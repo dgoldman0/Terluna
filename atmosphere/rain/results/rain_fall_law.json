@@ -1305,8 +1305,8 @@
    "number_weighted": 0.8860231745873226,
    "ventilation": 0.9572336519672563
   },
-  "present_over_solver_evaporation": 0.9613410767793966,
-  "present_over_solver_loss_per_metre": 0.9084766462274703,
+  "present_over_solver_evaporation": 0.9615683713021638,
+  "present_over_solver_loss_per_metre": 0.908691441757108,
   "breakup_product_solver_mass_weighted_m_s": 4.208875129423873
  },
  "fall_speed_cap": {
@@ -1342,14 +1342,14 @@
   "domain": "atmosphere",
   "files": {
    "atmosphere/rain/fall_law.py": "903e45fa545c61107579a9ae88bba5bd0e308498e6575646d71be19d649f6639",
-   "atmosphere/rain/drops.py": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1",
+   "atmosphere/rain/drops.py": "8e0d67ec86b357cca1ab83866c5714bbd261cd1075ea7ee3562679c66b3054aa",
    "atmosphere/rain/product.py": "7ee26847fd22860df2dbf8818ecdc4731825ce4b18a1b866b0eefd2b2b4381db",
    "atmosphere/rain/targets.py": "faed41667f2187fddccb9ab1793e4463150a10f3e8e385e4daa425da565660a7",
    "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
   },
   "inputs": {
    "research/studies/climate_targets/results/climate_targets.json": "53f12fe56f4166f499b7129cbeab49bd9b625e3861c9b6f0fd23b89906fbaaab",
-   "atmosphere/rain/results/rain_breakup.json": "13c69b6ae4e8c395c0c5a49e7a0cc7951764b2471164dab0e41bd4820a803a68"
+   "atmosphere/rain/results/rain_breakup.json": "a3079045fcb69e018cfe4d30180a281ac4cd958330e66ddbbd8ca031867e0bf6"
   },
   "constants": {
    "AVOGADRO": 6.02214076e+23,

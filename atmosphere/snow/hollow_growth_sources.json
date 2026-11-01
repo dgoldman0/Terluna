@@ -1,0 +1,140 @@
+{
+  "schema": "terluna.atmosphere.hollow-growth-sources/1",
+  "retrieved": [
+    {
+      "url": "https://www.datacommons.psu.edu/commonswizard/MetadataDisplay.aspx?Dataset=6511",
+      "cache_path": "research/runs/snow_scale/hollow_growth/dataset_index.html",
+      "bytes": 13134,
+      "sha256": "3ab137df122241ab923736fd329c355675c6afc20b31ec432599c6c351ee3c65"
+    },
+    {
+      "url": "https://www.datacommons.psu.edu/download/meteorology/harrington-pokrifka-revisiting-theories-for-the-growth-of-single-crystalline-ice-2026/",
+      "cache_path": "research/runs/snow_scale/hollow_growth/download_index.html",
+      "bytes": 980,
+      "sha256": "d24e5fe7757d8460d8738d5372f565f2b0122a2fcb3bb1bc6f76d357d656a726"
+    },
+    {
+      "url": "https://www.datacommons.psu.edu/download/meteorology/harrington-pokrifka-revisiting-theories-for-the-growth-of-single-crystalline-ice-2026/000-readme-zip-file-content.txt",
+      "cache_path": "research/runs/snow_scale/hollow_growth/000-readme-zip-file-content.txt",
+      "bytes": 2395,
+      "sha256": "fd51763add8e0c483a994acf7849e02277a4a5459932214615b97f2ec79eb388"
+    },
+    {
+      "url": "https://www.datacommons.psu.edu/download/meteorology/harrington-pokrifka-revisiting-theories-for-the-growth-of-single-crystalline-ice-2026/harrington-pokrifka-revisiting-theories-for-the-growth-of-single-crystalline-ice-2026.zip",
+      "cache_path": "research/runs/snow_scale/hollow_growth/harrington-pokrifka-revisiting-theories-for-the-growth-of-single-crystalline-ice-2026.zip",
+      "bytes": 104949,
+      "sha256": "3fa016d36ae11dad221b2c9b300a5fe928ed253ac92dd8acdb2887291f32bc36"
+    },
+    {
+      "url": "https://www.datacommons.psu.edu/commonswizard/FullMetadataDisplay.aspx?file=harrington-pokrifka-revisiting-theories-for-the-growth-of-single-crystalline-ice-2026.xml",
+      "cache_path": "research/runs/snow_scale/hollow_growth/full_metadata.html",
+      "bytes": 18500,
+      "sha256": "50a18ea308224d3a8d045fa8a2d1aeaba893927919ac1369e65675ac1f650ec3"
+    },
+    {
+      "url": "https://journals.ametsoc.org/abstract/journals/atsc/82/10/JAS-D-25-0030.1.xml",
+      "cache_path": "research/runs/snow_scale/hollow_growth/pokrifka2025_dimension_excerpt.json",
+      "bytes": 35931,
+      "sha256": "9a722267fa83efe63890040b75f431613e25acccf1b41000b4c2c73aa097c92e",
+      "representation": "Indexed primary-source retrieval response, not original article PDF bytes"
+    },
+    {
+      "url": "https://doi.org/10.1175/JAS-D-26-0016.1",
+      "cache_path": "research/runs/snow_scale/hollow_growth/harrington2026_abstract_search.json",
+      "bytes": 36373,
+      "sha256": "a69a724a84def9b0c849c8a49677d7e61601e9a0eb3942127af3f6b9d01b592b",
+      "representation": "Indexed primary-source retrieval response, not original article PDF bytes"
+    }
+  ],
+  "archive_members": {
+    "Qfunctionsdata.dat": {
+      "bytes": 7250,
+      "sha256": "58217c962b3db427ff775d82ce1b63094f4e1f510235a3ca5860a66af02b8ee1"
+    },
+    "README": {
+      "bytes": 2296,
+      "sha256": "ede97faf193a2adebb41e134bd9625a674c50914c2f6b2a26caf47aa8f5fa84a"
+    },
+    "a-dim-5.3C-col.csv": {
+      "bytes": 143,
+      "sha256": "1d45c34194b94aade2cc20f79e087846a66beba7be435e40dc8636b9f0069ba3"
+    },
+    "a-dimension-TF1991-raw.csv": {
+      "bytes": 985,
+      "sha256": "38ac124aa7485d0e1ad4d7fdb64cc420b34388e11c315f35d66c9d7a23e5d871"
+    },
+    "c-dim-5.3C-col.csv": {
+      "bytes": 126,
+      "sha256": "07cdf2e6fee89b533cdec83bd2c4a427db4b7796cc33eeb9afaaecc7c5f764f3"
+    },
+    "c-dimension-TF1991-raw.csv": {
+      "bytes": 854,
+      "sha256": "29efbc2d0e3cd1aaeace37361fc3d8723e5351446744d1c4a0a5ba1486fdb262"
+    },
+    "dimensions-20231128.dat": {
+      "bytes": 1692,
+      "sha256": "c4b8d3d5c674898b8e5bfa761e95933b251d59daa833dbd5fb27483238c57c48"
+    },
+    "dimensions-20240814.dat": {
+      "bytes": 4100,
+      "sha256": "8aff69945a47d383b708942bb0441768ddf2822f812495fea69e51aebf3f25e8"
+    },
+    "hfunction-eqns-hex-jas2026.dat": {
+      "bytes": 136500,
+      "sha256": "3d321c12d9440b72a8a447e7d319f7524daca49d7b1f12695d3c8293d8a1e8b8"
+    },
+    "hfunction-eqns-hexconvQ-jas2026.dat": {
+      "bytes": 136500,
+      "sha256": "4b72c97dbdbae48db1825832ddc7bb83afc1ec00f7a39c0c0c420e391d1d9431"
+    },
+    "hfunctiondata.dat": {
+      "bytes": 507,
+      "sha256": "bd7911622fc29cb10e2822def01e9690dcc4fead819fda137b732388fda9a043"
+    },
+    "hfunctions-jas-2026.f90": {
+      "bytes": 11935,
+      "sha256": "65d954a740cc448178a4478ff811d0c789b2c84cc17515db7872c8fd7cb57158"
+    },
+    "hfunctions-jas-2026.py": {
+      "bytes": 5658,
+      "sha256": "b0326246a4bcdd49d8430d520389546726b476b9e19684345026d9a4a0a6476d"
+    }
+  },
+  "sources": [
+    {
+      "id": "harrington_pokrifka_2026",
+      "title": "Revisiting Theories for the Growth of Solid and Hollow Single Crystals: The Importance of Step-Source Location",
+      "authors": [
+        "Jerry Y. Harrington",
+        "Gwenore F. Pokrifka"
+      ],
+      "doi": "https://doi.org/10.1175/JAS-D-26-0016.1",
+      "evidence": "Published abstract and source archive read; complete article equations unavailable.",
+      "claim": "Growth depends on facet step-source location and rim width. The archive provides shape functions and measurements, not a complete growth solver.",
+      "retrieval_issue": "Direct publisher returned 403; author preview exposed only the first page. No complete equation implementation is claimed."
+    },
+    {
+      "id": "pokrifka_moyle_harrington_2025",
+      "doi": "https://doi.org/10.1175/JAS-D-25-0030.1",
+      "evidence": "Indexed methods text read, including equations 2-3 and experimental limitations.",
+      "dimension_definition": "a and c are camera-averaged semidimensions. The 2026 archive labels dimensions without restating the half-length convention; this interpretation follows its cited companion methods.",
+      "limits": "Substrate measurements do not directly provide mass, and substrate contact may affect early growth."
+    },
+    {
+      "id": "takahashi_1991_surrogate",
+      "doi": "https://doi.org/10.2151/jmsj1965.69.1_15",
+      "evidence": "2026 author digitizations of the existing experiment; no independent experimental replication.",
+      "dimension_definition": "Files explicitly label maximum full dimensions in millimetres and age in minutes."
+    }
+  ],
+  "reuse": {
+    "external_bytes": "Original archive, source, tables and laboratory series remain only in the ignored research cache; no outside source code or full paper is redistributed.",
+    "metadata": "Penn State metadata permits local translation and added value with an annual notification condition for customization. No notification has been sent.",
+    "distribution": "No broader redistribution permission inferred; tracked outputs are local derived diagnostics and source identities."
+  },
+  "selection": {
+    "chamber_windows": "Step experiment: 150 <= t < 230 min before the change; 270 <= t < 336 min afterward. These exclude the first forty minutes after the stated switch.",
+    "shape_guards": "No input clipping; converted hexagonal aspect ratio must remain in the original 0.01 to 100 interval.",
+    "adoption": "No 2026 growth model, hollow-rim law, density law or lunar size distribution adopted."
+  }
+}

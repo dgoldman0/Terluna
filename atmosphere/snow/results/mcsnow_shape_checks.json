@@ -1,0 +1,276 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-shape-checks/1",
+  "date": "2026-10-23",
+  "evidence": "Source identity, raw numerical replay, interface controls and software checks are distinct from laboratory validation.",
+  "products": [
+    {
+      "path": "atmosphere/snow/results/mcsnow_shape_diagnosis.json",
+      "sha256": "9f9fa4625e0c7cc548cb7f4b50c36a4f65417faf9f0bbb24b5f6f3904078454a",
+      "exact_raw_reassembly": true
+    },
+    {
+      "path": "atmosphere/snow/results/mcsnow_pair_controls.json",
+      "sha256": "940afde241021833801b5673aecb22bc0aeede95f4efb0c9c38e07a38275a9f3",
+      "exact_raw_reassembly": true
+    },
+    {
+      "path": "atmosphere/snow/results/mcsnow_shape_controls.json",
+      "sha256": "6634e3841ca657394c5028eb4e27a86040d8cfc7cd8741d31fa998becebb38fb",
+      "exact_raw_reassembly": true
+    }
+  ],
+  "raw_audit": {
+    "trajectories": 48,
+    "fixed_state_probes": 148,
+    "directional_controls": 36,
+    "final_execution_total": 232,
+    "snapshots": 441020,
+    "maximum_mass_ledger_relative_to_current_mass": 2.2203646175791746e-16,
+    "maximum_spheroid_geometry_relative_residual": 2.6645352591003757e-15,
+    "density_incompatible_configurations_excluded": 64,
+    "unchanged_control_raw_parity_count": 12,
+    "source_density_and_imposed_ratio_checks": [
+      {
+        "name": "shape_trajectory_Tm5p3_sphere_dt0p03125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_sphere_dt0p03125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_sphere_dt0p03125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_sphere_dt0p0078125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_sphere_dt0p0078125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_sphere_dt0p0078125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_axes_dt0p03125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_axes_dt0p03125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_axes_dt0p03125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_axes_dt0p0078125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_axes_dt0p0078125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_axes_dt0p0078125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_volume_dt0p03125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_volume_dt0p03125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_volume_dt0p03125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_volume_dt0p0078125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_volume_dt0p0078125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm5p3_volume_dt0p0078125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_sphere_dt0p03125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_sphere_dt0p03125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_sphere_dt0p03125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_sphere_dt0p0078125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_sphere_dt0p0078125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_sphere_dt0p0078125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_axes_dt0p03125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_axes_dt0p03125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_axes_dt0p03125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_axes_dt0p0078125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_axes_dt0p0078125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_axes_dt0p0078125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_volume_dt0p03125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_volume_dt0p03125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_volume_dt0p03125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_volume_dt0p0078125_control0",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_volume_dt0p0078125_control1",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      },
+      {
+        "name": "shape_trajectory_Tm14p4_volume_dt0p0078125_control2",
+        "maximum_density_relative_residual": 0.0,
+        "maximum_prescribed_ratio_relative_residual": 0.0
+      }
+    ]
+  },
+  "collection": {
+    "native_pair_evaluations": 1098,
+    "independent_parity_pairs": 30,
+    "maximum_independent_relative_difference": 1.9872992140790302e-14,
+    "maximum_pair_reversal_absolute_difference": 0.0
+  },
+  "focused_checks": {
+    "command": "python -B -m pytest atmosphere/tests/test_snow_mcsnow_shape_diagnosis.py -q -p no:cacheprovider",
+    "passed": 24,
+    "elapsed_s": 0.38
+  },
+  "repository_checks": {
+    "status": "passed",
+    "exit_code": 0,
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+    "log": "research/runs/snow_scale/mcsnow_reproduction/growth_diagnosis/shape_diagnosis_make_check.log",
+    "log_sha256": "39d932ee68ba1dd36564951bcb3babedb9777a176947389902362e609fd529fe",
+    "python": {
+      "passed": 3721,
+      "skipped": 20,
+      "elapsed_s": 465.75
+    },
+    "javascript": {
+      "passed": 191,
+      "failed": 0,
+      "groups": [
+        129,
+        48,
+        14
+      ]
+    },
+    "layers": {
+      "files_checked": 1321,
+      "violations": 0
+    },
+    "provenance": "PASS",
+    "ensemble": "PASS",
+    "ensemble_scope": "Planning snapshot and workspace integrity; no scientific or manuscript clearance."
+  },
+  "scientific_limits": [
+    "No new growth law adopted; fitted effective ratios are causal inputs, not independent validation.",
+    "Fixed-property kernels do not establish a measured aggregation efficiency or an evolving population.",
+    "Full finite-water Earth-Moon aggregate comparison remains conditional on unresolved growth and aggregate geometry.",
+    "Original-author single-crystal configuration remains unrecovered.",
+    "Development builds and pre-three-minute ratio experiments are excluded from final counts and products."
+  ],
+  "record_review": {
+    "status": "completed",
+    "activities": [
+      "Read the complete report and adjacent updated synthesis.",
+      "Cross-checked quoted numerical values and table rows against the result products.",
+      "Checked local documentation targets and producer hashes.",
+      "Read the relevant native deposition, habit, geometry and collision source sections."
+    ],
+    "boundary": "These activities do not establish a new empirical validation or full scholarly source review."
+  },
+  "storage": {
+    "raw_growth_paths": "/media/projectspace/terluna-research/atmosphere-snow/snow_scale/mcsnow_reproduction/growth_diagnosis/traces/shape_diagnosis",
+    "raw_controls_and_pairs": "/media/projectspace/terluna-research/atmosphere-snow/snow_scale/mcsnow_reproduction/growth_diagnosis/shape_diagnosis",
+    "policy": "Raw builds and executions remain on the authorized project-space drive; existing lexical paths are preserved."
+  }
+}

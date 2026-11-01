@@ -1,0 +1,80 @@
+{
+  "schema": "terluna.atmosphere.snow-habit-sources/1",
+  "review_date": "2026-10-21",
+  "scope": "Targeted source and equation review for morphology and mechanical-load sensitivity. No full-paper scholarly review or lunar empirical validation claimed.",
+  "external_bytes": "No external papers or datasets added to the repository. Web text extraction supplied the cited passages; binary downloads to /tmp failed because command-line DNS was unavailable, so no raw-source byte hashes are claimed.",
+  "sources": [
+    {
+      "id": "hogan_2012",
+      "authors": "Robin J. Hogan, Lin Tian, Philip R. A. Brown, Christopher D. Westbrook, Andrew J. Heymsfield and Jon D. Eastment",
+      "title": "Radar Scattering from Ice Aggregates Using the Horizontally Aligned Oblate Spheroid Approximation",
+      "publication": "Journal of Applied Meteorology and Climatology 51, 655–671 (2012)",
+      "doi": "10.1175/JAMC-D-11-074.1",
+      "url": "https://www.met.reading.ac.uk/~swrhgnrj/publications/oblate_ice.pdf",
+      "reading_extent": "Abstract; section 2 mass/dimension conventions and equation 4; discussion of aircraft/radar consistency and scope. Publisher view returned 403; author-hosted published PDF text was retrieved.",
+      "use": "Brown–Francis uses mean orthogonal image dimension. Dmax approximately 1.25 Dmean gives m=0.0121 Dmax^1.9 in SI; holding 0.0185 while calling D maximum introduces a convention error.",
+      "limit": "Earth ice-cloud closure; no validation of 15–60 cm aggregates. The study itself reports remaining disagreement between mass fits to radar and water content."
+    },
+    {
+      "id": "seifert_2026",
+      "authors": "Axel Seifert, Fabian Jakub, Christoph Siewert, Leonie von Terzi and Stefan Kneifel",
+      "title": "On the geometry of aggregate snowflakes",
+      "publication": "arXiv:2601.10608v1, 15 January 2026 (preprint)",
+      "url": "https://arxiv.org/html/2601.10608v1",
+      "reading_extent": "Abstract; sections 2, 3.1–3.4 and initial section 4.1; equations 1–26 and their definitions. Geometry pictures were not visually inspected.",
+      "use": "Needle, plate and dendrite aggregate geometry; q normalizes projected area by an ellipse, while phi gives horizontal aspect ratio. The circle-normalized area is q*phi. habits.py implements mean phi/q fits from equations 9–17.",
+      "limit": "Synthetic unrimed aggregate geometries, 2–2048 monomers and mean input monomer sizes 50–500 micrometres. Holding representative q*phi constant at all population sizes is our sensitivity assumption. Multiplying fitted means does not reproduce the joint distribution. This paper is by Seifert et al.; Leinonen's earlier aggregation model underlies it."
+    },
+    {
+      "id": "libbrecht_2012",
+      "authors": "Kenneth G. Libbrecht",
+      "title": "Toward a Comprehensive Model of Snow Crystal Growth Dynamics: 1. Overarching Features and Physical Origins",
+      "publication": "arXiv:1211.5555v1, 23 November 2012 (preprint)",
+      "url": "https://arxiv.org/pdf/1211.5555",
+      "reading_extent": "Introduction, Figure 1 caption and physical discussion of temperature, supersaturation, pressure and morphology; extracted PDF text. Diagram screenshot retrieval failed, so no boundaries were digitized.",
+      "use": "Growth-form anchors near -2, -5, -7 and -15 C and greater morphological complexity with increased supersaturation. Only temperature anchors are mapped into the lunar column.",
+      "limit": "Atmospheric-pressure laboratory context and a partly semi-empirical growth model; lunar cloud history, nucleation, fractions of habits and individual crystal shape remain unpredicted."
+    },
+    {
+      "id": "westbrook_2008",
+      "authors": "Christopher D. Westbrook, Robin J. Hogan and Anthony J. Illingworth",
+      "title": "The Capacitance of Pristine Ice Crystals and Aggregate Snowflakes",
+      "publication": "Journal of the Atmospheric Sciences 65, 206–219 (2008)",
+      "doi": "10.1175/2007JAS2315.1",
+      "url": "https://journals.ametsoc.org/view/journals/atsc/65/1/2007jas2315.1.xml",
+      "reading_extent": "Publisher abstract and aggregate-capacitance results surrounding Figures 13–14; preprint abstract independently checked.",
+      "use": "Aggregate capacitance C/Dmax approximately 0.25, with shape dependence; retained existing closure for controlled geometry comparisons.",
+      "limit": "Diffusional capacitance, not optical cross section or mechanical strength. The earlier geometric model's circle-area ratios span a wider range than the newer Seifert representative families."
+    },
+    {
+      "id": "grzegorczyk_2023",
+      "authors": "Pierre Grzegorczyk, Sudha Yadav, Florian Zanger, Alexander Theis, Subir K. Mitra, Stephan Borrmann and Miklos Szakall",
+      "title": "Fragmentation of ice particles: laboratory experiments on graupel–graupel and graupel–snowflake collisions",
+      "publication": "Atmospheric Chemistry and Physics 23, 13505–13521 (2023), with 2024 corrigendum",
+      "doi": "10.5194/acp-23-13505-2023",
+      "url": "https://acp.copernicus.org/articles/23/13505/2023/",
+      "corrigendum_url": "https://acp.copernicus.org/articles/23/13505/2023/acp-23-13505-2023-corrigendum.pdf",
+      "reading_extent": "Abstract, experimental description, snowflake results including no-collision blank measurements; corrigendum text inspected for area convention.",
+      "use": "Artificial 10 mm dendritic aggregates shed monomers or branches on release even without collision. Contact network and baseline aerodynamic loading matter in addition to ambient turbulent velocity differences.",
+      "limit": "Artificial Earth-gravity particles and release procedure; fragment counts do not calibrate lunar decimetre flake strength. The corrigendum addresses the area convention of fitted breakup coefficients; those coefficients are not imported here."
+    },
+    {
+      "id": "bahaloo_2022",
+      "authors": "Hassan Bahaloo, Tobias Eidevag, Per Gren, Johan Casselgren, Fredrik Forsberg, Per Abrahamsson and Mikael Sjodahl",
+      "title": "Ice sintering: Dependence of sintering force on temperature, load, duration, and particle size",
+      "publication": "Journal of Applied Physics 131, 025109 (2022)",
+      "doi": "10.1063/5.0073824",
+      "url": "https://ltu.diva-portal.org/smash/get/diva2%3A1628847/FULLTEXT01.pdf",
+      "reading_extent": "Institutional published-PDF abstract and introduction; publisher indexed methods and results excerpts. Direct publisher full-text retrieval failed.",
+      "use": "Ice-contact strength depends on temperature, contact load, contact duration and particle size. Longer residence may change bonds, while sublimation may erode them.",
+      "limit": "Loaded ice contacts do not supply the unknown connectivity, contact history or failure capacity of a freely suspended snow aggregate. No numerical strength transferred to the lunar snow model."
+    }
+  ],
+  "unadmitted_sources": [
+    {
+      "title": "A Taxonomy of Snow Crystal Growth Behaviors: 2. Quantifying the Nakaya Diagram",
+      "url": "https://arxiv.org/abs/2306.13087",
+      "status": "Abstract identified; HTML unavailable and PDF too large for web retrieval. The 206-image dataset was not inspected, digitized or used as model input."
+    }
+  ]
+}

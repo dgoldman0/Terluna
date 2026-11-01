@@ -1,0 +1,3667 @@
+{
+  "schema": "terluna.atmosphere.welss-archive-comparison/1",
+  "producer": {
+    "file": "atmosphere/snow/welss_archive_comparison.py",
+    "sha256": "7ae7a75b8a60323e1f2b692371a9a27ce50434cde23fb24d6b99295391deca13",
+    "source_ledger_sha256": "339115bb4fac2aaada15b207c49735494c92013be554a9e6dc265318808ba662"
+  },
+  "physical_product": {
+    "file": "atmosphere/snow/results/welss_column.json",
+    "sha256": "1b56f80f00d9e68a49f20b15dde0da65142323c9d115ef4c2e1ec7599c6dbacf"
+  },
+  "reference": {
+    "attributes": {
+      "title": "McSnow vertical profiles processed by NCL",
+      "date": "Di 28. Feb 15:31:50 CET 2023",
+      "basedir": "../experiments/",
+      "expdir": "1d_obl_xi1650_nz250_lwc2_ncl100_dtc5_nrp10_rm10_rt0_vt3_h0-6_ba500_habit0_ckt0_ssat5_agg0_domtop5000._nucl1_IGF1_vent",
+      "asciifile": "hprofiles_diag.dat"
+    },
+    "sha256": "119871a2d269a90321a7fba21658b6f217aa2f8641dbda37f6cd9ae6ec41a304",
+    "bytes": 40036,
+    "member": "ob_hp0.nc",
+    "doi": "10.5281/zenodo.10077724",
+    "archive_url": "https://zenodo.org/api/records/10077724/files/McSnow_paper_plot_data.zip/content",
+    "credit": "Welss, Siewert and Seifert (2023), CC-BY-4.0; external member retained outside Git",
+    "evidence": "Archived author numerical calculations, not observations"
+  },
+  "evidence": "Comparison between deterministic declared-source calculations and archived author numerical profiles, not empirical validation.",
+  "reading_rule": "Use these direct raw-profile metrics for archive interpretation. The earlier one-sided-filter metrics in the frozen physical product are processing diagnostics, not matched archive comparisons.",
+  "archive_processing_evidence": {
+    "boundary_bins_m": [
+      0.0,
+      20.0,
+      2960.0,
+      2980.0
+    ],
+    "all_totals_finite_at_boundary_bins": true,
+    "interpretation": "Finite domain-end and source-end bins exclude the verified five-point opt0 pass with source zero-to-missing handling. Direct raw-bin comparison is used.",
+    "arithmetic": {
+      "Fn": {
+        "4": {
+          "compatible": 7,
+          "count": 150,
+          "compatible_fraction": 0.04666666666666667
+        },
+        "30": {
+          "compatible": 7,
+          "count": 150,
+          "compatible_fraction": 0.04666666666666667
+        },
+        "31": {
+          "compatible": 150,
+          "count": 150,
+          "compatible_fraction": 1.0
+        },
+        "32": {
+          "compatible": 7,
+          "count": 150,
+          "compatible_fraction": 0.04666666666666667
+        },
+        "61": {
+          "compatible": 7,
+          "count": 150,
+          "compatible_fraction": 0.04666666666666667
+        },
+        "62": {
+          "compatible": 150,
+          "count": 150,
+          "compatible_fraction": 1.0
+        },
+        "93": {
+          "compatible": 150,
+          "count": 150,
+          "compatible_fraction": 1.0
+        }
+      },
+      "Fm": {
+        "4": {
+          "compatible": 4,
+          "count": 150,
+          "compatible_fraction": 0.02666666666666667
+        },
+        "30": {
+          "compatible": 4,
+          "count": 150,
+          "compatible_fraction": 0.02666666666666667
+        },
+        "31": {
+          "compatible": 147,
+          "count": 150,
+          "compatible_fraction": 0.98
+        },
+        "32": {
+          "compatible": 4,
+          "count": 150,
+          "compatible_fraction": 0.02666666666666667
+        },
+        "61": {
+          "compatible": 4,
+          "count": 150,
+          "compatible_fraction": 0.02666666666666667
+        },
+        "62": {
+          "compatible": 147,
+          "count": 150,
+          "compatible_fraction": 0.98
+        },
+        "93": {
+          "compatible": 147,
+          "count": 150,
+          "compatible_fraction": 0.98
+        }
+      },
+      "Nd": {
+        "4": {
+          "compatible": 4,
+          "count": 150,
+          "compatible_fraction": 0.02666666666666667
+        },
+        "30": {
+          "compatible": 5,
+          "count": 150,
+          "compatible_fraction": 0.03333333333333333
+        },
+        "31": {
+          "compatible": 141,
+          "count": 150,
+          "compatible_fraction": 0.94
+        },
+        "32": {
+          "compatible": 4,
+          "count": 150,
+          "compatible_fraction": 0.02666666666666667
+        },
+        "61": {
+          "compatible": 4,
+          "count": 150,
+          "compatible_fraction": 0.02666666666666667
+        },
+        "62": {
+          "compatible": 144,
+          "count": 150,
+          "compatible_fraction": 0.96
+        },
+        "93": {
+          "compatible": 141,
+          "count": 150,
+          "compatible_fraction": 0.94
+        }
+      },
+      "Md": {
+        "4": {
+          "compatible": 6,
+          "count": 150,
+          "compatible_fraction": 0.04
+        },
+        "30": {
+          "compatible": 6,
+          "count": 150,
+          "compatible_fraction": 0.04
+        },
+        "31": {
+          "compatible": 146,
+          "count": 150,
+          "compatible_fraction": 0.9733333333333334
+        },
+        "32": {
+          "compatible": 6,
+          "count": 150,
+          "compatible_fraction": 0.04
+        },
+        "61": {
+          "compatible": 6,
+          "count": 150,
+          "compatible_fraction": 0.04
+        },
+        "62": {
+          "compatible": 146,
+          "count": 150,
+          "compatible_fraction": 0.9733333333333334
+        },
+        "93": {
+          "compatible": 146,
+          "count": 150,
+          "compatible_fraction": 0.9733333333333334
+        }
+      }
+    },
+    "arithmetic_limit": "The 31-snapshot lattice also admits multiples such as62 and93. Agreement supports, but does not identify uniquely, a31-snapshot five-hour window at600s cadence; raw time series and executable remain unavailable."
+  },
+  "comparison": {
+    "base": {
+      "last5h": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245177,
+            "relative_bias": 0.005069236621696943,
+            "relative_RMSE": 0.008334056922407544,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014254,
+            "relative_bias": 0.005050543186176229,
+            "relative_RMSE": 0.0082516718374697,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008697699870777573,
+            "relative_bias": 0.007586748756447843,
+            "relative_RMSE": 0.013382246879922902,
+            "maximum_absolute_relative_difference": 0.1779960506821666,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008701480268963486,
+            "relative_bias": 0.007596999153566718,
+            "relative_RMSE": 0.01270728280762792,
+            "maximum_absolute_relative_difference": 0.02719305664120529,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004622496805798575,
+            "relative_bias": -0.0034629998948320006,
+            "relative_RMSE": 0.0052513193155726305,
+            "maximum_absolute_relative_difference": 0.1779960506821666,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.01773651589110747,
+            "relative_bias": 0.013941579742117124,
+            "relative_RMSE": 0.04369023274384416,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004958087751250862,
+            "relative_bias": 0.00033417731510274165,
+            "relative_RMSE": 0.006765141570808916,
+            "maximum_absolute_relative_difference": 0.018606321720630408,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623449300144942,
+            "relative_bias": 0.07623449300144942,
+            "relative_RMSE": 0.07636963514737823,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.005472609077965026,
+            "relative_bias": 0.0028398280881626794,
+            "relative_RMSE": 0.008904796740093696,
+            "maximum_absolute_relative_difference": 0.09761135403701064,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.005472496055706719,
+            "relative_bias": 0.0028661733780807976,
+            "relative_RMSE": 0.008474503538978218,
+            "maximum_absolute_relative_difference": 0.020953877237574012,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005508149160018846,
+            "relative_bias": -0.005444502622009189,
+            "relative_RMSE": 0.006004999069276028,
+            "maximum_absolute_relative_difference": 0.09761135403701064,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245177,
+            "relative_bias": 0.005069236621696943,
+            "relative_RMSE": 0.008334056922407544,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014254,
+            "relative_bias": 0.005050543186176229,
+            "relative_RMSE": 0.0082516718374697,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008697699870777573,
+            "relative_bias": 0.007586748756447843,
+            "relative_RMSE": 0.013382246879922902,
+            "maximum_absolute_relative_difference": 0.1779960506821666,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008701480268963486,
+            "relative_bias": 0.007596999153566718,
+            "relative_RMSE": 0.01270728280762792,
+            "maximum_absolute_relative_difference": 0.02719305664120529,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004622496805798575,
+            "relative_bias": -0.0034629998948320006,
+            "relative_RMSE": 0.0052513193155726305,
+            "maximum_absolute_relative_difference": 0.1779960506821666,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.01773651589110747,
+            "relative_bias": 0.013941579742117124,
+            "relative_RMSE": 0.04369023274384416,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004958087751250862,
+            "relative_bias": 0.00033417731510274165,
+            "relative_RMSE": 0.006765141570808916,
+            "maximum_absolute_relative_difference": 0.018606321720630408,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623449300144942,
+            "relative_bias": 0.07623449300144942,
+            "relative_RMSE": 0.07636963514737823,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.005472609077965026,
+            "relative_bias": 0.0028398280881626794,
+            "relative_RMSE": 0.008904796740093696,
+            "maximum_absolute_relative_difference": 0.09761135403701064,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.005472496055706719,
+            "relative_bias": 0.0028661733780807976,
+            "relative_RMSE": 0.008474503538978218,
+            "maximum_absolute_relative_difference": 0.020953877237574012,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005508149160018846,
+            "relative_bias": -0.005444502622009189,
+            "relative_RMSE": 0.006004999069276028,
+            "maximum_absolute_relative_difference": 0.09761135403701064,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "final": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245177,
+            "relative_bias": 0.005069236621696943,
+            "relative_RMSE": 0.008334056922407544,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014254,
+            "relative_bias": 0.005050543186176229,
+            "relative_RMSE": 0.0082516718374697,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008697699870777573,
+            "relative_bias": 0.007586748756447843,
+            "relative_RMSE": 0.013382246879922902,
+            "maximum_absolute_relative_difference": 0.1779960506821666,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008701480268963486,
+            "relative_bias": 0.007596999153566718,
+            "relative_RMSE": 0.01270728280762792,
+            "maximum_absolute_relative_difference": 0.02719305664120529,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004622496805798575,
+            "relative_bias": -0.0034629998948320006,
+            "relative_RMSE": 0.0052513193155726305,
+            "maximum_absolute_relative_difference": 0.1779960506821666,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.01773651589110747,
+            "relative_bias": 0.013941579742117124,
+            "relative_RMSE": 0.04369023274384416,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004958087751250862,
+            "relative_bias": 0.00033417731510274165,
+            "relative_RMSE": 0.006765141570808916,
+            "maximum_absolute_relative_difference": 0.018606321720630408,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623449300144942,
+            "relative_bias": 0.07623449300144942,
+            "relative_RMSE": 0.07636963514737823,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.005472609077965026,
+            "relative_bias": 0.0028398280881626794,
+            "relative_RMSE": 0.008904796740093696,
+            "maximum_absolute_relative_difference": 0.09761135403701064,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.005472496055706719,
+            "relative_bias": 0.0028661733780807976,
+            "relative_RMSE": 0.008474503538978218,
+            "maximum_absolute_relative_difference": 0.020953877237574012,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005508149160018846,
+            "relative_bias": -0.005444502622009189,
+            "relative_RMSE": 0.006004999069276028,
+            "maximum_absolute_relative_difference": 0.09761135403701064,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      }
+    },
+    "mass": {
+      "last5h": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245174845,
+            "relative_bias": 0.005069236621696592,
+            "relative_RMSE": 0.00833405692240732,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014028,
+            "relative_bias": 0.00505054318617586,
+            "relative_RMSE": 0.008251671837469474,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008698213125956483,
+            "relative_bias": 0.0075874369627466605,
+            "relative_RMSE": 0.013382850694049871,
+            "maximum_absolute_relative_difference": 0.17799638412187518,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008701993347262965,
+            "relative_bias": 0.00759768804111131,
+            "relative_RMSE": 0.0127078561656572,
+            "maximum_absolute_relative_difference": 0.027194079822330672,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004623200733908614,
+            "relative_bias": -0.0034630460595509306,
+            "relative_RMSE": 0.005251980604958954,
+            "maximum_absolute_relative_difference": 0.17799638412187518,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.017736606169892973,
+            "relative_bias": 0.013941526212704183,
+            "relative_RMSE": 0.04369052947609902,
+            "maximum_absolute_relative_difference": 0.322969113340422,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004958079944084705,
+            "relative_bias": 0.00033399428595564464,
+            "relative_RMSE": 0.0067650962602473635,
+            "maximum_absolute_relative_difference": 0.018606115312560838,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623503230492655,
+            "relative_bias": 0.07623503230492655,
+            "relative_RMSE": 0.076370172653066,
+            "maximum_absolute_relative_difference": 0.322969113340422,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.005472818903365459,
+            "relative_bias": 0.0028403654966726926,
+            "relative_RMSE": 0.008905048316679782,
+            "maximum_absolute_relative_difference": 0.09761148435958678,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.00547270614323543,
+            "relative_bias": 0.0028667126479504307,
+            "relative_RMSE": 0.008474742963891637,
+            "maximum_absolute_relative_difference": 0.0209545909682655,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005508276558641786,
+            "relative_bias": -0.005444550521867885,
+            "relative_RMSE": 0.006005092945781959,
+            "maximum_absolute_relative_difference": 0.09761148435958678,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245174845,
+            "relative_bias": 0.005069236621696592,
+            "relative_RMSE": 0.00833405692240732,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014028,
+            "relative_bias": 0.00505054318617586,
+            "relative_RMSE": 0.008251671837469474,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008698213125956483,
+            "relative_bias": 0.0075874369627466605,
+            "relative_RMSE": 0.013382850694049871,
+            "maximum_absolute_relative_difference": 0.17799638412187518,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008701993347262965,
+            "relative_bias": 0.00759768804111131,
+            "relative_RMSE": 0.0127078561656572,
+            "maximum_absolute_relative_difference": 0.027194079822330672,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004623200733908614,
+            "relative_bias": -0.0034630460595509306,
+            "relative_RMSE": 0.005251980604958954,
+            "maximum_absolute_relative_difference": 0.17799638412187518,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.017736606169892973,
+            "relative_bias": 0.013941526212704183,
+            "relative_RMSE": 0.04369052947609902,
+            "maximum_absolute_relative_difference": 0.322969113340422,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004958079944084705,
+            "relative_bias": 0.00033399428595564464,
+            "relative_RMSE": 0.0067650962602473635,
+            "maximum_absolute_relative_difference": 0.018606115312560838,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623503230492655,
+            "relative_bias": 0.07623503230492655,
+            "relative_RMSE": 0.076370172653066,
+            "maximum_absolute_relative_difference": 0.322969113340422,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.005472818903365459,
+            "relative_bias": 0.0028403654966726926,
+            "relative_RMSE": 0.008905048316679782,
+            "maximum_absolute_relative_difference": 0.09761148435958678,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.00547270614323543,
+            "relative_bias": 0.0028667126479504307,
+            "relative_RMSE": 0.008474742963891637,
+            "maximum_absolute_relative_difference": 0.0209545909682655,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005508276558641786,
+            "relative_bias": -0.005444550521867885,
+            "relative_RMSE": 0.006005092945781959,
+            "maximum_absolute_relative_difference": 0.09761148435958678,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "final": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245174845,
+            "relative_bias": 0.005069236621696592,
+            "relative_RMSE": 0.00833405692240732,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014028,
+            "relative_bias": 0.00505054318617586,
+            "relative_RMSE": 0.008251671837469474,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008698213125956483,
+            "relative_bias": 0.0075874369627466605,
+            "relative_RMSE": 0.013382850694049871,
+            "maximum_absolute_relative_difference": 0.17799638412187518,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008701993347262965,
+            "relative_bias": 0.00759768804111131,
+            "relative_RMSE": 0.0127078561656572,
+            "maximum_absolute_relative_difference": 0.027194079822330672,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004623200733908614,
+            "relative_bias": -0.0034630460595509306,
+            "relative_RMSE": 0.005251980604958954,
+            "maximum_absolute_relative_difference": 0.17799638412187518,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.017736606169892973,
+            "relative_bias": 0.013941526212704183,
+            "relative_RMSE": 0.04369052947609902,
+            "maximum_absolute_relative_difference": 0.322969113340422,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004958079944084705,
+            "relative_bias": 0.00033399428595564464,
+            "relative_RMSE": 0.0067650962602473635,
+            "maximum_absolute_relative_difference": 0.018606115312560838,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623503230492655,
+            "relative_bias": 0.07623503230492655,
+            "relative_RMSE": 0.076370172653066,
+            "maximum_absolute_relative_difference": 0.322969113340422,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.005472818903365459,
+            "relative_bias": 0.0028403654966726926,
+            "relative_RMSE": 0.008905048316679782,
+            "maximum_absolute_relative_difference": 0.09761148435958678,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.00547270614323543,
+            "relative_bias": 0.0028667126479504307,
+            "relative_RMSE": 0.008474742963891637,
+            "maximum_absolute_relative_difference": 0.0209545909682655,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005508276558641786,
+            "relative_bias": -0.005444550521867885,
+            "relative_RMSE": 0.006005092945781959,
+            "maximum_absolute_relative_difference": 0.09761148435958678,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      }
+    },
+    "height": {
+      "last5h": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.006645051624518284,
+            "relative_bias": 0.0050692366216978655,
+            "relative_RMSE": 0.00833405692240813,
+            "maximum_absolute_relative_difference": 0.024434194533360924,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014822,
+            "relative_bias": 0.005050543186177152,
+            "relative_RMSE": 0.008251671837470264,
+            "maximum_absolute_relative_difference": 0.024434194533360924,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005968434321927298,
+            "relative_bias": 0.0054058374103662194,
+            "relative_RMSE": 0.007488859188554409,
+            "maximum_absolute_relative_difference": 0.011020910848072739,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008698837615326114,
+            "relative_bias": 0.007588410773687592,
+            "relative_RMSE": 0.013383871209397546,
+            "maximum_absolute_relative_difference": 0.17753000801442478,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008702618594309406,
+            "relative_bias": 0.007598662575350324,
+            "relative_RMSE": 0.012708825210180566,
+            "maximum_absolute_relative_difference": 0.027194539213029466,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004623008460940143,
+            "relative_bias": -0.0034628519512827265,
+            "relative_RMSE": 0.005252009465605547,
+            "maximum_absolute_relative_difference": 0.17753000801442478,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.017736827143668865,
+            "relative_bias": 0.013941600374246911,
+            "relative_RMSE": 0.04364043298069,
+            "maximum_absolute_relative_difference": 0.31177391330212806,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004989487416668093,
+            "relative_bias": 0.00036522287631534484,
+            "relative_RMSE": 0.006900333035225176,
+            "maximum_absolute_relative_difference": 0.018605958695002405,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07609248555536234,
+            "relative_bias": 0.07609248555536234,
+            "relative_RMSE": 0.07625279185416624,
+            "maximum_absolute_relative_difference": 0.31177391330212806,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0054730861920420345,
+            "relative_bias": 0.002841090294988751,
+            "relative_RMSE": 0.008905478456519017,
+            "maximum_absolute_relative_difference": 0.09635975569274001,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.005472981077340638,
+            "relative_bias": 0.00286743429918948,
+            "relative_RMSE": 0.008475152413792654,
+            "maximum_absolute_relative_difference": 0.02095493678483202,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.00550613972652879,
+            "relative_bias": -0.005442836118700223,
+            "relative_RMSE": 0.006003908810496447,
+            "maximum_absolute_relative_difference": 0.09635975569274001,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.006645051624518284,
+            "relative_bias": 0.0050692366216978655,
+            "relative_RMSE": 0.00833405692240813,
+            "maximum_absolute_relative_difference": 0.024434194533360924,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014822,
+            "relative_bias": 0.005050543186177152,
+            "relative_RMSE": 0.008251671837470264,
+            "maximum_absolute_relative_difference": 0.024434194533360924,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005968434321927298,
+            "relative_bias": 0.0054058374103662194,
+            "relative_RMSE": 0.007488859188554409,
+            "maximum_absolute_relative_difference": 0.011020910848072739,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008698837615326114,
+            "relative_bias": 0.007588410773687592,
+            "relative_RMSE": 0.013383871209397546,
+            "maximum_absolute_relative_difference": 0.17753000801442478,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008702618594309406,
+            "relative_bias": 0.007598662575350324,
+            "relative_RMSE": 0.012708825210180566,
+            "maximum_absolute_relative_difference": 0.027194539213029466,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004623008460940143,
+            "relative_bias": -0.0034628519512827265,
+            "relative_RMSE": 0.005252009465605547,
+            "maximum_absolute_relative_difference": 0.17753000801442478,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.017736827143668865,
+            "relative_bias": 0.013941600374246911,
+            "relative_RMSE": 0.04364043298069,
+            "maximum_absolute_relative_difference": 0.31177391330212806,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004989487416668093,
+            "relative_bias": 0.00036522287631534484,
+            "relative_RMSE": 0.006900333035225176,
+            "maximum_absolute_relative_difference": 0.018605958695002405,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07609248555536234,
+            "relative_bias": 0.07609248555536234,
+            "relative_RMSE": 0.07625279185416624,
+            "maximum_absolute_relative_difference": 0.31177391330212806,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0054730861920420345,
+            "relative_bias": 0.002841090294988751,
+            "relative_RMSE": 0.008905478456519017,
+            "maximum_absolute_relative_difference": 0.09635975569274001,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.005472981077340638,
+            "relative_bias": 0.00286743429918948,
+            "relative_RMSE": 0.008475152413792654,
+            "maximum_absolute_relative_difference": 0.02095493678483202,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.00550613972652879,
+            "relative_bias": -0.005442836118700223,
+            "relative_RMSE": 0.006003908810496447,
+            "maximum_absolute_relative_difference": 0.09635975569274001,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "final": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.006645051624518284,
+            "relative_bias": 0.0050692366216978655,
+            "relative_RMSE": 0.00833405692240813,
+            "maximum_absolute_relative_difference": 0.024434194533360924,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014822,
+            "relative_bias": 0.005050543186177152,
+            "relative_RMSE": 0.008251671837470264,
+            "maximum_absolute_relative_difference": 0.024434194533360924,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005968434321927298,
+            "relative_bias": 0.0054058374103662194,
+            "relative_RMSE": 0.007488859188554409,
+            "maximum_absolute_relative_difference": 0.011020910848072739,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008698837615326114,
+            "relative_bias": 0.007588410773687592,
+            "relative_RMSE": 0.013383871209397546,
+            "maximum_absolute_relative_difference": 0.17753000801442478,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008702618594309406,
+            "relative_bias": 0.007598662575350324,
+            "relative_RMSE": 0.012708825210180566,
+            "maximum_absolute_relative_difference": 0.027194539213029466,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004623008460940143,
+            "relative_bias": -0.0034628519512827265,
+            "relative_RMSE": 0.005252009465605547,
+            "maximum_absolute_relative_difference": 0.17753000801442478,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.017736827143668865,
+            "relative_bias": 0.013941600374246911,
+            "relative_RMSE": 0.04364043298069,
+            "maximum_absolute_relative_difference": 0.31177391330212806,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004989487416668093,
+            "relative_bias": 0.00036522287631534484,
+            "relative_RMSE": 0.006900333035225176,
+            "maximum_absolute_relative_difference": 0.018605958695002405,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07609248555536234,
+            "relative_bias": 0.07609248555536234,
+            "relative_RMSE": 0.07625279185416624,
+            "maximum_absolute_relative_difference": 0.31177391330212806,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0054730861920420345,
+            "relative_bias": 0.002841090294988751,
+            "relative_RMSE": 0.008905478456519017,
+            "maximum_absolute_relative_difference": 0.09635975569274001,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.005472981077340638,
+            "relative_bias": 0.00286743429918948,
+            "relative_RMSE": 0.008475152413792654,
+            "maximum_absolute_relative_difference": 0.02095493678483202,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.00550613972652879,
+            "relative_bias": -0.005442836118700223,
+            "relative_RMSE": 0.006003908810496447,
+            "maximum_absolute_relative_difference": 0.09635975569274001,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      }
+    },
+    "bins": {
+      "last5h": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245174845,
+            "relative_bias": 0.005069236621696592,
+            "relative_RMSE": 0.00833405692240732,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014028,
+            "relative_bias": 0.00505054318617586,
+            "relative_RMSE": 0.008251671837469474,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.00869770526220762,
+            "relative_bias": 0.007586741288924268,
+            "relative_RMSE": 0.013382245256032904,
+            "maximum_absolute_relative_difference": 0.17936881720721407,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008701480822381227,
+            "relative_bias": 0.007596999924919539,
+            "relative_RMSE": 0.01270728124686954,
+            "maximum_absolute_relative_difference": 0.02719306254188731,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004627717489799227,
+            "relative_bias": -0.003471888726879707,
+            "relative_RMSE": 0.005257180812346539,
+            "maximum_absolute_relative_difference": 0.17936881720721407,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.01773651589110747,
+            "relative_bias": 0.013941579742117124,
+            "relative_RMSE": 0.04369023274384416,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004958087751250862,
+            "relative_bias": 0.00033417731510274165,
+            "relative_RMSE": 0.006765141570808916,
+            "maximum_absolute_relative_difference": 0.018606321720630408,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623449300144942,
+            "relative_bias": 0.07623449300144942,
+            "relative_RMSE": 0.07636963514737823,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.005472823705777322,
+            "relative_bias": 0.002839614192703685,
+            "relative_RMSE": 0.0089048142921216,
+            "maximum_absolute_relative_difference": 0.10151063950029657,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.00547250878922672,
+            "relative_bias": 0.002866190958513675,
+            "relative_RMSE": 0.008474515989490757,
+            "maximum_absolute_relative_difference": 0.020953897122054078,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005571849864130633,
+            "relative_bias": -0.005517504588719566,
+            "relative_RMSE": 0.006070600647413186,
+            "maximum_absolute_relative_difference": 0.10151063950029657,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245174845,
+            "relative_bias": 0.005069236621696592,
+            "relative_RMSE": 0.00833405692240732,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014028,
+            "relative_bias": 0.00505054318617586,
+            "relative_RMSE": 0.008251671837469474,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.00869770526220762,
+            "relative_bias": 0.007586741288924268,
+            "relative_RMSE": 0.013382245256032904,
+            "maximum_absolute_relative_difference": 0.17936881720721407,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008701480822381227,
+            "relative_bias": 0.007596999924919539,
+            "relative_RMSE": 0.01270728124686954,
+            "maximum_absolute_relative_difference": 0.02719306254188731,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004627717489799227,
+            "relative_bias": -0.003471888726879707,
+            "relative_RMSE": 0.005257180812346539,
+            "maximum_absolute_relative_difference": 0.17936881720721407,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.01773651589110747,
+            "relative_bias": 0.013941579742117124,
+            "relative_RMSE": 0.04369023274384416,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004958087751250862,
+            "relative_bias": 0.00033417731510274165,
+            "relative_RMSE": 0.006765141570808916,
+            "maximum_absolute_relative_difference": 0.018606321720630408,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623449300144942,
+            "relative_bias": 0.07623449300144942,
+            "relative_RMSE": 0.07636963514737823,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.005472823705777322,
+            "relative_bias": 0.002839614192703685,
+            "relative_RMSE": 0.0089048142921216,
+            "maximum_absolute_relative_difference": 0.10151063950029657,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.00547250878922672,
+            "relative_bias": 0.002866190958513675,
+            "relative_RMSE": 0.008474515989490757,
+            "maximum_absolute_relative_difference": 0.020953897122054078,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005571849864130633,
+            "relative_bias": -0.005517504588719566,
+            "relative_RMSE": 0.006070600647413186,
+            "maximum_absolute_relative_difference": 0.10151063950029657,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "final": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245174845,
+            "relative_bias": 0.005069236621696592,
+            "relative_RMSE": 0.00833405692240732,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014028,
+            "relative_bias": 0.00505054318617586,
+            "relative_RMSE": 0.008251671837469474,
+            "maximum_absolute_relative_difference": 0.024434194533359606,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.00869770526220762,
+            "relative_bias": 0.007586741288924268,
+            "relative_RMSE": 0.013382245256032904,
+            "maximum_absolute_relative_difference": 0.17936881720721407,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008701480822381227,
+            "relative_bias": 0.007596999924919539,
+            "relative_RMSE": 0.01270728124686954,
+            "maximum_absolute_relative_difference": 0.02719306254188731,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004627717489799227,
+            "relative_bias": -0.003471888726879707,
+            "relative_RMSE": 0.005257180812346539,
+            "maximum_absolute_relative_difference": 0.17936881720721407,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.01773651589110747,
+            "relative_bias": 0.013941579742117124,
+            "relative_RMSE": 0.04369023274384416,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.004958087751250862,
+            "relative_bias": 0.00033417731510274165,
+            "relative_RMSE": 0.006765141570808916,
+            "maximum_absolute_relative_difference": 0.018606321720630408,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623449300144942,
+            "relative_bias": 0.07623449300144942,
+            "relative_RMSE": 0.07636963514737823,
+            "maximum_absolute_relative_difference": 0.3229659437906898,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.005472823705777322,
+            "relative_bias": 0.002839614192703685,
+            "relative_RMSE": 0.0089048142921216,
+            "maximum_absolute_relative_difference": 0.10151063950029657,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.00547250878922672,
+            "relative_bias": 0.002866190958513675,
+            "relative_RMSE": 0.008474515989490757,
+            "maximum_absolute_relative_difference": 0.020953897122054078,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005571849864130633,
+            "relative_bias": -0.005517504588719566,
+            "relative_RMSE": 0.006070600647413186,
+            "maximum_absolute_relative_difference": 0.10151063950029657,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      }
+    },
+    "ode": {
+      "last5h": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245177,
+            "relative_bias": 0.005069236621696943,
+            "relative_RMSE": 0.008334056922407544,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014254,
+            "relative_bias": 0.005050543186176229,
+            "relative_RMSE": 0.0082516718374697,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008697195844190462,
+            "relative_bias": 0.007585748556749269,
+            "relative_RMSE": 0.013380963147745893,
+            "maximum_absolute_relative_difference": 0.17799587105201395,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008700975491425433,
+            "relative_bias": 0.007595997526516379,
+            "relative_RMSE": 0.012706063821126304,
+            "maximum_absolute_relative_difference": 0.02719391690073798,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004622802291181535,
+            "relative_bias": -0.003462461434314093,
+            "relative_RMSE": 0.005251527268769046,
+            "maximum_absolute_relative_difference": 0.17799587105201395,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.017736453451687256,
+            "relative_bias": 0.013941465797456807,
+            "relative_RMSE": 0.04369011745289098,
+            "maximum_absolute_relative_difference": 0.3229659409355463,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.00495805209649872,
+            "relative_bias": 0.00033407890419137295,
+            "relative_RMSE": 0.006765046002381262,
+            "maximum_absolute_relative_difference": 0.018606130875657236,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623430794531276,
+            "relative_bias": 0.07623430794531276,
+            "relative_RMSE": 0.07636944965177458,
+            "maximum_absolute_relative_difference": 0.3229659409355463,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0054723821507436455,
+            "relative_bias": 0.0028391335707983207,
+            "relative_RMSE": 0.00890424752503003,
+            "maximum_absolute_relative_difference": 0.09761127795888941,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.005472268976832533,
+            "relative_bias": 0.0028654756648171546,
+            "relative_RMSE": 0.008473980855451231,
+            "maximum_absolute_relative_difference": 0.020954485082295228,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005507969920335011,
+            "relative_bias": -0.005444192182257254,
+            "relative_RMSE": 0.006004742865122882,
+            "maximum_absolute_relative_difference": 0.09761127795888941,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245177,
+            "relative_bias": 0.005069236621696943,
+            "relative_RMSE": 0.008334056922407544,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014254,
+            "relative_bias": 0.005050543186176229,
+            "relative_RMSE": 0.0082516718374697,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008697195844190462,
+            "relative_bias": 0.007585748556749269,
+            "relative_RMSE": 0.013380963147745893,
+            "maximum_absolute_relative_difference": 0.17799587105201395,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008700975491425433,
+            "relative_bias": 0.007595997526516379,
+            "relative_RMSE": 0.012706063821126304,
+            "maximum_absolute_relative_difference": 0.02719391690073798,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004622802291181535,
+            "relative_bias": -0.003462461434314093,
+            "relative_RMSE": 0.005251527268769046,
+            "maximum_absolute_relative_difference": 0.17799587105201395,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.017736453451687256,
+            "relative_bias": 0.013941465797456807,
+            "relative_RMSE": 0.04369011745289098,
+            "maximum_absolute_relative_difference": 0.3229659409355463,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.00495805209649872,
+            "relative_bias": 0.00033407890419137295,
+            "relative_RMSE": 0.006765046002381262,
+            "maximum_absolute_relative_difference": 0.018606130875657236,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623430794531276,
+            "relative_bias": 0.07623430794531276,
+            "relative_RMSE": 0.07636944965177458,
+            "maximum_absolute_relative_difference": 0.3229659409355463,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0054723821507436455,
+            "relative_bias": 0.0028391335707983207,
+            "relative_RMSE": 0.00890424752503003,
+            "maximum_absolute_relative_difference": 0.09761127795888941,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.005472268976832533,
+            "relative_bias": 0.0028654756648171546,
+            "relative_RMSE": 0.008473980855451231,
+            "maximum_absolute_relative_difference": 0.020954485082295228,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005507969920335011,
+            "relative_bias": -0.005444192182257254,
+            "relative_RMSE": 0.006004742865122882,
+            "maximum_absolute_relative_difference": 0.09761127795888941,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "final": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0066450516245177,
+            "relative_bias": 0.005069236621696943,
+            "relative_RMSE": 0.008334056922407544,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.006682628191014254,
+            "relative_bias": 0.005050543186176229,
+            "relative_RMSE": 0.0082516718374697,
+            "maximum_absolute_relative_difference": 0.024434194533359984,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0059684343219264,
+            "relative_bias": 0.005405837410365307,
+            "relative_RMSE": 0.0074888591885532456,
+            "maximum_absolute_relative_difference": 0.011020910848072909,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.008697195844190462,
+            "relative_bias": 0.007585748556749269,
+            "relative_RMSE": 0.013380963147745893,
+            "maximum_absolute_relative_difference": 0.17799587105201395,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.008700975491425433,
+            "relative_bias": 0.007595997526516379,
+            "relative_RMSE": 0.012706063821126304,
+            "maximum_absolute_relative_difference": 0.02719391690073798,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.004622802291181535,
+            "relative_bias": -0.003462461434314093,
+            "relative_RMSE": 0.005251527268769046,
+            "maximum_absolute_relative_difference": 0.17799587105201395,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.017736453451687256,
+            "relative_bias": 0.013941465797456807,
+            "relative_RMSE": 0.04369011745289098,
+            "maximum_absolute_relative_difference": 0.3229659409355463,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.00495805209649872,
+            "relative_bias": 0.00033407890419137295,
+            "relative_RMSE": 0.006765046002381262,
+            "maximum_absolute_relative_difference": 0.018606130875657236,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.07623430794531276,
+            "relative_bias": 0.07623430794531276,
+            "relative_RMSE": 0.07636944965177458,
+            "maximum_absolute_relative_difference": 0.3229659409355463,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0054723821507436455,
+            "relative_bias": 0.0028391335707983207,
+            "relative_RMSE": 0.00890424752503003,
+            "maximum_absolute_relative_difference": 0.09761127795888941,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.005472268976832533,
+            "relative_bias": 0.0028654756648171546,
+            "relative_RMSE": 0.008473980855451231,
+            "maximum_absolute_relative_difference": 0.020954485082295228,
+            "maximum_relative_difference_height_m": 1820.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.005507969920335011,
+            "relative_bias": -0.005444192182257254,
+            "relative_RMSE": 0.006004742865122882,
+            "maximum_absolute_relative_difference": 0.09761127795888941,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      }
+    }
+  },
+  "raw_refinement_changes": {
+    "mass": {
+      "last5h": {
+        "Fn": {
+          "relative_L1": 3.4813194326236494e-16,
+          "relative_bias": 3.4813194326236494e-16
+        },
+        "Fm": {
+          "relative_L1": 6.837463099529802e-07,
+          "relative_bias": -6.830238980487976e-07
+        },
+        "Nd": {
+          "relative_L1": 2.4350711914070855e-07,
+          "relative_bias": 5.279339247416886e-08
+        },
+        "Md": {
+          "relative_L1": 5.372912741836609e-07,
+          "relative_bias": -5.358863967813462e-07
+        },
+        "deposition": {
+          "relative_L1": 3.587548440919548e-07,
+          "relative_bias": -3.573240299841492e-07
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "relative_L1": 3.4813194326236494e-16,
+          "relative_bias": 3.4813194326236494e-16
+        },
+        "Fm": {
+          "relative_L1": 6.837463099529802e-07,
+          "relative_bias": -6.830238980487976e-07
+        },
+        "Nd": {
+          "relative_L1": 2.4350711914070855e-07,
+          "relative_bias": 5.279339247416886e-08
+        },
+        "Md": {
+          "relative_L1": 5.372912741836609e-07,
+          "relative_bias": -5.358863967813462e-07
+        },
+        "deposition": {
+          "relative_L1": 3.587548440919548e-07,
+          "relative_bias": -3.573240299841492e-07
+        }
+      },
+      "final": {
+        "Fn": {
+          "relative_L1": 3.4813194326236494e-16,
+          "relative_bias": 3.4813194326236494e-16
+        },
+        "Fm": {
+          "relative_L1": 6.837463099529802e-07,
+          "relative_bias": -6.830238980487976e-07
+        },
+        "Nd": {
+          "relative_L1": 2.4350711914070855e-07,
+          "relative_bias": 5.279339247416886e-08
+        },
+        "Md": {
+          "relative_L1": 5.372912741836609e-07,
+          "relative_bias": -5.358863967813462e-07
+        },
+        "deposition": {
+          "relative_L1": 3.587548440919548e-07,
+          "relative_bias": -3.573240299841492e-07
+        }
+      }
+    },
+    "height": {
+      "last5h": {
+        "Fn": {
+          "relative_L1": 9.1807712120752e-16,
+          "relative_bias": -9.1807712120752e-16
+        },
+        "Fm": {
+          "relative_L1": 1.650339492241669e-06,
+          "relative_bias": -1.6495001550027675e-06
+        },
+        "Nd": {
+          "relative_L1": 5.364424138807362e-05,
+          "relative_bias": -2.034843997442761e-08
+        },
+        "Md": {
+          "relative_L1": 1.3090110958300864e-06,
+          "relative_bias": -1.2586309419172662e-06
+        },
+        "deposition": {
+          "relative_L1": 2.217287425765945e-06,
+          "relative_bias": 6.488775561422921e-07
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "relative_L1": 9.1807712120752e-16,
+          "relative_bias": -9.1807712120752e-16
+        },
+        "Fm": {
+          "relative_L1": 1.650339492241669e-06,
+          "relative_bias": -1.6495001550027675e-06
+        },
+        "Nd": {
+          "relative_L1": 5.364424138807362e-05,
+          "relative_bias": -2.034843997442761e-08
+        },
+        "Md": {
+          "relative_L1": 1.3090110958300864e-06,
+          "relative_bias": -1.2586309419172662e-06
+        },
+        "deposition": {
+          "relative_L1": 2.217287425765945e-06,
+          "relative_bias": 6.488775561422921e-07
+        }
+      },
+      "final": {
+        "Fn": {
+          "relative_L1": 9.1807712120752e-16,
+          "relative_bias": -9.1807712120752e-16
+        },
+        "Fm": {
+          "relative_L1": 1.650339492241669e-06,
+          "relative_bias": -1.6495001550027675e-06
+        },
+        "Nd": {
+          "relative_L1": 5.364424138807362e-05,
+          "relative_bias": -2.034843997442761e-08
+        },
+        "Md": {
+          "relative_L1": 1.3090110958300864e-06,
+          "relative_bias": -1.2586309419172662e-06
+        },
+        "deposition": {
+          "relative_L1": 2.217287425765945e-06,
+          "relative_bias": 6.488775561422921e-07
+        }
+      }
+    },
+    "bins": {
+      "last5h": {
+        "Fn": {
+          "relative_L1": 3.4813194326236494e-16,
+          "relative_bias": 3.4813194326236494e-16
+        },
+        "Fm": {
+          "relative_L1": 1.141622559996285e-08,
+          "relative_bias": 7.411295988636929e-09
+        },
+        "Nd": {
+          "relative_L1": 0.0,
+          "relative_bias": 0.0
+        },
+        "Md": {
+          "relative_L1": 2.553675785318631e-07,
+          "relative_bias": 2.1328979825626014e-07
+        },
+        "deposition": {
+          "relative_L1": 1.9319020016830203e-05,
+          "relative_bias": -1.660062300056555e-05
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "relative_L1": 3.4813194326236494e-16,
+          "relative_bias": 3.4813194326236494e-16
+        },
+        "Fm": {
+          "relative_L1": 1.141622559996285e-08,
+          "relative_bias": 7.411295988636929e-09
+        },
+        "Nd": {
+          "relative_L1": 0.0,
+          "relative_bias": 0.0
+        },
+        "Md": {
+          "relative_L1": 2.553675785318631e-07,
+          "relative_bias": 2.1328979825626014e-07
+        },
+        "deposition": {
+          "relative_L1": 1.9319020016830203e-05,
+          "relative_bias": -1.660062300056555e-05
+        }
+      },
+      "final": {
+        "Fn": {
+          "relative_L1": 3.4813194326236494e-16,
+          "relative_bias": 3.4813194326236494e-16
+        },
+        "Fm": {
+          "relative_L1": 1.141622559996285e-08,
+          "relative_bias": 7.411295988636929e-09
+        },
+        "Nd": {
+          "relative_L1": 0.0,
+          "relative_bias": 0.0
+        },
+        "Md": {
+          "relative_L1": 2.553675785318631e-07,
+          "relative_bias": 2.1328979825626014e-07
+        },
+        "deposition": {
+          "relative_L1": 1.9319020016830203e-05,
+          "relative_bias": -1.660062300056555e-05
+        }
+      }
+    },
+    "ode": {
+      "last5h": {
+        "Fn": {
+          "relative_L1": 0.0,
+          "relative_bias": 0.0
+        },
+        "Fm": {
+          "relative_L1": 1.6170430815083143e-06,
+          "relative_bias": 9.926695569138966e-07
+        },
+        "Nd": {
+          "relative_L1": 2.7823897889542794e-07,
+          "relative_bias": 1.1237794701058432e-07
+        },
+        "Md": {
+          "relative_L1": 1.2209208167944815e-06,
+          "relative_bias": 6.925511192269479e-07
+        },
+        "deposition": {
+          "relative_L1": 6.380675982640059e-07,
+          "relative_bias": 1.8770679801279892e-07
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "relative_L1": 0.0,
+          "relative_bias": 0.0
+        },
+        "Fm": {
+          "relative_L1": 1.6170430815083143e-06,
+          "relative_bias": 9.926695569138966e-07
+        },
+        "Nd": {
+          "relative_L1": 2.7823897889542794e-07,
+          "relative_bias": 1.1237794701058432e-07
+        },
+        "Md": {
+          "relative_L1": 1.2209208167944815e-06,
+          "relative_bias": 6.925511192269479e-07
+        },
+        "deposition": {
+          "relative_L1": 6.380675982640059e-07,
+          "relative_bias": 1.8770679801279892e-07
+        }
+      },
+      "final": {
+        "Fn": {
+          "relative_L1": 0.0,
+          "relative_bias": 0.0
+        },
+        "Fm": {
+          "relative_L1": 1.6170430815083143e-06,
+          "relative_bias": 9.926695569138966e-07
+        },
+        "Nd": {
+          "relative_L1": 2.7823897889542794e-07,
+          "relative_bias": 1.1237794701058432e-07
+        },
+        "Md": {
+          "relative_L1": 1.2209208167944815e-06,
+          "relative_bias": 6.925511192269479e-07
+        },
+        "deposition": {
+          "relative_L1": 6.380675982640059e-07,
+          "relative_bias": 1.8770679801279892e-07
+        }
+      }
+    }
+  },
+  "regional_refinement_changes": {
+    "mass": {
+      "last5h": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 3.4813194326236494e-16,
+            "relative_bias": 3.4813194326236494e-16,
+            "relative_RMSE": 3.669632889898608e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.6747260677694075e-16,
+            "relative_bias": 3.6747260677694075e-16,
+            "relative_RMSE": 3.6747260677694075e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 6.837463099529802e-07,
+            "relative_bias": -6.830238980487976e-07,
+            "relative_RMSE": 8.47604080106656e-07,
+            "maximum_absolute_relative_difference": 2.092447164560171e-06,
+            "maximum_relative_difference_height_m": 2900.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 6.836930580218518e-07,
+            "relative_bias": -6.836930580218518e-07,
+            "relative_RMSE": 8.04841060503968e-07,
+            "maximum_absolute_relative_difference": 1.0184321301076928e-06,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 7.417881035079265e-07,
+            "relative_bias": 4.632514504081974e-08,
+            "relative_RMSE": 9.803201229331795e-07,
+            "maximum_absolute_relative_difference": 2.092447164560171e-06,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.4350711914070855e-07,
+            "relative_bias": 5.279339247416886e-08,
+            "relative_RMSE": 3.8647877174512794e-07,
+            "maximum_absolute_relative_difference": 2.395785132295199e-06,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.8296803681819322e-07,
+            "relative_bias": 1.8296803681819322e-07,
+            "relative_RMSE": 2.1905038947935466e-07,
+            "maximum_absolute_relative_difference": 3.682686548622742e-07,
+            "maximum_relative_difference_height_m": 2640.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 5.011019535058827e-07,
+            "relative_bias": -5.011019535058827e-07,
+            "relative_RMSE": 5.620942776809218e-07,
+            "maximum_absolute_relative_difference": 2.395785132295199e-06,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 5.372912741836609e-07,
+            "relative_bias": -5.358863967813462e-07,
+            "relative_RMSE": 6.456562594401986e-07,
+            "maximum_absolute_relative_difference": 9.326818814198759e-07,
+            "maximum_relative_difference_height_m": 2900.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 5.377283569511689e-07,
+            "relative_bias": -5.377283569511689e-07,
+            "relative_RMSE": 6.144358202063461e-07,
+            "maximum_absolute_relative_difference": 7.857615112390026e-07,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 3.98701130604321e-07,
+            "relative_bias": 4.8162079571704974e-08,
+            "relative_RMSE": 5.141057027786245e-07,
+            "maximum_absolute_relative_difference": 9.326818814198759e-07,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 3.587548440919548e-07,
+            "relative_bias": -3.573240299841492e-07,
+            "relative_RMSE": 4.536668397510149e-07,
+            "maximum_absolute_relative_difference": 4.886880278435997e-07,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.6145594216952153e-07,
+            "relative_bias": -3.6145594216952153e-07,
+            "relative_RMSE": 4.350883322600377e-07,
+            "maximum_absolute_relative_difference": 4.886880278435997e-07,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.1289403899018898e-07,
+            "relative_bias": 1.877310804372584e-08,
+            "relative_RMSE": 1.4478637434601888e-07,
+            "maximum_absolute_relative_difference": 2.3500997359320986e-07,
+            "maximum_relative_difference_height_m": 2820.0
+          }
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 3.4813194326236494e-16,
+            "relative_bias": 3.4813194326236494e-16,
+            "relative_RMSE": 3.669632889898608e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.6747260677694075e-16,
+            "relative_bias": 3.6747260677694075e-16,
+            "relative_RMSE": 3.6747260677694075e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 6.837463099529802e-07,
+            "relative_bias": -6.830238980487976e-07,
+            "relative_RMSE": 8.47604080106656e-07,
+            "maximum_absolute_relative_difference": 2.092447164560171e-06,
+            "maximum_relative_difference_height_m": 2900.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 6.836930580218518e-07,
+            "relative_bias": -6.836930580218518e-07,
+            "relative_RMSE": 8.04841060503968e-07,
+            "maximum_absolute_relative_difference": 1.0184321301076928e-06,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 7.417881035079265e-07,
+            "relative_bias": 4.632514504081974e-08,
+            "relative_RMSE": 9.803201229331795e-07,
+            "maximum_absolute_relative_difference": 2.092447164560171e-06,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.4350711914070855e-07,
+            "relative_bias": 5.279339247416886e-08,
+            "relative_RMSE": 3.8647877174512794e-07,
+            "maximum_absolute_relative_difference": 2.395785132295199e-06,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.8296803681819322e-07,
+            "relative_bias": 1.8296803681819322e-07,
+            "relative_RMSE": 2.1905038947935466e-07,
+            "maximum_absolute_relative_difference": 3.682686548622742e-07,
+            "maximum_relative_difference_height_m": 2640.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 5.011019535058827e-07,
+            "relative_bias": -5.011019535058827e-07,
+            "relative_RMSE": 5.620942776809218e-07,
+            "maximum_absolute_relative_difference": 2.395785132295199e-06,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 5.372912741836609e-07,
+            "relative_bias": -5.358863967813462e-07,
+            "relative_RMSE": 6.456562594401986e-07,
+            "maximum_absolute_relative_difference": 9.326818814198759e-07,
+            "maximum_relative_difference_height_m": 2900.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 5.377283569511689e-07,
+            "relative_bias": -5.377283569511689e-07,
+            "relative_RMSE": 6.144358202063461e-07,
+            "maximum_absolute_relative_difference": 7.857615112390026e-07,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 3.98701130604321e-07,
+            "relative_bias": 4.8162079571704974e-08,
+            "relative_RMSE": 5.141057027786245e-07,
+            "maximum_absolute_relative_difference": 9.326818814198759e-07,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 3.587548440919548e-07,
+            "relative_bias": -3.573240299841492e-07,
+            "relative_RMSE": 4.536668397510149e-07,
+            "maximum_absolute_relative_difference": 4.886880278435997e-07,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.6145594216952153e-07,
+            "relative_bias": -3.6145594216952153e-07,
+            "relative_RMSE": 4.350883322600377e-07,
+            "maximum_absolute_relative_difference": 4.886880278435997e-07,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.1289403899018898e-07,
+            "relative_bias": 1.877310804372584e-08,
+            "relative_RMSE": 1.4478637434601888e-07,
+            "maximum_absolute_relative_difference": 2.3500997359320986e-07,
+            "maximum_relative_difference_height_m": 2820.0
+          }
+        }
+      },
+      "final": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 3.4813194326236494e-16,
+            "relative_bias": 3.4813194326236494e-16,
+            "relative_RMSE": 3.669632889898608e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.6747260677694075e-16,
+            "relative_bias": 3.6747260677694075e-16,
+            "relative_RMSE": 3.6747260677694075e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 6.837463099529802e-07,
+            "relative_bias": -6.830238980487976e-07,
+            "relative_RMSE": 8.47604080106656e-07,
+            "maximum_absolute_relative_difference": 2.092447164560171e-06,
+            "maximum_relative_difference_height_m": 2900.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 6.836930580218518e-07,
+            "relative_bias": -6.836930580218518e-07,
+            "relative_RMSE": 8.04841060503968e-07,
+            "maximum_absolute_relative_difference": 1.0184321301076928e-06,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 7.417881035079265e-07,
+            "relative_bias": 4.632514504081974e-08,
+            "relative_RMSE": 9.803201229331795e-07,
+            "maximum_absolute_relative_difference": 2.092447164560171e-06,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.4350711914070855e-07,
+            "relative_bias": 5.279339247416886e-08,
+            "relative_RMSE": 3.8647877174512794e-07,
+            "maximum_absolute_relative_difference": 2.395785132295199e-06,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.8296803681819322e-07,
+            "relative_bias": 1.8296803681819322e-07,
+            "relative_RMSE": 2.1905038947935466e-07,
+            "maximum_absolute_relative_difference": 3.682686548622742e-07,
+            "maximum_relative_difference_height_m": 2640.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 5.011019535058827e-07,
+            "relative_bias": -5.011019535058827e-07,
+            "relative_RMSE": 5.620942776809218e-07,
+            "maximum_absolute_relative_difference": 2.395785132295199e-06,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 5.372912741836609e-07,
+            "relative_bias": -5.358863967813462e-07,
+            "relative_RMSE": 6.456562594401986e-07,
+            "maximum_absolute_relative_difference": 9.326818814198759e-07,
+            "maximum_relative_difference_height_m": 2900.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 5.377283569511689e-07,
+            "relative_bias": -5.377283569511689e-07,
+            "relative_RMSE": 6.144358202063461e-07,
+            "maximum_absolute_relative_difference": 7.857615112390026e-07,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 3.98701130604321e-07,
+            "relative_bias": 4.8162079571704974e-08,
+            "relative_RMSE": 5.141057027786245e-07,
+            "maximum_absolute_relative_difference": 9.326818814198759e-07,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 3.587548440919548e-07,
+            "relative_bias": -3.573240299841492e-07,
+            "relative_RMSE": 4.536668397510149e-07,
+            "maximum_absolute_relative_difference": 4.886880278435997e-07,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.6145594216952153e-07,
+            "relative_bias": -3.6145594216952153e-07,
+            "relative_RMSE": 4.350883322600377e-07,
+            "maximum_absolute_relative_difference": 4.886880278435997e-07,
+            "maximum_relative_difference_height_m": 840.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.1289403899018898e-07,
+            "relative_bias": 1.877310804372584e-08,
+            "relative_RMSE": 1.4478637434601888e-07,
+            "maximum_absolute_relative_difference": 2.3500997359320986e-07,
+            "maximum_relative_difference_height_m": 2820.0
+          }
+        }
+      }
+    },
+    "height": {
+      "last5h": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 9.1807712120752e-16,
+            "relative_bias": -9.1807712120752e-16,
+            "relative_RMSE": 9.415175545513906e-16,
+            "maximum_absolute_relative_difference": 1.3229013843969849e-15,
+            "maximum_relative_difference_height_m": 2740.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 9.186815169423506e-16,
+            "relative_bias": -9.186815169423506e-16,
+            "relative_RMSE": 9.186815169423506e-16,
+            "maximum_absolute_relative_difference": 9.186815169423508e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 9.071979979805715e-16,
+            "relative_bias": -9.071979979805715e-16,
+            "relative_RMSE": 1.271971015787079e-15,
+            "maximum_absolute_relative_difference": 1.3229013843969849e-15,
+            "maximum_relative_difference_height_m": 2740.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.650339492241669e-06,
+            "relative_bias": -1.6495001550027675e-06,
+            "relative_RMSE": 2.296418441492765e-06,
+            "maximum_absolute_relative_difference": 0.0005666378983830048,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.6508773238702613e-06,
+            "relative_bias": -1.6508773238702613e-06,
+            "relative_RMSE": 2.180569747461134e-06,
+            "maximum_absolute_relative_difference": 2.025369868075378e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.0641309584960534e-06,
+            "relative_bias": -1.4845763608912655e-07,
+            "relative_RMSE": 1.283157988389103e-06,
+            "maximum_absolute_relative_difference": 0.0005666378983830048,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 5.364424138807362e-05,
+            "relative_bias": -2.034843997442761e-08,
+            "relative_RMSE": 0.0004459391637874369,
+            "maximum_absolute_relative_difference": 0.008531981292712276,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.169546127964946e-05,
+            "relative_bias": -3.103422680302598e-05,
+            "relative_RMSE": 0.00035982564431527846,
+            "maximum_absolute_relative_difference": 0.00151193665542322,
+            "maximum_relative_difference_height_m": 2680.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0001470519648176218,
+            "relative_bias": 0.00013196583750307468,
+            "relative_RMSE": 0.0005373630921173602,
+            "maximum_absolute_relative_difference": 0.008531981292712276,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.3090110958300864e-06,
+            "relative_bias": -1.2586309419172662e-06,
+            "relative_RMSE": 1.709562324439779e-06,
+            "maximum_absolute_relative_difference": 0.0013850626420806671,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.2810092930141093e-06,
+            "relative_bias": -1.2573158381226341e-06,
+            "relative_RMSE": 1.6230178664486469e-06,
+            "maximum_absolute_relative_difference": 1.6992105883110042e-05,
+            "maximum_relative_difference_height_m": 2680.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.018780995080948e-05,
+            "relative_bias": -1.6756234528171325e-06,
+            "relative_RMSE": 1.1945310078576199e-05,
+            "maximum_absolute_relative_difference": 0.0013850626420806671,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.217287425765945e-06,
+            "relative_bias": 6.488775561422921e-07,
+            "relative_RMSE": 4.834276906502162e-06,
+            "maximum_absolute_relative_difference": 0.003782149089305907,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 8.000598204695209e-07,
+            "relative_bias": -7.855787866695711e-07,
+            "relative_RMSE": 1.0652986794886027e-06,
+            "maximum_absolute_relative_difference": 2.7316312035286065e-05,
+            "maximum_relative_difference_height_m": 2680.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.00013123392382516353,
+            "relative_bias": 0.00013123392382516353,
+            "relative_RMSE": 0.00013693217966724843,
+            "maximum_absolute_relative_difference": 0.003782149089305907,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 9.1807712120752e-16,
+            "relative_bias": -9.1807712120752e-16,
+            "relative_RMSE": 9.415175545513906e-16,
+            "maximum_absolute_relative_difference": 1.3229013843969849e-15,
+            "maximum_relative_difference_height_m": 2740.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 9.186815169423506e-16,
+            "relative_bias": -9.186815169423506e-16,
+            "relative_RMSE": 9.186815169423506e-16,
+            "maximum_absolute_relative_difference": 9.186815169423508e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 9.071979979805715e-16,
+            "relative_bias": -9.071979979805715e-16,
+            "relative_RMSE": 1.271971015787079e-15,
+            "maximum_absolute_relative_difference": 1.3229013843969849e-15,
+            "maximum_relative_difference_height_m": 2740.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.650339492241669e-06,
+            "relative_bias": -1.6495001550027675e-06,
+            "relative_RMSE": 2.296418441492765e-06,
+            "maximum_absolute_relative_difference": 0.0005666378983830048,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.6508773238702613e-06,
+            "relative_bias": -1.6508773238702613e-06,
+            "relative_RMSE": 2.180569747461134e-06,
+            "maximum_absolute_relative_difference": 2.025369868075378e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.0641309584960534e-06,
+            "relative_bias": -1.4845763608912655e-07,
+            "relative_RMSE": 1.283157988389103e-06,
+            "maximum_absolute_relative_difference": 0.0005666378983830048,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 5.364424138807362e-05,
+            "relative_bias": -2.034843997442761e-08,
+            "relative_RMSE": 0.0004459391637874369,
+            "maximum_absolute_relative_difference": 0.008531981292712276,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.169546127964946e-05,
+            "relative_bias": -3.103422680302598e-05,
+            "relative_RMSE": 0.00035982564431527846,
+            "maximum_absolute_relative_difference": 0.00151193665542322,
+            "maximum_relative_difference_height_m": 2680.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0001470519648176218,
+            "relative_bias": 0.00013196583750307468,
+            "relative_RMSE": 0.0005373630921173602,
+            "maximum_absolute_relative_difference": 0.008531981292712276,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.3090110958300864e-06,
+            "relative_bias": -1.2586309419172662e-06,
+            "relative_RMSE": 1.709562324439779e-06,
+            "maximum_absolute_relative_difference": 0.0013850626420806671,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.2810092930141093e-06,
+            "relative_bias": -1.2573158381226341e-06,
+            "relative_RMSE": 1.6230178664486469e-06,
+            "maximum_absolute_relative_difference": 1.6992105883110042e-05,
+            "maximum_relative_difference_height_m": 2680.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.018780995080948e-05,
+            "relative_bias": -1.6756234528171325e-06,
+            "relative_RMSE": 1.1945310078576199e-05,
+            "maximum_absolute_relative_difference": 0.0013850626420806671,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.217287425765945e-06,
+            "relative_bias": 6.488775561422921e-07,
+            "relative_RMSE": 4.834276906502162e-06,
+            "maximum_absolute_relative_difference": 0.003782149089305907,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 8.000598204695209e-07,
+            "relative_bias": -7.855787866695711e-07,
+            "relative_RMSE": 1.0652986794886027e-06,
+            "maximum_absolute_relative_difference": 2.7316312035286065e-05,
+            "maximum_relative_difference_height_m": 2680.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.00013123392382516353,
+            "relative_bias": 0.00013123392382516353,
+            "relative_RMSE": 0.00013693217966724843,
+            "maximum_absolute_relative_difference": 0.003782149089305907,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "final": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 9.1807712120752e-16,
+            "relative_bias": -9.1807712120752e-16,
+            "relative_RMSE": 9.415175545513906e-16,
+            "maximum_absolute_relative_difference": 1.3229013843969849e-15,
+            "maximum_relative_difference_height_m": 2740.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 9.186815169423506e-16,
+            "relative_bias": -9.186815169423506e-16,
+            "relative_RMSE": 9.186815169423506e-16,
+            "maximum_absolute_relative_difference": 9.186815169423508e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 9.071979979805715e-16,
+            "relative_bias": -9.071979979805715e-16,
+            "relative_RMSE": 1.271971015787079e-15,
+            "maximum_absolute_relative_difference": 1.3229013843969849e-15,
+            "maximum_relative_difference_height_m": 2740.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.650339492241669e-06,
+            "relative_bias": -1.6495001550027675e-06,
+            "relative_RMSE": 2.296418441492765e-06,
+            "maximum_absolute_relative_difference": 0.0005666378983830048,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.6508773238702613e-06,
+            "relative_bias": -1.6508773238702613e-06,
+            "relative_RMSE": 2.180569747461134e-06,
+            "maximum_absolute_relative_difference": 2.025369868075378e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.0641309584960534e-06,
+            "relative_bias": -1.4845763608912655e-07,
+            "relative_RMSE": 1.283157988389103e-06,
+            "maximum_absolute_relative_difference": 0.0005666378983830048,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 5.364424138807362e-05,
+            "relative_bias": -2.034843997442761e-08,
+            "relative_RMSE": 0.0004459391637874369,
+            "maximum_absolute_relative_difference": 0.008531981292712276,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.169546127964946e-05,
+            "relative_bias": -3.103422680302598e-05,
+            "relative_RMSE": 0.00035982564431527846,
+            "maximum_absolute_relative_difference": 0.00151193665542322,
+            "maximum_relative_difference_height_m": 2680.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0001470519648176218,
+            "relative_bias": 0.00013196583750307468,
+            "relative_RMSE": 0.0005373630921173602,
+            "maximum_absolute_relative_difference": 0.008531981292712276,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.3090110958300864e-06,
+            "relative_bias": -1.2586309419172662e-06,
+            "relative_RMSE": 1.709562324439779e-06,
+            "maximum_absolute_relative_difference": 0.0013850626420806671,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.2810092930141093e-06,
+            "relative_bias": -1.2573158381226341e-06,
+            "relative_RMSE": 1.6230178664486469e-06,
+            "maximum_absolute_relative_difference": 1.6992105883110042e-05,
+            "maximum_relative_difference_height_m": 2680.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.018780995080948e-05,
+            "relative_bias": -1.6756234528171325e-06,
+            "relative_RMSE": 1.1945310078576199e-05,
+            "maximum_absolute_relative_difference": 0.0013850626420806671,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.217287425765945e-06,
+            "relative_bias": 6.488775561422921e-07,
+            "relative_RMSE": 4.834276906502162e-06,
+            "maximum_absolute_relative_difference": 0.003782149089305907,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 8.000598204695209e-07,
+            "relative_bias": -7.855787866695711e-07,
+            "relative_RMSE": 1.0652986794886027e-06,
+            "maximum_absolute_relative_difference": 2.7316312035286065e-05,
+            "maximum_relative_difference_height_m": 2680.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.00013123392382516353,
+            "relative_bias": 0.00013123392382516353,
+            "relative_RMSE": 0.00013693217966724843,
+            "maximum_absolute_relative_difference": 0.003782149089305907,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      }
+    },
+    "bins": {
+      "last5h": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 3.4813194326236494e-16,
+            "relative_bias": 3.4813194326236494e-16,
+            "relative_RMSE": 3.669632889898608e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.6747260677694075e-16,
+            "relative_bias": 3.6747260677694075e-16,
+            "relative_RMSE": 3.6747260677694075e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.141622559996285e-08,
+            "relative_bias": 7.411295988636929e-09,
+            "relative_RMSE": 3.029096680705519e-08,
+            "maximum_absolute_relative_difference": 0.0016728178916814666,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.2430669706225212e-09,
+            "relative_bias": -7.655370359277721e-10,
+            "relative_RMSE": 1.4956232237347777e-08,
+            "maximum_absolute_relative_difference": 1.0962631151581794e-07,
+            "maximum_relative_difference_height_m": 800.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 8.919800602865455e-06,
+            "relative_bias": 8.919800602865455e-06,
+            "relative_RMSE": 8.926227491438385e-06,
+            "maximum_absolute_relative_difference": 0.0016728178916814666,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.553675785318631e-07,
+            "relative_bias": 2.1328979825626014e-07,
+            "relative_RMSE": 7.353387912259434e-07,
+            "maximum_absolute_relative_difference": 0.004339823747180827,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 2.4680286644444304e-08,
+            "relative_bias": -1.753018801091145e-08,
+            "relative_RMSE": 5.282417198104408e-08,
+            "maximum_absolute_relative_difference": 6.887845410913809e-07,
+            "maximum_relative_difference_height_m": 2660.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 7.340699011518044e-05,
+            "relative_bias": 7.340699011518044e-05,
+            "relative_RMSE": 7.375888910760023e-05,
+            "maximum_absolute_relative_difference": 0.004339823747180827,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.9319020016830203e-05,
+            "relative_bias": -1.660062300056555e-05,
+            "relative_RMSE": 3.525342618682196e-05,
+            "maximum_absolute_relative_difference": 0.010486668026167462,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.0536051793248628e-05,
+            "relative_bias": -7.787765447525461e-06,
+            "relative_RMSE": 2.0164399151234243e-05,
+            "maximum_absolute_relative_difference": 9.258235429655499e-05,
+            "maximum_relative_difference_height_m": 800.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0008181189611820739,
+            "relative_bias": -0.0008181189611820739,
+            "relative_RMSE": 0.0008228237954929886,
+            "maximum_absolute_relative_difference": 0.010486668026167462,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 3.4813194326236494e-16,
+            "relative_bias": 3.4813194326236494e-16,
+            "relative_RMSE": 3.669632889898608e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.6747260677694075e-16,
+            "relative_bias": 3.6747260677694075e-16,
+            "relative_RMSE": 3.6747260677694075e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.141622559996285e-08,
+            "relative_bias": 7.411295988636929e-09,
+            "relative_RMSE": 3.029096680705519e-08,
+            "maximum_absolute_relative_difference": 0.0016728178916814666,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.2430669706225212e-09,
+            "relative_bias": -7.655370359277721e-10,
+            "relative_RMSE": 1.4956232237347777e-08,
+            "maximum_absolute_relative_difference": 1.0962631151581794e-07,
+            "maximum_relative_difference_height_m": 800.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 8.919800602865455e-06,
+            "relative_bias": 8.919800602865455e-06,
+            "relative_RMSE": 8.926227491438385e-06,
+            "maximum_absolute_relative_difference": 0.0016728178916814666,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.553675785318631e-07,
+            "relative_bias": 2.1328979825626014e-07,
+            "relative_RMSE": 7.353387912259434e-07,
+            "maximum_absolute_relative_difference": 0.004339823747180827,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 2.4680286644444304e-08,
+            "relative_bias": -1.753018801091145e-08,
+            "relative_RMSE": 5.282417198104408e-08,
+            "maximum_absolute_relative_difference": 6.887845410913809e-07,
+            "maximum_relative_difference_height_m": 2660.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 7.340699011518044e-05,
+            "relative_bias": 7.340699011518044e-05,
+            "relative_RMSE": 7.375888910760023e-05,
+            "maximum_absolute_relative_difference": 0.004339823747180827,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.9319020016830203e-05,
+            "relative_bias": -1.660062300056555e-05,
+            "relative_RMSE": 3.525342618682196e-05,
+            "maximum_absolute_relative_difference": 0.010486668026167462,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.0536051793248628e-05,
+            "relative_bias": -7.787765447525461e-06,
+            "relative_RMSE": 2.0164399151234243e-05,
+            "maximum_absolute_relative_difference": 9.258235429655499e-05,
+            "maximum_relative_difference_height_m": 800.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0008181189611820739,
+            "relative_bias": -0.0008181189611820739,
+            "relative_RMSE": 0.0008228237954929886,
+            "maximum_absolute_relative_difference": 0.010486668026167462,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      },
+      "final": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 3.4813194326236494e-16,
+            "relative_bias": 3.4813194326236494e-16,
+            "relative_RMSE": 3.669632889898608e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.6747260677694075e-16,
+            "relative_bias": 3.6747260677694075e-16,
+            "relative_RMSE": 3.6747260677694075e-16,
+            "maximum_absolute_relative_difference": 3.6747260677694075e-16,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.141622559996285e-08,
+            "relative_bias": 7.411295988636929e-09,
+            "relative_RMSE": 3.029096680705519e-08,
+            "maximum_absolute_relative_difference": 0.0016728178916814666,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 3.2430669706225212e-09,
+            "relative_bias": -7.655370359277721e-10,
+            "relative_RMSE": 1.4956232237347777e-08,
+            "maximum_absolute_relative_difference": 1.0962631151581794e-07,
+            "maximum_relative_difference_height_m": 800.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 8.919800602865455e-06,
+            "relative_bias": 8.919800602865455e-06,
+            "relative_RMSE": 8.926227491438385e-06,
+            "maximum_absolute_relative_difference": 0.0016728178916814666,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.553675785318631e-07,
+            "relative_bias": 2.1328979825626014e-07,
+            "relative_RMSE": 7.353387912259434e-07,
+            "maximum_absolute_relative_difference": 0.004339823747180827,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 2.4680286644444304e-08,
+            "relative_bias": -1.753018801091145e-08,
+            "relative_RMSE": 5.282417198104408e-08,
+            "maximum_absolute_relative_difference": 6.887845410913809e-07,
+            "maximum_relative_difference_height_m": 2660.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 7.340699011518044e-05,
+            "relative_bias": 7.340699011518044e-05,
+            "relative_RMSE": 7.375888910760023e-05,
+            "maximum_absolute_relative_difference": 0.004339823747180827,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.9319020016830203e-05,
+            "relative_bias": -1.660062300056555e-05,
+            "relative_RMSE": 3.525342618682196e-05,
+            "maximum_absolute_relative_difference": 0.010486668026167462,
+            "maximum_relative_difference_height_m": 2980.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.0536051793248628e-05,
+            "relative_bias": -7.787765447525461e-06,
+            "relative_RMSE": 2.0164399151234243e-05,
+            "maximum_absolute_relative_difference": 9.258235429655499e-05,
+            "maximum_relative_difference_height_m": 800.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0008181189611820739,
+            "relative_bias": -0.0008181189611820739,
+            "relative_RMSE": 0.0008228237954929886,
+            "maximum_absolute_relative_difference": 0.010486668026167462,
+            "maximum_relative_difference_height_m": 2980.0
+          }
+        }
+      }
+    },
+    "ode": {
+      "last5h": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.6170430815083143e-06,
+            "relative_bias": 9.926695569138966e-07,
+            "relative_RMSE": 2.551170848963552e-06,
+            "maximum_absolute_relative_difference": 2.385771359178453e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.617819367514764e-06,
+            "relative_bias": 9.940760511130414e-07,
+            "relative_RMSE": 2.4224717843609726e-06,
+            "maximum_absolute_relative_difference": 2.385771359178453e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 7.709342335671792e-07,
+            "relative_bias": -5.40331394522737e-07,
+            "relative_RMSE": 1.1077691484978389e-06,
+            "maximum_absolute_relative_difference": 1.55292383154228e-06,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.7823897889542794e-07,
+            "relative_bias": 1.1237794701058432e-07,
+            "relative_RMSE": 3.497853694418578e-07,
+            "maximum_absolute_relative_difference": 5.628028470687953e-07,
+            "maximum_relative_difference_height_m": 2640.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 2.8484867671722846e-07,
+            "relative_bias": 9.837804533911732e-08,
+            "relative_RMSE": 3.5359054842546985e-07,
+            "maximum_absolute_relative_difference": 5.628028470687953e-07,
+            "maximum_relative_difference_height_m": 2640.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 2.501145799077402e-07,
+            "relative_bias": 1.7194781404717906e-07,
+            "relative_RMSE": 2.9386725550727503e-07,
+            "maximum_absolute_relative_difference": 4.936048070987635e-07,
+            "maximum_relative_difference_height_m": 2840.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.2209208167944815e-06,
+            "relative_bias": 6.925511192269479e-07,
+            "relative_RMSE": 1.8757567836687892e-06,
+            "maximum_absolute_relative_difference": 1.8830382602397716e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.2234192132814715e-06,
+            "relative_bias": 6.957196957851102e-07,
+            "relative_RMSE": 1.7851019738680342e-06,
+            "maximum_absolute_relative_difference": 1.8830382602397716e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 4.287308661722255e-07,
+            "relative_bias": -3.121390971675646e-07,
+            "relative_RMSE": 6.095163939064444e-07,
+            "maximum_absolute_relative_difference": 6.797420305890235e-07,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 6.380675982640059e-07,
+            "relative_bias": 1.8770679801279892e-07,
+            "relative_RMSE": 9.514201279682646e-07,
+            "maximum_absolute_relative_difference": 1.2079539164053328e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 6.437404354415248e-07,
+            "relative_bias": 1.9061777621371118e-07,
+            "relative_RMSE": 9.124960308254892e-07,
+            "maximum_absolute_relative_difference": 1.2079539164053328e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.2171188969863936e-07,
+            "relative_bias": -7.725765707628935e-08,
+            "relative_RMSE": 1.6672702732386837e-07,
+            "maximum_absolute_relative_difference": 1.6653954463113946e-07,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        }
+      },
+      "four_snapshots": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.6170430815083143e-06,
+            "relative_bias": 9.926695569138966e-07,
+            "relative_RMSE": 2.551170848963552e-06,
+            "maximum_absolute_relative_difference": 2.385771359178453e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.617819367514764e-06,
+            "relative_bias": 9.940760511130414e-07,
+            "relative_RMSE": 2.4224717843609726e-06,
+            "maximum_absolute_relative_difference": 2.385771359178453e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 7.709342335671792e-07,
+            "relative_bias": -5.40331394522737e-07,
+            "relative_RMSE": 1.1077691484978389e-06,
+            "maximum_absolute_relative_difference": 1.55292383154228e-06,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.7823897889542794e-07,
+            "relative_bias": 1.1237794701058432e-07,
+            "relative_RMSE": 3.497853694418578e-07,
+            "maximum_absolute_relative_difference": 5.628028470687953e-07,
+            "maximum_relative_difference_height_m": 2640.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 2.8484867671722846e-07,
+            "relative_bias": 9.837804533911732e-08,
+            "relative_RMSE": 3.5359054842546985e-07,
+            "maximum_absolute_relative_difference": 5.628028470687953e-07,
+            "maximum_relative_difference_height_m": 2640.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 2.501145799077402e-07,
+            "relative_bias": 1.7194781404717906e-07,
+            "relative_RMSE": 2.9386725550727503e-07,
+            "maximum_absolute_relative_difference": 4.936048070987635e-07,
+            "maximum_relative_difference_height_m": 2840.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.2209208167944815e-06,
+            "relative_bias": 6.925511192269479e-07,
+            "relative_RMSE": 1.8757567836687892e-06,
+            "maximum_absolute_relative_difference": 1.8830382602397716e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.2234192132814715e-06,
+            "relative_bias": 6.957196957851102e-07,
+            "relative_RMSE": 1.7851019738680342e-06,
+            "maximum_absolute_relative_difference": 1.8830382602397716e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 4.287308661722255e-07,
+            "relative_bias": -3.121390971675646e-07,
+            "relative_RMSE": 6.095163939064444e-07,
+            "maximum_absolute_relative_difference": 6.797420305890235e-07,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 6.380675982640059e-07,
+            "relative_bias": 1.8770679801279892e-07,
+            "relative_RMSE": 9.514201279682646e-07,
+            "maximum_absolute_relative_difference": 1.2079539164053328e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 6.437404354415248e-07,
+            "relative_bias": 1.9061777621371118e-07,
+            "relative_RMSE": 9.124960308254892e-07,
+            "maximum_absolute_relative_difference": 1.2079539164053328e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.2171188969863936e-07,
+            "relative_bias": -7.725765707628935e-08,
+            "relative_RMSE": 1.6672702732386837e-07,
+            "maximum_absolute_relative_difference": 1.6653954463113946e-07,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        }
+      },
+      "final": {
+        "Fn": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 0.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 0.0,
+            "relative_bias": 0.0,
+            "relative_RMSE": 0.0,
+            "maximum_absolute_relative_difference": 0.0,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        },
+        "Fm": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.6170430815083143e-06,
+            "relative_bias": 9.926695569138966e-07,
+            "relative_RMSE": 2.551170848963552e-06,
+            "maximum_absolute_relative_difference": 2.385771359178453e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.617819367514764e-06,
+            "relative_bias": 9.940760511130414e-07,
+            "relative_RMSE": 2.4224717843609726e-06,
+            "maximum_absolute_relative_difference": 2.385771359178453e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 7.709342335671792e-07,
+            "relative_bias": -5.40331394522737e-07,
+            "relative_RMSE": 1.1077691484978389e-06,
+            "maximum_absolute_relative_difference": 1.55292383154228e-06,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "Nd": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 2.7823897889542794e-07,
+            "relative_bias": 1.1237794701058432e-07,
+            "relative_RMSE": 3.497853694418578e-07,
+            "maximum_absolute_relative_difference": 5.628028470687953e-07,
+            "maximum_relative_difference_height_m": 2640.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 2.8484867671722846e-07,
+            "relative_bias": 9.837804533911732e-08,
+            "relative_RMSE": 3.5359054842546985e-07,
+            "maximum_absolute_relative_difference": 5.628028470687953e-07,
+            "maximum_relative_difference_height_m": 2640.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 2.501145799077402e-07,
+            "relative_bias": 1.7194781404717906e-07,
+            "relative_RMSE": 2.9386725550727503e-07,
+            "maximum_absolute_relative_difference": 4.936048070987635e-07,
+            "maximum_relative_difference_height_m": 2840.0
+          }
+        },
+        "Md": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 1.2209208167944815e-06,
+            "relative_bias": 6.925511192269479e-07,
+            "relative_RMSE": 1.8757567836687892e-06,
+            "maximum_absolute_relative_difference": 1.8830382602397716e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 1.2234192132814715e-06,
+            "relative_bias": 6.957196957851102e-07,
+            "relative_RMSE": 1.7851019738680342e-06,
+            "maximum_absolute_relative_difference": 1.8830382602397716e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 4.287308661722255e-07,
+            "relative_bias": -3.121390971675646e-07,
+            "relative_RMSE": 6.095163939064444e-07,
+            "maximum_absolute_relative_difference": 6.797420305890235e-07,
+            "maximum_relative_difference_height_m": 2900.0
+          }
+        },
+        "deposition": {
+          "all_populated": {
+            "count": 150,
+            "relative_L1": 6.380675982640059e-07,
+            "relative_bias": 1.8770679801279892e-07,
+            "relative_RMSE": 9.514201279682646e-07,
+            "maximum_absolute_relative_difference": 1.2079539164053328e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "below_nucleation": {
+            "count": 135,
+            "relative_L1": 6.437404354415248e-07,
+            "relative_bias": 1.9061777621371118e-07,
+            "relative_RMSE": 9.124960308254892e-07,
+            "maximum_absolute_relative_difference": 1.2079539164053328e-06,
+            "maximum_relative_difference_height_m": 780.0
+          },
+          "nucleation_belt": {
+            "count": 15,
+            "relative_L1": 1.2171188969863936e-07,
+            "relative_bias": -7.725765707628935e-08,
+            "relative_RMSE": 1.6672702732386837e-07,
+            "maximum_absolute_relative_difference": 1.6653954463113946e-07,
+            "maximum_relative_difference_height_m": 2700.0
+          }
+        }
+      }
+    }
+  },
+  "averaging": "All sampled physical trajectories reach ground before5h; continuous last5h, four final snapshots and final-time deterministic profiles coincide. An unknown archived window still changes stochastic sampling.",
+  "remaining": [
+    "Exact archived executable and preprocessing configuration.",
+    "Origin of residual number-density differences inside the nucleation belt.",
+    "Aggregation population comparison and empirical constraints."
+  ]
+}

@@ -1,0 +1,382 @@
+{
+  "schema": "terluna.atmosphere.scale-size-source-audit/1",
+  "date": "2026-10-22",
+  "purpose": "Identify the active model constraints on lunar snow size and distinguish explicit gravity dependence from assumptions shared with Earth simulations.",
+  "evidence": "Inspection of the pinned native implementation and local forcing adapter, with conditional algebraic deductions. No new full-column simulation or empirical validation is supplied by this record.",
+  "source_revision": "4eaf4f74aa03d091d9778eff373b816f178a962f",
+  "source_repository": "https://github.com/Shima-Lab/SCALE-SDM_mixed-phase_Shima2019",
+  "source_tag": "SCALE-SDM_0.2.5-2.2.2",
+  "identity_scope": "Hashes identify the actual local files inspected. The lunar build contains previously recorded compile, configured-liquid-gravity, collision-observer and forcing patches; its files are not all pristine upstream bytes. Cached native files remain under ignored research/runs/.",
+  "sources": {
+    "aggregation": {
+      "path": "research/runs/snow_scale/lunar/work/contrib/SDM/sdm_coalescence_cold.f90",
+      "sha256": "22573a3b9241c3fd446ca2853c67674bc05671704b7da08c6079f1372120b487"
+    },
+    "motion": {
+      "path": "research/runs/snow_scale/lunar/work/contrib/SDM/sdm_motion.f90",
+      "sha256": "1fdf72e7c01a8749c5075e9814673c649515a7fb0406608cf1f109522531c4a1"
+    },
+    "deposition": {
+      "path": "research/runs/snow_scale/lunar/work/contrib/SDM/sdm_subldep.f90",
+      "sha256": "37afcfdb871cdc3da53488810ada6e8541128eccd3a0e774faf6e359408cb444"
+    },
+    "microphysics_constants": {
+      "path": "research/runs/snow_scale/lunar/work/contrib/SDM/sdm_common.f90",
+      "sha256": "a237799be9b40455774462784ff758ddb588944fc7e33de4e0bef4ee847f8bcf"
+    },
+    "physical_constants": {
+      "path": "research/runs/snow_scale/lunar/work/scalelib/src/common/scale_const.F90",
+      "sha256": "256841aff9d6358cb073a199d05424dc67f2c52a2cfe21666419b8a0ec26a8c2"
+    },
+    "native_operator_order": {
+      "path": "research/runs/snow_scale/lunar/work/contrib/SDM/scale_atmos_phy_mp_sdm.F90",
+      "sha256": "0855ed87d04f51478f374b150166f2ca02554e14f8eb82328fc678e5c0b3670c"
+    },
+    "forcing_hook": {
+      "path": "atmosphere/snow/scale_lunar_hook.f90",
+      "sha256": "5462f20b62532cf2e3736f28b4cd307985ae136561552f2143faf4e6b81b5d11"
+    },
+    "forcing_builder": {
+      "path": "atmosphere/snow/scale_lunar.py",
+      "sha256": "83488e1d1ef1b1ff45c96c54f422f51777ee473a9cdf80498256aa527618362f"
+    }
+  },
+  "observations": [
+    {
+      "id": "ice_collision_kernel",
+      "claim": "The active ice-ice collision kernel is K = E (sqrt(A1)+sqrt(A2))^2 |v1-v2|, with native E=0.1. Areas depend on the two spheroid axes and apparent density. This branch contains no explicit gravity parameter; gravity enters through the terminal velocities.",
+      "references": [
+        {
+          "source": "aggregation",
+          "lines": [
+            695,
+            731
+          ]
+        }
+      ],
+      "boundary": "Changes in morphology or atmospheric density can alter both area and relative speed, so a gravity rescaling alone does not predict a complete population."
+    },
+    {
+      "id": "inactive_low_density_rejection",
+      "claim": "The displayed rho<10 kg/m3 aggregation shutoff and density-dependent reduction are commented out. They cannot explain the native lunar output.",
+      "references": [
+        {
+          "source": "aggregation",
+          "lines": [
+            714,
+            719
+          ]
+        }
+      ],
+      "boundary": "A 10 kg/m3 parameter remains active in the aggregate-outcome interpolation; that is a separate operation."
+    },
+    {
+      "id": "active_aggregate_geometry",
+      "claim": "The active call is sdm_outcome_aggregation_shima5_multi. It conserves the combined ice mass, holds one component of the larger constituent fixed, and computes the other component from volume and density interpolation. No gravity, collision energy, temperature or branch-contact strength enters this outcome routine.",
+      "references": [
+        {
+          "source": "aggregation",
+          "lines": [
+            1143,
+            1153
+          ]
+        },
+        {
+          "source": "aggregation",
+          "lines": [
+            1812,
+            1894
+          ]
+        }
+      ],
+      "boundary": "Holding one component fixed is not a maximum-diameter ceiling: the other component may become longer, and subsequent collisions and deposition continue growth. The 10 kg/m3 interpolation parameter is neither an explicit rejection at that density nor a mechanical fracture law."
+    },
+    {
+      "id": "configured_ice_gravity",
+      "claim": "The active ice fall speed is the Bohm closure. Its Best number is proportional to particle mass times configured CONST_GRAV, and the resulting Reynolds number determines terminal speed. The turbulence correction is a smooth drag correction rather than a flake-size cutoff.",
+      "references": [
+        {
+          "source": "motion",
+          "lines": [
+            1494,
+            1513
+          ]
+        },
+        {
+          "source": "motion",
+          "lines": [
+            1576,
+            1641
+          ]
+        }
+      ],
+      "boundary": "The drag law is Earth-derived. Its use at lunar gravity is a physical transfer assumption, but the source does use the configured lunar gravity rather than a hidden Earth gravity in this active ice branch."
+    },
+    {
+      "id": "deposition_and_habit",
+      "claim": "Deposition uses spheroid capacitance, ice supersaturation and a ventilation correction based on terminal speed. Temperature selects the inherent growth ratio. Apparent deposition density depends on supersaturation and this growth ratio; material is added as volume dm/rho_dep. These density and habit formulas contain no explicit gravity.",
+      "references": [
+        {
+          "source": "deposition",
+          "lines": [
+            205,
+            218
+          ]
+        },
+        {
+          "source": "deposition",
+          "lines": [
+            220,
+            275
+          ]
+        },
+        {
+          "source": "deposition",
+          "lines": [
+            279,
+            345
+          ]
+        },
+        {
+          "source": "deposition",
+          "lines": [
+            457,
+            469
+          ]
+        }
+      ],
+      "boundary": "Lower gravity affects ventilation through terminal speed and changes the time spent in each layer. It does not directly weaken this density law or make the geometric outcome more open."
+    },
+    {
+      "id": "active_growth_limiters",
+      "claim": "Growth sets the inherent ratio to one below 10 micrometres, restricts further columnar elongation when aspect ratio exceeds 40, and replaces a particle with a dense sphere if its smaller semiaxis falls to one micrometre. These are shape or small-particle rules rather than a millimetre upper-size limit.",
+      "references": [
+        {
+          "source": "deposition",
+          "lines": [
+            205,
+            207
+          ]
+        },
+        {
+          "source": "deposition",
+          "lines": [
+            335,
+            359
+          ]
+        }
+      ],
+      "boundary": "A limiter can affect the later trajectory of particles that reach it; this source audit does not count such events in the lunar run."
+    },
+    {
+      "id": "fixed_transport_coefficients",
+      "claim": "The native growth calculation uses constant vapour diffusivity 2.52e-5 m2/s and thermal conductivity 0.0255 W/(m K). The constants source describes the latter at 293 K and 100 kPa. The deposition routine does not rescale either coefficient to local pressure and temperature.",
+      "references": [
+        {
+          "source": "microphysics_constants",
+          "lines": [
+            242,
+            250
+          ]
+        },
+        {
+          "source": "deposition",
+          "lines": [
+            230,
+            252
+          ]
+        },
+        {
+          "source": "deposition",
+          "lines": [
+            286,
+            292
+          ]
+        }
+      ],
+      "boundary": "This is a transfer limitation at the lunar cloud pressure, approximately 47-66 kPa. It also affects terrestrial clouds at comparable pressure and does not by itself demonstrate a lunar-specific cap or the sign and magnitude of the size discrepancy."
+    },
+    {
+      "id": "seed_geometry",
+      "claim": "The forcing adapter injects log-uniform seed maximum dimensions and the inherited mass-size relation, then sets both native semiaxes to D/2 and chooses density to preserve seed mass. Thus initial maximum dimension and mass match the old column while its branching geometry and projected area do not.",
+      "references": [
+        {
+          "source": "forcing_hook",
+          "lines": [
+            118,
+            146
+          ]
+        }
+      ],
+      "boundary": "These initial spheres are an adapter choice, not a result establishing the real lunar ice habit."
+    },
+    {
+      "id": "water_allocation",
+      "claim": "The prescribed adapter allows only the local share of the integrated snowfall source. When native positive deposition demand exceeds the allowance it multiplies all positive mass increments in that cell by one common fraction, interpolates morphology, and rescales both axes to preserve the admitted mass. The builder divides the integrated source by total cloud depth.",
+      "references": [
+        {
+          "source": "forcing_hook",
+          "lines": [
+            158,
+            214
+          ]
+        },
+        {
+          "source": "forcing_builder",
+          "lines": [
+            141,
+            150
+          ]
+        }
+      ],
+      "boundary": "This imposed water source is a scenario assumption. Morphology interpolation adds an operator approximation; its timestep checks do not validate the assumed moisture supply or native ice habit."
+    },
+    {
+      "id": "operator_order",
+      "claim": "After injection and gas forcing, native terminal speed is recomputed before motion, again before deposition, and again before collisions. Deposition follows movement and precedes collisions. The prescribed case skips the native vapour/heat update for deposition.",
+      "references": [
+        {
+          "source": "native_operator_order",
+          "lines": [
+            2047,
+            2082
+          ]
+        },
+        {
+          "source": "native_operator_order",
+          "lines": [
+            2284,
+            2319
+          ]
+        },
+        {
+          "source": "native_operator_order",
+          "lines": [
+            2341,
+            2378
+          ]
+        }
+      ],
+      "boundary": "This inspection did not find an omitted gravity update or use of the pre-injection velocity in the active collision stage. It is not a proof that the full adapter is free of defects."
+    }
+  ],
+  "conditional_analysis": [
+    {
+      "id": "gravity_scaling_of_encounters",
+      "derivation": "For a dilute steady population with number flux F_i and settling speed v_i, n_i=F_i/v_i. A collector crossing dz has dt=dz/v_collector and expected encounters dN=E S F_i |v_collector-v_i| dz/(v_i v_collector), with S=(sqrt(A_collector)+sqrt(A_i))^2. If all velocities are multiplied by s with shapes and fluxes fixed, dN is multiplied by 1/s. If concentrations rather than fluxes are fixed, the kernel and residence-time factors cancel under the same uniform rescaling.",
+      "status": "Algebraic consequence of the active differential-settling kernel under the stated restrictions.",
+      "implication": "Slower lunar falling speeds alone do not establish smaller aggregates. Under fixed number flux they increase this idealized collision exposure. Nonuniform drag scaling, deposition, number depletion and morphology require population controls.",
+      "references": [
+        {
+          "source": "aggregation",
+          "lines": [
+            695,
+            731
+          ]
+        },
+        {
+          "source": "forcing_hook",
+          "lines": [
+            118,
+            146
+          ]
+        }
+      ]
+    },
+    {
+      "id": "water_per_seed_bound",
+      "derivation": "In a steady prescribed column, deposited mass flux cannot exceed the integrated source Q. Its deposited contribution per incoming seed is at most Q/F_seed, independently of depth or gravity. If lower gravity raises the suspended seed population, the per-time share may decrease while residence time increases.",
+      "status": "Budget deduction; it is a bound on mass averaged over incoming seeds, not on a single aggregate or a distribution maximum.",
+      "implication": "Longer lunar residence does not supply unlimited vapour growth in this experiment. Large aggregate mass requires collecting many seeds or strongly uneven water allocation; large visible span also depends on morphology.",
+      "references": [
+        {
+          "source": "forcing_hook",
+          "lines": [
+            122,
+            146
+          ]
+        },
+        {
+          "source": "forcing_hook",
+          "lines": [
+            173,
+            213
+          ]
+        },
+        {
+          "source": "forcing_builder",
+          "lines": [
+            141,
+            143
+          ]
+        }
+      ]
+    },
+    {
+      "id": "geometry_is_not_lunar_specific",
+      "derivation": "Neither the active aggregation outcome nor the deposition-density rule contains gravity. The same rules act in Earth and lunar configurations; different trajectories and particle populations can expose different errors.",
+      "status": "Source observation followed by a bounded mechanism inference.",
+      "implication": "The filling-in assumption is a candidate contributor to compact snow, but its existence does not identify a specifically lunar suppression or establish the correct replacement.",
+      "references": [
+        {
+          "source": "aggregation",
+          "lines": [
+            1812,
+            1894
+          ]
+        },
+        {
+          "source": "deposition",
+          "lines": [
+            279,
+            320
+          ]
+        }
+      ]
+    }
+  ],
+  "discriminating_controls": [
+    {
+      "control": "Change only configured gravity in the full prescribed native column, keeping temperature, pressure, vapour, depth, source flux and seed flux fixed.",
+      "purpose": "Determine the direction and magnitude of the model gravity response without conflating it with a different Earth storm.",
+      "required_diagnostics": [
+        "arriving mass and number flux",
+        "mass-weighted dimensions and particle masses",
+        "monomer counts",
+        "apparent density and aspect ratio",
+        "water budget and collision omissions"
+      ]
+    },
+    {
+      "control": "Change depth while preserving temperature/pressure as functions of normalized height and preserving integrated water supply per incoming seed.",
+      "purpose": "Separate extra geometric path length from the imposed water-per-seed budget; identify how lower volumetric supply changes growth versus aggregation."
+    },
+    {
+      "control": "Compare deposition-only, aggregation-only and coupled trajectories from the same declared seed population.",
+      "purpose": "Locate where number is removed, where compactness develops, and whether coupled growth narrows the fall-speed distribution."
+    },
+    {
+      "control": "Modify the aggregation geometry only after identifying its contribution, then compare with an observed Earth aggregate population.",
+      "purpose": "Distinguish a useful closure sensitivity from a physically supported repair."
+    }
+  ],
+  "limits": [
+    "No source-supported lunar-only millimetre ceiling was identified in the active ice, deposition or adapter branches inspected.",
+    "The existing native lunar result and a generic observation of larger Earth flakes do not establish an otherwise matched Earth-to-Moon difference.",
+    "Source inspection and algebra do not measure which assumption dominates the coupled lunar output.",
+    "This record contains no new observational data, native execution, illustrative terminal-speed numbers or claim of empirical validation."
+  ],
+  "verification": {
+    "activities": [
+      "Read the active branches and their call sites in the locally built source.",
+      "Read the forcing builder and injection, growth-allocation and reporting hook.",
+      "Computed SHA-256 for every identified source file.",
+      "Serialized and re-read this JSON record."
+    ],
+    "unperformed": [
+      "Full new Earth-observation validation.",
+      "A new native gravity/depth control as part of this source-only audit.",
+      "Counts of growth-shape limiter activations."
+    ]
+  }
+}

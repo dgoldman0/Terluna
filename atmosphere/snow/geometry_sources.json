@@ -1,0 +1,148 @@
+{
+  "schema": "terluna.atmosphere.snow-geometry-sources/1",
+  "review_date": "2026-10-21",
+  "scope": "Targeted primary literature on observed large flakes, aggregate scaling, evolving geometry and hydrodynamic collision efficiency; companion to strength_literature.md. No systematic review or full scholarly admission claimed.",
+  "external_bytes": "No external source bytes stored in the repository. Sources read through web text extraction and publisher-indexed results; no raw-source hash claimed.",
+  "sources": [
+    {
+      "id": "lawson_1993",
+      "authors": "R. Paul Lawson, Ronald E. Stewart, J. Walter Strapp and George A. Isaac",
+      "title": "Aircraft observations of the origin and growth of very large snowflakes",
+      "publication": "Geophysical Research Letters 20(1), 53–56 (1993)",
+      "doi": "10.1029/92GL02917",
+      "url": "https://doi.org/10.1029/92GL02917",
+      "retrieved_url": "https://www.researchgate.net/publication/241061277_Aircraft_observations_of_the_origin_and_growth_of_very_large_snowflakes",
+      "reading_extent": "Author-uploaded paper text: abstract, instrumentation, observations, surface collection and summary; figure captions. No image digitization.",
+      "evidence": "Direct airborne imaging and ground collection of centimetre aggregates.",
+      "limit": "Approximately 5 cm airborne imaging range; no physical maximum established.",
+      "retrieval_failure": "Direct Wiley full-text open failed; author-uploaded primary paper text obtained."
+    },
+    {
+      "id": "lawson_1998",
+      "authors": "R. Paul Lawson, Ronald E. Stewart and Leigh J. Angus",
+      "title": "Observations and Numerical Simulations of the Origin and Development of Very Large Snowflakes",
+      "publication": "Journal of the Atmospheric Sciences 55(21), 3209–3229 (1998)",
+      "doi": "10.1175/1520-0469(1998)055<3209:OANSOT>2.0.CO;2",
+      "url": "https://journals.ametsoc.org/view/journals/atsc/55/21/1520-0469_1998_055_3209_oansot_2.0.co_2.xml",
+      "reading_extent": "Publisher-indexed full text: abstract, introduction, observations/model synthesis, section 4c, conclusions and relevant captions.",
+      "evidence": "Observed large-flake storm interpreted with mesoscale and microphysical models.",
+      "limit": "Warm-layer breakup suppression is an inferred case mechanism, not a direct contact-strength measurement.",
+      "retrieval_failure": "Direct page open returned 403 after publisher-indexed text was retrieved."
+    },
+    {
+      "id": "westbrook_2004_grl",
+      "authors": "C. D. Westbrook, R. C. Ball, P. R. Field and A. J. Heymsfield",
+      "title": "Universality in snowflake aggregation",
+      "publication": "Geophysical Research Letters 31, L15104 (2004)",
+      "doi": "10.1029/2004GL020363",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2004GL020363",
+      "reading_extent": "Publisher text: model assumptions, fractal exponent, distribution scaling, observational comparisons and captions.",
+      "evidence": "Rigid geometric aggregation compared with cirrus observations.",
+      "limit": "No fracture, mechanical bond calculation or lunar validation."
+    },
+    {
+      "id": "westbrook_2004_pre",
+      "authors": "C. D. Westbrook, R. C. Ball, P. R. Field and A. J. Heymsfield",
+      "title": "Theory of growth by differential sedimentation, with application to snowflake formation",
+      "publication": "Physical Review E 70, 021403 (2004)",
+      "doi": "10.1103/PhysRevE.70.021403",
+      "url": "https://arxiv.org/pdf/physics/0312057",
+      "version_read": "arXiv:physics/0312057v2, 9 April 2004",
+      "reading_extent": "Sections II–IV and opening V; equations 1–14; PDF text and figure captions. Publisher abstract verified identity; no full-paper rendering review.",
+      "evidence": "Scaling argument and geometric simulation for structural feedback in differential sedimentation.",
+      "limit": "Dilute binary encounters, permanent rigid contacts, no hydrodynamic deflection. Local 1.9-law asymptotics in the note are our derivation, not paper results."
+    },
+    {
+      "id": "stein_2015",
+      "authors": "T. H. M. Stein, C. D. Westbrook and J. C. Nicol",
+      "title": "Fractal geometry of aggregate snowflakes revealed by triple-wavelength radar measurements",
+      "publication": "Geophysical Research Letters 42(1), 176–183 (2015); online 17 December 2014",
+      "doi": "10.1002/2014GL062170",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2014GL062170",
+      "reading_extent": "Abstract, sections 1–3, geometry/size integration assumptions and experimental setup.",
+      "evidence": "Remote retrieval supports fractal dimensions near two.",
+      "limit": "Size integration truncated at 20 mm; no decimetre strength inference."
+    },
+    {
+      "id": "seifert_2026",
+      "authors": "Axel Seifert, Fabian Jakub, Christoph Siewert, Leonie von Terzi and Stefan Kneifel",
+      "title": "On the Geometry of Aggregate Snowflakes",
+      "publication": "Tellus 79(1), 87–110, published 26 June 2026",
+      "doi": "10.16993/tellus.4127",
+      "url": "https://doi.org/10.16993/tellus.4127",
+      "manuscript_read": "https://arxiv.org/html/2601.10608v1",
+      "reading_extent": "Preprint sections 2–3 and stochastic representation context; published indexed metadata and geometry results. Published coefficient tables not compared exhaustively with v1.",
+      "evidence": "Synthetic joint geometry from 2–2048 monomers and mean monomer size 50–500 micrometres.",
+      "limit": "Contact regularization is geometric, not mechanical; present runs retain v1 provenance.",
+      "retrieval_failure": "Direct Tellus page opens failed; Reference Global full page timed out. Publisher-indexed content and arXiv v1 were accessible."
+    },
+    {
+      "id": "westbrook_2008",
+      "authors": "C. D. Westbrook, R. J. Hogan and A. J. Illingworth",
+      "title": "The Capacitance of Pristine Ice Crystals and Aggregate Snowflakes",
+      "publication": "Journal of the Atmospheric Sciences 65(1), 206–219 (2008)",
+      "doi": "10.1175/2007JAS2315.1",
+      "url": "https://arxiv.org/pdf/physics/0610038",
+      "version_read": "arXiv:physics/0610038v3, 17 July 2007",
+      "reading_extent": "Abstract, section 3e, Figures 12–14 captions, screening discussion and opening discussion; published identity checked.",
+      "evidence": "Diffusive capacitance computed for about 1000 synthetic aggregates, compared with previously reported sublimation retrieval.",
+      "limit": "Capacitance is distinct from aerodynamic collision efficiency, optical cross section and strength."
+    },
+    {
+      "id": "seifert_2019",
+      "authors": "Axel Seifert, Jussi Leinonen, Christoph Siewert and Stefan Kneifel",
+      "title": "The Geometry of Rimed Aggregate Snowflakes: A Modeling Study",
+      "publication": "Journal of Advances in Modeling Earth Systems 11, 712–731 (2019)",
+      "doi": "10.1029/2018MS001519",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2018MS001519",
+      "reading_extent": "Publisher-indexed sections 2, geometric transition discussion, 3.5, idealized column setup and conclusions.",
+      "evidence": "Explicit geometric aggregation/riming with prescribed rime compaction.",
+      "limit": "Mean 200 micrometre monomers, 40 micrometre droplets; no branch-strength validation at decimetre scale."
+    },
+    {
+      "id": "brdar_seifert_2018",
+      "authors": "S. Brdar and A. Seifert",
+      "title": "McSnow: A Monte-Carlo Particle Model for Riming and Aggregation of Ice Particles in a Multidimensional Microphysical Phase Space",
+      "publication": "Journal of Advances in Modeling Earth Systems 10, 187–206 (2018)",
+      "doi": "10.1002/2017MS001167",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2017MS001167",
+      "reading_extent": "Abstract and sections 2.2.2–2.2.5, 2.4, and Figure 3 collision-efficiency discussion.",
+      "evidence": "Implementation precedent separating hydrodynamic interception, sticking and riming state.",
+      "limit": "Describes a parameterization and numerical controls; paper does not claim observational validation of its full model."
+    },
+    {
+      "id": "welss_2024",
+      "authors": "Jan-Niklas Welss, Christoph Siewert and Axel Seifert",
+      "title": "Explicit Habit-Prediction in the Lagrangian Super-Particle Ice Microphysics Model McSnow",
+      "publication": "Journal of Advances in Modeling Earth Systems 16, e2023MS003805 (2024)",
+      "doi": "10.1029/2023MS003805",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2023MS003805",
+      "reading_extent": "Abstract, introduction, section 2.2 collision-efficiency discussion, section 3.2 atmospheric dependence, ventilation discussion and conclusions excerpts.",
+      "evidence": "Habit-dependent aerodynamic parameterization, comparisons with laboratory particle analogues and cloud observations.",
+      "limit": "No direct lunar-gravity or giant-aggregate validation; Böhm framework explicitly treated as parameterization."
+    }
+  ],
+  "leads_not_used_for_calibration": [
+    {
+      "title": "Some large snowflakes",
+      "authors": "A. H. Auer Jr.",
+      "publication": "Weather 26(3), 101, 121–122 (1971)",
+      "status": "Bibliographic and later-paper references located; original text not retrieved. No numerical claim attributed directly to this source."
+    },
+    {
+      "title": "Design of a cryo-vacuum drop tower for simulating water ice aggregates collisions in planetesimal formation",
+      "authors": "Yutian Wu, Xiaojing Zhang, Yuan Xiao and Yang Yu",
+      "doi": "10.5194/egusphere-egu25-5395",
+      "url": "https://meetingorganizer.copernicus.org/EGU25/EGU25-5395.html",
+      "reading_extent": "Conference abstract only: apparatus, below-130 K regime and intended collision velocities.",
+      "status": "Experimental apparatus lead; no reported collision outcome distribution used as snow evidence."
+    },
+    {
+      "title": "A general hydrodynamic theory for mixed-phase microphysics. Part III: Riming and aggregation",
+      "authors": "Johannes Peter Böhm",
+      "doi": "10.1016/0169-8095(92)90023-4",
+      "url": "https://www.sciencedirect.com/science/article/pii/0169809592900234",
+      "status": "Primary abstract read; detailed implementation discussion obtained from Brdar 2018 and Welss 2024 rather than claiming full original-paper review."
+    }
+  ]
+}

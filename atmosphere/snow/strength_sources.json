@@ -1,0 +1,157 @@
+{
+  "schema": "terluna.atmosphere.snow-strength-sources/1",
+  "review_date": "2026-10-21",
+  "scope": "Targeted primary-literature pass on contact strength, sintering, breakup and sublimation of porous snow/ice aggregates. Eight selected studies; not exhaustive.",
+  "destination_branch": "domain/atmosphere",
+  "external_bytes": "No full papers or external datasets stored in the repository. Retrieved web/PDF text lacks a locally retained byte identity; no raw-source hashes claimed.",
+  "model_changes": "None; physical implications remain proposals pending numerical repair and controlled tests.",
+  "sources": [
+    {
+      "id": "grzegorczyk_2023",
+      "authors": "Pierre Grzegorczyk, Sudha Yadav, Florian Zanger, Alexander Theis, Subir K. Mitra, Stephan Borrmann and Miklós Szakáll",
+      "title": "Fragmentation of ice particles: laboratory experiments on graupel–graupel and graupel–snowflake collisions",
+      "publication": "Atmospheric Chemistry and Physics 23, 13505–13521 (2023); corrigendum 26 February 2024",
+      "doi": "10.5194/acp-23-13505-2023",
+      "url": "https://acp.copernicus.org/articles/23/13505/2023/",
+      "corrigendum_url": "https://acp.copernicus.org/articles/23/13505/2023/acp-23-13505-2023-corrigendum.pdf",
+      "reading_extent": "Publisher HTML abstract; sections 3.2, 4.2, 5 and 6; complete one-page corrigendum text. No videos or figure images inspected.",
+      "evidence": "Laboratory artificial aggregate impacts and release controls.",
+      "use": "Branch shedding, fragment distributions and corrected fitted area convention.",
+      "limit": "Approximately 10 mm aggregates; preparation affects fragility. No decimetre network-strength calibration."
+    },
+    {
+      "id": "gautam_2024",
+      "authors": "Martanda Gautam, Deepak Waman, Sachin Patade, Akash Deshmukh, Vaughan T. J. Phillips, Marcin Jackowicz-Korczynski, Freddy Pazhambilly Paul, Paul Smith and Aaron Bansemer",
+      "title": "Fragmentation in Collisions of Snow with Graupel/Hail: New Formulation from Field Observations",
+      "publication": "Journal of the Atmospheric Sciences 81, 2149–2164 (2024)",
+      "doi": "10.1175/JAS-D-23-0122.1",
+      "url": "https://journals.ametsoc.org/view/journals/atsc/81/12/JAS-D-23-0122.1.xml",
+      "access_url": "https://www.researchgate.net/publication/385992237_Fragmentation_in_Collisions_of_Snow_with_GraupelHail_New_Formulation_from_Field_Observations",
+      "reading_extent": "Publisher indexed abstract/full-text passages and author paper text: chamber methods, mass/velocity estimation, detection limit, results, Table 2 and limitations. Direct publisher open returned 403.",
+      "evidence": "Natural snow impacting fixed ice targets; inferred collision masses.",
+      "use": "Fragment numbers by habit as a small-particle collision benchmark.",
+      "limit": "Millimetre particles; fixed target, mixed monomer/aggregate population, finite detection resolution; not a tensile test."
+    },
+    {
+      "id": "szabo_schneebeli_2007",
+      "authors": "Denes Szabo and Martin Schneebeli",
+      "title": "Subsecond sintering of ice",
+      "publication": "Applied Physics Letters 90, 151916 (2007)",
+      "doi": "10.1063/1.2721391",
+      "url": "https://doi.org/10.1063/1.2721391",
+      "access_url": "https://www.researchgate.net/publication/234977845_Subsecond_sintering_of_ice",
+      "reading_extent": "Author-provided article text: abstract, preparation, loads, times, temperature/humidity conditions and plastic-contact interpretation. Figures not visually inspected.",
+      "evidence": "Laboratory loaded ice tips.",
+      "use": "Rapid formation of tensile bonds under compression.",
+      "limit": "Large preloads and smooth tips differ from gentle dendrite contacts."
+    },
+    {
+      "id": "bahaloo_2022",
+      "authors": "Hassan Bahaloo, Tobias Eidevåg, Per Gren, Johan Casselgren, Fredrik Forsberg, Per Abrahamsson and Mikael Sjödahl",
+      "title": "Ice sintering: Dependence of sintering force on temperature, load, duration, and particle size",
+      "publication": "Journal of Applied Physics 131, 025109 (2022)",
+      "doi": "10.1063/5.0073824",
+      "url": "https://doi.org/10.1063/5.0073824",
+      "access_url": "https://www.researchgate.net/publication/357769992_Ice_sintering_Dependence_of_sintering_force_on_temperature_load_duration_and_particle_size",
+      "reading_extent": "Author-uploaded article extraction: setup, Table I, equations 1–10, sections III A–E and discussion. Institutional PDF URL timed out; figures not visually inspected.",
+      "failed_url": "https://ltu.diva-portal.org/smash/get/diva2%3A1628847/FULLTEXT01.pdf",
+      "evidence": "Loaded millimetre ice contacts and fitted model.",
+      "use": "Contact-history dependence; actual preload, dwell and curvature ranges.",
+      "limit": "Fixed humidity and geometry-specific effective strength. Holding time excludes loading/unloading."
+    },
+    {
+      "id": "demmenie_2025",
+      "authors": "Menno Demmenie, Sander Woutersen and Daniel Bonn",
+      "title": "Ice Sintering by Sublimation and Condensation",
+      "publication": "The Journal of Physical Chemistry Letters 16, 2104–2109 (2025)",
+      "doi": "10.1021/acs.jpclett.5c00050",
+      "url": "https://pubs.acs.org/doi/full/10.1021/acs.jpclett.5c00050",
+      "access_urls": [
+        "https://pubs.acs.org/jpclcd/article/16/8/2104/3742791/Ice-Sintering-by-Sublimation-and-Condensation",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11874037/"
+      ],
+      "reading_extent": "Indexed publisher methods, neck-growth discussion, Figure 2–3 captions/fits, dry-control result and conclusions. Direct publisher returned 403; direct PMC access returned a CAPTCHA. Supporting information and figure images not inspected.",
+      "evidence": "Uncompressed spherical-contact neck imaging near ice-vapour equilibrium.",
+      "use": "Bond geometry evolves without imposed compression; humidity controls apparent growth.",
+      "limit": "Approximately 1 mm spheres at −3 C, hours of growth; no tensile or dendrite measurement."
+    },
+    {
+      "id": "oraltay_hallett_1989",
+      "authors": "R. G. Oraltay and J. Hallett",
+      "title": "Evaporation and melting of ice crystals: A laboratory study",
+      "publication": "Atmospheric Research 24, 169–189 (1989)",
+      "doi": "10.1016/0169-8095(89)90044-6",
+      "url": "https://www.sciencedirect.com/science/article/pii/0169809589900446",
+      "reading_extent": "Publisher indexed abstract only. Direct publisher returned 403; full methods and humidity convention unresolved.",
+      "evidence": "Laboratory evaporation/melting of selected habits.",
+      "use": "Qualitative habit and thermal/moisture dependence of breakup and reattachment.",
+      "limit": "No quantitative sublimation-breakup rule admitted from abstract alone."
+    },
+    {
+      "id": "aumatell_wurm_2011",
+      "authors": "Guillem Aumatell and Gerhard Wurm",
+      "title": "Breaking the ice: planetesimal formation at the snowline",
+      "publication": "Monthly Notices of the Royal Astronomical Society: Letters 418, L1–L5 (2011)",
+      "doi": "10.1111/j.1745-3933.2011.01126.x",
+      "url": "https://arxiv.org/pdf/1108.0805",
+      "published_url": "https://academic.oup.com/mnrasl/article/418/1/L1/1021272",
+      "reading_extent": "Author preprint abstract, sections 2–3 apparatus/preparation/analysis and relevant contact discussion. Direct publisher redirected to inaccessible CDN; indexed publisher record verifies DOI/title.",
+      "evidence": "Levitated porous ice sublimation at a few millibars.",
+      "use": "Direct separation through sublimation-induced contact loss.",
+      "limit": "Thin nearly two-dimensional aggregates and thermal gradient; no atmospheric rate transfer."
+    },
+    {
+      "id": "sirono_ueno_2017",
+      "authors": "Sin-iti Sirono and Haruta Ueno",
+      "title": "Collisions between Sintered Icy Aggregates",
+      "publication": "The Astrophysical Journal 841, 36 (2017)",
+      "doi": "10.3847/1538-4357/aa6fad",
+      "url": "https://arxiv.org/pdf/1705.04778",
+      "published_record": "https://nagoya.repo.nii.ac.jp/records/24727",
+      "reading_extent": "Author preprint abstract; sections 2–4 contact model/setup; relevant section 5 outcomes and energy dissipation. Indexed institutional record confirms DOI; direct record retrieval failed.",
+      "evidence": "Contact-network simulation: 0.1 micrometre spherical grains, 1024 per aggregate.",
+      "use": "Inhibited rolling can yield bouncing/brittle disruption despite stronger bonds.",
+      "limit": "Indirect precedent; scale, surface physics and geometry differ. Numerical thresholds not admitted as lunar parameters."
+    }
+  ],
+  "screened_but_not_admitted": [
+    {
+      "title": "Improved Formulation of Fragmentation of Snow during Collision with Graupel/Hail based on Observations at Jungfraujoch: Cold Non-Dendritic Regime of Temperature",
+      "doi": "10.5194/egusphere-2024-3800",
+      "url": "https://egusphere.copernicus.org/preprints/2025/egusphere-2024-3800/",
+      "status": "Preprint abstract/review discussion inspected; full methods not reviewed. No coefficients adopted."
+    },
+    {
+      "title": "Ice particle generation during evaporation",
+      "doi": "10.1016/0169-8095(94)90050-7",
+      "url": "https://doi.org/10.1016/0169-8095(94)90050-7",
+      "status": "Primary text not retrieved. No quantitative result transferred from secondary summaries."
+    },
+    {
+      "title": "Snow microphysical processes in orographic turbulence revealed by cloud radar and in situ snowfall camera observations",
+      "doi": "10.5194/acp-26-3277-2026",
+      "url": "https://acp.copernicus.org/articles/26/3277/2026/index.html",
+      "status": "Abstract and instrument/EDR passages screened. Corrigendum exists but was not inspected; no quantitative result admitted."
+    },
+    {
+      "title": "Strength of Bonds between Ice Grains after Short Contact Times",
+      "url": "https://www.cambridge.org/core/journals/journal-of-glaciology/article/strength-of-bonds-between-ice-grains-after-short-contact-times/24E249C0704F2A644EB289F7CF4C65DB",
+      "status": "Selected methods/results screened; later loaded-contact studies retained instead. No coefficient adopted."
+    },
+    {
+      "title": "The stickiness of micrometer-sized water-ice particles",
+      "url": "https://arxiv.org/pdf/1410.7199",
+      "status": "Abstract retrieved; full methods not reviewed. Not used in synthesis."
+    }
+  ],
+  "checks": {
+    "json_syntax": "Round-trip JSON parsing on write.",
+    "substantive_reading": "Conditions compared against retrieved primary passages and existing numerical audit.",
+    "paper_figures": "Not visually inspected or digitized.",
+    "empirical_validation": "Not established for lunar aggregates.",
+    "simulator_tests": "Not run for this documentation-only source pass.",
+    "local_links": "Four relative links checked against the worktree; all resolve.",
+    "source_records": "Eight unique source IDs; DOI, URL, reading extent and limits present for each.",
+    "independent_review": "Geometry-review agent read note and ledger for logic and evidence scope; no substantive blocker. This was not an independent rereading of all eight primary sources."
+  }
+}

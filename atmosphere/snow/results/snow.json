@@ -44,28 +44,28 @@
     "cloud_top_c": -10.0,
     "cloud_depth_m": 10853.680628918893,
     "cloud_air_kg_m2": 8274.952957989775,
-    "size_mm": 8.52757058938031,
-    "mass_mg": 2.1664059623914373,
-    "speed_m_s": 0.5542204580598693,
-    "hours": 6.440261875011309
+    "size_mm": 9.150125749951107,
+    "mass_mg": 2.476755564291984,
+    "speed_m_s": 0.5598778441889348,
+    "hours": 6.333582082784876
    },
    {
     "cloud_top_c": -15.0,
     "cloud_depth_m": 16280.520943378342,
     "cloud_air_kg_m2": 11850.595590317014,
-    "size_mm": 21.437226098986827,
-    "mass_mg": 12.485100613253778,
-    "speed_m_s": 0.6138392747982034,
-    "hours": 8.268522447673302
+    "size_mm": 23.407132547539614,
+    "mass_mg": 14.75480029724027,
+    "speed_m_s": 0.6179726630070794,
+    "hours": 8.142919326903616
    },
    {
     "cloud_top_c": -20.0,
     "cloud_depth_m": 21707.36125783779,
     "cloud_air_kg_m2": 15089.13709263203,
-    "size_mm": 41.12129606014226,
-    "mass_mg": 43.04261391706264,
-    "speed_m_s": 0.6387857700142006,
-    "hours": 10.146788426914016
+    "size_mm": 45.693917469990865,
+    "mass_mg": 52.58993996324008,
+    "speed_m_s": 0.6416694340535402,
+    "hours": 9.998325709345567
    }
   ],
   "earth": [
@@ -73,28 +73,28 @@
     "cloud_top_c": -10.0,
     "cloud_depth_m": 1538.4615384615386,
     "cloud_air_kg_m2": 1542.962876668948,
-    "size_mm": 0.5109315656363255,
-    "mass_mg": 0.010305306756559557,
-    "speed_m_s": 0.8238218338028529,
-    "hours": 0.5703391010335127
+    "size_mm": 0.5369802116219669,
+    "mass_mg": 0.011326414830911917,
+    "speed_m_s": 0.8387197184748167,
+    "hours": 0.5616581179383916
    },
    {
     "cloud_top_c": -15.0,
     "cloud_depth_m": 2307.6923076923076,
     "cloud_air_kg_m2": 2226.299282556583,
-    "size_mm": 0.8154655872585882,
-    "mass_mg": 0.02505200222068209,
-    "speed_m_s": 0.9605329100417644,
-    "hours": 0.7484503336238667
+    "size_mm": 0.8742749588657409,
+    "mass_mg": 0.02859584954020439,
+    "speed_m_s": 0.980051077363941,
+    "hours": 0.7339127034421631
    },
    {
     "cloud_top_c": -20.0,
     "cloud_depth_m": 3076.923076923077,
     "cloud_air_kg_m2": 2855.5689351590945,
-    "size_mm": 1.162568841269097,
-    "mass_mg": 0.049143628407046426,
-    "speed_m_s": 1.0568625659709596,
-    "hours": 0.9122765343701967
+    "size_mm": 1.2666713516547774,
+    "mass_mg": 0.05784065868122783,
+    "speed_m_s": 1.0789055035782467,
+    "hours": 0.8920512856815981
    }
   ]
  },
@@ -145,116 +145,116 @@
    {
     "size_mm": 2.0,
     "relative_humidity": 0.9,
-    "half_melted_below_m": 975.7294374836165,
-    "melted_below_m": 1045.2840698077089,
-    "hours_to_melt": 0.7299064606805165
+    "half_melted_below_m": 1051.362906359951,
+    "melted_below_m": 1118.9255919205898,
+    "hours_to_melt": 0.7815054694882514
    },
    {
     "size_mm": 2.0,
     "relative_humidity": 0.7,
-    "half_melted_below_m": 2777.5126933719366,
-    "melted_below_m": 2848.6680322237407,
-    "hours_to_melt": 2.0012955851548586
+    "half_melted_below_m": 3049.940595046497,
+    "melted_below_m": 3119.1543787964547,
+    "hours_to_melt": 2.1931418873938346
    },
    {
     "size_mm": 5.0,
     "relative_humidity": 0.9,
-    "half_melted_below_m": 1040.417244376502,
-    "melted_below_m": 1136.6271974109077,
-    "hours_to_melt": 0.6274133177393466
+    "half_melted_below_m": 1115.0559042532986,
+    "melted_below_m": 1208.8645441576882,
+    "hours_to_melt": 0.6674544106789198
    },
    {
     "size_mm": 5.0,
     "relative_humidity": 0.7,
-    "half_melted_below_m": 2843.495118600502,
-    "melted_below_m": 2941.84216095231,
-    "hours_to_melt": 1.634835077651787
+    "half_melted_below_m": 3114.9695802211936,
+    "melted_below_m": 3210.98261233469,
+    "hours_to_melt": 1.7860617080817307
    },
    {
     "size_mm": 10.0,
     "relative_humidity": 0.9,
-    "half_melted_below_m": 1094.081173057315,
-    "melted_below_m": 1212.3788017618608,
-    "hours_to_melt": 0.5970048034831135
+    "half_melted_below_m": 1167.962214582658,
+    "melted_below_m": 1283.5469925220932,
+    "hours_to_melt": 0.6322148817131806
    },
    {
     "size_mm": 10.0,
     "relative_humidity": 0.7,
-    "half_melted_below_m": 2898.228103407604,
-    "melted_below_m": 3019.1059640889434,
-    "hours_to_melt": 1.4972588271692724
+    "half_melted_below_m": 3168.978619825997,
+    "melted_below_m": 3287.224429387912,
+    "hours_to_melt": 1.631832819982653
    },
    {
     "size_mm": 20.0,
     "relative_humidity": 0.9,
-    "half_melted_below_m": 1152.1412284429352,
-    "melted_below_m": 1294.311234219418,
-    "hours_to_melt": 0.592066405599543
+    "half_melted_below_m": 1225.2069097398598,
+    "melted_below_m": 1364.328776180304,
+    "hours_to_melt": 0.6242626238101795
    },
    {
     "size_mm": 20.0,
     "relative_humidity": 0.7,
-    "half_melted_below_m": 2957.4505783359346,
-    "melted_below_m": 3102.6826267199176,
-    "hours_to_melt": 1.4297788314406168
+    "half_melted_below_m": 3227.4213066172997,
+    "melted_below_m": 3369.700682811941,
+    "hours_to_melt": 1.5544177725693205
    }
   ],
   "earth": [
    {
     "size_mm": 2.0,
     "relative_humidity": 0.9,
-    "half_melted_below_m": 190.41099856431174,
-    "melted_below_m": 227.78644095513982,
-    "hours_to_melt": 0.053579759261390573
+    "half_melted_below_m": 200.0381252334298,
+    "melted_below_m": 236.7204431326861,
+    "hours_to_melt": 0.05569162962616254
    },
    {
     "size_mm": 2.0,
     "relative_humidity": 0.7,
-    "half_melted_below_m": 412.183476335392,
-    "melted_below_m": 450.3898799554893,
-    "hours_to_melt": 0.10647594973015781
+    "half_melted_below_m": 449.09875203448087,
+    "melted_below_m": 486.64852945591304,
+    "hours_to_melt": 0.11513528193501567
    },
    {
     "size_mm": 5.0,
     "relative_humidity": 0.9,
-    "half_melted_below_m": 217.4431343915619,
-    "melted_below_m": 265.86210365543275,
-    "hours_to_melt": 0.05501585440943512
+    "half_melted_below_m": 226.85294190378409,
+    "melted_below_m": 274.4879511918482,
+    "hours_to_melt": 0.056811780094327025
    },
    {
     "size_mm": 5.0,
     "relative_humidity": 0.7,
-    "half_melted_below_m": 439.77831790470987,
-    "melted_below_m": 489.26303411326717,
-    "hours_to_melt": 0.10178734802610467
+    "half_melted_below_m": 476.5026250381994,
+    "melted_below_m": 525.2503767806425,
+    "hours_to_melt": 0.10936215839396977
    },
    {
     "size_mm": 10.0,
     "relative_humidity": 0.9,
-    "half_melted_below_m": 239.88221348183447,
-    "melted_below_m": 297.44120094239247,
-    "hours_to_melt": 0.05822461559861234
+    "half_melted_below_m": 249.10628501166616,
+    "melted_below_m": 305.80327077292964,
+    "hours_to_melt": 0.0598730582619779
    },
    {
     "size_mm": 10.0,
     "relative_humidity": 0.7,
-    "half_melted_below_m": 462.68810030148666,
-    "melted_below_m": 521.509411156352,
-    "hours_to_melt": 0.10265016180061982
+    "half_melted_below_m": 499.24829056285546,
+    "melted_below_m": 557.2632993719902,
+    "hours_to_melt": 0.10977827218314146
    },
    {
     "size_mm": 20.0,
     "relative_humidity": 0.9,
-    "half_melted_below_m": 264.39139874168313,
-    "melted_below_m": 331.90603627340647,
-    "hours_to_melt": 0.06303524507851427
+    "half_melted_below_m": 273.39963437351616,
+    "melted_below_m": 339.96112657267145,
+    "hours_to_melt": 0.06457734226096128
    },
    {
     "size_mm": 20.0,
     "relative_humidity": 0.7,
-    "half_melted_below_m": 487.7154329839901,
-    "melted_below_m": 556.70900108388,
-    "hours_to_melt": 0.10632707498805179
+    "half_melted_below_m": 524.0832363423311,
+    "melted_below_m": 592.188833452016,
+    "hours_to_melt": 0.11319826780381922
    }
   ]
  },
@@ -262,7 +262,7 @@
   "domain": "atmosphere",
   "files": {
    "atmosphere/snow/flakes.py": "ce3a82113fc62480",
-   "atmosphere/rain/drops.py": "5d6908bf03eb88af",
+   "atmosphere/rain/drops.py": "8e0d67ec86b357cc",
    "atmosphere/rain/targets.py": "faed41667f2187fd"
   },
   "inputs": {

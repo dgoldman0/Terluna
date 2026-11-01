@@ -1,0 +1,133 @@
+{
+  "schema": "terluna.atmosphere.welss-reference-sources/1",
+  "revision": "1e428d7e901cbc5b91f2040e575f736ec5963a74",
+  "license": "BSD-3-Clause",
+  "license_file": "mcsnow_bsd_3_clause.txt",
+  "authors": [
+    "Slavko Brdar",
+    "Axel Seifert",
+    "Christoph Siewert",
+    "Markus Karrer",
+    "Jan-Niklas Welss"
+  ],
+  "original_sources": [
+    {
+      "path": "src/mo_constant.f90",
+      "sha256": "5a48136d0ba6b7b3921544a6fbc7dc4e854bf90f6c346ae627cc5a69e1882c32",
+      "bytes": 1303,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_constant.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_atmo_types.f90",
+      "sha256": "e303838efdeaa2bb1d02ef86b44de8ebf326badb4e3cc1bdcdb55fda3fdb8173",
+      "bytes": 2767,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo_types.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_mass2diam.f90",
+      "sha256": "1640c7670b810510996426c552da04280a140faf2a50b3049fb5a938fc332160",
+      "bytes": 20707,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_mass2diam.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_atmo.f90",
+      "sha256": "4851b9bbbecdc20cb68b8e1db51d6f0dd0e5790cd2c732cdd1e3d6b6b45ea4d8",
+      "bytes": 27125,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_atmo.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    },
+    {
+      "path": "src/mo_depo.f90",
+      "sha256": "a0904ce5e1061b559d9fe3d9c5c14329803dc823c9179fe43a3048f87f402232",
+      "bytes": 25047,
+      "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_depo.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74"
+    }
+  ],
+  "function_ranges_1_based": {
+    "mo_mass2diam.f90": [
+      [
+        1,
+        6
+      ],
+      [
+        100,
+        162
+      ],
+      [
+        222,
+        361
+      ],
+      [
+        378,
+        441
+      ],
+      [
+        449,
+        520
+      ]
+    ],
+    "mo_atmo.f90": [
+      [
+        1,
+        6
+      ],
+      [
+        722,
+        808
+      ]
+    ],
+    "mo_depo.f90": [
+      [
+        1,
+        6
+      ],
+      [
+        362,
+        414
+      ],
+      [
+        517,
+        563
+      ],
+      [
+        610,
+        653
+      ]
+    ]
+  },
+  "constant_ranges_1_based": {
+    "mo_constant.f90": [
+      [
+        1,
+        40
+      ]
+    ],
+    "mo_atmo_types.f90": [
+      [
+        1,
+        73
+      ]
+    ],
+    "mo_mass2diam.f90": [
+      [
+        18,
+        77
+      ]
+    ]
+  },
+  "construction": "Exact source slices concatenated with blank-line separators. A new geometry_constants module wraps original parameter declarations. Existing boehm source/type slices are reused unchanged; their original identities/ranges are in ../boehm_sources.json. Unexecuted geometry branches are retained so their dependencies compile; fixture scope remains pure-ice diagnostic monomers.",
+  "reading_extent": "Read every executed geometry, material, capacitance, ventilation and vapourDiffusion branch. Read retained dependency functions to resolve compilation; no validation of unexecuted habit/riming/liquid branches.",
+  "scope": "Independent scalar source parity at explicit air states. No source-column atmosphere interpolation, population integration, archived-case identity, empirical validation or lunar transfer is established.",
+  "retained_slice_hashes": {
+    "mcsnow_welss_constants.inc": "b59753c5da664ffd1ba8c80f7890973d89e7c57091684b546c3737404a4dacb3",
+    "mcsnow_welss_functions.inc": "edd373ac4eb31baa7a5a17680805b33c1bda69c84d91635489768c40ac3d44d4"
+  },
+  "component_fixture": "welss_microphysics_reference.json",
+  "generator": "build_welss_reference.py",
+  "verification": {
+    "compiled_cases": 44,
+    "repeat_generation": "Identical JSON bytes with GNU Fortran 13.3.0, -O0 -fno-fast-math.",
+    "existing_boehm_adapter_max_relative_speed_difference": 1.1634482266487112e-10,
+    "compact_sphere_capacitance": "All tested masses from 1e-20 to 1e-5 kg, including just below/above source mth, have positive computed v_crit and C/D=1/pi. Compact-sphere values of v_crit are small positive roundoff residuals; the literal source branch is retained and no spherical-limit regularization is adopted. This observation is compiler/test-sample specific.",
+    "limits": "These component fixtures do not exercise the ideal atmosphere grid/interpolation, archived source identity, population transport, ambient water feedback or a published snowfall distribution."
+  }
+}

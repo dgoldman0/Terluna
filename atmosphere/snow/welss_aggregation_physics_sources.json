@@ -1,0 +1,43 @@
+{
+  "schema": "terluna.atmosphere.welss-aggregation-physics-sources/1",
+  "revision": "1e428d7e901cbc5b91f2040e575f736ec5963a74",
+  "license": "BSD-3-Clause",
+  "license_file": "references/mcsnow_bsd_3_clause.txt",
+  "original_sticking_source": {
+    "id": "mo_colleffi.f90",
+    "url": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/files/src%2Fmo_colleffi.f90/raw?ref=1e428d7e901cbc5b91f2040e575f736ec5963a74",
+    "bytes": 21869,
+    "sha256": "db14ccced491814aebc8eb6995fcec8c0a978261ac160823659b5d61fef8f1e8",
+    "reading_extent": "Read the rough-ice Ecbohm interception branch and stick_effi_tempOnly option 1; retain the complete unchanged stick_effi_tempOnly routine here. The earlier Bohm reference retains Ecbohm. Other collection and breakup branches were not reviewed for this adapter.",
+    "license": "BSD-3-Clause"
+  },
+  "retained_sticking": {
+    "file": "references/mcsnow_sticking.inc",
+    "sha256": "c93fdd68f586341ea318bcc3c2c34b0d7d53c79dc12e8dc9d006bc96d0563d2e",
+    "routine": "stick_effi_tempOnly",
+    "lines_1_based": [
+      345,
+      428
+    ]
+  },
+  "other_sources": [
+    "boehm_sources.json",
+    "references/welss_reference_sources.json"
+  ],
+  "reading_extent": "Selected pure-ice habit0/agggeo1 geometry, capacitance, rough-ice Bohm interception and hydrodynamic outer kernel. Actual coupled population source behavior is tested separately.",
+  "source_conditions": {
+    "sp_habit": 0,
+    "agggeo_type": 1,
+    "snowgeo_type": 2,
+    "phi": 1,
+    "sp_stick_effi": 1,
+    "sp_kern_sig": 0,
+    "rough_interception_SIG": 0.25,
+    "pure_ice": true
+  },
+  "limits": [
+    "No particle collision trajectories or empirical validation.",
+    "Actual monomer count affects capacitance only through mm<1.01 under these selected settings.",
+    "Original archive producer is not identified by source parity."
+  ]
+}

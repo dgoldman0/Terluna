@@ -1,0 +1,41 @@
+{
+  "schema": "terluna.atmosphere.snow-turbulence-sources/1",
+  "literature": [
+    {
+      "citation": "Chellini and Kneifel (2024), Turbulence as a Key Driver of Ice Aggregation and Riming in Arctic Low-Level Mixed-Phase Clouds, GRL 51, e2023GL106599",
+      "doi": "10.1029/2023GL106599",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023GL106599",
+      "read_scope": "Publisher abstract and plain-language summary, not a full methodological review",
+      "used_for": "Terrestrial mixed-phase cloud anchor: changes in aggregation, particle number and riming accompany dissipation moving from below 1e-4 to above 1e-3 m2/s3. These rates are not lunar measurements.",
+      "scenario_choice": "1e-4 and 1e-3 m2/s3 bracket the published transition; 1e-5 and 1e-2 extend sensitivity one decade each way. The extension is our scenario choice, not a reported lunar or terrestrial interval."
+    },
+    {
+      "citation": "Koetsche et al. (2026), Snow microphysical processes in orographic turbulence revealed by cloud radar and in situ snowfall camera observations, ACP 26, 3277-3297",
+      "doi": "10.5194/acp-26-3277-2026",
+      "url": "https://acp.copernicus.org/articles/26/3277/2026/",
+      "read_scope": "Abstract and section 2.5 on the turbulence retrieval; 26 August 2026 corrigendum read in full",
+      "corrigendum_url": "https://acp.copernicus.org/articles/26/3277/2026/acp-26-3277-2026-corrigendum.pdf",
+      "corrigendum_effect": "Corrects reflectivity-difference units, a figure caption and acknowledgements; the dissipation threshold and conclusions used here are unchanged.",
+      "used_for": "An Earth orographic snowfall study identifies turbulent layers using a 1e-3 m2/s3 dissipation threshold. Its observations support treating enhanced aggregation and fragmentation together; it does not establish an aerodynamic size cap for lunar flakes."
+    },
+    {
+      "citation": "Kolmogorov (1941), The local structure of turbulence in incompressible viscous fluid for very large Reynolds numbers; English republication (1991), Proc. R. Soc. A 434, 9-13",
+      "doi": "10.1098/rspa.1991.0075",
+      "url": "https://rainbow.ldeo.columbia.edu/~alexeyk/Papers/Kolmogorov1941.pdf",
+      "read_scope": "English republication, local-isotropy and similarity derivation",
+      "used_for": "Locally isotropic small-scale similarity. Our prefactor-one velocity increment is a dimensional estimate, not a calibrated RMS statistic or a model of intermittent extremes."
+    }
+  ],
+  "cm1_source_audit": {
+    "version": "cm1r22.0",
+    "source_url": "https://www2.mmm.ucar.edu/people/bryan/cm1/",
+    "inspected_files": {
+      "/media/projectspace/terluna-research/cm1/build/moon_omp/src/turb.F": "faae25df2fd53e7a433df4121ad21347a6d5a209c5c6e5d05c9eca612909973d",
+      "/media/projectspace/terluna-research/cm1/build/moon_omp/src/restart_write.F": "9f45eaa770a1290538d73c244d85a5d24dbcb0ac22b490908599f18e1a2a6e62",
+      "/media/projectspace/terluna-research/cm1/build/moon_omp/src/constants.F": "b885840755ef83e1c424c1b09985ce0d59e8582096237ad6d603ae3f15ff2f34"
+    },
+    "finding": "cm1setup=2 and ipbl=2 call the Bryan-Rotunno diagnostic vertical Smagorinsky closure. These runs have sgsmodel=0 and do not prognose LES TKE. restart_write.F writes tkea only when idoles and iusetke are true, and writes MYNN/MYJ 3-D variables only for ipbl=4,5,6. Thus missing output_tke is not the only obstacle: switching that output on alone cannot recover a prognostic cloud TKE field in the selected configuration.",
+    "limits": "Grid-scale velocities can be recovered. Direct dissipation, a resolved inertial-range spectrum, centimetre-to-metre gust increments and snow-aggregate mechanical strength cannot be recovered from these archived outputs. The closure includes vertical mixing; sgsmodel=0 does not mean the simulation has no mixing."
+  },
+  "redistribution": "Only citations, short paraphrases and source hashes are stored here. No outside paper or dataset bytes are redistributed."
+}

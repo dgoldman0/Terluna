@@ -1,0 +1,88 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-growth-source-audit/1",
+  "old_revision": "1e428d7e901cbc5b91f2040e575f736ec5963a74",
+  "new_archive": "https://doi.org/10.5281/zenodo.17432967",
+  "archive_sha256": "01ea5884829e780c282e997dfda08858796666519e6aeb2d8f8fadee5c7a9dfe",
+  "files": {
+    "mo_depo.f90": {
+      "2024_sha256": "a0904ce5e1061b559d9fe3d9c5c14329803dc823c9179fe43a3048f87f402232",
+      "2026_sha256": "4c13bf06ba5010229a32097bb974b051cc9060aa57457b7b0bd73a7ac04491c0",
+      "identical": false
+    },
+    "mo_mass2diam.f90": {
+      "2024_sha256": "1640c7670b810510996426c552da04280a140faf2a50b3049fb5a938fc332160",
+      "2026_sha256": "170abb9b68595e84aaf78149bf3ff7198e86d56822247981627445ead0f1e753",
+      "identical": false
+    },
+    "mo_velocity.f90": {
+      "2024_sha256": "b2171d1a7b0726c35b4b9b179078886a5531f7a838f7aecfb6a04d39af9fd3e5",
+      "2026_sha256": "c2e0226c64182fcf6cf6dd070f27e5c7860a20c65e8983a9854f230248f66618",
+      "identical": false
+    },
+    "mo_atmo.f90": {
+      "2024_sha256": "4851b9bbbecdc20cb68b8e1db51d6f0dd0e5790cd2c732cdd1e3d6b6b45ea4d8",
+      "2026_sha256": "4851b9bbbecdc20cb68b8e1db51d6f0dd0e5790cd2c732cdd1e3d6b6b45ea4d8",
+      "identical": true
+    },
+    "mo_atmo_nml.f90": {
+      "2024_sha256": "ab60123619fbc2462865dc7637f46784a14cced1bb3170e32b2d4da37ba33789",
+      "2026_sha256": "ab60123619fbc2462865dc7637f46784a14cced1bb3170e32b2d4da37ba33789",
+      "identical": true
+    },
+    "mo_sp_types.f90": {
+      "2024_sha256": "24f11d47b13b7709f65137e2131ec9073e6198577ea3f5fd8dccc532ddf112ad",
+      "2026_sha256": "86a5639b2d5d2c2c0291b89697e53fae5587754b5a6f488823772bf44409e342",
+      "identical": false
+    },
+    "mo_sp_nml.f90": {
+      "2024_sha256": "62743aa0a924a54bcabfcd9cbc38e195be9275d65be7d3fdaff3a58ea7dfa4fa",
+      "2026_sha256": "a02f9447da07c783b49ae9126418439eca75a10e6bd1e56f1f8949dac208e063",
+      "identical": false
+    },
+    "mo_atmo_types.f90": {
+      "2024_sha256": "e303838efdeaa2bb1d02ef86b44de8ebf326badb4e3cc1bdcdb55fda3fdb8173",
+      "2026_sha256": "e303838efdeaa2bb1d02ef86b44de8ebf326badb4e3cc1bdcdb55fda3fdb8173",
+      "identical": true
+    },
+    "input/curve_inherent.txt": {
+      "2024_sha256": "035128971ad442e3e4f86c016f6e6011973be48bd090d096eea18024bf81346c",
+      "bytes": 1942,
+      "2026_archive_present": false
+    },
+    "input/IGF_new_poly.txt": {
+      "2024_sha256": "be7ff078d9f607262ae0ce656422b64474e2a47df7c09f12aa7be354820b60a4",
+      "bytes": 5474,
+      "2026_archive_present": false
+    }
+  },
+  "review_scope": "Selected native source comparison and isolated-driver review; no claim of exact published-figure reproduction.",
+  "paper_plot_scripts": {
+    "archive": "/tmp/lunar_snow_bohm_sources/McSnow_paper_plotscripts.zip",
+    "archive_sha256": "789e5a505f8680358fb427bdb53f5f814a139e3edc6ed55e15cc16cd7188dfb2",
+    "archive_md5": "a678b10d131f6a4059e7802a500a706b",
+    "reading": "fig10.py and fig13.py data selection and dimensional conversions; no numerical execution",
+    "members": [
+      {
+        "name": "fig10.py",
+        "sha256": "828c0415374d91877dce4eb74c0b3d6995d4cd0bf066d8bbf3ec2faa9ccce51e",
+        "bytes": 7582,
+        "zip_crc32": "0x221b52e0",
+        "path": "/tmp/terluna-welss-fig10.py"
+      },
+      {
+        "name": "fig13.py",
+        "sha256": "df83596494f72ac061f086c0cfe125891c9d2322bde861b98783a5e597d50614",
+        "bytes": 8473,
+        "zip_crc32": "0x7210330b",
+        "path": "/tmp/terluna-welss-fig13.py"
+      }
+    ],
+    "source_doi": "https://doi.org/10.5281/zenodo.10077724"
+  },
+  "findings": [
+    "Two new deposition-density rules in 2026; active pure-primary geometry and drag otherwise unchanged.",
+    "Both versions use volume^(1/3) in directional ventilation; no equivalent-sphere conversion inside the helper.",
+    "Both versions retain mean vapor/thermal ventilation operations beside a comment about an older paper-associated implementation.",
+    "The prescribed-air driver supplies the fields and native calls needed by this selected pure-primary path."
+  ]
+}

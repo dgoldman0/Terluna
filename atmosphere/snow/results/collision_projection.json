@@ -1,0 +1,625 @@
+{
+  "schema": "terluna.atmosphere.snow-collision-projection/1",
+  "producer": {
+    "files": {
+      "atmosphere/snow/collision_projection.py": "c715e32faba0326c905fb48125e60af7fbfc3e4f48afc160f715ca95cc6d9b53",
+      "atmosphere/snow/sectional.py": "f18d56b2d48647bc7812b62477b7934308526b338736321d6c2a83e56a6995ff",
+      "atmosphere/snow/habits.py": "e2cd9e9693b70c03de051f98635416f7f29b7cf87a1d7bda9154ccedfe26e8d1",
+      "atmosphere/snow/aggregation.py": "b1be75f1dc08b92c320fd288d458940821a43a9ae346221cc2d0dbd7a1adf628",
+      "atmosphere/snow/flakes.py": "ce3a82113fc62480130c4db99a95de44d7f3f1432f6444cdb8fcb86ced8012a5"
+    },
+    "inputs": {},
+    "constants": {
+      "GAS_CONSTANT": 8.31446261815324,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "STANDARD_GRAVITY": 9.80665
+    }
+  },
+  "settings": {
+    "geometry": {
+      "id": "bf95_dmax_dendrites_area",
+      "mass_coefficient": 0.0121,
+      "mass_exponent": 1.9,
+      "area_ratio": 0.26019796807371026,
+      "capacitance_ratio": 0.25,
+      "evidence": "Fixed representative area sensitivity: q(1024)*phi(1024) from synthetic dendrites aggregates. Holding this ratio at all sizes and combining it with Brown\u2013Francis is a modelling scenario, not a habit-specific mass fit. Earth cloud aggregate relation; not validated for 0.15\u20130.60 m snow. No riming, crystal habit fractions or geometric scatter represented.",
+      "source_ids": [
+        "hogan_2012",
+        "seifert_2026",
+        "westbrook_2008"
+      ]
+    },
+    "mass_bins": [
+      96,
+      144,
+      216
+    ],
+    "minimum_diameter_m": 2e-05,
+    "maximum_diameter_m": 10.0,
+    "kernel_m3_s": 1.0,
+    "each_parent_number_m3": 1.0,
+    "sticking": 1.0,
+    "breakup": false,
+    "event_rate_per_m3_s": 1.0,
+    "time_integration": false
+  },
+  "derivation": {
+    "notation": "A small mass s sticks to collector pivot M; the next collector pivot is M+delta, with 0<s<delta.",
+    "allocation": "The product is represented by number fractions 1-s/delta at M and s/delta at M+delta.",
+    "exact_second_moment": "(M+s)^2 - M^2 - s^2 = 2*M*s.",
+    "extra_second_moment": "The interpolation adds s*(delta-s) per sticking event; number and first mass moment still close.",
+    "relative_excess": "Extra / exact = (delta-s)/(2*M), approaching (r-1)/2 for a geometric ratio r and s/M tending to zero.",
+    "tagged_collector_interpretation": "With a prescribed small-particle bath, the physical collector jump has second moment s^2 per encounter. The projected jump has second moment s*delta; their ratio is delta/s. This is an instantaneous generator comparison, not an integrated collector variance or a prediction of a coupled tail."
+  },
+  "rows": [
+    {
+      "small_index": 17,
+      "large_index": 45,
+      "small_mass_kg": 1.2370639855967756e-09,
+      "collector_mass_kg": 1.922274328032758e-06,
+      "collector_next_pivot_mass_kg": 2.4991640561493897e-06,
+      "product_mass_kg": 1.923511392018355e-06,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 4.755952683293134e-15,
+      "projected_second_moment_change_kg2": 5.468071862302473e-15,
+      "excess_second_moment_change_kg2": 7.121191790093386e-16,
+      "analytical_excess_second_moment_kg2": 7.121191790093401e-16,
+      "excess_formula_relative_residual": -2.077059909195336e-15,
+      "excess_second_moment_fraction": 0.14973218331437443,
+      "upper_pivot_allocation_number_fraction": 0.0021443681960422673,
+      "collector_jump_second_moment_ratio": 466.33782474746664,
+      "tendency": {
+        "indices": [
+          17,
+          45,
+          46
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -0.0021443681960422673,
+          0.0021443681960422673
+        ]
+      },
+      "mass_bins": 96,
+      "geometric_mass_ratio": 1.3001079084830778,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.01,
+      "actual_small_diameter_m": 0.00020933684798686046,
+      "actual_collector_diameter_m": 0.010012490176166192,
+      "collector_next_pivot_diameter_m": 0.01149558986768692
+    },
+    {
+      "small_index": 17,
+      "large_index": 62,
+      "small_mass_kg": 1.2370639855967756e-09,
+      "collector_mass_kg": 0.00016651952656098127,
+      "collector_next_pivot_mass_kg": 0.00021649335339878983,
+      "product_mass_kg": 0.00016652076362496686,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 4.1199061841443124e-13,
+      "projected_second_moment_change_kg2": 4.738099094906292e-13,
+      "excess_second_moment_change_kg2": 6.181929107619797e-14,
+      "analytical_excess_second_moment_kg2": 6.181929107619811e-14,
+      "excess_formula_relative_residual": -2.245893100711318e-15,
+      "excess_second_moment_fraction": 0.15005023977029608,
+      "upper_pivot_allocation_number_fraction": 2.4754237645471915e-05,
+      "collector_jump_second_moment_ratio": 40397.12368936239,
+      "tendency": {
+        "indices": [
+          17,
+          62,
+          63
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -2.4754237645471915e-05,
+          2.4754237645471915e-05
+        ]
+      },
+      "mass_bins": 96,
+      "geometric_mass_ratio": 1.3001079084830778,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.1,
+      "actual_small_diameter_m": 0.00020933684798686046,
+      "actual_collector_diameter_m": 0.10479915669890184,
+      "collector_next_pivot_diameter_m": 0.12032252743256343
+    },
+    {
+      "small_index": 17,
+      "large_index": 65,
+      "small_mass_kg": 1.2370639855967756e-09,
+      "collector_mass_kg": 0.000365934509585198,
+      "collector_next_pivot_mass_kg": 0.0004757543498985929,
+      "product_mass_kg": 0.0003659357466491836,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 9.05368805789733e-13,
+      "projected_second_moment_change_kg2": 1.041221444818118e-12,
+      "excess_second_moment_change_kg2": 1.358526390283851e-13,
+      "analytical_excess_second_moment_kg2": 1.3585263902838532e-13,
+      "excess_formula_relative_residual": -1.6723410183896498e-15,
+      "excess_second_moment_fraction": 0.15005226396096547,
+      "upper_pivot_allocation_number_fraction": 1.1264485379568419e-05,
+      "collector_jump_second_moment_ratio": 88774.58368527026,
+      "tendency": {
+        "indices": [
+          17,
+          65,
+          66
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -1.1264485379568419e-05,
+          1.1264485379568419e-05
+        ]
+      },
+      "mass_bins": 96,
+      "geometric_mass_ratio": 1.3001079084830778,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.15,
+      "actual_small_diameter_m": 0.00020933684798686046,
+      "actual_collector_diameter_m": 0.1586080631644064,
+      "collector_next_pivot_diameter_m": 0.1821018759335591
+    },
+    {
+      "small_index": 17,
+      "large_index": 75,
+      "small_mass_kg": 1.2370639855967756e-09,
+      "collector_mass_kg": 0.005048906970269594,
+      "collector_next_pivot_mass_kg": 0.006564123881242867,
+      "product_mass_kg": 0.00504890820733358,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 1.2491641959098091e-11,
+      "projected_second_moment_change_kg2": 1.4366060699703015e-11,
+      "excess_second_moment_change_kg2": 1.8744187406049235e-12,
+      "analytical_excess_second_moment_kg2": 1.8744187406049267e-12,
+      "excess_formula_relative_residual": -1.7238273379311578e-15,
+      "excess_second_moment_fraction": 0.15005383173344317,
+      "upper_pivot_allocation_number_fraction": 8.1642699249058e-07,
+      "collector_jump_second_moment_ratio": 1224849.2629443998,
+      "tendency": {
+        "indices": [
+          17,
+          75,
+          76
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -8.1642699249058e-07,
+          8.1642699249058e-07
+        ]
+      },
+      "mass_bins": 96,
+      "geometric_mass_ratio": 1.3001079084830778,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.6,
+      "actual_small_diameter_m": 0.00020933684798686046,
+      "actual_collector_diameter_m": 0.631272457175626,
+      "collector_next_pivot_diameter_m": 0.724779663677695
+    },
+    {
+      "small_index": 17,
+      "large_index": 78,
+      "small_mass_kg": 1.2370639855967756e-09,
+      "collector_mass_kg": 0.011095211079826675,
+      "collector_next_pivot_mass_kg": 0.0144249716711718,
+      "product_mass_kg": 0.011095212316890661,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 2.7450972078895784e-11,
+      "projected_second_moment_change_kg2": 3.157009745678096e-11,
+      "excess_second_moment_change_kg2": 4.119125377885175e-12,
+      "analytical_excess_second_moment_kg2": 4.119125377885172e-12,
+      "excess_formula_relative_residual": 5.883240927429969e-16,
+      "excess_second_moment_fraction": 0.15005389849388776,
+      "upper_pivot_allocation_number_fraction": 3.7151739641949403e-07,
+      "collector_jump_second_moment_ratio": 2691663.9964575525,
+      "tendency": {
+        "indices": [
+          17,
+          78,
+          79
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -3.7151739641949403e-07,
+          3.7151739641949403e-07
+        ]
+      },
+      "mass_bins": 96,
+      "geometric_mass_ratio": 1.3001079084830778,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 1.0,
+      "actual_small_diameter_m": 0.00020933684798686046,
+      "actual_collector_diameter_m": 0.9553979718494328,
+      "collector_next_pivot_diameter_m": 1.0969162567514597
+    },
+    {
+      "small_index": 25,
+      "large_index": 68,
+      "small_mass_kg": 1.1162381822901031e-09,
+      "collector_mass_kg": 2.012527551293648e-06,
+      "collector_next_pivot_mass_kg": 2.395865396230576e-06,
+      "product_mass_kg": 2.013643789475938e-06,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 4.492920191329548e-15,
+      "projected_second_moment_change_kg2": 4.919570542885348e-15,
+      "excess_second_moment_change_kg2": 4.2665035155580003e-16,
+      "analytical_excess_second_moment_kg2": 4.266503515557996e-16,
+      "excess_formula_relative_residual": 1.0400419396555572e-15,
+      "excess_second_moment_fraction": 0.09496058985849587,
+      "upper_pivot_allocation_number_fraction": 0.00291189142171382,
+      "collector_jump_second_moment_ratio": 343.41939831377397,
+      "tendency": {
+        "indices": [
+          25,
+          68,
+          69
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -0.00291189142171382,
+          0.00291189142171382
+        ]
+      },
+      "mass_bins": 144,
+      "geometric_mass_ratio": 1.1904758246367941,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.01,
+      "actual_small_diameter_m": 0.00019831402220990714,
+      "actual_collector_diameter_m": 0.010257221122054632,
+      "collector_next_pivot_diameter_m": 0.011243011505518442
+    },
+    {
+      "small_index": 25,
+      "large_index": 93,
+      "small_mass_kg": 1.1162381822901031e-09,
+      "collector_mass_kg": 0.00015731000557777348,
+      "collector_next_pivot_mass_kg": 0.00018727375861381874,
+      "product_mass_kg": 0.00015731112181595577,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 3.511908693643597e-13,
+      "projected_second_moment_change_kg2": 3.8463630860022505e-13,
+      "excess_second_moment_change_kg2": 3.344543923586534e-14,
+      "analytical_excess_second_moment_kg2": 3.344543923586512e-14,
+      "excess_formula_relative_residual": 6.604220441064567e-15,
+      "excess_second_moment_fraction": 0.0952343644252487,
+      "upper_pivot_allocation_number_fraction": 3.7252949620406725e-05,
+      "collector_jump_second_moment_ratio": 26843.511995415574,
+      "tendency": {
+        "indices": [
+          25,
+          93,
+          94
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -3.7252949620406725e-05,
+          3.7252949620406725e-05
+        ]
+      },
+      "mass_bins": 144,
+      "geometric_mass_ratio": 1.1904758246367941,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.1,
+      "actual_small_diameter_m": 0.00019831402220990714,
+      "actual_collector_diameter_m": 0.10170753887055359,
+      "collector_next_pivot_diameter_m": 0.11148234167058134
+    },
+    {
+      "small_index": 25,
+      "large_index": 97,
+      "small_mass_kg": 1.1162381822901031e-09,
+      "collector_mass_kg": 0.00031596477493543577,
+      "collector_next_pivot_mass_kg": 0.00037614842599744156,
+      "product_mass_kg": 0.00031596589117361806,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 7.053838920832647e-13,
+      "projected_second_moment_change_kg2": 7.725619353606201e-13,
+      "excess_second_moment_change_kg2": 6.717804327735544e-14,
+      "analytical_excess_second_moment_kg2": 6.717804327735558e-14,
+      "excess_formula_relative_residual": -2.066739555745563e-15,
+      "excess_second_moment_fraction": 0.09523614592183746,
+      "upper_pivot_allocation_number_fraction": 1.854719949010852e-05,
+      "collector_jump_second_moment_ratio": 53916.49561613406,
+      "tendency": {
+        "indices": [
+          25,
+          97,
+          98
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -1.854719949010852e-05,
+          1.854719949010852e-05
+        ]
+      },
+      "mass_bins": 144,
+      "geometric_mass_ratio": 1.1904758246367941,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.15,
+      "actual_small_diameter_m": 0.00019831402220990714,
+      "actual_collector_diameter_m": 0.14681312863199836,
+      "collector_next_pivot_diameter_m": 0.16092289273374633
+    },
+    {
+      "small_index": 25,
+      "large_index": 112,
+      "small_mass_kg": 1.1162381822901031e-09,
+      "collector_mass_kg": 0.004319638223817671,
+      "collector_next_pivot_mass_kg": 0.005142424876631964,
+      "product_mass_kg": 0.004319639340055853,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 9.643490238210172e-12,
+      "projected_second_moment_change_kg2": 1.0561914869972472e-11,
+      "excess_second_moment_change_kg2": 9.184246317622995e-13,
+      "analytical_excess_second_moment_kg2": 9.184246317623048e-13,
+      "excess_formula_relative_residual": -5.717026747285633e-15,
+      "excess_second_moment_fraction": 0.09523778311334287,
+      "upper_pivot_allocation_number_fraction": 1.3566556755291018e-06,
+      "collector_jump_second_moment_ratio": 737106.7088264644,
+      "tendency": {
+        "indices": [
+          25,
+          112,
+          113
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -1.3566556755291018e-06,
+          1.3566556755291018e-06
+        ]
+      },
+      "mass_bins": 144,
+      "geometric_mass_ratio": 1.1904758246367941,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.6,
+      "actual_small_diameter_m": 0.00019831402220990714,
+      "actual_collector_diameter_m": 0.5815123600682314,
+      "collector_next_pivot_diameter_m": 0.6373997476558921
+    },
+    {
+      "small_index": 25,
+      "large_index": 118,
+      "small_mass_kg": 1.1162381822901031e-09,
+      "collector_mass_kg": 0.012296198299979605,
+      "collector_next_pivot_mass_kg": 0.014638326811065779,
+      "product_mass_kg": 0.012296199416217787,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 2.745097207889578e-11,
+      "projected_second_moment_change_kg2": 3.006534410481276e-11,
+      "excess_second_moment_change_kg2": 2.614372025916979e-12,
+      "analytical_excess_second_moment_kg2": 2.614372025916977e-12,
+      "excess_formula_relative_residual": 7.724546840870771e-16,
+      "excess_second_moment_fraction": 0.09523786692883272,
+      "upper_pivot_allocation_number_fraction": 4.765913471470624e-07,
+      "collector_jump_second_moment_ratio": 2098233.64604945,
+      "tendency": {
+        "indices": [
+          25,
+          118,
+          119
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -4.765913471470624e-07,
+          4.765913471470624e-07
+        ]
+      },
+      "mass_bins": 144,
+      "geometric_mass_ratio": 1.1904758246367941,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 1.0,
+      "actual_small_diameter_m": 0.00019831402220990714,
+      "actual_collector_diameter_m": 1.0085015561244974,
+      "collector_next_pivot_diameter_m": 1.1054255791036054
+    },
+    {
+      "small_index": 38,
+      "large_index": 102,
+      "small_mass_kg": 1.1709436884898192e-09,
+      "collector_mass_kg": 1.9577959111469875e-06,
+      "collector_next_pivot_mass_kg": 2.198519934808531e-06,
+      "product_mass_kg": 1.9589668548354773e-06,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 4.58493753101748e-15,
+      "projected_second_moment_change_kg2": 4.865440698070225e-15,
+      "excess_second_moment_change_kg2": 2.805031670527446e-16,
+      "analytical_excess_second_moment_kg2": 2.80503167052744e-16,
+      "excess_formula_relative_residual": 2.109229942507243e-15,
+      "excess_second_moment_fraction": 0.061179277832057156,
+      "upper_pivot_allocation_number_fraction": 0.00486425771171123,
+      "collector_jump_second_moment_ratio": 205.58121285235177,
+      "tendency": {
+        "indices": [
+          38,
+          102,
+          103
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -0.00486425771171123,
+          0.00486425771171123
+        ]
+      },
+      "mass_bins": 216,
+      "geometric_mass_ratio": 1.1229566484897355,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.01,
+      "actual_small_diameter_m": 0.0002033713681943548,
+      "actual_collector_diameter_m": 0.010109446844189759,
+      "collector_next_pivot_diameter_m": 0.010745688088615212
+    },
+    {
+      "small_index": 38,
+      "large_index": 140,
+      "small_mass_kg": 1.1709436884898192e-09,
+      "collector_mass_kg": 0.0001605317962179663,
+      "collector_next_pivot_mass_kg": 0.0001802702478569648,
+      "product_mass_kg": 0.00016053296716165481,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 3.75947387166723e-13,
+      "projected_second_moment_change_kg2": 3.9905863142484786e-13,
+      "excess_second_moment_change_kg2": 2.3111244258124873e-14,
+      "analytical_excess_second_moment_kg2": 2.3111244258125195e-14,
+      "excess_formula_relative_residual": -1.3926348825508107e-14,
+      "excess_second_moment_fraction": 0.06147467716772728,
+      "upper_pivot_allocation_number_fraction": 5.932297577872383e-05,
+      "collector_jump_second_moment_ratio": 16856.875213577026,
+      "tendency": {
+        "indices": [
+          38,
+          140,
+          141
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -5.932297577872383e-05,
+          5.932297577872383e-05
+        ]
+      },
+      "mass_bins": 216,
+      "geometric_mass_ratio": 1.1229566484897355,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.1,
+      "actual_small_diameter_m": 0.0002033713681943548,
+      "actual_collector_diameter_m": 0.1027986018195486,
+      "collector_next_pivot_diameter_m": 0.10926826443857277
+    },
+    {
+      "small_index": 38,
+      "large_index": 146,
+      "small_mass_kg": 1.1709436884898192e-09,
+      "collector_mass_kg": 0.00032191336626255973,
+      "collector_next_pivot_mass_kg": 0.000361494754882253,
+      "product_mass_kg": 0.0003219145372062482,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": 0.0,
+      "exact_second_moment_change_kg2": 7.538848489313116e-13,
+      "projected_second_moment_change_kg2": 8.002310550080829e-13,
+      "excess_second_moment_change_kg2": 4.6346206076771326e-14,
+      "analytical_excess_second_moment_kg2": 4.634620607677101e-14,
+      "excess_formula_relative_residual": 6.808418397089841e-15,
+      "excess_second_moment_fraction": 0.06147650552000156,
+      "upper_pivot_allocation_number_fraction": 2.9583188698620563e-05,
+      "collector_jump_second_moment_ratio": 33802.98216624055,
+      "tendency": {
+        "indices": [
+          38,
+          146,
+          147
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -2.9583188698620563e-05,
+          2.9583188698620563e-05
+        ]
+      },
+      "mass_bins": 216,
+      "geometric_mass_ratio": 1.1229566484897355,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.15,
+      "actual_small_diameter_m": 0.0002033713681943548,
+      "actual_collector_diameter_m": 0.14826144588672888,
+      "collector_next_pivot_diameter_m": 0.15759232702049772
+    },
+    {
+      "small_index": 38,
+      "large_index": 169,
+      "small_mass_kg": 1.1709436884898192e-09,
+      "collector_mass_kg": 0.004635406190903145,
+      "collector_next_pivot_mass_kg": 0.00520536020052517,
+      "product_mass_kg": 0.004635407361846833,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": -7.734876126625272e-17,
+      "exact_second_moment_change_kg2": 1.0855599245649343e-11,
+      "projected_second_moment_change_kg2": 1.1522981924836604e-11,
+      "excess_second_moment_change_kg2": 6.673826791872608e-13,
+      "analytical_excess_second_moment_kg2": 6.673826791872549e-13,
+      "excess_formula_relative_residual": 8.9266289671829e-15,
+      "excess_second_moment_fraction": 0.06147819794054496,
+      "upper_pivot_allocation_number_fraction": 2.054452936064701e-06,
+      "collector_jump_second_moment_ratio": 486747.58250510093,
+      "tendency": {
+        "indices": [
+          38,
+          169,
+          170
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -2.054452936064701e-06,
+          2.054452936064701e-06
+        ]
+      },
+      "mass_bins": 216,
+      "geometric_mass_ratio": 1.1229566484897355,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 0.6,
+      "actual_small_diameter_m": 0.0002033713681943548,
+      "actual_collector_diameter_m": 0.6035114129910086,
+      "collector_next_pivot_diameter_m": 0.6414935952354357
+    },
+    {
+      "small_index": 38,
+      "large_index": 177,
+      "small_mass_kg": 1.1709436884898192e-09,
+      "collector_mass_kg": 0.01172173023721566,
+      "collector_next_pivot_mass_kg": 0.013162994901684554,
+      "product_mass_kg": 0.01172173140815935,
+      "number_change_per_event": -1.0,
+      "relative_first_moment_residual": -7.734876126625535e-17,
+      "exact_second_moment_change_kg2": 2.7450972078895897e-11,
+      "projected_second_moment_change_kg2": 2.9138610470090013e-11,
+      "excess_second_moment_change_kg2": 1.687638391194116e-12,
+      "analytical_excess_second_moment_kg2": 1.687638391194127e-12,
+      "excess_formula_relative_residual": -6.4618186044339955e-15,
+      "excess_second_moment_fraction": 0.06147827429730839,
+      "upper_pivot_allocation_number_fraction": 8.124418209623641e-07,
+      "collector_jump_second_moment_ratio": 1230857.366273276,
+      "tendency": {
+        "indices": [
+          38,
+          177,
+          178
+        ],
+        "number_change_per_event": [
+          -1.0,
+          -8.124418209623641e-07,
+          8.124418209623641e-07
+        ]
+      },
+      "mass_bins": 216,
+      "geometric_mass_ratio": 1.1229566484897355,
+      "requested_small_diameter_m": 0.0002,
+      "requested_collector_diameter_m": 1.0,
+      "actual_small_diameter_m": 0.0002033713681943548,
+      "actual_collector_diameter_m": 0.9834226015968336,
+      "collector_next_pivot_diameter_m": 1.0453146150254138
+    }
+  ],
+  "checks": {
+    "maximum_first_moment_relative_residual": 7.734876126625535e-17,
+    "maximum_number_change_error": 0.0,
+    "maximum_excess_formula_relative_residual": 1.3926348825508107e-14,
+    "all_second_moment_excesses_positive": true
+  },
+  "evidence": "Direct evaluation of the frozen collision operator and exact single-event moment arithmetic. The selected pairs use the nearest actual mass pivots to the requested diameters.",
+  "reading_rule": "Positive second-moment excess is numerical redistribution, not physical fragmentation. These local values quantify an unresolved collision-grid error that the limited deposition repair does not alter. They do not determine how much of the full-column upper-domain loss it causes.",
+  "relationship_to_tests": "Existing constant/additive-kernel tests verify independent coagulation solutions and time accuracy. The geometric-grid constant-kernel test already demonstrates second-moment error decreasing under refinement. No independent continuous-mass or sufficiently resolved reference has yet quantified the same error under the full snow kernel.",
+  "unperformed": [
+    "Time-integrated collision-only comparison under the inherited snow kernel.",
+    "Independent coupled-column mass/time/height/domain convergence.",
+    "Quantification of fragmentation projection and unresolved velocity differences within one mass cell."
+  ]
+}

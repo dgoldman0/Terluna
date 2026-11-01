@@ -91,7 +91,9 @@ def test_drips_fall_below_both_bounds_and_faster_from_higher():
                     # A small drip that reaches its terminal speed and then shrinks as it evaporates lags its own
                     # falling terminal speed, by 0.03% for a 1 mm drip from 4 m on the Moon.
                     assert r['impact_speed_m_s'] < 1.001 * r['terminal_speed_m_s']
-                    assert 0.98 < (r['surface_diameter_mm'] / mm)**3 <= 1.0
+                    # A 1 mm drip from 4 m in the hot world's air keeps 97.9% of its water (98.0% before the
+                    # diffusivity took Massman's measured fit on 25 October).
+                    assert 0.975 < (r['surface_diameter_mm'] / mm)**3 <= 1.0
         moon, earth = (PRODUCT['targets'][key][w]['drips'] for w in arrivals.WORLDS)
         assert all(m['impact_speed_m_s'] < e['impact_speed_m_s'] for m, e in zip(moon, earth))
 
@@ -99,6 +101,7 @@ def test_drips_fall_below_both_bounds_and_faster_from_higher():
 def test_the_tail_reaches_the_moons_ground_and_breaks_up_on_earth():
     for key in rain.TARGETS:
         moon, earth = (PRODUCT['targets'][key][w]['tail'] for w in arrivals.WORLDS)
-        assert all(r['status'] == 'surface' and r['surviving_water_fraction'] > 0.85 for r in moon)
+        # 84.8-97% of the water reaches the Moon's ground, the hot world's 8 mm drop keeping least
+        assert all(r['status'] == 'surface' and r['surviving_water_fraction'] > 0.84 for r in moon)
         assert all(r['status'] == 'above the stability screen' for r in earth)
         assert np.all(np.diff([r['impact_speed_m_s'] for r in moon]) > 0)

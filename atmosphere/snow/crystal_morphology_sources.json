@@ -1,0 +1,52 @@
+{
+  "schema": "terluna.atmosphere.crystal-morphology-sources/1",
+  "retrieved_date_UTC": "2026-10-23",
+  "source_records": [
+    {
+      "path": "atmosphere/snow/spatial_growth_sources.json",
+      "sha256": "c57e0a0a37acbd701793a7289ea06f2896c6b984d0f17470a8ac6761b88fd948"
+    },
+    {
+      "path": "atmosphere/snow/surface_transport_sources.json",
+      "sha256": "29e65b1f5aaf1c68bcce1f2a6b833531ffe643a98b32c7d22ca38e57d3fd767e"
+    },
+    {
+      "path": "atmosphere/snow/crystal_parameter_sources.json",
+      "sha256": "a226501093a2ec7e1509c3291be990d1fd963b5c049acf80a71a3a9db09a285f"
+    }
+  ],
+  "retrieved": [
+    {
+      "name": "libbrecht2015_reanalysis",
+      "url": "https://arxiv.org/pdf/1509.06609",
+      "status_code": 200,
+      "cache_path": "research/runs/snow_scale/spatial_growth/libbrecht2015_reanalysis.pdf",
+      "state": "retrieved",
+      "sha256": "ef0f33d46cb38fbe8c000e1abf2582d03f34bffa3b35dbbbfc7280abfc1d1fc4",
+      "bytes": 194705
+    },
+    {
+      "name": "shi2025_molecular",
+      "url": "https://discovery.ucl.ac.uk/id/eprint/10204971/1/054714_1_5.0240795.pdf",
+      "status_code": 200,
+      "cache_path": "research/runs/snow_scale/spatial_growth/shi2025_molecular.pdf",
+      "state": "retrieved",
+      "sha256": "fe1fba194f1e108ba7bd0b0e0aef87675cce6cd3208b496393e4aeb675c79397",
+      "bytes": 8300167
+    }
+  ],
+  "reading_scope": {
+    "libbrecht2015_reanalysis": "All six pages read, including equations 2-13, sample-area humidity depletion, unit near-step attachment assumption and factor-three migration-length uncertainty. This is a reanalysis of basal data, not an accepted correction to later prism measurements.",
+    "shi2025_molecular": "Introduction, methodology II A-B, selected III growth-rate discussion, conclusion IV and data availability read. Qualitative temperature/habit correspondence is distinguished from a measured vapour-growth law; supplementary data not downloaded."
+  },
+  "source_claims": {
+    "humidity_depletion": "Libbrecht 2015 arXiv:1509.06609 argues that chamber-wide depletion and near-step attachment assumptions explain a much smaller migration length than the original basal analysis. Its chamber approximation and inferred length retain substantial uncertainty.",
+    "prism_humidity_assumption": "Miyamoto 2022 equations 1 and 5 determine beta from the low-nominal-supersaturation slope assuming local and reservoir humidity coincide, then infer local humidity from measured step speed. The same beta enters the spiral-spacing inversion.",
+    "molecular_alternative": "Shi et al. 2025, doi:10.1063/5.0240795, uses LAMMPS with TIP4P/Ice and mW to recrystallize an artificially enlarged quasi-liquid surface layer in vacuum. It supplies molecular mechanism comparisons, not a humidity-resolved atmospheric crystal or lunar column solver. Data are advertised at doi:10.18742/27080410; the dataset was not downloaded."
+  },
+  "limits": [
+    "No fitted humidity correction or new equilibrium parameter is adopted.",
+    "Source files are stored in ignored caches; only identities and scoped interpretation are redistributed.",
+    "The moving-interface code remains an independent axisymmetric event/FV prototype, without three-dimensional branching, a reversible surface field, or resolved gas flow."
+  ]
+}

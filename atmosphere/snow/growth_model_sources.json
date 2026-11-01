@@ -1,0 +1,134 @@
+{
+  "recorded_utc": "2026-10-22T19:47:27.961102+00:00",
+  "scope": "Light review and selected source inspection; no builds or numerical validation.",
+  "mcsnow_stochastic_geometry": {
+    "article": "https://doi.org/10.16993/tellus.4127",
+    "publication_date": "2026-06-26",
+    "article_retrieval": "Full publisher HTML retrieved by requests; sections 2, 4 and conclusions read, selected optical scope inspected; not a full scholarly review.",
+    "article_local_file": "/tmp/terluna-geometry.txt",
+    "article_sha256": "3bf118188de2ea25a24505b874a4f4298fdc3ccd76156a55f032731e57ef3949",
+    "archive_concept": "https://doi.org/10.5281/zenodo.17432966",
+    "archive_version": "https://doi.org/10.5281/zenodo.17432967",
+    "archive_publication_date": "2025-10-24",
+    "archive_metadata_url": "https://zenodo.org/api/records/17432966",
+    "archive_url": "https://zenodo.org/api/records/17432967/files/mcsnow_source.tar.gz/content",
+    "archive_local_file": "/tmp/terluna-modern-mcsnow_source.tar.gz",
+    "archive_bytes": 209564,
+    "archive_published_md5": "bf4517c14fb59717f7c7c296e3f843c5",
+    "archive_md5_verified": true,
+    "archive_sha256": "01ea5884829e780c282e997dfda08858796666519e6aeb2d8f8fadee5c7a9dfe",
+    "public_master_revision": "1e428d7e901cbc5b91f2040e575f736ec5963a74",
+    "public_master_checked": "https://gitlab.dkrz.de/api/v4/projects/mcsnow%2Fmcsnow/repository/branches",
+    "code_license": "BSD-3-Clause SPDX headers in source; source-only archive omits repository LICENSES directory. Zenodo record metadata says CC-BY-4.0 for dataset.",
+    "unretrieved_large_files": {
+      "aggregation.tar.gz": 4836100029,
+      "mcsnow_data.tar.gz": 423944878
+    },
+    "selected_source_files": [
+      {
+        "path": "src/mo_depo.f90",
+        "sha256": "4c13bf06ba5010229a32097bb974b051cc9060aa57457b7b0bd73a7ac04491c0",
+        "bytes": 27107
+      },
+      {
+        "path": "src/mo_mass2diam.f90",
+        "sha256": "170abb9b68595e84aaf78149bf3ff7198e86d56822247981627445ead0f1e753",
+        "bytes": 36850
+      },
+      {
+        "path": "src/mo_sp_nml.f90",
+        "sha256": "a02f9447da07c783b49ae9126418439eca75a10e6bd1e56f1f8949dac208e063",
+        "bytes": 11884
+      },
+      {
+        "path": "src/mo_atmo_types.f90",
+        "sha256": "e303838efdeaa2bb1d02ef86b44de8ebf326badb4e3cc1bdcdb55fda3fdb8173",
+        "bytes": 2767
+      },
+      {
+        "path": "src/mo_velocity.f90",
+        "sha256": "c2e0226c64182fcf6cf6dd070f27e5c7860a20c65e8983a9854f230248f66618",
+        "bytes": 15254
+      },
+      {
+        "path": "src/mo_loop_array.f90",
+        "sha256": "b8a1e732269b8d526c7572b0d7fc13ee5dd5480c08e6f5658308bda48f37dc64",
+        "bytes": 22656
+      },
+      {
+        "path": "run/1d_habit1",
+        "sha256": "5927a96d23b5010663012e37cdfe14f7f004900cdb31ec1bf35bb723dfcda7a4",
+        "bytes": 6202
+      },
+      {
+        "path": "run/1d_habit2",
+        "sha256": "e69e2ff74c058e982a97c5f8ef72ff01abae1dc7049747e4638dd1d0558abe11",
+        "bytes": 6202
+      }
+    ]
+  },
+  "other_retrievals": [
+    {
+      "name": "welss2024",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2023MS003805",
+      "status": 403,
+      "bytes": 5604,
+      "sha256": "5f6fc655d76087778f4ed003054f631d1d8e1e70a2229ba1304bdf2688fa19a3"
+    },
+    {
+      "name": "yang2026.pdf",
+      "url": "https://arxiv.org/pdf/2603.03767",
+      "status": 200,
+      "bytes": 1031246,
+      "sha256": "387d2af0fc62f9a6c84ba15c05938755e8e4976f71fd81b2642cd72b2c7ec456"
+    },
+    {
+      "name": "yang2024.pdf",
+      "url": "https://arxiv.org/pdf/2405.03570",
+      "status": 200,
+      "bytes": 1850903,
+      "sha256": "3b7ae31959bc13e662a1b2a088782ec65b37520c7a771d950bba69c976ffee6b"
+    },
+    {
+      "name": "exolyn-head",
+      "url": "https://api.github.com/repos/helonghuangastro/ExoLyn/commits?per_page=1",
+      "status": 200,
+      "bytes": 3219,
+      "sha256": "89dc8567011ceeab5c2aea81f9b5bff495d4dbd1046fb4e8d20416b4396a21b7"
+    },
+    {
+      "name": "exolyn-paper.pdf",
+      "url": "https://www.aanda.org/articles/aa/pdf/2024/11/aa51112-24.pdf",
+      "status": 403,
+      "bytes": 93,
+      "sha256": "0d3e98ca727fc1201b436170af5a63f23348aaf146a3ac6234f6c4da283e8b34"
+    }
+  ],
+  "reading": {
+    "welss2024": "Publisher full HTML via web tool: sections 2.1, 4.2\u20134.3 and conclusions; requests direct retrieval 403, no locally hashed full text.",
+    "yang2024": "Author-hosted arXiv PDF, published-paper version; methods, Table 1, gravity and pressure sections inspected.",
+    "yang2026": "Author-hosted arXiv PDF, published-paper version; methods, discussion and conclusions inspected.",
+    "exolyn": "Official repository and primary publisher search/PDF excerpts; full article direct retrieval 403; scope screen only."
+  },
+  "local_cache_note": "Original retrieval paths are retained as history. External papers and datasets are also retained under ignored research/runs/snow_scale; no full papers are redistributed.",
+  "local_cache": "research/runs/snow_scale/mcsnow_2026_source.tar.gz",
+  "retained_source_bytes": [
+    {
+      "path": "research/runs/snow_scale/growth_model_sources/yang2024.pdf",
+      "sha256": "3b7ae31959bc13e662a1b2a088782ec65b37520c7a771d950bba69c976ffee6b"
+    },
+    {
+      "path": "research/runs/snow_scale/growth_model_sources/yang2026.pdf",
+      "sha256": "387d2af0fc62f9a6c84ba15c05938755e8e4976f71fd81b2642cd72b2c7ec456"
+    },
+    {
+      "path": "research/runs/snow_scale/growth_model_sources/exolyn-head",
+      "sha256": "89dc8567011ceeab5c2aea81f9b5bff495d4dbd1046fb4e8d20416b4396a21b7"
+    },
+    {
+      "path": "research/runs/snow_scale/growth_model_sources/seifert2026_publisher_text.txt",
+      "sha256": "3bf118188de2ea25a24505b874a4f4298fdc3ccd76156a55f032731e57ef3949"
+    }
+  ],
+  "selected_archive_sources_reverified": true
+}

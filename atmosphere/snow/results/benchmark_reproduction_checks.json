@@ -1,0 +1,72 @@
+{
+  "schema": "terluna.atmosphere.mcsnow-reproduction-checks/1",
+  "date": "2026-10-23",
+  "focused_tests": {
+    "command": "python -m pytest atmosphere/tests/test_snow_mcsnow_reproduction.py atmosphere/tests/test_snow_mcsnow_growth.py -q",
+    "passed": 49,
+    "failed": 0,
+    "elapsed_s": 0.39,
+    "scope": "Interface fixtures and existing native-runner regressions; no empirical validation."
+  },
+  "raw_replay": {
+    "command": "python -m atmosphere.snow.mcsnow_reproduction_benchmarks assemble",
+    "executions": 709,
+    "complete": 709,
+    "builds_verified": 4,
+    "configuration_raw_output_and_saved_analysis_agree": true,
+    "product_sha256": "9a8bd42a6161746b505198a53ba750b97c15399a3754a6530e1de2d3eb194c2e",
+    "parity_files_identical": 4
+  },
+  "full_repository_check": {
+    "command": "make check",
+    "status": "PASS",
+    "exit_code": 0,
+    "python": {
+      "passed": 3633,
+      "skipped": 20,
+      "elapsed_s": 508.5
+    },
+    "javascript": [
+      {
+        "suite": "immersion",
+        "passed": 129,
+        "failed": 0
+      },
+      {
+        "suite": "column and light-transport references/viewers",
+        "passed": 48,
+        "failed": 0
+      },
+      {
+        "suite": "calendar",
+        "passed": 14,
+        "failed": 0
+      }
+    ],
+    "layers": "PASS",
+    "research_provenance": "PASS",
+    "protection_input_hashes_verified": 5,
+    "ensemble_workspace": "PASS",
+    "ensemble_scope": "Planning snapshot and workspace integrity only; no scientific or manuscript clearance.",
+    "numerical_threads": 1,
+    "temporary_files": "Project drive via TMPDIR.",
+    "log": "research/runs/snow_scale/mcsnow_reproduction/make-check.log",
+    "log_sha256": "159cf9735780845583ea55fa386daccd468b40010e12159a941ad05fbc61d9cd"
+  },
+  "evidence": "Software and provenance checks are separate from archive agreement and physical validation; exact paper reproduction remains unresolved.",
+  "artifact_review": {
+    "report": "atmosphere/snow/benchmark_reproduction.md",
+    "activities": [
+      "Read completed report in context against the product and source record.",
+      "Compared reported median errors, fixed-state speeds, endpoint ratios and last-pair refinements with the assembled product.",
+      "Checked local report/status links and git diff whitespace.",
+      "Verified that all recorded current producer hashes still match source files."
+    ],
+    "unperformed": [
+      "Fresh complete-paper reading",
+      "Exact-build PDF review",
+      "New finite-water population experiment",
+      "New lunar transfer or optical forecast"
+    ]
+  }
+}

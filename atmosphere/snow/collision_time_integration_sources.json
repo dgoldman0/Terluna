@@ -1,0 +1,64 @@
+{
+  "schema": "terluna.atmosphere.snow-collision-time-integration-sources/1",
+  "review_date": "2026-10-21",
+  "scope": "Targeted primary-source basis for positive finite-time updates of a prescribed replenished monodisperse capture bath. Three sources; not a general integrator survey.",
+  "destination_branch": "domain/atmosphere",
+  "evidence_state": "Published transient Markov and truncation methods, local analytic derivations and implemented sectional bath adaptations. Numerical controls are reported in collision_jump_results.md; no closed-aggregation solution or physical snow validation.",
+  "external_bytes": "No full papers or external datasets added to the repository. Browser text extraction was inspected; source-byte hashes were not retained.",
+  "sources": [
+    {
+      "id": "gross_miller_1984",
+      "authors": "Donald Gross and Douglas R. Miller",
+      "title": "The Randomization Technique as a Modeling Tool and Solution Procedure for Transient Markov Processes",
+      "publication": "Operations Research 32(2), 343–361 (1984)",
+      "doi": "10.1287/opre.32.2.343",
+      "url": "https://doi.org/10.1287/opre.32.2.343",
+      "access_url": "https://pubsonline.informs.org/doi/abs/10.1287/opre.32.2.343",
+      "reading_extent": "Publisher metadata and abstract only. Full derivations, implementation comparisons and figures were not read.",
+      "retrieval_limits": "Publisher-indexed abstract retrieved; full article not obtained.",
+      "evidence": "Primary development of randomization for transient Markov probabilities and event statistics.",
+      "use": "Method lineage for the uniformized birth-ladder transition.",
+      "limit": "Abstract-level reading does not establish the detailed algorithm or performance of the local snow adaptation."
+    },
+    {
+      "id": "fox_glynn_1988",
+      "authors": "Bennett L. Fox and Peter W. Glynn",
+      "title": "Computing Poisson Probabilities",
+      "publication": "Communications of the ACM 31(4), 440–445 (1988)",
+      "url": "https://web.stanford.edu/~glynn/papers/1988/FG88.html",
+      "access_url": "https://web.stanford.edu/~glynn/papers/1988/FG88.pdf",
+      "reading_extent": "Published six-page PDF text: abstract and §§1–4, including the weight algorithm, numerical stability, truncation selection and Poisson-tail bounds. Later probability-bound proofs and extensions were not substantively read; no figures inspected.",
+      "retrieval_limits": "Author-hosted PDF text retrieved successfully; no byte identity retained.",
+      "evidence": "Primary numerical method for stable Poisson weights with bounded truncated probability.",
+      "use": "Method lineage for stable finite-mixture evaluation and explicit probability-tail controls. The local implementation uses its own mode-centered recurrence and Chernoff bounds rather than claiming the complete published algorithm.",
+      "limit": "Its probability or bounded-reward bounds do not alone bound unbounded first or second mass moments; no snow-specific performance evidence."
+    },
+    {
+      "id": "munsky_khammash_2006",
+      "authors": "Brian Munsky and Mustafa Khammash",
+      "title": "The finite state projection algorithm for the solution of the chemical master equation",
+      "publication": "The Journal of Chemical Physics 124, 044104 (2006)",
+      "doi": "10.1063/1.2145882",
+      "url": "https://doi.org/10.1063/1.2145882",
+      "access_url": "https://www.researchgate.net/publication/7314435_The_finite_state_projection_algorithm_for_the_solution_of_the_Chemical_Master_Equation",
+      "version_read": "Author-posted text extraction identifies the published 2006 article and DOI. Exact equivalence to publisher bytes was not verified.",
+      "reading_extent": "Abstract; §I discussion of time leaping; selected §II mathematical passages, Theorem 2.2 and its probability-bound argument, finite-state interpretation; indexed §III algorithm opening. No full example or figure review.",
+      "retrieval_limits": "LANL PDF retrieval timed out and Colorado State PDF returned 403. Author-posted text was available; neither failed PDF was admitted as inspected bytes.",
+      "evidence": "Primary finite-state projection method and probability-error bounds.",
+      "use": "Explicit accounting for probability leaving a computational state set.",
+      "limit": "Probability certificates do not establish mass-moment accuracy or validate a nonlinear closed-aggregation adaptation."
+    }
+  ],
+  "local_derivations": [
+    "For a point initial state, constant-rate forward Euler gives capture-count variance mu*(1-mu); its conditional realizability bound is independent of population weight.",
+    "For the unbounded constant-rate birth ladder and point initial state, backward Euler gives a geometric count with mean mu and variance mu*(1+mu).",
+    "Exact constant-rate finite-time capture gives a Poisson shift mixture, preserving number and increasing normalized mass variance by donor_mass^2*mu.",
+    "Before stopping at a finite-domain exit: M1_new=M1+N*d*mu and M2_new=M2+2*d*mu*M1+N*d^2*(mu^2+mu).",
+    "State-dependent bath rates define a bidiagonal birth generator on actual masses m0+k*d; uniformization is positive when its dominating-rate bound is valid.",
+    "Sectional reconstruction and numerical state/probability truncation remain independent approximation sources; closed aggregation adds donor depletion and population-dependent rates.",
+    "For omitted Poisson counts, factorial-moment identities shift the tail thresholds and bound omitted number, first mass moment and second mass moment separately.",
+    "A finite actual-mass birth ladder can be coupled to its dominating Poisson process up to the first artificial-cap hit; the Poisson probability of at least C events bounds that hit probability.",
+    "An absorbing physical upper boundary U and donor mass d bound stopped mass by U+d, allowing accumulated omitted probability to bound subsequent raw moments separately from reconstruction and quadrature."
+  ],
+  "method_status": "Implemented in collision_jumps.py and collision_birth.py; numerical controls and approximation limits recorded separately in collision_jump_results.md. Prior solvers and saved products remain unchanged."
+}

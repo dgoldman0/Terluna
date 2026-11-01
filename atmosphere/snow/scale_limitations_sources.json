@@ -1,0 +1,139 @@
+{
+  "schema": "terluna.atmosphere.scale-limitations-sources/1",
+  "date": "2026-10-22",
+  "purpose": "Review published and locally configured limitations relevant to compact snow; select independent geometry and single-crystal comparisons.",
+  "source_revision": "4eaf4f74aa03d091d9778eff373b816f178a962f",
+  "native_code_audit": "scale_size_sources.json",
+  "local_retrievals": [
+    {
+      "file": "takahashi1991.pdf",
+      "url": "https://www.jstage.jst.go.jp/article/jmsj1965/69/1/69_1_15/_pdf",
+      "retrieved_utc": "2026-10-22T18:54:54.612012+00:00",
+      "status": "retrieved",
+      "bytes": 8910942,
+      "sha256": "2e5c6b492fcab7d1b3958be5a4c859fcd31174a1ac4865588ca48820bd4cd8eb"
+    },
+    {
+      "file": "takahashi1991_corrigendum.pdf",
+      "url": "https://www.jstage.jst.go.jp/article/jmsj1965/69/2/69_2_251/_pdf",
+      "retrieved_utc": "2026-10-22T18:54:54.612631+00:00",
+      "status": "retrieved",
+      "bytes": 1009054,
+      "sha256": "5297d387ee1c0e33944d9bdb0f6bd68a70a251e64f1f4b5f8e367e7b4c5946bb"
+    },
+    {
+      "file": "shima2020.html",
+      "url": "https://gmd.copernicus.org/articles/13/4107/2020/",
+      "retrieved_utc": "2026-10-22T18:54:59.051361+00:00",
+      "status": "retrieved",
+      "bytes": 1318878,
+      "sha256": "7aee09aba1e56cbbb678bb2e2f2dd561d959cc07a4b881ba35a44ae533226157"
+    }
+  ],
+  "redistribution": "Original PDFs and publisher HTML remain in ignored research/runs/. This record supplies bibliographic metadata, a limited transcription of numerical fit coefficients in the runner, and analysis; it does not redistribute full papers.",
+  "sources": [
+    {
+      "id": "shima2020",
+      "authors": "Shima et al.",
+      "year": 2020,
+      "title": "Predicting the morphology of ice particles in deep convection using the super-droplet method: development and evaluation of SCALE-SDM 0.2.5-2.2.0, -2.2.1, and -2.2.2",
+      "doi": "10.5194/gmd-13-4107-2020",
+      "url": "https://gmd.copernicus.org/articles/13/4107/2020/",
+      "read_extent": "Publisher full HTML retrieved; relevant formulation, evaluation and limitations sections read, especially 4.1.11, 7.2 and 9.3.4-9.3.10.",
+      "relevance": "Authors identify limitations in filling-in aggregation, deposition density, habit, capacitance, collection efficiency and transport coefficients. Section 9.3.8 motivates an offset-contact sensitivity.",
+      "limits": "Their reported Earth evaluation does not establish accuracy for this prescribed lunar column or our new geometry extension."
+    },
+    {
+      "id": "kajikawa1985",
+      "authors": "M. Kajikawa",
+      "year": 1985,
+      "title": "Structure and falling motion of early snowflakes",
+      "doi": "10.3189/1985AoG6-1-269-271",
+      "url": "https://www.cambridge.org/core/journals/annals-of-glaciology/article/structure-and-falling-motion-of-early-snowflakes/D3CA015917FB1A33E820F3C43C27BAB6",
+      "read_extent": "Original publisher full article text, sections on structure, separation ratio and motion, including the figure captions.",
+      "relevance": "Small two-crystal aggregates have different contact separation distributions for same-shape and different-shape pairs; a fixed separation of 0.5 is not a universal observed law.",
+      "limits": "Large flakes were excluded. This dataset cannot directly calibrate large aggregates, mechanical breakup or lunar contact outcomes. Online posting date 2017 is distinct from publication in 1985."
+    },
+    {
+      "id": "takahashi1991",
+      "authors": "T. Takahashi, T. Endoh, G. Wakahama and N. Fukuta",
+      "year": 1991,
+      "title": "Vapor Diffusional Growth of Free-Falling Snow Crystals between -3 and -23 C",
+      "doi": "10.2151/jmsj1965.69.1_15",
+      "url": "https://www.jstage.jst.go.jp/article/jmsj1965/69/1/69_1_15/_article/-char/en",
+      "read_extent": "Original PDF retrieved; experimental conditions, dimension measurement methods, growth/ventilation discussion and conclusions examined. Table 2 on printed page 24 (PDF page 10) rendered and visually read.",
+      "relevance": "The -14.4 C single-crystal curve supplies mass and full dimensions over 3-30 min at water saturation and about 1010 hPa. It tests deposition and initialization independently of aggregation.",
+      "limits": "Planar thickness is inferred from mass and basal area; these are not three independent observations. Empirical fits have no pointwise uncertainties. Laboratory air contains droplets, but this selected 30-minute crystal curve concerns diffusional growth; our control contains no liquid particles or riming."
+    },
+    {
+      "id": "takahashi1991_corrigendum",
+      "authors": "Journal of the Meteorological Society of Japan",
+      "year": 1991,
+      "title": "Corrigenda, volume 69, issue 2, pages 251-252",
+      "doi": "10.2151/jmsj1965.69.2_251",
+      "url": "https://www.jstage.jst.go.jp/article/jmsj1965/69/2/69_2_251/_article/-char/en",
+      "read_extent": "Original PDF retrieved and text extracted; scope of correction checked.",
+      "relevance": "Replaces the continuation of Figure 3 on page 20 and corrects an issue month; no correction to Table 2 is listed.",
+      "limits": "No corrected photographs are used in the numerical comparison."
+    },
+    {
+      "id": "alena1990",
+      "authors": "T. Alena, J. Hallett and C. P. R. Saunders",
+      "year": 1990,
+      "title": "On the facet-skeletal transition of snow crystals: Experiments in high and low gravity",
+      "doi": "10.1016/0022-0248(90)90157-G",
+      "url": "https://www.sciencedirect.com/science/article/pii/002202489090157G",
+      "secondary_record": "https://ntrs.nasa.gov/search.jsp?R=19910037537",
+      "read_extent": "Indexed publisher abstract and official NASA bibliographic/abstract record; publisher full-text request returned HTTP 403. A direct request to the canonical NASA citation URL also returned HTTP 403; the indexed official record supplied the bibliographic abstract.",
+      "relevance": "Airflow and brief reduced-gravity experiments support examining convection and ventilation when transferring crystal habits between gravities.",
+      "limits": "Abstract-only evidence, with roughly 20-second low-gravity intervals. No lunar snow population, aggregate fracture law or transferable maximum size is established."
+    },
+    {
+      "id": "lawson1998",
+      "authors": "R. P. Lawson, R. E. Stewart and L. J. Angus",
+      "year": 1998,
+      "title": "Observations and numerical simulations of the origin and development of very large snowflakes",
+      "doi": "10.1175/1520-0469(1998)055<3209:OANSOT>2.0.CO;2",
+      "url": "https://journals.ametsoc.org/view/journals/atsc/55/21/1520-0469_1998_055_3209_oansot_2.0.co_2.xml",
+      "read_extent": "Existing project geometry review retained; indexed publisher sections describing the generating cell and large flakes rechecked this session. Direct publisher page returned HTTP 403.",
+      "relevance": "Observed large Earth aggregates form in a specific dendritic and moist growth history; the prescribed SCALE Earth gravity control is not that observed storm.",
+      "limits": "No new complete reproduction of that storm was performed. See geometry_sources.json for the earlier review identity."
+    }
+  ],
+  "unresolved_retrievals": [
+    {
+      "source": "Kajikawa (2002), cited by Shima et al. for contact separation",
+      "state": "Original J-STAGE item not successfully retrieved this session; do not treat its reported separation values as directly inspected calibration data."
+    },
+    {
+      "source": "Alena et al. (1990) full paper",
+      "state": "Full text unretrieved; only abstract-level mechanism evidence used."
+    }
+  ],
+  "code_findings": [
+    {
+      "reference": "scale_size_sources.json#active_aggregate_geometry",
+      "finding": "Native aggregation geometry has no gravity, contact energy or contact-strength argument. Holding one semiaxis while recomputing the other is not a hard maximum-diameter cap."
+    },
+    {
+      "reference": "scale_size_sources.json#deposition_and_habit",
+      "finding": "Native Chen-Lamb density, temperature-selected intrinsic growth ratio and spheroid capacitance determine individual-crystal mass and axes; terminal speed supplies ventilation."
+    },
+    {
+      "reference": "scale_size_sources.json#seed_geometry",
+      "finding": "Spherical injected seeds and their fixed number flux are local comparison-adapter assumptions; they are not inferred lunar crystal habits."
+    },
+    {
+      "reference": "scale_size_sources.json#fixed_transport_coefficients",
+      "finding": "Native diffusivity and conductivity remain fixed at reference values rather than following local air pressure and temperature."
+    },
+    {
+      "reference": "scale_lunar_methods.md",
+      "finding": "The prescribed driver disables atmospheric dynamics and supplies water-saturated gas, a fixed water ceiling and no liquid population. It cannot test turbulence, riming or mechanical ice breakup."
+    }
+  ],
+  "follow_up": [
+    "Offset-contact full-column sensitivity with exact zero-change parity, conservation, timestep and Earth controls.",
+    "Single-crystal Earth laboratory comparison at -14.4 C, then a matched initial-shape and gravity sensitivity; the latter is not a second empirical benchmark."
+  ]
+}

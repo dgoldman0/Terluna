@@ -1,0 +1,61 @@
+{
+  "schema": "terluna.atmosphere.facet-attachment-audit/1",
+  "native_demo_comparisons": [
+    {
+      "precision": "single",
+      "rows": 991,
+      "maximum_relative_difference_from_printed_native": 4.639925221816554e-09,
+      "tolerance": 6e-07,
+      "build_sha256": "cb9298e424bb89d6a688cddfb0f9a9968a988f440941df382a99eb7291b96253"
+    },
+    {
+      "precision": "double",
+      "rows": 991,
+      "maximum_relative_difference_from_printed_native": 0.0,
+      "tolerance": 6e-15,
+      "build_sha256": "ac12138654179837704af455ab1ee8f10641205b5e02df7a7663e0c30bfb5cc8"
+    }
+  ],
+  "maximum_relative_single_double_differences": {
+    "alpha_a": 0.00013273410751424297,
+    "alpha_c": 0.00015464140875465215,
+    "alpha_t": 2.2351741790771484e-08,
+    "capacitance_m": 5.994468132985986e-08,
+    "boundary_capacitance_m": 1.0797723426492212e-07,
+    "diffusivity_m2_s": 8.03866107013107e-09,
+    "conductivity_W_m_K": 1.4486367660992983e-08,
+    "ice_saturation_pressure_Pa": 2.2052043524567466e-08,
+    "latent_sublimation_J_kg": 3.824857541800952e-08,
+    "vapor_molecular_speed_m_s": 3.693800021409288e-08,
+    "dry_air_density_kg_m3": 6.998673063307592e-08,
+    "vapor_mean_free_path_m": 7.963925074960798e-09,
+    "boundary_offset_m": 1.0741082601128937e-07,
+    "thermal_jump_length_m": 1.499875312838128e-08,
+    "characteristic_supersaturation_a": 1.2531175095364944e-06,
+    "characteristic_supersaturation_c": 1.057408700488871e-06,
+    "vapor_gas_constant_J_kg_K": 0.0,
+    "dry_air_gas_constant_J_kg_K": 0.0,
+    "dry_air_heat_capacity_J_kg_K": 0.0
+  },
+  "invalid_input_guards_checked": [
+    "ice_supersaturation",
+    "temperature_K",
+    "temperature_K",
+    "pressure_Pa",
+    "equatorial_radius_m",
+    "polar_radius_m",
+    "m"
+  ],
+  "evidence": "Numerical component parity and precision sensitivity; no empirical growth validation.",
+  "stable_demo_comparison": {
+    "precision": "double",
+    "rows": 991,
+    "maximum_relative_difference_from_printed_native": 0.0,
+    "tolerance": 6e-15,
+    "build_sha256": "86ea6034328396ad42393c434fd02373ecb6e3116d9709f350359f07fdb00a64"
+  },
+  "producer": {
+    "facet_attachment.py": "baca6d3f663c9d40b157d805b0be797c88d491dc84e180e9a9ee5bd2d5db7506",
+    "facet_attachment_driver.f90": "a94c7501db2fc925f8ac0f26ae29fd222acb102d845bef172c9a7600bb400949"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "terluna.atmosphere.crystal-parameter-sources/1",
+  "retrieved_date_UTC": "2026-10-23",
+  "source_records": [
+    {
+      "path": "atmosphere/snow/spatial_growth_sources.json",
+      "sha256": "c57e0a0a37acbd701793a7289ea06f2896c6b984d0f17470a8ac6761b88fd948"
+    },
+    {
+      "path": "atmosphere/snow/surface_transport_sources.json",
+      "sha256": "29e65b1f5aaf1c68bcce1f2a6b833531ffe643a98b32c7d22ca38e57d3fd767e"
+    }
+  ],
+  "retrieved": [
+    {
+      "name": "libbrecht_rickerby2011",
+      "url": "https://www.its.caltech.edu/~atomic/publist/1110.5828v1.pdf",
+      "status_code": 200,
+      "cache_path": "research/runs/snow_scale/spatial_growth/libbrecht_rickerby2011.pdf",
+      "sha256": "e2a7b68c5cec90322ad9d3e031d1b544a7afaddbc1c292a494858e62489fb9e4",
+      "bytes": 533705,
+      "state": "retrieved"
+    }
+  ],
+  "reading_scope": {
+    "libbrecht_rickerby2011": "Experimental setup, growth-fitting method and classical step-energy relation on pages 1-4 read; page 4 equation visually inspected. This paper measures basal surfaces at low pressure; the general circular-nucleus relation is compared with prism parameters, not its basal measurements.",
+    "miyamoto2022": "Sections 3.1-3.3 reread, including inferred surface humidity and the BCF spiral-spacing inversion. Printed molecular area, energy units and -15.3 C peak checked against the PDF. Source bytes and earlier reading scope remain in surface_transport_sources.json.",
+    "takahashi1991": "Original Table 1 and Figure 3 visually inspected. Warm photographs show distinct sheaths and needles; duration panels are different specimens. Methods report water saturation, approximately 0.1 g/m^3 liquid water, 8 micrometre mean droplets and most between 5 and 15 micrometres."
+  },
+  "source_claims": {
+    "classical_polynuclear_relation": "sigma0 = pi*kappa^2*Omega/(3*k_B^2*T^2); Libbrecht and Rickerby 2011, page 4. Dimensionless fractional supersaturation.",
+    "prism_microscopy_peak": {
+      "temperature_C": -15.3,
+      "ledge_energy_J_m": 8.5e-10,
+      "molecular_area_m2": 8.3e-20,
+      "source": "Miyamoto et al. 2022, equations 4-5 and Figure 7"
+    },
+    "broad_prism_law": "Libbrecht 2023 broad-facet limit, with source identity in spatial_growth_sources.json. Narrow-facet reduction is excluded from equilibrium-energy comparison."
+  },
+  "limits": [
+    "Cross-source compatibility calculation; no author-confirmed correction, empirical reconciliation or adopted growth law.",
+    "Full papers remain in ignored caches; this record redistributes only bibliographic identity and scoped interpretation."
+  ]
+}

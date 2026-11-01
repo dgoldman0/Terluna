@@ -132,6 +132,27 @@
    "doi_or_url": "",
    "use": "the breakup law in Morrison's self-collection, as CM1's morrison.F credits it",
    "access": "through the CM1 source; the paper not read; its DOI not checked"
+  },
+  {
+   "key": "massman1998",
+   "citation": "Massman WJ 1998, A review of the molecular diffusivities of H2O, CO2, CH4, CO, O3, SO2, NH3, N2O, NO, and NO2 in air, O2 and N2 near STP, Atmospheric Environment 32, 1111-1127",
+   "doi_or_url": "not checked",
+   "use": "drops.vapour_diffusivity since 25 October 2026: D = 0.2178 cm2/s (T / 273.15 K)^1.81 (1 atm / p), in place of rainprops' Chapman-Enskog value",
+   "access": "not read; the fit, the range of its data (273.15-373.15 K, corrected to 1 atm by the inverse pressure law) and its 7% uncertainty as Miles and co-authors (2012) give them, read on 25 October 2026"
+  },
+  {
+   "key": "miles2012",
+   "citation": "Miles REH, Reid JP, Riipinen I 2012, Comparison of approaches for measuring the mass accommodation coefficient for the condensation of water and sensitivities to uncertainties in thermophysical properties, Journal of Physical Chemistry A 116",
+   "doi_or_url": "https://doi.org/10.1021/jp3083858 (open access as PMC3600786)",
+   "use": "the source of Massman's fit as drops.py takes it, and the comparison at 298.15 K and 1 atm in which Chapman-Enskog theory gives the lowest of eleven parametrizations",
+   "access": "open-access text read through a fetch summary on 25 October 2026; the quoted sentences and numbers checked there"
+  },
+  {
+   "key": "huber_harvey_lemmon_jacobsen2004",
+   "citation": "Huber ML, Harvey AH, Viscosity of gases, and Thermal conductivity of gases, CRC Handbook of Chemistry and Physics tables (NIST); their air values from Lemmon EW, Jacobsen RT 2004, Viscosity and thermal conductivity equations for nitrogen, oxygen, argon, and air, International Journal of Thermophysics 25, 21-69",
+   "doi_or_url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=907539 (viscosity) and pub_id=907540 (conductivity)",
+   "use": "the README's comparison of the kinetic theory's viscosity and conductivity with air at 100 kPa: 13.3 and 18.5 uPa s, 18.5 and 26.4 mW/(m K) at 200 and 300 K, stated to 3%",
+   "access": "both one-page tables fetched and read on 25 October 2026 and kept outside the repository; SHA-256 355010888bdbba03658863a0070f3334f1456e5af075c7788bac4a3344cf6cc9 (viscosity) and 1854b2549b1b2c9fe6ccf0ec31b6f36e677e1d58206601538b36f3e8eb9496f0 (conductivity)"
   }
  ]
 }

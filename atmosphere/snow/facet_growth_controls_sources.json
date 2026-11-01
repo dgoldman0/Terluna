@@ -1,0 +1,28 @@
+{
+  "schema": "terluna.atmosphere.facet-growth-controls-sources/1",
+  "retrieved": [
+    {
+      "cache_path": "research/runs/snow_scale/facet_coupling/harrington2024_morphology_excerpt.json",
+      "bytes": 22764,
+      "sha256": "59d511b3bc824bf01dd55d6bfe0f0381eab082621a3cb23eee4deb27487ed382",
+      "url": "https://www.researchgate.net/publication/376863363_An_Approximate_Criterion_for_Morphological_Transformations_in_Small_Vapor_Grown_Ice_Crystals",
+      "doi": "https://doi.org/10.1175/JAS-D-23-0131.1",
+      "evidence": "Indexed author-uploaded article text retrieved through the web tool; not original PDF bytes."
+    }
+  ],
+  "reading_scope": "Harrington and Pokrifka 2024 section 3b, Eq.5, surrounding empirical limitations and warm-temperature comparison. Mathematical onset screen only.",
+  "quantities": {
+    "relative_excess_central": 0.27,
+    "relative_excess_range": [
+      0.2,
+      0.4
+    ],
+    "definition": "(rho_v-rho_ei)/(rho_el-rho_ei)"
+  },
+  "caveats": [
+    "An empirical transition range across heterogeneous measurements, not a universal size-free law or a calibrated deposition-density function.",
+    "Some cited experiments show size and pressure dependence. The broad criterion identifies substantial morphological change rather than a resolved transition time.",
+    "Original source bytes were not retrieved from the publisher. This record identifies the indexed author-copy excerpt used."
+  ],
+  "rights": "Retrieved fulltext remains in ignored cache; tracked calculations summarize and cite the primary source."
+}

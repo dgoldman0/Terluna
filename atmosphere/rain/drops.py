@@ -42,6 +42,8 @@ GROUND_RANGE_K = (273.15, 313.15)         # the warm-water domain at the ground
 CUTOFF_DIAMETER = 1e-6                    # m: a drop this small has evaporated
 CUTOFF_MASS = WATER_DENSITY * math.pi * CUTOFF_DIAMETER**3 / 6
 LARGEST_DIAMETER = 0.03                   # m: the solver's upper bound on size
+MASSMAN_DIFFUSIVITY = 2.178e-5            # m2/s, water vapour in air at 273.15 K and 1 atm (Massman 1998)
+MASSMAN_EXPONENT = 1.81                   # its temperature exponent
 
 # Each gas: molar mass (kg/mol), Lennard-Jones collision diameter (angstrom) and well depth over Boltzmann's constant
 # (K), and the coefficients of cp = c0 + c1 t + c2 t^2 + c3 t^3 (kJ/kg/K, t = T / 1000 K), as rainprops tabulates them
@@ -75,12 +77,23 @@ def liquid_saturation_pressure(temperature_k):
     return float(saturation_pressure(temperature_k))
 
 
+def vapour_diffusivity(temperature_k, pressure_pa):
+    """Diffusivity of water vapour in air (m2/s): Massman's (1998) measured fit, 0.2178 cm2/s at 273.15 K and 1 atm,
+    as (T / 273.15 K)^1.81 and inversely with pressure. The fit rests on measurements from 273.15 to 373.15 K,
+    corrected to 1 atm by the inverse pressure law, and is stated to 7% (as Miles and co-authors 2012 give it). The
+    drops' air, 0-40 C at 0.6-1.2 atm, lies within its temperatures; the inverse pressure law is kinetic theory's for a
+    dilute gas. It replaces rainprops' Chapman-Enskog value, which stands 17.6% below it at every temperature and
+    pressure the columns reach."""
+    return MASSMAN_DIFFUSIVITY * (temperature_k / 273.15) ** MASSMAN_EXPONENT * 101325.0 / pressure_pa
+
+
 def transport(temperature_k, pressure_pa, vapour_fraction, dry_fractions):
     """Viscosity (Pa s), vapour diffusivity (m2/s), thermal conductivity (W/m/K) and heat capacity (J/kg/K).
 
-    Each gas's Chapman-Enskog viscosity with the Neufeld collision integral, Eucken's conductivity, Wilke's mixing
-    rule for both, and the vapour's binary diffusion through each gas combined by Blanc's law with the vapour's own
-    self-diffusion term, as rainprops computes them (Reid, Prausnitz and Sherwood 1977).
+    Each gas's Chapman-Enskog viscosity with the Neufeld collision integral, Eucken's conductivity and Wilke's mixing
+    rule for both, as rainprops computes them (Reid, Prausnitz and Sherwood 1977); the vapour's diffusivity is
+    Massman's measured fit (vapour_diffusivity), the same in the Moon's air, whose nitrogen-richer mixture moves the
+    kinetic-theory value by 0.06%.
     """
     fractions = dict(dry_fractions)
     fractions['N2'] = fractions.get('N2', 0.0) + fractions.pop('Ar', 0.0)
@@ -103,13 +116,7 @@ def transport(temperature_k, pressure_pa, vapour_fraction, dry_fractions):
     viscosity = np.sum(x * viscosity_i / weight)
     conductivity = np.sum(x * conductivity_i / weight)
     heat_capacity = np.sum(x * molar * cp_i) / np.sum(x * molar)
-    pair_sigma = 0.5 * (sigma + GASES['H2O'][1])
-    t_star = temperature_k / np.sqrt(well * GASES['H2O'][2])
-    omega_d = (1.06036 / t_star**0.15610 + 0.193 / np.exp(0.47635 * t_star)
-               + 1.03587 / np.exp(1.52996 * t_star) + 1.76474 / np.exp(3.89411 * t_star))
-    binary = (1.858e-3 * np.sqrt(1 / (molar * 1e3) + 1 / (WATER_MOLAR_MASS * 1e3)) / pair_sigma**2
-              * temperature_k**1.5 / (pressure_pa / 101325.0) / omega_d * 1e-4)
-    diffusivity = 1.0 / np.sum(x / binary)
+    diffusivity = vapour_diffusivity(temperature_k, pressure_pa)
     return float(viscosity), float(diffusivity), float(conductivity), float(heat_capacity)
 
 

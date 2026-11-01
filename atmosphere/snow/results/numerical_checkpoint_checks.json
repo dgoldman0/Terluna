@@ -1,0 +1,42 @@
+{
+  "schema": "terluna.atmosphere.snow-numerical-checkpoint-checks/1",
+  "checked_at_utc": "2026-10-22T12:33:53.909701+00:00",
+  "branch": "domain/atmosphere",
+  "parent_commit": "802c321e658c1fe3f27ce274b69ae7721dcf1f52",
+  "scope": "Pre-commit verification of retained collision reconstruction controls, event columns, and passive column diagnosis. The following solver-reuse assessment is outside this checkpoint.",
+  "full_repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 make check",
+    "exit_code": 0,
+    "python_summary": [
+      "================= 3191 passed, 20 skipped in 533.44s (0:08:53) ================="
+    ],
+    "node_pass_counts": [
+      129,
+      48,
+      14
+    ],
+    "log": "/tmp/terluna-snow-checkpoint-make-check.log",
+    "log_sha256": "4f35e591a83b80d31f5eae9c4df4f7b4de1a3de72b251812292f843efc223451"
+  },
+  "retained_scientific_files": {
+    "previous_record": "atmosphere/snow/results/column_diagnosis_checks.json",
+    "count": 122,
+    "mismatches": []
+  },
+  "substantive_review": "Read the event and column-diagnosis methods, result reports and observer/analysis code; verified retained source/product identities and that unrelated research topics are unchanged semantically. Failed volume and timestep screens and uncalibrated physical closures remain explicit.",
+  "historical_records": "Earlier timestamped records retain their original uncommitted status and check scope. This additive record documents the later full repository check without rewriting those records or numerical products.",
+  "evidence_limit": "Passing software and provenance checks does not establish lunar size-distribution convergence, aggregate mechanical survival or a predictive snowstorm image.",
+  "staged_layer_check": {
+    "command": "python3 shared/check_layers.py",
+    "exit_code": 0,
+    "output": "check_layers: 1235 files checked, 0 violations",
+    "scope": "Run after staging all new Python and JavaScript sources, which the tracked-source checker otherwise omits."
+  },
+  "precommit_formatting": {
+    "path": "atmosphere/snow/column_diagnosis_results.md",
+    "change": "Removed one extra blank line at EOF; report text and numerical products unchanged.",
+    "before_sha256": "9aa4f08646633467fb755e1868fe62e21264bd17ba1bc23cf2c060252dd87458",
+    "after_sha256": "7bdb3e5f76ecfb020fbaff45663d39a7e89e780474b6c88102b02c787f74689b",
+    "historical_hash_scope": "The earlier diagnosis verification record identifies the report before this whitespace-only change."
+  }
+}

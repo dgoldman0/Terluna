@@ -1,0 +1,36 @@
+{
+  "schema": "terluna.atmosphere.welss-archive-sources/1",
+  "physical_source_ledger": "welss_column_sources.json",
+  "archive": "10.5281/zenodo.10077724, ob_hp0.nc; member identity and rights inherited from physical source ledger",
+  "observed_structure": "All four archived totals have finite bins at0,20,2960,2980m. The first two exclude a full opt0 five-point filter; the last two also exclude source zero-to-missing handling followed by that filter.",
+  "averaging_arithmetic": "Test mean lattices for4,30,31,32,61,62,93 samples using local ES12.2 quantum and two float32 ULP tolerance. This is an arithmetic consistency test, not identification of exact snapshot times.",
+  "sources": [
+    {
+      "url": "https://gitlab.dkrz.de/mcsnow/mcsnow/-/blob/1e428d7e901cbc5b91f2040e575f736ec5963a74/postprocessing/NCL/hprofiles.ncl",
+      "reading_extent": "Re-read zero-to-missing conversion, list-based filter call, time averaging and NetCDF write order. Its presence does not prove that the2023 archive used this2024 preprocessing version."
+    },
+    {
+      "url": "https://www.ncl.ucar.edu/Document/Manuals/Ref_Manual/NclVariables.shtml",
+      "reading_extent": "List construction/access and assignment documentation; no complete interpreter execution was performed."
+    }
+  ],
+  "ncl_source_inspection": [
+    {
+      "url": "https://raw.githubusercontent.com/NCAR/ncl/6.6.2/ni/src/ncl/NclList.c",
+      "bytes": 24537,
+      "sha256": "1c4ac38e8e32fdf0eb3a1d848708cff5e54a7f010e0684aec46fc15b80330c65"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NCAR/ncl/6.6.2/ni/src/ncl/ListSupport.c",
+      "bytes": 4679,
+      "sha256": "d5744913af913108ad03911714f96c858b2c3512783fc5874765568940cb58db"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NCAR/ncl/6.6.2/ni/src/ncl/Execute.c",
+      "bytes": 287435,
+      "sha256": "959fbd1154751a2b64fb1e81dbab7b55eac9d763103ebf69e1a0c595813b1ee5"
+    }
+  ],
+  "ncl_inspection_limit": "Read ListPush/ListAppend and relevant Execute list-read/assignment sections. This bounded inspection did not establish the entire list-assignment path; no claim that a list-aliasing bug caused the archive behavior. Archive masks and arithmetic independently support raw comparison.",
+  "external_bytes": "NCL source, NetCDF member and full papers are not copied into Git."
+}

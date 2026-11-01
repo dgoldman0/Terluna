@@ -1,0 +1,607 @@
+{
+  "schema": "terluna.atmosphere.scale-growth-verification/1",
+  "evidence": "Independent raw-output, trace, input and data-source checks; empirical adequacy is reported separately.",
+  "verifier_sha256": "ad340ffc2114e4190c8b78ed4f24c4536867c67d963d0b7bfbe869803ed86d95",
+  "native_runs": [
+    {
+      "case": "growth_sweep_3p7_dt5",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "analysis_sha256": "8befd29f6c43fb8a64a12631757ec6bd947db4c8c62bb43c6bc6b7dbf147bf95"
+    },
+    {
+      "case": "growth_sweep_3p7_dt1",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "analysis_sha256": "149a32382f311c901f4967908af415ff3a4b5d044769d4b76b22530f2bf2a366"
+    },
+    {
+      "case": "growth_sweep_5p3_dt5",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "analysis_sha256": "2518abd2812d03bdbb5fe3ae4b348b86d32ded17f9f5b78d91e1cb3f6034f1f2"
+    },
+    {
+      "case": "growth_sweep_5p3_dt1",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "analysis_sha256": "f8480ca6550146aba1771510701ce5df00da6affab9ccbedf9c54f3af9152b28"
+    },
+    {
+      "case": "growth_sweep_10p6_dt5",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "analysis_sha256": "9418924212eb4dc4d7f7339a983db4b31e609dbb988d4a45c12da6417570e24d"
+    },
+    {
+      "case": "growth_sweep_10p6_dt1",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "analysis_sha256": "53cb792b4521fbd14b453e21db70c50434b6419e81117fcd06ac0d41dab0461a"
+    },
+    {
+      "case": "growth_sweep_14p4_dt5",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "analysis_sha256": "806b0fac6ae2d698ae45b72e0d64794fda03d95e3b32f1be5c07657a5464bc78"
+    },
+    {
+      "case": "growth_sweep_14p4_dt1",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "analysis_sha256": "c378c2adb9d0fbb6072c10f3cb627e2bb0c6c65f469dcfb2a4486ef3852346a7"
+    },
+    {
+      "case": "growth_sweep_20p1_dt5",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "analysis_sha256": "451fb08ee05dd5d5bbaa921cb5fadd4fecaefbdaf30454336eaa2979a21e8c82"
+    },
+    {
+      "case": "growth_sweep_20p1_dt1",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true
+      },
+      "analysis_sha256": "c474d7eebcff934144a4895263dd9748d2e3f746c5a43c19877305f5d23219e9"
+    },
+    {
+      "case": "growth_sweep_14p4_dt5_control0",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true,
+        "growth_control.txt": true
+      },
+      "analysis_sha256": "3136fe89e0bdaeb4f1c06f3e2944e948dcd4d17d35c760c06f7472ef356b533d"
+    },
+    {
+      "case": "growth_sweep_14p4_dt1_control0",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true,
+        "growth_control.txt": true
+      },
+      "analysis_sha256": "4403325573415c43b870a84fc7578e08d54c8b0afb7256912b65ae8d6354cf0a"
+    },
+    {
+      "case": "growth_sweep_14p4_dt5_control1",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true,
+        "growth_control.txt": true
+      },
+      "analysis_sha256": "e8e4718559eeaacf5e2f050e6813b62a818da64ad8fd05884dd89e3bab952675"
+    },
+    {
+      "case": "growth_sweep_14p4_dt1_control1",
+      "physics_input_matches": {
+        "init.conf": true,
+        "run.conf": true,
+        "env.txt": true,
+        "particles.pe000000": true,
+        "lunar_forcing.txt": true,
+        "growth_control.txt": true
+      },
+      "analysis_sha256": "604df110ed09548ff9282a37ed6660be080ef09225424e8aab8b5f87afb79720"
+    }
+  ],
+  "traces": [
+    {
+      "case": "growth_sweep_14p4_dt5_control0",
+      "trace_rows": 324,
+      "trace_sha256": "527479f383be31b9a671f8b69df06cf9e3eaa1c590636ca7e22e604f87efafbe",
+      "snapshot_matches": 27,
+      "ranges": {
+        "intrinsic_growth_ratio": [
+          0.2818383,
+          0.2818383
+        ],
+        "effective_growth_ratio": [
+          0.03895191338280518,
+          0.2061940838729173
+        ],
+        "mean_ventilation": [
+          1.1732249506951247,
+          5.92543927647822
+        ],
+        "native_axis_ventilation_ratio": [
+          0.13820660067423476,
+          0.7316041995460422
+        ],
+        "axis_ventilation_ratio": [
+          0.13820660067423476,
+          0.7316041995460422
+        ],
+        "deposition_density_kg_m3": [
+          276.85183614231835,
+          276.85183614231835
+        ],
+        "capacitance_m": [
+          0.00012811861465001636,
+          0.008695376384837505
+        ],
+        "terminal_speed_m_s": [
+          0.06212468723668244,
+          0.23652000165171871
+        ],
+        "ice_supersaturation": [
+          0.1509834436485864,
+          0.1509834436485864
+        ]
+      },
+      "integrated_axis_growth_ratio": 0.11289774508941654,
+      "endpoint": {
+        "age_min": 30.0,
+        "elapsed_s": 1620.0,
+        "mass_kg": 1.3716652011876504e-06,
+        "equatorial_dimension_m": 0.02743985860096861,
+        "polar_dimension_m": 1.2565315561471065e-05,
+        "diameter_m": 0.02743985860096861,
+        "density_kg_m3": 276.8932447173143,
+        "terminal_speed_m_s": 0.23667210432022723,
+        "sha256": "ae5d48ea085785b3c43d6d50b1048b01c49d326f0bd698b28c7cc1fa12611925",
+        "observed_fit": {
+          "age_min": 30.0,
+          "mass_kg": 7.286269149125554e-08,
+          "equatorial_dimension_m": 0.004174524671856013,
+          "polar_dimension_m": 2.579619961642184e-05,
+          "diameter_m": 0.004174524671856013,
+          "habit": "broad branch to dendrite"
+        },
+        "observed_fall_speed_m_s": 0.297,
+        "fall_speed_ratio_to_fit": 0.7968757721219772,
+        "ratio_to_fit": {
+          "mass_kg": 18.825343575899442,
+          "equatorial_dimension_m": 6.5731695840639786,
+          "polar_dimension_m": 0.48709948551770377,
+          "diameter_m": 6.5731695840639786
+        },
+        "ledger_mass_error_kg": 0.0
+      }
+    },
+    {
+      "case": "growth_sweep_14p4_dt1_control0",
+      "trace_rows": 1620,
+      "trace_sha256": "96a016d4a85e78bb483f4e963f9b2de1ad6b3bb2e0eaab44dac7e29b97a403b1",
+      "snapshot_matches": 27,
+      "ranges": {
+        "intrinsic_growth_ratio": [
+          0.2818383,
+          0.2818383
+        ],
+        "effective_growth_ratio": [
+          0.03873651069917759,
+          0.2061940838729173
+        ],
+        "mean_ventilation": [
+          1.1732249506951247,
+          5.957106783314239
+        ],
+        "native_axis_ventilation_ratio": [
+          0.13744232313059507,
+          0.7316041995460422
+        ],
+        "axis_ventilation_ratio": [
+          0.13744232313059507,
+          0.7316041995460422
+        ],
+        "deposition_density_kg_m3": [
+          276.85183614231835,
+          276.85183614231835
+        ],
+        "capacitance_m": [
+          0.00012811861465001636,
+          0.00879927174659605
+        ],
+        "terminal_speed_m_s": [
+          0.06212468723668244,
+          0.23665794727631728
+        ],
+        "ice_supersaturation": [
+          0.1509834436485864,
+          0.1509834436485864
+        ]
+      },
+      "integrated_axis_growth_ratio": 0.11232696709600141,
+      "endpoint": {
+        "age_min": 30.0,
+        "elapsed_s": 1620.0,
+        "mass_kg": 1.3918603836678865e-06,
+        "equatorial_dimension_m": 0.027662042144265965,
+        "polar_dimension_m": 1.2546342991939522e-05,
+        "diameter_m": 0.027662042144265965,
+        "density_kg_m3": 276.892643811504,
+        "terminal_speed_m_s": 0.23668807397324795,
+        "sha256": "3c8bdc0f498ca01e2d8b2c47fa393b5297c36aad6729466906920aba3c9eaac2",
+        "observed_fit": {
+          "age_min": 30.0,
+          "mass_kg": 7.286269149125554e-08,
+          "equatorial_dimension_m": 0.004174524671856013,
+          "polar_dimension_m": 2.579619961642184e-05,
+          "diameter_m": 0.004174524671856013,
+          "habit": "broad branch to dendrite"
+        },
+        "observed_fall_speed_m_s": 0.297,
+        "fall_speed_ratio_to_fit": 0.7969295419974679,
+        "ratio_to_fit": {
+          "mass_kg": 19.102511246581216,
+          "equatorial_dimension_m": 6.626393258796406,
+          "polar_dimension_m": 0.48636400626829274,
+          "diameter_m": 6.626393258796406
+        },
+        "ledger_mass_error_kg": 2.117582368135751e-22
+      }
+    },
+    {
+      "case": "growth_sweep_14p4_dt5_control1",
+      "trace_rows": 324,
+      "trace_sha256": "7e9d41743885b26e0bf3cae043c32006e184e3c689bd9439d526c5a8ae64dc9a",
+      "snapshot_matches": 27,
+      "ranges": {
+        "intrinsic_growth_ratio": [
+          0.2818383,
+          0.2818383
+        ],
+        "effective_growth_ratio": [
+          0.2818383,
+          0.2818383
+        ],
+        "mean_ventilation": [
+          1.1732249506951247,
+          5.199242317659597
+        ],
+        "native_axis_ventilation_ratio": [
+          0.16888514841014296,
+          0.7316041995460422
+        ],
+        "axis_ventilation_ratio": [
+          1.0,
+          1.0
+        ],
+        "deposition_density_kg_m3": [
+          276.85183614231835,
+          276.85183614231835
+        ],
+        "capacitance_m": [
+          0.00012811861465001636,
+          0.005000068418769387
+        ],
+        "terminal_speed_m_s": [
+          0.06212468723668244,
+          0.30201825524226344
+        ],
+        "ice_supersaturation": [
+          0.1509834436485864,
+          0.1509834436485864
+        ]
+      },
+      "integrated_axis_growth_ratio": 0.2818382999999998,
+      "endpoint": {
+        "age_min": 30.0,
+        "elapsed_s": 1620.0,
+        "mass_kg": 7.906745174822421e-07,
+        "equatorial_dimension_m": 0.01575280272888342,
+        "polar_dimension_m": 2.197472036061964e-05,
+        "diameter_m": 0.01575280272888342,
+        "density_kg_m3": 276.92367979378156,
+        "terminal_speed_m_s": 0.3023523579186735,
+        "sha256": "cd5cf27bf8eb856e61237f06ef701610fee90072369ef6c300849f482867f698",
+        "observed_fit": {
+          "age_min": 30.0,
+          "mass_kg": 7.286269149125554e-08,
+          "equatorial_dimension_m": 0.004174524671856013,
+          "polar_dimension_m": 2.579619961642184e-05,
+          "diameter_m": 0.004174524671856013,
+          "habit": "broad branch to dendrite"
+        },
+        "observed_fall_speed_m_s": 0.297,
+        "fall_speed_ratio_to_fit": 1.018021407133581,
+        "ratio_to_fit": {
+          "mass_kg": 10.851568907211357,
+          "equatorial_dimension_m": 3.773556025452749,
+          "polar_dimension_m": 0.8518588275549919,
+          "diameter_m": 3.773556025452749
+        },
+        "ledger_mass_error_kg": 2.117582368135751e-22
+      }
+    },
+    {
+      "case": "growth_sweep_14p4_dt1_control1",
+      "trace_rows": 1620,
+      "trace_sha256": "6c1dba9c433d60d90854873fe4c70a971f3de55cb898079df47b6f9424ab449a",
+      "snapshot_matches": 27,
+      "ranges": {
+        "intrinsic_growth_ratio": [
+          0.2818383,
+          0.2818383
+        ],
+        "effective_growth_ratio": [
+          0.2818383,
+          0.2818383
+        ],
+        "mean_ventilation": [
+          1.1732249506951247,
+          5.218645693744584
+        ],
+        "native_axis_ventilation_ratio": [
+          0.1682994583988269,
+          0.7316041995460422
+        ],
+        "axis_ventilation_ratio": [
+          1.0,
+          1.0
+        ],
+        "deposition_density_kg_m3": [
+          276.85183614231835,
+          276.85183614231835
+        ],
+        "capacitance_m": [
+          0.00012811861465001636,
+          0.005034578056928567
+        ],
+        "terminal_speed_m_s": [
+          0.06212468723668244,
+          0.30263523262122666
+        ],
+        "ice_supersaturation": [
+          0.1509834436485864,
+          0.1509834436485864
+        ]
+      },
+      "integrated_axis_growth_ratio": 0.28183830000000115,
+      "endpoint": {
+        "age_min": 30.0,
+        "elapsed_s": 1620.0,
+        "mass_kg": 7.977387125482304e-07,
+        "equatorial_dimension_m": 0.015814343671713485,
+        "polar_dimension_m": 2.199888172084422e-05,
+        "diameter_m": 0.015814343671713485,
+        "density_kg_m3": 276.92304343491315,
+        "terminal_speed_m_s": 0.3027018458519965,
+        "sha256": "c1a1b56e7e4f698cd68cf595b8d46a105c2834f54b8255f4ddce59a8eb8f346c",
+        "observed_fit": {
+          "age_min": 30.0,
+          "mass_kg": 7.286269149125554e-08,
+          "equatorial_dimension_m": 0.004174524671856013,
+          "polar_dimension_m": 2.579619961642184e-05,
+          "diameter_m": 0.004174524671856013,
+          "habit": "broad branch to dendrite"
+        },
+        "observed_fall_speed_m_s": 0.297,
+        "fall_speed_ratio_to_fit": 1.0191981341818064,
+        "ratio_to_fit": {
+          "mass_kg": 10.948521063677276,
+          "equatorial_dimension_m": 3.7882980494357343,
+          "polar_dimension_m": 0.8527954523518165,
+          "diameter_m": 3.7882980494357343
+        },
+        "ledger_mass_error_kg": 1.0587911840678754e-22
+      }
+    }
+  ],
+  "build_producer_sha256": "e1fe9d0b310cd61a74c5036e0e5ea00779141fc709a0b072985d121bd3c6649d",
+  "measurements": {
+    "count": 169,
+    "missing_polar_axis": 79,
+    "md5_and_sha256_verified": true,
+    "unit_evidence": "Author plotting script and original paper, recorded in source register",
+    "workbook_sha256": "bfb05429b98aa4c5857f07a42f9594ddc8d1c7b9969baa025a1c34e448d72a63"
+  },
+  "mode_zero_parity": {
+    "5": {
+      "ledger_bytes_identical": true,
+      "identical_native_array_counts": {
+        "SD_output_NetCDF_00000000000.000.pe000000": 14,
+        "SD_output_NetCDF_00000000060.000.pe000000": 14,
+        "SD_output_NetCDF_00000000120.000.pe000000": 14,
+        "SD_output_NetCDF_00000000180.000.pe000000": 14,
+        "SD_output_NetCDF_00000000240.000.pe000000": 14,
+        "SD_output_NetCDF_00000000300.000.pe000000": 14,
+        "SD_output_NetCDF_00000000360.000.pe000000": 14,
+        "SD_output_NetCDF_00000000420.000.pe000000": 14,
+        "SD_output_NetCDF_00000000480.000.pe000000": 14,
+        "SD_output_NetCDF_00000000540.000.pe000000": 14,
+        "SD_output_NetCDF_00000000600.000.pe000000": 14,
+        "SD_output_NetCDF_00000000660.000.pe000000": 14,
+        "SD_output_NetCDF_00000000720.000.pe000000": 14,
+        "SD_output_NetCDF_00000000780.000.pe000000": 14,
+        "SD_output_NetCDF_00000000840.000.pe000000": 14,
+        "SD_output_NetCDF_00000000900.000.pe000000": 14,
+        "SD_output_NetCDF_00000000960.000.pe000000": 14,
+        "SD_output_NetCDF_00000001020.000.pe000000": 14,
+        "SD_output_NetCDF_00000001080.000.pe000000": 14,
+        "SD_output_NetCDF_00000001140.000.pe000000": 14,
+        "SD_output_NetCDF_00000001200.000.pe000000": 14,
+        "SD_output_NetCDF_00000001260.000.pe000000": 14,
+        "SD_output_NetCDF_00000001320.000.pe000000": 14,
+        "SD_output_NetCDF_00000001380.000.pe000000": 14,
+        "SD_output_NetCDF_00000001440.000.pe000000": 14,
+        "SD_output_NetCDF_00000001500.000.pe000000": 14,
+        "SD_output_NetCDF_00000001560.000.pe000000": 14,
+        "SD_output_NetCDF_00000001620.000.pe000000": 14,
+        "history.pe000000.nc": 81
+      }
+    },
+    "1": {
+      "ledger_bytes_identical": true,
+      "identical_native_array_counts": {
+        "SD_output_NetCDF_00000000000.000.pe000000": 14,
+        "SD_output_NetCDF_00000000060.000.pe000000": 14,
+        "SD_output_NetCDF_00000000120.000.pe000000": 14,
+        "SD_output_NetCDF_00000000180.000.pe000000": 14,
+        "SD_output_NetCDF_00000000240.000.pe000000": 14,
+        "SD_output_NetCDF_00000000300.000.pe000000": 14,
+        "SD_output_NetCDF_00000000360.000.pe000000": 14,
+        "SD_output_NetCDF_00000000420.000.pe000000": 14,
+        "SD_output_NetCDF_00000000480.000.pe000000": 14,
+        "SD_output_NetCDF_00000000540.000.pe000000": 14,
+        "SD_output_NetCDF_00000000600.000.pe000000": 14,
+        "SD_output_NetCDF_00000000660.000.pe000000": 14,
+        "SD_output_NetCDF_00000000720.000.pe000000": 14,
+        "SD_output_NetCDF_00000000780.000.pe000000": 14,
+        "SD_output_NetCDF_00000000840.000.pe000000": 14,
+        "SD_output_NetCDF_00000000900.000.pe000000": 14,
+        "SD_output_NetCDF_00000000960.000.pe000000": 14,
+        "SD_output_NetCDF_00000001020.000.pe000000": 14,
+        "SD_output_NetCDF_00000001080.000.pe000000": 14,
+        "SD_output_NetCDF_00000001140.000.pe000000": 14,
+        "SD_output_NetCDF_00000001200.000.pe000000": 14,
+        "SD_output_NetCDF_00000001260.000.pe000000": 14,
+        "SD_output_NetCDF_00000001320.000.pe000000": 14,
+        "SD_output_NetCDF_00000001380.000.pe000000": 14,
+        "SD_output_NetCDF_00000001440.000.pe000000": 14,
+        "SD_output_NetCDF_00000001500.000.pe000000": 14,
+        "SD_output_NetCDF_00000001560.000.pe000000": 14,
+        "SD_output_NetCDF_00000001620.000.pe000000": 14,
+        "history.pe000000.nc": 81
+      }
+    }
+  },
+  "legacy_case_parity": {
+    "5": {
+      "ledger_bytes_identical": true,
+      "identical_native_array_counts": {
+        "SD_output_NetCDF_00000000000.000.pe000000": 14,
+        "SD_output_NetCDF_00000000060.000.pe000000": 14,
+        "SD_output_NetCDF_00000000120.000.pe000000": 14,
+        "SD_output_NetCDF_00000000180.000.pe000000": 14,
+        "SD_output_NetCDF_00000000240.000.pe000000": 14,
+        "SD_output_NetCDF_00000000300.000.pe000000": 14,
+        "SD_output_NetCDF_00000000360.000.pe000000": 14,
+        "SD_output_NetCDF_00000000420.000.pe000000": 14,
+        "SD_output_NetCDF_00000000480.000.pe000000": 14,
+        "SD_output_NetCDF_00000000540.000.pe000000": 14,
+        "SD_output_NetCDF_00000000600.000.pe000000": 14,
+        "SD_output_NetCDF_00000000660.000.pe000000": 14,
+        "SD_output_NetCDF_00000000720.000.pe000000": 14,
+        "SD_output_NetCDF_00000000780.000.pe000000": 14,
+        "SD_output_NetCDF_00000000840.000.pe000000": 14,
+        "SD_output_NetCDF_00000000900.000.pe000000": 14,
+        "SD_output_NetCDF_00000000960.000.pe000000": 14,
+        "SD_output_NetCDF_00000001020.000.pe000000": 14,
+        "SD_output_NetCDF_00000001080.000.pe000000": 14,
+        "SD_output_NetCDF_00000001140.000.pe000000": 14,
+        "SD_output_NetCDF_00000001200.000.pe000000": 14,
+        "SD_output_NetCDF_00000001260.000.pe000000": 14,
+        "SD_output_NetCDF_00000001320.000.pe000000": 14,
+        "SD_output_NetCDF_00000001380.000.pe000000": 14,
+        "SD_output_NetCDF_00000001440.000.pe000000": 14,
+        "SD_output_NetCDF_00000001500.000.pe000000": 14,
+        "SD_output_NetCDF_00000001560.000.pe000000": 14,
+        "SD_output_NetCDF_00000001620.000.pe000000": 14,
+        "history.pe000000.nc": 81
+      }
+    },
+    "1": {
+      "ledger_bytes_identical": true,
+      "identical_native_array_counts": {
+        "SD_output_NetCDF_00000000000.000.pe000000": 14,
+        "SD_output_NetCDF_00000000060.000.pe000000": 14,
+        "SD_output_NetCDF_00000000120.000.pe000000": 14,
+        "SD_output_NetCDF_00000000180.000.pe000000": 14,
+        "SD_output_NetCDF_00000000240.000.pe000000": 14,
+        "SD_output_NetCDF_00000000300.000.pe000000": 14,
+        "SD_output_NetCDF_00000000360.000.pe000000": 14,
+        "SD_output_NetCDF_00000000420.000.pe000000": 14,
+        "SD_output_NetCDF_00000000480.000.pe000000": 14,
+        "SD_output_NetCDF_00000000540.000.pe000000": 14,
+        "SD_output_NetCDF_00000000600.000.pe000000": 14,
+        "SD_output_NetCDF_00000000660.000.pe000000": 14,
+        "SD_output_NetCDF_00000000720.000.pe000000": 14,
+        "SD_output_NetCDF_00000000780.000.pe000000": 14,
+        "SD_output_NetCDF_00000000840.000.pe000000": 14,
+        "SD_output_NetCDF_00000000900.000.pe000000": 14,
+        "SD_output_NetCDF_00000000960.000.pe000000": 14,
+        "SD_output_NetCDF_00000001020.000.pe000000": 14,
+        "SD_output_NetCDF_00000001080.000.pe000000": 14,
+        "SD_output_NetCDF_00000001140.000.pe000000": 14,
+        "SD_output_NetCDF_00000001200.000.pe000000": 14,
+        "SD_output_NetCDF_00000001260.000.pe000000": 14,
+        "SD_output_NetCDF_00000001320.000.pe000000": 14,
+        "SD_output_NetCDF_00000001380.000.pe000000": 14,
+        "SD_output_NetCDF_00000001440.000.pe000000": 14,
+        "SD_output_NetCDF_00000001500.000.pe000000": 14,
+        "SD_output_NetCDF_00000001560.000.pe000000": 14,
+        "SD_output_NetCDF_00000001620.000.pe000000": 14,
+        "history.pe000000.nc": 81
+      }
+    }
+  }
+}

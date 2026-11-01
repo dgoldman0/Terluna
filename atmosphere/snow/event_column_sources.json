@@ -1,0 +1,38 @@
+{
+  "schema": "terluna.atmosphere.snow-event-column-sources/1",
+  "review_date": "2026-10-21",
+  "scope": "Method lineage for a local positive-tree thinning extension of the independent finite-volume collision reference into the complete prescribed column.",
+  "sources": [
+    {
+      "id": "eibeck_wagner_2000",
+      "authors": "Andreas Eibeck and Wolfgang Wagner",
+      "title": "An Efficient Stochastic Algorithm for Studying Coagulation Dynamics and Gelation Phenomena",
+      "publication": "SIAM Journal on Scientific Computing 22(3), 802–821 (2000)",
+      "doi": "10.1137/S1064827599353488",
+      "url": "https://epubs.siam.org/doi/abs/10.1137/S1064827599353488",
+      "reading_extent": "Publisher abstract and bibliographic record only. The full algorithm, proofs, experiments and figures were not read.",
+      "use": "Published lineage for fictitious jumps and acceptance–rejection in stochastic coalescence; the specific separable majorant and positive tree are local derivations.",
+      "limit": "No theorem from this abstract-only reading is claimed for the snow kernel or coupled column."
+    }
+  ],
+  "retrieval_limits": [
+    "A WIAS page for the related 2001 Eibeck–Wagner stochastic-particle approximation paper returned a browser cache miss; that retrieval did not supply inspected full-paper evidence.",
+    "Search results for weighted-particle methods informed method selection only. No weighted-particle convergence theorem or implementation is claimed or adopted here."
+  ],
+  "local_derivations": [
+    "The snow encounter kernel is bounded by 2 C (D_i^2+D_j^2)(v_i+v_j). Factoring its ordered pair sum yields the two positive mixture components used to propose unordered pairs, including rejected self-pairs.",
+    "Thinning with K/Kbar preserves the unordered finite-volume collision rate K/V at fixed masses and layer properties.",
+    "Positive sum-tree parent recomputation avoids accumulated subtractive rate-sum drift; it does not remove ordinary floating-point summation error.",
+    "Whole-fragment allocation plus a retained remainder preserves expected chip mass and number. Remainder mass is bounded by one prescribed fragment per layer; delayed participation remains an approximation requiring volume controls.",
+    "Independent exponential downward layer transitions generate the frozen upwind settling equation in expectation.",
+    "The positive Heun growth stages share the prescribed vapour supply and preserve a water source ledger. Split-time and sampling errors require independent controls."
+  ],
+  "inherited_physical_evidence": [
+    "habits_sources.json",
+    "geometry_sources.json",
+    "strength_sources.json",
+    "collision_reference.md"
+  ],
+  "external_bytes": "No external datasets or full-paper bytes were added. The source-bound direct-event reference already belongs to this repository.",
+  "evidence_state": "Implemented numerical method with separate closed-box and full-column controls; physical geometry, breakup and moist exposure retain their existing evidence limits."
+}

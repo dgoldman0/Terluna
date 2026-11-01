@@ -90,7 +90,7 @@
     "dry_molar_mass_kg_mol": 0.028831461087186188,
     "density_kg_m3": 1.361776033365802,
     "viscosity_pa_s": 1.8305512572379006e-05,
-    "vapour_diffusivity_m2_s": 1.8756199810419378e-05
+    "vapour_diffusivity_m2_s": 2.23902906185136e-05
    },
    "earth": {
     "gravity_m_s2": 9.80665,
@@ -106,7 +106,7 @@
     "dry_molar_mass_kg_mol": 0.02896573152,
     "density_kg_m3": 1.1378651782417468,
     "viscosity_pa_s": 1.836829730634616e-05,
-    "vapour_diffusivity_m2_s": 2.2483845878148265e-05
+    "vapour_diffusivity_m2_s": 2.686834874221632e-05
    },
    "moon_air_earth_gravity": {
     "gravity_m_s2": 9.80665,
@@ -122,7 +122,7 @@
     "dry_molar_mass_kg_mol": 0.028831461087186188,
     "density_kg_m3": 1.361776033365802,
     "viscosity_pa_s": 1.8305512572379006e-05,
-    "vapour_diffusivity_m2_s": 1.8756199810419378e-05
+    "vapour_diffusivity_m2_s": 2.23902906185136e-05
    }
   },
   "resort": {
@@ -140,7 +140,7 @@
     "dry_molar_mass_kg_mol": 0.028831461087186188,
     "density_kg_m3": 1.3938769667041175,
     "viscosity_pa_s": 1.807851743125031e-05,
-    "vapour_diffusivity_m2_s": 1.8023631051807614e-05
+    "vapour_diffusivity_m2_s": 2.156250738291999e-05
    },
    "earth": {
     "gravity_m_s2": 9.80665,
@@ -156,7 +156,7 @@
     "dry_molar_mass_kg_mol": 0.02896573152,
     "density_kg_m3": 1.1653000089382177,
     "viscosity_pa_s": 1.8149773878709828e-05,
-    "vapour_diffusivity_m2_s": 2.1608517303900197e-05
+    "vapour_diffusivity_m2_s": 2.5875008859503987e-05
    },
    "moon_air_earth_gravity": {
     "gravity_m_s2": 9.80665,
@@ -172,7 +172,7 @@
     "dry_molar_mass_kg_mol": 0.028831461087186188,
     "density_kg_m3": 1.3938769667041175,
     "viscosity_pa_s": 1.807851743125031e-05,
-    "vapour_diffusivity_m2_s": 1.8023631051807614e-05
+    "vapour_diffusivity_m2_s": 2.156250738291999e-05
    }
   },
   "lock": {
@@ -190,7 +190,7 @@
     "dry_molar_mass_kg_mol": 0.028831461087186188,
     "density_kg_m3": 1.4291233293387593,
     "viscosity_pa_s": 1.781481019175474e-05,
-    "vapour_diffusivity_m2_s": 1.7240567417003656e-05
+    "vapour_diffusivity_m2_s": 2.068251087760743e-05
    },
    "earth": {
     "gravity_m_s2": 9.80665,
@@ -206,7 +206,7 @@
     "dry_molar_mass_kg_mol": 0.02896573152,
     "density_kg_m3": 1.195257906244351,
     "viscosity_pa_s": 1.789195170418773e-05,
-    "vapour_diffusivity_m2_s": 2.0671688268232123e-05
+    "vapour_diffusivity_m2_s": 2.4819013053128915e-05
    },
    "moon_air_earth_gravity": {
     "gravity_m_s2": 9.80665,
@@ -222,7 +222,7 @@
     "dry_molar_mass_kg_mol": 0.028831461087186188,
     "density_kg_m3": 1.4291233293387593,
     "viscosity_pa_s": 1.781481019175474e-05,
-    "vapour_diffusivity_m2_s": 1.7240567417003656e-05
+    "vapour_diffusivity_m2_s": 2.068251087760743e-05
    }
   }
  },
@@ -556,7 +556,7 @@
     "cloud_base_k": 294.99436636974843,
     "cloud_base_pa": 106003.60334872462,
     "lapse_k_km": 1.5889185892249602,
-    "smallest_surviving_mm": 2.43029034170701,
+    "smallest_surviving_mm": 2.4712424308570697,
     "drops": [
      {
       "initial_diameter_mm": 0.2,
@@ -564,7 +564,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 2721.6620388138604
+      "fall_time_s": 2652.054902264038
      },
      {
       "initial_diameter_mm": 0.3,
@@ -572,7 +572,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 2821.4767184747657
+      "fall_time_s": 2752.523401304003
      },
      {
       "initial_diameter_mm": 0.5,
@@ -580,7 +580,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 2994.727239298433
+      "fall_time_s": 2925.9731937313986
      },
      {
       "initial_diameter_mm": 0.7,
@@ -588,7 +588,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3149.5517599403092
+      "fall_time_s": 3080.314685222783
      },
      {
       "initial_diameter_mm": 1.0,
@@ -596,7 +596,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3348.1827505604665
+      "fall_time_s": 3278.070917547619
      },
      {
       "initial_diameter_mm": 1.5,
@@ -604,7 +604,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3614.2758832397944
+      "fall_time_s": 3542.956770874122
      },
      {
       "initial_diameter_mm": 2.0,
@@ -612,39 +612,39 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3829.4895222037294
+      "fall_time_s": 3757.306703280129
      },
      {
       "initial_diameter_mm": 3.0,
       "status": "surface",
-      "surviving_water_fraction": 0.2311892818602299,
-      "surface_diameter_mm": 1.841240362692981,
-      "impact_speed_m_s": 1.9980994612445497,
-      "fall_time_s": 2744.818419402711
+      "surviving_water_fraction": 0.2103252700226651,
+      "surface_diameter_mm": 1.7840967678667148,
+      "impact_speed_m_s": 1.9461719182187125,
+      "fall_time_s": 2761.284445281731
      },
      {
       "initial_diameter_mm": 4.0,
       "status": "surface",
-      "surviving_water_fraction": 0.5174478479138902,
-      "surface_diameter_mm": 3.211309664653214,
-      "impact_speed_m_s": 3.071938557685642,
-      "fall_time_s": 2123.486896660753
+      "surviving_water_fraction": 0.5020784723039906,
+      "surface_diameter_mm": 3.1791951811175645,
+      "impact_speed_m_s": 3.0502057957596977,
+      "fall_time_s": 2127.707890357832
      },
      {
       "initial_diameter_mm": 5.0,
       "status": "surface",
-      "surviving_water_fraction": 0.6706792608846175,
-      "surface_diameter_mm": 4.376648110238328,
-      "impact_speed_m_s": 3.7601619349362045,
-      "fall_time_s": 1823.5358986862568
+      "surviving_water_fraction": 0.659635792348284,
+      "surface_diameter_mm": 4.352492939192491,
+      "impact_speed_m_s": 3.747861717932055,
+      "fall_time_s": 1825.3139986160015
      },
      {
       "initial_diameter_mm": 6.0,
       "status": "surface",
-      "surviving_water_fraction": 0.7594945012051043,
-      "surface_diameter_mm": 5.474268923856027,
-      "impact_speed_m_s": 4.250981308314141,
-      "fall_time_s": 1648.6936584916944
+      "surviving_water_fraction": 0.751194576367878,
+      "surface_diameter_mm": 5.454254495653714,
+      "impact_speed_m_s": 4.2433769417850495,
+      "fall_time_s": 1649.588612694879
      }
     ],
     "rain": {
@@ -659,63 +659,63 @@
        "dm_mm": 0.75,
        "shape_mu": 0.0,
        "realized_dm_mm": 0.7514836414759526,
-       "water_survival_fraction": 0.0003358154824215661,
+       "water_survival_fraction": 0.0002766258920863653,
        "number_survival_fraction": 3.4410528387556214e-05,
-       "arrival_diameter_mm_by_number": 1.071498497955576,
-       "arrival_speed_m_s_by_number": 1.2295557125489192
+       "arrival_diameter_mm_by_number": 0.9489514681832738,
+       "arrival_speed_m_s_by_number": 1.090001093538588
       },
       {
        "dm_mm": 0.75,
        "shape_mu": 3.0,
        "realized_dm_mm": 0.750035885199126,
-       "water_survival_fraction": 6.286542651170085e-06,
+       "water_survival_fraction": 4.621284525933927e-06,
        "number_survival_fraction": 1.446977972684861e-06,
-       "arrival_diameter_mm_by_number": 0.9634845625179528,
-       "arrival_speed_m_s_by_number": 1.1113689680626373
+       "arrival_diameter_mm_by_number": 0.8228015045974448,
+       "arrival_speed_m_s_by_number": 0.9466347921975057
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 1.4997904911517754,
-       "water_survival_fraction": 0.04554714561508583,
+       "water_survival_fraction": 0.0418387160721181,
        "number_survival_fraction": 0.010518729275184822,
-       "arrival_diameter_mm_by_number": 1.3845894855629155,
-       "arrival_speed_m_s_by_number": 1.560648601268021
+       "arrival_diameter_mm_by_number": 1.3034435161282538,
+       "arrival_speed_m_s_by_number": 1.4779532201966266
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 1.4999983051032082,
-       "water_survival_fraction": 0.017027048976754892,
+       "water_survival_fraction": 0.015001488576802521,
        "number_survival_fraction": 0.009900985870185801,
-       "arrival_diameter_mm_by_number": 1.2152566729967473,
-       "arrival_speed_m_s_by_number": 1.3868531078578499
+       "arrival_diameter_mm_by_number": 1.1168472908207319,
+       "arrival_speed_m_s_by_number": 1.2808105271518904
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 2.439526735515278,
-       "water_survival_fraction": 0.21983400808239878,
+       "water_survival_fraction": 0.2097815565335473,
        "number_survival_fraction": 0.08769903455343091,
-       "arrival_diameter_mm_by_number": 1.7631431000397295,
-       "arrival_speed_m_s_by_number": 1.9244586371857768
+       "arrival_diameter_mm_by_number": 1.7025237599901162,
+       "arrival_speed_m_s_by_number": 1.8681541194843634
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 2.4906323183677914,
-       "water_survival_fraction": 0.184605236383197,
+       "water_survival_fraction": 0.17410187759095888,
        "number_survival_fraction": 0.16671649692285243,
-       "arrival_diameter_mm_by_number": 1.6395417563603782,
-       "arrival_speed_m_s_by_number": 1.8113975022577373
+       "arrival_diameter_mm_by_number": 1.574280083788969,
+       "arrival_speed_m_s_by_number": 1.7492832332623771
       }
      ],
      "central_encounters": {
       "dm_mm": 1.5,
       "shape_mu": 3.0,
       "rain_mm_h": 5.0,
-      "tau_by_surface_water": 33.57660477361709,
-      "volume_exposure_by_surface_water": 1.116547049727152,
+      "tau_by_surface_water": 34.44556080900551,
+      "volume_exposure_by_surface_water": 1.0874652663929933,
       "surface_water_share_tau_above_1": 1.0
      }
     }
@@ -725,7 +725,7 @@
     "cloud_base_k": 294.99108407343306,
     "cloud_base_pa": 88318.62907169748,
     "lapse_k_km": 9.60801401510167,
-    "smallest_surviving_mm": 0.7523938669172336,
+    "smallest_surviving_mm": 0.7629444288669984,
     "drops": [
      {
       "initial_diameter_mm": 0.2,
@@ -733,7 +733,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 460.86804916717216
+      "fall_time_s": 451.16034701173055
      },
      {
       "initial_diameter_mm": 0.3,
@@ -741,7 +741,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 484.14569845597225
+      "fall_time_s": 474.5138239340348
      },
      {
       "initial_diameter_mm": 0.5,
@@ -749,7 +749,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 524.0329334835202
+      "fall_time_s": 514.424807085472
      },
      {
       "initial_diameter_mm": 0.7,
@@ -757,63 +757,63 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 556.5742036800983
+      "fall_time_s": 546.9742459772337
      },
      {
       "initial_diameter_mm": 1.0,
       "status": "surface",
-      "surviving_water_fraction": 0.36721288447243927,
-      "surface_diameter_mm": 0.7160982905493438,
-      "impact_speed_m_s": 2.863525531083513,
-      "fall_time_s": 340.70322087669683
+      "surviving_water_fraction": 0.34941795532487463,
+      "surface_diameter_mm": 0.7043390047711207,
+      "impact_speed_m_s": 2.821033706397591,
+      "fall_time_s": 342.0196018651131
      },
      {
       "initial_diameter_mm": 1.5,
       "status": "surface",
-      "surviving_water_fraction": 0.7011081172969755,
-      "surface_diameter_mm": 1.332558419084061,
-      "impact_speed_m_s": 4.800950965463275,
-      "fall_time_s": 234.62561886887093
+      "surviving_water_fraction": 0.6918062656977197,
+      "surface_diameter_mm": 1.3266389869459878,
+      "impact_speed_m_s": 4.784869214288512,
+      "fall_time_s": 234.86783613419996
      },
      {
       "initial_diameter_mm": 2.0,
       "status": "surface",
-      "surviving_water_fraction": 0.8263542768099618,
-      "surface_diameter_mm": 1.8768032869446438,
-      "impact_speed_m_s": 6.117995960065654,
-      "fall_time_s": 190.11993114130246
+      "surviving_water_fraction": 0.8207425792780216,
+      "surface_diameter_mm": 1.8725452329181196,
+      "impact_speed_m_s": 6.109003332891633,
+      "fall_time_s": 190.2073621941495
      },
      {
       "initial_diameter_mm": 3.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9186805146850123,
-      "surface_diameter_mm": 2.916370901826278,
-      "impact_speed_m_s": 7.821660431980116,
-      "fall_time_s": 151.4477170859262
+      "surviving_water_fraction": 0.9158870124212439,
+      "surface_diameter_mm": 2.913411889711619,
+      "impact_speed_m_s": 7.8192594702560605,
+      "fall_time_s": 151.46662471378534
      },
      {
       "initial_diameter_mm": 4.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9521695636970718,
-      "surface_diameter_mm": 3.9351813956498836,
-      "impact_speed_m_s": 8.736586606041312,
-      "fall_time_s": 136.2325727418817
+      "surviving_water_fraction": 0.9504188282326244,
+      "surface_diameter_mm": 3.932768069033957,
+      "impact_speed_m_s": 8.735619499482397,
+      "fall_time_s": 136.23583056794544
      },
      {
       "initial_diameter_mm": 5.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9682789255063592,
-      "surface_diameter_mm": 4.9465624630345,
-      "impact_speed_m_s": 9.18595730923278,
-      "fall_time_s": 129.75984205296047
+      "surviving_water_fraction": 0.9670359417786558,
+      "surface_diameter_mm": 4.944444915663992,
+      "impact_speed_m_s": 9.186140491087492,
+      "fall_time_s": 129.75765498392968
      },
      {
       "initial_diameter_mm": 6.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9774040246545123,
-      "surface_diameter_mm": 5.95446332548748,
-      "impact_speed_m_s": 9.36803395005674,
-      "fall_time_s": 127.29538196372472
+      "surviving_water_fraction": 0.9764538978041949,
+      "surface_diameter_mm": 5.952533270793229,
+      "impact_speed_m_s": 9.36873998807248,
+      "fall_time_s": 127.29096025955187
      }
     ],
     "rain": {
@@ -828,64 +828,64 @@
        "dm_mm": 0.75,
        "shape_mu": 0.0,
        "realized_dm_mm": 0.7514836414759526,
-       "water_survival_fraction": 0.2604339961833757,
+       "water_survival_fraction": 0.2515947741651982,
        "number_survival_fraction": 0.09324009546325389,
-       "arrival_diameter_mm_by_number": 0.609008717916392,
-       "arrival_speed_m_s_by_number": 2.4646847221377217
+       "arrival_diameter_mm_by_number": 0.5945256511915245,
+       "arrival_speed_m_s_by_number": 2.40920823478275
       },
       {
        "dm_mm": 0.75,
        "shape_mu": 3.0,
        "realized_dm_mm": 0.7500358851991258,
-       "water_survival_fraction": 0.20346464776529824,
+       "water_survival_fraction": 0.19423100242439797,
        "number_survival_fraction": 0.14965954238735563,
-       "arrival_diameter_mm_by_number": 0.5655683305338486,
-       "arrival_speed_m_s_by_number": 2.298485175172796
+       "arrival_diameter_mm_by_number": 0.5496987500090774,
+       "arrival_speed_m_s_by_number": 2.236316512913246
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 1.4997904911517757,
-       "water_survival_fraction": 0.6527704691143972,
+       "water_survival_fraction": 0.6445998477891738,
        "number_survival_fraction": 0.38637147017402773,
-       "arrival_diameter_mm_by_number": 0.8678393070636515,
-       "arrival_speed_m_s_by_number": 3.390677815881433
+       "arrival_diameter_mm_by_number": 0.8584320345690031,
+       "arrival_speed_m_s_by_number": 3.359085392136888
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 1.499998305103208,
-       "water_survival_fraction": 0.66047925649074,
+       "water_survival_fraction": 0.6514726835646707,
        "number_survival_fraction": 0.683367226661696,
-       "arrival_diameter_mm_by_number": 0.9326613692390924,
-       "arrival_speed_m_s_by_number": 3.605018767971101
+       "arrival_diameter_mm_by_number": 0.9239857164095924,
+       "arrival_speed_m_s_by_number": 3.5768213069001757
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 2.439526735515278,
-       "water_survival_fraction": 0.8325836638084492,
+       "water_survival_fraction": 0.8277315700033585,
        "number_survival_fraction": 0.6245590169301816,
-       "arrival_diameter_mm_by_number": 1.1859308804217437,
-       "arrival_speed_m_s_by_number": 4.38551791221847
+       "arrival_diameter_mm_by_number": 1.1792411317930138,
+       "arrival_speed_m_s_by_number": 4.365950676241699
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 2.4906323183677923,
-       "water_survival_fraction": 0.8548493637691205,
+       "water_survival_fraction": 0.8502656127644662,
        "number_survival_fraction": 0.9170437235742219,
-       "arrival_diameter_mm_by_number": 1.493264723569216,
-       "arrival_speed_m_s_by_number": 5.223154704745363
+       "arrival_diameter_mm_by_number": 1.4879737301930072,
+       "arrival_speed_m_s_by_number": 5.209866507337548
       }
      ],
      "central_encounters": {
       "dm_mm": 1.5,
       "shape_mu": 3.0,
       "rain_mm_h": 5.0,
-      "tau_by_surface_water": 1.3686175723861553,
-      "volume_exposure_by_surface_water": 0.44625559793080155,
-      "surface_water_share_tau_above_1": 0.558746355972606
+      "tau_by_surface_water": 1.3570073451784008,
+      "volume_exposure_by_surface_water": 0.43903512367850334,
+      "surface_water_share_tau_above_1": 0.5629284137939737
      }
     }
    }
@@ -896,7 +896,7 @@
     "cloud_base_k": 290.29297103639936,
     "cloud_base_pa": 107798.8054508241,
     "lapse_k_km": 1.5944869773205734,
-    "smallest_surviving_mm": 2.0278629002760056,
+    "smallest_surviving_mm": 2.0735515885272906,
     "drops": [
      {
       "initial_diameter_mm": 0.2,
@@ -904,7 +904,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 2854.9268194120586
+      "fall_time_s": 2767.107223126341
      },
      {
       "initial_diameter_mm": 0.3,
@@ -912,7 +912,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 2959.8670387935676
+      "fall_time_s": 2872.9899468637072
      },
      {
       "initial_diameter_mm": 0.5,
@@ -920,7 +920,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3142.3483403075775
+      "fall_time_s": 3055.878299732309
      },
      {
       "initial_diameter_mm": 0.7,
@@ -928,7 +928,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3304.6830914343186
+      "fall_time_s": 3217.7906814168123
      },
      {
       "initial_diameter_mm": 1.0,
@@ -936,7 +936,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3511.8124623842223
+      "fall_time_s": 3424.103493013625
      },
      {
       "initial_diameter_mm": 1.5,
@@ -944,7 +944,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3787.5929191021987
+      "fall_time_s": 3698.8468384578423
      },
      {
       "initial_diameter_mm": 2.0,
@@ -952,39 +952,39 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 4009.461762139517
+      "fall_time_s": 3920.089618096838
      },
      {
       "initial_diameter_mm": 3.0,
       "status": "surface",
-      "surviving_water_fraction": 0.4363166660547837,
-      "surface_diameter_mm": 2.275386561272907,
-      "impact_speed_m_s": 2.357704671943643,
-      "fall_time_s": 2282.1043159497153
+      "surviving_water_fraction": 0.4150507181651739,
+      "surface_diameter_mm": 2.2378019327568506,
+      "impact_speed_m_s": 2.3269585931909633,
+      "fall_time_s": 2290.245146524931
      },
      {
       "initial_diameter_mm": 4.0,
       "status": "surface",
-      "surviving_water_fraction": 0.6587827391917183,
-      "surface_diameter_mm": 3.480492710774629,
-      "impact_speed_m_s": 3.224069633537054,
-      "fall_time_s": 1814.6940097094468
+      "surviving_water_fraction": 0.6449088456534346,
+      "surface_diameter_mm": 3.455886223201629,
+      "impact_speed_m_s": 3.2086505173020927,
+      "fall_time_s": 1817.2967301169658
      },
      {
       "initial_diameter_mm": 5.0,
       "status": "surface",
-      "surviving_water_fraction": 0.7703849499875666,
-      "surface_diameter_mm": 4.58359180541718,
-      "impact_speed_m_s": 3.8323077704715502,
-      "fall_time_s": 1571.781272569104
+      "surviving_water_fraction": 0.7607495723207801,
+      "surface_diameter_mm": 4.564402241396174,
+      "impact_speed_m_s": 3.8232097708069084,
+      "fall_time_s": 1572.9392164921737
      },
      {
       "initial_diameter_mm": 6.0,
       "status": "surface",
-      "surviving_water_fraction": 0.833640566685643,
-      "surface_diameter_mm": 5.646909970399225,
-      "impact_speed_m_s": 4.278540327112788,
-      "fall_time_s": 1426.9127594572092
+      "surviving_water_fraction": 0.8265150915492789,
+      "surface_diameter_mm": 5.630775077137963,
+      "impact_speed_m_s": 4.272836672682354,
+      "fall_time_s": 1427.5073327976547
      }
     ],
     "rain": {
@@ -999,63 +999,63 @@
        "dm_mm": 0.75,
        "shape_mu": 0.0,
        "realized_dm_mm": 0.7514836414759526,
-       "water_survival_fraction": 0.002032643449534665,
+       "water_survival_fraction": 0.001662193928195313,
        "number_survival_fraction": 0.00029349230901411943,
-       "arrival_diameter_mm_by_number": 0.904460044622801,
-       "arrival_speed_m_s_by_number": 1.0404486369929935
+       "arrival_diameter_mm_by_number": 0.7660283407322184,
+       "arrival_speed_m_s_by_number": 0.8734704937488829
       },
       {
        "dm_mm": 0.75,
        "shape_mu": 3.0,
        "realized_dm_mm": 0.750035885199126,
-       "water_survival_fraction": 0.0001158006617144006,
+       "water_survival_fraction": 8.257140354546948e-05,
        "number_survival_fraction": 4.0059632605285976e-05,
-       "arrival_diameter_mm_by_number": 0.7923142464433776,
-       "arrival_speed_m_s_by_number": 0.9100875206333086
+       "arrival_diameter_mm_by_number": 0.6164213654229237,
+       "arrival_speed_m_s_by_number": 0.6895116157005363
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 1.4997904911517757,
-       "water_survival_fraction": 0.09895963323699535,
+       "water_survival_fraction": 0.09124678611625252,
        "number_survival_fraction": 0.028924453898509873,
-       "arrival_diameter_mm_by_number": 1.2375091795320914,
-       "arrival_speed_m_s_by_number": 1.4039232045405678
+       "arrival_diameter_mm_by_number": 1.160235779053919,
+       "arrival_speed_m_s_by_number": 1.3227451761896694
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 1.499998305103208,
-       "water_survival_fraction": 0.053112301632623336,
+       "water_survival_fraction": 0.04715256521779175,
        "number_survival_fraction": 0.038328686525901164,
-       "arrival_diameter_mm_by_number": 1.0960472875343017,
-       "arrival_speed_m_s_by_number": 1.2558528088475154
+       "arrival_diameter_mm_by_number": 1.006160742737695,
+       "arrival_speed_m_s_by_number": 1.1578057303951745
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 2.439526735515277,
-       "water_survival_fraction": 0.3344023316623145,
+       "water_survival_fraction": 0.32063323845047326,
        "number_survival_fraction": 0.155270092323276,
-       "arrival_diameter_mm_by_number": 1.617386311133684,
-       "arrival_speed_m_s_by_number": 1.7803432053759172
+       "arrival_diameter_mm_by_number": 1.562626234816488,
+       "arrival_speed_m_s_by_number": 1.7284538967398937
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 2.4906323183677923,
-       "water_survival_fraction": 0.30933618592623885,
+       "water_survival_fraction": 0.2939572815367392,
        "number_survival_fraction": 0.3083161716480433,
-       "arrival_diameter_mm_by_number": 1.55892007155422,
-       "arrival_speed_m_s_by_number": 1.724199477613938
+       "arrival_diameter_mm_by_number": 1.5014905458937466,
+       "arrival_speed_m_s_by_number": 1.6689103949138369
       }
      ],
      "central_encounters": {
       "dm_mm": 1.5,
       "shape_mu": 3.0,
       "rain_mm_h": 5.0,
-      "tau_by_surface_water": 29.458791894842253,
-      "volume_exposure_by_surface_water": 1.3016112944212404,
+      "tau_by_surface_water": 27.19183512625062,
+      "volume_exposure_by_surface_water": 1.2596358504829086,
       "surface_water_share_tau_above_1": 1.0
      }
     }
@@ -1065,7 +1065,7 @@
     "cloud_base_k": 290.2906727770715,
     "cloud_base_pa": 89819.26181178403,
     "lapse_k_km": 9.64866024099689,
-    "smallest_surviving_mm": 0.6383852836119309,
+    "smallest_surviving_mm": 0.6491425213780981,
     "drops": [
      {
       "initial_diameter_mm": 0.2,
@@ -1073,7 +1073,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 480.7086513125545
+      "fall_time_s": 468.46023160617887
      },
      {
       "initial_diameter_mm": 0.3,
@@ -1081,7 +1081,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 504.9699371313533
+      "fall_time_s": 492.8589079944389
      },
      {
       "initial_diameter_mm": 0.5,
@@ -1089,71 +1089,71 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 546.2124653248364
+      "fall_time_s": 534.2112099576556
      },
      {
       "initial_diameter_mm": 0.7,
       "status": "surface",
-      "surviving_water_fraction": 0.1323455007857186,
-      "surface_diameter_mm": 0.3567257287868915,
-      "impact_speed_m_s": 1.4303947561975596,
-      "fall_time_s": 437.0927997052347
+      "surviving_water_fraction": 0.10600091568550885,
+      "surface_diameter_mm": 0.33128459831464036,
+      "impact_speed_m_s": 1.317962615167134,
+      "fall_time_s": 443.4365507611276
      },
      {
       "initial_diameter_mm": 1.0,
       "status": "surface",
-      "surviving_water_fraction": 0.5452506229125721,
-      "surface_diameter_mm": 0.8169561067375969,
-      "impact_speed_m_s": 3.2008658590537373,
-      "fall_time_s": 285.8736888369446
+      "surviving_water_fraction": 0.5284841179086178,
+      "surface_diameter_mm": 0.8084949534963676,
+      "impact_speed_m_s": 3.172020523354181,
+      "fall_time_s": 286.6202320166681
      },
      {
       "initial_diameter_mm": 1.5,
       "status": "surface",
-      "surviving_water_fraction": 0.7912647418414017,
-      "surface_diameter_mm": 1.3873899061463772,
-      "impact_speed_m_s": 4.916582802284056,
-      "fall_time_s": 201.48351011301463
+      "surviving_water_fraction": 0.7831238807719919,
+      "surface_diameter_mm": 1.3826154797789243,
+      "impact_speed_m_s": 4.90416865324669,
+      "fall_time_s": 201.64617673573576
      },
      {
       "initial_diameter_mm": 2.0,
       "status": "surface",
-      "surviving_water_fraction": 0.8800539578342154,
-      "surface_diameter_mm": 1.9166071139394179,
-      "impact_speed_m_s": 6.1574883094344806,
-      "fall_time_s": 164.1833465560274
+      "surviving_water_fraction": 0.8752347685711694,
+      "surface_diameter_mm": 1.9131022517100313,
+      "impact_speed_m_s": 6.1505674552940865,
+      "fall_time_s": 164.24373729603346
      },
      {
       "initial_diameter_mm": 3.0,
       "status": "surface",
-      "surviving_water_fraction": 0.944633087520044,
-      "surface_diameter_mm": 2.9435786155450967,
-      "impact_speed_m_s": 7.791830243800754,
-      "fall_time_s": 131.29580166039477
+      "surviving_water_fraction": 0.9422739383182704,
+      "surface_diameter_mm": 2.9411261182898043,
+      "impact_speed_m_s": 7.789335362268308,
+      "fall_time_s": 131.308735919856
      },
      {
       "initial_diameter_mm": 4.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9678792167206518,
-      "surface_diameter_mm": 3.9567053734666375,
-      "impact_speed_m_s": 8.674973882968409,
-      "fall_time_s": 118.28516890910484
+      "surviving_water_fraction": 0.9664162984857227,
+      "surface_diameter_mm": 3.954710890722999,
+      "impact_speed_m_s": 8.674412198929145,
+      "fall_time_s": 118.28706046026835
      },
      {
       "initial_diameter_mm": 5.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9790128124703973,
-      "surface_diameter_mm": 4.96477375933533,
-      "impact_speed_m_s": 9.108706321008816,
-      "fall_time_s": 112.75212751000399
+      "surviving_water_fraction": 0.9779858148106796,
+      "surface_diameter_mm": 4.963037113701455,
+      "impact_speed_m_s": 9.108867310672755,
+      "fall_time_s": 112.75026708120613
      },
      {
       "initial_diameter_mm": 6.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9852914626685284,
-      "surface_diameter_mm": 5.970437507733264,
-      "impact_speed_m_s": 9.282914510153091,
-      "fall_time_s": 110.65865996155611
+      "surviving_water_fraction": 0.9845163138381304,
+      "surface_diameter_mm": 5.968871408767095,
+      "impact_speed_m_s": 9.28356592777086,
+      "fall_time_s": 110.65535960271755
      }
     ],
     "rain": {
@@ -1168,64 +1168,64 @@
        "dm_mm": 0.75,
        "shape_mu": 0.0,
        "realized_dm_mm": 0.7514836414759528,
-       "water_survival_fraction": 0.3707845044324544,
+       "water_survival_fraction": 0.35848992912154276,
        "number_survival_fraction": 0.1676315417764302,
-       "arrival_diameter_mm_by_number": 0.5399381494330813,
-       "arrival_speed_m_s_by_number": 2.189188059427768
+       "arrival_diameter_mm_by_number": 0.5258431706992958,
+       "arrival_speed_m_s_by_number": 2.133714335109327
       },
       {
        "dm_mm": 0.75,
        "shape_mu": 3.0,
        "realized_dm_mm": 0.750035885199126,
-       "water_survival_fraction": 0.32520339283198335,
+       "water_survival_fraction": 0.3112421925439776,
        "number_survival_fraction": 0.2879656304835292,
-       "arrival_diameter_mm_by_number": 0.5150420173815338,
-       "arrival_speed_m_s_by_number": 2.089304759976298
+       "arrival_diameter_mm_by_number": 0.499890705584208,
+       "arrival_speed_m_s_by_number": 2.0286215129919722
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 1.4997904911517754,
-       "water_survival_fraction": 0.7382584666471388,
+       "water_survival_fraction": 0.7299115036861556,
        "number_survival_fraction": 0.49772221468315403,
-       "arrival_diameter_mm_by_number": 0.8053865194129082,
-       "arrival_speed_m_s_by_number": 3.16017429788347
+       "arrival_diameter_mm_by_number": 0.7967581766401537,
+       "arrival_speed_m_s_by_number": 3.130553779118033
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 1.499998305103208,
-       "water_survival_fraction": 0.7525495705130973,
+       "water_survival_fraction": 0.7437818913380753,
        "number_survival_fraction": 0.8048830466379888,
-       "arrival_diameter_mm_by_number": 0.9174361245205399,
-       "arrival_speed_m_s_by_number": 3.5347139927856848
+       "arrival_diameter_mm_by_number": 0.9100066021238165,
+       "arrival_speed_m_s_by_number": 3.510420015524293
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 2.4395267355152774,
-       "water_survival_fraction": 0.8802052941131194,
+       "water_survival_fraction": 0.8757458847011783,
        "number_survival_fraction": 0.7126395272684575,
-       "arrival_diameter_mm_by_number": 1.127434170229299,
-       "arrival_speed_m_s_by_number": 4.187540463129943
+       "arrival_diameter_mm_by_number": 1.1215106926992902,
+       "arrival_speed_m_s_by_number": 4.169999760380775
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 2.4906323183677928,
-       "water_survival_fraction": 0.8988368113786896,
+       "water_survival_fraction": 0.8948094423273691,
        "number_survival_fraction": 0.9568878389534785,
-       "arrival_diameter_mm_by_number": 1.5018590264870344,
-       "arrival_speed_m_s_by_number": 5.210904992777941
+       "arrival_diameter_mm_by_number": 1.497443899917119,
+       "arrival_speed_m_s_by_number": 5.199911023370678
       }
      ],
      "central_encounters": {
       "dm_mm": 1.5,
       "shape_mu": 3.0,
       "rain_mm_h": 5.0,
-      "tau_by_surface_water": 1.1414251080505364,
-      "volume_exposure_by_surface_water": 0.4910472254790232,
-      "surface_water_share_tau_above_1": 0.44001473956067455
+      "tau_by_surface_water": 1.1764992944720123,
+      "volume_exposure_by_surface_water": 0.4814334710814898,
+      "surface_water_share_tau_above_1": 0.44314180960041577
      }
     }
    }
@@ -1236,7 +1236,7 @@
     "cloud_base_k": 285.4307686633147,
     "cloud_base_pa": 110150.70876239215,
     "lapse_k_km": 1.5988748567262476,
-    "smallest_surviving_mm": 1.5782678950624616,
+    "smallest_surviving_mm": 1.61832785366859,
     "drops": [
      {
       "initial_diameter_mm": 0.2,
@@ -1244,7 +1244,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3037.365984844999
+      "fall_time_s": 2925.1548000113557
      },
      {
       "initial_diameter_mm": 0.3,
@@ -1252,7 +1252,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3149.004679868665
+      "fall_time_s": 3038.1779339554423
      },
      {
       "initial_diameter_mm": 0.5,
@@ -1260,7 +1260,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3343.3307241653006
+      "fall_time_s": 3233.288967696086
      },
      {
       "initial_diameter_mm": 0.7,
@@ -1268,7 +1268,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3515.145211117614
+      "fall_time_s": 3404.8514855499716
      },
      {
       "initial_diameter_mm": 1.0,
@@ -1276,7 +1276,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 3732.7651756684863
+      "fall_time_s": 3621.8924695584956
      },
      {
       "initial_diameter_mm": 1.5,
@@ -1284,47 +1284,47 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 4020.065762646149
+      "fall_time_s": 3908.61948845155
      },
      {
       "initial_diameter_mm": 2.0,
       "status": "surface",
-      "surviving_water_fraction": 0.2918816608362017,
-      "surface_diameter_mm": 1.3266782174852638,
-      "impact_speed_m_s": 1.4897573703975895,
-      "fall_time_s": 2625.653998129082
+      "surviving_water_fraction": 0.2609537413773638,
+      "surface_diameter_mm": 1.2780597906451971,
+      "impact_speed_m_s": 1.4408722137530814,
+      "fall_time_s": 2646.8461352346812
      },
      {
       "initial_diameter_mm": 3.0,
       "status": "surface",
-      "surviving_water_fraction": 0.6550239838801156,
-      "surface_diameter_mm": 2.605395480289707,
-      "impact_speed_m_s": 2.5998519096226262,
-      "fall_time_s": 1797.9760219226166
+      "surviving_water_fraction": 0.6377693854442392,
+      "surface_diameter_mm": 2.5823145609201617,
+      "impact_speed_m_s": 2.5824979155423398,
+      "fall_time_s": 1801.6105989929497
      },
      {
       "initial_diameter_mm": 4.0,
       "status": "surface",
-      "surviving_water_fraction": 0.796729188122309,
-      "surface_diameter_mm": 3.708203566456323,
-      "impact_speed_m_s": 3.3366002010378786,
-      "fall_time_s": 1455.4081440735092
+      "surviving_water_fraction": 0.7862184473763915,
+      "surface_diameter_mm": 3.691824672488875,
+      "impact_speed_m_s": 3.327015686674925,
+      "fall_time_s": 1456.7212357939907
      },
      {
       "initial_diameter_mm": 5.0,
       "status": "surface",
-      "surviving_water_fraction": 0.8649305976020923,
-      "surface_diameter_mm": 4.7639123012331135,
-      "impact_speed_m_s": 3.882768464729069,
-      "fall_time_s": 1269.2780383044737
+      "surviving_water_fraction": 0.857816009807669,
+      "surface_diameter_mm": 4.750814282945309,
+      "impact_speed_m_s": 3.876939158885083,
+      "fall_time_s": 1269.8841330466587
      },
      {
       "initial_diameter_mm": 6.0,
       "status": "surface",
-      "surviving_water_fraction": 0.902939726188155,
-      "surface_diameter_mm": 5.799236729292078,
-      "impact_speed_m_s": 4.291919621795351,
-      "fall_time_s": 1156.3958946819143
+      "surviving_water_fraction": 0.897750722080622,
+      "surface_diameter_mm": 5.788106384075774,
+      "impact_speed_m_s": 4.288234554280858,
+      "fall_time_s": 1156.71058650313
      }
     ],
     "rain": {
@@ -1339,63 +1339,63 @@
        "dm_mm": 0.75,
        "shape_mu": 0.0,
        "realized_dm_mm": 0.7514836414759526,
-       "water_survival_fraction": 0.01407013603407631,
-       "number_survival_fraction": 0.002764550393014926,
-       "arrival_diameter_mm_by_number": 0.7921575662027338,
-       "arrival_speed_m_s_by_number": 0.913074339292109
+       "water_survival_fraction": 0.011773239531425006,
+       "number_survival_fraction": 0.0016682181280017058,
+       "arrival_diameter_mm_by_number": 0.9502012177083454,
+       "arrival_speed_m_s_by_number": 1.0925871419069297
       },
       {
        "dm_mm": 0.75,
        "shape_mu": 3.0,
        "realized_dm_mm": 0.750035885199126,
-       "water_survival_fraction": 0.002476933480457258,
-       "number_survival_fraction": 0.0011521419454979178,
-       "arrival_diameter_mm_by_number": 0.6853361673312697,
-       "arrival_speed_m_s_by_number": 0.7821913328591787
+       "water_survival_fraction": 0.0018437791479051769,
+       "number_survival_fraction": 0.000548967545672327,
+       "arrival_diameter_mm_by_number": 0.8676754553303734,
+       "arrival_speed_m_s_by_number": 0.9983044797348457
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 1.4997904911517752,
-       "water_survival_fraction": 0.2210165480084587,
-       "number_survival_fraction": 0.08206665268280168,
-       "arrival_diameter_mm_by_number": 1.1187817507363382,
-       "arrival_speed_m_s_by_number": 1.2749413843810966
+       "water_survival_fraction": 0.20654284089451308,
+       "number_survival_fraction": 0.06498186293349502,
+       "arrival_diameter_mm_by_number": 1.2361779484234299,
+       "arrival_speed_m_s_by_number": 1.397659439856646
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 1.499998305103208,
-       "water_survival_fraction": 0.1646828102176352,
-       "number_survival_fraction": 0.1396859011797729,
-       "arrival_diameter_mm_by_number": 1.0226126316747548,
-       "arrival_speed_m_s_by_number": 1.1724227585664717
+       "water_survival_fraction": 0.1499172251238832,
+       "number_survival_fraction": 0.10591114124583671,
+       "arrival_diameter_mm_by_number": 1.1410570787243348,
+       "arrival_speed_m_s_by_number": 1.2982129640633577
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 2.439526735515278,
-       "water_survival_fraction": 0.5052223310745233,
-       "number_survival_fraction": 0.27691926532712174,
-       "arrival_diameter_mm_by_number": 1.4888482645396144,
-       "arrival_speed_m_s_by_number": 1.6481916583071747
+       "water_survival_fraction": 0.48882495547040034,
+       "number_survival_fraction": 0.2435170978912914,
+       "arrival_diameter_mm_by_number": 1.5866927547030936,
+       "arrival_speed_m_s_by_number": 1.7412048955629673
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 2.4906323183677928,
-       "water_survival_fraction": 0.5023879073974861,
-       "number_survival_fraction": 0.5306953616793019,
-       "arrival_diameter_mm_by_number": 1.5249940086593645,
-       "arrival_speed_m_s_by_number": 1.6824065937497135
+       "water_survival_fraction": 0.4838989188924989,
+       "number_survival_fraction": 0.474744667697519,
+       "arrival_diameter_mm_by_number": 1.5968136972813103,
+       "arrival_speed_m_s_by_number": 1.7508751417063575
       }
      ],
      "central_encounters": {
       "dm_mm": 1.5,
       "shape_mu": 3.0,
       "rain_mm_h": 5.0,
-      "tau_by_surface_water": 20.893095216616302,
-      "volume_exposure_by_surface_water": 1.6978604046239567,
+      "tau_by_surface_water": 21.38534170033029,
+      "volume_exposure_by_surface_water": 1.573251618777263,
       "surface_water_share_tau_above_1": 1.0
      }
     }
@@ -1405,7 +1405,7 @@
     "cloud_base_k": 285.42925045442,
     "cloud_base_pa": 91783.08715030362,
     "lapse_k_km": 9.680700716779215,
-    "smallest_surviving_mm": 0.5080439151025475,
+    "smallest_surviving_mm": 0.5194903792850734,
     "drops": [
      {
       "initial_diameter_mm": 0.2,
@@ -1413,7 +1413,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 507.8949427809289
+      "fall_time_s": 492.24218570200225
      },
      {
       "initial_diameter_mm": 0.3,
@@ -1421,7 +1421,7 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 533.3272360082958
+      "fall_time_s": 517.9164977715124
      },
      {
       "initial_diameter_mm": 0.5,
@@ -1429,71 +1429,71 @@
       "surviving_water_fraction": 0.0,
       "surface_diameter_mm": null,
       "impact_speed_m_s": null,
-      "fall_time_s": 576.1286769303795
+      "fall_time_s": 560.9864070870846
      },
      {
       "initial_diameter_mm": 0.7,
       "status": "surface",
-      "surviving_water_fraction": 0.44424055016695174,
-      "surface_diameter_mm": 0.5341182771237104,
-      "impact_speed_m_s": 2.1576402181199867,
-      "fall_time_s": 322.29510737735484
+      "surviving_water_fraction": 0.4190918945411872,
+      "surface_diameter_mm": 0.5238429785957316,
+      "impact_speed_m_s": 2.117466917163407,
+      "fall_time_s": 323.92822852295166
      },
      {
       "initial_diameter_mm": 1.0,
       "status": "surface",
-      "surviving_water_fraction": 0.7246142804117643,
-      "surface_diameter_mm": 0.8981915456613876,
-      "impact_speed_m_s": 3.452724285236335,
-      "fall_time_s": 226.0452224647894
+      "surviving_water_fraction": 0.71145452534745,
+      "surface_diameter_mm": 0.8927209266563304,
+      "impact_speed_m_s": 3.434940419330406,
+      "fall_time_s": 226.40703774403607
      },
      {
       "initial_diameter_mm": 1.5,
       "status": "surface",
-      "surviving_water_fraction": 0.8766994933926554,
-      "surface_diameter_mm": 1.4356266474743908,
-      "impact_speed_m_s": 5.008609653955597,
-      "fall_time_s": 162.05779585447692
+      "surviving_water_fraction": 0.8706319714494226,
+      "surface_diameter_mm": 1.4323070497220987,
+      "impact_speed_m_s": 5.000244369603744,
+      "fall_time_s": 162.14583023549412
      },
      {
       "initial_diameter_mm": 2.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9300371616883241,
-      "surface_diameter_mm": 1.95222601751703,
-      "impact_speed_m_s": 6.184039542807192,
-      "fall_time_s": 132.70747517301717
+      "surviving_water_fraction": 0.9265070097241804,
+      "surface_diameter_mm": 1.9497528573739733,
+      "impact_speed_m_s": 6.179442614834284,
+      "fall_time_s": 132.74070732253685
      },
      {
       "initial_diameter_mm": 3.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9683823574107981,
-      "surface_diameter_mm": 2.9680431527757145,
-      "impact_speed_m_s": 7.754450307415383,
-      "fall_time_s": 106.52065637086325
+      "surviving_water_fraction": 0.9666872412202775,
+      "surface_diameter_mm": 2.966310326050076,
+      "impact_speed_m_s": 7.7528100469799375,
+      "fall_time_s": 106.52750026954317
      },
      {
       "initial_diameter_mm": 4.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9820724723031857,
-      "surface_diameter_mm": 3.975952347053437,
-      "impact_speed_m_s": 8.607029743465429,
-      "fall_time_s": 96.11687432426226
+      "surviving_water_fraction": 0.9810390103063104,
+      "surface_diameter_mm": 3.974557189381684,
+      "impact_speed_m_s": 8.60688329648339,
+      "fall_time_s": 96.1175690868955
      },
      {
       "initial_diameter_mm": 5.0,
       "status": "surface",
-      "surviving_water_fraction": 0.9885832211004802,
-      "surface_diameter_mm": 4.980899159664373,
-      "impact_speed_m_s": 9.025056581927458,
-      "fall_time_s": 91.69739630498559
+      "surviving_water_fraction": 0.9878718595523218,
+      "surface_diameter_mm": 4.9797041598320515,
+      "impact_speed_m_s": 9.025273832944373,
+      "fall_time_s": 91.69611748171828
      },
      {
       "initial_diameter_mm": 6.0,
       "status": "surface",
-      "surviving_water_fraction": 0.992220494710588,
-      "surface_diameter_mm": 5.984400466998377,
-      "impact_speed_m_s": 9.191616321896628,
-      "fall_time_s": 90.03821508571035
+      "surviving_water_fraction": 0.9916963053133525,
+      "surface_diameter_mm": 5.983346429826084,
+      "impact_speed_m_s": 9.192126024814124,
+      "fall_time_s": 90.03628614314465
      }
     ],
     "rain": {
@@ -1508,64 +1508,64 @@
        "dm_mm": 0.75,
        "shape_mu": 0.0,
        "realized_dm_mm": 0.7514836414759527,
-       "water_survival_fraction": 0.5304816514828329,
-       "number_survival_fraction": 0.30314891391171206,
-       "arrival_diameter_mm_by_number": 0.4803975647114665,
-       "arrival_speed_m_s_by_number": 1.9445449066687663
+       "water_survival_fraction": 0.5162663898192645,
+       "number_survival_fraction": 0.26581308240009577,
+       "arrival_diameter_mm_by_number": 0.5138818506297866,
+       "arrival_speed_m_s_by_number": 2.0774053102286616
       },
       {
        "dm_mm": 0.75,
        "shape_mu": 3.0,
        "realized_dm_mm": 0.7500358851991261,
-       "water_survival_fraction": 0.5096967366902603,
-       "number_survival_fraction": 0.5139793276020777,
-       "arrival_diameter_mm_by_number": 0.4832769378152,
-       "arrival_speed_m_s_by_number": 1.9559488398110714
+       "water_survival_fraction": 0.4931759021503091,
+       "number_survival_fraction": 0.45629317517352647,
+       "arrival_diameter_mm_by_number": 0.5093832551499247,
+       "arrival_speed_m_s_by_number": 2.0594728759588246
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 1.4997904911517759,
-       "water_survival_fraction": 0.8316312639120554,
-       "number_survival_fraction": 0.6378169352387157,
-       "arrival_diameter_mm_by_number": 0.7471676030121452,
-       "arrival_speed_m_s_by_number": 2.9426858003112755
+       "water_survival_fraction": 0.8244187338236009,
+       "number_survival_fraction": 0.6041157242169206,
+       "arrival_diameter_mm_by_number": 0.7720845249429777,
+       "arrival_speed_m_s_by_number": 3.029437257131971
       },
       {
        "dm_mm": 1.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 1.4999983051032078,
-       "water_survival_fraction": 0.84793255370051,
-       "number_survival_fraction": 0.9095458508338371,
-       "arrival_diameter_mm_by_number": 0.919891340951325,
-       "arrival_speed_m_s_by_number": 3.5223403823779034
+       "water_survival_fraction": 0.840820300875802,
+       "number_survival_fraction": 0.8889204607453355,
+       "arrival_diameter_mm_by_number": 0.9278155759810788,
+       "arrival_speed_m_s_by_number": 3.5484318798570236
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 0.0,
        "realized_dm_mm": 2.4395267355152774,
-       "water_survival_fraction": 0.9274233724859665,
-       "number_survival_fraction": 0.8083074610993258,
-       "arrival_diameter_mm_by_number": 1.0731498415442293,
-       "arrival_speed_m_s_by_number": 3.999848768624881
+       "water_survival_fraction": 0.9239411790684846,
+       "number_survival_fraction": 0.7865592670724803,
+       "arrival_diameter_mm_by_number": 1.0930926383424286,
+       "arrival_speed_m_s_by_number": 4.059948502218977
       },
       {
        "dm_mm": 2.5,
        "shape_mu": 3.0,
        "realized_dm_mm": 2.490632318367792,
-       "water_survival_fraction": 0.9405845151339128,
-       "number_survival_fraction": 0.9835004470767486,
-       "arrival_diameter_mm_by_number": 1.5206398359648274,
-       "arrival_speed_m_s_by_number": 5.220822000352948
+       "water_survival_fraction": 0.9375842404386673,
+       "number_survival_fraction": 0.9788149765892319,
+       "arrival_diameter_mm_by_number": 1.5219096678125452,
+       "arrival_speed_m_s_by_number": 5.224392392748507
       }
      ],
      "central_encounters": {
       "dm_mm": 1.5,
       "shape_mu": 3.0,
       "rain_mm_h": 5.0,
-      "tau_by_surface_water": 0.9099049584222132,
-      "volume_exposure_by_surface_water": 0.5104670998695128,
-      "surface_water_share_tau_above_1": 0.3350358935105904
+      "tau_by_surface_water": 0.9135012269711954,
+      "volume_exposure_by_surface_water": 0.4978027275148727,
+      "surface_water_share_tau_above_1": 0.33687549370327186
      }
     }
    }
@@ -1677,18 +1677,18 @@
     1.46694741401669
    ],
    "water_lost_per_metre_cm1_over_solver": [
-    0.3076074294717735,
-    0.6236667213134321,
-    0.802703338302363,
-    0.9731891125937993,
-    1.0443888351449193,
-    1.0902388584339,
-    1.1152941100111666,
-    1.1197879885060942,
-    1.108578787585647,
-    1.0857189295974363,
-    1.0572218465115575,
-    1.0260381916122374
+    0.3053905816017831,
+    0.6202122976397285,
+    0.8009833139218173,
+    0.972920693211851,
+    1.0448297395340356,
+    1.0910695079182038,
+    1.1162041368395574,
+    1.1206068432964915,
+    1.109161855152128,
+    1.0860982947156796,
+    1.057437590617371,
+    1.02612383367202
    ]
   },
   "resort": {
@@ -1796,18 +1796,18 @@
     1.4604994243260239
    ],
    "water_lost_per_metre_cm1_over_solver": [
-    0.31504449401610135,
-    0.6341778739774224,
-    0.8126874773583526,
-    0.9812102593182565,
-    1.0510355262290116,
-    1.0957160994828947,
-    1.1198227173178905,
-    1.1238112041518684,
-    1.111963236472184,
-    1.0886114315672977,
-    1.0597012708274827,
-    1.0281851151036068
+    0.3127181486992235,
+    0.6309568667637013,
+    0.8110182603529038,
+    0.9810192021460228,
+    1.0515486658263773,
+    1.0966054445144058,
+    1.1207749771725344,
+    1.1246621631600213,
+    1.112566797701919,
+    1.0890047698546208,
+    1.0599269119780972,
+    1.0282780097565427
    ]
   },
   "lock": {
@@ -1915,18 +1915,18 @@
     1.4539254828539745
    ],
    "water_lost_per_metre_cm1_over_solver": [
-    0.32359846404358683,
-    0.6461557049218292,
-    0.8238917206010518,
-    0.9901532325082625,
-    1.0584315566752005,
-    1.1018057630510356,
-    1.1248532699642426,
-    1.1282720568801539,
-    1.1156889335339863,
-    1.091761347188391,
-    1.0623667080969175,
-    1.0304618997559924
+    0.3211398404546966,
+    0.643013490960818,
+    0.8222810905874417,
+    0.9900512118790207,
+    1.0590279709787438,
+    1.1027630070593353,
+    1.1258545683345644,
+    1.1291603224055915,
+    1.1163161788054072,
+    1.0921706229471946,
+    1.0626034098976291,
+    1.0305626764393785
    ]
   }
  },
@@ -1944,7 +1944,7 @@
     "lapse_k_km": 1.5754706491985535,
     "cloud_base_m": 7474.1367554723165,
     "cloud_base_change_m": 78.27501393250714,
-    "smallest_surviving_mm": 2.443865073325859,
+    "smallest_surviving_mm": 2.4850459061819286,
     "smallest_surviving_change": 0.005585641923472329
    },
    "gcm_land_air": {
@@ -1980,8 +1980,8 @@
     "lapse_k_km": 1.5813548384085996,
     "cloud_base_m": 6421.117628155518,
     "cloud_base_change_m": 65.14025374523953,
-    "smallest_surviving_mm": 2.039189816306842,
-    "smallest_surviving_change": 0.005585641923472551
+    "smallest_surviving_mm": 2.079334582680561,
+    "smallest_surviving_change": 0.002788931891189561
    },
    "gcm_land_air": {
     "height_km": [
@@ -2016,7 +2016,7 @@
     "lapse_k_km": 1.5860148696985712,
     "cloud_base_m": 5154.20763811269,
     "cloud_base_change_m": 50.83454650197291,
-    "smallest_surviving_mm": 1.5826695767278416,
+    "smallest_surviving_mm": 1.6228412598300863,
     "smallest_surviving_change": 0.002788931891189339
    },
    "gcm_land_air": {
@@ -2081,32 +2081,32 @@
      {
       "dm_mm": 0.75,
       "shape_mu": 0.0,
-      "water_survival_fraction": 0.0020197762010756956
+      "water_survival_fraction": 0.0016729376536340284
      },
      {
       "dm_mm": 0.75,
       "shape_mu": 3.0,
-      "water_survival_fraction": 0.00011373705277644004
+      "water_survival_fraction": 8.380017973335288e-05
      },
      {
       "dm_mm": 1.5,
       "shape_mu": 0.0,
-      "water_survival_fraction": 0.09886657856091442
+      "water_survival_fraction": 0.09134663772190844
      },
      {
       "dm_mm": 1.5,
       "shape_mu": 3.0,
-      "water_survival_fraction": 0.05300981905352308
+      "water_survival_fraction": 0.04726334034632156
      },
      {
       "dm_mm": 2.5,
       "shape_mu": 0.0,
-      "water_survival_fraction": 0.33428259289442264
+      "water_survival_fraction": 0.3206679055095753
      },
      {
       "dm_mm": 2.5,
       "shape_mu": 3.0,
-      "water_survival_fraction": 0.3092280818687205
+      "water_survival_fraction": 0.29403679207089073
      }
     ]
    },
@@ -2116,32 +2116,32 @@
      {
       "dm_mm": 0.75,
       "shape_mu": 0.0,
-      "water_survival_fraction": 0.37066610663582183
+      "water_survival_fraction": 0.3583703913336978
      },
      {
       "dm_mm": 0.75,
       "shape_mu": 3.0,
-      "water_survival_fraction": 0.32505318917038345
+      "water_survival_fraction": 0.31109163108573007
      },
      {
       "dm_mm": 1.5,
       "shape_mu": 0.0,
-      "water_survival_fraction": 0.7382339202387446
+      "water_survival_fraction": 0.7298874141051243
      },
      {
       "dm_mm": 1.5,
       "shape_mu": 3.0,
-      "water_survival_fraction": 0.752536221284806
+      "water_survival_fraction": 0.7437692281822698
      },
      {
       "dm_mm": 2.5,
       "shape_mu": 0.0,
-      "water_survival_fraction": 0.8801909574649578
+      "water_survival_fraction": 0.8757313768704643
      },
      {
       "dm_mm": 2.5,
       "shape_mu": 3.0,
-      "water_survival_fraction": 0.8988321344836983
+      "water_survival_fraction": 0.8948047158771678
      }
     ]
    }
@@ -2150,7 +2150,7 @@
  "producer": {
   "domain": "atmosphere",
   "files": {
-   "atmosphere/rain/drops.py": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1",
+   "atmosphere/rain/drops.py": "8e0d67ec86b357cca1ab83866c5714bbd261cd1075ea7ee3562679c66b3054aa",
    "atmosphere/rain/distributions.py": "19aea8e4e269e4146630f59bcffdab2140c2327dd459bbbe85931917f2e917f4",
    "atmosphere/rain/product.py": "7ee26847fd22860df2dbf8818ecdc4731825ce4b18a1b866b0eefd2b2b4381db",
    "atmosphere/rain/targets.py": "faed41667f2187fddccb9ab1793e4463150a10f3e8e385e4daa425da565660a7",

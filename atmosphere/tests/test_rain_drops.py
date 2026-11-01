@@ -11,7 +11,7 @@ import pytest
 
 from shared.constants import MOON_SURFACE_GRAVITY, STANDARD_GRAVITY
 from atmosphere.radiative_convective.thermodynamics import DryAir, earthlike_air
-from atmosphere.rain import drops
+from atmosphere.rain import drops, recovered
 
 RAIN = Path(drops.__file__).resolve().parent
 VENDOR = RAIN / 'vendor' / 'rainprops'
@@ -73,8 +73,9 @@ def test_port_reproduces_the_recovered_terminal_speeds(world, recovered):
 
 def test_port_reproduces_the_recovered_representative_drops():
     """The recovered representative-drops.json: cloud drops from the central lunar column, with the recovered solver's
-    dry adiabat, and drips from rest."""
-    central = drops.transport_adiabat(moon(303.106, 0.765, RECOVERED_MOON_AIR))
+    dry adiabat and its Chapman-Enskog vapour diffusivity (recovered.py), and drips from rest."""
+    plain = drops.transport_adiabat(moon(303.106, 0.765, RECOVERED_MOON_AIR))
+    central = recovered.Column(plain)
     assert central.cloud_base_m == pytest.approx(3629.772, rel=1e-4)
     assert drops.fall(1e-3, central, sample_heights_m=[central.cloud_base_m, 0])['status'] == 'evaporated'
     for mm, diameter_mm, speed, time in ((1.5, 0.902656, 1.048099, 2438.409), (2.0, 1.620508, 1.790074, 1775.958),
@@ -85,7 +86,7 @@ def test_port_reproduces_the_recovered_representative_drops():
         assert r['surface_speed_m_s'] == pytest.approx(speed, rel=1e-3)
         assert r['fall_time_s'] == pytest.approx(time, rel=5e-4)
     for height, mm, speed in ((0.1, 1.0, 0.514884), (1.0, 3.0, 1.595214), (3.0, 3.0, 2.336950)):
-        r = drops.fall(mm * 1e-3, replace(central, cloud_base_m=height), initial_speed_m_s=0.0,
+        r = drops.fall(mm * 1e-3, recovered.Column(replace(plain, cloud_base_m=height)), initial_speed_m_s=0.0,
                        sample_heights_m=[height, 0])
         assert r['surface_speed_m_s'] == pytest.approx(speed, rel=1e-3)
 
@@ -230,3 +231,18 @@ def test_domain_is_enforced():
         drops.terminal_speed(0.05, column())
     with pytest.raises(ValueError):
         drops.liquid_saturation_pressure(270.0)
+
+
+def test_vapour_diffusivity_is_massmans_fit():
+    """Massman's (1998) fit, 0.2178 cm2/s at 273.15 K and 1 atm, as T^1.81 / p, in Earth's air and the Moon's."""
+    for air in (EARTH_AIR, earthlike_air(121590.0, 400.0)):
+        assert drops.transport(273.15, 101325.0, 0.006, air.fractions)[1] == pytest.approx(2.178e-5, rel=1e-12)
+        assert drops.transport(303.15, 60000.0, 0.03, air.fractions)[1] == pytest.approx(
+            2.178e-5 * (303.15 / 273.15) ** 1.81 * 101325.0 / 60000.0, rel=1e-12)
+
+
+def test_recovered_diffusivity_stands_below_massmans():
+    """The recovered solver's Chapman-Enskog value, kept for the reproduction checks, is 17.6% lower."""
+    old = recovered.chapman_enskog_diffusivity(273.15, 101325.0, 600 / 101325.0, EARTH_AIR.fractions)
+    assert old == pytest.approx(1.7956873341e-05, rel=1e-9)
+    assert old / drops.vapour_diffusivity(273.15, 101325.0) == pytest.approx(0.824, abs=0.001)
