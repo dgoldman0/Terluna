@@ -7,7 +7,7 @@
       "schema": "terluna.research.industrial-physics/1"
     },
     "research/studies/world_economy/results/industrial_markets.json": {
-      "sha256": "e8f40308dc7b76b3b3ac2e18ec025a80fb0ad30ec83b6629b5fe98b9efd3379f",
+      "sha256": "9f8be30b6bbb85032b1877966c12a85e71872434a6546a606d95942ec06d14cd",
       "schema": "terluna.research.industrial-markets/1"
     }
   },

@@ -5,7 +5,7 @@
   "products": {
     "research/studies/world_economy/results/pressure_advantages.json": {
       "schema": "terluna.research.pressure-advantages/1",
-      "sha256": "cd05b9bcc7694fdc07b89971d7efd58d9673623d1fc9e4b19c790d9708564074",
+      "sha256": "31387dcfacf9f06c179381570cc9fe0d1372aa58ab4fc8d5a61ce71fa1fbd36b",
       "use": "environment.reference_Pa, locked_Pa, temperature_K and binary_composition_corrected_density_ratio"
     }
   },
