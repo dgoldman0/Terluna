@@ -28,7 +28,7 @@ DRHSFULL = 0.4           # PlaSim's wetness factor reaches 1 at this share of th
 
 # Rawls, Brakensiek and Miller (1983) texture-class means (Chow, Maidment and Mays 1988, Table 4.3.1; the conductivities
 # and suctions as HEC-HMS reproduces them); field capacity (33 kPa) and wilting point (1500 kPa) from Rawls,
-# Brakensiek and Saxton (1982), recalled, not re-read.
+# Brakensiek and Saxton (1982) as the GSSHA and SWMM5 tables reproduce them (read in phase 2a; unchanged).
 SOILS = {
     'sandy_loam': dict(ks_mm_h=10.9, suction_mm=110.1, porosity=0.453, effective_porosity=0.412,
                        field_capacity=0.207, wilting_point=0.095),
@@ -56,7 +56,8 @@ def drop_energy_factor(pressure_pa, gravity=MOON):
 
 
 def earth_rain_energy(rate_mm_h):
-    """Kinetic energy of Earth's natural rain (J/m2 per mm) at an intensity: Brown and Foster (1987), recalled."""
+    """Kinetic energy of Earth's natural rain (J/m2 per mm) at an intensity: Brown and Foster (1987), RUSLE's form as
+    Nearing et al. (2017, eq. 6) reproduce it (read in phase 2a; RUSLE2 later changed 0.05 to 0.082)."""
     return 29.0 * (1.0 - 0.72 * np.exp(-0.05 * np.asarray(rate_mm_h, float)))
 
 

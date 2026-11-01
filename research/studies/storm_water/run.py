@@ -31,11 +31,12 @@ from shared.provenance import constants_used
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 OUT = HERE / 'results' / 'storm_water.json'
-SCHEMA = 'terluna.research.storm-water-runoff/1'
+SCHEMA = 'terluna.research.storm-water-runoff/2'
 STORMS = 'climate/results/crm/storms_box_0e_elec_corrected_storms_first.json'
 CODE = ('research/studies/storm_water/run.py', 'research/studies/storm_water/storms.py',
         'research/studies/storm_water/infiltration.py', 'research/studies/storm_water/extract.py',
-        'climate/crm/gcm_site.py')
+        'research/studies/storm_water/wetting.py', 'research/studies/storm_water/routing.py',
+        'research/studies/storm_water/phase2a.py', 'geography/drainage.py', 'climate/crm/gcm_site.py')
 MEAN_DAYS = SYNODIC_MONTH_DAYS / 10.0                    # each 3-day mean is a tenth of the lunar day
 MM_PER_MEAN = 1000.0 * MEAN_DAYS * JULIAN_DAY            # m/s of water to mm per mean
 SATURATIONS = np.array([0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.65, 0.8, 0.95])
@@ -283,6 +284,9 @@ def main(argv=None):
             ponds[name] = (lam * interp(tab.ponding, s)).sum(axis=0) / np.maximum(lam.sum(axis=0), 1e-30)
         storms_cells[b] = dict(per_lunar_day=lam.sum(axis=0) / lunar_days, by_tenth=lt / lunar_days, ponding=ponds)
 
+    from research.studies.storm_water import phase2a as P2
+    phase2a, cells_2a = P2.run_phase2a(x, libs, pressure, cache, ls_cache)
+
     rain = x['pr'].astype(float) * MM_PER_MEAN
     by, mean = EX.composite(x)
     day = 86400e3                                                      # m/s of water to mm/day
@@ -299,6 +303,7 @@ def main(argv=None):
                            for b in BRACKETS},
                    runoff_ratio={n: {b: {m: dict(yearly=r3(cell_rows[n][b][m][0][c]), by_tenth=r3(cell_rows[n][b][m][1][:, c]))
                                          for m in MODES} for b in BRACKETS} for n in SURFACES})
+        row.update(cells_2a[c])
         cells.append(row)
 
     surfaces_out = {}
@@ -317,9 +322,11 @@ def main(argv=None):
         storm_libraries={b: dict(statistics=ST.statistics(libs[b]), source=libs[b]['source'], evidence=libs[b]['evidence'],
                                  parameters=libs[b]['parameters'], fit=libs[b].get('fit')) for b in BRACKETS},
         surfaces=surfaces_out, classes=results, sensitivity_semi_arid=sens, walnut_gulch_check=check,
-        thresholds=THRESHOLDS, cells=cells)
+        thresholds=THRESHOLDS, phase2a=phase2a, cells=cells)
+    inputs = {a.storms: sha256(a.storms)}
+    inputs.update(phase2a['routing'].pop('drainage_sources'))
     product['producer'] = dict(study='research/studies/storm_water', files={p: sha256(p) for p in CODE},
-                               inputs={a.storms: sha256(a.storms)}, ignored_inputs={str(EX.OUT.relative_to(ROOT)): meta['npz']['sha256']},
+                               inputs=inputs, ignored_inputs={str(EX.OUT.relative_to(ROOT)): meta['npz']['sha256']},
                                gcm_files=meta['files'], constants=constants_used(CODE))
     product['sizing'] = sizing(sens, check)
     OUT.parent.mkdir(exist_ok=True)
@@ -373,7 +380,13 @@ EVIDENCE = ('A model result of an offline chain on the design years, A28R_301k_d
             'soil at storm time reads PlaSim\'s 0.5 m bucket, which the arid, semi-arid and dry sub-humid cells keep '
             '0.4%, 2.7% and 8% full on average. Runoff here is what leaves '
             'the point as infiltration excess; it is not routed, and nothing of it is yet lost along slopes and channels '
-            'or returned by pools. The surfaces are design choices, not measured lunar soils.')
+            'or returned by pools. The surfaces are design choices, not measured lunar soils. Phase 2a (phase2a) '
+            'replaces the two wetting treatments with a redistribution and drying model between storms at random times '
+            'within each mean (wetting.py) and routes the central runoff on geography\'s 1.9 km grid into its '
+            'depression tree (routing.py): run-on infiltration on 100 m slopes, sub-grid crater bowls from the terrain '
+            'study\'s equilibrium counts for young and mature land, Lane\'s channel losses recast for gravity, and '
+            'storms\' runoff-making cores of 5 km2, a value the Walnut Gulch basin check sets. Every routing parameter '
+            'is a design choice or an Earth value; nothing in the lunar routing is measured.')
 READING_RULE = ('Ratios are runoff over all rain (convective and large-scale) of the same cells and means, area-weighted '
                 'over classes. walnut_gulch and cm1_6km bracket the storms\' intensities from above and below; independent '
                 'and continuing bracket the wetting between a mean\'s storms (each on the mean\'s soil, or one front carried '
@@ -382,7 +395,16 @@ READING_RULE = ('Ratios are runoff over all rain (convective and large-scale) of
                 'degrees before noon to the one 162 after, noon falling between the fifth and sixth; null where a tenth '
                 'brings under a thousandth of the cell\'s rain. share_of_evaporation is the runoff over the class\'s '
                 'evaporation, an upper bound on the change of the slopes\' evaporation before pools return any of it. '
-                'Volumes are km3 a year of 365.25 days; storms are expected point counts.')
+                'Volumes are km3 a year of 365.25 days; storms are expected point counts. In phase2a, wetting gives each '
+                'surface\'s central runoff ratio with its low and high over the soil curves\' range; routing.fates give '
+                'each fate of the runoff (bowls_inside, slope_soil, bowls_slope, channel_bed, bowls_channel, '
+                'depressions, sea, humid_land, and the parts of the slopes\' and beds\' losses below the root zone, '
+                'slope_recharge and bed_recharge) as shares of the runoff and of the rain, per hollow state (young: '
+                'bowls of 10 m and more; mature: of 100 m and more); leverage gives the share of the rain leaving the '
+                'soil\'s evaporating store (all fates but the soil above the root zone) over the evaporation. The cells\' '
+                'runoff_ratio_2a is the central runoff; routed_walnut_gulch gives mm a year over the cell, by tenth, '
+                'attributed to the cell where each loss or delivery happens. Per-depression inflow by tenth is in the '
+                'ignored file named by phase2a.hollow_inflow, rebuilt by run.py.')
 
 
 if __name__ == '__main__':

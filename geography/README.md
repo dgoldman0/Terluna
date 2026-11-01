@@ -22,7 +22,7 @@ climate-coupled shorelines are the next layer.
 | [coast_terrain.py](coast_terrain.py) | Native 256 px/deg LOLA terrain round the sea-appearance study's four rendering coasts: pinned row slices of three more LOLA tiles in [coast_inputs.json](coast_inputs.json) plus the Smythii rows, heights above the degree-200 geoid and the atlas sea level, resampled to ±72 km local grids (±69 km at Smythii) on the research drive |
 | [shore_profiles.py](shore_profiles.py) | Cross-shore profiles along the local shallower-water normal at the Smythii stations; a versioned product separates interpolated 118 m rock information from explicit beach slopes for the [breaking and run-up study](../climate/waves/runup.md) |
 | [nomenclature.py](nomenclature.py) | IAU lunar feature names from the USGS gazetteer archive (read by a small dBase reader built on the standard library) |
-| [drainage.py](drainage.py) | Rivers and rain-fed lakes above sea level: runoff from the climate run routed over the 16 px/deg terrain, with fill-and-spill lakes set by each depression's water balance ([results/drainage.json](results/drainage.json); grid product in `products/`). `--climatology` takes another run's climate product, `--out` writes elsewhere |
+| [drainage.py](drainage.py) | Rivers and rain-fed lakes above sea level: runoff from the climate run routed over the 16 px/deg terrain, with fill-and-spill lakes set by each depression's water balance ([results/drainage.json](results/drainage.json); grid product in `products/`). `--climatology` takes another run's climate product, `--out` writes elsewhere, `--runoff` routes a supplied runoff field (such as a study's storm water) in place of the precipitation less evaporation |
 | [groundwater.py](groundwater.py) | A first estimate of the water the porous crust takes up, from GRAIL's porosity, beside the seas and lakes ([results/groundwater.json](results/groundwater.json)) |
 | [groundwater_uptake.py](groundwater_uptake.py) | How fast the crust takes the water: heat and water down columns under the seas, lakes and land, the cold airless crust thawing from above ([results/groundwater_uptake.json](results/groundwater_uptake.json); sources in [groundwater_sources.json](groundwater_sources.json)) |
 | [groundwater_table.py](groundwater_table.py) | The water table on land: steady sideways flow over the atlas at 15 km with the seas and lakes held, springs where it reaches the ground, the mature and young Moon ([results/groundwater_table.json](results/groundwater_table.json)) |
@@ -135,7 +135,8 @@ Results at 28%:
 With a fixed water inventory, water held in lakes above sea level comes out of the seas. The sea level then falls
 below −1,654 m unless the lakes' water is delivered on top, or groundwater and infiltration keep the basins
 drier. [tests/test_drainage.py](tests/test_drainage.py) checks
-mass conservation, fill-and-spill and the closed-lake balance on synthetic terrain.
+mass conservation, fill-and-spill and the closed-lake balance on synthetic terrain, and that a supplied runoff field
+replaces the default, is validated and reaches the hollow it drains to.
 
 The [terrain study](../research/studies/terrain_through_time/README.md) fills these lakes and closed hollows with the
 land's eroded rock: lakes under 10 km² last a median 4,600 years at the central erosion and the largest 1.5 million,

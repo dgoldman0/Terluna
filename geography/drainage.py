@@ -10,8 +10,9 @@ fills them; these are the outlets. Above it:
 2. Cells that drain nowhere are the floors of closed depressions. A priority flood over the graph of
    catchments and their lowest shared passes gives each depression its spill level, the lowest pass on
    its way to an outlet, and the pass it spills through.
-3. Runoff is the climate run's precipitation less evaporation over land, where positive. It accumulates
-   downstream. A depression fills to its spill level and overflows when its inflow and the rain on its
+3. Runoff is the climate run's precipitation less evaporation over land, where positive, or a runoff field
+   supplied on the same grid (`--runoff`, or `compute(runoff=...)`), such as the storm water a study works out. It
+   accumulates downstream. A depression fills to its spill level and overflows when its inflow and the rain on its
    lake exceed the lake's open-water evaporation (the run's evaporation over sea at that latitude);
    otherwise it holds the smaller lake whose evaporation balances its inflow and passes nothing on.
 
@@ -251,11 +252,37 @@ def climate_on_grid(clim, name, rows, cols):
     return top * (1 - ty) + bottom * ty
 
 
+def runoff_field(clim, rows, cols, supplied=None):
+    """The runoff to route (mm/day on the 16 pixel/degree grid): the climatology's precipitation less evaporation
+    where positive, or a supplied field of that shape, which must be finite and non-negative."""
+    if supplied is None:
+        return np.maximum(climate_on_grid(clim, 'pr_mm_day', rows, cols) - climate_on_grid(clim, 'evap_mm_day', rows, cols), 0.0)
+    field = np.asarray(supplied)
+    if field.shape != (rows, cols):
+        raise ValueError(f'a supplied runoff field must have shape {(rows, cols)}, not {field.shape}')
+    if not np.all(np.isfinite(field)) or field.min() < 0.0:
+        raise ValueError('a supplied runoff field must be finite and non-negative (mm/day)')
+    return field.astype(np.float32)
+
+
+def load_runoff(path):
+    """A supplied runoff field from an .npz holding runoff_mm_day (rows from 90 N, columns from 0 E) and optional
+    metadata, or from an .npy of the field itself."""
+    path = Path(path)
+    if path.suffix == '.npy':
+        return np.load(path), {}
+    with np.load(path) as z:
+        meta = json.loads(str(z['metadata'])) if 'metadata' in z.files else {}
+        return z['runoff_mm_day'], meta
+
+
 def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def compute(climatology=CLIMATOLOGY):
+def compute(climatology=CLIMATOLOGY, runoff=None):
+    """Route the climatology's runoff, or a supplied runoff field (mm/day on the grid) in its place; the lakes'
+    open-water balance stays the climatology's."""
     from geography import atlas as ga
     from geography import topography as tp
     from shared.constants import MOON_RADIUS
@@ -274,8 +301,8 @@ def compute(climatology=CLIMATOLOGY):
     lat = 90.0 - (np.arange(rows) + 0.5) / PPD
     cell_km = MOON_RADIUS / 1000.0 * np.radians(1.0 / PPD)
     outlet = h < level
+    runoff = runoff_field(clim, rows, cols, runoff)
     precip = climate_on_grid(clim, 'pr_mm_day', rows, cols)
-    runoff = np.maximum(precip - climate_on_grid(clim, 'evap_mm_day', rows, cols), 0.0)
     lake_net = precip - lake_evaporation(clim, lat)[:, None].astype(np.float32)
     del precip
     r = route(h, outlet, lat, cell_km, runoff, lake_net)
@@ -333,26 +360,36 @@ def main(argv=None) -> int:
     parser.add_argument('--climatology', type=Path, default=CLIMATOLOGY,
                         help='climate product to take runoff and lake evaporation from (default: run A)')
     parser.add_argument('--out', type=Path, default=HERE, help='folder for results/ and products/ (default: geography)')
+    parser.add_argument('--runoff', type=Path, default=None,
+                        help='route this runoff field (.npz with runoff_mm_day, or .npy) in place of the climatology\'s '
+                             'precipitation less evaporation; the outputs take the field\'s name')
     args = parser.parse_args(argv)
     climatology = args.climatology.resolve()
-    atlas, atlas_path, clim_meta, level, h, lat, cell_km, runoff, r = compute(climatology)
+    supplied, supplied_meta = load_runoff(args.runoff) if args.runoff is not None else (None, {})
+    atlas, atlas_path, clim_meta, level, h, lat, cell_km, runoff, r = compute(climatology, supplied)
     summary = summarise(atlas, level, h, lat, r)
     producer = dict(domain='geography', files={f'geography/{p.name}': digest(p)[:16] for p in
                                               (Path(__file__), HERE / 'topography.py', HERE / 'atlas.py')})
     label = str(climatology.relative_to(ROOT)) if climatology.is_relative_to(ROOT) else str(climatology)
     sources = {str(atlas_path.relative_to(ROOT)): digest(atlas_path), label: digest(climatology)}
+    tag = ''
+    if args.runoff is not None:
+        rpath = args.runoff.resolve()
+        sources[str(rpath.relative_to(ROOT)) if rpath.is_relative_to(ROOT) else str(rpath)] = digest(rpath)
+        summary['runoff'] = dict(supplied=True, metadata=supplied_meta)
+        tag = '_' + args.runoff.stem
     summary.update(producer=producer, sources=sources, climatology=dict(run=clim_meta['run'], years=clim_meta['years']))
     q = r['discharge']
     keep = np.flatnonzero((q >= CHANNEL_M3S) & ~r['outlet'] & ~r['lake']).astype(np.int32)
     lake_cells = np.flatnonzero(r['lake']).astype(np.int32)
-    out = args.out / 'products' / f"drainage_{round(100 * atlas['share'])}pct_{PPD}ppd.npz"
+    out = args.out / 'products' / f"drainage_{round(100 * atlas['share'])}pct_{PPD}ppd{tag}.npz"
     out.parent.mkdir(parents=True, exist_ok=True)
     meta = {k: summary[k] for k in ('schema', 'share', 'sea_level_m', 'grid', 'evidence', 'reading_rule', 'producer', 'sources')}
     np.savez_compressed(out, metadata=json.dumps(meta), channel_cell=keep, channel_discharge_m3s=q[keep].astype(np.float32),
                         lake_cell=lake_cells, lake_level_m=r['lake_level'][lake_cells].astype(np.float32),
                         lake_spills=~r['closed'][r['label'][lake_cells]])
     (args.out / 'results').mkdir(parents=True, exist_ok=True)
-    (args.out / 'results' / 'drainage.json').write_text(json.dumps(summary, indent=2) + '\n')
+    (args.out / 'results' / f'drainage{tag}.json').write_text(json.dumps(summary, indent=2) + '\n')
     lk = summary['lakes']
     print(f"{summary['depressions']:,} closed depressions; {lk['bodies']:,} rain-fed lakes ({lk['closed_bodies']:,} without "
           f"an outlet) over {lk['area_share']:.2%} of the surface, {lk['volume_km3']:,} km3; "

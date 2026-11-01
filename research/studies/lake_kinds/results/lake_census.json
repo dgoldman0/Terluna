@@ -5,7 +5,7 @@
    "research/studies/lake_kinds/census.py": "ef9e9ef984607398722f2875c4f0981de66bba93f71a624ef5474acb931c69b4",
    "research/studies/lake_oxygen/lakes.py": "cd7207f544d71a19dcbf2fa9a2b5905d3804dc5ab049c2b000c964c41dbaf79f",
    "geography/groundwater_table.py": "5dc3e22ebf651ef25e13210816ccd36f6509ef7f21b36260d3a25cf4a95cefd0",
-   "geography/drainage.py": "a1b8d163c2ee340c1e58d218772278f3b229fddc96b8cc051757ab4051094c68",
+   "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5",
    "research/studies/springs/run.py": "9507ae39e5970d704a1192dfe5c4bcbdab4ee1451a659667f5622c3cd1b98403"
   },
   "inputs": {
@@ -10268,5 +10268,5 @@
    0.795
   ]
  },
- "seconds": 7.4
+ "seconds": 7.3
 }
