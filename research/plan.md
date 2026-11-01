@@ -323,12 +323,7 @@ levers on the corrected targets; the low-gravity design note; the Jura Island fl
 October: domain/climate's 301 K design case with its longwave and settling checks, and domain/atmosphere's snow, rain
 limits and CM1's radiation read at constant volume. What follows ranks what the integration found next.
 
-1. **The design case at 301 K**, on the rebuilt lakes: its design years are `A28R_301k_s0897`'s years 5–14 at sunlight
-   0.897, 301.25 K (register, 20 October), about 7.5% dimming against the design sunlight, 2–3 points above the target
-   study's, which rested on the 295 K longwave fit; they also settle the tower's air with one physics. The readers below
-   wait until the GCM's open questions (item 5) have said how far they move the climate (register, 20 October). The
-   first answer moves it by 2.8 K: with the cold cloud at lunar gravity these years' climate settles near 298.5 K at
-   their sunlight (item 5), and whether the design case takes it, with about 2% more sunlight, waits for the author.
+1. **The design case at 301 K**, on the rebuilt lakes: its design years are the design run's years 10–19 (`A28R_301k_design_l15_snow_s934`) at sunlight 0.934, 300.84 K (register, 1 November), about 3.7% dimming against the design sunlight, where the 20 October design years (`A28R_301k_s0897`'s years 5–14 at 0.897, 301.25 K) took about 7.5%. With the GCM's corrections since then (item 5) the clouds cool where they warmed and the rain falls 26%. The readers below wait until the GCM and CM1 agree (register, 20 October and 1 November).
    Then the glow pair from it, at which the glow study and the domain synthesis take the efficacy it gives; the lake
    studies rerun on its weather, which retires the climate targets they ran on (six to nine hours on two to four
    workers); and geography's lakes, the atlas globe, the rain and the studies that read the design climate, the
@@ -482,8 +477,8 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
      precipitating fraction tested first on the boxes' own columns and the snow's top at its formation-weighted height,
      and the runs carry diagnostics of the remaining Earth-tuned terms' leverage, without retuning.
      No fixed fraction held on both boxes; a spread of local rates whose typical rate rises with the snowfall, measured from the boxes' snow fields, held them in total (1.15 and 1.20) and missed one land band, where the box-mean air alone overstates the sublimation by 1.55 (1.19 overall), and it is adopted with that limit stated (register, 30 October). The build passed its tests and a smoke day on domain/climate (c6faed7): in one lunar day 52% of the frozen precipitation sublimates above the freezing level against gamma's 29%, and seven unfed shadows carry the snow's Earth-derived choices into the runs.
-     No Jura box until
-     the models agree. Then surface and radiation feedbacks. The depth test's 15-year run is held. The climate work's
+     No Jura box, biome map or local climate until
+     the models agree (register, 1 November). Then surface and radiation feedbacks. The depth test's 15-year run is held. The climate work's
      readers take the year files' humidity as interval means (register, 27 October); the climatology, the cross-domain
      extracts and the rings' readers still take it as it stands.
    - **The GCM's moister lowest level** follows the convection's ventilation of the boundary layer: the new scheme holds
@@ -506,8 +501,8 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    heads for about 296 K at the design sunlight, and the gust settles some 0.7 K warmer, which called for about 3.5–4.5%
    more sunlight at 0.73–0.96% of the sunlight a kelvin. The drops evaporate about half the rain formed in a first lunar
    day, against a fifth with gamma, and more evaporation grew the low cloud and cooled the Moon in the gamma runs of 21
-   October, so a short run on the final configuration finds the sunlight: six years at 0.929, 3.6% above 0.897, are running on domain/climate, and their yearly means set the design run's sunlight beside the longwave refit on their columns.
-   Once the design run is complete and analysed, every branch is reconciled with main and brought fully into line (register, 30 October).
+   October, so a short run on the final configuration found the sunlight. The design run is done (domain/climate a5de646; register, 31 October and 1 November): after a first run at 0.949 paused 0.85 K warm, the corrected run at 0.934 ran twenty years, and its years 10–19 are the design years at 300.84 K, the longwave refit holding within 1.73 W/m² and the exobase inside the middle atmosphere's bracket. The cold cloud's factors carry the difference Massman's diffusivity makes as a stated limit, redone as a sensitivity at the reconciliation. The gap with CM1 remains significant: over the Near-side Sea the design years rain 2.52 mm/day in the tenth of the lunar day before midnight, where CM1's boxes rained 0.1–0.2. Biome maps, local climates and the Jura box therefore wait until the models agree, and after the reconciliation the gap work opens with CM1's sea and land boxes forced by the design years (register, 1 November). Storm water running off dry ground into channels and hollows, which PlaSim's bucket soil cannot shed below its capacity, comes soon after the reconciliation (register, 1 November).
+   Next, every branch is reconciled with main and brought fully into line (register, 30 October).
    The cover question stays on hold. A CM1 ring that makes its own upper vapour comes later.
 6. **The lakes' open follow-ons:** the deep mixing's form (Osborn's rule against Shih and Bouffard's energetic regime)
    and the wind's share, which move the deep lakes' oxygen and methane two- to sevenfold (studies/lake_oxygen,
