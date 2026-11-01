@@ -1,0 +1,2682 @@
+{
+ "schema": "terluna.humanities.dance-phrases/1",
+ "producer": {
+  "domain": "humanities",
+  "files": {
+   "humanities/dance/grammar.py": "7171c027456e25e9",
+   "humanities/dance/envelope.py": "27da24f59c95cba1",
+   "humanities/dance/vocabulary/units.json": "ee00ce2e9662672c",
+   "humanities/dance/vocabulary/poses.json": "eb1edcf7234b5a9e",
+   "humanities/dance/body/model.py": "9c8c01f82b2d50cb"
+  },
+  "inputs": {
+   "humanities/dance/results/envelope.json": "6ab7afba36725e8a"
+  }
+ },
+ "evidence": "Phrases placed by the grammar from the vocabulary, with durations and entry checks from the envelope's physics: screens of feasibility and structure. The motion engine realises them with whole-body dynamics; artistic worth is for the author and dancers to judge.",
+ "vocabulary": {
+  "units": 29,
+  "lunar_native": [
+   "canopy",
+   "carve_landing",
+   "flight_phrase",
+   "long_fall",
+   "long_penche",
+   "orbit_run",
+   "partner_lift",
+   "partner_toss",
+   "skim",
+   "slow_salto",
+   "unfolding_turn",
+   "whirl"
+  ],
+  "families": {
+   "fabric": [
+    "canopy",
+    "sleeve_cast",
+    "sleeve_recover"
+   ],
+   "flight": [
+    "carve_landing",
+    "flight_phrase",
+    "grand_jete",
+    "saute",
+    "skim",
+    "slow_salto",
+    "unfolding_turn"
+   ],
+   "floor": [
+    "kneel_rise",
+    "rise_from_floor"
+   ],
+   "level": [
+    "developpe",
+    "fall_recovery",
+    "long_fall",
+    "long_penche",
+    "plie_rise"
+   ],
+   "partner": [
+    "partner_lift",
+    "partner_toss"
+   ],
+   "travel": [
+    "glide_step",
+    "orbit_run",
+    "pas_de_bourree",
+    "tombe",
+    "waltz_balance"
+   ],
+   "turn": [
+    "pirouette",
+    "spiral_descent",
+    "whirl"
+   ],
+   "upper": [
+    "contraction_release",
+    "port_de_bras"
+   ]
+  }
+ },
+ "phrases": [
+  {
+   "name": "Under the Canopy",
+   "evaluation": {
+    "duration_s": 28.67,
+    "units": 8,
+    "connectors": 1,
+    "connector_share": 0.067,
+    "families": [
+     "fabric",
+     "flight",
+     "level",
+     "travel",
+     "turn",
+     "upper"
+    ],
+    "time_aloft_s": 5.57,
+    "share_aloft": 0.194,
+    "flights_over_1_s": 1,
+    "lunar_native_share": 0.714,
+    "effort_changes": 13,
+    "levels": [
+     "air",
+     "falling",
+     "standing"
+    ],
+    "travel_m": 16.7,
+    "heading_change_deg": 157,
+    "stops": 0,
+    "climax_at": 0.52
+   },
+   "score": [
+    {
+     "count": 1.0,
+     "time_s": 0.0,
+     "seconds": 3.0,
+     "unit": "port de bras",
+     "unit_id": "port_de_bras",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "path": [
+       "bras_bas",
+       "first",
+       "fifth"
+      ],
+      "seconds": 3.0
+     },
+     "support_in": "both",
+     "support_out": "both",
+     "speed_in_m_s": 0.0,
+     "speed_out_m_s": 0.0,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "gesture",
+       "support": "same",
+       "t0": 0.0,
+       "seconds": 3.0,
+       "shapes": "along path",
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 4.0,
+     "time_s": 3.0,
+     "seconds": 5.1,
+     "unit": "canopy",
+     "unit_id": "canopy",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "under_s": 3.0
+     },
+     "support_in": "both",
+     "support_out": "both",
+     "speed_in_m_s": 0.0,
+     "speed_out_m_s": 0.0,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "gesture",
+       "support": "both",
+       "t0": 3.0,
+       "seconds": 0.9,
+       "shapes": [
+        {
+         "at": 0.4,
+         "arms": "sleeve_load"
+        },
+        {
+         "at": 1.0,
+         "arms": "high_v",
+         "head": "lifted"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "hold",
+       "support": "both",
+       "t0": 3.9,
+       "seconds": 3.0,
+       "shapes": [
+        {
+         "at": 0.5,
+         "arms": "embrace",
+         "torso": "spiral"
+        },
+        {
+         "at": 1.0,
+         "arms": "fifth"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "gesture",
+       "support": "both",
+       "t0": 6.9,
+       "seconds": 1.2,
+       "shapes": [
+        {
+         "at": 1.0,
+         "arms": "embrace",
+         "torso": "contraction"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 9.1,
+     "time_s": 8.1,
+     "seconds": 3.49,
+     "unit": "long fall",
+     "unit_id": "long_fall",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "to_deg": 35,
+      "catch": "lunge"
+     },
+     "support_in": "both",
+     "support_out": "R",
+     "speed_in_m_s": 0.0,
+     "speed_out_m_s": 0.6,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "strong",
+      "time": "sustained",
+      "space": "direct",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "fall",
+       "support": "L",
+       "t0": 8.1,
+       "seconds": 2.665,
+       "shapes": [
+        {
+         "at": 0.0,
+         "arms": "fifth",
+         "torso": "upright"
+        },
+        {
+         "at": 0.7,
+         "arms": "wings_back",
+         "head": "lifted"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 10.765,
+       "seconds": 0.822,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "lunge_forward",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 12.59,
+     "time_s": 11.59,
+     "seconds": 2.9,
+     "unit": "orbit run",
+     "unit_id": "orbit_run",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "speed_m_s": 1.6,
+      "radius_m": 4.0,
+      "strides": 3,
+      "stride_rise_m": 0.08
+     },
+     "support_in": "R",
+     "support_out": "L",
+     "speed_in_m_s": 0.6,
+     "speed_out_m_s": 1.6,
+     "flight_s": [
+      0.63,
+      0.63,
+      0.63
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 11.588,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 11.925,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 12.553,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 12.891,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 13.518,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 13.856,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 15.48,
+     "time_s": 14.48,
+     "seconds": 3.19,
+     "unit": "grand jet\u00e9 (suspended)",
+     "unit_id": "grand_jete",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "rise_m": 1.2,
+      "speed_m_s": 1.6
+     },
+     "support_in": "L",
+     "support_out": "R",
+     "speed_in_m_s": 1.6,
+     "speed_out_m_s": 1.6,
+     "flight_s": [
+      2.43
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "direct",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 14.484,
+       "seconds": 0.4,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "arms": "first"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 14.884,
+       "seconds": 2.431,
+       "shapes": [
+        {
+         "at": 0.3,
+         "legs": "split_air",
+         "arms": "arabesque_first",
+         "head": "lifted"
+        },
+        {
+         "at": 0.75,
+         "legs": "split_air",
+         "arms": "third",
+         "torso": "arched_flight"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 17.315,
+       "seconds": 0.355,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "lunge_forward",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 18.67,
+     "time_s": 17.67,
+     "seconds": 0.4,
+     "unit": "carve",
+     "unit_id": "carve_landing",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "turn_deg": 45
+     },
+     "support_in": "R",
+     "support_out": "R",
+     "speed_in_m_s": 1.6,
+     "speed_out_m_s": 1.6,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "strong",
+      "time": "sudden",
+      "space": "direct",
+      "flow": "bound"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 17.67,
+       "seconds": 0.4,
+       "shapes": [
+        {
+         "at": 0.6,
+         "legs": "lunge_forward",
+         "torso": "sway",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 19.07,
+     "time_s": 18.07,
+     "seconds": 1.93,
+     "unit": "orbit run",
+     "unit_id": "orbit_run",
+     "gesture_side": "L",
+     "connector": true,
+     "note": "2 strides to spend speed to 0.6 m/s",
+     "params": {
+      "speed_m_s": 0.8,
+      "radius_m": 2.0,
+      "strides": 2,
+      "stride_rise_m": 0.08
+     },
+     "support_in": "R",
+     "support_out": "R",
+     "speed_in_m_s": 1.6,
+     "speed_out_m_s": 0.6,
+     "flight_s": [
+      0.63,
+      0.63
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 18.07,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 18.408,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 19.035,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 19.373,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 21.0,
+     "time_s": 20.0,
+     "seconds": 6.67,
+     "unit": "whirl",
+     "unit_id": "whirl",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "revolutions": 3,
+      "rev_per_s": 0.45,
+      "circle_m": 0.0
+     },
+     "support_in": "R",
+     "support_out": "R",
+     "speed_in_m_s": 0.6,
+     "speed_out_m_s": 0.6,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "turn",
+       "support": "R",
+       "t0": 20.001,
+       "seconds": 6.667,
+       "shapes": [
+        {
+         "at": 0.2,
+         "arms": "second",
+         "head": "lifted"
+        },
+        {
+         "at": 0.8,
+         "arms": "high_v",
+         "head": "lifted"
+        }
+       ],
+       "turn_rev": "revolutions",
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 27.67,
+     "time_s": 26.67,
+     "seconds": 2.0,
+     "unit": "spiral descent",
+     "unit_id": "spiral_descent",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "revolutions": 1.0
+     },
+     "support_in": "R",
+     "support_out": "floor",
+     "speed_in_m_s": 0.6,
+     "speed_out_m_s": 0.0,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "strong",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "turn",
+       "support": "both",
+       "t0": 26.668,
+       "seconds": 2.0,
+       "shapes": [
+        {
+         "at": 0.3,
+         "torso": "spiral",
+         "arms": "embrace"
+        },
+        {
+         "at": 1.0,
+         "legs": "kneel_one",
+         "torso": "rounded_forward",
+         "arms": "bras_bas"
+        }
+       ],
+       "turn_rev": "revolutions",
+       "somersault_rev": null
+      }
+     ]
+    }
+   ],
+   "text": "Under the Canopy: 28.7 s at 60 beats a minute\n    1.00    0.00 s  port de bras               G=R  both->both  0.0->0.0 m/s\n    4.00    3.00 s  canopy                     G=R  both->both  0.0->0.0 m/s\n    9.10    8.10 s  long fall                  G=R  both->R     0.0->0.6 m/s\n   12.59   11.59 s  orbit run                  G=L     R->L     0.6->1.6 m/s  aloft 0.63+0.63+0.63 s\n   15.48   14.48 s  grand jet\u00e9 (suspended)     G=R     L->R     1.6->1.6 m/s  aloft 2.43 s\n   18.67   17.67 s  carve                      G=R     R->R     1.6->1.6 m/s\n   19.07   18.07 s  orbit run                  G=L     R->R     1.6->0.6 m/s  aloft 0.63+0.63 s  (link)  2 strides to spend speed to 0.6 m/s\n   21.00   20.00 s  whirl                      G=L     R->R     0.6->0.6 m/s\n   27.67   26.67 s  spiral descent             G=L     R->floor 0.6->0.0 m/s"
+  },
+  {
+   "name": "Suspension Study (motif, mirror, augmentation)",
+   "evaluation": {
+    "duration_s": 33.69,
+    "units": 7,
+    "connectors": 2,
+    "connector_share": 0.115,
+    "families": [
+     "flight",
+     "level",
+     "travel"
+    ],
+    "time_aloft_s": 16.57,
+    "share_aloft": 0.492,
+    "flights_over_1_s": 3,
+    "lunar_native_share": 1.0,
+    "effort_changes": 14,
+    "levels": [
+     "air",
+     "standing"
+    ],
+    "travel_m": 21.4,
+    "heading_change_deg": 66,
+    "stops": 0,
+    "climax_at": 0.68
+   },
+   "score": [
+    {
+     "count": 1.0,
+     "time_s": 0.0,
+     "seconds": 1.93,
+     "unit": "orbit run",
+     "unit_id": "orbit_run",
+     "gesture_side": "R",
+     "connector": true,
+     "note": "2 strides to build speed to 0.8 m/s",
+     "params": {
+      "speed_m_s": 0.8,
+      "radius_m": 2.0,
+      "strides": 2,
+      "stride_rise_m": 0.08
+     },
+     "support_in": "both",
+     "support_out": "L",
+     "speed_in_m_s": 0.0,
+     "speed_out_m_s": 0.8,
+     "flight_s": [
+      0.63,
+      0.63
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 0.0,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 0.338,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 0.965,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 1.303,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 2.93,
+     "time_s": 1.93,
+     "seconds": 4.65,
+     "unit": "skim",
+     "unit_id": "skim",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "hops": 4,
+      "rise_m": 0.05,
+      "speed_m_s": 0.8
+     },
+     "support_in": "L",
+     "support_out": "L",
+     "speed_in_m_s": 0.8,
+     "speed_out_m_s": 0.8,
+     "flight_s": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sudden",
+      "space": "direct",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 1.931,
+       "seconds": 0.667,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 2.597,
+       "seconds": 0.496,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 3.094,
+       "seconds": 0.667,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 3.76,
+       "seconds": 0.496,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 4.257,
+       "seconds": 0.667,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 4.923,
+       "seconds": 0.496,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 5.42,
+       "seconds": 0.667,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 6.086,
+       "seconds": 0.496,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 7.58,
+     "time_s": 6.58,
+     "seconds": 3.24,
+     "unit": "flight phrase",
+     "unit_id": "flight_phrase",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "rise_m": 1.2,
+      "speed_m_s": 0.8,
+      "shapes": [
+       "split_air",
+       "fetal_air",
+       "split_air_mirror"
+      ]
+     },
+     "support_in": "L",
+     "support_out": "R",
+     "speed_in_m_s": 0.8,
+     "speed_out_m_s": 0.8,
+     "flight_s": [
+      2.43
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 6.582,
+       "seconds": 0.4,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "arms": "first"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 6.983,
+       "seconds": 2.431,
+       "shapes": [
+        {
+         "at": 0.2,
+         "legs": "split_air",
+         "arms": "third"
+        },
+        {
+         "at": 0.5,
+         "legs": "fetal_air",
+         "arms": "embrace",
+         "torso": "contraction"
+        },
+        {
+         "at": 0.8,
+         "legs": "split_air",
+         "mirror": true,
+         "arms": "high_v",
+         "torso": "arched_flight"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 9.414,
+       "seconds": 0.405,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "lunge_forward",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 10.82,
+     "time_s": 9.82,
+     "seconds": 4.65,
+     "unit": "skim",
+     "unit_id": "skim",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "hops": 4,
+      "rise_m": 0.05,
+      "speed_m_s": 0.8
+     },
+     "support_in": "R",
+     "support_out": "R",
+     "speed_in_m_s": 0.8,
+     "speed_out_m_s": 0.8,
+     "flight_s": [
+      0.5,
+      0.5,
+      0.5,
+      0.5
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sudden",
+      "space": "direct",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 9.819,
+       "seconds": 0.667,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 10.486,
+       "seconds": 0.496,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 10.982,
+       "seconds": 0.667,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 11.649,
+       "seconds": 0.496,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 12.145,
+       "seconds": 0.667,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 12.812,
+       "seconds": 0.496,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 13.308,
+       "seconds": 0.667,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 13.974,
+       "seconds": 0.496,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 15.47,
+     "time_s": 14.47,
+     "seconds": 3.24,
+     "unit": "flight phrase",
+     "unit_id": "flight_phrase",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "rise_m": 1.2,
+      "speed_m_s": 0.8,
+      "shapes": [
+       "split_air",
+       "fetal_air",
+       "split_air_mirror"
+      ]
+     },
+     "support_in": "R",
+     "support_out": "L",
+     "speed_in_m_s": 0.8,
+     "speed_out_m_s": 0.8,
+     "flight_s": [
+      2.43
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 14.471,
+       "seconds": 0.4,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "arms": "first"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 14.871,
+       "seconds": 2.431,
+       "shapes": [
+        {
+         "at": 0.2,
+         "legs": "split_air",
+         "arms": "third"
+        },
+        {
+         "at": 0.5,
+         "legs": "fetal_air",
+         "arms": "embrace",
+         "torso": "contraction"
+        },
+        {
+         "at": 0.8,
+         "legs": "split_air",
+         "mirror": true,
+         "arms": "high_v",
+         "torso": "arched_flight"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 17.302,
+       "seconds": 0.405,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "lunge_forward",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 18.71,
+     "time_s": 17.71,
+     "seconds": 4.74,
+     "unit": "skim",
+     "unit_id": "skim",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "hops": 4,
+      "rise_m": 0.07,
+      "speed_m_s": 0.8
+     },
+     "support_in": "L",
+     "support_out": "L",
+     "speed_in_m_s": 0.8,
+     "speed_out_m_s": 0.8,
+     "flight_s": [
+      0.59,
+      0.59,
+      0.59,
+      0.59
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sudden",
+      "space": "direct",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 17.707,
+       "seconds": 0.597,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 18.305,
+       "seconds": 0.587,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 18.892,
+       "seconds": 0.597,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 19.49,
+       "seconds": 0.587,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 20.077,
+       "seconds": 0.597,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 20.674,
+       "seconds": 0.587,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 21.261,
+       "seconds": 0.597,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 21.859,
+       "seconds": 0.587,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 23.45,
+     "time_s": 22.45,
+     "seconds": 3.61,
+     "unit": "flight phrase",
+     "unit_id": "flight_phrase",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "rise_m": 1.68,
+      "speed_m_s": 0.8,
+      "shapes": [
+       "split_air",
+       "fetal_air",
+       "split_air_mirror"
+      ]
+     },
+     "support_in": "L",
+     "support_out": "R",
+     "speed_in_m_s": 0.8,
+     "speed_out_m_s": 0.8,
+     "flight_s": [
+      2.88
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 22.446,
+       "seconds": 0.396,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "arms": "first"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 22.842,
+       "seconds": 2.877,
+       "shapes": [
+        {
+         "at": 0.2,
+         "legs": "split_air",
+         "arms": "third"
+        },
+        {
+         "at": 0.5,
+         "legs": "fetal_air",
+         "arms": "embrace",
+         "torso": "contraction"
+        },
+        {
+         "at": 0.8,
+         "legs": "split_air",
+         "mirror": true,
+         "arms": "high_v",
+         "torso": "arched_flight"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 25.718,
+       "seconds": 0.342,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "lunge_forward",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 27.06,
+     "time_s": 26.06,
+     "seconds": 1.93,
+     "unit": "orbit run",
+     "unit_id": "orbit_run",
+     "gesture_side": "L",
+     "connector": true,
+     "note": "2 strides to spend speed to 0.1 m/s",
+     "params": {
+      "speed_m_s": 0.8,
+      "radius_m": 2.0,
+      "strides": 2,
+      "stride_rise_m": 0.08
+     },
+     "support_in": "R",
+     "support_out": "R",
+     "speed_in_m_s": 0.8,
+     "speed_out_m_s": 0.15,
+     "flight_s": [
+      0.63,
+      0.63
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 26.061,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 26.398,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 27.026,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 27.364,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 28.99,
+     "time_s": 27.99,
+     "seconds": 5.7,
+     "unit": "long pench\u00e9",
+     "unit_id": "long_penche",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "hold_s": 2.5
+     },
+     "support_in": "R",
+     "support_out": "R",
+     "speed_in_m_s": 0.15,
+     "speed_out_m_s": 0.0,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "direct",
+      "flow": "bound"
+     },
+     "phases": [
+      {
+       "kind": "hold",
+       "support": "R",
+       "t0": 27.992,
+       "seconds": 1.6,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "arabesque_90",
+         "arms": "arabesque_first"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "hold",
+       "support": "R",
+       "t0": 29.592,
+       "seconds": 2.5,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "arabesque_90",
+         "arms": "arabesque_first",
+         "torso": "penche"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "hold",
+       "support": "R",
+       "t0": 32.092,
+       "seconds": 1.6,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "arabesque_90",
+         "arms": "second"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    }
+   ],
+   "text": "Suspension Study (motif, mirror, augmentation): 33.7 s at 60 beats a minute\n    1.00    0.00 s  orbit run                  G=R  both->L     0.0->0.8 m/s  aloft 0.63+0.63 s  (link)  2 strides to build speed to 0.8 m/s\n    2.93    1.93 s  skim                       G=R     L->L     0.8->0.8 m/s  aloft 0.5+0.5+0.5+0.5 s\n    7.58    6.58 s  flight phrase              G=R     L->R     0.8->0.8 m/s  aloft 2.43 s\n   10.82    9.82 s  skim                       G=L     R->R     0.8->0.8 m/s  aloft 0.5+0.5+0.5+0.5 s\n   15.47   14.47 s  flight phrase              G=L     R->L     0.8->0.8 m/s  aloft 2.43 s\n   18.71   17.71 s  skim                       G=R     L->L     0.8->0.8 m/s  aloft 0.59+0.59+0.59+0.59 s\n   23.45   22.45 s  flight phrase              G=R     L->R     0.8->0.8 m/s  aloft 2.88 s\n   27.06   26.06 s  orbit run                  G=L     R->R     0.8->0.1 m/s  aloft 0.63+0.63 s  (link)  2 strides to spend speed to 0.1 m/s\n   28.99   27.99 s  long pench\u00e9                G=L     R->R     0.1->0.0 m/s"
+  },
+  {
+   "name": "Generated, seed 2 (best of 40 by lunar share, contrast, linking and climax)",
+   "evaluation": {
+    "duration_s": 46.2,
+    "units": 8,
+    "connectors": 3,
+    "connector_share": 0.103,
+    "families": [
+     "fabric",
+     "flight",
+     "level",
+     "travel",
+     "turn"
+    ],
+    "time_aloft_s": 7.74,
+    "share_aloft": 0.168,
+    "flights_over_1_s": 1,
+    "lunar_native_share": 0.831,
+    "effort_changes": 8,
+    "levels": [
+     "air",
+     "standing"
+    ],
+    "travel_m": 13.5,
+    "heading_change_deg": 160,
+    "stops": 1,
+    "climax_at": 0.5
+   },
+   "score": [
+    {
+     "count": 1.0,
+     "time_s": 0.0,
+     "seconds": 3.81,
+     "unit": "pirouette",
+     "unit_id": "pirouette",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "revolutions": 3,
+      "rev_per_s": 1.0
+     },
+     "support_in": "both",
+     "support_out": "both",
+     "speed_in_m_s": 0.0,
+     "speed_out_m_s": 0.0,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "direct",
+      "flow": "bound"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "both",
+       "t0": 0.0,
+       "seconds": 0.406,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "demi_plie",
+         "arms": "second",
+         "torso": "spiral"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "turn",
+       "support": "L",
+       "t0": 0.406,
+       "seconds": 3.0,
+       "shapes": [
+        {
+         "at": 0.1,
+         "legs": "passe",
+         "arms": "first"
+        },
+        {
+         "at": 0.9,
+         "legs": "passe",
+         "arms": "first"
+        }
+       ],
+       "turn_rev": "revolutions",
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "both",
+       "t0": 3.406,
+       "seconds": 0.406,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "demi_plie",
+         "arms": "second"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 4.81,
+     "time_s": 3.81,
+     "seconds": 2.0,
+     "unit": "d\u00e9velopp\u00e9",
+     "unit_id": "developpe",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "height_deg": 110,
+      "direction": "seconde",
+      "unfold_s": 2.0
+     },
+     "support_in": "both",
+     "support_out": "R",
+     "speed_in_m_s": 0.0,
+     "speed_out_m_s": 0.0,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "direct",
+      "flow": "bound"
+     },
+     "phases": [
+      {
+       "kind": "hold",
+       "support": "R",
+       "t0": 3.812,
+       "seconds": 0.8,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "passe",
+         "arms": "first"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "hold",
+       "support": "R",
+       "t0": 4.612,
+       "seconds": 1.2,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "seconde_135",
+         "arms": "second"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 6.81,
+     "time_s": 5.81,
+     "seconds": 15.0,
+     "unit": "whirl",
+     "unit_id": "whirl",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "revolutions": 6,
+      "rev_per_s": 0.4,
+      "circle_m": 0.0
+     },
+     "support_in": "R",
+     "support_out": "R",
+     "speed_in_m_s": 0.0,
+     "speed_out_m_s": 0.0,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "turn",
+       "support": "R",
+       "t0": 5.812,
+       "seconds": 15.0,
+       "shapes": [
+        {
+         "at": 0.2,
+         "arms": "second",
+         "head": "lifted"
+        },
+        {
+         "at": 0.8,
+         "arms": "high_v",
+         "head": "lifted"
+        }
+       ],
+       "turn_rev": "revolutions",
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 21.81,
+     "time_s": 20.81,
+     "seconds": 0.9,
+     "unit": "pas de bourr\u00e9e",
+     "unit_id": "pas_de_bourree",
+     "gesture_side": "L",
+     "connector": true,
+     "note": "brake the turn",
+     "params": {
+      "step_s": 0.3
+     },
+     "support_in": "R",
+     "support_out": "L",
+     "speed_in_m_s": 0.0,
+     "speed_out_m_s": 0.0,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sudden",
+      "space": "direct",
+      "flow": "bound"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 20.812,
+       "seconds": 0.3,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 21.112,
+       "seconds": 0.3,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "releve"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 21.412,
+       "seconds": 0.3,
+       "shapes": [
+        {
+         "at": 0.8,
+         "legs": "demi_plie"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 22.71,
+     "time_s": 21.71,
+     "seconds": 1.08,
+     "unit": "glide step",
+     "unit_id": "glide_step",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "speed_m_s": 0.6,
+      "step_m": 0.65
+     },
+     "support_in": "L",
+     "support_out": "R",
+     "speed_in_m_s": 0.0,
+     "speed_out_m_s": 0.6,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "direct",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 21.712,
+       "seconds": 1.083,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "parallel"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 23.8,
+     "time_s": 22.8,
+     "seconds": 3.48,
+     "unit": "flight phrase",
+     "unit_id": "flight_phrase",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "rise_m": 1.5,
+      "speed_m_s": 1.0,
+      "shapes": [
+       "split_air",
+       "fetal_air",
+       "split_air_mirror"
+      ]
+     },
+     "support_in": "R",
+     "support_out": "L",
+     "speed_in_m_s": 0.6,
+     "speed_out_m_s": 1.0,
+     "flight_s": [
+      2.72
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 22.795,
+       "seconds": 0.397,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "arms": "first"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 23.192,
+       "seconds": 2.718,
+       "shapes": [
+        {
+         "at": 0.2,
+         "legs": "split_air",
+         "arms": "third"
+        },
+        {
+         "at": 0.5,
+         "legs": "fetal_air",
+         "arms": "embrace",
+         "torso": "contraction"
+        },
+        {
+         "at": 0.8,
+         "legs": "split_air",
+         "mirror": true,
+         "arms": "high_v",
+         "torso": "arched_flight"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 25.91,
+       "seconds": 0.362,
+       "shapes": [
+        {
+         "at": 1.0,
+         "legs": "lunge_forward",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 27.27,
+     "time_s": 26.27,
+     "seconds": 1.93,
+     "unit": "orbit run",
+     "unit_id": "orbit_run",
+     "gesture_side": "R",
+     "connector": true,
+     "note": "2 strides to spend speed to 0.6 m/s",
+     "params": {
+      "speed_m_s": 0.8,
+      "radius_m": 2.0,
+      "strides": 2,
+      "stride_rise_m": 0.08
+     },
+     "support_in": "L",
+     "support_out": "L",
+     "speed_in_m_s": 1.0,
+     "speed_out_m_s": 0.6,
+     "flight_s": [
+      0.63,
+      0.63
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 26.273,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 26.61,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 27.238,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 27.576,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 29.2,
+     "time_s": 28.2,
+     "seconds": 6.1,
+     "unit": "canopy",
+     "unit_id": "canopy",
+     "gesture_side": "R",
+     "connector": false,
+     "note": "",
+     "params": {
+      "under_s": 4.0
+     },
+     "support_in": "L",
+     "support_out": "both",
+     "speed_in_m_s": 0.6,
+     "speed_out_m_s": 0.0,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "gesture",
+       "support": "both",
+       "t0": 28.204,
+       "seconds": 0.9,
+       "shapes": [
+        {
+         "at": 0.4,
+         "arms": "sleeve_load"
+        },
+        {
+         "at": 1.0,
+         "arms": "high_v",
+         "head": "lifted"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "hold",
+       "support": "both",
+       "t0": 29.104,
+       "seconds": 4.0,
+       "shapes": [
+        {
+         "at": 0.5,
+         "arms": "embrace",
+         "torso": "spiral"
+        },
+        {
+         "at": 1.0,
+         "arms": "fifth"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "gesture",
+       "support": "both",
+       "t0": 33.104,
+       "seconds": 1.2,
+       "shapes": [
+        {
+         "at": 1.0,
+         "arms": "embrace",
+         "torso": "contraction"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 35.3,
+     "time_s": 34.3,
+     "seconds": 3.86,
+     "unit": "orbit run",
+     "unit_id": "orbit_run",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "speed_m_s": 1.6,
+      "radius_m": 4.0,
+      "strides": 4,
+      "stride_rise_m": 0.08
+     },
+     "support_in": "both",
+     "support_out": "R",
+     "speed_in_m_s": 0.0,
+     "speed_out_m_s": 1.6,
+     "flight_s": [
+      0.63,
+      0.63,
+      0.63,
+      0.63
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 34.304,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 34.641,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 35.269,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 35.607,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 36.234,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 36.572,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 37.2,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 37.538,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 39.17,
+     "time_s": 38.17,
+     "seconds": 1.93,
+     "unit": "orbit run",
+     "unit_id": "orbit_run",
+     "gesture_side": "L",
+     "connector": true,
+     "note": "2 strides to spend speed to 0.6 m/s",
+     "params": {
+      "speed_m_s": 0.8,
+      "radius_m": 2.0,
+      "strides": 2,
+      "stride_rise_m": 0.08
+     },
+     "support_in": "R",
+     "support_out": "R",
+     "speed_in_m_s": 1.6,
+     "speed_out_m_s": 0.6,
+     "flight_s": [
+      0.63,
+      0.63
+     ],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "stance",
+       "support": "R",
+       "t0": 38.165,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 38.503,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "stance",
+       "support": "L",
+       "t0": 39.131,
+       "seconds": 0.338,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "demi_plie",
+         "torso": "sway"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "flight",
+       "support": "none",
+       "t0": 39.468,
+       "seconds": 0.628,
+       "shapes": [
+        {
+         "at": 0.5,
+         "legs": "coupe",
+         "arms": "allonge"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    },
+    {
+     "count": 41.1,
+     "time_s": 40.1,
+     "seconds": 6.1,
+     "unit": "canopy",
+     "unit_id": "canopy",
+     "gesture_side": "L",
+     "connector": false,
+     "note": "",
+     "params": {
+      "under_s": 4.0
+     },
+     "support_in": "R",
+     "support_out": "both",
+     "speed_in_m_s": 0.6,
+     "speed_out_m_s": 0.0,
+     "flight_s": [],
+     "sleeves": "gathered",
+     "effort": {
+      "weight": "light",
+      "time": "sustained",
+      "space": "indirect",
+      "flow": "free"
+     },
+     "phases": [
+      {
+       "kind": "gesture",
+       "support": "both",
+       "t0": 40.096,
+       "seconds": 0.9,
+       "shapes": [
+        {
+         "at": 0.4,
+         "arms": "sleeve_load"
+        },
+        {
+         "at": 1.0,
+         "arms": "high_v",
+         "head": "lifted"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "hold",
+       "support": "both",
+       "t0": 40.996,
+       "seconds": 4.0,
+       "shapes": [
+        {
+         "at": 0.5,
+         "arms": "embrace",
+         "torso": "spiral"
+        },
+        {
+         "at": 1.0,
+         "arms": "fifth"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      },
+      {
+       "kind": "gesture",
+       "support": "both",
+       "t0": 44.996,
+       "seconds": 1.2,
+       "shapes": [
+        {
+         "at": 1.0,
+         "arms": "embrace",
+         "torso": "contraction"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null
+      }
+     ]
+    }
+   ],
+   "text": "Generated, seed 2 (best of 40 by lunar share, contrast, linking and climax): 46.2 s at 60 beats a minute\n    1.00    0.00 s  pirouette                  G=R  both->both  0.0->0.0 m/s\n    4.81    3.81 s  d\u00e9velopp\u00e9                  G=L  both->R     0.0->0.0 m/s\n    6.81    5.81 s  whirl                      G=L     R->R     0.0->0.0 m/s\n   21.81   20.81 s  pas de bourr\u00e9e             G=L     R->L     0.0->0.0 m/s  (link)  brake the turn\n   22.71   21.71 s  glide step                 G=R     L->R     0.0->0.6 m/s\n   23.80   22.80 s  flight phrase              G=L     R->L     0.6->1.0 m/s  aloft 2.72 s\n   27.27   26.27 s  orbit run                  G=R     L->L     1.0->0.6 m/s  aloft 0.63+0.63 s  (link)  2 strides to spend speed to 0.6 m/s\n   29.20   28.20 s  canopy                     G=R     L->both  0.6->0.0 m/s\n   35.30   34.30 s  orbit run                  G=L  both->R     0.0->1.6 m/s  aloft 0.63+0.63+0.63+0.63 s\n   39.17   38.17 s  orbit run                  G=L     R->R     1.6->0.6 m/s  aloft 0.63+0.63 s  (link)  2 strides to spend speed to 0.6 m/s\n   41.10   40.10 s  canopy                     G=L     R->both  0.6->0.0 m/s"
+  }
+ ]
+}

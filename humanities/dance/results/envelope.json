@@ -1,0 +1,586 @@
+{
+ "schema": "terluna.humanities.dance-envelope/1",
+ "producer": {
+  "domain": "humanities",
+  "files": {
+   "humanities/dance/envelope.py": "27da24f59c95cba1",
+   "humanities/dance/body/model.py": "9c8c01f82b2d50cb",
+   "habitation/low_gravity/movement.py": "af012c7a4d59ea6f"
+  },
+  "constants": {
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "STANDARD_GRAVITY": 9.80665
+  },
+  "inputs": {
+   "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1"
+  }
+ },
+ "evidence": "Closed-form and one-dimensional mechanics for one representative dancer (the body model) at the shared gravity and the design run's air, with stated parameter choices beside each figure. A screen of capabilities and limits; the whole-body motion engine and the garment solver test them.",
+ "body": {
+  "stature_m": 1.64,
+  "mass_kg": 55.0
+ },
+ "gravity": {
+  "moon": 1.6242188765608128,
+  "earth": 9.80665,
+  "ratio": 6.0378
+ },
+ "jumps": {
+  "model": {
+   "F0_N_kg": 29.0,
+   "V0_m_s": 3.05,
+   "push_off_m": 0.36
+  },
+  "earth": {
+   "take_off_m_s": 2.381,
+   "rise_m": 0.289,
+   "airtime_s": 0.486
+  },
+  "moon_force_velocity": {
+   "take_off_m_s": 3.047,
+   "rise_m": 2.857,
+   "airtime_s": 3.752
+  },
+  "moon_earth_take_off": {
+   "take_off_m_s": 2.381,
+   "rise_m": 1.745,
+   "airtime_s": 2.932
+  },
+  "moon_same_work": {
+   "take_off_m_s": 3.4,
+   "rise_m": 3.559,
+   "airtime_s": 4.187
+  },
+  "ode_check": {
+   "earth_m_s": 1.872,
+   "moon_m_s": 2.513
+  },
+  "choreographic": [
+   {
+    "share_of_max_rise": 0.25,
+    "take_off_m_s": 1.523,
+    "rise_m": 0.714,
+    "airtime_s": 1.876
+   },
+   {
+    "share_of_max_rise": 0.5,
+    "take_off_m_s": 2.154,
+    "rise_m": 1.429,
+    "airtime_s": 2.653
+   },
+   {
+    "share_of_max_rise": 0.75,
+    "take_off_m_s": 2.638,
+    "rise_m": 2.143,
+    "airtime_s": 3.249
+   }
+  ]
+ },
+ "rotations": {
+  "inertia_kg_m2": {
+   "somersault_layout_arms_up": 9.385,
+   "somersault_layout_arms_down": 7.426,
+   "somersault_pike": 5.162,
+   "somersault_tuck": 2.816,
+   "twist_arms_in": 0.577,
+   "twist_arms_side": 1.506
+  },
+  "com_height_m": 0.909,
+  "flights_s": {
+   "moon_half_height": 2.653,
+   "moon_max": 3.752,
+   "earth_max": 0.486
+  },
+  "figures": [
+   {
+    "figure": "one layout somersault",
+    "inertia_kg_m2": 9.385,
+    "moon_half_height": {
+     "rad_s": 2.37,
+     "angular_momentum_N_m_s": 22.2
+    },
+    "moon_max": {
+     "rad_s": 1.67,
+     "angular_momentum_N_m_s": 15.7
+    },
+    "earth_max": {
+     "rad_s": 12.93,
+     "angular_momentum_N_m_s": 121.3
+    }
+   },
+   {
+    "figure": "one tucked somersault",
+    "inertia_kg_m2": 2.816,
+    "moon_half_height": {
+     "rad_s": 2.37,
+     "angular_momentum_N_m_s": 6.7
+    },
+    "moon_max": {
+     "rad_s": 1.67,
+     "angular_momentum_N_m_s": 4.7
+    },
+    "earth_max": {
+     "rad_s": 12.93,
+     "angular_momentum_N_m_s": 36.4
+    }
+   },
+   {
+    "figure": "a full twist, arms in",
+    "inertia_kg_m2": 0.577,
+    "moon_half_height": {
+     "rad_s": 2.37,
+     "angular_momentum_N_m_s": 1.4
+    },
+    "moon_max": {
+     "rad_s": 1.67,
+     "angular_momentum_N_m_s": 1.0
+    },
+    "earth_max": {
+     "rad_s": 12.93,
+     "angular_momentum_N_m_s": 7.5
+    }
+   },
+   {
+    "figure": "a full turn, arms in second",
+    "inertia_kg_m2": 1.506,
+    "moon_half_height": {
+     "rad_s": 2.37,
+     "angular_momentum_N_m_s": 3.6
+    },
+    "moon_max": {
+     "rad_s": 1.67,
+     "angular_momentum_N_m_s": 2.5
+    },
+    "earth_max": {
+     "rad_s": 12.93,
+     "angular_momentum_N_m_s": 19.5
+    }
+   },
+   {
+    "figure": "a triple twist, arms in",
+    "inertia_kg_m2": 0.577,
+    "moon_half_height": {
+     "rad_s": 7.1,
+     "angular_momentum_N_m_s": 4.1
+    },
+    "moon_max": {
+     "rad_s": 5.02,
+     "angular_momentum_N_m_s": 2.9
+    },
+    "earth_max": {
+     "rad_s": 38.79,
+     "angular_momentum_N_m_s": 22.4
+    }
+   }
+  ]
+ },
+ "traction": {
+  "friction": 0.5,
+  "peak_acceleration_m_s2": {
+   "moon": 0.812,
+   "earth": 4.903
+  },
+  "speeds": [
+   {
+    "speed_m_s": 1.0,
+    "build_or_stop_m": {
+     "moon": 0.62,
+     "earth": 0.1
+    },
+    "tightest_turn_radius_m": {
+     "moon": 1.23,
+     "earth": 0.2
+    },
+    "bank_for_a_2_m_circle_deg": 0.0
+   },
+   {
+    "speed_m_s": 1.5,
+    "build_or_stop_m": {
+     "moon": 1.39,
+     "earth": 0.23
+    },
+    "tightest_turn_radius_m": {
+     "moon": 2.77,
+     "earth": 0.46
+    },
+    "bank_for_a_2_m_circle_deg": 8.1
+   },
+   {
+    "speed_m_s": 2.0,
+    "build_or_stop_m": {
+     "moon": 2.46,
+     "earth": 0.41
+    },
+    "tightest_turn_radius_m": {
+     "moon": 4.93,
+     "earth": 0.82
+    },
+    "bank_for_a_2_m_circle_deg": 24.4
+   },
+   {
+    "speed_m_s": 3.0,
+    "build_or_stop_m": {
+     "moon": 5.54,
+     "earth": 0.92
+    },
+    "tightest_turn_radius_m": {
+     "moon": 11.08,
+     "earth": 1.84
+    },
+    "bank_for_a_2_m_circle_deg": 43.6
+   }
+  ]
+ },
+ "landings": {
+  "1.5_m_s_over_0_4_m": {
+   "moon": {
+    "stance_s": 0.533,
+    "mean_load_body_weights": 2.73,
+    "redirect_m_s": 1.183
+   },
+   "earth": {
+    "stance_s": 0.533,
+    "mean_load_body_weights": 1.29,
+    "redirect_m_s": 3.365
+   }
+  },
+  "2.5_m_s_over_0_4_m": {
+   "moon": {
+    "stance_s": 0.32,
+    "mean_load_body_weights": 5.81,
+    "redirect_m_s": 1.51
+   },
+   "earth": {
+    "stance_s": 0.32,
+    "mean_load_body_weights": 1.8,
+    "redirect_m_s": 2.819
+   }
+  }
+ },
+ "turns": {
+  "turning_torque_N_m": {
+   "moon": 8.9,
+   "earth": 53.9
+  },
+  "lunar_weight_N": 89.3,
+  "pirouettes": [
+   {
+    "revolutions_per_s": 0.5,
+    "angular_momentum_N_m_s": 1.81,
+    "moon": {
+     "preparation_s": 0.2,
+     "spin_decay_s": 2.5,
+     "revolutions_before_stopping": 0.6
+    },
+    "earth": {
+     "preparation_s": 0.03,
+     "spin_decay_s": 0.4,
+     "revolutions_before_stopping": 0.1
+    }
+   },
+   {
+    "revolutions_per_s": 1.0,
+    "angular_momentum_N_m_s": 3.63,
+    "moon": {
+     "preparation_s": 0.41,
+     "spin_decay_s": 5.1,
+     "revolutions_before_stopping": 2.5
+    },
+    "earth": {
+     "preparation_s": 0.07,
+     "spin_decay_s": 0.8,
+     "revolutions_before_stopping": 0.4
+    }
+   },
+   {
+    "revolutions_per_s": 2.0,
+    "angular_momentum_N_m_s": 7.25,
+    "moon": {
+     "preparation_s": 0.81,
+     "spin_decay_s": 10.1,
+     "revolutions_before_stopping": 10.1
+    },
+    "earth": {
+     "preparation_s": 0.13,
+     "spin_decay_s": 1.7,
+     "revolutions_before_stopping": 1.7
+    }
+   }
+  ]
+ },
+ "balance": {
+  "com_height_m": 0.909,
+  "time_constant_s": {
+   "moon": 0.748,
+   "earth": 0.304
+  },
+  "from_2_to_15_deg_s": {
+   "moon": 2.02,
+   "earth": 0.82
+  },
+  "from_2_to_45_deg_s": {
+   "moon": 2.86,
+   "earth": 1.16
+  },
+  "from_5_to_90_deg_s": {
+   "moon": 2.72,
+   "earth": 1.11
+  }
+ },
+ "air": {
+  "density_kg_m3": {
+   "moon_sea_level": 1.4036,
+   "moon_summit": 1.1738,
+   "earth": 1.225
+  },
+  "jump_take_off_m_s": 2.154,
+  "jumps_with_drag": [
+   {
+    "garment": "body alone, vertical flow",
+    "drag_area_m2": 0.2,
+    "moon": {
+     "apex_m": 1.423,
+     "airtime_s": 2.648,
+     "landing_m_s": 2.146
+    },
+    "moon_vacuum": {
+     "take_off_m_s": 2.154,
+     "rise_m": 1.428,
+     "airtime_s": 2.652
+    },
+    "earth": {
+     "apex_m": 0.236,
+     "airtime_s": 0.439,
+     "landing_m_s": 2.152
+    }
+   },
+   {
+    "garment": "a flared full skirt",
+    "drag_area_m2": 0.8,
+    "moon": {
+     "apex_m": 1.408,
+     "airtime_s": 2.633,
+     "landing_m_s": 2.123
+    },
+    "moon_vacuum": {
+     "take_off_m_s": 2.154,
+     "rise_m": 1.428,
+     "airtime_s": 2.652
+    },
+    "earth": {
+     "apex_m": 0.236,
+     "airtime_s": 0.439,
+     "landing_m_s": 2.149
+    }
+   },
+   {
+    "garment": "large sleeves or a cloak spread",
+    "drag_area_m2": 2.0,
+    "moon": {
+     "apex_m": 1.379,
+     "airtime_s": 2.606,
+     "landing_m_s": 2.079
+    },
+    "moon_vacuum": {
+     "take_off_m_s": 2.154,
+     "rise_m": 1.428,
+     "airtime_s": 2.652
+    },
+    "earth": {
+     "apex_m": 0.235,
+     "airtime_s": 0.438,
+     "landing_m_s": 2.142
+    }
+   }
+  ],
+  "terminal_speed_m_s": {
+   "body spread face-down": {
+    "moon": 13.5,
+    "earth": 35.5
+   },
+   "body alone, vertical flow": {
+    "moon": 25.2,
+    "earth": 66.4
+   },
+   "a flared full skirt": {
+    "moon": 12.6,
+    "earth": 33.2
+   },
+   "large sleeves or a cloak spread": {
+    "moon": 8.0,
+    "earth": 21.0
+   }
+  }
+ },
+ "fabric": {
+  "normal_force_coefficient": 1.17,
+  "fabrics": [
+   {
+    "fabric": "silk chiffon",
+    "areal_density_kg_m2": 0.026,
+    "face_on_fall_m_s": {
+     "moon": 0.227,
+     "earth": 0.596
+    },
+    "seconds_to_settle_1_5_m": {
+     "moon": 6.6,
+     "earth": 2.5
+    },
+    "air_over_weight_at_1_m_s": {
+     "moon": 19.44,
+     "earth": 2.81
+    }
+   },
+   {
+    "fabric": "silk georgette",
+    "areal_density_kg_m2": 0.034,
+    "face_on_fall_m_s": {
+     "moon": 0.259,
+     "earth": 0.682
+    },
+    "seconds_to_settle_1_5_m": {
+     "moon": 5.8,
+     "earth": 2.2
+    },
+    "air_over_weight_at_1_m_s": {
+     "moon": 14.87,
+     "earth": 2.15
+    }
+   },
+   {
+    "fabric": "crepe de chine",
+    "areal_density_kg_m2": 0.065,
+    "face_on_fall_m_s": {
+     "moon": 0.359,
+     "earth": 0.943
+    },
+    "seconds_to_settle_1_5_m": {
+     "moon": 4.2,
+     "earth": 1.6
+    },
+    "air_over_weight_at_1_m_s": {
+     "moon": 7.78,
+     "earth": 1.12
+    }
+   },
+   {
+    "fabric": "silk satin",
+    "areal_density_kg_m2": 0.09,
+    "face_on_fall_m_s": {
+     "moon": 0.422,
+     "earth": 1.11
+    },
+    "seconds_to_settle_1_5_m": {
+     "moon": 3.6,
+     "earth": 1.4
+    },
+    "air_over_weight_at_1_m_s": {
+     "moon": 5.62,
+     "earth": 0.81
+    }
+   },
+   {
+    "fabric": "linen",
+    "areal_density_kg_m2": 0.15,
+    "face_on_fall_m_s": {
+     "moon": 0.545,
+     "earth": 1.433
+    },
+    "seconds_to_settle_1_5_m": {
+     "moon": 2.8,
+     "earth": 1.0
+    },
+    "air_over_weight_at_1_m_s": {
+     "moon": 3.37,
+     "earth": 0.49
+    }
+   }
+  ],
+  "bending_length_ratio_moon_to_earth": 1.821,
+  "skirt": {
+   "waist_radius_m": 0.12,
+   "length_m": 0.7,
+   "rigid_strip_flare": [
+    {
+     "flare_deg": 30,
+     "rpm": {
+      "moon": 15.6,
+      "earth": 38.2
+     }
+    },
+    {
+     "flare_deg": 45,
+     "rpm": {
+      "moon": 18.1,
+      "earth": 44.6
+     }
+    },
+    {
+     "flare_deg": 60,
+     "rpm": {
+      "moon": 22.1,
+      "earth": 54.4
+     }
+    },
+    {
+     "flare_deg": 75,
+     "rpm": {
+      "moon": 31.1,
+      "earth": 76.5
+     }
+    }
+   ]
+  }
+ },
+ "partnering": {
+  "partner_weight_N": {
+   "moon": 89.3,
+   "earth": 539.4
+  },
+  "one_arm_overhead_hold": {
+   "moon": true,
+   "earth": false
+  },
+  "throw_moon": {
+   "take_off_m_s": 2.385,
+   "rise_m": 1.751,
+   "airtime_s": 2.937
+  },
+  "throw_earth": null
+ },
+ "stage_for_a_leap": {
+  "take_off_up_m_s": 2.154,
+  "rows": [
+   {
+    "speed_along_m_s": 1.0,
+    "approach_m": 0.62,
+    "flight_m": 2.65,
+    "run_out_m": 0.62,
+    "total_m": 3.88,
+    "earth_same_speeds_total_m": 0.64
+   },
+   {
+    "speed_along_m_s": 1.5,
+    "approach_m": 1.39,
+    "flight_m": 3.98,
+    "run_out_m": 1.39,
+    "total_m": 6.75,
+    "earth_same_speeds_total_m": 1.12
+   },
+   {
+    "speed_along_m_s": 2.0,
+    "approach_m": 2.46,
+    "flight_m": 5.3,
+    "run_out_m": 2.46,
+    "total_m": 10.23,
+    "earth_same_speeds_total_m": 1.69
+   }
+  ]
+ },
+ "microgravity": {
+  "traction": "none: no weight presses the feet, so every push needs a surface to push against",
+  "flight": "unending: a push sets a straight drift that only a surface or the air stops",
+  "falls_and_balance": "absent: no toppling, no landing, no down to dance against",
+  "fabric": "unsettled: cloth drifts until the air stops it, with no direction to hang or fall"
+ }
+}

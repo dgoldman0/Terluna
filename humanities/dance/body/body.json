@@ -1,0 +1,1661 @@
+{
+ "schema": "terluna.humanities.dance-body/1",
+ "frame": "x forward, y to the dancer's left, z up; metres, kilograms, seconds; rest pose standing, feet parallel under the hips, arms at the sides, palms toward the thighs; every segment frame sits at its proximal joint centre and is world-aligned at rest",
+ "stature_m": 1.64,
+ "mass_kg": 55.0,
+ "evidence": "One representative trained female dancer: de Leva (1996) segment parameters scaled by stature, anthropometric joint placements, dancer ranges of motion and peak torques chosen for a 55 kg trained woman (sources.json). A modelling basis for the motion engine and renderer, not a measured individual.",
+ "segments": [
+  {
+   "name": "pelvis",
+   "parent": null,
+   "origin": [
+    0.0,
+    0.0,
+    0.828507
+   ],
+   "offset": [
+    0.0,
+    0.0,
+    0.828507
+   ],
+   "joints": [],
+   "mass_kg": 6.8585,
+   "com": [
+    -0.01,
+    0.0,
+    0.087153
+   ],
+   "inertia_kg_m2": [
+    0.03784835,
+    0.03262295,
+    0.03979579
+   ],
+   "capsules": [
+    {
+     "a": [
+      -0.015,
+      0.085,
+      0.035
+     ],
+     "b": [
+      -0.015,
+      -0.085,
+      0.035
+     ],
+     "radius": 0.1
+    },
+    {
+     "a": [
+      -0.02,
+      0.0,
+      -0.01
+     ],
+     "b": [
+      -0.02,
+      0.0,
+      0.151562
+     ],
+     "radius": 0.115
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "abdomen",
+   "parent": "pelvis",
+   "origin": [
+    -0.04,
+    0.0,
+    1.000069
+   ],
+   "offset": [
+    -0.04,
+    0.0,
+    0.171562
+   ],
+   "joints": [
+    {
+     "name": "lumbar_flex",
+     "kind": "hinge",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "range_deg": [
+      -35,
+      60
+     ],
+     "torque_nm": [
+      100,
+      120
+     ]
+    },
+    {
+     "name": "lumbar_bend",
+     "kind": "hinge",
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "range_deg": [
+      -30,
+      30
+     ],
+     "torque_nm": [
+      90,
+      90
+     ]
+    },
+    {
+     "name": "lumbar_rot",
+     "kind": "hinge",
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "range_deg": [
+      -20,
+      20
+     ],
+     "torque_nm": [
+      60,
+      60
+     ]
+    }
+   ],
+   "mass_kg": 8.0575,
+   "com": [
+    0.03,
+    0.0,
+    0.106499
+   ],
+   "inertia_kg_m2": [
+    0.05689089,
+    0.03802537,
+    0.05225925
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.035,
+      0.0,
+      0.01
+     ],
+     "b": [
+      0.035,
+      0.0,
+      0.184059
+     ],
+     "radius": 0.108
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "thorax",
+   "parent": "abdomen",
+   "origin": [
+    -0.05,
+    0.0,
+    1.194128
+   ],
+   "offset": [
+    -0.01,
+    0.0,
+    0.194059
+   ],
+   "joints": [
+    {
+     "name": "thoracic_flex",
+     "kind": "hinge",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "range_deg": [
+      -30,
+      40
+     ],
+     "torque_nm": [
+      90,
+      100
+     ]
+    },
+    {
+     "name": "thoracic_bend",
+     "kind": "hinge",
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "range_deg": [
+      -25,
+      25
+     ],
+     "torque_nm": [
+      80,
+      80
+     ]
+    },
+    {
+     "name": "thoracic_rot",
+     "kind": "hinge",
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "range_deg": [
+      -40,
+      40
+     ],
+     "torque_nm": [
+      60,
+      60
+     ]
+    }
+   ],
+   "mass_kg": 8.0575,
+   "com": [
+    0.03,
+    0.0,
+    0.10668
+   ],
+   "inertia_kg_m2": [
+    0.08127006,
+    0.03689929,
+    0.07544864
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.04,
+      0.075,
+      0.115
+     ],
+     "b": [
+      0.04,
+      -0.075,
+      0.115
+     ],
+     "radius": 0.115
+    },
+    {
+     "a": [
+      0.03,
+      0.0,
+      0.02
+     ],
+     "b": [
+      0.03,
+      0.0,
+      0.155516
+     ],
+     "radius": 0.11
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "neck",
+   "parent": "thorax",
+   "origin": [
+    -0.045,
+    0.0,
+    1.399644
+   ],
+   "offset": [
+    0.005,
+    0.0,
+    0.205516
+   ],
+   "joints": [
+    {
+     "name": "neck_flex",
+     "kind": "hinge",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "range_deg": [
+      -50,
+      45
+     ],
+     "torque_nm": [
+      25,
+      25
+     ]
+    },
+    {
+     "name": "neck_bend",
+     "kind": "hinge",
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "range_deg": [
+      -35,
+      35
+     ],
+     "torque_nm": [
+      20,
+      20
+     ]
+    },
+    {
+     "name": "neck_rot",
+     "kind": "hinge",
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "range_deg": [
+      -70,
+      70
+     ],
+     "torque_nm": [
+      15,
+      15
+     ]
+    }
+   ],
+   "mass_kg": 0.55,
+   "com": [
+    0.015,
+    0.0,
+    0.055478
+   ],
+   "inertia_kg_m2": [
+    0.00067375,
+    0.00067375,
+    0.000495
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.015,
+      0.0,
+      0.0
+     ],
+     "b": [
+      0.025,
+      0.0,
+      0.100956
+     ],
+     "radius": 0.05
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "head",
+   "parent": "neck",
+   "origin": [
+    -0.015,
+    0.0,
+    1.5006
+   ],
+   "offset": [
+    0.03,
+    0.0,
+    0.100956
+   ],
+   "joints": [
+    {
+     "name": "head_nod",
+     "kind": "hinge",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "range_deg": [
+      -25,
+      25
+     ],
+     "torque_nm": [
+      10,
+      10
+     ]
+    }
+   ],
+   "mass_kg": 3.124,
+   "com": [
+    0.02,
+    0.0,
+    0.027885
+   ],
+   "inertia_kg_m2": [
+    0.01217445,
+    0.0144263,
+    0.01129255
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.025,
+      0.0,
+      0.0444
+     ],
+     "b": [
+      0.015,
+      0.0,
+      0.0694
+     ],
+     "radius": 0.092
+    }
+   ],
+   "tip": [
+    0.015,
+    0.0,
+    0.1394
+   ]
+  },
+  {
+   "name": "L_clavicle",
+   "parent": "thorax",
+   "origin": [
+    0.035,
+    0.02,
+    1.374644
+   ],
+   "offset": [
+    0.085,
+    0.02,
+    0.180516
+   ],
+   "joints": [
+    {
+     "name": "L_clav_elev",
+     "kind": "hinge",
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "range_deg": [
+      -10,
+      35
+     ],
+     "torque_nm": [
+      40,
+      40
+     ]
+    },
+    {
+     "name": "L_clav_prot",
+     "kind": "hinge",
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "range_deg": [
+      -15,
+      20
+     ],
+     "torque_nm": [
+      40,
+      40
+     ]
+    }
+   ],
+   "mass_kg": 0.22,
+   "com": [
+    -0.025,
+    0.07,
+    -0.015
+   ],
+   "inertia_kg_m2": [
+    3.168e-05,
+    0.000352,
+    0.000352
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "b": [
+      -0.035,
+      0.13,
+      -0.034644
+     ],
+     "radius": 0.03
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "L_upper_arm",
+   "parent": "L_clavicle",
+   "origin": [
+    -0.01,
+    0.17,
+    1.3
+   ],
+   "offset": [
+    -0.045,
+    0.15,
+    -0.074644
+   ],
+   "joints": [
+    {
+     "name": "L_shoulder",
+     "kind": "ball",
+     "long_axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "swing_deg": {
+      "forward": 180,
+      "back": 60,
+      "out": 180,
+      "across": 40
+     },
+     "twist_deg": [
+      90,
+      90
+     ],
+     "torque_nm": [
+      45,
+      50,
+      30
+     ]
+    }
+   ],
+   "mass_kg": 1.4025,
+   "com": [
+    0.0,
+    0.004,
+    -0.149625
+   ],
+   "inertia_kg_m2": [
+    0.0073293,
+    0.00641091,
+    0.00207729
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.0,
+      0.0,
+      -0.01
+     ],
+     "b": [
+      0.0,
+      0.008,
+      -0.240037
+     ],
+     "radius": 0.043
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "L_forearm",
+   "parent": "L_upper_arm",
+   "origin": [
+    -0.01,
+    0.178,
+    1.039963
+   ],
+   "offset": [
+    0.0,
+    0.008,
+    -0.260037
+   ],
+   "joints": [
+    {
+     "name": "L_elbow",
+     "kind": "hinge",
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "range_deg": [
+      0,
+      150
+     ],
+     "torque_nm": [
+      35,
+      35
+     ]
+    },
+    {
+     "name": "L_pronation",
+     "kind": "hinge",
+     "axis": [
+      0,
+      0,
+      -1
+     ],
+     "range_deg": [
+      -80,
+      80
+     ],
+     "torque_nm": [
+      8,
+      8
+     ]
+    }
+   ],
+   "mass_kg": 0.759,
+   "com": [
+    0.005,
+    0.002,
+    -0.113897
+   ],
+   "inertia_kg_m2": [
+    0.0031289,
+    0.00322705,
+    0.00041858
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.0,
+      0.0,
+      -0.01
+     ],
+     "b": [
+      0.013,
+      0.004,
+      -0.234828
+     ],
+     "radius": 0.034
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "L_hand",
+   "parent": "L_forearm",
+   "origin": [
+    0.005,
+    0.183,
+    0.790135
+   ],
+   "offset": [
+    0.015,
+    0.005,
+    -0.249828
+   ],
+   "joints": [
+    {
+     "name": "L_wrist_flex",
+     "kind": "hinge",
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "range_deg": [
+      -70,
+      80
+     ],
+     "torque_nm": [
+      15,
+      15
+     ]
+    },
+    {
+     "name": "L_wrist_dev",
+     "kind": "hinge",
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "range_deg": [
+      -30,
+      20
+     ],
+     "torque_nm": [
+      12,
+      12
+     ]
+    }
+   ],
+   "mass_kg": 0.308,
+   "com": [
+    0.003,
+    0.0,
+    -0.055105
+   ],
+   "inertia_kg_m2": [
+    0.0003451,
+    0.00047208,
+    0.0001879
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.003,
+      0.0,
+      -0.01
+     ],
+     "b": [
+      0.005,
+      0.0,
+      -0.146855
+     ],
+     "radius": 0.024
+    }
+   ],
+   "tip": [
+    0.005,
+    0.0,
+    -0.171855
+   ]
+  },
+  {
+   "name": "L_thigh",
+   "parent": "pelvis",
+   "origin": [
+    0.0,
+    0.082,
+    0.828507
+   ],
+   "offset": [
+    0.0,
+    0.082,
+    0.0
+   ],
+   "joints": [
+    {
+     "name": "L_hip",
+     "kind": "ball",
+     "long_axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "swing_deg": {
+      "forward": 150,
+      "back": 35,
+      "out": 110,
+      "across": 30
+     },
+     "twist_deg": [
+      40,
+      65
+     ],
+     "torque_nm": [
+      100,
+      150,
+      50
+     ]
+    }
+   ],
+   "mass_kg": 8.129,
+   "com": [
+    0.005,
+    0.0,
+    -0.125814
+   ],
+   "inertia_kg_m2": [
+    0.13429306,
+    0.13067834,
+    0.02588397
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.0,
+      0.008,
+      -0.03
+     ],
+     "b": [
+      0.0,
+      0.0,
+      -0.308323
+     ],
+     "radius": 0.072
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "L_shank",
+   "parent": "L_thigh",
+   "origin": [
+    0.0,
+    0.082,
+    0.480184
+   ],
+   "offset": [
+    0.0,
+    0.0,
+    -0.348323
+   ],
+   "joints": [
+    {
+     "name": "L_knee",
+     "kind": "hinge",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "range_deg": [
+      -5,
+      150
+     ],
+     "torque_nm": [
+      178,
+      90
+     ]
+    }
+   ],
+   "mass_kg": 2.6455,
+   "com": [
+    -0.01,
+    0.0,
+    -0.180451
+   ],
+   "inertia_kg_m2": [
+    0.03244185,
+    0.03149122,
+    0.00382061
+   ],
+   "capsules": [
+    {
+     "a": [
+      -0.005,
+      0.0,
+      -0.02
+     ],
+     "b": [
+      -0.005,
+      0.0,
+      -0.380629
+     ],
+     "radius": 0.048
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "L_foot",
+   "parent": "L_shank",
+   "origin": [
+    0.0,
+    0.082,
+    0.069555
+   ],
+   "offset": [
+    0.0,
+    0.0,
+    -0.410629
+   ],
+   "joints": [
+    {
+     "name": "L_ankle",
+     "kind": "hinge",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "range_deg": [
+      -25,
+      85
+     ],
+     "torque_nm": [
+      29,
+      120
+     ]
+    },
+    {
+     "name": "L_subtalar",
+     "kind": "hinge",
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "range_deg": [
+      -20,
+      30
+     ],
+     "torque_nm": [
+      30,
+      30
+     ]
+    }
+   ],
+   "mass_kg": 0.55,
+   "com": [
+    0.007,
+    0.0,
+    -0.034555
+   ],
+   "inertia_kg_m2": [
+    0.00056214,
+    0.00226478,
+    0.00260112
+   ],
+   "capsules": [
+    {
+     "a": [
+      -0.03,
+      0.0,
+      -0.037555
+     ],
+     "b": [
+      0.1194,
+      0.0,
+      -0.045555
+     ],
+     "radius": 0.03
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "L_toes",
+   "parent": "L_foot",
+   "origin": [
+    0.1294,
+    0.082,
+    0.022
+   ],
+   "offset": [
+    0.1294,
+    0.0,
+    -0.047555
+   ],
+   "joints": [
+    {
+     "name": "L_mtp",
+     "kind": "hinge",
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "range_deg": [
+      -30,
+      85
+     ],
+     "torque_nm": [
+      20,
+      20
+     ]
+    }
+   ],
+   "mass_kg": 0.1595,
+   "com": [
+    0.035,
+    0.0,
+    -0.01
+   ],
+   "inertia_kg_m2": [
+    2.297e-05,
+    6.38e-05,
+    6.38e-05
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.005,
+      0.0,
+      -0.008
+     ],
+     "b": [
+      0.0386,
+      0.0,
+      -0.01
+     ],
+     "radius": 0.013
+    }
+   ],
+   "tip": [
+    0.0506,
+    0.0,
+    -0.012
+   ]
+  },
+  {
+   "name": "R_clavicle",
+   "parent": "thorax",
+   "origin": [
+    0.035,
+    -0.02,
+    1.374644
+   ],
+   "offset": [
+    0.085,
+    -0.02,
+    0.180516
+   ],
+   "joints": [
+    {
+     "name": "R_clav_elev",
+     "kind": "hinge",
+     "axis": [
+      -1,
+      0,
+      0
+     ],
+     "range_deg": [
+      -10,
+      35
+     ],
+     "torque_nm": [
+      40,
+      40
+     ]
+    },
+    {
+     "name": "R_clav_prot",
+     "kind": "hinge",
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "range_deg": [
+      -15,
+      20
+     ],
+     "torque_nm": [
+      40,
+      40
+     ]
+    }
+   ],
+   "mass_kg": 0.22,
+   "com": [
+    -0.025,
+    -0.07,
+    -0.015
+   ],
+   "inertia_kg_m2": [
+    3.168e-05,
+    0.000352,
+    0.000352
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "b": [
+      -0.035,
+      -0.13,
+      -0.034644
+     ],
+     "radius": 0.03
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "R_upper_arm",
+   "parent": "R_clavicle",
+   "origin": [
+    -0.01,
+    -0.17,
+    1.3
+   ],
+   "offset": [
+    -0.045,
+    -0.15,
+    -0.074644
+   ],
+   "joints": [
+    {
+     "name": "R_shoulder",
+     "kind": "ball",
+     "long_axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "swing_deg": {
+      "forward": 180,
+      "back": 60,
+      "out": 180,
+      "across": 40
+     },
+     "twist_deg": [
+      90,
+      90
+     ],
+     "torque_nm": [
+      45,
+      50,
+      30
+     ]
+    }
+   ],
+   "mass_kg": 1.4025,
+   "com": [
+    0.0,
+    -0.004,
+    -0.149625
+   ],
+   "inertia_kg_m2": [
+    0.0073293,
+    0.00641091,
+    0.00207729
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.0,
+      0.0,
+      -0.01
+     ],
+     "b": [
+      0.0,
+      -0.008,
+      -0.240037
+     ],
+     "radius": 0.043
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "R_forearm",
+   "parent": "R_upper_arm",
+   "origin": [
+    -0.01,
+    -0.178,
+    1.039963
+   ],
+   "offset": [
+    0.0,
+    -0.008,
+    -0.260037
+   ],
+   "joints": [
+    {
+     "name": "R_elbow",
+     "kind": "hinge",
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "range_deg": [
+      0,
+      150
+     ],
+     "torque_nm": [
+      35,
+      35
+     ]
+    },
+    {
+     "name": "R_pronation",
+     "kind": "hinge",
+     "axis": [
+      0,
+      0,
+      1
+     ],
+     "range_deg": [
+      -80,
+      80
+     ],
+     "torque_nm": [
+      8,
+      8
+     ]
+    }
+   ],
+   "mass_kg": 0.759,
+   "com": [
+    0.005,
+    -0.002,
+    -0.113897
+   ],
+   "inertia_kg_m2": [
+    0.0031289,
+    0.00322705,
+    0.00041858
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.0,
+      0.0,
+      -0.01
+     ],
+     "b": [
+      0.013,
+      -0.004,
+      -0.234828
+     ],
+     "radius": 0.034
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "R_hand",
+   "parent": "R_forearm",
+   "origin": [
+    0.005,
+    -0.183,
+    0.790135
+   ],
+   "offset": [
+    0.015,
+    -0.005,
+    -0.249828
+   ],
+   "joints": [
+    {
+     "name": "R_wrist_flex",
+     "kind": "hinge",
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "range_deg": [
+      -70,
+      80
+     ],
+     "torque_nm": [
+      15,
+      15
+     ]
+    },
+    {
+     "name": "R_wrist_dev",
+     "kind": "hinge",
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "range_deg": [
+      -30,
+      20
+     ],
+     "torque_nm": [
+      12,
+      12
+     ]
+    }
+   ],
+   "mass_kg": 0.308,
+   "com": [
+    0.003,
+    0.0,
+    -0.055105
+   ],
+   "inertia_kg_m2": [
+    0.0003451,
+    0.00047208,
+    0.0001879
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.003,
+      0.0,
+      -0.01
+     ],
+     "b": [
+      0.005,
+      0.0,
+      -0.146855
+     ],
+     "radius": 0.024
+    }
+   ],
+   "tip": [
+    0.005,
+    0.0,
+    -0.171855
+   ]
+  },
+  {
+   "name": "R_thigh",
+   "parent": "pelvis",
+   "origin": [
+    0.0,
+    -0.082,
+    0.828507
+   ],
+   "offset": [
+    0.0,
+    -0.082,
+    0.0
+   ],
+   "joints": [
+    {
+     "name": "R_hip",
+     "kind": "ball",
+     "long_axis": [
+      0.0,
+      0.0,
+      -1.0
+     ],
+     "swing_deg": {
+      "forward": 150,
+      "back": 35,
+      "out": 110,
+      "across": 30
+     },
+     "twist_deg": [
+      40,
+      65
+     ],
+     "torque_nm": [
+      100,
+      150,
+      50
+     ]
+    }
+   ],
+   "mass_kg": 8.129,
+   "com": [
+    0.005,
+    0.0,
+    -0.125814
+   ],
+   "inertia_kg_m2": [
+    0.13429306,
+    0.13067834,
+    0.02588397
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.0,
+      -0.008,
+      -0.03
+     ],
+     "b": [
+      0.0,
+      0.0,
+      -0.308323
+     ],
+     "radius": 0.072
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "R_shank",
+   "parent": "R_thigh",
+   "origin": [
+    0.0,
+    -0.082,
+    0.480184
+   ],
+   "offset": [
+    0.0,
+    0.0,
+    -0.348323
+   ],
+   "joints": [
+    {
+     "name": "R_knee",
+     "kind": "hinge",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "range_deg": [
+      -5,
+      150
+     ],
+     "torque_nm": [
+      178,
+      90
+     ]
+    }
+   ],
+   "mass_kg": 2.6455,
+   "com": [
+    -0.01,
+    0.0,
+    -0.180451
+   ],
+   "inertia_kg_m2": [
+    0.03244185,
+    0.03149122,
+    0.00382061
+   ],
+   "capsules": [
+    {
+     "a": [
+      -0.005,
+      0.0,
+      -0.02
+     ],
+     "b": [
+      -0.005,
+      0.0,
+      -0.380629
+     ],
+     "radius": 0.048
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "R_foot",
+   "parent": "R_shank",
+   "origin": [
+    0.0,
+    -0.082,
+    0.069555
+   ],
+   "offset": [
+    0.0,
+    0.0,
+    -0.410629
+   ],
+   "joints": [
+    {
+     "name": "R_ankle",
+     "kind": "hinge",
+     "axis": [
+      0,
+      1,
+      0
+     ],
+     "range_deg": [
+      -25,
+      85
+     ],
+     "torque_nm": [
+      29,
+      120
+     ]
+    },
+    {
+     "name": "R_subtalar",
+     "kind": "hinge",
+     "axis": [
+      1,
+      0,
+      0
+     ],
+     "range_deg": [
+      -20,
+      30
+     ],
+     "torque_nm": [
+      30,
+      30
+     ]
+    }
+   ],
+   "mass_kg": 0.55,
+   "com": [
+    0.007,
+    0.0,
+    -0.034555
+   ],
+   "inertia_kg_m2": [
+    0.00056214,
+    0.00226478,
+    0.00260112
+   ],
+   "capsules": [
+    {
+     "a": [
+      -0.03,
+      0.0,
+      -0.037555
+     ],
+     "b": [
+      0.1194,
+      0.0,
+      -0.045555
+     ],
+     "radius": 0.03
+    }
+   ],
+   "tip": null
+  },
+  {
+   "name": "R_toes",
+   "parent": "R_foot",
+   "origin": [
+    0.1294,
+    -0.082,
+    0.022
+   ],
+   "offset": [
+    0.1294,
+    0.0,
+    -0.047555
+   ],
+   "joints": [
+    {
+     "name": "R_mtp",
+     "kind": "hinge",
+     "axis": [
+      0,
+      -1,
+      0
+     ],
+     "range_deg": [
+      -30,
+      85
+     ],
+     "torque_nm": [
+      20,
+      20
+     ]
+    }
+   ],
+   "mass_kg": 0.1595,
+   "com": [
+    0.035,
+    0.0,
+    -0.01
+   ],
+   "inertia_kg_m2": [
+    2.297e-05,
+    6.38e-05,
+    6.38e-05
+   ],
+   "capsules": [
+    {
+     "a": [
+      0.005,
+      0.0,
+      -0.008
+     ],
+     "b": [
+      0.0386,
+      0.0,
+      -0.01
+     ],
+     "radius": 0.013
+    }
+   ],
+   "tip": [
+    0.0506,
+    0.0,
+    -0.012
+   ]
+  }
+ ],
+ "contacts": {
+  "L_heel_m": {
+   "segment": "L_foot",
+   "pos": [
+    -0.04,
+    -0.018,
+    -0.069555
+   ]
+  },
+  "L_heel_l": {
+   "segment": "L_foot",
+   "pos": [
+    -0.04,
+    0.018,
+    -0.069555
+   ]
+  },
+  "L_ball_m": {
+   "segment": "L_foot",
+   "pos": [
+    0.1294,
+    -0.032,
+    -0.069555
+   ]
+  },
+  "L_ball_l": {
+   "segment": "L_foot",
+   "pos": [
+    0.1044,
+    0.036,
+    -0.069555
+   ]
+  },
+  "L_toe": {
+   "segment": "L_toes",
+   "pos": [
+    0.0406,
+    -0.01,
+    -0.022
+   ]
+  },
+  "L_palm": {
+   "segment": "L_hand",
+   "pos": [
+    0.003,
+    0.0,
+    -0.093729
+   ]
+  },
+  "R_heel_m": {
+   "segment": "R_foot",
+   "pos": [
+    -0.04,
+    0.018,
+    -0.069555
+   ]
+  },
+  "R_heel_l": {
+   "segment": "R_foot",
+   "pos": [
+    -0.04,
+    -0.018,
+    -0.069555
+   ]
+  },
+  "R_ball_m": {
+   "segment": "R_foot",
+   "pos": [
+    0.1294,
+    0.032,
+    -0.069555
+   ]
+  },
+  "R_ball_l": {
+   "segment": "R_foot",
+   "pos": [
+    0.1044,
+    -0.036,
+    -0.069555
+   ]
+  },
+  "R_toe": {
+   "segment": "R_toes",
+   "pos": [
+    0.0406,
+    0.01,
+    -0.022
+   ]
+  },
+  "R_palm": {
+   "segment": "R_hand",
+   "pos": [
+    0.003,
+    0.0,
+    -0.093729
+   ]
+  }
+ }
+}
