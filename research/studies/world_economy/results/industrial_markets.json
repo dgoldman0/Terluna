@@ -3,7 +3,7 @@
   "producer": {
     "files": {
       "research/studies/world_economy/industrial_markets.py": "e0d0bc3b1184faf1d52da5f4413aad4140b40eb7d970bd436dc4190e63b86168",
-      "research/studies/world_economy/industrial_markets_inputs.json": "2798dfddd3a8f0cad84f9b0954eb42b8e80bb5f0a01d91f09ef6258ab8e9efcd",
+      "research/studies/world_economy/industrial_markets_inputs.json": "7c3efc6c55317147d5e1bfd9679bd1d958bc8ff551466338757fa97750b011c9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11"
     },
     "constants": {
@@ -12,11 +12,11 @@
     },
     "input_products": {
       "research/studies/world_economy/results/construction.json": {
-        "sha256": "b8eb0abc52bb1b178050104d96420f8a103f26f9f23b2a139d7f3735838aa1d2",
+        "sha256": "0735438723d40a99d418346190b2a3fd5161bd4a8a16916c8dbea19c693973ea",
         "schema": "terluna.research.world-economy-construction/1"
       },
       "research/studies/world_economy/results/comparison.json": {
-        "sha256": "4372ece9db02b0e408902c4955f9af27519cb50f8e19ea26055efcadff13efc0",
+        "sha256": "7e68637147aee94e91da25a4fc2428b4887a8a4f478af13637d672572b055e3b",
         "schema": "terluna.research.world-economy-comparison/1"
       },
       "resources/results/industry.json": {
