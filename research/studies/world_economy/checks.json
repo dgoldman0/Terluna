@@ -9,8 +9,7 @@
     },
     {
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
-      "result": "Passed: 2849 Python tests passed, 20 skipped; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer check1141 files,0violations.",
-      "log": "/tmp/terluna-economy-stage1-final-check.log"
+      "result": "Passed: 2849 Python tests passed, 20 skipped; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer check1141 files,0violations."
     },
     {
       "command": "git diff --check",
@@ -21,12 +20,11 @@
     "No empirical validation of source industry, bulk capture, settlement capacity, engineered asset lifetimes or future markets.",
     "Local resource depletion remains unpriced in the reference, with explicit sensitivity allowances.",
     "Construction-phase renewal/operations require contemporaneous funding or additional liabilities; no settlement/production timeline or market-clearing trade model is solved.",
-    "The301K redesign is not propagated through every inherited requirement.",
+    "The 301 K redesign is not propagated through every inherited requirement.",
     "Primary sources were read at the targeted scopes recorded in sources.json and supporting reports, not as a full scholarly literature review.",
     "Ensemble validation establishes workspace integrity, not manuscript or scientific clearance."
   ],
   "earlier_run": {
-    "log": "/tmp/terluna-economy-stage1-check.log",
     "result": "2848 passed,20 skipped,1 reproduction failure because pytest had imported the inventory before the three-world benchmark update during the run. Fresh focused and complete runs passed on the settled files."
   },
   "review": {
@@ -37,8 +35,7 @@
     "focused": "31 study tests passed, including13construction tests; source/product reproduction, joint-feed costs, territorial inclusion and schedule/income scaling.",
     "full_repository_check": {
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
-      "result": "Passed:2862 Python tests,20skipped; JavaScript, calendar, layer, provenance and ensemble passed. Layer1145files,0violations.",
-      "log": "/tmp/terluna-economy-stage2-check.log"
+      "result": "Passed:2862 Python tests,20skipped; JavaScript, calendar, layer, provenance and ensemble passed. Layer1145files,0violations."
     },
     "review": "Independent physical and economic review checked cost conservation, source-site energy, territorial versus beneficiary accounts, ordinary capital inclusion, and construction-era renewal omissions. Broader ordinary-capital allowances replace treating material mass as complete productive capital.",
     "limits": "Prices, source industrial technology, ordinary capital and unquantified environmental/magnetic allowances remain scenarios. Initial/end-state expenditure excludes construction-era operating/renewal funding."
@@ -65,8 +62,7 @@
     },
     "full_repository_check": {
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
-      "result": "Passed:2924 Python tests passed,20skipped in399.00seconds; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer1147files,0violations.",
-      "log": "/tmp/terluna-economy-final-check.log"
+      "result": "Passed:2924 Python tests passed,20skipped in399.00seconds; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer1147files,0violations."
     },
     "numerical_controls": [
       "Reproduction of bound inventory, construction and comparison products; schema and input identity checks.",
@@ -87,8 +83,7 @@
     "full_repository_check": {
       "status": "passed",
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
-      "result": "2999 Python tests passed,20skipped in403.20seconds; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer1155files,0violations.",
-      "log": "/tmp/terluna-economy-followup-check.log"
+      "result": "2999 Python tests passed,20skipped in403.20seconds; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer1155files,0violations."
     },
     "numerical_controls": [
       "All six visitor routes: budgets, capacity, operator territory, direct value added, imported inputs and external-trade closure; zero automatic GWP addition.",
@@ -114,8 +109,7 @@
     "full_repository_check": {
       "status": "passed",
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
-      "result": "3024 passed, 20 skipped in 403.07s (0:06:43); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1163 files, 0 violations.",
-      "log": "/tmp/terluna-early-exports-check.log"
+      "result": "3024 passed, 20 skipped in 403.07s (0:06:43); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1163 files, 0 violations."
     },
     "numerical_controls": [
       "Origin customer budgets, route/bed/life-support capacity and factory orders; destination fares excluded; absent factories remove capital as well as sales.",
@@ -143,8 +137,7 @@
     "full_repository_check": {
       "status": "passed",
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
-      "result": "3097 passed, 20 skipped in 391.06s (0:06:31); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1167 files, 0 violations.",
-      "log": "/tmp/terluna-industrial-transition-check.log"
+      "result": "3097 passed, 20 skipped in 391.06s (0:06:31); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1167 files, 0 violations."
     },
     "numerical_controls": [
       "Bound-product identity and complete reproduction; historical spherical pressure/mass calibration kept separate from the thin-column bound and evolving atmospheric physics.",
@@ -176,8 +169,7 @@
     "full_repository_check": {
       "status": "passed",
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
-      "result": "3126 passed, 20 skipped in 417.26s (0:06:57); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1175 files checked, 0 violations.",
-      "log": "/tmp/terluna-pressure-continuation-check.log"
+      "result": "3126 passed, 20 skipped in 417.26s (0:06:57); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1175 files checked, 0 violations."
     },
     "numerical_controls": [
       "Pumped-chamber gas balance, internal gas floor, impossible target detection and transient solution; equal-pressure zero initial evacuation with positive continuing gas load.",
@@ -191,7 +183,7 @@
     "limitations": [
       "No actual pumping/enclosure/route quote, certified pressure system or empirically demonstrated cost advantage. Constant molecular conductance and pumping speed are illustrative; real gas species, flow regimes and ultimate pressure require equipment-specific treatment.",
       "Continuation assumes the original prices, customers,63.7Mt/year throughput and viable routes. Added cost allowances do not solve competitive repricing, retrofit liquidity, loan restructuring or independent development cash.",
-      "The prior inherited atmosphere inventory remains distinct from the301K redesign; linear pressure loading is not a local or evolving atmosphere simulation.",
+      "The prior inherited atmosphere inventory remains distinct from the 301 K redesign; linear pressure loading is not a local or evolving atmosphere simulation.",
       "Source reading scopes are recorded in industrial_sources.json. No full scholarly review, empirical validation or exact-build PDF/figure inspection."
     ],
     "industrial_continuation_sha256": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
@@ -210,8 +202,7 @@
     "full_repository_check": {
       "status": "passed",
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
-      "result": "3172 passed, 20 skipped in 411.38s (0:06:51); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1177 files checked, 0 violations.",
-      "log": "/tmp/terluna-mature-industry-check.log"
+      "result": "3172 passed, 20 skipped in 411.38s (0:06:51); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1177 files checked, 0 violations."
     },
     "numerical_controls": [
       "Matched 301 K gas properties, 1.2/1 atmosphere loads, ideal vacuum work, no-added-gas pumpdown and a separate continuous process-load diagnostic. A 1 Pa m3/s load requires 10 m3/s to approach 0.1 Pa; it is not assigned to the example 1 m3/s pump.",
@@ -253,8 +244,7 @@
     "full_repository_check": {
       "status": "passed",
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
-      "result": "3204 Python tests passed, 20 skipped in 418.90 seconds; 191 JavaScript tests passed across immersion, column/light-transport and calendar suites. Layer, provenance and ensemble checks passed. Layer 1185 files checked, 0 violations; protection verifier checked five input hashes.",
-      "log": "/tmp/terluna-slow-settling-check.log"
+      "result": "3204 Python tests passed, 20 skipped in 418.90 seconds; 191 JavaScript tests passed across immersion, column/light-transport and calendar suites. Layer, provenance and ensemble checks passed. Layer 1185 files checked, 0 violations; protection verifier checked five input hashes."
     },
     "numerical_controls": [
       "Stokes limit, finite-Re drag force balance, invalid regimes, neutral buoyancy and ideal freefall; boundary-arrival flags distinguish an unbounded drift diagnostic from travel through a vessel.",
@@ -297,8 +287,7 @@
     "full_repository_check": {
       "status": "passed",
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
-      "result": "3231 Python tests passed, 20 skipped in 387.22 seconds; 191 JavaScript tests passed across immersion, column/light-transport and calendar suites. Layer, provenance and ensemble checks passed; 1187 files checked with 0 layer violations and five protection input hashes verified. The final bibliography/product-metadata update received the additional focused reproduction check described above.",
-      "log": "/tmp/terluna-pressure-benefits-check.log"
+      "result": "3231 Python tests passed, 20 skipped in 387.22 seconds; 191 JavaScript tests passed across immersion, column/light-transport and calendar suites. Layer, provenance and ensemble checks passed; 1187 files checked with 0 layer violations and five protection input hashes verified. The final bibliography/product-metadata update received the additional focused reproduction check described above."
     },
     "numerical_controls": [
       "Pressure-only density, buoyant volume/area and fixed-lift speed scaling, with a no-pressure-change control and invalid-domain rejection. Oxygen composition is a separate diagnostic; the design dry oxygen partial pressure matches the rounded Earth reference.",
@@ -341,7 +330,6 @@
     "full_repository_check": {
       "status": "passed",
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
-      "log": "/tmp/terluna-industrial-combustion-check.log",
       "result": "3252 Python tests passed, 20 skipped in 414.26 seconds; 191 JavaScript tests passed. Layer, provenance and ensemble checks passed: 1189 files checked with 0 layer violations, and five protection input hashes verified. A subsequent bibliography identifier correction changed only source metadata; the final product was regenerated and its 21 focused tests passed again in 0.16 seconds. Calculation code and numerical inputs were unchanged."
     },
     "numerical_controls": [
@@ -387,7 +375,6 @@
     "full_repository_check": {
       "status": "passed",
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
-      "log": "/tmp/terluna-distinctive-activities-check.log",
       "result": "3268 Python tests passed, 20 skipped in 407.56 seconds; 191 JavaScript tests passed. Layer, research/provenance and ensemble checks passed: 1191 files with 0 layer violations, and five protection input hashes verified. Ensemble validation covers workspace integrity, not scientific or manuscript clearance."
     },
     "limitations": [
@@ -418,7 +405,6 @@
     "full_repository_check": {
       "status": "passed",
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
-      "log": "/tmp/terluna-sports-finance-check.log",
       "result": "3284 Python tests passed, 20 skipped in 407.52 seconds; 191 JavaScript tests passed. Layer, research/provenance and ensemble checks passed: 1193 files with 0 layer violations, and five protection input hashes verified. Ensemble validation covers workspace integrity, not scientific or manuscript clearance."
     },
     "review": "Independent sports-business and financial-accounting reviews identified the smaller starting scale, remote audience channel, professional accommodation and residual travel/training capacities. Accounting review led to explicit gaps before working-cash use, separately reported extra upfront capital and finite break-even domains. All three fixes are implemented. Final independent prose reviews checked the full sports sequence and financial/currency discussion. Revisions clarify the territory of locally supplied training, exclusion of fixed programme costs from variable costs, and the distinction between debt-payment break-even and the underwriting coverage target. The complete report and numerical tables were substantively read; script checks are recorded separately.",
@@ -463,7 +449,6 @@
     "full_repository_check": {
       "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
       "result": "PASS; 3306 Python tests passed, 20 skipped in 581.41 s; 191 JavaScript tests passed. Layer check 1195 files, zero violations. Research integrity/provenance and five protection input hashes verified; ensemble setup validator passed.",
-      "log": "/tmp/terluna-monetary-system-check.log",
       "boundary": "Repository integrity and numerical checks; no empirical lunar validation or manuscript clearance."
     }
   },
@@ -490,5 +475,13 @@
     "assumptions": "Uses committed lunar gravity; prescribed vertical velocity 2.5 m/s, added horizontal velocity 2 m/s, no drag, equal launch/landing height. Steady level-turn examples prescribe 30 degrees bank and 3 or 6 m/s; no craft performance is established.",
     "capacity_limit": "The proposed one-athlete, two-cell and six-player formats do not validate 20 simultaneous commercial participants.",
     "review": "Complete report substantively read by authoring agent and root. Review clarified judging moments, goal/possession scoring, deliberate and incidental body contact, start possession and timed match duration. Local source links and both recorded product identities checked. No facility qualification or demand forecast."
+  },
+  "capping_check_2026_10_31": {
+    "scope": "The capping commit of domain/provisioning on 31 October 2026: the synthesis rewrite, the functions framing of money and finance, the port study restored with two corrections, records and labels, bindings limited to the files whose values are read, and the merge list.",
+    "regeneration": "Twelve products regenerated in dependency order (industrial_markets, industrial_legacy, industrial_continuation, early_campaigns, pressure_advantages, distinctive_activities, industrial_combustion, slow_settling, sports_finance, amenities, the monetary reference and the aerophyte product), with five readers' inputs rebound to the changed upstream hashes. With the producer blocks masked every product's values are unchanged; the differences are the corrected text in early_campaigns, amenities and the aerophyte product and the rebound upstream hash that distinctive_activities and industrial_combustion carry in their assumptions.",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check, with ulimit -v 16000000",
+    "result": "Exit 0. Layer check: 1,198 files, 0 violations. Python: 3,306 passed, 20 skipped, in 532 s. JavaScript: 191 passed (129 for the immersion after its bake, 48 for the column, references and viewer, 14 for the calendar). Research integrity and provenance: PASS. Ensemble validator: PASS.",
+    "log": "/media/projectspace/terluna-research/session-tools/codex_review/cleanup/provisioning_make_check_1.log",
+    "tree": "The working tree of the capping commit, before this record was written."
   }
 }

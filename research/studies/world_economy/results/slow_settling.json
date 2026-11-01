@@ -4,7 +4,7 @@
     "files": {
       "research/studies/world_economy/slow_settling.py": "9e8b9963ef5837ee75d20857c58cab2f4ece96ff5a51e89f7f651f54d9921b37",
       "research/studies/world_economy/slow_settling_inputs.json": "465f7d7678b32778d1823d7c29eca94778c0ba95c719fc885cc0be06e72cda26",
-      "research/studies/world_economy/slow_settling_sources.json": "358dde366a47b76a9afdb52e706c86d527d5adc3e34f0ea6fca0d562c1e3cb83",
+      "research/studies/world_economy/slow_settling_sources.json": "c8c085257126dfd84d7ad9644a7c62f17294d9121592778c6595e0e1913f9a36",
       "research/studies/world_economy/partial_gravity.py": "70dfa9bff92d1776b7602b3845ba37362d01f3f8ac21b7b6544cd3da81dc1452",
       "research/studies/world_economy/mature_economics.py": "5dce4911db4947bfc957163df87ce59d1998be7b5f2111e76bb58aa2aff3f207"
     },

@@ -35,8 +35,6 @@ figures.
 
 Nothing here is a fire strategy or a certified design.
 
-**Industrial reuse.** The [31 October industrial audit](../world_economy/industrial_combustion.md) distinguishes this port screen from production at 1.2 atm and 301 K. The slower design fire, 23.5% oxygen material screen and post-activation sprinkler control remain assumptions or proposals. Earth correlations and numerical checks do not qualify a lunar factory, and the Earth design fire is not a demonstrated upper bound. The historical implementation and result are retained.
-
 ## What carries over from Earth
 
 Fire engineering's formulas for plumes, ceiling jets, smoke filling, flashover and vent flows follow Froude scaling:
@@ -54,8 +52,7 @@ fire at lunar gravity behaves as an Earth fire several times larger, played abou
 | Largest fire a room's openings can feed | 1 | 0.32 | 0.28 | 0.25 | 0.32 |
 
 The oxygen and the pressure add to what gravity does:
-- **Flames about twice as tall.** Air with 17.5% oxygen supplies less oxygen per kilogram of air, so a flame
-  draws in more of it, and the flames lengthen.
+- **Flames about twice as tall.** Each kilogram of air at 17.5% oxygen carries a sixth less oxygen, so a flame draws in more of it, and the flames lengthen.
 - **Hotter, slower smoke.** The plume takes in about two-thirds of Earth's air, so its smoke is hotter and less
   diluted, and it moves more slowly.
 - **Starved room fires.** A room's door and window breathe about a third as much, since buoyant flow through an
@@ -69,8 +66,7 @@ The spaces:
 - **A compartment.** A floor compartment of 2,000 m² under a 3.5 m ceiling, the size of Earth's usual smoke reservoir.
 - **A hall.** A hall of 5,000 m² through three of a band's four storeys, under a 12 m ceiling.
 
-Smoke detection is represented by a 13 K ceiling-jet temperature-rise surrogate, without modeling aerosol entry or a specific optical detector. Quick-response sprinklers use RTI
-50 (m s)^½ and a 68 °C activation temperature. The table compares Earth with the enclosed floors at 3–10 km for EN 1991-1-2's design fire, with
+The sensors are smoke detectors, timed by the usual 13 K rise of the ceiling jet as a temperature surrogate for the smoke reaching them, and quick-response sprinklers (RTI 50 (m s)^½, 68 °C), timed to their activation. The table compares Earth with the enclosed floors at 3–10 km for EN 1991-1-2's design fire, with
 the slower lunar estimate (section 2) in brackets. The enclosed zones above 10 km differ from it by under 6%; on the
 open floors below 3 km some times run up to a fifth longer, the transport hall's sprinklers the most.
 
@@ -117,7 +113,7 @@ What this shows:
 
 EN 1991-1-2 Annex E gives each occupancy a growth rate, a peak heat release per square metre and a fire load. The
 lunar estimate takes one growth class slower, twice the time to reach 1 MW, and scales the peak by 0.65. That factor
-comes from evaluating Peatross and Beyler's correlation at about 17.5% oxygen. The original relates normalized mass loss to oxygen at the flame base in particular compartment and small-fuel experiments; it does not establish this reduction at the surface's 1.2 atm or at lunar gravity. The two fire cases remain scenarios rather than validated bounds.
+is Peatross and Beyler's measured fall in burning rate at 17.5% oxygen.
 
 Why a slower estimate:
 - **Measured slowing.** In partial-gravity flights, upward flame spread over thin fuels fell roughly in proportion
@@ -144,7 +140,10 @@ centrifuge tests (Ferkul and Olson 2011), tabled by Miller et al.:
 | Ultem 1000 (70 kPa) | 23.0–23.5% | 19.9–21.0% | 2.5–3.1 points |
 | Nomex HT90-40 (101 kPa) | 22.1–23.5% | 19.9–21.0% | 2.2–2.5 points |
 
-- **Proposed screen for critical materials.** The proposal tests materials in escape routes, concealed spaces, cable insulation and the sealed zone for self-extinguishment in NASA-STD-6001's upward test at 23.5% oxygen: the design's 17.5% plus the largest shift in the cited sample. Testing at 1 atm versus the port's 0.74–0.95 atm may add margin for materials following the cited pressure trend. That trend and the observed gravity shift do not establish a universal acceptance rule; assemblies, flows, temperatures and sustained lunar-gravity exposure remain to be tested. This screen does not qualify surface factories at 1.2 atm.
+- **Rule for critical materials.** Materials in escape routes, concealed spaces, cable insulation and the sealed
+  zone stop burning in NASA-STD-6001's upward test at 23.5% oxygen. That is the design's 17.5% plus the largest
+  measured shift. Testing at 1 atm adds margin, since the port's air is at 0.74–0.95 atm and a material's oxygen
+  limit rises as pressure falls (NASA White Sands tests).
 - **Everywhere else.** Rooms, shops and halls follow Earth practice for linings and furnishings, with sprinklers.
 - **Top up by pressure.** Topping up the middle zones' air should raise its pressure and keep the 17.5%. Enriching
   it instead to match the summit's breathing would take 21.3% oxygen at the top of the 3–10 km zone, 23.5% at 10–15

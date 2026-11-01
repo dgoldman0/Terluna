@@ -9,8 +9,7 @@ capacity for other biomass, gardens, homes and small communities. That service c
 valuable even when the host's own harvested output is modest. Materials can be recovered
 during renewal or at the end of life while the host continues supporting its inhabitants.
 
-These are provisioning proposals based on the ecology models, rather than selected crops,
-proven edible organisms or a change to the planned food blend. Agricultural value includes
+These are provisioning proposals built on the ecology models, ahead of any selected crop or proven edible organism, and the planned food blend stands as it was. Agricultural value includes
 propagation, feedstocks and materials as well as food. Economic value also includes the
 services a living community provides while it remains intact. The accompanying
 [calculation](aerophytes.py) and [product](results/aerophytes.json) separate recurring host
@@ -27,11 +26,11 @@ expenditure from a possible new product allocation; [inputs](aerophytes_inputs.j
 | Small 8–15 m bodies in the food-web study | Experimental specialist forage or whole-body crops | Propagules and ecological restoration stock | Rebuilding gas, envelopes and reserves consumes most construction carbon; smallness does not make them efficient annual crops |
 | G50 epiphytes and G51 underside films, associated with the hosts | Candidate herbs, ornamentals, leafy/algal crops, pigments or other specialty compounds | Nursery services, biological collections and material cultures | Their independent fixation is additional to the host account only after their own light, nutrient, water and shading effects are calculated |
 
-The proposed products do not follow automatically from the taxonomic names. A storage pod,
+The proposed products are designs to investigate beyond what the taxonomic names give. A storage pod,
 exudate organ or cultivated film is a design to investigate. Suitable composition,
 digestibility, processing and harvest response would distinguish a food cultivar from a
 material cultivar. A microbial or fungal culture supplied with host sugars converts the
-host's production; it does not add independent primary production.
+host's production, with no independent primary production of its own.
 
 ## How much carbon could a crop receive?
 
@@ -65,15 +64,13 @@ Annual structural renewal is about 0.33 kg dry/m² in the lesser body, 0.53 in t
 and 1.27 in the giant. All three renew 0.50 kg dry/m²/year of host green tissue.
 
 The light reductions are prescribed sensitivities, with gross fixation scaled linearly and
-fixed upkeep retained. They are not predictions for a particular coverage, altitude or the
+fixed upkeep retained, independent of any particular coverage, altitude or the
 final 301 K climate. At a 20% reduction the representative giant cannot pay its full fixed
 programme at the central mortality rate; the calculation credits no crop in that case.
 Lesser bodies and reef modules retain allocation margins. Real shade acclimation, directional
 light and changing tissue investment could change these responses.
 
-The ecology branch's richer-sky estimate remains provisional because its new mutual-shading
-column does not resolve the Moon's strong multiple scattering. This provisioning account
-therefore avoids multiplying a per-area crop by an assumed global cover. Existing tenant-light
+The ecology branch's richer-sky estimate (the aerial-productivity study, domain/ecology 9633550) counts the surface's light and rain losses at first order on a vertical-beam column, with the Moon's multiple scattering through the community still to compute, so this provisioning account keeps its crops per area, without a global cover. Existing tenant-light
 calculations do support photosynthesis on flanks and undersides: at 10 km an isolated underside
 receives 19–30% of top horizontal illumination, and a reef underside 11–22%, over the stated
 ground-albedo range. A separate crop model must establish how much production those surfaces
@@ -94,7 +91,7 @@ supports on illuminated flanks or fringes could hold cultivated epiphytes or pho
 films with managed water and nutrient return. Some crops might be more valuable for their
 propagules, aromas, pigments or appearance than for bulk calories. Earth experiments on
 orchid propagation show that managing compatible fungi can materially affect successful
-seedling production; that is a precedent for nursery expertise, not a lunar yield estimate
+seedling production, a precedent for nursery expertise ahead of any lunar yield estimate
 ([Yang, Li and Gao, 2023](https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2023.1114105/full)).
 
 The crop also needs its own response to the long light and dark intervals. An attached herb
@@ -128,7 +125,7 @@ of selected organs would preserve that machinery between harvests.
 **Shed membrane is the most developed material opportunity in the existing work.** A 2-km
 colony's old resource scenario yields about 38,000–570,000 m²/year of collected film, assuming
 renewal every 10–30 years and recovery of 10–50%. Those are design assumptions, and the result
-is membrane area rather than certified gas-cell fabric. Permeability, strength, fatigue,
+is membrane area, ahead of any certification as gas-cell fabric. Permeability, strength, fatigue,
 storage and joining after collection remain open. Repair patches, packaging or composite
 feedstock may accept material that fails the much stricter demands of lifting-gas containment.
 Active gas barriers must remain continuous; a harvest method needs to establish that a new
@@ -165,7 +162,7 @@ a round body four square metres of physical surface per projected square metre a
 about 3.63. A 2-km reef therefore has roughly **11.4 km² of physical surface over a 3.14 km²
 projected footprint**, divided among tops, flanks, contacts and undersides. Those surfaces
 offer different light and moisture conditions for gardens, nurseries, pools, films and other
-communities. Physical surface is not automatically walkable floor or productive cropland;
+communities. Walkable floor and productive cropland are portions of that physical surface;
 built living areas would occupy selected portions while the host keeps its productive tissue
 and the other organisms keep their habitat.
 
@@ -253,8 +250,8 @@ return cost divided by delivered saleable output, compared with the alternative 
 The present model supplies only a carbon-allocation input to that calculation. Processing
 recovery, edible fraction, prices, demand and service revenue remain unspecified. Specialty
 products and local supply to aerial settlements are sensible first comparisons because they
-can carry more collection cost per unit mass; this is a research priority, not a profitability
-finding. Bulk fuel and removal of operating lifting hydrogen are weak starting candidates:
+can carry more collection cost per unit mass; this is a research priority, with profitability still to be found.
+Bulk fuel and removal of operating lifting hydrogen are weak starting candidates:
 they spend the same valuable carbon or lift needed to maintain the producer. A dedicated
 gas-producing cultivar would be a separate energy-conversion proposal, compared with
 electrolysis and other gas supplies; the present operating inventory is not its annual yield.

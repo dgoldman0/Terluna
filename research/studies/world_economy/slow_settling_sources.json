@@ -41,7 +41,7 @@
       "reading": "Complete 15-page author-repository PDF retrieved to temporary storage. Targeted reading: abstract, cultivation methods 2.2, suspension/growth results and Table 1, conclusions. Indexed publisher passages supplement methods. No supplementary-data audit.",
       "retrieval": "Hindawi and browser author-PDF retrieval initially failed; direct public repository download obtained the intended DOI/title PDF.",
       "sha256": "a0a097900de0eb27a04d27c0d7f94713dae8349520ec512d701a91a0aa7974b6",
-      "temporary_pdf": "/tmp/terluna-slow-settling/jossen2016.pdf",
+      "temporary_pdf": "not kept: a temporary download during source reading",
       "claims": [
         "Terrestrial hASC yield depends on agitation and aggregation; the highest tested rpm gave the lowest living cell density.",
         "Large aggregates were associated with reduced living-cell density even at low shear; diffusion limitation was proposed rather than established.",

@@ -528,7 +528,7 @@
         "comfort in sway at 0.16 g, where a sideways acceleration tilts the apparent vertical six times more than on Earth",
         "the central port's power: about 400 MW for its floors; screened slow rotors over its whole open face give 74% in the modelled winds (132% with the summit speed-up) for 43 Mt more steel, and 140% in main's corrected climate for 65 Mt more (studies/infrastructure_review); louvered panels on the face, level panels on the highland around the base and pumped storage with the Korolev lake are the other parts",
         "the central port's occupancy figures (areas per person, busy-hour shares) are rough planning figures to check against published standards",
-        "fire at 0.16 g: the port has a first-order study (studies/port_fire: Earth correlations carried by Froude scaling, design fires bracketed, a proposed 23.5% oxygen screening test (not a universal lunar acceptance rule), compartments with assumed sprinkler control, shafts broken every three bands, 33 water pressure zones); open are full-scale fire data at partial gravity (NASA's FM2 is planned as the first fire on the Moon), sprinkler sprays at 0.16 g, crowd flows, wind-driven fire and smoke through a band (CFD of a band section), and the city",
+        "fire at 0.16 g: the port has a first-order study (studies/port_fire: Earth correlations carried by Froude scaling, design fires bracketed, a materials test at 23.5% oxygen, compartments with sprinklers, shafts broken every three bands, 33 water pressure zones); open are full-scale fire data at partial gravity (NASA's FM2 is planned as the first fire on the Moon), sprinkler sprays at 0.16 g, crowd flows, wind-driven fire and smoke through a band (CFD of a band section), and the city",
         "the port's architecture is a first proposal (visualization/summit-port): six leg towers with lift cores, a four-storey wing every 200 m wrapped round two opposite legs, berths every 60 m, gate interchanges and a crown terminal; the building fills about 1/2,000 of the space inside the frame, so it reads as a lattice with shelves; the crown's docking arms as drawn are not credible structure; long-haul berths depend on the long-haul class, the author's to choose (studies/sky_fleet compares and draws four classes at the crown on the sized form: 27 berths of 500 m liners on three levels with arms of 772 m, 8 of 750 m on two with arms of 424 m, 4 of 1 km, or one of 1.5 km; it recommends the 750 m liner and adding winged liners on landing pads); only the hexagonal frame is modelled",
         "sky ships and the other flyers (studies/sky_ships, studies/sky_fleet): the classes from canopies, micro gliders and pedalled wings to long-haul liners, freighters and high platforms are sized with their numbers for the metropolis and height bands; open are the author's choice of long-haul class and whether winged liners join it, a wind study of the crown's wake before the berths are fixed (berths in the lee sit in the tower's wake; the Empire State Building's mast failed on its eddies), an automated traffic system for sky boats (at a car-like 10% of trips they are denser than NASA's urban air mobility spacing allows; about 7-8% fit), shared rather than owned sky boats (owned at Tokyo's rate for cars their berths would cover three-fifths of the city), designs of a sky boat, a personal wing and a ferry, hydrogen safety at scale or a helium supply, buoyancy over the lunar day and night, and sheds or open-air yards for kilometre-long ships",
         "the corrected climate (main's A28_dim5_moon; studies/infrastructure_review): winds aloft about twice as strong; with main's corrected inputs the design gust is 32.4 m/s, the port's chosen form takes 98 Mt of steel, the moored ships' design and service winds are 38.6 and 24.4 m/s, and the high platforms near 70 km need about seven times the power to hold station; the summit's model cells rain 9-17 mm a day; the four studies rerun with the corrected inputs at the joint integration",
@@ -919,7 +919,7 @@
     },
     {
       "topic": "aerophyte_provisioning",
-      "condition": "conditional_product_allocation_economic_use_and_living_area_clusters_2026_10_31; no_crop_market_harvest_quota_or_resident_capacity_adopted",
+      "condition": "capped_for_the_merge_2026_10_31; conditional_crop_allocation_living_area_and_services_on_the_sky_ecology_product",
       "material": [
         "../provisioning/aerophytes.md",
         "../provisioning/aerophytes.py",
@@ -929,16 +929,20 @@
         "../provisioning/aerophytes_checks.json"
       ],
       "unresolved": [
-        "Product composition, extra crop upkeep and night reserves, wet mass, harvest schedules and host recovery.",
-        "Living-area clusters: domatia establishment and replacement, extra gas, floors and connections, trim and complete residential services.",
-        "Additional crop water, nitrogen and phosphorus delivery; return of harvested nutrients and effects on existing tenants.",
-        "Diffuse light through cultivated communities, final301K weather, collection logistics and comparative costs against ground farms, sky-town farms and manufactured materials."
+        "Product composition, the crop's own upkeep and night reserves, wet mass, harvest schedules and host recovery.",
+        "Living-area clusters: domatia establishment and replacement, extra gas, floors and connections, trim and complete residential services; where cultivated and inhabited aerophytes sit in the managed share of the sky.",
+        "Additional crop water, nitrogen and phosphorus delivery and the return of harvested nutrients.",
+        "Diffuse light through cultivated communities, the final 301 K weather, collection logistics and comparative costs against ground farms, sky-town farms and manufactured materials."
       ],
-      "next_session_task": "Test one lesser-body crop and one modular reef product through a complete harvest cycle; qualify shed membrane separately. Develop small-home and community clusters with gardens and habitat, closing payload, local support, gas, trim, human services and nutrient return."
+      "next_session_task": "None before the merge. The merge adds provisioning/aerophytes to settle's order after sky_ecology, the aerophyte study and inhabited_volume, and cites the ecology context at its path once the ecology branch is merged. The branch takes no further work before the merge.",
+      "findings": [
+        "Lesser aerophytes and 60 m sky-reef modules have 0.85-0.93 kg C/m2 a year to allocate after upkeep and adult replacement: 4-8 t of generic dry tissue per projected hectare a year at 25-50% allocation, against 1.2-2.4 t for 1 km round giants.",
+        "Clusters of 3 and 30 tenant modules, each with 3 green modules, carry 102 and 1,023 t, a four-person home and a community of sixteen at the inhabited-volume study's 20 and 50 t a resident, for about 21% of the green modules' residual carbon."
+      ]
     },
     {
       "topic": "world_economy",
-      "condition": "conditional_three_world_economy_with_preliminary_sport_media_project_finance_2026_10_31; monetary_institutions_in_separate_monetary_system_study; no_market_forecast_or_financing_terms_adopted",
+      "condition": "capped_for_the_merge_2026_10_31; proposals_and_calculations_on_the_committed_inventory; sector_ratios_and_prices_are_judgements",
       "material": [
         "studies/world_economy/README.md",
         "studies/world_economy/inputs.json",
@@ -1005,32 +1009,23 @@
         "studies/world_economy/sports_concepts.md"
       ],
       "unresolved": [
-        "Source-site energy, ore processing and bulk capture architecture; future unit prices and full construction/settlement timeline, including renewal funding.",
-        "Territorial ordinary asset portfolios, lifetimes, natural-resource depletion and measured costs of environmental/safety operations.",
-        "Array workloads, realised demand, export capacity, ownership and long-term institutions; no market-clearing or financing feasibility is established.",
-        "Revised301K climate and biological requirements are not yet propagated through every inherited physical input.",
-        "Hybrid maintenance and peak visitor capacity; buyer demand and independent source of project cash; asset commissioning and replacement before occupancy.",
-        "Surveyed exportable lunar reserves after future use and protection, nutrient-retention performance/cost, and actual depletion valuation.",
-        "Product-specific curing, gas escape and particle mobility; qualified partial-gravity manufacturing compared with optimized Earth processes and rotating orbital factories.",
-        "Enclosed-community visitor demand and engineering costs, permanent resident funding and a dated commissioning schedule; new facility capital must be reconciled with mature ordinary assets.",
-        "Retained-gas release sequence, local vapour/dust control and pressure-qualified process windows; no complete vacuum factory or post-atmosphere export architecture.",
-        "Equipment quotations, realistic simultaneous orders and route capacity; terminal recovery versus retained use, equity returns and qualified long-term material/specification survival.",
-        "Process-specific staged enclosure/pumping costs and retrofit funding, retained customers and export-route adaptation; no mandatory closure follows from loss of ambient process vacuum.",
-        "Complete product-cycle and delivered-cost qualification under 1.2 atm: hot assemblies, printed cores and sintered composites compared with optimized Earth and rotating array processes.",
-        "Funded campaign orders, ramp and commissioning design, export routes and actual plant capital; customer advances change financing timing and do not establish independent programme income.",
-        "Product-specific suspension and recovery under lunar gravity: dense/aggregating rheology, uniformity, heat and gas transfer, complete-cycle accepted yield and time-dependent material or biological quality.",
-        "Empirical low-gravity mixer scaling, powder cohesion and fluid-bed entrainment; full transport, forced-harvest and fixed-capital costs compared with optimized Earth and freefall/rotating array recipes.",
-        "Complete equipment and economic qualification of pressure benefits: net buoyant payload, matched heat/ventilation duties, liquid-system margins and vacuum-assisted material quality; ambient advantages versus controlled Earth/array facilities.",
-        "Assembly-specific ignition, propagation and smoke behaviour at 121.59 kPa, 17.5% oxygen, 301 K and lunar gravity; process flow, hot exposure, dust and deposits require separate qualification. No general fire-loss or material-cost premium is established.",
-        "Activity-specific capacity and complete costs for connected flying/garden districts, aquatic environments and large physical testing campuses; rotating-array alternatives, user demand and regional 301 K conditions. Living-host capacity and clinical benefits remain unqualified.",
-        "Costed first-community sport/media programme, trained visitor and professional capacity, rights ownership, repeat demand and contracted receipts; full host funding, equity returns, contract denomination and matched debt terms remain open.",
-        "Proposed sport rules, movement control and arenas require physical trials, operating qualification and audience testing; commercial calculations do not establish sports design or demand."
+        "The source economies and colonies as a fourth account; the build's energy and departure propulsion in resources' extraction plan.",
+        "Interworld travel sized against transport, arrival ports and the register's transport rules, before tourism balances carry financing conclusions.",
+        "The engineering models inside the study (industrial_physics, partial_gravity, slow_settling, pressure_advantages, industrial_combustion, and distinctive_activities' physical references) as engineering products the economy reads.",
+        "Territorial asset portfolios, lifetimes, depletion and the costs of environmental and safety operations; array workloads, demand and export capacity; the institutions, which the communities choose.",
+        "The 301 K design run's refresh of the inherited power, food, water and structural inputs; the sport model's twenty participants against formats of one, two and six."
       ],
-      "next_session_task": "Qualify a slowly immobilizing filled material and one fragile culture or crystal suspension through distribution, functional quality and final recovery. Compare optimized Earth, lunar and freefall/rotating processes. Price a modular structural or thermal yard against funded orders and a post-campaign use; retain the 1.2 atm lock and account for actual process pressure. Compare a heat-limited air circuit and a pressure-difference clamping process with their actual equipment curves before assigning pressure-related cost savings. Compare a bonded panel or cable assembly across matched normoxic atmospheres and gravities; qualify the process before valuing material substitution, conditioning or yield gains. Develop a connected flying/garden district, an aquatic facility and a physical testing campus with equal-service Earth/array comparators, explicit regional conditions, capital and user demand. Prioritize a recurring sport/media programme in one enclosed community, with a costed schedule, rights ownership, visitor preparation, contracted customer receipts and an explicit financing term sheet. Compare currency institutions independently in monetary_system."
+      "next_session_task": "None before the merge. The merge rebinds the world economy's inputs.json to main's power, carbon_cycle, distributions, food_blend and terrain_through_time products and amenities_inputs.json to main's distributions and sea_phosphorus, all differing by hash only, and adds the chain to settle's order: inventory, construction, compare, amenities, early_exports, partial_gravity, industrial_physics, industrial_markets, industrial_legacy, industrial_continuation, mature_industry, early_campaigns, slow_settling, pressure_advantages, industrial_combustion, distinctive_activities and sports_finance, each rebound in its readers' inputs as it rebuilds, then the monetary study, whose context binds comparison.json and inputs.json. Deferred to the reconciliation: moving the engineering models to engineering/ (each mixes physical and cost calculations and binds the next by hash, so the move is a redesign of the modules and their products), splitting the build's energy out of construction.py into resources, sizing interworld travel, and the editorial pass on the industrial write-ups' bodies. The branch takes no further work before the merge.",
+      "findings": [
+        "Earth:Moon:array gross product 100:93:56 and net product 100:91:53 at C', the population split times an assumed 1.049 of Earth's value added per resident on the Moon and 1 in the array; the cases span 74-112 for the Moon and 42-83 for the array.",
+        "The middle inventory's 3.2e19 kg of air and water needs 46, 99 or 366 PW of source-site process power over 500 years, 82% of it departure propulsion in the advanced case; with the hubs' 20-340 PW of braking, 120-440 PW against the 501 PW civilization envelope. At an assumed 0.01, 0.1 or 1 U/MWh it costs 11, 97 or 2,964 years of future Earth's output.",
+        "A patient-debt example leaves the Moon and the array 100:75:48 of Earth's resources after replacement and external principal; full deferral at 1% fails.",
+        "The connected travel case brings 3.58 billion arrivals a year to the Moon, a flow set by spending and still to be sized against transport, arrival ports and the register's transport rules."
+      ]
     },
     {
       "topic": "monetary_system",
-      "condition": "conditional_institutional_analysis_and_reproducible_stock_flow_reference_2026_10_31; no_currency_regime_or_monetary_policy_forecast_selected",
+      "condition": "capped_for_the_merge_2026_10_31; the_functions_any_arrangement_performs_and_four_currency_arrangements_of_the_present_day_family; verified_ledger_at_normalized_sizes",
       "material": [
         "studies/monetary_system/README.md",
         "studies/monetary_system/institutions.md",
@@ -1043,12 +1038,15 @@
         "studies/monetary_system/checks.json"
       ],
       "unresolved": [
-        "Jurisdictions, fiscal authority, monetary mandate, membership and guarantees are unselected.",
-        "Staged domestic supply, invoicing currencies, imports, debt ownership and maturities are needed to rank regimes quantitatively.",
-        "Inflation, exchange rates, interest rates, credit demand and behavioral production responses are not modeled.",
-        "Targeted institutional source reading does not constitute a complete literature review or empirical lunar validation."
+        "The arrangement itself, its mandates, collective revenue and guarantees, chosen through the communities' collective decisions.",
+        "Staged domestic supply, invoicing currencies, imports, debt ownership and maturities for a quantitative comparison.",
+        "Inflation, exchange rates, interest rates, credit demand and production responses."
       ],
-      "next_session_task": "Build dated sector and external accounts with explicit physical capacity, contract currencies, fiscal funding and joint shocks before estimating gains from any monetary regime."
+      "next_session_task": "None before the merge. The merge adds research/studies/monetary_system/run to settle's order after the world economy's comparison and refreshes its two context identities (comparison.json and the world economy's inputs.json) once those are rebound. The branch takes no further work before the merge.",
+      "findings": [
+        "Currency use, access to settlement and emergency lending, and the bearing of losses are separate functions; three worlds need not mean three currencies or three issuers.",
+        "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs."
+      ]
     }
   ]
 }

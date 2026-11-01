@@ -45,7 +45,6 @@
   "local_context": [
     {
       "path": "research/studies/world_economy/early_exports.md",
-      "sha256": "045f60ba9f6bc868ba793372e9db2b0544d64f1d56e7d2982c4244fa7810c8ac",
       "use": "Prior first milestone, synthetic facility allowances and coverage boundary; new venue is an alternative smaller account, not additive."
     },
     {
@@ -55,17 +54,14 @@
     },
     {
       "path": "research/studies/world_economy/distinctive_activities.md",
-      "sha256": "d991838cfc6c5a3d9952c1e55c187a560f1e2cab97da4610da5291730f157cef",
       "use": "Physical activity opportunities; this stage develops the early operating sequence and finance."
     },
     {
       "path": "research/studies/land_cities/README.md",
-      "sha256": "de3a4e5d8f919ad2c6b14ca7c3ff885067f34948249fc4aa0b13124bc36a6346",
       "use": "Enclosed lava-tube communities, liner/habitat options and future water exposure; cave size does not establish a pressure-qualified venue."
     },
     {
       "path": "research/studies/world_economy/annual_accounts.md",
-      "sha256": "599b97e442aa78cc05fe11c3236840de950856fa870fb34a66c0fb04ed489e35",
       "use": "Debt payments versus production, ownership and capital renewal."
     },
     {

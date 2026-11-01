@@ -1,14 +1,14 @@
 {
   "schema": "terluna.provisioning.aerophyte-products/1",
   "evidence": "Allocation arithmetic on hypothetical mature aerophytes. Generic new tissue is not a demonstrated edible, saleable or physically supportable crop; no market, farm, nutrient supply or harvest operation is simulated.",
-  "reading_rule": "Carbon flows are kg C per horizontal projected m2 per year; dry allocation is tonnes per projected hectare per year; crop phosphorus is kg P per projected hectare per year. Membrane is m2 per year for one specified2km colony. Inhabited clusters report total projected hectares, tonnes of conditional tenant allowance and annual tonnes C; people are payload equivalents under inherited district budgets, not capacity. Projected area is not leaf area, atmospheric volume or surface terrain. The reference uses inherited GPP2 physiology; light fractions are prescribed sensitivity cases, not angular transport or final301K weather. Allocate only after fixed host costs, tenant sugar and adult replacement. Crop allocation competes with growth, sailing and extra tenants. New crop maintenance, night storage, decay, wet-load gas and harvest-wound repair are uncomputed deductions from this allocation ceiling. Phosphorus is an additional leaflike harvest loop, excluding existing host demand. Do not add crop potential to an already fully allocated biomass total.",
+  "reading_rule": "Carbon flows are kg C per horizontal projected m2 per year; dry allocation is tonnes per projected hectare per year; crop phosphorus is kg P per projected hectare per year. Membrane is m2 per year for one specified 2 km colony. Inhabited clusters report total projected hectares, tonnes of conditional tenant allowance and annual tonnes C; people are payload equivalents under inherited district budgets, not capacity. Projected area is not leaf area, atmospheric volume or surface terrain. The reference uses inherited physiology at a gross fixation of 2 kg C/m2/year; light fractions are prescribed sensitivity cases, not angular transport or the final 301 K weather. Allocate only after fixed host costs, tenant sugar and adult replacement. Crop allocation competes with growth, sailing and extra tenants. New crop maintenance, night storage, decay, wet-load gas and harvest-wound repair are uncomputed deductions from this allocation ceiling. Phosphorus is an additional leaflike harvest loop, excluding existing host demand. Do not add crop potential to an already fully allocated biomass total.",
   "producer": {
     "files": {
-      "provisioning/aerophytes.py": "31cc50d558d226dac97f38241ef2f74b24f29dbddeabe640a3d72692ae464a12"
+      "provisioning/aerophytes.py": "6f950213d2882a3dd909d70103c9d949b31163be3b9f1f63b7f9bf81d3d58b35"
     },
     "inputs": {
       "provisioning/aerophytes_inputs.json": "16c03cad0a1b8196387f5ff16037adbd65ff9ce092c78069a25dfe62ad0c5630",
-      "provisioning/aerophytes_sources.json": "8eeb5396f76e3787f0c9335764d62c6513384813f8c3ce24dc4ab9b7b769c4dd",
+      "provisioning/aerophytes_sources.json": "fd374686c0da5a06d537e5b2e2292a6c8a9a55be3c31e68e20f0a0f53d608f3f",
       "research/studies/sky_ecology/results/sky_ecology.json": "16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af",
       "research/studies/aerophytes/results/aerophytes.json": "3721a734cfc100c2d2070db9f7b56de94b03e227631cb56ac6a7b08801f096ca",
       "research/studies/inhabited_volume/results/inhabited_volume.json": "62002e2d2edd27109ac410097826ea96a1d4b4a9799dd64c33b1cfd505ce0a29"
@@ -1993,7 +1993,7 @@
     "New crop respiration, night storage, decay, wet-load gas and harvest-wound repair",
     "Wet standing crop, buoyancy, trim and harvest schedules",
     "Water, nitrogen and phosphorus delivery including new crop demand",
-    "Diffuse light through crowded communities and final301K weather",
+    "Diffuse light through crowded communities and the final 301 K weather",
     "Independent fixation by attached crops and their effect on the host",
     "Access, transport, equipment, labor and comparative costs",
     "Living-area clusters: domatia replacement and establishment, payload gas, connections, floors and human services",

@@ -3,7 +3,7 @@
   "producer": {
     "files": {
       "research/studies/world_economy/industrial_markets.py": "e0d0bc3b1184faf1d52da5f4413aad4140b40eb7d970bd436dc4190e63b86168",
-      "research/studies/world_economy/industrial_markets_inputs.json": "6d22ccf4c4f845efc5a342c11d0c299cc5dd349214c6081f966014fcc31bc98d",
+      "research/studies/world_economy/industrial_markets_inputs.json": "7b419330545551f592db034ec97d6ef37359984d60ec5844907fdd1a631661fa",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11"
     },
     "constants": {

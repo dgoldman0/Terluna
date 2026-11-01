@@ -34,7 +34,7 @@
       "pdf": "https://iapws.org/technical-guidance/release/Supp-sat.download",
       "reading": "Landing page and the intended seven-page PDF retrieved. PDF pages 2, 3 and 7 rendered and inspected: temperature scale, constants, vapor-pressure equation and Table 1 controls. The repository's existing water law matches the displayed coefficients; its other thermodynamic functions were not used.",
       "sha256": "a10d38d73339b0713c86cfac88f9adcba137202167ccdfa1cd58238c438361d7",
-      "temporary_pdf": "/tmp/terluna-pressure-benefits/iapws-saturation.pdf",
+      "temporary_pdf": "not kept: a temporary download during source reading",
       "supports": "Pure-water equilibrium saturation and inversion for boiling temperature. Table 1 gives 101325 Pa at 373.1243 K.",
       "limit": "No mixture boiling, local heat-transfer coefficient, pump design or sterilization performance."
     },

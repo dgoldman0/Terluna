@@ -122,7 +122,7 @@
       "independent_funding_fraction": 1,
       "eligible_stock_kg": 4500000000000.0,
       "procurement_years": 300,
-      "stock_rule": "Hypothetical 10% of45Gt if all3B eventual colonists used15t/person of fabricated structure. No adopted architecture, demand or near-term population is implied."
+      "stock_rule": "Hypothetical 10% of 45 Gt if all 3 billion eventual colonists used 15 t/person of fabricated structure. No adopted architecture, demand or near-term population is implied."
     }
   },
   "delivery_U_kg": {

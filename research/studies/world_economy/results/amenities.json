@@ -3,7 +3,7 @@
   "producer": {
     "study": "world_economy",
     "files": {
-      "research/studies/world_economy/amenities.py": "9095a6cd43852b3100baaafc7df9ad2aa6145f13a9092812f8e00fa9586df53a",
+      "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
       "research/studies/world_economy/amenities_inputs.json": "f529192e5a65b94e59520f28d42cacdb8262f49e0355123c12f2ae2434772a52",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
@@ -23495,7 +23495,7 @@
   },
   "limitations": [
     "Hybrid water, maintenance machinery, utilities and seasonal/peak capacity remain unsized.",
-    "The301K redesign changes comfort and ecological management; older amenity descriptions are not new regional comfort simulations.",
+    "The 301 K redesign changes comfort and ecological management; older amenity descriptions are not new regional comfort simulations.",
     "Tourism assumes visitor status, service-only spending and a first-tier import account; local amenities include destination services on domestic trips, with domestic passenger fares excluded.",
     "Capacity and commissioning schedules are explicit assumptions; early array real activity does not establish full lunar outdoor access.",
     "Construction remains uniformly funded over500years; no resource-feasible milestone network is solved.",

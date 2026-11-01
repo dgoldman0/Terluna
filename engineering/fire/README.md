@@ -42,4 +42,4 @@ What it does not carry:
 
 The [port fire study](../../research/studies/port_fire/README.md) applies them to the summit's central port.
 
-The [industrial audit](../../research/studies/world_economy/industrial_combustion.md) qualifies reuse at the 1.2 atm surface. `lunar_estimate` supplies an assumed slower scenario, not a validated heat-release reduction; the Earth case does not establish a universal upper bound. `materials_test_oxygen_percent` calculates a proposed screening margin from a small material sample and cannot guarantee lunar self-extinguishment. Smoke detection uses a ceiling-temperature surrogate, and sprinkler activation does not validate spray suppression. The existing implementation and port result remain reproducible with these limits.
+The [industrial-combustion assessment](../../research/studies/world_economy/industrial_combustion.md) applies the models to production at the 1.2 atm surface.

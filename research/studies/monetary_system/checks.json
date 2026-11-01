@@ -9,7 +9,6 @@
   "full_repository_check": {
     "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
     "result": "PASS; 3306 Python tests passed, 20 skipped in 581.41 s; 191 JavaScript tests passed. Layer check 1195 files, zero violations. Research integrity/provenance and five protection input hashes verified; ensemble setup validator passed.",
-    "log": "/tmp/terluna-monetary-system-check.log",
     "boundary": "Repository integrity and numerical checks; no empirical lunar validation or manuscript clearance."
   },
   "reviews": [
@@ -96,5 +95,14 @@
     "scope": "Local Markdown destinations in eight new or revised synthesis/research documents; all resolve.",
     "substantive_reading": "All three monetary reports and the full sports-concepts report read substantively. Independent institutional/accounting review led to explicit private interbank funding alternatives, correct transfer classifications, delivery/ownership conditions on equipment imports, debt-horizon analysis and a common-shock regime comparison. Sports review clarified judging moments, possession, body-contact conduct and match duration."
   },
-  "result_sha256": "fd2b20dced8d8572ce6df1585ec096da90461debb456e7d195a2fd6677e5aa8a"
+  "result_sha256": "fd2b20dced8d8572ce6df1585ec096da90461debb456e7d195a2fd6677e5aa8a",
+  "capping_check_2026_10_31": {
+    "scope": "The capping commit of domain/provisioning on 31 October 2026: the synthesis rewrite, the functions framing of money and finance, the port study restored with two corrections, records and labels, bindings limited to the files whose values are read, and the merge list.",
+    "regeneration": "Twelve products regenerated in dependency order (industrial_markets, industrial_legacy, industrial_continuation, early_campaigns, pressure_advantages, distinctive_activities, industrial_combustion, slow_settling, sports_finance, amenities, the monetary reference and the aerophyte product), with five readers' inputs rebound to the changed upstream hashes. With the producer blocks masked every product's values are unchanged; the differences are the corrected text in early_campaigns, amenities and the aerophyte product and the rebound upstream hash that distinctive_activities and industrial_combustion carry in their assumptions.",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check, with ulimit -v 16000000",
+    "result": "Exit 0. Layer check: 1,198 files, 0 violations. Python: 3,306 passed, 20 skipped, in 532 s. JavaScript: 191 passed (129 for the immersion after its bake, 48 for the column, references and viewer, 14 for the calendar). Research integrity and provenance: PASS. Ensemble validator: PASS.",
+    "log": "/media/projectspace/terluna-research/session-tools/codex_review/cleanup/provisioning_make_check_1.log",
+    "tree": "The working tree of the capping commit, before this record was written."
+  },
+  "preserved_baselines_note": "The baselines above are the hashes at 52e6b96; the capping commit regenerated several of these products with their values unchanged, as its regeneration record states."
 }

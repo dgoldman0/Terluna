@@ -270,7 +270,7 @@ def results():
         hybrid=hybrid,park_cost_sensitivities=park_costs,tourism=travel,mining=mining_cases(settings,products,costs,baseline),
         development_reference=reference,development_scenarios=development_rows,idle_stock_funding_stress=idle_stress,
         limitations=['Hybrid water, maintenance machinery, utilities and seasonal/peak capacity remain unsized.',
-            'The301K redesign changes comfort and ecological management; older amenity descriptions are not new regional comfort simulations.',
+            'The 301 K redesign changes comfort and ecological management; older amenity descriptions are not new regional comfort simulations.',
             'Tourism assumes visitor status, service-only spending and a first-tier import account; local amenities include destination services on domestic trips, with domestic passenger fares excluded.',
             'Capacity and commissioning schedules are explicit assumptions; early array real activity does not establish full lunar outdoor access.',
             'Construction remains uniformly funded over500years; no resource-feasible milestone network is solved.',

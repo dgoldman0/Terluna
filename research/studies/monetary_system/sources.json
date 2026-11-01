@@ -122,11 +122,6 @@
       "use": "Unchanged mature product, construction and financing scenarios; U is a real numeraire."
     },
     {
-      "path": "research/studies/world_economy/annual_accounts.md",
-      "sha256": "599b97e442aa78cc05fe11c3236840de950856fa870fb34a66c0fb04ed489e35",
-      "use": "Territorial product, resident income, principal cash flows and creditor residence."
-    },
-    {
       "path": "research/studies/world_economy/inputs.json",
       "sha256": "725b27f773b1edb802c4803de8f18db6bce41a1b4955c4d01e954e1564e0bd77",
       "use": "Prior population and physical/economic scenario definitions; no nominal-currency regime."
@@ -142,6 +137,12 @@
       "url": "https://www.imf.org/external/pubs/ft/issues/issues24/",
       "status": "Full-dollarization full-text/PDF retrieval failed during source investigation; not treated as read.",
       "disposition": "Not cited or used as support in this study."
+    }
+  ],
+  "cited_by_path": [
+    {
+      "path": "research/studies/world_economy/annual_accounts.md",
+      "use": "Territorial product, resident income, principal cash flows and creditor residence."
     }
   ]
 }

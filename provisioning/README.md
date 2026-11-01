@@ -56,102 +56,15 @@ The author's decisions frame it:
 - **The network:** a mesh of aerostats drifting near 30 km, fixed posts, fibre and towers, linked to the array
   ([network.md](network.md)).
 
-## Mature world economy
+## The economy, 31 October 2026
 
-The [world-economy study](../research/studies/world_economy/comparison.md) compares the
-Moon, inhabited array and equally advanced Earth as three interconnected economies. Its
-reference gross-product ratio is Earth:Moon:array **100:93:56**, and its net-product ratio
-is **100:91:53** under the stated ordinary and engineered depreciation assumptions, before
-unpriced local resource depletion. Sector productivity, prices and asset lives remain scenarios.
+The [world-economy study](../research/studies/world_economy/README.md) compares the Moon, the inhabited array and an equally advanced Earth as three interconnected economies at the accepted population, with the colonies and the source economies as a fourth account still outside them. **Production follows population and an assumed output per resident**: at the Moon's assumed 1.049 of Earth's value added per resident and the array's 1, Earth:Moon:array gross product is **100:93:56**, and net product **100:91:53** before unpriced local depletion. **The build's physical demand is the firm result**: delivering the middle inventory's 3.2×10¹⁹ kg of air and water over 500 years takes 46–366 PW of purchased process power at the source sites, 99 PW in the advanced case with 82% of it departure propulsion, and with the hubs' braking 120–440 PW against the 19 September civilization envelope of 501 PW ([industry](../resources/industry.md)). At an assumed 0.1 U/MWh for that energy the build costs about 97 years of future Earth's output. A patient-debt example leaves the Moon and the array 100:75:48 of Earth's resources after replacement and principal; who lends, owns and decides are arrangements the communities choose ([register](../research/decisions.md#automation-the-network-and-food-12-october-2026)), and the [monetary-system study](../research/studies/monetary_system/README.md) treats money, settlement and credit.
 
-The construction screen separates source processing, delivery and installed capital. Its
-middle advanced case requires about 97 years of reference Earth output, spread over a
-500-year build before construction-era renewal. A separate patient-debt example gives
-**100:75:48** in resources after replacement and external principal, including Earth's
-creditor receipts. Existing loans can instead retire before full population. These are
-conditional comparisons; no financing programme or economic forecast is adopted.
+The extensions attribute output within those totals. The hybrid regions' 4.68 million km² carry resident and visitor services, and six-way travel brings 3.58 billion arrivals a year to the Moon in the connected case, a flow still to be sized against transport, arrival ports and the register's transport rules ([amenities](../research/studies/world_economy/amenities.md)). Early income from the array, enclosed communities, reserve-constrained mining and a sport-first lava-tube community reduces the lunar debt modestly ([development](../research/studies/world_economy/development.md), [early exports](../research/studies/world_economy/early_exports.md), [sport](../research/studies/world_economy/sports_finance.md), [sport concepts](../research/studies/world_economy/sports_concepts.md)). Lunar industry's strengths are particular: a deliberately deferred release of the air keeps a vacuum interval for large workpieces, with pumped vacuum easy afterwards at low ambient pressure; lunar gravity suits filled castings, spin-cast blanks and slow-settling suspensions; and the 1.2 atm atmosphere gives 20% more buoyant mass per volume, 30.6% less fan work for a fixed heat duty and, from its extra nitrogen, a material-specific resistance to flame spread ([industrial transition](../research/studies/world_economy/industrial_transition.md), [mature industry](../research/studies/world_economy/mature_industry.md), [slow settling](../research/studies/world_economy/slow_settling.md), [pressure services](../research/studies/world_economy/pressure_advantages.md), [combustion](../research/studies/world_economy/industrial_combustion.md), [distinctive activities](../research/studies/world_economy/distinctive_activities.md)). Equally advanced Earth processes and rotating array factories are the comparators throughout.
 
-The [amenity and tourism extension](../research/studies/world_economy/amenities.md) gives the
-4.68-million-km² hybrid park/garden regions explicit resident and visitor accounts, including
-reciprocal travel among all three worlds. These attribute existing output. The
-[early-finance extension](../research/studies/world_economy/development.md) tests phased array
-and lunar earnings, future-resource reservations for lunar mining, and debt reduction from
-independent surplus. A 5% contribution under the stated phased, 0.1%-real scenario retires
-array debt during construction; the much larger lunar import bill remains demanding.
+## Aerophyte crops, living area and services, 31 October 2026
 
-The [early-community account](../research/studies/world_economy/early_exports.md) sizes
-tourism-led export businesses before the open environment exists. It records customer and
-visitor capacity, new facility finance, replacement and negative operating cases. The
-[manufacturing investigation](../research/studies/world_economy/manufacturing.md) identifies
-conditional advantages of finite gravity while retaining Earth process controls and
-rotating array factories as competitors. These remain hypotheses and conditional accounts.
-
-The [industrial-transition study](../research/studies/world_economy/industrial_transition.md)
-compares early sealed and vacuum production with equally advanced Earth and array factories.
-It follows finite orders, capital renewal, continued pumped operation and optional shutdown, then tests stocks and operating assets
-that retain value after atmospheric loading. Its [engineering assessment](../research/studies/world_economy/industrial_engineering.md)
-separates pressure loads from weight relief and treats the vacuum interval as a construction
-sequence to preserve deliberately, with progressively pumped operation available afterward.
-No commissioning dates, export reserves or financing institutions are adopted.
-
-The [mature-industry assessment](../research/studies/world_economy/mature_industry.md) compares
-domestic construction, aerial renewal and selected fabrication under the 1.2 atm lock with
-Earth and orbital alternatives. [Early infrastructure campaigns](../research/studies/world_economy/early_campaigns.md)
-size finite structural orders, full plant recovery and customer advances. Their physical
-advantages, assumed prices and financing flows remain distinct; existing replacement and
-construction orders are counted once.
-
-The [slow-settling study](../research/studies/world_economy/slow_settling.md) examines longer
-workable suspensions, fragile products and fluidized beds. It accounts for other mixing duties
-and the cost of slower recovery; prospective gains in formulation or quality remain separate
-from measured performance and the existing world-product totals.
-
-The [pressure-benefits assessment](../research/studies/world_economy/pressure_advantages.md) treats
-the 1.2 atm atmosphere as useful infrastructure for buoyant transport, air cooling, liquid handling
-and vacuum-assisted clamping. Its gains depend on the required service, with oxygen partial pressure
-held near Earth's and existing atmosphere costs retained.
-
-The [industrial-combustion assessment](../research/studies/world_economy/industrial_combustion.md)
-audits the earlier fire work for production use. Extra nitrogen supports a material-specific
-propagation-resistance opportunity, subject to lunar-gravity and assembly tests. The calculation
-separates oxygen supply, burner/exhaust composition and nitrogen-purge duties; potential gains
-in material choice or accepted yield are not assigned a general economic premium.
-
-The [distinctive-activities study](../research/studies/world_economy/distinctive_activities.md)
-assesses flight, performance, aquatic spaces, hybrid gardens, living aerial communities and
-physical testing across the combined environment. Natural partial gravity over extensive
-landscapes is its strongest prospective advantage; Earth simulators and rotating array venues
-remain explicit competitors. Resident welfare, recorded production and export cash are separate.
-
-The [early sport and project-finance scenario](../research/studies/world_economy/sports_finance.md)
-examines a resident performance programme and small visitor cohorts within the first enclosed
-communities. Remote media, sponsorship and licensing can reach customers beyond visitor capacity.
-Its commercial assumptions remain preliminary; [sport concepts](../research/studies/world_economy/sports_concepts.md)
-develop proposed rules, arenas and movement mechanics separately.
-
-The [monetary-system study](../research/studies/monetary_system/README.md) treats currency arrangements,
-bank credit, settlement, public finance, external balances and construction funding at economy scale.
-It compares institutional alternatives and reproduces bounded transactions; no currency regime,
-inflation path or monetary reduction in construction debt is established.
-
-## Aerophyte crops, living area and services
-
-The [31 October assessment](aerophytes.md) identifies lesser aerophytes and small sky-reef
-modules as candidates for recurring cultivated products. Large colonies and round giants also
-provide living area for other biomass, gardens, homes and small communities, alongside
-material recovery and ecological services.
-
-Allocating 25–50% of carbon left after host upkeep and adult replacement gives about 4–8 tonnes
-of generic dry tissue per projected hectare per year in the lesser and reef reference cases,
-before new crop upkeep, wet-load support and collection costs. Edible yields and profitability
-remain unestablished. Shed membrane, nursery stock and attached specialty crops are candidate uses.
-
-Illustrative clusters of 3 and 30 specialised tenant modules, each supported by 3 green
-modules, offer conditional payloads of about 102 and 1,023 tonnes. Their routine support takes
-about 21% of the green modules' residual carbon. These are housing mass comparisons, with
-floors, attachments, extra gas and full residential services still to design. The
-[calculation](aerophytes.py) records the carbon, additional phosphorus-return requirements and
-cluster comparisons. The food blend and wild harvest allocations remain unchanged.
+The [assessment](aerophytes.md) identifies lesser aerophytes and small sky-reef modules as the candidates for recurring cultivated products, and large colonies and round giants as living area for other biomass, gardens, homes and small communities, with material recovery and ecological services beside them. Allocating 25–50% of the carbon left after host upkeep and adult replacement gives about 4–8 tonnes of generic dry tissue per projected hectare a year in the lesser and reef reference cases, before the crop's own upkeep, wet-load support and collection; edible yields and costs come next, and shed membrane, nursery stock and attached specialty crops are the candidate uses. Clusters of 3 and 30 specialised tenant modules, each with 3 green modules, carry about 102 and 1,023 tonnes, enough for a four-person home and a community of sixteen at the inhabited-volume study's 20 and 50 tonnes a resident, for about 21% of the green modules' residual carbon; floors, attachments, extra gas and full residential services are still to design. The [calculation](aerophytes.py) records the carbon, the added phosphorus return and the clusters, and the food blend and wild-harvest allocations stand as they were.
 
 ## What the project already says
 

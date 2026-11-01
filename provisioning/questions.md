@@ -122,6 +122,7 @@ on this laptop. The findings behind them are in the [README](README.md).
     automation everywhere on 12 October, the parks and their amenities almost purely automated and the whole system
     engineered for extreme uptime, so the machines' energy, materials and repair are provisioning's to size; how work is
     shared and how decisions are made belong to the human paper.
+    The [world-economy study](../research/studies/world_economy/README.md) (31 October) gives the economy's first accounts: Earth:Moon:array gross product 100:93:56 at the assumed output per resident, the build's 46–366 PW of source-site power and its cost at assumed energy prices, financing cases, amenities, travel, early income and industry, with the [monetary-system study](../research/studies/monetary_system/README.md) beside it. Open: the source economies and colonies as a fourth account, the build's energy in resources' extraction plan, interworld travel sized against transport and the transport rules, and the institutions, which the communities choose.
 11. **Lamps and the dark night.** The summit's night has about 190 hours that need lamps. At the lunar design's
     lighting each billion people light 0.79–1.42 million km² of sky, so 6–15 billion lunar residents light 20–91% of
     the dry land ([ways of living](../research/studies/ways_of_living/README.md), finding 4). Sleep needs at most 1 lux

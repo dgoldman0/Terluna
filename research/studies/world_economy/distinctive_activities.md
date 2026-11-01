@@ -2,7 +2,7 @@
 
 31 October 2026. The strongest prospective advantage is **extensive, continuously usable space in which low gravity, breathable air, liquid water, living landscapes and fixed ground coexist**. This combination could support ordinary personal flight, new sports and performing arts, unusual aquatic environments, aerial gardens and settlements, and large physical research facilities. Selected production processes remain candidates, but the wider opportunity includes what residents can do for themselves without buying a service.
 
-This assessment is for planning across provisioning, habitation and ecology. It compares equally advanced Earth, Open Moon and array economies, retaining the 1.2 atm lock, approximately 17.5% oxygen and the 301 K design target. Physical reference calculations, conditional biological designs and possible demand are distinguished throughout. A target global temperature does not establish every region's weather or comfort. Earlier regional and ecological results have not all been refreshed for that target.
+This assessment is for planning across provisioning, habitation and ecology. It compares equally advanced Earth, Open Moon and array economies, retaining the 1.2 atm lock, approximately 17.5% oxygen and the 301 K design target. Physical reference calculations, conditional biological designs and possible demand are distinguished throughout. Each region's weather and comfort under that target come with the design run. Earlier regional and ecological results have not all been refreshed for that target.
 
 ## What would be distinctive?
 

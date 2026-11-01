@@ -13,11 +13,10 @@
       "alternate_author_url": "https://robertmaccurdy.com/docs/2024_Kauzya-Direct%20ink%20writing%20of%20viscous%20inks%20in%20variable%20gravity%20regimes%20using%20parabolic%20flights.pdf",
       "retrieval": "Author-hosted PDF retrieved; local text extracted; selected pages rendered and visually inspected",
       "reading_scope": "Abstract; methods sections 2.1–2.5; results 3.2–3.3; conclusion; printed pages 576–577 figures 6–8 visually inspected. Not a complete statistical reanalysis or supplementary-data audit.",
-      "local_pdf": "/tmp/terluna-mature-industry/diw_2024.pdf",
+      "local_pdf": "not kept: a temporary download during source reading",
       "sha256": "df2307aec7de7a01b8c756ab1f466065905e2c00efd03747122214442a02755a",
       "visual_artifacts": [
-        "/tmp/terluna-mature-industry/diw-08.png",
-        "/tmp/terluna-mature-industry/diw-09.png"
+        "not kept: temporary page images during source reading"
       ],
       "supported_claims": [
         "Short lunar-gravity bridge printing improves unsupported shape retention under the tested recipe",
