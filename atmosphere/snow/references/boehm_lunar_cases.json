@@ -14,7 +14,7 @@
     "gravity": 1.6242188765608128,
     "moon_binding": {
       "inputs": {
-        "research/studies/climate_targets/results/climate_targets.json": "53f12fe56f4166f499b7129cbeab49bd9b625e3861c9b6f0fd23b89906fbaaab"
+        "research/studies/climate_targets/results/climate_targets.json": "f824007286177a19568fb6d428ed29ee742e0de435f934e7a03d92fe30438e9e"
       }
     },
     "local_inputs": {

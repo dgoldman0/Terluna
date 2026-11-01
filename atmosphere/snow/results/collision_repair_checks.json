@@ -19,10 +19,10 @@
     "atmosphere/snow/collision_repair.md": "455d2eac9b2bf072ab603a9a10cba12c69a1d561462409cb3d08462e2123571e",
     "atmosphere/snow/collision_time_integration.md": "6ce0344a2311df8b426a554018c82da97b69a372d846cafd846df5e624af7b87",
     "atmosphere/snow/collision_time_integration_sources.json": "47e7b5454800f438e435980f7a9b540d2a5d78bbe26aebca2b5e43106a8fea7d",
-    "atmosphere/snow/results/collision_entropy_bath.json": "292f9972db1dd07e9f3a9bb1cd5970a674d9e660e71034838783fbde54cf54a9",
-    "atmosphere/snow/results/collision_entropy_boundary.json": "09175e0992cce779ebaa2b249bdf367fab8b4244733113a99f64a3c86e9d7830",
-    "atmosphere/snow/results/collision_moment_bath.json": "54adb3892930a144ec0e3f64095e4becc5d08e88e39f58a255fe6254f5d1007e",
-    "atmosphere/snow/results/collision_moment_boundary.json": "2de09db55da03668ec6a53806703380b94ef9076b4c48d1ebe20309b9b0da174",
+    "atmosphere/snow/results/collision_entropy_bath.json": "a8687829a3484a6f262a2503a59ae1d967265cf0218fc03f9ec69f7d3a19f0f2",
+    "atmosphere/snow/results/collision_entropy_boundary.json": "437e8cf6aefce30587e7bd61d0b523d6adf97688bc4d478e913da6245bdaf8b0",
+    "atmosphere/snow/results/collision_moment_bath.json": "11dd714b8636e236afb9185b9ff91ca49c49edf248d3a9fd91128905beb9c348",
+    "atmosphere/snow/results/collision_moment_boundary.json": "8830f09942e05e380f68cb9f90ba08a6651a6f972aaf3e5d33736542cad8ffc2",
     "atmosphere/tests/test_snow_collision_entropy.py": "038849967d28355eb5a16036a16a5abc71c60e28f73f1ed69c1f099df8c298c0",
     "atmosphere/tests/test_snow_collision_entropy_benchmarks.py": "02b733db0d9bac74e0a7c9929dc2a995471c4b46075ad635f08d47ed235028a7",
     "atmosphere/tests/test_snow_collision_moment_benchmarks.py": "7b5187734180f04c740d1e023e92d2afe987990e1425228712d123067375f464",
@@ -81,7 +81,7 @@
   "scientific_controls": {
     "collision_moment_bath": {
       "path": "atmosphere/snow/results/collision_moment_bath.json",
-      "sha256": "54adb3892930a144ec0e3f64095e4becc5d08e88e39f58a255fe6254f5d1007e",
+      "sha256": "11dd714b8636e236afb9185b9ff91ca49c49edf248d3a9fd91128905beb9c348",
       "completed_runs": 2,
       "requested_controls": null,
       "reported_acceptance": {
@@ -138,7 +138,7 @@
     },
     "collision_moment_boundary": {
       "path": "atmosphere/snow/results/collision_moment_boundary.json",
-      "sha256": "2de09db55da03668ec6a53806703380b94ef9076b4c48d1ebe20309b9b0da174",
+      "sha256": "8830f09942e05e380f68cb9f90ba08a6651a6f972aaf3e5d33736542cad8ffc2",
       "completed_runs": 1,
       "requested_controls": null,
       "reported_acceptance": {
@@ -179,7 +179,7 @@
     },
     "collision_entropy_bath": {
       "path": "atmosphere/snow/results/collision_entropy_bath.json",
-      "sha256": "292f9972db1dd07e9f3a9bb1cd5970a674d9e660e71034838783fbde54cf54a9",
+      "sha256": "a8687829a3484a6f262a2503a59ae1d967265cf0218fc03f9ec69f7d3a19f0f2",
       "completed_runs": 1,
       "requested_controls": 5,
       "reported_acceptance": {
@@ -252,7 +252,7 @@
     },
     "collision_entropy_boundary": {
       "path": "atmosphere/snow/results/collision_entropy_boundary.json",
-      "sha256": "09175e0992cce779ebaa2b249bdf367fab8b4244733113a99f64a3c86e9d7830",
+      "sha256": "437e8cf6aefce30587e7bd61d0b523d6adf97688bc4d478e913da6245bdaf8b0",
       "completed_runs": 1,
       "requested_controls": 5,
       "reported_acceptance": {
@@ -375,11 +375,11 @@
       "sha256": "29080d066664b306e8e9628ffa8f32cac8421bac06578ee064cc9287dfe21aed"
     },
     "inputs": {
-      "atmosphere/snow/results/collision_reference.json": "908b3bff4440f66853773c8ab70d18e658c6be760395dff087fe0198911110b4",
-      "atmosphere/snow/results/collision_moment_bath.json": "54adb3892930a144ec0e3f64095e4becc5d08e88e39f58a255fe6254f5d1007e",
-      "atmosphere/snow/results/collision_entropy_bath.json": "292f9972db1dd07e9f3a9bb1cd5970a674d9e660e71034838783fbde54cf54a9",
-      "atmosphere/snow/results/collision_moment_boundary.json": "2de09db55da03668ec6a53806703380b94ef9076b4c48d1ebe20309b9b0da174",
-      "atmosphere/snow/results/collision_entropy_boundary.json": "09175e0992cce779ebaa2b249bdf367fab8b4244733113a99f64a3c86e9d7830"
+      "atmosphere/snow/results/collision_reference.json": "ccfe6c2fc8ceaceefdda4814f3c122b9dd12f7954007e843d0392507239b74c9",
+      "atmosphere/snow/results/collision_moment_bath.json": "11dd714b8636e236afb9185b9ff91ca49c49edf248d3a9fd91128905beb9c348",
+      "atmosphere/snow/results/collision_entropy_bath.json": "a8687829a3484a6f262a2503a59ae1d967265cf0218fc03f9ec69f7d3a19f0f2",
+      "atmosphere/snow/results/collision_moment_boundary.json": "8830f09942e05e380f68cb9f90ba08a6651a6f972aaf3e5d33736542cad8ffc2",
+      "atmosphere/snow/results/collision_entropy_boundary.json": "437e8cf6aefce30587e7bd61d0b523d6adf97688bc4d478e913da6245bdaf8b0"
     },
     "output_hashes": {
       "moment_comparison.png": "87f32696e9b505ca9700fc4fffbb5b0351029008134a2748a4c000ea734fceba",

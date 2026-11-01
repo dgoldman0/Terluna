@@ -1,7 +1,7 @@
 {
   "schema": "terluna.atmosphere.mcsnow-lunar-checks/1",
   "date": "2026-10-23",
-  "scientific_product_sha256": "adb419eeb0fbb102bfb630e64d78c8fd3c1dae6b7c9feeffaea649e923f68fb0",
+  "scientific_product_sha256": "e127233907e57d875c7d956646a47c08fed3c2501d8abb5a23aac3b5464feaf7",
   "focused_tests": {
     "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest atmosphere/tests/test_snow_mcsnow_lunar_growth.py atmosphere/tests/test_snow_mcsnow_growth_trace.py -q -p no:cacheprovider",
     "passed": 35,

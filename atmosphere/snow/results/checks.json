@@ -231,11 +231,11 @@
     "visualization/snow/plot.py": "cffbf147edf6bb3c9509250b2dea244379989c19f646db32835ff8921d50b19c"
   },
   "product_sha256": {
-    "atmosphere/snow/results/population.json": "b961a21a3374f6e0fa28acf7f0e4f1aabc07b03685458fab1011d667965ccfd2",
-    "atmosphere/snow/results/growth_depth.json": "01c8b10df8924dd9a67ccdda14820bc6240d517e4972a559eda6371e7b35bf5d",
-    "atmosphere/snow/results/numerical_audit.json": "a965989b3685de2b8e8cae6c4e6746f0156a356608d3789e59843b6e1aa6d41d",
-    "atmosphere/snow/results/turbulence.json": "dca5ad9790020b293c5661dbaaeefd150f9f4ccf0f62065422cdda05d585570c",
-    "atmosphere/snow/results/optics.json": "6f55ac97f89d73b73b82338157d395c689fb1b128326444480c82aa4c24add6d"
+    "atmosphere/snow/results/population.json": "65d899e2509a76d79589569972d104dcb84de862eb7ed1eb7cc15db8eabbf66b",
+    "atmosphere/snow/results/growth_depth.json": "f00c970af68064c878b8ca0081155f5b0b2423ab969edeae0b7dabefbf41277a",
+    "atmosphere/snow/results/numerical_audit.json": "55bbb91401ab7fedaf49f8233384e177ee94d901aa023fd67654d1bc7a168787",
+    "atmosphere/snow/results/turbulence.json": "43d83ee9be86e5c0d3de0f5fc7a967e5cee8ae2e5aa18adda798d5e03dd5fbf5",
+    "atmosphere/snow/results/optics.json": "22c05864f9412c4b69a96b810060e9879613d019820098756f76ba5f663023cc"
   },
   "scientific_adequacy": {
     "population_distribution": "exploratory_numerically_unresolved",

@@ -75,10 +75,10 @@
       "atmosphere/snow/collision_entropy_benchmarks.py": "dbf00eaa3da86938e34d30a7912e55bb1752be1ccec4ba9e5e5f3fcd8b87859d",
       "atmosphere/snow/collision_moment_benchmarks.py": "4d525748d595e5ed81ce54075d14849b3e5f7d6039dfb4e60ccfdcd5318e7f28",
       "atmosphere/snow/collision_moments.py": "dc4851aaa8399cdb2d54e51eb950318fa7ce609bd0583d32895cf61b8b858b7e",
-      "atmosphere/snow/results/collision_entropy_bath.json": "292f9972db1dd07e9f3a9bb1cd5970a674d9e660e71034838783fbde54cf54a9",
-      "atmosphere/snow/results/collision_entropy_boundary.json": "09175e0992cce779ebaa2b249bdf367fab8b4244733113a99f64a3c86e9d7830",
-      "atmosphere/snow/results/collision_moment_bath.json": "54adb3892930a144ec0e3f64095e4becc5d08e88e39f58a255fe6254f5d1007e",
-      "atmosphere/snow/results/collision_moment_boundary.json": "2de09db55da03668ec6a53806703380b94ef9076b4c48d1ebe20309b9b0da174",
+      "atmosphere/snow/results/collision_entropy_bath.json": "a8687829a3484a6f262a2503a59ae1d967265cf0218fc03f9ec69f7d3a19f0f2",
+      "atmosphere/snow/results/collision_entropy_boundary.json": "437e8cf6aefce30587e7bd61d0b523d6adf97688bc4d478e913da6245bdaf8b0",
+      "atmosphere/snow/results/collision_moment_bath.json": "11dd714b8636e236afb9185b9ff91ca49c49edf248d3a9fd91128905beb9c348",
+      "atmosphere/snow/results/collision_moment_boundary.json": "8830f09942e05e380f68cb9f90ba08a6651a6f972aaf3e5d33736542cad8ffc2",
       "atmosphere/tests/test_snow_collision_entropy.py": "038849967d28355eb5a16036a16a5abc71c60e28f73f1ed69c1f099df8c298c0",
       "atmosphere/tests/test_snow_collision_entropy_benchmarks.py": "02b733db0d9bac74e0a7c9929dc2a995471c4b46075ad635f08d47ed235028a7",
       "atmosphere/tests/test_snow_collision_moment_benchmarks.py": "7b5187734180f04c740d1e023e92d2afe987990e1425228712d123067375f464",
@@ -104,10 +104,10 @@
       "atmosphere/rain/drops.py": "5d6908bf03eb88af44c2129ae13aa4ae01918eb9994d5c503569b8f2438159a1",
       "atmosphere/rain/targets.py": "faed41667f2187fddccb9ab1793e4463150a10f3e8e385e4daa425da565660a7",
       "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
-      "atmosphere/snow/results/collision_reference.json": "908b3bff4440f66853773c8ab70d18e658c6be760395dff087fe0198911110b4",
-      "research/studies/climate_targets/results/climate_targets.json": "53f12fe56f4166f499b7129cbeab49bd9b625e3861c9b6f0fd23b89906fbaaab",
+      "atmosphere/snow/results/collision_reference.json": "ccfe6c2fc8ceaceefdda4814f3c122b9dd12f7954007e843d0392507239b74c9",
+      "research/studies/climate_targets/results/climate_targets.json": "80a85def114b039cef9c9acd97b18d3bd47413f51f6693d1cc6f5e850ebdbea8",
       "atmosphere/snow/collision_birth_benchmarks.py": "0788cc19b02bd93aa54cdcedbaa90b97425ee6077cc8041f835b3ba597d65f00",
-      "atmosphere/snow/results/collision_jump_bath_attempt.json": "4062132c7ba627b659c6d7a8345ef013bff02964bacf2961bc99420b709de28b"
+      "atmosphere/snow/results/collision_jump_bath_attempt.json": "a117221b051d9f7b939cfeca6888272c39c99df132f7730aa3b8b55a6ea50262"
     },
     "mismatches": [],
     "scope": "Actual current bytes rehashed after production and figure generation."
@@ -131,7 +131,7 @@
       },
       "retained_product": {
         "path": "/home/kir/Documents/Projects/terluna-atmosphere/atmosphere/snow/results/collision_jump_bath_attempt.json",
-        "sha256": "4062132c7ba627b659c6d7a8345ef013bff02964bacf2961bc99420b709de28b"
+        "sha256": "a117221b051d9f7b939cfeca6888272c39c99df132f7730aa3b8b55a6ea50262"
       }
     },
     "continued_bath": {
@@ -143,7 +143,7 @@
       },
       "execution_history": {
         "initial_attempt": "atmosphere/snow/results/collision_jump_bath_attempt.json",
-        "initial_attempt_sha256": "4062132c7ba627b659c6d7a8345ef013bff02964bacf2961bc99420b709de28b",
+        "initial_attempt_sha256": "a117221b051d9f7b939cfeca6888272c39c99df132f7730aa3b8b55a6ea50262",
         "initial_wall_limit_s": 300.0,
         "continued_wall_limit_s": 600.0,
         "retained_completed_controls": [
@@ -194,7 +194,7 @@
   "scientific_controls": {
     "boundary": {
       "path": "atmosphere/snow/results/collision_jump_boundary.json",
-      "sha256": "a3d49f2c5dbee51171530604522c6de51f0f7f1426be776ce85a832ffb8ada8f",
+      "sha256": "5bac3effe7a8e5bd07a3a5aaf0da71a261f7c174d7a6d39d70e5dcba0f038e04",
       "completed_controls": 6,
       "acceptance": {
         "gates": {
@@ -901,7 +901,7 @@
     },
     "bath": {
       "path": "atmosphere/snow/results/collision_jump_bath.json",
-      "sha256": "4cfa658050d78fc7c760823209d4766a3ee89fb66cdb299a1665a90f1a9161dd",
+      "sha256": "4bf529dbb4bd0f204a22769a3a60c5b1b04ba1e4f4829f0630ae206fd8c5eccc",
       "completed_controls": 6,
       "acceptance": {
         "gates": {
@@ -1510,9 +1510,9 @@
     "figure_checks": {
       "renderer_sha256": "d9928f02868d103cd9bada98f7bd7a4a803849e6d60b3ed7a8756cc3864afcbe",
       "input_hashes": {
-        "atmosphere/snow/results/collision_jump_boundary.json": "a3d49f2c5dbee51171530604522c6de51f0f7f1426be776ce85a832ffb8ada8f",
-        "atmosphere/snow/results/collision_jump_bath.json": "4cfa658050d78fc7c760823209d4766a3ee89fb66cdb299a1665a90f1a9161dd",
-        "atmosphere/snow/results/collision_reference.json": "908b3bff4440f66853773c8ab70d18e658c6be760395dff087fe0198911110b4"
+        "atmosphere/snow/results/collision_jump_boundary.json": "5bac3effe7a8e5bd07a3a5aaf0da71a261f7c174d7a6d39d70e5dcba0f038e04",
+        "atmosphere/snow/results/collision_jump_bath.json": "4bf529dbb4bd0f204a22769a3a60c5b1b04ba1e4f4829f0630ae206fd8c5eccc",
+        "atmosphere/snow/results/collision_reference.json": "ccfe6c2fc8ceaceefdda4814f3c122b9dd12f7954007e843d0392507239b74c9"
       },
       "output_hashes": {
         "capture_comparison.png": "427e1bd3e342d3f62dcc8a98e87cfe9287e5232ceee887e901ceef07665e52d4",

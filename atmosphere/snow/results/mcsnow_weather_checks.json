@@ -1,7 +1,7 @@
 {
   "schema": "terluna.atmosphere.mcsnow-weather-checks/1",
   "date": "2026-10-23",
-  "scientific_product_sha256": "eb00b853ea232479e37cf1d55ad519d7a1deae4304fbc18cf48659e183aac5f1",
+  "scientific_product_sha256": "f893fa5155167d2d75510687ca09f6e12cc75bffa4467be289a655b3130a1f01",
   "repository_check": {
     "status": "passed",
     "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",

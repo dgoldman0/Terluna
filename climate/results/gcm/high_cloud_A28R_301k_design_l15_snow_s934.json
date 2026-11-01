@@ -1,0 +1,419 @@
+{
+ "schema": "terluna.climate.gcm-high-cloud-range/1",
+ "run": "A28R_301k_design_l15_snow_s934",
+ "years": [
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19
+ ],
+ "visible_share": 0.5014643979665835,
+ "cloud": {
+  "cover": [
+   0.07116163781012154,
+   0.1275439301822271,
+   0.11711944502883351
+  ],
+  "water_g_m2": [
+   1.4964455228317775,
+   2.5541123627934534,
+   7.406579190535304
+  ],
+  "t_k": [
+   166.476156580537,
+   194.8764018803383,
+   221.75711766154137
+  ],
+  "sunlight_w_m2": 299.95875189565515,
+  "planetary_albedo": 0.40097968763088987,
+  "olr_clear_w_m2": 226.55165310343975,
+  "cloud_water": "earth_path",
+  "sigma": [
+   0.038299560546875,
+   0.11909961700439453,
+   0.21084976196289062
+  ]
+ },
+ "base": [
+  {
+   "radius_um": 2.8097623639721414,
+   "reflection": 0.19289759646216476,
+   "emissivity": 0.5920115699056054,
+   "scaled_reflection": 0.19289759646216476,
+   "scaled_emissivity": 0.5920115699056054,
+   "sunlight_w_m2": -0.0,
+   "infrared_w_m2": 0.0,
+   "net_w_m2": 0.0
+  },
+  {
+   "radius_um": 13.468318325877746,
+   "reflection": 0.08766637114897702,
+   "emissivity": 0.28537626972470753,
+   "scaled_reflection": 0.08766637114897702,
+   "scaled_emissivity": 0.28537626972470753,
+   "sunlight_w_m2": -0.0,
+   "infrared_w_m2": 0.0,
+   "net_w_m2": 0.0
+  },
+  {
+   "radius_um": 35.20940030215546,
+   "reflection": 0.09245501746894465,
+   "emissivity": 0.3367935137048179,
+   "scaled_reflection": 0.09245501746894465,
+   "scaled_emissivity": 0.3367935137048179,
+   "sunlight_w_m2": -0.0,
+   "infrared_w_m2": 0.0,
+   "net_w_m2": 0.0
+  }
+ ],
+ "cases": [
+  {
+   "water_scale": 0.5,
+   "radius_scale": 1.0,
+   "layers": [
+    {
+     "radius_um": 2.8097623639721414,
+     "reflection": 0.19289759646216476,
+     "emissivity": 0.5920115699056054,
+     "scaled_reflection": 0.11614222425552637,
+     "scaled_emissivity": 0.3612602798522747,
+     "sunlight_w_m2": 0.5878944407203139,
+     "infrared_w_m2": -3.0049519485502363,
+     "net_w_m2": -2.4170575078299223
+    },
+    {
+     "radius_um": 13.468318325877746,
+     "reflection": 0.08766637114897702,
+     "emissivity": 0.28537626972470753,
+     "scaled_reflection": 0.04907737483017473,
+     "scaled_emissivity": 0.15464579596757644,
+     "sunlight_w_m2": 0.5297462787911675,
+     "infrared_w_m2": -2.4138997930401165,
+     "net_w_m2": -1.884153514248949
+    },
+    {
+     "radius_um": 35.20940030215546,
+     "reflection": 0.09245501746894465,
+     "emissivity": 0.3367935137048179,
+     "scaled_reflection": 0.052068389576780304,
+     "scaled_emissivity": 0.18562509475353917,
+     "sunlight_w_m2": 0.5091095400161831,
+     "infrared_w_m2": -1.5832475389297584,
+     "net_w_m2": -1.0741379989135753
+    }
+   ],
+   "net_w_m2": -5.375349020992447,
+   "ground_k": [
+    -4.479457517493706,
+    -3.4457365519182352
+   ]
+  },
+  {
+   "water_scale": 1.5,
+   "radius_scale": 1.0,
+   "layers": [
+    {
+     "radius_um": 2.8097623639721414,
+     "reflection": 0.19289759646216476,
+     "emissivity": 0.5920115699056054,
+     "scaled_reflection": 0.2529392755132875,
+     "scaled_emissivity": 0.7394015843379966,
+     "sunlight_w_m2": -0.4598788112269169,
+     "infrared_w_m2": 1.9193821666743416,
+     "net_w_m2": 1.4595033554474246
+    },
+    {
+     "radius_um": 13.468318325877746,
+     "reflection": 0.08766637114897702,
+     "emissivity": 0.28537626972470753,
+     "scaled_reflection": 0.12055098748631601,
+     "scaled_emissivity": 0.3958898253104488,
+     "sunlight_w_m2": -0.4514370622718818,
+     "infrared_w_m2": 2.0406003381594613,
+     "net_w_m2": 1.5891632758875796
+    },
+    {
+     "radius_um": 35.20940030215546,
+     "reflection": 0.09245501746894465,
+     "emissivity": 0.3367935137048179,
+     "scaled_reflection": 0.12656577141205747,
+     "scaled_emissivity": 0.45990128056452284,
+     "sunlight_w_m2": -0.4299965398436416,
+     "infrared_w_m2": 1.2893570644976144,
+     "net_w_m2": 0.8593605246539728
+    }
+   ],
+   "net_w_m2": 3.908027155988977,
+   "ground_k": [
+    3.256689296657481,
+    2.505145612813447
+   ]
+  },
+  {
+   "water_scale": 2.5,
+   "radius_scale": 1.0,
+   "layers": [
+    {
+     "radius_um": 2.8097623639721414,
+     "reflection": 0.19289759646216476,
+     "emissivity": 0.5920115699056054,
+     "scaled_reflection": 0.3455674748528352,
+     "scaled_emissivity": 0.8936788615089728,
+     "sunlight_w_m2": -1.169348414202061,
+     "infrared_w_m2": 3.928453511605087,
+     "net_w_m2": 2.759105097403026
+    },
+    {
+     "radius_um": 13.468318325877746,
+     "reflection": 0.08766637114897702,
+     "emissivity": 0.28537626972470753,
+     "scaled_reflection": 0.1754312890780898,
+     "scaled_emissivity": 0.5682885334660944,
+     "sunlight_w_m2": -1.2048289179966616,
+     "infrared_w_m2": 5.2238918384290844,
+     "net_w_m2": 4.019062920432423
+    },
+    {
+     "radius_um": 35.20940030215546,
+     "reflection": 0.09245501746894465,
+     "emissivity": 0.3367935137048179,
+     "scaled_reflection": 0.1830050917874075,
+     "scaled_emissivity": 0.6418030260306699,
+     "sunlight_w_m2": -1.1414646156592825,
+     "infrared_w_m2": 3.194487070052048,
+     "net_w_m2": 2.0530224543927655
+    }
+   ],
+   "net_w_m2": 8.831190472228215,
+   "ground_k": [
+    7.359325393523513,
+    5.6610195334796245
+   ]
+  },
+  {
+   "water_scale": 3.5,
+   "radius_scale": 1.0,
+   "layers": [
+    {
+     "radius_um": 2.8097623639721414,
+     "reflection": 0.19289759646216476,
+     "emissivity": 0.5920115699056054,
+     "scaled_reflection": 0.41533544222191837,
+     "scaled_emissivity": 0.9566222056211972,
+     "sunlight_w_m2": -1.703724041307585,
+     "infrared_w_m2": 4.748131375571016,
+     "net_w_m2": 3.044407334263431
+    },
+    {
+     "radius_um": 13.468318325877746,
+     "reflection": 0.08766637114897702,
+     "emissivity": 0.28537626972470753,
+     "scaled_reflection": 0.22091042813525888,
+     "scaled_emissivity": 0.6914887413829234,
+     "sunlight_w_m2": -1.8291624580328525,
+     "infrared_w_m2": 7.498747484905394,
+     "net_w_m2": 5.669585026872541
+    },
+    {
+     "radius_um": 35.20940030215546,
+     "reflection": 0.09245501746894465,
+     "emissivity": 0.3367935137048179,
+     "scaled_reflection": 0.22940186039065918,
+     "scaled_emissivity": 0.7624414434922338,
+     "sunlight_w_m2": -1.726337350885132,
+     "infrared_w_m2": 4.457981646971324,
+     "net_w_m2": 2.7316442960861917
+    }
+   ],
+   "net_w_m2": 11.445636657222163,
+   "ground_k": [
+    9.538030547685137,
+    7.336946575142412
+   ]
+  },
+  {
+   "water_scale": 1.0,
+   "radius_scale": 0.5,
+   "layers": [
+    {
+     "radius_um": 2.8097623639721414,
+     "reflection": 0.19289759646216476,
+     "emissivity": 0.5920115699056054,
+     "scaled_reflection": 0.30343005935092615,
+     "scaled_emissivity": 0.8314650997251942,
+     "sunlight_w_m2": -0.8466041995925225,
+     "infrared_w_m2": 3.118276612244748,
+     "net_w_m2": 2.2716724126522254
+    },
+    {
+     "radius_um": 13.468318325877746,
+     "reflection": 0.08766637114897702,
+     "emissivity": 0.28537626972470753,
+     "scaled_reflection": 0.15076032913016188,
+     "scaled_emissivity": 0.47837123367592627,
+     "sunlight_w_m2": -0.8661481936096223,
+     "infrared_w_m2": 3.5635953129422457,
+     "net_w_m2": 2.6974471193326233
+    },
+    {
+     "radius_um": 35.20940030215546,
+     "reflection": 0.09245501746894465,
+     "emissivity": 0.3367935137048179,
+     "scaled_reflection": 0.16025547764125336,
+     "scaled_emissivity": 0.5322695836780552,
+     "sunlight_w_m2": -0.8546853969431464,
+     "infrared_w_m2": 2.047299355591833,
+     "net_w_m2": 1.1926139586486868
+    }
+   ],
+   "net_w_m2": 6.1617334906335355,
+   "ground_k": [
+    5.13477790886128,
+    3.9498291606625227
+   ]
+  },
+  {
+   "water_scale": 1.0,
+   "radius_scale": 2.0,
+   "layers": [
+    {
+     "radius_um": 2.8097623639721414,
+     "reflection": 0.19289759646216476,
+     "emissivity": 0.5920115699056054,
+     "scaled_reflection": 0.11574234439184436,
+     "scaled_emissivity": 0.3652147207688111,
+     "sunlight_w_m2": 0.5909572510755521,
+     "infrared_w_m2": -2.9534553569826376,
+     "net_w_m2": -2.3624981059070853
+    },
+    {
+     "radius_um": 13.468318325877746,
+     "reflection": 0.08766637114897702,
+     "emissivity": 0.28537626972470753,
+     "scaled_reflection": 0.04819284863367263,
+     "scaled_emissivity": 0.16355886313269463,
+     "sunlight_w_m2": 0.5418889750463168,
+     "infrared_w_m2": -2.249322626241179,
+     "net_w_m2": -1.7074336511948625
+    },
+    {
+     "radius_um": 35.20940030215546,
+     "reflection": 0.09245501746894465,
+     "emissivity": 0.3367935137048179,
+     "scaled_reflection": 0.049147661430798684,
+     "scaled_emissivity": 0.21027599166242306,
+     "sunlight_w_m2": 0.5459279286888734,
+     "infrared_w_m2": -1.3250687993877357,
+     "net_w_m2": -0.7791408706988623
+    }
+   ],
+   "net_w_m2": -4.84907262780081,
+   "ground_k": [
+    -4.040893856500675,
+    -3.108379889615904
+   ]
+  },
+  {
+   "water_scale": 0.5,
+   "radius_scale": 2.0,
+   "layers": [
+    {
+     "radius_um": 2.8097623639721414,
+     "reflection": 0.19289759646216476,
+     "emissivity": 0.5920115699056054,
+     "scaled_reflection": 0.06618381495966058,
+     "scaled_emissivity": 0.20326586665865198,
+     "sunlight_w_m2": 0.9705421987586678,
+     "infrared_w_m2": -5.0624295889851005,
+     "net_w_m2": -4.091887390226432
+    },
+    {
+     "radius_um": 13.468318325877746,
+     "reflection": 0.08766637114897702,
+     "emissivity": 0.28537626972470753,
+     "scaled_reflection": 0.0260395103821834,
+     "scaled_emissivity": 0.08542844081651801,
+     "sunlight_w_m2": 0.8460080146962369,
+     "infrared_w_m2": -3.691977921819254,
+     "net_w_m2": -2.845969907123017
+    },
+    {
+     "radius_um": 35.20940030215546,
+     "reflection": 0.09245501746894465,
+     "emissivity": 0.3367935137048179,
+     "scaled_reflection": 0.026654532885105345,
+     "scaled_emissivity": 0.11133582927093488,
+     "sunlight_w_m2": 0.8294739171779144,
+     "infrared_w_m2": -2.3613088400943942,
+     "net_w_m2": -1.5318349229164798
+    }
+   ],
+   "net_w_m2": -8.469692220265928,
+   "ground_k": [
+    -7.058076850221608,
+    -5.4292898847858515
+   ]
+  },
+  {
+   "water_scale": 3.5,
+   "radius_scale": 0.5,
+   "layers": [
+    {
+     "radius_um": 2.8097623639721414,
+     "reflection": 0.19289759646216476,
+     "emissivity": 0.5920115699056054,
+     "scaled_reflection": 0.5663948085387686,
+     "scaled_emissivity": 0.998034765093876,
+     "sunlight_w_m2": -2.8607370180322156,
+     "infrared_w_m2": 5.287425224169296,
+     "net_w_m2": 2.4266882061370807
+    },
+    {
+     "radius_um": 13.468318325877746,
+     "reflection": 0.08766637114897702,
+     "emissivity": 0.28537626972470753,
+     "scaled_reflection": 0.34308409344918783,
+     "scaled_emissivity": 0.897490204493454,
+     "sunlight_w_m2": -3.506351572557617,
+     "infrared_w_m2": 11.30250398388577,
+     "net_w_m2": 7.796152411328154
+    },
+    {
+     "radius_um": 35.20940030215546,
+     "reflection": 0.09245501746894465,
+     "emissivity": 0.3367935137048179,
+     "scaled_reflection": 0.3581839525216142,
+     "scaled_emissivity": 0.9300182747500483,
+     "sunlight_w_m2": -3.349750720829612,
+     "infrared_w_m2": 6.2130810752195815,
+     "net_w_m2": 2.8633303543899697
+    }
+   ],
+   "net_w_m2": 13.086170971855204,
+   "ground_k": [
+    10.905142476546004,
+    8.388571135804618
+   ]
+  }
+ ],
+ "feedback_w_m2_k": [
+  1.2,
+  1.56
+ ],
+ "evidence": "First-order radiative changes of the GCM's own top three layers of cloud, its water and crystal radius scaled through the ice optics the GCM runs with, from the run's own means; no cloud, vapour or circulation response, no overlap, day and night averaged. A range for judging the high cloud, not a run.",
+ "reading_rule": "cloud holds the top layers' area-weighted cover and their cover-weighted in-cloud water path and temperature over the years, the top first. Each case scales every top layer's water or radius; sunlight_w_m2 and infrared_w_m2 are its changes at the top of the air, positive warming, and ground_k the net over each feedback, K.",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/high_cloud.py": "c021b4e264b62d7b",
+   "gcm/plasim_ice_optics.py": "4683bdb84e5afee9",
+   "gcm/cloud_water.py": "2b1a2abad227ee41"
+  }
+ }
+}
