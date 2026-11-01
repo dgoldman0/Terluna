@@ -178,6 +178,25 @@ def test_the_inflow_build_draws_the_reference_s_air_in_where_the_mean_wind_conve
     assert case['restart_from'] == dict(case='box_near_side_sea_l15', day=59.0)
 
 
+def test_the_boxes_on_the_design_years_are_the_site_boxes_on_the_corrected_build_and_the_design_run():
+    # each differs from the site box it repeats in its build and its forcing run alone, and its run-on days chain
+    # from its own restarts as the fifteen-level sea box's did
+    assert (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS) == ('A28R_301k_design_l15_snow_s934', (10, 19))
+    same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'gcm', 'purpose')}
+    for name, source in (('box_near_side_sea_design_years', 'box_near_side_sea'), ('box_0e_design_years', 'box_0e_design')):
+        case = c.CASES[name]
+        assert case['build'] == c.CORRECTED_BUILD and case['gcm'] == (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS)
+        assert same(case) == same(c.CASES[source]) and case['days'] == 59.06
+        assert c.corrected_inflow(case['build'], case) == dict(var7=1.0)
+        assert c.corrected_wind(case['build'], 316.1) == dict(var10=c.WIND_TAU_S, var8=316.1)
+        day3, day4 = c.CASES[f'{name}_day3'], c.CASES[f'{name}_day4']
+        assert day3['restart_from'] == dict(case=name, day=59.0) and day3['days'] == 88.5
+        assert day4['restart_from'] == dict(case=f'{name}_day3', day=88.5) and day4['days'] == 118.0
+        for run_on in (day3, day4):
+            assert {k: v for k, v in run_on.items() if k not in ('restart_from', 'days', 'purpose')} == \
+                {k: v for k, v in case.items() if k not in ('days', 'purpose')}
+
+
 def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     name, marker, edits = c.TWILIGHT_PATCH
     assert name == 'radiation_driver.F' and any(marker in new for _, new, _ in edits)

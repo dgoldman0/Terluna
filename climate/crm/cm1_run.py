@@ -2037,6 +2037,34 @@ CASES['box_near_side_sea_l15_inflow_day3'] = dict(
     CASES['box_near_side_sea_l15_aloft_day3'], build=INFLOW_BUILD,
     purpose=CASES['box_near_side_sea_l15_aloft_day3']['purpose'] + "; the air the GCM's mean wind draws in carrying the "
             "GCM's mean air rather than the box's own")
+# The sea and land boxes forced by the design climate, the design run's years 10-19 (register, 31 October), for the
+# gap between the two models at the Near-side Sea that biome maps, local climates and the Jura box wait on. Each is a
+# fresh box from local sunrise on the GCM's mean air at its site, as box_near_side_sea and box_0e_design began, on
+# the corrected build with its defaults from the first step: the wind relaxed toward the GCM's by local time on
+# 2 hours from the GCM's lowest level up (corrected_wind), Beljaars's gust over water at lunar gravity, and the air
+# the GCM's mean wind draws in carrying the GCM's mean air (corrected_inflow). The design run gives the reference air,
+# the sea's temperature or the land's wetness and ground, the mean vertical wind, its circulation's heating and
+# moistening by local time, its wind by local time, the height the air is held from (its convection's top), the
+# height the wind's pull starts from and its sunlight; the sites' cells, the grid, the rain limits and law, the
+# twilight and the output are the earlier boxes'. Two lunar days from sunrise, then the third and fourth from the
+# restarts, as the fifteen-level sea box ran.
+GCM_DESIGN_RUN, GCM_DESIGN_YEARS = 'A28R_301k_design_l15_snow_s934', (10, 19)
+for _name, _source, _where in (('box_near_side_sea_design_years', 'box_near_side_sea', 'over the Near-side Sea at 5 S, 45 W'),
+                               ('box_0e_design_years', 'box_0e_design', 'over the land at 0 N, 0 E')):
+    CASES[_name] = dict(
+        CASES[_source], build=CORRECTED_BUILD, gcm=(GCM_DESIGN_RUN, GCM_DESIGN_YEARS),
+        purpose=f"a 3-D box 192 km square {_where}, forced by the design run's column there (its years 10-19, the "
+                "design climate) through its whole depth: its mean air held only above the top of the GCM's "
+                "convection, its mean vertical wind and its own heating and moistening by local time; on the corrected "
+                "build with its defaults, the wind relaxed toward the GCM's on 2 hours from the GCM's lowest level up, "
+                "Beljaars's gust over water at lunar gravity and the GCM's mean air drawn in where its mean wind "
+                f"converges; otherwise as {_source}, two lunar days from sunrise")
+    CASES[f'{_name}_day3'] = dict(
+        CASES[_name], restart_from=dict(case=_name, day=59.0), days=88.5,
+        purpose=CASES[_name]['purpose'] + '; its third lunar day, days 59-88.5, from its day-59 restart')
+    CASES[f'{_name}_day4'] = dict(
+        CASES[_name], restart_from=dict(case=f'{_name}_day3', day=88.5), days=118.0,
+        purpose=CASES[_name]['purpose'] + "; its fourth lunar day, days 88.5-118, from the third day's day-88.5 restart")
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
