@@ -16,7 +16,7 @@
   },
   "generation_script_sha256": "d2b44d8ea460eb5c0ce87969b2517ede4cfd77d5a419d8a22040694ae42b0bba",
   "additional_inputs_sha256": {
-    "boehm_lunar_cases.json": "c39e73446a3635a4f581ab6cf43acd919731ddb2e0430e7e37106ef6b0679925",
+    "boehm_lunar_cases.json": "bf00ee5b7465cc5b96f76b431d41d6bc25a8fece2118cc34fc95c0597c10e0fa",
     "mcsnow_ground_graupel.json": "400b726c87ff75f3898059c19a7bc064bf53fc72976de6a44349771bd4760de3"
   },
   "input_construction": "Explicit synthetic cases; g=9.81 and 1.62 m/s2, rho=0.3\u20131.1 kg/m3. Masses specify numerical tests, not observations.",
