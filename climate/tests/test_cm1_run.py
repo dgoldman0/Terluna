@@ -197,6 +197,49 @@ def test_the_boxes_on_the_design_years_are_the_site_boxes_on_the_corrected_build
                 {k: v for k, v in case.items() if k not in ('days', 'purpose')}
 
 
+def test_the_third_box_on_the_design_years_is_the_land_box_at_the_dry_site_with_its_own_wetness_row():
+    # box_se_dry_design_years departs from box_0e_design_years in its site, with the start at the site's sunrise, and
+    # in its land row at the GCM's own wetness alone; its run-on days chain from its own restarts
+    name, land = 'box_se_dry_design_years', c.CASES['box_0e_design_years']
+    case = c.CASES[name]
+    assert {k for k in set(case) | set(land) if case.get(k) != land.get(k)} == {'site', 'start_hour_angle_deg', 'land_row',
+                                                                              'purpose'}
+    assert case['site'] == dict(land['site'], lat_deg=-44.3, lon_deg=56.25) and case['site']['surface'] == 'land'
+    assert case['start_hour_angle_deg'] == -90.0 - case['site']['lon_deg'] and case['land_row'] == 'gcm'
+    assert case['build'] == c.CORRECTED_BUILD and case['gcm'] == (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS)
+    assert c.corrected_inflow(case['build'], case) == dict(var7=1.0) and case['days'] == 59.06
+    day3, day4 = c.CASES[f'{name}_day3'], c.CASES[f'{name}_day4']
+    assert day3['restart_from'] == dict(case=name, day=59.0) and day3['days'] == 88.5
+    assert day4['restart_from'] == dict(case=f'{name}_day3', day=88.5) and day4['days'] == 118.0
+    for run_on in (day3, day4):
+        assert {k: v for k, v in run_on.items() if k not in ('restart_from', 'days', 'purpose')} == \
+            {k: v for k, v in case.items() if k not in ('days', 'purpose')}
+    # the latitude turns the box (the land box on the equator has no Coriolis force)
+    assert c.turning_rate(case, -44.3) == pytest.approx(-3.718e-6, rel=1e-3) and c.turning_rate(land, 0.0) == 0.0
+    # its land is the placeholder land's own row at the GCM's wetness to two decimals, as the circles of latitude
+    # have it; every other box keeps the wetness class nearest its site's wetness
+    index = c.PLACEHOLDER_LAND[0]
+    assert c.site_land_row(case, 0.0823) == index and c.site_land_row(land, 0.794) == c.wetness_class(0.794) == 29
+    assert c.site_land_row(land, 0.0823) == c.wetness_class(0.0823) == 21
+    assert all(c.site_land_row(v, 0.5) == c.wetness_class(0.5) for k, v in c.CASES.items() if not k.startswith(name))
+    row = c.landuse_rows(((index, round(0.0823, 2)),))[index]
+    assert row.startswith(f'{index},') and '   .08,' in row and 'wetness 0.08' in row
+
+
+def test_the_dry_box_takes_six_cells_at_two_gaussian_rows_and_three_columns():
+    # the land box's footprint about 44.3 S, 56.25 E on PlaSim's T21 grid (Gaussian rows, 5.625-degree columns) holds
+    # the rows at 41.53 and 47.07 S and the columns at 50.625, 56.25 and 61.875 E; all six are land on the design run
+    # (checked on its mask at setup)
+    from climate.crm import gcm_site as gs
+    lat = np.degrees(np.arcsin(np.polynomial.legendre.leggauss(32)[0]))[::-1]
+    lon = np.arange(64) * 5.625
+    site = c.CASES['box_se_dry_design_years']['site']
+    cells = gs.site_cells(lat, lon, np.ones((32, 64), bool), np.zeros((32, 64)), site)
+    jj, ii = np.nonzero(cells)
+    assert sorted({round(float(lat[j]), 2) for j in jj}) == [-47.07, -41.53]
+    assert sorted({float(lon[i]) for i in ii}) == [50.625, 56.25, 61.875] and cells.sum() == 6
+
+
 def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     name, marker, edits = c.TWILIGHT_PATCH
     assert name == 'radiation_driver.F' and any(marker in new for _, new, _ in edits)

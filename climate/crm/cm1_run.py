@@ -2065,6 +2065,37 @@ for _name, _source, _where in (('box_near_side_sea_design_years', 'box_near_side
     CASES[f'{_name}_day4'] = dict(
         CASES[_name], restart_from=dict(case=f'{_name}_day3', day=88.5), days=118.0,
         purpose=CASES[_name]['purpose'] + "; its fourth lunar day, days 88.5-118, from the third day's day-88.5 restart")
+# The third box on the design years (register, 1 November), run after the other two: the semi-arid inland block of the
+# near side's south-east, for the gap test and for a study of storm water, which reruns ten-minute windows of its
+# storms from its restarts. The site is centred at 44.3 S, 56.25 E with the land box's footprint (half widths of 5.6
+# degrees of latitude and 8.5 of longitude), which takes the design run's six land cells at 47.07 and 41.53 S,
+# 50.625-61.875 E, 0.8-1.3 km up, raining 156-280 mm a year, 95-98% of it by day (session-tools/design_run/
+# jura_dryland_cells.json). It is box_0e_design_years, its build and defaults, with these departures alone:
+#   1. The site, 44.3 S, 56.25 E, in place of 0 N, 0 E, and with it the design run's column there (its mean air,
+#      ground, wetness, mean vertical wind, circulation and wind by local time, convection's top and lowest level),
+#      the start at the site's sunrise (start hour angle -146.25 degrees), the site's Sun, 44.3 degrees from the
+#      zenith at noon, and its latitude's Coriolis force (-3.7e-6 per second, CM1 supplying the reference wind's own
+#      pressure gradient, lspgrad 1), where the equator has none.
+#   2. Its land row at the GCM's own wetness there to two decimals, the placeholder land's row 28 (land_row 'gcm'),
+#      as the circles of latitude have it, in place of the wetness class nearest the GCM's wetness.
+CASES['box_se_dry_design_years'] = dict(
+    CASES['box_0e_design_years'],
+    site=dict(CASES['box_0e_design_years']['site'], lat_deg=-44.3, lon_deg=56.25), start_hour_angle_deg=-90.0 - 56.25,
+    land_row='gcm',
+    purpose="a 3-D box 192 km square over the semi-arid inland block of the near side's south-east at 44.3 S, 56.25 E, "
+            "forced by the design run's column there (its years 10-19, the design climate) through its whole depth: "
+            "its mean air held only above the top of the GCM's convection, its mean vertical wind and its own heating "
+            "and moistening by local time; on the corrected build with its defaults, the wind relaxed toward the "
+            "GCM's on 2 hours from the GCM's lowest level up, Beljaars's gust over water at lunar gravity and the "
+            "GCM's mean air drawn in where its mean wind converges; its land the placeholder land at the GCM's own "
+            "wetness there; otherwise as box_0e_design_years, two lunar days from sunrise")
+CASES['box_se_dry_design_years_day3'] = dict(
+    CASES['box_se_dry_design_years'], restart_from=dict(case='box_se_dry_design_years', day=59.0), days=88.5,
+    purpose=CASES['box_se_dry_design_years']['purpose'] + '; its third lunar day, days 59-88.5, from its day-59 restart')
+CASES['box_se_dry_design_years_day4'] = dict(
+    CASES['box_se_dry_design_years'], restart_from=dict(case='box_se_dry_design_years_day3', day=88.5), days=118.0,
+    purpose=CASES['box_se_dry_design_years']['purpose'] + "; its fourth lunar day, days 88.5-118, from the third day's "
+            'day-88.5 restart')
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -2389,6 +2420,13 @@ def tilted_path(nx: int, tilt_deg: float, node_deg: float) -> dict:
 def wetness_class(wetness) -> int:
     """The land-use row whose wetness is nearest."""
     return min(WETNESS_CLASSES, key=lambda c: abs(c[1] - float(wetness)))[0]
+
+
+def site_land_row(cfg: dict, wetness) -> int:
+    """The land-use row of a box's land: the wetness class nearest the site's wetness or, where the case sets land_row
+    'gcm', the placeholder land's own row written at the site's wetness to two decimals, as the circles of latitude
+    have it."""
+    return PLACEHOLDER_LAND[0] if cfg.get('land_row') == 'gcm' else wetness_class(wetness)
 
 
 def landuse_rows(classes, land=None) -> dict:
@@ -3498,7 +3536,7 @@ def setup(name: str) -> Path:
     if pair:
         segments, water_share, surface_sha = [(-1e9, 1e9, 2, 16, ref['sea_surface_k'], ref['sea_surface_k'])], 1.0, None
     elif box:
-        segments = [(-1e9, 1e9, 1, wetness_class(site['wetness']), site['ground_k'], site['ground_k'])]
+        segments = [(-1e9, 1e9, 1, site_land_row(cfg, site['wetness']), site['ground_k'], site['ground_k'])]
         water_share, surface_sha = 0.0, site['surface_product']
         if cfg['site'].get('surface') == 'sea':                              # all of it sea, held at the GCM's
             segments, water_share = [(-1e9, 1e9, 2, 16, site['sea_k'], site['sea_k'])], 1.0
@@ -3513,7 +3551,7 @@ def setup(name: str) -> Path:
             np.asarray(heights, dtype='<f4').tofile(case / 'perts.dat')   # CM1's itern = 4: nx by ny reals, x fastest
             ground = site['ground_k'] - site['lapse_k_m'] * heights       # carried from sea level to each column's height
             water = (site['sea_k'] - site['lapse_k_m'] * heights) if sea else ground   # the sea, and raised lakes
-            row = wetness_class(site['wetness'])
+            row = site_land_row(cfg, site['wetness'])
             (case / 'terluna_surface2d.txt').write_text(f'{nx} {cfg["ny"]}\n' + ''.join(
                 f'{s:.3f} {s:.3f} 16\n' if w else f'{g:.3f} {g:.3f} {row:d}\n'
                 for g, s, w in zip(ground.ravel(), water.ravel(), wet.ravel())))
@@ -3541,6 +3579,8 @@ def setup(name: str) -> Path:
              for line in table]
     if tilted or box:                                                     # land-use rows for the wetness classes
         rows = landuse_rows(WETNESS_CLASSES, cfg.get('land'))
+        if box and cfg.get('land_row') == 'gcm':                          # the placeholder's row at the site's wetness
+            rows[index] = landuse_rows(((index, round(site['wetness'], 2)),), cfg.get('land'))[index]
         table = [next((r for i, r in rows.items() if line.startswith(f'{i},')), line) for line in table]
     elif cfg.get('land'):                         # a circle of latitude's one land row, its wetness as written above
         row = landuse_rows(((index, round(land_moisture(cfg, ref), 2)),), cfg['land'])[index]
@@ -3626,7 +3666,8 @@ def setup(name: str) -> Path:
     record = dict(case=name, configuration=cfg, time_scale=s,
                   grid=dict(nx=nx, dx_m=dx, length_m=length, nz=nz, ztop_m=zw[-1], **(dict(ny=cfg['ny']) if box else {})),
                   site=dict(cfg['site'], ring_columns=site['columns'], land_share=site['land_share'], wetness=site['wetness'],
-                            wetness_class=wetness_class(site['wetness']), ground_k=site['ground_k']) if box else None,
+                            wetness_class=wetness_class(site['wetness']), land_row=site_land_row(cfg, site['wetness']),
+                            ground_k=site['ground_k']) if box else None,
                   build=build_record, gcm=dict(run=run, years=list(years)), air=air,
                   reference=ref, initial=initial, water_share=water_share, surface_product=surface_sha,
                   path=dict(tilt_deg=cfg['tilt_deg'], node_deg=cfg['node_deg'], lat=[round(float(v), 4) for v in track['lat']],
