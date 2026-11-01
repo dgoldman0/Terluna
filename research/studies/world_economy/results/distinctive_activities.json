@@ -1,0 +1,119 @@
+{
+  "schema": "terluna.research.distinctive-activities/1",
+  "evidence": "Classical scaling and reference geometry, with selected design conditions. No qualified vehicle, human tolerance, habitat design, wave climate, biological capacity or market forecast.",
+  "reading_rule": "SI units; matched dry 301 K binary N2/O2 atmospheres. Compare equal mass, geometry and stated coefficients. Rotating-venue tolerances are chosen for illustration; the Moon comparison assumes a smooth spherical field and gives a maximum Coriolis magnitude. Water pressure is an apparatus constraint, never a human exposure limit. No monetary output is added.",
+  "assumptions": {
+    "schema": "terluna.research.distinctive-activities-inputs/1",
+    "evidence": "Classical scaling and reference geometry, with selected design conditions. No qualified vehicle, human tolerance, habitat design, wave climate, biological capacity or market forecast.",
+    "reading_rule": "SI units; matched dry 301 K binary N2/O2 atmospheres. Compare equal mass, geometry and stated coefficients. Rotating-venue tolerances are chosen for illustration; the Moon comparison assumes a smooth spherical field and gives a maximum Coriolis magnitude. Water pressure is an apparatus constraint, never a human exposure limit. No monetary output is added.",
+    "products": {
+      "research/studies/world_economy/results/pressure_advantages.json": {
+        "schema": "terluna.research.pressure-advantages/1",
+        "sha256": "b221d23501d2a9e0a521addfbe1a1145cc266dca461053cbaebe7855a511dfae",
+        "use": "environment.reference_Pa, locked_Pa, temperature_K and binary_composition_corrected_density_ratio"
+      }
+    },
+    "vertical_takeoff_speed_m_s": 2.5,
+    "venue": {
+      "height_m": 50.0,
+      "circumferential_arc_width_m": 1000.0,
+      "transverse_speed_m_s": 10.0,
+      "gravity_tolerance_fraction": 0.01,
+      "direction_tolerance_degrees": 2.0,
+      "coriolis_tolerance_fraction": 0.1,
+      "basis": "Illustrative freely multidirectional venue. Axial width does not curve around the spin axis and axial velocity has no Coriolis term. Alternative layouts can relax requirements; no habitat mass or price is inferred."
+    },
+    "water": {
+      "density_kg_m3": 1000.0,
+      "target_absolute_pressure_Pa": 300000.0,
+      "basis": "Chosen constant reference density and arbitrary apparatus absolute-pressure budget, equal on both worlds; not a water-property fit at 301 K or diving limit."
+    },
+    "waves": {
+      "wavelength_m": 10.0,
+      "depth_m": 20.0,
+      "basis": "Infinitesimal gravity waves, still water, equal wavelength and depth. No wind, viscosity, breaking, currents or surface tension; no surf-ride or safety prediction."
+    }
+  },
+  "producer": {
+    "files": {
+      "research/studies/world_economy/distinctive_activities.py": "0678bbb78eb0fd2fdd8a044361eb40759eb532cb0a712d4aa8241b9f6c3e399f",
+      "research/studies/world_economy/distinctive_activities_inputs.json": "8bfb6c4c84acfdd8fdfcea6f359250540624085f181f03c31101f62aca9aa05f",
+      "research/studies/world_economy/distinctive_activities_sources.json": "d73a24b3d9fa3692450eb8cb220f92fbbbf948efe3beea12f048350917986992"
+    },
+    "constants": {
+      "JULIAN_DAY": 86400.0,
+      "MOON_RADIUS": 1737400.0,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "SIDEREAL_MONTH_DAYS": 27.321661,
+      "STANDARD_GRAVITY": 9.80665
+    }
+  },
+  "environment": {
+    "earth_gravity_m_s2": 9.80665,
+    "moon_gravity_m_s2": 1.6242188765608128,
+    "gravity_ratio": 0.16562423218538572,
+    "matched_temperature_K": 301.0,
+    "earth_pressure_Pa": 101325.0,
+    "moon_pressure_Pa": 121590.0,
+    "binary_density_ratio": 1.1941980983651694
+  },
+  "flight": {
+    "speed_at_fixed_lift_coefficient": 0.37241207271604987,
+    "aerodynamic_power_at_fixed_lift_and_drag_coefficients": 0.06168046360016379,
+    "ideal_induced_hover_power": 0.06168046360016379,
+    "work_per_distance_at_fixed_lift_to_drag": 0.16562423218538572,
+    "parasite_drag_at_fixed_speed_and_coefficient": 1.1941980983651694
+  },
+  "ballistic": {
+    "earth": {
+      "height_m": 0.3186613165556026,
+      "return_time_s": 0.5098581064889641
+    },
+    "moon": {
+      "height_m": 1.9240017740817066,
+      "return_time_s": 3.0784028385307303
+    }
+  },
+  "rotating_analogue": {
+    "constraint_radii": {
+      "gravity_gradient_m": 5000.0,
+      "direction_change_m": 28647.88975654116,
+      "coriolis_m": 24627.222708245838
+    },
+    "combined_radius_m": 28647.88975654116,
+    "venue": {
+      "radius_m": 28647.88975654116,
+      "angular_speed_rad_s": 0.007529670267552164,
+      "rpm": 0.07190305457598006,
+      "fractional_gravity_change": 0.0017453292519943296,
+      "down_direction_change_degrees": 2.0,
+      "coriolis_to_rim_gravity": 0.09271743329933212
+    }
+  },
+  "natural_moon_venue": {
+    "fractional_gravity_change": 5.755478494906541e-05,
+    "down_direction_change_degrees": 0.032977886216808056,
+    "maximum_coriolis_to_gravity": 3.277513351957909e-05
+  },
+  "water": {
+    "depth_m": {
+      "earth": 20.25921186133899,
+      "moon": 109.84357008445352
+    },
+    "depth_ratio": 5.421907369164243,
+    "same_depth_gauge_pressure_ratio": 0.16562423218538572,
+    "same_liquid_capillary_length_ratio": 2.457186162930167,
+    "gravity_waves": {
+      "earth": {
+        "angular_frequency_rad_s": 2.482277164040188,
+        "phase_speed_m_s": 3.9506668078112748,
+        "period_s": 2.531218269338219
+      },
+      "moon": {
+        "angular_frequency_rad_s": 1.0102112739720543,
+        "phase_speed_m_s": 1.607801178198134,
+        "period_s": 6.219674506773916
+      }
+    }
+  }
+}

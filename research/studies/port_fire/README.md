@@ -52,8 +52,7 @@ fire at lunar gravity behaves as an Earth fire several times larger, played abou
 | Largest fire a room's openings can feed | 1 | 0.32 | 0.28 | 0.25 | 0.32 |
 
 The oxygen and the pressure add to what gravity does:
-- **Flames about twice as tall.** Air with 17.5% oxygen gives a fifth less heat per kilogram burned, so a flame
-  draws in more of it, and the flames lengthen.
+- **Flames about twice as tall.** Each kilogram of air at 17.5% oxygen carries a sixth less oxygen, so a flame draws in more of it, and the flames lengthen.
 - **Hotter, slower smoke.** The plume takes in about two-thirds of Earth's air, so its smoke is hotter and less
   diluted, and it moves more slowly.
 - **Starved room fires.** A room's door and window breathe about a third as much, since buoyant flow through an
@@ -67,8 +66,7 @@ The spaces:
 - **A compartment.** A floor compartment of 2,000 m² under a 3.5 m ceiling, the size of Earth's usual smoke reservoir.
 - **A hall.** A hall of 5,000 m² through three of a band's four storeys, under a 12 m ceiling.
 
-The sensors are smoke detectors, judged by the usual 13 K rise of the ceiling jet, and quick-response sprinklers (RTI
-50 (m s)^½, 68 °C). The table compares Earth with the enclosed floors at 3–10 km for EN 1991-1-2's design fire, with
+The sensors are smoke detectors, timed by the usual 13 K rise of the ceiling jet as a temperature surrogate for the smoke reaching them, and quick-response sprinklers (RTI 50 (m s)^½, 68 °C), timed to their activation. The table compares Earth with the enclosed floors at 3–10 km for EN 1991-1-2's design fire, with
 the slower lunar estimate (section 2) in brackets. The enclosed zones above 10 km differ from it by under 6%; on the
 open floors below 3 km some times run up to a fifth longer, the transport hall's sprinklers the most.
 

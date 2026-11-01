@@ -1,0 +1,2060 @@
+{
+  "schema": "terluna.research.world-economy-construction/1",
+  "evidence": "Explicit future-price and engineering assumptions applied to committed physical inventories. Conditional cost scenarios, not forecasts or validated industrial architectures.",
+  "numeraire": "U: the same transferable common-price real unit as the world accounts; no present launch price, future exchange rate or inflation conversion is assumed.",
+  "build_years": 500.0,
+  "rules": [
+    "The middle crust inventory is an illustrative scenario inside the physical bracket, not a measured or selected groundwater inventory.",
+    "Joint source feed is max(water feed/source water fraction, nitrogen/nitrogen grade). This assumes water and nitrogen can be obtained from the same processed feed; disjoint deposits would increase feed. Grades are recoverable fractions; extraction recovery is embedded, not separately credited.",
+    "Purchase energy includes source chemistry and propulsion, but not the incoming mass's braking energy or gravitational fall energy. Those must be recovered or rejected, and their handling hardware is charged separately. No energy-sale credit is used.",
+    "Every hardware-service unit charge includes the supplier's process equipment, replacement, operation, and capital recovery over throughput. The electricity price includes generation capital service. Do not add source plants, transport fleets, catchers or their generation capex again.",
+    "Ordinary installed capital is an explicit total allowance of 300000/500000/1000000 U per resident in the three cost cases, identically valued on Earth, Moon and array. It includes normal housing, orbital habitat structure, productive equipment, food systems, ordinary computing, intangibles and R&D. The physical mass-times-price proxy is an included diagnostic, never an extra cost. Ordinary capital excludes the separately priced aerial carrier, passive orbital shielding, optical shield, dedicated power and reserve rows. This is a judgment, not an empirical capital-stock estimate; use it instead of another ordinary-capital baseline. The fixed U/resident allowances remain fixed across the three Earth income benchmarks.",
+    "Environmental establishment and magnetic protection are unquantified allowances, not engineering cost estimates. Environmental establishment is assumed to cover initial aerial hydrogen manufacture/fill, ecosystem seeding and soil engineering; the gas fill is not independently priced. Neither allowance adds volatile import mass already counted, import delivery networks, ordinary capital or the separately priced shield/power hardware.",
+    "Capital beneficiary and asset territory are distinct. Primary capital totals assign optical shield, orbital power and magnetic protection to the array; their Moon benefit is a memo only. No Moon funding obligation or debt is inferred. Contracts and finance are separate. This module calculates construction expenditure, not territorial CFC or GDP.",
+    "The 990 t/person orbital shield is bulk material added separately. The 15 t/person habitat structure is already inside ordinary capital; its separate engineering valuation is a diagnostic excluded from totals. Shielding is never added twice.",
+    "Using the same ordinary capital value per person on Earth, Moon and array is an optimistic comparability assumption: orbital pressure hulls, redundancy and rotation may raise the array's ordinary cost. Dedicated export industry or computing beyond the common ordinary benchmark requires additional capital and output scenarios.",
+    "Orbital power price is per operating watt at the transmitting tiles and is assumed to include the installed spare generation, beam apertures and transmitter hardware. Ground receivers and critical reserve stores have their own rows. This final mature power system is distinct from the source-site generation already included in the import energy price.",
+    "Prices are frozen at the future technology assumed in each case for all 500 build years. Learning, price changes, finance, schedule overruns, catastrophic failure, supplier profits beyond unit charges and residual asset resale are not separately modeled.",
+    "Source-site energy prices require independent technology. Solar flux at 40 AU is about 1/1600 of 1-AU flux; cheap inner-system solar power does not establish cheap Kuiper-belt processing. No working planetary catch network is demonstrated."
+  ],
+  "cases": [
+    {
+      "cost_case": "patient_automation",
+      "water_case": "surface_only",
+      "imports": {
+        "beneficiary": "moon",
+        "asset_territory": "planetary_environment_with_upstream_services",
+        "delivered_water_kg": 1.3815701215540812e+19,
+        "delivered_air_kg": 3.1413494805269903e+18,
+        "delivered_mass_kg": 1.6957050696067801e+19,
+        "source_feed_kg": 8.42890025615657e+19,
+        "water_feed_requirement_kg": 2.9009931089361666e+19,
+        "nitrogen_feed_requirement_kg": 8.42890025615657e+19,
+        "components": {
+          "source_ore": {
+            "purchased_energy_U": 46827223645314.28,
+            "hardware_service_U": 421445012807828.56,
+            "total_U": 468272236453142.9
+          },
+          "source_chemistry": {
+            "purchased_energy_U": 69158162382875.695,
+            "hardware_service_U": 62826989610539.81,
+            "total_U": 131985151993415.5
+          },
+          "departure_propulsion": {
+            "purchased_energy_U": 942058372003766.9,
+            "hardware_service_U": 678282027842712.1,
+            "total_U": 1620340399846479.0
+          },
+          "capture_controls": {
+            "purchased_energy_U": 23551459300094.168,
+            "hardware_service_U": 678282027842712.1,
+            "total_U": 701833487142806.2
+          },
+          "placement": {
+            "purchased_energy_U": 47102918600188.336,
+            "hardware_service_U": 169570506960678.03,
+            "total_U": 216673425560866.38
+          }
+        },
+        "purchased_energy_MJ": {
+          "source_ore": 1.6857800512313141e+19,
+          "source_chemistry": 2.489693845783525e+19,
+          "departure_propulsion": 3.3914101392135605e+20,
+          "capture_controls": 8.478525348033901e+18,
+          "placement": 1.6957050696067801e+19
+        },
+        "purchased_energy_mean_PW": 25.751725665805143,
+        "construction_power_over_mature_moon_transmitting_power": 546.2818342343052,
+        "generation_capital_ceiling_U_per_continuous_W": 0.006885048240168091,
+        "generation_diagnostic": {
+          "life_years": 100,
+          "annual_real_capital_rate": 0.005,
+          "assumption": "100% availability, zero operation and maintenance cost, no fuel, all electricity revenue available for capital recovery; a ceiling, not an extra construction charge"
+        },
+        "incoming_braking_energy_charged_as_purchased_MJ": 0.0,
+        "energy_recovery_revenue_U": 0.0,
+        "contingency_U": 313910470099671.0,
+        "total_U": 3453015171096381.0,
+        "delivered_average_U_per_kg": 0.00020363300393370332
+      },
+      "installed_assets": [
+        {
+          "element": "ordinary_lunar_capital",
+          "quantity": 8000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 300000.0,
+          "total_U": 2400000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "common_per_resident_total_capital_allowance_excluding_the_separate_rows"
+        },
+        {
+          "element": "ordinary_array_capital",
+          "quantity": 5000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 300000.0,
+          "total_U": 1500000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "same_ordinary_capital_valuation_as_Earth_and_Moon_includes_habitat_structure_and_normal_computing"
+        },
+        {
+          "element": "aerial_carriers_and_control",
+          "quantity": 140000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.5,
+          "total_U": 70000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "optical_shield_fleet",
+          "quantity": 46300000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.5,
+          "total_U": 23150000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "orbital_power_and_beaming",
+          "quantity": 47140000000000.0,
+          "quantity_unit": "W",
+          "unit_cost_U": 0.01,
+          "total_U": 471400000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "ground_receivers",
+          "quantity": 96000000000.0,
+          "quantity_unit": "m2",
+          "unit_cost_U": 1.0,
+          "total_U": 96000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "critical_energy_reserves",
+          "quantity": 424600000000000.0,
+          "quantity_unit": "Wh",
+          "unit_cost_U": 0.001,
+          "total_U": 424600000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "environment_establishment_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 90000000000000.0,
+          "total_U": 90000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "magnetic_protection_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 18000000000000.0,
+          "total_U": 18000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "array_bulk_habitat_shield",
+          "quantity": 4950000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.01,
+          "total_U": 49500000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "scenario_price_on_physical_screen"
+        }
+      ],
+      "moon_territorial_capital_U": 6013535771096381.0,
+      "array_territorial_capital_U": 1591121400000000.0,
+      "combined_total_U": 7604657171096381.0,
+      "earth_ordinary_capital_benchmark_U": 2700000000000000.0,
+      "included_ordinary_physical_proxy": {
+        "mass_kg_per_resident": 43000,
+        "price_U_per_kg": 0.5,
+        "value_U_per_resident": 21500.0,
+        "total_allowance_U_per_resident": 300000,
+        "added_to_total": false
+      },
+      "included_array_structure_comparison": {
+        "mass_kg": 75000000000000,
+        "separately_valued_U": 75000000000000,
+        "added_to_total": false
+      },
+      "beneficiary_memo_U": {
+        "moon": 6055157171096381.0,
+        "array": 1549500000000000.0
+      },
+      "mean_annual_build_U": 15209314342192.762,
+      "earth_comparisons": {
+        "50000": {
+          "earth_annual_output_U": 450000000000000.0,
+          "imports_in_earth_output_years": 7.673367046880847,
+          "moon_capital_in_earth_output_years": 13.363412824658624,
+          "array_capital_in_earth_output_years": 3.5358253333333334,
+          "earth_ordinary_capital_in_earth_output_years": 6.0,
+          "combined_in_earth_output_years": 16.89923815799196,
+          "annual_build_share_of_earth_output": 0.033798476315983914
+        },
+        "100000": {
+          "earth_annual_output_U": 900000000000000.0,
+          "imports_in_earth_output_years": 3.8366835234404233,
+          "moon_capital_in_earth_output_years": 6.681706412329312,
+          "array_capital_in_earth_output_years": 1.7679126666666667,
+          "earth_ordinary_capital_in_earth_output_years": 3.0,
+          "combined_in_earth_output_years": 8.44961907899598,
+          "annual_build_share_of_earth_output": 0.016899238157991957
+        },
+        "250000": {
+          "earth_annual_output_U": 2250000000000000.0,
+          "imports_in_earth_output_years": 1.5346734093761694,
+          "moon_capital_in_earth_output_years": 2.672682564931725,
+          "array_capital_in_earth_output_years": 0.7071650666666667,
+          "earth_ordinary_capital_in_earth_output_years": 1.2,
+          "combined_in_earth_output_years": 3.3798476315983916,
+          "annual_build_share_of_earth_output": 0.006759695263196783
+        }
+      }
+    },
+    {
+      "cost_case": "patient_automation",
+      "water_case": "illustrative_middle",
+      "imports": {
+        "beneficiary": "moon",
+        "asset_territory": "planetary_environment_with_upstream_services",
+        "delivered_water_kg": 2.8815701215540814e+19,
+        "delivered_air_kg": 3.1413494805269903e+18,
+        "delivered_mass_kg": 3.1957050696067805e+19,
+        "source_feed_kg": 8.42890025615657e+19,
+        "water_feed_requirement_kg": 5.9009931089361674e+19,
+        "nitrogen_feed_requirement_kg": 8.42890025615657e+19,
+        "components": {
+          "source_ore": {
+            "purchased_energy_U": 46827223645314.28,
+            "hardware_service_U": 421445012807828.56,
+            "total_U": 468272236453142.9
+          },
+          "source_chemistry": {
+            "purchased_energy_U": 69158162382875.695,
+            "hardware_service_U": 62826989610539.81,
+            "total_U": 131985151993415.5
+          },
+          "departure_propulsion": {
+            "purchased_energy_U": 1775391705337100.2,
+            "hardware_service_U": 1278282027842712.2,
+            "total_U": 3053673733179812.5
+          },
+          "capture_controls": {
+            "purchased_energy_U": 44384792633427.51,
+            "hardware_service_U": 1278282027842712.2,
+            "total_U": 1322666820476139.8
+          },
+          "placement": {
+            "purchased_energy_U": 88769585266855.02,
+            "hardware_service_U": 319570506960678.06,
+            "total_U": 408340092227533.06
+          }
+        },
+        "purchased_energy_MJ": {
+          "source_ore": 1.6857800512313141e+19,
+          "source_chemistry": 2.489693845783525e+19,
+          "departure_propulsion": 6.39141013921356e+20,
+          "capture_controls": 1.5978525348033903e+19,
+          "placement": 3.1957050696067805e+19
+        },
+        "purchased_energy_mean_PW": 46.19054230585381,
+        "construction_power_over_mature_moon_transmitting_power": 979.8587676252398,
+        "generation_capital_ceiling_U_per_continuous_W": 0.006885048240168091,
+        "generation_diagnostic": {
+          "life_years": 100,
+          "annual_real_capital_rate": 0.005,
+          "assumption": "100% availability, zero operation and maintenance cost, no fuel, all electricity revenue available for capital recovery; a ceiling, not an extra construction charge"
+        },
+        "incoming_braking_energy_charged_as_purchased_MJ": 0.0,
+        "energy_recovery_revenue_U": 0.0,
+        "contingency_U": 538493803433004.44,
+        "total_U": 5923431837763048.0,
+        "delivered_average_U_per_kg": 0.0001853560234359144
+      },
+      "installed_assets": [
+        {
+          "element": "ordinary_lunar_capital",
+          "quantity": 8000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 300000.0,
+          "total_U": 2400000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "common_per_resident_total_capital_allowance_excluding_the_separate_rows"
+        },
+        {
+          "element": "ordinary_array_capital",
+          "quantity": 5000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 300000.0,
+          "total_U": 1500000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "same_ordinary_capital_valuation_as_Earth_and_Moon_includes_habitat_structure_and_normal_computing"
+        },
+        {
+          "element": "aerial_carriers_and_control",
+          "quantity": 140000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.5,
+          "total_U": 70000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "optical_shield_fleet",
+          "quantity": 46300000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.5,
+          "total_U": 23150000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "orbital_power_and_beaming",
+          "quantity": 47140000000000.0,
+          "quantity_unit": "W",
+          "unit_cost_U": 0.01,
+          "total_U": 471400000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "ground_receivers",
+          "quantity": 96000000000.0,
+          "quantity_unit": "m2",
+          "unit_cost_U": 1.0,
+          "total_U": 96000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "critical_energy_reserves",
+          "quantity": 424600000000000.0,
+          "quantity_unit": "Wh",
+          "unit_cost_U": 0.001,
+          "total_U": 424600000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "environment_establishment_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 90000000000000.0,
+          "total_U": 90000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "magnetic_protection_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 18000000000000.0,
+          "total_U": 18000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "array_bulk_habitat_shield",
+          "quantity": 4950000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.01,
+          "total_U": 49500000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "scenario_price_on_physical_screen"
+        }
+      ],
+      "moon_territorial_capital_U": 8483952437763048.0,
+      "array_territorial_capital_U": 1591121400000000.0,
+      "combined_total_U": 1.0075073837763048e+16,
+      "earth_ordinary_capital_benchmark_U": 2700000000000000.0,
+      "included_ordinary_physical_proxy": {
+        "mass_kg_per_resident": 43000,
+        "price_U_per_kg": 0.5,
+        "value_U_per_resident": 21500.0,
+        "total_allowance_U_per_resident": 300000,
+        "added_to_total": false
+      },
+      "included_array_structure_comparison": {
+        "mass_kg": 75000000000000,
+        "separately_valued_U": 75000000000000,
+        "added_to_total": false
+      },
+      "beneficiary_memo_U": {
+        "moon": 8525573837763048.0,
+        "array": 1549500000000000.0
+      },
+      "mean_annual_build_U": 20150147675526.098,
+      "earth_comparisons": {
+        "50000": {
+          "earth_annual_output_U": 450000000000000.0,
+          "imports_in_earth_output_years": 13.163181861695662,
+          "moon_capital_in_earth_output_years": 18.85322763947344,
+          "array_capital_in_earth_output_years": 3.5358253333333334,
+          "earth_ordinary_capital_in_earth_output_years": 6.0,
+          "combined_in_earth_output_years": 22.389052972806773,
+          "annual_build_share_of_earth_output": 0.04477810594561355
+        },
+        "100000": {
+          "earth_annual_output_U": 900000000000000.0,
+          "imports_in_earth_output_years": 6.581590930847831,
+          "moon_capital_in_earth_output_years": 9.42661381973672,
+          "array_capital_in_earth_output_years": 1.7679126666666667,
+          "earth_ordinary_capital_in_earth_output_years": 3.0,
+          "combined_in_earth_output_years": 11.194526486403387,
+          "annual_build_share_of_earth_output": 0.022389052972806776
+        },
+        "250000": {
+          "earth_annual_output_U": 2250000000000000.0,
+          "imports_in_earth_output_years": 2.6326363723391326,
+          "moon_capital_in_earth_output_years": 3.770645527894688,
+          "array_capital_in_earth_output_years": 0.7071650666666667,
+          "earth_ordinary_capital_in_earth_output_years": 1.2,
+          "combined_in_earth_output_years": 4.477810594561355,
+          "annual_build_share_of_earth_output": 0.00895562118912271
+        }
+      }
+    },
+    {
+      "cost_case": "patient_automation",
+      "water_case": "deep_crust",
+      "imports": {
+        "beneficiary": "moon",
+        "asset_territory": "planetary_environment_with_upstream_services",
+        "delivered_water_kg": 7.311570121554081e+19,
+        "delivered_air_kg": 3.1413494805269903e+18,
+        "delivered_mass_kg": 7.625705069606781e+19,
+        "source_feed_kg": 1.4760993108936167e+20,
+        "water_feed_requirement_kg": 1.4760993108936167e+20,
+        "nitrogen_feed_requirement_kg": 8.42890025615657e+19,
+        "components": {
+          "source_ore": {
+            "purchased_energy_U": 82005517271867.6,
+            "hardware_service_U": 738049655446808.4,
+            "total_U": 820055172718676.0
+          },
+          "source_chemistry": {
+            "purchased_energy_U": 69158162382875.695,
+            "hardware_service_U": 62826989610539.81,
+            "total_U": 131985151993415.5
+          },
+          "departure_propulsion": {
+            "purchased_energy_U": 4236502816448212.0,
+            "hardware_service_U": 3050282027842712.5,
+            "total_U": 7286784844290924.0
+          },
+          "capture_controls": {
+            "purchased_energy_U": 105912570411205.3,
+            "hardware_service_U": 3050282027842712.5,
+            "total_U": 3156194598253918.0
+          },
+          "placement": {
+            "purchased_energy_U": 211825140822410.6,
+            "hardware_service_U": 762570506960678.1,
+            "total_U": 974395647783088.8
+          }
+        },
+        "purchased_energy_MJ": {
+          "source_ore": 2.9521986217872335e+19,
+          "source_chemistry": 2.489693845783525e+19,
+          "departure_propulsion": 1.5251410139213563e+21,
+          "capture_controls": 3.8128525348033905e+19,
+          "placement": 7.625705069606781e+19
+        },
+        "purchased_energy_mean_PW": 107.35578844025945,
+        "construction_power_over_mature_moon_transmitting_power": 2277.3820203703744,
+        "generation_capital_ceiling_U_per_continuous_W": 0.006885048240168091,
+        "generation_diagnostic": {
+          "life_years": 100,
+          "annual_real_capital_rate": 0.005,
+          "assumption": "100% availability, zero operation and maintenance cost, no fuel, all electricity revenue available for capital recovery; a ceiling, not an extra construction charge"
+        },
+        "incoming_braking_energy_charged_as_purchased_MJ": 0.0,
+        "energy_recovery_revenue_U": 0.0,
+        "contingency_U": 1236941541504002.2,
+        "total_U": 1.3606356956544024e+16,
+        "delivered_average_U_per_kg": 0.00017842752679714683
+      },
+      "installed_assets": [
+        {
+          "element": "ordinary_lunar_capital",
+          "quantity": 8000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 300000.0,
+          "total_U": 2400000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "common_per_resident_total_capital_allowance_excluding_the_separate_rows"
+        },
+        {
+          "element": "ordinary_array_capital",
+          "quantity": 5000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 300000.0,
+          "total_U": 1500000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "same_ordinary_capital_valuation_as_Earth_and_Moon_includes_habitat_structure_and_normal_computing"
+        },
+        {
+          "element": "aerial_carriers_and_control",
+          "quantity": 140000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.5,
+          "total_U": 70000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "optical_shield_fleet",
+          "quantity": 46300000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.5,
+          "total_U": 23150000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "orbital_power_and_beaming",
+          "quantity": 47140000000000.0,
+          "quantity_unit": "W",
+          "unit_cost_U": 0.01,
+          "total_U": 471400000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "ground_receivers",
+          "quantity": 96000000000.0,
+          "quantity_unit": "m2",
+          "unit_cost_U": 1.0,
+          "total_U": 96000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "critical_energy_reserves",
+          "quantity": 424600000000000.0,
+          "quantity_unit": "Wh",
+          "unit_cost_U": 0.001,
+          "total_U": 424600000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "environment_establishment_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 90000000000000.0,
+          "total_U": 90000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "magnetic_protection_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 18000000000000.0,
+          "total_U": 18000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "array_bulk_habitat_shield",
+          "quantity": 4950000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.01,
+          "total_U": 49500000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "scenario_price_on_physical_screen"
+        }
+      ],
+      "moon_territorial_capital_U": 1.6166877556544024e+16,
+      "array_territorial_capital_U": 1591121400000000.0,
+      "combined_total_U": 1.7757998956544024e+16,
+      "earth_ordinary_capital_benchmark_U": 2700000000000000.0,
+      "included_ordinary_physical_proxy": {
+        "mass_kg_per_resident": 43000,
+        "price_U_per_kg": 0.5,
+        "value_U_per_resident": 21500.0,
+        "total_allowance_U_per_resident": 300000,
+        "added_to_total": false
+      },
+      "included_array_structure_comparison": {
+        "mass_kg": 75000000000000,
+        "separately_valued_U": 75000000000000,
+        "added_to_total": false
+      },
+      "beneficiary_memo_U": {
+        "moon": 1.6208498956544024e+16,
+        "array": 1549500000000000.0
+      },
+      "mean_annual_build_U": 35515997913088.05,
+      "earth_comparisons": {
+        "50000": {
+          "earth_annual_output_U": 450000000000000.0,
+          "imports_in_earth_output_years": 30.236348792320054,
+          "moon_capital_in_earth_output_years": 35.926394570097834,
+          "array_capital_in_earth_output_years": 3.5358253333333334,
+          "earth_ordinary_capital_in_earth_output_years": 6.0,
+          "combined_in_earth_output_years": 39.46221990343116,
+          "annual_build_share_of_earth_output": 0.07892443980686233
+        },
+        "100000": {
+          "earth_annual_output_U": 900000000000000.0,
+          "imports_in_earth_output_years": 15.118174396160027,
+          "moon_capital_in_earth_output_years": 17.963197285048917,
+          "array_capital_in_earth_output_years": 1.7679126666666667,
+          "earth_ordinary_capital_in_earth_output_years": 3.0,
+          "combined_in_earth_output_years": 19.73110995171558,
+          "annual_build_share_of_earth_output": 0.03946221990343116
+        },
+        "250000": {
+          "earth_annual_output_U": 2250000000000000.0,
+          "imports_in_earth_output_years": 6.047269758464011,
+          "moon_capital_in_earth_output_years": 7.185278914019566,
+          "array_capital_in_earth_output_years": 0.7071650666666667,
+          "earth_ordinary_capital_in_earth_output_years": 1.2,
+          "combined_in_earth_output_years": 7.892443980686233,
+          "annual_build_share_of_earth_output": 0.015784887961372465
+        }
+      }
+    },
+    {
+      "cost_case": "advanced_industrial",
+      "water_case": "surface_only",
+      "imports": {
+        "beneficiary": "moon",
+        "asset_territory": "planetary_environment_with_upstream_services",
+        "delivered_water_kg": 1.3815701215540812e+19,
+        "delivered_air_kg": 3.1413494805269903e+18,
+        "delivered_mass_kg": 1.6957050696067801e+19,
+        "source_feed_kg": 2.528670076846971e+20,
+        "water_feed_requirement_kg": 2.9009931089361666e+19,
+        "nitrogen_feed_requirement_kg": 2.528670076846971e+20,
+        "components": {
+          "source_ore": {
+            "purchased_energy_U": 4916858482757999.0,
+            "hardware_service_U": 5057340153693942.0,
+            "total_U": 9974198636451940.0
+          },
+          "source_chemistry": {
+            "purchased_energy_U": 1076823545817504.0,
+            "hardware_service_U": 314134948052699.06,
+            "total_U": 1390958493870203.0
+          },
+          "departure_propulsion": {
+            "purchased_energy_U": 1.8841167440075336e+16,
+            "hardware_service_U": 3391410139213560.5,
+            "total_U": 2.2232577579288896e+16
+          },
+          "capture_controls": {
+            "purchased_energy_U": 471029186001883.4,
+            "hardware_service_U": 3391410139213560.5,
+            "total_U": 3862439325215444.0
+          },
+          "placement": {
+            "purchased_energy_U": 471029186001883.4,
+            "hardware_service_U": 847852534803390.1,
+            "total_U": 1318881720805273.5
+          }
+        },
+        "purchased_energy_MJ": {
+          "source_ore": 1.7700690537928796e+20,
+          "source_chemistry": 3.876564764943014e+19,
+          "departure_propulsion": 6.782820278427121e+20,
+          "capture_controls": 1.6957050696067801e+19,
+          "placement": 1.6957050696067801e+19
+        },
+        "purchased_energy_mean_PW": 58.81110618447321,
+        "construction_power_over_mature_moon_transmitting_power": 588.1110618447321,
+        "generation_capital_ceiling_U_per_continuous_W": 0.0688504824016809,
+        "generation_diagnostic": {
+          "life_years": 100,
+          "annual_real_capital_rate": 0.005,
+          "assumption": "100% availability, zero operation and maintenance cost, no fuel, all electricity revenue available for capital recovery; a ceiling, not an extra construction charge"
+        },
+        "incoming_braking_energy_charged_as_purchased_MJ": 0.0,
+        "energy_recovery_revenue_U": 0.0,
+        "contingency_U": 9694763938907940.0,
+        "total_U": 4.84738196945397e+16,
+        "delivered_average_U_per_kg": 0.002858623269067679
+      },
+      "installed_assets": [
+        {
+          "element": "ordinary_lunar_capital",
+          "quantity": 8000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 500000.0,
+          "total_U": 4000000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "common_per_resident_total_capital_allowance_excluding_the_separate_rows"
+        },
+        {
+          "element": "ordinary_array_capital",
+          "quantity": 5000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 500000.0,
+          "total_U": 2500000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "same_ordinary_capital_valuation_as_Earth_and_Moon_includes_habitat_structure_and_normal_computing"
+        },
+        {
+          "element": "aerial_carriers_and_control",
+          "quantity": 140000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 3.0,
+          "total_U": 420000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "optical_shield_fleet",
+          "quantity": 46300000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 5.0,
+          "total_U": 231500000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "orbital_power_and_beaming",
+          "quantity": 100000000000000.0,
+          "quantity_unit": "W",
+          "unit_cost_U": 0.1,
+          "total_U": 10000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "ground_receivers",
+          "quantity": 240000000000.0,
+          "quantity_unit": "m2",
+          "unit_cost_U": 5.0,
+          "total_U": 1200000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "critical_energy_reserves",
+          "quantity": 800000000000000.0,
+          "quantity_unit": "Wh",
+          "unit_cost_U": 0.01,
+          "total_U": 8000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "environment_establishment_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 450000000000000.0,
+          "total_U": 450000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "magnetic_protection_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 90000000000000.0,
+          "total_U": 90000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "array_bulk_habitat_shield",
+          "quantity": 4950000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.1,
+          "total_U": 495000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "scenario_price_on_physical_screen"
+        }
+      ],
+      "moon_territorial_capital_U": 5.33530196945397e+16,
+      "array_territorial_capital_U": 3326500000000000.0,
+      "combined_total_U": 5.66795196945397e+16,
+      "earth_ordinary_capital_benchmark_U": 4500000000000000.0,
+      "included_ordinary_physical_proxy": {
+        "mass_kg_per_resident": 100000,
+        "price_U_per_kg": 1.5,
+        "value_U_per_resident": 150000.0,
+        "total_allowance_U_per_resident": 500000,
+        "added_to_total": false
+      },
+      "included_array_structure_comparison": {
+        "mass_kg": 75000000000000,
+        "separately_valued_U": 375000000000000,
+        "added_to_total": false
+      },
+      "beneficiary_memo_U": {
+        "moon": 5.36845196945397e+16,
+        "array": 2995000000000000.0
+      },
+      "mean_annual_build_U": 113359039389079.39,
+      "earth_comparisons": {
+        "50000": {
+          "earth_annual_output_U": 450000000000000.0,
+          "imports_in_earth_output_years": 107.71959932119933,
+          "moon_capital_in_earth_output_years": 118.56226598786598,
+          "array_capital_in_earth_output_years": 7.392222222222222,
+          "earth_ordinary_capital_in_earth_output_years": 10.0,
+          "combined_in_earth_output_years": 125.95448821008821,
+          "annual_build_share_of_earth_output": 0.2519089764201764
+        },
+        "100000": {
+          "earth_annual_output_U": 900000000000000.0,
+          "imports_in_earth_output_years": 53.85979966059966,
+          "moon_capital_in_earth_output_years": 59.28113299393299,
+          "array_capital_in_earth_output_years": 3.696111111111111,
+          "earth_ordinary_capital_in_earth_output_years": 5.0,
+          "combined_in_earth_output_years": 62.97724410504411,
+          "annual_build_share_of_earth_output": 0.1259544882100882
+        },
+        "250000": {
+          "earth_annual_output_U": 2250000000000000.0,
+          "imports_in_earth_output_years": 21.543919864239864,
+          "moon_capital_in_earth_output_years": 23.712453197573197,
+          "array_capital_in_earth_output_years": 1.4784444444444444,
+          "earth_ordinary_capital_in_earth_output_years": 2.0,
+          "combined_in_earth_output_years": 25.190897642017642,
+          "annual_build_share_of_earth_output": 0.05038179528403528
+        }
+      }
+    },
+    {
+      "cost_case": "advanced_industrial",
+      "water_case": "illustrative_middle",
+      "imports": {
+        "beneficiary": "moon",
+        "asset_territory": "planetary_environment_with_upstream_services",
+        "delivered_water_kg": 2.8815701215540814e+19,
+        "delivered_air_kg": 3.1413494805269903e+18,
+        "delivered_mass_kg": 3.1957050696067805e+19,
+        "source_feed_kg": 2.528670076846971e+20,
+        "water_feed_requirement_kg": 5.9009931089361674e+19,
+        "nitrogen_feed_requirement_kg": 2.528670076846971e+20,
+        "components": {
+          "source_ore": {
+            "purchased_energy_U": 4916858482757999.0,
+            "hardware_service_U": 5057340153693942.0,
+            "total_U": 9974198636451940.0
+          },
+          "source_chemistry": {
+            "purchased_energy_U": 1076823545817504.0,
+            "hardware_service_U": 314134948052699.06,
+            "total_U": 1390958493870203.0
+          },
+          "departure_propulsion": {
+            "purchased_energy_U": 3.5507834106742004e+16,
+            "hardware_service_U": 6391410139213561.0,
+            "total_U": 4.189924424595557e+16
+          },
+          "capture_controls": {
+            "purchased_energy_U": 887695852668550.1,
+            "hardware_service_U": 6391410139213561.0,
+            "total_U": 7279105991882111.0
+          },
+          "placement": {
+            "purchased_energy_U": 887695852668550.1,
+            "hardware_service_U": 1597852534803390.2,
+            "total_U": 2485548387471940.5
+          }
+        },
+        "purchased_energy_MJ": {
+          "source_ore": 1.7700690537928796e+20,
+          "source_chemistry": 3.876564764943014e+19,
+          "departure_propulsion": 1.278282027842712e+21,
+          "capture_controls": 3.1957050696067805e+19,
+          "placement": 3.1957050696067805e+19
+        },
+        "purchased_energy_mean_PW": 98.73809683014969,
+        "construction_power_over_mature_moon_transmitting_power": 987.3809683014969,
+        "generation_capital_ceiling_U_per_continuous_W": 0.0688504824016809,
+        "generation_diagnostic": {
+          "life_years": 100,
+          "annual_real_capital_rate": 0.005,
+          "assumption": "100% availability, zero operation and maintenance cost, no fuel, all electricity revenue available for capital recovery; a ceiling, not an extra construction charge"
+        },
+        "incoming_braking_energy_charged_as_purchased_MJ": 0.0,
+        "energy_recovery_revenue_U": 0.0,
+        "contingency_U": 1.575726393890794e+16,
+        "total_U": 7.87863196945397e+16,
+        "delivered_average_U_per_kg": 0.0024653814409799106
+      },
+      "installed_assets": [
+        {
+          "element": "ordinary_lunar_capital",
+          "quantity": 8000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 500000.0,
+          "total_U": 4000000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "common_per_resident_total_capital_allowance_excluding_the_separate_rows"
+        },
+        {
+          "element": "ordinary_array_capital",
+          "quantity": 5000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 500000.0,
+          "total_U": 2500000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "same_ordinary_capital_valuation_as_Earth_and_Moon_includes_habitat_structure_and_normal_computing"
+        },
+        {
+          "element": "aerial_carriers_and_control",
+          "quantity": 140000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 3.0,
+          "total_U": 420000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "optical_shield_fleet",
+          "quantity": 46300000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 5.0,
+          "total_U": 231500000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "orbital_power_and_beaming",
+          "quantity": 100000000000000.0,
+          "quantity_unit": "W",
+          "unit_cost_U": 0.1,
+          "total_U": 10000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "ground_receivers",
+          "quantity": 240000000000.0,
+          "quantity_unit": "m2",
+          "unit_cost_U": 5.0,
+          "total_U": 1200000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "critical_energy_reserves",
+          "quantity": 800000000000000.0,
+          "quantity_unit": "Wh",
+          "unit_cost_U": 0.01,
+          "total_U": 8000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "environment_establishment_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 450000000000000.0,
+          "total_U": 450000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "magnetic_protection_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 90000000000000.0,
+          "total_U": 90000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "array_bulk_habitat_shield",
+          "quantity": 4950000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.1,
+          "total_U": 495000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "scenario_price_on_physical_screen"
+        }
+      ],
+      "moon_territorial_capital_U": 8.36655196945397e+16,
+      "array_territorial_capital_U": 3326500000000000.0,
+      "combined_total_U": 8.69920196945397e+16,
+      "earth_ordinary_capital_benchmark_U": 4500000000000000.0,
+      "included_ordinary_physical_proxy": {
+        "mass_kg_per_resident": 100000,
+        "price_U_per_kg": 1.5,
+        "value_U_per_resident": 150000.0,
+        "total_allowance_U_per_resident": 500000,
+        "added_to_total": false
+      },
+      "included_array_structure_comparison": {
+        "mass_kg": 75000000000000,
+        "separately_valued_U": 375000000000000,
+        "added_to_total": false
+      },
+      "beneficiary_memo_U": {
+        "moon": 8.39970196945397e+16,
+        "array": 2995000000000000.0
+      },
+      "mean_annual_build_U": 173984039389079.4,
+      "earth_comparisons": {
+        "50000": {
+          "earth_annual_output_U": 450000000000000.0,
+          "imports_in_earth_output_years": 175.08071043231044,
+          "moon_capital_in_earth_output_years": 185.9233770989771,
+          "array_capital_in_earth_output_years": 7.392222222222222,
+          "earth_ordinary_capital_in_earth_output_years": 10.0,
+          "combined_in_earth_output_years": 193.31559932119933,
+          "annual_build_share_of_earth_output": 0.3866311986423987
+        },
+        "100000": {
+          "earth_annual_output_U": 900000000000000.0,
+          "imports_in_earth_output_years": 87.54035521615522,
+          "moon_capital_in_earth_output_years": 92.96168854948856,
+          "array_capital_in_earth_output_years": 3.696111111111111,
+          "earth_ordinary_capital_in_earth_output_years": 5.0,
+          "combined_in_earth_output_years": 96.65779966059966,
+          "annual_build_share_of_earth_output": 0.19331559932119935
+        },
+        "250000": {
+          "earth_annual_output_U": 2250000000000000.0,
+          "imports_in_earth_output_years": 35.01614208646209,
+          "moon_capital_in_earth_output_years": 37.18467541979542,
+          "array_capital_in_earth_output_years": 1.4784444444444444,
+          "earth_ordinary_capital_in_earth_output_years": 2.0,
+          "combined_in_earth_output_years": 38.66311986423987,
+          "annual_build_share_of_earth_output": 0.07732623972847974
+        }
+      }
+    },
+    {
+      "cost_case": "advanced_industrial",
+      "water_case": "deep_crust",
+      "imports": {
+        "beneficiary": "moon",
+        "asset_territory": "planetary_environment_with_upstream_services",
+        "delivered_water_kg": 7.311570121554081e+19,
+        "delivered_air_kg": 3.1413494805269903e+18,
+        "delivered_mass_kg": 7.625705069606781e+19,
+        "source_feed_kg": 2.528670076846971e+20,
+        "water_feed_requirement_kg": 1.4760993108936167e+20,
+        "nitrogen_feed_requirement_kg": 2.528670076846971e+20,
+        "components": {
+          "source_ore": {
+            "purchased_energy_U": 4916858482757999.0,
+            "hardware_service_U": 5057340153693942.0,
+            "total_U": 9974198636451940.0
+          },
+          "source_chemistry": {
+            "purchased_energy_U": 1076823545817504.0,
+            "hardware_service_U": 314134948052699.06,
+            "total_U": 1390958493870203.0
+          },
+          "departure_propulsion": {
+            "purchased_energy_U": 8.473005632896424e+16,
+            "hardware_service_U": 1.5251410139213562e+16,
+            "total_U": 9.998146646817781e+16
+          },
+          "capture_controls": {
+            "purchased_energy_U": 2118251408224106.0,
+            "hardware_service_U": 1.5251410139213562e+16,
+            "total_U": 1.7369661547437668e+16
+          },
+          "placement": {
+            "purchased_energy_U": 2118251408224106.0,
+            "hardware_service_U": 3812852534803390.5,
+            "total_U": 5931103943027496.0
+          }
+        },
+        "purchased_energy_MJ": {
+          "source_ore": 1.7700690537928796e+20,
+          "source_chemistry": 3.876564764943014e+19,
+          "departure_propulsion": 3.0502820278427126e+21,
+          "capture_controls": 7.625705069606781e+19,
+          "placement": 7.625705069606781e+19
+        },
+        "purchased_energy_mean_PW": 216.65580920371423,
+        "construction_power_over_mature_moon_transmitting_power": 2166.558092037142,
+        "generation_capital_ceiling_U_per_continuous_W": 0.0688504824016809,
+        "generation_diagnostic": {
+          "life_years": 100,
+          "annual_real_capital_rate": 0.005,
+          "assumption": "100% availability, zero operation and maintenance cost, no fuel, all electricity revenue available for capital recovery; a ceiling, not an extra construction charge"
+        },
+        "incoming_braking_energy_charged_as_purchased_MJ": 0.0,
+        "energy_recovery_revenue_U": 0.0,
+        "contingency_U": 3.366184727224128e+16,
+        "total_U": 1.683092363612064e+17,
+        "delivered_average_U_per_kg": 0.002207130158128254
+      },
+      "installed_assets": [
+        {
+          "element": "ordinary_lunar_capital",
+          "quantity": 8000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 500000.0,
+          "total_U": 4000000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "common_per_resident_total_capital_allowance_excluding_the_separate_rows"
+        },
+        {
+          "element": "ordinary_array_capital",
+          "quantity": 5000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 500000.0,
+          "total_U": 2500000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "same_ordinary_capital_valuation_as_Earth_and_Moon_includes_habitat_structure_and_normal_computing"
+        },
+        {
+          "element": "aerial_carriers_and_control",
+          "quantity": 140000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 3.0,
+          "total_U": 420000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "optical_shield_fleet",
+          "quantity": 46300000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 5.0,
+          "total_U": 231500000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "orbital_power_and_beaming",
+          "quantity": 100000000000000.0,
+          "quantity_unit": "W",
+          "unit_cost_U": 0.1,
+          "total_U": 10000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "ground_receivers",
+          "quantity": 240000000000.0,
+          "quantity_unit": "m2",
+          "unit_cost_U": 5.0,
+          "total_U": 1200000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "critical_energy_reserves",
+          "quantity": 800000000000000.0,
+          "quantity_unit": "Wh",
+          "unit_cost_U": 0.01,
+          "total_U": 8000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "environment_establishment_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 450000000000000.0,
+          "total_U": 450000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "magnetic_protection_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 90000000000000.0,
+          "total_U": 90000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "array_bulk_habitat_shield",
+          "quantity": 4950000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 0.1,
+          "total_U": 495000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "scenario_price_on_physical_screen"
+        }
+      ],
+      "moon_territorial_capital_U": 1.731884363612064e+17,
+      "array_territorial_capital_U": 3326500000000000.0,
+      "combined_total_U": 1.765149363612064e+17,
+      "earth_ordinary_capital_benchmark_U": 4500000000000000.0,
+      "included_ordinary_physical_proxy": {
+        "mass_kg_per_resident": 100000,
+        "price_U_per_kg": 1.5,
+        "value_U_per_resident": 150000.0,
+        "total_allowance_U_per_resident": 500000,
+        "added_to_total": false
+      },
+      "included_array_structure_comparison": {
+        "mass_kg": 75000000000000,
+        "separately_valued_U": 375000000000000,
+        "added_to_total": false
+      },
+      "beneficiary_memo_U": {
+        "moon": 1.735199363612064e+17,
+        "array": 2995000000000000.0
+      },
+      "mean_annual_build_U": 353029872722412.8,
+      "earth_comparisons": {
+        "50000": {
+          "earth_annual_output_U": 450000000000000.0,
+          "imports_in_earth_output_years": 374.0205252471253,
+          "moon_capital_in_earth_output_years": 384.863191913792,
+          "array_capital_in_earth_output_years": 7.392222222222222,
+          "earth_ordinary_capital_in_earth_output_years": 10.0,
+          "combined_in_earth_output_years": 392.2554141360142,
+          "annual_build_share_of_earth_output": 0.7845108282720284
+        },
+        "100000": {
+          "earth_annual_output_U": 900000000000000.0,
+          "imports_in_earth_output_years": 187.01026262356265,
+          "moon_capital_in_earth_output_years": 192.431595956896,
+          "array_capital_in_earth_output_years": 3.696111111111111,
+          "earth_ordinary_capital_in_earth_output_years": 5.0,
+          "combined_in_earth_output_years": 196.1277070680071,
+          "annual_build_share_of_earth_output": 0.3922554141360142
+        },
+        "250000": {
+          "earth_annual_output_U": 2250000000000000.0,
+          "imports_in_earth_output_years": 74.80410504942506,
+          "moon_capital_in_earth_output_years": 76.9726383827584,
+          "array_capital_in_earth_output_years": 1.4784444444444444,
+          "earth_ordinary_capital_in_earth_output_years": 2.0,
+          "combined_in_earth_output_years": 78.45108282720284,
+          "annual_build_share_of_earth_output": 0.1569021656544057
+        }
+      }
+    },
+    {
+      "cost_case": "expensive_energy_dilute_ore",
+      "water_case": "surface_only",
+      "imports": {
+        "beneficiary": "moon",
+        "asset_territory": "planetary_environment_with_upstream_services",
+        "delivered_water_kg": 1.3815701215540812e+19,
+        "delivered_air_kg": 3.1413494805269903e+18,
+        "delivered_mass_kg": 1.6957050696067801e+19,
+        "source_feed_kg": 8.428900256156569e+20,
+        "water_feed_requirement_kg": 2.9009931089361666e+19,
+        "nitrogen_feed_requirement_kg": 8.428900256156569e+20,
+        "components": {
+          "source_ore": {
+            "purchased_energy_U": 4.682722364531427e+17,
+            "hardware_service_U": 8.42890025615657e+16,
+            "total_U": 5.525612390147084e+17
+          },
+          "source_chemistry": {
+            "purchased_energy_U": 1.915382879092778e+16,
+            "hardware_service_U": 1570674740263495.2,
+            "total_U": 2.0724503531191276e+16
+          },
+          "departure_propulsion": {
+            "purchased_energy_U": 5.6523502320226003e+17,
+            "hardware_service_U": 1.6957050696067802e+16,
+            "total_U": 5.821920738983278e+17
+          },
+          "capture_controls": {
+            "purchased_energy_U": 1.41308755800565e+16,
+            "hardware_service_U": 1.6957050696067802e+16,
+            "total_U": 3.1087926276124304e+16
+          },
+          "placement": {
+            "purchased_energy_U": 1.41308755800565e+16,
+            "hardware_service_U": 3391410139213560.5,
+            "total_U": 1.752228571927006e+16
+          }
+        },
+        "purchased_energy_MJ": {
+          "source_ore": 1.6857800512313138e+21,
+          "source_chemistry": 6.895378364734001e+19,
+          "departure_propulsion": 2.034846083528136e+21,
+          "capture_controls": 5.08711520882034e+19,
+          "placement": 5.08711520882034e+19
+        },
+        "purchased_energy_mean_PW": 246.61712060379728,
+        "construction_power_over_mature_moon_transmitting_power": 1099.9871570196133,
+        "generation_capital_ceiling_U_per_continuous_W": 0.688504824016809,
+        "generation_diagnostic": {
+          "life_years": 100,
+          "annual_real_capital_rate": 0.005,
+          "assumption": "100% availability, zero operation and maintenance cost, no fuel, all electricity revenue available for capital recovery; a ceiling, not an extra construction charge"
+        },
+        "incoming_braking_energy_charged_as_purchased_MJ": 0.0,
+        "energy_recovery_revenue_U": 0.0,
+        "contingency_U": 6.02044014219811e+17,
+        "total_U": 1.806132042659433e+18,
+        "delivered_average_U_per_kg": 0.1065121568032028
+      },
+      "installed_assets": [
+        {
+          "element": "ordinary_lunar_capital",
+          "quantity": 8000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 1000000.0,
+          "total_U": 8000000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "common_per_resident_total_capital_allowance_excluding_the_separate_rows"
+        },
+        {
+          "element": "ordinary_array_capital",
+          "quantity": 5000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 1000000.0,
+          "total_U": 5000000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "same_ordinary_capital_valuation_as_Earth_and_Moon_includes_habitat_structure_and_normal_computing"
+        },
+        {
+          "element": "aerial_carriers_and_control",
+          "quantity": 140000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 15.0,
+          "total_U": 2100000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "optical_shield_fleet",
+          "quantity": 46300000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 30.0,
+          "total_U": 1389000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "orbital_power_and_beaming",
+          "quantity": 224200000000000.0,
+          "quantity_unit": "W",
+          "unit_cost_U": 1.0,
+          "total_U": 224200000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "ground_receivers",
+          "quantity": 436000000000.0,
+          "quantity_unit": "m2",
+          "unit_cost_U": 20.0,
+          "total_U": 8720000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "critical_energy_reserves",
+          "quantity": 1266000000000000.0,
+          "quantity_unit": "Wh",
+          "unit_cost_U": 0.1,
+          "total_U": 126600000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "environment_establishment_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 1800000000000000.0,
+          "total_U": 1800000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "magnetic_protection_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 450000000000000.0,
+          "total_U": 450000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "array_bulk_habitat_shield",
+          "quantity": 4950000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 1.0,
+          "total_U": 4950000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "scenario_price_on_physical_screen"
+        }
+      ],
+      "moon_territorial_capital_U": 1.818167362659433e+18,
+      "array_territorial_capital_U": 1.20132e+16,
+      "combined_total_U": 1.830180562659433e+18,
+      "earth_ordinary_capital_benchmark_U": 9000000000000000.0,
+      "included_ordinary_physical_proxy": {
+        "mass_kg_per_resident": 200000,
+        "price_U_per_kg": 5,
+        "value_U_per_resident": 1000000,
+        "total_allowance_U_per_resident": 1000000,
+        "added_to_total": false
+      },
+      "included_array_structure_comparison": {
+        "mass_kg": 75000000000000,
+        "separately_valued_U": 2250000000000000,
+        "added_to_total": false
+      },
+      "beneficiary_memo_U": {
+        "moon": 1.820230562659433e+18,
+        "array": 9950000000000000.0
+      },
+      "mean_annual_build_U": 3660361125318866.0,
+      "earth_comparisons": {
+        "50000": {
+          "earth_annual_output_U": 450000000000000.0,
+          "imports_in_earth_output_years": 4013.6267614654066,
+          "moon_capital_in_earth_output_years": 4040.371917020962,
+          "array_capital_in_earth_output_years": 26.696,
+          "earth_ordinary_capital_in_earth_output_years": 20.0,
+          "combined_in_earth_output_years": 4067.0679170209623,
+          "annual_build_share_of_earth_output": 8.134135834041924
+        },
+        "100000": {
+          "earth_annual_output_U": 900000000000000.0,
+          "imports_in_earth_output_years": 2006.8133807327033,
+          "moon_capital_in_earth_output_years": 2020.185958510481,
+          "array_capital_in_earth_output_years": 13.348,
+          "earth_ordinary_capital_in_earth_output_years": 10.0,
+          "combined_in_earth_output_years": 2033.5339585104812,
+          "annual_build_share_of_earth_output": 4.067067917020962
+        },
+        "250000": {
+          "earth_annual_output_U": 2250000000000000.0,
+          "imports_in_earth_output_years": 802.7253522930813,
+          "moon_capital_in_earth_output_years": 808.0743834041924,
+          "array_capital_in_earth_output_years": 5.3392,
+          "earth_ordinary_capital_in_earth_output_years": 4.0,
+          "combined_in_earth_output_years": 813.4135834041924,
+          "annual_build_share_of_earth_output": 1.626827166808385
+        }
+      }
+    },
+    {
+      "cost_case": "expensive_energy_dilute_ore",
+      "water_case": "illustrative_middle",
+      "imports": {
+        "beneficiary": "moon",
+        "asset_territory": "planetary_environment_with_upstream_services",
+        "delivered_water_kg": 2.8815701215540814e+19,
+        "delivered_air_kg": 3.1413494805269903e+18,
+        "delivered_mass_kg": 3.1957050696067805e+19,
+        "source_feed_kg": 8.428900256156569e+20,
+        "water_feed_requirement_kg": 5.9009931089361674e+19,
+        "nitrogen_feed_requirement_kg": 8.428900256156569e+20,
+        "components": {
+          "source_ore": {
+            "purchased_energy_U": 4.682722364531427e+17,
+            "hardware_service_U": 8.42890025615657e+16,
+            "total_U": 5.525612390147084e+17
+          },
+          "source_chemistry": {
+            "purchased_energy_U": 1.915382879092778e+16,
+            "hardware_service_U": 1570674740263495.2,
+            "total_U": 2.0724503531191276e+16
+          },
+          "departure_propulsion": {
+            "purchased_energy_U": 1.0652350232022602e+18,
+            "hardware_service_U": 3.1957050696067804e+16,
+            "total_U": 1.097192073898328e+18
+          },
+          "capture_controls": {
+            "purchased_energy_U": 2.6630875580056504e+16,
+            "hardware_service_U": 3.1957050696067804e+16,
+            "total_U": 5.85879262761243e+16
+          },
+          "placement": {
+            "purchased_energy_U": 2.6630875580056504e+16,
+            "hardware_service_U": 6391410139213561.0,
+            "total_U": 3.3022285719270064e+16
+          }
+        },
+        "purchased_energy_MJ": {
+          "source_ore": 1.6857800512313138e+21,
+          "source_chemistry": 6.895378364734001e+19,
+          "departure_propulsion": 3.834846083528137e+21,
+          "capture_controls": 9.587115208820341e+19,
+          "placement": 9.587115208820341e+19
+        },
+        "purchased_energy_mean_PW": 366.3980925408267,
+        "construction_power_over_mature_moon_transmitting_power": 1634.2466215023494,
+        "generation_capital_ceiling_U_per_continuous_W": 0.688504824016809,
+        "generation_diagnostic": {
+          "life_years": 100,
+          "annual_real_capital_rate": 0.005,
+          "assumption": "100% availability, zero operation and maintenance cost, no fuel, all electricity revenue available for capital recovery; a ceiling, not an extra construction charge"
+        },
+        "incoming_braking_energy_charged_as_purchased_MJ": 0.0,
+        "energy_recovery_revenue_U": 0.0,
+        "contingency_U": 8.810440142198111e+17,
+        "total_U": 2.6431320426594335e+18,
+        "delivered_average_U_per_kg": 0.08270888536609108
+      },
+      "installed_assets": [
+        {
+          "element": "ordinary_lunar_capital",
+          "quantity": 8000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 1000000.0,
+          "total_U": 8000000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "common_per_resident_total_capital_allowance_excluding_the_separate_rows"
+        },
+        {
+          "element": "ordinary_array_capital",
+          "quantity": 5000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 1000000.0,
+          "total_U": 5000000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "same_ordinary_capital_valuation_as_Earth_and_Moon_includes_habitat_structure_and_normal_computing"
+        },
+        {
+          "element": "aerial_carriers_and_control",
+          "quantity": 140000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 15.0,
+          "total_U": 2100000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "optical_shield_fleet",
+          "quantity": 46300000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 30.0,
+          "total_U": 1389000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "orbital_power_and_beaming",
+          "quantity": 224200000000000.0,
+          "quantity_unit": "W",
+          "unit_cost_U": 1.0,
+          "total_U": 224200000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "ground_receivers",
+          "quantity": 436000000000.0,
+          "quantity_unit": "m2",
+          "unit_cost_U": 20.0,
+          "total_U": 8720000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "critical_energy_reserves",
+          "quantity": 1266000000000000.0,
+          "quantity_unit": "Wh",
+          "unit_cost_U": 0.1,
+          "total_U": 126600000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "environment_establishment_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 1800000000000000.0,
+          "total_U": 1800000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "magnetic_protection_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 450000000000000.0,
+          "total_U": 450000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "array_bulk_habitat_shield",
+          "quantity": 4950000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 1.0,
+          "total_U": 4950000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "scenario_price_on_physical_screen"
+        }
+      ],
+      "moon_territorial_capital_U": 2.6551673626594335e+18,
+      "array_territorial_capital_U": 1.20132e+16,
+      "combined_total_U": 2.6671805626594335e+18,
+      "earth_ordinary_capital_benchmark_U": 9000000000000000.0,
+      "included_ordinary_physical_proxy": {
+        "mass_kg_per_resident": 200000,
+        "price_U_per_kg": 5,
+        "value_U_per_resident": 1000000,
+        "total_allowance_U_per_resident": 1000000,
+        "added_to_total": false
+      },
+      "included_array_structure_comparison": {
+        "mass_kg": 75000000000000,
+        "separately_valued_U": 2250000000000000,
+        "added_to_total": false
+      },
+      "beneficiary_memo_U": {
+        "moon": 2.6572305626594335e+18,
+        "array": 9950000000000000.0
+      },
+      "mean_annual_build_U": 5334361125318867.0,
+      "earth_comparisons": {
+        "50000": {
+          "earth_annual_output_U": 450000000000000.0,
+          "imports_in_earth_output_years": 5873.626761465408,
+          "moon_capital_in_earth_output_years": 5900.371917020963,
+          "array_capital_in_earth_output_years": 26.696,
+          "earth_ordinary_capital_in_earth_output_years": 20.0,
+          "combined_in_earth_output_years": 5927.067917020963,
+          "annual_build_share_of_earth_output": 11.854135834041927
+        },
+        "100000": {
+          "earth_annual_output_U": 900000000000000.0,
+          "imports_in_earth_output_years": 2936.813380732704,
+          "moon_capital_in_earth_output_years": 2950.1859585104817,
+          "array_capital_in_earth_output_years": 13.348,
+          "earth_ordinary_capital_in_earth_output_years": 10.0,
+          "combined_in_earth_output_years": 2963.5339585104816,
+          "annual_build_share_of_earth_output": 5.927067917020963
+        },
+        "250000": {
+          "earth_annual_output_U": 2250000000000000.0,
+          "imports_in_earth_output_years": 1174.7253522930816,
+          "moon_capital_in_earth_output_years": 1180.0743834041928,
+          "array_capital_in_earth_output_years": 5.3392,
+          "earth_ordinary_capital_in_earth_output_years": 4.0,
+          "combined_in_earth_output_years": 1185.4135834041927,
+          "annual_build_share_of_earth_output": 2.370827166808385
+        }
+      }
+    },
+    {
+      "cost_case": "expensive_energy_dilute_ore",
+      "water_case": "deep_crust",
+      "imports": {
+        "beneficiary": "moon",
+        "asset_territory": "planetary_environment_with_upstream_services",
+        "delivered_water_kg": 7.311570121554081e+19,
+        "delivered_air_kg": 3.1413494805269903e+18,
+        "delivered_mass_kg": 7.625705069606781e+19,
+        "source_feed_kg": 8.428900256156569e+20,
+        "water_feed_requirement_kg": 1.4760993108936167e+20,
+        "nitrogen_feed_requirement_kg": 8.428900256156569e+20,
+        "components": {
+          "source_ore": {
+            "purchased_energy_U": 4.682722364531427e+17,
+            "hardware_service_U": 8.42890025615657e+16,
+            "total_U": 5.525612390147084e+17
+          },
+          "source_chemistry": {
+            "purchased_energy_U": 1.915382879092778e+16,
+            "hardware_service_U": 1570674740263495.2,
+            "total_U": 2.0724503531191276e+16
+          },
+          "departure_propulsion": {
+            "purchased_energy_U": 2.541901689868927e+18,
+            "hardware_service_U": 7.62570506960678e+16,
+            "total_U": 2.6181587405649946e+18
+          },
+          "capture_controls": {
+            "purchased_energy_U": 6.3547542246723176e+16,
+            "hardware_service_U": 7.62570506960678e+16,
+            "total_U": 1.3980459294279098e+17
+          },
+          "placement": {
+            "purchased_energy_U": 6.3547542246723176e+16,
+            "hardware_service_U": 1.5251410139213562e+16,
+            "total_U": 7.879895238593674e+16
+          }
+        },
+        "purchased_energy_MJ": {
+          "source_ore": 1.6857800512313138e+21,
+          "source_chemistry": 6.895378364734001e+19,
+          "departure_propulsion": 9.150846083528137e+21,
+          "capture_controls": 2.2877115208820343e+20,
+          "placement": 2.2877115208820343e+20
+        },
+        "purchased_energy_mean_PW": 720.1512296615205,
+        "construction_power_over_mature_moon_transmitting_power": 3212.0929066080307,
+        "generation_capital_ceiling_U_per_continuous_W": 0.688504824016809,
+        "generation_diagnostic": {
+          "life_years": 100,
+          "annual_real_capital_rate": 0.005,
+          "assumption": "100% availability, zero operation and maintenance cost, no fuel, all electricity revenue available for capital recovery; a ceiling, not an extra construction charge"
+        },
+        "incoming_braking_energy_charged_as_purchased_MJ": 0.0,
+        "energy_recovery_revenue_U": 0.0,
+        "contingency_U": 1.705024014219811e+18,
+        "total_U": 5.115072042659433e+18,
+        "delivered_average_U_per_kg": 0.06707670957596046
+      },
+      "installed_assets": [
+        {
+          "element": "ordinary_lunar_capital",
+          "quantity": 8000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 1000000.0,
+          "total_U": 8000000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "common_per_resident_total_capital_allowance_excluding_the_separate_rows"
+        },
+        {
+          "element": "ordinary_array_capital",
+          "quantity": 5000000000.0,
+          "quantity_unit": "resident",
+          "unit_cost_U": 1000000.0,
+          "total_U": 5000000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "same_ordinary_capital_valuation_as_Earth_and_Moon_includes_habitat_structure_and_normal_computing"
+        },
+        {
+          "element": "aerial_carriers_and_control",
+          "quantity": 140000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 15.0,
+          "total_U": 2100000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "optical_shield_fleet",
+          "quantity": 46300000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 30.0,
+          "total_U": 1389000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "orbital_power_and_beaming",
+          "quantity": 224200000000000.0,
+          "quantity_unit": "W",
+          "unit_cost_U": 1.0,
+          "total_U": 224200000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "ground_receivers",
+          "quantity": 436000000000.0,
+          "quantity_unit": "m2",
+          "unit_cost_U": 20.0,
+          "total_U": 8720000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "critical_energy_reserves",
+          "quantity": 1266000000000000.0,
+          "quantity_unit": "Wh",
+          "unit_cost_U": 0.1,
+          "total_U": 126600000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "scenario_price_on_physical_screen"
+        },
+        {
+          "element": "environment_establishment_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 1800000000000000.0,
+          "total_U": 1800000000000000.0,
+          "asset_territory": "moon",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "magnetic_protection_allowance",
+          "quantity": 1.0,
+          "quantity_unit": "allowance",
+          "unit_cost_U": 450000000000000.0,
+          "total_U": 450000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "moon",
+          "evidence": "unquantified_allowance"
+        },
+        {
+          "element": "array_bulk_habitat_shield",
+          "quantity": 4950000000000000.0,
+          "quantity_unit": "kg",
+          "unit_cost_U": 1.0,
+          "total_U": 4950000000000000.0,
+          "asset_territory": "array",
+          "beneficiary": "array",
+          "evidence": "scenario_price_on_physical_screen"
+        }
+      ],
+      "moon_territorial_capital_U": 5.127107362659433e+18,
+      "array_territorial_capital_U": 1.20132e+16,
+      "combined_total_U": 5.139120562659433e+18,
+      "earth_ordinary_capital_benchmark_U": 9000000000000000.0,
+      "included_ordinary_physical_proxy": {
+        "mass_kg_per_resident": 200000,
+        "price_U_per_kg": 5,
+        "value_U_per_resident": 1000000,
+        "total_allowance_U_per_resident": 1000000,
+        "added_to_total": false
+      },
+      "included_array_structure_comparison": {
+        "mass_kg": 75000000000000,
+        "separately_valued_U": 2250000000000000,
+        "added_to_total": false
+      },
+      "beneficiary_memo_U": {
+        "moon": 5.129170562659433e+18,
+        "array": 9950000000000000.0
+      },
+      "mean_annual_build_U": 1.0278241125318866e+16,
+      "earth_comparisons": {
+        "50000": {
+          "earth_annual_output_U": 450000000000000.0,
+          "imports_in_earth_output_years": 11366.826761465407,
+          "moon_capital_in_earth_output_years": 11393.571917020963,
+          "array_capital_in_earth_output_years": 26.696,
+          "earth_ordinary_capital_in_earth_output_years": 20.0,
+          "combined_in_earth_output_years": 11420.267917020963,
+          "annual_build_share_of_earth_output": 22.840535834041923
+        },
+        "100000": {
+          "earth_annual_output_U": 900000000000000.0,
+          "imports_in_earth_output_years": 5683.413380732703,
+          "moon_capital_in_earth_output_years": 5696.785958510482,
+          "array_capital_in_earth_output_years": 13.348,
+          "earth_ordinary_capital_in_earth_output_years": 10.0,
+          "combined_in_earth_output_years": 5710.1339585104815,
+          "annual_build_share_of_earth_output": 11.420267917020961
+        },
+        "250000": {
+          "earth_annual_output_U": 2250000000000000.0,
+          "imports_in_earth_output_years": 2273.3653522930817,
+          "moon_capital_in_earth_output_years": 2278.7143834041926,
+          "array_capital_in_earth_output_years": 5.3392,
+          "earth_ordinary_capital_in_earth_output_years": 4.0,
+          "combined_in_earth_output_years": 2284.0535834041925,
+          "annual_build_share_of_earth_output": 4.568107166808385
+        }
+      }
+    }
+  ],
+  "inputs_sha256": "aee9fa991b415997dce453a7284e0119b20ce70031eb6fc563937d672761af99",
+  "producer": {
+    "study": "world_economy",
+    "files": {
+      "research/studies/world_economy/construction.py": "32e7d41dcb8054665d4c3c9ae98d42fd9c7bfee06837924fe056314a9080a865",
+      "research/studies/world_economy/construction_inputs.json": "69678c97c6a66e02c86110a649670d8087a750c0ad03fc95347a786d66a5763e",
+      "research/studies/world_economy/inventory.py": "721e67cd0d546969613d11663249c8204fd0c6137e3cbf4d95b06d962024d9d1",
+      "research/studies/world_economy/inputs.json": "d59184c3fb9ece83fcaf65f99b832e5d0d2bf5de85d476eecd7870babcdd535a"
+    },
+    "constants": {
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25
+    },
+    "inputs": {
+      "resources/results/first_screen.json": {
+        "schema": "terluna.resources.first-screen/1",
+        "sha256": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
+        "fields": [
+          "inventories.air_kg",
+          "inventories.n2_kg",
+          "inventories.o2_kg",
+          "inventories.water",
+          "delivery.mass_kg",
+          "delivery.build_years",
+          "delivery.flow_kg_s",
+          "film.fresh_feed_kg_s"
+        ]
+      },
+      "resources/results/industry.json": {
+        "schema": "terluna.resources.industry/1",
+        "sha256": "7ac8754b4ec1c3c4f50bd55f4803cad6e5d0a9f1709cc9e7eb0a68af8ce3e79c",
+        "fields": [
+          "people.stock_t_per_person",
+          "people.lifetime_years",
+          "operation.braking_mj_kg",
+          "operation.braking_power.build_pw",
+          "after_build.air.computed_kg_s",
+          "after_build.water.hydrogen_escape_as_water_kg_s"
+        ]
+      },
+      "research/studies/distributions/results/distributions.json": {
+        "schema": "terluna.research.distributions/1",
+        "sha256": "a190a05f88c4846e258945c1e10e852a776eed0d5806004998407143ab0fad63",
+        "fields": [
+          "distributions.C'.people_billion",
+          "distributions.C'.moon.water_lift_gw",
+          "transcribed.array_habitat_gt_per_billion.value"
+        ]
+      },
+      "research/studies/inhabited_volume/results/inhabited_volume.json": {
+        "schema": "terluna.research.inhabited-volume/1",
+        "sha256": "62002e2d2edd27109ac410097826ea96a1d4b4a9799dd64c33b1cfd505ce0a29",
+        "fields": [
+          "assumptions.districts",
+          "assumptions.lift_allocation_shares"
+        ]
+      },
+      "research/studies/ways_of_living/results/ways_of_living.json": {
+        "schema": "terluna.research.ways-of-living/1",
+        "sha256": "9ef2b91e2d80edf9703036d011045f83655d10d4fccc39968fafa738c0d38148",
+        "fields": [
+          "aerial_reference.lifting_species_t_per_resident",
+          "aerial_reference.hydrogen_upkeep"
+        ]
+      },
+      "research/studies/solar_shield_array/results/array_heat.json": {
+        "schema": "terluna.research.array-heat/1",
+        "sha256": "8ade010fcbf805adf71a90c74e4357ad699067f5fbc8f445267fc984e80a1aa1",
+        "fields": [
+          "fleet.optical_mass_Gt",
+          "fleet.film_upkeep_Gt_per_year",
+          "film_plant.power_TW"
+        ]
+      },
+      "provisioning/results/power.json": {
+        "schema": "terluna.provisioning.power/1",
+        "sha256": "b20fa5b5f0f7b78bba0fc7f8cbd1ccbfecf6690d6bf1964a9085e043dd5d336e",
+        "fields": [
+          "reserves.ring_fault.delivered_total_tw",
+          "reserves.ring_fault.energy_twh",
+          "reserves.ring_fault.ground.battery_bridge_mt",
+          "ring.electricity_at_the_tiles_tw",
+          "ring.collector_and_aperture_km2_installed",
+          "grid.receiver_km2"
+        ]
+      },
+      "research/studies/food_systems/results/food_blend.json": {
+        "schema": "terluna.research.food-blend/1",
+        "sha256": "ac29dbf9ba4a4ff288c58594eb89af90823bd8ebf89156fbcd4b47af4a32b148",
+        "fields": [
+          "blend.8.wild_30_hybrid_20.power_tw",
+          "blend.8.wild_30_hybrid_20.fields_km2",
+          "blend.8.wild_30_hybrid_20.structure_gt",
+          "blend.8.wild_30_hybrid_20.phosphorus_mt_year"
+        ]
+      },
+      "provisioning/results/computing.json": {
+        "schema": "terluna.provisioning.computing/1",
+        "sha256": "48f60b85d0c33abbaa911fb152eb0c7896ac8a6f4577a0935f740bb915aab43b",
+        "fields": [
+          "supply.per_tw"
+        ]
+      },
+      "research/studies/terrain_through_time/results/terrain_through_time.json": {
+        "schema": "terluna.research.terrain-through-time/1",
+        "sha256": "65f1c069569aeab8ed0633510af2ffa97bfed3f0ec4f17ef3be5d4f4bf4192d3",
+        "fields": [
+          "upkeep.rates"
+        ]
+      },
+      "research/studies/carbon_cycle/results/carbon_cycle.json": {
+        "schema": "terluna.research.carbon-cycle/1",
+        "sha256": "55f92a4697054578ebaf8e4aa03d0ecda547f4aee90890957d892fb3311c185b",
+        "fields": [
+          "questions.imports",
+          "questions.managed_return.by_corner"
+        ]
+      }
+    }
+  },
+  "reading_rule": "U is a common transferable real unit. All costs are total construction expenditures before purchaser financing, not annual GDP or CFC. Territories own their installed assets; beneficiaries are a separate memo. Earth capital is a comparator excluded from the Moon-plus-array total. Prices and source-site engineering remain assumptions."
+}

@@ -1,0 +1,1341 @@
+{
+  "schema": "terluna.research.world-economy-inventory/1",
+  "producer": {
+    "study": "world_economy",
+    "files": {
+      "research/studies/world_economy/inventory.py": "721e67cd0d546969613d11663249c8204fd0c6137e3cbf4d95b06d962024d9d1",
+      "research/studies/world_economy/inputs.json": "d59184c3fb9ece83fcaf65f99b832e5d0d2bf5de85d476eecd7870babcdd535a"
+    }
+  },
+  "evidence": "Reproducible inventory of committed engineering screens and accepted population; no construction quotation, market estimate, validated capacity or GDP forecast.",
+  "reading_rule": "Copied quantities retain source units and assumptions. Gt=1e12 kg. Population is billion residents. Stocks, annual throughputs, losses and alternative estimates are separate; their rows are not additive. See README for accounting boundaries.",
+  "baseline_commit": "e89462608af21bd386b23b7eb36cf8373818619b",
+  "population_billion": {
+    "earth": 9.0,
+    "moon": 8.0,
+    "moon_ground": 4.0,
+    "moon_aloft": 4.0,
+    "array": 5.0,
+    "colonies": 3.0,
+    "total": 25.0
+  },
+  "equal_per_resident_benchmark": {
+    "moon_over_earth": 0.8888888888888888,
+    "array_over_earth": 0.5555555555555556,
+    "moon_and_array_over_earth": 1.4444444444444444,
+    "moon_per_resident_premium_for_equal_total": 0.125
+  },
+  "derived": {
+    "moon_ordinary_material_stock_gt": [
+      344.0,
+      2680.0
+    ],
+    "aerial_district_gt": 200.0,
+    "aerial_envelope_flight_allowance_gt": 100.0,
+    "aerial_control_allowance_gt": 40.0,
+    "aerial_unmanufactured_reserve_gt": 60.0,
+    "aerial_hydrogen_gt": 29.84,
+    "array_habitat_gt": 5025.0
+  },
+  "sources": {
+    "resources/results/first_screen.json": {
+      "schema": "terluna.resources.first-screen/1",
+      "sha256": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
+      "evidence": "A screen on committed products (the reference air, the geography inventories, the CO2 study, the loss sweep, the array heat screen, the ecology register's weathering, the conservation gates) with the stated literature values. Closed-form arithmetic; no transport, geochemical or industrial model is run.",
+      "values": {
+        "inventories.air_kg": 3.1413494805269903e+18,
+        "inventories.n2_kg": 2.528670076846971e+18,
+        "inventories.o2_kg": 6.126794036800198e+17,
+        "inventories.water": {
+          "seas_kg": 1.0707076215540812e+19,
+          "lakes_kg": 3.108625e+18,
+          "crust_kg": [
+            4.976e+18,
+            5.93e+19
+          ],
+          "total_kg": [
+            1.3815701215540812e+19,
+            7.311570121554081e+19
+          ]
+        },
+        "delivery.mass_kg": [
+          1.7e+19,
+          7.63e+19
+        ],
+        "delivery.build_years": 500.0,
+        "delivery.flow_kg_s": [
+          1070000000.0,
+          4830000000.0
+        ],
+        "film.fresh_feed_kg_s": {
+          "0.99": [
+            732,
+            1470
+          ],
+          "0.999": [
+            73,
+            147
+          ]
+        }
+      }
+    },
+    "resources/results/industry.json": {
+      "schema": "terluna.resources.industry/1",
+      "sha256": "7ac8754b4ec1c3c4f50bd55f4803cad6e5d0a9f1709cc9e7eb0a68af8ce3e79c",
+      "evidence": "A screen on committed products (the first resources screen, the array heat screen, the integrated ledger and ring layout, the joint ledgers, the geography atlas and drainage, the 19 September calculations) with the literature values named in industry_sources.json and three values from the provisioning branch (52dcdb6). Closed-form arithmetic: coplanar Hohmann transfers, heat released evenly in every direction, population, growth and lifetime scenarios. No orbital, industrial, economic or population model is run.",
+      "values": {
+        "people.stock_t_per_person": [
+          43.0,
+          335.0
+        ],
+        "people.lifetime_years": [
+          65.0,
+          81.0
+        ],
+        "operation.braking_mj_kg": {
+          "main_belt": 19.2,
+          "jupiter_trojans": 38.6,
+          "kuiper_belt": 69.9
+        },
+        "operation.braking_power.build_pw": [
+          20.5,
+          338.0
+        ],
+        "after_build.air.computed_kg_s": [
+          0.044,
+          1.4
+        ],
+        "after_build.water.hydrogen_escape_as_water_kg_s": [
+          0.0218,
+          0.0242
+        ]
+      }
+    },
+    "research/studies/distributions/results/distributions.json": {
+      "schema": "terluna.research.distributions/1",
+      "sha256": "a190a05f88c4846e258945c1e10e852a776eed0d5806004998407143ab0fad63",
+      "evidence": "A screen on committed and bound products: the food study's mixes and their feasible ranges, the land-cities highlands, tubes and water lift, the ways-of-living settings and sky towns, the inhabited-volume envelopes and roaming case, the zonal-wind product's spreads and gathering, the heritage register, the population and computing screens, ecology's living light and sky ecology, resources' phosphorus routes and main's places, with two primary sources on free-space and Mars settlements. People are placed by rule; every cost is arithmetic on those products. No settlement, farm, tube, sky town, traffic system, habitat or colony has been designed or tested, and no capacity is credited to the colonies.",
+      "values": {
+        "distributions.C'.people_billion": {
+          "earth": 9.0,
+          "moon": 8.0,
+          "moon_ground": 4.0,
+          "moon_aloft": 4.0,
+          "array": 5.0,
+          "colonies": 3.0,
+          "total": 25.0
+        },
+        "distributions.C'.moon.water_lift_gw": [
+          0.753,
+          27.5
+        ],
+        "transcribed.array_habitat_gt_per_billion.value": 1005.0
+      }
+    },
+    "research/studies/inhabited_volume/results/inhabited_volume.json": {
+      "schema": "terluna.research.inhabited-volume/1",
+      "sha256": "62002e2d2edd27109ac410097826ea96a1d4b4a9799dd64c33b1cfd505ce0a29",
+      "evidence": "Closed-form geometry, Archimedean lift, drag and service-account screens on committed model products. No habitat structure, population capacity, weather simulation, ecosystem or sustainable allocation is established.",
+      "values": {
+        "assumptions.districts": {
+          "light20": {
+            "building_t": 10.5,
+            "people_furnishings_t": 2.5,
+            "wet_stocks_t": 3.0,
+            "utilities_local_stocks_t": 4.0,
+            "total_t_per_person": 20.0,
+            "building_kg_per_m2": 150.0
+          },
+          "central50": {
+            "building_t": 28.0,
+            "people_furnishings_t": 4.0,
+            "wet_stocks_t": 8.0,
+            "utilities_local_stocks_t": 10.0,
+            "total_t_per_person": 50.0,
+            "building_kg_per_m2": 400.0
+          },
+          "heavy100": {
+            "building_t": 59.5,
+            "people_furnishings_t": 5.5,
+            "wet_stocks_t": 15.0,
+            "utilities_local_stocks_t": 20.0,
+            "total_t_per_person": 100.0,
+            "building_kg_per_m2": 850.0
+          }
+        },
+        "assumptions.lift_allocation_shares": {
+          "district_payload": 0.5,
+          "envelope_flight_structure": 0.25,
+          "control_flight_services": 0.1,
+          "reserve": 0.15
+        }
+      }
+    },
+    "research/studies/ways_of_living/results/ways_of_living.json": {
+      "schema": "terluna.research.ways-of-living/1",
+      "sha256": "9ef2b91e2d80edf9703036d011045f83655d10d4fccc39968fafa738c0d38148",
+      "evidence": "Grid sums on the 28% atlas, the drainage lakes and rivers and the design climatology (A28_dim5_moon), twilight from the solved clear sky, and closed-form arithmetic on committed products and two bound inputs. The settings are possibilities drawn from the project's designs; their densities, mixes and shares are stated assumptions. No climate, flow, structural, ecological or social model runs, and no placement of people is chosen.",
+      "values": {
+        "aerial_reference.lifting_species_t_per_resident": 7.46,
+        "aerial_reference.hydrogen_upkeep": {
+          "loss_bracket_per_year": [
+            0.01,
+            0.1
+          ],
+          "electrolysis_kwh_per_kg": [
+            50.0,
+            52.0
+          ],
+          "per_billion_per_percent_a_year": {
+            "released_mt_year": 74.6,
+            "remake_tw": [
+              0.426,
+              0.443
+            ],
+            "air_hydrogen_ppm_held": 0.692
+          },
+          "air_hydrogen_now_mt": 114.0,
+          "air_hydrogen_ppm_per_mt_held": 0.00464,
+          "soil_uptake_years": 2.0
+        }
+      }
+    },
+    "research/studies/solar_shield_array/results/array_heat.json": {
+      "schema": "terluna.research.array-heat/1",
+      "sha256": "8ade010fcbf805adf71a90c74e4357ad699067f5fbc8f445267fc984e80a1aa1",
+      "evidence": "Closed-form screen on the named products and the assumptions in design, each sourced in array_industry_sources.json; the films' thermal emissivity comes from the protection domain's optical tables (normal incidence, 2-125 um). No dynamics, device or plant model.",
+      "values": {
+        "fleet.optical_mass_Gt": [
+          46.17499393913809,
+          46.38400661641534
+        ],
+        "fleet.film_upkeep_Gt_per_year": [
+          2.3087496969569044,
+          4.638400661641534
+        ],
+        "film_plant.power_TW": [
+          0.14631972627556622,
+          2.9396409496549385
+        ]
+      }
+    },
+    "provisioning/results/power.json": {
+      "schema": "terluna.provisioning.power/1",
+      "sha256": "b20fa5b5f0f7b78bba0fc7f8cbd1ccbfecf6690d6bf1964a9085e043dd5d336e",
+      "evidence": "Screen-level arithmetic and one-dimensional radiative transfer on committed products. The gaseous absorption is ITU-R P.676-13 Annex 1 line by line, reproduced to 1e-12 against ITU-R Study Group 3's validation examples on Earth, then integrated through the atmosphere domain's prescribed moon_1.2atm column at 295 K with oxygen at Earth's partial pressure: a computed result for a prescribed clear-sky column, on line parameters fitted to Earth's air. Rain uses ITU-R P.838-3 with Earth's drop spectra, its rate scaled by the Moon's slower fall (an estimate). The ring's view is geometry on the held matched stack, circular rings at their layout radii and tilts. Receivers, beams, grid, faults and storage are sized from the products and labelled design guesses; nothing is simulated through time beyond sampling the lunar cycle and the libration of the ring plane.",
+      "values": {
+        "reserves.ring_fault.delivered_total_tw": [
+          22.12,
+          105.3
+        ],
+        "reserves.ring_fault.energy_twh": [
+          424.6,
+          1266.0
+        ],
+        "reserves.ring_fault.ground.battery_bridge_mt": [
+          8.424,
+          50.22
+        ],
+        "ring.electricity_at_the_tiles_tw": [
+          47.14,
+          224.2
+        ],
+        "ring.collector_and_aperture_km2_installed": [
+          346400.0,
+          2471000.0
+        ],
+        "grid.receiver_km2": [
+          96000.0,
+          436000.0
+        ]
+      }
+    },
+    "research/studies/food_systems/results/food_blend.json": {
+      "schema": "terluna.research.food-blend/1",
+      "sha256": "ac29dbf9ba4a4ff288c58594eb89af90823bd8ebf89156fbcd4b47af4a32b148",
+      "evidence": "A screen on the food study's basis and mix rules, recombined: each blend is one case built from the three mixes' rules, with heat, dimming, N2O and methane from the totals. The weights come from a stated rule over a 5% grid. The heritage meat uses Earth's global per-kilogram land use and FAO GLEAM's methane intensities for a basket of the author's examples. No crop, livestock, grassland, climate or ecosystem model runs here.",
+      "values": {
+        "blend.8.wild_30_hybrid_20.power_tw": {
+          "irrigation": [
+            0.0,
+            0.0
+          ],
+          "glasshouse_operations": [
+            0.0,
+            0.0
+          ],
+          "glasshouse_water": [
+            0.0,
+            0.0
+          ],
+          "lamps": [
+            4.41,
+            44.6
+          ],
+          "microbial": [
+            0.159,
+            0.532
+          ],
+          "aquaponics": [
+            0.0,
+            0.0
+          ],
+          "power_made_food": [
+            2.78,
+            11.2
+          ],
+          "nitrogen_fixation": [
+            0.031,
+            0.0715
+          ],
+          "total": [
+            7.38,
+            56.3
+          ]
+        },
+        "blend.8.wild_30_hybrid_20.fields_km2": [
+          676000.0,
+          1860000.0
+        ],
+        "blend.8.wild_30_hybrid_20.structure_gt": {
+          "glass_gt": [
+            0.0,
+            0.0
+          ],
+          "steel_gt": [
+            0.0,
+            0.0
+          ],
+          "aluminium_gt": [
+            0.0,
+            0.0
+          ],
+          "building_gt": [
+            1.85,
+            22.5
+          ]
+        },
+        "blend.8.wild_30_hybrid_20.phosphorus_mt_year": {
+          "eaten": [
+            3.52,
+            4.8
+          ],
+          "lost": [
+            0.352,
+            1.44
+          ],
+          "in_microbial_biomass": [
+            1.07,
+            3.47
+          ],
+          "glass_discharge": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "provisioning/results/computing.json": {
+      "schema": "terluna.provisioning.computing/1",
+      "sha256": "48f60b85d0c33abbaa911fb152eb0c7896ac8a6f4577a0935f740bb915aab43b",
+      "evidence": "A screen on committed products: the shield study's array heat (collectors, radiators, placement, fleet, film plant), the joint synthesis's night-half interception, the fleet-light model's night-side reflection and the provisioning first screen's heat response, with the literature values in computing_sources.json. Closed-form arithmetic; no platform, device, network or workload is modelled. Task demands are published estimates or arithmetic on published measurements, each with the assumptions named in its basis; the per-person AI demand, the weather twin's levels and service factor, and the control filter sizes are assumptions for scale.",
+      "values": {
+        "supply.per_tw": {
+          "light_tw": [
+            3.333,
+            5.0
+          ],
+          "collector_km2": [
+            2449.0,
+            3674.0
+          ],
+          "radiator_km2": 826.2,
+          "radiator_mt": [
+            2.478,
+            11.57
+          ],
+          "collector_mt": [
+            1.0,
+            10.0
+          ],
+          "hardware_kg_per_kw": [
+            3.5,
+            12.79
+          ],
+          "hardware_mt": [
+            3.5,
+            12.79
+          ],
+          "mass_mt": [
+            6.978,
+            34.36
+          ],
+          "hardware_renewal_mt_per_year": [
+            0.7,
+            2.558
+          ],
+          "heat_released_in_orbit_tw": [
+            2.933,
+            4.4
+          ],
+          "orbit_moon_w_m2": [
+            0.0001462,
+            0.0002193
+          ],
+          "orbit_moon_k": [
+            9.136e-05,
+            0.0002193
+          ],
+          "on_moon_w_m2": 0.02636,
+          "on_moon_k": [
+            0.01648,
+            0.02636
+          ],
+          "platform_side_km": [
+            57.23,
+            67.08
+          ],
+          "flop_s_per_kg_today": [
+            40750000000000.0,
+            200600000000000.0
+          ]
+        }
+      }
+    },
+    "research/studies/terrain_through_time/results/terrain_through_time.json": {
+      "schema": "terluna.research.terrain-through-time/1",
+      "sha256": "65f1c069569aeab8ed0633510af2ffa97bfed3f0ec4f17ef3be5d4f4bf4192d3",
+      "evidence": "Calculations on committed products: the routing summary (geography's drainage rerun, erosion by relief and rain, units filled in log-spaced steps), the sea chemistry's works and the sea phosphorus study's dredging. Crater degradation is linear diffusion of Pike's fresh profile on a radial grid; travertine is the carbon cycle's carbonate solver at the land's air temperature; dam builders take Earth's capacity thresholds through equal Shields numbers. Earth's values are reference points, design guesses are named, and nothing here is validated against a lunar landscape.",
+      "values": {
+        "upkeep.rates": {
+          "10 m/Myr": {
+            "rock_gt_yr": 0.71,
+            "lift_gw_in_place": 0.0377393,
+            "lift_gw_to_heads": 0.061154,
+            "haulage_tonne_km_yr": 6628150000.0,
+            "haulage_gw_at_rail_energy": 0.0224736,
+            "share_of_earth_sand_and_gravel": [
+              0.0142,
+              0.01775
+            ],
+            "lake_dredging_km3_yr": [
+              0.18092,
+              0.542761
+            ],
+            "lake_dredging_fuel_gw": [
+              0.101073,
+              0.850493
+            ],
+            "spread_in_place_mm_per_century": 1.16751,
+            "spread_on_heads_mm_per_century": 3.56088,
+            "loess_falls_mm_per_century": [
+              10.0,
+              21.0
+            ]
+          },
+          "50 m/Myr": {
+            "rock_gt_yr": 3.55,
+            "lift_gw_in_place": 0.188697,
+            "lift_gw_to_heads": 0.30577,
+            "haulage_tonne_km_yr": 33140700000.0,
+            "haulage_gw_at_rail_energy": 0.112368,
+            "share_of_earth_sand_and_gravel": [
+              0.071,
+              0.08875
+            ],
+            "lake_dredging_km3_yr": [
+              0.904602,
+              2.7138
+            ],
+            "lake_dredging_fuel_gw": [
+              0.505366,
+              4.25247
+            ],
+            "spread_in_place_mm_per_century": 5.83755,
+            "spread_on_heads_mm_per_century": 17.8044,
+            "loess_falls_mm_per_century": [
+              10.0,
+              21.0
+            ]
+          },
+          "100 m/Myr": {
+            "rock_gt_yr": 7.1,
+            "lift_gw_in_place": 0.377393,
+            "lift_gw_to_heads": 0.61154,
+            "haulage_tonne_km_yr": 66281500000.0,
+            "haulage_gw_at_rail_energy": 0.224736,
+            "share_of_earth_sand_and_gravel": [
+              0.142,
+              0.1775
+            ],
+            "lake_dredging_km3_yr": [
+              1.8092,
+              5.42761
+            ],
+            "lake_dredging_fuel_gw": [
+              1.01073,
+              8.50493
+            ],
+            "spread_in_place_mm_per_century": 11.6751,
+            "spread_on_heads_mm_per_century": 35.6088,
+            "loess_falls_mm_per_century": [
+              10.0,
+              21.0
+            ]
+          },
+          "soil loss the phosphorus particles imply": {
+            "rock_gt_yr": 8.2754,
+            "lift_gw_in_place": 0.43987,
+            "lift_gw_to_heads": 0.71278,
+            "haulage_tonne_km_yr": 77254300000.0,
+            "haulage_gw_at_rail_energy": 0.261941,
+            "share_of_earth_sand_and_gravel": [
+              0.165508,
+              0.206885
+            ],
+            "lake_dredging_km3_yr": [
+              2.10872,
+              6.32615
+            ],
+            "lake_dredging_fuel_gw": [
+              1.17806,
+              9.91292
+            ],
+            "spread_in_place_mm_per_century": 13.6079,
+            "spread_on_heads_mm_per_century": 41.5038,
+            "loess_falls_mm_per_century": [
+              10.0,
+              21.0
+            ]
+          }
+        }
+      }
+    },
+    "research/studies/carbon_cycle/results/carbon_cycle.json": {
+      "schema": "terluna.research.carbon-cycle/1",
+      "sha256": "55f92a4697054578ebaf8e4aa03d0ecda547f4aee90890957d892fb3311c185b",
+      "evidence": "A box model on committed products: the air and its 400 ppm of CO2, the design case's temperatures, the drainage's runoff and lakes, the atlas's seas, C''s land uses with the food blend, the gas ledger's methane, the sky ecology's aerophytes, resources' dredged deltas and its kilns. Its rates are Earth measurements carried to the Moon (the basalt weathering law, field ageing, biome inventories, lake and marine burial, peat and desert carbonate) beside design guesses, each labelled in the assumptions; the groundwater's share of the weathering, the rock's calcite and the filling crust's uptake come from the springs study and stage 1; its carbonate chemistry uses published constants at the design temperatures. A runnable calculation with checked conservation and step convergence: ecosystems, sediments and the seas enter as well-mixed boxes with Earth rates, and no lunar measurement stands behind any rate.",
+      "values": {
+        "questions.imports": {
+          "low/held/natural": {
+            "grown_year": 940.0,
+            "carbon_on_the_moon": 950.6,
+            "beyond_the_air": 425.0,
+            "peak_import": {
+              "gt_c_yr": 3.801,
+              "year": 33.75
+            },
+            "import_gt_c_yr": {
+              "2000": 0.167,
+              "5000": 0.1626,
+              "10000": 0.1285
+            },
+            "imported_after_grown": 1349.0
+          },
+          "low/held/magnesite": {
+            "grown_year": 940.0,
+            "carbon_on_the_moon": 928.7,
+            "beyond_the_air": 403.1,
+            "peak_import": {
+              "gt_c_yr": 3.778,
+              "year": 33.75
+            },
+            "import_gt_c_yr": {
+              "2000": 0.1445,
+              "5000": 0.1413,
+              "10000": 0.1151
+            },
+            "imported_after_grown": 1253.0
+          },
+          "low/soils/natural": {
+            "grown_year": 940.0,
+            "carbon_on_the_moon": 970.5,
+            "beyond_the_air": 444.9,
+            "peak_import": {
+              "gt_c_yr": 3.823,
+              "year": 33.75
+            },
+            "import_gt_c_yr": {
+              "2000": 0.1688,
+              "5000": 0.1626,
+              "10000": 0.1285
+            },
+            "imported_after_grown": 1356.0
+          },
+          "low/soils/magnesite": {
+            "grown_year": 940.0,
+            "carbon_on_the_moon": 948.6,
+            "beyond_the_air": 423.0,
+            "peak_import": {
+              "gt_c_yr": 3.8,
+              "year": 33.75
+            },
+            "import_gt_c_yr": {
+              "2000": 0.1462,
+              "5000": 0.1413,
+              "10000": 0.1151
+            },
+            "imported_after_grown": 1259.0
+          },
+          "central/held/natural": {
+            "grown_year": 932.0,
+            "carbon_on_the_moon": 1081.0,
+            "beyond_the_air": 555.3,
+            "peak_import": {
+              "gt_c_yr": 4.167,
+              "year": 34.25
+            },
+            "import_gt_c_yr": {
+              "2000": 0.2477,
+              "5000": 0.2433,
+              "10000": 0.2205
+            },
+            "imported_after_grown": 2147.0
+          },
+          "central/held/magnesite": {
+            "grown_year": 932.0,
+            "carbon_on_the_moon": 1049.0,
+            "beyond_the_air": 523.8,
+            "peak_import": {
+              "gt_c_yr": 4.117,
+              "year": 34.25
+            },
+            "import_gt_c_yr": {
+              "2000": 0.2219,
+              "5000": 0.2182,
+              "10000": 0.2178
+            },
+            "imported_after_grown": 1998.0
+          },
+          "central/soils/natural": {
+            "grown_year": 932.0,
+            "carbon_on_the_moon": 1104.0,
+            "beyond_the_air": 578.7,
+            "peak_import": {
+              "gt_c_yr": 4.196,
+              "year": 34.25
+            },
+            "import_gt_c_yr": {
+              "2000": 0.2498,
+              "5000": 0.2434,
+              "10000": 0.2205
+            },
+            "imported_after_grown": 2154.0
+          },
+          "central/soils/magnesite": {
+            "grown_year": 932.0,
+            "carbon_on_the_moon": 1073.0,
+            "beyond_the_air": 547.1,
+            "peak_import": {
+              "gt_c_yr": 4.146,
+              "year": 34.25
+            },
+            "import_gt_c_yr": {
+              "2000": 0.224,
+              "5000": 0.2183,
+              "10000": 0.2178
+            },
+            "imported_after_grown": 2005.0
+          },
+          "high/held/natural": {
+            "grown_year": 922.0,
+            "carbon_on_the_moon": 1251.0,
+            "beyond_the_air": 725.5,
+            "peak_import": {
+              "gt_c_yr": 4.659,
+              "year": 33.75
+            },
+            "import_gt_c_yr": {
+              "2000": 0.3496,
+              "5000": 0.3123,
+              "10000": 0.3258
+            },
+            "imported_after_grown": 2999.0
+          },
+          "high/held/magnesite": {
+            "grown_year": 922.0,
+            "carbon_on_the_moon": 1208.0,
+            "beyond_the_air": 682.3,
+            "peak_import": {
+              "gt_c_yr": 4.589,
+              "year": 33.75
+            },
+            "import_gt_c_yr": {
+              "2000": 0.3105,
+              "5000": 0.3088,
+              "10000": 0.2935
+            },
+            "imported_after_grown": 2764.0
+          },
+          "high/soils/natural": {
+            "grown_year": 922.0,
+            "carbon_on_the_moon": 1278.0,
+            "beyond_the_air": 752.6,
+            "peak_import": {
+              "gt_c_yr": 4.695,
+              "year": 33.75
+            },
+            "import_gt_c_yr": {
+              "2000": 0.3519,
+              "5000": 0.3124,
+              "10000": 0.3258
+            },
+            "imported_after_grown": 3008.0
+          },
+          "high/soils/magnesite": {
+            "grown_year": 922.0,
+            "carbon_on_the_moon": 1235.0,
+            "beyond_the_air": 709.4,
+            "peak_import": {
+              "gt_c_yr": 4.624,
+              "year": 33.75
+            },
+            "import_gt_c_yr": {
+              "2000": 0.3128,
+              "5000": 0.3088,
+              "10000": 0.2935
+            },
+            "imported_after_grown": 2772.0
+          },
+          "central/held/natural/salted": {
+            "grown_year": 932.0,
+            "carbon_on_the_moon": 1334.0,
+            "beyond_the_air": 808.8,
+            "peak_import": {
+              "gt_c_yr": 4.17,
+              "year": 34.25
+            },
+            "import_gt_c_yr": {
+              "2000": 0.2093,
+              "5000": 0.2083,
+              "10000": 0.2091
+            },
+            "imported_after_grown": 1907.0
+          },
+          "central/held/magnesite/salted": {
+            "grown_year": 932.0,
+            "carbon_on_the_moon": 1320.0,
+            "beyond_the_air": 794.3,
+            "peak_import": {
+              "gt_c_yr": 4.123,
+              "year": 34.25
+            },
+            "import_gt_c_yr": {
+              "2000": 0.2072,
+              "5000": 0.206,
+              "10000": 0.2067
+            },
+            "imported_after_grown": 1886.0
+          },
+          "central/held/natural/slow_soils": {
+            "grown_year": 4655.0,
+            "carbon_on_the_moon": 1995.0,
+            "beyond_the_air": 1469.0,
+            "peak_import": {
+              "gt_c_yr": 3.827,
+              "year": 34.25
+            },
+            "import_gt_c_yr": {
+              "2000": 0.2779,
+              "5000": 0.2498,
+              "10000": 0.221
+            },
+            "imported_after_grown": 1232.0
+          }
+        },
+        "questions.managed_return.by_corner": {
+          "low/natural": {
+            "100": {
+              "net_sink": 0.5403,
+              "kilns": 0.0,
+              "dredged": 0.001107,
+              "import_": 0.5392,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "1000": {
+              "net_sink": 0.1933,
+              "kilns": 0.0,
+              "dredged": 0.001107,
+              "import_": 0.1922,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "2000": {
+              "net_sink": 0.1681,
+              "kilns": 0.0,
+              "dredged": 0.001107,
+              "import_": 0.167,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "5000": {
+              "net_sink": 0.1637,
+              "kilns": 0.0,
+              "dredged": 0.001107,
+              "import_": 0.1626,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "10000": {
+              "net_sink": 0.1463,
+              "kilns": 0.01665,
+              "dredged": 0.001107,
+              "import_": 0.1285,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.06102,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 7.889,
+              "kiln_gw_best_kilns": [
+                7.889,
+                10.35
+              ],
+              "lime_gt_yr": {
+                "cao": 0.07775,
+                "mgo": 0.0
+              }
+            }
+          },
+          "low/magnesite": {
+            "100": {
+              "net_sink": 0.5287,
+              "kilns": 0.01171,
+              "dredged": 0.001107,
+              "import_": 0.5159,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0429
+              },
+              "kiln_gw_minimum": 3.494,
+              "kiln_gw_best_kilns": [
+                3.494,
+                4.586
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.03929
+              }
+            },
+            "1000": {
+              "net_sink": 0.1817,
+              "kilns": 0.01171,
+              "dredged": 0.001107,
+              "import_": 0.1689,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0429
+              },
+              "kiln_gw_minimum": 3.494,
+              "kiln_gw_best_kilns": [
+                3.494,
+                4.586
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.03929
+              }
+            },
+            "2000": {
+              "net_sink": 0.157,
+              "kilns": 0.01144,
+              "dredged": 0.001107,
+              "import_": 0.1445,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.04193
+              },
+              "kiln_gw_minimum": 3.415,
+              "kiln_gw_best_kilns": [
+                3.415,
+                4.482
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0384
+              }
+            },
+            "5000": {
+              "net_sink": 0.1535,
+              "kilns": 0.01109,
+              "dredged": 0.001107,
+              "import_": 0.1413,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.04065
+              },
+              "kiln_gw_minimum": 3.311,
+              "kiln_gw_best_kilns": [
+                3.311,
+                4.345
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.03723
+              }
+            },
+            "10000": {
+              "net_sink": 0.1398,
+              "kilns": 0.02358,
+              "dredged": 0.001107,
+              "import_": 0.1151,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0467,
+                "magnesite": 0.0397
+              },
+              "kiln_gw_minimum": 9.27,
+              "kiln_gw_best_kilns": [
+                9.27,
+                12.17
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0595,
+                "mgo": 0.03636
+              }
+            }
+          },
+          "central/natural": {
+            "100": {
+              "net_sink": 0.6785,
+              "kilns": 0.0,
+              "dredged": 0.008509,
+              "import_": 0.67,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "1000": {
+              "net_sink": 0.3148,
+              "kilns": 0.0,
+              "dredged": 0.008509,
+              "import_": 0.3063,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "2000": {
+              "net_sink": 0.2562,
+              "kilns": 0.0,
+              "dredged": 0.008509,
+              "import_": 0.2477,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "5000": {
+              "net_sink": 0.2519,
+              "kilns": 0.0,
+              "dredged": 0.008509,
+              "import_": 0.2433,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "10000": {
+              "net_sink": 0.2407,
+              "kilns": 0.01166,
+              "dredged": 0.008509,
+              "import_": 0.2205,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.04274,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 5.525,
+              "kiln_gw_best_kilns": [
+                5.525,
+                7.252
+              ],
+              "lime_gt_yr": {
+                "cao": 0.05446,
+                "mgo": 0.0
+              }
+            }
+          },
+          "central/magnesite": {
+            "100": {
+              "net_sink": 0.6566,
+              "kilns": 0.02187,
+              "dredged": 0.008509,
+              "import_": 0.6263,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.08013
+              },
+              "kiln_gw_minimum": 6.526,
+              "kiln_gw_best_kilns": [
+                6.526,
+                8.565
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.07339
+              }
+            },
+            "1000": {
+              "net_sink": 0.3014,
+              "kilns": 0.01358,
+              "dredged": 0.008509,
+              "import_": 0.2794,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.04975
+              },
+              "kiln_gw_minimum": 4.052,
+              "kiln_gw_best_kilns": [
+                4.052,
+                5.318
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.04556
+              }
+            },
+            "2000": {
+              "net_sink": 0.2435,
+              "kilns": 0.0131,
+              "dredged": 0.008509,
+              "import_": 0.2219,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.04801
+              },
+              "kiln_gw_minimum": 3.91,
+              "kiln_gw_best_kilns": [
+                3.91,
+                5.132
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.04397
+              }
+            },
+            "5000": {
+              "net_sink": 0.2397,
+              "kilns": 0.01296,
+              "dredged": 0.008509,
+              "import_": 0.2182,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.04747
+              },
+              "kiln_gw_minimum": 3.866,
+              "kiln_gw_best_kilns": [
+                3.866,
+                5.074
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.04348
+              }
+            },
+            "10000": {
+              "net_sink": 0.2395,
+              "kilns": 0.01315,
+              "dredged": 0.008509,
+              "import_": 0.2178,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.04817
+              },
+              "kiln_gw_minimum": 3.923,
+              "kiln_gw_best_kilns": [
+                3.923,
+                5.149
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.04412
+              }
+            }
+          },
+          "high/natural": {
+            "100": {
+              "net_sink": 0.8241,
+              "kilns": 0.0,
+              "dredged": 0.04499,
+              "import_": 0.7791,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "1000": {
+              "net_sink": 0.4877,
+              "kilns": 0.0,
+              "dredged": 0.04499,
+              "import_": 0.4427,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "2000": {
+              "net_sink": 0.3946,
+              "kilns": 0.0,
+              "dredged": 0.04499,
+              "import_": 0.3496,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 0.0,
+              "kiln_gw_best_kilns": [
+                0.0,
+                0.0
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0
+              }
+            },
+            "5000": {
+              "net_sink": 0.3781,
+              "kilns": 0.02072,
+              "dredged": 0.04499,
+              "import_": 0.3123,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.07592,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 9.816,
+              "kiln_gw_best_kilns": [
+                9.816,
+                12.88
+              ],
+              "lime_gt_yr": {
+                "cao": 0.09674,
+                "mgo": 0.0
+              }
+            },
+            "10000": {
+              "net_sink": 0.385,
+              "kilns": 0.01425,
+              "dredged": 0.04499,
+              "import_": 0.3258,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.05222,
+                "magnesite": 0.0
+              },
+              "kiln_gw_minimum": 6.751,
+              "kiln_gw_best_kilns": [
+                6.751,
+                8.861
+              ],
+              "lime_gt_yr": {
+                "cao": 0.06654,
+                "mgo": 0.0
+              }
+            }
+          },
+          "high/magnesite": {
+            "100": {
+              "net_sink": 0.7925,
+              "kilns": 0.0319,
+              "dredged": 0.04499,
+              "import_": 0.7156,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.1169
+              },
+              "kiln_gw_minimum": 9.518,
+              "kiln_gw_best_kilns": [
+                9.518,
+                12.49
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.107
+              }
+            },
+            "1000": {
+              "net_sink": 0.4712,
+              "kilns": 0.01674,
+              "dredged": 0.04499,
+              "import_": 0.4095,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.06134
+              },
+              "kiln_gw_minimum": 4.995,
+              "kiln_gw_best_kilns": [
+                4.995,
+                6.557
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.05618
+              }
+            },
+            "2000": {
+              "net_sink": 0.3754,
+              "kilns": 0.01994,
+              "dredged": 0.04499,
+              "import_": 0.3105,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.07305
+              },
+              "kiln_gw_minimum": 5.949,
+              "kiln_gw_best_kilns": [
+                5.949,
+                7.808
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.0669
+              }
+            },
+            "5000": {
+              "net_sink": 0.3764,
+              "kilns": 0.02265,
+              "dredged": 0.04499,
+              "import_": 0.3088,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.0,
+                "magnesite": 0.08299
+              },
+              "kiln_gw_minimum": 6.759,
+              "kiln_gw_best_kilns": [
+                6.759,
+                8.871
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0,
+                "mgo": 0.076
+              }
+            },
+            "10000": {
+              "net_sink": 0.3695,
+              "kilns": 0.03101,
+              "dredged": 0.04499,
+              "import_": 0.2935,
+              "kiln_gt_co2_yr": {
+                "calcite": 0.02456,
+                "magnesite": 0.08904
+              },
+              "kiln_gw_minimum": 10.43,
+              "kiln_gw_best_kilns": [
+                10.43,
+                13.69
+              ],
+              "lime_gt_yr": {
+                "cao": 0.0313,
+                "mgo": 0.08155
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "exclusions": [
+    "Array habitat construction streams are growth, not mature renewal.",
+    "Material-stock proxies overlap explicit buildings and infrastructure.",
+    "Total delivered electricity already includes food and close computing.",
+    "Lift reserve is capacity, not manufactured mass.",
+    "Array habitat shielding geometries are alternatives, not additions.",
+    "Braking energy is managed energy, not automatically purchased electricity."
+  ]
+}

@@ -1,0 +1,481 @@
+{
+  "schema": "terluna.research.world-economy-amenities-inputs/1",
+  "baseline_commit": "f63aaf4",
+  "products": {
+    "research/studies/world_economy/results/comparison.json": {
+      "schema": "terluna.research.world-economy-comparison/1",
+      "sha256": "63066ace193ab88e1a368f0a7a4da7ac4c557fb10dfe66b6af2b8c5f296ee30f"
+    },
+    "research/studies/world_economy/results/construction.json": {
+      "schema": "terluna.research.world-economy-construction/1",
+      "sha256": "c3eea562a97cb689a563cc97b4f71397d19ce76020c624342987407bb0941d55"
+    },
+    "research/studies/distributions/results/distributions.json": {
+      "schema": "terluna.research.distributions/1",
+      "sha256": "a190a05f88c4846e258945c1e10e852a776eed0d5806004998407143ab0fad63"
+    },
+    "resources/results/sea_phosphorus.json": {
+      "schema": "terluna.resources.sea-phosphorus/1",
+      "sha256": "ae4e7eb572e12daac4aa83f32c8fdd30c7e1c60735cb5bb38415fcaea3f997b5"
+    }
+  },
+  "evidence": "Scenario assumptions on accepted hybrid land and the committed economic reference. No observed future demand, engineered transport capacity, commissioned industrial timetable or fiscal institution.",
+  "tourism": {
+    "local_amenity_spend_share_of_gwp": {
+      "earth": 0.04,
+      "moon": 0.07,
+      "array": 0.05
+    },
+    "inbound_visitor_night_capacity": {
+      "earth": 100000000000.0,
+      "moon": 200000000000.0,
+      "array": 60000000000.0
+    },
+    "destination_stay_nights": {
+      "earth": 14,
+      "moon": 21,
+      "array": 10
+    },
+    "destination_spend_per_night_U": {
+      "earth": 350,
+      "moon": 450,
+      "array": 500
+    },
+    "route_trip_capacity_per_year": 3000000000.0,
+    "route_access_cost_U": {
+      "earth_moon": 2000,
+      "earth_array": 3000,
+      "moon_array": 2000
+    },
+    "operator_shares": {
+      "earth_moon": {
+        "earth": 0.2,
+        "moon": 0.2,
+        "array": 0.6
+      },
+      "earth_array": {
+        "earth": 0.4,
+        "array": 0.6
+      },
+      "moon_array": {
+        "moon": 0.4,
+        "array": 0.6
+      }
+    },
+    "direct_gva_shares": {
+      "visitor_services": 0.65,
+      "local_amenities": 0.6,
+      "transport": 0.5
+    },
+    "imported_input_shares": {
+      "earth": {
+        "moon": 0.03,
+        "array": 0.07
+      },
+      "moon": {
+        "earth": 0.08,
+        "array": 0.12
+      },
+      "array": {
+        "earth": 0.15,
+        "moon": 0.05
+      }
+    },
+    "cases": {
+      "balanced": {
+        "outbound_budget_share_of_gwp": {
+          "earth": 0.02,
+          "moon": 0.02,
+          "array": 0.02
+        },
+        "route_budget_shares": {
+          "earth": {
+            "moon": 0.5,
+            "array": 0.5
+          },
+          "moon": {
+            "earth": 0.5,
+            "array": 0.5
+          },
+          "array": {
+            "earth": 0.5,
+            "moon": 0.5
+          }
+        }
+      },
+      "connected": {
+        "outbound_budget_share_of_gwp": {
+          "earth": 0.04,
+          "moon": 0.04,
+          "array": 0.04
+        },
+        "route_budget_shares": {
+          "earth": {
+            "moon": 0.75,
+            "array": 0.25
+          },
+          "moon": {
+            "earth": 0.65,
+            "array": 0.35
+          },
+          "array": {
+            "earth": 0.3,
+            "moon": 0.7
+          }
+        }
+      },
+      "lunar_destination": {
+        "outbound_budget_share_of_gwp": {
+          "earth": 0.08,
+          "moon": 0.04,
+          "array": 0.1
+        },
+        "route_budget_shares": {
+          "earth": {
+            "moon": 0.8,
+            "array": 0.2
+          },
+          "moon": {
+            "earth": 0.65,
+            "array": 0.35
+          },
+          "array": {
+            "earth": 0.2,
+            "moon": 0.8
+          }
+        }
+      }
+    },
+    "hybrid_attribution": {
+      "moon_local_amenity_share": 0.5,
+      "moon_inbound_service_share": 0.5,
+      "resident_visits_per_year": 52,
+      "inbound_visits_with_hybrid_use_share": 0.8
+    }
+  },
+  "park_cost_sensitivity": {
+    "reading_rule": "Alternative annual resource budgets. Not empirically estimated costs, extra GDP, or additive to existing ordinary capital and intermediate inputs. If previously omitted from the project cash calculation, deduct them before financing surplus.",
+    "cases": {
+      "sparse_amenities": {
+        "initial_produced_capital_U_per_m2": 2,
+        "annual_operating_U_per_m2": 0.1,
+        "replacement_life_years": 40
+      },
+      "distributed_amenities": {
+        "initial_produced_capital_U_per_m2": 10,
+        "annual_operating_U_per_m2": 0.5,
+        "replacement_life_years": 30
+      },
+      "intensive_amenities": {
+        "initial_produced_capital_U_per_m2": 50,
+        "annual_operating_U_per_m2": 2,
+        "replacement_life_years": 20
+      }
+    }
+  },
+  "development": {
+    "build_years": 500,
+    "repayment_years": 500,
+    "annual_real_rates": [
+      0.001,
+      0.005,
+      0.01
+    ],
+    "fixed_sponsor_share_of_construction": 0.5,
+    "project_available_cash_shares_of_realised_gwp": [
+      0.02,
+      0.05,
+      0.1
+    ],
+    "array_excess_transfer_to_moon_shares": [
+      0,
+      1
+    ],
+    "activity_fraction_knots": {
+      "late_opening": {
+        "moon": [
+          [
+            0,
+            0
+          ],
+          [
+            300,
+            0
+          ],
+          [
+            400,
+            0.1
+          ],
+          [
+            450,
+            0.35
+          ],
+          [
+            500,
+            1
+          ]
+        ],
+        "array": [
+          [
+            0,
+            0
+          ],
+          [
+            100,
+            0.02
+          ],
+          [
+            200,
+            0.1
+          ],
+          [
+            300,
+            0.3
+          ],
+          [
+            400,
+            0.6
+          ],
+          [
+            500,
+            1
+          ]
+        ]
+      },
+      "phased": {
+        "moon": [
+          [
+            0,
+            0
+          ],
+          [
+            100,
+            0.001
+          ],
+          [
+            200,
+            0.01
+          ],
+          [
+            300,
+            0.1
+          ],
+          [
+            400,
+            0.4
+          ],
+          [
+            500,
+            1
+          ]
+        ],
+        "array": [
+          [
+            0,
+            0
+          ],
+          [
+            50,
+            0.03
+          ],
+          [
+            100,
+            0.1
+          ],
+          [
+            200,
+            0.35
+          ],
+          [
+            300,
+            0.6
+          ],
+          [
+            400,
+            0.8
+          ],
+          [
+            500,
+            1
+          ]
+        ]
+      },
+      "early_orbital": {
+        "moon": [
+          [
+            0,
+            0
+          ],
+          [
+            100,
+            0.001
+          ],
+          [
+            200,
+            0.01
+          ],
+          [
+            300,
+            0.1
+          ],
+          [
+            400,
+            0.4
+          ],
+          [
+            500,
+            1
+          ]
+        ],
+        "array": [
+          [
+            0,
+            0
+          ],
+          [
+            25,
+            0.02
+          ],
+          [
+            50,
+            0.1
+          ],
+          [
+            100,
+            0.3
+          ],
+          [
+            200,
+            0.6
+          ],
+          [
+            300,
+            0.8
+          ],
+          [
+            400,
+            0.95
+          ],
+          [
+            500,
+            1
+          ]
+        ]
+      },
+      "enclosed_then_open": {
+        "moon": [
+          [
+            0,
+            0
+          ],
+          [
+            100,
+            0.0001
+          ],
+          [
+            300,
+            0.001
+          ],
+          [
+            500,
+            0.005
+          ],
+          [
+            600,
+            0.1
+          ],
+          [
+            700,
+            0.4
+          ],
+          [
+            750,
+            1
+          ]
+        ],
+        "array": [
+          [
+            0,
+            0
+          ],
+          [
+            50,
+            0.03
+          ],
+          [
+            100,
+            0.1
+          ],
+          [
+            200,
+            0.35
+          ],
+          [
+            300,
+            0.6
+          ],
+          [
+            400,
+            0.8
+          ],
+          [
+            500,
+            1
+          ],
+          [
+            750,
+            1
+          ]
+        ]
+      }
+    },
+    "cash_rule": "Project-available saving/dividends/taxes after ordinary consumption, operating inputs, replacement, independent business growth capital and senior obligations; excludes revenue funded by this same construction loan. Rates are allocations of realised value added, not profit margins or a second addition to GDP.",
+    "reference": {
+      "activity_case": "phased",
+      "cash_share": 0.05,
+      "annual_rate": 0.001,
+      "array_transfer_share": 0
+    },
+    "cross_world_rule": "Optional transfer releases only new array surplus after own construction, interest and prepayment. The same sum is deducted from array retained funds and added once to lunar cash. It is an explicit grant/dividend allocation sensitivity, not an established ownership right."
+  },
+  "mining": {
+    "evidence": "Synthetic export-envelope, customer and cost scenarios, not surveyed recoverable reserves or approved extraction allowances. Grade uses byte-bound soil transcription, not a prospect assay.",
+    "feed_pool_kg": 1e+16,
+    "reserved_future_kg": 4000000000000000.0,
+    "protected_kg": 3000000000000000.0,
+    "uncertainty_buffer_kg": 2000000000000000.0,
+    "customer_finished_product_demand_cap_kg": 1000000000000000.0,
+    "years": 100,
+    "first_operating_year": 21,
+    "annual_feed_capacity_kg": 10000000000000.0,
+    "phosphorus_export_allowance_kg": 1000000000.0,
+    "phosphorus_retention_fractions": [
+      0,
+      0.9,
+      0.99,
+      0.999
+    ],
+    "grade_case": "mare",
+    "grade_cases_for_sensitivity": [
+      "highland",
+      "mare",
+      "kreep_rich"
+    ],
+    "independent_buyer_fractions": [
+      0,
+      0.5,
+      1
+    ],
+    "unit_costs_per_feed_kg": {
+      "intermediate_cost_U_per_kg": 0.04,
+      "cfc_U_per_kg": 0.01,
+      "depletion_U_per_kg": 0.005,
+      "other_senior_cash_U_per_kg": 0.02,
+      "retained_growth_capex_U_per_kg": 0.01,
+      "depletion_reserve_U_per_kg": 0.005
+    },
+    "price_binding": "Advanced construction array_bulk_habitat_shield allowance per kg finished product; this is a transfer-price illustration, not a mineral quote.",
+    "retention_rule": "Ideal P-only separation: exported bulk fraction=1\u2212raw P grade\u00d7retention. Retained P stays on the Moon in usable/recoverable stock. Recovery performance and incremental separation expense are unvalidated.",
+    "funding_rule": "Zero independent fraction applies to purchases financed by this same joint construction programme. Independently funded customer shares are hypothetical. Mining cash is an attribution/standalone financing counterfactual, never added to the topdown2/5/10%contributions."
+  }
+}

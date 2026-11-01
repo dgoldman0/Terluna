@@ -41,3 +41,5 @@ What it does not carry:
   1.3 persons/s/m. The design-fire helpers keep the published values.
 
 The [port fire study](../../research/studies/port_fire/README.md) applies them to the summit's central port.
+
+The [industrial-combustion assessment](../../research/studies/world_economy/industrial_combustion.md) applies the models to production at the 1.2 atm surface.

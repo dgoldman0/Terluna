@@ -1,0 +1,170 @@
+{
+  "schema": "terluna.research.slow-settling-sources/1",
+  "accessed": "2026-10-31",
+  "scope": "Targeted primary research, author abstracts, technical documentation and apparatus evidence. Physical derivations and scenario inputs are distinct from observed results.",
+  "sources": [
+    {
+      "id": "ayranci_2014_suspension",
+      "title": "Critical analysis of Zwietering correlation for solids suspension in stirred tanks",
+      "doi": "10.1016/j.cherd.2013.09.005",
+      "url": "https://open.metu.edu.tr/handle/11511/39250",
+      "reading": "Institutional primary abstract and publisher-indexed introduction/equation. Direct publisher request returned 403; institutional direct retrieval timed out. Full article and figures not read.",
+      "claims": [
+        "Empirical suspension correlation has geometry and concentration limits; off-bottom suspension is a distinct operating criterion.",
+        "The published g^0.45 term is used only as an extrapolation sensitivity at lunar gravity."
+      ],
+      "limits": [
+        "The abstract reports concentration-exponent revisions and requires matching geometry. No low-gravity validation."
+      ]
+    },
+    {
+      "id": "ibrahim_nienow_2004",
+      "title": "Suspension of microcarriers for cell culture with axial flow impellers",
+      "doi": "10.1205/cerd.82.9.1082.44161",
+      "url": "https://eprints.um.edu.my/9448/",
+      "alternate": "https://research.birmingham.ac.uk/en/publications/the-suspension-of-microcarriers-for-cell-culture-with-axial-flow-/",
+      "reading": "Indexed author-repository abstract and Birmingham bibliographic record. Original UM page now redirects to a consolidated repository; full article not retrieved.",
+      "claims": [
+        "19.2 L baffled vessel, approximately 20% wet-weight Cytodex 3, particle-liquid density difference 40 kg/m3.",
+        "50-90 rpm just-suspended speed; selected hydrofoils required about 0.5e-3 to under 1e-3 W/kg. Complete bed pickup could take about 40 minutes."
+      ],
+      "limits": [
+        "Specific terrestrial laboratory configuration, not full bioreactor utility power, lunar performance or a universal suspension energy."
+      ]
+    },
+    {
+      "id": "jossen_2016_microcarriers",
+      "title": "Theoretical and Practical Issues That Are Relevant When Scaling Up hMSC Microcarrier Production Processes",
+      "doi": "10.1155/2016/4760414",
+      "url": "https://tore.tuhh.de/dspace-cris-server/api/core/bitstreams/920773b0-2288-4755-9493-4635c18bd0cc/content",
+      "publisher": "https://onlinelibrary.wiley.com/doi/10.1155/2016/4760414",
+      "reading": "Complete 15-page author-repository PDF retrieved to temporary storage. Targeted reading: abstract, cultivation methods 2.2, suspension/growth results and Table 1, conclusions. Indexed publisher passages supplement methods. No supplementary-data audit.",
+      "retrieval": "Hindawi and browser author-PDF retrieval initially failed; direct public repository download obtained the intended DOI/title PDF.",
+      "sha256": "a0a097900de0eb27a04d27c0d7f94713dae8349520ec512d701a91a0aa7974b6",
+      "temporary_pdf": "not kept: a temporary download during source reading",
+      "claims": [
+        "Terrestrial hASC yield depends on agitation and aggregation; the highest tested rpm gave the lowest living cell density.",
+        "Large aggregates were associated with reduced living-cell density even at low shear; diffusion limitation was proposed rather than established.",
+        "Settling was used during medium exchange."
+      ],
+      "limits": [
+        "No lunar or orbital comparison, no general biological growth premium, no application of 2016 clinical/market claims to the future world."
+      ]
+    },
+    {
+      "id": "sornchamni_2004_magnetic_bed",
+      "title": "Operation of magnetically assisted fluidized beds in microgravity and variable gravity: experiment and theory",
+      "doi": "10.1016/j.asr.2004.07.010",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0273117704007008",
+      "reading": "Indexed publisher abstract, introduction, apparatus excerpt and conclusion; direct retrieval returned 403. No full PDF or figure review.",
+      "claims": [
+        "Magnetically susceptible bed media were stabilized during aircraft microgravity tests.",
+        "Biomass-filtration experiments were terrestrial; the paper distinguishes those from the flight force demonstration."
+      ],
+      "limits": [
+        "No quantified future array cost, no assertion that all orbital reactors require gravity."
+      ]
+    },
+    {
+      "id": "grill_2020_regolith_bed",
+      "title": "Behaviour of lunar regolith simulants in fluidised bed reactors for in-situ resource utilisation",
+      "doi": "10.1016/j.pss.2019.104757",
+      "url": "https://www.sciencedirect.com/science/article/pii/S0032063319301771",
+      "reading": "Indexed primary highlights, abstract, introduction, particle analysis, abrasion discussion and conclusion excerpt. Full data/figures not read.",
+      "claims": [
+        "Nitrogen fluidization of EAC-1, JSC-1A and TUBS-M was studied on Earth; particle distributions and abrasion mattered.",
+        "Sieving/preprocessing and changed gravity require additional qualification."
+      ],
+      "limits": [
+        "These experiments were not conducted at lunar gravity; room-temperature model in this study is not the hot reduction process."
+      ]
+    },
+    {
+      "id": "williams_2006_powder_flow",
+      "title": "The Flowability of Fine Powders in Reduced Gravity Conditions",
+      "url": "https://proceedings.aiche.org/conferences/aiche-spring-meeting-and-global-congress-on-process-safety/2006/proceeding/paper/199b-flowability-fine-powders-reduced-gravity-conditions",
+      "reading": "Primary conference abstract indexed in search; no proceedings paper or data audit.",
+      "claims": [
+        "Reduced-gravity powder-fluidization work had broad size classes and transient/time-scale limitations; follow-on rotating-drum tests included nominal lunar gravity."
+      ],
+      "limits": [
+        "Qualitative support for cohesion/flowability concerns; no validated reactor-power multiplier."
+      ]
+    },
+    {
+      "id": "openfoam12_drag",
+      "title": "OpenFOAM v12 SchillerNaumann.C, CdRe implementation",
+      "url": "https://cpp.openfoam.org/v12/SchillerNaumann_8C_source.html",
+      "reading": "Official source page, especially lines 62-69, read directly. Model implementation independently written from the standard mathematical relation.",
+      "claims": [
+        "Cd Re = 24(1+0.15 Re^0.687) below Re=1000."
+      ],
+      "limits": [
+        "Isolated-sphere empirical relation; does not resolve particle interactions or rarefied gas. This study rejects Re>=1000 rather than extrapolating its chosen branch."
+      ]
+    },
+    {
+      "id": "comsol63_ergun",
+      "title": "COMSOL CFD Module User Guide 6.3, Euler-Euler drag models",
+      "url": "https://doc.comsol.com/6.3/doc/com.comsol.help.cfd/CFDModuleUsersGuide.pdf",
+      "reading": "Indexed official manual page 658, equations 6-69 through 6-71: Ergun/Gidaspow and Schiller-Naumann terms. Direct PDF find timed out; full manual not read.",
+      "claims": [
+        "Packed-bed drag includes viscous and inertial terms with coefficients 150 and 1.75."
+      ],
+      "limits": [
+        "The study derives an incipient-fluidization force balance from the conventional superficial-velocity Ergun form. No CFD simulation or expanded-bed prediction is performed."
+      ]
+    },
+    {
+      "id": "dataphysics_2024_battery_slurry",
+      "title": "Stability study of battery coating slurries, application note MS_53, version 1.1",
+      "url": "https://www.dataphysics-instruments.com/resources/Downloads/ApplicationNote-MS_Battery-Slurries_EN.pdf?v=1.1",
+      "reading": "Complete three-page manufacturer primary experiment note text, methods and result discussion; no independent figure-image or raw-data analysis.",
+      "claims": [
+        "20 mL samples at 25 C were compared with optical scans; one formulation sedimented within its 26-hour observation and another showed no optical change over 120 hours."
+      ],
+      "limits": [
+        "Manufacturer application note with undisclosed formulations and no lunar test. Stable scattering does not establish final electrode performance or lifetime."
+      ]
+    },
+    {
+      "id": "jaxa_protein_gravity",
+      "title": "Effect of microgravity on the quality of protein crystal",
+      "url": "https://humans-in-space.jaxa.jp/protein/en/researchers/project/microgravity.html",
+      "reading": "Primary programme explanation of convection, depletion zones, sedimentation and prior experiments; no underlying experimental datasets or image review.",
+      "claims": [
+        "Orbital protein-crystal work provides a competitor where reduced sedimentation and convection help."
+      ],
+      "limits": [
+        "The programme states that the mechanism is not completely verified; no general lunar crystal optimum or bulk production market follows."
+      ]
+    },
+    {
+      "id": "attrition_1996",
+      "title": "Abrasion and breakage phenomena in mechanically stirred crystallizers",
+      "doi": "10.1016/0923-0467(96)03082-5",
+      "url": "https://www.sciencedirect.com/science/article/pii/0923046796030825",
+      "reading": "Primary publisher abstract only.",
+      "claims": [
+        "Hours-long stirred dilute sodium-chloride crystal experiments produced fine fragments; abrasion and breakage were modeled."
+      ],
+      "limits": [
+        "Specific salt, sizes and high stirring rates; no lunar damage law or economic yield parameter."
+      ]
+    },
+    {
+      "id": "nasa_2011_hydrofocusing",
+      "title": "Microgravity-Enhanced Stem Cell Selection, NASA Tech Brief GSC-15807-1",
+      "url": "https://ntrs.nasa.gov/citations/20110012602",
+      "reading": "Complete substantive NASA record/technical-brief text and bibliographic metadata.",
+      "claims": [
+        "Rotating-wall suspension and a hydrofocusing design provide Earth/space engineering controls for low shear and bubble/cell manipulation."
+      ],
+      "limits": [
+        "Technical brief, not future production qualification. Historical clinical limitations and claims are not treated as current medical guidance."
+      ]
+    }
+  ],
+  "inherited_evidence": "The bound partial_gravity.json retains earlier casting inputs and their source qualifications; no new claim that its illustrative 100-second cure was demonstrated.",
+  "limitations": "No exhaustive literature review or industrial low-gravity validation. Each direct-retrieval failure remains identified; only Jossen was subsequently obtained as the intended full PDF. External full papers remain temporary and are not redistributed."
+}

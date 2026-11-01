@@ -1,0 +1,54 @@
+{
+  "schema": "terluna.research.pressure-advantages-inputs/1",
+  "evidence": "Matched-condition physical calculations and conditional cost allowances. Pressure is varied separately from gravity and composition. No empirical lunar process gain, equipment qualification, climate response, market demand or new world product is inferred.",
+  "reading_rule": "SI units unless a field specifies otherwise. Most pressure-only comparisons use the same dry N2/O2 gas at 301 K and the same gravity. Composition diagnostics separately compare rounded Earth oxygen at 21% with the design's 17.5%; trace CO2 is a separate dilute partial-pressure diagnostic. The atmosphere domain's reusable water-property law is evaluated directly, with its implementation hash recorded. Existing domain result files are not consumed through imports.",
+  "products": {
+    "research/studies/world_economy/results/mature_industry.json": {
+      "schema": "terluna.research.mature-industry/1",
+      "sha256": "945966428a5737b8a6c6e2781b6b08e8367f4f4233781aa29c50d96686464f4a",
+      "use": "environment.earth_pressure_Pa and environment.moon_pressure_Pa; retained 1.2 atm lock"
+    }
+  },
+  "environment": {
+    "temperature_K": 301.0,
+    "reference_oxygen_mole_fraction": 0.21,
+    "moon_oxygen_mole_fraction": 0.175,
+    "trace_CO2_mole_fraction": 0.0004,
+    "basis": "The 301 K industrial comparison and 1.2 atm lock are retained. atmosphere/lower_air.py and biosphere/ecology/state.md document the 17.5% O2 design; atmosphere/radiative_convective/thermodynamics.py supplies N2/O2 molecular properties and the water saturation law. Rounded 21% reference O2 makes the dry partial-pressure equality exact. This does not update the climate or prescribe a new atmosphere."
+  },
+  "cooling": {
+    "heat_transport_W": 1000000.0,
+    "air_temperature_rise_K": 20.0,
+    "duct_area_m2": 4.0,
+    "loss_coefficient": 12.0,
+    "fixed_pressure_losses_Pa": [0.0, 500.0],
+    "fan_efficiency": 0.65,
+    "fan_electricity_cost_shares": [0.01, 0.05, 0.2],
+    "limits": "Prescribed heat carriage, fixed geometry and equal gas properties/efficiency. The resistance coefficient is held fixed; mass flow preserves Reynolds number when viscosity is unchanged. An optional pressure-loss floor weakens the saving. Heat-exchanger area, full cooling plant, compressor/chiller energy and planet-wide heat rejection are not sized."
+  },
+  "vacuum_assisted": {
+    "bag_absolute_pressure_Pa": 10000.0,
+    "required_clamping_pressure_Pa": 80000.0,
+    "rigid_volume_m3": 0.001,
+    "constant_pump_speed_m3_s": 0.001,
+    "limits": "An illustrative 1 L rigid volume and 1 L/s effective pump isolate pressure-difference and absolute-pressure duties. No leaks, outgassing, collapse, resin transport, cure chemistry or varying pump speed. Greater consolidation pressure is not automatically better for a laminate or core."
+  },
+  "liquid": {
+    "density_kg_m3": 1000.0,
+    "temperatures_K": [301.0, 368.15, 373.15, 378.15],
+    "limits": "Pure-water saturation; fixed 1000 kg/m3 density is a column-height approximation, including hot cases. Column limits omit line losses, velocity head, pump requirements, nucleation, dissolved gas and operating margin. No actual suction installation or sterilization process is certified."
+  },
+  "compression": {
+    "outlet_absolute_pressures_Pa": [200000.0, 800000.0, 10000000.0],
+    "gamma": 1.4,
+    "limits": "Same ideal gas, inlet temperature and molar output, with fixed absolute outlet pressure. Isothermal reversible work and ideal isentropic work are distinct references. Separation, drying, machinery losses and downstream expansion are excluded. A pneumatic engine exhausting to the higher ambient also loses expansion work; compressor savings are not free cycle energy."
+  },
+  "boundaries": [
+    "The pressure-only density ratio is 1.2. The binary composition correction is reported separately and does not silently change the matched-gas screens.",
+    "Buoyant capacity is displaced-air mass minus lifting-gas mass, before envelope, payload and reserve allocation; lower gravity cancels from supported mass per volume.",
+    "The isothermal pressure-level height is a spherical hydrostatic diagnostic, not an extra inhabited or ecologically available sky layer.",
+    "Natural-convection exponents are illustrative regimes. Higher pressure partly offsets weak lunar buoyancy but does not restore Earth-gravity cooling.",
+    "No automatic oxygen, aquaculture, fermentation, fire-safety or crop-yield premium follows from total pressure. Partial pressures and full transport processes govern these comparisons.",
+    "Earth and the array can reproduce controlled pressures inside equipment. The lunar benefit is ambient availability across open infrastructure and selected processes; atmosphere construction and sustaining costs already belong to the wider accounts."
+  ]
+}

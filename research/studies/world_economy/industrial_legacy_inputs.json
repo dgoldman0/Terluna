@@ -1,0 +1,97 @@
+{
+  "schema": "terluna.research.industrial-legacy-inputs/1",
+  "products": {
+    "resources/results/industry.json": {
+      "schema": "terluna.resources.industry/1",
+      "sha256": "7ac8754b4ec1c3c4f50bd55f4803cad6e5d0a9f1709cc9e7eb0a68af8ce3e79c"
+    },
+    "research/studies/world_economy/results/industrial_markets.json": {
+      "schema": "terluna.research.industrial-markets/1",
+      "sha256": "787de364fdeb4e03be0b2141d8ab0be3cbf5add010bff9d9903890268ffd7074"
+    }
+  },
+  "evidence": "Conditional preservation, storage and ownership scenarios. Losses, compatibility, prices, asset yields and routes are unvalidated; no automatic additional GDP or independent construction finance.",
+  "analysis_years": 50,
+  "reserve_years": [
+    5,
+    20,
+    50
+  ],
+  "classes": {
+    "durable_feed": 0,
+    "modular_parts": 0.005,
+    "rapidly_changing_hardware": 0.05
+  },
+  "normalized_costs": {
+    "acquisition_cost_per_kg": 1,
+    "preposition_cost_per_kg": 0.1,
+    "storage_cost_per_kg_year": 0.002,
+    "physical_attrition": 0.0005
+  },
+  "future_buy_costs_per_kg": [
+    1,
+    1.5,
+    2
+  ],
+  "annual_real_price_declines": [
+    0,
+    0.01,
+    0.03
+  ],
+  "real_discount_rates": [
+    0.005,
+    0.01,
+    0.02
+  ],
+  "reference": {
+    "future_buy_cost_per_kg": 1.5,
+    "annual_price_decline": 0,
+    "real_discount_rate": 0.005
+  },
+  "fresh_feed_fractions": [
+    0.001,
+    0.01
+  ],
+  "installed_operating_assets": {
+    "complete_asset_value_U": 1000000000000.0,
+    "gross_operating_surplus_rates_after_current_expenses": [
+      0.03,
+      0.06,
+      0.1
+    ],
+    "useful_lives_years": [
+      50,
+      100
+    ],
+    "lunar_ownership_fraction": 1
+  },
+  "boundaries": [
+    "One unit of initial acquisition cost is a normalization, not a quotation for lunar glass or metal. The common50-year comparison buys JIT for demand that each reserve cannot supply.",
+    "Inventory is acquired and prepositioned at the beginning of this post-production comparison. Earlier factory production and capacity must fund it; inventory sales are alternatives to selling the same material earlier.",
+    "Physical attrition and incompatibility are separate. Incompatible stock remains material requiring unpriced recovery; unsold terminal market reference value supplies no PV liquidation credit.",
+    "Equal-service JIT comparison assumes post-atmosphere suppliers and route capacity remain available. Supply interruption/insurance value is not priced.",
+    "Film feed quantities use gross turnover times unrecovered fraction, not a whole fleet replacement mass each year. Matching composition, purity, spare strategy and collection recovery require qualification.",
+    "Orbital stockpiles avoid later lunar export. Lunar stockpiles can serve local construction, but their later orbital export cannot inherit airless tariffs. Stock preposition and protective storage are paid.",
+    "The installed-asset example values a complete operating facility, with required complement investment and customers assumed. Loose components do not automatically earn its service return.",
+    "Lunar ownership can provide resident income from array production after the lunar factory closes. This does not relocate array GDP or add to the mature comparison. Foregone cash sales or equity purchase fund that ownership; financing/tax/distribution terms remain additional."
+  ],
+  "construction_package": {
+    "programme_cost_U": 1000000000000.0,
+    "eligible_shares": [
+      0.1,
+      0.2,
+      0.3
+    ],
+    "eligible_package_saving_fractions": [
+      0.1,
+      0.2,
+      0.3
+    ],
+    "extra_enclosure_transition_cost_fractions_of_total": [
+      0,
+      0.02,
+      0.05
+    ],
+    "rule": "Normalized sensitivity only. Eligible gravity/vacuum-related packages must be costed against complete alternatives; no share or saving is inferred from gravity. Savings reduce procurement expenditure, not independent export receipts."
+  }
+}

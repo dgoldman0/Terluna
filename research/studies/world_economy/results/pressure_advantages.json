@@ -1,0 +1,430 @@
+{
+  "schema": "terluna.research.pressure-advantages/1",
+  "producer": {
+    "files": {
+      "research/studies/world_economy/pressure_advantages.py": "3fde0cc5696613ec18308e240dfcdccbe102c7518af52793b8ac754817b7562a",
+      "research/studies/world_economy/pressure_advantages_inputs.json": "9b44c482951d515f4f59e7bf254bb9921995450ee286fe9a3942d1404b9dc75d",
+      "research/studies/world_economy/pressure_advantages_sources.json": "3b1bb73906ad7faaf5751f53885cea4cf180096e46b31892aa48ebde099eaacb",
+      "research/studies/world_economy/industrial_physics.py": "915b7edcbdf70c244cb2d234465f75539e4d65ed81c98f719480d6a802e785cc"
+    },
+    "thermodynamic_law": {
+      "path": "atmosphere/radiative_convective/thermodynamics.py",
+      "sha256": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+    },
+    "constants": {
+      "GAS_CONSTANT": 8.31446261815324,
+      "MOON_RADIUS": 1737400.0,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "STANDARD_GRAVITY": 9.80665
+    },
+    "input_products": {
+      "research/studies/world_economy/results/mature_industry.json": {
+        "schema": "terluna.research.mature-industry/1",
+        "sha256": "945966428a5737b8a6c6e2781b6b08e8367f4f4233781aa29c50d96686464f4a",
+        "use": "environment.earth_pressure_Pa and environment.moon_pressure_Pa; retained 1.2 atm lock"
+      }
+    }
+  },
+  "evidence": "Matched-condition physical calculations and conditional cost allowances. Pressure is varied separately from gravity and composition. No empirical lunar process gain, equipment qualification, climate response, market demand or new world product is inferred.",
+  "reading_rule": "SI units unless a field specifies otherwise. Most pressure-only comparisons use the same dry N2/O2 gas at 301 K and the same gravity. Composition diagnostics separately compare rounded Earth oxygen at 21% with the design's 17.5%; trace CO2 is a separate dilute partial-pressure diagnostic. The atmosphere domain's reusable water-property law is evaluated directly, with its implementation hash recorded. Existing domain result files are not consumed through imports.",
+  "assumptions": {
+    "schema": "terluna.research.pressure-advantages-inputs/1",
+    "evidence": "Matched-condition physical calculations and conditional cost allowances. Pressure is varied separately from gravity and composition. No empirical lunar process gain, equipment qualification, climate response, market demand or new world product is inferred.",
+    "reading_rule": "SI units unless a field specifies otherwise. Most pressure-only comparisons use the same dry N2/O2 gas at 301 K and the same gravity. Composition diagnostics separately compare rounded Earth oxygen at 21% with the design's 17.5%; trace CO2 is a separate dilute partial-pressure diagnostic. The atmosphere domain's reusable water-property law is evaluated directly, with its implementation hash recorded. Existing domain result files are not consumed through imports.",
+    "products": {
+      "research/studies/world_economy/results/mature_industry.json": {
+        "schema": "terluna.research.mature-industry/1",
+        "sha256": "945966428a5737b8a6c6e2781b6b08e8367f4f4233781aa29c50d96686464f4a",
+        "use": "environment.earth_pressure_Pa and environment.moon_pressure_Pa; retained 1.2 atm lock"
+      }
+    },
+    "environment": {
+      "temperature_K": 301.0,
+      "reference_oxygen_mole_fraction": 0.21,
+      "moon_oxygen_mole_fraction": 0.175,
+      "trace_CO2_mole_fraction": 0.0004,
+      "basis": "The 301 K industrial comparison and 1.2 atm lock are retained. atmosphere/lower_air.py and biosphere/ecology/state.md document the 17.5% O2 design; atmosphere/radiative_convective/thermodynamics.py supplies N2/O2 molecular properties and the water saturation law. Rounded 21% reference O2 makes the dry partial-pressure equality exact. This does not update the climate or prescribe a new atmosphere."
+    },
+    "cooling": {
+      "heat_transport_W": 1000000.0,
+      "air_temperature_rise_K": 20.0,
+      "duct_area_m2": 4.0,
+      "loss_coefficient": 12.0,
+      "fixed_pressure_losses_Pa": [
+        0.0,
+        500.0
+      ],
+      "fan_efficiency": 0.65,
+      "fan_electricity_cost_shares": [
+        0.01,
+        0.05,
+        0.2
+      ],
+      "limits": "Prescribed heat carriage, fixed geometry and equal gas properties/efficiency. The resistance coefficient is held fixed; mass flow preserves Reynolds number when viscosity is unchanged. An optional pressure-loss floor weakens the saving. Heat-exchanger area, full cooling plant, compressor/chiller energy and planet-wide heat rejection are not sized."
+    },
+    "vacuum_assisted": {
+      "bag_absolute_pressure_Pa": 10000.0,
+      "required_clamping_pressure_Pa": 80000.0,
+      "rigid_volume_m3": 0.001,
+      "constant_pump_speed_m3_s": 0.001,
+      "limits": "An illustrative 1 L rigid volume and 1 L/s effective pump isolate pressure-difference and absolute-pressure duties. No leaks, outgassing, collapse, resin transport, cure chemistry or varying pump speed. Greater consolidation pressure is not automatically better for a laminate or core."
+    },
+    "liquid": {
+      "density_kg_m3": 1000.0,
+      "temperatures_K": [
+        301.0,
+        368.15,
+        373.15,
+        378.15
+      ],
+      "limits": "Pure-water saturation; fixed 1000 kg/m3 density is a column-height approximation, including hot cases. Column limits omit line losses, velocity head, pump requirements, nucleation, dissolved gas and operating margin. No actual suction installation or sterilization process is certified."
+    },
+    "compression": {
+      "outlet_absolute_pressures_Pa": [
+        200000.0,
+        800000.0,
+        10000000.0
+      ],
+      "gamma": 1.4,
+      "limits": "Same ideal gas, inlet temperature and molar output, with fixed absolute outlet pressure. Isothermal reversible work and ideal isentropic work are distinct references. Separation, drying, machinery losses and downstream expansion are excluded. A pneumatic engine exhausting to the higher ambient also loses expansion work; compressor savings are not free cycle energy."
+    },
+    "boundaries": [
+      "The pressure-only density ratio is 1.2. The binary composition correction is reported separately and does not silently change the matched-gas screens.",
+      "Buoyant capacity is displaced-air mass minus lifting-gas mass, before envelope, payload and reserve allocation; lower gravity cancels from supported mass per volume.",
+      "The isothermal pressure-level height is a spherical hydrostatic diagnostic, not an extra inhabited or ecologically available sky layer.",
+      "Natural-convection exponents are illustrative regimes. Higher pressure partly offsets weak lunar buoyancy but does not restore Earth-gravity cooling.",
+      "No automatic oxygen, aquaculture, fermentation, fire-safety or crop-yield premium follows from total pressure. Partial pressures and full transport processes govern these comparisons.",
+      "Earth and the array can reproduce controlled pressures inside equipment. The lunar benefit is ambient availability across open infrastructure and selected processes; atmosphere construction and sustaining costs already belong to the wider accounts."
+    ]
+  },
+  "environment": {
+    "reference_Pa": 101325.0,
+    "locked_Pa": 121590.0,
+    "temperature_K": 301.0,
+    "pressure_ratio": 1.2,
+    "same_composition_reference_density_kg_m3": 1.162416875719916,
+    "locked_density_kg_m3": 1.3949002508638992,
+    "binary_composition_corrected_density_ratio": 1.1941980983651694,
+    "molar_mass_kg_mol": 0.028710845,
+    "mass_cp_J_kg_K": 1015.8356537399022
+  },
+  "pressure_only_scalings": {
+    "density_and_gross_buoyant_mass_per_volume": 1.2,
+    "volume_for_same_buoyant_mass": 0.8333333333333334,
+    "similar_envelope_area_for_same_buoyant_mass": 0.8855488076521759,
+    "wing_speed_at_same_lift": 0.9128709291752769,
+    "ideal_induced_hover_power_at_same_weight_and_disk": 0.9128709291752769,
+    "wind_power_and_dynamic_load_at_same_speed": 1.2,
+    "natural_convection_Rayleigh": 1.44,
+    "heat_transfer_if_Nusselt_scales_as_Rayleigh_quarter": 1.0954451150103321,
+    "heat_transfer_if_Nusselt_scales_as_Rayleigh_third": 1.129243234657234
+  },
+  "ideal_isothermal_height_of_one_atm_m": 9840.132637063523,
+  "gas_partial_pressures": {
+    "reference_oxygen_Pa": 21278.25,
+    "locked_oxygen_Pa": 21278.25,
+    "dry_oxygen_ratio": 1.0,
+    "saturated_water_interface_oxygen_ratio": 1.0064053857173678,
+    "reference_trace_CO2_Pa": 40.53,
+    "locked_trace_CO2_Pa": 48.636
+  },
+  "cooling": [
+    {
+      "fixed_loss_Pa": 0.0,
+      "one_atm": {
+        "density_kg_m3": 1.162416875719916,
+        "mass_flow_kg_s": 49.220560250981464,
+        "volume_flow_m3_s": 42.34329462956037,
+        "speed_m_s": 10.585823657390092,
+        "dynamic_pressure_loss_Pa": 781.560256702251,
+        "fixed_loss_Pa": 0.0,
+        "total_pressure_loss_Pa": 781.560256702251,
+        "electric_power_W": 50913.594185074224
+      },
+      "locked_same_heat_transport": {
+        "density_kg_m3": 1.3949002508638992,
+        "mass_flow_kg_s": 49.220560250981464,
+        "volume_flow_m3_s": 35.28607885796698,
+        "speed_m_s": 8.821519714491744,
+        "dynamic_pressure_loss_Pa": 651.3002139185426,
+        "fixed_loss_Pa": 0.0,
+        "total_pressure_loss_Pa": 651.3002139185426,
+        "electric_power_W": 35356.66262852378
+      },
+      "locked_same_volume_flow": {
+        "density_kg_m3": 1.3949002508638992,
+        "mass_flow_kg_s": 59.06467230117775,
+        "volume_flow_m3_s": 42.34329462956037,
+        "speed_m_s": 10.585823657390092,
+        "dynamic_pressure_loss_Pa": 937.8723080427012,
+        "fixed_loss_Pa": 0.0,
+        "total_pressure_loss_Pa": 937.8723080427012,
+        "electric_power_W": 61096.31302208907
+      },
+      "same_heat_transport_power_ratio": 0.6944444444444448,
+      "same_volume_flow_power_ratio": 1.2
+    },
+    {
+      "fixed_loss_Pa": 500.0,
+      "one_atm": {
+        "density_kg_m3": 1.162416875719916,
+        "mass_flow_kg_s": 49.220560250981464,
+        "volume_flow_m3_s": 42.34329462956037,
+        "speed_m_s": 10.585823657390092,
+        "dynamic_pressure_loss_Pa": 781.560256702251,
+        "fixed_loss_Pa": 500.0,
+        "total_pressure_loss_Pa": 1281.560256702251,
+        "electric_power_W": 83485.35928473606
+      },
+      "locked_same_heat_transport": {
+        "density_kg_m3": 1.3949002508638992,
+        "mass_flow_kg_s": 49.220560250981464,
+        "volume_flow_m3_s": 35.28607885796698,
+        "speed_m_s": 8.821519714491744,
+        "dynamic_pressure_loss_Pa": 651.3002139185426,
+        "fixed_loss_Pa": 500.0,
+        "total_pressure_loss_Pa": 1151.3002139185426,
+        "electric_power_W": 62499.80021157529
+      },
+      "locked_same_volume_flow": {
+        "density_kg_m3": 1.3949002508638992,
+        "mass_flow_kg_s": 59.06467230117775,
+        "volume_flow_m3_s": 42.34329462956037,
+        "speed_m_s": 10.585823657390092,
+        "dynamic_pressure_loss_Pa": 937.8723080427012,
+        "fixed_loss_Pa": 500.0,
+        "total_pressure_loss_Pa": 1437.8723080427012,
+        "electric_power_W": 93668.07812175089
+      },
+      "same_heat_transport_power_ratio": 0.7486318648807967,
+      "same_volume_flow_power_ratio": 1.1219701145716525
+    }
+  ],
+  "vacuum_assisted": {
+    "same_absolute_bag_pressure_Pa": 10000.0,
+    "one_atm_clamping_Pa": 91325.0,
+    "locked_clamping_Pa": 111590.0,
+    "added_clamping_force_N_per_m2": 20265.0,
+    "fixed_force_cases": [
+      {
+        "ambient_Pa": 101325.0,
+        "clamping_pressure_Pa": 80000.0,
+        "final_absolute_Pa": 21325.0,
+        "constant_speed_no_load_pumpdown_s": 1.5584530791366293,
+        "ideal_work_J": 46.76598808741138
+      },
+      {
+        "ambient_Pa": 121590.0,
+        "clamping_pressure_Pa": 80000.0,
+        "final_absolute_Pa": 41590.0,
+        "constant_speed_no_load_pumpdown_s": 1.0727949755535064,
+        "ideal_work_J": 35.38245696672966
+      }
+    ],
+    "fixed_force_pumpdown_ratio": 0.6883716872296383,
+    "fixed_force_ideal_work_ratio": 0.7565852538087189
+  },
+  "liquid": {
+    "boiling_temperature_K": [
+      373.12429580541163,
+      378.313902474085
+    ],
+    "added_pressure_margin_Pa": 20265.0,
+    "added_water_column_m": 12.47676670456505,
+    "cases": [
+      {
+        "ambient_Pa": 101325.0,
+        "temperature_K": 301.0,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 9.80665,
+        "vapour_pressure_Pa": 3750.0318443798024,
+        "pressure_above_vapour_Pa": 97574.9681556202,
+        "unboiled_surface_possible": true,
+        "ideal_suction_column_limit_m": 9.949877700909097
+      },
+      {
+        "ambient_Pa": 101325.0,
+        "temperature_K": 368.15,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 9.80665,
+        "vapour_pressure_Pa": 84608.98515774749,
+        "pressure_above_vapour_Pa": 16716.01484225251,
+        "unboiled_surface_possible": true,
+        "ideal_suction_column_limit_m": 1.704559135102457
+      },
+      {
+        "ambient_Pa": 101325.0,
+        "temperature_K": 373.15,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 9.80665,
+        "vapour_pressure_Pa": 101417.99381792804,
+        "pressure_above_vapour_Pa": -92.99381792804343,
+        "unboiled_surface_possible": false,
+        "ideal_suction_column_limit_m": null
+      },
+      {
+        "ambient_Pa": 101325.0,
+        "temperature_K": 378.15,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 9.80665,
+        "vapour_pressure_Pa": 120902.45057170143,
+        "pressure_above_vapour_Pa": -19577.450571701425,
+        "unboiled_surface_possible": false,
+        "ideal_suction_column_limit_m": null
+      },
+      {
+        "ambient_Pa": 101325.0,
+        "temperature_K": 301.0,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 1.6242188765608128,
+        "vapour_pressure_Pa": 3750.0318443798024,
+        "pressure_above_vapour_Pa": 97574.9681556202,
+        "unboiled_surface_possible": true,
+        "ideal_suction_column_limit_m": 60.075011787961365
+      },
+      {
+        "ambient_Pa": 101325.0,
+        "temperature_K": 368.15,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 1.6242188765608128,
+        "vapour_pressure_Pa": 84608.98515774749,
+        "pressure_above_vapour_Pa": 16716.01484225251,
+        "unboiled_surface_possible": true,
+        "ideal_suction_column_limit_m": 10.291725507862388
+      },
+      {
+        "ambient_Pa": 101325.0,
+        "temperature_K": 373.15,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 1.6242188765608128,
+        "vapour_pressure_Pa": 101417.99381792804,
+        "pressure_above_vapour_Pa": -92.99381792804343,
+        "unboiled_surface_possible": false,
+        "ideal_suction_column_limit_m": null
+      },
+      {
+        "ambient_Pa": 101325.0,
+        "temperature_K": 378.15,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 1.6242188765608128,
+        "vapour_pressure_Pa": 120902.45057170143,
+        "pressure_above_vapour_Pa": -19577.450571701425,
+        "unboiled_surface_possible": false,
+        "ideal_suction_column_limit_m": null
+      },
+      {
+        "ambient_Pa": 121590.0,
+        "temperature_K": 301.0,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 1.6242188765608128,
+        "vapour_pressure_Pa": 3750.0318443798024,
+        "pressure_above_vapour_Pa": 117839.9681556202,
+        "unboiled_surface_possible": true,
+        "ideal_suction_column_limit_m": 72.55177849252642
+      },
+      {
+        "ambient_Pa": 121590.0,
+        "temperature_K": 368.15,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 1.6242188765608128,
+        "vapour_pressure_Pa": 84608.98515774749,
+        "pressure_above_vapour_Pa": 36981.01484225251,
+        "unboiled_surface_possible": true,
+        "ideal_suction_column_limit_m": 22.76849221242744
+      },
+      {
+        "ambient_Pa": 121590.0,
+        "temperature_K": 373.15,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 1.6242188765608128,
+        "vapour_pressure_Pa": 101417.99381792804,
+        "pressure_above_vapour_Pa": 20172.006182071957,
+        "unboiled_surface_possible": true,
+        "ideal_suction_column_limit_m": 12.41951221794995
+      },
+      {
+        "ambient_Pa": 121590.0,
+        "temperature_K": 378.15,
+        "density_kg_m3": 1000.0,
+        "gravity_m_s2": 1.6242188765608128,
+        "vapour_pressure_Pa": 120902.45057170143,
+        "pressure_above_vapour_Pa": 687.5494282985746,
+        "unboiled_surface_possible": true,
+        "ideal_suction_column_limit_m": 0.4233108223409026
+      }
+    ]
+  },
+  "compression": [
+    {
+      "outlet_Pa": 200000.0,
+      "one_atm": {
+        "inlet_Pa": 101325.0,
+        "outlet_Pa": 200000.0,
+        "pressure_ratio": 1.9738465334320257,
+        "reversible_isothermal_J_mol": 1701.7646518306162,
+        "ideal_isentropic_J_mol": 1878.321509456069
+      },
+      "locked": {
+        "inlet_Pa": 121590.0,
+        "outlet_Pa": 200000.0,
+        "pressure_ratio": 1.6448721111933546,
+        "reversible_isothermal_J_mol": 1245.477015528118,
+        "ideal_isentropic_J_mol": 1338.3741155012056
+      },
+      "isothermal_work_saving_fraction": 0.2681261688046359,
+      "isentropic_work_saving_fraction": 0.28746271138172896
+    },
+    {
+      "outlet_Pa": 800000.0,
+      "one_atm": {
+        "inlet_Pa": 101325.0,
+        "outlet_Pa": 800000.0,
+        "pressure_ratio": 7.895386133728103,
+        "reversible_isothermal_J_mol": 5171.178737460292,
+        "ideal_isentropic_J_mol": 7048.1381880870085
+      },
+      "locked": {
+        "inlet_Pa": 121590.0,
+        "outlet_Pa": 800000.0,
+        "pressure_ratio": 6.5794884447734185,
+        "reversible_isothermal_J_mol": 4714.891101157793,
+        "ideal_isentropic_J_mol": 6245.779444235704
+      },
+      "isothermal_work_saving_fraction": 0.08823667861200135,
+      "isentropic_work_saving_fraction": 0.11383981449278002
+    },
+    {
+      "outlet_Pa": 10000000.0,
+      "one_atm": {
+        "inlet_Pa": 101325.0,
+        "outlet_Pa": 10000000.0,
+        "pressure_ratio": 98.69232667160128,
+        "reversible_isothermal_J_mol": 11492.201732866946,
+        "ideal_isentropic_J_mol": 23769.209262033128
+      },
+      "locked": {
+        "inlet_Pa": 121590.0,
+        "outlet_Pa": 10000000.0,
+        "pressure_ratio": 82.24360555966774,
+        "reversible_isothermal_J_mol": 11035.91409656445,
+        "ideal_isentropic_J_mol": 22118.11658717704
+      },
+      "isothermal_work_saving_fraction": 0.039704109526509934,
+      "isentropic_work_saving_fraction": 0.06946350872064566
+    }
+  ],
+  "conditional_whole_cost_savings": [
+    {
+      "fan_electricity_cost_share": 0.01,
+      "whole_cost_saving_fraction": 0.0030555555555555527
+    },
+    {
+      "fan_electricity_cost_share": 0.05,
+      "whole_cost_saving_fraction": 0.015277777777777763
+    },
+    {
+      "fan_electricity_cost_share": 0.2,
+      "whole_cost_saving_fraction": 0.061111111111111054
+    }
+  ]
+}

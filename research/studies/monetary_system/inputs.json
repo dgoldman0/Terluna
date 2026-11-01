@@ -1,0 +1,143 @@
+{
+  "schema": "terluna.research.monetary-system-inputs/1",
+  "evidence": "Arbitrary normalized balance sheets and transaction sizes selected to expose monetary mechanisms. No observed or forecast monetary stock, currency regime, market price or credit capacity is asserted.",
+  "units": "Amounts are normalized currency units. L is a hypothetical lunar contract currency; S is a hypothetical externally issued settlement currency. U is only the common valuation numeraire and is not issued money. No conversion to the mature world-economy product is defined.",
+  "prices_U": {
+    "L": 1.0,
+    "S": 1.0
+  },
+  "actors": {
+    "moon_bank_a": "Moon",
+    "moon_bank_b": "Moon",
+    "moon_cb": "Moon",
+    "moon_treasury": "Moon",
+    "moon_firms": "Moon",
+    "moon_households": "Moon",
+    "earth_counterparty": "Earth",
+    "array_counterparty": "Array",
+    "settlement_issuer": "Earth"
+  },
+  "opening_real_assets_U": {
+    "moon_treasury": 20,
+    "moon_firms": 120,
+    "earth_counterparty": 225
+  },
+  "opening_claims": [
+    [
+      "moon_cb",
+      "moon_bank_a",
+      "reserve",
+      "L",
+      8
+    ],
+    [
+      "moon_cb",
+      "moon_bank_b",
+      "reserve",
+      "L",
+      12
+    ],
+    [
+      "moon_firms",
+      "moon_bank_a",
+      "loan",
+      "L",
+      72
+    ],
+    [
+      "moon_firms",
+      "moon_bank_b",
+      "loan",
+      "L",
+      48
+    ],
+    [
+      "moon_bank_a",
+      "moon_firms",
+      "deposit",
+      "L",
+      30
+    ],
+    [
+      "moon_bank_b",
+      "moon_firms",
+      "deposit",
+      "L",
+      10
+    ],
+    [
+      "moon_bank_a",
+      "moon_households",
+      "deposit",
+      "L",
+      40
+    ],
+    [
+      "moon_bank_b",
+      "moon_households",
+      "deposit",
+      "L",
+      40
+    ],
+    [
+      "moon_treasury",
+      "moon_cb",
+      "bond",
+      "L",
+      20
+    ],
+    [
+      "settlement_issuer",
+      "moon_cb",
+      "settlement",
+      "S",
+      25
+    ],
+    [
+      "settlement_issuer",
+      "earth_counterparty",
+      "settlement",
+      "S",
+      100
+    ],
+    [
+      "settlement_issuer",
+      "array_counterparty",
+      "settlement",
+      "S",
+      100
+    ],
+    [
+      "earth_counterparty",
+      "settlement_issuer",
+      "loan",
+      "S",
+      225
+    ]
+  ],
+  "opening_boundary": "Earth and array counterparties aggregate external customers, suppliers and investors. The S issuer is assigned to Earth for this example only, with an explicit 225 S claim on the Earth counterparty matching its 225 S liabilities. This is a closed accounting boundary, not a proposed Earth banking system or a forecast of reserve-currency dominance. Bank net worth is unallocated capital; shareholder equity securities, price risk, accrued interest, collateral encumbrance and regulation are outside the ledger.",
+  "domestic_liquidity": {
+    "new_loan_L": 20,
+    "interbank_payment_L": 20,
+    "eligible_collateral_after_haircut_L": 60,
+    "agreed_debt_cancellation_L": 15,
+    "counterfactual_additional_liquidity_L": 5,
+    "damaged_produced_capital_U": 15
+  },
+  "fiscal_transactions": {
+    "bond_issue_L": 10,
+    "transfer_L": 10,
+    "secondary_purchase_L": 10
+  },
+  "foreign_liquidity": {
+    "working_capital_loan_L": 30,
+    "initial_cb_loan_L": 25,
+    "requested_import_S": 28,
+    "additional_local_liquidity_L": 50,
+    "eligible_collateral_after_haircut_L": 80,
+    "array_service_receipt_S": 6,
+    "depreciated_U_per_L": 0.7
+  },
+  "policy_boundary": "Collateral limits and solvency checks are illustrative access rules, not calibrated regulatory standards. The additional post-insolvency loan is an explicit accounting counterfactual, not an eligible operation or recommendation. Foreign liquidity examples assume the quoted exchange rate remains available; they do not establish a credible peg or an endogenous floating rate. All scenarios restart from the same opening balance sheets.",
+  "real_asset_boundary": "The Earth counterparty holds movable produced equipment physically located on Earth. The import transaction explicitly transfers both its economic ownership and its location to Moon firms at the same fixed U value. It is not a purchase of land, a security or equipment remaining on Earth. Freight and transaction costs are outside the example. Initial lunar real assets are produced capital. The domestic damage event is an assumed destruction of produced capital, classified as an other-volume change, not a payment or recurring depreciation estimate."
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "terluna.world-economy.annual-inputs/1",
+  "evidence": "Explicit annual accounting and financing sensitivity assumptions, not observed future costs, market-clearing prices or verified repayment capacity.",
+  "worlds": ["earth", "moon", "array"],
+  "build_years": 500,
+  "ordinary_cfc_shares": {"earth": 0.15, "moon": 0.15, "array": 0.15},
+  "ordinary_cfc_sensitivities": [0.10, 0.15, 0.25],
+  "ordinary_cfc_scope": "Normal housing, productive equipment, food systems, ordinary energy hardware, computing, habitat structure and intangibles. Excludes the explicitly listed incremental assets; the construction ordinary-capital rows are not depreciated a second time.",
+  "incremental_asset_lives_years": {
+    "aerial_carriers_and_control": 40,
+    "ground_receivers": 40,
+    "critical_energy_reserves": 20,
+    "environment_establishment_allowance": 100,
+    "optical_shield_fleet": 15,
+    "orbital_power_and_beaming": 40,
+    "magnetic_protection_allowance": 100,
+    "array_bulk_habitat_shield": 500
+  },
+  "incremental_cfc_convention": "Installed scenario cost divided by assumed life, using unchanged real replacement prices and a maintained mature stock. These lives are sensitivities, not engineering service-life predictions. Environmental establishment is provisionally treated as produced renewable infrastructure; its biological and financial classifications remain unresolved.",
+  "imported_endowment_convention": "Initial air and water are a maintained planetary endowment with no automatic cost/lifetime depreciation. The endowment remains in construction finance. Actual losses, repair and catastrophic instability require physical operating or risk scenarios rather than automatic amortization of the entire original import bill.",
+  "natural_depletion_shares": {"earth": 0, "moon": 0, "array": 0},
+  "natural_depletion_status": "Unpriced. Headline net product is conditional on zero local valued depletion; this is not a claim of zero physical extraction or depletion. Extraction outside the three economic territories belongs to its producer territory.",
+  "natural_depletion_sensitivities": {
+    "equal_half_percent": {"earth": 0.005, "moon": 0.005, "array": 0.005},
+    "equal_two_percent": {"earth": 0.02, "moon": 0.02, "array": 0.02},
+    "earth_one_percent": {"earth": 0.01, "moon": 0, "array": 0}
+  },
+  "essential_final_operations": {
+    "baseline_share_of_gwp": 0.02,
+    "extra_shares_of_gwp": {"earth": 0, "moon": 0.01, "array": 0.01},
+    "scale_sensitivities": [0.5, 1, 2],
+    "classification": "A policy allocation for collective final environmental and safety services. Excludes producer intermediate inputs, commercial power and habitat operating bills, depreciation, replacement investment, debt service and income transfers. This is a chosen allocation, not an engineering estimate of necessary expenditure. Report it separately and also show the optional residual after allocation."
+  },
+  "earth_creditor_share": 0.5,
+  "creditor_share_sensitivities": [0, 0.5, 1],
+  "finance_cases": {
+    "legacy_retired": {"mode": "retired", "financed_fraction": 0, "annual_rate": 0, "capitalized_interest_fraction": 0, "repayment_years": 500, "full_population_year": 500},
+    "patient": {"mode": "completion_loan", "financed_fraction": 0.5, "annual_rate": 0.001, "capitalized_interest_fraction": 1, "repayment_years": 500, "full_population_year": 500},
+    "staged": {"mode": "staged", "financed_fraction": 0.5, "annual_rate": 0.005, "capitalized_interest_fraction": 1, "repayment_years": 250, "tranche_years": 50, "full_population_year": 500},
+    "current_interest": {"mode": "completion_loan", "financed_fraction": 0.5, "annual_rate": 0.005, "capitalized_interest_fraction": 0, "repayment_years": 500, "full_population_year": 500},
+    "deferred_stress": {"mode": "completion_loan", "financed_fraction": 1, "annual_rate": 0.01, "capitalized_interest_fraction": 1, "repayment_years": 500, "full_population_year": 500},
+    "staged_retired": {"mode": "staged", "financed_fraction": 0.5, "annual_rate": 0.005, "capitalized_interest_fraction": 1, "repayment_years": 250, "tranche_years": 50, "full_population_year": 750}
+  },
+  "earth_legacy_debt": {
+    "multiple_of_earth_gwp": 0,
+    "multiple_sensitivities": [0, 1, 5],
+    "annual_rate": 0.005,
+    "repayment_years": 250,
+    "creditor": "array",
+    "statement": "Explicit first-payment sensitivity on an inherited external Earth liability. The array receives interest and principal. This liability is separate from Earth's lending to Moon and array and is not inferred from current Earth debt."
+  },
+  "net_export_capacity_share_screens": [0.05, 0.15, 0.30],
+  "trade_closure": "Required net exports equal minus net primary income minus net principal receipts, with no new external borrowing, asset sales, current transfers or other financial flows. Gross domestic absorption is GWP minus required net exports. Gross replacement equals CFC. Subtracting a further depletion reserve gives the NWP-based resource pool; that reserve is an unallocated planning allowance, not an automatically implemented restoration investment. A trade matrix, demand, prices and export capacity are not solved.",
+  "construction_history_limits": "Construction prices the initial or end-state asset inventory. Renewal and operating expenditure during the build is not added to initial debt. Staged repayment presumes early orbital/source-industry revenues or external sponsors; eight billion lunar residents and mature lunar output do not exist throughout construction. Early operations and deficits must be funded separately. The mature-CFC ramp memo is gross replacement expenditure under an illustrative linear buildout, not automatically extra borrowed capital."
+}

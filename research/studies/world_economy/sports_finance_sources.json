@@ -1,0 +1,73 @@
+{
+  "source_admission": "Primary issuer filings, official guidance and existing project records for a preliminary sports/media business scenario. Targeted reading only; external documents remain external. Monetary sources and analysis belong to the separate monetary_system study.",
+  "sources": [
+    {
+      "id": "liberty_results_2025",
+      "title": "Liberty Media: Fourth Quarter and Year End 2025 Financial and Operating Results",
+      "url": "https://www.libertymedia.com/news/detail/579/liberty-media-corporation-reports-fourth-quarter-and-year",
+      "reading_scope": "Formula 1 revenue composition and operating-cost discussion read; no valuation of teams, entire sports sector or transfer of margins to lunar operations.",
+      "use": "Media rights and sponsorship can be major separate sports revenue streams; reported shares are a business-model analogy, not a lunar audience forecast.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "liberty_10k_2025",
+      "title": "Liberty Media Corporation 2025 Form 10-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1560385/000110465926020653/lmca-20251231x10k.htm",
+      "reading_scope": "Targeted advance-payment, deferred-revenue and commercial-contract passages read; no complete annual-filing audit.",
+      "use": "Upfront contract cash can precede earned revenue and leaves performance obligations; team and production costs remain.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "faa_participant_training",
+      "title": "14 CFR 460.51: Space flight participant training",
+      "url": "https://www.ecfr.gov/current/title-14/chapter-III/subchapter-C/part-460/subpart-B/section-460.51",
+      "reading_scope": "Current official section on emergency-response training read. Present US commercial-space rule only; no applicability to future lunar institutions asserted.",
+      "use": "Supports travel preparation as a distinct element from habitat competence and sport instruction; no specific lunar syllabus or safe participation criterion.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "world_bank_project_finance",
+      "title": "World Bank PPP Resource Center: Key Issues in Developing Project Financed Transactions",
+      "url": "https://ppp.worldbank.org/financing/issues-in-project-financed-transactions",
+      "reading_scope": "Revenue-certainty and financial-ratio/coverage passages read. No complete project-finance handbook or underwriting standard adopted.",
+      "use": "Coverage uses operating cash before equity distributions and compares with interest plus principal; downside and reserves require separate treatment. Lunar rates, terms and coverage thresholds are assumptions.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "id": "sec_revenue_bonds",
+      "title": "SEC Investor.gov: Municipal Bonds",
+      "url": "https://www.investor.gov/introduction-investing/investing-basics/investment-products/bonds-or-fixed-income-products-0",
+      "reading_scope": "Revenue versus general-obligation descriptions and risk passages read; no US tax exemption, jurisdiction or securities treatment transferred to the Moon.",
+      "use": "Different issuers and repayment sources distinguish project-revenue debt from broad public obligations.",
+      "accessed": "2026-10-31"
+    }
+  ],
+  "local_context": [
+    {
+      "path": "research/studies/world_economy/early_exports.md",
+      "use": "Prior first milestone, synthetic facility allowances and coverage boundary; new venue is an alternative smaller account, not additive."
+    },
+    {
+      "path": "research/studies/world_economy/early_exports_inputs.json",
+      "sha256": "b1eb7030a608c23937f82c11cba07775747e9c37df1547911f811c4f255f818e",
+      "use": "Original common real U, visitor assumptions and costs retained as provenance; no adopted currency or small-facility quote."
+    },
+    {
+      "path": "research/studies/world_economy/distinctive_activities.md",
+      "use": "Physical activity opportunities; this stage develops the early operating sequence and finance."
+    },
+    {
+      "path": "research/studies/land_cities/README.md",
+      "use": "Enclosed lava-tube communities, liner/habitat options and future water exposure; cave size does not establish a pressure-qualified venue."
+    },
+    {
+      "path": "research/studies/world_economy/annual_accounts.md",
+      "use": "Debt payments versus production, ownership and capital renewal."
+    },
+    {
+      "path": "research/studies/world_economy/results/comparison.json",
+      "sha256": "63066ace193ab88e1a368f0a7a4da7ac4c557fb10dfe66b6af2b8c5f296ee30f",
+      "use": "Original three-world results remain unchanged."
+    }
+  ]
+}

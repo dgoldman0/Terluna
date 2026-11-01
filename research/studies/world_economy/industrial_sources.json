@@ -1,0 +1,191 @@
+{
+  "accessed": "2026-10-31",
+  "evidence": "Targeted primary reading and explicit numerical transcriptions; no complete scholarly review, source-byte archive or experimental lunar validation.",
+  "processing_sources": [
+    {
+      "id": "twi_reduced_pressure_faq",
+      "url": "https://www.twi-global.com/technical-knowledge/faqs/faq-what-is-electron-beam-welding-at-reduced-pressure",
+      "reading_scope": "Complete short primary developer FAQ text retrieved through search. Pressure, thickness and 150 m3 pumpdown examples read.",
+      "use": "Conventional thick-section comparison near 10^-3 mbar, special-gun operation at 1-10 mbar, 70/16 minute chamber examples."
+    },
+    {
+      "id": "twi_reduced_pressure_ip",
+      "url": "https://www.twi-global.com/who-we-are/innovation/intellectual-property-licensing/reduced-pressure-high-power-electron-beam-welding/intellectual-property-rights",
+      "reading_scope": "Complete short primary developer page retrieved through search.",
+      "use": "Conventional range 10^-5 to 10^-2 mbar versus reduced pressure near 1 mbar; local-seal capital/throughput mechanism. No whole-factory saving inferred."
+    },
+    {
+      "id": "twi_development_paper",
+      "url": "https://www.twi-global.com/technical-knowledge/published-papers/reduced-pressure-electron-beam-welding-in-the-power-generation-industry",
+      "reading_scope": "Full web text retrieved; targeted Introduction, Reduced pressure EB welding, applications and conclusions. No figure-image inspection.",
+      "use": "Differentially pumped gun, pressure regime and competing terrestrial architecture. The local-head ten-second result belongs to the separate 2007 source."
+    },
+    {
+      "id": "nasa_ebf3_microgravity",
+      "url": "https://ntrs.nasa.gov/api/citations/20070005152/downloads/20070005152.pdf",
+      "reading_scope": "Full nine-page primary PDF retrieved as text. Targeted apparatus, experimental procedure and results pp1-8 read, including 45 sections and interrupted build. No image inspection.",
+      "use": "Microgravity process demonstration, wire-standoff failure, chamber achieved 10^-4 Pa, 3-5 kW beam apparatus. The achieved pressure is not a maximum permissible pressure."
+    },
+    {
+      "id": "nasa_ebf3_rates",
+      "url": "https://ntrs.nasa.gov/api/citations/20040042496/downloads/20040042496.pdf",
+      "reading_scope": "Full six-page primary PDF retrieved as text. Abstract and process/material/rate sections pp1-3 read; no full mechanical-property reanalysis or image inspection.",
+      "use": "Terrestrial demonstrated 330-2500 cm3/h rate, fine-detail tradeoff, near-net stock and repair applications."
+    },
+    {
+      "id": "senior_pyrolysis",
+      "url": "https://ntrs.nasa.gov/citations/19920033574",
+      "reading_scope": "Complete NASA bibliographic record and author abstract read. Record has no downloadable full text; full 1991 paper not read.",
+      "use": "Preliminary ilmenite/anorthite solar experiments and equilibrium estimates at 2000-2500 K, process gas pressures 0.01-1 torr, possible condensate byproducts."
+    },
+    {
+      "id": "shaw_sublimation",
+      "url": "https://doi.org/10.3390/min13010079",
+      "retrieved_url": "https://www.mdpi.com/2075-163x/13/1/79",
+      "reading_scope": "Direct publisher open returned429. Indexed primary abstract, methods sections2.1-2.3 and Tables1-2 retrieved and read, including distinction between measured area loss, modeled vapor pressure and historical Apollo KEMS evidence. No complete paper or figures inspected.",
+      "use": "Hertz-Knudsen-Langmuir kinetic screen, sintering area loss, feed-composition/depletion limit and absence of a demonstrated steady industrial yield."
+    },
+    {
+      "id": "freunlich_regolith_films",
+      "url": "https://ntrs.nasa.gov/api/citations/20050110155/downloads/20050110155.pdf",
+      "doi": "10.1109/PVSC.2005.1488252",
+      "reading_scope": "Four-page primary PDF retrieved as text; abstract and experimental substrate/film results pp1-2, conceptual paver discussion p3 read. OCR is imperfect; no image inspection and no ambiguous production-rate figures transcribed.",
+      "use": "Ground simulant glass substrates and mainly-silicon-oxide transparent deposited films; component evidence rather than a completed solar-cell factory."
+    },
+    {
+      "id": "shi_vacuum_fibres",
+      "url": "https://doi.org/10.1016/j.ceramint.2025.10.337",
+      "retrieved_url": "https://www.sciencedirect.com/science/article/pii/S0272884225052654",
+      "reading_scope": "Direct publisher open returned403. Indexed primary abstract and introduction read. Full methods/results not retrieved; pressure, test-population details and long-term moisture qualification remain unverified.",
+      "use": "Terrestrial vacuum-drawing feasibility and reported1205MPa/37% difference from air control; not a lunar-gravity advantage or lifetime claim."
+    },
+    {
+      "id": "blacic_dry_glass",
+      "url": "https://www.osti.gov/biblio/6094553",
+      "reading_scope": "Primary institutional bibliographic record/author abstract retrieved through search. Direct page open timed out with400. Full conference paper not read.",
+      "use": "Hydrolytic weakening motivation; no numerical structural-strength multiplier adopted."
+    },
+    {
+      "id": "nist_aluminium_condensed",
+      "url": "https://janaf.nist.gov/tables/Al-004.html",
+      "reading_scope": "Full short official JANAF table retrieved. Read 298.15 K reference and933.45 K solid/liquid transition rows.",
+      "use": "28.693kJ/mol from298.15K solid reference to just-molten liquid; pureAl baseline, not ore-processing energy."
+    },
+    {
+      "id": "nist_aluminium_atom",
+      "url": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C7429905&Mask=1",
+      "reading_scope": "Official gas-phase thermochemistry table and molar mass read.",
+      "use": "329.70kJ/mol atomic gas formation enthalpy at298.15K; energy scale not full high-temperature vapor-processing duty."
+    },
+    {
+      "id": "landis_refining_context",
+      "url": "https://ntrs.nasa.gov/api/citations/20060004126/downloads/20060004126.pdf",
+      "reading_scope": "25-page NASA technical memorandum retrieved as text. Abstract, background and silicon-purity discussion pp1-2 read; not full report.",
+      "use": "Context only: local bulk silicon/glass supply is distinct from semiconductor-grade feedstock and complete solar-cell manufacture."
+    },
+    {
+      "id": "twi_local_head_2007",
+      "url": "https://www.twi-global.com/technical-knowledge/published-papers/eb-welding-of-large-components-without-a-vacuum-chamber-april-2007",
+      "reading_scope": "Primary full web text retrieved; section 2.2 after Figure 8 directly checked. Earlier search-excerpt attribution to the 2004 paper was corrected before delivery.",
+      "use": "Local mobile head below 1 mbar in less than ten seconds, maintaining pressure while traversing plate; an optimized competing architecture, not a whole-factory saving."
+    }
+  ],
+  "mechanics_and_transition_sources": {
+    "pressure_vessels": {
+      "title": "Pressure Vessels",
+      "author": "David Roylance, MIT",
+      "date": "2001-08-23",
+      "url": "https://ocw.mit.edu/courses/3-11-mechanics-of-materials-fall-1999/082fcd712adffa589a670f9f8dfdd49a_MIT3_11F99_pv.pdf",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading pp. 2-4, Eqs. 1-3: thin spherical and cylindrical membrane stresses. Material properties, radii and enclosure pressures below are independent illustrative assumptions."
+    },
+    "spherical_buckling": {
+      "title": "Nonlinear buckling behaviour of spherical shells: barriers and symmetry-breaking dimples",
+      "authors": "John W. Hutchinson and J. Michael T. Thompson",
+      "year": 2017,
+      "doi": "10.1098/rsta.2016.0154",
+      "url": "https://groups.seas.harvard.edu/hutchinson/papers/2017-7-PerfectSpheres.pdf",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading pp. 1-3: classical perfect-sphere elastic pressure and strong imperfection sensitivity. The 0.2 reduction below is an illustration, not a transferred design rule or safety factor."
+    },
+    "anthropogenic_exosphere": {
+      "title": "Temporary atmospheres produced by human activities on the Moon",
+      "authors": "Rosemary M. Killen, Benjamin T. Sprague and William M. Farrell",
+      "year": 2024,
+      "doi": "10.1016/j.asr.2024.08.042",
+      "url": "https://ntrs.nasa.gov/api/citations/20240014015/downloads/KillenTemporarySTI.pdf?attachment=true",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading abstract and sections 1-2: local gas from exhaust, airlocks, equipment and mining; surface adsorption and composition matter. These near-term local calculations do not simulate planetary atmosphere construction."
+    },
+    "habitat_environment": {
+      "title": "Strategies for the design and operation of resilient extraterrestrial habitats",
+      "authors": "Shirley J. Dyke et al.",
+      "year": 2021,
+      "url": "https://ntrs.nasa.gov/api/citations/20220005431/downloads/2021.03%20-%20SPIE%20-%20Strategies%20for%20the%20Design%20and%20Operation%20of%20Resilient%20Extraterrestrial%20Habitats.pdf?attachment=true",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading section 2.1: independent pressure containment, reduced self-weight, dynamic response and environmental requirements. No design validation or capital cost supplied."
+    },
+    "eb_welding_pressure": {
+      "title": "Reduced Pressure Electron Beam Welding in the Power Generation Industry",
+      "author": "C. S. Punshon, TWI",
+      "year": 2004,
+      "url": "https://www.twi-global.com/technical-knowledge/published-papers/reduced-pressure-electron-beam-welding-in-the-power-generation-industry",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading Introduction, Reduced pressure EB welding and Concluding remarks. Conventional working pressure around 0.001 mbar = 0.1 Pa; specially developed differential pumping permits working pressure up to about 1 mbar = 100 Pa. Gun vacuum and workpiece atmosphere differ; these are specific welding cases, not universal manufacturing limits."
+    },
+    "eb_welding_faq": {
+      "title": "What is electron beam welding at reduced pressure?",
+      "author": "TWI",
+      "url": "https://www.twi-global.com/technical-knowledge/faqs/faq-what-is-electron-beam-welding-at-reduced-pressure",
+      "accessed": "2026-10-31",
+      "scope": "Complete short substantive FAQ. Quotes about 0.001 mbar for conventional >75 mm thick-section welding, and 1-10 mbar for a special gun up to 150 mm. The 100-1000 Pa range is process-specific; no inference of lunar processing qualification."
+    },
+    "nasa_ebf3_rates": {
+      "title": "Electron Beam Freeform Fabrication: A Rapid Metal Deposition Process",
+      "authors": "Karen M. B. Taminger and Robert A. Hafley, NASA Langley",
+      "year": 2003,
+      "url": "https://ntrs.nasa.gov/api/citations/20040042496/downloads/20040042496.pdf",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading abstract and Electron Beam Deposition section, pp. 1-3. Demonstrated deposition rates 330-2500 cm3/hour; fine-detail/rate tradeoff. No future upper rate limit, lunar production test or complete factory system established."
+    }
+  },
+  "economic_sources": [
+    {
+      "url": "https://www.bea.gov/resources/methodologies/nipa-handbook/pdf/chapter-07.pdf",
+      "reading_scope": "December 2024 chapter, targeted printed pp7-1\u20137-4 including the three-period inventory example: production timing, withdrawal and holding gains. Full text retrieved; no complete methodology review.",
+      "use": "Original manufacturing output is not counted again when stored goods are sold; new storage, distribution or processing services require their own accounts."
+    }
+  ],
+  "local_inputs": "Full schemas and SHA256 identities are in the industrial input files and generated products. The mature comparison, prior industrial products and historical reference products remain unchanged.",
+  "limitations": [
+    "No source PDFs or datasets copied into the repository.",
+    "Web source bytes are not pinned locally; explicit numerical transcriptions and reading scopes are recorded.",
+    "Calculations are limiting physics or labelled illustrations, not a validated process, hardware design, cost forecast or lunar experiment."
+  ],
+  "continuation_sources": [
+    {
+      "url": "https://www.leybold.com/en-uk/knowledge/vacuum-fundamentals/vacuum-generation/how-to-choose-a-pump-size",
+      "reading_scope": "Full substantive web text retrieved; initial evacuation, effective speed, medium/high-vacuum gas evolution and leak limitations read. Formula images not inspected; gas-balance equations independently derived.",
+      "use": "Separate initial gas removal from continuing process/outgassing load; constant speed is an ideal diagnostic.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "url": "https://www.leybold.com/en-be/knowledge/vacuum-fundamentals/fundamental-physics-of-vacuum/how-to-calculate-vacuum-conductance",
+      "reading_scope": "Primary web text retrieved; gas, geometry and pressure-regime dependence read. No numerical nomogram transcribed.",
+      "use": "Constant molecular conductance is not a universal leakage law across atmospheric growth.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "url": "https://www.pfeiffervacuum.com/no/en/knowledge/vacuum-technology/knowledge-book/4-vacuum-generation/",
+      "reading_scope": "Primary substantive text retrieved; pumping speed, throughput and ultimate/base-pressure definitions read, especially sections4.1.2\u20134.1.3.",
+      "use": "Gas throughput is pressure times pumping speed; finite pump ultimate pressure and gas release constrain operation.",
+      "accessed": "2026-10-31"
+    },
+    {
+      "url": "https://www.pfeiffervacuum.com/no/en/knowledge/vacuum-technology/knowledge-book/4-vacuum-generation/4.9-turbomolecular-pumps.html",
+      "reading_scope": "Primary web text retrieved; gas loads, critical backing pressure, base/ultimate pressure and application restrictions read. No pump or price selected.",
+      "use": "Low surroundings may ease backing-pressure requirements subject to pump-specific operating conditions.",
+      "accessed": "2026-10-31"
+    }
+  ]
+}

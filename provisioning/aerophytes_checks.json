@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-31",
+  "scope": "First provisioning assessment of aerophyte crops, materials, living area and services on domain/provisioning. No crop, harvest quota or population allocation selected.",
+  "checks": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider provisioning/tests",
+      "result": "50 passed in10.21seconds, including9new aerophyte accounting tests."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python shared/check_layers.py",
+      "result": "1139files checked,0violations."
+    },
+    {
+      "command": "git diff --check",
+      "result": "Passed."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider provisioning/tests/test_aerophytes.py",
+      "result": "9passed in0.45seconds after the final residential-budget wording and product regeneration."
+    },
+    {
+      "activity": "Compare local source SHA-256 identities and committed ecology-context blob; verify the new research-index material paths.",
+      "result": "All identities matched and paths existed."
+    }
+  ],
+  "review": {
+    "activity": "Substantive reading of the report, independent reproduction of the crop and cluster tables, and separate reviews of agricultural accounting and economic/source claims.",
+    "resolved": [
+      "Crop numbers are allocation ceilings before extra crop physiology, night storage, wet-load gas, harvest damage and processing losses.",
+      "Carbon per projected square metre, dry/P per projected hectare and whole-colony membrane units are distinguished.",
+      "Tenant sugar and green-module payload margins are not counted twice; crop allocations compete with support of inhabited domatia.",
+      "Residential mass comparisons include generic building/floor inventories; detailed structures must fit those allowances or pay for any excess.",
+      "Routine domatia upkeep is distinct from their establishment/replacement and additional gas to access payload margins.",
+      "The ecology context is cited by path at domain/ecology 9633550, the aerial-productivity study with its light and rain losses; the crop table keeps its own light sensitivities."
+    ]
+  },
+  "limitations": [
+    "No empirical organism/crop validation, completed dwelling, economic price/demand study, full scholarly source review or coupled 301 K climate calculation."
+  ],
+  "full_repository_check": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
+    "result": "Passed: 2831 Python tests passed, 20 skipped; JavaScript, calendar, layer, provenance and ensemble checks passed.",
+    "scope": "Provisioning working tree before committing the aerophyte assessment."
+  },
+  "related_ecology_validation": {
+    "commit": "9633550",
+    "result": "The capped ecology commit passed make check: 2,839 Python tests passed and 20 skipped, 191 JavaScript tests, no layer violations, provenance and ensemble checks."
+  },
+  "capping_check_2026_10_31": {
+    "scope": "The capping commit of domain/provisioning on 31 October 2026: the synthesis rewrite, the functions framing of money and finance, the port study restored with two corrections, records and labels, bindings limited to the files whose values are read, and the merge list.",
+    "regeneration": "Twelve products regenerated in dependency order (industrial_markets, industrial_legacy, industrial_continuation, early_campaigns, pressure_advantages, distinctive_activities, industrial_combustion, slow_settling, sports_finance, amenities, the monetary reference and the aerophyte product), with five readers' inputs rebound to the changed upstream hashes. With the producer blocks masked every product's values are unchanged; the differences are the corrected text in early_campaigns, amenities and the aerophyte product and the rebound upstream hash that distinctive_activities and industrial_combustion carry in their assumptions.",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check, with ulimit -v 16000000",
+    "result": "Exit 0. Layer check: 1,198 files, 0 violations. Python: 3,306 passed, 20 skipped, in 532 s. JavaScript: 191 passed (129 for the immersion after its bake, 48 for the column, references and viewer, 14 for the calendar). Research integrity and provenance: PASS. Ensemble validator: PASS.",
+    "log": "/media/projectspace/terluna-research/session-tools/codex_review/cleanup/provisioning_make_check_1.log",
+    "tree": "The working tree of the capping commit, before this record was written."
+  }
+}

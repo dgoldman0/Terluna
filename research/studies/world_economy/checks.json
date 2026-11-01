@@ -1,0 +1,487 @@
+{
+  "date": "2026-10-31",
+  "stage": 13,
+  "scope": "Three-world economic comparison with industrial accounts, distinctive activities and a preliminary sport/media commercial scenario. Monetary institutions and transaction accounts are evaluated in the separate monetary_system study.",
+  "checks": [
+    {
+      "command": "python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "18 passed; inventory reproduction, population/lift accounting, input-change rejection, annuity and staged-debt controls."
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
+      "result": "Passed: 2849 Python tests passed, 20 skipped; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer check1141 files,0violations."
+    },
+    {
+      "command": "git diff --check",
+      "result": "Passed."
+    }
+  ],
+  "limitations": [
+    "No empirical validation of source industry, bulk capture, settlement capacity, engineered asset lifetimes or future markets.",
+    "Local resource depletion remains unpriced in the reference, with explicit sensitivity allowances.",
+    "Construction-phase renewal/operations require contemporaneous funding or additional liabilities; no settlement/production timeline or market-clearing trade model is solved.",
+    "The 301 K redesign is not propagated through every inherited requirement.",
+    "Primary sources were read at the targeted scopes recorded in sources.json and supporting reports, not as a full scholarly literature review.",
+    "Ensemble validation establishes workspace integrity, not manuscript or scientific clearance."
+  ],
+  "earlier_run": {
+    "result": "2848 passed,20 skipped,1 reproduction failure because pytest had imported the inventory before the three-world benchmark update during the run. Fresh focused and complete runs passed on the settled files."
+  },
+  "review": {
+    "scope": "Read the inventory, source identities, accounting definitions and financing mathematics; independent accounting review corrected renewable depletion, investment-income wording and tranche capitalization assumptions.",
+    "not_established": "Economic forecasts, completed source industry, population capacity or a financing decision."
+  },
+  "stage2": {
+    "focused": "31 study tests passed, including13construction tests; source/product reproduction, joint-feed costs, territorial inclusion and schedule/income scaling.",
+    "full_repository_check": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
+      "result": "Passed:2862 Python tests,20skipped; JavaScript, calendar, layer, provenance and ensemble passed. Layer1145files,0violations."
+    },
+    "review": "Independent physical and economic review checked cost conservation, source-site energy, territorial versus beneficiary accounts, ordinary capital inclusion, and construction-era renewal omissions. Broader ordinary-capital allowances replace treating material mass as complete productive capital.",
+    "limits": "Prices, source industrial technology, ordinary capital and unquantified environmental/magnetic allowances remain scenarios. Initial/end-state expenditure excludes construction-era operating/renewal funding."
+  },
+  "completed_stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "stages3_4": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "93 passed in0.42seconds in the actual provisioning worktree; the isolated integration also passed93."
+    },
+    "full_repository_check": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check",
+      "result": "Passed:2924 Python tests passed,20skipped in399.00seconds; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer1147files,0violations."
+    },
+    "numerical_controls": [
+      "Reproduction of bound inventory, construction and comparison products; schema and input identity checks.",
+      "Debt conservation, discounted installments, construction capitalization, retired tranches and mature debt age.",
+      "Three-world production/income/principal closure; counterparty receipts and required net exports; negative stress cases retained.",
+      "Independent cost/production axes, water inventory and debt effects, ordinary and incremental depreciation, domestic/external debt shares, mixed final/intermediate operating purchases.",
+      "Agent numerical sweep:486 construction/production/income/finance combinations finite; maximum relative accounting residual5.96e-16."
+    ],
+    "review": "Substantive reading of the delivered comparison, supporting methodology and source scopes; independent reviews of accounting, physical cost boundaries and productivity assumptions. Reported tables and financial/depreciation sensitivities matched stored outputs. Reviews corrected construction-era renewal funding, territorial cost versus asset value, ordinary-capital overlap, household electricity classification and the interpretation of creditor stress claims.",
+    "documentation_links": "23 local study links checked against candidate/current repository; all resolved.",
+    "comparison_sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+  },
+  "stage5": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "168 passed in1.39seconds on the final model files."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "2999 Python tests passed,20skipped in403.20seconds; JavaScript, calendar, layer, provenance and ensemble checks passed. Layer1155files,0violations."
+    },
+    "numerical_controls": [
+      "All six visitor routes: budgets, capacity, operator territory, direct value added, imported inputs and external-trade closure; zero automatic GWP addition.",
+      "72 development scenarios and idle-stock stress: matched construction grants and debt age, cash conservation, compound debt avoidance and one-time array surplus transfers.",
+      "Finite mining envelopes: reserved stock and demand/capacity caps, phosphorus/feed mass closure, economic depletion distinct from cash reserves, independent versus programme-funded buyers.",
+      "Bound input identity and full output reproduction; original GWP/NWP comparison product remains unchanged."
+    ],
+    "documentation_links": "35 local study links checked; all resolve.",
+    "review": "Substantive reading of both delivered reports and comparison update; independent accounting, hybrid-design and physical-cost reviews. All72 development scenarios plus idle-stock stress conserve mature resources and counterpart receipts; all36 mining cases independently checked for mass, nutrient, reservation, GVA/NWP/cash and debt arithmetic. Reviews resolved the idle-care comparator, domestic transport classification and one table rounding error.",
+    "limitations": [
+      "Activity, saving, visitor demand and capacity are hypothetical; no resource-feasible commissioning plan or market equilibrium.",
+      "Mining pools, protected/future reservations and nutrient loss allowances are synthetic; no surveyed exportable reserves or extraction authorization.",
+      "High phosphorus retention, separation cost and finished-product delivery allowances are unvalidated; other elemental and site constraints remain additional.",
+      "Full scholarly source review and visual PDF verification were not performed."
+    ],
+    "amenities_sha256": "ac34679a5eddecaef39e81de13d8ce0efa5a14bd5a22558ce6ccd3129fd8c48c"
+  },
+  "stage6": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "193 passed in 1.48 seconds on the final model and input files."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3024 passed, 20 skipped in 403.07s (0:06:43); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1163 files, 0 violations."
+    },
+    "numerical_controls": [
+      "Origin customer budgets, route/bed/life-support capacity and factory orders; destination fares excluded; absent factories remove capital as well as sales.",
+      "Facility GVA/NVA/cash, sponsor equity and loan obligations, renewal after loan retirement, negative funding gaps and allocation closure across 16 milestone cases.",
+      "Casting radius conversion, Stokes acceleration window, zero-gravity failure of buoyant clearance, Reynolds/Bond quantities, identical Earth mobility under adjusted immobilization time or viscosity, long-hold and late-bubble failures.",
+      "Spin-cast fixed-focus geometry and rotation-load ratios; shared constants; model/input identities and complete result reproduction."
+    ],
+    "review": "Substantive reading of both reports and their synthesis; independent economic, physical and editorial reviews. Reviews corrected a provisional diameter/radius arithmetic factor before implementation, distinguished physical constraints from optimized alternatives, and made sponsor permission and unmodelled equity dividends explicit. Source reading scopes remain recorded individually; no full scholarly review is claimed.",
+    "documentation_links": "47 local links in the five reviewed study reports/README resolve; mathematical brackets excluded from the link scan after inspection of a false positive.",
+    "limitations": [
+      "No qualified partial-gravity manufacturing product, empirical lunar process gain, industrial cost advantage or export demand established.",
+      "Casting duration, bubble sizes, geometry and tolerance are illustrative constraints; the cited material table does not establish the assumed 100-second recipe. Optimized terrestrial controls and orbital centrifuges remain competitors.",
+      "Early settlement milestones and facility prices are scenarios. Permanent resident budgets, mandatory equity distributions, calendar commissioning and integration with mature ordinary capital remain unresolved.",
+      "No source-byte pinning for external papers, full scholarly source review, experimental validation or exact-build PDF/figure inspection."
+    ],
+    "early_exports_sha256": "36097cc25ad5025327c87d9d6a7fd297c2cf08d89a1f82dd470f0749a5814d2c",
+    "partial_gravity_sha256": "103289d4453eff7bf78574f0d0bd029d139acff70a8efc1f5bff0938004d2297",
+    "original_comparison_sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+  },
+  "stage7": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "266 passed in 1.74 seconds on the settled scientific files; 73 new controls across physics, markets, stocks and legacy calculations."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3097 passed, 20 skipped in 391.06s (0:06:31); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1167 files, 0 violations."
+    },
+    "numerical_controls": [
+      "Bound-product identity and complete reproduction; historical spherical pressure/mass calibration kept separate from the thin-column bound and evolving atmospheric physics.",
+      "Pressure-vessel membrane loads, conditional dome uplift, external-pressure buckling, self-weight spans, inertia, melt capillarity, ideal pump work, batch duty and historical deposition-throughput controls.",
+      "Competitive delivered prices, finite buyer budgets and installed-stock orders, feed/power/route constraints, idle and oversized plant losses, and independent versus programme-funded purchases.",
+      "Lifetime sources and uses, capital renewal, closing debt and reserves, positive interim cash versus negative unlevered NPV; independent review of all 36 cost/scale/window cases found maximum relative cash residual 2.34e-15.",
+      "Equal-service inventory comparisons: physical attrition, incompatible material retained, shortage purchases, discounting, prepositioning and no terminal liquidation or second manufacture credit; 81 sensitivity combinations each compare four reserve lengths.",
+      "Shield fresh-feed mass distinct from gross renewal; separate normalized operating-asset and construction-package accounts; original comparison and prior-stage products unchanged."
+    ],
+    "documentation_links": "125 local links in study README, comparison, both new reports and provisioning README checked; all resolve.",
+    "review": "Substantive reading of both delivered reports, cost/duration/scale tables and synthesis; independent physical and accounting review. Reviews corrected source attribution for the TWI mobile head, exposed negative reference investment NPV, distinguished retained asset value from cash available to settle debt, and added the programme-wide costs omitted from factory-level atmospheric-delay comparisons.",
+    "limitations": [
+      "No qualified lunar product, empirical lunar-versus-Earth/orbital cost premium, complete factory or launch design, surveyed exportable reserves or established buyer demand.",
+      "Vacuum inventory clocks are not local plume, exosphere, mixing or construction-sequence simulations; the 301 K redesign remains unpropagated through historical air inventory.",
+      "Factory windows and cost reductions are scenarios. Wider costs of delaying atmospheric release, equity distributions, depletion pricing and a complete post-atmosphere retrofit/transport account remain unresolved.",
+      "Long-lived stock requires grade and storage qualification; asset income assumes complete operating facilities, customers and funded ownership. Neither surplus nor terminal recovery is guaranteed.",
+      "Primary source scopes and retrieval limits are recorded individually in industrial_sources.json. No full scholarly review, empirical validation, external-paper byte archive or exact-build PDF/figure inspection."
+    ],
+    "industrial_physics_sha256": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+    "industrial_markets_sha256": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+    "industrial_legacy_sha256": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+    "original_comparison_sha256": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+  },
+  "stage7_continuation": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "295 passed in 1.98 seconds on settled scientific files, including 29 new continuation and pumped-vacuum controls."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3126 passed, 20 skipped in 417.26s (0:06:57); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1175 files checked, 0 violations."
+    },
+    "numerical_controls": [
+      "Pumped-chamber gas balance, internal gas floor, impossible target detection and transient solution; equal-pressure zero initial evacuation with positive continuing gas load.",
+      "Independent work/time and load ratios across low-pressure surroundings and Earth comparison; historical-column loading samples retain their conditional inventory meaning.",
+      "Normalized independent continuation cash-flow example counts forgone early salvage and later terminal credits once; retrofit at the decision year and later annual costs are discounted separately.",
+      "Source replay verifies identical operating history through year50, constant63.7Mt/year thereafter and retained ordinary renewal. Separate continuation and initial-investment break-even tests, zero-rate/output and invalid-input controls.",
+      "Full new-product reproduction and bound-source rejection. Prior physics, markets, legacy and mature comparison products remain byte-identical."
+    ],
+    "review": "Substantive reading of revised engineering, economic and synthesis passages; independent engineering review checked the ODE, pressure loads, gas floors and timing. Independent accounting review checked all20 extra-cost cases and the four published examples. Final language confines short vacuum clocks to unassisted operation and retains closure only as a sensitivity.",
+    "documentation_links": "130 local links in study README, comparison, engineering and economic reports, and provisioning README checked; all resolve.",
+    "limitations": [
+      "No actual pumping/enclosure/route quote, certified pressure system or empirically demonstrated cost advantage. Constant molecular conductance and pumping speed are illustrative; real gas species, flow regimes and ultimate pressure require equipment-specific treatment.",
+      "Continuation assumes the original prices, customers,63.7Mt/year throughput and viable routes. Added cost allowances do not solve competitive repricing, retrofit liquidity, loan restructuring or independent development cash.",
+      "The prior inherited atmosphere inventory remains distinct from the 301 K redesign; linear pressure loading is not a local or evolving atmosphere simulation.",
+      "Source reading scopes are recorded in industrial_sources.json. No full scholarly review, empirical validation or exact-build PDF/figure inspection."
+    ],
+    "industrial_continuation_sha256": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
+    "preserved_products_sha256": {
+      "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+    }
+  },
+  "stage8": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "341 passed in 2.36 seconds on settled scientific files; 46 new mature-cost, physical, demand and campaign controls."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3172 passed, 20 skipped in 411.38s (0:06:51); JavaScript, calendar, layer, provenance and ensemble checks passed. Layer 1177 files checked, 0 violations."
+    },
+    "numerical_controls": [
+      "Matched 301 K gas properties, 1.2/1 atmosphere loads, ideal vacuum work, no-added-gas pumpdown and a separate continuous process-load diagnostic. A 1 Pa m3/s load requires 10 m3/s to approach 0.1 Pa; it is not assigned to the example 1 m3/s pump.",
+      "Independent gravity, self-weight beam, capillarity, Rayleigh, flight, buoyancy and centrifuge checks. Ideal hover excludes profile losses; gravity cancels from buoyant supported mass per volume. Orbital field gradient and transverse Coriolis sensitivities are explicit.",
+      "72 normalized matched delivered-cost cases and 18 yield variants count process, pressure-specific components, accepted yield, capital service and delivery once. Earth optimization and shared orbital partial gravity remain competing options.",
+      "Aerial and array structural replacement demand comes from bound installed stocks, lifetimes, eligible fractions, market shares, budgets and capacity; existing replacement and original GWP are not increased.",
+      "108 early campaign cases cap output by ramp, finite orders, budget, feed, power and routes. Initial plant, actual replacement, residual recovery and decommissioning reconcile with cash; customer advances leave output, unlevered NPV and final surplus unchanged.",
+      "Independent review reproduced published campaign rows, year-23 pre-terminal capital recovery and 24 positive-NPV cases. No tested ten-year or modest-saving campaign has positive NPV.",
+      "Additional read-only valuation of the reference annual capital-inclusive cash: at 2% discount NPV is -1.819945789752 trillion U; cash-flow IRR is 1.2769683787% real. Prices, initial capital and annual flows are held fixed. The 1% valuation reproduces the stored 0.763740266783 trillion U.",
+      "Full source/product reproduction and bound-source rejection passed; five prior industrial and comparison results remain byte-identical."
+    ],
+    "documentation_links": "234 local links across both new reports, comparison, study README, provisioning README and research README checked; all resolve.",
+    "review": "Substantive reading of both reports and updated synthesis, with independent atmospheric, vacuum and accounting reviews. Direct-ink-writing lunar evidence is restricted to the tested 80 mm bridge and short parabolas; the 133 mm result is Earth/microgravity. Numerical cost examples are hypotheses, not manufacturing quotations. Early campaign sales, operating cash, capital-inclusive surplus, asset ownership and independent financing are distinguished.",
+    "source_review": "Nineteen primary source records, including consolidated readings of the NASA lift page. Individual records distinguish abstracts, indexed primary passages, retrieved full text and limitations. Selected pages of the Kauzya 2024 author PDF were rendered and figures 6-8 visually inspected by the atmospheric reviewer. Publisher access failures and the paper residual-microgravity unit discrepancy remain recorded. No full scholarly review or supplementary-data audit.",
+    "limitations": [
+      "No complete lunar qualified product, empirically established delivered-cost advantage, factory or launch design, exportable reserve survey, actual orders or financing contract.",
+      "Early campaigns assume 10% or 25% whole-production cost savings; these are not inferred from gravity or pressure. Nominal 10/25/50-year horizons do not establish ambient-vacuum duration or require atmospheric shutdown.",
+      "The positive reference requires patient capital and chosen terminal values. Cash interest, taxes, required equity distributions and natural-resource depletion are not fully priced; buyer advances are delivery obligations and programme payments do not create independent programme income.",
+      "Inherited 301 K inventory, physical asset masses and source industrial prices have not all been recomputed. Replacement stocks and synthetic feed/route/power allowances remain engineering screens.",
+      "Repository checks establish reproducibility and workspace integrity. No empirical factory validation, complete market-clearing model or manuscript/PDF production review."
+    ],
+    "products_sha256": {
+      "mature_industry": "8bb2eb795b5cc3a588b4e283a67312733cee4f0645754728066b45be1527367b",
+      "early_campaigns": "27c30250c56f4a54ad8e673b126774498bc619daed899edff56ca21f8ff78aa6"
+    },
+    "preserved_products_sha256": {
+      "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "industrial_continuation": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
+      "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+    }
+  },
+  "stage9": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "373 passed in 2.11 seconds, including 32 new slow-settling controls. After a prose-only input-description correction and product regeneration, all 32 module tests passed again in 0.09 seconds; the complete repository run subsequently passed on those final files."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3204 Python tests passed, 20 skipped in 418.90 seconds; 191 JavaScript tests passed across immersion, column/light-transport and calendar suites. Layer, provenance and ensemble checks passed. Layer 1185 files checked, 0 violations; protection verifier checked five input hashes."
+    },
+    "numerical_controls": [
+      "Stokes limit, finite-Re drag force balance, invalid regimes, neutral buoyancy and ideal freefall; boundary-arrival flags distinguish an unbounded drift diagnostic from travel through a vessel.",
+      "Brownian diffusion, zero-flux concentration balance, distinct squared and cubed particle-size criteria, and a stable colloid control. These are dilute rigid-sphere calculations, not dense slurry or cell-growth simulations.",
+      "Extrapolated just-suspension scaling separated from uniformity and other process duties; independent mixing floors can reduce or remove the power advantage.",
+      "Ergun onset and bed-support pressure balance, process gas demand, fixed loop pressure loss, isolated-particle retention margins and a lunar entrainment failure. No gravity-retained freefall bed is assumed.",
+      "Complete batch timing, passive harvest and equal-output vessel capacity. Mixer electricity and time-dependent capital/overhead shares are disjoint; slow recovery can reverse a favorable mixing cost.",
+      "Eighteen normalized process-cost cases and six cycle-adjusted cases retain Earth optimization, freefall and rotating-array competitors. Equivalent lunar and rotating processes receive the same hypothetical yield gain; added handling, recovery and freight must fit within the stated allowances.",
+      "Input and source identities, full product reproduction, 12 source records and preserved hashes of all eight earlier industrial/comparison products."
+    ],
+    "documentation_links": "256 local Markdown links across eight study/domain/research documents checked; all resolve. TeX math delimiters were excluded after inspecting a false-positive link match.",
+    "review": "Substantive reading of the complete delivered report, equations, numerical tables, source scopes, calculation and current synthesis. The review distinguished bubble/particle speed ratios from an independent process clock, added the cost of recovery capacity, and retained identical hypothetical yield gains for equivalent rotating-array processes. No independent-agent review was performed for this stage.",
+    "source_review": "Twelve primary research, author-abstract, technical-documentation and apparatus records with individual reading/access limits in slow_settling_sources.json. The intended 15-page Jossen author PDF was retrieved after initial access failures; its abstract, selected methods, Table 1, results and conclusions were read. Its SHA-256 is a0a097900de0eb27a04d27c0d7f94713dae8349520ec512d701a91a0aa7974b6. External PDF bytes remain in temporary storage. Other records distinguish full substantive text from indexed abstracts/excerpts; no full scholarly review, supplementary-data audit or figure-image inspection is claimed.",
+    "limitations": [
+      "No empirically demonstrated lunar suspension process, qualified product, factory quotation, buyer demand or new world-product estimate. Quality and accepted-yield gains are hypotheses.",
+      "Terrestrial mixer gravity scaling and constant turbulent power number are extrapolations. Local shear, uniformity, oxygen/heat transfer, aggregation, non-Newtonian rheology, dense solids and biological response remain process-specific.",
+      "Fluid-bed particles, gas properties, retention margin and loop loss are assumptions. Cohesion, expanded-bed dynamics, chemistry, heat and real entrainment are not simulated.",
+      "Cycle costs hold other inputs and yield fixed and assume capacity scales linearly. Forced recovery, equipment service, freight, location and total capital require actual designs; rotating-array service costs are not invented.",
+      "The 1.2 atm lock remains. Early ambient vacuum does not supply a fluid for wet suspensions; volatile liquids and gas beds generally require containment. Original GWP/NWP and prior campaign results are unchanged."
+    ],
+    "products_sha256": {
+      "slow_settling": "cf87897b3c6697a9647876969a0525b5f61b3b89ea66d817bb370eb180099812"
+    },
+    "preserved_products_sha256": {
+      "partial_gravity": "103289d4453eff7bf78574f0d0bd029d139acff70a8efc1f5bff0938004d2297",
+      "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "industrial_continuation": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
+      "mature_industry": "8bb2eb795b5cc3a588b4e283a67312733cee4f0645754728066b45be1527367b",
+      "early_campaigns": "27c30250c56f4a54ad8e673b126774498bc619daed899edff56ca21f8ff78aa6",
+      "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a"
+    }
+  },
+  "stage10": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "400 passed in 2.38 seconds, including 27 new pressure-benefit controls. After adding two primary source records and the qualified nitrogen-dilution discussion, the evidence-bound product was regenerated and all 27 module tests passed again in 0.20 seconds. Calculation code and numerical inputs were unchanged by that final bibliography update."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3231 Python tests passed, 20 skipped in 387.22 seconds; 191 JavaScript tests passed across immersion, column/light-transport and calendar suites. Layer, provenance and ensemble checks passed; 1187 files checked with 0 layer violations and five protection input hashes verified. The final bibliography/product-metadata update received the additional focused reproduction check described above."
+    },
+    "numerical_controls": [
+      "Pressure-only density, buoyant volume/area and fixed-lift speed scaling, with a no-pressure-change control and invalid-domain rejection. Oxygen composition is a separate diagnostic; the design dry oxygen partial pressure matches the rounded Earth reference.",
+      "Heat-carriage and mass-flow conservation, constant mass flux/Reynolds number in matched geometry, fan pressure-work balance, opposite fixed-volume and fixed-heat outcomes, and a fixed pressure-loss floor. Electricity savings apply only to the selected cost share.",
+      "Fixed-force clamping keeps the pressure difference while raising final absolute pressure; pumpdown and reversible work improve in that example. A fixed-absolute-vacuum control retains the previously identified extra pressure burden.",
+      "Water saturation matches the rendered IAPWS triple-point and 373.1243 K reference values; inversion reproduces both specified pressures. Pressure margin and column height retain their distinct units, lunar gravity, and a hot-water boiling threshold.",
+      "Isothermal and ideal isentropic compression remain separate. The reversible saving per mole is independent of specified outlet pressure, while its fractional size declines as the outlet pressure rises; zero-work and invalid-order controls pass.",
+      "The pressure-level height satisfies the spherical isothermal hydrostatic equation. It is not an available-habitat, climate or productivity calculation.",
+      "Bound mature-pressure product and complete new-result reproduction; all nine earlier industrial/comparison products retain their stage-9 hashes."
+    ],
+    "documentation_links": "242 local Markdown links across the new report, study README, mature industry, comparison, provisioning README and research README checked; all resolve.",
+    "review": "Substantive reading of the complete delivered report, calculation, numerical tables and synthesis. Review distinguished absolute-pressure from pressure-difference duties, corrected hydraulic wording to pumps above their source, preserved unrelated JSON text, and made existing aerial-capacity inclusion explicit. No independent-agent review was performed.",
+    "source_review": "Eleven primary technical/author source records retain exact reading and access scopes. The intended IAPWS seven-page saturation PDF was retrieved to temporary storage after sandbox network resolution failed; pages 2, 3 and 7 were rendered and inspected for temperature scale, equation coefficients and numerical table. SHA-256 a10d38d73339b0713c86cfac88f9adcba137202167ccdfa1cd58238c438361d7. The USGS oxygen PDF direct request returned 403; the claim uses its indexed primary passage and no full-chapter review is claimed. NASA flammability guidance was read at the pressure/composition passage; the PMMA paper at its author/agency abstract. No complete scholarly review, full handbook audit or physical equipment validation.",
+    "limitations": [
+      "Matched-gas and fixed-temperature engineering screens isolate pressure. Local humidity, temperature, oxygen fraction, winds and composition require actual profiles. The 301 K isothermal height is not a climate sounding.",
+      "No certified flight, buoyant inhabited capacity, complete cooling plant, pump installation, laminate, gripper or gas compressor. Power coefficients, prescribed geometry, constant pump speed and water density are idealizations.",
+      "No general oxygen-productivity, fire-safety, electrical-voltage or crop-yield premium is assigned. Nitrogen dilution and external insulation are qualitative qualification candidates; existing port-fire requirements remain intact.",
+      "Atmosphere construction and sustaining costs remain in the existing accounts. Previously calculated aerial stocks already use 1.2 atm. No new GWP/NWP, buyer orders, campaign income or economic forecast is added."
+    ],
+    "products_sha256": {
+      "pressure_advantages": "db6b1c5e602ba8f960974c2e61096b5f64ca5c80ef8fbf9b1d5701cdbf52524f"
+    },
+    "preserved_products_sha256": {
+      "partial_gravity": "103289d4453eff7bf78574f0d0bd029d139acff70a8efc1f5bff0938004d2297",
+      "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "industrial_continuation": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
+      "mature_industry": "8bb2eb795b5cc3a588b4e283a67312733cee4f0645754728066b45be1527367b",
+      "early_campaigns": "27c30250c56f4a54ad8e673b126774498bc619daed899edff56ca21f8ff78aa6",
+      "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
+      "slow_settling": "cf87897b3c6697a9647876969a0525b5f61b3b89ea66d817bb370eb180099812"
+    }
+  },
+  "stage11": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests engineering/tests/test_fire.py research/studies/port_fire/test_run.py",
+      "result": "447 passed in 2.80 seconds, including 21 new composition, stoichiometry, purge and input-identity controls. The new module also passed its initial 21-test run in 0.16 seconds. After correcting the internal bibliography identifier for Link et al., the final evidence-bound product was regenerated and all 21 module tests passed in 0.16 seconds."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3252 Python tests passed, 20 skipped in 414.26 seconds; 191 JavaScript tests passed. Layer, provenance and ensemble checks passed: 1189 files checked with 0 layer violations, and five protection input hashes verified. A subsequent bibliography identifier correction changed only source metadata; the final product was regenerated and its 21 focused tests passed again in 0.16 seconds. Calculation code and numerical inputs were unchanged."
+    },
+    "numerical_controls": [
+      "Equal oxygen partial pressure preserves oxygen inventory per gas volume; composition-corrected density and oxygen mass fraction conserve oxygen. A fixed-composition pressure control increases oxygen inventory.",
+      "Complete methane balances conserve carbon, hydrogen, oxygen and nitrogen over two oxygen fractions and three excess-oxygen ratios. Air mass and local volume are distinct duties.",
+      "More wet exhaust moles coexist with slightly less local-pressure volume at the same temperature; the ratio is independent of common temperature within the ideal-gas, all-vapour reference.",
+      "Equal fractional oxygen excess gives different dry exhaust oxygen readings. No reaction kinetics, flame temperature, NOx rate, ignition limit or explosion pressure is computed.",
+      "An independent 50,000-step oxygen-inventory integration matches the analytical well-mixed purge within 1e-4 relative tolerance; zero-change and volume-extensivity controls pass. Equal fraction and equal partial pressure endpoints give distinct gas requirements.",
+      "Invalid physical domains and changed upstream product identity are rejected. The complete new result reproduces; all ten preceding economy/industrial products retain their hashes."
+    ],
+    "documentation_links": "271 local file links across nine study/domain/research documents checked; all resolve. Fragment targets and external-link availability are separate from this file-existence check.",
+    "review": "Substantive reading of the full production assessment, calculation, numerical tables, old fire model/tests, amended port descriptions and current synthesis. The audit separates a heat-release scenario from empirical fire growth, a proposed oxygen screen from material acceptance, thermal smoke-detection surrogates from detector performance, and sprinkler activation from assumed suppression. Editorial review corrected the Link et al. attribution. No independent-agent review was performed.",
+    "source_review": "Eleven primary publication/agency records with individual access limits. Harper 2016 methods/findings/conclusions and Table 2 were read; its PDF page 15 was rendered and inspected. Peatross and Beyler 1997 setup, oxygen/burning-rate discussion and conclusions were read; its Equation 2 on PDF page 9 was rendered and inspected. Their local PDF hashes are recorded in industrial_combustion_sources.json. NASA configuration guidance was read at composition, assembly and selected battery passages. Cashdollar text was obtained through web PDF retrieval, but the local download returned 403; no local bytes/hash or image review is claimed. The Olson 2024 direct publisher page returned 403 and claims remain restricted to its indexed primary abstract/setup excerpt. Other scopes remain explicit; no full scholarly literature review or experimental lunar validation.",
+    "limitations": [
+      "No empirical qualification at 121.59 kPa, 17.5% oxygen, 301 K and lunar gravity. Material geometry, support, assembly, airflow, process temperature, exposure duration and dust/deposit behaviour remain specific to the production line.",
+      "The dry binary gas and complete methane balance omit humidity, trace gases, dissociation, kinetics, soot, radiation and actual furnace temperature. Near-300 K heat capacities are used only for ambient heat carriage.",
+      "Purge endpoints are arbitrary mathematical comparisons, not inerting limits or operating settings. Perfect mixing, constant pressure/temperature, pure nitrogen and absence of leaks/desorption are assumptions; supplied mass is not a full gas-conditioning cost.",
+      "The earlier port implementation and result remain unchanged, with qualifications in its README and the engineering README. The 0.65 heat-release and slower-growth cases, 23.5% oxygen screen and post-activation suppression do not establish general industrial performance.",
+      "No general fire-loss, material-price, yield or manufacturing premium enters the economic totals. Existing atmosphere construction/maintenance and earlier industry/comparison products remain in their established accounts."
+    ],
+    "products_sha256": {
+      "industrial_combustion": "8c54e57922c63440a35824faa7c4926b1b77d9f3414c05577d36377680a25b20"
+    },
+    "preserved_products_sha256": {
+      "partial_gravity": "103289d4453eff7bf78574f0d0bd029d139acff70a8efc1f5bff0938004d2297",
+      "industrial_physics": "f908d2a2490b35ca2d4709f8b6f489ec4114b8f460b95f284376feb8d27f1f32",
+      "industrial_markets": "aa68cc9615e82da474158cb6625bfe0718721816dc2ed7126fd9ce7cd29ce231",
+      "industrial_legacy": "6124af93e08961068eea2b1f95308f89a1ef64c83356b8f2f3e062b78d5ca496",
+      "industrial_continuation": "c29e92c4ef8f788eecf64c4da2229fbce2ec79feaf8d43c82fea6a7e7f509980",
+      "mature_industry": "8bb2eb795b5cc3a588b4e283a67312733cee4f0645754728066b45be1527367b",
+      "early_campaigns": "27c30250c56f4a54ad8e673b126774498bc619daed899edff56ca21f8ff78aa6",
+      "comparison": "9c3e86576f8a9d9e1e0ba2ef370bad6d666da2a021bc667db84e5434f874117a",
+      "slow_settling": "cf87897b3c6697a9647876969a0525b5f61b3b89ea66d817bb370eb180099812",
+      "pressure_advantages": "db6b1c5e602ba8f960974c2e61096b5f64ca5c80ef8fbf9b1d5701cdbf52524f"
+    },
+    "preserved_port_product_sha256": "6298845b9ddf3f83ce270878a97f0b84ab2664032c5fc9fe05e3d3b50b5b1828"
+  },
+  "stage12": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "437 passed in 2.46 seconds, including 16 new activity-reference tests. The new module also passed its initial focused run: 16 passed in 0.06 seconds."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3268 Python tests passed, 20 skipped in 407.56 seconds; 191 JavaScript tests passed. Layer, research/provenance and ensemble checks passed: 1191 files with 0 layer violations, and five protection input hashes verified. Ensemble validation covers workspace integrity, not scientific or manuscript clearance."
+    },
+    "limitations": [
+      "The 301 K dry gas comparison does not refresh regional weather, old vehicle concepts, ecology or human comfort.",
+      "Rotating-venue fidelity tolerances are chosen illustrative values, not comfort limits, a cost model or a restriction on alternative array layouts.",
+      "Linear waves, ballistic motion and ideal flight omit real vehicle/participant dynamics, breaking waves and weather. Apparatus pressure budgets are not human diving limits.",
+      "No facility capacity, willingness to pay, market share, therapeutic benefit or dependable engineered living-host capacity is established. Existing GWP/NWP and debt accounts are unchanged."
+    ],
+    "numerical_controls": [
+      "Flight ratios agree with dimensional lift, drag, work per distance and ideal induced-hover calculations; equal-environment and density-only controls distinguish speed/power savings from fixed-speed drag.",
+      "Ballistic return position and mechanical energy close for both gravities. Prescribed takeoff speed is distinct from a prediction of effort or biomechanics.",
+      "Rotating geometry meets all selected fidelity constraints with one active boundary; a smaller radius violates that boundary. Axial-motion and zero-extent controls retain the vector Coriolis distinction. Natural rotation uses the sidereal month.",
+      "Hydrostatic pressure reconstructs both absolute-pressure budgets; equal-ambient control isolates gravity and confirms the higher lunar surface pressure reduces available depth.",
+      "Gravity-wave deep/shallow limits, wavelength closure and gravity scaling pass. No breaking waves or natural wave climate is inferred.",
+      "The complete result reproduces with bound source/product identities and named shared constants. Changed upstream identity is rejected. All 15 preceding economy result products retain their SHA-256 identities.",
+      "Reported rounded flight, water-depth and rotating-venue values were checked against the stored result; all six spot checks passed. All twelve local source-context hashes match."
+    ],
+    "documentation_links": "253 local file links across the new report and four current research/domain synthesis documents checked; all resolve. Fragment identity and external-link availability are separate from this file-existence check.",
+    "review": "Substantive reading of the full activity report, calculation, tables, comparisons and current synthesis. The assessment separates environmental fit from demand, apparatus pressure budgets from human exposure, chosen rotating-venue fidelity from comfort limits, biological proposals from capacity, and measured public services from wider resident welfare. Equal technology and rotating-array alternatives are retained; no independent-agent review was performed.",
+    "source_review": "Nine primary agency/publication or author-produced technical records read at the scopes in distinctive_activities_sources.json, plus twelve identified local context files. Targeted primary PDF text was read for artificial gravity, partial-gravity health and water-wave relations; no figure/image or complete-paper review is claimed. The direct Carrer et al. publisher retrieval failed; cave claims explicitly use the obtained NASA account, without claiming full-paper access. No complete scholarly literature review, clinical assessment or empirical validation of the Open Moon.",
+    "distinctive_activities_sha256": "290b9d8e7e628660b36073d746c52ff0b7255aa6a773a8ac92f06fb580773138"
+  },
+  "stage13": {
+    "focused_check": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider research/studies/world_economy/tests",
+      "result": "453 passed in 2.51 seconds on the final model/input/source product. The independent focused run passed all 16 new tests in 0.07 seconds before the final narrative provenance rebinding."
+    },
+    "full_repository_check": {
+      "status": "passed",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "3284 Python tests passed, 20 skipped in 407.52 seconds; 191 JavaScript tests passed. Layer, research/provenance and ensemble checks passed: 1193 files with 0 layer violations, and five protection input hashes verified. Ensemble validation covers workspace integrity, not scientific or manuscript clearance."
+    },
+    "review": "Independent sports-business and financial-accounting reviews identified the smaller starting scale, remote audience channel, professional accommodation and residual travel/training capacities. Accounting review led to explicit gaps before working-cash use, separately reported extra upfront capital and finite break-even domains. All three fixes are implemented. Final independent prose reviews checked the full sports sequence and financial/currency discussion. Revisions clarify the territory of locally supplied training, exclusion of fixed programme costs from variable costs, and the distinction between debt-payment break-even and the underwriting coverage target. The complete report and numerical tables were substantively read; script checks are recorded separately.",
+    "independent_numerical_review": "216 financing cases and 864 fixed-debt stresses passed cash/demand caps, reserve controls and funding conservation; maximum funding residual 1.13e-14. Review was of the algebra and conditional inputs, not empirical business viability.",
+    "limitations": [
+      "No costed pressure-qualified venue, visitor/athlete qualification, event schedule, observed audience, sponsor commitment or empirical demand.",
+      "The inherited visitor capital price came from a 100,000-resident milestone and does not establish the cost of the first community. Host-settlement capital, construction interest/ramp losses, actual tax treatment, equity return and peak replacement costs require separate accounts.",
+      "Reference bond service remains fixed across independent stress years; each starts with a full dedicated reserve. Gaps precede working-cash draws and additional support. Capital doubling needs separate upfront funding.",
+      "Real loan terms and the tax allowance are illustrative. U is a numeraire; no lunar currency, financial institution or future legal regime is adopted.",
+      "No GWP/NWP or planetary debt reduction is added to existing results; the venue cash account includes wages and cannot be treated as value added."
+    ],
+    "numerical_controls": [
+      "Guest capacity preserves the total bed-night allowance after team reservations; training and arena constraints can bind independently. Public demand and capacities remain separate.",
+      "Operator cash reconciles visitor and remote receipts with variable/fixed costs, replacement and the tax allowance. Capital doubling leaves receipts fixed and explicitly records 120 million U of additional upfront uses.",
+      "Gross bond principal obeys coverage, demand and funded-use caps; proceeds reconcile capital, working cash, reserve, fees and other funding. An independent payment schedule amortizes the loan and reproduces its present value.",
+      "Operating stresses retain original debt service and conserve cash, dedicated reserve draws, remaining debt gaps and operating deficits. Remaining gaps precede any working-cash use.",
+      "Break-even media receipts reproduce operating cash and debt-payment thresholds; coverage 1.0 is distinguished from the 1.5 issuance target.",
+      "Redeemable claims preserve book equity while an illiquid diversion exposes redemption shortfalls. Currency changes affect net local receipts and can reverse sign for a local-cost exporter.",
+      "The full result reproduces with named constants and upstream product identity; changed identities are rejected. All 16 preceding economy results retain their hashes.",
+      "Six report spot checks matched the final product: base receipts/cash, bond principal/net proceeds/other funding, media break-even, visitor-interruption reserve, half-media gap and audience-growth receipts/cash."
+    ],
+    "documentation_links": "254 local file links across the new report and five current synthesis/prior-study documents checked; all resolve. Fragment targets and external availability are separate from file-existence checks.",
+    "source_review": "Eight primary issuer, official, monetary or research records read at the targeted scopes in sports_finance_sources.json; six local context hashes checked. The Liberty revenue composition and deferred-revenue passages, official participant-training section, coverage and settlement discussions were inspected. No full filing audit, legal review, literature review or empirical lunar validation.",
+    "sports_finance_sha256": "0c24a5320da8d2cacf973da73e02eda3d110861f21b15c71899673b52b8da699"
+  },
+  "stage13_scope_revision": {
+    "date": "2026-10-31",
+    "prior_commit": "aace2cb",
+    "prior_schema": "terluna.research.sports-finance/1",
+    "current_schema": "terluna.research.sports-finance/2",
+    "change": "Remove redeemable-wallet and toy currency-cash examples from the current sports product. Retain venue cash, project-bond capacity and operating stresses unchanged; separate economy-scale monetary analysis. Existing stage13 record describes its historical scope and checks, not a completed central-banking study.",
+    "verification": "All six retained commercial result groups equal the schema1 product in aace2cb. Fourteen current venue/project-finance tests passed; full repository check passed. Separate monetary checks are in ../monetary_system/checks.json.",
+    "unchanged_numerical_fields": [
+      "inherited_screen",
+      "reference_bond",
+      "operating_scenarios",
+      "break_even",
+      "financing_sensitivity",
+      "investor_demand_sensitivity"
+    ],
+    "current_result_sha256": "f0e4b547dab606728e04f814787c396fe33a43f340a2f4041e1e72b776bdcdf1",
+    "full_repository_check": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n10 make check",
+      "result": "PASS; 3306 Python tests passed, 20 skipped in 581.41 s; 191 JavaScript tests passed. Layer check 1195 files, zero violations. Research integrity/provenance and five protection input hashes verified; ensemble setup validator passed.",
+      "boundary": "Repository integrity and numerical checks; no empirical lunar validation or manuscript clearance."
+    }
+  },
+  "stage13_sport_concepts": {
+    "evidence": "Proposed rules, dimensions and programme; no operating or commercial qualification.",
+    "source_identities": [
+      {
+        "path": "research/studies/world_economy/results/distinctive_activities.json",
+        "sha256": "290b9d8e7e628660b36073d746c52ff0b7255aa6a773a8ac92f06fb580773138"
+      },
+      {
+        "path": "habitation/low_gravity/results/low_gravity.json",
+        "sha256": "728d394399e5a793495a9e8999389f179a84854df14154ee45d7f8de8071ef2c"
+      }
+    ],
+    "independent_algebra_recomputation": {
+      "height_m": 1.9240017740817066,
+      "flight_time_s": 3.0784028385307303,
+      "horizontal_range_m": 6.1568056770614605,
+      "total_launch_speed_m_s": 3.2015621187164243,
+      "turn_radius_3_m_s_m": 9.597510220499057,
+      "turn_radius_6_m_s_m": 38.39004088199623
+    },
+    "assumptions": "Uses committed lunar gravity; prescribed vertical velocity 2.5 m/s, added horizontal velocity 2 m/s, no drag, equal launch/landing height. Steady level-turn examples prescribe 30 degrees bank and 3 or 6 m/s; no craft performance is established.",
+    "capacity_limit": "The proposed one-athlete, two-cell and six-player formats do not validate 20 simultaneous commercial participants.",
+    "review": "Complete report substantively read by authoring agent and root. Review clarified judging moments, goal/possession scoring, deliberate and incidental body contact, start possession and timed match duration. Local source links and both recorded product identities checked. No facility qualification or demand forecast."
+  },
+  "capping_check_2026_10_31": {
+    "scope": "The capping commit of domain/provisioning on 31 October 2026: the synthesis rewrite, the functions framing of money and finance, the port study restored with two corrections, records and labels, bindings limited to the files whose values are read, and the merge list.",
+    "regeneration": "Twelve products regenerated in dependency order (industrial_markets, industrial_legacy, industrial_continuation, early_campaigns, pressure_advantages, distinctive_activities, industrial_combustion, slow_settling, sports_finance, amenities, the monetary reference and the aerophyte product), with five readers' inputs rebound to the changed upstream hashes. With the producer blocks masked every product's values are unchanged; the differences are the corrected text in early_campaigns, amenities and the aerophyte product and the rebound upstream hash that distinctive_activities and industrial_combustion carry in their assumptions.",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 nice -n 10 make check, with ulimit -v 16000000",
+    "result": "Exit 0. Layer check: 1,198 files, 0 violations. Python: 3,306 passed, 20 skipped, in 532 s. JavaScript: 191 passed (129 for the immersion after its bake, 48 for the column, references and viewer, 14 for the calendar). Research integrity and provenance: PASS. Ensemble validator: PASS.",
+    "log": "/media/projectspace/terluna-research/session-tools/codex_review/cleanup/provisioning_make_check_1.log",
+    "tree": "The working tree of the capping commit, before this record was written."
+  }
+}

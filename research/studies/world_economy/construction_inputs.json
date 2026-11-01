@@ -1,0 +1,189 @@
+{
+  "schema": "terluna.research.world-economy-construction-inputs/1",
+  "evidence": "Explicit future-price and engineering assumptions applied to committed physical inventories. Conditional cost scenarios, not forecasts or validated industrial architectures.",
+  "numeraire": "U: the same transferable common-price real unit as the world accounts; no present launch price, future exchange rate or inflation conversion is assumed.",
+  "build_years": 500,
+  "earth_population": 9000000000,
+  "lunar_population": 8000000000,
+  "aerial_population": 4000000000,
+  "array_population": 5000000000,
+  "earth_value_added_per_person": [
+    50000,
+    100000,
+    250000
+  ],
+  "generation_cost_diagnostic": {
+    "life_years": 100,
+    "annual_real_capital_rate": 0.005
+  },
+  "physical": {
+    "air_kg": 3.1413494805269903e+18,
+    "nitrogen_kg": 2.528670076846971e+18,
+    "oxygen_kg": 6.126794036800198e+17,
+    "sea_and_lake_water_kg": 1.3815701215540812e+19,
+    "water_feed_kg_per_kg_oxygen": 1.125,
+    "source_water_mass_fraction": 0.5,
+    "shield_fleet_kg": 46300000000000.0,
+    "aerial_carrier_allowance_kg_per_person": 35000,
+    "array_shield_kg_per_person": 990000,
+    "array_structure_kg_per_person": 15000
+  },
+  "crust_water_kg": {
+    "surface_only": 0,
+    "illustrative_middle": 1.5e+19,
+    "deep_crust": 5.93e+19
+  },
+  "cost_cases": {
+    "patient_automation": {
+      "energy_U_per_MWh": 0.01,
+      "nitrogen_mass_fraction_in_source": 0.03,
+      "ore_processing_MJ_per_kg_feed": 0.2,
+      "ore_hardware_service_U_per_kg_feed": 5e-06,
+      "nitrogen_chemistry_MJ_per_kg_N": 5,
+      "oxygen_chemistry_MJ_per_kg_O": 20,
+      "chemical_hardware_service_U_per_kg_air": 2e-05,
+      "departure_propulsion_MJ_per_kg_delivered": 20,
+      "departure_hardware_service_U_per_kg_delivered": 4e-05,
+      "capture_controls_MJ_per_kg_delivered": 0.5,
+      "capture_hardware_service_U_per_kg_delivered": 4e-05,
+      "placement_MJ_per_kg_delivered": 1,
+      "placement_hardware_service_U_per_kg_delivered": 1e-05,
+      "import_contingency_fraction": 0.1,
+      "ordinary_stock_kg_per_lunar_resident": 43000,
+      "ordinary_stock_U_per_kg": 0.5,
+      "ordinary_installed_capital_U_per_resident": 300000,
+      "aerial_carrier_U_per_kg": 0.5,
+      "shield_fabrication_U_per_kg": 0.5,
+      "orbital_power_capacity_TW": 47.14,
+      "orbital_power_U_per_W": 0.01,
+      "ground_receiver_km2": 96000,
+      "ground_receiver_U_per_m2": 1,
+      "reserve_TWh": 424.6,
+      "reserve_U_per_Wh": 0.001,
+      "environment_establishment_allowance_U": 90000000000000.0,
+      "magnetic_protection_allowance_U": 18000000000000.0,
+      "array_bulk_shield_U_per_kg": 0.01,
+      "array_structure_U_per_kg": 1
+    },
+    "advanced_industrial": {
+      "energy_U_per_MWh": 0.1,
+      "nitrogen_mass_fraction_in_source": 0.01,
+      "ore_processing_MJ_per_kg_feed": 0.7,
+      "ore_hardware_service_U_per_kg_feed": 2e-05,
+      "nitrogen_chemistry_MJ_per_kg_N": 10,
+      "oxygen_chemistry_MJ_per_kg_O": 22,
+      "chemical_hardware_service_U_per_kg_air": 0.0001,
+      "departure_propulsion_MJ_per_kg_delivered": 40,
+      "departure_hardware_service_U_per_kg_delivered": 0.0002,
+      "capture_controls_MJ_per_kg_delivered": 1,
+      "capture_hardware_service_U_per_kg_delivered": 0.0002,
+      "placement_MJ_per_kg_delivered": 1,
+      "placement_hardware_service_U_per_kg_delivered": 5e-05,
+      "import_contingency_fraction": 0.25,
+      "ordinary_stock_kg_per_lunar_resident": 100000,
+      "ordinary_stock_U_per_kg": 1.5,
+      "ordinary_installed_capital_U_per_resident": 500000,
+      "aerial_carrier_U_per_kg": 3,
+      "shield_fabrication_U_per_kg": 5,
+      "orbital_power_capacity_TW": 100,
+      "orbital_power_U_per_W": 0.1,
+      "ground_receiver_km2": 240000,
+      "ground_receiver_U_per_m2": 5,
+      "reserve_TWh": 800,
+      "reserve_U_per_Wh": 0.01,
+      "environment_establishment_allowance_U": 450000000000000.0,
+      "magnetic_protection_allowance_U": 90000000000000.0,
+      "array_bulk_shield_U_per_kg": 0.1,
+      "array_structure_U_per_kg": 5
+    },
+    "expensive_energy_dilute_ore": {
+      "energy_U_per_MWh": 1,
+      "nitrogen_mass_fraction_in_source": 0.003,
+      "ore_processing_MJ_per_kg_feed": 2,
+      "ore_hardware_service_U_per_kg_feed": 0.0001,
+      "nitrogen_chemistry_MJ_per_kg_N": 20,
+      "oxygen_chemistry_MJ_per_kg_O": 30,
+      "chemical_hardware_service_U_per_kg_air": 0.0005,
+      "departure_propulsion_MJ_per_kg_delivered": 120,
+      "departure_hardware_service_U_per_kg_delivered": 0.001,
+      "capture_controls_MJ_per_kg_delivered": 3,
+      "capture_hardware_service_U_per_kg_delivered": 0.001,
+      "placement_MJ_per_kg_delivered": 3,
+      "placement_hardware_service_U_per_kg_delivered": 0.0002,
+      "import_contingency_fraction": 0.5,
+      "ordinary_stock_kg_per_lunar_resident": 200000,
+      "ordinary_stock_U_per_kg": 5,
+      "ordinary_installed_capital_U_per_resident": 1000000,
+      "aerial_carrier_U_per_kg": 15,
+      "shield_fabrication_U_per_kg": 30,
+      "orbital_power_capacity_TW": 224.2,
+      "orbital_power_U_per_W": 1,
+      "ground_receiver_km2": 436000,
+      "ground_receiver_U_per_m2": 20,
+      "reserve_TWh": 1266,
+      "reserve_U_per_Wh": 0.1,
+      "environment_establishment_allowance_U": 1800000000000000.0,
+      "magnetic_protection_allowance_U": 450000000000000.0,
+      "array_bulk_shield_U_per_kg": 1,
+      "array_structure_U_per_kg": 30
+    }
+  },
+  "rules": [
+    "The middle crust inventory is an illustrative scenario inside the physical bracket, not a measured or selected groundwater inventory.",
+    "Joint source feed is max(water feed/source water fraction, nitrogen/nitrogen grade). This assumes water and nitrogen can be obtained from the same processed feed; disjoint deposits would increase feed. Grades are recoverable fractions; extraction recovery is embedded, not separately credited.",
+    "Purchase energy includes source chemistry and propulsion, but not the incoming mass's braking energy or gravitational fall energy. Those must be recovered or rejected, and their handling hardware is charged separately. No energy-sale credit is used.",
+    "Every hardware-service unit charge includes the supplier's process equipment, replacement, operation, and capital recovery over throughput. The electricity price includes generation capital service. Do not add source plants, transport fleets, catchers or their generation capex again.",
+    "Ordinary installed capital is an explicit total allowance of 300000/500000/1000000 U per resident in the three cost cases, identically valued on Earth, Moon and array. It includes normal housing, orbital habitat structure, productive equipment, food systems, ordinary computing, intangibles and R&D. The physical mass-times-price proxy is an included diagnostic, never an extra cost. Ordinary capital excludes the separately priced aerial carrier, passive orbital shielding, optical shield, dedicated power and reserve rows. This is a judgment, not an empirical capital-stock estimate; use it instead of another ordinary-capital baseline. The fixed U/resident allowances remain fixed across the three Earth income benchmarks.",
+    "Environmental establishment and magnetic protection are unquantified allowances, not engineering cost estimates. Environmental establishment is assumed to cover initial aerial hydrogen manufacture/fill, ecosystem seeding and soil engineering; the gas fill is not independently priced. Neither allowance adds volatile import mass already counted, import delivery networks, ordinary capital or the separately priced shield/power hardware.",
+    "Capital beneficiary and asset territory are distinct. Primary capital totals assign optical shield, orbital power and magnetic protection to the array; their Moon benefit is a memo only. No Moon funding obligation or debt is inferred. Contracts and finance are separate. This module calculates construction expenditure, not territorial CFC or GDP.",
+    "The 990 t/person orbital shield is bulk material added separately. The 15 t/person habitat structure is already inside ordinary capital; its separate engineering valuation is a diagnostic excluded from totals. Shielding is never added twice.",
+    "Using the same ordinary capital value per person on Earth, Moon and array is an optimistic comparability assumption: orbital pressure hulls, redundancy and rotation may raise the array's ordinary cost. Dedicated export industry or computing beyond the common ordinary benchmark requires additional capital and output scenarios.",
+    "Orbital power price is per operating watt at the transmitting tiles and is assumed to include the installed spare generation, beam apertures and transmitter hardware. Ground receivers and critical reserve stores have their own rows. This final mature power system is distinct from the source-site generation already included in the import energy price.",
+    "Prices are frozen at the future technology assumed in each case for all 500 build years. Learning, price changes, finance, schedule overruns, catastrophic failure, supplier profits beyond unit charges and residual asset resale are not separately modeled.",
+    "Source-site energy prices require independent technology. Solar flux at 40 AU is about 1/1600 of 1-AU flux; cheap inner-system solar power does not establish cheap Kuiper-belt processing. No working planetary catch network is demonstrated."
+  ],
+  "physical_sources": [
+    {
+      "path": "resources/results/first_screen.json",
+      "sha256": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
+      "use": "air, N2, O2, seas and lakes, upper crust water"
+    },
+    {
+      "path": "resources/results/industry.json",
+      "sha256": "7ac8754b4ec1c3c4f50bd55f4803cad6e5d0a9f1709cc9e7eb0a68af8ce3e79c",
+      "use": "departure velocities, braking and source distances; ordinary stock bracket; torus structure/shield"
+    },
+    {
+      "path": "provisioning/results/power.json",
+      "sha256": "b20fa5b5f0f7b78bba0fc7f8cbd1ccbfecf6690d6bf1964a9085e043dd5d336e",
+      "use": "orbital electricity capacity, ground receivers and 7-day critical reserves"
+    },
+    {
+      "path": "research/studies/inhabited_volume/results/inhabited_volume.json",
+      "sha256": "62002e2d2edd27109ac410097826ea96a1d4b4a9799dd64c33b1cfd505ce0a29",
+      "use": "central district mass and carrier/control lift allowances; reserve lift is not material"
+    },
+    {
+      "path": "research/studies/solar_shield_array/results/array_heat.json",
+      "sha256": "8ade010fcbf805adf71a90c74e4357ad699067f5fbc8f445267fc984e80a1aa1",
+      "use": "46.3 Gt optical fleet"
+    }
+  ],
+  "primary_sources": [
+    {
+      "url": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C7732185&Mask=2",
+      "access": "NIST condensed-phase data read 2026-10-31",
+      "use": "Water enthalpy of formation -285.830 kJ/mol implies about 17.9 MJ reaction enthalpy per kg oxygen released; thermal and electrical work are distinct."
+    },
+    {
+      "url": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C7664417&Mask=1",
+      "access": "NIST gas-phase data read 2026-10-31",
+      "use": "Ammonia enthalpy of formation -45.94 kJ/mol implies about 3.28 MJ reaction enthalpy per kg N2 released; actual salts, organics and separation need additional processing."
+    },
+    {
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/",
+      "access": "NASA derivation read 2026-10-31",
+      "use": "Reaction-propulsion mass and energy must include exhaust, not only 0.5*payload*delta-v squared; no monetary cost is inferred from this source."
+    }
+  ]
+}

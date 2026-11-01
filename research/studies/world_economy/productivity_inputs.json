@@ -1,0 +1,99 @@
+{
+  "schema": "terluna.world-economy.productivity-inputs/1",
+  "evidence": {
+    "type": "judgment_scenarios",
+    "probability_interpretation": "none",
+    "statement": "Sector weights and realised relative value added are explicit assumptions, not fitted estimates or probability bounds. All three worlds use the same mature technology."
+  },
+  "array_sector_allocation": "reference_weights_accounting_only_not_array_industry_estimate",
+  "net_product_taxes": {
+    "default_share_of_gdp": 0.0,
+    "statement": "The common zero default isolates production. A caller may supply a separate net-product-tax share of GDP for each territory."
+  },
+  "sectors": [
+    {"id": "food_biomass", "label": "Food and biological products"},
+    {"id": "materials_manufacturing", "label": "Materials and manufacturing excluding food processing"},
+    {"id": "construction_housing", "label": "Construction and ordinary housing services"},
+    {"id": "energy_water_waste", "label": "Energy, water and waste services"},
+    {"id": "trade_transport", "label": "Trade and transport"},
+    {"id": "digital_technical", "label": "Digital, scientific, technical and business services"},
+    {"id": "public_social", "label": "Public, health, educational and social services"},
+    {"id": "leisure_visitor", "label": "Leisure, accommodation and visitor services"}
+  ],
+  "weight_cases": {
+    "central": {
+      "food_biomass": 0.04,
+      "materials_manufacturing": 0.12,
+      "construction_housing": 0.15,
+      "energy_water_waste": 0.06,
+      "trade_transport": 0.12,
+      "digital_technical": 0.21,
+      "public_social": 0.20,
+      "leisure_visitor": 0.10
+    },
+    "material_weighted": {
+      "food_biomass": 0.06,
+      "materials_manufacturing": 0.20,
+      "construction_housing": 0.17,
+      "energy_water_waste": 0.08,
+      "trade_transport": 0.12,
+      "digital_technical": 0.12,
+      "public_social": 0.15,
+      "leisure_visitor": 0.10
+    },
+    "service_weighted": {
+      "food_biomass": 0.02,
+      "materials_manufacturing": 0.08,
+      "construction_housing": 0.12,
+      "energy_water_waste": 0.04,
+      "trade_transport": 0.10,
+      "digital_technical": 0.30,
+      "public_social": 0.24,
+      "leisure_visitor": 0.10
+    }
+  },
+  "scenarios": {
+    "constrained": {
+      "label": "Constrained Moon",
+      "moon_gva_per_resident_ratios": {
+        "food_biomass": 0.70,
+        "materials_manufacturing": 0.70,
+        "construction_housing": 0.80,
+        "energy_water_waste": 0.65,
+        "trade_transport": 0.90,
+        "digital_technical": 0.85,
+        "public_social": 0.90,
+        "leisure_visitor": 0.90
+      },
+      "array_gva_per_resident_ratio": 0.75
+    },
+    "close_parity": {
+      "label": "Close parity",
+      "moon_gva_per_resident_ratios": {
+        "food_biomass": 0.95,
+        "materials_manufacturing": 0.90,
+        "construction_housing": 1.05,
+        "energy_water_waste": 0.95,
+        "trade_transport": 1.15,
+        "digital_technical": 1.05,
+        "public_social": 1.00,
+        "leisure_visitor": 1.30
+      },
+      "array_gva_per_resident_ratio": 1.00
+    },
+    "realised_specialisation": {
+      "label": "Realised specialisation",
+      "moon_gva_per_resident_ratios": {
+        "food_biomass": 1.20,
+        "materials_manufacturing": 1.10,
+        "construction_housing": 1.25,
+        "energy_water_waste": 1.15,
+        "trade_transport": 1.40,
+        "digital_technical": 1.25,
+        "public_social": 1.10,
+        "leisure_visitor": 1.70
+      },
+      "array_gva_per_resident_ratio": 1.50
+    }
+  }
+}

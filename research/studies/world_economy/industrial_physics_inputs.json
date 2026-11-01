@@ -1,0 +1,207 @@
+{
+  "schema": "terluna.research.industrial-physics-inputs/1",
+  "evidence": "Closed-form pressure-inventory, illustrative retained-air loading, ideal membrane/buckling and mechanical-energy calculations. No atmosphere commissioning simulation, certified structure, process qualification, construction estimate or commercial forecast.",
+  "reading_rule": "Pressure thresholds are process-screen inputs, not definitions of universally usable vacuum. Immediate/deferred linear release schedules are hypothetical, although the overall 500-year construction horizon is a standing project decision. Thin-column results are inventory equivalents and a hydrostatic spherical upper pressure bound; calibrated results hold the historical column shape fixed. Neither predicts local ambient pressure. All shell masses are pressure-only idealizations.",
+  "products": {
+    "air_inventory": {
+      "path": "resources/results/first_screen.json",
+      "sha256": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
+      "schema": "terluna.resources.first-screen/1",
+      "fields": [
+        "inventories.air_kg"
+      ]
+    },
+    "historical_air": {
+      "path": "research/baselines/feasibility/reference.json",
+      "sha256": "5878ad8ff00e42bffef193f1af39a17f0d7cf92f4b95319c486c369e2630c01d",
+      "schema": null,
+      "fields": [
+        "constants.pressure_Pa",
+        "constants.surface_T_K",
+        "inventory.mass_kg"
+      ]
+    },
+    "ring_layout": {
+      "path": "research/studies/solar_shield_array/results/ring_layout.json",
+      "sha256": "456338e771bbc4aa384b70a0cffda0ed8f62ec5737eea53e264e7f4e9acab4d6",
+      "schema": "terluna.research.ring-layout/1",
+      "fields": [
+        "design.middle_radius_km"
+      ]
+    }
+  },
+  "sources": {
+    "pressure_vessels": {
+      "title": "Pressure Vessels",
+      "author": "David Roylance, MIT",
+      "date": "2001-08-23",
+      "url": "https://ocw.mit.edu/courses/3-11-mechanics-of-materials-fall-1999/082fcd712adffa589a670f9f8dfdd49a_MIT3_11F99_pv.pdf",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading pp. 2-4, Eqs. 1-3: thin spherical and cylindrical membrane stresses. Material properties, radii and enclosure pressures below are independent illustrative assumptions."
+    },
+    "spherical_buckling": {
+      "title": "Nonlinear buckling behaviour of spherical shells: barriers and symmetry-breaking dimples",
+      "authors": "John W. Hutchinson and J. Michael T. Thompson",
+      "year": 2017,
+      "doi": "10.1098/rsta.2016.0154",
+      "url": "https://groups.seas.harvard.edu/hutchinson/papers/2017-7-PerfectSpheres.pdf",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading pp. 1-3: classical perfect-sphere elastic pressure and strong imperfection sensitivity. The 0.2 reduction below is an illustration, not a transferred design rule or safety factor."
+    },
+    "anthropogenic_exosphere": {
+      "title": "Temporary atmospheres produced by human activities on the Moon",
+      "authors": "Rosemary M. Killen, Benjamin T. Sprague and William M. Farrell",
+      "year": 2024,
+      "doi": "10.1016/j.asr.2024.08.042",
+      "url": "https://ntrs.nasa.gov/api/citations/20240014015/downloads/KillenTemporarySTI.pdf?attachment=true",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading abstract and sections 1-2: local gas from exhaust, airlocks, equipment and mining; surface adsorption and composition matter. These near-term local calculations do not simulate planetary atmosphere construction."
+    },
+    "habitat_environment": {
+      "title": "Strategies for the design and operation of resilient extraterrestrial habitats",
+      "authors": "Shirley J. Dyke et al.",
+      "year": 2021,
+      "url": "https://ntrs.nasa.gov/api/citations/20220005431/downloads/2021.03%20-%20SPIE%20-%20Strategies%20for%20the%20Design%20and%20Operation%20of%20Resilient%20Extraterrestrial%20Habitats.pdf?attachment=true",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading section 2.1: independent pressure containment, reduced self-weight, dynamic response and environmental requirements. No design validation or capital cost supplied."
+    },
+    "eb_welding_pressure": {
+      "title": "Reduced Pressure Electron Beam Welding in the Power Generation Industry",
+      "author": "C. S. Punshon, TWI",
+      "year": 2004,
+      "url": "https://www.twi-global.com/technical-knowledge/published-papers/reduced-pressure-electron-beam-welding-in-the-power-generation-industry",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading Introduction, Reduced pressure EB welding and Concluding remarks. Conventional working pressure around 0.001 mbar = 0.1 Pa; specially developed differential pumping permits working pressure up to about 1 mbar = 100 Pa. Gun vacuum and workpiece atmosphere differ; these are specific welding cases, not universal manufacturing limits."
+    },
+    "eb_welding_faq": {
+      "title": "What is electron beam welding at reduced pressure?",
+      "author": "TWI",
+      "url": "https://www.twi-global.com/technical-knowledge/faqs/faq-what-is-electron-beam-welding-at-reduced-pressure",
+      "accessed": "2026-10-31",
+      "scope": "Complete short substantive FAQ. Quotes about 0.001 mbar for conventional >75 mm thick-section welding, and 1-10 mbar for a special gun up to 150 mm. The 100-1000 Pa range is process-specific; no inference of lunar processing qualification."
+    },
+    "nasa_ebf3_rates": {
+      "title": "Electron Beam Freeform Fabrication: A Rapid Metal Deposition Process",
+      "authors": "Karen M. B. Taminger and Robert A. Hafley, NASA Langley",
+      "year": 2003,
+      "url": "https://ntrs.nasa.gov/api/citations/20040042496/downloads/20040042496.pdf",
+      "accessed": "2026-10-31",
+      "scope": "Targeted reading abstract and Electron Beam Deposition section, pp. 1-3. Demonstrated deposition rates 330-2500 cm3/hour; fine-detail/rate tradeoff. No future upper rate limit, lunar production test or complete factory system established."
+    }
+  },
+  "loading_scenarios": {
+    "end_year": 500,
+    "start_years": [
+      0,
+      10,
+      50,
+      100
+    ],
+    "thresholds_Pa": [
+      0.0001,
+      0.01,
+      0.1,
+      1,
+      100,
+      1000
+    ]
+  },
+  "illustrative_material": {
+    "density_kg_m3": 2700,
+    "allowable_stress_Pa": 100000000,
+    "elastic_modulus_Pa": 70000000000,
+    "poisson_ratio": 0.33,
+    "evidence": "Chosen isotropic aluminium-like engineering properties, not a material procurement specification, qualified alloy, long-life allowable or measured lunar manufacture."
+  },
+  "enclosures": {
+    "radii_m": [
+      25,
+      100
+    ],
+    "internal_pressures_Pa": [
+      101325,
+      121590
+    ],
+    "illustrative_buckling_knockdown": 0.2,
+    "illustrative_ballast_density_kg_m3": 1800,
+    "evidence": "1 and 1.2 standard-atmosphere pressure examples entered explicitly as design inputs; these are not added shared constants. Matched ambient means exactly the same internal/external pressure for that case; it is not an atmospheric-altitude calculation."
+  },
+  "handling": {
+    "mass_kg": 1000,
+    "lift_height_m": 10,
+    "acceleration_m_s2": 1,
+    "speed_m_s": 1,
+    "friction_coefficient": 0.5
+  },
+  "assumptions": [
+    "Retained atmospheric gas rises linearly only after the chosen release start and reaches the committed total at year 500. No unmodeled early leakage is credited as clean vacuum; water exposure, industrial outgassing, exhaust and escaping habitat gas need their own retained-gas account.",
+    "A delayed planned nitrogen/oxygen release does not establish a clean ambient vacuum. Local flux, species, dust, source distance, adsorption and cold trapping govern practical processing; incoming material held in tanks or condensed reservoirs is not yet atmospheric gas.",
+    "The thin-column relation p=M*g/(4*pi*R^2) ignores geometric extension. The historical final inventory is 1.10625 times the thin-column mass for its 121590 Pa surface pressure; holding that ratio fixed is an alternative scenario, not a model of the 301 K transition.",
+    "For spherical hydrostatic gas above radius R, p_surface=(GM/(4*pi))*integral(dM/r^4), hence p_surface <= M*g_surface/(4*pi*R^2). This bound assumes global spherical symmetry and hydrostatic equilibrium; it is not a local upper bound near a plume.",
+    "Thin isotropic pressure shells are ideal membrane structures without joints, ports, floors, foundations, liners, reinforcement, radiation shielding, thermal control, impact protection, fatigue, creep or minimum fabrication gauge. Zero pressure-only mass at equal pressure is not zero building mass.",
+    "The cylinder result covers its long barrel only, excludes end caps and fittings, and should not be compared with a complete habitat bill. Material and allowable stress are kept identical between gravity environments.",
+    "External-pressure shell results use classical elastic buckling of a complete perfect sphere and an explicitly assumed capacity reduction. They are not a certified thickness, a complete cost or a universal penalty for every chamber design.",
+    "Low gravity reduces weight, weight-derived friction and lifting energy while mass, momentum and acceleration force remain unchanged. Actual anchoring includes soil strength, cohesion, fasteners and geometry; the weight-only friction example is not a soil model.",
+    "At equal gas composition, pressure and temperature, air and lift-gas densities do not depend on gravity. Buoyant force per volume scales with gravity; supported mass per volume remains the density contrast, before envelope and control mass.",
+    "Orbital factories may provide vacuum and chosen effective gravity with rotation; neither vacuum nor partial gravity creates a lunar monopoly. Earth retains the same assumed technology and can use optimized local chambers and other processes.",
+    "Beam-span ratios retain the same section and material under uniform self-weight alone. The two alternatives preserve either absolute deflection or bending stress, not both plus every other construction requirement.",
+    "The capillary calculation uses an explicitly hypothetical aluminium-like liquid. Small Bond number denotes gravity weak relative to capillarity at that length, not a guarantee of controlled wetting or good manufacturing.",
+    "Ideal pump work assumes reversible isothermal removal from a rigid chamber, exhausting at its initial ambient pressure. It excludes inefficient compression, conductance limits, leaks, gas loads and hardware. Batch capacity ratios assume all sequential pumpdown can be removed and do not apply to a whole economy.",
+    "Historical beam deposition rates are scale controls. The head count precedes feedstock preparation, rejects and finishing and is not a proposed manufacturing architecture.",
+    "The accelerator examples apply v^2/(2a) with constant net tangential acceleration from rest. Low lunar weight does not make a payload insensitive to large launch acceleration."
+  ],
+  "illustrative_liquid": {
+    "liquid_density_kg_m3": 2400,
+    "surface_tension_N_m": 0.9,
+    "lengths_m": [
+      0.003,
+      0.02
+    ],
+    "head_height_m": 0.2,
+    "evidence": "Chosen aluminium-like liquid and geometries; not a sourced alloy specification or qualified process."
+  },
+  "pumpdown_example": {
+    "source_id": "eb_welding_faq",
+    "chamber_volume_m3": 150,
+    "initial_pressure_Pa": 101325,
+    "ideal_work_final_pressure_Pa": 0.1,
+    "reported_pumpdown_cases": [
+      {
+        "working_pressure_Pa": 0.1,
+        "pumpdown_minutes": 70
+      },
+      {
+        "working_pressure_Pa": 1000,
+        "pumpdown_minutes": 16
+      }
+    ],
+    "illustrative_process_minutes": [
+      120,
+      480
+    ],
+    "evidence": "TWI gives 70/16 minute evacuation examples for this chamber volume and target pressures. Initial pressure for the thermodynamic comparison and useful batch durations are explicit model assumptions. Ideal reversible work is not inferred from the reported pumpdown times."
+  },
+  "historical_deposition_scale": {
+    "source_id": "nasa_ebf3_rates",
+    "reported_volume_rates_m3_h": [
+      0.00033,
+      0.0025
+    ],
+    "illustrative_density_kg_m3": 2700,
+    "assumed_duty_fraction": 0.7,
+    "illustrative_annual_target_kg": 1000000000.0,
+    "evidence": "NASA 2003 demonstrated volume rates, converted with chosen aluminium density and target/utilization. This diagnostic does not cap future technology or establish finished-product quality and yield."
+  },
+  "illustrative_accelerator": {
+    "speed_m_s": 2400,
+    "accelerations_m_s2": [
+      10,
+      100,
+      1000
+    ],
+    "evidence": "Chosen constant-acceleration examples; no demonstrated payload tolerance, launch corridor, rail design or orbital capture system."
+  },
+  "beam_span_assumptions": {
+    "evidence": "Euler-Bernoulli scaling for the same beam section, material and support type under its uniform self-weight. Fixed absolute sag gives g^-1/4; fixed bending stress gives g^-1/2. Other loads and a relative-sag criterion alter the comparison."
+  }
+}

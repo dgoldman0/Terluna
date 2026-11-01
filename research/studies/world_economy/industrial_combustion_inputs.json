@@ -1,0 +1,28 @@
+{
+  "schema": "terluna.research.industrial-combustion-inputs/1",
+  "evidence": "Ideal-gas, stoichiometric and perfectly mixed purge reference calculations. No ignition, flame propagation, explosion pressure, emission rate, qualified material or lunar safety factor is calculated.",
+  "reading_rule": "SI units. Rounded binary dry O2/N2 mixtures at equal 301 K; pressure and composition come from the bound pressure-advantages product. Gravity is absent from these conservation identities and must be assessed separately. Purge endpoints are arbitrary mathematical comparisons, never qualified inerting limits.",
+  "products": {
+    "research/studies/world_economy/results/pressure_advantages.json": {
+      "schema": "terluna.research.pressure-advantages/1",
+      "sha256": "b221d23501d2a9e0a521addfbe1a1145cc266dca461053cbaebe7855a511dfae",
+      "use": "environment.reference_Pa, locked_Pa, temperature_K; gas_partial_pressures.reference_oxygen_Pa and locked_oxygen_Pa"
+    }
+  },
+  "methane": {
+    "excess_oxygen_ratios": [
+      1.0,
+      1.1
+    ],
+    "basis": "One mole CH4, complete conversion to CO2 and gaseous H2O; N2 unchanged. No dissociation, kinetics, soot, NOx, radiation or gas temperature prediction. Methane is an accounting example, not an adopted lunar fuel."
+  },
+  "purge": {
+    "vessel_m3": 1.0,
+    "target_oxygen_mole_fractions": [
+      0.1,
+      0.01
+    ],
+    "target_oxygen_partial_pressure_Pa": 1000.0,
+    "basis": "Pure N2 inflow with simultaneous well-mixed outflow; constant vessel volume, absolute pressure and temperature. No leaks, desorption, mixing dead zones or gas-separation/compression costs. Equal final mole fraction and equal final partial pressure are different services."
+  }
+}

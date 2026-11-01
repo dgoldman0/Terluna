@@ -1,0 +1,98 @@
+{
+  "schema": "terluna.research.pressure-advantages-sources/1",
+  "accessed": "2026-10-31",
+  "scope": "Targeted primary technical references for pressure, lift, pumps, heat transport and gas composition. The lunar comparisons are calculations or proposed applications, not observations from these sources.",
+  "sources": [
+    {
+      "id": "nasa_lift",
+      "title": "Lift Equation",
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/lift-equation-2/",
+      "reading": "Complete substantive equation and explanation read.",
+      "supports": "Lift proportional to density and speed squared for a specified coefficient and area; coefficients depend on actual flow and geometry.",
+      "limit": "No certified lunar aircraft, cost or biological flight outcome."
+    },
+    {
+      "id": "nasa_momentum",
+      "title": "Propeller Thrust",
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/propeller-thrust/",
+      "reading": "Actuator-disk momentum and Bernoulli derivation, density, mass flow and pressure jump read; no blade-design analysis.",
+      "supports": "Ideal induced-power scaling at fixed thrust and disk area.",
+      "limit": "Blade profile power, tip effects, actual efficiency and control are excluded."
+    },
+    {
+      "id": "doe_amca_fans",
+      "title": "Improving Fan System Performance: A Sourcebook for Industry",
+      "url": "https://www1.eere.energy.gov/manufacturing/tech_assistance/pdfs/fan_sourcebook.pdf",
+      "reading": "Selected text: system approach, conditioning-equipment resistance, fan-curve density corrections and glossary definitions of flow and density. Full 92-page text was accessible, but not read throughout or visually reviewed.",
+      "supports": "Density and actual volume flow must be included in fan selection; filters and heat exchangers add system resistance.",
+      "limit": "The matched-pressure calculation is derived here; no current industry-energy totals or equipment quotation are adopted from this historical guide."
+    },
+    {
+      "id": "iapws_saturation",
+      "title": "SR1-86(1992): Revised Supplementary Release on Saturation Properties of Ordinary Water Substance",
+      "url": "https://iapws.org/technical-guidance/release/Supp-sat",
+      "pdf": "https://iapws.org/technical-guidance/release/Supp-sat.download",
+      "reading": "Landing page and the intended seven-page PDF retrieved. PDF pages 2, 3 and 7 rendered and inspected: temperature scale, constants, vapor-pressure equation and Table 1 controls. The repository's existing water law matches the displayed coefficients; its other thermodynamic functions were not used.",
+      "sha256": "a10d38d73339b0713c86cfac88f9adcba137202167ccdfa1cd58238c438361d7",
+      "temporary_pdf": "not kept: a temporary download during source reading",
+      "supports": "Pure-water equilibrium saturation and inversion for boiling temperature. Table 1 gives 101325 Pa at 373.1243 K.",
+      "limit": "No mixture boiling, local heat-transfer coefficient, pump design or sterilization performance."
+    },
+    {
+      "id": "ksb_atmospheric_pressure",
+      "title": "Centrifugal Pump Lexicon: Atmospheric pressure",
+      "url": "https://www.ksb.com/en-global/centrifugal-pump-lexicon/article/atmospheric-pressure-1116788",
+      "reading": "Complete substantive entry and pressure table read.",
+      "supports": "Actual site absolute pressure enters head and NPSH calculations; average pressure is only a rough reference.",
+      "limit": "The extra lunar water-column height is derived from delta p divided by rho g; required pump margin, friction and gas effects remain unpriced."
+    },
+    {
+      "id": "west_vacuum_bagging",
+      "title": "Vacuum Bagging",
+      "url": "https://www.westsystem.com/instruction/epoxy-basics/vacuum-bagging/",
+      "reading": "Primary manufacturer's indexed Q&A read, including atmospheric clamping, setup and material/mold limits; direct page checked for the mechanism. No complete manual or experimental-data audit.",
+      "supports": "Vacuum bagging uses atmospheric pressure to consolidate and clamp laminates; materials, resin content, cure and tooling determine the result.",
+      "limit": "No measurement at 1.2 atm and no assumption that 20% more pressure produces 20% stronger or cheaper material."
+    },
+    {
+      "id": "nasa_compressor",
+      "title": "Compressor Thermodynamics",
+      "url": "https://www.grc.nasa.gov/www/k-12/airplane/compth.html",
+      "reading": "Complete substantive indexed equation and derivation read, including pressure ratio and efficiency.",
+      "supports": "Ideal-gas isentropic compression work depends on inlet temperature and absolute pressure ratio. Reversible isothermal work is independently derived from the ideal-gas law.",
+      "limit": "Actual compressors are irreversible; no specific process price, gas-separation credit or full pneumatic-cycle gain."
+    },
+    {
+      "id": "usgs_oxygen",
+      "title": "National Field Manual, 6.2.1.C Measurement: Dissolved oxygen",
+      "url": "https://pubs.usgs.gov/twri/twri9a6/twri9a62/twri9a6_6.2_ver3.pdf",
+      "reading": "Indexed primary passage on oxygen partial pressure, temperature and dissolved solids read. Direct PDF request returned 403; full chapter not retrieved.",
+      "supports": "Oxygen equilibrium concentration depends on oxygen partial pressure rather than total pressure alone, and on temperature and salinity.",
+      "limit": "No lunar gas-transfer rate, ecosystem productivity or automatic 20% oxygen bonus."
+    },
+    {
+      "id": "schneider_external_insulation",
+      "title": "Effect of altitude on equipment insulation level",
+      "url": "https://www.se.com/ie/en/faqs/FA239957/",
+      "reading": "Complete substantive manufacturer FAQ read; attached correction graph not inspected.",
+      "supports": "Ambient conditions affect external air insulation; sealed internal insulation has a different boundary.",
+      "limit": "A possible higher-density electrical margin is identified qualitatively. No extrapolated voltage rating or lunar standards claim."
+    },
+    {
+      "id": "nasa_flammability_configuration",
+      "title": "JSC 29353D: Flammability Configuration Analysis for Spacecraft Applications",
+      "url": "https://standards.nasa.gov/system/files/tmp/JSC%2029353D%20Flammability%20Configuration%20Analysis%20for%20Spacecraft%20Applications.pdf",
+      "reading": "Targeted extracted text on PDF page 19 (printed page 13): oxygen and diluent partial pressure, the Shuttle/ISS comparison and the dependence on material and pressure/concentration combination. No full 60-page handbook or hardware qualification review.",
+      "supports": "Oxygen partial pressure alone does not determine material flammability; nitrogen dilution can change the comparison.",
+      "limit": "No universal lunar flame-suppression factor, current material certification, or relaxation of the project fire analysis."
+    },
+    {
+      "id": "mcallister_2010_ignition",
+      "title": "The combined effect of pressure and oxygen concentration on piloted ignition of a solid combustible",
+      "url": "https://research.fs.usda.gov/treesearch/35607",
+      "reading": "Complete primary author/agency abstract and bibliographic record read. Full paper not read.",
+      "supports": "PMMA ignition experiments included constant-oxygen-partial-pressure mixtures and found nonmonotonic ignition delay as pressure decreased, with transport and chemical regimes.",
+      "limit": "Sub-atmospheric PMMA experiment; no 1.2-atm lunar material test, universal fire trend or fire-loss valuation."
+    }
+  ]
+}

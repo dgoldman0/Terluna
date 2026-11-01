@@ -1251,6 +1251,137 @@
         "Upward phosphorus return, nitrogen fixation and trace elements with the traits measured together; Wetzel's production bracket against its source, since a near-net rate would make the NPP/GPP factor discount twice."
       ],
       "next_session_task": "None before the merge; the branch is capped. The merge adds research/studies/light_limitation/biomass_comparison (binding light_limitation.json, its inputs and shared/scenarios/water.json) and then research/studies/aerial_productivity/run (binding sky_ecology, aerophytes, light_limitation, biomass_comparison, its inputs, aerial_ecology, gases_glow_dimming, domain_synthesis ledgers, provisioning power and its parameters) to settle.py's ORDER after light_limitation, gases_glow_dimming, ledgers and power, rebuilding both on main's products, four of which differ from this branch by hash only (light_limitation, gases_glow_dimming, ledgers, power); carries the nutrient-poor lakes' 7-66 g C/m2 a year of NPP into the carbon cycle's lake burial with the aquatic programme; and reruns both studies on the 301 K design run's fields once it is analysed."
+    },
+    {
+      "topic": "aerophyte_provisioning",
+      "condition": "capped_for_the_merge_2026_10_31; conditional_crop_allocation_living_area_and_services_on_the_sky_ecology_product",
+      "material": [
+        "../provisioning/aerophytes.md",
+        "../provisioning/aerophytes.py",
+        "../provisioning/results/aerophytes.json",
+        "../provisioning/aerophytes_inputs.json",
+        "../provisioning/aerophytes_sources.json",
+        "../provisioning/aerophytes_checks.json"
+      ],
+      "unresolved": [
+        "Product composition, the crop's own upkeep and night reserves, wet mass, harvest schedules and host recovery.",
+        "Living-area clusters: domatia establishment and replacement, extra gas, floors and connections, trim and complete residential services; where cultivated and inhabited aerophytes sit in the managed share of the sky.",
+        "Additional crop water, nitrogen and phosphorus delivery and the return of harvested nutrients.",
+        "Diffuse light through cultivated communities, the final 301 K weather, collection logistics and comparative costs against ground farms, sky-town farms and manufactured materials."
+      ],
+      "next_session_task": "None before the merge. The merge adds provisioning/aerophytes to settle's order after sky_ecology, the aerophyte study and inhabited_volume, and cites the ecology context at its path once the ecology branch is merged. The branch takes no further work before the merge.",
+      "findings": [
+        "Lesser aerophytes and 60 m sky-reef modules have 0.85-0.93 kg C/m2 a year to allocate after upkeep and adult replacement: 4-8 t of generic dry tissue per projected hectare a year at 25-50% allocation, against 1.2-2.4 t for 1 km round giants.",
+        "Clusters of 3 and 30 tenant modules, each with 3 green modules, carry 102 and 1,023 t, a four-person home and a community of sixteen at the inhabited-volume study's 20 and 50 t a resident, for about 21% of the green modules' residual carbon."
+      ]
+    },
+    {
+      "topic": "world_economy",
+      "condition": "capped_for_the_merge_2026_10_31; proposals_and_calculations_on_the_committed_inventory; sector_ratios_and_prices_are_judgements",
+      "material": [
+        "studies/world_economy/README.md",
+        "studies/world_economy/inputs.json",
+        "studies/world_economy/results/inventory.json",
+        "studies/world_economy/checks.json",
+        "studies/world_economy/construction.md",
+        "studies/world_economy/results/construction.json",
+        "studies/world_economy/comparison.md",
+        "studies/world_economy/productivity.md",
+        "studies/world_economy/annual_accounts.md",
+        "studies/world_economy/results/comparison.json",
+        "studies/world_economy/amenities.md",
+        "studies/world_economy/development.md",
+        "studies/world_economy/amenities_inputs.json",
+        "studies/world_economy/results/amenities.json",
+        "studies/world_economy/early_exports.md",
+        "studies/world_economy/early_exports_inputs.json",
+        "studies/world_economy/results/early_exports.json",
+        "studies/world_economy/manufacturing.md",
+        "studies/world_economy/manufacturing_sources.md",
+        "studies/world_economy/partial_gravity_inputs.json",
+        "studies/world_economy/results/partial_gravity.json",
+        "studies/world_economy/industrial_engineering.md",
+        "studies/world_economy/industrial_transition.md",
+        "studies/world_economy/industrial_sources.json",
+        "studies/world_economy/industrial_physics_inputs.json",
+        "studies/world_economy/industrial_markets_inputs.json",
+        "studies/world_economy/industrial_legacy_inputs.json",
+        "studies/world_economy/results/industrial_physics.json",
+        "studies/world_economy/results/industrial_markets.json",
+        "studies/world_economy/results/industrial_legacy.json",
+        "studies/world_economy/industrial_continuation.py",
+        "studies/world_economy/industrial_continuation_inputs.json",
+        "studies/world_economy/results/industrial_continuation.json",
+        "studies/world_economy/mature_industry.md",
+        "studies/world_economy/mature_industry_inputs.json",
+        "studies/world_economy/mature_industry_sources.json",
+        "studies/world_economy/results/mature_industry.json",
+        "studies/world_economy/early_campaigns.md",
+        "studies/world_economy/early_campaigns_inputs.json",
+        "studies/world_economy/results/early_campaigns.json",
+        "studies/world_economy/slow_settling.md",
+        "studies/world_economy/slow_settling_inputs.json",
+        "studies/world_economy/slow_settling_sources.json",
+        "studies/world_economy/results/slow_settling.json",
+        "studies/world_economy/pressure_advantages.md",
+        "studies/world_economy/pressure_advantages_inputs.json",
+        "studies/world_economy/pressure_advantages_sources.json",
+        "studies/world_economy/results/pressure_advantages.json",
+        "studies/world_economy/industrial_combustion.md",
+        "studies/world_economy/industrial_combustion_inputs.json",
+        "studies/world_economy/industrial_combustion_sources.json",
+        "studies/world_economy/results/industrial_combustion.json",
+        "studies/world_economy/distinctive_activities.md",
+        "studies/world_economy/distinctive_activities.py",
+        "studies/world_economy/distinctive_activities_inputs.json",
+        "studies/world_economy/distinctive_activities_sources.json",
+        "studies/world_economy/results/distinctive_activities.json",
+        "studies/world_economy/sports_finance.md",
+        "studies/world_economy/sports_finance.py",
+        "studies/world_economy/sports_finance_inputs.json",
+        "studies/world_economy/sports_finance_sources.json",
+        "studies/world_economy/results/sports_finance.json",
+        "studies/world_economy/sports_concepts.md"
+      ],
+      "unresolved": [
+        "The source economies and colonies as a fourth account; the build's energy and departure propulsion in resources' extraction plan.",
+        "Interworld travel sized against transport, arrival ports and the register's transport rules, before tourism balances carry financing conclusions.",
+        "The engineering models inside the study (industrial_physics, partial_gravity, slow_settling, pressure_advantages, industrial_combustion, and distinctive_activities' physical references) as engineering products the economy reads.",
+        "Territorial asset portfolios, lifetimes, depletion and the costs of environmental and safety operations; array workloads, demand and export capacity; the institutions, which the communities choose.",
+        "The 301 K design run's refresh of the inherited power, food, water and structural inputs; the sport model's twenty participants against formats of one, two and six."
+      ],
+      "next_session_task": "None before the merge. The merge rebinds the world economy's inputs.json to main's power, carbon_cycle, distributions, food_blend and terrain_through_time products and amenities_inputs.json to main's distributions and sea_phosphorus, all differing by hash only, and adds the chain to settle's order: inventory, construction, compare, amenities, early_exports, partial_gravity, industrial_physics, industrial_markets, industrial_legacy, industrial_continuation, mature_industry, early_campaigns, slow_settling, pressure_advantages, industrial_combustion, distinctive_activities and sports_finance, each rebound in its readers' inputs as it rebuilds, then the monetary study, whose context binds comparison.json and inputs.json. Deferred to the reconciliation: moving the engineering models to engineering/ (each mixes physical and cost calculations and binds the next by hash, so the move is a redesign of the modules and their products), splitting the build's energy out of construction.py into resources, sizing interworld travel, and the editorial pass on the industrial write-ups' bodies. The branch takes no further work before the merge.",
+      "findings": [
+        "Earth:Moon:array gross product 100:93:56 and net product 100:91:53 at C', the population split times an assumed 1.049 of Earth's value added per resident on the Moon and 1 in the array; the cases span 74-112 for the Moon and 42-83 for the array.",
+        "The middle inventory's 3.2e19 kg of air and water needs 46, 99 or 366 PW of source-site process power over 500 years, 82% of it departure propulsion in the advanced case; with the hubs' 20-340 PW of braking, 120-440 PW against the 501 PW civilization envelope. At an assumed 0.01, 0.1 or 1 U/MWh it costs 11, 97 or 2,964 years of future Earth's output.",
+        "A patient-debt example leaves the Moon and the array 100:75:48 of Earth's resources after replacement and external principal; full deferral at 1% fails.",
+        "The connected travel case brings 3.58 billion arrivals a year to the Moon, a flow set by spending and still to be sized against transport, arrival ports and the register's transport rules."
+      ]
+    },
+    {
+      "topic": "monetary_system",
+      "condition": "capped_for_the_merge_2026_10_31; the_functions_any_arrangement_performs_and_four_currency_arrangements_of_the_present_day_family; verified_ledger_at_normalized_sizes",
+      "material": [
+        "studies/monetary_system/README.md",
+        "studies/monetary_system/institutions.md",
+        "studies/monetary_system/external_accounts.md",
+        "studies/monetary_system/ledger.py",
+        "studies/monetary_system/run.py",
+        "studies/monetary_system/inputs.json",
+        "studies/monetary_system/sources.json",
+        "studies/monetary_system/results/reference.json",
+        "studies/monetary_system/checks.json"
+      ],
+      "unresolved": [
+        "The arrangement itself, its mandates, collective revenue and guarantees, chosen through the communities' collective decisions.",
+        "Staged domestic supply, invoicing currencies, imports, debt ownership and maturities for a quantitative comparison.",
+        "Inflation, exchange rates, interest rates, credit demand and production responses."
+      ],
+      "next_session_task": "None before the merge. The merge adds research/studies/monetary_system/run to settle's order after the world economy's comparison and refreshes its two context identities (comparison.json and the world economy's inputs.json) once those are rebound. The branch takes no further work before the merge.",
+      "findings": [
+        "Currency use, access to settlement and emergency lending, and the bearing of losses are separate functions; three worlds need not mean three currencies or three issuers.",
+        "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs."
+      ]
     }
   ]
 }

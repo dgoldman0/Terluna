@@ -1,0 +1,119 @@
+{
+  "schema": "terluna.research.sports-finance-inputs/2",
+  "evidence": "Preliminary conditional annual cash and project-finance scenarios for one sports/media venue hosted by an existing enclosed community. No qualified sports programme, facility quotation, customer demand, clinical qualification or bond issue is established. Monetary institutions are analysed in the separate monetary_system study.",
+  "reading_rule": "U is a common real accounting numeraire. Reference early-exports prices are inherited assumptions extrapolated to a much smaller facility. Operating cash includes compensation; no GDP/GVA is calculated. Rates and equal payments are real/indexed-equivalent scenarios. Reference debt remains fixed across independent operating stress years; reserves start full in each case. Capital costs exclude the host settlement and construction-period interest/ramp losses. Those require separate funding.",
+  "products": {
+    "research/studies/world_economy/results/early_exports.json": {
+      "schema": "terluna.research.early-exports/1",
+      "sha256": "64e99e86e079adf334895cf38d51cb7f191acc394f588a30363afc66c5683a2c",
+      "use": "scenarios.reference[0]: stay, nightly destination receipts, visitor capital per bed and replacement life; these remain synthetic assumptions"
+    }
+  },
+  "venue": {
+    "guest_beds": 100,
+    "occupancy_ceiling": 0.5,
+    "team_guest_nights": 2000,
+    "route_arrivals_year": 1500,
+    "training_completions_year": 1600,
+    "arena_days_year": 300,
+    "arena_hours_day": 8,
+    "arena_simultaneous_participants": 20,
+    "professional_participant_hours": 12000,
+    "guest_arena_hours": 12,
+    "resident_core_crew": 20,
+    "basis": "Twenty resident performers/production staff lease accommodation and support through the host-service allowance; their accommodation is not charged against guest beds. Visiting teams/production receive 2000 bed-nights inside the occupancy allowance. Guest travel, training and arena capacities are independent ceilings, not qualified operating limits. Arena participant-hours are a preliminary allocation, not a collision-safe schedule. Travel and training ceilings are residual public-guest capacities after professional-team and resident-cohort requirements."
+  },
+  "production_capital_U": 20000000.0,
+  "production_asset_life_years": 10,
+  "working_cash_U": 5000000.0,
+  "rights_receipt_U_per_audience_equivalent": 20.0,
+  "costs": {
+    "visitor_cash_cost_fraction": 0.6,
+    "media_cash_cost_fraction": 0.4,
+    "fixed_operating_fraction_capital": 0.01,
+    "core_programme_U_year": 4000000.0,
+    "host_services_U_year": 2000000.0,
+    "tax_allowance_fraction": 0.2,
+    "basis": "Variable costs include compensation, training and purchased services. Core programme covers recurring performer/production, emergency and programme provision; host services include the resident cohort accommodation and utility lease. Adequacy is unqualified. Replacement equals straight-line economic depreciation. Tax allowance is 20% of positive operating surplus after depreciation, with no interest deduction or loss relief; this is not an adopted tax regime. Insurance, rescue and outage coverage require qualification within the allowances or additional funding."
+  },
+  "cases": {
+    "reference": {
+      "visitor_demand_year": 1000,
+      "rights_receipts_U": 20000000.0,
+      "sponsorship_receipts_U": 5000000.0,
+      "capital_scale": 1
+    },
+    "visitor_interruption": {
+      "visitor_demand_year": 0,
+      "rights_receipts_U": 20000000.0,
+      "sponsorship_receipts_U": 5000000.0,
+      "capital_scale": 1
+    },
+    "media_half": {
+      "visitor_demand_year": 1000,
+      "rights_receipts_U": 10000000.0,
+      "sponsorship_receipts_U": 2500000.0,
+      "capital_scale": 1
+    },
+    "media_lost": {
+      "visitor_demand_year": 1000,
+      "rights_receipts_U": 0,
+      "sponsorship_receipts_U": 0,
+      "capital_scale": 1
+    },
+    "shared_venue_shutdown": {
+      "visitor_demand_year": 0,
+      "rights_receipts_U": 0,
+      "sponsorship_receipts_U": 0,
+      "capital_scale": 1
+    },
+    "audience_growth": {
+      "visitor_demand_year": 3000,
+      "rights_receipts_U": 100000000.0,
+      "sponsorship_receipts_U": 10000000.0,
+      "capital_scale": 1
+    },
+    "capital_double": {
+      "visitor_demand_year": 1000,
+      "rights_receipts_U": 20000000.0,
+      "sponsorship_receipts_U": 5000000.0,
+      "capital_scale": 2
+    }
+  },
+  "bond": {
+    "real_rate": 0.05,
+    "years": 10,
+    "coverage": 1.5,
+    "reserve_years": 0.5,
+    "fee_fraction": 0.02,
+    "investor_demand_U": 60000000.0,
+    "rate_term_cases": [
+      [
+        0.02,
+        10
+      ],
+      [
+        0.05,
+        4
+      ],
+      [
+        0.05,
+        10
+      ],
+      [
+        0.1,
+        10
+      ],
+      [
+        0.05,
+        20
+      ]
+    ],
+    "demand_cases_U": [
+      10000000.0,
+      60000000.0,
+      200000000.0
+    ],
+    "basis": "Illustrative operating/refinancing snapshot, not construction underwriting or investor commitments. Gross principal is capped by cash coverage, investor appetite and funding uses. Reserve earns zero real return, starts full, is pledged only to debt service and must be replenished after use. One-year stress has no modeled insurance payout, recovery or default restructuring. No equity dividend, growth allocation or planetary-development transfer is assumed. Working cash is funded separately and is not drawn in this one-year stress; reported remaining gaps precede any use of that liquidity. Capital-scale stress reports additional upfront capital separately and assumes it is provided outside the fixed reference bond."
+  }
+}
