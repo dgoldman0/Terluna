@@ -4333,9 +4333,9 @@ The final configuration, the similarity smoke runs' flags with the snow from its
 
 **The design sunlight.** S* = 0.958 (1 + 0.35 K × 0.0085 − 2.26/186.97) = 0.949 (0.9489–0.9497), 5.8% above the design years' 0.897 against the plan's 3.5–4.5%, the refit's change entering as sunlight of equal efficacy. It is a first-order estimate, and the design years' own mean is the result.
 
-**The exobase's inputs.** The bridge's top two levels hold 168.4 and 195.5 K and 0.063 and 4.6 ppmv of vapour, against 165.9 and 194.0 K and 0.034 and 3.7 ppmv in the cold cloud's year 15, and 162.2 and 192.1 K and 0.013 and 3.9 ppmv in the design years of 20 October. That is well past the 0.5 K and 10% within which the 14 October check carries over, so the exobase is worked again from the design years.
+**The exobase's inputs.** The bridge's top two levels hold 168.4 and 195.5 K and 0.063 and 4.6 ppmv of vapour, against 165.9 and 194.0 K and 0.034 and 3.7 ppmv in the cold cloud's year 15, and 162.2 and 192.1 K and 0.013 and 3.9 ppmv in the design years of 20 October. That is well past the 0.5 K and 10% within which the 14 October check carries over, so the exobase is read again on the design years (below).
 
-**The design run** (`A28R_301k_design_l15_snow_s949`): fifteen years at 0.949 from the bridge's year-5 restart with `--longwave-fit l15_design`, its years 5–14 the design years. A watch (`watch_design.py`) logs each year and pauses the run if, over the latest four years, the land's ground falls faster than 0.08 K a year while its clouds' shortwave effect strengthens by more than 0.15 W/m² a year, the sunlight run's signature, or if the ground lies more than 0.75 K from 301.25 K.
+**The first design run** (`A28R_301k_design_l15_snow_s949`) was to take fifteen years at 0.949 from the bridge's year-5 restart with `--longwave-fit l15_design`, under a watch (`watch_design.py`) that logs each year and pauses the run if, over the latest four years, the land's ground falls faster than 0.08 K a year while its clouds' shortwave effect strengthens by more than 0.15 W/m² a year, the sunlight run's signature, or if the ground lies more than 0.75 K from 301.25 K. The watch paused it at year 4 (below).
 
 ```sh
 S=/media/projectspace/terluna-research/session-tools/snow_sublimation
@@ -4352,6 +4352,78 @@ B=A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_bridge_s95
 <climate venv>/bin/python $S/refit_forcing.py $B 5
 <climate venv>/bin/python $S/design_sunlight.py $B
 SUNLIGHT=0.949 START=/media/projectspace/terluna-research/gcm-runs/$B/model/MOST_REST.00005 $S/run_design.sh   # fifteen years, watched
+```
+
+#### The design run (1 November)
+
+**The first run at 0.949** warmed from 301.00 K in its year 0 to 302.10 K in its year 4, its imbalance at the top falling only from +3.01 to +1.50 W/m². Its year 0 already held a cloud longwave effect 4.75 W/m² larger than the bridge's year 5, a response to the refit that the fixed-state reading behind S* leaves out. The watch's land rule never fired, the land warming 0.23–0.31 K a year with its clouds within 0.11 W/m² a year, and its guard paused the run at year 4, 0.85 K above the target. The rule set before the run's year 2 was read, for a pause with the ground off the target, takes S** = S (1 − N_t / ASR), with N_t the mean imbalance over years 1 to the pause plus λ (their mean ground − 301.25 K) and λ = ASR k at k = 0.0085 (0.0073–0.0096). Years 1–4 at 301.77 K and +2.05 W/m², absorbing 183.47 W/m², leave +2.87 W/m² (2.76–2.98) at the target, and S** = 0.934 (0.9336–0.9347).
+
+**The cold cloud's factors with Massman's diffusivity.** The factors the design runs take ([cold_cloud_A28R_301k_s0897.json](../results/gcm/cold_cloud_A28R_301k_s0897.json), 20 October) were computed with the raindrop solver's Chapman–Enskog vapour diffusivity, 17.6% below Massman's measured fit, which domain/atmosphere adopted about 25 October. Recomputed offline with that alone changed, the water factors move by −0.10%, −7.67% and +0.61% and the radius factors by −0.01%, +0.80% and −1.51% (layers 1–3). The second layer's water factor falls from 36.6 to 33.8, inside its stated range of 12.8–52.8, and the factors' first-order effect at the ground moves by +0.47 to +0.61 K. Both exceed the thresholds set before the recomputation, 5% and 0.3 K, so the corrected run stopped during its year 4 while the choice was made. The difference is carried as a stated limit of the design years, and at the reconciliation the factors are redone with Massman's fit as a sensitivity on them (register, 1 November).
+
+**The run** (`A28R_301k_design_l15_snow_s934`) took fifteen years at 0.934 from the bridge's year-5 restart with `--longwave-fit l15_design` under the same watch, resuming from its folder after that stop, and five more from its folder because its last years still cooled. The watch never paused it. Its ground held 300.87–301.02 K through year 11, fell to 300.74 K by year 16 and stayed at 300.73–300.78 K through year 19, while its imbalance went from −0.13 W/m² in year 10 to −0.45 in year 15 and then to +0.13, +0.18 and −0.16 in years 17–19. Over the step the sea cooled from 302.86 to 302.61 K and the land from 299.85 to 299.57 K. The sea's clouds reflected more, their shortwave effect strengthening from −55.3 W/m² in year 11 to −56.6 in year 15 and easing to −55.9 to −56.0 in years 17–19, while the land's held at −44.3 to −44.9 W/m² with their cover at 0.355–0.358 and the soil water at 0.153–0.159 m (`drift_check.py`). The top level cooled from 166.55 to 166.2–166.3 K and its vapour fell from 0.039 to 0.036–0.037 ppmv. What drove the step is not traced.
+
+**Settling.** The settling criterion asks for a ten-year ground trend under 0.1 K a decade and a mean imbalance over the last five years under 0.2 W/m², read against the run's own leftover as well as zero. Years 10–19 fail on the trend, −0.31 K a decade, and pass on the imbalance, −0.14 W/m² over years 15–19, whose ground is flat (0.00 K a decade) at 300.76 K. `compare --settle` is not determined on these years: over years 5–19 it reads 301.1 K with a feedback of −0.45 W/m² per K, and over years 10–19 its feedback takes the wrong sign, because the step does not follow one feedback. The design years are the run's years 10–19 (register, 1 November), at 300.84 K and −0.21 W/m², 0.41 K below the 301.25 K target, with years 15–19 as their settled end.
+
+| | 20 October design years (A28R_301k_s0897, years 5–14, at 0.897) | Design years (A28R_301k_design_l15_snow_s934, years 10–19, at 0.934) |
+|---|---|---|
+| Surface temperature (K) | 301.25 | 300.84 |
+| Sea surface (K) | 302.6 | 302.7 |
+| Air over land (K) | 300.9 | 299.9 |
+| Air within 12° of the equator (K) | 300.8 | 299.6 |
+| Air poleward of 70° (K) | 300.5 | 300.9 |
+| Top-of-atmosphere balance (W/m²) | 0.02 | −0.21 |
+| Planetary albedo | 0.298 | 0.401 |
+| Cloud effect, sunlight (W/m²) | −18.2 | −48.9 |
+| Cloud effect, infrared (W/m²) | 29.2 | 46.6 |
+| Cloud effect, net (W/m²) | 11.1 | −2.3 |
+| Cloud cover | 0.496 | 0.371 |
+| Sunlight absorbed at the ground (W/m²) | 107.7 | 86.6 |
+| Precipitation (mm/day) | 2.70 | 2.00 |
+| Water vapour (kg/m²) | 248 | 286 |
+| Equatorial land air, sunlit 3-day means (K) | 301.8 | 300.4 |
+| Equatorial land air, dark 3-day means (K) | 300.2 | 298.5 |
+| Equatorial land, range of 3-day means at a place in a year (K) | 5.3 | 4.6 |
+| Land at 55–65°, the same range (K) | 7.0 | 6.1 |
+| Coldest 3-day mean anywhere (K) | 292.3 | 292.4 |
+| Warmest 3-day mean anywhere (K) | 309.3 | 308.1 |
+| Air over near-side land, within 90° of 0° E (K) | 301.8 | 300.8 |
+| Air over far-side land (K) | 300.2 | 299.1 |
+| Air over land, annual means at a place: 5th percentile of the area (K) | 298.0 | 296.9 |
+| The same, 95th percentile (K) | 303.2 | 302.1 |
+| Land under 0.5 mm/day of rain (share of the land) | 0.268 | 0.302 |
+
+**Against the 20 October design years.** The two climates sit within 0.41 K of each other because the sunlight, 4.1% higher, makes up for clouds that now cool. Cover falls from 0.50 to 0.37 while the clouds' shortwave effect grows from −18.2 to −48.9 W/m² and their longwave effect from +29.2 to +46.6, so their net turns from +11.1 to −2.3 W/m² and the ground absorbs a fifth less sunlight. With less sunlight at the ground the water cycle slows: the rain falls 26%, to 2.00 mm/day, while the column holds 15% more vapour. The seas lose most of it, raining 1.51 mm/day against 2.80 and evaporating 2.68 against 3.55. The land rains 2.30 mm/day against 2.64, its rain now exceeding its evaporation by 0.73 mm/day against 0.47, so more of the seas' vapour falls on land. The land's air is 1.0 K cooler, 1.2 K within 12° of the equator, and 0.4 K warmer poleward of 70°. Against the design sunlight of 0.970 the design years take 3.7% of dimming, where the 20 October design years took about 7.5%.
+
+**The land's water** (`design_years.py`). The rain over a Priestley–Taylor demand from each cell's yearly net radiation, in UNEP's aridity classes, puts 57.8% of the land in drylands against 43.0% (Earth's cover about 41% of its land, by the Millennium Ecosystem Assessment of 2005). Semi-arid land doubles from 12.0% to 25.1%, arid land grows from 16.4% to 19.1% and dry sub-humid from 6.7% to 9.4%, while hyper-arid land falls from 8.0% to 4.2% and humid land from 57.0% to 42.2%: the demand fell with the sunlight, from 2.76 to 2.22 mm/day over the land, easing the driest places, while the land receiving 730–1460 mm of rain a year shrank from 31% to 10% and the land receiving 182–730 mm grew from 18% to 34%. The land's rain pattern correlates with the old one at 0.69, and on 54% of the land the rain changed by more than half. The semi-arid land receives 243 mm a year against a demand of 714 at 27.1 °C, 83% of it by day in storms that peak just after noon. Through the two-week night its evaporation falls to 0.14–0.16 mm/day and its soil water holds at 14.5–15.6 mm; the sunny morning before the storms dries it to 9.5 mm in the class mean and to 4.7 mm or less in half its cells, and the afternoon's rain refills it by sunset. PlaSim's soil is a 0.5 m bucket that runs off only when full, so the drylands carry no runoff, ponds or groundwater; storm water running off dry ground into channels and hollows is planned for after the reconciliation (register, 1 November).
+
+**The two models at the box sites.** Over the Near-side Sea site at 5° S, 45° W the design years rain 1.41 mm/day (3.13 in the 20 October design years), half of it at night. In the last tenth of the lunar day before midnight, 144–180°, they rain 2.52 mm/day, where CM1's boxes rained 0.1–0.2 mm/day from 135° to midnight on every grid and forcing tried ([the late evening on finer grids](../crm/README.md#the-late-evening-on-finer-grids-and-where-the-models-part-28-october)). Those boxes were forced by earlier GCM runs, so the comparison stands until boxes forced by the design years test it. At the land site at 0° N, 0° E, 97% of the rain falls by day, at the hours the land box rained.
+
+**The checks.**
+- **The longwave.** On years 5, 9, 14 and 19 the l15_design correction leaves its largest layer mean within 1.73 W/m² of correlated-k (year 9's sea on columns of every kind), against the 2.5 W/m² rule; year 19's largest are 0.74 W/m² on 1,346 cloud-free columns and 1.06 on 1,253 of every kind ([longwave_check_A28R_301k_design_l15_snow_s934.json](../results/gcm/longwave_check_A28R_301k_design_l15_snow_s934.json)).
+- **The exobase.** The design years' top level holds 166.2–166.5 K and 0.036–0.039 ppmv of vapour, inside the 0.02–0.07 ppm to which the middle atmosphere's cold trap holds the water entering the upper air behind the stack, and their ground lies within the 268–308 K across which the middle atmosphere's base moves by under 0.4 K. The exobase therefore stays inside the bracket the middle atmosphere's cases computed: across the three design cases the 0.3 Pa base lies at 145.7–197.2 K with the cold trap's water, and 1.2–2.0 K warmer if methane broke entirely above the tropopause ([methane_water.json](../../atmosphere/middle_atmosphere/results/methane_water.json)).
+- **The snow's Earth-derived choices** (`leverage_table.py`, years 10–19). Of the 0.842 mm/day of frozen precipitation formed, the adopted scheme sublimates 47.5%, 13.1 W/m² of latent cooling below the clouds, and melts the rest, none reaching the ground. The unfed shadows move that cooling by −0.09 to +0.41 W/m², all the snow as flakes the largest; PlaSim's gamma would move it by −7.3 W/m², and the box-mean air's factor, applied offline, by about −2.1 W/m², the largest stated limit. The falling rain loses 53% of its water.
+
+**Limits.** The design years carry the cold cloud's diffusivity limit (above), the open gap with CM1 over the sea's late evening and in the upper air, a soil that sheds no water below its capacity, and a step down in their years 11–16 whose cause is not traced.
+
+```sh
+S=/media/projectspace/terluna-research/session-tools/snow_sublimation
+D=/media/projectspace/terluna-research/session-tools/design_run
+R=/media/projectspace/terluna-research/gcm-runs
+B=A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_bridge_s958
+<climate venv>/bin/python $S/corrected_sunlight.py A28R_301k_design_l15_snow_s949          # S** from the paused run
+SUNLIGHT=0.934 START=$R/$B/model/MOST_REST.00005 $S/run_design2.sh             # fifteen years, watched; RESUME=1 resumes a stopped run
+RESUME=1 YEARS=20 SUNLIGHT=0.934 START=$R/$B/model/MOST_REST.00005 $S/run_design2.sh   # five more years (about 45 minutes)
+<climate venv>/bin/python $S/drift_check.py A28R_301k_design_l15_snow_s934 10,11,12,13,14,15,16,17,18,19
+<climate venv>/bin/python -m climate.gcm.compare --settle A28R_301k_design_l15_snow_s934:10-19
+<climate venv>/bin/python -m climate.gcm.compare A28R_301k_s0897:5-14 A28R_301k_design_l15_snow_s934:10-19
+<climate venv>/bin/python -m climate.gcm.plasim_longwave check --case A28R_301k_design_l15_snow_s934:5 \
+    --case A28R_301k_design_l15_snow_s934:9 --case A28R_301k_design_l15_snow_s934:14 --case A28R_301k_design_l15_snow_s934:19 \
+    --correction l15_design=climate/results/gcm/longwave_${B}_refit.json \
+    --output climate/results/gcm/longwave_check_A28R_301k_design_l15_snow_s934.json     # about three minutes
+<climate venv>/bin/python $S/leverage_table.py A28R_301k_design_l15_snow_s934 10-19
+<climate venv>/bin/python $D/design_years.py A28R_301k_design_l15_snow_s934:10-19 A28R_301k_s0897:5-14   # about two minutes
+# the cold cloud's factors with Massman's diffusivity: cold_cloud.py on A28R_301k_s0897 years 5-14 in a scratch export of this
+# branch with domain/atmosphere's drops.py (session-tools/cold_cloud_massman/; its log and product there)
 ```
 
 ### Cloud amount: what published models say
