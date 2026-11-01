@@ -4321,6 +4321,39 @@ $S/smoke_gcm_snow.sh                         # one lunar day each in PlaSim
 <climate venv>/bin/python $S/smoke_compare_snow.py
 ```
 
+#### The design run's sunlight, its bridge and the longwave refit (31 October)
+
+The final configuration, the similarity smoke runs' flags with the snow from its flakes and its shadows, took its design sunlight from two short runs, by rules set before their years were read (`rules_design_sunlight.txt` on the research drive, each later addition and outcome timed there).
+
+**The sunlight run** (`A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_s929`, six years at 0.929 from the fifteen-level restart of the cold cloud's year 19). Its ground held 298.27 K for three years and then fell to 298.02 K, while its imbalance at the top grew from +0.34 to −1.08 W/m² instead of shrinking. The land carries the drift. Its clouds' shortwave effect strengthened from −39.8 to −42.2 W/m², most of it in the first year, as low cloud at σ 0.77–0.92 grew 8–17% in air that cooled 0.3 K and dried by 0.5–1.4%; its soil water rose from 0.141 to 0.155 m, the level the four-year gust runs of 28 October reached in their first year; the sea moved 0.08 K. Its years 3–5, their imbalance carried at 0.0085 of the absorbed sunlight a kelvin, settle at 297.61 K, which gave the bridge 0.958 (0.954–0.961). Over years 1–5 the imbalance's growth of 0.99 W/m² is the clouds' (`drift_mechanism.py`): the land's reflect 0.74 W/m² more and the sea's trap 1.31 W/m² less longwave, while the clear sky's emission fell 0.19 W/m² with the cooling. The land's lower air held its relative humidity within 0.01 at every level, its process budgets within a few percent, and the top two levels lost 17–21% of their vapour. What drives the two cloud changes is not yet traced.
+
+**The bridge** (`…_snow_bridge_s958`, six years at 0.958 from the 301 K design years' last restart, A28R_301k_s0897's year 14, carried onto the fifteen levels by `levels.py restart` with every column integral kept to 10⁻¹³ of its size). Its ground rose through 300.54, 300.67, 300.81, 300.87, 300.87 and 300.92 K, its imbalance fell from +3.41 W/m² to +0.12, +0.13 and −0.21 over years 3–5, and the land's clouds held at −42.3 to −42.7 W/m² with its soil water at 0.154–0.158 m from the first year: the sunlight run's drift does not appear at the design state. Its years 3–5 settle at 300.90 K. The gate set for it, slopes over years 3–5 of no more than 0.1 W/m² or 0.1 K a year downward, failed on the imbalance, −0.16 W/m² a year from year 5's value, while the ground rose 0.025 K a year.
+
+**The longwave refit** ([longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_bridge_s958_refit.json](../results/gcm/longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_bridge_s958_refit.json); `plasim_longwave refit`, the runner's `--longwave-fit l15_design`). On the bridge's year 5 the provisional correction leaves its largest layer mean at 3.43 W/m² over land and 5.52 over the sea on 1,449 cloud-free columns, and 3.65 and 4.65 on 1,253 columns of every kind, past the 2.5 W/m² rule, with the outgoing longwave 1.9–2.4 W/m² above correlated-k's. The refit leaves 0.05–0.12 W/m² on its own columns and 0.97–1.21 on the sample of every column. At year 5's state it removes 2.26 W/m² of escape, 2.13 over land and 2.46 over the sea (`refit_forcing.py`): it takes escape from most of the air between σ 0.2 and 0.92 and adds some at the top two levels and the three lowest.
+
+**The design sunlight.** S* = 0.958 (1 + 0.35 K × 0.0085 − 2.26/186.97) = 0.949 (0.9489–0.9497), 5.8% above the design years' 0.897 against the plan's 3.5–4.5%, the refit's change entering as sunlight of equal efficacy. It is a first-order estimate, and the design years' own mean is the result.
+
+**The exobase's inputs.** The bridge's top two levels hold 168.4 and 195.5 K and 0.063 and 4.6 ppmv of vapour, against 165.9 and 194.0 K and 0.034 and 3.7 ppmv in the cold cloud's year 15, and 162.2 and 192.1 K and 0.013 and 3.9 ppmv in the design years of 20 October. That is well past the 0.5 K and 10% within which the 14 October check carries over, so the exobase is worked again from the design years.
+
+**The design run** (`A28R_301k_design_l15_snow_s949`): fifteen years at 0.949 from the bridge's year-5 restart with `--longwave-fit l15_design`, its years 5–14 the design years. A watch (`watch_design.py`) logs each year and pauses the run if, over the latest four years, the land's ground falls faster than 0.08 K a year while its clouds' shortwave effect strengthens by more than 0.15 W/m² a year, the sunlight run's signature, or if the ground lies more than 0.75 K from 301.25 K.
+
+```sh
+S=/media/projectspace/terluna-research/session-tools/snow_sublimation
+$S/run_sunlight.sh                                              # six years at 0.929 (about 55 minutes)
+<climate venv>/bin/python $S/sunlight_fit.py                    # where it settles, and the bridge's sunlight
+<climate venv>/bin/python $S/drift_check.py A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_s929
+<climate venv>/bin/python $S/drift_mechanism.py <run>:1 <run>:5 <bridge>:5     # the land's lower air by level and process
+<climate venv>/bin/python -m climate.gcm.levels restart \
+    /media/projectspace/terluna-research/gcm-runs/A28R_301k_s0897/model/MOST_REST.00014 \
+    /media/projectspace/terluna-research/gcm-runs/A28R_301k_s0897_l15_restart/MOST_REST.00014 --to l15
+SUNLIGHT=0.958 $S/run_bridge.sh                                 # six years from the design years' restart
+B=A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_bridge_s958
+<climate venv>/bin/python -m climate.gcm.plasim_longwave refit $B --year 5     # under a minute
+<climate venv>/bin/python $S/refit_forcing.py $B 5
+<climate venv>/bin/python $S/design_sunlight.py $B
+SUNLIGHT=0.949 START=/media/projectspace/terluna-research/gcm-runs/$B/model/MOST_REST.00005 $S/run_design.sh   # fifteen years, watched
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

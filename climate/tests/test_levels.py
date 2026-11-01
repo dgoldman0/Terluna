@@ -147,11 +147,12 @@ def test_the_15_level_inputs_split_the_lowest_layers_terms_and_keep_their_sums()
         assert abs(carried['check'][key]['sums'][0] - carried['check'][key]['sums'][1]) < 1e-3
 
 
-def test_the_runner_reads_the_provisional_refit_as_it_is_on_15_levels_and_refuses_it_elsewhere():
+@pytest.mark.parametrize('fit', ['l15_provisional', 'l15_design'])
+def test_the_runner_reads_the_fifteen_level_refits_as_they_are_and_refuses_them_elsewhere(fit):
     import json
     from climate.gcm import exoplasim_run as er
-    path = er.longwave_product('l15_provisional', 'l15', 15)
-    assert path == er.LONGWAVE_FITS['l15_provisional']
+    path = er.longwave_product(fit, 'l15', 15)
+    assert path == er.LONGWAVE_FITS[fit]
     refit = json.loads(path.read_text())
     assert refit['levels']['name'] == 'l15' and refit['levels']['half_levels'] == list(lv.half_levels('l15'))
     assert all(len(refit['correction'][k]) == 16 for k in ('land', 'sea', 'tref'))
@@ -160,6 +161,6 @@ def test_the_runner_reads_the_provisional_refit_as_it_is_on_15_levels_and_refuse
     assert er.longwave_product('301k', lv.DEFAULT, 10) == er.LONGWAVE_FITS['301k']
     for name, layers in (('l14', 14), (lv.DEFAULT, 10)):
         with pytest.raises(ValueError):
-            er.longwave_product('l15_provisional', name, layers)
+            er.longwave_product(fit, name, layers)
     with pytest.raises(ValueError):
         er.longwave_product('301k', 'l15', 14)                     # a layer count other than the correction's
