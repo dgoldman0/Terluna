@@ -131,9 +131,12 @@ roots stays, and most for the plant that respires through the night as by day.
 | [test_run.py](test_run.py) | Its binding, regeneration and arithmetic |
 | [sources.json](sources.json) | The published values and how far each was read |
 | [results/light_limitation.json](results/light_limitation.json) | The product |
+| [biomass_comparison.md](biomass_comparison.md) | The comparison with Earth of 31 October 2026, built on this screen: about 20 Gt C a year, with 15–25 as a screening estimate, the waters at nutrient-poor rates and the split per square metre between land share and land productivity |
+| [biomass_comparison.py](biomass_comparison.py), [biomass_comparison_inputs.json](biomass_comparison_inputs.json), [test_biomass_comparison.py](test_biomass_comparison.py) | Its arithmetic, inputs and checks, writing [results/biomass_comparison.json](results/biomass_comparison.json) |
 
 ```
 python -m biosphere.canopy.light_response          # the canopy with the light dimmed, about a minute and a half
 python -m research.studies.light_limitation.run     # the screen
+python -m research.studies.light_limitation.biomass_comparison   # the comparison with Earth
 python -m pytest research/studies/light_limitation biosphere/tests/test_light_response.py
 ```

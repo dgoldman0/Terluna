@@ -1227,6 +1227,30 @@
         "the photosynthetic calcifiers' 354-hour night at about 30 °C"
       ],
       "next_session_task": "Nothing starts before the author's word; then the plan's order (studies/aquatic_biogeochemistry/plan.md): the seas' chemistry with magnesium kept on resources, the calcifiers and the floors on ecology, the mixing form's check on climate, then the harvests and the coupled study."
+    },
+    {
+      "topic": "aerial_productivity",
+      "condition": "capped_for_the_merge_2026_10_31; prescribed_cover_screen_with_shared_photons_surface_displacement_first_order_rain_channel_and_shared_sky_rates; production_against_earth_as_a_screening_estimate",
+      "material": [
+        "studies/aerial_productivity/README.md",
+        "studies/aerial_productivity/results/aerial_productivity.json",
+        "studies/aerial_productivity/checks.json",
+        "studies/light_limitation/biomass_comparison.md",
+        "studies/light_limitation/results/biomass_comparison.json"
+      ],
+      "findings": [
+        "About 20 Gt C/year of new biomass on the sunlight-supported surface (15-25 as a screening estimate), a fifth of Earth's NPP and 2.0-2.9 times its mean per square metre in the computed cases: the 62% land share gives 1.4 times at Earth's rates, and the land grows 1.7-2.3 times Earth's land average.",
+        "A 10-20% sky adds roughly 0.2-3.3 Gt C/year after the surface's light losses and a first-order rain loss of 0.071 Gt C of rain-fed growth per per cent of intercepted sunlight; light alone gave 0.8-4.6.",
+        "At 10-20% cover a sky town meets 0.43-23 reefs a day and a beam receiver switches 2.3-278 times a day, ten to twenty times the 1% rates the shared-sky rules met; the sky's phosphorus resupply is 0.05-1.25 Tg a year."
+      ],
+      "unresolved": [
+        "The rich sky's own effect on the energy balance, clouds and rain: a GCM run, none run yet. Absorption aloft probably cuts rain more than the first-order rain channel, and reflection moves the energy balance instead.",
+        "The 301 K design run's temperature, water and light fields for the land screen, the rain ratio and the vertical habitat.",
+        "Coverage, recruitment, shadow duration, water collection and trim along the design climate's routes; angular light through the community.",
+        "Towns' steering reserves and beam switching at the rich sky's rates; where cultivated and inhabited aerophytes sit in the managed share of the sky.",
+        "Upward phosphorus return, nitrogen fixation and trace elements with the traits measured together; Wetzel's production bracket against its source, since a near-net rate would make the NPP/GPP factor discount twice."
+      ],
+      "next_session_task": "None before the merge; the branch is capped. The merge adds research/studies/light_limitation/biomass_comparison (binding light_limitation.json, its inputs and shared/scenarios/water.json) and then research/studies/aerial_productivity/run (binding sky_ecology, aerophytes, light_limitation, biomass_comparison, its inputs, aerial_ecology, gases_glow_dimming, domain_synthesis ledgers, provisioning power and its parameters) to settle.py's ORDER after light_limitation, gases_glow_dimming, ledgers and power, rebuilding both on main's products, four of which differ from this branch by hash only (light_limitation, gases_glow_dimming, ledgers, power); carries the nutrient-poor lakes' 7-66 g C/m2 a year of NPP into the carbon cycle's lake burial with the aquatic programme; and reruns both studies on the 301 K design run's fields once it is analysed."
     }
   ]
 }

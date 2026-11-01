@@ -1,0 +1,73 @@
+{
+  "scope": "Sources and inherited evidence for the 31 October 2026 aerial-productivity screen. run.py binds the products it reads by schema and hash; the documents here are cited by path. Original datasets and papers are not copied.",
+  "local_inputs": [
+    {
+      "path": "research/studies/sky_ecology/results/sky_ecology.json",
+      "use": "Carbon allocations per class, geometry, mature replacement, the class mixture, phosphorus stocks and losses before supply: engineered-organism screening scenarios."
+    },
+    {
+      "path": "research/studies/aerophytes/results/aerophytes.json",
+      "use": "The older vertical atmosphere, water-use traits and gas and structure feasibility; coupled traits and wet and dry trajectories are open."
+    },
+    {
+      "path": "research/studies/aerial_ecology/results/aerial_ecology.json",
+      "use": "The shared Earth-analogue phosphorus fallout and the optical and physiological precedent; its sources.json holds the original access record."
+    },
+    {
+      "path": "research/studies/light_limitation/results/biomass_comparison.json",
+      "use": "The surface reference of 18.79 Gt C/year, kept apart from all sky production, and the provisional light sensitivity; biomass_comparison_inputs.json holds the climate references."
+    },
+    {
+      "path": "research/studies/gases_glow_dimming/results/gases_glow_dimming.json",
+      "use": "The rain channel: the gas-dimming branch A28_gases of the 0.950 design case, 1.694% added dimming, 0.550% of the land's rain per per cent of dimming, and rain-fed growth changes of -0.118 to -0.122 Gt C/year at the light-limitation study's ends."
+    },
+    {
+      "path": "research/studies/domain_synthesis/results/ledgers.json",
+      "use": "Reef passes per sky town a day at 1% cover, with reefs half the cover, for the shared-sky scaling."
+    },
+    {
+      "path": "provisioning/results/power.json",
+      "use": "Beam switches per receiver a day at 1% cover for sky towns and ground receivers in operation, for the shared-sky scaling."
+    }
+  ],
+  "published_sources": [
+    {
+      "citation": "Dillon KP et al. (2020), Cyanobacteria and Algae in Clouds and Rain in the Area of puy de Dome, Central France",
+      "url": "https://journals.asm.org/doi/10.1128/AEM.01850-20",
+      "access": "Publisher abstract read 2026-10-31",
+      "use": "Viable oxygenic phototrophs occur in cloud and rain samples: biological precedent for aerial phototrophs, with their production rates and any lunar carrying capacity still to be measured."
+    },
+    {
+      "citation": "Peguilhan R et al. (2025), Clouds influence the functioning of airborne microorganisms",
+      "url": "https://bg.copernicus.org/articles/22/1257/2025/",
+      "access": "Publisher abstract and indexed results and discussion excerpts read 2026-10-31",
+      "use": "Metabolic activity depends on cloud-water conditions; a complete productive aerial life cycle needs more than atmospheric depth or cloud presence."
+    },
+    {
+      "citation": "Mercado LM et al. (2009), Impact of changes in diffuse radiation on the global land carbon sink",
+      "url": "https://doi.org/10.1038/nature07949",
+      "access": "Publisher and repository index records inspected; the publisher page could not be opened. No numerical input is taken from this paper.",
+      "use": "Context for the distinction between diffuse redistribution and extra photons; the local canopy products supply the numerical responses."
+    }
+  ],
+  "new_scenario_choices": [
+    "Summed projected area at 1, 2, 5, 10, 20, 30, 50 and 100% of the Moon's area, each a prescribed scenario.",
+    "A vertical-beam Poisson column with mixed or class-stratified positions; angular and cloud radiative transfer are open.",
+    "Mature adult hazard 0.003 a year, low-maintenance photolytic reference bodies and the existing 50/30/20 class mix.",
+    "Surface elasticities of 0.65 for wet margins, 0.6 for productive coasts, 0.1 for oligotrophic waters and 0.8 for the rain-fed light potential, approximating the inherited model responses.",
+    "The rain channel: rain-fed growth falls by 0.496 of the intercepted share of sunlight, the gas-dimming branch's loss over the mean rain-fed growth of 14.3 Gt C/year, as a first-order estimate.",
+    "Shared-sky rates scaled linearly in cover from their products' 1% basis.",
+    "Half of unallocated assimilate converted to tissue is a potential allocation with its nutrients and the destination of its mass still to be found, and stays out of the headline increment.",
+    "Microbial columns with a prescribed 0.2 favourable duty and 3.6-day doubling; an optimistic engineered case with 0.5 duty and 1-day doubling."
+  ],
+  "scattering_context": {
+    "use": "Existing diffuse and underside light evidence, used to interpret the whole-sky angular transport still to be computed; no production multiplier is added.",
+    "files": [
+      "illumination/surface_light/README.md",
+      "illumination/surface_light/results/surface_light.json",
+      "biosphere/canopy/README.md",
+      "research/studies/sky_ecology/tenants.md"
+    ],
+    "claims": "On the older clear-sky columns diffuse PAR is 37, 56 and 80% at solar elevations of 90, 30 and 10 degrees; the canopy baseline includes diffuse illumination; at 10 km a lone body's underside receives 19-30% and a reef's underside 11-22% of the light on a horizontal top surface over ground albedos of 0.05-0.2. Attenuation and production in a crowded aerial community are still to be computed."
+  }
+}
