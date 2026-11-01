@@ -16,7 +16,7 @@ the boxes' own range, with references from −30 °C as well, it holds in light 
 boxes' sub-cloud air, overstates the loss where nearly all of a light snow from −15 °C sublimates, and meets McSnow's
 own limit in snow of 1 mm/h from −30 °C, whose flakes grow metres across without a breakup law. With the aggregates
 capped at 14 cm, the lunar span the snow work's load analogy allows, the closure holds on nine of the eleven runs McSnow
-resolves, the land's 1 mm/h snow from −30 °C included, and misses only in that lightest snow from −15 °C.
+resolves, the land's 1 mm/h snow from −30 °C included, and misses only in that lightest snow from −15 °C. That closure was adopted on 30 October with its miss stated as its limit, and its tables are the product PlaSim's build reads ([below](#the-adopted-closures-tables)).
 
 ## The change
 
@@ -41,7 +41,7 @@ within the cap. The cap is 14 cm, the load analogy's lunar equivalent of the 6 c
 ([survival](turbulence_survival.md)), with 10 cm as a sensitivity. Off, the capped build again gives
 `col_sat_f0.01_base` back byte for byte in its kept tables and in every field of its snapshots but one: the fall speed
 of seeds created in the snapshot's own step, which McSnow has not yet set and whose unset memory the rebuilt layout
-changes. The test checks the cap's lines as well.
+changes. The test checks the cap's lines as well. With the cap set, computing every superparticle's geometry afresh at each step costs up to 3% of a run's time; trimming that cost comes before the next long McSnow batch.
 
 ## The boxes' air
 
@@ -162,6 +162,8 @@ five, so the miss lies in the shrinking term: it takes every flake as losing the
 most of the flux sublimates the smallest flakes vanish whole and leave the flux to larger ones. By its rule nothing was
 adopted.
 
+Graupel stays outside these references. PlaSim's graupel sublimates as CM1's own graupel does, since McSnow's riming, the treatment preferred for it, needs an updraft added to superparticles that only fall and a check of the riming on Earth first (register, 29 October).
+
 ## The fourth test
 
 The fourth test (rules set on 30 October at 02:45, offline on the nine resolved runs of the second and third tests)
@@ -173,8 +175,8 @@ base, while McSnow's keep merging into larger flakes that lose less per metre. E
 processes, the shrinking closure the vanishing of the smallest flakes and the carried flakes the aggregation. As shares
 of the cloud base's flux sublimated, the shrinking closure stays within 0.03 of McSnow's except in the lightest snow
 from −15 °C, where it sublimates 98–99% against 94%, and the carried flakes within 0.06 except at 1 mm/h over land,
-0.62 against 0.46. The carried flakes were chosen after these runs showed the miss and fit no parameter; the choice
-between the two is open.
+0.62 against 0.46. The carried flakes were chosen after these runs showed the miss and fit no parameter; the fifth test
+judged the shrinking closure and carried them beside it as an observation.
 
 ## The fifth test
 
@@ -203,7 +205,7 @@ The cap's value reaches the closure where the flakes gather under it: with refer
 the land's 1 mm/h snow from −30 °C rises by 14–15%, and elsewhere by 0.6% or less. The contact-network calculation
 ([breakup network](breakup_network.md)) puts the lunar equivalent of Earth's largest observed flakes at 11.7–13.5 cm
 under a bending criterion, within that range, and finds a breaking flake keeping about two thirds of its mass in one
-piece, where the cap splits it evenly. By the test's rules the adoption is the author's call.
+piece, where the cap splits it evenly. The shrinking closure was adopted on 30 October, its limit in light snow from shallow tops stated (register, 30 October).
 
 ## The adopted closure's tables
 
