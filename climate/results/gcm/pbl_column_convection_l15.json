@@ -1,0 +1,6337 @@
+{
+ "schema": "terluna.climate.gcm-pbl-column-convection/1",
+ "level_set": "l15",
+ "step_s": 1800.0,
+ "setups": [
+  "massflux",
+  "cm1",
+  "massflux_shallow_night"
+ ],
+ "cases": {
+  "sea evening": {
+   "site": "sea",
+   "case": "box_near_side_sea_day3",
+   "start_quarter": "afternoon",
+   "compared_quarter": "evening",
+   "cm1": {
+    "measures": {
+     "mixed_depth_km": 5.578,
+     "q_low_g_kg": 12.64,
+     "q_mid_g_kg": 10.53,
+     "vapour_drop_g_kg": 2.108,
+     "lid_rise_k": 1.249,
+     "levels_km": [
+      0.31,
+      6.15,
+      8.17
+     ],
+     "hpbl_km": 4.913
+    },
+    "rain_ground_mm_day": 2.963,
+    "lid": {
+     "heights_km": [
+      6.446,
+      6.989
+     ],
+     "khv_m2_s": 9.988,
+     "heat": {
+      "resolved": -1.259,
+      "diffusion": -1.026,
+      "subgrid": -7.178,
+      "total": -9.464
+     },
+     "vapour": {
+      "resolved": 64.46,
+      "diffusion": 4.604,
+      "subgrid": 18.98,
+      "total": 88.04
+     }
+    },
+    "theta_v_k": [
+     393.5,
+     332.9,
+     320.6,
+     310.2,
+     305.0,
+     298.2,
+     292.4,
+     290.0,
+     288.8,
+     287.8,
+     286.6,
+     286.0,
+     285.9,
+     285.8,
+     285.8
+    ],
+    "q_g_kg": [
+     2.514e-05,
+     0.0007674,
+     0.04591,
+     0.288,
+     1.288,
+     3.267,
+     5.097,
+     6.289,
+     7.464,
+     8.972,
+     10.53,
+     11.63,
+     12.14,
+     12.38,
+     12.64
+    ]
+   },
+   "setups": {
+    "massflux": {
+     "schemes": {
+      "earth_local": {
+       "measures": {
+        "mixed_depth_km": 4.717,
+        "q_low_g_kg": 14.01,
+        "q_mid_g_kg": 10.4,
+        "vapour_drop_g_kg": 3.611,
+        "lid_rise_k": 1.519,
+        "levels_km": [
+         0.31,
+         6.15,
+         8.17
+        ]
+       },
+       "lid": {
+        "height_km": 7.176,
+        "heat": {
+         "diffusion": -0.02955,
+         "dry_adjustment": -4.453e-12,
+         "mixing": -0.02955
+        },
+        "vapour": {
+         "diffusion": 0.02659,
+         "dry_adjustment": 0.0,
+         "mixing": 0.02659
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "rain_mm_day": 3.261,
+       "rain_conv_mm_day": 2.376,
+       "rain_ls_mm_day": 0.8851,
+       "dca_share": 0.9943,
+       "types": {
+        "deep": 0.8657,
+        "shallow": 0.002857,
+        "mid": 0.1314
+       },
+       "top_median_km": 56.39,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -1.108,
+        "rain": 3.261,
+        "water_stored": -1.417
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 70.21,
+        "heat_stored": 66.81
+       },
+       "residuals": {
+        "water_mm_day": -0.005276,
+        "heat_w_m2": -2.594
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        9.803,
+        36.27,
+        40.78,
+        13.77,
+        2.844,
+        -5.838,
+        -7.361,
+        0.1015,
+        1.152,
+        -3.279,
+        -10.98,
+        -8.379
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.4916,
+        -0.2269,
+        -0.3212,
+        -0.09255,
+        0.1905,
+        -0.2387,
+        -0.3742,
+        0.3224,
+        -0.1039,
+        -0.9227,
+        -0.7483,
+        -0.3516
+       ],
+       "theta_v_k": [
+        399.4,
+        334.0,
+        319.6,
+        306.4,
+        303.3,
+        298.2,
+        292.9,
+        290.0,
+        288.6,
+        287.8,
+        286.3,
+        285.1,
+        285.0,
+        285.0,
+        285.0
+       ],
+       "q_g_kg": [
+        9.631e-06,
+        0.001746,
+        0.0636,
+        0.2963,
+        1.158,
+        3.018,
+        5.313,
+        6.928,
+        8.386,
+        9.734,
+        10.4,
+        11.49,
+        13.59,
+        14.01,
+        14.01
+       ],
+       "z_full_m": [
+        126200.0,
+        90830.0,
+        70290.0,
+        54130.0,
+        40360.0,
+        28380.0,
+        19220.0,
+        13610.0,
+        10420.0,
+        8173.0,
+        6151.0,
+        4168.0,
+        2499.0,
+        1209.0,
+        311.7
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.2841,
+         "shallow": 0.0,
+         "mid": 0.6051
+        },
+        "top_median_km": 56.63,
+        "rain_mm_day": 0.612,
+        "residuals": {
+         "water_mm_day": -4.441e-15,
+         "heat_w_m2": -1.123
+        }
+       }
+      },
+      "lunar_local": {
+       "measures": {
+        "mixed_depth_km": 4.899,
+        "q_low_g_kg": 13.51,
+        "q_mid_g_kg": 10.47,
+        "vapour_drop_g_kg": 3.045,
+        "lid_rise_k": 1.226,
+        "levels_km": [
+         0.31,
+         6.16,
+         8.19
+        ]
+       },
+       "lid": {
+        "height_km": 7.19,
+        "heat": {
+         "diffusion": -0.3788,
+         "dry_adjustment": 1.619,
+         "mixing": 1.24
+        },
+        "vapour": {
+         "diffusion": 0.07627,
+         "dry_adjustment": -15.77,
+         "mixing": -15.7
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.2121,
+        "vapour_drop_g_kg": 0.3768,
+        "lid_rise_k": 0.918
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.2121,
+        "vapour_drop_g_kg": 0.3768,
+        "lid_rise_k": 0.918
+       },
+       "rain_mm_day": 2.777,
+       "rain_conv_mm_day": 1.887,
+       "rain_ls_mm_day": 0.89,
+       "dca_share": 0.8029,
+       "types": {
+        "deep": 0.6857,
+        "shallow": 0.0,
+        "mid": 0.3143
+       },
+       "top_median_km": 56.43,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -1.438,
+        "rain": 2.777,
+        "water_stored": -1.263
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 71.66,
+        "heat_stored": 54.27
+       },
+       "residuals": {
+        "water_mm_day": -0.005272,
+        "heat_w_m2": -2.621
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        9.976,
+        33.72,
+        39.04,
+        14.6,
+        4.165,
+        -4.694,
+        -9.598,
+        -0.04952,
+        -0.8271,
+        -5.73,
+        -14.71,
+        -11.01
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.4066,
+        -0.2684,
+        -0.3622,
+        -0.1928,
+        -0.1029,
+        -0.1854,
+        0.328,
+        -0.1273,
+        -0.2151,
+        -0.6776,
+        -0.38,
+        -0.1095
+       ],
+       "theta_v_k": [
+        399.4,
+        334.0,
+        319.6,
+        305.9,
+        302.9,
+        297.7,
+        292.7,
+        289.8,
+        288.7,
+        287.8,
+        286.6,
+        285.9,
+        285.7,
+        285.6,
+        285.6
+       ],
+       "q_g_kg": [
+        9.631e-06,
+        0.001746,
+        0.06367,
+        0.2849,
+        1.161,
+        3.027,
+        5.321,
+        7.15,
+        8.708,
+        10.05,
+        10.47,
+        11.87,
+        13.23,
+        13.48,
+        13.51
+       ],
+       "z_full_m": [
+        126100.0,
+        90780.0,
+        70240.0,
+        54090.0,
+        40340.0,
+        28380.0,
+        19230.0,
+        13630.0,
+        10440.0,
+        8187.0,
+        6165.0,
+        4178.0,
+        2505.0,
+        1212.0,
+        312.4
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.267,
+         "shallow": 0.0,
+         "mid": 0.6222
+        },
+        "top_median_km": 56.79,
+        "rain_mm_day": 0.8643,
+        "residuals": {
+         "water_mm_day": -1.243e-14,
+         "heat_w_m2": -1.292
+        }
+       }
+      },
+      "earth_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 5.136,
+        "q_low_g_kg": 12.98,
+        "q_mid_g_kg": 10.69,
+        "vapour_drop_g_kg": 2.282,
+        "lid_rise_k": 1.374,
+        "levels_km": [
+         0.31,
+         6.16,
+         8.19
+        ]
+       },
+       "lid": {
+        "height_km": 7.189,
+        "heat": {
+         "diffusion": -0.09622,
+         "dry_adjustment": 4.731e-12,
+         "mixing": -0.09622
+        },
+        "vapour": {
+         "diffusion": -0.02999,
+         "dry_adjustment": 0.0,
+         "mixing": -0.02999
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.4875,
+        "vapour_drop_g_kg": 0.8841,
+        "lid_rise_k": 0.5366
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.4875,
+        "vapour_drop_g_kg": 0.8841,
+        "lid_rise_k": 0.5366
+       },
+       "rain_mm_day": 2.415,
+       "rain_conv_mm_day": 1.621,
+       "rain_ls_mm_day": 0.7942,
+       "dca_share": 0.6629,
+       "types": {
+        "deep": 0.7686,
+        "shallow": 0.01429,
+        "mid": 0.2143
+       },
+       "top_median_km": 56.36,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -1.785,
+        "rain": 2.415,
+        "water_stored": -1.248
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 72.72,
+        "heat_stored": 44.7
+       },
+       "residuals": {
+        "water_mm_day": -0.005272,
+        "heat_w_m2": -2.459
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        10.72,
+        32.93,
+        38.18,
+        13.26,
+        2.325,
+        -6.433,
+        -7.706,
+        0.8273,
+        -1.202,
+        -11.17,
+        -15.67,
+        -8.855
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.3858,
+        -0.2693,
+        -0.38,
+        -0.2,
+        -0.05921,
+        -0.1935,
+        -0.3333,
+        0.04014,
+        -0.4707,
+        -0.07983,
+        -0.04927,
+        -0.01156
+       ],
+       "h_median_km": 4.267,
+       "we_median_mm_s": 4.643,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        399.4,
+        334.0,
+        319.6,
+        306.0,
+        303.0,
+        297.8,
+        292.7,
+        289.8,
+        288.6,
+        287.8,
+        286.5,
+        285.9,
+        285.7,
+        285.7,
+        285.7
+       ],
+       "q_g_kg": [
+        9.631e-06,
+        0.001746,
+        0.06368,
+        0.2868,
+        1.151,
+        3.017,
+        5.302,
+        7.068,
+        8.61,
+        10.12,
+        10.69,
+        12.15,
+        12.81,
+        12.94,
+        12.98
+       ],
+       "z_full_m": [
+        126100.0,
+        90780.0,
+        70250.0,
+        54100.0,
+        40340.0,
+        28380.0,
+        19230.0,
+        13630.0,
+        10440.0,
+        8186.0,
+        6164.0,
+        4178.0,
+        2505.0,
+        1212.0,
+        312.4
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.2443,
+         "shallow": 0.0,
+         "mid": 0.6449
+        },
+        "top_median_km": 56.92,
+        "rain_mm_day": 0.8647,
+        "residuals": {
+         "water_mm_day": -3.375e-14,
+         "heat_w_m2": -1.383
+        }
+       }
+      },
+      "lunar_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 4.787,
+        "q_low_g_kg": 13.31,
+        "q_mid_g_kg": 10.5,
+        "vapour_drop_g_kg": 2.812,
+        "lid_rise_k": 1.391,
+        "levels_km": [
+         0.31,
+         6.16,
+         8.18
+        ]
+       },
+       "lid": {
+        "height_km": 7.186,
+        "heat": {
+         "diffusion": -0.3538,
+         "dry_adjustment": -2.48e-12,
+         "mixing": -0.3538
+        },
+        "vapour": {
+         "diffusion": 0.1427,
+         "dry_adjustment": 0.0,
+         "mixing": 0.1427
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.08131,
+        "vapour_drop_g_kg": 0.5315,
+        "lid_rise_k": 0.4721
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.08131,
+        "vapour_drop_g_kg": 0.5315,
+        "lid_rise_k": 0.4721
+       },
+       "rain_mm_day": 2.685,
+       "rain_conv_mm_day": 1.765,
+       "rain_ls_mm_day": 0.9195,
+       "dca_share": 0.4314,
+       "types": {
+        "deep": 0.7543,
+        "shallow": 0.0,
+        "mid": 0.2457
+       },
+       "top_median_km": 56.37,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -1.554,
+        "rain": 2.685,
+        "water_stored": -1.287
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 71.74,
+        "heat_stored": 51.74
+       },
+       "residuals": {
+        "water_mm_day": -0.005273,
+        "heat_w_m2": -2.657
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        9.553,
+        33.77,
+        38.77,
+        13.52,
+        3.401,
+        -5.246,
+        -7.364,
+        -0.7203,
+        0.161,
+        -8.312,
+        -15.57,
+        -10.58
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.4244,
+        -0.2597,
+        -0.3617,
+        -0.1692,
+        -0.09545,
+        -0.1839,
+        -0.2488,
+        0.2231,
+        -0.5778,
+        -0.2631,
+        -0.2145,
+        -0.03873
+       ],
+       "h_median_km": 3.585,
+       "we_median_mm_s": 4.505,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        399.4,
+        334.0,
+        319.6,
+        306.0,
+        303.0,
+        297.9,
+        292.7,
+        289.8,
+        288.6,
+        287.8,
+        286.4,
+        285.7,
+        285.5,
+        285.4,
+        285.4
+       ],
+       "q_g_kg": [
+        9.631e-06,
+        0.001746,
+        0.06365,
+        0.2877,
+        1.157,
+        3.02,
+        5.31,
+        7.122,
+        8.616,
+        10.0,
+        10.5,
+        12.11,
+        13.1,
+        13.25,
+        13.31
+       ],
+       "z_full_m": [
+        126100.0,
+        90790.0,
+        70250.0,
+        54100.0,
+        40340.0,
+        28380.0,
+        19230.0,
+        13620.0,
+        10430.0,
+        8183.0,
+        6161.0,
+        4176.0,
+        2503.0,
+        1211.0,
+        312.2
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.2699,
+         "shallow": 0.0,
+         "mid": 0.6193
+        },
+        "top_median_km": 56.77,
+        "rain_mm_day": 0.8274,
+        "residuals": {
+         "water_mm_day": 4.263e-14,
+         "heat_w_m2": -1.244
+        }
+       }
+      }
+     },
+     "setup_closes_half_of_testbed_gap": false,
+     "nonlocal_closes_half_within": false
+    },
+    "cm1": {
+     "schemes": {
+      "earth_local": {
+       "measures": {
+        "mixed_depth_km": 3.302,
+        "q_low_g_kg": 14.62,
+        "q_mid_g_kg": 9.875,
+        "vapour_drop_g_kg": 4.749,
+        "lid_rise_k": 0.9382,
+        "levels_km": [
+         0.31,
+         6.16,
+         8.18
+        ]
+       },
+       "lid": {
+        "height_km": 7.186,
+        "heat": {
+         "diffusion": -0.04165,
+         "dry_adjustment": -9.509e-12,
+         "mixing": -0.04165,
+         "cm1_transport": -2.235,
+         "total": -2.277
+        },
+        "vapour": {
+         "diffusion": 0.0758,
+         "dry_adjustment": 0.0,
+         "mixing": 0.0758,
+         "cm1_transport": 68.8,
+         "total": 68.88
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": -1.643,
+        "vapour_drop_g_kg": -0.7573,
+        "lid_rise_k": -0.1499
+       },
+       "rain_mm_day": 0.2232,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.2232,
+       "dca_share": 0.2057,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -0.9084,
+        "rain": 0.2232,
+        "water_stored": -1.182,
+        "prescribed": -2.998,
+        "floor": 0.0
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 62.24,
+        "heat_stored": 56.21,
+        "prescribed": 87.56
+       },
+       "residuals": {
+        "water_mm_day": -4.441e-15,
+        "heat_w_m2": -0.3296
+       },
+       "conv_heating_w_m2": [
+        -0.6537,
+        0.5985,
+        1.896,
+        16.54,
+        17.43,
+        33.42,
+        13.5,
+        2.617,
+        1.334,
+        -0.6159,
+        5.424,
+        3.805,
+        5.46,
+        -1.749,
+        -11.45
+       ],
+       "conv_moistening_mm_day": [
+        0.0007853,
+        0.00677,
+        -0.07636,
+        -0.06609,
+        0.1338,
+        0.1269,
+        -0.2664,
+        -0.3267,
+        -0.2131,
+        0.02837,
+        0.5359,
+        1.037,
+        0.09303,
+        -1.507,
+        -2.504
+       ],
+       "theta_v_k": [
+        399.1,
+        333.7,
+        319.0,
+        309.6,
+        304.0,
+        298.3,
+        292.7,
+        290.2,
+        289.1,
+        287.9,
+        287.0,
+        285.6,
+        285.3,
+        285.0,
+        285.0
+       ],
+       "q_g_kg": [
+        2.717e-05,
+        0.002734,
+        0.03566,
+        0.3563,
+        1.409,
+        3.336,
+        5.052,
+        5.163,
+        7.972,
+        9.133,
+        9.875,
+        11.91,
+        12.55,
+        14.31,
+        14.62
+       ],
+       "z_full_m": [
+        126300.0,
+        90980.0,
+        70470.0,
+        54240.0,
+        40390.0,
+        28390.0,
+        19240.0,
+        13630.0,
+        10430.0,
+        8183.0,
+        6159.0,
+        4171.0,
+        2499.0,
+        1209.0,
+        311.7
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 0.08869,
+        "residuals": {
+         "water_mm_day": 7.55e-15,
+         "heat_w_m2": -0.03637
+        }
+       }
+      },
+      "lunar_local": {
+       "measures": {
+        "mixed_depth_km": 3.159,
+        "q_low_g_kg": 14.54,
+        "q_mid_g_kg": 9.711,
+        "vapour_drop_g_kg": 4.832,
+        "lid_rise_k": 0.7444,
+        "levels_km": [
+         0.31,
+         6.16,
+         8.18
+        ]
+       },
+       "lid": {
+        "height_km": 7.187,
+        "heat": {
+         "diffusion": -0.5193,
+         "dry_adjustment": 1.143e-11,
+         "mixing": -0.5193,
+         "cm1_transport": -2.235,
+         "total": -2.754
+        },
+        "vapour": {
+         "diffusion": 0.5755,
+         "dry_adjustment": 0.0,
+         "mixing": 0.5755,
+         "cm1_transport": 68.8,
+         "total": 69.38
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -0.06274,
+        "vapour_drop_g_kg": -0.03133,
+        "lid_rise_k": -0.6244
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": -1.809,
+        "vapour_drop_g_kg": -0.8124,
+        "lid_rise_k": -0.8679
+       },
+       "rain_mm_day": 0.214,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.214,
+       "dca_share": 0.1286,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -0.9448,
+        "rain": 0.214,
+        "water_stored": -1.21,
+        "prescribed": -2.998,
+        "floor": 0.0
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 62.1,
+        "heat_stored": 55.83,
+        "prescribed": 87.56
+       },
+       "residuals": {
+        "water_mm_day": 1.465e-14,
+        "heat_w_m2": -0.3583
+       },
+       "conv_heating_w_m2": [
+        -0.6537,
+        0.5985,
+        1.896,
+        16.54,
+        17.43,
+        33.42,
+        13.5,
+        2.617,
+        1.334,
+        -0.6159,
+        5.424,
+        3.805,
+        5.46,
+        -1.749,
+        -11.45
+       ],
+       "conv_moistening_mm_day": [
+        0.0007853,
+        0.00677,
+        -0.07636,
+        -0.06609,
+        0.1338,
+        0.1269,
+        -0.2664,
+        -0.3267,
+        -0.2131,
+        0.02837,
+        0.5359,
+        1.037,
+        0.09303,
+        -1.507,
+        -2.504
+       ],
+       "theta_v_k": [
+        399.1,
+        333.7,
+        319.0,
+        309.6,
+        304.0,
+        298.3,
+        292.7,
+        290.2,
+        289.2,
+        287.8,
+        287.1,
+        285.7,
+        285.3,
+        285.0,
+        285.0
+       ],
+       "q_g_kg": [
+        2.718e-05,
+        0.002735,
+        0.03574,
+        0.3565,
+        1.409,
+        3.336,
+        5.052,
+        5.191,
+        7.965,
+        9.335,
+        9.711,
+        11.86,
+        12.52,
+        14.21,
+        14.54
+       ],
+       "z_full_m": [
+        126300.0,
+        90980.0,
+        70470.0,
+        54250.0,
+        40390.0,
+        28390.0,
+        19240.0,
+        13630.0,
+        10440.0,
+        8184.0,
+        6159.0,
+        4172.0,
+        2500.0,
+        1209.0,
+        311.7
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 0.1135,
+        "residuals": {
+         "water_mm_day": 2.487e-14,
+         "heat_w_m2": -0.06139
+        }
+       }
+      },
+      "earth_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 4.593,
+        "q_low_g_kg": 11.9,
+        "q_mid_g_kg": 10.15,
+        "vapour_drop_g_kg": 1.746,
+        "lid_rise_k": 1.121,
+        "levels_km": [
+         0.31,
+         6.16,
+         8.19
+        ]
+       },
+       "lid": {
+        "height_km": 7.188,
+        "heat": {
+         "diffusion": -0.03992,
+         "dry_adjustment": 3.611e-12,
+         "mixing": -0.03992,
+         "cm1_transport": -2.235,
+         "total": -2.275
+        },
+        "vapour": {
+         "diffusion": 0.08304,
+         "dry_adjustment": 0.0,
+         "mixing": 0.08304,
+         "cm1_transport": 68.8,
+         "total": 68.89
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.5674,
+        "vapour_drop_g_kg": 0.8628,
+        "lid_rise_k": 0.588
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": -0.1435,
+        "vapour_drop_g_kg": 0.759,
+        "lid_rise_k": 0.5262
+       },
+       "rain_mm_day": 0.08496,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.08496,
+       "dca_share": 0.3457,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -2.074,
+        "rain": 0.08496,
+        "water_stored": -2.209,
+        "prescribed": -2.998,
+        "floor": 0.0
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 67.24,
+        "heat_stored": 57.21,
+        "prescribed": 87.56
+       },
+       "residuals": {
+        "water_mm_day": -2.665e-15,
+        "heat_w_m2": -0.3345
+       },
+       "conv_heating_w_m2": [
+        -0.6537,
+        0.5985,
+        1.896,
+        16.54,
+        17.43,
+        33.42,
+        13.5,
+        2.617,
+        1.334,
+        -0.6159,
+        5.424,
+        3.805,
+        5.46,
+        -1.749,
+        -11.45
+       ],
+       "conv_moistening_mm_day": [
+        0.0007853,
+        0.00677,
+        -0.07636,
+        -0.06609,
+        0.1338,
+        0.1269,
+        -0.2664,
+        -0.3267,
+        -0.2131,
+        0.02837,
+        0.5359,
+        1.037,
+        0.09303,
+        -1.507,
+        -2.504
+       ],
+       "h_median_km": 4.652,
+       "we_median_mm_s": 1.298,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        399.1,
+        333.7,
+        319.0,
+        309.6,
+        304.0,
+        298.3,
+        292.7,
+        290.2,
+        289.1,
+        288.0,
+        286.8,
+        285.6,
+        285.5,
+        285.4,
+        285.4
+       ],
+       "q_g_kg": [
+        2.717e-05,
+        0.002734,
+        0.03566,
+        0.3563,
+        1.409,
+        3.336,
+        5.052,
+        5.166,
+        7.972,
+        9.11,
+        10.15,
+        11.86,
+        12.04,
+        11.96,
+        11.9
+       ],
+       "z_full_m": [
+        126300.0,
+        90980.0,
+        70470.0,
+        54250.0,
+        40390.0,
+        28400.0,
+        19240.0,
+        13630.0,
+        10440.0,
+        8185.0,
+        6161.0,
+        4175.0,
+        2503.0,
+        1211.0,
+        312.1
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 0.08521,
+        "residuals": {
+         "water_mm_day": 5.684e-14,
+         "heat_w_m2": -0.03656
+        }
+       }
+      },
+      "lunar_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 4.607,
+        "q_low_g_kg": 11.84,
+        "q_mid_g_kg": 9.986,
+        "vapour_drop_g_kg": 1.856,
+        "lid_rise_k": 0.9338,
+        "levels_km": [
+         0.31,
+         6.16,
+         8.19
+        ]
+       },
+       "lid": {
+        "height_km": 7.19,
+        "heat": {
+         "diffusion": -0.4944,
+         "dry_adjustment": -5.192e-12,
+         "mixing": -0.4944,
+         "cm1_transport": -2.235,
+         "total": -2.729
+        },
+        "vapour": {
+         "diffusion": 0.7432,
+         "dry_adjustment": 0.0,
+         "mixing": 0.7432,
+         "cm1_transport": 68.8,
+         "total": 69.55
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.5733,
+        "vapour_drop_g_kg": 0.9043,
+        "lid_rise_k": -0.01407
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": -0.1277,
+        "vapour_drop_g_kg": 0.8318,
+        "lid_rise_k": -0.166
+       },
+       "rain_mm_day": 0.0848,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.0848,
+       "dca_share": 0.1543,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -2.106,
+        "rain": 0.0848,
+        "water_stored": -2.242,
+        "prescribed": -2.998,
+        "floor": 0.0
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 67.47,
+        "heat_stored": 57.46,
+        "prescribed": 87.56
+       },
+       "residuals": {
+        "water_mm_day": 1.288e-14,
+        "heat_w_m2": -0.3623
+       },
+       "conv_heating_w_m2": [
+        -0.6537,
+        0.5985,
+        1.896,
+        16.54,
+        17.43,
+        33.42,
+        13.5,
+        2.617,
+        1.334,
+        -0.6159,
+        5.424,
+        3.805,
+        5.46,
+        -1.749,
+        -11.45
+       ],
+       "conv_moistening_mm_day": [
+        0.0007853,
+        0.00677,
+        -0.07636,
+        -0.06609,
+        0.1338,
+        0.1269,
+        -0.2664,
+        -0.3267,
+        -0.2131,
+        0.02837,
+        0.5359,
+        1.037,
+        0.09303,
+        -1.507,
+        -2.504
+       ],
+       "h_median_km": 4.629,
+       "we_median_mm_s": 1.265,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        399.1,
+        333.7,
+        319.0,
+        309.6,
+        304.0,
+        298.3,
+        292.7,
+        290.2,
+        289.2,
+        287.9,
+        286.9,
+        285.7,
+        285.5,
+        285.5,
+        285.4
+       ],
+       "q_g_kg": [
+        2.718e-05,
+        0.002735,
+        0.03574,
+        0.3565,
+        1.409,
+        3.336,
+        5.052,
+        5.192,
+        7.965,
+        9.324,
+        9.986,
+        11.82,
+        11.99,
+        11.9,
+        11.84
+       ],
+       "z_full_m": [
+        126300.0,
+        90980.0,
+        70480.0,
+        54250.0,
+        40390.0,
+        28400.0,
+        19240.0,
+        13630.0,
+        10440.0,
+        8187.0,
+        6163.0,
+        4176.0,
+        2503.0,
+        1211.0,
+        312.2
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 0.113,
+        "residuals": {
+         "water_mm_day": -9.77e-15,
+         "heat_w_m2": -0.06108
+        }
+       }
+      }
+     },
+     "setup_closes_half_of_testbed_gap": false,
+     "nonlocal_closes_half_within": true
+    },
+    "massflux_shallow_night": {
+     "schemes": {
+      "earth_local": {
+       "measures": {
+        "mixed_depth_km": 5.014,
+        "q_low_g_kg": 13.22,
+        "q_mid_g_kg": 10.78,
+        "vapour_drop_g_kg": 2.44,
+        "lid_rise_k": 1.205,
+        "levels_km": [
+         0.31,
+         6.17,
+         8.19
+        ]
+       },
+       "lid": {
+        "height_km": 7.192,
+        "heat": {
+         "diffusion": -0.03238,
+         "dry_adjustment": 6.198e-12,
+         "mixing": -0.03238
+        },
+        "vapour": {
+         "diffusion": 0.02584,
+         "dry_adjustment": 0.0,
+         "mixing": 0.02584
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.3458,
+        "vapour_drop_g_kg": 0.7792,
+        "lid_rise_k": 0.8394
+       },
+       "rain_mm_day": 2.56,
+       "rain_conv_mm_day": 1.667,
+       "rain_ls_mm_day": 0.8935,
+       "dca_share": 1.0,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.7914,
+        "mid": 0.0
+       },
+       "top_median_km": 55.0,
+       "shallow_only_share": 1.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -1.739,
+        "rain": 2.56,
+        "water_stored": -1.347,
+        "prescribed": 0.0,
+        "floor": 0.005268
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 71.9,
+        "heat_stored": 48.83,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": 4.663e-15,
+        "heat_w_m2": -3.208
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        -10.42,
+        21.13,
+        28.48,
+        14.35,
+        5.628,
+        -2.939,
+        -5.123,
+        5.233,
+        5.88,
+        -4.231,
+        -6.234,
+        -3.602
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.6194,
+        -0.2874,
+        -0.3102,
+        -0.1232,
+        0.3519,
+        0.001835,
+        -0.1048,
+        0.6016,
+        -1.2,
+        -0.5928,
+        -0.4099,
+        -0.2126
+       ],
+       "theta_v_k": [
+        399.4,
+        334.0,
+        319.6,
+        305.5,
+        302.5,
+        297.4,
+        292.8,
+        289.9,
+        288.9,
+        288.1,
+        286.8,
+        285.8,
+        285.7,
+        285.7,
+        285.7
+       ],
+       "q_g_kg": [
+        9.631e-06,
+        0.001746,
+        0.06374,
+        0.2739,
+        1.178,
+        3.081,
+        5.376,
+        7.081,
+        8.749,
+        10.36,
+        10.78,
+        12.08,
+        13.12,
+        13.22,
+        13.22
+       ],
+       "z_full_m": [
+        126100.0,
+        90730.0,
+        70200.0,
+        54060.0,
+        40330.0,
+        28380.0,
+        19240.0,
+        13640.0,
+        10440.0,
+        8190.0,
+        6166.0,
+        4179.0,
+        2505.0,
+        1212.0,
+        312.5
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.2841,
+         "shallow": 0.0,
+         "mid": 0.6051
+        },
+        "top_median_km": 56.63,
+        "rain_mm_day": 0.612,
+        "residuals": {
+         "water_mm_day": -4.441e-15,
+         "heat_w_m2": -1.123
+        }
+       }
+      },
+      "lunar_local": {
+       "measures": {
+        "mixed_depth_km": 6.575,
+        "q_low_g_kg": 12.63,
+        "q_mid_g_kg": 11.21,
+        "vapour_drop_g_kg": 1.422,
+        "lid_rise_k": 1.237,
+        "levels_km": [
+         0.31,
+         6.19,
+         8.22
+        ]
+       },
+       "lid": {
+        "height_km": 7.219,
+        "heat": {
+         "diffusion": -0.3728,
+         "dry_adjustment": -1.179e-12,
+         "mixing": -0.3728
+        },
+        "vapour": {
+         "diffusion": 0.126,
+         "dry_adjustment": 0.0,
+         "mixing": 0.126
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -0.771,
+        "vapour_drop_g_kg": -1.068,
+        "lid_rise_k": 0.7342
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": -0.1585,
+        "vapour_drop_g_kg": 0.5434,
+        "lid_rise_k": 0.9573
+       },
+       "rain_mm_day": 0.7464,
+       "rain_conv_mm_day": 0.01543,
+       "rain_ls_mm_day": 0.731,
+       "dca_share": 1.0,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.2829,
+        "mid": 0.0
+       },
+       "top_median_km": 8.53,
+       "shallow_only_share": 1.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -2.072,
+        "rain": 0.7464,
+        "water_stored": 0.1341,
+        "prescribed": 0.0,
+        "floor": 0.005265
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 71.11,
+        "heat_stored": -5.709,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": -5.94e-15,
+        "heat_w_m2": -1.952
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        -0.4158,
+        2.222,
+        1.733,
+        -0.04823,
+        -0.06696,
+        -0.4755,
+        -1.027,
+        0.02322,
+        -0.1988,
+        -0.4725,
+        -0.5733,
+        -0.2322
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.0209,
+        -0.0622,
+        -0.04689,
+        -0.01161,
+        0.00257,
+        0.009849,
+        0.07002,
+        0.0734,
+        -0.03837,
+        -0.01722,
+        -0.00857,
+        -0.007305
+       ],
+       "theta_v_k": [
+        399.4,
+        334.0,
+        319.6,
+        305.1,
+        301.8,
+        296.5,
+        292.0,
+        289.3,
+        289.0,
+        288.5,
+        287.3,
+        287.0,
+        287.0,
+        287.0,
+        287.0
+       ],
+       "q_g_kg": [
+        9.631e-06,
+        0.001746,
+        0.0638,
+        0.2621,
+        1.255,
+        3.196,
+        5.485,
+        7.423,
+        9.124,
+        10.53,
+        11.21,
+        12.21,
+        12.59,
+        12.62,
+        12.63
+       ],
+       "z_full_m": [
+        126000.0,
+        90650.0,
+        70110.0,
+        53990.0,
+        40280.0,
+        28370.0,
+        19250.0,
+        13660.0,
+        10470.0,
+        8218.0,
+        6190.0,
+        4198.0,
+        2517.0,
+        1217.0,
+        313.9
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.267,
+         "shallow": 0.0,
+         "mid": 0.6222
+        },
+        "top_median_km": 56.79,
+        "rain_mm_day": 0.8643,
+        "residuals": {
+         "water_mm_day": -1.243e-14,
+         "heat_w_m2": -1.292
+        }
+       }
+      },
+      "earth_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 7.052,
+        "q_low_g_kg": 11.97,
+        "q_mid_g_kg": 11.62,
+        "vapour_drop_g_kg": 0.3498,
+        "lid_rise_k": 1.036,
+        "levels_km": [
+         0.31,
+         6.2,
+         8.22
+        ]
+       },
+       "lid": {
+        "height_km": 7.224,
+        "heat": {
+         "diffusion": -2.047,
+         "dry_adjustment": -6.511e-12,
+         "mixing": -2.047
+        },
+        "vapour": {
+         "diffusion": 3.292,
+         "dry_adjustment": 0.0,
+         "mixing": 3.292
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -1.619,
+        "vapour_drop_g_kg": -4.301,
+        "lid_rise_k": -3.912
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": -0.7131,
+        "vapour_drop_g_kg": -0.1703,
+        "lid_rise_k": 0.2112
+       },
+       "rain_mm_day": 0.6745,
+       "rain_conv_mm_day": 0.003913,
+       "rain_ls_mm_day": 0.6706,
+       "dca_share": 1.0,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.04857,
+        "mid": 0.0
+       },
+       "top_median_km": 7.474,
+       "shallow_only_share": 1.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -2.523,
+        "rain": 0.6745,
+        "water_stored": -0.246,
+        "prescribed": 0.0,
+        "floor": 0.005263
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 73.09,
+        "heat_stored": -5.538,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": -2.34e-14,
+        "heat_w_m2": -2.224
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        -0.04292,
+        0.3615,
+        0.3038,
+        0.03563,
+        0.03387,
+        -0.02265,
+        -2.014,
+        0.4936,
+        0.4204,
+        0.2637,
+        0.1923,
+        0.09184
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.003594,
+        -0.01071,
+        -0.008052,
+        -0.003446,
+        -0.001607,
+        -0.001353,
+        0.1055,
+        -0.02724,
+        -0.02455,
+        -0.01656,
+        -0.01294,
+        -0.006567
+       ],
+       "h_median_km": 6.779,
+       "we_median_mm_s": 1.7,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        399.4,
+        334.0,
+        319.6,
+        305.0,
+        301.7,
+        296.5,
+        292.0,
+        289.3,
+        289.2,
+        288.4,
+        287.4,
+        287.3,
+        287.3,
+        287.3,
+        287.3
+       ],
+       "q_g_kg": [
+        9.631e-06,
+        0.001746,
+        0.06383,
+        0.2601,
+        1.256,
+        3.196,
+        5.494,
+        7.315,
+        9.055,
+        10.99,
+        11.62,
+        11.87,
+        11.91,
+        11.97,
+        11.97
+       ],
+       "z_full_m": [
+        126000.0,
+        90650.0,
+        70110.0,
+        53990.0,
+        40280.0,
+        28370.0,
+        19260.0,
+        13670.0,
+        10480.0,
+        8223.0,
+        6195.0,
+        4201.0,
+        2519.0,
+        1219.0,
+        314.2
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.2443,
+         "shallow": 0.0,
+         "mid": 0.6449
+        },
+        "top_median_km": 56.92,
+        "rain_mm_day": 0.8647,
+        "residuals": {
+         "water_mm_day": -3.375e-14,
+         "heat_w_m2": -1.383
+        }
+       }
+      },
+      "lunar_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 6.797,
+        "q_low_g_kg": 12.23,
+        "q_mid_g_kg": 11.61,
+        "vapour_drop_g_kg": 0.6251,
+        "lid_rise_k": 1.111,
+        "levels_km": [
+         0.31,
+         6.19,
+         8.22
+        ]
+       },
+       "lid": {
+        "height_km": 7.218,
+        "heat": {
+         "diffusion": -2.184,
+         "dry_adjustment": -3.078e-13,
+         "mixing": -2.184
+        },
+        "vapour": {
+         "diffusion": 4.423,
+         "dry_adjustment": 0.0,
+         "mixing": 4.423
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -1.166,
+        "vapour_drop_g_kg": -3.471,
+        "lid_rise_k": -2.168
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": -0.4167,
+        "vapour_drop_g_kg": 0.01288,
+        "lid_rise_k": 0.4913
+       },
+       "rain_mm_day": 0.7686,
+       "rain_conv_mm_day": 0.02966,
+       "rain_ls_mm_day": 0.7389,
+       "dca_share": 1.0,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.03143,
+        "mid": 0.0
+       },
+       "top_median_km": 7.482,
+       "shallow_only_share": 1.0,
+       "water_mm_day": {
+        "evaporation": 2.947,
+        "large_scale_water": -2.36,
+        "rain": 0.7686,
+        "water_stored": -0.1769,
+        "prescribed": 0.0,
+        "floor": 0.005265
+       },
+       "heat_w_m2": {
+        "sensible": 9.222,
+        "radiation": -109.6,
+        "large_scale_heat": 72.62,
+        "heat_stored": -3.368,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": 1.946e-14,
+        "heat_w_m2": -2.143
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        -0.1511,
+        1.001,
+        0.8168,
+        0.08434,
+        0.1235,
+        -0.05859,
+        -0.7654,
+        0.08754,
+        0.02611,
+        -0.07734,
+        -0.1295,
+        -0.09409
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.009645,
+        -0.02859,
+        -0.02182,
+        -0.008907,
+        -0.005673,
+        -0.002668,
+        0.05193,
+        -0.01125,
+        -0.008988,
+        -0.00331,
+        -0.0005718,
+        0.0005383
+       ],
+       "h_median_km": 6.583,
+       "we_median_mm_s": 1.422,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        399.4,
+        334.0,
+        319.6,
+        305.1,
+        301.8,
+        296.5,
+        292.0,
+        289.3,
+        289.1,
+        288.3,
+        287.2,
+        287.0,
+        287.0,
+        287.0,
+        287.0
+       ],
+       "q_g_kg": [
+        9.631e-06,
+        0.001746,
+        0.06379,
+        0.262,
+        1.254,
+        3.195,
+        5.477,
+        7.437,
+        8.969,
+        10.74,
+        11.61,
+        12.09,
+        12.17,
+        12.23,
+        12.23
+       ],
+       "z_full_m": [
+        126000.0,
+        90650.0,
+        70120.0,
+        53990.0,
+        40280.0,
+        28370.0,
+        19250.0,
+        13660.0,
+        10470.0,
+        8217.0,
+        6191.0,
+        4198.0,
+        2517.0,
+        1218.0,
+        313.9
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.2699,
+         "shallow": 0.0,
+         "mid": 0.6193
+        },
+        "top_median_km": 56.77,
+        "rain_mm_day": 0.8274,
+        "residuals": {
+         "water_mm_day": 4.263e-14,
+         "heat_w_m2": -1.244
+        }
+       }
+      }
+     },
+     "setup_closes_half_of_testbed_gap": false,
+     "nonlocal_closes_half_within": false
+    }
+   }
+  },
+  "sea night": {
+   "site": "sea",
+   "case": "box_near_side_sea_day3",
+   "start_quarter": "evening",
+   "compared_quarter": "night",
+   "cm1": {
+    "measures": {
+     "mixed_depth_km": 6.484,
+     "q_low_g_kg": 11.44,
+     "q_mid_g_kg": 11.11,
+     "vapour_drop_g_kg": 0.3363,
+     "lid_rise_k": 1.38,
+     "levels_km": [
+      0.31,
+      6.12,
+      8.13
+     ],
+     "hpbl_km": 6.074
+    },
+    "rain_ground_mm_day": 0.1564,
+    "lid": {
+     "heights_km": [
+      6.446,
+      6.989
+     ],
+     "khv_m2_s": 11.3,
+     "heat": {
+      "resolved": -0.02409,
+      "diffusion": -0.5499,
+      "subgrid": -10.09,
+      "total": -10.66
+     },
+     "vapour": {
+      "resolved": 7.671,
+      "diffusion": 0.7949,
+      "subgrid": 14.11,
+      "total": 22.58
+     }
+    },
+    "theta_v_k": [
+     395.9,
+     332.6,
+     320.0,
+     307.6,
+     303.8,
+     297.0,
+     292.7,
+     290.3,
+     288.8,
+     287.2,
+     285.9,
+     285.6,
+     285.5,
+     285.5,
+     285.6
+    ],
+    "q_g_kg": [
+     2.69e-05,
+     0.0,
+     0.002552,
+     0.1811,
+     1.268,
+     3.233,
+     4.942,
+     6.25,
+     7.583,
+     10.05,
+     11.11,
+     11.31,
+     11.32,
+     11.32,
+     11.44
+    ]
+   },
+   "setups": {
+    "massflux": {
+     "schemes": {
+      "earth_local": {
+       "measures": {
+        "mixed_depth_km": 4.871,
+        "q_low_g_kg": 13.51,
+        "q_mid_g_kg": 10.18,
+        "vapour_drop_g_kg": 3.337,
+        "lid_rise_k": 1.955,
+        "levels_km": [
+         0.31,
+         6.12,
+         8.13
+        ]
+       },
+       "lid": {
+        "height_km": 7.138,
+        "heat": {
+         "diffusion": -0.02648,
+         "dry_adjustment": -4.8e-12,
+         "mixing": -0.02648
+        },
+        "vapour": {
+         "diffusion": 0.02822,
+         "dry_adjustment": 0.0,
+         "mixing": 0.02822
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "rain_mm_day": 1.062,
+       "rain_conv_mm_day": 0.7541,
+       "rain_ls_mm_day": 0.3076,
+       "dca_share": 1.0,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 57.61,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -3.511,
+        "rain": 1.062,
+        "water_stored": -1.364
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 74.95,
+        "heat_stored": -70.52
+       },
+       "residuals": {
+        "water_mm_day": -0.1324,
+        "heat_w_m2": -0.66
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        17.15,
+        8.023,
+        18.88,
+        -7.189,
+        -5.675,
+        -3.035,
+        -3.06,
+        10.44,
+        6.224,
+        -0.378,
+        -9.801,
+        -9.639
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.2096,
+        -0.05359,
+        -0.05571,
+        0.4681,
+        0.2192,
+        0.09024,
+        0.1259,
+        -0.1646,
+        -0.5884,
+        -0.6169,
+        -0.3298,
+        -0.05802
+       ],
+       "theta_v_k": [
+        404.8,
+        333.6,
+        318.9,
+        306.8,
+        304.0,
+        298.6,
+        293.2,
+        289.9,
+        287.9,
+        286.5,
+        284.5,
+        283.7,
+        283.5,
+        283.5,
+        283.5
+       ],
+       "q_g_kg": [
+        6.337e-06,
+        1e-06,
+        0.004176,
+        0.3051,
+        1.204,
+        3.146,
+        5.223,
+        7.075,
+        8.327,
+        9.252,
+        10.18,
+        11.54,
+        12.9,
+        13.51,
+        13.51
+       ],
+       "z_full_m": [
+        126400.0,
+        90810.0,
+        70300.0,
+        54150.0,
+        40350.0,
+        28350.0,
+        19170.0,
+        13560.0,
+        10370.0,
+        8131.0,
+        6120.0,
+        4148.0,
+        2486.0,
+        1203.0,
+        310.1
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.9603,
+         "shallow": 0.008499,
+         "mid": 0.0
+        },
+        "top_median_km": 48.21,
+        "rain_mm_day": 1.823,
+        "residuals": {
+         "water_mm_day": -0.005365,
+         "heat_w_m2": -1.026
+        }
+       }
+      },
+      "lunar_local": {
+       "measures": {
+        "mixed_depth_km": 4.571,
+        "q_low_g_kg": 13.36,
+        "q_mid_g_kg": 10.27,
+        "vapour_drop_g_kg": 3.082,
+        "lid_rise_k": 1.862,
+        "levels_km": [
+         0.31,
+         6.12,
+         8.13
+        ]
+       },
+       "lid": {
+        "height_km": 7.14,
+        "heat": {
+         "diffusion": -0.3207,
+         "dry_adjustment": -1.428e-11,
+         "mixing": -0.3207
+        },
+        "vapour": {
+         "diffusion": 0.4075,
+         "dry_adjustment": 0.0,
+         "mixing": 0.4075
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -0.1862,
+        "vapour_drop_g_kg": 0.0849,
+        "lid_rise_k": 0.1618
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": -0.1862,
+        "vapour_drop_g_kg": 0.0849,
+        "lid_rise_k": 0.1618
+       },
+       "rain_mm_day": 0.9742,
+       "rain_conv_mm_day": 0.6542,
+       "rain_ls_mm_day": 0.3199,
+       "dca_share": 1.0,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 57.52,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -3.602,
+        "rain": 0.9742,
+        "water_stored": -1.367
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 74.15,
+        "heat_stored": -73.76
+       },
+       "residuals": {
+        "water_mm_day": -0.1323,
+        "heat_w_m2": -0.7494
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        16.03,
+        8.342,
+        19.58,
+        -6.291,
+        -5.155,
+        -3.91,
+        -4.805,
+        9.883,
+        6.336,
+        -0.691,
+        -10.54,
+        -9.698
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.2199,
+        -0.07359,
+        -0.07451,
+        0.4179,
+        0.1968,
+        0.1095,
+        0.1868,
+        -0.2842,
+        -0.5951,
+        -0.51,
+        -0.2374,
+        -0.01058
+       ],
+       "theta_v_k": [
+        404.8,
+        333.6,
+        318.9,
+        306.7,
+        304.0,
+        298.5,
+        293.1,
+        289.8,
+        287.9,
+        286.5,
+        284.6,
+        283.8,
+        283.6,
+        283.5,
+        283.5
+       ],
+       "q_g_kg": [
+        6.337e-06,
+        1e-06,
+        0.004181,
+        0.3032,
+        1.204,
+        3.141,
+        5.215,
+        7.065,
+        8.307,
+        9.201,
+        10.27,
+        11.63,
+        12.86,
+        13.35,
+        13.36
+       ],
+       "z_full_m": [
+        126400.0,
+        90790.0,
+        70290.0,
+        54140.0,
+        40340.0,
+        28340.0,
+        19170.0,
+        13560.0,
+        10370.0,
+        8133.0,
+        6121.0,
+        4148.0,
+        2486.0,
+        1203.0,
+        310.1
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.9377,
+         "shallow": 0.01983,
+         "mid": 0.02833
+        },
+        "top_median_km": 47.79,
+        "rain_mm_day": 1.78,
+        "residuals": {
+         "water_mm_day": -0.005365,
+         "heat_w_m2": -0.999
+        }
+       }
+      },
+      "earth_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 4.459,
+        "q_low_g_kg": 12.78,
+        "q_mid_g_kg": 10.41,
+        "vapour_drop_g_kg": 2.366,
+        "lid_rise_k": 1.592,
+        "levels_km": [
+         0.31,
+         6.13,
+         8.14
+        ]
+       },
+       "lid": {
+        "height_km": 7.146,
+        "heat": {
+         "diffusion": -0.0312,
+         "dry_adjustment": -1.11e-13,
+         "mixing": -0.0312
+        },
+        "vapour": {
+         "diffusion": 0.05596,
+         "dry_adjustment": 0.0,
+         "mixing": 0.05596
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -0.2559,
+        "vapour_drop_g_kg": 0.3234,
+        "lid_rise_k": 0.6322
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": -0.2559,
+        "vapour_drop_g_kg": 0.3234,
+        "lid_rise_k": 0.6322
+       },
+       "rain_mm_day": 0.7725,
+       "rain_conv_mm_day": 0.3152,
+       "rain_ls_mm_day": 0.4574,
+       "dca_share": 0.6103,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 57.36,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -3.894,
+        "rain": 0.7725,
+        "water_stored": -1.458
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 74.59,
+        "heat_stored": -79.28
+       },
+       "residuals": {
+        "water_mm_day": -0.1322,
+        "heat_w_m2": -0.6266
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        14.38,
+        7.175,
+        17.22,
+        -6.292,
+        -5.696,
+        -4.212,
+        -4.483,
+        7.27,
+        4.611,
+        -4.535,
+        -9.787,
+        -6.349
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.179,
+        -0.08074,
+        -0.04465,
+        0.3641,
+        0.2021,
+        0.1215,
+        0.1746,
+        -0.4121,
+        -0.5745,
+        -0.1656,
+        -0.08089,
+        0.002041
+       ],
+       "h_median_km": 3.163,
+       "we_median_mm_s": 3.899,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        404.8,
+        333.6,
+        318.9,
+        306.6,
+        303.8,
+        298.3,
+        292.9,
+        289.7,
+        287.8,
+        286.4,
+        284.8,
+        284.2,
+        283.8,
+        283.8,
+        283.8
+       ],
+       "q_g_kg": [
+        6.337e-06,
+        1e-06,
+        0.004179,
+        0.2996,
+        1.208,
+        3.138,
+        5.227,
+        7.037,
+        8.241,
+        9.127,
+        10.41,
+        11.91,
+        12.78,
+        12.75,
+        12.78
+       ],
+       "z_full_m": [
+        126400.0,
+        90770.0,
+        70260.0,
+        54120.0,
+        40330.0,
+        28330.0,
+        19170.0,
+        13570.0,
+        10380.0,
+        8139.0,
+        6127.0,
+        4152.0,
+        2489.0,
+        1204.0,
+        310.4
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.9377,
+         "shallow": 0.03399,
+         "mid": 0.01416
+        },
+        "top_median_km": 47.57,
+        "rain_mm_day": 1.687,
+        "residuals": {
+         "water_mm_day": -0.005365,
+         "heat_w_m2": -0.9385
+        }
+       }
+      },
+      "lunar_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 4.411,
+        "q_low_g_kg": 12.73,
+        "q_mid_g_kg": 10.45,
+        "vapour_drop_g_kg": 2.286,
+        "lid_rise_k": 1.575,
+        "levels_km": [
+         0.31,
+         6.13,
+         8.14
+        ]
+       },
+       "lid": {
+        "height_km": 7.146,
+        "heat": {
+         "diffusion": -0.3662,
+         "dry_adjustment": 3.499e-12,
+         "mixing": -0.3662
+        },
+        "vapour": {
+         "diffusion": 0.6757,
+         "dry_adjustment": 0.0,
+         "mixing": 0.6757
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -0.2852,
+        "vapour_drop_g_kg": 0.3501,
+        "lid_rise_k": 0.6614
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": -0.2852,
+        "vapour_drop_g_kg": 0.3501,
+        "lid_rise_k": 0.6614
+       },
+       "rain_mm_day": 0.7335,
+       "rain_conv_mm_day": 0.2899,
+       "rain_ls_mm_day": 0.4436,
+       "dca_share": 0.6074,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 57.36,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -3.921,
+        "rain": 0.7335,
+        "water_stored": -1.445
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 74.42,
+        "heat_stored": -80.55
+       },
+       "residuals": {
+        "water_mm_day": -0.1321,
+        "heat_w_m2": -0.6489
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        14.22,
+        7.239,
+        17.27,
+        -6.345,
+        -6.537,
+        -4.274,
+        -4.384,
+        7.344,
+        4.614,
+        -4.533,
+        -9.74,
+        -6.301
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.1769,
+        -0.08604,
+        -0.05381,
+        0.3533,
+        0.2307,
+        0.1173,
+        0.1676,
+        -0.4408,
+        -0.5411,
+        -0.1561,
+        -0.06696,
+        0.009132
+       ],
+       "h_median_km": 3.122,
+       "we_median_mm_s": 3.862,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        404.8,
+        333.6,
+        318.9,
+        306.5,
+        303.8,
+        298.3,
+        292.9,
+        289.7,
+        287.8,
+        286.4,
+        284.8,
+        284.2,
+        283.8,
+        283.8,
+        283.7
+       ],
+       "q_g_kg": [
+        6.337e-06,
+        1e-06,
+        0.004182,
+        0.2994,
+        1.209,
+        3.141,
+        5.228,
+        7.039,
+        8.248,
+        9.13,
+        10.45,
+        11.91,
+        12.74,
+        12.71,
+        12.73
+       ],
+       "z_full_m": [
+        126400.0,
+        90770.0,
+        70260.0,
+        54110.0,
+        40320.0,
+        28330.0,
+        19170.0,
+        13570.0,
+        10380.0,
+        8139.0,
+        6127.0,
+        4152.0,
+        2489.0,
+        1204.0,
+        310.4
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.9405,
+         "shallow": 0.03399,
+         "mid": 0.008499
+        },
+        "top_median_km": 47.6,
+        "rain_mm_day": 1.687,
+        "residuals": {
+         "water_mm_day": -0.005365,
+         "heat_w_m2": -0.9658
+        }
+       }
+      }
+     },
+     "setup_closes_half_of_testbed_gap": false,
+     "nonlocal_closes_half_within": false
+    },
+    "cm1": {
+     "schemes": {
+      "earth_local": {
+       "measures": {
+        "mixed_depth_km": 5.275,
+        "q_low_g_kg": 12.3,
+        "q_mid_g_kg": 11.24,
+        "vapour_drop_g_kg": 1.058,
+        "lid_rise_k": 2.894,
+        "levels_km": [
+         0.31,
+         6.15,
+         8.17
+        ]
+       },
+       "lid": {
+        "height_km": 7.17,
+        "heat": {
+         "diffusion": -0.02296,
+         "dry_adjustment": -4.952e-11,
+         "mixing": -0.02296,
+         "cm1_transport": 0.1505,
+         "total": 0.1276
+        },
+        "vapour": {
+         "diffusion": 0.04375,
+         "dry_adjustment": 2.272e-13,
+         "mixing": 0.04375,
+         "cm1_transport": 6.821,
+         "total": 6.865
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.2505,
+        "vapour_drop_g_kg": 0.7596,
+        "lid_rise_k": -1.635
+       },
+       "rain_mm_day": 0.4093,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.4093,
+       "dca_share": 0.9971,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -4.429,
+        "rain": 0.4093,
+        "water_stored": -1.901,
+        "prescribed": -0.1573,
+        "floor": 0.01795
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 68.23,
+        "heat_stored": -78.52,
+        "prescribed": 18.25
+       },
+       "residuals": {
+        "water_mm_day": 2.265e-14,
+        "heat_w_m2": -0.004129
+       },
+       "conv_heating_w_m2": [
+        1.821,
+        3.865,
+        2.296,
+        3.336,
+        4.301,
+        4.851,
+        -4.495,
+        -0.5754,
+        -0.76,
+        3.908,
+        -1.637,
+        7.602,
+        5.237,
+        -2.426,
+        -9.071
+       ],
+       "conv_moistening_mm_day": [
+        -2.591e-05,
+        0.01881,
+        0.1085,
+        -0.05076,
+        -0.128,
+        -0.118,
+        0.1037,
+        0.03287,
+        0.1182,
+        -0.006675,
+        0.5696,
+        0.4868,
+        0.3002,
+        0.3564,
+        -1.949
+       ],
+       "theta_v_k": [
+        404.9,
+        334.1,
+        318.9,
+        307.7,
+        303.1,
+        297.6,
+        292.8,
+        290.4,
+        288.8,
+        288.7,
+        285.8,
+        284.9,
+        284.9,
+        284.9,
+        284.9
+       ],
+       "q_g_kg": [
+        5.447e-05,
+        0.002074,
+        0.001691,
+        0.1918,
+        1.296,
+        3.163,
+        4.785,
+        5.681,
+        7.573,
+        8.56,
+        11.24,
+        12.31,
+        12.31,
+        12.3,
+        12.3
+       ],
+       "z_full_m": [
+        126500.0,
+        90840.0,
+        70320.0,
+        54140.0,
+        40340.0,
+        28380.0,
+        19230.0,
+        13620.0,
+        10420.0,
+        8170.0,
+        6147.0,
+        4167.0,
+        2498.0,
+        1209.0,
+        311.6
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 2.997e-05,
+        "residuals": {
+         "water_mm_day": -1.377e-14,
+         "heat_w_m2": -0.001915
+        }
+       }
+      },
+      "lunar_local": {
+       "measures": {
+        "mixed_depth_km": 5.24,
+        "q_low_g_kg": 12.06,
+        "q_mid_g_kg": 11.29,
+        "vapour_drop_g_kg": 0.7656,
+        "lid_rise_k": 2.799,
+        "levels_km": [
+         0.31,
+         6.15,
+         8.17
+        ]
+       },
+       "lid": {
+        "height_km": 7.172,
+        "heat": {
+         "diffusion": -0.2746,
+         "dry_adjustment": -6.89e-11,
+         "mixing": -0.2746,
+         "cm1_transport": 0.1505,
+         "total": -0.124
+        },
+        "vapour": {
+         "diffusion": 0.5652,
+         "dry_adjustment": 2.371e-13,
+         "mixing": 0.5652,
+         "cm1_transport": 6.821,
+         "total": 7.386
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -0.02867,
+        "vapour_drop_g_kg": 0.4048,
+        "lid_rise_k": 0.0628
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.229,
+        "vapour_drop_g_kg": 0.8569,
+        "lid_rise_k": -1.47
+       },
+       "rain_mm_day": 0.4117,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.4117,
+       "dca_share": 0.9026,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -4.501,
+        "rain": 0.4117,
+        "water_stored": -1.975,
+        "prescribed": -0.1573,
+        "floor": 0.0179
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 68.42,
+        "heat_stored": -78.19,
+        "prescribed": 18.25
+       },
+       "residuals": {
+        "water_mm_day": -4.441e-14,
+        "heat_w_m2": -0.0755
+       },
+       "conv_heating_w_m2": [
+        1.821,
+        3.865,
+        2.296,
+        3.336,
+        4.301,
+        4.851,
+        -4.495,
+        -0.5754,
+        -0.76,
+        3.908,
+        -1.637,
+        7.602,
+        5.237,
+        -2.426,
+        -9.071
+       ],
+       "conv_moistening_mm_day": [
+        -2.591e-05,
+        0.01881,
+        0.1085,
+        -0.05076,
+        -0.128,
+        -0.118,
+        0.1037,
+        0.03287,
+        0.1182,
+        -0.006675,
+        0.5696,
+        0.4868,
+        0.3002,
+        0.3564,
+        -1.949
+       ],
+       "theta_v_k": [
+        404.9,
+        334.1,
+        318.9,
+        307.7,
+        303.1,
+        297.6,
+        292.8,
+        290.4,
+        288.8,
+        288.6,
+        285.8,
+        284.9,
+        284.9,
+        284.9,
+        284.9
+       ],
+       "q_g_kg": [
+        5.452e-05,
+        0.002076,
+        0.001699,
+        0.1924,
+        1.296,
+        3.163,
+        4.786,
+        5.635,
+        7.821,
+        8.479,
+        11.29,
+        12.07,
+        12.07,
+        12.05,
+        12.06
+       ],
+       "z_full_m": [
+        126500.0,
+        90840.0,
+        70320.0,
+        54140.0,
+        40340.0,
+        28380.0,
+        19230.0,
+        13620.0,
+        10420.0,
+        8172.0,
+        6148.0,
+        4167.0,
+        2499.0,
+        1209.0,
+        311.7
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 2.997e-05,
+        "residuals": {
+         "water_mm_day": -3.353e-14,
+         "heat_w_m2": -0.03503
+        }
+       }
+      },
+      "earth_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 5.057,
+        "q_low_g_kg": 10.88,
+        "q_mid_g_kg": 11.53,
+        "vapour_drop_g_kg": -0.6507,
+        "lid_rise_k": 2.54,
+        "levels_km": [
+         0.31,
+         6.16,
+         8.18
+        ]
+       },
+       "lid": {
+        "height_km": 7.179,
+        "heat": {
+         "diffusion": -0.02552,
+         "dry_adjustment": -4.498e-11,
+         "mixing": -0.02552,
+         "cm1_transport": 0.1505,
+         "total": 0.125
+        },
+        "vapour": {
+         "diffusion": 0.06086,
+         "dry_adjustment": -2.078e-13,
+         "mixing": 0.06086,
+         "cm1_transport": 6.821,
+         "total": 6.882
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -0.1808,
+        "vapour_drop_g_kg": -0.3683,
+        "lid_rise_k": 0.2339
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.115,
+        "vapour_drop_g_kg": 0.6711,
+        "lid_rise_k": -1.019
+       },
+       "rain_mm_day": 0.4815,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.4815,
+       "dca_share": 0.5559,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -4.914,
+        "rain": 0.4815,
+        "water_stored": -2.458,
+        "prescribed": -0.1573,
+        "floor": 0.01795
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 68.94,
+        "heat_stored": -75.72,
+        "prescribed": 18.25
+       },
+       "residuals": {
+        "water_mm_day": 8.882e-15,
+        "heat_w_m2": -0.004786
+       },
+       "conv_heating_w_m2": [
+        1.821,
+        3.865,
+        2.296,
+        3.336,
+        4.301,
+        4.851,
+        -4.495,
+        -0.5754,
+        -0.76,
+        3.908,
+        -1.637,
+        7.602,
+        5.237,
+        -2.426,
+        -9.071
+       ],
+       "conv_moistening_mm_day": [
+        -2.591e-05,
+        0.01881,
+        0.1085,
+        -0.05076,
+        -0.128,
+        -0.118,
+        0.1037,
+        0.03287,
+        0.1182,
+        -0.006675,
+        0.5696,
+        0.4868,
+        0.3002,
+        0.3564,
+        -1.949
+       ],
+       "h_median_km": 4.704,
+       "we_median_mm_s": 1.734,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        404.9,
+        334.1,
+        318.9,
+        307.7,
+        303.1,
+        297.6,
+        292.8,
+        290.4,
+        288.8,
+        288.7,
+        286.1,
+        285.3,
+        285.2,
+        285.2,
+        285.2
+       ],
+       "q_g_kg": [
+        5.447e-05,
+        0.002074,
+        0.001691,
+        0.1918,
+        1.296,
+        3.163,
+        4.785,
+        5.679,
+        7.568,
+        8.504,
+        11.53,
+        11.23,
+        11.09,
+        10.97,
+        10.88
+       ],
+       "z_full_m": [
+        126500.0,
+        90850.0,
+        70330.0,
+        54150.0,
+        40350.0,
+        28390.0,
+        19240.0,
+        13630.0,
+        10430.0,
+        8180.0,
+        6155.0,
+        4172.0,
+        2501.0,
+        1210.0,
+        311.9
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 0.09476,
+        "residuals": {
+         "water_mm_day": -2.531e-14,
+         "heat_w_m2": -0.01035
+        }
+       }
+      },
+      "lunar_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 5.147,
+        "q_low_g_kg": 10.85,
+        "q_mid_g_kg": 11.5,
+        "vapour_drop_g_kg": -0.6533,
+        "lid_rise_k": 2.557,
+        "levels_km": [
+         0.31,
+         6.16,
+         8.18
+        ]
+       },
+       "lid": {
+        "height_km": 7.18,
+        "heat": {
+         "diffusion": -0.2967,
+         "dry_adjustment": -6.274e-11,
+         "mixing": -0.2967,
+         "cm1_transport": 0.1505,
+         "total": -0.1462
+        },
+        "vapour": {
+         "diffusion": 0.7182,
+         "dry_adjustment": -6.173e-14,
+         "mixing": 0.7182,
+         "cm1_transport": 6.821,
+         "total": 7.539
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -0.1057,
+        "vapour_drop_g_kg": -0.3719,
+        "lid_rise_k": 0.2227
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.1713,
+        "vapour_drop_g_kg": 0.6702,
+        "lid_rise_k": -1.049
+       },
+       "rain_mm_day": 0.4662,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.4662,
+       "dca_share": 0.6476,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -4.914,
+        "rain": 0.4662,
+        "water_stored": -2.443,
+        "prescribed": -0.1573,
+        "floor": 0.0179
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 69.27,
+        "heat_stored": -75.76,
+        "prescribed": 18.25
+       },
+       "residuals": {
+        "water_mm_day": -5.329e-15,
+        "heat_w_m2": -0.07618
+       },
+       "conv_heating_w_m2": [
+        1.821,
+        3.865,
+        2.296,
+        3.336,
+        4.301,
+        4.851,
+        -4.495,
+        -0.5754,
+        -0.76,
+        3.908,
+        -1.637,
+        7.602,
+        5.237,
+        -2.426,
+        -9.071
+       ],
+       "conv_moistening_mm_day": [
+        -2.591e-05,
+        0.01881,
+        0.1085,
+        -0.05076,
+        -0.128,
+        -0.118,
+        0.1037,
+        0.03287,
+        0.1182,
+        -0.006675,
+        0.5696,
+        0.4868,
+        0.3002,
+        0.3564,
+        -1.949
+       ],
+       "h_median_km": 4.809,
+       "we_median_mm_s": 1.949,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        404.9,
+        334.1,
+        318.9,
+        307.7,
+        303.1,
+        297.6,
+        292.8,
+        290.4,
+        288.8,
+        288.6,
+        286.1,
+        285.3,
+        285.3,
+        285.2,
+        285.2
+       ],
+       "q_g_kg": [
+        5.452e-05,
+        0.002076,
+        0.001699,
+        0.1924,
+        1.296,
+        3.163,
+        4.786,
+        5.631,
+        7.827,
+        8.438,
+        11.5,
+        11.2,
+        11.05,
+        10.94,
+        10.85
+       ],
+       "z_full_m": [
+        126500.0,
+        90850.0,
+        70330.0,
+        54150.0,
+        40350.0,
+        28390.0,
+        19240.0,
+        13630.0,
+        10430.0,
+        8180.0,
+        6156.0,
+        4173.0,
+        2501.0,
+        1210.0,
+        312.0
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 0.09146,
+        "residuals": {
+         "water_mm_day": -2.842e-14,
+         "heat_w_m2": -0.03788
+        }
+       }
+      }
+     },
+     "setup_closes_half_of_testbed_gap": false,
+     "nonlocal_closes_half_within": false
+    },
+    "massflux_shallow_night": {
+     "schemes": {
+      "earth_local": {
+       "measures": {
+        "mixed_depth_km": 6.688,
+        "q_low_g_kg": 13.78,
+        "q_mid_g_kg": 12.02,
+        "vapour_drop_g_kg": 1.762,
+        "lid_rise_k": 1.416,
+        "levels_km": [
+         0.31,
+         6.18,
+         8.21
+        ]
+       },
+       "lid": {
+        "height_km": 7.211,
+        "heat": {
+         "diffusion": -0.03948,
+         "dry_adjustment": -9.413e-12,
+         "mixing": -0.03948
+        },
+        "vapour": {
+         "diffusion": 0.1609,
+         "dry_adjustment": -8.98e-14,
+         "mixing": 0.1609
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.8733,
+        "vapour_drop_g_kg": 0.5249,
+        "lid_rise_k": 0.9375
+       },
+       "rain_mm_day": 0.7301,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.7301,
+       "dca_share": 1.0,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.1862,
+        "mid": 0.0
+       },
+       "top_median_km": 54.4,
+       "shallow_only_share": 1.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -4.169,
+        "rain": 0.7301,
+        "water_stored": -1.693,
+        "prescribed": 0.0,
+        "floor": 0.1297
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 69.45,
+        "heat_stored": -85.86,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": 3.397e-14,
+        "heat_w_m2": -0.4174
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "theta_v_k": [
+        404.8,
+        333.6,
+        318.9,
+        305.9,
+        301.4,
+        295.5,
+        291.7,
+        290.0,
+        288.4,
+        288.3,
+        286.9,
+        286.7,
+        286.7,
+        286.7,
+        286.7
+       ],
+       "q_g_kg": [
+        6.337e-06,
+        1e-06,
+        0.004233,
+        0.2491,
+        1.229,
+        3.003,
+        4.962,
+        6.183,
+        7.629,
+        8.677,
+        12.02,
+        13.76,
+        13.79,
+        13.78,
+        13.78
+       ],
+       "z_full_m": [
+        126200.0,
+        90590.0,
+        70080.0,
+        53950.0,
+        40230.0,
+        28340.0,
+        19250.0,
+        13650.0,
+        10460.0,
+        8210.0,
+        6184.0,
+        4194.0,
+        2514.0,
+        1216.0,
+        313.6
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.05382,
+         "mid": 0.0
+        },
+        "top_median_km": 5.637,
+        "rain_mm_day": 0.568,
+        "residuals": {
+         "water_mm_day": 5.618e-14,
+         "heat_w_m2": -0.6457
+        }
+       }
+      },
+      "lunar_local": {
+       "measures": {
+        "mixed_depth_km": 6.475,
+        "q_low_g_kg": 13.67,
+        "q_mid_g_kg": 12.06,
+        "vapour_drop_g_kg": 1.617,
+        "lid_rise_k": 1.361,
+        "levels_km": [
+         0.31,
+         6.18,
+         8.21
+        ]
+       },
+       "lid": {
+        "height_km": 7.209,
+        "heat": {
+         "diffusion": -0.4892,
+         "dry_adjustment": -6.393e-11,
+         "mixing": -0.4892
+        },
+        "vapour": {
+         "diffusion": 2.202,
+         "dry_adjustment": -2.955e-13,
+         "mixing": 2.202
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.9558,
+        "vapour_drop_g_kg": 0.1016,
+        "lid_rise_k": 0.4577
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.9944,
+        "vapour_drop_g_kg": 0.5732,
+        "lid_rise_k": 0.9661
+       },
+       "rain_mm_day": 0.6967,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.6967,
+       "dca_share": 1.0,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.07163,
+        "mid": 0.0
+       },
+       "top_median_km": 54.54,
+       "shallow_only_share": 1.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -4.178,
+        "rain": 0.6967,
+        "water_stored": -1.668,
+        "prescribed": 0.0,
+        "floor": 0.1297
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 69.06,
+        "heat_stored": -87.13,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": -1.799e-14,
+        "heat_w_m2": -0.5063
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "theta_v_k": [
+        404.8,
+        333.6,
+        318.9,
+        305.9,
+        301.4,
+        295.5,
+        291.7,
+        290.0,
+        288.3,
+        288.3,
+        286.9,
+        286.6,
+        286.6,
+        286.6,
+        286.6
+       ],
+       "q_g_kg": [
+        6.337e-06,
+        1e-06,
+        0.004236,
+        0.2495,
+        1.229,
+        3.003,
+        4.966,
+        6.047,
+        8.325,
+        8.388,
+        12.06,
+        13.67,
+        13.68,
+        13.67,
+        13.67
+       ],
+       "z_full_m": [
+        126200.0,
+        90590.0,
+        70080.0,
+        53950.0,
+        40230.0,
+        28340.0,
+        19240.0,
+        13650.0,
+        10460.0,
+        8208.0,
+        6182.0,
+        4192.0,
+        2513.0,
+        1216.0,
+        313.5
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.05099,
+         "mid": 0.0
+        },
+        "top_median_km": 5.55,
+        "rain_mm_day": 0.5365,
+        "residuals": {
+         "water_mm_day": 7.072e-14,
+         "heat_w_m2": -0.6923
+        }
+       }
+      },
+      "earth_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 6.146,
+        "q_low_g_kg": 13.14,
+        "q_mid_g_kg": 12.18,
+        "vapour_drop_g_kg": 0.9637,
+        "lid_rise_k": 0.8213,
+        "levels_km": [
+         0.31,
+         6.18,
+         8.21
+        ]
+       },
+       "lid": {
+        "height_km": 7.21,
+        "heat": {
+         "diffusion": -0.05866,
+         "dry_adjustment": -4.001e-12,
+         "mixing": -0.05866
+        },
+        "vapour": {
+         "diffusion": 0.3087,
+         "dry_adjustment": 0.0,
+         "mixing": 0.3087
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -0.6523,
+        "vapour_drop_g_kg": 0.5598,
+        "lid_rise_k": -14.57
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.7907,
+        "vapour_drop_g_kg": 0.7909,
+        "lid_rise_k": 0.02657
+       },
+       "rain_mm_day": 0.5302,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.5302,
+       "dca_share": 1.0,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.3782,
+        "mid": 0.0
+       },
+       "top_median_km": 47.16,
+       "shallow_only_share": 1.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -4.539,
+        "rain": 0.5302,
+        "water_stored": -1.862,
+        "prescribed": 0.0,
+        "floor": 0.1297
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 70.17,
+        "heat_stored": -90.9,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": 3.753e-14,
+        "heat_w_m2": -0.4435
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "h_median_km": 4.85,
+       "we_median_mm_s": 2.859,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        404.8,
+        333.6,
+        318.9,
+        305.9,
+        301.4,
+        295.5,
+        291.8,
+        290.0,
+        288.5,
+        287.9,
+        287.1,
+        286.6,
+        286.6,
+        286.6,
+        286.6
+       ],
+       "q_g_kg": [
+        6.337e-06,
+        1e-06,
+        0.004233,
+        0.2492,
+        1.229,
+        3.004,
+        4.958,
+        6.247,
+        7.213,
+        9.351,
+        12.18,
+        13.15,
+        13.15,
+        13.14,
+        13.14
+       ],
+       "z_full_m": [
+        126200.0,
+        90590.0,
+        70080.0,
+        53950.0,
+        40230.0,
+        28340.0,
+        19240.0,
+        13650.0,
+        10460.0,
+        8208.0,
+        6183.0,
+        4192.0,
+        2513.0,
+        1216.0,
+        313.5
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.04249,
+         "mid": 0.0
+        },
+        "top_median_km": 5.496,
+        "rain_mm_day": 0.668,
+        "residuals": {
+         "water_mm_day": 3.617e-14,
+         "heat_w_m2": -0.6091
+        }
+       }
+      },
+      "lunar_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 6.34,
+        "q_low_g_kg": 12.98,
+        "q_mid_g_kg": 12.16,
+        "vapour_drop_g_kg": 0.8247,
+        "lid_rise_k": 0.8515,
+        "levels_km": [
+         0.31,
+         6.18,
+         8.21
+        ]
+       },
+       "lid": {
+        "height_km": 7.211,
+        "heat": {
+         "diffusion": -0.66,
+         "dry_adjustment": -4.748e-12,
+         "mixing": -0.66
+        },
+        "vapour": {
+         "diffusion": 3.372,
+         "dry_adjustment": 0.0,
+         "mixing": 3.372
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.294,
+        "vapour_drop_g_kg": 0.6573,
+        "lid_rise_k": -13.73
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.9106,
+        "vapour_drop_g_kg": 0.8372,
+        "lid_rise_k": 0.07903
+       },
+       "rain_mm_day": 0.505,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.505,
+       "dca_share": 1.0,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.3754,
+        "mid": 0.0
+       },
+       "top_median_km": 47.9,
+       "shallow_only_share": 1.0,
+       "water_mm_day": {
+        "evaporation": 3.077,
+        "large_scale_water": -4.612,
+        "rain": 0.505,
+        "water_stored": -1.911,
+        "prescribed": 0.0,
+        "floor": 0.1297
+       },
+       "heat_w_m2": {
+        "sensible": 8.338,
+        "radiation": -185.2,
+        "large_scale_heat": 70.6,
+        "heat_stored": -91.2,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": 7.55e-14,
+        "heat_w_m2": -0.4385
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+       ],
+       "h_median_km": 4.95,
+       "we_median_mm_s": 3.309,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        404.8,
+        333.6,
+        318.9,
+        305.9,
+        301.4,
+        295.5,
+        291.7,
+        290.0,
+        288.5,
+        287.9,
+        287.0,
+        286.6,
+        286.6,
+        286.6,
+        286.6
+       ],
+       "q_g_kg": [
+        6.337e-06,
+        1e-06,
+        0.004236,
+        0.2495,
+        1.229,
+        3.003,
+        4.964,
+        6.166,
+        7.62,
+        9.377,
+        12.16,
+        13.01,
+        12.99,
+        12.98,
+        12.98
+       ],
+       "z_full_m": [
+        126200.0,
+        90590.0,
+        70080.0,
+        53950.0,
+        40230.0,
+        28340.0,
+        19240.0,
+        13650.0,
+        10460.0,
+        8208.0,
+        6183.0,
+        4192.0,
+        2513.0,
+        1216.0,
+        313.5
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.04249,
+         "mid": 0.0
+        },
+        "top_median_km": 5.516,
+        "rain_mm_day": 0.6715,
+        "residuals": {
+         "water_mm_day": 8.188e-15,
+         "heat_w_m2": -0.6934
+        }
+       }
+      }
+     },
+     "setup_closes_half_of_testbed_gap": true,
+     "nonlocal_closes_half_within": false
+    }
+   }
+  },
+  "land afternoon": {
+   "site": "land",
+   "case": "box_0e_design",
+   "start_quarter": "morning",
+   "compared_quarter": "afternoon",
+   "cm1": {
+    "measures": {
+     "mixed_depth_km": 2.753,
+     "q_low_g_kg": 16.18,
+     "q_mid_g_kg": 13.14,
+     "vapour_drop_g_kg": 3.033,
+     "lid_rise_k": 0.6034,
+     "levels_km": [
+      0.32,
+      6.24,
+      8.28
+     ],
+     "hpbl_km": 3.975
+    },
+    "rain_ground_mm_day": 8.715,
+    "lid": {
+     "heights_km": [
+      6.446,
+      6.989
+     ],
+     "khv_m2_s": 9.473,
+     "heat": {
+      "resolved": -9.202,
+      "diffusion": -0.6806,
+      "subgrid": -4.56,
+      "total": -14.44
+     },
+     "vapour": {
+      "resolved": 217.1,
+      "diffusion": 4.485,
+      "subgrid": 22.49,
+      "total": 244.1
+     }
+    },
+    "theta_v_k": [
+     398.3,
+     330.9,
+     322.8,
+     318.4,
+     311.9,
+     303.7,
+     297.8,
+     295.2,
+     293.7,
+     292.7,
+     292.1,
+     291.7,
+     291.4,
+     291.0,
+     290.9
+    ],
+    "q_g_kg": [
+     5.499e-12,
+     0.001098,
+     0.05219,
+     0.4988,
+     2.003,
+     4.458,
+     6.394,
+     8.002,
+     9.649,
+     11.32,
+     13.14,
+     14.61,
+     15.49,
+     15.92,
+     16.18
+    ]
+   },
+   "setups": {
+    "massflux": {
+     "schemes": {
+      "earth_local": {
+       "measures": {
+        "mixed_depth_km": 6.863,
+        "q_low_g_kg": 19.0,
+        "q_mid_g_kg": 13.58,
+        "vapour_drop_g_kg": 5.418,
+        "lid_rise_k": 0.57,
+        "levels_km": [
+         0.32,
+         6.24,
+         8.28
+        ]
+       },
+       "lid": {
+        "height_km": 7.274,
+        "heat": {
+         "diffusion": -0.1252,
+         "dry_adjustment": 9.937e-13,
+         "mixing": -0.1252
+        },
+        "vapour": {
+         "diffusion": 1.052,
+         "dry_adjustment": 0.0,
+         "mixing": 1.052
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "rain_mm_day": 9.369,
+       "rain_conv_mm_day": 7.837,
+       "rain_ls_mm_day": 1.531,
+       "dca_share": 0.6648,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 72.17,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 5.741,
+        "rain": 9.369,
+        "water_stored": 1.47
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -362.1,
+        "heat_stored": 26.34
+       },
+       "residuals": {
+        "water_mm_day": -0.0002791,
+        "heat_w_m2": -5.393
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        -30.05,
+        81.32,
+        72.32,
+        66.74,
+        27.49,
+        15.41,
+        9.445,
+        5.56,
+        3.254,
+        0.296,
+        -0.3195,
+        -11.41,
+        -13.64
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        1.215,
+        -0.485,
+        -0.679,
+        0.1146,
+        1.088,
+        0.3721,
+        -0.2681,
+        -0.5459,
+        -2.212,
+        -2.43,
+        -2.193,
+        -1.349,
+        -0.4664
+       ],
+       "theta_v_k": [
+        410.7,
+        331.6,
+        317.5,
+        315.2,
+        310.9,
+        304.6,
+        298.2,
+        294.8,
+        292.8,
+        291.5,
+        290.9,
+        290.7,
+        290.6,
+        290.6,
+        290.6
+       ],
+       "q_g_kg": [
+        1e-06,
+        0.001895,
+        0.04856,
+        0.456,
+        1.781,
+        4.239,
+        6.718,
+        8.712,
+        10.26,
+        11.61,
+        13.58,
+        15.68,
+        17.68,
+        18.84,
+        19.0
+       ],
+       "z_full_m": [
+        127200.0,
+        91580.0,
+        71280.0,
+        55020.0,
+        40950.0,
+        28750.0,
+        19450.0,
+        13780.0,
+        10550.0,
+        8279.0,
+        6238.0,
+        4230.0,
+        2536.0,
+        1227.0,
+        316.3
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.3086,
+         "shallow": 0.0,
+         "mid": 0.6914
+        },
+        "top_median_km": 61.55,
+        "rain_mm_day": 0.8736,
+        "residuals": {
+         "water_mm_day": -0.02462,
+         "heat_w_m2": -1.377
+        }
+       }
+      },
+      "lunar_local": {
+       "measures": {
+        "mixed_depth_km": 6.51,
+        "q_low_g_kg": 18.9,
+        "q_mid_g_kg": 13.71,
+        "vapour_drop_g_kg": 5.189,
+        "lid_rise_k": 0.5324,
+        "levels_km": [
+         0.32,
+         6.24,
+         8.28
+        ]
+       },
+       "lid": {
+        "height_km": 7.276,
+        "heat": {
+         "diffusion": -1.354,
+         "dry_adjustment": 6.689e-12,
+         "mixing": -1.354
+        },
+        "vapour": {
+         "diffusion": 10.85,
+         "dry_adjustment": 0.0,
+         "mixing": 10.85
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.08592,
+        "vapour_drop_g_kg": 0.09618,
+        "lid_rise_k": -1.13
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.08592,
+        "vapour_drop_g_kg": 0.09618,
+        "lid_rise_k": -1.13
+       },
+       "rain_mm_day": 9.306,
+       "rain_conv_mm_day": 7.8,
+       "rain_ls_mm_day": 1.506,
+       "dca_share": 0.6222,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 72.15,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 5.767,
+        "rain": 9.306,
+        "water_stored": 1.559
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -362.3,
+        "heat_stored": 24.33
+       },
+       "residuals": {
+        "water_mm_day": -0.0002791,
+        "heat_w_m2": -5.343
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        -29.87,
+        80.86,
+        72.1,
+        66.89,
+        27.51,
+        15.02,
+        8.999,
+        5.881,
+        3.9,
+        1.007,
+        -0.6774,
+        -12.15,
+        -14.13
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        1.196,
+        -0.4898,
+        -0.6944,
+        0.1403,
+        1.111,
+        0.3731,
+        -0.298,
+        -0.8523,
+        -2.312,
+        -2.353,
+        -2.004,
+        -1.223,
+        -0.3937
+       ],
+       "theta_v_k": [
+        410.7,
+        331.6,
+        317.5,
+        315.1,
+        310.9,
+        304.6,
+        298.2,
+        294.7,
+        292.8,
+        291.5,
+        291.0,
+        290.8,
+        290.6,
+        290.6,
+        290.6
+       ],
+       "q_g_kg": [
+        1e-06,
+        0.001895,
+        0.04847,
+        0.456,
+        1.78,
+        4.23,
+        6.7,
+        8.696,
+        10.25,
+        11.71,
+        13.71,
+        15.76,
+        17.69,
+        18.75,
+        18.9
+       ],
+       "z_full_m": [
+        127200.0,
+        91570.0,
+        71280.0,
+        55020.0,
+        40940.0,
+        28750.0,
+        19450.0,
+        13780.0,
+        10550.0,
+        8281.0,
+        6239.0,
+        4230.0,
+        2536.0,
+        1227.0,
+        316.3
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.2657,
+         "shallow": 0.0,
+         "mid": 0.7343
+        },
+        "top_median_km": 62.0,
+        "rain_mm_day": 0.9268,
+        "residuals": {
+         "water_mm_day": -0.02449,
+         "heat_w_m2": -0.8205
+        }
+       }
+      },
+      "earth_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 3.544,
+        "q_low_g_kg": 18.41,
+        "q_mid_g_kg": 14.21,
+        "vapour_drop_g_kg": 4.201,
+        "lid_rise_k": 0.316,
+        "levels_km": [
+         0.32,
+         6.25,
+         8.29
+        ]
+       },
+       "lid": {
+        "height_km": 7.286,
+        "heat": {
+         "diffusion": -3.155,
+         "dry_adjustment": -4.381e-13,
+         "mixing": -3.155
+        },
+        "vapour": {
+         "diffusion": 47.13,
+         "dry_adjustment": 0.0,
+         "mixing": 47.13
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.8076,
+        "vapour_drop_g_kg": 0.5105,
+        "lid_rise_k": -7.629
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.8076,
+        "vapour_drop_g_kg": 0.5105,
+        "lid_rise_k": -7.629
+       },
+       "rain_mm_day": 9.817,
+       "rain_conv_mm_day": 7.697,
+       "rain_ls_mm_day": 2.119,
+       "dca_share": 0.002841,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 72.21,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 5.915,
+        "rain": 9.817,
+        "water_stored": 1.196
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -363.0,
+        "heat_stored": 38.44
+       },
+       "residuals": {
+        "water_mm_day": -0.0002791,
+        "heat_w_m2": -5.42
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        -30.08,
+        82.37,
+        74.01,
+        70.92,
+        30.4,
+        17.3,
+        10.59,
+        5.243,
+        1.044,
+        3.642,
+        -5.847,
+        -19.46,
+        -17.61
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        1.179,
+        -0.4968,
+        -0.7483,
+        0.04613,
+        1.028,
+        0.325,
+        -0.3148,
+        -2.282,
+        -2.338,
+        -2.784,
+        -1.141,
+        -0.2744,
+        0.1019
+       ],
+       "h_median_km": 3.466,
+       "we_median_mm_s": 10.38,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        410.7,
+        331.6,
+        317.3,
+        315.0,
+        310.8,
+        304.4,
+        298.0,
+        294.6,
+        292.6,
+        291.9,
+        291.6,
+        291.3,
+        291.0,
+        290.7,
+        290.7
+       ],
+       "q_g_kg": [
+        1e-06,
+        0.001893,
+        0.048,
+        0.4525,
+        1.774,
+        4.216,
+        6.669,
+        8.657,
+        10.2,
+        12.22,
+        14.21,
+        16.41,
+        17.73,
+        18.22,
+        18.41
+       ],
+       "z_full_m": [
+        127200.0,
+        91550.0,
+        71260.0,
+        55010.0,
+        40940.0,
+        28750.0,
+        19460.0,
+        13790.0,
+        10560.0,
+        8292.0,
+        6247.0,
+        4234.0,
+        2537.0,
+        1227.0,
+        316.4
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.3171,
+         "shallow": 0.005714,
+         "mid": 0.6771
+        },
+        "top_median_km": 61.5,
+        "rain_mm_day": 0.6067,
+        "residuals": {
+         "water_mm_day": -0.02464,
+         "heat_w_m2": -1.321
+        }
+       }
+      },
+      "lunar_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 3.552,
+        "q_low_g_kg": 18.36,
+        "q_mid_g_kg": 14.25,
+        "vapour_drop_g_kg": 4.11,
+        "lid_rise_k": 0.328,
+        "levels_km": [
+         0.32,
+         6.25,
+         8.29
+        ]
+       },
+       "lid": {
+        "height_km": 7.285,
+        "heat": {
+         "diffusion": -4.657,
+         "dry_adjustment": 1.549e-12,
+         "mixing": -4.657
+        },
+        "vapour": {
+         "diffusion": 52.81,
+         "dry_adjustment": 0.0,
+         "mixing": 52.81
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.8056,
+        "vapour_drop_g_kg": 0.5488,
+        "lid_rise_k": -7.268
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.8056,
+        "vapour_drop_g_kg": 0.5488,
+        "lid_rise_k": -7.268
+       },
+       "rain_mm_day": 9.785,
+       "rain_conv_mm_day": 7.783,
+       "rain_ls_mm_day": 2.002,
+       "dca_share": 0.0,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 72.19,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 5.927,
+        "rain": 9.785,
+        "water_stored": 1.24
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -363.0,
+        "heat_stored": 37.47
+       },
+       "residuals": {
+        "water_mm_day": -0.0002791,
+        "heat_w_m2": -5.381
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        -30.01,
+        82.15,
+        73.74,
+        70.58,
+        30.18,
+        17.23,
+        10.97,
+        7.26,
+        2.356,
+        4.102,
+        -5.936,
+        -19.81,
+        -17.84
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        1.174,
+        -0.4973,
+        -0.7488,
+        0.05244,
+        1.034,
+        0.333,
+        -0.5532,
+        -2.303,
+        -2.354,
+        -2.672,
+        -1.092,
+        -0.2653,
+        0.1082
+       ],
+       "h_median_km": 3.688,
+       "we_median_mm_s": 10.73,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        410.7,
+        331.6,
+        317.3,
+        315.0,
+        310.8,
+        304.4,
+        298.0,
+        294.5,
+        292.6,
+        291.9,
+        291.5,
+        291.3,
+        290.9,
+        290.7,
+        290.7
+       ],
+       "q_g_kg": [
+        1e-06,
+        0.001893,
+        0.04799,
+        0.4526,
+        1.774,
+        4.216,
+        6.668,
+        8.652,
+        10.27,
+        12.28,
+        14.25,
+        16.38,
+        17.7,
+        18.18,
+        18.36
+       ],
+       "z_full_m": [
+        127200.0,
+        91550.0,
+        71260.0,
+        55010.0,
+        40940.0,
+        28750.0,
+        19460.0,
+        13790.0,
+        10560.0,
+        8291.0,
+        6247.0,
+        4234.0,
+        2537.0,
+        1227.0,
+        316.4
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.3114,
+         "shallow": 0.005714,
+         "mid": 0.6829
+        },
+        "top_median_km": 61.56,
+        "rain_mm_day": 0.6018,
+        "residuals": {
+         "water_mm_day": -0.02456,
+         "heat_w_m2": -1.286
+        }
+       }
+      }
+     },
+     "setup_closes_half_of_testbed_gap": false,
+     "nonlocal_closes_half_within": true
+    },
+    "cm1": {
+     "schemes": {
+      "earth_local": {
+       "measures": {
+        "mixed_depth_km": 1.413,
+        "q_low_g_kg": 17.18,
+        "q_mid_g_kg": 14.48,
+        "vapour_drop_g_kg": 2.695,
+        "lid_rise_k": 1.204,
+        "levels_km": [
+         0.32,
+         6.25,
+         8.3
+        ]
+       },
+       "lid": {
+        "height_km": 7.293,
+        "heat": {
+         "diffusion": -0.04696,
+         "dry_adjustment": -7.656e-12,
+         "mixing": -0.04696,
+         "cm1_transport": -4.963,
+         "total": -5.01
+        },
+        "vapour": {
+         "diffusion": 0.2486,
+         "dry_adjustment": 3.418e-14,
+         "mixing": 0.2486,
+         "cm1_transport": 224.5,
+         "total": 224.7
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.6739,
+        "vapour_drop_g_kg": 0.8579,
+        "lid_rise_k": -17.03
+       },
+       "rain_mm_day": 0.6895,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.6895,
+       "dca_share": 0.554,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 5.694,
+        "rain": 0.6895,
+        "water_stored": 2.541,
+        "prescribed": -7.561,
+        "floor": 3.75e-06
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -356.3,
+        "heat_stored": -0.4783,
+        "prescribed": 221.7
+       },
+       "residuals": {
+        "water_mm_day": -2.398e-14,
+        "heat_w_m2": -2.247
+       },
+       "conv_heating_w_m2": [
+        -3.047,
+        5.945,
+        41.24,
+        83.28,
+        64.47,
+        61.11,
+        5.196,
+        -0.8121,
+        1.995,
+        1.643,
+        -3.95,
+        -3.201,
+        -1.592,
+        -2.532,
+        -28.04
+       ],
+       "conv_moistening_mm_day": [
+        0.0002933,
+        -0.00564,
+        -0.2587,
+        -0.3377,
+        0.2856,
+        0.3483,
+        0.563,
+        -0.8004,
+        -0.5097,
+        -0.7147,
+        -0.4463,
+        -1.098,
+        -0.81,
+        -0.7856,
+        -2.992
+       ],
+       "theta_v_k": [
+        409.9,
+        332.7,
+        321.8,
+        316.5,
+        311.5,
+        304.9,
+        298.8,
+        294.2,
+        293.9,
+        293.4,
+        292.2,
+        291.9,
+        291.9,
+        289.9,
+        289.7
+       ],
+       "q_g_kg": [
+        2.562e-05,
+        0.00261,
+        0.06403,
+        0.4586,
+        2.229,
+        4.553,
+        6.123,
+        7.168,
+        8.565,
+        10.4,
+        14.48,
+        15.15,
+        15.19,
+        16.64,
+        17.18
+       ],
+       "z_full_m": [
+        127600.0,
+        92010.0,
+        71540.0,
+        55130.0,
+        41020.0,
+        28800.0,
+        19500.0,
+        13810.0,
+        10580.0,
+        8305.0,
+        6253.0,
+        4235.0,
+        2534.0,
+        1223.0,
+        315.3
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 0.01738,
+        "residuals": {
+         "water_mm_day": 6.661e-15,
+         "heat_w_m2": -0.06816
+        }
+       }
+      },
+      "lunar_local": {
+       "measures": {
+        "mixed_depth_km": 1.404,
+        "q_low_g_kg": 17.13,
+        "q_mid_g_kg": 14.41,
+        "vapour_drop_g_kg": 2.718,
+        "lid_rise_k": 1.141,
+        "levels_km": [
+         0.32,
+         6.25,
+         8.31
+        ]
+       },
+       "lid": {
+        "height_km": 7.294,
+        "heat": {
+         "diffusion": -0.5753,
+         "dry_adjustment": -6.99e-12,
+         "mixing": -0.5753,
+         "cm1_transport": -4.963,
+         "total": -5.539
+        },
+        "vapour": {
+         "diffusion": 3.167,
+         "dry_adjustment": 1.69e-13,
+         "mixing": 3.167,
+         "cm1_transport": 224.5,
+         "total": 227.6
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -0.006578,
+        "vapour_drop_g_kg": 0.06858,
+        "lid_rise_k": 0.1046
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.6718,
+        "vapour_drop_g_kg": 0.8677,
+        "lid_rise_k": -15.14
+       },
+       "rain_mm_day": 0.6803,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.6803,
+       "dca_share": 0.5568,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 5.687,
+        "rain": 0.6803,
+        "water_stored": 2.543,
+        "prescribed": -7.561,
+        "floor": 3.75e-06
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -356.5,
+        "heat_stored": -0.9155,
+        "prescribed": 221.7
+       },
+       "residuals": {
+        "water_mm_day": 1.599e-14,
+        "heat_w_m2": -2.272
+       },
+       "conv_heating_w_m2": [
+        -3.047,
+        5.945,
+        41.24,
+        83.28,
+        64.47,
+        61.11,
+        5.196,
+        -0.8121,
+        1.995,
+        1.643,
+        -3.95,
+        -3.201,
+        -1.592,
+        -2.532,
+        -28.04
+       ],
+       "conv_moistening_mm_day": [
+        0.0002933,
+        -0.00564,
+        -0.2587,
+        -0.3377,
+        0.2856,
+        0.3483,
+        0.563,
+        -0.8004,
+        -0.5097,
+        -0.7147,
+        -0.4463,
+        -1.098,
+        -0.81,
+        -0.7856,
+        -2.992
+       ],
+       "theta_v_k": [
+        409.9,
+        332.7,
+        321.8,
+        316.5,
+        311.5,
+        304.9,
+        298.8,
+        294.2,
+        293.8,
+        293.4,
+        292.3,
+        291.9,
+        291.9,
+        290.0,
+        289.8
+       ],
+       "q_g_kg": [
+        2.562e-05,
+        0.00261,
+        0.06405,
+        0.4612,
+        2.229,
+        4.553,
+        6.124,
+        7.262,
+        8.96,
+        10.3,
+        14.41,
+        14.9,
+        14.91,
+        16.63,
+        17.13
+       ],
+       "z_full_m": [
+        127600.0,
+        92000.0,
+        71540.0,
+        55130.0,
+        41020.0,
+        28800.0,
+        19490.0,
+        13810.0,
+        10590.0,
+        8306.0,
+        6253.0,
+        4236.0,
+        2535.0,
+        1224.0,
+        315.4
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 0.01755,
+        "residuals": {
+         "water_mm_day": -1.91e-14,
+         "heat_w_m2": -0.08599
+        }
+       }
+      },
+      "earth_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 6.18,
+        "q_low_g_kg": 13.81,
+        "q_mid_g_kg": 14.13,
+        "vapour_drop_g_kg": -0.3175,
+        "lid_rise_k": 0.5788,
+        "levels_km": [
+         0.32,
+         6.27,
+         8.32
+        ]
+       },
+       "lid": {
+        "height_km": 7.307,
+        "heat": {
+         "diffusion": -10.04,
+         "dry_adjustment": -3.52e-12,
+         "mixing": -10.04,
+         "cm1_transport": -4.963,
+         "total": -15.0
+        },
+        "vapour": {
+         "diffusion": 25.19,
+         "dry_adjustment": 0.0,
+         "mixing": 25.19,
+         "cm1_transport": 224.5,
+         "total": 249.7
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -1.557,
+        "vapour_drop_g_kg": -8.889,
+        "lid_rise_k": 0.9592
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.1662,
+        "vapour_drop_g_kg": -0.4051,
+        "lid_rise_k": 0.2637
+       },
+       "rain_mm_day": 1.052,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 1.052,
+       "dca_share": 0.0,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 6.608,
+        "rain": 1.052,
+        "water_stored": 3.093,
+        "prescribed": -7.561,
+        "floor": 3.75e-06
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -366.6,
+        "heat_stored": -0.3132,
+        "prescribed": 221.7
+       },
+       "residuals": {
+        "water_mm_day": 5.151e-14,
+        "heat_w_m2": -2.28
+       },
+       "conv_heating_w_m2": [
+        -3.047,
+        5.945,
+        41.24,
+        83.28,
+        64.47,
+        61.11,
+        5.196,
+        -0.8121,
+        1.995,
+        1.643,
+        -3.95,
+        -3.201,
+        -1.592,
+        -2.532,
+        -28.04
+       ],
+       "conv_moistening_mm_day": [
+        0.0002933,
+        -0.00564,
+        -0.2587,
+        -0.3377,
+        0.2856,
+        0.3483,
+        0.563,
+        -0.8004,
+        -0.5097,
+        -0.7147,
+        -0.4463,
+        -1.098,
+        -0.81,
+        -0.7856,
+        -2.992
+       ],
+       "h_median_km": 7.537,
+       "we_median_mm_s": 6.622,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        409.9,
+        332.7,
+        321.8,
+        316.5,
+        311.5,
+        304.9,
+        298.8,
+        294.2,
+        293.6,
+        292.8,
+        292.3,
+        292.0,
+        291.9,
+        291.8,
+        291.7
+       ],
+       "q_g_kg": [
+        2.562e-05,
+        0.00261,
+        0.06403,
+        0.4586,
+        2.229,
+        4.553,
+        6.125,
+        7.103,
+        11.27,
+        13.45,
+        14.13,
+        13.94,
+        13.95,
+        13.9,
+        13.81
+       ],
+       "z_full_m": [
+        127700.0,
+        92010.0,
+        71540.0,
+        55140.0,
+        41020.0,
+        28810.0,
+        19500.0,
+        13820.0,
+        10590.0,
+        8316.0,
+        6266.0,
+        4248.0,
+        2546.0,
+        1232.0,
+        317.5
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 0.1259,
+        "residuals": {
+         "water_mm_day": -4.441e-15,
+         "heat_w_m2": -0.08774
+        }
+       }
+      },
+      "lunar_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 6.274,
+        "q_low_g_kg": 13.79,
+        "q_mid_g_kg": 14.1,
+        "vapour_drop_g_kg": -0.3065,
+        "lid_rise_k": 0.5529,
+        "levels_km": [
+         0.32,
+         6.27,
+         8.32
+        ]
+       },
+       "lid": {
+        "height_km": 7.307,
+        "heat": {
+         "diffusion": -9.955,
+         "dry_adjustment": 1.948e-12,
+         "mixing": -9.955,
+         "cm1_transport": -4.963,
+         "total": -14.92
+        },
+        "vapour": {
+         "diffusion": 24.42,
+         "dry_adjustment": -1.49e-14,
+         "mixing": 24.42,
+         "cm1_transport": 224.5,
+         "total": 248.9
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": -1.627,
+        "vapour_drop_g_kg": -8.856,
+        "lid_rise_k": 0.916
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.1434,
+        "vapour_drop_g_kg": -0.4005,
+        "lid_rise_k": -0.5145
+       },
+       "rain_mm_day": 0.9906,
+       "rain_conv_mm_day": 0.0,
+       "rain_ls_mm_day": 0.9906,
+       "dca_share": 0.0142,
+       "types": {
+        "deep": 0.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": null,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 6.63,
+        "rain": 0.9906,
+        "water_stored": 3.176,
+        "prescribed": -7.561,
+        "floor": 3.75e-06
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -366.7,
+        "heat_stored": -2.121,
+        "prescribed": 221.7
+       },
+       "residuals": {
+        "water_mm_day": 5.018e-14,
+        "heat_w_m2": -2.283
+       },
+       "conv_heating_w_m2": [
+        -3.047,
+        5.945,
+        41.24,
+        83.28,
+        64.47,
+        61.11,
+        5.196,
+        -0.8121,
+        1.995,
+        1.643,
+        -3.95,
+        -3.201,
+        -1.592,
+        -2.532,
+        -28.04
+       ],
+       "conv_moistening_mm_day": [
+        0.0002933,
+        -0.00564,
+        -0.2587,
+        -0.3377,
+        0.2856,
+        0.3483,
+        0.563,
+        -0.8004,
+        -0.5097,
+        -0.7147,
+        -0.4463,
+        -1.098,
+        -0.81,
+        -0.7856,
+        -2.992
+       ],
+       "h_median_km": 7.544,
+       "we_median_mm_s": 6.503,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        409.9,
+        332.7,
+        321.8,
+        316.5,
+        311.5,
+        304.9,
+        298.8,
+        294.2,
+        293.6,
+        292.8,
+        292.2,
+        292.0,
+        291.9,
+        291.8,
+        291.8
+       ],
+       "q_g_kg": [
+        2.562e-05,
+        0.00261,
+        0.06405,
+        0.4612,
+        2.229,
+        4.552,
+        6.123,
+        7.314,
+        11.12,
+        13.4,
+        14.1,
+        13.93,
+        13.93,
+        13.88,
+        13.79
+       ],
+       "z_full_m": [
+        127700.0,
+        92010.0,
+        71540.0,
+        55140.0,
+        41020.0,
+        28810.0,
+        19500.0,
+        13820.0,
+        10590.0,
+        8316.0,
+        6266.0,
+        4248.0,
+        2547.0,
+        1232.0,
+        317.5
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.0,
+         "shallow": 0.0,
+         "mid": 0.0
+        },
+        "top_median_km": null,
+        "rain_mm_day": 0.1359,
+        "residuals": {
+         "water_mm_day": -4.796e-14,
+         "heat_w_m2": -0.1041
+        }
+       }
+      }
+     },
+     "setup_closes_half_of_testbed_gap": true,
+     "nonlocal_closes_half_within": false
+    },
+    "massflux_shallow_night": {
+     "schemes": {
+      "earth_local": {
+       "measures": {
+        "mixed_depth_km": 6.863,
+        "q_low_g_kg": 19.0,
+        "q_mid_g_kg": 13.58,
+        "vapour_drop_g_kg": 5.418,
+        "lid_rise_k": 0.57,
+        "levels_km": [
+         0.32,
+         6.24,
+         8.28
+        ]
+       },
+       "lid": {
+        "height_km": 7.274,
+        "heat": {
+         "diffusion": -0.1252,
+         "dry_adjustment": 9.937e-13,
+         "mixing": -0.1252
+        },
+        "vapour": {
+         "diffusion": 1.052,
+         "dry_adjustment": 0.0,
+         "mixing": 1.052
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.0,
+        "vapour_drop_g_kg": 0.0,
+        "lid_rise_k": 0.0
+       },
+       "rain_mm_day": 9.369,
+       "rain_conv_mm_day": 7.837,
+       "rain_ls_mm_day": 1.531,
+       "dca_share": 0.6648,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 72.17,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 5.741,
+        "rain": 9.369,
+        "water_stored": 1.47,
+        "prescribed": 0.0,
+        "floor": 0.0002791
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -362.1,
+        "heat_stored": 26.34,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": 1.303e-13,
+        "heat_w_m2": -5.393
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        -30.05,
+        81.32,
+        72.32,
+        66.74,
+        27.49,
+        15.41,
+        9.445,
+        5.56,
+        3.254,
+        0.296,
+        -0.3195,
+        -11.41,
+        -13.64
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        1.215,
+        -0.485,
+        -0.679,
+        0.1146,
+        1.088,
+        0.3721,
+        -0.2681,
+        -0.5459,
+        -2.212,
+        -2.43,
+        -2.193,
+        -1.349,
+        -0.4664
+       ],
+       "theta_v_k": [
+        410.7,
+        331.6,
+        317.5,
+        315.2,
+        310.9,
+        304.6,
+        298.2,
+        294.8,
+        292.8,
+        291.5,
+        290.9,
+        290.7,
+        290.6,
+        290.6,
+        290.6
+       ],
+       "q_g_kg": [
+        1e-06,
+        0.001895,
+        0.04856,
+        0.456,
+        1.781,
+        4.239,
+        6.718,
+        8.712,
+        10.26,
+        11.61,
+        13.58,
+        15.68,
+        17.68,
+        18.84,
+        19.0
+       ],
+       "z_full_m": [
+        127200.0,
+        91580.0,
+        71280.0,
+        55020.0,
+        40950.0,
+        28750.0,
+        19450.0,
+        13780.0,
+        10550.0,
+        8279.0,
+        6238.0,
+        4230.0,
+        2536.0,
+        1227.0,
+        316.3
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.3086,
+         "shallow": 0.0,
+         "mid": 0.6914
+        },
+        "top_median_km": 61.55,
+        "rain_mm_day": 0.8736,
+        "residuals": {
+         "water_mm_day": 6.395e-14,
+         "heat_w_m2": -1.377
+        }
+       }
+      },
+      "lunar_local": {
+       "measures": {
+        "mixed_depth_km": 6.51,
+        "q_low_g_kg": 18.9,
+        "q_mid_g_kg": 13.71,
+        "vapour_drop_g_kg": 5.189,
+        "lid_rise_k": 0.5324,
+        "levels_km": [
+         0.32,
+         6.24,
+         8.28
+        ]
+       },
+       "lid": {
+        "height_km": 7.276,
+        "heat": {
+         "diffusion": -1.354,
+         "dry_adjustment": 6.689e-12,
+         "mixing": -1.354
+        },
+        "vapour": {
+         "diffusion": 10.85,
+         "dry_adjustment": 0.0,
+         "mixing": 10.85
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.08592,
+        "vapour_drop_g_kg": 0.09618,
+        "lid_rise_k": -1.13
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.08592,
+        "vapour_drop_g_kg": 0.09618,
+        "lid_rise_k": -1.13
+       },
+       "rain_mm_day": 9.306,
+       "rain_conv_mm_day": 7.8,
+       "rain_ls_mm_day": 1.506,
+       "dca_share": 0.6222,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 72.15,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 5.767,
+        "rain": 9.306,
+        "water_stored": 1.559,
+        "prescribed": 0.0,
+        "floor": 0.0002791
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -362.3,
+        "heat_stored": 24.33,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": 2.198e-14,
+        "heat_w_m2": -5.343
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        -29.87,
+        80.86,
+        72.1,
+        66.89,
+        27.51,
+        15.02,
+        8.999,
+        5.881,
+        3.9,
+        1.007,
+        -0.6774,
+        -12.15,
+        -14.13
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        1.196,
+        -0.4898,
+        -0.6944,
+        0.1403,
+        1.111,
+        0.3731,
+        -0.298,
+        -0.8523,
+        -2.312,
+        -2.353,
+        -2.004,
+        -1.223,
+        -0.3937
+       ],
+       "theta_v_k": [
+        410.7,
+        331.6,
+        317.5,
+        315.1,
+        310.9,
+        304.6,
+        298.2,
+        294.7,
+        292.8,
+        291.5,
+        291.0,
+        290.8,
+        290.6,
+        290.6,
+        290.6
+       ],
+       "q_g_kg": [
+        1e-06,
+        0.001895,
+        0.04847,
+        0.456,
+        1.78,
+        4.23,
+        6.7,
+        8.696,
+        10.25,
+        11.71,
+        13.71,
+        15.76,
+        17.69,
+        18.75,
+        18.9
+       ],
+       "z_full_m": [
+        127200.0,
+        91570.0,
+        71280.0,
+        55020.0,
+        40940.0,
+        28750.0,
+        19450.0,
+        13780.0,
+        10550.0,
+        8281.0,
+        6239.0,
+        4230.0,
+        2536.0,
+        1227.0,
+        316.3
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.2657,
+         "shallow": 0.0,
+         "mid": 0.7343
+        },
+        "top_median_km": 62.0,
+        "rain_mm_day": 0.9268,
+        "residuals": {
+         "water_mm_day": -1.865e-14,
+         "heat_w_m2": -0.8205
+        }
+       }
+      },
+      "earth_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 3.544,
+        "q_low_g_kg": 18.41,
+        "q_mid_g_kg": 14.21,
+        "vapour_drop_g_kg": 4.201,
+        "lid_rise_k": 0.316,
+        "levels_km": [
+         0.32,
+         6.25,
+         8.29
+        ]
+       },
+       "lid": {
+        "height_km": 7.286,
+        "heat": {
+         "diffusion": -3.155,
+         "dry_adjustment": -4.381e-13,
+         "mixing": -3.155
+        },
+        "vapour": {
+         "diffusion": 47.13,
+         "dry_adjustment": 0.0,
+         "mixing": 47.13
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.8076,
+        "vapour_drop_g_kg": 0.5105,
+        "lid_rise_k": -7.629
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.8076,
+        "vapour_drop_g_kg": 0.5105,
+        "lid_rise_k": -7.629
+       },
+       "rain_mm_day": 9.817,
+       "rain_conv_mm_day": 7.697,
+       "rain_ls_mm_day": 2.119,
+       "dca_share": 0.002841,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 72.21,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 5.915,
+        "rain": 9.817,
+        "water_stored": 1.196,
+        "prescribed": 0.0,
+        "floor": 0.0002791
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -363.0,
+        "heat_stored": 38.44,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": -1.215e-13,
+        "heat_w_m2": -5.42
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        -30.08,
+        82.37,
+        74.01,
+        70.92,
+        30.4,
+        17.3,
+        10.59,
+        5.243,
+        1.044,
+        3.642,
+        -5.847,
+        -19.46,
+        -17.61
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        1.179,
+        -0.4968,
+        -0.7483,
+        0.04613,
+        1.028,
+        0.325,
+        -0.3148,
+        -2.282,
+        -2.338,
+        -2.784,
+        -1.141,
+        -0.2744,
+        0.1019
+       ],
+       "h_median_km": 3.466,
+       "we_median_mm_s": 10.38,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        410.7,
+        331.6,
+        317.3,
+        315.0,
+        310.8,
+        304.4,
+        298.0,
+        294.6,
+        292.6,
+        291.9,
+        291.6,
+        291.3,
+        291.0,
+        290.7,
+        290.7
+       ],
+       "q_g_kg": [
+        1e-06,
+        0.001893,
+        0.048,
+        0.4525,
+        1.774,
+        4.216,
+        6.669,
+        8.657,
+        10.2,
+        12.22,
+        14.21,
+        16.41,
+        17.73,
+        18.22,
+        18.41
+       ],
+       "z_full_m": [
+        127200.0,
+        91550.0,
+        71260.0,
+        55010.0,
+        40940.0,
+        28750.0,
+        19460.0,
+        13790.0,
+        10560.0,
+        8292.0,
+        6247.0,
+        4234.0,
+        2537.0,
+        1227.0,
+        316.4
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.3171,
+         "shallow": 0.005714,
+         "mid": 0.6771
+        },
+        "top_median_km": 61.5,
+        "rain_mm_day": 0.6067,
+        "residuals": {
+         "water_mm_day": 1.608e-13,
+         "heat_w_m2": -1.321
+        }
+       }
+      },
+      "lunar_nonlocal": {
+       "measures": {
+        "mixed_depth_km": 3.552,
+        "q_low_g_kg": 18.36,
+        "q_mid_g_kg": 14.25,
+        "vapour_drop_g_kg": 4.11,
+        "lid_rise_k": 0.328,
+        "levels_km": [
+         0.32,
+         6.25,
+         8.29
+        ]
+       },
+       "lid": {
+        "height_km": 7.285,
+        "heat": {
+         "diffusion": -4.657,
+         "dry_adjustment": 1.549e-12,
+         "mixing": -4.657
+        },
+        "vapour": {
+         "diffusion": 52.81,
+         "dry_adjustment": 0.0,
+         "mixing": 52.81
+        }
+       },
+       "gap_closed_within": {
+        "mixed_depth_km": 0.8056,
+        "vapour_drop_g_kg": 0.5488,
+        "lid_rise_k": -7.268
+       },
+       "gap_closed_from_testbed": {
+        "mixed_depth_km": 0.8056,
+        "vapour_drop_g_kg": 0.5488,
+        "lid_rise_k": -7.268
+       },
+       "rain_mm_day": 9.785,
+       "rain_conv_mm_day": 7.783,
+       "rain_ls_mm_day": 2.002,
+       "dca_share": 0.0,
+       "types": {
+        "deep": 1.0,
+        "shallow": 0.0,
+        "mid": 0.0
+       },
+       "top_median_km": 72.19,
+       "shallow_only_share": 0.0,
+       "water_mm_day": {
+        "evaporation": 5.098,
+        "large_scale_water": 5.927,
+        "rain": 9.785,
+        "water_stored": 1.24,
+        "prescribed": 0.0,
+        "floor": 0.0002791
+       },
+       "heat_w_m2": {
+        "sensible": 27.03,
+        "radiation": 84.89,
+        "large_scale_heat": -363.0,
+        "heat_stored": 37.47,
+        "prescribed": 0.0
+       },
+       "residuals": {
+        "water_mm_day": 4.596e-14,
+        "heat_w_m2": -5.381
+       },
+       "conv_heating_w_m2": [
+        0.0,
+        0.0,
+        -30.01,
+        82.15,
+        73.74,
+        70.58,
+        30.18,
+        17.23,
+        10.97,
+        7.26,
+        2.356,
+        4.102,
+        -5.936,
+        -19.81,
+        -17.84
+       ],
+       "conv_moistening_mm_day": [
+        0.0,
+        0.0,
+        1.174,
+        -0.4973,
+        -0.7488,
+        0.05244,
+        1.034,
+        0.333,
+        -0.5532,
+        -2.303,
+        -2.354,
+        -2.672,
+        -1.092,
+        -0.2653,
+        0.1082
+       ],
+       "h_median_km": 3.688,
+       "we_median_mm_s": 10.73,
+       "vapour_kept_steps": 0,
+       "theta_v_k": [
+        410.7,
+        331.6,
+        317.3,
+        315.0,
+        310.8,
+        304.4,
+        298.0,
+        294.5,
+        292.6,
+        291.9,
+        291.5,
+        291.3,
+        290.9,
+        290.7,
+        290.7
+       ],
+       "q_g_kg": [
+        1e-06,
+        0.001893,
+        0.04799,
+        0.4526,
+        1.774,
+        4.216,
+        6.668,
+        8.652,
+        10.27,
+        12.28,
+        14.25,
+        16.38,
+        17.7,
+        18.18,
+        18.36
+       ],
+       "z_full_m": [
+        127200.0,
+        91550.0,
+        71260.0,
+        55010.0,
+        40940.0,
+        28750.0,
+        19460.0,
+        13790.0,
+        10560.0,
+        8291.0,
+        6247.0,
+        4234.0,
+        2537.0,
+        1227.0,
+        316.4
+       ],
+       "spin_up_quarter": {
+        "types": {
+         "deep": 0.3114,
+         "shallow": 0.005714,
+         "mid": 0.6829
+        },
+        "top_median_km": 61.56,
+        "rain_mm_day": 0.6018,
+        "residuals": {
+         "water_mm_day": 4.974e-14,
+         "heat_w_m2": -1.286
+        }
+       }
+      }
+     },
+     "setup_closes_half_of_testbed_gap": false,
+     "nonlocal_closes_half_within": true
+    }
+   }
+  }
+ },
+ "thresholds": {
+  "half_gap": 0.5,
+  "rule": "a change passes when it closes at least half of the gap to CM1 in both the mixed depth and the 0.3-6.2 km vapour drop"
+ },
+ "parameters": {
+  "b_excess": 8.5,
+  "a_countergradient": 7.2,
+  "eps_surface": 0.1,
+  "beta_m": 15.0,
+  "beta_h": 15.0,
+  "beta_s": 5.0,
+  "ricr_stable": 0.3,
+  "ricr_unstable": 0.0,
+  "b_ustar": 100.0,
+  "a_entrain": 0.15,
+  "c_entrain_ustar": 5.0
+ },
+ "shallow_only": {
+  "departure_dp": -1.0,
+  "midlevel_top": 2.0
+ },
+ "evidence": "Single-column calculations on PlaSim's fifteen levels driven by the CM1 boxes' own forcing, as in the first column test (one realization each of the settled sea box and the 0 E land box on a 6 km grid). In setup cm1 CM1's microphysics and resolved transport are prescribed from its domain diagnostics, each output one time step's domain mean, interpolated linearly between the 3-hourly outputs; the resolved transport carries the box's resolved boundary-layer eddies, so beneath it PlaSim's mixing stands for CM1's boundary-layer scheme and the nonlocal scheme counts part of the eddies twice below its top. CM1's lid exchange from its own flux diagnostics (box_lid). No GCM or CM1 run and no Fortran change.",
+ "reading_rule": "cases: each column's compared quarter, by convection setup (massflux: the testbed as it stood; cm1: CM1's microphysics and resolved transport in place of the scheme; massflux_shallow_night: the scheme limited to shallow convection while the Sun is down, shallow_only) and boundary layer (as in the first test). measures as in the first test. lid: the heat and vapour (W/m2, upward) the column carries through its interface nearest 6.7 km (7.1 km) by diffusion and dry adjustment (mixing), with cm1_transport the part CM1's prescribed transport carries there and total their sum; cm1.lid: CM1's parts (box_lid) averaged over its levels at 6.45 and 6.99 km over the same quarter: resolved, diffusion (the advection's implicit diffusion), subgrid (its boundary-layer scheme) and total; khv its scheme's diffusivity. gap_closed_within: 1 - |x - CM1| / |earth_local - CM1| with the same setup's earth_local; gap_closed_from_testbed: the same against the testbed's earth_local (massflux). setup_closes_half_of_testbed_gap: the setup's earth_local closes at least half of the testbed's gap in depth and drop; nonlocal_closes_half_within: lunar_nonlocal closes at least half of its setup's earth_local gap in both. water_mm_day and heat_w_m2: the budget's terms over the quarter, with prescribed the cm1 tendencies' column sums and floor the water the floor on vapour adds; residuals: what each budget leaves.",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/pbl_column.py": "a09b7fa48a34c416",
+   "gcm/pbl_scheme.py": "aff7bda14c48b1ed",
+   "gcm/massflux.py": "5493e4056f08b543",
+   "gcm/pbl_mixing.py": "ca104f979ae5b60b",
+   "crm/box_budget.py": "1ec391e81bda9e69",
+   "crm/box_lid.py": "d2a56eb1ce0b4d0c"
+  }
+ }
+}

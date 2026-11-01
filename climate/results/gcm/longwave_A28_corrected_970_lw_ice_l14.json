@@ -1,0 +1,148 @@
+{
+ "schema": "terluna.climate.gcm-longwave-levels/1",
+ "run": "A28_corrected_970_lw_ice",
+ "year": 2,
+ "parent": {
+  "product": "climate/results/gcm/longwave_A28_corrected_970_lw_ice.json",
+  "sha256": "f2c4c07319eb2b85"
+ },
+ "levels": {
+  "name": "l14",
+  "half_levels": [
+   0.07660000000000002,
+   0.16160000000000002,
+   0.2601,
+   0.3736000000000001,
+   0.5,
+   0.6335999999999999,
+   0.7379,
+   0.7981,
+   0.8382,
+   0.8717,
+   0.9066,
+   0.941,
+   0.9666000000000001,
+   1.0
+  ],
+  "full_levels": [
+   0.03830000000000001,
+   0.11910000000000001,
+   0.21085,
+   0.3168500000000001,
+   0.4368000000000001,
+   0.5668,
+   0.68575,
+   0.768,
+   0.8181499999999999,
+   0.85495,
+   0.88915,
+   0.9238,
+   0.9538,
+   0.9833000000000001
+  ]
+ },
+ "correction": {
+  "land": [
+   8.1273,
+   14.8052,
+   10.3858,
+   1.1417,
+   -2.3824,
+   -2.0926,
+   -1.1731,
+   -1.8543,
+   -2.7559,
+   -3.4504,
+   -6.0507,
+   -7.6822,
+   -6.4947,
+   -7.8676,
+   0.0
+  ],
+  "sea": [
+   16.4213,
+   15.2459,
+   9.3489,
+   0.9986,
+   -2.2224,
+   -2.325,
+   -0.8633,
+   -2.4593,
+   -3.487,
+   -4.0937,
+   -5.6954,
+   -7.8053,
+   -7.249,
+   -13.0907,
+   0.0
+  ],
+  "tref": [
+   166.554,
+   194.221,
+   221.837,
+   243.539,
+   260.84,
+   273.943,
+   281.698,
+   287.253,
+   290.573,
+   292.914,
+   294.999,
+   296.877,
+   298.492,
+   299.515,
+   300.919
+  ]
+ },
+ "check": {
+  "land": {
+   "ten_levels": [
+    -1.8827,
+    -8.5707,
+    -19.0079
+   ],
+   "split_layers": [
+    -1.1731,
+    -1.8543,
+    -2.7559,
+    -3.4504,
+    -6.0507,
+    -7.6822,
+    -6.4947
+   ],
+   "sums": [
+    -29.4613,
+    -29.4613
+   ]
+  },
+  "sea": {
+   "ten_levels": [
+    -1.608,
+    -10.7108,
+    -19.3342
+   ],
+   "split_layers": [
+    -0.8633,
+    -2.4593,
+    -3.487,
+    -4.0937,
+    -5.6954,
+    -7.8053,
+    -7.249
+   ],
+   "sums": [
+    -31.653,
+    -31.653
+   ]
+  }
+ },
+ "evidence": "The parent's correction, fitted on PlaSim's ten levels, carried onto the level set by the conservative remap: no fit on the set's own columns, which `check` with this product tests.",
+ "reading_rule": "correction reads as the parent's (W/m2 at tref by layer, the top first and the ground last, scaled by (T / tref)^4) on the level set's layers. check gives, over land and over sea, the parent's values on the layers the grids do not share, the set's on its layers there, and the two sums, which the remap keeps equal.",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/plasim_longwave.py": "878a834edca7b259",
+   "gcm/levels.py": "61e0b41fa186c9e6"
+  }
+ }
+}

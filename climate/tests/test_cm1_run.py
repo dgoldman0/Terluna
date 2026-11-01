@@ -1,4 +1,5 @@
 """Checks of the CM1 runner's pure pieces: patching, namelist editing, grids, surfaces and restarts."""
+import hashlib
 import json
 
 import numpy as np
@@ -64,11 +65,128 @@ def test_the_rain_test_build_takes_earth_fall_speeds_and_keeps_the_host_gravity_
     assert c.BUILD_PATCHES['moon_omp_earth_fall'] == [c.EARTH_FALL_PATCH]
 
 
+
+def test_the_wind_build_relaxes_the_wind_alone_on_var10_and_keeps_lsnudge_tau_without_it():
+    source = ('      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n'
+              '      if( donudge .and. do_lsnudge_u )then\n'
+              '          tem1 = -lsnudgefac*( (umove+uavg(k))-lsnudge_u(k,lsnudge_count) )/(lsnudge_tau)\n'
+              '          tem2 = -lsnudgefac*( (vmove+vavg(k))-lsnudge_v(k,lsnudge_count) )/(lsnudge_tau)\n'
+              '          tem1 = -lsnudgefac*terluna_w*( thavg(k)-lsnudge_th(k,lsnudge_count) )/(lsnudge_tau)\n')
+    out = c.apply_patch(source, *c.WIND_TAU_PATCH)
+    assert out.count('/(terluna_tau_uv)') == 2 and out.count('/(lsnudge_tau)') == 1          # the held air keeps its own
+    assert 'terluna_tau_uv = lsnudge_tau' in out and 'if( var10.gt.0.0 ) terluna_tau_uv = var10' in out
+    assert out.index('terluna_tau_uv = lsnudge_tau') < out.index('if( donudge .and. do_lsnudge_u )then')
+    assert c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] == c.BUILD_PATCHES['moon_omp_rain_law_pbl'] + [c.WIND_TAU_PATCH]
+    assert c.BUILDS['moon_omp_rain_law_pbl_wind'] == c.BUILDS['moon_omp']
+    for day in ('day3', 'day4'):
+        case, base = c.CASES[f'box_near_side_sea_l15_wind_{day}'], c.CASES[f'box_near_side_sea_l15_{day}']
+        assert case['build'] == 'moon_omp_rain_law_pbl_wind' and case['restart_namelist'] == dict(param8=dict(var10=7200.0))
+        same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'restart_namelist', 'purpose', 'restart_from')}
+        assert same(case) == same(base) and case['restart_from']['day'] == base['restart_from']['day']
+
+
+def test_the_gust_build_takes_beljaars_gust_over_water_and_changes_nothing_else():
+    source = ('!      Use Beljaars over land, old MM5 (Wyngaard) formula over water\n'
+              '        if (xland(i).lt.1.5) then\n'
+              '        fluxc = max(hfx(i)/rhox(i)/cp                    &\n'
+              '              + ep1*tskv*qfx(i)/rhox(i),0.)\n'
+              '        VCONV = vconvc*(g/tgdsa(i)*pblh(i)*fluxc)**.33\n'
+              '        else\n        VCONV = SQRT(DTHVM)\n        endif\n')
+    out = c.apply_patch(source, *c.GUST_PATCH)
+    assert 'if (xland(i).lt.1.5 .or. .true.) then' in out and c.GUST_MARKER in out
+    assert out.replace('if (xland(i).lt.1.5 .or. .true.) then   ! ' + c.GUST_MARKER + ", at the build's gravity",
+                       'if (xland(i).lt.1.5) then') == source
+    assert c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] == \
+        c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] + [c.GUST_PATCH]
+    assert all(c.GUST_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
+               if label not in ('moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft',
+                                c.INFLOW_BUILD))
+    for day in ('day3', 'day4'):
+        case, wind = c.CASES[f'box_near_side_sea_l15_wind_gust_{day}'], c.CASES[f'box_near_side_sea_l15_wind_{day}']
+        assert case['build'] == 'moon_omp_rain_law_pbl_wind_gust'
+        same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'purpose', 'restart_from')}
+        assert same(case) == same(wind) and case['restart_from']['day'] == wind['restart_from']['day']
+    assert c.CASES['box_near_side_sea_l15_wind_gust_day4']['restart_from']['case'] == 'box_near_side_sea_l15_wind_gust_day3'
+
+
+def test_the_aloft_build_pulls_the_wind_from_var8_up_and_new_cases_take_the_corrected_wind():
+    source = ('          tem1 = -lsnudgefac*( (umove+uavg(k))-lsnudge_u(k,lsnudge_count) )/(terluna_tau_uv)\n'
+              '          tem2 = -lsnudgefac*( (vmove+vavg(k))-lsnudge_v(k,lsnudge_count) )/(terluna_tau_uv)\n'
+              '          tem1 = -lsnudgefac*terluna_w*( thavg(k)-lsnudge_th(k,lsnudge_count) )/(lsnudge_tau)\n')
+    out = c.apply_patch(source, *c.WIND_ALOFT_PATCH)
+    lines = out.splitlines()
+    assert lines[1].startswith('          if( zh(1,1,k).lt.var8 ) tem1 = 0.0') and c.WIND_ALOFT_MARKER in lines[1]
+    assert lines[3].startswith('          if( zh(1,1,k).lt.var8 ) tem2 = 0.0')
+    assert [x for i, x in enumerate(lines) if i not in (1, 3)] == source.splitlines()   # the held air untouched
+    assert c.BUILD_PATCHES[c.ALOFT_BUILD] == c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] + [c.WIND_ALOFT_PATCH]
+    assert c.BUILDS[c.ALOFT_BUILD] == c.BUILDS['moon_omp']
+    assert all(c.WIND_ALOFT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
+               if label not in (c.ALOFT_BUILD, c.INFLOW_BUILD))
+    # the corrected wind follows the build: none on the old builds, the time scale on the wind's, both on the new one
+    assert c.corrected_wind('moon_omp_rain_law_pbl', 312.69) == {}
+    assert c.corrected_wind('moon_omp_rain_law_pbl_wind_gust', 312.69) == dict(var10=7200.0)
+    assert c.corrected_wind(c.CORRECTED_BUILD, 312.69) == dict(var10=7200.0, var8=312.7)
+    assert c.corrected_wind(c.CORRECTED_BUILD, 312.69, 0.5) == dict(var10=3600.0, var8=312.7)
+    with pytest.raises(ValueError):
+        c.corrected_wind(c.CORRECTED_BUILD, 0.0)
+    assert c.gcm_lowest_level_m(dict(reference=dict(profile=dict(z_m=[2508.9, 1213.5, 312.69])))) == 312.69
+    assert c.gcm_lowest_level_m(dict(reference=None)) == 0.0 and c.gcm_lowest_level_m({}) == 0.0
+    for day in ('day3', 'day4'):
+        case, base = c.CASES[f'box_near_side_sea_l15_aloft_{day}'], c.CASES[f'box_near_side_sea_l15_{day}']
+        assert case['build'] == c.ALOFT_BUILD and 'restart_namelist' not in case   # the build they ran on
+        same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'purpose', 'restart_from')}
+        assert same(case) == same(base) and case['restart_from']['day'] == base['restart_from']['day']
+    assert c.CASES['box_near_side_sea_l15_aloft_day3']['restart_from'] == dict(case='box_near_side_sea_l15', day=59.0)
+    assert c.CASES['box_near_side_sea_l15_aloft_day4']['restart_from']['case'] == 'box_near_side_sea_l15_aloft_day3'
+
+def test_the_inflow_build_draws_the_reference_s_air_in_where_the_mean_wind_converges():
+    source = ('      real :: dttmp,rtime,rdt,tem,tem0,tem1,tem2,thrad,prad,terluna_w\n'
+              '      integer, save :: terluna_nb = 0, terluna_nl = 0   ! Terluna: large-scale horizontal advection by '
+              'local time\n'
+              '          tem1 = -lsnudgefac*terluna_w*( qavg(k,nqv)-lsnudge_qv(k,lsnudge_count) )/(lsnudge_tau)\n'
+              + c.QV_NUDGE_END + '      if(timestats.ge.1) time_misc=time_misc+mytime()\n')
+    out = c.apply_patch(source, *c.INFLOW_PATCH)
+    assert c.apply_patch(out, *c.INFLOW_PATCH) == out                          # once only
+    assert out.count(c.INFLOW_MARKER) == 1 and 'logical, save :: terluna_inflow_out = .true.' in out
+    block = out[out.index(c.QV_NUDGE_END) + len(c.QV_NUDGE_END):]
+    assert block.startswith('      ! ' + c.INFLOW_MARKER) and block.endswith(
+        '      if(timestats.ge.1) time_misc=time_misc+mytime()\n')
+    # wsub's own mass convergence, kept where the flow converges, over the base-state density
+    assert ('tem = max( 0.0 , (rf0(1,1,k+1)*wprof(k+1)-rf0(1,1,k)*wprof(k))*rdz*mh(1,1,k) )*rr0(1,1,k)' in block)
+    assert 'tem1 = tem*( lsnudge_th(k,lsnudge_count)-thavg(k) )' in block
+    assert 'tem2 = tem*( lsnudge_qv(k,lsnudge_count)-qavg(k,nqv) )' in block
+    assert 'if( var7.gt.0.5 .and. dolsw .and. do_lsnudge_th .and. do_lsnudge_qv .and. imoist.eq.1 )then' in block
+    assert f"file='{c.INFLOW_RATES}'" in block
+    assert max(len(line) for line in block.splitlines()) <= 132                 # free form's limit
+    # everything else as it was
+    assert out.replace(block, '').replace(
+        '      logical, save :: terluna_inflow_out = .true.   ! Terluna: the inflow rates, written once a segment\n',
+        '') + '      if(timestats.ge.1) time_misc=time_misc+mytime()\n' == source
+    assert c.BUILD_PATCHES[c.INFLOW_BUILD] == c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust_aloft'] + [c.INFLOW_PATCH]
+    assert c.BUILDS[c.INFLOW_BUILD] == c.BUILDS['moon_omp']
+    assert all(c.INFLOW_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label != c.INFLOW_BUILD)
+    assert c.corrected_inflow(c.INFLOW_BUILD) == dict(var7=1.0)
+    assert c.corrected_inflow(c.ALOFT_BUILD) == {} and c.corrected_inflow('moon_omp') == {}
+    # the default for the boxes forced by the GCM's column at their site; a ring on the build keeps var7 0
+    assert c.CORRECTED_BUILD == c.INFLOW_BUILD
+    assert c.corrected_inflow(c.CORRECTED_BUILD, c.CASES['box_near_side_sea']) == dict(var7=1.0)
+    assert c.corrected_inflow(c.CORRECTED_BUILD, c.CASES['ring_45n_corrected']) == {}
+    assert c.corrected_inflow(c.CORRECTED_BUILD, dict(c.CASES['box_near_side_sea'], day_night=None)) == {}
+    case, base = c.CASES['box_near_side_sea_l15_inflow_day3'], c.CASES['box_near_side_sea_l15_aloft_day3']
+    same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'purpose')}
+    assert case['build'] == c.INFLOW_BUILD and same(case) == same(base)
+    assert case['restart_from'] == dict(case='box_near_side_sea_l15', day=59.0)
+
+
 def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     name, marker, edits = c.TWILIGHT_PATCH
     assert name == 'radiation_driver.F' and any(marker in new for _, new, _ in edits)
     assert c.BUILD_PATCHES['moon_omp_twilight'] == [c.TWILIGHT_PATCH] and c.BUILDS['moon_omp_twilight'] == c.BUILDS['moon_omp']
-    with_hook = {'moon_omp_twilight', 'moon_omp_terrain_sea_twilight'}               # the rings', and Jura's box
+    # the rings', Jura's box, and the boxes on the design climate with the rain law (and the boundary layer's fix, the
+    # wind's own nudging time scale, the gust over water at lunar gravity and the wind pulled from aloft)
+    with_hook = {'moon_omp_twilight', 'moon_omp_terrain_sea_twilight', 'moon_omp_rain_law', 'moon_omp_rain_law_pbl',
+                 'moon_omp_rain_law_pbl_wind', 'moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft',
+                 c.INFLOW_BUILD}
     assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label not in with_hook)
     sun = next(p for p in c.PATCHES if p[0] == 'radiation_driver.F')
     added = ''.join(new for _, new, _ in sun[2])
@@ -190,6 +308,52 @@ def test_latest_restart_needs_a_complete_set(tmp_path):
     empty = tmp_path / 'empty'
     empty.mkdir()
     assert c.latest_restart(empty) == 0
+
+
+def test_a_run_on_from_a_restart_carries_the_wind_windows_on_by_whole_lunar_days(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'solar_day_s', lambda: 3600.0)               # 36 windows of 100 s a day
+    source, case = tmp_path / 'source', tmp_path / 'case'
+    source.mkdir()
+    case.mkdir()
+    for i in range(72):                                                   # two days, each phase's profile repeating
+        t2 = 1.0e30 if i == 71 else (i + 1) * 100.0
+        (source / f'lsnudge_{i + 1:04d}.dat').write_text(
+            f' *  Header\n  {i * 100.0:22.1f} {t2:22.6e}\n *  Profile\n *  z\n  0.0 300.0 10.0 {i % 36:.1f} 0.0\n')
+    record = c.restart_windows(source, case, 7150.0, 10650.0)            # from inside the 72nd window
+    files = sorted(case.glob('lsnudge_*.dat'))
+    assert record['windows'] == len(files) == 36 and record['first_window_of_source'] == 72
+    first, second, last = (f.read_text().splitlines() for f in (files[0], files[1], files[-1]))
+    assert first[1].split() == ['7100.0', '7.200000e+03'] and first[4].split()[3] == '35.0'
+    assert second[1].split()[0] == '7200.0' and second[4].split()[3] == '0.0'      # the next day's first phase
+    assert last[1].split()[1] == '1.000000e+30' and last[4].split()[3] == '34.0'
+    (source / 'lsnudge_0040.dat').write_text(' *  Header\n  3900.0 4.0e+03\n *  Profile\n *  z\n  0.0 300.0 10.0 9.0 0.0\n')
+    with pytest.raises(RuntimeError):                                     # a day's windows that disagree
+        c.restart_windows(source, case, 7150.0, 10650.0)
+    single = tmp_path / 'single'
+    single.mkdir()
+    (single / 'lsnudge_0001.dat').write_text(' *  Header\n  0.0 1.0e+30\n')
+    assert c.restart_windows(single, case, 0.0, 100.0) is None
+
+
+def test_a_run_on_from_a_run_on_case_takes_its_windows_from_the_first_case(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'solar_day_s', lambda: 3600.0)               # 36 windows of 100 s a day
+    root, third, fourth = (tmp_path / n for n in ('root', 'third', 'fourth'))
+    for folder in (root, third, fourth):
+        folder.mkdir()
+    for i in range(72):
+        t2 = 1.0e30 if i == 71 else (i + 1) * 100.0
+        (root / f'lsnudge_{i + 1:04d}.dat').write_text(
+            f' *  Header\n  {i * 100.0:22.1f} {t2:22.6e}\n *  Profile\n *  z\n  0.0 300.0 10.0 {i % 36:.1f} 0.0\n')
+    (root / 'case.json').write_text(json.dumps(dict(case='root')))
+    (third / 'case.json').write_text(json.dumps(dict(case='third', restart_from=dict(case='root', day=0.083))))
+    c.restart_windows(root, third, 7150.0, 10650.0)                       # the third day's windows, from phase 35
+    assert c.window_root(third) == root and c.window_root(root) == root
+    c.restart_windows(c.window_root(third), fourth, 10800.0, 14400.0)    # the fourth day from the third's restart
+    first = sorted(fourth.glob('lsnudge_*.dat'))[0].read_text().splitlines()
+    assert first[1].split()[0] == '10800.0' and first[4].split()[3] == '0.0'      # the day's first phase
+    c.restart_windows(third, fourth, 10800.0, 14400.0)                    # the run-on case's own windows
+    shifted = sorted(fourth.glob('lsnudge_*.dat'))[0].read_text().splitlines()
+    assert shifted[4].split()[3] == '35.0'                                # a window out of phase
 
 
 def test_storms_wrap_around_the_ring():
@@ -858,3 +1022,240 @@ def test_the_jura_box_is_the_island_and_its_sea_on_the_corrected_design_case():
     assert c.BUILD_PATCHES[box['build']] == c.TERRAIN_PATCHES + [c.SEA_COLUMNS_PATCH, c.TWILIGHT_PATCH]
     # the hook places each shell by its column's own face heights, which over terrain stand on the column's ground
     assert any('zf(i,j,k+1)' in new for _, new, _ in c.TWILIGHT_PATCH[2])
+
+
+NIGHT_TEMPLATE = (' &param0\n nx           =     2,\n ny           =     2,\n nz           =      3,\n /\n'
+                  ' &param1\n dx     =  6000.0,\n dy     =  6000.0,\n dtl    =  40.0,\n timax  = 5102784,\n'
+                  ' run_time =  -999.9,\n tapfrq =   10800.0,\n rstfrq =  43200.0,\n statfrq =   3600.0,\n /\n'
+                  ' &param2\n irst      =  0,\n rstnum    =  1,\n /\n'
+                  ' &param8\n var11     =   1.0,\n var14     =   93132.6,\n var18     =   -90.0,\n'
+                  ' var19     =   2551443.0,\n var20     =   1.0,\n /\n'
+                  ' &param9\n output_radten    = 1,\n output_thbudget  = 1,\n output_qvbudget  = 1,\n /\n'
+                  ' &param14\n diagfrq        =     10800.0,\n /\n')
+
+
+def night_source(folder):
+    """A sea box of two by two columns and three levels with one output at day 7.5 and three wind windows, the
+    second of which holds that time."""
+    coarse_run(folder)
+    (folder / 'namelist.template').write_text(NIGHT_TEMPLATE)
+    (folder / 'terluna_surface.txt').write_text('1\n-1000000000.0 1000000000.0 2.0 16 302.036 302.036\n')
+    for name in ('terluna_twilight.txt', 'terluna_rain_law.txt'):
+        (folder / name).write_text(name)
+    (folder / 'lsnudge_0001.dat').unlink()
+    edges = [0.0, 600000.0, 700000.0, 1.0e30]
+    for k in range(3):
+        (folder / f'lsnudge_{k + 1:04d}.dat').write_text(
+            f' *  Header\n  {edges[k]:22.1f} {edges[k + 1]:22.6e}\n *  Profile\n *  columns\n'
+            f'        0.0000     284.0000    13.000000     {k:.4f}     1.0000\n')
+    record = json.loads((folder / 'case.json').read_text())
+    record['configuration']['site'] = dict(lat_deg=-5.0, lon_deg=-45.0, surface='sea')
+    record.update(restart_from=dict(case='earlier', day=0.0), nudging_wind=dict(windows=3))
+    (folder / 'case.json').write_text(json.dumps(record))
+
+
+def test_a_held_night_starts_from_the_source_s_mean_air_and_holds_that_hour_s_forcing(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    build = tmp_path / 'cm1' / 'build' / 'moon_omp_rain_law_pbl'
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label='moon_omp_rain_law_pbl', executable_sha256='night')))
+    source = tmp_path / 'runs' / 'coarse'
+    night_source(source)
+    monkeypatch.setitem(c.CASES, 'night', dict(c.CASES['box_near_side_sea_night_2km'],
+                                               night_from=dict(case='coarse', day=7.0, refine=3)))
+    with pytest.raises(RuntimeError, match='no output at day 7.0'):
+        c.setup('night')
+    monkeypatch.setitem(c.CASES, 'night', dict(c.CASES['box_near_side_sea_night_2km'],
+                                               night_from=dict(case='coarse', day=7.5, refine=3)))
+    case = c.setup('night')
+    rows = np.array([[float(v) for v in line.split()] for line in (case / 'input_sounding').read_text().splitlines()[1:]])
+    assert rows[:3, 1].tolist() == pytest.approx([303.0, 310.0, 321.5])          # the source's means over its columns
+    # the wind window holding day 7.5 (648,000 s), its profile kept and held from the start to the end
+    nudge = (case / 'lsnudge_0001.dat').read_text().splitlines()
+    assert [float(v) for v in nudge[1].split()] == [0.0, 1.0e30] and nudge[4].split()[3] == '1.0000'
+    assert nudge[:1] + nudge[2:] == (source / 'lsnudge_0002.dat').read_text().splitlines()[:1] + \
+        (source / 'lsnudge_0002.dat').read_text().splitlines()[2:]
+    assert not (case / 'lsnudge_0002.dat').exists()
+    for name in ('terluna_lsadv.txt', 'terluna_wls.txt', 'terluna_surface.txt', 'terluna_twilight.txt',
+                 'terluna_rain_law.txt', 'LANDUSE.TBL', 'input_grid_z'):
+        assert (case / name).read_bytes() == (source / name).read_bytes(), name   # the source's own, as written
+    text = (case / 'namelist.template').read_text()
+    hour = (-90.0 + 360.0 * 7.5 * 86400.0 / 2551443.0 + 180.0) % 360.0 - 180.0
+    value = lambda section, key: c.namelist_value(text, section, key)
+    assert float(value('param8', 'var18')) == pytest.approx(hour, abs=1e-4)
+    assert float(value('param8', 'var19')) == c.STOPPED_CLOCK_S                  # the Sun and the table held
+    assert value('param8', 'var14') == '93132.6' and value('param8', 'var11') == '1.0'
+    assert value('param0', 'nx') == '64' and value('param0', 'ny') == '64'
+    assert value('param1', 'dx') == '2000.0' and value('param1', 'dtl') == '13.333'
+    assert value('param1', 'timax') == str(round(2.0 * 86400.0)) and value('param1', 'tapfrq') == '21600.0'
+    assert value('param1', 'rstfrq') == '43200.0' and value('param1', 'statfrq') == '900.0'
+    assert value('param14', 'diagfrq') == '1800.0' and value('param2', 'irst') == '0'
+    assert [value('param9', k) for k in ('output_thbudget', 'output_qvbudget')] == ['0', '0']   # the budgets' 3-D fields
+    assert value('param9', 'output_radten') == '1'                     # as the source's: CM1 writes it with radiation
+    record = json.loads((case / 'case.json').read_text())
+    assert record['restart_from'] is None and record['nudging_wind']['windows'] == 1
+    assert record['grid']['nx'] == 64 and record['grid']['ny'] == 64 and record['grid']['dx_m'] == pytest.approx(2000.0)
+    assert record['initial']['snapshot'] == 61 and record['held']['hour_angle_deg'] == pytest.approx(hour, abs=1e-4)
+    assert record['held']['wind_window']['source_file'] == 'lsnudge_0002.dat'
+    assert record['held']['sun_elevation_deg'] == pytest.approx(
+        np.degrees(np.arcsin(np.cos(np.radians(5.0)) * np.cos(np.radians(hour)))), abs=0.01)
+    assert record['configuration']['start_hour_angle_deg'] == pytest.approx(hour + 45.0, abs=1e-4)
+    assert record['build']['executable_sha256'] == 'night'
+    assert record['runner'] == hashlib.sha256(open(c.__file__, 'rb').read()).hexdigest()[:16]
+
+
+def test_the_held_nights_differ_in_their_grid_alone():
+    names = [f'box_near_side_sea_night_{tag}' for tag in ('6km', '3km', '2km')]
+    boxes = [c.CASES[n] for n in names]
+    grid = ('nx', 'ny', 'night_from', 'purpose')
+    for box in boxes[1:]:
+        assert {k: v for k, v in box.items() if k not in grid} == {k: v for k, v in boxes[0].items() if k not in grid}
+    assert [(b['nx'], b['night_from']['refine']) for b in boxes] == [(32, 1), (64, 2), (64, 3)]
+    assert all(b['night_from']['case'] == 'box_near_side_sea_day3' and b['night_from']['day'] == 84.5 for b in boxes)
+    sea = c.CASES['box_near_side_sea']
+    shared = ('build', 'nudge', 'large_scale_w', 'day_night', 'site', 'twilight', 'twilight_product', 'rain_law',
+              'rain_limits', 'z_grid', 'droplets_cm3', 'gcm', 'land', 'surface_output', 'wind_by_local_time')
+    assert all(boxes[0][k] == sea[k] for k in shared)                            # the sea box's build and forcing
+    assert boxes[0]['days'] == 2.0 and boxes[0]['output_s'] == 6 * 3600.0 and boxes[0]['restart_s'] == 12 * 3600.0
+    assert c.case_length_s(boxes[0], 1.0) == 2.0 * 86400.0
+
+
+def test_the_earth_length_cases_differ_from_their_sources_in_the_length_and_what_they_write_alone():
+    day3, linf = c.CASES['box_near_side_sea_day3'], c.CASES['box_near_side_sea_day3_linf75']
+    own = ('output_s', 'keep_restarts', 'restart_namelist', 'purpose')
+    assert {k: v for k, v in linf.items() if k not in own} == {k: v for k, v in day3.items() if k not in own}
+    assert linf['restart_from'] == dict(case='box_near_side_sea', day=59.0) and linf['days'] == 88.5
+    assert linf['restart_namelist'] == dict(param3=dict(l_inf=75.0), param9=dict(output_thbudget=0, output_qvbudget=0))
+    assert linf['output_s'] == 6 * 3600.0 and linf['restart_s'] == day3['restart_s'] and linf['keep_restarts'] == 2
+    night, night75 = c.CASES['box_near_side_sea_night_6km'], c.CASES['box_near_side_sea_night_6km_linf75']
+    assert {k: v for k, v in night75.items() if k not in ('namelist', 'purpose')} == \
+        {k: v for k, v in night.items() if k not in ('namelist', 'purpose')}
+    assert night75['namelist'] == dict(c.NIGHT_OUTPUT, param3=dict(l_inf=75.0))
+    # no case set up before them takes either new key, so the runner sets them up and runs them as before (the
+    # wind's own time scale of 28 October, and the gust beside it, take restart_namelist after them)
+    new = {'box_near_side_sea_day3_linf75', 'box_near_side_sea_night_6km_linf75', 'box_near_side_sea_l15_wind_day3',
+           'box_near_side_sea_l15_wind_day4', 'box_near_side_sea_l15_wind_gust_day3', 'box_near_side_sea_l15_wind_gust_day4'}
+    assert not [n for n, v in c.CASES.items() if n not in new and ('restart_namelist' in v or 'keep_restarts' in v)]
+
+
+def test_pruning_keeps_the_starting_restart_the_newest_and_any_incomplete_set(tmp_path):
+    for n in (118, 119, 120, 121, 122):
+        for part in 'isuvwx':
+            (tmp_path / f'cm1rst_t{n:06d}_{part}.dat').write_bytes(b'')
+    for part in 'isuv':                                                   # being written
+        (tmp_path / f'cm1rst_t000123_{part}.dat').write_bytes(b'')
+    assert c.prune_restarts(tmp_path, 2, start=118) == [119, 120]
+    left = sorted({p.name[8:14] for p in tmp_path.glob('cm1rst_t*_s.dat')})
+    assert left == ['000118', '000121', '000122', '000123'] and c.latest_restart(tmp_path) == 122
+    assert len(list(tmp_path.glob('cm1rst_t000121_*.dat'))) == 6 and c.prune_restarts(tmp_path, 2, start=118) == []
+
+
+LENGTH_TEMPLATE = FINE_TEMPLATE + (' &param3\n fcor    = -1.155e-06,\n l_inf   =     453.0,\n /\n'
+                                   ' &param9\n output_radten    = 1,\n output_thbudget  = 1,\n output_qvbudget  = 1,\n /\n')
+
+
+def test_a_run_on_with_earth_s_length_changes_the_source_s_namelist_there_alone(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    monkeypatch.setattr(c, 'apply_rain_limits', lambda case, cfg, g: None)   # the source's limits, written elsewhere
+    build = tmp_path / 'cm1' / 'build' / 'moon_omp_rain_law_pbl'
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label='moon_omp_rain_law_pbl', executable_sha256='linf')))
+    source = tmp_path / 'runs' / 'coarse'
+    coarse_run(source)
+    (source / 'namelist.template').write_text(LENGTH_TEMPLATE)
+    for part in 'isuvwx':
+        (source / f'cm1rst_t000015_{part}.dat').write_text(part)
+    (source / 'progress.json').write_text(json.dumps(dict(segments=[dict(segment=8, model_s=691200.0,
+                                                                          executable='source')])))
+    monkeypatch.setitem(c.CASES, 'linf', dict(c.CASES['box_near_side_sea_day3_linf75'],
+                                              restart_from=dict(case='coarse', day=7.5), days=14.5))
+    case = c.setup('linf')
+    text = (case / 'namelist.template').read_text()
+    value = lambda section, key: c.namelist_value(text, section, key)
+    assert value('param3', 'l_inf') == '75.0' and value('param3', 'fcor') == '-1.155e-06'
+    assert [value('param9', k) for k in ('output_thbudget', 'output_qvbudget', 'output_radten')] == ['0', '0', '1']
+    assert value('param1', 'tapfrq') == '21600.0' and value('param14', 'diagfrq') == '10800.0'   # 3-hourly diagnostics
+    assert value('param1', 'rstfrq') == '43200.0'                       # restarts numbered as the source's
+    changed = [(a, b) for a, b in zip(LENGTH_TEMPLATE.splitlines(), text.splitlines()) if a != b]
+    assert len(changed) == 4 and len(text.splitlines()) == len(LENGTH_TEMPLATE.splitlines())
+    assert all((case / f'cm1rst_t000015_{part}.dat').read_text() == part for part in 'isuvwx')
+    record = json.loads((case / 'case.json').read_text())
+    assert record['configuration']['restart_namelist']['param3'] == dict(l_inf=75.0)
+    assert record['restart_from']['restart'] == 15 and record['build']['executable_sha256'] == 'linf'
+
+
+@pytest.mark.parametrize('base, changes', [('box_near_side_sea_l15_aloft_day3', ['var8', 'var10']),
+                                           ('box_near_side_sea_l15_inflow_day3', ['var7', 'var8', 'var10'])])
+def test_a_run_on_on_the_corrected_build_takes_the_wind_from_the_source_s_lowest_gcm_level(tmp_path, monkeypatch, base,
+                                                                                           changes):
+    label = c.CASES[base]['build']                                   # the aloft build, then the inflow build
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    monkeypatch.setattr(c, 'apply_rain_limits', lambda case, cfg, g: None)   # the source's limits, written elsewhere
+    build = tmp_path / 'cm1' / 'build' / label
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label=label, executable_sha256='aloft')))
+    source = tmp_path / 'runs' / 'coarse'
+    coarse_run(source)
+    record = json.loads((source / 'case.json').read_text())
+    (source / 'case.json').write_text(json.dumps(dict(record, reference=dict(profile=dict(z_m=[2508.9, 1213.5, 312.69])))))
+    for part in 'isuvwx':
+        (source / f'cm1rst_t000015_{part}.dat').write_text(part)
+    (source / 'progress.json').write_text(json.dumps(dict(segments=[dict(segment=8, model_s=691200.0,
+                                                                          executable='source')])))
+    monkeypatch.setitem(c.CASES, 'aloft', dict(c.CASES[base], restart_from=dict(case='coarse', day=7.5), days=14.5))
+    case = c.setup('aloft')
+    text = (case / 'namelist.template').read_text()
+    assert c.namelist_value(text, 'param8', 'var8') == '312.7' and c.namelist_value(text, 'param8', 'var10') == '7200.0'
+    changed = [(a, b) for a, b in zip(FINE_TEMPLATE.splitlines(), text.splitlines()) if a != b]
+    assert [b.split('=')[0].strip() for a, b in changed] == changes   # nothing else in the source's namelist
+    record = json.loads((case / 'case.json').read_text())
+    assert record['corrected_wind'] == dict(var10=7200.0, var8=312.7)
+    # the inflow's switch on its build only
+    assert record.get('corrected_inflow') == (dict(var7=1.0) if 'var7' in changes else None)
+    assert ('var7' in changes) == (c.namelist_value(text, 'param8', 'var7') == '1.0')
+    assert record['reference']['profile']['z_m'][-1] == 312.69                    # carried on for the fourth day
+
+
+def test_the_held_night_with_earth_s_length_takes_it_over_the_source_s(tmp_path, monkeypatch):
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    build = tmp_path / 'cm1' / 'build' / 'moon_omp_rain_law_pbl'
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label='moon_omp_rain_law_pbl', executable_sha256='night')))
+    source = tmp_path / 'runs' / 'coarse'
+    night_source(source)
+    (source / 'namelist.template').write_text(NIGHT_TEMPLATE + ' &param3\n l_inf   =     453.0,\n /\n')
+    for name, base in (('night75', 'box_near_side_sea_night_6km_linf75'), ('night', 'box_near_side_sea_night_6km')):
+        monkeypatch.setitem(c.CASES, name, dict(c.CASES[base], night_from=dict(case='coarse', day=7.5, refine=1)))
+    long_, short = (c.namelist_value((c.setup(n) / 'namelist.template').read_text(), 'param3', 'l_inf')
+                    for n in ('night', 'night75'))
+    assert (long_, short) == ('453.0', '75.0')
+    a, b = ((c.RUNS / n / 'namelist.template').read_text().splitlines() for n in ('night', 'night75'))
+    assert [(x, y) for x, y in zip(a, b) if x != y] == [(' l_inf   =     453.0,', ' l_inf   =     75.0,')]

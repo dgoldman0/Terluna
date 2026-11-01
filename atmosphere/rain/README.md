@@ -3,7 +3,8 @@
 Single raindrops in the Open Moon's air: how fast each size falls, with its drag and its shape, how it evaporates on
 the way down, and which sizes reach the ground from a cloud base, with tools for weighing drop-size spectra. The
 products give these in the Moon's air at 2 m in the three target climates beside Earth's air, check the fall speeds
-CM1 gives its rain, and carry CM1's limits on its rain's size to lunar gravity by the drops' collisions.
+CM1 gives its rain, carry CM1's limits on its rain's size to lunar gravity by the drops' collisions, and give CM1's
+rain the solver's own fall law.
 
 The model comes from the author's rain work of 11–13 October 2026, done in ChatGPT and recovered on 17 October (the
 assessment of that day on the research drive, `integration-history-review-2026-10-17/assessment.md`, finding F02). Its
@@ -21,6 +22,7 @@ arriving at the ground by the audio lab [visualization/rain-audio](../../visuali
 | [arrivals.py](arrivals.py) | The product [results/rain_arrivals.json](results/rain_arrivals.json), schema `terluna.atmosphere.rain-arrivals/1`: the drops arriving at the ground |
 | [rates.py](rates.py) | The product [results/rain_rates.json](results/rain_rates.json), schema `terluna.atmosphere.rain-rates/1`: the GCM's rain rates on each target's land |
 | [breakup.py](breakup.py) | The product [results/rain_breakup.json](results/rain_breakup.json), schema `terluna.atmosphere.rain-breakup/1`: the size scale of raindrop breakup at lunar gravity and the lunar values of CM1's rain limits |
+| [fall_law.py](fall_law.py) | The product [results/rain_fall_law.json](results/rain_fall_law.json), schema `terluna.atmosphere.rain-fall-law/1`: the solver's fall law as the moments CM1's Morrison scheme reads, and the lunar rate of rain's self-collection |
 | [targets.py](targets.py) | The three target climates as the products read them from the climate targets' product: the hot world, the resort at 301 K and the lock, and that product's binding in the tree |
 | [sources.json](sources.json) | The equations' and data's sources, with how far each was read |
 | [vendor/rainprops/](vendor/rainprops/) | Loftus's rainprops at commit `e2df9c2` (MIT licence): the code the solver adapts, with the Gunn–Kinzer fall speeds, unmodified, each file pinned in its `PROVENANCE.json` |
@@ -30,6 +32,7 @@ python -m atmosphere.rain.product                 # about three and a half minut
 python -m atmosphere.rain.arrivals                # about two minutes
 climate/gcm/.venv/bin/python -m atmosphere.rain.rates   # about ten seconds; reads the GCM's output with netCDF4
 python -m atmosphere.rain.breakup                 # about a minute
+python -m atmosphere.rain.fall_law                # about a second
 python -m pytest atmosphere/tests/test_rain_*.py
 ```
 
@@ -284,6 +287,52 @@ At 1.68 mm Morrison's mass-weighted fall speed in the Moon's air at 2 m is 4.47 
 spectrum 4.21 m/s; the cap the lunar builds carried, 2.70 m/s there, would hold it below both. These values are a
 runnable calculation of the similarity: no laboratory has measured lunar collisions, and CM1 has not run with them
 beyond a smoke test ([climate/crm](../../climate/crm/README.md#rain-limits-at-lunar-gravity)).
+
+### The fall law for CM1
+
+Morrison's scheme reads rain's fall law only through three moments of its exponential spectrum: the mass-weighted and
+the number-weighted mean fall speeds, which carry the rain's water and its drops down, and the integral that
+ventilates its evaporation. CM1's lunar builds slow the scheme's Earth law, V = 842 D^0.8 in its reference air, by one
+factor at every size. [fall_law.py](fall_law.py) takes the three moments from the solver instead
+([results/rain_fall_law.json](results/rain_fall_law.json)). Over the mean diameters lunar rain occupies, 0.2–3 mm, the
+present law's moments stand off the solver's by up to 44%, and the power law closest to the solver's mass-weighted
+speed and ventilation (V = 150 D^0.68) stands off nearly as far, since one exponent cannot follow both the viscous fall
+of drizzle and the inertial fall of large drops:
+
+| Moment, over the solver's | Present law | Closest power law |
+|---|---|---|
+| Mass-weighted fall speed | 0.84–1.44 | 0.90–1.27 |
+| Number-weighted fall speed | 0.88–1.41 | 0.96–1.99 |
+| Ventilation integral | 0.92–1.05 | 0.96–1.20 |
+
+At the lunar breakup equilibrium, a mean diameter of 1.68 mm, the present law carries the rain's water down 6% faster
+than the solver's 4.22 m/s at 2 m, its drops 11% more slowly, and ventilates its evaporation 4% less, so per metre of
+fall its rain loses 9% less water than the solver's would.
+
+The table holds the solver's three moments for 301 slopes of the spectrum, uniform in log from 100 to 100,000 per
+metre, mean diameters from 10 mm to 10 µm, beyond the scheme's own 20 µm to 6.88 mm. The speeds are the solver's in
+the resort's air at 2 m. Below 1 µm they follow Stokes's D², which the solver meets there to 0.1%. Beyond the
+stability screen (16.3 mm), where Morrison's untruncated spectrum still places mass, they hold at the screen's speed,
+5.33 m/s. Divided by the scheme's density factor there, (RHOSU/ρ)^0.54 = 0.873, they come back through the scheme's own
+factor, and the Moon's air holds its density within about a tenth through the lowest 10 km, where the rain falls. The
+quadrature gives a power law's closed forms back to within 3 × 10⁻⁶, and the table, read linearly in the log of the
+slope, gives its own moments between its points to within 3 × 10⁻⁵. The rain limits' cap on the mean fall speeds holds
+the table back only for mean diameters beyond 3.6 mm.
+
+Rain's self-collection, Seifert and Beheng's (2001) 5.78 m³/kg/s on Earth, follows the drops' gravitational collision
+kernel, π/4 (D₁ + D₂)² |V₁ − V₂|. Summed over pairs from 80 µm to Earth's stability screen, in each world's air at 2 m,
+Earth's kernel exceeds the Moon's by a factor that falls as the drops grow:
+
+| Mean diameter | 0.60 mm | 1.00 mm | 1.68 mm, the lunar equilibrium | 2.50 mm |
+|---|---|---|---|---|
+| Earth's kernel over the Moon's | 2.65 | 2.29 | 1.98 | 1.81 |
+
+Earth's large drops approach one speed near 9 m/s, so the differences between their speeds shrink, while lunar drops
+keep gaining speed with size; the ratio of the kernels therefore falls below the 2.5–3.1 by which gravity slows single
+drops of 1–3 mm. At the lunar equilibrium the lunar rate is 5.78/1.98 = 2.92 m³/kg/s. The rate sets how fast the rain
+reaches the breakup equilibrium, whose size the breakup law sets. CM1 takes the table and the rate through its
+rain-law patch ([climate/crm](../../climate/crm/README.md#the-rain-law-at-lunar-gravity)). Both are a runnable
+calculation of the solver over Morrison's spectra; no lunar collision has been measured.
 
 ## Assumptions and limits
 

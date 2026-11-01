@@ -8,6 +8,7 @@
     "planck_J_s": 6.62607015e-34,
     "speed_of_light_m_s": 299792458.0,
     "standard_gravity_m_s2": 9.80665,
+    "standard_atmosphere_pa": 101325.0,
     "elementary_charge_C": 1.602176634e-19,
     "proton_mass_kg": 1.67262192595e-27,
     "vacuum_permeability_N_A2": 1.25663706212e-06,
@@ -54,7 +55,14 @@
       "charnock_parameter": 0.018,
       "sea_roughness_floor_m": 1.5e-05,
       "von_karman_constant": 0.4,
-      "sea_surface_source": "ExoPlaSim 3.4.2 seamod.f90 namelist defaults charnock and dz0sea (open-sea roughness max(charnock u*^2/g, dz0sea), with the configured planetary gravity) and fluxmod.f90 parameter vonkarman"
+      "sea_surface_source": "ExoPlaSim 3.4.2 seamod.f90 namelist defaults charnock and dz0sea (open-sea roughness max(charnock u*^2/g, dz0sea), with the configured planetary gravity) and fluxmod.f90 parameter vonkarman",
+      "free_convection_constant_m_s_K13": 0.0016,
+      "free_convection_source": "ExoPlaSim 3.4.2 fluxmod.f90 surflx: the constant of Miller, Beljaars and Palmer (1992, J. Climate 5, 418-434, eq. 9) in the heat and vapour transfer over water in unstable air, an Earth value set at Earth's gravity and sea-level pressure",
+      "vertical_diffusion_mixing_length_m": 160.0,
+      "vertical_diffusion_wind_floor_m_s": 1.0,
+      "vertical_diffusion_stability_constant": 5.0,
+      "vertical_diffusion_height_temperature_k": 250.0,
+      "vertical_diffusion_source": "ExoPlaSim 3.4.2 fluxmod.f90: the namelist defaults vdiff_lamm (Blackadar's asymptotic mixing length for momentum in vdiff, the length for heat and vapour sqrt(7.5) times it), zumin (the least wind-speed difference between levels in vdiff, and the least squared surface wind in surflx) and vdiff_b = vdiff_c = vdiff_d (the Louis-ECHAM stability constants), and vdiff's parameter ztscal (the temperature at which it counts its heights); the length was set for Earth"
     },
     "swan_41_51_wu": {
       "low_speed_drag_coefficient": 0.0012875,
@@ -89,6 +97,36 @@
       "self_collection_m3_kg_s": 5.78,
       "source": "CM1 r22.0 src/morrison.F: rain's exponential spectrum has its slope LAMR held between LAMMINR = 1/2800E-6 and LAMMAXR = 1/20E-6 (lines 492 and 489), so its mean diameter 1/LAMR lies between 20 um and 2.8 mm; the breakup cutoff D_b defaults to 300E-6 when the namelist's brkup_db is essentially 0 (lines 494-498; src/cm1.F line 404 sets brkup_db = 0.0, and the cpm_RadConvEquil namelist Terluna's cases start from sets it to 300.0e-6); rain's self-collection is NRAGG = -5.78*DUM*QR*NR*RHO with DUM = 2 - EXP(2300*(1/LAMR - D_b)) above D_b and 1 below (lines 2269-2275 and 3598-3604; the morrison.F header credits the breakup to Verlinde and Cotton 1993); source SHA256 2e199a4f2cb66f0590b455fe54b762c5ca4bfdfcd49bd7aa5317b757655034f7.",
       "note": "Earth's limits on rain's size in Morrison's scheme. The breakup factor falls through zero at a mean diameter of D_b + ln 2 / 2300 m = 0.60 mm, where self-collection and breakup balance. atmosphere/rain/breakup.py carries them to lunar gravity, and climate/crm/cm1_run.py's rain-limits patch scales them from the namelist."
+    },
+    "cm1_r22_morrison_rain_evaporation": {
+      "ventilation_f1": 0.78,
+      "ventilation_f2": 0.308,
+      "vapour_diffusivity_coefficient_si": 8.794e-5,
+      "vapour_diffusivity_temperature_exponent": 1.81,
+      "viscosity_coefficient_si": 1.496e-6,
+      "viscosity_sutherland_k": 120.0,
+      "water_density_kg_m3": 997.0,
+      "self_collection_floor_kg_kg": 1.0e-8,
+      "source": "CM1 r22.0 src/morrison.F: RHOW = 997. (line 438); the ventilation F1R = 0.78 and F2R = 0.308 (lines 455 and 459); MU = 1.496E-6*T**1.5/(T+120.) (line 1832); DV = 8.794E-5*T**1.81/PRES (line 1873); AB = 1.+DQSDT*XXLV/CPM (line 1890); rain evaporates at PRE = EPSR*(QV-QVS)/AB with EPSR = 2*PI*N0RR*RHO*DV*(F1R/LAMR**2 + F2R*(ARN*RHO/MU)**0.5*SC**(1/3)*CONS9/LAMR**CONS34) (lines 2283-2295 and 3751-3783), its number falling in proportion to its mass (NSUBR = PRE*DT/QR*NR/DT, lines 2479-2481 and 4068-4070); self-collection acts only on rain of at least 1.E-8 kg/kg (lines 2265 and 3594); source SHA256 2e199a4f2cb66f0590b455fe54b762c5ca4bfdfcd49bd7aa5317b757655034f7.",
+      "note": "Morrison's evaporation of rain integrates each drop's ventilated diffusion over the exponential spectrum, with Earth air's fits for the vapour's diffusivity and the air's viscosity. climate/gcm/rain_drops.py takes the same equation into PlaSim's falling rain, its speeds and ventilation integral from atmosphere/rain's lunar fall law."
+    },
+    "cm1_r22_morrison_graupel": {
+      "fall_speed_coefficient_si": 19.3,
+      "fall_speed_exponent": 0.37,
+      "density_kg_m3": 400.0,
+      "mean_fall_speed_cap_m_s": 20.0,
+      "mean_diameter_cap_m": 2000.0e-6,
+      "mean_diameter_floor_m": 20.0e-6,
+      "ventilation_f1": 0.86,
+      "ventilation_f2": 0.28,
+      "source": "CM1 r22.0 src/morrison.F with ihail = 0: AG = 19.3 and BG = 0.37 (lines 409 and 410), RHOG = 400. (line 443), the ice ventilation F1S = 0.86 and F2S = 0.28 (lines 453 and 454), the slope held between LAMMING = 1/2000E-6 and LAMMAXG = 1/20E-6 (lines 503 and 502); the speed coefficient AGN = DUM*AG with DUM = (RHOSU/RHO)**0.54 (lines 1836 and 1849), the mass-weighted speed UMG = AGN*CONS7/LAMG**BG with CONS7 = GAMMA(4+BG)/6, capped at 20*DUM (lines 563, 2188 and 2196); graupel sublimates at PRDG = EPSG*(QV-QVI)/ABI with EPSG = 2*PI*N0G*RHO*DV*(F1S/LAMG**2 + F2S*(AGN*RHO/MU)**0.5*SC**(1/3)*CONS11/LAMG**CONS36), CONS11 = GAMMA(5/2+BG/2) and CONS36 = 5/2+BG/2 (lines 567, 592, 3739-3743 and 3778), ABI = 1+DQSIDT*XXLS/CPM (line 1889), its number falling in proportion to its mass (NSUBG, lines 4072-4075); source SHA256 2e199a4f2cb66f0590b455fe54b762c5ca4bfdfcd49bd7aa5317b757655034f7.",
+      "note": "Morrison's graupel, fitted on Earth: its density, its fall-speed law and the riming that makes it. climate/crm/cm1_run.py's fall-speed patch scales AG by (g/9.81)**((BG+1)/3) at the host gravity, and climate/gcm/snow_sublimation.py sublimates PlaSim's graupel by the same equation."
+    },
+    "murray_1967_saturation": {
+      "magnus_a_over_ice": 21.8745584,
+      "magnus_b_over_ice_k": 7.66,
+      "source": "Murray, F. W., 1967: On the computation of saturation vapor pressure. J. Appl. Meteor., 6, 203-204: e = 6.1078 exp(a (T - 273.16)/(T - b)) hPa, with a = 17.2693882 and b = 35.86 K over water and a = 21.8745584 and b = 7.66 K over ice.",
+      "note": "PlaSim's saturation over water (ra1 = 610.78 Pa, ra2 = 17.2693882, ra4 = 35.86) is Murray's form over water; its form over ice, with PlaSim's ra1, is the saturation PlaSim's snow sublimates against in climate/gcm/snow_sublimation.py."
     }
   },
   "legacy": {

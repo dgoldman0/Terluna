@@ -120,6 +120,30 @@ A case's executable changes only when its build is rebuilt (`build moon_omp`
 replaces the one every such case links to), so the runner records the executable
 and thread count of every segment.
 
+**CM1's simple boundary layer gave the air its density times the surface's fluxes** (found 2026-10-21 in the Near-side
+Sea box's water budget; fixed with the author's go-ahead of that day). Every ring and box here runs CM1's simple
+boundary-layer scheme (`ipbl` 2, the Louis-type scheme of Bryan and Rotunno 2009), 51 of the 59 runs on the research
+drive. Its driver (`turb.F`, block `dobr09`) takes its tendencies from the routines that return the change of the
+density-weighted field, rho times the change per second. CM1's ordinary turbulence path divides that density out
+(`turbtend.F`), but this driver hands the tendencies to `solve1.F`, which adds them as changes of potential
+temperature, the mixing ratios and the wind. So the air took rho times what the surface passed it:
+- in the sea box, 1.35 times the sea's evaporation;
+- in the earlier land box, 1.32 times the evaporation and 1.46–1.51 times the sensible heat.
+
+The air at the ground weighs 1.38 kg/m³ in the Moon's 1.2 atm, and the surface drag was inflated by the same factor.
+The water budget closes only with the inflated term, to 0.01 mm/day. The same code stands in the cm1r22.0 release and
+in NCAR's current main branch (read on 21 October).
+
+The build `moon_omp_rain_law_pbl` divides the density out where the driver's block ends (`PBL_DENSITY_PATCH` in
+[cm1_run.py](cm1_run.py)). In its trials the boundary layer's water came to 0.995–1.000 times the evaporation. CM1's
+averaging of the scheme's wind tendencies from scalar points, which this scheme fills at u and v points, is left as
+CM1 has it. Every earlier ring and box put 30–50% more of its surface's heat and water into its air than its surface
+fluxes say, and dragged its low wind harder. Their near-surface air carries that bias in its temperature, humidity,
+fog and wind at 10 m, and so do the products read from them, among them the wave study's winds
+([wave_coverage.py](wave_coverage.py)), the comfort tables ([ring_comfort.py](ring_comfort.py)) and the storms the
+electricity study reads. A fixed rerun of a reference case has yet to size the effect.
+[box_budget.py](box_budget.py) now reports the boundary layer's water and heat over the surface's for every box.
+
 ```sh
 climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_o3 moon_omp_o3_strict
 climate/gcm/.venv/bin/python -m climate.crm.build_check ring_equator moon_omp_o3 moon_omp_o3_strict --threads 1    # about 25 minutes
@@ -1411,19 +1435,23 @@ against the control, W/m², positive warming:
 
 | Layer | Microphysics | Of it: rain's evaporation; condensation | Turbulence | Circulation | Radiation | Storage |
 |---|---|---|---|---|---|---|
-| 0–1.8 km | +8.2 | +8.2; −6.1 | −12.7 | +8.8 | −1.4 | +2.1 |
-| 1.8–6.5 km | +13.9 | +25.1; −14.7 | +2.5 | −11.7 | −1.9 | +6.1 |
-| 6.5–13.7 km | −1.8 | +40.3; −45.4 | +7.3 | +0.4 | −0.4 | +5.2 |
-| 13.7–23 km | +15.3 | +48.4; −30.1 | +0.4 | −1.6 | +0.2 | +1.2 |
-| Whole column | +29.8 | +135.0; −124.4 | −1.9 | −10.8 | −3.4 | +19.1 |
+| 0–1.8 km | +8.2 | +8.2; −6.1 | −12.3 | +8.3 | −1.4 | +2.1 |
+| 1.8–6.5 km | +13.9 | +25.1; −14.7 | −0.2 | −9.0 | −1.9 | +6.1 |
+| 6.5–13.7 km | −1.8 | +40.3; −45.4 | +1.8 | +5.9 | −0.4 | +5.2 |
+| 13.7–23 km | +15.3 | +48.4; −30.1 | +0.2 | −1.4 | +0.2 | +1.2 |
+| Whole column | +29.8 | +135.0; −124.4 | −10.3 | −2.4 | −3.4 | +19.1 |
 
-The spread's differences stay within 3 W/m² in every term and layer.
+The spread's differences stay within 3.3 W/m² in every term and layer. Turbulence is the boundary layer and
+dissipation, and circulation the box's own transport with its advection's implicit diffusion. Until 21 October the
+tool put the implicit diffusion with the turbulence. CM1's slot for it also carries the imposed sinking's heating, and
+its vertical advection has that heating taken out (`adv.F`), so the two columns differed from these by up to
+11 W/m² (box_budget schema 2).
 
 - **Over the whole column** the rain's evaporation cools 135 W/m² less and condensation heats 124 W/m² less; the net,
   about 30 W/m², is the heat of the extra rain that reaches the ground.
 - **In the lowest 1.8 km** the rain's evaporation cools the air 8.2 W/m² less. The warmer air takes 6.6 W/m² less
-  sensible heat from the ground, which evaporates 8.2 W/m² more, and its turbulence brings it 12.7 W/m² less in all;
-  its own circulation brings 8.8 more.
+  sensible heat from the ground, which evaporates 8.2 W/m² more, and its turbulence brings it 12.3 W/m² less in all;
+  its own circulation brings 8.3 more.
 - **So the air at 2 m runs 1.5 K warmer and 0.9 g/kg moister**, most by night (+1.6 K, the dewpoint +1.5 K), and the
   low cloud reaches the ground more often while the fog below 200 m holds at 30%.
 - **Against the GCM** at 0° E, which forced this box before its corrections: the box's air as the GCM measures it,
@@ -1448,7 +1476,8 @@ climate/gcm/.venv/bin/python -m climate.crm.box_budget box_0e_small_rain_control
 - The self-collection rate, 5.78 m³ kg⁻¹ s⁻¹ (Seifert and Beheng 2001), carries Earth's collision kernel, the volume
   drops sweep at their difference in fall speed with collision efficiency near one. At the scheme's own lunar speeds it
   would be 2.94 times smaller, by the solver's 2.5–3.4 times for drops of 0.5–3 mm. It sets how fast the rain reaches
-  the breakup equilibrium, whose size is the breakup law's; it stays for the size-dependent fall law of the plan.
+  the breakup equilibrium, whose size is the breakup law's. The rain law below takes its lunar rate from the collision
+  kernels, 1.98 times smaller at the lunar equilibrium, since Earth's large drops approach one speed.
 - Autoconversion and accretion (Khairoutdinov and Kogan 2000: 1,350 q_c^2.47 N_c^−1.79 and 67 (q_c q_r)^1.15) are fits
   to Earth's bin model. At lunar gravity droplets settle 6 times slower and collide less efficiently, so rain forms
   more slowly by a factor that needs a lunar collision calculation; they stay.
@@ -1461,9 +1490,1583 @@ climate/gcm/.venv/bin/python -m climate.crm.box_budget box_0e_small_rain_control
   6 mm (`xvrmx0` with `imaxdiaopt = 3`), its active breakup off for two moments. Carried as Morrison's are, the
   collisional lengths would scale by about 2.8 and the cap by 2.46; it is not patched, since no NSSL run is planned.
 
-**Open.** The lunar limits change the answers by several times the spread between realizations (above), and the author
-decides whether they join CM1's next run with the size-dependent fall law. The similarity carries Earth's collision
-outcomes to the Moon by the Weber number; no lunar collision has been measured.
+**Since.** The lunar limits change the answers by several times the spread between realizations (above). On 21 October
+the author chose for CM1's next runs, the pair of boxes on the design climate, the lunar limits with the size-dependent
+fall law below. The similarity carries Earth's collision outcomes to the Moon by the Weber number; no lunar collision
+has been measured.
+
+## The rain law at lunar gravity
+
+Morrison's scheme reads rain's fall law only through three moments of its exponential spectrum, and no single power law
+follows the single-drop solver through drizzle and large drops alike: refitted to the solver, the closest power law
+stands as far from it as the lunar builds' present one
+([atmosphere/rain](../../atmosphere/rain/README.md#the-fall-law-for-cm1)). The patch therefore takes the moments from
+a table of the solver's, and gives rain's self-collection its lunar rate beside them. The author approved building it
+on 21 October, before the pair of boxes over the Near-side Sea and at 0° E.
+
+**The patch** (`RAIN_LAW_PATCHES` in [cm1_run.py](cm1_run.py); build `moon_omp_rain_law`, which carries the rain
+limits and the twilight hook with it). Two entries join `&param3`: `rain_fall_law`, 0 to keep the build's power law or
+1 to read `terluna_rain_law.txt` from the run directory, and `rain_selfcoll`, rain's self-collection rate, CM1's
+5.78 m³/kg/s when 0. With the table, three things come from it, read linearly in the log of the spectrum's slope:
+rain's mass-weighted and number-weighted mean fall speeds, in its sedimentation and in its collection of snow and
+graupel, times the scheme's density factor; and the ventilation integral of its evaporation, times that factor's
+square root. Rain's collection of cloud ice keeps the power law, and the rain limits' cap on the mean fall speeds
+stays. For a case with `rain_law='lunar'`, which requires `rain_limits='lunar'`, the runner writes the table and the
+lunar rate, 2.92 m³/kg/s, from atmosphere/rain's product. The patch's header in `morrison.F` states what it changes,
+its default and its source.
+
+**The build and the smoke test** (21 October; `crm-runs/smoke_rain_law/` on the research drive). `moon_omp_rain_law`
+built at `-O3 -march=native` in three minutes on two jobs (executable `721fba67fa38d856`). From the small box's
+day-42.0 restart, with 2.4 kg/m² of rain aloft, each arm ran two model hours on one thread. With the law written out
+at its default, the build parted from the rain-limits build in the last digits: after two hours the rain at the ground
+differed in its sixth digit. Built both strictly (`-ffp-contract=off -nostdinc`, without fused multiply-adds or vector
+maths; `strict.py`), the two matched bit for bit in every output, statistic and restart file. So the patch at its
+default leaves the scheme as it was, and at `-O3` the compiler parts them: the patch's branches change which of
+Morrison's loops it vectorises, and so where it calls glibc's vector exp and log. With the lunar law the build logged
+its 301 table rows and the rate, and its reading of the table at a slope of 1,000/m matched the product's mirror to
+seven digits. Over the two hours it held slightly more rain aloft (2.37 against 2.33 kg/m²) at a smaller mass-median
+mean diameter (1.51 against 1.60 mm), and 8% less rain reached the ground (2.85 against 3.09 mm). This is the
+transient of a law switched on in mid-storm, in one realization; the boxes below measure the law settled.
+
+```sh
+python -m atmosphere.rain.fall_law                                          # about a second: rain_fall_law.json
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_rain_law --jobs 2       # three minutes
+python3 /media/projectspace/terluna-research/crm-runs/smoke_rain_law/smoke.py setup|run|compare
+python3 /media/projectspace/terluna-research/crm-runs/smoke_rain_law/strict.py build|setup|run|compare
+```
+
+## Boxes on the design climate: the Near-side Sea and 0° E
+
+The small box's 48% of falling rain evaporated, against PlaSim's evaporation constant gamma, rests on one box over
+land, forced by the GCM before its corrections and without the heat and vapour its circulation carries sideways. The
+GCM evaporates a larger share of its rain over the Near-side Sea than at that box's place, and the gap widens with
+gamma ([the GCM's account](../gcm/README.md#the-evaporation-of-falling-rain-21-october)). So, at the author's word of
+21 October, a pair of boxes on the design climate puts gamma to the test where the land and the sea differ: one over
+the Near-side Sea at 5° S, 45° W in the southern Procellarum region, the author's site, open water 120 km from the
+nearest land; its twin over the land at 0° E. Both take the lunar rain limits and the rain law above.
+
+**Forcing from the GCM alone** ([gcm_site.py](gcm_site.py)). No ring passes either site on the design climate, so each
+box takes its forcing from the GCM's column there: the cells within 5.6° of latitude and 8.5° of longitude of the site
+that have its surface, six sea cells at sea level and four land cells 0.7–1.3 km up. It takes the GCM's mean air
+there as the reference and the GCM's mean vertical wind, which CM1 applies to its own air through the column. It also
+takes the heat and vapour the GCM's circulation brings by local time, prescribed through the table the rings'
+day-night forcing used (`var11`), through the column. The box's air is held to the GCM's only above the top of the
+GCM's convection, and the first two attempts differed here (below). These come from the GCM's own budget, the storage
+less the physics, and not from differences of its winds and humidity. The Moon's column at 301 K holds about 220 kg/m²
+of vapour, so its circulation moves water through a column about a hundred times as fast as the column keeps it, and
+the net at a site is a residual of about a millimetre a day. At the Near-side Sea, centred and spectral differences of
+the 3-day means brought the column +0.1 to +2.5 mm/day, where the GCM's rain less its evaporation takes 0.7 away.
+
+- **The GCM's budget.** A branch of the cold-cloud run, `A28R_301k_cold_moist`, six years from its year-19 restart
+  with its settings, writes PlaSim's physics heating and moistening of each layer as the model applies them
+  (`--moisture-diagnostics` with `--heating-diagnostics`). The heating comes at each grid point (code 21) and is
+  projected here onto the T21 harmonics, as the spectral step takes it; the moistening comes as that step applies it
+  (code 40, whose slot is filled in the diabatic spectral step), and code 41 holds the horizontal diffusion after it.
+- **The snapshots and the exact means.** The diagnostics are single time steps at the end of each 3-day mean, at ten
+  times of day. So the vapour over the column is held to the GCM's exact means: the change in its precipitable water
+  less the evaporation, plus the rain. The difference is spread over the levels in proportion to the vapour each
+  holds. Over the six years it was 0.24 mm/day at the sea, where the snapshots gave −1.02 and the means −0.78, and
+  0.48 at the land, −0.33 against +0.15.
+- **The vertical wind.** PlaSim's postprocessor writes omega (`wap`) about a hundred times too weak at the equator
+  against the meridional mass flux of the same winds. The wind here is the GCM's own continuity: the divergence and
+  the surface pressure's gradient from the written winds and pressure projected onto the harmonics, summed down each
+  column over its layers as PlaSim sums them. Over the equatorial band it gives ascent of 1–3 mm/s, as the band's
+  meridional mass flux does. At the sea it rises 3.5 and 4.0 mm/s at 0.9 and 4.2 km and sinks 3.4 mm/s at 10 km; at
+  the land it sinks 4.3, 1.0 and 2.3 mm/s at the same heights.
+- **Local time.** The means cover 36° of hour angle each, centred on the site's hour angle from the subsolar
+  longitude of the mean solar height; the snapshots fall 18° later. Each level's series is fitted with the day's mean
+  and first four harmonics, the means' harmonics divided by the damping a 36° mean gives them.
+
+CM1 applies the mean vertical wind to its own air, so the table holds the circulation's heating and moistening with
+the mean wind's advection of the box's starting air added back, on CM1's own levels. At the start the two cancel to
+the accuracy of their differences (centred in the table, third-order upstream in CM1), and the box's own advection
+follows its air as it changes. The GCM holds its tendencies as layer values between half levels, so each layer's is
+laid on CM1's levels by pressure, linear within the layer about its value, its slope the monotonized-central limit of
+its neighbours' (flat in the top and bottom layers). Every layer keeps its total; the 2% of the column's mass above
+CM1's 150 km top is left out. Over the day the GCM's circulation cools and
+dries the lowest kilometre at both sites, by 0.12 K and 0.43 g/kg a day over the sea and 0.24 K and 0.52 g/kg a day
+over the land: it carries the evaporation and the ground's heat away. The box cannot make the planet's day-night
+circulation, whose wind turns with the Sun: over the sea the GCM's wind 0.9 km up blows 3.7 m/s toward the east
+around noon and 3.8 m/s toward the west in the evening, while its mean over the day is 0.5 m/s. So the box's mean
+wind is nudged toward the GCM's by local time, in 72 windows each a 36th of the lunar day (0.82 Earth days), the
+lowest level's speed 1.4–4.3 m/s through the day.
+
+**The first attempt** (kept as `crm-runs/box_near_side_sea_split`). It took the table on the GCM's levels, the mean
+wind's advection added back along the GCM's coarse gradient between its levels, and held the box's wind to the GCM's
+mean. Over the sea, CM1's own advection by the mean wind, acting on the box's well-mixed boundary layer and its own
+lapse, took back less than the table added: between 1.8 and 6.5 km the large-scale terms warmed the box by 8.5 W/m²
+where the GCM's circulation cools that layer by about 11. With its wind near the mean, the sea evaporated 32–61 W/m²
+against the GCM's 102. Over its first 13.6 days the box's air there warmed 0.3 K a day, its air at 2 m rose above the
+sea's temperature, the sea's evaporation fell to 25 W/m², its CAPE to nothing, its condensation level to 8–11 km, and
+it did not rain. It was stopped at day 15 and the pair began again with the table on CM1's levels and the wind by
+local time. With them the sea evaporated 78 W/m² by day 7; on the Moon, where the dry adiabat cools 1.6 K a
+kilometre, the morning air at 73% relative humidity still condenses 4–5 km up.
+
+**The second attempt: the nudging stood in for the convection** (kept as `crm-runs/box_near_side_sea_nudged`, its 59
+days complete; [box_budget_box_near_side_sea_nudged.json](../results/crm/box_budget_box_near_side_sea_nudged.json)).
+It took the table and the mean wind to 16 km, as the rings' day-night forcing does, with the layers' values
+interpolated in height and the lowest held to the ground, and held its air to the GCM's from 8 km, fully from 16 km.
+Over its second lunar day the sea box rained 0.06 mm/day against the GCM's 2.72 at the site. Its water and heat
+budgets, set against the GCM's own budget at the site, account for the gap. CM1's vapour budget closes to
+0.01 mm/day. In mm/day:
+
+| Over the second lunar day | Box | GCM at the site |
+|---|---|---|
+| Water into the air from the surface | 2.99 (the surface flux 2.23, the boundary layer's density above) | 3.51 |
+| Removed by the forcing: the table; the mean ascent | 2.13; 0.49 | 0.78, the circulation's net |
+| Removed by the nudging, all of it at 8–16 km | 0.35 | none |
+| Change in the column's water | −0.04 | 0 |
+| Rain at the ground | 0.06 | 2.72 |
+
+- **Above 16 km the nudging did the convection's work.** The air there holds 76% of the column's mass. Radiation cooled
+  it by 85 W/m², the nudging put back 83.5 W/m², and the box's clouds added nothing. Over the whole column the nudging
+  supplied 89 of the 107 W/m² radiation removed, so the box needed about 2 W/m² of latent heat, which is the 0.06
+  mm/day it rained. In the GCM the latent heat of its rain does that work, 79 W/m². Its convection scheme forms 3.5 of
+  the 4.0 mm/day formed at the site, 3.2 of it between 18 and 72 km. Its circulation takes 35.5 W/m² from the air above
+  16 km, which the box's forcing left out.
+- **The box's convection stayed shallow.** Its clouds stayed below 10 km, its condensate peaking at 7 km under 1%
+  cover. At lunar gravity that is the trade-cumulus regime, and it formed 0.41 mm/day of condensate where the GCM forms
+  4.0.
+- **Below 16 km the water left through the forcing.** The mean ascent moistened the starting air by 0.80 mm/day but
+  dried the box's own air by 0.49. The box's shallow clouds and boundary layer had carried water from below 5 km up to
+  6–10 km, where the GCM's mean flow sinks. Interpolating the GCM's layer values in height left the table's column
+  0.55 mm/day drier than the GCM's.
+- **The earlier land box shows the same shape more mildly.** It was forced by the GCM before its corrections. Its
+  nudging supplied 50 of the 90 W/m² its radiation removed and took 5.3 mm/day of water back from the 4.2 the mean
+  ascent brought ([box_budget_box_0e_small_lunar_rain_day29.json](../results/crm/box_budget_box_0e_small_lunar_rain_day29.json)).
+  It rained 63 mm a lunar day against 180 in the GCM that forced it.
+- **Two published results frame it.** Randall and Cripe (1999, *JGR* 104, D20) set out the ways to force a column
+  model: prescribe the whole advective tendency; prescribe the sideways tendencies and let the observed vertical
+  motion act on the model's own profiles; or relax the model toward observed soundings. These boxes combine all three,
+  and the second, the mean ascent, turned against them. In the EUROCS study (Derbyshire and others 2004, *QJRMS* 130),
+  two cloud-resolving models gave deep, raining convection in moister free tropospheres and only shallow convection in
+  the driest. The study names mixing between cloud and surrounding air as the mechanism behind many differences among
+  convection schemes. PlaSim's Kuo scheme lifts an undiluted parcel from the surface and rains a share of the column's
+  moisture supply wherever that parcel is buoyant (`rainmod.f90`).
+
+So the second attempt's 53% of falling water evaporated over that day (2.3 mm on the way down, 2.0 mm reaching the
+sea, from 12.1 mm condensed; [box_box_near_side_sea_nudged.json](../results/crm/box_box_near_side_sea_nudged.json))
+came from clouds below 10 km. Its rain fell a fraction of the way the GCM's falls, so the share tests nothing about
+gamma. The small box's 48% stands with the same doubt.
+
+**The pair as it runs now** (the author's go-ahead of 21 October). Three changes:
+1. **The build** `moon_omp_rain_law_pbl` divides the density out of the boundary layer's tendencies.
+2. **The forcing** reaches CM1's top, each GCM layer's total kept (above).
+3. **The box's temperature and vapour** are held to the GCM's only above the top of the GCM's convection.
+
+The convection top is the GCM's lowest level above which its convection forms less than 1% of its convective rain:
+72 km at both sites, the sea's convection forming 99.7% of that rain at or below it. The air is held from the GCM's
+next level up, 93 km, fully from its top level at 129 km, where CM1's own damping begins at 115.5 km. The GCM resolves
+no tropopause to hold from: its temperature falls through its top level, to 166 K at 129 km at both sites, and its
+lapse never falls below 0.8 K/km. The convection's top stands in for the tropopause. The wind is still nudged by
+local time throughout. The mean ascent now acts above 16 km too: 3.6 mm/s at 40 km over the sea and 6.7 mm/s over the
+land.
+
+**The boxes** (cases `box_near_side_sea` and `box_0e_design`, on the build `moon_omp_rain_law_pbl`). They have the
+small box's size and spacing, 32 × 32 columns 6.0 km apart. The sea is held at the GCM's 302.0 K. The land is the
+placeholder land at the GCM's wetness, 0.83 (the 0.90 class, as box_0e's), at the ground's own height, with heights
+above it. Both start at local sunrise and run two lunar days, the second analysed. They carry the curved air's
+twilight from the 301 K ledger and write the heat and vapour budgets.
+
+**The trials** (21 October; `crm-runs/trial_site_boxes/` on the research drive). Each case, copied, ran three model
+hours on two threads, in about half a minute. Every trial ran normally and wrote its four outputs, with every field
+the analyses read present and finite and the 22 fields of their heat, vapour and radiation budgets.
+- **The first trials' logs** show the rain limits, the rain law's 301 rows and rate, the table, the vertical wind
+  falling to zero above 16 km and the twilight's 167 elevations. With the split's fixes, the land box's showed the
+  table's 111 levels and all 72 nudging windows read.
+- **The second trials**, with the three changes, ran in 29 and 26 s. The boundary layer's water came to 0.995–1.000
+  times the evaporation, against 1.32–1.35 before. Its heat came to 0.90–1.19 times the sensible heat, which is only
+  3–4 W/m² at sunrise. The namelists hold the air from 93.1 and 92.8 km, and the vertical wind reads through to the top.
+
+The pair runs one box after the other on four threads, with half an hour's rest between.
+
+**The sea box with the three changes** (21 October; its second lunar day, days 29.5–59.0;
+[box_budget_box_near_side_sea.json](../results/crm/box_budget_box_near_side_sea.json),
+[box_box_near_side_sea.json](../results/crm/box_box_near_side_sea.json)). It ran its 59 days in 2.0 hours on four
+threads. Its water budget closes to 0.06 mm/day, and its boundary layer passes on 0.998 times the sea's evaporation.
+- **Rain.** The box rained 0.85 mm/day over the second lunar day, 31% of the GCM's 2.72, against 0.06 with the
+  nudging. Its first lunar day barely rained, 0.02 mm/day: its upper air had first to cool enough for deep convection to
+  start.
+- **Convection.** Cloud water and ice now reach about 70 km and peak at 52 km, the heights where the GCM forms its rain.
+  The column's radiation cools it by 50 W/m², against 107 in the nudged run, under the deep cloud.
+- **Evaporation.** The sea evaporates 2.69 mm/day, against the GCM's 3.51.
+- **Drift.** Without the nudging the upper air cools. At 40 km it went from 262 to 254 K over the two lunar days and at
+  60 km from 238 to 224.2 K, still falling 0.1–0.2 K a day at the end, so the second lunar day is not yet the box's own
+  equilibrium. (Corrected on 24 October: this entry first gave 226.5 K at 60 km; the domain diagnostics and the 3-D
+  output at day 59.0 both give 224.2 K.)
+- **The share.** 61% of the water falling from its clouds evaporates on the way down: 39.2 mm, against 25.2 mm reaching
+  the sea, from 80.7 mm condensed. On PlaSim's pooled shares for this sea (49.7% at gamma 0.02, 75.8% at 0.04) that is
+  gamma about 0.027, provisional on the drift and on the timing below; `rain_evaporation.py`'s fit follows with the land
+  box.
+
+**The gap follows the time of day.** The box takes the GCM's own circulation as prescribed forcing, and at this site
+that circulation lifts the air by day and lets it sink by night. The box's rain follows it. Over the second lunar day,
+by quarter:
+
+| Second lunar day | Prescribed heating above 16 km | Prescribed water | Inhibition | Box rain | GCM rain |
+|---|---|---|---|---|---|
+| Sunrise to noon | −37 W/m² | −4.6 mm/day | 55 J/kg | 0.00 mm/day | 0.92 mm/day |
+| Noon to sunset | −119 W/m² | +3.3 mm/day | 54 J/kg | 1.19 mm/day | 3.50 mm/day |
+| Sunset to midnight | +97 W/m² | −2.1 mm/day | 3 J/kg | 2.04 mm/day | 3.54 mm/day |
+| Midnight to sunrise | +93 W/m² | −4.5 mm/day | 3 J/kg | 0.17 mm/day | 2.93 mm/day |
+
+- **Afternoon.** The rising air cools the upper air and moistens the column, and the box builds deep storms.
+- **Evening.** They peak after sunset, spending what the afternoon built.
+- **Night.** After midnight the sinking air warms the upper air by about 95 W/m² and dries the column, and the storms
+  die.
+- **Morning.** Through the morning the column dries further, the inhibition stands at 55 J/kg, the condensation level
+  sits at 6.2 km, and nothing rains.
+
+PlaSim's convection is a Kuo scheme (`rainmod.f90`). Wherever a parcel lifted undiluted from the surface is buoyant, it
+turns the column's whole moisture supply into rain, the surface's evaporation included. So after midnight the GCM's
+sea evaporates 3.4 mm/day and its scheme rains 2.9 of it while the circulation dries the column. That is the closure's
+known behaviour:
+- Kuo assumed that all the moisture supply makes cloud wherever the air is conditionally unstable (as reviewed by
+  Villalba-Pradas and Tapiador 2022, *GMD* 15).
+- Its moisture-convergence closure has been criticized for reversing the causality between convection and convergence
+  (Emanuel, Neelin and Bretherton 1994, *QJRMS* 120; Arakawa 2004, *J. Climate* 17).
+- Most single-column convection schemes start rain quickly where cloud-resolving models develop it through the day
+  (Guichard and others 2004, *QJRMS* 130).
+- ECMWF replaced its Kuo scheme with Tiedtke's mass-flux scheme in 1989.
+
+So at least part of the gap is PlaSim's rain in the hours when resolved convection cannot run. The box's 61% is the
+share of its own afternoon and evening storms. A third of the GCM's rain falls in the night and morning, when the box
+makes almost none, so gamma fitted to the box measures how fast those storms' rain evaporates. It cannot settle whether
+PlaSim should rain at those hours. The land box runs with the same changes as the Kuo-forced twin; over land the ground
+heats and cools with the Sun, where the sea box's water is held at one temperature. PlaSim's replacement scheme is
+planned in [the GCM's account](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october).
+
+**The land box with the three changes** (21 October; its second lunar day;
+[box_budget_box_0e_design.json](../results/crm/box_budget_box_0e_design.json),
+[box_box_0e_design.json](../results/crm/box_box_0e_design.json)). It ran its 59 days in 2.3 hours.
+- **Closure.** Its water budget closes to 0.04 mm/day, and its boundary layer passes on 0.997 times the ground's
+  evaporation.
+- **Rain.** It rained 3.28 mm/day over the second lunar day, 92% of the GCM's 3.58 on the same four land cells, and
+  1.84 mm/day over its first.
+- **Its water.** The ground evaporates 2.86 mm/day, against the GCM's 3.42, and the prescribed day-night forcing brings
+  it 1.37 mm/day. Its column was still gaining 0.60 mm/day.
+- **The share.** 61% of the water falling from its clouds evaporates on the way down.
+
+Over land the two models rain at the same hours (mm/day):
+
+| Second lunar day | Land box | GCM |
+|---|---|---|
+| Sunrise to noon | 2.87 | 1.91 |
+| Noon to sunset | 8.59 | 11.06 |
+| Sunset to midnight | 1.53 | 0.96 |
+| Midnight to sunrise | 0.07 | 0.21 |
+
+Both rain mostly through the afternoon and barely after midnight, because over land the ground's evaporation follows
+the Sun and leaves Kuo's scheme little to rain at night. The sea box's gap is the sea's own: there the evaporation
+goes on through the night, Kuo's scheme rains it, and the sinking air keeps CM1's convection down.
+
+**What the pair says of gamma** ([rain_evaporation.json](../results/gcm/rain_evaporation.json)). Both boxes evaporate
+61% of their falling water. PlaSim at one gamma evaporates far more over the sea than on land: 75.8% against 58.2% at
+0.04. So the sea box's 61% comes at gamma 0.027, while the land box's lies beyond PlaSim's land share at 0.04, about
+0.046 if the shares are extended in log gamma. No single constant fits both places, which points at the form of
+PlaSim's evaporation of falling rain rather than its constant alone. Both shares are provisional: each box drifts
+still, the sea box's upper air cooling and the land box's column gaining water.
+
+**The near-ground gap, with the boundary layer fixed.** The rings of September ran 2.4–4.7 °C warmer than the GCM
+near the ground over land and 1.8–2.4 °C over the seas, which made the GCM look cool. The corrected boxes' air at
+2 m runs 1.15 K warmer than the GCM's over land and 0.23 K over the sea, at the same cells over the second lunar
+day. So most of that gap was CM1's boundary layer passing on its density times the surface's heat and water. A
+corrected rerun of a reference ring would show how much of it the rings carried.
+
+**The sea box's third lunar day** (24 October; case `box_near_side_sea_day3`, days 59–88.5;
+[box_days_box_near_side_sea.json](../results/crm/box_days_box_near_side_sea.json),
+[box_budget_box_near_side_sea_day3.json](../results/crm/box_budget_box_near_side_sea_day3.json),
+[box_box_near_side_sea_day3.json](../results/crm/box_box_near_side_sea_day3.json)). The sea box ran on from its
+day-59 restart on the same build, inputs and settings, in 1.3 hours on three threads, its outputs numbered on from
+474. The runner's restart setup now copies the rain law's table and carries the wind's windows by local time on by
+whole lunar days: CM1 reads at most 100, so the run takes the 37 that span its days, each with the profile of the
+first two lunar days' window at the same hour (`restart_windows`; the case records runner `0fd2316a921208a1`). A
+3-hour trial from the restart read the 37 windows, the rain law's 301 rows and the restart's running totals, and
+wrote every field the analyses read (`trial_sea_day3.py` in `session-tools/agents/climate` on the research drive).
+
+| The sea box | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise | Mean |
+|---|---|---|---|---|---|
+| Rain, second lunar day | 0.00 | 1.19 | 2.04 | 0.17 | 0.85 mm/day |
+| Rain, third lunar day | 0.00 | 2.23 | 2.97 | 0.14 | 1.33 mm/day |
+| CM1's inhibition, third lunar day | 37 | 35 | 3 | 2 J/kg | |
+
+- **Rain.** The afternoon's rain rises by 87% and the evening's by 46%, and the box rains 49% of the forcing GCM's
+  2.72 mm/day at the site, against 31% over the second day. The nights and mornings stay quiet, 0.14 and
+  0.00 mm/day, under CAPE of 1,270–1,490 J/kg.
+- **Closure.** The water budget closes to 0.04 mm/day, the boundary layer passing on 0.998 times the sea's
+  evaporation of 2.98 mm/day, and the column loses 0.37 mm/day. The heat budget, with the storage taken between the
+  day's sunrises, closes to 4 W/m² of the 43 W/m² the radiation removes; with box_budget's storage, a linear trend
+  over the day that the day's own cycle tilts, it leaves 22 W/m² (`heat_storage_check.py` beside the trial).
+- **Drift.** The upper air has nearly settled. Between the third day's sunrises the domain-mean air at 40 km went
+  from 253.5 to 253.0 K and at 60 km from 224.2 to 224.5 K, and the 16–60 km band's mean by mass fell 0.5 K, against
+  2.2 K over the second day. The lunar day's mean fell 1.5 K at 40 km and 1.4 K at 60 km from the second day, against
+  4.0 and 6.1 K from the first to the second; the box started from the GCM's 261.9 and 237.7 K. Below 16 km the air
+  cooled 0.5 K.
+- **The share.** 60.4% of the water falling from the box's clouds evaporates on the way down (60.7 mm, against
+  39.7 mm reaching the sea, from 133.5 mm condensed): gamma 0.027 on PlaSim's pooled shares, as over the second day.
+
+So the second lunar day's pattern holds as the upper air settles: the sea box rains in the afternoon and evening and
+barely after midnight, where the GCM with the new scheme rains 1.45 mm/day.
+
+**The new scheme on the boxes' own air** (24 October; [sbm_offline.json](../results/gcm/sbm_offline.json), the
+account in [the GCM's README](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october)). PlaSim's
+simplified Betts–Miller scheme was run at once on each box's domain-mean column every 3 hours of its second lunar day,
+laid on PlaSim's ten levels, at reference humidities of 0.6–0.8, parcel mixing of 0–16 per e-folding of pressure and
+inhibition limits of 10 and 30 J/kg. Wherever it convects it rains tens to hundreds of mm/day, and on the sea box's
+air it convects most after midnight: at rh 0.7 without mixing on every column, while the box rains 0.17 mm/day
+there with 1,420 J/kg of CAPE and 3 J/kg of inhibition. Mixing raises its rain until the diluted parcel loses its
+buoyancy, which on PlaSim's levels comes at every hour together at a mixing of 16, and no setting brings the sea's
+nights near the box's while keeping its afternoons and evenings. On the land box's air the scheme convects on none of
+the afternoons and on every night, although in the GCM it rains over that land at the box's hours. The box's
+convection spends the vapour its columns gather, so the scheme's rate at once measures the vapour left above its
+reference, most of it after the box's convection has stopped. Only the GCM can show when the scheme would rain in a
+model running it.
+
+**Why the sea box's nights stay quiet** (24 October; [box_onset.py](box_onset.py),
+[box_onset_box_near_side_sea_day3.json](../results/crm/box_onset_box_near_side_sea_day3.json),
+[box_onset_box_0e_design.json](../results/crm/box_onset_box_0e_design.json)). The diagnosis covers the sea box's third
+lunar day and, for contrast, the land box's second. At every 3-hourly output, parcels rise through the domain-mean
+sounding:
+- **The parcels.** They start from the lowest level and from the lowest 0.5 and 1 km mixed, keep their moist static
+  energy and drop their condensate. They rise undiluted or mixing in surrounding air at 1–8 per e-folding of pressure,
+  as the scheme's `eps_bm` counts it. The lunar column's scale height near the ground is about 48 km, so 8 is
+  0.17/km. If lunar convection is Earth's stretched by the ratio of the gravities, as the gravity pair tests, 8 is
+  Earth's 1/km (Neale and others 2008 used 1e-3/m).
+- **The forcing's dCAPE** (Xie and Zhang 2000). This is the CAPE's change over an hour under the day-night table and
+  the mean ascent alone, applied above 1 km.
+- **The 3-D output.** The strongest updrafts, the cloud tops, and CM1's own CAPE, inhibition and boundary-layer depth
+  in each column.
+
+By quarter, for the parcel from the lowest 0.5 km (undiluted unless marked):
+
+| | Rain, mm/day | Boundary layer | CAPE | CAPE at eps 8 | Inhibition | LCL; LFC | LFC inside the boundary layer | Free-troposphere dCAPE | Strongest updraft, mean of outputs |
+|---|---|---|---|---|---|---|---|---|---|
+| Sea, sunrise–noon | 0.00 | 3.7 km | 1,646 J/kg | 10 | 39.5 J/kg | 6.4; 12.7 km | 6% of columns | +1.2 J/kg/h | 1.8 m/s |
+| Sea, noon–sunset | 2.23 | 2.3 km | 2,008 | 37 | 38.1 | 7.5; 9.6 | 1% | +3.7 | 10.1 |
+| Sea, sunset–midnight | 2.97 | 4.9 km | 1,876 | 16 | 1.4 | 4.7; 5.1 | 58% | −1.6 | 6.8 |
+| Sea, midnight–sunrise | 0.14 | 6.1 km | 1,415 | 10 | 0.4 | 5.9; 6.2 | 59% | −1.6 | 1.5 |
+| Land, sunrise–noon | 2.91 | 3.8 km | 1,900 | 46 | 99.7 | 5.9; 11.8 | 20% | +4.6 | 5.8 |
+| Land, noon–sunset | 8.59 | 4.0 km | 4,593 | 35 | 9.0 | 4.3; 5.6 | 37% | +14.9 | 16.5 |
+| Land, sunset–midnight | 1.53 | 0.2 km | 2,195 | 78 | 73.1 | 2.7; 9.0 | 0% | −4.3 | 2.2 |
+| Land, midnight–sunrise | 0.08 | 0.1 km | 473 | 1 | 148.4 | 3.3; 15.2 | 0% | −4.1 | 2.3 |
+
+- **Over land the quiet nights belong to the boundary layer.** After sunset it collapses to about 100 m, and the parcel
+  meets 136–157 J/kg of inhibition with its LFC at 14–16 km. Convection starts each morning once the deepening layer,
+  6.9 km, holds the LFC in 56% of the columns and the inhibition falls to 10–12 J/kg. Then the box resolves
+  low-level updrafts of 2.6–3.0 m/s (the 99.9th percentile below 16 km).
+- **After midnight the sea box meets those conditions and does not convect.** Its boundary layer is 6.1 km deep and
+  holds the LFC in 59% of the columns; the parcel's inhibition is 0.4 J/kg and its CAPE 1,415 J/kg. Its resolved
+  low-level updrafts reach 1.0–1.25 m/s, and its cloud stays shallow, with tops below 16 km in 14–25% of the columns.
+- **The sea box convects on the CAPE the afternoon's circulation builds.** Its storms start at 1,822 J/kg against
+  65 J/kg of inhibition, as the free-troposphere dCAPE runs at +3.9 to +4.2 J/kg/h. They peak at 2,609 J/kg and spend
+  it, to 1,173 J/kg by midnight. Through the night the CAPE stays at 1,350–1,460 J/kg, and in the morning it rises
+  to 1,630–1,680 J/kg under growing inhibition.
+- **The forcing alone does not separate evening from night.** Its free-troposphere dCAPE is −0.7 to −2.4 J/kg/h
+  through both the rainy evening and the quiet night. CAPE at eps 8 is 18–63 J/kg as the storms start and peak, 5–16
+  at night and in the morning, and 0–1 through the evening's decay.
+
+So over the sea a trigger on whether boundary-layer air reaches its LFC would favour the nights, and the dCAPE treats
+the evening and the night alike. The CAPE the circulation builds marks the box's convection, carried into the evening
+by the storms the afternoon starts. The box's own grid is a candidate cause of the quiet nights. Its night boundary
+layer is as deep as its 6-km spacing is wide, so the boundary-layer scheme carries the layer's eddies, which the grid
+cannot resolve. Petch and others (2002, *QJRMS* 128) found deep convection's onset delayed on grids too coarse for such
+eddies. A finer box would show whether the sea's nights convect.
+[The GCM's account](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october) tests a CAPE trigger on the
+GCM's own columns.
+
+**The sea box's night on finer grids** (25 October; cases `box_near_side_sea_night_6km`, `_3km` and `_2km`;
+[box_resolution.py](box_resolution.py),
+[box_resolution_near_side_sea_night.json](../results/crm/box_resolution_near_side_sea_night.json)). Three boxes put
+that candidate to the test, at the author's go-ahead of 25 October. Each starts from the settled box's own night, and
+they differ from one another in their grid alone.
+- **The start.** Each takes box_near_side_sea_day3's air at day 84.5 (its output 677), averaged over its columns, and
+  CM1 adds its random perturbations of up to 0.25 K at every point. That hour lies 40° of hour angle past midnight on
+  the third lunar day, 14 minutes into a window of the wind by local time. There the source box rained 0.16 mm/day
+  under 1,305 J/kg of CM1's CAPE and 0.6 J/kg of inhibition, its boundary layer 6.0 km deep and holding the LFC in
+  61% of its columns.
+- **The forcing, held at that hour for two Earth days** (`setup_night`). The clock that times the Sun and the day-night
+  table (`var19`) is stopped. The table keeps its values at the hour angle −139.9°, warming the air above 16 km by
+  87 W/m² and drying the column by 4.7 mm/day. The Sun stays 49.6° below the horizon, beneath the twilight table's
+  lowest elevation (−40°), while the twilight's infrared acts as at every hour. The wind is nudged toward that window's
+  for the whole run. The hold on the air above the GCM's convection, the mean vertical wind, the sea at 302.0 K, the
+  rain law and limits, the build `moon_omp_rain_law_pbl` and its physics are the source's. The cases record runner
+  `a0e3d9887788dbea`.
+- **The grids.** The control is the box's own grid, 6 km on 32 × 32 columns (192 km). The finer boxes keep domains
+  wide enough for deep cells: 3 km on 64 × 64 columns (192 km) and 2 km on 64 × 64 (128 km). All keep the 111 levels
+  to 150 km and CM1's boundary-layer scheme. Their first time steps are divided as the spacing, and CM1's adaptive
+  step settles near 75, 39 and 26 s. They ran in 4, 34 and 49 minutes on four threads.
+- **What they write.** The 3-D output comes every 6 hours without the budgets' fields (the domain diagnostics keep
+  their means), the domain diagnostics every half hour, CM1's statistics every 15 minutes and restarts every
+  12 hours. The three runs wrote 1.33 GB and their smoke tests 0.34 GB; the box's third lunar day wrote 5.6 GB.
+- **The smoke tests** (`trial_night.py` in `session-tools/agents/climate-resolution` on the research drive). Each
+  case, copied, ran half a model hour on four threads in 3–28 s and wrote its 3-D output, diagnostics, statistics and
+  a restart, with every field the analysis reads present and finite. Their logs show the one wind window, the
+  table's 36 bins, the twilight's 167 elevations, the rain law's 301 rows and the stopped clock.
+
+**The rule, set before the runs** (`CONTROL` and `READING`). Over its second day the control must reproduce the
+source's quiet night: rain under 0.3 mm/day, the strongest updraft below 60 km averaging under 3 m/s, the 99.9th
+percentile of w below 16 km under 2 m/s in every snapshot, and cloud tops above 40 km in under 5% of the columns on
+average over its snapshots. Otherwise the method fails and the finer grids go unread. A grid convects when it rains
+at least 0.5 mm/day, a third of the GCM's 1.45 after midnight, with its strongest updraft averaging 5 m/s or deep
+tops in 5% of its columns.
+
+**The control reproduces the quiet night, and the finer grids stay as quiet.** Over each box's second day, beside the
+source box over the same hours of its own run (48 diagnostics and 4 snapshots in each box, 8 of each in the source):
+
+| Second day | Source box, days 85.5–86.5 | 6 km, the control | 3 km | 2 km |
+|---|---|---|---|---|
+| Rain | 0.03 mm/day | 0.07 | 0.05 | 0.04 |
+| Strongest updraft below 60 km: mean; highest | 1.28; 1.51 m/s | 1.45; 1.81 | 1.88; 2.18 | 1.96; 2.36 |
+| w's 99.9th percentile below 16 km; at 16–60 km | 1.02; 0.10 m/s | 1.11; 0.13 | 1.35; 0.17 | 1.45; 0.21 |
+| Columns with cloud tops below 16 km | 36% | 48% | 47% | 43% |
+| Highest top of the cloud below 40 km: mean; highest | 10.5; 25.8 km | 8.6; 8.6 | 8.9; 9.3 | 8.7; 9.3 |
+| Columns with ice standing apart at 50–52 km | 0.3% | 0.8% | 1.6% | 3.0% |
+| CM1's CAPE; inhibition | 1,292; 1.6 J/kg | 1,343; 0.8 | 1,320; 0.7 | 1,313; 0.6 |
+| The 0.5 km parcel of the mean sounding: CAPE; inhibition; CAPE at eps 8 | 1,440; 0.5; 13 J/kg | 1,500; 0.5; 13 | 1,476; 0.6; 13 | 1,468; 0.7; 13 |
+| Boundary layer | 6.1 km | 6.1 | 6.0 | 6.0 |
+
+- **The finer grids resolve stronger eddies, and their cloud stays shallow.** The 99.9th percentile of w below 16 km
+  rises from 1.11 m/s at 6 km to 1.35 at 3 km and 1.45 at 2 km, and the strongest updraft from 1.45 to 1.96 m/s, while
+  the boundary layer stays 6.0–6.1 km deep. The cloud rising from below tops out at 8.6–9.3 km on every grid, no column
+  holds cloud at 16–40 km, and the rain falls slightly as the grid refines. The two halves of the second day differ by
+  under 0.1 m/s in the strongest updraft on every grid, so none was building toward an onset when the runs ended.
+- **The cloud above 40 km stands apart.** A thin layer of ice, up to 0.03 g/kg at 50–52 km, comes and goes over
+  0–11% of the columns with no cloud beneath it at 16–40 km. The source box carries it at night too, so it forms in
+  place. The rule's share of cloud tops above 40 km counts it, and averaged over the second day it stays under 5% on
+  every grid.
+- **CAPE stays high and inhibition nil on every grid.** The mean sounding's parcel reaches its LFC at 6.2–6.5 km,
+  and in 47–57% of the columns CM1's own LFC lies inside the boundary layer. Mixing at eps 8 leaves the parcel 13 J/kg
+  on every grid, as in the source's quiet hours; the source's storms start and peak with 18–63 J/kg.
+- **Drift.** From the homogeneous start each box's boundary layer reaches 6.1 km within its first hour, and its
+  shallow cloud covers 29–34% of the columns by hour 12. Over the two days the air at 60 km cools 1.37 K on every
+  grid, against 1.33 K in the source over the same hours. The lowest 1.77 km cools 0.03–0.06 K and dries
+  0.23–0.25 g/kg, against 0.10 K and 0.32 g/kg in the source, whose forcing grows drier toward morning (5.3 mm/day by
+  the end of its two days).
+- **Water.** The boundary layer passes on 0.998–1.003 times the sea's evaporation of 3.05–3.08 mm/day. The vapour
+  budget's rest over the second day, 0.13–0.17 mm/day, matches the vapour CM1's microphysics puts back above 55 km,
+  0.160 mm/day, where the held table dries air that holds none; the source's at those hours are 0.157 and 0.135. Less
+  that refill, the budgets close to 0.03 mm/day.
+
+So under the rule set before the runs none of the three convect, and the quiet sea nights hold up across the grids.
+The rings' and boxes' 6 km grid passes this test at the sea box's night: at 3 and 2 km the boxes resolve stronger
+eddies under the same CAPE and the same nil inhibition, and their cloud stays below 10 km. The GCM's next candidate is
+the CAPE threshold near 100 J/kg that
+[its account](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october) points to (`--sbm-cape`, off by
+default), for a branch at the author's word. The test is one realization of each grid over two Earth days, from one
+hour's mean air with that hour's forcing held. CM1's boundary-layer scheme stays on at every spacing, as in every lunar
+case, so the test measures the grid within that set-up. The 2 km box is 128 km wide against the others' 192.
+
+**What ends the night's cloud: its entrainment under the night's sounding** (25 October, at the author's go-ahead;
+[box_entrainment.py](box_entrainment.py),
+[box_entrainment_near_side_sea.json](../results/crm/box_entrainment_near_side_sea.json), 22 seconds, no new runs). With
+the grid ruled out, the box's own clouds show what stops them. Every 3-D output of the sea box's third lunar day is
+sampled level by level, as Siebesma and Cuijpers (1995, *J. Atmos. Sci.* 52) sampled large-eddy trade cumulus: 59
+snapshots 3 hours apart in each quarter of the lunar day, each of 1,024 columns, and the held-night boxes' 7 snapshots
+from hour 12 (1,024 columns at 6 km, 4,096 at 3 and 2 km).
+- **The samples.** Cloud is air holding at least 0.01 g/kg of cloud water and ice. The cloudy updraft is cloud that
+  rises, and the core is cloudy updraft lighter than its level's mean, counting the weight of every water species.
+  Each sample's environment is the rest of its level.
+- **The entrainment.** Total water qt and moist static energy h, which condensation leaves unchanged, give a bulk
+  plume's fractional entrainment ε = −(dφ_c/dz)/(φ_c − φ_e) from each quarter's pooled profiles; the detrainment is ε
+  less the mass flux's fractional growth with height. Rain that forms takes qt away and freezing adds to h, so the
+  night's warm cloud, which barely rains, keeps both, while in the afternoon's deep cells neither is kept exactly. The
+  bulk rate is the mass-flux-weighted mean of ε below 16 km, with the 5–95% range of 300 resamplings of the snapshots.
+- **The plume.** A plume with the mean air of the lowest 0.5 km (box_onset's parcel) rises undiluted to its
+  condensation level, then mixes in a share 1 − exp(−ε Δz) of the surrounding air's h and water between levels of
+  each quarter's mean sounding, dropping its condensate as it forms (with its condensate kept as weight, in brackets
+  below). Its cap is the first height above its level of free convection (LFC) where its buoyancy vanishes.
+- **The tops.** Each column's cloud top is the top of its lowest unbroken cloud below 40 km, which leaves out the ice
+  that forms in place near 50 km.
+
+| | Night | Morning | Afternoon | Evening |
+|---|---|---|---|---|
+| Rain | 0.14 mm/day | 0.00 | 2.23 | 2.97 |
+| Cloudy columns; their tops' median and 90th percentile | 22%; 7.3, 7.9 km | 0.9%; 6.7, 7.3 | 10%; 22.1, 27.8 | 10%; 7.3, 25.8 |
+| Cloudy updraft's entrainment by qt (5–95%); by h | 1.34 (1.20–1.53); 1.10 × 10⁻³ m⁻¹ | 0.50; 0.32 | 0.33 (0.30–0.35); 0.22 | 0.31 (0.29–0.34); 0.24 |
+| Core's entrainment by qt (5–95%); by h | 0.57 (0.55–0.61); 0.18 × 10⁻³ m⁻¹ | too few cores | 0.29 (0.25–0.31); 0.16 | 0.27 (0.25–0.29); 0.18 |
+| Undiluted parcel's CAPE below 10 km; at 10–16 km; above | 5; 32; 1,378 J/kg | 0.6; 12; 1,632 | 0.1; 54; 1,944 | 19; 84; 1,733 |
+| Plume at the quarter's core rate by h: inhibition; LFC; cap | 0.5 J/kg; 6.2; 8.3 (6.9) km | no cores | 39; 10.0; 26.8 (24.0) | 1.5; 5.3; 7.2 (6.6) |
+| Plume at 1 × 10⁻⁴ m⁻¹: inhibition; LFC; cap | 0.5 J/kg; 6.2; 8.8 (7.2) km | 54; 17.4; 31.4 (28.6) | 38; 10.0; 32.9 (28.3) | 1.5; 5.3; 27.8 (23.9) |
+
+**At night the boundary layer's air meets a layer of almost no buoyancy, and mixing ends its cloud there.** Nearly all
+of the night's 1,415 J/kg of undiluted CAPE lies above 10 km. Between its LFC at 6.2 km and 10 km the parcel gains 5
+J/kg, at most 0.0013 m/s² of buoyancy (0.2 K), and carrying its condensate it loses even that at 8.0 km. The cloudy
+updrafts mix in their surroundings at 1.1–1.3 × 10⁻³ m⁻¹ and their buoyant cores at 0.18–0.57 × 10⁻³ m⁻¹. At these rates
+the plume stops between 6.9 and 8.3 km or never becomes buoyant, where the columns' clouds end: half by 7.3 km, 90% by
+7.9 km. The cloud itself shows the same end. Its rising air is 0.05–0.10 K heavier than its level, and its mass flux
+falls fivefold from 6.2 to 7.9 km, 0.019 to 0.004 kg/m²/s, as it detrains 1.0–2.4 × 10⁻³ m⁻¹ into a layer that cloud
+covers 6–10% of. Above 10 km the parcel's buoyancy grows to 0.012 m/s² by 16 km in air that warms 0.51 K/km in potential
+temperature, less stable than the parcel's own moist adiabat, and that deep layer holds the CAPE the night's diluted
+cloud never reaches.
+
+**In the afternoon the same mixing carries cloud deep once the ascent has lifted it through the inhibition below
+10 km.** There the parcel is 0.9–1.4 K colder than its surroundings at 4–8 km, and the plume crosses 38–41 J/kg of
+inhibition. The cloudy updrafts cross that layer as forced cloud, 0.06–0.24 K heavier than their levels, rising at
+0.6–0.7 m/s under the prescribed ascent. Above 10 km the parcel's buoyancy grows to 0.017 m/s² by 16 km (54 J/kg
+between 10 and 16 km, against the night's 32). The updrafts' mass flux grows more than tenfold from 6.7 to 12 km, and a
+plume at the afternoon's core rate by h (0.16 × 10⁻³ m⁻¹) stops at 26.8 km, or 24.0 km with its condensate, beside the
+columns' tops: half by 22.1 km, 90% by 27.8 km. At the core rate by qt (0.29 × 10⁻³ m⁻¹) it stops at 12.6 km, or never
+becomes buoyant with its condensate, so the two rates bracket the afternoon's tops.
+
+**At a common rate the two soundings diverge.** At 1 × 10⁻⁴ m⁻¹, below every measured rate, the plume
+stops at 8.8 km at night and at 32.9 km in the afternoon; at 2 × 10⁻⁴ m⁻¹ at 8.3 and 24.3 km. The night's core rate
+by h carries a plume to 25.3 km through the afternoon's air, and the afternoon's to 8.4 km through the night's. So the
+sounding sets the difference, and the night's mixing deepens it: its cloudy updrafts mix four to five times as fast
+per metre as the afternoon's, its cores up to twice as fast.
+
+**The night's air above the boundary layer, and what the sinking does to it.** Between 6 and 10 km the potential
+temperature rises 0.74–0.95 K/km at night against 0.13–0.17 K/km in the afternoon. At 10–14 km the relative humidity
+is 0.73–0.77 against 0.82–0.89, and at 10–12 km the saturation deficit h* − h is 5.9–6.2 kJ/kg against 2.8–3.4. The
+stable layer stands on a cooler boundary layer: at 1 km the night's potential temperature is 283.6 K against the
+afternoon's 285.5, while at 10 km the two match, 287.3 and 287.4 K. The prescribed sinking keeps that shape. After
+midnight it cools the lowest 6 km by 18.7 W/m² and dries them by 2.9 mm/day against the sea's evaporation, and it warms
+6–10 km by 11.6 W/m² and 10–16 km by 25.4 W/m², where radiation cools them by 13.4 and 21.6 W/m². So the sinking's
+warming holds the air above the cloud at the afternoon's temperature while the boundary layer beneath cools. In the
+afternoon the forcing cools 6–16 km by 15.2 W/m² and moistens it by 2.2 mm/day, and radiation adds 1.5 W/m² at 6–10 km
+and takes 1.8 at 10–16 km.
+
+**Against BOMEX, the trade-wind case.** BOMEX's cumulus grow under subsidence reaching 0.65 cm/s at 1.5 km, radiative
+cooling of 2 K/day and drying near the sea, below an inversion at 1.48–2.0 km. Its LES clouds mix in 1–3 × 10⁻³ m⁻¹,
+0.8–1.7 × 10⁻³ m⁻¹ by the bulk-plume method this diagnosis uses. The night box has the regime's parts: sinking that
+warms the air above the cloud and dries the boundary layer against the sea's evaporation, a cloud layer spreading
+beneath a stable layer, little rain, and entrainment and detrainment near 10⁻³ m⁻¹. Its lid is a layer where the
+parcel's buoyancy almost vanishes, beneath a deep layer holding nearly all of its CAPE, where BOMEX's is an inversion.
+If lunar convection is Earth's stretched by the ratio of the gravities, as the gravity pair tests, a BOMEX-like cloud
+would mix 0.13–0.28 × 10⁻³ m⁻¹ by the bulk method on the Moon; this inference from scaling alone puts the night's
+cloudy updrafts at four to ten times that and its cores at 0.6–4 times.
+
+**The grid.** On the held-night boxes the rate stays put as the spacing shrinks. Their cloudy updrafts mix at 2.18,
+2.03 and 2.12 × 10⁻³ m⁻¹ by qt (1.52, 1.36 and 1.58 by h) at 6, 3 and 2 km, and at 2.21, 2.15 and 2.22 by qt over the
+second days alone, while half their columns' cloud tops lie by 7.9 km on every grid. Their buoyant cloud occupies only
+the cloud's topmost level, too thin for a core profile on any grid. They mix faster than the source's night (1.34 ×
+10⁻³ m⁻¹), their cloud a single thin deck at 6.2–7.9 km under the held forcing. All keep the same 111 levels,
+0.5–0.6 km apart in the cloud layer, so the night's cloud spans four or five of them, and CM1's boundary-layer scheme;
+a finer vertical grid stays untested.
+
+**The evidence.** The rates are measurements of the model, the bulk mixing of the cloud that the 6, 3 and 2 km boxes
+resolve, from one realization each; the resampling ranges treat 3-hourly snapshots as independent and so understate
+the spread. Romps (2010) found that the bulk-plume method gives at most half the entrainment measured directly in LES,
+and the night's core rates by qt and h differ threefold, since a core chosen for its buoyancy keeps its h. The caps
+are a calculation on mean soundings. The mechanism, a layer of almost no buoyancy between the boundary layer and the
+CAPE, is an inference from the caps, the cloud's own buoyancy and mass flux, and the soundings, and BOMEX is an
+analogy from the literature. The evening marks a limit of the bulk plume: a fresh plume in the evening's mean air stops
+at 5.8–7.9 km at the measured rates, or never becomes buoyant, yet the evening rains 2.97 mm/day from storms the
+afternoon set going. Their cores mix 0.07–0.23 × 10⁻³ m⁻¹ by qt between 6.7 and 17 km while rising at 0.7–4.7 m/s,
+more slowly than the evening's bulk rate, which the cloud near its base sets.
+[The GCM's account](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october) traces why its scheme rains
+after midnight all the same.
+
+**The sources and how they were read.** A helper agent retrieved the literature on 25 October, within a bounded search;
+the publishers' pages for the AMS and Wiley papers refused it.
+- Romps (2010, *J. Atmos. Sci.* 67, 1908–1927), read in full from the author's copy (davidromps.com): BOMEX's
+  bulk-plume and direct entrainment, and the factor of two.
+- Siebesma and others (2003, *J. Atmos. Sci.* 60, 1201–1219), not read. BOMEX's forcing comes from MicroHH's
+  implementation of the case (`cases/bomex/bomex_input.py` on GitHub), and its LES entrainment of 1–3 × 10⁻³ m⁻¹ from
+  Siebesma's 2005 GCSS presentation (atmos.washington.edu, `~breth/GCSS/Arrowhead-200506`), both read.
+- Siebesma and Cuijpers (1995), not read. Its method is taken as Romps (2010) and Villalba-Pradas and Tapiador (2022,
+  *Geosci. Model Dev.* 15, 3447, read) describe it, cores entraining 1.5–2 × 10⁻³ m⁻¹ and the updraft about
+  3 × 10⁻³ m⁻¹ in BOMEX, five to ten times Tiedtke's (1989) 3 × 10⁻⁴ m⁻¹ for shallow convection.
+- De Rooy and others (2013, *QJRMS* 139) and Derbyshire and others (2004, *QJRMS* 130), not read.
+
+**Why the settled box runs colder aloft** (25 October, at the author's go-ahead; [box_upper_air.py](box_upper_air.py),
+[box_upper_air_near_side_sea.json](../results/crm/box_upper_air_near_side_sea.json), 8 seconds, no new runs). Over its
+third lunar day the box is 7.7 K colder than Kuo's GCM, the run that forced it, at 42 km and 10.0 K at 56 km. Its
+convection holds the upper air on a diluted moist adiabat, which sets most of that gap; the GCM's moister air near the
+ground sets most of the rest, and the radiation codes add little.
+- **Against each model's own moist adiabat.** Kuo's air at 19–56 km sits 0.3–1.3 K below the undiluted
+  pseudo-adiabat of its own lowest level, and the rh 0.7 branch's 1.0–1.6 K above its own. The box's sits 3.0–6.3 K
+  below the adiabat of its lowest 0.5 km. A plume held at zero buoyancy while it entrains air of the box's own
+  humidity matches the box's air between 0.5 and 1 × 10⁻⁴ m⁻¹ (a calculation on its mean sounding, after the
+  zero-buoyancy plume of Singh and O'Gorman 2013, not read): at 1 × 10⁻⁴ its column stays within 1.7 K of the box's
+  at 19–56 km, and at 0.5 × 10⁻⁴ the box runs 1.7–2.6 K colder than it. That is 2.4–4.8 per e-folding of pressure,
+  below the afternoon cores' bulk rates under 16 km.
+- **The air near the ground.** The GCM's lowest level holds 13.5 g/kg of vapour against 11.8 in the box's lowest
+  0.5 km, 4.6 kJ/kg more moist static energy, which sets its adiabat 3.1 K warmer at 42 km and 4.0 K at 56 km.
+- **Radiation on one column.** On the GCM's air, CM1's clear-sky longwave (its RRTMG through rrtmg_edge's driver) cools
+  35–48 km as PlaSim's does, 27.6 against 27.2 W/m² (29.7 and 29.8 with each code's curved-air escape), and 48–63 km 3.8
+  W/m² more (2.7 with the escapes). The box absorbs 3.4 W/m² less sunlight at 48–63 km and 3.8 more at 35–48 km.
+  PlaSim's water-vapour copy shifts by −3.9 and +4.9 W/m² between the two columns, so that difference follows the box's
+  drier air at 48–63 km (0.22 against 0.48 g/kg). On the box's own colder, drier air RRTMG cools 35–63 km 17–18 W/m²
+  more than PlaSim, whose fitted correction holds on the GCM's columns; RRTMG agreed within 2% with the correlated-k
+  model aloft on the 45° N ring's columns.
+
+| Lunar-day means, W/m² (48–63 km; 35–48 km) | Box | Kuo GCM | rh 0.7 GCM |
+|---|---|---|---|
+| Temperature | 233.9; 252.9 K | 243.8; 260.8 | 245.1; 262.7 |
+| Longwave, sunlight | −24.8, 11.5; −30.5, 18.1 | −24.1, 14.9; −22.9, 14.3 | −27.0, 16.7; −25.0, 16.2 |
+| Convection (box: microphysics, resolved transport, turbulence) | 19.1; 10.5 | 20.0; 17.5 | 9.3; 11.2 |
+| Forcing or circulation | −6.9; −2.4 | −10.8; −8.9 | 1.0; −2.4 |
+| Storage | −1.2; −1.8 | 0; 0 | 0; 0 |
+
+**How the budgets settle.** At 48–63 km the box's convection heats as much as Kuo's, while its radiation cools
+4.1 W/m² more and its forcing 3.9 less. On the box's start air its forcing cools that layer by 11.3 W/m², as the GCM's
+circulation does (10.8), so the drift weakened it: the mean ascent there cools the box's less stable air less. The
+rh 0.7 branch heats the layer by 9.3 W/m² and still sits 1.3 K warmer than Kuo. The convective heating's size follows
+the radiation and the circulation, and the temperature follows the parcel to which the convection holds the air. So
+the explanation through mixing fits, at 5.3–6.3 K of the gap at 42–56 km, with radiation adding a few W/m² at
+48–63 km. The GCM's moister boundary layer gives 3–4 K, which a mixing setting in the scheme would leave in place.
+The evidence is one realization of the box, the GCM's single-step heating averaged over the lunar day, and radiation
+on lunar-day mean columns: RRTMG on the box's mean column cools 56 km 18% less than the mean of the box's own
+clear-sky heating. The sunlight copy leaves out the gas bands and the curved air's twilight and serves for the
+difference between columns only.
+
+```sh
+/media/projectspace/terluna-research/session-tools/run_column_budget.sh       # the GCM branch, and gamma's years
+climate/gcm/.venv/bin/python -m climate.crm.gcm_site A28R_301k_cold_moist 0 5 -5 -45 sea      # about ten seconds
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_rain_law_pbl                 # three minutes
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_0e_design
+python3 /media/projectspace/terluna-research/crm-runs/trial_site_boxes/trial.py run|check
+/media/projectspace/terluna-research/session-tools/run_site_boxes.sh             # the pair; rerun to resume
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_nudged --from-day 29.5   # the second attempt
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_day3    # the third lunar day, from day 59
+/media/projectspace/terluna-research/session-tools/agents/climate/run_sea_day3.sh    # 1.3 hours; rerun to resume
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_day3 --from-day 59
+climate/gcm/.venv/bin/python -m climate.crm.box_analysis box_near_side_sea_day3 --from-day 59
+climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea box_near_side_sea_day3     # its lunar days
+climate/gcm/.venv/bin/python -m climate.gcm.sbm_offline           # the new scheme on the boxes' air, 15 seconds
+climate/gcm/.venv/bin/python -m climate.crm.box_onset box_near_side_sea_day3 59 88.5    # why the nights stay quiet
+climate/gcm/.venv/bin/python -m climate.crm.box_onset box_0e_design 29.5 59               # the land, for contrast
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_night_6km     # and _3km, _2km
+climate/gcm/.venv/bin/python /media/projectspace/terluna-research/session-tools/agents/climate-resolution/trial_night.py run|check box_near_side_sea_night_6km
+/media/projectspace/terluna-research/session-tools/agents/climate-resolution/run_night.sh 6km   # 4 min; 3km 34, 2km 49
+climate/gcm/.venv/bin/python -m climate.crm.box_resolution          # the three grids beside the source's two nights
+climate/gcm/.venv/bin/python -m climate.crm.box_entrainment         # the clouds' entrainment and the scheme's nights
+climate/gcm/.venv/bin/python -m climate.crm.box_upper_air           # why the box runs colder aloft than the GCM
+```
+
+### The sea box with Earth's boundary-layer length (27 October)
+
+CM1's simple boundary layer (`ipbl` 2) mixes with K = l² √max(S² − N²/Pr, small), its length
+l = (l_inf⁻² + (κz)⁻²)^−½, and `case_settings` stretches the asymptotic length l_inf by the gravities from Earth's 75 m
+to 453 m, as it stretches the Rayleigh layer's time. No experiment here has tested that scaling, and at the top of the
+sea's night boundary layer the scheme carries most of the heat and vapour the box exchanges there
+([the GCM's account](../gcm/README.md#the-single-column-with-cm1s-own-convection-27-october)). On 27 October the author
+approved a run of the sea box's third lunar day with Earth's length, to see whether its deep, evenly moist night layer
+rests on the stretched one ([box_length.py](box_length.py),
+[box_length_near_side_sea.json](../results/crm/box_length_near_side_sea.json)).
+
+**The case** (`box_near_side_sea_day3_linf75`). It runs box_near_side_sea_day3 again from box_near_side_sea's day-59
+restart, sunrise to sunrise over days 59–88.5, on the build `moon_omp_rain_law_pbl` with the day-3 run's 37 wind
+windows, inputs, forcing and physics; every input file is the day-3 run's byte for byte except the namelist, which
+differs in l_inf (75.0 m) and in what it writes. l_inf is a namelist value, so the build is the day-3 run's. The domain
+diagnostics keep the day-3 run's 3-hour cadence, so the two compare output for output; the 3-D output comes every 6
+hours without the budgets' fields, as the held nights' does; and the run keeps only its newest two restarts besides the
+one it starts from. It writes 18 3-D fields where its source wrote 45, so CM1 puts all its output under a second output
+configuration, the files suffixed `.02` and numbered from 1 (cm1.F, `nconfig`); [box_lid.py](box_lid.py) and box_length
+read either.
+
+**The runner.** `cm1_run` gains two keys a case may set: `restart_namelist`, entries set over the source's namelist when
+a case runs on from a restart, and `keep_restarts`, under which the runner removes, after each segment, the restart sets
+the case wrote beyond its newest few, never the one it started from. No earlier case sets either (a test checks it), so
+every case already set up or run sets up and runs as before. The new cases record runner `f3ca175b41d3a536`. The held
+night with the same length (`box_near_side_sea_night_6km_linf75`, `setup_night` as for box_near_side_sea_night_6km)
+differs from its 453 m twin in l_inf alone.
+
+**The smoke test** (`trial_linf75.py` and `trial_linf75_checks.py` in `session-tools/agents/climate-pbl-tests` on the
+research drive). A copy of the set-up case ran six model hours from the restart on six threads. CM1 ended normally, its
+log showing l_inf 75 m, the second output configuration and 18 3-D fields; with the 37 windows in place it wrote
+diagnostics at 59.125 and 59.25 days, the 3-D output at 59.25 and a restart, every field the analyses read present and
+finite, and its running domain rain at the restart equal to the day-3 run's. The copy was removed after the checks.
+
+**The held night first** (`box_near_side_sea_night_6km_linf75`). Two Earth days of the held night at 6 km with Earth's
+length ran in 3.6 minutes on six threads. Over the second day, beside its 453 m twin:
+
+| Held night at 6 km, second day | l_inf 453 m | 75 m |
+|---|---|---|
+| Mixed depth; CM1's hpbl, km | 6.48; 6.10 | 6.44; 6.10 |
+| Vapour drop 0.31–6.2 km, g/kg | 0.24 | 0.25 |
+| θv rise 6.2–8.2 km, K | 1.35 | 1.45 |
+| Rain, mm/day | 0.07 | 0.16 |
+| Heat through 6.45–6.99 km, W/m²: the scheme; all parts | −9.6; −11.2 | −0.7; −2.2 |
+| Vapour through 6.45–6.99 km, W/m²: the scheme; all parts | 11.6; 15.3 | 0.9; 5.3 |
+| The scheme's khv there, m²/s | 10.2 | 0.8 |
+
+At Earth's length the scheme's diffusivity at the lid falls thirteenfold and its exchange there by 92%, while the
+resolved parts with the implicit diffusion barely change (−1.6 and −1.5 W/m² of heat, 3.8 and 4.3 W/m² of vapour). Over
+those two days the layer keeps its depth and its even moisture, and its lid gains 0.1 K. The held night starts from the
+453 m box's own air, so it shows how the lid's exchange answers the length at once and leaves the layer's own evolution
+to the lunar day.
+
+**The rule, set before the run** (`CRITERIA` in box_length.py). After midnight the run with Earth's length is robust if
+its mixed depth lies within 1 km of the stretched run's 6.48 km and its 0.31–6.2 km vapour drop within 1 g/kg of
+0.35 g/kg; it depends on the length if the depth falls by more than 1.5 km or the drop grows by more than 1 g/kg; it is
+ambiguous otherwise.
+
+**The lunar day.** Both runs over days 59–88.5, read output for output: 59 domain diagnostics in each quarter, and
+29–30 3-D outputs at the 6-hourly times both wrote. Each cell gives the stretched length (453 m) first and Earth's
+(75 m) second. The depth, drop and rise are read on the GCM's full levels at the site, 0.314, 6.201 and 8.238 km, as
+the comparison with the GCM read them; CM1's own boundary-layer depth (hpbl) is the mean of its columns'
+bulk-Richardson heights.
+
+| Quarter | Mixed depth, km | Vapour drop, g/kg | θv rise 6.2–8.2 km, K | CM1's hpbl, km | Rain, mm/day |
+|---|---|---|---|---|---|
+| Sunrise–noon | 3.25; 3.19 | 0.64; 0.51 | 1.28; 1.44 | 3.69; 3.87 | 0.00; 0.00 |
+| Noon–sunset | 2.64; 2.78 | 1.08; 1.08 | 0.22; 0.24 | 2.31; 2.60 | 2.27; 2.35 |
+| Sunset–midnight | 5.58; 5.41 | 2.14; 2.33 | 1.25; 1.31 | 4.91; 4.85 | 2.96; 3.00 |
+| Midnight–sunrise | 6.48; 6.15 | 0.35; 0.53 | 1.44; 1.70 | 6.07; 5.78 | 0.16; 0.28 |
+
+The cloud below 40 km (liquid and ice of at least 0.01 g/kg) in the 3-D outputs, and what each run carries through
+6.45–6.99 km (W/m², upward; the scheme's part, the resolved part with the advection's implicit diffusion, and all):
+
+| Quarter | Columns with cloud | Their top: median, 90th percentile, km | Columns with cloud above 16 km | Heat: scheme, resolved, all | Vapour: scheme, resolved, all | khv, m²/s |
+|---|---|---|---|---|---|---|
+| Sunrise–noon | 0.7%; 1.8% | 9.8, 13.8; 9.4, 9.7 | 0.1%; 0.1% | −1.2, 0.1, −1.2; 0.0, 0.5, 0.5 | 0.8, 0.4, 1.2; −0.2, −1.1, −1.4 | 13.3; 0.7 |
+| Noon–sunset | 10.2%; 9.5% | 17.2, 31.4; 18.7, 29.5 | 6.8%; 6.5% | −0.5, 0.0, −0.6; −0.1, 1.6, 1.5 | 3.3, 33.1, 36.4; 0.4, 31.7, 32.1 | 31.7; 1.5 |
+| Sunset–midnight | 10.1%; 11.4% | 10.8, 20.8; 8.8, 17.8 | 3.0%; 1.3% | −7.2, −2.3, −9.5; −0.4, −2.3, −2.7 | 19.0, 69.1, 88.0; 1.5, 73.1, 74.6 | 10.0; 0.5 |
+| Midnight–sunrise | 21.9%; 45.8% | 7.4, 10.8; 8.9, 12.5 | 0.7%; 8.2% | −10.1, −0.6, −10.7; −0.7, −0.1, −0.8 | 14.1, 8.5, 22.6; 1.2, 9.6, 10.8 | 11.3; 0.8 |
+
+**Under the rule the night layer is robust.** After midnight, with Earth's length, the layer stands 6.15 km deep
+against 6.48 and its vapour drops 0.53 g/kg against 0.35, inside both margins.
+
+**What the length does.** At Earth's length the scheme's diffusivity at the lid falls 13–21-fold in every quarter, and
+its exchange there with it: after midnight it carries 0.75 W/m² of heat down and 1.2 W/m² of vapour up, against 10.1
+and 14.1. The resolved motion does not take that exchange over. Through the lid after midnight the run with Earth's
+length moves 0.8 W/m² of heat against 10.7 and 10.8 W/m² of vapour against 22.6. The layer below changes little: its
+lid is 0.26 K stronger, its air 0.2–0.4 g/kg moister up to 6.2 km and 0.5 g/kg drier at 8.2 km. The night's
+cloud changes most: it covers 46% of the columns after midnight against 22%, its median top stands at 8.9 km against
+7.4, 8.2% of the columns reach above 16 km against 0.7%, and it rains 0.28 mm/day against 0.16, a fifth of the GCM's
+1.45 with the new convection. By day the two runs differ little: in the afternoon the layer's depth, its drop and the
+rain lie within 0.14 km, 0.01 g/kg and 0.08 mm/day of each other, and the evening's storms rain alike, 3.00 against
+2.96 mm/day, their tops lower at Earth's length (median 8.8 km against 10.8).
+
+So the sea's deep, evenly moist night layer holds at Earth's length, and the scheme's mixing at the layer's top bears
+mostly on the night's cloud. In CM1 the exchange the scheme carries at the lid can almost vanish while the layer's depth
+moves 0.33 km and its lid 0.26 K. In the single column of
+[the GCM's account](../gcm/README.md#the-single-column-with-cm1s-own-convection-27-october), where CM1's convective
+tendencies are prescribed from the 453 m run and cannot adjust, the absence of the same exchange doubled the lid; the
+column's doubled lid therefore overstates what that exchange does in a model whose convection answers its absence (an
+interpretation).
+
+**Evidence and limits.** The two runs are one realization each, started from one restart, so their differences mix the
+length's effect with two realizations drifting apart; the stretched run's second and third lunar days differ in their
+afternoon rain by 87%, so rain differences of a few tenths of a mm/day lie within that spread. The fluxes are CM1's own
+diagnostics, each output one time step's mean over the box's columns, the scheme's part its `thfs` and `qvfs`. Both
+runs use CM1's scheme on a 6 km grid, so the test measures the box's sensitivity to that scheme's length within CM1; no
+observation stands for either length. The cloud tops come from the 3-D outputs both runs wrote every 6 hours, 118 of
+them, against 236 diagnostics.
+
+**Cost.** The lunar day ran in 51 minutes on six threads, in 30 segments, and its folder holds 1.1 GB with its two
+kept restarts and the starting one; the held night ran in 3.6 minutes and holds 0.15 GB; the smoke test's copy was
+removed after its checks. The day-3 run took 1.3 hours on three threads and holds 5.6 GB with every restart and the
+budgets' 3-D fields.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_night_6km_linf75   # and _day3_linf75
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_near_side_sea_night_6km_linf75 --hours 0.5 --threads 6
+PYTHONPATH=. climate/gcm/.venv/bin/python /media/projectspace/terluna-research/session-tools/agents/climate-pbl-tests/trial_linf75.py
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run run box_near_side_sea_day3_linf75 --hours 3 --threads 6   # 51 min
+climate/gcm/.venv/bin/python -m climate.crm.box_length       # both lengths by quarter, and the held nights; seconds
+climate/gcm/.venv/bin/python -m climate.crm.box_lid          # the held nights' lid split by part
+```
+
+### The sea box forced by the fifteen-level GCM (27 October)
+
+Every sea box above took its forcing from the Kuo run on ten levels (`A28R_301k_cold_moist`), while the night rain it
+was set against came, from 22 October on, from GCM runs with the Betts–Miller scheme and, from 26 October, on fifteen
+levels, whose circulation differs from Kuo's. On 27 October the author chose to test whether CM1's quiet sea nights
+survive the fifteen-level GCM's own circulation. The case `box_near_side_sea_l15` is box_near_side_sea with one change,
+the run whose column forces it, read by a rule set before it ran.
+
+**The forcing run.** The fifteen-level baseline (`A28R_301k_cold_sbm_rh07_deep200_l15cap`) had two years. It was run
+again from its own start on the shared ExoPlaSim source as it now stands, for four years
+(`A28R_301k_cold_sbm_rh07_deep200_l15cap_cwsource`; `runs.sh` and `settling.py` in `session-tools/option3` on the
+research drive). Its first two years repeat the baseline's in all 61 output fields and both restarts, so the source's
+later patches, switched off, leave the model as it was. Over the four years it settles: the ground cools from 298.10 to
+297.53, 297.15 and 296.87 K, and the imbalance at the top shrinks from −4.12 to −3.27, −2.63 and −1.90 W/m². A line
+through the imbalance against the ground reaches zero at 295.7 K, and an exponential approach fitted to the ground
+levels off at 296.3 K with an e-folding time of 2.7 years. The sea site's rain after midnight, 2.31, 1.85, 2.33 and
+2.62 mm/day in years 0–3, does not follow that drift. Years 2 and 3 fall inside 1.4–2.8 mm/day, the first two years'
+range widened by their difference, which was the rule set before the run, so the box takes all four years.
+
+**What the forcing brings** (`forcing_audit.py` beside them), against the Kuo run's six years at the same six cells:
+- **The surface and the reference column.** The sea stands at 301.02 K against 302.03, the column 0.7–1.3 K cooler in
+  potential temperature below 10 km and 1.4–1.5 g/kg drier below 7 km.
+- **The mean vertical wind.** It rises 2.6 mm/s at 1 km against 3.5 and 2.1 against 4.0 at 4 km, and it sinks from
+  about 5.5 km, 1.3 mm/s at 7 km, where Kuo's still rises.
+- **The held air.** The GCM's convection forms its rain up to 55 km against 72, so the box's air is held from 71.7 km,
+  fully from 92.4 km, against 93.1 and 129.3.
+- **The circulation by local time.** After midnight it warms the column by 88 W/m² against 57 and dries it by
+  4.3 mm/day against 3.3; through the afternoon it moistens it by 2.3 mm/day against 4.5. Over the lunar day it takes
+  2.0 mm/day of vapour from the site's column against 0.8, as the GCM rains 1.78 mm/day there against 2.72 and
+  evaporates 3.75 against 3.50.
+
+Every other input follows from the fifteen-level run by the setup the Kuo-forced box had. The rain limits differ only
+in the breakup's reference density, 1.1991 against 1.199 kg/m³.
+
+**The runner.** A case run on from a case that was itself run on from a restart now takes its wind windows from the
+case the chain began from (`window_root`). A run-on case numbers its windows from its own restart while
+`restart_windows` counts phases from the run's start, so the fourth lunar day's windows would otherwise have come one
+window, 0.82 days, out of phase. Every case set up before ran on from a case that began its chain, so its windows are
+unchanged; a test checks both. `box_days` reads a fourth lunar day, 88.5–118 days. The first two cases record runner
+`73493ca056a4fa5e`, the fourth day `c8d7968f708640a0`.
+
+**The trial** (`trial_option3/trial.py` in `crm-runs`, after the site boxes' trial). Three model hours ran in 28 s on
+two threads. Every field the analyses read was present and finite, the namelist held the air from 71.7 and 92.4 km,
+and the boundary layer passed on 0.999 times the sea's evaporation.
+
+**The runs.** Two lunar days from sunrise ran in 1.8 hours on four threads, the third from the day-59 restart in 1.0
+hour and the fourth from the day-88.5 restart in 1.1 hours (`box_runs.sh` and `box_day4.sh` beside the GCM's). Rain by
+quarter, in mm/day ([box_days_box_near_side_sea_l15.json](../results/crm/box_days_box_near_side_sea_l15.json)):
+
+| | Sunrise–noon | Noon–sunset | Sunset–midnight | Midnight–sunrise | Mean |
+|---|---|---|---|---|---|
+| Fifteen-level forcing, second lunar day | 0.00 | 0.95 | 1.03 | 0.50 | 0.62 |
+| Fifteen-level forcing, third lunar day | 0.00 | 1.16 | 1.20 | 1.62 | 1.00 |
+| Fifteen-level forcing, fourth lunar day | 0.00 | 1.01 | 1.06 | 1.88 | 0.99 |
+| Kuo forcing, third lunar day | 0.00 | 2.23 | 2.97 | 0.14 | 1.33 |
+| The fifteen-level GCM at the site, four years | 0.19 | 1.64 | 2.96 | 2.28 | 1.77 |
+
+**The rule, set before the run**, on the box's rain after midnight over its third lunar day, against the GCM's
+2.28 mm/day: at most 0.5 mm/day would have left CM1's quiet night standing under the fifteen-level GCM's own
+circulation, and the GCM's night rain to its moist physics; at least 1.0 means that the quiet night came with the Kuo
+forcing. The third day rains 1.62 mm/day after midnight, and the fourth, run because the box was still changing,
+1.88.
+
+**The night after midnight** ([box_onset_box_near_side_sea_l15_day3.json](../results/crm/box_onset_box_near_side_sea_l15_day3.json)
+and [_day4](../results/crm/box_onset_box_near_side_sea_l15_day4.json), against box_near_side_sea_day3's), over the third
+and fourth lunar days:
+- **A shallower, unstable night.** The boundary layer is 3.6 and 4.5 km deep against 6.1 under the Kuo forcing (the
+  GCM's 4.3). The condensation and free-convection levels stand at 3.3–3.7 and 3.7–3.9 km against 5.8 and 6.6, and
+  CM1's CAPE at 1,770–1,880 J/kg against 1,265, with 1.0–1.3 J/kg of inhibition against 1.7.
+- **Strong updrafts in a few columns.** About 2% of the columns have tops above 16 km under either forcing, but here
+  their updrafts are strong: 6.5–6.7 m/s at 18–19 km at the most, and 2.4–2.7 m/s at the 99.9th percentile between 16
+  and 60 km against 0.3.
+- **The cloud layer.** At 5.2–11.8 km on the night budget's bands (`read_box4.py` beside the runs) it condenses 1.86
+  and 1.71 mm/day and re-evaporates 83% of that on both days, against 1.14 mm/day and 81%. The prescribed circulation
+  warms the layer by 31 W/m² against 18, as the GCM's own circulation does there (28 W/m²). Its heat budget leaves
+  9–11 W/m² unclosed, against under 1 for the Kuo-forced box.
+
+**The evening.** Before midnight the box rains 1.20 and 1.06 mm/day against the GCM's 2.96. Its storms are held down
+by 18–26 J/kg of inhibition, against 3 under the Kuo forcing, with a free-convection level at 9.1–9.4 km against 5.3.
+Its rain therefore peaks after midnight, where the GCM's peaks in the evening.
+
+**Budgets and drift.** Over the third and fourth lunar days the water budget closes to 0.07 and 0.04 mm/day, and the
+boundary layer passes on 0.998 times the sea's evaporation of 2.76 and 3.03 mm/day
+([box_budget_box_near_side_sea_l15_day3.json](../results/crm/box_budget_box_near_side_sea_l15_day3.json) and
+[_day4](../results/crm/box_budget_box_near_side_sea_l15_day4.json)). The forcing takes 2.46–2.48 mm/day from the column
+against the GCM's own circulation's 1.99, a gap of about 0.5 against the Kuo-forced box's 1.26; after midnight it
+takes 4.9–5.0 mm/day against 4.3. 61–62% of the box's falling water evaporates, gamma 0.027 on PlaSim's pooled shares,
+as under the Kuo forcing. The box is still settling. Between the third day's sunrises its domain-mean air cooled by
+0.4 K at 3 km, 0.8 K at 6 km, 1.4 K at 10 km, 0.8 K at 40 km and 1.0 K at 60 km; over the fourth by 0.3, 0.5, 0.5,
+0.7 and 0.4 K, its vapour falling 0.5–0.6 g/kg below 6 km.
+
+**Why the evening parts** (`evening.py` beside the runs, taken up once the fourth day had shown the night holding). The
+same parcel, from the lowest 0.5 km mixed and undiluted, was raised through both models' columns: the box's domain means
+at each 3-hourly output and the GCM's own 3-day means at the six cells, laid on the box's levels by height. PlaSim's
+Betts–Miller scheme, with the run's settings (reference humidity 0.7, no mixing, no inhibition limit, the 200 hPa depth
+test and the shallow cap), was applied at once to both on the run's fifteen levels. By quarter, the box's third and
+fourth lunar days and the GCM's four years, the GCM's rain here from its 3-day means binned by the site's hour angle:
+
+| | CM1's rain, mm/day | Parcel on CM1's air: CAPE; inhibition, J/kg | The scheme on CM1's air: deep share; rain at once, mm/day | The GCM's rain (convective), mm/day | Parcel on the GCM's columns: CAPE; inhibition, J/kg |
+|---|---|---|---|---|---|
+| Noon–sunset | 1.16; 1.01 | 1,240 and 750; 56 and 33 | 36% and 25%; 54 and 24 | 1.71 (1.43) | 118; 51 |
+| Sunset–midnight | 1.20; 1.06 | 940 and 980; 27 and 20 | 37% and 36%; 109 and 73 | 3.02 (2.81) | 27; 23 |
+| Midnight–sunrise | 1.65; 1.91 | 2,230 and 2,050; 1.2 and 0.7 | none on either day | 2.18 (1.49) | 28; 20 |
+
+- **The GCM's columns hold little CAPE,** 27–118 J/kg on its 3-day means against 750–2,230 J/kg in CM1's air, as a
+  Betts–Miller scheme keeps its column near its reference.
+- **On CM1's own air the scheme convects in the afternoon and evening.** It goes deep at a quarter to a third of those
+  outputs, raining tens of mm/day at once, where CM1 rains about 1 mm/day under 20–56 J/kg of inhibition. Split by 15°
+  of hour angle ([below](#the-late-evening-on-finer-grids-and-where-the-models-part-28-october)), those outputs fall
+  where CM1's own storms rain, at 60–120°, and none falls in CM1's lull from 135° to midnight.
+- **After midnight it never convects deep.** There CM1 convects through about 1 J/kg and rains 1.65–1.91 mm/day, while
+  the scheme stays shallow at every output: on the third day its cloud was too thin for the depth test at 26 outputs
+  and the column drier than its reference at 33.
+
+On the same air, then, the scheme keeps resolved convection's timing through the evening and leaves it after
+midnight. Read by quarter alone, these outputs were first taken to show the scheme convecting through the inhibition
+that held CM1's storms down; the split by hour angle corrects that reading, and puts the evening's parting in the two
+models' air. The GCM's night rain comes from its own columns, held near its reference, so the two models' nights come
+close in amount by different routes.
+
+**What this changes.** The sea's night gap that the accounts since 24 October chased came largely with the Kuo run's
+circulation. Under the fifteen-level GCM's own circulation CM1 rains through the night at 71–82% of the GCM's rate, so
+at this site the fifteen-level GCM's night rain is close to what resolved convection makes of the same large-scale
+conditions. Several readings that rested on the Kuo-forced box are qualified:
+- CM1's 6 km evenly moist night layer, against which
+  [the boundary-layer comparison](../gcm/README.md#plasims-boundary-layer-mixing-at-lunar-gravity-27-october) and the
+  nonlocal scheme's test set PlaSim, belongs to the Kuo-forced box; under the fifteen-level forcing the layer is
+  3.6–4.5 km deep.
+- The night water budget's pointer to PlaSim's night-cloud physics
+  ([the GCM's account](../gcm/README.md#the-seas-night-water-by-process-and-height-27-october)) and the cloud water's
+  premise compared PlaSim's night with that box's.
+- On 24 October the circulation's night alone, warmer aloft and drier under the new GCM, was read as showing that the
+  Kuo forcing did not explain the quiet nights. The day's forcing turns out to matter more: under the fifteen-level
+  circulation the afternoon is fed less, the evening's storms stay weaker, and the night keeps its CAPE (an
+  interpretation of the quarters above).
+
+The Kuo GCM's own comparison stands: under its circulation CM1 rains 0.14 mm/day after midnight where Kuo rains 2.9.
+The models now part in the late evening, from 135° to midnight, where the GCM's low air is warmer and moister than the
+box's ([28 October](#the-late-evening-on-finer-grids-and-where-the-models-part-28-october)). Open, at the author's
+word: settling the fifteen-level configuration with the evening's difference stated, its longwave refit and a 15-year
+run; a physical account of the evening before any GCM test, taken up on 28 October; and the land box forced by the
+same GCM.
+
+**Evidence and limits.** One realization on the 6 km grid, forced by four years of a GCM still settling, and the box
+itself still settling over its fourth lunar day. The prescribed circulation includes the GCM's response to its own
+convection, and a box forced by it cannot judge whether that circulation is the Moon's; it shows what resolved
+convection does under it. The cloud layer's heat budget leaves 9–11 W/m² unclosed after midnight. The scheme applied at
+once to another model's air meets that air away from its own equilibrium, so its rain at once measures how far the air
+stands from the reference ([the offline test of 24 October](../gcm/README.md#plasims-convection-at-the-moons-long-day-21-october)),
+and the GCM's 3-day means smooth the instants the scheme fires on. The GCM's quarter rain comes from night_water's
+fitted 3-day means at its six cells, CM1's from its domain diagnostics every 3 hours.
+
+**Cost.** The GCM's four years ran in 31 minutes on four cores and hold 0.9 GB. The box's four lunar days ran in
+3.9 hours on four threads and hold 23 GB with every restart; the trial's copy holds 0.1 GB. The read-outs take
+seconds to minutes.
+
+```sh
+S=/media/projectspace/terluna-research/session-tools/option3
+$S/runs.sh l15_four_years                                                      # the GCM, 31 minutes
+climate/gcm/.venv/bin/python $S/settling.py                                    # the years' rule
+climate/gcm/.venv/bin/python $S/forcing_audit.py                               # the forcing beside the Kuo run's
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_l15     # _day3 and _day4 in turn
+$S/box_runs.sh                                                                 # two lunar days, then the third
+$S/box_day4.sh                                                                 # the fourth
+climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea_l15 box_near_side_sea_l15_day3 box_near_side_sea_l15_day4
+climate/gcm/.venv/bin/python -m climate.crm.box_onset box_near_side_sea_l15_day4 88.5 118     # and _day3 59 88.5
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_l15_day4 --from-day 88.5
+climate/gcm/.venv/bin/python $S/read_box4.py --no-products                     # the rule and the night's budget
+climate/gcm/.venv/bin/python $S/evening.py                                     # why the evening parts
+```
+
+### The late evening on finer grids, and where the models part (28 October)
+
+Under the fifteen-level forcing the two models part in the evening (above). Split by 15° of hour angle
+(`evening_bins.py` beside the runs), the evening holds two spans. From 60° to 120°, through sunset, both rain, the GCM
+three times as much at first and about as much by the end. From 135° to midnight the box rains 0.1–0.2 mm/day where
+the GCM rains 2.3–3.6:
+
+| Hour angle | CM1's rain, third; fourth lunar day, mm/day | CM1's inhibition, J/kg | PlaSim's scheme on CM1's air: outputs convecting deep | The GCM's rain (convective), mm/day |
+|---|---|---|---|---|
+| 60–75° | 0.88; 0.83 | 52; 33 | 100%; 60% | 2.46 (2.09) |
+| 75–90° | 2.12; 1.93 | 61; 43 | 100%; 100% | 4.90 (4.20) |
+| 90–105° | 3.19; 2.68 | 54; 39 | 100%; 100% | 4.67 (4.27) |
+| 105–120° | 2.87; 2.45 | 44; 31 | 100%; 100% | 2.73 (2.63) |
+| 120–135° | 0.64; 0.72 | 30; 21 | 20%; 10% | 1.89 (1.85) |
+| 135–150° | 0.20; 0.21 | 20; 13 | none | 2.82 (2.74) |
+| 150–165° | 0.11; 0.09 | 9.1; 4.8 | none | 2.29 (2.00) |
+| 165–180° | 0.10; 0.12 | 1.2; 0.4 | none | 3.64 (3.29) |
+
+Applied at once to the box's air with the run's settings, PlaSim's scheme convects deep where the box's own storms
+rain, while its columns hold 30–60 J/kg of inhibition on average, and stays shallow in the lull. The quarters above
+averaged the two spans together, and their reading, that the scheme convects through the inhibition that holds the
+box's storms down, does not survive the split: on the box's air the scheme keeps resolved convection's timing through
+the evening and leaves it only after midnight, where it stays shallow while the box rains. From 135° to midnight,
+then, the models part because their air differs. Two questions follow: whether the box's lull comes from its grid, and
+how the GCM's late-evening air differs from the box's.
+
+**The lull on finer grids** (cases `box_near_side_sea_l15_evening_6km`, `_3km` and `_2km`;
+[box_resolution.py](box_resolution.py) with `--test evening`;
+[box_resolution_near_side_sea_l15_evening.json](../results/crm/box_resolution_near_side_sea_l15_evening.json)). In
+the lull the box's boundary layer is 5.5 km deep, nearly as deep as its 6 km columns are wide, and the free-convection
+level of its mean sounding stands near 9 km. Coarse grids delay convection's onset under such a layer (Petch and
+others 2002), so three boxes put the lull to the test the night passed on 25 October (above).
+- **The start.** Each box takes box_near_side_sea_l15_day4's air at day 107.625 (its output 862), 142° of hour angle
+  in the fourth lunar day's lull, averaged over its columns, with CM1's random perturbations of up to 0.25 K; the mean
+  air carries no cloud. Over the next Earth day the source rained 0.11 mm/day under 1,000 J/kg of CM1's CAPE and
+  10 J/kg of inhibition.
+- **The forcing, held at that hour for two Earth days** (`setup_night`, as for the night). The clock that times the Sun
+  and the day-night table stops at 142.03°, with the Sun 51.75° below the horizon, and the held table dries the column
+  by 1.18 mm/day. The wind is nudged toward the window of 140–150° for the whole run. The hold on the air above the
+  GCM's convection, the mean vertical wind, the sea at 301.02 K, the rain law and limits, the build and its physics are
+  the source's. The cases record runner `58208d6dfe0b435b`.
+- **The grids** are the night's: 6 km on 32 × 32 columns (192 km), the control; 3 km on 64 × 64 (192 km); and 2 km on
+  64 × 64 (128 km), all on 111 levels to 150 km with CM1's boundary-layer scheme, their adaptive steps near 75, 39 and
+  26 s. They ran in turn in 4, 30 and 43 minutes on four threads and wrote 1.33 GB with the night's output settings.
+  They had no smoke tests of their own; their set-up is the night's, whose smoke tests passed.
+
+**The rule, set before the runs** (`EVENING_CONTROL` and `EVENING_READING`). Over its second day the control must
+reproduce the source's lull: rain under 0.4 mm/day, twice the source's at 135–150°; the strongest updraft below 60 km
+averaging under 3 m/s; and the 99.9th percentile of w below 16 km under 2 m/s in every snapshot. The source carries the
+sunset storms' ice above 40 km over much of its domain, which a box started from mean air lacks, so no share of cloud
+tops enters. Otherwise the method fails and the finer grids go unread. A grid convects when it rains at least
+0.93 mm/day, a third of the GCM's 2.8 at 135–150°, with its strongest updraft averaging 5 m/s or w's 99.9th percentile
+at 16–60 km averaging 1.5 m/s, below the 2.4–2.7 m/s of the source's storms after midnight. Should the finer grids
+convect, the lull comes from the grid; should they stay quiet, it holds across the grids, and CM1 does not support the
+GCM's late-evening rain.
+
+**The control reproduces the lull, and the finer grids stay as quiet.** Over each box's second day, beside the source
+box over the same hours of its run (48 diagnostics and 4 snapshots in each box, 8 of each in the source):
+
+| Second day | Source box, days 108.625–109.625 | 6 km, the control | 3 km | 2 km |
+|---|---|---|---|---|
+| Rain | 0.09 mm/day | 0.14 | 0.16 | 0.17 |
+| Strongest updraft below 60 km: mean; highest | 1.00; 1.15 m/s | 0.92; 1.05 | 1.39; 1.64 | 1.54; 1.86 |
+| w's 99.9th percentile below 16 km; at 16–60 km | 0.82; 0.12 m/s | 0.74; 0.15 | 1.04; 0.19 | 1.15; 0.22 |
+| CM1's CAPE; inhibition | 1,309; 3.3 J/kg | 1,232; 5.5 | 1,204; 6.2 | 1,188; 6.7 |
+| The 0.5 km parcel of the mean sounding: CAPE; inhibition; CAPE at eps 8 | 1,464; 3.2; 67 J/kg | 1,372; 6.2; 59 | 1,340; 7.1; 59 | 1,322; 7.6; 58 |
+| That parcel's free-convection level | 7.7 km | 8.7 | 8.9 | 9.0 |
+| Columns whose own free-convection level lies in the boundary layer | 30% | 17% | 12% | 9% |
+| Columns with cloud at 16–40 km; mean top of the cloud below 40 km | 63%; 24.7 km | 63%; 25.4 | 61%; 25.3 | 61%; 25.4 |
+| Boundary layer | 5.5 km | 5.5 | 5.5 | 5.5 |
+
+- **Stronger eddies, no deep cells.** The 99.9th percentile of w below 16 km rises from 0.74 m/s at 6 km to 1.04 at
+  3 km and 1.15 at 2 km, and the strongest updraft from 0.92 to 1.54 m/s, in a boundary layer 5.5 km deep on every
+  grid. Aloft the 99.9th percentile stays at 0.15–0.22 m/s, under a tenth of what the source's storms reach after
+  midnight.
+  The rain rises from 0.14 to 0.17 mm/day as the grid refines. Between the second day's halves the strongest updraft
+  moves by under 0.05 m/s on every grid.
+- **The air recharges at one pace on every grid.** Held at that hour, the sea evaporates 2.93–2.98 mm/day into each
+  box and the boundary layer passes all of it on; the held table takes 1.18 mm/day and the rain 0.14–0.17, so the
+  vapour below 6.5 km rises by about 0.45 g/kg a day. CM1's CAPE climbs from 890–940 J/kg over the first half-day to
+  1,250–1,300 over the last, and its inhibition falls from 11–13 to 4–5 J/kg, alike on the three grids. The source,
+  whose forcing moves on toward midnight, reaches 1.9 J/kg over the same hours and rains after midnight.
+- **Cloud aloft.** Cloud with tops at 22–25 km forms from the mean air, which carried none, over 89–90% of the columns
+  in the first day and covers 61–63% over the second, as in the source; the updrafts there are the weak ones above. No
+  column holds cloud above 40 km.
+- **Drift and water.** Over the two days the air at 1 km warms 0.18–0.22 K and at 16 km 0.25–0.30 K, and at 40 km it
+  cools 0.37–0.38 K on every grid, against −0.02, +0.17 and −0.42 K in the source over the same hours. The vapour
+  budget's rest over the second day is −0.06 to −0.08 mm/day, against 0.01 in the source.
+
+So under the rule set before the runs none of the three convect, and the box's quiet late evening holds up across the
+grids. At 3 and 2 km the boxes resolve stronger eddies in the same boundary layer, recharge at the same pace and form
+no deep cell in two days. On the box's own air CM1 does not support the GCM's late-evening rain.
+
+**Where the two models' air parts** (`late_evening_columns.py`, `low_air.py` and `sea_surface.py` beside the runs).
+The GCM's 3-day means at the six cells were laid on the box's heights, as above, and set beside the box's domain means
+over its third and fourth lunar days.
+- **The late evening** (135° to midnight: 58 of the box's outputs, 360 of the GCM's means). The GCM's air is warmer
+  through the whole column, by 1.0–1.7 K below 8 km, 2.3 K at 10 km and 5.0–7.6 K at 16–30 km. Its lowest 4 km hold
+  0.25–0.97 g/kg more vapour, the most near the ground (11.92 against 10.95 g/kg at 0.3 km), and above 10 km it stands
+  at 67–70% of saturation, where the box's air stands at 83–98%.
+- **PlaSim's scheme on each mean column**, with the run's settings on its fifteen levels. On the GCM's, the parcel from
+  the lowest level passes 20 J/kg of inhibition and is then buoyant without a break from 5.4 to 55 km, so the scheme
+  convects deep. On the box's, the parcel is buoyant only at the level 2.5 km up, inside the boundary layer, and
+  nowhere above its condensation level, so the scheme stays shallow. The box's own 0.5 km parcel holds 1,100–1,500 J/kg
+  above a free-convection level at 7.7–9.3 km, 2–4 km above the boundary layer's top, and mixing at eps 8 leaves it
+  50–70 J/kg. The scheme goes deep on only 7% of the GCM's individual 3-day means, whose averaging smooths the instants
+  it fires on, while the GCM rains 2.69 mm/day convectively at those hours.
+- **Through the lunar day**, by quarter, with the GCM's wind at 10 m taken from the 3-day means of its components,
+  which understates its speed, and the box's as the mean of its columns' speeds:
+
+| Quarter | Air at 0.3 km: GCM; box | The sea: GCM; box | Evaporation: GCM; box | Wind at 10 m: GCM; box | The box's mean wind at 0.3 km; its target's |
+|---|---|---|---|---|---|
+| Sunrise–noon | 298.83 K, 12.36 g/kg; 298.29, 11.17 | 300.77; 301.02 K | 3.61; 2.74 mm/day | 2.75; 1.23 m/s | 1.42; 3.23 m/s |
+| Noon–sunset | 300.24, 12.11; 299.62, 9.59 | 301.32; 301.02 | 4.54; 3.03 | 2.81; 1.57 | 1.64; 3.10 |
+| Sunset–midnight | 299.66, 11.93; 298.06, 10.34 | 301.16; 301.02 | 3.50; 3.22 | 2.16; 1.41 | 1.48; 2.21 |
+| Midnight–sunrise | 298.72, 12.29; 297.35, 12.33 | 300.83; 301.02 | 3.37; 2.60 | 2.40; 1.27 | 1.37; 2.49 |
+
+  The GCM's low air is 0.5–1.6 K warmer in every quarter and 1.2–2.5 g/kg moister from sunrise to midnight, its vapour
+  level with the box's after midnight. Its sea, within 0.3 K of the box's held 301.02 K, evaporates 9–50% more, most in
+  the afternoon, under a wind at 10 m 1.5–2.2 times the box's.
+- **The box's wind falls short of its forcing.** Its domain-mean wind at 0.3 km runs at 44–67% of its target's speed
+  through most of the lunar day and reaches 92% only in the late evening, where the target is weak and steady
+  (1.6–1.7 m/s at 0.3–1 km). The nudging relaxes the box's mean wind over 3 days, a time scale carried over from the
+  rings, where it held the air to a fixed profile. Here the target changes with each window, every 0.82 days, as the
+  GCM's wind turns with the Sun, faster than such a relaxation follows (an interpretation; the box's momentum budget is
+  not read here). The Kuo-forced box was nudged the same way, unmeasured here.
+
+**What it shows** (an interpretation of the runs above). The box's lull is a recharge. Its sunset storms end with
+20–30 J/kg of inhibition in its columns and a free-convection level near 9 km over a boundary layer 5.5 km deep; the
+sea then refills the low air, the inhibition decays to nil by midnight, and after midnight the box convects again from
+a free-convection level at 3.7–3.9 km (above). On the held hour the recharge runs at one pace on 6, 3 and 2 km, so the
+grid does not set the lull's length. The GCM enters the evening with warmer, moister low air, and on that air its
+scheme keeps convecting through the late evening. Its late-evening rain thus rests on low air that CM1, under the same
+circulation, does not build. Two sources of that difference stand out, neither measured yet. On PlaSim's side, its
+sea's transfer uses Earth's free-convection constant, which on 26 October accounted for about a quarter of its extra
+evaporation, and its wind is stronger. On the box's side, a wind at about half the GCM's through the morning and
+afternoon may leave its sea evaporating less, and its air drier, than the GCM's circulation implies. Which side
+dominates decides whether the late-evening rain is PlaSim's alone.
+
+**What it changes.**
+- The reading of 27 October, that PlaSim's scheme on the box's air convects through the inhibition that holds the box's
+  storms down, is withdrawn (corrected above).
+- Under the rule set before the runs, CM1 on 6, 3 and 2 km grids does not support the GCM's rain from 135° to midnight
+  on the box's own air: that rain leans toward PlaSim's making, pending the account of the low air.
+- The box's short wind qualifies every comparison of the sea's evaporation with the GCM's, among them the reading of 26
+  October that a lunar free-convection constant removes a quarter of the GCM's extra evaporation, an excess measured
+  against the Kuo-forced box, nudged the same way.
+
+Open, at the author's word: a box whose wind follows the GCM's, nudged fast enough for windows of 0.82 days, would show
+how much of the low air's difference is the box's; the free-convection constant over the sea is the author's call
+(26 October); the items open above stand.
+
+**Evidence and limits.** Each grid is one realization over two Earth days, started from one hour's mean air with that
+hour's forcing held; the 2 km box is 128 km wide against the others' 192, and CM1's boundary-layer scheme stays on at
+every spacing. The held window is one where the box's wind nearly meets its target, but the air it starts from carries
+the day's shortfall. The account sets the GCM's 3-day means, which smooth what its scheme fires on, against the box's
+3-hourly domain means, and the GCM's wind taken from its components' means understates its speed, so the ratio of the
+winds is a lower bound. The scheme applied at once to another model's air measures how far that air stands from its
+reference, not a rain rate. The quarters' vapour is a mixing ratio, the late evening's profile specific humidity. The
+box was still settling over its fourth lunar day (above).
+
+**Cost.** The three boxes ran in 76 minutes on four threads and wrote 1.33 GB; each read-out takes seconds to two
+minutes.
+
+```sh
+S=/media/projectspace/terluna-research/session-tools/option3
+climate/gcm/.venv/bin/python $S/evening_bins.py                                # the evening by 15 degrees
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_l15_evening_6km   # and _3km, _2km
+$S/run_evening.sh                                                              # 6, 3 and 2 km in turn, 76 minutes
+climate/gcm/.venv/bin/python -m climate.crm.box_resolution --test evening      # the rule's reading
+climate/gcm/.venv/bin/python $S/late_evening_columns.py                        # the late evening's air in both
+climate/gcm/.venv/bin/python $S/low_air.py                                     # the air at 0.3 km by quarter
+climate/gcm/.venv/bin/python $S/sea_surface.py                                 # the sea, its fluxes, the box's wind
+```
+
+### The sea box with its wind following the GCM's, and the gust over water at lunar gravity (28 October)
+
+The late evening's account (above) found two things in the box's own set-up that bear on its evaporation, and so on
+the low air where the two models part. Its mean wind ran at 44–67% of the speed its forcing aims for through most of
+the lunar day. And over water its surface layer adds a gust with no gravity in it. Two boxes test them side by side,
+each the box's third and fourth lunar days again from its day-59 restart, read by rules set before they ran
+(`rules.txt` beside the runs, parts A and D).
+
+**The wind's own time scale** (`WIND_TAU_PATCH`, the build `moon_omp_rain_law_pbl_wind`). CM1 relaxes the domain-mean
+wind and the held air toward their targets on one time scale, `lsnudge_tau`, 3 days in every case, a value the rings
+took for a profile held fixed. The boxes' wind targets change with each window of local time, every 0.82 days, faster
+than a 3-day relaxation follows. With `var10` above 0 the build relaxes the wind alone on `var10` seconds, the held air
+keeping `lsnudge_tau`; with `var10` at CM1's default of 0 it runs as `moon_omp_rain_law_pbl` does. Three-hour trials
+from the day-59 restart (`trial.py` beside the runs) checked it: with `var10` 0 the new build repeats the old one bit
+for bit in all 16 files the trial writes, and with `var10` at 7200 s the box's mean wind at 0.3 km rose from 1.44 to
+2.49 m/s within the three hours, against a target of 3.24, and its evaporation from 2.66 to 3.15 mm/day. The boxes take
+2 hours, a tenth of a window, the time scale on which cloud-resolving runs forced by observations relax their mean wind
+(Khairoutdinov, Randall and DeMott 2005).
+
+**The gust over water** (`GUST_PATCH`, the build `moon_omp_rain_law_pbl_wind_gust`). CM1's surface layer (`sfclay`,
+`sfcmodel` 2) adds a gust to the wind in its bulk formulas: over land Beljaars's (1995) convective velocity of the
+boundary layer's eddies, vconvc (g/T_s · h · B)^1/3 with vconvc 1, at the build's gravity; over water the old MM5
+formula √Δθ_v m/s, with no gravity in it. Over the lunar sea, whose air stands 3–4 K below the sea in virtual
+temperature, that gust was 1.6–2.1 m/s and raised the wind in the bulk formulas 1.6–1.8 times
+([the GCM's account](../gcm/README.md#the-free-convection-constant-over-four-years-and-the-two-models-light-wind-exchange-28-october)).
+The build takes Beljaars's branch over water too; the COARE algorithm's gust over Earth's ocean has the same form
+(Fairall and others 2003). In a three-hour trial the gust fell from 2.0 to 0.61 m/s, the surface layer's wind from 3.18
+to 2.62 m/s and the evaporation from 3.15 to 2.75 mm/day, every field finite.
+
+**The cases** (`box_near_side_sea_l15_wind_day3`, `_wind_day4`, `_wind_gust_day3` and `_wind_gust_day4`). The third
+days' inputs equal box_near_side_sea_l15_day3's byte for byte, the namelist differing in `var10` alone, and the gust
+cases differ from the wind cases in their build alone; each fourth day runs on from its own third day's restart. The
+first case records runner `1c3858b609e083ea`, set up before the gust's cases were added, and the others
+`c2184716516f7265`.
+
+**The rules, set before the runs.**
+- **Method.** Over the fourth lunar day the box's domain-mean wind at 0.3 and 1 km averages at least 0.85 of its
+  target's speed in every quarter; for the gust box, its surface layer's gust also stays at most 1.0 m/s in every
+  quarter. Otherwise the box is not read as a test of the change.
+- **Evaporation (the wind box).** G = (E_wind − E_old)/(E_GCM − E_old), with E the lunar day's mean surface vapour flux,
+  E_old 3.03 mm/day (the fourth day as first run) and E_GCM 3.75. At least 0.5: the box's short wind accounts for most
+  of the gap; at most 0.25: the gap lies mostly in the two models' surface exchange.
+- **The late evening (both).** Rain over the fourth day's 135–180° of at least 0.93 mm/day, a third of the GCM's 2.8:
+  CM1 supports part of the GCM's late-evening rain; at most 0.4: the lull holds.
+- **The night (both).** Rain after midnight over the fourth day of at least 1.0 mm/day: the box still rains at night as
+  the GCM does; at most 0.5: the quiet night returns (the thresholds of 27 October).
+
+**The runs.** The two boxes ran side by side on three threads each, two lunar days in 2.6 hours (`run_wind.sh`). Over
+the fourth lunar day, by quarter from sunrise, beside the box as first run and the GCM at the site over four years
+with Earth's and with the lunar free-convection constant (`wind_read.py` beside the runs;
+[box_days_box_near_side_sea_l15_wind_gust_day3.json](../results/crm/box_days_box_near_side_sea_l15_wind_gust_day3.json)
+and the wind box's, with their onset and budget products):
+
+| Fourth lunar day | Box as first run | Wind following the GCM's | Wind and lunar gust | GCM, Earth constant | GCM, lunar constant |
+|---|---|---|---|---|---|
+| Mean wind at 0.3 km against its target | 0.42, 0.53, 0.66, 0.55 | 0.89, 0.95, 1.03, 0.85 | 0.89, 0.96, 1.03, 0.86 | | |
+| Gust over the sea, m/s | 1.9, 1.7, 2.0, 2.1 | 1.7, 1.5, 1.9, 2.0 | 0.63, 0.48, 0.67, 0.67 | | |
+| Evaporation; daily mean, mm/day | 2.79, 3.30, 3.32, 2.72; 3.03 | 3.41, 4.01, 3.36, 2.89; 3.42 | 3.28, 3.92, 3.04, 2.61; 3.21 | 3.61, 4.54, 3.50, 3.37; 3.75 | 3.34, 4.67, 3.20, 3.12; 3.58 |
+| Air at 0.3 km, K | 298.18, 299.74, 298.02, 297.25 | 298.80, 300.07, 298.39, 297.58 | 298.54, 299.90, 298.12, 297.24 | 298.83, 300.24, 299.66, 298.72 | 298.90, 300.35, 299.67, 298.69 |
+| Vapour at 0.3 km, g/kg | 11.08, 8.90, 10.11, 12.06 | 11.18, 9.18, 10.85, 12.36 | 10.82, 8.81, 10.42, 11.93 | 12.36, 12.11, 11.93, 12.29 | 11.99, 11.62, 11.77, 12.08 |
+| CM1's inhibition, J/kg | 11, 30, 19, 1.0 | 5.7, 24, 8.9, 1.1 | 6.1, 25, 12, 1.5 | | |
+| Rain; daily mean, mm/day | 0.00, 1.01, 1.06, 1.91; 1.00 | 0.23, 1.06, 1.26, 2.32; 1.22 | 0.15, 0.97, 1.16, 2.30; 1.14 | 0.15, 1.71, 3.02, 2.18; 1.78 | 0.20, 1.18, 2.40, 1.72; 1.38 |
+| Rain at 60–75°, 75–90°, 90–105°, 105–120°, 120–135° | 0.83, 1.93, 2.68, 2.45, 0.72 | 0.86, 1.67, 2.96, 2.57, 0.48 | 0.52, 1.48, 2.64, 3.44, 0.46 | 2.47, 4.90, 4.67, 2.73, 1.89 | 1.38, 4.13, 2.28, 1.84, 2.03 |
+| Rain at 135–150°, 150–165°, 165–180°; the late evening | 0.21, 0.09, 0.13; 0.14 | 0.17, 0.09, 1.28; 0.49 | 0.17, 0.09, 0.06; 0.11 | 2.82, 2.29, 3.64; 2.93 | 2.94, 2.86, 2.47; 2.76 |
+
+The vapour is a mixing ratio; the GCM's columns are its 3-day means at the six cells laid on the box's heights.
+
+**By the rules.**
+- **The box with the wind and the lunar gust passes both method checks** (its wind 0.86–1.03 of its target, its gust
+  0.48–0.67 m/s), so it is read. Its late evening rains 0.11 mm/day: the lull holds. Its night rains 2.30 mm/day after
+  midnight: it still rains at night as the GCM does (2.28 with Earth's constant, 1.72 with the lunar one).
+- **The box with the wind alone misses its method check narrowly:** its wind after midnight averages 0.847 of its
+  target's at 0.3 km (0.88 at 1 km), under the 0.85 its rule asked of every quarter, so it is not read as a test of the
+  wind. Its measures stand as observations: an evaporation of 3.42 mm/day, half the gap to the GCM (G 0.54); a late
+  evening of 0.49 mm/day, its storms returning at 165–180°; a night of 2.32. Over its third lunar day, which passed the
+  same check, G was 0.33 and the late evening 0.44 mm/day.
+
+**What the two show** (an interpretation of the runs above).
+- **The wind made part of the evaporation gap, and the gust gave part of it back.** With the GCM's wind the box
+  evaporates 3.42 mm/day against 3.03; with the lunar gust as well, 3.21. The Earth gust had stood in for about half of
+  what the short wind withheld.
+- **The late evening stays quiet with lunar surface physics.** The GCM's wind with the Earth gust brings the box's
+  storms back before midnight; with the lunar gust the lull holds through 180°, as in the box as first run. The GCM's
+  rain over those hours, 2.8–2.9 mm/day with either constant, stays unsupported.
+- **The night holds in every box.** After midnight the three boxes rain 1.9–2.3 mm/day from the same regime: a
+  boundary layer 4.2–4.5 km deep, 1,670–1,830 J/kg of CAPE released through 1–1.5 J/kg of inhibition, a
+  free-convection level at 3.9–4.2 km and the 99.9th percentile of w at 16–60 km at 2.7–3.8 m/s. With the GCM's wind
+  it rains 2.3 mm/day, as the GCM with Earth's constant does.
+- **The low air's difference now lies above the surface.** The corrected box evaporates within 2–16% of the GCM with the
+  lunar constant in every quarter, yet its air at 0.3 km stays 1.2–2.8 g/kg drier by day and 1.5 K cooler in the evening
+  and the night. The difference that feeds the GCM's late-evening rain lies less in the sea's supply than in how each
+  model carries heat and vapour up from its lowest layers, where CM1 mixes them through a boundary layer far deeper than
+  PlaSim's, as
+  [the boundary-layer comparison](../gcm/README.md#plasims-boundary-layer-mixing-at-lunar-gravity-27-october) found.
+  The test of that reading the same day did not bear it out: the GCM carries vapour out of its lowest kilometre as CM1
+  does, and the gap lies in how much vapour each column holds
+  ([the next section](#the-sea-box-on-the-corrected-build-its-wind-pulled-from-the-gcms-lowest-level-up-28-october)).
+
+**What it changes.** Every CM1 run over water so far, the rings and boxes among them, took MM5's gust over the sea, and
+every box forced by local time took the 3-day relaxation of its wind; both bear on their evaporation, in opposite
+directions. The box with both corrections is the nearest CM1 stands to the GCM's own forcing with lunar surface physics:
+on it the night's agreement with the GCM holds and the late evening's gap remains. The two corrections became the
+defaults for the boxes and rings that follow, the wind's pull starting at the GCM's lowest level (register, 28
+October; [the next section](#the-sea-box-on-the-corrected-build-its-wind-pulled-from-the-gcms-lowest-level-up-28-october));
+PlaSim took Beljaars's gust for a four-year test
+([the GCM's account](../gcm/README.md#beljaarss-gust-in-plasims-surface-transfer-over-four-years-28-october)); and
+the vertical carrying of the low air's heat and vapour, tested next, put the gap in the columns' vapour instead.
+
+**Evidence and limits.** One realization of each box over two lunar days from the day-59 restart, whose first day
+carries the box's earlier state, forced by four years of a GCM still settling. The boxes hold the sea at 301.02 K, so
+unlike the GCM's mixed layer it cannot warm as its evaporation changes. The gust takes CM1's land setting, vconvc 1,
+where Beljaars suggested 1.2 and COARE takes 1.25, a gust 0.1–0.15 m/s larger. The quarters' measures are means of
+the domain diagnostics every 3 hours; the gust is inferred from the domain means of the surface layer's wind and the
+resolved wind at 50 m. The GCM's columns are 3-day means.
+
+**Cost.** The builds took 4 and 2 minutes; the four trials 18–35 s each. The two boxes ran side by side in 2.6 hours on
+six threads and hold 22.4 GB with every restart; the trials' copies hold 0.2 GB.
+
+```sh
+W=/media/projectspace/terluna-research/session-tools/wind_fc
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_rain_law_pbl_wind moon_omp_rain_law_pbl_wind_gust --jobs 4
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run setup box_near_side_sea_l15_wind_day3   # and _wind_gust_day3
+climate/gcm/.venv/bin/python $W/trial.py run && climate/gcm/.venv/bin/python $W/trial.py check   # bit check and trials
+$W/run_wind.sh wind & $W/run_wind.sh wind_gust &                               # side by side, 2.6 hours
+climate/gcm/.venv/bin/python $W/wind_read.py                                   # the rules' readings, both boxes
+climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea_l15_wind_gust_day3 box_near_side_sea_l15_wind_gust_day4
+climate/gcm/.venv/bin/python -m climate.crm.box_onset box_near_side_sea_l15_wind_gust_day4 88.5 118   # and _wind_day4
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_l15_wind_gust_day4 --from-day 88.5
+```
+
+### The sea box on the corrected build: its wind pulled from the GCM's lowest level up (28 October)
+
+The wind's own time scale and Beljaars's gust over water became the defaults for the boxes and rings that follow
+(register, 28 October), and the wind took one more change first. Below the GCM's lowest level, 313 m over the sea site,
+the boxes' wind targets are that level's wind held to the ground (`gcm_site.wind_windows`), and a ring's targets are
+held the same way. On 3 days the pull hardly reached the box's surface layer. On 2 hours it set the lowest levels
+against their own drag: in the gust box's fourth day the 50 m wind stood at 0.92–0.98 of the 0.3 km wind (domain-mean
+vector winds, by quarter), against 0.90–0.92 in the box as first run, although a stronger wind should leave the air
+near the ground further behind, the air less unstable and the sea rougher.
+
+**The build** (`WIND_ALOFT_PATCH`, the build `moon_omp_rain_law_pbl_wind_gust_aloft`, `CORRECTED_BUILD`). With `var8`
+above 0 it pulls the wind only at levels from `var8` m up and leaves the levels below to the box's own surface layer and
+turbulence; with `var8` at CM1's default of 0 it runs as the gust build. A case on it takes the corrected wind unless its
+namelist sets otherwise (`corrected_wind`): `var10` 2 hours and `var8` the GCM's lowest level from the case's reference
+profile, in a fresh set-up and in a run on from a restart alike. Over the sea site that level stands at 312.7 m, so
+CM1's levels at 50, 150 and 250 m are the box's own.
+
+**The trials**, each read by a rule set before it ran (`rules.txt` part A beside the runs; `trial_aloft.py`). From the
+day-59 restart on three threads:
+- With `var8` 0 the build repeats the gust build bit for bit in all 16 files a three-hour trial writes.
+- With `var8` 312.7 m the 50 m wind falls to 0.92–0.93 of the 0.3 km wind, against 1.00–1.02 with the pull to the
+  ground.
+- The three-hour rule also asked that the wind at 0.3 and 1 km come within 10% of the gust build's. At 0.3 km it fell
+  12% short, so that rule failed as written: the free levels are mixed with the pulled ones, the surface's drag reaches
+  both, and three hours from a 1.4 m/s start are still far from steady. A 24-hour pair, read by a rule set before it
+  ran, narrowed the gap to 8% at 0.3 km and 2% at 1 km and held there from day 59.6, the 50 m wind staying below the
+  full pull's: it passed. Over that first day both builds level off below their targets, the full pull at 0.82–0.84 of
+  its target at 0.3 km and the pull from 313 m at 0.74–0.76, and the evaporation runs 9% lower with the levels below
+  left free.
+
+**The box days** (`box_near_side_sea_l15_aloft_day3` and `_aloft_day4`, from the day-59 restart; their inputs the gust
+box's byte for byte but for `var8`). Day 3 ran on two threads beside the GCM, in 1.6 hours, and day 4 on three, in 1.2
+hours. They were read on the fourth lunar day by the rules of `rules.txt` part B, set before they ran. Those rules
+check the wind at the pulled levels, 0.5 and 1 km, with 0.3 km now in the layer the box shapes itself. The table compares
+the fourth day with the gust box's and with the GCM that takes the same gust over four years
+([the GCM's account](../gcm/README.md#beljaarss-gust-in-plasims-surface-transfer-over-four-years-28-october)); the
+products are
+[box_days_box_near_side_sea_l15_aloft_day3.json](../results/crm/box_days_box_near_side_sea_l15_aloft_day3.json) and
+the fourth day's onset and budget.
+
+| Fourth lunar day, by quarter from sunrise | Wind pulled to the ground, lunar gust | Wind pulled from 313 m, lunar gust | GCM with Beljaars's gust |
+|---|---|---|---|
+| Mean wind at 0.5 km; at 1 km, against its target | 0.89, 0.96, 1.03, 0.87; 0.89, 0.92, 1.02, 0.89 | 0.87, 0.93, 1.03, 0.84; 0.88, 0.91, 1.02, 0.88 | |
+| Mean wind at 0.3 km against its target | 0.89, 0.96, 1.03, 0.86 | 0.85, 0.92, 1.03, 0.81 | |
+| The 50 m wind against the 0.3 km wind | 0.97, 0.94, 0.94, 0.98 | 0.92, 0.90, 0.93, 0.92 | |
+| Gust over the sea, m/s | 0.63, 0.48, 0.67, 0.67 | 0.62, 0.49, 0.68, 0.66 | |
+| Evaporation; daily mean, mm/day | 3.28, 3.92, 3.04, 2.61; 3.21 | 3.13, 3.79, 3.09, 2.43; 3.11 | 3.23, 4.87, 2.88, 2.71; 3.41 |
+| Air at 0.3 km, K | 298.54, 299.90, 298.12, 297.24 | 298.40, 299.84, 298.15, 297.25 | 299.05, 300.59, 299.78, 298.85 |
+| Vapour at 0.3 km, g/kg | 10.82, 8.81, 10.42, 11.93 | 10.68, 8.71, 10.25, 11.88 | 11.87, 11.59, 11.62, 12.02 |
+| Rain; daily mean, mm/day | 0.15, 0.97, 1.16, 2.30; 1.14 | 0.03, 1.17, 1.03, 1.89; 1.03 | 0.14, 1.46, 2.81, 1.15; 1.40 |
+| Rain at 60–75°, 75–90°, 90–105°, 105–120°, 120–135° | 0.52, 1.48, 2.64, 3.44, 0.46 | 0.60, 1.37, 3.07, 2.12, 0.47 | 2.27, 4.20, 4.02, 2.73, 2.20 |
+| Rain at 135–150°, 150–165°, 165–180°; the late evening | 0.17, 0.09, 0.06; 0.11 | 0.30, 0.10, 0.06; 0.15 | 2.04, 3.70, 2.20; 2.62 |
+
+**By the rules.** The fourth day misses its wind check narrowly. After midnight its wind at 0.5 km averages 0.840 of its
+target, under the 0.85 asked of every quarter (1 km holds at 0.876). Its gust (0.49–0.68 m/s) and its near-ground
+profile (the 50 m wind at 0.90–0.93 of the 0.3 km wind) pass. Like the wind box of the morning, it is not read as a
+test, and its measures stand as observations. The late evening rains 0.15 mm/day and the night 1.89 mm/day after
+midnight. The third day, which passed the same checks, rains 0.13 and 1.91. With the pull left off the lowest levels
+the evaporation falls 3% from the gust box's and the night's rain 18%, while the late evening stays quiet. Against the
+GCM on the same surface physics, the box rains 1.03 mm/day over the lunar day against 1.40: half the GCM's from noon
+to midnight (1.10 against 2.13 mm/day), and 0.15 against 2.62 in the late evening. After midnight it rains 1.6 times
+the GCM's 1.15 mm/day, at evaporation within 11%.
+
+**How the two models carry vapour up from the sea** (`rules.txt` part D, set before either run's budgets were read;
+`carry.py`, `carry_direct.py`). This morning's account read the low air's gap as a sign that PlaSim carries heat and
+vapour up from its lowest layers more slowly than CM1. The test set that against the vapour each model's turbulence and
+convection carry up through 0.6 and 1.2 km, as a share of the evaporation, and the fall of vapour from 0.3 to 1.2 km. In
+the box the flux came first from CM1's vapour budget by process. That budget returns the evaporation over the whole
+column within 1.6% in every quarter, as the rule asked, but not over the lowest 1.2 km, where its terms sum to −1.3 mm/day
+against a change of −0.03. A direct measure, the resolved eddy flux ρ⟨w′q′⟩ from the 3-D output every 3 hours plus the
+boundary-layer scheme's flux, stands beside it.
+
+| Fourth day / four years, by quarter | CM1, direct | CM1, from its budget | GCM with the gust |
+|---|---|---|---|
+| Share of the evaporation carried up through 0.6 km | 0.91, 0.76, 0.88, 0.79 | 1.27, 1.19, 1.34, 1.18 | 0.90, 0.94, 0.95, 0.88 |
+| The same through 1.2 km | 0.58, 0.43, 0.66, 0.43 | 0.97, 0.75, 1.16, 0.76 | 0.59, 0.80, 0.74, 0.57 |
+| Vapour's fall from 0.3 to 1.2 km, g/kg | 0.49, 0.56, 0.24, 0.16 | | 0.36, 0.49, 0.18, 0.22 |
+| Vapour at 0.3, 1.2, 2.5, 4 and 6 km by day (sunrise to noon), g/kg | 10.7, 10.2, 9.9, 9.8, 9.2 | | 11.9, 11.5, 10.6, 10.2, 7.5 |
+| The same, noon to sunset | 8.7, 8.2, 8.1, 8.2, 8.4 | | 11.6, 11.1, 9.8, 9.4, 8.7 |
+| Potential temperature at 0.3 and 4 km, sunrise to noon; sunset to midnight, K | 282.9, 283.3; 282.6, 282.7 | | 283.4, 284.7; 284.1, 284.3 |
+
+By the rule the slow-carrying reading holds nowhere: on either measure of CM1's flux the GCM carries a like share
+through the lowest kilometre with a vapour fall no steeper than CM1's (0.74–0.87 of it by day). From noon to sunset
+the falls agree within 13% while the air at 0.3 km differs by 2.9 g/kg, so there the difference lies in the column's
+whole vapour; in the morning and evening the falls sit 26–28% apart, the GCM's the smaller, with gaps of 1.2–1.4 g/kg;
+after midnight the low air agrees within 0.14 g/kg. The profiles say the same: by day the GCM is 1.2–2.9 g/kg moister
+from 0.3 to 1.2 km alike, less so higher, and drier at 6 km in the morning, while CM1's vapour stands nearly uniform up
+to 4 km. The low air's gap is not in how either model carries vapour out of its lowest layers; it lies in how much
+vapour each column holds.
+
+**A lead on the column's vapour.** The box's day-night forcing takes the GCM's circulation by local time, less the
+part the GCM's mean vertical wind carries, which CM1 is to apply itself on the box's own profile. Over the lunar day the
+GCM's circulation exports 1.99 mm/day of vapour from the site's column (held to its exact budget), and the mean wind's
+part the table leaves out comes to about +0.48 mm/day, so the table removes about 2.5. In the box the table removes
+2.45 mm/day (box_budget) and CM1's imposed ascent gives −0.10, not +0.48. The box therefore exports about half a
+millimetre a day more vapour than the GCM it stands for, about a quarter of the GCM's export, which would dry its whole
+column. Why CM1's large-scale vertical advection gives so little back is checked in the next section.
+
+**What it changes.** The corrected build stands as the default, its near-ground wind the box's own. On the same surface
+physics the two models rain alike in amount over the lunar day and differently in time: the GCM in the evening, CM1
+after midnight. The low air's gap lies in the column's vapour, with the box's forcing a named suspect, rather than in
+the boundary layer's carrying.
+
+**Evidence and limits.** One realization of each box day from one restart, forced by the baseline GCM's four years,
+whose light-wind term differs from the gust GCM's; the GCM's numbers are its four years at the six cells. CM1's
+direct flux takes resolved snapshots every 3 hours and the boundary-layer scheme's tendency, and neglects density
+fluctuations; why CM1's budget does not close over its lowest kilometre is not traced. The GCM's flux comes from its
+single-step budgets at the end of each 3-day mean, and below 1.2 km its convection condenses little. The heat budget
+of the box does not close over the column (its resolved terms leave several W/m² against a surface flux of a few), so
+the heat flux is not read; the potential temperatures are.
+
+```sh
+W=/media/projectspace/terluna-research/session-tools/gust_aloft
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_rain_law_pbl_wind_gust_aloft --jobs 4
+python3 $W/trial_aloft.py run && python3 $W/trial_aloft.py check                # bit check and the three-hour trial
+python3 $W/trial_aloft.py run gust24 aloft24 && python3 $W/trial_aloft.py check24   # the 24-hour pair
+$W/run_aloft.sh                                                                  # day 3 on two threads, day 4 on three
+climate/gcm/.venv/bin/python $W/aloft_read.py                                    # part B
+climate/gcm/.venv/bin/python $W/carry.py && climate/gcm/.venv/bin/python $W/carry_direct.py   # part D
+climate/gcm/.venv/bin/python $W/box_low_budget.py && climate/gcm/.venv/bin/python $W/gcm_low_budget.py
+climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea_l15_aloft_day3 box_near_side_sea_l15_aloft_day4
+climate/gcm/.venv/bin/python -m climate.crm.box_onset box_near_side_sea_l15_aloft_day4 88.5 118
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_l15_aloft_day4 --from-day 88.5
+```
+
+### The box's forcing export checked (28 October, evening)
+
+The lead above asked why CM1's large-scale vertical advection gives back so little. The site forcing builds its table
+from the GCM's circulation by local time and adds back the GCM's mean vertical wind's advection of the box's starting
+air, the GCM's mean air (`gcm_site.to_cm1`); CM1 then applies the same mean wind to its own air. The two cancel while
+the box's air is its starting air. Afterwards their sum is a departure term, the mean wind acting on the box's departure
+from its start. The check was read by rules set before it was computed (`rules.txt` beside `forcing_check.py`):
+
+- **The table** rebuilt from the GCM run's four years matches the box's `terluna_lsadv.txt` to two parts in a million.
+- **The excess.** The box's forcing removes 0.45 mm/day (third day) and 0.55 (fourth) more vapour from the column than
+  the GCM's circulation, which removes 1.99. The departure term reproduces both to 0.01 mm/day, and CM1's own imposed
+  ascent matches the term recomputed from the box's vapour to 0.01.
+- **Where.** The GCM's mean wind over the site rises through the lowest 5 km, fastest near 2.2 km (0.39 cm/s), and sinks
+  slowly from 6 to 14 km: it draws air into the column below about 2.5 km and sends it out between 2.5 and 6 km. In
+  CM1's advective form the air it draws in carries the box's own vapour. On the fourth day the box's air from 0.25 to
+  1 km stands 1.5–1.7 g/kg below its start; in flux form the inflow levels take 0.83 mm/day and the outflow levels,
+  drier too, give back 0.25. The layer below 1.77 km holds 0.62 of it.
+- **When.** Through the first lunar day the term swung with the box's adjustment (+0.16, +0.42, +0.14 and −0.97 mm/day
+  by quarter), and with the term still small the box's air at 0.2–0.7 km fell 0.8 g/kg below its start within the
+  first week. From the second day it took 0.44, 0.47 and 0.57 mm/day, 43 kg/m² over three lunar days, while the
+  column's vapour fell from 259 to 217 kg/m². At the fourth day's evaporation and rain, the column would have gained
+  0.21 mm/day without it, against the 0.36 it lost.
+- **Heat.** The same term warms the box by 12.0 W/m² on the fourth day, 12.3 of it above 23 km, where the box's air has
+  fallen 7–10 K below its start under the GCM's weak mean ascent; there it restores.
+
+**The reading.** The forcing's mean-wind part is what Randall and Cripe (1999, J. Geophys. Res. 104, 24,527) call
+horizontal advective forcing, the horizontal advection prescribed and the vertical reckoned on the model's own sounding;
+its hour-by-hour part is their revealed forcing, the whole advection prescribed. Over the days to weeks of field
+experiments they found the two comparable, preferred revealed forcing for its simplicity, and noted that a forced
+column whose sounding errors carry it away cannot find its way back. Over four lunar days the advective form here
+turned the low-level deficit the box opened in its first week into a steady drying of the whole column, because the
+air the GCM's mean wind draws in is the box's own and drier than the GCM's. Coupled columns under the
+weak-temperature-gradient approximation carry the air entering a column at the upwind value, the neighbouring
+column's or the reference's, and the air leaving at the column's own (Daleu, Woolnough and Plant 2012, J. Atmos. Sci.
+69, 3683, their equation 9). In that form the box's inflow would carry the GCM's air and its drier outflow would export
+less, so the departure would restore the column rather than drain it.
+
+**What it changes.** The afternoon's reading stands where it placed the gap: in the column's vapour, not in the
+boundary layer's carrying. That vapour, though, has drifted with the forcing's form since the first lunar day, and on
+the fourth day the box's low air stands 1.6 g/kg below the GCM's mean air, about the low air's whole gap over the
+lunar day; the comparisons made on this forcing carry that drift. How much of the gap CM1's physics would keep with its
+inflow at the GCM's humidity needs a box run in that form. Boxes forced from here on should take a form that does not
+build on the box's departure: the inflow at the GCM's air, recommended, or the mean wind's part prescribed with the
+rest. The choice is the author's.
+
+**Evidence and limits.** Domain means every 3 hours from one realization of each box day. The departure term takes
+centred differences on the box's levels, as the table's added-back term does; CM1's own term (third-order upstream)
+matches it to 0.01 mm/day. The flux-form split interpolates the density to the w levels. Nothing has been run in
+another form.
+
+```sh
+F=/media/projectspace/terluna-research/session-tools/forcing_check
+PYTHONPATH=. climate/gcm/.venv/bin/python $F/forcing_check.py       # rules F0-F5; forcing_check.json and .txt
+PYTHONPATH=. climate/gcm/.venv/bin/python $F/low_air_by_day.py      # the low air against its start by lunar day
+```
+
+### The sea box with the mean wind's inflow at the GCM's air (28 October, evening)
+
+Boxes forced from here on draw the GCM's air in where its mean wind converges (register, 28 October), and one lunar
+day on the fifteen-level GCM's forcing sizes how far the box's vapour drifted with its own air drawn in.
+
+**The build** (`INFLOW_PATCH`, the build `moon_omp_rain_law_pbl_wind_gust_aloft_inflow`). CM1's large-scale vertical
+advection (`wsub`) is the flux form less the scalar times the mean wind's mass convergence, div, so the air the
+convergence draws in carries the box's own mean. With `var7` = 1 the build carries the reference's air in where div
+is positive and the box's own out where it is negative, the upwind form of coupled columns (Daleu, Woolnough and Plant
+2012, their equation 9). Each level's domain-mean potential temperature and vapour are drawn toward the nudging
+reference, the GCM's mean air and the box's starting sounding, at the rate max(div, 0)/ρ₀ from CM1's own base state.
+The term vanishes while the box's air is the reference, so the table's added-back advection still cancels at the
+start. The rates go to `terluna_inflow_rate.txt`, from which `box_budget` reckons the term at each output, as it does
+the table; with `var7` at 0 the build runs as the aloft build. It is the default build from here on
+(`CORRECTED_BUILD`): a box forced by the GCM's column at its site takes `var7` 1 from `corrected_inflow` unless its
+namelist sets otherwise, and a ring on it keeps `var7` 0 and runs as the aloft build. The aloft days keep the build they
+ran on.
+
+**The trials**, read by rules set before the build finished (`rules.txt` part G beside `trial_inflow.py`), three model
+hours from the day-59 restart on three threads:
+- With `var7` 0 the build repeats the aloft build's trial bit for bit in all 16 files the trial writes.
+- With `var7` 1 the rates CM1 writes match the rates reckoned from the GCM's vertical wind and the box's density to
+  0.983–1.020 at the 48 levels compared, and stand at zero where the flow diverges. The largest, 2.6 × 10⁻⁶ per second
+  at 450 m, renews the air there in about 4½ days; the inflow reaches 2.5 km.
+
+**The day** (`box_near_side_sea_l15_inflow_day3`, from the day-59 restart, its inputs the corrected third day's byte
+for byte but for `var7`; 0.9 hours on four threads), read by the rules of `rules.txt` part H, set before the build
+finished; the products are
+[box_days_box_near_side_sea_l15_inflow_day3.json](../results/crm/box_days_box_near_side_sea_l15_inflow_day3.json) and
+[box_budget_box_near_side_sea_l15_inflow_day3.json](../results/crm/box_budget_box_near_side_sea_l15_inflow_day3.json).
+
+| Third lunar day, by quarter from sunrise | The box's own air drawn in (corrected build) | The GCM's air drawn in |
+|---|---|---|
+| Mean wind at 0.5 km against its target | 0.888, 0.953, 1.034, 0.857 | 0.876, 0.954, 1.033, 0.849 |
+| Evaporation; daily mean, mm/day | 2.82, 2.99, 2.91, 2.26; 2.74 | 2.72, 2.76, 2.62, 2.10; 2.55 |
+| Air at 0.3 km, K | 298.56, 299.70, 298.27, 297.48 | 298.78, 299.70, 298.71, 298.28 |
+| Vapour at 0.3 km, g/kg | 11.52, 10.49, 10.67, 12.42 | 11.61, 11.18, 11.28, 12.52 |
+| Rain; daily mean, mm/day | 0.00, 1.28, 1.02, 1.91; 1.05 | 0.00, 1.00, 0.82, 0.61; 0.61 |
+| Rain in the late evening (135–180°), mm/day | 0.13 | 0.09 |
+| The column's vapour from the day's start to its end, kg/m² | 247.4 to 227.8 | 247.4 to 238.5 |
+| Vapour against the start at 0.2–0.7, 2–5 and 5–10 km, g/kg | −0.75, +0.05, +0.90 | −0.38, +0.34, +1.22 |
+| Heat stored by the column; brought by the inflow, W/m² | −20.4; none | −10.6; +22.5 |
+
+**By the rules.** The vapour budget closes with the inflow reckoned (its rest 0.05 mm/day against the corrected day's
+0.075), and the inflow does what it was built to do: it gives back 0.147 mm/day where CM1's advection at the inflow
+levels takes 0.148, and what remains of the forcing's excess over the GCM's circulation, 0.31 mm/day, is the outflow
+levels' part (0.33). The column's drying falls from 0.67 to 0.30 mm/day, 0.37 less where the rule asked 0.3. The day
+misses its wind check by 0.001: after midnight its wind at 0.5 km averages 0.849 of its target, where the corrected
+day's passed at 0.857. By the rule its measures, the drying's with them, stand as observations.
+
+**What the day shows**, as observations:
+- **The drift halves.** The column ends 10.7 kg/m² moister than on the corrected day, its air at 0.2–0.7 km 0.38 g/kg
+  below the GCM's mean air rather than 0.75, and 0.6–0.7 g/kg moister at 0.3 km from noon to midnight. What drying
+  remains comes from the outflow: the box's air at 2–10 km stands moister than the GCM's (+0.34 and +1.22 g/kg), and the
+  air leaving there carries more vapour out, a term that pulls the column back toward the GCM's.
+- **The rain falls with it.** The day rains 0.61 mm/day against 1.05, after midnight 0.61 against 1.91, and the late
+  evening stays quiet (0.09). The water budget says why: the rain is the evaporation and the forcing less the column's
+  change, and on the corrected day the column's drawdown, 0.67 mm/day, fed it. With the GCM's air drawn in the drawdown
+  is 0.30, the forcing takes 0.15 mm/day less, and the evaporation falls 0.19 under the moister low air.
+- **The evaporation now leads.** Once the column stops drying, the box rains its evaporation, 2.55 mm/day, less the
+  forcing's export, which lies between the GCM's 1.99 and today's 2.29: 0.3–0.6 mm/day, where the GCM rains 1.78 from
+  3.75 mm/day of evaporation (the gust GCM evaporates 3.41). The two models' rain at the site, and its timing, rest
+  first on that gap.
+- **Heat.** The inflow brings 22.5 W/m², 14.5 of it at 16–60 km, where the box's air stands 5.5–8.4 K below the GCM's
+  mean air. The box still cools, by 10.6 W/m² against 20.4, and its condensation gives 12 W/m² less as it rains less.
+
+**What it changes.** Boxes forced by the GCM's column take the inflow from here on. The old form's drawdown fed part of
+the rain the earlier comparisons read on this forcing, the night's 1.9 mm/day after midnight among it; with the GCM's
+air drawn in, the night rains 0.6 mm/day. Where the two models part at the site now turns first on the box's
+evaporation, a third below the GCM's, then on its remaining cooling.
+
+**Evidence and limits.** One realization of one lunar day from one restart, forced by the fifteen-level GCM's four
+years without the gust, read as observations. The inflow draws in the GCM's mean air, not its air hour by hour, at
+rates from CM1's base state. The rain once the column stops drying is arithmetic on this day's terms, not a run to
+equilibrium.
+
+```sh
+I=/media/projectspace/terluna-research/session-tools/inflow
+climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_rain_law_pbl_wind_gust_aloft_inflow --jobs 4
+PYTHONPATH=. climate/gcm/.venv/bin/python $I/trial_inflow.py run          # part G: the two three-hour trials
+PYTHONPATH=. climate/gcm/.venv/bin/python $I/trial_inflow.py check
+$I/run_inflow.sh                                                          # the day on four threads; rerun to resume
+PYTHONPATH=. climate/gcm/.venv/bin/python $I/inflow_read.py               # part H
+climate/gcm/.venv/bin/python -m climate.crm.box_days box_near_side_sea_l15_inflow_day3
+climate/gcm/.venv/bin/python -m climate.crm.box_budget box_near_side_sea_l15_inflow_day3 \
+    --reference box_near_side_sea_l15_aloft_day3 --from-day 59
+```
+
+### Where the two models' evaporation parts over the sea (28 October, night)
+
+With the GCM's air drawn in, the box's rain at the site turns first on its evaporation, a third below the forcing GCM's
+(2.55 against 3.75 mm/day). The trace asks whether that gap lies in the air each model holds or in how each turns air
+into evaporation, by rules set before it was computed (`rules.txt` beside `evap_trace.py`). PlaSim's own transfer
+(`surface_gust.surface_transfer`, its `surflx` step for step, with its Charnock roughness iterated to its own stress and
+its implicit evaporation step) is applied to the GCM's own 3-day means at the site's sea cells and to the box's
+domain-mean air at the GCM's lowest level, 312.7 m, averaged over the same tenths of the lunar day; CM1's own transfer
+at its 50 m level is read from the box's diagnostics.
+
+| Over the Near-side Sea | PlaSim on the GCM's air | PlaSim on the box's air, Earth's term | PlaSim on the box's air, the gust | CM1's own, at 50 m |
+|---|---|---|---|---|
+| Evaporation, mm/day (inflow day; fourth day) | 3.43 (it wrote 3.75) | 3.28; 3.94 | 1.72; 2.04 | 2.55; 3.11 |
+| Transfer ρCU, 10⁻³ kg/m²/s | 5.44 | 4.91 | 2.63 | 3.85 |
+| Its stability factor | 1.96 | 2.35 | 1.11 | about 1.23 |
+| Wind in the formula, m/s | 3.17 | 2.50 | 2.55 | 2.45 |
+| Humidity difference, g/kg | 7.48 | 8.03 | 8.03 | 7.43 |
+| Roughness, m | 1.0 × 10⁻⁴ | 5.7 × 10⁻⁵ | 5.8 × 10⁻⁵ | 1.1 × 10⁻⁴ |
+
+The columns' last three are the inflow day's; CM1's stability factor is its transfer coefficient, 1.13 × 10⁻³, over
+its neutral value at 50 m from its own roughness lengths.
+
+**By the rules.** PlaSim's transfer reproduces the GCM's own evaporation from its 3-day means to 8.5% (with the gust,
+the gust GCM's to 14%), within the 15% the method check allowed; the means smooth the wind, which accounts for the
+shortfall. The gap lies in the surface transfer: on the inflow day the air's part is 0.15 of the 0.88 mm/day gap
+between PlaSim on the GCM's air and CM1 (17%) and the transfer's 0.73 (83%); on the fourth day the box's drier air
+would draw more under PlaSim's transfer, and the transfer's part exceeds the whole gap.
+
+**What the trace shows.**
+- **Earth's free-convection term carried the forcing GCM's extra evaporation.** On the same air PlaSim's transfer with
+  it evaporates 29% more than CM1's surface layer. Its interpolation over unstable water roughly doubles PlaSim's
+  stability factor, where CM1's similarity raises its coefficient about 1.23 times neutral.
+- **With Beljaars's gust, as the design run will take it, PlaSim's transfer falls a third below CM1's** on the same air.
+  Its stability factor stands at 1.11 at the 313 m level and its roughness at half CM1's, from a smaller u*. The box's
+  wind and vapour change less between 50 and 313 m (about 1.08–1.09 times) than the log profile PlaSim's coefficient
+  assumes from its roughness (about 1.13–1.14), which suggests the level sits near the top of the surface layer or
+  above it, an inference the trace does not test.
+- **CM1's transfer sits between PlaSim's two forms**, and the GCM makes up part of any shortfall with its own air:
+  with the gust its lowest level dries by 1.9 g/kg, so its evaporation falls 9% where its transfer falls 32%.
+
+**What it changes.** The gap the box's rain turns on is a property of PlaSim's surface transfer at its lowest level,
+not of either model's air. The design run takes the gust, which brings the sea's transfer from 29% above CM1's to about
+a third below it on the same air. A next step, proposed: set PlaSim's transfer from its 313 m level beside
+Monin–Obukhov similarity integrated to the same height on the box's and the GCM's states, a column calculation of
+minutes; if they part by more than a tenth, the design configuration would take similarity over water beside the gust.
+
+**The similarity, set beside it (29 October).** CM1's own surface layer over water, carried to the GCM's lowest level,
+gives CM1's written evaporation at its own 50 m within 0.3% and the same evaporation at 313 m with CM1's wind. On the
+same air and the gust's wind at 313 m, PlaSim's transfer evaporates 0.72 of the similarity's on the box's inflow day and
+0.82 on the gust GCM's own air, most of the difference in light wind over warm water, so the design configuration takes
+similarity over water beside the gust ([Similarity over water in
+PlaSim](../gcm/README.md#similarity-over-water-in-plasim-29-october)).
+
+**Evidence and limits.** The GCM's side rests on 3-day means at six cells over four years, the box's on domain means
+every 3 hours of one lunar day each; PlaSim's formula on a domain-mean wind leaves out the spread of the box's own
+winds, which CM1's column-by-column fluxes keep and the gust is meant to stand for. PlaSim's roughness is iterated on
+the mean state.
+
+```sh
+E=/media/projectspace/terluna-research/session-tools/evaporation
+PYTHONPATH=. climate/gcm/.venv/bin/python $E/evap_trace.py       # rules EV1-EV3; evap_trace.json
+```
 
 ## A box over the highlands
 

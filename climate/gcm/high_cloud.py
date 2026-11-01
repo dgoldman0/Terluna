@@ -98,13 +98,16 @@ def run_cloud(run, years):
 
 
 def effect(cloud, visible, water_scale=1.0, radius_scale=1.0):
-    """The change at the top of the air (W/m2, positive warms) when every top layer's water and crystal radius are
-    scaled, layer by layer and in all."""
+    """The change at the top of the air (W/m2, positive warms) when the top layers' water and crystal radius are
+    scaled, all alike or each by its own (a sequence, the top first), layer by layer and in all."""
     rows = []
-    for c, w, t in zip(cloud['cover'], cloud['water_g_m2'], cloud['t_k']):
+    layers = len(cloud['cover'])
+    waters = list(water_scale) if np.ndim(water_scale) else [water_scale] * layers
+    radii = list(radius_scale) if np.ndim(radius_scale) else [radius_scale] * layers
+    for c, w, t, ws, rs in zip(cloud['cover'], cloud['water_g_m2'], cloud['t_k'], waters, radii):
         r = float(io.ice_radius(t))
         r0, e0 = layer_optics(w, r, visible)
-        r1, e1 = layer_optics(w * water_scale, r * radius_scale, visible)
+        r1, e1 = layer_optics(w * ws, r * rs, visible)
         sun = c * (r1 - r0) * cloud['sunlight_w_m2'] * (1.0 - cloud['planetary_albedo']) ** 2
         infrared = c * (e1 - e0) * (cloud['olr_clear_w_m2'] - SIGMA_SB * t ** 4)
         rows.append(dict(radius_um=r, reflection=r0, emissivity=e0, scaled_reflection=r1, scaled_emissivity=e1,

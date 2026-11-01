@@ -289,3 +289,14 @@ class EscapeTests(unittest.TestCase):
         flat = es.leakage_heat(1.0, activity=es.SOLAR_MAXIMUM)
         measured = es.leakage_heat(1.0, activity=es.SOLAR_MAXIMUM, xray_activity=es.XRAY_SOLAR_MAXIMUM)
         self.assertTrue(flat < measured < 1.05 * flat)
+
+
+def test_the_design_airs_methane_cases_set_its_n2o_and_the_water_bounds():
+    import pytest
+    from atmosphere.middle_atmosphere import methane_water as mw, run as runner
+    case = runner.cases()['moon_1.2atm_titania_stack']
+    unbroken, broken = (mw.design_case(case, b, 2.4e-8) for b in mw.BOUNDS)
+    assert unbroken.n2o_ppb == broken.n2o_ppb == mw.N2O_PPB == 100.0
+    assert unbroken.stratospheric_h2o is None                           # the cold trap's own water
+    assert broken.stratospheric_h2o == pytest.approx(2.4e-8 + 2 * 1.9e-6)
+    assert unbroken.name.endswith('_design_air_unbroken') and broken.name.endswith('_design_air_broken')

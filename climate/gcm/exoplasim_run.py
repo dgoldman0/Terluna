@@ -56,7 +56,35 @@ Every earlier run had neither, so none of them resumes under the new defaults. S
 come from the ledger on the design climate's 301 K column (--twilight-ledger 301k; 294.9k gives the earlier one) and
 each layer's are taken in the clear share above it (--twilight-clear-share, TWILIGHT_CLEAR_EDITS), and experiment A28R
 reads the lakes surface built from the geography domain's current routing (boundary.lakes_name), which needs a cold
-start.
+start. Since 2026-10-26 --levels l14 runs PlaSim on fourteen levels with more of them near the ground (levels.py), its
+restart carried there by levels.py's conservative remap and its twilight terms, longwave correction and cold cloud's
+factors on those levels, and --sbm-shallow-cap holds a shallow cloud's top within the depth test's threshold of its own
+base in place of PlaSim's 700 hPa (SBM_CAP_PATCHES); without either a run is as before. --levels l15 adds a thin bottom
+layer, the ground to 0.6 km, to the fourteen, and --longwave-fit l15_provisional gives a run on it the longwave
+correction refitted on its own levels' columns; since 2026-10-31 --longwave-fit l15_design gives the design run the correction refitted on its configuration's bridge at 300.9 K. --convection massflux runs the mass-flux scheme of massflux.py in
+Kuo's place (rainmod's nprc 3; massflux_fortran.py's patch, applied only for a run that sets it); a run without it is as
+before. --free-convection lunar takes the free-convection constant in the heat and vapour transfer over water (Miller
+and others 1992; FREE_CONVECTION_EDITS) from Earth's 0.0016 to the Moon's gravity and surface pressure, and
+--massflux-start boundary_layer starts the mass-flux scheme's surface parcel at a multiple of the boundary layer's
+convective velocity (massflux_fortran.START_PATCHES). --mixing-length lunar stretches PlaSim's Blackadar length in its
+vertical diffusion (fluxmod's vdiff_lamm, 160 m) by the ratio of the gravities, and --boundary-layer nonlocal runs the
+nonlocal boundary layer of pbl_scheme.py in vdiff (pbl_fortran.PBL_PATCHES, fluxmod's nlpbl); a run with either also
+writes the vapour each process gives each layer and the heating of falling precipitation's evaporation (BUDGET), with
+PlaSim's convection slot completed for the Betts-Miller and mass-flux schemes (pbl_fortran.DIAGNOSTIC_PATCHES).
+--surface-gust beljaars adds Beljaars's gust, the convective velocity of the boundary layer's eddies, to the wind in
+PlaSim's surface transfer over every surface, in place of the free-convection term over water and the least wind of
+1 m/s (surface_gust.py; GUST_PATCHES over the nonlocal scheme's patch, whose depth rule it takes); a run with it and
+the moisture diagnostics writes the vapour by process too. --surface-gust beljaars_similarity adds to the gust CM1's
+surface-layer similarity over ice-free water, carried to the lowest level's height (surface_similarity.py; SIMW_PATCHES
+over the gust's patch).
+--sbm-diagnostic-night, a diagnostic and never a configuration, holds the Betts-Miller scheme's deep convection off
+wherever the Sun is down (SBM_NIGHT_PATCHES); a run with it and the moisture diagnostics writes the vapour by process
+too. --large-scale-condensate cloud holds PlaSim's large-scale condensate as cloud water in its layer above freezing,
+evaporated where the air is unsaturated and turned to rain by autoconversion and accretion (condensate.py), and
+--humidity-mean writes the humidity's true 3-day mean as hus_mean (HUS_MEAN_PATCHES); without them a run is as
+before. --rain-drops evaporates PlaSim's falling rain from its drops' sizes and fall speeds at lunar gravity in place
+of gamma, with the birth rule it names for the size of new rain (rain_drops.py; RAIN_DROP_PATCHES, rainmod's
+nevapprec 2); snow keeps gamma.
 """
 from __future__ import annotations
 import argparse
@@ -70,8 +98,17 @@ import signal
 import sys
 import time
 import numpy as np
-from shared.constants import STANDARD_GRAVITY
+from shared.constants import EXOPLASIM_FREE_CONVECTION, STANDARD_ATMOSPHERE, STANDARD_GRAVITY
 from climate.gcm import plasim_ice_optics as pio
+from climate.gcm import levels as lv
+from climate.gcm import massflux_fortran as mff
+from climate.gcm import pbl_fortran as pbf
+from climate.gcm import pbl_scheme as pbs
+from climate.gcm import surface_gust as sgf
+from climate.gcm import surface_similarity as ssf
+from climate.gcm import condensate as cnd
+from climate.gcm import rain_drops as rdr
+from climate.gcm import snow_sublimation as sns
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -179,7 +216,8 @@ OUTPUT = ['ta', 'ua', 'va', 'hus', 'cl',
           'rst', 'rsut', 'rlut', 'ntr', 'nbr', 'rss', 'rls', 'hfss', 'hfls', 'alb', 'czen', 'lsm', 'tauu', 'tauv']
 # The codes PlaSim 3.4.2 writes to its raw output (outmod.f90's writegp calls on unit 40), and the names ExoPlaSim's
 # postprocessor derives from them (pyburn.dataset): a name outside both comes out of the postprocessor as nothing.
-# The diagnostics' own codes (the heating's 21-29 among them) come on top when their switches are on.
+# The diagnostics' own codes (the heating's 21-29 among them) come on top when their switches are on, as does 233,
+# the humidity's true mean, which HUS_MEAN_PATCHES writes through a variable only with nhusmean 1.
 PLASIM_CODES = (101, 102, 103, 104, 105, 106, 107, 110, 129, 130, 133, 138, 139, 140, 141, 142, 143, 144, 146, 147, 152,
                 155, 159, 160, 161, 162, 164, 165, 166, 167, 169, 170, 172, 173, 174, 175, 176, 177, 178, 179, 180,
                 181, 182, 183, 184, 201, 202, 203, 204, 205, 207, 208, 209, 210, 211, 218, 221, 229, 230, 232, 265,
@@ -206,6 +244,32 @@ HEATING = {21: ('dt_diab', 'temperature_tendency_summed_over_the_physics'),
            27: ('dt_lsp', 'temperature_tendency_due_to_large_scale_condensation'),
            28: ('dt_conv', 'temperature_tendency_due_to_convection'),
            29: ('dt_dca', 'temperature_tendency_due_to_dry_convective_adjustment')}
+# With the same diagnostics PlaSim also writes the water vapour each layer gains, as a water flux (m/s: the specific
+# humidity tendency times the layer's mass over the density of water): code 31 the sum over the physics, code 32 the fix
+# that fills negative humidity (miscmod), and codes 40 and 41 the two parts of the spectral step that changes the
+# humidity after the physics (spectrald, mkdqtgp): the physics' moistening as that step applies it, carried to the
+# model's harmonics and back, then the horizontal diffusion, which sums to nothing over the globe. Code 40 keeps the
+# name dq_dyn under which the runs have written it since 21 October, but no code holds the dynamics' own transport: the
+# circulation's moistening is the storage less code 40 (climate/crm/gcm_site.py, gcm/night_water.py). With them the
+# runner writes omega (wap), which the postprocessor derives from the spectral fields. A column model forced by the GCM
+# takes these as the GCM's own budget, which closes by construction (climate/crm/gcm_site.py).
+MOISTENING = {31: ('dq_diab', 'water_vapour_gained_in_the_layer_summed_over_the_physics'),
+              32: ('dq_fill', 'water_vapour_gained_in_the_layer_by_the_negative_humidity_fix'),
+              40: ('dq_dyn', 'water_vapour_gained_in_the_layer_by_the_physics_as_the_spectral_step_applies_it'),
+              41: ('dq_dyn_late', 'water_vapour_gained_in_the_layer_by_horizontal_diffusion')}
+# A run with the boundary-layer options or the night switch (a diagnostic) and the moisture diagnostics also writes the
+# vapour each process gives each layer (2026-10-27), from slots PlaSim fills whenever its gridpoint diagnostics are on:
+# the surface's evaporation into the lowest layer (mkevap), vertical diffusion (vdiff), large-scale condensation
+# (mklsp), convection (Kuo's routine, and with pbl_fortran.DIAGNOSTIC_PATCHES the Betts-Miller and mass-flux schemes)
+# and dry adjustment (mkdca), each a water flux as code 31 is, and the evaporation of falling rain and snow (mkrain),
+# whose vapour PlaSim writes as a specific humidity tendency and whose heating is code 30.
+BUDGET = {30: ('dt_evap', 'temperature_tendency_due_to_evaporation_of_falling_precipitation', 'K s-1'),
+          33: ('dq_sfc', 'water_vapour_gained_in_the_lowest_layer_from_the_surface', 'm s-1'),
+          34: ('dq_vdif', 'water_vapour_gained_in_the_layer_by_vertical_diffusion', 'm s-1'),
+          35: ('dq_lsp', 'water_vapour_gained_in_the_layer_by_large_scale_condensation', 'm s-1'),
+          36: ('dq_conv', 'water_vapour_gained_in_the_layer_by_convection', 'm s-1'),
+          37: ('dq_dca', 'water_vapour_gained_in_the_layer_by_dry_convective_adjustment', 'm s-1'),
+          39: ('dq_evap', 'specific_humidity_tendency_due_to_evaporation_of_falling_precipitation', 'kg kg-1 s-1')}
 
 
 def output_variables(model: dict) -> list:
@@ -462,13 +526,555 @@ TWILIGHT_EDITS = [
      "      return\n"
      "      end subroutine twilight_lw\n"),
 ]
+# A simplified Betts-Miller convection scheme (rainmod.f90, mksbm; the author's direction of 2026-10-21, the climate
+# staying on ExoPlaSim), chosen by PlaSim's own switch: nprc 1 keeps Kuo's scheme exactly, 2 calls mksbm in its place.
+# Kuo's turns the column's moisture supply into rain wherever an undiluted surface parcel is buoyant, so over the
+# Near-side Sea it rains 2.9 mm/day after midnight while the GCM's circulation sinks there and CM1's resolved
+# convection makes almost none (climate/crm/README.md). mksbm follows Frierson (2007): a parcel from the lowest level
+# gives the reference temperature up to the top of its buoyancy, and the reference vapour is rh_bm of saturation there;
+# where the parcel is buoyant the temperature and vapour relax toward them over tau_bm, the rain is the vapour removed,
+# and the heating is shifted by one amount through the convecting layers to release the rain's latent heat, keeping
+# the column's moist enthalpy. Two lunar options, off by default: eps_bm mixes surrounding air into the rising parcel,
+# a share 1 - exp(-eps_bm ln(p_below/p)) per layer, and cin_bm (J/kg) holds back deep convection below a parcel whose
+# inhibition exceeds it. A buoyant column too dry to rain, held back, or topped below pdeep takes PlaSim's shallow
+# scheme, as under Kuo. The rain formed at each level follows the vapour removed there, for mkrain's evaporation.
+SBM_MARKER = 'Terluna: the simplified Betts-Miller scheme'
+SBM_CODE = """
+!     ================
+!     SUBROUTINE MKSBM
+!     ================
+
+      subroutine mksbm
+      use rainmod
+!
+!     Terluna: the simplified Betts-Miller scheme (Frierson 2007, J. Atmos. Sci. 64, 1959-1976), in place of Kuo's
+!     with nprc = 2. A parcel lifted from the lowest level, dry and then moist adiabatically with PlaSim's saturation,
+!     and mixing in a share 1 - exp(-eps_bm*ln(p_below/p)) of the surrounding air per layer, gives the reference
+!     temperature from the lowest level to the top of its buoyancy; the reference vapour is rh_bm of saturation there.
+!     Where the parcel is buoyant (and its inhibition below cin_bm J/kg, when that is set) the temperature and vapour
+!     relax toward the references over tau_bm s; the rain is the vapour removed, and the heating is shifted by one
+!     amount through the convecting layers so that it releases the rain's latent heat, keeping the moist enthalpy.
+!
+      integer :: ishallow(NHOR), ilift(NHOR), itop(NHOR)
+      integer :: jhor, jlev, jtop, jlfc
+      real :: zte(NHOR,NLEV), zqe(NHOR,NLEV), zdtdts(NHOR,NLEV), zdqdts(NHOR,NLEV), zdtc(NHOR,NLEV)
+      real :: ztp(NLEV), zdtr(NLEV), zdqr(NLEV), zm(NLEV), zcp(NLEV), zp(NLEV)
+      real :: ztnew, zqnew, zmix, zcin, zpq, zpt, zcpm, zcorr, zcond, ztau
+!
+      ztau=max(tau_bm,deltsec2)
+      ishallow(:)=0
+      ilift(:)=-1
+      itop(:)=-1
+      icctot(:)=0
+      icclev(:,:)=0
+      dprcl(:,:)=0.
+      dprscl(:,:)=0.
+      zdtdts(:,:)=0.
+      zdqdts(:,:)=0.
+      zdtc(:,:)=0.
+      if(ndiaggp==1) then
+       do jlev=1,NLEV
+        dgp3d(:,jlev,16)=-dqdt(:,jlev)*dp(:)*dsigma(jlev)/ga/1000.
+        dgp3d(:,jlev,18)=dqt(:,jlev)*dp(:)*dsigma(jlev)/ga/1000.
+       enddo
+      end if
+      zte(:,:)=dt(:,1:NLEV)+dtdt(:,1:NLEV)*deltsec2
+      zqe(:,:)=dq(:,1:NLEV)+dqdt(:,1:NLEV)*deltsec2
+!
+      do jhor=1,NHOR
+       zp(:)=dp(jhor)*sigma(:)
+       zm(:)=dp(jhor)*dsigma(:)/ga
+       zcp(:)=acpd*(1.+ADV*zqe(jhor,:))
+!      the parcel, from the lowest level up
+       ztnew=zte(jhor,NLEV)
+       zqnew=zqe(jhor,NLEV)
+       call sbmsat(ztnew,zqnew,zp(NLEV))
+       ztp(NLEV)=ztnew
+       do jlev=NLEM,1,-1
+        ztnew=ztnew*(sigma(jlev)/sigma(jlev+1))**akap
+        if(eps_bm > 0.) then
+         zmix=1.-exp(-eps_bm*log(sigma(jlev+1)/sigma(jlev)))
+         ztnew=(1.-zmix)*ztnew+zmix*zte(jhor,jlev)
+         zqnew=(1.-zmix)*zqnew+zmix*zqe(jhor,jlev)
+        endif
+        call sbmsat(ztnew,zqnew,zp(jlev))
+        ztp(jlev)=ztnew
+       enddo
+!      its level of free convection, the lowest above the start where it is buoyant, and its top, the last level
+!      above that it stays buoyant without a break
+       jlfc=0
+       do jlev=NLEM,1,-1
+        if(ztp(jlev) > zte(jhor,jlev)) then
+         jlfc=jlev
+         exit
+        endif
+       enddo
+       if(jlfc == 0) cycle
+       jtop=jlfc
+       do jlev=jlfc-1,1,-1
+        if(ztp(jlev) <= zte(jhor,jlev)) exit
+        jtop=jlev
+       enddo
+       zcin=0.
+       do jlev=jlfc+1,NLEV
+        zcin=zcin+gascon*max(0.,zte(jhor,jlev)-ztp(jlev))*dsigma(jlev)/sigma(jlev)
+       enddo
+!      the relaxation toward the references, from the lowest level to the top
+       zpq=0.
+       zpt=0.
+       zcpm=0.
+       do jlev=jtop,NLEV
+        zdtr(jlev)=(ztp(jlev)-zte(jhor,jlev))/ztau
+        zdqr(jlev)=(rh_bm*sbmqs(ztp(jlev),zp(jlev))-zqe(jhor,jlev))/ztau
+        zpq=zpq-zdqr(jlev)*zm(jlev)
+        zpt=zpt+zcp(jlev)*zdtr(jlev)*zm(jlev)
+        zcpm=zcpm+zcp(jlev)*zm(jlev)
+       enddo
+       if(zpq <= 0. .or. zp(jtop) > pdeep .or. (cin_bm > 0. .and. zcin > cin_bm)) then
+        if(nshallow == 1) then
+         ishallow(jhor)=1
+         ilift(jhor)=NLEP
+         itop(jhor)=jtop
+        endif
+        cycle
+       endif
+!      deep convection: the heating shifted to release the rain's latent heat, the rain where the vapour is removed
+       zcorr=(ALV*zpq-zpt)/zcpm
+       zcond=0.
+       do jlev=jtop,NLEV
+        zdtr(jlev)=zdtr(jlev)+zcorr
+        zcond=zcond+max(0.,-zdqr(jlev))*zm(jlev)
+       enddo
+       do jlev=jtop,NLEV
+        dtdt(jhor,jlev)=dtdt(jhor,jlev)+zdtr(jlev)
+        dqdt(jhor,jlev)=dqdt(jhor,jlev)+zdqr(jlev)
+        zdtc(jhor,jlev)=zdtr(jlev)
+        if(zdqr(jlev) < 0.) then
+         dprcl(jhor,jlev)=-zdqr(jlev)*zpq/zcond*dsigma(jlev)
+         icclev(jhor,jlev)=1
+         icctot(jhor)=icctot(jhor)+1
+         if(sigma(jlev) < 0.4 .and. jlev == jtop) icclev(jhor,jlev)=2
+        endif
+       enddo
+      enddo
+!
+      if(nshallow == 1) then
+       call mkshallow(zte,zqe,ishallow,ilift,itop,zdtdts,zdqdts)
+       dtdt(:,1:NLEV)=dtdt(:,1:NLEV)+zdtdts(:,1:NLEV)
+       dqdt(:,1:NLEV)=dqdt(:,1:NLEV)+zdqdts(:,1:NLEV)
+      endif
+      if(ndiaggp==1) then
+       do jlev=1,NLEV
+        dgp3d(:,jlev,8)=zdtc(:,jlev)+zdtdts(:,jlev)
+       enddo
+      end if
+      return
+!
+      contains
+!
+      real function sbmqs(pt,pp)
+!     saturation specific humidity, as Kuo's parcel takes it
+      real, intent(in) :: pt,pp
+      real :: zqs
+      zqs=rdbrv*ra1*exp(ra2*(pt-TMELT)/(pt-ra4))/pp
+      zqs=min(zqs,rdbrv)
+      sbmqs=zqs/(1.-(1./rdbrv-1.)*zqs)
+      end function sbmqs
+!
+      subroutine sbmsat(pt,pq,pp)
+!     a supersaturated parcel condensed to saturation in two steps, as Kuo's, the ice's latent heat below freezing
+      real, intent(inout) :: pt,pq
+      real, intent(in) :: pp
+      real :: zqs,zcor,zlcp,zdqsdt,zrain
+      integer :: jit
+      do jit=1,2
+       zqs=rdbrv*ra1*exp(ra2*(pt-TMELT)/(pt-ra4))/pp
+       zqs=min(zqs,rdbrv)
+       zcor=1./(1.-(1./rdbrv-1.)*zqs)
+       zqs=zqs*zcor
+       if(zqs >= pq) return
+       if(pt < TMELT) then
+        zlcp=ALS/(acpd*(1.+ADV*pq))
+       else
+        zlcp=ALV/(acpd*(1.+ADV*pq))
+       endif
+       zdqsdt=ra2*(TMELT-ra4)*zqs*zcor/((pt-ra4)*(pt-ra4))
+       zrain=(pq-zqs)/(1.+zlcp*zdqsdt)
+       pt=pt+zlcp*zrain
+       pq=pq-zrain
+      enddo
+      end subroutine sbmsat
+!
+      end subroutine mksbm
+"""
+SBM_EDITS = [
+    ("      real :: gamma   = 0.01  ! tuning parameter for evaporation of precip.\n",
+     "      real :: gamma   = 0.01  ! tuning parameter for evaporation of precip.\n"
+     "      real :: tau_bm  = 7200. ! Terluna: the simplified Betts-Miller scheme's relaxation time (s), nprc = 2\n"
+     "      real :: rh_bm   = 0.7   ! its reference relative humidity\n"
+     "      real :: eps_bm  = 0.    ! its parcel's mixing per e-folding of pressure (0: undiluted)\n"
+     "      real :: cin_bm  = 0.    ! its limit on the parcel's inhibition (J/kg; 0: none)\n"),
+    ("      namelist/rainmod_nl/kbeta,nprl,nprc,ndca,ncsurf,nmoment,nshallow  &\n",
+     "      namelist/rainmod_nl/tau_bm,rh_bm,eps_bm,cin_bm   ! Terluna: the simplified Betts-Miller scheme\n"
+     "      namelist/rainmod_nl/kbeta,nprl,nprc,ndca,ncsurf,nmoment,nshallow  &\n"),
+    ("      call mpbcr(gamma)\n",
+     "      call mpbcr(gamma)\n      call mpbcr(tau_bm)\n      call mpbcr(rh_bm)\n      call mpbcr(eps_bm)\n"
+     "      call mpbcr(cin_bm)\n"),
+    ("      if(nprc == 1) call mkdqtgp\n", "      if(nprc >= 1) call mkdqtgp\n"),
+    ("      if(nprc == 1) call kuo\n",
+     "      if(nprc == 1) call kuo\n      if(nprc == 2) call mksbm   ! Terluna: the simplified Betts-Miller scheme\n"),
+    ("      end subroutine kuo\n", "      end subroutine kuo\n" + SBM_CODE),
+]
 # (file, marker, edits) in the order applied; a marker appears only in the text its patch adds.
 PATCHES = [('radmod.f90', 'Terluna: calibration multiplier', RADMOD_EDITS),
            ('rainmod.f90', 'Terluna: gravity for the heights below', RAINMOD_EDITS),
            ('rainmod.f90', 'Terluna: seconds per day in the convective cloud formula', CONVECTIVE_EDITS),
            ('radmod.f90', "Terluna: the Sun's clock", SUN_EDITS),
            ('radmod.f90', 'Terluna: calibrated absorptivity', SHORTWAVE_EDITS),
-           ('radmod.f90', 'Terluna: infrared from space at the top of the air', TOP_INFRARED_EDITS)]
+           ('radmod.f90', 'Terluna: infrared from space at the top of the air', TOP_INFRARED_EDITS),
+           ('rainmod.f90', SBM_MARKER, SBM_EDITS)]
+# A CAPE trigger for the simplified Betts-Miller scheme (24 October), off by default: with cape_bm > 0 a column convects
+# deep only where a second parcel, lifted as the reference's but mixing epst_bm per e-folding of pressure, has at least
+# cape_bm J/kg of CAPE from its own level of free convection up through the layers it stays buoyant, counted as the
+# scheme counts its inhibition; a column held back takes the shallow scheme. It is a patch of its own on the scheme's
+# text, applied only for a run that sets it, so a source the scheme's patch has already reached takes it in place and
+# runs without it keep their source; with cape_bm 0 the scheme's arithmetic is the same.
+SBM_TRIGGER_MARKER = 'Terluna: the CAPE trigger'
+SBM_TRIGGER_BLOCK = """\
+!      Terluna: the CAPE trigger: deep convection only where a parcel mixing epst_bm per e-folding of pressure has
+!      at least cape_bm J/kg of CAPE, from its own level of free convection up through the layers it stays buoyant
+       zcapet=0.
+       if(cape_bm > 0.) then
+        ztnew=zte(jhor,NLEV)
+        zqnew=zqe(jhor,NLEV)
+        call sbmsat(ztnew,zqnew,zp(NLEV))
+        ztt(NLEV)=ztnew
+        do jlev=NLEM,1,-1
+         ztnew=ztnew*(sigma(jlev)/sigma(jlev+1))**akap
+         if(epst_bm > 0.) then
+          zmix=1.-exp(-epst_bm*log(sigma(jlev+1)/sigma(jlev)))
+          ztnew=(1.-zmix)*ztnew+zmix*zte(jhor,jlev)
+          zqnew=(1.-zmix)*zqnew+zmix*zqe(jhor,jlev)
+         endif
+         call sbmsat(ztnew,zqnew,zp(jlev))
+         ztt(jlev)=ztnew
+        enddo
+        jlfct=0
+        do jlev=NLEM,1,-1
+         if(ztt(jlev) > zte(jhor,jlev)) then
+          jlfct=jlev
+          exit
+         endif
+        enddo
+        do jlev=jlfct,1,-1
+         if(ztt(jlev) <= zte(jhor,jlev)) exit
+         zcapet=zcapet+gascon*(ztt(jlev)-zte(jhor,jlev))*dsigma(jlev)/sigma(jlev)
+        enddo
+       endif
+"""
+SBM_TRIGGER_EDITS = [
+    ("      real :: cin_bm  = 0.    ! its limit on the parcel's inhibition (J/kg; 0: none)\n",
+     "      real :: cin_bm  = 0.    ! its limit on the parcel's inhibition (J/kg; 0: none)\n"
+     "      real :: cape_bm = 0.    ! Terluna: the CAPE trigger: deep only above this CAPE (J/kg; 0: none)\n"
+     "      real :: epst_bm = 0.    ! its parcel's mixing per e-folding of pressure\n"),
+    ("      namelist/rainmod_nl/tau_bm,rh_bm,eps_bm,cin_bm   ! Terluna: the simplified Betts-Miller scheme\n",
+     "      namelist/rainmod_nl/tau_bm,rh_bm,eps_bm,cin_bm   ! Terluna: the simplified Betts-Miller scheme\n"
+     "      namelist/rainmod_nl/cape_bm,epst_bm   ! Terluna: the CAPE trigger\n"),
+    ("      call mpbcr(cin_bm)\n", "      call mpbcr(cin_bm)\n      call mpbcr(cape_bm)\n      call mpbcr(epst_bm)\n"),
+    ("      real :: ztnew, zqnew, zmix, zcin, zpq, zpt, zcpm, zcorr, zcond, ztau\n",
+     "      real :: ztnew, zqnew, zmix, zcin, zpq, zpt, zcpm, zcorr, zcond, ztau\n"
+     "      real :: ztt(NLEV), zcapet   ! Terluna: the CAPE trigger\n      integer :: jlfct\n"),
+    ("       if(zpq <= 0. .or. zp(jtop) > pdeep .or. (cin_bm > 0. .and. zcin > cin_bm)) then\n",
+     SBM_TRIGGER_BLOCK + "       if(zpq <= 0. .or. zp(jtop) > pdeep .or. (cin_bm > 0. .and. zcin > cin_bm) .or. "
+     "(cape_bm > 0. .and. zcapet < cape_bm)) then\n"),
+]
+SBM_TRIGGER_PATCHES = [('rainmod.f90', SBM_TRIGGER_MARKER, SBM_TRIGGER_EDITS)]
+# Two more options for the simplified Betts-Miller scheme (25 October), each off by default. The cloud-depth test
+# (dpdeep_bm > 0, Pa) lets a column convect deep only where the parcel's cloud, from the condensation level of the
+# lowest level's air (found by bisection in log pressure with PlaSim's saturation) up to the scheme's top level, is
+# more than dpdeep_bm thick; a thinner cloud takes PlaSim's shallow scheme, which does not rain. It is the IFS's rule
+# (documentation Cy36r1, Part IV, section 6.4: a cloud from its LCL up thicker than 200 hPa is deep), where PlaSim's
+# own pdeep tests the top's pressure alone. The mixing within layers (nsub_bm > 1, with eps_bm > 0) carries the
+# parcel across each layer in nsub_bm equal steps of log pressure, each lifting it dry adiabatically, mixing in its
+# step's share of the surrounding air interpolated there in log pressure, and condensing the mixture, so the mixing
+# acts through the thick layers rather than once at their tops; one step is the scheme as before, and eps_bm 0 never
+# takes the steps. Like the CAPE trigger it is a patch of its own on the scheme's text, applied only for a run that
+# sets either option, on a source with or without the trigger; with both off the routine's arithmetic is unchanged.
+SBM_DEPTH_MARKER = 'Terluna: the cloud-depth test and the mixing within layers'
+SBM_DEPTH_LOOP_OLD = """\
+       ztp(NLEV)=ztnew
+       do jlev=NLEM,1,-1
+        ztnew=ztnew*(sigma(jlev)/sigma(jlev+1))**akap
+        if(eps_bm > 0.) then
+         zmix=1.-exp(-eps_bm*log(sigma(jlev+1)/sigma(jlev)))
+         ztnew=(1.-zmix)*ztnew+zmix*zte(jhor,jlev)
+         zqnew=(1.-zmix)*zqnew+zmix*zqe(jhor,jlev)
+        endif
+        call sbmsat(ztnew,zqnew,zp(jlev))
+        ztp(jlev)=ztnew
+       enddo
+"""
+SBM_DEPTH_LOOP_NEW = """\
+       ztp(NLEV)=ztnew
+       do jlev=NLEM,1,-1
+        if(eps_bm > 0. .and. nsub_bm > 1) then
+!        Terluna: the mixing within layers: nsub_bm equal steps of log pressure, each lifting the parcel dry
+!        adiabatically, mixing in its share of the air interpolated there in log pressure and condensing the mixture
+         zsub=log(sigma(jlev+1)/sigma(jlev))/real(nsub_bm)
+         zmix=1.-exp(-eps_bm*zsub)
+         zstep=exp(-zsub)
+         zlift=exp(-akap*zsub)
+         zsig0=sigma(jlev+1)
+         do jsub=1,nsub_bm
+          if(jsub < nsub_bm) then
+           zsig1=zsig0*zstep
+           ztnew=ztnew*zlift
+          else
+           zsig1=sigma(jlev)
+           ztnew=ztnew*(zsig1/zsig0)**akap
+          endif
+          zw=real(jsub)/real(nsub_bm)
+          ztnew=(1.-zmix)*ztnew+zmix*((1.-zw)*zte(jhor,jlev+1)+zw*zte(jhor,jlev))
+          zqnew=(1.-zmix)*zqnew+zmix*((1.-zw)*zqe(jhor,jlev+1)+zw*zqe(jhor,jlev))
+          call sbmsat(ztnew,zqnew,dp(jhor)*zsig1)
+          zsig0=zsig1
+         enddo
+        else
+         ztnew=ztnew*(sigma(jlev)/sigma(jlev+1))**akap
+         if(eps_bm > 0.) then
+          zmix=1.-exp(-eps_bm*log(sigma(jlev+1)/sigma(jlev)))
+          ztnew=(1.-zmix)*ztnew+zmix*zte(jhor,jlev)
+          zqnew=(1.-zmix)*zqnew+zmix*zqe(jhor,jlev)
+         endif
+         call sbmsat(ztnew,zqnew,zp(jlev))
+        endif
+        ztp(jlev)=ztnew
+       enddo
+"""
+SBM_DEPTH_TEST = """\
+!      Terluna: the cloud-depth test: deep convection only where the parcel's cloud, from the condensation level of
+!      the lowest level's air up to the top, is more than dpdeep_bm thick; a thinner cloud takes the shallow scheme
+       if(dpdeep_bm > 0.) then
+        zpbase=sbmlcl(zte(jhor,NLEV),zqe(jhor,NLEV),zp(NLEV),zp(jtop))
+        if(zpbase-zp(jtop) <= dpdeep_bm) then
+         if(nshallow == 1) then
+          ishallow(jhor)=1
+          ilift(jhor)=NLEP
+          itop(jhor)=jtop
+         endif
+         cycle
+        endif
+       endif
+"""
+SBM_DEPTH_LCL = """\
+!
+      real function sbmlcl(pt,pq,pp,ptop)
+!     Terluna: the pressure at which air of temperature pt and vapour pq at pp, lifted dry adiabatically with its
+!     vapour kept, reaches saturation: pp if it is saturated there, ptop if it is still unsaturated at ptop, and
+!     otherwise found by bisection in log pressure between the two
+      real, intent(in) :: pt,pq,pp,ptop
+      real :: zlo,zhi,zmid,zpm
+      integer :: jit
+      if(pq >= sbmqs(pt,pp)) then
+       sbmlcl=pp
+       return
+      endif
+      if(pq < sbmqs(pt*(ptop/pp)**akap,ptop)) then
+       sbmlcl=ptop
+       return
+      endif
+      zlo=log(ptop)
+      zhi=log(pp)
+      do jit=1,24
+       zmid=0.5*(zlo+zhi)
+       zpm=exp(zmid)
+       if(pq >= sbmqs(pt*(zpm/pp)**akap,zpm)) then
+        zlo=zmid
+       else
+        zhi=zmid
+       endif
+      enddo
+      sbmlcl=exp(0.5*(zlo+zhi))
+      end function sbmlcl
+"""
+SBM_DEPTH_EDITS = [
+    ("      real :: cin_bm  = 0.    ! its limit on the parcel's inhibition (J/kg; 0: none)\n",
+     "      real :: cin_bm  = 0.    ! its limit on the parcel's inhibition (J/kg; 0: none)\n"
+     "      real :: dpdeep_bm = 0.  ! Terluna: the cloud-depth test: deep only above this depth (Pa; 0: no test)\n"
+     "      integer :: nsub_bm = 1  ! the parcel's mixing steps within each layer (1: one a layer)\n"),
+    ("      namelist/rainmod_nl/tau_bm,rh_bm,eps_bm,cin_bm   ! Terluna: the simplified Betts-Miller scheme\n",
+     "      namelist/rainmod_nl/tau_bm,rh_bm,eps_bm,cin_bm   ! Terluna: the simplified Betts-Miller scheme\n"
+     f"      namelist/rainmod_nl/dpdeep_bm,nsub_bm   ! {SBM_DEPTH_MARKER}\n"),
+    ("      call mpbcr(cin_bm)\n", "      call mpbcr(cin_bm)\n      call mpbcr(dpdeep_bm)\n      call mpbci(nsub_bm)\n"),
+    ("      real :: ztnew, zqnew, zmix, zcin, zpq, zpt, zcpm, zcorr, zcond, ztau\n",
+     "      real :: ztnew, zqnew, zmix, zcin, zpq, zpt, zcpm, zcorr, zcond, ztau\n"
+     "      real :: zsub, zstep, zlift, zsig0, zsig1, zw, zpbase   ! Terluna: the cloud-depth test and the mixing within "
+     "layers\n"
+     "      integer :: jsub\n"),
+    (SBM_DEPTH_LOOP_OLD, SBM_DEPTH_LOOP_NEW),
+    ("!      the relaxation toward the references, from the lowest level to the top\n",
+     SBM_DEPTH_TEST + "!      the relaxation toward the references, from the lowest level to the top\n"),
+    ("      end function sbmqs\n", "      end function sbmqs\n" + SBM_DEPTH_LCL),
+]
+SBM_DEPTH_PATCHES = [('rainmod.f90', SBM_DEPTH_MARKER, SBM_DEPTH_EDITS)]
+# The shallow cap (26 October), off by default and applied only for a run that sets it, after the depth patch it needs.
+# PlaSim's shallow scheme (mkshallow) holds every shallow cloud's top at or below the lowest level above pdeepth, 700 hPa,
+# Earth's lower troposphere and about 28 km up in the Moon's air. With nshcap_bm 1 and the depth test set, a column the
+# scheme hands to the shallow scheme after the depth test (too dry to rain, or held back by its inhibition or the CAPE
+# trigger) gets a top no higher than dpdeep_bm above its cloud's base, the highest level at or below its parcel's top
+# within that depth of the condensation level, and mkshallow's absolute cap gives way to it; a cloud the depth test
+# itself hands over is already that thin. With nshcap_bm 0 the routine's arithmetic and mkshallow's are as before.
+SBM_CAP_MARKER = 'Terluna: the shallow cap'
+SBM_CAP_EDITS = [
+    ("      integer :: nsub_bm = 1  ! the parcel's mixing steps within each layer (1: one a layer)\n",
+     "      integer :: nsub_bm = 1  ! the parcel's mixing steps within each layer (1: one a layer)\n"
+     f"      integer :: nshcap_bm = 0 ! {SBM_CAP_MARKER}: 1 holds a shallow top within dpdeep_bm of its base\n"),
+    (f"      namelist/rainmod_nl/dpdeep_bm,nsub_bm   ! {SBM_DEPTH_MARKER}\n",
+     f"      namelist/rainmod_nl/dpdeep_bm,nsub_bm   ! {SBM_DEPTH_MARKER}\n"
+     f"      namelist/rainmod_nl/nshcap_bm   ! {SBM_CAP_MARKER}\n"),
+    ("      call mpbci(nsub_bm)\n", "      call mpbci(nsub_bm)\n      call mpbci(nshcap_bm)\n"),
+    ("        if(nshallow == 1) then\n         ishallow(jhor)=1\n         ilift(jhor)=NLEP\n         itop(jhor)=jtop\n"
+     "        endif\n        cycle\n       endif\n"
+     "!      deep convection: the heating shifted to release the rain's latent heat, the rain where the vapour is removed\n",
+     "        if(nshallow == 1) then\n         ishallow(jhor)=1\n         ilift(jhor)=NLEP\n         itop(jhor)=jtop\n"
+     f"!        {SBM_CAP_MARKER}: the top no higher than dpdeep_bm above the cloud's base\n"
+     "         if(nshcap_bm == 1 .and. dpdeep_bm > 0.) then\n"
+     "          do jlev=jtop,NLEV\n"
+     "           if(zp(jlev) >= zpbase-dpdeep_bm) exit\n"
+     "          enddo\n"
+     "          itop(jhor)=min(jlev,NLEV)\n"
+     "         endif\n"
+     "        endif\n        cycle\n       endif\n"
+     "!      deep convection: the heating shifted to release the rain's latent heat, the rain where the vapour is removed\n"),
+    ("      ktop(:)=MAX(ktop(:),kktop(:))\n",
+     f"      if(nprc /= 2 .or. nshcap_bm /= 1) ktop(:)=MAX(ktop(:),kktop(:)) ! {SBM_CAP_MARKER} replaces it\n"),
+]
+SBM_CAP_PATCHES = [('rainmod.f90', SBM_CAP_MARKER, SBM_CAP_EDITS)]
+# The night switch (27 October), a diagnostic and never a configuration, off by default and applied only for a run that
+# sets it. With ndiagnight_bm 1 the simplified Betts-Miller scheme convects deep nowhere the Sun is down: where the
+# geometric cosine of the Sun's zenith at the grid point is at most 0 (radmod's gmuz, the twilight patch's cosine that
+# solang sets each step before the convection runs, below the horizon too), a column that would convect deep takes
+# PlaSim's shallow scheme as a column held back by the inhibition limit or the CAPE trigger takes it, its top held by
+# the shallow cap where that is set. The scheme reads the cosine through sbmnight, a routine added to radmod.f90 and
+# called without a module dependency, so rainmod.f90 still compiles on PlaSim's module alone. The patch edits the text
+# of the CAPE trigger's, the depth test's and the cap's patches and goes over them; with ndiagnight_bm 0 the routine's
+# arithmetic is as before.
+SBM_NIGHT_MARKER = 'Terluna: the night switch, a diagnostic'
+SBM_NIGHT_GETTER = f"""
+!     ===================
+!     SUBROUTINE SBMNIGHT
+!     ===================
+
+      subroutine sbmnight(pmuz)
+      use radmod
+!
+!     {SBM_NIGHT_MARKER} (rainmod's ndiagnight_bm): the geometric cosine of the Sun's zenith at each grid
+!     point, below the horizon too, as solang set it this step
+!
+      real, intent(out) :: pmuz(NHOR)
+      pmuz(:)=gmuz(:)
+      return
+      end subroutine sbmnight
+"""
+SBM_NIGHT_EDITS = [
+    (f"      integer :: nshcap_bm = 0 ! {SBM_CAP_MARKER}: 1 holds a shallow top within dpdeep_bm of its base\n",
+     f"      integer :: nshcap_bm = 0 ! {SBM_CAP_MARKER}: 1 holds a shallow top within dpdeep_bm of its base\n"
+     f"      integer :: ndiagnight_bm = 0 ! {SBM_NIGHT_MARKER}: 1 holds deep convection off where the Sun is down\n"),
+    (f"      namelist/rainmod_nl/nshcap_bm   ! {SBM_CAP_MARKER}\n",
+     f"      namelist/rainmod_nl/nshcap_bm   ! {SBM_CAP_MARKER}\n"
+     f"      namelist/rainmod_nl/ndiagnight_bm   ! {SBM_NIGHT_MARKER}\n"),
+    ("      call mpbci(nshcap_bm)\n", "      call mpbci(nshcap_bm)\n      call mpbci(ndiagnight_bm)\n"),
+    ("      real :: ztt(NLEV), zcapet   ! Terluna: the CAPE trigger\n",
+     "      real :: ztt(NLEV), zcapet   ! Terluna: the CAPE trigger\n"
+     f"      real :: zmuz(NHOR)   ! {SBM_NIGHT_MARKER}: the geometric cosine of the Sun's zenith\n"),
+    ("      ztau=max(tau_bm,deltsec2)\n",
+     "      ztau=max(tau_bm,deltsec2)\n      zmuz(:)=1.\n      if(ndiagnight_bm == 1) call sbmnight(zmuz)\n"),
+    ("       if(zpq <= 0. .or. zp(jtop) > pdeep .or. (cin_bm > 0. .and. zcin > cin_bm) .or. "
+     "(cape_bm > 0. .and. zcapet < cape_bm)) then\n",
+     f"!      {SBM_NIGHT_MARKER}: no deep convection where the Sun is down, the shallow scheme instead\n"
+     "       if(zpq <= 0. .or. zp(jtop) > pdeep .or. (cin_bm > 0. .and. zcin > cin_bm) .or. "
+     "(cape_bm > 0. .and. zcapet < cape_bm) &\n"
+     "     &    .or. (ndiagnight_bm == 1 .and. zmuz(jhor) <= 0.)) then\n"),
+]
+SBM_NIGHT_RADMOD_EDITS = [("      end subroutine solang\n", "      end subroutine solang\n" + SBM_NIGHT_GETTER)]
+SBM_NIGHT_PATCHES = [('rainmod.f90', SBM_NIGHT_MARKER, SBM_NIGHT_EDITS),
+                     ('radmod.f90', SBM_NIGHT_MARKER, SBM_NIGHT_RADMOD_EDITS)]
+
+
+# Two switches in PlaSim's own namelist, read before the restart, so that the restart can see them (both 0 by default,
+# when the model and its output are as before): ncwat 1 holds large-scale condensate as cloud water
+# (condensate.CLOUD_WATER_PATCHES), the restart carrying it as dqcw and a restart without it giving none
+# (restart_has_array); nhusmean 1 writes the humidity's true 3-day mean as code 233 (HUS_MEAN_PATCHES), the gridpoint
+# humidity PlaSim adds every step (aadq), where code 133 holds the humidity at each interval's start (year_files.py).
+SWITCH_MARKER = 'Terluna: switches'
+SWITCH_PLASIMMOD_EDITS = [
+    ("      integer :: nqspec   = 1   ! 1: spectral q   0: gridpoint q (semi-Langrangian)\n",
+     "      integer :: nqspec   = 1   ! 1: spectral q   0: gridpoint q (semi-Langrangian)\n"
+     f"      integer :: ncwat    = 0   ! {SWITCH_MARKER}: 1 holds large-scale condensate as cloud water\n"
+     "      integer :: nhusmean = 0   ! 1 writes the humidity's true mean as code 233 (low-I/O mode)\n"),
+    ("      real :: dql(NHOR,NLEP)  = 0.     ! Liquid water content\n",
+     "      real :: dql(NHOR,NLEP)  = 0.     ! Liquid water content\n"
+     f"      real :: dqcw(NHOR,NLEV) = 0.     ! {SWITCH_MARKER}: the cloud water mklsp holds (kg/kg)\n"),
+]
+SWITCH_PLASIM_EDITS = [
+    ("                   , sigh    , nenergy , nener3d , nsponge , dampsp     &\n                   , l_aero\n",
+     "                   , sigh    , nenergy , nener3d , nsponge , dampsp     &\n"
+     "                   , l_aero  , ncwat   , nhusmean\n"),
+    ("      call mpbci(ndiaggp3d ) ! no of 3d gp diagnostic arrays\n",
+     "      call mpbci(ndiaggp3d ) ! no of 3d gp diagnostic arrays\n"
+     f"      call mpbci(ncwat    ) ! {SWITCH_MARKER}: cloud water\n"
+     "      call mpbci(nhusmean ) ! the humidity's true mean\n"),
+    ("      call mpputgp('dqsat'  ,dqsat  ,NHOR,NLEV)\n",
+     "      call mpputgp('dqsat'  ,dqsat  ,NHOR,NLEV)\n"
+     f"      if (ncwat == 1) call mpputgp('dqcw'   ,dqcw   ,NHOR,NLEV)   ! {SWITCH_MARKER}\n"),
+    ("      call mpgetgp('dqsat'  ,dqsat  ,NHOR,NLEV)\n",
+     "      call mpgetgp('dqsat'  ,dqsat  ,NHOR,NLEV)\n"
+     f"      if (ncwat == 1) then   ! {SWITCH_MARKER}: the cloud water, none in a restart without it\n"
+     "         icwread = 0\n"
+     "         if (mypid == NROOT) call restart_has_array('dqcw',icwread)\n"
+     "         call mpbci(icwread)\n"
+     "         if (icwread == 1) call mpgetgp('dqcw'   ,dqcw   ,NHOR,NLEV)\n"
+     "      endif\n"),
+]
+SWITCH_RESTART_EDITS = [
+    ("      end subroutine get_restart_array\n",
+     "      end subroutine get_restart_array\n"
+     f"\n!     {SWITCH_MARKER}: whether the restart holds the array yn (kfound 1) or not (0)\n"
+     "      subroutine restart_has_array(yn,kfound)\n"
+     "      use restartmod\n"
+     "      character (len=*) :: yn\n"
+     "      integer :: kfound\n"
+     "      kfound = 0\n"
+     "      do j = 1 , nresnum\n"
+     "         if (trim(yn) == trim(yresnam(j))) kfound = 1\n"
+     "      enddo\n"
+     "      return\n"
+     "      end subroutine restart_has_array\n"),
+]
+PLASIM_SWITCH_PATCHES = [('plasimmod.f90', SWITCH_MARKER, SWITCH_PLASIMMOD_EDITS),
+                         ('plasim.f90', SWITCH_MARKER, SWITCH_PLASIM_EDITS),
+                         ('restartmod.f90', SWITCH_MARKER, SWITCH_RESTART_EDITS)]
+HUS_MEAN_MARKER = "Terluna: the humidity's true mean"
+HUS_MEAN_CODE = 233
+HUS_MEAN = ('hus_mean', 'specific_humidity_mean_over_the_output_interval', '1')
+_HUS_LOWIO = ("        if (nqspec == 0) then ! Semi Langrangian advection active\n"
+              "           do jlev = 1 , NLEV\n"
+              "              aadq(:,jlev) = aadq(:,jlev)/real(naccuout)\n"
+              "              call writegp(40,aadq(1,jlev),133,jlev)\n"
+              "           enddo\n"
+              "        endif\n")
+HUS_MEAN_EDITS = [
+    (_HUS_LOWIO,
+     _HUS_LOWIO
+     + f"        if (nqspec == 1 .and. nhusmean == 1) then ! {HUS_MEAN_MARKER}, code 233\n"
+     "           ihuscode = 233   ! through a variable: PlaSim writes it only with nhusmean 1\n"
+     "           do jlev = 1 , NLEV\n"
+     "              aadq(:,jlev) = aadq(:,jlev)/real(naccuout)\n"
+     "              call writegp(40,aadq(1,jlev),ihuscode,jlev)\n"
+     "           enddo\n"
+     "        endif\n"),
+]
+HUS_MEAN_PATCHES = [('outmod.f90', HUS_MEAN_MARKER, HUS_MEAN_EDITS)]
 # CO2 and O2 in PlaSim's sunlight (radmod.f90, swr; climate/gcm/plasim_shortwave.py, GAS_BANDS). PlaSim's two bands hold
 # no CO2 or O2, whose strongest lines the Moon's deep column takes high up, so it puts that sunlight where its water
 # is. NGASBANDS 1 adds CO2 and O2 in the near-infrared band and O2 in the visible, each an absorptivity of its own
@@ -824,6 +1430,27 @@ ICE_WEIGHTS_EDITS = [
     ("        zrs = zrs+zew(jb-1)*zrf\n", "        zrs = zrs+zicew(jb-1)*zrf\n"),
     ("        zts = zts+zew(jb-1)*ztf\n", "        zts = zts+zicew(jb-1)*ztf\n"),
 ]
+# The cold cloud's lunar factors (2026-10-20): ZICEWF and ZICERF scale, level by level, the water path and the crystal
+# radius the ice optics give cloud colder than TICEOPT, in sunlight and in the infrared alike (cold_cloud.py: the
+# factors that carry PlaSim's Earth water and Kristjansson and Mitchell's Earth crystals to lunar gravity). Their
+# defaults of 1 leave the model as it was; the factors touch only how the radiation sees the cloud.
+ICE_FACTOR_EDITS = [
+    ("      real :: zicew(4) = (/" + _fortran_list(pio.NIR_WEIGHTS, '{:.4f}') + "/) "
+     "! world-crafting: ice bands 2-5 in band 2, patch 10's\n",
+     "      real :: zicew(4) = (/" + _fortran_list(pio.NIR_WEIGHTS, '{:.4f}') + "/) "
+     "! world-crafting: ice bands 2-5 in band 2, patch 10's\n"
+     "      real :: zicewf(NLEV) = 1.0 ! Terluna: the cold cloud's water factor by level\n"
+     "      real :: zicerf(NLEV) = 1.0 ! Terluna: the cold cloud's crystal radius factor by level\n"),
+    ("     &               ,ntwlclear,zicew\n", "     &               ,ntwlclear,zicew,zicewf,zicerf\n"),
+    ("      call mpbcrn(zicew,4)\n", "      call mpbcrn(zicew,4)\n      call mpbcrn(zicewf,NLEV)\n      call mpbcrn(zicerf,NLEV)\n"),
+    ("       zre = ice_radius(dt(jhor,jlev))\n", "       zre = ice_radius(dt(jhor,jlev))*zicerf(jlev)\n"),
+    ("       zwp = min(1000.,1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev))\n",
+     "       zwp = min(1000.,1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev)*zicewf(jlev))\n"),
+    ("       zwp = 1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev)\n"
+     "       ztaucc(jhor) = 1.-dcc(jhor,jlev)*(1.-exp(-1.66*(0.005+1./ice_radius(dt(jhor,jlev)))*zwp))\n",
+     "       zwp = 1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev)*zicewf(jlev)\n"
+     "       ztaucc(jhor) = 1.-dcc(jhor,jlev)*(1.-exp(-1.66*(0.005+1./(ice_radius(dt(jhor,jlev))*zicerf(jlev)))*zwp))\n"),
+]
 # The 10 m wind (2026-10-19). PlaSim 3.4.2 writes no wind below its lowest level, about 0.9 km up in the lunar air, and
 # the lake model brought that wind down on a neutral log profile. NWIND10 1 has the surface layer (surflx) take the
 # 10 m wind on Geleyn's (1988) profile through the lowest layer, u(z) = u_L (ln(1 + z/z0) - (z/z_L)(B_N - B_D)) / B_D,
@@ -881,15 +1508,39 @@ WIND10_OUT_EDITS = [
 WIND10_PATCHES = [('plasimmod.f90', 'Terluna: 1 writes the 10 m wind', WIND10_MOD_EDITS),
                   ('fluxmod.f90', "Terluna: the 10 m wind, Geleyn's profile", WIND10_FLUX_EDITS),
                   ('outmod.f90', "Terluna: the 10 m wind's mean since its last output", WIND10_OUT_EDITS)]
+# The free-convection constant over water (2026-10-26). In unstable air over water surflx raises the transfer of heat and
+# vapour by the interpolation of Miller, Beljaars and Palmer (1992, J. Climate 5, 418-434, their eq. 9),
+# C_H = C_HN (1 + C_R^1.25)^0.8 with C_R = 0.0016 (theta_vs - theta_v1)^(1/3) / (C_HN |U|), whose still-air limit,
+# C_H |U| = 0.0016 (theta_vs - theta_v1)^(1/3), stands for the free convection of tank experiments (their eq. 8):
+# E / rho = 0.17 (g kappa^2 / (theta_v nu))^(1/3) (theta_vs - theta_v1)^(1/3) (q_s - q_1), with kappa the air's thermal
+# diffusivity and nu its kinematic viscosity. At 300 K and 1013 hPa that law's constant is 0.0017; they took 0.0016, to
+# sit near Monin-Obukhov similarity at low wind speeds. With kappa = k / (rho c_p), nu = mu / rho and rho theta_v = p / R
+# at the ground, the constant goes as (g / p_s)^(1/3) at a given temperature, the conductivity and viscosity adding
+# about T^0.3 (free_convection_setting). FREE_CONVECTION_EDITS make it fluxmod's namelist variable CFREE, PlaSim's 0.0016
+# unless a run sets it, so a run without the setting computes as before.
+FREE_CONVECTION_MARKER = 'Terluna: the free-convection constant over water'
+FREE_CONVECTION_EDITS = [
+    ('      real :: vdiff_d    = 5.    !        "\n',
+     '      real :: vdiff_d    = 5.    !        "\n'
+     f'      real :: cfree      = 0.0016 ! {FREE_CONVECTION_MARKER} (m s-1 K-1/3; Miller et al. 1992)\n'),
+    ("     &                ,zumin,vdiff_lamm,vdiff_b,vdiff_c,vdiff_d\n",
+     "     &                ,zumin,vdiff_lamm,vdiff_b,vdiff_c,vdiff_d,cfree\n"),
+    ("      call mpbcr(vdiff_d)\n", "      call mpbcr(vdiff_d)\n      call mpbcr(cfree)\n"),
+    ("         zrifh(jhor)=(1.+(0.0016*zdth**(1./3.)/SQRT(zabsu2(jhor))       &\n",
+     "         zrifh(jhor)=(1.+(cfree*zdth**(1./3.)/SQRT(zabsu2(jhor))        &\n"),
+]
+FREE_CONVECTION_PATCHES = [('fluxmod.f90', FREE_CONVECTION_MARKER, FREE_CONVECTION_EDITS)]
 # The twilight, gas, longwave and ice patches go only into a copy of ExoPlaSim of its own, which every run imports
 # first since the corrected radiation became the standard (2026-10-14); the shared installation stays as the earlier
-# runs had it. The twilight's clear share follows them, from 2026-10-19, and the ice weights and the 10 m wind after it.
+# runs had it. The twilight's clear share follows them, from 2026-10-19, and the ice weights and the 10 m wind after it,
+# and the cold cloud's lunar factors from 2026-10-20.
 TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", TWILIGHT_EDITS),
                     ('radmod.f90', 'Terluna: CO2 and O2 in the sunlight', GAS_EDITS),
                     ('radmod.f90', 'Terluna: the longwave by height', LW_CORRECTION_EDITS),
                     ('radmod.f90', 'Terluna: ice optics for cold cloud', ICE_OPTICS_EDITS),
                     ('radmod.f90', "Terluna: 1 puts the twilight's terms in the clear share", TWILIGHT_CLEAR_EDITS),
                     ('radmod.f90', 'world-crafting: ice bands 2-5 in band 2', ICE_WEIGHTS_EDITS)] + WIND10_PATCHES
+TWILIGHT_PATCHES += [('radmod.f90', "Terluna: the cold cloud's water factor by level", ICE_FACTOR_EDITS)]
 TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
 # The curved air's ledgers (twilight.py): on the design climate's 301 K column, the standard since 2026-10-19, and on
 # the 294.9 K column every run from 14 to 19 October took. The Moon's slant factors (ZMLUNAR, ZMAIRLUNAR) stay the 294.9 K
@@ -901,9 +1552,16 @@ TWILIGHT_PRODUCT = TWILIGHT_LEDGERS['301k']
 SLANT_PRODUCT = TWILIGHT_LEDGERS['294.9k']
 # The longwave by height (plasim_longwave.py): fitted on the design case's columns near 295 K, and refitted on 19 October
 # on the columns of the 20-year test with the correction as it passed 301.2 K (its year 2), since the first does not hold
-# there (longwave_check_301k.json); new runs with --longwave-correction take the refit.
+# there (longwave_check_301k.json); new runs with --longwave-correction take the refit. 'l15_provisional' (2026-10-26) is
+# the correction refitted on the 15-level month trial's own cloud-free columns (plasim_longwave.py refit), for tests on
+# those levels until the configuration chosen for a long run is refitted; a run on another set refuses it.
+# 'l15_design' (2026-10-31) is the correction refitted on year 5 of the design configuration's bridge at 300.9 K (the snow from its flakes, the rain from its drops, Beljaars's gust with the similarity over water, Betts-Miller at 0.7 on fifteen levels), for the design run.
 LONGWAVE_FITS = {'301k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_lw_ice.json',
-                 '295k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_heating.json'}
+                 '295k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_heating.json',
+                 'l15_provisional': ROOT / 'climate' / 'results' / 'gcm'
+                 / 'longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json',
+                 'l15_design': ROOT / 'climate' / 'results' / 'gcm'
+                 / 'longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_bridge_s958_refit.json'}
 LONGWAVE_PRODUCT = LONGWAVE_FITS['301k']
 GASES_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'shortwave_gases.json'
 GAS_ORDER = ('co2_nir', 'o2_nir', 'o2_vis')                     # PlaSim's ZGASQ columns
@@ -928,16 +1586,61 @@ def use_twilight_package():
     sys.path.insert(0, str(TWILIGHT_PACKAGE))
 
 
-def ensure_patched(twilight: bool = False) -> dict:
+def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
+                   massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
+                   boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
+                   cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
+                   similarity: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
-    so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and return each patched file's
-    hash for the run key."""
+    so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
+    (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
+    (SBM_CAP_PATCHES, after the depth patch), the mass-flux scheme (massflux_fortran.MASSFLUX_PATCHES, over the
+    Betts-Miller patch) with its surface parcel's starting speed (massflux_fortran.START_PATCHES, over it), and the
+    free-convection constant over water (FREE_CONVECTION_PATCHES, after the 10 m wind's), and the nonlocal boundary
+    layer with the convection's vapour diagnostic (pbl_fortran.PBL_PATCHES over the free-convection patch and
+    DIAGNOSTIC_PATCHES over the Betts-Miller and mass-flux patches), and the night switch, a diagnostic
+    (SBM_NIGHT_PATCHES, over the CAPE trigger's, the depth test's and the cap's patches, with the convection's vapour
+    diagnostic), and the switches in PlaSim's namelist (PLASIM_SWITCH_PATCHES) with the humidity's true mean
+    (HUS_MEAN_PATCHES) and the cloud water (condensate.CLOUD_WATER_PATCHES, with the convection's vapour diagnostic),
+    and Beljaars's gust in the surface transfer (surface_gust.GUST_PATCHES, over the nonlocal boundary layer's patch,
+    with the convection's vapour diagnostic) with CM1's similarity over water (surface_similarity.SIMW_PATCHES, over
+    the gust's patch), and the rain evaporated from its drops (rain_drops.RAIN_DROP_PATCHES), for a run that sets them,
+    and return each patched file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
         raise RuntimeError(f'the twilight patch belongs only in {TWILIGHT_PACKAGE}, not in {src}')
+    if free_convection and not twilight:
+        raise RuntimeError('the free-convection constant goes into the twilight copy, after the 10 m wind patch')
+    if massflux_start and not massflux:
+        raise RuntimeError("the starting speed's patch goes over the mass-flux scheme's")
+    if boundary_layer and not twilight:
+        raise RuntimeError('the boundary-layer patch goes into the twilight copy, over the free-convection patch')
+    if gust and not twilight:
+        raise RuntimeError("the gust's patch goes into the twilight copy, over the boundary-layer patch")
+    if similarity and not gust:
+        raise RuntimeError("the similarity over water goes over the gust's patch")
+    if night and not twilight:
+        raise RuntimeError("the night switch reads the twilight patch's cosine below the horizon; it goes into the "
+                           'twilight copy')
     hashes = {}
-    for name, marker, edits in PATCHES + (TWILIGHT_PATCHES if twilight else []):
+    for name, marker, edits in (PATCHES + (TWILIGHT_PATCHES if twilight else [])
+                                + (SBM_TRIGGER_PATCHES if trigger or night else [])
+                                + (SBM_DEPTH_PATCHES if depth or cap or night else [])
+                                + (SBM_CAP_PATCHES if cap or night else [])
+                                + (mff.MASSFLUX_PATCHES if massflux or boundary_layer or night or cloud_water
+                                   else [])
+                                + (mff.START_PATCHES if massflux_start else [])
+                                + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer or gust else [])
+                                + (pbf.PBL_PATCHES if boundary_layer or gust else [])
+                                + (sgf.GUST_PATCHES if gust else [])
+                                + (ssf.SIMW_PATCHES if similarity else [])
+                                + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night or cloud_water or gust else [])
+                                + (SBM_NIGHT_PATCHES if night else [])
+                                + (PLASIM_SWITCH_PATCHES if humidity_mean or cloud_water else [])
+                                + (HUS_MEAN_PATCHES if humidity_mean else [])
+                                + (cnd.CLOUD_WATER_PATCHES if cloud_water else [])
+                                + (rdr.RAIN_DROP_PATCHES if rain_drops else [])):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -958,20 +1661,298 @@ def _atomic_write(path: Path, text: str):
     tmp.replace(path)
 
 
+PLASIM_RAIN_GAMMA = 0.01   # rainmod's gamma at T21: the share of a layer's saturation deficit its rain evaporates a step
+
+
+def rain_evaporation_setting(gamma) -> dict:
+    """PlaSim's evaporation of falling rain and snow as the configuration records it: rainmod's gamma, the share of
+    each unsaturated layer's saturation deficit the precipitation passing through it evaporates in a time step (with
+    the latent cooling's correction, at most the precipitation there), in place of PlaSim's own 0.01."""
+    gamma = float(gamma)
+    if not 0.0 < gamma <= 1.0:
+        raise ValueError('the rain evaporation constant must lie above 0 and at most 1')
+    return dict(gamma=gamma, plasim_default=PLASIM_RAIN_GAMMA)
+
+
+FREE_CONVECTION_CHOICES = ('earth', 'lunar')
+
+
+def free_convection_setting(choice: str, gravity: float, pressure_pa: float) -> dict:
+    """The free-convection constant over water (FREE_CONVECTION_EDITS) as the configuration records it. 'lunar' takes
+    PlaSim's 0.0016 m s-1 K-1/3, set at Earth's gravity and sea-level pressure, to the planet's gravity and the
+    experiment's surface pressure: the tank experiments' law behind it, 0.17 (g kappa^2 / (theta_v nu))^(1/3), goes as
+    (g / p_s)^(1/3) at a given temperature, since kappa^2 / nu = k^2 / (rho c_p^2 mu) and rho theta_v = p_s / R at the
+    ground, with the conductivity k and the viscosity mu set by the temperature alone. The sea's temperature, near 300 K on
+    both worlds, and the air's composition are taken as Earth's; their factor, about (T / T_E)^0.3, is left out.
+    'earth' is PlaSim's own constant, which the configuration leaves unrecorded."""
+    if choice not in FREE_CONVECTION_CHOICES[1:]:
+        raise ValueError(f"the free-convection constant is set only for 'lunar' (PlaSim's Earth value is the default), "
+                         f"not {choice!r}")
+    if not (gravity > 0.0 and pressure_pa > 0.0):
+        raise ValueError('the free-convection constant needs a positive gravity and surface pressure')
+    factor = (gravity / STANDARD_GRAVITY * STANDARD_ATMOSPHERE / pressure_pa) ** (1.0 / 3.0)
+    return dict(choice=choice, constant=EXOPLASIM_FREE_CONVECTION * factor, earth_constant=EXOPLASIM_FREE_CONVECTION,
+                factor=factor, gravity_m_s2=float(gravity), surface_pressure_pa=float(pressure_pa),
+                earth_reference=dict(gravity_m_s2=STANDARD_GRAVITY, surface_pressure_pa=STANDARD_ATMOSPHERE),
+                scaling='(g / p_s)^(1/3), from 0.17 (g kappa^2 / (theta_v nu))^(1/3) with rho theta_v = p_s / R',
+                source='Miller, Beljaars and Palmer (1992), J. Climate 5, 418-434, eqs. (8) and (9)')
+
+
+MIXING_LENGTH_CHOICES = ('earth', 'lunar')
+BOUNDARY_LAYER_CHOICES = ('local', 'nonlocal')
+
+
+def mixing_length_setting(choice: str, gravity: float) -> dict:
+    """PlaSim's Blackadar length in vdiff as the configuration records it. 'lunar' stretches vdiff_lamm, 160 m for
+    momentum (sqrt(7.5) times that for heat and vapour), by the ratio of the gravities, the rule climate/crm/cm1_run.py
+    applies to CM1's asymptotic length l_inf: a column stretched by g_E / g keeps its velocities and pressures and
+    lengthens its lengths by that ratio. It is a scaling assumption the CM1 boxes share, with no independent support
+    yet, so runs take it as a sensitivity. 'earth' is PlaSim's own length, which the configuration leaves unrecorded."""
+    if choice not in MIXING_LENGTH_CHOICES[1:]:
+        raise ValueError(f"the mixing length is set only for 'lunar' (PlaSim's Earth value is the default), not {choice!r}")
+    if not gravity > 0.0:
+        raise ValueError('the lunar mixing length needs a positive gravity')
+    momentum = pbs.lunar_length(gravity)
+    return dict(choice=choice, momentum_m=momentum, heat_m=momentum * (3.0 * pbs.STABILITY * 0.5) ** 0.5,
+                earth_momentum_m=pbs.LAMBDA_EARTH_M, stretch=STANDARD_GRAVITY / gravity, gravity_m_s2=float(gravity),
+                rule="vdiff_lamm times g_E / g, as climate/crm/cm1_run.py stretches CM1's l_inf",
+                status='a scaling assumption the CM1 boxes share, taken as a sensitivity')
+
+
+def boundary_layer_setting(choice: str) -> dict:
+    """The nonlocal boundary layer in vdiff (pbl_scheme.py, pbl_fortran.PBL_PATCHES) as the configuration records it,
+    with every constant fluxmod's namelist receives; 'local' is PlaSim's own diffusion, left unrecorded."""
+    if choice not in BOUNDARY_LAYER_CHOICES[1:]:
+        raise ValueError(f"the boundary layer is set only for 'nonlocal' (PlaSim's local diffusion is the default), "
+                         f'not {choice!r}')
+    return dict(scheme=choice, parameters=pbf.fortran_values(),
+                sources=('Holtslag and Boville (1993), J. Climate 6, 1825-1842, as CAM3 implements it (Collins and '
+                         'others 2004, NCAR/TN-464+STR, section 4.11.2; hb_diff.F90); the entrainment flux of Hong, Noh '
+                         'and Dudhia (2006), Mon. Wea. Rev. 134, 2318-2341'),
+                code='climate/gcm/pbl_scheme.py (nonlocal_column), as Fortran in climate/gcm/pbl_fortran.py (pblcol)')
+
+
+SURFACE_GUST_CHOICES = ('none', 'beljaars', 'beljaars_similarity')
+
+
+def surface_gust_setting(choice: str) -> dict:
+    """Beljaars's gust in PlaSim's surface transfer (surface_gust.py, GUST_PATCHES) as the configuration records it:
+    beta w* joins the lowest level's wind in the bulk formulas over every surface, the wind there at least 0.1 m/s, and
+    over water the free-convection term goes; w* comes from the surface fluxes of the step before and the boundary
+    layer's depth by the nonlocal scheme's rule and constants. 'beljaars_similarity' adds CM1's surface-layer
+    similarity over ice-free water (surface_similarity.py, SIMW_PATCHES). 'none' is PlaSim's own transfer, left
+    unrecorded."""
+    if choice not in SURFACE_GUST_CHOICES[1:]:
+        raise ValueError(f"the surface gust is set only for {SURFACE_GUST_CHOICES[1:]} (PlaSim's own transfer is the "
+                         f'default), not {choice!r}')
+    similarity = {}
+    if choice == 'beljaars_similarity':
+        similarity = dict(similarity_over_water=dict(
+            over='ice-free water (land share below 1, no ice cover); land and ice keep the transfer above',
+            form="CM1's surface layer (sfclay.F, sfcmodel 2, isftcflx 0) carried to the lowest level's height",
+            constants=dict(karman=ssf.KARMAN, charnock=ssf.CHARNOCK, smooth_flow_m2_s=ssf.SMOOTH,
+                           roughness_cap_m=ssf.Z0_MAX, fairall=[ssf.Z0Q_COEFF, ssf.Z0Q_EXPONENT],
+                           heat_roughness_range_m=[ssf.Z0Q_MIN, ssf.Z0Q_MAX], least_psi_q=ssf.PSI_FLOOR,
+                           least_wind_m_s=ssf.WIND_MIN),
+            state="u*, the temperature scale and the roughness carried between steps as CM1 carries them",
+            start=dict(ssf.START), wind="the gust's, without CM1's subgrid wind",
+            check='session-tools/evaporation/rules_similarity.txt on the research drive (29 October)',
+            code='climate/gcm/surface_similarity.py (similarity_column, surface_transfer; simwcol in Fortran)'))
+    return dict(form=choice, beta=sgf.GUST_BETA, least_wind_m_s=sgf.GUST_UMIN, **similarity,
+                replaces=dict(free_convection_over_water=sgf.EXOPLASIM_CFREE, least_wind_m_s=sgf.EXOPLASIM_ZUMIN),
+                depth=dict(rule="the nonlocal scheme's bulk Richardson number with the thermals' excess (pblcol)",
+                           parameters=pbf.fortran_values()),
+                fluxes='the surface fluxes of the step before (dshfl, devap, dust3)',
+                sources=('Beljaars (1995), Q. J. R. Meteorol. Soc. 121, 255-270; CM1 sfclay (vconvc 1, least wind '
+                         '0.1 m/s); Fairall and others (2003), J. Climate 16, 571-591'),
+                code='climate/gcm/surface_gust.py (surface_transfer, gust_column; gustnl and gustcol in Fortran)')
+
+
+SBM_DEFAULTS = dict(tau_s=7200.0, rh=0.7, eps=0.0, cin_j_kg=0.0)   # Frierson's 2 h and 70%; the lunar options off
+SBM_TRIGGER_SETTINGS = ('cape_j_kg', 'trigger_eps')                   # the CAPE trigger, recorded only when set
+SBM_DEPTH_SETTINGS = ('deep_hpa', 'mixing_steps')                     # SBM_DEPTH_PATCHES' options, likewise
+SBM_CAP_SETTINGS = ('shallow_cap',)                                   # SBM_CAP_PATCHES' option, likewise
+SBM_NIGHT_SETTINGS = ('diagnostic_night',)                            # SBM_NIGHT_PATCHES' diagnostic, likewise
+SBM_NIGHT_RECORD = dict(rule='no deep convection where the geometric cosine of the Sun\'s zenith at the grid point is '
+                             'at most 0; such a column takes PlaSim\'s shallow scheme, its top held by the shallow cap '
+                             'where that is set',
+                        status='a diagnostic, never a configuration (27 October 2026)',
+                        patch='climate/gcm/exoplasim_run.py SBM_NIGHT_PATCHES (rainmod ndiagnight_bm)')
+
+
+def convection_setting(scheme='sbm', **values) -> dict:
+    """PlaSim's deep convection as the configuration records it: 'massflux' for the mass-flux scheme (massflux.py, as
+    massflux_fortran.py patches it in, rainmod's nprc 3) with every one of its parameters as the routine's defaults give
+    them, which takes no setting of the Betts-Miller scheme's; or 'sbm' for the simplified Betts-Miller scheme of the
+    Terluna patch (SBM_EDITS, rainmod's nprc 2) with its relaxation time tau_s, reference relative humidity rh, the
+    parcel's mixing per e-folding of pressure eps and its inhibition limit cin_j_kg (0: none), each defaulting to
+    SBM_DEFAULTS; left out, the configuration keeps Kuo's scheme (nprc 1). The CAPE trigger (SBM_TRIGGER_PATCHES)
+    joins the record only when cape_j_kg is set above 0: the CAPE a parcel mixing trigger_eps per e-folding of
+    pressure (default 0) must have for the column to convect deep. The options of SBM_DEPTH_PATCHES join it only
+    when set: deep_hpa above 0, the depth (hPa) the parcel's cloud must exceed for deep convection, and mixing_steps
+    above 1, the steps of the parcel's mixing within each layer, which need eps above 0. The shallow cap of
+    SBM_CAP_PATCHES joins it only when shallow_cap is true, and it needs the depth test. The night switch of
+    SBM_NIGHT_PATCHES, a diagnostic, joins it as SBM_NIGHT_RECORD only when diagnostic_night is true."""
+    if scheme == 'massflux':
+        values = dict(values)
+        start = values.pop('start', None)
+        given = sorted(k for k, v in values.items() if v not in (None, False))
+        if given:
+            raise ValueError(f'the mass-flux scheme takes none of the Betts-Miller settings: {given}')
+        out = dict(scheme='massflux', nprc=3, parameters=mff.fortran_values())
+        if start not in (None, 'ifs'):                    # the surface parcel's starting speed (massflux_fortran)
+            out['start'] = dict(rule=start, parameters=mff.start_values(dict(mff.mf.PARAMETERS, start=start)))
+        return out
+    if scheme != 'sbm':
+        raise ValueError(f"the convection scheme is 'sbm' or 'massflux' (Kuo's is the default, left out), "
+                         f"not {scheme!r}")
+    unknown = (set(values) - set(SBM_DEFAULTS) - set(SBM_TRIGGER_SETTINGS) - set(SBM_DEPTH_SETTINGS)
+               - set(SBM_CAP_SETTINGS) - set(SBM_NIGHT_SETTINGS))
+    if unknown:
+        raise ValueError(f'unknown settings of the simplified Betts-Miller scheme: {sorted(unknown)}')
+    s = {k: float(values.get(k, v) if values.get(k) is not None else v) for k, v in SBM_DEFAULTS.items()}
+    if s['tau_s'] <= 0.0 or not 0.0 < s['rh'] <= 1.0 or s['eps'] < 0.0 or s['cin_j_kg'] < 0.0:
+        raise ValueError(f'the simplified Betts-Miller settings are out of range: {s}')
+    cape, mix = values.get('cape_j_kg'), values.get('trigger_eps')
+    if cape is not None and float(cape) > 0.0:
+        s.update(cape_j_kg=float(cape), trigger_eps=float(mix or 0.0))
+        if s['trigger_eps'] < 0.0:
+            raise ValueError(f"the CAPE trigger's mixing must not be negative: {s['trigger_eps']}")
+    elif (cape is not None and float(cape) < 0.0) or (mix is not None and float(mix) != 0.0):
+        raise ValueError('the CAPE trigger takes a positive cape_j_kg, and its mixing only with it')
+    deep, steps = values.get('deep_hpa'), values.get('mixing_steps')
+    if deep is not None:
+        if not 0.0 <= float(deep) < 1000.0:
+            raise ValueError(f'the cloud-depth test takes a depth from 0 to 1000 hPa, not {deep}')
+        if float(deep) > 0.0:
+            s['deep_hpa'] = float(deep)
+    if steps is not None:
+        if int(steps) != steps or int(steps) < 1:
+            raise ValueError(f'the mixing within layers takes a whole number of steps from 1, not {steps}')
+        if int(steps) > 1:
+            if s['eps'] <= 0.0:
+                raise ValueError('the mixing within layers needs the parcel to mix (eps above 0)')
+            s['mixing_steps'] = int(steps)
+    if values.get('shallow_cap'):
+        if 'deep_hpa' not in s:
+            raise ValueError("the shallow cap holds a top within the depth test's threshold, which needs the depth test")
+        s['shallow_cap'] = True
+    if values.get('diagnostic_night'):
+        s['diagnostic_night'] = dict(SBM_NIGHT_RECORD)
+    return dict(scheme='sbm', nprc=2, **s)
+
+
+def convection_namelist(c: dict) -> list:
+    """The rainmod namelist entries (name, text) the scheme's record sets: its settings, the CAPE trigger's and the
+    cloud-depth patch's only when the record holds them, the depth in Pa as PlaSim reads it; for the mass-flux scheme
+    every parameter of its record."""
+    entries = [('NPRC', str(c['nprc']))]
+    if c.get('scheme') == 'massflux':
+        start = c['start']['parameters'] if 'start' in c else {}
+        return entries + [(name.upper(), mff.fortran_literal(value))
+                          for name, value in list(c['parameters'].items()) + list(start.items())]
+    for key, name in (('tau_s', 'TAU_BM'), ('rh', 'RH_BM'), ('eps', 'EPS_BM'), ('cin_j_kg', 'CIN_BM'),
+                      ('cape_j_kg', 'CAPE_BM'), ('trigger_eps', 'EPST_BM')):
+        if key in c:                                                  # the CAPE trigger only when set
+            entries.append((name, repr(float(c[key]))))
+    if 'deep_hpa' in c:
+        entries.append(('DPDEEP_BM', repr(float(c['deep_hpa']) * 100.0)))
+    if 'mixing_steps' in c:
+        entries.append(('NSUB_BM', str(int(c['mixing_steps']))))
+    if c.get('shallow_cap'):
+        entries.append(('NSHCAP_BM', '1'))
+    if c.get('diagnostic_night'):
+        entries.append(('NDIAGNIGHT_BM', '1'))                       # the night switch, a diagnostic
+    return entries
+
+
+def uses_depth_patch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) set an option of SBM_DEPTH_PATCHES."""
+    return bool(convection) and ((convection.get('deep_hpa') or 0.0) > 0.0
+                                 or (convection.get('mixing_steps') or 1) > 1)
+
+
+def uses_massflux(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) choose the mass-flux scheme."""
+    return bool(convection) and convection.get('scheme') == 'massflux'
+
+
+def uses_massflux_start(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) set the mass-flux scheme's starting speed."""
+    return uses_massflux(convection) and convection.get('start') not in (None, 'ifs')
+
+
+def uses_cap_patch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) set the shallow cap of SBM_CAP_PATCHES."""
+    return bool(convection) and bool(convection.get('shallow_cap'))
+
+
+def uses_night_switch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) set the night switch of SBM_NIGHT_PATCHES, a
+    diagnostic."""
+    return bool(convection) and bool(convection.get('diagnostic_night'))
+
+
+def cold_cloud_factors(path, half=None) -> dict:
+    """The central factors of a cold_cloud.py product, its top layer first, as the configuration records them: the
+    ice optics' water and crystal radius on PlaSim's top levels (ZICEWF, ZICERF), the levels below left at 1. With a
+    run's half levels (half) it refuses a product whose layers are not the run's top layers."""
+    path = Path(path)
+    product = json.loads(path.read_text())
+    if product.get('schema') != 'terluna.climate.gcm-cold-cloud-factors/1':
+        raise ValueError(f'{path} is not a cold_cloud.py product')
+    layers = sorted(product['layers'], key=lambda r: r['layer'])
+    if [r['layer'] for r in layers] != list(range(1, len(layers) + 1)):
+        raise ValueError(f'{path} does not hold the top layers from the first')
+    factors = [(float(r['factors']['water']), float(r['factors']['radius'])) for r in layers]
+    if half is not None:
+        edges = np.r_[0.0, np.asarray(half, float)]
+        for r in layers:
+            k = r['layer']
+            if abs(r['sigma_top'] - edges[k - 1]) > 1e-5 or abs(r['sigma_bottom'] - edges[k]) > 1e-5:
+                raise ValueError(f"{path}: its layer {k} spans sigma {r['sigma_top']:.5f}-{r['sigma_bottom']:.5f}, the "
+                                 f"run's {edges[k - 1]:.5f}-{edges[k]:.5f}; its factors belong to other levels")
+    if not all(0.0 < w < 1e3 and 0.0 < r < 1e2 for w, r in factors):
+        raise ValueError(f'{path} holds factors outside 0-1000 for the water or 0-100 for the radius')
+    resolved = path.resolve()
+    return dict(product=str(resolved.relative_to(ROOT)) if resolved.is_relative_to(ROOT) else str(resolved),
+                sha256=hashlib.sha256(path.read_bytes()).hexdigest()[:16], run=product['run'],
+                water_factors=[round(w, 6) for w, _ in factors], radius_factors=[round(r, 6) for _, r in factors])
+
+
 def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, twilight='full', gas_bands=True,
                   heating=False, longwave_correction=False, ice_optics=False, twilight_ledger='301k',
-                  twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield'):
-    """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces
-    the air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and
-    twilight (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the
-    ledger twilight_ledger names (TWILIGHT_LEDGERS), its terms in the clear share above each layer with
-    twilight_clear_share (TWILIGHT_CLEAR_EDITS), and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); heating
-    writes each process's temperature tendency (HEATING), longwave_correction the longwave by height
-    (LW_CORRECTION_EDITS) from the fit longwave_fit names (LONGWAVE_FITS), and ice_optics ice optics for cloud colder
-    than -38 °C (ICE_OPTICS_EDITS) with the near-infrared weights ice_weights names (ICE_WEIGHTS_EDITS), and wind10 the
-    10 m wind (WIND10_PATCHES). Each is recorded when given, and left out the configuration is the one every
-    earlier run had; the 294.9 K ledger without the clear share records the twilight as the runs of 14 to 19 October
-    did, and the 295 K fit the longwave correction as those of 17 October did."""
+                  twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
+                  cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
+                  free_convection=None, mixing_length=None, boundary_layer=None, large_scale_condensate=None,
+                  humidity_mean=False, surface_gust=None, rain_drops=None, snow=None):
+    """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces the
+    air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and twilight
+    (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the ledger
+    twilight_ledger names (TWILIGHT_LEDGERS), its terms in the clear share above each layer with twilight_clear_share
+    (TWILIGHT_CLEAR_EDITS), and gas_bands CO2 and O2 in PlaSim's sunlight (GAS_EDITS); heating writes each process's
+    temperature tendency (HEATING), longwave_correction the longwave by height (LW_CORRECTION_EDITS) from the fit
+    longwave_fit names (LONGWAVE_FITS), and ice_optics ice optics for cloud colder than -38 °C (ICE_OPTICS_EDITS) with
+    the near-infrared weights ice_weights names (ICE_WEIGHTS_EDITS), and wind10 the 10 m wind (WIND10_PATCHES);
+    cold_cloud, a cold_cloud.py product, scales the ice optics' water and radius on its layers by its central factors
+    (ICE_FACTOR_EDITS); rain_evaporation replaces PlaSim's constant for the evaporation of falling rain and snow
+    (rainmod's gamma); levels, a set of levels.LEVEL_SETS other than PlaSim's own, runs PlaSim on it, with the twilight
+    terms and the longwave correction from their products on that set (levels_product) and the cold cloud's factors
+    checked against its top layers; free_convection 'lunar' sets the free-convection constant over water for the
+    planet's gravity and surface pressure (free_convection_setting, FREE_CONVECTION_EDITS); mixing_length 'lunar'
+    stretches vdiff's Blackadar length by the gravities (mixing_length_setting) and boundary_layer 'nonlocal' runs the
+    nonlocal boundary layer (boundary_layer_setting); with either of them, or with the Betts-Miller scheme's night
+    switch (a diagnostic, SBM_NIGHT_PATCHES), the moisture diagnostics also write the vapour by process (BUDGET);
+    large_scale_condensate 'cloud' holds large-scale condensate as cloud water (condensate.py; with the moisture
+    diagnostics its own diagnostics and the vapour by process too), and humidity_mean writes the humidity's true mean
+    (HUS_MEAN_PATCHES), and surface_gust 'beljaars' Beljaars's gust in the surface transfer in place of the
+    free-convection term and the least wind (surface_gust_setting; with the moisture diagnostics the vapour by process
+    too), 'beljaars_similarity' with CM1's similarity over ice-free water as well, and rain_drops, a birth rule of rain_drops.BIRTH_RULES, the rain's evaporation from its drops' sizes and fall
+    speeds in place of gamma, which the snow keeps (rain_drops.setting), unless snow, a choice of
+    snow_sublimation.CHOICES, sublimates it by its flakes' closure and Morrison's graupel with their diagnostics and
+    shadows (snow_sublimation.setting; with the rain's drops only). Each is recorded when given, and left out the
+    configuration is the one every earlier run had; the 294.9 K ledger without the clear share records the twilight as
+    the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -983,6 +1964,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     co2 = (CO2_PPM if co2_ppm is None else co2_ppm) * 1e-6 * dry_bar
     n2_ar = dry_bar - O2_PA / 1e5 - co2
     model = {**MODEL, **(overrides or {})}
+    level_set, half = level_settings(model, overrides, levels)
     cloud_water_namelist(model['cloud_water'], planet['gravity_m_s2'])        # refuses an unknown choice
     if model['convective_day_s'] < 0:
         raise ValueError('convective_day_s must be 0 (the solar day) or a positive number of seconds')
@@ -1002,19 +1984,46 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         raise ValueError(f'twilight_ledger must be one of {tuple(TWILIGHT_LEDGERS)}')
     if longwave_fit not in LONGWAVE_FITS:
         raise ValueError(f'longwave_fit must be one of {tuple(LONGWAVE_FITS)}')
+    if large_scale_condensate not in (None, 'cloud'):
+        raise ValueError("large_scale_condensate is 'cloud' or None (PlaSim's own: rain at once)")
+    cloud = large_scale_condensate == 'cloud'
+    if surface_gust is not None and free_convection is not None:
+        raise ValueError("the gust drops the free-convection term over water; set one of them")
+    if rain_drops is not None and uses_massflux(convection):
+        raise ValueError("the rain's drops leave out the mass-flux scheme's floor on its convective water; run them "
+                         'with PlaSim\'s convection or the Betts-Miller scheme')
+    drops = rdr.setting(rain_drops) if rain_drops is not None else None     # refuses an unknown rule
+    if snow is not None and rain_drops is None:
+        raise ValueError("the snow from its flakes runs inside the rain's drops patch (nevapprec 2); set rain_drops")
+    flakes = sns.setting(snow) if snow is not None else None                  # refuses an unknown choice
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
-               exoplasim=version('exoplasim'), source=ensure_patched(True),
+               exoplasim=version('exoplasim'),
+               source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
+                                     depth=uses_depth_patch(convection), cap=uses_cap_patch(convection),
+                                     massflux=uses_massflux(convection),
+                                     free_convection=free_convection is not None,
+                                     massflux_start=uses_massflux_start(convection),
+                                     boundary_layer=mixing_length is not None or boundary_layer is not None,
+                                     night=uses_night_switch(convection), humidity_mean=bool(humidity_mean),
+                                     cloud_water=cloud, gust=surface_gust is not None,
+                                     rain_drops=rain_drops is not None,
+                                     similarity=surface_gust == 'beljaars_similarity'),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
                gases_bar=dict(pN2=n2_ar / (1 + AR_PER_N2), pO2=O2_PA / 1e5, pAr=n2_ar * AR_PER_N2 / (1 + AR_PER_N2),
                               pCO2=co2))
+    if level_set != lv.DEFAULT:
+        cfg['levels'] = dict(name=level_set, half_levels=[float(x) for x in half],
+                             full_levels=[float(x) for x in lv.full_levels(half)],
+                             plasim_namelist=dict(lv.namelist_entries(level_set)),
+                             set_by='climate/gcm/levels.py (LEVEL_SETS)')
     if co2_ppm is not None:
         cfg['co2_ppm'] = co2_ppm
     if top_infrared is not None:
         cfg['top_infrared_w_m2'] = dict(day=float(top_infrared[0]), night=float(top_infrared[1]))
     if longwave_correction:
-        fit = LONGWAVE_FITS[longwave_fit]
+        fit = longwave_product(longwave_fit, level_set, half.size)
         product = json.loads(fit.read_text())
         cfg['longwave_correction'] = dict(product=str(fit.relative_to(ROOT)),
                                           sha256=hashlib.sha256(fit.read_bytes()).hexdigest()[:16],
@@ -1027,6 +2036,35 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
             cfg['ice_optics'].update(near_ir_weights=list(pio.SHIELD_NIR_WEIGHTS),
                                      weights_source="the design shield's sunlight, written as ZICEW (world-crafting's "
                                                     'patch 11, lab branch 79ea224)')
+    if rain_evaporation is not None:
+        cfg['rain_evaporation'] = rain_evaporation_setting(rain_evaporation)
+    if free_convection is not None:
+        cfg['free_convection'] = free_convection_setting(free_convection, planet['gravity_m_s2'], exp['pressure_pa'])
+    if mixing_length is not None:
+        cfg['mixing_length'] = mixing_length_setting(mixing_length, planet['gravity_m_s2'])
+    if boundary_layer is not None:
+        cfg['boundary_layer'] = boundary_layer_setting(boundary_layer)
+    if surface_gust is not None:
+        cfg['surface_gust'] = surface_gust_setting(surface_gust)
+    if drops is not None:
+        cfg['rain_drops'] = drops
+    if flakes is not None:
+        cfg['snow'] = flakes
+        cfg['rain_drops'] = dict(drops, snow='sublimates by its flakes and graupel in place of gamma (the snow entry)')
+        cfg['output'] = cfg['output'] + [name for name, _, _ in sns.DIAGNOSTICS.values()]
+    if cloud:
+        cfg['large_scale_condensate'] = cnd.setting()
+    if humidity_mean:
+        cfg['humidity_mean'] = dict(code=HUS_MEAN_CODE, name=HUS_MEAN[0],
+                                    field='the gridpoint humidity PlaSim adds every step (outmod aadq)',
+                                    patch='climate/gcm/exoplasim_run.py HUS_MEAN_PATCHES (pumamod nhusmean)')
+        cfg['output'] = cfg['output'] + [HUS_MEAN[0]]
+    if convection is not None:                       # the Betts-Miller or the mass-flux scheme in Kuo's place
+        cfg['convection'] = convection_setting(**convection)
+    if cold_cloud is not None:
+        if not ice_optics:
+            raise ValueError("the cold cloud's factors act on the ice optics, which need --ice-optics")
+        cfg['ice_optics']['cold_cloud'] = cold_cloud_factors(cold_cloud, half=half)
     if wind10:
         cfg['wind10'] = dict(codes=[165, 166],
                              profile="Geleyn's (1988) profile through the lowest layer, from the drag PlaSim uses with "
@@ -1035,12 +2073,27 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if heating:
         cfg['heating_diagnostics'] = True
         cfg['output'] = cfg['output'] + [name for name, _ in HEATING.values()]
+    if moisture:
+        if not heating:
+            raise ValueError('the moisture diagnostics come with the heating diagnostics, which need --heating-diagnostics')
+        cfg['moisture_diagnostics'] = True
+        cfg['output'] = cfg['output'] + [name for name, _ in MOISTENING.values()] + ['wap']
+        if (mixing_length is not None or boundary_layer is not None or uses_night_switch(convection) or cloud
+                or surface_gust is not None):
+            cfg['budget_diagnostics'] = sorted(BUDGET)
+            cfg['output'] = cfg['output'] + [name for name, _, _ in BUDGET.values()]
+        if cloud:
+            cfg['cloud_water_diagnostics'] = sorted(cnd.DIAGNOSTICS)
+            cfg['output'] = cfg['output'] + [name for name, _, _ in cnd.DIAGNOSTICS.values()]
     if twilight is not None:
         ledger = TWILIGHT_LEDGERS[twilight_ledger]
+        terms = ledger if level_set == lv.DEFAULT else levels_product(ledger, level_set)
         lunar = json.loads(SLANT_PRODUCT.read_text())['magnification']
-        cfg['twilight'] = dict(mode=twilight, product=str(ledger.relative_to(ROOT)),
-                               sha256=hashlib.sha256(ledger.read_bytes()).hexdigest()[:16],
+        cfg['twilight'] = dict(mode=twilight, product=str(terms.relative_to(ROOT)),
+                               sha256=hashlib.sha256(terms.read_bytes()).hexdigest()[:16],
                                magnification=[lunar['a'], lunar['b'], lunar['c']])
+        if terms != ledger:
+            cfg['twilight']['ledger'] = str(ledger.relative_to(ROOT))
         if ledger != SLANT_PRODUCT:
             cfg['twilight'].update(slant_product=str(SLANT_PRODUCT.relative_to(ROOT)),
                                    slant_sha256=hashlib.sha256(SLANT_PRODUCT.read_bytes()).hexdigest()[:16])
@@ -1056,6 +2109,47 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                 mass_fractions=gas_mass_fractions(cfg['gases_bar']),
                                 magnification_air=[air['a'], air['b'], air['c']])
     return cfg
+
+
+def level_settings(model: dict, overrides: dict | None, levels: str | None) -> tuple:
+    """The level set a run takes (levels.LEVEL_SETS, PlaSim's own when None) and its half levels, setting the model's
+    layer count to the set's; a layer count other than the set's is refused, so per-layer inputs always match."""
+    level_set = levels or lv.DEFAULT
+    half = lv.half_levels(level_set)                                           # refuses an unknown set
+    if level_set == lv.DEFAULT and model['layers'] != half.size:
+        raise ValueError(f"{model['layers']} layers need a level set of as many (levels); PlaSim's own has {half.size}")
+    if level_set != lv.DEFAULT:
+        if (overrides or {}).get('layers', half.size) != half.size:
+            raise ValueError(f"level set {level_set} has {half.size} layers, not {overrides['layers']}")
+        model['layers'] = half.size
+    return level_set, half
+
+
+def levels_product(product: Path, level_set: str) -> Path:
+    """A 10-level input product's counterpart on another level set, written beside it as <name>_<set>.json by the
+    script that wrote it: the twilight ledger's GCM terms (twilight.py levels) and the longwave correction
+    (plasim_longwave.py levels)."""
+    path = product.with_name(f'{product.stem}_{level_set}.json')
+    if not path.exists():
+        raise FileNotFoundError(f'{path.relative_to(ROOT)} is missing: the script that wrote {product.name} writes it for '
+                                f'level set {level_set} (twilight.py levels, plasim_longwave.py levels)')
+    return path
+
+
+def longwave_product(longwave_fit: str, level_set: str, layers: int) -> Path:
+    """The longwave correction a run on level_set reads (LONGWAVE_FITS): a fit made on that set's own columns as it
+    is, a fit on PlaSim's ten levels carried onto the set (levels_product); a fit made on another set is refused, and
+    so is a correction without a value for each of the run's layers and the ground."""
+    fit = LONGWAVE_FITS[longwave_fit]
+    product = json.loads(fit.read_text())
+    own = product.get('levels', {}).get('name', lv.DEFAULT)                  # the set the fit was made on
+    if own != level_set and own != lv.DEFAULT:
+        raise ValueError(f'{fit.name} was fitted on level set {own}, and the run takes level set {level_set}')
+    path = fit if own == level_set else levels_product(fit, level_set)
+    correction = json.loads(path.read_text())['correction']
+    if any(len(correction[k]) != layers + 1 for k in ('land', 'sea', 'tref')):
+        raise ValueError(f'{path.name} does not hold a value for each of {layers} layers and the ground')
+    return path
 
 
 def gas_mass_fractions(gases: dict) -> dict:
@@ -1227,6 +2321,8 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     # A fixed seed makes runs repeatable; the generator's state then travels in every restart file.
     model._edit_namelist('plasim_namelist', 'SEED', str(m['seed']))
     model._edit_namelist('plasim_namelist', 'NSTPW', str(m['steps_per_lunar_day'] // m['writes_per_lunar_day']))
+    for name, text in lv.namelist_entries(cfg.get('levels', {}).get('name', lv.DEFAULT)):
+        model._edit_namelist('plasim_namelist', name, text)               # a level set's half levels and top friction
     model._edit_namelist('radmod_namelist', 'RAYSCALE', str(m['rayleigh_scale']))
     model._edit_namelist('radmod_namelist', 'NSUNCLOCK', str(SUN_CLOCKS.index(m['sun_clock'])))
     model._edit_namelist('radmod_namelist', 'SWH2OSCALE', str(m['sw_water_absorption']))
@@ -1236,6 +2332,17 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     model._edit_namelist('rainmod_namelist', 'CWSCALE', str(scale))
     model._edit_namelist('plasim_namelist', 'NDIAGCF', str(m['clear_sky']))
     model._edit_namelist('rainmod_namelist', 'CONVDAY', str(float(m['convective_day_s'])))
+    if 'rain_evaporation' in cfg:
+        model._edit_namelist('rainmod_namelist', 'GAMMA', repr(float(cfg['rain_evaporation']['gamma'])))
+    if 'convection' in cfg:
+        for name, text in convection_namelist(cfg['convection']):
+            model._edit_namelist('rainmod_namelist', name, text)
+    if 'large_scale_condensate' in cfg:                               # condensate.py's cloud water
+        model._edit_namelist('plasim_namelist', 'NCWAT', '1')
+        for name, text in cnd.namelist_values(cfg['large_scale_condensate']['parameters']).items():
+            model._edit_namelist('rainmod_namelist', name, text)
+    if 'humidity_mean' in cfg:
+        model._edit_namelist('plasim_namelist', 'NHUSMEAN', '1')
     if m['surface_cloud_rcrit'] > 0.0:                                 # the lowest layer is the last of RCRIT
         model._edit_namelist('rainmod_namelist', f"RCRIT({m['layers']})", str(float(m['surface_cloud_rcrit'])))
     if 'top_infrared_w_m2' in cfg:
@@ -1257,8 +2364,36 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         if cfg['ice_optics'].get('weights_source'):
             for i, w in enumerate(cfg['ice_optics']['near_ir_weights'], 1):
                 model._edit_namelist('radmod_namelist', f'ZICEW({i})', repr(float(w)))
+        factors = cfg['ice_optics'].get('cold_cloud')
+        if factors:
+            for i, (w, r) in enumerate(zip(factors['water_factors'], factors['radius_factors']), 1):
+                model._edit_namelist('radmod_namelist', f'ZICEWF({i})', repr(float(w)))
+                model._edit_namelist('radmod_namelist', f'ZICERF({i})', repr(float(r)))
     if 'wind10' in cfg:
         model._edit_namelist('fluxmod_namelist', 'NWIND10', '1')
+    if 'free_convection' in cfg:
+        model._edit_namelist('fluxmod_namelist', 'CFREE', repr(float(cfg['free_convection']['constant'])))
+    if 'mixing_length' in cfg:
+        model._edit_namelist('fluxmod_namelist', 'VDIFF_LAMM', repr(float(cfg['mixing_length']['momentum_m'])))
+    if 'boundary_layer' in cfg:
+        model._edit_namelist('fluxmod_namelist', 'NLPBL', '1')
+        for name, value in cfg['boundary_layer']['parameters'].items():
+            model._edit_namelist('fluxmod_namelist', name.upper(), repr(float(value)))
+    if 'rain_drops' in cfg:
+        model._edit_namelist('rainmod_namelist', 'NEVAPPREC', '2')
+        for name, value in cfg['rain_drops']['namelist'].items():
+            text = str(value) if isinstance(value, int) else repr(float(value))
+            model._edit_namelist('rainmod_namelist', name.upper(), text)
+    if 'snow' in cfg:
+        for name, value in cfg['snow']['namelist'].items():
+            text = str(value) if isinstance(value, int) else repr(float(value))
+            model._edit_namelist('rainmod_namelist', name.upper(), text)
+    if 'surface_gust' in cfg:
+        model._edit_namelist('fluxmod_namelist', 'NGUST', '1')
+        model._edit_namelist('fluxmod_namelist', 'GUST_BETA', repr(float(cfg['surface_gust']['beta'])))
+        model._edit_namelist('fluxmod_namelist', 'GUST_UMIN', repr(float(cfg['surface_gust']['least_wind_m_s'])))
+        if 'similarity_over_water' in cfg['surface_gust']:
+            model._edit_namelist('fluxmod_namelist', 'NSIMW', '1')
     if cfg.get('twilight', {}).get('magnification'):
         for i, x in enumerate(cfg['twilight']['magnification'], 1):
             model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
@@ -1281,6 +2416,26 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         for code, (name, long_name) in HEATING.items():
             pyburn.ilibrary[str(code)] = [name, long_name, 'K s-1']
             pyburn.slibrary[name] = [code, long_name, 'K s-1']
+    if cfg.get('moisture_diagnostics'):
+        for code, (name, long_name) in MOISTENING.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, 'm s-1']
+            pyburn.slibrary[name] = [code, long_name, 'm s-1']
+    if cfg.get('budget_diagnostics'):
+        for code, (name, long_name, units) in BUDGET.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, units]
+            pyburn.slibrary[name] = [code, long_name, units]
+    if cfg.get('cloud_water_diagnostics'):                            # four slots beyond PlaSim's 21
+        model._edit_namelist('plasim_namelist', 'NDIAGGP3D', str(cnd.EXTRA_SLOTS))
+        for code, (name, long_name, units) in cnd.DIAGNOSTICS.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, units]
+            pyburn.slibrary[name] = [code, long_name, units]
+    if 'snow' in cfg:
+        for code, (name, long_name, units) in sns.DIAGNOSTICS.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, units]
+            pyburn.slibrary[name] = [code, long_name, units]
+    if 'humidity_mean' in cfg:
+        pyburn.ilibrary[str(HUS_MEAN_CODE)] = list(HUS_MEAN)
+        pyburn.slibrary[HUS_MEAN[0]] = [HUS_MEAN_CODE, HUS_MEAN[1], HUS_MEAN[2]]
     model.cfgpostprocessor(ftype='regular', extension='.nc', variables=cfg['output'],
                            times=m['writes_per_lunar_day'] * m['lunar_days_per_year'], timeaverage=True,
                            interpolatetimes=False)
@@ -1448,11 +2603,20 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         top_infrared: tuple | None = None, twilight: str | None = 'full', gas_bands: bool = True,
         heating: bool = False, longwave_correction: bool = False, ice_optics: bool = False,
         twilight_ledger: str = '301k', twilight_clear_share: bool = True, longwave_fit: str = '301k',
-        wind10: bool = False, ice_weights: str = 'shield') -> int:
+        wind10: bool = False, ice_weights: str = 'shield', cold_cloud: str | None = None,
+        rain_evaporation: float | None = None, moisture: bool = False, convection: dict | None = None,
+        levels: str | None = None, free_convection: str | None = None, mixing_length: str | None = None,
+        boundary_layer: str | None = None, large_scale_condensate: str | None = None,
+        humidity_mean: bool = False, surface_gust: str | None = None, rain_drops: str | None = None,
+        snow: str | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
-                        ice_weights=ice_weights)
+                        ice_weights=ice_weights, cold_cloud=cold_cloud, rain_evaporation=rain_evaporation,
+                        moisture=moisture, convection=convection, levels=levels, free_convection=free_convection,
+                        mixing_length=mixing_length, boundary_layer=boundary_layer,
+                        large_scale_condensate=large_scale_condensate, humidity_mean=humidity_mean,
+                        surface_gust=surface_gust, rain_drops=rain_drops, snow=snow)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -1571,19 +2735,102 @@ def main(argv=None) -> int:
                              'run key)')
     parser.add_argument('--longwave-fit', choices=tuple(LONGWAVE_FITS), default='301k',
                         help='which fit --longwave-correction adds: the refit on the 301 K columns (the standard since '
-                             '2026-10-19) or the fit near 295 K the runs of 17 October took (part of the run key)')
+                             '2026-10-19), the fit near 295 K the runs of 17 October took, or l15_provisional, refitted '
+                             'on the 15-level month trial for runs on l15 (part of the run key)')
     parser.add_argument('--ice-optics', action='store_true',
                         help='ice optics for cloud colder than -38 C (plasim_ice_optics.py; part of the run key)')
     parser.add_argument('--ice-weights', choices=('shield', 'stock'), default='shield',
                         help="the ice optics' near-infrared weights: the shares of the design shield's sunlight "
                              "(ZICEW, the standard since 2026-10-19) or the unfiltered Sun's the earlier runs took "
                              '(part of the run key)')
+    parser.add_argument('--cold-cloud', metavar='PRODUCT',
+                        help="a cold_cloud.py product whose central factors scale the ice optics' water and crystal "
+                             'radius on its layers, carrying them to lunar gravity (ICE_FACTOR_EDITS; needs '
+                             '--ice-optics; part of the run key)')
+    parser.add_argument('--convection', choices=('kuo', 'sbm', 'massflux'), default='kuo',
+                        help="PlaSim's deep convection: Kuo's scheme, its own, the simplified Betts-Miller scheme of "
+                             'the Terluna patch (SBM_EDITS), or the mass-flux scheme (massflux_fortran.py; part of the '
+                             'run key)')
+    parser.add_argument('--massflux-start', choices=tuple(mff.START_CHOICES), default='ifs',
+                        help="the mass-flux scheme's surface parcel's starting speed: the IFS's (the larger of 1 m/s "
+                             "and the excess's velocity scale) or c_start times the boundary layer's convective velocity "
+                             "w* (massflux_fortran.START_PATCHES; part of the run key)")
+    parser.add_argument('--sbm-tau', type=float, metavar='SECONDS', help='its relaxation time (7200)')
+    parser.add_argument('--sbm-rh', type=float, metavar='SHARE', help='its reference relative humidity (0.7)')
+    parser.add_argument('--sbm-eps', type=float, help="its parcel's mixing per e-folding of pressure (0)")
+    parser.add_argument('--sbm-cin', type=float, metavar='J_KG', help="its limit on the parcel's inhibition (0: none)")
+    parser.add_argument('--sbm-cape', type=float, metavar='J_KG',
+                        help='its CAPE trigger: deep convection only where a parcel has this CAPE (0: none; '
+                             'SBM_TRIGGER_PATCHES)')
+    parser.add_argument('--sbm-trigger-eps', type=float, metavar='EPS',
+                        help="the CAPE trigger's parcel mixing per e-folding of pressure (0)")
+    parser.add_argument('--sbm-deep-hpa', type=float, metavar='HPA',
+                        help="its cloud-depth test: deep convection only where the parcel's cloud, from its "
+                             'condensation level to its top, is thicker than this (0: none; SBM_DEPTH_PATCHES)')
+    parser.add_argument('--sbm-mixing-steps', type=int, metavar='N',
+                        help="the parcel's mixing within each layer in N steps of log pressure (1: one a layer; "
+                             'needs --sbm-eps; SBM_DEPTH_PATCHES)')
+    parser.add_argument('--sbm-diagnostic-night', action='store_true',
+                        help='a diagnostic, never a configuration: no deep convection in the simplified Betts-Miller '
+                             "scheme wherever the Sun is down (the geometric cosine of its zenith at the grid point at "
+                             "most 0), such columns taking PlaSim's shallow scheme (SBM_NIGHT_PATCHES; with "
+                             '--moisture-diagnostics it writes the vapour by process; part of the run key)')
+    parser.add_argument('--sbm-shallow-cap', action='store_true',
+                        help="with --sbm-deep-hpa, a shallow cloud's top no higher than that depth above its own base, "
+                             "in place of PlaSim's 700 hPa (SBM_CAP_PATCHES; part of the run key)")
+    parser.add_argument('--levels', choices=tuple(lv.LEVEL_SETS), default=lv.DEFAULT,
+                        help="PlaSim's levels: its own ten, or a set of levels.py (l14: fourteen, more of them near "
+                             'the ground; l15: those and a bottom layer 0.6 km thick), which needs a restart on the '
+                             'same levels (levels.py restart; part of the run key)')
+    parser.add_argument('--rain-evaporation', type=float, metavar='GAMMA',
+                        help="PlaSim's constant for the evaporation of falling rain and snow (rainmod's gamma, "
+                             f'{PLASIM_RAIN_GAMMA} its own; part of the run key)')
     parser.add_argument('--wind10', action='store_true',
                         help="the 10 m wind on Geleyn's profile from the lowest layer's drag, codes 165 and 166 "
                              '(WIND10_PATCHES; part of the run key)')
+    parser.add_argument('--free-convection', choices=FREE_CONVECTION_CHOICES, default='earth',
+                        help="the free-convection constant in the heat and vapour transfer over water (Miller and "
+                             "others 1992): PlaSim's Earth value, 0.0016 m s-1 K-1/3, or the lunar one, scaled as "
+                             "(g / p_s)^(1/3) to the Moon's gravity and the surface pressure (FREE_CONVECTION_EDITS; "
+                             'part of the run key)')
+    parser.add_argument('--mixing-length', choices=MIXING_LENGTH_CHOICES, default='earth',
+                        help="Blackadar's asymptotic mixing length in PlaSim's vertical diffusion: its Earth value, "
+                             '160 m for momentum, or that stretched by the ratio of the gravities, a sensitivity '
+                             '(mixing_length_setting; part of the run key)')
+    parser.add_argument('--boundary-layer', choices=BOUNDARY_LAYER_CHOICES, default='local',
+                        help="PlaSim's local vertical diffusion alone, or the nonlocal boundary layer beneath it "
+                             '(pbl_scheme.py; pbl_fortran.PBL_PATCHES; part of the run key)')
+    parser.add_argument('--surface-gust', choices=SURFACE_GUST_CHOICES, default='none',
+                        help="Beljaars's gust, the boundary layer's convective velocity, added to the wind in PlaSim's "
+                             'surface transfer over every surface in place of the free-convection term over water and '
+                             'the least wind of 1 m/s (surface_gust.py; GUST_PATCHES; part of the run key); '
+                             "beljaars_similarity adds CM1's surface-layer similarity over ice-free water "
+                             '(surface_similarity.py; SIMW_PATCHES)')
+    parser.add_argument('--large-scale-condensate', choices=('rain', 'cloud'), default='rain',
+                        help="what PlaSim's large-scale condensation makes of its condensate: rain at once, as "
+                             'PlaSim does, or cloud water held in its layer above freezing, evaporated where the air '
+                             'is unsaturated and turned to rain by autoconversion and accretion (condensate.py; '
+                             'CLOUD_WATER_PATCHES; part of the run key)')
+    parser.add_argument('--rain-drops', choices=('none',) + tuple(rdr.BIRTH_RULES), default='none',
+                        help="PlaSim's falling rain evaporated from its drops' sizes and fall speeds at lunar gravity "
+                             'in place of gamma, which the snow keeps, with the named rule for the size of new rain '
+                             '(rain_drops.py; RAIN_DROP_PATCHES; part of the run key)')
+    parser.add_argument('--snow', choices=('none',) + tuple(sns.CHOICES), default='none',
+                        help="PlaSim's snow sublimated by its flakes' closure and Morrison's graupel in place of "
+                             'gamma, with the rain from its drops: flakes (its shadows on), flakes_highest_top (the '
+                             "snow top at its highest forming layer) or flakes_no_shadows (snow_sublimation.py; part "
+                             'of the run key)')
+    parser.add_argument('--humidity-mean', action='store_true',
+                        help="write the humidity's true 3-day mean as hus_mean, code 233, where a year file's hus "
+                             "holds the humidity at each interval's start (HUS_MEAN_PATCHES; year_files.py; part of "
+                             'the run key)')
     parser.add_argument('--heating-diagnostics', action='store_true',
                         help="PlaSim's temperature tendency of each process at every level, codes 21-29 (part of "
                              'the run key)')
+    parser.add_argument('--moisture-diagnostics', action='store_true',
+                        help="with --heating-diagnostics, the water vapour each layer gains from the physics, the "
+                             "negative-humidity fix and the dynamics, codes 31, 32, 40 and 41, and omega (part of the "
+                             'run key)')
     parser.add_argument('--twilight', choices=TWILIGHT_MODES + ('none',), default='full',
                         help="the curved air's sunlight and infrared from the twilight ledger: the curved "
                              "parts, all of it (full, the standard since 2026-10-14), the Moon's slant path alone, or "
@@ -1609,11 +2856,37 @@ def main(argv=None) -> int:
         if key not in MODEL:
             parser.error(f'unknown model setting {key}')
         overrides[key] = type(MODEL[key])(value)
+    if args.sbm_shallow_cap and args.convection != 'sbm':
+        parser.error('--sbm-shallow-cap belongs to the simplified Betts-Miller scheme (--convection sbm)')
+    if args.sbm_diagnostic_night and args.convection != 'sbm':
+        parser.error('--sbm-diagnostic-night, a diagnostic, belongs to the simplified Betts-Miller scheme '
+                     '(--convection sbm)')
+    if args.massflux_start != 'ifs' and args.convection != 'massflux':
+        parser.error('--massflux-start belongs to the mass-flux scheme (--convection massflux)')
+    sbm_given = [k for k in ('sbm_tau', 'sbm_rh', 'sbm_eps', 'sbm_cin', 'sbm_cape', 'sbm_trigger_eps', 'sbm_deep_hpa',
+                             'sbm_mixing_steps') if getattr(args, k) is not None]
+    if sbm_given and args.convection != 'sbm':
+        parser.error(f'{sbm_given} belong to the simplified Betts-Miller scheme (--convection sbm)')
+    convection = None
+    if args.convection == 'sbm':
+        convection = dict(tau_s=args.sbm_tau, rh=args.sbm_rh, eps=args.sbm_eps, cin_j_kg=args.sbm_cin,
+                          cape_j_kg=args.sbm_cape, trigger_eps=args.sbm_trigger_eps, deep_hpa=args.sbm_deep_hpa,
+                          mixing_steps=args.sbm_mixing_steps, shallow_cap=args.sbm_shallow_cap or None,
+                          diagnostic_night=args.sbm_diagnostic_night or None)
+    elif args.convection == 'massflux':
+        convection = dict(scheme='massflux', start=None if args.massflux_start == 'ifs' else args.massflux_start)
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
                args.longwave_correction, args.ice_optics, args.twilight_ledger, args.twilight_clear_share,
-               args.longwave_fit, args.wind10, args.ice_weights)
+               args.longwave_fit, args.wind10, args.ice_weights, args.cold_cloud, args.rain_evaporation,
+               args.moisture_diagnostics, convection, args.levels,
+               None if args.free_convection == 'earth' else args.free_convection,
+               None if args.mixing_length == 'earth' else args.mixing_length,
+               None if args.boundary_layer == 'local' else args.boundary_layer,
+               None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean,
+               None if args.surface_gust == 'none' else args.surface_gust,
+               None if args.rain_drops == 'none' else args.rain_drops, None if args.snow == 'none' else args.snow)
 
 
 if __name__ == '__main__':

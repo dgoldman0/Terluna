@@ -1,0 +1,107 @@
+{
+ "schema": "terluna.climate.gcm-cloud-water-night/1",
+ "runs_compared": {
+  "cloud": "A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night_cloud",
+  "plain": "A28R_301k_cold_sbm_rh07_deep200_l15cap_diagnostic_night",
+  "years": [
+   0,
+   1
+  ],
+  "cm1": {
+   "sea_afternoon": 2.23,
+   "land_afternoon": 8.59
+  }
+ },
+ "runs": {
+  "cloud": {
+   "sea_rain_after_midnight": 2.506,
+   "layer_to_precipitation_after_midnight": 2.065,
+   "sea_afternoon_rain": 3.015,
+   "land_rain": {
+    "sunrise-noon": 0.20963461464439723,
+    "noon-sunset": 17.354099104839577,
+    "sunset-midnight": 0.3914108532203341,
+    "midnight-sunrise": 0.0022464212640072034
+   },
+   "globe": {
+    "toa_net_w_m2": -3.91,
+    "precipitation_mm_day": 2.1719999999999997,
+    "surface_k": 297.845
+   },
+   "sea_cloud_water_after_midnight_kg_m2": 0.8450000000000001,
+   "circulation_heating_5_12_km_w_m2": -17.421
+  },
+  "plain": {
+   "sea_rain_after_midnight": 2.197,
+   "layer_to_precipitation_after_midnight": 1.545,
+   "sea_afternoon_rain": 2.469,
+   "land_rain": {
+    "sunrise-noon": 0.9902708640789997,
+    "noon-sunset": 14.855306246952667,
+    "sunset-midnight": 0.06030973381553635,
+    "midnight-sunrise": 0.0005839882177838263
+   },
+   "globe": {
+    "toa_net_w_m2": -3.41,
+    "precipitation_mm_day": 2.191,
+    "surface_k": 297.92499999999995
+   },
+   "sea_cloud_water_after_midnight_kg_m2": null,
+   "circulation_heating_5_12_km_w_m2": -8.689
+  }
+ },
+ "checks": {
+  "P1": {
+   "value": 2.506,
+   "limit": 1.0985,
+   "met": false
+  },
+  "P2": {
+   "value": 2.065,
+   "limit": 0.7725,
+   "met": false
+  },
+  "S1_sea": {
+   "value": 3.015,
+   "low": 1.115,
+   "high": 3.3449999999999998,
+   "met": true
+  },
+  "S1_land": {
+   "value": 8.764099104839577,
+   "limit": 6.265306246952667,
+   "met": false
+  },
+  "S2_top": {
+   "value": 0.5,
+   "limit": 1.0,
+   "met": true
+  },
+  "S2_rain": {
+   "value": 0.008671839342765941,
+   "limit": 0.05,
+   "met": true
+  },
+  "S2_ground": {
+   "value": 0.07999999999992724,
+   "limit": 0.5,
+   "met": true
+  },
+  "S3": {
+   "value": 0.8450000000000001,
+   "limit": 1.0,
+   "met": true
+  }
+ },
+ "passes": false,
+ "primary_passes": false,
+ "rule": "set before the run (climate/gcm/README.md, cloud water): P1 the sea's rain after midnight at most half the run without cloud water's; P2 the water 5.2-11.8 km hands to the precipitation after midnight at most half; S1 the sea's afternoon rain within half to one and a half times CM1's and the land's afternoon no further from CM1's; S2 the top within 1 W/m2, the global rain within 5% and the ground within 0.5 K of the run without; S3 the sea's column cloud water after midnight at most 1.0 kg/m2",
+ "evidence": "One realization of two years each from the fifteen-level restart; the sea after midnight from night_water.py (its snapshots and fitted means), the land's afternoon from the 3-day means by quarter at the land box's cells, the globe from the yearly records.",
+ "producer": {
+  "domain": "climate",
+  "script": "/media/projectspace/terluna-research/session-tools/night_water/stop_rule.py",
+  "script_sha256": "b8c076b527a9d991",
+  "night_water": "climate/results/gcm/night_water_l15.json",
+  "night_water_sha256": "f3f51ba5d181d148"
+ }
+}

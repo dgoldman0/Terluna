@@ -146,7 +146,8 @@ class RunnerTests(unittest.TestCase):
 
     def test_the_twilight_clear_share_follows_the_patches_it_extends(self):
         # It extends the module, namelist and broadcast lines and the subroutines the twilight, longwave and ice patches
-        # wrote, keeps PlaSim's lines short, and comes last of the radiation's own patches; the ice weights follow it.
+        # wrote, keeps PlaSim's lines short, and comes last of the radiation's own patches; the ice weights follow it,
+        # then the 10 m wind and the cold cloud's factors.
         at = [edits for _, _, edits in er.TWILIGHT_PATCHES].index(er.TWILIGHT_CLEAR_EDITS)
         written = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:at] for _, new in edits)
         for old, _ in er.TWILIGHT_CLEAR_EDITS:
@@ -155,7 +156,7 @@ class RunnerTests(unittest.TestCase):
             self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
         self.assertIs(er.TWILIGHT_PATCHES[at][2], er.TWILIGHT_CLEAR_EDITS)
         self.assertEqual([name for name, _, _ in er.TWILIGHT_PATCHES[at + 1:]],
-                         ['radmod.f90', 'plasimmod.f90', 'fluxmod.f90', 'outmod.f90'])
+                         ['radmod.f90', 'plasimmod.f90', 'fluxmod.f90', 'outmod.f90', 'radmod.f90'])
         self.assertIn('ntwlclear', ''.join(new for _, new in er.TWILIGHT_CLEAR_EDITS))
 
     def test_the_twilight_clear_share_patch_leaves_the_model_as_it_was_when_off(self):
@@ -302,6 +303,74 @@ class RunnerTests(unittest.TestCase):
             self.assertEqual(inspect.signature(f).parameters['ice_weights'].default, 'shield')
             self.assertIs(inspect.signature(f).parameters['wind10'].default, False)
 
+    def test_the_cold_cloud_factors_scale_the_ice_optics_by_level_from_a_default_of_one(self):
+        # On what the ice, clear-share and weights patches wrote: ZICEWF and ZICERF, read and broadcast, default 1,
+        # scaling the water path and the radius in both the sunlight's and the infrared's ice routines.
+        self.assertEqual(er.TWILIGHT_PATCHES[-1][2], er.ICE_FACTOR_EDITS)
+        text = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:-1] for _, new in edits)
+        for old, new in er.ICE_FACTOR_EDITS:
+            self.assertEqual(text.count(old), 1, old)
+            text = text.replace(old, new)
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        self.assertIn('real :: zicewf(NLEV) = 1.0', text)
+        self.assertIn('real :: zicerf(NLEV) = 1.0', text)
+        self.assertIn(',ntwlclear,zicew,zicewf,zicerf', text)
+        self.assertIn('call mpbcrn(zicewf,NLEV)', text)
+        self.assertIn('call mpbcrn(zicerf,NLEV)', text)
+        self.assertEqual(text.count('*zicewf(jlev)'), 2)               # the water path, in sunlight and infrared
+        self.assertEqual(text.count('*zicerf(jlev)'), 2)               # the radius, likewise
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertIsNone(inspect.signature(f).parameters['cold_cloud'].default)
+
+    def test_the_cold_cloud_factors_come_from_a_product_top_layer_first(self):
+        import json
+        import tempfile
+        layers = [dict(layer=2, factors=dict(water=30.0, radius=1.6)), dict(layer=1, factors=dict(water=7.0, radius=0.6))]
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / 'cold_cloud_test.json'
+            path.write_text(json.dumps(dict(schema='terluna.climate.gcm-cold-cloud-factors/1', run='X', layers=layers)))
+            got = er.cold_cloud_factors(path)
+            self.assertEqual((got['water_factors'], got['radius_factors'], got['run']), ([7.0, 30.0], [0.6, 1.6], 'X'))
+            path.write_text(json.dumps(dict(schema='terluna.climate.gcm-cold-cloud-factors/1', run='X', layers=layers[:1])))
+            with self.assertRaises(ValueError):                         # a product must start at the top layer
+                er.cold_cloud_factors(path)
+            path.write_text(json.dumps(dict(schema='other', run='X', layers=layers)))
+            with self.assertRaises(ValueError):
+                er.cold_cloud_factors(path)
+
+    def test_the_rain_evaporation_constant_is_recorded_only_when_given(self):
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertIsNone(inspect.signature(f).parameters['rain_evaporation'].default)
+        got = er.rain_evaporation_setting(0.02)
+        self.assertEqual((got['gamma'], got['plasim_default']), (0.02, 0.01))
+        for bad in (0.0, -0.01, 1.5):
+            with self.assertRaises(ValueError):
+                er.rain_evaporation_setting(bad)
+        # PlaSim reads gamma from its rain namelist, after its own resolution defaults
+        src = Path(er.__file__).read_text()
+        self.assertIn("'rainmod_namelist', 'GAMMA'", src)
+
+    def test_the_moisture_diagnostics_come_with_the_heating_and_name_plasims_slots(self):
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertIs(inspect.signature(f).parameters['moisture'].default, False)
+        # PlaSim's 3-D gridpoint diagnostics write slot j as code 20 + j (outdiag.f90): the heating's slots 1-9, and
+        # the moistening's 11 (the physics), 12 (the negative-humidity fix), 20 and 21 (the two stages of the spectral
+        # step: the physics' tendency as it applies it, then the horizontal diffusion).
+        self.assertEqual(sorted(er.HEATING), list(range(21, 30)))
+        self.assertEqual({c - 20 for c in er.MOISTENING}, {11, 12, 20, 21})
+        names = [name for name, _ in er.MOISTENING.values()]
+        self.assertEqual(len(set(names)), 4)
+        self.assertFalse(set(names) & {name for name, _ in er.HEATING.values()})
+        src = Path(er.__file__).read_text()
+        self.assertIn("the moisture diagnostics come with the heating diagnostics", src)
+        self.assertIn("[name for name, _ in MOISTENING.values()] + ['wap']", src)
+        source = er.TWILIGHT_PACKAGE / 'exoplasim' / 'plasim' / 'src' / 'outdiag.f90'
+        if source.exists():
+            self.assertIn('jcode=20+jdiag', source.read_text().replace(' ', ''))
+
     def test_the_10_m_wind_follows_geleyns_profile(self):
         # The surface layer's lines, compiled on a stand-in: neutral air gives the log profile, stable air brings less
         # of the wind down and unstable air more, as the profile through the lowest layer gives them.
@@ -336,6 +405,66 @@ class RunnerTests(unittest.TestCase):
         self.assertAlmostEqual(u10[0], 10.0 * math.log(1.0 + 1e5) / math.log(885.0 / 1e-4 + 1.0), places=9)
         self.assertLess(u10[1], u10[0])
         self.assertLess(u10[0], u10[2])
+
+    def test_the_free_convection_constant_goes_as_gravity_over_surface_pressure(self):
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertIsNone(inspect.signature(f).parameters['free_convection'].default)
+        self.assertEqual(er.EXOPLASIM_FREE_CONVECTION, 0.0016)                    # fluxmod.f90's own constant
+        earth = er.free_convection_setting('lunar', er.STANDARD_GRAVITY, er.STANDARD_ATMOSPHERE)
+        self.assertAlmostEqual(earth['constant'], 0.0016, places=15)              # Earth's gravity and pressure: its own
+        g, p = 1.6242188765608128, 121590.0
+        moon = er.free_convection_setting('lunar', g, p)
+        self.assertAlmostEqual(moon['factor'], (g / 9.80665 * 101325.0 / p) ** (1.0 / 3.0), places=14)
+        self.assertAlmostEqual(moon['constant'], 0.000827, places=6)
+        # g^(1/3) at a given pressure and p^(-1/3) at a given gravity: the tank law's (g kappa^2 / (theta_v nu))^(1/3)
+        # with kappa and nu inversely as the density
+        self.assertAlmostEqual(er.free_convection_setting('lunar', 8.0 * g, p)['constant'] / moon['constant'], 2.0,
+                               places=12)
+        self.assertAlmostEqual(er.free_convection_setting('lunar', g, 8.0 * p)['constant'] / moon['constant'], 0.5,
+                               places=12)
+        for choice, gravity in (('earth', g), ('mars', g), ('lunar', 0.0)):
+            with self.assertRaises(ValueError):
+                er.free_convection_setting(choice, gravity, p)
+
+    def test_the_free_convection_patch_reads_the_constant_from_the_namelist(self):
+        import shutil
+        import subprocess
+        for _, marker, edits in er.FREE_CONVECTION_PATCHES:          # the marker marks added text only
+            self.assertTrue(any(marker in new for _, new in edits))
+            self.assertFalse(any(marker in old for old, _ in edits))
+        self.assertTrue(all(len(line) <= 132 for _, new in er.FREE_CONVECTION_EDITS for line in new.splitlines()))
+        source = er.TWILIGHT_PACKAGE / 'exoplasim' / 'plasim' / 'src' / 'fluxmod.f90'
+        if source.exists():                                           # each anchor once, before or after the patch
+            from climate.tests.test_pbl_fortran import before_later_patches
+            text = before_later_patches(source.read_text())           # as this patch left it, the later ones undone
+            patched = er.FREE_CONVECTION_MARKER in text
+            for old, new in er.FREE_CONVECTION_EDITS:
+                self.assertEqual(text.count(new if patched else old), 1)
+        self.assertIn("'fluxmod_namelist', 'CFREE'", Path(er.__file__).read_text())
+        # Compiled with PlaSim's flags, the namelist variable at its default gives the transfer factor bit for bit as the
+        # literal did, over the range of temperature differences, winds and neutral coefficients the sea meets.
+        if shutil.which('gfortran') is None:
+            self.skipTest('no gfortran')
+        line = er.FREE_CONVECTION_EDITS[-1]
+        program = ('      module fc\n      real :: cfree = 0.0016\n      end module fc\n      program check\n      use fc\n'
+                   '      implicit none\n      integer :: i, j, k, nbad\n      integer, parameter :: jhor = 1\n'
+                   '      real :: zdth, zabsu2(1), zkblnz2, zrifh(1), zold\n      namelist/fc_nl/cfree\n'
+                   "      open(11,file='fc_nl')\n      read(11,fc_nl)\n      close(11)\n      nbad = 0\n"
+                   '      do i = 1, 60\n       zdth = 0.05*i\n       do j = 1, 40\n        zabsu2(1) = 1.+0.9*j*j\n'
+                   '        do k = 1, 30\n         zkblnz2 = 2.e-4*k\n'
+                   + line[0].replace('zrifh(jhor)=', 'zold=') + '     &                  /zkblnz2)**1.25)**0.8\n'
+                   + line[1] + '     &                  /zkblnz2)**1.25)**0.8\n'
+                   '         if (transfer(zold,1_8) /= transfer(zrifh(1),1_8)) nbad = nbad+1\n'
+                   '        enddo\n       enddo\n      enddo\n      print *, nbad, cfree\n      end program check\n')
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / 'check.f90').write_text(program)
+            (Path(tmp) / 'fc_nl').write_text(' &fc_nl\n /\n')
+            subprocess.run(['gfortran', '-O3', '-cpp', '-fcheck=all', '-ffpe-trap=invalid,zero,overflow',
+                            '-finit-real=zero', '-fdefault-real-8', '-o', 'check', 'check.f90'], cwd=tmp, check=True)
+            out = subprocess.run(['./check'], cwd=tmp, check=True, capture_output=True, text=True).stdout.split()
+        self.assertEqual(int(out[0]), 0)
+        self.assertEqual(float(out[1]), 0.0016)
 
     def test_new_runs_take_the_301_k_ledger_in_the_clear_share(self):
         import inspect
@@ -381,6 +510,71 @@ class RunnerTests(unittest.TestCase):
                                    rtol=1e-4, atol=2e-9)
         np.testing.assert_allclose(tables['full'][1][:-1] - tables['curved'][1][:-1], lw['gcm_layers']['cone'],
                                    rtol=1e-5, atol=1e-8)
+
+    def test_a_level_set_sets_the_layer_count_and_refuses_a_count_of_its_own(self):
+        from climate.gcm import levels as lv
+        model = dict(er.MODEL)
+        self.assertEqual(er.level_settings(model, None, None)[0], lv.DEFAULT)
+        self.assertEqual(model['layers'], 10)
+        name, half = er.level_settings(model, {}, 'l14')
+        self.assertEqual((name, model['layers'], half.size), ('l14', 14, 14))
+        with self.assertRaises(ValueError):                              # 14 layers on PlaSim's own formula
+            er.level_settings({**er.MODEL, 'layers': 14}, {'layers': 14}, None)
+        with self.assertRaises(ValueError):
+            er.level_settings({**er.MODEL, 'layers': 12}, {'layers': 12}, 'l14')
+        with self.assertRaises(ValueError):
+            er.level_settings(dict(er.MODEL), None, 'l99')
+        import inspect
+        for f in (er.run, er.configuration):
+            self.assertIsNone(inspect.signature(f).parameters['levels'].default)
+
+    def test_the_14_level_inputs_are_the_10_level_products_on_those_levels(self):
+        import json
+        from climate.gcm import levels as lv
+        half = lv.half_levels('l14')
+        shared = lv.shared_layers(lv.half_levels(lv.DEFAULT), half)
+        for parent in (er.TWILIGHT_LEDGERS['301k'], er.LONGWAVE_FITS['301k']):
+            path = er.levels_product(parent, 'l14')
+            self.assertEqual(path.name, parent.stem + '_l14.json')
+            with self.assertRaises(FileNotFoundError):
+                er.levels_product(parent, 'l99')
+        # the twilight table on 14 levels: 2 + 14 columns, 15 escapes; the regridding kept the ledger's sums
+        ledger = er.levels_product(er.TWILIGHT_LEDGERS['301k'], 'l14')
+        product, parent = (json.loads(x.read_text()) for x in (ledger, er.TWILIGHT_LEDGERS['301k']))
+        with tempfile.TemporaryDirectory() as d:
+            rows = er.twilight_table(Path(d) / 'twilight.dat', 'full', ledger).read_text().strip().split('\n')
+        n = int(rows[0])
+        self.assertEqual(len(rows[1].split()), 2 + 14)
+        self.assertEqual([len(r.split()) for r in rows[n + 1:]], [15, 15])
+        for key in ('gcm_term', 'gcm_term_cone'):
+            new, old = np.array(product[key]['layers']), np.array(parent[key]['layers'])
+            np.testing.assert_allclose(new.sum(0), old.sum(0), rtol=1e-4, atol=1e-8)
+            for k, j in shared.items():
+                np.testing.assert_allclose(new[k], old[j], rtol=1e-4, atol=1e-9)
+        lw, lw0 = product['longwave']['gcm_layers'], parent['longwave']['gcm_layers']
+        for k, j in shared.items():
+            self.assertAlmostEqual(lw['temperature_k'][k], lw0['temperature_k'][j], delta=0.01)
+        # the longwave correction on 14 levels: 15 values a surface, the shared layers' own, the split ones' sum kept
+        corr = json.loads(er.levels_product(er.LONGWAVE_FITS['301k'], 'l14').read_text())['correction']
+        corr0 = json.loads(er.LONGWAVE_FITS['301k'].read_text())['correction']
+        for key in ('land', 'sea', 'tref'):
+            self.assertEqual(len(corr[key]), 15)
+            for k, j in list(shared.items()) + [(14, 10)]:
+                self.assertAlmostEqual(corr[key][k], corr0[key][j], places=3)
+        for key in ('land', 'sea'):
+            self.assertAlmostEqual(sum(corr[key]), sum(corr0[key]), places=2)
+
+    def test_the_cold_cloud_factors_refuse_levels_whose_top_layers_differ(self):
+        from climate.gcm import levels as lv
+        product = er.ROOT / 'climate' / 'results' / 'gcm' / 'cold_cloud_A28R_301k_s0897.json'
+        if not product.exists():
+            self.skipTest('no cold cloud product')
+        same = er.cold_cloud_factors(product)
+        for name in (lv.DEFAULT, 'l14'):
+            self.assertEqual(er.cold_cloud_factors(product, half=lv.half_levels(name)), same)
+        other = lv.plasim_half(20)
+        with self.assertRaises(ValueError):
+            er.cold_cloud_factors(product, half=other)
 
     def test_spectrum_tail_follows_the_sun(self):
         # A blackbody "measurement" that stops at 2.73 um must continue as the same blackbody, not as a

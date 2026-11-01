@@ -1,0 +1,1831 @@
+{
+ "schema": "terluna.climate.gcm-longwave-check/1",
+ "corrections": {
+  "fit_295k": {
+   "product": "climate/results/gcm/longwave_A28_corrected_970_heating.json",
+   "sha256": "e58ad11b423ca3aa",
+   "fitted_on": "A28_corrected_970_heating year 0",
+   "tref": [
+    175.837,
+    197.757,
+    218.318,
+    236.855,
+    253.902,
+    267.926,
+    277.707,
+    285.691,
+    290.596,
+    292.062,
+    293.394
+   ]
+  },
+  "refit_301k": {
+   "product": "climate/results/gcm/longwave_A28_corrected_970_lw_ice.json",
+   "sha256": "f2c4c07319eb2b85",
+   "fitted_on": "A28_corrected_970_lw_ice year 2",
+   "tref": [
+    166.554,
+    194.221,
+    221.837,
+    243.539,
+    260.84,
+    273.943,
+    282.597,
+    290.904,
+    296.893,
+    299.515,
+    300.919
+   ]
+  }
+ },
+ "holds_w_m2": 2.5,
+ "near_301k": {
+  "cases": []
+ },
+ "all_cases": {
+  "cases": [
+   "A28R_301k_cold_sbm_rh07 year 14",
+   "A28R_301k_cold_sbm_rh06 year 14"
+  ],
+  "fit_295k": {
+   "largest_layer_mean_w_m2": 6.98,
+   "holds": false
+  },
+  "refit_301k": {
+   "largest_layer_mean_w_m2": 3.38,
+   "holds": false
+  }
+ },
+ "cases": [
+  {
+   "run": "A28R_301k_cold_sbm_rh07",
+   "year": 14,
+   "global_ground_k": 299.59,
+   "samples": {
+    "cloud_free": {
+     "columns": 1487,
+     "ground_k": 299.48,
+     "lowest_layer_k": 298.24,
+     "every": 11,
+     "path": "/media/projectspace/terluna-research/gcm-runs/longwave_check/A28R_301k_cold_sbm_rh07_00014_cloud_free_11_84cd371d22c71e1a.npz",
+     "source": "climate/gcm/runs/A28R_301k_cold_sbm_rh07/model/MOST.00014.nc",
+     "source_sha256": "102329d0964a359f9f270d0fdcf8f209c969111e98b9409460dca5e8f339bb56",
+     "plasim": {
+      "land": {
+       "columns": 1069,
+       "mean": {
+        "layer_1": -7.2,
+        "layer_2": -19.82,
+        "layer_3": -9.2,
+        "layer_4": -1.58,
+        "layer_5": -3.73,
+        "layer_6": -3.19,
+        "layer_7": 2.09,
+        "layer_8": 12.0,
+        "layer_9": 13.49,
+        "olr": 8.09
+       },
+       "rms": {
+        "layer_1": 8.4,
+        "layer_2": 20.1,
+        "layer_3": 10.19,
+        "layer_4": 2.59,
+        "layer_5": 4.88,
+        "layer_6": 6.8,
+        "layer_7": 8.7,
+        "layer_8": 13.93,
+        "layer_9": 13.78,
+        "olr": 8.3
+       },
+       "largest_layer_mean": 19.82
+      },
+      "sea": {
+       "columns": 418,
+       "mean": {
+        "layer_1": -12.13,
+        "layer_2": -19.0,
+        "layer_3": -12.63,
+        "layer_4": -1.76,
+        "layer_5": -3.54,
+        "layer_6": -3.23,
+        "layer_7": 1.8,
+        "layer_8": 11.34,
+        "layer_9": 14.14,
+        "olr": 8.22
+       },
+       "rms": {
+        "layer_1": 12.9,
+        "layer_2": 19.32,
+        "layer_3": 13.56,
+        "layer_4": 2.62,
+        "layer_5": 4.62,
+        "layer_6": 5.95,
+        "layer_7": 8.52,
+        "layer_8": 13.41,
+        "layer_9": 14.43,
+        "olr": 8.38
+       },
+       "largest_layer_mean": 19.0
+      },
+      "tropics": {
+       "columns": 121,
+       "mean": {
+        "layer_1": -5.89,
+        "layer_2": -17.48,
+        "layer_3": -13.03,
+        "layer_4": -1.54,
+        "layer_5": -3.55,
+        "layer_6": -4.5,
+        "layer_7": -0.34,
+        "layer_8": 13.7,
+        "layer_9": 13.69,
+        "olr": 9.94
+       },
+       "rms": {
+        "layer_1": 9.33,
+        "layer_2": 17.81,
+        "layer_3": 14.07,
+        "layer_4": 2.35,
+        "layer_5": 4.28,
+        "layer_6": 6.31,
+        "layer_7": 9.75,
+        "layer_8": 16.36,
+        "layer_9": 14.13,
+        "olr": 10.17
+       },
+       "largest_layer_mean": 17.48
+      },
+      "mid_latitudes": {
+       "columns": 327,
+       "mean": {
+        "layer_1": -7.49,
+        "layer_2": -18.8,
+        "layer_3": -11.42,
+        "layer_4": -1.4,
+        "layer_5": -3.56,
+        "layer_6": -4.19,
+        "layer_7": 1.01,
+        "layer_8": 12.55,
+        "layer_9": 13.81,
+        "olr": 8.77
+       },
+       "rms": {
+        "layer_1": 9.08,
+        "layer_2": 19.09,
+        "layer_3": 12.63,
+        "layer_4": 2.43,
+        "layer_5": 4.5,
+        "layer_6": 7.19,
+        "layer_7": 9.67,
+        "layer_8": 14.91,
+        "layer_9": 14.16,
+        "olr": 8.97
+       },
+       "largest_layer_mean": 18.8
+      },
+      "high_latitudes": {
+       "columns": 1039,
+       "mean": {
+        "layer_1": -9.25,
+        "layer_2": -20.09,
+        "layer_3": -9.44,
+        "layer_4": -1.71,
+        "layer_5": -3.73,
+        "layer_6": -2.74,
+        "layer_7": 2.6,
+        "layer_8": 11.36,
+        "layer_9": 13.63,
+        "olr": 7.71
+       },
+       "rms": {
+        "layer_1": 10.17,
+        "layer_2": 20.35,
+        "layer_3": 10.37,
+        "layer_4": 2.68,
+        "layer_5": 4.96,
+        "layer_6": 6.39,
+        "layer_7": 8.17,
+        "layer_8": 13.07,
+        "layer_9": 13.89,
+        "olr": 7.86
+       },
+       "largest_layer_mean": 20.09
+      }
+     },
+     "fit_295k": {
+      "land": {
+       "columns": 1069,
+       "mean": {
+        "layer_1": -0.35,
+        "layer_2": -6.98,
+        "layer_3": -2.35,
+        "layer_4": 3.56,
+        "layer_5": 0.18,
+        "layer_6": -3.48,
+        "layer_7": -2.96,
+        "layer_8": 1.66,
+        "layer_9": 2.42,
+        "olr": 1.38
+       },
+       "rms": {
+        "layer_1": 4.35,
+        "layer_2": 7.75,
+        "layer_3": 4.97,
+        "layer_4": 4.12,
+        "layer_5": 3.16,
+        "layer_6": 6.93,
+        "layer_7": 8.96,
+        "layer_8": 7.28,
+        "layer_9": 3.69,
+        "olr": 2.34
+       },
+       "largest_layer_mean": 6.98
+      },
+      "sea": {
+       "columns": 418,
+       "mean": {
+        "layer_1": 5.38,
+        "layer_2": -6.29,
+        "layer_3": -5.3,
+        "layer_4": 4.23,
+        "layer_5": 0.4,
+        "layer_6": -3.81,
+        "layer_7": -3.13,
+        "layer_8": 1.52,
+        "layer_9": 2.46,
+        "olr": -1.9
+       },
+       "rms": {
+        "layer_1": 7.04,
+        "layer_2": 7.17,
+        "layer_3": 7.21,
+        "layer_4": 4.66,
+        "layer_5": 3.0,
+        "layer_6": 6.29,
+        "layer_7": 8.91,
+        "layer_8": 7.32,
+        "layer_9": 3.77,
+        "olr": 2.5
+       },
+       "largest_layer_mean": 6.29
+      },
+      "tropics": {
+       "columns": 121,
+       "mean": {
+        "layer_1": 4.61,
+        "layer_2": -4.8,
+        "layer_3": -6.07,
+        "layer_4": 3.89,
+        "layer_5": 0.36,
+        "layer_6": -4.89,
+        "layer_7": -5.4,
+        "layer_8": 3.57,
+        "layer_9": 2.65,
+        "olr": 2.02
+       },
+       "rms": {
+        "layer_1": 7.06,
+        "layer_2": 5.88,
+        "layer_3": 8.02,
+        "layer_4": 4.29,
+        "layer_5": 2.43,
+        "layer_6": 6.58,
+        "layer_7": 11.14,
+        "layer_8": 9.65,
+        "layer_9": 4.31,
+        "olr": 3.59
+       },
+       "largest_layer_mean": 6.07
+      },
+      "mid_latitudes": {
+       "columns": 327,
+       "mean": {
+        "layer_1": 2.81,
+        "layer_2": -6.02,
+        "layer_3": -4.43,
+        "layer_4": 4.02,
+        "layer_5": 0.36,
+        "layer_6": -4.57,
+        "layer_7": -4.06,
+        "layer_8": 2.35,
+        "layer_9": 2.63,
+        "olr": 0.92
+       },
+       "rms": {
+        "layer_1": 6.15,
+        "layer_2": 6.86,
+        "layer_3": 6.88,
+        "layer_4": 4.5,
+        "layer_5": 2.79,
+        "layer_6": 7.42,
+        "layer_7": 10.44,
+        "layer_8": 8.38,
+        "layer_9": 4.02,
+        "olr": 2.74
+       },
+       "largest_layer_mean": 6.02
+      },
+      "high_latitudes": {
+       "columns": 1039,
+       "mean": {
+        "layer_1": 0.38,
+        "layer_2": -7.26,
+        "layer_3": -2.45,
+        "layer_4": 3.65,
+        "layer_5": 0.19,
+        "layer_6": -3.1,
+        "layer_7": -2.4,
+        "layer_8": 1.16,
+        "layer_9": 2.35,
+        "olr": 0.13
+       },
+       "rms": {
+        "layer_1": 4.65,
+        "layer_2": 7.97,
+        "layer_3": 4.89,
+        "layer_4": 4.2,
+        "layer_5": 3.28,
+        "layer_6": 6.56,
+        "layer_7": 8.1,
+        "layer_8": 6.56,
+        "layer_9": 3.53,
+        "olr": 2.07
+       },
+       "largest_layer_mean": 7.26
+      },
+      "fitted_on_these_columns": false
+     },
+     "refit_301k": {
+      "land": {
+       "columns": 1069,
+       "mean": {
+        "layer_1": 0.45,
+        "layer_2": -1.2,
+        "layer_3": -0.85,
+        "layer_4": 0.27,
+        "layer_5": -1.66,
+        "layer_6": -0.83,
+        "layer_7": 0.97,
+        "layer_8": 1.86,
+        "layer_9": -1.43,
+        "olr": 0.82
+       },
+       "rms": {
+        "layer_1": 4.35,
+        "layer_2": 3.56,
+        "layer_3": 4.45,
+        "layer_4": 2.07,
+        "layer_5": 3.56,
+        "layer_6": 6.06,
+        "layer_7": 8.51,
+        "layer_8": 7.32,
+        "layer_9": 3.13,
+        "olr": 2.05
+       },
+       "largest_layer_mean": 1.86
+      },
+      "sea": {
+       "columns": 418,
+       "mean": {
+        "layer_1": 0.73,
+        "layer_2": 0.11,
+        "layer_3": -2.04,
+        "layer_4": -0.16,
+        "layer_5": -1.22,
+        "layer_6": -1.0,
+        "layer_7": 0.81,
+        "layer_8": 2.06,
+        "layer_9": -1.46,
+        "olr": 0.67
+       },
+       "rms": {
+        "layer_1": 4.55,
+        "layer_2": 3.44,
+        "layer_3": 5.28,
+        "layer_4": 1.96,
+        "layer_5": 3.21,
+        "layer_6": 5.1,
+        "layer_7": 8.37,
+        "layer_8": 7.45,
+        "layer_9": 3.21,
+        "olr": 1.74
+       },
+       "largest_layer_mean": 2.06
+      },
+      "tropics": {
+       "columns": 121,
+       "mean": {
+        "layer_1": 3.53,
+        "layer_2": 1.14,
+        "layer_3": -3.97,
+        "layer_4": 0.23,
+        "layer_5": -1.4,
+        "layer_6": -2.18,
+        "layer_7": -1.42,
+        "layer_8": 3.89,
+        "layer_9": -1.15,
+        "olr": 2.44
+       },
+       "rms": {
+        "layer_1": 6.89,
+        "layer_2": 3.68,
+        "layer_3": 6.61,
+        "layer_4": 1.82,
+        "layer_5": 2.78,
+        "layer_6": 4.91,
+        "layer_7": 9.84,
+        "layer_8": 9.78,
+        "layer_9": 3.57,
+        "olr": 3.31
+       },
+       "largest_layer_mean": 3.97
+      },
+      "mid_latitudes": {
+       "columns": 327,
+       "mean": {
+        "layer_1": 1.86,
+        "layer_2": -0.05,
+        "layer_3": -2.36,
+        "layer_4": 0.37,
+        "layer_5": -1.41,
+        "layer_6": -1.85,
+        "layer_7": -0.08,
+        "layer_8": 2.67,
+        "layer_9": -1.22,
+        "olr": 1.26
+       },
+       "rms": {
+        "layer_1": 5.02,
+        "layer_2": 3.33,
+        "layer_3": 5.53,
+        "layer_4": 2.03,
+        "layer_5": 3.11,
+        "layer_6": 6.14,
+        "layer_7": 9.62,
+        "layer_8": 8.46,
+        "layer_9": 3.27,
+        "olr": 2.35
+       },
+       "largest_layer_mean": 2.67
+      },
+      "high_latitudes": {
+       "columns": 1039,
+       "mean": {
+        "layer_1": -0.24,
+        "layer_2": -1.31,
+        "layer_3": -0.48,
+        "layer_4": 0.07,
+        "layer_5": -1.59,
+        "layer_6": -0.42,
+        "layer_7": 1.52,
+        "layer_8": 1.45,
+        "layer_9": -1.54,
+        "olr": 0.44
+       },
+       "rms": {
+        "layer_1": 3.79,
+        "layer_2": 3.57,
+        "layer_3": 4.11,
+        "layer_4": 2.07,
+        "layer_5": 3.64,
+        "layer_6": 5.79,
+        "layer_7": 7.89,
+        "layer_8": 6.62,
+        "layer_9": 3.06,
+        "olr": 1.59
+       },
+       "largest_layer_mean": 1.59
+      },
+      "fitted_on_these_columns": false
+     }
+    },
+    "all": {
+     "columns": 1274,
+     "ground_k": 299.55,
+     "lowest_layer_k": 298.45,
+     "every": 193,
+     "path": "/media/projectspace/terluna-research/gcm-runs/longwave_check/A28R_301k_cold_sbm_rh07_00014_all_193_4374d62b57b2bff5.npz",
+     "source": "climate/gcm/runs/A28R_301k_cold_sbm_rh07/model/MOST.00014.nc",
+     "source_sha256": "102329d0964a359f9f270d0fdcf8f209c969111e98b9409460dca5e8f339bb56",
+     "plasim": {
+      "land": {
+       "columns": 807,
+       "mean": {
+        "layer_1": -5.19,
+        "layer_2": -19.09,
+        "layer_3": -10.78,
+        "layer_4": -1.14,
+        "layer_5": -3.69,
+        "layer_6": -3.7,
+        "layer_7": 2.28,
+        "layer_8": 11.42,
+        "layer_9": 13.94,
+        "olr": 8.51
+       },
+       "rms": {
+        "layer_1": 7.34,
+        "layer_2": 19.44,
+        "layer_3": 12.25,
+        "layer_4": 2.48,
+        "layer_5": 4.84,
+        "layer_6": 6.94,
+        "layer_7": 8.79,
+        "layer_8": 13.54,
+        "layer_9": 14.26,
+        "olr": 8.74
+       },
+       "largest_layer_mean": 19.09
+      },
+      "sea": {
+       "columns": 467,
+       "mean": {
+        "layer_1": -11.88,
+        "layer_2": -17.28,
+        "layer_3": -13.89,
+        "layer_4": -1.37,
+        "layer_5": -3.38,
+        "layer_6": -4.2,
+        "layer_7": 1.43,
+        "layer_8": 11.85,
+        "layer_9": 14.16,
+        "olr": 8.76
+       },
+       "rms": {
+        "layer_1": 12.82,
+        "layer_2": 17.69,
+        "layer_3": 15.15,
+        "layer_4": 2.42,
+        "layer_5": 4.38,
+        "layer_6": 7.32,
+        "layer_7": 9.48,
+        "layer_8": 14.28,
+        "layer_9": 14.52,
+        "olr": 8.95
+       },
+       "largest_layer_mean": 17.28
+      },
+      "tropics": {
+       "columns": 398,
+       "mean": {
+        "layer_1": -7.45,
+        "layer_2": -16.74,
+        "layer_3": -13.18,
+        "layer_4": -1.15,
+        "layer_5": -3.42,
+        "layer_6": -4.55,
+        "layer_7": 1.14,
+        "layer_8": 12.22,
+        "layer_9": 14.14,
+        "olr": 9.61
+       },
+       "rms": {
+        "layer_1": 10.75,
+        "layer_2": 17.17,
+        "layer_3": 14.79,
+        "layer_4": 2.16,
+        "layer_5": 4.15,
+        "layer_6": 7.1,
+        "layer_7": 9.18,
+        "layer_8": 14.66,
+        "layer_9": 14.53,
+        "olr": 9.78
+       },
+       "largest_layer_mean": 16.74
+      },
+      "mid_latitudes": {
+       "columns": 478,
+       "mean": {
+        "layer_1": -6.93,
+        "layer_2": -18.47,
+        "layer_3": -12.63,
+        "layer_4": -0.9,
+        "layer_5": -3.57,
+        "layer_6": -4.04,
+        "layer_7": 2.02,
+        "layer_8": 11.35,
+        "layer_9": 14.19,
+        "olr": 8.51
+       },
+       "rms": {
+        "layer_1": 8.76,
+        "layer_2": 18.81,
+        "layer_3": 13.96,
+        "layer_4": 2.49,
+        "layer_5": 4.69,
+        "layer_6": 7.13,
+        "layer_7": 8.96,
+        "layer_8": 13.57,
+        "layer_9": 14.5,
+        "olr": 8.71
+       },
+       "largest_layer_mean": 18.47
+      },
+      "high_latitudes": {
+       "columns": 398,
+       "mean": {
+        "layer_1": -8.69,
+        "layer_2": -20.06,
+        "layer_3": -9.82,
+        "layer_4": -1.69,
+        "layer_5": -3.75,
+        "layer_6": -3.03,
+        "layer_7": 2.74,
+        "layer_8": 11.22,
+        "layer_9": 13.71,
+        "olr": 7.7
+       },
+       "rms": {
+        "layer_1": 9.72,
+        "layer_2": 20.35,
+        "layer_3": 10.98,
+        "layer_4": 2.67,
+        "layer_5": 5.14,
+        "layer_6": 7.02,
+        "layer_7": 9.03,
+        "layer_8": 13.24,
+        "layer_9": 14.0,
+        "olr": 7.87
+       },
+       "largest_layer_mean": 20.06
+      }
+     },
+     "fit_295k": {
+      "land": {
+       "columns": 807,
+       "mean": {
+        "layer_1": 1.67,
+        "layer_2": -6.32,
+        "layer_3": -3.98,
+        "layer_4": 3.99,
+        "layer_5": 0.2,
+        "layer_6": -3.98,
+        "layer_7": -2.79,
+        "layer_8": 1.14,
+        "layer_9": 3.0,
+        "olr": 1.75
+       },
+       "rms": {
+        "layer_1": 5.5,
+        "layer_2": 7.31,
+        "layer_3": 7.01,
+        "layer_4": 4.56,
+        "layer_5": 3.15,
+        "layer_6": 7.1,
+        "layer_7": 8.94,
+        "layer_8": 7.37,
+        "layer_9": 4.2,
+        "olr": 2.67
+       },
+       "largest_layer_mean": 6.32
+      },
+      "sea": {
+       "columns": 467,
+       "mean": {
+        "layer_1": 5.67,
+        "layer_2": -4.61,
+        "layer_3": -6.61,
+        "layer_4": 4.6,
+        "layer_5": 0.54,
+        "layer_6": -4.78,
+        "layer_7": -3.53,
+        "layer_8": 2.09,
+        "layer_9": 2.64,
+        "olr": -1.53
+       },
+       "rms": {
+        "layer_1": 7.68,
+        "layer_2": 5.95,
+        "layer_3": 8.88,
+        "layer_4": 5.02,
+        "layer_5": 2.83,
+        "layer_6": 7.66,
+        "layer_7": 10.02,
+        "layer_8": 8.26,
+        "layer_9": 4.1,
+        "olr": 2.4
+       },
+       "largest_layer_mean": 6.61
+      },
+      "tropics": {
+       "columns": 398,
+       "mean": {
+        "layer_1": 4.32,
+        "layer_2": -4.15,
+        "layer_3": -6.23,
+        "layer_4": 4.34,
+        "layer_5": 0.46,
+        "layer_6": -4.96,
+        "layer_7": -3.85,
+        "layer_8": 2.29,
+        "layer_9": 3.12,
+        "olr": 1.19
+       },
+       "rms": {
+        "layer_1": 7.09,
+        "layer_2": 5.63,
+        "layer_3": 9.06,
+        "layer_4": 4.72,
+        "layer_5": 2.42,
+        "layer_6": 7.38,
+        "layer_7": 9.91,
+        "layer_8": 8.45,
+        "layer_9": 4.5,
+        "olr": 3.04
+       },
+       "largest_layer_mean": 6.23
+      },
+      "mid_latitudes": {
+       "columns": 478,
+       "mean": {
+        "layer_1": 3.85,
+        "layer_2": -5.68,
+        "layer_3": -5.64,
+        "layer_4": 4.54,
+        "layer_5": 0.35,
+        "layer_6": -4.43,
+        "layer_7": -3.05,
+        "layer_8": 1.21,
+        "layer_9": 3.0,
+        "olr": 0.43
+       },
+       "rms": {
+        "layer_1": 6.51,
+        "layer_2": 6.71,
+        "layer_3": 8.11,
+        "layer_4": 5.13,
+        "layer_5": 3.07,
+        "layer_6": 7.36,
+        "layer_7": 9.24,
+        "layer_8": 7.54,
+        "layer_9": 4.22,
+        "olr": 2.54
+       },
+       "largest_layer_mean": 5.68
+      },
+      "high_latitudes": {
+       "columns": 398,
+       "mean": {
+        "layer_1": 1.1,
+        "layer_2": -7.25,
+        "layer_3": -2.83,
+        "layer_4": 3.69,
+        "layer_5": 0.17,
+        "layer_6": -3.39,
+        "layer_7": -2.28,
+        "layer_8": 1.02,
+        "layer_9": 2.46,
+        "olr": 0.05
+       },
+       "rms": {
+        "layer_1": 5.41,
+        "layer_2": 8.01,
+        "layer_3": 5.58,
+        "layer_4": 4.23,
+        "layer_5": 3.52,
+        "layer_6": 7.19,
+        "layer_7": 8.89,
+        "layer_8": 7.12,
+        "layer_9": 3.73,
+        "olr": 2.07
+       },
+       "largest_layer_mean": 7.25
+      },
+      "fitted_on_these_columns": false
+     },
+     "refit_301k": {
+      "land": {
+       "columns": 807,
+       "mean": {
+        "layer_1": 2.47,
+        "layer_2": -0.57,
+        "layer_3": -2.48,
+        "layer_4": 0.71,
+        "layer_5": -1.63,
+        "layer_6": -1.34,
+        "layer_7": 1.16,
+        "layer_8": 1.34,
+        "layer_9": -0.82,
+        "olr": 1.12
+       },
+       "rms": {
+        "layer_1": 5.79,
+        "layer_2": 3.72,
+        "layer_3": 6.28,
+        "layer_4": 2.32,
+        "layer_5": 3.54,
+        "layer_6": 6.03,
+        "layer_7": 8.57,
+        "layer_8": 7.41,
+        "layer_9": 3.05,
+        "olr": 2.31
+       },
+       "largest_layer_mean": 2.48
+      },
+      "sea": {
+       "columns": 467,
+       "mean": {
+        "layer_1": 1.01,
+        "layer_2": 1.76,
+        "layer_3": -3.38,
+        "layer_4": 0.22,
+        "layer_5": -1.07,
+        "layer_6": -1.97,
+        "layer_7": 0.43,
+        "layer_8": 2.63,
+        "layer_9": -1.23,
+        "olr": 1.0
+       },
+       "rms": {
+        "layer_1": 5.19,
+        "layer_2": 4.15,
+        "layer_3": 6.78,
+        "layer_4": 2.01,
+        "layer_5": 2.97,
+        "layer_6": 6.31,
+        "layer_7": 9.38,
+        "layer_8": 8.41,
+        "layer_9": 3.36,
+        "olr": 2.11
+       },
+       "largest_layer_mean": 3.38
+      },
+      "tropics": {
+       "columns": 398,
+       "mean": {
+        "layer_1": 2.58,
+        "layer_2": 1.83,
+        "layer_3": -3.95,
+        "layer_4": 0.57,
+        "layer_5": -1.26,
+        "layer_6": -2.26,
+        "layer_7": 0.08,
+        "layer_8": 2.64,
+        "layer_9": -0.66,
+        "olr": 2.01
+       },
+       "rms": {
+        "layer_1": 6.85,
+        "layer_2": 4.33,
+        "layer_3": 7.69,
+        "layer_4": 1.95,
+        "layer_5": 2.69,
+        "layer_6": 5.9,
+        "layer_7": 9.12,
+        "layer_8": 8.56,
+        "layer_9": 3.29,
+        "olr": 2.82
+       },
+       "largest_layer_mean": 3.95
+      },
+      "mid_latitudes": {
+       "columns": 478,
+       "mean": {
+        "layer_1": 2.67,
+        "layer_2": 0.32,
+        "layer_3": -3.51,
+        "layer_4": 0.86,
+        "layer_5": -1.41,
+        "layer_6": -1.71,
+        "layer_7": 0.93,
+        "layer_8": 1.53,
+        "layer_9": -0.85,
+        "olr": 0.89
+       },
+       "rms": {
+        "layer_1": 5.37,
+        "layer_2": 3.65,
+        "layer_3": 6.64,
+        "layer_4": 2.48,
+        "layer_5": 3.36,
+        "layer_6": 6.12,
+        "layer_7": 8.77,
+        "layer_8": 7.61,
+        "layer_9": 3.08,
+        "olr": 2.11
+       },
+       "largest_layer_mean": 3.51
+      },
+      "high_latitudes": {
+       "columns": 398,
+       "mean": {
+        "layer_1": 0.4,
+        "layer_2": -1.29,
+        "layer_3": -0.84,
+        "layer_4": 0.1,
+        "layer_5": -1.61,
+        "layer_6": -0.7,
+        "layer_7": 1.65,
+        "layer_8": 1.32,
+        "layer_9": -1.42,
+        "olr": 0.36
+       },
+       "rms": {
+        "layer_1": 4.25,
+        "layer_2": 3.67,
+        "layer_3": 4.67,
+        "layer_4": 2.09,
+        "layer_5": 3.87,
+        "layer_6": 6.37,
+        "layer_7": 8.76,
+        "layer_8": 7.18,
+        "layer_9": 3.14,
+        "olr": 1.66
+       },
+       "largest_layer_mean": 1.65
+      },
+      "fitted_on_these_columns": false
+     }
+    }
+   }
+  },
+  {
+   "run": "A28R_301k_cold_sbm_rh06",
+   "year": 14,
+   "global_ground_k": 300.13,
+   "samples": {
+    "cloud_free": {
+     "columns": 1493,
+     "ground_k": 299.93,
+     "lowest_layer_k": 298.85,
+     "every": 11,
+     "path": "/media/projectspace/terluna-research/gcm-runs/longwave_check/A28R_301k_cold_sbm_rh06_00014_cloud_free_11_fe9d9c007f8efbb1.npz",
+     "source": "climate/gcm/runs/A28R_301k_cold_sbm_rh06/model/MOST.00014.nc",
+     "source_sha256": "8669583ca8efd5c13237901ffcc5f576c2b587af38c81fb68868affb6f0ae90e",
+     "plasim": {
+      "land": {
+       "columns": 1058,
+       "mean": {
+        "layer_1": -7.92,
+        "layer_2": -19.01,
+        "layer_3": -8.83,
+        "layer_4": -1.92,
+        "layer_5": -3.94,
+        "layer_6": -3.67,
+        "layer_7": 1.19,
+        "layer_8": 11.83,
+        "layer_9": 14.25,
+        "olr": 8.05
+       },
+       "rms": {
+        "layer_1": 8.87,
+        "layer_2": 19.36,
+        "layer_3": 9.65,
+        "layer_4": 2.62,
+        "layer_5": 4.65,
+        "layer_6": 6.96,
+        "layer_7": 8.59,
+        "layer_8": 13.87,
+        "layer_9": 14.53,
+        "olr": 8.27
+       },
+       "largest_layer_mean": 19.01
+      },
+      "sea": {
+       "columns": 435,
+       "mean": {
+        "layer_1": -12.48,
+        "layer_2": -18.9,
+        "layer_3": -12.23,
+        "layer_4": -2.24,
+        "layer_5": -3.79,
+        "layer_6": -3.32,
+        "layer_7": -0.22,
+        "layer_8": 12.1,
+        "layer_9": 14.52,
+        "olr": 8.31
+       },
+       "rms": {
+        "layer_1": 13.23,
+        "layer_2": 19.18,
+        "layer_3": 13.08,
+        "layer_4": 2.76,
+        "layer_5": 4.43,
+        "layer_6": 5.47,
+        "layer_7": 8.25,
+        "layer_8": 14.39,
+        "layer_9": 14.86,
+        "olr": 8.47
+       },
+       "largest_layer_mean": 18.9
+      },
+      "tropics": {
+       "columns": 135,
+       "mean": {
+        "layer_1": -6.47,
+        "layer_2": -18.41,
+        "layer_3": -11.02,
+        "layer_4": -1.98,
+        "layer_5": -3.57,
+        "layer_6": -4.82,
+        "layer_7": -1.01,
+        "layer_8": 13.07,
+        "layer_9": 14.53,
+        "olr": 9.61
+       },
+       "rms": {
+        "layer_1": 9.48,
+        "layer_2": 18.81,
+        "layer_3": 11.95,
+        "layer_4": 2.42,
+        "layer_5": 3.9,
+        "layer_6": 6.31,
+        "layer_7": 9.52,
+        "layer_8": 15.69,
+        "layer_9": 14.89,
+        "olr": 9.79
+       },
+       "largest_layer_mean": 18.41
+      },
+      "mid_latitudes": {
+       "columns": 383,
+       "mean": {
+        "layer_1": -8.23,
+        "layer_2": -18.82,
+        "layer_3": -10.69,
+        "layer_4": -1.69,
+        "layer_5": -3.83,
+        "layer_6": -4.34,
+        "layer_7": 0.42,
+        "layer_8": 11.96,
+        "layer_9": 14.56,
+        "olr": 8.59
+       },
+       "rms": {
+        "layer_1": 9.74,
+        "layer_2": 19.14,
+        "layer_3": 11.78,
+        "layer_4": 2.49,
+        "layer_5": 4.43,
+        "layer_6": 6.78,
+        "layer_7": 9.08,
+        "layer_8": 14.34,
+        "layer_9": 14.88,
+        "olr": 8.79
+       },
+       "largest_layer_mean": 18.82
+      },
+      "high_latitudes": {
+       "columns": 975,
+       "mean": {
+        "layer_1": -10.03,
+        "layer_2": -19.12,
+        "layer_3": -9.32,
+        "layer_4": -2.14,
+        "layer_5": -3.97,
+        "layer_6": -3.09,
+        "layer_7": 1.17,
+        "layer_8": 11.73,
+        "layer_9": 14.21,
+        "olr": 7.74
+       },
+       "rms": {
+        "layer_1": 10.66,
+        "layer_2": 19.44,
+        "layer_3": 10.15,
+        "layer_4": 2.76,
+        "layer_5": 4.74,
+        "layer_6": 6.51,
+        "layer_7": 8.1,
+        "layer_8": 13.65,
+        "layer_9": 14.49,
+        "olr": 7.91
+       },
+       "largest_layer_mean": 19.12
+      }
+     },
+     "fit_295k": {
+      "land": {
+       "columns": 1058,
+       "mean": {
+        "layer_1": -1.01,
+        "layer_2": -5.99,
+        "layer_3": -1.89,
+        "layer_4": 3.32,
+        "layer_5": 0.04,
+        "layer_6": -3.96,
+        "layer_7": -4.0,
+        "layer_8": 1.2,
+        "layer_9": 2.92,
+        "olr": 1.58
+       },
+       "rms": {
+        "layer_1": 4.11,
+        "layer_2": 7.0,
+        "layer_3": 4.3,
+        "layer_4": 3.77,
+        "layer_5": 2.47,
+        "layer_6": 7.12,
+        "layer_7": 9.4,
+        "layer_8": 7.36,
+        "layer_9": 4.08,
+        "olr": 2.5
+       },
+       "largest_layer_mean": 5.99
+      },
+      "sea": {
+       "columns": 435,
+       "mean": {
+        "layer_1": 5.2,
+        "layer_2": -5.99,
+        "layer_3": -4.77,
+        "layer_4": 3.87,
+        "layer_5": 0.23,
+        "layer_6": -3.91,
+        "layer_7": -5.31,
+        "layer_8": 1.95,
+        "layer_9": 2.54,
+        "olr": -1.51
+       },
+       "rms": {
+        "layer_1": 6.92,
+        "layer_2": 6.83,
+        "layer_3": 6.62,
+        "layer_4": 4.2,
+        "layer_5": 2.31,
+        "layer_6": 5.85,
+        "layer_7": 9.81,
+        "layer_8": 8.05,
+        "layer_9": 4.04,
+        "olr": 2.25
+       },
+       "largest_layer_mean": 5.99
+      },
+      "tropics": {
+       "columns": 135,
+       "mean": {
+        "layer_1": 3.4,
+        "layer_2": -5.54,
+        "layer_3": -3.99,
+        "layer_4": 3.48,
+        "layer_5": 0.41,
+        "layer_6": -5.19,
+        "layer_7": -6.2,
+        "layer_8": 2.59,
+        "layer_9": 3.21,
+        "olr": 2.24
+       },
+       "rms": {
+        "layer_1": 6.04,
+        "layer_2": 6.69,
+        "layer_3": 6.04,
+        "layer_4": 3.78,
+        "layer_5": 1.63,
+        "layer_6": 6.6,
+        "layer_7": 11.32,
+        "layer_8": 9.1,
+        "layer_9": 4.54,
+        "olr": 3.55
+       },
+       "largest_layer_mean": 6.2
+      },
+      "mid_latitudes": {
+       "columns": 383,
+       "mean": {
+        "layer_1": 2.26,
+        "layer_2": -5.85,
+        "layer_3": -3.58,
+        "layer_4": 3.83,
+        "layer_5": 0.17,
+        "layer_6": -4.73,
+        "layer_7": -4.78,
+        "layer_8": 1.44,
+        "layer_9": 3.06,
+        "olr": 1.03
+       },
+       "rms": {
+        "layer_1": 5.55,
+        "layer_2": 6.81,
+        "layer_3": 6.02,
+        "layer_4": 4.25,
+        "layer_5": 2.23,
+        "layer_6": 7.03,
+        "layer_7": 10.26,
+        "layer_8": 8.05,
+        "layer_9": 4.29,
+        "olr": 2.77
+       },
+       "largest_layer_mean": 5.85
+      },
+      "high_latitudes": {
+       "columns": 975,
+       "mean": {
+        "layer_1": -0.14,
+        "layer_2": -6.11,
+        "layer_3": -2.22,
+        "layer_4": 3.34,
+        "layer_5": 0.02,
+        "layer_6": -3.47,
+        "layer_7": -3.97,
+        "layer_8": 1.25,
+        "layer_9": 2.65,
+        "olr": 0.33
+       },
+       "rms": {
+        "layer_1": 4.75,
+        "layer_2": 7.04,
+        "layer_3": 4.51,
+        "layer_4": 3.77,
+        "layer_5": 2.59,
+        "layer_6": 6.69,
+        "layer_7": 8.93,
+        "layer_8": 7.12,
+        "layer_9": 3.91,
+        "olr": 2.07
+       },
+       "largest_layer_mean": 6.11
+      },
+      "fitted_on_these_columns": false
+     },
+     "refit_301k": {
+      "land": {
+       "columns": 1058,
+       "mean": {
+        "layer_1": -0.21,
+        "layer_2": -0.12,
+        "layer_3": -0.36,
+        "layer_4": -0.03,
+        "layer_5": -1.83,
+        "layer_6": -1.25,
+        "layer_7": 0.05,
+        "layer_8": 1.41,
+        "layer_9": -1.03,
+        "olr": 0.99
+       },
+       "rms": {
+        "layer_1": 3.99,
+        "layer_2": 3.64,
+        "layer_3": 3.88,
+        "layer_4": 1.78,
+        "layer_5": 3.07,
+        "layer_6": 6.04,
+        "layer_7": 8.51,
+        "layer_8": 7.39,
+        "layer_9": 3.03,
+        "olr": 2.16
+       },
+       "largest_layer_mean": 1.83
+      },
+      "sea": {
+       "columns": 435,
+       "mean": {
+        "layer_1": 0.51,
+        "layer_2": 0.49,
+        "layer_3": -1.46,
+        "layer_4": -0.6,
+        "layer_5": -1.42,
+        "layer_6": -1.02,
+        "layer_7": -1.25,
+        "layer_8": 2.52,
+        "layer_9": -1.49,
+        "olr": 1.04
+       },
+       "rms": {
+        "layer_1": 4.55,
+        "layer_2": 3.31,
+        "layer_3": 4.8,
+        "layer_4": 1.73,
+        "layer_5": 2.7,
+        "layer_6": 4.46,
+        "layer_7": 8.34,
+        "layer_8": 8.2,
+        "layer_9": 3.48,
+        "olr": 1.96
+       },
+       "largest_layer_mean": 2.52
+      },
+      "tropics": {
+       "columns": 135,
+       "mean": {
+        "layer_1": 2.66,
+        "layer_2": 0.45,
+        "layer_3": -1.98,
+        "layer_4": -0.17,
+        "layer_5": -1.39,
+        "layer_6": -2.43,
+        "layer_7": -2.13,
+        "layer_8": 2.89,
+        "layer_9": -0.69,
+        "olr": 2.44
+       },
+       "rms": {
+        "layer_1": 6.19,
+        "layer_2": 3.87,
+        "layer_3": 4.94,
+        "layer_4": 1.41,
+        "layer_5": 2.11,
+        "layer_6": 4.75,
+        "layer_7": 9.7,
+        "layer_8": 9.19,
+        "layer_9": 3.26,
+        "olr": 3.14
+       },
+       "largest_layer_mean": 2.89
+      },
+      "mid_latitudes": {
+       "columns": 383,
+       "mean": {
+        "layer_1": 1.25,
+        "layer_2": 0.22,
+        "layer_3": -1.47,
+        "layer_4": 0.11,
+        "layer_5": -1.63,
+        "layer_6": -1.95,
+        "layer_7": -0.69,
+        "layer_8": 1.76,
+        "layer_9": -0.9,
+        "olr": 1.38
+       },
+       "rms": {
+        "layer_1": 4.64,
+        "layer_2": 3.55,
+        "layer_3": 4.87,
+        "layer_4": 1.85,
+        "layer_5": 2.76,
+        "layer_6": 5.56,
+        "layer_7": 9.1,
+        "layer_8": 8.11,
+        "layer_9": 3.13,
+        "olr": 2.37
+       },
+       "largest_layer_mean": 1.95
+      },
+      "high_latitudes": {
+       "columns": 975,
+       "mean": {
+        "layer_1": -0.86,
+        "layer_2": -0.05,
+        "layer_3": -0.19,
+        "layer_4": -0.32,
+        "layer_5": -1.79,
+        "layer_6": -0.71,
+        "layer_7": 0.06,
+        "layer_8": 1.56,
+        "layer_9": -1.34,
+        "olr": 0.66
+       },
+       "rms": {
+        "layer_1": 3.57,
+        "layer_2": 3.5,
+        "layer_3": 3.73,
+        "layer_4": 1.78,
+        "layer_5": 3.15,
+        "layer_6": 5.77,
+        "layer_7": 8.0,
+        "layer_8": 7.2,
+        "layer_9": 3.17,
+        "olr": 1.78
+       },
+       "largest_layer_mean": 1.79
+      },
+      "fitted_on_these_columns": false
+     }
+    },
+    "all": {
+     "columns": 1274,
+     "ground_k": 300.1,
+     "lowest_layer_k": 299.18,
+     "every": 193,
+     "path": "/media/projectspace/terluna-research/gcm-runs/longwave_check/A28R_301k_cold_sbm_rh06_00014_all_193_44c659b1b1330102.npz",
+     "source": "climate/gcm/runs/A28R_301k_cold_sbm_rh06/model/MOST.00014.nc",
+     "source_sha256": "8669583ca8efd5c13237901ffcc5f576c2b587af38c81fb68868affb6f0ae90e",
+     "plasim": {
+      "land": {
+       "columns": 807,
+       "mean": {
+        "layer_1": -5.95,
+        "layer_2": -18.88,
+        "layer_3": -9.94,
+        "layer_4": -1.51,
+        "layer_5": -3.57,
+        "layer_6": -4.1,
+        "layer_7": 0.31,
+        "layer_8": 12.22,
+        "layer_9": 14.36,
+        "olr": 8.48
+       },
+       "rms": {
+        "layer_1": 7.91,
+        "layer_2": 19.21,
+        "layer_3": 11.12,
+        "layer_4": 2.45,
+        "layer_5": 4.3,
+        "layer_6": 6.71,
+        "layer_7": 9.38,
+        "layer_8": 14.8,
+        "layer_9": 14.72,
+        "olr": 8.71
+       },
+       "largest_layer_mean": 18.88
+      },
+      "sea": {
+       "columns": 467,
+       "mean": {
+        "layer_1": -12.56,
+        "layer_2": -17.84,
+        "layer_3": -12.5,
+        "layer_4": -1.78,
+        "layer_5": -3.34,
+        "layer_6": -4.28,
+        "layer_7": 0.1,
+        "layer_8": 11.7,
+        "layer_9": 14.75,
+        "olr": 8.48
+       },
+       "rms": {
+        "layer_1": 13.54,
+        "layer_2": 18.22,
+        "layer_3": 13.68,
+        "layer_4": 2.54,
+        "layer_5": 3.89,
+        "layer_6": 6.08,
+        "layer_7": 8.6,
+        "layer_8": 14.13,
+        "layer_9": 15.13,
+        "olr": 8.65
+       },
+       "largest_layer_mean": 17.84
+      },
+      "tropics": {
+       "columns": 398,
+       "mean": {
+        "layer_1": -7.85,
+        "layer_2": -17.97,
+        "layer_3": -11.46,
+        "layer_4": -1.34,
+        "layer_5": -3.38,
+        "layer_6": -4.35,
+        "layer_7": -1.82,
+        "layer_8": 13.59,
+        "layer_9": 14.3,
+        "olr": 9.41
+       },
+       "rms": {
+        "layer_1": 11.17,
+        "layer_2": 18.35,
+        "layer_3": 12.77,
+        "layer_4": 2.07,
+        "layer_5": 3.68,
+        "layer_6": 5.53,
+        "layer_7": 9.69,
+        "layer_8": 16.46,
+        "layer_9": 14.75,
+        "olr": 9.61
+       },
+       "largest_layer_mean": 17.97
+      },
+      "mid_latitudes": {
+       "columns": 478,
+       "mean": {
+        "layer_1": -7.78,
+        "layer_2": -18.55,
+        "layer_3": -11.34,
+        "layer_4": -1.53,
+        "layer_5": -3.35,
+        "layer_6": -4.63,
+        "layer_7": 1.04,
+        "layer_8": 11.22,
+        "layer_9": 14.83,
+        "olr": 8.38
+       },
+       "rms": {
+        "layer_1": 9.62,
+        "layer_2": 18.93,
+        "layer_3": 12.64,
+        "layer_4": 2.58,
+        "layer_5": 4.1,
+        "layer_6": 7.11,
+        "layer_7": 9.09,
+        "layer_8": 13.66,
+        "layer_9": 15.17,
+        "olr": 8.55
+       },
+       "largest_layer_mean": 18.55
+      },
+      "high_latitudes": {
+       "columns": 398,
+       "mean": {
+        "layer_1": -9.61,
+        "layer_2": -18.96,
+        "layer_3": -9.75,
+        "layer_4": -1.97,
+        "layer_5": -3.75,
+        "layer_6": -3.42,
+        "layer_7": 1.33,
+        "layer_8": 11.44,
+        "layer_9": 14.32,
+        "olr": 7.67
+       },
+       "rms": {
+        "layer_1": 10.3,
+        "layer_2": 19.26,
+        "layer_3": 10.73,
+        "layer_4": 2.73,
+        "layer_5": 4.64,
+        "layer_6": 6.58,
+        "layer_7": 8.49,
+        "layer_8": 13.55,
+        "layer_9": 14.63,
+        "olr": 7.83
+       },
+       "largest_layer_mean": 18.96
+      }
+     },
+     "fit_295k": {
+      "land": {
+       "columns": 807,
+       "mean": {
+        "layer_1": 0.99,
+        "layer_2": -5.89,
+        "layer_3": -3.03,
+        "layer_4": 3.71,
+        "layer_5": 0.4,
+        "layer_6": -4.39,
+        "layer_7": -4.9,
+        "layer_8": 1.61,
+        "layer_9": 3.1,
+        "olr": 1.98
+       },
+       "rms": {
+        "layer_1": 5.34,
+        "layer_2": 6.87,
+        "layer_3": 5.8,
+        "layer_4": 4.19,
+        "layer_5": 2.43,
+        "layer_6": 6.89,
+        "layer_7": 10.58,
+        "layer_8": 8.52,
+        "layer_9": 4.46,
+        "olr": 2.84
+       },
+       "largest_layer_mean": 5.89
+      },
+      "sea": {
+       "columns": 467,
+       "mean": {
+        "layer_1": 5.14,
+        "layer_2": -4.98,
+        "layer_3": -5.11,
+        "layer_4": 4.3,
+        "layer_5": 0.67,
+        "layer_6": -4.86,
+        "layer_7": -4.99,
+        "layer_8": 1.61,
+        "layer_9": 2.9,
+        "olr": -1.49
+       },
+       "rms": {
+        "layer_1": 7.46,
+        "layer_2": 6.16,
+        "layer_3": 7.46,
+        "layer_4": 4.66,
+        "layer_5": 2.11,
+        "layer_6": 6.51,
+        "layer_7": 9.93,
+        "layer_8": 8.15,
+        "layer_9": 4.36,
+        "olr": 2.29
+       },
+       "largest_layer_mean": 5.14
+      },
+      "tropics": {
+       "columns": 398,
+       "mean": {
+        "layer_1": 4.04,
+        "layer_2": -5.15,
+        "layer_3": -4.39,
+        "layer_4": 4.25,
+        "layer_5": 0.57,
+        "layer_6": -4.78,
+        "layer_7": -6.95,
+        "layer_8": 3.31,
+        "layer_9": 2.93,
+        "olr": 1.26
+       },
+       "rms": {
+        "layer_1": 7.14,
+        "layer_2": 6.3,
+        "layer_3": 7.05,
+        "layer_4": 4.56,
+        "layer_5": 1.56,
+        "layer_6": 5.87,
+        "layer_7": 11.79,
+        "layer_8": 9.92,
+        "layer_9": 4.59,
+        "olr": 3.12
+       },
+       "largest_layer_mean": 6.95
+      },
+      "mid_latitudes": {
+       "columns": 478,
+       "mean": {
+        "layer_1": 3.09,
+        "layer_2": -5.57,
+        "layer_3": -4.23,
+        "layer_4": 4.01,
+        "layer_5": 0.64,
+        "layer_6": -5.03,
+        "layer_7": -4.16,
+        "layer_8": 0.74,
+        "layer_9": 3.32,
+        "olr": 0.62
+       },
+       "rms": {
+        "layer_1": 6.23,
+        "layer_2": 6.7,
+        "layer_3": 6.93,
+        "layer_4": 4.51,
+        "layer_5": 2.45,
+        "layer_6": 7.38,
+        "layer_7": 9.95,
+        "layer_8": 7.81,
+        "layer_9": 4.55,
+        "olr": 2.6
+       },
+       "largest_layer_mean": 5.57
+      },
+      "high_latitudes": {
+       "columns": 398,
+       "mean": {
+        "layer_1": 0.28,
+        "layer_2": -5.95,
+        "layer_3": -2.65,
+        "layer_4": 3.5,
+        "layer_5": 0.25,
+        "layer_6": -3.8,
+        "layer_7": -3.84,
+        "layer_8": 0.95,
+        "layer_9": 2.77,
+        "olr": 0.26
+       },
+       "rms": {
+        "layer_1": 5.03,
+        "layer_2": 6.83,
+        "layer_3": 5.1,
+        "layer_4": 3.98,
+        "layer_5": 2.74,
+        "layer_6": 6.79,
+        "layer_7": 9.21,
+        "layer_8": 7.32,
+        "layer_9": 4.09,
+        "olr": 2.16
+       },
+       "largest_layer_mean": 5.95
+      },
+      "fitted_on_these_columns": false
+     },
+     "refit_301k": {
+      "land": {
+       "columns": 807,
+       "mean": {
+        "layer_1": 1.79,
+        "layer_2": -0.04,
+        "layer_3": -1.51,
+        "layer_4": 0.37,
+        "layer_5": -1.47,
+        "layer_6": -1.68,
+        "layer_7": -0.84,
+        "layer_8": 1.81,
+        "layer_9": -0.82,
+        "olr": 1.31
+       },
+       "rms": {
+        "layer_1": 5.54,
+        "layer_2": 3.53,
+        "layer_3": 5.17,
+        "layer_4": 1.97,
+        "layer_5": 2.81,
+        "layer_6": 5.57,
+        "layer_7": 9.41,
+        "layer_8": 8.56,
+        "layer_9": 3.31,
+        "olr": 2.43
+       },
+       "largest_layer_mean": 1.81
+      },
+      "sea": {
+       "columns": 467,
+       "mean": {
+        "layer_1": 0.44,
+        "layer_2": 1.49,
+        "layer_3": -1.82,
+        "layer_4": -0.16,
+        "layer_5": -0.98,
+        "layer_6": -1.99,
+        "layer_7": -0.92,
+        "layer_8": 2.17,
+        "layer_9": -1.09,
+        "olr": 1.02
+       },
+       "rms": {
+        "layer_1": 5.34,
+        "layer_2": 3.89,
+        "layer_3": 5.69,
+        "layer_4": 1.81,
+        "layer_5": 2.23,
+        "layer_6": 4.76,
+        "layer_7": 8.65,
+        "layer_8": 8.27,
+        "layer_9": 3.41,
+        "olr": 2.03
+       },
+       "largest_layer_mean": 2.17
+      },
+      "tropics": {
+       "columns": 398,
+       "mean": {
+        "layer_1": 2.29,
+        "layer_2": 0.94,
+        "layer_3": -2.08,
+        "layer_4": 0.41,
+        "layer_5": -1.18,
+        "layer_6": -2.01,
+        "layer_7": -2.91,
+        "layer_8": 3.68,
+        "layer_9": -0.96,
+        "olr": 2.05
+       },
+       "rms": {
+        "layer_1": 6.96,
+        "layer_2": 3.82,
+        "layer_3": 5.94,
+        "layer_4": 1.65,
+        "layer_5": 1.87,
+        "layer_6": 3.96,
+        "layer_7": 9.96,
+        "layer_8": 10.05,
+        "layer_9": 3.62,
+        "olr": 2.93
+       },
+       "largest_layer_mean": 3.68
+      },
+      "mid_latitudes": {
+       "columns": 478,
+       "mean": {
+        "layer_1": 1.9,
+        "layer_2": 0.52,
+        "layer_3": -2.07,
+        "layer_4": 0.26,
+        "layer_5": -1.15,
+        "layer_6": -2.25,
+        "layer_7": -0.08,
+        "layer_8": 1.08,
+        "layer_9": -0.64,
+        "olr": 1.06
+       },
+       "rms": {
+        "layer_1": 5.27,
+        "layer_2": 3.79,
+        "layer_3": 5.73,
+        "layer_4": 2.11,
+        "layer_5": 2.64,
+        "layer_6": 5.85,
+        "layer_7": 9.03,
+        "layer_8": 7.84,
+        "layer_9": 3.18,
+        "olr": 2.09
+       },
+       "largest_layer_mean": 2.25
+      },
+      "high_latitudes": {
+       "columns": 398,
+       "mean": {
+        "layer_1": -0.42,
+        "layer_2": 0.1,
+        "layer_3": -0.63,
+        "layer_4": -0.16,
+        "layer_5": -1.57,
+        "layer_6": -1.03,
+        "layer_7": 0.22,
+        "layer_8": 1.25,
+        "layer_9": -1.21,
+        "olr": 0.54
+       },
+       "rms": {
+        "layer_1": 3.74,
+        "layer_2": 3.34,
+        "layer_3": 4.17,
+        "layer_4": 1.91,
+        "layer_5": 3.16,
+        "layer_6": 5.72,
+        "layer_7": 8.39,
+        "layer_8": 7.36,
+        "layer_9": 3.25,
+        "olr": 1.72
+       },
+       "largest_layer_mean": 1.57
+      },
+      "fitted_on_these_columns": false
+     }
+    }
+   }
+  }
+ ],
+ "evidence": "PlaSim's clear-sky longwave as a copy of its arithmetic (which reproduces its own heating within 0.01 K a day on cloud-free 3-day means) with and without each correction the runner can add, against the atmosphere domain's correlated-k model on the same columns; both plane-parallel, without the curved air's escape. The states are GCM years, those near 301 K from a run still warming 1.5 K a year; correlated-k is the target, not line-by-line.",
+ "reading_rule": "Errors are PlaSim (copy) less correlated-k in W/m2 by layer from the ground (negative cools too much) and in the outgoing longwave, means and rms over the columns of each group: plasim without a correction, and under each correction's name with it, scaled by (T / tref)^4 as the GCM scales it; fitted_on_these_columns marks the sample a correction was fitted on. cloud_free samples the columns clear of cloud at every level, as the corrections were fitted; all samples every n-th column of the year whatever its cloud, both codes taken clear-sky. near_301k gathers the cases whose global ground lies within 0.75 K of 301 K and, for each correction, the largest layer mean over land or sea among them; it holds when that is within holds_w_m2, the largest layer error the 295 K fit left in any band of latitude on its own columns. all_cases does the same over every case checked, for runs away from 301 K.",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/plasim_longwave.py": "1e15af92615ebbba"
+  }
+ }
+}

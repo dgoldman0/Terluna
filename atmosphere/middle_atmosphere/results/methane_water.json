@@ -1,0 +1,759 @@
+{
+ "schema": "terluna.atmosphere.methane-water/1",
+ "methane_ppm": 1.9,
+ "n2o_ppb": 100.0,
+ "cases": {
+  "moon_1.2atm_titania_stack": {
+   "cold_trap_water": 2.4000150644099826e-08,
+   "curved_light_14_october": {
+    "base_temperature_k": 168.36738302634012,
+    "atomic_o_fraction_at_base": 3.331681289301985e-21,
+    "rows": [
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 0.0,
+      "exobase_temperature_k": 168.3673827289848,
+      "exobase_radius_R": 2.041002873218135,
+      "molecular_loss_kg_s": 2.180616342330533e-07,
+      "atomic_o_loss_eddy_kg_s": 1.1764479664587177e-21,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-06,
+      "exobase_temperature_k": 183.661496031327,
+      "exobase_radius_R": 2.1234782193594763,
+      "molecular_loss_kg_s": 4.97192510960561e-06,
+      "atomic_o_loss_eddy_kg_s": 7.190594093609236e-21,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 3e-06,
+      "exobase_temperature_k": 214.74892487023027,
+      "exobase_radius_R": 2.3179522984421057,
+      "molecular_loss_kg_s": 0.0007203594285973427,
+      "atomic_o_loss_eddy_kg_s": 1.2975182493527872e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-05,
+      "exobase_temperature_k": 317.0314914122101,
+      "exobase_radius_R": 3.4913950777408687,
+      "molecular_loss_kg_s": 10.983121473046095,
+      "atomic_o_loss_eddy_kg_s": 3.981431855485089e-17,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     },
+     {
+      "heat_source": "film_quiet",
+      "deposited_heat_w_m2": 9.635751896369723e-10,
+      "exobase_temperature_k": 168.38204720957896,
+      "exobase_radius_R": 2.0410783955811627,
+      "molecular_loss_kg_s": 2.1877645417885583e-07,
+      "atomic_o_loss_eddy_kg_s": 1.1786763478370859e-21,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "film_maximum",
+      "deposited_heat_w_m2": 1.9673987375104604e-08,
+      "exobase_temperature_k": 168.66682457591406,
+      "exobase_radius_R": 2.0425463037097913,
+      "molecular_loss_kg_s": 2.3310409620555997e-07,
+      "atomic_o_loss_eddy_kg_s": 1.2227177957514374e-21,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_quiet",
+      "deposited_heat_w_m2": 1.6751049043095798e-06,
+      "exobase_temperature_k": 194.07654741079628,
+      "exobase_radius_R": 2.1842686767171475,
+      "molecular_loss_kg_s": 3.147453742985966e-05,
+      "atomic_o_loss_eddy_kg_s": 2.0979414835037895e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_maximum",
+      "deposited_heat_w_m2": 4.245470914830341e-06,
+      "exobase_temperature_k": 234.49196522863588,
+      "exobase_radius_R": 2.465157289984029,
+      "molecular_loss_kg_s": 0.008557854666202276,
+      "atomic_o_loss_eddy_kg_s": 5.517744918959468e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     }
+    ]
+   },
+   "unbroken": {
+    "water_above_tropopause": 2.4000150644099826e-08,
+    "tropopause_k": 178.9025910166821,
+    "t_1pa_k": 174.92316472725693,
+    "solve_seconds": 230.36679315567017,
+    "base_temperature_k": 168.3833570644666,
+    "atomic_o_fraction_at_base": 4.288159237301604e-22,
+    "rows": [
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 0.0,
+      "exobase_temperature_k": 168.38335676560783,
+      "exobase_radius_R": 2.04120165519871,
+      "molecular_loss_kg_s": 2.1917434559457074e-07,
+      "atomic_o_loss_eddy_kg_s": 1.5186956043622537e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-06,
+      "exobase_temperature_k": 183.67766594260345,
+      "exobase_radius_R": 2.1236968879997864,
+      "molecular_loss_kg_s": 4.9940192435147915e-06,
+      "atomic_o_loss_eddy_kg_s": 9.278991462805807e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 3e-06,
+      "exobase_temperature_k": 214.7655617760396,
+      "exobase_radius_R": 2.318222863396666,
+      "molecular_loss_kg_s": 0.0007228809919162073,
+      "atomic_o_loss_eddy_kg_s": 1.673472001017543e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-05,
+      "exobase_temperature_k": 317.03451706784,
+      "exobase_radius_R": 3.491897283741185,
+      "molecular_loss_kg_s": 10.996180375930127,
+      "atomic_o_loss_eddy_kg_s": 5.128379605846643e-18,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     },
+     {
+      "heat_source": "film_quiet",
+      "deposited_heat_w_m2": 9.635751896369723e-10,
+      "exobase_temperature_k": 168.39802142474093,
+      "exobase_radius_R": 2.041277195215085,
+      "molecular_loss_kg_s": 2.1989265652498908e-07,
+      "atomic_o_loss_eddy_kg_s": 1.521571640991539e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "film_maximum",
+      "deposited_heat_w_m2": 1.9673987375104604e-08,
+      "exobase_temperature_k": 168.6828022615602,
+      "exobase_radius_R": 2.042745446667265,
+      "molecular_loss_kg_s": 2.342901679514659e-07,
+      "atomic_o_loss_eddy_kg_s": 1.5784130391220832e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_quiet",
+      "deposited_heat_w_m2": 1.6751049043095798e-06,
+      "exobase_temperature_k": 194.09286284766438,
+      "exobase_radius_R": 2.1845027987087575,
+      "molecular_loss_kg_s": 3.160290609906178e-05,
+      "atomic_o_loss_eddy_kg_s": 2.7066974881510524e-21,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_maximum",
+      "deposited_heat_w_m2": 4.245470914830341e-06,
+      "exobase_temperature_k": 234.50893605145674,
+      "exobase_radius_R": 2.4654719417099695,
+      "molecular_loss_kg_s": 0.008584218220396603,
+      "atomic_o_loss_eddy_kg_s": 7.114833551757075e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     }
+    ]
+   },
+   "broken": {
+    "water_above_tropopause": 3.824000150644099e-06,
+    "tropopause_k": 193.82937703136443,
+    "t_1pa_k": 177.43447490588844,
+    "solve_seconds": 168.79088616371155,
+    "base_temperature_k": 170.32882640946457,
+    "atomic_o_fraction_at_base": 4.721907081036141e-22,
+    "rows": [
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 0.0,
+      "exobase_temperature_k": 170.32882586083343,
+      "exobase_radius_R": 2.0657561403250777,
+      "molecular_loss_kg_s": 4.0463987562944577e-07,
+      "atomic_o_loss_eddy_kg_s": 2.387323882142733e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-06,
+      "exobase_temperature_k": 185.64719636325844,
+      "exobase_radius_R": 2.1507313749743813,
+      "molecular_loss_kg_s": 8.524150863331549e-06,
+      "atomic_o_loss_eddy_kg_s": 1.3947643984462122e-21,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 3e-06,
+      "exobase_temperature_k": 216.79247898486514,
+      "exobase_radius_R": 2.3517461923246312,
+      "molecular_loss_kg_s": 0.0011024792825682708,
+      "atomic_o_loss_eddy_kg_s": 2.359511073538108e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-05,
+      "exobase_temperature_k": 317.32683086377983,
+      "exobase_radius_R": 3.55312212098828,
+      "molecular_loss_kg_s": 12.654815152461465,
+      "atomic_o_loss_eddy_kg_s": 6.163317238099778e-18,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED EARTH_TIDES_REQUIRE_REVIEW"
+     },
+     {
+      "heat_source": "film_quiet",
+      "deposited_heat_w_m2": 9.635751896369723e-10,
+      "exobase_temperature_k": 170.34351244109774,
+      "exobase_radius_R": 2.065833880144249,
+      "molecular_loss_kg_s": 4.0593146307371304e-07,
+      "atomic_o_loss_eddy_kg_s": 2.3917286712260844e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "film_maximum",
+      "deposited_heat_w_m2": 1.9673987375104604e-08,
+      "exobase_temperature_k": 170.62871939014866,
+      "exobase_radius_R": 2.0673449143522697,
+      "molecular_loss_kg_s": 4.3179736149453897e-07,
+      "atomic_o_loss_eddy_kg_s": 2.478742492315063e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_quiet",
+      "deposited_heat_w_m2": 1.6751049043095798e-06,
+      "exobase_temperature_k": 196.0802826643548,
+      "exobase_radius_R": 2.2134669979907837,
+      "molecular_loss_kg_s": 5.1642836869007724e-05,
+      "atomic_o_loss_eddy_kg_s": 3.9688519799505525e-21,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_maximum",
+      "deposited_heat_w_m2": 4.245470914830341e-06,
+      "exobase_temperature_k": 236.57635092394685,
+      "exobase_radius_R": 2.504522298399803,
+      "molecular_loss_kg_s": 0.012450311267697668,
+      "atomic_o_loss_eddy_kg_s": 9.751349804817409e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     }
+    ]
+   }
+  },
+  "moon_1.2atm_titania_stack_nonlte": {
+   "cold_trap_water": 2.4000150644099826e-08,
+   "curved_light_14_october": {
+    "base_temperature_k": 197.1485331097822,
+    "atomic_o_fraction_at_base": 3.382832845460013e-21,
+    "rows": [
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 0.0,
+      "exobase_temperature_k": 197.14779094686426,
+      "exobase_radius_R": 2.4929694686677992,
+      "molecular_loss_kg_s": 0.000595505166880134,
+      "atomic_o_loss_eddy_kg_s": 1.2438230067249485e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-06,
+      "exobase_temperature_k": 212.8423046197302,
+      "exobase_radius_R": 2.6290029818442284,
+      "molecular_loss_kg_s": 0.005368103769123689,
+      "atomic_o_loss_eddy_kg_s": 4.4959795482925595e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 3e-06,
+      "exobase_temperature_k": 244.70473711050056,
+      "exobase_radius_R": 2.9691653944201635,
+      "molecular_loss_kg_s": 0.19797535849215314,
+      "atomic_o_loss_eddy_kg_s": 3.766334369157309e-18,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-05,
+      "exobase_temperature_k": 309.43264215767135,
+      "exobase_radius_R": 4.408134866995983,
+      "molecular_loss_kg_s": 47.499347791895595,
+      "atomic_o_loss_eddy_kg_s": 1.0864166162772354e-16,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED EARTH_TIDES_REQUIRE_REVIEW"
+     },
+     {
+      "heat_source": "film_quiet",
+      "deposited_heat_w_m2": 9.635751896369723e-10,
+      "exobase_temperature_k": 197.16282047160632,
+      "exobase_radius_R": 2.4930918331168064,
+      "molecular_loss_kg_s": 0.0005968600243176852,
+      "atomic_o_loss_eddy_kg_s": 1.2454723635061968e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "film_maximum",
+      "deposited_heat_w_m2": 1.9673987375104604e-08,
+      "exobase_temperature_k": 197.45469419647912,
+      "exobase_radius_R": 2.495470984072199,
+      "molecular_loss_kg_s": 0.000623746498983463,
+      "atomic_o_loss_eddy_kg_s": 1.277890537674309e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_quiet",
+      "deposited_heat_w_m2": 1.6751049043095798e-06,
+      "exobase_temperature_k": 223.54661366542976,
+      "exobase_radius_R": 2.732457364580115,
+      "molecular_loss_kg_s": 0.020176870403816684,
+      "atomic_o_loss_eddy_kg_s": 9.778694662981364e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_maximum",
+      "deposited_heat_w_m2": 4.245470914830341e-06,
+      "exobase_temperature_k": 264.0720552156468,
+      "exobase_radius_R": 3.2370624909278307,
+      "molecular_loss_kg_s": 1.18269016537452,
+      "atomic_o_loss_eddy_kg_s": 1.0947318995359866e-17,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     }
+    ]
+   },
+   "unbroken": {
+    "water_above_tropopause": 2.4000150644099826e-08,
+    "tropopause_k": 178.9025910166821,
+    "t_1pa_k": 180.9212553427963,
+    "solve_seconds": 257.1616005897522,
+    "base_temperature_k": 197.16754196649538,
+    "atomic_o_fraction_at_base": 4.354036064911681e-22,
+    "rows": [
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 0.0,
+      "exobase_temperature_k": 197.16679648816856,
+      "exobase_radius_R": 2.4933470688889243,
+      "molecular_loss_kg_s": 0.0005982037375870108,
+      "atomic_o_loss_eddy_kg_s": 1.605208568672569e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-06,
+      "exobase_temperature_k": 212.86159795827686,
+      "exobase_radius_R": 2.629432641964272,
+      "molecular_loss_kg_s": 0.005389860976755344,
+      "atomic_o_loss_eddy_kg_s": 5.800709934966868e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 3e-06,
+      "exobase_temperature_k": 244.72407540470823,
+      "exobase_radius_R": 2.9697385441721096,
+      "molecular_loss_kg_s": 0.1986271021460123,
+      "atomic_o_loss_eddy_kg_s": 4.857286937646275e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-05,
+      "exobase_temperature_k": 309.4212885241572,
+      "exobase_radius_R": 4.40875633019923,
+      "molecular_loss_kg_s": 47.53084351172869,
+      "atomic_o_loss_eddy_kg_s": 1.398988660444523e-17,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED EARTH_TIDES_REQUIRE_REVIEW"
+     },
+     {
+      "heat_source": "film_quiet",
+      "deposited_heat_w_m2": 9.635751896369723e-10,
+      "exobase_temperature_k": 197.18182628345173,
+      "exobase_radius_R": 2.493469478290379,
+      "molecular_loss_kg_s": 0.0005995644295032478,
+      "atomic_o_loss_eddy_kg_s": 1.607336676001169e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "film_maximum",
+      "deposited_heat_w_m2": 1.9673987375104604e-08,
+      "exobase_temperature_k": 197.4737052663258,
+      "exobase_radius_R": 2.4958495039385475,
+      "molecular_loss_kg_s": 0.0006265665512328773,
+      "atomic_o_loss_eddy_kg_s": 1.6491645962134938e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_quiet",
+      "deposited_heat_w_m2": 1.6751049043095798e-06,
+      "exobase_temperature_k": 223.5660810197225,
+      "exobase_radius_R": 2.7329292431995746,
+      "molecular_loss_kg_s": 0.020253098383745803,
+      "atomic_o_loss_eddy_kg_s": 1.261454342688877e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_maximum",
+      "deposited_heat_w_m2": 4.245470914830341e-06,
+      "exobase_temperature_k": 264.08892933902547,
+      "exobase_radius_R": 3.237735998990123,
+      "molecular_loss_kg_s": 1.1859640657700359,
+      "atomic_o_loss_eddy_kg_s": 1.4114227854866801e-18,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     }
+    ]
+   },
+   "broken": {
+    "water_above_tropopause": 3.824000150644099e-06,
+    "tropopause_k": 193.82937703136443,
+    "t_1pa_k": 183.67741452553568,
+    "solve_seconds": 244.5014615058899,
+    "base_temperature_k": 199.15607840044905,
+    "atomic_o_fraction_at_base": 4.78712151371264e-22,
+    "rows": [
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 0.0,
+      "exobase_temperature_k": 199.15489519910008,
+      "exobase_radius_R": 2.5335996049886313,
+      "molecular_loss_kg_s": 0.0009558697784794561,
+      "atomic_o_loss_eddy_kg_s": 2.3225565047777747e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-06,
+      "exobase_temperature_k": 214.87964078175798,
+      "exobase_radius_R": 2.6753066077881105,
+      "molecular_loss_kg_s": 0.00820002297850721,
+      "atomic_o_loss_eddy_kg_s": 8.164065759098135e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 3e-06,
+      "exobase_temperature_k": 246.7341712080742,
+      "exobase_radius_R": 3.031045479585581,
+      "molecular_loss_kg_s": 0.2791882966791702,
+      "atomic_o_loss_eddy_kg_s": 6.541895843103256e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-05,
+      "exobase_temperature_k": 308.2016629581914,
+      "exobase_radius_R": 4.473984986878477,
+      "molecular_loss_kg_s": 50.87234940267828,
+      "atomic_o_loss_eddy_kg_s": 1.608721552923072e-17,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED EARTH_TIDES_REQUIRE_REVIEW"
+     },
+     {
+      "heat_source": "film_quiet",
+      "deposited_heat_w_m2": 9.635751896369723e-10,
+      "exobase_temperature_k": 199.16995342664092,
+      "exobase_radius_R": 2.533726863695969,
+      "molecular_loss_kg_s": 0.0009579938626947448,
+      "atomic_o_loss_eddy_kg_s": 2.325566794223676e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "film_maximum",
+      "deposited_heat_w_m2": 1.9673987375104604e-08,
+      "exobase_temperature_k": 199.46238493984566,
+      "exobase_radius_R": 2.53620124975193,
+      "molecular_loss_kg_s": 0.0010001233121095733,
+      "atomic_o_loss_eddy_kg_s": 2.3847171347712032e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_quiet",
+      "deposited_heat_w_m2": 1.6751049043095798e-06,
+      "exobase_temperature_k": 225.60125889456404,
+      "exobase_radius_R": 2.783364589748521,
+      "molecular_loss_kg_s": 0.02995209439399511,
+      "atomic_o_loss_eddy_kg_s": 1.7475011311094582e-19,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_maximum",
+      "deposited_heat_w_m2": 4.245470914830341e-06,
+      "exobase_temperature_k": 265.80239092807835,
+      "exobase_radius_R": 3.309400413852836,
+      "molecular_loss_kg_s": 1.5754143226901938,
+      "atomic_o_loss_eddy_kg_s": 1.8419306305991853e-18,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     }
+    ]
+   }
+  },
+  "moon_1.2atm_titania_stack_nonlte_nir_collisional": {
+   "cold_trap_water": 2.4000150644099826e-08,
+   "curved_light_14_october": {
+    "base_temperature_k": 145.67985461583248,
+    "atomic_o_fraction_at_base": 3.2449629209823286e-21,
+    "rows": [
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 0.0,
+      "exobase_temperature_k": 145.67985461575364,
+      "exobase_radius_R": 1.7980405738303489,
+      "molecular_loss_kg_s": 5.431142836037513e-11,
+      "atomic_o_loss_eddy_kg_s": 9.18087381250347e-24,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-06,
+      "exobase_temperature_k": 160.72030918993678,
+      "exobase_radius_R": 1.8584126480382561,
+      "molecular_loss_kg_s": 3.963918608337424e-09,
+      "atomic_o_loss_eddy_kg_s": 1.0890820538985204e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 3e-06,
+      "exobase_temperature_k": 191.21052358530574,
+      "exobase_radius_R": 1.9965828036829911,
+      "molecular_loss_kg_s": 2.9382732422072732e-06,
+      "atomic_o_loss_eddy_kg_s": 4.969404218309209e-21,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-05,
+      "exobase_temperature_k": 302.56498979183925,
+      "exobase_radius_R": 2.8178525724564,
+      "molecular_loss_kg_s": 1.075516665930627,
+      "atomic_o_loss_eddy_kg_s": 9.057376205969564e-18,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     },
+     {
+      "heat_source": "film_quiet",
+      "deposited_heat_w_m2": 9.635751896369723e-10,
+      "exobase_temperature_k": 145.6942867396897,
+      "exobase_radius_R": 1.7980963371163154,
+      "molecular_loss_kg_s": 5.455891465028762e-11,
+      "atomic_o_loss_eddy_kg_s": 9.204947086691005e-24,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "film_maximum",
+      "deposited_heat_w_m2": 1.9673987375104604e-08,
+      "exobase_temperature_k": 145.97454791750002,
+      "exobase_radius_R": 1.7991800172975618,
+      "molecular_loss_kg_s": 5.958359964372455e-11,
+      "atomic_o_loss_eddy_kg_s": 9.684154608399905e-24,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_quiet",
+      "deposited_heat_w_m2": 1.6751049043095798e-06,
+      "exobase_temperature_k": 170.94847180548012,
+      "exobase_radius_R": 1.9022362053503183,
+      "molecular_loss_kg_s": 4.743493902188569e-08,
+      "atomic_o_loss_eddy_kg_s": 4.565434257546776e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_maximum",
+      "deposited_heat_w_m2": 4.245470914830341e-06,
+      "exobase_temperature_k": 210.51017341113496,
+      "exobase_radius_R": 2.097266316245629,
+      "molecular_loss_kg_s": 7.110856775186491e-05,
+      "atomic_o_loss_eddy_kg_s": 3.158619299011122e-20,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     }
+    ]
+   },
+   "unbroken": {
+    "water_above_tropopause": 2.4000150644099826e-08,
+    "tropopause_k": 178.9025910166821,
+    "t_1pa_k": 150.59733426859987,
+    "solve_seconds": 316.2365412712097,
+    "base_temperature_k": 145.69010664979973,
+    "atomic_o_fraction_at_base": 4.1764950422791955e-22,
+    "rows": [
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 0.0,
+      "exobase_temperature_k": 145.69010664972058,
+      "exobase_radius_R": 1.7981351089736186,
+      "molecular_loss_kg_s": 5.4545933600484786e-11,
+      "atomic_o_loss_eddy_kg_s": 1.1845991338732453e-24,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-06,
+      "exobase_temperature_k": 160.73066595523207,
+      "exobase_radius_R": 1.858514955353837,
+      "molecular_loss_kg_s": 3.9784401093724764e-09,
+      "atomic_o_loss_eddy_kg_s": 1.4047093453033027e-23,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 3e-06,
+      "exobase_temperature_k": 191.22112324702218,
+      "exobase_radius_R": 1.996704417783524,
+      "molecular_loss_kg_s": 2.9463963765901425e-06,
+      "atomic_o_loss_eddy_kg_s": 6.406318738184028e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-05,
+      "exobase_temperature_k": 302.5752081498334,
+      "exobase_radius_R": 2.818122406545994,
+      "molecular_loss_kg_s": 1.076936052326385,
+      "atomic_o_loss_eddy_kg_s": 1.1666906631928348e-18,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     },
+     {
+      "heat_source": "film_quiet",
+      "deposited_heat_w_m2": 9.635751896369723e-10,
+      "exobase_temperature_k": 145.70453887004183,
+      "exobase_radius_R": 1.7981908792578913,
+      "molecular_loss_kg_s": 5.479444906398394e-11,
+      "atomic_o_loss_eddy_kg_s": 1.187704797119206e-24,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "film_maximum",
+      "deposited_heat_w_m2": 1.9673987375104604e-08,
+      "exobase_temperature_k": 145.98480192107814,
+      "exobase_radius_R": 1.79927469550947,
+      "molecular_loss_kg_s": 5.983999251483377e-11,
+      "atomic_o_loss_eddy_kg_s": 1.2495265132210446e-24,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_quiet",
+      "deposited_heat_w_m2": 1.6751049043095798e-06,
+      "exobase_temperature_k": 170.95890510212095,
+      "exobase_radius_R": 1.9023444034497394,
+      "molecular_loss_kg_s": 4.7591953511921946e-08,
+      "atomic_o_loss_eddy_kg_s": 5.887362547441205e-23,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_maximum",
+      "deposited_heat_w_m2": 4.245470914830341e-06,
+      "exobase_temperature_k": 210.52095311234172,
+      "exobase_radius_R": 2.0974033953461237,
+      "molecular_loss_kg_s": 7.127782164240398e-05,
+      "atomic_o_loss_eddy_kg_s": 4.071055250638436e-21,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     }
+    ]
+   },
+   "broken": {
+    "water_above_tropopause": 3.824000150644099e-06,
+    "tropopause_k": 193.82937703136443,
+    "t_1pa_k": 151.92456687468544,
+    "solve_seconds": 225.28693079948425,
+    "base_temperature_k": 146.87130204559006,
+    "atomic_o_fraction_at_base": 4.600952581608896e-22,
+    "rows": [
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 0.0,
+      "exobase_temperature_k": 146.87130204546094,
+      "exobase_radius_R": 1.8091070045679083,
+      "molecular_loss_kg_s": 8.926103704384775e-11,
+      "atomic_o_loss_eddy_kg_s": 1.7336475864635864e-24,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-06,
+      "exobase_temperature_k": 161.92398194521644,
+      "exobase_radius_R": 1.8703931412608799,
+      "molecular_loss_kg_s": 6.044960850767326e-09,
+      "atomic_o_loss_eddy_kg_s": 1.9703207696587475e-23,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 3e-06,
+      "exobase_temperature_k": 192.44257023030914,
+      "exobase_radius_R": 2.0108363137154504,
+      "molecular_loss_kg_s": 4.042275117427388e-06,
+      "atomic_o_loss_eddy_kg_s": 8.475882248768113e-22,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "swept",
+      "deposited_heat_w_m2": 1e-05,
+      "exobase_temperature_k": 303.73869895961093,
+      "exobase_radius_R": 2.8495042899471374,
+      "molecular_loss_kg_s": 1.2520110260285275,
+      "atomic_o_loss_eddy_kg_s": 1.4053704203294012e-18,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO KINETIC_ESCAPE_SENSITIVITY_REQUIRED"
+     },
+     {
+      "heat_source": "film_quiet",
+      "deposited_heat_w_m2": 9.635751896369723e-10,
+      "exobase_temperature_k": 146.88574541812707,
+      "exobase_radius_R": 1.8091635906622616,
+      "molecular_loss_kg_s": 8.96603787983936e-11,
+      "atomic_o_loss_eddy_kg_s": 1.7381112919354285e-24,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "film_maximum",
+      "deposited_heat_w_m2": 1.9673987375104604e-08,
+      "exobase_temperature_k": 147.1662252132526,
+      "exobase_radius_R": 1.8102632688194717,
+      "molecular_loss_kg_s": 9.776139478207246e-11,
+      "atomic_o_loss_eddy_kg_s": 1.8269250671375796e-24,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_quiet",
+      "deposited_heat_w_m2": 1.6751049043095798e-06,
+      "exobase_temperature_k": 172.16108141665475,
+      "exobase_radius_R": 1.9149098692633437,
+      "molecular_loss_kg_s": 6.946964523214622e-08,
+      "atomic_o_loss_eddy_kg_s": 8.070535963161798e-23,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     },
+     {
+      "heat_source": "leak_maximum",
+      "deposited_heat_w_m2": 4.245470914830341e-06,
+      "exobase_temperature_k": 211.76326673479,
+      "exobase_radius_R": 2.113342908098682,
+      "molecular_loss_kg_s": 9.360372247607021e-05,
+      "atomic_o_loss_eddy_kg_s": 5.253241057856334e-21,
+      "flags": "MOLECULAR_LIMIT_ONLY PRESCRIBED_LOWER_ATMOSPHERE NO_IR_COOLING NET_HEATING_INPUT_NOT_SPECTRAL_PREDICTION FIXED_MIXING_RATIO"
+     }
+    ]
+   }
+  }
+ },
+ "ledger": {
+  "path": "climate/results/gcm/twilight_301k.json",
+  "sha256": "01c6eb854493aac6"
+ },
+ "evidence": "One-dimensional, global- and diurnal-mean, clear-sky radiative-convective and photochemical equilibrium (equilibrium.py) for the three design cases behind the titania stack at a 288 K ground, with the curved air's near-infrared heating, the design air's N2O and the water above the tropopause at the two bounds of methane's oxidation; the thermal column above the 0.3 Pa base as escape.py runs it. Methane's own bands and chemistry are left out.",
+ "reading_rule": "cases holds each design case: the cold trap's water above the tropopause as stored, the 14 October check's curved-light exobase rows (curved_light.json) and, for each bound, the water held above the tropopause, the tropopause and 1 Pa temperatures, the 0.3 Pa base and the exobase rows at the exobase table's heats (curved_light.exobase): exobase temperature and radius, molecular and atomic-oxygen loss.",
+ "producer": {
+  "domain": "atmosphere",
+  "files": {
+   "middle_atmosphere/methane_water.py": "89a13a06617d7de4",
+   "middle_atmosphere/curved_light.py": "885a85f828999732",
+   "middle_atmosphere/equilibrium.py": "265bc854a481936e",
+   "middle_atmosphere/escape.py": "5571aa6a55a04bb3",
+   "middle_atmosphere/run.py": "551829d244329d12",
+   "middle_atmosphere/chemistry.py": "c7eb0ece06ef9fc1"
+  }
+ }
+}
