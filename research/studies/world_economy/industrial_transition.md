@@ -97,7 +97,7 @@ Local construction offers another benefit. For each 1 trillion U of programme ex
 
 Refined feed, standardized parts and technology-specific hardware have different storage prospects. A metal or purified compound may retain useful chemistry after a finished mechanism loses compatibility with current designs. The reserve model therefore separates physical attrition from compatibility loss: incompatible material remains physically present, with any recovery process unpriced.
 
-Every case serves the same fifty years of demand. Reserves covering zero, five, twenty or fifty years are purchased initially; later purchases cover shortages or the remaining years. The normalized acquisition cost is 1 U/kg, early positioning costs 0.1 U/kg, annual storage costs 0.002 U per opening physical kilogram, and physical attrition is 0.05% annually. These values are assumptions, the normalization included, ahead of any quotation for lunar film feed.
+Every case serves the same fifty years of demand. Reserves covering zero, five, twenty or fifty years are purchased initially; later purchases cover shortages or the remaining years. The normalized acquisition cost is 1 U/kg, early positioning costs 0.1 U/kg, annual storage costs 0.002 U per opening physical kilogram, and physical attrition is 0.05% annually. These values are assumptions, the normalization included, which a quotation for lunar film feed would replace.
 
 At a constant alternative delivered price of 1.5 U/kg and a 0.5% real discount rate, purchasing one unit each year costs 66.214 U in present value. The least-cost tested reserve depends on assumed compatibility decay:
 

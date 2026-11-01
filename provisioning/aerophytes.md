@@ -26,8 +26,8 @@ expenditure from a possible new product allocation; [inputs](aerophytes_inputs.j
 | Small 8–15 m bodies in the food-web study | Experimental specialist forage or whole-body crops | Propagules and ecological restoration stock | Rebuilding gas, envelopes and reserves consumes most construction carbon; smallness does not make them efficient annual crops |
 | G50 epiphytes and G51 underside films, associated with the hosts | Candidate herbs, ornamentals, leafy/algal crops, pigments or other specialty compounds | Nursery services, biological collections and material cultures | Their independent fixation is additional to the host account only after their own light, nutrient, water and shading effects are calculated |
 
-The proposed products are designs to investigate beyond what the taxonomic names give. A storage pod,
-exudate organ or cultivated film is a design to investigate. Suitable composition,
+Each proposed product, such as a storage pod,
+exudate organ or cultivated film, is a design to investigate beyond what its organism's name gives. Suitable composition,
 digestibility, processing and harvest response would distinguish a food cultivar from a
 material cultivar. A microbial or fungal culture supplied with host sugars converts the
 host's production, with no independent primary production of its own.
@@ -162,7 +162,7 @@ a round body four square metres of physical surface per projected square metre a
 about 3.63. A 2-km reef therefore has roughly **11.4 km² of physical surface over a 3.14 km²
 projected footprint**, divided among tops, flanks, contacts and undersides. Those surfaces
 offer different light and moisture conditions for gardens, nurseries, pools, films and other
-communities. Walkable floor and productive cropland are portions of that physical surface;
+communities. Only part of that physical surface can become walkable floor or productive cropland:
 built living areas would occupy selected portions while the host keeps its productive tissue
 and the other organisms keep their habitat.
 

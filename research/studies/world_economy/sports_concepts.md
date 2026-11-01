@@ -2,7 +2,7 @@
 
 **Concept proposals, 31 October 2026.** An early sporting programme can begin with three disciplines that use ordinary bodies, built contacts and a shared hall: a timed gate circuit, aerial figures, and a team catching game. Each makes prolonged airborne movement part of an intelligible contest. This note develops candidate rules and facilities for designers, instructors and programme planners, ahead of qualified equipment and any measure of participation or revenue.
 
-The illustrative environment is lunar gravity, **1.2 atm, approximately 17.5% oxygen and 301 K**, matching the current comparison. An early enclosed community can select its own operating conditions; that selection would precede qualification of its activities. Early practice rooms can keep their own conditions ahead of the mature 1.2 atm lock. Humidity, ventilation, clothing and individual response remain unspecified.
+The illustrative environment is lunar gravity, **1.2 atm, approximately 17.5% oxygen and 301 K**, matching the current comparison. An early enclosed community can select its own operating conditions; that selection would precede qualification of its activities. Early practice rooms, enclosed before the open air reaches its 1.2 atm surface pressure, can keep conditions of their own. Humidity, ventilation, clothing and individual response remain unspecified.
 
 ## The movement the games should use
 
