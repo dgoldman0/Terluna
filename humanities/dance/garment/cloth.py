@@ -298,10 +298,12 @@ class Cloth:
         self.use_graph = dev.type == 'cuda'
         self.stats = dict(pairs_max=0, pairs_truncated=0)
 
-    def set_body(self, cap_r):
+    def set_body(self, cap_r, cap_rb=None):
+        """Capsule radii at their a ends, and at their b ends for tapered pieces (default: the same)."""
         n = len(cap_r)
         f32 = dict(device=self.dev, dtype=torch.float32)
         self.cap_r = torch.as_tensor(cap_r, **f32)
+        self.cap_dr = torch.as_tensor(cap_rb, **f32) - self.cap_r if cap_rb is not None else torch.zeros_like(self.cap_r)
         self.capA0 = torch.zeros((n, 3), **f32)
         self.capdA = torch.zeros((n, 3), **f32)
         self.capB0 = torch.zeros((n, 3), **f32)
@@ -505,7 +507,7 @@ class Cloth:
         cpt = a[None] + t[..., None] * ab[None]
         d = x[:, None, :] - cpt
         dist = d.norm(dim=2)
-        pen = r[None] + self.s.body_offset - dist
+        pen = r[None] + t * self.cap_dr[None] + self.s.body_offset - dist
         pmax, best = pen.max(dim=1)
         act = (pmax > 0) & self.free
         ar = torch.arange(self.V, device=self.dev)

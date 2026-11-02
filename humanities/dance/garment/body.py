@@ -37,20 +37,31 @@ def qrot_np(q, v):
 
 
 class Body:
-    def __init__(self, spec=None):
+    def __init__(self, spec=None, form=None):
+        """form: a dress form (schema terluna.visualization.dance-dress-form/1) whose tapered pieces replace
+        body.json's capsules for the cloth, so that dressed renders' cloth stays outside the skin they show; its
+        waist outline places the skirts' waistband. Without it the cloth collides with body.json's capsules."""
         sp = spec or body_spec()
         self.spec = sp
         self.names = [s['name'] for s in sp['segments']]
         self.index = {n: i for i, n in enumerate(self.names)}
         self.origin = np.array([s['origin'] for s in sp['segments']], float)       # world, rest
         caps = []
-        for i, s in enumerate(sp['segments']):
-            for c in s['capsules']:
-                caps.append((i, c['a'], c['b'], c['radius'], s['name']))
+        if form is not None:
+            assert form['schema'] == 'terluna.visualization.dance-dress-form/1', form['schema']
+            for p in form['pieces']:
+                caps.append((self.index[p['segment']], p['a'], p['b'], p['ra'], p['segment'], p['rb']))
+        else:
+            for i, s in enumerate(sp['segments']):
+                for c in s['capsules']:
+                    caps.append((i, c['a'], c['b'], c['radius'], s['name'], c['radius']))
+        self.form = form
+        self.waist = form['waist'] if form is not None else None
         self.cap_seg = np.array([c[0] for c in caps])
         self.cap_a = np.array([c[1] for c in caps], float)                           # relative to the segment origin
         self.cap_b = np.array([c[2] for c in caps], float)
-        self.cap_r = np.array([c[3] for c in caps], float)
+        self.cap_r = np.array([c[3] for c in caps], float)                           # radius at a
+        self.cap_rb = np.array([c[5] for c in caps], float)                          # radius at b (tapered pieces)
         self.cap_name = [c[4] for c in caps]
 
     def capsules(self, pos, quat):
@@ -171,7 +182,7 @@ def run(cloth, pose, attachment, body: Body, t0: float, t1: float, n_sub: int, f
         return tt(a), tt(b), tg
 
     if not cloth.has_body:
-        cloth.set_body(body.cap_r)
+        cloth.set_body(body.cap_r, body.cap_rb)
     n_frames = int(round((t1 - t0) * fps))
     A0, B0, T0 = frame(t0)
     frames, times = [], []

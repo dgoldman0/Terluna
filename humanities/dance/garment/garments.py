@@ -21,7 +21,25 @@ from .body import Attachment, Body, qrot_np
 from .patterns import Piece, annulus, rectangle, sector
 
 WAIST_ABOVE_OMPHALION = 0.02       # m: the natural waist, just above the navel (placement)
-BAND_CLEARANCE = 0.006             # m: waistband radius beyond the abdomen capsule
+BAND_CLEARANCE = 0.006             # m: waistband radius beyond the abdomen capsule (or the dress form's waist)
+
+
+def waist_band(waist, axis_x, z_w):
+    """The waistband on a dress form's waist outline (body.waist), offset by BAND_CLEARANCE: returns its perimeter
+    and band(f) -> (body angle, radius) at fraction f of the perimeter from centre back (theta = pi), turning as
+    theta increases. Points are spaced by arc length, as the pattern's inner edge is."""
+    assert abs(waist['axis_x'] - axis_x) < 1e-3 and abs(waist['z'] - z_w) < 1e-3, 'dress form from another body'
+    th0, r0 = np.asarray(waist['theta']), np.asarray(waist['r']) + BAND_CLEARANCE
+    th = np.pi + np.linspace(0.0, 2 * np.pi, 721)
+    r = np.interp(np.mod(th, 2 * np.pi), th0, r0, period=2 * np.pi)
+    P = np.c_[r * np.cos(th), r * np.sin(th)]
+    s = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(P, axis=0), axis=1))]
+    perim = float(s[-1])
+
+    def band(f):
+        t = np.interp(np.asarray(f) * perim, s, th)
+        return t, np.interp(np.mod(t, 2 * np.pi), th0, r0, period=2 * np.pi)
+    return perim, band
 
 
 @dataclass
@@ -50,7 +68,8 @@ def merge(pieces):
 
 
 def circle_skirt(body: Body, pose0, length=0.85, h=0.02, seed=0) -> Garment:
-    """pose0 = (seg_pos, seg_quat) at the start of dressing."""
+    """pose0 = (seg_pos, seg_quat) at the start of dressing. Its band is round: with a dress form, use skirt(cut=2 pi)."""
+    assert body.waist is None, 'circle_skirt has a round waistband; skirt() puts the band on a dress form'
     sp = {s['name']: s for s in body.spec['segments']}
     ab = sp['abdomen']
     cap = ab['capsules'][0]
@@ -93,6 +112,11 @@ def skirt(body: Body, pose0, cut=2 * np.pi, length=0.85, h=0.02, hem_weight_kg_m
     axis_x = ab['origin'][0] + cap['a'][0]
     r_band = cap['radius'] + BAND_CLEARANCE
     z_w = omph + WAIST_ABOVE_OMPHALION
+    if body.waist is not None:          # the band on the dress form's waist outline; r_band its mean radius
+        perim, band = waist_band(body.waist, axis_x, z_w)
+        r_band = perim / (2 * np.pi)
+    else:
+        band = lambda f: (np.pi + 2 * np.pi * np.asarray(f), np.full(np.shape(f), r_band))
     r_in = 2 * np.pi * r_band / cut
     piece = sector(r_in, r_in + length, cut, h)
     inner = np.array(piece.rings['inner'])
@@ -104,11 +128,12 @@ def skirt(body: Body, pose0, cut=2 * np.pi, length=0.85, h=0.02, hem_weight_kg_m
     ca = np.sqrt(1.0 - sa * sa)
     if cut > 2 * np.pi + 1e-9:
         raise NotImplementedError('a skirt cut from more than one circle needs a fluted starting placement')
-    th = np.pi + psi * 2 * np.pi / cut                      # body angle, centre back (the seam) at -x
-    local = np.c_[rho * sa * np.cos(th), rho * sa * np.sin(th), -(rho - r_in) * ca]
+    th, rb = band(psi / cut)                                # body angle, centre back (the seam) at -x
+    R = rb + (rho - r_in) * sa                              # rho sa on a round band
+    local = np.c_[R * np.cos(th), R * np.sin(th), -(rho - r_in) * ca]
     centre_rest = np.array([axis_x, 0.0, z_w])
-    th_in = np.pi + psi[inner] * 2 * np.pi / cut
-    p_rest = centre_rest + np.c_[r_band * np.cos(th_in), r_band * np.sin(th_in), np.zeros(len(inner))]
+    th_in, rb_in = th[inner], rb[inner]
+    p_rest = centre_rest + np.c_[rb_in * np.cos(th_in), rb_in * np.sin(th_in), np.zeros(len(inner))]
     att = Attachment(body, p_rest, ['pelvis', 'abdomen'], [0.5, 0.5])
     pos, quat = pose0
     tgt = att.targets(pos, quat)
@@ -126,6 +151,8 @@ def skirt(body: Body, pose0, cut=2 * np.pi, length=0.85, h=0.02, hem_weight_kg_m
                   smooth_cone_flare_deg=float(np.degrees(np.arcsin(sa))),
                   hem_weight_kg_m=hem_weight_kg_m, hem_weight_total_kg=hem_weight_kg_m * cut * (r_in + length),
                   natural_waist_height_rest_m=z_w,
+                  waistband=('on the dress form\'s waist outline + %g m' % BAND_CLEARANCE if body.waist is not None
+                             else 'round, the abdomen capsule + %g m' % BAND_CLEARANCE),
                   pattern='ring sector sewn at centre back, centre front on the straight grain',
                   attachment='waistband ring pinned to pelvis 0.5 + abdomen 0.5',
                   area_m2=piece.area(), mean_edge_m=piece.edge_length(), vertices=piece.n_vertices,

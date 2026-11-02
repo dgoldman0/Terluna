@@ -4,7 +4,8 @@
     python -m humanities.dance.garment.drive sleeves earth MOTION.npz OUT.npz
     python -m humanities.dance.garment.drive skirt moon MOTION.npz OUT.npz --fabric wool_plain --cut 0.5 --tether
     # --cut: the share of a circle the skirt is cut from (0.5 a half circle; without it, the full circle skirt of the
-    # first renders); --hem: a weighted hem in kg/m; --tether: tethers from the cloth to the waistband or the cuffs
+    # first renders); --hem: a weighted hem in kg/m; --tether: tethers from the cloth to the waistband or the cuffs;
+    # --form: a dress form measured from the rendered dancer (visualization/dance/dress_form.py), for dressed renders
 
 Output (schema terluna.humanities.dance-garment/1): faces (F, 3) int32; verts (N, V, 3) float32 in the motion's world
 frame at its fps, frame k at time[k]; time (N,); uv (V, 2) pattern coordinates; pinned (P,) int32; meta, a JSON
@@ -14,6 +15,7 @@ the evidence statement.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import time
@@ -43,10 +45,11 @@ def dressing_damping(pose: MotionPose, strong=2.0, gentle=0.5):
 
 def simulate(garment: str, world: str, motion, out, fabric=None, h=0.02, substeps=40, t_raised=6.0, t_lower=1.5,
              t_hold=1.5, settings: Settings | None = None, t_end=None, quiet=False, cut=None, hem_kg_m=0.0,
-             tether=False, length=0.85):
+             tether=False, length=0.85, form=None):
     torch.set_num_threads(3)
     W = WORLDS[world]
-    body = Body()
+    form_doc = json.loads(Path(form).read_text()) if form else None
+    body = Body(form=form_doc)
     pose = MotionPose(str(motion), body, t_raised=t_raised, t_lower=t_lower, t_hold=t_hold)
     p0 = pose(-pose.pre)
     if garment == 'skirt' and cut is None and not hem_kg_m:
@@ -97,6 +100,9 @@ def simulate(garment: str, world: str, motion, out, fabric=None, h=0.02, substep
                     settings=s.to_dict(), self_contact_distance=cloth.d_self, device=str(cloth.dev),
                     dtype='float32', pairs_max=cloth.stats['pairs_max'], pairs_truncated=cloth.stats['pairs_truncated']),
         tethers=bool(tether),
+        body=(dict(collision='dress form', path=str(form), schema=form_doc['schema'],
+                   sha256=hashlib.sha256(Path(form).read_bytes()).hexdigest(), pieces=len(form_doc['pieces']))
+              if form_doc is not None else dict(collision="body.json's capsules")),
         dressing=dict(description='first frame held with the arms raised 80 deg to the side while the garment settles '
                                   'with numerical damping, then the arms lowered to the first frame and held',
                       t_raised=pose.t_raised, t_lower=pose.t_lower, t_hold=pose.t_hold,
@@ -132,9 +138,10 @@ def main(argv=None):
     ap.add_argument('--hem', type=float, default=0.0, help='weighted hem, kg/m')
     ap.add_argument('--tether', action='store_true', help='tethers from the cloth to the waistband or the cuffs')
     ap.add_argument('--length', type=float, default=0.85, help='skirt length, m')
+    ap.add_argument('--form', default=None, help="dress form .json to collide with in place of body.json's capsules")
     a = ap.parse_args(argv)
     simulate(a.garment, a.world, a.motion, a.out, fabric=a.fabric, h=a.h, substeps=a.substeps, t_end=a.t_end,
-             cut=a.cut, hem_kg_m=a.hem, tether=a.tether, length=a.length)
+             cut=a.cut, hem_kg_m=a.hem, tether=a.tether, length=a.length, form=a.form)
     return 0
 
 

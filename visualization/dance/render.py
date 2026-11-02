@@ -44,6 +44,19 @@ RENDER_FPS = 30
 FS = dict(torso=1, head=17, abdomen=19, pelvis=18,
           upper_arm_L=21, upper_arm_R=20, forearm_L=12, forearm_R=11, hand_L=9, hand_R=10,
           thigh_L=24, thigh_R=23, shank_L=15, shank_R=16, foot_L=14, foot_R=13, ear_L=4, ear_R=5)
+# The artist's head set (17) also covers the neck, and the jaw and mouth are a set of their own (22), so the head and
+# neck are weighted by height up the neck instead: planes z = a + b x on the base mesh (x forward, metres) through
+# the neck's base (the notch in front at 1.335 m, the seventh vertebra behind at 1.395 m) and through the jaw line
+# (under the chin at 1.40 m, the skull's base behind at 1.46 m).
+NECK_BASE = (1.366, -0.484)
+JAW_LINE = (1.443, -0.43)
+
+
+def neck_height(V):
+    """Height up the neck: 0 at its base, 1 at the jaw line and the skull's base; above 1 is the head."""
+    zn = NECK_BASE[0] + NECK_BASE[1] * V[:, 0]
+    zb = JAW_LINE[0] + JAW_LINE[1] * V[:, 0]
+    return (V[:, 2] - zn) / np.maximum(zb - zn, 1e-3)
 
 
 # ----------------------------------------------------------------------------------------------- small helpers
@@ -552,11 +565,21 @@ def fix_weights(body, names, mesh_heads):
         W[:, col[f'{s}_clavicle']] *= 1 - smoothstep(0.0, 0.05, 1.20 - z)
     W[np.isin(vfs, list(leg_sets | arm_sets)), col['head']] = 0
     W[:, col['head']] *= smoothstep(1.36, 1.42, z)
-    W[np.isin(vfs, [FS['head'], 2, 3, 4, 5, 7, 8]), :] *= 0.0
-    W[np.isin(vfs, [FS['head'], 2, 3, 4, 5, 7, 8]), col['head']] = 1.0
     W[:, col['pelvis']] *= 1 - smoothstep(1.02, 1.08, z)
     s = W.sum(1, keepdims=True)
     W = np.where(s > 1e-9, W / np.maximum(s, 1e-9), W)
+    # head and neck: the whole face, jaw and mouth go with the skull; the neck's bend spreads along its length, from
+    # the thorax at its base through the neck bone to the head at the jaw line, over a column 6-8.5 cm either side
+    u = neck_height(V)
+    limbs = np.isin(vfs, list(leg_sets | arm_sets))
+    head_zone = (u >= 1.0) & ~limbs
+    th, hd = 1 - smoothstep(0.0, 0.45, u), smoothstep(0.55, 1.0, u)
+    N = np.zeros_like(W)
+    N[:, col['thorax']], N[:, col['head']] = th, hd
+    N[:, col['neck']] = 1 - th - hd
+    f = (1 - smoothstep(0.055, 0.085, np.abs(y))) * smoothstep(-0.25, 0.0, u)
+    f = np.where(head_zone, 1.0, np.where(limbs, 0.0, f))[:, None]
+    W = (1 - f) * W + f * N
     write_weights(body, names, W)
     # Blender's own smoothing across the joints, then limit and normalise
     set_active(body)
@@ -567,11 +590,10 @@ def fix_weights(body, names, mesh_heads):
     bpy.ops.object.vertex_group_limit_total(group_select_mode='ALL', limit=4)
     bpy.ops.object.vertex_group_normalize_all(group_select_mode='ALL', lock_active=False)
     bpy.ops.object.mode_set(mode='OBJECT')
-    # the head stays rigid
+    # the head stays rigid above the jaw line
     W = weights_matrix(body, names)
-    hm = np.isin(vfs, [FS['head'], 2, 3, 4, 5, 7, 8])
-    W[hm] = 0
-    W[hm, col['head']] = 1
+    W[head_zone] = 0
+    W[head_zone, col['head']] = 1
     write_weights(body, names, W)
 
 

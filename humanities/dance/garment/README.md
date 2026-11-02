@@ -65,7 +65,10 @@ Mass sewn to the cloth, such as a weighted hem, adds to its vertices' inertia an
 and self-contact between non-adjacent vertices through a sorted spatial hash rebuilt every 4 substeps; the contact
 distance is 0.75 of the mean edge. Contacts are inelastic. Penetration made within a substep is removed at once;
 older penetration, such as cloth caught where the mannequin's forearm capsule overlaps its hip by 3.8 cm, is removed
-at 0.5 m/s, in position only.
+at 0.5 m/s, in position only. For dressed renders the driver's `--form` replaces the capsules with a dress form measured from the rendered dancer
+(visualization/dance/dress_form.py): 78 tapered pieces whose radius runs linearly along each, reaching the skin the
+renderer shows, and a waist outline on which a skirt's waistband is placed, its points spaced by arc length as the
+pattern's inner edge is. The study's runs and checks keep the capsules.
 
 **Garments.** The skirt is a full circle 0.85 m long on a waistband at the natural waist (2 cm above the omphalion)
 that follows the pelvis and abdomen equally. Skirts of other cuts (a half circle, three quarters) are ring sectors sewn

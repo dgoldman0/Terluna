@@ -169,3 +169,81 @@ def test_cuff_tethers_hold_each_sleeve_to_its_own_cuff():
         assert all(a in ring for a in anchor[idx])
         assert np.allclose(length[idx], 1.05 * uv[idx, 1], atol=1e-9)
 
+
+
+def test_tapered_piece_pushes_cloth_to_its_radius_there():
+    """A dress form's piece tapers from ra to rb along its axis: a vertex that moved inside the cone in this substep
+    goes back out to the radius at its place on the axis (plus the body offset), where a straight capsule of radius
+    ra would have left it, and a vertex outside the cone stays put."""
+    from humanities.dance.garment.patterns import rectangle
+    pc = rectangle(0.1, 0.1, 0.05)
+    X0 = np.c_[pc.vertex_uv, np.zeros(pc.n_vertices)] + 5.0
+    out = {}
+    for rb in (0.1, 0.2):
+        c = Cloth(pc, X0, FABRICS['silk_chiffon'], MOON, Settings(self_collision=False), device='cpu')
+        c.set_body([0.1], [rb])
+        z = torch.zeros((1, 3))
+        c.set_frame(z, z, z + torch.tensor([[0.0, 0.0, 1.0]]), z + torch.tensor([[0.0, 0.0, 1.0]]))
+        c.frac0.fill_(1.0)
+        c.frac1.fill_(1.0)
+        c.dt_now = 1.0 / 2400.0
+        x = c.x.clone()
+        x[0] = torch.tensor([0.12, 0.0, 0.5])            # inside the cone (0.15 there), outside the capsule (0.10)
+        x[1] = torch.tensor([0.0, 0.16, 0.5])            # outside both
+        disp = torch.zeros_like(x)
+        disp[0] = torch.tensor([-0.05, 0.0, 0.0])        # it arrived moving inward in this substep
+        dx, _ = c.body_contact(x, disp)
+        out[rb] = (x + dx)[:2].numpy()
+    off = Settings().body_offset
+    assert np.allclose(out[0.1][0], [0.12, 0.0, 0.5], atol=1e-7)          # straight capsule: already outside
+    assert np.allclose(out[0.2][0], [0.15 + off, 0.0, 0.5], atol=1e-6)    # cone: out to its radius at mid-length
+    assert np.allclose(out[0.2][1], [0.0, 0.16, 0.5], atol=1e-7)
+
+
+def test_skirt_band_follows_a_dress_forms_waist():
+    """With a dress form, a skirt's waistband lies on the form's waist outline plus its clearance, its points spaced
+    by arc length as the pattern's inner edge is, and the pattern's inner edge is as long as the band."""
+    from humanities.dance.garment.body import Body, MotionPose
+    from humanities.dance.garment.garments import BAND_CLEARANCE, WAIST_ABOVE_OMPHALION, skirt
+    from humanities.dance.garment.trials import TEST_PATTERN
+    body = Body()
+    ab = {s['name']: s for s in body.spec['segments']}['abdomen']
+    axis_x = ab['origin'][0] + ab['capsules'][0]['a'][0]
+    z_w = ab['origin'][2] + WAIST_ABOVE_OMPHALION
+    th = (np.arange(72) + 0.5) * 2 * np.pi / 72
+    r = 0.13 * 0.09 / np.sqrt((0.09 * np.cos(th - np.pi / 2)) ** 2 + (0.13 * np.sin(th - np.pi / 2)) ** 2)
+    body.waist = dict(axis_x=axis_x, z=z_w, theta=th.tolist(), r=r.tolist())     # 26 cm wide, 18 cm deep
+    mp = MotionPose(TEST_PATTERN, body, t_raised=1.0, t_lower=1.0, t_hold=1.0)
+    cut = np.pi
+    G = skirt(body, mp(-mp.pre), cut=cut, length=0.3, h=0.03)
+    P = G.attachment.p_rest - np.array([axis_x, 0.0, z_w])
+    ang = np.mod(np.arctan2(P[:, 1], P[:, 0]), 2 * np.pi)
+    want = np.interp(ang, th, r, period=2 * np.pi) + BAND_CLEARANCE
+    assert np.allclose(np.hypot(P[:, 0], P[:, 1]), want, atol=1e-4)
+    order = np.argsort(np.mod(ang - np.pi, 2 * np.pi))
+    Q = np.vstack([P[order], P[order[:1]]])[:, :2]
+    gaps = np.linalg.norm(np.diff(Q, axis=0), axis=1)
+    assert gaps.std() / gaps.mean() < 0.02
+    assert G.params['waist_circumference_m'] == pytest.approx(gaps.sum(), rel=6e-3)     # chords on a 3 cm grid
+    assert G.params['waist_circumference_m'] == pytest.approx(cut * G.params['pattern_inner_radius_m'], rel=1e-9)
+
+
+def test_dress_form_product_matches_the_body():
+    """The dress form that dressed renders collide with: its schema, its pieces on body.json's segments, limbs never
+    slimmer than body.json's capsules, and the body.json it was measured against."""
+    import hashlib
+    from pathlib import Path
+    from humanities.dance.motion_io import body_spec
+    root = Path(__file__).resolve().parents[2]
+    form = json.loads((root / 'visualization' / 'dance' / 'dress_form.json').read_text())
+    assert form['schema'] == 'terluna.visualization.dance-dress-form/1'
+    body_json = root / 'humanities' / 'dance' / 'body' / 'body.json'
+    assert form['producer']['body_json_sha256'] == hashlib.sha256(body_json.read_bytes()).hexdigest()
+    spec = {s['name']: s for s in body_spec()['segments']}
+    for p in form['pieces']:
+        assert p['segment'] in spec
+        if p['segment'] not in ('pelvis', 'abdomen', 'thorax'):
+            r = min(c['radius'] for c in spec[p['segment']]['capsules'])
+            assert min(p['ra'], p['rb']) >= r - 1e-9
+    w = form['waist']
+    assert len(w['theta']) == len(w['r']) and 0.5 < w['perimeter_m'] < 0.9
