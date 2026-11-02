@@ -191,7 +191,7 @@ def trigger_cape(t, tp, sigma, dsigma, c=PLASIM):
 
 def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, step=1800.0, akap=0.2857,
            c=PLASIM, cape_limit=0.0, eps_trigger=0.0, deep_pa=0.0, steps=1, shallow_cap=False, dilution=0.0,
-           max_mix=MAX_MIX):
+           max_mix=MAX_MIX, relax_from_lfc=False):
     """One column's tendencies by the scheme: temperature (K/s) and vapour (kg/kg/s) by level, the rain formed at each
     level (kg/m2/s), the convection's top level (index, or None), the parcel's inhibition (J/kg), whether the
     column is left to the shallow scheme and the parcel's temperature, the reference; with the CAPE trigger set
@@ -199,7 +199,11 @@ def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, 
     and depth (Pa). steps > 1 integrates the parcel's mixing within each layer. step is PlaSim's deltsec2, the shortest
     relaxation time. With shallow_cap and the depth test, a deep column left to the shallow scheme hands it the top the
     cap allows, its parcel's own top kept as parcel_top. dilution (per metre) puts the diluted parcel in place of the
-    mixing option's, max_mix its steps' largest mixing exponent; the two options do not combine."""
+    mixing option's, max_mix its steps' largest mixing exponent; the two options do not combine. relax_from_lfc
+    relaxes only the parcel's buoyant layer, its level of free convection to its top, and leaves the layers below it
+    (the inhibition and sub-cloud layers, which the parcel crosses colder than its surroundings) as they are; the
+    closure's single temperature increment then spreads over the buoyant layer alone. Off, every level from the top
+    to the lowest relaxes, as in Frierson's scheme."""
     t, q = np.asarray(t, float), np.asarray(q, float)
     sigma, dsigma = np.asarray(sigma, float), np.asarray(dsigma, float)
     n = t.size
@@ -232,7 +236,7 @@ def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, 
     if cape_limit > 0.0:
         out['trigger_cape'] = trigger_cape(t, parcel(t, q, sigma, p, eps_trigger, akap, c), sigma, dsigma, c)
     tau = max(tau, step)
-    layers = range(top, n)
+    layers = range(top, lfc + 1) if relax_from_lfc else range(top, n)
     dtr = {k: (tp[k] - t[k]) / tau for k in layers}
     dqr = {k: (rh * saturation(tp[k], p[k], c) - q[k]) / tau for k in layers}
     pq = -sum(dqr[k] * m[k] for k in layers)
