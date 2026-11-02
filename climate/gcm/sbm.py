@@ -22,6 +22,14 @@ Two options of the cloud-depth patch (exoplasim_run.SBM_DEPTH_PATCHES), off by d
 With the depth test set, the shallow cap (shallow_cap, exoplasim_run.SBM_CAP_PATCHES, off by default) hands a deep
 column the scheme leaves to the shallow scheme a top no higher than deep_pa above its cloud's base: the highest level
 at or below the parcel's top whose pressure is within deep_pa of the condensation level.
+
+The diluted parcel (dilution > 0, per metre; an offline design, not yet in the Fortran) takes the place of the mixing
+option's: lifted undiluted to the condensation level of the lowest level's air, the parcel then takes in the
+surrounding air at a fractional rate per metre of its rise, the metres a step in log pressure spans set by the
+hypsometric equation under the planet's gravity. Its level of free convection, its top (where its buoyancy vanishes),
+its inhibition and the depth test's cloud all follow from the diluted parcel, and its temperature is the reference
+from the lowest level to the top; the closure, the reference humidity and the relaxation are the scheme's own. With
+dilution 0 the scheme is the undiluted one exactly.
 """
 from __future__ import annotations
 
@@ -33,6 +41,7 @@ import numpy as np
 PLASIM = dict(ALV=2.5008e6, ALS=2.8345e6, acpd=1004.6, ADV=0.8608, TMELT=273.16, ra1=610.78, ra2=17.2693882,
               ra4=35.86, rdbrv=0.622, gascon=287.05, ga=1.62)
 LCL_ITERATIONS = 24                # halvings of the condensation level's bracket in log pressure, as the Fortran's
+MAX_MIX = 0.05                     # the diluted parcel's largest mixing exponent (rate times metres) in one step
 
 
 def saturation(t, p, c=PLASIM):
@@ -113,6 +122,59 @@ def condensation_level(t0, q0, p0, p_top, akap, c=PLASIM, iterations=LCL_ITERATI
     return math.exp(0.5 * (lo + hi))
 
 
+def diluted_parcel(t, q, sigma, ps, dilution, akap, c=PLASIM, base=None, max_mix=MAX_MIX, min_steps=1):
+    """The scheme's parcel diluted by entrainment, its temperature by level (top first). It rises from the lowest level
+    dry adiabatically with its vapour kept, undiluted, to base (Pa; by default the condensation level of the lowest
+    level's air), and above it takes in the surrounding air at dilution per metre. Each layer is crossed in equal steps
+    of log pressure, as many as keep each step's mixing exponent, dilution times the step's metres above base, at most
+    max_mix, and at least min_steps. A step lifts the parcel dry adiabatically to its end, mixes in a share 1 -
+    exp(-dilution dz) of the surrounding air there (temperature and vapour interpolated linearly in log pressure between
+    the layer's levels), and condenses the mixture, dropping the condensate as the scheme's parcel does. dz is the part
+    of the step above base in metres, the gas constant times the surrounding air's virtual temperature at that part's
+    middle over gravity times its depth in log pressure. A layer wholly below base is crossed as parcel() crosses it, so
+    with dilution 0, or with base above the top level, the parcel is parcel()'s undiluted one exactly; with dilution 0
+    and min_steps > 1 it is the undiluted parcel integrated in finer steps above base."""
+    t, q, sigma = np.asarray(t, float), np.asarray(q, float), np.asarray(sigma, float)
+    p = ps * sigma
+    if dilution <= 0.0 and min_steps <= 1:
+        return parcel(t, q, sigma, p, 0.0, akap, c)
+    if base is None:
+        base = condensation_level(t[-1], q[-1], p[-1], p[0], akap, c)
+    lb = math.log(base / ps)                            # the mixing starts where log sigma falls below lb
+    tv = t * (1.0 + (1.0 / c['rdbrv'] - 1.0) * q)       # the surrounding air's virtual temperature
+    scale = c['gascon'] / c['ga']                       # metres per unit log pressure per kelvin
+    tp = np.zeros(t.size)
+    tn, qn = condense(t[-1], q[-1], p[-1], c)
+    tp[-1] = tn
+    for k in range(t.size - 2, -1, -1):
+        x1, x0 = math.log(sigma[k + 1]), math.log(sigma[k])
+        above = min(x1, lb) - x0                        # the layer's depth in log pressure above base
+        if above <= 0.0:
+            tn *= (sigma[k] / sigma[k + 1]) ** akap
+            tn, qn = condense(tn, qn, p[k], c)
+            tp[k] = tn
+            continue
+        dz_layer = scale * 0.5 * (tv[k] + tv[k + 1]) * above
+        steps = max(min_steps, math.ceil(dilution * dz_layer / max_mix))
+        width = (x1 - x0) / steps
+        xa = x1
+        for s in range(1, steps + 1):
+            xb = x0 if s == steps else x1 - s * width
+            tn *= math.exp(akap * (xb - xa))           # the dry lift to the step's end
+            mixed = min(xa, lb) - xb                    # the step's depth in log pressure above base
+            if mixed > 0.0 and dilution > 0.0:
+                w = (x1 - xb) / (x1 - x0)
+                wm = (x1 - 0.5 * (min(xa, lb) + xb)) / (x1 - x0)
+                dz = scale * ((1.0 - wm) * tv[k + 1] + wm * tv[k]) * mixed
+                mix = 1.0 - math.exp(-dilution * dz)
+                tn = (1.0 - mix) * tn + mix * ((1.0 - w) * t[k + 1] + w * t[k])
+                qn = (1.0 - mix) * qn + mix * ((1.0 - w) * q[k + 1] + w * q[k])
+            tn, qn = condense(tn, qn, ps * math.exp(xb), c)
+            xa = xb
+        tp[k] = tn
+    return tp
+
+
 def trigger_cape(t, tp, sigma, dsigma, c=PLASIM):
     """A parcel's CAPE (J/kg) as the scheme counts its inhibition: the gas constant times (tp - t) dsigma/sigma, summed
     from its level of free convection, the lowest above its start where it is buoyant, up through the layers it stays
@@ -128,14 +190,16 @@ def trigger_cape(t, tp, sigma, dsigma, c=PLASIM):
 
 
 def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, step=1800.0, akap=0.2857,
-           c=PLASIM, cape_limit=0.0, eps_trigger=0.0, deep_pa=0.0, steps=1, shallow_cap=False):
+           c=PLASIM, cape_limit=0.0, eps_trigger=0.0, deep_pa=0.0, steps=1, shallow_cap=False, dilution=0.0,
+           max_mix=MAX_MIX):
     """One column's tendencies by the scheme: temperature (K/s) and vapour (kg/kg/s) by level, the rain formed at each
     level (kg/m2/s), the convection's top level (index, or None), the parcel's inhibition (J/kg), whether the
     column is left to the shallow scheme and the parcel's temperature, the reference; with the CAPE trigger set
     (cape_limit > 0), the trigger parcel's CAPE too, and with the depth test set (deep_pa > 0, Pa), the cloud's base
     and depth (Pa). steps > 1 integrates the parcel's mixing within each layer. step is PlaSim's deltsec2, the shortest
     relaxation time. With shallow_cap and the depth test, a deep column left to the shallow scheme hands it the top the
-    cap allows, its parcel's own top kept as parcel_top."""
+    cap allows, its parcel's own top kept as parcel_top. dilution (per metre) puts the diluted parcel in place of the
+    mixing option's, max_mix its steps' largest mixing exponent; the two options do not combine."""
     t, q = np.asarray(t, float), np.asarray(q, float)
     sigma, dsigma = np.asarray(sigma, float), np.asarray(dsigma, float)
     n = t.size
@@ -143,7 +207,10 @@ def column(t, q, sigma, dsigma, ps, tau=7200.0, rh=0.7, eps=0.0, cin_limit=0.0, 
     cp = c['acpd'] * (1.0 + c['ADV'] * q)
     out = dict(dtdt=np.zeros(n), dqdt=np.zeros(n), rain=np.zeros(n), top=None, cin=0.0, shallow=False,
                reference_t=None)
-    tp = parcel(t, q, sigma, p, eps, akap, c, steps=steps, ps=ps)
+    if dilution > 0.0 and eps > 0.0:
+        raise ValueError('the diluted parcel replaces the mixing option: set dilution or eps, not both')
+    tp = (diluted_parcel(t, q, sigma, ps, dilution, akap, c, max_mix=max_mix) if dilution > 0.0 else
+          parcel(t, q, sigma, p, eps, akap, c, steps=steps, ps=ps))
     out['reference_t'] = tp.copy()
     buoyant = [k for k in range(n - 2, -1, -1) if tp[k] > t[k]]
     if not buoyant:
