@@ -70,6 +70,7 @@ class Material:
     shear_stiffness: float      # N/m per radian of in-plane shear
     tensile_stiffness: float    # N/m along warp and weft
     friction: float = 0.3       # Coulomb coefficient against the body and the floor
+    normal_factor: float = 1.0  # share of a closed sheet's normal pressure an open weave or net takes (1: closed)
 
 
 @dataclass
@@ -114,10 +115,14 @@ def triangle_rest(piece: Piece):
 def bending_operator(piece: Piece):
     """M = L - P (scipy CSR, V x V) and the barycentric vertex areas. L is the cotangent Laplacian of the flat
     pattern; P carries each vertex's in-plane rest Laplacian through the angle-weighted deformation gradient of its
-    triangles, so M x = 0 for every isometric placement of the flat piece."""
+    triangles, so M x = 0 for every isometric placement of the flat piece. A piece sewn across a seam that turns the
+    pattern (a skirt cut from part of a circle) gives each corner the turn from its vertex's own pattern frame to its
+    triangle's (piece.corner_rot), so each vertex's rest Laplacian is summed in one frame and read in each triangle's."""
     import scipy.sparse as sp
     F, UV, V = piece.F, piece.UV, piece.n_vertices
     area, _, _, Dinv = triangle_rest(piece)
+    rot = getattr(piece, 'corner_rot', None)
+    turn = (lambda vec, a: vec) if rot is None else _turn
     rows, cols, vals = [], [], []
     r = np.zeros((V, 2))
     ang = np.zeros((len(F), 3))
@@ -132,15 +137,16 @@ def bending_operator(piece: Piece):
         rows += [J, K, J, K]
         cols += [K, J, J, K]
         vals += [wgt, wgt, -wgt, -wgt]
-        np.add.at(r, J, wgt[:, None] * (UV[:, k] - UV[:, j]))
-        np.add.at(r, K, wgt[:, None] * (UV[:, j] - UV[:, k]))
+        np.add.at(r, J, turn(wgt[:, None] * (UV[:, k] - UV[:, j]), None if rot is None else -rot[:, j]))
+        np.add.at(r, K, turn(wgt[:, None] * (UV[:, j] - UV[:, k]), None if rot is None else -rot[:, k]))
     L = sp.coo_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(V, V)).tocsr()
     angsum = np.zeros(V)
     np.add.at(angsum, F, ang)
     prow, pcol, pval = [], [], []
     for q in range(3):
         vq = F[:, q]
-        d = np.einsum('tij,tj->ti', Dinv, r[vq])               # Dm^-1 r for the corner's vertex
+        rq = turn(r[vq], None if rot is None else rot[:, q])   # the vertex's rest Laplacian in this triangle's frame
+        d = np.einsum('tij,tj->ti', Dinv, rq)                  # Dm^-1 r for the corner's vertex
         coef = np.stack([-d[:, 0] - d[:, 1], d[:, 0], d[:, 1]], 1) * (ang[:, q] / angsum[vq])[:, None]
         for c in range(3):
             prow.append(vq)
@@ -150,6 +156,12 @@ def bending_operator(piece: Piece):
     M = (L - P).tocsr()
     M.eliminate_zeros()
     return M, mixed_areas(piece)
+
+
+def _turn(vec, a):
+    """Rotate 2-vectors (n, 2) by angles a (n,) in the pattern plane."""
+    c, s = np.cos(a), np.sin(a)
+    return np.stack([c * vec[:, 0] - s * vec[:, 1], s * vec[:, 0] + c * vec[:, 1]], 1)
 
 
 def mixed_areas(piece: Piece) -> np.ndarray:
@@ -201,7 +213,7 @@ class Cloth:
     """One garment piece. `pinned` vertices follow targets given by the caller each substep."""
 
     def __init__(self, piece: Piece, X0: np.ndarray, material: Material, world: World, settings: Settings | None = None,
-                 pinned=None, device=None):
+                 pinned=None, device=None, extra_mass=None, tethers=None):
         s = settings or Settings()
         self.s, self.material, self.world, self.piece = s, material, world, piece
         dev = torch.device(device or ('cuda' if torch.cuda.is_available() else 'cpu'))
@@ -211,6 +223,8 @@ class Cloth:
         area, c1, c2, _ = triangle_rest(piece)
         m = np.zeros(V)
         np.add.at(m, F, (material.areal_density * area / 3)[:, None])
+        if extra_mass is not None:                     # mass sewn to the cloth (a weighted hem) that the air does not see
+            m = m + np.asarray(extra_mass, float)
         pin = np.zeros(V, bool)
         if pinned is not None:
             pin[np.asarray(pinned, np.int64)] = True
@@ -256,6 +270,15 @@ class Cloth:
         self.gvec = torch.tensor([0.0, 0.0, -world.gravity], **f32)
         self.pin_idx = torch.nonzero(self.pin).ravel()
         self.has_pins = bool(pin.any())
+        # long-range attachments (Kim, Chentanez & Mueller 2012): each tethered vertex stays within a set distance of
+        # a pinned anchor, so a heavy hem's pull cannot stretch a light fabric that one stretch pass cannot stiffen
+        self.has_tethers = tethers is not None
+        if self.has_tethers:
+            anchor, length = (np.asarray(a) for a in tethers)
+            keep = (anchor >= 0) & ~pin
+            self.t_idx = torch.as_tensor(np.nonzero(keep)[0], device=dev)
+            self.t_anchor = torch.as_tensor(anchor[keep], dtype=torch.int64, device=dev)
+            self.t_len = torch.as_tensor(length[keep], **f32)
         self.has_body = False
         # static inputs for the substep (filled by set_frame / set_fraction), so the substep can be a CUDA graph
         self.capA0 = self.capdA = self.capB0 = self.capdB = self.cap_r = None
@@ -323,7 +346,7 @@ class Cloth:
         vn = (vt * n).sum(1)
         vtan = vt - vn[:, None] * n
         vtn = vtan.norm(dim=1)
-        kn = 0.5 * rho * s.c_normal * vn.abs() * A / self.mtri
+        kn = 0.5 * rho * s.c_normal * self.material.normal_factor * vn.abs() * A / self.mtri
         kt = 0.5 * rho * s.c_tangent * vtn * A / self.mtri
         dv = -(kn * dt / (1 + kn * dt) * vn)[:, None] * n - (kt * dt / (1 + kt * dt))[:, None] * vtan
         imp = (self.mtri / 3.0)[:, None] * dv
@@ -362,6 +385,15 @@ class Cloth:
             corr = (c1[:, k:k + 1] * (g1 * d1[:, None] + p * d3[:, None]) + c2[:, k:k + 1] * (g2 * d2[:, None] + q * d3[:, None]))
             dx.index_add_(0, F[:, k], corr)
         return dx * self.w[:, None]
+
+    def tether(self, x):
+        """Pull each tethered vertex back to its tether's length from its anchor, where it has gone beyond."""
+        v = x[self.t_idx] - x[self.t_anchor]
+        n = v.norm(dim=1).clamp_min(1e-12)
+        ex = (n - self.t_len).clamp_min(0.0)
+        out = torch.zeros_like(x)
+        out.index_copy_(0, self.t_idx, -(v / n[:, None]) * ex[:, None])
+        return out
 
     def bend(self, x, x_start, dt):
         B = self.material.bending_rigidity
@@ -529,6 +561,10 @@ class Cloth:
             y[self.pin_idx] = tg
         for _ in range(s.stretch_iterations):
             d = self.stretch(y, dt)
+            D = D + d
+            y = y + d
+        if self.has_tethers:
+            d = self.tether(y)
             D = D + d
             y = y + d
         d = self.bend(y, x0, dt)

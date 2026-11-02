@@ -23,9 +23,16 @@ questions move to the decisions register (section "Dance and the movement arts, 
    Earth-like floors, or design its own? Levels are planned as a future study.
 4. **Music.** Lunar flights set slow pulses (a 2.7 s flight is three beats at 66 a minute) under quick articulation.
    Should phrases be timed to music, and is there music to work with?
-5. **Wings and apparatus.** The sky-ship world has personal wings, and the six families include suspended and
+5. **Silk measurements.** The garment library's bending stiffness is measured for chiffon, georgette, a plain wool and
+   a plain cotton; for organza, habotai, taffeta, velvet, tulle and jersey it is a modelling choice, and every drape
+   result for them rests on it. The tables that would close it were out of reach in two literature passes: the KES-F
+   measurements of woven silks in Matsudaira and Kawabata (1988, Journal of the Textile Institute 79(3), three parts)
+   and the drape of habutae, crepe, georgette and crepe de chine in Matsudaira and Yang (2003, Textile Research
+   Journal 73(3)), both paywalled, and an open-access study of silks for hanbok (Fashion and Textiles, 2024,
+   doi:10.1186/s40691-024-00388-6) behind a login redirect. Can you obtain any of them?
+6. **Wings and apparatus.** The sky-ship world has personal wings, and the six families include suspended and
    aerodynamic dance. They stay outside the flowing solo dance; should one of them follow it?
-6. **Names.** The lunar units carry working names (orbit run, skim, flight phrase, slow salto, unfolding turn, carve,
+7. **Names.** The lunar units carry working names (orbit run, skim, flight phrase, slow salto, unfolding turn, carve,
    canopy, long fall, long penché). Rename any?
 
 Answered on 1 November: the garments (light and weighted fabrics both, combined to suit each dance), the next step

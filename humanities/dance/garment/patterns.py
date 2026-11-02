@@ -6,6 +6,7 @@ geometry. The fabric's grain is a direction in the pattern plane: the warp, with
 """
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -20,6 +21,8 @@ class Piece:
     warp: tuple = (1.0, 0.0)         # warp direction in the pattern plane
     rings: dict = field(default_factory=dict)   # named vertex index lists (waist, hem, cuff, end, ...)
     vertex_uv: np.ndarray | None = None          # (V, 2) one pattern position per vertex (seam side arbitrary)
+    corner_rot: np.ndarray | None = None         # (T, 3) turn of each corner's pattern position from its vertex's
+                                                 # vertex_uv, for seams that turn the pattern (None: no such seam)
 
     def edge_length(self) -> float:
         e = np.concatenate([self.UV[:, 1] - self.UV[:, 0], self.UV[:, 2] - self.UV[:, 1], self.UV[:, 0] - self.UV[:, 2]])
@@ -102,6 +105,64 @@ def annulus(r_in: float, r_out: float, h: float, seed: int = 0, warp=(1.0, 0.0))
     tri, UV = tri[good], UV[good]
     rings = dict(inner=list(np.where(ring_of == 0)[0]), outer=list(np.where(ring_of == nr)[0]))
     return Piece(tri, UV, len(P), warp=tuple(warp), rings=rings, vertex_uv=P)
+
+
+def sector(r_in: float, r_out: float, angle: float, h: float, warp=None) -> Piece:
+    """A ring sector of `angle` radians whose two straight edges are sewn together: a skirt cut from part of a
+    circle (angle pi for a half circle, 2 pi for a full one) or from more than one (4 pi for a double circle, whose
+    pattern covers the plane twice). Rows of points about h apart from r_in to r_out are spaced evenly in angle, each
+    row's points offset by half a step from the row before, and neighbouring rows are joined by a strip that wraps
+    across the seam. A corner reached across the seam lies at its vertex's pattern position turned by `angle`
+    (corner_rot), so every triangle keeps its own flat shape and the sewn piece rests as the cone it makes. The warp
+    defaults to the straight grain at the middle of the arc, which is the centre front when the seam is at the
+    centre back. Rings: 'inner' (the waist) and 'outer' (the hem), each in order of angle."""
+    if warp is None:
+        warp = (math.cos(angle / 2), math.sin(angle / 2))
+    nr = max(1, int(round((r_out - r_in) / (h * math.sqrt(3) / 2))))
+    radii = np.linspace(r_in, r_out, nr + 1)
+    rows, off = [], 0
+    for k, r in enumerate(radii):
+        n = max(6, int(round(angle * r / h)))
+        rows.append((off, n, (np.arange(n) + 0.5 * (k % 2)) * angle / n, r))
+        off += n
+    V = off
+    vuv = np.concatenate([np.c_[r * np.cos(psi), r * np.sin(psi)] for _, _, psi, r in rows])
+    F, UV, ROT = [], [], []
+
+    def corner(row, l):
+        o, n, psi, r = row
+        lap = l // n                                   # times this corner has been carried across the seam
+        a = psi[l % n] + angle * lap
+        return o + l % n, (r * math.cos(a), r * math.sin(a)), angle * lap
+
+    for k in range(nr):
+        ra, rb = rows[k], rows[k + 1]
+        na, nb = ra[1], rb[1]
+        i = j = 0
+        while i < na or j < nb:
+            next_a = ra[2][(i + 1) % na] + angle * ((i + 1) // na)
+            next_b = rb[2][(j + 1) % nb] + angle * ((j + 1) // nb)
+            if j >= nb or (i < na and next_a <= next_b):
+                cs = [corner(ra, i), corner(ra, i + 1), corner(rb, j)]
+                i += 1
+            else:
+                cs = [corner(ra, i), corner(rb, j + 1), corner(rb, j)]
+                j += 1
+            F.append([c[0] for c in cs])
+            UV.append([c[1] for c in cs])
+            ROT.append([c[2] for c in cs])
+    F = np.array(F, np.int64)
+    UV = np.array(UV, float)
+    ROT = np.array(ROT, float)
+    e1 = UV[:, 1] - UV[:, 0]
+    e2 = UV[:, 2] - UV[:, 0]
+    flip = (e1[:, 0] * e2[:, 1] - e1[:, 1] * e2[:, 0]) < 0
+    F[flip] = F[flip][:, [0, 2, 1]]
+    UV[flip] = UV[flip][:, [0, 2, 1]]
+    ROT[flip] = ROT[flip][:, [0, 2, 1]]
+    rings = dict(inner=list(range(rows[0][0], rows[0][0] + rows[0][1])),
+                 outer=list(range(rows[-1][0], rows[-1][0] + rows[-1][1])))
+    return Piece(F, UV, V, warp=tuple(warp), rings=rings, vertex_uv=vuv, corner_rot=ROT)
 
 
 def mesh_edges(F: np.ndarray) -> np.ndarray:

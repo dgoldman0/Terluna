@@ -12,7 +12,10 @@ numbers and the plain list of shortcomings are in
     python -m humanities.dance.garment.drive skirt moon MOTION.npz OUT.npz [--fabric silk_chiffon] [--h 0.02]
     python -m humanities.dance.garment.drive sleeves earth MOTION.npz OUT.npz [--fabric silk_georgette]
     python -m humanities.dance.garment.validate OUTDIR [--only terminal,cantilever,spin,convergence,spin_convergence]
-    python -m pytest humanities/tests/test_garment.py
+    python -m humanities.dance.garment.screen          # the fabric and cut study's screen: results/garments.json
+    python -m humanities.dance.garment.trials OUTDIR [--only drape,satin,turn,stream] [--fast]
+    python -m humanities.dance.garment.figures OUTDIR
+    python -m pytest humanities/tests/test_garment.py humanities/tests/test_garment_study.py
 
 Use the dance venv from the worktree root. A sequence writes `faces` (F, 3) int32, `verts` (N, V, 3) float32 at the
 motion's fps in the motion's world frame, `time`, `uv` (pattern coordinates in metres, for texturing), `pinned` and
@@ -25,12 +28,15 @@ settings, the dressing sequence, timing and peak GPU memory, and the evidence st
 | File | Content |
 |---|---|
 | `cloth.py` | The solver: XPBD in small steps on the GPU (float32, one CUDA graph per substep), strain constraints in the fabric's grain, isometric bending, air, contact |
-| `patterns.py` | Flat pattern pieces as triangle meshes: rectangles, tubes, the circle skirt's ring |
-| `garments.py` | The full circle skirt and the water sleeves: patterns, grain, attachment, starting placement |
+| `patterns.py` | Flat pattern pieces as triangle meshes: rectangles, tubes, the circle skirt's ring, and ring sectors sewn at a seam that turns the pattern (skirts cut from part of a circle or from more than one) |
+| `garments.py` | The full circle skirt, circle skirts of any cut up to a full circle with or without a weighted hem, and the water sleeves: patterns, grain, attachment, starting placement |
 | `body.py` | Capsules and attachment frames from `body.json`, posed per frame and interpolated per substep; the dressing sequence; the steady-turn pose |
-| `materials.py`, `sources.json` | Four silks and every outside number with its basis and standing |
+| `materials.py`, `sources.json` | Thirteen fabrics (nine silks, a wool, a cotton, a nylon tulle, a viscose jersey) and every outside number with its basis and standing; each fabric's bending is marked measured, inferred (from a measured drape), bracket or chosen |
 | `drive.py` | Dress a garment on a motion and write its sequence |
 | `validate.py` | Terminal speed, Peirce bending length, steady-turn flare and convergence, with plots |
+| `screen.py` | The fabric and cut study's closed-form screen of every fabric on the Moon and on Earth: `results/garments.json` |
+| `trials.py` | The study's trial runs: Cusick's drape test, circle skirts in steady turns (weighted hems tethered to the waistband), a panel trailing in travel; findings in the dance README, "Fabrics and cuts on the Moon" |
+| `figures.py` | The study's figures from the screen and the trials |
 
 ## The physics, briefly
 
@@ -51,7 +57,9 @@ boundaries. There is no fabric damping; the air does the damping.
 
 **Air.** Each triangle feels pressure along its normal, −½ρC_N|v_n|v_n A (C_N = 1.17), and skin friction along its
 plane, −½ρC_T|v_t|v_t A (C_T = 0.01, both faces), relative to still air. Both act semi-implicitly. Layers lying in
-contact with parallel normals (folds, a flattened sleeve) share one face to the air.
+contact with parallel normals (folds, a flattened sleeve) share one face to the air. An open weave or net takes a
+share of the normal pressure (the fabric's normal_factor: 0.6 for tulle, from porous-plate drag).
+Mass sewn to the cloth, such as a weighted hem, adds to its vertices' inertia and weight but not to the air's push. Optional long-range tethers (Kim, Chentanez & Müller 2012) hold chosen vertices within a set distance of a pinned anchor; the weighted-hem trials tether every vertex to the waistband at 105% of its distance in the pattern, because one stretch pass cannot carry a heavy hem's pull up light cloth. Shear does not lock as a weave jams, so a heavy hem can still shear light cloth further than a woven fabric allows.
 
 **Contact.** Contact covers the body's 23 capsules with Coulomb friction relative to the moving surface, the floor,
 and self-contact between non-adjacent vertices through a sorted spatial hash rebuilt every 4 substeps; the contact
@@ -60,7 +68,9 @@ older penetration, such as cloth caught where the mannequin's forearm capsule ov
 at 0.5 m/s, in position only.
 
 **Garments.** The skirt is a full circle 0.85 m long on a waistband at the natural waist (2 cm above the omphalion)
-that follows the pelvis and abdomen equally. The water sleeves are tubes of silk georgette 1.5 m long and 0.50 m
+that follows the pelvis and abdomen equally. Skirts of other cuts (a half circle, three quarters) are ring sectors sewn
+at centre back with the straight grain at centre front; each starts as the cone it makes when laid smooth, and its
+bending reproduces that cone's analytic energy within 1-2%. The water sleeves are tubes of silk georgette 1.5 m long and 0.50 m
 round, sewn to each forearm's cuff at the wrist. Each garment starts flat (the skirt as its own pattern, a horizontal
 disc) or straight (the sleeves) in the first frame's pose with the arms raised 80° to the side. It settles for 6 s
 with numerical damping of 2/s; the arms then come down over 1.5 s and hold for 1.5 s with damping of 0.5/s; the
