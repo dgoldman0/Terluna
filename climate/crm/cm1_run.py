@@ -2047,7 +2047,9 @@ CASES['box_near_side_sea_l15_inflow_day3'] = dict(
 # moistening by local time, its wind by local time, the height the air is held from (its convection's top), the
 # height the wind's pull starts from and its sunlight; the sites' cells, the grid, the rain limits and law, the
 # twilight and the output are the earlier boxes'. Two lunar days from sunrise, then the third and fourth from the
-# restarts, as the fifteen-level sea box ran.
+# restarts, as the fifteen-level sea box ran, and a fifth from the fourth's day-118 restart where the gap test's rules
+# call one: a rule whose days 3 and 4 differ by more than its tolerance, or a column drifting over day 4
+# (session-tools/agents/gap_boxes/rules.txt, fixed 1 November).
 GCM_DESIGN_RUN, GCM_DESIGN_YEARS = 'A28R_301k_design_l15_snow_s934', (10, 19)
 for _name, _source, _where in (('box_near_side_sea_design_years', 'box_near_side_sea', 'over the Near-side Sea at 5 S, 45 W'),
                                ('box_0e_design_years', 'box_0e_design', 'over the land at 0 N, 0 E')):
@@ -2065,6 +2067,10 @@ for _name, _source, _where in (('box_near_side_sea_design_years', 'box_near_side
     CASES[f'{_name}_day4'] = dict(
         CASES[_name], restart_from=dict(case=f'{_name}_day3', day=88.5), days=118.0,
         purpose=CASES[_name]['purpose'] + "; its fourth lunar day, days 88.5-118, from the third day's day-88.5 restart")
+    CASES[f'{_name}_day5'] = dict(
+        CASES[_name], restart_from=dict(case=f'{_name}_day4', day=118.0), days=147.5,
+        purpose=CASES[_name]['purpose'] + "; its fifth lunar day, days 118-147.5, from the fourth day's day-118 "
+                'restart')
 # The third box on the design years (register, 1 November), run after the other two: the semi-arid inland block of the
 # near side's south-east, for the gap test and for a study of storm water, which reruns ten-minute windows of its
 # storms from its restarts. The site is centred at 44.3 S, 56.25 E with the land box's footprint (half widths of 5.6
@@ -2096,6 +2102,10 @@ CASES['box_se_dry_design_years_day4'] = dict(
     CASES['box_se_dry_design_years'], restart_from=dict(case='box_se_dry_design_years_day3', day=88.5), days=118.0,
     purpose=CASES['box_se_dry_design_years']['purpose'] + "; its fourth lunar day, days 88.5-118, from the third day's "
             'day-88.5 restart')
+CASES['box_se_dry_design_years_day5'] = dict(
+    CASES['box_se_dry_design_years'], restart_from=dict(case='box_se_dry_design_years_day4', day=118.0), days=147.5,
+    purpose=CASES['box_se_dry_design_years']['purpose'] + "; its fifth lunar day, days 118-147.5, from the fourth day's "
+            'day-118 restart')
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,

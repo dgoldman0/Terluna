@@ -32,3 +32,15 @@ def test_a_lunar_day_takes_the_outputs_between_its_restart_times():
 def test_a_quarter_without_outputs_holds_none():
     rows = [r for r in made_up_rows() if r['hour'] < 0.0]
     assert bd.quarters(rows, 'rain')[1:3] == [None, None]
+
+
+def test_a_fifth_lunar_day_is_read_between_its_restart_times():
+    # a box run on to a fifth lunar day (118-147.5 days), as the gap test's rules call one, is read day by day
+    rows = made_up_rows(days=(0.0, 147.5))
+    assert bd.SPANS[-1] == (118.0, 147.5)
+    days = [bd.span_summary(rows, span) for span in bd.SPANS]
+    assert [d['span_days'] for d in days] == [list(span) for span in bd.SPANS]
+    assert all(d['outputs'] == 237 for d in days)
+    fifth = days[-1]
+    assert fifth['rain_by_quarter_mm_day'][1] == pytest.approx(2.0) and fifth['rain_by_quarter_mm_day'][3] == 0.0
+    assert fifth['temperature_k']['40 km']['change_k_day'] == pytest.approx(-0.1)

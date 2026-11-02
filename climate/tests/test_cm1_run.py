@@ -180,7 +180,8 @@ def test_the_inflow_build_draws_the_reference_s_air_in_where_the_mean_wind_conve
 
 def test_the_boxes_on_the_design_years_are_the_site_boxes_on_the_corrected_build_and_the_design_run():
     # each differs from the site box it repeats in its build and its forcing run alone, and its run-on days chain
-    # from its own restarts as the fifteen-level sea box's did
+    # from its own restarts as the fifteen-level sea box's did, a fifth lunar day (where the gap test's rules call
+    # one) from the fourth's day-118 restart
     assert (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS) == ('A28R_301k_design_l15_snow_s934', (10, 19))
     same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'gcm', 'purpose')}
     for name, source in (('box_near_side_sea_design_years', 'box_near_side_sea'), ('box_0e_design_years', 'box_0e_design')):
@@ -189,17 +190,19 @@ def test_the_boxes_on_the_design_years_are_the_site_boxes_on_the_corrected_build
         assert same(case) == same(c.CASES[source]) and case['days'] == 59.06
         assert c.corrected_inflow(case['build'], case) == dict(var7=1.0)
         assert c.corrected_wind(case['build'], 316.1) == dict(var10=c.WIND_TAU_S, var8=316.1)
-        day3, day4 = c.CASES[f'{name}_day3'], c.CASES[f'{name}_day4']
+        day3, day4, day5 = (c.CASES[f'{name}_day{k}'] for k in (3, 4, 5))
         assert day3['restart_from'] == dict(case=name, day=59.0) and day3['days'] == 88.5
         assert day4['restart_from'] == dict(case=f'{name}_day3', day=88.5) and day4['days'] == 118.0
-        for run_on in (day3, day4):
+        assert day5['restart_from'] == dict(case=f'{name}_day4', day=118.0) and day5['days'] == 147.5
+        for run_on in (day3, day4, day5):
             assert {k: v for k, v in run_on.items() if k not in ('restart_from', 'days', 'purpose')} == \
                 {k: v for k, v in case.items() if k not in ('days', 'purpose')}
 
 
 def test_the_third_box_on_the_design_years_is_the_land_box_at_the_dry_site_with_its_own_wetness_row():
     # box_se_dry_design_years departs from box_0e_design_years in its site, with the start at the site's sunrise, and
-    # in its land row at the GCM's own wetness alone; its run-on days chain from its own restarts
+    # in its land row at the GCM's own wetness alone; its run-on days chain from its own restarts, a fifth lunar day
+    # (where the gap test's rules call one) from the fourth's day-118 restart
     name, land = 'box_se_dry_design_years', c.CASES['box_0e_design_years']
     case = c.CASES[name]
     assert {k for k in set(case) | set(land) if case.get(k) != land.get(k)} == {'site', 'start_hour_angle_deg', 'land_row',
@@ -208,10 +211,11 @@ def test_the_third_box_on_the_design_years_is_the_land_box_at_the_dry_site_with_
     assert case['start_hour_angle_deg'] == -90.0 - case['site']['lon_deg'] and case['land_row'] == 'gcm'
     assert case['build'] == c.CORRECTED_BUILD and case['gcm'] == (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS)
     assert c.corrected_inflow(case['build'], case) == dict(var7=1.0) and case['days'] == 59.06
-    day3, day4 = c.CASES[f'{name}_day3'], c.CASES[f'{name}_day4']
+    day3, day4, day5 = (c.CASES[f'{name}_day{k}'] for k in (3, 4, 5))
     assert day3['restart_from'] == dict(case=name, day=59.0) and day3['days'] == 88.5
     assert day4['restart_from'] == dict(case=f'{name}_day3', day=88.5) and day4['days'] == 118.0
-    for run_on in (day3, day4):
+    assert day5['restart_from'] == dict(case=f'{name}_day4', day=118.0) and day5['days'] == 147.5
+    for run_on in (day3, day4, day5):
         assert {k: v for k, v in run_on.items() if k not in ('restart_from', 'days', 'purpose')} == \
             {k: v for k, v in case.items() if k not in ('days', 'purpose')}
     # the latitude turns the box (the land box on the equator has no Coriolis force)
