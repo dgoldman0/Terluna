@@ -2106,26 +2106,33 @@ CASES['box_se_dry_design_years_day5'] = dict(
     CASES['box_se_dry_design_years'], restart_from=dict(case='box_se_dry_design_years_day4', day=118.0), days=147.5,
     purpose=CASES['box_se_dry_design_years']['purpose'] + "; its fifth lunar day, days 118-147.5, from the fourth day's "
             'day-118 restart')
-# The weather-carrying boxes (2026-11-01; session-tools/agents/gap_boxes/plan_weather.md, set up only once the author
-# approves the plan and its rules). Each design-years box runs on from its fourth lunar day's day-118 restart and
+# The weather-carrying boxes (2026-11-01; session-tools/agents/gap_boxes/plan_weather.md, and the rules fixed before
+# any of them ran, rules_weather.txt). Each design-years box runs on from its fourth lunar day's day-118 restart and
 # follows the design run's own sequence at its site from the first time in year 15, the first of the design years'
 # settled end, when the site's hour angle is the box's at day 118 (setup_weather): a transition lunar day, then six
-# read lunar days, one case each, each from the one before's restart. Under source (a) the records are the year
-# files' 3-day means; under source (b), the plan's recommendation, a rerun of years 15-16 from the design run's year-14
-# restart writing its means every 11 steps (5.5 hours) supplies them, and only the weather entry's run, years and
-# window change. The fits by local time (the forcing's mean part) stay the design years' in both.
-WEATHER_STRETCH = dict(year=15, box_day=118.0)
-WEATHER_DAYS = 7
+# read lunar days, one case each, each from the one before's restart. The records are source (b): the design run's
+# years 15 and 16 rerun from its own year-14 restart on 4 ranks with every flag unchanged, its means written every
+# 11 steps (5.5 hours, 2.7937 degrees of the site's hour angle), so that the stretch's year is the rerun's year 0.
+# The fits by local time (the forcing's mean part) stay the design years'. Cases 8 to 14 stand for a second
+# transition day and the extension's six read days, which run only where rules_weather.txt calls them. The sea and
+# land cases keep their newest two restart sets (the last among them, which the next case starts from); the dry box's
+# keep every restart, for the storm-water study's windows.
+WEATHER_RUN = 'A28R_301k_design_l15_snow_s934_weather'
+WEATHER_STRETCH = dict(year=0, box_day=118.0)
+WEATHER_DAYS = 14
+WEATHER_KEEP_RESTARTS = {'box_near_side_sea_design_years': 2, 'box_0e_design_years': 2}
 for _box in ('box_near_side_sea_design_years', 'box_0e_design_years', 'box_se_dry_design_years'):
     for _j in range(1, WEATHER_DAYS + 1):
         _day = 118.0 + 29.5 * (_j - 1)
+        _role = 'the transition' if _j == 1 else 'read' if _j <= 7 else 'run only where the rules call it'
         CASES[f'{_box}_weather{_j}'] = dict(
             CASES[_box], restart_from=dict(case=f'{_box}_day4' if _j == 1 else f'{_box}_weather{_j - 1}', day=_day),
-            days=_day + 29.5,
-            weather=dict(source='(a) the year files\' 3-day means', run=GCM_DESIGN_RUN, years=(15, 16),
-                         fits=(GCM_DESIGN_RUN, GCM_DESIGN_YEARS), window_deg=36.0, stretch=WEATHER_STRETCH),
+            days=_day + 29.5, **({'keep_restarts': WEATHER_KEEP_RESTARTS[_box]} if _box in WEATHER_KEEP_RESTARTS else {}),
+            weather=dict(source="(b) the design run's years 15-16 rerun, means every 11 steps", run=WEATHER_RUN,
+                         years=(0, 1), fits=(GCM_DESIGN_RUN, GCM_DESIGN_YEARS), window_deg=2.7937,
+                         stretch=WEATHER_STRETCH),
             purpose=CASES[_box]['purpose'] + f"; run on from day {_day:g} following the design run's own sequence at "
-                    f"the site from year 15, the stretch's lunar day {_j} ({'the transition' if _j == 1 else 'read'})")
+                    f"the site from year 15, the stretch's lunar day {_j} ({_role})")
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,

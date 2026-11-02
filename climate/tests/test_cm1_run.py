@@ -1206,9 +1206,11 @@ def test_the_earth_length_cases_differ_from_their_sources_in_the_length_and_what
         {k: v for k, v in night.items() if k not in ('namelist', 'purpose')}
     assert night75['namelist'] == dict(c.NIGHT_OUTPUT, param3=dict(l_inf=75.0))
     # no case set up before them takes either new key, so the runner sets them up and runs them as before (the
-    # wind's own time scale of 28 October, and the gust beside it, take restart_namelist after them)
+    # wind's own time scale of 28 October, and the gust beside it, take restart_namelist after them; the sea and land
+    # boxes' weather chains of 2 November keep their newest two restart sets)
     new = {'box_near_side_sea_day3_linf75', 'box_near_side_sea_night_6km_linf75', 'box_near_side_sea_l15_wind_day3',
            'box_near_side_sea_l15_wind_day4', 'box_near_side_sea_l15_wind_gust_day3', 'box_near_side_sea_l15_wind_gust_day4'}
+    new |= {n for n in c.CASES if n.startswith(('box_near_side_sea_design_years_weather', 'box_0e_design_years_weather'))}
     assert not [n for n, v in c.CASES.items() if n not in new and ('restart_namelist' in v or 'keep_restarts' in v)]
 
 
@@ -1330,8 +1332,10 @@ def test_the_held_night_with_earth_s_length_takes_it_over_the_source_s(tmp_path,
 
 def test_the_weather_cases_run_on_lunar_day_by_lunar_day_from_the_fourth_days_restart():
     # each design-years box's weather chain: from its fourth lunar day's day-118 restart, one lunar day a case, each from
-    # the one before's restart, all following the design run's sequence from year 15 with the design years' fits, and
-    # otherwise the box itself
+    # the one before's restart, all following the rerun of the design run's years 15-16 (source (b): its year 0 the
+    # stretch's year, its 11-step means 2.7937 degrees of hour angle) with the design years' fits, and otherwise the box
+    # itself
+    assert c.WEATHER_DAYS == 14
     for box in ('box_near_side_sea_design_years', 'box_0e_design_years', 'box_se_dry_design_years'):
         base = c.CASES[box]
         for j in range(1, c.WEATHER_DAYS + 1):
@@ -1339,9 +1343,13 @@ def test_the_weather_cases_run_on_lunar_day_by_lunar_day_from_the_fourth_days_re
             assert case['restart_from'] == dict(case=f'{box}_day4' if j == 1 else f'{box}_weather{j - 1}', day=day)
             assert case['days'] == day + 29.5
             w = case['weather']
-            assert w['stretch'] == dict(year=15, box_day=118.0) and w['run'] == c.GCM_DESIGN_RUN
-            assert w['fits'] == (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS) and w['years'] == (15, 16)
-            assert {k: v for k, v in case.items() if k not in ('restart_from', 'days', 'weather', 'purpose')} == \
+            assert w['stretch'] == dict(year=0, box_day=118.0) and w['run'] == c.WEATHER_RUN
+            assert w['fits'] == (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS) and w['years'] == (0, 1)
+            assert w['window_deg'] == 2.7937
+            # the sea and land chains keep their newest two restart sets, the dry box's every restart
+            assert case.get('keep_restarts') == (None if box == 'box_se_dry_design_years' else 2)
+            assert {k: v for k, v in case.items() if k not in ('restart_from', 'days', 'weather', 'purpose',
+                                                               'keep_restarts')} == \
                 {k: v for k, v in base.items() if k not in ('days', 'purpose')}
     assert c.WEATHER_WINDOWS == 100 and c.WEATHER_BINS % 4 == 0
 
