@@ -61,11 +61,55 @@ def test_seal_passes_less_at_lunar_gravity_through_its_capillary_drive():
     assert B.bank_seepage(IN.MOON) == pytest.approx(B.bank_seepage(1.0) * IN.MOON)
 
 
+def neutral_transfer(wind, gravity, z=(10.0, 2.0)):
+    return B.transfer(np.array([wind]), gravity, 300.0, 300.0, 0.02, 0.02, 1.0e5, z_wind=z[0], z_air=z[1], neutral=True)
+
+
 def test_charnock_roughness_carries_gravity():
-    ce_m, z0_m = B.transfer(np.array([3.0]), IN.MOON)
-    ce_e, z0_e = B.transfer(np.array([3.0]), 1.0)
+    v_m, z0_m, _ = neutral_transfer(3.0, IN.MOON)
+    v_e, z0_e, _ = neutral_transfer(3.0, 1.0)
     assert z0_m[0] > 2.0 * z0_e[0]
-    assert ce_m[0] == pytest.approx(ce_e[0], rel=0.15)
+    assert v_m[0] == pytest.approx(v_e[0], rel=0.15)
+
+
+def test_neutral_transfer_is_coares_at_ten_metres():
+    """COARE 3.0's neutral 10 m coefficient for vapour over the open sea at moderate winds, about 1.1-1.2e-3."""
+    for wind in (5.0, 8.0):
+        v, _, _ = neutral_transfer(wind, 1.0, z=(10.0, 10.0))
+        assert 1.0e-3 < v[0] / wind < 1.3e-3
+    assert B.Z0_SCALAR['cap_m'] == 1.15e-4
+
+
+def test_stability_and_free_convection_over_a_pool():
+    """A pool warmer than its air under light wind transfers more than the neutral law gives, one cooler than its air
+    less; in still air the warm pool's transfer is no less than free convection, whose constant goes as the cube root
+    of the gravity at a given excess."""
+    p = 1.17e5
+    warm = lambda u, g, neutral=False: B.transfer(np.array([u]), g, 308.0, 300.0, 0.035, 0.006, p, neutral=neutral)[0][0]
+    cold = B.transfer(np.array([1.0]), IN.MOON, 297.0, 300.0, 0.019, 0.018, p)[0][0]
+    assert warm(1.0, IN.MOON) > 1.3 * warm(1.0, IN.MOON, neutral=True)
+    assert cold < warm(1.0, IN.MOON, neutral=True)
+    dthv = 308.0 * (1.0 + 0.61 * 0.035) - (300.0 + IN.MOON * B.STANDARD_GRAVITY / B.CP * 2.0) * (1.0 + 0.61 * 0.006)
+    assert warm(0.0, IN.MOON) >= B.free_convection(IN.MOON, p) * dthv ** (1.0 / 3.0) * (1.0 - 1e-9)
+    assert B.free_convection(IN.MOON, p) / B.free_convection(1.0, p) == pytest.approx(IN.MOON ** (1.0 / 3.0))
+
+
+def test_the_layers_gust_joins_the_wind():
+    one = lambda v: np.full((2, 1), v, np.float32)
+    x = dict(tenth=np.zeros((2, 1), np.int8), alb=one(0.2), rss=one(400.0), rls=one(-80.0), ts=one(310.0), tas=one(300.0),
+             hus_low=one(0.006), ps=one(1170.0), uas=np.array([[1.0], [0.0]], np.float32), vas=one(0.0),
+             gust_wstar=np.array([[0.0], [1.5]], np.float32))
+    f = B.forcing(x)
+    assert f['wind_eff'][0, 0] == pytest.approx((1.0 + 1.5) / 2.0)
+    assert f['wind'][0, 0] == pytest.approx(0.5)
+
+
+def test_half_levels_invert_plasims_full_levels():
+    from climate.gcm import pbl_scheme as ps
+    from research.studies.storm_water import extract as EX
+    sigmah = np.array([0.0766, 0.1616, 0.2601, 0.3736, 0.5, 0.6336, 0.7379, 0.7981, 0.8382, 0.8717, 0.9066, 0.941,
+                       0.9666, 0.9883, 1.0])
+    assert np.allclose(EX.half_levels(ps.full_sigma(sigmah)), sigmah)
 
 
 def synthetic_forcing(cells=2):
@@ -130,6 +174,63 @@ def test_a_steadily_fed_pool_settles_where_its_area_balances_the_inflow():
     loss = 0.08 / 1000.0 / 3600.0 + float(B.seal_seepage(np.array([depth]), IN.MOON)[0])
     rain = 2e-9 * (1.0 - 0.2 / (2e-9 * R.MM_PER_MEAN))
     assert area == pytest.approx(g / (loss - rain), rel=0.03)
+
+
+def test_a_full_channel_fed_bowl_spills_into_its_cells_depression():
+    """A channel-fed bowl that fills passes its spill on down its channel to the depressions of its cell, in the
+    shares of their inflow, and the pools' water still balances counting each pool's number."""
+    x, off, pools, tab = synthetic_case(chain=False)
+    pools.update(kind=np.array([2, 1, 0, 0], np.int8), state=np.zeros(4, np.int8), weight=np.array([3.0, 1.0, 1.0, 1.0]))
+    B.route_spill(pools, 1)
+    assert list(pools['dep_share']) == [0.0, 0.0, 1.0, 0.0] and list(pools['routed']) == [True, False, False, False]
+    st = B.simulate(pools, x, tab, 'clay_floored', IN.MOON, off, np.array([4.0]))
+    w = pools['weight']
+    assert st['spill_routed'][0] > 0 and st['spill_out'][0] == 0.0
+    gain = (w * (st['inflow'] + st['rain'])).sum()
+    out = (w * (st['evap'].sum(axis=1) + st['seep'] + st['spill_out'] + st['storage_end'] - st['storage_start'])).sum()
+    assert out == pytest.approx(gain, rel=0.01)
+
+
+def test_pools_start_near_their_balance():
+    """Under steady air and inflow the pools start where their inflow balances their losses, so none is still filling
+    or draining through the record."""
+    x, off, pools, tab = synthetic_case(nm=600, inflow=200.0, chain=False)
+    st = B.simulate(pools, x, tab, 'clay_floored', IN.MOON, off, np.array([4.0]))
+    fed = st['inflow'] > 0
+    change = np.abs(st['storage_end'] - st['storage_start'])[fed]
+    assert np.all(change < 0.02 * st['inflow'][fed])
+
+
+def test_seepage_recharges_under_standing_water_and_below_the_root_zone():
+    """A pool that stands through the lunar day passes all its seepage below the root zone; a small pool that dries
+    within its storm period leaves its seepage in the top metre, where phase 2a's rule returns it to the air."""
+    from research.studies.storm_water import phase2a as P2
+    x, off, pools, tab = synthetic_case(nm=600, inflow=200.0, chain=False)
+    pools['inflow'][0] = np.where(np.arange(10) == 5, 5.0, 0.0)                     # a little water in one tenth a day
+    rt = P2.recharge_tables(0.3)
+    st = B.simulate(pools, x, tab, 'clay_floored', IN.MOON, off, np.array([4.0]), rt)
+    standing = st['wet'] == st['steps']
+    assert standing[2] and st['recharge'][2] == pytest.approx(st['seep'][2], rel=1e-6)
+    assert st['dry_ever'][0] and st['recharge'][0] < 0.1 * st['seep'][0]
+    every = B.simulate(pools, x, tab, 'clay_floored', IN.MOON, off, np.array([4.0]))
+    assert every['recharge'][0] == pytest.approx(every['seep'][0], rel=1e-6)
+
+
+def test_leverage_reads_the_pools_on_the_fates_basis():
+    """The pools' evaporation enters the leverage as a rate over each cell's grid dryland area, the basis of phase 2a's
+    fates, so the dryland part's share of the cell no longer scales it."""
+    nm = 120
+    x = dict(pr=np.full((nm, 1), 5e-9, np.float32), evap=np.full((nm, 1), -4e-9, np.float32),
+             tenth=(np.arange(nm) % 10).astype(np.int8)[:, None], cls=np.array(['semi-arid']), area_km2=np.array([100.0]))
+    inp = {f'{q}__walnut_gulch__loam__{s}': np.zeros((10, 1)) for s in B.STATES
+           for q in ('bowls_inside', 'bowls_slope', 'bowls_channel', 'depressions', 'slope_recharge', 'bed_recharge', 'sea',
+                     'humid_land')}
+    cc = {s: dict(rain_on_pools_mm_yr=np.zeros(1), evap_mm_yr=np.full((10, 1), 1.0), seep_mm_yr=np.zeros(1),
+                  recharge_mm_yr=np.zeros(1)) for s in B.STATES}
+    a = B.leverage_2b(x, inp, 'walnut_gulch', 'loam', cc, np.array([89.0]))['young']['drylands']
+    b = B.leverage_2b(x, inp, 'walnut_gulch', 'loam', cc, np.array([100.0]))['young']['drylands']
+    assert a['pools_evaporation_share_of_evaporation'] == pytest.approx(b['pools_evaporation_share_of_evaporation'])
+    assert a['pools_evaporation_share_of_evaporation'] > 0
 
 
 def test_persistence_classes():

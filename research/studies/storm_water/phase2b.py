@@ -26,8 +26,9 @@ from research.studies.storm_water import phase2a as P2
 from research.studies.storm_water import routing as RT
 from research.studies.storm_water import run as R1
 from research.studies.storm_water import wetting as W
-from shared.constants import (JULIAN_YEAR_DAYS, MOON_SURFACE_GRAVITY, STANDARD_GRAVITY, STEFAN_BOLTZMANN,
-                              SYNODIC_MONTH_DAYS)
+from climate.gcm import surface_gust as SG
+from shared.constants import (JULIAN_YEAR_DAYS, MOON_SURFACE_GRAVITY, STANDARD_ATMOSPHERE, STANDARD_GRAVITY,
+                              STEFAN_BOLTZMANN, SYNODIC_MONTH_DAYS)
 
 STATES = P2.STATES
 SEEPAGE = ('clay_floored', 'sandy_banked')
@@ -40,9 +41,16 @@ KARMAN = 0.4
 WATER_ALBEDO = 0.07                 # open water, the plan's reading
 WATER_EMISSIVITY = 0.97             # a property of water
 FLOOR_HEAT = dict(depth_m=0.3, rho_c_j_m3_k=2.0e6)   # design: the wet floor's soil joins the pool's heat store
-CHARNOCK = 0.011                    # Earth value; the roughness z0 = a u*^2 / g + 0.11 nu / u* carries the gravity
+CHARNOCK = 0.011                    # Earth value, COARE 3.0's below 10 m/s (Fairall et al. 2003); the roughness
+                                    # z0 = a u*^2 / g + 0.11 nu / u* carries the gravity
 NU_AIR = 1.4e-5                     # m2/s, air near 300 K at the drylands' 1.16 atm
-Z0_SCALAR_M = 1.0e-4                # Earth value: heat and vapour roughness over water, set by the viscous sublayer
+Z0_SCALAR = dict(cap_m=1.15e-4, a_m=5.5e-5, power=-0.6)   # Earth-calibrated: COARE 3.0's roughness for heat and vapour,
+                                    # min(1.15e-4, 5.5e-5 Rr^-0.6) m with Rr = z0 u* / nu (Fairall et al. 2003)
+GUST_BETA, WIND_MIN_M_S = SG.GUST_BETA, SG.GUST_UMIN   # the design run's gust (surface_gust.py): beta 1 on the layer's
+                                    # w* and a least wind of 0.1 m/s, CM1's sfclay values (Beljaars 1995)
+FREE_CONVECTION = dict(earth_m_s_k3=SG.EXOPLASIM_CFREE, scaling='(g / p)^(1/3)')   # Earth-calibrated: the still-air
+                                    # law's constant at Earth's gravity and 1013 hPa (Miller, Beljaars and Palmer 1992)
+STABILITY_ITERATIONS = 16
 Z_WIND_M, Z_AIR_M = 10.0, 2.0       # PlaSim's 10 m wind and 2 m air; its lowest level's humidity (about 309 m) is
                                     # taken as the surface layer's (a limit)
 D_REF = np.array([0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0])       # mean depths (m) at which the energy balance runs
@@ -105,16 +113,76 @@ def qsat(t_k, p_pa):
     return 0.622 * e / (p_pa - 0.378 * e)
 
 
-def transfer(wind, gravity, z_wind=Z_WIND_M, z_air=Z_AIR_M):
-    """Neutral bulk transfer coefficient for heat and vapour over water at a gravity (in Earth's): the log law with
-    Charnock's roughness at that gravity plus the smooth-flow term, and a viscous scalar roughness."""
-    u = np.maximum(np.asarray(wind, float), 0.3)
+def psi_u(zeta):
+    """COARE 3.0's integrated profile function for momentum (Fairall et al. 2003, cor30a's psiu_30): Kansas and
+    convective forms blended in unstable air, whose convective form carries the free-convection limit, and Beljaars
+    and Holtslag's (1991) in stable air."""
+    z = np.asarray(zeta, float)
+    zn, zp = np.minimum(z, 0.0), np.maximum(z, 0.0)
+    x = (1.0 - 15.0 * zn) ** 0.25
+    kansas = 2.0 * np.log((1.0 + x) / 2.0) + np.log((1.0 + x * x) / 2.0) - 2.0 * np.arctan(x) + 2.0 * np.arctan(1.0)
+    y = (1.0 - 10.15 * zn) ** (1.0 / 3.0)
+    conv = 1.5 * np.log((1.0 + y + y * y) / 3.0) - math.sqrt(3.0) * np.arctan((1.0 + 2.0 * y) / math.sqrt(3.0)) \
+        + math.pi / math.sqrt(3.0)
+    f = zn * zn / (1.0 + zn * zn)
+    stable = -((1.0 + zp) + 0.667 * (zp - 14.28) / np.exp(np.minimum(50.0, 0.35 * zp)) + 8.525)
+    return np.where(z < 0.0, (1.0 - f) * kansas + f * conv, stable)
+
+
+def psi_t(zeta):
+    """COARE 3.0's integrated profile function for heat and vapour (cor30a's psit_30), in the same forms."""
+    z = np.asarray(zeta, float)
+    zn, zp = np.minimum(z, 0.0), np.maximum(z, 0.0)
+    kansas = 2.0 * np.log((1.0 + (1.0 - 15.0 * zn) ** 0.5) / 2.0)
+    y = (1.0 - 34.15 * zn) ** (1.0 / 3.0)
+    conv = 1.5 * np.log((1.0 + y + y * y) / 3.0) - math.sqrt(3.0) * np.arctan((1.0 + 2.0 * y) / math.sqrt(3.0)) \
+        + math.pi / math.sqrt(3.0)
+    f = zn * zn / (1.0 + zn * zn)
+    stable = -((1.0 + 2.0 / 3.0 * zp) ** 1.5 + 0.6667 * (zp - 14.28) / np.exp(np.minimum(50.0, 0.35 * zp)) + 8.525)
+    return np.where(z < 0.0, (1.0 - f) * kansas + f * conv, stable)
+
+
+def free_convection(gravity, pressure_pa):
+    """The still-air transfer constant (m s-1 K-1/3) at a gravity (in Earth's) and pressure: Miller, Beljaars and
+    Palmer's 0.0016, from the tank experiments' 0.17 (g kappa^2 / (theta_v nu))^(1/3), goes as (g / p)^(1/3), as
+    climate/gcm/exoplasim_run.py's free_convection_setting takes it."""
+    return FREE_CONVECTION['earth_m_s_k3'] * (gravity * STANDARD_ATMOSPHERE / np.asarray(pressure_pa, float)) ** (1.0 / 3.0)
+
+
+def transfer(wind, gravity, tw, ta, qs, qa, pressure_pa, z_wind=Z_WIND_M, z_air=Z_AIR_M, neutral=False):
+    """The transfer velocity C_H S (m/s) for heat and vapour between water at tw (K, saturated at qs) and the air at
+    z_air (ta, qa) under the wind S at z_wind, at a gravity (in Earth's), with the roughness and z/L at z_wind.
+
+    COARE 3.0's bulk algorithm (Fairall et al. 2003): Monin-Obukhov similarity with its profile functions (psi_u,
+    psi_t), Charnock's roughness at the gravity with the smooth-flow term, and COARE's roughness for heat and vapour.
+    The wind is the effective one, the mean wind with the gust of the surrounding boundary layer (forcing), at least
+    WIND_MIN_M_S; the gravity enters z/L through the buoyancy g / T. The transfer is no less than the still-air free
+    convection of a warm water surface, free_convection(g, p) (theta_v,s - theta_v,a)^(1/3), which goes as the cube root
+    of the gravity at a given excess. neutral=True holds z/L at 0 and leaves out the free convection."""
+    S = np.maximum(np.asarray(wind, float), WIND_MIN_M_S)
+    tw, ta, qs, qa, S = np.broadcast_arrays(*(np.asarray(v, float) for v in (tw, ta, qs, qa, S)))
     g = gravity * STANDARD_GRAVITY
-    z0 = np.full_like(u, 2e-4)
-    for _ in range(6):
-        ustar = KARMAN * u / np.log(z_wind / z0)
+    th_air = ta + g / CP * z_air                                     # the air's potential temperature from the ground
+    dth, dq = tw - th_air, qs - qa
+    ustar = KARMAN * S / np.log(z_wind / 1e-4)
+    zeta = np.zeros_like(S)
+    for _ in range(STABILITY_ITERATIONS):
         z0 = CHARNOCK * ustar ** 2 / g + 0.11 * NU_AIR / ustar
-    return KARMAN ** 2 / (np.log(z_wind / z0) * np.log(z_air / Z0_SCALAR_M)), z0
+        z0t = np.minimum(Z0_SCALAR['cap_m'], Z0_SCALAR['a_m'] * (z0 * ustar / NU_AIR) ** Z0_SCALAR['power'])
+        rt = np.log(z_air / z0t) - psi_t(zeta * z_air / z_wind)
+        ustar = 0.5 * (ustar + KARMAN * S / (np.log(z_wind / z0) - psi_u(zeta)))       # averaged, as CM1 carries it
+        if neutral:
+            continue
+        tsr, qsr = -KARMAN * dth / rt, -KARMAN * dq / rt
+        zeta = np.clip(KARMAN * g * z_wind / ta * (tsr * (1.0 + 0.61 * qa) + 0.61 * ta * qsr) / ustar ** 2
+                       / (1.0 + 0.61 * qa), -1000.0, 100.0)
+    z0 = CHARNOCK * ustar ** 2 / g + 0.11 * NU_AIR / ustar
+    z0t = np.minimum(Z0_SCALAR['cap_m'], Z0_SCALAR['a_m'] * (z0 * ustar / NU_AIR) ** Z0_SCALAR['power'])
+    v = KARMAN * ustar / (np.log(z_air / z0t) - psi_t(zeta * z_air / z_wind))
+    if not neutral:
+        dthv = tw * (1.0 + 0.61 * qs) - th_air * (1.0 + 0.61 * qa)
+        v = np.maximum(v, free_convection(gravity, pressure_pa) * np.maximum(dthv, 0.0) ** (1.0 / 3.0))
+    return v, z0, zeta
 
 
 def mean_by_tenth(a, tenth):
@@ -128,50 +196,56 @@ def mean_by_tenth(a, tenth):
 def forcing(x):
     """Each dryland cell's air and radiation by tenth (tenth, cell): sunlight down from the net and the albedo,
     longwave down from the net and the ground's emission, 2 m air, the lowest level's humidity, the pressure and the
-    10 m wind speed of each 3-day mean."""
+    10 m wind speed of each 3-day mean, with the effective wind that adds the boundary layer's gust to it."""
     t = x['tenth']
     alb = np.clip(x['alb'].astype(float), 0.0, 0.95)
     sw = x['rss'].astype(float) / (1.0 - alb)
     lw = x['rls'].astype(float) + STEFAN_BOLTZMANN * x['ts'].astype(float) ** 4
     wind = np.hypot(x['uas'].astype(float), x['vas'].astype(float))
+    wstar = x['gust_wstar'].astype(float) if 'gust_wstar' in x else np.zeros_like(wind)
+    gusty = np.maximum(np.hypot(wind, GUST_BETA * wstar), WIND_MIN_M_S)        # the design run's gust form, each mean
     f = dict(sw_in=sw, lw_in=lw, ta=x['tas'].astype(float), qa=x['hus_low'].astype(float),
-             p=x['ps'].astype(float) * 100.0, wind=wind, rls=x['rls'].astype(float))
+             p=x['ps'].astype(float) * 100.0, wind=wind, wind_eff=gusty, wstar=wstar, rls=x['rls'].astype(float))
     return {k: mean_by_tenth(v, t) for k, v in f.items()}
 
 
-def fluxes(tw, f, ce, k=None):
-    """Net radiation, latent and sensible heat (W/m2, upward positive for the turbulent fluxes) of water at tw."""
-    sl = slice(None) if k is None else k
-    p, ta, qa, u = f['p'][sl], f['ta'][sl], f['qa'][sl], f['wind'][sl]
+def pool_transfer(tw, f, gravity, factor=1.0):
+    """The pool's transfer velocity (m/s) at water temperature tw under the forcing f, on its effective wind."""
+    v, _, _ = transfer(f.get('wind_eff', f['wind']), gravity, tw, f['ta'], qsat(tw, f['p']), f['qa'], f['p'])
+    return v * factor
+
+
+def fluxes(tw, f, v):
+    """Net radiation, latent and sensible heat (W/m2, upward positive for the turbulent fluxes) of water at tw, with
+    the transfer velocity v (m/s)."""
+    p, ta, qa = f['p'], f['ta'], f['qa']
     rho = p / (R_DRY * ta * (1.0 + 0.61 * qa))
-    rn = (1.0 - WATER_ALBEDO) * f['sw_in'][sl] + WATER_EMISSIVITY * (f['lw_in'][sl] - STEFAN_BOLTZMANN * tw ** 4)
-    le = rho * LATENT * ce * u * (qsat(tw, p) - qa)
-    h = rho * CP * ce * u * (tw - ta)
+    rn = (1.0 - WATER_ALBEDO) * f['sw_in'] + WATER_EMISSIVITY * (f['lw_in'] - STEFAN_BOLTZMANN * tw ** 4)
+    le = rho * LATENT * v * (qsat(tw, p) - qa)
+    h = rho * CP * v * (tw - ta)
     return rn, le, h
 
 
 def penman(f, gravity, factor=1.0):
     """Penman's evaporation in its exact form: the water temperature at which net radiation balances the latent and
-    sensible heat with no storage, by tenth and cell (mm/h), with that temperature."""
-    ce, _ = transfer(f['wind'], gravity)
-    ce = ce * factor
+    sensible heat with no storage, by tenth and cell (mm/h), with that temperature; the transfer follows the water's
+    temperature through its stability."""
     tw = f['ta'].copy()
     for _ in range(40):
-        rn, le, h = fluxes(tw, f, ce)
+        v = pool_transfer(tw, f, gravity, factor)
+        rn, le, h = fluxes(tw, f, v)
         r = rn - le - h
         d = 0.05
-        rn2, le2, h2 = fluxes(tw + d, f, ce)
+        rn2, le2, h2 = fluxes(tw + d, f, v)
         tw = tw + r / np.maximum((r - (rn2 - le2 - h2)) / d, 1.0)
-    rn, le, h = fluxes(tw, f, ce)
+    rn, le, h = fluxes(tw, f, pool_transfer(tw, f, gravity, factor))
     return le / LATENT * 3600.0, tw
 
 
 def energy_balance(f, gravity, depths=D_REF, cycles=3, dt_h=1.0, factor=1.0):
     """The pool's temperature through the lunar cycle at each mean depth, the forcing constant within each tenth,
     with the floor's soil in the heat store: mean evaporation (mm/h) and water temperature (K) by depth, tenth and
-    cell from the last cycle."""
-    ce, _ = transfer(f['wind'], gravity)
-    ce = ce * factor
+    cell from the last cycle. Each step's transfer follows the water's temperature through its stability."""
     nd, nc = depths.size, f['ta'].shape[1]
     heat = (RHO_W * C_W * depths + FLOOR_HEAT['depth_m'] * FLOOR_HEAT['rho_c_j_m3_k'])[:, None]
     steps = int(round(MEAN_H / dt_h))
@@ -181,12 +255,12 @@ def energy_balance(f, gravity, depths=D_REF, cycles=3, dt_h=1.0, factor=1.0):
     for cyc in range(cycles):
         for k in range(10):
             fk = {q: v[k][None, :] for q, v in f.items()}
-            cek = ce[k][None, :]
             esum, tsum = np.zeros((nd, nc)), np.zeros((nd, nc))
             for _ in range(steps):
-                rn, le, h = fluxes(tw, fk, cek)
+                v = pool_transfer(tw, fk, gravity, factor)
+                rn, le, h = fluxes(tw, fk, v)
                 r = rn - le - h
-                rn2, le2, h2 = fluxes(tw + 0.05, fk, cek)
+                rn2, le2, h2 = fluxes(tw + 0.05, fk, v)
                 slope = np.maximum((r - (rn2 - le2 - h2)) / 0.05, 0.0)
                 tw = tw + dt * r / (heat + dt * slope)
                 esum += le
@@ -304,11 +378,20 @@ def area_at_stage(stage, s, A):
 # ---------------------------------------------------------------------------------------------------------------------
 # The pools through the design years.
 
-def simulate(pools, x, evap_tab, seep_case, gravity, off, solute_mg_l):
+def simulate(pools, x, evap_tab, seep_case, gravity, off, solute_mg_l, rech_tab=None):
     """Every pool through the means in STEPS_PER_MEAN steps each: inflow spread through each mean, the rain on the
     pool's surface, evaporation at the pool's mean depth in its cell's tenth, seepage, and spill to the depression it
-    drains into. The volume advances implicitly in sqrt(V), exact for a paraboloid drying under constant losses."""
+    drains into (a channel-fed bowl's spill to its cell's depressions, route_spill). The volume advances implicitly in
+    sqrt(V), exact for a paraboloid drying under constant losses. The pools start where their mean inflow balances their
+    mean losses (balance_start). With rech_tab (phase 2a's recharge_tables) the seepage of each storm period counts as
+    recharge where the pool still stands at the end of the next morning, and otherwise in the share phase 2a's rule puts
+    below the root zone after a lunar day of redistribution and drying beneath the floor; without it all seepage counts."""
     n = pools['cell'].size
+    weight = pools.get('weight', np.ones(n))
+    routed = pools.get('routed', np.zeros(n, bool))
+    key = pools.get('key', np.zeros(n, np.int64))
+    dep_share = pools.get('dep_share', np.zeros(n))
+    nkey = int(key.max()) + 1 if n else 1
     cell, s, A, V, top = pools['cell'], pools['s'], pools['A'], pools['V'], pools['top']
     c1 = np.sqrt(2.0 * np.maximum(A[:, 1], 1e-9) / np.maximum(s[:, 1], 1e-9))      # A = c1 sqrt(V) in the first segment
     clog = area_at_stage(np.full(n, BANK['clogged_stage_m']), s, A) if seep_case == 'sandy_banked' else None
@@ -327,7 +410,7 @@ def simulate(pools, x, evap_tab, seep_case, gravity, off, solute_mg_l):
     dt = MEAN_H / STEPS_PER_MEAN * 3600.0
     ln_d = np.log(D_REF)
     idx = np.arange(n)
-    vol, stage, area, spill_in, salt = (np.zeros(n) for _ in range(5))
+    stage, area, spill_in = (np.zeros(n) for _ in range(3))
     nd = D_REF.size
     ev = np.ascontiguousarray(evap_tab.transpose(0, 2, 1)).reshape(-1) / 1000.0 / 3600.0    # (cell, tenth, depth) m/s
     g1 = A[:, 1] / np.maximum(s[:, 1], 1e-9)                                       # area per metre of stage, first segment
@@ -340,8 +423,24 @@ def simulate(pools, x, evap_tab, seep_case, gravity, off, solute_mg_l):
         if big.any():
             st_[big], ar[big] = on_curve(v[big], s[big], A[big], V[big])
         return st_, ar
+    def seepage_rate(dmean, ar):
+        q_seal = np.interp(dmean, depth_tab, seal_tab)
+        if clog is None:
+            return q_seal, np.zeros(n)
+        bank = np.where(ar > clog, q_bank * (ar - clog), 0.0)
+        total = np.where(ar > clog, (q_seal * clog + bank) / np.maximum(ar, 1e-9), q_seal)
+        return total, np.where(ar > clog, bank / np.maximum(total * ar, 1e-30), 0.0)
+
+    e_day = evap_tab.mean(axis=2) / 1000.0 / 3600.0                              # (cell, depth) m/s over the lunar day
+    q_mean = pools['inflow'].sum(axis=1) / (JULIAN_YEAR_DAYS * 86400.0)            # m3/s
+    r_mean = (rain * direct).mean(axis=0)[cell] / (MEAN_H * 3600.0)                # m/s on the pool's surface
+    vol, salt = balance_start(n, cell, top, q_mean, r_mean, e_day, seepage_rate, geometry, parent, routed, key, dep_share,
+                              weight, nkey, solute_mg_l[cell])
+    stage, area = geometry(vol)
     z = lambda: np.zeros(n)
-    st = dict(evap=np.zeros((n, 10)), seep=z(), spill_out=z(), inflow=z(), rain=z(), wet=z(), deep=z(), stage_sum=z(),
+    seep_cyc, bank_cyc, area_cyc, wet_cyc = z(), z(), z(), z()
+    st = dict(evap=np.zeros((n, 10)), seep=z(), recharge=z(), spill_out=z(), spill_routed=z(), inflow=z(), rain=z(),
+              wet=z(), deep=z(), stage_sum=z(),
               stage_max=z(), area=np.zeros((n, 10)), steps_by_tenth=np.zeros(10), dry_ever=np.zeros(n, bool),
               deposit=z(), salt_in=z(), salt_out=z(), checks={c: z() for c in CHECKPOINTS},
               n_at={c: z() for c in CHECKPOINTS})
@@ -359,11 +458,7 @@ def simulate(pools, x, evap_tab, seep_case, gravity, off, solute_mg_l):
             j = np.clip(np.searchsorted(ln_d, ld) - 1, 0, D_REF.size - 2)
             w = (ld - ln_d[j]) / (ln_d[j + 1] - ln_d[j])
             e = (1.0 - w) * ev[base + j] + w * ev[base + j + 1]
-            q_seal = np.interp(dmean, depth_tab, seal_tab)
-            if clog is None:
-                seep = q_seal
-            else:
-                seep = np.where(area > clog, (q_seal * clog + q_bank * (area - clog)) / np.maximum(area, 1e-9), q_seal)
+            seep, bank_share = seepage_rate(dmean, area)
             loss = e + seep
             water_in = q_step + r_step * area
             gain = water_in + spill_in
@@ -380,6 +475,9 @@ def simulate(pools, x, evap_tab, seep_case, gravity, off, solute_mg_l):
             if has.any():
                 tgt, amt = parent[has], over[has]
                 np.add.at(spill_in, tgt[tgt >= 0], amt[tgt >= 0])
+                go = has & routed
+                if go.any():
+                    spill_in += np.bincount(key[go], weights=over[go] * weight[go], minlength=nkey)[key] * dep_share
             # solutes come with the water, leave with the seepage and the spill at the pool's concentration, and
             # settle on the floor when the pool dries
             sin = water_in * solute_mg_l[cell]                                         # g
@@ -388,13 +486,19 @@ def simulate(pools, x, evap_tab, seep_case, gravity, off, solute_mg_l):
             sout = np.minimum(conc * (np.maximum(lost * (1.0 - fe), 0.0) + over), salt)
             salt -= sout
             vol = new
+            sv = np.maximum(lost * (1.0 - fe), 0.0)
+            seep_cyc += sv
+            bank_cyc += sv * bank_share
             stage, area = geometry(vol)
             wet = stage >= WET_M
             dry = vol <= 1e-9
+            area_cyc += np.where(wet, area, 0.0)
+            wet_cyc += wet
             if rec:
                 st['evap'][idx, kk] += lost * fe
                 st['seep'] += lost * (1.0 - fe)
-                st['spill_out'] += np.where(parent >= 0, 0.0, over)
+                st['spill_out'] += np.where((parent >= 0) | routed, 0.0, over)
+                st['spill_routed'] += np.where(routed, over, 0.0)
                 st['inflow'] += q_step
                 st['rain'] += r_step * area
                 st['salt_in'] += sin
@@ -407,6 +511,20 @@ def simulate(pools, x, evap_tab, seep_case, gravity, off, solute_mg_l):
                 st['area'][idx, kk] += np.where(wet, area, 0.0)
                 st['dry_ever'] |= ~wet
             salt = np.where(dry, 0.0, salt)
+        end = kk == CHECKPOINTS['before_storms']                                   # a storm period's cycle closes
+        if end.any():
+            if rech_tab is None:
+                got = seep_cyc
+            else:
+                a_m = np.where(wet_cyc > 0, area_cyc / np.maximum(wet_cyc, 1.0), np.maximum(area, 1e-9))
+                d_seal = (seep_cyc - bank_cyc) / np.maximum(a_m, 1e-9) * 1000.0                # mm over the floor
+                d_bank = bank_cyc / np.maximum(a_m, 1e-9) * 1000.0
+                got = np.where(wet, seep_cyc, (seep_cyc - bank_cyc) * P2.share_below(rech_tab, SEAL['subsoil'], d_seal)
+                               + bank_cyc * P2.share_below(rech_tab, 'bed', d_bank))
+            if rec:
+                st['recharge'] += np.where(end, got, 0.0)
+            for a_ in (seep_cyc, bank_cyc, area_cyc, wet_cyc):
+                a_[end] = 0.0
         if rec:
             for cname, ck in CHECKPOINTS.items():
                 at = kk == ck
@@ -419,6 +537,54 @@ def simulate(pools, x, evap_tab, seep_case, gravity, off, solute_mg_l):
     # steps per tenth for each pool's cell (the same for every pool of a cell): the means after spin-up in each tenth
     st['steps_in_tenth'] = np.stack([(tenth[SPINUP_MEANS:, cell] == k).sum(axis=0) for k in range(10)], axis=1) * STEPS_PER_MEAN
     return st
+
+
+def balance_start(n, cell, top, q_mean, r_mean, e_day, seepage_rate, geometry, parent, routed, key, dep_share, weight,
+                  nkey, conc_in, sweeps=40, iterations=36):
+    """Each pool's starting volume and solutes: the volume at which its mean inflow, rain on its surface and the
+    surplus of the pools above it balance its evaporation at its mean depth over the lunar day and its seepage, or its
+    top where the inflow exceeds the losses there, the surplus passing down the tree and from channel-fed bowls to their
+    cell's depressions as their spill does; the water starts at the concentration that balances its solutes' inflow
+    and outflow. The first design year then adjusts every pool, so the statistics begin near the pools' cycle rather
+    than with empty hollows that the deepest fill only over decades."""
+    ln_d = np.log(D_REF)
+    flat = e_day.reshape(-1)
+
+    def losses(v):
+        st_, ar = geometry(v)
+        d = np.where(ar > 0, v / np.maximum(ar, 1e-9), D_REF[0])
+        ld = np.clip(np.log(np.maximum(d, D_REF[0])), ln_d[0], ln_d[-1])
+        j = np.clip(np.searchsorted(ln_d, ld) - 1, 0, D_REF.size - 2)
+        w = (ld - ln_d[j]) / (ln_d[j + 1] - ln_d[j])
+        e = (1.0 - w) * flat[cell * D_REF.size + j] + w * flat[cell * D_REF.size + j + 1]
+        sp, _ = seepage_rate(d, ar)
+        return ar, e, sp
+
+    incoming = np.zeros(n)
+    for _ in range(sweeps):
+        q = q_mean + incoming
+        ar, e, sp = losses(top)
+        surplus = q + (r_mean - e - sp) * ar
+        lo, hi = np.zeros(n), top.copy()
+        for _ in range(iterations):
+            mid = 0.5 * (lo + hi)
+            ar_m, e_m, sp_m = losses(mid)
+            up = q + (r_mean - e_m - sp_m) * ar_m > 0
+            lo, hi = np.where(up, mid, lo), np.where(up, hi, mid)
+        vol = np.where(surplus >= 0.0, top, 0.5 * (lo + hi))
+        out = np.maximum(surplus, 0.0)
+        new = np.zeros(n)
+        np.add.at(new, parent[parent >= 0], out[parent >= 0])
+        if routed.any():
+            new += np.bincount(key[routed], weights=out[routed] * weight[routed], minlength=nkey)[key] * dep_share
+        if np.allclose(new, incoming, rtol=1e-6, atol=1e-9):
+            break
+        incoming = new
+    ar, e, sp = losses(vol)
+    water_in = q_mean + incoming + r_mean * ar
+    leaving = sp * ar + np.maximum(water_in - (e + sp) * ar, 0.0)
+    conc = np.where(leaving > 0, conc_in * water_in / np.maximum(leaving, 1e-30), conc_in)
+    return vol, vol * conc
 
 
 def persistence(st):
@@ -492,7 +658,21 @@ def build_pools(inp, b, name):
     pools = {k: np.concatenate([p[k] for p in parts]) for k in parts[0]}
     width = max(c[0].shape[1] for c in curves)
     pools['s'], pools['A'], pools['V'], pools['top'] = pad_curves(curves, width)
+    route_spill(pools, ncell)
     return pools
+
+
+def route_spill(pools, ncell):
+    """Where a channel-fed bowl's spill goes: on down its channel to the grid's depressions of its T21 cell and hollow
+    age, shared as their inflow is (design choice: the channels end in those hollows, phase 2a's routing having
+    filled each crossed bowl afresh in every event). A cell with no fed depression passes the spill on."""
+    key = pools['state'].astype(np.int64) * ncell + pools['cell']
+    dep = pools['kind'] == 0
+    q_dep = np.where(dep, pools['inflow'].sum(axis=1), 0.0)
+    tot = np.bincount(key, weights=q_dep, minlength=len(STATES) * ncell)
+    pools['key'] = key
+    pools['dep_share'] = np.where(dep & (tot[key] > 0), q_dep / np.maximum(tot[key], 1e-30), 0.0)
+    pools['routed'] = (pools['kind'] == 2) & (tot[key] > 0)
 
 
 def case_summary(pools, st, inp, x):
@@ -522,7 +702,11 @@ def case_summary(pools, st, inp, x):
                        inflow_km3_yr=infl * 1e-9, rain_on_pools_km3_yr=float((ww * st['rain'][fed]).sum() / yrs) * 1e-9,
                        evaporated_km3_yr=float((ww[:, None] * st['evap'][fed]).sum() / yrs) * 1e-9,
                        seeped_km3_yr=float((ww * st['seep'][fed]).sum() / yrs) * 1e-9,
+                       recharged_km3_yr=float((ww * st['recharge'][fed]).sum() / yrs) * 1e-9,
+                       recharge_mm_yr_beneath_wet_floor=float((ww * st['recharge'][fed]).sum() / yrs * 1000.0
+                                                              / max(float((ww * mean_area[fed].mean(axis=1)).sum()), 1e-30)),
                        spilled_out_km3_yr=float((ww * st['spill_out'][fed]).sum() / yrs) * 1e-9,
+                       spill_routed_to_depressions_km3_yr=float((ww * st['spill_routed'][fed]).sum() / yrs) * 1e-9,
                        time_wet_share_mean=float((ww * wet_share).sum() / max(ww.sum(), 1e-30)),
                        time_deep_share_mean=float((ww * st['deep'][fed] / max(st['steps'], 1)).sum() / max(ww.sum(), 1e-30)),
                        carried_to_next_storms_share=float((ww * share['before_storms'][fed]).sum() / max(ww.sum(), 1e-30)),
@@ -541,6 +725,7 @@ def case_summary(pools, st, inp, x):
         by_cls = np.stack([np.bincount(c, weights=w[m] * mean_area[m].mean(axis=1) * (cls[m] == q), minlength=ncell)
                            for q in range(1, len(CLASS_NAMES))])
         cells[s] = dict(evap_mm_yr=ev / dry_m2 * 1000.0, seep_mm_yr=np.bincount(c, weights=w[m] * st['seep'][m], minlength=ncell)
+                        / yrs / dry_m2 * 1000.0, recharge_mm_yr=np.bincount(c, weights=w[m] * st['recharge'][m], minlength=ncell)
                         / yrs / dry_m2 * 1000.0, rain_on_pools_mm_yr=np.bincount(c, weights=w[m] * st['rain'][m], minlength=ncell)
                         / yrs / dry_m2 * 1000.0, spill_out_mm_yr=np.bincount(c, weights=w[m] * st['spill_out'][m], minlength=ncell)
                         / yrs / dry_m2 * 1000.0, wet_fraction=wet / dry_m2, wet_fraction_by_class=by_cls / dry_m2,
@@ -597,12 +782,13 @@ def leverage_2b(x, inp, b, name, cells_case, dry_km2):
              'depressions', 'slope_recharge', 'bed_recharge', 'sea', 'humid_land')}
         hollows = f['bowls_inside'] + f['bowls_slope'] + f['bowls_channel'] + f['depressions']
         cc = cells_case[s]
-        scale = dry_km2 / x['area_km2']                                           # pools' mm over the grid's dryland area
-        pool_rain = cc['rain_on_pools_mm_yr'] * scale
+        # the pools' mm a year over each cell's grid dryland area, the basis of phase 2a's fates (each a rate over the
+        # dryland part, carried over the T21 cell's area like the bucket's evaporation)
+        pool_rain = cc['rain_on_pools_mm_yr']
         with np.errstate(invalid='ignore', divide='ignore'):
             rain_k = hollows / np.maximum(hollows.sum(axis=0), 1e-30) * pool_rain[None, :]
         leaves = hollows + f['slope_recharge'] + f['bed_recharge'] + f['sea'] + f['humid_land'] + rain_k
-        pools = cc['evap_mm_yr'] * scale[None, :]
+        pools = cc['evap_mm_yr']
         out = {}
         for cname in R1.CLASSES + ('drylands',):
             m = np.ones(x['cls'].size, bool) if cname == 'drylands' else (x['cls'] == cname)
@@ -620,7 +806,12 @@ def leverage_2b(x, inp, b, name, cells_case, dry_km2):
                               change_by_tenth_bucket_timing=[float(v) for v in timed / np.maximum(e_k, 1e-30)],
                               pools_evaporation_by_tenth_share=[float(v) for v in p_k / np.maximum(e_k, 1e-30)],
                               recharge_share_of_rain=float(((f['slope_recharge'] + f['bed_recharge'])[:, m] * a).sum() / r_k.sum()
-                                                           + (cc['seep_mm_yr'][m] * scale[m] * a).sum() / r_k.sum()),
+                                                           + (cc['recharge_mm_yr'][m] * a).sum() / r_k.sum()),
+                              recharge_by_component_share_of_rain=dict(
+                                  slopes=float((f['slope_recharge'][:, m] * a).sum() / r_k.sum()),
+                                  channel_beds=float((f['bed_recharge'][:, m] * a).sum() / r_k.sum()),
+                                  floors=float((cc['recharge_mm_yr'][m] * a).sum() / r_k.sum()),
+                                  floors_seepage=float((cc['seep_mm_yr'][m] * a).sum() / r_k.sum())),
                               passes_yearly=bool(abs(p_k.sum() - l_k.sum()) / e_y > R1.THRESHOLDS['yearly']),
                               passes_tenth_bucket_timing=bool(np.max(np.abs(timed) / np.maximum(e_k, 1e-30)) > R1.THRESHOLDS['tenth']),
                               passes_tenth_storm_timing=bool(np.max(np.abs(storm) / np.maximum(e_k, 1e-30)) > R1.THRESHOLDS['tenth']))
@@ -703,8 +894,10 @@ def wear_summary(x, loss_mm):
 # Checks.
 
 def mead_check():
-    """The bulk transfer at Earth's gravity against Lake Mead's measured latent heat (rule set before running)."""
-    ce, z0 = transfer(np.array([MEAD['wind_m_s']]), 1.0, z_wind=MEAD['height_m'], z_air=MEAD['height_m'])
+    """The bulk transfer at Earth's gravity against Lake Mead's measured latent heat (rule set before running), on the
+    month's water-surface temperature, air temperature and vapour pressure and the period's mean wind at the sensors'
+    height, with the stability each month's means give; the record gives no boundary-layer depth for a gust. The
+    neutral transfer is recorded beside it."""
     p = MEAD['pressure_pa']
     ta = np.array(MEAD['ta']) + 273.15
     tw = np.array(MEAD['to']) + 273.15
@@ -712,11 +905,28 @@ def mead_check():
     qa = 0.622 * ea / (p - 0.378 * ea)
     rho = p / (R_DRY * ta * (1.0 + 0.61 * qa))
     lam = 2.501e6 - 2370.0 * (tw - 273.15)
-    le = rho * lam * ce[0] * MEAD['wind_m_s'] * (qsat(tw, p) - qa)
+    u = np.full(ta.shape, MEAD['wind_m_s'])
+    z = MEAD['height_m']
+    out = {}
+    for label, neutral in (('similarity', False), ('neutral', True)):
+        v, z0, zeta = transfer(u, 1.0, tw, ta, qsat(tw, p), qa, p, z_wind=z, z_air=z, neutral=neutral)
+        le = rho * lam * v * (qsat(tw, p) - qa)
+        out[label] = dict(le=le, v=v, z0=z0, zeta=zeta)
+    le = out['similarity']['le']
     ratio = float(le.mean() / MEAD['le_period'])
     monthly = le / np.array(MEAD['le'], float)
-    return dict(rule=MEAD_RULE, transfer_coefficient=float(ce[0]), roughness_m=float(z0[0]), modelled_w_m2=float(le.mean()),
-                measured_w_m2=MEAD['le_period'], ratio=ratio, monthly_ratio_range=[float(monthly.min()), float(monthly.max())],
+    warm = tw > ta
+    return dict(rule=MEAD_RULE, transfer_coefficient=float((out['similarity']['v'] / u).mean()),
+                transfer_coefficient_monthly_range=[float((out['similarity']['v'] / u).min()),
+                                                    float((out['similarity']['v'] / u).max())],
+                neutral_transfer_coefficient=float((out['neutral']['v'] / u).mean()),
+                roughness_m=float(out['similarity']['z0'].mean()),
+                zeta_monthly_range=[float(out['similarity']['zeta'].min()), float(out['similarity']['zeta'].max())],
+                modelled_w_m2=float(le.mean()), neutral_w_m2=float(out['neutral']['le'].mean()),
+                measured_w_m2=MEAD['le_period'], ratio=ratio,
+                ratio_lake_warmer=float(le[warm].sum() / np.array(MEAD['le'], float)[warm].sum()),
+                ratio_lake_cooler=float(le[~warm].sum() / np.array(MEAD['le'], float)[~warm].sum()),
+                monthly_ratio_range=[float(monthly.min()), float(monthly.max())],
                 monthly_correlation=float(np.corrcoef(le, MEAD['le'])[0, 1]),
                 modelled_mm_yr=float(le.mean() / 2.45e6 * 86400 * JULIAN_YEAR_DAYS), measured_mm_yr=[1881.0, 2074.0],
                 passes=bool(abs(ratio - 1.0) <= MEAD_RULE['tolerance']))
@@ -751,8 +961,9 @@ def night_check(x, f, e_tab, pen):
 WET_PATCHES = R1.HERE / 'results' / 'wet_patches.json'
 WET_CELLS = P2.RUNS / 'wet_patches_2b.npz'
 WET_SCHEMA = 'terluna.research.storm-water-wet-patches/1'
-SENSITIVITY_TRANSFER = 1.45          # the factor that would close Lake Mead's latent heat: a calibration, kept out of
-                                     # the check and used only as a sensitivity case
+SENSITIVITY_TRANSFER = 1.49          # Lake Mead's Bowen-ratio latent heat over the corrected transfer's on the data
+                                     # release's 30-minute record (164 / 110 W/m2): a calibration, kept out of the
+                                     # check and used only as a sensitivity case
 
 
 def rel(path):
@@ -801,6 +1012,7 @@ def run_phase2b(x, libs, pressure):
     pen, pen_t = penman(f, IN.MOON)
     e_hi, _ = energy_balance(f, IN.MOON, factor=SENSITIVITY_TRANSFER)
     pen_hi, _ = penman(f, IN.MOON, factor=SENSITIVITY_TRANSFER)
+    rech_tab = P2.recharge_tables(float(P2.demand_mm_h(x).mean()))
     years = x['pr'].shape[0] * R1.MEAN_DAYS / JULIAN_YEAR_DAYS
     rain_m_yr = x['pr'].astype(float).sum(axis=0) * R1.MM_PER_MEAN / 1000.0 / years
     solute = SALTS['rain_mg_l'] + SALTS['dust_soluble_g_m2_yr'] / np.maximum(rain_m_yr, 1e-3)    # g/m3 in the runoff
@@ -812,7 +1024,7 @@ def run_phase2b(x, libs, pressure):
             pools = build_pools(inp, b, name)
             off = inp[f'off__{b}__{name}'].astype(float)
             for seep in SEEPAGE:
-                st = simulate(pools, x, e_tab, seep, IN.MOON, off, solute)
+                st = simulate(pools, x, e_tab, seep, IN.MOON, off, solute, rech_tab)
                 summ, cc, cls, share, mean_area = case_summary(pools, st, inp, x)
                 w = pools['weight']
                 for si, s in enumerate(STATES):
@@ -836,7 +1048,7 @@ def run_phase2b(x, libs, pressure):
                                                     events=parts, cell_mm_yr=loss)
     # Sensitivity: the transfer raised by Lake Mead's factor for the loam under Walnut Gulch's storms.
     pools = build_pools(inp, 'walnut_gulch', 'loam')
-    st = simulate(pools, x, e_hi, 'clay_floored', IN.MOON, inp['off__walnut_gulch__loam'].astype(float), solute)
+    st = simulate(pools, x, e_hi, 'clay_floored', IN.MOON, inp['off__walnut_gulch__loam'].astype(float), solute, rech_tab)
     summ, cc, cls, share, mean_area = case_summary(pools, st, inp, x)
     sens = dict(transfer_factor=SENSITIVITY_TRANSFER, case='walnut_gulch, loam, clay_floored',
                 pools=summ, leverage=leverage_2b(x, inp, 'walnut_gulch', 'loam', cc, dry_km2),
@@ -845,7 +1057,8 @@ def run_phase2b(x, libs, pressure):
     keep_seal = dict(SEAL)
     SEAL.update(tight)
     try:
-        st = simulate(pools, x, e_tab, 'clay_floored', IN.MOON, inp['off__walnut_gulch__loam'].astype(float), solute)
+        st = simulate(pools, x, e_tab, 'clay_floored', IN.MOON, inp['off__walnut_gulch__loam'].astype(float), solute,
+                      rech_tab)
     finally:
         SEAL.update(keep_seal)
     summ, cc, cls, share, mean_area = case_summary(pools, st, inp, x)
@@ -861,7 +1074,12 @@ def run_phase2b(x, libs, pressure):
                   semi_arid_penman_mm_h_by_tenth=sig((pen[:, semi] * a).sum(axis=1) / a.sum()),
                   semi_arid_pt_water_mm_h_by_tenth=sig((pt_water(f)[:, semi] * a).sum(axis=1) / a.sum()),
                   semi_arid_wind_m_s_by_tenth=sig((f['wind'][:, semi] * a).sum(axis=1) / a.sum()),
-                  transfer_coefficient_mean=float(transfer(f['wind'], IN.MOON)[0].mean()),
+                  semi_arid_gust_wstar_m_s_by_tenth=sig((f['wstar'][:, semi] * a).sum(axis=1) / a.sum()),
+                  semi_arid_effective_wind_m_s_by_tenth=sig((f['wind_eff'][:, semi] * a).sum(axis=1) / a.sum()),
+                  semi_arid_boundary_layer_depth_m_by_tenth=sig((mean_by_tenth(x['gust_h'].astype(float), x['tenth'])[:, semi] * a)
+                                                                .sum(axis=1) / a.sum()),
+                  semi_arid_transfer_velocity_mm_s_by_tenth_at_penman=sig((pool_transfer(pen_t, f, IN.MOON)[:, semi] * a)
+                                                                          .sum(axis=1) / a.sum() * 1000.0),
                   seal_seepage_mm_day=dict(depth_m=[0.1, 0.5, 1.0, 3.0],
                                            moon=sig(seal_seepage(np.array([0.1, 0.5, 1.0, 3.0]), IN.MOON) * 8.64e7),
                                            earth=sig(seal_seepage(np.array([0.1, 0.5, 1.0, 3.0]), 1.0) * 8.64e7)),
@@ -898,7 +1116,10 @@ def run_phase2b(x, libs, pressure):
         cells_1_9km=dict(path=rel(WET_CELLS), schema=lmeta['schema'], sha256=R1.sha256(WET_CELLS)))
     section = dict(
         design=dict(water_albedo=WATER_ALBEDO, water_emissivity=WATER_EMISSIVITY, floor_heat=FLOOR_HEAT, charnock=CHARNOCK,
-                    scalar_roughness_m=Z0_SCALAR_M, depths_m=[float(v) for v in D_REF], steps_per_mean=STEPS_PER_MEAN,
+                    scalar_roughness=Z0_SCALAR, gust=dict(beta=GUST_BETA, least_wind_m_s=WIND_MIN_M_S,
+                                                          source='climate/gcm/surface_gust.py, the design run\'s gust'),
+                    free_convection=dict(FREE_CONVECTION, lunar_m_s_k3=float(free_convection(IN.MOON, 1.16 * STANDARD_ATMOSPHERE))),
+                    transfer='COARE 3.0 (Fairall et al. 2003) at lunar gravity on the wind with the layer\'s gust', depths_m=[float(v) for v in D_REF], steps_per_mean=STEPS_PER_MEAN,
                     wet_m=WET_M, deep_m=DEEP_M, checkpoints=CHECKPOINTS, spinup_means=SPINUP_MEANS, seal=SEAL, bank=BANK,
                     salts=SALTS, textures=TEXTURES, biocrust=BIOCRUST, rill=RILL, bulk_density=BULK_DENSITY,
                     soil_formation_mm_yr=SOIL_FORMATION_MM_YR, bowl_shape='paraboloid, Pike\'s fresh form at half its depth',

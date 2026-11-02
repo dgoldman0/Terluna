@@ -9,14 +9,17 @@ subsolar longitude), its rain over Priestley and Taylor's demand on that mean's 
 UNEP's aridity classes. The drylands are the arid, semi-arid and dry sub-humid cells, aridity 0.05-0.65. For each of
 them the extract keeps all 1,200 means of the rain and its convective part, the evaporation, the bucket's soil water,
 the net sunlight and longwave at the ground, the air at 2 m, the ground, the surface pressure, the wind at 10 m and the
-sensible and latent heat, with the tenth each mean falls in. It writes research/runs/storm_water/design_years.npz
-(ignored) and a sidecar design_years.json with the sha256 and size of every year file read. A change of design years
-reruns it in about a minute.
+sensible and latent heat, with the tenth each mean falls in, and for the pools the surface albedo, the lowest level's
+humidity and the boundary layer's gust: the depth and convective velocity w* of each mean's layer by the design run's
+own gust rule (climate/gcm/surface_gust.py), from the mean's profiles, surface fluxes and stress. It writes
+research/runs/storm_water/design_years.npz (ignored) and a sidecar design_years.json with the sha256 and size of every
+year file read. A change of design years reruns it in a few minutes.
 """
 from __future__ import annotations
 
 import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -34,6 +37,8 @@ SIDECAR = OUT.with_suffix('.json')
 SCHEMA = 'terluna.research.storm-water-design-years/1'
 SERIES = ('pr', 'prc', 'evap', 'mrso', 'rss', 'rls', 'tas', 'ts', 'ps', 'uas', 'vas', 'hfss', 'hfls')
 EXTRA = ('alb', 'hus_low')        # phase 2b's pools: the surface albedo and the specific humidity at the lowest level
+GUST = ('gust_wstar', 'gust_h')   # the pools' gust: each mean's boundary-layer convective velocity (m/s) and depth (m)
+PLANET = RUNS / RUN / 'model' / 'planet_namelist'
 # design_years.py's demand: Priestley and Taylor's alpha, water's latent heat (J/kg) and air's heat capacity (J/kg/K)
 PT_ALPHA, LATENT, CP = 1.26, 2.5e6, 1004.0
 UNEP = (('hyper-arid', 0.0, 0.05), ('arid', 0.05, 0.2), ('semi-arid', 0.2, 0.5), ('dry sub-humid', 0.5, 0.65),
@@ -95,6 +100,60 @@ def read():
     return files, {k: np.concatenate(v) for k, v in series.items()}, np.concatenate(tenth), lat, lon, land
 
 
+def run_constants() -> dict:
+    """PlaSim's constants as the design run took them: its gas constant and gravity from its planet namelist, with
+    ExoPlaSim's kappa 0.286 and vapour gas constant 461.51 J/kg/K, as climate/gcm/sbm_offline.py takes them."""
+    text = PLANET.read_text()
+    value = lambda key: float(re.search(rf'^\s*{key}\s*=\s*([-+0-9.eEdD]+)', text, re.M | re.I).group(1))
+    gascon, ga = value('GASCON'), value('GA')
+    return dict(ga=ga, gascon=gascon, acpd=gascon / 0.286, rdbrv=gascon / 461.51)
+
+
+def half_levels(sigma) -> np.ndarray:
+    """PlaSim's half levels from its full levels, each full level midway between the half levels bounding its layer
+    (pbl_scheme.full_sigma inverted), the lowest at the ground."""
+    out, below = np.zeros(sigma.size), 0.0
+    for k, s in enumerate(sigma):
+        out[k] = below = 2.0 * s - below
+    if abs(out[-1] - 1.0) > 1e-3:
+        raise ValueError(f'the half levels end at sigma {out[-1]:.4f}, not at the ground')
+    out[-1] = 1.0
+    return out
+
+
+def gust(paths, jj, ii):
+    """Each dryland cell's boundary-layer depth h (m) and convective velocity w* (m/s) in every 3-day mean (time, cell),
+    by the design run's own gust rule (climate/gcm/surface_gust.py gust_column: the nonlocal scheme's depth from the bulk
+    Richardson number with the surface parcel's excess, and w* = (g / thv_n h (w'thv')0)^(1/3)), from the mean's
+    profiles of temperature, humidity and wind, its surface fluxes of heat and vapour and its stress; both are 0 in
+    stable or neutral air. The pools take this as the gust their surroundings' air carries."""
+    import netCDF4
+    from climate.gcm import surface_gust as SG
+    c = run_constants()
+    ws, hs = [], []
+    for path in paths:
+        with netCDF4.Dataset(path) as d:
+            sigma = np.asarray(d['lev'][:], float)
+            sigmah = half_levels(sigma)
+            prof = {k: np.asarray(d[k][:], float)[:, :, jj, ii] for k in ('ta', 'hus', 'ua', 'va')}   # (time, lev, cell)
+            sfc = {k: np.asarray(d[k][:], float)[:, jj, ii] for k in ('ps', 'tas', 'hfss', 'evap', 'tauu', 'tauv')}
+        rho = sfc['ps'] * 100.0 / (c['gascon'] * sfc['tas'] * (1.0 + (1.0 / c['rdbrv'] - 1.0) * prof['hus'][:, -1]))
+        wth0 = -sfc['hfss'] / (rho * c['acpd'])                    # PlaSim's fluxes are positive downward
+        wq0 = -sfc['evap'] * 1000.0 / rho
+        ustar = np.sqrt(np.hypot(sfc['tauu'], sfc['tauv']) / rho)
+        eps_v = 1.0 / c['rdbrv'] - 1.0
+        theta_n = prof['ta'][:, -1] / sigma[-1] ** (c['gascon'] / c['acpd'])
+        wthv0 = wth0 * (1.0 + eps_v * prof['hus'][:, -1]) + eps_v * theta_n * wq0
+        w, h = np.zeros(wth0.shape), np.zeros(wth0.shape)
+        for t, k in zip(*np.nonzero(wthv0 > 0.0)):
+            r = SG.gust_column(prof['ta'][t, :, k], prof['hus'][t, :, k], prof['ua'][t, :, k], prof['va'][t, :, k], sigma,
+                               sigmah, float(wth0[t, k]), float(wq0[t, k]), float(ustar[t, k]), c)
+            w[t, k], h[t, k] = r['wstar'], r['h']
+        ws.append(w)
+        hs.append(h)
+    return np.concatenate(ws), np.concatenate(hs), c
+
+
 def classify(f, tenth, land):
     """Each cell's yearly means as design_years.py forms them, its demand, aridity and UNEP class."""
     by = np.zeros((10,) + land.shape + (len(SERIES),))
@@ -120,6 +179,8 @@ def extract():
     area = cell_areas(lat, lon.size)
     jj, ii = np.nonzero(np.isin(cls, DRYLANDS))
     arrays = {k: f[k][:, jj, ii].astype(np.float32) for k in SERIES + EXTRA}
+    wstar, depth, constants = gust(list(files), jj, ii)
+    arrays.update(gust_wstar=wstar.astype(np.float32), gust_h=depth.astype(np.float32))
     arrays.update(tenth=tenth[:, ii], lat=lat[jj], lon=lon[ii], j=jj, i=ii, area_km2=area[jj, ii],
                   aridity=ai[jj, ii], demand_m_s=pet[jj, ii], cls=np.array([str(c) for c in cls[jj, ii]]),
                   grid_lat=lat, grid_lon=lon, land=land)
@@ -132,7 +193,11 @@ def extract():
                 producer=dict(study='research/studies/storm_water', file='research/studies/storm_water/extract.py',
                               sha256=sha256(Path(__file__))),
                 rule='UNEP classes of rain over Priestley-Taylor demand (alpha 1.26) on each cell\'s mean over the '
-                     'ten tenths of the lunar day, as session-tools/design_run/design_years.py reads them')
+                     'ten tenths of the lunar day, as session-tools/design_run/design_years.py reads them',
+                gust=dict(fields=list(GUST), constants=constants,
+                          rule='each mean\'s boundary-layer depth and convective velocity by climate/gcm/surface_gust.py '
+                               'gust_column (the design run\'s gust: the nonlocal scheme\'s depth rule) from the mean\'s '
+                               'profiles, surface fluxes and stress; 0 in stable or neutral air'))
     SIDECAR.write_text(json.dumps(meta, indent=1) + '\n')
     return meta
 
