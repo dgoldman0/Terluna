@@ -33,6 +33,7 @@ OUT = ROOT / 'research' / 'runs' / 'storm_water' / 'design_years.npz'
 SIDECAR = OUT.with_suffix('.json')
 SCHEMA = 'terluna.research.storm-water-design-years/1'
 SERIES = ('pr', 'prc', 'evap', 'mrso', 'rss', 'rls', 'tas', 'ts', 'ps', 'uas', 'vas', 'hfss', 'hfls')
+EXTRA = ('alb', 'hus_low')        # phase 2b's pools: the surface albedo and the specific humidity at the lowest level
 # design_years.py's demand: Priestley and Taylor's alpha, water's latent heat (J/kg) and air's heat capacity (J/kg/K)
 PT_ALPHA, LATENT, CP = 1.26, 2.5e6, 1004.0
 UNEP = (('hyper-arid', 0.0, 0.05), ('arid', 0.05, 0.2), ('semi-arid', 0.2, 0.5), ('dry sub-humid', 0.5, 0.65),
@@ -73,7 +74,7 @@ def cell_areas(lat, nlon):
 
 def read():
     import netCDF4
-    files, series, tenth, lat, lon, land = {}, {k: [] for k in SERIES}, [], None, None, None
+    files, series, tenth, lat, lon, land = {}, {k: [] for k in SERIES + EXTRA}, [], None, None, None
     for year in range(YEARS[0], YEARS[1] + 1):
         path = RUNS / RUN / 'model' / f'MOST.{year:05d}.nc'
         files[str(path)] = dict(sha256=sha256(path), bytes=path.stat().st_size)
@@ -87,6 +88,9 @@ def read():
             lat, lon, land = la, lo, mask[0]
             for k in SERIES:
                 series[k].append(np.asarray(d[k][:], np.float64))
+            low = int(np.argmax(np.asarray(d['lev'][:], float)))                # the level nearest the ground
+            series['alb'].append(np.asarray(d['alb'][:], np.float64))
+            series['hus_low'].append(np.asarray(d['hus'][:, low], np.float64))
             tenth.append(tenths(np.asarray(d['czen'][:], float), lat, lon))
     return files, {k: np.concatenate(v) for k, v in series.items()}, np.concatenate(tenth), lat, lon, land
 
@@ -115,7 +119,7 @@ def extract():
     mean, pet, ai, cls = classify(f, tenth, land)
     area = cell_areas(lat, lon.size)
     jj, ii = np.nonzero(np.isin(cls, DRYLANDS))
-    arrays = {k: f[k][:, jj, ii].astype(np.float32) for k in SERIES}
+    arrays = {k: f[k][:, jj, ii].astype(np.float32) for k in SERIES + EXTRA}
     arrays.update(tenth=tenth[:, ii], lat=lat[jj], lon=lon[ii], j=jj, i=ii, area_km2=area[jj, ii],
                   aridity=ai[jj, ii], demand_m_s=pet[jj, ii], cls=np.array([str(c) for c in cls[jj, ii]]),
                   grid_lat=lat, grid_lon=lon, land=land)
@@ -139,7 +143,7 @@ def composite(x):
     tenth = x['tenth']
     count = np.stack([(tenth == k).sum(axis=0) for k in range(10)])
     by = {k: np.stack([(x[k].astype(float) * (tenth == t)).sum(axis=0) for t in range(10)]) / np.maximum(count, 1)
-          for k in SERIES}
+          for k in SERIES + EXTRA if k in x}
     return by, {k: v.mean(axis=0) for k, v in by.items()}
 
 

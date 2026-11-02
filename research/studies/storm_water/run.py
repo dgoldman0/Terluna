@@ -36,7 +36,8 @@ STORMS = 'climate/results/crm/storms_box_0e_elec_corrected_storms_first.json'
 CODE = ('research/studies/storm_water/run.py', 'research/studies/storm_water/storms.py',
         'research/studies/storm_water/infiltration.py', 'research/studies/storm_water/extract.py',
         'research/studies/storm_water/wetting.py', 'research/studies/storm_water/routing.py',
-        'research/studies/storm_water/phase2a.py', 'geography/drainage.py', 'climate/crm/gcm_site.py')
+        'research/studies/storm_water/phase2a.py', 'research/studies/storm_water/phase2b.py', 'geography/drainage.py',
+        'climate/crm/gcm_site.py')
 MEAN_DAYS = SYNODIC_MONTH_DAYS / 10.0                    # each 3-day mean is a tenth of the lunar day
 MM_PER_MEAN = 1000.0 * MEAN_DAYS * JULIAN_DAY            # m/s of water to mm per mean
 SATURATIONS = np.array([0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.65, 0.8, 0.95])
@@ -205,6 +206,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--storms', default=STORMS, help='a CM1 storm-lives product for the lower bracket (repository path)')
     ap.add_argument('--extract', action='store_true', help='rerun the design-years extract first')
+    ap.add_argument('--stop-after-2a', action='store_true', help='write phase 2b\'s inputs and stop')
     a = ap.parse_args(argv)
     if a.extract or not EX.SIDECAR.is_file():
         EX.extract()
@@ -286,6 +288,10 @@ def main(argv=None):
 
     from research.studies.storm_water import phase2a as P2
     phase2a, cells_2a = P2.run_phase2a(x, libs, pressure, cache, ls_cache)
+    if a.stop_after_2a:
+        return None
+    from research.studies.storm_water import phase2b as P3
+    phase2b, cells_2b, wet_layer = P3.run_phase2b(x, libs, pressure)
 
     rain = x['pr'].astype(float) * MM_PER_MEAN
     by, mean = EX.composite(x)
@@ -304,6 +310,7 @@ def main(argv=None):
                    runoff_ratio={n: {b: {m: dict(yearly=r3(cell_rows[n][b][m][0][c]), by_tenth=r3(cell_rows[n][b][m][1][:, c]))
                                          for m in MODES} for b in BRACKETS} for n in SURFACES})
         row.update(cells_2a[c])
+        row.update(cells_2b[c])
         cells.append(row)
 
     surfaces_out = {}
@@ -322,13 +329,20 @@ def main(argv=None):
         storm_libraries={b: dict(statistics=ST.statistics(libs[b]), source=libs[b]['source'], evidence=libs[b]['evidence'],
                                  parameters=libs[b]['parameters'], fit=libs[b].get('fit')) for b in BRACKETS},
         surfaces=surfaces_out, classes=results, sensitivity_semi_arid=sens, walnut_gulch_check=check,
-        thresholds=THRESHOLDS, phase2a=phase2a, cells=cells)
+        thresholds=THRESHOLDS, phase2a=phase2a, phase2b=phase2b, cells=cells)
     inputs = {a.storms: sha256(a.storms)}
     inputs.update(phase2a['routing'].pop('drainage_sources'))
     product['producer'] = dict(study='research/studies/storm_water', files={p: sha256(p) for p in CODE},
                                inputs=inputs, ignored_inputs={str(EX.OUT.relative_to(ROOT)): meta['npz']['sha256']},
                                gcm_files=meta['files'], constants=constants_used(CODE))
     product['sizing'] = sizing(sens, check)
+    wet_layer['producer'] = dict(study='research/studies/storm_water', files=product['producer']['files'],
+                                 inputs=product['producer']['inputs'], ignored_inputs=product['producer']['ignored_inputs'],
+                                 storm_water_schema=SCHEMA)
+    wet_layer['basis'] = dict(run=meta['run'], years=meta['years'])
+    head = json.dumps({k: v for k, v in wet_layer.items() if k != 'layers'}, indent=1, default=float)
+    body = ',\n'.join(f'  {json.dumps(k)}: ' + json.dumps(v, separators=(',', ':'), default=float) for k, v in wet_layer['layers'].items())
+    P3.WET_PATCHES.write_text(head[:-2] + ',\n "layers": {\n' + body + '\n }\n}\n')
     OUT.parent.mkdir(exist_ok=True)
     head = json.dumps({k: v for k, v in product.items() if k != 'cells'}, indent=1, default=float)
     rows = ',\n'.join('  ' + json.dumps(c, separators=(',', ':'), default=float) for c in cells)
@@ -386,7 +400,13 @@ EVIDENCE = ('A model result of an offline chain on the design years, A28R_301k_d
             'depression tree (routing.py): run-on infiltration on 100 m slopes, sub-grid crater bowls from the terrain '
             'study\'s equilibrium counts for young and mature land, Lane\'s channel losses recast for gravity, and '
             'storms\' runoff-making cores of 5 km2, a value the Walnut Gulch basin check sets. Every routing parameter '
-            'is a design choice or an Earth value; nothing in the lunar routing is measured.')
+            'is a design choice or an Earth value; nothing in the lunar routing is measured. Phase 2b (phase2b) runs '
+            'every fed depression and the bowls below the grid through the design years: an energy balance of each pool '
+            'and its floor under the design years\' air by tenth (Penman\'s evaporation by day, the stored heat and night '
+            'air at night), seepage through designed clay floors or sandy banks at lunar gravity, and fill and spill along '
+            'the depression tree; the slopes\' wear from WEPP\'s Earth erodibilities with the lunar drops and shear; the '
+            'salts from designed solute inputs. Its pools, leverage and wet-patch layer are model results on designed '
+            'floors and stand-in storms.')
 READING_RULE = ('Ratios are runoff over all rain (convective and large-scale) of the same cells and means, area-weighted '
                 'over classes. walnut_gulch and cm1_6km bracket the storms\' intensities from above and below; independent '
                 'and continuing bracket the wetting between a mean\'s storms (each on the mean\'s soil, or one front carried '
@@ -404,7 +424,14 @@ READING_RULE = ('Ratios are runoff over all rain (convective and large-scale) of
                 'soil\'s evaporating store (all fates but the soil above the root zone) over the evaporation. The cells\' '
                 'runoff_ratio_2a is the central runoff; routed_walnut_gulch gives mm a year over the cell, by tenth, '
                 'attributed to the cell where each loss or delivery happens. Per-depression inflow by tenth is in the '
-                'ignored file named by phase2a.hollow_inflow, rebuilt by run.py.')
+                'ignored file named by phase2a.hollow_inflow, rebuilt by run.py. In phase2b, pools give per library, '
+                'surface, seepage case and hollow age the depressions\' and bowls\' (wall-fed and channel-fed) numbers in '
+                'each persistence class, their water\'s fates in km3 a year and their depths; leverage gives the drylands\' '
+                'evaporation change with the pools as a share of the bucket\'s, by year and by tenth under two timings of '
+                'the bucket\'s loss (the tenth the water runs off, or spread as the bucket\'s evaporation is); wear gives the '
+                'slopes\' soil loss in mm a year; salts the share of hollows whose floors turn saline within each span; '
+                'the cells\' pools_2b_walnut_gulch_clay_floored give each surface\'s wet share, pools\' evaporation and '
+                'seepage in mm a year over the cell and the slopes\' loss. The wet-patch layer is results/wet_patches.json.')
 
 
 if __name__ == '__main__':

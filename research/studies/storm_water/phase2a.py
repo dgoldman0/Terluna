@@ -41,8 +41,11 @@ RANGE_CASES = dict(bubbling_low=dict(hb=-1), bubbling_high=dict(hb=1), profile_f
 ROOT_ZONE_MM = 1000.0            # design: the drylands' plants root to about a metre
 LUNAR_DAY_H = SYNODIC_MONTH_DAYS * 24.0
 STATES = ('young', 'mature')
+HYPSOMETRY_CELLS = 16           # phase 2b: each depression's lowest cells kept for its area-volume curve
+PHASE2B_INPUTS = None           # set below once RUNS is known
 RUNS = R1.ROOT / 'research' / 'runs' / 'storm_water'
 HOLLOWS = RUNS / 'hollows_2a.npz'
+PHASE2B_INPUTS = RUNS / 'phase2b_inputs.npz'
 WG_BASIN_KM2, WG_BASIN_MM = 149.0, 2.0          # Stone et al. (2008, abstract, via the plan): about 2 mm a year
 
 
@@ -174,6 +177,7 @@ class Grid:
         self.lossless = dict(generated_m3s=gen, to_closed_depressions_m3s=float(r['inflow'][1:][closed[1:]].sum()),
                              to_closed_depressions_share=float(r['inflow'][1:][closed[1:]].sum()) / max(gen, 1e-30),
                              note='the rest joins lakes and depressions that spill with the climatology\'s own water')
+        self.tree(r, h.ravel())
         del r, h, runoff
         self.t21 = t21.ravel()
         dry = (self.t21 >= 0) & ~self.outlet
@@ -199,8 +203,50 @@ class Grid:
         self.length_km = (np.hypot(dr_ * cell_km, dc * cell_km * coslat) * RT.SINUOSITY).astype(np.float32)
         self.length_km = np.where(self.length_km > 0, self.length_km, cell_km * RT.SINUOSITY).astype(np.float32)
         self.order = RT.fronts(self.nxt)
+        self.floor_t21 = np.where(self.sink_cell >= 0, self.t21[self.sink_cell], -1).astype(np.int32)
         print(f'grid: {self.slope_cells.size:,} dryland slope cells, {self.hollow_cells.size:,} in hollows, '
               f'{len(self.order)} fronts', file=sys.stderr)
+
+    def tree(self, r, hf, k=HYPSOMETRY_CELLS):
+        """Phase 2b's depression tree: each depression's own pass (the height of its spill pass, the higher of the
+        two cells across it), the depression it spills into (0 the sea), and its hypsometry below the pass: the
+        lowest k cells (index, height, area) in height order, their count and the volume at the pass with the area
+        rising linearly from the floor cell's height through each next cell's (geography's cells are points)."""
+        n_nodes = r['level'].size
+        sf, st = r['spill_from'], r['spill_to']
+        out = r['outlet']
+        self.pass_m = np.full(n_nodes, np.nan, np.float32)
+        self.parent = np.zeros(n_nodes, np.int32)
+        ok = sf >= 0
+        hp = np.where(out[st[ok]], -np.inf, hf[st[ok]])
+        self.pass_m[ok] = np.maximum(hf[sf[ok]], hp)
+        self.parent[ok] = r['label'][st[ok]]
+        cells = np.flatnonzero(~out & (r['label'] > 0))
+        lab = r['label'][cells]
+        cells = cells[np.lexsort((hf[cells], lab))]
+        lab, z = r['label'][cells], hf[cells]
+        below = z < self.pass_m[lab]
+        cells, lab, z = cells[below], lab[below], z[below]
+        a = r['area'][cells]
+        start = np.r_[0, np.flatnonzero(lab[1:] != lab[:-1]) + 1]
+        size = np.diff(np.r_[start, cells.size])
+        rank = np.arange(cells.size) - np.repeat(start, size)
+        cum = np.cumsum(a)
+        before = cum - a - np.repeat(cum[start] - a[start], size)
+        z_next = np.r_[z[1:], 0.0]
+        last = np.r_[start[1:] - 1, cells.size - 1]
+        z_next[last] = self.pass_m[lab[last]]
+        seg = (before + 0.5 * a) * (z_next - z)
+        self.n_below = np.bincount(lab, minlength=n_nodes).astype(np.int32)
+        self.vmax_m3 = np.bincount(lab, weights=seg, minlength=n_nodes)
+        self.area_below_pass = np.bincount(lab, weights=a, minlength=n_nodes)
+        keep = rank < k
+        self.hyps_cell = np.full((n_nodes, k), -1, np.int32)
+        self.hyps_z = np.full((n_nodes, k), np.nan, np.float32)
+        self.hyps_a = np.zeros((n_nodes, k), np.float32)
+        self.hyps_cell[lab[keep], rank[keep]] = cells[keep]
+        self.hyps_z[lab[keep], rank[keep]] = z[keep]
+        self.hyps_a[lab[keep], rank[keep]] = a[keep]
 
 
 def recharge_tables(e_mean):
@@ -273,6 +319,7 @@ def route_surface(g, x, p, lib, se_ref, rech, gravity=IN.MOON):
     res = route_forest(g, local, d0, gravity, bowl_list, rech)
     for q in ('channel_bed', 'bowls_channel'):
         fate[q] += res[q]
+    fate['bowls_channel_by_bin'] = res.pop('bowls_channel_by_bin')
     fate['loss_reach'], fate['bed_m2'] = res.pop('loss_reach'), res.pop('bed_m2')
     out = res['out']
     for code, q in ((1, 'depressions'), (2, 'sea'), (3, 'humid_land')):
@@ -291,6 +338,8 @@ def route_forest(g, local, d0, gravity, bowl_list, rech):
     out = np.zeros((n, k), np.float32)
     ncell = int(g.t21.max()) + 1
     acc = {q: np.zeros((ncell, k)) for q in ('channel_bed', 'bowls_channel')}
+    nb = bowl_list[0]['number_km2'].size
+    by_bin = np.zeros((k, ncell * nb))
     loss_reach = np.zeros((n, k), np.float32)
     width = RT.channel_width_m(g.upstream_km2[g.slope_cells])
     fp = RT.FOOTPRINT_KM2 * 1e6
@@ -311,6 +360,14 @@ def route_forest(g, local, d0, gravity, bowl_list, rech):
         loss = mult * (v - q)
         loss_reach[f] = loss
         o = mult * q * s
+        for j, b in enumerate(bowl_list):
+            # Each crossing takes up to its bowl's volume: the capture splits over the bins as their crossings times
+            # the share of the flow each takes (routing.bowl_survival's terms).
+            wi = (b['number_km2'] * b['diameter_km'])[None, :] * ln[:, None] * np.minimum(
+                1.0, b['volume_m3'][None, :] / np.maximum(q[:, j], 1e-9)[:, None])
+            cap = (mult[:, j] * q[:, j] * (1.0 - s[:, j]))[:, None] * wi / np.maximum(wi.sum(axis=1, keepdims=True), 1e-30)
+            by_bin[j] += np.bincount((t21[f].astype(np.int64)[:, None] * nb + np.arange(nb)[None, :]).ravel(),
+                                     weights=cap.ravel(), minlength=ncell * nb)
         for name, val in (('channel_bed', loss), ('bowls_channel', mult * q * (1.0 - s))):
             for j in range(k):
                 acc[name][:, j] += np.bincount(t21[f], weights=val[:, j], minlength=ncell)
@@ -323,6 +380,7 @@ def route_forest(g, local, d0, gravity, bowl_list, rech):
             np.add.at(total, r[go], o[go])
             np.add.at(area, r[go], (a * live)[go])
             np.maximum.at(path, r[go], (path[f] + ln)[go].astype(np.float32))
+    acc['bowls_channel_by_bin'] = by_bin.reshape(k, ncell, nb).transpose(1, 2, 0)      # (cell, bin, column)
     acc['out'] = out
     acc['loss_reach'] = loss_reach
     acc['bed_m2'] = (width * g.length_km * 1000.0).astype(np.float32)
@@ -342,6 +400,13 @@ def delivered(x, off, fate, classes, cols, dep_in, g, rech):
     # that depth below the root zone after a lunar day of redistribution and drying.
     rate = np.stack([share[i] * rt.sum(axis=0) / c['runoff_mm'] for i, c in enumerate(classes)])     # (class, cell)
     loss_reach, bed_m2 = fate.pop('loss_reach'), fate.pop('bed_m2')
+    by_bin = fate.pop('bowls_channel_by_bin')
+    for s in STATES:
+        jj = [j for j, (_, st) in enumerate(cols) if st == s]
+        with np.errstate(divide='ignore', invalid='ignore'):
+            w = sum(share[i] * np.where(fate['generated'][:, j, None] > 0, by_bin[:, :, j] / fate['generated'][:, j, None], 0.0)
+                    for i, j in enumerate(jj))
+        out.setdefault('bowls_channel_by_bin', {})[s] = rt[:, :, None] * w[None, :, :]       # (tenth, cell, bin)
     t21 = g.t21[g.slope_cells]
     per_day = JULIAN_YEAR_DAYS / SYNODIC_MONTH_DAYS
     for si, s in enumerate(STATES):
@@ -491,6 +556,47 @@ def ref_saturation(x, soil):
     return float((s * w).sum() / w.sum())
 
 
+def save_phase2b_inputs(g, x, off, p2b, union, inflow):
+    """Everything phase 2b reads from the routing, in an ignored file run.py rebuilds: the depression tree's fed
+    dryland depressions with their dryland ancestors, each one's pass, parent and lowest cells, the bowls' inflows
+    per T21 cell by tenth (mm a year) and their channel capture by diameter bin, and each surface's runoff per mean."""
+    dry_node = np.r_[False, g.floor_t21 >= 0]                      # by node (0 is the sea)
+    nodes = set(int(v) for v in union)
+    front = np.array(sorted(nodes), np.int64)
+    while front.size:
+        par = g.parent[front]
+        par = np.unique(par[(par > 0) & dry_node[par]])
+        front = np.array([v for v in par.tolist() if v not in nodes], np.int64)
+        nodes.update(front.tolist())
+    nodes = np.array(sorted(nodes), np.int64)
+    pos = np.searchsorted(union, nodes)
+    fed = (pos < union.size) & (union[np.minimum(pos, union.size - 1)] == nodes)
+    arrays = dict(node=nodes.astype(np.int32), parent=g.parent[nodes], pass_m=g.pass_m[nodes],
+                  floor_m=g.floor_m[nodes - 1], sink_cell=g.sink_cell[nodes - 1].astype(np.int64),
+                  floor_t21=g.floor_t21[nodes - 1], n_below=g.n_below[nodes], vmax_m3=g.vmax_m3[nodes],
+                  area_below_pass_m2=g.area_below_pass[nodes], hyps_cell=g.hyps_cell[nodes], hyps_z=g.hyps_z[nodes],
+                  hyps_a=g.hyps_a[nodes], cell_km=np.float64(g.cell_km), cols=np.int64(g.cols))
+    for key, a in inflow.items():
+        full = np.zeros((nodes.size, 10), np.float32)
+        full[fed] = a[pos[fed]]
+        arrays['inflow__' + key] = full
+    dry = (g.t21 >= 0) & ~g.outlet
+    ncell = x['cls'].size
+    arrays['t21_dry_km2'] = np.bincount(g.t21[dry], weights=g.area[dry].astype(float), minlength=ncell) / 1e6
+    arrays['t21_reach_km'] = np.bincount(g.t21[g.slope_cells], weights=g.length_km.astype(float), minlength=ncell)
+    for (b, name), d in p2b.items():
+        arrays[f'off__{b}__{name}'] = np.asarray(off[name][b], np.float32)
+        for s in STATES:
+            arrays[f'bins__{b}__{name}__{s}'] = d['bins'][s].astype(np.float32)
+            for q, v in d['fates'].items():
+                arrays[f'{q}__{b}__{name}__{s}'] = v[s].astype(np.float32)
+    np.savez_compressed(PHASE2B_INPUTS, metadata=json.dumps(dict(
+        schema='terluna.research.storm-water-phase2b-inputs/1', drainage_sources=g.sources,
+        rule='depressions as geography.drainage nodes; cells as row * cols + column; fates in mm a year over each '
+             'T21 cell by tenth; inflow in m3 a year by tenth; off in mm of runoff per 3-day mean')), **arrays)
+    print(f'phase 2b inputs: {nodes.size:,} dryland depressions ({int(fed.sum()):,} fed)', file=sys.stderr)
+
+
 def run_phase2a(x, libs, pressure, cache, ls_cache):
     """Everything phase 2a adds to the product, and the per-cell rows' additions."""
     off, wet, demand = wetting(x, libs, pressure, cache, ls_cache)
@@ -500,6 +606,7 @@ def run_phase2a(x, libs, pressure, cache, ls_cache):
     grid = Grid(x, loam)
     rech = recharge_tables(demand['demand_mm_h_mean'])
     routed, fates_cells, leverage_rows, event_rows, hollow_tabs = {}, {}, {}, {}, {}
+    p2b = {}
     for b in R1.BRACKETS:
         routed[b], fates_cells[b], leverage_rows[b], event_rows[b] = {}, {}, {}, {}
         for name in IN.MAIN:
@@ -507,6 +614,9 @@ def run_phase2a(x, libs, pressure, cache, ls_cache):
             se = ref_saturation(x, IN.SURFACES[name]['soil'])
             classes, cols, fate, dep_in = route_surface(grid, x, p, libs[b], se, rech)
             fates, have, dep = delivered(x, off[name][b], fate, classes, cols, dep_in, grid, rech)
+            p2b[(b, name)] = dict(bins=fates.pop('bowls_channel_by_bin'), fates={
+                q: fates[q] for q in ('bowls_inside', 'bowls_slope', 'bowls_channel', 'depressions', 'slope_recharge',
+                                      'bed_recharge', 'sea', 'humid_land')})
             routed[b][name] = class_sums(x, fates, off[name][b])
             leverage_rows[b][name] = leverage(x, fates, off[name][b])
             event_rows[b][name] = dict(reference_saturation=se, classes=classes)
@@ -546,6 +656,7 @@ def run_phase2a(x, libs, pressure, cache, ls_cache):
                 depressions_fed=int((tot > 0).sum()), inflow_km3_yr=float(tot.sum() * 1e-9),
                 share_of_inflow_in_largest_hundred=float(q[:100].sum() / max(q.sum(), 1e-30)),
                 median_m3_yr=float(np.median(tot[tot > 0])) if (tot > 0).any() else 0.0)
+    save_phase2b_inputs(grid, x, off, p2b, union, arrays)
     check = walnut_gulch_basin(libs, grid.cell_km)
     print('walnut gulch basin', json.dumps(check, default=float)[:400], file=sys.stderr)
     bowls = {s: dict(cover=RT.bowl_cover(RT.bowl_classes(s)),
