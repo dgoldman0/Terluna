@@ -30,7 +30,9 @@ SIGHUP to the runner) takes ExoPlaSim's MPI ranks down with it. A run refuses to
 that determines the model changed: its settings, the number of MPI ranks, ExoPlaSim's version or
 the input files the runner writes (land mask, topography, spectrum). Tested by killing a run with
 SIGKILL a minute into its second year: the resumed year's restart and output were byte-identical
-to an uninterrupted run's.
+to an uninterrupted run's. With --convert-pieces N, each year's raw output is converted in pieces of N output times,
+several at a time (convert_in_pieces), since ExoPlaSim's postprocessor costs time and memory as the square of a file's
+length; a year PlaSim finished whose conversion did not is then converted on resume rather than run again.
 
 The planet (radius, gravity, rotation, orbit), the land-sea mask and topography come from
 climate/gcm/products (python -m climate.gcm.boundary). The mask is binary per cell, as PlaSim
@@ -2446,12 +2448,155 @@ def _free_gb(path: Path) -> float:
     return shutil.disk_usage(path).free / 1e9
 
 
-def _clean_partial(workdir: Path, year: int):
-    """Remove whatever an interrupted year left in the working folder."""
+def _clean_partial(workdir: Path, year: int, keep_raw: bool = False):
+    """Remove whatever an interrupted year left in the working folder. With keep_raw, a year PlaSim finished keeps its
+    raw output, restart and diagnostics for its conversion, and only a partial conversion (the year's netCDF file and
+    pieces) goes."""
     for name in ('plasim_output', 'plasim_status', 'plasim_snapshot', 'plasim_diag', 'plasim_hcadence', 'Abort_Message'):
         (workdir / name).unlink(missing_ok=True)
     for p in workdir.glob(f'MOST*.{year:05d}*'):
-        p.unlink()
+        if not keep_raw or p.name == f'MOST.{year:05d}.nc' or '.piece' in p.name:
+            p.unlink()
+
+
+def split_raw(raw: Path, times_per_piece: int, folder: Path) -> list:
+    """PlaSim's raw output split by output time into pieces of times_per_piece times each, every piece led by the file's
+    own first two records (the main header and the sigma levels), as pyburn expects a raw file to begin. It streams
+    record by record, so the year never sits in memory. An output time begins where a field's header carries a new
+    step count, its seventh word, which pyburn reads as the time; each piece must hold one surface-temperature field
+    per time, as pyburn's time axis assumes. Returns [(piece, times)] in order."""
+    import struct
+    pieces = []
+    with open(raw, 'rb') as f:
+        head = f.read(8)                       # the first record's marker gives the byte order and marker length,
+        ml = 8 if struct.unpack('=i', head[:4])[0] == 0 else 4             # as pyburn's _getEndian reads it
+        native = '<' if sys.byteorder == 'little' else '>'
+        en = native if struct.unpack('=' + ('i' if ml == 4 else 'q'), head[:ml])[0] <= 1024 else \
+            {'<': '>', '>': '<'}[native]
+        mf = 'i' if ml == 4 else 'q'
+        f.seek(0)
+
+        def record():
+            marker = f.read(ml)
+            if not marker:
+                return None
+            n = struct.unpack(en + mf, marker)[0]
+            payload, tail = f.read(n), f.read(ml)
+            if len(payload) != n or tail != marker:
+                raise RuntimeError(f'{raw.name}: a damaged record before byte {f.tell()}')
+            return marker + payload + tail, payload
+
+        lead = record()[0] + record()[0]
+        out, path, times, ts, step = None, None, 0, 0, None
+        while (header := record()) is not None:
+            field = record()
+            if field is None:
+                raise RuntimeError(f'{raw.name}: a field header without its field at the end')
+            words = struct.unpack(en + 'i' * (len(header[1]) // 4), header[1])
+            if words[6] != step:                                          # a new output time
+                step = words[6]
+                if out is None or times == times_per_piece:
+                    if out is not None:
+                        out.close()
+                        pieces.append((path, times, ts))
+                    path = folder / f'{raw.name}.piece{len(pieces):03d}'
+                    out = open(path, 'wb')
+                    out.write(lead)
+                    times, ts = 0, 0
+                times += 1
+            ts += words[0] == 139
+            out.write(header[0])
+            out.write(field[0])
+        if out is not None:
+            out.close()
+            pieces.append((path, times, ts))
+    bad = [(p.name, n, k) for p, n, k in pieces if n != k]
+    if bad:
+        raise RuntimeError(f'{raw.name}: pieces whose output times and surface-temperature fields differ: {bad}')
+    return [(p, n) for p, n, _ in pieces]
+
+
+def _pyburn_names(ilibrary: dict, slibrary: dict) -> None:
+    """A fresh worker's pyburn given the runner's variable names, the codes build_model teaches it included."""
+    from exoplasim import pyburn
+    pyburn.ilibrary.update(ilibrary)
+    pyburn.slibrary.update(slibrary)
+
+
+def _convert_piece(job):
+    """One piece through pyburn, from the model's folder, with the whole file's settings and its own count of times."""
+    piece, times, kwargs, workdir = job
+    from exoplasim import pyburn
+    os.chdir(workdir)
+    pyburn.postprocess(str(piece), f'{piece}.nc', logfile=f'{piece}.log', **dict(kwargs, times=times))
+    return f'{piece}.nc'
+
+
+def finite_surface(out: Path) -> None:
+    """ExoPlaSim's integrity check on a year file, its surface temperature present and finite, reading that field
+    alone; ExoPlaSim's own (integritycheck) loads the whole file first, 2.9 GB for a year written every 11 steps, and
+    the runner keeps that memory."""
+    import netCDF4
+    with netCDF4.Dataset(out) as d:
+        if 'ts' not in d.variables:
+            raise RuntimeError(f'{out.name} has no surface temperature; see the conversion logs')
+        if not np.isfinite(np.ma.getdata(d['ts'][:])).all():
+            raise RuntimeError(f'{out.name} holds non-finite surface temperatures')
+
+
+def join_along_time(parts: list, out: Path) -> None:
+    """netCDF files that differ only in their times, joined along time in order into out: the dimensions, variables,
+    attributes and storage settings of the first, every value copied as stored. A variable with a time dimension
+    must hold it first."""
+    import netCDF4
+    with netCDF4.Dataset(parts[0]) as first, netCDF4.Dataset(out, 'w', format=first.data_model) as dst:
+        first.set_auto_maskandscale(False)
+        dst.setncatts({k: first.getncattr(k) for k in first.ncattrs()})
+        for name, dim in first.dimensions.items():
+            dst.createDimension(name, None if name == 'time' else len(dim))
+        for name, v in first.variables.items():
+            if 'time' in v.dimensions and v.dimensions[0] != 'time':
+                raise RuntimeError(f'{name}: time is not its first dimension')
+            f = v.filters() or {}
+            w = dst.createVariable(name, v.dtype, v.dimensions, zlib=bool(f.get('zlib')), complevel=f.get('complevel') or 4,
+                                   shuffle=bool(f.get('shuffle')), fill_value=v.getncattr('_FillValue')
+                                   if '_FillValue' in v.ncattrs() else None)
+            w.set_auto_maskandscale(False)
+            w.setncatts({k: v.getncattr(k) for k in v.ncattrs() if k != '_FillValue'})
+            if 'time' not in v.dimensions:
+                w[:] = v[:]
+        start = 0
+        for part in parts:
+            with netCDF4.Dataset(part) as src:
+                src.set_auto_maskandscale(False)
+                n = len(src.dimensions['time'])
+                for name, v in src.variables.items():
+                    if 'time' in v.dimensions:
+                        dst[name][start:start + n] = v[:]
+                start += n
+
+
+def convert_in_pieces(model, raw: Path, out: Path, times_per_piece: int, workers: int = 2) -> dict:
+    """A year's raw output converted as the model's postprocessor converts a whole file (its configured settings and
+    the model's radius, gravity and gas constant), in pieces of times_per_piece output times, `workers` at a time,
+    joined along time into out. pyburn grows each variable field by field with np.append, so a file's conversion
+    costs time and memory as the square of its length: a year written every 11 steps (1,560 times) held 12 GB and
+    ran for hours, where its lunar-day pieces need about 2 GB each. The workers start fresh (spawn) with the runner's
+    variable names, so none carries a copy of the runner's own memory, as forked workers did once the runner had
+    checked a year. The pieces and their logs are removed once out is written. Returns a record of the conversion."""
+    import multiprocessing
+    from exoplasim import pyburn
+    folder = raw.parent
+    kwargs = dict(model.postprocessorcfgs['regular'], radius=model.radius, gravity=model.gravity, gascon=model.gascon)
+    pieces = split_raw(raw, times_per_piece, folder)
+    with multiprocessing.get_context('spawn').Pool(workers, initializer=_pyburn_names,
+                                                   initargs=(dict(pyburn.ilibrary), dict(pyburn.slibrary))) as pool:
+        parts = pool.map(_convert_piece, [(p, n, kwargs, str(folder)) for p, n in pieces], chunksize=1)
+    join_along_time([Path(p) for p in parts], out)
+    for p, _ in pieces:
+        for q in (p, Path(f'{p}.nc'), Path(f'{p}.log')):
+            q.unlink(missing_ok=True)
+    return dict(pieces=len(pieces), times=sum(n for _, n in pieces), times_per_piece=times_per_piece, workers=workers)
 
 
 def _prune(workdir: Path, year: int):
@@ -2608,7 +2753,7 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         levels: str | None = None, free_convection: str | None = None, mixing_length: str | None = None,
         boundary_layer: str | None = None, large_scale_condensate: str | None = None,
         humidity_mean: bool = False, surface_gust: str | None = None, rain_drops: str | None = None,
-        snow: str | None = None) -> int:
+        snow: str | None = None, pieces: int = 0, workers: int = 2) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
@@ -2654,32 +2799,49 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
             return 1
         done = len(progress['years'])
         workdir = rundir / 'model'
-        restart = workdir / f'MOST_REST.{done - 1:05d}' if done else None
-        if not done and isinstance(cfg['initial_state'], dict):
+        # With the conversion in pieces, a year PlaSim finished whose conversion did not keeps its raw output and
+        # restart: the run takes up from its conversion, and its restart starts the next year.
+        pending = bool(pieces) and all((workdir / f'{stem}.{done:05d}').is_file() for stem in ('MOST', 'MOST_REST'))
+        last = done if pending else done - 1
+        restart = workdir / f'MOST_REST.{last:05d}' if last >= 0 else None
+        if last < 0 and isinstance(cfg['initial_state'], dict):
             restart = Path(cfg['initial_state']['path'])
         if restart is not None and not restart.is_file():
-            print(f'{name}: restart for year {done - 1} is missing; cannot resume.', file=sys.stderr)
+            print(f'{name}: restart for year {last} is missing; cannot resume.', file=sys.stderr)
             return 1
         if workdir.exists():
-            _clean_partial(workdir, done)
+            _clean_partial(workdir, done, keep_raw=pending)
         if restart is not None:                                       # keep it safe from configure()'s copy
             kept = rundir / 'resume_from'
             shutil.copy2(restart, kept)
             restart = kept
         model = build_model(cfg, rundir, ncpus, restart, inputs)
-        model.currentyear = done
+        model.currentyear = done + pending
         for year in range(done, years):
             if _free_gb(rundir) < MIN_FREE_GB:
                 print(f'{name}: less than {MIN_FREE_GB} GB free; pausing after year {year - 1}.', file=sys.stderr)
                 return 2
             start = time.time()
-            model.run(years=1, crashifbroken=True)
             out, rest = workdir / f'MOST.{year:05d}.nc', workdir / f'MOST_REST.{year:05d}'
+            conversion = None
+            if pieces:                                                # PlaSim's year, then its output in pieces
+                if not (pending and year == done):
+                    model.run(years=1, crashifbroken=False, postprocess=False, clean=False)
+                raw = workdir / f'MOST.{year:05d}'
+                if not (raw.is_file() and rest.is_file()):
+                    print(f'{name}: year {year} produced no raw output or restart; stopping.', file=sys.stderr)
+                    return 1
+                conversion = convert_in_pieces(model, raw, out, pieces, workers)
+                finite_surface(out)
+                raw.unlink()
+            else:
+                model.run(years=1, crashifbroken=True)
             if not (out.is_file() and rest.is_file()):
                 print(f'{name}: year {year} produced no output or restart; stopping.', file=sys.stderr)
                 return 1
             writes = cfg['model']['writes_per_lunar_day'] * cfg['model']['lunar_days_per_year']
-            entry = dict(year=year, seconds=round(time.time() - start, 1), **summarise_year(out, writes))
+            entry = dict(year=year, seconds=round(time.time() - start, 1), **summarise_year(out, writes),
+                         **({'conversion': conversion} if conversion else {}))
             if 'model_sunlight' not in progress:
                 # The Sun's light splits about evenly across 0.75 um; anything far off means a broken spectrum.
                 progress['model_sunlight'] = model_reported_sunlight(workdir)
@@ -2820,6 +2982,10 @@ def main(argv=None) -> int:
                              'gamma, with the rain from its drops: flakes (its shadows on), flakes_highest_top (the '
                              "snow top at its highest forming layer) or flakes_no_shadows (snow_sublimation.py; part "
                              'of the run key)')
+    parser.add_argument('--convert-pieces', type=int, default=0, metavar='TIMES',
+                        help='convert each year in pieces of this many output times (convert_in_pieces); 0 leaves '
+                             "the whole file to ExoPlaSim's postprocessor (not part of the run key)")
+    parser.add_argument('--convert-workers', type=int, default=2, help='pieces converted at once')
     parser.add_argument('--humidity-mean', action='store_true',
                         help="write the humidity's true 3-day mean as hus_mean, code 233, where a year file's hus "
                              "holds the humidity at each interval's start (HUS_MEAN_PATCHES; year_files.py; part of "
@@ -2886,7 +3052,8 @@ def main(argv=None) -> int:
                None if args.boundary_layer == 'local' else args.boundary_layer,
                None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean,
                None if args.surface_gust == 'none' else args.surface_gust,
-               None if args.rain_drops == 'none' else args.rain_drops, None if args.snow == 'none' else args.snow)
+               None if args.rain_drops == 'none' else args.rain_drops, None if args.snow == 'none' else args.snow,
+               args.convert_pieces, args.convert_workers)
 
 
 if __name__ == '__main__':
