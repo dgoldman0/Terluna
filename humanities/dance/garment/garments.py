@@ -154,6 +154,24 @@ def waist_tethers(G: Garment, slack=1.05):
     return anchor, slack * best
 
 
+def cuff_tethers(G: Garment, slack=1.05):
+    """Long-range tethers for water sleeves: each vertex to the nearest vertex of its own sleeve's cuff in the flat
+    pattern, at `slack` times their distance there, so that a sleeve yanked from the floor by a cast or flung by a
+    landing cannot stretch away from the wrist further than silk allows."""
+    uv = G.piece.vertex_uv
+    half = G.piece.n_vertices // 2
+    anchor = np.full(len(uv), -1)
+    dist = np.zeros(len(uv))
+    for side, lo in (('L', 0), ('R', half)):
+        ring = np.array(G.piece.rings[f'{side}_start'])
+        idx = np.arange(lo, lo + half)
+        d = np.linalg.norm(uv[idx, None, :] - uv[None, ring, :], axis=2)
+        k = d.argmin(1)
+        anchor[idx] = ring[k]
+        dist[idx] = d[np.arange(len(idx)), k]
+    return anchor, slack * dist
+
+
 def water_sleeves(body: Body, pose0, length=1.5, circumference=0.50, h=0.02) -> Garment:
     pieces, p_rest, segs = [], [], []
     for side in ('L', 'R'):

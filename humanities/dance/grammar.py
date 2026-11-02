@@ -178,6 +178,7 @@ class State:
     x: float = 0.0
     y: float = 0.0
     aloft: bool = False            # the unit ended in the air: the next stance is a landing
+    last_kind: str = ''            # the kind of the phase the unit ended in (a shift ends on both feet)
 
 
 @dataclass
@@ -288,8 +289,9 @@ def exit_state(u, p, side, entry, t_end, phases):
 
 def continues_stance(unit_id, side, st: State):
     """Whether the unit's first phase is a stance on the one foot already bearing the weight from a stance (not a
-    landing): then that stance is its push, and a dancer never adds a second stance on the same foot."""
-    if st.aloft or st.support not in ('L', 'R'):
+    landing): then that stance is its push, and a dancer never adds a second stance on the same foot. A weight shift
+    ends with both feet still down, so a jump after it keeps its own take-off on the foot the weight moved onto."""
+    if st.aloft or st.support not in ('L', 'R') or st.last_kind not in ('stance', 'turn'):
         return False
     first = UNITS[unit_id]['phases'][0]
     if first['kind'] == 'repeat':
@@ -315,6 +317,7 @@ def place(unit_id, side, given, entry, connector=False, note='', drop_first=Fals
     if drop_landing:
         ex.support = 'none'
     ex.aloft = bool(phases) and phases[-1]['kind'] == 'flight'
+    ex.last_kind = phases[-1]['kind'] if phases else entry.last_kind
     return Placed(unit_id, side, p, entry.t, t - entry.t, phases, entry, ex, connector, note, drop_first, drop_landing)
 
 
@@ -417,7 +420,10 @@ def support_links(unit_id, side, st: State):
             v = s.speed
             braking = v > 0.15
             step = max(0.25, v * v / (2 * MU * G)) if braking else 0.25
-            pl = place('glide_step', s.support if s.support in ('L', 'R') else side,
+            # Out of the air the step lands on the foot the travel comes down on; standing on one foot, the dancer
+            # steps onto the other.
+            foot = s.support if s.support in ('L', 'R') else other(side)
+            pl = place('glide_step', other(foot) if s.aloft else foot,
                        {'speed_m_s': max(0.2, v / 2) if braking else max(0.3, v), 'step_m': step},
                        s, connector=True, note='close to both feet' + (f', stopping {v:.2g} m/s' if braking else ''))
             pl.exit.support = 'both'
@@ -674,8 +680,25 @@ def air_study():
     ))
 
 
+def canopy_and_salto():
+    """Under the Canopy with the hanging salto: the first phrase up to its whirl, then the aerial figure that the
+    motion engine realised first, as its ending. The sleeves go up and the dancer falls under them, gathers speed,
+    hangs a split in the long jete and steers out of it, runs the speed down into the whirl, closes to both feet and
+    turns over backward in a salto that hangs upside down, landing still."""
+    return build('Under the Canopy, with the hanging salto', motif(
+        ('port_de_bras', 'R', {'seconds': 3.0, 'path': ['bras_bas', 'first', 'fifth']}),
+        ('canopy', 'R', {'under_s': 3.0}),
+        ('long_fall', 'R', {'to_deg': 35}),
+        ('orbit_run', 'L', {'speed_m_s': 1.6, 'strides': 3, 'radius_m': 4.0}),
+        ('grand_jete', 'R', {'rise_m': 1.2, 'speed_m_s': 1.6}),
+        ('carve_landing', 'R', {'turn_deg': 45}),
+        ('whirl', 'R', {'revolutions': 3, 'rev_per_s': 0.45}),
+        ('hanging_salto', 'R', {'rise_m': 1.6}),
+    ))
+
+
 def results():
-    phrases = [first_phrase(), suspension_study(), air_study()]
+    phrases = [first_phrase(), suspension_study(), air_study(), canopy_and_salto()]
     key, seed, gen, _ = best_generated()
     gen.name = f'Generated, seed {seed} (best of 40 by lunar share, contrast, linking and climax)'
     phrases.append(gen)

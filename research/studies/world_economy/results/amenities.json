@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "3a902d62d69af7ce274e940d693106be520a8c04bc6207ff17e555480b5cfeaf",
+      "research/studies/world_economy/amenities_inputs.json": "83700dd164c8625b13b451d2b9835b7a9908193464ed02d94681f813dd447f65",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "2f679398f32ffc80d4df7e491fdbfd7ae213c4d41642d104cee800d67b2a17e0"
+        "sha256": "1681419979cbc8f678ff4476f92c8aa1cfa402445b4ca215e64f8b93ff7e9eaf"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "4790bdd021f7ee59bfd433e4fc0019883fb8d653afc72283b46bb15905d5751e"
+        "sha256": "b2867791d75a2e870e2c1c219ab699a1a707df733b23859a49f794b121b303ad"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "ab9861e2c893ebeeeea82edc57e29f3388c69134f9de215ec9b1ef6a7ecf7ea6"
+        "sha256": "93208e51d3aeeae8cff6ac7e4662104f17999275c407b32b2f590a542a99bb0f"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "ddc89369d3610fd37d5fc42b1116a02787390d10fc4399ef2bdefa3afd77aecf"
+        "sha256": "9b1a025628097db6613ce74b72e21aa89591388a70d97cf3dd0d5128ac659419"
       }
     }
   },

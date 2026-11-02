@@ -20,7 +20,7 @@ OUT=ROOT/'atmosphere/snow/results/event_column.json'
 BOX=ROOT/'atmosphere/snow/results/event_closed_boxes.json'
 REFERENCE=ROOT/'atmosphere/snow/results/collision_reference.json'
 SCHEMA='terluna.atmosphere.snow-event-column-controls/1'
-REFERENCE_SHA='80d8e4a7df3ea114c436e34c0b059a432c156c25cc57db68639baf0231b4ce08'
+REFERENCE_SHA='c83f719b31e978faa4a3c8480a60dc803ae1bede985f27fb88210cf304ae6cf6'
 
 
 def plain(value):

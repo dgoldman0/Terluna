@@ -1279,11 +1279,30 @@ def write_pc2(path, verts, fps):
         f.write(verts.tobytes())
 
 
+# How each fabric of the garment library looks: sheer silks translucent, satins glossy and opaque, wool, velvet and
+# jersey matte and opaque. Sleeves keep the pale rose of the first renders; skirts take a pale gold so that layers read
+# apart. (fabric -> kind)
+FABRIC_LOOK = {'silk_chiffon': 'sheer', 'silk_georgette': 'sheer', 'silk_organza': 'sheer', 'nylon_tulle': 'sheer',
+               'silk_habotai': 'silk', 'silk_crepe_de_chine': 'silk', 'silk_taffeta': 'silk',
+               'silk_satin_soft': 'satin', 'silk_satin_heavy': 'satin',
+               'wool_plain': 'matte', 'cotton_plain': 'matte', 'silk_velvet': 'velvet', 'viscose_jersey': 'matte'}
+
+
+def garment_fabric(z):
+    try:
+        meta = json.loads(str(z['meta']))
+        fab = meta.get('fabric')
+        return fab.get('name') if isinstance(fab, dict) else str(fab)
+    except Exception:
+        return None
+
+
 def add_garment(npz_path, motion_fps, t_render, pc2_dir: Path, index):
     with np.load(npz_path, allow_pickle=False) as z:
         faces = z['faces'].astype(int)
         verts = z['verts'].astype(float)
         gfps = float(z['fps']) if 'fps' in z.files else motion_fps
+        fabric = garment_fabric(z)
     f = np.clip(t_render * gfps, 0, len(verts) - 1)
     i0 = np.floor(f).astype(int)
     i1 = np.minimum(i0 + 1, len(verts) - 1)
@@ -1308,9 +1327,23 @@ def add_garment(npz_path, motion_fps, t_render, pc2_dir: Path, index):
     mc.frame_scale = 1.0
     so = ob.modifiers.new('thickness', 'SOLIDIFY')
     so.thickness, so.offset = 0.0015, 0.0
-    # sheer silk (chiffon, georgette): pale rose, translucent, partly see-through (alpha hashed)
     m, nt, out = node_mat(f'garment_{index}')
     sleeves = 'sleeve' in Path(npz_path).stem
+    look = FABRIC_LOOK.get(fabric, 'sheer')
+    if look != 'sheer':
+        # opaque cloth: a pale gold silk, satin or wool; satin glossy, silk soft, wool and jersey matte, velvet deep
+        base = {'satin': srgb(0.88, 0.78, 0.58), 'silk': srgb(0.90, 0.80, 0.62), 'matte': srgb(0.80, 0.66, 0.46),
+                'velvet': srgb(0.55, 0.16, 0.24)}[look]
+        rough = {'satin': 0.22, 'silk': 0.38, 'matte': 0.8, 'velvet': 0.7}[look]
+        p = principled(nt, **{'Base Color': base, 'Roughness': rough,
+                              'Sheen Weight': {'satin': 0.2, 'silk': 0.5, 'matte': 0.6, 'velvet': 1.0}[look],
+                              'Sheen Roughness': 0.4, 'Specular IOR Level': {'satin': 0.7, 'silk': 0.45}.get(look, 0.25),
+                              'Anisotropic': 0.6 if look == 'satin' else 0.0})
+        nt.links.new(p.outputs['BSDF'], out.inputs['Surface'])
+        m.use_backface_culling = False
+        ob.data.materials.append(m)
+        return ob
+    # sheer silk (chiffon, georgette): pale rose, translucent, partly see-through (alpha hashed)
     p = principled(nt, **{'Base Color': srgb(0.93, 0.74, 0.74), 'Roughness': 0.5, 'Sheen Weight': 0.9,
                           'Sheen Roughness': 0.35, 'Sheen Tint': srgb(1.0, 0.9, 0.9), 'Specular IOR Level': 0.3,
                           'Alpha': 0.72 if sleeves else 0.6})

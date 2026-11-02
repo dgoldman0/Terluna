@@ -192,3 +192,56 @@ def test_the_posed_body_places_its_joints_as_the_engine_does():
         R, p = fr[seg]
         assert np.allclose(d.oMf[m.getFrameId(seg)].translation, p, atol=1e-9), seg
         assert np.allclose(d.oMf[m.getFrameId(seg)].rotation, R, atol=1e-9), seg
+
+
+def _aerial(sequence):
+    nodes = rz.timeline(gr.build('figure', gr.motif(*sequence)).placed, finish_s=1.0)
+    return nodes, rz.Problem(nodes)
+
+
+def test_aerial_figures_plan_one_whole_turn_on_the_momentum_their_shapes_need():
+    # A backward hanging salto: the pelvis turns once backward about its lateral axis and lands upright; the planned
+    # angular momentum is the whole turn over the integral of dt / I through the figure's shapes.
+    nodes, prob = _aerial([('hanging_salto', 'R', {'rise_m': 1.6})])
+    (plan,) = prob.air_plans
+    flight = [n for n in nodes if n.R_air is not None]
+    assert plan['air']['somersault'] == -1.0
+    first, last = flight[0].R_air, flight[-1].R_air
+    assert np.allclose(first, rz.rz(flight[0].yaw), atol=1e-9)
+    assert math.degrees(np.linalg.norm(pin.log3(last.T @ rz.rz(flight[-1].yaw)))) < 10.0
+    mid = flight[len(flight) // 2].R_air
+    assert mid[2, 2] < -0.9                                     # upside down at the middle of the flight
+    data = prob.model.createData()
+    integral = 0.0
+    for n in flight:
+        q = prob.reference_q(n)
+        q[:3], q[3:7] = 0.0, [0.0, 0.0, 0.0, 1.0]
+        pin.ccrba(prob.model, data, q, np.zeros(prob.model.nv))
+        integral += rz.DT / data.Ig.inertia[1, 1]
+    L = np.array(plan['angular_momentum_N_m_s'])
+    assert L[1] == pytest.approx(-2 * math.pi / integral, abs=0.01) and abs(L[0]) < 1e-9 and abs(L[2]) < 1e-9
+    # Within what the envelope says a lunar take-off can give (37 N m s), and the take-off may lean into it.
+    assert 5.0 < abs(L[1]) < 37.0
+    k = nodes.index(flight[0])
+    assert all(n.lean_free for n in nodes[k - int(round(rz.LEAN_FREE_S / rz.DT)):k])
+
+
+def test_the_corkscrew_twists_once_and_the_flat_spin_lies_flat_about_the_vertical():
+    nodes, prob = _aerial([('corkscrew', 'R', {'rise_m': 1.6, 'twists': 1})])
+    flight = [n for n in nodes if n.R_air is not None]
+    assert prob.air_plans[0]['air']['twist'] == -1.0
+    assert math.degrees(np.linalg.norm(pin.log3(flight[-1].R_air.T @ rz.rz(flight[-1].yaw)))) < 10.0
+    nodes, prob = _aerial([('flat_spin', 'R', {'rise_m': 2.3, 'speed_m_s': 0.5})])
+    (plan,) = prob.air_plans
+    L = np.array(plan['angular_momentum_N_m_s'])
+    assert abs(L[0]) < 1e-9 and abs(L[1]) < 1e-9 and 10.0 < abs(L[2]) < 25.0     # the grip's 25 N m s at most
+    flight = [n for n in nodes if n.R_air is not None]
+    mid = flight[len(flight) // 2]
+    assert math.degrees(math.acos(mid.R_air[2, 2])) == pytest.approx(rz.FLAT_PITCH_DEG, abs=0.5)
+    assert flight[0].R_air[2, 2] > 0.99 and flight[-1].R_air[2, 2] > 0.99
+
+
+def test_phrases_without_aerial_figures_are_planned_as_before():
+    nodes = rz.timeline(gr.first_phrase().placed, finish_s=1.0)
+    prob = rz.Problem(nodes)
+    assert prob.air_plans == [] and not any(n.lean_free or n.z_rel is not None for n in nodes)

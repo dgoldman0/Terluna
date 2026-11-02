@@ -3,7 +3,7 @@
   "producer": {
     "files": {
       "research/studies/world_economy/pressure_advantages.py": "3fde0cc5696613ec18308e240dfcdccbe102c7518af52793b8ac754817b7562a",
-      "research/studies/world_economy/pressure_advantages_inputs.json": "5f7e33322deac949c6fbbab6a74c528d0c4716de43bd744896e5482312ad13fe",
+      "research/studies/world_economy/pressure_advantages_inputs.json": "abdb025893aa29e3cde4e02df64eb44b4db02b44fe26bdb22e3f8dc319715dcb",
       "research/studies/world_economy/pressure_advantages_sources.json": "3b1bb73906ad7faaf5751f53885cea4cf180096e46b31892aa48ebde099eaacb",
       "research/studies/world_economy/industrial_physics.py": "915b7edcbdf70c244cb2d234465f75539e4d65ed81c98f719480d6a802e785cc"
     },
@@ -20,7 +20,7 @@
     "input_products": {
       "research/studies/world_economy/results/mature_industry.json": {
         "schema": "terluna.research.mature-industry/1",
-        "sha256": "352f7955a4375c710b2bbc67ebcbdd1390a4889e355ea3c3fd1db794bd6c5b8f",
+        "sha256": "efdc5695526a8ee20d4bf3ce2a5ebc8fd50448b09a4e3ecba6c620472878e800",
         "use": "environment.earth_pressure_Pa and environment.moon_pressure_Pa; retained 1.2 atm lock"
       }
     }
@@ -34,7 +34,7 @@
     "products": {
       "research/studies/world_economy/results/mature_industry.json": {
         "schema": "terluna.research.mature-industry/1",
-        "sha256": "352f7955a4375c710b2bbc67ebcbdd1390a4889e355ea3c3fd1db794bd6c5b8f",
+        "sha256": "efdc5695526a8ee20d4bf3ce2a5ebc8fd50448b09a4e3ecba6c620472878e800",
         "use": "environment.earth_pressure_Pa and environment.moon_pressure_Pa; retained 1.2 atm lock"
       }
     },

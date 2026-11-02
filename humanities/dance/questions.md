@@ -34,6 +34,19 @@ questions move to the decisions register (section "Dance and the movement arts, 
    aerodynamic dance. They stay outside the flowing solo dance; should one of them follow it?
 7. **Names.** The lunar units carry working names (orbit run, skim, flight phrase, slow salto, unfolding turn, carve,
    canopy, long fall, long penché). Rename any?
+8. **Movement sources and the conlang's cultures.** The register keeps the Terlunan language work out of choosing
+   movement sources, which are chosen by mechanics, anatomy and expressive quality. Several traditions of the conlang's
+   present blend pass that test on their own: Māori poi, whose circles keep their shape on the Moon at 0.41 of Earth's
+   spin rate; strand skirts such as the piupiu and the Tahitian more, whose separate strands should meet far less of the
+   fold drag that winds light cloth round a turning body (an estimate, not yet simulated); the bamboo-pole and fan
+   dances of the Philippines (tinikling, singkil) and its lamp balancing (pandanggo sa ilaw); the fans and handkerchiefs
+   of Hakka tea-picking opera; and the tiered and fringed garments of Sumer and Akkad, whose dances survive only as
+   names and images. Traditions outside the blend pass it as well: Chinese classical dance with its long silk and the
+   Dunhuang flying figures, Korean sleeve and scarf dances, Loie Fuller's serpentine silk, the fall-and-recovery
+   technique of Humphrey and Limón, the skirt-whirling dances (kathak, ghoomar, tanoura), Javanese court dance with the
+   sampur scarf, and the acrobatic traditions of frevo, capoeira and the fancy shawl dance. Should these join the
+   survey on their merits (recommended), or should one style follow the conlang's culture, which would change the
+   register's rule?
 
 Answered on 1 November: the garments (light and weighted fabrics both, combined to suit each dance), the next step
 (the whole phrase, before the replay controller), partnering and levels (each a future study, neither now), the

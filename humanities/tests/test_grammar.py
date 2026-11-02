@@ -130,3 +130,16 @@ def test_the_air_study_turns_in_the_air_and_brakes_on_the_floor():
     for pl in air.placed:
         if pl.connector and pl.note.startswith('close to both feet, stopping'):
             assert pl.duration >= pl.entry.speed / (g.MU * GM) - 1e-9
+
+
+def test_a_jump_after_a_weight_shift_keeps_its_take_off():
+    # A shift ends with both feet still down, so the jump that follows pushes from its own stance on the foot the weight
+    # moved onto; a stance continued from one foot (the carve into the run) still serves as the next unit's push.
+    air = g.air_study()
+    units = [pl.unit for pl in air.placed]
+    sleeve = air.placed[units.index('sleeve_flight')]
+    assert air.placed[units.index('sleeve_flight') - 1].unit == 'weight_shift'
+    assert not sleeve.dropped_first and sleeve.phases[0]['kind'] == 'stance' and sleeve.phases[1]['kind'] == 'flight'
+    first = g.first_phrase()
+    runs = [pl for pl in first.placed if pl.unit == 'orbit_run']
+    assert all(pl.dropped_first for pl in runs)

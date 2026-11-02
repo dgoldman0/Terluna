@@ -31,7 +31,7 @@
     },
     "research/studies/distributions/results/distributions.json": {
       "schema": "terluna.research.distributions/1",
-      "sha256": "ab9861e2c893ebeeeea82edc57e29f3388c69134f9de215ec9b1ef6a7ecf7ea6",
+      "sha256": "93208e51d3aeeae8cff6ac7e4662104f17999275c407b32b2f590a542a99bb0f",
       "fields": [
         "distributions.C'.people_billion",
         "distributions.C'.moon.water_lift_gw",
@@ -65,7 +65,7 @@
     },
     "provisioning/results/power.json": {
       "schema": "terluna.provisioning.power/1",
-      "sha256": "f51f1b5e870791ddc873af326c9023f8f666bf404b77d9b8a0102f669643c794",
+      "sha256": "cbfc7be8b84801d71bd1580189970fec4046e4836394e8ee58853c5edb3b6d31",
       "fields": [
         "reserves.ring_fault.delivered_total_tw",
         "reserves.ring_fault.energy_twh",
@@ -77,7 +77,7 @@
     },
     "research/studies/food_systems/results/food_blend.json": {
       "schema": "terluna.research.food-blend/1",
-      "sha256": "4fc30397d1c78ee90bf97655ec77fcda1e0c9879263cda856c97009357874220",
+      "sha256": "a78a33e620810ddd20ceb8c3bb472ae87e4bc9f37d55c60eb567abdd36d5e32b",
       "fields": [
         "blend.8.wild_30_hybrid_20.power_tw",
         "blend.8.wild_30_hybrid_20.fields_km2",
@@ -94,14 +94,14 @@
     },
     "research/studies/terrain_through_time/results/terrain_through_time.json": {
       "schema": "terluna.research.terrain-through-time/1",
-      "sha256": "f1830590e893d7b20acfb76b7a5166d8a4ebfb5554b03043e2ddac987d44287a",
+      "sha256": "4a83ab83dad6bb036f7c85eb155fa5e38bf55108a5c23e736ed372b7eccde5c7",
       "fields": [
         "upkeep.rates"
       ]
     },
     "research/studies/carbon_cycle/results/carbon_cycle.json": {
       "schema": "terluna.research.carbon-cycle/1",
-      "sha256": "4b3803c66f7ff0c356efa5c96144bd8e03b48300425ed4b5b49629a7ae7a4fe4",
+      "sha256": "590fdf88521ea6dbee5877aa40ed122b7727792db733edb2cf5a8f2287e15169",
       "fields": [
         "questions.imports",
         "questions.managed_return.by_corner"

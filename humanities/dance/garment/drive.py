@@ -2,6 +2,9 @@
 
     python -m humanities.dance.garment.drive skirt moon MOTION.npz OUT.npz [--fabric silk_chiffon] [--h 0.02]
     python -m humanities.dance.garment.drive sleeves earth MOTION.npz OUT.npz
+    python -m humanities.dance.garment.drive skirt moon MOTION.npz OUT.npz --fabric wool_plain --cut 0.5 --tether
+    # --cut: the share of a circle the skirt is cut from (0.5 a half circle; without it, the full circle skirt of the
+    # first renders); --hem: a weighted hem in kg/m; --tether: tethers from the cloth to the waistband or the cuffs
 
 Output (schema terluna.humanities.dance-garment/1): faces (F, 3) int32; verts (N, V, 3) float32 in the motion's world
 frame at its fps, frame k at time[k]; time (N,); uv (V, 2) pattern coordinates; pinned (P,) int32; meta, a JSON
@@ -21,7 +24,7 @@ import torch
 
 from .body import Body, MotionPose, run
 from .cloth import EARTH, MOON, Cloth, Settings
-from .garments import circle_skirt, water_sleeves
+from .garments import circle_skirt, cuff_tethers, skirt as cut_skirt, waist_tethers, water_sleeves
 from .materials import FABRICS
 
 SCHEMA = 'terluna.humanities.dance-garment/1'
@@ -39,14 +42,18 @@ def dressing_damping(pose: MotionPose, strong=2.0, gentle=0.5):
 
 
 def simulate(garment: str, world: str, motion, out, fabric=None, h=0.02, substeps=40, t_raised=6.0, t_lower=1.5,
-             t_hold=1.5, settings: Settings | None = None, t_end=None, quiet=False):
+             t_hold=1.5, settings: Settings | None = None, t_end=None, quiet=False, cut=None, hem_kg_m=0.0,
+             tether=False, length=0.85):
     torch.set_num_threads(3)
     W = WORLDS[world]
     body = Body()
     pose = MotionPose(str(motion), body, t_raised=t_raised, t_lower=t_lower, t_hold=t_hold)
     p0 = pose(-pose.pre)
-    if garment == 'skirt':
-        G = circle_skirt(body, p0, h=h)
+    if garment == 'skirt' and cut is None and not hem_kg_m:
+        G = circle_skirt(body, p0, length=length, h=h)
+        mat = FABRICS[fabric or 'silk_chiffon']
+    elif garment == 'skirt':
+        G = cut_skirt(body, p0, cut=2 * math.pi * (cut or 1.0), length=length, h=h, hem_weight_kg_m=hem_kg_m)
         mat = FABRICS[fabric or 'silk_chiffon']
     elif garment == 'sleeves':
         G = water_sleeves(body, p0, h=h)
@@ -55,7 +62,8 @@ def simulate(garment: str, world: str, motion, out, fabric=None, h=0.02, substep
         raise ValueError(garment)
     s = settings or Settings()
     s.dt = 1.0 / (pose.fps * substeps)
-    cloth = Cloth(G.piece, G.X0, mat, W, s, pinned=G.pinned)
+    cloth = Cloth(G.piece, G.X0, mat, W, s, pinned=G.pinned, extra_mass=G.extra_mass,
+                  tethers=(waist_tethers(G) if garment == 'skirt' else cuff_tethers(G)) if tether else None)
     damp = dressing_damping(pose)
     torch.cuda.reset_peak_memory_stats() if torch.cuda.is_available() else None
     t_wall = time.time()
@@ -88,6 +96,7 @@ def simulate(garment: str, world: str, motion, out, fabric=None, h=0.02, substep
         solver=dict(method='XPBD small steps, Jacobi with mass splitting, CUDA graph', substeps_per_frame=substeps,
                     settings=s.to_dict(), self_contact_distance=cloth.d_self, device=str(cloth.dev),
                     dtype='float32', pairs_max=cloth.stats['pairs_max'], pairs_truncated=cloth.stats['pairs_truncated']),
+        tethers=bool(tether),
         dressing=dict(description='first frame held with the arms raised 80 deg to the side while the garment settles '
                                   'with numerical damping, then the arms lowered to the first frame and held',
                       t_raised=pose.t_raised, t_lower=pose.t_lower, t_hold=pose.t_hold,
@@ -119,8 +128,13 @@ def main(argv=None):
     ap.add_argument('--h', type=float, default=0.02)
     ap.add_argument('--substeps', type=int, default=40)
     ap.add_argument('--t-end', type=float, default=None)
+    ap.add_argument('--cut', type=float, default=None, help='share of a circle (0.5: half circle; 1: full circle)')
+    ap.add_argument('--hem', type=float, default=0.0, help='weighted hem, kg/m')
+    ap.add_argument('--tether', action='store_true', help='tethers from the cloth to the waistband or the cuffs')
+    ap.add_argument('--length', type=float, default=0.85, help='skirt length, m')
     a = ap.parse_args(argv)
-    simulate(a.garment, a.world, a.motion, a.out, fabric=a.fabric, h=a.h, substeps=a.substeps, t_end=a.t_end)
+    simulate(a.garment, a.world, a.motion, a.out, fabric=a.fabric, h=a.h, substeps=a.substeps, t_end=a.t_end,
+             cut=a.cut, hem_kg_m=a.hem, tether=a.tether, length=a.length)
     return 0
 
 

@@ -59,6 +59,7 @@ STANCE_WIDTH = 0.10
 SOLE_POINTS = ('heel_m', 'heel_l', 'ball_m', 'ball_l', 'toe')
 FLOOR_POINTS = SOLE_POINTS + ('kneecap',)
 FLOOR_MARGIN_M = 0.002
+PALM_FLOOR_M = 0.03          # the palms kept this far above the floor (no unit rests on the hands)
 MAX_FOOT_FORCE_N = 900.0     # a foot's peak push, about 10 lunar body weights (1.7 of Earth's): a jump's take-off peak
 # Contact kinds: the frame that holds the floor, how many directions it holds (6: no slip and no swivel; 3: a point
 # that cannot slip but may swivel), and the body's points that rest on the floor with it.
@@ -79,6 +80,12 @@ FOURTH_M = (-0.30, 0.25)     # the free foot behind and beside the turning foot 
 RELEVE = {'ankle': 45.0, 'mtp': 65.0}   # the foot on demi-pointe (poses.json, releve)
 PIVOT_SUPPORTS = ('ball_m', 'ball_l')   # a pivot's metatarsal heads: they press on the floor without friction
 SPEED_CHANGE_M_S2 = 0.5 * MU * gr.G     # how fast a unit without flights changes its travel: half the floor's grip
+AERIAL_KEYS = ('somersault_rev', 'cartwheel_rev', 'twist_rev')   # a flight that turns the body over (with body: flat)
+FLAT_PITCH_DEG = 75.0        # how far a flat spin lays the body over, face down, from upright
+LEAN_FREE_S = 0.3            # the last part of a figure's take-off in which the trunk leans freely into the turn
+AIR_TURN_WEIGHT = 10.0       # per flight node, on the pelvis's angular velocity against the plan (rad/s)
+CART_LEAN_M = env.AERIAL_LEAN_M   # a cartwheel's take-off foot this far to the side of the body's lean
+AIR_TWIST_WEIGHT = 0.3       # the share of the attitude cost on a twist about the body's long axis
 
 
 # --- shapes to joint targets ---------------------------------------------------------------------------------------
@@ -238,6 +245,15 @@ class Node:
     family: str = ''
     side: str = 'R'                # the unit's gesture side
     phase_id: int = 0
+    # An aerial figure's flight: what it turns (AERIAL_KEYS), the node's fraction of the flight and its height above
+    # the take-off on the ballistic arc; Problem fills in the pelvis's planned attitude and the angular momentum.
+    air: dict | None = None
+    air_frac: float = 0.0
+    z_rel: float | None = None
+    R_air: np.ndarray | None = None
+    L_air: np.ndarray | None = None
+    w_air: np.ndarray | None = None  # the pelvis's planned angular velocity (world axes, rad/s)
+    lean_free: bool = False        # the end of a take-off into a figure: the trunk may lean into the turn
 
 
 def contact_kind(phase, unit):
@@ -301,6 +317,25 @@ def ball_ahead_m():
     return body_spec()['contacts']['L_ball_m']['pos'][0]
 
 
+def aerial_spec(pl, ph):
+    """What an aerial figure's flight turns, in revolutions: the somersault (negative backward, the unit's
+    direction), the cartwheel (positive toward the right; a cartwheel turns toward the foot it leaves from), the
+    twist (toward the gesture side) and whether the body lies flat for a spin about the vertical."""
+    def val(key):
+        v = ph.get(key)
+        if v is None:
+            return 0.0
+        return gr.evaluate(v, pl.params) if isinstance(v, str) else float(v)
+    i = next(k for k, p in enumerate(pl.phases) if p is ph)
+    before = pl.phases[i - 1].get('support') if i > 0 else None
+    toward = before if before in ('L', 'R') else pl.side
+    som = val('somersault_rev')
+    return dict(somersault=-som if pl.params.get('direction', 'back') == 'back' else som,
+                cartwheel=val('cartwheel_rev') * (1.0 if toward == 'R' else -1.0),
+                twist=val('twist_rev') * (1.0 if pl.side == 'L' else -1.0),
+                flat=ph.get('body') == 'flat', duration=ph['duration'])
+
+
 def timeline(placed, dt=DT, finish_s=0.0):
     """Nodes every dt from the placed units: contacts from each phase's support, shape targets interpolated between
     the phase's key shapes (held between phases), the centre of mass's planned path, yaw for turns. finish_s holds the
@@ -340,6 +375,9 @@ def timeline(placed, dt=DT, finish_s=0.0):
                 sgn = 1.0 if gr.other(pl.side) == 'L' else -1.0
                 across = sgn * pl.params.get('across_m', STANCE_WIDTH) * np.array([-math.sin(heading0), math.cos(heading0)])
             flights = any(p['kind'] == 'flight' for p in pl.phases)
+            air = None
+            if ph['kind'] == 'flight' and (any(ph.get(key) is not None for key in AERIAL_KEYS) or ph.get('body') == 'flat'):
+                air = aerial_spec(pl, ph)
         frac = (t - ph['t0']) / max(ph['duration'], 1e-9)
         ufrac = (t - pl.t0) / max(pl.duration, 1e-9)
         dh = ((pl.exit.heading - pl.entry.heading + 180) % 360) - 180
@@ -396,9 +434,11 @@ def timeline(placed, dt=DT, finish_s=0.0):
             if kind == 'pivot':                            # the turning foot stays on demi-pointe
                 for j, deg in RELEVE.items():
                     tg[f'{s}_{j}'] = ('hinge', math.radians(deg))
+        tau = t - ph['t0']
         nodes.append(Node(t=float(t), contacts=contacts, landing=landing, targets=tg, yaw=heading + yaw_turn,
                           yaw_rate=yaw_rate, com=pos.copy(), com_vel=(pos - before) / dt, phase=ph['kind'],
-                          unit=pl.unit, family=u['family'], side=pl.side, phase_id=pid))
+                          unit=pl.unit, family=u['family'], side=pl.side, phase_id=pid, air=air, air_frac=frac,
+                          z_rel=(0.5 * gr.G * ph['duration'] * tau - 0.5 * gr.G * tau * tau) if air else None))
         if shapes:
             reached = [s for s in shapes if s['at'] <= frac + 1e-9]
             if reached:
@@ -444,6 +484,86 @@ class Problem:
                     j += 1
                 st[s] = j
             self.stay.append(st)
+        self._plan_air()
+
+    def _plan_air(self):
+        """Each aerial figure's planned attitude and angular momentum. In the air the body keeps its angular momentum
+        L and turns at L / I, with I its moment of inertia about the turning axis in the shape it holds, so the
+        planned angle grows with the integral of dt / I through the figure's shapes, and L is the whole turn over that
+        integral; the take-off has to give the body that L. A twist is spread over the middle of the flight (0.2 to
+        0.85 of it) the same way about the long axis; a flat spin lays the body over face down early in the flight,
+        spins it about the vertical, and brings it upright for the landing."""
+        data = self.model.createData()
+        groups = {}
+        for i, n in enumerate(self.nodes):
+            if n.air is not None:
+                groups.setdefault(n.phase_id, []).append(i)
+        self.air_plans, self.air_blocks = [], []
+        for pid, idx in groups.items():
+            air = self.nodes[idx[0]].air
+            inv = []
+            for i in idx:
+                q = self.reference_q(self.nodes[i])
+                q[:3] = 0.0
+                q[3:7] = np.array([0.0, 0.0, 0.0, 1.0])
+                pin.ccrba(self.model, data, q, np.zeros(self.model.nv))
+                I = data.Ig.inertia.copy()
+                if air['flat']:
+                    a = pin.utils.rpyToMatrix(0, math.radians(FLAT_PITCH_DEG), 0).T @ np.array([0.0, 0.0, 1.0])
+                    inv.append([1.0 / I[0, 0], 1.0 / I[1, 1], 1.0 / I[2, 2], 1.0 / float(a @ I @ a)])
+                else:
+                    inv.append([1.0 / I[0, 0], 1.0 / I[1, 1], 1.0 / I[2, 2], 0.0])
+            inv = np.array(inv)
+            frac = np.array([self.nodes[i].air_frac for i in idx])
+
+            def schedule(w):
+                c = np.concatenate([[0.0], np.cumsum(w)])
+                return c[:-1] / c[-1] if c[-1] > 0 else np.zeros(len(w)), float(c[-1]) * DT
+
+            som, s_int = schedule(inv[:, 1])
+            cart, c_int = schedule(inv[:, 0])
+            tw_w = inv[:, 2] * ((frac >= 0.2) & (frac <= 0.85))
+            tw, _ = schedule(tw_w)
+            spin, f_int = schedule(inv[:, 3])
+            yaw0 = self.nodes[idx[0]].yaw
+            yaw_total = (self.nodes[idx[-1]].yaw + self.nodes[idx[-1]].yaw_rate * DT) - yaw0
+            ang_som = 2 * math.pi * air['somersault']
+            ang_cart = 2 * math.pi * air['cartwheel']
+            ang_tw = 2 * math.pi * air['twist']
+            for k, i in enumerate(idx):
+                n = self.nodes[i]
+                Rz = rz(n.yaw if not air['flat'] else yaw0 + yaw_total * spin[k])
+                if air['flat']:
+                    f = n.air_frac
+                    lay = (lambda s: s * s * (3 - 2 * s))(min(f / 0.2, 1.0)) if f < 0.5 else \
+                        (lambda s: s * s * (3 - 2 * s))(min((1.0 - f) / 0.25, 1.0))
+                    n.yaw = yaw0 + yaw_total * spin[k]
+                    n.R_air = Rz @ pin.utils.rpyToMatrix(0, math.radians(FLAT_PITCH_DEG) * lay, 0)
+                    n.L_air = np.array([0.0, 0.0, yaw_total / f_int]) if f_int > 0 else np.zeros(3)
+                else:
+                    n.R_air = Rz @ pin.utils.rpyToMatrix(ang_cart * cart[k], ang_som * som[k], 0) @ rz(ang_tw * tw[k])
+                    n.L_air = Rz @ np.array([ang_cart / c_int if ang_cart else 0.0, ang_som / s_int if ang_som else 0.0, 0.0])
+            # The planned angular velocity, from the attitude schedule node to node.
+            for k, i in enumerate(idx):
+                n = self.nodes[i]
+                nxt = self.nodes[idx[k + 1]].R_air if k + 1 < len(idx) else None
+                if nxt is None:
+                    n.w_air = self.nodes[idx[k - 1]].w_air.copy() if k else np.zeros(3)
+                else:
+                    n.w_air = n.R_air @ pin.log3(n.R_air.T @ nxt) / DT
+            # The take-off's last moments may lean into the turn.
+            for j in range(max(idx[0] - int(round(LEAN_FREE_S / DT)), 0), idx[0]):
+                if self.nodes[j].contacts:
+                    self.nodes[j].lean_free = True
+            # The figure's block, from its take-off stance to the end of its landing: a window never cuts it.
+            pre = self.nodes[idx[0] - 1].phase_id if idx[0] > 0 else None
+            s0 = next((k for k in range(idx[0]) if self.nodes[k].phase_id == pre), idx[0])
+            post = self.nodes[idx[-1] + 1].phase_id if idx[-1] + 1 < len(self.nodes) else None
+            e0 = self.phase_last.get(post, idx[-1]) + 1 if post is not None else idx[-1] + 1
+            self.air_blocks.append((s0, e0))
+            self.air_plans.append(dict(unit=self.nodes[idx[0]].unit, t=[round(self.nodes[idx[0]].t, 3),
+                                       round(self.nodes[idx[-1]].t + DT, 3)], air=air,
+                                       angular_momentum_N_m_s=[round(float(v), 2) for v in self.nodes[idx[0]].L_air]))
 
     # A reference state for a node: the carriage with the node's targets applied, the root at the planned travel.
     def reference_q(self, node):
@@ -459,7 +579,7 @@ class Problem:
                 lo, hi = self.model.lowerPositionLimit[iq], self.model.upperPositionLimit[iq]
                 q[iq] = float(np.clip(val, lo, hi))
         q[0:2] = node.com
-        q[3:7] = pin.Quaternion(rz(node.yaw)).coeffs()
+        q[3:7] = pin.Quaternion(rz(node.yaw) if node.R_air is None else node.R_air).coeffs()
         return q
 
     def state_weights(self, node):
@@ -487,10 +607,24 @@ class Problem:
         # Facing: the pelvis stays near upright and its yaw follows the travel. In a turn the yaw's rate follows the
         # plan instead of its angle, so a turn that lags never meets the half-revolution where an angle error wraps.
         pelvis = self.model.getFrameId('pelvis')
-        turning = abs(node.yaw_rate) > 1e-9
-        cm.addCost('facing', crocoddyl.CostModelResidual(
-            self.state, crocoddyl.ActivationModelWeightedQuad(np.array([1.0, 1.0, 0.0 if turning else 4.0]) ** 2),
-            crocoddyl.ResidualModelFrameRotation(self.state, pelvis, rz(node.yaw), self.nu)), 10.0)
+        turning = abs(node.yaw_rate) > 1e-9 and node.R_air is None
+        if node.R_air is not None:
+            # An aerial figure: the pelvis follows the planned attitude and turns at the planned rate; the body keeps
+            # its angular momentum through the flight, so the rate asks the take-off to give it.
+            # A twist is the body's own work in the air (a tilt made by the arms), so its target is held loosely.
+            twist_w = AIR_TWIST_WEIGHT if node.air and node.air.get('twist') else 1.0
+            cm.addCost('facing', crocoddyl.CostModelResidual(
+                self.state, crocoddyl.ActivationModelWeightedQuad(np.array([1.0, 1.0, twist_w]) ** 2),
+                crocoddyl.ResidualModelFrameRotation(self.state, pelvis, node.R_air, self.nu)), 10.0)
+            cm.addCost('turning', crocoddyl.CostModelResidual(
+                self.state, crocoddyl.ActivationModelWeightedQuad(np.r_[np.zeros(3), np.ones(3)]),
+                crocoddyl.ResidualModelFrameVelocity(self.state, pelvis, pin.Motion(np.zeros(3), node.w_air),
+                                                     pin.LOCAL_WORLD_ALIGNED, self.nu)), AIR_TURN_WEIGHT)
+        else:
+            tilt = 0.3 if node.lean_free else 1.0
+            cm.addCost('facing', crocoddyl.CostModelResidual(
+                self.state, crocoddyl.ActivationModelWeightedQuad(np.array([tilt, tilt, 0.0 if turning else 4.0]) ** 2),
+                crocoddyl.ResidualModelFrameRotation(self.state, pelvis, rz(node.yaw), self.nu)), 10.0)
         if turning:
             cm.addCost('spin', crocoddyl.CostModelResidual(
                 self.state, crocoddyl.ActivationModelWeightedQuad(np.array([0.0, 0.0, 0.0, 0.0, 0.0, 1.0])),
@@ -541,6 +675,13 @@ class Problem:
                 cm.addCost(f'{side}_{pt}_floor', crocoddyl.CostModelResidual(
                     self.state, crocoddyl.ActivationModelQuadraticBarrier(floor),
                     crocoddyl.ResidualModelFrameTranslation(self.state, fid, np.zeros(3), self.nu)), 1e4)
+        # The hands never pass through the floor either.
+        for side in ('L', 'R'):
+            floor = crocoddyl.ActivationBounds(np.array([-1e6, -1e6, PALM_FLOOR_M]), np.array([1e6, 1e6, 1e6]))
+            cm.addCost(f'{side}_palm_floor', crocoddyl.CostModelResidual(
+                self.state, crocoddyl.ActivationModelQuadraticBarrier(floor),
+                crocoddyl.ResidualModelFrameTranslation(self.state, self.model.getFrameId(f'{side}_palm'), np.zeros(3),
+                                                        self.nu)), 1e4)
         # Landings: the arriving foot or knee reaches its planned foothold.
         for side, (fid, M) in (landing_targets or {}).items():
             if isinstance(M, pin.SE3):
@@ -667,8 +808,14 @@ class Problem:
             lateral = (1 if side == 'L' else -1) * STANCE_WIDTH
             p = np.array([n.com[0] - math.sin(n.yaw) * lateral, n.com[1] + math.cos(n.yaw) * lateral, 0.0])
             return pin.SE3(rz(n.yaw), p)
-        # One foot from the air: under the centre of mass at mid-stance, a little to its own side.
+        # One foot from the air: under the centre of mass at mid-stance, a little to its own side; a cartwheel's
+        # take-off foot lands to the side away from the turn, so the body leans past it into the cartwheel.
         nm, p = self._mid_stance(i, side)
+        j = self.phase_last[n.phase_id] + 1
+        cart = self.nodes[j].air['cartwheel'] if j < len(self.nodes) and self.nodes[j].air else 0.0
+        if cart:
+            off = math.copysign(CART_LEAN_M, cart)
+            p = np.array([nm.com[0] - math.sin(nm.yaw) * off, nm.com[1] + math.cos(nm.yaw) * off, 0.0])
         return pin.SE3(rz(nm.yaw), p)
 
     def plan(self):
@@ -830,16 +977,29 @@ class Problem:
         by inverse kinematics, the height carried along; an impulse keeps the state it receives."""
         data = self.model.createData()
         xs = [x_start]
+        z_base = x_start[2]
         for k, (i, m) in enumerate(ms):
             if isinstance(m, crocoddyl.ActionModelImpulseFwdDynamics):
                 xs.append(xs[-1].copy())
                 continue
             j = min(i + 1, len(self.nodes) - 1)
             qn = self.reference_q(self.nodes[j])
-            qn[2] = xs[-1][2]
+            if self.nodes[j].z_rel is not None:
+                qn[2] = z_base + self.nodes[j].z_rel        # an aerial figure rises and falls on its arc
+            else:
+                qn[2] = z_base = xs[-1][2]
             if self.nodes[j].contacts:
                 qn = place_feet(self.model, data, qn, self.node_targets[j], iters=30, com=self.nodes[j].com)
-            xs.append(np.concatenate([qn, np.zeros(self.model.nv)]))
+            vn = np.zeros(self.model.nv)
+            nj = self.nodes[j]
+            if nj.w_air is not None:
+                # an aerial figure starts warm with its planned turn and its ballistic arc
+                R = pin.Quaternion(qn[6], qn[3], qn[4], qn[5]).toRotationMatrix()
+                tau = nj.air_frac * nj.air['duration']
+                v_up = 0.5 * gr.G * nj.air['duration'] - gr.G * tau
+                vn[:3] = R.T @ np.array([nj.com_vel[0], nj.com_vel[1], v_up])
+                vn[3:6] = R.T @ nj.w_air
+            xs.append(np.concatenate([qn, vn]))
         return xs
 
     def build(self):
@@ -927,7 +1087,8 @@ def solve_span(prob, a, b, maxiter=150, verbose=False):
 def solve_windows(prob, window_s=3.5, step_s=1.0, maxiter=150, verbose=False, log=None):
     """Solve the phrase window by window: each window of `window_s` starts from the state the previous one reached
     after `step_s`, so every window is short enough to converge and long enough to see a whole flight from its
-    push to its landing. Only one window's models exist at a time; the kept pieces join into one trajectory that
+    push to its landing. An aerial figure is never cut: a window that reaches into one is lengthened to hold it to
+    its landing, and a window keeps either all of it or none. Only one window's models exist at a time; the kept pieces join into one trajectory that
     satisfies the dynamics throughout. `log`, a callable, hears each window's result as it finishes."""
     x = prob.plan()
     N = len(prob.nodes)
@@ -935,8 +1096,12 @@ def solve_windows(prob, window_s=3.5, step_s=1.0, maxiter=150, verbose=False, lo
     records, tail = [], None
     a, total_cost, iters, worst_gap = 0, 0.0, 0, 0.0
     t0 = time.time()
+    blocks = getattr(prob, 'air_blocks', [])
     while a < N:
         b = min(N, a + W)
+        for s0, e0 in blocks:
+            if s0 < b < e0 + 10:
+                b = min(N, e0 + 10)          # a window that reaches into a figure holds it to its landing and beyond
         ms = prob.running(a, b)
         sub = crocoddyl.ShootingProblem(x, [m for _, m in ms], prob.terminal(b))
         warm_x = prob.reference_states(ms, x)
@@ -951,6 +1116,12 @@ def solve_windows(prob, window_s=3.5, step_s=1.0, maxiter=150, verbose=False, lo
             solver.setCallbacks([crocoddyl.CallbackVerbose()])
         solver.solve(warm_x, warm_u, maxiter, False, 1e-3)
         keep_nodes = b - a if b >= N else min(S, b - a)
+        for s0, e0 in blocks:
+            if s0 < a + keep_nodes < e0:
+                # The kept part would end inside an aerial figure: stop before its take-off, so that the next window
+                # holds the whole figure from take-off to landing, or keep the whole figure from the window that
+                # began with it.
+                keep_nodes = s0 - a if s0 > a else min(e0 - a, b - a)
         keep = sum(1 for i, _ in ms if i < a + keep_nodes)
         part = Solution(prob, ms, sub, solver, keep, solver.cost, solver.iter, solver.ffeas)
         records.extend(part.records)
@@ -1058,7 +1229,7 @@ def contact_report(prob, sol):
 
 
 def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=False, windows=False, span=None,
-            finish_s=0.0, window_log=None):
+            finish_s=0.0, window_log=None, window_s=3.5, step_s=1.0):
     """Realise the phrase (or units[i:j] of it, or the nodes in span=(t0, t1) seconds) and write its motion file and
     report. finish_s holds the last shape at rest at the end."""
     placed = phrase.placed if units is None else phrase.placed[units[0]:units[1]]
@@ -1070,7 +1241,7 @@ def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=Fal
         solver = solve_span(prob, a, b, maxiter=maxiter, verbose=verbose)
         nodes = nodes[a:b]
     elif windows:
-        solver = solve_windows(prob, maxiter=maxiter, verbose=verbose, log=window_log)
+        solver = solve_windows(prob, window_s=window_s, step_s=step_s, maxiter=maxiter, verbose=verbose, log=window_log)
     else:
         solver = prob.solve(maxiter=maxiter, verbose=verbose)
     times, P, Q, C, QS = segment_frames(prob, solver)
@@ -1080,7 +1251,8 @@ def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=Fal
     meta = dict(kind='dynamic', gravity=gr.G, air_density=None, phrase=phrase.name,
                 units=sorted({n.unit for n in nodes}, key=[n.unit for n in nodes].index), dt=DT,
                 span_s=[round(nodes[0].t, 3), round(nodes[-1].t + DT, 3)], finish_s=finish_s,
-                solver='crocoddyl.SolverBoxFDDP' + (' in overlapping windows' if windows else ''), iterations=solver.iter,
+                solver='crocoddyl.SolverBoxFDDP' + (f' in overlapping windows of {window_s:g} s, {step_s:g} s kept from each'
+                                                    if windows else ''), iterations=solver.iter,
                 cost=solver.cost, stop=solver.stop, dynamic_gap=float(solver.ffeas), seconds=round(prob.seconds, 1),
                 evidence='Whole-body optimal control at lunar gravity: rigid-body dynamics with 6D foot contacts, point '
                          'contacts for pivots (with the floor\'s turning friction) and knees, wrench and friction-cone '
@@ -1088,6 +1260,8 @@ def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=Fal
                 producer='humanities/dance/motion/realise.py')
     on, force = contact_record(prob, solver, times)
     meta['floor'] = dict(lowest_sole_point_m=round(float(lowest_sole(prob, QS)), 4))
+    if prob.air_plans:
+        meta['aerial'] = prob.air_plans
     save_motion(out_dir / f'{tag}.npz', times, P, Q, C, QS, meta, contact_on=on, contact_force=force)
     (out_dir / f'{tag}_report.json').write_text(json.dumps(dict(meta=meta, nodes=report), indent=1))
     return prob, solver, report
@@ -1095,21 +1269,24 @@ def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=Fal
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument('phrase', choices=['canopy', 'suspension', 'test'])
+    ap.add_argument('phrase', choices=['canopy', 'canopy_salto', 'air', 'suspension', 'test'])
     ap.add_argument('--units', default=None, help='i:j, a slice of the placed units')
     ap.add_argument('--span', default=None, help='t0:t1, seconds of the phrase to solve on their own')
     ap.add_argument('--maxiter', type=int, default=200)
     ap.add_argument('--windows', action='store_true', help='solve in overlapping windows (a whole phrase)')
+    ap.add_argument('--window', type=float, default=3.5, help='window length, s (long enough for push, flight, landing)')
+    ap.add_argument('--step', type=float, default=1.0, help='seconds of each window kept')
     ap.add_argument('--finish', type=float, default=0.0, help='seconds to hold the last shape at rest')
     ap.add_argument('--tag', default=None)
     ap.add_argument('--verbose', action='store_true')
     a = ap.parse_args()
-    ph = {'canopy': gr.first_phrase, 'suspension': gr.suspension_study}.get(a.phrase, gr.first_phrase)()
+    ph = {'canopy': gr.first_phrase, 'canopy_salto': gr.canopy_and_salto, 'air': gr.air_study,
+          'suspension': gr.suspension_study}.get(a.phrase, gr.first_phrase)()
     units = tuple(int(x) for x in a.units.split(':')) if a.units else None
     span = tuple(float(x) for x in a.span.split(':')) if a.span else None
     log = (lambda r: print(json.dumps(r), flush=True)) if a.windows else None
     prob, solver, report = realise(ph, units, maxiter=a.maxiter, verbose=a.verbose, windows=a.windows, span=span,
-                                   finish_s=a.finish, tag=a.tag, window_log=log)
+                                   finish_s=a.finish, tag=a.tag, window_log=log, window_s=a.window, step_s=a.step)
     print(f'{len(prob.nodes)} nodes, {solver.iter} iterations, cost {solver.cost:.4g}, gap {solver.ffeas:.2e}, '
           f'{prob.seconds:.0f} s')
     return 0

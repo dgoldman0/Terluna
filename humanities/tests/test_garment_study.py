@@ -149,3 +149,23 @@ def test_tethers_hold_a_heavy_hem_without_touching_slack_cloth():
         out[tethers is None] = float(1.0 - cl.x[foot, 2].mean())
     assert out[False] <= 0.5 * 1.02 + 1e-3                # tethered: within the tether
     assert out[True] > out[False]                          # untethered, one stretch pass lets the bar pull further
+
+
+def test_cuff_tethers_hold_each_sleeve_to_its_own_cuff():
+    """Water sleeves' tethers anchor every vertex to a vertex of its own sleeve's cuff, at 1.05 times its distance
+    from the cuff in the pattern, which for a tube is its distance along the sleeve."""
+    from humanities.dance.garment.body import Body, MotionPose
+    from humanities.dance.garment.garments import cuff_tethers, water_sleeves
+    from humanities.dance.garment.trials import TEST_PATTERN
+    body = Body()
+    mp = MotionPose(TEST_PATTERN, body, t_raised=1.0, t_lower=1.0, t_hold=1.0)
+    G = water_sleeves(body, mp(-mp.pre), h=0.05)
+    anchor, length = cuff_tethers(G)
+    half = G.piece.n_vertices // 2
+    uv = G.piece.vertex_uv
+    for side, lo in (('L', 0), ('R', half)):
+        ring = set(G.piece.rings[f'{side}_start'])
+        idx = np.arange(lo, lo + half)
+        assert all(a in ring for a in anchor[idx])
+        assert np.allclose(length[idx], 1.05 * uv[idx, 1], atol=1e-9)
+
