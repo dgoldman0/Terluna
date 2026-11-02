@@ -48,17 +48,15 @@ def replay(prob, solver, friction=None, density=1.40, feedback=True):
     mj.dof_armature[:] = 0.0
     from humanities.dance.motion.realise import MU
     mj.geom_friction[:, 0] = friction if friction is not None else MU
+    from humanities.dance.motion.realise import DT
     mj.actuator_ctrllimited[:] = 1
     md = mujoco.MjData(mj)
     mp = MujocoMap(prob.model, mj)
     amap = actuator_map(prob.model, mj)
     state = prob.state
-    steps = []
-    xs_all, us_all, K_all = list(solver.xs), list(solver.us), list(solver.K)
-    for x, u, K, m in zip(xs_all[:-1], us_all, K_all, prob.problem.runningModels):
-        if isinstance(m, crocoddyl.ActionModelImpulseFwdDynamics):
-            continue
-        steps.append((x, u, K, m.dt))
+    # The solution's running nodes (impulses are instants the contacts resolve themselves).
+    steps = [(r['x'], r['u'], r['K'], DT) for r in solver.records if not r['impulse']]
+    xs_all = solver.xs
     x0 = solver.xs[0]
     qpos, qvel = mp.to_mujoco(x0[:prob.model.nq], x0[prob.model.nq:])
     md.qpos[:] = qpos

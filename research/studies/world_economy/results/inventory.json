@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/inventory.py": "721e67cd0d546969613d11663249c8204fd0c6137e3cbf4d95b06d962024d9d1",
-      "research/studies/world_economy/inputs.json": "fdaf8e96a301dca1fe8bd436dd3179bca593a9e3311490b9c6fc53870a45aa2e"
+      "research/studies/world_economy/inputs.json": "c231c2ebef27175356c5609c755e34c6d108c695efd1da2d7566c0d9aa3c354d"
     }
   },
   "evidence": "Reproducible inventory of committed engineering screens and accepted population; no construction quotation, market estimate, validated capacity or GDP forecast.",
@@ -113,7 +113,7 @@
     },
     "research/studies/distributions/results/distributions.json": {
       "schema": "terluna.research.distributions/1",
-      "sha256": "ed65508a3cd9f6ea055333824f28cb3c14897bbdbd4d4ee36422afe8e514febb",
+      "sha256": "ab9861e2c893ebeeeea82edc57e29f3388c69134f9de215ec9b1ef6a7ecf7ea6",
       "evidence": "A screen on committed and bound products: the food study's mixes and their feasible ranges, the land-cities highlands, tubes and water lift, the ways-of-living settings and sky towns, the inhabited-volume envelopes and roaming case, the zonal-wind product's spreads and gathering, the heritage register, the population and computing screens, ecology's living light and sky ecology, resources' phosphorus routes and main's places, with two primary sources on free-space and Mars settlements. People are placed by rule; every cost is arithmetic on those products. No settlement, farm, tube, sky town, traffic system, habitat or colony has been designed or tested, and no capacity is credited to the colonies.",
       "values": {
         "distributions.C'.people_billion": {
@@ -221,7 +221,7 @@
     },
     "provisioning/results/power.json": {
       "schema": "terluna.provisioning.power/1",
-      "sha256": "c51390f7ed66d4012892c71d3ae698c89c27f6b85017ed5520c693a5d634247b",
+      "sha256": "f51f1b5e870791ddc873af326c9023f8f666bf404b77d9b8a0102f669643c794",
       "evidence": "Screen-level arithmetic and one-dimensional radiative transfer on committed products. The gaseous absorption is ITU-R P.676-13 Annex 1 line by line, reproduced to 1e-12 against ITU-R Study Group 3's validation examples on Earth, then integrated through the atmosphere domain's prescribed moon_1.2atm column at 295 K with oxygen at Earth's partial pressure: a computed result for a prescribed clear-sky column, on line parameters fitted to Earth's air. Rain uses ITU-R P.838-3 with Earth's drop spectra, its rate scaled by the Moon's slower fall (an estimate). The ring's view is geometry on the held matched stack, circular rings at their layout radii and tilts. Receivers, beams, grid, faults and storage are sized from the products and labelled design guesses; nothing is simulated through time beyond sampling the lunar cycle and the libration of the ring plane.",
       "values": {
         "reserves.ring_fault.delivered_total_tw": [
@@ -252,7 +252,7 @@
     },
     "research/studies/food_systems/results/food_blend.json": {
       "schema": "terluna.research.food-blend/1",
-      "sha256": "b7a53443c3a6d1995289a0a6c1d23c357e72fa8383ee95b3c3620153ce48d1ce",
+      "sha256": "4fc30397d1c78ee90bf97655ec77fcda1e0c9879263cda856c97009357874220",
       "evidence": "A screen on the food study's basis and mix rules, recombined: each blend is one case built from the three mixes' rules, with heat, dimming, N2O and methane from the totals. The weights come from a stated rule over a 5% grid. The heritage meat uses Earth's global per-kilogram land use and FAO GLEAM's methane intensities for a basket of the author's examples. No crop, livestock, grassland, climate or ecosystem model runs here.",
       "values": {
         "blend.8.wild_30_hybrid_20.power_tw": {
@@ -404,7 +404,7 @@
     },
     "research/studies/terrain_through_time/results/terrain_through_time.json": {
       "schema": "terluna.research.terrain-through-time/1",
-      "sha256": "0a8d470305580faee12a01f495dc95b38187803216acb7f1cf7505642adc9f5a",
+      "sha256": "f1830590e893d7b20acfb76b7a5166d8a4ebfb5554b03043e2ddac987d44287a",
       "evidence": "Calculations on committed products: the routing summary (geography's drainage rerun, erosion by relief and rain, units filled in log-spaced steps), the sea chemistry's works and the sea phosphorus study's dredging. Crater degradation is linear diffusion of Pike's fresh profile on a radial grid; travertine is the carbon cycle's carbonate solver at the land's air temperature; dam builders take Earth's capacity thresholds through equal Shields numbers. Earth's values are reference points, design guesses are named, and nothing here is validated against a lunar landscape.",
       "values": {
         "upkeep.rates": {
@@ -513,7 +513,7 @@
     },
     "research/studies/carbon_cycle/results/carbon_cycle.json": {
       "schema": "terluna.research.carbon-cycle/1",
-      "sha256": "48277d5ce54ce3acfb331680ac4face2b4b1a9b57227cb6d724ba4d6f56e5ae8",
+      "sha256": "4b3803c66f7ff0c356efa5c96144bd8e03b48300425ed4b5b49629a7ae7a4fe4",
       "evidence": "A box model on committed products: the air and its 400 ppm of CO2, the design case's temperatures, the drainage's runoff and lakes, the atlas's seas, C''s land uses with the food blend, the gas ledger's methane, the sky ecology's aerophytes, resources' dredged deltas and its kilns. Its rates are Earth measurements carried to the Moon (the basalt weathering law, field ageing, biome inventories, lake and marine burial, peat and desert carbonate) beside design guesses, each labelled in the assumptions; the groundwater's share of the weathering, the rock's calcite and the filling crust's uptake come from the springs study and stage 1; its carbonate chemistry uses published constants at the design temperatures. A runnable calculation with checked conservation and step convergence: ecosystems, sediments and the seas enter as well-mixed boxes with Earth rates, and no lunar measurement stands behind any rate.",
       "values": {
         "questions.imports": {

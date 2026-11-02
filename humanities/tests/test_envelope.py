@@ -99,3 +99,37 @@ def test_partnering_and_the_leap_stage():
     assert p['throw_moon']['take_off_m_s'] == pytest.approx(math.sqrt(2 * a * env.THROW_STROKE_M), abs=1e-3)
     for row in PRODUCT['stage_for_a_leap']['rows']:
         assert row['total_m'] == pytest.approx(row['approach_m'] + row['flight_m'] + row['run_out_m'], abs=0.02)
+
+
+def test_aerial_figures_follow_their_mechanics():
+    a = PRODUCT['aerials']
+    I = a['inertia_kg_m2']
+    # The corkscrew's tilt: twist rate L sin(tilt) / I_twist equal to the somersault's rate.
+    lay = I['layout, arms gathered']
+    assert a['corkscrew']['tilt_deg'] == pytest.approx(math.degrees(math.asin(lay['twist'] / lay['somersault'])), abs=0.1)
+    # The hanging salto's programme turns the body exactly once.
+    Io, It = I['layout, arms overhead']['somersault'], I['tuck']['somersault']
+    for where in ('moon', 'earth'):
+        h = a['hanging_salto'][where]
+        T = a['flights_s'][where]
+        turned = h['angular_momentum_N_m_s'] * T * (0.6 / Io + 0.4 / It)
+        assert turned == pytest.approx(2 * math.pi, rel=0.01)
+        assert h['hang_s'] == pytest.approx(0.4 * T, abs=0.01)
+    # The Moon's take-off covers each figure (the flat spin from the high jump); Earth's standing take-off covers none
+    # of the corkscrew, star wheel and flat spin.
+    cap = a['take_off']
+    for fig in ('corkscrew', 'star_wheel'):
+        assert a[fig]['angular_momentum_N_m_s']['moon'] < cap['moon']['somersault_or_cartwheel_N_m_s']
+        assert a[fig]['angular_momentum_N_m_s']['earth'] > cap['earth']['somersault_or_cartwheel_N_m_s']
+    flat = a['flat_spin']['angular_momentum_N_m_s']
+    assert flat['moon_high'] < cap['moon_high']['about_the_vertical_N_m_s'] and flat['moon'] < cap['moon']['about_the_vertical_N_m_s']
+    assert flat['earth'] > cap['earth']['about_the_vertical_N_m_s']
+    assert a['flat_spin']['spread_is_the_largest_axis']
+    # The take-off's turning follows from its mean push.
+    v = PRODUCT['jumps']['choreographic'][1]['take_off_m_s']
+    t = 2 * env.H_PO_M / v
+    assert cap['moon']['mean_push_N'] == pytest.approx(env.MASS_KG * (v / t + GM), abs=0.1)
+    # Sleeves stand above the falling hands only on the Moon, and never further than their length.
+    s = a['sleeve_flight']
+    assert 0.5 < s['moon']['sleeves_above_hands_at_landing_m'] <= env.SLEEVE_LENGTH_M
+    assert s['earth']['sleeves_above_hands_at_landing_m'] < 0.2 and s['moon']['settle_after_landing_s'] > 10 * s['earth']['settle_after_landing_s']

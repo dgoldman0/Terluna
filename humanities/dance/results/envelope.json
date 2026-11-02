@@ -3,8 +3,9 @@
  "producer": {
   "domain": "humanities",
   "files": {
-   "humanities/dance/envelope.py": "27da24f59c95cba1",
-   "humanities/dance/body/model.py": "9c8c01f82b2d50cb",
+   "humanities/dance/envelope.py": "660f3247df5da23d",
+   "humanities/dance/body/model.py": "2b553c5592ee07a5",
+   "humanities/dance/body/pose.py": "a8c420d770df0a9d",
    "habitation/low_gravity/movement.py": "af012c7a4d59ea6f"
   },
   "constants": {
@@ -12,7 +13,8 @@
    "STANDARD_GRAVITY": 9.80665
   },
   "inputs": {
-   "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1"
+   "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
+   "humanities/dance/vocabulary/poses.json": "128fac64dc50a3ed"
   }
  },
  "evidence": "Closed-form and one-dimensional mechanics for one representative dancer (the body model) at the shared gravity and the design run's air, with stated parameter choices beside each figure. A screen of capabilities and limits; the whole-body motion engine and the garment solver test them.",
@@ -576,6 +578,133 @@
     "earth_same_speeds_total_m": 1.69
    }
   ]
+ },
+ "aerials": {
+  "lean_m": 0.25,
+  "spin_lever_m": 0.3,
+  "flights_s": {
+   "moon": 2.653,
+   "moon_high": 3.249,
+   "earth": 0.486
+  },
+  "take_off": {
+   "moon": {
+    "push_s": 0.334,
+    "mean_push_N": 443.8,
+    "somersault_or_cartwheel_N_m_s": 37.1,
+    "about_the_vertical_N_m_s": 22.2
+   },
+   "moon_high": {
+    "push_s": 0.273,
+    "mean_push_N": 620.9,
+    "somersault_or_cartwheel_N_m_s": 42.4,
+    "about_the_vertical_N_m_s": 25.4
+   },
+   "earth": {
+    "push_s": 0.302,
+    "mean_push_N": 972.4,
+    "somersault_or_cartwheel_N_m_s": 73.5,
+    "about_the_vertical_N_m_s": 44.1
+   }
+  },
+  "inertia_kg_m2": {
+   "layout, arms overhead": {
+    "cartwheel": 9.714,
+    "somersault": 9.38,
+    "twist": 0.614
+   },
+   "layout, arms gathered": {
+    "cartwheel": 8.138,
+    "somersault": 7.82,
+    "twist": 0.824
+   },
+   "tuck": {
+    "cartwheel": 2.175,
+    "somersault": 2.369,
+    "twist": 1.491
+   },
+   "pike": {
+    "cartwheel": 3.724,
+    "somersault": 4.722,
+    "twist": 3.594
+   },
+   "star": {
+    "cartwheel": 10.103,
+    "somersault": 7.564,
+    "twist": 2.758
+   },
+   "flat spread": {
+    "cartwheel": 8.293,
+    "somersault": 3.391,
+    "twist": 5.305
+   }
+  },
+  "tuck_and_pike_shares": {
+   "tuck": 0.253,
+   "pike": 0.503,
+   "assumed": {
+    "tuck": 0.3,
+    "pike": 0.55
+   }
+  },
+  "corkscrew": {
+   "tilt_deg": 6.1,
+   "twist_rev_s": {
+    "moon": 0.38,
+    "earth": 2.06
+   },
+   "angular_momentum_N_m_s": {
+    "moon": 18.5,
+    "earth": 101.1
+   }
+  },
+  "star_wheel": {
+   "rev_s": {
+    "moon": 0.38,
+    "earth": 2.06
+   },
+   "angular_momentum_N_m_s": {
+    "moon": 23.9,
+    "earth": 130.6
+   }
+  },
+  "flat_spin": {
+   "angular_momentum_N_m_s": {
+    "moon": 19.6,
+    "moon_high": 16.0,
+    "earth": 107.2
+   },
+   "spread_is_the_largest_axis": true
+  },
+  "hanging_salto": {
+   "open_over_tuck": 3.96,
+   "moon": {
+    "angular_momentum_N_m_s": 10.2,
+    "hang_s": 1.06,
+    "hang_sweep_deg": 65.9
+   },
+   "earth": {
+    "angular_momentum_N_m_s": 55.5,
+    "hang_s": 0.19,
+    "hang_sweep_deg": 65.9
+   }
+  },
+  "sleeve_flight": {
+   "moon": {
+    "body_descent_s": 1.33,
+    "landing_m_s": 2.15,
+    "sleeve_sink_m_s": 0.227,
+    "sleeves_above_hands_at_landing_m": 1.13,
+    "settle_after_landing_s": 5.0
+   },
+   "earth": {
+    "body_descent_s": 0.24,
+    "landing_m_s": 2.38,
+    "sleeve_sink_m_s": 0.596,
+    "sleeves_above_hands_at_landing_m": 0.14,
+    "settle_after_landing_s": 0.2
+   }
+  }
  },
  "microgravity": {
   "traction": "none: no weight presses the feet, so every push needs a surface to push against",

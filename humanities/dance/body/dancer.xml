@@ -97,6 +97,8 @@
           <joint name="L_knee" type="hinge" axis="0 1 0" range="-0.0872665 2.61799"/>
           <inertial pos="-0.01 0 -0.180451" mass="2.6455" diaginertia="0.0324419 0.0314912 0.00382061"/>
           <geom name="L_shank_cap0" type="capsule" fromto="-0.005 0 -0.02 -0.005 0 -0.380629" size="0.048" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+          <geom name="L_kneecap" type="sphere" pos="0.045 0 -0.039" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+          <site name="L_kneecap" pos="0.045 0 -0.045" size="0.005"/>
           <body name="L_foot" pos="0 0 -0.410629">
             <joint name="L_ankle" type="hinge" axis="0 1 0" range="-0.436332 1.48353"/>
             <joint name="L_subtalar" type="hinge" axis="-1 0 0" range="-0.349066 0.523599"/>
@@ -128,6 +130,8 @@
           <joint name="R_knee" type="hinge" axis="0 1 0" range="-0.0872665 2.61799"/>
           <inertial pos="-0.01 0 -0.180451" mass="2.6455" diaginertia="0.0324419 0.0314912 0.00382061"/>
           <geom name="R_shank_cap0" type="capsule" fromto="-0.005 0 -0.02 -0.005 0 -0.380629" size="0.048" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+          <geom name="R_kneecap" type="sphere" pos="0.045 0 -0.039" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+          <site name="R_kneecap" pos="0.045 0 -0.045" size="0.005"/>
           <body name="R_foot" pos="0 0 -0.410629">
             <joint name="R_ankle" type="hinge" axis="0 1 0" range="-0.436332 1.48353"/>
             <joint name="R_subtalar" type="hinge" axis="1 0 0" range="-0.349066 0.523599"/>

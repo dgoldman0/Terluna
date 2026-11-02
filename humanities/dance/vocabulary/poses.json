@@ -27,7 +27,7 @@
    "star_air": {"origin": "modern, gymnastics", "joints": {"G_hip": {"elev": 40, "az": 90, "twist": 20}, "S_hip": {"elev": 40, "az": 90, "twist": 20}, "G_knee": 0, "S_knee": 0, "G_ankle": 60, "S_ankle": 60}},
    "fetal_air": {"origin": "modern", "joints": {"G_hip": {"elev": 100, "az": 15, "twist": 10}, "S_hip": {"elev": 80, "az": 15, "twist": 10}, "G_knee": 110, "S_knee": 120, "G_ankle": 40, "S_ankle": 40}},
    "lunge_forward": {"origin": "contemporary", "joints": {"G_hip": {"elev": 75, "az": 0, "twist": 10}, "G_knee": 85, "S_hip": {"elev": 30, "az": 180, "twist": 10}, "S_knee": 5, "S_ankle": -10}},
-   "kneel_one": {"origin": "general", "joints": {"G_hip": {"elev": 90, "az": 0, "twist": 5}, "G_knee": 90, "S_hip": {"elev": 5, "az": 180, "twist": 5}, "S_knee": 100, "S_ankle": 40}}
+   "kneel_one": {"origin": "general", "joints": {"G_hip": {"elev": 90, "az": 0, "twist": 5}, "G_knee": 90, "S_hip": {"elev": 5, "az": 180, "twist": 5}, "S_knee": 100, "S_ankle": 80}}
   },
   "arms": {
    "bras_bas": {"origin": "ballet", "joints": {"G_shoulder": {"elev": 15, "az": 30, "twist": 30}, "S_shoulder": {"elev": 15, "az": 30, "twist": 30}, "G_elbow": 25, "S_elbow": 25}},

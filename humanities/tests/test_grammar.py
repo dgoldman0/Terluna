@@ -84,3 +84,49 @@ def test_the_example_phrases_are_lunar_and_flowing():
     gen_a, _ = g.generate(5)
     gen_b, _ = g.generate(5)
     assert g.evaluate_phrase(gen_a) == g.evaluate_phrase(gen_b)          # reproducible from its seed
+
+
+def test_weight_shifts_and_falls_follow_gravity():
+    # A shift onto one foot is an inverted pendulum pushed from the feet's edges: its time scales as 1/sqrt(g).
+    moon = g.shift_s(0.10)
+    g.G = 9.80665
+    try:
+        earth = g.shift_s(0.10)
+        grip_earth = g.fall_grip(35)
+    finally:
+        g.G = GM
+    assert 1.5 < moon < 2.0 and moon / earth == pytest.approx(math.sqrt(9.80665 / GM), rel=1e-6)
+    # Falling as one piece asks the same grip on both worlds, under a point mass's tan(angle), and the vocabulary
+    # stops falls where the dance floor's grip still holds.
+    assert g.fall_grip(35) == pytest.approx(grip_earth, rel=1e-9)
+    assert g.fall_grip(35) < math.tan(math.radians(35)) and g.fall_grip(35) <= g.MU
+    assert g.fall_grip(g.UNITS['long_fall']['params']['to_deg']['max']) <= g.MU + 0.01
+
+
+def test_junctions_never_stand_one_foot_through_two_stances():
+    for ph in (g.first_phrase(), g.suspension_study()):
+        seq = [(pl, p) for pl in ph.placed for p in pl.phases]
+        for (pa, a), (pb, b) in zip(seq, seq[1:]):
+            if pa is not pb and a['kind'] == b['kind'] == 'stance':
+                assert a['support'] != b['support'] or a['support'] not in ('L', 'R'), (ph.name, pa.unit, pb.unit)
+    first = g.first_phrase()
+    units = [pl.unit for pl in first.placed]
+    # Standing on both feet, the weight shifts in place before the fall; the jete's landing is the carve.
+    assert units[units.index('long_fall') - 1] == 'weight_shift'
+    jete = first.placed[units.index('grand_jete')]
+    assert jete.dropped_landing and jete.exit.support == 'none' and jete.phases[-1]['kind'] == 'flight'
+    # The whirl starts from rest and turns on the spot; the spiral ends kneeling, still.
+    whirl = first.placed[units.index('whirl')]
+    assert whirl.entry.speed <= 0.15 and whirl.exit.speed == 0.0 and whirl.phases[0]['support'] == 'both'
+    assert first.placed[-1].exit.support == 'floor' and first.placed[-1].phases[-1]['support'] == 'kneel'
+
+
+def test_the_air_study_turns_in_the_air_and_brakes_on_the_floor():
+    air = g.air_study()
+    e = g.evaluate_phrase(air)
+    assert e['flights_over_1_s'] >= 5 and e['share_aloft'] > 0.5 and e['climax_at'] > 0.5
+    assert e['aerial_revolutions'] == {'cartwheel': 1.0, 'somersault': 2.0, 'twist': 1.0, 'turn': 1.0}
+    # A closing step that stops the travel takes as long as the floor's grip needs.
+    for pl in air.placed:
+        if pl.connector and pl.note.startswith('close to both feet, stopping'):
+            assert pl.duration >= pl.entry.speed / (g.MU * GM) - 1e-9

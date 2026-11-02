@@ -15,6 +15,7 @@ from humanities.dance.body.model import MJCF_OUT
 from humanities.dance.motion import realise as rz
 from humanities.dance.motion.pinmodel import MujocoMap, build, neutral
 from humanities.dance.motion.replay import actuator_map
+import crocoddyl
 
 
 @pytest.fixture(scope='module')
@@ -105,5 +106,89 @@ def test_timeline_carries_the_contact_schedule():
     nodes = rz.timeline(ph.placed)
     flight = [n for n in nodes if not n.contacts]
     assert flight and len(flight) * rz.DT == pytest.approx(gr.flight_s(0.5), abs=2 * rz.DT)
-    landings = [n for n in nodes if n.landing]
-    assert len(landings) == 1 and set(landings[0].landing) == {'L', 'R'}
+    # One landing from the air, on both feet; the heels coming down from the rise are landings of their own.
+    from_air = [n for k, n in enumerate(nodes) if n.landing and k > 0 and not nodes[k - 1].contacts]
+    assert len(from_air) == 1 and set(from_air[0].landing) == {'L', 'R'}
+    heels = [n for k, n in enumerate(nodes) if n.landing and k > 0 and nodes[k - 1].contacts]
+    assert all(set(nodes[nodes.index(n) - 1].contacts.values()) == {'ball'} for n in heels)
+
+
+def test_the_whole_phrase_is_scheduled_on_contacts_that_can_do_it():
+    ph = gr.first_phrase()
+    nodes = rz.timeline(ph.placed, finish_s=1.0)
+    for n in nodes:
+        if n.phase == 'turn':
+            # A turn stands on one pivoting foot; the other foot touches down only to push.
+            assert 'pivot' in n.contacts.values(), n.t
+    # Two feet held without swivel never turn the body more than the hips can twist between them.
+    run, yaw0 = False, 0.0
+    for n in nodes:
+        held = len(n.contacts) == 2 and all(k in ('flat', 'ball') for k in n.contacts.values())
+        if held and not run:
+            yaw0 = n.yaw
+        if held:
+            assert abs(n.yaw - yaw0) < math.radians(70), n.t
+        run = held
+    fall = [n for n in nodes if n.unit == 'long_fall' and n.phase == 'fall']
+    assert fall[0].contacts == {'L': 'flat'} and fall[-1].contacts == {'L': 'ball'}
+    whirl = [n for n in nodes if n.unit == 'whirl' and n.phase == 'turn']
+    assert sum(1 for n in whirl if n.landing) == 3          # a push each revolution
+    last = nodes[-1]
+    assert last.phase == 'hold' and set(last.contacts.values()) == {'flat', 'knee'} and not last.com_vel.any()
+
+
+def test_footholds_are_planned_for_the_whole_phrase():
+    ph = gr.first_phrase()
+    nodes = rz.timeline(ph.placed, finish_s=1.0)
+    prob = rz.Problem(nodes)
+    prob.plan()
+    for i, n in enumerate(nodes):
+        for fid, M in prob.node_targets[i].items():
+            p = M.translation if isinstance(M, pin.SE3) else M
+            assert abs(p[2]) < 1e-9 and np.linalg.norm(p[:2] - n.com) < 0.8, (n.t, prob.model.frames[fid].name)
+    # The whirl's pivot sits under the centre of mass it turns about.
+    i = next(k for k, n in enumerate(nodes) if n.unit == 'whirl' and n.phase == 'turn')
+    pivot = next(M for f, M in prob.node_targets[i].items())
+    assert np.linalg.norm(pivot[:2] - nodes[i].com) < 0.02
+
+
+def test_pivot_friction_opposes_the_swivel_with_exact_velocity_derivatives():
+    m, _ = build()
+    state = crocoddyl.StateMultibody(m)
+    fid = m.getFrameId('R_toesole')
+    act = rz.PivotFriction(state, [fid])
+    rng = np.random.default_rng(5)
+    q, v = neutral(m), rng.normal(size=m.nv) * 0.5
+    x, u = np.concatenate([q, v]), np.zeros(m.nv - 6)
+    d = act.createData()
+    act.calc(d, x, u)
+    act.calcDiff(d, x, u)
+    jz = pin.computeFrameJacobian(m, m.createData(), q, fid, pin.LOCAL_WORLD_ALIGNED)[5]
+    w = jz @ v
+    assert np.sign(jz @ d.tau) == -np.sign(w)                # the floor's moment works against the swivel
+    eps, num = 1e-6, np.zeros((m.nv, m.nv))
+    for k in range(m.nv):
+        v2 = v.copy()
+        v2[k] += eps
+        d2 = act.createData()
+        act.calc(d2, np.concatenate([q, v2]), u)
+        num[:, k] = (d2.tau - d.tau) / eps
+    assert np.allclose(d.dtau_dx[:, m.nv:], num, atol=1e-4)
+
+
+def test_the_posed_body_places_its_joints_as_the_engine_does():
+    from humanities.dance.body import pose
+    m, _ = build()
+    d = m.createData()
+    shape = dict(legs='star_air', arms='high_v', torso='spiral', head='lifted')
+    node = rz.Node(t=0.0, contacts={}, targets=rz.shape_targets({**rz.CARRIAGE, **shape}, 'R'), com=np.zeros(2))
+    q = rz.Problem.__new__(rz.Problem)
+    q.model, q.q0 = m, neutral(m)
+    qq = rz.Problem.reference_q(q, node)
+    qq[:3] = 0.0
+    pin.framesForwardKinematics(m, d, qq)
+    fr = pose.frames(pose.joint_values(shape, 'R'))
+    for seg in ('L_hand', 'R_toes', 'head', 'L_shank'):
+        R, p = fr[seg]
+        assert np.allclose(d.oMf[m.getFrameId(seg)].translation, p, atol=1e-9), seg
+        assert np.allclose(d.oMf[m.getFrameId(seg)].rotation, R, atol=1e-9), seg

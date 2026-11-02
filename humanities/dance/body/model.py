@@ -203,9 +203,10 @@ def build_segments():
 
 
 def contact_points():
-    """Points of the sole and hand that can take the floor's force, world coordinates at rest. Sole points lie on the
-    floor (z = 0) at rest; the heel pair and the two metatarsal heads span the foot's support, the toe point carries
-    demi-pointe."""
+    """Points of the sole, hand and knee that can take the floor's force, world coordinates at rest. Sole points lie on
+    the floor (z = 0) at rest; the heel pair and the two metatarsal heads span the foot's support, the toe point carries
+    demi-pointe. The kneecap point sits on the front of the shank just below the knee's centre, where a kneeling
+    dancer meets the floor."""
     pts = {}
     mtp_x = -0.050 + 0.78 * FOOT_LEN
     for s in (1, -1):
@@ -216,6 +217,7 @@ def contact_points():
         pts[f'{L}_ball_l'] = (f'{L}_foot', (mtp_x - 0.025, s * (HIP_Y + 0.036), 0.0))
         pts[f'{L}_toe'] = (f'{L}_toes', (-0.050 + FOOT_LEN - 0.010, s * (HIP_Y - 0.010), 0.0))
         pts[f'{L}_palm'] = (f'{L}_hand', (0.008, s * 0.183, MET3 - 0.020))
+        pts[f'{L}_kneecap'] = (f'{L}_shank', (0.045, s * HIP_Y, KJC - 0.045))
     return pts
 
 

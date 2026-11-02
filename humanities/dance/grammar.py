@@ -88,9 +88,46 @@ def fall_speed(angle_deg, a0=2.0):
     return L * math.sqrt(max(w2, 0.0))
 
 
-def prep_s(rev_per_s):
-    """Preparation that builds a turn's angular momentum with the floor's grip (arms-in inertia)."""
-    I = env.whole_body_inertia()[2][2, 2]
+def fall_grip(angle_deg, a0=2.0):
+    """The most grip a fall as one piece asks of the floor on its way from a0 to angle_deg: the ratio of the floor's
+    sideways push to its upward push, for the whole body pivoting about its foot from rest. The body's own moment of
+    inertia about its centre of mass slows the fall's sideways acceleration, so a dancer needs less grip than a point
+    mass on a rod (tan(angle)); the ratio is the same at any gravity."""
+    L = _com_height()
+    k2 = env.whole_body_inertia()[2][1, 1] / env.MASS_KG
+    r = L * L / (L * L + k2)
+    c0 = math.cos(math.radians(a0))
+    worst = 0.0
+    for i in range(1, 201):
+        th = math.radians(a0 + (angle_deg - a0) * i / 200)
+        s, c = math.sin(th), math.cos(th)
+        worst = max(worst, r * s * (3 * c - 2 * c0) / (1 - r * (s * s + 2 * c * (c0 - c))))
+    return worst
+
+
+def shift_s(across_m, half_stance_m=0.10, half_foot_m=0.04):
+    """Carrying the centre of mass from between the feet onto one foot without a step, as fast as the floor allows. The
+    body is an inverted pendulum pushed sideways from the far foot's outer edge and braked from the near foot's outer
+    edge (x'' = (g/h)(x - p), p at the support's edges), coming to rest over the standing foot. Gravity sets the pace:
+    a 10 cm shift takes 1.7 s on the Moon and 0.7 s on Earth."""
+    w = math.sqrt(G / _com_height())
+    edge = half_stance_m + half_foot_m
+
+    def meet(a):          # pushed for a/w, braked for b/w: positions where the two arcs meet
+        b = math.asinh(edge * math.sinh(a) / (edge - across_m))
+        return edge * (math.cosh(a) - 1) - (edge - (edge - across_m) * math.cosh(b)), b
+
+    lo, hi = 0.0, 6.0
+    for _ in range(60):
+        mid = 0.5 * (lo + hi)
+        lo, hi = (mid, hi) if meet(mid)[0] < 0 else (lo, mid)
+    return (lo + meet(lo)[1]) / w
+
+
+def prep_s(rev_per_s, arms_open=0):
+    """Preparation that builds a turn's angular momentum with the floor's grip, for a turn with the arms gathered (the
+    default) or open in second (arms_open=1), which nearly triples the body's inertia about the vertical."""
+    I = env.whole_body_inertia(arms_side=bool(arms_open))[2][2, 2]
     tau = MU * env.MASS_KG * G * env.FEET_APART_M / 2
     return I * 2 * math.pi * rev_per_s / tau
 
@@ -104,7 +141,8 @@ def stride_dv(stride_rise_m=0.08):
 
 
 PHYSICS = dict(takeoff=takeoff, flight_s=flight_s, push_s=push_s, absorb_s=absorb_s, descend_s=descend_s,
-               topple_s=topple_s, fall_speed=fall_speed, prep_s=prep_s, max=max, min=min, sqrt=math.sqrt)
+               topple_s=topple_s, fall_speed=fall_speed, prep_s=prep_s, shift_s=shift_s, max=max, min=min,
+               sqrt=math.sqrt)
 
 
 def evaluate(expr, params):
@@ -139,6 +177,7 @@ class State:
     t: float = 0.0
     x: float = 0.0
     y: float = 0.0
+    aloft: bool = False            # the unit ended in the air: the next stance is a landing
 
 
 @dataclass
@@ -153,6 +192,8 @@ class Placed:
     exit: State
     connector: bool = False
     note: str = ''
+    dropped_first: bool = False     # its first stance continues the stance it entered on
+    dropped_landing: bool = False   # the next unit's landing replaces its own
 
     def describe(self):
         u = UNITS[self.unit]
@@ -197,6 +238,10 @@ def expand_phases(u, p, side):
             q = dict(ph)
             q['support'] = resolve(ph.get('support', 'none'), side)
             q['duration'] = evaluate(ph['duration'], p) if not isinstance(ph['duration'], (int, float)) else float(ph['duration'])
+            if q.get('shapes') == 'along path':
+                # The arms pass through the path's positions at equal intervals of the phase.
+                path = p['path']
+                q['shapes'] = [{'at': k / max(len(path) - 1, 1), 'arms': a} for k, a in enumerate(path)]
             out.append(q)
     return out
 
@@ -222,6 +267,8 @@ def exit_state(u, p, side, entry, t_end, phases):
         st.spin = 0.0
     elif mom == 'turning':
         st.spin = p.get('rev_per_s', entry.spin)
+        # A turn on a pivot cannot drift: the dancer travels only round the circle the unit names, once in its time.
+        st.speed = math.pi * p.get('circle_m', 0.0) / max(t_end - entry.t, 1e-9)
     if 'turn_deg' in p:
         st.heading = (entry.heading + p['turn_deg'] * (1 if side == 'L' else -1)) % 360
     if 'sleeves' in ex:
@@ -239,16 +286,36 @@ def exit_state(u, p, side, entry, t_end, phases):
     return st
 
 
-def place(unit_id, side, given, entry, connector=False, note=''):
+def continues_stance(unit_id, side, st: State):
+    """Whether the unit's first phase is a stance on the one foot already bearing the weight from a stance (not a
+    landing): then that stance is its push, and a dancer never adds a second stance on the same foot."""
+    if st.aloft or st.support not in ('L', 'R'):
+        return False
+    first = UNITS[unit_id]['phases'][0]
+    if first['kind'] == 'repeat':
+        first = first['of'][0]
+    return first['kind'] == 'stance' and resolve(first.get('support', 'none'), side) == st.support
+
+
+def place(unit_id, side, given, entry, connector=False, note='', drop_first=False, drop_landing=False):
+    """Place a unit from an entry state. drop_first: its first stance is the one the dancer is already standing in.
+    drop_landing: the unit ends in the air because the next unit (a carve) is its landing."""
     u = UNITS[unit_id]
     p = params_for(unit_id, given)
     phases = expand_phases(u, p, side)
+    if drop_first and phases and phases[0]['kind'] == 'stance':
+        phases = phases[1:]
+    if drop_landing and len(phases) >= 2 and phases[-1]['kind'] == 'stance' and phases[-2]['kind'] == 'flight':
+        phases = phases[:-1]
     t = entry.t
     for ph in phases:
         ph['t0'] = t
         t += ph['duration']
-    return Placed(unit_id, side, p, entry.t, t - entry.t, phases, entry, exit_state(u, p, side, entry, t, phases),
-                  connector, note)
+    ex = exit_state(u, p, side, entry, t, phases)
+    if drop_landing:
+        ex.support = 'none'
+    ex.aloft = bool(phases) and phases[-1]['kind'] == 'flight'
+    return Placed(unit_id, side, p, entry.t, t - entry.t, phases, entry, ex, connector, note, drop_first, drop_landing)
 
 
 # --- entry checks and the linking steps that satisfy them ---------------------------------------------------------
@@ -311,8 +378,12 @@ def motion_links(probs, unit_id, side, st: State, given=None):
             want = target
         n = max(2, math.ceil(abs(want - s.speed) / stride_dv()))
         lead = other(s.support) if s.support in ('L', 'R') else side
+        # Run on from a stance: that stance pushes into the first flight, and one more stride does the speed's work.
+        cont = continues_stance('orbit_run', lead, s)
+        n += 1 if cont else 0
         pl = place('orbit_run', lead, {'speed_m_s': want, 'strides': n, 'radius_m': max(2.0, want ** 2 / (0.5 * MU * G))}, s,
-                   connector=True, note=f'{n} strides to {"build" if want > s.speed else "spend"} speed to {want:.1f} m/s')
+                   connector=True, note=f'{n} strides to {"build" if want > s.speed else "spend"} speed to {want:.2g} m/s',
+                   drop_first=cont)
         pl.exit.speed = want
         out.append(pl)
         s = pl.exit
@@ -333,13 +404,22 @@ def support_links(unit_id, side, st: State):
     if 'any' not in allowed and s.support not in allowed:
         want = allowed[0]
         pl = None
-        if want in ('L', 'R') and s.support in ('both', other(want)):
+        if want in ('L', 'R') and s.support == 'both' and s.speed < 0.15:
+            # Standing still on both feet: the weight is carried across onto the standing foot in place.
+            pl = place('weight_shift', other(want), {}, s, connector=True, note=f'weight onto {want} in place')
+        elif want in ('L', 'R') and s.support in ('both', other(want)):
             pl = place('glide_step', other(want), {'speed_m_s': max(0.3, s.speed), 'step_m': 0.3}, s, connector=True,
                        note=f'weight onto {want}')
             pl.exit.support = want
         elif want == 'both':
-            pl = place('glide_step', s.support if s.support in ('L', 'R') else side, {'speed_m_s': max(0.3, s.speed), 'step_m': 0.25},
-                       s, connector=True, note='close to both feet')
+            # A closing step that also stops the travel: friction brakes it at mu g at most, so the step is long enough
+            # to spend the speed (v^2 / (2 mu g)), covered at the mean speed.
+            v = s.speed
+            braking = v > 0.15
+            step = max(0.25, v * v / (2 * MU * G)) if braking else 0.25
+            pl = place('glide_step', s.support if s.support in ('L', 'R') else side,
+                       {'speed_m_s': max(0.2, v / 2) if braking else max(0.3, v), 'step_m': step},
+                       s, connector=True, note='close to both feet' + (f', stopping {v:.2g} m/s' if braking else ''))
             pl.exit.support = 'both'
             pl.exit.speed = 0.0
         if pl:
@@ -360,6 +440,13 @@ class Phrase:
     def add(self, unit_id, side='R', flexible_side=True, **given):
         """Place a unit: first the links its motion needs (spin, sleeves, speed), then the side, taken on the other
         foot when only the supporting foot is wrong (as a dancer would), then any weight change still needed."""
+        # A landing unit (the carve) replaces the landing of the jump before it, which then ends in the air.
+        need = UNITS[unit_id]['entry'].get('support')
+        if need in ('none', ['none']) and self.placed and self.state.support != 'none' and not self.placed[-1].connector:
+            prev = self.placed[-1]
+            if len(prev.phases) >= 2 and prev.phases[-1]['kind'] == 'stance' and prev.phases[-2]['kind'] == 'flight':
+                self.placed[-1] = place(prev.unit, prev.side, prev.params, prev.entry, prev.connector, prev.note,
+                                        drop_first=prev.dropped_first, drop_landing=True)
         st = self.state
         fits = lambda sd, state: not any(k == 'support' for k, _ in entry_problems(unit_id, sd, state, given))
         probs = [p for p in entry_problems(unit_id, side, st, given) if p[0] != 'support']
@@ -368,7 +455,7 @@ class Phrase:
             side = other(side)
         more, st = support_links(unit_id, side, st)
         self.placed.extend(links + more)
-        self.placed.append(place(unit_id, side, given, st))
+        self.placed.append(place(unit_id, side, given, st, drop_first=continues_stance(unit_id, side, st)))
         return self
 
     @property
@@ -439,17 +526,28 @@ def evaluate_phrase(ph: Phrase):
     levels = set()
     for pl in ph.placed:
         for p in pl.phases:
-            levels.add({'flight': 'air', 'fall': 'falling'}.get(p['kind'], 'floor' if p['support'] == 'floor' else 'standing'))
+            levels.add({'flight': 'air', 'fall': 'falling'}.get(p['kind'], 'floor' if p['support'] in ('floor', 'kneel') else 'standing'))
     flights = [(pl.t0 + p['t0'] - pl.t0, p['duration']) for pl in ph.placed for p in pl.phases if p['kind'] == 'flight']
     climax = max(flights, key=lambda f: f[1])[0] / T if flights else None
     linking = sum(pl.duration for pl in ph.placed if pl.connector)
+    # Revolutions turned in the air, by axis.
+    aerial = {}
+    for pl in ph.placed:
+        for p in pl.phases:
+            if p['kind'] != 'flight':
+                continue
+            for key, axis in (('somersault_rev', 'somersault'), ('cartwheel_rev', 'cartwheel'), ('twist_rev', 'twist'),
+                              ('turn_rev', 'turn')):
+                if p.get(key) is not None:
+                    v = evaluate(p[key], pl.params) if isinstance(p[key], str) else float(p[key])
+                    aerial[axis] = round(aerial.get(axis, 0.0) + v, 2)
     return dict(duration_s=round(T, 2), units=len([p for p in ph.placed if not p.connector]),
                 connectors=len([p for p in ph.placed if p.connector]), connector_share=round(linking / T, 3),
                 families=sorted(families),
                 time_aloft_s=round(aloft, 2), share_aloft=round(aloft / T, 3), flights_over_1_s=long_flights,
                 lunar_native_share=round(native / T, 3), effort_changes=contrast, levels=sorted(levels),
                 travel_m=round(travel, 1), heading_change_deg=round(turning), stops=stops,
-                climax_at=round(climax, 2) if climax is not None else None)
+                climax_at=round(climax, 2) if climax is not None else None, aerial_revolutions=aerial)
 
 
 def score(ph: Phrase, bpm=60.0):
@@ -468,7 +566,9 @@ def score(ph: Phrase, bpm=60.0):
             flight_s=[round(f, 2) for f in flights], sleeves=pl.exit.sleeves, effort=u['effort'],
             phases=[dict(kind=p['kind'], support=p.get('support'), t0=round(p['t0'], 3),
                          seconds=round(p['duration'], 3), shapes=p.get('shapes', []),
-                         turn_rev=p.get('turn_rev'), somersault_rev=p.get('somersault_rev')) for p in pl.phases]))
+                         turn_rev=p.get('turn_rev'), somersault_rev=p.get('somersault_rev'),
+                         cartwheel_rev=p.get('cartwheel_rev'), twist_rev=p.get('twist_rev'), body=p.get('body'))
+                    for p in pl.phases]))
     return rows
 
 
@@ -559,8 +659,23 @@ def suspension_study():
     return build('Suspension Study (motif, mirror, augmentation)', seq)
 
 
+def air_study():
+    """Air Study: the aerial figures the Moon's long flights open, composed by hand. A run into a star wheel, a
+    hanging salto and a corkscrew on the spot, a sleeve flight that leaves the sleeves standing, the highest jump laid
+    out flat and spinning, and a spiral down to a kneel as the sleeves come home."""
+    return build('Air Study', motif(
+        ('orbit_run', 'R', {'speed_m_s': 0.8, 'strides': 2, 'radius_m': 3.0}),
+        ('star_wheel', 'R', {'rise_m': 1.4, 'speed_m_s': 0.8}),
+        ('hanging_salto', 'R', {'rise_m': 1.6}),
+        ('corkscrew', 'R', {'rise_m': 1.6, 'twists': 1}),
+        ('sleeve_flight', 'R', {'rise_m': 1.4, 'speed_m_s': 0.8}),
+        ('flat_spin', 'R', {'rise_m': 2.3}),
+        ('spiral_descent', 'R', {'revolutions': 1.0}),
+    ))
+
+
 def results():
-    phrases = [first_phrase(), suspension_study()]
+    phrases = [first_phrase(), suspension_study(), air_study()]
     key, seed, gen, _ = best_generated()
     gen.name = f'Generated, seed {seed} (best of 40 by lunar share, contrast, linking and climax)'
     phrases.append(gen)

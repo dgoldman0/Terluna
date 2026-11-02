@@ -15,6 +15,10 @@ Assumptions, each where its figures are made:
 - Rotation. The body model's inertia in two poses (standing, arms down; arms overhead) gives the layout and twist
   moments; the tuck and pike take Yeadon's ratios to the layout. A turn on the floor gets its torque from two feet
   pushing tangentially at the friction limit, 0.40 m apart.
+- Figures in the air. The body model posed in the vocabulary's shapes (body/pose.py) gives each figure's inertia, and
+  the computed tuck and pike shares are reported beside Yeadon's. A take-off gives a somersault or cartwheel the mean
+  push over the push-off times an assumed lean of 0.25 m past the foot, and a spin about the vertical the floor's grip
+  on that push times an assumed lever of 0.30 m. Sleeves are the garment solver's 1.5 m of chiffon.
 - Friction between dance shoe and floor: 0.5 for steps and turns, an assumed value for leather and suede on a vinyl
   dance floor, for which no measurement was found (sources.json, open); the habitation note's 0.6 stays its own.
 - Balance. A standing dancer topples like an inverted pendulum about the ankle with the centre of mass at its standing
@@ -42,7 +46,9 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 SCHEMA = 'terluna.humanities.dance-envelope/1'
 OUT = HERE / 'results' / 'envelope.json'
-FILES = ('humanities/dance/envelope.py', 'humanities/dance/body/model.py', 'habitation/low_gravity/movement.py')
+FILES = ('humanities/dance/envelope.py', 'humanities/dance/body/model.py', 'humanities/dance/body/pose.py',
+         'habitation/low_gravity/movement.py')
+POSES = ROOT / 'humanities' / 'dance' / 'vocabulary' / 'poses.json'
 WINDS = ROOT / 'climate' / 'results' / 'gcm' / 'global_winds_A28_dim5_moon.json'
 
 G_M = MOON_SURFACE_GRAVITY
@@ -313,6 +319,92 @@ def partnering():
     return out
 
 
+# --- figures in the air -------------------------------------------------------------------------------------------------
+
+AERIAL_LEAN_M = 0.25      # the centre of mass's lean past the pushing foot at an acrobatic take-off (assumed)
+SPIN_LEVER_M = 0.30       # the lever of the floor's sideways push about the centre of mass in a spinning take-off (assumed)
+SLEEVE_LENGTH_M = 1.5     # the garment solver's water sleeves
+AERIAL_SHAPES = {         # vocabulary shapes (poses.json) for the figures, over the motion engine's carriage
+    'layout, arms overhead': dict(legs='layout_air', arms='overhead_straight'),
+    'layout, arms gathered': dict(legs='layout_air', arms='tucked_in'),
+    'tuck': dict(legs='tuck_air', arms='tucked_in', torso='contraction'),
+    'pike': dict(legs='pike_air', arms='second'),
+    'star': dict(legs='star_air', arms='high_v'),
+    'flat spread': dict(legs='straddle_air', arms='second'),
+}
+
+
+def take_off_turning(v, g):
+    """How much angular momentum a take-off at speed v can give the body, from the mean push over the push-off: the
+    push's lean past the foot turns a somersault or cartwheel; the floor's grip, pushing sideways on a lever, turns the
+    body about the vertical."""
+    t = 2 * H_PO_M / v
+    push = MASS_KG * (v / t + g)
+    return dict(push_s=round(t, 3), mean_push_N=round(push, 1),
+                somersault_or_cartwheel_N_m_s=round(push * AERIAL_LEAN_M * t, 1),
+                about_the_vertical_N_m_s=round(FRICTION * push * SPIN_LEVER_M * t, 1))
+
+
+def aerials(jump, rho_moon):
+    """Rotations in the air that the Moon's long flights open, with the body model's own inertia in each shape: a
+    twisting somersault, a cartwheel in a star, a flat spin, a somersault that hangs upside down, and sleeves left
+    standing above a falling body. Each needs the angular momentum its rotations take over the flight, against what the
+    take-off can give; Earth's figures are for its best standing jump."""
+    from humanities.dance.body import pose
+    I = {k: pose.inertia(s)[2] for k, s in AERIAL_SHAPES.items()}
+    moon, high = jump['choreographic'][1], jump['choreographic'][2]
+    earth = jump['earth']
+    flights = dict(moon=(moon['take_off_m_s'], moon['airtime_s'], G_M), moon_high=(high['take_off_m_s'], high['airtime_s'], G_M),
+                   earth=(earth['take_off_m_s'], earth['airtime_s'], G_E))
+    cap = {k: take_off_turning(v, g) for k, (v, _, g) in flights.items()}
+
+    def need(inertia, turns, where):
+        return round(inertia * 2 * math.pi * turns / flights[where][1], 1)
+
+    out = dict(lean_m=AERIAL_LEAN_M, spin_lever_m=SPIN_LEVER_M, flights_s={k: round(t, 3) for k, (_, t, _) in flights.items()},
+               take_off=cap, inertia_kg_m2={k: dict(cartwheel=round(v[0, 0], 3), somersault=round(v[1, 1], 3),
+                                                    twist=round(v[2, 2], 3)) for k, v in I.items()},
+               tuck_and_pike_shares=dict(tuck=round(I['tuck'][1, 1] / I['layout, arms overhead'][1, 1], 3),
+                                         pike=round(I['pike'][1, 1] / I['layout, arms overhead'][1, 1], 3),
+                                         assumed=dict(tuck=TUCK_SHARE, pike=PIKE_SHARE)))
+    # A layout somersault with a full twist: the somersault's angular momentum drives the twist once the body tilts
+    # out of its plane (twist rate L sin(tilt) / I_twist), so a 1:1 corkscrew needs sin(tilt) = I_twist / I_somersault.
+    Is, It = I['layout, arms gathered'][1, 1], I['layout, arms gathered'][2, 2]
+    out['corkscrew'] = dict(
+        tilt_deg=round(math.degrees(math.asin(It / Is)), 1),
+        twist_rev_s={k: round(1 / flights[k][1], 2) for k in ('moon', 'earth')},
+        angular_momentum_N_m_s={k: need(Is, 1, k) for k in ('moon', 'earth')})
+    out['star_wheel'] = dict(rev_s={k: round(1 / flights[k][1], 2) for k in ('moon', 'earth')},
+                             angular_momentum_N_m_s={k: need(I['star'][0, 0], 1, k) for k in ('moon', 'earth')})
+    out['flat_spin'] = dict(angular_momentum_N_m_s={k: need(I['flat spread'][0, 0], 1, k) for k in flights},
+                            spread_is_the_largest_axis=bool(np.argmax(np.linalg.eigvalsh(I['flat spread'])) == 2
+                                                            and I['flat spread'][0, 0] >= I['flat spread'][1:, 1:].diagonal().max()))
+    # A somersault that tucks to turn over, opens when upside down and tucks again: open 0-0.1 of the flight, tuck to
+    # 0.3, open to 0.7 (the hang, centred on the inversion), tuck to 0.9, open to land.
+    Io, It_ = I['layout, arms overhead'][1, 1], I['tuck'][1, 1]
+    program = ((0.1, Io), (0.2, It_), (0.4, Io), (0.2, It_), (0.1, Io))
+    hang = {}
+    for k in ('moon', 'earth'):
+        T = flights[k][1]
+        L = 2 * math.pi / (T * sum(f / i for f, i in program))
+        hang[k] = dict(angular_momentum_N_m_s=round(L, 1), hang_s=round(0.4 * T, 2),
+                       hang_sweep_deg=round(math.degrees(L * 0.4 * T / Io), 1))
+    out['hanging_salto'] = dict(open_over_tuck=round(Io / It_, 2), **hang)
+    # Sleeves cast up at the take-off: from the apex the body falls freely while chiffon sinks at most at its face-on
+    # speed, so the sleeves stand above the hands until the landing, up to their length, then settle.
+    ma = FABRIC_KG_M2['silk chiffon']
+    sleeve = {}
+    for k, rho in (('moon', rho_moon), ('earth', RHO_EARTH)):
+        v, T, g = flights[k]
+        vt = math.sqrt(2 * ma * g / (rho * CN_FLAT))
+        rise = v * v / (2 * g)
+        gap = min(max(rise - vt * T / 2, 0.0), SLEEVE_LENGTH_M)
+        sleeve[k] = dict(body_descent_s=round(T / 2, 2), landing_m_s=round(v, 2), sleeve_sink_m_s=round(vt, 3),
+                         sleeves_above_hands_at_landing_m=round(gap, 2), settle_after_landing_s=round(gap / vt, 1))
+    out['sleeve_flight'] = sleeve
+    return out
+
+
 def stage_for_a_leap(jump):
     v_up = jump['choreographic'][1]['take_off_m_s']
     rows = []
@@ -334,7 +426,7 @@ def results():
         schema=SCHEMA,
         producer=dict(domain='humanities', files={f: digest(f) for f in FILES},
                       constants=constants_used([ROOT / f for f in FILES]),
-                      inputs={str(WINDS.relative_to(ROOT)): digest(WINDS.relative_to(ROOT))}),
+                      inputs={str(p.relative_to(ROOT)): digest(p.relative_to(ROOT)) for p in (WINDS, POSES)}),
         evidence='Closed-form and one-dimensional mechanics for one representative dancer (the body model) at the '
                  'shared gravity and the design run\'s air, with stated parameter choices beside each figure. A '
                  'screen of capabilities and limits; the whole-body motion engine and the garment solver test them.',
@@ -345,6 +437,7 @@ def results():
                   for v in (1.5, 2.5)},
         turns=turns_on_the_floor(rot), balance=balance(rot), air=a, fabric=fabric(a['density_kg_m3']['moon_sea_level']),
         partnering=partnering(), stage_for_a_leap=stage_for_a_leap(j),
+        aerials=aerials(j, a['density_kg_m3']['moon_sea_level']),
         microgravity=dict(
             traction='none: no weight presses the feet, so every push needs a surface to push against',
             flight='unending: a push sets a straight drift that only a surface or the air stops',
