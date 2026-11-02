@@ -2037,6 +2037,22 @@ CASES['box_near_side_sea_l15_inflow_day3'] = dict(
     CASES['box_near_side_sea_l15_aloft_day3'], build=INFLOW_BUILD,
     purpose=CASES['box_near_side_sea_l15_aloft_day3']['purpose'] + "; the air the GCM's mean wind draws in carrying the "
             "GCM's mean air rather than the box's own")
+# What times the sea box's evening storms (2 November 2026; session-tools/agents/gap_boxes/rules_mechanism.txt, fixed
+# before either case ran). On every sea box CM1's storms peak about 60 degrees of hour angle after the box's prescribed
+# large-scale cooling does. Two cases run on from box_near_side_sea_l15_inflow_day3's restarts, on its build and with
+# its inputs, and differ from it only in that forcing (change_forcing): from just after sunrise its daily cycle
+# replaced by its lunar-day mean, and from the forcing's peak at +31 degrees no large-scale forcing at all. The pair
+# shows whether the forcing's cycle times the evening storms and whether they still come once it stops.
+CASES['box_near_side_sea_l15_inflow_cycle_mean'] = dict(
+    CASES['box_near_side_sea_l15_inflow_day3'], days=86.5, forcing_change='cycle_to_mean',
+    restart_from=dict(case='box_near_side_sea_l15_inflow_day3', day=59.5),
+    purpose=CASES['box_near_side_sea_l15_inflow_day3']['purpose'] + "; from day 59.5, just after sunrise, the "
+            "circulation's heating and moistening held at their lunar-day mean without their daily cycle")
+CASES['box_near_side_sea_l15_inflow_forcing_off'] = dict(
+    CASES['box_near_side_sea_l15_inflow_day3'], days=86.5, forcing_change='off',
+    restart_from=dict(case='box_near_side_sea_l15_inflow_day3', day=69.0),
+    purpose=CASES['box_near_side_sea_l15_inflow_day3']['purpose'] + "; from day 69.0, the forcing's peak at +31 "
+            "degrees of hour angle, without the circulation's heating and moistening or the mean vertical wind")
 # The sea and land boxes forced by the design climate, the design run's years 10-19 (register, 31 October), for the
 # gap between the two models at the Near-side Sea that biome maps, local climates and the Jura box wait on. Each is a
 # fresh box from local sunrise on the GCM's mean air at its site, as box_near_side_sea and box_0e_design began, on
@@ -3176,8 +3192,9 @@ def setup_restart(name: str, cfg: dict) -> Path:
     """Set up a case that runs on from another case's restart (cfg['restart_from']: the case and the day), so that a
     window of a run can run again under other settings, or run on: the other case's inputs, restart files and kept
     vertical field, its rain law's table and its wind-nudging windows carried over the case's span (restart_windows),
-    and its namelist with this case's electricity. Its progress starts at the restart, and the runner takes up from
-    there; output and restarts keep the other case's numbering."""
+    and its namelist with this case's electricity; with cfg['forcing_change'], its large-scale forcing changed from
+    the restart on (change_forcing). Its progress starts at the restart, and the runner takes up from there; output
+    and restarts keep the other case's numbering."""
     fr = cfg['restart_from']
     source = RUNS / fr['case']
     src = json.loads((source / 'case.json').read_text())
@@ -3203,6 +3220,7 @@ def setup_restart(name: str, cfg: dict) -> Path:
             shutil.copy2(source / item, case / item)
     for f in files + ([ez] if ez.exists() else []):
         shutil.copy2(f, case / f.name)
+    forcing = change_forcing(case, cfg['forcing_change']) if cfg.get('forcing_change') else None
     windows = (None if cfg.get('weather')                                  # setup_weather writes its own
                else restart_windows(window_root(source), case, n * restart_s, case_length_s(cfg, scale)))
     if windows and abs(windows['window_s'] - src['nudging_wind']['window_s']) > 1e-3:
@@ -3243,6 +3261,7 @@ def setup_restart(name: str, cfg: dict) -> Path:
                   restart_from=dict(case=fr['case'], day=fr['day'], restart=n, model_s=n * restart_s,
                                     made_by=made.get('executable')),
                   **({'nudging_wind': dict(src.get('nudging_wind') or {}, **windows)} if windows else {}),
+                  **({'forcing_change': forcing} if forcing else {}),
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in RESTART_INPUTS + ('namelist.template',) + windows_written
                           if (case / p).exists()})
@@ -3250,6 +3269,34 @@ def setup_restart(name: str, cfg: dict) -> Path:
     _save_progress(case, dict(segments=[], case=name, start_s=n * restart_s,
                               start=f"{fr['case']}'s restart {n} (day {fr['day']})"))
     return case
+
+
+FORCING_CHANGES = ('cycle_to_mean', 'off')
+
+
+def change_forcing(case: Path, change: str) -> dict:
+    """A run-on case's large-scale forcing changed from its restart on (setup_restart's cfg['forcing_change']), in the
+    case's copies of its source's inputs, which CM1 reads afresh at every start: base sets the vertical wind from
+    terluna_wls.txt before a restart is read, and the circulation's table loads on the first step. 'cycle_to_mean'
+    gives every local-time bin of the circulation's heating and moistening (terluna_lsadv.txt) the table's mean over
+    its bins, so the forcing keeps its lunar-day mean and loses its daily cycle, the mean vertical wind unchanged; 'off'
+    sets the table and the mean vertical wind to zero, so the box keeps no large-scale forcing but its held air and
+    its wind's pull. Returns the record for case.json."""
+    import numpy as np
+    if change not in FORCING_CHANGES:
+        raise ValueError(f'forcing_change {change!r}: one of {FORCING_CHANGES}')
+    table = read_day_night(case / 'terluna_lsadv.txt')
+    th, qv = table['theta_k_s'], table['qv_kg_kg_s']
+    if change == 'cycle_to_mean':
+        th, qv = (np.repeat(a.mean(axis=0, keepdims=True), a.shape[0], axis=0) for a in (th, qv))
+    else:
+        th, qv = np.zeros_like(th), np.zeros_like(qv)
+        lines = (case / 'terluna_wls.txt').read_text().split('\n')
+        z = [float(line.split()[0]) for line in lines[1:int(lines[0]) + 1]]
+        write_vertical_wind(case / 'terluna_wls.txt', dict(z_m=z, w_m_s=[0.0] * len(z)), z[-1])
+    write_day_night(case / 'terluna_lsadv.txt', dict(z_m=table['z_m'], theta_k_s=th, qv_kg_kg_s=qv))
+    return dict(change=change, bins=int(th.shape[0]), levels=int(table['z_m'].size),
+                vertical_wind='zero' if change == 'off' else "the source's")
 
 
 

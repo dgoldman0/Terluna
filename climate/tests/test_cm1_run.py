@@ -402,6 +402,48 @@ def test_a_run_on_from_a_restart_carries_the_wind_windows_on_by_whole_lunar_days
     assert c.restart_windows(single, case, 0.0, 100.0) is None
 
 
+def test_a_forcing_change_holds_the_table_at_its_mean_or_removes_the_forcing(tmp_path):
+    z = np.array([0.0, 500.0, 2000.0, 9000.0])
+    th = np.array([[1.0e-5, 2.0e-5, -1.0e-5, 0.0], [3.0e-5, -2.0e-5, 1.0e-5, 4.0e-6], [-1.0e-5, 0.0, 2.0e-5, 2.0e-6]])
+    qv = th * 1.0e-3
+    wind = dict(z_m=[0.0, 1000.0, 5000.0, 20000.0], w_m_s=[0.0, 0.004, 0.011, 0.002])
+    for change in c.FORCING_CHANGES:
+        case = tmp_path / change
+        case.mkdir()
+        c.write_day_night(case / 'terluna_lsadv.txt', dict(z_m=z, theta_k_s=th, qv_kg_kg_s=qv))
+        c.write_vertical_wind(case / 'terluna_wls.txt', wind, 30000.0)
+        before = (case / 'terluna_wls.txt').read_text()
+        record = c.change_forcing(case, change)
+        table = c.read_day_night(case / 'terluna_lsadv.txt')
+        assert record['change'] == change and record['bins'] == 3 and record['levels'] == 4
+        assert np.allclose(table['z_m'], z) and table['theta_k_s'].shape == th.shape
+        lines = (case / 'terluna_wls.txt').read_text().splitlines()
+        if change == 'cycle_to_mean':                     # every bin the mean, the wind as it was
+            for got, want in ((table['theta_k_s'], th), (table['qv_kg_kg_s'], qv)):
+                assert np.allclose(got, want.mean(axis=0)[None, :], rtol=1e-6, atol=0.0)
+            assert (case / 'terluna_wls.txt').read_text() == before
+        else:                                             # no table and no wind, at the same levels
+            assert not table['theta_k_s'].any() and not table['qv_kg_kg_s'].any()
+            assert int(lines[0]) == 5 and [float(r.split()[0]) for r in lines[1:]] == wind['z_m'] + [30000.0]
+            assert all(float(r.split()[1]) == 0.0 for r in lines[1:])
+    with pytest.raises(ValueError):
+        c.change_forcing(tmp_path / 'off', 'halved')
+
+
+def test_the_mechanism_cases_differ_from_the_sea_box_only_in_their_forcing_and_span():
+    control = c.CASES['box_near_side_sea_l15_inflow_day3']
+    restart_day = control['restart_s'] / 86400.0
+    for name, change, day in (('box_near_side_sea_l15_inflow_cycle_mean', 'cycle_to_mean', 59.5),
+                              ('box_near_side_sea_l15_inflow_forcing_off', 'off', 69.0)):
+        cfg = c.CASES[name]
+        assert cfg['forcing_change'] == change and cfg['days'] == 86.5
+        assert cfg['restart_from'] == dict(case='box_near_side_sea_l15_inflow_day3', day=day)
+        assert abs(day / restart_day - round(day / restart_day)) < 1e-9 and 59.0 < day < 86.5 <= control['days']
+        assert cfg['purpose'].startswith(control['purpose'])
+        same = {k for k in set(cfg) | set(control)} - {'forcing_change', 'days', 'restart_from', 'purpose'}
+        assert all(cfg.get(k) == control.get(k) for k in same)
+
+
 def test_a_run_on_from_a_run_on_case_takes_its_windows_from_the_first_case(tmp_path, monkeypatch):
     monkeypatch.setattr(c, 'solar_day_s', lambda: 3600.0)               # 36 windows of 100 s a day
     root, third, fourth = (tmp_path / n for n in ('root', 'third', 'fourth'))
