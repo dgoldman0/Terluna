@@ -1,6 +1,7 @@
 """Checks of the CM1 runner's pure pieces: patching, namelist editing, grids, surfaces and restarts."""
 import hashlib
 import json
+import math
 
 import numpy as np
 import pytest
@@ -1325,3 +1326,108 @@ def test_the_held_night_with_earth_s_length_takes_it_over_the_source_s(tmp_path,
     assert (long_, short) == ('453.0', '75.0')
     a, b = ((c.RUNS / n / 'namelist.template').read_text().splitlines() for n in ('night', 'night75'))
     assert [(x, y) for x, y in zip(a, b) if x != y] == [(' l_inf   =     453.0,', ' l_inf   =     75.0,')]
+
+
+def test_the_weather_cases_run_on_lunar_day_by_lunar_day_from_the_fourth_days_restart():
+    # each design-years box's weather chain: from its fourth lunar day's day-118 restart, one lunar day a case, each from
+    # the one before's restart, all following the design run's sequence from year 15 with the design years' fits, and
+    # otherwise the box itself
+    for box in ('box_near_side_sea_design_years', 'box_0e_design_years', 'box_se_dry_design_years'):
+        base = c.CASES[box]
+        for j in range(1, c.WEATHER_DAYS + 1):
+            case, day = c.CASES[f'{box}_weather{j}'], 118.0 + 29.5 * (j - 1)
+            assert case['restart_from'] == dict(case=f'{box}_day4' if j == 1 else f'{box}_weather{j - 1}', day=day)
+            assert case['days'] == day + 29.5
+            w = case['weather']
+            assert w['stretch'] == dict(year=15, box_day=118.0) and w['run'] == c.GCM_DESIGN_RUN
+            assert w['fits'] == (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS) and w['years'] == (15, 16)
+            assert {k: v for k, v in case.items() if k not in ('restart_from', 'days', 'weather', 'purpose')} == \
+                {k: v for k, v in base.items() if k not in ('days', 'purpose')}
+    assert c.WEATHER_WINDOWS == 100 and c.WEATHER_BINS % 4 == 0
+
+
+def weather_sequence(departure=0.0):
+    """A three-level GCM column whose fits by local time hold a mean and a first harmonic, its records departing from
+    them by departure in theta and u (and in heating, 1e-6 times it) at every level."""
+    from climate.crm import gcm_site as gs
+    zeros = [np.zeros(3)] * (2 * gs.HARMONICS - 2)
+    coef = lambda mean, amp: np.vstack([np.full(3, mean), np.full(3, amp), np.zeros(3)] + zeros)
+    step = 257400.0
+    t = (np.arange(400) + 0.5) * step
+    full = lambda x: np.full((t.size, 3), x)
+    return dict(forcing=dict(profile=dict(z_m=[60000.0, 20000.0, 4000.0]), sigma=[0.2, 0.6, 0.9],
+                             surface=dict(pressure_pa=1.2e5)),
+                record_s=step, year_s=120 * step, window_deg=36.0,
+                sun=dict(period_s=c.solar_day_s(), hour_at_zero_deg=-90.0),
+                coefficients=dict(theta=coef(300.0, 1.0), q=coef(0.01, 0.0), u=coef(2.0, 1.0), v=coef(0.0, 0.0)),
+                mean_profile=dict(theta_k=np.full(3, 300.0), qv_kg_kg=np.full(3, 0.01)),
+                states=dict(time_s=t, hour_angle_deg=np.zeros(t.size), theta_departure=full(departure),
+                            q_departure=full(0.0), u_departure=full(departure), v_departure=full(0.0)),
+                boundaries=dict(time_s=t[:-1] + 0.5 * step, theta_k_s=np.full((t.size - 1, 3), 1e-6 * departure),
+                                qv_kg_kg_s=np.zeros((t.size - 1, 3))))
+
+
+def weather_cfg(box_day=118.0):
+    return dict(start_hour_angle_deg=-45.0, site=dict(lon_deg=-45.0), weather=dict(stretch=dict(year=1, box_day=box_day)))
+
+
+def test_the_weather_clock_matches_the_boxs_hour_to_the_gcms_and_refuses_another_sun():
+    seq = weather_sequence()
+    clock = c.weather_clock(weather_cfg(), seq)
+    assert 120 * seq['record_s'] - 1e-6 <= clock['gcm_start_s'] < 120 * seq['record_s'] + c.solar_day_s()
+    gcm_hour = (-90.0 + 360.0 * clock['gcm_start_s'] / c.solar_day_s() + 180.0) % 360.0 - 180.0
+    assert abs((gcm_hour - clock['hour_at_start_deg'] + 180.0) % 360.0 - 180.0) < 1e-9
+    with pytest.raises(ValueError):
+        c.weather_clock(weather_cfg(), dict(seq, sun=dict(seq['sun'], period_s=c.solar_day_s() * 1.001)))
+
+
+def test_the_weather_windows_carry_the_fit_and_the_departures_and_the_reference_air():
+    heights = np.array([0.0, 2000.0, 10000.0, 40000.0, 100000.0])
+    reference = dict(z_m=heights, theta_k=np.full(5, 290.0), qv_kg_kg=np.full(5, 0.005))
+    for departure in (0.0, 0.5):
+        seq = weather_sequence(departure)
+        clock = c.weather_clock(weather_cfg(), seq)
+        start = 118.0 * 86400.0
+        windows = c.weather_windows(weather_cfg(), seq, clock, reference, start, start + 29.5 * 86400.0)
+        assert len(windows) == 100 and windows[0]['time_s'][0] == start
+        assert abs(windows[-1]['time_s'][1] - (start + 29.5 * 86400.0)) < 1e-6
+        for w in windows[::17]:
+            fit = 2.0 + math.cos(math.radians(w['hour_angle_deg'])) + departure
+            assert np.allclose(w['u_m_s'], fit) and np.allclose(w['v_m_s'], 0.0)
+            above = heights > 60000.0                                        # nil departure above the GCM's top
+            assert np.allclose(w['theta_k'][~above], 290.0 + math.cos(math.radians(w['hour_angle_deg'])) + departure)
+            assert np.allclose(w['theta_k'][above], 290.0) and np.allclose(w['qv_kg_kg'], 0.005)
+            gcm_hour = (-90.0 + 360.0 * w['gcm_s'] / c.solar_day_s() + 180.0) % 360.0 - 180.0
+            assert abs((gcm_hour - w['hour_angle_deg'] + 180.0) % 360.0 - 180.0) < 1e-6
+
+
+def test_the_weather_table_is_the_mean_table_in_local_time_plus_the_departure_laid_by_pressure():
+    zw = np.array([0.0, 1000.0, 3000.0, 10000.0, 30000.0, 80000.0, 150000.0])
+    zh = 0.5 * (zw[1:] + zw[:-1])
+    pressure = 1.2e5 * np.exp(-zw / 50000.0)
+    hours = np.array([-135.0, -45.0, 45.0, 135.0])
+    mean_table = dict(z_m=zh, hour_angle_deg=hours, theta_k_s=np.outer([1.0, 2.0, 3.0, 4.0], np.ones(6)) * 1e-5,
+                      qv_kg_kg_s=np.zeros((4, 6)))
+    for departure in (0.0, 1.0):
+        seq = weather_sequence(departure)
+        clock = c.weather_clock(weather_cfg(), seq)
+        start = 118.0 * 86400.0
+        table = c.weather_table(seq, clock, mean_table, pressure, start)
+        h = table['hour_angle_deg']
+        assert h.size == c.WEATHER_BINS and np.isclose(h[0], -179.5)
+        expect = np.interp(h, np.r_[-225.0, hours, 225.0], [4.0, 1.0, 2.0, 3.0, 4.0, 1.0]) * 1e-5
+        assert np.allclose(table['theta_k_s'], expect[:, None] + 1e-6 * departure, rtol=1e-9, atol=1e-15)
+        assert np.all((table['box_s'] >= start) & (table['box_s'] < start + c.solar_day_s()))
+
+
+def test_the_nudging_and_table_files_read_back_as_written(tmp_path):
+    z = np.array([0.0, 50.0, 1000.0])
+    c.write_nudging(tmp_path / 'lsnudge_0001.dat', 10.0, 1.0e30, z, [300.0, 301.5, 302.25], [0.014, 0.0125, 0.001],
+                    [1.5, -2.0, 0.0], [0.25, 0.0, 3.0])
+    w = c.read_nudging(tmp_path / 'lsnudge_0001.dat')
+    assert w['time_s'] == (10.0, 1.0e30) and np.allclose(w['z_m'], z) and np.allclose(w['theta_k'], [300.0, 301.5, 302.25])
+    assert np.allclose(w['qv_kg_kg'], [0.014, 0.0125, 0.001]) and np.allclose(w['u_m_s'], [1.5, -2.0, 0.0])
+    table = dict(z_m=z, theta_k_s=np.array([[1e-5, 2e-5, 3e-5], [4e-5, 5e-5, 6e-5]]), qv_kg_kg_s=np.ones((2, 3)) * 1e-9)
+    c.write_day_night(tmp_path / 'terluna_lsadv.txt', table)
+    back = c.read_day_night(tmp_path / 'terluna_lsadv.txt')
+    assert np.allclose(back['theta_k_s'], table['theta_k_s']) and np.allclose(back['hour_angle_deg'], [-90.0, 90.0])

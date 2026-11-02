@@ -256,9 +256,11 @@ def convection_top(formed, z, share=CONVECTION_TOP_SHARE):
     return dict(level=k, top_m=float(z[k]), share=share, held_from_m=level(k - 1), held_fully_from_m=level(k - 2))
 
 
-def site_forcing(run, years, site, window_deg=36.0, top_m=TOP_M):
+def site_forcing(run, years, site, window_deg=36.0, top_m=TOP_M, series=False):
     """The GCM's column at a site over the years: its mean air and surface, its mean vertical wind, the table CM1
-    prescribes by local time, and the budgets behind it. Arrays by level run top first, as PlaSim writes them."""
+    prescribes by local time, and the budgets behind it. Arrays by level run top first, as PlaSim writes them. With
+    series, also the cells' mean of every record behind the fits, its index in the run's records, and the fits'
+    coefficients (site_sequence reads them)."""
     import netCDF4
     from climate.crm.cm1_run import gcm_soil, planet, solar_day_s
     from climate.gcm import year_files as yf
@@ -266,7 +268,7 @@ def site_forcing(run, years, site, window_deg=36.0, top_m=TOP_M):
     gravity, radius = p['gravity_m_s2'], p['radius_m']
     folder = HERE.parent / 'gcm' / 'runs' / run / 'model'
     keep = {k: [] for k in ('hour', 'theta', 'q', 'u', 'v', 'z', 'rho', 'omega', 'heat', 'moist', 'ps', 'ts', 'tas',
-                            'rain', 'evaporation', 'water', 'wetness', 'conv', 'lsp')}
+                            'rain', 'evaporation', 'water', 'wetness', 'conv', 'lsp', 'index')}
     for year in range(years[0], years[1] + 1):
         with netCDF4.Dataset(folder / f'MOST.{year:05d}.nc') as d:
             missing = [k for k in MEANS + SNAPSHOTS + SCHEMES if k not in d.variables]
@@ -274,6 +276,8 @@ def site_forcing(run, years, site, window_deg=36.0, top_m=TOP_M):
                 raise ValueError(f'{run} year {year} lacks {missing}: run it with --heating-diagnostics '
                                  '--moisture-diagnostics')
             f = yf.fields(d, MEANS + SNAPSHOTS + SCHEMES)            # the humidity's means: gcm/year_files.py
+            count = len(d['time'])
+            keep['index'].append(year * count + np.arange(count)[yf.records(d)])   # each record's place in the run
             lat, lon = np.asarray(d['lat'][:], float), np.asarray(d['lon'][:], float)
             sigma = np.asarray(d['lev'][:], float)
             lsm = np.asarray(d['lsm'][:], float)[0] > 0.5
@@ -346,8 +350,9 @@ def site_forcing(run, years, site, window_deg=36.0, top_m=TOP_M):
     table_th, table_q = np.where(below, table_th, 0.0), np.where(below, table_q, 0.0)
     circ_th, circ_q = np.where(below, heating, 0.0), np.where(below, moistening, 0.0)
     per_day = 86400.0
+    extra = dict(s, coefficients=dict(theta=theta_c, q=q_c, u=u_c, v=v_c), mass=mass) if series else None
     phase = np.round(((centre + 180.0) % 360.0) / window_deg - 0.5).astype(int) % int(round(360.0 / window_deg))
-    return dict(
+    out = dict(
         run=run, years=list(years), site=dict(site), window_deg=window_deg, harmonics=HARMONICS, truncation=TRUNCATION,
         cells=[[float(lat[j]), float(lon[i])] for j, i in zip(jj, ii)],
         cell_heights_m=[float(height[j, i]) for j, i in zip(jj, ii)],
@@ -383,6 +388,7 @@ def site_forcing(run, years, site, window_deg=36.0, top_m=TOP_M):
             column_heating_w_m2=dict(physics=float(CP * (heat_c[0] * mass * (tm('ps') * sigma / 1e5)**KAPPA).sum()),
                                      rain_latent=float(LV * tm('rain'))),
             rain_mm_day=float(tm('rain') * per_day), evaporation_mm_day=float(tm('evaporation') * per_day)))
+    return (out, extra) if series else out
 
 
 def to_cm1(forcing, zw, theta_at=None, qv_at=None, gravity=None):
@@ -443,6 +449,114 @@ def wind_windows(forcing, zh, start_hour_deg, day_s, length_s, bins=BINS):
                         u_m_s=np.interp(zh, z, u[b]), v_m_s=np.interp(zh, z, v[b])))
         t += step
     return out
+
+
+
+# The GCM's own weather at a site (2026-11-01). A box forced by the fits above follows the mean circulation by local
+# time and carries none of the weather the GCM's evaporation rests on (gap_boxes/findings_sea.md). site_sequence keeps
+# the fits as the forcing's mean part and adds each record's departure from them, so that a box can follow the
+# design years' own sequence: the states (air, wind) by their departures at the records' centres, the circulation's
+# heating and moistening by their departures at the boundaries between consecutive records (where the physics'
+# snapshots fall), each the storage between the two records less the physics' snapshot, less the same operator on the
+# fits, with the column's vapour departure held to the exact means' budget across the boundary. The records are the
+# year files' 3-day means (the weather between the means) or, from a rerun writing its means more often, means of a
+# few hours (the weather within them); window_deg is then the rerun's interval in hour angle.
+def record_seconds(run, year=False) -> float:
+    """The length (s) of one output interval of a GCM run, or with year of one model year, from its progress record."""
+    import json
+    m = json.loads((HERE.parent / 'gcm' / 'runs' / run / 'progress.json').read_text())['configuration']['model']
+    step = m['timestep_min'] * 60.0
+    return step * m['steps_per_lunar_day'] * (m['lunar_days_per_year'] if year else 1.0 / m['writes_per_lunar_day'])
+
+
+def site_sequence(run, years, site, window_deg=36.0, top_m=TOP_M, fits=None):
+    """The GCM's sequence at a site: the mean forcing (site_forcing, from fits = (run, years) when given, else from
+    these records) and the departures of these records from its fits. Times are seconds from the run's start; arrays
+    by level run top first. Departures above the forcing's top, where it has one, are nil."""
+    f, s = site_forcing(run, years, site, window_deg, top_m, series=True)
+    if fits is not None:                                                   # the mean part from other years' records
+        f, s_fit = site_forcing(*fits, site, 36.0, top_m, series=True)       # the year files' 3-day means
+    else:
+        s_fit = s
+    step = record_seconds(run)
+    centre = s['hour']
+    end = (centre + window_deg / 2.0 + 180.0) % 360.0 - 180.0
+    fc, fe = s_fit['hour'], (s_fit['hour'] + f['window_deg'] / 2.0 + 180.0) % 360.0 - 180.0
+    raw = {k: harmonic_coefficients(fc, s_fit[k]) for k in ('theta', 'q', 'u', 'v', 'water', 'rain', 'evaporation')}
+    phys = dict(theta=harmonic_coefficients(fe, s_fit['heat']), q=harmonic_coefficients(fe, s_fit['moist']))
+    # The fits' window means at a record's phase: the means' own fit, damped from window_deg of the fits' records to
+    # this sequence's window; for the year files' own records the fit itself.
+    damp = lambda coef: coef if fits is None else redamped(coef, f['window_deg'], window_deg)
+    mean_at = lambda k, h: evaluate(damp(raw[k]), h)
+    states = {k: s[k] - mean_at(k, centre) for k in ('theta', 'q', 'u', 'v')}
+    i = np.nonzero(np.diff(s['index']) == 1)[0]                            # consecutive records
+    depart = {}
+    for k, physics in (('theta', 'heat'), ('q', 'moist')):
+        own = (s[k][i + 1] - s[k][i]) / step - s[physics][i]
+        fit = (mean_at(k, centre[i + 1]) - mean_at(k, centre[i])) / step - evaluate(phys[k], end[i])
+        depart[k] = own - fit
+    budget = lambda w, e, r: (w[1] - w[0]) / step - 0.5 * (e[0] + e[1]) + 0.5 * (r[0] + r[1])
+    exact = budget(*([s[k][i], s[k][i + 1]] for k in ('water', 'evaporation', 'rain')))
+    exact_fit = budget(*([mean_at(k, centre[i]), mean_at(k, centre[i + 1])] for k in ('water', 'evaporation', 'rain')))
+    mass = s_fit['mass']
+    q_b = 0.5 * (s['q'][i] + s['q'][i + 1])
+    share = q_b * mass[None, :] / (q_b @ mass)[:, None]
+    depart['q'] = depart['q'] + ((exact - exact_fit) - depart['q'] @ mass)[:, None] * share / mass[None, :]
+    z = np.asarray(f['profile']['z_m'], float)
+    below = z <= (np.inf if top_m is None else top_m)
+    depart = {k: np.where(below, v, 0.0) for k, v in depart.items()}
+    t = (s['index'] + 0.5) * step
+    order = np.argsort(t)
+    unwrapped = np.degrees(np.unwrap(np.radians(centre[order])))
+    slope, h0 = np.polyfit(t[order], unwrapped, 1)                          # the site's hour angle against time
+    return dict(forcing=f, run=run, years=list(years), record_s=step, year_s=record_seconds(run, year=True),
+                window_deg=window_deg,
+                sun=dict(period_s=float(360.0 / slope), hour_at_zero_deg=float(h0),
+                         residual_deg=float(np.abs(unwrapped - (h0 + slope * t[order])).max())),
+                coefficients=s_fit['coefficients'], mean_profile=dict(theta_k=s_fit['theta'].mean(axis=0),
+                                                                      qv_kg_kg=s_fit['q'].mean(axis=0)),
+                states=dict(time_s=t, hour_angle_deg=centre, **{f'{k}_departure': v for k, v in states.items()}),
+                boundaries=dict(time_s=(s['index'][i] + 1.0) * step, theta_k_s=depart['theta'], qv_kg_kg_s=depart['q'],
+                                column_vapour_kg_m2_s=exact, column_vapour_fit_kg_m2_s=exact_fit),
+                sea_k=dict(time_s=t, value=s['ts']), rain_kg_m2_s=s['rain'], evaporation_kg_m2_s=s['evaporation'])
+
+
+def redamped(coef, from_deg, to_deg, harmonics=HARMONICS):
+    """Coefficients of a fit to means over from_deg of hour angle, as means over to_deg would carry them."""
+    return undamped(coef, from_deg, harmonics) / undamped(np.ones_like(coef), to_deg, harmonics)
+
+
+def gcm_time(seq, hour_deg, after_s):
+    """The first time (s from the GCM run's start) at or after after_s when the site's hour angle is hour_deg."""
+    period, h0 = seq['sun']['period_s'], seq['sun']['hour_at_zero_deg']
+    base = (hour_deg - h0) / 360.0 * period
+    return base + period * math.ceil((after_s - base) / period - 1e-9)
+
+
+def sequence_state(seq, key, t_s, hour_deg):
+    """The GCM's air or wind (theta, q, u or v) at its levels at GCM times t_s (s) and the site's hour angles there:
+    the fit by local time (undamped) plus the records' departures interpolated linearly in time between their
+    centres; (times, levels), top first."""
+    t_s, hour_deg = np.atleast_1d(np.asarray(t_s, float)), np.atleast_1d(np.asarray(hour_deg, float))
+    st = seq['states']
+    order = np.argsort(st['time_s'])
+    tt, dep = st['time_s'][order], st[f'{key}_departure'][order]
+    if t_s.min() < tt[0] or t_s.max() > tt[-1]:
+        raise ValueError(f'times {t_s.min():.0f}-{t_s.max():.0f} s lie outside the records ({tt[0]:.0f}-{tt[-1]:.0f} s)')
+    depart = np.stack([np.interp(t_s, tt, dep[:, k]) for k in range(dep.shape[1])], axis=-1)
+    return evaluate(seq['coefficients'][key], hour_deg) + depart
+
+
+def sequence_tendency(seq, key, t_s):
+    """The departure of the GCM's circulation heating (theta, K/s) or moistening (q, kg/kg/s) from its fit by local
+    time at GCM times t_s, linear in time between the boundaries; (times, levels), top first."""
+    t_s = np.atleast_1d(np.asarray(t_s, float))
+    b = seq['boundaries']
+    order = np.argsort(b['time_s'])
+    tt, dep = b['time_s'][order], b[f'{key}_k_s' if key == 'theta' else 'qv_kg_kg_s'][order]
+    if t_s.min() < tt[0] or t_s.max() > tt[-1]:
+        raise ValueError(f'times {t_s.min():.0f}-{t_s.max():.0f} s lie outside the boundaries ({tt[0]:.0f}-{tt[-1]:.0f} s)')
+    return np.stack([np.interp(t_s, tt, dep[:, k]) for k in range(dep.shape[1])], axis=-1)
 
 
 def main(argv=None) -> int:

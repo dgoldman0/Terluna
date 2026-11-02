@@ -2106,6 +2106,26 @@ CASES['box_se_dry_design_years_day5'] = dict(
     CASES['box_se_dry_design_years'], restart_from=dict(case='box_se_dry_design_years_day4', day=118.0), days=147.5,
     purpose=CASES['box_se_dry_design_years']['purpose'] + "; its fifth lunar day, days 118-147.5, from the fourth day's "
             'day-118 restart')
+# The weather-carrying boxes (2026-11-01; session-tools/agents/gap_boxes/plan_weather.md, set up only once the author
+# approves the plan and its rules). Each design-years box runs on from its fourth lunar day's day-118 restart and
+# follows the design run's own sequence at its site from the first time in year 15, the first of the design years'
+# settled end, when the site's hour angle is the box's at day 118 (setup_weather): a transition lunar day, then six
+# read lunar days, one case each, each from the one before's restart. Under source (a) the records are the year
+# files' 3-day means; under source (b), the plan's recommendation, a rerun of years 15-16 from the design run's year-14
+# restart writing its means every 11 steps (5.5 hours) supplies them, and only the weather entry's run, years and
+# window change. The fits by local time (the forcing's mean part) stay the design years' in both.
+WEATHER_STRETCH = dict(year=15, box_day=118.0)
+WEATHER_DAYS = 7
+for _box in ('box_near_side_sea_design_years', 'box_0e_design_years', 'box_se_dry_design_years'):
+    for _j in range(1, WEATHER_DAYS + 1):
+        _day = 118.0 + 29.5 * (_j - 1)
+        CASES[f'{_box}_weather{_j}'] = dict(
+            CASES[_box], restart_from=dict(case=f'{_box}_day4' if _j == 1 else f'{_box}_weather{_j - 1}', day=_day),
+            days=_day + 29.5,
+            weather=dict(source='(a) the year files\' 3-day means', run=GCM_DESIGN_RUN, years=(15, 16),
+                         fits=(GCM_DESIGN_RUN, GCM_DESIGN_YEARS), window_deg=36.0, stretch=WEATHER_STRETCH),
+            purpose=CASES[_box]['purpose'] + f"; run on from day {_day:g} following the design run's own sequence at "
+                    f"the site from year 15, the stretch's lunar day {_j} ({'the transition' if _j == 1 else 'read'})")
 # The highland box (the author's go-ahead of 2026-10-01; the plan of 2026-09-29 in the decisions register): box_0e's
 # size (64 x 64 columns, 385 km square) over high ground on ring_70_45e's path at 44.7 S, 246.1 E on the far side, its x
 # axis along the ring. The ground stands at the atlas's heights (each column the mean of its 0.25-degree neighbourhood,
@@ -3176,7 +3196,8 @@ def setup_restart(name: str, cfg: dict) -> Path:
             shutil.copy2(source / item, case / item)
     for f in files + ([ez] if ez.exists() else []):
         shutil.copy2(f, case / f.name)
-    windows = restart_windows(window_root(source), case, n * restart_s, case_length_s(cfg, scale))
+    windows = (None if cfg.get('weather')                                  # setup_weather writes its own
+               else restart_windows(window_root(source), case, n * restart_s, case_length_s(cfg, scale)))
     if windows and abs(windows['window_s'] - src['nudging_wind']['window_s']) > 1e-3:
         raise RuntimeError(f"{fr['case']}'s windows are {src['nudging_wind']['window_s']} s long, not {windows['window_s']}")
     text = (source / 'namelist.template').read_text()
@@ -3223,6 +3244,192 @@ def setup_restart(name: str, cfg: dict) -> Path:
                               start=f"{fr['case']}'s restart {n} (day {fr['day']})"))
     return case
 
+
+
+# The GCM's own weather (2026-11-01, session-tools/agents/gap_boxes/plan_weather.md). A weather case runs on from a
+# restart of a box forced by the GCM's mean circulation by local time and follows the design run's own sequence at the
+# site from then on: its wind target and its reference air (the air the inflow draws in and the air held above the
+# GCM's convection) window by window, and its table of the circulation's heating and moistening bin by bin, each the
+# mean-forced box's own (the table as CM1 applied it, interpolated in local time; the wind's fit by local time) plus
+# the departure of the GCM's records from their fit at the same time (gcm_site.site_sequence). The box's clock and the
+# GCM's are matched at the box's local hour angle where the stretch begins: the first time at or after the first boundary
+# between records in the stretch's year when the GCM's site has the hour angle the box has at stretch['box_day']. Every case of a chain carries
+# the same stretch, so each finds the same match. The mean vertical wind, the sea's temperature, the land, the build
+# and the physics are the mean-forced box's.
+WEATHER_WINDOWS = 100            # nudging windows a weather case reads, CM1's most (lsnudge_nmax), 7.08 hours each
+WEATHER_BINS = 360               # the table's bins of local time, one degree (1.97 hours) each
+
+
+def weather_sequence(cfg: dict) -> dict:
+    """The GCM's sequence a weather case follows (gcm_site.site_sequence): its records from cfg['weather']['run'] and
+    years, the mean part from the fits' run and years."""
+    from climate.crm import gcm_site
+    w = cfg['weather']
+    site = {k: cfg['site'][k] for k in ('lat_deg', 'lon_deg', 'half_lat_deg', 'half_lon_deg', 'surface')}
+    return gcm_site.site_sequence(w['run'], tuple(w['years']), site, w.get('window_deg', 36.0),
+                                  fits=tuple(w['fits']) if w.get('fits') else None)
+
+
+def weather_clock(cfg: dict, seq: dict) -> dict:
+    """The match between the box's clock and the GCM's: the box time (s) the stretch begins at, the GCM time there,
+    and the box's start hour angle and solar day. Refuses a GCM Sun whose period departs from the box's by more than
+    1e-4 (0.43 degrees over twelve lunar days)."""
+    import numpy as np
+    from climate.crm import gcm_site
+    day_s = solar_day_s()
+    if abs(seq['sun']['period_s'] / day_s - 1.0) > 1e-4:
+        raise ValueError(f"the GCM's Sun turns in {seq['sun']['period_s']:.0f} s, the box's in {day_s:.0f} s")
+    stretch = cfg['weather']['stretch']
+    hour0 = cfg['start_hour_angle_deg'] + cfg['site']['lon_deg']
+    box_s = stretch['box_day'] * 86400.0
+    edges = seq['boundaries']['time_s']                                  # the first boundary in the stretch's year,
+    first = float(np.min(edges[edges >= stretch['year'] * seq['year_s']]))   # records either side of it
+    hour = (hour0 + 360.0 * box_s / day_s + 180.0) % 360.0 - 180.0
+    return dict(box_start_s=box_s, gcm_start_s=gcm_site.gcm_time(seq, hour, first), hour0_deg=hour0, day_s=day_s,
+                hour_at_start_deg=hour)
+
+
+def weather_windows(cfg: dict, seq: dict, clock: dict, reference: dict, start_s: float, end_s: float) -> list:
+    """The case's nudging windows: WEATHER_WINDOWS equal windows from start_s to end_s (box time), each with the GCM's
+    wind and air at its middle (gcm_site.sequence_state) on the reference's heights: the wind held at the GCM's lowest
+    level down to the ground and at its top level above, as wind_windows holds it; the air the mean-forced reference
+    plus the GCM's departure from its mean air (theta's difference, the vapour's ratio), held at the lowest level's
+    below it and nil above the GCM's top level."""
+    import numpy as np
+    from climate.crm import gcm_site
+    f = seq['forcing']
+    z = np.asarray(f['profile']['z_m'], float)[::-1]
+    heights = np.asarray(reference['z_m'], float)
+    step = (end_s - start_s) / WEATHER_WINDOWS
+    middle = start_s + step * (np.arange(WEATHER_WINDOWS) + 0.5)
+    gcm_s = clock['gcm_start_s'] + (middle - clock['box_start_s'])
+    hours = (clock['hour0_deg'] + 360.0 * middle / clock['day_s'] + 180.0) % 360.0 - 180.0
+    state = {k: gcm_site.sequence_state(seq, k, gcm_s, hours)[:, ::-1] for k in ('u', 'v', 'theta', 'q')}
+    th_mean, q_mean = (np.asarray(seq['mean_profile'][k], float)[::-1] for k in ('theta_k', 'qv_kg_kg'))
+    out = []
+    for k in range(WEATHER_WINDOWS):
+        dth = np.interp(heights, z, state['theta'][k] - th_mean, right=0.0)
+        ratio = np.interp(heights, z, state['q'][k] / q_mean, right=1.0)
+        out.append(dict(time_s=(start_s + k * step, start_s + (k + 1) * step), gcm_s=float(gcm_s[k]),
+                        hour_angle_deg=float(hours[k]), u_m_s=np.interp(heights, z, state['u'][k]),
+                        v_m_s=np.interp(heights, z, state['v'][k]), theta_k=reference['theta_k'] + dth,
+                        qv_kg_kg=reference['qv_kg_kg'] * ratio))
+    return out
+
+
+def weather_table(seq: dict, clock: dict, mean_table: dict, pressure_pa, start_s: float, bins: int = WEATHER_BINS):
+    """The case's table of heating and moistening by local time (terluna_lsadv.txt) over its lunar day from start_s:
+    at each bin's hour angle, the mean-forced table as CM1 applies it there (linear in local time between its bins,
+    round the day) plus the GCM's departure from its fit at the time within the case the bin's hour angle falls at
+    (gcm_site.sequence_tendency), laid on CM1's levels by pressure (gcm_site.remap, as to_cm1 lays the table)."""
+    import numpy as np
+    from climate.crm import gcm_site
+    f = seq['forcing']
+    hours = (np.arange(bins) + 0.5) * 360.0 / bins - 180.0
+    h_mean = np.asarray(mean_table['hour_angle_deg'], float)
+    mean = {}
+    for key in ('theta_k_s', 'qv_kg_kg_s'):
+        a = np.asarray(mean_table[key], float)
+        hh = np.r_[h_mean[-1] - 360.0, h_mean, h_mean[0] + 360.0]
+        aa = np.vstack([a[-1:], a, a[:1]])
+        mean[key] = np.stack([np.interp(hours, hh, aa[:, k]) for k in range(a.shape[1])], axis=-1)
+    hour_start = (clock['hour0_deg'] + 360.0 * start_s / clock['day_s'] + 180.0) % 360.0 - 180.0
+    box_s = start_s + ((hours - hour_start) % 360.0) / 360.0 * clock['day_s']
+    gcm_s = clock['gcm_start_s'] + (box_s - clock['box_start_s'])
+    edges = gcm_site.plasim_edges(f['sigma']) * f['surface']['pressure_pa']
+    depart = {key: gcm_site.remap(gcm_site.sequence_tendency(seq, k, gcm_s), edges, pressure_pa)
+              for key, k in (('theta_k_s', 'theta'), ('qv_kg_kg_s', 'q'))}
+    return dict(z_m=np.asarray(mean_table['z_m'], float), hour_angle_deg=hours, box_s=box_s, gcm_s=gcm_s,
+                theta_k_s=mean['theta_k_s'] + depart['theta_k_s'], qv_kg_kg_s=mean['qv_kg_kg_s'] + depart['qv_kg_kg_s'],
+                departure=depart, mean=mean)
+
+
+def read_day_night(path: Path) -> dict:
+    """terluna_lsadv.txt as write_day_night writes it."""
+    import numpy as np
+    words = path.read_text().split()
+    nb, nl = int(words[0]), int(words[1])
+    v = np.asarray(words[2:], float)
+    z, rows = v[:nl], v[nl:].reshape(nb, 2, nl)
+    return dict(z_m=z, theta_k_s=rows[:, 0], qv_kg_kg_s=rows[:, 1],
+                hour_angle_deg=(np.arange(nb) + 0.5) * 360.0 / nb - 180.0)
+
+
+def read_nudging(path: Path) -> dict:
+    """One lsnudge_NNNN.dat: its times and profile (z m, theta K, qv kg/kg, u and v m/s)."""
+    import numpy as np
+    lines = path.read_text().splitlines()
+    t1, t2 = (float(x) for x in lines[1].split()[:2])
+    rows = np.array([[float(x) for x in line.split()] for line in lines[4:] if line.strip()])
+    return dict(time_s=(t1, t2), z_m=rows[:, 0], theta_k=rows[:, 1], qv_kg_kg=rows[:, 2] / 1000.0, u_m_s=rows[:, 3],
+                v_m_s=rows[:, 4])
+
+
+def write_nudging(path: Path, t1: float, t2: float, z, theta, qv, u, v) -> None:
+    """One lsnudge_NNNN.dat in the form setup writes them."""
+    rows = [' *  Header:   lsnudge_time1 (s)   lsnudge_time2 (s)', f'  {t1:22.1f} {t2:22.6e}',
+            ' *  Profile.   Note: values will be ignored if nudging for that variable is off.',
+            ' *    z (m)   theta (K)    qv (g/kg)  u (m/s, grnd-reltv) v (m/s, grnd-reltv)']
+    rows += [f'  {a:12.4f} {b:12.4f} {c * 1000:12.6f} {d:10.4f} {e:10.4f}' for a, b, c, d, e in zip(z, theta, qv, u, v)]
+    path.write_text('\n'.join(rows) + '\n')
+
+
+def setup_weather(name: str, cfg: dict) -> Path:
+    """Set up a weather case: setup_restart's case from the source's restart, with its nudging windows and its table
+    of heating and moistening replaced by the GCM's sequence over the case's span (weather_windows, weather_table),
+    and the record of what it follows in case.json."""
+    import numpy as np
+    from climate.crm import gcm_site
+    case = setup_restart(name, cfg)
+    record = json.loads((case / 'case.json').read_text())
+    root = window_root(RUNS / cfg['restart_from']['case'])
+    reference = read_nudging(root / 'lsnudge_0001.dat')                  # the mean-forced box's reference air
+    seq = weather_sequence(cfg)
+    clock = weather_clock(cfg, seq)
+    start_s = record['restart_from']['model_s']
+    end_s = case_length_s(cfg, record.get('time_scale', 1.0))
+    if start_s < clock['box_start_s'] - 1.0:
+        raise ValueError(f"{name} starts at {start_s:.0f} s, before its stretch begins at {clock['box_start_s']:.0f} s")
+    windows = weather_windows(cfg, seq, clock, reference, start_s, end_s)
+    for old in case.glob('lsnudge_*.dat'):
+        old.unlink()
+    for k, w in enumerate(windows, 1):
+        t1, t2 = w['time_s']
+        write_nudging(case / f'lsnudge_{k:04d}.dat', t1, 1.0e30 if k == len(windows) else t2, reference['z_m'],
+                      w['theta_k'], w['qv_kg_kg'], w['u_m_s'], w['v_m_s'])
+    zw = np.loadtxt(case / 'input_grid_z')
+    sounding = np.loadtxt(case / 'input_sounding', skiprows=1)
+    theta_at = lambda z: np.interp(z, sounding[:, 0], sounding[:, 1])
+    qv_at = lambda z: np.interp(z, sounding[:, 0], sounding[:, 2] / 1000.0)
+    f = seq['forcing']
+    pressure = gcm_site.column_pressures(zw, theta_at, qv_at, f['surface']['pressure_pa'], planet()['gravity_m_s2'])
+    mean_table = read_day_night(root / 'terluna_lsadv.txt')               # the mean-forced box's own table
+    table = weather_table(seq, clock, mean_table, pressure, start_s)
+    write_day_night(case / 'terluna_lsadv.txt', table)
+    low = table['z_m'] < 3000.0
+    speed = [float(np.hypot(w['u_m_s'][1], w['v_m_s'][1])) for w in windows]
+    digest = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()[:16]
+    names = [p.name for p in sorted(case.glob('lsnudge_*.dat'))] + ['terluna_lsadv.txt']
+    record['inputs'] = dict({k: v for k, v in record['inputs'].items() if not k.startswith('lsnudge_')},
+                            **{n: digest(case / n) for n in names})
+    w = cfg['weather']
+    record['nudging_wind'] = dict(windows=len(windows), window_s=windows[0]['time_s'][1] - windows[0]['time_s'][0],
+                                  source="the GCM's own sequence at the site (weather_windows)",
+                                  lowest_level_speed_m_s=dict(min=min(speed), max=max(speed)))
+    record['weather'] = dict(
+        w, source_records=f"{w['run']} years {w['years'][0]}-{w['years'][-1]}, means over {seq['window_deg']} degrees",
+        clock=clock, sun=seq['sun'], case_box_s=[start_s, end_s],
+        case_gcm_s=[clock['gcm_start_s'] + start_s - clock['box_start_s'], clock['gcm_start_s'] + end_s - clock['box_start_s']],
+        windows=len(windows), bins=int(table['hour_angle_deg'].size),
+        reference=f"{root.name}'s lsnudge_0001.dat plus the GCM's departure from its mean air",
+        table=dict(source=f"the mean-forced table ({root.name}'s terluna_lsadv.txt) in local time plus the GCM's "
+                          'departures from its fit, laid by pressure',
+                   lowest_3_km_departure=dict(theta_k_day=float(table['departure']['theta_k_s'][:, low].mean() * 86400.0),
+                                              qv_g_kg_day=float(table['departure']['qv_kg_kg_s'][:, low].mean() * 8.64e7))),
+        sea_k=dict(held=float((case / 'terluna_surface.txt').read_text().split()[5]), gcm_over_case=float(np.mean(np.interp(np.linspace(*[clock['gcm_start_s'] + s - clock['box_start_s'] for s in (start_s, end_s)], 200),
+                                                                     seq['sea_k']['time_s'], seq['sea_k']['value'])))))
+    (case / 'case.json').write_text(json.dumps(record, indent=1, default=float) + '\n')
+    return case
 
 NIGHT_INPUTS = ('input_grid_z', 'terluna_wls.txt', 'terluna_lsadv.txt', 'terluna_surface.txt', 'LANDUSE.TBL',
                 TWILIGHT_TABLE, RAIN_LAW_TABLE)
@@ -3434,6 +3641,8 @@ def setup(name: str) -> Path:
     cfg = CASES[name]
     if cfg.get('night_from'):
         return setup_night(name, cfg)
+    if cfg.get('restart_from') and cfg.get('weather'):
+        return setup_weather(name, cfg)
     if cfg.get('restart_from'):
         return setup_restart(name, cfg)
     if cfg.get('fine_from'):
