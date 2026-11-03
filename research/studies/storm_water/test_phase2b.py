@@ -262,6 +262,23 @@ def test_wepp_baselines_as_documented():
     assert tc == pytest.approx(2.67 + 0.065 * 20.0 - 0.058 * 10.0)
 
 
+def test_earth_crusts_leave_the_measured_share_of_their_bare_soils_loss():
+    """Earth's crusts leave 0.32 of the bare soil's loss on average and 0.15 on loams (Eldridge et al. 2020); the
+    engineered crust's share of the bare sandy loam's loss is reported over the drylands, weighted by area."""
+    x = dict(cls=np.array(['arid', 'semi-arid', 'semi-arid', 'dry sub-humid']), area_km2=np.array([1.0, 2.0, 1.0, 1.0]))
+    wear = dict(sandy_loam=dict(cell_mm_yr=np.array([0.1, 0.2, 0.4, 0.5])),
+                loam=dict(cell_mm_yr=np.array([0.2, 0.3, 0.5, 0.6])),
+                biocrust=dict(cell_mm_yr=np.array([0.005, 0.01, 0.02, 0.025])))
+    out = B.earth_crusts(x, wear)
+    assert set(out) == {f'earth_crust_{k}_over_{s}' for k in ('mean', 'loams') for s in ('sandy_loam', 'loam')}
+    assert out['earth_crust_mean_over_loam']['cell_mm_yr'] == pytest.approx([0.064, 0.096, 0.16, 0.192])
+    assert out['earth_crust_loams_over_sandy_loam']['share_of_bare_loss'] == 0.15
+    semi = out['earth_crust_mean_over_sandy_loam']['classes']['semi-arid']
+    assert semi['loss_mm_yr'] == pytest.approx(0.32 * (0.2 * 2.0 + 0.4) / 3.0)
+    assert semi['share_of_area_above_formation']['0.036'] == pytest.approx(1.0)    # 0.064 and 0.128 mm a year
+    assert wear['biocrust']['share_of_bare_sandy_loam_loss'] == pytest.approx(0.05)
+
+
 def test_lake_mead_check_is_recorded_with_its_rule():
     c = B.mead_check()
     assert c['rule']['tolerance'] == 0.25 and c['measured_w_m2'] == 164.0

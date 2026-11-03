@@ -78,7 +78,12 @@ SALTS = dict(rain_mg_l=2.0, dust_soluble_g_m2_yr=0.5, soda_share=0.02, saline_kg
 # percentages (Alberts et al. 1995, read in a search summary of WEPP's documentation).
 TEXTURES = dict(sandy_loam=dict(sand=65.0, clay=10.0, vfs=15.0, om=1.0), loam=dict(sand=40.0, clay=20.0, vfs=10.0, om=1.0))
 BIOCRUST = dict(erodibility_factor=0.1, critical_shear_factor=3.0)    # design: crusts bind the surface (recalled)
-RILL = dict(spacing_m=1.0, width_a=1.13, width_b=0.303)               # WEPP's rill spacing and width (recalled)
+# The crust at Earth's measured strength. Over 109 studies biological crusts cut sediment production by 68%, and by 85%
+# on loams (Eldridge et al. 2020, Global Change Biology 26, 6003-6014, doi:10.1111/gcb.15232), so a crust leaves 0.32
+# or 0.15 of its bare soil's loss under the same storms. BIOCRUST's factors cut the bare sandy loam's loss by about
+# 95%, beyond Earth's measured crusts: the biocrust surface stands as the engineered crust, and these as Earth's.
+EARTH_CRUST = dict(mean=0.32, loams=0.15)
+RILL =dict(spacing_m=1.0, width_a=1.13, width_b=0.303)               # WEPP's rill spacing and width (recalled)
 BULK_DENSITY = 1400.0
 SOIL_FORMATION_MM_YR = (0.017, 0.036)  # natural soil formation (Montgomery 2007), as biosphere/ecology/people.py has it
 # The Earth checks' rules, set before each was run.
@@ -890,6 +895,21 @@ def wear_summary(x, loss_mm):
     return out
 
 
+def earth_crusts(x, wear):
+    """Crusts of Earth's measured strength (EARTH_CRUST) over the bare sandy loam and the loam, from those surfaces'
+    own losses under the same storms; and, on the biocrust surface, the engineered crust's share of the bare sandy
+    loam's loss over the drylands, for comparison."""
+    out = {}
+    for bare in ('sandy_loam', 'loam'):
+        for k, f in EARTH_CRUST.items():
+            loss = f * wear[bare]['cell_mm_yr']
+            out[f'earth_crust_{k}_over_{bare}'] = dict(classes=wear_summary(x, loss), share_of_bare_loss=f, cell_mm_yr=loss)
+    a = x['area_km2']
+    wear['biocrust']['share_of_bare_sandy_loam_loss'] = float((wear['biocrust']['cell_mm_yr'] * a).sum()
+                                                              / (wear['sandy_loam']['cell_mm_yr'] * a).sum())
+    return out
+
+
 # ---------------------------------------------------------------------------------------------------------------------
 # Checks.
 
@@ -1046,6 +1066,7 @@ def run_phase2b(x, libs, pressure):
             loss, earth, parts = slope_wear(x, off, name, libs[b], pressure)
             wear_out.setdefault(b, {})[name] = dict(classes=wear_summary(x, loss), earth_gravity_and_drops=wear_summary(x, earth),
                                                     events=parts, cell_mm_yr=loss)
+        wear_out[b].update(earth_crusts(x, wear_out[b]))
     # Sensitivity: the transfer raised by Lake Mead's factor for the loam under Walnut Gulch's storms.
     pools = build_pools(inp, 'walnut_gulch', 'loam')
     st = simulate(pools, x, e_hi, 'clay_floored', IN.MOON, inp['off__walnut_gulch__loam'].astype(float), solute, rech_tab)
@@ -1121,7 +1142,10 @@ def run_phase2b(x, libs, pressure):
                     free_convection=dict(FREE_CONVECTION, lunar_m_s_k3=float(free_convection(IN.MOON, 1.16 * STANDARD_ATMOSPHERE))),
                     transfer='COARE 3.0 (Fairall et al. 2003) at lunar gravity on the wind with the layer\'s gust', depths_m=[float(v) for v in D_REF], steps_per_mean=STEPS_PER_MEAN,
                     wet_m=WET_M, deep_m=DEEP_M, checkpoints=CHECKPOINTS, spinup_means=SPINUP_MEANS, seal=SEAL, bank=BANK,
-                    salts=SALTS, textures=TEXTURES, biocrust=BIOCRUST, rill=RILL, bulk_density=BULK_DENSITY,
+                    salts=SALTS, textures=TEXTURES, biocrust=BIOCRUST,
+                    earth_crust=dict(EARTH_CRUST, source='Eldridge et al. 2020, Global Change Biology 26, 6003-6014: '
+                                     'sediment production -68% across studies, -85% on loams'),
+                    rill=RILL, bulk_density=BULK_DENSITY,
                     soil_formation_mm_yr=SOIL_FORMATION_MM_YR, bowl_shape='paraboloid, Pike\'s fresh form at half its depth',
                     classes=list(CLASS_NAMES)),
         energy=energy, checks=checks, pools=pools_out, leverage=lev_out, salts=salt_out,

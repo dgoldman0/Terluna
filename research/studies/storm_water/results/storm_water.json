@@ -8688,6 +8688,11 @@
     "erodibility_factor": 0.1,
     "critical_shear_factor": 3.0
    },
+   "earth_crust": {
+    "mean": 0.32,
+    "loams": 0.15,
+    "source": "Eldridge et al. 2020, Global Change Biology 26, 6003-6014: sediment production -68% across studies, -85% on loams"
+   },
    "rill": {
     "spacing_m": 1.0,
     "width_a": 1.13,
@@ -22652,7 +22657,156 @@
        "earth_interrill_kg_m2": 0.10967272686326819,
        "earth_rill_kg_m2": 0.23303945009848429
       }
-     ]
+     ],
+     "share_of_bare_sandy_loam_loss": 0.0527330870387161
+    },
+    "earth_crust_mean_over_sandy_loam": {
+     "classes": {
+      "arid": {
+       "loss_mm_yr": 0.017267198271729123,
+       "loss_mm_yr_max": 0.08034119050599893,
+       "share_of_area_above_formation": {
+        "0.017": 0.3173251250577963,
+        "0.036": 0.14285061803651378
+       }
+      },
+      "semi-arid": {
+       "loss_mm_yr": 0.08210422505773031,
+       "loss_mm_yr_max": 0.24289589459201744,
+       "share_of_area_above_formation": {
+        "0.017": 0.9657064441803892,
+        "0.036": 0.7904763916445834
+       }
+      },
+      "dry sub-humid": {
+       "loss_mm_yr": 0.1832647573628091,
+       "loss_mm_yr_max": 0.40423200765112677,
+       "share_of_area_above_formation": {
+        "0.017": 1.0,
+        "0.036": 1.0
+       }
+      },
+      "drylands": {
+       "loss_mm_yr": 0.07675582277722409,
+       "loss_mm_yr_max": 0.40423200765112677,
+       "share_of_area_above_formation": {
+        "0.017": 0.7406234869166654,
+        "0.036": 0.5964293761241191
+       }
+      }
+     },
+     "share_of_bare_loss": 0.32
+    },
+    "earth_crust_loams_over_sandy_loam": {
+     "classes": {
+      "arid": {
+       "loss_mm_yr": 0.008093999189873025,
+       "loss_mm_yr_max": 0.037659933049687,
+       "share_of_area_above_formation": {
+        "0.017": 0.14285061803651378,
+        "0.036": 0.012092318230267466
+       }
+      },
+      "semi-arid": {
+       "loss_mm_yr": 0.03848635549581108,
+       "loss_mm_yr_max": 0.11385745059000817,
+       "share_of_area_above_formation": {
+        "0.017": 0.7875124474815721,
+        "0.036": 0.4891252356166194
+       }
+      },
+      "dry sub-humid": {
+       "loss_mm_yr": 0.08590535501381676,
+       "loss_mm_yr_max": 0.18948375358646566,
+       "share_of_area_above_formation": {
+        "0.017": 1.0,
+        "0.036": 0.9634312628791416
+       }
+      },
+      "drylands": {
+       "loss_mm_yr": 0.03597929192682379,
+       "loss_mm_yr_max": 0.18948375358646566,
+       "share_of_area_above_formation": {
+        "0.017": 0.5950422830267548,
+        "0.036": 0.4023731738108848
+       }
+      }
+     },
+     "share_of_bare_loss": 0.15
+    },
+    "earth_crust_mean_over_loam": {
+     "classes": {
+      "arid": {
+       "loss_mm_yr": 0.015556745992886012,
+       "loss_mm_yr_max": 0.0712651832675214,
+       "share_of_area_above_formation": {
+        "0.017": 0.276706891803485,
+        "0.036": 0.12863664549929715
+       }
+      },
+      "semi-arid": {
+       "loss_mm_yr": 0.06978005874874163,
+       "loss_mm_yr_max": 0.1930652541843171,
+       "share_of_area_above_formation": {
+        "0.017": 0.9489518032863475,
+        "0.036": 0.7626236017072398
+       }
+      },
+      "dry sub-humid": {
+       "loss_mm_yr": 0.15016847640356978,
+       "loss_mm_yr_max": 0.31838991528899185,
+       "share_of_area_above_formation": {
+        "0.017": 1.0,
+        "0.036": 0.9978107100960409
+       }
+      },
+      "drylands": {
+       "loss_mm_yr": 0.06456759099328088,
+       "loss_mm_yr_max": 0.31838991528899185,
+       "share_of_area_above_formation": {
+        "0.017": 0.7183048420539614,
+        "0.036": 0.5779438643356106
+       }
+      }
+     },
+     "share_of_bare_loss": 0.32
+    },
+    "earth_crust_loams_over_loam": {
+     "classes": {
+      "arid": {
+       "loss_mm_yr": 0.007292224684165316,
+       "loss_mm_yr_max": 0.033405554656650654,
+       "share_of_area_above_formation": {
+        "0.017": 0.12863664549929715,
+        "0.036": 0.0
+       }
+      },
+      "semi-arid": {
+       "loss_mm_yr": 0.03270940253847265,
+       "loss_mm_yr_max": 0.09049933789889865,
+       "share_of_area_above_formation": {
+        "0.017": 0.7584157750747442,
+        "0.036": 0.379751035143926
+       }
+      },
+      "dry sub-humid": {
+       "loss_mm_yr": 0.07039147331417332,
+       "loss_mm_yr_max": 0.14924527279171493,
+       "share_of_area_above_formation": {
+        "0.017": 0.9956214201920819,
+        "0.036": 0.9240496625463727
+       }
+      },
+      "drylands": {
+       "loss_mm_yr": 0.03026605827810041,
+       "loss_mm_yr_max": 0.14924527279171493,
+       "share_of_area_above_formation": {
+        "0.017": 0.5755902556208099,
+        "0.036": 0.3399625973613065
+       }
+      }
+     },
+     "share_of_bare_loss": 0.15
     }
    },
    "cm1_6km": {
@@ -23070,7 +23224,156 @@
        "earth_interrill_kg_m2": 0.23738415127925533,
        "earth_rill_kg_m2": 0.02331849398400646
       }
-     ]
+     ],
+     "share_of_bare_sandy_loam_loss": 0.1030810319592405
+    },
+    "earth_crust_mean_over_sandy_loam": {
+     "classes": {
+      "arid": {
+       "loss_mm_yr": 0.010416362365773037,
+       "loss_mm_yr_max": 0.04766348777769915,
+       "share_of_area_above_formation": {
+        "0.017": 0.2004506348175808,
+        "0.036": 0.0464283165524004
+       }
+      },
+      "semi-arid": {
+       "loss_mm_yr": 0.045767008828929166,
+       "loss_mm_yr_max": 0.12659049684389695,
+       "share_of_area_above_formation": {
+        "0.017": 0.8634902272374906,
+        "0.036": 0.5923874370446717
+       }
+      },
+      "dry sub-humid": {
+       "loss_mm_yr": 0.0976408292051072,
+       "loss_mm_yr_max": 0.20478308641137336,
+       "share_of_area_above_formation": {
+        "0.017": 1.0,
+        "0.036": 0.9890535504802046
+       }
+      },
+      "drylands": {
+       "loss_mm_yr": 0.042274820577739396,
+       "loss_mm_yr_max": 0.20478308641137336,
+       "share_of_area_above_formation": {
+        "0.017": 0.6511295615261982,
+        "0.036": 0.4674359322977981
+       }
+      }
+     },
+     "share_of_bare_loss": 0.32
+    },
+    "earth_crust_loams_over_sandy_loam": {
+     "classes": {
+      "arid": {
+       "loss_mm_yr": 0.00488266985895611,
+       "loss_mm_yr_max": 0.022342259895796475,
+       "share_of_area_above_formation": {
+        "0.017": 0.04061570419350886,
+        "0.036": 0.0
+       }
+      },
+      "semi-arid": {
+       "loss_mm_yr": 0.021453285388560544,
+       "loss_mm_yr_max": 0.05933929539557669,
+       "share_of_area_above_formation": {
+        "0.017": 0.5894234928816604,
+        "0.036": 0.13425475442883172
+       }
+      },
+      "dry sub-humid": {
+       "loss_mm_yr": 0.045769138689894,
+       "loss_mm_yr_max": 0.09599207175533125,
+       "share_of_area_above_formation": {
+        "0.017": 0.9890535504802046,
+        "0.036": 0.7045261886611974
+       }
+      },
+      "drylands": {
+       "loss_mm_yr": 0.01981632214581534,
+       "loss_mm_yr_max": 0.09599207175533125,
+       "share_of_area_above_formation": {
+        "0.017": 0.46397703528188633,
+        "0.036": 0.18652943629233207
+       }
+      }
+     },
+     "share_of_bare_loss": 0.15
+    },
+    "earth_crust_mean_over_loam": {
+     "classes": {
+      "arid": {
+       "loss_mm_yr": 0.01562948135966432,
+       "loss_mm_yr_max": 0.0717748924172651,
+       "share_of_area_above_formation": {
+        "0.017": 0.28376879867128907,
+        "0.036": 0.13296085751196626
+       }
+      },
+      "semi-arid": {
+       "loss_mm_yr": 0.06630702497021178,
+       "loss_mm_yr_max": 0.18090982069515807,
+       "share_of_area_above_formation": {
+        "0.017": 0.9508270096398391,
+        "0.036": 0.7508036058968831
+       }
+      },
+      "dry sub-humid": {
+       "loss_mm_yr": 0.1378522932962741,
+       "loss_mm_yr_max": 0.2815632479450616,
+       "share_of_area_above_formation": {
+        "0.017": 1.0,
+        "0.036": 1.0
+       }
+      },
+      "drylands": {
+       "loss_mm_yr": 0.06080571710448559,
+       "loss_mm_yr_max": 0.2815632479450616,
+       "share_of_area_above_formation": {
+        "0.017": 0.7216995109699728,
+        "0.036": 0.5743379190305652
+       }
+      }
+     },
+     "share_of_bare_loss": 0.32
+    },
+    "earth_crust_loams_over_loam": {
+     "classes": {
+      "arid": {
+       "loss_mm_yr": 0.0073263193873426505,
+       "loss_mm_yr_max": 0.033644480820593015,
+       "share_of_area_above_formation": {
+        "0.017": 0.12816328077437636,
+        "0.036": 0.0
+       }
+      },
+      "semi-arid": {
+       "loss_mm_yr": 0.031081417954786767,
+       "loss_mm_yr_max": 0.08480147845085534,
+       "share_of_area_above_formation": {
+        "0.017": 0.7478396617338718,
+        "0.036": 0.3409123127900564
+       }
+      },
+      "dry sub-humid": {
+       "loss_mm_yr": 0.06461826248262849,
+       "loss_mm_yr_max": 0.1319827724742476,
+       "share_of_area_above_formation": {
+        "0.017": 1.0,
+        "0.036": 0.9148219580561661
+       }
+      },
+      "drylands": {
+       "loss_mm_yr": 0.02850267989272761,
+       "loss_mm_yr_max": 0.1319827724742476,
+       "share_of_area_above_formation": {
+        "0.017": 0.5712408136924455,
+        "0.036": 0.3201663176293415
+       }
+      }
+     },
+     "share_of_bare_loss": 0.15
     }
    }
   },
@@ -24610,7 +24913,7 @@
    "research/studies/storm_water/wetting.py": "76736a6f41b6ef81b670e5feb39360b64294696feee8cf9b953ded68291d1a1f",
    "research/studies/storm_water/routing.py": "1ce22a462e0774f3b18c9d5fa8695f7e3e619b6a6d4f0914db9810817b6dd3e6",
    "research/studies/storm_water/phase2a.py": "69d7c6e0656c823dcc5961ff09bbbe11f0dd57586baa0dffefd7c88e4699b52b",
-   "research/studies/storm_water/phase2b.py": "5e74916990a026419a6ae119c2f5c983609fb7e25cb65ba3ff5cc656149c49d1",
+   "research/studies/storm_water/phase2b.py": "32e81c118b449c4118797c0357f62f3707baba9320110e246dc0fec472f1ae3f",
    "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5",
    "climate/crm/gcm_site.py": "ab7dbb26a52ae1835fb0ac088bb492eb29a4327a058683877830c99482f61b72"
   },
