@@ -403,7 +403,9 @@ def harness_input(mode, rows, nsteps, store=None):
 
 
 def run(exe, text):
-    out = subprocess.run([str(exe)], input=text, capture_output=True, text=True, check=True).stdout
+    run = subprocess.run([str(exe)], input=text, capture_output=True, text=True, check=True)
+    assert 'array temporary' not in run.stderr, 'the patched routines make array temporaries under -fcheck=all'
+    out = run.stdout
     return [line for line in out.strip('\n').split('\n')]
 
 
@@ -485,7 +487,9 @@ def test_lstoreini_reads_the_runners_table_into_the_start_the_python_copy_gives(
     for floor, surface, held in (('sandy_banked', 'loam', 0), ('tight_seal', 'biocrust', 1)):
         stdin = f"{ls.FLOORS.index(floor) + 1} {ls.SURFACES.index(surface) + 1} {held} {held} {TAU!r} {len(points)}\n"
         stdin += ' '.join(str(k + 1) for k in points) + '\n'
-        out = subprocess.run([str(exe)], input=stdin, capture_output=True, text=True, check=True, cwd=folder).stdout
+        run = subprocess.run([str(exe)], input=stdin, capture_output=True, text=True, check=True, cwd=folder)
+        assert 'array temporary' not in run.stderr, 'the patched routines make array temporaries under -fcheck=all'
+        out = run.stdout
         lines = [line for line in out.strip('\n').split('\n') if '*' not in line]
         si = ls.SURFACES.index(surface)
         for line, k in zip(lines, points):

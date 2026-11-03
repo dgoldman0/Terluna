@@ -552,6 +552,7 @@ ROUTINES = """
 !     The store needs the prognostic land.
 !
       real zcap(NUGP),zarea(NUGP,NLSF),zseep(NUGP,NLSF),zshare(NUGP,3),zvbal(NUGP),zrc0(NUGP),zrl0(NUGP)
+      real zla(NLSF),zls(NLSF)   ! a cell's curve, contiguous for lscurve
       real zrow(2+NLSSURFS*NLSROW)
       real ztab(NLSR,NLSW)
       real zq
@@ -627,7 +628,9 @@ ROUTINES = """
          dlsrc(jhor)=dlsrc0(jhor)
          dlsrl(jhor)=dlsrl0(jhor)
         endif
-        call lscurve(NLSF,dlsfill,dlsarea(jhor,:),dlsseep(jhor,:),dlscap(jhor),dlsv(jhor),dlsfw(jhor),zq)
+        zla(:)=dlsarea(jhor,:)
+        zls(:)=dlsseep(jhor,:)
+        call lscurve(NLSF,dlsfill,zla,zls,dlscap(jhor),dlsv(jhor),dlsfw(jhor),zq)
        else
         dlsv(jhor)=0.
         dlsfw(jhor)=0.
@@ -690,13 +693,17 @@ ROUTINES = """
 !     carries; the slow store gains the seepage and the recharge below the roots.
 !
       real zdwat,zvn,zfwn,zrcn,zrln,zroff,zseep,zrech,zspill,zriver,zinfl
+      real zla(NLSF),zls(NLSF),zsh(3)   ! a cell's curve and shares, contiguous for lsstep
       integer jhor
 !
       do jhor=1,NHOR
        dlsflx(jhor,:)=0.
        if (dls(jhor) > 0. .and. dlscap(jhor) > 0.) then
+        zla(:)=dlsarea(jhor,:)
+        zls(:)=dlsseep(jhor,:)
+        zsh(:)=dlsshare(jhor,:)
         call lsstep(deltsec,dprc(jhor),dprl(jhor),dlses(jhor),dlstau,dlsrc(jhor),dlsrl(jhor),dwatc(jhor),dwmax(jhor),   &
-     &              dlsfw(jhor),dlsv(jhor),dlscap(jhor),NLSF,dlsfill,dlsarea(jhor,:),dlsseep(jhor,:),dlsshare(jhor,:),    &
+     &              dlsfw(jhor),dlsv(jhor),dlscap(jhor),NLSF,dlsfill,zla,zls,zsh,                                       &
      &              NLSR,NLSW,dlsrgrid,dlswgrid,dlsctab,dlsltab,zdwat,zvn,zfwn,zrcn,zrln,zroff,zseep,zrech,zspill,zriver, &
      &              zinfl)
         dwater(jhor)=dwater(jhor)+zdwat
