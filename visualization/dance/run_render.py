@@ -2,7 +2,8 @@
 
     python visualization/dance/run_render.py MOTION.npz --out OUT.mp4 [--garment G.npz ...]
            [--preset draft|test|detail|video|final] [--stills 2.0,4.4,6.5] [--stills-preset final] [--stills-only]
-           [--frames 1:120] [--rebuild] [--bodice R,G,B [--bodice-look matte|satin]] [--yoke R,G,B,A] [--sheer hashed|blend] [--samples N]
+           [--frames 1:120] [--cam-az DEG] [--cam-dist M] [--cam-aim M] [--cam-fstop N] [--rebuild] [--bodice R,G,B [--bodice-look matte|satin]] [--yoke R,G,B,A] [--sheer hashed|blend] [--samples N]
+           [--bodice-shell STYLE[,NECKLINE] [--trim R,G,B]] [--light stage|soft]
 
 MOTION.npz follows humanities/dance/motion_io.py (schema terluna.humanities.dance-motion/1). Each --garment file holds
 `faces` (F, 3) int and `verts` (N_frames, V, 3) in the dance world frame at the motion's rate (or at its own `fps`).
@@ -20,7 +21,10 @@ colour over the skin above the bodice, from the bodice's neckline to a jewel nec
 the shoulders to the shoulder point; A (0 to 1) is the share of the skin it veils seen face on, denser toward the
 silhouette and at its hems. The yoke is off unless --yoke is given, and it needs a dancer built since 2 November (the
 build stores its zone; rebuild an older dancer with --rebuild). Sheer garments render as one surface seen from both
-sides; opaque ones are given 1.5 mm of thickness.
+sides; opaque ones are given 1.5 mm of thickness. --bodice-shell STYLE[,NECKLINE] makes the bodice a garment: a shell
+over the torso, skinned as the body is, in a structured, ruched or pleated style with a sweetheart, vee or straight
+neckline piped in the --trim colour (the README gives its construction). --cam-aim and --cam-fstop frame close stills:
+--cam-aim 0.36 --cam-dist 2.1 --cam-fstop 8 takes the standing dancer from the hips to the head.
 """
 from __future__ import annotations
 
@@ -69,6 +73,11 @@ def main(argv=None) -> int:
                     help='camera bearing from the +x axis, degrees (default: 30 for phrases in place, square to the '
                          'travel for travelling phrases)')
     ap.add_argument('--cam-dist', type=float, default=None, help='camera distance, m (default 5.5 in place, 6.8 travelling)')
+    ap.add_argument('--cam-aim', type=float, default=None,
+                    help='height of the camera\'s aim above the centre of mass, m (default 0.06); the camera rises '
+                         'with it, so --cam-aim 0.32 --cam-dist 1.9 frames the bodice level, hips to head')
+    ap.add_argument('--cam-fstop', type=float, default=None,
+                    help='aperture (default 2.8); a close still wants about 8 to keep the torso in focus')
     ap.add_argument('--dancer', default=str(DANCER), help='rigged dancer .blend (built if missing)')
     ap.add_argument('--report-dir', default=str(REPORT))
     ap.add_argument('--rebuild', action='store_true')
@@ -83,6 +92,12 @@ def main(argv=None) -> int:
                     help='transparency of sheer cloth: hashed (dithered; smooth only at high sample counts) or blend '
                          '(smooth at any count; layers sorted by object)')
     ap.add_argument('--samples', type=int, default=0, help="render samples (0: the preset's)")
+    ap.add_argument('--bodice-shell', default='',
+                    help='STYLE[,NECKLINE]: make the bodice a shell over the torso (structured, ruched or pleated; '
+                         'sweetheart, vee or straight neckline), coloured by --bodice')
+    ap.add_argument('--trim', default='0.70,0.52,0.25', help="sRGB r,g,b of the bodice shell's piped edge")
+    ap.add_argument('--light', choices=['stage', 'soft'], default='stage',
+                    help='the lighting: stage (side light from coloured booms, the default) or soft (an even, stronger front light)')
     a = ap.parse_args(argv)
     if a.rebuild or not Path(a.dancer).exists():
         rc = blender(['build', '--blend', a.dancer, '--report-dir', a.report_dir])
@@ -94,6 +109,10 @@ def main(argv=None) -> int:
         args += ['--cam-az', a.cam_az]
     if a.cam_dist is not None:
         args += ['--cam-dist', a.cam_dist]
+    if a.cam_aim is not None:
+        args += ['--cam-aim', a.cam_aim]
+    if a.cam_fstop is not None:
+        args += ['--cam-fstop', a.cam_fstop]
     for g in a.garment:
         args += ['--garment', Path(g).resolve()]
     if a.stills:
@@ -112,6 +131,10 @@ def main(argv=None) -> int:
         args += ['--sheer', a.sheer]
     if a.samples:
         args += ['--samples', a.samples]
+    if a.bodice_shell:
+        args += ['--bodice-shell', a.bodice_shell, '--trim', a.trim]
+    if a.light != 'stage':
+        args += ['--light', a.light]
     return blender(args)
 
 

@@ -3,7 +3,7 @@
   "producer": {
     "files": {
       "research/studies/world_economy/industrial_continuation.py": "be1dd3fa36c448bd1a581891216dd982c9dcf16a397d35fe083e5a1454e610b7",
-      "research/studies/world_economy/industrial_continuation_inputs.json": "4deed1be810728848445a1e78eccc6adc51854f24c07bd413c1602e508f02ab8",
+      "research/studies/world_economy/industrial_continuation_inputs.json": "393fdb562a36112b3382272995dcd91961ad850e37f73dc8dbb808cd2e97b3ca",
       "research/studies/world_economy/industrial_physics.py": "915b7edcbdf70c244cb2d234465f75539e4d65ed81c98f719480d6a802e785cc"
     },
     "input_products": {
@@ -12,7 +12,7 @@
         "schema": "terluna.research.industrial-physics/1"
       },
       "research/studies/world_economy/results/industrial_markets.json": {
-        "sha256": "881b9e8754746be0fca3387fb4e6c473079374e69128524df1ecbc84c89146dd",
+        "sha256": "1ce70438b50dcb5679c653326897d82a099edb6d437a87cf51ee42f53258edf7",
         "schema": "terluna.research.industrial-markets/1"
       }
     }

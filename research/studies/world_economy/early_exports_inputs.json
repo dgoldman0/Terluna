@@ -3,7 +3,7 @@
   "baseline_commit": "6b818cd",
   "products": {
     "research/studies/world_economy/results/comparison.json": {
-      "sha256": "1588231a76669650d362735c922c7a5ce29ef6caa316f6d48f96eae5803f6e4f",
+      "sha256": "010d1c7634f75478d60273aaa9689627a293d9fc2861a261de93ac83fd5e8561",
       "schema": "terluna.research.world-economy-comparison/1"
     }
   },

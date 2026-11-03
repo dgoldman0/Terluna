@@ -340,3 +340,140 @@ def test_sash_follows_a_dress_forms_waist():
     ang = np.mod(np.arctan2(P[:, 1], P[:, 0]), 2 * np.pi)
     th, r = np.asarray(body.waist['theta']), np.asarray(body.waist['r'])
     assert np.allclose(np.hypot(P[:, 0], P[:, 1]), np.interp(ang, th, r, period=2 * np.pi) + 0.016, atol=2e-4)
+
+
+def test_develop_keeps_a_grids_columns_and_cuts_a_bulging_band_to_its_longest_rows():
+    """A grid on a cylinder develops without strain; a band bulging out at its middle rows, developed to its longest
+    rows, starts with every row and column at or under its cut length (compressed, never stretched)."""
+    from humanities.dance.garment.patterns import develop, grid
+    th = np.linspace(0.0, 1.5, 40)
+    z = np.linspace(0.0, 0.1, 9)
+    for bulge, common in ((0.0, False), (0.01, True)):
+        r = 0.15 + bulge * np.sin(np.pi * z / z[-1]) ** 2
+        X = np.stack([r[None, :] * np.cos(th)[:, None], r[None, :] * np.sin(th)[:, None],
+                      np.broadcast_to(z, (len(th), len(z)))], -1)
+        pc = grid(develop(X, common_rows=common))
+        Xv = X.transpose(1, 0, 2).reshape(-1, 3)
+        i, j = np.arange(pc.n_vertices) % len(th), np.arange(pc.n_vertices) // len(th)
+        va = np.concatenate([pc.F[:, a] for a in (0, 1, 2)])
+        vb = np.concatenate([pc.F[:, b] for b in (1, 2, 0)])
+        flat = np.concatenate([np.linalg.norm(pc.UV[:, b] - pc.UV[:, a], axis=1) for a, b in ((0, 1), (1, 2), (2, 0))])
+        ratio = np.linalg.norm(Xv[vb] - Xv[va], axis=1) / flat
+        straight = (i[va] == i[vb]) | (j[va] == j[vb])
+        if bulge == 0.0:
+            assert np.allclose(ratio[straight], 1.0, atol=1e-6)
+            assert np.abs(ratio - 1).max() < 0.01
+        else:
+            assert ratio[straight].max() < 1.0 + 1e-9
+            assert ratio[straight].min() < 0.95                        # the rows inside the bulge start compressed
+
+
+def test_radial_envelope_reaches_the_outermost_cloth():
+    """The envelope of points on a cone is at least each point's radius in its own angle and height."""
+    from humanities.dance.garment.garments import radial_envelope
+    rng = np.random.default_rng(1)
+    th, z = rng.uniform(0, 2 * np.pi, 4000), rng.uniform(0.3, 1.0, 4000)
+    r = 0.15 + 0.4 * (1.0 - z)
+    env = radial_envelope(np.c_[0.02 + r * np.cos(th), r * np.sin(th), z], 0.02)
+    assert (env(th, z) >= r - 1e-12).all()
+    assert (env(th, z) <= r + 0.4 * 0.02 + 0.01).all()                  # a bin and its neighbours, not more
+    assert env(0.0, 1.5) == 0.0                                         # no cloth there
+
+
+def test_draped_sash_starts_on_its_pins_with_its_tails_clear_of_the_dressed_cloth():
+    """A draped sash on a dress form's waist outline (in the rest pose, where its start is its rest) starts with its
+    held edges on their targets, its band's rows and columns at or under their cut lengths and wider toward the knot,
+    and its tails flat at their cut, tilted out until every point below the knot lies `margin` outside the cloth
+    already dressed."""
+    from humanities.dance.garment.body import Body
+    from humanities.dance.garment.garments import draped_sash
+    body = Body()
+    body.waist, axis_x, z_w = _oval_waist(body)
+    p0 = (body.origin, np.tile([1.0, 0.0, 0.0, 0.0], (len(body.names), 1)))
+    env = lambda th, z: np.where(np.asarray(z) < z_w - 0.08, 0.24, 0.0)          # dressed skirts below the hip
+    G = draped_sash(body, p0, h=0.012, h_tail=0.03, envelope=env, margin=0.018)
+    assert np.isfinite(G.X0).all()
+    assert np.allclose(G.attachment.targets(*p0), G.X0[G.pinned], atol=1e-9)
+    offs = G.params['offsets']
+    assert [q['name'] for q in G.params['parts']] == ['sash_band', 'sash_knot', 'sash_tail_0', 'sash_tail_1']
+    w = G.params['parts'][0]['width_on_body_m']
+    assert w[0] > 0.055 and w[1] > 1.4 * w[0]
+    F, UV, X = G.piece.F, G.piece.UV, G.X0
+    edges = lambda sel: [(F[sel][:, a], F[sel][:, b], np.linalg.norm(UV[sel][:, b] - UV[sel][:, a], axis=1))
+                         for a, b in ((0, 1), (1, 2), (2, 0))]
+    n_i = len(G.piece.rings['p0_start'])                                  # the band's grid: rows and columns
+    for va, vb, flat in edges(np.all((F >= offs[0]) & (F < offs[1]), 1)):
+        ka, kb = va - offs[0], vb - offs[0]
+        straight = (ka % n_i == kb % n_i) | (ka // n_i == kb // n_i)
+        assert (np.linalg.norm(X[vb] - X[va], axis=1) / flat)[straight].max() < 1.0 + 1e-6
+    for t in (2, 3):                                                      # the tails: flat at their cut, clear
+        for va, vb, flat in edges(np.all((F >= offs[t]) & (F < offs[t + 1]), 1)):
+            assert np.allclose(np.linalg.norm(X[vb] - X[va], axis=1) / flat, 1.0, atol=1e-6)
+        Xt = X[offs[t]:offs[t + 1]]
+        low = Xt[:, 2] < z_w - 0.12
+        r = np.hypot(Xt[low, 0] - axis_x, Xt[low, 1])
+        assert low.any() and (r >= 0.24 + 0.018 - 1e-9).all()
+        assert G.params['parts'][t]['tilt_deg'] > 10.0
+
+
+def _gathered_tube(compression):
+    """A chiffon tube cut from a narrow ring sector (as a sleeve tier is), its top gathered into a ring 0.73 of its
+    width and hung from it for 1 s on the Moon; returns the largest edge stretch of each triangle in the row below the
+    seam, against the cut."""
+    top, L, h, ring_r, flare = 0.30, 0.12, 0.02, 0.035, 0.2
+    angle = flare * top / L
+    r_in = top / angle
+    pc = sector(r_in, r_in + L, angle, h)
+    uv = pc.vertex_uv
+    rho = np.hypot(uv[:, 0], uv[:, 1])
+    th = 2 * np.pi * np.mod(np.arctan2(uv[:, 1], uv[:, 0]), 2 * np.pi) / angle
+    d = rho - r_in
+    sa = angle / (2 * np.pi)
+    r_free = top / (2 * np.pi)
+    dg = 2 * (r_free - ring_r)
+    slope = (r_free - ring_r) / dg + sa
+    R = ring_r + (r_free - ring_r) * np.clip(d / dg, 0, 1) + d * sa
+    along = np.where(d < dg, d * math.sqrt(1 - slope ** 2),
+                     dg * math.sqrt(1 - slope ** 2) + (d - dg) * math.sqrt(1 - sa * sa))
+    X0 = np.c_[R * np.cos(th), R * np.sin(th), 1.0 - along]
+    inner = np.array(pc.rings['inner'])
+    s = Settings(compression=compression)
+    s.dt = 1 / 2400
+    cl = Cloth(pc, X0, FABRICS['silk_chiffon'], MOON, s, pinned=inner, device='cpu')
+    T = torch.as_tensor(X0[inner], dtype=cl.x.dtype)
+    for _ in range(60):
+        cl.set_frame(T0=T, T1=T, damping=2.0)
+        for k in range(40):
+            cl.substep(s.dt, k / 40, (k + 1) / 40)
+    x = cl.x.double().numpy()
+    F, UV = pc.F, pc.UV
+    lp = np.stack([np.linalg.norm(UV[:, b] - UV[:, a], axis=1) for a, b in ((0, 1), (1, 2), (2, 0))], 1)
+    lx = np.stack([np.linalg.norm(x[F[:, b]] - x[F[:, a]], axis=1) for a, b in ((0, 1), (1, 2), (2, 0))], 1)
+    return (lx / lp).max(1)[d[F].mean(1) < 0.015] - 1
+
+
+def test_gathered_seam_holds_the_cloth_below_at_its_cut_lengths():
+    """Woven cloth buckles under a small fraction of the load it carries in tension, so the solver meets compression
+    along warp and weft with 1% of the tensile stiffness. A tube gathered into a ring then keeps the row below the
+    seam within a few percent of its cut lengths; with the two-sided stretch used until 3 November (compression 1)
+    that row stayed stretched by about half."""
+    assert Settings().compression == pytest.approx(0.01)
+    assert _gathered_tube(0.01).max() < 0.05
+    assert np.median(_gathered_tube(1.0)) > 0.3
+
+
+def test_skirt_hem_binding_is_its_last_strip():
+    """A bound hem is the skirt's last strip of triangles, every one touching the hem, with the binding's fold added
+    to the hem's mass."""
+    from humanities.dance.garment.body import Body, MotionPose
+    from humanities.dance.garment.garments import skirt
+    from humanities.dance.garment.trials import TEST_PATTERN
+    body = Body()
+    mp = MotionPose(TEST_PATTERN, body, t_raised=1.0, t_lower=1.0, t_hold=1.0)
+    plain = skirt(body, mp(-mp.pre), cut=math.pi, length=0.4, h=0.04)
+    G = skirt(body, mp(-mp.pre), cut=math.pi, length=0.4, h=0.04, binding=True, binding_kg_m=0.002)
+    hem = set(G.piece.rings['outer'])
+    bt = np.asarray(G.params['binding_tris'])
+    assert len(bt) > 0 and all(set(G.piece.F[t]) & hem for t in bt)
+    assert plain.params['binding_tris'] == [] and plain.extra_mass is None
+    assert G.extra_mass.sum() == pytest.approx(0.002 * G.params['hem_circumference_m'], rel=1e-9)

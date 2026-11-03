@@ -28,6 +28,10 @@ that very light fabric stays stable. Stacked layers in contact (a folded skirt, 
 present one face to the air: a vertex with another layer within 1.5 contact distances and a parallel or opposed normal
 (|cos| > 0.7) takes half the force.
 
+Compression. Along warp and weft the stretch constraint meets compression with only `Settings.compression` (1%) of
+the tensile stiffness, since woven cloth buckles under a small fraction of the load it carries in tension; two-sided,
+as until 3 November, it held cloth gathered into a seam stretched below the seam.
+
 Contact. Vertices are kept outside the body's capsules (moved with the motion each substep) by the contact offset,
 with Coulomb friction relative to the body's surface; above the floor; and apart from one another by the
 self-contact distance, found with a sorted spatial hash rebuilt every few substeps. Contacts are inelastic: the
@@ -96,6 +100,8 @@ class Settings:
     floor_offset: float = 0.002
     self_collision: bool = True
     self_distance: float = 0.0      # m; 0 means 0.75 x the mean edge length
+    compression: float = 0.01       # stiffness against compression along warp and weft, as a fraction of the
+                                    # tensile stiffness; 1 is the two-sided stretch used until 3 November
     self_rebuild_every: int = 4
     self_max_per_cell: int = 12
     depenetration_speed: float = 0.5   # m/s: rate at which older penetration is undone (positions only)
@@ -474,8 +480,11 @@ class Cloth:
         q = (g1 - C3[:, None] * g2) / l2[:, None]
         at = 1.0 / (self.tensile_stiffness * self.area0 * dt * dt)
         ash = 1.0 / (self.shear_stiffness * self.area0 * dt * dt)
-        d1 = -C1 / (self.W11 + at)
-        d2 = -C2 / (self.W22 + at)
+        # woven cloth buckles under a small fraction of the load it carries in tension, so a thread shortened along
+        # the warp or weft meets only `compression` of the tensile stiffness
+        ac = at / self.s.compression
+        d1 = -C1 / (self.W11 + torch.where(C1 < 0, ac, at))
+        d2 = -C2 / (self.W22 + torch.where(C2 < 0, ac, at))
         den3 = (p * p).sum(1) * self.W11 + 2 * (p * q).sum(1) * self.W12 + (q * q).sum(1) * self.W22
         d3 = -C3 / (den3 + ash)
         dx = torch.zeros_like(x)

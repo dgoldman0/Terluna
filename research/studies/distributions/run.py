@@ -70,8 +70,8 @@ BOUND = {
     'sea_phosphorus': dict(
         path='resources/results/sea_phosphorus.json', schema='terluna.resources.sea-phosphorus/1',
         branch='main', worktree='terluna', commit=None,
-        blob='56a653c799128a8d1492379e37957ffb9e0cec73',
-        sha256='827a8a46cea3110bcf4ec7882b471afe000316dabf2fa208ab86ba4757568a10',
+        blob='4377922305c9cca32ec1c735988b6e63ab05bbe8',
+        sha256='c30527cc6d6b4cf0c5e4652e41c5fd807cfae291094551b248bb59541afb2150',
         note="The land's phosphorus through the lakes to the seas, people's needs, dredging the lake deltas, sewage "
              'recovery and the natural cycle kept beside them.'),
     'industry_md': dict(

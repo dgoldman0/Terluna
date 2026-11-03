@@ -19,7 +19,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from .body import Attachment, Body, qrot_np
-from .patterns import Piece, annulus, gore, rectangle, sector
+from .patterns import Piece, annulus, develop, gore, grid, rectangle, sector
 
 WAIST_ABOVE_OMPHALION = 0.02       # m: the natural waist, just above the navel (placement)
 BAND_CLEARANCE = 0.006             # m: waistband radius beyond the abdomen capsule (or the dress form's waist)
@@ -100,7 +100,7 @@ def circle_skirt(body: Body, pose0, length=0.85, h=0.02, seed=0) -> Garment:
 
 
 def skirt(body: Body, pose0, cut=2 * np.pi, length=0.85, h=0.02, hem_weight_kg_m=0.0,
-          band_clearance=BAND_CLEARANCE, start_clear=None) -> Garment:
+          band_clearance=BAND_CLEARANCE, start_clear=None, binding=False, binding_kg_m=0.0023) -> Garment:
     """A circle skirt cut from `cut` radians of a ring (pi: a half circle; 2 pi: a full circle; 4 pi: a double
     circle, two full circles sewn at the sides, whose starting placement is not built yet), with the seam at centre
     back and the straight grain at centre front, on the same waistband as circle_skirt. Its pattern's inner radius
@@ -116,7 +116,8 @@ def skirt(body: Body, pose0, cut=2 * np.pi, length=0.85, h=0.02, hem_weight_kg_m
     and the solver's recoil from that start kept a full circle moving through the dressing (2 November). start_clear
     (default: on a dress form) then moves any starting point inside the body out of it, 4 mm clear: a half circle's
     cone, laid from the small of the back, starts partly inside the hips, and on the form that start held the hem up
-    at the sides."""
+    at the sides. With binding, the hem's last strip of triangles is a bound edge, listed in params['binding_tris']
+    for the binding's own fabric, and the hem carries binding_kg_m more for the fold (as sleeve_tier's hems)."""
     sp = {s['name']: s for s in body.spec['segments']}
     ab = sp['abdomen']
     cap = ab['capsules'][0]
@@ -175,15 +176,20 @@ def skirt(body: Body, pose0, cut=2 * np.pi, length=0.85, h=0.02, hem_weight_kg_m
     if start_clear if start_clear is not None else body.waist is not None:
         X0 = clear_of_body(body, pose0, X0, np.setdiff1d(np.arange(piece.n_vertices), inner))
     extra = None
-    if hem_weight_kg_m > 0:
+    if hem_weight_kg_m > 0 or binding:
         extra = np.zeros(piece.n_vertices)
-        extra[hem] = hem_weight_kg_m * cut * (r_in + length) / len(hem)
+        extra[hem] = (hem_weight_kg_m + (binding_kg_m if binding else 0.0)) * cut * (r_in + length) / len(hem)
+    binding_tris = []
+    if binding:                                             # the last strip of triangles, between the last two rows
+        nr = max(1, int(round(length / (h * np.sqrt(3) / 2))))
+        last = rho >= r_in + length * (nr - 1) / nr - 1e-9
+        binding_tris = [int(t) for t in np.where(last[piece.F].all(1))[0]]
     params = dict(kind=f'circle skirt cut from {cut / (2 * np.pi):g} of a circle', cut_rad=cut, length_m=length,
                   waist_radius_m=r_band, waist_circumference_m=2 * np.pi * r_band, pattern_inner_radius_m=r_in,
                   hem_circumference_m=cut * (r_in + length),
                   smooth_cone_flare_deg=float(np.degrees(np.arcsin(sa))),
                   hem_weight_kg_m=hem_weight_kg_m, hem_weight_total_kg=hem_weight_kg_m * cut * (r_in + length),
-                  natural_waist_height_rest_m=z_w,
+                  natural_waist_height_rest_m=z_w, bound_hem=binding, binding_tris=binding_tris,
                   waistband=('on the dress form\'s waist outline + %g m' % band_clearance if body.waist is not None
                              else 'round, the abdomen capsule + %g m' % band_clearance),
                   pattern='ring sector sewn at centre back, centre front on the straight grain',
@@ -691,5 +697,221 @@ def sash(body: Body, pose0, clearance=0.048, band_w=0.05, tail_w=0.07, tail_len=
                           dict(kind='sash tail', width_m=tail_w, length_m=tail_len, vertices=tail.n_vertices)))
     G, offs = combine(gs, 'sash', dict(kind='sash with two tails at the back', radius_m=r, band_width_m=band_w,
                                        tail_width_m=tail_w, tail_length_m=tail_len))
+    G.params['offsets'] = [int(o) for o in offs]
+    return G
+
+
+class _BlendAttachment:
+    """Pinned vertices that follow two segments, each vertex with its own share of the first."""
+
+    def __init__(self, body: Body, p_rest, segments, first_share):
+        self.parts = [Attachment(body, p_rest, [s], [1.0]) for s in segments]
+        self.w = np.asarray(first_share, float)[:, None]
+
+    def targets(self, pos, quat):
+        return self.w * self.parts[0].targets(pos, quat) + (1.0 - self.w) * self.parts[1].targets(pos, quat)
+
+
+def radial_envelope(X, axis_x, n_theta=72, dz=0.01):
+    """How far cloth already dressed reaches round the body: a function (theta, z) -> radius about the vertical line
+    x = axis_x, y = 0, the largest radius of the points X (rest frame) in that angle's and height's bin and the bins
+    next to it, zero where there is no cloth. A garment put on over others is laid outside it."""
+    X = np.asarray(X, float)
+    th = np.mod(np.arctan2(X[:, 1], X[:, 0] - axis_x), 2 * np.pi)
+    r = np.hypot(X[:, 0] - axis_x, X[:, 1])
+    z0 = X[:, 2].min() - 2 * dz
+    nz = int(np.ceil((X[:, 2].max() - z0) / dz)) + 3
+    E = np.zeros((n_theta, nz))
+    np.maximum.at(E, ((th / (2 * np.pi) * n_theta).astype(int) % n_theta, ((X[:, 2] - z0) / dz).astype(int)), r)
+    D = E.copy()
+    for di in (-1, 0, 1):                     # the empty bins at both ends in height make the roll there harmless
+        for dj in (-1, 0, 1):
+            D = np.maximum(D, np.roll(np.roll(E, di, 0), dj, 1))
+
+    def env(theta, z):
+        theta, z = np.broadcast_arrays(np.asarray(theta, float), np.asarray(z, float))
+        i = (np.mod(theta, 2 * np.pi) / (2 * np.pi) * n_theta).astype(int) % n_theta
+        j = np.floor((z - z0) / dz).astype(int)
+        return np.where((j >= 0) & (j < nz), D[i, np.clip(j, 0, nz - 1)], 0.0)
+    return env
+
+
+def _fold_profile(gather, folds, weight, n=1601):
+    """Across a band gathered into `folds` folds of depths set by weight(s): the chord fraction s, the outward height d
+    (in chords) and the fraction of the cloth's width t at n points, for the profile d = a weight(s) sin^2(pi folds s)
+    whose arc is `gather` chords."""
+    s = np.linspace(0.0, 1.0, n)
+    shape = weight(s) * np.sin(np.pi * folds * s) ** 2
+
+    def arc(a):
+        return np.r_[0.0, np.cumsum(np.hypot(np.diff(s), a * np.diff(shape)))]
+    lo, hi = 0.0, 1.0
+    while arc(hi)[-1] < gather:
+        hi *= 2.0
+    for _ in range(50):
+        mid = 0.5 * (lo + hi)
+        lo, hi = (mid, hi) if arc(mid)[-1] < gather else (lo, mid)
+    L = arc(hi)
+    return s, hi * shape, L / L[-1]
+
+
+def _clear_radially(body: Body, pose, P, axis_x, margin, rounds=40, skip=('upper_arm', 'forearm', 'hand')):
+    """Points moved horizontally away from the vertical line x = axis_x, y = 0 until each is `margin` clear of the
+    body's pieces other than those of segments named with `skip` (in the rest pose the arms hang beside the waist),
+    keeping their heights (clear_of_body moves points along a piece's normal, which near the ends of the trunk's
+    pieces turns up or down)."""
+    P = np.array(P, float)
+    keep = np.array([not any(k in n for k in skip) for n in body.cap_name])
+    A, B, r = (x[keep] for x in body.capsules(*pose))
+    ab = B - A
+    L2 = np.maximum((ab * ab).sum(1), 1e-12)
+    dr = (body.cap_rb - body.cap_r)[keep]
+    for _ in range(rounds):
+        t = np.clip(((P[:, None] - A[None]) * ab[None]).sum(2) / L2[None], 0.0, 1.0)
+        dist = np.linalg.norm(P[:, None] - (A[None] + t[..., None] * ab[None]), axis=2)
+        pen = (r[None] + t * dr[None] - dist).max(1)
+        bad = pen > -margin
+        if not bad.any():
+            break
+        out = np.c_[P[bad, 0] - axis_x, P[bad, 1], np.zeros(bad.sum())]
+        out /= np.maximum(np.linalg.norm(out, axis=1, keepdims=True), 1e-9)
+        P[bad] += (pen[bad] + margin + 1e-4)[:, None] * out
+    return P
+
+
+def sash_band(body: Body, knot_deg=55.0, top=(0.025, 0.02), bottom=(0.035, 0.06), clearance=0.018):
+    """Where a draped sash's band lies (rest frame): its held edges' heights z_top(theta) and z_bot(theta), top[0]
+    above and bottom[0] below the natural waist, falling by top[1] and bottom[1] more toward the knot at knot_deg from
+    centre front toward the left, and base(theta, z), the points `clearance` off the body at those angles and heights,
+    moved straight out from the waist outline. Returns (z_top, z_bot, base, axis_x)."""
+    sp = {s['name']: s for s in body.spec['segments']}
+    ab = sp['abdomen']
+    cap = ab['capsules'][0]
+    axis_x = ab['origin'][0] + cap['a'][0]
+    z_w = ab['origin'][2] + WAIST_ABOVE_OMPHALION
+    rest_pose = (body.origin, np.tile([1.0, 0.0, 0.0, 0.0], (len(body.names), 1)))
+    if body.waist is not None:
+        th0, r0 = np.asarray(body.waist['theta']), np.asarray(body.waist['r'])
+        r_waist = lambda th: np.interp(np.mod(th, 2 * np.pi), th0, r0, period=2 * np.pi)
+    else:
+        r_waist = lambda th: np.full(np.shape(th), float(cap['radius']))
+    tk = math.radians(knot_deg)
+    bump = lambda th: ((1.0 + np.cos(np.asarray(th, float) - tk)) / 2.0) ** 2
+    z_top = lambda th: z_w + top[0] - top[1] * bump(th)
+    z_bot = lambda th: z_w - bottom[0] - bottom[1] * bump(th)
+
+    def base(th, z):
+        th, z = np.broadcast_arrays(np.asarray(th, float), np.asarray(z, float))
+        rw = r_waist(th)
+        P = np.stack([axis_x + rw * np.cos(th), rw * np.sin(th), z], -1)
+        return _clear_radially(body, rest_pose, P.reshape(-1, 3), axis_x, clearance).reshape(P.shape)
+    return z_top, z_bot, base, axis_x
+
+
+def draped_sash(body: Body, pose0, knot_deg=55.0, top=(0.025, 0.02), bottom=(0.035, 0.06), gather=1.9, folds=4,
+                clearance=0.018, knot_r=0.028, knot_tilt_deg=25.0,
+                tails=((0.55, 0.06, 0.13, 0.03), (0.75, 0.06, 0.13, -0.03)), tail_slant_deg=35.0, h=0.006,
+                h_tail=0.012, envelope=None, margin=0.018, fold_drift=1.0, seed=0) -> Garment:
+    """A draped sash knotted at the hip. The band (sash_band) is a strip of soft satin gathered across its width into
+    `folds` folds of unequal depth, which drift across it fold_drift times round the waist (its cut width `gather` times the 6-10 cm it covers), held along both edges
+    `clearance` off the body on a slant that falls toward the knot at the left hip, so it covers the skirts' waistbands;
+    it is cut to its longest rows (patterns.develop), so it starts compressed where its folds' hollows run shorter and
+    nowhere stretched. Both its ends go into the knot, a held bundle of wrapped satin knot_r round with spiral folds,
+    its long axis tilted knot_tilt_deg below the waist's line toward the front. From the knot hang tails (length, width
+    at the knot, width at the end, offset along the waist), free, cut on a slant of tail_slant_deg at the end. Held
+    parts follow the pelvis and abdomen, the abdomen's share falling from half at the top edge to a fifth at the knot.
+
+    The sash goes on over the skirts, as one tied on after the skirt hangs: `envelope(theta, z) -> r` (radial_envelope
+    of the dressed skirts, rest frame) tilts each tail out from the hip until it starts `margin` outside their cloth.
+    The skirts' cloth under the band is pressed under it by the run that dresses them (it lies within the band's
+    reach of the body, sash_band)."""
+    z_top, z_bot, base, axis_x = sash_band(body, knot_deg, top, bottom, clearance)
+    env = envelope if envelope is not None else (lambda th, z: np.zeros(np.broadcast(th, z).shape))
+    tk = math.radians(knot_deg)
+    segs = ['pelvis', 'abdomen']
+    outward = lambda th: np.stack([np.cos(th), np.sin(th), np.zeros_like(th)], -1)
+
+    # the band: columns round the waist from the knot back to it, rows across its gathered width
+    r_k = float(np.hypot(*(base(tk, z_top(tk))[:2] - [axis_x, 0.0])))
+    gap = 0.8 * knot_r / r_k
+    th_f = np.linspace(tk + gap, tk + 2 * np.pi - gap, 721)
+    Tf = base(th_f, z_top(th_f))
+    n_i = max(8, int(round(np.linalg.norm(np.diff(Tf, axis=0), axis=1).sum() / h)) + 1)
+    th_c = np.linspace(tk + gap, tk + 2 * np.pi - gap, n_i)
+    T, B = base(th_c, z_top(th_c)), base(th_c, z_bot(th_c))
+    chord = np.linalg.norm(B - T, axis=1)
+    n_j = max(5, int(round(gather * chord.max() / h)) + 1)
+    t_rows = np.linspace(0.0, 1.0, n_j)
+    phase = np.random.default_rng(seed).uniform(0.0, 2 * np.pi)
+    X = np.zeros((n_i, n_j, 3))
+    for i in range(n_i):
+        c = B[i] - T[i]
+        cdir = c / chord[i]
+        out = outward(th_c[i]) - (outward(th_c[i]) @ cdir) * cdir
+        out /= np.linalg.norm(out)
+        weight = lambda s, i=i: 1.0 + 0.3 * np.sin(2 * np.pi * s + phase + fold_drift * th_c[i])   # unequal folds
+        sf, d, t = _fold_profile(gather, folds, weight)
+        X[i] = T[i] + np.interp(t_rows, t, sf)[:, None] * c + (chord[i] * np.interp(t_rows, t, d))[:, None] * out
+    band = grid(develop(X, common_rows=True), warp=(1.0, 0.0))
+    Xb = X.transpose(1, 0, 2).reshape(-1, 3)              # vertex k is grid point (k % n_i, k // n_i)
+    share = 0.5 + 0.3 * np.repeat(t_rows, n_i)            # the pelvis's share: half at the top edge, 0.8 at the bottom
+    ends = np.r_[band.rings['left'], band.rings['right']]
+    share[ends] = 0.8
+    pins = np.unique(np.r_[band.rings['start'], band.rings['end'], ends])
+    gs = [Garment('sash_band', band, _BlendAttachment(body, Xb, segs, share).targets(*pose0), pins,
+                  _BlendAttachment(body, Xb[pins], segs, share[pins]),
+                  dict(kind='draped sash band, held along both edges', gather=gather, folds=folds,
+                       width_on_body_m=[float(chord.min()), float(chord.max())], vertices=band.n_vertices))]
+
+    # the knot: a held bundle over the band's ends, its long axis along the waist tilted down toward the front
+    zk = 0.5 * (float(z_top(tk)) + float(z_bot(tk)))
+    bk = base(tk, zk)
+    out_k, tan_k, down = outward(np.float64(tk)), np.array([-math.sin(tk), math.cos(tk), 0.0]), np.array([0.0, 0.0, -1.0])
+    tilt = math.radians(knot_tilt_deg)
+    e1 = -math.cos(tilt) * tan_k + math.sin(tilt) * down       # toward the front and down
+    e3 = out_k - (out_k @ e1) * e1
+    e3 /= np.linalg.norm(e3)
+    e2 = np.cross(e3, e1)
+    centre = bk + 0.8 * knot_r * e3
+    u = np.linspace(0.1, 0.9, 9)
+    v = np.linspace(0.0, 2 * np.pi, 17)
+    R = knot_r * np.sqrt(np.sin(np.pi * u))[None, :] * (1.0 + 0.15 * np.sin(3.0 * v[:, None] + 3 * np.pi * u[None, :]))
+    flat_back = np.where(np.sin(v) < 0, 0.35, 1.0)[:, None, None]        # the side against the band lies flatter
+    K = (centre + (2 * u - 1)[None, :, None] * 1.1 * knot_r * e1
+         + R[..., None] * (np.cos(v)[:, None, None] * e2 + flat_back * np.sin(v)[:, None, None] * e3))
+    knot = grid(develop(K), warp=(1.0, 0.0), wrap=True)
+    Xk = K[:-1].transpose(1, 0, 2).reshape(-1, 3)
+    held_k = _BlendAttachment(body, Xk, segs, np.full(len(Xk), 0.8))
+    gs.append(Garment('sash_knot', knot, held_k.targets(*pose0), np.arange(knot.n_vertices), held_k,
+                      dict(kind='sash knot, held', radius_m=knot_r, vertices=knot.n_vertices)))
+
+    # the tails: planar trapezoids hanging from under the knot, tilted out from the hip until they clear the skirts
+    slant = math.tan(math.radians(tail_slant_deg))
+    for k, (L, w0, w1, side) in enumerate(tails):
+        n_u = max(3, int(round(w1 / h_tail)) + 1)
+        n_v = max(3, int(round(L / h_tail)) + 1)
+        uu, vv = np.linspace(-0.5, 0.5, n_u), np.linspace(0.0, 1.0, n_v)
+        flat = np.stack([uu[:, None] * (w0 + (w1 - w0) * vv[None, :]),
+                         vv[None, :] * (L + uu[:, None] * w1 * slant)], -1)          # (n_u, n_v, 2)
+        top_c = centre - 0.7 * knot_r * e3 + 0.6 * knot_r * down + side * tan_k + (0.4 * knot_r + 0.012 * k) * out_k
+        for alpha in np.arange(0.1, 1.2, 0.02):
+            dirn = math.cos(alpha) * down + math.sin(alpha) * out_k
+            Xt = top_c + flat[..., :1] * tan_k + flat[..., 1:] * dirn
+            th_t = np.arctan2(Xt[..., 1], Xt[..., 0] - axis_x)
+            r_t = np.hypot(Xt[..., 0] - axis_x, Xt[..., 1])
+            low = flat[..., 1] > 2.5 * knot_r                  # below the knot's own reach
+            if (r_t[low] >= env(th_t[low], Xt[..., 2][low]) + margin).all():
+                break
+        tail = grid(flat, warp=(0.0, 1.0))
+        Xtv = Xt.transpose(1, 0, 2).reshape(-1, 3)
+        top_ids = np.asarray(tail.rings['start'])
+        gs.append(Garment(f'sash_tail_{k}', tail,
+                          _BlendAttachment(body, Xtv, segs, np.full(len(Xtv), 0.8)).targets(*pose0), top_ids,
+                          _BlendAttachment(body, Xtv[top_ids], segs, np.full(len(top_ids), 0.8)),
+                          dict(kind='sash tail', length_m=L, width_m=[w0, w1], tilt_deg=float(np.degrees(alpha)),
+                               vertices=tail.n_vertices)))
+    G, offs = combine(gs, 'draped_sash', dict(kind='draped sash knotted at the hip', knot_deg=knot_deg, gather=gather,
+                                              folds=folds, knot_radius_m=knot_r,
+                                              over_dressed_cloth=envelope is not None))
     G.params['offsets'] = [int(o) for o in offs]
     return G

@@ -210,6 +210,49 @@ def sector(r_in: float, r_out: float, angle: float, h: float, warp=None, hem=Non
     return Piece(F, UV, V, warp=tuple(warp), rings=rings, vertex_uv=vuv, corner_rot=ROT)
 
 
+def grid(P, warp=(1.0, 0.0), wrap: bool = False) -> Piece:
+    """A pattern piece on a structured grid of flat positions P (ni, nj, 2), i along u and j along v, each cell split
+    along alternating diagonals as in rectangle(). With wrap=True the last column is the first one again across a
+    seam (its flat positions those of column 0 carried round the tube), so the piece is a tube of ni - 1 columns.
+    Rings: 'start' (j = 0), 'end' (j = nj - 1), and for an open piece 'left' (i = 0) and 'right' (i = ni - 1)."""
+    P = np.asarray(P, float)
+    ni, nj = P.shape[:2]
+    cols = ni - 1 if wrap else ni
+    vid = lambda i, j: (i % cols) + cols * j
+    F, UV = [], []
+    for j in range(nj - 1):
+        for i in range(ni - 1):
+            c00, c10, c01, c11 = (i, j), (i + 1, j), (i, j + 1), (i + 1, j + 1)
+            tris = [(c00, c10, c11), (c00, c11, c01)] if (i + j) % 2 == 0 else [(c00, c10, c01), (c10, c11, c01)]
+            for t in tris:
+                F.append([vid(*c) for c in t])
+                UV.append([P[c] for c in t])
+    F, UV = _orient(np.array(F, np.int64), np.array(UV, float))
+    V = cols * nj
+    vuv = np.array([P[k % cols, k // cols] for k in range(V)])
+    rings = dict(start=[vid(i, 0) for i in range(cols)], end=[vid(i, nj - 1) for i in range(cols)])
+    if not wrap:
+        rings['left'] = [vid(0, j) for j in range(nj)]
+        rings['right'] = [vid(ni - 1, j) for j in range(nj)]
+    return Piece(F, UV, V, warp=tuple(warp), rings=rings, vertex_uv=vuv)
+
+
+def develop(X, common_rows: bool = False) -> np.ndarray:
+    """Flat positions (ni, nj, 2) for a structured grid of points X (ni, nj, 3) that keep the lengths of its columns,
+    each column i laid along v by its own arc length, and of its rows along u: each row j by its own arc length,
+    centred, or with common_rows every row by the longest, step by step. A piece cut so starts on the grid without
+    strain along its columns. Where rows of one surface differ in length (a band gathered into folds round a body,
+    whose crests run further round than its hollows) rows of their own lengths slant the columns between them, so such
+    a piece is cut to its longest rows and its shorter rows start compressed, which cloth takes by buckling."""
+    X = np.asarray(X, float)
+    du = np.linalg.norm(np.diff(X, axis=0), axis=2)
+    if common_rows:
+        du = np.broadcast_to(du.max(1, keepdims=True), du.shape)
+    u = np.concatenate([np.zeros((1, X.shape[1])), np.cumsum(du, 0)])
+    v = np.concatenate([np.zeros((X.shape[0], 1)), np.cumsum(np.linalg.norm(np.diff(X, axis=1), axis=2), 1)], 1)
+    return np.stack([u - u[-1:] / 2, v], -1)
+
+
 def mesh_edges(F: np.ndarray) -> np.ndarray:
     """Unique undirected edges (E, 2), i < j."""
     e = np.concatenate([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]])

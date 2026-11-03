@@ -9,13 +9,13 @@
     "inputs": {
       "research/studies/sky_ecology/results/sky_ecology.json": "16c6e70e051728833ac47fbb3ab3df61364dd0a1bedfbc371f095705124058af",
       "research/studies/aerophytes/results/aerophytes.json": "3721a734cfc100c2d2070db9f7b56de94b03e227631cb56ac6a7b08801f096ca",
-      "research/studies/light_limitation/results/light_limitation.json": "ce107d2f65845ac38efb664aea9b746d4f22dadb313f1a241ba7c84856b207bb",
-      "research/studies/light_limitation/results/biomass_comparison.json": "d9dc6cf59498b6179fc4236b39024520963154ede0b88101c357ce98c485c43f",
+      "research/studies/light_limitation/results/light_limitation.json": "0bf3d8f9e608339dcf8794bf95070257ca9337851d454473accd30cf0d497c3e",
+      "research/studies/light_limitation/results/biomass_comparison.json": "77b3518072917841711c6597fa431b47f1a94fcf1c957c973f5b85ef938467a0",
       "research/studies/light_limitation/biomass_comparison_inputs.json": "c667d7ad24f2ca4b941bebbcd3730056fb2b70cb3dbaa5604167d4e079b1d32f",
       "research/studies/aerial_ecology/results/aerial_ecology.json": "deeca7f1bc7e2893da4096b0d0c431ab4703aa625ffaea48a971e090b4abba61",
-      "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "1ffac764d47c4ae9b56804af88e546a6c334bc71b02147f05bb1d9450e8165ca",
-      "research/studies/domain_synthesis/results/ledgers.json": "3ad7e56a0862bb324c6d8890fc83a1697809675ed15ced0c12ee6acf9132a380",
-      "provisioning/results/power.json": "14437a5debc1c57b719447c3b5ed7e44180712fce3598ebe4083f2b7044e96ae",
+      "research/studies/gases_glow_dimming/results/gases_glow_dimming.json": "0bd9fa39533d5c0f4eba5859fbc6753f4016dd0af22523c7dc2d0deec98423c6",
+      "research/studies/domain_synthesis/results/ledgers.json": "45bc414c77e1fb73712efe475febb02bfa550d459bb6d0825af8bb41d85659d9",
+      "provisioning/results/power.json": "4a2375fd5796b93d3bbf1308a632fd50e8695037f2d78f3c4f0ce8460c06015c",
       "research/studies/aerial_productivity/parameters.json": "f12ac7cf4e9e591543dcd9524d411a65ca9416e079dea5495f8a2029685f783a"
     },
     "context": [

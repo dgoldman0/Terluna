@@ -5,13 +5,13 @@
    "research/studies/heat_levers/run.py": "056afdd04ee8f36a246da2bccbc92783c172a84aaef59ef502b2b3d10978954d"
   },
   "inputs": {
-   "research/studies/climate_targets/results/climate_targets.json": "2d6662533e5c6d8996fb24cf29cf14e8df1afe1d6a914c0855822d3207c6faff",
+   "research/studies/climate_targets/results/climate_targets.json": "9095c8232bb9d06e2e5a1a77d11999a7ca5c997109860d26c8efd7566dfa3f18",
    "atmosphere/radiative_convective/results/reduced_gases.json": "db883e4fa1cbac6d26526af5a979c30ce49e73af26c1b8c5ea39334ce61e3167",
    "atmosphere/radiative_convective/results/summary.json": "8fb31329ebcbca52ea9ac1c0af06ed5e357c02267dce8b47250334ae91c39171",
-   "research/studies/domain_synthesis/results/ledgers.json": "3ad7e56a0862bb324c6d8890fc83a1697809675ed15ced0c12ee6acf9132a380",
-   "research/studies/food_systems/results/food_systems.json": "fc6f13167af03366029671bdd7c034f2d0451dbabb6983b1aba859d82fa74862",
-   "research/studies/carbon_cycle/results/carbon_cycle.json": "4faa161046e1fecbd8610135cfc695106c14948203585e4ccb680ab423c32e31",
-   "provisioning/results/power.json": "14437a5debc1c57b719447c3b5ed7e44180712fce3598ebe4083f2b7044e96ae",
+   "research/studies/domain_synthesis/results/ledgers.json": "45bc414c77e1fb73712efe475febb02bfa550d459bb6d0825af8bb41d85659d9",
+   "research/studies/food_systems/results/food_systems.json": "103c6500fb3bc92fb5c9f3a1eeb3b5c744a484d6a19c4304fcf0cd29172d82ed",
+   "research/studies/carbon_cycle/results/carbon_cycle.json": "e3e6e7f1f131bf6130dacb8e242d41d16c0cd914d35b35c119677740b3bb9361",
+   "provisioning/results/power.json": "4a2375fd5796b93d3bbf1308a632fd50e8695037f2d78f3c4f0ce8460c06015c",
    "research/studies/solar_shield_array/results/glow.json": "ad1f44be15dd5afe64576b8b062b26dfef085a9a9947080d15a185625903bec1",
    "research/studies/atmospheric_co2/results/atmospheric_co2.json": "80db612918d3fc44d313b6aa93259ecfbad0bf869ea39de903a3fb09ace0d451",
    "climate/results/gcm/radiation_check_A28_dim5_moon.json": "82f2d3baff7cb2c3260818bcab20b9f0b940f84e36c4edb9a294fd477d373ae5",
@@ -307,7 +307,7 @@
    },
    "oxygen_source": {
     "path": "research/studies/lake_oxygen/results/lake_oxygen.json",
-    "sha256": "4385cc39b3e9c8fa2cc324b34938f5a46428ad9ed83cb11f36b8c0edbdd8cbd7"
+    "sha256": "4aa184510705ed649e0b4bd6abc17b2f08fff2e1f6637163be8bec4ef3fa1a78"
    },
    "activation_ev": 0.96,
    "wild_sources_left_tg_yr": [

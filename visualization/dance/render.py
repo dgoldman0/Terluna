@@ -1498,7 +1498,15 @@ def add_light(name, kind, loc, target, energy, color, size=None, spot_deg=None, 
     return ob
 
 
-def build_stage(cam_az_deg=30.0, centre=(0.0, 0.0), R=7.5):
+# The stage's lighting (--light). stage: side light from booms, amber from stage left and blue from stage right
+# (2.2-2.7 kW each), a 4.2 kW rim from behind and a soft key in front several times dimmer than a boom, graded with
+# AgX's medium-high contrast; the dancer's skin turns orange or blue-grey with the side it faces and her face dark
+# when it turns from the booms to the camera. soft: the booms paler and at 0.8 of their power, a key five times as
+# strong, a soft fill from the camera's side, half the rim and AgX's base contrast (a proposal of 3 November).
+LIGHT_RIGS = ('stage', 'soft')
+
+
+def build_stage(cam_az_deg=30.0, centre=(0.0, 0.0), R=7.5, light='stage'):
     sc = bpy.context.scene
     # floor: black Marley, matte with a soft sheen and faint seams between the strips
     bpy.ops.mesh.primitive_plane_add(size=40.0, location=(0, 0, 0))
@@ -1586,16 +1594,22 @@ def build_stage(cam_az_deg=30.0, centre=(0.0, 0.0), R=7.5):
     vol.inputs['Density'].default_value = 0.008
     vol.inputs['Anisotropy'].default_value = 0.45
     w.node_tree.links.new(vol.outputs['Volume'], w.node_tree.nodes['World Output'].inputs['Volume'])
-    # lights: side light from booms (warm stage left, cool stage right), soft key, rim, top pool
-    warm, cool = (1.0, 0.70, 0.42), (0.50, 0.64, 1.0)
+    # lights: side light from booms (warm stage left, cool stage right), soft key, rim, top pool. The 'soft' rig
+    # (LIGHT_RIGS) evens the skin out: the booms' colours paler and their power 0.8, a key five times as strong, a
+    # soft fill from the camera's side and half the rim.
+    soft = light == 'soft'
+    warm, cool = ((1.0, 0.86, 0.72), (0.78, 0.85, 1.0)) if soft else ((1.0, 0.70, 0.42), (0.50, 0.64, 1.0))
     lights = []
     for side, colr, y in (('SL', warm, 4.2), ('SR', cool, -4.2)):
         for lvl, z, e in (('shin', 0.35, 1400), ('mid', 1.45, 1700), ('head', 2.45, 1500)):
             lights.append(add_light(f'boom_{side}_{lvl}', 'SPOT', (0.0, y, z), (0.0, 0.0, max(z * 0.6, 0.5)),
-                                    e * 1.6, colr, spot_deg=36, blend=0.45, soft=0.16))
+                                    e * 1.6 * (0.8 if soft else 1.0), colr, spot_deg=36, blend=0.45, soft=0.16))
     lights.append(add_light('key_soft', 'AREA', (5.2 * math.cos(math.radians(30) + 0.25), 5.2 * math.sin(math.radians(30) + 0.25), 4.2),
-                            (0, 0, 1.1), 190, (1.0, 0.93, 0.86), size=(2.4, 2.4)))
-    lights.append(add_light('rim', 'SPOT', (-3.6, -1.0, 5.4), (0, 0, 1.3), 4200, (0.85, 0.9, 1.0),
+                            (0, 0, 1.1), 950 if soft else 190, (1.0, 0.93, 0.86), size=(2.4, 2.4)))
+    if soft:
+        lights.append(add_light('fill', 'AREA', (4.0 * math.cos(math.radians(30)), 4.0 * math.sin(math.radians(30)), 1.5),
+                                (0, 0, 1.1), 300, (1.0, 0.96, 0.92), size=(3.0, 2.0)))
+    lights.append(add_light('rim', 'SPOT', (-3.6, -1.0, 5.4), (0, 0, 1.3), 2100 if soft else 4200, (0.85, 0.9, 1.0),
                             spot_deg=24, blend=0.5, soft=0.15))
     lights.append(add_light('top_pool', 'SPOT', (0.0, 0.0, 7.5), (0, 0, 0), 210, (1.0, 0.92, 0.82),
                             spot_deg=21, blend=0.8, soft=0.25))
@@ -1608,7 +1622,7 @@ def build_stage(cam_az_deg=30.0, centre=(0.0, 0.0), R=7.5):
     return floor, cyc, lights, rig_
 
 
-def setup_render(preset, out_path, n_frames):
+def setup_render(preset, out_path, n_frames, light='stage'):
     sc = bpy.context.scene
     sc.render.hair_type = 'STRAND'
     sc.render.hair_subdiv = 1
@@ -1649,7 +1663,7 @@ def setup_render(preset, out_path, n_frames):
     vs = sc.view_settings
     try:
         vs.view_transform = 'AgX'
-        vs.look = 'AgX - Medium High Contrast'
+        vs.look = 'AgX - Base Contrast' if light == 'soft' else 'AgX - Medium High Contrast'
     except TypeError:
         vs.view_transform = 'Filmic'
         vs.look = 'Medium High Contrast'
@@ -1706,15 +1720,17 @@ def camera_plan(com, t, pelvis_quat, az_arg, dist_arg):
     return az, dist, sm
 
 
-def follow_camera(com, t, az_deg=30.0, dist=5.5, height=1.1, aim_dz=0.06, sigma_s=0.8, rig=None):
+def follow_camera(com, t, az_deg=30.0, dist=5.5, height=1.1, aim_dz=0.06, sigma_s=0.8, rig=None, fstop=2.8):
     """A camera at a fixed bearing that follows the smoothed centre of mass: across the floor (sigma 0.8 s) and, more
-    closely, in height (sigma 0.35 s), so a leap stays framed."""
+    closely, in height (sigma 0.35 s), so a leap stays framed. It aims `aim_dz` above the centre of mass and rises
+    with its aim above the default 6 cm, so a close still of the bodice is taken level."""
     sc = bpy.context.scene
     cd = bpy.data.cameras.new('camera')
     cd.lens = 50.0
     cd.sensor_width = 36.0
     cd.dof.use_dof = True
-    cd.dof.aperture_fstop = 2.8
+    cd.dof.aperture_fstop = fstop
+    height += aim_dz - 0.06
     cam = bpy.data.objects.new('camera', cd)
     sc.collection.objects.link(cam)
     sc.camera = cam
@@ -1854,6 +1870,192 @@ def set_yoke(body, rgba):
     return True
 
 
+# Dressed as a colour on the leotard zone, a bodice follows every contour of the skin and reads as moulded on the body.
+# bodice_shell makes it a garment: a shell over the torso that spans the body's hollows, lifted 3 mm off it, given
+# cloth's thickness and skinned as the body is, with a neckline cut by the shader, a surface style and a piped edge in
+# the trim colour.
+BODICE_STYLES = ('structured', 'ruched', 'pleated')
+BODICE_NECKLINES = ('sweetheart', 'vee', 'straight')
+BODICE_BOTTOM = 1.0                    # m, rest height of the lower edge: under the sash, 2 cm below the natural waist
+BUST_APEX = (0.158, 0.076, 1.183)      # forward, to the side and up (m): the rest mesh's bust apex (measured 3 November)
+
+
+def neckline_z(x, ay, kind):
+    """Rest height (m) of the bodice's top edge at a point forward x and |y| to the side: the front's shape by kind,
+    straight across the back below the shoulder blades (1.205 m), the two blended across the sides as the leotard's
+    neckline is. The sweetheart dips between the breasts (1.212 m) and arches over each (1.252 m at the apex's |y|);
+    the vee runs from 1.165 m at the centre front; the straight line is level at 1.235 m, 5 cm above the apex."""
+    if kind == 'sweetheart':
+        zf = 1.212 + 0.040 * np.sin(np.pi * np.clip(ay / (2 * BUST_APEX[1]), 0.0, 1.0))
+    elif kind == 'vee':
+        zf = np.minimum(1.165 + 0.95 * ay, 1.27)
+    else:
+        zf = np.full(np.shape(ay), 1.235)
+    front = smoothstep(-0.03, 0.03, x)
+    return 1.205 + (zf - 1.205) * front
+
+
+def bodice_shell(body, names, style='structured', neckline='sweetheart', rgb=(0.93, 0.90, 0.84),
+                 trim=(0.70, 0.52, 0.25)):
+    """Build the bodice shell from the body (rest mesh, skinned by the body's own armature modifiers) and clear the
+    body's leotard zone above its neckline, so that the skin or the sheer yoke shows there."""
+    import bmesh
+    if style not in BODICE_STYLES or neckline not in BODICE_NECKLINES:
+        raise SystemExit(f'bodice shell: style in {BODICE_STYLES}, neckline in {BODICE_NECKLINES}')
+    V = mesh_coords(body)
+    W = weights_matrix(body, names)
+    col = {n: j for j, n in enumerate(names)}
+    arm = sum(W[:, col[f'{s}_{q}']] for s in 'LR' for q in ('upper_arm', 'forearm', 'hand'))
+    headneck = W[:, col['head']] + W[:, col['neck']]
+    x, y, z = V.T
+    nz = neckline_z(x, np.abs(y), neckline)
+    keep = (arm < 0.3) & (headneck < 0.3) & (z > BODICE_BOTTOM) & (z < nz + 0.025)
+    # clear the body's own bodice above the new neckline (2 mm below it, under the shell's edge)
+    leo = np.empty(len(V))
+    body.data.attributes['leotard'].data.foreach_get('value', leo)
+    leo *= 1.0 - smoothstep(-0.006, -0.002, z - nz)
+    body.data.attributes['leotard'].data.foreach_set('value', leo.astype(np.float32))
+    shell = body.copy()
+    shell.data = body.data.copy()
+    shell.name = shell.data.name = 'bodice_shell'
+    bpy.context.scene.collection.objects.link(shell)
+    bm = bmesh.new()
+    bm.from_mesh(shell.data)
+    bm.verts.ensure_lookup_table()
+    bmesh.ops.delete(bm, geom=[bm.verts[i] for i in np.where(~keep)[0]], context='VERTS')
+    bm.verts.ensure_lookup_table()
+    boundary = np.array([v.is_boundary for v in bm.verts])
+    bm.to_mesh(shell.data)
+    bm.free()
+    shell.data.update()
+    V = mesh_coords(shell)
+    E = mesh_edges(shell)
+    N = np.empty(len(V) * 3)
+    shell.data.vertices.foreach_get('normal', N)
+    N = N.reshape(-1, 3)
+    rest = V.copy()
+    # as boning and a lined shell span the abdomen's relief, the cleavage and the spine's groove: the torso with its
+    # relief a few centimetres across taken out by Taubin's smoothing (steps of 0.5 and -0.53, which keep the torso's
+    # and the bust's size), the shell at most 1.5 mm inside it and up to 15 mm out, then filled outward only until no
+    # hollow is left, and lifted 3 mm
+    S = V.copy()
+    for _ in range(60):
+        S = smooth_field(smooth_field(S, E, 1, mask=~boundary, lam=0.5), E, 1, mask=~boundary, lam=-0.53)
+    dn = np.clip(((S - V) * N).sum(1), -0.0015, 0.015)
+    for _ in range(300):
+        X = V + N * dn[:, None]
+        rise = ((smooth_field(X, E, 1, mask=~boundary) - X) * N).sum(1)
+        dn = np.minimum(dn + np.maximum(rise, 0.0), 0.015)
+    D = smooth_field(N * (dn + 0.003)[:, None], E, 8)
+    shell.data.vertices.foreach_set('co', (V + D).ravel())
+    shell.data.update()
+    # the copy brings the body's custom split normals, which shade the shell as the body itself, its abdominal muscles
+    # showing through whatever the shell's shape (the first shells, 3 November); the shell shades by its own surface
+    with bpy.context.temp_override(object=shell, active_object=shell, selected_objects=[shell],
+                                   selected_editable_objects=[shell]):
+        bpy.ops.mesh.customdata_custom_splitnormals_clear()
+    for nm, typ, val in (('rest_co', 'FLOAT_VECTOR', rest),
+                         ('below_neck', 'FLOAT', neckline_z(rest[:, 0], np.abs(rest[:, 1]), neckline) - rest[:, 2])):
+        a = shell.data.attributes.get(nm) or shell.data.attributes.new(nm, typ, 'POINT')
+        a.data.foreach_set('vector' if typ == 'FLOAT_VECTOR' else 'value', val.astype(np.float32).ravel())
+    for m in list(shell.modifiers):
+        if m.type == 'DISPLACE':
+            shell.modifiers.remove(m)
+    so = shell.modifiers.new('thickness', 'SOLIDIFY')
+    so.thickness, so.offset = 0.0015, 1.0
+    sm = shell.modifiers.new('smooth', 'SUBSURF')
+    sm.levels = sm.render_levels = 1
+    shell.data.materials.clear()
+    shell.data.materials.append(bodice_material(style, rgb, trim))
+    log('bodice shell: %s, %s neckline, %d vertices; lift %.1f-%.1f mm' % (
+        style, neckline, len(V), 1e3 * np.linalg.norm(D, axis=1).min(), 1e3 * np.linalg.norm(D, axis=1).max()))
+    return shell
+
+
+def bodice_material(style, rgb, trim):
+    """Matte silk in rgb with an 8 mm piped edge in satin of the trim colour along the neckline (from the shell's
+    below_neck field), cut at the neckline by alpha clipping, and the style's surface as a bump from the rest
+    position: princess seams (structured), gathers running down to the centre front (ruched), or pleats radiating from
+    below the waist (pleated)."""
+    m, nt, out = node_mat(f'bodice_{style}')
+    L = nt.links.new
+    rest = nt.nodes.new('ShaderNodeAttribute')
+    rest.attribute_name = 'rest_co'
+    sep = nt.nodes.new('ShaderNodeSeparateXYZ')
+    L(rest.outputs['Vector'], sep.inputs[0])
+    X, Y, Z = sep.outputs[0], sep.outputs[1], sep.outputs[2]
+
+    def op(kind, a, b=None, c=None):
+        n = nt.nodes.new('ShaderNodeMath')
+        n.operation = kind
+        for k, v in enumerate((a, b, c)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                n.inputs[k].default_value = float(v)
+            else:
+                L(v, n.inputs[k])
+        return n.outputs[0]
+
+    def ramp(v, a, b, lo, hi):                     # smoothstep from (a -> lo) to (b -> hi)
+        n = nt.nodes.new('ShaderNodeMapRange')
+        n.interpolation_type = 'SMOOTHSTEP'
+        L(v, n.inputs['Value'])
+        n.inputs['From Min'].default_value, n.inputs['From Max'].default_value = a, b
+        n.inputs['To Min'].default_value, n.inputs['To Max'].default_value = lo, hi
+        return n.outputs['Result']
+
+    AY = op('ABSOLUTE', Y)
+    if style == 'structured':                      # princess seams over the bust apex, and down the back
+        ys_front = op('MULTIPLY_ADD', op('SUBTRACT', Z, BUST_APEX[2]), 0.12, BUST_APEX[1])
+        front = op('GREATER_THAN', X, 0.0)
+        ys = op('ADD', op('MULTIPLY', front, op('SUBTRACT', ys_front, 0.065)), 0.065)
+        d = op('ABSOLUTE', op('SUBTRACT', AY, ys))
+        height, strength, dist = ramp(d, 0.0015, 0.005, 0.0, 1.0), 0.9, 0.004
+    elif style == 'ruched':                        # gathers rising from the centre front's waist to the sides
+        # irregular as gathered cloth lies: two noise fields shift the folds (about 17 mm apart) by up to a third of a
+        # fold and vary their depth, and the crests are broad; a regular 11 mm sine read as stripes (3 November)
+        def noise(scale):
+            n = nt.nodes.new('ShaderNodeTexNoise')
+            n.inputs['Scale'].default_value = scale
+            n.inputs['Detail'].default_value = 2.0
+            L(rest.outputs['Vector'], n.inputs['Vector'])
+            return n.outputs['Fac']
+        line = op('MULTIPLY_ADD', AY, 0.55, op('SUBTRACT', Z, BODICE_BOTTOM))
+        phase = op('MULTIPLY_ADD', op('SUBTRACT', noise(14.0), 0.5), 4.0, op('MULTIPLY', line, 2 * math.pi / 0.017))
+        crest = op('POWER', op('MULTIPLY_ADD', op('SINE', phase), 0.5, 0.5), 0.6)
+        height, strength, dist = op('MULTIPLY', crest, op('MULTIPLY_ADD', noise(9.0), 1.2, 0.4)), 0.4, 0.003
+    else:                                          # pleats fanning from 7 cm below the waist
+        theta = op('ARCTAN2', Y, op('SUBTRACT', Z, 0.93))
+        height, strength, dist = op('FRACT', op('MULTIPLY', theta, 1.0 / 0.055)), 0.5, 0.0025
+    bump = nt.nodes.new('ShaderNodeBump')
+    bump.inputs['Strength'].default_value = strength
+    bump.inputs['Distance'].default_value = dist
+    L(height, bump.inputs['Height'])
+    neck = nt.nodes.new('ShaderNodeAttribute')
+    neck.attribute_name = 'below_neck'
+    below = neck.outputs['Fac']
+    alpha = op('GREATER_THAN', below, 0.0)
+    piping = ramp(below, 0.007, 0.009, 1.0, 0.0)
+    silk = principled(nt, **{'Base Color': srgb(*rgb), 'Roughness': 0.5, 'Sheen Weight': 0.4, 'Sheen Roughness': 0.5,
+                             'Specular IOR Level': 0.3})
+    satin = principled(nt, **{'Base Color': srgb(*trim), 'Roughness': 0.35, 'Specular IOR Level': 0.5,
+                              'Anisotropic': 0.3})
+    for b in (silk, satin):
+        L(bump.outputs['Normal'], b.inputs['Normal'])
+        L(alpha, b.inputs['Alpha'])
+    mix = nt.nodes.new('ShaderNodeMixShader')
+    L(piping, mix.inputs['Fac'])
+    L(silk.outputs['BSDF'], mix.inputs[1])
+    L(satin.outputs['BSDF'], mix.inputs[2])
+    L(mix.outputs['Shader'], out.inputs['Surface'])
+    m.blend_method = 'CLIP'
+    m.alpha_threshold = 0.5
+    m.shadow_method = 'CLIP'
+    m.use_backface_culling = False
+    return m
+
+
 def render(args):
     bpy.ops.wm.open_mainfile(filepath=str(args.blend))
     spec = body_spec()
@@ -1870,18 +2072,23 @@ def render(args):
         if len(rgba) != 4:
             raise SystemExit('--yoke takes r,g,b,a')
         set_yoke(bpy.data.objects['dancer_body'], rgba)
+    if args.bodice_shell:
+        style, neckline = (args.bodice_shell.split(',') + ['sweetheart'])[:2]
+        rgb = [float(v) for v in args.bodice.split(',')] if args.bodice else [0.93, 0.90, 0.84]
+        bodice_shell(bpy.data.objects['dancer_body'], names, style, neckline, rgb,
+                     [float(v) for v in args.trim.split(',')])
     az, dist, path = camera_plan(com, t, quat[:, names.index('pelvis')], args.cam_az, args.cam_dist)
     centre = 0.5 * (path.min(0) + path.max(0))
     radius = 7.5 + 0.5 * float(np.linalg.norm(path.max(0) - path.min(0)))
-    _f, _c, _l, light_rig = build_stage(az, tuple(centre), radius)
-    follow_camera(com, t, az_deg=az, dist=dist, rig=light_rig)
+    _f, _c, _l, light_rig = build_stage(az, tuple(centre), radius, args.light)
+    follow_camera(com, t, az_deg=az, dist=dist, rig=light_rig, aim_dz=args.cam_aim, fstop=args.cam_fstop)
     log('camera bearing %.1f deg, distance %.1f m; cyclorama centre (%.2f, %.2f), radius %.1f m'
         % (az, dist, centre[0], centre[1], radius))
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     for i, g in enumerate(args.garment or []):
         add_garment(g, float(mot['fps']), t, out.parent / 'pc2', i, args.sheer)
-    setup_render(args.stills_preset if args.stills else args.preset, out, len(t))
+    setup_render(args.stills_preset if args.stills else args.preset, out, len(t), args.light)
     if args.save_scene:
         bpy.ops.wm.save_as_mainfile(filepath=str(args.save_scene), compress=True)
     sc = bpy.context.scene
@@ -1923,12 +2130,17 @@ def main():
     ap.add_argument('--yoke', default='',
                     help='sRGB r,g,b and strength a (0-1): a sheer chiffon yoke over the skin above the bodice')
     ap.add_argument('--sheer', default='hashed', choices=list(SHEER_METHOD))
+    ap.add_argument('--bodice-shell', default='')
+    ap.add_argument('--trim', default='0.70,0.52,0.25')
     ap.add_argument('--samples', type=int, default=0)
     ap.add_argument('--stills', default='')
     ap.add_argument('--stills-only', action='store_true')
     ap.add_argument('--frames', default='')
     ap.add_argument('--cam-az', type=float, default=None)
     ap.add_argument('--cam-dist', type=float, default=None)
+    ap.add_argument('--cam-aim', type=float, default=0.06)
+    ap.add_argument('--light', default='stage', choices=LIGHT_RIGS)
+    ap.add_argument('--cam-fstop', type=float, default=2.8)
     ap.add_argument('--save-scene', default='')
     args = ap.parse_args(argv)
     global SAMPLES
