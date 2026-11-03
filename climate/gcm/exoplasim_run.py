@@ -86,7 +86,11 @@ evaporated where the air is unsaturated and turned to rain by autoconversion and
 --humidity-mean writes the humidity's true 3-day mean as hus_mean (HUS_MEAN_PATCHES); without them a run is as
 before. --rain-drops evaporates PlaSim's falling rain from its drops' sizes and fall speeds at lunar gravity in place
 of gamma, with the birth rule it names for the size of new rain (rain_drops.py; RAIN_DROP_PATCHES, rainmod's
-nevapprec 2); snow keeps gamma.
+nevapprec 2); snow keeps gamma. --land-store PRODUCT adds the storm-water study's hollows' store to PlaSim's land in
+the drylands (land_store.py; LAND_STORE_PATCHES, landmod's nlstore): the slopes' runoff by infiltration excess, the
+store's evaporation at the pools' own rate and its seepage into a slow store, with the floor, surface, storm library,
+hollow age and wetted fraction its companion options name and the tables the runner writes from the product; a run
+without it is as before.
 """
 from __future__ import annotations
 import argparse
@@ -111,6 +115,7 @@ from climate.gcm import surface_similarity as ssf
 from climate.gcm import condensate as cnd
 from climate.gcm import rain_drops as rdr
 from climate.gcm import snow_sublimation as sns
+from climate.gcm import land_store as lsf
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -1592,7 +1597,7 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                    massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
                    boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
                    cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
-                   similarity: bool = False) -> dict:
+                   similarity: bool = False, land_store: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
@@ -1606,8 +1611,9 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     (HUS_MEAN_PATCHES) and the cloud water (condensate.CLOUD_WATER_PATCHES, with the convection's vapour diagnostic),
     and Beljaars's gust in the surface transfer (surface_gust.GUST_PATCHES, over the nonlocal boundary layer's patch,
     with the convection's vapour diagnostic) with CM1's similarity over water (surface_similarity.SIMW_PATCHES, over
-    the gust's patch), and the rain evaporated from its drops (rain_drops.RAIN_DROP_PATCHES), for a run that sets them,
-    and return each patched file's hash for the run key."""
+    the gust's patch), and the rain evaporated from its drops (rain_drops.RAIN_DROP_PATCHES), and the hollows' store
+    (land_store.LAND_STORE_PATCHES, with the switch patch's restart_has_array in restartmod.f90, reading the 10 m wind
+    patch's wind), for a run that sets them, and return each patched file's hash for the run key."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
@@ -1622,6 +1628,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
         raise RuntimeError("the gust's patch goes into the twilight copy, over the boundary-layer patch")
     if similarity and not gust:
         raise RuntimeError("the similarity over water goes over the gust's patch")
+    if land_store and not twilight:
+        raise RuntimeError("the hollows' store reads the 10 m wind patch's wind; it goes into the twilight copy")
     if night and not twilight:
         raise RuntimeError("the night switch reads the twilight patch's cosine below the horizon; it goes into the "
                            'twilight copy')
@@ -1642,7 +1650,9 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                                 + (PLASIM_SWITCH_PATCHES if humidity_mean or cloud_water else [])
                                 + (HUS_MEAN_PATCHES if humidity_mean else [])
                                 + (cnd.CLOUD_WATER_PATCHES if cloud_water else [])
-                                + (rdr.RAIN_DROP_PATCHES if rain_drops else [])):
+                                + (rdr.RAIN_DROP_PATCHES if rain_drops else [])
+                                + ([('restartmod.f90', SWITCH_MARKER, SWITCH_RESTART_EDITS)] + lsf.LAND_STORE_PATCHES
+                                   if land_store else [])):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1927,7 +1937,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
                   cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
                   free_convection=None, mixing_length=None, boundary_layer=None, large_scale_condensate=None,
-                  humidity_mean=False, surface_gust=None, rain_drops=None, snow=None):
+                  humidity_mean=False, surface_gust=None, rain_drops=None, snow=None, land_store=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces the
     air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and twilight
     (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the ledger
@@ -1952,7 +1962,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     too), 'beljaars_similarity' with CM1's similarity over ice-free water as well, and rain_drops, a birth rule of rain_drops.BIRTH_RULES, the rain's evaporation from its drops' sizes and fall
     speeds in place of gamma, which the snow keeps (rain_drops.setting), unless snow, a choice of
     snow_sublimation.CHOICES, sublimates it by its flakes' closure and Morrison's graupel with their diagnostics and
-    shadows (snow_sublimation.setting; with the rain's drops only). Each is recorded when given, and left out the
+    shadows (snow_sublimation.setting; with the rain's drops only), and land_store, a dict of the store tables' product
+    and the floor, surface, library, hollows and wetted_fraction, adds the hollows' store to the drylands' land
+    (land_store.setting; with the 10 m wind, which its pools' evaporation reads). Each is recorded when given, and left out the
     configuration is the one every earlier run had; the 294.9 K ledger without the clear share records the twilight as
     the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did."""
     from importlib.metadata import version
@@ -1998,6 +2010,11 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if snow is not None and rain_drops is None:
         raise ValueError("the snow from its flakes runs inside the rain's drops patch (nevapprec 2); set rain_drops")
     flakes = sns.setting(snow) if snow is not None else None                  # refuses an unknown choice
+    if land_store is not None and not wind10:
+        raise ValueError("the hollows' store evaporates on PlaSim's 10 m wind; set wind10")
+    store = (lsf.setting(land_store['product'], land_store['floor'], land_store['surface'], land_store['library'],
+                         land_store['hollows'], land_store['wetted_fraction'], planet['gravity_m_s2'],
+                         exp['pressure_pa'], root=ROOT) if land_store is not None else None)   # refuses a bad choice
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                exoplasim=version('exoplasim'),
                source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
@@ -2009,7 +2026,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      night=uses_night_switch(convection), humidity_mean=bool(humidity_mean),
                                      cloud_water=cloud, gust=surface_gust is not None,
                                      rain_drops=rain_drops is not None,
-                                     similarity=surface_gust == 'beljaars_similarity'),
+                                     similarity=surface_gust == 'beljaars_similarity',
+                                     land_store=store is not None),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -2054,6 +2072,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['snow'] = flakes
         cfg['rain_drops'] = dict(drops, snow='sublimates by its flakes and graupel in place of gamma (the snow entry)')
         cfg['output'] = cfg['output'] + [name for name, _, _ in sns.DIAGNOSTICS.values()]
+    if store is not None:
+        cfg['land_store'] = store
+        cfg['output'] = cfg['output'] + [lsf.RUNOFF_NAME] + [name for name, _, _ in lsf.CODES.values()]
     if cloud:
         cfg['large_scale_condensate'] = cnd.setting()
     if humidity_mean:
@@ -2185,7 +2206,8 @@ def run_key(cfg, inputs) -> str:
     """Changes if the settings or any written input file change, so a resume never mixes models."""
     digest = hashlib.sha256(json.dumps(cfg, sort_keys=True).encode())
     for path in (inputs['landmap'], inputs['topomap'], inputs['starspec'], inputs['starspec'][:-4] + '_hr.dat',
-                 *([inputs['twilight']] if 'twilight' in inputs else [])):
+                 *([inputs['twilight']] if 'twilight' in inputs else []),
+                 *([inputs['land_store']] if 'land_store' in inputs else [])):
         digest.update(Path(path).read_bytes())
     return digest.hexdigest()[:16]
 
@@ -2295,7 +2317,23 @@ def prepare_inputs(cfg, rundir: Path) -> dict:
     if cfg.get('twilight', {}).get('mode') in ('curved', 'full'):
         out['twilight'] = str(twilight_table(folder / 'twilight.dat', cfg['twilight']['mode'],
                                              ROOT / cfg['twilight']['product']))
+    if 'land_store' in cfg:
+        out['land_store'] = str(land_store_table(cfg['land_store'], landmap, folder / lsf.TABLE_NAME))
     return out
+
+
+def land_store_table(s: dict, landmap: Path, path: Path) -> Path:
+    """The hollows' store's tables for a run (land_store.write_table) from the product its configuration names, refused
+    if the product changed since the configuration read it or holds a store where the run's mask has sea."""
+    product_path = Path(s['product']) if Path(s['product']).is_absolute() else ROOT / s['product']
+    if hashlib.sha256(product_path.read_bytes()).hexdigest()[:16] != s['sha256']:
+        raise ValueError(f'{product_path} changed since the configuration read it')
+    product = lsf.read_product(product_path)
+    *_, rows = lsf.table_rows(product, s['library'], s['hollows'])
+    sea = (rows[:, 0] > 0.0) & ~lsf.land_mask_cells(landmap)
+    if sea.any():
+        raise ValueError(f'{product_path} holds a store in {int(sea.sum())} cells that are sea in the run\'s land mask')
+    return lsf.write_table(product, s['library'], s['hollows'], path)
 
 
 def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dict):
@@ -2396,6 +2434,11 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         model._edit_namelist('fluxmod_namelist', 'GUST_UMIN', repr(float(cfg['surface_gust']['least_wind_m_s'])))
         if 'similarity_over_water' in cfg['surface_gust']:
             model._edit_namelist('fluxmod_namelist', 'NSIMW', '1')
+    if 'land_store' in cfg:                                           # land_store.py's hollows' store
+        shutil.copy2(inputs['land_store'], workdir / lsf.TABLE_NAME)
+        for name, text in lsf.namelist_values(cfg['land_store']).items():
+            model._edit_namelist('landmod_namelist', name, text)
+        model._edit_namelist('plasim_namelist', 'NDIAGGP2D', str(lsf.NLSOUT))     # its means, codes 1-7
     if cfg.get('twilight', {}).get('magnification'):
         for i, x in enumerate(cfg['twilight']['magnification'], 1):
             model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
@@ -2438,6 +2481,10 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     if 'humidity_mean' in cfg:
         pyburn.ilibrary[str(HUS_MEAN_CODE)] = list(HUS_MEAN)
         pyburn.slibrary[HUS_MEAN[0]] = [HUS_MEAN_CODE, HUS_MEAN[1], HUS_MEAN[2]]
+    if 'land_store' in cfg:
+        for code, (name, long_name, units) in lsf.CODES.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, units]
+            pyburn.slibrary[name] = [code, long_name, units]
     model.cfgpostprocessor(ftype='regular', extension='.nc', variables=cfg['output'],
                            times=m['writes_per_lunar_day'] * m['lunar_days_per_year'], timeaverage=True,
                            interpolatetimes=False)
@@ -2753,7 +2800,7 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         levels: str | None = None, free_convection: str | None = None, mixing_length: str | None = None,
         boundary_layer: str | None = None, large_scale_condensate: str | None = None,
         humidity_mean: bool = False, surface_gust: str | None = None, rain_drops: str | None = None,
-        snow: str | None = None, pieces: int = 0, workers: int = 2) -> int:
+        snow: str | None = None, pieces: int = 0, workers: int = 2, land_store: dict | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
@@ -2761,7 +2808,7 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
                         moisture=moisture, convection=convection, levels=levels, free_convection=free_convection,
                         mixing_length=mixing_length, boundary_layer=boundary_layer,
                         large_scale_condensate=large_scale_condensate, humidity_mean=humidity_mean,
-                        surface_gust=surface_gust, rain_drops=rain_drops, snow=snow)
+                        surface_gust=surface_gust, rain_drops=rain_drops, snow=snow, land_store=land_store)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -2982,6 +3029,17 @@ def main(argv=None) -> int:
                              'gamma, with the rain from its drops: flakes (its shadows on), flakes_highest_top (the '
                              "snow top at its highest forming layer) or flakes_no_shadows (snow_sublimation.py; part "
                              'of the run key)')
+    parser.add_argument('--land-store', metavar='PRODUCT',
+                        help="the storm-water study's store tables (store_tables.json): the drylands' slopes shed "
+                             "runoff by infiltration excess into a store of their hollows' water, which evaporates at "
+                             "the pools' own rate and seeps into a slow store (land_store.py; LAND_STORE_PATCHES; needs "
+                             '--wind10 and every --land-store-* option; part of the run key)')
+    parser.add_argument('--land-store-floor', choices=lsf.FLOORS, help="the hollows' floor design")
+    parser.add_argument('--land-store-surface', choices=lsf.SURFACES, help="the slopes' surface")
+    parser.add_argument('--land-store-library', choices=lsf.LIBRARIES, help='the storm library the routing follows')
+    parser.add_argument('--land-store-hollows', choices=lsf.HOLLOWS, help="the hollows' age")
+    parser.add_argument('--land-store-wetted', type=float, metavar='SHARE',
+                        help="the convective rain's wetted share of a cell (Earth's schemes take 0.3; an open term)")
     parser.add_argument('--convert-pieces', type=int, default=0, metavar='TIMES',
                         help='convert each year in pieces of this many output times (convert_in_pieces); 0 leaves '
                              "the whole file to ExoPlaSim's postprocessor (not part of the run key)")
@@ -3041,6 +3099,13 @@ def main(argv=None) -> int:
                           diagnostic_night=args.sbm_diagnostic_night or None)
     elif args.convection == 'massflux':
         convection = dict(scheme='massflux', start=None if args.massflux_start == 'ifs' else args.massflux_start)
+    store_options = dict(floor=args.land_store_floor, surface=args.land_store_surface, library=args.land_store_library,
+                         hollows=args.land_store_hollows, wetted_fraction=args.land_store_wetted)
+    if args.land_store and any(v is None for v in store_options.values()):
+        parser.error('--land-store needs --land-store-floor, -surface, -library, -hollows and -wetted')
+    if not args.land_store and any(v is not None for v in store_options.values()):
+        parser.error('the --land-store-* options belong to --land-store')
+    land_store = dict(product=args.land_store, **store_options) if args.land_store else None
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
@@ -3053,7 +3118,7 @@ def main(argv=None) -> int:
                None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean,
                None if args.surface_gust == 'none' else args.surface_gust,
                None if args.rain_drops == 'none' else args.rain_drops, None if args.snow == 'none' else args.snow,
-               args.convert_pieces, args.convert_workers)
+               args.convert_pieces, args.convert_workers, land_store)
 
 
 if __name__ == '__main__':
