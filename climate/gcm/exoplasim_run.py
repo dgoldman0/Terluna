@@ -96,6 +96,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import inspect
 import json
 import os
 from pathlib import Path
@@ -116,6 +117,7 @@ from climate.gcm import condensate as cnd
 from climate.gcm import rain_drops as rdr
 from climate.gcm import snow_sublimation as sns
 from climate.gcm import land_store as lsf
+from climate.gcm import patch_ledger as plg
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -1549,6 +1551,9 @@ TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", T
                     ('radmod.f90', 'world-crafting: ice bands 2-5 in band 2', ICE_WEIGHTS_EDITS)] + WIND10_PATCHES
 TWILIGHT_PATCHES += [('radmod.f90', "Terluna: the cold cloud's water factor by level", ICE_FACTOR_EDITS)]
 TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
+# ExoPlaSim 3.4.2's PlaSim sources as its pip wheel holds them, untouched by any patch (manifest.json beside the folder
+# gives the wheel and each file's hash): patch_ledger checks a patched folder against them and rebuilds a file from them.
+UNTOUCHED_SOURCE = Path('/media/projectspace/terluna-research/exoplasim-untouched/3.4.2/src')
 # The curved air's ledgers (twilight.py): on the design climate's 301 K column, the standard since 2026-10-19, and on
 # the 294.9 K column every run from 14 to 19 October took. The Moon's slant factors (ZMLUNAR, ZMAIRLUNAR) stay the 294.9 K
 # ledger's, with which the shortwave calibration was refitted (shortwave_fit_A28_dim5_lunar.json); the 301 K ledger
@@ -1593,6 +1598,48 @@ def use_twilight_package():
     sys.path.insert(0, str(TWILIGHT_PACKAGE))
 
 
+def patch_chain(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
+                massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
+                boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
+                cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
+                similarity: bool = False, land_store: bool = False) -> list:
+    """The Terluna patches a run with these settings takes, as (file, marker, edits), in the order ensure_patched
+    applies them."""
+    return (PATCHES + (TWILIGHT_PATCHES if twilight else [])
+            + (SBM_TRIGGER_PATCHES if trigger or night else [])
+            + (SBM_DEPTH_PATCHES if depth or cap or night else [])
+            + (SBM_CAP_PATCHES if cap or night else [])
+            + (mff.MASSFLUX_PATCHES if massflux or boundary_layer or night or cloud_water else [])
+            + (mff.START_PATCHES if massflux_start else [])
+            + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer or gust else [])
+            + (pbf.PBL_PATCHES if boundary_layer or gust else [])
+            + (sgf.GUST_PATCHES if gust else [])
+            + (ssf.SIMW_PATCHES if similarity else [])
+            + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night or cloud_water or gust else [])
+            + (SBM_NIGHT_PATCHES if night else [])
+            + (PLASIM_SWITCH_PATCHES if humidity_mean or cloud_water else [])
+            + (HUS_MEAN_PATCHES if humidity_mean else [])
+            + (cnd.CLOUD_WATER_PATCHES if cloud_water else [])
+            + (rdr.RAIN_DROP_PATCHES if rain_drops else [])
+            + ([('restartmod.f90', SWITCH_MARKER, SWITCH_RESTART_EDITS)] + lsf.LAND_STORE_PATCHES
+               if land_store else []))
+
+
+def patch_catalogue() -> list:
+    """Every Terluna patch once, in the order ensure_patched applies them: the chain of a run that sets every switch,
+    a patch that two switches share kept at its first place. Two different patches may not share a marker in a file,
+    since the marker is how ensure_patched and the ledger know a patch is there."""
+    out, seen = [], {}
+    for name, marker, edits in patch_chain(**{key: True for key in inspect.signature(patch_chain).parameters}):
+        if (name, marker) in seen:
+            if plg.fingerprint(seen[name, marker]) != plg.fingerprint(edits):
+                raise RuntimeError(f'two different Terluna patches share the marker {marker!r} in {name}')
+            continue
+        seen[name, marker] = edits
+        out.append((name, marker, edits))
+    return out
+
+
 def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
                    massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
                    boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
@@ -1613,7 +1660,9 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     with the convection's vapour diagnostic) with CM1's similarity over water (surface_similarity.SIMW_PATCHES, over
     the gust's patch), and the rain evaporated from its drops (rain_drops.RAIN_DROP_PATCHES), and the hollows' store
     (land_store.LAND_STORE_PATCHES, with the switch patch's restart_has_array in restartmod.f90, reading the 10 m wind
-    patch's wind), for a run that sets them, and return each patched file's hash for the run key."""
+    patch's wind), for a run that sets them (patch_chain), and return each patched file's hash for the run key. The
+    folder's ledger (patch_ledger.py) records the version of each patch applied, and a file that carries a patch's
+    marker is refused unless the ledger holds the runner's version of that patch for it."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
@@ -1634,35 +1683,22 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
         raise RuntimeError("the night switch reads the twilight patch's cosine below the horizon; it goes into the "
                            'twilight copy')
     hashes = {}
-    for name, marker, edits in (PATCHES + (TWILIGHT_PATCHES if twilight else [])
-                                + (SBM_TRIGGER_PATCHES if trigger or night else [])
-                                + (SBM_DEPTH_PATCHES if depth or cap or night else [])
-                                + (SBM_CAP_PATCHES if cap or night else [])
-                                + (mff.MASSFLUX_PATCHES if massflux or boundary_layer or night or cloud_water
-                                   else [])
-                                + (mff.START_PATCHES if massflux_start else [])
-                                + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer or gust else [])
-                                + (pbf.PBL_PATCHES if boundary_layer or gust else [])
-                                + (sgf.GUST_PATCHES if gust else [])
-                                + (ssf.SIMW_PATCHES if similarity else [])
-                                + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night or cloud_water or gust else [])
-                                + (SBM_NIGHT_PATCHES if night else [])
-                                + (PLASIM_SWITCH_PATCHES if humidity_mean or cloud_water else [])
-                                + (HUS_MEAN_PATCHES if humidity_mean else [])
-                                + (cnd.CLOUD_WATER_PATCHES if cloud_water else [])
-                                + (rdr.RAIN_DROP_PATCHES if rain_drops else [])
-                                + ([('restartmod.f90', SWITCH_MARKER, SWITCH_RESTART_EDITS)] + lsf.LAND_STORE_PATCHES
-                                   if land_store else [])):
+    ledger = plg.read(src)
+    for name, marker, edits in patch_chain(twilight=twilight, trigger=trigger, depth=depth, cap=cap, massflux=massflux,
+                                           free_convection=free_convection, massflux_start=massflux_start,
+                                           boundary_layer=boundary_layer, night=night, humidity_mean=humidity_mean,
+                                           cloud_water=cloud_water, gust=gust, rain_drops=rain_drops,
+                                           similarity=similarity, land_store=land_store):
         path = src / name
         text = path.read_text()
         if marker not in text:
-            for old, new in edits:
-                if text.count(old) != 1:
-                    raise RuntimeError(f'ExoPlaSim {name} is not the version the Terluna patch expects near {old.strip()!r}')
-                text = text.replace(old, new)
-            path.write_text(text)
+            path.write_text(plg.apply(text, edits, name))
+            plg.note(ledger, name, marker, edits)
+            plg.write(src, ledger)
             for exe in (src.parent / 'run').glob('most_plasim_*.x'):
                 exe.unlink()
+        else:
+            plg.check(ledger, src, name, marker, edits)
         hashes[path.stem] = hashlib.sha256(path.read_bytes()).hexdigest()[:16]
     return hashes
 
