@@ -19,7 +19,8 @@ The water: the column's vapour by CM1's own budget terms (rho times each, level 
 prescribed moistening reckoned as for the heat, against the evaporation, the rain and the change of the column's
 vapour and condensate from the span's first output to its last; what is left closes it. On the inflow build with
 var7 = 1 (cm1_run.INFLOW_PATCH) the air the mean wind draws in carries the reference's, a tendency outside CM1's
-budget too, reckoned at each output as the written rate times the reference less the domain mean. CM1 splits its
+budget too, reckoned at each output as the written rate times the reference less the domain mean, the reference's
+air being that of the nudging window CM1 holds then (a weather case's windows follow the GCM's air). CM1 splits its
 vertical advection from its implicit diffusion with the imposed sinking taken out twice (adv.F: the slot for the
 diffusion holds the sinking too), so only their sum with the horizontal advection, the box's own transport, stands;
 over a doubly periodic box it is near nil. The boundary layer's column over the evaporation, and its heating over the
@@ -105,7 +106,9 @@ def read_day_night(path: Path, field: str = 'theta'):
 def read_inflow(case: Path, text: str):
     """The mean wind's inflow at the reference's air (cm1_run.INFLOW_PATCH) when the namelist text sets var7 = 1: the
     rates (1/s) by level as the build wrote them, and the reference's potential temperature (K) and vapour (kg/kg)
-    there from the first nudging window, which CM1 interpolates to its levels linearly; None otherwise."""
+    there in each nudging window, which CM1 interpolates to its levels linearly, with the window's end (s); theta and
+    qv are the first window's. None otherwise. CM1 draws the air toward the window it holds (inflow_reference): the
+    same air in every window of a mean-forced box, the GCM's changing air in a weather case's."""
     try:
         if namelist_value(text, 'var7') <= 0.5:
             return None
@@ -114,12 +117,24 @@ def read_inflow(case: Path, text: str):
     words = (case / INFLOW_RATES).read_text().split()
     nk = int(words[0])
     values = np.array([float(v) for v in words[1:1 + 2 * nk]]).reshape(nk, 2)
-    rows = [line.split() for line in (case / 'lsnudge_0001.dat').read_text().splitlines()[4:]
-            if line.strip() and not line.lstrip().startswith('*')]
-    ref = np.array([[float(v) for v in row[:3]] for row in rows])
     z = values[:, 0]
-    return dict(z=z, rate=values[:, 1], theta=np.interp(z, ref[:, 0], ref[:, 1]),
-                qv=np.interp(z, ref[:, 0], ref[:, 2]) * 1.0e-3)
+    windows = []
+    for path in sorted(case.glob('lsnudge_*.dat')):
+        lines = path.read_text().splitlines()
+        rows = [line.split() for line in lines[4:] if line.strip() and not line.lstrip().startswith('*')]
+        ref = np.array([[float(v) for v in row[:3]] for row in rows])
+        windows.append(dict(end_s=float(lines[1].split()[1]), theta=np.interp(z, ref[:, 0], ref[:, 1]),
+                            qv=np.interp(z, ref[:, 0], ref[:, 2]) * 1.0e-3))
+    return dict(z=z, rate=values[:, 1], theta=windows[0]['theta'], qv=windows[0]['qv'], windows=windows)
+
+
+def inflow_reference(inflow: dict, mtime: float) -> dict:
+    """The nudging window whose air the inflow draws in at model time mtime (s): CM1 moves on to the next window once
+    a step's time passes the end of the one it holds (solve1.F, lsnudge_count), and stays on the last."""
+    for window in inflow['windows']:
+        if mtime <= window['end_s']:
+            return window
+    return inflow['windows'][-1]
 
 
 def day_night_heating(z_table, th_table, zh, mtime, var18, var19):
@@ -219,7 +234,7 @@ def budget(name: str, from_day: float) -> dict:
         if prescribed:
             day_night.append(day_night_heating(*table, zh, d['mtime'], var18, var19) * exner * DAY)
         if inflow is not None:
-            inflowing.append(inflow['rate'] * (inflow['theta'] - d['th']) * exner * DAY)
+            inflowing.append(inflow['rate'] * (inflow_reference(inflow, d['mtime'])['theta'] - d['th']) * exner * DAY)
         surface['t2_k'].append(d['t2'])
         surface['q2_g_kg'].append(d['q2'] * 1000.0)
         surface['sensible_w_m2'].append(d['hfx'])
@@ -287,7 +302,7 @@ def water(name: str, from_day: float, to_day: float | None = None) -> dict:
         if prescribed:
             rates['day_night_prescribed'] = day_night_heating(z_table, qv_table, zh, d['mtime'], var18, var19)
         if inflow is not None:
-            rates['inflow'] = inflow['rate'] * (inflow['qv'] - d['qv'])
+            rates['inflow'] = inflow['rate'] * (inflow_reference(inflow, d['mtime'])['qv'] - d['qv'])
         for k, r in rates.items():
             columns[k].append(float((r * mass).sum()) * DAY)
             bands[k].append([float((r * mass)[(zh >= a * 1000.0) & (zh < b * 1000.0)].sum()) * DAY
