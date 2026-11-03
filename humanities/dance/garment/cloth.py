@@ -33,7 +33,17 @@ with Coulomb friction relative to the body's surface; above the floor; and apart
 self-contact distance, found with a sorted spatial hash rebuilt every few substeps. Contacts are inelastic: the
 approach made within a substep is undone at once and enters the velocity; older penetration (cloth caught where two
 capsules overlap) is undone at the depenetration speed in position only. Pinned vertices follow their attachment
-targets.
+targets. Layers gathered into one seam can be put in a contact group whose vertices do not repel one another, so that
+they lie a few millimetres apart where they are sewn (the self-contact distance, 0.75 mean edges, is about 1.1 cm at a
+1.5 cm mesh) and separate as they hang.
+
+Several fabrics. One cloth can be cut from several fabrics, as when a chiffon layer over a satin underskirt is merged
+into one mesh. Each triangle then carries its own fabric's areal density, tensile and shear stiffness and normal factor,
+and each vertex the bending rigidity and friction of the fabric its triangles are cut from, so every layer keeps its own
+physics and the layers meet through the self-contact. That contact has no friction, so layers slide freely over one
+another. Shielding gives each stacked vertex half of its own fabric's air force, which keeps the pair's total for two
+closed sheets moving together but leaves each layer's deceleration set by its own mass: a light layer in a heavy
+layer's lee can drift off it and regain its full force.
 
 Precision. Positions and velocities are float32. The velocity is updated from the projections' increments,
 v + D / dt, never from position differences, whose float32 rounding (ulp / dt, 0.3-2 mm/s at 1-10 m and
@@ -43,6 +53,7 @@ from __future__ import annotations
 
 import math
 import time
+from collections.abc import Sequence
 from dataclasses import dataclass, asdict, field
 
 import numpy as np
@@ -207,22 +218,94 @@ def quat_rotate(q, v):
     return v + w * t + torch.cross(u, t, dim=-1)
 
 
+# ----------------------------------------------------------------------------------------------------------- fabrics
+
+TRIANGLE_FIELDS = ('areal_density', 'tensile_stiffness', 'shear_stiffness', 'normal_factor')
+VERTEX_FIELDS = ('bending_rigidity', 'friction')
+
+
+def merged_tri_material(pieces, index) -> np.ndarray:
+    """tri_material for a cloth merged from `pieces` with garments.merge, which keeps each piece's triangles together
+    and in order: every triangle of the k-th piece takes material index index[k]. `pieces` holds Pieces or the
+    (tag, Piece) pairs merge takes."""
+    counts = [len((p if isinstance(p, Piece) else p[1]).F) for p in pieces]
+    if len(index) != len(counts):
+        raise ValueError(f'{len(counts)} pieces and {len(index)} material indices')
+    return np.repeat(np.asarray(index, np.int64), counts)
+
+
+def material_assignment(material, tri_material, n_tri):
+    """(materials, tri_material): a single material and None, or a tuple of Materials and a (T,) int64 index array.
+    Anything other than a list or tuple counts as a single material."""
+    if tri_material is None:
+        if isinstance(material, (list, tuple)):
+            raise ValueError('a sequence of materials needs tri_material, one index into it per triangle')
+        return (material,), None
+    mats = tuple(material) if isinstance(material, (list, tuple)) else (material,)
+    idx = np.asarray(tri_material)
+    if idx.shape != (n_tri,) or not np.issubdtype(idx.dtype, np.integer):
+        raise ValueError(f'tri_material must hold {n_tri} integers, one per triangle')
+    if not mats or idx.min() < 0 or idx.max() >= len(mats):
+        raise ValueError(f'tri_material indices must lie in [0, {len(mats)})')
+    return mats, idx.astype(np.int64)
+
+
+def fabric_fields(mats, tri_material, F, area, V) -> dict:
+    """Each material field where the solver reads it: the triangle fields (T,) and the vertex fields (V,) as float64
+    arrays, or the single material's own values when tri_material is None."""
+    if tri_material is None:
+        return {k: getattr(mats[0], k) for k in TRIANGLE_FIELDS + VERTEX_FIELDS}
+    per_tri = {k: np.array([getattr(m, k) for m in mats], float)[tri_material] for k in TRIANGLE_FIELDS + VERTEX_FIELDS}
+    out = {k: per_tri[k] for k in TRIANGLE_FIELDS}
+    # a vertex takes the bending rigidity and friction of the fabric its triangles are cut from; where triangles of
+    # different fabrics meet at a vertex (a seam inside one mesh), it takes the mean of their values weighted by the
+    # triangles' rest areas. A vertex outside every triangle (which no piece builder makes) takes the first fabric's.
+    wsum = np.zeros(V)
+    np.add.at(wsum, F, area[:, None])
+    for k in VERTEX_FIELDS:
+        acc = np.zeros(V)
+        np.add.at(acc, F, (per_tri[k] * area)[:, None])
+        out[k] = np.where(wsum > 0, acc / np.where(wsum > 0, wsum, 1.0), getattr(mats[0], k))
+    return out
+
+
 # ------------------------------------------------------------------------------------------------------------ solver
 
 class Cloth:
-    """One garment piece. `pinned` vertices follow targets given by the caller each substep."""
+    """One cloth: a garment piece, or several pieces merged into one mesh (garments.merge) that meet one another
+    through the self-contact. `pinned` vertices follow targets given by the caller each substep.
 
-    def __init__(self, piece: Piece, X0: np.ndarray, material: Material, world: World, settings: Settings | None = None,
-                 pinned=None, device=None, extra_mass=None, tethers=None):
+    Fabric. `material` is one Material for the whole cloth, or a sequence of Materials together with `tri_material`,
+    an integer array that gives each triangle its index into the sequence. For pieces merged with garments.merge, whose
+    triangles stay together in the pieces' order, merged_tri_material(pieces, index) builds it from one index per piece.
+    Each triangle takes its fabric's areal density, tensile and shear stiffness and normal factor; each vertex takes the
+    bending rigidity and friction of the fabric its triangles are cut from, and where triangles of different fabrics
+    meet at a vertex, their mean weighted by rest area. These values are float32 tensors made once, which the captured
+    substep reads. A single Material keeps them as Python floats, the scalar arithmetic of a one-fabric cloth; a
+    sequence that gives every triangle the same fabric agrees with it to float32 rounding. The solver reads them as
+    `tensile_stiffness`, `shear_stiffness` and `normal_factor` (per triangle) and `bending_rigidity` and `friction`
+    (per vertex); the areal density enters through the triangle masses `mtri` and the vertex masses `m`. `material`
+    holds the single Material, or the first of the sequence; `materials` holds the sequence and `tri_material` the
+    index array (None for a single Material)."""
+
+    def __init__(self, piece: Piece, X0: np.ndarray, material: Material | Sequence[Material], world: World,
+                 settings: Settings | None = None, pinned=None, device=None, extra_mass=None, tethers=None,
+                 tri_material=None, contact_skip=None):
+        """contact_skip: an optional (V,) group number per vertex. Vertices sharing a group above 0 do not repel one
+        another, so that layers gathered into one seam (skirts at a waistband, sleeve tiers at a cuff) can lie closer
+        together there than the self-contact distance, as gathered layers do; every other pair keeps its contact."""
         s = settings or Settings()
-        self.s, self.material, self.world, self.piece = s, material, world, piece
+        F = np.asarray(piece.F, np.int64)
+        mats, tri_material = material_assignment(material, tri_material, len(F))
+        self.s, self.material, self.world, self.piece = s, mats[0], world, piece
+        self.materials, self.tri_material = mats, tri_material
         dev = torch.device(device or ('cuda' if torch.cuda.is_available() else 'cpu'))
         self.dev = dev
         V = piece.n_vertices
-        F = np.asarray(piece.F, np.int64)
         area, c1, c2, _ = triangle_rest(piece)
+        fab = fabric_fields(mats, tri_material, F, area, V)
         m = np.zeros(V)
-        np.add.at(m, F, (material.areal_density * area / 3)[:, None])
+        np.add.at(m, F, (fab['areal_density'] * area / 3)[:, None])
         if extra_mass is not None:                     # mass sewn to the cloth (a weighted hem) that the air does not see
             m = m + np.asarray(extra_mass, float)
         pin = np.zeros(V, bool)
@@ -245,7 +328,19 @@ class Cloth:
         self.c1 = torch.as_tensor(c1, **f32)
         self.c2 = torch.as_tensor(c2, **f32)
         self.area0 = torch.as_tensor(area, **f32)
-        self.mtri = torch.as_tensor(material.areal_density * area, **f32)
+        self.mtri = torch.as_tensor(fab['areal_density'] * area, **f32)
+        # per triangle (T,) and per vertex (V,) as tensors made once; a single fabric's Python floats as they are
+        coef = lambda a: torch.as_tensor(a, **f32) if np.ndim(a) else a
+        self.tensile_stiffness = coef(fab['tensile_stiffness'])
+        self.shear_stiffness = coef(fab['shear_stiffness'])
+        self.normal_factor = coef(fab['normal_factor'])
+        self.bending_rigidity = coef(fab['bending_rigidity'])
+        self.friction = coef(fab['friction'])
+        B = np.asarray(fab['bending_rigidity'])
+        self.bend_on = bool((B > 0).any())
+        # a vertex whose fabric has no bending rigidity takes no bending correction; its stand-in of 1 keeps the
+        # compliance finite where the mask removes it
+        self.bend_B = coef(np.where(B > 0, B, 1.0)) if B.ndim else fab['bending_rigidity']
         self.m = torch.as_tensor(m, **f32)
         self.w = torch.as_tensor(w, **f32)
         self.pin = torch.as_tensor(pin, device=dev)
@@ -257,13 +352,15 @@ class Cloth:
         self.MT = _csr(M.T.tocsr(), dev)
         self.S_bend = torch.as_tensor(S_bend, **f32)
         self.Av = torch.as_tensor(Av, **f32)
-        self.bend_active = torch.as_tensor(S_bend > 0, device=dev)
+        self.bend_active = torch.as_tensor((S_bend > 0) & (B > 0) if B.ndim else S_bend > 0, device=dev)
         self.x = torch.as_tensor(X0, **f32).clone()
         self.v = torch.zeros_like(self.x)
         self.edge_len = piece.edge_length()
         self.d_self = s.self_distance or 0.75 * self.edge_len
         edges = mesh_edges(F)
         self.excl = torch.as_tensor(np.sort(edges[:, 0] * V + edges[:, 1]), device=dev)
+        self.skip = (torch.as_tensor(np.asarray(contact_skip), dtype=torch.int64, device=dev)
+                     if contact_skip is not None else None)
         self.pairs = None
         self.stacked = torch.zeros(V, dtype=torch.bool, device=dev)
         self.n_sub = 0
@@ -348,7 +445,7 @@ class Cloth:
         vn = (vt * n).sum(1)
         vtan = vt - vn[:, None] * n
         vtn = vtan.norm(dim=1)
-        kn = 0.5 * rho * s.c_normal * self.material.normal_factor * vn.abs() * A / self.mtri
+        kn = 0.5 * rho * s.c_normal * self.normal_factor * vn.abs() * A / self.mtri
         kt = 0.5 * rho * s.c_tangent * vtn * A / self.mtri
         dv = -(kn * dt / (1 + kn * dt) * vn)[:, None] * n - (kt * dt / (1 + kt * dt))[:, None] * vtan
         imp = (self.mtri / 3.0)[:, None] * dv
@@ -375,9 +472,8 @@ class Cloth:
         C3 = (g1 * g2).sum(1)
         p = (g2 - C3[:, None] * g1) / l1[:, None]
         q = (g1 - C3[:, None] * g2) / l2[:, None]
-        mat = self.material
-        at = 1.0 / (mat.tensile_stiffness * self.area0 * dt * dt)
-        ash = 1.0 / (mat.shear_stiffness * self.area0 * dt * dt)
+        at = 1.0 / (self.tensile_stiffness * self.area0 * dt * dt)
+        ash = 1.0 / (self.shear_stiffness * self.area0 * dt * dt)
         d1 = -C1 / (self.W11 + at)
         d2 = -C2 / (self.W22 + at)
         den3 = (p * p).sum(1) * self.W11 + 2 * (p * q).sum(1) * self.W12 + (q * q).sum(1) * self.W22
@@ -398,12 +494,11 @@ class Cloth:
         return out
 
     def bend(self, x, x_start, dt):
-        B = self.material.bending_rigidity
-        if B <= 0:
+        if not self.bend_on:
             return torch.zeros_like(x)
         gam = self.s.bend_damping_time / dt
         C = self.M @ ((1 + gam) * x - gam * x_start)
-        alpha = self.Av / (B * dt * dt)
+        alpha = self.Av / (self.bend_B * dt * dt)
         dl = -C / ((1 + gam) * self.S_bend + alpha)[:, None]
         dl = dl * self.bend_active[:, None]
         return self.w[:, None] * (self.MT @ dl)
@@ -436,6 +531,9 @@ class Cloth:
         pos = torch.searchsorted(self.excl, pk).clamp(max=len(self.excl) - 1)
         keep = self.excl[pos] != pk
         i, j = i[keep], j[keep]
+        if self.skip is not None:
+            keep = (self.skip[i] != self.skip[j]) | (self.skip[i] == 0)
+            i, j = i[keep], j[keep]
         n = len(i)
         self.stats['pairs_max'] = max(self.stats['pairs_max'], n)
         if n > self.pair_cap:
@@ -499,7 +597,7 @@ class Cloth:
         a0 = self.capA0 + self.frac0 * self.capdA
         b0 = self.capB0 + self.frac0 * self.capdB
         r = self.cap_r
-        mu = self.material.friction
+        mu = self.friction
         ab = b - a
         L2 = (ab * ab).sum(1).clamp_min(1e-12)
         xa = x[:, None, :] - a[None]
@@ -537,7 +635,7 @@ class Cloth:
         pen = torch.minimum(pen0, approach + self.s.depenetration_speed * self.dt_now)
         rel = disp[:, :2]
         rt = rel.norm(dim=1).clamp_min(1e-12)
-        k = torch.clamp(self.material.friction * pen / rt, max=1.0)
+        k = torch.clamp(self.friction * pen / rt, max=1.0)
         d = torch.cat([-rel * k[:, None], pen[:, None]], dim=1)
         dv = torch.cat([-rel * k[:, None], torch.minimum(pen0, approach)[:, None]], dim=1)
         return d, dv
@@ -640,5 +738,5 @@ class Cloth:
         ke = 0.5 * float((self.m * (self.v * self.v).sum(1) * self.free).sum())
         pe = float((self.m * self.x[:, 2]).sum()) * self.world.gravity
         C = self.M @ self.x
-        be = float((self.material.bending_rigidity / (2 * self.Av) * (C * C).sum(1)).sum())
+        be = float((self.bending_rigidity / (2 * self.Av) * (C * C).sum(1)).sum())
         return dict(kinetic=ke, potential=pe, bending=be)

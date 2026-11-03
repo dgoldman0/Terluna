@@ -49,7 +49,7 @@
     },
     {
       "path": "research/studies/world_economy/early_exports_inputs.json",
-      "sha256": "0451f665ad3bfe91d46fe147df37bbf71ee86a8f599437727634075d45c98d20",
+      "sha256": "9255120bf1b51915e6aee473256dce8f9ba7a886f7ce822b315c5615fd0aed88",
       "use": "Original common real U, visitor assumptions and costs retained as provenance; no adopted currency or small-facility quote."
     },
     {
@@ -66,7 +66,7 @@
     },
     {
       "path": "research/studies/world_economy/results/comparison.json",
-      "sha256": "1681419979cbc8f678ff4476f92c8aa1cfa402445b4ca215e64f8b93ff7e9eaf",
+      "sha256": "1588231a76669650d362735c922c7a5ce29ef6caa316f6d48f96eae5803f6e4f",
       "use": "Original three-world results remain unchanged."
     }
   ]

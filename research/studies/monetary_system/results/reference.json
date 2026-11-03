@@ -4416,7 +4416,7 @@
     "inputs_sha256": "098ab9c8d982e5ea3acaa3915b5091828fd1730ec1bdfbfea202092dda1b771b",
     "model_sha256": "6ab1cc6cd506ffc3112f630bdadeb40f19966f12f9bb9f99febf82ce75165e57",
     "module": "research.studies.monetary_system.run",
-    "sources_sha256": "92d30477a83ad66fba850edf78c0553d2f5a2d776b3df989a93ff05f360d7d9a"
+    "sources_sha256": "ca9769bc1e4a83872ac92bba141910200e9f6a2b8d4efc5b61bfaacf3970ec80"
   },
   "reading_rule": "Amounts are normalized currency units. L is a hypothetical lunar contract currency; S is a hypothetical externally issued settlement currency. U is only the common valuation numeraire and is not issued money. No conversion to the mature world-economy product is defined.",
   "schema": "terluna.research.monetary-system/1",

@@ -107,7 +107,45 @@ def annulus(r_in: float, r_out: float, h: float, seed: int = 0, warp=(1.0, 0.0))
     return Piece(tri, UV, len(P), warp=tuple(warp), rings=rings, vertex_uv=P)
 
 
-def sector(r_in: float, r_out: float, angle: float, h: float, warp=None) -> Piece:
+def gore(r_in: float, r_out: float, angle: float, h: float, warp=None) -> Piece:
+    """An open ring sector of `angle` radians: a flared panel (a gore, or a petal left unsewn) whose straight edges
+    stay free. Rows of points about h apart from r_in to r_out run from one edge to the other, neighbouring rows
+    joined by strips. The warp defaults to the panel's centre line; a bias cut turns it by 45 degrees. Rings: 'inner'
+    (the top edge) and 'outer' (the hem), each in order of angle."""
+    if warp is None:
+        warp = (math.cos(angle / 2), math.sin(angle / 2))
+    nr = max(1, int(round((r_out - r_in) / (h * math.sqrt(3) / 2))))
+    radii = np.linspace(r_in, r_out, nr + 1)
+    rows, off = [], 0
+    for r in radii:
+        n = max(2, int(round(angle * r / h)) + 1)
+        rows.append((off, n, np.linspace(0.0, angle, n), r))
+        off += n
+    vuv = np.concatenate([np.c_[r * np.cos(psi), r * np.sin(psi)] for _, _, psi, r in rows])
+    F = []
+    for k in range(nr):
+        (oa, na, pa, _), (ob, nb, pb, _) = rows[k], rows[k + 1]
+        i = j = 0
+        while i < na - 1 or j < nb - 1:
+            if j >= nb - 1 or (i < na - 1 and pa[i + 1] <= pb[j + 1]):
+                F.append([oa + i, oa + i + 1, ob + j])
+                i += 1
+            else:
+                F.append([oa + i, ob + j + 1, ob + j])
+                j += 1
+    F = np.array(F, np.int64)
+    UV = vuv[F]
+    e1 = UV[:, 1] - UV[:, 0]
+    e2 = UV[:, 2] - UV[:, 0]
+    flip = (e1[:, 0] * e2[:, 1] - e1[:, 1] * e2[:, 0]) < 0
+    F[flip] = F[flip][:, [0, 2, 1]]
+    UV = vuv[F]
+    rings = dict(inner=list(range(rows[0][0], rows[0][0] + rows[0][1])),
+                 outer=list(range(rows[-1][0], rows[-1][0] + rows[-1][1])))
+    return Piece(F, UV, off, warp=tuple(warp), rings=rings, vertex_uv=vuv)
+
+
+def sector(r_in: float, r_out: float, angle: float, h: float, warp=None, hem=None) -> Piece:
     """A ring sector of `angle` radians whose two straight edges are sewn together: a skirt cut from part of a
     circle (angle pi for a half circle, 2 pi for a full one) or from more than one (4 pi for a double circle, whose
     pattern covers the plane twice). Rows of points about h apart from r_in to r_out are spaced evenly in angle, each
@@ -115,7 +153,11 @@ def sector(r_in: float, r_out: float, angle: float, h: float, warp=None) -> Piec
     across the seam. A corner reached across the seam lies at its vertex's pattern position turned by `angle`
     (corner_rot), so every triangle keeps its own flat shape and the sewn piece rests as the cone it makes. The warp
     defaults to the straight grain at the middle of the arc, which is the centre front when the seam is at the
-    centre back. Rings: 'inner' (the waist) and 'outer' (the hem), each in order of angle."""
+    centre back. Rings: 'inner' (the waist) and 'outer' (the hem), each in order of angle.
+
+    hem: an optional function of the fraction u (0 to 1) along the arc that gives the hem's distance from r_in there,
+    for a hem that is not an arc (a hem cut on a slant). Each row then lies at a fixed fraction of its radial line, and
+    r_out (the longest line) sets the number of rows."""
     if warp is None:
         warp = (math.cos(angle / 2), math.sin(angle / 2))
     nr = max(1, int(round((r_out - r_in) / (h * math.sqrt(3) / 2))))
@@ -123,16 +165,19 @@ def sector(r_in: float, r_out: float, angle: float, h: float, warp=None) -> Piec
     rows, off = [], 0
     for k, r in enumerate(radii):
         n = max(6, int(round(angle * r / h)))
-        rows.append((off, n, (np.arange(n) + 0.5 * (k % 2)) * angle / n, r))
+        psi = (np.arange(n) + 0.5 * (k % 2)) * angle / n
+        rr = np.full(n, r) if hem is None else r_in + (k / nr) * np.asarray(hem(psi / angle), float)
+        rows.append((off, n, psi, rr))
         off += n
     V = off
-    vuv = np.concatenate([np.c_[r * np.cos(psi), r * np.sin(psi)] for _, _, psi, r in rows])
+    vuv = np.concatenate([np.c_[rr * np.cos(psi), rr * np.sin(psi)] for _, _, psi, rr in rows])
     F, UV, ROT = [], [], []
 
     def corner(row, l):
-        o, n, psi, r = row
+        o, n, psi, rr = row
         lap = l // n                                   # times this corner has been carried across the seam
         a = psi[l % n] + angle * lap
+        r = rr[l % n]
         return o + l % n, (r * math.cos(a), r * math.sin(a)), angle * lap
 
     for k in range(nr):

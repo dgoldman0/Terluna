@@ -6,7 +6,9 @@ renders collides with (Blender side, run on the built dancer):
 body.json's capsules are the dynamics' body. The rendered skin lies outside them by up to 5 cm at the thighs and
 4 cm at the waist, so cloth simulated on them passes through the skin the renderer shows. The form splits each
 capsule into three tapered pieces. A limb's pieces reach the 95th percentile of the skin's distance from the axis
-near each node, never less than the capsule's radius; the hands keep theirs, since a water sleeve's cuff closes
+near each node, taken over skin within the capsule's own span (beyond its ends lie the joints, the buttock and the
+groin, which the trunk's pieces cover: counted at the thigh's end, they made a hip piece 11 cm wider than the hips,
+on which a skirt dropped in dressing caught), never less than the capsule's radius; the hands keep theirs, since a water sleeve's cuff closes
 round the wrist and its tube holds the hand. The trunk's upright capsules (pelvis, abdomen, thorax) become
 left and right pairs whose union spans the skin's cross-section at each node (its depth as the radius, the rest of
 its width as the pair's spread), with the leotard's thickness added; the trunk's crosswise capsules stay as they are.
@@ -100,9 +102,10 @@ def main():
                 continue
             m = nearest == k
             d, t = seg_dist(V, A, B)
+            t_raw = (V - A) @ (B - A) / max(float((B - A) @ (B - A)), 1e-12)
             radii = []
-            for tj in ts:
-                sel = m & (np.abs(t - tj) <= 0.5 / (NODES - 1))
+            for tj in ts:      # skin within the piece's own span; beyond its ends (buttock, groin) is the trunk's
+                sel = m & (np.abs(t_raw - tj) <= 0.5 / (NODES - 1)) & (t_raw >= 0.0) & (t_raw <= 1.0)
                 gap = np.percentile(d[sel], LIMB_PERCENTILE) if sel.sum() >= 20 else r
                 radii.append(max(r, float(gap)))
             if s['name'] in TRUNK or s['name'].endswith('hand'):

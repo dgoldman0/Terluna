@@ -46,7 +46,8 @@ questions move to the decisions register (section "Dance and the movement arts, 
    technique of Humphrey and Limón, the skirt-whirling dances (kathak, ghoomar, tanoura), Javanese court dance with the
    sampur scarf, and the acrobatic traditions of frevo, capoeira and the fancy shawl dance. Should these join the
    survey on their merits (recommended), or should one style follow the conlang's culture, which would change the
-   register's rule?
+   register's rule? *Answered on 2 November: on their merits at most, as a vague influence only; no style follows the
+   conlang's culture (register, section of 2-3 November).*
 
 Answered on 1 November: the garments (light and weighted fabrics both, combined to suit each dance), the next step
 (the whole phrase, before the replay controller), partnering and levels (each a future study, neither now), the

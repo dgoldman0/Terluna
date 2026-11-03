@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "83700dd164c8625b13b451d2b9835b7a9908193464ed02d94681f813dd447f65",
+      "research/studies/world_economy/amenities_inputs.json": "4657b865704bcc015cacd8c5b1964845bcc5bee6e349f8330e0fc5a3cdbe9eaa",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "1681419979cbc8f678ff4476f92c8aa1cfa402445b4ca215e64f8b93ff7e9eaf"
+        "sha256": "1588231a76669650d362735c922c7a5ce29ef6caa316f6d48f96eae5803f6e4f"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "b2867791d75a2e870e2c1c219ab699a1a707df733b23859a49f794b121b303ad"
+        "sha256": "de6691a594a91880ff8e15d63a324994b900c06d4568b86e1e99c08e829fb0dd"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "93208e51d3aeeae8cff6ac7e4662104f17999275c407b32b2f590a542a99bb0f"
+        "sha256": "6c77b843b0bfc267671e019adcb832f1e20cc50428e5afa5423e9ad12a5553b2"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "9b1a025628097db6613ce74b72e21aa89591388a70d97cf3dd0d5128ac659419"
+        "sha256": "827a8a46cea3110bcf4ec7882b471afe000316dabf2fa208ab86ba4757568a10"
       }
     }
   },

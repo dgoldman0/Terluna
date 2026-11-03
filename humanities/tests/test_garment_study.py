@@ -247,3 +247,96 @@ def test_dress_form_product_matches_the_body():
             assert min(p['ra'], p['rb']) >= r - 1e-9
     w = form['waist']
     assert len(w['theta']) == len(w['r']) and 0.5 < w['perimeter_m'] < 0.9
+
+
+@pytest.mark.parametrize('cut', [math.pi, 1.5 * math.pi, 2 * math.pi])
+def test_waist_tethers_reach_the_near_waist_for_every_cut(cut):
+    """Each skirt vertex is tethered to the waistband point nearest it in the sewn pattern, across the seam where that
+    is shorter, at 1.05 times their pattern distance: on the skirt's starting cone (isometric to its pattern) no
+    tether is shorter than the distance it starts at. Cuts between a half and a full circle once tethered cloth to
+    the far side of the waist."""
+    from humanities.dance.garment.body import Body, MotionPose
+    from humanities.dance.garment.garments import skirt, waist_tethers
+    from humanities.dance.garment.trials import TEST_PATTERN
+    body = Body()
+    mp = MotionPose(TEST_PATTERN, body, t_raised=1.0, t_lower=1.0, t_hold=1.0)
+    G = skirt(body, mp(-mp.pre), cut=cut, length=0.5, h=0.04)
+    anchor, length = waist_tethers(G)
+    d0 = np.linalg.norm(G.X0 - G.X0[anchor], axis=1)
+    assert (length >= d0 - 1e-9).all()
+    # the anchor sits on the vertex's own line down the pattern, within a mesh spacing of it
+    rho = np.hypot(*G.piece.vertex_uv.T)
+    assert (length <= 1.05 * (rho - rho.min() + 0.04) + 1e-9).all()
+
+
+def test_sector_hem_cuts_a_slanted_hem():
+    """A sector given a hem function ends at that hem: its outer ring lies at r_in plus the hem's distance there, its
+    area is the integral of the slanted band, and it stays one sewn band with only its top and hem free."""
+    r_in, L, s, cut = 3.0, 0.5, 0.2, 0.15
+    hem = lambda u: L * (1 + s * np.cos(2 * np.pi * np.asarray(u)))
+    pc = sector(r_in, r_in + L * (1 + s), cut, 0.02, hem=hem)
+    uv = pc.vertex_uv
+    out = np.array(pc.rings['outer'])
+    u = np.mod(np.arctan2(uv[out, 1], uv[out, 0]), 2 * np.pi) / cut
+    assert np.allclose(np.hypot(*uv[out].T), r_in + hem(u), atol=1e-12)
+    psi = np.linspace(0.0, cut, 20001)
+    f = 0.5 * ((r_in + hem(psi / cut)) ** 2 - r_in ** 2)
+    want = float(((f[1:] + f[:-1]) * np.diff(psi)).sum() / 2)
+    assert pc.area() == pytest.approx(want, rel=2e-3)
+    assert set(boundary_vertices(pc.F)) == set(pc.rings['inner']) | set(pc.rings['outer'])
+
+
+def _oval_waist(body):
+    """An oval waist outline 26 cm wide and 18 cm deep about the abdomen capsule's axis, as on a dress form."""
+    from humanities.dance.garment.garments import WAIST_ABOVE_OMPHALION
+    ab = {s['name']: s for s in body.spec['segments']}['abdomen']
+    axis_x = ab['origin'][0] + ab['capsules'][0]['a'][0]
+    z_w = ab['origin'][2] + WAIST_ABOVE_OMPHALION
+    th = (np.arange(72) + 0.5) * 2 * np.pi / 72
+    r = 0.13 * 0.09 / np.sqrt((0.09 * np.cos(th - np.pi / 2)) ** 2 + (0.13 * np.sin(th - np.pi / 2)) ** 2)
+    return dict(axis_x=axis_x, z=z_w, theta=th.tolist(), r=r.tolist()), axis_x, z_w
+
+
+@pytest.mark.parametrize('cut', [math.pi, 2 * math.pi])
+def test_skirt_on_a_waist_outline_starts_at_its_pattern_lengths_and_clear_of_the_body(cut):
+    """On a waist outline that is not a circle, a skirt starts out along the outline's normal and turns into its
+    pattern's own cone about the outline's centre, so the starting cloth keeps its cut lengths everywhere but in that
+    blend (laid out from the capsule axis instead, half its triangles started more than 15% off their cut), and no
+    free starting point lies inside the body."""
+    from humanities.dance.garment.body import Body, MotionPose
+    from humanities.dance.garment.garments import skirt
+    from humanities.dance.garment.trials import TEST_PATTERN
+    body = Body()
+    body.waist, _, _ = _oval_waist(body)
+    mp = MotionPose(TEST_PATTERN, body, t_raised=1.0, t_lower=1.0, t_hold=1.0)
+    p0 = mp(-mp.pre)
+    G = skirt(body, p0, cut=cut, length=0.6, h=0.02)
+    F, X, UV = G.piece.F, G.X0, G.piece.UV
+    e = np.stack([np.linalg.norm(X[F[:, i]] - X[F[:, j]], axis=1) / np.linalg.norm(UV[:, i] - UV[:, j], axis=1)
+                  for i, j in ((0, 1), (1, 2), (2, 0))], 1)
+    strain = np.abs(e - 1).max(1)
+    assert np.median(strain) < 0.01
+    assert np.percentile(strain, 95) < 0.15
+    free = np.setdiff1d(np.arange(G.piece.n_vertices), G.pinned)
+    A, B, r = body.capsules(*p0)
+    ab = B - A
+    x = X[free]
+    t = np.clip(((x[:, None] - A[None]) * ab[None]).sum(2) / (ab * ab).sum(1)[None], 0, 1)
+    dist = np.linalg.norm(x[:, None] - (A[None] + t[..., None] * ab[None]), axis=2)
+    assert (r[None] + t * (body.cap_rb - body.cap_r)[None] - dist).max() < -0.003
+
+
+def test_sash_follows_a_dress_forms_waist():
+    """With a dress form's waist outline the sash's band lies on the outline plus its clearance, all round."""
+    from humanities.dance.garment.body import Body, MotionPose
+    from humanities.dance.garment.garments import sash
+    from humanities.dance.garment.trials import TEST_PATTERN
+    body = Body()
+    body.waist, axis_x, z_w = _oval_waist(body)
+    mp = MotionPose(TEST_PATTERN, body, t_raised=1.0, t_lower=1.0, t_hold=1.0)
+    G = sash(body, mp(-mp.pre), clearance=0.016, h=0.02)
+    P = G.attachment.parts[0].p_rest - np.array([axis_x, 0.0, z_w])         # the band, every point of it held
+    assert len(P) == G.params['parts'][0]['vertices']
+    ang = np.mod(np.arctan2(P[:, 1], P[:, 0]), 2 * np.pi)
+    th, r = np.asarray(body.waist['theta']), np.asarray(body.waist['r'])
+    assert np.allclose(np.hypot(P[:, 0], P[:, 1]), np.interp(ang, th, r, period=2 * np.pi) + 0.016, atol=2e-4)

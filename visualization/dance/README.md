@@ -9,14 +9,49 @@ Meshes v1.4.1); the skeleton is `humanities/dance/body/body.json`, which the phy
 From the worktree root (any Python 3 works; the launcher only calls Blender):
 
     python visualization/dance/run_render.py MOTION.npz --out OUT.mp4 \
-        [--garment CLOTH.npz ...] [--preset test|video|final] [--stills 2.0,4.4,6.5] [--stills-only] \
-        [--frames 1:120] [--cam-az DEG] [--cam-dist M] [--rebuild] [--save-scene SCENE.blend]
+        [--garment CLOTH.npz ...] [--preset draft|test|detail|video|final] [--stills 2.0,4.4,6.5] [--stills-preset final] [--stills-only] \
+        [--frames 1:120] [--cam-az DEG] [--cam-dist M] [--rebuild] [--save-scene SCENE.blend] \
+        [--bodice R,G,B] [--bodice-look matte|satin] [--yoke R,G,B,A] [--sheer hashed|blend] [--samples N]
 
-- Presets: `test` is 1280x720 with 24 samples and sampled soft shadows (about 5 to 7 s a frame on the shared laptop);
-  `video` is 1920x1080 with 32 samples and filtered shadows (about 10 s a frame); `final` is 1920x1080 with 80 samples
-  and soft shadows, meant for stills. Motion blur is off because EEVEE's motion blur and an 8-pixel volumetric tile both
-  returned black frames in background renders with Blender 4.0.2.
-- `--stills` writes PNGs beside the video as `<stem>_tSS.SS.png`; `--stills-only` skips the video.
+- Presets: `draft` is 854x480 with 24 samples and sampled soft shadows, the default for whole videos until a complete
+  video is near (from the per-pixel cost below, about 45% of the 720p frame time; not yet timed); check stills render
+  at `final` by default (`--stills-preset`), so detail is judged at full size while videos stay small, and the
+  1080p presets are kept for a final draft. `test` is 1280x720 with 24 samples and sampled soft shadows; `video` is
+  1920x1080 with 32 samples and filtered shadows; `final` is 1920x1080 with 80 samples and soft shadows, meant for
+  stills. `--samples` overrides a preset's sample count. Motion blur is off because EEVEE's motion blur and an 8-pixel
+  volumetric tile both returned black frames in background renders with Blender 4.0.2, on the integrated GPU (below).
+- The GPU. On a laptop with hybrid graphics Blender renders through Mesa on the integrated GPU unless OpenGL is
+  offloaded to the NVIDIA GPU, which run_render.py does whenever the NVIDIA driver is loaded
+  (`__NV_PRIME_RENDER_OFFLOAD=1`, `__GLX_VENDOR_LIBRARY_NAME=nvidia`). Until 2 November every render here ran on the
+  integrated GPU (an Intel UHD GT1): stills at 1080p or at 80 samples came back black or striped, frames took 5 to 10 s,
+  and blended transparency crashed in the Mesa driver. On the NVIDIA GPU a 1080p still at 80 samples renders cleanly
+  in about 6 s after 8 s of scene setup, and 512 samples at 720p in about 20 s in all. The frame timings in this
+  README before that date are the integrated GPU's.
+- Sheer cloth is drawn with hashed transparency (`--sheer hashed`, the default), which is dithered and smooths out only
+  with many samples: at 24 samples it read as grain; at 200-256 samples it is smooth (a measure of pixel noise in the
+  skirt fell from 0.032 at 24 samples to 0.023 at 200 and 0.022 at 512, the rest being the folds' own detail).
+  `--sheer blend` alpha-blends instead, smooth at any sample count, but layers sort by object, the folds lose their
+  shading and the body shows through every layer, so the design stills use hashed transparency at 256 samples.
+- `--stills` writes PNGs beside the video as `<stem>_tSS.SS.png`; `--stills-only` skips the video. `detail` is the
+  final quality at 720p.
+- A garment file may carry its own render settings (meta `render`: look, sRGB colour, alpha), which the design
+  stills use for provisional colours; cloth gets one level of subdivision smoothing at render time. Opaque cloth
+  (satin, silk, wool, velvet, jersey) is given 1.5 mm of thickness with a Solidify modifier. A sheer layer stays a
+  single surface seen from both sides: solidified, it was two veils 1.5 mm apart, and stacked sheer layers read as
+  opaque white. Satin has a silk satin's soft sheen (roughness 0.38, specular 0.45, anisotropy 0.3); until
+  2 November it was glossier (0.22, 0.7, 0.6) and read as rubber or plastic.
+- Design stills can dress the leotard zone and the skin above it. `--bodice r,g,b` makes the leotard a bodice of that
+  sRGB colour, in the look `--bodice-look` names: `matte` (the default), a matte silk with a soft sheen in its own
+  colour that sits with chiffon skirts, or `satin`, the glossy satin of the first design stills, which read as a
+  rubber catsuit beside chiffon. `--yoke r,g,b,a` lays a sheer chiffon yoke of that sRGB colour over the skin from
+  the bodice's neckline to a jewel neckline at the base of the neck, front and back, and over the shoulders to the
+  shoulder point. Its strength `a` (0 to 1) is the share of the skin the chiffon veils seen face on. The veil
+  thickens toward the silhouette, where light crosses the sheet obliquely (transmission `(1 - a) ** (1 / cos)`), and
+  doubles in the hems at its neckline and armholes. Ivory chiffon over this dancer's skin reads as a pale grey veil
+  at 0.5 and shows the skin clearly at 0.3. Without `--yoke` the skin is bare as before. The build stores the
+  yoke's zone as the vertex fields `yoke` and `yoke_hem`, and the render adds the chiffon to the body material
+  (`set_yoke`), so its look can change without a rebuild; a dancer built before 2 November lacks the zone and needs
+  `--rebuild`.
 - `--garment` takes a cloth sequence: `faces` (F, 3) int and `verts` (N, V, 3) in the dance world frame at the motion's
   rate (or at the file's own `fps`). The renderer resamples it to 30 fps, writes a PC2 cache into `pc2/` beside the
   output and plays it with a Mesh Cache modifier. `test_sheet.py MOTION.npz OUT.npz` makes a kinematic test skirt for
@@ -25,7 +60,10 @@ From the worktree root (any Python 3 works; the launcher only calls Blender):
   (about 40 s) and reused; `--rebuild` remakes it and rewrites `landmark_check.json` (and `proposal_landmarks.json`
   when a landmark differs from body.json by more than 2 cm) in the render agent's folder.
 - Blender runs with `--threads 3`; EEVEE renders on the GPU (about 0.3 GB). The frame time is mostly GPU work per pixel
-  and sample (subsurface, reflections, haze, shadow maps), so 1080p costs about 2.2 times 720p.
+  and sample (subsurface, reflections, haze, shadow maps), so 1080p costs about 2.2 times 720p. A virtual-memory limit
+  (`ulimit -v`) fails under the NVIDIA driver, which reserves far more address space than it uses (a 14 GB limit
+  stopped a three-still render with std::bad_alloc while Blender held about 0.3 GB); cap real memory instead, for
+  example with `systemd-run --user --scope -p MemoryMax=6G`.
 
 ## Pipeline
 
@@ -41,7 +79,8 @@ From the worktree root (any Python 3 works; the launcher only calls Blender):
    along its axis to body.json's length and placed on its joint centre; the trunk, neck and head keep the mesh's shape.
 5. Builds the render armature from body.json's joint centres alone (21 parentless bones, one per segment) and binds the
    reposed mesh to it with the same vertex groups.
-6. Adds the costume, face and hair, the eyes and the materials, and saves the rigged dancer.
+6. Adds the costume zones (leotard, slippers, yoke), the face and hair, the eyes and the materials, and saves the
+   rigged dancer.
 
 `render.py render` opens the rigged dancer, keys every bone from the motion, builds the stage, lights and camera, adds
 garments and renders.
@@ -55,12 +94,21 @@ the motion's 60 fps samples, normalised lerp for the orientations). The root mov
 Designed by hand (choices in the code, judged on renders):
 - the costume: a camisole-cut leotard in deep wine as a smooth vertex-field zone of the body material (high-cut leg
   line, scoop neck and back, sleeveless), 1.8 mm proud of the skin, with the fabric bridging hollows (cleavage, navel,
-  spine groove); pale pink satin slippers below 5.5 cm;
+  spine groove); pale pink satin slippers below 5.5 cm; a yoke zone for the sheer yoke of the design stills,
+  running from under the leotard to a jewel neckline at the base of the neck and over the shoulders to the shoulder
+  point, its armholes on the leotard's armhole line (summed arm weight 0.32), with a hem band 4 to 6 mm wide inside
+  its neckline and armholes. The neckline follows the neck, taken as an elliptic cylinder of semi-axes 6.0 cm front
+  to back and 7.0 cm across about an axis leaning forward with it (x = 0.012 + 0.4 (z - 1.36) m), so it meets the skin
+  at the jugular notch (z 1.337 m), at the sides of the neck's base (1.39 m) and just below the seventh vertebra
+  (1.39 m);
 - the hair: a dark base cap 1.5 to 6 mm off the scalp that thins out at the hairline, about 13.7 k hair-curve strands
   combed over it to a classical bun at the crown, 2.6 k strands wound round the bun, all rigid with the head bone;
 - the face: lips (the base mesh's lip face sets) and brows (an arch above each eye) as colour fields;
 - materials: subsurface skin (warm medium brown, red-weighted scattering radius), knit leotard, satin slippers, hair,
-  eyes with iris and pupil from the angle to the eye's axis;
+  eyes with iris and pupil from the angle to the eye's axis; at render time, the bodice's matte silk and satin looks
+  and the yoke's chiffon (a BSDF in 0.35 of the fabric's colour plus 0.25 of the skin's albedo, for light passed
+  through the threads to the skin and back, with a soft sheen, mixed over the skin). The yoke has no weave bump: a
+  0.5 mm weave, below a pixel at these framings, made 80-sample stills come back black on the integrated GPU;
 - the stage: matte black Marley (roughness 0.52 to 0.68), a curved cyclorama with an emitted dusk wash (amber horizon
   to deep indigo), a black ground row at its foot, light haze;
 - the lighting: booms at shin, mid and head height on both sides (warm amber stage left, steel blue stage right), a
@@ -95,7 +143,7 @@ Generated by rule (repeatable from the scripts):
   capsules lie inside the rendered skin by up to 5 cm at the thighs, and the rendered waist sits 5 cm forward of the
   abdomen capsule, so cloth simulated on them passed through the skin and the waistband sank into the waist. The
   form splits each limb capsule into three tapered pieces reaching the skin (95th percentile of its distance from the
-  axis near each node; the hands keep their capsules inside the sleeves' cuffs), turns the trunk's upright capsules
+  axis near each node, over skin within the capsule's span; the hands keep their capsules inside the sleeves' cuffs), turns the trunk's upright capsules
   into left and right pairs spanning its cross-section, and gives the waist's outline for the waistband. It is a
   stand-in until the body model and the rendered mesh are fitted as one body (question 1). Rebuild it after
   `--rebuild`: `blender -b DANCER.blend --python visualization/dance/dress_form.py -- --out visualization/dance/dress_form.json`.

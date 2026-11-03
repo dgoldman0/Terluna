@@ -2,7 +2,8 @@
 
     blender -b --threads 3 --python render.py -- build  --blend DANCER.blend --report-dir DIR
     blender -b --threads 3 --python render.py -- render --blend DANCER.blend --motion M.npz --out OUT.mp4 \
-            [--garment G.npz ...] [--preset test|final] [--stills 2.0,4.4] [--save-scene S.blend]
+            [--garment G.npz ...] [--preset test|final] [--stills 2.0,4.4] [--save-scene S.blend] \
+            [--bodice R,G,B [--bodice-look matte|satin]] [--yoke R,G,B,A]
 
 Use run_render.py, which supplies these arguments. Blender 4.0.2, EEVEE (legacy).
 
@@ -11,12 +12,14 @@ frame (x forward, y left, z up, soles on z = 0), measures its joint landmarks an
 (landmark_check.json, and proposal_landmarks.json when a difference exceeds 2 cm), weights it to a fit armature
 placed at its own joints (Blender's heat weights, then rule-based clean-up), applies two multires levels, reposes it
 into body.json's rest pose with the limbs carried onto body.json's joint centres, and binds it to an armature built
-from body.json alone. Costume zones, hair, eyes and materials are added and the rigged dancer is saved.
+from body.json alone. Costume zones (leotard, slippers and the sheer yoke's zone), hair, eyes and materials are added
+and the rigged dancer is saved.
 
 render: opens the rigged dancer, builds the stage (black Marley floor, cyclorama with a graded wash, ground row,
 booms, soft key, rim, top light, haze), keys every bone from the motion's segment poses sampled at the render rate,
 plays optional cloth sequences through Mesh Cache (PC2), sets a smoothly following camera and renders stills and/or an
-H.264 MP4.
+H.264 MP4. For design stills it can dress the leotard zone as a bodice (set_bodice) and lay a sheer chiffon yoke over
+the skin above it (set_yoke).
 """
 from __future__ import annotations
 
@@ -39,6 +42,8 @@ ASSET = Path('/media/projectspace/terluna-research/humanities/assets/human-base-
 BODY_NAME = 'GEO-body_female_realistic'
 MULTIRES_LEVEL = 2          # 10.6 k base vertices -> about 170 k; level 3 (677 k) adds skin detail a full-body shot cannot show
 RENDER_FPS = 30
+# draft is the working size for whole videos until a complete video is near; stills check detail at final
+RESOLUTION = dict(draft=(854, 480), test=(1280, 720), detail=(1280, 720), video=(1920, 1080), final=(1920, 1080))
 
 # Face sets of the base mesh (left side; the right side is the mirrored set). The artist's sets end at the joints.
 FS = dict(torso=1, head=17, abdomen=19, pelvis=18,
@@ -664,6 +669,56 @@ def leotard_and_slipper_masks(body, names):
     return leo, slip
 
 
+# The sheer yoke's neckline follows the base of the neck. The neck leans forward, so it is taken as an elliptic
+# cylinder about the axis x = 0.012 + 0.4 (z - 1.36) m (through the neck's base centre, tilted with the neck), with
+# semi-axes 6.0 cm front to back and 7.0 cm side to side: on the rest mesh it meets the skin at the jugular notch
+# (z 1.337 m), at the sides of the neck's base (1.39 m) and just below the seventh vertebra behind (1.39 m). The plane
+# of neck_height alone would cut the shoulder tops 11 cm from the midline and leave the trapezius bare beside the neck.
+NECK_AXIS = (0.012, 1.36, 0.4)        # x at z0, z0, dx/dz
+NECK_SEMI = (0.060, 0.070)            # front-back, side-to-side (m)
+
+
+def yoke_mask(body, names):
+    """The sheer yoke as smooth vertex fields on the rest-posed mesh (rest coordinates, metres).
+
+    'yoke' covers the skin from under the leotard up to a jewel neckline at the base of the neck, front and back,
+    over the shoulder tops out to the shoulder point, and down to the leotard at the sides, its armholes on the
+    leotard's own armhole line (summed arm weight 0.32, which on the shoulder top lies at |y| = 0.195 m, where the
+    contour turns down the arm). Below its visible part it runs on under the leotard (from z = 1.12 m, the leotard's
+    sides reaching 1.16 m), so the leotard's edge is the yoke's edge there. 'yoke_hem' is a 4 to 6 mm band inside the
+    yoke's neckline and armholes, where the fabric is turned back on itself. The render's chiffon look reads both
+    (set_yoke); without --yoke the skin shows as before."""
+    V = mesh_coords(body)
+    W = weights_matrix(body, names)
+    col = {n: j for j, n in enumerate(names)}
+    x, y, z = V.T
+    arm = sum(W[:, col[f'{s}_{p}']] for s in 'LR' for p in ('upper_arm', 'forearm', 'hand'))
+    x0, z0, tilt = NECK_AXIS
+    a, b = NECK_SEMI
+    r = np.sqrt(((x - x0 - tilt * (z - z0)) / a) ** 2 + (y / b) ** 2)
+    nh = neck_height(V)
+    d_neck = np.maximum((r - 1.0) * min(a, b), -(nh + 0.6) * 0.08)    # outside the neck, or well below its base
+    d_head = (0.6 - nh) * 0.08                                         # never up the neck past its lower part
+    d_arm = (0.32 - arm) * 0.08                                        # the leotard's armhole line
+    d = np.minimum.reduce([d_neck, d_head, d_arm, z - 1.12])
+    E = mesh_edges(body)
+    yoke = smoothstep(0.35, 0.65, smooth_field(smoothstep(-0.0015, 0.0015, d), E, 6))
+    hem = yoke * (1 - smoothstep(0.004, 0.006, np.minimum.reduce([d_neck, d_head, d_arm])))
+    for nm, val in (('yoke', yoke), ('yoke_hem', hem)):
+        at = body.data.attributes.get(nm) or body.data.attributes.new(nm, 'FLOAT', 'POINT')
+        at.data.foreach_set('value', np.clip(val, 0, 1).astype(np.float32))
+    log('yoke: %d vertices (%d of them clear of the leotard), hem %d' % (
+        (yoke > 0.5).sum(), ((yoke > 0.5) & (body_leotard(body) < 0.5)).sum(), (hem > 0.5).sum()))
+    return yoke
+
+
+def body_leotard(body):
+    a = body.data.attributes['leotard']
+    v = np.empty(len(a.data))
+    a.data.foreach_get('value', v)
+    return v
+
+
 def mesh_edges(obj):
     e = np.empty(len(obj.data.edges) * 2, int)
     obj.data.edges.foreach_get('vertices', e)
@@ -931,6 +986,9 @@ def srgb(*c):
     return tuple(((v + 0.055) / 1.055) ** 2.4 if v > 0.04045 else v / 12.92 for v in c) + (1.0,)
 
 
+SKIN_RAMP = ((0.43, 0.26, 0.175), (0.49, 0.27, 0.19))     # the skin's sRGB colour range (blotch noise between them)
+
+
 def body_material():
     """Skin (subsurface), the leotard and the slippers as zones of one material, mixed by vertex fields."""
     m, nt, out = node_mat('dancer_body')
@@ -942,8 +1000,8 @@ def body_material():
     noise.inputs['Detail'].default_value = 3.0
     L.new(tex.outputs['Object'], noise.inputs['Vector'])
     ramp = nt.nodes.new('ShaderNodeValToRGB')
-    ramp.color_ramp.elements[0].color = srgb(0.43, 0.26, 0.175)
-    ramp.color_ramp.elements[1].color = srgb(0.49, 0.27, 0.19)
+    ramp.color_ramp.elements[0].color = srgb(*SKIN_RAMP[0])
+    ramp.color_ramp.elements[1].color = srgb(*SKIN_RAMP[1])
     L.new(noise.outputs['Fac'], ramp.inputs['Fac'])
     skin = principled(nt, **{'Roughness': 0.55, 'Subsurface Weight': 1.0, 'Subsurface Scale': 0.0035,
                              'Subsurface Radius': (1.0, 0.30, 0.15), 'Specular IOR Level': 0.38})
@@ -1136,6 +1194,7 @@ def build(args):
     rig.data.display_type = 'OCTAHEDRAL'
     # costume zones, fabric, face, hair, eyes
     leo, _slip = leotard_and_slipper_masks(body, names)
+    yoke_mask(body, names)
     fabric_fill(body, leo)
     face_paint(body, eyes)
     cap, bun, strands = build_hair(body, names)
@@ -1301,9 +1360,11 @@ def write_pc2(path, verts, fps):
         f.write(verts.tobytes())
 
 
-# How each fabric of the garment library looks: sheer silks translucent, satins glossy and opaque, wool, velvet and
-# jersey matte and opaque. Sleeves keep the pale rose of the first renders; skirts take a pale gold so that layers read
+# How each fabric of the garment library looks: sheer silks translucent, satins opaque with a silk satin's soft
+# directional sheen, wool, velvet and jersey matte and opaque. Sleeves keep the pale rose of the first renders; skirts take a pale gold so that layers read
 # apart. (fabric -> kind)
+SHEER_METHOD = {'hashed': 'HASHED', 'blend': 'BLEND'}
+SAMPLES = 0                         # render samples; 0 keeps the preset's
 FABRIC_LOOK = {'silk_chiffon': 'sheer', 'silk_georgette': 'sheer', 'silk_organza': 'sheer', 'nylon_tulle': 'sheer',
                'silk_habotai': 'silk', 'silk_crepe_de_chine': 'silk', 'silk_taffeta': 'silk',
                'silk_satin_soft': 'satin', 'silk_satin_heavy': 'satin',
@@ -1319,12 +1380,21 @@ def garment_fabric(z):
         return None
 
 
-def add_garment(npz_path, motion_fps, t_render, pc2_dir: Path, index):
+def garment_render(z):
+    """A garment file's own render settings, if it carries them (meta 'render': look, sRGB color, alpha)."""
+    try:
+        return json.loads(str(z['meta'])).get('render') or {}
+    except Exception:
+        return {}
+
+
+def add_garment(npz_path, motion_fps, t_render, pc2_dir: Path, index, sheer='hashed'):
     with np.load(npz_path, allow_pickle=False) as z:
         faces = z['faces'].astype(int)
         verts = z['verts'].astype(float)
         gfps = float(z['fps']) if 'fps' in z.files else motion_fps
         fabric = garment_fabric(z)
+        own = garment_render(z)
     f = np.clip(t_render * gfps, 0, len(verts) - 1)
     i0 = np.floor(f).astype(int)
     i1 = np.minimum(i0 + 1, len(verts) - 1)
@@ -1347,30 +1417,41 @@ def add_garment(npz_path, motion_fps, t_render, pc2_dir: Path, index):
     mc.play_mode = 'SCENE'
     mc.frame_start = 1.0
     mc.frame_scale = 1.0
-    so = ob.modifiers.new('thickness', 'SOLIDIFY')
-    so.thickness, so.offset = 0.0015, 0.0
+    sm = ob.modifiers.new('smooth', 'SUBSURF')    # one level of smoothing: folds read as cloth, not facets
+    sm.levels = sm.render_levels = 1
+    look = own.get('look') or FABRIC_LOOK.get(fabric, 'sheer')
+    if look != 'sheer':
+        # opaque cloth is given its 1.5 mm thickness; a sheer layer stays one surface seen from both sides (backface
+        # culling off), since a solidified one is two veils 1.5 mm apart and stacked layers then read as opaque white
+        so = ob.modifiers.new('thickness', 'SOLIDIFY')
+        so.thickness, so.offset = 0.0015, 0.0
     m, nt, out = node_mat(f'garment_{index}')
     sleeves = 'sleeve' in Path(npz_path).stem
-    look = FABRIC_LOOK.get(fabric, 'sheer')
     if look != 'sheer':
-        # opaque cloth: a pale gold silk, satin or wool; satin glossy, silk soft, wool and jersey matte, velvet deep
+        # opaque cloth: a pale gold silk, satin or wool; satin with a silk satin's sheen, silk soft, wool and jersey
+        # matte, velvet deep. Satin was glossier until 2 November (roughness 0.22, specular 0.7, anisotropy 0.6), which
+        # read as rubber or plastic in the design stills.
         base = {'satin': srgb(0.88, 0.78, 0.58), 'silk': srgb(0.90, 0.80, 0.62), 'matte': srgb(0.80, 0.66, 0.46),
                 'velvet': srgb(0.55, 0.16, 0.24)}[look]
-        rough = {'satin': 0.22, 'silk': 0.38, 'matte': 0.8, 'velvet': 0.7}[look]
+        if own.get('color'):
+            base = srgb(*own['color'])
+        rough = {'satin': 0.38, 'silk': 0.38, 'matte': 0.8, 'velvet': 0.7}[look]
         p = principled(nt, **{'Base Color': base, 'Roughness': rough,
                               'Sheen Weight': {'satin': 0.2, 'silk': 0.5, 'matte': 0.6, 'velvet': 1.0}[look],
-                              'Sheen Roughness': 0.4, 'Specular IOR Level': {'satin': 0.7, 'silk': 0.45}.get(look, 0.25),
-                              'Anisotropic': 0.6 if look == 'satin' else 0.0})
+                              'Sheen Roughness': 0.4, 'Specular IOR Level': {'satin': 0.45, 'silk': 0.45}.get(look, 0.25),
+                              'Anisotropic': 0.3 if look == 'satin' else 0.0})
         nt.links.new(p.outputs['BSDF'], out.inputs['Surface'])
         m.use_backface_culling = False
         ob.data.materials.append(m)
         return ob
     # sheer silk (chiffon, georgette): pale rose, translucent, partly see-through (alpha hashed)
-    p = principled(nt, **{'Base Color': srgb(0.93, 0.74, 0.74), 'Roughness': 0.5, 'Sheen Weight': 0.9,
+    tint = own.get('color') or (0.93, 0.74, 0.74)
+    p = principled(nt, **{'Base Color': srgb(*tint), 'Roughness': 0.5, 'Sheen Weight': 0.9,
                           'Sheen Roughness': 0.35, 'Sheen Tint': srgb(1.0, 0.9, 0.9), 'Specular IOR Level': 0.3,
-                          'Alpha': 0.72 if sleeves else 0.6})
+                          'Alpha': own.get('alpha', 0.72 if sleeves else 0.6)})
     tr = nt.nodes.new('ShaderNodeBsdfTranslucent')
-    tr.inputs['Color'].default_value = srgb(0.95, 0.70, 0.66)
+    tr.inputs['Color'].default_value = srgb(*[min(1.0, 1.02 * c) for c in tint]) if own.get('color') \
+        else srgb(0.95, 0.70, 0.66)
     mx = nt.nodes.new('ShaderNodeMixShader')
     mx.inputs['Fac'].default_value = 0.4
     tp = nt.nodes.new('ShaderNodeBsdfTransparent')
@@ -1381,7 +1462,10 @@ def add_garment(npz_path, motion_fps, t_render, pc2_dir: Path, index):
     nt.links.new(mx.outputs['Shader'], mx2.inputs[1])
     nt.links.new(tp.outputs['BSDF'], mx2.inputs[2])
     nt.links.new(mx2.outputs['Shader'], out.inputs['Surface'])
-    m.blend_method = 'HASHED'
+    # hashed transparency is dithered and smooths out only with many samples; blended transparency is smooth at any
+    # sample count but sorts by object, so overlapping layers of one garment can draw out of order
+    m.blend_method = SHEER_METHOD[sheer]
+    m.show_transparent_back = True
     m.shadow_method = 'HASHED'
     m.use_backface_culling = False
     ob.data.materials.append(m)
@@ -1530,12 +1614,14 @@ def setup_render(preset, out_path, n_frames):
     sc.render.hair_subdiv = 1
     sc.render.engine = 'BLENDER_EEVEE'
     ee = sc.eevee
-    final = preset == 'final'
+    final = preset in ('final', 'detail')        # detail: the final quality at 720p
     video = preset == 'video'
-    sc.render.resolution_x, sc.render.resolution_y = (1920, 1080) if (final or video) else (1280, 720)
+    sc.render.resolution_x, sc.render.resolution_y = RESOLUTION[preset]
     sc.render.resolution_percentage = 100
     sc.render.fps = RENDER_FPS
     ee.taa_render_samples = 80 if final else (32 if video else 24)
+    if SAMPLES:
+        ee.taa_render_samples = SAMPLES
     ee.use_gtao = True
     ee.gtao_distance = 0.35
     ee.gtao_factor = 1.0
@@ -1554,11 +1640,11 @@ def setup_render(preset, out_path, n_frames):
     ee.light_threshold = 0.005
     ee.use_volumetric_lights = True
     ee.use_volumetric_shadows = True
-    ee.volumetric_tile_size = '16'      # an 8-pixel tile with 64 samples returned black 1080p frames here (4.0.2)
+    ee.volumetric_tile_size = '16'      # an 8-pixel tile with 64 samples returned black 1080p frames (4.0.2, integrated GPU)
     ee.volumetric_samples = 32 if final else 16
     ee.volumetric_start = 0.5
     ee.volumetric_end = 25.0
-    ee.use_motion_blur = False          # EEVEE's motion blur returned black frames in background renders (4.0.2)
+    ee.use_motion_blur = False          # EEVEE's motion blur returned black frames in background renders (4.0.2, integrated GPU)
     ee.motion_blur_shutter = 0.4
     vs = sc.view_settings
     try:
@@ -1657,6 +1743,117 @@ def follow_camera(com, t, az_deg=30.0, dist=5.5, height=1.1, aim_dz=0.06, sigma_
     return cam, sm
 
 
+# The bodice's looks (--bodice-look). matte: a matte silk to sit with sheer chiffon skirts, its light spread wide
+# (roughness 0.5) with a soft sheen tinted by its own colour, low specular and no anisotropy, the leotard's knit ribbing
+# all but gone. satin: the glossy satin of the first design stills (until 2 November the only look), which read as a
+# rubber catsuit beside chiffon; its sheen keeps the leotard's garnet tint.
+BODICE_LOOK = {'matte': dict(roughness=0.5, sheen=0.4, sheen_roughness=0.5, specular=0.3, anisotropic=0.0, bump=0.004),
+               'satin': dict(roughness=0.3, sheen=0.25, sheen_roughness=None, specular=0.6, anisotropic=0.4, bump=0.05)}
+
+
+def set_bodice(body, rgb, look='matte'):
+    """Dress the leotard zone as a bodice of the given sRGB colour in one of BODICE_LOOK's looks. The leotard's node is
+    the principled BSDF built with the deep garnet base colour."""
+    nt = body.data.materials[0].node_tree
+    garnet = srgb(0.17, 0.016, 0.042)
+    s = BODICE_LOOK[look]
+    for n in nt.nodes:
+        if n.type == 'BSDF_PRINCIPLED' and all(abs(a - b) < 1e-3 for a, b in zip(n.inputs['Base Color'].default_value,
+                                                                                  garnet)):
+            n.inputs['Base Color'].default_value = srgb(*rgb)
+            n.inputs['Roughness'].default_value = s['roughness']
+            n.inputs['Sheen Weight'].default_value = s['sheen']
+            n.inputs['Specular IOR Level'].default_value = s['specular']
+            n.inputs['Anisotropic'].default_value = s['anisotropic']
+            if s['sheen_roughness'] is not None:
+                n.inputs['Sheen Roughness'].default_value = s['sheen_roughness']
+                n.inputs['Sheen Tint'].default_value = srgb(*[0.5 + 0.5 * c for c in rgb])
+            for link in n.inputs['Normal'].links:
+                if link.from_node.type == 'BUMP':
+                    link.from_node.inputs['Strength'].default_value = s['bump']
+            log('bodice: %s, sRGB %s' % (look, ','.join('%.2f' % c for c in rgb)))
+            return True
+    log('bodice: leotard node not found')
+    return False
+
+
+def set_yoke(body, rgba):
+    """Lay a sheer chiffon yoke over the skin in the build's 'yoke' zone (yoke_mask), at render time.
+
+    rgba: the chiffon's sRGB colour and its strength a (0 to 1), the share of the skin it veils seen face on. Toward
+    the silhouette the light crosses the fabric obliquely, so the veil thickens as a sheet's would: transmission
+    (1 - a) ** (1 / cos theta), with cos theta from the Layer Weight node's facing output, floored at 0.3; the hem band
+    ('yoke_hem') is two layers, transmission squared. The veil mixes a chiffon BSDF over the skin BSDF, so the skin
+    keeps its subsurface colour beneath, lightened toward the fabric. The leotard is mixed in above the yoke, so its
+    edge is the yoke's edge at the bodice. The material built by `build` is unchanged; the dancer must carry the
+    'yoke' attributes (dancers built before 2 November do not: rebuild them).
+
+    Where threads cover the skin they reflect part of the light in their own colour and pass part on to the skin and
+    back, so the chiffon BSDF's colour is 0.35 x the fabric's plus 0.25 x the skin's mean albedo (linear; a single pass
+    through translucent silk), with roughness 0.5, a soft sheen tinted toward white and low specular. Ivory over this
+    skin reads as a pale grey veil at a = 0.5, and a = 0.3 shows the skin clearly.
+
+    Tried and set aside: with the fabric's full colour and a cos theta floor of 0.2, an ivory yoke at a = 0.5 read as
+    an opaque white top. Linking the skin's colour nodes into the chiffon BSDF made Blender abort with bad_alloc under
+    the 14 GB memory cap, so the skin's albedo enters as a constant. A weave bump (threads 0.5 mm apart, below a pixel
+    at every framing used) made 80-sample stills come back black with the GPU free while 24-sample stills rendered:
+    summed from three band textures it blackened full-figure stills, and as one band texture, built as the leotard's
+    knit is, it blackened close views at 2.4 m. Without it the full-figure 80-sample still rendered. The cause is not
+    known, and the yoke has no weave bump."""
+    me = body.data
+    if 'yoke' not in me.attributes or 'yoke_hem' not in me.attributes:
+        log('yoke: this dancer has no yoke zone; rebuild it (--rebuild)')
+        return False
+    nt = me.materials[0].node_tree
+    L = nt.links
+    mix_leo = next((n for n in nt.nodes if n.type == 'MIX_SHADER' and n.inputs['Fac'].links
+                    and getattr(n.inputs['Fac'].links[0].from_node, 'attribute_name', '') == 'leotard'), None)
+    if mix_leo is None or not mix_leo.inputs[1].links:
+        log('yoke: the leotard mix was not found')
+        return False
+    skin_out = mix_leo.inputs[1].links[0].from_socket
+    r, g, b, a = rgba
+    a = min(max(a, 0.0), 0.999)
+
+    def math(op, x0, x1=None, clamp=False):
+        m = nt.nodes.new('ShaderNodeMath')
+        m.operation = op
+        m.use_clamp = clamp
+        for k, v in enumerate((x0, x1)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                m.inputs[k].default_value = v
+            else:
+                L.new(v, m.inputs[k])
+        return m.outputs['Value']
+
+    thread = srgb(r, g, b)
+    chiffon = principled(nt, **{'Roughness': 0.5, 'Sheen Weight': 0.5,
+                                'Sheen Roughness': 0.35, 'Sheen Tint': srgb(*[0.5 + 0.5 * c for c in (r, g, b)]),
+                                'Specular IOR Level': 0.3})
+    skin = [0.5 * (u + v) for u, v in zip(srgb(*SKIN_RAMP[0])[:3], srgb(*SKIN_RAMP[1])[:3])]
+    chiffon.inputs['Base Color'].default_value = tuple(0.35 * f + 0.25 * k for f, k in zip(thread[:3], skin)) + (1.0,)
+    # veil = yoke * (1 - (1 - a) ** ((1 + hem) / max(cos theta, 0.3)))
+    lw = nt.nodes.new('ShaderNodeLayerWeight')
+    lw.inputs['Blend'].default_value = 0.5               # facing = 1 - |cos theta|
+    cos_t = math('MAXIMUM', math('SUBTRACT', 1.0, lw.outputs['Facing']), 0.3)
+    a_y = nt.nodes.new('ShaderNodeAttribute')
+    a_y.attribute_name = 'yoke'
+    a_h = nt.nodes.new('ShaderNodeAttribute')
+    a_h.attribute_name = 'yoke_hem'
+    path = math('DIVIDE', math('ADD', a_h.outputs['Fac'], 1.0), cos_t)
+    veil = math('MULTIPLY', math('SUBTRACT', 1.0, math('POWER', 1.0 - a, path)), a_y.outputs['Fac'], clamp=True)
+    mix_y = nt.nodes.new('ShaderNodeMixShader')
+    mix_y.name = 'yoke_mix'
+    L.new(veil, mix_y.inputs['Fac'])
+    L.new(skin_out, mix_y.inputs[1])
+    L.new(chiffon.outputs['BSDF'], mix_y.inputs[2])
+    L.new(mix_y.outputs['Shader'], mix_leo.inputs[1])
+    log('yoke: chiffon sRGB %.2f,%.2f,%.2f, strength %.2f' % (r, g, b, a))
+    return True
+
+
 def render(args):
     bpy.ops.wm.open_mainfile(filepath=str(args.blend))
     spec = body_spec()
@@ -1666,6 +1863,13 @@ def render(args):
     t, pos, quat, com = sample_motion(mot, RENDER_FPS)
     rig = bpy.data.objects['dancer_rig']
     key_armature(rig, names, pos, quat)
+    if args.bodice:
+        set_bodice(bpy.data.objects['dancer_body'], [float(v) for v in args.bodice.split(',')], args.bodice_look)
+    if args.yoke:
+        rgba = [float(v) for v in args.yoke.split(',')]
+        if len(rgba) != 4:
+            raise SystemExit('--yoke takes r,g,b,a')
+        set_yoke(bpy.data.objects['dancer_body'], rgba)
     az, dist, path = camera_plan(com, t, quat[:, names.index('pelvis')], args.cam_az, args.cam_dist)
     centre = 0.5 * (path.min(0) + path.max(0))
     radius = 7.5 + 0.5 * float(np.linalg.norm(path.max(0) - path.min(0)))
@@ -1676,8 +1880,8 @@ def render(args):
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     for i, g in enumerate(args.garment or []):
-        add_garment(g, float(mot['fps']), t, out.parent / 'pc2', i)
-    setup_render(args.preset, out, len(t))
+        add_garment(g, float(mot['fps']), t, out.parent / 'pc2', i, args.sheer)
+    setup_render(args.stills_preset if args.stills else args.preset, out, len(t))
     if args.save_scene:
         bpy.ops.wm.save_as_mainfile(filepath=str(args.save_scene), compress=True)
     sc = bpy.context.scene
@@ -1693,9 +1897,8 @@ def render(args):
             bpy.ops.render.render(write_still=True)
             log('still', sc.render.filepath)
         img.file_format = fmt
-        if out.suffix.lower() == '.mp4':
-            video_output(sc, out)
     if out.suffix.lower() == '.mp4' and not args.stills_only:
+        setup_render(args.preset, out, len(t))      # the video's own size and output
         if args.frames:
             a, b = (int(x) for x in args.frames.split(':'))
             sc.frame_start, sc.frame_end = a, b
@@ -1712,7 +1915,15 @@ def main():
     ap.add_argument('--motion')
     ap.add_argument('--out')
     ap.add_argument('--garment', action='append')
-    ap.add_argument('--preset', default='test', choices=['test', 'video', 'final'])
+    ap.add_argument('--preset', default='draft', choices=list(RESOLUTION))
+    ap.add_argument('--stills-preset', default='final', choices=list(RESOLUTION))
+    ap.add_argument('--bodice', default='', help='sRGB r,g,b: dress the leotard as a bodice of this colour')
+    ap.add_argument('--bodice-look', default='matte', choices=list(BODICE_LOOK),
+                    help="the bodice's look: matte silk (default) or glossy satin")
+    ap.add_argument('--yoke', default='',
+                    help='sRGB r,g,b and strength a (0-1): a sheer chiffon yoke over the skin above the bodice')
+    ap.add_argument('--sheer', default='hashed', choices=list(SHEER_METHOD))
+    ap.add_argument('--samples', type=int, default=0)
     ap.add_argument('--stills', default='')
     ap.add_argument('--stills-only', action='store_true')
     ap.add_argument('--frames', default='')
@@ -1720,6 +1931,8 @@ def main():
     ap.add_argument('--cam-dist', type=float, default=None)
     ap.add_argument('--save-scene', default='')
     args = ap.parse_args(argv)
+    global SAMPLES
+    SAMPLES = args.samples
     if args.cmd == 'build':
         build(args)
     else:

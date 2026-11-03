@@ -5,8 +5,8 @@
   "files": {
    "humanities/dance/garment/screen.py": "447934a3750b5826",
    "humanities/dance/garment/materials.py": "a51f15efecb2b963",
-   "humanities/dance/garment/cloth.py": "7a3bc1d461f6dc7e",
-   "humanities/dance/garment/garments.py": "89c64b84293e2c86",
+   "humanities/dance/garment/cloth.py": "d2ba212dc66cbdd9",
+   "humanities/dance/garment/garments.py": "1834a4bde7285bae",
    "humanities/dance/envelope.py": "660f3247df5da23d"
   },
   "constants": {
