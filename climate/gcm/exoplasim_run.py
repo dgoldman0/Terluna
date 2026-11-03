@@ -87,10 +87,10 @@ evaporated where the air is unsaturated and turned to rain by autoconversion and
 before. --rain-drops evaporates PlaSim's falling rain from its drops' sizes and fall speeds at lunar gravity in place
 of gamma, with the birth rule it names for the size of new rain (rain_drops.py; RAIN_DROP_PATCHES, rainmod's
 nevapprec 2); snow keeps gamma. --land-store PRODUCT adds the storm-water study's hollows' store to PlaSim's land in
-the drylands (land_store.py; LAND_STORE_PATCHES, landmod's nlstore): the slopes' runoff by infiltration excess, the
-store's evaporation at the pools' own rate and its seepage into a slow store, with the floor, surface, storm library,
-hollow age and wetted fraction its companion options name and the tables the runner writes from the product; a run
-without it is as before.
+the drylands (land_store.py; LAND_STORE_PATCHES, landmod's nlstore): the slopes' runoff as the storm library's storms
+at a running mean of each cell's rain, the store's evaporation at the pools' own rate and its seepage into a slow
+store, with the floor, surface, storm library and hollow age its companion options name and the tables the runner
+writes from the product; a run without it is as before.
 """
 from __future__ import annotations
 import argparse
@@ -1963,7 +1963,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     speeds in place of gamma, which the snow keeps (rain_drops.setting), unless snow, a choice of
     snow_sublimation.CHOICES, sublimates it by its flakes' closure and Morrison's graupel with their diagnostics and
     shadows (snow_sublimation.setting; with the rain's drops only), and land_store, a dict of the store tables' product
-    and the floor, surface, library, hollows and wetted_fraction, adds the hollows' store to the drylands' land
+    and the floor, surface, library and hollows, adds the hollows' store to the drylands' land
     (land_store.setting; with the 10 m wind, which its pools' evaporation reads). Each is recorded when given, and left out the
     configuration is the one every earlier run had; the 294.9 K ledger without the clear share records the twilight as
     the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did."""
@@ -2013,8 +2013,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if land_store is not None and not wind10:
         raise ValueError("the hollows' store evaporates on PlaSim's 10 m wind; set wind10")
     store = (lsf.setting(land_store['product'], land_store['floor'], land_store['surface'], land_store['library'],
-                         land_store['hollows'], land_store['wetted_fraction'], planet['gravity_m_s2'],
-                         exp['pressure_pa'], root=ROOT) if land_store is not None else None)   # refuses a bad choice
+                         land_store['hollows'], planet['gravity_m_s2'], exp['pressure_pa'], root=ROOT)
+             if land_store is not None else None)                                              # refuses a bad choice
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                exoplasim=version('exoplasim'),
                source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
@@ -3030,16 +3030,15 @@ def main(argv=None) -> int:
                              "snow top at its highest forming layer) or flakes_no_shadows (snow_sublimation.py; part "
                              'of the run key)')
     parser.add_argument('--land-store', metavar='PRODUCT',
-                        help="the storm-water study's store tables (store_tables.json): the drylands' slopes shed "
-                             "runoff by infiltration excess into a store of their hollows' water, which evaporates at "
-                             "the pools' own rate and seeps into a slow store (land_store.py; LAND_STORE_PATCHES; needs "
-                             '--wind10 and every --land-store-* option; part of the run key)')
+                        help="the storm-water study's store tables (store_tables.json, schema /2): the drylands' "
+                             "slopes shed runoff as the storm library's storms into a store of their hollows' water, "
+                             "which evaporates at the pools' own rate and seeps into a slow store (land_store.py; "
+                             'LAND_STORE_PATCHES; needs --wind10 and every --land-store-* option; part of the run key)')
     parser.add_argument('--land-store-floor', choices=lsf.FLOORS, help="the hollows' floor design")
     parser.add_argument('--land-store-surface', choices=lsf.SURFACES, help="the slopes' surface")
-    parser.add_argument('--land-store-library', choices=lsf.LIBRARIES, help='the storm library the routing follows')
+    parser.add_argument('--land-store-library', choices=lsf.LIBRARIES,
+                        help="the storm library the slopes' runoff, the routing and the store's curve follow")
     parser.add_argument('--land-store-hollows', choices=lsf.HOLLOWS, help="the hollows' age")
-    parser.add_argument('--land-store-wetted', type=float, metavar='SHARE',
-                        help="the convective rain's wetted share of a cell (Earth's schemes take 0.3; an open term)")
     parser.add_argument('--convert-pieces', type=int, default=0, metavar='TIMES',
                         help='convert each year in pieces of this many output times (convert_in_pieces); 0 leaves '
                              "the whole file to ExoPlaSim's postprocessor (not part of the run key)")
@@ -3100,9 +3099,9 @@ def main(argv=None) -> int:
     elif args.convection == 'massflux':
         convection = dict(scheme='massflux', start=None if args.massflux_start == 'ifs' else args.massflux_start)
     store_options = dict(floor=args.land_store_floor, surface=args.land_store_surface, library=args.land_store_library,
-                         hollows=args.land_store_hollows, wetted_fraction=args.land_store_wetted)
+                         hollows=args.land_store_hollows)
     if args.land_store and any(v is None for v in store_options.values()):
-        parser.error('--land-store needs --land-store-floor, -surface, -library, -hollows and -wetted')
+        parser.error('--land-store needs --land-store-floor, -surface, -library and -hollows')
     if not args.land_store and any(v is not None for v in store_options.values()):
         parser.error('the --land-store-* options belong to --land-store')
     land_store = dict(product=args.land_store, **store_options) if args.land_store else None

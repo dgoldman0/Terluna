@@ -1,11 +1,14 @@
 """The hollows' store in PlaSim's land (climate/gcm/land_store.py): the pools' rate is Penman's exact form of the
 no-storage balance with PlaSim's surface transfer over water; the store's curve is exact for paraboloids and nil at nil
-water; the runoff share is bilinear within its grids; each land step conserves water exactly, keeps the store's water
-from going negative and spills only above capacity; PlaSim's soil step with the patch, compiled with ExoPlaSim's flags
-against PlaSim's own module, gives the Python copy's water to 1e-10 with the switch on and prints every digit the
-unpatched soil step prints with it off; every edit only inserts lines and the inserted statements run only with
-nlstore 1; the patch applies once to the shared landmod.f90 and compiles with PlaSim's modules; and the runner records
-the store, writes its tables and namelist, and refuses a run without the 10 m wind."""
+water; the runoff share is bilinear within its grids and the running means are exact exponential means, so that a
+3-day mean's steady rain read step by step gives the table's runoff; each land step conserves water exactly, keeps the
+store's water from going negative and spills only above capacity; the start takes the balanced water and the record's
+rain where the restart holds none; PlaSim's soil step with the patch, compiled with ExoPlaSim's flags against PlaSim's
+own module, gives the Python copy's water to 1e-10 with the switch on and prints every digit the unpatched soil step
+prints with it off, and its lstoreini reads the runner's table file into the start the Python copy gives; every edit
+only inserts lines and the inserted statements run only with nlstore 1; the patch applies once to the shared
+landmod.f90 and compiles with PlaSim's modules; and the runner records the store with its limits, writes its tables and
+namelist, refuses a version 1 product, a changed or mismatched one and a store at sea, and needs the 10 m wind."""
 import json
 import math
 import re
@@ -30,28 +33,37 @@ def twilight_source(name):
     return path if path.exists() else None
 
 
+RGRID = np.array([0.0, 0.02, 0.05, 0.1, 0.2, 0.35, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 6.5, 8.0, 10.0, 13.0,
+                  16.0, 20.0, 25.0, 32.0, 40.0, 50.0, 65.0, 80.0, 100.0, 130.0])
+WGRID = np.array([0.0, 0.01, 0.02, 0.04, 0.07, 0.13, 0.25, 0.28, 0.44, 0.56, 0.62, 0.99, 1.0])
+
+
 def tables(n, seed=3):
     """A store's tables for n cells: paraboloid bowls (area as the root of the fill) and a deeper depression whose
-    area grows more slowly, a seal-like seepage, routing shares and a runoff table rising with depth and wetness."""
+    area grows more slowly, a seal-like seepage, routing shares, runoff tables rising with the rain's mean and the
+    wetness, the balanced water and the record's rain."""
     rng = np.random.default_rng(seed)
     fill = np.array([0.0, 1e-6, 1e-5, 1e-4, 3e-4, 1e-3, 3e-3, 0.01, 0.03, 0.1, 0.3, 1.0])
     bowls = rng.uniform(0.05, 0.2, n)[:, None] * np.sqrt(fill)[None, :]
     deps = rng.uniform(0.0, 0.03, n)[:, None] * fill[None, :] ** 0.35
     area = bowls + deps
     seep = area * rng.uniform(2.5e-8, 4e-8, n)[:, None] * (1.0 + 0.3 * fill[None, :])
-    depths = np.array([0.0, 0.1, 0.2, 0.5, 1, 2, 3, 5, 7, 10, 15, 20, 30, 50, 70, 100, 150, 200, 300.0])
-    wets = np.array([0.0, 0.005, 0.01, 0.02, 0.04, 0.08, 0.15, 0.3, 0.5, 0.75, 1.0])
-    table = np.clip((depths[:, None] - 1.0) / (depths[:, None] + 15.0), 0.0, 1.0) * (0.6 + 0.4 * wets[None, :])
+    ctab = (0.1 + 0.4 * RGRID[:, None] / (RGRID[:, None] + 10.0)) * (0.6 + 0.4 * WGRID[None, :])
+    ltab = np.clip((RGRID[:, None] - 1.0) / (RGRID[:, None] + 30.0), 0.0, 1.0) * (0.5 + 0.5 * WGRID[None, :])
     shares = np.stack([rng.uniform(0.4, 0.8, n), rng.uniform(0.0, 0.01, n), rng.uniform(0.0, 0.02, n)], axis=1)
     cap = rng.uniform(0.5, 20.0, n)
-    return dict(fill=fill, area=area, seep=seep, cap=cap, shares=shares, depths=depths, wets=wets, table=table,
-                wmax=np.full(n, 0.5))
+    return dict(fill=fill, area=area, seep=seep, cap=cap, shares=shares, rgrid=RGRID, wgrid=WGRID, ctab=ctab, ltab=ltab,
+                wmax=np.full(n, 0.5), vbal=cap * rng.uniform(1e-6, 1e-3, n), rc0=rng.uniform(0.0, 4e-8, n),
+                rl0=rng.uniform(0.0, 5e-9, n))
 
 
 def forcing(n, seed=5):
     rng = np.random.default_rng(seed)
     return dict(prc=rng.choice([0.0, 2e-7, 3e-6, 2e-5], n), prl=rng.choice([0.0, 1e-7, 8e-7], n),
                 devap_bucket=-rng.uniform(0.0, 4e-8, n), pool_rate=rng.uniform(-2e-9, 1.2e-7, n))
+
+
+TAU = ls.RUNNING_MEAN_DAYS * 86400.0
 
 
 # ------------------------------------------------------------------------------------------------------- physics
@@ -127,22 +139,49 @@ def test_the_curve_is_exact_for_paraboloids_and_nil_at_nil_water():
 
 def test_the_runoff_share_is_bilinear_within_its_grids():
     t = tables(1)
-    d, w, tab = t['depths'], t['wets'], t['table']
-    for i in range(d.size):
+    r, w, tab = t['rgrid'], t['wgrid'], t['ctab']
+    for i in range(r.size):
         for j in range(w.size):
-            assert float(ls.runoff_share(d, w, tab, d[i], w[j])) == pytest.approx(tab[i, j], abs=1e-15)
-    mid = float(ls.runoff_share(d, w, tab, 0.5 * (d[6] + d[7]), 0.25 * w[3] + 0.75 * w[4]))
+            assert float(ls.runoff_share(r, w, tab, r[i], w[j])) == pytest.approx(tab[i, j], abs=1e-15)
+    mid = float(ls.runoff_share(r, w, tab, 0.5 * (r[6] + r[7]), 0.25 * w[3] + 0.75 * w[4]))
     expect = 0.5 * (0.25 * tab[6, 3] + 0.75 * tab[6, 4]) + 0.5 * (0.25 * tab[7, 3] + 0.75 * tab[7, 4])
     assert mid == pytest.approx(expect, rel=1e-12)
-    assert float(ls.runoff_share(d, w, tab, 1e4, 2.0)) == tab[-1, -1]
-    assert float(ls.runoff_share(d, w, tab, -1.0, -1.0)) == tab[0, 0] == 0.0
+    assert float(ls.runoff_share(r, w, tab, 1e4, 2.0)) == tab[-1, -1]
+    assert float(ls.runoff_share(r, w, tab, -1.0, -1.0)) == tab[0, 0]
+
+
+def test_the_running_mean_is_exponential_and_a_steady_mean_reads_the_table():
+    # exact for steady rain: after any number of steps the mean is the rain plus the start's excess decayed
+    r = np.array([0.0, 3e-7, 1e-6])
+    p = np.array([2e-6, 0.0, 1e-6])
+    for _ in range(37):
+        r = ls.running_mean(r, p, DT, TAU)
+    expect = p + (np.array([0.0, 3e-7, 1e-6]) - p) * math.exp(-37 * DT / TAU)
+    assert r == pytest.approx(expect, rel=1e-12, abs=1e-22)
+    # a 3-day mean's steady rain read step by step from a running mean at that rain gives the table's share of it
+    n = 3
+    t = tables(n)
+    rain_mm_day = np.array([0.7, 6.0, 45.0])
+    prc = rain_mm_day / ls.MM_DAY_PER_M_S
+    state = dict(w=np.full(n, 0.02), v=np.zeros(n), fw=np.zeros(n), rc=prc.copy(), rl=np.zeros(n))
+    f = dict(prc=prc, prl=np.zeros(n), devap_bucket=np.zeros(n), pool_rate=np.zeros(n))
+    tt = dict(t, cap=np.zeros(n))                                   # no store: the runoff alone
+    runoff = np.zeros(n)
+    steps = int(round(2.953 * 86400.0 / DT))
+    for _ in range(steps):
+        state, flux, _ = ls.land_step(DT, state, f, tt, TAU)
+        runoff += flux['runoff'] * DT
+        state['w'] = np.full(n, 0.02)                               # the mean's bucket held, as the tables read it
+    share = ls.runoff_share(t['rgrid'], t['wgrid'], t['ctab'], rain_mm_day, 0.02 / 0.5)
+    assert runoff == pytest.approx(share * prc * steps * DT, rel=1e-12)
 
 
 def test_each_land_step_conserves_water_and_keeps_the_stores_limits():
     n = 400
     t = tables(n)
     rng = np.random.default_rng(11)
-    state = dict(w=rng.uniform(0.0, 0.03, n), v=np.where(rng.random(n) < 0.3, 0.0, rng.uniform(0.0, 0.2, n)), fw=None)
+    state = ls.start_state(t, rng.uniform(0.0, 0.03, n))
+    state['v'] = np.where(rng.random(n) < 0.3, 0.0, rng.uniform(0.0, 0.2, n))
     state['v'][:20] = t['cap'][:20] * 0.999                  # some nearly full stores, which spill
     state['fw'], _ = ls.curve(t['fill'], t['area'], t['seep'], t['cap'], state['v'])
     spilled = np.zeros(n)
@@ -151,7 +190,7 @@ def test_each_land_step_conserves_water_and_keeps_the_stores_limits():
         if step < 3:
             f['prc'][:20] = 5e-4                            # a downpour onto the full stores
         v0 = state['v'].copy()
-        state, flux, b = ls.land_step(DT, state, f, t, 0.3)
+        state, flux, b = ls.land_step(DT, state, f, t, TAU)
         lhs = b['rain']
         rhs = (b['bucket_change'] + b['bucket_evaporation'] + b['to_rivers'] + b['store_change']
                + b['store_evaporation'] + b['slow_store'])
@@ -160,10 +199,25 @@ def test_each_land_step_conserves_water_and_keeps_the_stores_limits():
         assert (np.abs(rhs - lhs) <= 1e-14 * np.maximum(scale, 1e-3)).all()
         assert (b['clamp'] == 0.0).all() and (state['v'] >= 0.0).all() and (state['v'] <= t['cap'] + 1e-15).all()
         assert (state['fw'][state['v'] == 0.0] == 0.0).all() and (flux['es'] * DT <= v0 + 1e-18).all()
+        assert (state['rc'] >= 0.0).all() and (state['rl'] >= 0.0).all()
         # the store spills only what lies above its capacity, and only when full
         assert (flux['spill'][state['v'] < t['cap'] * (1.0 - 1e-12)] == 0.0).all()
         spilled += flux['spill']
     assert (spilled[:20] > 0.0).all()
+
+
+def test_the_start_takes_the_balanced_water_and_the_records_rain_where_the_restart_holds_none():
+    n = 6
+    t = tables(n)
+    t['cap'][4] = 0.0                                        # a cell without a store
+    s = ls.start_state(t, np.full(n, 0.01))
+    on = t['cap'] > 0.0
+    assert (s['v'][on] == t['vbal'][on]).all() and s['v'][4] == 0.0 and s['fw'][4] == 0.0
+    assert (s['rc'][on] == t['rc0'][on]).all() and (s['rl'][on] == t['rl0'][on]).all() and s['rc'][4] == 0.0
+    fw, _ = ls.curve(t['fill'], t['area'], t['seep'], t['cap'], t['vbal'])
+    assert s['fw'] == pytest.approx(np.where(on, fw, 0.0), rel=1e-15)
+    held = ls.start_state(t, np.full(n, 0.01), store=np.full(n, 0.3), means=(np.full(n, 1e-8), np.full(n, 2e-9)))
+    assert (held['v'][on] == 0.3).all() and (held['rc'][on] == 1e-8).all() and (held['rl'][on] == 2e-9).all()
 
 
 def test_the_stores_evaporation_is_at_most_its_water_and_none_under_snow():
@@ -235,31 +289,78 @@ STORE_INPUT = """
        ndiaggp2d = NLSOUT
        allocate(dgp2d(NHOR,NLSOUT))
        nafter = 0
-       read(*,*) dlswet, dlssbk, dlsalbw, dlsemw, dlsz0w, dlszw, dlsumin, dlscfree, dlslb, dlslc, dlsld, alv, tmelt
+       read(*,*) dlstau, dlssbk, dlsalbw, dlsemw, dlsz0w, dlszw, dlsumin, dlscfree, dlslb, dlslc, dlsld, alv, tmelt
        read(*,*) dlsfill
-       read(*,*) dlsdgrid
+       read(*,*) dlsrgrid
        read(*,*) dlswgrid
-       read(*,*) dlsrtab
+       read(*,*) dlsctab
+       read(*,*) dlsltab
        do j=1,n
-        read(*,*) dlscap(j), dlsv(j), dlsfw(j), (dlsarea(j,k),k=1,NLSF), (dlsseep(j,k),k=1,NLSF), (dlsshare(j,k),k=1,3)
+        read(*,*) dlscap(j), dlsv(j), dlsfw(j), dlsrc(j), dlsrl(j), (dlsarea(j,k),k=1,NLSF), (dlsseep(j,k),k=1,NLSF), &
+     &   (dlsshare(j,k),k=1,3)
         read(*,*) dswfl(j,NLEP), dlwfl(j,NLEP), dalb(j), dt(j,NLEP), dt(j,NLEV), dq(j,NLEV), dp(j), du10(j), dv10(j)
        enddo
       endif
 """
 STORE_STEP = "       if (nlstore == 1) call lstoreevap\n"
-STORE_OUT = ", dlsv(j), dlsfw(j), dlses(j), devap(j), (dlsflx(j,k),k=1,NLSOUT)"
+STORE_OUT = ", dlsv(j), dlsfw(j), dlses(j), devap(j), (dlsflx(j,k),k=1,NLSOUT), dlsrc(j), dlsrl(j)"
+INI_HARNESS = """
+      program harness_ini
+      use landmod
+      implicit none
+      integer :: n, j, k, m
+      integer :: points(16)
+      read(*,*) nlsfloor, nlssurf, nlsread, nlsrread, dlstau, n
+      read(*,*) (points(j), j=1,n)
+      nlstore = 1
+      nlandt = 1
+      nlandw = 1
+      ndiaggp2d = NLSOUT
+      dls(:) = 0.
+      dlsv(:) = 0.5
+      dlsrc(:) = 7.e-9
+      dlsrl(:) = 3.e-9
+      do j=1,n
+       dls(points(j)) = 1.
+      enddo
+      call lstoreini
+      do j=1,n
+       k = points(j)
+       write(*,'(*(es25.16e3))') dlscap(k), dlsv(k), dlsfw(k), dlsrc(k), dlsrl(k), dlsvbal(k), dlsrc0(k), dlsrl0(k), &
+     &  (dlsarea(k,m),m=1,NLSF), (dlsseep(k,m),m=1,NLSF), (dlsshare(k,m),m=1,3)
+      enddo
+      write(*,'(*(es25.16e3))') dlsfill, dlsrgrid, dlswgrid, dlsctab, dlsltab
+      end program harness_ini
+"""
+COPY_STUBS = """
+      subroutine mpgagp(pf,pp,klev)
+      real pf(*),pp(*)
+      integer klev
+      end subroutine mpgagp
+      subroutine mpscgp(pf,pp,klev)
+      use pumamod
+      real pf(NUGP,klev),pp(NHOR,klev)
+      integer klev
+      pp(1:NHOR,1:klev) = pf(1:NHOR,1:klev)
+      end subroutine mpscgp
+      subroutine mpbcrn(p,n)
+      real p(*)
+      integer n
+      end subroutine mpbcrn
+"""
 
 
-def compile_soil(folder, text, with_store: bool):
+def compile_soil(folder, text, with_store: bool, harness=None, stubs=STUBS):
     src = twilight_source('plasimmod.f90')
     folder.mkdir(parents=True, exist_ok=True)
     (folder / 'resmod.f90').write_text('      module resmod\n      parameter(NLAT_ATM = 32)\n      parameter(NLEV_ATM = 15)\n'
                                        '      parameter(NPRO_ATM = 1)\n      end module resmod\n')
     shutil.copy(src, folder / 'plasimmod.f90')
     (folder / 'landsoil.f90').write_text(soil_routines(text))
-    (folder / 'stubs.f90').write_text(STUBS)
-    harness = HARNESS.replace('{store_input}', STORE_INPUT if with_store else '').replace(
-        '{store_step}', STORE_STEP if with_store else '').replace('{store_out}', STORE_OUT if with_store else '')
+    (folder / 'stubs.f90').write_text(stubs)
+    if harness is None:
+        harness = HARNESS.replace('{store_input}', STORE_INPUT if with_store else '').replace(
+            '{store_step}', STORE_STEP if with_store else '').replace('{store_out}', STORE_OUT if with_store else '')
     (folder / 'harness.f90').write_text(harness)
     files = ['resmod.f90', 'plasimmod.f90', 'landsoil.f90', 'stubs.f90', 'harness.f90']
     subprocess.run(['gfortran', *GCM_FLAGS, '-o', 'harness', *files], cwd=folder, check=True, capture_output=True)
@@ -291,11 +392,12 @@ def harness_input(mode, rows, nsteps, store=None):
         lines.append(num([r['dts'], r['dtsm'], r['dshfl'], r['dlhfl'], r['dflux'], *r['dsoilt']]))
     if store is not None:
         t, st, air = store
-        lines.append(num([0.3, PC[9], PC[10], PC[11], PC[12], PC[13], PC[14], PC[15], PC[16], PC[17], PC[18],
+        lines.append(num([TAU, PC[9], PC[10], PC[11], PC[12], PC[13], PC[14], PC[15], PC[16], PC[17], PC[18],
                           PLASIM['alv'], PLASIM['tmelt']]))
-        lines += [num(t['fill']), num(t['depths']), num(t['wets']), num(t['table'].T.ravel())]
+        lines += [num(t['fill']), num(t['rgrid']), num(t['wgrid']), num(t['ctab'].T.ravel()), num(t['ltab'].T.ravel())]
         for j in range(len(rows)):
-            lines.append(num([t['cap'][j], st['v'][j], st['fw'][j], *t['area'][j], *t['seep'][j], *t['shares'][j]]))
+            lines.append(num([t['cap'][j], st['v'][j], st['fw'][j], st['rc'][j], st['rl'][j], *t['area'][j],
+                              *t['seep'][j], *t['shares'][j]]))
             lines.append(num([air[k][j] for k in ('sw_net', 'lw_net', 'alb', 'ts', 'tl', 'ql', 'p', 'u10', 'v10')]))
     return '\n'.join(lines) + '\n'
 
@@ -342,15 +444,16 @@ def test_the_fortran_store_gives_the_python_copys_water(tmp_path):
                ts=rng.uniform(295, 325, n), tl=rng.uniform(280, 300, n), ql=rng.uniform(0.004, 0.014, n),
                p=rng.uniform(110000, 121000, n), u10=rng.uniform(-3, 3, n), v10=rng.uniform(-3, 3, n))
     nsteps = 40
-    out = run(compile_soil(tmp_path / 'store', text, True), harness_input(1, rows, nsteps, (t, dict(v=v, fw=fw), air)))
+    out = run(compile_soil(tmp_path / 'store', text, True),
+              harness_input(1, rows, nsteps, (t, dict(v=v, fw=fw, rc=t['rc0'], rl=t['rl0']), air)))
     sw, lw = ls.radiation_from_plasim(air['sw_net'], air['alb'], air['lw_net'], air['ts'])
     ta = air['tl'] * 0.99415 ** (-PLASIM['akap'])
     rate, _, _ = ls.pool_evaporation(sw, lw, ta, air['ql'], air['p'], np.hypot(air['u10'], air['v10']), PC)
-    state = dict(w=np.array([r['dwatc'] for r in rows]), v=v, fw=fw)
+    state = dict(w=np.array([r['dwatc'] for r in rows]), v=v, fw=fw, rc=t['rc0'], rl=t['rl0'])
     f = dict(prc=np.array([r['dprc'] for r in rows]), prl=np.array([r['dprl'] for r in rows]),
              devap_bucket=np.array([r['devap'] for r in rows]), pool_rate=rate)
     for step in range(nsteps):
-        state, flux, _ = ls.land_step(DT, state, f, t, 0.3)
+        state, flux, _ = ls.land_step(DT, state, f, t, TAU)
         for j in range(n):
             vals = [float(x) for x in out[step * n + j].split()]
             assert vals[0] == pytest.approx(state['w'][j], rel=1e-10, abs=1e-18)
@@ -362,6 +465,41 @@ def test_the_fortran_store_gives_the_python_copys_water(tmp_path):
             expect = [flux['runoff'][j], state['v'][j], state['fw'][j], -flux['es'][j], flux['seepage'][j],
                       flux['recharge'][j], flux['rivers'][j] + flux['spill'][j]]
             assert vals[11:18] == pytest.approx(expect, rel=1e-10, abs=1e-22)
+            assert vals[18:20] == pytest.approx([state['rc'][j], state['rl'][j]], rel=1e-10, abs=1e-24)
+    assert max(state['rc'] * ls.MM_DAY_PER_M_S) > 20.0          # the running means crossed the table's rain grid
+
+
+@FORTRAN
+def test_lstoreini_reads_the_runners_table_into_the_start_the_python_copy_gives(tmp_path):
+    source = twilight_source('landmod.f90')
+    if source is None:
+        pytest.skip('no ExoPlaSim source at hand')
+    text = source.read_text()
+    text = patched(text) if ls.LAND_STORE_MARKER not in text else text
+    path, _ = product(tmp_path)
+    folder = tmp_path / 'ini'
+    exe = compile_soil(folder, text, True, harness=INI_HARNESS, stubs=COPY_STUBS)
+    ls.write_table(ls.read_product(path), 'cm1_6km', 'mature', folder / ls.TABLE_NAME)
+    fill, rgrid, wgrid, ctab, ltab, rows = ls.table_rows(ls.read_product(path), 'cm1_6km', 'mature')
+    points = [5 * 64 + 10, 6 * 64 + 11, 3]                              # two stores and a point without one
+    for floor, surface, held in (('sandy_banked', 'loam', 0), ('tight_seal', 'biocrust', 1)):
+        stdin = f"{ls.FLOORS.index(floor) + 1} {ls.SURFACES.index(surface) + 1} {held} {held} {TAU!r} {len(points)}\n"
+        stdin += ' '.join(str(k + 1) for k in points) + '\n'
+        out = subprocess.run([str(exe)], input=stdin, capture_output=True, text=True, check=True, cwd=folder).stdout
+        lines = [line for line in out.strip('\n').split('\n') if '*' not in line]
+        si = ls.SURFACES.index(surface)
+        for line, k in zip(lines, points):
+            vals = np.array(line.split(), float)
+            rc0, rl0, cap, area, seep, shares, vbal = ls.unpack_row(rows[k], surface, floor)
+            if cap <= 0.0:
+                assert (vals[:6] == 0.0).all()
+                continue
+            v = 0.5 if held else vbal
+            fw, _ = ls.curve(fill, area[None, :], seep[None, :], np.array([cap]), np.array([v]))
+            expect = [cap, v, fw[0], 7e-9 if held else rc0, 3e-9 if held else rl0, vbal, rc0, rl0, *area, *seep, *shares]
+            assert vals == pytest.approx(np.array(expect), rel=1e-15, abs=1e-30)
+        grids = np.array(lines[len(points)].split(), float)
+        assert grids == pytest.approx(np.r_[fill, rgrid, wgrid, ctab[si].T.ravel(), ltab[si].T.ravel()], rel=1e-15)
 
 
 def inserted(old, new):
@@ -424,7 +562,7 @@ def test_the_patch_applies_once_to_the_shared_landmod():
     # the Fortran's grids and slots are the module's, and its σ is the radiation's own
     radmod = twilight_source('radmod.f90')
     assert re.search(r'parameter\(SBK = 5\.67E-8\)', radmod.read_text())
-    assert f'NLSF = {ls.NLSF}, NLSD = {ls.NLSD}, NLSW = {ls.NLSW}' in text and f'NLSOUT = {ls.NLSOUT}' in text
+    assert f'NLSF = {ls.NLSF}, NLSR = {ls.NLSR}, NLSW = {ls.NLSW}' in text and f'NLSOUT = {ls.NLSOUT}' in text
 
 
 @FORTRAN
@@ -446,22 +584,37 @@ def test_the_patched_landmod_compiles_with_plasims_modules(tmp_path):
 # ------------------------------------------------------------------------------------------------------- runner
 
 def product(tmp_path, cells_=((5, 10), (6, 11))):
-    """A synthetic store-tables product on T21: two dryland cells with stores."""
+    """A synthetic store-tables product (schema /2) on T21: two dryland cells with stores, each library, surface and
+    age with its own curve, and the second cell without a store on the sealed loam."""
     t = tables(len(cells_))
     rows = []
     for k, (j, i) in enumerate(cells_):
-        store = {h: dict(capacity_m=float(t['cap'][k]), area_share=[float(x) for x in t['area'][k]],
-                         seepage_m_s={f: [float(x) * (1.0 + q) for x in t['seep'][k]] for q, f in enumerate(ls.FLOORS)})
-                 for h in ls.HOLLOWS}
-        shares = {b: {s: {h: dict(hollows=0.6, rivers=0.001, recharge=0.002, soil=0.397) for h in ls.HOLLOWS}
-                      for s in ls.SURFACES} for b in ls.LIBRARIES}
-        rows.append(dict(j=j, i=i, store=store, shares=shares))
+        store = {}
+        for bi, b in enumerate(ls.LIBRARIES):
+            store[b] = {}
+            for si, s in enumerate(ls.SURFACES):
+                store[b][s] = {}
+                for hi, h in enumerate(ls.HOLLOWS):
+                    scale = 1.0 + 0.1 * bi + 0.01 * si + 0.001 * hi
+                    cap = 0.0 if (k == 1 and s == 'sealed_loam') else float(t['cap'][k]) * scale
+                    store[b][s][h] = dict(capacity_m=cap, area_share=[float(x) * scale for x in t['area'][k]],
+                                          seepage_m_s={f: [float(x) * (1.0 + q) * scale for x in t['seep'][k]]
+                                                       for q, f in enumerate(ls.FLOORS)},
+                                          balanced_m={f: float(t['vbal'][k]) * scale / (1.0 + q) for q, f in enumerate(ls.FLOORS)},
+                                          inflow_m_s=1e-9)
+        shares = {b: {s: {h: dict(hollows=0.6, rivers=0.001 * (1 + si), recharge=0.002, soil=0.397 - 0.001 * si)
+                          for h in ls.HOLLOWS} for si, s in enumerate(ls.SURFACES)} for b in ls.LIBRARIES}
+        rows.append(dict(j=j, i=i, store=store, shares=shares,
+                         rain_m_s=dict(convective=float(t['rc0'][k]), large_scale=float(t['rl0'][k]),
+                                       total=float(t['rc0'][k] + t['rl0'][k]))))
     p = dict(schema=ls.PRODUCT_SCHEMA, grid=dict(nlon=64, nlat=32), floors=list(ls.FLOORS), surfaces=list(ls.SURFACES),
              libraries=list(ls.LIBRARIES), hollows=list(ls.HOLLOWS),
-             grids=dict(fill=list(t['fill']), rain_depth_mm=list(t['depths']), wetness=list(t['wets'])),
-             runoff_tables={s: (t['table'] * (1 + q)).tolist() for q, s in enumerate(ls.SURFACES)},
-             producer=dict(files={'research/studies/storm_water/store_tables.py': 'abc'}), basis=dict(run='test'),
-             cells=rows)
+             grids=dict(fill=list(t['fill']), rain_mm_day=list(t['rgrid']), wetness=list(t['wgrid'])),
+             convective_runoff={b: {s: (t['ctab'] * (1 + q + 0.5 * bi)).tolist() for q, s in enumerate(ls.SURFACES)}
+                                for bi, b in enumerate(ls.LIBRARIES)},
+             large_scale_runoff={s: (t['ltab'] * (1 + q)).tolist() for q, s in enumerate(ls.SURFACES)},
+             producer=dict(files={'research/studies/storm_water/store_tables.py': 'abc'}),
+             basis=dict(run='test', mean_days=2.953), cells=rows)
     path = tmp_path / 'store_tables.json'
     path.write_text(json.dumps(p))
     return path, t
@@ -469,40 +622,56 @@ def product(tmp_path, cells_=((5, 10), (6, 11))):
 
 def test_the_runner_records_the_store_and_writes_its_tables_and_namelist(tmp_path):
     path, t = product(tmp_path)
-    s = ls.setting(path, 'sandy_banked', 'loam', 'cm1_6km', 'mature', 0.3, G_MOON, 121590.0)
-    assert s['floor'] == 'sandy_banked' and s['wetted_fraction'] == 0.3 and 'not settled' in s['wetted_fraction_status']
+    s = ls.setting(path, 'sandy_banked', 'loam', 'cm1_6km', 'mature', G_MOON, 121590.0)
+    assert s['floor'] == 'sandy_banked' and s['runoff']['running_mean_days'] == ls.RUNNING_MEAN_DAYS
+    assert s['runoff']['tables_built_on_mean_days'] == 2.953 and 'wetted_fraction' not in s
+    assert set(s['limits']) == {'sandy_banks', 'gust'} and 'a tenth low' in s['limits']['gust']
+    assert s['earth_terms_kept'] == dict(wsmax_m=0.5, drhsfull=0.4) and 'wetted_fraction' not in ls.EARTH_TERMS
     assert s['pool']['free_convection_m_s_k3'] == pytest.approx(PC[15]) and s['output']['160'] == 'mrro'
-    for bad in (dict(floor='concrete'), dict(surface='rock'), dict(library='earth'), dict(hollows='old'),
-                dict(wetted_fraction=0.0)):
-        args = dict(floor='clay_floored', surface='loam', library='walnut_gulch', hollows='young', wetted_fraction=0.3)
+    for bad in (dict(floor='concrete'), dict(surface='rock'), dict(library='earth'), dict(hollows='old')):
+        args = dict(floor='clay_floored', surface='loam', library='walnut_gulch', hollows='young')
         args.update(bad)
         with pytest.raises(ValueError):
-            ls.setting(path, args['floor'], args['surface'], args['library'], args['hollows'], args['wetted_fraction'],
-                       G_MOON, 121590.0)
+            ls.setting(path, args['floor'], args['surface'], args['library'], args['hollows'], G_MOON, 121590.0)
     nl = ls.namelist_values(s)
-    assert nl['NLSTORE'] == '1' and nl['NLSFLOOR'] == '2' and nl['NLSSURF'] == '2' and nl['DLSWET'] == '0.3'
+    assert nl['NLSTORE'] == '1' and nl['NLSFLOOR'] == '2' and nl['NLSSURF'] == '2'
+    assert float(nl['DLSTAU']) == pytest.approx(ls.RUNNING_MEAN_DAYS * 86400.0) and 'DLSWET' not in nl
     assert set(k.lower() for k in nl) == set(ls.NAMELIST_NAMES)
     out = ls.write_table(ls.read_product(path), 'cm1_6km', 'mature', tmp_path / 'landstore.dat')
     lines = out.read_text().splitlines()
-    assert lines[0].split() == ['1', '2048', '12', '19', '11', '3', '4']
-    assert len(lines) == 4 + len(ls.SURFACES) + ls.NUGP
-    tab = np.array(lines[4 + 1].split(), float).reshape(ls.NLSW, ls.NLSD).T     # the loam's, depth fastest
-    assert tab == pytest.approx(t['table'] * 2.0)
-    row = np.array(lines[4 + len(ls.SURFACES) + 5 * 64 + 10].split(), float)
-    assert row.size == 1 + 12 * 4 + 12 and row[0] == pytest.approx(t['cap'][0])
-    assert row[1 + 12 + 12:1 + 12 + 24] == pytest.approx(t['seep'][0] * 2.0)     # the sandy banks' seepage
-    assert row[49:52] == pytest.approx([0.6, 0.001, 0.002])
-    assert float(np.abs(np.array(lines[4 + len(ls.SURFACES)].split(), float)).sum()) == 0.0   # no store at the pole
+    assert lines[0].split() == ['2', '2048', '12', '29', '13', '3', '4']
+    assert len(lines) == 4 + 2 * len(ls.SURFACES) + ls.NUGP
+    tab = np.array(lines[4 + 1].split(), float).reshape(ls.NLSW, ls.NLSR).T     # the loam's, the rain fastest
+    assert tab == pytest.approx(t['ctab'] * 2.5)                                # CM1's scale on the second surface
+    tab = np.array(lines[4 + len(ls.SURFACES) + 3].split(), float).reshape(ls.NLSW, ls.NLSR).T
+    assert tab == pytest.approx(t['ltab'] * 4.0)                                # the crust's large-scale table
+    row = np.array(lines[4 + 2 * len(ls.SURFACES) + 5 * 64 + 10].split(), float)
+    assert row.size == 2 + 4 * ls.NLSROW and row[:2] == pytest.approx([t['rc0'][0], t['rl0'][0]])
+    rc0, rl0, cap, area, seep, shares, vbal = ls.unpack_row(row, 'loam', 'sandy_banked')
+    scale = 1.0 + 0.1 + 0.01 + 0.001
+    assert cap == pytest.approx(t['cap'][0] * scale) and area == pytest.approx(t['area'][0] * scale)
+    assert seep == pytest.approx(t['seep'][0] * 2.0 * scale) and vbal == pytest.approx(t['vbal'][0] * scale / 2.0)
+    assert shares == pytest.approx([0.6, 0.002, 0.002])
+    row2 = np.array(lines[4 + 2 * len(ls.SURFACES) + 6 * 64 + 11].split(), float)
+    assert (ls.unpack_row(row2, 'sealed_loam', 'clay_floored')[2] == 0.0
+            and (row2[2 + 2 * ls.NLSROW:2 + 3 * ls.NLSROW] == 0.0).all())      # no store on that surface there
+    assert float(np.abs(np.array(lines[4 + 2 * len(ls.SURFACES)].split(), float)).sum()) == 0.0   # none at the pole
+    for schema in ('something/1', 'terluna.research.storm-water-store-tables/1'):
+        bad = json.loads(path.read_text())
+        bad['schema'] = schema
+        (tmp_path / 'bad.json').write_text(json.dumps(bad))
+        with pytest.raises(ValueError, match='version 1' if schema.endswith('tables/1') else 'not a'):
+            ls.read_product(tmp_path / 'bad.json')
     bad = json.loads(path.read_text())
-    bad['schema'] = 'something/1'
+    bad['grids']['wetness'] = bad['grids']['wetness'][:-1]
     (tmp_path / 'bad.json').write_text(json.dumps(bad))
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match='grids'):
         ls.read_product(tmp_path / 'bad.json')
 
 
-def test_the_runner_writes_the_runs_tables_and_refuses_a_changed_product_or_a_store_at_sea(tmp_path):
+def test_the_runner_writes_the_runs_tables_and_refuses_a_changed_or_mismatched_product_or_a_store_at_sea(tmp_path):
     path, t = product(tmp_path)
-    s = ls.setting(path, 'clay_floored', 'loam', 'walnut_gulch', 'young', 0.3, G_MOON, 121590.0)
+    s = ls.setting(path, 'clay_floored', 'loam', 'walnut_gulch', 'young', G_MOON, 121590.0)
     mask = np.zeros((32, 64))
     mask[5, 10] = mask[6, 11] = 1.0
     er._write_sra(tmp_path / 'land.sra', 172, mask)
@@ -512,9 +681,17 @@ def test_the_runner_writes_the_runs_tables_and_refuses_a_changed_product_or_a_st
     er._write_sra(tmp_path / 'sea.sra', 172, mask)
     with pytest.raises(ValueError, match='sea'):
         er.land_store_table(s, tmp_path / 'sea.sra', tmp_path / 'x.dat')
-    path.write_text(path.read_text().replace('"basis": {"run": "test"}', '"basis": {"run": "changed"}'))
+    text = path.read_text()
+    path.write_text(text.replace('"run": "test"', '"run": "changed"'))
     with pytest.raises(ValueError, match='changed'):
         er.land_store_table(s, tmp_path / 'land.sra', tmp_path / 'y.dat')
+    # a product whose curve does not hold the patch's fills is refused even when the configuration reads it afresh
+    bad = json.loads(text)
+    bad['cells'][0]['store']['walnut_gulch']['loam']['young']['area_share'] = [0.0] * 11
+    path.write_text(json.dumps(bad))
+    s = dict(s, sha256=__import__('hashlib').sha256(path.read_bytes()).hexdigest()[:16])
+    with pytest.raises(ValueError, match='fills'):
+        er.land_store_table(s, tmp_path / 'land.sra', tmp_path / 'z.dat')
 
 
 def test_the_runner_wires_the_store_without_touching_other_runs():
