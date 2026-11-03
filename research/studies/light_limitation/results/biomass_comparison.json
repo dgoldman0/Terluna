@@ -7,7 +7,7 @@
       "research/studies/light_limitation/biomass_comparison.py": "5bc97252eae30db31b7fd738c14839cb3ac4fbd9fa3630c3bb9439e406175854"
     },
     "inputs": {
-      "research/studies/light_limitation/results/light_limitation.json": "16b594540f8172ae81089188291a587b4972e81ea2c07bfb16d7f0fde17fe8f4",
+      "research/studies/light_limitation/results/light_limitation.json": "bd487325c3b4cf7140b7375910382e6a1351efa9e21b15abe229bc992cd46619",
       "research/studies/light_limitation/biomass_comparison_inputs.json": "c667d7ad24f2ca4b941bebbcd3730056fb2b70cb3dbaa5604167d4e079b1d32f",
       "shared/scenarios/water.json": "876ac34f925302e2b8e73555ece37dfc0560e0551674a4a6a810abd8909b5f6f"
     },

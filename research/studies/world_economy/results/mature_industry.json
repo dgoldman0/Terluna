@@ -3,7 +3,7 @@
   "producer": {
     "files": {
       "research/studies/world_economy/mature_industry.py": "80ef90e76db51202048a708a1a3cbc22a655b31f283898fcd966f9f69ad7d783",
-      "research/studies/world_economy/mature_industry_inputs.json": "6e147dc281fd6488df311ab424c6a581330cf00eea0a03622233e13ef832dca0",
+      "research/studies/world_economy/mature_industry_inputs.json": "39e9017153d49bdbee88050ed75a9242308d3284275513c162c56eb4edb3029d",
       "research/studies/world_economy/mature_economics.py": "5dce4911db4947bfc957163df87ce59d1998be7b5f2111e76bb58aa2aff3f207",
       "research/studies/world_economy/industrial_physics.py": "915b7edcbdf70c244cb2d234465f75539e4d65ed81c98f719480d6a802e785cc"
     },
@@ -18,11 +18,11 @@
         "schema": "terluna.research.industrial-physics/1"
       },
       "research/studies/world_economy/results/construction.json": {
-        "sha256": "d241417ca1aff320315d22c67bbb202328a2a419a6c187c090d15650efbcd8c6",
+        "sha256": "e0cbd2278e666b9f9eb647bebfaf62901311bd39b4a16d94eecdfff59b2045fb",
         "schema": "terluna.research.world-economy-construction/1"
       },
       "research/studies/world_economy/results/comparison.json": {
-        "sha256": "3983740eac99a0b05fdd7ca369bef2fcdd11921abbf4a04620c036f81c9b9927",
+        "sha256": "3cc7144f4b4a16ab614b31d37a59ed6c7f27b9a01f706c6eea1ac944deb91bc9",
         "schema": "terluna.research.world-economy-comparison/1"
       },
       "resources/results/industry.json": {

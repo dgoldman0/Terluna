@@ -20,9 +20,9 @@
       "atmosphere/snow/collision_birth_benchmarks.py": "0788cc19b02bd93aa54cdcedbaa90b97425ee6077cc8041f835b3ba597d65f00"
     },
     "inputs": {
-      "atmosphere/snow/results/collision_reference.json": "96d482124b199af8d86b263145c8fcdfebcaa2552d0bbc5bd6b7ee7fac1964e0",
-      "research/studies/climate_targets/results/climate_targets.json": "b3315ad933f0e651c011f99107952f76509a672b60b973b9f6a43e48d9892793",
-      "atmosphere/snow/results/collision_jump_bath_attempt.json": "2cb227b6e45e92fffeb75094052fe57e3941fc7a3e16008ee5d8f1567dc226cf"
+      "atmosphere/snow/results/collision_reference.json": "be06ef5bb6a90217433e5cfed3cba90387c3a95104033800a2829351f4b4953e",
+      "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64",
+      "atmosphere/snow/results/collision_jump_bath_attempt.json": "cd5f569cc73e9b6de871d12f84a8c1cbbb23558686708ea60e0f7811e1650959"
     },
     "constants": {
       "AVOGADRO": 6.02214076e+23,
@@ -91905,7 +91905,7 @@
   },
   "execution_history": {
     "initial_attempt": "atmosphere/snow/results/collision_jump_bath_attempt.json",
-    "initial_attempt_sha256": "2cb227b6e45e92fffeb75094052fe57e3941fc7a3e16008ee5d8f1567dc226cf",
+    "initial_attempt_sha256": "cd5f569cc73e9b6de871d12f84a8c1cbbb23558686708ea60e0f7811e1650959",
     "initial_wall_limit_s": 300.0,
     "continued_wall_limit_s": 600.0,
     "retained_completed_controls": [
