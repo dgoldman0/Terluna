@@ -19,7 +19,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from .body import Attachment, Body, qrot_np
-from .patterns import Piece, annulus, develop, gore, grid, rectangle, sector
+from .patterns import Piece, annulus, develop, gore, grid, rectangle, sector, slit
 
 WAIST_ABOVE_OMPHALION = 0.02       # m: the natural waist, just above the navel (placement)
 BAND_CLEARANCE = 0.006             # m: waistband radius beyond the abdomen capsule (or the dress form's waist)
@@ -99,8 +99,41 @@ def circle_skirt(body: Body, pose0, length=0.85, h=0.02, seed=0) -> Garment:
     return Garment('circle_skirt', piece, X0, inner, att, params)
 
 
+def _cut_slits(piece: Piece, r_in, cut, slits, slit_top, band):
+    """Slits up a sector skirt's pattern at body angles `slits` (degrees from centre front toward her left), each along
+    the pattern's radial line that hangs from that angle's band point, from the hem up to slit_top down the pattern
+    from the waist; they must lie away from the seam at centre back. Returns the cut piece, its 'outer' ring with each
+    slit's new hem vertex after the old, and each slit's lips as two vertex lists from its closed end to the hem (the
+    end shared), the lip toward centre back first."""
+    wrap = lambda a: np.angle(np.exp(1j * np.asarray(a)))
+    f = np.linspace(0.0, 1.0, 7201)
+    th_f = np.asarray(band(f)[0])
+    lips = []
+    for deg in slits:
+        uv = piece.vertex_uv
+        rho = np.hypot(uv[:, 0], uv[:, 1])
+        psi = np.mod(np.arctan2(uv[:, 1], uv[:, 0]), 2 * np.pi)
+        psi_s = f[np.argmin(np.abs(wrap(th_f - math.radians(deg))))] * cut
+        path = []
+        for r in np.unique(np.round(rho[rho >= r_in + slit_top - 1e-6], 7)):    # one vertex per row, nearest the line
+            on = np.where(np.abs(rho - r) < 1e-6)[0]
+            path.append(int(on[np.argmin(np.abs(wrap(psi[on] - psi_s)))]))
+        on_path = np.zeros(piece.n_vertices, bool)
+        on_path[path] = True
+        off = ~on_path[piece.F]
+        ang = wrap(np.arctan2(piece.UV[..., 1], piece.UV[..., 0]) - psi_s)        # each corner's side of the line
+        side = on_path[piece.F].any(1) & ((np.where(off, ang, 0.0).sum(1) / np.maximum(off.sum(1), 1)) > 0)
+        piece, copies = slit(piece, path, side)
+        outer = list(piece.rings['outer'])
+        k = outer.index(path[-1])
+        piece.rings['outer'] = outer[:k + 1] + [int(copies[-1])] + outer[k + 1:]
+        lips.append((path, [path[0]] + [int(c) for c in copies]))
+    return piece, lips
+
+
 def skirt(body: Body, pose0, cut=2 * np.pi, length=0.85, h=0.02, hem_weight_kg_m=0.0,
-          band_clearance=BAND_CLEARANCE, start_clear=None, binding=False, binding_kg_m=0.0023) -> Garment:
+          band_clearance=BAND_CLEARANCE, start_clear=None, binding=False, binding_kg_m=0.0023,
+          slits=(), slit_top=None) -> Garment:
     """A circle skirt cut from `cut` radians of a ring (pi: a half circle; 2 pi: a full circle; 4 pi: a double
     circle, two full circles sewn at the sides, whose starting placement is not built yet), with the seam at centre
     back and the straight grain at centre front, on the same waistband as circle_skirt. Its pattern's inner radius
@@ -117,7 +150,13 @@ def skirt(body: Body, pose0, cut=2 * np.pi, length=0.85, h=0.02, hem_weight_kg_m
     (default: on a dress form) then moves any starting point inside the body out of it, 4 mm clear: a half circle's
     cone, laid from the small of the back, starts partly inside the hips, and on the form that start held the hem up
     at the sides. With binding, the hem's last strip of triangles is a bound edge, listed in params['binding_tris']
-    for the binding's own fabric, and the hem carries binding_kg_m more for the fold (as sleeve_tier's hems)."""
+    for the binding's own fabric, and the hem carries binding_kg_m more for the fold (as sleeve_tier's hems).
+
+    slits: body angles (degrees from centre front toward her left; 90 and -90 for the sides) of slits cut up the
+    skirt from its hem to slit_top down the pattern from the waist, each along the line of the pattern that hangs
+    from its band point (_cut_slits). Their lips start closed, as cut, and with binding are bound like the hem: the
+    triangles along each lip join params['binding_tris'] and each lip carries binding_kg_m along its length.
+    params['slit_lips'] lists each slit's two lips (vertex indices from its closed end to the hem)."""
     sp = {s['name']: s for s in body.spec['segments']}
     ab = sp['abdomen']
     cap = ab['capsules'][0]
@@ -132,6 +171,10 @@ def skirt(body: Body, pose0, cut=2 * np.pi, length=0.85, h=0.02, hem_weight_kg_m
         band = lambda f: (np.pi + 2 * np.pi * np.asarray(f), np.full(np.shape(f), r_band))
     r_in = 2 * np.pi * r_band / cut
     piece = sector(r_in, r_in + length, cut, h)
+    lips = []
+    if len(slits):
+        assert slit_top is not None and 0.0 < slit_top < length, 'a slit runs from slit_top down to the hem'
+        piece, lips = _cut_slits(piece, r_in, cut, slits, slit_top, band)
     inner = np.array(piece.rings['inner'])
     hem = np.array(piece.rings['outer'])
     uv = piece.vertex_uv
@@ -184,12 +227,19 @@ def skirt(body: Body, pose0, cut=2 * np.pi, length=0.85, h=0.02, hem_weight_kg_m
         nr = max(1, int(round(length / (h * np.sqrt(3) / 2))))
         last = rho >= r_in + length * (nr - 1) / nr - 1e-9
         binding_tris = [int(t) for t in np.where(last[piece.F].all(1))[0]]
+        if lips:                                            # each lip's triangles, and its fold along its length
+            cutv = np.zeros(piece.n_vertices, bool)
+            for lip in (l for pair in lips for l in pair):
+                cutv[lip[1:]] = True
+                extra[lip[1:]] += binding_kg_m * (length - slit_top) / len(lip[1:])
+            binding_tris = sorted(set(binding_tris) | {int(t) for t in np.where(cutv[piece.F].any(1))[0]})
     params = dict(kind=f'circle skirt cut from {cut / (2 * np.pi):g} of a circle', cut_rad=cut, length_m=length,
                   waist_radius_m=r_band, waist_circumference_m=2 * np.pi * r_band, pattern_inner_radius_m=r_in,
                   hem_circumference_m=cut * (r_in + length),
                   smooth_cone_flare_deg=float(np.degrees(np.arcsin(sa))),
                   hem_weight_kg_m=hem_weight_kg_m, hem_weight_total_kg=hem_weight_kg_m * cut * (r_in + length),
                   natural_waist_height_rest_m=z_w, bound_hem=binding, binding_tris=binding_tris,
+                  slits_deg=[float(s) for s in slits], slit_top_m=slit_top if len(slits) else None, slit_lips=lips,
                   waistband=('on the dress form\'s waist outline + %g m' % band_clearance if body.waist is not None
                              else 'round, the abdomen capsule + %g m' % band_clearance),
                   pattern='ring sector sewn at centre back, centre front on the straight grain',
@@ -811,7 +861,8 @@ def sash_band(body: Body, knot_deg=55.0, top=(0.025, 0.02), bottom=(0.035, 0.06)
 def draped_sash(body: Body, pose0, knot_deg=55.0, top=(0.025, 0.02), bottom=(0.035, 0.06), gather=1.9, folds=4,
                 clearance=0.018, knot_r=0.028, knot_tilt_deg=25.0,
                 tails=((0.55, 0.06, 0.13, 0.03), (0.75, 0.06, 0.13, -0.03)), tail_slant_deg=35.0, h=0.006,
-                h_tail=0.012, envelope=None, margin=0.018, fold_drift=1.0, seed=0) -> Garment:
+                h_tail=0.012, envelope=None, margin=0.018, fold_drift=1.0, seed=0, hold='edges', tack_every=0.08,
+                share=None) -> Garment:
     """A draped sash knotted at the hip. The band (sash_band) is a strip of soft satin gathered across its width into
     `folds` folds of unequal depth, which drift across it fold_drift times round the waist (its cut width `gather` times the 6-10 cm it covers), held along both edges
     `clearance` off the body on a slant that falls toward the knot at the left hip, so it covers the skirts' waistbands;
@@ -824,7 +875,12 @@ def draped_sash(body: Body, pose0, knot_deg=55.0, top=(0.025, 0.02), bottom=(0.0
     The sash goes on over the skirts, as one tied on after the skirt hangs: `envelope(theta, z) -> r` (radial_envelope
     of the dressed skirts, rest frame) tilts each tail out from the hip until it starts `margin` outside their cloth.
     The skirts' cloth under the band is pressed under it by the run that dresses them (it lies within the band's
-    reach of the body, sash_band)."""
+    reach of the body, sash_band).
+
+    hold='top' holds the band's top edge all round and tacks its bottom edge every tack_every round the waist, so the
+    gathered cloth between the tacks can settle into its own folds; 'edges' (the default) holds both edges all round.
+    share sets one pelvis share for every held part (band, knot and tails), so that a twist of the torso turns the
+    sash as one piece; None keeps the shares above."""
     z_top, z_bot, base, axis_x = sash_band(body, knot_deg, top, bottom, clearance)
     env = envelope if envelope is not None else (lambda th, z: np.zeros(np.broadcast(th, z).shape))
     tk = math.radians(knot_deg)
@@ -854,13 +910,21 @@ def draped_sash(body: Body, pose0, knot_deg=55.0, top=(0.025, 0.02), bottom=(0.0
         X[i] = T[i] + np.interp(t_rows, t, sf)[:, None] * c + (chord[i] * np.interp(t_rows, t, d))[:, None] * out
     band = grid(develop(X, common_rows=True), warp=(1.0, 0.0))
     Xb = X.transpose(1, 0, 2).reshape(-1, 3)              # vertex k is grid point (k % n_i, k // n_i)
+    assert hold in ('edges', 'top'), hold
+    one = share
     share = 0.5 + 0.3 * np.repeat(t_rows, n_i)            # the pelvis's share: half at the top edge, 0.8 at the bottom
     ends = np.r_[band.rings['left'], band.rings['right']]
     share[ends] = 0.8
-    pins = np.unique(np.r_[band.rings['start'], band.rings['end'], ends])
+    if one is not None:
+        share[:] = one
+    k_tail = 0.8 if one is None else one
+    held_bottom = band.rings['end'] if hold == 'edges' else band.rings['end'][::max(1, int(round(tack_every / h)))]
+    pins = np.unique(np.r_[band.rings['start'], held_bottom, ends])
     gs = [Garment('sash_band', band, _BlendAttachment(body, Xb, segs, share).targets(*pose0), pins,
                   _BlendAttachment(body, Xb[pins], segs, share[pins]),
-                  dict(kind='draped sash band, held along both edges', gather=gather, folds=folds,
+                  dict(kind='draped sash band, held along both edges' if hold == 'edges' else
+                       f'draped sash band, held along its top edge and tacked every {tack_every:g} m along its bottom',
+                       gather=gather, folds=folds,
                        width_on_body_m=[float(chord.min()), float(chord.max())], vertices=band.n_vertices))]
 
     # the knot: a held bundle over the band's ends, its long axis along the waist tilted down toward the front
@@ -881,7 +945,7 @@ def draped_sash(body: Body, pose0, knot_deg=55.0, top=(0.025, 0.02), bottom=(0.0
          + R[..., None] * (np.cos(v)[:, None, None] * e2 + flat_back * np.sin(v)[:, None, None] * e3))
     knot = grid(develop(K), warp=(1.0, 0.0), wrap=True)
     Xk = K[:-1].transpose(1, 0, 2).reshape(-1, 3)
-    held_k = _BlendAttachment(body, Xk, segs, np.full(len(Xk), 0.8))
+    held_k = _BlendAttachment(body, Xk, segs, np.full(len(Xk), k_tail))
     gs.append(Garment('sash_knot', knot, held_k.targets(*pose0), np.arange(knot.n_vertices), held_k,
                       dict(kind='sash knot, held', radius_m=knot_r, vertices=knot.n_vertices)))
 
@@ -906,8 +970,8 @@ def draped_sash(body: Body, pose0, knot_deg=55.0, top=(0.025, 0.02), bottom=(0.0
         Xtv = Xt.transpose(1, 0, 2).reshape(-1, 3)
         top_ids = np.asarray(tail.rings['start'])
         gs.append(Garment(f'sash_tail_{k}', tail,
-                          _BlendAttachment(body, Xtv, segs, np.full(len(Xtv), 0.8)).targets(*pose0), top_ids,
-                          _BlendAttachment(body, Xtv[top_ids], segs, np.full(len(top_ids), 0.8)),
+                          _BlendAttachment(body, Xtv, segs, np.full(len(Xtv), k_tail)).targets(*pose0), top_ids,
+                          _BlendAttachment(body, Xtv[top_ids], segs, np.full(len(top_ids), k_tail)),
                           dict(kind='sash tail', length_m=L, width_m=[w0, w1], tilt_deg=float(np.degrees(alpha)),
                                vertices=tail.n_vertices)))
     G, offs = combine(gs, 'draped_sash', dict(kind='draped sash knotted at the hip', knot_deg=knot_deg, gather=gather,

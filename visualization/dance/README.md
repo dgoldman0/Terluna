@@ -137,13 +137,14 @@ Designed by hand (choices in the code, judged on renders):
   0.5 mm weave, below a pixel at these framings, made 80-sample stills come back black on the integrated GPU;
 - the stage: matte black Marley (roughness 0.52 to 0.68), a curved cyclorama with an emitted dusk wash (amber horizon
   to deep indigo), a black ground row at its foot, light haze;
-- the lighting (`--light stage`, the default): booms at shin, mid and head height on both sides (warm amber stage left,
-  steel blue stage right, 2.2-2.7 kW each), a soft front key several times dimmer than a boom, a high back rim of
-  4.2 kW, a top pool that follows the dancer, graded with AgX's medium-high contrast. Under it the skin turns orange or
-  blue-grey with the side it faces and the face goes dark when it turns from the booms to the camera, which reads as
-  jarring changes of skin tone between frames. `--light soft` (proposed 3 November) pales the booms' colours and sets
-  them at 0.8 of their power, makes the key five times as strong, adds a soft fill from the camera's side, halves the
-  rim and grades with AgX's base contrast;
+- the lighting (`--light soft`, the default since 3 November): booms at shin, mid and head height on both sides (a pale
+  warm tint stage left, a pale cool one stage right) at 0.8 of the stage rig's power, the shin-level pair at 0.4 so the
+  legs light like the rest of her, a soft front key of 950 W, a soft fill from the camera's side, a high back rim of
+  2.1 kW and a top pool that follows the dancer, graded with AgX's base contrast. `--light stage`, the earlier rig, has
+  the booms in warm amber stage left and steel blue stage right (2.2-2.7 kW each), a key several times dimmer than a
+  boom, a 4.2 kW rim and AgX's medium-high contrast; under it the skin turns orange or blue-grey with the side it faces
+  and the face goes dark when it turns from the booms to the camera, which reads as jarring changes of skin tone between
+  frames;
 - the camera: 50 mm at f/2.8 following the smoothed centre of mass (across the floor with sigma 0.8 s, in height with
   sigma 0.35 s, aimed 6 cm above it). Phrases in place: 5.5 m away at a 30 deg bearing from the dancer's front, 1.1 m
   high. Travelling phrases (more than 1 m of travel): 6.8 m away, square to the travel so the line reads in profile.

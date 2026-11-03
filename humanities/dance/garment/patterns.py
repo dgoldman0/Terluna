@@ -210,6 +210,31 @@ def sector(r_in: float, r_out: float, angle: float, h: float, warp=None, hem=Non
     return Piece(F, UV, V, warp=tuple(warp), rings=rings, vertex_uv=vuv, corner_rot=ROT)
 
 
+def slit(piece: Piece, path, side) -> tuple[Piece, np.ndarray]:
+    """The piece cut open along `path`, a chain of vertices joined by mesh edges from the slit's closed end to the
+    piece's edge: every vertex of the chain after the first is split in two, and the triangles marked by `side` (a
+    (T,) bool, those on one side of the chain) take the copies, so the cut's two lips can part while its end stays
+    whole. A copy keeps its vertex's pattern position, so every triangle keeps its flat shape. Returns the cut piece
+    and the copies' indices in the chain's order; the rings are kept as they were."""
+    path = np.asarray(path, np.int64)
+    edges = set(map(tuple, mesh_edges(piece.F).tolist()))
+    for a, b in zip(path[:-1].tolist(), path[1:].tolist()):
+        if (min(a, b), max(a, b)) not in edges:
+            raise ValueError(f'the slit leaves the mesh edges between vertices {a} and {b}')
+    cut = path[1:]
+    copies = np.arange(piece.n_vertices, piece.n_vertices + len(cut))
+    to_copy = np.full(piece.n_vertices, -1, np.int64)
+    to_copy[cut] = copies
+    F = piece.F.copy()
+    mF = to_copy[F]
+    take = np.asarray(side, bool)[:, None] & (mF >= 0)
+    F[take] = mF[take]
+    vuv = None if piece.vertex_uv is None else np.concatenate([piece.vertex_uv, piece.vertex_uv[cut]])
+    rot = None if piece.corner_rot is None else piece.corner_rot.copy()
+    return Piece(F, piece.UV.copy(), piece.n_vertices + len(cut), warp=piece.warp,
+                 rings={k: list(v) for k, v in piece.rings.items()}, vertex_uv=vuv, corner_rot=rot), copies
+
+
 def grid(P, warp=(1.0, 0.0), wrap: bool = False) -> Piece:
     """A pattern piece on a structured grid of flat positions P (ni, nj, 2), i along u and j along v, each cell split
     along alternating diagonals as in rectangle(). With wrap=True the last column is the first one again across a

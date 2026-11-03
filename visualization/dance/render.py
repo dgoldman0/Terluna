@@ -1501,12 +1501,13 @@ def add_light(name, kind, loc, target, energy, color, size=None, spot_deg=None, 
 # The stage's lighting (--light). stage: side light from booms, amber from stage left and blue from stage right
 # (2.2-2.7 kW each), a 4.2 kW rim from behind and a soft key in front several times dimmer than a boom, graded with
 # AgX's medium-high contrast; the dancer's skin turns orange or blue-grey with the side it faces and her face dark
-# when it turns from the booms to the camera. soft: the booms paler and at 0.8 of their power, a key five times as
-# strong, a soft fill from the camera's side, half the rim and AgX's base contrast (a proposal of 3 November).
+# when it turns from the booms to the camera. soft (the default since 3 November): the booms paler and at 0.8 of their
+# power, the shin-level pair at half that again so the legs light like the rest of her, a key five times as strong, a
+# soft fill from the camera's side, half the rim and AgX's base contrast.
 LIGHT_RIGS = ('stage', 'soft')
 
 
-def build_stage(cam_az_deg=30.0, centre=(0.0, 0.0), R=7.5, light='stage'):
+def build_stage(cam_az_deg=30.0, centre=(0.0, 0.0), R=7.5, light='soft'):
     sc = bpy.context.scene
     # floor: black Marley, matte with a soft sheen and faint seams between the strips
     bpy.ops.mesh.primitive_plane_add(size=40.0, location=(0, 0, 0))
@@ -1595,15 +1596,17 @@ def build_stage(cam_az_deg=30.0, centre=(0.0, 0.0), R=7.5, light='stage'):
     vol.inputs['Anisotropy'].default_value = 0.45
     w.node_tree.links.new(vol.outputs['Volume'], w.node_tree.nodes['World Output'].inputs['Volume'])
     # lights: side light from booms (warm stage left, cool stage right), soft key, rim, top pool. The 'soft' rig
-    # (LIGHT_RIGS) evens the skin out: the booms' colours paler and their power 0.8, a key five times as strong, a
-    # soft fill from the camera's side and half the rim.
+    # (LIGHT_RIGS) evens the skin out: the booms' colours paler and their power 0.8 (the shin-level pair 0.4, which
+    # had left the legs pale beside the rest of her), a key five times as strong, a soft fill from the camera's side and
+    # half the rim.
     soft = light == 'soft'
     warm, cool = ((1.0, 0.86, 0.72), (0.78, 0.85, 1.0)) if soft else ((1.0, 0.70, 0.42), (0.50, 0.64, 1.0))
     lights = []
     for side, colr, y in (('SL', warm, 4.2), ('SR', cool, -4.2)):
         for lvl, z, e in (('shin', 0.35, 1400), ('mid', 1.45, 1700), ('head', 2.45, 1500)):
+            scale = (0.4 if lvl == 'shin' else 0.8) if soft else 1.0
             lights.append(add_light(f'boom_{side}_{lvl}', 'SPOT', (0.0, y, z), (0.0, 0.0, max(z * 0.6, 0.5)),
-                                    e * 1.6 * (0.8 if soft else 1.0), colr, spot_deg=36, blend=0.45, soft=0.16))
+                                    e * 1.6 * scale, colr, spot_deg=36, blend=0.45, soft=0.16))
     lights.append(add_light('key_soft', 'AREA', (5.2 * math.cos(math.radians(30) + 0.25), 5.2 * math.sin(math.radians(30) + 0.25), 4.2),
                             (0, 0, 1.1), 950 if soft else 190, (1.0, 0.93, 0.86), size=(2.4, 2.4)))
     if soft:
@@ -1622,7 +1625,7 @@ def build_stage(cam_az_deg=30.0, centre=(0.0, 0.0), R=7.5, light='stage'):
     return floor, cyc, lights, rig_
 
 
-def setup_render(preset, out_path, n_frames, light='stage'):
+def setup_render(preset, out_path, n_frames, light='soft'):
     sc = bpy.context.scene
     sc.render.hair_type = 'STRAND'
     sc.render.hair_subdiv = 1
@@ -2139,7 +2142,7 @@ def main():
     ap.add_argument('--cam-az', type=float, default=None)
     ap.add_argument('--cam-dist', type=float, default=None)
     ap.add_argument('--cam-aim', type=float, default=0.06)
-    ap.add_argument('--light', default='stage', choices=LIGHT_RIGS)
+    ap.add_argument('--light', default='soft', choices=LIGHT_RIGS)
     ap.add_argument('--cam-fstop', type=float, default=2.8)
     ap.add_argument('--save-scene', default='')
     args = ap.parse_args(argv)

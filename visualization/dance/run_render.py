@@ -96,8 +96,8 @@ def main(argv=None) -> int:
                     help='STYLE[,NECKLINE]: make the bodice a shell over the torso (structured, ruched or pleated; '
                          'sweetheart, vee or straight neckline), coloured by --bodice')
     ap.add_argument('--trim', default='0.70,0.52,0.25', help="sRGB r,g,b of the bodice shell's piped edge")
-    ap.add_argument('--light', choices=['stage', 'soft'], default='stage',
-                    help='the lighting: stage (side light from coloured booms, the default) or soft (an even, stronger front light)')
+    ap.add_argument('--light', choices=['stage', 'soft'], default='soft',
+                    help='the lighting: soft (an even, stronger front light, the default) or stage (side light from coloured booms)')
     a = ap.parse_args(argv)
     if a.rebuild or not Path(a.dancer).exists():
         rc = blender(['build', '--blend', a.dancer, '--report-dir', a.report_dir])
@@ -133,8 +133,7 @@ def main(argv=None) -> int:
         args += ['--samples', a.samples]
     if a.bodice_shell:
         args += ['--bodice-shell', a.bodice_shell, '--trim', a.trim]
-    if a.light != 'stage':
-        args += ['--light', a.light]
+    args += ['--light', a.light]
     return blender(args)
 
 

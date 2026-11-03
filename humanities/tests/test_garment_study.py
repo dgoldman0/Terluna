@@ -477,3 +477,77 @@ def test_skirt_hem_binding_is_its_last_strip():
     assert len(bt) > 0 and all(set(G.piece.F[t]) & hem for t in bt)
     assert plain.params['binding_tris'] == [] and plain.extra_mass is None
     assert G.extra_mass.sum() == pytest.approx(0.002 * G.params['hem_circumference_m'], rel=1e-9)
+
+
+def test_slits_open_a_skirt_from_its_hem_to_their_tops():
+    """Side slits cut a half circle open from the hem up to slit_top down the pattern, at the requested angles: each
+    slit's two lips are open edges of the cloth that meet at its closed top, start on one another, end on the hem and
+    are bound like it; the pattern itself is unchanged."""
+    from humanities.dance.garment.body import Body
+    from humanities.dance.garment.garments import skirt
+    body = Body()
+    p0 = (body.origin, np.tile([1.0, 0.0, 0.0, 0.0], (len(body.names), 1)))
+    kw = dict(cut=math.pi, length=0.4, h=0.04, binding=True, binding_kg_m=0.002)
+    plain = skirt(body, p0, **kw)
+    G = skirt(body, p0, slits=(90.0, -90.0), slit_top=0.2, **kw)
+    lips = G.params['slit_lips']
+    assert len(lips) == 2
+    assert G.piece.n_vertices == plain.piece.n_vertices + sum(len(lo) - 1 for lo, _ in lips)
+    assert G.piece.area() == pytest.approx(plain.piece.area(), rel=1e-12)
+    assert len(G.piece.rings['outer']) == len(plain.piece.rings['outer']) + 2
+    e = np.sort(G.piece.F[:, [0, 1, 1, 2, 2, 0]].reshape(-1, 2), 1)
+    u, n = np.unique(e, axis=0, return_counts=True)
+    open_edges = {tuple(x) for x in u[n == 1].tolist()}
+    uv = G.piece.vertex_uv
+    r_in = G.params['pattern_inner_radius_m']
+    sp = {s['name']: s for s in body.spec['segments']}
+    axis_x = sp['abdomen']['origin'][0] + sp['abdomen']['capsules'][0]['a'][0]
+    hem = set(G.piece.rings['outer'])
+    for (lo, up), deg in zip(lips, (90.0, -90.0)):
+        assert lo[0] == up[0] and len(lo) == len(up) > 3
+        for lip in (lo, up):
+            assert all((min(a, b), max(a, b)) in open_edges for a, b in zip(lip[:-1], lip[1:]))
+            assert lip[-1] in hem
+        assert not any(set(t) >= {a, b} for t in G.piece.F.tolist() for a, b in zip(lo[1:], up[1:]))
+        assert np.allclose(G.X0[lo], G.X0[up])
+        top = np.hypot(*uv[lo[0]]) - r_in
+        assert 0.2 - 1e-9 <= top < 0.2 + 0.04
+        X = G.X0[lo[0]]
+        assert abs(math.degrees(math.atan2(X[1], X[0] - axis_x)) - deg) < 6.0
+    lip_v = {v for lo, up in lips for v in lo[1:] + up[1:]}
+    bt = set(G.params['binding_tris'])
+    assert all(k in bt for k, t in enumerate(G.piece.F.tolist()) if lip_v & set(t))
+    assert G.extra_mass.sum() == pytest.approx(plain.extra_mass.sum() + 4 * 0.002 * 0.2, rel=1e-9)
+
+
+def test_tacked_sash_holds_its_top_edge_and_turns_as_one_piece():
+    """hold='top' keeps the band's top edge held all round and tacks its bottom edge about every tack_every; with one
+    share, a twist of the torso turns every held point of the sash (band, knot, tails) by the same angle, where the
+    default shares turn the top edge further than the bottom."""
+    from humanities.dance.garment.body import Body
+    from humanities.dance.garment.garments import draped_sash
+    body = Body()
+    body.waist, axis_x, z_w = _oval_waist(body)
+    p0 = (body.origin, np.tile([1.0, 0.0, 0.0, 0.0], (len(body.names), 1)))
+    kw = dict(h=0.012, h_tail=0.03)
+    E = draped_sash(body, p0, **kw)
+    T = draped_sash(body, p0, hold='top', tack_every=0.08, share=0.8, **kw)
+    assert T.piece.n_vertices == E.piece.n_vertices
+    pins = set(np.asarray(T.pinned).tolist())
+    top, bottom = T.piece.rings['p0_start'], T.piece.rings['p0_end']
+    assert set(top) <= pins and set(bottom) <= set(np.asarray(E.pinned).tolist())
+    tacks = [v for v in bottom if v in pins]
+    assert 6 <= len(tacks) <= len(bottom) / 5                                # every 7th point at h = 12 mm
+    gaps = np.linalg.norm(np.diff(T.X0[tacks], axis=0), axis=1)
+    assert 0.06 < np.median(gaps) < 0.10
+    assert np.allclose(T.attachment.targets(*p0), T.X0[T.pinned], atol=1e-9)
+    quat = p0[1].copy()
+    k = body.index['abdomen']
+    quat[k] = [math.cos(math.radians(10.0)), 0.0, 0.0, math.sin(math.radians(10.0))]   # 20 degrees about the vertical
+    o = body.origin[k]
+    turned = lambda G: np.degrees(np.angle(np.exp(1j * (
+        np.arctan2(*(G.attachment.targets(p0[0], quat) - o)[:, [1, 0]].T)
+        - np.arctan2(*(G.X0[G.pinned] - o)[:, [1, 0]].T)))))
+    t_one, t_rows = turned(T), turned(E)
+    assert np.ptp(t_one) < 1e-6 and t_one[0] == pytest.approx(math.degrees(np.angle(0.8 + 0.2 * np.exp(1j * math.radians(20.0)))))
+    assert np.ptp(t_rows) > 1.0
