@@ -87,7 +87,8 @@
     "Oceanus Procellarum": {
      "water_km2": 1867965.051509287,
      "median_month_range_m": 3.6019325256347656,
-     "equilibrium_median_month_range_m": 3.2996838092803955,
+     "equilibrium_median_month_range_m": 3.5777863908614465,
+     "equilibrium_2026_2045_median_month_range_m": 3.2996838092803955,
      "largest_speed_m_s": 1.6136611209145981,
      "p99_largest_speed_m_s": 0.7155937585217773,
      "bed_dissipation_w": 6769028000.584543,
@@ -96,7 +97,8 @@
     "Mare Imbrium": {
      "water_km2": 616177.2617612511,
      "median_month_range_m": 1.9999306797981262,
-     "equilibrium_median_month_range_m": 3.2484991550445557,
+     "equilibrium_median_month_range_m": 2.001469809371918,
+     "equilibrium_2026_2045_median_month_range_m": 3.2484991550445557,
      "largest_speed_m_s": 0.10049603702803313,
      "p99_largest_speed_m_s": 0.05897533256818114,
      "bed_dissipation_w": 1676509.2081194269,
@@ -105,7 +107,8 @@
     "Mare Frigoris": {
      "water_km2": 774479.1759630777,
      "median_month_range_m": 4.16312837600708,
-     "equilibrium_median_month_range_m": 3.341610908508301,
+     "equilibrium_median_month_range_m": 3.942952296532481,
+     "equilibrium_2026_2045_median_month_range_m": 3.341610908508301,
      "largest_speed_m_s": 0.1307881896320063,
      "p99_largest_speed_m_s": 0.04633723701483992,
      "bed_dissipation_w": 2900299.5019752895,
@@ -114,7 +117,8 @@
     "Mare Serenitatis": {
      "water_km2": 330032.2691602771,
      "median_month_range_m": 3.6809884309768677,
-     "equilibrium_median_month_range_m": 4.085676193237305,
+     "equilibrium_median_month_range_m": 3.5812121571500404,
+     "equilibrium_2026_2045_median_month_range_m": 4.085676193237305,
      "largest_speed_m_s": 0.09474247466693386,
      "p99_largest_speed_m_s": 0.05437925643825281,
      "bed_dissipation_w": 626066.5358305131,
@@ -123,7 +127,8 @@
     "Mare Tranquillitatis": {
      "water_km2": 223559.50745032556,
      "median_month_range_m": 5.261080503463745,
-     "equilibrium_median_month_range_m": 4.9411725997924805,
+     "equilibrium_median_month_range_m": 5.370939542430372,
+     "equilibrium_2026_2045_median_month_range_m": 4.9411725997924805,
      "largest_speed_m_s": 0.46350547671318054,
      "p99_largest_speed_m_s": 0.11542472795783495,
      "bed_dissipation_w": 9743686.05919527,
@@ -132,7 +137,8 @@
     "Mare Crisium": {
      "water_km2": 192153.18425163973,
      "median_month_range_m": 2.1117237210273743,
-     "equilibrium_median_month_range_m": 4.660308361053467,
+     "equilibrium_median_month_range_m": 4.421330412810919,
+     "equilibrium_2026_2045_median_month_range_m": 4.660308361053467,
      "largest_speed_m_s": 1.8084229086583898,
      "p99_largest_speed_m_s": 0.10471681389374624,
      "bed_dissipation_w": 78011786.88195449,
@@ -141,7 +147,8 @@
     "Mare Fecunditatis": {
      "water_km2": 238312.37252331714,
      "median_month_range_m": 2.905454635620117,
-     "equilibrium_median_month_range_m": 5.435040473937988,
+     "equilibrium_median_month_range_m": 5.260578358694367,
+     "equilibrium_2026_2045_median_month_range_m": 5.435040473937988,
      "largest_speed_m_s": 2.225568337574541,
      "p99_largest_speed_m_s": 0.17864033153349243,
      "bed_dissipation_w": 335389987.46618515,
@@ -150,7 +157,8 @@
     "Mare Nectaris": {
      "water_km2": 90186.5946601837,
      "median_month_range_m": 6.583414077758789,
-     "equilibrium_median_month_range_m": 6.0837836265563965,
+     "equilibrium_median_month_range_m": 6.429064309043229,
+     "equilibrium_2026_2045_median_month_range_m": 6.0837836265563965,
      "largest_speed_m_s": 0.10211479119759591,
      "p99_largest_speed_m_s": 0.045470236377118785,
      "bed_dissipation_w": 73894.73495734349,
@@ -159,7 +167,8 @@
     "Mare Nubium": {
      "water_km2": 321054.7047837935,
      "median_month_range_m": 8.717270374298096,
-     "equilibrium_median_month_range_m": 5.955994606018066,
+     "equilibrium_median_month_range_m": 7.634507664966151,
+     "equilibrium_2026_2045_median_month_range_m": 5.955994606018066,
      "largest_speed_m_s": 0.05829639951378105,
      "p99_largest_speed_m_s": 0.04554305622683406,
      "bed_dissipation_w": 1139631.7151095662,
@@ -168,7 +177,8 @@
     "Mare Humorum": {
      "water_km2": 123956.26570677834,
      "median_month_range_m": 6.839855194091797,
-     "equilibrium_median_month_range_m": 5.732571125030518,
+     "equilibrium_median_month_range_m": 6.330289854106477,
+     "equilibrium_2026_2045_median_month_range_m": 5.732571125030518,
      "largest_speed_m_s": 0.05614680502275802,
      "p99_largest_speed_m_s": 0.04145848225400103,
      "bed_dissipation_w": 169818.45376917222,
@@ -177,7 +187,8 @@
     "Mare Cognitum": {
      "water_km2": 68407.12157290398,
      "median_month_range_m": 7.836551189422607,
-     "equilibrium_median_month_range_m": 5.280167579650879,
+     "equilibrium_median_month_range_m": 6.928619627788747,
+     "equilibrium_2026_2045_median_month_range_m": 5.280167579650879,
      "largest_speed_m_s": 0.11945598266988042,
      "p99_largest_speed_m_s": 0.0757451912910006,
      "bed_dissipation_w": 1210680.426398746,
@@ -186,7 +197,8 @@
     "Mare Undarum": {
      "water_km2": 1738.28567749657,
      "median_month_range_m": 2.5800013542175293,
-     "equilibrium_median_month_range_m": 4.360858917236328,
+     "equilibrium_median_month_range_m": 3.716035476300264,
+     "equilibrium_2026_2045_median_month_range_m": 4.360858917236328,
      "largest_speed_m_s": 0.002232647880037776,
      "p99_largest_speed_m_s": 0.0016450687424943108,
      "bed_dissipation_w": 0.4126632557304291,
@@ -195,7 +207,8 @@
     "Mare Spumans": {
      "water_km2": 7461.827810974901,
      "median_month_range_m": 3.487496852874756,
-     "equilibrium_median_month_range_m": 4.728249549865723,
+     "equilibrium_median_month_range_m": 4.089985497403739,
+     "equilibrium_2026_2045_median_month_range_m": 4.728249549865723,
      "largest_speed_m_s": 0.11594736948609352,
      "p99_largest_speed_m_s": 0.03631983190718684,
      "bed_dissipation_w": 7582.557099573751,
@@ -207,6 +220,540 @@
     "fecunditatis_basin": 138689035.004978,
     "western channels": 500646499.20762444,
     "Crisium passage": 73429319.82699528
+   },
+   "drag": 0.0025
+  },
+  "schism_cd0.0025": {
+   "snapshots": 1544,
+   "span_days": 192.875,
+   "months": [
+    {
+     "month": 1,
+     "model_range_m": 2.727889594642922,
+     "equilibrium_range_m": 4.448548721230868
+    },
+    {
+     "month": 2,
+     "model_range_m": 2.840859275608169,
+     "equilibrium_range_m": 4.67857590560604
+    },
+    {
+     "month": 3,
+     "model_range_m": 3.1908095352187065,
+     "equilibrium_range_m": 5.442272895619695
+    },
+    {
+     "month": 4,
+     "model_range_m": 3.4093578360354693,
+     "equilibrium_range_m": 5.677666766083177
+    },
+    {
+     "month": 5,
+     "model_range_m": 3.3380358658785565,
+     "equilibrium_range_m": 5.6894215426361345
+    },
+    {
+     "month": 6,
+     "model_range_m": 2.987606210497421,
+     "equilibrium_range_m": 5.214824505022698
+    },
+    {
+     "month": 7,
+     "model_range_m": 2.4727702772413642,
+     "equilibrium_range_m": 4.3856246782902275
+    }
+   ],
+   "median_month_range": {
+    "model_m": 2.987606210497421,
+    "equilibrium_m": 5.214824505022698
+   },
+   "bands": {
+    "monthly (25-35 d)": {
+     "gain": 0.6043859568829202,
+     "lag_deg": 31.330613844733108,
+     "reference_rms_m": 1.7147674712242194
+    },
+    "fortnightly (13-16 d)": {
+     "gain": 0.46821559572438,
+     "lag_deg": 57.304087426771495,
+     "reference_rms_m": 0.3007667065242124
+    },
+    "nine-day (8.5-10.5 d)": {
+     "gain": 0.7321487114604146,
+     "lag_deg": -15.597629217452056,
+     "reference_rms_m": 0.061339152125862585
+    }
+   },
+   "exchange": {
+    "largest_m3_s": 1524607.8867588227,
+    "equilibrium_largest_m3_s": 2767843.077411606,
+    "rms_m3_s": 696069.2878511504,
+    "equilibrium_rms_m3_s": 1170335.39713675
+   },
+   "sea_mean_level_spread_m": 1.5828816658747295e-05,
+   "zones": {
+    "western channels": {
+     "largest_speed_m_s": 2.336661783728981,
+     "median_daily_largest_m_s": 1.570895673056901,
+     "p95_daily_largest_m_s": 2.1577644477473066
+    },
+    "Crisium passage": {
+     "largest_speed_m_s": 1.8248261590890391,
+     "median_daily_largest_m_s": 1.224370270808968,
+     "p95_daily_largest_m_s": 1.739675926838159
+    }
+   },
+   "maria": {
+    "Oceanus Procellarum": {
+     "water_km2": 1865094.6306510803,
+     "median_month_range_m": 3.537546396255493,
+     "equilibrium_median_month_range_m": 3.5777863908614465,
+     "equilibrium_2026_2045_median_month_range_m": 3.2996838092803955,
+     "largest_speed_m_s": 1.367564290595918,
+     "p99_largest_speed_m_s": 0.407132331769912,
+     "bed_dissipation_w": 5574842308.820139,
+     "bed_dissipation_mw_m2": 2.9890399217298875
+    },
+    "Mare Imbrium": {
+     "water_km2": 616877.6681501929,
+     "median_month_range_m": 1.9778308272361755,
+     "equilibrium_median_month_range_m": 2.001469809371918,
+     "equilibrium_2026_2045_median_month_range_m": 3.2484991550445557,
+     "largest_speed_m_s": 0.13369496530647165,
+     "p99_largest_speed_m_s": 0.07083716786748027,
+     "bed_dissipation_w": 3440345.275308298,
+     "bed_dissipation_mw_m2": 0.005577030022216118
+    },
+    "Mare Frigoris": {
+     "water_km2": 769814.7317253553,
+     "median_month_range_m": 4.11230194568634,
+     "equilibrium_median_month_range_m": 3.942952296532481,
+     "equilibrium_2026_2045_median_month_range_m": 3.341610908508301,
+     "largest_speed_m_s": 0.10785476127396353,
+     "p99_largest_speed_m_s": 0.05462621472378164,
+     "bed_dissipation_w": 2293055.6725202156,
+     "bed_dissipation_mw_m2": 0.0029787110820559135
+    },
+    "Mare Serenitatis": {
+     "water_km2": 330375.8576582622,
+     "median_month_range_m": 3.7140634059906006,
+     "equilibrium_median_month_range_m": 3.5812121571500404,
+     "equilibrium_2026_2045_median_month_range_m": 4.085676193237305,
+     "largest_speed_m_s": 0.1490102354624803,
+     "p99_largest_speed_m_s": 0.07129066798895022,
+     "bed_dissipation_w": 1427294.1897308112,
+     "bed_dissipation_mw_m2": 0.004320213346845674
+    },
+    "Mare Tranquillitatis": {
+     "water_km2": 222876.14509073773,
+     "median_month_range_m": 5.286156415939331,
+     "equilibrium_median_month_range_m": 5.370939542430372,
+     "equilibrium_2026_2045_median_month_range_m": 4.9411725997924805,
+     "largest_speed_m_s": 0.5501705868484323,
+     "p99_largest_speed_m_s": 0.09376144933941681,
+     "bed_dissipation_w": 7499191.606792644,
+     "bed_dissipation_mw_m2": 0.03364734975894149
+    },
+    "Mare Crisium": {
+     "water_km2": 192443.97574001912,
+     "median_month_range_m": 2.8012564182281494,
+     "equilibrium_median_month_range_m": 4.421330412810919,
+     "equilibrium_2026_2045_median_month_range_m": 4.660308361053467,
+     "largest_speed_m_s": 1.8248261590890391,
+     "p99_largest_speed_m_s": 0.25459630642982445,
+     "bed_dissipation_w": 96964893.66800942,
+     "bed_dissipation_mw_m2": 0.5038603744032158
+    },
+    "Mare Fecunditatis": {
+     "water_km2": 238339.8738239381,
+     "median_month_range_m": 3.0645246505737305,
+     "equilibrium_median_month_range_m": 5.260578358694367,
+     "equilibrium_2026_2045_median_month_range_m": 5.435040473937988,
+     "largest_speed_m_s": 2.336661783728981,
+     "p99_largest_speed_m_s": 0.2862130054732518,
+     "bed_dissipation_w": 498910129.3787924,
+     "bed_dissipation_mw_m2": 2.093271769319379
+    },
+    "Mare Nectaris": {
+     "water_km2": 90481.96262118296,
+     "median_month_range_m": 6.5888831615448,
+     "equilibrium_median_month_range_m": 6.429064309043229,
+     "equilibrium_2026_2045_median_month_range_m": 6.0837836265563965,
+     "largest_speed_m_s": 0.06623381550769057,
+     "p99_largest_speed_m_s": 0.038717273240268864,
+     "bed_dissipation_w": 47212.72092502364,
+     "bed_dissipation_mw_m2": 0.0005217915212857082
+    },
+    "Mare Nubium": {
+     "water_km2": 321910.3681765362,
+     "median_month_range_m": 8.65532398223877,
+     "equilibrium_median_month_range_m": 7.634507664966151,
+     "equilibrium_2026_2045_median_month_range_m": 5.955994606018066,
+     "largest_speed_m_s": 0.06316253386955907,
+     "p99_largest_speed_m_s": 0.05039279800265378,
+     "bed_dissipation_w": 1458699.4782871902,
+     "bed_dissipation_mw_m2": 0.004531383958056413
+    },
+    "Mare Humorum": {
+     "water_km2": 124834.50058463513,
+     "median_month_range_m": 6.870945692062378,
+     "equilibrium_median_month_range_m": 6.330289854106477,
+     "equilibrium_2026_2045_median_month_range_m": 5.732571125030518,
+     "largest_speed_m_s": 0.04661944299102086,
+     "p99_largest_speed_m_s": 0.030561819842556348,
+     "bed_dissipation_w": 104158.06234911464,
+     "bed_dissipation_mw_m2": 0.000834369199710922
+    },
+    "Mare Cognitum": {
+     "water_km2": 67835.1833423899,
+     "median_month_range_m": 7.794114351272583,
+     "equilibrium_median_month_range_m": 6.928619627788747,
+     "equilibrium_2026_2045_median_month_range_m": 5.280167579650879,
+     "largest_speed_m_s": 0.12265442313101536,
+     "p99_largest_speed_m_s": 0.0849681134356648,
+     "bed_dissipation_w": 1566477.8578863768,
+     "bed_dissipation_mw_m2": 0.02309240987792086
+    },
+    "Mare Undarum": {
+     "water_km2": 1703.2448149795107,
+     "median_month_range_m": 3.1640456914901733,
+     "equilibrium_median_month_range_m": 3.716035476300264,
+     "equilibrium_2026_2045_median_month_range_m": 4.360858917236328,
+     "largest_speed_m_s": 0.001782231726129286,
+     "p99_largest_speed_m_s": 0.0017180981377077676,
+     "bed_dissipation_w": 0.48422562033530403,
+     "bed_dissipation_mw_m2": 2.842959603203777e-07
+    },
+    "Mare Spumans": {
+     "water_km2": 7418.634163097082,
+     "median_month_range_m": 3.4928784370422363,
+     "equilibrium_median_month_range_m": 4.089985497403739,
+     "equilibrium_2026_2045_median_month_range_m": 4.728249549865723,
+     "largest_speed_m_s": 0.09014375451251878,
+     "p99_largest_speed_m_s": 0.03166074631359908,
+     "bed_dissipation_w": 5513.99691657966,
+     "bed_dissipation_mw_m2": 0.0007432630852735988
+    }
+   },
+   "stations": {
+    "Oceanus Procellarum": {
+     "lat": 20.5,
+     "lon": -56.5,
+     "median_month_range_m": 3.753795623779297,
+     "equilibrium_median_month_range_m": 3.646416663021398,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 0.978914452841637,
+       "lag_deg": -0.39877370211074203,
+       "reference_rms_m": 1.2206983628946213
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 1.1718550212692975,
+       "lag_deg": -0.7087652745550077,
+       "reference_rms_m": 0.21149189380420372
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 1.236825430199423,
+       "lag_deg": 8.805927974887737,
+       "reference_rms_m": 0.03953930546993563
+      }
+     },
+     "short_period_rms_m": 0.01757277636260392
+    },
+    "Mare Imbrium": {
+     "lat": 34.5,
+     "lon": -15.0,
+     "median_month_range_m": 1.6766535639762878,
+     "equilibrium_median_month_range_m": 1.827982425028956,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 1.0133876258471914,
+       "lag_deg": -4.479816310919759,
+       "reference_rms_m": 0.5925320056030441
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 1.034612385614501,
+       "lag_deg": 0.41555359325973984,
+       "reference_rms_m": 0.10414240889223007
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 1.4835868746013234,
+       "lag_deg": 6.403280503221317,
+       "reference_rms_m": 0.02163551520057797
+      }
+     },
+     "short_period_rms_m": 0.0244278841284281
+    },
+    "Mare Frigoris": {
+     "lat": 57.5,
+     "lon": 0.0,
+     "median_month_range_m": 4.4333648681640625,
+     "equilibrium_median_month_range_m": 4.078176238611064,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 1.0378454344911714,
+       "lag_deg": -1.067878353222591,
+       "reference_rms_m": 1.4204131065698895
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 1.315414994934624,
+       "lag_deg": 9.97980848696235,
+       "reference_rms_m": 0.12360635568786618
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 1.2074460382025092,
+       "lag_deg": 25.879569779809177,
+       "reference_rms_m": 0.02830362666088012
+      }
+     },
+     "short_period_rms_m": 0.020024385667309647
+    },
+    "Mare Serenitatis": {
+     "lat": 27.5,
+     "lon": 18.5,
+     "median_month_range_m": 3.4166924953460693,
+     "equilibrium_median_month_range_m": 3.30090122590572,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 1.0585399946949112,
+       "lag_deg": 1.7003206939681008,
+       "reference_rms_m": 1.1786821739775748
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 0.927431038653453,
+       "lag_deg": 12.448772114410147,
+       "reference_rms_m": 0.2035582641373066
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 1.0287953233399834,
+       "lag_deg": 8.54020851667008,
+       "reference_rms_m": 0.03572529345365371
+      }
+     },
+     "short_period_rms_m": 0.033079626895703144
+    },
+    "Mare Crisium": {
+     "lat": 16.0,
+     "lon": 59.0,
+     "median_month_range_m": 2.6486896276474,
+     "equilibrium_median_month_range_m": 4.418161143573261,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 0.5529846757129392,
+       "lag_deg": 85.32020122763898,
+       "reference_rms_m": 1.5741550768200405
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 0.2368371645574772,
+       "lag_deg": 144.1348070702763,
+       "reference_rms_m": 0.2652588721220703
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 0.43499154670839707,
+       "lag_deg": 83.97647980831906,
+       "reference_rms_m": 0.05291377486414845
+      }
+     },
+     "short_period_rms_m": 0.005334079795052497
+    },
+    "Mare Fecunditatis": {
+     "lat": -7.8125,
+     "lon": 53.6875,
+     "median_month_range_m": 2.7204196453094482,
+     "equilibrium_median_month_range_m": 5.018769642723533,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 0.5658165762766922,
+       "lag_deg": 29.512701765780378,
+       "reference_rms_m": 1.7020364015949632
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 0.44803148426736344,
+       "lag_deg": 53.822301593328014,
+       "reference_rms_m": 0.3107175849681311
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 0.7510765731129841,
+       "lag_deg": -14.928675380399516,
+       "reference_rms_m": 0.06421014156478316
+      }
+     },
+     "short_period_rms_m": 0.012403157303662746
+    },
+    "Mare Nectaris": {
+     "lat": -15.125,
+     "lon": 34.625,
+     "median_month_range_m": 6.620165109634399,
+     "equilibrium_median_month_range_m": 6.382638247279914,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 1.01117203501081,
+       "lag_deg": 2.557854674999333,
+       "reference_rms_m": 2.208520700374456
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 0.9343928219343578,
+       "lag_deg": 5.904273476401268,
+       "reference_rms_m": 0.3648865445085851
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 1.060367041869263,
+       "lag_deg": 3.2418950057899916,
+       "reference_rms_m": 0.07479884945005415
+      }
+     },
+     "short_period_rms_m": 0.026485572230489966
+    },
+    "Mare Nubium": {
+     "lat": -20.5,
+     "lon": -17.5,
+     "median_month_range_m": 8.765441179275513,
+     "equilibrium_median_month_range_m": 7.806435780950656,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 1.105869604785482,
+       "lag_deg": 11.104297799881113,
+       "reference_rms_m": 2.652740420829768
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 1.2765011315741785,
+       "lag_deg": 28.931136020008726,
+       "reference_rms_m": 0.37874605127106725
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 1.2310112096419112,
+       "lag_deg": 28.97827338763375,
+       "reference_rms_m": 0.07947715147232587
+      }
+     },
+     "short_period_rms_m": 0.03524285670011454
+    },
+    "Mare Humorum": {
+     "lat": -24.5,
+     "lon": -38.5,
+     "median_month_range_m": 6.942390203475952,
+     "equilibrium_median_month_range_m": 6.368864082297174,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 1.0522666866678938,
+       "lag_deg": 15.173398436038063,
+       "reference_rms_m": 2.196285052451434
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 1.0166772222831881,
+       "lag_deg": 42.56789854904735,
+       "reference_rms_m": 0.3252323165436428
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 1.0889927345837653,
+       "lag_deg": 30.990169349699734,
+       "reference_rms_m": 0.06949700393236054
+      }
+     },
+     "short_period_rms_m": 0.04143468844860128
+    },
+    "Mare Cognitum": {
+     "lat": -10.5,
+     "lon": -22.5,
+     "median_month_range_m": 7.899044990539551,
+     "equilibrium_median_month_range_m": 7.026584867514843,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 1.0880837428203085,
+       "lag_deg": 13.313756445812334,
+       "reference_rms_m": 2.354787089106948
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 1.2045668903965503,
+       "lag_deg": 33.502782631316926,
+       "reference_rms_m": 0.34710185206804023
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 1.1416376032736362,
+       "lag_deg": 35.16624187416981,
+       "reference_rms_m": 0.07146643699923973
+      }
+     },
+     "short_period_rms_m": 0.023800082190784357
+    },
+    "Mare Spumans": {
+     "lat": 1.3125,
+     "lon": 65.3125,
+     "median_month_range_m": 3.467938184738159,
+     "equilibrium_median_month_range_m": 4.039061872872435,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 0.8155732111721011,
+       "lag_deg": 46.588954938845816,
+       "reference_rms_m": 1.3268268322544745
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 0.8673939093226514,
+       "lag_deg": 56.86965775021811,
+       "reference_rms_m": 0.27516595258312276
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 0.5980297381587016,
+       "lag_deg": -6.8678865568393785,
+       "reference_rms_m": 0.05567857119742962
+      }
+     },
+     "short_period_rms_m": 0.010892505236307158
+    },
+    "western channels": {
+     "lat": -6.0,
+     "lon": 39.75,
+     "median_month_range_m": 3.097514033317566,
+     "equilibrium_median_month_range_m": 6.099433953298737,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 0.5440764818378002,
+       "lag_deg": 11.50869966536586,
+       "reference_rms_m": 2.0220629195217787
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 0.2751769224976421,
+       "lag_deg": 7.034572624715817,
+       "reference_rms_m": 0.340527479354753
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 0.8656885745511439,
+       "lag_deg": -21.150500245442615,
+       "reference_rms_m": 0.06858677675060212
+      }
+     },
+     "short_period_rms_m": 0.008561176255652633
+    },
+    "Crisium passage": {
+     "lat": 8.625,
+     "lon": 57.125,
+     "median_month_range_m": 1.8776690363883972,
+     "equilibrium_median_month_range_m": 4.704523238576753,
+     "bands": {
+      "monthly (25-35 d)": {
+       "gain": 0.3630251140471947,
+       "lag_deg": 93.13360432455482,
+       "reference_rms_m": 1.6020060743783366
+      },
+      "fortnightly (13-16 d)": {
+       "gain": 0.15919066640382246,
+       "lag_deg": -153.14431218769076,
+       "reference_rms_m": 0.2779643615269787
+      },
+      "nine-day (8.5-10.5 d)": {
+       "gain": 0.2365162468093087,
+       "lag_deg": 81.22410948814264,
+       "reference_rms_m": 0.05595625928505511
+      }
+     },
+     "short_period_rms_m": 0.0068579900222019785
+    }
+   },
+   "bed_dissipation_w": {
+    "near_side_sea": 6489052730.784227,
+    "fecunditatis_basin": 272218654.7831562,
+    "western channels": 731045081.7463491,
+    "Crisium passage": 79210955.24832927
    },
    "drag": 0.0025
   }

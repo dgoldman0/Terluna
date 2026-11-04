@@ -6,7 +6,7 @@ equilibrium tide, and draws into out/ (kept out of Git):
 
 - level.png: the Fecunditatis basin's mean level through the analysed months, each model against the equilibrium;
 - range.png and range_sea.png: each model's median monthly range round Fecunditatis and over the whole Near-side Sea,
-  and the equilibrium's, on one colour scale;
+  and the equilibrium's over the same months, on one colour scale;
 - speed.png and speed_sea.png: each model's largest depth-averaged speed over the analysed months, round Fecunditatis
   and over the whole sea (outside the fine box the cells and triangles are up to half a degree).
 
@@ -94,10 +94,9 @@ def main():
     fig.savefig(OUT / "level.png", dpi=110, bbox_inches="tight")
     plt.close(fig)
 
-    with np.load(study.ROOT / "geography/products/tides_28pct_4ppd.npz", allow_pickle=False) as p:
-        lat_n, lon_n = p["lat_deg"][p["rows"]], p["lon_deg"][p["cols"]]
-        eq_range, body = p["monthly_range_median_m"].astype(float), p["labels"]
-    lon_n = np.where(lon_n > 180, lon_n - 360, lon_n)
+    # the equilibrium over the same analysed months as the runs (its 2026-2045 median differs by up to tens of per cent)
+    r0 = next(iter(runs.values()))
+    lat_n, lon_n, eq_range, _ = study.equilibrium_window_ranges(r0["t"][r0["t"] >= study.SPINUP_DAYS * 86400.0 - 1])
     ranges = {}
     for model, r in runs.items():
         months = r["month_max"].astype(float) - r["month_min"].astype(float)
@@ -105,17 +104,17 @@ def main():
         ranges[model] = np.median(months[filled], axis=0) if filled.any() else np.full(months.shape[1], np.nan)
     vmax = max(np.nanpercentile(x, 99.5) for x in ranges.values())
     speed_vmax = max(np.percentile(r["speed_max"], 99.9) for r in runs.values())
-    for view, suffix, marker in ((VIEW, "", 4), (VIEW_SEA, "_sea", 0.6)):
+    for view, suffix, marker in ((VIEW, "", 6), (VIEW_SEA, "_sea", 0.8)):
         aspect = np.ptp(view["lat"]) / np.ptp(view["lon"])
         panels = len(runs) + 1
         fig, axes = plt.subplots(1, panels, figsize=(5.2 * panels, 5.2 * aspect + 0.8), constrained_layout=True)
         for ax, (model, r) in zip(axes, runs.items()):
             im = draw(ax, r, ranges[model], vmin=0, vmax=vmax, cmap="viridis")
             ax.set_title(f"{model}: median monthly range")
-        sel = ((body == 433) & (lon_n > view["lon"][0] - 1) & (lon_n < view["lon"][1] + 1)
+        sel = ((lon_n > view["lon"][0] - 1) & (lon_n < view["lon"][1] + 1)
                & (lat_n > view["lat"][0] - 1) & (lat_n < view["lat"][1] + 1))
         axes[-1].scatter(lon_n[sel], lat_n[sel], c=eq_range[sel], s=marker, marker="s", lw=0, vmin=0, vmax=vmax, cmap="viridis")
-        axes[-1].set_title("equilibrium: median monthly range")
+        axes[-1].set_title("equilibrium, same months: median monthly range")
         for ax in axes:
             ax.set_xlim(*view["lon"]); ax.set_ylim(*view["lat"]); ax.set_aspect(1); ax.set_facecolor("#9a8f80")
         fig.colorbar(im, ax=axes, shrink=0.8, label="metres")

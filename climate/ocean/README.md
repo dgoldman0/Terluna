@@ -87,12 +87,35 @@ Before the long runs, [strait_numerics.py](strait_numerics.py) ran the study's f
 
 MITgcm does not depend on its step. SCHISM's sample filter, the setting its documentation suggests for coasts, estuaries and rivers, smooths the velocities once a step at a fixed strength, so its smoothing per unit time falls as the step grows and the straits' currents moved by up to 46% with the step. Its Smagorinsky-like filter (`ishapiro = 2`) sets each step's strength to 0.5 tanh(γ₀ Δt μ), μ the local deformation rate, which is proportional to the step while the tanh is unsaturated. A filter of strength s acting once a step on cells of size L diffuses momentum like a viscosity s L²/(4Δt), so γ₀ = 8√2 (2.2/π)² = 5.55 matches MITgcm's Smagorinsky viscosity; on triangles the conversion holds within a factor of order one. At that strength the straits' speeds hold within 3.3% from a 150 s to a 600 s step and each point's largest speed within 7% rms, against 13-46% and 26% under the sample filter, and the straits' currents at hour 21 come within 4-6% of MITgcm's. SCHISM's sample also forces at least ten backtracking sub-steps a step (`dtb_max = 30 s`); letting the flow choose them (`dtb_max` = the step) changed nothing that matters and halved its cost. The strait run takes both: a 300 s step, the Smagorinsky-like filter at γ₀ = 5.55 and the flow's sub-steps.
 
-MITgcm's run finished on 4 November in 3.6 hours on four processes; SCHISM's, about ten hours on four, follows, and both are recorded here when it ends. Each run also keeps the level through time at the centres of eleven maria and the two strait zones (the stations).
+### What the runs find
+
+Both models ran the 222.9 days on four processes, MITgcm in 3.6 hours and SCHISM in about 11, and they agree on Fecunditatis's tide within 5% ([results/ocean/fecunditatis.json](../results/ocean/fecunditatis.json)).
+
+- **The straits halve Fecunditatis's monthly tide and delay it by about two and a half days.** The basin's level swings 2.84–2.99 m in the median month (MITgcm, SCHISM) against 5.21 m in equilibrium. In the monthly band it carries 0.58–0.60 of the equilibrium's amplitude, 31–34° (2.4–2.6 days) behind, and in the fortnightly band 0.40–0.47, 57–69° (2.2–2.6 days) behind. The 9.61-day line, which geography's linear solver found resonating at 39 times its equilibrium height under weak friction, keeps 0.73–0.84 of it, within 16° of its phase, close to the solver's hundredfold-friction case (0.6): the passages' quadratic friction damps the resonance away.
+- **The western channels carry tidal races.** The basin's exchange peaks at 1.4–1.5 million m³/s against 2.8 million in equilibrium. The currents in the western channels reach 2.2–2.3 m/s, with a daily peak of 1.5–1.6 m/s on the median day and 2.1–2.2 m/s on the strongest twentieth of days; the Crisium passage reaches 1.8 m/s, 1.2–1.3 m/s on the median day. The bed in the western channels dissipates 0.5–0.7 GW of the Near-side Sea's 6.5–7.4 GW.
+- **Crisium, behind its passage, is choked further.** Its range is 0.48–0.63 of the equilibrium's over the same months, the two models' widest difference. At its centre the monthly tide arrives 85° (6.5 days) late and the fortnightly at a quarter of its equilibrium height (SCHISM's station).
+- **The open sea follows its equilibrium tide.** Over the same months Procellarum, Imbrium, Frigoris, Serenitatis, Tranquillitatis and Nectaris hold 0.98–1.06 of the equilibrium's median monthly range in both models, and their stations' monthly bands lie within 6% and 5° of it. The maps' low ranges over Imbrium and high ones in the south-west belong to the equilibrium tide of these months. Its two monthly lines, 27.55 and 27.21 days, beat over about six years and redraw the pattern, so the analysed months' equilibrium ranges differ from geography's 2026–2045 medians by −42% to +31% across the sea; each mare is compared with the equilibrium over the same months.
+- **The south-western maria swing 8–14% beyond their equilibrium.** Nubium, Humorum and Cognitum, joined to Imbrium by a neck across western Procellarum 120 m deep, take 1.08–1.14 of the equilibrium's range in both models, and their stations lag it by 11–15° in the monthly band and 29–43° in the fortnightly.
+- **Seiches and other motions under five days** hold 0.5–4 cm rms at the stations.
+
+| | MITgcm | SCHISM | Equilibrium, same months |
+|---|---|---|---|
+| Fecunditatis basin, median monthly range | 2.84 m | 2.99 m | 5.21 m |
+| Monthly band: gain, lag | 0.58, 34° | 0.60, 31° | |
+| Fortnightly band | 0.40, 69° | 0.47, 57° | |
+| Nine-day band | 0.84, 1° | 0.73, −16° | |
+| Exchange through the straits, largest | 1.41 million m³/s | 1.52 million m³/s | 2.77 million m³/s |
+| Western channels: largest speed; median daily peak | 2.23; 1.48 m/s | 2.34; 1.57 m/s | |
+| Crisium passage | 1.81; 1.31 m/s | 1.82; 1.22 m/s | |
+| Bed dissipation: Near-side Sea; western channels | 7.4; 0.50 GW | 6.5; 0.73 GW | |
+| Crisium, median monthly range | 2.11 m | 2.80 m | 4.42 m |
+
+The models differ most where the passages' staircase coasts and the cube of the speed weigh most: by 46% in the western channels' dissipation and 30% in Crisium's range. The stations come from SCHISM's run alone; MITgcm's run predates them. Each run keeps the level through time at the centres of eleven maria and the two strait zones.
 
 ## Limits
 
 - The seas are fresh water at one density; no temperature, salinity or stratification enters the tide runs.
-- The floor is LOLA's at 16 px/deg above the geoid, without the crust's subsidence under the water's load (10-30% of the depth under large seas, geography's estimate), which would deepen the sills.
+- The floor is LOLA's at 16 px/deg and the water level the atlas's, on the dry Moon's geoid. Geography's sea-level equation ([geography/README.md](../../geography/README.md), The crust's response to the water) finds that with 28% cover held, the water's own gravity and the crust's elastic sag leave the western channels within 2 m of their 109 m, deepen the Crisium passage from 155 m to 197 m and shoal the south-western maria's neck from 120 m to 86 m. The water also turns the Moon by about 8°, which moves the tide's pattern across the seas (the Moon's orientation study, research/studies/moon_orientation on main). The atlas work redraws the floor and the level; a screen with geography's linear solver on that geography decides whether these runs repeat.
 - Both models resolve the straits with 1/16-degree cells (about 1.9 km); channels narrower than a few cells are rendered as staircases, and the two models' different treatments of those staircases measure part of the uncertainty.
 - The water's self-attraction is the equilibrium tide's (9% of the forcing on the largest seas), held fixed through each run.
 
@@ -102,3 +125,4 @@ MITgcm's run finished on 4 November in 3.6 hours on four processes; SCHISM's, ab
 - MITgcm's forcing package's bulk formulas audited for Earth terms before any atmosphere-forced run.
 - One lunar-night convection column against the sea-oxygen study's Procellarum column.
 - The South Pole-Aitken sea's Tenebrarum sub-basin, geography's other strait, on the same footing.
+- A screen of the strait study with geography's linear solver on the deformed, turned geography of the atlas work, which decides whether its two runs repeat.

@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
@@ -48,6 +49,23 @@ def write_gr3(path, mesh: Mesh, values, title, boundaries=True):
                 out.write(f"{len(loop)} {0 if k == 0 else 1} = Number of nodes for land boundary {k + 1}\n")
                 for n in loop:
                     out.write(f"{n + 1}\n")
+
+
+def chunk_steps(start_s, span_s, dt, output_s, file_s):
+    """A chunk's steps in each output file (ihfskip) and between hotstarts (nhot_write).
+
+    A full chunk takes file_s's files and one hotstart at its end. A shorter last chunk takes files of the largest
+    number of steps dividing both its length and its first step, so that a continued run's files line up with its
+    start, and, since SCHISM writes a hotstart whenever the run's own step count is a multiple of nhot_write, a
+    hotstart interval equal to its last step."""
+    steps, per_file = int(round(span_s / dt)), int(round(file_s / dt))
+    if steps % per_file == 0:
+        return per_file, steps
+    first = int(round(start_s / dt))
+    per_file = math.gcd(steps, first)
+    if per_file % int(round(output_s / dt)):
+        raise ValueError("a chunk must hold a whole number of output files (nhot_write a multiple of ihfskip)")
+    return per_file, first + steps
 
 
 def param_nml(values: dict, opt_extra: dict) -> str:
@@ -129,13 +147,13 @@ class Experiment:
 
     def _param(self, start_s, span_s, hot):
         nspool = int(round(self.output_s / self.dt))
-        ihfskip = int(round(self.file_s / self.dt))
+        ihfskip, nhot_write = chunk_steps(start_s, span_s, self.dt, self.output_s, self.file_s)
         values = dict(ipre=0, ibc=1, ibtp=0, rnday=(start_s + span_s) / 86400.0, dt=self.dt, nspool=nspool,
                       ihfskip=ihfskip, ics=2, ihot=2 if hot else 0, dramp=self.ramp_days,
                       nchi=0, ncor=1 if self.rotation else 0, coricoef=0.0, nadv=1 if self.advection else 0,
                       ic_elev=1 if (self.initial_eta is not None and not hot) else 0, h0=0.01, thetai=0.6,
                       itur=0, ihorcon=0, ishapiro=self.filter_mode if self.advection else 0, indvel=0, inunfl=0, nws=0,
-                      ihconsv=0, isconsv=0, iloadtide=0, nhot=1, nhot_write=int(round(span_s / self.dt)),
+                      ihconsv=0, isconsv=0, iloadtide=0, nhot=1, nhot_write=nhot_write,
                       rearth_pole=lunar.RADIUS, rearth_eq=lunar.RADIUS,
                       dtb_max=self.btrack_max_s, dtb_min=self.btrack_min_s,
                       shapiro0=self.filter_strength if self.filter_mode == 1 else 0.5,

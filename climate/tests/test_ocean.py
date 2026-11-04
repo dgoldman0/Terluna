@@ -260,3 +260,13 @@ def test_recorded_schism_checks():
         assert abs(record["channel"]["model_over_analytic"]) < 0.005
     if "seiches_smythii_uniform" in record:
         assert all(abs(m["relative_difference"]) < 0.06 for m in record["seiches_smythii_uniform"]["modes"])
+
+
+def test_schism_last_shorter_chunk_lines_up_its_files_and_ends_on_a_hotstart():
+    from climate.ocean import schism
+    assert schism.chunk_steps(0.0, 864000.0, 300.0, 10800.0, 864000.0) == (2880, 2880)          # a full chunk
+    assert schism.chunk_steps(17280000.0, 864000.0, 300.0, 10800.0, 864000.0) == (2880, 2880)
+    # the strait run's last 2.875 days from day 220: one file per snapshot, a hotstart at its last step only
+    assert schism.chunk_steps(19008000.0, 248400.0, 300.0, 10800.0, 864000.0) == (36, 64188)
+    with pytest.raises(ValueError):
+        schism.chunk_steps(19008000.0, 249000.0, 300.0, 10800.0, 864000.0)                    # ends between two snapshots

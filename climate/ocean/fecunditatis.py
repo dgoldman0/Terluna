@@ -322,9 +322,10 @@ def run_schism(drag=lunar.DRAG, until_s=None, smoke=False, exp=None):
             path.unlink()
         reducer.save()
 
+    # the run ends on the last snapshot at or before the analysed months' end, where MITgcm's last snapshot falls
+    until = math.floor((86400.0 if smoke else until_s or end_s()) / OUTPUT_S + 1e-9) * OUTPUT_S
     timed(exp.run, lambda: exp.chunks_done()[-1]["end_s"] if exp.chunks_done() else 0.0,
-          86400.0 if smoke else until_s or end_s(), (SMOKE_CHUNK_DAYS if smoke else CHUNK_DAYS) * 86400.0, exp.dt,
-          after_chunk=after_chunk)
+          until, (SMOKE_CHUNK_DAYS if smoke else CHUNK_DAYS) * 86400.0, exp.dt, after_chunk=after_chunk)
     return exp
 
 
@@ -373,18 +374,41 @@ def weighted_median(values, weights):
     return float(values[order][np.searchsorted(cum, cum[-1] / 2)])
 
 
-def maria_summary(lat, lon, area, point_range, speed_max, power):
-    """The Near-side Sea's maria from one run: each one's water area, median monthly range against the equilibrium's
-    (geography's product, each sea's volume held), largest speeds and the bed's dissipation. Outside the fine box the
-    cells and triangles are up to half a degree, so narrow passages there are not resolved."""
-    index, names = assign_maria(lat, lon)
+def equilibrium_window_ranges(t_s):
+    """Geography's equilibrium tide (each sea's volume held, self-attraction included) at the Near-side Sea's atlas
+    nodes: their latitudes and longitudes, the median monthly range over the analysed months at times t_s, and the
+    product's own median over 2026-2045. The two monthly lines (27.55 and 27.21 days) beat over about six years, so
+    the analysed months' ranges differ from the long median by -42% to +31% (5-95%) across the sea; a run's months
+    are compared with the equilibrium over the same months."""
     with np.load(ROOT / "geography/products/tides_28pct_4ppd.npz", allow_pickle=False) as product:
         n_lat, n_lon = product["lat_deg"][product["rows"]], product["lon_deg"][product["cols"]]
-        eq_range, body = product["monthly_range_median_m"].astype(float), product["labels"]
+        basis, body = product["basis"].astype(float), product["labels"]
+        long_range = product["monthly_range_median_m"].astype(float)
     n_lon = np.where(n_lon > 180, n_lon - 360, n_lon)
-    near = body == 433
-    eq_index, _ = assign_maria(n_lat[near], n_lon[near])
-    eq_w = np.cos(np.radians(n_lat[near]))
+    near = np.flatnonzero(body == 433)
+    coefs = forcing.ephemeris_series(t_s)
+    months = []
+    for k in range(MONTHS):
+        a = (SPINUP_DAYS + k * MONTH_DAYS) * 86400.0
+        sel = (t_s >= a) & (t_s < a + MONTH_DAYS * 86400.0)
+        if sel.sum() >= 100:
+            months.append(sel)
+    window = np.empty(len(near))
+    for i in range(0, len(near), 8000):                 # 8,000 nodes at a time, about 100 MB of series
+        eq = coefs @ basis[:, near[i:i + 8000]]
+        window[i:i + 8000] = np.median(np.stack([np.ptp(eq[sel], axis=0) for sel in months]), axis=0)
+    return n_lat[near], n_lon[near], window, long_range[near]
+
+
+def maria_summary(lat, lon, area, point_range, speed_max, power, t_s):
+    """The Near-side Sea's maria from one run: each one's water area, median monthly range against the equilibrium's
+    over the same months (geography's tide, each sea's volume held; the product's 2026-2045 median beside it), largest
+    speeds and the bed's dissipation. Outside the fine box the cells and triangles are up to half a degree, so narrow
+    passages there are not resolved."""
+    index, names = assign_maria(lat, lon)
+    e_lat, e_lon, eq_range, eq_long = equilibrium_window_ranges(t_s)
+    eq_index, _ = assign_maria(e_lat, e_lon)
+    eq_w = np.cos(np.radians(e_lat))
     out = {}
     for k, name in enumerate(names):
         m = (index == k) & np.isfinite(point_range)
@@ -393,7 +417,8 @@ def maria_summary(lat, lon, area, point_range, speed_max, power):
             continue
         out[name] = dict(water_km2=float(area[m].sum() / 1e6),
                          median_month_range_m=weighted_median(point_range[m], area[m]),
-                         equilibrium_median_month_range_m=weighted_median(eq_range[near][e], eq_w[e]) if e.sum() >= 5 else None,
+                         equilibrium_median_month_range_m=weighted_median(eq_range[e], eq_w[e]) if e.sum() >= 5 else None,
+                         equilibrium_2026_2045_median_month_range_m=weighted_median(eq_long[e], eq_w[e]) if e.sum() >= 5 else None,
                          largest_speed_m_s=float(speed_max[m].max()),
                          p99_largest_speed_m_s=float(np.percentile(speed_max[m], 99)),
                          bed_dissipation_w=float(power[m].sum()),
@@ -500,7 +525,7 @@ def analyse_case(folder, area_of, fec_area_m2, eq_mean, eq_t):
     ranges = r["month_max"].astype(float) - r["month_min"].astype(float)
     filled = np.isfinite(ranges).all(axis=1)
     point_range = np.median(ranges[filled], axis=0) if filled.any() else np.full(ranges.shape[1], np.nan)
-    return dict(snapshots=int(n), span_days=float((t_s[-1] - t_s[0]) / 86400.0), point_range=point_range,
+    return dict(snapshots=int(n), span_days=float((t_s[-1] - t_s[0]) / 86400.0), point_range=point_range, t_s=t_s,
                 speed_max=r["speed_max"].astype(float),
                 station_series=(t_s, r["station_eta"], [str(x) for x in r["station_names"]], r["station_index"])
                 if "station_eta" in r else None,
@@ -539,7 +564,7 @@ def analyse():
                 continue
             basin = lookup(t, labels, lat, lon)
             power = out.pop("speed_cube_mean") * out.pop("rho") * drag * area
-            out["maria"] = maria_summary(lat, lon, area, out.pop("point_range"), out.pop("speed_max"), power)
+            out["maria"] = maria_summary(lat, lon, area, out.pop("point_range"), out.pop("speed_max"), power, out.pop("t_s"))
             series = out.pop("station_series")
             if series is not None:
                 st, eta, names, index = series

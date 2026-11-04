@@ -482,7 +482,7 @@
         "Sea temperature gradients, mixing and currents; the existing climate uses a slab ocean or fixed sea-surface temperatures.",
         "Spectral underwater light, including diffuse incidence, water absorption/scattering and dissolved/particulate/biological constituents; euphotic and aphotic definitions must be explicit."
       ],
-      "next_session_task": "The author's order of 2026-10-03 is done: the nearside sea's waves, the geography tide product and the synthesis README (climate/waves/README.md). Open, with recommendations: further lunar cycles and the South Pole-Aitken sea's waves; the tide's water level in the coastal and run-up calculations and Mare Fecunditatis's strait at 16 px/deg; a 0.5-degree basin for Smythii-Marginis; a Janssen drag-and-growth run; a wider frequency band for weak seas; sediment and beach evolution on regolith coasts; the seas' composition and density (author); vertical heat, mixing and underwater light columns."
+      "next_session_task": "The author's order of 2026-10-03 is done: the nearside sea's waves, the geography tide product and the synthesis README (climate/waves/README.md). Open, with recommendations: further lunar cycles and the South Pole-Aitken sea's waves; the tide's water level in the coastal and run-up calculations and Mare Fecunditatis's strait at 16 px/deg (run 4 November in MITgcm and SCHISM, climate/ocean on domain/hydrosphere: the passages' friction halves the basin's monthly tide and damps the 9.61-day resonance); a 0.5-degree basin for Smythii-Marginis; a Janssen drag-and-growth run; a wider frequency band for weak seas; sediment and beach evolution on regolith coasts; the seas' composition and density (author); vertical heat, mixing and underwater light columns."
     },
     {
       "topic": "geography",
@@ -514,7 +514,7 @@
       ],
       "unresolved": [
         "polar cold-trapping",
-        "the water's own gravity and the crust's sag in the atlas's shorelines: sized in geography/README.md ('The crust's response to the water', 2026-11-04) but not carried into the products. At today's water the seas cover 26.4% within years, and 23.7-25.6% if the mantle flows beneath a lithosphere of 20-150 km; holding 28% takes 0.89 million km3 more at first and 1.4-2.6 million km3 if the mantle flows. No measurement gives today's lithosphere or upper-mantle viscosity. The atlas work carries them into the shorelines when it is done (2026-11-04)",
+        "the water's own gravity and the crust's sag in the atlas's shorelines: sized in geography/README.md ('The crust's response to the water', 2026-11-04) but not carried into the products. At today's water the seas cover 26.4% within years, and 23.7-25.6% if the mantle flows beneath a lithosphere of 20-150 km; holding 28% takes 0.89 million km3 more at first and 1.4-2.6 million km3 if the mantle flows. No measurement gives today's lithosphere or upper-mantle viscosity; computed from published present-day temperature profiles (geology lane, domain/geology) the deep floors stay within tens of metres of the elastic sag for millions of years unless the shallow mantle is as warm as the warmest profile. The atlas work carries them into the shorelines when it is done (2026-11-04)",
         "erosion and sediment",
         "groundwater storage in the porous crust, which sets the delivered inventory for 28% cover and how much of the rain lakes keep",
         "polar heights from the LOLA polar stereographic grids",
