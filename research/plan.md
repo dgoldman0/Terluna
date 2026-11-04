@@ -561,7 +561,7 @@ Each irreversible step waits for the record it destroys, so the gates in the stu
 
 The atlas at the selected 28% water share places everything. Its next refinements are:
 
-- groundwater storage in the porous crust and crustal loading, which fix the delivered inventory and the shoreline;
+- groundwater storage in the porous crust, and whether to carry the water's own gravity and the crust's sag ([geography](../geography/README.md#the-crusts-response-to-the-water)) into the atlas, which together fix the delivered inventory and the shoreline;
 - lake levels from each catchment's rainfall and evaporation in a climate run at 28%;
 - LOLA polar stereographic grids for the cold traps.
 

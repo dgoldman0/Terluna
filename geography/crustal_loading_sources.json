@@ -1,0 +1,100 @@
+{
+  "source_admission": "Published values used in love_numbers.py, crustal_loading.py and the README's section on the crust's response to the water, each with how far it was read on 2026-11-04. The search was bounded to one radial interior model, the elastic thickness under the mare basins, the lunar mantle's viscosity and the sea-level equation's method. No outside dataset or full paper is committed. Values marked open are stated brackets that the reading did not settle.",
+  "interior_model": {
+    "source": "briaud2023_tidal",
+    "about": "Category 4a medians of Briaud et al. 2023 (Table 4), with the crust and mantle of their Table 2, which follow Williams et al. 2014. Rigidity is the source's; it gives no compressional velocity (its ALMA code treats the Moon as incompressible). love_numbers.py carries the crust to the Moon's 1737.4 km and takes a Poisson solid (nu = 0.25) for the compressible case. Shear velocities implied: crust 2.43 km/s, mantle 4.41 km/s, low-viscosity zone 2.70 km/s.",
+    "layers": [
+      {"name": "core", "top_km": 355.0, "density_kg_m3": 5223.0, "rigidity_pa": 0.0, "viscosity_pa_s": null},
+      {"name": "low-viscosity zone", "top_km": 500.0, "density_kg_m3": 3405.0, "rigidity_pa": 2.48e10, "viscosity_pa_s": 2.0e16},
+      {"name": "mantle", "top_km": 1690.0, "density_kg_m3": 3380.0, "rigidity_pa": 6.56e10, "viscosity_pa_s": 1.0e21},
+      {"name": "crust", "top_km": 1737.1, "density_kg_m3": 2700.0, "rigidity_pa": 1.60e10, "viscosity_pa_s": null}
+    ]
+  },
+  "sources": [
+    {
+      "key": "briaud2023_tidal",
+      "citation": "Briaud A, Fienga A, Melini D, Rambaux N, Mémin A, Spada G, Saliby C, Hussmann H, Stark A, Viswanathan V, Baguet D 2023, Constraints on the lunar core viscosity from tidal deformation (arXiv:2301.04035v1, 10 January 2023)",
+      "doi_or_url": "https://arxiv.org/abs/2301.04035",
+      "use": "interior_model: layer radii, densities and rigidities; the mantle's adopted viscosity of 1e21 Pa s; the low-viscosity zone's radius, density and viscosity",
+      "values_used": {
+        "crust": {"top_km": 1737.1, "density_kg_m3": 2700, "rigidity_pa": 1.60e10},
+        "mantle": {"top_km": 1690, "density_kg_m3": 3380, "rigidity_pa": 6.56e10, "viscosity_pa_s": 1e21},
+        "low_viscosity_zone": {"top_km": 500, "density_kg_m3": 3405, "rigidity_pa": 2.48e10, "viscosity_pa_s": 2.0e16, "abstract_constraint": "radius 500 +/- 1 km, viscosity (4.5 +/- 0.8)e16 Pa s, density 3400 +/- 10 kg/m3"},
+        "core_category_4a": {"top_km": 355, "density_kg_m3": 5223}
+      },
+      "access": "arXiv preprint: abstract, model set-up (section 2), Table 2 and Table 4 read 2026-11-04; the mantle viscosity is adopted in the paper by analogy with Earth's post-glacial rebound (an Earth value, not a lunar measurement); the journal version was not checked"
+    },
+    {
+      "key": "williams2014_grail_interior",
+      "citation": "Williams JG et al. 2014, Lunar interior properties from the GRAIL mission, Journal of Geophysical Research: Planets 119, 1546-1578 (doi:10.1002/2013JE004559)",
+      "doi_or_url": "https://doi.org/10.1002/2013JE004559",
+      "use": "named by Briaud et al. 2023 as the source of their crust and mantle densities and rigidities",
+      "values_used": {},
+      "access": "not read; cited through Briaud et al. 2023"
+    },
+    {
+      "key": "garcia2019_review",
+      "citation": "Garcia RF, Khan A, Drilleau M et al. 2019, Lunar seismology: an update on interior structure models, Space Science Reviews 215, 50 (doi:10.1007/s11214-019-0613-y)",
+      "doi_or_url": "http://jupiter.ethz.ch/~akhan/amir/Publications_files/Garcia_etal19.pdf",
+      "use": "validation of the interior's k2 and h2: the measured monthly values carry an anelastic part; with Q proportional to frequency^0.3 the elastic (infinite-frequency) k2 is 0.02294 +/- 0.00018 (0.02248 +/- 0.00072 for exponents 0.1-0.4) and the elastic h2 from LOLA 0.0353 +/- 0.0031",
+      "values_used": {"k2_elastic_alpha_0_3": 0.02294, "k2_elastic_alpha_0_3_sd": 0.00018, "k2_elastic_alpha_0_1_0_4": 0.02248, "k2_elastic_alpha_0_1_0_4_sd": 0.00072, "h2_lola_elastic_alpha_0_3": 0.0353, "h2_lola_elastic_alpha_0_3_sd": 0.0031},
+      "access": "author's PDF: section 2.1 and Table 5 read 2026-11-04"
+    },
+    {
+      "key": "weber2011_core",
+      "citation": "Weber RC, Lin P-Y, Garnero EJ, Williams Q, Lognonné P 2011, Seismic detection of the lunar core, Science 331, 309-312 (doi:10.1126/science.1199375)",
+      "doi_or_url": "https://doi.org/10.1126/science.1199375",
+      "use": "context for the interior: a partially molten layer to 480 km radius, a fluid outer core to 330 km and a solid inner core to 240 km; their model gives k2 = 0.0232 and h2 = 0.0406",
+      "values_used": {"k2_model": 0.0232, "h2_model": 0.0406},
+      "access": "main text read 2026-11-04 (the full model is in its supplement, not read)"
+    },
+    {
+      "key": "takeuchi_saito1972",
+      "citation": "Takeuchi H, Saito M 1972, Seismic surface waves, in Methods in Computational Physics 11, 217-295",
+      "doi_or_url": "https://doi.org/10.1016/B978-0-12-460811-5.50010-6",
+      "use": "the static spheroidal equations of a self-gravitating elastic sphere (love_numbers.Interior.matrix) and the Love-number boundary conditions",
+      "values_used": {},
+      "access": "method as widely reproduced; not reread. Checked in tests against the closed-form Love numbers of a homogeneous incompressible sphere"
+    },
+    {
+      "key": "turcotte1981_shell",
+      "citation": "Turcotte DL, Willemann RJ, Haxby WF, Norberry J 1981, Role of membrane stresses in the support of planetary topography, Journal of Geophysical Research 86(B5), 3951-3959",
+      "doi_or_url": "https://doi.org/10.1029/JB086iB05p03951",
+      "use": "the thin elastic shell: deflection w_n = q_n a^4 (L - 1 + nu) / (D (L^3 - 4 L^2) + E Te a^2 (L - 2)), L = n(n + 1)",
+      "values_used": {},
+      "access": "equation as reproduced in later reviews; not reread. Checked in tests against a thick elastic shell over the same relaxed interior"
+    },
+    {
+      "key": "elastic_thickness_maria",
+      "citation": "Mascon flexure as reviewed by Solomon SC, Head JW 1980, Lunar mascon basins: lava filling, tectonics, and evolution of the lithosphere, Reviews of Geophysics 18, 107-141, and quoted by the GRAIL-era study of the Grimaldi basin (Icarus, 2017, ScienceDirect S0019103516304924); Variations in lunar elastic thickness from admittance spectral analysis, Icarus 403, 115631, 2023 (doi:10.1016/j.icarus.2023.115631)",
+      "doi_or_url": "https://doi.org/10.1029/RG018i001p00107",
+      "use": "TE_CASES_M: flexure of the mare loads needs about 50 km under Serenitatis, Nectaris and Imbrium, 35 km under Crisium, 30 km under Humorum and Smythii and about 20 km under smaller basins, with 50-75 km under Imbrium in another analysis; GRAIL and LOLA admittance gives 13-72 km, mean 29 km, its reliable values away from the maria",
+      "values_used": {"mascon_flexure_km": [20, 75], "grail_admittance_km": [13, 72], "grail_admittance_mean_km": 29},
+      "access": "search summaries only, 2026-11-04: the mascon numbers as quoted there, without checking which of the two works each comes from; the 2023 admittance study's abstract as summarised (its authors not checked). Neither paper read. A GRAIL-era estimate under the nearside maria themselves was not found in the time allowed: open. These thicknesses record the lithosphere when the mare basalts loaded it, 3-3.8 billion years ago; today's colder lithosphere is likely thicker"
+    },
+    {
+      "key": "flexure_moduli",
+      "citation": "Conventional moduli of lunar flexure studies (Young's modulus 100 GPa, Poisson's ratio 0.25)",
+      "doi_or_url": "",
+      "use": "YOUNG_PA, POISSON: the shell's rigidity D = E Te^3 / 12 (1 - nu^2), so that a published Te gives the rigidity its study inferred",
+      "values_used": {"young_pa": 1.0e11, "poisson": 0.25},
+      "access": "design assumption: the usual values, not checked against the two Te sources (open). The interior's seismic rigidities give E of 40 GPa in the crust and 164 GPa in the mantle"
+    },
+    {
+      "key": "mantle_viscosity",
+      "citation": "Briaud et al. 2023 (above); Harada Y et al. 2014, Strong tidal heating in an ultralow-viscosity zone at the core-mantle boundary of the Moon, Nature Geoscience 7, 569-572 (doi:10.1038/ngeo2211)",
+      "doi_or_url": "https://doi.org/10.1038/ngeo2211",
+      "use": "VISCOSITY_CASES_PA_S: the mantle under the lithosphere bracketed at 1e20-1e22 Pa s around the 1e21 adopted by Briaud et al.; the zone at the core's top near 2e16 Pa s (Harada et al.) to 4.5e16 (Briaud et al.)",
+      "values_used": {"mantle_pa_s": [1e20, 1e21, 1e22], "low_viscosity_zone_pa_s": [2e16, 4.5e16]},
+      "access": "Harada et al.: abstract as summarised by search, 2026-11-04. The mantle bracket is open: the only value read is an Earth analogy, and the mascons' survival for billions of years says the cold upper mantle and lithosphere are stiffer still"
+    },
+    {
+      "key": "sea_level_equation",
+      "citation": "Farrell WE, Clark JA 1976, On postglacial sea level, Geophysical Journal of the Royal Astronomical Society 46, 647-667; Mitrovica JX, Milne GA 2003, On post-glacial sea level: I. General theory, Geophysical Journal International 154, 253-267",
+      "doi_or_url": "https://doi.org/10.1111/j.1365-246X.2003.01942.x",
+      "use": "the method of crustal_loading.solve: the sea surface an equipotential of the deformed Moon and its water, the water thickness the sea surface less the deformed floor wherever positive, the volume or the area held by a uniform shift, iterated as the shoreline moves",
+      "values_used": {},
+      "access": "method as known; neither paper reread"
+    }
+  ]
+}
