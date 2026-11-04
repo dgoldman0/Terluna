@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "f356bcc3c883c63ada44a2a15f01a24f04e2d093d810ab7ab3d430a17c77a2ee",
+      "research/studies/world_economy/amenities_inputs.json": "506de45c8a4c22219a3cd4e449c14adaff0d9874d53adadd93781da26d691b81",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "88bbd8f62e879c9c89aa65f99f351bef9ec62cdc84c58f490fe40288315ff566"
+        "sha256": "b885746c3fe5574913bdb4e58b84e02a47c75a8099dd27c9370b34bad97f720a"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "a97dcb37c0b3933d9590adb84a19c1bfe917d4f32190b3742c6ffbf6cb6f7b61"
+        "sha256": "2fc6bc4ca371d441e0bd9e17ddb7a493bc379418bf336c039a2770285ae702e9"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "c94d952a5c448419f92b92b491898f418dde62990207096089ac426ca848d8bf"
+        "sha256": "83546444ab15e8aa9276576c6f72da0c00de80ac9c899bbcb4a5fc45f76831c4"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "5083b4fa8c18862119f2d20ce6ac7778f90b88b5fb8cd728c4ea949cc88dd3eb"
+        "sha256": "1146ec36643f523f24162bb6cad649c5c10218fb3f72a4eecbca3c6d6c64da13"
       }
     }
   },
