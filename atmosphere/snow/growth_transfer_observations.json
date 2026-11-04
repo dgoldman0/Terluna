@@ -828,7 +828,7 @@
     },
     "climate_binding": {
       "inputs": {
-        "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64"
+        "research/studies/climate_targets/results/climate_targets.json": "0a60a067056d33d11b051601bb8336bbe515c8425cd9f71f59eb60c68d9244d5"
       }
     },
     "rows": [

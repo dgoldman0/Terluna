@@ -13,12 +13,12 @@
       "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
       "atmosphere/snow/column_diagnosis.py": "b43a5b7d43989b0333670b06e29e44978e4a705db3d560406cf73bd1f4d4993b",
       "atmosphere/snow/column_diagnosis.cpp": "855402ab6642d695e15f867b1ba59174df7cc2ba1c11a66dfc6ac033181b3386",
-      "atmosphere/snow/column_diagnosis_runs.py": "e3a53a64486597b8eca157fac477af8bfb0bb0353dd409aaf43684d001e56ab8",
-      "atmosphere/snow/event_column_benchmarks.py": "1f5a405594900319bb4b9fe34d332215cc422e8739848ee0a7ab46cc930cd2b9",
+      "atmosphere/snow/column_diagnosis_runs.py": "57d9f1bf06bbec3d16319bc4b8a3c0f0f1c7cbc9400c879e4361466d540f0d5d",
+      "atmosphere/snow/event_column_benchmarks.py": "c641830dff69fd5d7a1f71756e9c67e905dc95ff087be352099d59894456fa9d",
       "atmosphere/snow/column_diagnosis_aggregation_only.py": "6ccf06ad51e23d62b4359d6d335055a14be345b79026549eb7aaf3223828d8c8"
     },
     "inputs": {
-      "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64"
+      "research/studies/climate_targets/results/climate_targets.json": "0a60a067056d33d11b051601bb8336bbe515c8425cd9f71f59eb60c68d9244d5"
     },
     "constants": {
       "AVOGADRO": 6.02214076e+23,
@@ -34,11 +34,11 @@
   },
   "baseline": {
     "path": "atmosphere/snow/results/event_column.json",
-    "sha256": "87eb3591b353bc7240b95c8a07151870311c4540f3c5dc0659a555446fdcd4aa"
+    "sha256": "1668a8238dd850befa948328f1dac628ed00d22359202d0a9e539f4d4e7c86c2"
   },
   "primary_diagnosis": {
     "path": "atmosphere/snow/results/column_diagnosis.json",
-    "sha256": "852700921d47d2ce8a0223fe54b51f8fc515a82f9709bec5d6dbe751f591c9ad"
+    "sha256": "079dbca6e1f4c633ffa3fc62efc5701159e1b8b8f161a009418c8c85168390e0"
   },
   "expected_cases": 8,
   "completed_cases": 8,
@@ -74,11 +74,11 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
           "atmosphere/snow/column_diagnosis.py": "b43a5b7d43989b0333670b06e29e44978e4a705db3d560406cf73bd1f4d4993b",
           "atmosphere/snow/column_diagnosis.cpp": "855402ab6642d695e15f867b1ba59174df7cc2ba1c11a66dfc6ac033181b3386",
-          "atmosphere/snow/column_diagnosis_runs.py": "e3a53a64486597b8eca157fac477af8bfb0bb0353dd409aaf43684d001e56ab8",
-          "atmosphere/snow/event_column_benchmarks.py": "1f5a405594900319bb4b9fe34d332215cc422e8739848ee0a7ab46cc930cd2b9"
+          "atmosphere/snow/column_diagnosis_runs.py": "57d9f1bf06bbec3d16319bc4b8a3c0f0f1c7cbc9400c879e4361466d540f0d5d",
+          "atmosphere/snow/event_column_benchmarks.py": "c641830dff69fd5d7a1f71756e9c67e905dc95ff087be352099d59894456fa9d"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64"
+          "research/studies/climate_targets/results/climate_targets.json": "0a60a067056d33d11b051601bb8336bbe515c8425cd9f71f59eb60c68d9244d5"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -5958,11 +5958,11 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
           "atmosphere/snow/column_diagnosis.py": "b43a5b7d43989b0333670b06e29e44978e4a705db3d560406cf73bd1f4d4993b",
           "atmosphere/snow/column_diagnosis.cpp": "855402ab6642d695e15f867b1ba59174df7cc2ba1c11a66dfc6ac033181b3386",
-          "atmosphere/snow/column_diagnosis_runs.py": "e3a53a64486597b8eca157fac477af8bfb0bb0353dd409aaf43684d001e56ab8",
-          "atmosphere/snow/event_column_benchmarks.py": "1f5a405594900319bb4b9fe34d332215cc422e8739848ee0a7ab46cc930cd2b9"
+          "atmosphere/snow/column_diagnosis_runs.py": "57d9f1bf06bbec3d16319bc4b8a3c0f0f1c7cbc9400c879e4361466d540f0d5d",
+          "atmosphere/snow/event_column_benchmarks.py": "c641830dff69fd5d7a1f71756e9c67e905dc95ff087be352099d59894456fa9d"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64"
+          "research/studies/climate_targets/results/climate_targets.json": "0a60a067056d33d11b051601bb8336bbe515c8425cd9f71f59eb60c68d9244d5"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -11842,11 +11842,11 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
           "atmosphere/snow/column_diagnosis.py": "b43a5b7d43989b0333670b06e29e44978e4a705db3d560406cf73bd1f4d4993b",
           "atmosphere/snow/column_diagnosis.cpp": "855402ab6642d695e15f867b1ba59174df7cc2ba1c11a66dfc6ac033181b3386",
-          "atmosphere/snow/column_diagnosis_runs.py": "e3a53a64486597b8eca157fac477af8bfb0bb0353dd409aaf43684d001e56ab8",
-          "atmosphere/snow/event_column_benchmarks.py": "1f5a405594900319bb4b9fe34d332215cc422e8739848ee0a7ab46cc930cd2b9"
+          "atmosphere/snow/column_diagnosis_runs.py": "57d9f1bf06bbec3d16319bc4b8a3c0f0f1c7cbc9400c879e4361466d540f0d5d",
+          "atmosphere/snow/event_column_benchmarks.py": "c641830dff69fd5d7a1f71756e9c67e905dc95ff087be352099d59894456fa9d"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64"
+          "research/studies/climate_targets/results/climate_targets.json": "0a60a067056d33d11b051601bb8336bbe515c8425cd9f71f59eb60c68d9244d5"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -17726,11 +17726,11 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
           "atmosphere/snow/column_diagnosis.py": "b43a5b7d43989b0333670b06e29e44978e4a705db3d560406cf73bd1f4d4993b",
           "atmosphere/snow/column_diagnosis.cpp": "855402ab6642d695e15f867b1ba59174df7cc2ba1c11a66dfc6ac033181b3386",
-          "atmosphere/snow/column_diagnosis_runs.py": "e3a53a64486597b8eca157fac477af8bfb0bb0353dd409aaf43684d001e56ab8",
-          "atmosphere/snow/event_column_benchmarks.py": "1f5a405594900319bb4b9fe34d332215cc422e8739848ee0a7ab46cc930cd2b9"
+          "atmosphere/snow/column_diagnosis_runs.py": "57d9f1bf06bbec3d16319bc4b8a3c0f0f1c7cbc9400c879e4361466d540f0d5d",
+          "atmosphere/snow/event_column_benchmarks.py": "c641830dff69fd5d7a1f71756e9c67e905dc95ff087be352099d59894456fa9d"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64"
+          "research/studies/climate_targets/results/climate_targets.json": "0a60a067056d33d11b051601bb8336bbe515c8425cd9f71f59eb60c68d9244d5"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -23610,11 +23610,11 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
           "atmosphere/snow/column_diagnosis.py": "b43a5b7d43989b0333670b06e29e44978e4a705db3d560406cf73bd1f4d4993b",
           "atmosphere/snow/column_diagnosis.cpp": "855402ab6642d695e15f867b1ba59174df7cc2ba1c11a66dfc6ac033181b3386",
-          "atmosphere/snow/column_diagnosis_runs.py": "e3a53a64486597b8eca157fac477af8bfb0bb0353dd409aaf43684d001e56ab8",
-          "atmosphere/snow/event_column_benchmarks.py": "1f5a405594900319bb4b9fe34d332215cc422e8739848ee0a7ab46cc930cd2b9"
+          "atmosphere/snow/column_diagnosis_runs.py": "57d9f1bf06bbec3d16319bc4b8a3c0f0f1c7cbc9400c879e4361466d540f0d5d",
+          "atmosphere/snow/event_column_benchmarks.py": "c641830dff69fd5d7a1f71756e9c67e905dc95ff087be352099d59894456fa9d"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64"
+          "research/studies/climate_targets/results/climate_targets.json": "0a60a067056d33d11b051601bb8336bbe515c8425cd9f71f59eb60c68d9244d5"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -29494,11 +29494,11 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
           "atmosphere/snow/column_diagnosis.py": "b43a5b7d43989b0333670b06e29e44978e4a705db3d560406cf73bd1f4d4993b",
           "atmosphere/snow/column_diagnosis.cpp": "855402ab6642d695e15f867b1ba59174df7cc2ba1c11a66dfc6ac033181b3386",
-          "atmosphere/snow/column_diagnosis_runs.py": "e3a53a64486597b8eca157fac477af8bfb0bb0353dd409aaf43684d001e56ab8",
-          "atmosphere/snow/event_column_benchmarks.py": "1f5a405594900319bb4b9fe34d332215cc422e8739848ee0a7ab46cc930cd2b9"
+          "atmosphere/snow/column_diagnosis_runs.py": "57d9f1bf06bbec3d16319bc4b8a3c0f0f1c7cbc9400c879e4361466d540f0d5d",
+          "atmosphere/snow/event_column_benchmarks.py": "c641830dff69fd5d7a1f71756e9c67e905dc95ff087be352099d59894456fa9d"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64"
+          "research/studies/climate_targets/results/climate_targets.json": "0a60a067056d33d11b051601bb8336bbe515c8425cd9f71f59eb60c68d9244d5"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -35378,11 +35378,11 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
           "atmosphere/snow/column_diagnosis.py": "b43a5b7d43989b0333670b06e29e44978e4a705db3d560406cf73bd1f4d4993b",
           "atmosphere/snow/column_diagnosis.cpp": "855402ab6642d695e15f867b1ba59174df7cc2ba1c11a66dfc6ac033181b3386",
-          "atmosphere/snow/column_diagnosis_runs.py": "e3a53a64486597b8eca157fac477af8bfb0bb0353dd409aaf43684d001e56ab8",
-          "atmosphere/snow/event_column_benchmarks.py": "1f5a405594900319bb4b9fe34d332215cc422e8739848ee0a7ab46cc930cd2b9"
+          "atmosphere/snow/column_diagnosis_runs.py": "57d9f1bf06bbec3d16319bc4b8a3c0f0f1c7cbc9400c879e4361466d540f0d5d",
+          "atmosphere/snow/event_column_benchmarks.py": "c641830dff69fd5d7a1f71756e9c67e905dc95ff087be352099d59894456fa9d"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64"
+          "research/studies/climate_targets/results/climate_targets.json": "0a60a067056d33d11b051601bb8336bbe515c8425cd9f71f59eb60c68d9244d5"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -41262,11 +41262,11 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f",
           "atmosphere/snow/column_diagnosis.py": "b43a5b7d43989b0333670b06e29e44978e4a705db3d560406cf73bd1f4d4993b",
           "atmosphere/snow/column_diagnosis.cpp": "855402ab6642d695e15f867b1ba59174df7cc2ba1c11a66dfc6ac033181b3386",
-          "atmosphere/snow/column_diagnosis_runs.py": "e3a53a64486597b8eca157fac477af8bfb0bb0353dd409aaf43684d001e56ab8",
-          "atmosphere/snow/event_column_benchmarks.py": "1f5a405594900319bb4b9fe34d332215cc422e8739848ee0a7ab46cc930cd2b9"
+          "atmosphere/snow/column_diagnosis_runs.py": "57d9f1bf06bbec3d16319bc4b8a3c0f0f1c7cbc9400c879e4361466d540f0d5d",
+          "atmosphere/snow/event_column_benchmarks.py": "c641830dff69fd5d7a1f71756e9c67e905dc95ff087be352099d59894456fa9d"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "dfdf6df796e91a21afc3bb7ef28f33c52aad7809e826dff5ec33c87466e9cc64"
+          "research/studies/climate_targets/results/climate_targets.json": "0a60a067056d33d11b051601bb8336bbe515c8425cd9f71f59eb60c68d9244d5"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,

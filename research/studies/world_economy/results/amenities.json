@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "4e81bee2780e53f0fccbcf64701c01731f77899dcfba69d7ddacd45f8d1cfdf3",
+      "research/studies/world_economy/amenities_inputs.json": "13315cfe1341b035c41003d91fcf9a2e714b8b4822e01d59f5ce86b0fce1d854",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "3cc7144f4b4a16ab614b31d37a59ed6c7f27b9a01f706c6eea1ac944deb91bc9"
+        "sha256": "7146dccf640d5f0eb9849587562a583b2d13b9c4cbe05980bc22619ab23e4e80"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "e0cbd2278e666b9f9eb647bebfaf62901311bd39b4a16d94eecdfff59b2045fb"
+        "sha256": "8113938ab7099bb9c83b88ba248011e2265b3c3e3969326772d5dbe1a3e20a05"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "fdcc8e1a6e6b6f80a8f32cb5ccfff31368ddbdd62d01b29532936aa4be1d365d"
+        "sha256": "95c8c81486b475ef3ab28d96157b94d1a01bcef9749d27b734614546f3de982a"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "fa2f4271028942f6f081bc2062591ec550fab3ba0cdd053303337036b5c4c8e8"
+        "sha256": "beecc725d82d25cceb664ff4feb8b1e6b2a8dfdec8ee25c518d263e10b92bb0b"
       }
     }
   },
