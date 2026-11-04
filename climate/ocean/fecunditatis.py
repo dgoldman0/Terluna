@@ -57,7 +57,13 @@ RAMP_DAYS = 5.0
 FORCING_STEP_S = 10800.0
 OUTPUT_S = 10800.0
 CHUNK_DAYS = 10.0
-DT_S = 300.0
+SMOKE_CHUNK_DAYS = 0.5        # the smoke case's day runs as two chunks, so it resumes once
+DT_S = 300.0                  # both models' step
+# SCHISM's lateral dissipation: its Smagorinsky-like filter (ishapiro = 2) at the strength of MITgcm's Smagorinsky
+# viscosity (viscC2smag = 2.2), which keeps its strait currents within 2-3% from a 150 s to a 600 s step where its
+# default filter moved them by 20-46%; and backtracking sub-steps chosen by the flow (dtb_max = the step), which halves
+# its cost and moves its currents by under 0.5% (strait_numerics.py, results/ocean/strait_numerics.json)
+SCHISM_FILTER_G0 = 8 * math.sqrt(2) * (2.2 / math.pi) ** 2
 
 
 def end_s():
@@ -146,10 +152,30 @@ def forcing_series():
 
 # ------------------------------------------------- reductions
 
-class Reducer:
-    """Accumulates the analysis quantities from snapshots at water points (cells or nodes), saved after each chunk."""
+def stations(lat, lon, within_km=60.0):
+    """Points whose level is kept through time: the water point nearest each mare's centre (within `within_km`) and
+    each strait zone's middle. Returns the points' indices and names."""
+    from geography import nomenclature
+    named = nomenclature.by_name(nomenclature.features())
+    places = {name: (named[name]["lat"], named[name]["lon"]) for name in MARIA}
+    places.update({name: (float(np.mean(z["lat"])), float(np.mean(z["lon"]))) for name, z in ZONES.items()})
+    pts = forcing.unit_points(np.asarray(lat), np.asarray(lon))
+    index, names = [], []
+    for name, (la, lo) in places.items():
+        angle = np.arccos(np.clip(pts @ forcing.unit_points(la, lo), -1, 1))
+        k = int(np.argmin(angle))
+        if angle[k] * lunar.RADIUS / 1000 <= within_km:
+            index.append(k)
+            names.append(name)
+    return np.array(index, int), names
 
-    def __init__(self, path, lat, lon, area, basin, fec_label):
+
+class Reducer:
+    """Accumulates the analysis quantities from snapshots at water points (cells or nodes), saved after each chunk.
+    With `station_index` it also keeps the level at those points through time; a run whose reductions began without
+    them carries on without them."""
+
+    def __init__(self, path, lat, lon, area, basin, fec_label, station_index=None, station_names=()):
         self.path = Path(path)
         self.lat, self.lon, self.area = lat, lon, area
         self.fec = basin == fec_label
@@ -165,6 +191,9 @@ class Reducer:
                               month_min=np.full((MONTHS, n), np.inf, np.float32),
                               speed_max=np.zeros(n, np.float32), speed_cube_sum=np.zeros(n), count=np.zeros(1),
                               **{f"zone_speed_{k}": np.zeros(0) for k in range(len(ZONES))})
+            if station_index is not None and len(station_index):
+                self.state.update(station_index=np.asarray(station_index, int), station_names=np.array(station_names),
+                                  station_eta=np.zeros((0, len(station_index))))
 
     def add(self, t_s, eta, speed):
         s = self.state
@@ -183,6 +212,8 @@ class Reducer:
         s["count"] = s["count"] + 1
         for k, zone in enumerate(self.zones.values()):
             s[f"zone_speed_{k}"] = np.r_[s[f"zone_speed_{k}"], speed[zone].max() if zone.any() else 0.0]
+        if "station_eta" in s:
+            s["station_eta"] = np.vstack([s["station_eta"], eta[s["station_index"]][None, :]])
 
     def save(self):
         tmp = self.path.with_suffix(".tmp.npz")
@@ -203,8 +234,12 @@ def mitgcm_case(drag=lunar.DRAG, smoke=False):
     return exp, spec
 
 
-def run_mitgcm(drag=lunar.DRAG, until_s=None, smoke=False):
-    exp, spec = mitgcm_case(drag, smoke)
+def run_mitgcm(drag=lunar.DRAG, until_s=None, smoke=False, exp=None):
+    """Run or resume the MITgcm case (or `exp`, a variant of it, such as a numerics test on the smoke case's day)."""
+    if exp is None:
+        exp, spec = mitgcm_case(drag, smoke)
+    else:
+        spec = mitgcm.tide_forcing_grid(exp.grid, step=1.0)
     t, mask = sea()
     labels, fec = basins(t, mask)
     g = exp.grid
@@ -215,10 +250,15 @@ def run_mitgcm(drag=lunar.DRAG, until_s=None, smoke=False):
         (exp.folder / "tide.bin.tmp").replace(exp.folder / "tide.bin")
     wet = g.wet
     yc, xc = np.meshgrid(g.yc, g.xc, indexing="ij")
-    reducer = Reducer(exp.folder / "reduced.npz", yc[wet], xc[wet], g.area[wet], lookup(t, labels, yc[wet], xc[wet]), fec)
+    reducer = Reducer(exp.folder / "reduced.npz", yc[wet], xc[wet], g.area[wet], lookup(t, labels, yc[wet], xc[wet]), fec,
+                      *stations(yc[wet], xc[wet]))
 
     def after_chunk(e, first_it, last_it):
-        for it in e.snapshots(first_it + 1, last_it):
+        # a chunk writes the snapshot at its own start (MITgcm writes the previous chunk's last one there), so each
+        # chunk reduces from its first iteration; the reducer skips a time it has counted
+        for it in e.snapshots(first_it, last_it):
+            if it * e.deltat < e.output_from_s - 1:     # MITgcm writes iteration 0 even with output off
+                continue
             s = e.state(it)
             u = s["UVEL"]
             v = s["VVEL"]
@@ -226,13 +266,13 @@ def run_mitgcm(drag=lunar.DRAG, until_s=None, smoke=False):
             vc = 0.5 * (v + np.roll(v, -1, axis=0))
             reducer.add(it * e.deltat, s["ETAN"][wet], np.hypot(uc, vc)[wet])
         reducer.save()
-        for it in e.snapshots(first_it + 1, last_it):
+        for it in e.snapshots(first_it, last_it):
             for suffix in ("data", "meta"):
                 (e.folder / f"state.{it:010d}.{suffix}").unlink(missing_ok=True)
 
     exp.binary()                                        # built before the clock starts
     timed(exp.run, lambda: max([0] + exp.pickups()) * exp.deltat, 86400.0 if smoke else until_s or end_s(),
-          CHUNK_DAYS * 86400.0, exp.deltat, after_chunk=after_chunk)
+          (SMOKE_CHUNK_DAYS if smoke else CHUNK_DAYS) * 86400.0, exp.deltat, after_chunk=after_chunk)
     return exp
 
 
@@ -251,18 +291,21 @@ def schism_case(drag=lunar.DRAG, smoke=False):
     m = schism_mesh()
     return schism.Experiment(name="fecunditatis_smoke" if smoke else f"fecunditatis_cd{drag:g}", mesh=m, dt=DT_S,
                              drag=drag, advection=True, rotation=True, output_s=OUTPUT_S,
-                             file_s=(86400.0 if smoke else CHUNK_DAYS * 86400.0), compute_ranks=3)
+                             file_s=(SMOKE_CHUNK_DAYS if smoke else CHUNK_DAYS) * 86400.0, compute_ranks=3,
+                             filter_mode=2, filter_strength=SCHISM_FILTER_G0, btrack_max_s=DT_S)
 
 
-def run_schism(drag=lunar.DRAG, until_s=None, smoke=False):
-    exp = schism_case(drag, smoke)
+def run_schism(drag=lunar.DRAG, until_s=None, smoke=False, exp=None):
+    """Run or resume the SCHISM case (or `exp`, a variant of it, such as a numerics test on the smoke case's day)."""
+    exp = exp or schism_case(drag, smoke)
     t, mask = sea()
     labels, fec = basins(t, mask)
     m = exp.mesh
     if smoke or not (exp.folder / "lunar_tide.th").exists():
         seconds, coefs = forcing_series()
         exp.write(seconds, coefs, fresh=smoke)
-    reducer = Reducer(exp.folder / "reduced.npz", m.lat, m.lon, nodal_areas(m), lookup(t, labels, m.lat, m.lon), fec)
+    reducer = Reducer(exp.folder / "reduced.npz", m.lat, m.lon, nodal_areas(m), lookup(t, labels, m.lat, m.lon), fec,
+                      *stations(m.lat, m.lon))
     first_s = 0.0 if smoke else SPINUP_DAYS * 86400.0
 
     def after_chunk(e, out, start_s, stop_s):
@@ -280,7 +323,8 @@ def run_schism(drag=lunar.DRAG, until_s=None, smoke=False):
         reducer.save()
 
     timed(exp.run, lambda: exp.chunks_done()[-1]["end_s"] if exp.chunks_done() else 0.0,
-          86400.0 if smoke else until_s or end_s(), CHUNK_DAYS * 86400.0, exp.dt, after_chunk=after_chunk)
+          86400.0 if smoke else until_s or end_s(), (SMOKE_CHUNK_DAYS if smoke else CHUNK_DAYS) * 86400.0, exp.dt,
+          after_chunk=after_chunk)
     return exp
 
 
@@ -301,6 +345,60 @@ def describe_grids():
 # ------------------------------------------------- analysis
 
 BANDS = {"monthly (25-35 d)": (25.0, 35.0), "fortnightly (13-16 d)": (13.0, 16.0), "nine-day (8.5-10.5 d)": (8.5, 10.5)}
+MARIA = ("Oceanus Procellarum", "Mare Imbrium", "Mare Frigoris", "Mare Serenitatis", "Mare Tranquillitatis", "Mare Crisium",
+         "Mare Fecunditatis", "Mare Nectaris", "Mare Nubium", "Mare Humorum", "Mare Cognitum", "Mare Insularum",
+         "Mare Vaporum", "Sinus Medii", "Mare Undarum", "Mare Spumans")
+
+
+def assign_maria(lat, lon, names=MARIA):
+    """Each point's mare: the one whose centre lies nearest in units of its radius, within that radius (-1 for none).
+    Returns the indices and the names."""
+    from geography import nomenclature
+    named = nomenclature.by_name(nomenclature.features())
+    pts = forcing.unit_points(np.asarray(lat), np.asarray(lon))
+    best = np.full(len(pts), np.inf)
+    index = np.full(len(pts), -1)
+    for k, name in enumerate(names):
+        f = named[name]
+        angle = np.arccos(np.clip(pts @ forcing.unit_points(f["lat"], f["lon"]), -1, 1))
+        scaled = angle * lunar.RADIUS / 1000 / (f["diameter_km"] / 2)
+        take = (scaled < 1) & (scaled < best)
+        best[take], index[take] = scaled[take], k
+    return index, list(names)
+
+
+def weighted_median(values, weights):
+    order = np.argsort(values)
+    cum = np.cumsum(weights[order])
+    return float(values[order][np.searchsorted(cum, cum[-1] / 2)])
+
+
+def maria_summary(lat, lon, area, point_range, speed_max, power):
+    """The Near-side Sea's maria from one run: each one's water area, median monthly range against the equilibrium's
+    (geography's product, each sea's volume held), largest speeds and the bed's dissipation. Outside the fine box the
+    cells and triangles are up to half a degree, so narrow passages there are not resolved."""
+    index, names = assign_maria(lat, lon)
+    with np.load(ROOT / "geography/products/tides_28pct_4ppd.npz", allow_pickle=False) as product:
+        n_lat, n_lon = product["lat_deg"][product["rows"]], product["lon_deg"][product["cols"]]
+        eq_range, body = product["monthly_range_median_m"].astype(float), product["labels"]
+    n_lon = np.where(n_lon > 180, n_lon - 360, n_lon)
+    near = body == 433
+    eq_index, _ = assign_maria(n_lat[near], n_lon[near])
+    eq_w = np.cos(np.radians(n_lat[near]))
+    out = {}
+    for k, name in enumerate(names):
+        m = (index == k) & np.isfinite(point_range)
+        e = eq_index == k
+        if m.sum() < 5:
+            continue
+        out[name] = dict(water_km2=float(area[m].sum() / 1e6),
+                         median_month_range_m=weighted_median(point_range[m], area[m]),
+                         equilibrium_median_month_range_m=weighted_median(eq_range[near][e], eq_w[e]) if e.sum() >= 5 else None,
+                         largest_speed_m_s=float(speed_max[m].max()),
+                         p99_largest_speed_m_s=float(np.percentile(speed_max[m], 99)),
+                         bed_dissipation_w=float(power[m].sum()),
+                         bed_dissipation_mw_m2=float(power[m].sum() / area[m].sum() * 1e3))
+    return out
 
 
 def equilibrium_basin_mean(seconds, fec_label, t=None, mask=None):
@@ -334,12 +432,53 @@ def band_gain(t_s, model, reference, band):
                 reference_rms_m=float(np.sqrt(2 * np.sum(np.abs(e[sel]) ** 2)) / len(t_s)))
 
 
+def station_analysis(t_s, eta, names, lat, lon):
+    """Each station's level against the equilibrium tide at the nearest atlas node of the Near-side Sea (each sea's
+    volume held, self-attraction included): the median monthly ranges, the gains and lags in the bands, and the rms
+    of what the level holds at periods under five days (seiches and other short motions)."""
+    with np.load(ROOT / "geography/products/tides_28pct_4ppd.npz", allow_pickle=False) as product:
+        n_lat, n_lon = product["lat_deg"][product["rows"]], product["lon_deg"][product["cols"]]
+        basis, body = product["basis"].astype(float), product["labels"]
+    n_lon = np.where(n_lon > 180, n_lon - 360, n_lon)
+    near = np.flatnonzero(body == 433)
+    pts = forcing.unit_points(n_lat[near], n_lon[near])
+    coefs = forcing.ephemeris_series(t_s)
+    f = np.fft.rfftfreq(len(t_s), (t_s[1] - t_s[0]) / 86400.0)
+    out = {}
+    for k, name in enumerate(names):
+        node = near[int(np.argmax(pts @ forcing.unit_points(lat[k], lon[k])))]
+        eq = coefs @ basis[:, node]
+        x = eta[:, k]
+        spectrum = np.fft.rfft(x - x.mean())
+        short = np.fft.irfft(np.where(f > 1 / 5.0, spectrum, 0), len(x))
+        ranges = []
+        for m in range(MONTHS):
+            a = (SPINUP_DAYS + m * MONTH_DAYS) * 86400.0
+            sel = (t_s >= a) & (t_s < a + MONTH_DAYS * 86400.0)
+            if sel.sum() >= 100:
+                ranges.append((np.ptp(x[sel]), np.ptp(eq[sel])))
+        out[name] = dict(lat=float(lat[k]), lon=float(lon[k]),
+                         median_month_range_m=float(np.median([r[0] for r in ranges])) if ranges else None,
+                         equilibrium_median_month_range_m=float(np.median([r[1] for r in ranges])) if ranges else None,
+                         bands={b: band_gain(t_s, x, eq, band) for b, band in BANDS.items()},
+                         short_period_rms_m=float(np.sqrt(np.mean(short ** 2))))
+    return out
+
+
 def analyse_case(folder, area_of, fec_area_m2, eq_mean, eq_t):
     with np.load(Path(folder) / "reduced.npz", allow_pickle=False) as s:
         r = {k: s[k] for k in s.files}
+    # the analysed window only (a run's reductions may hold snapshots from before it, such as MITgcm's iteration 0)
+    window = r["t"] >= SPINUP_DAYS * 86400.0 - 1
+    r["count"] = r["count"] - np.count_nonzero(~window)        # those snapshots added nothing to the cube's sum
+    for key in ["t", "fec_mean", "fec_volume", "sea_mean", "station_eta"] + [f"zone_speed_{k}" for k in range(len(ZONES))]:
+        if key in r:
+            r[key] = r[key][window]
     t_s = r["t"]
     if t_s.size < 10:
         return None
+    if not np.allclose(np.diff(t_s), t_s[1] - t_s[0]):
+        raise ValueError(f"{folder}: snapshots are not evenly spaced")
     eq = np.interp(t_s, eq_t, eq_mean)
     months = []
     for k in range(MONTHS):
@@ -358,7 +497,13 @@ def analyse_case(folder, area_of, fec_area_m2, eq_mean, eq_t):
         daily = z[: (len(z) // 8) * 8].reshape(-1, 8).max(axis=1)
         zones[name] = dict(largest_speed_m_s=float(z.max()), median_daily_largest_m_s=float(np.median(daily)),
                            p95_daily_largest_m_s=float(np.percentile(daily, 95)))
-    return dict(snapshots=int(n), span_days=float((t_s[-1] - t_s[0]) / 86400.0),
+    ranges = r["month_max"].astype(float) - r["month_min"].astype(float)
+    filled = np.isfinite(ranges).all(axis=1)
+    point_range = np.median(ranges[filled], axis=0) if filled.any() else np.full(ranges.shape[1], np.nan)
+    return dict(snapshots=int(n), span_days=float((t_s[-1] - t_s[0]) / 86400.0), point_range=point_range,
+                speed_max=r["speed_max"].astype(float),
+                station_series=(t_s, r["station_eta"], [str(x) for x in r["station_names"]], r["station_index"])
+                if "station_eta" in r else None,
                 months=months,
                 median_month_range=dict(model_m=float(np.median([m["model_range_m"] for m in months])),
                                         equilibrium_m=float(np.median([m["equilibrium_range_m"] for m in months]))),
@@ -394,6 +539,11 @@ def analyse():
                 continue
             basin = lookup(t, labels, lat, lon)
             power = out.pop("speed_cube_mean") * out.pop("rho") * drag * area
+            out["maria"] = maria_summary(lat, lon, area, out.pop("point_range"), out.pop("speed_max"), power)
+            series = out.pop("station_series")
+            if series is not None:
+                st, eta, names, index = series
+                out["stations"] = station_analysis(st, eta, names, lat[index], lon[index])
             out["bed_dissipation_w"] = dict(near_side_sea=float(power.sum()), fecunditatis_basin=float(power[basin == fec].sum()),
                                             **{name: float(power[(lon >= z["lon"][0]) & (lon <= z["lon"][1]) &
                                                                  (lat >= z["lat"][0]) & (lat <= z["lat"][1])].sum())
@@ -412,7 +562,7 @@ def main():
     parser.add_argument("--drag", type=float, default=lunar.DRAG)
     parser.add_argument("--days", type=float, help="stop at this model day (a partial run)")
     parser.add_argument("--smoke", action="store_true",
-                        help="one day in runs/<model>/fecunditatis_smoke with output from the start: speed and reducer")
+                        help="one day in runs/<model>/fecunditatis_smoke, as two chunks with output from the start: speed, resume and reducer")
     args = parser.parse_args()
     if args.action == "grids":
         print(json.dumps(describe_grids(), indent=1))

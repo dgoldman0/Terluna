@@ -215,6 +215,15 @@ def cpp_options(source: Path, nonlinear_surface=False) -> str:
     return text
 
 
+def diagnostics_size(source: Path, fields: int) -> str:
+    """The diagnostics package's storage sized for `fields` output fields (its default holds one per level)."""
+    text = (source / "pkg" / "diagnostics" / "DIAGNOSTICS_SIZE.h").read_text()
+    text, n = re.subn(r"PARAMETER\( numDiags = 1\*Nr \)", f"PARAMETER( numDiags = {fields}*Nr )", text)
+    if n != 1:
+        raise RuntimeError("DIAGNOSTICS_SIZE.h no longer sets numDiags as this setup expects")
+    return text
+
+
 def namelist(group, values):
     lines = [f" &{group}"]
     for key, value in values.items():
@@ -259,8 +268,11 @@ class Experiment:
 
     def code(self) -> dict:
         source = builds.checkout("mitgcm")
-        return {"SIZE.h": size_h(self.grid.nx, self.grid.ny, *self.tiles), "packages.conf": PACKAGES_CONF,
+        code = {"SIZE.h": size_h(self.grid.nx, self.grid.ny, *self.tiles), "packages.conf": PACKAGES_CONF,
                 "CPP_OPTIONS.h": cpp_options(source, self.nonlinear_surface), "EXF_OPTIONS.h": exf_options(source)}
+        if len(self.output_fields) > 1:
+            code["DIAGNOSTICS_SIZE.h"] = diagnostics_size(source, len(self.output_fields))
+        return code
 
     def binary(self, jobs=3) -> Path:
         return builds.mitgcm(self.code(), mpi=self.tiles != (1, 1), jobs=jobs)

@@ -15,6 +15,7 @@ Two ocean models for the Open Moon's seas, set up from pinned sources with the M
 | [schism.py](schism.py) | SCHISM experiments: mesh files, namelists, the lunar tide files, chunked runs with hotstarts |
 | [checks.py](checks.py) | Both models against geography/tide_dynamics.py and an analytic channel ([results](../results/ocean/)) |
 | [fecunditatis.py](fecunditatis.py) | The strait study (below) |
+| [strait_numerics.py](strait_numerics.py) | The strait study's first day under each model's step and SCHISM's filters ([results](../results/ocean/strait_numerics.json)) |
 
 Builds, runs and products live on the research drive (`TERLUNA_OCEAN_DRIVE`, default `/media/projectspace/terluna-research/ocean`); `products/` and `runs/` here link to it and stay out of Git. The Python tools run in the `ocean` virtual environment beside the project's others (`venvs/ocean`: the system's numpy and scipy, with `netCDF4` and CMake 3 added; SCHISM's CMakeLists sets a policy CMake 4 refuses). The drive's `run.sh` runs a module with the numerical libraries held to two threads, niced and under a memory cap:
 
@@ -42,7 +43,7 @@ Builds, runs and products live on the research drive (`TERLUNA_OCEAN_DRIVE`, def
 
 The build's ledger (`terluna_ledger.json` beside the binary) records the upstream commit, the patch's hash and each patched file's hashes before and after. SCHISM runs in its two-dimensional mode (two vertical levels), with elevation and depth-averaged velocity written by one writer rank beside the compute ranks. Two quirks of v5.13.0's sample `param.nml` are handled in [schism.py](schism.py): it gives the vegetation settings `veg_lai` and `veg_cw` real values that the code declares as integers, which gfortran cannot read (vegetation is off, so they keep the code's defaults), and the code switches on three-dimensional layer heights by default, which a 2-D run turns off.
 
-Bed friction is quadratic, tau = rho Cd |u| u, with Cd = 0.0025 and a bracket of 0.001-0.005. A drag coefficient from a logarithmic boundary layer holds no gravity, so it carries to the Moon unchanged; Manning's n, which hides g, is not used. MITgcm's strait run adds Smagorinsky viscosity (`viscC2smag = 2.2`), capped at the explicit scheme's stability limit (`viscAhGridMax = 0.5`, L²/8Δt); SCHISM filters its velocities with its Shapiro filter instead. Both models solve the drag implicitly. SCHISM does by design; MITgcm does with `selectImplicitDrag = 2`, which solves it together with the surface pressure and needs `ALLOW_SOLVE4_PS_AND_DRAG` at compile time. MITgcm's default steps the drag explicitly within its Adams-Bashforth scheme, which holds only while r dt / H stays below about 1: the forced check at a hundred times the base friction reaches 4.5 on the solver's 1-m cells, and with explicit drag it ran away to NaN.
+Bed friction is quadratic, tau = rho Cd |u| u, with Cd = 0.0025 and a bracket of 0.001-0.005. A drag coefficient from a logarithmic boundary layer holds no gravity, so it carries to the Moon unchanged; Manning's n, which hides g, is not used. MITgcm's strait run adds Smagorinsky viscosity (`viscC2smag = 2.2`), capped at the explicit scheme's stability limit (`viscAhGridMax = 0.5`, L²/8Δt). SCHISM's strait run takes its Smagorinsky-like Shapiro filter at the same strength (below). Both models solve the drag implicitly. SCHISM does by design; MITgcm does with `selectImplicitDrag = 2`, which solves it together with the surface pressure and needs `ALLOW_SOLVE4_PS_AND_DRAG` at compile time. MITgcm's default steps the drag explicitly within its Adams-Bashforth scheme, which holds only while r dt / H stays below about 1: the forced check at a hundred times the base friction reaches 4.5 on the solver's 1-m cells, and with explicit drag it ran away to NaN.
 
 A run proceeds in chunks and resumes from its last pickup or hotstart, and only under the setup it started with: each run folder stamps its namelists or settings, fields, mesh, tide files and build (`setup.sha256`), and a changed setup must start again from a cleared folder. Each check starts from a cleared folder.
 
@@ -72,7 +73,21 @@ Geography's linear solver found Mare Fecunditatis joined to the Near-side Sea th
 
 Both step 300 s. The first 30 days spin the seas up and the next seven anomalistic months (192.9 days) are analysed. The Fecunditatis basin, 244,000 km², is the water joined to its deep core below 160 m, with shallower water given to the nearest core, so its boundary runs through the sills and its volume's change is the exchange through the straits. Each chunk's snapshots (every three hours) are reduced as it finishes: the basin's mean level against its equilibrium in the monthly, fortnightly and nine-day bands, each month's range at every water point, the exchange, the largest currents in the western channels and the Crisium passage, and the bed's dissipation from the mean cube of speed. [visualization/ocean-tides/render.py](../../visualization/ocean-tides/render.py) draws the basin's level, the monthly ranges and the largest currents from the reduced runs.
 
-The runs follow the checks; their results will be recorded here.
+Before the long runs, [strait_numerics.py](strait_numerics.py) ran the study's first day, as the tide spins up from rest, under each model's step and SCHISM's filters ([strait_numerics.json](../results/ocean/strait_numerics.json)). Each case is read on the largest speeds in the western channels and the Crisium passage at hour 21, the last snapshot both models share, and against its reference over the whole day on those speeds and each water point's largest speed:
+
+| Case | Western channels, Crisium passage at hour 21 | Against its reference over the day |
+|---|---|---|
+| MITgcm, 300 s | 0.60, 0.72 m/s | |
+| MITgcm, 150 s | 0.60, 0.72 m/s | within 0.1% |
+| SCHISM's sample filter (`ishapiro = 1`, 0.5), 300 s | 0.43, 0.36 m/s | |
+| the same at 150 s and at 600 s | 0.35, 0.21 and 0.49, 0.52 m/s | straits 13-46% apart; points 26% rms |
+| SCHISM's Smagorinsky-like filter at MITgcm's strength, 300 s | 0.56, 0.69 m/s | |
+| the same at 150 s and at 600 s | 0.56, 0.68 and 0.56, 0.70 m/s | straits within 3.3%; points 7% rms |
+| the same at 300 s with backtracking sub-steps chosen by the flow | 0.56, 0.69 m/s | within 0.5% throughout, at half the cost |
+
+MITgcm does not depend on its step. SCHISM's sample filter, the setting its documentation suggests for coasts, estuaries and rivers, smooths the velocities once a step at a fixed strength, so its smoothing per unit time falls as the step grows and the straits' currents moved by up to 46% with the step. Its Smagorinsky-like filter (`ishapiro = 2`) sets each step's strength to 0.5 tanh(γ₀ Δt μ), μ the local deformation rate, which is proportional to the step while the tanh is unsaturated. A filter of strength s acting once a step on cells of size L diffuses momentum like a viscosity s L²/(4Δt), so γ₀ = 8√2 (2.2/π)² = 5.55 matches MITgcm's Smagorinsky viscosity; on triangles the conversion holds within a factor of order one. At that strength the straits' speeds hold within 3.3% from a 150 s to a 600 s step and each point's largest speed within 7% rms, against 13-46% and 26% under the sample filter, and the straits' currents at hour 21 come within 4-6% of MITgcm's. SCHISM's sample also forces at least ten backtracking sub-steps a step (`dtb_max = 30 s`); letting the flow choose them (`dtb_max` = the step) changed nothing that matters and halved its cost. The strait run takes both: a 300 s step, the Smagorinsky-like filter at γ₀ = 5.55 and the flow's sub-steps.
+
+MITgcm's run finished on 4 November in 3.6 hours on four processes; SCHISM's, about ten hours on four, follows, and both are recorded here when it ends. Each run also keeps the level through time at the centres of eleven maria and the two strait zones (the stations).
 
 ## Limits
 

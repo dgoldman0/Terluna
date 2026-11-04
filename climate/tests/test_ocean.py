@@ -194,6 +194,39 @@ def test_reducer_counts_each_snapshot_once(tmp_path):
     assert np.allclose(s["fec_mean"], [2.0, 0.5]) and s["count"][0] == 2
     assert np.allclose(s["month_max"][0], [1.0, 3.0, 5.0]) and np.allclose(s["month_min"][0], [0.0, 1.0, 2.0])
     assert np.allclose(s["zone_speed_1"], [2.0, 0.5])                   # the point at 7 N 58 E is in the Crisium passage
+    assert "station_eta" not in s
+    r = fecunditatis.Reducer(tmp_path / "s.npz", lat, lon, np.ones(3), np.array([1, 1, 2]), 1, np.array([2, 0]), ["a", "b"])
+    r.add(t0, np.array([1.0, 3.0, 5.0]), np.array([0.1, 2.0, 0.2]))
+    r.add(t0 + 10800.0, np.array([0.0, 1.0, 2.0]), np.array([0.3, 0.5, 0.1]))
+    r.save()
+    s = fecunditatis.Reducer(tmp_path / "s.npz", lat, lon, np.ones(3), np.array([1, 1, 2]), 1, np.array([2, 0]), ["a", "b"]).state
+    assert np.array_equal(s["station_eta"], [[5.0, 1.0], [2.0, 0.0]]) and list(s["station_names"]) == ["a", "b"]
+
+
+def test_points_take_the_mare_they_lie_in():
+    from climate.ocean import fecunditatis
+    from geography import nomenclature
+    try:
+        nomenclature.features()
+    except (FileNotFoundError, OSError, KeyError):
+        pytest.skip("no nomenclature archive")
+    idx, names = fecunditatis.assign_maria(np.array([34.7, -7.8, 16.2, -60.0]), np.array([-14.9, 53.7, 59.1, 0.0]))
+    assert [names[i] for i in idx[:3]] == ["Mare Imbrium", "Mare Fecunditatis", "Mare Crisium"] and idx[3] == -1
+    assert fecunditatis.weighted_median(np.array([1.0, 2.0, 10.0]), np.array([1.0, 1.0, 5.0])) == 10.0
+
+
+def test_numerics_comparison_reads_largest_relative_differences():
+    from climate.ocean import strait_numerics
+    ref = dict(t_h=[3.0, 6.0, 9.0], fecunditatis_level_m=[-0.01, -0.02, -0.04], western_channels_m_s=[0.1, 0.2, 0.4],
+               crisium_passage_m_s=[0.1, 0.2, 0.5], largest_speed_m_s=0.5, p99_largest_speed_m_s=0.05,
+               speed_max=np.array([0.1, 0.5]))
+    case = dict(ref, t_h=[0.0, 3.0, 6.0, 9.0], fecunditatis_level_m=[0.0, -0.01, -0.02, -0.05],
+                western_channels_m_s=[0.0, 0.1, 0.2, 0.44], crisium_passage_m_s=[0.0, 0.1, 0.2, 0.5],
+                largest_speed_m_s=0.55, speed_max=np.array([0.1, 0.55]))
+    out = strait_numerics.compare(case, ref)
+    assert out["fecunditatis_level_m"] == pytest.approx(0.25) and out["western_channels_m_s"] == pytest.approx(0.1)
+    assert out["crisium_passage_m_s"] == 0.0 and out["largest_speed_m_s"] == pytest.approx(0.1)
+    assert out["rms_largest_speed"] == pytest.approx(np.sqrt(0.05 ** 2 / 2) / np.sqrt((0.1 ** 2 + 0.5 ** 2) / 2))
 
 
 RESULTS = ROOT / "climate/results/ocean"
