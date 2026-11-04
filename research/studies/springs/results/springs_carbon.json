@@ -403,7 +403,7 @@
   "inputs": {
    "research/studies/springs/results/springs.json": "b657370e8a10b5501e7a24924f45702bbe9617f7938a5b1e8d7db812f3dc244c",
    "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
-   "research/studies/carbon_cycle/results/carbon_cycle.json": "2b63323ae980af1bf7344750aa9c784c390ce4ae5aeb3eb586c7855bf73aec83"
+   "research/studies/carbon_cycle/results/carbon_cycle.json": "bc20e3f4d3cdc69058a2eebc194aeda7e5ccf5729f9b94081bc10cedd5275113"
   }
  }
 }

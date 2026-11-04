@@ -3,11 +3,11 @@
   "evidence": "Accelerated, binding-order structural campaigns with explicit raw throughput, ramp, budgets, plant capital and buyer advances. No actual contracts, cost advantage, engineering capacity or commissioning schedule established.",
   "products": {
     "research/studies/world_economy/industrial_markets_inputs.json": {
-      "sha256": "a81901665624c4c1a62c59737b60bbee8ffb644c9d038ca06837c71e7e555981",
+      "sha256": "732b3a382e7d42a6e70435092939bd8344a2061e5aba8a51179dd938ccfc2fa3",
       "schema": "terluna.research.industrial-markets-inputs/1"
     },
     "research/studies/world_economy/results/industrial_markets.json": {
-      "sha256": "1eb25518b73a2511be0165476fbe0ccf07e9dd4e3d3e42c0832fd4866f959a1d",
+      "sha256": "ff474b77e9a5439e13b8ce2f8cba17e9b51332eaa05a7582b88a3514fd801056",
       "schema": "terluna.research.industrial-markets/1"
     }
   },
