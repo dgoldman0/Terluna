@@ -100,7 +100,13 @@ nclos_bm 2): the design scheme's undiluted parcel as the trigger, the column fro
 relaxed over 18 hours toward the parcel diluted 2e-4 per metre and toward Romps's humidity in the buoyant cloud, the
 air's own vapour beneath it, a layer warmed only toward a reference above it, the excess vapour raining and a column
 below its reference moistening without rain by Frierson's qref form; it takes closure (c)'s requirements and no route
-L, and a run without it is as before.
+L, and a run without it is as before. --sbm-closure redesign2 takes the second redesign (sbm_redesign2.py;
+SBM_REDESIGN2_PATCHES over the first redesign's and closure (c)'s, rainmod's nclos_bm 3): the design scheme's undiluted
+parcel as the trigger with its level of free convection at or above the condensation level, the column from its source
+to the parcel's top relaxed over 12 hours toward the zero-buoyancy state of a plume from the lowest level's air and
+toward 0.70 of the air's own saturation, the vapour above that reference raining with at most a tenth of it moistening
+the layers below theirs, and the rain's heat warming only the layers below their reference temperature; it takes the
+first redesign's requirements, and a run without it is as before.
 """
 from __future__ import annotations
 import argparse
@@ -130,6 +136,7 @@ from climate.gcm import land_store as lsf
 from climate.gcm import patch_ledger as plg
 from climate.gcm import sbm_closure as scl
 from climate.gcm import sbm_redesign as srd
+from climate.gcm import sbm_redesign2 as sr2
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -1087,6 +1094,11 @@ SBM_CLOSURE_PATCHES = [('rainmod.f90', scl.CLOSURE_MARKER, scl.SBM_CLOSURE_EDITS
 # stays as it was and a source that carries it takes this one where its marker is missing; with nclos_bm 0 or 1 the
 # routine's arithmetic is as before.
 SBM_REDESIGN_PATCHES = [('rainmod.f90', srd.REDESIGN_MARKER, srd.SBM_REDESIGN_EDITS)]
+# The second redesign (4 November; sbm_redesign2.py), behind closure (c)'s switch at its value 3 (rainmod's nclos_bm),
+# a patch of its own over the first redesign's, whose hook it follows, and over closure (c)'s, whose sbmapply it calls,
+# so that both stay as they were and a source that carries them takes this one where its marker is missing; with
+# nclos_bm 0, 1 or 2 the routine's arithmetic is as before.
+SBM_REDESIGN2_PATCHES = [('rainmod.f90', sr2.REDESIGN2_MARKER, sr2.SBM_REDESIGN2_EDITS)]
 HUS_MEAN_MARKER = "Terluna: the humidity's true mean"
 HUS_MEAN_CODE = 233
 HUS_MEAN = ('hus_mean', 'specific_humidity_mean_over_the_output_interval', '1')
@@ -1627,9 +1639,9 @@ def patch_chain(twilight: bool = False, trigger: bool = False, depth: bool = Fal
                 boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
                 cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
                 similarity: bool = False, land_store: bool = False, closure: bool = False,
-                redesign: bool = False) -> list:
+                redesign: bool = False, redesign2: bool = False) -> list:
     """The Terluna patches a run with these settings takes, as (file, marker, edits), in the order ensure_patched
-    applies them; the redesigned closure takes closure (c)'s patch beneath its own."""
+    applies them; the redesigned closure takes closure (c)'s patch beneath its own, and the second redesign both."""
     return (PATCHES + (TWILIGHT_PATCHES if twilight else [])
             + (SBM_TRIGGER_PATCHES if trigger or night else [])
             + (SBM_DEPTH_PATCHES if depth or cap or night else [])
@@ -1648,8 +1660,9 @@ def patch_chain(twilight: bool = False, trigger: bool = False, depth: bool = Fal
             + (rdr.RAIN_DROP_PATCHES if rain_drops else [])
             + ([('restartmod.f90', SWITCH_MARKER, SWITCH_RESTART_EDITS)] + lsf.LAND_STORE_PATCHES
                if land_store else [])
-            + (SBM_CLOSURE_PATCHES if closure or redesign else [])
-            + (SBM_REDESIGN_PATCHES if redesign else []))
+            + (SBM_CLOSURE_PATCHES if closure or redesign or redesign2 else [])
+            + (SBM_REDESIGN_PATCHES if redesign or redesign2 else [])
+            + (SBM_REDESIGN2_PATCHES if redesign2 else []))
 
 
 def patch_catalogue() -> list:
@@ -1672,7 +1685,7 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                    boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
                    cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
                    similarity: bool = False, land_store: bool = False, closure: bool = False,
-                   redesign: bool = False) -> dict:
+                   redesign: bool = False, redesign2: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
@@ -1690,7 +1703,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     (land_store.LAND_STORE_PATCHES, with the switch patch's restart_has_array in restartmod.f90, reading the 10 m wind
     patch's wind), and the scheme's closure (c) with route L (SBM_CLOSURE_PATCHES, over the depth test's and the
     cap's patches, calling the gust patch's gustcol, with restart_has_array for route L's history), and the
-    redesigned closure (SBM_REDESIGN_PATCHES, over closure (c)'s), for a run that sets them (patch_chain), and return
+    redesigned closure (SBM_REDESIGN_PATCHES, over closure (c)'s) with the second redesign (SBM_REDESIGN2_PATCHES, over
+    both), for a run that sets them (patch_chain), and return
     each patched file's hash for the run key. The
     folder's ledger (patch_ledger.py) records the version of each patch applied, and a file that carries a patch's
     marker is refused unless the ledger holds the runner's version of that patch for it."""
@@ -1719,6 +1733,9 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     if redesign and not (depth and cap and gust):
         raise RuntimeError("the redesigned closure's patch goes over closure (c)'s, which goes over the depth test's "
                            "and the shallow cap's and calls the gust patch's gustcol")
+    if redesign2 and not (depth and cap and gust):
+        raise RuntimeError("the second redesign's patch goes over the first redesign's and closure (c)'s, which go over "
+                           "the depth test's and the shallow cap's and call the gust patch's gustcol")
     hashes = {}
     ledger = plg.read(src)
     for name, marker, edits in patch_chain(twilight=twilight, trigger=trigger, depth=depth, cap=cap, massflux=massflux,
@@ -1726,7 +1743,7 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                                            boundary_layer=boundary_layer, night=night, humidity_mean=humidity_mean,
                                            cloud_water=cloud_water, gust=gust, rain_drops=rain_drops,
                                            similarity=similarity, land_store=land_store, closure=closure,
-                                           redesign=redesign):
+                                           redesign=redesign, redesign2=redesign2):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1884,7 +1901,8 @@ def convection_setting(scheme='sbm', **values) -> dict:
     the default, left out): its own relaxation time and Romps's humidity in place of rh, which the record then leaves
     out, on the 200 hPa depth test with the shallow cap and with none of the other options; route_l adds route L to
     it (sbm_closure.route_l_record). closure 'redesign' takes the redesigned closure of SBM_REDESIGN_PATCHES
-    (sbm_redesign.redesign_record) on the same terms, and no route L."""
+    (sbm_redesign.redesign_record) on the same terms, and no route L; closure 'redesign2' takes the second redesign of
+    SBM_REDESIGN2_PATCHES (sbm_redesign2.record) on the same terms with its own 12-hour relaxation."""
     if scheme == 'massflux':
         values = dict(values)
         start = values.pop('start', None)
@@ -1932,17 +1950,19 @@ def convection_setting(scheme='sbm', **values) -> dict:
     if values.get('diagnostic_night'):
         s['diagnostic_night'] = dict(SBM_NIGHT_RECORD)
     closure, route_l = values.get('closure'), values.get('route_l')
-    if closure not in (None, 'design', 'c', 'redesign'):
-        raise ValueError(f"the closure is the design scheme's ('design'), closure (c) ('c') or the redesigned closure "
-                         f"('redesign'), not {closure!r}")
+    if closure not in (None, 'design', 'c', 'redesign', 'redesign2'):
+        raise ValueError(f"the closure is the design scheme's ('design'), closure (c) ('c'), the redesigned closure "
+                         f"('redesign') or the second redesign ('redesign2'), not {closure!r}")
     if route_l and closure != 'c':
         raise ValueError('route L launches closure (c); it needs closure c')
-    if closure in ('c', 'redesign'):
-        name = 'closure (c)' if closure == 'c' else 'the redesigned closure'
+    if closure in ('c', 'redesign', 'redesign2'):
+        name = {'c': 'closure (c)', 'redesign': 'the redesigned closure', 'redesign2': 'the second redesign'}[closure]
+        tau = sr2.TAU_S if closure == 'redesign2' else scl.TAU_S
         if values.get('rh') is not None:
-            raise ValueError(f"{name} relaxes toward Romps's humidity, which takes the place of rh; leave rh out")
-        if values.get('tau_s') is not None and float(values['tau_s']) != scl.TAU_S:
-            raise ValueError(f'{name} relaxes over its own {scl.TAU_S:.0f} s; leave tau_s out')
+            humidity = "0.70 of the air's own saturation" if closure == 'redesign2' else "Romps's humidity"
+            raise ValueError(f"{name} relaxes toward {humidity}, which takes the place of rh; leave rh out")
+        if values.get('tau_s') is not None and float(values['tau_s']) != tau:
+            raise ValueError(f'{name} relaxes over its own {tau:.0f} s; leave tau_s out')
         if s.get('deep_hpa') != scl.DEEP_PA / 100.0 or not s.get('shallow_cap'):
             raise ValueError(f'{name} takes the {scl.DEEP_PA / 100.0:.0f} hPa depth test with the shallow cap')
         others = [k for k in ('cape_j_kg', 'mixing_steps', 'diagnostic_night') if k in s]
@@ -1950,7 +1970,8 @@ def convection_setting(scheme='sbm', **values) -> dict:
         if others:
             raise ValueError(f'{name} runs with none of the options {others}')
         del s['rh']
-        s.update(tau_s=scl.TAU_S, closure=scl.closure_record() if closure == 'c' else srd.redesign_record())
+        s.update(tau_s=tau, closure={'c': scl.closure_record, 'redesign': srd.redesign_record,
+                                     'redesign2': sr2.record}[closure]())
         if route_l:
             s['route_l'] = scl.route_l_record()
     return dict(scheme='sbm', nprc=2, **s)
@@ -1977,9 +1998,10 @@ def convection_namelist(c: dict) -> list:
         entries.append(('NSHCAP_BM', '1'))
     if c.get('diagnostic_night'):
         entries.append(('NDIAGNIGHT_BM', '1'))                       # the night switch, a diagnostic
-    if 'closure' in c:                       # closure (c) (1) or the redesign (2), and route L, with their constants
-        entries.append(('NCLOS_BM', '2' if c['closure']['form'] == 'redesign' else '1'))
-        entries += [(name.upper(), repr(float(value))) for name, value in c['closure']['constants'].items()]
+    if 'closure' in c:       # closure (c) (1), the redesign (2) or the second (3), and route L, with their constants
+        entries.append(('NCLOS_BM', {'c': '1', 'redesign': '2', 'redesign2': '3'}[c['closure']['form']]))
+        entries += [(name.upper(), str(value) if isinstance(value, int) else repr(float(value)))
+                    for name, value in c['closure']['constants'].items()]
     if 'route_l' in c:
         entries.append(('NROUTEL_BM', '1'))
         entries += [(name.upper(), repr(float(value))) for name, value in c['route_l']['constants'].items()]
@@ -1995,6 +2017,12 @@ def uses_redesign_patch(convection: dict | None) -> bool:
     """Whether a run's convection settings (as given to configuration) take the redesigned closure of
     SBM_REDESIGN_PATCHES, which goes over closure (c)'s patch."""
     return bool(convection) and convection.get('closure') == 'redesign'
+
+
+def uses_redesign2_patch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) take the second redesign of
+    SBM_REDESIGN2_PATCHES, which goes over the first redesign's and closure (c)'s patches."""
+    return bool(convection) and convection.get('closure') == 'redesign2'
 
 
 def uses_depth_patch(convection: dict | None) -> bool:
@@ -2134,9 +2162,10 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     store = (lsf.setting(land_store['product'], land_store['floor'], land_store['surface'], land_store['library'],
                          land_store['hollows'], planet['gravity_m_s2'], exp['pressure_pa'], root=ROOT)
              if land_store is not None else None)                                              # refuses a bad choice
-    if uses_closure_patch(convection) or uses_redesign_patch(convection):   # refused before a patch reaches the source
+    redesigned = uses_redesign_patch(convection) or uses_redesign2_patch(convection)
+    if uses_closure_patch(convection) or redesigned:                         # refused before a patch reaches the source
         convection_setting(**convection)
-        if surface_gust is None and uses_redesign_patch(convection):
+        if surface_gust is None and redesigned:
             raise ValueError("the redesigned closure's patch goes over closure (c)'s, which calls the gust patch's "
                              'gustcol; set surface_gust')
         if surface_gust is None:
@@ -2157,7 +2186,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      rain_drops=rain_drops is not None,
                                      similarity=surface_gust == 'beljaars_similarity',
                                      land_store=store is not None, closure=uses_closure_patch(convection),
-                                     redesign=uses_redesign_patch(convection)),
+                                     redesign=uses_redesign_patch(convection),
+                                     redesign2=uses_redesign2_patch(convection)),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -3117,7 +3147,7 @@ def main(argv=None) -> int:
     parser.add_argument('--sbm-shallow-cap', action='store_true',
                         help="with --sbm-deep-hpa, a shallow cloud's top no higher than that depth above its own base, "
                              "in place of PlaSim's 700 hPa (SBM_CAP_PATCHES; part of the run key)")
-    parser.add_argument('--sbm-closure', choices=('design', 'c', 'redesign'), default='design',
+    parser.add_argument('--sbm-closure', choices=('design', 'c', 'redesign', 'redesign2'), default='design',
                         help="the scheme's closure: the design run's (rh of the parcel's saturation over tau), "
                              "closure (c), the whole convecting column relaxed over 18 h toward the parcel diluted "
                              "2e-4 per metre and Romps's humidity for each layer's detrainment (sbm_closure.py; "
@@ -3125,7 +3155,11 @@ def main(argv=None) -> int:
                              "parcel and relaxed toward the diluted parcel, Romps's humidity in the buoyant cloud and "
                              "the air's own vapour beneath it, warming only toward a reference above the air and "
                              "moistening without rain where the column holds less vapour than its reference "
-                             '(sbm_redesign.py; SBM_REDESIGN_PATCHES over closure (c)\'s); c and redesign need '
+                             '(sbm_redesign.py; SBM_REDESIGN_PATCHES over closure (c)\'s), or the second redesign, '
+                             "its trigger's level of free convection at or above the condensation level, relaxed over "
+                             '12 h toward the zero-buoyancy state of a plume from the lowest level\'s air and 0.70 of '
+                             "the air's own saturation, the rain's heat warming only the layers below their reference "
+                             '(sbm_redesign2.py; SBM_REDESIGN2_PATCHES over both); c, redesign and redesign2 need '
                              '--sbm-deep-hpa 200, --sbm-shallow-cap and --surface-gust, and take no --sbm-rh or '
                              '--sbm-tau; part of the run key')
     parser.add_argument('--sbm-route-l', action='store_true',
@@ -3236,9 +3270,9 @@ def main(argv=None) -> int:
         parser.error('--sbm-closure and --sbm-route-l belong to the simplified Betts-Miller scheme (--convection sbm)')
     if args.sbm_closure == 'c' and args.surface_gust == 'none':
         parser.error("--sbm-closure c calls the gust patch's depth for route L; set --surface-gust")
-    if args.sbm_closure == 'redesign' and args.surface_gust == 'none':
-        parser.error("--sbm-closure redesign goes over closure (c)'s patch, which calls the gust patch's depth; set "
-                     '--surface-gust')
+    if args.sbm_closure in ('redesign', 'redesign2') and args.surface_gust == 'none':
+        parser.error(f"--sbm-closure {args.sbm_closure} goes over closure (c)'s patch, which calls the gust patch's "
+                     'depth; set --surface-gust')
     sbm_given = [k for k in ('sbm_tau', 'sbm_rh', 'sbm_eps', 'sbm_cin', 'sbm_cape', 'sbm_trigger_eps', 'sbm_deep_hpa',
                              'sbm_mixing_steps') if getattr(args, k) is not None]
     if sbm_given and args.convection != 'sbm':
@@ -3251,8 +3285,9 @@ def main(argv=None) -> int:
                           diagnostic_night=args.sbm_diagnostic_night or None,
                           closure=None if args.sbm_closure == 'design' else args.sbm_closure,
                           route_l=args.sbm_route_l or None)
-        if uses_closure_patch(convection) or uses_redesign_patch(convection) or args.sbm_route_l:
-            try:                                 # closure (c)'s, the redesign's and route L's combinations, refused here
+        if (uses_closure_patch(convection) or uses_redesign_patch(convection) or uses_redesign2_patch(convection)
+                or args.sbm_route_l):
+            try:                       # closure (c)'s, the redesigns' and route L's combinations, refused here
                 convection_setting(**convection)
             except ValueError as err:
                 parser.error(str(err))
