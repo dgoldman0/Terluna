@@ -1,0 +1,112 @@
+{
+ "schema": "terluna.climate.ocean-checks/1",
+ "model": "mitgcm",
+ "seiches_smythii": {
+  "cells": 4746,
+  "deltat_s": 120.0,
+  "days": 14.0,
+  "modes": [
+   {
+    "mode": 1,
+    "solver_hours": 40.17854774486047,
+    "mitgcm_hours": 40.178638042431736,
+    "relative_difference": 2.2474075429546048e-06
+   },
+   {
+    "mode": 2,
+    "solver_hours": 20.646557614110183,
+    "mitgcm_hours": 20.646734393116155,
+    "relative_difference": 8.562154005353761e-06
+   },
+   {
+    "mode": 3,
+    "solver_hours": 16.734439154502237,
+    "mitgcm_hours": 16.734657320310863,
+    "relative_difference": 1.303693578313947e-05
+   }
+  ],
+  "mean_level_range_m": 7.229950699362358e-17
+ },
+ "forced_fecunditatis": {
+  "line": {
+   "argument": "2D +M'",
+   "period_days": 9.613717832177953
+  },
+  "cells": 106819,
+  "fecunditatis_cells": 4345,
+  "results": [
+   {
+    "friction_factor": 10,
+    "friction_m_s": 0.00025,
+    "days": 110.0,
+    "fit_days": 50.0,
+    "deltat_s": 1800.0,
+    "forcing_record_s": 21600.0,
+    "forcing_interpolation_amplitude": 0.9977752779175545,
+    "fecunditatis_ratio": {
+     "solver": 5.434232747508228,
+     "mitgcm": 5.3975551928087215
+    },
+    "nearside_ratio": {
+     "solver": 2.925059885828775,
+     "mitgcm": 2.9063842493324157
+    },
+    "fecunditatis_phase_deg": {
+     "solver": -85.45189628254705,
+     "mitgcm": -85.77645513043804
+    },
+    "rms_difference_over_rms_solver": 0.00814306240025382
+   },
+   {
+    "friction_factor": 100,
+    "friction_m_s": 0.0025,
+    "days": 60.0,
+    "fit_days": 30.0,
+    "deltat_s": 1800.0,
+    "forcing_record_s": 21600.0,
+    "forcing_interpolation_amplitude": 0.9977752779175545,
+    "fecunditatis_ratio": {
+     "solver": 0.6144048803950006,
+     "mitgcm": 0.6130974901449157
+    },
+    "nearside_ratio": {
+     "solver": 0.9390046484890353,
+     "mitgcm": 0.9370742150678817
+    },
+    "fecunditatis_phase_deg": {
+     "solver": -88.32077386796308,
+     "mitgcm": -88.6601565627335
+    },
+    "rms_difference_over_rms_solver": 0.003154413390640971
+   },
+   {
+    "friction_factor": 100,
+    "friction_m_s": 0.0025,
+    "days": 60.0,
+    "fit_days": 30.0,
+    "deltat_s": 900.0,
+    "forcing_record_s": 10800.0,
+    "forcing_interpolation_amplitude": 0.9994438194793887,
+    "fecunditatis_ratio": {
+     "solver": 0.6144048803950006,
+     "mitgcm": 0.6140478335426459
+    },
+    "nearside_ratio": {
+     "solver": 0.9390046484890353,
+     "mitgcm": 0.9384910484571951
+    },
+    "fecunditatis_phase_deg": {
+     "solver": -88.32077386796308,
+     "mitgcm": -88.49026497457155
+    },
+    "rms_difference_over_rms_solver": 0.0012768887025593246
+   }
+  ]
+ },
+ "channel": {
+  "analytic_hours": 4.180058915076198,
+  "solver_hours": 4.1809228544834705,
+  "model_hours": 4.180977504014634,
+  "model_over_analytic": 0.0002197550219025235
+ }
+}

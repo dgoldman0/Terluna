@@ -1,0 +1,129 @@
+diff -ruN a/src/Core/schism_glbl.F90 b/src/Core/schism_glbl.F90
+--- a/src/Core/schism_glbl.F90
++++ b/src/Core/schism_glbl.F90
+@@ -46,8 +46,15 @@
+   real(rkind),parameter :: small1=real(1.d-6,rkind) !small non-negative number
+   real(rkind),parameter :: small2=small1*100._rkind !slightly larger number
+   real(rkind),parameter :: pi=3.141592653589793_rkind
+-  real(rkind),parameter :: grav=9.81_rkind
+-  real(rkind),parameter :: omega_e=real(7.292d-5,rkind) !angular freq. of earth rotation
++  !Terluna lunar build: the Moon's surface gravity MOON_GM/MOON_RADIUS**2 and its rotation, 2*pi over the
++  !sidereal month of 27.321661 days (shared/constants.json)
++  real(rkind),parameter :: grav=1.6242188765608128_rkind
++  real(rkind),parameter :: omega_e=real(2.6616995272150692d-6,rkind) !angular freq. of the Moon's rotation
++  !Terluna lunar tide (ilunartide=1): equilibrium height = ramp * sum over k of ctide(k)*tide_basis(k,node),
++  !ctide interpolated in time from tide_coef_th (records tide_dt_th seconds apart from the run's start)
++  integer,save :: ilunartide=0,ntide_coef=0,ntide_rec=0
++  real(rkind),save :: tide_dt_th=0.d0
++  real(rkind),save,allocatable :: tide_basis(:,:),tide_coef_th(:,:),ctide(:),tide_buf(:,:)
+ 
+   !# of threads in openMP. Note that this is the # at the start of run (thus the 'default'), but
+   !you can change # of threads in some loops (after that, it should revert to default)
+diff -ruN a/src/Core/scribe_io.F90 b/src/Core/scribe_io.F90
+--- a/src/Core/scribe_io.F90
++++ b/src/Core/scribe_io.F90
+@@ -1095,9 +1095,9 @@
+           if(iret.ne.NF90_NOERR) call parallel_abort('fill_header_static: crs(3)')
+           iret=nf90_put_att(ncid_schism0,ivarid,'longitude_of_prime_meridian',0.0)
+           if(iret.ne.NF90_NOERR) call parallel_abort('fill_header_static: crs(4)')
+-          iret=nf90_put_att(ncid_schism0,ivarid,'semi_major_axis',6378137.0)
++          iret=nf90_put_att(ncid_schism0,ivarid,'semi_major_axis',1737400.0) !Terluna: the Moon
+           if(iret.ne.NF90_NOERR) call parallel_abort('fill_header_static: crs(5)')
+-          iret=nf90_put_att(ncid_schism0,ivarid,'inverse_flattening',298.257223563)
++          iret=nf90_put_att(ncid_schism0,ivarid,'inverse_flattening',0.0) !Terluna: a sphere
+           if(iret.ne.NF90_NOERR) call parallel_abort('fill_header_static: crs(6)')
+         endif
+   
+diff -ruN a/src/Hydro/schism_init.F90 b/src/Hydro/schism_init.F90
+--- a/src/Hydro/schism_init.F90
++++ b/src/Hydro/schism_init.F90
+@@ -189,7 +189,7 @@
+       namelist /CORE/ipre,ibc,ibtp,ntracer_gen,ntracer_age,sed_class,eco_class, &
+      &nspool,ihfskip,msc2,mdc2,dt,rnday,nbins_veg_vert
+ 
+-      namelist /OPT/ gen_wsett,flag_fib,ics,rearth_pole,rearth_eq,indvel, &
++      namelist /OPT/ gen_wsett,flag_fib,ics,rearth_pole,rearth_eq,indvel,ilunartide, &
+      &imm,ibdef,ihot,ihydraulics,izonal5,slam0,sfea0,iupwind_mom,ihorcon, &
+      &hvis_coef0,ishapiro,shapiro0,niter_shap,ihdif,thetai,drampbc, &
+      &dramp,nadv,dtb_min,dtb_max,h0,nchi,dzb_min, &
+@@ -461,7 +461,8 @@
+ 
+       !Init defaults
+       indvel=0; iupwind_mom=0; ihorcon=0; hvis_coef0=0.025_rkind; ishapiro=1; shapiro0=0.5_rkind; niter_shap=1
+-      gen_wsett=real(0.d0,rkind); flag_fib=1; ics=1; rearth_pole=6378206.4_rkind; rearth_eq=6378206.4_rkind; 
++      gen_wsett=real(0.d0,rkind); flag_fib=1; ics=1; rearth_pole=1737400._rkind; rearth_eq=1737400._rkind; ilunartide=0; !Terluna: the Moon's radius
++      
+       imm=0; ibdef=10; ihot=0; ihydraulics=0; izonal5=0; slam0=-124._rkind; sfea0=45._rkind; 
+       ihdif=0; thetai=0.6_rkind; drampbc=0.d0
+       dramp=1._rkind; nadv=1; dtb_min=10._rkind; dtb_max=30._rkind; h0=0.01_rkind; nchi=0; dzb_min=0.5_rkind 
+@@ -2306,6 +2307,43 @@
+       read(31,*) !start_time
+ !...  Earth tidal potential
+       read(31,*) ntip,tip_dp !cut-off depth for applying tidal potential
++!     Terluna lunar build: Earth's constituents (species patterns and the 0.69 Love factor) do not apply,
++!     and sflux's bulk formulas still carry Earth's gravity; the Moon's tide comes from ilunartide=1
++      if(ntip>0) call parallel_abort('INIT: lunar build, set ntip=0 and use ilunartide=1 for the tide')
++      if(nws==2) call parallel_abort('INIT: lunar build, sflux (nws=2) carries Earth constants; audit it first')
++      if(ilunartide==1) then
++        if(myrank==0) then
++          open(32,file=in_dir(1:len_in_dir)//'lunar_tide.th',status='old')
++          read(32,*) ntide_rec,ntide_coef,tide_dt_th
++        endif
++        call mpi_bcast(ntide_rec,1,itype,0,comm,istat)
++        call mpi_bcast(ntide_coef,1,itype,0,comm,istat)
++        call mpi_bcast(tide_dt_th,1,rtype,0,comm,istat)
++        if(ntide_rec<2.or.ntide_coef<1.or.tide_dt_th<=0.d0) call parallel_abort('INIT: check lunar_tide.th')
++        allocate(tide_coef_th(ntide_coef,ntide_rec),tide_basis(ntide_coef,npa),ctide(ntide_coef), &
++     &tide_buf(ntide_coef,np_global),stat=istat)
++        if(istat/=0) call parallel_abort('INIT: alloc failure for the lunar tide')
++        if(myrank==0) then
++          do j=1,ntide_rec
++            read(32,*) tide_coef_th(:,j)
++          enddo !j
++          close(32)
++          open(32,file=in_dir(1:len_in_dir)//'lunar_tide_basis.in',status='old')
++          read(32,*) itmp1,itmp2
++          if(itmp1/=np_global.or.itmp2/=ntide_coef) call parallel_abort('INIT: check lunar_tide_basis.in')
++          do i=1,np_global
++            read(32,*) tide_buf(:,i)
++          enddo !i
++          close(32)
++        endif !myrank
++        call mpi_bcast(tide_coef_th,ntide_coef*ntide_rec,rtype,0,comm,istat)
++        call mpi_bcast(tide_buf,ntide_coef*np_global,rtype,0,comm,istat)
++        tide_basis=0.d0
++        do i=1,np_global
++          if(ipgl(i)%rank==myrank) tide_basis(:,ipgl(i)%id)=tide_buf(:,i)
++        enddo !i
++        deallocate(tide_buf)
++      endif !ilunartide
+       if(ntip>0) then
+         !Alloc local arrays separately to avoid crash under ESMF-PDAF flexible mode ensemble
+         if(.not.allocated(tp_name)) allocate(tp_name(ntip),stat=istat)
+diff -ruN a/src/Hydro/schism_step.F90 b/src/Hydro/schism_step.F90
+--- a/src/Hydro/schism_step.F90
++++ b/src/Hydro/schism_step.F90
+@@ -429,6 +429,15 @@
+         ramp=1.d0
+       endif
+ 
++!     Terluna lunar tide: the coefficients at this time, linear between records
++      if(ilunartide==1) then
++        tmp1=time/tide_dt_th
++        if(tmp1>real(ntide_rec-1,rkind)+1.d-6) call parallel_abort('STEP: the run outlasts lunar_tide.th')
++        itmp1=min(max(int(tmp1),0),ntide_rec-2)
++        tmp2=min(max(tmp1-real(itmp1,rkind),0.d0),1.d0)
++        ctide(:)=(1.d0-tmp2)*tide_coef_th(:,itmp1+1)+tmp2*tide_coef_th(:,itmp1+2)
++      endif
++
+ !$OMP parallel default(shared) private(i,j,ncyc,arg)
+ 
+ !...  Compute new bed deformation
+@@ -443,6 +452,7 @@
+ !$OMP do
+       do i=1,npa
+         etp(i)=0.d0
++        if(ilunartide==1) etp(i)=ramp*sum(ctide(1:ntide_coef)*tide_basis(1:ntide_coef,i)) !Terluna lunar tide
+         do j=1,ntip
+           ncyc=int(tfreq(j)*time/2.d0/pi)
+           arg=tfreq(j)*time-real(ncyc,rkind)*2.d0*pi+jspc(j)*xlon(i)+tear(j)
