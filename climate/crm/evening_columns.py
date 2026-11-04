@@ -10,6 +10,7 @@ from pathlib import Path
 
 import numpy as np
 
+from climate.crm import cm1_files
 from climate.crm.cloud_columns import dry_density, read_cm1_constants, sha256, SPECIES
 from climate.crm.ring_analysis import case_geometry, hour_angle, read_snapshot
 from climate.crm.cm1_run import RUNS
@@ -90,7 +91,7 @@ def export_case(name, output):
             rows.setdefault(key, []).append(np.asarray(value, dtype='f4'))
         times.append(day); snapshots.append(int(n))
         path = case/f'cm1out_t{n:06d}_s.dat'
-        raw.append(dict(snapshot=int(n), time_day=day, file=path.name, sha256=sha256(path)))
+        raw.append(dict(snapshot=int(n), time_day=day, file=path.name, sha256=cm1_files.sha256(path)))   # raw bytes
         if count % 40 == 0:
             print(name, count+1, '/', len(numbers), flush=True)
     metadata = dict(schema=SCHEMA, case=name, gcm_run=record['reference']['run'],

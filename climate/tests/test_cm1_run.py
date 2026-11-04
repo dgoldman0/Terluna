@@ -310,7 +310,8 @@ def test_a_case_set_up_from_another_takes_its_inputs_and_only_a_new_executable(t
     source = tmp_path / 'runs' / 'box_0e_small'
     source.mkdir(parents=True)
     for name in ('input_sounding', 'namelist.template', 'terluna_surface.txt', 'progress.json', 'namelist.input',
-                 'cm1out_t000001_s.dat', 'cm1rst_t000002_s.dat', 'cm1_segment_001.log'):
+                 'cm1out_t000001_s.dat', 'cm1rst_t000002_s.dat', 'cm1_segment_001.log',
+                 'cm1out_t000003_s.dat.zst', 'compression_manifest.jsonl'):      # compressed outputs and their record stay
         (source / name).write_text(name)
     (source / 'RRTMG_LW_DATA').symlink_to(source / 'input_sounding')
     (source / 'case.json').write_text(json.dumps(dict(case='box_0e_small', build=dict(label='moon_omp', executable_sha256='old'))))
@@ -1266,6 +1267,106 @@ def test_pruning_keeps_the_starting_restart_the_newest_and_any_incomplete_set(tm
     left = sorted({p.name[8:14] for p in tmp_path.glob('cm1rst_t*_s.dat')})
     assert left == ['000118', '000121', '000122', '000123'] and c.latest_restart(tmp_path) == 122
     assert len(list(tmp_path.glob('cm1rst_t000121_*.dat'))) == 6 and c.prune_restarts(tmp_path, 2, start=118) == []
+
+
+def compress_restarts(case, numbers, monkeypatch):
+    """Compress some of a case's restart sets as cm1_files.compress does, with no CM1 process about and no floor."""
+    from climate.crm import cm1_files as cf
+    monkeypatch.setattr(cf, 'cm1_processes', lambda: [])
+    for n in numbers:
+        for path in cf.restart_files(case, n):
+            assert cf.compress_file(path, floor_bytes=0)['status'] == 'compressed'
+
+
+def test_restart_sets_kept_compressed_count_as_sets_and_are_pruned_whole(tmp_path, monkeypatch):
+    from climate.crm import cm1_files as cf
+    for n in (118, 119, 120, 121, 122):
+        for part in 'isuvwx':
+            (tmp_path / f'cm1rst_t{n:06d}_{part}.dat').write_bytes(f'{n}{part}'.encode())
+    compress_restarts(tmp_path, (118, 119, 122), monkeypatch)
+    (tmp_path / 'cm1rst_t000121_v.dat').unlink()                          # 121 incomplete
+    assert c.latest_restart(tmp_path) == 122
+    assert c.prune_restarts(tmp_path, 1, start=118) == [119, 120]
+    assert cf.restart_numbers(tmp_path) == [118, 122]
+    assert not list(tmp_path.glob('cm1rst_t000119_*')) and not list(tmp_path.glob('cm1rst_t000120_*'))
+    assert len(list(tmp_path.glob('cm1rst_t000121_*.dat'))) == 5           # the incomplete set stays
+
+
+def test_a_rerun_from_a_compressed_restart_gets_raw_copies_checked_against_the_manifest(tmp_path, monkeypatch, capsys):
+    from climate.crm import cm1_files as cf
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    monkeypatch.setattr(cf, 'free_bytes', lambda folder: 10 ** 15)
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    build = tmp_path / 'cm1' / 'build' / 'moon_omp_elec'
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label='moon_omp_elec', executable_sha256='rerun')))
+    source = tmp_path / 'runs' / 'coarse'
+    coarse_run(source)
+    for part in 'isuvwx':
+        (source / f'cm1rst_t000015_{part}.dat').write_text(part * 100)
+    (source / 'progress.json').write_text(json.dumps(dict(segments=[
+        dict(segment=7, model_s=604800.0, executable='first'), dict(segment=8, model_s=691200.0, executable='second')])))
+    (source / 'terluna_ez_648000.bin').write_text('ez')
+    compress_restarts(source, (15,), monkeypatch)
+    assert not (source / 'cm1rst_t000015_s.dat').exists()
+    monkeypatch.setitem(c.CASES, 'again', dict(c.CASES['box_0e_elec_uncapped_corona'],
+                                               restart_from=dict(case='coarse', day=7.5)))
+    case = c.setup('again')
+    assert all((case / f'cm1rst_t000015_{part}.dat').read_text() == part * 100 for part in 'isuvwx')
+    assert not list(case.glob('*.zst')) and not (case / cf.MANIFEST).exists() and not list(case.glob('*.part'))
+    assert all(cf.compressed(source / f'cm1rst_t000015_{part}.dat').exists() for part in 'isuvwx')  # the source stays
+    record = json.loads((case / 'case.json').read_text())
+    assert record['restart_from']['decompressed'] == [f'cm1rst_t000015_{part}.dat' for part in 'isuvwx']
+    assert record['restart_from']['restart'] == 15 and (case / 'terluna_ez_648000.bin').read_text() == 'ez'
+    assert 'restart 15 decompressed' in capsys.readouterr().out
+
+
+def test_a_run_resumed_from_compressed_restart_files_decompresses_them_before_cm1_starts(tmp_path, monkeypatch, capsys):
+    import subprocess
+    from climate.crm import cm1_files as cf
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(cf, 'free_bytes', lambda folder: 10 ** 15)
+    case = tmp_path / 'runs' / 'resumed'
+    case.mkdir(parents=True)
+    (case / 'cm1.exe').write_text('exe')
+    (case / 'case.json').write_text(json.dumps(dict(case='resumed')))
+    (case / 'namelist.template').write_text(' &param1\n run_time = -999.9,\n /\n &param2\n irst = 0,\n rstnum = 1,\n /\n')
+    for part in 'isuvwx':
+        (case / f'cm1rst_t000002_{part}.dat').write_bytes(part.encode() * 1000)
+    compress_restarts(case, (2,), monkeypatch)
+    c._save_progress(case, dict(segments=[dict(segment=1, model_s=7200.0, wall_s=1.0, log='cm1_segment_001.log')],
+                                case='resumed'))
+    monkeypatch.setitem(c.CASES, 'resumed', dict(restart_s=3600.0, segment_s=3600.0, days=3 * 3600.0 / 86400.0))
+    seen, real = {}, subprocess.run
+
+    def cm1(args, **kw):                                                  # CM1 reads its restart and writes the next
+        if args[:1] != ['nice']:
+            return real(args, **kw)
+        cwd = kw['cwd']
+        seen['restart'] = {p: (cwd / f'cm1rst_t000002_{p}.dat').read_bytes() for p in 'isuvwx'}
+        seen['namelist'] = (cwd / 'namelist.input').read_text()
+        for p in 'isuvwx':
+            (cwd / f'cm1rst_t000003_{p}.dat').write_bytes(b'next')
+        kw['stdout'].write(' Program terminated normally\n')
+        return subprocess.CompletedProcess(args, 0)
+
+    monkeypatch.setattr(c.subprocess, 'run', cm1)
+    progress = c.run('resumed', hours=1.0, threads=1)
+    assert seen['restart'] == {p: p.encode() * 1000 for p in 'isuvwx'}
+    assert c.namelist_value(seen['namelist'], 'param2', 'irst') == '1'
+    assert c.namelist_value(seen['namelist'], 'param2', 'rstnum') == '2'
+    log = (case / 'cm1_segment_002.log').read_text().splitlines()
+    assert log[0].startswith('cm1_run: restart 2 decompressed from cm1rst_t000002_i.dat.zst') and cf.MANIFEST in log[0]
+    assert log[-1].strip() == 'Program terminated normally'
+    assert [s['model_s'] for s in progress['segments']] == [7200.0, 10800.0] and not (case / 'run.lock').exists()
+    assert all(cf.compressed(case / f'cm1rst_t000002_{p}.dat').exists() for p in 'isuvwx')     # kept beside
+    assert 'restart 2 decompressed' in capsys.readouterr().out
 
 
 LENGTH_TEMPLATE = FINE_TEMPLATE + (' &param3\n fcor    = -1.155e-06,\n l_inf   =     453.0,\n /\n'

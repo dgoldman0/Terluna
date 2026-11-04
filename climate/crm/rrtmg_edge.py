@@ -34,6 +34,7 @@ from pathlib import Path
 
 import numpy as np
 
+from climate.crm import cm1_files
 from climate.crm import cm1_output as co
 
 HERE = Path(__file__).resolve().parent
@@ -119,7 +120,7 @@ def columns(case_name, from_day, every_snapshot, every_column):
     tap = geo['record']['configuration']['output_s']
     equation_set = co.eqtset(case)
     air = td.earthlike_air(121590.0, 400.0)
-    outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    outputs = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     span = [n for n in outputs if (n - 1) * tap >= from_day * DAY][::every_snapshot]
     cols, ground, cm1, written, levels = [], [], [], [], []
     for n in span:

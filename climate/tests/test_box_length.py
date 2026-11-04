@@ -43,6 +43,25 @@ def test_a_second_output_configuration_is_found_by_its_metadata_beside_the_sourc
         bln.read_snapshot(*found[43200])
 
 
+def test_compressed_outputs_are_found_by_their_metadata_and_read_as_the_raw_ones(tmp_path, monkeypatch):
+    from climate.crm import cm1_files as cf
+    monkeypatch.setattr(cf, 'cm1_processes', lambda: [])
+    names = ['mtime', 'nstep', 'dt', 'adt', 'nwrite']
+    write_ctl(tmp_path / 'cm1out_metadata.ctl', names)
+    np.array([[t, 0.0, 1.0, 1.0, n] for t, n in ((0.0, 1.0), (10800.0, 2.0))], '<f4').tofile(tmp_path / 'cm1out_metadata.dat')
+    write_ctl(tmp_path / 'cm1out_s.ctl', ['qc', 'qi'], nx=2)
+    for n in (1, 2):
+        (np.arange(4, dtype='<f4') + n).tofile(tmp_path / f'cm1out_t{n:06d}_s.dat')
+    raw = {t: bln.read_snapshot(*v) for t, v in bln.output_times(tmp_path).items()}
+    cf.compress(tmp_path, floor_bytes=0)
+    assert not (tmp_path / 'cm1out_t000001_s.dat').exists()
+    found = bln.output_times(tmp_path)
+    assert sorted(found) == sorted(raw) == [0, 10800]
+    for t, (path, ctl) in found.items():
+        d = bln.read_snapshot(path, ctl)
+        assert all(d[k].tobytes() == raw[t][k].tobytes() for k in ('qc', 'qi'))
+
+
 def test_the_statistics_join_over_configurations_and_give_the_rain_by_quarter(tmp_path, monkeypatch):
     monkeypatch.setattr(bln.ra, 'RUNS', tmp_path)
     case = tmp_path / 'box'

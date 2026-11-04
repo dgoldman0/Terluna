@@ -21,6 +21,7 @@ import json
 from pathlib import Path
 import sys
 import numpy as np
+from climate.crm import cm1_files
 
 HERE = Path(__file__).resolve().parent
 RUNS = HERE / 'runs'
@@ -101,9 +102,10 @@ def grads_layout(ctl: Path):
 
 def read_snapshot(case: Path, n: int, kind: str = 's') -> dict:
     """One output time: surface fields as (nx,) arrays, sections as (nz, nx). A three-dimensional run's columns
-    are laid out row by row, x fastest, as (ny * nx,) and (nz, ny * nx)."""
+    are laid out row by row, x fastest, as (ny * nx,) and (nz, ny * nx). The output may be kept compressed
+    (cm1_files)."""
     nx, layout = grads_layout(case / f'cm1out_{kind}.ctl')
-    raw = np.fromfile(case / f'cm1out_t{n:06d}_{kind}.dat', dtype='<f4')
+    raw = cm1_files.fromfile(case / f'cm1out_t{n:06d}_{kind}.dat', dtype='<f4')
     out, offset = {}, 0
     for name, levels in layout:
         size = levels * nx
@@ -189,7 +191,7 @@ def analyse(name: str, from_day: float) -> dict:
     tap = record['configuration']['output_s']
     from climate.crm.cm1_run import solar_day_s
     day_s = solar_day_s()
-    outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    outputs = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     use = [n for n in outputs if (n - 1) * tap >= from_day * 86400.0]
     if not use:
         raise RuntimeError(f'no output after day {from_day}')

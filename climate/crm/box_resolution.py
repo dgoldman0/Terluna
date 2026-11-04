@@ -41,6 +41,7 @@ import numpy as np
 
 from climate.crm import box_budget as bb
 from climate.crm import box_onset as bo
+from climate.crm import cm1_files
 from climate.crm import cm1_output as co
 from climate.crm import ring_analysis as ra
 
@@ -220,7 +221,7 @@ def snapshot_rows(name: str, first_s: float = 0.0, last_s: float = np.inf) -> li
     tap = json.loads((case / 'case.json').read_text())['configuration']['output_s']
     zh = ra.case_geometry(case)['zh']
     rows = []
-    for n in sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat')):
+    for n in sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat')):
         t = (n - 1) * tap
         if first_s - 1.0 <= t <= last_s + 1.0:
             d = ra.read_snapshot(case, n)
@@ -357,7 +358,7 @@ def run_record(name: str) -> dict:
     record = json.loads((case / 'case.json').read_text())
     progress = json.loads((case / 'progress.json').read_text())
     s = stats(case)
-    written = sum(p.stat().st_size for p in case.iterdir() if p.is_file() and not p.is_symlink())
+    written = cm1_files.written_bytes(case)                             # as CM1 wrote it, compressed files at their raw size
     dt = s['dt'][s['dt'] > 0.0]
     return dict(case=name, grid=record['grid'], runner=record['runner'], executable=record['build']['executable_sha256'],
                 held=record['held'], initial=record['initial'],

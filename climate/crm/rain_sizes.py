@@ -18,7 +18,7 @@ from pathlib import Path
 
 import numpy as np
 
-from climate.crm import cm1_run, ring_analysis as ra
+from climate.crm import cm1_files, cm1_run, ring_analysis as ra
 
 RUNS, RESULTS = ra.RUNS, ra.RESULTS
 SCHEMA = 'terluna.climate.crm-rain-sizes/1'
@@ -55,7 +55,7 @@ def census(name: str, from_day: float, stride: int = 1) -> dict:
     limits = cm1_run.rain_limits(gravity, namelist_settings(case))
     scale = record.get('time_scale', 1.0)
     output_s = record['configuration']['output_s'] * scale
-    numbers = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    numbers = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     first = int(round(from_day * 86400.0 * scale / output_s)) + 1
     used = [n for n in numbers if n >= first][::stride]
     if not used:

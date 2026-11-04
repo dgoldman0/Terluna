@@ -28,6 +28,7 @@ import re
 from pathlib import Path
 import sys
 import numpy as np
+from climate.crm import cm1_files
 from climate.crm import ring_analysis as ra
 from climate.crm.mixed_phase_analysis import significant, stats
 
@@ -344,7 +345,7 @@ def analyse(name: str) -> dict:
                               negative_c=float(np.nansum(r[:, 0] * dt)),
                               peak_c_s=float(np.nanmax(np.abs(r))),
                               per_bin_c=binned(rates['time_s'], (r[:, 1] - r[:, 0]) * dt, edges))
-    snaps = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    snaps = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     times = output_times(case)
     structures = []
     for n in snaps:
@@ -368,8 +369,8 @@ def against(name: str, other: str) -> dict:
     """The storm beside another run of the same case: the largest updraft, reflectivity, graupel, hail, cloud ice and
     its number, and accumulated rain at each shared snapshot, and the condensate by height as a ratio."""
     a, b = ra.RUNS / name, ra.RUNS / other
-    shared = sorted({int(p.name[8:14]) for p in a.glob('cm1out_t*_s.dat')} &
-                    {int(p.name[8:14]) for p in b.glob('cm1out_t*_s.dat')})
+    shared = sorted({int(p.name[8:14]) for p in cm1_files.glob(a, 'cm1out_t*_s.dat')} &
+                    {int(p.name[8:14]) for p in cm1_files.glob(b, 'cm1out_t*_s.dat')})
     output_s = json.loads((a / 'case.json').read_text())['configuration']['output_s']
     fields = dict(w_m_s=('winterp', 1.0), dbz=('dbz', 1.0), graupel_g_kg=('qg', 1e3), hail_g_kg=('qhl', 1e3),
                   cloud_ice_g_kg=('qi', 1e3), cloud_ice_per_kg=('cci', 1.0), rain_cm=('rain', 1.0))
@@ -480,7 +481,7 @@ def window(name: str, t0: float, t1: float) -> dict:
     output_s = cfg['output_s'] * record.get('time_scale', 1.0)
     times = output_times(case, [case / seg['log'] for seg in segments if (case / seg['log']).exists()])
     snapshots = []
-    for n in sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat')):
+    for n in sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat')):
         t = times.get(n, (n - 1) * output_s)
         if not t0 < t <= t1:
             continue
@@ -608,7 +609,7 @@ def impact_speeds(name: str, t0: float, t1: float) -> dict:
     namelist = (case / 'namelist.template').read_text()
     rows = {k: [] for k in ('graupel', 'hail', 'cloud_ice', 'snow')}
     used = []
-    for n in sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat')):
+    for n in sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat')):
         if not t0 < (n - 1) * output_s <= t1:
             continue
         s = ra.read_snapshot(case, n)

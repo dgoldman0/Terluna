@@ -108,12 +108,12 @@ def ring_composite(name, from_day, spans):
     """The ring's snapshots after from_day by local time over its land and its sea in the same bins: ground and air
     at 2 m (C), each column's mass-weighted temperature over each GCM layer's span above the ground (spans: surface ->
     LAYERS + 1 heights in m), the ground's heat and vapour fluxes (W/m2, upward positive) and the mixed layer (km)."""
-    from climate.crm import ring_analysis as ra
+    from climate.crm import cm1_files, ring_analysis as ra
     from climate.crm.cm1_run import solar_day_s
     case = ra.RUNS / name
     geo = ra.case_geometry(case)
     tap = geo['record']['configuration']['output_s']
-    outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    outputs = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     use = [n for n in outputs if (n - 1) * tap >= from_day * 86400.0]
     if not use:
         raise RuntimeError(f'no output after day {from_day}')

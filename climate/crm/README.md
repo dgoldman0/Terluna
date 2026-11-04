@@ -149,6 +149,38 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_o3 moon_omp_o
 climate/gcm/.venv/bin/python -m climate.crm.build_check ring_equator moon_omp_o3 moon_omp_o3_strict --threads 1    # about 25 minutes
 ```
 
+## How the runs are kept: compressed outputs and restarts
+
+A case's 3-D outputs (`cm1out_tNNNNNN_s.dat`) and restart files (`cm1rst_tNNNNNN_{i,s,u,v,w,x}.dat`) hold nearly
+everything CM1 writes, and [cm1_files.py](cm1_files.py) keeps them raw or compressed with zstd at level 3, without
+loss. A sea box's outputs shrink about 1.9 times and its largest restart file about 3.6 times; `box_jura`'s outputs
+shrink 3 times. Each compressed file, `<file>.zst`, keeps the raw file's times and has a line in its case's
+`compression_manifest.jsonl` giving its name, its raw size, SHA-256 and modification time, its compressed size, the
+zstd version and the time the line was written. The readers in this folder go through
+cm1_files: given the raw file's path, they read the `.zst` when the raw file is gone and return the same bytes
+(`fromfile` for `np.fromfile`, a read-only `memmap` for `np.memmap`, `sha256` and `size`), and the listings (`glob`,
+`restart_numbers`) find files kept either way. A run resumed from a compressed restart set decompresses it first,
+checks it against the manifest and notes this at the top of the segment's log. A case set up from another case's
+compressed restart gets raw copies, checked the same way and listed under `restart_from` in its `case.json`.
+Statistics, diagnostics, metadata, control files, the other output kinds (`_u`, `_v`, `_w` and the vorticities),
+namelists and logs stay raw.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_files compress box_jura     # one file at a time, resumable
+climate/gcm/.venv/bin/python -m climate.crm.cm1_files verify box_jura       # every .zst against its manifest line
+climate/gcm/.venv/bin/python -m climate.crm.cm1_files decompress box_jura cm1rst_t000085_s.dat
+```
+
+compress stops when the drive would keep less than 30 GB free beyond the next file. It streams each file through a
+SHA-256 and `zstd -3 -T1` into `<file>.zst.part`, then decompresses the `.part` back from the drive into a second hash.
+Only when the two hashes agree does it rename the `.part`, append and fsync the manifest line, and remove the raw
+file. Taken up again after a stop, it settles each state the stop can leave. It leaves alone a case that holds
+`run.lock` or that a CM1 process is working in. Since 3 November 2026 most older runs on the research drive are kept
+this way. Runs in current use stay raw, and so do the runs that code outside this folder reads raw (the snow and
+atmospheric-electricity studies, the sea-appearance scan, `climate/gcm/massflux.py`) until that code goes through
+cm1_files. `cloud_columns.py` still hashes `ring_equator`'s outputs raw: the cloud-twilight study's check of its saved
+local clouds pins the module's bytes.
+
 ## The equatorial ring
 
 Case `ring` is the equator as a two-dimensional ring 10,916 km round, in 1,816

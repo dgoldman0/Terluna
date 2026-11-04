@@ -23,6 +23,7 @@ from pathlib import Path
 
 import numpy as np
 
+from climate.crm import cm1_files
 from climate.crm import cm1_output as co
 
 HERE = Path(__file__).resolve().parent
@@ -94,7 +95,7 @@ def ring_budget(name, from_day):
     th_ref = np.interp(zh, zr, thr)
     zl, wl = read_wls(case / 'terluna_wls.txt')
     w_ls = np.interp(zh, zl, wl)
-    outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    outputs = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     names = ('t', 'theta', 'radiation', 'sinking', 'nudging', 'rho')
     span = {k: [] for k in names}
     times, drift = [], []

@@ -21,6 +21,7 @@ import json
 from pathlib import Path
 import sys
 import numpy as np
+from climate.crm import cm1_files
 from climate.crm import ring_analysis as ra
 
 RUNS, RESULTS = ra.RUNS, ra.RESULTS
@@ -104,7 +105,7 @@ def cm1_clear(case: Path, from_day: float, lo: float, hi: float):
     acc = dict(p=0.0, t=0.0, qv=0.0, ps=0.0, t2=0.0, reflected=0.0, air=0.0, ground=0.0, cos_zenith=0.0)
     flux = dict(reflected=0.0, air=0.0, ground=0.0)
     used = total = 0
-    for n in sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat')):
+    for n in sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat')):
         if (n - 1) * tap < from_day * 86400.0:
             continue
         total += 1

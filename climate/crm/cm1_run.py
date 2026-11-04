@@ -29,7 +29,8 @@ a fresh copy of its source for every build, the way climate/gcm/exoplasim_run.py
   wind with it.
 
 Runs live in climate/crm/runs (a link to the external drive), one folder per case, and restart from
-their latest restart file.
+their latest restart file. A case's 3-D outputs and restart files may be kept compressed (cm1_files); a
+run decompresses the restart set it starts from, checked against the case's manifest, before CM1 starts.
 """
 from __future__ import annotations
 import argparse
@@ -46,6 +47,7 @@ import time
 import urllib.request
 
 from climate.crm import cm1_elec
+from climate.crm import cm1_files
 from shared.constants import (CM1_GRAVITY, CM1_RAIN_BREAKUP_CUTOFF, CM1_RAIN_BREAKUP_RATE, CM1_RAIN_FALL_CAP,
                               CM1_RAIN_FALL_EXPONENT, CM1_RAIN_MEAN_DIAMETER_CAP)
 
@@ -2960,7 +2962,7 @@ def ring_sea_profile(days: float = 3.0, name: str = 'ring') -> dict:
     case = RUNS / name
     geo = ra.case_geometry(case)
     tap = geo['record']['configuration']['output_s']
-    outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    outputs = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     last = (outputs[-1] - 1) * tap
     use = [n for n in outputs if (n - 1) * tap >= last - days * 86400.0]
     profile = water_mean_profile((ra.read_snapshot(case, n) for n in use), geo['land'])
@@ -2982,7 +2984,7 @@ def setup_from(name: str, cfg: dict) -> Path:
     case.mkdir(parents=True, exist_ok=True)
     for item in sorted(source.iterdir()):
         if item.name.startswith(('cm1out_', 'cm1rst_', 'cm1_segment_')) or item.name in (
-                'progress.json', 'run.lock', 'STOP', 'namelist.input', 'cm1.exe', 'case.json'):
+                'progress.json', 'run.lock', 'STOP', 'namelist.input', 'cm1.exe', 'case.json', cm1_files.MANIFEST):
             continue
         target = case / item.name
         if target.is_symlink() or target.exists():
@@ -3096,7 +3098,7 @@ def setup_fine(name: str, cfg: dict) -> Path:
         raise RuntimeError(f'{case} has started; remove it to set up afresh')
     output_s = src['configuration']['output_s']
     n = round(fine['day'] * 86400.0 / output_s) + 1
-    if abs((n - 1) * output_s - fine['day'] * 86400.0) > 1.0 or not (source / f'cm1out_t{n:06d}_s.dat').exists():
+    if abs((n - 1) * output_s - fine['day'] * 86400.0) > 1.0 or not cm1_files.exists(source / f'cm1out_t{n:06d}_s.dat'):
         raise RuntimeError(f"{fine['case']} has no output at day {fine['day']}")
     case.mkdir(parents=True, exist_ok=True)
     start = fine_start(ra.read_snapshot(source, n))
@@ -3203,7 +3205,7 @@ def setup_restart(name: str, cfg: dict) -> Path:
     start_s = fr['day'] * 86400.0 * scale
     n = round(start_s / restart_s)
     files = [source / f'cm1rst_t{n:06d}_{part}.dat' for part in 'isuvwx']
-    if abs(n * restart_s - start_s) > 1.0 or not all(f.exists() for f in files):
+    if abs(n * restart_s - start_s) > 1.0 or not all(cm1_files.exists(f) for f in files):
         raise RuntimeError(f"{fr['case']} has no restart at day {fr['day']}")
     ez = source / f'terluna_ez_{round(n * restart_s)}.bin'
     if cfg.get('elec') is not None and not ez.exists():
@@ -3218,8 +3220,11 @@ def setup_restart(name: str, cfg: dict) -> Path:
     for item in RESTART_INPUTS:
         if (source / item).exists():
             shutil.copy2(source / item, case / item)
-    for f in files + ([ez] if ez.exists() else []):
-        shutil.copy2(f, case / f.name)
+    decompressed = [f.name for f in files + ([ez] if ez.exists() else [])
+                    if cm1_files.copy_raw(f, case / f.name)]                 # a compressed one checked as it is written
+    if decompressed:
+        print(f"{name}: restart {n} decompressed from {fr['case']}'s {', '.join(d + '.zst' for d in decompressed)}, "
+              f'each checked against its {cm1_files.MANIFEST}', flush=True)
     forcing = change_forcing(case, cfg['forcing_change']) if cfg.get('forcing_change') else None
     windows = (None if cfg.get('weather')                                  # setup_weather writes its own
                else restart_windows(window_root(source), case, n * restart_s, case_length_s(cfg, scale)))
@@ -3259,7 +3264,8 @@ def setup_restart(name: str, cfg: dict) -> Path:
                   build=build_record, electricity=electricity, rain_limits=rain, corrected_wind=wind or None,
                   **({'corrected_inflow': inflow} if inflow else {}),
                   restart_from=dict(case=fr['case'], day=fr['day'], restart=n, model_s=n * restart_s,
-                                    made_by=made.get('executable')),
+                                    made_by=made.get('executable'),
+                                    **({'decompressed': decompressed} if decompressed else {})),
                   **({'nudging_wind': dict(src.get('nudging_wind') or {}, **windows)} if windows else {}),
                   **({'forcing_change': forcing} if forcing else {}),
                   runner=digest(__file__),
@@ -3535,7 +3541,7 @@ def setup_night(name: str, cfg: dict) -> Path:
     output_s = src['configuration']['output_s']
     n = round(night['day'] * 86400.0 / output_s) + 1
     t_s = (n - 1) * output_s
-    if abs(t_s - night['day'] * 86400.0) > 1.0 or not (source / f'cm1out_t{n:06d}_s.dat').exists():
+    if abs(t_s - night['day'] * 86400.0) > 1.0 or not cm1_files.exists(source / f'cm1out_t{n:06d}_s.dat'):
         raise RuntimeError(f"{night['case']} has no output at day {night['day']}")
     window, rows = held_wind_window(source, t_s)
     case.mkdir(parents=True, exist_ok=True)
@@ -3967,24 +3973,20 @@ def setup(name: str) -> Path:
 
 
 def latest_restart(case: Path):
-    """Index of the newest complete restart set (cm1rst_tNNNNNN_{i,s,u,v,w,x}.dat), or 0."""
-    import re
-    found = {int(m.group(1)) for p in case.glob('cm1rst_t*_s.dat') if (m := re.match(r'cm1rst_t(\d+)_s\.dat$', p.name))}
-    complete = [n for n in found if all((case / f'cm1rst_t{n:06d}_{part}.dat').exists() for part in 'isuvwx')]
-    return max(complete, default=0)
+    """Index of the newest complete restart set (cm1rst_tNNNNNN_{i,s,u,v,w,x}.dat, each raw or compressed), or 0."""
+    return max(cm1_files.restart_numbers(case), default=0)
 
 
 def prune_restarts(case: Path, keep: int, start: int = 0) -> list:
     """Remove the complete restart sets a case has written (numbers above start, the set it started from) beyond its
-    newest keep; returns the numbers removed. Incomplete sets, the starting set and the newest keep stay."""
-    import re
-    found = {int(m.group(1)) for p in case.glob('cm1rst_t*_s.dat') if (m := re.match(r'cm1rst_t(\d+)_s\.dat$', p.name))}
-    complete = sorted(n for n in found if all((case / f'cm1rst_t{n:06d}_{part}.dat').exists() for part in 'isuvwx'))
+    newest keep, raw or compressed; returns the numbers removed. Incomplete sets, the starting set and the newest keep
+    stay."""
+    complete = cm1_files.restart_numbers(case)
     newest = set(complete[-keep:]) if keep > 0 else set()
     removed = [n for n in complete if n > start and n not in newest]
     for n in removed:
-        for part in 'isuvwx':
-            (case / f'cm1rst_t{n:06d}_{part}.dat').unlink()
+        for path in cm1_files.restart_files(case, n):
+            cm1_files.remove(path)
     return removed
 
 
@@ -4049,6 +4051,7 @@ def run(name: str, hours: float, threads: int = 8) -> dict:
             rst = latest_restart(case)
             if rst and abs(rst * restart_s - done) > 1.0:
                 raise RuntimeError(f'restart {rst} does not match the recorded model time {done} s')
+            restored = cm1_files.restore(case, [p.name for p in cm1_files.restart_files(case, rst)]) if rst else []
             text = (case / 'namelist.template').read_text()
             text = set_namelist(text, 'param2', 'irst', 1 if rst else 0)
             text = set_namelist(text, 'param2', 'rstnum', max(rst, 1))
@@ -4057,6 +4060,12 @@ def run(name: str, hours: float, threads: int = 8) -> dict:
             log = case / f'cm1_segment_{len(progress["segments"]) + 1:03d}.log'
             start = time.time()
             with open(log, 'w') as out:
+                if restored:                                            # the segment's log says so, ahead of CM1's
+                    note = (f'cm1_run: restart {rst} decompressed from {", ".join(r + ".zst" for r in restored)}, '
+                            f'each checked against {cm1_files.MANIFEST}')
+                    out.write(note + '\n')
+                    out.flush()
+                    print(f'{name}: {note}', flush=True)
                 done_run = subprocess.run(['nice', '-n', '5', './cm1.exe'], cwd=case, env=env, stdout=out,
                                           stderr=subprocess.STDOUT, preexec_fn=_unlimited_stack)
             if done_run.returncode != 0 or 'Program terminated normally' not in log.read_text()[-4000:]:

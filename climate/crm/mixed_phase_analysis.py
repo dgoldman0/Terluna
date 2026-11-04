@@ -28,6 +28,7 @@ from math import gamma
 from pathlib import Path
 import sys
 import numpy as np
+from climate.crm import cm1_files
 from climate.crm import ring_analysis as ra
 from climate.crm import ring_comfort as rcf
 from climate.crm import ring_crossings as rc
@@ -246,7 +247,7 @@ def analyse(name: str, from_day: float, to_day: float = np.inf, laws: dict | Non
     charge = {(name, regime): dict(abs=np.zeros(len(BANDS_C)), signed=np.zeros(len(BANDS_C)), columns=[], ground=[])
               for name in laws for regime in ('run', 'earth_speeds')}
     for n in numbers:
-        raw = np.memmap(case / f'cm1out_t{n:06d}_s.dat', dtype='<f4', mode='r')
+        raw = cm1_files.memmap(case / f'cm1out_t{n:06d}_s.dat', dtype='<f4', mode='r')    # raw or compressed
 
         def get(field):
             o, levels = offsets[field]
