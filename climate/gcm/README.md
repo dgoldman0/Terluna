@@ -4465,6 +4465,16 @@ Within PlaSim's step the order follows its land step. `lstoreevap` runs before `
 
 By the runoff plan's stage (c), the store moves the drylands beyond the design years' spread, which is the condition for carrying it into a later design run; that adoption is a decision still to make. The run's first start printed an array-temporary warning at every call of the store and was stopped after three minutes (the checks, above).
 
+**Two further cases** (3-4 November; the same ten years with one lever changed each, read by the same rules and against the offline check's predictions, `session-tools/agents/storm_water/rules_store_cases.txt`): Walnut Gulch's storms on the sealed loam, and CM1's storms on the loam, both on clay floors with young hollows. They ran with closure (c)'s patch in the shared rainmod.f90, its switches off.
+
+| Case | The drylands' evaporation: GCM (offline) | Their rain | The bucket's water | The ground |
+|---|---|---|---|---|
+| Loam, Walnut Gulch's storms (the first run) | −9.0% (−9.2%) | +0.5% | 13.9 → 9.4 mm | +0.13 K |
+| Sealed loam, Walnut Gulch's storms | −28.0% (−24.3%) | −10.0% | 13.9 → 4.1 mm | +0.31 K |
+| Loam, CM1's storms | −28.6% (−24.0%) | −11.1% | 13.9 → 4.0 mm | +0.39 K |
+
+Both further cases come within the offline check's tolerance of its predictions (within 2 points or a fifth of the change, here 3.7 and 4.6 points apart against 4.9 and 4.8), so by the rules set before they ran the offline tables stand for the store's remaining cases in choosing the design climate's case. As the store's effect grows, though, the GCM's change outruns the tables', because the drylands then lose rain: 10-11% over the drylands and 19-21% over the dry sub-humid land, where less of the evaporated water comes back as rain. The tables hold the rain fixed, so at large effects they read as a lower bound on the GCM's change (an inference from these two runs). In both, the evaporation falls 40% in the late morning's tenth, the ground warms most in the dry sub-humid land (0.56-0.64 K), the store starts larger (952 and 895 km³) and settles smaller (681 and 594 km³) as the rain falls, with 810-840 km³ a year passing through it, and the climate beyond the drylands moves little (the ground +0.15 and +0.22 K, the rain 2.5-2.7% lower). The top level holds 166.1-166.7 K and 0.034-0.040 ppmv, inside the cold trap's range.
+
 ```sh
 python3 -m pytest climate/tests/test_land_store.py                         # 17 tests: physics, running means, start, Fortran, switch, patch, runner
 # a run (only with the author's word): the store's tables from the storm-water study's product (schema /2)
