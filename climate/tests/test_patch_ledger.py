@@ -99,6 +99,20 @@ def test_the_catalogue_holds_every_patch_a_run_applies_in_the_same_order_within_
 
 
 @pytest.mark.skipif(not (er.UNTOUCHED_SOURCE / 'radmod.f90').exists(), reason='no untouched ExoPlaSim sources at hand')
+def test_the_runs_chains_apply_to_the_untouched_sources():
+    """The design run's chain, the store run's and closure (c)'s build from ExoPlaSim's untouched sources as
+    ensure_patched applies them (DIAGNOSTIC_PATCHES edit the mass-flux patch's text, which a gust run therefore takes,
+    behind PlaSim's nprc = 3)."""
+    design = dict(twilight=True, depth=True, cap=True, gust=True, similarity=True, rain_drops=True)
+    for switches in (design, dict(design, land_store=True), dict(design, closure=True), dict(design, cloud_water=True)):
+        files = {}
+        for name, marker, edits in er.patch_chain(**switches):
+            text = files.get(name) or (er.UNTOUCHED_SOURCE / name).read_text()
+            files[name] = text if marker in text else plg.apply(text, edits, name)
+        assert all(marker in files[name] for name, marker, _ in er.patch_chain(**switches))
+
+
+@pytest.mark.skipif(not (er.UNTOUCHED_SOURCE / 'radmod.f90').exists(), reason='no untouched ExoPlaSim sources at hand')
 def test_ensure_patched_keeps_the_ledger_and_refuses_a_revised_patch(tmp_path, monkeypatch):
     package = tmp_path / 'exoplasim'
     src = package / 'plasim' / 'src'
