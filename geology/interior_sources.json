@@ -1,0 +1,180 @@
+{
+  "source_admission": "Published values used in thermal_state.py, viscoelastic.py, orientation.py and the README's section on the present Moon's response to the water, each with how far it was read on 2026-11-04. The search was bounded to present-day lunar temperature profiles, olivine flow laws, the present lithosphere's thickness, a GRAIL-era elastic thickness under the near-side maria and Keane & Matsuyama (2014) as a cross-check on remnant-figure models. Values the crustal-loading study (domain/hydrosphere, c2c8624a) had already sourced are reused through its sources file and results JSON, which this lane reads by path and does not copy. No outside dataset or full paper is committed. Temperature profiles were digitised from a rendered figure (Khan et al. 2014, Figure 7b, 300 dpi, axis ticks located in the image, lines picked by colour); their reading error is about 20 C. Values marked open are stated brackets that the reading did not settle.",
+  "interior_model": {
+    "source": "briaud2023_tidal",
+    "about": "Category 4a medians of Briaud et al. 2023, as the crustal-loading study (geography/crustal_loading_sources.json at c2c8624a) records them, the crust carried to the Moon's 1737.4 km. Viscosities other than the low-viscosity zone's come from thermal_state.py.",
+    "layers": [
+      {"name": "core", "top_km": 355.0, "density_kg_m3": 5223.0, "rigidity_pa": 0.0},
+      {"name": "low-viscosity zone", "top_km": 500.0, "density_kg_m3": 3405.0, "rigidity_pa": 24.8e9},
+      {"name": "mantle", "top_km": 1690.0, "density_kg_m3": 3380.0, "rigidity_pa": 65.6e9},
+      {"name": "crust", "top_km": 1737.4, "density_kg_m3": 2700.0, "rigidity_pa": 16.0e9}
+    ]
+  },
+  "temperature_profiles": {
+    "about": "Present-day mantle temperatures (C) against depth (km), read from Khan et al. 2014, Figure 7b, which draws its own inversion with 95% credible bounds beside Karato (2013) and Kuskov & Kronrod (2009). Each profile is extended to the low-viscosity zone's top (1237.4 km) at its deepest gradient and above its shallowest node at the gradient between its two shallowest nodes; the crust is elastic in this lane's models and needs no temperature.",
+    "central": {
+      "source": "karato2013_dry_olivine",
+      "label": "Karato (2013), dry olivine: Apollo-era conductivity (Hood et al. 1982) and tidal Q",
+      "depth_km": [40, 60, 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1100, 1200],
+      "temperature_c": [541, 575, 641, 727, 796, 851, 907, 1014, 1117, 1212, 1306, 1384, 1463, 1623, 1715]
+    },
+    "cool": {
+      "source": "kuskov_kronrod2009",
+      "label": "Kuskov & Kronrod (2009): seismic velocity models mapped to temperature",
+      "depth_km": [60, 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000],
+      "temperature_c": [434, 488, 553, 611, 670, 727, 832, 924, 1016, 1098, 1173, 1244, 1311]
+    },
+    "warm": {
+      "source": "khan2014_melt",
+      "label": "Khan et al. (2014): joint inversion of electromagnetic sounding, mass, moment of inertia and k2, centre of the posterior band",
+      "depth_km": [50, 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200],
+      "temperature_c": [880, 915, 959, 1003, 1045, 1085, 1157, 1216, 1272, 1340, 1399, 1457, 1498, 1545, 1631],
+      "lower_95_c": [841, 882, 919, 960, 980, 1042, 1110, 1151, 1195, 1260, 1331, 1420, null, 1529, 1570],
+      "upper_95_c": [919, 960, 1001, 1042, 1069, 1151, 1229, 1260, 1321, 1379, 1440, 1491, null, 1611, 1679]
+    }
+  },
+  "crustal_loading_reference": {
+    "about": "Values read on 2026-11-04 from the crustal-loading study's results (geography/results/crustal_loading.json on domain/hydrosphere at c2c8624a, sha256 e1b1b2fca964fb98d0269574c65f8a128381fb524abe038fc8c041cd49db7670) for the same interior: the elastic load Love numbers (compressible, Poisson's ratio 0.25), the tidal Love numbers with an inviscid core, and the relaxed thin-shell load Love numbers (E 100 GPa, Poisson's ratio 0.25) over an interior in hydrostatic equilibrium. This lane's solver reproduces the first two and is compared with the third.",
+    "elastic_load": {"n": [2, 3, 5, 10, 20, 50], "h_load": [-0.05994, -0.06633, -0.0777, -0.09717, -0.12781, -0.20627], "k_load": [-0.018545, -0.014197, -0.010273, -0.006178, -0.003838, -0.002811]},
+    "tidal": {"compressible": {"k2": 0.02473, "h2": 0.04328}, "incompressible": {"k2": 0.02427, "h2": 0.04078}, "compressible_lvz_relaxed": {"k2": 0.02592, "h2": 0.04531}},
+    "relaxed_thin_shell": {
+      "n": [2, 3, 5, 10, 20],
+      "te_20_km": {"h_load": [-1.4536, -2.0677, -3.2816, -6.2041, -10.0057], "k_load": [-0.8464, -0.8592, -0.8627, -0.8384, -0.6678]},
+      "te_40_km": {"h_load": [-1.238, -1.797, -2.879, -5.0455, -4.2053], "k_load": [-0.7183, -0.7449, -0.7556, -0.6805, -0.2779]},
+      "te_75_km": {"h_load": [-1.0231, -1.4986, -2.3545, -2.9468, -1.03], "k_load": [-0.5907, -0.6189, -0.616, -0.3945, -0.0645]},
+      "te_150_km": {"h_load": [-0.7867, -1.1227, -1.5028, -0.8369, -0.2527], "k_load": [-0.4502, -0.4602, -0.3894, -0.107, -0.0122]}
+    },
+    "deep_sea_sag": {"about": "Floors where the seas are deeper than 2 km (2.8 km on average) against the mean land, held at 28%: elastic 17 m, relaxed 370-620 m over Te 75-20 km (490 m at 40 km), 240 m at 150 km", "elastic_m": 17, "relaxed_te_20_m": 620, "relaxed_te_40_m": 490, "relaxed_te_75_m": 370, "relaxed_te_150_m": 240}
+  },
+  "sources": [
+    {
+      "key": "khan2014_melt",
+      "citation": "Khan A, Connolly JAD, Pommier A, Noir J 2014, Geophysical evidence for melt in the deep lunar interior and implications for lunar evolution, Journal of Geophysical Research: Planets 119, 2197-2221 (doi:10.1002/2014JE004661)",
+      "doi_or_url": "http://jupiter.ethz.ch/~akhan/amir/Publications_files/khan_jgrp14.pdf",
+      "use": "temperature_profiles.warm and, through its Figure 7b, the central and cool profiles; the solidus is crossed near 1,100-1,200 km depth (at least 1,600 C at 1,200 km); average mantle gradients 0.5-0.6 C/km; an anhydrous interior assumed",
+      "values_used": {"melt_below_km": 1100, "t_1200_km_min_c": 1600, "mantle_gradient_c_per_km": [0.5, 0.6]},
+      "access": "author's PDF: abstract, section 7.1.3 and Figure 7 with its caption read 2026-11-04; Figure 7b digitised as described in source_admission. The figure's profile above about 100 km implies a conductive heat flow well above the Apollo values (README); the inversion's shallow resolution was not examined"
+    },
+    {
+      "key": "karato2013_dry_olivine",
+      "citation": "Karato S 2013, Geophysical constraints on the water content of the lunar mantle and its implications for the origin of the Moon, Earth and Planetary Science Letters 384, 144-153 (doi:10.1016/j.epsl.2013.10.001)",
+      "doi_or_url": "https://doi.org/10.1016/j.epsl.2013.10.001",
+      "use": "temperature_profiles.central (dry olivine) and the wet bound's water content (olivine with 0.01 wt% H2O, the hydrous case Khan et al. 2014 draw)",
+      "values_used": {"wet_case_h2o_wt_percent": 0.01},
+      "access": "not read; its profiles as drawn in Khan et al. 2014, Figure 7b, and as described by Garcia et al. 2019 (conductivity consistent with an anhydrous mantle, small amounts of water not ruled out)"
+    },
+    {
+      "key": "kuskov_kronrod2009",
+      "citation": "Kuskov OL, Kronrod VA 2009, Geochemical constraints on the model of the composition and thermal conditions of the Moon according to seismic data, Izvestiya, Physics of the Solid Earth 45, 753-768",
+      "doi_or_url": "https://doi.org/10.1134/S1069351309090043",
+      "use": "temperature_profiles.cool",
+      "values_used": {},
+      "access": "not read; its geotherm as drawn in Khan et al. 2014, Figure 7b, where Khan et al. put its uncertainty at likely 200-400 C. A search summary gives another Kuskov-Kronrod selenotherm of 600 C at 150 km, 900 C at 500 km and 1,200 C at 1,000 km, within that spread"
+    },
+    {
+      "key": "garcia2019_review",
+      "citation": "Garcia RF, Khan A, Drilleau M et al. 2019, Lunar seismology: an update on interior structure models, Space Science Reviews 215, 50 (doi:10.1007/s11214-019-0613-y)",
+      "doi_or_url": "https://www.issibern.ch/teams/internstructmoon/wp-content/uploads/sites/93/2019/11/Final_Preprint_SSR_2019_Reference_Moon_models_from_ISSI_team.pdf",
+      "use": "the spread of present-day profiles (1,000-1,500 C at 1,000 km depth; 0.5-0.6 C/km mantle gradients; about 1 C/km in Gagnepain-Beyneix et al. 2006; core-mantle boundary 1,500-1,900 K) and the present lithosphere: models carrying the upper-mantle low-velocity layer put the lithosphere's base at 260 km depth (1,425 km radius) with 1.7 +/- 0.4 C/km, others a thicker lithosphere with lower gradients",
+      "values_used": {"t_1000_km_c": [1000, 1500], "lithosphere_base_km": 260, "lithosphere_gradient_c_per_km": [1.3, 2.1]},
+      "access": "preprint PDF: sections 2.3, 2.5 and 6 on the M2 inversion read 2026-11-04 (text extracted)"
+    },
+    {
+      "key": "park2025_asymmetry",
+      "citation": "Park RS, Berne A, Konopliv AS et al. 2025, Thermal asymmetry in the Moon's mantle inferred from monthly tidal response, Nature (doi:10.1038/s41586-025-08949-5)",
+      "doi_or_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12119328/",
+      "use": "NEAR_FAR_OFFSET_K: a 2-3% near-far difference in the mantle's shear modulus, explained by a near-side mantle 100-200 K warmer, over the whole mantle with peak sensitivity near 600 km depth and a slight preference for the upper 800 km; k2 = 0.024223 +/- 0.000037; a lower-mantle Maxwell viscosity of about 1e15-1e16 Pa s between 1,257 and 1,407 km depth",
+      "values_used": {"near_minus_far_k": [100, 200], "k2": 0.024223, "lower_mantle_viscosity_pa_s": [1e15, 1e16]},
+      "access": "PMC full text summarised by a fetch tool, 2026-11-04 (quoted sentences); the methods not read in full"
+    },
+    {
+      "key": "hirth_kohlstedt2003",
+      "citation": "Hirth G, Kohlstedt DL 2003, Rheology of the upper mantle and the mantle wedge: a view from the experimentalists, in Inside the Subduction Factory, Geophysical Monograph 138, 83-105 (doi:10.1029/138GM06); reproduced in Turner AJ, Katz RF, Behn MD 2015, Grain-size dynamics beneath mid-ocean ridges (arXiv:1412.4231), Table 1",
+      "doi_or_url": "https://arxiv.org/abs/1412.4231",
+      "use": "FLOW_LAWS: strain rate = A sigma^n d^-p C_OH^r exp(-(E + P V)/R T), sigma in MPa, d in micrometres, C_OH in H/1e6 Si. Diffusion: dry A 1.5e9, wet A 2.5e7 with r 1; n 1, p 3, E 375 kJ/mol, V 4 cm3/mol. Dislocation: dry A 1.1e5, wet A 1.6e4 with r 1.2; n 3.5, p 0, E 530 kJ/mol, V 16 cm3/mol",
+      "values_used": {"diffusion": {"a_dry": 1.5e9, "a_wet": 2.5e7, "n": 1, "p": 3, "r": 1, "e_j_mol": 375e3, "v_m3_mol": 4e-6},
+                       "dislocation": {"a_dry": 1.1e5, "a_wet": 1.6e4, "n": 3.5, "p": 0, "r": 1.2, "e_j_mol": 530e3, "v_m3_mol": 16e-6}},
+      "access": "the original not read; Turner et al. 2015, Table 1 (arXiv PDF) read 2026-11-04, its dry diffusion prefactor printed as 1.59e9 and read as 1.5e9, which a second reproduction (a search summary of a GitHub implementation) also gives with V 5 and 14 cm3/mol. The wet constants are as reproduced there and open: the original's wet laws differ in form (constant C_OH or water fugacity). Laboratory measurements on terrestrial olivine (San Carlos), an Earth-calibrated law applied to the lunar mantle's olivine"
+    },
+    {
+      "key": "olivine_water_conversion",
+      "citation": "Conversion of hydrogen in olivine, 1 wt ppm H2O to about 16 H/1e6 Si (Paterson calibration, as Hirth & Kohlstedt use)",
+      "doi_or_url": "",
+      "use": "WET_C_OH: 0.01 wt% H2O (100 ppm, Karato 2013's hydrous case) is about 1,600 H/1e6 Si",
+      "values_used": {"h_per_1e6_si_per_wt_ppm": 16.0},
+      "access": "design assumption from the conversion as commonly quoted; not checked against the original calibration (open, a factor up to about 3 with the Bell et al. 2003 calibration)"
+    },
+    {
+      "key": "grain_size",
+      "citation": "Mantle grain size, a stated assumption",
+      "doi_or_url": "",
+      "use": "GRAIN_SIZES_M: 1 mm, 3 mm (central) and 10 mm for an olivine mantle that has stood hot and nearly static for billions of years; terrestrial upper-mantle xenoliths span about 1-10 mm",
+      "values_used": {"grain_m": [0.001, 0.003, 0.01]},
+      "access": "design assumption, not sourced in the time allowed; diffusion creep's viscosity scales as the cube of grain size"
+    },
+    {
+      "key": "creep_stress",
+      "citation": "Deviatoric stress for dislocation creep, a stated assumption",
+      "doi_or_url": "",
+      "use": "STRESSES_MPA: 0.3, 1 (central) and 3 MPa, the scale of the seas' load (1.6 MPa per kilometre of water) spread over the mantle",
+      "values_used": {"stress_mpa": [0.3, 1.0, 3.0]},
+      "access": "design assumption; the response is computed as linear (Maxwell) with dislocation creep's effective viscosity at this stress"
+    },
+    {
+      "key": "harada2014_lvz",
+      "citation": "Harada Y et al. 2014, Strong tidal heating in an ultralow-viscosity zone at the core-mantle boundary of the Moon, Nature Geoscience 7, 569-572 (doi:10.1038/ngeo2211); Briaud A et al. 2023 (arXiv:2301.04035)",
+      "doi_or_url": "https://doi.org/10.1038/ngeo2211",
+      "use": "LVZ_VISCOSITY_PA_S: the low-viscosity zone from the core to 500 km radius at 2e16 Pa s (Harada et al.) to 4.5e16 Pa s (Briaud et al.), kept as published",
+      "values_used": {"lvz_pa_s": [2e16, 4.5e16], "lvz_top_km": 500},
+      "access": "through the crustal-loading study's sources file (c2c8624a): Harada et al. abstract as summarised by search; Briaud et al. arXiv preprint read there"
+    },
+    {
+      "key": "grail_admittance_te",
+      "citation": "Variations in lunar elastic thickness from admittance spectral analysis, Icarus 403, 115631, 2023 (doi:10.1016/j.icarus.2023.115631)",
+      "doi_or_url": "https://www.sciencedirect.com/science/article/abs/pii/S0019103523002087",
+      "use": "the GRAIL-era elastic thickness: 13-72 km, mean 29 km, lower on the far side and higher under the Procellarum KREEP Terrane, above 25 km in the northern hemisphere",
+      "values_used": {"te_km": [13, 72], "te_mean_km": 29, "northern_hemisphere_min_km": 25},
+      "access": "search summaries of the abstract only, 2026-11-04 (three searches). A value under the near-side maria themselves was not found: open. These thicknesses record the lithosphere when it was loaded"
+    },
+    {
+      "key": "keane_matsuyama2014",
+      "citation": "Keane JT, Matsuyama I 2014, Evidence for lunar true polar wander and a past low-eccentricity, synchronous lunar orbit, Geophysical Research Letters 41, 6610-6619 (doi:10.1002/2014GL061195; arXiv:1408.6863)",
+      "doi_or_url": "https://arxiv.org/abs/1408.6863",
+      "use": "cross-check of the secular tidal Love number: k2* = 1.44 without a lithosphere and, following Matsuyama (2013), k2 = 0.86 under a 50 km and 1.08 under a 25 km elastic lithosphere; South Pole-Aitken's formation reoriented the Moon about 15 degrees",
+      "values_used": {"k2_fluid": 1.44, "k2_secular_te50": 0.86, "k2_secular_te25": 1.08},
+      "access": "arXiv preprint: abstract, sections 2-3 read 2026-11-04 (text extracted); their three-layer interior's parameters not read"
+    },
+    {
+      "key": "moments_llr",
+      "citation": "Murphy TW 2013, Lunar laser ranging: the millimeter challenge, Reports on Progress in Physics 76, 076901 (arXiv:1309.6294); Williams JG et al. 2014, Lunar interior properties from the GRAIL mission, JGR Planets 119, 1546-1578",
+      "doi_or_url": "https://arxiv.org/abs/1309.6294",
+      "use": "orientation.BETA, GAMMA, C_MR2 and R_C: beta = 631.0213e-6, gamma = 227.7317e-6, C/MR2 = 0.393112 at R = 1738 km",
+      "values_used": {"beta": 631.0213e-6, "gamma": 227.7317e-6, "c_mr2": 0.393112, "r_km": 1738.0},
+      "access": "as the orientation report (main's research/studies/moon_orientation, 4 November 2026) uses and checks them against GRAIL GL0420A's J2 and C22 (within 0.01%); not reread here"
+    },
+    {
+      "key": "nodal_period",
+      "citation": "The regression period of the lunar orbit's node, 6,798.38 days (18.61 years)",
+      "doi_or_url": "",
+      "use": "orientation.NODE_DAYS in the Cassini relation",
+      "values_used": {"node_days": 6798.38},
+      "access": "standard value as the orientation report's verify.py uses it"
+    },
+    {
+      "key": "heat_flow_check",
+      "citation": "Langseth MG, Keihm SJ, Peters K 1976, Revised lunar heat-flow values; Warren PH, Rasmussen KL 1987, Megaregolith insulation, internal temperatures, and bulk uranium content of the moon; both through geography/groundwater_sources.json",
+      "doi_or_url": "https://doi.org/10.1029/JB092iB05p03453",
+      "use": "README's heat-flow check of the three profiles: Apollo 15 and 17 heat flows of 21 and 16 mW/m2, regional means 13-17 mW/m2, a megaregolith 2 km thick at 0.2 W/m/K and bedrock about seven times as conductive (1.4 W/m/K); the upper bedrock value of 3 W/m/K is an assumption",
+      "values_used": {"apollo_mw_m2": [21, 16], "regional_mw_m2": [13, 17], "megaregolith_m": 2000, "k_megaregolith": 0.2, "k_bedrock": [1.4, 3.0]},
+      "access": "as geography's groundwater sources record them (2026-10-13); not reread here"
+    },
+    {
+      "key": "measured_tide",
+      "citation": "The Moon's monthly tidal Love numbers k2 = 0.02405 (GRAIL) and h2 = 0.0371 (LOLA), shared/constants.json; the elastic (anelasticity-removed) values 0.02294 and 0.0353 of Garcia et al. 2019 through the crustal-loading sources",
+      "doi_or_url": "",
+      "use": "validation of the response at a month",
+      "values_used": {"k2": 0.02405, "h2": 0.0371, "k2_elastic": 0.02294, "h2_elastic": 0.0353},
+      "access": "repository values"
+    }
+  ]
+}
