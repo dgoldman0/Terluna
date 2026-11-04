@@ -90,7 +90,10 @@ def test_the_catalogue_holds_every_patch_a_run_applies_in_the_same_order_within_
     for switches in (dict(), dict(twilight=True, land_store=True), dict(twilight=True, gust=True, similarity=True),
                      dict(twilight=True, night=True, cloud_water=True, rain_drops=True, humidity_mean=True),
                      dict(twilight=True, depth=True, cap=True, gust=True, similarity=True, rain_drops=True,
-                          humidity_mean=True, land_store=True)):
+                          humidity_mean=True, land_store=True),
+                     dict(twilight=True, depth=True, cap=True, gust=True, similarity=True, rain_drops=True, closure=True),
+                     dict(twilight=True, depth=True, cap=True, gust=True, similarity=True, rain_drops=True,
+                          redesign=True)):
         chain = [(n, m) for n, m, _ in er.patch_chain(**switches)]
         assert set(chain) <= set(catalogue)
         for name in {n for n, _ in chain}:
@@ -100,11 +103,12 @@ def test_the_catalogue_holds_every_patch_a_run_applies_in_the_same_order_within_
 
 @pytest.mark.skipif(not (er.UNTOUCHED_SOURCE / 'radmod.f90').exists(), reason='no untouched ExoPlaSim sources at hand')
 def test_the_runs_chains_apply_to_the_untouched_sources():
-    """The design run's chain, the store run's and closure (c)'s build from ExoPlaSim's untouched sources as
-    ensure_patched applies them (DIAGNOSTIC_PATCHES edit the mass-flux patch's text, which a gust run therefore takes,
-    behind PlaSim's nprc = 3)."""
+    """The design run's chain, the store run's, closure (c)'s and the redesign's build from ExoPlaSim's untouched
+    sources as ensure_patched applies them (DIAGNOSTIC_PATCHES edit the mass-flux patch's text, which a gust run
+    therefore takes, behind PlaSim's nprc = 3)."""
     design = dict(twilight=True, depth=True, cap=True, gust=True, similarity=True, rain_drops=True)
-    for switches in (design, dict(design, land_store=True), dict(design, closure=True), dict(design, cloud_water=True)):
+    for switches in (design, dict(design, land_store=True), dict(design, closure=True), dict(design, redesign=True),
+                     dict(design, cloud_water=True)):
         files = {}
         for name, marker, edits in er.patch_chain(**switches):
             text = files.get(name) or (er.UNTOUCHED_SOURCE / name).read_text()

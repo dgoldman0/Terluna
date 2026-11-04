@@ -22,6 +22,7 @@ from climate.gcm import levels as lv
 from climate.gcm import pbl_fortran as pbf
 from climate.gcm import sbm
 from climate.gcm import sbm_closure as scl
+from climate.gcm import sbm_redesign as srd
 from climate.gcm import surface_gust as sg
 
 GCM_FLAGS = ('-O3', '-cpp', '-fcheck=all', '-ffpe-trap=invalid,zero,overflow', '-ffpe-summary=none',
@@ -218,6 +219,12 @@ def undo(text, edits, marker):
     return text
 
 
+def without_redesign(text):
+    """The source without the redesigned closure's patch (sbm_redesign.py), which goes over closure (c)'s and edits
+    its parcel's routine, so that closure (c)'s own edits can be undone."""
+    return undo(text, srd.SBM_REDESIGN_EDITS, srd.REDESIGN_MARKER)
+
+
 def routine(text, name):
     a = text.index(f'      subroutine {name}\n')
     b = text.index(f'      end subroutine {name}\n') + len(f'      end subroutine {name}\n')
@@ -350,7 +357,7 @@ def source_routines():
     path = shared_rainmod()
     if path is None:
         pytest.skip('no ExoPlaSim source at hand')
-    text = undo(path.read_text(), scl.SBM_CLOSURE_EDITS, scl.CLOSURE_MARKER)
+    text = undo(without_redesign(path.read_text()), scl.SBM_CLOSURE_EDITS, scl.CLOSURE_MARKER)
     return routine(text, 'mksbm'), routine(apply(text, scl.SBM_CLOSURE_EDITS, scl.CLOSURE_MARKER), 'mksbm')
 
 
@@ -587,7 +594,8 @@ def test_the_patch_applies_once_to_the_shared_source_and_to_a_closure_runs_chain
     patched = []
     path = shared_rainmod()
     if path is not None:
-        patched.append(apply(undo(path.read_text(), scl.SBM_CLOSURE_EDITS, marker), scl.SBM_CLOSURE_EDITS, marker))
+        patched.append(apply(undo(without_redesign(path.read_text()), scl.SBM_CLOSURE_EDITS, marker),
+                             scl.SBM_CLOSURE_EDITS, marker))
     if (er.UNTOUCHED_SOURCE / 'rainmod.f90').exists():
         patched.append(fresh_rainmod(dict(FRESH_SWITCHES, closure=True)))
         assert marker not in fresh_rainmod(FRESH_SWITCHES)                 # a run without closure (c) keeps its source
@@ -618,8 +626,8 @@ def test_the_patched_rainmod_compiles_with_plasims_modules(tmp_path):
                                          '      parameter(NLEV_ATM = 15)\n      parameter(NPRO_ATM = 1)\n'
                                          '      end module resmod\n')
     shutil.copy(src / 'plasimmod.f90', tmp_path / 'plasimmod.f90')
-    text = apply(undo(path.read_text(), scl.SBM_CLOSURE_EDITS, scl.CLOSURE_MARKER), scl.SBM_CLOSURE_EDITS,
-                 scl.CLOSURE_MARKER)
+    text = apply(undo(without_redesign(path.read_text()), scl.SBM_CLOSURE_EDITS, scl.CLOSURE_MARKER),
+                 scl.SBM_CLOSURE_EDITS, scl.CLOSURE_MARKER)
     (tmp_path / 'rainmod.f90').write_text(text)
     for name in ('resmod.f90', 'plasimmod.f90', 'rainmod.f90'):
         subprocess.run(['gfortran', *GCM_FLAGS, '-c', name], cwd=tmp_path, check=True, capture_output=True)
