@@ -466,7 +466,7 @@ at most 6 cm.
   degree 200 by 5 m RMS.
 - **Resolution:** the depression tree uses the 4 pixel/degree grid, where small
   craters are unresolved; level curves use 16 pixels/degree.
-- **Not modelled:** the water's own gravity and the crust's sag in the atlas's shorelines and the products drawn from them, which keep the dry Moon's geoid and LOLA's floor ([The crust's response to the water](#the-crusts-response-to-the-water) sizes both), groundwater beyond the first estimate above, polar
+- **Not modelled:** the water's own gravity and the crust's sag in the atlas's shorelines and the products drawn from them, which keep the dry Moon's geoid and LOLA's floor until the atlas work redraws them ([The crust's response to the water](#the-crusts-response-to-the-water) sizes both), groundwater beyond the first estimate above, polar
   ice and the water held in the air and soil (the design case's air holds about
   180 kg/m², 0.06% of the seas).
 
@@ -475,7 +475,7 @@ at most 6 cm.
 - How fast, and how deep, the crust takes up water, which sets the inventory to deliver (see "Groundwater").
 - The straits of Mare Fecunditatis and of the Tenebrarum sub-basin at 16 px/deg, with nonlinear bed friction, which
   set those basins' fortnightly and 9.6-day tides; the tide's water levels in the wave and run-up calculations.
-- Groundwater storage in the porous crust (GRAIL: about 12%), which with the crust's sag and the water's own gravity sets how much water to deliver for 28% cover and where the shore falls; the decision whether to move the atlas's shorelines by the sea-level equation (see "The crust's response to the water").
+- Groundwater storage in the porous crust (GRAIL: about 12%), which with the crust's sag and the water's own gravity sets how much water to deliver for 28% cover and where the shore falls; the atlas work redraws the shorelines by the sea-level equation (see "The crust's response to the water").
 - LOLA polar stereographic grids for the polar cold traps.
 - Land–sea masks for chosen inventories are available:
   `python -m geography.water_inventory --masks 0.25 0.35 --resolution 1.0` writes
@@ -483,7 +483,7 @@ at most 6 cm.
   water fraction, mean ground height and mean water depth per cell; not
   committed).
 - Polar cold-trapping of water.
-- The crust's response through time: a viscoelastic interior in place of the relaxed state and its half-space times, a GRAIL-era elastic thickness under the near-side maria, and, if the shorelines move, the atlas, drainage, tides and the strait study's floor redrawn on the deformed Moon.
+- The crust's response through time: a viscoelastic interior in place of the relaxed state and its half-space times, a GRAIL-era elastic thickness under the near-side maria, and, in the atlas work, the atlas, drainage, tides and the strait study's floor redrawn on the deformed Moon.
 
 Couple candidate geographies to [climate](../climate/) and the water and element
 accounts in [biosphere](../biosphere/). Keep several candidate geographies, so

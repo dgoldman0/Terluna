@@ -518,8 +518,7 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    light on the night; and the coupled design search at the later date the author set.
 8. **The shores and the waters:** groundwater by the fresh seas (resources, question 16; its tide and load answered 4 November, [coast water](studies/coast_water/README.md#the-monthly-tide-and-where-the-seas-load-settles)), the delivered water's
    chlorine (question 17) and the polar drainage grid; then the Jura Island rerun with its planted shores.
-9. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set, the author's next
-   round once these details are worked out.
+9. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set and the shorelines redrawn with the water's own gravity and the crust's sag ([geography](../geography/README.md#the-crusts-response-to-the-water)), the author's next round once these details are worked out.
 10. **A district wind study for the summit metropolis**, the largest megacity, round the central sky tower: layouts
    denser than the sparse pilot, the author's direction of 15 and 17 October
    ([register](decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)), by the method recovered from
@@ -561,7 +560,7 @@ Each irreversible step waits for the record it destroys, so the gates in the stu
 
 The atlas at the selected 28% water share places everything. Its next refinements are:
 
-- groundwater storage in the porous crust, and whether to carry the water's own gravity and the crust's sag ([geography](../geography/README.md#the-crusts-response-to-the-water)) into the atlas, which together fix the delivered inventory and the shoreline;
+- groundwater storage in the porous crust, and the water's own gravity and the crust's sag ([geography](../geography/README.md#the-crusts-response-to-the-water)), which the atlas work carries; together they fix the delivered inventory and the shoreline;
 - lake levels from each catchment's rainfall and evaporation in a climate run at 28%;
 - LOLA polar stereographic grids for the cold traps.
 
