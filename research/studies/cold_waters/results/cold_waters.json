@@ -1,0 +1,722 @@
+{
+ "schema": "terluna.research.cold-waters/1",
+ "producer": "research/studies/cold_waters/run.py",
+ "evidence": "A first estimate from model results on the design years (A28R_301k_design_l15_snow_s934, years 10-19), read before the GCM and CM1 agree: the lapse rate and the night air are among what that gap could move. The lakes take their cells' air carried along the lapse rate; the ponds run the project's lake model on the cells' means made linear in time.",
+ "reading_rule": "Air temperatures are 2 m air at each lake's own level; coldest spell is the coldest 3-day mean over ten years, minimum the coldest minimum within a mean. Lapse rates are K per km of warming going down between 0.9 and 5 km above the ground, over land: central the mean over every land column and mean, low and high the 10th and 90th percentiles of the land cells' means.",
+ "lapse_k_per_km": {
+  "central": 1.036,
+  "low": 0.925,
+  "high": 1.14
+ },
+ "highland_lakes": {
+  "lakes": 27865,
+  "area_km2": 3922470.014548823,
+  "height_above_sea_m": {
+   "area_weighted_median": 4003.38359375,
+   "area_weighted_p90": 6579.6716796875,
+   "area_weighted_p99": 7892.29912109375,
+   "highest": 9889.9666015625,
+   "lakes_above_2km": 15167,
+   "lakes_above_4km": 7739,
+   "area_km2_above_2km": 3113235.1662668623
+  },
+  "air_at_the_lakes_c": {
+   "mean_area_weighted": 24.87232090370014,
+   "coldest_spell_area_weighted": 23.248512359167627,
+   "coldest_spell_lowest": 17.505389396359305,
+   "minimum_lowest": 14.813165117654421
+  },
+  "below_threshold": {
+   "26": {
+    "lakes_coldest_spell_below": 22933,
+    "area_km2_coldest_spell_below": 3796793.95910119,
+    "lakes_mean_below": 13029,
+    "area_km2_mean_below": 2733584.303034372,
+    "lakes_coldest_spell_below_any_lapse": 23197
+   },
+   "24": {
+    "lakes_coldest_spell_below": 13418,
+    "area_km2_coldest_spell_below": 2489536.6000520447,
+    "lakes_mean_below": 5862,
+    "area_km2_mean_below": 1305915.543486486,
+    "lakes_coldest_spell_below_any_lapse": 13702
+   },
+   "22": {
+    "lakes_coldest_spell_below": 4965,
+    "area_km2_coldest_spell_below": 951007.8837246527,
+    "lakes_mean_below": 1286,
+    "area_km2_mean_below": 300137.0287628184,
+    "lakes_coldest_spell_below_any_lapse": 5163
+   },
+   "20": {
+    "lakes_coldest_spell_below": 543,
+    "area_km2_coldest_spell_below": 219707.95137326713,
+    "lakes_mean_below": 57,
+    "area_km2_mean_below": 2773.703807547692,
+    "lakes_coldest_spell_below_any_lapse": 648
+   },
+   "18": {
+    "lakes_coldest_spell_below": 15,
+    "area_km2_coldest_spell_below": 583.4340129043782,
+    "lakes_mean_below": 0,
+    "area_km2_mean_below": 0.0,
+    "lakes_coldest_spell_below_any_lapse": 19
+   },
+   "15": {
+    "lakes_coldest_spell_below": 0,
+    "area_km2_coldest_spell_below": 0.0,
+    "lakes_mean_below": 0,
+    "area_km2_mean_below": 0.0,
+    "lakes_coldest_spell_below_any_lapse": 0
+   }
+  },
+  "coldest_lakes": [
+   {
+    "lat": 0.29,
+    "lon": 139.57,
+    "height_above_sea_m": 5707,
+    "cell_ground_above_sea_m": 1666,
+    "area_km2": 17.96,
+    "mean_air_c": 20.54,
+    "coldest_spell_c": 17.51,
+    "coldest_minimum_c": 15.2,
+    "coldest_spell_c_lapse_bracket": [
+     17.95,
+     17.08
+    ]
+   },
+   {
+    "lat": 0.19,
+    "lon": 139.05,
+    "height_above_sea_m": 5667,
+    "cell_ground_above_sea_m": 1666,
+    "area_km2": 107.75,
+    "mean_air_c": 20.58,
+    "coldest_spell_c": 17.55,
+    "coldest_minimum_c": 15.24,
+    "coldest_spell_c_lapse_bracket": [
+     17.99,
+     17.13
+    ]
+   },
+   {
+    "lat": 0.67,
+    "lon": 138.44,
+    "height_above_sea_m": 5643,
+    "cell_ground_above_sea_m": 1666,
+    "area_km2": 17.96,
+    "mean_air_c": 20.61,
+    "coldest_spell_c": 17.57,
+    "coldest_minimum_c": 15.26,
+    "coldest_spell_c_lapse_bracket": [
+     18.01,
+     17.16
+    ]
+   },
+   {
+    "lat": 0.32,
+    "lon": 139.73,
+    "height_above_sea_m": 5638,
+    "cell_ground_above_sea_m": 1666,
+    "area_km2": 17.96,
+    "mean_air_c": 20.61,
+    "coldest_spell_c": 17.58,
+    "coldest_minimum_c": 15.27,
+    "coldest_spell_c_lapse_bracket": [
+     18.02,
+     17.16
+    ]
+   },
+   {
+    "lat": -14.18,
+    "lon": 160.11,
+    "height_above_sea_m": 7290,
+    "cell_ground_above_sea_m": 3278,
+    "area_km2": 17.41,
+    "mean_air_c": 20.49,
+    "coldest_spell_c": 17.6,
+    "coldest_minimum_c": 15.6,
+    "coldest_spell_c_lapse_bracket": [
+     18.04,
+     17.18
+    ]
+   },
+   {
+    "lat": 0.37,
+    "lon": 138.42,
+    "height_above_sea_m": 5604,
+    "cell_ground_above_sea_m": 1666,
+    "area_km2": 35.92,
+    "mean_air_c": 20.65,
+    "coldest_spell_c": 17.61,
+    "coldest_minimum_c": 15.3,
+    "coldest_spell_c_lapse_bracket": [
+     18.05,
+     17.2
+    ]
+   },
+   {
+    "lat": -15.28,
+    "lon": 250.47,
+    "height_above_sea_m": 6861,
+    "cell_ground_above_sea_m": 3538,
+    "area_km2": 3.46,
+    "mean_air_c": 20.37,
+    "coldest_spell_c": 17.67,
+    "coldest_minimum_c": 15.65,
+    "coldest_spell_c_lapse_bracket": [
+     18.04,
+     17.32
+    ]
+   },
+   {
+    "lat": 0.39,
+    "lon": 137.94,
+    "height_above_sea_m": 5524,
+    "cell_ground_above_sea_m": 1666,
+    "area_km2": 262.2,
+    "mean_air_c": 20.73,
+    "coldest_spell_c": 17.7,
+    "coldest_minimum_c": 15.39,
+    "coldest_spell_c_lapse_bracket": [
+     18.12,
+     17.29
+    ]
+   },
+   {
+    "lat": 2.48,
+    "lon": 199.12,
+    "height_above_sea_m": 9890,
+    "cell_ground_above_sea_m": 8400,
+    "area_km2": 17.94,
+    "mean_air_c": 19.07,
+    "coldest_spell_c": 17.71,
+    "coldest_minimum_c": 15.82,
+    "coldest_spell_c_lapse_bracket": [
+     17.87,
+     17.55
+    ]
+   },
+   {
+    "lat": -22.16,
+    "lon": 247.84,
+    "height_above_sea_m": 9247,
+    "cell_ground_above_sea_m": 5802,
+    "area_km2": 3.33,
+    "mean_air_c": 19.24,
+    "coldest_spell_c": 17.78,
+    "coldest_minimum_c": 14.81,
+    "coldest_spell_c_lapse_bracket": [
+     18.16,
+     17.42
+    ]
+   },
+   {
+    "lat": -15.12,
+    "lon": 250.38,
+    "height_above_sea_m": 6715,
+    "cell_ground_above_sea_m": 3538,
+    "area_km2": 13.87,
+    "mean_air_c": 20.52,
+    "coldest_spell_c": 17.82,
+    "coldest_minimum_c": 15.8,
+    "coldest_spell_c_lapse_bracket": [
+     18.17,
+     17.49
+    ]
+   },
+   {
+    "lat": -13.59,
+    "lon": 159.31,
+    "height_above_sea_m": 7013,
+    "cell_ground_above_sea_m": 3278,
+    "area_km2": 6.98,
+    "mean_air_c": 20.78,
+    "coldest_spell_c": 17.89,
+    "coldest_minimum_c": 15.89,
+    "coldest_spell_c_lapse_bracket": [
+     18.3,
+     17.5
+    ]
+   },
+   {
+    "lat": 6.28,
+    "lon": 200.06,
+    "height_above_sea_m": 9785,
+    "cell_ground_above_sea_m": 6452,
+    "area_km2": 7.14,
+    "mean_air_c": 18.79,
+    "coldest_spell_c": 17.91,
+    "coldest_minimum_c": 21.34,
+    "coldest_spell_c_lapse_bracket": [
+     18.28,
+     17.56
+    ]
+   },
+   {
+    "lat": 5.47,
+    "lon": 199.46,
+    "height_above_sea_m": 9617,
+    "cell_ground_above_sea_m": 8400,
+    "area_km2": 17.88,
+    "mean_air_c": 19.35,
+    "coldest_spell_c": 17.99,
+    "coldest_minimum_c": 16.1,
+    "coldest_spell_c_lapse_bracket": [
+     18.12,
+     17.86
+    ]
+   },
+   {
+    "lat": 6.65,
+    "lon": 199.78,
+    "height_above_sea_m": 9710,
+    "cell_ground_above_sea_m": 6452,
+    "area_km2": 35.68,
+    "mean_air_c": 18.87,
+    "coldest_spell_c": 17.99,
+    "coldest_minimum_c": 21.41,
+    "coldest_spell_c_lapse_bracket": [
+     18.35,
+     17.65
+    ]
+   },
+   {
+    "lat": -15.66,
+    "lon": 250.42,
+    "height_above_sea_m": 6432,
+    "cell_ground_above_sea_m": 3538,
+    "area_km2": 17.29,
+    "mean_air_c": 20.81,
+    "coldest_spell_c": 18.12,
+    "coldest_minimum_c": 16.09,
+    "coldest_spell_c_lapse_bracket": [
+     18.44,
+     17.81
+    ]
+   },
+   {
+    "lat": 2.91,
+    "lon": 199.47,
+    "height_above_sea_m": 9462,
+    "cell_ground_above_sea_m": 8400,
+    "area_km2": 3.59,
+    "mean_air_c": 19.51,
+    "coldest_spell_c": 18.15,
+    "coldest_minimum_c": 16.26,
+    "coldest_spell_c_lapse_bracket": [
+     18.27,
+     18.04
+    ]
+   },
+   {
+    "lat": 0.62,
+    "lon": 139.84,
+    "height_above_sea_m": 5021,
+    "cell_ground_above_sea_m": 1666,
+    "area_km2": 7.18,
+    "mean_air_c": 21.25,
+    "coldest_spell_c": 18.22,
+    "coldest_minimum_c": 15.91,
+    "coldest_spell_c_lapse_bracket": [
+     18.59,
+     17.87
+    ]
+   },
+   {
+    "lat": 9.34,
+    "lon": 137.91,
+    "height_above_sea_m": 5658,
+    "cell_ground_above_sea_m": 1822,
+    "area_km2": 3.54,
+    "mean_air_c": 20.75,
+    "coldest_spell_c": 18.22,
+    "coldest_minimum_c": 16.21,
+    "coldest_spell_c_lapse_bracket": [
+     18.65,
+     17.82
+    ]
+   },
+   {
+    "lat": 5.35,
+    "lon": 200.51,
+    "height_above_sea_m": 9766,
+    "cell_ground_above_sea_m": 8087,
+    "area_km2": 1108.59,
+    "mean_air_c": 19.28,
+    "coldest_spell_c": 18.25,
+    "coldest_minimum_c": 22.03,
+    "coldest_spell_c_lapse_bracket": [
+     18.44,
+     18.08
+    ]
+   }
+  ]
+ },
+ "ponds": {
+  "the coldest lake": {
+   "lat": 2.7689027786254883,
+   "lon": 140.625,
+   "cell_ground_above_sea_m": 1665.912789863264,
+   "water_above_cell_ground_m": 4041.5796906054857,
+   "cases": {
+    "0.5 m pond, open": {
+     "mean_c": 25.792142436150577,
+     "lowest_c": 16.913879900786142,
+     "lowest_3day_mean_c": 17.074141941209284,
+     "air_mean_c": 20.52628699333279,
+     "air_lowest_c": 17.508633372528493,
+     "hours_per_lunar_day_below": {
+      "26": 408.6002824858757,
+      "24": 369.73646421845575,
+      "22": 321.438618173258,
+      "20": 243.702565913371,
+      "18": 39.09945856873823,
+      "15": 0.0
+     }
+    },
+    "1 m pond, open": {
+     "mean_c": 26.029789730661697,
+     "lowest_c": 17.249960809486165,
+     "lowest_3day_mean_c": 17.593535967992842,
+     "air_mean_c": 20.52628699333279,
+     "air_lowest_c": 17.508633372528493,
+     "hours_per_lunar_day_below": {
+      "26": 400.26871468926555,
+      "24": 351.1292961393597,
+      "22": 286.24405602636534,
+      "20": 180.50888653483992,
+      "18": 4.519244350282486,
+      "15": 0.0
+     }
+    },
+    "2 m pond, open": {
+     "mean_c": 26.518143931039393,
+     "lowest_c": 18.906552814481895,
+     "lowest_3day_mean_c": 19.054141381241763,
+     "air_mean_c": 20.52628699333279,
+     "air_lowest_c": 17.508633372528493,
+     "hours_per_lunar_day_below": {
+      "26": 361.5143008474576,
+      "24": 287.3970103578154,
+      "22": 188.46174670433143,
+      "20": 23.63977165725047,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "30 m lake, surface": {
+     "mean_c": 26.65269709332053,
+     "lowest_c": 21.851777085608273,
+     "lowest_3day_mean_c": 21.935592470172796,
+     "air_mean_c": 20.333773044754842,
+     "air_lowest_c": 17.508633372528493,
+     "hours_per_lunar_day_below": {
+      "26": 373.2233796296296,
+      "24": 260.5012297453704,
+      "22": 7.716869212962963,
+      "20": 0.0,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "30 m lake, floor": {
+     "mean_c": 21.686360105542377,
+     "lowest_c": 21.074972713012887,
+     "lowest_3day_mean_c": 21.077109622155504,
+     "air_mean_c": 20.333773044754842,
+     "air_lowest_c": 17.508633372528493,
+     "hours_per_lunar_day_below": {
+      "26": 715.0,
+      "24": 715.0,
+      "22": 664.8713831018518,
+      "20": 0.0,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "0.5 m pond, sheltered": {
+     "mean_c": 25.87097060746375,
+     "lowest_c": 16.913879900786142,
+     "lowest_3day_mean_c": 17.074141941209284,
+     "air_mean_c": 20.52628699333279,
+     "air_lowest_c": 17.508633372528493,
+     "hours_per_lunar_day_below": {
+      "26": 407.7166313559322,
+      "24": 369.15577919020717,
+      "22": 321.0767419962335,
+      "20": 243.50058851224105,
+      "18": 39.08262711864407,
+      "15": 0.0
+     }
+    },
+    "1 m pond, sheltered": {
+     "mean_c": 26.112077830059185,
+     "lowest_c": 17.249960903061268,
+     "lowest_3day_mean_c": 17.593536134857814,
+     "air_mean_c": 20.52628699333279,
+     "air_lowest_c": 17.508633372528493,
+     "hours_per_lunar_day_below": {
+      "26": 398.9221986817326,
+      "24": 350.1783192090395,
+      "22": 285.37723634651604,
+      "20": 180.07968455743878,
+      "18": 4.493997175141242,
+      "15": 0.0
+     }
+    },
+    "2 m pond, sheltered": {
+     "mean_c": 26.601893036987473,
+     "lowest_c": 18.9053366664069,
+     "lowest_3day_mean_c": 19.05297652975598,
+     "air_mean_c": 20.52628699333279,
+     "air_lowest_c": 17.508633372528493,
+     "hours_per_lunar_day_below": {
+      "26": 358.6108757062147,
+      "24": 284.964865819209,
+      "22": 186.40830979284368,
+      "20": 23.092749529190208,
+      "18": 0.0,
+      "15": 0.0
+     }
+    }
+   }
+  },
+  "the coldest land cell": {
+   "lat": 2.7689027786254883,
+   "lon": 196.875,
+   "cell_ground_above_sea_m": 8400.208984696626,
+   "water_above_cell_ground_m": 0.0,
+   "cases": {
+    "0.5 m pond, open": {
+     "mean_c": 24.947692933701976,
+     "lowest_c": 17.63454591239941,
+     "lowest_3day_mean_c": 17.841840898653928,
+     "air_mean_c": 20.611935072430132,
+     "air_lowest_c": 19.25239524841311,
+     "hours_per_lunar_day_below": {
+      "26": 445.2760122410546,
+      "24": 401.4048375706215,
+      "22": 347.0224223163842,
+      "20": 243.1302966101695,
+      "18": 1.1108757062146895,
+      "15": 0.0
+     }
+    },
+    "1 m pond, open": {
+     "mean_c": 25.231772273970503,
+     "lowest_c": 18.416106188769824,
+     "lowest_3day_mean_c": 18.546421982321014,
+     "air_mean_c": 20.611935072430132,
+     "air_lowest_c": 19.25239524841311,
+     "hours_per_lunar_day_below": {
+      "26": 437.61770244821093,
+      "24": 383.6139948210923,
+      "22": 309.32838983050846,
+      "20": 157.17208097928437,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "2 m pond, open": {
+     "mean_c": 25.65482801940618,
+     "lowest_c": 19.429563207542916,
+     "lowest_3day_mean_c": 19.73364142092897,
+     "air_mean_c": 20.611935072430132,
+     "air_lowest_c": 19.25239524841311,
+     "hours_per_lunar_day_below": {
+      "26": 412.9091337099812,
+      "24": 328.40683851224105,
+      "22": 204.4600400188324,
+      "20": 2.7687735404896423,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "0.5 m pond, sheltered": {
+     "mean_c": 25.166859708102027,
+     "lowest_c": 17.65970914378879,
+     "lowest_3day_mean_c": 17.867869859540665,
+     "air_mean_c": 20.611935072430132,
+     "air_lowest_c": 19.25239524841311,
+     "hours_per_lunar_day_below": {
+      "26": 440.7904307909605,
+      "24": 397.7019185499058,
+      "22": 343.67296374764595,
+      "20": 239.01500706214688,
+      "18": 1.0183027306967984,
+      "15": 0.0
+     }
+    },
+    "1 m pond, sheltered": {
+     "mean_c": 25.45558749433617,
+     "lowest_c": 18.419223391369687,
+     "lowest_3day_mean_c": 18.565317924118567,
+     "air_mean_c": 20.611935072430132,
+     "air_lowest_c": 19.25239524841311,
+     "hours_per_lunar_day_below": {
+      "26": 431.8697622410546,
+      "24": 378.39624529190206,
+      "22": 303.73193267419964,
+      "20": 149.87564736346516,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "2 m pond, sheltered": {
+     "mean_c": 25.892157015063283,
+     "lowest_c": 19.558499273279484,
+     "lowest_3day_mean_c": 19.89551299132974,
+     "air_mean_c": 20.611935072430132,
+     "air_lowest_c": 19.25239524841311,
+     "hours_per_lunar_day_below": {
+      "26": 398.9390301318267,
+      "24": 315.86740819209035,
+      "22": 192.56862052730696,
+      "20": 2.070268361581921,
+      "18": 0.0,
+      "15": 0.0
+     }
+    }
+   }
+  },
+  "a typical land cell": {
+   "lat": 41.53246307373047,
+   "lon": 135.0,
+   "cell_ground_above_sea_m": 1821.0322775356922,
+   "water_above_cell_ground_m": 0.0,
+   "cases": {
+    "0.5 m pond, open": {
+     "mean_c": 28.393020405820863,
+     "lowest_c": 22.484221399748392,
+     "lowest_3day_mean_c": 22.66978795467331,
+     "air_mean_c": 27.261589286286974,
+     "air_lowest_c": 23.67649273342556,
+     "hours_per_lunar_day_below": {
+      "26": 320.27724811676086,
+      "24": 169.34963512241055,
+      "22": 0.0,
+      "20": 0.0,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "1 m pond, open": {
+     "mean_c": 28.46479763235278,
+     "lowest_c": 22.63136253517684,
+     "lowest_3day_mean_c": 22.85542625063907,
+     "air_mean_c": 27.261589286286974,
+     "air_lowest_c": 23.67649273342556,
+     "hours_per_lunar_day_below": {
+      "26": 298.40477871939737,
+      "24": 130.11552495291903,
+      "22": 0.0,
+      "20": 0.0,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "2 m pond, open": {
+     "mean_c": 28.67492249659549,
+     "lowest_c": 23.25566176330681,
+     "lowest_3day_mean_c": 23.48117076905996,
+     "air_mean_c": 27.261589286286974,
+     "air_lowest_c": 23.67649273342556,
+     "hours_per_lunar_day_below": {
+      "26": 231.43243879472692,
+      "24": 9.96421845574388,
+      "22": 0.0,
+      "20": 0.0,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "0.5 m pond, sheltered": {
+     "mean_c": 29.147317531412703,
+     "lowest_c": 22.565452247160692,
+     "lowest_3day_mean_c": 22.756060673594092,
+     "air_mean_c": 27.261589286286974,
+     "air_lowest_c": 23.67649273342556,
+     "hours_per_lunar_day_below": {
+      "26": 309.1348281544256,
+      "24": 158.20721516007535,
+      "22": 0.0,
+      "20": 0.0,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "1 m pond, sheltered": {
+     "mean_c": 29.232472965353438,
+     "lowest_c": 22.6892943596778,
+     "lowest_3day_mean_c": 22.91602069753838,
+     "air_mean_c": 27.261589286286974,
+     "air_lowest_c": 23.67649273342556,
+     "hours_per_lunar_day_below": {
+      "26": 281.5649129001883,
+      "24": 113.54496233521657,
+      "22": 0.0,
+      "20": 0.0,
+      "18": 0.0,
+      "15": 0.0
+     }
+    },
+    "2 m pond, sheltered": {
+     "mean_c": 29.444116618425202,
+     "lowest_c": 23.393993990241583,
+     "lowest_3day_mean_c": 23.653705977673585,
+     "air_mean_c": 27.261589286286974,
+     "air_lowest_c": 23.67649273342556,
+     "hours_per_lunar_day_below": {
+      "26": 200.84969397363466,
+      "24": 2.3395715630885126,
+      "22": 0.0,
+      "20": 0.0,
+      "18": 0.0,
+      "15": 0.0
+     }
+    }
+   }
+  }
+ },
+ "settings": {
+  "pond_depths_m": [
+   0.5,
+   1.0,
+   2.0
+  ],
+  "pond_layer_m": 0.1,
+  "lake_depth_m": 30.0,
+  "shelter": 0.3,
+  "spin_means": {
+   "pond": 20,
+   "lake": 240
+  },
+  "steps_per_mean": 72,
+  "thresholds_c": [
+   26.0,
+   24.0,
+   22.0,
+   20.0,
+   18.0,
+   15.0
+  ]
+ },
+ "inputs": {
+  "A28R_301k_design_l15_snow_s934/model/MOST.00010.nc": "6f84bf532c00105b6c40797b102037d4cdef2237385565b42f15c7e0df663189",
+  "A28R_301k_design_l15_snow_s934/model/MOST.00011.nc": "e4342bc0854789d1d70f954ac35e830de15683bd7b929b2e552129828069b381",
+  "A28R_301k_design_l15_snow_s934/model/MOST.00012.nc": "123b18d4e3c07692d4d8eae02329328e53ab7dbd82493fbae0f8be6536f129a2",
+  "A28R_301k_design_l15_snow_s934/model/MOST.00013.nc": "743811c92a21c9306641dc54851496180b59107a3f58b3e5c22fceb2dca6eccb",
+  "A28R_301k_design_l15_snow_s934/model/MOST.00014.nc": "05594df67e94caf4e94c37c6428ed3106100f83844f5d4f1d3616fe1a77160c3",
+  "A28R_301k_design_l15_snow_s934/model/MOST.00015.nc": "acafd7602d8deb799a94e1f394505e4740fbd7d6b194fcccd00cb50af1722952",
+  "A28R_301k_design_l15_snow_s934/model/MOST.00016.nc": "4da9ff5536769386f6756ec4a38f0adb6dc4704de530e1fe3bdd83e727d7b64d",
+  "A28R_301k_design_l15_snow_s934/model/MOST.00017.nc": "649a15752f91a337348eb3ad52688007eea47857cdd445af1a9e6eb1f147f0bb",
+  "A28R_301k_design_l15_snow_s934/model/MOST.00018.nc": "b81ca584380cb6c942a0b3baef182da46bf14fe71c58bc3f36ea2d5659ceb117",
+  "A28R_301k_design_l15_snow_s934/model/MOST.00019.nc": "3e978220a7dc8bee5fd86ab8ee90af1b06690f68d26ba2510f7bb66685958fbe",
+  "A28R_301k_design_l15_snow_s934/inputs/moon_topography.sra": "b40a9d44bf8e447f18d99354e9fb7717020ba5da2b2b68cef5a0da8339193c2e",
+  "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f8899bd4f5d712445f78c8882c85a1bc30bf631ac9dd14ab1c03",
+  "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+  "research/studies/lake_oxygen/results/lake_oxygen.json": "cd2532cfe2ad2e4d97b64be23942a69a830dd95432816a284292510cbb9d3590"
+ },
+ "seconds": 301.8
+}
