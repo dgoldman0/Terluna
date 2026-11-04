@@ -516,7 +516,7 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    for the author; the tile inventory matched to the eccentric rings' length, about 11% fewer tiles; illumination's
    fleet light on the layout's radii, whose sunward crossings it puts 11–16% too far out, with the films' specular
    light on the night; and the coupled design search at the later date the author set.
-8. **The shores and the waters:** groundwater by the fresh seas (resources, question 16), the delivered water's
+8. **The shores and the waters:** groundwater by the fresh seas (resources, question 16; its tide and load answered 4 November, [coast water](studies/coast_water/README.md#the-monthly-tide-and-where-the-seas-load-settles)), the delivered water's
    chlorine (question 17) and the polar drainage grid; then the Jura Island rerun with its planted shores.
 9. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set, the author's next
    round once these details are worked out.

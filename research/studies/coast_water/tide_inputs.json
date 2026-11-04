@@ -1,0 +1,125 @@
+{
+ "schema": "terluna.research.coast-tide-inputs/1",
+ "status": "external inputs; fetched by HTTP byte range and hash-checked by tide_terrain.py; ignored by Git",
+ "credit": "NASA LRO LOLA Science Team, NASA Goddard Space Flight Center; archived by the PDS Geosciences Node at Washington University in St. Louis (Smith et al. 2010, Space Sci. Rev. 150, 209).",
+ "rights": "NASA scientific data; retain source attribution. The bytes stay in ignored storage.",
+ "evidence": "Archived altimetry-derived raster (LOLA GDR, 256 pixels per degree, about 118 m at the equator and 59-69 m east-west at 45-60 degrees), with interpolation for incomplete coverage.",
+ "slices": [
+  {
+   "name": "n48_e",
+   "tile": "00n_90n_000_180",
+   "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_00n_90n_000_180.img",
+   "latitude_deg": [
+    48.0,
+    49.0
+   ],
+   "first_row": 10494,
+   "row_count": 260,
+   "row_bytes": 92160,
+   "samples": 46080,
+   "pixels_per_degree": 256,
+   "selected_byte_range": [
+    967127040,
+    991088639
+   ],
+   "selected_bytes": 23961600,
+   "sample_type": "<i2",
+   "scale_m": 0.5,
+   "center_longitude_deg": 180.0,
+   "line_projection_offset": 23039.5,
+   "sample_projection_offset": 46079.5,
+   "local_image": "research/runs/coast_water/tide/ldem_256_00n_90n_000_180_rows_10494_10753.img",
+   "source_etag": "\"0e8ded85f1ad51:0\"",
+   "source_last_modified": "Mon, 03 Jun 2019 22:58:24 GMT",
+   "selected_sha256": "7c018bac993d2f142f8159e38b9b1869d92fe83c66336ebe44adf3e97a8c08b9",
+   "retrieved": "2026-11-04"
+  },
+  {
+   "name": "n60_e",
+   "tile": "00n_90n_000_180",
+   "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_00n_90n_000_180.img",
+   "latitude_deg": [
+    60.0,
+    61.0
+   ],
+   "first_row": 7422,
+   "row_count": 260,
+   "row_bytes": 92160,
+   "samples": 46080,
+   "pixels_per_degree": 256,
+   "selected_byte_range": [
+    684011520,
+    707973119
+   ],
+   "selected_bytes": 23961600,
+   "sample_type": "<i2",
+   "scale_m": 0.5,
+   "center_longitude_deg": 180.0,
+   "line_projection_offset": 23039.5,
+   "sample_projection_offset": 46079.5,
+   "local_image": "research/runs/coast_water/tide/ldem_256_00n_90n_000_180_rows_7422_7681.img",
+   "source_etag": "\"0e8ded85f1ad51:0\"",
+   "source_last_modified": "Mon, 03 Jun 2019 22:58:24 GMT",
+   "selected_sha256": "8002f43f455813385f2c622e4d1ac199773a56c37c72956bbc1fcc6a62221c7d",
+   "retrieved": "2026-11-04"
+  },
+  {
+   "name": "n50_w",
+   "tile": "00n_90n_180_360",
+   "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_00n_90n_180_360.img",
+   "latitude_deg": [
+    50.0,
+    51.0
+   ],
+   "first_row": 9982,
+   "row_count": 260,
+   "row_bytes": 92160,
+   "samples": 46080,
+   "pixels_per_degree": 256,
+   "selected_byte_range": [
+    919941120,
+    943902719
+   ],
+   "selected_bytes": 23961600,
+   "sample_type": "<i2",
+   "scale_m": 0.5,
+   "center_longitude_deg": 180.0,
+   "line_projection_offset": 23039.5,
+   "sample_projection_offset": -0.5,
+   "local_image": "research/runs/coast_water/tide/ldem_256_00n_90n_180_360_rows_9982_10241.img",
+   "source_etag": "\"809a1c8e761ad51:0\"",
+   "source_last_modified": "Tue, 04 Jun 2019 01:40:57 GMT",
+   "selected_sha256": "b5b8542dd88a116c59330869cb696a0a09766ece46945727cbc1f92b1b38058b",
+   "retrieved": "2026-11-04"
+  },
+  {
+   "name": "s57_e",
+   "tile": "90s_00s_000_180",
+   "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_256_90s_00s_000_180.img",
+   "latitude_deg": [
+    -58.0,
+    -57.0
+   ],
+   "first_row": 14590,
+   "row_count": 260,
+   "row_bytes": 92160,
+   "samples": 46080,
+   "pixels_per_degree": 256,
+   "selected_byte_range": [
+    1344614400,
+    1368575999
+   ],
+   "selected_bytes": 23961600,
+   "sample_type": "<i2",
+   "scale_m": 0.5,
+   "center_longitude_deg": 180.0,
+   "line_projection_offset": -0.5,
+   "sample_projection_offset": 46079.5,
+   "local_image": "research/runs/coast_water/tide/ldem_256_90s_00s_000_180_rows_14590_14849.img",
+   "source_etag": "\"8011e430951ad51:0\"",
+   "source_last_modified": "Tue, 04 Jun 2019 05:20:15 GMT",
+   "selected_sha256": "d23dbf095875c5b70faf9cd8ca122eaa9fcaf0907b9fb0dcd707fa6016c9cd46",
+   "retrieved": "2026-11-04"
+  }
+ ]
+}

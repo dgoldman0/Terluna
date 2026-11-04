@@ -1,5 +1,5 @@
 {
-  "source_admission": "Published values used in dew.py, run.py and README.md, each with how far it was read for this study on 2026-10-18. The groundwater's permeability, recharge and transmissivity come from geography's products and groundwater_sources.json; the reach of 15-25 m, the sandy ground's tenfold transmissivity and the flat-shore screen from geography's shore screen (geography/README.md, Shores by the fresh seas); the fog's liquid water and fog nets from the food study's sources.json; saturation over water (Bolton 1980) from climate_targets. No outside dataset or full paper is committed.",
+  "source_admission": "Published values used in dew.py, run.py and README.md, each with how far it was read for this study on 2026-10-18. The groundwater's permeability, recharge and transmissivity come from geography's products and groundwater_sources.json; the reach of 15-25 m, the sandy ground's tenfold transmissivity and the flat-shore screen from geography's shore screen (geography/README.md, Shores by the fresh seas); the fog's liquid water and fog nets from the food study's sources.json; saturation over water (Bolton 1980) from climate_targets. No outside dataset or full paper is committed. The tide study of 2026-11-04 (tide.py, tide_run.py, load.py) adds the entries from ferris1951 on, each with how far it was read that day; its LOLA rows are recorded in tide_inputs.json.",
   "sources": [
     {
       "key": "allen1998_fao56",
@@ -64,6 +64,136 @@
       "use": "README and run.EVIDENCE: the lowest level's new humidity is AMAX1 of its old value and the implicit surface exchange (fluxmod.f90 line 664), so the surface only evaporates and the GCM forms no dew; run.LAND_EMISSIVITY and WATER_EMISSIVITY, the surface emissivity zeps = dls + 0.98 (1 - dls) (radmod.f90 line 2289)",
       "values_used": {"land_emissivity": 1.0, "water_emissivity": 0.98},
       "access": "the installed source read 2026-10-18"
+    },
+    {
+      "key": "ferris1951_cyclic",
+      "citation": "Ferris JG 1951, Cyclic fluctuations of water level as a basis for determining aquifer transmissibility, International Association of Scientific Hydrology Publication 33, 148-155",
+      "doi_or_url": "IAHS Publication 33 (General Assembly of Brussels 1951, vol. 2)",
+      "use": "tide.damping and tide.ferris: a sinusoidal level at a fixed shore drives the water table A exp(-kx) cos(wt - kx) inland, k = sqrt(w Sy / 2T); the swing falls to 1/e in 1/k and lags kx/w",
+      "values_used": {
+        "k": "sqrt(w Sy / 2T)",
+        "lag": "kx / w"
+      },
+      "access": "the standard form, recalled; the same relation is Raubenheimer et al. 1999's equation 3 (k = sqrt(n_e w / 2KD)), read 2026-11-04; the paper itself not read"
+    },
+    {
+      "key": "nielsen1990_beach_tide",
+      "citation": "Nielsen P 1990, Tidal dynamics of the water table in beaches, Water Resources Research 26(9), 2127-2134",
+      "doi_or_url": "https://doi.org/10.1029/WR026i009p02127",
+      "use": "tide.nielsen_overheight and tide.finite_amplitude_overheight: to first order in eps = kA cot(beta) the moving shoreline on a planar face raises the mean water table inland by eps A / 2, and to first order in A/D the finite amplitude by A^2 / 4D; the numerical model reproduces both limits",
+      "values_used": {
+        "overheight_moving_shoreline": "eps A / 2",
+        "overheight_finite_amplitude": "A^2 / 4D"
+      },
+      "access": "the abstract through search summaries; the two perturbation solutions as Raubenheimer et al. 1999 restate them (their equations 1 and 2, the steady terms alpha A / 4 with alpha = A/D and eps A / 2), read from that paper's full text 2026-11-04; Nielsen 1990 itself not read"
+    },
+    {
+      "key": "raubenheimer1999_beach_water_table",
+      "citation": "Raubenheimer B, Guza RT, Elgar S 1999, Tidal water table fluctuations in a sandy ocean beach, Water Resources Research 35(8), 2313-2320",
+      "doi_or_url": "https://doi.org/10.1029/1999WR900105",
+      "use": "the restatement of Nielsen's solutions and the linear dispersion relation; measured: mean water tables above mean sea level everywhere on a 0.03 beach with 0.5-1.0 m tides, and a seepage face that changes the water table little landward of the intertidal zone",
+      "values_used": {
+        "intertidal_slope": 0.03,
+        "tide_amplitude_m": [
+          0.5,
+          1.0
+        ]
+      },
+      "access": "full text (WHOI copy) read 2026-11-04, its first two pages in detail"
+    },
+    {
+      "key": "johnson1967_specific_yield",
+      "citation": "Johnson AI 1967, Specific yield: compilation of specific yields for various materials, US Geological Survey Water-Supply Paper 1662-D",
+      "doi_or_url": "https://doi.org/10.3133/wsp1662D",
+      "use": "tide.SPECIFIC_YIELD's sandy ground, 0.21-0.27: the averages for fine, medium and coarse sand (21, 26 and 27%; silt 8%, clay 2%)",
+      "values_used": {
+        "fine_sand": 0.21,
+        "medium_sand": 0.26,
+        "coarse_sand": 0.27
+      },
+      "access": "the averages through search summaries 2026-11-04; the USGS pages refused the fetch, so the report was not read"
+    },
+    {
+      "key": "woessner_poeter2020_specific_yield",
+      "citation": "Woessner WW, Poeter EP 2020, Hydrogeologic Properties of Earth Materials and Principles of Groundwater Flow, The Groundwater Project, section 3.6, Specific yield and specific retention",
+      "doi_or_url": "https://books.gw-project.org/hydrogeologic-properties-of-earth-materials-and-principles-of-groundwater-flow/chapter/specific-yield-and-specific-retention/",
+      "use": "tide.SPECIFIC_YIELD's crust: fractured basalt 2-10%, vesicular basalt 5-15%; sands' ranges after Morris and Johnson 1967",
+      "values_used": {
+        "fractured_basalt": [
+          0.02,
+          0.1
+        ],
+        "vesicular_basalt": [
+          0.05,
+          0.15
+        ]
+      },
+      "access": "the section's table through the fetch tool's summary 2026-11-04"
+    },
+    {
+      "key": "hunt1996_oahu",
+      "citation": "Hunt CD 1996, Geohydrology of the Island of Oahu, Hawaii, USGS Professional Paper 1412-B",
+      "doi_or_url": "https://doi.org/10.3133/pp1412B",
+      "use": "tide.SPECIFIC_YIELD's crust, 0.05-0.10: the lava flows' specific yield mostly 5-10%",
+      "values_used": {
+        "lava_flows": [
+          0.05,
+          0.1
+        ]
+      },
+      "access": "through research/studies/land_cities/sources.json, as read there; not reread"
+    },
+    {
+      "key": "fenske2025_duricrust",
+      "citation": "Fenske C, Braun J, Guillocheau F, Robin C 2025, A numerical model for duricrust formation by water table fluctuations, Earth Surface Dynamics 13, 119-146",
+      "doi_or_url": "https://doi.org/10.5194/esurf-13-119-2025",
+      "use": "README: the growth of calcretes the load's rates compare with: groundwater calcretes 10-3,000 mm per thousand years and pedogenic ones 0.5-350 (Goudie 1985), southern African calcretes 5-50 m per million years (Netterberg 1978); precipitation near or just above the water table and in the vadose zone",
+      "values_used": {
+        "groundwater_calcrete_mm_kyr": [
+          10,
+          3000
+        ],
+        "pedogenic_calcrete_mm_kyr": [
+          0.5,
+          350
+        ],
+        "netterberg_m_myr": [
+          5,
+          50
+        ]
+      },
+      "access": "the review's rates and their attributions through the fetch tool's summary with quotes 2026-11-04; the primary sources not read"
+    },
+    {
+      "key": "hardie_eugster1970_divides",
+      "citation": "Hardie LA, Eugster HP 1970, The evolution of closed-basin brines, Mineralogical Society of America Special Paper 3, 273-290",
+      "doi_or_url": "through research/studies/sea_chemistry/sources.json and research/studies/lake_kinds/sources.json",
+      "use": "load.evaporation_path: on the chemical divides a water whose alkalinity exceeds twice its calcium keeps its alkalinity after calcite and turns to soda, its magnesium going to silicates and its silica to opal",
+      "values_used": {},
+      "access": "through the sea chemistry study's use, as recorded there; not reread"
+    },
+    {
+      "key": "sea_chemistry_constants",
+      "citation": "The sea chemistry study's and carbon cycle's chemistry: Plummer and Busenberg 1982 constants with Davies activities to an ionic strength of 0.5; Gunnarsson and Arnorsson 2000 for amorphous silica (log K -2.71 at 25 C, pKa 9.82); magnesium clays at pH 9 with 1.5 silicons a magnesium (design guess after Tosca and Masterson 2014); the minerals' densities",
+      "doi_or_url": "through research/studies/sea_chemistry/sources.json",
+      "use": "load.evaporation_path and load.deposits, by import of research.studies.carbon_cycle.run and research.studies.sea_chemistry.run",
+      "values_used": {
+        "silica_log_k_25c": -2.71,
+        "silica_pka": 9.82,
+        "ph_clay": 9.0
+      },
+      "access": "through the sea chemistry study; not reread"
+    },
+    {
+      "key": "usda1954_sodic",
+      "citation": "US Salinity Laboratory Staff 1954, Diagnosis and Improvement of Saline and Alkali Soils, USDA Agriculture Handbook 60",
+      "doi_or_url": "https://www.ars.usda.gov/pacific-west-area/riverside-ca/agricultural-water-efficiency-and-salinity-research-unit/docs/handbook-no-60/",
+      "use": "load.SODIC_ESP (an exchangeable sodium share of 15%) and load.SALINE_MOL_M3 (soil water near 4 dS/m, about 40 mmol/L of sodium chloride) as the thresholds; load.CEC_MOL_KG's 5-25 cmol/kg is a stated bracket for loamy developed soils, open",
+      "values_used": {
+        "sodic_esp": 0.15,
+        "saline_ec_ds_m": 4.0
+      },
+      "access": "recalled, not read for this study"
     }
   ]
 }

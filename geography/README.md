@@ -340,13 +340,7 @@ for the shorelines and the seas' freshness to be weighed more. The shore study a
   lowers its middle's water table by Ea²/2T: 8 m for an island a kilometre across at the central transmissivity and
   32 m for one two kilometres across, a tenth of that in sandy ground. Low islands up to about a kilometre across in
   ordinary ground, or a few kilometres in sand, can stay wooded from shore to shore on groundwater alone.
-- **The sea's load stays where the draw ends.** A metre a year at 0.14 g/kg leaves 140 g/m² a year. Most of it is
-  calcite, magnesium minerals and opal, a hardpan that cements about 18 cm of soil at 30% porosity each millennium.
-  Sodium and potassium are 2% of weathering's load ([sea chemistry](../research/studies/sea_chemistry/README.md)), so
-  salt in the harmful sense builds slowly. On the Okavango Delta's islands, whose water is fresher than the held seas
-  but carries more sodium beside its calcium, trees drawing the delta's water leave wooded rims round bare, salty
-  centres (McCarthy and Ellery 1994; *recalled*). Rain, the monthly tide (3.7 m typical on the Near-side Sea) or
-  flushing by people carries the load away.
+- **The sea's load stays where the draw ends.** A metre a year at 0.14 g/kg leaves 140 g/m² a year. The held sea lays it at the roots as calcite, then opal, about a centimetre of cemented soil a century under the desert belts, and neither the monthly tide nor the rain carries it back ([coast water](../research/studies/coast_water/README.md#the-monthly-tide-and-where-the-seas-load-settles)). On the Okavango Delta's islands, whose water is fresher than the held seas but carries more sodium beside its calcium, trees drawing the delta's water leave wooded rims round bare, salty centres (McCarthy and Ellery 1994; *recalled*). A soluble load leaves only by flushing below the roots: the delivered water's chloride, if the seas kept it, would salt the desert belts' root zones within two years unless about 0.17 m of water a year passed below them, nearly three times the deserts' rain.
 - **Jura Island.** Measured at LOLA's 16 px/deg in [its study](../research/studies/jura_island/README.md), only 2% of
   the island lies within 25 m of the sea and its first 1–2 km inland stand a median 112 m up, so its belts are a rim of
   1,100–2,600 km², 2–4.5% of it.

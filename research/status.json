@@ -508,7 +508,9 @@
         "../geography/tides_ephemeris_check.csv",
         "../geography/results/tides.json",
         "studies/coast_water/README.md",
-        "studies/coast_water/results/coast_water.json"
+        "studies/coast_water/results/coast_water.json",
+        "studies/coast_water/results/coast_tide.json",
+        "studies/coast_water/tide_inputs.json"
       ],
       "unresolved": [
         "polar cold-trapping",
