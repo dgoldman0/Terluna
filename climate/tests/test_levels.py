@@ -147,7 +147,7 @@ def test_the_15_level_inputs_split_the_lowest_layers_terms_and_keep_their_sums()
         assert abs(carried['check'][key]['sums'][0] - carried['check'][key]['sums'][1]) < 1e-3
 
 
-@pytest.mark.parametrize('fit', ['l15_provisional', 'l15_design'])
+@pytest.mark.parametrize('fit', ['l15_provisional', 'l15_design', 'l15_turned'])
 def test_the_runner_reads_the_fifteen_level_refits_as_they_are_and_refuses_them_elsewhere(fit):
     import json
     from climate.gcm import exoplasim_run as er

@@ -63,7 +63,7 @@ restart carried there by levels.py's conservative remap and its twilight terms, 
 factors on those levels, and --sbm-shallow-cap holds a shallow cloud's top within the depth test's threshold of its own
 base in place of PlaSim's 700 hPa (SBM_CAP_PATCHES); without either a run is as before. --levels l15 adds a thin bottom
 layer, the ground to 0.6 km, to the fourteen, and --longwave-fit l15_provisional gives a run on it the longwave
-correction refitted on its own levels' columns; since 2026-10-31 --longwave-fit l15_design gives the design run the correction refitted on its configuration's bridge at 300.9 K. --convection massflux runs the mass-flux scheme of massflux.py in
+correction refitted on its own levels' columns; since 2026-10-31 --longwave-fit l15_design gives the design run the correction refitted on its configuration's bridge at 300.9 K, and since 2026-11-05 --longwave-fit l15_turned gives the design run on the turned geography the correction refitted on the turned design run's year 19. --convection massflux runs the mass-flux scheme of massflux.py in
 Kuo's place (rainmod's nprc 3; massflux_fortran.py's patch, applied only for a run that sets it); a run without it is as
 before. --free-convection lunar takes the free-convection constant in the heat and vapour transfer over water (Miller
 and others 1992; FREE_CONVECTION_EDITS) from Earth's 0.0016 to the Moon's gravity and surface pressure, and
@@ -1614,12 +1614,15 @@ SLANT_PRODUCT = TWILIGHT_LEDGERS['294.9k']
 # the correction refitted on the 15-level month trial's own cloud-free columns (plasim_longwave.py refit), for tests on
 # those levels until the configuration chosen for a long run is refitted; a run on another set refuses it.
 # 'l15_design' (2026-10-31) is the correction refitted on year 5 of the design configuration's bridge at 300.9 K (the snow from its flakes, the rain from its drops, Beljaars's gust with the similarity over water, Betts-Miller at 0.7 on fifteen levels), for the design run.
+# 'l15_turned' (2026-11-05) is the correction refitted on year 19 of the turned design run at 301.7 K, where 'l15_design' strays past its 2.5 W/m² rule at sea, for the design run on the turned geography.
 LONGWAVE_FITS = {'301k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_lw_ice.json',
                  '295k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_heating.json',
                  'l15_provisional': ROOT / 'climate' / 'results' / 'gcm'
                  / 'longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json',
                  'l15_design': ROOT / 'climate' / 'results' / 'gcm'
-                 / 'longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_bridge_s958_refit.json'}
+                 / 'longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_bridge_s958_refit.json',
+                 'l15_turned': ROOT / 'climate' / 'results' / 'gcm'
+                 / 'longwave_A28R_301k_design_l15_snow_s934_turned_refit.json'}
 LONGWAVE_PRODUCT = LONGWAVE_FITS['301k']
 GASES_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'shortwave_gases.json'
 GAS_ORDER = ('co2_nir', 'o2_nir', 'o2_vis')                     # PlaSim's ZGASQ columns
