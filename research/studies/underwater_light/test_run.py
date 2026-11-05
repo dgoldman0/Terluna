@@ -107,6 +107,24 @@ def test_lit_area_counts_floor_shallower_than_the_limit():
     assert out['0-15'] == pytest.approx(4.0) and out['45-60'] == pytest.approx(3.0) and out['all'] == pytest.approx(7.0)
 
 
+def test_the_turned_frame_puts_its_pole_at_90_and_earth_on_its_equator():
+    assert R.turned_latitude(*R.TURNED_POLE_DEG) == pytest.approx(90.0, abs=1e-6)
+    assert R.turned_latitude(7.998315406406375, 6.088889089043695) == pytest.approx(0.0, abs=1e-6)   # sub-Earth point
+    assert R.turned_latitude(-81.94628788358153, 12.857075738768941) == pytest.approx(-90.0, abs=1e-6)
+    assert np.linalg.norm(R.TURNED_NORTH) == pytest.approx(1.0, abs=1e-12)
+    lat = np.array([-60.0, 0.0, 33.0])
+    assert np.allclose(R.turned_latitude(lat, np.array([10.0, 200.0, -70.0]), np.array([0.0, 0.0, 1.0])), lat)
+
+
+def test_binned_floor_counts_each_cell_at_its_own_latitude():
+    lat, depth, area = np.array([10.1, -50.1, 10.2]), np.array([5.0, 2.0, 50.0]), np.array([2.0, 3.0, 4.0])
+    shallower, whole = R.binned_areas(lat, depth, area)
+    tables = dict(bin_lat=0.5 * (R.LATITUDE_BINS[1:] + R.LATITUDE_BINS[:-1]), sea_turned=shallower, sea_turned_all=whole)
+    out = R.lit_area(tables, 'sea', lambda x: np.full_like(x, 10.0), 'turned')
+    assert out['0-15'] == pytest.approx(2.0) and out['45-60'] == pytest.approx(3.0) and out['all'] == pytest.approx(5.0)
+    assert R.floor_by_band(tables, 'sea', None, 'turned')['all'] == pytest.approx(9.0)
+
+
 # ==== The product ==================================================================================================
 def test_product_header_and_provenance():
     p = product()
@@ -135,6 +153,20 @@ def test_shallow_sea_area_matches_the_aquatic_plan():
     p = product()
     assert p['floor_shallower_than_30m_km2']['sea']['all'] == pytest.approx(233000, rel=0.03)
     assert p['floor_total_km2']['sea']['all'] == pytest.approx(10.6e6, rel=0.01)
+
+
+def test_the_turned_moon_moves_the_floor_between_latitudes_and_keeps_its_area():
+    p = product()
+    assert p['checks']['floor_binned_today_vs_rows_max_relative'] < 0.005
+    for kind in ('sea', 'lake'):
+        for key in ('floor_total', 'floor_shallower_than_30m'):
+            assert p[f'{key}_turned_km2'][kind]['all'] == pytest.approx(p[f'{key}_km2'][kind]['all'], rel=1e-3)
+    for kind, waters in p['floor'].items():
+        for name, by_threshold in waters.items():
+            for t, today in by_threshold.items():
+                if t != 'limit_depth_m_by_latitude':
+                    assert p['floor_turned'][kind][name][t]['all'] > 0
+                    assert p['floor_turned'][kind][name][t]['all'] == pytest.approx(today['all'], rel=0.5)
 
 
 def test_zones_are_ordered_and_light_falls_with_depth():

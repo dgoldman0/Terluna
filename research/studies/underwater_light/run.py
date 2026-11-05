@@ -13,7 +13,9 @@ fresh water's scattering and ultraviolet absorption, Lee et al.'s attenuation pe
 spectral downwelling irradiance with depth, photosynthetic photons, illuminance and a fish rod's photon catch.
 
 The Sun's arc is the present axis's at equinox (declination 0; the 1.54 degree seasonal swing is a sensitivity at
-75 degrees), so latitude stays a parameter: a place moved by the turned Moon reads its new latitude. Each water's
+75 degrees), so latitude stays a parameter: a place moved by the turned Moon reads its new latitude, and the lit
+floors are summed twice, at today's latitudes and at the turned Moon's (the elastic frame set for the second set of
+simulations), over today's depths and lakes. Each water's
 chlorophyll runs from its dawn value at sunrise to its dusk value at sunset and back through the night, mixed in the
 logarithm of the light. The ultraviolet comes from the surface-light product (1 nm, Sun 1-90 degrees, two-stream).
 The floor's depths are geography's: the 16 pixel/degree heights against the atlas's sea level, as geography/drainage.py
@@ -59,6 +61,12 @@ PERIOD_H = SYNODIC_MONTH_DAYS * 24.0
 LATITUDES = np.arange(0.0, 75.01, 5.0)        # reported places
 AREA_LATITUDES = np.arange(0.0, 90.01, 2.0)   # for the floor, read per 16 px/deg row
 BANDS = ((0, 15), (15, 30), (30, 45), (45, 60), (60, 75), (75, 90))
+# The turned Moon: its north axis in today's body frame (x toward 0 N 0 E, z north), the third row of the elastic
+# frame's rotation, the orientation set for the second set of simulations (geology/results/moon_orientation.json on
+# domain/geology, 45c3d817; research/studies/moon_orientation on main). Its north pole lies at 81.95 N, 167.14 W.
+TURNED_NORTH = np.array([-0.13658877239395323, -0.03117532763335884, 0.990137165347744])
+TURNED_POLE_DEG = (81.94628788358153, -167.14292426123106)
+LATITUDE_BINS = np.arange(-90.0, 90.01, 0.25)  # the floor by latitude in a frame, cells binned at their own latitudes
 PPD = 16
 DEPTH_EDGES = np.arange(0.0, 1000.01, 0.5)    # the floors' depth histograms (LOLA heights come in 0.5 m steps)
 EVENING_DEG = (0.0, -6.0, -12.0, -18.0, -24.0, -30.0, -40.0)
@@ -200,11 +208,12 @@ def hours_below(series, level):
 
 # ==== The floors ===================================================================================================
 def depth_tables():
-    """Per 16 px/deg row, cumulative counts of sea and lake cells shallower than each edge, with the cell areas; cached
-    on the drive under the inputs' hashes."""
+    """Per 16 px/deg row, cumulative counts of sea and lake cells shallower than each edge, with the cell areas, and the
+    same floors' areas binned at each cell's latitude today and on the turned Moon; cached on the drive under the
+    inputs' hashes."""
     identity = {str(p.relative_to(ROOT)): sha256(p) for p in (ATLAS, DRAINAGE, ROOT / 'geography/topography.py',
                                                               *TOPOGRAPHY_INPUTS)}
-    layout = 'cumulative counts per row with totals, 2026-11-04'
+    layout = 'cumulative counts per row with totals, and areas by latitude today and on the turned Moon, 2026-11-04'
     cache = BULK / 'depths_16ppd.npz'
     if cache.exists():
         with np.load(cache, allow_pickle=False) as z:
@@ -234,30 +243,64 @@ def depth_tables():
     out = dict(lat=grid.lat_deg, area_km2=area, sea=sea, lake=lake, edges=DEPTH_EDGES, sea_all=sea_all,
                lake_all=np.bincount(lake_row, minlength=rows),
                sea_cells=np.array([int((h < level).sum())]), lake_negative=np.array([int((lake_depth < 0).sum())]),
-               sea_level_m=np.array([level]))
+               sea_level_m=np.array([level]), bin_lat=0.5 * (LATITUDE_BINS[1:] + LATITUDE_BINS[:-1]))
+    # The same floors binned at each cell's own latitude: today's, which checks the binning against the rows, and the
+    # turned Moon's. Lake cells below their floor count from the first edge on.
+    sea_row, sea_col = np.nonzero(h < level)
+    places = dict(sea=(sea_row, sea_col, level - h[sea_row, sea_col]),
+                  lake=(lake_row, cells % cols, np.maximum(lake_depth, 0.0)))
+    for frame, north in (('today', np.array([0.0, 0.0, 1.0])), ('turned', TURNED_NORTH)):
+        for kind, (r, c, depth) in places.items():
+            lat = turned_latitude(grid.lat_deg[r], grid.lon_deg[c], north)
+            out[f'{kind}_{frame}'], out[f'{kind}_{frame}_all'] = binned_areas(lat, depth, area[r])
     BULK.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(cache, identity=json.dumps(identity), layout=layout, **out)
     return out | dict(identity=identity)
 
 
-def lit_area(tables, kind, limit_by_lat):
-    """km2 of floor shallower than the limit depth at each row's latitude, by band; limit_by_lat(|lat|) in m."""
-    lat = np.abs(tables['lat'])
-    limit = np.clip(limit_by_lat(lat), 0, DEPTH_EDGES[-1])
-    counts = np.array([np.interp(z, DEPTH_EDGES, c) for z, c in zip(limit, tables[kind])])
-    area = counts * tables['area_km2']
+def turned_latitude(lat_deg, lon_deg, north=TURNED_NORTH):
+    """Latitude (degrees) in the frame whose north axis is `north`, a unit vector in today's body frame."""
+    lat, lon = np.radians(lat_deg), np.radians(lon_deg)
+    s = np.cos(lat) * (north[0] * np.cos(lon) + north[1] * np.sin(lon)) + north[2] * np.sin(lat)
+    return np.degrees(np.arcsin(np.clip(s, -1.0, 1.0)))
+
+
+def binned_areas(lat_deg, depth_m, area_km2):
+    """km2 of floor shallower than each depth edge in each latitude bin, and each bin's whole floor."""
+    hist, _, _ = np.histogram2d(lat_deg, depth_m, bins=[LATITUDE_BINS, DEPTH_EDGES], weights=area_km2)
+    shallower = np.concatenate([np.zeros((hist.shape[0], 1)), np.cumsum(hist, axis=1)], axis=1)
+    return shallower, np.histogram(lat_deg, bins=LATITUDE_BINS, weights=area_km2)[0]
+
+
+def by_band(lat, area):
     out = {f'{lo}-{hi}': float(area[(lat >= lo) & (lat < hi + (hi == 90))].sum()) for lo, hi in BANDS}
     out['all'] = float(area.sum())
     return out
 
 
-def floor_by_band(tables, kind, depth_m):
+def lit_area(tables, kind, limit_by_lat, frame=None):
+    """km2 of floor shallower than the limit depth at each row's latitude, by band; limit_by_lat(|lat|) in m. With a
+    frame ('today' or 'turned'), the floor binned at each cell's latitude in that frame."""
+    if frame is not None:
+        lat = np.abs(tables['bin_lat'])
+        limit = np.clip(limit_by_lat(lat), 0, DEPTH_EDGES[-1])
+        return by_band(lat, np.array([np.interp(z, DEPTH_EDGES, a) for z, a in zip(limit, tables[f'{kind}_{frame}'])]))
+    lat = np.abs(tables['lat'])
+    limit = np.clip(limit_by_lat(lat), 0, DEPTH_EDGES[-1])
+    counts = np.array([np.interp(z, DEPTH_EDGES, c) for z, c in zip(limit, tables[kind])])
+    return by_band(lat, counts * tables['area_km2'])
+
+
+def floor_by_band(tables, kind, depth_m, frame=None):
+    """km2 of floor shallower than depth_m (all of it if None) by band, per row or binned in a frame."""
+    if frame is not None:
+        lat = np.abs(tables['bin_lat'])
+        return by_band(lat, tables[f'{kind}_{frame}_all'] if depth_m is None else
+                       np.array([np.interp(depth_m, DEPTH_EDGES, a) for a in tables[f'{kind}_{frame}']]))
     lat = np.abs(tables['lat'])
     counts = (tables[f'{kind}_all'] if depth_m is None else
               np.array([np.interp(depth_m, DEPTH_EDGES, c) for c in tables[kind]])) * tables['area_km2']
-    out = {f'{lo}-{hi}': float(counts[(lat >= lo) & (lat < hi + (hi == 90))].sum()) for lo, hi in BANDS}
-    out['all'] = float(counts.sum())
-    return out
+    return by_band(lat, counts)
 
 
 # ==== Ultraviolet ==================================================================================================
@@ -349,7 +392,7 @@ def build():
     thresholds = dict(BENTHIC) | {f'charophyte_{p:g}pct': p / 100 * earth_mean_40 * UMOL_DAY for p in CHAROPHYTE_PERCENT}
 
     zones, floors, dark, spectra, eyes, seasonal, profiles, twilight = {}, {}, {}, {}, {}, {}, {}, {}
-    bulk = {}
+    floors_turned, binning, bulk = {}, [], {}
     for world, light in lights.items():
         surface = (light['direct'] + light['diffuse']) @ light['weights']['par']
         surface_par[world] = {f'{lat:g}': dict(noon=float(np.interp(90 - lat, ELEVATION, surface)),
@@ -392,11 +435,17 @@ def build():
                 lim = {t: np.array([first_below(DEPTH, m, v) for m in means]) for t, v in thresholds.items()}
                 kinds = ('lake',) if name == 'crater_lake' else ('sea', 'lake') if name == 'productive_coast' else ('sea',)
                 for kind in kinds:
-                    floors.setdefault(kind, {})[name] = {
-                        t: lit_area(tables, kind, lambda lat, z=np.nan_to_num(v, nan=DEPTH_EDGES[-1]):
-                                    np.interp(lat, AREA_LATITUDES, z)) for t, v in lim.items()}
+                    limits = {t: (lambda lat, z=np.nan_to_num(v, nan=DEPTH_EDGES[-1]): np.interp(lat, AREA_LATITUDES, z))
+                              for t, v in lim.items()}
+                    floors.setdefault(kind, {})[name] = {t: lit_area(tables, kind, f) for t, f in limits.items()}
                     floors[kind][name]['limit_depth_m_by_latitude'] = {t: dict(zip([f'{x:g}' for x in AREA_LATITUDES[::5]],
                                                                                    v[::5].tolist())) for t, v in lim.items()}
+                    floors_turned.setdefault(kind, {})[name] = {t: lit_area(tables, kind, f, 'turned')
+                                                                for t, f in limits.items()}
+                    # Binned at today's latitudes, the floor must repeat the rows' areas.
+                    for t, f in limits.items():
+                        rows_, binned = floors[kind][name][t], lit_area(tables, kind, f, 'today')
+                        binning.extend(abs(binned[b] / rows_[b] - 1) for b in rows_ if rows_[b] > 1000.0)
                 if name in ('open_sea', 'productive_coast', 'crater_lake'):
                     seasonal[name] = {f'{d:+.2f}': first_below(DEPTH, through_day(tabs['dawn'], tabs['dusk'], 75.0, d).mean(0)
                                                                 * UMOL_DAY, EUPHOTIC_DOSE)
@@ -513,6 +562,9 @@ def build():
                         quantities=np.array(['par_umol_m2_s', 'lux', 'rod_umol_m2_s']), **bulk)
     shallow = {kind: floor_by_band(tables, kind, 30.0) for kind in ('sea', 'lake')}
     totals = {kind: floor_by_band(tables, kind, None) for kind in ('sea', 'lake')}
+    shallow_turned = {kind: floor_by_band(tables, kind, 30.0, 'turned') for kind in ('sea', 'lake')}
+    totals_turned = {kind: floor_by_band(tables, kind, None, 'turned') for kind in ('sea', 'lake')}
+    checks['floor_binned_today_vs_rows_max_relative'] = float(max(binning))
     files = [Path(__file__), HERE / 'optics.py', ROOT / 'illumination/water_column/model.py',
              ROOT / 'illumination/water_column/fresh_water.py',
              ROOT / 'biosphere/ecology/screen.py', ROOT / 'geography/topography.py']
@@ -539,8 +591,9 @@ def build():
                       'thresholds), disphotic_end_m (noon rod catch falls to the deep-sea limit; aphotic below), '
                       'benthic_limit_m (lunar-day mean PAR at the floor falls to each threshold). floor[sea|lake][water]'
                       '[threshold][band] is km2 of floor lit above the threshold, bands of |latitude| in degrees, today\'s '
-                      'latitudes; for the turned Moon read each place at its new latitude. Declination 0 throughout '
-                      'except seasonal_75.'),
+                      'latitudes; floor_turned is the same floor with each cell at its latitude on the turned Moon '
+                      '(turned_frame), today\'s depths and lakes. For other places on the turned Moon read each at its '
+                      'new latitude. Declination 0 throughout except seasonal_75.'),
         units=dict(depth='m', par='umol m-2 s-1', dose='mol m-2 d-1 (Earth day)', illuminance='lux',
                    rod='umol m-2 s-1 weighted by an A1 template at 480 nm', ultraviolet='W m-2',
                    dna='W m-2 weighted by the DNA-damage action spectrum, 1 at 300 nm', area='km2'),
@@ -564,6 +617,13 @@ def build():
                            status='design guess of this study' if name == 'crater_lake' else 'biosphere/living_water/waters.json')
                 for name, ph_ in cases.items()} | {'crater_lake_record': CRATER_LAKE},
         surface_par=surface_par, zones=zones, floor=floors, floor_shallower_than_30m_km2=shallow, floor_total_km2=totals,
+        floor_turned=floors_turned, floor_shallower_than_30m_turned_km2=shallow_turned,
+        floor_total_turned_km2=totals_turned,
+        turned_frame=dict(north_axis_in_todays_frame=TURNED_NORTH.tolist(), north_pole_lat_lon_deg=list(TURNED_POLE_DEG),
+                          latitude_bin_deg=float(LATITUDE_BINS[1] - LATITUDE_BINS[0]),
+                          source=('the elastic frame with the seas and lakes in place, set for the second set of '
+                                  'simulations: geology/results/moon_orientation.json on domain/geology (45c3d817), '
+                                  'research/studies/moon_orientation on main')),
         depth_table_notes=dict(sea_cells=int(tables['sea_cells'][0]), lake_cells_below_their_floor=int(tables['lake_negative'][0]),
                                sea_level_m=float(tables['sea_level_m'][0])),
         dark_hours=dark, seasonal_75=seasonal, ultraviolet=uv, dna_weighting_share_overhead_surface=share,

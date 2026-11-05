@@ -4,7 +4,7 @@
   "lane": "research",
   "runner": "research/studies/underwater_light/run.py",
   "files": {
-   "research/studies/underwater_light/run.py": "8723e4c027c6f7328e2e7c43789d0990e186d818aba4c3e83ab7cc3ff4ce6c6b",
+   "research/studies/underwater_light/run.py": "f3aff0a7c7935e97fb0e597c4af26185a12b1e166116f913e9381f168f07b53b",
    "research/studies/underwater_light/optics.py": "840fd98698b4910cad2fcdeeac558b2da3c03838f20d30599a4a4c77b944acfc",
    "illumination/water_column/model.py": "c829a086bbbbe3f5f659395a1d43718e89099774916aed8c11a65e27a2b005e1",
    "illumination/water_column/fresh_water.py": "1f88ba7cee014cc395f4a6d3e681c295c289cd931aeba3575fdb519b4a198274",
@@ -47,7 +47,7 @@
   "illumination/water_column/inputs/62231Kdata.txt": "8d8bcaf7748281b4792e783de9395ea53bcb2b05904c625ea38f570f9ff01a89"
  },
  "evidence": "A calculation on committed products: the solved spherical sky (clear, ground albedo 0.1), the calendar's Earth spectrum, the surface-light product's ultraviolet, the biosphere's design guesses for the waters and this study's design guess for the crater lakes, through Earth's ocean optics with fresh water's scattering and ultraviolet absorption; geography's 16 px/deg depths. Earth's light requirements are reference points, and organisms are engineered. No organism, survival through the night, wave focusing, inelastic scattering or real reef shape is modelled.",
- "reading_rule": "Depths in metres below a flat surface; light just below the surface is depth 0. PAR is 400-700 nm photons in umol m-2 s-1; doses in mol m-2 per Earth day (umol m-2 s-1 x 0.0864). zones[world][water][latitude]: euphotic_noon_1pct_m (1% of the PAR just below the surface at local noon, mean chlorophyll; dawn and dusk beside it), euphotic_dose_m (lunar-day mean PAR falls to 0.4 mol m-2 d-1), twilight_feeding_end_m (noon illuminance falls to the fish feeding thresholds), disphotic_end_m (noon rod catch falls to the deep-sea limit; aphotic below), benthic_limit_m (lunar-day mean PAR at the floor falls to each threshold). floor[sea|lake][water][threshold][band] is km2 of floor lit above the threshold, bands of |latitude| in degrees, today's latitudes; for the turned Moon read each place at its new latitude. Declination 0 throughout except seasonal_75.",
+ "reading_rule": "Depths in metres below a flat surface; light just below the surface is depth 0. PAR is 400-700 nm photons in umol m-2 s-1; doses in mol m-2 per Earth day (umol m-2 s-1 x 0.0864). zones[world][water][latitude]: euphotic_noon_1pct_m (1% of the PAR just below the surface at local noon, mean chlorophyll; dawn and dusk beside it), euphotic_dose_m (lunar-day mean PAR falls to 0.4 mol m-2 d-1), twilight_feeding_end_m (noon illuminance falls to the fish feeding thresholds), disphotic_end_m (noon rod catch falls to the deep-sea limit; aphotic below), benthic_limit_m (lunar-day mean PAR at the floor falls to each threshold). floor[sea|lake][water][threshold][band] is km2 of floor lit above the threshold, bands of |latitude| in degrees, today's latitudes; floor_turned is the same floor with each cell at its latitude on the turned Moon (turned_frame), today's depths and lakes. For other places on the turned Moon read each at its new latitude. Declination 0 throughout except seasonal_75.",
  "units": {
   "depth": "m",
   "par": "umol m-2 s-1",
@@ -3563,6 +3563,300 @@
    "75-90": 19760.0,
    "all": 3922000.0
   }
+ },
+ "floor_turned": {
+  "sea": {
+   "open_sea": {
+    "seagrass": {
+     "0-15": 57670.0,
+     "15-30": 41580.0,
+     "30-45": 26800.0,
+     "45-60": 12630.0,
+     "60-75": 3151.0,
+     "75-90": 322.3,
+     "all": 142200.0
+    },
+    "coral_reef": {
+     "0-15": 118600.0,
+     "15-30": 87000.0,
+     "30-45": 59910.0,
+     "45-60": 34850.0,
+     "60-75": 12610.0,
+     "75-90": 2751.0,
+     "all": 315700.0
+    },
+    "microphytobenthos": {
+     "0-15": 183900.0,
+     "15-30": 132800.0,
+     "30-45": 96200.0,
+     "45-60": 58680.0,
+     "60-75": 23440.0,
+     "75-90": 6109.0,
+     "all": 501200.0
+    },
+    "charophyte_3pct": {
+     "0-15": 121700.0,
+     "15-30": 89250.0,
+     "30-45": 61820.0,
+     "45-60": 35990.0,
+     "60-75": 13160.0,
+     "75-90": 2924.0,
+     "all": 324900.0
+    },
+    "charophyte_9pct": {
+     "0-15": 69110.0,
+     "15-30": 50010.0,
+     "30-45": 33040.0,
+     "45-60": 16630.0,
+     "60-75": 4657.0,
+     "75-90": 619.2,
+     "all": 174100.0
+    }
+   },
+   "productive_coast": {
+    "seagrass": {
+     "0-15": 12140.0,
+     "15-30": 9141.0,
+     "30-45": 6279.0,
+     "45-60": 3185.0,
+     "60-75": 1038.0,
+     "75-90": 136.2,
+     "all": 31920.0
+    },
+    "coral_reef": {
+     "0-15": 21820.0,
+     "15-30": 16380.0,
+     "30-45": 11840.0,
+     "45-60": 6881.0,
+     "60-75": 2692.0,
+     "75-90": 624.8,
+     "all": 60230.0
+    },
+    "microphytobenthos": {
+     "0-15": 32310.0,
+     "15-30": 24480.0,
+     "30-45": 17910.0,
+     "45-60": 11160.0,
+     "60-75": 4527.0,
+     "75-90": 1166.0,
+     "all": 91570.0
+    },
+    "charophyte_3pct": {
+     "0-15": 22340.0,
+     "15-30": 16770.0,
+     "30-45": 12130.0,
+     "45-60": 7095.0,
+     "60-75": 2781.0,
+     "75-90": 648.1,
+     "all": 61770.0
+    },
+    "charophyte_9pct": {
+     "0-15": 13970.0,
+     "15-30": 10420.0,
+     "30-45": 7314.0,
+     "45-60": 3873.0,
+     "60-75": 1339.0,
+     "75-90": 226.7,
+     "all": 37150.0
+    }
+   },
+   "river_mouth": {
+    "seagrass": {
+     "0-15": 2421.0,
+     "15-30": 1828.0,
+     "30-45": 1333.0,
+     "45-60": 636.7,
+     "60-75": 214.6,
+     "75-90": 28.36,
+     "all": 6462.0
+    },
+    "coral_reef": {
+     "0-15": 4225.0,
+     "15-30": 3233.0,
+     "30-45": 2436.0,
+     "45-60": 1290.0,
+     "60-75": 566.4,
+     "75-90": 132.9,
+     "all": 11880.0
+    },
+    "microphytobenthos": {
+     "0-15": 5945.0,
+     "15-30": 4584.0,
+     "30-45": 3487.0,
+     "45-60": 1987.0,
+     "60-75": 934.3,
+     "75-90": 238.6,
+     "all": 17180.0
+    },
+    "charophyte_3pct": {
+     "0-15": 4314.0,
+     "15-30": 3307.0,
+     "30-45": 2490.0,
+     "45-60": 1325.0,
+     "60-75": 585.7,
+     "75-90": 138.8,
+     "all": 12160.0
+    },
+    "charophyte_9pct": {
+     "0-15": 2766.0,
+     "15-30": 2082.0,
+     "30-45": 1547.0,
+     "45-60": 757.2,
+     "60-75": 281.2,
+     "75-90": 47.4,
+     "all": 7480.0
+    }
+   }
+  },
+  "lake": {
+   "productive_coast": {
+    "seagrass": {
+     "0-15": 56140.0,
+     "15-30": 17910.0,
+     "30-45": 9617.0,
+     "45-60": 378.4,
+     "60-75": 47.52,
+     "75-90": 544.9,
+     "all": 84640.0
+    },
+    "coral_reef": {
+     "0-15": 91420.0,
+     "15-30": 29850.0,
+     "30-45": 15510.0,
+     "45-60": 612.5,
+     "60-75": 54.47,
+     "75-90": 1319.0,
+     "all": 138800.0
+    },
+    "microphytobenthos": {
+     "0-15": 125300.0,
+     "15-30": 41940.0,
+     "30-45": 22060.0,
+     "45-60": 882.0,
+     "60-75": 60.1,
+     "75-90": 2049.0,
+     "all": 192300.0
+    },
+    "charophyte_3pct": {
+     "0-15": 93160.0,
+     "15-30": 30480.0,
+     "30-45": 15800.0,
+     "45-60": 625.0,
+     "60-75": 54.47,
+     "75-90": 1356.0,
+     "all": 141500.0
+    },
+    "charophyte_9pct": {
+     "0-15": 62830.0,
+     "15-30": 20250.0,
+     "30-45": 10750.0,
+     "45-60": 415.3,
+     "60-75": 49.19,
+     "75-90": 702.3,
+     "all": 95010.0
+    }
+   },
+   "crater_lake": {
+    "seagrass": {
+     "0-15": 137500.0,
+     "15-30": 44530.0,
+     "30-45": 21690.0,
+     "45-60": 753.2,
+     "60-75": 51.97,
+     "75-90": 764.7,
+     "all": 205200.0
+    },
+    "coral_reef": {
+     "0-15": 227000.0,
+     "15-30": 80700.0,
+     "30-45": 40490.0,
+     "45-60": 1568.0,
+     "60-75": 64.86,
+     "75-90": 2653.0,
+     "all": 352500.0
+    },
+    "microphytobenthos": {
+     "0-15": 302600.0,
+     "15-30": 113400.0,
+     "30-45": 58070.0,
+     "45-60": 2325.0,
+     "60-75": 68.46,
+     "75-90": 4334.0,
+     "all": 480800.0
+    },
+    "charophyte_3pct": {
+     "0-15": 231400.0,
+     "15-30": 82480.0,
+     "30-45": 41510.0,
+     "45-60": 1601.0,
+     "60-75": 65.71,
+     "75-90": 2749.0,
+     "all": 359800.0
+    },
+    "charophyte_9pct": {
+     "0-15": 156200.0,
+     "15-30": 51810.0,
+     "30-45": 25360.0,
+     "45-60": 917.7,
+     "60-75": 54.47,
+     "75-90": 1114.0,
+     "all": 235500.0
+    }
+   }
+  }
+ },
+ "floor_shallower_than_30m_turned_km2": {
+  "sea": {
+   "0-15": 77580.0,
+   "15-30": 59910.0,
+   "30-45": 46360.0,
+   "45-60": 32150.0,
+   "60-75": 15000.0,
+   "75-90": 4714.0,
+   "all": 235700.0
+  },
+  "lake": {
+   "0-15": 241400.0,
+   "15-30": 90200.0,
+   "30-45": 48790.0,
+   "45-60": 2096.0,
+   "60-75": 68.46,
+   "75-90": 5045.0,
+   "all": 387600.0
+  }
+ },
+ "floor_total_turned_km2": {
+  "sea": {
+   "0-15": 2113000.0,
+   "15-30": 2904000.0,
+   "30-45": 2538000.0,
+   "45-60": 2010000.0,
+   "60-75": 834500.0,
+   "75-90": 221200.0,
+   "all": 10620000.0
+  },
+  "lake": {
+   "0-15": 2207000.0,
+   "15-30": 1049000.0,
+   "30-45": 605300.0,
+   "45-60": 41080.0,
+   "60-75": 69.43,
+   "75-90": 19690.0,
+   "all": 3922000.0
+  }
+ },
+ "turned_frame": {
+  "north_axis_in_todays_frame": [
+   -0.1366,
+   -0.03118,
+   0.9901
+  ],
+  "north_pole_lat_lon_deg": [
+   81.95,
+   -167.1
+  ],
+  "latitude_bin_deg": 0.25,
+  "source": "the elastic frame with the seas and lakes in place, set for the second set of simulations: geology/results/moon_orientation.json on domain/geology (45c3d817), research/studies/moon_orientation on main"
  },
  "depth_table_notes": {
   "sea_cells": 4691662,
@@ -17468,7 +17762,8 @@
     "their_method_reproduced": 2.344
    }
   },
-  "twilight_share_of_360_400nm_day_dose_equator": 0.007172
+  "twilight_share_of_360_400nm_day_dose_equator": 0.007172,
+  "floor_binned_today_vs_rows_max_relative": 0.0003217
  },
- "elapsed_s": 46.54
+ "elapsed_s": 65.06
 }

@@ -121,13 +121,8 @@ Agreed on 19 October, cheap work first.
    0.05–0.5 mmol/kg raises the 0.14 g/kg to about 0.15–0.21 by the bicarbonate it brings, before the model's adjustment.
    The model runs in seconds.
 3. **The calcifiers and the floors** (ecology).
-   - *Habitat and rates.* Stonewort meadows in Earth's hard-water lakes lay down about 0.4–1.1 kg of carbonate a square
-     metre in a growing season (Pełechaty et al. 2013; Pukacz et al. 2016). At that rate the seas' 150 Mt of calcite a
-     year needs roughly 140,000–380,000 km² of meadow, against the 233,000 km² of the seas shallower than 30 m and the
-     lakes' shallows. Microbial reefs (Bacalar's warm fresh lagoon; Salda and Alchichica, near pH 9, for magnesium) and
-     shell beds join them.
-   - *The night.* Photosynthetic calcifiers must carry 354 hours of dark at about 30 °C, which no Earth stonewort or
-     microbial mat is adapted to; selection and engineering meet here.
+   - *Habitat and rates.* Stonewort meadows in Earth's hard-water lakes lay down about 0.4–1.1 kg of carbonate a square metre in a growing season (Pełechaty et al. 2013; Pukacz et al. 2016). At that rate the seas' 150 Mt of calcite a year needs roughly 140,000–380,000 km² of meadow, against the floor that light allows. Under water as clear as the open sea's, a lunar day's light at the floor exceeds Earth charophytes' limits on 171,000–325,000 km² of sea floor (235,700 km² lie shallower than 30 m); under productive-coast water it does so on 37,000–62,000 km², and under the crater lakes' design water on 235,000–362,000 km² of lake floor. Each range spans today's latitudes and the turned Moon's, which differ by under 2% ([underwater light](../underwater_light/README.md)). Microbial reefs (Bacalar's warm fresh lagoon; Salda and Alchichica, near pH 9, for magnesium) and shell beds join them.
+   - *The night.* Photosynthetic calcifiers must carry a night whose light stays under 1 µmol m⁻² s⁻¹ for 255 hours at the equator and 208 at 45° (longer at depth; from 65° poleward the twilight never falls that low), at about 30 °C, which no Earth stonewort or microbial mat is adapted to; selection and engineering meet here.
    - *The floors and the methane share.* The share of the floors' decay that becomes methane, now a bracket of 0.3–0.8
      around 0.5, is tied to what the floors are made of: carbonate marl, the reactive iron of weathered basalt for
      iron-reducing microbes and iron-coupled methane oxidation, and the organic load. At 0.3 the floors of lakes to
@@ -270,3 +265,4 @@ first:
 - Added: magnesium as the harder half, with its reefs in alkaline basins; the floors' make-up as the methane lever; the
   night as the photosynthetic calcifiers' hard limit; and the methane study's three communities and anaerobic pathways
   as the base the methane work extends.
+- 4 November 2026: step 3's lit floor and night come from the underwater light study, the floor over today's latitudes and the turned Moon's.
