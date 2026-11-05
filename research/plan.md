@@ -155,6 +155,7 @@ studies answered, each reviewed independently:
 - **Living light** (ecology, `studies/living_light`). A beetle-class glow could light a path for 2–10% of a plant's
   night store; the natural night serves walking on 48% of the dry land, and the land under a light-polluted sky falls
   to 0.9–40% at 4–8 billion.
+- **Light under the water** (hydrosphere, `studies/underwater_light`). Counted as a lunar-day dose, photosynthetic light reaches 71 m in the open sea at the equator and 42 m at 75°. Water as clear as the open sea lights 171,000–322,000 km² of the seas' floor for charophytes, productive-coast water a fifth of that, and the lakes add 237,000–362,000 km². No UV-B reaches the water, and fish see by day to about 690 m.
 
 Step six followed on the same day (provisioning, `studies/distributions`): four distributions of 25–30 billion for the
 author's choice, Earth at 9 billion in each. A puts the Moon at 4 billion (2 aloft), the array at 7 and the colonies at
