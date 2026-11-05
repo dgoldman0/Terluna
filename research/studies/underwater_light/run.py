@@ -514,6 +514,7 @@ def build():
     shallow = {kind: floor_by_band(tables, kind, 30.0) for kind in ('sea', 'lake')}
     totals = {kind: floor_by_band(tables, kind, None) for kind in ('sea', 'lake')}
     files = [Path(__file__), HERE / 'optics.py', ROOT / 'illumination/water_column/model.py',
+             ROOT / 'illumination/water_column/fresh_water.py',
              ROOT / 'biosphere/ecology/screen.py', ROOT / 'geography/topography.py']
     inputs = {str(p.relative_to(ROOT)): sha256(p) for p in (*SKY.values(), CALENDAR, SURFACE, WATERS, SEA_APPEARANCE)}
     inputs |= tables['identity']

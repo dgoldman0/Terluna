@@ -1,7 +1,7 @@
 """Fresh water's optics and the light's passage through the surface and down the column.
 
 The illumination domain's seawater optics (illumination/water_column/model.py) carry two Earth terms that the Open
-Moon's fresh seas change, and this module corrects both without touching the domain file:
+Moon's fresh seas change; the domain's fresh_water.py corrects both, and this module reads its pure water:
 
 - pure-water scattering: the domain's table is seawater's at 20 C and 38.4 g/kg (Zhang et al. 2009). Morel's
   measurements, which Zhang et al.'s fluctuation model reproduces within 1%, put seawater at 38.4 g/kg 30% above pure
@@ -26,42 +26,16 @@ from __future__ import annotations
 
 import numpy as np
 
-from illumination.water_column import model as domain
+from illumination.water_column import fresh_water as fresh, model as domain
 
-SEAWATER_TABLE_SALINITY = 38.4      # g/kg, the domain table's scattering (Zhang et al. 2009 at 20 C)
-SALT_SCATTERING_AT_TABLE = 0.30     # seawater at 38.4 g/kg over pure water (Morel 1966, 1968; Zhang et al. 2009)
-SEA_SALINITY = 0.14                 # g/kg, the Open Moon's seas (biosphere and sea-chemistry design)
+SEAWATER_TABLE_SALINITY = fresh.SEAWATER_TABLE_SALINITY
+SALT_SCATTERING_AT_TABLE = fresh.SALT_SCATTERING_AT_TABLE
+SEA_SALINITY = fresh.SEAS_SALINITY
+PURE_WATER_UV = fresh.PURE_WATER_UV
+JOIN_NM = fresh.JOIN_NM
 WATER_INDEX = 1.333                 # pure water near 20-30 C in the visible
-# Pure water's absorption (per metre), IOCCG Protocol Series vol. 1 (2018), Table 1.1: Jonasz and Fournier (2007)
-# 250-340 nm, Morel et al. (2007) 340-415 nm; Pope and Fry (1997) continues from 420 nm in the domain's table.
-PURE_WATER_UV = np.array([
-    (250, 0.045), (255, 0.0392), (260, 0.0344), (265, 0.0303), (270, 0.0269), (275, 0.0240), (280, 0.0216),
-    (285, 0.0194), (290, 0.0176), (295, 0.0160), (300, 0.0147), (305, 0.0134), (310, 0.0124), (315, 0.0114),
-    (320, 0.0106), (325, 0.0098), (330, 0.0092), (335, 0.0085), (340, 0.0080), (345, 0.0075), (350, 0.0071),
-    (355, 0.0068), (360, 0.0066), (365, 0.0063), (370, 0.0060), (375, 0.0056), (380, 0.0052), (385, 0.0050),
-    (390, 0.0048), (395, 0.0047), (400, 0.0046), (405, 0.0046), (410, 0.0046), (415, 0.0046)])
-JOIN_NM = 420.0
-
-
-def scattering_factor(salinity_g_kg):
-    """Pure water's molecular scattering at a salinity over the domain table's seawater at 38.4 g/kg."""
-    return (1 + SALT_SCATTERING_AT_TABLE * salinity_g_kg / SEAWATER_TABLE_SALINITY) / (1 + SALT_SCATTERING_AT_TABLE)
-
-
-def pure_water(wavelength_nm, salinity_g_kg=SEA_SALINITY, uv_absorption=True):
-    """Absorption and scattering (per metre) of pure water at a salinity. uv_absorption=False sets the absorption
-    below 420 nm to zero, the bound beyond every measurement."""
-    w = np.asarray(wavelength_nm, float)
-    a_table, b_table = domain.seawater(w)
-    if uv_absorption:
-        a_uv = np.interp(w, PURE_WATER_UV[:, 0], PURE_WATER_UV[:, 1])
-        # From 415 to 420 nm the composite runs straight to Pope and Fry's 420 nm value, 0.00006 per metre below it.
-        top = float(domain.seawater(JOIN_NM)[0])
-        a_uv = np.where(w > PURE_WATER_UV[-1, 0], PURE_WATER_UV[-1, 1] + (top - PURE_WATER_UV[-1, 1])
-                        * (w - PURE_WATER_UV[-1, 0]) / (JOIN_NM - PURE_WATER_UV[-1, 0]), a_uv)
-    else:
-        a_uv = np.zeros_like(w)
-    return np.where(w < JOIN_NM, a_uv, a_table), b_table * scattering_factor(salinity_g_kg)
+scattering_factor = fresh.scattering_factor
+pure_water = fresh.pure_water
 
 
 def dissolved_organic(wavelength_nm, absorption_440, uv_slope=None, uv_from_nm=350.0):

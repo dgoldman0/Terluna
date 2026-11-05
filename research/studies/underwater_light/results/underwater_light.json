@@ -4,9 +4,10 @@
   "lane": "research",
   "runner": "research/studies/underwater_light/run.py",
   "files": {
-   "research/studies/underwater_light/run.py": "c520658948eb7f09cdc1b2d2b735bf0b4d33b781349c3ff60dc530803f0eea9b",
-   "research/studies/underwater_light/optics.py": "3f28331b7245a9deccba6586c3e2e8839cb124f88a2de40fb9da28728ee97403",
+   "research/studies/underwater_light/run.py": "8723e4c027c6f7328e2e7c43789d0990e186d818aba4c3e83ab7cc3ff4ce6c6b",
+   "research/studies/underwater_light/optics.py": "840fd98698b4910cad2fcdeeac558b2da3c03838f20d30599a4a4c77b944acfc",
    "illumination/water_column/model.py": "c829a086bbbbe3f5f659395a1d43718e89099774916aed8c11a65e27a2b005e1",
+   "illumination/water_column/fresh_water.py": "1f88ba7cee014cc395f4a6d3e681c295c289cd931aeba3575fdb519b4a198274",
    "biosphere/ecology/screen.py": "4ca788045f524525b17443f2feeb1070d7bbf721beec6402a715d526a99886aa",
    "geography/topography.py": "228e08f79efca868b49bcae0687c7f80a239b18234629c4390c147075b3f5c29"
   },
@@ -17469,5 +17470,5 @@
   },
   "twilight_share_of_360_400nm_day_dose_equator": 0.007172
  },
- "elapsed_s": 54.91
+ "elapsed_s": 46.54
 }

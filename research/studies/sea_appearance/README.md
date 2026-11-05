@@ -321,6 +321,8 @@ approximations for grains 4 µm across, from space-weathered Apollo soils, which
 seawater would weather; the contents are design guesses. The reflected sky, the
 glitter and the views across the water come in the results by regime.
 
+The waters here keep the illumination domain's seawater: its scattering at 38.4 g/kg and, below 380 nm, Smith and Baker's bounds for natural water. The Open Moon's seas are fresh at about 0.14 g/kg, and the domain's [fresh_water.py](../../../illumination/water_column/fresh_water.py) gives pure water as they hold it: scattering 0.770 of the table's and the IOCCG composite's absorption below 420 nm. In the [underwater light study](../underwater_light/README.md) these move the open sea's 1% depth with the Sun 45° up from 68.1 m to about 69.4 m and the coasts' by under 1%; the waters, regimes and scenes here take fresh water at their next rerun.
+
 ```sh
 python -m illumination.water_column.fetch_inputs --download
 OPENBLAS_NUM_THREADS=1 python -m research.studies.sea_appearance.waters
