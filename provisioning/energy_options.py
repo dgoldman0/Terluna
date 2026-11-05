@@ -749,9 +749,15 @@ def mixes(load, b, beam_opts, solar, plants, orb, power, ledgers):
                    'a fault across the ring leaves the critical loads on a week of stores')
     f = orb['food']
     c = orb['computing']
-    ground_b = [ground[e] - load['delivered_tw']['food'][e]
-                - load['delivered_tw']['close_computing'][e] * c['moved_share'] for e in (0, 1)]
-    out['B'] = row('Beams, with the beamed food and three quarters of close computing made at the ring radius',
+    # A2 is the placement the register adopts on 5 November: computing in the array as far as latency allows, the
+    # millisecond control and the food on the Moon.
+    ground_a2 = [ground[e] - load['delivered_tw']['close_computing'][e] * c['moved_share'] for e in (0, 1)]
+    out['A2'] = row('Beams as chosen, with the food on the Moon and three quarters of close computing at the ring radius',
+                    [sky[e] * h_t + ground_a2[e] * h_g for e in (0, 1)],
+                    [ground_a2[e] * rec for e in (0, 1)], critical,
+                    "the computing's results return as data; the food's carbon and phosphorus stay in the Moon's cycles")
+    ground_b = [ground_a2[e] - load['delivered_tw']['food'][e] for e in (0, 1)]
+    out['B'] = row('Beams, with the food they power and three quarters of close computing made at the ring radius',
                    [sky[e] * h_t + ground_b[e] * h_g + f['food_energy_arriving_tw'][e] + f['fall_tw'][e]
                     for e in (0, 1)],
                    [ground_b[e] * rec for e in (0, 1)], critical,

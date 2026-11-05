@@ -145,7 +145,10 @@ def test_the_mixes_add_up_and_order_by_heat():
     for e in (0, 1):
         heat = loads['sky_tw'][e] * link['towns_heat_per_w'] + loads['ground_tw'][e] * link['ground_heat_per_w']
         assert close(mixes['A']['heat_tw'][e], heat, 2e-3)
-        assert mixes['B']['heat_tw'][e] < mixes['A']['heat_tw'][e] < mixes['E']['heat_tw'][e] < mixes['F']['heat_tw'][e]
+        assert (mixes['B']['heat_tw'][e] < mixes['A2']['heat_tw'][e] < mixes['A']['heat_tw'][e]
+                < mixes['E']['heat_tw'][e] < mixes['F']['heat_tw'][e])
+        moved = loads['delivered_tw']['close_computing'][e] * PRODUCT['orbit']['computing']['moved_share']
+        assert close(mixes['A2']['heat_tw'][e], heat - moved * link['ground_heat_per_w'], 2e-3)
         for m in mixes.values():
             assert close(m['points'][e], m['heat_tw'][e] / PRODUCT['basis']['point']['heat_tw'], 2e-3)
     assert close(mixes['A']['points'][0], PRODUCT['basis']['beams_now_points'][0], 2e-2)

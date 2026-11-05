@@ -3,7 +3,7 @@
  "producer": {
   "domain": "provisioning",
   "files": {
-   "provisioning/energy_options.py": "52cbb8324d90a36e550e4a248de0a745c506785e3e3fd4afd2fe8b67eaaffeba",
+   "provisioning/energy_options.py": "68d98d5d6c89c525ba97ebfe95ca4ffb65a11cd5372682fe5281f019423ea313",
    "provisioning/power.py": "a511e7ec84587dc5ab0dd42350984dcd31a99abda9d15b5940bc35c88dbad015",
    "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
   },
@@ -4580,8 +4580,52 @@
    ],
    "notes": "a fault across the ring leaves the critical loads on a week of stores"
   },
+  "A2": {
+   "name": "Beams as chosen, with the food on the Moon and three quarters of close computing at the ring radius",
+   "heat_tw": [
+    27.76,
+    152.1
+   ],
+   "w_m2": [
+    0.7319,
+    4.011
+   ],
+   "points": [
+    0.3247,
+    1.78
+   ],
+   "share_of_the_resorts_dimming": [
+    0.02986,
+    0.2175
+   ],
+   "land_rain_percent": [
+    0.1786,
+    2.456
+   ],
+   "growth_percent": [
+    0.02273,
+    0.525
+   ],
+   "ground_km2": [
+    93990.0,
+    519500.0
+   ],
+   "share_of_the_land_outside_kept_and_parks": [
+    0.008033,
+    0.0444
+   ],
+   "against_the_land_now_used": [
+    0.0758,
+    0.1797
+   ],
+   "store_twh": [
+    424.6,
+    1266.0
+   ],
+   "notes": "the computing's results return as data; the food's carbon and phosphorus stay in the Moon's cycles"
+  },
   "B": {
-   "name": "Beams, with the beamed food and three quarters of close computing made at the ring radius",
+   "name": "Beams, with the food they power and three quarters of close computing made at the ring radius",
    "heat_tw": [
     17.35,
     69.02

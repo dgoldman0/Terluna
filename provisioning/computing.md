@@ -156,6 +156,8 @@ radiator problem of finding 6 at the scale of a star.
 
 ## Where the work runs
 
+This division is the adopted placement (register, 5 November): computing runs in the array as far as latency allows, and moving three-quarters of the ground's close computing there takes 0.06 points off the beams' heat ([energy options](energy_options.md), mix A2).
+
 - **On the tiles and on the Moon:** control loops that close in milliseconds, such as tile keeping, sky-boat
   separation, grid protection and robots.
 - **In the array, within the 0.13 s round trip:** the Moon's AI services and digital minds that meet its people, its
