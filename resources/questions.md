@@ -13,7 +13,7 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
    - **What decides it:**
      - where the common-level crater waters and pits spill once they fill, which sets the great seas' inflow (geography);
      - how lunar lakes keep phosphorus: uptake, diagenesis and release from beds without oxygen;
-     - delta sediment grades by catchment, highland to KREEP-rich, and how much of each delta can be dredged;
+     - delta sediment grades by catchment, highland to KREEP-rich, and how much of each delta can be dredged; the river deltas screen (research/studies/river_deltas, 4 November 2026) keeps 0.08–0.42 of the load on the delta plains, with the plunging underflows carrying most of the fines, where particulate phosphorus rides, to the delta fronts and the floors beyond, so dredging for phosphorus reaches past the plains;
      - the provisioning study's food systems and their efficiencies;
      - whether the seas' living waters and sea-feeding flyers need phosphorus delivered with the water or sent from
        the deltas, a choice for the author with ecology.

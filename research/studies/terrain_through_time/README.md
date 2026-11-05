@@ -245,7 +245,7 @@ At 4–15 dams a km and Earth's typical 0.35 ha a pond, the steady lunar case ho
   by cell outward, at each cell's depth (at least 1 m). It keeps half to all of what settles (*design guess*: fines
   spread over the floor or pass on, and lunar settling is six times slower), paired from the latest case to the
   earliest. The deltas in one lake, or in one connected sea or small water at the common level, together stop at its
-  area; reach is the radius of a half-disc of the delta's area.
+  area; reach is the radius of a half-disc of the delta's area. The [river deltas screen](../river_deltas/README.md) (4 November 2026) computes the share by state and soil: about 0.4 on the young Moon (to 1.0 where the plunging underflows drop their fines on the delta fronts) and 0.42 (sand) to 0.08 (clay) on the mature Moon (0.34–0.95 with the underflows), the rest settling on the floors; this study's areas stay on the design guess until it reads those shares.
 - **Upkeep.** Each eroding cell's lift to where its rock first settles, or to its catchment's highest third, and its
   straight distance there; lunar gravity; rail freight at 107 kJ a tonne-km (IEA 2019).
 

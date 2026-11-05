@@ -229,7 +229,7 @@ deposits are stone for the built land; travertine builds while the young soils w
 the small streams' ponds. The author set the next round, once these details are worked out, as a large round of
 atlas building down to districts, in which the young-Moon landforms to keep are chosen as a set. Delta growth followed
 at the author's word: deltas move the shorelines first, covering 6.5% of the lake area within 10,000 years at the
-central rate and adding 104,000 km² of land at the common-level waters. The author keeps water delivery going to
+central rate and adding 104,000 km² of land at the common-level waters. The [river deltas screen](studies/river_deltas/README.md) (4 November 2026) worked out how they form at lunar gravity, on the young Moon and the mature one: the young rivers braid over bare banks and the mature rooted ones run in single, narrow channels; the rivers enter the fresh seas and lakes as plunging underflows, and no plume turns along a coast; waves shape most mouths and the monthly tide only some young sea deltas on gentle slopes; and the delta plains keep 0.08–0.42 of the load, less than the half to all assumed, the rest settling on the fronts and floors. The author keeps water delivery going to
 balance what the crust takes up, and wants groundwater modelled: the crust's uptake through time, the water table
 with its springs, baseflow and lake seepage, then the springs' load. Its first stage followed: the cold airless crust
 thaws from above in centuries at the equator and tens of thousands of years near the poles, and once thawed takes water

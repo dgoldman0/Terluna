@@ -527,7 +527,7 @@
     },
     {
       "topic": "resources",
-      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11; carbon_cycle_box_model_to_year_10000_with_the_managed_return_2026_10_12; industry_burial_basis_lakes_at_lake_rates_seas_at_marine_rates; sea_chemistry_through_a_billion_years_alkaline_unless_held_2026_10_13; terrain_through_time_small_waters_first_upkeep_a_few_gigawatts_2026_10_13; terrain_deltas_move_the_shorelines_first_2026_10_13; groundwater_model_prepared_2026_10_13; groundwater_stage_1_the_crust_drinks_more_than_the_seas_hold_2026_10_13; groundwater_stage_2_water_table_a_third_of_the_land_seeps_2026_10_13; groundwater_stage_3_springs_carry_the_soils_load_and_build_little_travertine_2026_10_14; carbon_cycle_and_sea_chemistry_take_the_groundwater_2026_10_14",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11; carbon_cycle_box_model_to_year_10000_with_the_managed_return_2026_10_12; industry_burial_basis_lakes_at_lake_rates_seas_at_marine_rates; sea_chemistry_through_a_billion_years_alkaline_unless_held_2026_10_13; terrain_through_time_small_waters_first_upkeep_a_few_gigawatts_2026_10_13; terrain_deltas_move_the_shorelines_first_2026_10_13; groundwater_model_prepared_2026_10_13; groundwater_stage_1_the_crust_drinks_more_than_the_seas_hold_2026_10_13; groundwater_stage_2_water_table_a_third_of_the_land_seeps_2026_10_13; groundwater_stage_3_springs_carry_the_soils_load_and_build_little_travertine_2026_10_14; carbon_cycle_and_sea_chemistry_take_the_groundwater_2026_10_14; river_deltas_screen_young_braid_mature_single_thread_plumes_plunge_deltas_keep_0_08_to_0_42_2026_11_04",
       "material": [
         "../resources/README.md",
         "../resources/state.md",
@@ -552,6 +552,8 @@
         "studies/terrain_through_time/README.md",
         "studies/terrain_through_time/results/terrain_routing.json",
         "studies/terrain_through_time/results/terrain_through_time.json",
+        "studies/river_deltas/README.md",
+        "studies/river_deltas/results/river_deltas.json",
         "../geography/groundwater_uptake.py",
         "../geography/results/groundwater_uptake.json",
         "../geography/groundwater_table.py",

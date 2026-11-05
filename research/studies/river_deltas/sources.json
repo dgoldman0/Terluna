@@ -1,0 +1,152 @@
+{
+ "schema": "terluna.research.river-deltas-sources/1",
+ "accessed": "2026-11-04",
+ "scope": "Values the screen carries, each with how far it was read on 4 November 2026. Search summaries are second-hand; recalled values were not re-read in this study and stay open until checked.",
+ "sources": [
+  {
+   "citation": "Parker, Wilcock, Paola, Dietrich & Pitlick (2007), JGR Earth Surface 112, F04005",
+   "use": "Gravel-bed bankfull relations H = 0.382 Q^0.4 g^-0.2, B = 4.63 Q^0.4 g^-0.2 Qhat^0.0667, S = 0.101 Qhat^-0.344, Qhat = Q/(sqrt(gD) D^2); the width relation also used for sand beds (an extrapolation)",
+   "read": "Equations read as reproduced in Palucis & Lamb (2017, GRL 44, eqs 8-10, extracted text); coefficients confirmed by a search summary; the paper itself not opened (publisher refused)",
+   "url": "https://doi.org/10.1029/2006JF000549"
+  },
+  {
+   "citation": "Palucis & Lamb (2017), What controls channel form in steep mountain streams? GRL 44",
+   "use": "Source text for Parker et al. (2007) relations",
+   "read": "Relevant section read (extracted PDF text)",
+   "url": "https://lamb.caltech.edu/documents/19682/Palucis_Lamb_GRL_2017.pdf"
+  },
+  {
+   "citation": "Wilkerson & Parker (2011), J. Hydraulic Engineering 137(7), 739-753",
+   "use": "Bankfull Shields number of single-thread sand-bed rivers falls as Rep^-1/2 (D50 0.062-0.5 mm)",
+   "read": "Search summaries of the abstract; fitted coefficients not obtained (paywalled), open"
+  },
+  {
+   "citation": "Trampush, Huzurbazar & McElroy (2014), Water Resources Research 50, 9211-9220",
+   "use": "Bankfull Shields number 17 Rep^-1/2 from the global compilation of single-thread rivers",
+   "read": "Read second-hand in Hayden et al. (2019) eq. 11 (extracted text)"
+  },
+  {
+   "citation": "Hayden, Lamb et al. (2019), sinuous ridges by inversion of river-channel belts, with implications for Mars (Icarus)",
+   "use": "Carries the Trampush/Wilkerson-Parker closure to another gravity in dimensionless form",
+   "read": "Methods section read (extracted PDF text)",
+   "url": "https://lamb.caltech.edu/documents/19707/Hayden_et_al_2019.pdf"
+  },
+  {
+   "citation": "Dunne & Jerolmack (2020), What sets river width? Science Advances 6, eabc1505",
+   "use": "Bankfull stress near 1.2 times the critical stress of the most resistant material lining the channel (18 sections, none above 1.5); fine-grained rivers depart from the Shields curve at about 10 Pa, where cohesive banks exceed the bed",
+   "read": "Search summary of the paper",
+   "url": "https://doi.org/10.1126/sciadv.abc1505"
+  },
+  {
+   "citation": "Ferguson & Church (2004), Journal of Sedimentary Research 74, 933-937",
+   "use": "Settling law w = R g D^2 / (C1 nu + sqrt(0.75 C2 R g D^3)), C1 = 18, C2 = 1 for natural grains",
+   "read": "Search summary (constants); equation form standard, checked against Stokes and a 2.5 cm/s medium sand in the tests",
+   "url": "https://doi.org/10.1306/051204740933"
+  },
+  {
+   "citation": "Akiyama & Stefan (1984), J. Hydraulic Engineering 110, 484-497; Parker & Toniolo (2007), J. Hydraulic Engineering 133",
+   "use": "Plunging at a densimetric Froude number of about 0.5 (0.4-0.8 reported), plunge depth (q^2 / (g' Fp^2))^(1/3)",
+   "read": "Search summaries (turbulence-resolving plunging studies citing both)"
+  },
+  {
+   "citation": "Mulder & Syvitski (1995), Journal of Geology 103, 285-299",
+   "use": "River water needs 36-43 kg/m3 of sediment to plunge into seawater (the brief's figure)",
+   "read": "Not read in this study; reproduced by calculation, 41.8 kg/m3 at 25 C"
+  },
+  {
+   "citation": "Nienhuis, Ashton, Edmonds, Hoitink, Kettner, Rowland & Tornqvist (2020), Nature 577, 514-518",
+   "use": "Qwave as max - min of the angular wave energy convolved with deep-water alongshore transport (eq. 1); Qtide = Qw,tide Qriver / Qw,river (eq. 2) with Qw,tide = 1/2 omega k a^2 (d_u/S)^2 beta (eq. 3); a delta is dominated by the largest of the three fluxes (eq. 4)",
+   "read": "Methods read in full in the author manuscript (extracted text)",
+   "url": "https://par.nsf.gov/servlets/purl/10166405"
+  },
+  {
+   "citation": "Ashton & Murray (2006), JGR Earth Surface 111, F04011",
+   "use": "CERC recast into deep-water terms, Q ~ H0^(12/5) T^(1/5) cos^(6/5) sin; K2 here derived with g explicit",
+   "read": "Recalled; derivation in physics.longshore_max"
+  },
+  {
+   "citation": "US Army Corps of Engineers (1984), Shore Protection Manual",
+   "use": "CERC K = 0.39 with significant height; JONSWAP fetch-limited growth and fully developed limits",
+   "read": "Recalled standard values; the growth law is checked against the wave study's computed seas"
+  },
+  {
+   "citation": "Edmonds & Slingerland (2007), JGR Earth Surface 112, F02034",
+   "use": "Distance to the mouth bar rises with the jet's momentum flux over the grains' weight to about the 1/5 power",
+   "read": "Abstract via search summary; the 3-width coefficient (2-6) is a design guess, open",
+   "url": "https://doi.org/10.1029/2006JF000574"
+  },
+  {
+   "citation": "Jerolmack & Mohrig (2007), Geology 35, 463-466",
+   "use": "Avulsion time T_A = h / v_A with v_A the near-channel aggradation; avulsion at a superelevation of about one channel depth",
+   "read": "Relevant text read (extracted PDF)",
+   "url": "https://sseh.uchicago.edu/doc/Jerolmack_and_Mohrig_2007_Geology.pdf"
+  },
+  {
+   "citation": "Ganti, Chadwick, Hassenruck-Gudipati, Fuller & Lamb (2016), Science Advances 2, e1501768",
+   "use": "Avulsion length scales with the backwater length h_c / S within a factor of 2",
+   "read": "Introduction and Fig. 1 read (extracted text)"
+  },
+  {
+   "citation": "Crosato & Mosselman (2009), Water Resources Research 45, W03424",
+   "use": "Bar mode m^2 = 0.17 g (b - 3) B^3 S / (sqrt(Delta D50) C Q), b = 4 sand (mixed load), 10 gravel; m about 1 alternate bars, 2 central bars, 3 and more braided",
+   "read": "Symbols and b values from search summaries; the equation's form recalled and checked for dimensional consistency only, open"
+  },
+  {
+   "citation": "Grant (1997), Critical flow constrains flow hydraulics in mobile-bed streams: a new hypothesis, Water Resources Research 33(2), 349-358",
+   "use": "The bound that mobile-bed channels hold their flow near critical (Froude number about 1) at most, against which the screened slopes' bankfull Froude numbers of 1.7-1.9 read as too steep",
+   "read": "Abstract via search summary (4 November 2026); used for its qualitative bound only",
+   "url": "https://doi.org/10.1029/96WR03134"
+  },
+  {
+   "citation": "Alberts et al. (1995), WEPP technical documentation",
+   "use": "Bare-soil critical shear 2.67 + 0.065 clay% - 0.058 VFS% Pa (soils with 30% sand or more)",
+   "read": "Reused from the storm-water study (repository); extrapolated here to the clay texture"
+  },
+  {
+   "citation": "Wynn & Mostaghimi (2006) and related jet-test studies of rooted banks",
+   "use": "Roots raise banks' critical shear; root factor 1.5-6 taken as a design bracket",
+   "read": "Search results only, not read; open"
+  },
+  {
+   "citation": "Carrier (2003), J. Geotechnical and Geoenvironmental Engineering 129, 956-959",
+   "use": "Lunar soil median 72 um (40-130 um), Cu 8.7-30, 90% of the mass between 10 um and 1 mm",
+   "read": "Search summaries"
+  },
+  {
+   "citation": "McKay et al. (1991), The lunar regolith, Lunar Sourcebook chapter 7",
+   "use": "Regolith texture and density (repository's existing source)",
+   "read": "Reused from the repository's sources"
+  },
+  {
+   "citation": "Montgomery (2007), PNAS 104, 13268-13272",
+   "use": "Plowed fields erode 1-2 orders of magnitude faster than ground under native vegetation (medians above 1 mm a year)",
+   "read": "Abstract via search summary (the steering's one Earth review of bare against covered ground)",
+   "url": "https://doi.org/10.1073/pnas.0611508104"
+  },
+  {
+   "citation": "Goldberg & Forsythe-type flocculation measurements (USDA ARS reprint P1095, Flocculation of reference clays and arid-zone soil clays) and related studies",
+   "use": "Critical flocculation of smectite, beidellite and illite at 5-25 mmol/L of monovalent salt; about 3 mM CaCl2 for montmorillonite; about 100 mmol/L NaCl at alkaline pH",
+   "read": "Search summaries only; the calcium bracket 0.3-3 mmol/L and the organic flocculation bracket are design values, open (no review read)"
+  },
+  {
+   "citation": "Tanaka et al. (2001), Metrologia 38, 301-309",
+   "use": "Pure water density",
+   "read": "Recalled formula, checked numerically (997.05 kg/m3 at 25 C)"
+  },
+  {
+   "citation": "Brownlie (1981) Shields-curve fit as written by Parker; Engelund & Hansen (1967) total load; Vogel viscosity fit; Taylor's stability number",
+   "use": "Standard closures",
+   "read": "Recalled"
+  },
+  {
+   "citation": "Earth deltas: Mississippi, Sao Francisco, Fly, Rhone into Lake Geneva",
+   "use": "Mean discharge, load, bed texture, waves, tides, channel width and slope, receiving water and temperatures",
+   "read": "Recalled typical values (e.g. Milliman & Farnsworth 2011; Syvitski & Saito 2007; Nienhuis et al. 2020 examples), not re-read; to verify before the values carry weight"
+  },
+  {
+   "citation": "Repository",
+   "use": "Terrain routing grids and cases; geography drainage, atlas, tides, water table; wave study nearside and Smythii-Marginis; Fecunditatis strait study; sea chemistry; lake census; cold waters lapse rate; design years",
+   "read": "Read from the products, with their sha256 in results/river_deltas.json"
+  }
+ ]
+}
