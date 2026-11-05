@@ -1,0 +1,474 @@
+{
+  "schema": "terluna.research.eel-budget/1",
+  "evidence": "Illustrative design assumptions for sensitivity arithmetic, not measured lunar performance or a facility specification. All biological rates and yields below are assumptions; sources motivate the questions, not the chosen numbers.",
+  "producer": {
+    "module": "research.studies.food_systems.eel_budget",
+    "files": {
+      "research/studies/food_systems/eel_budget.py": "428b2cef9f6b091deac39400d7e34a4e25f85c414c6364332e83b5a74b637987",
+      "research/studies/food_systems/eel_parameters.json": "9e07ca2333eb0c0da49b167703356884f43edc607299fd437dd1888f9feaa36d",
+      "research/studies/food_systems/eel_sources.json": "af90cd81fa91dc35b188b73492dc20468993b98f4a2fe563c4b4830b1f7e5f4b"
+    },
+    "environment_manifest": {
+      "path": "research/studies/food_systems/aquatic_basis.json",
+      "sha256": "6fc290e12d6ff7219560ee73969c3e30d6b080439de0015562706addaa41460b",
+      "use": "Context only; no environmental carrying capacity is computed."
+    },
+    "constants": {
+      "JULIAN_YEAR_DAYS": 365.25
+    }
+  },
+  "assumptions": {
+    "schema": "terluna.research.eel-parameters/1",
+    "evidence": "Illustrative design assumptions for sensitivity arithmetic, not measured lunar performance or a facility specification. All biological rates and yields below are assumptions; sources motivate the questions, not the chosen numbers.",
+    "preferred_endpoint": "Autonomous freshwater recruitment in the established ecosystem, without obligatory hatchery intervention; saline production is transitional and a controlled freshwater life cycle is an intermediate milestone.",
+    "cohort": {
+      "harvest_live_kg": 1000.0,
+      "harvest_individual_kg": 0.25,
+      "nursery_exit_individual_kg": 0.01,
+      "glass_eel_individual_kg": 0.0002,
+      "growout_survival": 0.9,
+      "nursery_survival": 0.8,
+      "fertilization_fraction": 0.7,
+      "normal_hatch_fraction_of_fertilized": 0.6,
+      "larva_to_glass_survival": 0.01,
+      "nursery_economic_dry_fcr": 1.2,
+      "growout_economic_dry_fcr": 1.5,
+      "cut_yield_of_live": 0.65,
+      "cook_yield_of_cut": 0.8,
+      "portion_cooked_fish_kg": 0.1,
+      "feed_crude_protein_fraction_dry": 0.48,
+      "whole_fish_protein_fraction_wet": 0.18,
+      "feed_phosphorus_fraction_dry": 0.01,
+      "whole_fish_phosphorus_fraction_wet": 0.004,
+      "protein_to_nitrogen_factor": 6.25
+    },
+    "oxygen": {
+      "standing_biomass_kg": 1000.0,
+      "feed_dry_kg_per_day": 10.0,
+      "fish_respiration_mg_o2_per_kg_per_hour": 200.0,
+      "tan_n_kg_per_kg_dry_feed": 0.03,
+      "nitrified_fraction_of_tan": 1.0,
+      "other_biological_o2_kg_per_kg_dry_feed": 0.2,
+      "capacity_factor": 1.5,
+      "inlet_do_mg_per_l": 7.0,
+      "outlet_floor_do_mg_per_l": 5.0,
+      "connected_water_m3": 100.0,
+      "nitrification_o2_kg_per_kg_n": 4.57,
+      "nitrification_alkalinity_kg_caco3_per_kg_n": 7.14
+    },
+    "hatchery": {
+      "annual_live_harvest_kg": 1000.0,
+      "glass_eels_per_successful_batch": 1000.0,
+      "successful_batch_fraction": 0.8,
+      "larval_cycle_days": 270.0,
+      "turnaround_days": 30.0,
+      "water_inventory_m3": 100.0,
+      "daily_liquid_discharge_m3": 1.0,
+      "discharged_salt_recovery_fraction": 0.0,
+      "water_density_kg_per_m3": 1000.0
+    },
+    "sensitivity": {
+      "larva_to_glass_survival": [
+        0.001,
+        0.01,
+        0.05
+      ],
+      "processing_and_feed_cases": [
+        {
+          "name": "efficient_example",
+          "growout_economic_dry_fcr": 1.2,
+          "cut_yield_of_live": 0.75,
+          "cook_yield_of_cut": 0.85
+        },
+        {
+          "name": "reference_example",
+          "growout_economic_dry_fcr": 1.5,
+          "cut_yield_of_live": 0.65,
+          "cook_yield_of_cut": 0.8
+        },
+        {
+          "name": "higher_resource_example",
+          "growout_economic_dry_fcr": 2.0,
+          "cut_yield_of_live": 0.55,
+          "cook_yield_of_cut": 0.7
+        }
+      ],
+      "oxygen_cases": [
+        {
+          "name": "lower_demand",
+          "fish_respiration_mg_o2_per_kg_per_hour": 100.0,
+          "feed_dry_kg_per_day": 5.0,
+          "other_biological_o2_kg_per_kg_dry_feed": 0.1
+        },
+        {
+          "name": "reference_demand",
+          "fish_respiration_mg_o2_per_kg_per_hour": 200.0,
+          "feed_dry_kg_per_day": 10.0,
+          "other_biological_o2_kg_per_kg_dry_feed": 0.2
+        },
+        {
+          "name": "higher_demand",
+          "fish_respiration_mg_o2_per_kg_per_hour": 300.0,
+          "feed_dry_kg_per_day": 15.0,
+          "other_biological_o2_kg_per_kg_dry_feed": 0.3
+        }
+      ],
+      "salt_concentration_g_per_kg": [
+        35.0,
+        17.5,
+        13.0,
+        0.14
+      ]
+    },
+    "reading_rules": {
+      "fcr": "Dry feed supplied divided by net stage biomass gain (outgoing live biomass minus incoming live biomass). Economic FCR includes feed lost and mortality effects; do not add a second mortality feed multiplier. This is not a claim of constant FCR as survival changes.",
+      "composition": "Use the same assumed wet whole-fish N and P content at entry and exit. Nonretained material includes uneaten feed, mortalities, dissolved excretion and solids; it is not all water discharge.",
+      "oxygen": "Separate instantaneous standing-stock calculation. Fish respiration excludes nitrification and other biological demand. The latter excludes fish and nitrifiers. Basal nitrogen excretion and delayed decomposition are unresolved; feed-proportional terms do not model fasting or system upsets. The capacity factor is a design allowance, not a proven peak multiplier. Nitrification coefficients are oxidation-only stoichiometry from E10; other coefficients are assumptions.",
+      "hatchery": "Batch yield is a planning assumption motivated by E08, not a validated count at the assumed cycle time or survival. Nominal water inventory is a separate hydraulic unit, not the volume of a 1000-glass-eel tank. Salt calculation assumes density 1000 kg/m3, tracks liquid losses, and excludes evaporation losses of salt.",
+      "freshwater": "The 0.14 g/kg case is a physical inventory comparison only. No successful egg or larval performance is assigned to it; the actual calcium-bicarbonate ion recipe and magnesium floor remain unresolved.",
+      "scope": "Feed and nutrient totals start at glass-eel entry. Broodstock, egg and larval feed, their wastes/oxygen/energy, and processing energy remain unquantified, not zero. Cooked fish excludes sauce, rice and coproduct credits. No annual yield per area or profitability is estimated."
+    }
+  },
+  "reference_cohort": {
+    "harvest_live_kg": 1000.0,
+    "harvest_individuals": 4000.0,
+    "nursery_exit_individuals": 4444.444444444444,
+    "glass_eels_required": 5555.555555555555,
+    "normal_hatchlings_required": 555555.5555555555,
+    "fertilized_eggs_required": 925925.9259259258,
+    "eggs_before_fertilization_required": 1322751.3227513228,
+    "incoming_glass_eel_kg": 1.111111111111111,
+    "nursery_exit_live_kg": 44.44444444444444,
+    "nursery_dry_feed_kg": 51.99999999999999,
+    "growout_dry_feed_kg": 1433.3333333333333,
+    "post_glass_dry_feed_kg": 1485.3333333333333,
+    "prepared_raw_cut_kg": 650.0,
+    "processing_coproducts_and_trim_kg": 350.0,
+    "cooking_loss_kg": 130.0,
+    "cooked_fish_kg": 520.0,
+    "cooked_portions": 5200.0,
+    "post_glass_dry_feed_per_kg_cooked": 2.8564102564102565,
+    "nutrients_kg": {
+      "feed_n": 114.07359999999998,
+      "seed_n": 0.031999999999999994,
+      "harvest_n": 28.8,
+      "nonretained_n": 85.30559999999998,
+      "feed_p": 14.853333333333333,
+      "seed_p": 0.004444444444444444,
+      "harvest_p": 4.0,
+      "nonretained_p": 10.857777777777779
+    }
+  },
+  "reference_oxygen": {
+    "standing_biomass_kg": 1000.0,
+    "fish_o2_kg_per_day": 4.8,
+    "tan_n_kg_per_day": 0.3,
+    "nitrification_o2_kg_per_day": 1.371,
+    "other_biological_o2_kg_per_day": 2.0,
+    "total_o2_kg_per_day": 8.171,
+    "capacity_o2_kg_per_day": 12.256499999999999,
+    "capacity_o2_kg_per_hour": 0.5106875,
+    "nitrification_alkalinity_kg_caco3_per_day": 2.142,
+    "equivalent_flow_without_reoxygenation_m3_per_hour": 255.34374999999997,
+    "water_o2_inventory_above_floor_kg": 0.2,
+    "ideal_inventory_minutes_at_capacity_demand": 23.497735895239263
+  },
+  "reference_hatchery_throughput": {
+    "annual_live_harvest_kg": 1000.0,
+    "glass_eels_required_per_year": 5555.555555555555,
+    "expected_glass_eels_per_occupied_batch_slot_year": 974.0,
+    "batch_slots_continuous_equivalent": 5.70385580652521,
+    "batch_slots_rounded_up": 6,
+    "note": "Mean throughput screen; integer rounding is not a reliability or redundancy design."
+  },
+  "larval_survival_sensitivity": [
+    {
+      "larva_to_glass_survival": 0.001,
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 5555555.555555555,
+        "fertilized_eggs_required": 9259259.25925926,
+        "eggs_before_fertilization_required": 13227513.227513228,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1433.3333333333333,
+        "post_glass_dry_feed_kg": 1485.3333333333333,
+        "prepared_raw_cut_kg": 650.0,
+        "processing_coproducts_and_trim_kg": 350.0,
+        "cooking_loss_kg": 130.0,
+        "cooked_fish_kg": 520.0,
+        "cooked_portions": 5200.0,
+        "post_glass_dry_feed_per_kg_cooked": 2.8564102564102565,
+        "nutrients_kg": {
+          "feed_n": 114.07359999999998,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 85.30559999999998,
+          "feed_p": 14.853333333333333,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 10.857777777777779
+        }
+      }
+    },
+    {
+      "larva_to_glass_survival": 0.01,
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 555555.5555555555,
+        "fertilized_eggs_required": 925925.9259259258,
+        "eggs_before_fertilization_required": 1322751.3227513228,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1433.3333333333333,
+        "post_glass_dry_feed_kg": 1485.3333333333333,
+        "prepared_raw_cut_kg": 650.0,
+        "processing_coproducts_and_trim_kg": 350.0,
+        "cooking_loss_kg": 130.0,
+        "cooked_fish_kg": 520.0,
+        "cooked_portions": 5200.0,
+        "post_glass_dry_feed_per_kg_cooked": 2.8564102564102565,
+        "nutrients_kg": {
+          "feed_n": 114.07359999999998,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 85.30559999999998,
+          "feed_p": 14.853333333333333,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 10.857777777777779
+        }
+      }
+    },
+    {
+      "larva_to_glass_survival": 0.05,
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 111111.1111111111,
+        "fertilized_eggs_required": 185185.18518518517,
+        "eggs_before_fertilization_required": 264550.2645502645,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1433.3333333333333,
+        "post_glass_dry_feed_kg": 1485.3333333333333,
+        "prepared_raw_cut_kg": 650.0,
+        "processing_coproducts_and_trim_kg": 350.0,
+        "cooking_loss_kg": 130.0,
+        "cooked_fish_kg": 520.0,
+        "cooked_portions": 5200.0,
+        "post_glass_dry_feed_per_kg_cooked": 2.8564102564102565,
+        "nutrients_kg": {
+          "feed_n": 114.07359999999998,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 85.30559999999998,
+          "feed_p": 14.853333333333333,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 10.857777777777779
+        }
+      }
+    }
+  ],
+  "processing_and_feed_sensitivity": [
+    {
+      "name": "efficient_example",
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 555555.5555555555,
+        "fertilized_eggs_required": 925925.9259259258,
+        "eggs_before_fertilization_required": 1322751.3227513228,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1146.6666666666665,
+        "post_glass_dry_feed_kg": 1198.6666666666665,
+        "prepared_raw_cut_kg": 750.0,
+        "processing_coproducts_and_trim_kg": 250.0,
+        "cooking_loss_kg": 112.5,
+        "cooked_fish_kg": 637.5,
+        "cooked_portions": 6375.0,
+        "post_glass_dry_feed_per_kg_cooked": 1.8802614379084965,
+        "nutrients_kg": {
+          "feed_n": 92.05759999999998,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 63.28959999999998,
+          "feed_p": 11.986666666666665,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 7.99111111111111
+        }
+      }
+    },
+    {
+      "name": "reference_example",
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 555555.5555555555,
+        "fertilized_eggs_required": 925925.9259259258,
+        "eggs_before_fertilization_required": 1322751.3227513228,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1433.3333333333333,
+        "post_glass_dry_feed_kg": 1485.3333333333333,
+        "prepared_raw_cut_kg": 650.0,
+        "processing_coproducts_and_trim_kg": 350.0,
+        "cooking_loss_kg": 130.0,
+        "cooked_fish_kg": 520.0,
+        "cooked_portions": 5200.0,
+        "post_glass_dry_feed_per_kg_cooked": 2.8564102564102565,
+        "nutrients_kg": {
+          "feed_n": 114.07359999999998,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 85.30559999999998,
+          "feed_p": 14.853333333333333,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 10.857777777777779
+        }
+      }
+    },
+    {
+      "name": "higher_resource_example",
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 555555.5555555555,
+        "fertilized_eggs_required": 925925.9259259258,
+        "eggs_before_fertilization_required": 1322751.3227513228,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1911.111111111111,
+        "post_glass_dry_feed_kg": 1963.111111111111,
+        "prepared_raw_cut_kg": 550.0,
+        "processing_coproducts_and_trim_kg": 450.0,
+        "cooking_loss_kg": 165.0,
+        "cooked_fish_kg": 385.0,
+        "cooked_portions": 3850.0,
+        "post_glass_dry_feed_per_kg_cooked": 5.098989898989899,
+        "nutrients_kg": {
+          "feed_n": 150.76693333333333,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 121.99893333333334,
+          "feed_p": 19.63111111111111,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 15.635555555555555
+        }
+      }
+    }
+  ],
+  "oxygen_sensitivity": [
+    {
+      "name": "lower_demand",
+      "budget": {
+        "standing_biomass_kg": 1000.0,
+        "fish_o2_kg_per_day": 2.4,
+        "tan_n_kg_per_day": 0.15,
+        "nitrification_o2_kg_per_day": 0.6855,
+        "other_biological_o2_kg_per_day": 0.5,
+        "total_o2_kg_per_day": 3.5854999999999997,
+        "capacity_o2_kg_per_day": 5.3782499999999995,
+        "capacity_o2_kg_per_hour": 0.22409374999999998,
+        "nitrification_alkalinity_kg_caco3_per_day": 1.071,
+        "equivalent_flow_without_reoxygenation_m3_per_hour": 112.04687499999999,
+        "water_o2_inventory_above_floor_kg": 0.2,
+        "ideal_inventory_minutes_at_capacity_demand": 53.54901687351835
+      }
+    },
+    {
+      "name": "reference_demand",
+      "budget": {
+        "standing_biomass_kg": 1000.0,
+        "fish_o2_kg_per_day": 4.8,
+        "tan_n_kg_per_day": 0.3,
+        "nitrification_o2_kg_per_day": 1.371,
+        "other_biological_o2_kg_per_day": 2.0,
+        "total_o2_kg_per_day": 8.171,
+        "capacity_o2_kg_per_day": 12.256499999999999,
+        "capacity_o2_kg_per_hour": 0.5106875,
+        "nitrification_alkalinity_kg_caco3_per_day": 2.142,
+        "equivalent_flow_without_reoxygenation_m3_per_hour": 255.34374999999997,
+        "water_o2_inventory_above_floor_kg": 0.2,
+        "ideal_inventory_minutes_at_capacity_demand": 23.497735895239263
+      }
+    },
+    {
+      "name": "higher_demand",
+      "budget": {
+        "standing_biomass_kg": 1000.0,
+        "fish_o2_kg_per_day": 7.2,
+        "tan_n_kg_per_day": 0.44999999999999996,
+        "nitrification_o2_kg_per_day": 2.0564999999999998,
+        "other_biological_o2_kg_per_day": 4.5,
+        "total_o2_kg_per_day": 13.756499999999999,
+        "capacity_o2_kg_per_day": 20.634749999999997,
+        "capacity_o2_kg_per_hour": 0.8597812499999998,
+        "nitrification_alkalinity_kg_caco3_per_day": 3.2129999999999996,
+        "equivalent_flow_without_reoxygenation_m3_per_hour": 429.89062499999994,
+        "water_o2_inventory_above_floor_kg": 0.2,
+        "ideal_inventory_minutes_at_capacity_demand": 13.957038490895217
+      }
+    }
+  ],
+  "salt_inventory_sensitivity": [
+    {
+      "salt_concentration_g_per_kg": 35.0,
+      "salt_inventory_kg": 3500.0,
+      "makeup_salt_after_recovery_kg_per_day": 35.0,
+      "note": "Physical salt accounting only; concentration does not specify ion composition or biological suitability."
+    },
+    {
+      "salt_concentration_g_per_kg": 17.5,
+      "salt_inventory_kg": 1750.0,
+      "makeup_salt_after_recovery_kg_per_day": 17.5,
+      "note": "Physical salt accounting only; concentration does not specify ion composition or biological suitability."
+    },
+    {
+      "salt_concentration_g_per_kg": 13.0,
+      "salt_inventory_kg": 1300.0,
+      "makeup_salt_after_recovery_kg_per_day": 13.0,
+      "note": "Physical salt accounting only; concentration does not specify ion composition or biological suitability."
+    },
+    {
+      "salt_concentration_g_per_kg": 0.14,
+      "salt_inventory_kg": 14.000000000000002,
+      "makeup_salt_after_recovery_kg_per_day": 0.14,
+      "note": "Physical salt accounting only; concentration does not specify ion composition or biological suitability."
+    }
+  ],
+  "unquantified": [
+    "Broodstock and pre-glass feed and wastes",
+    "Hatchery oxygen and energy",
+    "Grow-out duration and biomass trajectory",
+    "Low-gravity oxygen transfer and electrical energy",
+    "Local prey production and habitat carrying capacity",
+    "Processing energy and coproduct recovery",
+    "Survival or yield of locally spawning or fully freshwater breeding lines"
+  ]
+}

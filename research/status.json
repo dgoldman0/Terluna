@@ -1386,7 +1386,7 @@
     },
     {
       "topic": "aquatic_food_systems",
-      "condition": "author_authorized_domain_food_systems_2026_11_04; initial_literature_synthesis_and_trial_design; earth_founders_and_genomic_informed_selective_breeding_first; no_new_biological_or_fishery_validation",
+      "condition": "author_authorized_domain_food_systems_2026_11_04; initial_literature_synthesis_and_trial_design; earth_founders_and_genomic_informed_selective_breeding_first; no_new_biological_or_fishery_validation; eel_dossier_and_assumption_based_accounts; preferred_autonomous_freshwater_recruitment",
       "material": [
         "studies/food_systems/aquatic_novelty.md",
         "studies/food_systems/aquatic_biomes.md",
@@ -1397,19 +1397,29 @@
         "studies/food_systems/breeding_and_trials.md",
         "studies/food_systems/culinary_evaluation.md",
         "studies/food_systems/aquatic_checks.json",
-        "studies/food_systems/aquatic_decisions.md"
+        "studies/food_systems/aquatic_decisions.md",
+        "studies/food_systems/fish_cuisine_followup.md",
+        "studies/food_systems/eel_habitat_hatchery.md",
+        "studies/food_systems/eel_budget.py",
+        "studies/food_systems/eel_parameters.json",
+        "studies/food_systems/eel_sources.json",
+        "studies/food_systems/results/eel_budget.json",
+        "studies/food_systems/eel_checks.json",
+        "studies/food_systems/test_eel_budget.py"
       ],
       "findings": [
         "Earth evidence provides candidate mechanisms and selectable variation for edible fat, tissue chemistry and food-web-derived foods; lunar culinary novelty remains hypothetical.",
         "Lunar-cycle, moderate alkaline and carbonate-associated studies require independent light/feed/chemistry/diet contrasts and complete founder life cycles.",
-        "Cooked foods, actual eel/unagi, shellfish and qualified raw candidates have separate product objectives; connected Earth-Terluna biological exchange remains an assumption."
+        "Cooked foods, actual eel/unagi, shellfish and qualified raw candidates have separate product objectives; connected Earth-Terluna biological exchange remains an assumption.",
+        "Eel dossier distinguishes initial saline hatchery production, local spawning, stage-specific salinity reduction and the preferred autonomous freshwater life cycle. Complete freshwater recruitment remains unproven. Reproducible seed/feed/oxygen/nutrient/cooked-yield accounts are illustrative assumptions, not lunar production estimates."
       ],
       "unresolved": [
         "Named founder populations, full methods appraisal where sources were accessed at abstract level, life-stage tolerances and complete reproductive routes.",
         "Site-resolved environments after reorientation and climate refresh; preserve inherited basin mixing brackets and the unresolved magnesium floor.",
-        "Replicated ecological and multigeneration trials, resource/oxygen budgets, sensory outcomes and product-specific raw/cooked qualification."
+        "Replicated ecological and multigeneration trials, resource/oxygen budgets, sensory outcomes and product-specific raw/cooked qualification.",
+        "Eel founder families, stage-specific ion requirements, complete larval feed and oxygen costs, grow-out biomass trajectories, weighed cooked yields and unassisted habitat-level reproductive replacement."
       ],
-      "next_session_task": "Prepare paired founder dossiers and habitat/food-web eligibility for jade perch/tilapia, tilapia/prawn in moderate alkaline water, a carbonate community and a separate closed-life-cycle eel track; then specify pilots. No new global simulations or organism releases have been performed."
+      "next_session_task": "Appraise full hatchery methods and obtain traceable founder-family and life-stage data for the eel pilots, retaining autonomous freshwater recruitment as the preferred Gaean endpoint; replace scenario inputs with measured seed, feed, oxygen and cooked-yield outcomes. Continue the paired jade-perch/tilapia, moderate-alkaline and carbonate-community founder dossiers. No organism releases or biological trials have been performed."
     }
   ]
 }

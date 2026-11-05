@@ -12,6 +12,19 @@ design; no new biological results or fishery capacities are claimed. Its
 model forcing and separately inspected hydrosphere work. The production accounts
 and their numerical products below retain their existing scope.
 
+The [follow-up on jade perch, raw-fish habitats and unagi](fish_cuisine_followup.md)
+distils the subsequent discussion: edible-fat allocation and diet, potential
+lunar culinary traits, qualification across the wider aquatic landscape, and eel
+grow-out with an initial reproductive hatchery and possible selection for local
+spawning or a complete freshwater life cycle.
+
+The [eel habitat-and-hatchery dossier](eel_habitat_hatchery.md) develops juvenile
+supply, grow-out habitats, ecological effects, feed and oxygen budgets, and cooked
+yield. Its preferred Gaean endpoint is autonomous freshwater recruitment; saline
+hatcheries provide a transitional route. The accompanying
+[scenario accounts](results/eel_budget.json) expose assumptions and sensitivities
+without assigning lunar production capacity or demonstrated breeding success.
+
 ## Production accounts
 
 This study prices eight ways of growing the lunar design's plant-rich diet for each billion residents, fits each to the

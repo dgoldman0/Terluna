@@ -44,6 +44,8 @@ These are recorded in the [decision register](aquatic_decisions.md).
 | [Reef communities, shellfish and cooked foods](reef_shellfish_cuisine.md) | Carbonate habitat, Earth founders, pearls/materials, prey and eel routes |
 | [Breeding and trials](breeding_and_trials.md) | Lineage selection, controlled comparisons, genomic prediction, welfare and ecological performance |
 | [Culinary evaluation and qualification](culinary_evaluation.md) | Product-specific sensory tests, handling and the raw/cooked qualification boundary |
+| [Jade perch, raw-fish habitats and unagi](fish_cuisine_followup.md) | Follow-up priorities, fat metabolism, scope of raw-fish qualification and the eel grow-out/recruitment distinction |
+| [Eel habitats, hatcheries and cooked yield](eel_habitat_hatchery.md) | Juvenile supply, feed/oxygen/nutrient accounts, cooked yield and selective breeding toward the preferred autonomous freshwater life cycle |
 | [Author decisions](aquatic_decisions.md) | Scope, breeding priority, cooked foods and continuing biological exchange |
 | [Environmental source manifest](aquatic_basis.json) | Exact main revision and hashes of the inherited studies; separately identified hydrosphere evidence |
 

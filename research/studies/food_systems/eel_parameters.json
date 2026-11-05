@@ -1,0 +1,73 @@
+{
+  "schema": "terluna.research.eel-parameters/1",
+  "evidence": "Illustrative design assumptions for sensitivity arithmetic, not measured lunar performance or a facility specification. All biological rates and yields below are assumptions; sources motivate the questions, not the chosen numbers.",
+  "preferred_endpoint": "Autonomous freshwater recruitment in the established ecosystem, without obligatory hatchery intervention; saline production is transitional and a controlled freshwater life cycle is an intermediate milestone.",
+  "cohort": {
+    "harvest_live_kg": 1000.0,
+    "harvest_individual_kg": 0.25,
+    "nursery_exit_individual_kg": 0.01,
+    "glass_eel_individual_kg": 0.0002,
+    "growout_survival": 0.9,
+    "nursery_survival": 0.8,
+    "fertilization_fraction": 0.7,
+    "normal_hatch_fraction_of_fertilized": 0.6,
+    "larva_to_glass_survival": 0.01,
+    "nursery_economic_dry_fcr": 1.2,
+    "growout_economic_dry_fcr": 1.5,
+    "cut_yield_of_live": 0.65,
+    "cook_yield_of_cut": 0.8,
+    "portion_cooked_fish_kg": 0.1,
+    "feed_crude_protein_fraction_dry": 0.48,
+    "whole_fish_protein_fraction_wet": 0.18,
+    "feed_phosphorus_fraction_dry": 0.01,
+    "whole_fish_phosphorus_fraction_wet": 0.004,
+    "protein_to_nitrogen_factor": 6.25
+  },
+  "oxygen": {
+    "standing_biomass_kg": 1000.0,
+    "feed_dry_kg_per_day": 10.0,
+    "fish_respiration_mg_o2_per_kg_per_hour": 200.0,
+    "tan_n_kg_per_kg_dry_feed": 0.03,
+    "nitrified_fraction_of_tan": 1.0,
+    "other_biological_o2_kg_per_kg_dry_feed": 0.2,
+    "capacity_factor": 1.5,
+    "inlet_do_mg_per_l": 7.0,
+    "outlet_floor_do_mg_per_l": 5.0,
+    "connected_water_m3": 100.0,
+    "nitrification_o2_kg_per_kg_n": 4.57,
+    "nitrification_alkalinity_kg_caco3_per_kg_n": 7.14
+  },
+  "hatchery": {
+    "annual_live_harvest_kg": 1000.0,
+    "glass_eels_per_successful_batch": 1000.0,
+    "successful_batch_fraction": 0.8,
+    "larval_cycle_days": 270.0,
+    "turnaround_days": 30.0,
+    "water_inventory_m3": 100.0,
+    "daily_liquid_discharge_m3": 1.0,
+    "discharged_salt_recovery_fraction": 0.0,
+    "water_density_kg_per_m3": 1000.0
+  },
+  "sensitivity": {
+    "larva_to_glass_survival": [0.001, 0.01, 0.05],
+    "processing_and_feed_cases": [
+      {"name": "efficient_example", "growout_economic_dry_fcr": 1.2, "cut_yield_of_live": 0.75, "cook_yield_of_cut": 0.85},
+      {"name": "reference_example", "growout_economic_dry_fcr": 1.5, "cut_yield_of_live": 0.65, "cook_yield_of_cut": 0.8},
+      {"name": "higher_resource_example", "growout_economic_dry_fcr": 2.0, "cut_yield_of_live": 0.55, "cook_yield_of_cut": 0.7}
+    ],
+    "oxygen_cases": [
+      {"name": "lower_demand", "fish_respiration_mg_o2_per_kg_per_hour": 100.0, "feed_dry_kg_per_day": 5.0, "other_biological_o2_kg_per_kg_dry_feed": 0.1},
+      {"name": "reference_demand", "fish_respiration_mg_o2_per_kg_per_hour": 200.0, "feed_dry_kg_per_day": 10.0, "other_biological_o2_kg_per_kg_dry_feed": 0.2},
+      {"name": "higher_demand", "fish_respiration_mg_o2_per_kg_per_hour": 300.0, "feed_dry_kg_per_day": 15.0, "other_biological_o2_kg_per_kg_dry_feed": 0.3}
+    ],
+    "salt_concentration_g_per_kg": [35.0, 17.5, 13.0, 0.14]
+  },
+  "reading_rules": {
+    "fcr": "Dry feed supplied divided by net stage biomass gain (outgoing live biomass minus incoming live biomass). Economic FCR includes feed lost and mortality effects; do not add a second mortality feed multiplier. This is not a claim of constant FCR as survival changes.",
+    "composition": "Use the same assumed wet whole-fish N and P content at entry and exit. Nonretained material includes uneaten feed, mortalities, dissolved excretion and solids; it is not all water discharge.",
+    "oxygen": "Separate instantaneous standing-stock calculation. Fish respiration excludes nitrification and other biological demand. The latter excludes fish and nitrifiers. Basal nitrogen excretion and delayed decomposition are unresolved; feed-proportional terms do not model fasting or system upsets. The capacity factor is a design allowance, not a proven peak multiplier. Nitrification coefficients are oxidation-only stoichiometry from E10; other coefficients are assumptions.",
+    "hatchery": "Batch yield is a planning assumption motivated by E08, not a validated count at the assumed cycle time or survival. Nominal water inventory is a separate hydraulic unit, not the volume of a 1000-glass-eel tank. Salt calculation assumes density 1000 kg/m3, tracks liquid losses, and excludes evaporation losses of salt.",
+    "freshwater": "The 0.14 g/kg case is a physical inventory comparison only. No successful egg or larval performance is assigned to it; the actual calcium-bicarbonate ion recipe and magnesium floor remain unresolved.",
+    "scope": "Feed and nutrient totals start at glass-eel entry. Broodstock, egg and larval feed, their wastes/oxygen/energy, and processing energy remain unquantified, not zero. Cooked fish excludes sauce, rice and coproduct credits. No annual yield per area or profitability is estimated."
+  }
+}
