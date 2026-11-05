@@ -4592,6 +4592,32 @@ python3 -m pytest climate/tests/test_sbm_redesign2.py                     # 12 t
     --longwave-fit l15_design --surface-gust beljaars_similarity --rain-drops share --snow flakes
 ```
 
+#### The second redesign's heat beyond its reference (4 November, evening)
+
+DESIGN2 lets the rain's latent heat warm only the layers standing below their reference temperature, and it holds the rain to what those layers can take within PlaSim's 1-hour `deltsec2`. That limit binds on two thirds or more of the deep 3-day-mean columns at the three gap-test boxes, in R2 and in the run that restored R2's land soil water. On land it holds the afternoon's rain at once to about a quarter of what the vapour's relaxation gives, and the land then dries to a state of its own (`session-tools/agents/gap_boxes/followups/` on the research drive). The rule came from CM1 spinning up from GCM air, when its convection did not rain and so did not heat. Once CM1 rains, it puts 0.66 of its gross convective heating on land, and 0.40 at the dry box, into layers standing at or above DESIGN2's reference. In those layers its net tendency stays small only because the imposed circulation cools them. A GCM's scheme must supply the gross heating and leave that cooling to the dynamics.
+
+**The switch** ([sbm_redesign2_heat.py](sbm_redesign2_heat.py); `SBM_HEAT_PATCHES` over the second redesign's patch; rainmod's `nheat_bm`). With `nheat_bm` 1, where the limit would bind, the rain is the vapour's relaxation, unheld. The layers below their reference warm at the limit's own rate, each reaching it within `deltsec2`. The rest of the latent heat is spread over the cloud layers, the relaxed levels at or above the condensation level, by one temperature increment. Elsewhere, and in every decision, the column is DESIGN2's; moist enthalpy and water are kept, and no layer cools. With `nheat_bm` 0, the default, the routine is DESIGN2's. Frierson's enthalpy-conserving shift was weighed and left aside: it puts 23–63% of the heat below the condensation level, where CM1's gross heating is negative at the sea and land boxes, and it cools 12–31% of the cloud layers. A profile taken from CM1's heating was left aside because the three boxes' profiles disagree (normalised rms 0.66–1.55).
+
+**Checks** ([test_sbm_redesign2_heat.py](../tests/test_sbm_redesign2_heat.py), 11 tests):
+- The copy gives DESIGN2's decisions on every column, and every output bit for bit where the limit does not bind.
+- The Fortran gives the copy's decisions, tendencies and rain to 2.2e-14 relative on soundings and over 24 steps, with no array temporaries.
+- With `nheat_bm` 0 the patched routine prints every digit of the second redesign's for every closure setting.
+- The patch keeps its lines within 132 columns and its place last in the catalogue.
+- The runner records the rule and writes `NHEAT_BM` 1 only when the switch is on, leaving every other run's configuration and key as they were.
+
+**The single column.** Under the CM1 boxes' own forcing, the column rains 1.75 and 1.16 times CM1's rain at the sea and land boxes from CM1's air, against DESIGN2's 1.17 and 0.97. Its band ends warmer than the target everywhere: 0.35–1.0 K below its fine parcel at sea and on land from the design years' GCM air and 0.7 K above it at the dry box, and 3.9 K above it at sea from CM1's air. A prescribed column cannot carry the spread heat away by ascent, so only the two-year GCM test can show what the dynamics do with it.
+
+```sh
+python3 -m pytest climate/tests/test_sbm_redesign2_heat.py                # 11 tests: copy, Fortran, switch off, patch, runner
+# the heat rule's GCM test from the design run's year-9 restart, two years: the second redesign's flags with
+# --sbm-heat spread added
+<climate venv>/bin/python -m climate.gcm.exoplasim_run A28R --folder <name> --years 2 --ncpus 4 \
+    --start-from <design run>/model/MOST_REST.00009 --set sunlight_scale=0.934 --longwave-correction --ice-optics \
+    --heating-diagnostics --wind10 --cold-cloud climate/results/gcm/cold_cloud_A28R_301k_s0897.json --moisture-diagnostics \
+    --convection sbm --sbm-deep-hpa 200 --levels l15 --sbm-shallow-cap --sbm-closure redesign2 --sbm-heat spread \
+    --longwave-fit l15_design --surface-gust beljaars_similarity --rain-drops share --snow flakes
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked

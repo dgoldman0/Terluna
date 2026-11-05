@@ -24,6 +24,7 @@ from climate.gcm import sbm
 from climate.gcm import sbm_closure as scl
 from climate.gcm import sbm_redesign as srd
 from climate.gcm import sbm_redesign2 as sr2
+from climate.gcm import sbm_redesign2_heat as srh
 from climate.gcm import surface_gust as sg
 
 GCM_FLAGS = ('-O3', '-cpp', '-fcheck=all', '-ffpe-trap=invalid,zero,overflow', '-ffpe-summary=none',
@@ -221,8 +222,10 @@ def undo(text, edits, marker):
 
 
 def without_redesign(text):
-    """The source without the redesigned closures' patches (sbm_redesign2.py's over sbm_redesign.py's, which goes over
-    closure (c)'s and edits its parcel's routine), so that closure (c)'s own edits can be undone."""
+    """The source without the redesigned closures' patches (sbm_redesign2_heat.py's over sbm_redesign2.py's over
+    sbm_redesign.py's, which goes over closure (c)'s and edits its parcel's routine), so that closure (c)'s own edits
+    can be undone."""
+    text = undo(text, srh.SBM_HEAT_EDITS, srh.HEAT_MARKER)
     return undo(undo(text, sr2.SBM_REDESIGN2_EDITS, sr2.REDESIGN2_MARKER), srd.SBM_REDESIGN_EDITS, srd.REDESIGN_MARKER)
 
 
