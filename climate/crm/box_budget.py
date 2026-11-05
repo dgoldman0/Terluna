@@ -156,12 +156,25 @@ def read_dgw(case: Path, text: str):
 
 def dgw_at(rows: list, mtime: float, interval: float) -> dict:
     """The damped gravity wave's record for the diagnostic output at mtime (s): the interval ending nearest it, within half
-    an interval (the build closes an interval at the first step at or past each multiple of the diagnostic period)."""
+    an interval (the build closes an interval at the first step at or past each multiple of the diagnostic period).
+
+    The record misses the interval ending at each run segment's end, 1 in 8 with one-day segments and 3-hour intervals.
+    There the interval's means are estimated as the mean of the intervals ending one period before and one after, exact
+    for a trend linear across the three, and at the record's end, with nothing after, the interval before is carried.
+    An estimated row has no steps and says how it was made under 'estimated' ('between' or 'carried')."""
     ends = np.array([r['end_s'] for r in rows])
     k = int(np.argmin(np.abs(ends - mtime)))
-    if abs(ends[k] - mtime) > 0.5 * interval:
-        raise ValueError(f'no damped-gravity-wave interval ends near {mtime:.0f} s (nearest {ends[k]:.0f} s)')
-    return rows[k]
+    if abs(ends[k] - mtime) <= 0.5 * interval:
+        return rows[k]
+    before = [r for r in rows if abs(r['end_s'] - (mtime - interval)) <= 0.5 * interval]
+    after = [r for r in rows if abs(r['end_s'] - (mtime + interval)) <= 0.5 * interval]
+    if before and after:
+        means = {key: 0.5 * (before[0][key] + after[0][key])
+                 for key in ('zb_m', 'w', 'inflow_theta', 'inflow_qv', 'table_theta')}
+        return dict(before[0], end_s=mtime, steps=0.0, estimated='between', **means)
+    if before and ends.max() < mtime:
+        return dict(before[0], end_s=mtime, steps=0.0, estimated='carried')
+    raise ValueError(f'no damped-gravity-wave interval ends near {mtime:.0f} s (nearest {ends[k]:.0f} s)')
 
 
 def inflow_reference(inflow: dict, mtime: float) -> dict:

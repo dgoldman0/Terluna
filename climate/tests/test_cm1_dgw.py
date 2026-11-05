@@ -162,3 +162,23 @@ def test_box_budget_reads_the_record(tmp_path):
     with pytest.raises(ValueError):
         bb.dgw_at(record, 40000.0, 10800.0)
     assert bb.read_dgw(tmp_path, ' &param8\n var9 = 0.0,\n /\n') is None
+
+
+def test_box_budget_estimates_the_intervals_a_segment_end_misses():
+    def row(end, w, top):
+        return dict(end_s=end, steps=270.0, zb_m=top, zh=np.array([50.0, 150.0]), zf=np.array([0.0, 100.0]),
+                    w=np.array([0.0, w]), inflow_theta=np.array([w, w]), inflow_qv=np.array([2.0 * w, w]),
+                    table_theta=np.array([3.0 * w, w]))
+    record = [row(10800.0, 0.01, 1200.0), row(21600.2, 0.03, 1400.0), row(43200.3, 0.07, 1800.0)]
+    between = bb.dgw_at(record, 32400.0, 10800.0)              # a segment's end: the interval ending there is missing
+    assert between['estimated'] == 'between' and between['steps'] == 0.0 and between['end_s'] == 32400.0
+    assert between['zb_m'] == pytest.approx(1600.0)
+    assert between['w'].tolist() == pytest.approx([0.0, 0.05])
+    assert between['inflow_qv'].tolist() == pytest.approx([0.10, 0.05])
+    assert between['table_theta'].tolist() == pytest.approx([0.15, 0.05])
+    assert record[1]['w'].tolist() == pytest.approx([0.0, 0.03])     # the neighbours stay as recorded
+    assert 'estimated' not in bb.dgw_at(record, 21600.0, 10800.0)
+    carried = bb.dgw_at(record, 54000.0, 10800.0)               # the record's end: nothing after it
+    assert carried['estimated'] == 'carried' and carried['w'].tolist() == pytest.approx([0.0, 0.07])
+    with pytest.raises(ValueError):                              # a gap of two intervals is not estimated
+        bb.dgw_at([record[0], record[2]], 21600.0, 10800.0)

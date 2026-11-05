@@ -3117,13 +3117,14 @@ The design-years boxes take the GCM's mean vertical wind as given, and much of t
 
 **The cases and checks.**
 - **Cases.** `box_near_side_sea_dgw`, `box_0e_dgw` and `box_se_dry_dgw`, each with `_day3` and `_day4`. A comment in `cm1_run.py` names their five departures from the design-years boxes.
-- **Inputs and budget.** `gcm_site.dgw_forcing` and `first_mode` give the air by hour, the horizontal tendencies and the mode's speed, recorded in each case's case.json. `box_budget` books the inflow and the table's heating from the record `terluna_dgw.txt`, and writes the box's own import (`own_large_scale_convergence_mm_day`).
-- **Tests** ([test_cm1_dgw.py](../tests/test_cm1_dgw.py), 6 tests):
+- **Inputs and budget.** `gcm_site.dgw_forcing` and `first_mode` give the air by hour, the horizontal tendencies and the mode's speed, recorded in each case's case.json. `box_budget` books the inflow and the table's heating from the record `terluna_dgw.txt`, and writes the box's own import (`own_large_scale_convergence_mm_day`). The record misses the interval ending at each run segment's end, 1 in 8 with one-day segments and 3-hour intervals, because a segment stops at the interval's end, before the step at which the build writes it, and the restart begins the next interval afresh. The budget estimates such an interval as the mean of the intervals ending one period before and after it, or carries the one before at the record's end, and marks the row as estimated. A later build should write the interval before a segment stops.
+- **Tests** ([test_cm1_dgw.py](../tests/test_cm1_dgw.py), 7 tests):
   - with the switch off the build's sources are the inflow build's;
   - a reference equal to the box's mean gives no wind;
   - warm departures rise and cool ones sink at the first mode's rate within 5%;
   - the inflow keeps heat, water and air mass;
-  - the budget reads the record.
+  - the budget reads the record;
+  - it estimates the intervals a segment's end misses from their neighbours.
 - **Builds.** Compiled and set up on scratch copies; no CM1 run has yet tested the wave against a 192 km box's convective noise.
 - **Earth-calibrated values met.** Morrison's ice processes, the 100 cm⁻³ droplets, the boundary layer's length scale and Rayleigh time (stretched by the gravity ratio), its critical Richardson number of 0.125 and the surface similarity functions (`yardstick/audit.md`).
 
