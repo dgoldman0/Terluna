@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/early_exports.py": "d7bb926a9ece039b2f2b437d8ba50451f9c3950fb73768f66deab8b026dc8ac5",
-      "research/studies/world_economy/early_exports_inputs.json": "3ee9bafd1d7bb9fe048b8a54eb8be11cf0c53b39793490c660b7cc41a97c2337",
+      "research/studies/world_economy/early_exports_inputs.json": "c8089410f68d668170e8a273e59b4f2e76a9efc577b356018088f59bfa484105",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
       "research/studies/world_economy/inventory.py": "721e67cd0d546969613d11663249c8204fd0c6137e3cbf4d95b06d962024d9d1"
     },
@@ -13,7 +13,7 @@
     },
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
-        "sha256": "b885746c3fe5574913bdb4e58b84e02a47c75a8099dd27c9370b34bad97f720a",
+        "sha256": "b465a1b2788af3fdebe8d01af234f163e07e051c2973fe0a34bd4e1c7c590a59",
         "schema": "terluna.research.world-economy-comparison/1"
       }
     }
