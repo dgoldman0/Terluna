@@ -9,7 +9,7 @@
     "products": {
       "research/studies/world_economy/results/pressure_advantages.json": {
         "schema": "terluna.research.pressure-advantages/1",
-        "sha256": "09eb9d8ed04a92c7918b3873c9bee691e0895f8307df15cfb102c787d11d8e19",
+        "sha256": "2b094baee2495e1a3def375cb1b4b2dca3dd29dedbe9289524a55ce97ce921a8",
         "use": "environment.reference_Pa, locked_Pa, temperature_K and binary_composition_corrected_density_ratio"
       }
     },
@@ -37,8 +37,8 @@
   "producer": {
     "files": {
       "research/studies/world_economy/distinctive_activities.py": "0678bbb78eb0fd2fdd8a044361eb40759eb532cb0a712d4aa8241b9f6c3e399f",
-      "research/studies/world_economy/distinctive_activities_inputs.json": "1b04db171eb688665dd9590431f46e8fc1c7213de30c768b407cfc6d0b84fa19",
-      "research/studies/world_economy/distinctive_activities_sources.json": "a04877ec409dcd110fd0370642f9b20e309e700597c62642c1db6e84cb1fb198"
+      "research/studies/world_economy/distinctive_activities_inputs.json": "8debca27ca8a539cb2f021c24caeaa6affa8a001b76efbcd13c79488a9846417",
+      "research/studies/world_economy/distinctive_activities_sources.json": "ae1641dd2f177c0666dedb5802d217961830e1c8d0c77817f64842e5a42d80a4"
     },
     "constants": {
       "JULIAN_DAY": 86400.0,
