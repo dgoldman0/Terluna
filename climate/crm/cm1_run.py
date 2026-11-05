@@ -1495,6 +1495,265 @@ def gcm_lowest_level_m(record: dict) -> float:
     return float(z[-1]) if z else 0.0
 
 
+# The damped gravity wave (5 November 2026; session-tools/agents/gap_boxes/yardstick/rules_wtg.txt, rules_wtg_boxes.txt
+# and the offline step's report). A box forced by the GCM's mean vertical wind takes much of its free troposphere's
+# temperature from that imposed motion, so it cannot say how much the storms should draw in. With var9 = 1 this build
+# lets the box make its own large-scale vertical wind from its departure from the reference's air, as the damped gravity
+# wave does (Kuang 2008; Blossey, Bretherton and Wyant 2009; compared with the weak temperature gradient by Daleu and
+# others 2015, whose DGW runs always settled into a raining state and whose WTG runs in some models into a dry one;
+# Romps 2012 found the WTG's steady profiles too top-heavy). Each step it solves
+#     d2(omega)/dp2 = (k^2/eps) Rd Tv' / p,   k^2/eps = 1 / (var5 * var6**2),
+# for the domain-mean omega, nil at the ground and at a lid at var4 m (the top of the GCM's convection at the site, the
+# depth of the first baroclinic mode whose speed var6 is), with Tv' the domain-mean virtual temperature less the nudging
+# reference's between the box's own boundary layer's top and the lid, and nil outside. var5 is the first baroclinic mode's adjustment time (s), the horizontal
+# scale the box stands for over var6, the mode's speed (m/s): for that mode the equation relaxes Tv' on var5. The
+# boundary layer's top is the domain mean of CM1's own hpbl (bulk Richardson, gethpbl2), no lower than var8 m (the
+# GCM's lowest level) and no higher than the lid; below it omega falls linearly in pressure to the ground, the wave's own
+# taper. The wind -omega/(rho0 g) replaces wprof every step, so CM1's large-scale vertical advection carries it (its
+# budget terms ptb_lsw and qvb_lsw book it) and the inflow patch (var7 = 1) draws the reference's air in where it
+# converges. The day-night table's heating applies only below the boundary layer's top, where horizontal temperature
+# advection is not small. The build writes the wind, the inflow's tendencies and the table's heating as applied,
+# averaged over each diagnostic interval, to DGW_RECORD for the budget. The domain mean of hpbl is taken over one
+# process's columns, so the mode is for OpenMP builds. With var9 at CM1's default of 0 it runs as the inflow build.
+DGW_MARKER = 'Terluna: the damped gravity wave'
+DGW_RECORD = 'terluna_dgw.txt'
+DGW_DECLARATIONS = f"""      ! {DGW_MARKER}: its arrays, its means over each diagnostic interval and their count
+      real, dimension(:), allocatable, save :: terluna_dgw_pf,terluna_dgw_tv,terluna_dgw_a,terluna_dgw_b
+      real, dimension(:), allocatable, save :: terluna_dgw_c,terluna_dgw_d,terluna_dgw_om,terluna_dgw_sw
+      real, dimension(:), allocatable, save :: terluna_dgw_sth,terluna_dgw_sqv,terluna_dgw_sad
+      real, save :: terluna_dgw_n = 0.0, terluna_dgw_szb = 0.0
+      double precision, save :: terluna_dgw_next = -1.0d0
+      integer, save :: terluna_dgw_klid = 0
+      real :: terluna_dgw_zb,terluna_dgw_k2e
+"""
+DGW_BLOCK = f"""      ! {DGW_MARKER} (var9 = 1; cm1_run.DGW_PATCHES): the box's large-scale vertical wind from its own
+      ! virtual-temperature departure Tv' from the nudging reference between its boundary layer's top and the lid at
+      ! var4 m, d2(omega)/dp2 = (k2/eps) Rd Tv'/p with k2/eps = 1/(var5 var6**2), omega nil at the ground and the lid;
+      ! the base state's pressures, on w levels the geometric means of the scalar levels'. It replaces wprof.
+      if( var9.gt.0.5 .and. var7.gt.0.5 .and. dolsw .and. do_lsnudge_th .and. do_lsnudge_qv .and. imoist.eq.1 )then
+        if( .not. allocated(terluna_dgw_om) )then
+          allocate( terluna_dgw_pf(nk+1) , terluna_dgw_tv(nk) , terluna_dgw_a(nk+1) , terluna_dgw_b(nk+1) ,   &
+                    terluna_dgw_c(nk+1) , terluna_dgw_d(nk+1) , terluna_dgw_om(nk+1) , terluna_dgw_sw(nk+1) ,   &
+                    terluna_dgw_sth(nk) , terluna_dgw_sqv(nk) , terluna_dgw_sad(nk) )
+          terluna_dgw_sw = 0.0
+          terluna_dgw_sth = 0.0
+          terluna_dgw_sqv = 0.0
+          terluna_dgw_sad = 0.0
+          terluna_dgw_pf(1) = prs0(1,1,1)*(prs0(1,1,1)/prs0(1,1,2))**((zh(1,1,1)-zf(1,1,1))/(zh(1,1,2)-zh(1,1,1)))
+          do k=2,nk
+            terluna_dgw_pf(k) = sqrt( prs0(1,1,k-1)*prs0(1,1,k) )
+          enddo
+          terluna_dgw_pf(nk+1) = prs0(1,1,nk)*(prs0(1,1,nk)/prs0(1,1,nk-1))**((zf(1,1,nk+1)-zh(1,1,nk))/(zh(1,1,nk)-zh(1,1,nk-1)))
+          terluna_dgw_klid = nk+1
+          do k=nk+1,2,-1
+            if( zf(1,1,k).ge.var4 ) terluna_dgw_klid = k
+          enddo
+          terluna_dgw_next = (aint(mtime/dble(diagfrq))+1.0d0)*dble(diagfrq)
+          if( myid.eq.0 ) print *,'  Terluna: the damped gravity wave; lid (k, z) = ',terluna_dgw_klid,zf(1,1,terluna_dgw_klid)
+        endif
+        terluna_dgw_zb = max( var8 , min( terluna_hpbl , var4 ) )
+        terluna_dgw_k2e = 1.0/( var5*var6*var6 )
+        do k=1,nk
+          terluna_dgw_tv(k) = 0.0
+          if( zh(1,1,k).gt.terluna_dgw_zb .and. zh(1,1,k).lt.zf(1,1,terluna_dgw_klid) )                       &
+            terluna_dgw_tv(k) = pi0(1,1,k)*( thavg(k)*(1.0+(rv/rd-1.0)*qavg(k,nqv))                              &
+                              - lsnudge_th(k,lsnudge_count)*(1.0+(rv/rd-1.0)*lsnudge_qv(k,lsnudge_count)) )
+        enddo
+        do k=1,nk+1
+          terluna_dgw_om(k) = 0.0
+        enddo
+        do k=2,terluna_dgw_klid-1
+          tem1 = terluna_dgw_pf(k)-terluna_dgw_pf(k-1)
+          tem2 = terluna_dgw_pf(k+1)-terluna_dgw_pf(k)
+          terluna_dgw_a(k) = 2.0/(tem1*(tem1+tem2))
+          terluna_dgw_c(k) = 2.0/(tem2*(tem1+tem2))
+          terluna_dgw_b(k) = -( terluna_dgw_a(k) + terluna_dgw_c(k) )
+          terluna_dgw_d(k) = terluna_dgw_k2e*rd*0.5*( terluna_dgw_tv(k-1) + terluna_dgw_tv(k) )/terluna_dgw_pf(k)
+        enddo
+        do k=3,terluna_dgw_klid-1
+          tem = terluna_dgw_a(k)/terluna_dgw_b(k-1)
+          terluna_dgw_b(k) = terluna_dgw_b(k) - tem*terluna_dgw_c(k-1)
+          terluna_dgw_d(k) = terluna_dgw_d(k) - tem*terluna_dgw_d(k-1)
+        enddo
+        if( terluna_dgw_klid.gt.2 )                                                                      &
+          terluna_dgw_om(terluna_dgw_klid-1) = terluna_dgw_d(terluna_dgw_klid-1)/terluna_dgw_b(terluna_dgw_klid-1)
+        do k=terluna_dgw_klid-2,2,-1
+          terluna_dgw_om(k) = ( terluna_dgw_d(k) - terluna_dgw_c(k)*terluna_dgw_om(k+1) )/terluna_dgw_b(k)
+        enddo
+        do k=1,nk+1
+          wprof(k) = -terluna_dgw_om(k)/( rf0(1,1,k)*g )
+          terluna_dgw_sw(k) = terluna_dgw_sw(k) + wprof(k)
+        enddo
+        terluna_dgw_n = terluna_dgw_n + 1.0
+        terluna_dgw_szb = terluna_dgw_szb + terluna_dgw_zb
+      endif
+"""
+DGW_INFLOW_SUMS = """          if( var9.gt.0.5 .and. allocated(terluna_dgw_sth) )then   ! Terluna: the damped gravity wave's record
+            terluna_dgw_sth(k) = terluna_dgw_sth(k) + tem1
+            terluna_dgw_sqv(k) = terluna_dgw_sqv(k) + tem2
+          endif
+"""
+DGW_FLUSH = f"""        if( var9.gt.0.5 .and. allocated(terluna_dgw_sw) )then   ! Terluna: the damped gravity wave's means, by interval
+          if( mtime.ge.terluna_dgw_next .and. terluna_dgw_n.gt.0.5 )then
+            if( myid.eq.0 )then
+              open(unit=94,file='{DGW_RECORD}',status='unknown',position='append',action='write')
+              write(94,*) mtime,terluna_dgw_n,terluna_dgw_szb/terluna_dgw_n,nk
+              do k=1,nk
+                write(94,*) zh(1,1,k),zf(1,1,k),terluna_dgw_sw(k)/terluna_dgw_n,terluna_dgw_sth(k)/terluna_dgw_n,   &
+                            terluna_dgw_sqv(k)/terluna_dgw_n,terluna_dgw_sad(k)/terluna_dgw_n
+              enddo
+              close(unit=94)
+            endif
+            terluna_dgw_sw = 0.0
+            terluna_dgw_sth = 0.0
+            terluna_dgw_sqv = 0.0
+            terluna_dgw_sad = 0.0
+            terluna_dgw_n = 0.0
+            terluna_dgw_szb = 0.0
+            terluna_dgw_next = (aint(mtime/dble(diagfrq))+1.0d0)*dble(diagfrq)
+          endif
+        endif
+"""
+DGW_TABLE = """        if( var9.gt.0.5 )then   ! Terluna: the damped gravity wave's boxes take the table's heating below their boundary layer's top
+          if( zh(1,1,k).gt.max( var8 , min( terluna_hpbl , var4 ) ) ) terluna_th = 0.0
+          if( allocated(terluna_dgw_sad) ) terluna_dgw_sad(k) = terluna_dgw_sad(k) + terluna_th
+        endif
+"""
+DGW_HPBL = f"""        IF( var9.gt.0.5 )THEN   ! {DGW_MARKER}'s boundary layer: the domain mean of hpbl (one process's columns)
+          terluna_hpbl = 0.0
+          do j=1,nj
+          do i=1,ni
+            terluna_hpbl = terluna_hpbl + hpbl(i,j)
+          enddo
+          enddo
+          terluna_hpbl = terluna_hpbl/real(ni*nj)
+        ENDIF
+"""
+INFLOW_HEAD = f"      ! {INFLOW_MARKER} (var7 = 1). CM1's large-scale vertical advection\n"
+TABLE_APPLY = '        do j=1,nj\n        do i=1,ni\n          thten1(i,j,k) = thten1(i,j,k) + terluna_th\n'
+HPBL_TERRAIN_END = '            hpbl(i,j) = hpbl(i,j)-zs(i,j)\n          enddo\n          enddo\n         ENDIF\n'
+TURB_CONSTANTS = ('      use constants, only : cmemin,c_l,ri_c,pi,rv,rd,g,repsm1,karman,rkarman,cp,rp00,rovcp,  &\n'
+                  '                            xlv,lv1,lv2,svp1,svp2,svp3,svpt0,th0r\n')
+INFLOW_DECLARED = ('      logical, save :: terluna_inflow_out = .true.   ! Terluna: the inflow rates, written once a segment\n')
+INFLOW_TEM2 = '          tem2 = tem*( lsnudge_qv(k,lsnudge_count)-qavg(k,nqv) )\n'
+INFLOW_TAIL = '        terluna_inflow_out = .false.\n      endif\n'
+WPROF_IN = '      real, intent(in),    dimension(kb:ke) :: wprof\n'
+DGW_PATCHES = [
+    ('input.F', DGW_MARKER, [
+        ('      real, dimension(:,:), allocatable :: terluna_w2   ! Terluna: large-scale vertical wind by column and w level\n',
+         '      real, dimension(:,:), allocatable :: terluna_w2   ! Terluna: large-scale vertical wind by column and w level\n'
+         f"      real :: terluna_hpbl = 0.0   ! {DGW_MARKER}: the domain-mean boundary-layer depth (m)\n", 1)]),
+    ('turb.F', DGW_MARKER, [
+        (TURB_CONSTANTS, TURB_CONSTANTS + f"      use input, only : var9,terluna_hpbl   ! {DGW_MARKER}'s boundary layer\n", 1),
+        (HPBL_TERRAIN_END, HPBL_TERRAIN_END + DGW_HPBL, 1)]),
+    ('solve1.F', DGW_MARKER, [
+        (WPROF_IN, f'      real, intent(inout), dimension(kb:ke) :: wprof   ! {DGW_MARKER} sets it (var9 = 1)\n', 1),
+        (INFLOW_DECLARED, INFLOW_DECLARED + DGW_DECLARATIONS, 1),
+        (INFLOW_HEAD, DGW_BLOCK + INFLOW_HEAD, 1),
+        (INFLOW_TEM2, INFLOW_TEM2 + DGW_INFLOW_SUMS, 1),
+        (INFLOW_TAIL, '        terluna_inflow_out = .false.\n' + DGW_FLUSH + '      endif\n', 1),
+        (TABLE_APPLY, DGW_TABLE + TABLE_APPLY, 1)]),
+]
+DGW_BUILD = INFLOW_BUILD + '_dgw'
+BUILDS[DGW_BUILD] = BUILDS['moon_omp']
+BUILD_PATCHES[DGW_BUILD] = BUILD_PATCHES[INFLOW_BUILD] + DGW_PATCHES
+RD_CM1, RV_CM1 = 287.04, 461.5          # CM1's gas constants (constants.F), for dgw_wind's copy of the Fortran
+
+
+def dgw_wind(zh, zf, prs0, pi0, rf0, theta_mean, qv_mean, theta_ref, qv_ref, tau_s, c_m_s, floor_m, hpbl_m, lid_m,
+             gravity, rd=RD_CM1, rv=RV_CM1):
+    """The damped gravity wave's large-scale vertical wind (m/s) on the w levels zf, as DGW_BLOCK computes it: a copy of
+    the Fortran's arithmetic for one domain-mean column, for the tests and offline checks. zh and the base state's
+    prs0 (Pa), pi0 and the reference and mean air on the scalar levels; rf0 (kg/m3) on the w levels."""
+    import numpy as np
+    zh, zf, prs0, pi0, rf0 = (np.asarray(a, float) for a in (zh, zf, prs0, pi0, rf0))
+    nk = zh.size
+    pf = np.empty(nk + 1)
+    pf[0] = prs0[0] * (prs0[0] / prs0[1]) ** ((zh[0] - zf[0]) / (zh[1] - zh[0]))
+    pf[1:nk] = np.sqrt(prs0[:-1] * prs0[1:])
+    pf[nk] = prs0[-1] * (prs0[-1] / prs0[-2]) ** ((zf[nk] - zh[-1]) / (zh[-1] - zh[-2]))
+    lid = next((k for k in range(1, nk + 1) if zf[k] >= lid_m), nk)          # 0-based index of the lid's w level
+    zb = max(floor_m, min(hpbl_m, lid_m))
+    eps = rv / rd - 1.0
+    tv = np.where((zh > zb) & (zh < zf[lid]), pi0 * (np.asarray(theta_mean) * (1.0 + eps * np.asarray(qv_mean))
+                                                     - np.asarray(theta_ref) * (1.0 + eps * np.asarray(qv_ref))), 0.0)
+    k2e = 1.0 / (tau_s * c_m_s * c_m_s)
+    omega = np.zeros(nk + 1)
+    inner = np.arange(1, lid)
+    if inner.size:
+        h1, h2 = pf[inner] - pf[inner - 1], pf[inner + 1] - pf[inner]
+        a, c = 2.0 / (h1 * (h1 + h2)), 2.0 / (h2 * (h1 + h2))
+        b = -(a + c)
+        d = k2e * rd * 0.5 * (tv[inner - 1] + tv[inner]) / pf[inner]
+        matrix = np.diag(b) + np.diag(c[:-1], 1) + np.diag(a[1:], -1)
+        omega[inner] = np.linalg.solve(matrix, d)
+    return -omega / (np.asarray(rf0, float) * gravity)
+
+
+def dgw_settings(build: str, scale_m: float, c_m_s: float, lid_m: float) -> dict:
+    """The &param8 entries of the damped gravity wave on a build that carries it: var9 1, var5 the first baroclinic
+    mode's adjustment time scale_m / c_m_s (s), var6 the mode's speed (m/s), var4 the lid (m), the mode's top."""
+    if DGW_PATCHES[0] not in BUILD_PATCHES.get(build, []):
+        raise ValueError(f'build {build} carries no damped gravity wave')
+    if BUILDS[build][1] != 'omp':
+        raise ValueError("the damped gravity wave's boundary layer is one process's mean: an OpenMP build only")
+    if not (scale_m > 0.0 and c_m_s > 0.0 and lid_m > 0.0):
+        raise ValueError(f'the scale ({scale_m} m), speed ({c_m_s} m/s) and lid ({lid_m} m) must be positive')
+    return dict(var9=1.0, var5=round(scale_m / c_m_s, 1), var6=round(c_m_s, 3), var4=round(lid_m, 1))
+
+
+def gcm_site_bins() -> int:
+    """The bins of the day gcm_site fits by local time, one nudging window each."""
+    from climate.crm import gcm_site
+    return gcm_site.BINS
+
+
+def footprint_m(site: dict) -> float:
+    """The horizontal scale a GCM-fed box stands for: the square root of its site's area, half_lat_deg by half_lon_deg
+    either side of it."""
+    a = planet()['radius_m']
+    return math.sqrt((2.0 * math.radians(site['half_lat_deg']) * a)
+                     * (2.0 * math.radians(site['half_lon_deg']) * a * math.cos(math.radians(site['lat_deg']))))
+
+
+def dgw_inputs(cfg: dict, run, years, zw, theta_at, qv_at) -> dict:
+    """What a damped-gravity-wave box takes from the GCM (gcm_site.dgw_forcing, gcm_site.first_mode): its air by local
+    time as functions of height and hour angle (theta_window, qv_window; the vapour by hour only where the case asks,
+    otherwise the lunar-day mean qv_at), the circulation's horizontal part as CM1's table on its levels, the namelist
+    entries and the record."""
+    import numpy as np
+    from climate.crm import gcm_site
+    site = cfg['site']
+    d = cfg['dgw']
+    f = gcm_site.dgw_forcing(run, years, {k: site[k] for k in ('lat_deg', 'lon_deg', 'half_lat_deg', 'half_lon_deg',
+                                                                 'surface')})
+    mode = gcm_site.first_mode(run, years)
+    scale = footprint_m(site) if d.get('scale_m') in (None, 'footprint') else float(d['scale_m'])
+    air = f['air_by_hour']
+    zg = np.asarray(air['z_m'], float)[::-1]
+    hours = np.asarray(air['hour_angle_deg'], float)
+    th_h, q_h = (np.asarray(air[k], float)[:, ::-1] for k in ('theta_k', 'qv_kg_kg'))
+    th_mean, q_mean = th_h.mean(axis=0), q_h.mean(axis=0)
+    nearest = lambda hour: int(np.argmin(np.abs((hours - hour + 180.0) % 360.0 - 180.0)))
+    theta_window = lambda z, hour: theta_at(z) + np.interp(z, zg, th_h[nearest(hour)] - th_mean)
+    qv_window = ((lambda z, hour: qv_at(z) * np.interp(z, zg, q_h[nearest(hour)] / q_mean)) if d.get('qv_by_hour')
+                 else (lambda z, hour: qv_at(z)))
+    horizontal = dict(f['forcing'], circulation=f['horizontal'],
+                      vertical_wind_m_s=[0.0] * len(f['forcing']['vertical_wind_m_s']))
+    table = gcm_site.to_cm1(horizontal, zw, theta_at, qv_at)['day_night']
+    column = f['column_vapour_mm_day']
+    record = dict(source="gcm_site.dgw_forcing and gcm_site.first_mode", run=run, years=list(years),
+                  scale_m=scale, scale_rule=d.get('scale_m') or 'footprint', c_m_s=mode['c_m_s'],
+                  c_to_model_top_m_s=mode['c_to_model_top_m_s'], tropical_convection_top_m=mode['convection_top_m'],
+                  tau_s=scale / mode['c_m_s'], lid_m=f['forcing']['convection']['top_m'], qv_by_hour=bool(d.get('qv_by_hour')),
+                  gcm_column_vapour_mm_day={k: dict(mean=float(np.mean(v)), by_hour=[round(float(x), 4) for x in v])
+                                            for k, v in column.items()},
+                  theta_by_hour_band_range_k=float(np.ptp(th_h[:, (zg > 15e3) & (zg < 50e3)].mean(axis=1))))
+    return dict(theta_window=theta_window, qv_window=qv_window, table=table,
+                namelist=dgw_settings(cfg['build'], scale, mode['c_m_s'], f['forcing']['convection']['top_m']),
+                record=record)
+
+
 RAIN_LAW_PRODUCT = 'atmosphere/rain/results/rain_fall_law.json'
 RAIN_LAW_SCHEMA = 'terluna.atmosphere.rain-fall-law/1'
 RAIN_LAW_KEYS = ('rain_fall_law', 'rain_selfcoll')
@@ -2124,6 +2383,46 @@ CASES['box_se_dry_design_years_day5'] = dict(
     CASES['box_se_dry_design_years'], restart_from=dict(case='box_se_dry_design_years_day4', day=118.0), days=147.5,
     purpose=CASES['box_se_dry_design_years']['purpose'] + "; its fifth lunar day, days 118-147.5, from the fourth day's "
             'day-118 restart')
+# The damped-gravity-wave boxes (5 November 2026; session-tools/agents/gap_boxes/yardstick/rules_wtg.txt, fixed before the
+# material that decided them was read, and rules_wtg_boxes.txt, fixed before any of them runs). The design-years boxes
+# take much of their free troposphere's temperature from the GCM's imposed motion; these make their own, so that they
+# can say how much rain the state should give and how much moisture the storms should draw in. Each is its
+# design-years box with these departures alone:
+#   1. The build DGW_BUILD (the inflow build with DGW_PATCHES) and var9 1: the box makes its large-scale vertical wind by
+#      the damped gravity wave, with var5 the first baroclinic mode's adjustment time, the site's footprint (418 km at
+#      the sea and land sites, 354 km at the dry box) over the mode's speed over the design years' tropics (about
+#      40.5 m/s), var6 that speed and var4 its lid, the top of the GCM's convection at the site (about 73 km)
+#      (dgw_inputs; gcm_site.first_mode).
+#   2. The GCM's mean vertical wind is not imposed: terluna_wls.txt holds nil, and var13 1 still turns on CM1's
+#      large-scale vertical advection, which carries the wave's wind.
+#   3. The table holds the circulation's horizontal part alone, its tendencies less the vertical advection by the GCM's
+#      own vertical wind at that hour (gcm_site.dgw_forcing); its heating applies only below the box's boundary-layer
+#      top, its moistening at every level.
+#   4. The air the box is held near above the GCM's convection, draws in where its wind converges and measures its
+#      departure from is the site's column by local time, window by window, in place of its lunar-day mean: the
+#      potential temperature at all three, the vapour by local time at the land and dry boxes and its lunar-day mean at
+#      sea, where its lowest level varies by 4% over the day.
+#   5. The box starts at local sunrise from the GCM's air at the site in the first window's hour, the reference the wave
+#      first measures it against, in place of the GCM's lunar-day mean air, so that the wave starts from rest.
+# Everything else is the design-years box's: the GCM run and years, the site and its cells, the start at local
+# sunrise, the grid, the wind relaxed toward the GCM's by local time from its lowest level up, the
+# gust, the inflow (var7 1), the air held above the convection's top, the sea's temperature or the land's wetness and
+# row, the radiation and sunlight, the twilight, the rain limits and law, the droplets and the output. Two lunar days
+# from sunrise, then the third and fourth from the restarts.
+for _name, _source, _qv in (('box_near_side_sea_dgw', 'box_near_side_sea_design_years', False),
+                            ('box_0e_dgw', 'box_0e_design_years', True),
+                            ('box_se_dry_dgw', 'box_se_dry_design_years', True)):
+    CASES[_name] = dict(
+        CASES[_source], build=DGW_BUILD, dgw=dict(scale_m='footprint', qv_by_hour=_qv),
+        purpose=CASES[_source]['purpose'] + "; its large-scale vertical wind its own, by the damped gravity wave against "
+                "the site's air by local time, in place of the GCM's mean vertical wind, and its table the "
+                "circulation's horizontal part alone, the heating below the boundary layer's top")
+    CASES[f'{_name}_day3'] = dict(
+        CASES[_name], restart_from=dict(case=_name, day=59.0), days=88.5,
+        purpose=CASES[_name]['purpose'] + '; its third lunar day, days 59-88.5, from its day-59 restart')
+    CASES[f'{_name}_day4'] = dict(
+        CASES[_name], restart_from=dict(case=f'{_name}_day3', day=88.5), days=118.0,
+        purpose=CASES[_name]['purpose'] + "; its fourth lunar day, days 88.5-118, from the third day's day-88.5 restart")
 # The weather-carrying boxes (2026-11-01; session-tools/agents/gap_boxes/plan_weather.md, and the rules fixed before
 # any of them ran, rules_weather.txt). Each design-years box runs on from its fourth lunar day's day-118 restart and
 # follows the design run's own sequence at its site from the first time in year 15, the first of the design years'
@@ -3770,6 +4069,16 @@ def setup(name: str) -> Path:
     theta_sfc = ref['air_over_sea_k'] * (1e5 / ref['surface_pa_sea']) ** kappa
     lines = [f"{ref['surface_pa_sea'] / 100:12.4f} {theta_sfc:12.4f} {qv[0] * 1000:12.5f}"]
     start_theta, start_qv, initial = theta_at, qv_at, dict(source='GCM reference')
+    dgw = None
+    if box and cfg.get('dgw'):                 # the damped gravity wave's box: its air by local time, its table, its wave
+        if not (cfg['site'].get('gcm') and cfg.get('wind_by_local_time')):
+            raise ValueError("a damped-gravity-wave box takes the GCM's air by local time through the nudging windows")
+        dgw = dgw_inputs(cfg, run, years, zw, theta_at, qv_at)
+    if dgw:                                    # from the air of the first window, the reference the wave starts against
+        first = cfg['start_hour_angle_deg'] + cfg['site']['lon_deg'] + 180.0 / gcm_site_bins()
+        start_theta = lambda z: dgw['theta_window'](z, first)
+        start_qv = lambda z: dgw['qv_window'](z, first)
+        initial = dict(source="the GCM's air at the site in the first window's hour (gcm_site.dgw_forcing)", hour_deg=first)
     if cfg.get('initial') == 'ring_sea':
         start = ring_sea_profile()
         zr = np.asarray(start['z_m']) * s
@@ -3801,7 +4110,11 @@ def setup(name: str) -> Path:
         for i, window in enumerate(windows, 1):
             t1, t2 = window['time_s']
             rows = nudge[:1] + [f'  {t1:22.1f} {1.0e30 if i == len(windows) else t2:22.6e}'] + nudge[2:4]
-            rows += [f'  {z:12.4f} {float(theta_at(z)):12.4f} {float(qv_at(z)) * 1000:12.6f} {u:10.4f} {v:10.4f}'
+            th_w, qv_w = theta_at, qv_at                                  # the GCM's mean air, or by local time
+            if dgw:
+                th_w = lambda z, h=window['hour_angle_deg']: dgw['theta_window'](z, h)
+                qv_w = lambda z, h=window['hour_angle_deg']: dgw['qv_window'](z, h)
+            rows += [f'  {z:12.4f} {float(th_w(z)):12.4f} {float(qv_w(z)) * 1000:12.6f} {u:10.4f} {v:10.4f}'
                      for z, u, v in zip(heights, window['u_m_s'], window['v_m_s'])]
             (case / f'lsnudge_{i:04d}.dat').write_text('\n'.join(rows) + '\n')
         nudging_wind = dict(windows=len(windows), window_s=windows[0]['time_s'][1] - windows[0]['time_s'][0],
@@ -3867,8 +4180,9 @@ def setup(name: str) -> Path:
     (case / 'LANDUSE.TBL').write_text(''.join(table))
     vertical_wind = None
     if box and cfg.get('large_scale_w') == 'gcm':
-        vertical_wind = dict(z_m=[float(z) for z in zw], w_m_s=site['w_m_s'], ring=cfg['site'].get('ring'),
-                             ring_columns=site['columns'], rows_deg=ref['rows_deg'])
+        vertical_wind = dict(z_m=[float(z) for z in zw], w_m_s=[0.0] * len(zw) if dgw else site['w_m_s'],
+                             ring=cfg['site'].get('ring'), ring_columns=site['columns'], rows_deg=ref['rows_deg'],
+                             **(dict(note='nil: the damped gravity wave makes the large-scale vertical wind') if dgw else {}))
         write_vertical_wind(case / 'terluna_wls.txt', vertical_wind, zw[-1])
     elif tilted and cfg.get('large_scale_w') == 'gcm':
         write_vertical_wind_2d(case / 'terluna_wls2d.txt', zw, ref['w_columns'])
@@ -3889,13 +4203,15 @@ def setup(name: str) -> Path:
     day_night = None
     if box and cfg.get('day_night') == 'gcm':                            # the GCM's own budget at the site
         from climate.crm import gcm_site
-        forcing = gcm_site.to_cm1(site['forcing'], zw, theta_at, qv_at)['day_night']
+        forcing = dgw['table'] if dgw else gcm_site.to_cm1(site['forcing'], zw, theta_at, qv_at)['day_night']
         write_day_night(case / 'terluna_lsadv.txt', forcing)
         low = forcing['z_m'] < 3000.0
         spread = lambda a, scale: dict(mean=float(a[:, low].mean() * scale), min=float(a[:, low].mean(axis=1).min() * scale),
                                        max=float(a[:, low].mean(axis=1).max() * scale))
         f = site['forcing']
-        day_night = dict(source="the GCM's own budget at the site (gcm_site.py)", run=f['run'], years=f['years'],
+        day_night = dict(source="the GCM's own budget at the site (gcm_site.py)" + (
+                             ": the circulation's horizontal part alone (gcm_site.dgw_forcing), its heating applied "
+                             "below the box's boundary-layer top" if dgw else ''), run=f['run'], years=f['years'],
                          harmonics=f['harmonics'], top_m=f['day_night']['top_m'],
                          lowest_3_km=dict(theta_k_day=spread(forcing['theta_k_s'], 86400.0),
                                           qv_g_kg_day=spread(forcing['qv_kg_kg_s'], 8.64e7)))
@@ -3922,6 +4238,8 @@ def setup(name: str) -> Path:
     wind = corrected_wind(cfg['build'], float(zg[0]), s)                 # the build's corrected wind and inflow (the
     inflow = corrected_inflow(cfg['build'], cfg)                          # case's own namelist, applied below, may
     settings['param8'].update(dict(wind, **inflow))                       # change them)
+    if dgw:
+        settings['param8'].update(dgw['namelist'])
     settings['param12'].update(tsk0=round(ref['sea_surface_k'], 3), tmn0=round(ref['land_ground_k'], 3), xland0=2.0, lu0=16)
     for section, entries in settings.items():
         for key, value in entries.items():
@@ -3960,6 +4278,7 @@ def setup(name: str) -> Path:
                   electricity=electricity,
                   twilight=twilight,
                   rain_limits=rain, rain_law=rain_law, nudging_wind=nudging_wind, corrected_wind=wind or None,
+                  dgw=dgw['record'] if dgw else None,
                   gcm_site=gcm_site_record(site['forcing']) if box and site.get('forcing') else None,
                   runner=digest(__file__),
                   inputs={p: digest(case / p) for p in ('input_sounding', 'input_grid_z', 'lsnudge_0001.dat',

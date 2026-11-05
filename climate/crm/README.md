@@ -3100,6 +3100,39 @@ E=/media/projectspace/terluna-research/session-tools/evaporation
 PYTHONPATH=. climate/gcm/.venv/bin/python $E/evap_trace.py       # rules EV1-EV3; evap_trace.json
 ```
 
+### Boxes that make their own large-scale motion: the damped gravity wave (5 November)
+
+The design-years boxes take the GCM's mean vertical wind as given, and much of their free troposphere's temperature comes from it. Their band (σ 0.38–0.73) cools 3.5–7.2 K from the GCM's air over their days and still cools 0.25–0.35 K a lunar day at days 3–4. On land the imposed ascent makes most of that cooling (`session-tools/agents/gap_boxes/refinement/report_free_troposphere.md` on the research drive). Such a box can judge the GCM's upper air only through motion the GCM supplied, and it cannot say how much moisture its storms should draw in. That inflow is the quantity on which the land's rain turns: +2.87 mm/day at the land box in the design years against about nil under the GCM's second convection refinement.
+
+**The method** (`session-tools/agents/gap_boxes/yardstick/`: rules_wtg.txt, report_wtg.md). With `var9` = 1 the build `moon_omp_rain_law_pbl_wind_gust_aloft_inflow_dgw` makes the box's own large-scale vertical wind each step by the damped gravity wave (Kuang 2008; Blossey, Bretherton and Wyant 2009). It solves d²ω/dp² = (k²/ε) R_d T_v′/p for the domain-mean ω, nil at the ground and at a lid at the GCM's convection top at the site, about 73 km. T_v′ is the domain-mean virtual temperature less the reference air's between the box's boundary-layer top and the lid; below that top ω falls linearly in pressure to the ground. The wind replaces the imposed one, CM1's large-scale vertical advection carries it, and the inflow patch draws the reference air in where it converges. The wave was chosen over the weak temperature gradient on two grounds. In the comparison of Daleu et al. (2015) its runs always settled into a raining state, while the weak temperature gradient's sometimes fell into a dry one, a hazard the Moon's 14.8-day nights would favour. Romps (2012) found the weak temperature gradient's steady profiles too top-heavy for the import's shape. Rotation does not enter: the first mode's equatorial deformation radius, 3,640–5,190 km, exceeds the boxes' distance from the equator.
+
+**Its settings, from the lunar column.**
+- **Speed and time.** The first baroclinic mode's speed is 40.5 m/s, the WKB integral of the buoyancy frequency to the convection top. Over the 418 km footprint the box stands for (354 km at the dry box) it gives an adjustment time of 2.87 h (2.43 h), the only parameter, since k²/ε = 1/(Lc) for the first mode. No Earth damping rate remains, and 0.65–18.7 h is carried as the range.
+- **The boundary layer's top.** The domain mean of CM1's own boundary-layer depth, bounded below by the GCM's lowest level and above by the lid. That depth swings from 0.06 to 8.4 km over the lunar day on land.
+- **The reference air.** The site's own GCM column by local time, through the nudging windows. Within 3 hours a tenth of a kelvin turns into 3 cm/s of large-scale motion, so a tropical-mean reference would drive spurious motion; the site's band stands within 0.17 K of the tropical mean.
+- **The day-night table.** It keeps only the GCM circulation's horizontal part: its heating below the boundary-layer top and its moistening at every level.
+- **The start.** Each box starts from the GCM's air at local sunrise, so the wave starts from rest.
+
+**What the boxes can judge.** At the land box the second refinement's collapse of convergence lies almost wholly in the horizontal part of the import. The vertical advection by the GCM's own wind stands at +11.25 mm/day in the design years' afternoon and +9.64 in the second refinement's, while the horizontal remainder falls from +3.09 to −9.37 mm/day (GCM output; the parts carry the fits' errors, only the total is exact). Boxes forced by the design years take the design years' horizontal part, so they test the vertical import and the rain it feeds. Judging the second refinement's dry land needs a set forced by its state.
+
+**The cases and checks.**
+- **Cases.** `box_near_side_sea_dgw`, `box_0e_dgw` and `box_se_dry_dgw`, each with `_day3` and `_day4`. A comment in `cm1_run.py` names their five departures from the design-years boxes.
+- **Inputs and budget.** `gcm_site.dgw_forcing` and `first_mode` give the air by hour, the horizontal tendencies and the mode's speed, recorded in each case's case.json. `box_budget` books the inflow and the table's heating from the record `terluna_dgw.txt`, and writes the box's own import (`own_large_scale_convergence_mm_day`).
+- **Tests** ([test_cm1_dgw.py](../tests/test_cm1_dgw.py), 6 tests):
+  - with the switch off the build's sources are the inflow build's;
+  - a reference equal to the box's mean gives no wind;
+  - warm departures rise and cool ones sink at the first mode's rate within 5%;
+  - the inflow keeps heat, water and air mass;
+  - the budget reads the record.
+- **Builds.** Compiled and set up on scratch copies; no CM1 run has yet tested the wave against a 192 km box's convective noise.
+- **Earth-calibrated values met.** Morrison's ice processes, the 100 cm⁻³ droplets, the boundary layer's length scale and Rayleigh time (stretched by the gravity ratio), its critical Richardson number of 0.125 and the surface similarity functions (`yardstick/audit.md`).
+
+```sh
+Y=/media/projectspace/terluna-research/session-tools/agents/gap_boxes/yardstick
+$Y/run_wtg_boxes.sh            # land, sea, dry in turn: build, setup, two lunar days, day 3, day 4; guarded, resumable
+python3 -m pytest climate/tests/test_cm1_dgw.py
+```
+
 ## A box over the highlands
 
 The author's plan for highlands (2026-09-29) left a three-dimensional box over

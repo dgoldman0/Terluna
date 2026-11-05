@@ -101,7 +101,7 @@ def test_the_gust_build_takes_beljaars_gust_over_water_and_changes_nothing_else(
         c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] + [c.GUST_PATCH]
     assert all(c.GUST_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
                if label not in ('moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft',
-                                c.INFLOW_BUILD))
+                                c.INFLOW_BUILD, c.DGW_BUILD))
     for day in ('day3', 'day4'):
         case, wind = c.CASES[f'box_near_side_sea_l15_wind_gust_{day}'], c.CASES[f'box_near_side_sea_l15_wind_{day}']
         assert case['build'] == 'moon_omp_rain_law_pbl_wind_gust'
@@ -122,7 +122,7 @@ def test_the_aloft_build_pulls_the_wind_from_var8_up_and_new_cases_take_the_corr
     assert c.BUILD_PATCHES[c.ALOFT_BUILD] == c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] + [c.WIND_ALOFT_PATCH]
     assert c.BUILDS[c.ALOFT_BUILD] == c.BUILDS['moon_omp']
     assert all(c.WIND_ALOFT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
-               if label not in (c.ALOFT_BUILD, c.INFLOW_BUILD))
+               if label not in (c.ALOFT_BUILD, c.INFLOW_BUILD, c.DGW_BUILD))
     # the corrected wind follows the build: none on the old builds, the time scale on the wind's, both on the new one
     assert c.corrected_wind('moon_omp_rain_law_pbl', 312.69) == {}
     assert c.corrected_wind('moon_omp_rain_law_pbl_wind_gust', 312.69) == dict(var10=7200.0)
@@ -165,7 +165,8 @@ def test_the_inflow_build_draws_the_reference_s_air_in_where_the_mean_wind_conve
         '') + '      if(timestats.ge.1) time_misc=time_misc+mytime()\n' == source
     assert c.BUILD_PATCHES[c.INFLOW_BUILD] == c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust_aloft'] + [c.INFLOW_PATCH]
     assert c.BUILDS[c.INFLOW_BUILD] == c.BUILDS['moon_omp']
-    assert all(c.INFLOW_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label != c.INFLOW_BUILD)
+    assert all(c.INFLOW_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
+               if label not in (c.INFLOW_BUILD, c.DGW_BUILD))
     assert c.corrected_inflow(c.INFLOW_BUILD) == dict(var7=1.0)
     assert c.corrected_inflow(c.ALOFT_BUILD) == {} and c.corrected_inflow('moon_omp') == {}
     # the default for the boxes forced by the GCM's column at their site; a ring on the build keeps var7 0
@@ -226,7 +227,8 @@ def test_the_third_box_on_the_design_years_is_the_land_box_at_the_dry_site_with_
     index = c.PLACEHOLDER_LAND[0]
     assert c.site_land_row(case, 0.0823) == index and c.site_land_row(land, 0.794) == c.wetness_class(0.794) == 29
     assert c.site_land_row(land, 0.0823) == c.wetness_class(0.0823) == 21
-    assert all(c.site_land_row(v, 0.5) == c.wetness_class(0.5) for k, v in c.CASES.items() if not k.startswith(name))
+    assert all(c.site_land_row(v, 0.5) == c.wetness_class(0.5) for k, v in c.CASES.items()
+               if not k.startswith((name, 'box_se_dry_dgw')))
     row = c.landuse_rows(((index, round(0.0823, 2)),))[index]
     assert row.startswith(f'{index},') and '   .08,' in row and 'wetness 0.08' in row
 
@@ -253,7 +255,7 @@ def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     # wind's own nudging time scale, the gust over water at lunar gravity and the wind pulled from aloft)
     with_hook = {'moon_omp_twilight', 'moon_omp_terrain_sea_twilight', 'moon_omp_rain_law', 'moon_omp_rain_law_pbl',
                  'moon_omp_rain_law_pbl_wind', 'moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft',
-                 c.INFLOW_BUILD}
+                 c.INFLOW_BUILD, c.DGW_BUILD}
     assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label not in with_hook)
     sun = next(p for p in c.PATCHES if p[0] == 'radiation_driver.F')
     added = ''.join(new for _, new, _ in sun[2])
