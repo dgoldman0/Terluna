@@ -3,7 +3,7 @@
   "producer": {
     "files": {
       "research/studies/world_economy/early_campaigns.py": "708f54e1c7e7c4d1d125031fd5fe985b86313c5ea9a95035d4d31aa70a9f3a83",
-      "research/studies/world_economy/early_campaigns_inputs.json": "bb50217c90feb1e578449a2b00abe167ec17738f7bb10388eab85c99117e1ab0",
+      "research/studies/world_economy/early_campaigns_inputs.json": "ea164f22325bf6236675d7fdbf8dc1306d6ca4c89999709d485a17f7c0a03d04",
       "research/studies/world_economy/early_campaign.py": "5ae86ea125d7f3e36c5db84d62f73c43f654c559c0db106e55b3e6bd2efbadb6"
     },
     "constants": {
@@ -12,11 +12,11 @@
     },
     "input_products": {
       "research/studies/world_economy/industrial_markets_inputs.json": {
-        "sha256": "0491a9bd96fa3c0890a93e29e1704d170c2ba44baab7dacb406b1ba98764af25",
+        "sha256": "d9d1308d903fc4d86a80bdbc06750fc916125b1597f81bcb3b975c7afd7c7605",
         "schema": "terluna.research.industrial-markets-inputs/1"
       },
       "research/studies/world_economy/results/industrial_markets.json": {
-        "sha256": "e8a2104eefcc478b58d1201678fc05543a83bd9fcd54e130e937855e557abc53",
+        "sha256": "8b96d8a25c2d7ece2e55a569a1e2498e049cf2539856342ee9663986ac78be21",
         "schema": "terluna.research.industrial-markets/1"
       }
     }

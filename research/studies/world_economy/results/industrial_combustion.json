@@ -9,7 +9,7 @@
     "products": {
       "research/studies/world_economy/results/pressure_advantages.json": {
         "schema": "terluna.research.pressure-advantages/1",
-        "sha256": "2b094baee2495e1a3def375cb1b4b2dca3dd29dedbe9289524a55ce97ce921a8",
+        "sha256": "12a0cfcaecfb8c5ad75fa439edaf15ccd4f4c0e8f27904fcb7e800a6f264e9ce",
         "use": "environment.reference_Pa, locked_Pa, temperature_K; gas_partial_pressures.reference_oxygen_Pa and locked_oxygen_Pa"
       }
     },
@@ -33,7 +33,7 @@
   "producer": {
     "files": {
       "research/studies/world_economy/industrial_combustion.py": "8380c9c05da9c265a6cd0b52bdbf41a1fd4e6174641bcc9a05398a0d0345e11f",
-      "research/studies/world_economy/industrial_combustion_inputs.json": "bf49172a03425742fe294ed2d82b0d6bdba1ed7505faf90bfef4d139c28ea0fc",
+      "research/studies/world_economy/industrial_combustion_inputs.json": "ecc5be670d166ec919ef13fe4de333f24c1870bfd85e8eb57494f76c0c9d833e",
       "research/studies/world_economy/industrial_combustion_sources.json": "997e2997dd0f1bec8b77c5045a00811a2127e35c30f71437f0fa095889abee28",
       "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
     },

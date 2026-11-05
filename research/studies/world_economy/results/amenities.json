@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "366376ebb9b0acea297601f2eecf8b965160a3e33ad4d09b7c5b523a0d78ed09",
+      "research/studies/world_economy/amenities_inputs.json": "dc56fa4dc5827d90650a819d1e33ed044dbab884c7e4fc8a2e52b22eafbcd2b8",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "7fa6b450faf039fd0ff8f2e24130946ada4a082c02d8c14ecef0d39d2c135338"
+        "sha256": "05bf892bfa6937dc56850b7beefcf171c5cb9985b1e3b304e9bfdf0781c481db"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "3a3f2a91099f7ce409ff5143f2c71ff18077392117846a1da0d869f4729d7548"
+        "sha256": "b17671969aeab859657b33ede67a566a81f42bafe0f39e51db83329af6f858e0"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "8e01f277190eacef135cd3577e7cc733e99dabb669bafce114d68a82d742fb08"
+        "sha256": "22b4ba3822e85b77e2e3ad2c0c9a54203e2b50867c9d8ebb54465d6ad7925feb"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "c157704e700197f347fe64fb57c8fb0d4c59acc11ff042f448d4aec04eadfaa3"
+        "sha256": "bc45c2a5bcbd0d26e52ec59a6da63dfde04b9a679b262ef3b34829af5da48683"
       }
     }
   },
