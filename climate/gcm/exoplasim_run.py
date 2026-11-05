@@ -138,6 +138,7 @@ from climate.gcm import sbm_closure as scl
 from climate.gcm import sbm_redesign as srd
 from climate.gcm import sbm_redesign2 as sr2
 from climate.gcm import sbm_redesign2_heat as srh
+from climate.gcm import sbm_redesign2_subcloud as srs
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -1104,6 +1105,10 @@ SBM_REDESIGN2_PATCHES = [('rainmod.f90', sr2.REDESIGN2_MARKER, sr2.SBM_REDESIGN2
 # rule (rainmod's nheat_bm), a patch of its own over the second redesign's, which it edits; with nheat_bm 0 the routine
 # is the second redesign's.
 SBM_HEAT_PATCHES = [('rainmod.f90', srh.HEAT_MARKER, srh.SBM_HEAT_EDITS)]
+# The second redesign's cloud layers only (4 November, night; sbm_redesign2_subcloud.py), a switch on which levels it
+# relaxes (rainmod's nsubcl_bm), a patch of its own over the heat rule's, whose lines it follows; with nsubcl_bm 0 the
+# routine relaxes every level, as the second redesign does.
+SBM_SUBCLOUD_PATCHES = [('rainmod.f90', srs.SUBCLOUD_MARKER, srs.SBM_SUBCLOUD_EDITS)]
 HUS_MEAN_MARKER = "Terluna: the humidity's true mean"
 HUS_MEAN_CODE = 233
 HUS_MEAN = ('hus_mean', 'specific_humidity_mean_over_the_output_interval', '1')
@@ -1644,9 +1649,10 @@ def patch_chain(twilight: bool = False, trigger: bool = False, depth: bool = Fal
                 boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
                 cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
                 similarity: bool = False, land_store: bool = False, closure: bool = False,
-                redesign: bool = False, redesign2: bool = False, heat: bool = False) -> list:
+                redesign: bool = False, redesign2: bool = False, heat: bool = False, subcloud: bool = False) -> list:
     """The Terluna patches a run with these settings takes, as (file, marker, edits), in the order ensure_patched
-    applies them; the redesigned closure takes closure (c)'s patch beneath its own, and the second redesign both."""
+    applies them; the redesigned closure takes closure (c)'s patch beneath its own, the second redesign both, and the
+    second redesign's cloud layers only the heat rule's."""
     return (PATCHES + (TWILIGHT_PATCHES if twilight else [])
             + (SBM_TRIGGER_PATCHES if trigger or night else [])
             + (SBM_DEPTH_PATCHES if depth or cap or night else [])
@@ -1668,7 +1674,8 @@ def patch_chain(twilight: bool = False, trigger: bool = False, depth: bool = Fal
             + (SBM_CLOSURE_PATCHES if closure or redesign or redesign2 else [])
             + (SBM_REDESIGN_PATCHES if redesign or redesign2 else [])
             + (SBM_REDESIGN2_PATCHES if redesign2 else [])
-            + (SBM_HEAT_PATCHES if heat else []))
+            + (SBM_HEAT_PATCHES if heat or subcloud else [])
+            + (SBM_SUBCLOUD_PATCHES if subcloud else []))
 
 
 def patch_catalogue() -> list:
@@ -1691,7 +1698,7 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                    boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
                    cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
                    similarity: bool = False, land_store: bool = False, closure: bool = False,
-                   redesign: bool = False, redesign2: bool = False, heat: bool = False) -> dict:
+                   redesign: bool = False, redesign2: bool = False, heat: bool = False, subcloud: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
@@ -1710,7 +1717,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     patch's wind), and the scheme's closure (c) with route L (SBM_CLOSURE_PATCHES, over the depth test's and the
     cap's patches, calling the gust patch's gustcol, with restart_has_array for route L's history), and the
     redesigned closure (SBM_REDESIGN_PATCHES, over closure (c)'s) with the second redesign (SBM_REDESIGN2_PATCHES, over
-    both), for a run that sets them (patch_chain), and return
+    both), its heat rule (SBM_HEAT_PATCHES, over it) and its cloud layers only (SBM_SUBCLOUD_PATCHES, over the heat
+    rule's), for a run that sets them (patch_chain), and return
     each patched file's hash for the run key. The
     folder's ledger (patch_ledger.py) records the version of each patch applied, and a file that carries a patch's
     marker is refused unless the ledger holds the runner's version of that patch for it."""
@@ -1742,6 +1750,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     if redesign2 and not (depth and cap and gust):
         raise RuntimeError("the second redesign's patch goes over the first redesign's and closure (c)'s, which go over "
                            "the depth test's and the shallow cap's and call the gust patch's gustcol")
+    if subcloud and not redesign2:
+        raise RuntimeError("the cloud layers' patch edits the second redesign's routine; it needs the second redesign")
     if heat and not redesign2:
         raise RuntimeError("the heat rule's patch edits the second redesign's routine; it needs the second redesign")
     hashes = {}
@@ -1751,7 +1761,7 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                                            boundary_layer=boundary_layer, night=night, humidity_mean=humidity_mean,
                                            cloud_water=cloud_water, gust=gust, rain_drops=rain_drops,
                                            similarity=similarity, land_store=land_store, closure=closure,
-                                           redesign=redesign, redesign2=redesign2, heat=heat):
+                                           redesign=redesign, redesign2=redesign2, heat=heat, subcloud=subcloud):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -1884,7 +1894,7 @@ SBM_TRIGGER_SETTINGS = ('cape_j_kg', 'trigger_eps')                   # the CAPE
 SBM_DEPTH_SETTINGS = ('deep_hpa', 'mixing_steps')                     # SBM_DEPTH_PATCHES' options, likewise
 SBM_CAP_SETTINGS = ('shallow_cap',)                                   # SBM_CAP_PATCHES' option, likewise
 SBM_NIGHT_SETTINGS = ('diagnostic_night',)                            # SBM_NIGHT_PATCHES' diagnostic, likewise
-SBM_CLOSURE_SETTINGS = ('closure', 'route_l', 'heat')     # closure (c) and route L, the second redesign's heat rule
+SBM_CLOSURE_SETTINGS = ('closure', 'route_l', 'heat', 'subcloud')   # closure (c), route L, the second redesign's rules
 SBM_NIGHT_RECORD = dict(rule='no deep convection where the geometric cosine of the Sun\'s zenith at the grid point is '
                              'at most 0; such a column takes PlaSim\'s shallow scheme, its top held by the shallow cap '
                              'where that is set',
@@ -1989,6 +1999,16 @@ def convection_setting(scheme='sbm', **values) -> dict:
         if closure != 'redesign2':
             raise ValueError("the heat rule 'spread' belongs to the second redesign (closure redesign2)")
         s['heat'] = srh.record()
+    subcloud = values.get('subcloud')
+    if subcloud not in (None, 'all', 'cloud'):
+        raise ValueError(f"the second redesign's levels are 'all' (its own) or 'cloud', not {subcloud!r}")
+    if subcloud == 'cloud':
+        if closure != 'redesign2':
+            raise ValueError("the sub-cloud rule 'cloud' belongs to the second redesign (closure redesign2)")
+        if heat == 'spread':
+            raise ValueError("the sub-cloud rule 'cloud' is tested with the second redesign's own heat rule; "
+                             'leave heat out')
+        s['subcloud'] = srs.record()
     return dict(scheme='sbm', nprc=2, **s)
 
 
@@ -2019,6 +2039,8 @@ def convection_namelist(c: dict) -> list:
                     for name, value in c['closure']['constants'].items()]
     if 'heat' in c:                                                   # the second redesign's heat rule, spread
         entries.append(('NHEAT_BM', '1'))
+    if 'subcloud' in c:                                               # the second redesign's cloud layers only
+        entries.append(('NSUBCL_BM', '1'))
     if 'route_l' in c:
         entries.append(('NROUTEL_BM', '1'))
         entries += [(name.upper(), repr(float(value))) for name, value in c['route_l']['constants'].items()]
@@ -2046,6 +2068,12 @@ def uses_heat_patch(convection: dict | None) -> bool:
     """Whether a run's convection settings (as given to configuration) take the second redesign's heat rule of
     SBM_HEAT_PATCHES, which goes over the second redesign's patch."""
     return bool(convection) and convection.get('heat') == 'spread'
+
+
+def uses_subcloud_patch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) take the second redesign's cloud layers only of
+    SBM_SUBCLOUD_PATCHES, which goes over the heat rule's patch."""
+    return bool(convection) and convection.get('subcloud') == 'cloud'
 
 
 def uses_depth_patch(convection: dict | None) -> bool:
@@ -2185,7 +2213,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     store = (lsf.setting(land_store['product'], land_store['floor'], land_store['surface'], land_store['library'],
                          land_store['hollows'], planet['gravity_m_s2'], exp['pressure_pa'], root=ROOT)
              if land_store is not None else None)                                              # refuses a bad choice
-    redesigned = uses_redesign_patch(convection) or uses_redesign2_patch(convection) or uses_heat_patch(convection)
+    redesigned = (uses_redesign_patch(convection) or uses_redesign2_patch(convection) or uses_heat_patch(convection)
+                  or uses_subcloud_patch(convection))
     if uses_closure_patch(convection) or redesigned:                         # refused before a patch reaches the source
         convection_setting(**convection)
         if surface_gust is None and redesigned:
@@ -2211,7 +2240,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      land_store=store is not None, closure=uses_closure_patch(convection),
                                      redesign=uses_redesign_patch(convection),
                                      redesign2=uses_redesign2_patch(convection),
-                                     heat=uses_heat_patch(convection)),
+                                     heat=uses_heat_patch(convection), subcloud=uses_subcloud_patch(convection)),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -3192,6 +3221,11 @@ def main(argv=None) -> int:
                              "'spread', where that limit would bind the rain unheld and the rest of its heat spread "
                              "over the cloud layers by one increment (sbm_redesign2_heat.py; SBM_HEAT_PATCHES; part "
                              "of the run key only when spread)")
+    parser.add_argument('--sbm-subcloud', choices=('all', 'cloud'), default='all',
+                        help="with --sbm-closure redesign2, the levels it relaxes: 'all', the second redesign's own "
+                             "(every level from the top to the source), or 'cloud', the levels below the condensation "
+                             "level left alone (sbm_redesign2_subcloud.py; SBM_SUBCLOUD_PATCHES over the heat rule's; "
+                             "part of the run key only when cloud)")
     parser.add_argument('--sbm-route-l', action='store_true',
                         help='with --sbm-closure c, route L: closure (c) launched from the most humid layer between '
                              "0.60 and 0.94 of the surface pressure above the boundary layer's top where the lowest "
@@ -3300,6 +3334,8 @@ def main(argv=None) -> int:
         parser.error('--sbm-closure and --sbm-route-l belong to the simplified Betts-Miller scheme (--convection sbm)')
     if args.sbm_closure == 'c' and args.surface_gust == 'none':
         parser.error("--sbm-closure c calls the gust patch's depth for route L; set --surface-gust")
+    if args.sbm_subcloud != 'all' and args.sbm_closure != 'redesign2':
+        parser.error('--sbm-subcloud cloud belongs to the second redesign (--sbm-closure redesign2)')
     if args.sbm_heat != 'reference' and args.sbm_closure != 'redesign2':
         parser.error('--sbm-heat spread belongs to the second redesign (--sbm-closure redesign2)')
     if args.sbm_closure in ('redesign', 'redesign2') and args.surface_gust == 'none':
@@ -3317,9 +3353,10 @@ def main(argv=None) -> int:
                           diagnostic_night=args.sbm_diagnostic_night or None,
                           closure=None if args.sbm_closure == 'design' else args.sbm_closure,
                           route_l=args.sbm_route_l or None,
-                          heat=None if args.sbm_heat == 'reference' else args.sbm_heat)
+                          heat=None if args.sbm_heat == 'reference' else args.sbm_heat,
+                          subcloud=None if args.sbm_subcloud == 'all' else args.sbm_subcloud)
         if (uses_closure_patch(convection) or uses_redesign_patch(convection) or uses_redesign2_patch(convection)
-                or uses_heat_patch(convection) or args.sbm_route_l):
+                or uses_heat_patch(convection) or uses_subcloud_patch(convection) or args.sbm_route_l):
             try:                       # closure (c)'s, the redesigns' and route L's combinations, refused here
                 convection_setting(**convection)
             except ValueError as err:

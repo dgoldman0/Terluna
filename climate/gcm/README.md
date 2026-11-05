@@ -4618,6 +4618,32 @@ python3 -m pytest climate/tests/test_sbm_redesign2_heat.py                # 11 t
     --longwave-fit l15_design --surface-gust beljaars_similarity --rain-drops share --snow flakes
 ```
 
+#### The second redesign's cloud layers only (4 November, night)
+
+DESIGN2 relaxes every level from the trigger's top to the source toward 0.70 of the air's own saturation, Frierson's (2007) form inherited from the design scheme, so it rains the boundary layer's vapour above that value and marks those layers as convective cloud. In R2 this drains the land's sub-cloud layer. Counting the falling rain's evaporation, the convection takes 1.42 mm/day from the layer at sigma 0.85 and below over the lunar day, and 2.95 in the afternoon, against 0.28 in the design years. CM1's resolved transport and microphysics leave the same layer nearly unchanged while it rains (+0.08 mm/day at the land box) and moisten it by 0.94 mm/day over the lunar day: the transport takes 3.1 mm/day of vapour out of the layer, the falling rain's evaporation returns 3.0, and CM1 forms no condensate below its condensation level. The surface flux of 2.7 mm/day and the turbulence carry that layer's budget (`session-tools/agents/gap_boxes/followups/subcloud/` on the research drive).
+
+**The switch** ([sbm_redesign2_subcloud.py](sbm_redesign2_subcloud.py); `SBM_SUBCLOUD_PATCHES` over the heat rule's patch; rainmod's `nsubcl_bm`). With `nsubcl_bm` 1 the levels below the condensation level of the lowest level's air, the one the trigger and the plume take, are left wholly alone. Their reference vapour is their own and their reference warming nil, so the scheme neither dries, moistens nor heats them and marks no convective cloud there; the boundary-layer scheme, the surface and the falling rain's evaporation carry their budget. The cloud layers relax as in DESIGN2. A column whose cloud layers hold nothing above their reference vapour takes the shallow scheme with DESIGN2's top. Where DESIGN2 changes no level below the condensation level the column is DESIGN2's bit for bit, and moist enthalpy and water are kept. With `nsubcl_bm` 0, the default, the routine is the heat-patched DESIGN2's. The rule is tested with DESIGN2's own heat rule, and the runner refuses it beside `--sbm-heat spread`. Two alternatives were weighed and left aside. Moving the updraughts' export into the cloud layers presumed that DESIGN2's sub-cloud drying matched CM1's convective drying within a factor of two, but DESIGN2 removes vapour where CM1's convection leaves the layer unchanged or moistens it. Taking CM1's sub-cloud budget as the rule presumed a convective tendency there of at least a third of the surface flux, and at the sea and land boxes that tendency is a small moistening.
+
+**Checks** ([test_sbm_redesign2_subcloud.py](../tests/test_sbm_redesign2_subcloud.py), 11 tests):
+- The copy leaves every level below the condensation level alone and keeps moist enthalpy and water. Wherever DESIGN2 changes nothing below the condensation level, soundings set at DESIGN2's references there included, it gives DESIGN2's outputs bit for bit.
+- The Fortran gives the copy's decisions, tendencies and rain to 2.2e-14 relative on soundings and 5.0e-14 over 24 steps, with no array temporaries.
+- With `nsubcl_bm` 0 the patched routine prints every digit of the heat-patched routine for every closure setting, with the heat rule off and on.
+- The patch keeps its lines within 132 columns and its place after the heat rule's in the catalogue, and the patched rainmod.f90 compiles with PlaSim's modules.
+- The runner records the rule and writes `NSUBCL_BM` 1 only when the switch is on, leaving every other run's configuration and key as they were. It refuses the rule without the second redesign or beside the heat rule, before any patch.
+
+**Offline.** On R2's 3-day means at the gap boxes the rule cuts the deep share from 0.39 to 0.12 at sea, 0.24 to 0.13 on land and 0.16 to 0.06 at the dry box, and the rain at once from 1.74 to 1.23, 1.83 to 1.21 and 0.88 to 0.63 mm/day: the scheme now waits until the cloud layers hold vapour above their reference. Under the CM1 boxes' own forcing the single column rains 1.07 and 1.00 times CM1's rain at the sea and land boxes from CM1's air, against DESIGN2's 1.17 and 0.97, and 1.23 times at the dry box against 2.87. From the design years' GCM air, convection takes 0.75 of the sea box's rain, against DESIGN2's 0.86. The band ends 3.7 K below its fine parcel at sea, 2.5 K on land and 0.8 K at the dry box, nearer CM1's 5.3, 2.4 and 2.4 K than DESIGN2's 3.1, 3.2 and 0.6 K; the column runs colder aloft than the GCM, so these standings are read against DESIGN2's in the same column. The column takes CM1's prescribed surface fluxes and cannot carry a soil-limited boundary layer, so the land's answer waits on the two-year GCM test.
+
+```sh
+python3 -m pytest climate/tests/test_sbm_redesign2_subcloud.py            # 11 tests: copy, Fortran, switch off, patch, runner
+# the sub-cloud rule's GCM test from the design run's year-9 restart, two years: the second redesign's flags with
+# --sbm-subcloud cloud added
+<climate venv>/bin/python -m climate.gcm.exoplasim_run A28R --folder <name> --years 2 --ncpus 4 \
+    --start-from <design run>/model/MOST_REST.00009 --set sunlight_scale=0.934 --longwave-correction --ice-optics \
+    --heating-diagnostics --wind10 --cold-cloud climate/results/gcm/cold_cloud_A28R_301k_s0897.json --moisture-diagnostics \
+    --convection sbm --sbm-deep-hpa 200 --levels l15 --sbm-shallow-cap --sbm-closure redesign2 --sbm-subcloud cloud \
+    --longwave-fit l15_design --surface-gust beljaars_similarity --rain-drops share --snow flakes
+```
+
 ### Cloud amount: what published models say
 
 From a literature search, with Yang et al. (2014) and Way et al. (2018) checked
