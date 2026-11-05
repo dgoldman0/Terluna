@@ -1,0 +1,106 @@
+{
+  "schema": "terluna.research.food-systems-aquatic-basis/1",
+  "date": "2026-11-04",
+  "branch": "domain/food-systems",
+  "parent_main_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+  "evidence": "Source identity manifest for a literature synthesis and proposed study; no new biological experiment or numerical food-web result.",
+  "reading_rule": "Hashes identify source bytes at the parent commit, not a claim that every historical result uses the latest GCM or current physical reference frame. No mutable-branch file is silently substituted.",
+  "main_sources": [
+    {
+      "path": "shared/constants.json",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72",
+      "role": "Physical constants and lunar cycle"
+    },
+    {
+      "path": "research/plan.md",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "f8ddc9b24f0e04cc8ea70bf61ad6beac4db37dcc8d391e5b0dc124e5eb091f13",
+      "role": "Design climate and outstanding reorientation; read at parent revision"
+    },
+    {
+      "path": "research/decisions.md",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "c3b456251ba0c721c3a3a7d8e52b6d77637d9692f6710af5706659065a414d2d",
+      "role": "Accepted climate, biological design and hydrosphere directions at parent revision"
+    },
+    {
+      "path": "research/studies/sea_oxygen/README.md",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "e238187bd6ea7340f617f56f320de0c31ad5272e115ea7fea32dfe15199bed0c",
+      "role": "October 18 interpolated 301 K basin columns and mixing bounds"
+    },
+    {
+      "path": "research/studies/sea_oxygen/results/sea_oxygen.json",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "9fed156a16ec8403c97bb08092dbe8d4019a1195d5ace204d6fea474f56aafce",
+      "role": "Inherited oxygen product; no food-fish capacity inferred"
+    },
+    {
+      "path": "research/studies/sea_oxygen/results/seas.json",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "76073ddab08f9683b7876af482c2a6cb0d27dcc8a193aeff828df9044bd3d4cd",
+      "role": "Inherited basin geometry on existing atlas"
+    },
+    {
+      "path": "research/studies/sea_chemistry/README.md",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "1952270234707b179847f5d2a95e7e30c6cd88474fdc303bfa7c570c1954191c",
+      "role": "Maintained freshwater and soda-lake pathways"
+    },
+    {
+      "path": "research/studies/sea_chemistry/results/sea_chemistry.json",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "f70abdbf49663f241770871e44fad577e953281afd7c435dfd4a1cd860d7564e",
+      "role": "Inherited chemistry product, not a complete rearing medium"
+    },
+    {
+      "path": "research/studies/aquatic_biogeochemistry/plan.md",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "6831fb53ffdb9db4b48a8dcea99dff445d3aa6cb68bfcfe77c807a935d0fb8b2",
+      "role": "Essential-ion gap, mineral producers and shellfish programme"
+    },
+    {
+      "path": "resources/sea_phosphorus.md",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "b19af4fedbf3417122f0ef8bed3c740510059f9b8bb1f7adb515edd85326585f",
+      "role": "Shared nutrient accounting and screening harvest constraints"
+    },
+    {
+      "path": "research/studies/lunar_cycle_ecology/README.md",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "e8c03e110fc08d571627bea0e942e8a4b812f95d26d0e2b9f3e567d8b66ab624",
+      "role": "Long-cycle and twilight ecological hypotheses"
+    },
+    {
+      "path": "research/studies/sea_appearance/README.md",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "5fb1263d88bfd8f0607a6eb4e5f53afd3dbc9921a6d7a0a5655f6a2d75c04c1c",
+      "role": "Local illumination and water appearance limits"
+    },
+    {
+      "path": "research/studies/food_systems/results/food_systems.json",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "ed4a38e38e74488bc9181783000a248ce5efb0571ed185da54594b53a5897830",
+      "role": "Existing provisioning accounts; unchanged"
+    },
+    {
+      "path": "research/studies/food_systems/results/food_blend.json",
+      "git_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+      "sha256": "c72a5fcbe056bb0bb4989702b53c56bdf418820ea8fda1b149d851fb57e69def",
+      "role": "Existing selected blend; unchanged"
+    }
+  ],
+  "supplementary_sources": [
+    {
+      "repository": "dgoldman0/Terluna",
+      "branch_at_inspection": "domain/hydrosphere",
+      "commit": "6ac19391f2728f9a2899f5f4492248653575db67",
+      "path": "research/studies/cold_waters/README.md",
+      "git_blob_sha": "22b6523d49734cd2db8b4f38e9bc3e54dab7ff2c",
+      "access": "README read through GitHub connector; branch head resolved with git ls-remote; no hydrosphere commits merged",
+      "role": "Provisional cold-water estimate on design years 10-19; lapse-rate and temporal-resolution limits retained"
+    }
+  ],
+  "new_results": []
+}

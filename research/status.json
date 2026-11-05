@@ -1383,6 +1383,33 @@
         "Currency use, access to settlement and emergency lending, and the bearing of losses are separate functions; three worlds need not mean three currencies or three issuers.",
         "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs."
       ]
+    },
+    {
+      "topic": "aquatic_food_systems",
+      "condition": "author_authorized_domain_food_systems_2026_11_04; initial_literature_synthesis_and_trial_design; earth_founders_and_genomic_informed_selective_breeding_first; no_new_biological_or_fishery_validation",
+      "material": [
+        "studies/food_systems/aquatic_novelty.md",
+        "studies/food_systems/aquatic_biomes.md",
+        "studies/food_systems/aquatic_basis.json",
+        "studies/food_systems/lunar_cycle_fisheries.md",
+        "studies/food_systems/alkaline_foods.md",
+        "studies/food_systems/reef_shellfish_cuisine.md",
+        "studies/food_systems/breeding_and_trials.md",
+        "studies/food_systems/culinary_evaluation.md",
+        "studies/food_systems/aquatic_checks.json",
+        "studies/food_systems/aquatic_decisions.md"
+      ],
+      "findings": [
+        "Earth evidence provides candidate mechanisms and selectable variation for edible fat, tissue chemistry and food-web-derived foods; lunar culinary novelty remains hypothetical.",
+        "Lunar-cycle, moderate alkaline and carbonate-associated studies require independent light/feed/chemistry/diet contrasts and complete founder life cycles.",
+        "Cooked foods, actual eel/unagi, shellfish and qualified raw candidates have separate product objectives; connected Earth-Terluna biological exchange remains an assumption."
+      ],
+      "unresolved": [
+        "Named founder populations, full methods appraisal where sources were accessed at abstract level, life-stage tolerances and complete reproductive routes.",
+        "Site-resolved environments after reorientation and climate refresh; preserve inherited basin mixing brackets and the unresolved magnesium floor.",
+        "Replicated ecological and multigeneration trials, resource/oxygen budgets, sensory outcomes and product-specific raw/cooked qualification."
+      ],
+      "next_session_task": "Prepare paired founder dossiers and habitat/food-web eligibility for jade perch/tilapia, tilapia/prawn in moderate alkaline water, a carbonate community and a separate closed-life-cycle eel track; then specify pilots. No new global simulations or organism releases have been performed."
     }
   ]
 }

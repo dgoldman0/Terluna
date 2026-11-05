@@ -549,6 +549,18 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
 
 New runs wait on the author's word on the design case at 301 K, and no rented compute is commissioned.
 
+## Aquatic foods, 4 November 2026
+
+The author authorized the [aquatic-food programme](studies/food_systems/aquatic_novelty.md)
+on `domain/food-systems`: lunar-cycle fatty foods, alkaline-water taste chemistry
+and carbonate-community fish/shellfish. The first synthesis and comparative-trial
+design are written. Next are named founder/strain dossiers and site-resolved
+eligibility and food-web budgets, followed by separately justified biological
+trials. Earth founders and genomic-informed selective breeding come first;
+cooked foods, actual eel/unagi and qualified raw products have separate
+objectives. Reuse the aquatic studies with their forcing and mixing limits; the
+pending reoriented climate and coupled circulation remain separate dependencies.
+
 ## Conservation through the transformation
 
 The [conservation study](studies/conservation/README.md) runs two programmes.

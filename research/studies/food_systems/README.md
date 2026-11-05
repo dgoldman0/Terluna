@@ -1,5 +1,19 @@
 # Food systems for the Open Moon
 
+## Aquatic foods: biomes, breeding and cuisine, 4 November 2026
+
+The new [aquatic-food study](aquatic_novelty.md) develops three proposals: lunar-cycle
+energy storage and fatty fish; alkaline habitats and taste-active compounds; and
+carbonate communities, pale fish and shellfish. It connects inherited biome models,
+Earth founder species, genomic-informed selective breeding and separate raw/cooked
+culinary objectives, including unagi. It is a sourced initial synthesis and trial
+design; no new biological results or fishery capacities are claimed. Its
+[environmental basis](aquatic_biomes.md) distinguishes current decisions from older
+model forcing and separately inspected hydrosphere work. The production accounts
+and their numerical products below retain their existing scope.
+
+## Production accounts
+
 This study prices eight ways of growing the lunar design's plant-rich diet for each billion residents, fits each to the
 29.5-day light cycle, and combines them into seven mixes for 4, 6 and 8 billion people. It reads ecology's diets,
 crop-model yields and nutrient targets and resources' phosphorus accounts for the sky and the waters (from their

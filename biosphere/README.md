@@ -73,6 +73,13 @@ signal times, fluid pressure and renewal; one sail tested for stability decides 
 
 ## Remaining biological work
 
+The [aquatic-food programme](../research/studies/food_systems/aquatic_novelty.md),
+opened 4 November 2026, connects aquatic biomes to Earth founder species,
+genomic-informed selective breeding and culinary traits. Its first three
+hypotheses concern cyclic edible fat, alkaline-water taste chemistry and
+carbonate-associated food webs; the study distinguishes literature evidence,
+inherited environmental models and proposed biological trials.
+
 The wider portfolio retains soils, aquatic communities, detrital/subsurface habitats, varied plant architectures, aerial exchange and human developmental requirements. Nutrient compartments, ecological interactions, plant hydraulics, structural support and complete life cycles still need separate models and empirical tests. Megaforests remain one candidate within this scope.
 
 Run `python -m pytest biosphere` and `python -m research.studies.environment_screens.run` from the root. Provisional research sources and their actual access status are in [environment_sources.json](../research/studies/environment_screens/sources.json); older sources and archives remain linked through [archive_status.md](../research/archive_status.md).
