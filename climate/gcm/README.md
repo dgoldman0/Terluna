@@ -4445,7 +4445,33 @@ The seas' and lakes' weight turns the Moon about 8°, and the second set of full
 
 The same step serves a simulation of the build years, at each change of coastline or orientation.
 
-**The run** (`A28R_301k_design_l15_snow_s934_turned`) takes 20 years from the carried restart from 07:10 on 5 November. The design run's watch logs each year without stopping it, since the run keeps the design sunlight wherever it settles. Its years 10–19 are the turned design years. Its first lunar day's zonal tables are finite, with temperatures within 2–3 K of the design run's at the same times of year and cloud re-forming over the new surface.
+**The run** (`A28R_301k_design_l15_snow_s934_turned`) took 20 years from the carried restart, 07:10–10:13 on 5 November. The design run's watch logged each year without stopping it, since the run keeps the design sunlight wherever it settles. Its years 10–19 are the turned design years. Its first lunar day's zonal tables were finite, with temperatures within 2–3 K of the design run's at the same times of year and cloud re-forming over the new surface.
+
+**The turned design years** (`climate.gcm.compare`, the snow work's `drift_check.py`, and `checks_turned.sh` and `turned_years_land.py` in `session-tools/turned_design` on the research drive; the land read as the biome map reads it, its shares on the design years reproducing `design_years.json`'s). The run settles near 301.7 K, where its imbalance reaches +0.02 ± 0.08 W/m² at a feedback of 1.63 W/m² per K, and its last year stands at 301.72 K and −0.04 W/m². Within years 10–19 its land still warms 0.18 K, its sea 0.26 K and its air's vapour 2.5%.
+
+| | Design years (10–19) | Turned design years (10–19) |
+|---|---|---|
+| Ground (K) | 300.84 | 301.64 |
+| Sea surface; air over land (K) | 302.7; 299.9 | 303.4; 300.7 |
+| Top-of-atmosphere balance (W/m²) | −0.21 | +0.11 |
+| Planetary albedo | 0.401 | 0.398 |
+| Clouds' effect: sunlight, infrared, net (W/m²) | −48.9, +46.6, −2.3 | −48.2, +47.5, −0.7 |
+| Cloud cover | 0.371 | 0.376 |
+| Rain: globe, land (mm/day) | 2.00, 2.30 | 2.02, 2.26 |
+| Water vapour (kg/m²) | 286 | 305 |
+| Coldest, warmest 3-day mean anywhere (K) | 292.4, 308.1 | 293.6, 309.3 |
+| Land under 0.5 mm/day of rain (share) | 0.302 | 0.327 |
+| Land by aridity: hyper-arid, arid, semi-arid, dry sub-humid, humid | 0.042, 0.191, 0.251, 0.094, 0.422 | 0.026, 0.201, 0.271, 0.078, 0.425 |
+
+- **Warmer, mostly through the clouds.** The turned years stand 0.80 K above the design years and 0.39 K above the 301.25 K target that the design years sat 0.41 K below. The clouds' net cooling weakens by 1.6 W/m²: they reflect 0.7 W/m² less sunlight, most of the 0.003 fall in planetary albedo, and hold 0.9 W/m² more infrared as the air holds 7% more vapour. The turn takes about half a million km² of sea out of the caps poleward of 60°, whose land grows from 3.50 to 4.01 million km², and some out of the equatorial band, and adds it at 10–60°.
+- **The drylands keep their share and move.** Land below an aridity of 0.65 holds 57.5% of the land against 57.8%, but its extremes narrow: hyper-arid and dry sub-humid land each shrink by 1.6 points, while arid and semi-arid land together grow from 44.2% to 47.1% (single years 0.453–0.499 against 0.439–0.464). The near side's north wets as its seas and coasts move toward the equator: the land at 10–30° N rains 4.05 mm/day against 3.14 and at 30–60° N 1.48 against 1.10, Mare Imbrium's water 336 mm a year against 145, and Mare Tranquillitatis's land 1,904 mm against 1,554 with 0.41 m of soil water against 0.35. The southern highlands dry as they move poleward: the land at 30–60° S rains 1.15 mm/day against 1.56, Tycho's ground, now at 52.6° S, takes 326 mm a year against 1,104 and turns from humid to dry sub-humid, and the dry south-east block turns from semi-arid to arid at 104 mm against 252. The north's drylands fall from 64% of its land to 60% and the south's rise from 52% to 55%; about 2 million km² of ground turns from dry to humid and about as much the other way. The land box at 0° E keeps its rain (2,504 mm a year against 2,548), and the Near-side Sea box's water loses a fifth (310 against 385).
+- **Jura.** Its two land cells, the same ground moved from 47.1° and 41.5° N to 41.5° and 36.0° N, rain 481 and 741 mm a year against 517 and 488. The high cell stays dry sub-humid at an aridity of 0.50 against 0.60, and the low one becomes humid at 0.69 against 0.51. Nine tenths of their rain falls at night (against 94–96%), the regime in which the GCM out-rains CM1 most. Their air averages 29.9–30.1 °C against 29.2–29.6, and the hottest 3-day air reaches 33.3–33.7 °C against 32.4–33.0.
+
+**The checks** (`checks_turned.sh`).
+- **The longwave.** On years 5, 9, 14 and 19 the l15_design correction leaves largest layer means of 2.52, 2.73, 3.38 and 3.56 W/m², against the 2.5 W/m² rule ([longwave_check_A28R_301k_design_l15_snow_s934_turned.json](../results/gcm/longwave_check_A28R_301k_design_l15_snow_s934_turned.json)). Each is at sea in the fourth layer from the ground, where PlaSim's own error on year 19's cloud-free columns is 0.29 W/m², so the correction fitted on the bridge's columns overshoots there; year 19's land columns of every kind reach 2.64 in the same layer. On the design years that layer stayed within 1.73. The clear-sky outgoing longwave's error, PlaSim less correlated-k, moves from −0.1 to −0.8 W/m² on the design run's year 19 to +0.5 to +1.1 W/m² on the turned run's. By the rule of "The longwave refit" (above), the turned climate takes a refit of its own before a design run on the turned geography. One fitted offline on year 19's cloud-free columns ([longwave_A28R_301k_design_l15_snow_s934_turned_refit.json](../results/gcm/longwave_A28R_301k_design_l15_snow_s934_turned_refit.json); `plasim_longwave refit`) leaves 0.06–0.14 W/m² on them and 1.02–1.11 W/m² on columns of every kind. At year 19's state it lowers the outgoing longwave by 1.03 W/m² against the run's correction, 0.96 over land and 1.13 over the sea (the snow work's `refit_forcing.py`). With the ground's own offset (S** = 0.9312 by the rule of 31 October, `corrected_sunlight.py`), a design run on the turned geography with the refit would take sunlight near 0.926, a first-order estimate; the refit waits for that run.
+- **The exobase.** The turned years' top level holds 167.0–167.4 K and 0.042–0.047 ppmv of vapour, against the design years' 166.2–166.5 K and 0.036–0.039 ppmv, inside the 0.02–0.07 ppm of the middle atmosphere's cold trap, and their ground lies within 268–308 K. The exobase stays inside the bracket the middle atmosphere's cases computed.
+
+**Limits.** The turned design years carry the design years' limits, their longwave correction beyond its rule, and 0.2 K of warming still inside them.
 
 ```sh
 T=/media/projectspace/terluna-research/session-tools/turned_design
@@ -4458,6 +4484,8 @@ $T/run_base.sh                                                                  
     $R/A28R_301k_design_l15_snow_s934_turned_base/model/MOST_REST.00000 $T/carried_MOST_REST.00019 \
     --frame climate/results/gcm/turned_surface_8d71fd350ca4c6cd.json
 $T/run_turned.sh                                                                  # twenty years, watched; RESUME=1 resumes
+$T/checks_turned.sh             # drift, settling, the comparison, the longwave on years 5, 9, 14 and 19, and the land; about 4 minutes
+$T/prep_refit.sh                # the longwave refit on year 19, the escape it changes and the sunlight; no run
 python3 -m pytest climate/tests/test_turned.py climate/tests/test_carry.py      # 13 tests
 ```
 
