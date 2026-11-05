@@ -4426,6 +4426,41 @@ RESUME=1 YEARS=20 SUNLIGHT=0.934 START=$R/$B/model/MOST_REST.00005 $S/run_design
 # branch with domain/atmosphere's drops.py (session-tools/cold_cloud_massman/; its log and product there)
 ```
 
+#### The turned design run (5 November)
+
+The seas' and lakes' weight turns the Moon about 8°, and the second set of full simulations runs on the turned Moon at the elastic state (main's register, 4 November; `research/studies/moon_orientation/`). The turned design run keeps the design run's configuration, its convection and its sunlight of 0.934 included, so that its differences from the design run come from the turn alone (main's register, 5 November).
+
+**The turned surface** ([turned.py](turned.py); [turned_surface_8d71fd350ca4c6cd.json](../results/gcm/turned_surface_8d71fd350ca4c6cd.json)). The lakes surface this builder makes is carried into the frame of domain/geology's orientation product (`geology/results/moon_orientation.json` at 45c3d817). Each atlas cell of the turned frame takes the mean of nine points read where they stood before the turn, then the grids are averaged as `boundary.py` averages them. The ground and its water turn with the crust; the water level, the lakes' levels and the heights stay today's, on the dry Moon's geoid, until the atlas work folds in the water's own gravity and the crust's sag (main's register, 4 November). The water's share holds at 0.38342 against today's 0.38341, and geology's named places land within 0.004° of its own turned coordinates. On the T21 grid PlaSim's mask makes 667 cells water against today's 734, at nearly the same share (land 0.6160 against 0.6162), because the water now lies nearer the equator, where the Gaussian cells are larger. The land's share of the band 10° S to the equator rises from 0.49 to 0.55, of 50–60° N from 0.57 to 0.70 and of the southern polar cap from 0.57 to 0.83, while the South Pole–Aitken sea's centre moves from 53° S to 45° S.
+
+**The frame in the runner.** `--frame` takes a turned surface's record. The run reads that surface in place of today's, and the spin axis's tilt to the ecliptic for the elastic state, 1.613° against today's 1.542°. Both enter the configuration only with the switch, so no other run's key moves.
+
+**Today's source.** One year of the design run rerun from its year-9 restart on today's shared PlaSim source, with every refinement patch at its default, is identical to the design run's year 10 in all 91 variables of its year file and all 185 records of its restart (`session-tools/turned_design/compare_source_check.out` on the research drive). The patches added since the design run leave the design scheme's model unchanged.
+
+**The start** ([carry.py](carry.py)). A PlaSim restart carries the land-sea mask and the orography: `plasim.f90` reads `dls` from it, and the land, ocean and ice modules read theirs. A run on a new coastline therefore starts either afresh or from a restart whose surface is the new one. A fresh start from ExoPlaSim's own state, 250 K with the seas mostly frozen, would need about 45 years to give ten settled years ("How long a cold start takes", above). It would also begin from a state the Moon never passes through. `carry.py` builds the second kind of restart instead.
+- **From PlaSim.** One lunar day of a fresh start on the turned surface (`A28R_301k_design_l15_snow_s934_turned_base`) supplies everything PlaSim derives from a surface: the three masks, the grid and spectral orography, the ground's geopotential, the runoff's velocities and the surface climatologies.
+- **From the design run.** The design run's year-19 restart supplies the clock, the atmosphere's spectral state and cloud as they stand, and every surface field moved with the ground. Each cell takes the value of the old surface's nearest cell of its own kind, land or water, to where the cell stood before the turn.
+- **What moved.** 234 cells turn from land to water and 301 from water to land. The values travel 7.4° on average, about the turn itself, and at most 17.7°. The sea's mean temperature is 302.53 K against 302.49, the land's ground 299.91 K against 299.90, and the soil's water 0.101 m against 0.107.
+- **The atmosphere.** It keeps its longitudes, which stay tied to the Sun, and finds the new orography under its surface pressure at the first step, as PlaSim's own fresh start does with its uniform pressure.
+- **Its tests.** Every record has one rule. On the same surface without a turn the climate is carried unchanged, and the design run's restart carried onto itself is byte for byte the same. Values move with the ground to cells of their own kind.
+
+The same step serves a simulation of the build years, at each change of coastline or orientation.
+
+**The run** (`A28R_301k_design_l15_snow_s934_turned`) takes 20 years from the carried restart from 07:10 on 5 November. The design run's watch logs each year without stopping it, since the run keeps the design sunlight wherever it settles. Its years 10–19 are the turned design years. Its first lunar day's zonal tables are finite, with temperatures within 2–3 K of the design run's at the same times of year and cloud re-forming over the new surface.
+
+```sh
+T=/media/projectspace/terluna-research/session-tools/turned_design
+R=/media/projectspace/terluna-research/gcm-runs
+<climate venv>/bin/python -m climate.gcm.turned <domain/geology checkout>/geology/results/moon_orientation.json \
+    --source domain/geology@45c3d817:geology/results/moon_orientation.json        # the turned surface and its record
+$T/run_source_check.sh && <climate venv>/bin/python $T/compare_source_check.py    # a year of the design run, bit for bit
+$T/run_base.sh                                                                    # a lunar day of a fresh start on it
+<climate venv>/bin/python -m climate.gcm.carry $R/A28R_301k_design_l15_snow_s934/model/MOST_REST.00019 \
+    $R/A28R_301k_design_l15_snow_s934_turned_base/model/MOST_REST.00000 $T/carried_MOST_REST.00019 \
+    --frame climate/results/gcm/turned_surface_8d71fd350ca4c6cd.json
+$T/run_turned.sh                                                                  # twenty years, watched; RESUME=1 resumes
+python3 -m pytest climate/tests/test_turned.py climate/tests/test_carry.py      # 13 tests
+```
+
 #### The hollows' store in PlaSim's land (3 November, second pass the same day)
 
 PlaSim holds each land cell's water in one bucket of 0.5 m that sheds water only when full, so on the design years the drylands return all their rain to the air. The storm-water study on `domain/hydrosphere` (`research/studies/storm_water/`) worked out offline what their storms do instead: runoff from the slopes, water standing in the hollows, seepage through the hollows' floors. Its leverage passed the plan's thresholds on the loams under both storm libraries and on every surface under CM1's storms, through the water the hollows send into the ground. Stage (b) of the plan puts that water's path into PlaSim's land behind a switch, with the three floor designs and the four slope surfaces as ranges. The first build read each step's rain as a storm of its own, filled the hollows by their capacity and started the store empty; the second pass reads the rain as the storm library's storms, fills the hollows by their own inflow and starts the store balanced. It is built and checked offline; no PlaSim step has run with it.
