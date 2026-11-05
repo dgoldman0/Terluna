@@ -2135,7 +2135,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
                   cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
                   free_convection=None, mixing_length=None, boundary_layer=None, large_scale_condensate=None,
-                  humidity_mean=False, surface_gust=None, rain_drops=None, snow=None, land_store=None):
+                  humidity_mean=False, surface_gust=None, rain_drops=None, snow=None, land_store=None, frame=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces the
     air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and twilight
     (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the ledger
@@ -2164,7 +2164,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     and the floor, surface, library and hollows, adds the hollows' store to the drylands' land
     (land_store.setting; with the 10 m wind, which its pools' evaporation reads). Each is recorded when given, and left out the
     configuration is the one every earlier run had; the 294.9 K ledger without the clear share records the twilight as
-    the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did."""
+    the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did. frame, a
+    turned surface's record (turned.py), runs the turned Moon: that record's surface in place of today's and its spin
+    axis's tilt to the ecliptic (frame_setting); left out, the Moon stands as it does today."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -2246,6 +2248,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
                gases_bar=dict(pN2=n2_ar / (1 + AR_PER_N2), pO2=O2_PA / 1e5, pAr=n2_ar * AR_PER_N2 / (1 + AR_PER_N2),
                               pCO2=co2))
+    if frame is not None:
+        cfg['frame'] = frame_setting(frame, exp)
+        cfg['planet']['obliquity'] = cfg['frame']['tilt_deg']
     if level_set != lv.DEFAULT:
         cfg['levels'] = dict(name=level_set, half_levels=[float(x) for x in half],
                              full_levels=[float(x) for x in lv.full_levels(half)],
@@ -2456,12 +2461,35 @@ def surface_product(water, lakes):
     return f'moon_{water}pct_water_gaussian_T21.nc'
 
 
+def frame_setting(record, exp) -> dict:
+    """The turned Moon a run takes from a turned surface's record (turned.py; turned_surface_<frame>.json in
+    ../results/gcm): the T21 surface it names, which must be built from the experiment's own lakes and stand in
+    PRODUCTS as the record wrote it, and the spin axis's tilt to the ecliptic in that frame. The record's sha256 and the
+    surface's go into the configuration, so the run key follows them."""
+    from climate.gcm import turned
+    path = Path(record) if Path(record).is_absolute() else ROOT / record
+    r = json.loads(path.read_text())
+    if r.get('schema') != turned.SCHEMA:
+        raise ValueError(f'{path} is not a {turned.SCHEMA} record')
+    if not exp.get('lakes') or not r['surface'].startswith(f"moon_{exp['water']}pct_water_lakes_{exp['lakes']}_turned_"):
+        raise ValueError(f"{path} turns another surface than the experiment's ({exp['water']}% water, lakes "
+                         f"{exp.get('lakes')})")
+    surface = PRODUCTS / r['surface']
+    if not surface.is_file() or hashlib.sha256(surface.read_bytes()).hexdigest() != r['files'][r['surface']]:
+        raise ValueError(f'{surface} is missing or differs from its record; rebuild it with python -m climate.gcm.turned')
+    return dict(record=str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path),
+                sha256=hashlib.sha256(path.read_bytes()).hexdigest()[:16], surface=r['surface'],
+                surface_sha256=r['files'][r['surface']][:16], state=r['frame']['state'],
+                tilt_deg=float(r['frame']['tilt_to_ecliptic_deg']))
+
+
 def surface_files(cfg, folder: Path):
     """Land mask (code 172) and surface geopotential (code 129) at T21 from the geography product. With
-    lakes, the water share is the product's (seas and lakes) and water cells stand at their water surface."""
+    lakes, the water share is the product's (seas and lakes) and water cells stand at their water surface; with a
+    frame, the product is the turned surface it names (frame_setting)."""
     import netCDF4
     lakes = cfg.get('lakes', False)
-    name = surface_product(cfg['water'], lakes)
+    name = cfg['frame']['surface'] if 'frame' in cfg else surface_product(cfg['water'], lakes)
     with netCDF4.Dataset(PRODUCTS / name) as d:
         land = np.asarray(d['land_fraction'][:], dtype=float)
         height = np.asarray(d['land_elevation_m'][:], dtype=float)
@@ -3013,7 +3041,8 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         levels: str | None = None, free_convection: str | None = None, mixing_length: str | None = None,
         boundary_layer: str | None = None, large_scale_condensate: str | None = None,
         humidity_mean: bool = False, surface_gust: str | None = None, rain_drops: str | None = None,
-        snow: str | None = None, pieces: int = 0, workers: int = 2, land_store: dict | None = None) -> int:
+        snow: str | None = None, pieces: int = 0, workers: int = 2, land_store: dict | None = None,
+        frame: str | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
@@ -3021,7 +3050,8 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
                         moisture=moisture, convection=convection, levels=levels, free_convection=free_convection,
                         mixing_length=mixing_length, boundary_layer=boundary_layer,
                         large_scale_condensate=large_scale_condensate, humidity_mean=humidity_mean,
-                        surface_gust=surface_gust, rain_drops=rain_drops, snow=snow, land_store=land_store)
+                        surface_gust=surface_gust, rain_drops=rain_drops, snow=snow, land_store=land_store,
+                        frame=frame)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -3278,6 +3308,10 @@ def main(argv=None) -> int:
                              "slopes shed runoff as the storm library's storms into a store of their hollows' water, "
                              "which evaporates at the pools' own rate and seeps into a slow store (land_store.py; "
                              'LAND_STORE_PATCHES; needs --wind10 and every --land-store-* option; part of the run key)')
+    parser.add_argument('--frame', metavar='RECORD',
+                        help="a turned surface's record (turned.py; climate/results/gcm/turned_surface_<frame>.json): "
+                             "the Moon turned into that frame, its surface in place of today's and the spin axis's "
+                             'tilt to the ecliptic for that state (frame_setting; part of the run key)')
     parser.add_argument('--land-store-floor', choices=lsf.FLOORS, help="the hollows' floor design")
     parser.add_argument('--land-store-surface', choices=lsf.SURFACES, help="the slopes' surface")
     parser.add_argument('--land-store-library', choices=lsf.LIBRARIES,
@@ -3382,7 +3416,7 @@ def main(argv=None) -> int:
                None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean,
                None if args.surface_gust == 'none' else args.surface_gust,
                None if args.rain_drops == 'none' else args.rain_drops, None if args.snow == 'none' else args.snow,
-               args.convert_pieces, args.convert_workers, land_store)
+               args.convert_pieces, args.convert_workers, land_store, args.frame)
 
 
 if __name__ == '__main__':

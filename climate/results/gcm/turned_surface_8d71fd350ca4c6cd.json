@@ -1,0 +1,398 @@
+{
+ "schema": "terluna.climate.gcm-turned-surface/1",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/turned.py": "0048cd6ac13ab7e9",
+   "gcm/boundary.py": "b7dc76a6681c5334"
+  }
+ },
+ "inputs": {
+  "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693",
+  "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f8899bd4f5d712445f78c8882c85a1bc30bf631ac9dd14ab1c03",
+  "domain/geology@45c3d817:geology/results/moon_orientation.json": "8d71fd350ca4c6cd2e1c6766478543708b537a51c62f42d6a4bafb907a446ba3"
+ },
+ "frame": {
+  "state": "elastic",
+  "rotation_today_to_turned": [
+   [
+    0.9846855719087231,
+    0.10503940127938541,
+    0.13914398533051775
+   ],
+   [
+    -0.10834127436348502,
+    0.9939792870708228,
+    0.016350692446348673
+   ],
+   [
+    -0.13658877239395323,
+    -0.03117532763335884,
+    0.990137165347744
+   ]
+  ],
+  "north_pole": {
+   "lat_deg": 81.94628788358153,
+   "lon_deg": -167.14292426123106
+  },
+  "sub_earth_point": {
+   "lat_deg": 7.998315406406375,
+   "lon_deg": 6.088889089043695
+  },
+  "pole_move_deg": 8.054,
+  "tilt_to_ecliptic_deg": 1.613
+ },
+ "samples_per_axis": 3,
+ "routing_run": "A28_dim5_moon",
+ "surface": "moon_28pct_water_lakes_98842fc2a648f889_turned_8d71fd350ca4c6cd_gaussian_T21.nc",
+ "files": {
+  "moon_28pct_water_lakes_98842fc2a648f889_turned_8d71fd350ca4c6cd_regular_4x5.nc": "7740f8d74e312fafcec62ffbd8e8dbfb9411c020aba6d132d1f14713d4fb24bc",
+  "moon_28pct_water_lakes_98842fc2a648f889_turned_8d71fd350ca4c6cd_regular_2x2.5.nc": "591741aef0df05056a3f656545ac3498b0cf34d5d1aae7bc6c30a0a1c633b5dd",
+  "moon_28pct_water_lakes_98842fc2a648f889_turned_8d71fd350ca4c6cd_gaussian_T21.nc": "ec076b73255d638f3c7ae0365a8fd6ac5d3dcdad342ac6f4ffd6ae5a84c55050",
+  "moon_28pct_water_lakes_98842fc2a648f889_turned_8d71fd350ca4c6cd_gaussian_T42.nc": "8467adf8555518bbfce02ad542d69aa17a9aa7e064db692d080b95a04b3f6ae3"
+ },
+ "shares": {
+  "today": {
+   "seas": 0.27999928623479153,
+   "lakes": 0.10340689683080045,
+   "water": 0.383406183065592
+  },
+  "turned": {
+   "seas": 0.2800049262754514,
+   "lakes": 0.10341478603898424,
+   "water": 0.38341971231443567
+  }
+ },
+ "t21": {
+  "turned": {
+   "water_share": 0.3834197121094465,
+   "mask_land_share": 0.6159989537208409,
+   "mask_water_cells": 667,
+   "cells": 2048
+  },
+  "today": {
+   "water_share": 0.3834061829476184,
+   "mask_land_share": 0.6162376229868974,
+   "mask_water_cells": 734
+  }
+ },
+ "land_by_band": {
+  "today": [
+   {
+    "band": "-90 to -80",
+    "land": 0.5707
+   },
+   {
+    "band": "-80 to -70",
+    "land": 0.5867
+   },
+   {
+    "band": "-70 to -60",
+    "land": 0.6538
+   },
+   {
+    "band": "-60 to -50",
+    "land": 0.6149
+   },
+   {
+    "band": "-50 to -40",
+    "land": 0.688
+   },
+   {
+    "band": "-40 to -30",
+    "land": 0.6696
+   },
+   {
+    "band": "-30 to -20",
+    "land": 0.6736
+   },
+   {
+    "band": "-20 to -10",
+    "land": 0.6163
+   },
+   {
+    "band": "-10 to +0",
+    "land": 0.4923
+   },
+   {
+    "band": "+0 to +10",
+    "land": 0.5988
+   },
+   {
+    "band": "+10 to +20",
+    "land": 0.5666
+   },
+   {
+    "band": "+20 to +30",
+    "land": 0.5975
+   },
+   {
+    "band": "+30 to +40",
+    "land": 0.5594
+   },
+   {
+    "band": "+40 to +50",
+    "land": 0.6383
+   },
+   {
+    "band": "+50 to +60",
+    "land": 0.5696
+   },
+   {
+    "band": "+60 to +70",
+    "land": 0.7969
+   },
+   {
+    "band": "+70 to +80",
+    "land": 0.8689
+   },
+   {
+    "band": "+80 to +90",
+    "land": 0.8355
+   }
+  ],
+  "turned": [
+   {
+    "band": "-90 to -80",
+    "land": 0.8327
+   },
+   {
+    "band": "-80 to -70",
+    "land": 0.6994
+   },
+   {
+    "band": "-70 to -60",
+    "land": 0.6703
+   },
+   {
+    "band": "-60 to -50",
+    "land": 0.6625
+   },
+   {
+    "band": "-50 to -40",
+    "land": 0.6764
+   },
+   {
+    "band": "-40 to -30",
+    "land": 0.5951
+   },
+   {
+    "band": "-30 to -20",
+    "land": 0.5785
+   },
+   {
+    "band": "-20 to -10",
+    "land": 0.6042
+   },
+   {
+    "band": "-10 to +0",
+    "land": 0.5508
+   },
+   {
+    "band": "+0 to +10",
+    "land": 0.5829
+   },
+   {
+    "band": "+10 to +20",
+    "land": 0.5214
+   },
+   {
+    "band": "+20 to +30",
+    "land": 0.5403
+   },
+   {
+    "band": "+30 to +40",
+    "land": 0.5444
+   },
+   {
+    "band": "+40 to +50",
+    "land": 0.5972
+   },
+   {
+    "band": "+50 to +60",
+    "land": 0.7023
+   },
+   {
+    "band": "+60 to +70",
+    "land": 0.8917
+   },
+   {
+    "band": "+70 to +80",
+    "land": 0.8948
+   },
+   {
+    "band": "+80 to +90",
+    "land": 0.8139
+   }
+  ]
+ },
+ "places": [
+  {
+   "place": "Jura Island's centre (the CM1 box)",
+   "today": [
+    45.0,
+    -36.1
+   ],
+   "turned": [
+    39.426,
+    -36.962
+   ],
+   "product_turned": [
+    39.43,
+    -36.96
+   ]
+  },
+  {
+   "place": "Mare Imbrium",
+   "today": [
+    34.7,
+    -14.9
+   ],
+   "turned": [
+    27.499,
+    -18.871
+   ],
+   "product_turned": [
+    27.5,
+    -18.87
+   ]
+  },
+  {
+   "place": "Mare Serenitatis",
+   "today": [
+    27.3,
+    18.4
+   ],
+   "turned": [
+    19.282,
+    11.919
+   ],
+   "product_turned": [
+    19.28,
+    11.92
+   ]
+  },
+  {
+   "place": "Mare Tranquillitatis",
+   "today": [
+    8.3,
+    30.8
+   ],
+   "turned": [
+    0.633,
+    24.452
+   ],
+   "product_turned": [
+    0.63,
+    24.45
+   ]
+  },
+  {
+   "place": "Apollo 11",
+   "today": [
+    0.674,
+    23.473
+   ],
+   "turned": [
+    -7.241,
+    17.404
+   ],
+   "product_turned": [
+    -7.24,
+    17.4
+   ]
+  },
+  {
+   "place": "Copernicus",
+   "today": [
+    9.6,
+    -20.1
+   ],
+   "turned": [
+    2.821,
+    -25.781
+   ],
+   "product_turned": [
+    2.82,
+    -25.78
+   ]
+  },
+  {
+   "place": "Tycho",
+   "today": [
+    -43.3,
+    -11.2
+   ],
+   "turned": [
+    -50.548,
+    -21.13
+   ],
+   "product_turned": [
+    -50.55,
+    -21.13
+   ]
+  },
+  {
+   "place": "Korolev",
+   "today": [
+    -4.2,
+    -157.4
+   ],
+   "turned": [
+    3.738,
+    -163.561
+   ],
+   "product_turned": [
+    3.74,
+    -163.56
+   ]
+  },
+  {
+   "place": "Hertzsprung",
+   "today": [
+    1.4,
+    -128.7
+   ],
+   "turned": [
+    7.694,
+    -134.454
+   ],
+   "product_turned": [
+    7.69,
+    -134.45
+   ]
+  },
+  {
+   "place": "Chang'e 4",
+   "today": [
+    -45.44,
+    177.6
+   ],
+   "turned": [
+    -37.637,
+    173.219
+   ],
+   "product_turned": [
+    -37.64,
+    173.22
+   ]
+  },
+  {
+   "place": "South Pole-Aitken sea's centre",
+   "today": [
+    -53.0,
+    -169.0
+   ],
+   "turned": [
+    -44.95,
+    -174.877
+   ],
+   "product_turned": [
+    -44.95,
+    -174.88
+   ]
+  }
+ ],
+ "evidence": "A calculation: the lakes surface of boundary.py carried into the turned Moon's elastic frame by domain/geology's rotation and averaged onto the GCM grids; the water level, the lakes' levels and the heights are today's, on the dry Moon's geoid.",
+ "reading_rule": "shares are of the Moon's surface on the atlas's 4 pixel/degree grid, today and turned; t21 gives the T21 files' water share and the binary mask PlaSim runs; land_by_band the land's share of each 10\u00b0 band on the T21 grid, today's latitudes and the turned Moon's; places compares this module's rotation with the orientation product's own turned coordinates; the runner's frame reads surface and frame.tilt_to_ecliptic_deg."
+}
