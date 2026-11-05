@@ -1,0 +1,4813 @@
+{
+ "schema": "terluna.provisioning.energy-options/1",
+ "producer": {
+  "domain": "provisioning",
+  "files": {
+   "provisioning/energy_options.py": "52cbb8324d90a36e550e4a248de0a745c506785e3e3fd4afd2fe8b67eaaffeba",
+   "provisioning/power.py": "a511e7ec84587dc5ab0dd42350984dcd31a99abda9d15b5940bc35c88dbad015",
+   "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
+  },
+  "inputs": {
+   "provisioning/results/energy_climate.json": "58e4fab4dff9829435c2d4c7a36aa8b9ac0119814d563f08ef30186623847234",
+   "provisioning/results/power.json": "feaf183975d0cc83466664a0688af5e8e05cd5dcc8dfa161c80527f8e875f01b",
+   "provisioning/results/first_screen.json": "7696e01a81a9d460000b0289a8476d24e2ad115b2bee41b66de744de1d522701",
+   "research/studies/domain_synthesis/results/ledgers.json": "927139677db8089c389acbe0c6b79dc1655b6c27b53ec848397eff34d59b75bc",
+   "research/studies/heat_levers/results/heat_levers.json": "f62616be5183d796947fc751a7b43890980a22fcc6aa616e379fde2c553921ed",
+   "shared/scenarios/water.json": "876ac34f925302e2b8e73555ece37dfc0560e0551674a4a6a810abd8909b5f6f",
+   "climate/results/crm/ring_ring_equator.json": "7da8c01d24121e32712fd94a00ea03f1b212a39bed21b7a54b3a4a61707a72c8",
+   "climate/results/crm/ring_ring_45n_lsw.json": "608921535125ea8ce92a83f49c550f06d1118a5f389b6426d7dc9925d98e62cc",
+   "climate/results/crm/ring_ring_45s_lsw.json": "fe6782e258b2da561ddfd1f01f5a47b8ad8605f9d02f8b2897613f9f6b918d38",
+   "climate/results/crm/ring_ring_80n_lsw.json": "135b346ce4def45f7debfd52be7c992c507bb41821204406438c333aa168eedf",
+   "climate/results/crm/ring_ring_80s_lsw.json": "ec69fbfb38c74c73830a5f5b204f223e762bf5e4818c485081a5c32d5e445f99"
+  },
+  "sources": {
+   "provisioning/energy_options_sources.json": "1d70022e869bfc3fb1f50d5c9750d16a31465b8283ab5b0b5479647ab3827427"
+  },
+  "constants": {
+   "AVOGADRO": 6.02214076e+23,
+   "BOLTZMANN": 1.380649e-23,
+   "EARTH_GM": 398600441800000.0,
+   "EARTH_RADIUS": 6371000.0,
+   "ELEMENTARY_CHARGE": 1.602176634e-19,
+   "GAS_CONSTANT": 8.31446261815324,
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_EQUATOR_TO_ECLIPTIC_DEG": 1.5424,
+   "MOON_GM": 4902800118000.0,
+   "MOON_ORBIT_INCLINATION_DEG": 5.145,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "SOLAR_CONSTANT": 1361.0,
+   "SPEED_OF_LIGHT": 299792458.0,
+   "STANDARD_ATMOSPHERE": 101325.0,
+   "SYNODIC_MONTH_DAYS": 29.53059
+  }
+ },
+ "evidence": "Arithmetic on committed products, one-dimensional gaseous absorption (ITU-R P.676-13 Annex 1, the power screen's model, reproduced against ITU-R Study Group 3's Earth values) through prescribed clear-sky columns, and means of the design run's own sunlight, cloud and winds. Published values are labelled with their sources and how far each was read; recalled values, estimates and design guesses are labelled as such. No plant, store, beam, grid or line is designed or simulated, and nothing here is validated against a built system.",
+ "reading_rule": "Pairs are [low-cost end, high-cost end] of C' with the food blend, as the domain synthesis gives them; where an option's own range is wide its low end goes with the low-cost loads and its high end with the high-cost loads, so a pair spans both. 'Per TW' means per terawatt delivered to the loads. Heat is what the option leaves on the Moon beyond the sunlight it would have absorbed anyway, at an efficacy of 1 as the climate targets take it; a point of dimming is 1% of the hot world's absorbed sunlight, 225.4 W/m2. Land in km2; storage in TWh delivered; masses in Mt or Gt.",
+ "assumptions": {
+  "collector_conversion": {
+   "value": [
+    0.2,
+    0.3
+   ],
+   "kind": "project",
+   "basis": "the climate targets' and heat-levers study's 20-30% for collectors on dimmed light"
+  },
+  "rectenna_peak_w_m2": {
+   "value": 230.0,
+   "kind": "project",
+   "basis": "the 1978 reference's peak, as the synthesis fills the ground's patches"
+  },
+  "receiver_buffer": {
+   "value": 1.25,
+   "kind": "project",
+   "basis": "the power screen's ground closed round each patch to the public 10 W/m2, a quarter more"
+  },
+  "rectenna_areal_kg_m2": {
+   "value": [
+    5.0,
+    20.0
+   ],
+   "kind": "design guess",
+   "basis": "a ground rectenna of mesh, dipoles and footings; the 1978 reference used steel panels on continuous concrete footings, not quantified here"
+  },
+  "sps_kg_per_kw": {
+   "value": 10.0,
+   "kind": "published",
+   "basis": "the 1978 reference satellite, about 5e4 t for 5 GW delivered (OTA 1981 summary, from a search snippet; not read in full); thin-film tiles would be lighter"
+  },
+  "line_raised": {
+   "value": [
+    0.97,
+    0.98
+   ],
+   "kind": "estimate",
+   "basis": "a raised receiver: conductor down its tether and a converter, 2-3% in all"
+  },
+  "raised_heights_km": {
+   "value": [
+    20.0,
+    30.0,
+    40.0
+   ],
+   "kind": "design guess",
+   "basis": "above the storms (tops 22 km, the 0 C level 27-28 km) and the reefs"
+  },
+  "pv_module": {
+   "value": [
+    0.22,
+    0.3
+   ],
+   "kind": "published/estimate",
+   "basis": "22%: commercial wafer modules from 2024 production (Fraunhofer ISE Photovoltaics Report 2025); 30%: an estimate for commercial tandem modules"
+  },
+  "pv_derate": {
+   "value": 0.85,
+   "kind": "estimate",
+   "basis": "temperature, inverter, wiring and soiling together"
+  },
+  "pv_tilt_gain": {
+   "value": [
+    1.0,
+    1.15
+   ],
+   "kind": "estimate",
+   "basis": "tilting or tracking against a flat panel, small in the deep air's diffuse light"
+  },
+  "ground_cover_ratio": {
+   "value": [
+    0.4,
+    0.7
+   ],
+   "kind": "estimate",
+   "basis": "panel area over the land a plant occupies"
+  },
+  "pv_albedo": {
+   "value": [
+    0.05,
+    0.1
+   ],
+   "kind": "estimate",
+   "basis": "glass-faced modules with their frames and gaps"
+  },
+  "cloud_reflect_up": {
+   "value": [
+    0.3,
+    0.6
+   ],
+   "kind": "estimate",
+   "basis": "the share of light reflected up from the ground that a cloud above sends back down"
+  },
+  "surface_kernel_clear": {
+   "value": 0.34,
+   "kind": "project",
+   "basis": "the heat-levers study's clear-sky kernel at the equator: the Moon reflects 0.34 more of the arriving sunlight for each unit of surface albedo"
+  },
+  "pv_t_per_mwp": {
+   "value": [
+    100.0,
+    130.0
+   ],
+   "kind": "published/estimate",
+   "basis": "modules about 55 t/MWp (Mirletz et al. 2022: 97 Mt for 1.75 TW), mounting steel 60-67 t/MWp and aluminium 6-8 t/MWp (search summaries); Earth mounting, lighter at a sixth g"
+  },
+  "hydrogen_round_trip": {
+   "value": 0.4,
+   "kind": "project",
+   "basis": "Headley & Schoenung 2020, in the power screen"
+  },
+  "fuel_cell": {
+   "value": 0.5,
+   "kind": "project",
+   "basis": "the power screen's electricity per unit of hydrogen's heating value"
+  },
+  "hydrogen_kwh_kg": {
+   "value": 33.3,
+   "kind": "published",
+   "basis": "hydrogen's lower heating value"
+  },
+  "hydrogen_store_density": {
+   "value": 15.0,
+   "kind": "recalled",
+   "basis": "kg/m3 of hydrogen near 20 MPa and 300 K"
+  },
+  "pumped_round_trip": {
+   "value": [
+    0.75,
+    0.8
+   ],
+   "kind": "recalled",
+   "basis": "Earth's pumped hydro"
+  },
+  "pumped_head_m": {
+   "value": 3740.0,
+   "kind": "project",
+   "basis": "Korolev's head, the first screen"
+  },
+  "battery_round_trip": {
+   "value": 0.88,
+   "kind": "recalled",
+   "basis": "lithium-ion packs"
+  },
+  "battery_kwh_kg": {
+   "value": [
+    0.15,
+    0.3
+   ],
+   "kind": "project",
+   "basis": "the power screen's pack specific energy"
+  },
+  "iron_air_round_trip": {
+   "value": [
+    0.4,
+    0.45
+   ],
+   "kind": "published",
+   "basis": "Form Energy target for its 100-hour iron-air system (secondary sources)"
+  },
+  "grid_long_loss": {
+   "value": [
+    0.09,
+    0.19
+   ],
+   "kind": "project",
+   "basis": "the first screen: HVDC 2-3.5% per 1,000 km and 1% a converter over 4,000-5,500 km (US EIA 2018)"
+  },
+  "grid_local_loss": {
+   "value": 0.02,
+   "kind": "estimate",
+   "basis": "local lines and one converter"
+  },
+  "grid_line_gw": {
+   "value": 12.0,
+   "kind": "published",
+   "basis": "Changji-Guquan, 1,100 kV, 12 GW over more than 3,000 km (Hitachi Energy; in sources.json)"
+  },
+  "grid_distance_km": {
+   "value": [
+    4000.0,
+    5500.0
+   ],
+   "kind": "project",
+   "basis": "the first screen's distances to the day side"
+  },
+  "grid_al_t_per_km": {
+   "value": 30.0,
+   "kind": "estimate",
+   "basis": "aluminium for both poles of a 12 GW line at 1,100 kV losing 2.5% per 1,000 km"
+  },
+  "roof_usable_share": {
+   "value": [
+    0.3,
+    0.5
+   ],
+   "kind": "estimate",
+   "basis": "share of roofs and pavements that carries panels"
+  },
+  "grid_peak_transfer": {
+   "value": [
+    0.5,
+    0.7
+   ],
+   "kind": "estimate",
+   "basis": "the share of the ground's load the lines carry at once, the night side's loads with C''s far-side lean"
+  },
+  "grid_row_km": {
+   "value": [
+    0.05,
+    0.1
+   ],
+   "kind": "estimate",
+   "basis": "right of way a line"
+  },
+  "aerial_transmission": {
+   "value": [
+    0.8,
+    0.9
+   ],
+   "kind": "estimate",
+   "basis": "sunlight reaching panels 30 km up, above the cloud and most of the vapour"
+  },
+  "aerial_albedo_below": {
+   "value": 0.4,
+   "kind": "project",
+   "basis": "the design run's planetary albedo (high-cloud product), what panels above the cloud cover"
+  },
+  "aerial_escape": {
+   "value": 0.9,
+   "kind": "estimate",
+   "basis": "share of light reflected at 30 km that leaves the air"
+  },
+  "laser_wall_plug": {
+   "value": [
+    0.5,
+    0.7
+   ],
+   "kind": "published",
+   "basis": "fibre lasers above 50% (IPG) and diode lasers to 71% at 780 nm (2023)"
+  },
+  "laser_capture": {
+   "value": 0.9,
+   "kind": "estimate",
+   "basis": "beam spread and the dense air's turbulence"
+  },
+  "laser_cell": {
+   "value": [
+    0.4,
+    0.65
+   ],
+   "kind": "published/estimate",
+   "basis": "68.9% for a GaAs cell under 858 nm laser light (Fraunhofer ISE 2021), about 20% laser-to-electric at the receiver in the 2025 DARPA POWER record; arrays at high flux between them"
+  },
+  "rayleigh_earth_850nm": {
+   "value": 0.017,
+   "kind": "recalled",
+   "basis": "Earth's Rayleigh optical depth at 850 nm"
+  },
+  "rayleigh_earth_550nm": {
+   "value": 0.097,
+   "kind": "recalled",
+   "basis": "Earth's Rayleigh optical depth at 550 nm"
+  },
+  "optical_other_depth": {
+   "value": [
+    0.05,
+    0.3
+   ],
+   "kind": "estimate",
+   "basis": "water vapour's window absorption and aerosol in the deep, moist column"
+  },
+  "optical_escape": {
+   "value": [
+    0.0,
+    0.5
+   ],
+   "kind": "estimate",
+   "basis": "share of the light lost from the beam that leaves the Moon instead of warming it"
+  },
+  "rx_5_8": {
+   "value": 0.85,
+   "kind": "estimate",
+   "basis": "the 2.45 GHz chain kept at 5.8 GHz; 82% is published for a 5.8 GHz rectenna, 90.6% for Brown 1977 at 2.45 GHz"
+  },
+  "thermal_efficiency_fission": {
+   "value": [
+    0.33,
+    0.45
+   ],
+   "kind": "recalled",
+   "basis": "light-water to advanced reactors"
+  },
+  "heat_per_w_fusion": {
+   "value": [
+    2.0,
+    3.0
+   ],
+   "kind": "project",
+   "basis": "the domain synthesis's fusion plant"
+  },
+  "mev_per_fission": {
+   "value": 200.0,
+   "kind": "recalled",
+   "basis": "energy a fission of U-233"
+  },
+  "thorium_ppm": {
+   "value": [
+    4.0,
+    12.0
+   ],
+   "kind": "published",
+   "basis": "Procellarum KREEP Terrane, Lunar Prospector (Lawrence et al.; search summaries)"
+  },
+  "mev_dt": {
+   "value": 17.6,
+   "kind": "recalled",
+   "basis": "energy a D-T fusion"
+  },
+  "heat_flow_mw_m2": {
+   "value": [
+    14.0,
+    21.0
+   ],
+   "kind": "published",
+   "basis": "Apollo 15 and 17 (Langseth et al. 1976); Siegler & Smrekar 2014 put the internal flow at 9-13 mW/m2"
+  },
+  "geothermal_efficiency": {
+   "value": [
+    0.1,
+    0.15
+   ],
+   "kind": "recalled",
+   "basis": "binary plants on low-grade heat"
+  },
+  "otec_w_m2": {
+   "value": [
+    0.023,
+    0.047
+   ],
+   "kind": "published/estimate",
+   "basis": "Earth's 7-14 TW (Rajagopalan & Nihous 2013) over about 3e14 m2 of warm ocean, carried to the Moon's seas by area alone; their deep water's temperature is open"
+  },
+  "hydro_developable": {
+   "value": [
+    0.3,
+    0.6
+   ],
+   "kind": "estimate",
+   "basis": "share of the rivers' gross power a fleet of plants could take"
+  },
+  "turbine": {
+   "value": 0.85,
+   "kind": "recalled",
+   "basis": "hydro turbine and generator"
+  },
+  "earth_wind_realized_w_m2": {
+   "value": 0.5,
+   "kind": "published",
+   "basis": "US wind farms in 2016 (Miller & Keith 2018)"
+  },
+  "earth_land_wind_power_density_w_m2": {
+   "value": [
+    323.0,
+    410.0
+   ],
+   "kind": "published",
+   "basis": "the Global Wind Atlas's mean power density over its whole area and over the windiest half (Badger et al.; search summary)"
+  },
+  "moon_gust_factor": {
+   "value": [
+    1.0,
+    3.0
+   ],
+   "kind": "estimate",
+   "basis": "instantaneous over 3-day-mean wind cubes; the design run's means lack the gusts"
+  },
+  "food_kcal": {
+   "value": 2500.0,
+   "kind": "project",
+   "basis": "the food studies' diet"
+  },
+  "food_wet_kg": {
+   "value": [
+    0.55,
+    2.0
+   ],
+   "kind": "estimate",
+   "basis": "a person-day shipped dry to fresh"
+  },
+  "phosphorus_kg_person_year": {
+   "value": 0.44,
+   "kind": "project",
+   "basis": "README finding 11: the metropolis passes 44 kt of P a year for 100 million"
+  },
+  "computing_kept": {
+   "value": 0.25,
+   "kind": "project",
+   "basis": "the power screen's millisecond control kept on the Moon"
+  },
+  "aloft_share": {
+   "value": 0.5,
+   "kind": "project",
+   "basis": "C': 4 of the Moon's 8 billion aloft"
+  }
+ },
+ "loads": {
+  "delivered_tw": {
+   "residents": [
+    7.994,
+    23.91
+   ],
+   "food": [
+    7.413,
+    56.32
+   ],
+   "sky_control": [
+    0.2769,
+    2.769
+   ],
+   "sky_hydrogen_remade": [
+    1.708,
+    17.81
+   ],
+   "sky_trips_and_food_lift": [
+    0.07849,
+    0.07849
+   ],
+   "water": [
+    0.0007558,
+    0.02762
+   ],
+   "close_computing": [
+    4.629,
+    4.629
+   ]
+  },
+  "sky_tw": [
+   6.06,
+   32.61
+  ],
+  "ground_tw": [
+   16.04,
+   72.93
+  ],
+  "total_tw": [
+   22.1,
+   105.5
+  ],
+  "intake_factor": 1.376,
+  "rule": "the synthesis's array heat by component over the Earth-service 1.376 W a delivered watt; the towns take their control, hydrogen, trips and the aloft half of the residents"
+ },
+ "basis": {
+  "moon_area_m2": 37930000000000.0,
+  "moon_w_m2_per_tw": 0.02636,
+  "point": {
+   "absorbed_sunlight_w_m2": 225.4,
+   "w_m2": 2.254,
+   "heat_tw": 85.49,
+   "light_at_the_shield_tw": 111.3,
+   "electricity_tw": [
+    22.25,
+    33.38
+   ],
+   "growth_percent": [
+    0.07,
+    0.295
+   ],
+   "land_rain_percent": [
+    0.5501,
+    1.38
+   ]
+  },
+  "absorbing_dimmer_glow_return": {
+   "rolled": 0.1,
+   "night_roll": 0.14,
+   "as_built": 0.25
+  },
+  "resort_dimming_points": [
+   8.182,
+   10.88
+  ],
+  "resort_dimming_light_tw": [
+   910.4,
+   1210.0
+  ],
+  "resort_dimming_electricity_tw": [
+   182.1,
+   363.0
+  ],
+  "resort_dimming_electricity_at_the_lower_conversion_tw": [
+   182.1,
+   242.0
+  ],
+  "beams_now_points": [
+   0.386,
+   1.836
+  ],
+  "tile_electricity_tw": [
+   47.14,
+   224.2
+  ],
+  "planned_dimmer_electricity_tw": [
+   117.1,
+   175.7
+  ]
+ },
+ "air": {
+  "columns": {
+   "1.2 atm, 295 K": {
+    "surface_pressure_pa": 123600.0,
+    "air_column_t_m2": 80.37,
+    "o2_mole_fraction": 0.1746,
+    "rows": {
+     "1_ghz_0_km_90_deg": {
+      "db": 0.219,
+      "vapour_share": 0.006358,
+      "share_lost": 0.04918
+     },
+     "1_ghz_0_km_61.23_deg": {
+      "db": 0.2485,
+      "vapour_share": 0.006381,
+      "share_lost": 0.05561
+     },
+     "1_ghz_0_km_71.19_deg": {
+      "db": 0.2309,
+      "vapour_share": 0.006367,
+      "share_lost": 0.05177
+     },
+     "1_ghz_0_km_30_deg": {
+      "db": 0.4171,
+      "vapour_share": 0.006565,
+      "share_lost": 0.09158
+     },
+     "1_ghz_4_km_90_deg": {
+      "db": 0.1973,
+      "vapour_share": 0.004935,
+      "share_lost": 0.04442
+     },
+     "1_ghz_4_km_61.23_deg": {
+      "db": 0.224,
+      "vapour_share": 0.004953,
+      "share_lost": 0.05026
+     },
+     "1_ghz_4_km_71.19_deg": {
+      "db": 0.2081,
+      "vapour_share": 0.004942,
+      "share_lost": 0.04678
+     },
+     "1_ghz_4_km_30_deg": {
+      "db": 0.3762,
+      "vapour_share": 0.005094,
+      "share_lost": 0.08298
+     },
+     "1_ghz_10_km_90_deg": {
+      "db": 0.1681,
+      "vapour_share": 0.00332,
+      "share_lost": 0.03797
+     },
+     "1_ghz_10_km_61.23_deg": {
+      "db": 0.1908,
+      "vapour_share": 0.003331,
+      "share_lost": 0.04299
+     },
+     "1_ghz_10_km_71.19_deg": {
+      "db": 0.1773,
+      "vapour_share": 0.003324,
+      "share_lost": 0.04
+     },
+     "1_ghz_10_km_30_deg": {
+      "db": 0.3209,
+      "vapour_share": 0.003425,
+      "share_lost": 0.07123
+     },
+     "1_ghz_20_km_90_deg": {
+      "db": 0.1274,
+      "vapour_share": 0.001612,
+      "share_lost": 0.02891
+     },
+     "1_ghz_20_km_61.23_deg": {
+      "db": 0.1446,
+      "vapour_share": 0.001618,
+      "share_lost": 0.03276
+     },
+     "1_ghz_20_km_71.19_deg": {
+      "db": 0.1343,
+      "vapour_share": 0.001615,
+      "share_lost": 0.03046
+     },
+     "1_ghz_20_km_30_deg": {
+      "db": 0.2437,
+      "vapour_share": 0.001663,
+      "share_lost": 0.05456
+     },
+     "1_ghz_30_km_90_deg": {
+      "db": 0.09532,
+      "vapour_share": 0.0006966,
+      "share_lost": 0.02171
+     },
+     "1_ghz_30_km_61.23_deg": {
+      "db": 0.1082,
+      "vapour_share": 0.0006989,
+      "share_lost": 0.02461
+     },
+     "1_ghz_30_km_71.19_deg": {
+      "db": 0.1005,
+      "vapour_share": 0.0006975,
+      "share_lost": 0.02288
+     },
+     "1_ghz_30_km_30_deg": {
+      "db": 0.1827,
+      "vapour_share": 0.0007181,
+      "share_lost": 0.0412
+     },
+     "1_ghz_40_km_90_deg": {
+      "db": 0.07047,
+      "vapour_share": 0.0002555,
+      "share_lost": 0.01609
+     },
+     "1_ghz_40_km_61.23_deg": {
+      "db": 0.08004,
+      "vapour_share": 0.0002563,
+      "share_lost": 0.01826
+     },
+     "1_ghz_40_km_71.19_deg": {
+      "db": 0.07432,
+      "vapour_share": 0.0002558,
+      "share_lost": 0.01697
+     },
+     "1_ghz_40_km_30_deg": {
+      "db": 0.1354,
+      "vapour_share": 0.0002632,
+      "share_lost": 0.03069
+     },
+     "2.45_ghz_0_km_90_deg": {
+      "db": 0.2656,
+      "vapour_share": 0.03167,
+      "share_lost": 0.05932
+     },
+     "2.45_ghz_0_km_61.23_deg": {
+      "db": 0.3015,
+      "vapour_share": 0.03177,
+      "share_lost": 0.06707
+     },
+     "2.45_ghz_0_km_71.19_deg": {
+      "db": 0.28,
+      "vapour_share": 0.0317,
+      "share_lost": 0.06244
+     },
+     "2.45_ghz_0_km_30_deg": {
+      "db": 0.5079,
+      "vapour_share": 0.03256,
+      "share_lost": 0.1104
+     },
+     "2.45_ghz_4_km_90_deg": {
+      "db": 0.2341,
+      "vapour_share": 0.02513,
+      "share_lost": 0.05247
+     },
+     "2.45_ghz_4_km_61.23_deg": {
+      "db": 0.2657,
+      "vapour_share": 0.02521,
+      "share_lost": 0.05935
+     },
+     "2.45_ghz_4_km_71.19_deg": {
+      "db": 0.2468,
+      "vapour_share": 0.02516,
+      "share_lost": 0.05524
+     },
+     "2.45_ghz_4_km_30_deg": {
+      "db": 0.4478,
+      "vapour_share": 0.02585,
+      "share_lost": 0.09797
+     },
+     "2.45_ghz_10_km_90_deg": {
+      "db": 0.1937,
+      "vapour_share": 0.0174,
+      "share_lost": 0.04363
+     },
+     "2.45_ghz_10_km_61.23_deg": {
+      "db": 0.22,
+      "vapour_share": 0.01746,
+      "share_lost": 0.04939
+     },
+     "2.45_ghz_10_km_71.19_deg": {
+      "db": 0.2043,
+      "vapour_share": 0.01742,
+      "share_lost": 0.04595
+     },
+     "2.45_ghz_10_km_30_deg": {
+      "db": 0.3708,
+      "vapour_share": 0.0179,
+      "share_lost": 0.08184
+     },
+     "2.45_ghz_20_km_90_deg": {
+      "db": 0.1413,
+      "vapour_share": 0.008778,
+      "share_lost": 0.03202
+     },
+     "2.45_ghz_20_km_61.23_deg": {
+      "db": 0.1605,
+      "vapour_share": 0.008807,
+      "share_lost": 0.03628
+     },
+     "2.45_ghz_20_km_71.19_deg": {
+      "db": 0.149,
+      "vapour_share": 0.008789,
+      "share_lost": 0.03374
+     },
+     "2.45_ghz_20_km_30_deg": {
+      "db": 0.2708,
+      "vapour_share": 0.009036,
+      "share_lost": 0.06046
+     },
+     "2.45_ghz_30_km_90_deg": {
+      "db": 0.1029,
+      "vapour_share": 0.003898,
+      "share_lost": 0.02341
+     },
+     "2.45_ghz_30_km_61.23_deg": {
+      "db": 0.1168,
+      "vapour_share": 0.00391,
+      "share_lost": 0.02654
+     },
+     "2.45_ghz_30_km_71.19_deg": {
+      "db": 0.1085,
+      "vapour_share": 0.003903,
+      "share_lost": 0.02467
+     },
+     "2.45_ghz_30_km_30_deg": {
+      "db": 0.1974,
+      "vapour_share": 0.004013,
+      "share_lost": 0.04444
+     },
+     "2.45_ghz_40_km_90_deg": {
+      "db": 0.07457,
+      "vapour_share": 0.001458,
+      "share_lost": 0.01702
+     },
+     "2.45_ghz_40_km_61.23_deg": {
+      "db": 0.08471,
+      "vapour_share": 0.001462,
+      "share_lost": 0.01932
+     },
+     "2.45_ghz_40_km_71.19_deg": {
+      "db": 0.07865,
+      "vapour_share": 0.001459,
+      "share_lost": 0.01795
+     },
+     "2.45_ghz_40_km_30_deg": {
+      "db": 0.1434,
+      "vapour_share": 0.0015,
+      "share_lost": 0.03248
+     },
+     "5.8_ghz_0_km_90_deg": {
+      "db": 0.3239,
+      "vapour_share": 0.151,
+      "share_lost": 0.07188
+     },
+     "5.8_ghz_0_km_61.23_deg": {
+      "db": 0.3679,
+      "vapour_share": 0.1514,
+      "share_lost": 0.08123
+     },
+     "5.8_ghz_0_km_71.19_deg": {
+      "db": 0.3416,
+      "vapour_share": 0.1511,
+      "share_lost": 0.07565
+     },
+     "5.8_ghz_0_km_30_deg": {
+      "db": 0.6221,
+      "vapour_share": 0.1546,
+      "share_lost": 0.1334
+     },
+     "5.8_ghz_4_km_90_deg": {
+      "db": 0.2773,
+      "vapour_share": 0.1234,
+      "share_lost": 0.06186
+     },
+     "5.8_ghz_4_km_61.23_deg": {
+      "db": 0.315,
+      "vapour_share": 0.1237,
+      "share_lost": 0.06996
+     },
+     "5.8_ghz_4_km_71.19_deg": {
+      "db": 0.2925,
+      "vapour_share": 0.1235,
+      "share_lost": 0.06513
+     },
+     "5.8_ghz_4_km_30_deg": {
+      "db": 0.5324,
+      "vapour_share": 0.1265,
+      "share_lost": 0.1154
+     },
+     "5.8_ghz_10_km_90_deg": {
+      "db": 0.2215,
+      "vapour_share": 0.08855,
+      "share_lost": 0.04972
+     },
+     "5.8_ghz_10_km_61.23_deg": {
+      "db": 0.2515,
+      "vapour_share": 0.08881,
+      "share_lost": 0.05627
+     },
+     "5.8_ghz_10_km_71.19_deg": {
+      "db": 0.2336,
+      "vapour_share": 0.08865,
+      "share_lost": 0.05236
+     },
+     "5.8_ghz_10_km_30_deg": {
+      "db": 0.425,
+      "vapour_share": 0.09088,
+      "share_lost": 0.09322
+     },
+     "5.8_ghz_20_km_90_deg": {
+      "db": 0.1549,
+      "vapour_share": 0.04659,
+      "share_lost": 0.03503
+     },
+     "5.8_ghz_20_km_61.23_deg": {
+      "db": 0.1759,
+      "vapour_share": 0.04673,
+      "share_lost": 0.03969
+     },
+     "5.8_ghz_20_km_71.19_deg": {
+      "db": 0.1633,
+      "vapour_share": 0.04664,
+      "share_lost": 0.03691
+     },
+     "5.8_ghz_20_km_30_deg": {
+      "db": 0.2972,
+      "vapour_share": 0.04789,
+      "share_lost": 0.06614
+     },
+     "5.8_ghz_30_km_90_deg": {
+      "db": 0.1098,
+      "vapour_share": 0.02121,
+      "share_lost": 0.02497
+     },
+     "5.8_ghz_30_km_61.23_deg": {
+      "db": 0.1248,
+      "vapour_share": 0.02127,
+      "share_lost": 0.02832
+     },
+     "5.8_ghz_30_km_71.19_deg": {
+      "db": 0.1158,
+      "vapour_share": 0.02123,
+      "share_lost": 0.02632
+     },
+     "5.8_ghz_30_km_30_deg": {
+      "db": 0.211,
+      "vapour_share": 0.02182,
+      "share_lost": 0.04741
+     },
+     "5.8_ghz_40_km_90_deg": {
+      "db": 0.07852,
+      "vapour_share": 0.008027,
+      "share_lost": 0.01792
+     },
+     "5.8_ghz_40_km_61.23_deg": {
+      "db": 0.0892,
+      "vapour_share": 0.008052,
+      "share_lost": 0.02033
+     },
+     "5.8_ghz_40_km_71.19_deg": {
+      "db": 0.08281,
+      "vapour_share": 0.008037,
+      "share_lost": 0.01889
+     },
+     "5.8_ghz_40_km_30_deg": {
+      "db": 0.151,
+      "vapour_share": 0.008259,
+      "share_lost": 0.03418
+     },
+     "10_ghz_0_km_90_deg": {
+      "db": 0.4639,
+      "vapour_share": 0.3512,
+      "share_lost": 0.1013
+     },
+     "10_ghz_0_km_61.23_deg": {
+      "db": 0.5272,
+      "vapour_share": 0.352,
+      "share_lost": 0.1143
+     },
+     "10_ghz_0_km_71.19_deg": {
+      "db": 0.4893,
+      "vapour_share": 0.3515,
+      "share_lost": 0.1066
+     },
+     "10_ghz_0_km_30_deg": {
+      "db": 0.8959,
+      "vapour_share": 0.3577,
+      "share_lost": 0.1864
+     },
+     "10_ghz_4_km_90_deg": {
+      "db": 0.38,
+      "vapour_share": 0.3003,
+      "share_lost": 0.08378
+     },
+     "10_ghz_4_km_61.23_deg": {
+      "db": 0.4318,
+      "vapour_share": 0.3009,
+      "share_lost": 0.09465
+     },
+     "10_ghz_4_km_71.19_deg": {
+      "db": 0.4008,
+      "vapour_share": 0.3005,
+      "share_lost": 0.08817
+     },
+     "10_ghz_4_km_30_deg": {
+      "db": 0.7332,
+      "vapour_share": 0.3063,
+      "share_lost": 0.1553
+     },
+     "10_ghz_10_km_90_deg": {
+      "db": 0.2861,
+      "vapour_share": 0.2288,
+      "share_lost": 0.06376
+     },
+     "10_ghz_10_km_61.23_deg": {
+      "db": 0.3251,
+      "vapour_share": 0.2293,
+      "share_lost": 0.07212
+     },
+     "10_ghz_10_km_71.19_deg": {
+      "db": 0.3018,
+      "vapour_share": 0.229,
+      "share_lost": 0.06713
+     },
+     "10_ghz_10_km_30_deg": {
+      "db": 0.5513,
+      "vapour_share": 0.2339,
+      "share_lost": 0.1192
+     },
+     "10_ghz_20_km_90_deg": {
+      "db": 0.1854,
+      "vapour_share": 0.1299,
+      "share_lost": 0.04178
+     },
+     "10_ghz_20_km_61.23_deg": {
+      "db": 0.2106,
+      "vapour_share": 0.1302,
+      "share_lost": 0.04733
+     },
+     "10_ghz_20_km_71.19_deg": {
+      "db": 0.1955,
+      "vapour_share": 0.13,
+      "share_lost": 0.04402
+     },
+     "10_ghz_20_km_30_deg": {
+      "db": 0.3566,
+      "vapour_share": 0.1332,
+      "share_lost": 0.07883
+     },
+     "10_ghz_30_km_90_deg": {
+      "db": 0.1251,
+      "vapour_share": 0.06194,
+      "share_lost": 0.0284
+     },
+     "10_ghz_30_km_61.23_deg": {
+      "db": 0.1422,
+      "vapour_share": 0.06213,
+      "share_lost": 0.0322
+     },
+     "10_ghz_30_km_71.19_deg": {
+      "db": 0.132,
+      "vapour_share": 0.06201,
+      "share_lost": 0.02993
+     },
+     "10_ghz_30_km_30_deg": {
+      "db": 0.2406,
+      "vapour_share": 0.06365,
+      "share_lost": 0.0539
+     },
+     "10_ghz_40_km_90_deg": {
+      "db": 0.08712,
+      "vapour_share": 0.02396,
+      "share_lost": 0.01986
+     },
+     "10_ghz_40_km_61.23_deg": {
+      "db": 0.09898,
+      "vapour_share": 0.02403,
+      "share_lost": 0.02253
+     },
+     "10_ghz_40_km_71.19_deg": {
+      "db": 0.09189,
+      "vapour_share": 0.02398,
+      "share_lost": 0.02094
+     },
+     "10_ghz_40_km_30_deg": {
+      "db": 0.1677,
+      "vapour_share": 0.02464,
+      "share_lost": 0.03787
+     }
+    }
+   },
+   "1.2 atm, 301 K": {
+    "surface_pressure_pa": 124500.0,
+    "air_column_t_m2": 81.09,
+    "o2_mole_fraction": 0.1746,
+    "rows": {
+     "1_ghz_0_km_90_deg": {
+      "db": 0.2111,
+      "vapour_share": 0.01035,
+      "share_lost": 0.04745
+     },
+     "1_ghz_0_km_61.23_deg": {
+      "db": 0.2395,
+      "vapour_share": 0.01039,
+      "share_lost": 0.05366
+     },
+     "1_ghz_0_km_71.19_deg": {
+      "db": 0.2225,
+      "vapour_share": 0.01036,
+      "share_lost": 0.04995
+     },
+     "1_ghz_0_km_30_deg": {
+      "db": 0.4018,
+      "vapour_share": 0.01067,
+      "share_lost": 0.08836
+     },
+     "1_ghz_4_km_90_deg": {
+      "db": 0.1902,
+      "vapour_share": 0.008313,
+      "share_lost": 0.04284
+     },
+     "1_ghz_4_km_61.23_deg": {
+      "db": 0.2158,
+      "vapour_share": 0.008341,
+      "share_lost": 0.04847
+     },
+     "1_ghz_4_km_71.19_deg": {
+      "db": 0.2005,
+      "vapour_share": 0.008324,
+      "share_lost": 0.04511
+     },
+     "1_ghz_4_km_30_deg": {
+      "db": 0.3622,
+      "vapour_share": 0.008571,
+      "share_lost": 0.08002
+     },
+     "1_ghz_10_km_90_deg": {
+      "db": 0.162,
+      "vapour_share": 0.005931,
+      "share_lost": 0.03662
+     },
+     "1_ghz_10_km_61.23_deg": {
+      "db": 0.1839,
+      "vapour_share": 0.005952,
+      "share_lost": 0.04145
+     },
+     "1_ghz_10_km_71.19_deg": {
+      "db": 0.1708,
+      "vapour_share": 0.005939,
+      "share_lost": 0.03856
+     },
+     "1_ghz_10_km_30_deg": {
+      "db": 0.3089,
+      "vapour_share": 0.006114,
+      "share_lost": 0.06865
+     },
+     "1_ghz_20_km_90_deg": {
+      "db": 0.1229,
+      "vapour_share": 0.00327,
+      "share_lost": 0.0279
+     },
+     "1_ghz_20_km_61.23_deg": {
+      "db": 0.1395,
+      "vapour_share": 0.003281,
+      "share_lost": 0.03161
+     },
+     "1_ghz_20_km_71.19_deg": {
+      "db": 0.1296,
+      "vapour_share": 0.003274,
+      "share_lost": 0.02939
+     },
+     "1_ghz_20_km_30_deg": {
+      "db": 0.2347,
+      "vapour_share": 0.00337,
+      "share_lost": 0.0526
+     },
+     "1_ghz_30_km_90_deg": {
+      "db": 0.09225,
+      "vapour_share": 0.001695,
+      "share_lost": 0.02102
+     },
+     "1_ghz_30_km_61.23_deg": {
+      "db": 0.1047,
+      "vapour_share": 0.001701,
+      "share_lost": 0.02383
+     },
+     "1_ghz_30_km_71.19_deg": {
+      "db": 0.09727,
+      "vapour_share": 0.001698,
+      "share_lost": 0.02215
+     },
+     "1_ghz_30_km_30_deg": {
+      "db": 0.1765,
+      "vapour_share": 0.001747,
+      "share_lost": 0.03982
+     },
+     "1_ghz_40_km_90_deg": {
+      "db": 0.06857,
+      "vapour_share": 0.0007972,
+      "share_lost": 0.01567
+     },
+     "1_ghz_40_km_61.23_deg": {
+      "db": 0.07787,
+      "vapour_share": 0.0007999,
+      "share_lost": 0.01777
+     },
+     "1_ghz_40_km_71.19_deg": {
+      "db": 0.07231,
+      "vapour_share": 0.0007982,
+      "share_lost": 0.01651
+     },
+     "1_ghz_40_km_30_deg": {
+      "db": 0.1314,
+      "vapour_share": 0.0008213,
+      "share_lost": 0.0298
+     },
+     "2.45_ghz_0_km_90_deg": {
+      "db": 0.2594,
+      "vapour_share": 0.05086,
+      "share_lost": 0.05799
+     },
+     "2.45_ghz_0_km_61.23_deg": {
+      "db": 0.2945,
+      "vapour_share": 0.05101,
+      "share_lost": 0.06556
+     },
+     "2.45_ghz_0_km_71.19_deg": {
+      "db": 0.2735,
+      "vapour_share": 0.05092,
+      "share_lost": 0.06104
+     },
+     "2.45_ghz_0_km_30_deg": {
+      "db": 0.496,
+      "vapour_share": 0.05222,
+      "share_lost": 0.1079
+     },
+     "2.45_ghz_4_km_90_deg": {
+      "db": 0.2281,
+      "vapour_share": 0.04185,
+      "share_lost": 0.05118
+     },
+     "2.45_ghz_4_km_61.23_deg": {
+      "db": 0.259,
+      "vapour_share": 0.04198,
+      "share_lost": 0.05789
+     },
+     "2.45_ghz_4_km_71.19_deg": {
+      "db": 0.2406,
+      "vapour_share": 0.0419,
+      "share_lost": 0.05388
+     },
+     "2.45_ghz_4_km_30_deg": {
+      "db": 0.4362,
+      "vapour_share": 0.04298,
+      "share_lost": 0.09557
+     },
+     "2.45_ghz_10_km_90_deg": {
+      "db": 0.1884,
+      "vapour_share": 0.03081,
+      "share_lost": 0.04244
+     },
+     "2.45_ghz_10_km_61.23_deg": {
+      "db": 0.2138,
+      "vapour_share": 0.03091,
+      "share_lost": 0.04804
+     },
+     "2.45_ghz_10_km_71.19_deg": {
+      "db": 0.1986,
+      "vapour_share": 0.03085,
+      "share_lost": 0.0447
+     },
+     "2.45_ghz_10_km_30_deg": {
+      "db": 0.3603,
+      "vapour_share": 0.03166,
+      "share_lost": 0.0796
+     },
+     "2.45_ghz_20_km_90_deg": {
+      "db": 0.1371,
+      "vapour_share": 0.01771,
+      "share_lost": 0.03108
+     },
+     "2.45_ghz_20_km_61.23_deg": {
+      "db": 0.1557,
+      "vapour_share": 0.01776,
+      "share_lost": 0.03521
+     },
+     "2.45_ghz_20_km_71.19_deg": {
+      "db": 0.1446,
+      "vapour_share": 0.01773,
+      "share_lost": 0.03274
+     },
+     "2.45_ghz_20_km_30_deg": {
+      "db": 0.2624,
+      "vapour_share": 0.0182,
+      "share_lost": 0.05863
+     },
+     "2.45_ghz_30_km_90_deg": {
+      "db": 0.09986,
+      "vapour_share": 0.00946,
+      "share_lost": 0.02273
+     },
+     "2.45_ghz_30_km_61.23_deg": {
+      "db": 0.1134,
+      "vapour_share": 0.00949,
+      "share_lost": 0.02577
+     },
+     "2.45_ghz_30_km_71.19_deg": {
+      "db": 0.1053,
+      "vapour_share": 0.009471,
+      "share_lost": 0.02396
+     },
+     "2.45_ghz_30_km_30_deg": {
+      "db": 0.1913,
+      "vapour_share": 0.009732,
+      "share_lost": 0.0431
+     },
+     "2.45_ghz_40_km_90_deg": {
+      "db": 0.07265,
+      "vapour_share": 0.004544,
+      "share_lost": 0.01659
+     },
+     "2.45_ghz_40_km_61.23_deg": {
+      "db": 0.08251,
+      "vapour_share": 0.004559,
+      "share_lost": 0.01882
+     },
+     "2.45_ghz_40_km_71.19_deg": {
+      "db": 0.07661,
+      "vapour_share": 0.00455,
+      "share_lost": 0.01749
+     },
+     "2.45_ghz_40_km_30_deg": {
+      "db": 0.1394,
+      "vapour_share": 0.004677,
+      "share_lost": 0.03158
+     },
+     "5.8_ghz_0_km_90_deg": {
+      "db": 0.3399,
+      "vapour_share": 0.2258,
+      "share_lost": 0.07528
+     },
+     "5.8_ghz_0_km_61.23_deg": {
+      "db": 0.3861,
+      "vapour_share": 0.2263,
+      "share_lost": 0.08506
+     },
+     "5.8_ghz_0_km_71.19_deg": {
+      "db": 0.3585,
+      "vapour_share": 0.226,
+      "share_lost": 0.07923
+     },
+     "5.8_ghz_0_km_30_deg": {
+      "db": 0.6534,
+      "vapour_share": 0.2306,
+      "share_lost": 0.1397
+     },
+     "5.8_ghz_4_km_90_deg": {
+      "db": 0.2883,
+      "vapour_share": 0.1927,
+      "share_lost": 0.06423
+     },
+     "5.8_ghz_4_km_61.23_deg": {
+      "db": 0.3275,
+      "vapour_share": 0.1931,
+      "share_lost": 0.07263
+     },
+     "5.8_ghz_4_km_71.19_deg": {
+      "db": 0.3041,
+      "vapour_share": 0.1929,
+      "share_lost": 0.06762
+     },
+     "5.8_ghz_4_km_30_deg": {
+      "db": 0.5539,
+      "vapour_share": 0.1969,
+      "share_lost": 0.1197
+     },
+     "5.8_ghz_10_km_90_deg": {
+      "db": 0.2273,
+      "vapour_share": 0.1486,
+      "share_lost": 0.05098
+     },
+     "5.8_ghz_10_km_61.23_deg": {
+      "db": 0.2581,
+      "vapour_share": 0.149,
+      "share_lost": 0.0577
+     },
+     "5.8_ghz_10_km_71.19_deg": {
+      "db": 0.2397,
+      "vapour_share": 0.1488,
+      "share_lost": 0.05369
+     },
+     "5.8_ghz_10_km_30_deg": {
+      "db": 0.4363,
+      "vapour_share": 0.1522,
+      "share_lost": 0.09558
+     },
+     "5.8_ghz_20_km_90_deg": {
+      "db": 0.156,
+      "vapour_share": 0.09057,
+      "share_lost": 0.03528
+     },
+     "5.8_ghz_20_km_61.23_deg": {
+      "db": 0.1772,
+      "vapour_share": 0.09083,
+      "share_lost": 0.03997
+     },
+     "5.8_ghz_20_km_71.19_deg": {
+      "db": 0.1645,
+      "vapour_share": 0.09067,
+      "share_lost": 0.03717
+     },
+     "5.8_ghz_20_km_30_deg": {
+      "db": 0.2993,
+      "vapour_share": 0.09291,
+      "share_lost": 0.06659
+     },
+     "5.8_ghz_30_km_90_deg": {
+      "db": 0.1092,
+      "vapour_share": 0.05031,
+      "share_lost": 0.02484
+     },
+     "5.8_ghz_30_km_61.23_deg": {
+      "db": 0.1241,
+      "vapour_share": 0.05046,
+      "share_lost": 0.02816
+     },
+     "5.8_ghz_30_km_71.19_deg": {
+      "db": 0.1152,
+      "vapour_share": 0.05037,
+      "share_lost": 0.02618
+     },
+     "5.8_ghz_30_km_30_deg": {
+      "db": 0.2096,
+      "vapour_share": 0.05169,
+      "share_lost": 0.04711
+     },
+     "5.8_ghz_40_km_90_deg": {
+      "db": 0.07754,
+      "vapour_share": 0.02475,
+      "share_lost": 0.01769
+     },
+     "5.8_ghz_40_km_61.23_deg": {
+      "db": 0.08806,
+      "vapour_share": 0.02482,
+      "share_lost": 0.02007
+     },
+     "5.8_ghz_40_km_71.19_deg": {
+      "db": 0.08177,
+      "vapour_share": 0.02478,
+      "share_lost": 0.01865
+     },
+     "5.8_ghz_40_km_30_deg": {
+      "db": 0.1488,
+      "vapour_share": 0.02545,
+      "share_lost": 0.03369
+     },
+     "10_ghz_0_km_90_deg": {
+      "db": 0.5436,
+      "vapour_share": 0.4705,
+      "share_lost": 0.1177
+     },
+     "10_ghz_0_km_61.23_deg": {
+      "db": 0.6179,
+      "vapour_share": 0.4712,
+      "share_lost": 0.1326
+     },
+     "10_ghz_0_km_71.19_deg": {
+      "db": 0.5735,
+      "vapour_share": 0.4708,
+      "share_lost": 0.1237
+     },
+     "10_ghz_0_km_30_deg": {
+      "db": 1.052,
+      "vapour_share": 0.4772,
+      "share_lost": 0.2151
+     },
+     "10_ghz_4_km_90_deg": {
+      "db": 0.4399,
+      "vapour_share": 0.4214,
+      "share_lost": 0.09632
+     },
+     "10_ghz_4_km_61.23_deg": {
+      "db": 0.5,
+      "vapour_share": 0.4222,
+      "share_lost": 0.1087
+     },
+     "10_ghz_4_km_71.19_deg": {
+      "db": 0.464,
+      "vapour_share": 0.4217,
+      "share_lost": 0.1013
+     },
+     "10_ghz_4_km_30_deg": {
+      "db": 0.8504,
+      "vapour_share": 0.4281,
+      "share_lost": 0.1778
+     },
+     "10_ghz_10_km_90_deg": {
+      "db": 0.3243,
+      "vapour_share": 0.3481,
+      "share_lost": 0.07195
+     },
+     "10_ghz_10_km_61.23_deg": {
+      "db": 0.3686,
+      "vapour_share": 0.3488,
+      "share_lost": 0.08136
+     },
+     "10_ghz_10_km_71.19_deg": {
+      "db": 0.3421,
+      "vapour_share": 0.3484,
+      "share_lost": 0.07575
+     },
+     "10_ghz_10_km_30_deg": {
+      "db": 0.6261,
+      "vapour_share": 0.3544,
+      "share_lost": 0.1342
+     },
+     "10_ghz_20_km_90_deg": {
+      "db": 0.2022,
+      "vapour_share": 0.2338,
+      "share_lost": 0.04549
+     },
+     "10_ghz_20_km_61.23_deg": {
+      "db": 0.2297,
+      "vapour_share": 0.2343,
+      "share_lost": 0.05152
+     },
+     "10_ghz_20_km_71.19_deg": {
+      "db": 0.2132,
+      "vapour_share": 0.234,
+      "share_lost": 0.04792
+     },
+     "10_ghz_20_km_30_deg": {
+      "db": 0.3895,
+      "vapour_share": 0.2388,
+      "share_lost": 0.08577
+     },
+     "10_ghz_30_km_90_deg": {
+      "db": 0.1316,
+      "vapour_share": 0.1396,
+      "share_lost": 0.02985
+     },
+     "10_ghz_30_km_61.23_deg": {
+      "db": 0.1495,
+      "vapour_share": 0.14,
+      "share_lost": 0.03384
+     },
+     "10_ghz_30_km_71.19_deg": {
+      "db": 0.1388,
+      "vapour_share": 0.1397,
+      "share_lost": 0.03146
+     },
+     "10_ghz_30_km_30_deg": {
+      "db": 0.2531,
+      "vapour_share": 0.143,
+      "share_lost": 0.05662
+     },
+     "10_ghz_40_km_90_deg": {
+      "db": 0.08892,
+      "vapour_share": 0.07196,
+      "share_lost": 0.02027
+     },
+     "10_ghz_40_km_61.23_deg": {
+      "db": 0.101,
+      "vapour_share": 0.07217,
+      "share_lost": 0.02299
+     },
+     "10_ghz_40_km_71.19_deg": {
+      "db": 0.09378,
+      "vapour_share": 0.07204,
+      "share_lost": 0.02136
+     },
+     "10_ghz_40_km_30_deg": {
+      "db": 0.1709,
+      "vapour_share": 0.07391,
+      "share_lost": 0.03859
+     }
+    }
+   },
+   "1.0 atm, 301 K": {
+    "surface_pressure_pa": 104200.0,
+    "air_column_t_m2": 67.91,
+    "o2_mole_fraction": 0.2095,
+    "rows": {
+     "1_ghz_0_km_90_deg": {
+      "db": 0.1834,
+      "vapour_share": 0.01079,
+      "share_lost": 0.04135
+     },
+     "1_ghz_0_km_61.23_deg": {
+      "db": 0.2081,
+      "vapour_share": 0.01083,
+      "share_lost": 0.0468
+     },
+     "1_ghz_0_km_71.19_deg": {
+      "db": 0.1934,
+      "vapour_share": 0.01081,
+      "share_lost": 0.04355
+     },
+     "1_ghz_0_km_30_deg": {
+      "db": 0.3496,
+      "vapour_share": 0.01111,
+      "share_lost": 0.07734
+     },
+     "1_ghz_4_km_90_deg": {
+      "db": 0.1641,
+      "vapour_share": 0.00881,
+      "share_lost": 0.03709
+     },
+     "1_ghz_4_km_61.23_deg": {
+      "db": 0.1863,
+      "vapour_share": 0.008838,
+      "share_lost": 0.04198
+     },
+     "1_ghz_4_km_71.19_deg": {
+      "db": 0.173,
+      "vapour_share": 0.008821,
+      "share_lost": 0.03906
+     },
+     "1_ghz_4_km_30_deg": {
+      "db": 0.313,
+      "vapour_share": 0.009065,
+      "share_lost": 0.06953
+     },
+     "1_ghz_10_km_90_deg": {
+      "db": 0.1385,
+      "vapour_share": 0.006454,
+      "share_lost": 0.03139
+     },
+     "1_ghz_10_km_61.23_deg": {
+      "db": 0.1572,
+      "vapour_share": 0.006475,
+      "share_lost": 0.03555
+     },
+     "1_ghz_10_km_71.19_deg": {
+      "db": 0.146,
+      "vapour_share": 0.006463,
+      "share_lost": 0.03306
+     },
+     "1_ghz_10_km_30_deg": {
+      "db": 0.2643,
+      "vapour_share": 0.006641,
+      "share_lost": 0.05905
+     },
+     "1_ghz_20_km_90_deg": {
+      "db": 0.1036,
+      "vapour_share": 0.003751,
+      "share_lost": 0.02357
+     },
+     "1_ghz_20_km_61.23_deg": {
+      "db": 0.1176,
+      "vapour_share": 0.003763,
+      "share_lost": 0.02671
+     },
+     "1_ghz_20_km_71.19_deg": {
+      "db": 0.1092,
+      "vapour_share": 0.003756,
+      "share_lost": 0.02483
+     },
+     "1_ghz_20_km_30_deg": {
+      "db": 0.1979,
+      "vapour_share": 0.003859,
+      "share_lost": 0.04455
+     },
+     "1_ghz_30_km_90_deg": {
+      "db": 0.0768,
+      "vapour_share": 0.002083,
+      "share_lost": 0.01753
+     },
+     "1_ghz_30_km_61.23_deg": {
+      "db": 0.0872,
+      "vapour_share": 0.00209,
+      "share_lost": 0.01988
+     },
+     "1_ghz_30_km_71.19_deg": {
+      "db": 0.08099,
+      "vapour_share": 0.002086,
+      "share_lost": 0.01847
+     },
+     "1_ghz_30_km_30_deg": {
+      "db": 0.147,
+      "vapour_share": 0.002144,
+      "share_lost": 0.03327
+     },
+     "1_ghz_40_km_90_deg": {
+      "db": 0.05654,
+      "vapour_share": 0.001078,
+      "share_lost": 0.01293
+     },
+     "1_ghz_40_km_61.23_deg": {
+      "db": 0.0642,
+      "vapour_share": 0.001081,
+      "share_lost": 0.01467
+     },
+     "1_ghz_40_km_71.19_deg": {
+      "db": 0.05962,
+      "vapour_share": 0.001079,
+      "share_lost": 0.01363
+     },
+     "1_ghz_40_km_30_deg": {
+      "db": 0.1083,
+      "vapour_share": 0.001109,
+      "share_lost": 0.02463
+     },
+     "2.45_ghz_0_km_90_deg": {
+      "db": 0.2172,
+      "vapour_share": 0.05504,
+      "share_lost": 0.04879
+     },
+     "2.45_ghz_0_km_61.23_deg": {
+      "db": 0.2466,
+      "vapour_share": 0.0552,
+      "share_lost": 0.0552
+     },
+     "2.45_ghz_0_km_71.19_deg": {
+      "db": 0.229,
+      "vapour_share": 0.0551,
+      "share_lost": 0.05137
+     },
+     "2.45_ghz_0_km_30_deg": {
+      "db": 0.4156,
+      "vapour_share": 0.05644,
+      "share_lost": 0.09125
+     },
+     "2.45_ghz_4_km_90_deg": {
+      "db": 0.1904,
+      "vapour_share": 0.04587,
+      "share_lost": 0.04289
+     },
+     "2.45_ghz_4_km_61.23_deg": {
+      "db": 0.2162,
+      "vapour_share": 0.046,
+      "share_lost": 0.04855
+     },
+     "2.45_ghz_4_km_71.19_deg": {
+      "db": 0.2008,
+      "vapour_share": 0.04592,
+      "share_lost": 0.04517
+     },
+     "2.45_ghz_4_km_30_deg": {
+      "db": 0.3643,
+      "vapour_share": 0.04705,
+      "share_lost": 0.08045
+     },
+     "2.45_ghz_10_km_90_deg": {
+      "db": 0.1564,
+      "vapour_share": 0.03452,
+      "share_lost": 0.03538
+     },
+     "2.45_ghz_10_km_61.23_deg": {
+      "db": 0.1776,
+      "vapour_share": 0.03462,
+      "share_lost": 0.04007
+     },
+     "2.45_ghz_10_km_71.19_deg": {
+      "db": 0.1649,
+      "vapour_share": 0.03456,
+      "share_lost": 0.03727
+     },
+     "2.45_ghz_10_km_30_deg": {
+      "db": 0.2993,
+      "vapour_share": 0.03542,
+      "share_lost": 0.0666
+     },
+     "2.45_ghz_20_km_90_deg": {
+      "db": 0.113,
+      "vapour_share": 0.02077,
+      "share_lost": 0.02568
+     },
+     "2.45_ghz_20_km_61.23_deg": {
+      "db": 0.1283,
+      "vapour_share": 0.02083,
+      "share_lost": 0.02911
+     },
+     "2.45_ghz_20_km_71.19_deg": {
+      "db": 0.1191,
+      "vapour_share": 0.02079,
+      "share_lost": 0.02706
+     },
+     "2.45_ghz_20_km_30_deg": {
+      "db": 0.2163,
+      "vapour_share": 0.02133,
+      "share_lost": 0.04858
+     },
+     "2.45_ghz_30_km_90_deg": {
+      "db": 0.08173,
+      "vapour_share": 0.01182,
+      "share_lost": 0.01864
+     },
+     "2.45_ghz_30_km_61.23_deg": {
+      "db": 0.09281,
+      "vapour_share": 0.01186,
+      "share_lost": 0.02114
+     },
+     "2.45_ghz_30_km_71.19_deg": {
+      "db": 0.08619,
+      "vapour_share": 0.01184,
+      "share_lost": 0.01965
+     },
+     "2.45_ghz_30_km_30_deg": {
+      "db": 0.1566,
+      "vapour_share": 0.01215,
+      "share_lost": 0.03541
+     },
+     "2.45_ghz_40_km_90_deg": {
+      "db": 0.05913,
+      "vapour_share": 0.006223,
+      "share_lost": 0.01352
+     },
+     "2.45_ghz_40_km_61.23_deg": {
+      "db": 0.06714,
+      "vapour_share": 0.006243,
+      "share_lost": 0.01534
+     },
+     "2.45_ghz_40_km_71.19_deg": {
+      "db": 0.06235,
+      "vapour_share": 0.006231,
+      "share_lost": 0.01425
+     },
+     "2.45_ghz_40_km_30_deg": {
+      "db": 0.1134,
+      "vapour_share": 0.0064,
+      "share_lost": 0.02577
+     },
+     "5.8_ghz_0_km_90_deg": {
+      "db": 0.2869,
+      "vapour_share": 0.2423,
+      "share_lost": 0.06392
+     },
+     "5.8_ghz_0_km_61.23_deg": {
+      "db": 0.3259,
+      "vapour_share": 0.2429,
+      "share_lost": 0.07229
+     },
+     "5.8_ghz_0_km_71.19_deg": {
+      "db": 0.3026,
+      "vapour_share": 0.2425,
+      "share_lost": 0.0673
+     },
+     "5.8_ghz_0_km_30_deg": {
+      "db": 0.5518,
+      "vapour_share": 0.2471,
+      "share_lost": 0.1193
+     },
+     "5.8_ghz_4_km_90_deg": {
+      "db": 0.2427,
+      "vapour_share": 0.2093,
+      "share_lost": 0.05434
+     },
+     "5.8_ghz_4_km_61.23_deg": {
+      "db": 0.2756,
+      "vapour_share": 0.2098,
+      "share_lost": 0.06149
+     },
+     "5.8_ghz_4_km_71.19_deg": {
+      "db": 0.2559,
+      "vapour_share": 0.2095,
+      "share_lost": 0.05722
+     },
+     "5.8_ghz_4_km_30_deg": {
+      "db": 0.4664,
+      "vapour_share": 0.2137,
+      "share_lost": 0.1018
+     },
+     "5.8_ghz_10_km_90_deg": {
+      "db": 0.1904,
+      "vapour_share": 0.165,
+      "share_lost": 0.04289
+     },
+     "5.8_ghz_10_km_61.23_deg": {
+      "db": 0.2162,
+      "vapour_share": 0.1654,
+      "share_lost": 0.04857
+     },
+     "5.8_ghz_10_km_71.19_deg": {
+      "db": 0.2008,
+      "vapour_share": 0.1652,
+      "share_lost": 0.04518
+     },
+     "5.8_ghz_10_km_30_deg": {
+      "db": 0.3657,
+      "vapour_share": 0.1687,
+      "share_lost": 0.08075
+     },
+     "5.8_ghz_20_km_90_deg": {
+      "db": 0.1296,
+      "vapour_share": 0.1054,
+      "share_lost": 0.0294
+     },
+     "5.8_ghz_20_km_61.23_deg": {
+      "db": 0.1472,
+      "vapour_share": 0.1057,
+      "share_lost": 0.03333
+     },
+     "5.8_ghz_20_km_71.19_deg": {
+      "db": 0.1367,
+      "vapour_share": 0.1055,
+      "share_lost": 0.03098
+     },
+     "5.8_ghz_20_km_30_deg": {
+      "db": 0.2487,
+      "vapour_share": 0.1079,
+      "share_lost": 0.05566
+     },
+     "5.8_ghz_30_km_90_deg": {
+      "db": 0.09001,
+      "vapour_share": 0.06247,
+      "share_lost": 0.02051
+     },
+     "5.8_ghz_30_km_61.23_deg": {
+      "db": 0.1022,
+      "vapour_share": 0.06265,
+      "share_lost": 0.02326
+     },
+     "5.8_ghz_30_km_71.19_deg": {
+      "db": 0.09492,
+      "vapour_share": 0.06254,
+      "share_lost": 0.02162
+     },
+     "5.8_ghz_30_km_30_deg": {
+      "db": 0.1727,
+      "vapour_share": 0.0641,
+      "share_lost": 0.03898
+     },
+     "5.8_ghz_40_km_90_deg": {
+      "db": 0.06339,
+      "vapour_share": 0.03375,
+      "share_lost": 0.01449
+     },
+     "5.8_ghz_40_km_61.23_deg": {
+      "db": 0.072,
+      "vapour_share": 0.03385,
+      "share_lost": 0.01644
+     },
+     "5.8_ghz_40_km_71.19_deg": {
+      "db": 0.06685,
+      "vapour_share": 0.03379,
+      "share_lost": 0.01528
+     },
+     "5.8_ghz_40_km_30_deg": {
+      "db": 0.1217,
+      "vapour_share": 0.03468,
+      "share_lost": 0.02763
+     },
+     "10_ghz_0_km_90_deg": {
+      "db": 0.4689,
+      "vapour_share": 0.494,
+      "share_lost": 0.1024
+     },
+     "10_ghz_0_km_61.23_deg": {
+      "db": 0.5331,
+      "vapour_share": 0.4948,
+      "share_lost": 0.1155
+     },
+     "10_ghz_0_km_71.19_deg": {
+      "db": 0.4947,
+      "vapour_share": 0.4943,
+      "share_lost": 0.1077
+     },
+     "10_ghz_0_km_30_deg": {
+      "db": 0.9079,
+      "vapour_share": 0.5005,
+      "share_lost": 0.1886
+     },
+     "10_ghz_4_km_90_deg": {
+      "db": 0.3788,
+      "vapour_share": 0.4474,
+      "share_lost": 0.08354
+     },
+     "10_ghz_4_km_61.23_deg": {
+      "db": 0.4306,
+      "vapour_share": 0.4481,
+      "share_lost": 0.0944
+     },
+     "10_ghz_4_km_71.19_deg": {
+      "db": 0.3997,
+      "vapour_share": 0.4477,
+      "share_lost": 0.08792
+     },
+     "10_ghz_4_km_30_deg": {
+      "db": 0.7328,
+      "vapour_share": 0.4539,
+      "share_lost": 0.1553
+     },
+     "10_ghz_10_km_90_deg": {
+      "db": 0.2784,
+      "vapour_share": 0.3771,
+      "share_lost": 0.06209
+     },
+     "10_ghz_10_km_61.23_deg": {
+      "db": 0.3164,
+      "vapour_share": 0.3778,
+      "share_lost": 0.07026
+     },
+     "10_ghz_10_km_71.19_deg": {
+      "db": 0.2936,
+      "vapour_share": 0.3774,
+      "share_lost": 0.06538
+     },
+     "10_ghz_10_km_30_deg": {
+      "db": 0.5377,
+      "vapour_share": 0.3834,
+      "share_lost": 0.1165
+     },
+     "10_ghz_20_km_90_deg": {
+      "db": 0.1721,
+      "vapour_share": 0.2655,
+      "share_lost": 0.03885
+     },
+     "10_ghz_20_km_61.23_deg": {
+      "db": 0.1956,
+      "vapour_share": 0.2661,
+      "share_lost": 0.04403
+     },
+     "10_ghz_20_km_71.19_deg": {
+      "db": 0.1815,
+      "vapour_share": 0.2657,
+      "share_lost": 0.04094
+     },
+     "10_ghz_20_km_30_deg": {
+      "db": 0.3317,
+      "vapour_share": 0.2708,
+      "share_lost": 0.07354
+     },
+     "10_ghz_30_km_90_deg": {
+      "db": 0.1108,
+      "vapour_share": 0.1698,
+      "share_lost": 0.02519
+     },
+     "10_ghz_30_km_61.23_deg": {
+      "db": 0.1259,
+      "vapour_share": 0.1702,
+      "share_lost": 0.02856
+     },
+     "10_ghz_30_km_71.19_deg": {
+      "db": 0.1168,
+      "vapour_share": 0.1699,
+      "share_lost": 0.02655
+     },
+     "10_ghz_30_km_30_deg": {
+      "db": 0.2132,
+      "vapour_share": 0.1737,
+      "share_lost": 0.0479
+     },
+     "10_ghz_40_km_90_deg": {
+      "db": 0.0739,
+      "vapour_share": 0.09666,
+      "share_lost": 0.01687
+     },
+     "10_ghz_40_km_61.23_deg": {
+      "db": 0.08395,
+      "vapour_share": 0.09693,
+      "share_lost": 0.01914
+     },
+     "10_ghz_40_km_71.19_deg": {
+      "db": 0.07794,
+      "vapour_share": 0.09677,
+      "share_lost": 0.01779
+     },
+     "10_ghz_40_km_30_deg": {
+      "db": 0.1421,
+      "vapour_share": 0.09914,
+      "share_lost": 0.03219
+     }
+    }
+   }
+  },
+  "geometry": {
+   "ground_operating_elevation_deg": 61.23,
+   "towns_operating_elevation_deg": 71.19,
+   "rule": "variants carry the power screen's load-weighted ground loss by the ratio of losses at the ground beams' mean operating elevation (an estimate); pairs are [highest tiles, any tile above 30 degrees] and, for raised receivers, the better and worse line"
+  },
+  "rule": "dB and share lost from each receiver height to the column top; the vapour share is the water lines and continuum over the whole path"
+ },
+ "beams": {
+  "chosen_system": [
+   {
+    "name": "2.45 GHz as chosen, towns and ground together",
+    "share_lost": 0.06316,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.09277
+    },
+    "tile_electricity_w_per_w": 2.098,
+    "link_dc_efficiency": 0.4766,
+    "heat_w_per_w": 1.469,
+    "w_m2": 0.03872,
+    "points": 0.01718,
+    "points_if_the_dimmer_absorbs": [
+     0.01909,
+     0.02291
+    ],
+    "land_rain_percent": [
+     0.009451,
+     0.02371
+    ],
+    "growth_percent": [
+     0.001203,
+     0.005068
+    ],
+    "dimming_light_tw_per_tw": 1.912,
+    "dimming_electricity_tw_per_tw": [
+     0.3823,
+     0.5735
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": "the power screen: beams from the highest tiles and from any above 30 degrees"
+   },
+   {
+    "name": "2.45 GHz as chosen, towns and ground together",
+    "share_lost": 0.07758,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.1157
+    },
+    "tile_electricity_w_per_w": 2.131,
+    "link_dc_efficiency": 0.4693,
+    "heat_w_per_w": 1.492,
+    "w_m2": 0.03933,
+    "points": 0.01745,
+    "points_if_the_dimmer_absorbs": [
+     0.01939,
+     0.02327
+    ],
+    "land_rain_percent": [
+     0.009598,
+     0.02408
+    ],
+    "growth_percent": [
+     0.001221,
+     0.005148
+    ],
+    "dimming_light_tw_per_tw": 1.941,
+    "dimming_electricity_tw_per_tw": [
+     0.3883,
+     0.5824
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": "the power screen: beams from the highest tiles and from any above 30 degrees"
+   }
+  ],
+  "towns_2_45_ghz": [
+   {
+    "name": "2.45 GHz to the towns at 10 km",
+    "share_lost": 0.05147,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.07467
+    },
+    "tile_electricity_w_per_w": 2.072,
+    "link_dc_efficiency": 0.4825,
+    "heat_w_per_w": 1.451,
+    "w_m2": 0.03824,
+    "points": 0.01697,
+    "points_if_the_dimmer_absorbs": [
+     0.01885,
+     0.02263
+    ],
+    "land_rain_percent": [
+     0.009334,
+     0.02342
+    ],
+    "growth_percent": [
+     0.001188,
+     0.005006
+    ],
+    "dimming_light_tw_per_tw": 1.888,
+    "dimming_electricity_tw_per_tw": [
+     0.3776,
+     0.5664
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 0.0,
+    "notes": "on the towns' own crowns"
+   },
+   {
+    "name": "2.45 GHz to the towns at 10 km",
+    "share_lost": 0.06293,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.09241
+    },
+    "tile_electricity_w_per_w": 2.098,
+    "link_dc_efficiency": 0.4767,
+    "heat_w_per_w": 1.468,
+    "w_m2": 0.03871,
+    "points": 0.01718,
+    "points_if_the_dimmer_absorbs": [
+     0.01909,
+     0.0229
+    ],
+    "land_rain_percent": [
+     0.009448,
+     0.0237
+    ],
+    "growth_percent": [
+     0.001202,
+     0.005067
+    ],
+    "dimming_light_tw_per_tw": 1.911,
+    "dimming_electricity_tw_per_tw": [
+     0.3822,
+     0.5733
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 0.0,
+    "notes": "on the towns' own crowns"
+   }
+  ],
+  "ground_2_45_ghz": [
+   {
+    "name": "2.45 GHz to the ground, as chosen",
+    "share_lost": 0.0675,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.0996
+    },
+    "tile_electricity_w_per_w": 2.108,
+    "link_dc_efficiency": 0.4744,
+    "heat_w_per_w": 1.476,
+    "w_m2": 0.0389,
+    "points": 0.01726,
+    "points_if_the_dimmer_absorbs": [
+     0.01918,
+     0.02301
+    ],
+    "land_rain_percent": [
+     0.009495,
+     0.02382
+    ],
+    "growth_percent": [
+     0.001208,
+     0.005092
+    ],
+    "dimming_light_tw_per_tw": 1.92,
+    "dimming_electricity_tw_per_tw": [
+     0.3841,
+     0.5761
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": ""
+   },
+   {
+    "name": "2.45 GHz to the ground, as chosen",
+    "share_lost": 0.083,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.1245
+    },
+    "tile_electricity_w_per_w": 2.144,
+    "link_dc_efficiency": 0.4665,
+    "heat_w_per_w": 1.501,
+    "w_m2": 0.03956,
+    "points": 0.01755,
+    "points_if_the_dimmer_absorbs": [
+     0.0195,
+     0.0234
+    ],
+    "land_rain_percent": [
+     0.009655,
+     0.02422
+    ],
+    "growth_percent": [
+     0.001229,
+     0.005178
+    ],
+    "dimming_light_tw_per_tw": 1.953,
+    "dimming_electricity_tw_per_tw": [
+     0.3906,
+     0.5859
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": ""
+   }
+  ],
+  "ground_no_air": [
+   {
+    "name": "the same link with no air",
+    "share_lost": 0.0,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.0
+    },
+    "tile_electricity_w_per_w": 1.966,
+    "link_dc_efficiency": 0.5087,
+    "heat_w_per_w": 1.376,
+    "w_m2": 0.03627,
+    "points": 0.0161,
+    "points_if_the_dimmer_absorbs": [
+     0.01788,
+     0.02146
+    ],
+    "land_rain_percent": [
+     0.008854,
+     0.02221
+    ],
+    "growth_percent": [
+     0.001127,
+     0.004748
+    ],
+    "dimming_light_tw_per_tw": 1.791,
+    "dimming_electricity_tw_per_tw": [
+     0.3582,
+     0.5373
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": "the floor any beam meets: spill, rectennas and bus"
+   },
+   {
+    "name": "the same link with no air",
+    "share_lost": 0.0,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.0
+    },
+    "tile_electricity_w_per_w": 1.966,
+    "link_dc_efficiency": 0.5087,
+    "heat_w_per_w": 1.376,
+    "w_m2": 0.03627,
+    "points": 0.0161,
+    "points_if_the_dimmer_absorbs": [
+     0.01788,
+     0.02146
+    ],
+    "land_rain_percent": [
+     0.008854,
+     0.02221
+    ],
+    "growth_percent": [
+     0.001127,
+     0.004748
+    ],
+    "dimming_light_tw_per_tw": 1.791,
+    "dimming_electricity_tw_per_tw": [
+     0.3582,
+     0.5373
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": "the floor any beam meets: spill, rectennas and bus"
+   }
+  ],
+  "ground_2_45_ghz_at_301_k": [
+   {
+    "name": "2.45 GHz to the ground through the design climate's 301 K column",
+    "share_lost": 0.06598,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.09721
+    },
+    "tile_electricity_w_per_w": 2.105,
+    "link_dc_efficiency": 0.4752,
+    "heat_w_per_w": 1.473,
+    "w_m2": 0.03884,
+    "points": 0.01723,
+    "points_if_the_dimmer_absorbs": [
+     0.01915,
+     0.02298
+    ],
+    "land_rain_percent": [
+     0.009479,
+     0.02378
+    ],
+    "growth_percent": [
+     0.001206,
+     0.005084
+    ],
+    "dimming_light_tw_per_tw": 1.917,
+    "dimming_electricity_tw_per_tw": [
+     0.3835,
+     0.5752
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": ""
+   },
+   {
+    "name": "2.45 GHz to the ground through the design climate's 301 K column",
+    "share_lost": 0.08115,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.1215
+    },
+    "tile_electricity_w_per_w": 2.139,
+    "link_dc_efficiency": 0.4674,
+    "heat_w_per_w": 1.498,
+    "w_m2": 0.03948,
+    "points": 0.01752,
+    "points_if_the_dimmer_absorbs": [
+     0.01946,
+     0.02336
+    ],
+    "land_rain_percent": [
+     0.009636,
+     0.02417
+    ],
+    "growth_percent": [
+     0.001226,
+     0.005168
+    ],
+    "dimming_light_tw_per_tw": 1.949,
+    "dimming_electricity_tw_per_tw": [
+     0.3898,
+     0.5847
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": ""
+   }
+  ],
+  "ground_2_45_ghz_through_1_atm": [
+   {
+    "name": "2.45 GHz to the ground through 1.0 atm at 301 K (for comparison; the air is a design condition)",
+    "share_lost": 0.05556,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.08095
+    },
+    "tile_electricity_w_per_w": 2.081,
+    "link_dc_efficiency": 0.4805,
+    "heat_w_per_w": 1.457,
+    "w_m2": 0.03841,
+    "points": 0.01704,
+    "points_if_the_dimmer_absorbs": [
+     0.01894,
+     0.02272
+    ],
+    "land_rain_percent": [
+     0.009375,
+     0.02352
+    ],
+    "growth_percent": [
+     0.001193,
+     0.005028
+    ],
+    "dimming_light_tw_per_tw": 1.896,
+    "dimming_electricity_tw_per_tw": [
+     0.3792,
+     0.5689
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": ""
+   },
+   {
+    "name": "2.45 GHz to the ground through 1.0 atm at 301 K (for comparison; the air is a design condition)",
+    "share_lost": 0.06842,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.1011
+    },
+    "tile_electricity_w_per_w": 2.11,
+    "link_dc_efficiency": 0.4739,
+    "heat_w_per_w": 1.477,
+    "w_m2": 0.03894,
+    "points": 0.01728,
+    "points_if_the_dimmer_absorbs": [
+     0.0192,
+     0.02304
+    ],
+    "land_rain_percent": [
+     0.009504,
+     0.02384
+    ],
+    "growth_percent": [
+     0.001209,
+     0.005097
+    ],
+    "dimming_light_tw_per_tw": 1.922,
+    "dimming_electricity_tw_per_tw": [
+     0.3845,
+     0.5767
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": ""
+   }
+  ],
+  "ground_1_ghz": [
+   {
+    "name": "1 GHz to the ground",
+    "share_lost": 0.05597,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.08159
+    },
+    "tile_electricity_w_per_w": 2.082,
+    "link_dc_efficiency": 0.4802,
+    "heat_w_per_w": 1.458,
+    "w_m2": 0.03843,
+    "points": 0.01705,
+    "points_if_the_dimmer_absorbs": [
+     0.01894,
+     0.02273
+    ],
+    "land_rain_percent": [
+     0.009379,
+     0.02353
+    ],
+    "growth_percent": [
+     0.001194,
+     0.00503
+    ],
+    "dimming_light_tw_per_tw": 1.897,
+    "dimming_electricity_tw_per_tw": [
+     0.3794,
+     0.5691
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": "apertures 2.45 times as wide for the same receiver"
+   },
+   {
+    "name": "1 GHz to the ground",
+    "share_lost": 0.06893,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.1019
+    },
+    "tile_electricity_w_per_w": 2.111,
+    "link_dc_efficiency": 0.4737,
+    "heat_w_per_w": 1.478,
+    "w_m2": 0.03896,
+    "points": 0.01729,
+    "points_if_the_dimmer_absorbs": [
+     0.01921,
+     0.02305
+    ],
+    "land_rain_percent": [
+     0.009509,
+     0.02386
+    ],
+    "growth_percent": [
+     0.00121,
+     0.0051
+    ],
+    "dimming_light_tw_per_tw": 1.923,
+    "dimming_electricity_tw_per_tw": [
+     0.3847,
+     0.577
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": "apertures 2.45 times as wide for the same receiver"
+   }
+  ],
+  "ground_5_8_ghz": [
+   {
+    "name": "5.8 GHz to the ground",
+    "share_lost": 0.08033,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.1202
+    },
+    "tile_electricity_w_per_w": 2.137,
+    "link_dc_efficiency": 0.4679,
+    "heat_w_per_w": 1.496,
+    "w_m2": 0.03944,
+    "points": 0.0175,
+    "points_if_the_dimmer_absorbs": [
+     0.01945,
+     0.02334
+    ],
+    "land_rain_percent": [
+     0.009627,
+     0.02415
+    ],
+    "growth_percent": [
+     0.001225,
+     0.005163
+    ],
+    "dimming_light_tw_per_tw": 1.947,
+    "dimming_electricity_tw_per_tw": [
+     0.3895,
+     0.5842
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": "storms stop it: the 90th-percentile storm takes 68-97%"
+   },
+   {
+    "name": "5.8 GHz to the ground",
+    "share_lost": 0.0987,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0,
+     "spill": 0.1376,
+     "air": 0.1507
+    },
+    "tile_electricity_w_per_w": 2.181,
+    "link_dc_efficiency": 0.4585,
+    "heat_w_per_w": 1.527,
+    "w_m2": 0.04025,
+    "points": 0.01786,
+    "points_if_the_dimmer_absorbs": [
+     0.01984,
+     0.02381
+    ],
+    "land_rain_percent": [
+     0.009823,
+     0.02464
+    ],
+    "growth_percent": [
+     0.00125,
+     0.005268
+    ],
+    "dimming_light_tw_per_tw": 1.987,
+    "dimming_electricity_tw_per_tw": [
+     0.3974,
+     0.5961
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 7478.0,
+    "notes": "storms stop it: the 90th-percentile storm takes 68-97%"
+   }
+  ],
+  "raised_20_km_2_45_ghz": [
+   {
+    "name": "2.45 GHz to receivers raised to 20 km, lines down",
+    "share_lost": 0.03652,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.02527,
+     "spill": 0.1404,
+     "air": 0.05322
+    },
+    "tile_electricity_w_per_w": 2.082,
+    "link_dc_efficiency": 0.4803,
+    "heat_w_per_w": 1.457,
+    "w_m2": 0.03842,
+    "points": 0.01705,
+    "points_if_the_dimmer_absorbs": [
+     0.01894,
+     0.02273
+    ],
+    "land_rain_percent": [
+     0.009377,
+     0.02352
+    ],
+    "growth_percent": [
+     0.001193,
+     0.005029
+    ],
+    "dimming_light_tw_per_tw": 1.897,
+    "dimming_electricity_tw_per_tw": [
+     0.3793,
+     0.569
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 0.0,
+    "notes": "the ground beneath stays open; tethers stand in the flight bands"
+   },
+   {
+    "name": "2.45 GHz to receivers raised to 20 km, lines down",
+    "share_lost": 0.04508,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0383,
+     "spill": 0.1419,
+     "air": 0.06696
+    },
+    "tile_electricity_w_per_w": 2.122,
+    "link_dc_efficiency": 0.4712,
+    "heat_w_per_w": 1.486,
+    "w_m2": 0.03916,
+    "points": 0.01738,
+    "points_if_the_dimmer_absorbs": [
+     0.01931,
+     0.02317
+    ],
+    "land_rain_percent": [
+     0.009558,
+     0.02398
+    ],
+    "growth_percent": [
+     0.001216,
+     0.005126
+    ],
+    "dimming_light_tw_per_tw": 1.933,
+    "dimming_electricity_tw_per_tw": [
+     0.3867,
+     0.58
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 0.0,
+    "notes": "the ground beneath stays open; tethers stand in the flight bands"
+   }
+  ],
+  "raised_30_km_2_45_ghz": [
+   {
+    "name": "2.45 GHz to receivers raised to 30 km, lines down",
+    "share_lost": 0.02672,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.02527,
+     "spill": 0.1404,
+     "air": 0.03854
+    },
+    "tile_electricity_w_per_w": 2.061,
+    "link_dc_efficiency": 0.4852,
+    "heat_w_per_w": 1.443,
+    "w_m2": 0.03803,
+    "points": 0.01688,
+    "points_if_the_dimmer_absorbs": [
+     0.01875,
+     0.0225
+    ],
+    "land_rain_percent": [
+     0.009282,
+     0.02329
+    ],
+    "growth_percent": [
+     0.001181,
+     0.004978
+    ],
+    "dimming_light_tw_per_tw": 1.878,
+    "dimming_electricity_tw_per_tw": [
+     0.3755,
+     0.5633
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 0.0,
+    "notes": "the ground beneath stays open; tethers stand in the flight bands"
+   },
+   {
+    "name": "2.45 GHz to receivers raised to 30 km, lines down",
+    "share_lost": 0.03302,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0383,
+     "spill": 0.1419,
+     "air": 0.04843
+    },
+    "tile_electricity_w_per_w": 2.096,
+    "link_dc_efficiency": 0.4772,
+    "heat_w_per_w": 1.467,
+    "w_m2": 0.03867,
+    "points": 0.01716,
+    "points_if_the_dimmer_absorbs": [
+     0.01907,
+     0.02288
+    ],
+    "land_rain_percent": [
+     0.009439,
+     0.02368
+    ],
+    "growth_percent": [
+     0.001201,
+     0.005062
+    ],
+    "dimming_light_tw_per_tw": 1.909,
+    "dimming_electricity_tw_per_tw": [
+     0.3819,
+     0.5728
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 0.0,
+    "notes": "the ground beneath stays open; tethers stand in the flight bands"
+   }
+  ],
+  "raised_40_km_2_45_ghz": [
+   {
+    "name": "2.45 GHz to receivers raised to 40 km, lines down",
+    "share_lost": 0.01944,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.02527,
+     "spill": 0.1404,
+     "air": 0.02784
+    },
+    "tile_electricity_w_per_w": 2.046,
+    "link_dc_efficiency": 0.4889,
+    "heat_w_per_w": 1.432,
+    "w_m2": 0.03775,
+    "points": 0.01675,
+    "points_if_the_dimmer_absorbs": [
+     0.01861,
+     0.02233
+    ],
+    "land_rain_percent": [
+     0.009214,
+     0.02312
+    ],
+    "growth_percent": [
+     0.001173,
+     0.004941
+    ],
+    "dimming_light_tw_per_tw": 1.864,
+    "dimming_electricity_tw_per_tw": [
+     0.3727,
+     0.5591
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 0.0,
+    "notes": "the ground beneath stays open; tethers stand in the flight bands"
+   },
+   {
+    "name": "2.45 GHz to receivers raised to 40 km, lines down",
+    "share_lost": 0.02405,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0383,
+     "spill": 0.1419,
+     "air": 0.03496
+    },
+    "tile_electricity_w_per_w": 2.076,
+    "link_dc_efficiency": 0.4816,
+    "heat_w_per_w": 1.454,
+    "w_m2": 0.03832,
+    "points": 0.017,
+    "points_if_the_dimmer_absorbs": [
+     0.01889,
+     0.02267
+    ],
+    "land_rain_percent": [
+     0.009352,
+     0.02346
+    ],
+    "growth_percent": [
+     0.00119,
+     0.005016
+    ],
+    "dimming_light_tw_per_tw": 1.892,
+    "dimming_electricity_tw_per_tw": [
+     0.3783,
+     0.5675
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 0.0,
+    "notes": "the ground beneath stays open; tethers stand in the flight bands"
+   }
+  ],
+  "raised_30_km_5_8_ghz": [
+   {
+    "name": "5.8 GHz to receivers raised to 30 km, lines down",
+    "share_lost": 0.028,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.02527,
+     "spill": 0.1404,
+     "air": 0.04044
+    },
+    "tile_electricity_w_per_w": 2.064,
+    "link_dc_efficiency": 0.4846,
+    "heat_w_per_w": 1.445,
+    "w_m2": 0.03808,
+    "points": 0.0169,
+    "points_if_the_dimmer_absorbs": [
+     0.01878,
+     0.02253
+    ],
+    "land_rain_percent": [
+     0.009295,
+     0.02332
+    ],
+    "growth_percent": [
+     0.001183,
+     0.004985
+    ],
+    "dimming_light_tw_per_tw": 1.88,
+    "dimming_electricity_tw_per_tw": [
+     0.376,
+     0.564
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 0.0,
+    "notes": "above the storms, so 5.8 GHz holds through them"
+   },
+   {
+    "name": "5.8 GHz to receivers raised to 30 km, lines down",
+    "share_lost": 0.03462,
+    "heat_parts_w_per_w": {
+     "delivered": 1.0,
+     "bus": 0.05263,
+     "rectenna": 0.1858,
+     "line": 0.0383,
+     "spill": 0.1419,
+     "air": 0.05088
+    },
+    "tile_electricity_w_per_w": 2.099,
+    "link_dc_efficiency": 0.4764,
+    "heat_w_per_w": 1.469,
+    "w_m2": 0.03874,
+    "points": 0.01719,
+    "points_if_the_dimmer_absorbs": [
+     0.0191,
+     0.02292
+    ],
+    "land_rain_percent": [
+     0.009455,
+     0.02372
+    ],
+    "growth_percent": [
+     0.001203,
+     0.005071
+    ],
+    "dimming_light_tw_per_tw": 1.912,
+    "dimming_electricity_tw_per_tw": [
+     0.3825,
+     0.5737
+    ],
+    "self_supply_share": [
+     0.1822,
+     0.2733
+    ],
+    "ground_closed_km2_per_tw": 0.0,
+    "notes": "above the storms, so 5.8 GHz holds through them"
+   }
+  ]
+ },
+ "optical": {
+  "rayleigh_depth_850nm": 0.1322,
+  "rayleigh_depth_550nm": 0.7545,
+  "direct_sunbeam_rayleigh_only_overhead": 0.4702,
+  "clear_transmission_at_61_deg": [
+   0.8123,
+   0.6107
+  ],
+  "heat_w_per_w": [
+   2.007,
+   4.788
+  ],
+  "tile_electricity_w_per_w": [
+   3.165,
+   9.575
+  ],
+  "points": [
+   0.02348,
+   0.05601
+  ],
+  "share_of_time_cloud_blocks_a_ground_receiver": 0.3565,
+  "notes": "cloud stops the beam: the design run covers the land's sky 36% of the time on average"
+ },
+ "local_solar": {
+  "whole": {
+   "toa_w_m2": 300.0,
+   "ghi_w_m2": 101.7,
+   "ghi_clear_w_m2": 142.9,
+   "ground_over_top": 0.3392,
+   "ground_over_top_clear": 0.4764,
+   "land_cloud": 0.3565
+  },
+  "load_weighted_ghi_w_m2": 92.71,
+  "by_band": {
+   "0": {
+    "lat_deg": [
+     0.0,
+     15.0
+    ],
+    "ghi_w_m2": 127.8,
+    "ghi_clear_w_m2": 186.4,
+    "toa_w_m2": 370.6,
+    "ground_over_top": 0.3449,
+    "load_weight": [
+     0.105,
+     0.105
+    ],
+    "stores": {
+     "hydrogen": {
+      "generation_over_load": [
+       1.72,
+       1.72
+      ],
+      "store_share": [
+       0.4799,
+       0.4799
+      ],
+      "store_twh_per_tw": [
+       340.1,
+       340.1
+      ]
+     },
+     "pumped_water": {
+      "generation_over_load": [
+       1.128,
+       1.17
+      ],
+      "store_share": [
+       0.5128,
+       0.5102
+      ],
+      "store_twh_per_tw": [
+       363.4,
+       361.6
+      ]
+     },
+     "batteries": {
+      "generation_over_load": [
+       1.07,
+       1.07
+      ],
+      "store_share": [
+       0.5164,
+       0.5164
+      ],
+      "store_twh_per_tw": [
+       366.0,
+       366.0
+      ]
+     },
+     "iron_air": {
+      "generation_over_load": [
+       1.593,
+       1.72
+      ],
+      "store_share": [
+       0.4854,
+       0.4799
+      ],
+      "store_twh_per_tw": [
+       344.0,
+       340.1
+      ]
+     }
+    },
+    "grid_remote_share": 0.5217
+   },
+   "15": {
+    "lat_deg": [
+     15.0,
+     30.0
+    ],
+    "ghi_w_m2": 119.8,
+    "ghi_clear_w_m2": 172.7,
+    "toa_w_m2": 348.8,
+    "ground_over_top": 0.3436,
+    "load_weight": [
+     0.07451,
+     0.07452
+    ],
+    "stores": {
+     "hydrogen": {
+      "generation_over_load": [
+       1.715,
+       1.715
+      ],
+      "store_share": [
+       0.4767,
+       0.4767
+      ],
+      "store_twh_per_tw": [
+       337.9,
+       337.9
+      ]
+     },
+     "pumped_water": {
+      "generation_over_load": [
+       1.128,
+       1.169
+      ],
+      "store_share": [
+       0.5106,
+       0.508
+      ],
+      "store_twh_per_tw": [
+       361.9,
+       360.0
+      ]
+     },
+     "batteries": {
+      "generation_over_load": [
+       1.07,
+       1.07
+      ],
+      "store_share": [
+       0.5143,
+       0.5143
+      ],
+      "store_twh_per_tw": [
+       364.5,
+       364.5
+      ]
+     },
+     "iron_air": {
+      "generation_over_load": [
+       1.59,
+       1.715
+      ],
+      "store_share": [
+       0.4825,
+       0.4767
+      ],
+      "store_twh_per_tw": [
+       341.9,
+       337.9
+      ]
+     }
+    },
+    "grid_remote_share": 0.52
+   },
+   "30": {
+    "lat_deg": [
+     30.0,
+     45.0
+    ],
+    "ghi_w_m2": 106.5,
+    "ghi_clear_w_m2": 147.1,
+    "toa_w_m2": 306.6,
+    "ground_over_top": 0.3473,
+    "load_weight": [
+     0.3937,
+     0.3938
+    ],
+    "stores": {
+     "hydrogen": {
+      "generation_over_load": [
+       1.697,
+       1.697
+      ],
+      "store_share": [
+       0.4649,
+       0.4649
+      ],
+      "store_twh_per_tw": [
+       329.5,
+       329.5
+      ]
+     },
+     "pumped_water": {
+      "generation_over_load": [
+       1.125,
+       1.166
+      ],
+      "store_share": [
+       0.5008,
+       0.4978
+      ],
+      "store_twh_per_tw": [
+       354.9,
+       352.8
+      ]
+     },
+     "batteries": {
+      "generation_over_load": [
+       1.069,
+       1.069
+      ],
+      "store_share": [
+       0.5049,
+       0.5049
+      ],
+      "store_twh_per_tw": [
+       357.8,
+       357.8
+      ]
+     },
+     "iron_air": {
+      "generation_over_load": [
+       1.576,
+       1.697
+      ],
+      "store_share": [
+       0.4714,
+       0.4649
+      ],
+      "store_twh_per_tw": [
+       334.1,
+       329.5
+      ]
+     }
+    },
+    "grid_remote_share": 0.511
+   },
+   "45": {
+    "lat_deg": [
+     45.0,
+     60.0
+    ],
+    "ghi_w_m2": 81.96,
+    "ghi_clear_w_m2": 107.8,
+    "toa_w_m2": 238.7,
+    "ground_over_top": 0.3433,
+    "load_weight": [
+     0.2253,
+     0.2252
+    ],
+    "stores": {
+     "hydrogen": {
+      "generation_over_load": [
+       1.654,
+       1.654
+      ],
+      "store_share": [
+       0.4361,
+       0.4361
+      ],
+      "store_twh_per_tw": [
+       309.1,
+       309.1
+      ]
+     },
+     "pumped_water": {
+      "generation_over_load": [
+       1.12,
+       1.158
+      ],
+      "store_share": [
+       0.478,
+       0.4744
+      ],
+      "store_twh_per_tw": [
+       338.8,
+       336.2
+      ]
+     },
+     "batteries": {
+      "generation_over_load": [
+       1.066,
+       1.066
+      ],
+      "store_share": [
+       0.4831,
+       0.4831
+      ],
+      "store_twh_per_tw": [
+       342.4,
+       342.4
+      ]
+     },
+     "iron_air": {
+      "generation_over_load": [
+       1.543,
+       1.654
+      ],
+      "store_share": [
+       0.4441,
+       0.4361
+      ],
+      "store_twh_per_tw": [
+       314.8,
+       309.1
+      ]
+     }
+    },
+    "grid_remote_share": 0.491
+   },
+   "60": {
+    "lat_deg": [
+     60.0,
+     75.0
+    ],
+    "ghi_w_m2": 54.07,
+    "ghi_clear_w_m2": 63.84,
+    "toa_w_m2": 154.0,
+    "ground_over_top": 0.3511,
+    "load_weight": [
+     0.1503,
+     0.1503
+    ],
+    "stores": {
+     "hydrogen": {
+      "generation_over_load": [
+       1.508,
+       1.508
+      ],
+      "store_share": [
+       0.339,
+       0.339
+      ],
+      "store_twh_per_tw": [
+       240.2,
+       240.2
+      ]
+     },
+     "pumped_water": {
+      "generation_over_load": [
+       1.1,
+       1.131
+      ],
+      "store_share": [
+       0.3987,
+       0.3934
+      ],
+      "store_twh_per_tw": [
+       282.6,
+       278.8
+      ]
+     },
+     "batteries": {
+      "generation_over_load": [
+       1.055,
+       1.055
+      ],
+      "store_share": [
+       0.407,
+       0.407
+      ],
+      "store_twh_per_tw": [
+       288.4,
+       288.4
+      ]
+     },
+     "iron_air": {
+      "generation_over_load": [
+       1.427,
+       1.508
+      ],
+      "store_share": [
+       0.3492,
+       0.339
+      ],
+      "store_twh_per_tw": [
+       247.5,
+       240.2
+      ]
+     }
+    },
+    "grid_remote_share": 0.4177
+   },
+   "75": {
+    "lat_deg": [
+     75.0,
+     90.0
+    ],
+    "ghi_w_m2": 36.27,
+    "ghi_clear_w_m2": 34.95,
+    "toa_w_m2": 91.49,
+    "ground_over_top": 0.3964,
+    "load_weight": [
+     0.05124,
+     0.05123
+    ],
+    "stores": {
+     "hydrogen": {
+      "generation_over_load": [
+       1.144,
+       1.144
+      ],
+      "store_share": [
+       0.0962,
+       0.0962
+      ],
+      "store_twh_per_tw": [
+       67.89,
+       67.89
+      ]
+     },
+     "pumped_water": {
+      "generation_over_load": [
+       1.035,
+       1.045
+      ],
+      "store_share": [
+       0.1385,
+       0.1337
+      ],
+      "store_twh_per_tw": [
+       98.15,
+       94.76
+      ]
+     },
+     "batteries": {
+      "generation_over_load": [
+       1.02,
+       1.02
+      ],
+      "store_share": [
+       0.1456,
+       0.1456
+      ],
+      "store_twh_per_tw": [
+       103.2,
+       103.2
+      ]
+     },
+     "iron_air": {
+      "generation_over_load": [
+       1.125,
+       1.144
+      ],
+      "store_share": [
+       0.1019,
+       0.0962
+      ],
+      "store_twh_per_tw": [
+       71.27,
+       67.89
+      ]
+     }
+    },
+    "grid_remote_share": 0.1552
+   }
+  },
+  "albedo": {
+   "land": 0.2,
+   "pv": [
+    0.05,
+    0.1
+   ],
+   "change": [
+    0.1,
+    0.15
+   ],
+   "clear_sky_ground_over_top_equator": 0.5029,
+   "escape_clear": 0.6761,
+   "escape_all_sky": [
+    0.5315,
+    0.6038
+   ]
+  },
+  "routes": {
+   "global_grid": {
+    "delivered_w_m2_of_panel": [
+     25.74,
+     15.59
+    ],
+    "delivered_over_generated": [
+     0.9467,
+     0.8991
+    ],
+    "panel_km2_per_tw": [
+     38850.0,
+     64150.0
+    ],
+    "land_km2_per_tw": [
+     55500.0,
+     160400.0
+    ],
+    "store_twh_per_tw": [
+     0.0,
+     0.0
+    ],
+    "heat_w_per_w": [
+     0.1914,
+     0.5387
+    ],
+    "surface_light_w_per_w": [
+     3.602,
+     5.948
+    ],
+    "peak_capacity_tw_per_tw": [
+     11.66,
+     14.11
+    ],
+    "pv_mass_gt_per_tw": [
+     1.166,
+     1.835
+    ]
+   },
+   "hydrogen": {
+    "delivered_w_m2_of_panel": [
+     16.63,
+     10.61
+    ],
+    "delivered_over_generated": [
+     0.6118,
+     0.6118
+    ],
+    "panel_km2_per_tw": [
+     60120.0,
+     94280.0
+    ],
+    "land_km2_per_tw": [
+     85890.0,
+     235700.0
+    ],
+    "store_twh_per_tw": [
+     299.8,
+     299.8
+    ],
+    "heat_w_per_w": [
+     0.2962,
+     0.7917
+    ],
+    "surface_light_w_per_w": [
+     5.574,
+     8.741
+    ],
+    "peak_capacity_tw_per_tw": [
+     18.04,
+     20.74
+    ],
+    "pv_mass_gt_per_tw": [
+     1.804,
+     2.696
+    ]
+   },
+   "pumped_water": {
+    "delivered_w_m2_of_panel": [
+     24.36,
+     15.03
+    ],
+    "delivered_over_generated": [
+     0.8961,
+     0.867
+    ],
+    "panel_km2_per_tw": [
+     41040.0,
+     66530.0
+    ],
+    "land_km2_per_tw": [
+     58640.0,
+     166300.0
+    ],
+    "store_twh_per_tw": [
+     328.7,
+     326.2
+    ],
+    "heat_w_per_w": [
+     0.2023,
+     0.5586
+    ],
+    "surface_light_w_per_w": [
+     3.805,
+     6.168
+    ],
+    "peak_capacity_tw_per_tw": [
+     12.31,
+     14.64
+    ],
+    "pv_mass_gt_per_tw": [
+     1.231,
+     1.903
+    ]
+   },
+   "batteries": {
+    "delivered_w_m2_of_panel": [
+     25.55,
+     16.3
+    ],
+    "delivered_over_generated": [
+     0.9399,
+     0.9399
+    ],
+    "panel_km2_per_tw": [
+     39130.0,
+     61370.0
+    ],
+    "land_km2_per_tw": [
+     55900.0,
+     153400.0
+    ],
+    "store_twh_per_tw": [
+     332.2,
+     332.2
+    ],
+    "heat_w_per_w": [
+     0.1928,
+     0.5153
+    ],
+    "surface_light_w_per_w": [
+     3.628,
+     5.689
+    ],
+    "peak_capacity_tw_per_tw": [
+     11.74,
+     13.5
+    ],
+    "pv_mass_gt_per_tw": [
+     1.174,
+     1.755
+    ]
+   },
+   "iron_air": {
+    "delivered_w_m2_of_panel": [
+     17.82,
+     10.61
+    ],
+    "delivered_over_generated": [
+     0.6554,
+     0.6118
+    ],
+    "panel_km2_per_tw": [
+     56120.0,
+     94280.0
+    ],
+    "land_km2_per_tw": [
+     80170.0,
+     235700.0
+    ],
+    "store_twh_per_tw": [
+     304.9,
+     299.8
+    ],
+    "heat_w_per_w": [
+     0.2765,
+     0.7917
+    ],
+    "surface_light_w_per_w": [
+     5.203,
+     8.741
+    ],
+    "peak_capacity_tw_per_tw": [
+     16.84,
+     20.74
+    ],
+    "pv_mass_gt_per_tw": [
+     1.684,
+     2.696
+    ]
+   }
+  },
+  "grid": {
+   "remote_share": 0.476,
+   "peak_transfer_tw_per_tw": [
+    0.5,
+    0.7
+   ],
+   "line_km_per_tw": [
+    166700.0,
+    320800.0
+   ],
+   "aluminium_mt_per_tw": [
+    5.0,
+    9.625
+   ],
+   "corridor_km2_per_tw": [
+    8333.0,
+    32080.0
+   ]
+  },
+  "stores": {
+   "hydrogen_mt_per_tw": [
+    18.01,
+    18.01
+   ],
+   "hydrogen_volume_km3_per_tw_at_20_mpa": [
+    1.2,
+    1.2
+   ],
+   "pumped_water_km3_per_tw": [
+    229.2,
+    227.4
+   ],
+   "battery_gt_per_tw": [
+    1.107,
+    2.215
+   ]
+  },
+  "sunlight_taken_from_the_ground_w_per_w": {
+   "beams_dimming": [
+    0.6484,
+    0.6586
+   ],
+   "panels_global_grid": [
+    3.602,
+    5.948
+   ],
+   "panels_hydrogen": [
+    5.574,
+    8.741
+   ]
+  },
+  "aerial_above_the_cloud": {
+   "heat_w_per_w": {
+    "hydrogen": [
+     1.731,
+     2.753
+    ],
+    "global_grid": [
+     1.118,
+     1.874
+    ]
+   },
+   "transmission": [
+    0.8,
+    0.9
+   ],
+   "rule": "panels at 30 km over a planet of albedo 0.40, through the night on hydrogen or a grid"
+  },
+  "floating_on_the_seas": {
+   "albedo_change_times_escape": [
+    -0.01648,
+    0.01147
+   ],
+   "rule": "the design run's open water against panels of 0.05-0.10: near zero, the sign open"
+  },
+  "rooftops": {
+   "roof_and_pavement_km2": [
+    260000.0,
+    740000.0
+   ],
+   "kind": "project",
+   "basis": "the heat-levers study's roofs and pavements of the settled land; a usable share of it carries panels stored through the night in hydrogen",
+   "delivered_tw": [
+    0.8273,
+    6.154
+   ]
+  },
+  "first_screen_metropolis_panels_km2": 6100.0
+ },
+ "other_flows": {
+  "hydro": {
+   "gross_tw": 0.87,
+   "developable_tw": [
+    0.2218,
+    0.4437
+   ],
+   "heat_w_per_w": 0.0
+  },
+  "tides": {
+   "tw": [
+    0.0288,
+    0.0577
+   ],
+   "heat_w_per_w": 0.0
+  },
+  "geothermal": {
+   "heat_flow_tw": [
+    0.5311,
+    0.7966
+   ],
+   "electricity_if_all_taken_tw": [
+    0.05311,
+    0.1195
+   ],
+   "heat_w_per_w_mining_stored_heat": [
+    6.667,
+    10.0
+   ]
+  },
+  "otec": {
+   "seas_km2": 10620000.0,
+   "tw": [
+    0.2443,
+    0.4992
+   ],
+   "heat_w_per_w": 0.0
+  },
+  "wind": {
+   "air_density_kg_m3": 1.423,
+   "mean_speed_m_s": 1.696,
+   "share_below_cut_in": 0.886,
+   "power_density_w_m2": 7.788,
+   "against_earth": [
+    0.019,
+    0.07234
+   ],
+   "realized_w_m2": [
+    0.009498,
+    0.03617
+   ],
+   "km2_per_tw": [
+    27650000.0,
+    105300000.0
+   ],
+   "stress_dissipation_w_m2": 0.1492,
+   "dissipation_over_dry_land_tw": 3.492,
+   "cm1_rings": {
+    "equator": {
+     "latitude_deg": 0.0,
+     "land_10_m": {
+      "median_m_s": 1.217,
+      "p90_m_s": 3.396,
+      "p99_m_s": 5.196,
+      "max_m_s": 9.496,
+      "weibull_shape": 1.17,
+      "weibull_scale_m_s": 1.665,
+      "power_density_w_m2": 11.71,
+      "power_density_bound_w_m2": 26.86
+     },
+     "water_10_m": {
+      "median_m_s": 2.153,
+      "p90_m_s": 4.001,
+      "p99_m_s": 5.837,
+      "max_m_s": 10.93,
+      "weibull_shape": 1.937,
+      "weibull_scale_m_s": 2.601,
+      "power_density_w_m2": 17.24,
+      "power_density_bound_w_m2": 43.79
+     },
+     "1_km": {
+      "median_m_s": 2.76,
+      "p90_m_s": 5.605,
+      "p99_m_s": 8.315,
+      "max_m_s": 15.6,
+      "weibull_shape": 1.694,
+      "weibull_scale_m_s": 3.426,
+      "power_density_w_m2": 46.81,
+      "power_density_bound_w_m2": 121.4
+     }
+    },
+    "45n": {
+     "latitude_deg": 45.0,
+     "land_10_m": {
+      "median_m_s": 1.094,
+      "p90_m_s": 2.792,
+      "p99_m_s": 3.915,
+      "max_m_s": 8.275,
+      "weibull_shape": 1.281,
+      "weibull_scale_m_s": 1.456,
+      "power_density_w_m2": 6.158,
+      "power_density_bound_w_m2": 14.54
+     },
+     "water_10_m": {
+      "median_m_s": 1.611,
+      "p90_m_s": 2.648,
+      "p99_m_s": 3.349,
+      "max_m_s": 7.795,
+      "weibull_shape": 2.417,
+      "weibull_scale_m_s": 1.875,
+      "power_density_w_m2": 5.287,
+      "power_density_bound_w_m2": 12.54
+     },
+     "1_km": {
+      "median_m_s": 2.826,
+      "p90_m_s": 4.518,
+      "p99_m_s": 5.969,
+      "max_m_s": 10.84,
+      "weibull_shape": 2.559,
+      "weibull_scale_m_s": 3.262,
+      "power_density_w_m2": 26.8,
+      "power_density_bound_w_m2": 56.96
+     }
+    },
+    "45s": {
+     "latitude_deg": -45.0,
+     "land_10_m": {
+      "median_m_s": 0.8881,
+      "p90_m_s": 2.763,
+      "p99_m_s": 3.847,
+      "max_m_s": 8.102,
+      "weibull_shape": 1.058,
+      "weibull_scale_m_s": 1.256,
+      "power_density_w_m2": 6.912,
+      "power_density_bound_w_m2": 13.68
+     },
+     "water_10_m": {
+      "median_m_s": 1.787,
+      "p90_m_s": 3.027,
+      "p99_m_s": 3.845,
+      "max_m_s": 9.191,
+      "weibull_shape": 2.279,
+      "weibull_scale_m_s": 2.099,
+      "power_density_w_m2": 7.757,
+      "power_density_bound_w_m2": 19.09
+     },
+     "1_km": {
+      "median_m_s": 2.608,
+      "p90_m_s": 4.643,
+      "p99_m_s": 5.996,
+      "max_m_s": 13.15,
+      "weibull_shape": 2.082,
+      "weibull_scale_m_s": 3.11,
+      "power_density_w_m2": 27.32,
+      "power_density_bound_w_m2": 64.78
+     }
+    },
+    "80n": {
+     "latitude_deg": 80.0,
+     "land_10_m": {
+      "median_m_s": 0.000789,
+      "p90_m_s": 0.04913,
+      "p99_m_s": 0.2939,
+      "max_m_s": 0.5859,
+      "weibull_shape": null,
+      "weibull_scale_m_s": null,
+      "power_density_w_m2": null,
+      "power_density_bound_w_m2": 0.003091
+     },
+     "water_10_m": {
+      "median_m_s": 0.5505,
+      "p90_m_s": 0.7815,
+      "p99_m_s": 0.9561,
+      "max_m_s": 1.002,
+      "weibull_shape": 3.425,
+      "weibull_scale_m_s": 0.6126,
+      "power_density_w_m2": 0.156,
+      "power_density_bound_w_m2": 0.2583
+     },
+     "1_km": {
+      "median_m_s": 0.1635,
+      "p90_m_s": 0.2756,
+      "p99_m_s": 0.3872,
+      "max_m_s": 0.6544,
+      "weibull_shape": 2.301,
+      "weibull_scale_m_s": 0.1918,
+      "power_density_w_m2": 0.005869,
+      "power_density_bound_w_m2": 0.01322
+     }
+    },
+    "80s": {
+     "latitude_deg": -80.0,
+     "land_10_m": {
+      "median_m_s": 0.003122,
+      "p90_m_s": 0.3348,
+      "p99_m_s": 0.8766,
+      "max_m_s": 1.379,
+      "weibull_shape": null,
+      "weibull_scale_m_s": null,
+      "power_density_w_m2": null,
+      "power_density_bound_w_m2": 0.07247
+     },
+     "water_10_m": {
+      "median_m_s": 0.568,
+      "p90_m_s": 0.9584,
+      "p99_m_s": 1.316,
+      "max_m_s": 1.585,
+      "weibull_shape": 2.295,
+      "weibull_scale_m_s": 0.6663,
+      "power_density_w_m2": 0.2467,
+      "power_density_bound_w_m2": 0.4901
+     },
+     "1_km": {
+      "median_m_s": 0.4678,
+      "p90_m_s": 0.8318,
+      "p99_m_s": 0.9815,
+      "max_m_s": 1.362,
+      "weibull_shape": 2.086,
+      "weibull_scale_m_s": 0.5577,
+      "power_density_w_m2": 0.1572,
+      "power_density_bound_w_m2": 0.2787
+     }
+    }
+   },
+   "cm1_rule": "the cloud-resolving rings' instantaneous 3-hourly winds (the earlier design case): a Weibull through each median and 90th percentile where its shape passes 0.8, and an upper bound with each slice of time at its slice's top speed, at the design air's density",
+   "heat_w_per_w": 0.0
+  }
+ },
+ "thermal_plants": {
+  "fission": {
+   "heat_w_per_w": [
+    2.222,
+    3.03
+   ],
+   "points": [
+    0.026,
+    0.03545
+   ],
+   "fissioned_t_per_twe_year": [
+    846.8,
+    1155.0
+   ],
+   "thorium_rock_gt_per_twe_year": [
+    0.07056,
+    0.2887
+   ]
+  },
+  "fusion": {
+   "heat_w_per_w": [
+    2.0,
+    3.0
+   ],
+   "points": [
+    0.0234,
+    0.03509
+   ],
+   "deuterium_t_per_twe_year": [
+    74.85,
+    112.3
+   ],
+   "lithium6_t_per_twe_year": [
+    223.6,
+    335.3
+   ]
+  }
+ },
+ "orbit": {
+  "food": {
+   "beams_heat_removed_tw": [
+    11.06,
+    83.97
+   ],
+   "food_energy_arriving_tw": [
+    0.6288,
+    0.9437
+   ],
+   "fall_tw": [
+    0.08925,
+    0.4871
+   ],
+   "fall_mj_per_kg": 2.699,
+   "mass_kg_s": [
+    33060.0,
+    180400.0
+   ],
+   "net_heat_saved_tw": [
+    10.34,
+    82.54
+   ],
+   "points_saved": [
+    0.121,
+    0.9655
+   ],
+   "heat_on_the_moon_w_per_w_of_food_power_moved": [
+    0.09687,
+    0.0254
+   ],
+   "carbon_arriving_gt_yr": [
+    0.4743,
+    0.7118
+   ],
+   "carbon_times_the_managed_import": [
+    1.456,
+    6.184
+   ],
+   "phosphorus_arriving_mt_yr": [
+    2.285,
+    3.43
+   ]
+  },
+  "computing": {
+   "moved_share": 0.75,
+   "beams_heat_removed_tw": [
+    5.1,
+    5.179
+   ],
+   "points_saved": [
+    0.05965,
+    0.06059
+   ]
+  },
+  "heat_in_orbit_w_m2_per_tw": 4.97e-05
+ },
+ "options": {
+  "beams_2_45_ghz": {
+   "heat_w_per_w": [
+    1.476,
+    1.501
+   ],
+   "points_per_tw": [
+    0.01726,
+    0.01755
+   ],
+   "kind": "project and computed",
+   "ground_km2_per_tw": 7478.0,
+   "rectenna_gt_per_tw": [
+    0.02991,
+    0.1197
+   ],
+   "tile_electricity_w_per_w": [
+    2.108,
+    2.144
+   ],
+   "notes": "",
+   "store_twh_per_tw": [
+    19.2,
+    12.02
+   ],
+   "orbit_mt_per_tw_at_1978_reference": 10.0,
+   "failure": "a fault across the ring is the one common mode; storms cost 1-23% of a beam",
+   "maturity": "rectennas measured at 82-91%; tens of kW over a few km on the ground; milliwatts in space (2023); no system built"
+  },
+  "beams_5_8_ghz": {
+   "heat_w_per_w": [
+    1.496,
+    1.527
+   ],
+   "points_per_tw": [
+    0.0175,
+    0.01786
+   ],
+   "kind": "project and computed",
+   "ground_km2_per_tw": 7478.0,
+   "rectenna_gt_per_tw": [
+    0.02991,
+    0.1197
+   ],
+   "tile_electricity_w_per_w": [
+    2.137,
+    2.181
+   ],
+   "notes": "storms stop it: the 90th-percentile storm takes 68-97%",
+   "failure": "storms stop it",
+   "maturity": "as 2.45 GHz"
+  },
+  "beams_1_ghz": {
+   "heat_w_per_w": [
+    1.458,
+    1.478
+   ],
+   "points_per_tw": [
+    0.01705,
+    0.01729
+   ],
+   "kind": "computed (P.676 at its lower limit)",
+   "ground_km2_per_tw": 7478.0,
+   "rectenna_gt_per_tw": [
+    0.02991,
+    0.1197
+   ],
+   "tile_electricity_w_per_w": [
+    2.082,
+    2.111
+   ],
+   "notes": "apertures 2.45 times as wide for the same receiver",
+   "failure": "as 2.45 GHz",
+   "maturity": "as 2.45 GHz; apertures 2.45 times as wide"
+  },
+  "beams_raised_30_km": {
+   "heat_w_per_w": [
+    1.443,
+    1.467
+   ],
+   "points_per_tw": [
+    0.01688,
+    0.01716
+   ],
+   "kind": "computed on estimates",
+   "ground_km2_per_tw": 0.0,
+   "rectenna_gt_per_tw": 0.0,
+   "tile_electricity_w_per_w": [
+    2.061,
+    2.096
+   ],
+   "notes": "the ground beneath stays open; tethers stand in the flight bands",
+   "failure": "a tether or its platform; lines in the flight bands",
+   "maturity": "tethered aerostats carry kilowatts to megawatts on Earth (recalled)"
+  },
+  "beams_raised_30_km_5_8_ghz": {
+   "heat_w_per_w": [
+    1.445,
+    1.469
+   ],
+   "points_per_tw": [
+    0.0169,
+    0.01719
+   ],
+   "kind": "computed on estimates",
+   "ground_km2_per_tw": 0.0,
+   "rectenna_gt_per_tw": 0.0,
+   "tile_electricity_w_per_w": [
+    2.064,
+    2.099
+   ],
+   "notes": "above the storms, so 5.8 GHz holds through them",
+   "failure": "as raised 2.45 GHz; above the storms",
+   "maturity": "as above"
+  },
+  "optical": {
+   "heat_w_per_w": [
+    2.007,
+    4.788
+   ],
+   "points_per_tw": [
+    0.02348,
+    0.05601
+   ],
+   "kind": "estimate",
+   "ground_km2_per_tw": "small",
+   "tile_electricity_w_per_w": [
+    3.165,
+    9.575
+   ],
+   "failure": "cloud blocks a ground receiver 36% of the time",
+   "maturity": "800 W over 8.6 km (2025); 68.9% cells under laser light"
+  },
+  "food_made_in_orbit": {
+   "heat_w_per_w": [
+    0.09687,
+    0.0254
+   ],
+   "points_per_tw": [
+    0.001133,
+    0.0002972
+   ],
+   "kind": "computed on the heat-levers product",
+   "ground_km2_per_tw": 0.0,
+   "failure": "food security rides on the array and on arrivals",
+   "maturity": "controlled-environment farming and microbial protein exist on Earth; nothing at orbital scale"
+  },
+  "local_solar_grid": {
+   "heat_w_per_w": [
+    0.1914,
+    0.5387
+   ],
+   "points_per_tw": [
+    0.00224,
+    0.006301
+   ],
+   "kind": "computed on the design run and estimates",
+   "panel_km2_per_tw": [
+    38850.0,
+    64150.0
+   ],
+   "ground_km2_per_tw": [
+    63840.0,
+    192500.0
+   ],
+   "store_twh_per_tw": 0.0,
+   "line_km_per_tw": [
+    166700.0,
+    320800.0
+   ],
+   "pv_gt_per_tw": [
+    1.166,
+    1.835
+   ],
+   "failure": "distributed; a cut in the lines darkens the night side",
+   "maturity": "PV and 1,100 kV HVDC are commercial; no grid girdles a world"
+  },
+  "local_solar_hydrogen": {
+   "heat_w_per_w": [
+    0.2962,
+    0.7917
+   ],
+   "points_per_tw": [
+    0.003465,
+    0.009261
+   ],
+   "kind": "computed on the design run and estimates",
+   "panel_km2_per_tw": [
+    60120.0,
+    94280.0
+   ],
+   "ground_km2_per_tw": [
+    85890.0,
+    235700.0
+   ],
+   "store_twh_per_tw": [
+    299.8,
+    299.8
+   ],
+   "hydrogen_mt_per_tw": [
+    18.01,
+    18.01
+   ],
+   "pv_gt_per_tw": [
+    1.804,
+    2.696
+   ],
+   "failure": "distributed; the store must carry a 354-hour night",
+   "maturity": "electrolysers and fuel cells are commercial; no store of this size"
+  },
+  "local_solar_pumped_water": {
+   "heat_w_per_w": [
+    0.2023,
+    0.5586
+   ],
+   "points_per_tw": [
+    0.002366,
+    0.006535
+   ],
+   "kind": "computed on estimates",
+   "ground_km2_per_tw": [
+    58640.0,
+    166300.0
+   ],
+   "store_twh_per_tw": [
+    328.7,
+    326.2
+   ],
+   "water_km3_per_tw": [
+    229.2,
+    227.4
+   ],
+   "failure": "the reservoirs swing hundreds of metres every lunar day",
+   "maturity": "pumped hydro is commercial; no reservoir near this size"
+  },
+  "local_solar_batteries": {
+   "heat_w_per_w": [
+    0.1928,
+    0.5153
+   ],
+   "points_per_tw": [
+    0.002256,
+    0.006028
+   ],
+   "kind": "computed on estimates",
+   "ground_km2_per_tw": [
+    55900.0,
+    153400.0
+   ],
+   "store_twh_per_tw": [
+    332.2,
+    332.2
+   ],
+   "battery_gt_per_tw": [
+    1.107,
+    2.215
+   ],
+   "failure": "distributed",
+   "maturity": "commercial at hours, not at 300 TWh a TW"
+  },
+  "panels_above_the_cloud": {
+   "heat_w_per_w": [
+    1.118,
+    1.874
+   ],
+   "points_per_tw": [
+    0.01308,
+    0.02192
+   ],
+   "kind": "estimate",
+   "failure": "as aerial platforms",
+   "maturity": "none at scale"
+  },
+  "floating_panels": {
+   "heat_w_per_w": [
+    -0.01648,
+    0.01147
+   ],
+   "kind": "estimate",
+   "failure": "as local solar",
+   "maturity": "floating PV is commercial on reservoirs"
+  },
+  "wind": {
+   "heat_w_per_w": 0.0,
+   "kind": "computed on the design run",
+   "ground_km2_per_tw": [
+    27650000.0,
+    105300000.0
+   ],
+   "failure": "the design run's low winds",
+   "maturity": "commercial on Earth"
+  },
+  "hydro": {
+   "heat_w_per_w": 0.0,
+   "kind": "project",
+   "total_tw": [
+    0.2218,
+    0.4437
+   ],
+   "maturity": "commercial"
+  },
+  "otec": {
+   "heat_w_per_w": 0.0,
+   "kind": "estimate from Earth by area",
+   "total_tw": [
+    0.2443,
+    0.4992
+   ],
+   "maturity": "pilot plants on Earth (recalled)"
+  },
+  "tides": {
+   "heat_w_per_w": 0.0,
+   "kind": "project",
+   "total_tw": [
+    0.0288,
+    0.0577
+   ],
+   "maturity": "commercial"
+  },
+  "geothermal": {
+   "heat_w_per_w": [
+    0.0,
+    10.0
+   ],
+   "kind": "published heat flow",
+   "total_tw": [
+    0.05311,
+    0.1195
+   ],
+   "maturity": "commercial on Earth's hot spots; the Moon has none"
+  },
+  "fission": {
+   "heat_w_per_w": [
+    2.222,
+    3.03
+   ],
+   "points_per_tw": [
+    0.026,
+    0.03545
+   ],
+   "kind": "recalled efficiency",
+   "ground_km2_per_tw": "small",
+   "fissioned_t_per_twe_year": [
+    846.8,
+    1155.0
+   ],
+   "failure": "plant by plant",
+   "maturity": "commercial; thorium breeding demonstrated (recalled)"
+  },
+  "fusion": {
+   "heat_w_per_w": [
+    2.0,
+    3.0
+   ],
+   "points_per_tw": [
+    0.0234,
+    0.03509
+   ],
+   "kind": "project (conditional technology)",
+   "ground_km2_per_tw": "small",
+   "failure": "plant by plant",
+   "maturity": "target gain 4.13 at NIF (2025); ITER research 2034, D-T 2039; no plant has made net electricity"
+  }
+ },
+ "trades": {
+  "local_solar_global_grid": {
+   "points_saved_per_tw": [
+    0.01502,
+    0.01125
+   ],
+   "extra_ground_km2_per_tw": [
+    56360.0,
+    185000.0
+   ],
+   "ground_km2_per_point_saved": [
+    3752000.0,
+    16440000.0
+   ],
+   "share_of_dry_land_per_point_saved": [
+    0.1603,
+    0.7026
+   ]
+  },
+  "local_solar_hydrogen": {
+   "points_saved_per_tw": [
+    0.0138,
+    0.008292
+   ],
+   "extra_ground_km2_per_tw": [
+    78410.0,
+    228200.0
+   ],
+   "ground_km2_per_point_saved": [
+    5683000.0,
+    27520000.0
+   ],
+   "share_of_dry_land_per_point_saved": [
+    0.2429,
+    1.176
+   ]
+  },
+  "raised_20_km": {
+   "points_saved_per_tw": [
+    0.0002141,
+    0.0001758
+   ],
+   "ground_opened_km2_per_tw": 7478.0
+  },
+  "raised_30_km": {
+   "points_saved_per_tw": [
+    0.0003858,
+    0.0003925
+   ],
+   "ground_opened_km2_per_tw": 7478.0
+  },
+  "raised_40_km": {
+   "points_saved_per_tw": [
+    0.0005109,
+    0.0005501
+   ],
+   "ground_opened_km2_per_tw": 7478.0
+  },
+  "food_made_in_orbit": {
+   "points_saved_per_tw_of_food_power": [
+    0.01613,
+    0.01726
+   ],
+   "ground_opened_km2_per_tw": 7478.0
+  },
+  "rule": "against the ground's 2.45 GHz beams; a point of dimming costs the heat-levers study's 0.55-1.38% of the land's rain and 0.07-0.30% of the growth through light"
+ },
+ "mixes": {
+  "A": {
+   "name": "Beams as chosen: 2.45 GHz to the towns and the ground",
+   "heat_tw": [
+    32.97,
+    157.3
+   ],
+   "w_m2": [
+    0.8692,
+    4.148
+   ],
+   "points": [
+    0.3857,
+    1.841
+   ],
+   "share_of_the_resorts_dimming": [
+    0.03546,
+    0.2249
+   ],
+   "land_rain_percent": [
+    0.2122,
+    2.54
+   ],
+   "growth_percent": [
+    0.027,
+    0.543
+   ],
+   "ground_km2": [
+    120000.0,
+    545400.0
+   ],
+   "share_of_the_land_outside_kept_and_parks": [
+    0.01025,
+    0.04662
+   ],
+   "against_the_land_now_used": [
+    0.09673,
+    0.1887
+   ],
+   "store_twh": [
+    424.6,
+    1266.0
+   ],
+   "notes": "a fault across the ring leaves the critical loads on a week of stores"
+  },
+  "B": {
+   "name": "Beams, with the beamed food and three quarters of close computing made at the ring radius",
+   "heat_tw": [
+    17.35,
+    69.02
+   ],
+   "w_m2": [
+    0.4575,
+    1.82
+   ],
+   "points": [
+    0.203,
+    0.8074
+   ],
+   "share_of_the_resorts_dimming": [
+    0.01866,
+    0.09868
+   ],
+   "land_rain_percent": [
+    0.1117,
+    1.114
+   ],
+   "growth_percent": [
+    0.01421,
+    0.2382
+   ],
+   "ground_km2": [
+    38550.0,
+    98260.0
+   ],
+   "share_of_the_land_outside_kept_and_parks": [
+    0.003295,
+    0.008399
+   ],
+   "against_the_land_now_used": [
+    0.03109,
+    0.034
+   ],
+   "store_twh": [
+    424.6,
+    1266.0
+   ],
+   "notes": "food's carbon and phosphorus arrive with it and need return paths"
+  },
+  "C": {
+   "name": "Beams to the towns; the ground on local solar with a grid round the Moon",
+   "heat_tw": [
+    11.97,
+    87.16
+   ],
+   "w_m2": [
+    0.3155,
+    2.298
+   ],
+   "points": [
+    0.14,
+    1.02
+   ],
+   "share_of_the_resorts_dimming": [
+    0.01287,
+    0.1246
+   ],
+   "land_rain_percent": [
+    0.077,
+    1.407
+   ],
+   "growth_percent": [
+    0.009799,
+    0.3008
+   ],
+   "ground_km2": [
+    1024000.0,
+    14040000.0
+   ],
+   "share_of_the_land_outside_kept_and_parks": [
+    0.08752,
+    1.2
+   ],
+   "against_the_land_now_used": [
+    0.8258,
+    4.857
+   ],
+   "store_twh": [
+    0.0,
+    0.0
+   ],
+   "notes": "lines carry the night side from the day side; the panels darken the ground",
+   "line_km": [
+    2673000.0,
+    23400000.0
+   ]
+  },
+  "D": {
+   "name": "Beams to the towns; the ground on local solar with hydrogen through the night",
+   "heat_tw": [
+    13.65,
+    105.6
+   ],
+   "w_m2": [
+    0.3598,
+    2.784
+   ],
+   "points": [
+    0.1597,
+    1.235
+   ],
+   "share_of_the_resorts_dimming": [
+    0.01468,
+    0.151
+   ],
+   "land_rain_percent": [
+    0.08782,
+    1.705
+   ],
+   "growth_percent": [
+    0.01118,
+    0.3644
+   ],
+   "ground_km2": [
+    1378000.0,
+    17190000.0
+   ],
+   "share_of_the_land_outside_kept_and_parks": [
+    0.1177,
+    1.469
+   ],
+   "against_the_land_now_used": [
+    1.111,
+    5.948
+   ],
+   "store_twh": [
+    4809.0,
+    21870.0
+   ],
+   "notes": "a store of about 300 TWh for each TW, refilled every lunar day",
+   "hydrogen_mt": [
+    288.8,
+    1313.0
+   ]
+  },
+  "E": {
+   "name": "Beams to the towns; the ground on fission or fusion plants",
+   "heat_tw": [
+    40.98,
+    268.9
+   ],
+   "w_m2": [
+    1.08,
+    7.088
+   ],
+   "points": [
+    0.4793,
+    3.145
+   ],
+   "share_of_the_resorts_dimming": [
+    0.04407,
+    0.3844
+   ],
+   "land_rain_percent": [
+    0.2637,
+    4.341
+   ],
+   "growth_percent": [
+    0.03355,
+    0.9279
+   ],
+   "ground_km2": [
+    0.0,
+    0.0
+   ],
+   "share_of_the_land_outside_kept_and_parks": [
+    0.0,
+    0.0
+   ],
+   "against_the_land_now_used": [
+    0.0,
+    0.0
+   ],
+   "store_twh": [
+    0.0,
+    0.0
+   ],
+   "notes": "plants' land is small; their heat is two to three times what they deliver"
+  },
+  "F": {
+   "name": "Fusion for all, the planning assumption of 27 September",
+   "heat_tw": [
+    44.2,
+    316.6
+   ],
+   "w_m2": [
+    1.165,
+    8.347
+   ],
+   "points": [
+    0.517,
+    3.704
+   ],
+   "share_of_the_resorts_dimming": [
+    0.04754,
+    0.4527
+   ],
+   "land_rain_percent": [
+    0.2844,
+    5.111
+   ],
+   "growth_percent": [
+    0.03619,
+    1.093
+   ],
+   "ground_km2": [
+    0.0,
+    0.0
+   ],
+   "share_of_the_land_outside_kept_and_parks": [
+    0.0,
+    0.0
+   ],
+   "against_the_land_now_used": [
+    0.0,
+    0.0
+   ],
+   "store_twh": [
+    0.0,
+    0.0
+   ],
+   "notes": "a conditional technology; the towns would carry plants or take lines"
+  }
+ },
+ "sources_count": 18
+}

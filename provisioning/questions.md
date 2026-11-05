@@ -69,6 +69,10 @@ on this laptop. The findings behind them are in the [README](README.md).
 
    **Next:** a beam-assignment model through the lunar cycle, the transmitting tiles' design, the receivers' land with
    the cities' look, what a late switch does to a reef, and the causes and restart time of a fault across the ring.
+
+   The [energy-options study](energy_options.md) (5 November) set the beams against their alternatives per delivered watt. The beams leave 1.47–1.50 W of heat a delivered watt, the dense air 0.10–0.12 W of it, almost all the oxygen's; local solar leaves 0.19–0.79 W but takes 39,000–94,000 km² of panels a delivered terawatt under the design run's dim ground sunlight, with a grid round the Moon or 300–330 TWh of storage each lunar night; fission and fusion leave 2.0–3.0 W; the Moon's winds, rivers, tides, heat flow and seas' thermal gradients reach about a terawatt together. The beams stand as the bulk supply.
+   - **What decides the remaining choices:** whether the beamed food is made at the ring radius, which takes 0.12–0.97 points off the dimming if its carbon and phosphorus can return (the author's to decide); the reserve for a fault across the ring from rivers, roofs and the towns' fuel cells; and the rectennas' efficiency and capture, which outweigh the air.
+   - **How:** a site's store through its darkest lunar day from the design run's records; slope, valley and coastal winds over the real relief, which the flat cloud-resolving rings leave out; the reserve sized against the critical loads of 2.5–7.5 TW; for food in orbit, the carbon's burial or return, the phosphorus's recovery and the food's descent through the extended air.
 4. **The food system.** The [food-systems study](../research/studies/food_systems/README.md) prices eight systems per
    billion residents, fits them to the lunar cycle and mixes them for 4, 6 and 8 billion, with the range each mix can
    be built over: rain-fed fields cost least and the rain feeds 9.1–27.0 billion outside a kept 30%; glass and lamps
