@@ -1,0 +1,1950 @@
+{
+ "schema": "terluna.research.ring-fault/1",
+ "producer": {
+  "files": {
+   "research/studies/solar_shield_array/ring_fault.py": "8711ca3299663b825742ec126daa3af0b60f8962243f52f520dbd3976fec746a"
+  },
+  "constants": {
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_GM": 4902800118000.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "SPEED_OF_LIGHT": 299792458.0
+  }
+ },
+ "inputs": {
+  "provisioning/results/power.json": "feaf183975d0cc83466664a0688af5e8e05cd5dcc8dfa161c80527f8e875f01b",
+  "research/studies/solar_shield_array/results/attitude_schemes.json": "55c2d051a72a30642506570a4ca97dee8c10692f9f39e398282940e1f34d3228",
+  "research/studies/solar_shield_array/results/photon_control.json": "1ea808e2fa722bdd0e38fde277fe0f2719641f7f16dfe987ffaa1a47d772d14a",
+  "research/studies/solar_shield_array/results/ring_bundle.json": "d51b6e19f0f3698faf44dffe4c2e1d4631c5ec629258d82966e48c51764955c9",
+  "research/studies/solar_shield_array/results/ring_keeping.json": "28bb4c2c662c644dba015d24ecef5747589ce1758078c455124db0d3b3cdfb37",
+  "research/studies/solar_shield_array/results/tile_design.json": "2f7681a958381494e9e0d1917154cd842589476120a60155366fc211db0d2d76",
+  "research/studies/solar_shield_array/results/ring_layout_rolled.json": "b26d63ed1f4fb1462188a7224b01fc8dd2456fb08be1d39e711c540dd6cafd4e",
+  "protection/transmission/results/uv_transmission.json": "6589385e2665ade4409cfc529f9fef62f932fa75e9a3b2693bc63a0e13d9ec9f",
+  "atmosphere/loss_response/results/loss_response.json": "647283106d3f36ccc008b113939a773f7ba35d17093c9db3b78e0f23b52cd194",
+  "research/studies/solar_shield_array/ring_fault_sources.json": "a9b8dacefecea4c382d872816296cdc9edf3b7e4eabadaa9b497d04ebe8cb623"
+ },
+ "evidence": "Closed-form screen on the named products; no dynamics are run. Clocks come from the products' torques, inertias, keeping demand, free-ring and failed-tile runs, scaled to the design loading where stated; node speeds from the rolled layout's radius at which each height's ring turns with the Sun; the upper air's time is an order-of-magnitude bracket on assumed warming; fault classes, restart times, tolerances and the separation's hardware are design guesses anchored on the precedents in ring_fault_sources.json. Each value carries its kind in ring_fault.md.",
+ "reading_rule": "Times in seconds, minutes, hours or days as named; forces N; accelerations m/s2; powers TW; energies TWh. Pairs are the low-cost and high-cost ends of the power screen, or the low and high ends of a range as named. \"with_separation\" applies the design rules of ring_fault.md. Tile counts are slots of the 28.2 million; \"contiguous\" losses uncover everything under them, \"spread\" losses only the singly covered share.",
+ "design": {
+  "tile_side_m": 10000.0,
+  "pitch_m": 8500.0,
+  "shingle_deg": 1.5,
+  "clearance_m": 150.0,
+  "envelopes_m": [
+   0.0,
+   50.0
+  ],
+  "areal_masses_kg_m2": {
+   "annulus_allocation": 0.013765,
+   "mean_tile": 0.0164,
+   "kept_run": null
+  },
+  "mean_tile_kg": 1640000.0,
+  "fleet_inventory_Gt": 46.0,
+  "design_radius_km": 20000.0,
+  "latch_transmission": {
+   "titania": [
+    0.0035,
+    0.0082
+   ],
+   "edge_200_nm": [
+    0.0012,
+    0.0024
+   ]
+  },
+  "latch_heat_W_m2": {
+   "titania": [
+    3.9e-05,
+    8.4e-05
+   ],
+   "edge_200_nm": [
+    1.9e-05,
+    3e-05
+   ]
+  },
+  "warmed_efolds": [
+   3.0,
+   4.0
+  ],
+  "cp_J_kg_K": 1040.0,
+  "warming_K": [
+   30.0,
+   300.0
+  ],
+  "climate_efolding_years": [
+   4.0,
+   7.1
+  ],
+  "fragment_tilts_deg": [
+   0.0,
+   12.0
+  ],
+  "fast_m_s": 50.0,
+  "storm_enhancement": [
+   10.0,
+   1000.0
+  ],
+  "storm_days": 1.0,
+  "storm_hole_factor": 4.0,
+  "local_tw": {
+   "rivers": [
+    0.2218,
+    0.4437
+   ],
+   "tides": [
+    0.0288,
+    0.0577
+   ],
+   "heat_flow": [
+    0.05311,
+    0.1195
+   ],
+   "roofs": [
+    0.8273,
+    6.154
+   ]
+  },
+  "tolerance_s": {
+   "close_computing": {
+    "range": [
+     0.01,
+     1.0
+    ],
+    "kind": "design guess",
+    "basis": "millisecond control rides on its own uninterruptible supply"
+   },
+   "health_care": {
+    "range": [
+     10.0,
+     10.0
+    ],
+    "kind": "published",
+    "basis": "NFPA 110 Level 1, Type 10: emergency power within 10 s for life safety; Class 96, 96 hours of fuel on site"
+   },
+   "sky_control": {
+    "range": [
+     1.0,
+     60.0
+    ],
+    "kind": "design guess",
+    "basis": "the towns' flight control rides on their own batteries and fuel cells"
+   },
+   "food_cultures": {
+    "range": [
+     60.0,
+     3600.0
+    ],
+    "kind": "design guess",
+    "basis": "dense aerobic cultures use their dissolved oxygen within minutes without aeration (recalled); cooling holds them for about an hour"
+   },
+   "refrigeration": {
+    "range": [
+     14400.0,
+     172800.0
+    ],
+    "kind": "published",
+    "basis": "USDA: a closed refrigerator keeps food safe 4 hours, a full freezer 48"
+   },
+   "pumps": {
+    "range": [
+     7200.0,
+     86400.0
+    ],
+    "kind": "design guess",
+    "basis": "water and sewage pumps; tanks and reservoirs buffer them for hours"
+   },
+   "water_lift": {
+    "range": [
+     86400.0,
+     259200.0
+    ],
+    "kind": "design guess",
+    "basis": "the lift fills reservoirs"
+   },
+   "lamp_farms": {
+    "range": [
+     172800.0,
+     1209600.0
+    ],
+    "kind": "design guess",
+    "basis": "crops kept dark with air and water moving; the field crops already pass the 354-hour lunar night"
+   }
+  },
+  "accepted_probability": 0.01,
+  "horizons_years": [
+   1000.0,
+   10000.0,
+   1000000.0,
+   1000000000.0
+  ],
+  "halloween_2003": {
+   "anomalies": 28,
+   "out_of_service": 2,
+   "operating": [
+    800,
+    1000
+   ]
+  },
+  "grid_restoration_days": [
+   0.5,
+   1.0
+  ],
+  "atmosphere_kg": 3.1e+18,
+  "loss_short_of_onset_kg_s": [
+   140.0,
+   190.0
+  ],
+  "aviation_catastrophic_per_flight_hour": 1e-09,
+  "nuclear_large_release_per_reactor_year": 1e-06,
+  "collateral_tiles": [
+   2,
+   4
+  ],
+  "margin": 10.0,
+  "separate_controller_kg": [
+   10.0,
+   100.0
+  ],
+  "separate_controller_W": [
+   10.0,
+   100.0
+  ],
+  "update_soak_days": [
+   1.0,
+   3.0
+  ],
+  "fallback_failure": [
+   0.001,
+   0.0001
+  ],
+  "trim": {
+   "range": 0.25,
+   "reflected": [
+    0.0469,
+    0.0579
+   ],
+   "cover": [
+    0.25,
+    0.89
+   ],
+   "glow_W_m2_per_percent": [
+    1.7,
+    2.9
+   ],
+   "basis": "array_industry.md (the shield's own loads); constraints_review.md finding 1; decisions.md, 9 October"
+  },
+  "transmitter_kg_per_kw": 10.0,
+  "transmitter_efficiency": 0.7,
+  "thin_film_transmitter_kg_m2": 0.2
+ },
+ "inertia_check": {
+  "62.7_g_m2": {
+   "inertia_kg_m2": [
+    52246040790786.016,
+    52246040790786.01,
+    52246040790785.99
+   ],
+   "plate_kg_m2": 52250000000000.0,
+   "over_plate": [
+    0.9999242256609764,
+    0.9999242256609763,
+    0.9999242256609759
+   ]
+  },
+  "5_g_m2": {
+   "inertia_kg_m2": [
+    4166666666666.6665,
+    4166666666666.6665,
+    4166666666666.6655
+   ],
+   "plate_kg_m2": 4166666666666.6665,
+   "over_plate": [
+    1.0,
+    1.0,
+    0.9999999999999998
+   ]
+  },
+  "26_g_m2": {
+   "inertia_kg_m2": [
+    21666666666666.668,
+    21666666666666.67,
+    21666666666666.668
+   ],
+   "plate_kg_m2": 21666666666666.668,
+   "over_plate": [
+    1.0,
+    1.0000000000000002,
+    1.0
+   ]
+  }
+ },
+ "attitude": {
+  "angles": {
+   "envelope_0_m": {
+    "shingle_gap_m": 222.5040606169218,
+    "gate_rad": 0.010253802265795305,
+    "contact_rad": 0.03147202120730554
+   },
+   "envelope_50_m": {
+    "shingle_gap_m": 222.5040606169218,
+    "gate_rad": 0.003182560145816018,
+    "contact_rad": 0.02439817872539394
+   }
+  },
+  "stores_N_m_s": {
+   "chosen": 1862269442.7309687,
+   "rolled": 22873986236.88886
+  },
+  "motor_torque_N_m": 1000000.0,
+  "by_tile": {
+   "annulus_allocation": {
+    "inertia_kg_m2": 11470833333333.334,
+    "areal_mass_kg_m2": 0.013765,
+    "torque_N_m": [
+     37148.17814319714,
+     82089.90684455633
+    ],
+    "envelope_0_m": {
+     "drift_hours_median_p95_torque": {
+      "gate_rad": [
+       0.6990104868578939,
+       0.4702270079315497
+      ],
+      "contact_rad": [
+       1.2246261806389183,
+       0.8238106803590037
+      ]
+     },
+     "store_dump_seconds": {
+      "chosen": {
+       "gate_rad": 63.15931203349799,
+       "contact_rad": 193.85503603749302
+      },
+      "rolled": {
+       "gate_rad": 5.142070805053145,
+       "contact_rad": 15.782570916735663
+      }
+     },
+     "wrong_command_minutes": {
+      "gate_rad": 8.083579268557465,
+      "contact_rad": 14.161966081573208
+     }
+    },
+    "envelope_50_m": {
+     "drift_hours_median_p95_torque": {
+      "gate_rad": [
+       0.3894301143065291,
+       0.2619711161587026
+      ],
+      "contact_rad": [
+       1.0782511408187103,
+       0.7253436354368141
+      ]
+     },
+     "store_dump_seconds": {
+      "chosen": {
+       "gate_rad": 19.60329486609016,
+       "contact_rad": 150.2830016828579
+      },
+      "rolled": {
+       "gate_rad": 1.5959884135582099,
+       "contact_rad": 12.23518449724915
+      }
+     },
+     "wrong_command_minutes": {
+      "gate_rad": 4.503493520834969,
+      "contact_rad": 12.469238633886928
+     }
+    }
+   },
+   "mean_tile": {
+    "inertia_kg_m2": 13666666666666.666,
+    "areal_mass_kg_m2": 0.0164,
+    "torque_N_m": [
+     37254.6575890921,
+     82370.57820240155
+    ],
+    "envelope_0_m": {
+     "drift_hours_median_p95_torque": {
+      "gate_rad": [
+       0.7618965010886924,
+       0.5123894863378899
+      ],
+      "contact_rad": [
+       1.334798861694451,
+       0.8976769182306599
+      ]
+     },
+     "store_dump_seconds": {
+      "chosen": {
+       "gate_rad": 75.24974335992493,
+       "contact_rad": 230.96422746203302
+      },
+      "rolled": {
+       "gate_rad": 6.1264047368595405,
+       "contact_rad": 18.803789541188877
+      }
+     },
+     "wrong_command_minutes": {
+      "gate_rad": 8.823431482659485,
+      "contact_rad": 15.458144619989326
+     }
+    },
+    "envelope_50_m": {
+     "drift_hours_median_p95_torque": {
+      "gate_rad": [
+       0.4244649359159517,
+       0.28546051881277984
+      ],
+      "contact_rad": [
+       1.1752552886258447,
+       0.7903809149857015
+      ]
+     },
+     "store_dump_seconds": {
+      "chosen": {
+       "gate_rad": 23.35590525273364,
+       "contact_rad": 179.05130603696833
+      },
+      "rolled": {
+       "gate_rad": 1.901504539219371,
+       "contact_rad": 14.577335688694955
+      }
+     },
+     "wrong_command_minutes": {
+      "gate_rad": 4.915677225836039,
+      "contact_rad": 13.610489743693142
+     }
+    }
+   },
+   "kept_run": {
+    "inertia_kg_m2": 52246040790786.01,
+    "areal_mass_kg_m2": 0.06269524894894321,
+    "torque_N_m": [
+     39125.4327145771,
+     87301.79276949157
+    ],
+    "envelope_0_m": {
+     "drift_hours_median_p95_torque": {
+      "gate_rad": [
+       1.4536239904366135,
+       0.9731282440390905
+      ],
+      "contact_rad": [
+       2.5466656494602633,
+       1.7048647297500708
+      ]
+     },
+     "store_dump_seconds": {
+      "chosen": {
+       "gate_rad": 287.6708166643037,
+       "contact_rad": 882.9487645751528
+      },
+      "rolled": {
+       "gate_rad": 23.420516471914254,
+       "contact_rad": 71.88465039441287
+      }
+     },
+     "wrong_command_minutes": {
+      "gate_rad": 17.251740193051628,
+      "contact_rad": 30.22405686209219
+     }
+    },
+    "envelope_50_m": {
+     "drift_hours_median_p95_torque": {
+      "gate_rad": [
+       0.8098375738238763,
+       0.5421455764054899
+      ],
+      "contact_rad": [
+       2.2422721196289648,
+       1.5010885516390995
+      ]
+     },
+     "store_dump_seconds": {
+      "chosen": {
+       "gate_rad": 89.28684721024791,
+       "contact_rad": 684.4918418671432
+      },
+      "rolled": {
+       "gate_rad": 7.269225638042927,
+       "contact_rad": 55.72742012286858
+      }
+     },
+     "wrong_command_minutes": {
+      "gate_rad": 9.611225127059434,
+      "contact_rad": 26.611487086384113
+     }
+    }
+   },
+   "reference_tile": {
+    "inertia_kg_m2": 4462930538959616.0,
+    "areal_mass_kg_m2": 2.683524602108991,
+    "torque_N_m": [
+     253006.52935937344,
+     651075.3671730858
+    ],
+    "envelope_0_m": {
+     "drift_hours_median_p95_torque": {
+      "gate_rad": [
+       5.283225714245257,
+       3.29343728388544
+      ],
+      "contact_rad": [
+       9.255907671675335,
+       5.769912752336688
+      ]
+     },
+     "store_dump_seconds": {
+      "chosen": {
+       "gate_rad": 24573.24714804019,
+       "contact_rad": 75422.72957176993
+      },
+      "rolled": {
+       "gate_rad": 2000.613570304192,
+       "contact_rad": 6140.488287185945
+      }
+     },
+     "wrong_command_minutes": {
+      "gate_rad": 159.44697354793252,
+      "contact_rad": 279.3419296299276
+     }
+    },
+    "envelope_50_m": {
+     "drift_hours_median_p95_torque": {
+      "gate_rad": [
+       2.943370997270883,
+       1.8348274912013327
+      ],
+      "contact_rad": [
+       8.149583247591249,
+       5.080256412928874
+      ]
+     },
+     "store_dump_seconds": {
+      "chosen": {
+       "gate_rad": 7627.008498839435,
+       "contact_rad": 58470.25915265782
+      },
+      "rolled": {
+       "gate_rad": 620.947513028229,
+       "contact_rad": 4760.314874761655
+      }
+     },
+     "wrong_command_minutes": {
+      "gate_rad": 88.83050297816898,
+      "contact_rad": 245.9532215331419
+     }
+    }
+   }
+  },
+  "rolled_law": {
+   "annulus_allocation": {
+    "missing_torque_N_m": [
+     101621.77315590346,
+     487158.5465512777
+    ],
+    "hours": {
+     "gate_rad": [
+      0.4226287787076848,
+      0.1930266564385543
+     ],
+     "contact_rad": [
+      0.7404213196047528,
+      0.33817160325937085
+     ]
+    }
+   },
+   "mean_tile": {
+    "missing_torque_N_m": [
+     120680.86449047452,
+     564813.0650319818
+    ],
+    "hours": {
+     "gate_rad": [
+      0.42331831709147955,
+      0.1956743501412351
+     ],
+     "contact_rad": [
+      0.7416293512054607,
+      0.34281021038698456
+     ]
+    }
+   }
+  },
+  "guarantee_loss_check": [
+   {
+    "rate_deg_s": 0.0001,
+    "product_s": 1823.4589387507106,
+    "screen_s": 1823.472644017977
+   },
+   {
+    "rate_deg_s": 0.001,
+    "product_s": 182.34589387507106,
+    "screen_s": 182.3472644017977
+   },
+   {
+    "rate_deg_s": 0.01,
+    "product_s": 18.234589387507107,
+    "screen_s": 18.23472644017977
+   }
+  ]
+ },
+ "keeping": {
+  "free_rings_product_h": {
+   "edge_h": 5.416666666666667,
+   "interior_h": 12.25,
+   "minimum_h": 228.81656116545767
+  },
+  "free_rings_design_h": {
+   "edge_h": 2.5380659505287677,
+   "interior_h": 5.739933765041982,
+   "minimum_h": 107.2156657497473
+  },
+  "scale_to_design": 0.4685660216360802,
+  "kept_cost": {
+   "rings_mean_m_s_per_orbit": 0.11746992034929606,
+   "top_ring_m_s_per_orbit": 0.25409555507449144,
+   "mean_acceleration_m_s2": [
+    7.126397188321141e-07,
+    1.541488956375722e-06
+   ],
+   "over_photon_median_demand": [
+    1.3116479189338326,
+    2.837185085618312
+   ]
+  },
+  "run": {
+   "areal_mass_kg_m2": 0.06269524894894321,
+   "radius_step_m": 600.0,
+   "period_h": 45.787473624697746
+  },
+  "keeping_demand_m_s2": {
+   "run": [
+    5.433163187659233e-07,
+    5.66183317047925e-06
+   ],
+   "design": [
+    2.474635079044892e-06,
+    2.5787870696010248e-05
+   ]
+  },
+  "single_tile_table": {
+   "envelope_1_m": {
+    "residual_m_s2": [
+     1e-06,
+     1e-05,
+     0.0001
+    ],
+    "gate_s": [
+     11973.519067869765,
+     3780.582253049484,
+     1195.7996966621538
+    ],
+    "contact_s": [
+     21197.086930595902,
+     6654.988923976189,
+     2104.417793954225
+    ]
+   },
+   "envelope_50_m": {
+    "residual_m_s2": [
+     1e-06,
+     1e-05,
+     0.0001
+    ],
+    "gate_s": [
+     6707.95002106344,
+     2121.147057161165,
+     670.9063548380673
+    ],
+    "contact_s": [
+     18668.245459945803,
+     5872.470011166142,
+     1857.1761843065512
+    ]
+   },
+   "envelope_100_m": {
+    "residual_m_s2": [
+     1e-06,
+     1e-05,
+     0.0001
+    ],
+    "gate_s": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "contact_s": [
+     15700.95666740767,
+     4948.483632063234,
+     1565.110464189017
+    ]
+   }
+  },
+  "single_tile_design": {
+   "residual_median": {
+    "residual_m_s2": 2.474635079044892e-06,
+    "gate_min": 81.71653072239698,
+    "contact_min": 227.21608261104308
+   },
+   "residual_peak": {
+    "residual_m_s2": 2.5787870696010248e-05,
+    "gate_min": 25.408259613301507,
+    "contact_min": 70.34193263770807
+   }
+  },
+  "edge_ring_light_excess": 0.153065357894564
+ },
+ "shade": {
+  "tiles": 28233094,
+  "single_cover_share": 0.8910077618922212,
+  "standard_level": [
+   0.0001941163707541026,
+   0.00021611860557693518
+  ],
+  "dispatch_per_day": 6183.839890485969,
+  "latch": {
+   "titania": {
+    "latch_transmission": [
+     0.0035,
+     0.0082
+    ],
+    "margin_over_standard": [
+     0.0032838813944230647,
+     0.008005883629245899
+    ],
+    "tiles_spread": [
+     104055.35850406253,
+     253680.01798047402
+    ],
+    "tiles_contiguous": [
+     92714.13209359747,
+     226030.86505756062
+    ],
+    "share_of_fleet_contiguous": [
+     0.0032838813944230647,
+     0.008005883629245899
+    ],
+    "dispatch_days": [
+     14.992970991412806,
+     36.55186244477581,
+     16.8269813492673,
+     41.02305727073702
+    ]
+   },
+   "edge_200_nm": {
+    "latch_transmission": [
+     0.0012,
+     0.0024
+    ],
+    "margin_over_standard": [
+     0.0009838813944230648,
+     0.002205883629245897
+    ],
+    "tiles_spread": [
+     31175.95276005864,
+     69897.1687129859
+    ],
+    "tiles_contiguous": [
+     27778.015893597465,
+     62278.91985756056
+    ],
+    "share_of_fleet_contiguous": [
+     0.0009838813944230648,
+     0.002205883629245897
+    ],
+    "dispatch_days": [
+     4.492033491412805,
+     10.071237444775798,
+     5.0415200445315245,
+     11.30319832835984
+    ]
+   }
+  },
+  "transmitters_all_lost_uncovered": {
+   "whole_tile_collateral_0": [
+    0.00011175036235349747,
+    0.0007974955257477777
+   ],
+   "whole_tile_collateral_2": [
+    0.0003352510870604924,
+    0.002392486577243333
+   ],
+   "whole_tile_collateral_4": [
+    0.0005587518117674873,
+    0.003987477628738889
+   ],
+   "tenth_tile_collateral_0": [
+    0.0011175036235349747,
+    0.007974955257477778
+   ],
+   "tenth_tile_collateral_2": [
+    0.003352510870604924,
+    0.023924865772433336
+   ],
+   "tenth_tile_collateral_4": [
+    0.005587518117674874,
+    0.039874776287388884
+   ]
+  },
+  "fleet_rebuild_years": 12.5
+ },
+ "nodes": {
+  "rings": 1859,
+  "tilt_range_deg": [
+   -24.20459603912446,
+   24.423215025352665
+  ],
+  "radius_range_km": [
+   19068.11064048312,
+   21048.0
+  ],
+  "radius_neighbours": {
+   "opposite_side_share": 0.616254036598493,
+   "speed_m_s": {
+    "median": 160.3362765086867,
+    "p90": 356.651897295716,
+    "max": 389.4012492203321
+   },
+   "share_over_100_m_s": 0.5952637244348762
+  },
+  "strip_neighbours_speed_m_s": {
+   "median": 0.232369265087794,
+   "max": 0.2514960856152443
+  },
+  "slide_m_s_per_km_step": 0.037133711546080334,
+  "widest_pair_m_s": 409.7040669614552,
+  "orbit_hours": 70.50181005318434,
+  "fragment_encounters": {
+   "tilt_0_deg": {
+    "per_orbit": 12.41709626161719,
+    "fast_per_orbit": 2.045546877925741,
+    "fast_share": 0.16473633084804087
+   },
+   "tilt_12_deg": {
+    "per_orbit": 12.455489998278619,
+    "fast_per_orbit": 1.841268732449353,
+    "fast_share": 0.1478278841461734
+   }
+  }
+ },
+ "recoil": {
+  "transmitting_tiles": [
+   3541.0,
+   25270.0
+  ],
+  "in_use_N": [
+   31.0861766211212,
+   20.72400591456663
+  ],
+  "rated_N": [
+   93.26452101740331,
+   62.17634734493554
+  ],
+  "tenth_tile_in_use_N": [
+   3.1086176621121204,
+   2.0724005914566628
+  ],
+  "film_tile_sail_N": {
+   "median": 28.45723798776992,
+   "p95": 96.25461022886734
+  },
+  "in_use_over_film_sail": [
+   1.0923820728660008,
+   0.7282507853879985
+  ],
+  "whole_tile_absorbed_N": 443.97381070874036,
+  "step_share_of_absorbed_push": {
+   "in_use": [
+    0.07001804131531225,
+    0.046678442319567755
+   ],
+   "rated": [
+    0.21006761833208115,
+    0.1400450788880541
+   ]
+  },
+  "edge_ring_light_excess": 0.153065357894564,
+  "acceleration_by_areal_mass": {
+   "film_allocation": {
+    "areal_mass_kg_m2": [
+     0.013765,
+     0.013765
+    ],
+    "in_use_m_s2": [
+     2.2583491915089866e-05,
+     1.5055580032376773e-05
+    ]
+   },
+   "thin_film_sandwich": {
+    "areal_mass_kg_m2": [
+     0.2,
+     0.2
+    ],
+    "in_use_m_s2": [
+     1.55430883105606e-06,
+     1.0362002957283315e-06
+    ]
+   },
+   "reference_1978": {
+    "areal_mass_kg_m2": [
+     3.9942857142857147,
+     2.662857142857143
+    ],
+    "in_use_m_s2": [
+     7.782662244200586e-08,
+     7.78262024688661e-08
+    ]
+   }
+  },
+  "film_tile_acceleration_m_s2": 2.0673620041968703e-05,
+  "matched_sandwich_kg_m2": 0.21475378274702087,
+  "reference_over_matched": [
+   18.599373027067784,
+   12.399582018045187
+  ]
+ },
+ "trim": {
+  "sunlight_share_if_transmitted": [
+   0.00293125,
+   0.01288275
+  ],
+  "glow_W_m2_if_absorbed": [
+   0.49831249999999994,
+   3.7359975
+  ],
+  "uv_transmission_at_stake": 0.0,
+  "basis": "array_industry.md (the shield's own loads); constraints_review.md finding 1; decisions.md, 9 October"
+ },
+ "faults": [
+  {
+   "id": "F1",
+   "name": "the beams' phase and timing reference",
+   "reach": {
+    "without": [
+     "beams"
+    ],
+    "with_separation": [
+     "beams"
+    ]
+   },
+   "modes": {
+    "beams": "stops",
+    "attitude_keeping": "unaffected",
+    "film": "unaffected"
+   },
+   "spread": "at the speed of the reference: every beam that takes it loses coherence within seconds",
+   "detection": "each transmitter sees its pilot lock and its spot efficiency fall",
+   "restart_days": {
+    "without": [
+     0.1,
+     7.0
+    ],
+    "with_separation": [
+     0.01,
+     0.25
+    ]
+   },
+   "likelihood": "occasional: about one constellation-wide timing or reference fault a decade per system",
+   "precedents": [
+    "galileo_2019",
+    "gps_2016"
+   ],
+   "kind": "design guess",
+   "opens_shade_without": false,
+   "opens_shade_with": false
+  },
+  {
+   "id": "F2",
+   "name": "the receivers' pilot signals",
+   "reach": {
+    "without": [
+     "beams"
+    ],
+    "with_separation": [
+     "beams"
+    ]
+   },
+   "modes": {
+    "beams": "stops",
+    "attitude_keeping": "unaffected",
+    "film": "unaffected"
+   },
+   "spread": "as fast as a common fault in the receivers takes effect; a lost pilot defocuses its beam at once",
+   "detection": "beams douse on their own; the receivers report",
+   "restart_days": {
+    "without": [
+     0.1,
+     3.0
+    ],
+    "with_separation": [
+     0.1,
+     3.0
+    ]
+   },
+   "likelihood": "occasional: a shared design or update across 0.7 million crowns and up to 48,000 patches",
+   "precedents": [
+    "dickinson_1978",
+    "doe_nasa_1978"
+   ],
+   "kind": "design guess",
+   "opens_shade_without": false,
+   "opens_shade_with": false
+  },
+  {
+   "id": "F3",
+   "name": "scheduling and command software",
+   "reach": {
+    "without": [
+     "beams",
+     "attitude_keeping"
+    ],
+    "with_separation": [
+     "beams"
+    ]
+   },
+   "modes": {
+    "beams": "holds",
+    "attitude_keeping": "holds",
+    "film": "unaffected"
+   },
+   "spread": "beams hold their last assignment and fade as their tiles set, over 2-20 hours",
+   "detection": "missed handovers; watchdogs on the schedulers",
+   "restart_days": {
+    "without": [
+     0.01,
+     1.0
+    ],
+    "with_separation": [
+     0.01,
+     0.5
+    ]
+   },
+   "likelihood": "expected: global software services fail for hours several times a decade",
+   "precedents": [
+    "starlink_2025",
+    "crowdstrike_2024"
+   ],
+   "kind": "design guess",
+   "opens_shade_without": true,
+   "opens_shade_with": false
+  },
+  {
+   "id": "F4",
+   "name": "a bad update, or a latent timer, across the fleet",
+   "reach": {
+    "without": [
+     "beams",
+     "attitude_keeping"
+    ],
+    "with_separation": [
+     "beams"
+    ]
+   },
+   "modes": {
+    "beams": "stops",
+    "attitude_keeping": "drifts",
+    "film": "unaffected"
+   },
+   "spread": "as fast as the rollout; a latent timer fires everywhere at once",
+   "detection": "canary waves; the second, dissimilar stack disagrees",
+   "restart_days": {
+    "without": [
+     0.5,
+     10.0
+    ],
+    "with_separation": [
+     0.1,
+     3.0
+    ]
+   },
+   "likelihood": "expected over the fleet life unless no update ever reaches the whole fleet at once",
+   "precedents": [
+    "crowdstrike_2024",
+    "glonass_2014"
+   ],
+   "kind": "design guess",
+   "opens_shade_without": true,
+   "opens_shade_with": false
+  },
+  {
+   "id": "F5",
+   "name": "an intrusion into command",
+   "reach": {
+    "without": [
+     "beams",
+     "attitude_keeping"
+    ],
+    "with_separation": [
+     "beams"
+    ]
+   },
+   "modes": {
+    "beams": "stops",
+    "attitude_keeping": "drifts",
+    "film": "unaffected"
+   },
+   "spread": "at the attacker's pace once trusted management access is held",
+   "detection": "command authentication, rate limits that refuse fleet-wide moves, anomaly watch",
+   "restart_days": {
+    "without": [
+     3.0,
+     60.0
+    ],
+    "with_separation": [
+     1.0,
+     14.0
+    ]
+   },
+   "likelihood": "occasional to expected: constellation-scale intrusions have happened",
+   "precedents": [
+    "viasat_2022"
+   ],
+   "kind": "design guess",
+   "opens_shade_without": true,
+   "opens_shade_with": false
+  },
+  {
+   "id": "F6",
+   "name": "space weather across the fleet",
+   "reach": {
+    "without": [
+     "beams",
+     "attitude_keeping"
+    ],
+    "with_separation": [
+     "beams",
+     "attitude_keeping"
+    ]
+   },
+   "modes": {
+    "beams": "stops",
+    "attitude_keeping": "holds",
+    "film": "unaffected"
+   },
+   "spread": "simultaneous: solar protons bring upsets and latch-ups to every tile within hours of a flare and stay for days; surface and internal charging in Earth's magnetotail, which the Moon crosses for a few days each month (recalled)",
+   "detection": "radiation monitors on the tiles and upstream",
+   "restart_days": {
+    "without": [
+     0.5,
+     7.0
+    ],
+    "with_separation": [
+     0.5,
+     7.0
+    ]
+   },
+   "likelihood": "expected: Oct-1989-class proton events a few times a solar cycle; the ring sits outside Earth's magnetosphere most of each month",
+   "precedents": [
+    "tdrs_1989",
+    "halloween_2003",
+    "anik_1994",
+    "galaxy15_2010"
+   ],
+   "kind": "design guess",
+   "opens_shade_without": true,
+   "opens_shade_with": true
+  },
+  {
+   "id": "F7",
+   "name": "shared navigation and timing for attitude and keeping",
+   "reach": {
+    "without": [
+     "beams",
+     "attitude_keeping"
+    ],
+    "with_separation": [
+     "attitude_keeping"
+    ]
+   },
+   "modes": {
+    "beams": "stops",
+    "attitude_keeping": "drifts",
+    "film": "unaffected"
+   },
+   "spread": "as fast as the broadcast; every tile that trusts it computes the same wrong target",
+   "detection": "cross-checks against neighbours' ranging, star trackers and the Sun",
+   "restart_days": {
+    "without": [
+     0.5,
+     7.0
+    ],
+    "with_separation": [
+     0.0,
+     0.0
+    ]
+   },
+   "likelihood": "occasional: GLONASS 2014, GPS 2016 and Galileo 2019 in six years among four systems",
+   "precedents": [
+    "glonass_2014",
+    "gps_2016",
+    "galileo_2019"
+   ],
+   "kind": "design guess",
+   "opens_shade_without": true,
+   "opens_shade_with": true
+  },
+  {
+   "id": "F8",
+   "name": "a collision cascade in the rings",
+   "reach": {
+    "without": [
+     "beams",
+     "attitude_keeping",
+     "film"
+    ],
+    "with_separation": [
+     "beams",
+     "attitude_keeping",
+     "film"
+    ]
+   },
+   "modes": {
+    "beams": "stops",
+    "attitude_keeping": "stops",
+    "film": "stops"
+   },
+   "spread": "fragments return to the common line of nodes every half orbit, 34-39 hours",
+   "detection": "the tiles' own ranging and the fleet's tracking",
+   "restart_days": {
+    "without": [
+     180.0,
+     3650.0
+    ],
+    "with_separation": [
+     180.0,
+     3650.0
+    ]
+   },
+   "likelihood": "no precedent at this scale; the concern of crowded low Earth orbit",
+   "precedents": [
+    "kessler_1978"
+   ],
+   "kind": "design guess",
+   "opens_shade_without": true,
+   "opens_shade_with": true
+  },
+  {
+   "id": "F9",
+   "name": "a meteoroid stream",
+   "reach": {
+    "without": [
+     "film"
+    ],
+    "with_separation": [
+     "film"
+    ]
+   },
+   "modes": {
+    "beams": "unaffected",
+    "attitude_keeping": "unaffected",
+    "film": "drifts"
+   },
+   "spread": "hours, over the whole fleet at once",
+   "detection": "forecast from the parent comets",
+   "restart_days": {
+    "without": [
+     0.0,
+     0.0
+    ],
+    "with_separation": [
+     0.0,
+     0.0
+    ]
+   },
+   "likelihood": "expected: showers yearly and storms every few decades, adding holes slowly",
+   "precedents": [
+    "grun_1985"
+   ],
+   "kind": "design guess",
+   "opens_shade_without": true,
+   "opens_shade_with": true
+  },
+  {
+   "id": "F10",
+   "name": "an operations error",
+   "reach": {
+    "without": [
+     "beams",
+     "attitude_keeping"
+    ],
+    "with_separation": [
+     "beams"
+    ]
+   },
+   "modes": {
+    "beams": "stops",
+    "attitude_keeping": "holds",
+    "film": "unaffected"
+   },
+   "spread": "as fast as the command is accepted",
+   "detection": "two-person and two-system authority; refusal of fleet-wide moves",
+   "restart_days": {
+    "without": [
+     0.01,
+     2.0
+    ],
+    "with_separation": [
+     0.01,
+     1.5
+    ]
+   },
+   "likelihood": "expected: global routing and configuration errors take networks down for hours",
+   "precedents": [
+    "iberia_2025",
+    "starlink_2025"
+   ],
+   "kind": "design guess",
+   "opens_shade_without": true,
+   "opens_shade_with": false
+  }
+ ],
+ "meteoroid_storm": {
+  "holing_per_year_at_largest_holes": 2.3469050477688045e-06,
+  "holed_share": [
+   6.425475832358123e-08,
+   6.425475832358123e-06
+  ],
+  "over_smallest_margin": [
+   6.530742291479085e-05,
+   0.006530742291479085
+  ]
+ },
+ "swollen_loss": {
+  "short_of_onset": {
+   "kg_s": [
+    140.0,
+    190.0
+   ],
+   "cycle_years": [
+    701664801.5963553,
+    517016169.5973144
+   ]
+  },
+  "unshielded_quiet": {
+   "kg_s": [
+    335.1816488453076,
+    80443.59572287381
+   ],
+   "cycle_years": [
+    293074136.2538797,
+    1221142.2343911657
+   ]
+  }
+ },
+ "upper_air": {
+  "base_pressure_Pa": 0.3,
+  "column_kg_m2": 0.18470417031184383,
+  "warmed_capacity_J_m2_K": [
+   3.518293880061987,
+   9.563714321351169
+  ],
+  "threshold_heat_W_m2": [
+   1.9e-05,
+   8.4e-05
+  ],
+  "days": [
+   14.543212136499617,
+   1747.7548101884445
+  ],
+  "climate_efolding_years": [
+   4.0,
+   7.1
+  ],
+  "service_days_to_replace_threshold": [
+   4.492033491412805,
+   41.02305727073702
+  ]
+ },
+ "beams": {
+  "critical_tw": {
+   "residents_aloft": [
+    0.3997,
+    1.195
+   ],
+   "residents_ground": [
+    0.3997,
+    1.195
+   ],
+   "sky_control": [
+    0.05538,
+    0.5538
+   ],
+   "water": [
+    0.0007558,
+    0.02762
+   ],
+   "food_cultures": [
+    0.2939,
+    1.173
+   ],
+   "lamp_farms": [
+    0.2205,
+    2.23
+   ],
+   "close_computing": [
+    1.157,
+    1.157
+   ]
+  },
+  "critical_total_tw": [
+   2.527,
+   7.533
+  ],
+  "ground_tw": [
+   2.072,
+   5.784
+  ],
+  "towns_tw": [
+   0.4551,
+   1.749
+  ],
+  "week_twh": [
+   424.6,
+   1266.0
+  ],
+  "local_tw": {
+   "flows": [
+    0.30371,
+    0.6209
+   ],
+   "with_roofs": [
+    1.13101,
+    6.7749
+   ]
+  },
+  "local_share_of_ground": {
+   "flows": [
+    0.05250864453665283,
+    0.2996621621621622
+   ],
+   "flows_and_roofs": [
+    0.1955411479944675,
+    1.0
+   ]
+  },
+  "towns_weeks_on_reserve_lift": [
+   973.7098344693283,
+   253.2286654849329
+  ],
+  "tolerance": {
+   "close_computing": {
+    "range": [
+     0.01,
+     1.0
+    ],
+    "kind": "design guess",
+    "basis": "millisecond control rides on its own uninterruptible supply",
+    "range_h": [
+     2.777777777777778e-06,
+     0.0002777777777777778
+    ]
+   },
+   "health_care": {
+    "range": [
+     10.0,
+     10.0
+    ],
+    "kind": "published",
+    "basis": "NFPA 110 Level 1, Type 10: emergency power within 10 s for life safety; Class 96, 96 hours of fuel on site",
+    "range_h": [
+     0.002777777777777778,
+     0.002777777777777778
+    ]
+   },
+   "sky_control": {
+    "range": [
+     1.0,
+     60.0
+    ],
+    "kind": "design guess",
+    "basis": "the towns' flight control rides on their own batteries and fuel cells",
+    "range_h": [
+     0.0002777777777777778,
+     0.016666666666666666
+    ]
+   },
+   "food_cultures": {
+    "range": [
+     60.0,
+     3600.0
+    ],
+    "kind": "design guess",
+    "basis": "dense aerobic cultures use their dissolved oxygen within minutes without aeration (recalled); cooling holds them for about an hour",
+    "range_h": [
+     0.016666666666666666,
+     1.0
+    ]
+   },
+   "refrigeration": {
+    "range": [
+     14400.0,
+     172800.0
+    ],
+    "kind": "published",
+    "basis": "USDA: a closed refrigerator keeps food safe 4 hours, a full freezer 48",
+    "range_h": [
+     4.0,
+     48.0
+    ]
+   },
+   "pumps": {
+    "range": [
+     7200.0,
+     86400.0
+    ],
+    "kind": "design guess",
+    "basis": "water and sewage pumps; tanks and reservoirs buffer them for hours",
+    "range_h": [
+     2.0,
+     24.0
+    ]
+   },
+   "water_lift": {
+    "range": [
+     86400.0,
+     259200.0
+    ],
+    "kind": "design guess",
+    "basis": "the lift fills reservoirs",
+    "range_h": [
+     24.0,
+     72.0
+    ]
+   },
+   "lamp_farms": {
+    "range": [
+     172800.0,
+     1209600.0
+    ],
+    "kind": "design guess",
+    "basis": "crops kept dark with air and water moving; the field crops already pass the 354-hour lunar night",
+    "range_h": [
+     48.0,
+     336.0
+    ]
+   }
+  },
+  "stores": {
+   "F1": {
+    "without": {
+     "restart_days": 7.0,
+     "days": 8.0,
+     "energy_twh": [
+      485.184,
+      1446.336
+     ],
+     "ground_store_twh_after_local_flows": [
+      278.6112,
+      1052.21568
+     ],
+     "within_a_week": false
+    },
+    "with": {
+     "restart_days": 0.25,
+     "days": 1.25,
+     "energy_twh": [
+      75.81,
+      225.99
+     ],
+     "ground_store_twh_after_local_flows": [
+      43.533,
+      164.4087
+     ],
+     "within_a_week": true
+    }
+   },
+   "F2": {
+    "without": {
+     "restart_days": 3.0,
+     "days": 4.0,
+     "energy_twh": [
+      242.592,
+      723.168
+     ],
+     "ground_store_twh_after_local_flows": [
+      139.3056,
+      526.10784
+     ],
+     "within_a_week": true
+    },
+    "with": {
+     "restart_days": 3.0,
+     "days": 4.0,
+     "energy_twh": [
+      242.592,
+      723.168
+     ],
+     "ground_store_twh_after_local_flows": [
+      139.3056,
+      526.10784
+     ],
+     "within_a_week": true
+    }
+   },
+   "F3": {
+    "without": {
+     "restart_days": 1.0,
+     "days": 2.0,
+     "energy_twh": [
+      121.296,
+      361.584
+     ],
+     "ground_store_twh_after_local_flows": [
+      69.6528,
+      263.05392
+     ],
+     "within_a_week": true
+    },
+    "with": {
+     "restart_days": 0.5,
+     "days": 1.5,
+     "energy_twh": [
+      90.97200000000001,
+      271.188
+     ],
+     "ground_store_twh_after_local_flows": [
+      52.239599999999996,
+      197.29044
+     ],
+     "within_a_week": true
+    }
+   },
+   "F4": {
+    "without": {
+     "restart_days": 10.0,
+     "days": 11.0,
+     "energy_twh": [
+      667.128,
+      1988.712
+     ],
+     "ground_store_twh_after_local_flows": [
+      383.0904,
+      1446.79656
+     ],
+     "within_a_week": false
+    },
+    "with": {
+     "restart_days": 3.0,
+     "days": 4.0,
+     "energy_twh": [
+      242.592,
+      723.168
+     ],
+     "ground_store_twh_after_local_flows": [
+      139.3056,
+      526.10784
+     ],
+     "within_a_week": true
+    }
+   },
+   "F5": {
+    "without": {
+     "restart_days": 60.0,
+     "days": 61.0,
+     "energy_twh": [
+      3699.5280000000002,
+      11028.312
+     ],
+     "ground_store_twh_after_local_flows": [
+      2124.4103999999998,
+      8023.14456
+     ],
+     "within_a_week": false
+    },
+    "with": {
+     "restart_days": 14.0,
+     "days": 15.0,
+     "energy_twh": [
+      909.72,
+      2711.88
+     ],
+     "ground_store_twh_after_local_flows": [
+      522.396,
+      1972.9044000000001
+     ],
+     "within_a_week": false
+    }
+   },
+   "F6": {
+    "without": {
+     "restart_days": 7.0,
+     "days": 8.0,
+     "energy_twh": [
+      485.184,
+      1446.336
+     ],
+     "ground_store_twh_after_local_flows": [
+      278.6112,
+      1052.21568
+     ],
+     "within_a_week": false
+    },
+    "with": {
+     "restart_days": 7.0,
+     "days": 8.0,
+     "energy_twh": [
+      485.184,
+      1446.336
+     ],
+     "ground_store_twh_after_local_flows": [
+      278.6112,
+      1052.21568
+     ],
+     "within_a_week": false
+    }
+   },
+   "F7": {
+    "without": {
+     "restart_days": 7.0,
+     "days": 8.0,
+     "energy_twh": [
+      485.184,
+      1446.336
+     ],
+     "ground_store_twh_after_local_flows": [
+      278.6112,
+      1052.21568
+     ],
+     "within_a_week": false
+    },
+    "with": {
+     "restart_days": 0.0,
+     "days": 0.0,
+     "energy_twh": [
+      0.0,
+      0.0
+     ],
+     "ground_store_twh_after_local_flows": [
+      0.0,
+      0.0
+     ],
+     "within_a_week": true
+    }
+   },
+   "F8": {
+    "without": {
+     "restart_days": 3650.0,
+     "days": 3651.0,
+     "energy_twh": [
+      221425.848,
+      660071.5920000001
+     ],
+     "ground_store_twh_after_local_flows": [
+      127151.18639999999,
+      480204.93096
+     ],
+     "within_a_week": false
+    },
+    "with": {
+     "restart_days": 3650.0,
+     "days": 3651.0,
+     "energy_twh": [
+      221425.848,
+      660071.5920000001
+     ],
+     "ground_store_twh_after_local_flows": [
+      127151.18639999999,
+      480204.93096
+     ],
+     "within_a_week": false
+    }
+   },
+   "F9": {
+    "without": {
+     "restart_days": 0.0,
+     "days": 0.0,
+     "energy_twh": [
+      0.0,
+      0.0
+     ],
+     "ground_store_twh_after_local_flows": [
+      0.0,
+      0.0
+     ],
+     "within_a_week": true
+    },
+    "with": {
+     "restart_days": 0.0,
+     "days": 0.0,
+     "energy_twh": [
+      0.0,
+      0.0
+     ],
+     "ground_store_twh_after_local_flows": [
+      0.0,
+      0.0
+     ],
+     "within_a_week": true
+    }
+   },
+   "F10": {
+    "without": {
+     "restart_days": 2.0,
+     "days": 3.0,
+     "energy_twh": [
+      181.94400000000002,
+      542.376
+     ],
+     "ground_store_twh_after_local_flows": [
+      104.47919999999999,
+      394.58088
+     ],
+     "within_a_week": true
+    },
+    "with": {
+     "restart_days": 1.5,
+     "days": 2.5,
+     "energy_twh": [
+      151.62,
+      451.98
+     ],
+     "ground_store_twh_after_local_flows": [
+      87.066,
+      328.8174
+     ],
+     "within_a_week": true
+    }
+   }
+  }
+ },
+ "separation": {
+  "fleet_mass_Mt": [
+   0.28233094,
+   2.8233094
+  ],
+  "share_of_mean_tile": [
+   6.0975609756097564e-06,
+   6.097560975609756e-05
+  ],
+  "share_of_inventory": [
+   6.137629130434782e-06,
+   6.137629130434782e-05
+  ],
+  "fleet_power_GW": [
+   0.28233094,
+   2.8233094
+  ],
+  "smallest_latch_budget_tiles": 27778.015893597465,
+  "largest_wave_tiles": [
+   925.9338631199155,
+   555.5603178719493
+  ],
+  "campaign_years": {
+   "wave_925": [
+    83.48254620123203,
+    250.4476386036961
+   ],
+   "wave_555": [
+    139.13757700205338,
+    417.4127310061602
+   ]
+  },
+  "with_fallback": {
+   "p_0.001": {
+    "wave_tiles": [
+     925933.8631199155,
+     555560.3178719493
+    ],
+    "waves": [
+     31,
+     51
+    ],
+    "campaign_days": [
+     [
+      31.0,
+      93.0
+     ],
+     [
+      51.0,
+      153.0
+     ]
+    ]
+   },
+   "p_0.0001": {
+    "wave_tiles": [
+     9259338.631199155,
+     5555603.178719494
+    ],
+    "waves": [
+     4,
+     6
+    ],
+    "campaign_days": [
+     [
+      4.0,
+      12.0
+     ],
+     [
+      6.0,
+      18.0
+     ]
+    ]
+   }
+  }
+ },
+ "targets": {
+  "per_year": {
+   "1000_years": 1e-05,
+   "10000_years": 1e-06,
+   "1e+06_years": 1e-08,
+   "1e+09_years": 1.0000000000000001e-11
+  },
+  "aviation_per_year_of_continuous_operation": 8.766e-06,
+  "nuclear_large_release_per_reactor_year": 1e-06,
+  "uncontrolled_at_once_budget_tiles": {
+   "titania": [
+    30904.710697865823,
+    18542.826418719495
+   ],
+   "edge_200_nm": [
+    9259.338631199154,
+    5555.603178719493
+   ]
+  },
+  "per_tile_loss_of_control_per_event": {
+   "titania": {
+    "no_margin": [
+     0.001094627131474355,
+     0.000656776278884613
+    ],
+    "with_margin": [
+     0.0001094627131474355,
+     6.567762788846129e-05
+    ]
+   },
+   "edge_200_nm": {
+    "no_margin": [
+     0.00032796046480768824,
+     0.00019677627888461298
+    ],
+    "with_margin": [
+     3.279604648076882e-05,
+     1.9677627888461298e-05
+    ]
+   }
+  },
+  "halloween_2003": {
+   "anomaly_share": [
+    0.028,
+    0.035
+   ],
+   "loss_share": [
+    0.002,
+    0.0025
+   ],
+   "loss_share_over_loosest_budget": [
+    1.8271061830033364,
+    2.2838827287541705
+   ]
+  }
+ },
+ "checks": {
+  "turn_times_match_plate_inertia": true,
+  "guarantee_loss_matches_tile_study": true,
+  "week_matches_power_screen": true,
+  "fault_classes_complete": true
+ }
+}

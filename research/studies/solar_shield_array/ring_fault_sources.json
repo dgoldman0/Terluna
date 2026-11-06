@@ -1,0 +1,260 @@
+{
+  "schema": "terluna.research.ring-fault-sources/1",
+  "accessed": "2026-11-05",
+  "reading": "The literature pass for the fault across the ring took about four minutes of wall time (18:49-18:53 on 5 November, searches run in parallel) against a 45-minute bound, sized to the values the study needs: restart times of common-mode failures in large distributed systems, space weather's effect on spacecraft electronics, fail-safe retrodirective beams, and formation-flying autonomy and sail attitude control. 'search summary' means the result summary of a web search, the document not opened; 'page' means the named web page was fetched and read for the stated facts; 'recalled' means general knowledge not checked here; 'via project' means a source the repository already reads, not re-read here. Nothing here is admitted as a manuscript source, and no outside bytes are kept.",
+  "sources": [
+    {
+      "id": "crowdstrike_2024",
+      "citation": "2024 CrowdStrike-related IT outages (Wikipedia), with CrowdStrike's Falcon Content Update Preliminary Post Incident Report and CISA's alert of 19 July 2024",
+      "url": "https://en.wikipedia.org/wiki/2024_CrowdStrike-related_IT_outages",
+      "kind": "incident record",
+      "read": "page (Wikipedia) for the times, the count and the recovery; the CrowdStrike report and CISA alert by search summary",
+      "used_for": [
+        "a faulty content update released at 04:09 UTC on 19 July 2024 and reverted at 05:27 UTC, 78 minutes later",
+        "about 8.5 million Windows devices affected (Microsoft's estimate)",
+        "each machine had to be repaired locally, so recovery was expected to take days; Delta Air Lines returned to normal operations on 25 July, six days after the outage",
+        "precedent for a bad update across a fleet: the fix is fast, the restart slow when every unit needs local repair"
+      ]
+    },
+    {
+      "id": "galileo_2019",
+      "citation": "D. Estevez, Galileo constellation outage (blog analysis, July 2019), with EUSPA/GSA notices as reported by Inside GNSS and others",
+      "url": "https://destevez.net/2019/07/galileo-constellation-outage/",
+      "kind": "incident analysis",
+      "read": "page for the start and the cause; the duration (about six days, over 80 hours by early reports) by search summary",
+      "used_for": [
+        "service declared unavailable from 11-12 July 2019; restoration about six days later",
+        "cause: a failure of the Precise Timing Facility that generates Galileo System Time, which stopped the orbit and clock products, so the satellites broadcast stale ephemerides",
+        "precedent for a shared timing reference taking a whole constellation's service down for days"
+      ]
+    },
+    {
+      "id": "glonass_2014",
+      "citation": "GPS World, 'GLONASS Gone . . . Then Back' and related reports of the 1-2 April 2014 GLONASS outage",
+      "url": "https://www.gpsworld.com/glonass-gone-then-back/",
+      "kind": "incident reports",
+      "read": "search summary",
+      "used_for": [
+        "illegal ephemerides uploaded to every satellite took effect simultaneously at about 21:00 UTC on 1 April 2014",
+        "the whole constellation broadcast corrupt data for about 11 hours and was unusable",
+        "precedent for a shared navigation upload corrupting every user's solution at once"
+      ]
+    },
+    {
+      "id": "gps_2016",
+      "citation": "Metsahovi Radio Observatory, GPS Time Disruptions on 26-Jan-2016 (Aalto University); RNTF case study of the 26 January 2016 GPS event",
+      "url": "https://core.ac.uk/download/pdf/80718686.pdf",
+      "kind": "measurement report and case study",
+      "read": "search summary",
+      "used_for": [
+        "removing SVN 23 from service triggered a ground-software error that left 15 satellites' UTC offset wrong by about 13.7 microseconds",
+        "timing receivers jumped by 13 microseconds for about 12 hours; telecommunications and broadcasting were affected",
+        "precedent for a timing fault that leaves navigation intact while corrupting time"
+      ]
+    },
+    {
+      "id": "starlink_2025",
+      "citation": "ThousandEyes, Starlink Outage Analysis: July 24, 2025; press reports of SpaceX's explanation",
+      "url": "https://www.thousandeyes.com/blog/starlink-outage-analysis-july-24-2025",
+      "kind": "incident analysis",
+      "read": "search summary",
+      "used_for": [
+        "a global outage of about 2.5 hours from about 19:13 UTC on 24 July 2025",
+        "caused by the failure of internal software services of the core network during an upgrade of the ground compute clusters that host the constellation's control plane",
+        "precedent for a constellation's common control plane as a single point of failure, restored in hours"
+      ]
+    },
+    {
+      "id": "viasat_2022",
+      "citation": "SentinelOne Labs, AcidRain: a modem wiper rains down on Europe (2022); Viasat statements as reported by Bleeping Computer and MIT Technology Review",
+      "url": "https://www.sentinelone.com/labs/acidrain-a-modem-wiper-rains-down-on-europe/",
+      "kind": "incident analysis",
+      "read": "search summary",
+      "used_for": [
+        "on 24 February 2022 attackers used a misconfigured VPN appliance to reach KA-SAT's trusted management segment and issued legitimate management commands to many modems at once",
+        "the AcidRain wiper disabled the modems permanently; tens of thousands of customers across Europe lost service and Viasat shipped almost 30,000 modems to restore it",
+        "precedent for an intrusion that uses the system's own command authority, with a restart measured in weeks of hardware replacement"
+      ]
+    },
+    {
+      "id": "iberia_2025",
+      "citation": "POWER Magazine, Understanding the April 2025 Iberian Peninsula Blackout; Wikipedia, 2025 Iberian Peninsula blackout",
+      "url": "https://www.powermag.com/understanding-the-april-2025-iberian-peninsula-blackout-early-analysis-and-lessons-learned/",
+      "kind": "incident analysis",
+      "read": "search summary",
+      "used_for": [
+        "the whole Iberian grid blacked out at 12:33 local time on 28 April 2025",
+        "Spain re-energized 62% of substations in 9.5 hours and all in about 15.5; full load within about 24 hours; Portugal reconnected all load in about 12 hours",
+        "black start from hydro and gas plants: a large grid's restart takes about a day even with its sources intact"
+      ]
+    },
+    {
+      "id": "tdrs_1989",
+      "citation": "Solar particle induced upsets in the TDRS-1 attitude control system RAM during the October 1989 solar particle events (OSTI 131648); The magnitude and effects of extreme solar particle events, Space Weather and Space Climate 4 (2014)",
+      "url": "https://www.osti.gov/biblio/131648",
+      "kind": "flight observation and review",
+      "read": "search summary",
+      "used_for": [
+        "three large solar particle events from 19 October 1989 lasted about six days at 1 AU",
+        "243 upsets in the RAM of TDRS-1's attitude control system during the events; upset rates on other craft rose from 1-2 a day to about 20",
+        "October 1989 underlies CREME96's worst-week and worst-day environments"
+      ]
+    },
+    {
+      "id": "halloween_2003",
+      "citation": "NOAA, Service Assessment: Intense Space Weather Storms October 19 - November 07, 2003 (2004); NOAA Technical Memorandum OAR SEC-88",
+      "url": "https://www.spaceweather.gov/sites/default/files/images/Service%20Assessment%20Sep%2007,%202004.pdf",
+      "kind": "agency assessment",
+      "read": "search summary",
+      "used_for": [
+        "17 major flares from 19 October to 5 November 2003",
+        "28 satellites reported anomalies and two were put out of service, among them ADEOS-II, lost after 24 October",
+        "precedent for space weather reaching many spacecraft at once over days"
+      ]
+    },
+    {
+      "id": "anik_1994",
+      "citation": "Lam et al., Anik-E1 and E2 satellite failures of January 1994 revisited, Space Weather 10 (2012)",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2012SW000811",
+      "kind": "anomaly analysis",
+      "read": "search summary",
+      "used_for": [
+        "on 20 January 1994 internal (bulk dielectric) charging and discharge disabled a part in the speed-control loop of both satellites' momentum wheels, the same day",
+        "Anik E1 was recovered in about seven hours on its backup wheel; Anik E2's backup could not be activated and its attitude recovery took many months",
+        "precedent for space weather disabling attitude control on several craft of one design at once"
+      ]
+    },
+    {
+      "id": "galaxy15_2010",
+      "citation": "Galaxy 15 (Wikipedia); Spaceflight Now, January 2011; D. Ferguson et al., Plasma conditions during the Galaxy 15 anomaly and the possibility of ESD from subsurface charging (AIAA 2011)",
+      "url": "https://en.wikipedia.org/wiki/Galaxy_15",
+      "kind": "incident record",
+      "read": "search summary",
+      "used_for": [
+        "Galaxy 15 stopped answering commands on 5 April 2010, probably after an electrostatic discharge, while its payload kept relaying",
+        "it drifted uncommanded for about nine months, a hazard to its neighbours, until its wheels saturated, it lost the Sun, its batteries drained and it rebooted on 27 December 2010",
+        "precedent for a transmitter that keeps radiating after control is lost: the beams must stop when they lose command or pilot"
+      ]
+    },
+    {
+      "id": "dickinson_1978",
+      "citation": "R. M. Dickinson (NASA), Microwave power transmission beam safety system, US patent 4,187,506 (filed 1978)",
+      "url": "https://patents.google.com/patent/US4187506A/en",
+      "kind": "patent",
+      "read": "page (Google Patents abstract and summary)",
+      "used_for": [
+        "the beam's power, shape and direction are controlled from the pilot and from received, reflected and scattered power profiles",
+        "the system reshapes, dims or douses the beam when an object enters it, and withholds high power until the pilot profile shows an unobstructed path"
+      ]
+    },
+    {
+      "id": "doe_nasa_1978",
+      "citation": "US DOE & NASA 1978, Satellite Power System Concept Development and Evaluation Program: Reference System Report, DOE/ER-0023",
+      "url": "https://nss.org/wp-content/uploads/SSP-DOE-1978-space-solar-power-Reference-System-Report.pdf",
+      "kind": "reference design",
+      "read": "via project (provisioning/power_sources.json and the domain synthesis), not re-read here",
+      "used_for": [
+        "the retrodirective beam focuses only on a pilot sent up from the receiver and spreads out when the pilot is lost",
+        "the transmitter at about 10 kg per kW (as provisioning/energy_options.md carries it)"
+      ]
+    },
+    {
+      "id": "ikaros_2010",
+      "citation": "JAXA press release of 23 July 2010 on IKAROS attitude control; eoPortal, IKAROS; Y. Tsuda et al. on IKAROS's reflectivity control devices",
+      "url": "https://global.jaxa.jp/press/2010/07/20100723_ikaros_e.html",
+      "kind": "flight demonstration",
+      "read": "search summary",
+      "used_for": [
+        "80 liquid-crystal reflectivity control devices at the sail's edge turned its Sun angle by about half a degree in 23 hours, about a degree a day, without propellant",
+        "the method reached about 90% of the attitude control expected before launch",
+        "the devices reflect specularly only while powered (via project: array_industry_sources, Mori et al.), so a trim that needs power to hold its state reverts when its power fails"
+      ]
+    },
+    {
+      "id": "starling_2024",
+      "citation": "Starling Formation-Flying Optical Experiment: Initial Operations and Flight Results, arXiv:2406.06748 (2024); NASA, Swarming for Success: Starling Completes Primary Mission",
+      "url": "https://arxiv.org/abs/2406.06748",
+      "kind": "flight results",
+      "read": "search summary",
+      "used_for": [
+        "the first autonomous angles-only navigation of a satellite swarm, with multiple targets and observers and autonomous initialization",
+        "relative positioning uncertainty of 1.3% of range (1 sigma) for one observer and 0.6% with several",
+        "on-board distributed decision-making by consensus across the swarm (the Distributed Spacecraft Autonomy experiment)"
+      ]
+    },
+    {
+      "id": "canx_2014",
+      "citation": "eoPortal, CanX-4 and CanX-5; Newman et al., flight results of the CanX-4 and CanX-5 formation flying mission, Small Satellite Conference 2015, SSC15-VIII-1",
+      "url": "https://directory.eoportal.org/satellite-missions/canx-4-5",
+      "kind": "flight results",
+      "read": "search summary",
+      "used_for": [
+        "autonomous formation control with under 1 m error at 50-1,000 m ranges, completed in November 2014",
+        "relative position knowledge better than 10 cm from carrier-phase differential GPS",
+        "autonomy holds a formation from relative measurements; here the relative sensing would be the tiles' own, without GNSS"
+      ]
+    },
+    {
+      "id": "nfpa_110",
+      "citation": "NFPA 110, Standard for Emergency and Standby Power Systems, as summarized by power-equipment suppliers' guides",
+      "url": "https://ckpower.com/wp-content/uploads/2018/04/NFPA-110-Final.pdf",
+      "kind": "standard (secondary summaries)",
+      "read": "search summary",
+      "used_for": [
+        "Level 1, Type 10: emergency power within 10 seconds where failure could cost lives, as in hospitals",
+        "Class 96: 96 hours of fuel on site"
+      ]
+    },
+    {
+      "id": "usda_power_outage",
+      "citation": "USDA Food Safety and Inspection Service, Keep Your Food Safe During Emergencies",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/emergencies/keep-your-food-safe-during-emergencies",
+      "kind": "agency guidance",
+      "read": "search summary",
+      "used_for": [
+        "with the doors closed, food stays safe about 4 hours in a refrigerator, 48 hours in a full freezer and 24 in a half-full one"
+      ]
+    },
+    {
+      "id": "faa_ac_25_1309",
+      "citation": "FAA Advisory Circular AC 25.1309-1 (and 1B), System Design and Analysis",
+      "url": "https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC_25.1309-1B.pdf",
+      "kind": "regulatory guidance",
+      "read": "search summary",
+      "used_for": [
+        "catastrophic failure conditions must be extremely improbable: an average probability under 1e-9 per flight hour",
+        "derived from about one serious accident per million flight hours apportioned among failure conditions"
+      ]
+    },
+    {
+      "id": "nrc_safety_goals",
+      "citation": "US NRC safety goals as summarized in IAEA and OECD/NEA documents (e.g. MDEP safety goals report, 2011)",
+      "url": "https://www.oecd-nea.org/mdep/documents/MDEP-SAHLSG-Jan2011.pdf",
+      "kind": "regulatory goals (secondary summary)",
+      "read": "search summary",
+      "used_for": [
+        "mean core damage frequency under 1e-4 per reactor-year and large release frequency under 1e-6 per reactor-year"
+      ]
+    },
+    {
+      "id": "kessler_1978",
+      "citation": "D. J. Kessler and B. G. Cour-Palais, Collision frequency of artificial satellites: the creation of a debris belt, J. Geophys. Res. 83, 2637-2646 (1978)",
+      "url": "https://doi.org/10.1029/JA083iA06p02637",
+      "kind": "theory",
+      "read": "recalled; not read here",
+      "used_for": [
+        "a population dense enough that collision fragments cause further collisions grows on its own: the collisional cascade"
+      ]
+    },
+    {
+      "id": "grun_1985",
+      "citation": "E. Grun, H. A. Zook, H. Fechtig and R. H. Giese, Collisional balance of the meteoritic complex, Icarus 62, 244-272 (1985)",
+      "url": "https://www.spenvis.oma.be/help/background/metdeb/metdeb.html",
+      "kind": "flux model",
+      "read": "via project (protection/transmission/README.md, in SPENVIS's form)",
+      "used_for": [
+        "the interplanetary flux at 1 AU holes 1.5e-7 of the film a year, mostly through particles near 60 micrometres; showers and focusing by Earth and the Moon are left out of that model"
+      ]
+    }
+  ]
+}
