@@ -10,11 +10,11 @@
       "research/studies/world_economy/accounts.py": "94f5fa8f712d341cc09b85f88cc65aa0afa20b50ab9e0c0a6cb8a26e7bd35a98",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
       "research/studies/world_economy/construction.py": "32e7d41dcb8054665d4c3c9ae98d42fd9c7bfee06837924fe056314a9080a865",
-      "research/studies/world_economy/construction_inputs.json": "7371556e189e57bf19ec92f7e789fc87f5bf59709c4c612357c3b5915018abb6",
+      "research/studies/world_economy/construction_inputs.json": "0fff27dbd2989a8224586771c403dd41f79ba1e2d1b90f981ce72e178198cda4",
       "research/studies/world_economy/productivity.py": "33ed629a087ac95a591f181d47ee17e57ee8a08f16548ffb3379fb028fdf08b1",
       "research/studies/world_economy/productivity_inputs.json": "c91c407c5974c8384ee993252031ef39dc0e4f996e1e8c3f6da8f204dc8bc51c",
       "research/studies/world_economy/inventory.py": "721e67cd0d546969613d11663249c8204fd0c6137e3cbf4d95b06d962024d9d1",
-      "research/studies/world_economy/inputs.json": "0327fa6423a84fa07414a9e4f66101546121987abb1daf29338aa3f92c4934e7"
+      "research/studies/world_economy/inputs.json": "7e4dcaf2b05252dd1ea003a9b3a70c475cc78c21b405a498d82fb4341e4556ae"
     },
     "constants": {
       "JULIAN_DAY": 86400.0,
@@ -49,7 +49,7 @@
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "b7d5104e8f74cd9a3886f6d4d5f83a27d3f040af2308f8471eb6a8fd7b717af9",
+        "sha256": "8e5b60cc7c2ba7d5f3e8b07899cd60d9b34e9b4baae1b69a7683f5e4909e41dc",
         "fields": [
           "distributions.C'.people_billion",
           "distributions.C'.moon.water_lift_gw",
@@ -83,7 +83,7 @@
       },
       "provisioning/results/power.json": {
         "schema": "terluna.provisioning.power/1",
-        "sha256": "d7351d9e5e083ba8bbede7102473015b5ae325abc83d3e80f6141a3e61694bfd",
+        "sha256": "6d8fcf104a00ef8521df3af5869c001e707bd2781ac079252a441ca3c618544c",
         "fields": [
           "reserves.ring_fault.delivered_total_tw",
           "reserves.ring_fault.energy_twh",
@@ -95,7 +95,7 @@
       },
       "research/studies/food_systems/results/food_blend.json": {
         "schema": "terluna.research.food-blend/1",
-        "sha256": "825daf0df5d8bedef0adf250a2633315acdafaaa48c86303607d040208d95633",
+        "sha256": "5904b4e7b7aefb42e0e88f7f4e8ce62f72ae304706dd2eb64e97a95a63fa3896",
         "fields": [
           "blend.8.wild_30_hybrid_20.power_tw",
           "blend.8.wild_30_hybrid_20.fields_km2",
@@ -112,14 +112,14 @@
       },
       "research/studies/terrain_through_time/results/terrain_through_time.json": {
         "schema": "terluna.research.terrain-through-time/1",
-        "sha256": "dd10ee84a1ad65558226077816c841302ba25b57426ef14006ae9abf7fbbe53d",
+        "sha256": "9669e3c1d876ac7566494c19ab1f73900657d1f76aa2131d9b96551a13978669",
         "fields": [
           "upkeep.rates"
         ]
       },
       "research/studies/carbon_cycle/results/carbon_cycle.json": {
         "schema": "terluna.research.carbon-cycle/1",
-        "sha256": "d6f71848e62f5eb4cf58a1fca5ae1fb2c551ff248662a31d07514e0bc9d7751c",
+        "sha256": "86767c46a0a548b4d87b25f8dbe11dd5f7caa2a0a84d269fc68350a8a057e34a",
         "fields": [
           "questions.imports",
           "questions.managed_return.by_corner"
