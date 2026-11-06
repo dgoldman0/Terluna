@@ -12,7 +12,7 @@ From the worktree root (any Python 3 works; the launcher only calls Blender):
         [--garment CLOTH.npz ...] [--preset draft|test|detail|video|final] [--stills 2.0,4.4,6.5] [--stills-preset final] [--stills-only] \
         [--frames 1:120] [--cam-az DEG] [--cam-dist M] [--cam-aim M] [--cam-fstop N] [--rebuild] [--save-scene SCENE.blend] \
         [--bodice R,G,B] [--bodice-look matte|satin] [--yoke R,G,B,A] [--sheer hashed|blend] [--samples N] \
-        [--bodice-shell STYLE[,NECKLINE]] [--trim R,G,B] [--light stage|soft]
+        [--bodice-shell STYLE[,NECKLINE]] [--trim R,G,B] [--waist-band obi] [--waist-band-rgb R,G,B] [--light stage|soft]
 
 - Presets: `draft` is 854x480 with 24 samples and sampled soft shadows, the default for whole videos until a complete
   video is near (from the per-pixel cost below, about 45% of the 720p frame time; not yet timed); check stills render
@@ -35,8 +35,8 @@ From the worktree root (any Python 3 works; the launcher only calls Blender):
   shading and the body shows through every layer, so the design stills use hashed transparency at 256 samples.
 - `--stills` writes PNGs beside the video as `<stem>_tSS.SS.png`; `--stills-only` skips the video. `detail` is the
   final quality at 720p.
-- The camera stands at a fixed bearing (`--cam-az`) and distance (`--cam-dist`) and follows the smoothed centre of
-  mass. `--cam-aim` sets how far above the centre of mass it aims (0.06 m by default) and raises the camera with its
+- The camera stands at a fixed bearing (`--cam-az`) and follows the smoothed centre of mass. Without `--cam-dist` it
+  keeps its default distance and pulls back while the body would reach past the frame (below); `--cam-dist` fixes it. `--cam-aim` sets how far above the centre of mass it aims (0.06 m by default) and raises the camera with its
   aim, so a close still is taken level; `--cam-fstop` sets the aperture (2.8 by default). The bodice stills of
   3 November used `--cam-aim 0.36 --cam-dist 2.1 --cam-fstop 8`, which frames the standing dancer from the hips to the
   head with the whole torso in focus.
@@ -75,6 +75,12 @@ From the worktree root (any Python 3 works; the launcher only calls Blender):
   `ruched`, soft gathers rising from the centre front's waist to the sides, about 17 mm apart, their spacing and
   depth varied by two noise fields (a regular 11 mm sine read as stripes); `pleated`, knife pleats fanning from 7 cm
   below the waist. The colour is `--bodice`'s (ivory without it). The shell does not crease or slide as cloth would.
+- `--waist-band obi` draws a stiff waist band over the gown, for cloth runs dressed without a sash (6 November): a
+  copy of the body's torso from 1.00 to 1.13 m, smoothed further than the bodice shell (150 Taubin steps) so it
+  spans the navel and the spine's groove as a nearly straight-sided ring, lifted 20 mm clear of the bodice shell and
+  the skirts' gathered waistbands, 3 mm thick, in satin of `--waist-band-rgb` (the sash's gold by default) with a
+  fine weave, piped edges 6 mm deep and a round cord 7 mm wide at mid-height, without tassels. It moves with the body
+  and cannot press the skirts' tops in as a tied band would.
 - `--garment` takes a cloth sequence: `faces` (F, 3) int and `verts` (N, V, 3) in the dance world frame at the motion's
   rate (or at the file's own `fps`). The renderer resamples it to 30 fps, writes a PC2 cache into `pc2/` beside the
   output and plays it with a Mesh Cache modifier. `test_sheet.py MOTION.npz OUT.npz` makes a kinematic test skirt for
@@ -88,8 +94,13 @@ From the worktree root (any Python 3 works; the launcher only calls Blender):
   stopped a three-still render with std::bad_alloc while Blender held about 0.3 GB); cap real memory instead, above
   the scene's peak and without swap, for example with `systemd-run --user --scope -p MemoryMax=10G -p MemorySwapMax=0`.
   With the fourth costume round's fourteen garment files (each tier's bound hem a file of its own) Blender's resident
-  memory peaked at 7.7-8.5 GB for a still at 720p or 1080p, and under an 8 GB cap the memory controller stopped the
-  canopy still; what in the scene takes that much is not yet measured.
+  memory peaked at 7.7-8.5 GB for a still at 720p or 1080p, and a 480p video of the salto held 12.2 GB from its second
+  frame. On 6 November a still built up in steps found the cause: the dancer alone peaks at 0.71 GB, with the bodice
+  shell and yoke at 0.98 GB, with the gown's seven sheer parts at 8.57 GB and with their seven bindings at 8.73 GB.
+  The cloth is triangles, and the smoothing level's subdivision pushed its points to the limit surface, whose tables
+  for triangles are large; set to leave the points where the one level puts them (`use_limit_surface` off), the same
+  still peaks at 1.27 GB and differs from the other by 0.4 of 255 per pixel on average, the sheer cloth's dither.
+  Rendering on the GPU's subdivision or not made no difference.
 
 ## Pipeline
 
@@ -129,7 +140,17 @@ Designed by hand (choices in the code, judged on renders):
   (1.39 m);
 - the hair: a dark base cap 1.5 to 6 mm off the scalp that thins out at the hairline, about 13.7 k hair-curve strands
   combed over it to a classical bun at the crown, 2.6 k strands wound round the bun, all rigid with the head bone;
-- the face: lips (the base mesh's lip face sets) and brows (an arch above each eye) as colour fields;
+- the face: lips (the base mesh's lip face sets), brows (an arch above each eye, 2.5 mm lower and fuller at the inner
+  end since 6 November) and a dark lash line along each lid's margin, dense above and light below, as colour fields.
+  The base mesh's open eyes showed white all round each iris, a stare that read as uncanny; since 6 November the
+  build turns each upper lid down about its eye's centre (13 degrees over the lid's middle, nothing at the corners) so
+  it covers the top of the iris, raises each lower lid 4 degrees and lifts the corners of the mouth 1.2 mm
+  (`soften_face`). The lids slide over the eyeball and stay outside it. The eyes' whites are softer (sRGB 0.80, 0.76,
+  0.72 from 0.86, 0.83, 0.80) with a dark limbal ring at the iris's edge, the skin a little rougher with shallower
+  scattering (roughness 0.6, specular 0.32, 3 mm, from 0.55, 0.38 and 3.5 mm, which read as wax), and the hair cap's
+  combing broken by six times the noise with half the bump, so it no longer reads as a ribbed swim cap. The base
+  mesh's fingers stay splayed: a curl about the knuckles' line, its palm direction taken from the hand's thinnest
+  axis, creased a wrist and twisted the other hand on 6 November, and the mesh does not separate the fingers;
 - materials: subsurface skin (warm medium brown, red-weighted scattering radius), knit leotard, satin slippers, hair,
   eyes with iris and pupil from the angle to the eye's axis; at render time, the bodice's matte silk and satin looks
   and the yoke's chiffon (a BSDF in 0.35 of the fabric's colour plus 0.25 of the skin's albedo, for light passed
@@ -148,6 +169,11 @@ Designed by hand (choices in the code, judged on renders):
 - the camera: 50 mm at f/2.8 following the smoothed centre of mass (across the floor with sigma 0.8 s, in height with
   sigma 0.35 s, aimed 6 cm above it). Phrases in place: 5.5 m away at a 30 deg bearing from the dancer's front, 1.1 m
   high. Travelling phrases (more than 1 m of travel): 6.8 m away, square to the travel so the line reads in profile.
+  Since 6 November the distance is a floor: frame by frame the camera stands farther back while the body reaches past
+  the frame's height above or below the aim (the segments' origins plus 22 cm for the crown, 20 cm for the fingertips,
+  12 cm for the toes' tips and 10 cm for the feet, with 15% of the height spare), starting 0.7 s ahead and smoothed with sigma 0.35 s, so
+  it dollies back to 7.5 m for a salto whose feet left the frame at the top at 5.5 m, and stands at
+  6.1-6.3 m for the canopy, whose raised sleeves touched the top of the frame at 5.5 m, and 6.8-7.1 m for the leap.
   The lighting rig turns with the camera bearing and travels with the dancer; the cyclorama is centred on the path.
 
 Generated by rule (repeatable from the scripts):

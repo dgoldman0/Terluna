@@ -3,7 +3,7 @@
   "producer": {
     "files": {
       "research/studies/world_economy/industrial_legacy.py": "495aa1021512c3635c11e6bc460ee958bada2b1a89eedac92a845356dff1fecd",
-      "research/studies/world_economy/industrial_legacy_inputs.json": "efb384a49aa09afa35c379f095d371ea2c10e39f4d7524726a40c2516c54428d",
+      "research/studies/world_economy/industrial_legacy_inputs.json": "49b26a40124dc54dfff73527a2cfe20573c6d46fd90d1c26491f7325ccbed801",
       "research/studies/world_economy/industrial_stocks.py": "6718a60ceee706d888861918bfaeab130ab58cbff7cb2d21dd590d600bf601ef"
     },
     "input_products": {
@@ -13,7 +13,7 @@
       },
       "research/studies/world_economy/results/industrial_markets.json": {
         "schema": "terluna.research.industrial-markets/1",
-        "sha256": "a48a83316b9485fcaf9af252b64fa73481ce0ea596199e07d20dbb23e1e6f78e"
+        "sha256": "e7815a05096ff59c829460e43ed375fb9853aa4cbc4f0a8576cc02b28d8a43e5"
       }
     }
   },

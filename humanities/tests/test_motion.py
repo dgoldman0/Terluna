@@ -245,3 +245,76 @@ def test_phrases_without_aerial_figures_are_planned_as_before():
     nodes = rz.timeline(gr.first_phrase().placed, finish_s=1.0)
     prob = rz.Problem(nodes)
     assert prob.air_plans == [] and not any(n.lean_free or n.z_rel is not None for n in nodes)
+
+
+def test_self_distance_measures_the_capsules_it_keeps_apart():
+    """The pairs kept apart (the legs, the arms, each arm and the head) are measured as the distance between their
+    capsules' surfaces, here at rest against the capsules placed from body.json directly."""
+    from humanities.dance.motion.apart import SelfDistance, capsules, closest
+    from humanities.dance.motion_io import body_spec
+    m, _ = build()
+    sd = SelfDistance(m)
+    d = sd.distances(neutral(m))[0]
+    spec = body_spec()
+    origin = {s['name']: np.array(s['origin'], float) for s in spec['segments']}
+    caps = capsules(spec)
+    for (g, s1, s2), dk in zip(sd.prs, d):
+        (a1, b1, r1), (a2, b2, r2) = caps[s1], caps[s2]
+        P1, Q1, P2, Q2 = (np.array([v]) for v in (origin[s1] + a1, origin[s1] + b1, origin[s2] + a2, origin[s2] + b2))
+        s, t = closest(P1, Q1, P2, Q2)
+        ref = np.linalg.norm(P1 + s[:, None] * (Q1 - P1) - P2 - t[:, None] * (Q2 - P2)) - r1 - r2
+        assert dk == pytest.approx(ref, abs=1e-9)
+    assert len(sd.prs) == 24 and d.min() > 0.0                       # at rest no pair touches
+
+
+def test_self_distance_derivatives_match_finite_differences():
+    """In a random pose the analytic derivative of every pair's distance (each closest point's velocity Jacobian
+    along the unit vector between the points) matches finite differences in the configuration's tangent space."""
+    from humanities.dance.motion.apart import SelfDistance
+    m, _ = build()
+    sd = SelfDistance(m)
+    rng = np.random.default_rng(11)
+    q = pin.integrate(m, neutral(m), rng.normal(size=m.nv) * 0.4)
+    d, J = sd.jacobian(q)
+    eps, num = 1e-7, np.zeros_like(J)
+    for k in range(m.nv):
+        e = np.zeros(m.nv)
+        e[k] = eps
+        num[:, k] = (sd.distances(pin.integrate(m, q, e))[0] - sd.distances(pin.integrate(m, q, -e))[0]) / (2 * eps)
+    assert np.allclose(J, num, atol=1e-5)
+
+
+def test_the_barrier_follows_the_body_between_nodes():
+    """With an interval T between nodes the residual also measures each distance on the path from the node before,
+    which the integrator's step and the motion file's interpolation both take along the node's velocity: q integrated
+    back along v for T/4, T/2 and 3T/4 (a fast shin can slide through a standing one between two nodes). Those are the
+    configurations pin.interpolate gives between the node before and this one, and the derivatives in the
+    configuration and the velocity match finite differences."""
+    from humanities.dance.motion.apart import ResidualApart, SelfDistance
+    m, _ = build()
+    state = crocoddyl.StateMultibody(m)
+    T = 0.025
+    res = ResidualApart(state, m.nv - 6, interval=T)
+    rng = np.random.default_rng(3)
+    q = pin.integrate(m, neutral(m), rng.normal(size=m.nv) * 0.4)
+    v = rng.normal(size=m.nv)
+    x = np.concatenate([q, v])
+
+    def r(x):
+        d = res.createData(crocoddyl.DataCollectorMultibody(m.createData()))
+        res.calc(d, x)
+        return d.r.copy(), d
+
+    r0, data = r(x)
+    res.calcDiff(data, x)
+    sd, n = SelfDistance(m), res.n
+    q_before = pin.integrate(m, q, -T * v)                       # the node before, which the step took here along v
+    assert np.allclose(r0[:n], sd.distances(q)[0])
+    assert np.allclose(r0[2 * n:3 * n], sd.distances(pin.interpolate(m, q_before, q, 0.5))[0], atol=1e-9)
+    eps, num = 1e-6, np.zeros((len(r0), 2 * m.nv))
+    for k in range(2 * m.nv):
+        dx = np.zeros(2 * m.nv)
+        dx[k] = eps
+        num[:, k] = (r(state.integrate(x, dx))[0] - r(state.integrate(x, -dx))[0]) / (2 * eps)
+    assert np.allclose(data.Rx, num, atol=1e-5)
+

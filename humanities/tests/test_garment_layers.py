@@ -295,3 +295,85 @@ def test_layers_in_one_contact_group_do_not_repel():
         gap[label] = veil[np.abs(veil[:, 0]) < 0.011, 2].mean() - under[np.abs(under[:, 0]) < 0.011, 2].mean()
     assert abs(gap['grouped']) < 0.2 * d
     assert 0.9 * d < gap['apart'] < 1.2 * d
+
+
+
+def _contact(cloth, a0, a1, b0, b1):
+    """One call of the body contact on the cloth at rest, its capsules moving from (a0, b0) to (a1, b1) in a substep."""
+    cloth.set_frame(a0, a1, b0, b1)
+    cloth.frac0.fill_(0.0)
+    cloth.frac1.fill_(1.0)
+    cloth.dt_now = DT
+    return cloth.body_contact(cloth.x.clone(), torch.zeros_like(cloth.x))[0].double().numpy()
+
+
+def _on_a_line(z):
+    """A small strip's vertices laid on one line along x at height z, so that each is the same distance from capsules
+    along x (the body contact alone is called on it)."""
+    pc = rectangle(0.02, 0.01, 0.01)
+    return pc, np.c_[pc.vertex_uv[:, 0] - 0.01, np.zeros(pc.n_vertices), np.full(pc.n_vertices, z)]
+
+
+def test_undoing_an_overlap_presses_nothing():
+    """Cloth already 5 mm inside a capsule's reach (older penetration, as where two capsules overlap) while the capsule
+    slides 1 mm along its own axis in a substep: the overlap is undone at the depenetration speed, and with
+    press_friction that push carries no friction, so the slide does not drag the cloth; counted as a press (until 3
+    November) it dragged it by mu times the push."""
+    pc, X0 = _on_a_line(0.049)
+    a, b, slide = torch.tensor([[-0.3, 0.0, 0.0]]), torch.tensor([[0.3, 0.0, 0.0]]), torch.tensor([[0.001, 0.0, 0.0]])
+    out = {}
+    for press in (True, False):
+        cl = Cloth(pc, X0, CHIFFON, MOON, Settings(press_friction=press, self_collision=False), device='cpu')
+        cl.set_body([0.05])
+        out[press] = _contact(cl, a, a + slide, b, b + slide)
+    for d in out.values():
+        assert np.allclose(d[:, 2], 0.5 * DT, rtol=1e-4)            # out at the depenetration speed, along the normal
+    assert np.abs(out[True][:, 0]).max() < 1e-9
+    assert np.allclose(out[False][:, 0], 0.3 * 0.5 * DT, rtol=1e-3)  # mu x the push, along the slide
+
+
+def test_cloth_squeezed_between_two_parts_is_held_between_them():
+    """Cloth between two capsules whose surfaces face each other, reaching 3 mm into one and 1 mm into the other, while
+    they slide past each other in opposite directions as shins do in a stride. Held between them (squeeze_between),
+    its friction follows their mean motion, so the opposite slides leave it in place, and it is pushed toward the
+    shallower no further than where it reaches equally into both; pushed out of the deeper alone (until 3 November)
+    it is dragged along with the deeper one and pushed on past that point."""
+    pc, X0 = _on_a_line(0.0)
+    a = torch.tensor([[-0.3, -0.021, 0.0], [-0.3, 0.023, 0.0]])
+    b = torch.tensor([[0.3, -0.021, 0.0], [0.3, 0.023, 0.0]])
+    slide = torch.tensor([[0.001, 0.0, 0.0], [-0.001, 0.0, 0.0]])
+    out = {}
+    for between in (True, False):
+        kw = dict(squeeze_between=between, press_friction=False, self_collision=False)
+        cl = Cloth(pc, X0, CHIFFON, MOON, Settings(**kw), device='cpu')
+        cl.set_body([0.02, 0.02])
+        moving = _contact(cl, a, a + slide, b, b + slide)
+        squeezed = cl.squeezed.numpy().copy()
+        near = Cloth(pc, X0 + [0.0, 0.0009, 0.0], CHIFFON, MOON, Settings(**kw), device='cpu')   # 0.1 mm short
+        near.set_body([0.02, 0.02])
+        out[between] = (moving, squeezed, _contact(near, a, a, b, b))
+    (held, sq, held_near), (deeper, sq_old, deeper_near) = out[True], out[False]
+    assert sq.all() and not sq_old.any()
+    assert np.allclose(held[:, 1], 0.5 * DT, rtol=1e-4) and np.allclose(deeper[:, 1], 0.5 * DT, rtol=1e-4)
+    assert np.abs(held[:, 0]).max() < 1e-9                           # the opposite slides cancel
+    assert np.allclose(deeper[:, 0], 0.3 * 0.5 * DT, rtol=1e-3)      # dragged along with the deeper capsule
+    assert np.allclose(held_near[:, 1], 0.0001, atol=1e-7)           # stops where it reaches 2 mm into each
+    assert np.allclose(deeper_near[:, 1], 0.5 * DT, rtol=1e-4)       # pushed on past it
+
+
+def test_squeezed_layers_lie_together():
+    """Two layers 4 mm apart, closer than their contact distance, repel one another; flagged as squeezed between body
+    parts (squeeze_between), they are let lie together."""
+    pieces = [('a', rectangle(0.1, 0.1, 0.02)), ('b', rectangle(0.1, 0.1, 0.02))]
+    pc = _merge(pieces)
+    kv = _piece_of_vertex(pieces)
+    X0 = np.c_[pc.vertex_uv - 0.05, np.where(kv == 0, 0.5, 0.504)]
+    moved = {}
+    for squeezed in (False, True):
+        cl = Cloth(pc, X0, CHIFFON, World('void', 0.0, 0.0), Settings(), device='cpu')
+        cl.squeezed.fill_(squeezed)
+        cl.build_pairs()
+        cl.dt_now = DT
+        d, _ = cl.self_contact(cl.x.clone(), torch.zeros_like(cl.x))
+        moved[squeezed] = float(d.abs().max())
+    assert moved[False] > 1e-6 and moved[True] == 0.0

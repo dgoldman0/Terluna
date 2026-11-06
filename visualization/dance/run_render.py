@@ -3,7 +3,7 @@
     python visualization/dance/run_render.py MOTION.npz --out OUT.mp4 [--garment G.npz ...]
            [--preset draft|test|detail|video|final] [--stills 2.0,4.4,6.5] [--stills-preset final] [--stills-only]
            [--frames 1:120] [--cam-az DEG] [--cam-dist M] [--cam-aim M] [--cam-fstop N] [--rebuild] [--bodice R,G,B [--bodice-look matte|satin]] [--yoke R,G,B,A] [--sheer hashed|blend] [--samples N]
-           [--bodice-shell STYLE[,NECKLINE] [--trim R,G,B]] [--light stage|soft]
+           [--bodice-shell STYLE[,NECKLINE] [--trim R,G,B]] [--waist-band obi [--waist-band-rgb R,G,B]] [--light stage|soft]
 
 MOTION.npz follows humanities/dance/motion_io.py (schema terluna.humanities.dance-motion/1). Each --garment file holds
 `faces` (F, 3) int and `verts` (N_frames, V, 3) in the dance world frame at the motion's rate (or at its own `fps`).
@@ -96,6 +96,10 @@ def main(argv=None) -> int:
                     help='STYLE[,NECKLINE]: make the bodice a shell over the torso (structured, ruched or pleated; '
                          'sweetheart, vee or straight neckline), coloured by --bodice')
     ap.add_argument('--trim', default='0.70,0.52,0.25', help="sRGB r,g,b of the bodice shell's piped edge")
+    ap.add_argument('--waist-band', default='', choices=['', 'obi'],
+                    help='draw a stiff waist band over the gown, for runs dressed without a sash: obi (13 cm, piped, '
+                         'with a cord round its middle)')
+    ap.add_argument('--waist-band-rgb', default='0.70,0.52,0.25', help='sRGB r,g,b of the waist band')
     ap.add_argument('--light', choices=['stage', 'soft'], default='soft',
                     help='the lighting: soft (an even, stronger front light, the default) or stage (side light from coloured booms)')
     a = ap.parse_args(argv)
@@ -133,6 +137,8 @@ def main(argv=None) -> int:
         args += ['--samples', a.samples]
     if a.bodice_shell:
         args += ['--bodice-shell', a.bodice_shell, '--trim', a.trim]
+    if a.waist_band:
+        args += ['--waist-band', a.waist_band, '--waist-band-rgb', a.waist_band_rgb]
     args += ['--light', a.light]
     return blender(args)
 

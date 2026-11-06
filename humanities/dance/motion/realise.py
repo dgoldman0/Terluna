@@ -22,6 +22,9 @@ problem over the dancer's full rigid-body dynamics at lunar gravity (body.json t
   passes an impulse model that stops the new contact, as a rigid contact does;
 - joint torques stay inside the body's strength (box-constrained FDDP), joint ranges inside barrier costs, every point
   of the soles and knees that bears no weight at or above the floor;
+- no part of the body passes into another: a barrier keeps the legs, the arms and each arm and the head at or above
+  zero distance between their capsules (apart.py; without it the motions of 1-2 November passed the legs through each
+  other in strides and turns and the arms into the head in the hanging salto's tuck);
 - the shapes enter as posture targets interpolated through each phase and the turns as the pelvis's yaw. The travel
   enters as a centre-of-mass reference: a fall's follows the envelope's toppling pendulum and a weight shift's moves
   across to the standing foot. The footholds come from the plan: a foot landing from the air goes under the centre of
@@ -47,6 +50,7 @@ import crocoddyl
 
 from humanities.dance import envelope as env
 from humanities.dance import grammar as gr
+from humanities.dance.motion.apart import apart_cost, scan as self_scan
 from humanities.dance.motion.pinmodel import build, neutral
 from humanities.dance.motion_io import body_spec, save_motion
 
@@ -60,6 +64,17 @@ SOLE_POINTS = ('heel_m', 'heel_l', 'ball_m', 'ball_l', 'toe')
 FLOOR_POINTS = SOLE_POINTS + ('kneecap',)
 FLOOR_MARGIN_M = 0.002
 PALM_FLOOR_M = 0.03          # the palms kept this far above the floor (no unit rests on the hands)
+APART_WEIGHT = 1e5           # the barrier keeping the legs, the arms and each arm and the head out of each other, at
+                             # each node and on the way from the node before (m); 1e4 left them 46-62 mm deep at
+                             # the leap's take-offs. Raising it in steps from 1e3, each solve starting from the last,
+                             # and moving the reference postures clear of overlap first were tried on the leap (3
+                             # November) and kept the crossings no shorter, the latter with a sole 32 mm through the
+                             # floor
+APART_BETWEEN = tuple(k / 8 for k in range(1, 8))   # where the barrier looks between nodes (fractions of the step):
+                             # with 1/4, 1/2 and 3/4 the whole phrase's shins passed 32 mm through each other between
+                             # two looks at 21.07 s, where the run turns into the whirl, and caught the longest skirt
+                             # tier there, which the whirl then wound round her right leg (6 November)
+APART_MARGIN = 0.003         # m kept between the pairs' surfaces: parts nearly touch, as legs in fifth do
 MAX_FOOT_FORCE_N = 900.0     # a foot's peak push, about 10 lunar body weights (1.7 of Earth's): a jump's take-off peak
 # Contact kinds: the frame that holds the floor, how many directions it holds (6: no slip and no swivel; 3: a point
 # that cannot slip but may swivel), and the body's points that rest on the floor with it.
@@ -604,6 +619,9 @@ class Problem:
         bounds = crocoddyl.ActivationBounds(self._xlb(), self._xub(), 1.0)
         cm.addCost('ranges', crocoddyl.CostModelResidual(self.state, crocoddyl.ActivationModelQuadraticBarrier(bounds),
                                                          crocoddyl.ResidualModelState(self.state, self.nu)), 1e3)
+        # No part of the body passes into another: the legs, the arms, each arm and the head (apart.py).
+        cm.addCost('apart', *apart_cost(self.state, self.nu, APART_WEIGHT, interval=DT, between=APART_BETWEEN,
+                                        margin=APART_MARGIN))
         # Facing: the pelvis stays near upright and its yaw follows the travel. In a turn the yaw's rate follows the
         # plan instead of its angle, so a turn that lags never meets the half-revolution where an angle error wraps.
         pelvis = self.model.getFrameId('pelvis')
@@ -1260,6 +1278,8 @@ def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=Fal
                 producer='humanities/dance/motion/realise.py')
     on, force = contact_record(prob, solver, times)
     meta['floor'] = dict(lowest_sole_point_m=round(float(lowest_sole(prob, QS)), 4))
+    meta['self_distance'] = {g: dict(least_m=round(d, 4), t=round(float(times[k]), 3))
+                             for g, (d, k) in sorted(self_scan(prob.model, QS).items())}
     if prob.air_plans:
         meta['aerial'] = prob.air_plans
     save_motion(out_dir / f'{tag}.npz', times, P, Q, C, QS, meta, contact_on=on, contact_force=force)

@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "b57fa33ab52b8a675c6f87c67eacbed2b931b9020943ac7560501fc2de0802b8",
+      "research/studies/world_economy/amenities_inputs.json": "e7a43b6124a54b9c159f30c7a49b318447cb0b7b765c296165d94655e91425d5",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "c5d93051588481169176059aac1aca0f2f3e72ca06cf4cbed052830c88ae1cb3"
+        "sha256": "44bb32cf252ef5b84e80756fb1f04a4095bf9e719f5972b4e75bb5ee89622a05"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "75be8b76ea09f6004a4331d11b57412ae6a83f3484ca73d56202fd23b83f41cc"
+        "sha256": "c7221f5b81f7961f7e269edf2412a1c6d1eb630fa6fd794b9a64f4d8540ecc0b"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "4019bef126d4f1420f9a3090831fff5ee6ebf8f7f79c83ef376fd268a6e52ea2"
+        "sha256": "36a386f361da8d1f2dddcf12889d41c81723959e9a86b057e99fc84a04d28940"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "fbb72359ff9885ea24fa543c38aa8021543d5e11b7976f9e1acce2e2ac65cd38"
+        "sha256": "17aa706d679b8622a1f0bbaaff88f2b1ed3b8de3df568d2a7ec01134fd02a369"
       }
     }
   },

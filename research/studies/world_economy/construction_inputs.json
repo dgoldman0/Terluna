@@ -155,7 +155,7 @@
     },
     {
       "path": "provisioning/results/power.json",
-      "sha256": "04990883e6cbb59400f9ac350b7e17809014278a84542ed0b8f6642f1f161f63",
+      "sha256": "4c940564ced307eca271b6807e40ce6f9814482a9b5596686e90297b4e44eac6",
       "use": "orbital electricity capacity, ground receivers and 7-day critical reserves"
     },
     {

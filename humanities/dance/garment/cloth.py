@@ -36,8 +36,12 @@ Contact. Vertices are kept outside the body's capsules (moved with the motion ea
 with Coulomb friction relative to the body's surface; above the floor; and apart from one another by the
 self-contact distance, found with a sorted spatial hash rebuilt every few substeps. Contacts are inelastic: the
 approach made within a substep is undone at once and enters the velocity; older penetration (cloth caught where two
-capsules overlap) is undone at the depenetration speed in position only. Pinned vertices follow their attachment
-targets. Layers gathered into one seam can be put in a contact group whose vertices do not repel one another, so that
+capsules overlap) is undone at the depenetration speed in position only. Friction comes from the approach alone
+(`Settings.press_friction`), since undoing older penetration corrects the solver's own overlap and presses nothing.
+Cloth within reach of two body parts whose surfaces face each other, as between passing shins or an arm closing on
+the head, is held where it reaches equally into both and rides on their mean motion (`Settings.squeeze_between`), and
+squeezed layers lie together; pushed out of the deeper part alone, as until 3 November, it was driven through the
+other and left hooked round the limb. Pinned vertices follow their attachment targets. Layers gathered into one seam can be put in a contact group whose vertices do not repel one another, so that
 they lie a few millimetres apart where they are sewn (the self-contact distance, 0.75 mean edges, is about 1.1 cm at a
 1.5 cm mesh) and separate as they hang.
 
@@ -105,6 +109,11 @@ class Settings:
     self_rebuild_every: int = 4
     self_max_per_cell: int = 12
     depenetration_speed: float = 0.5   # m/s: rate at which older penetration is undone (positions only)
+    squeeze_between: bool = True    # cloth within reach of two body parts whose surfaces face each other is held
+                                    # between them; False pushes it out of the deeper one only (until 3 November)
+    squeeze_facing: float = 0.3     # the two contacts face each other when their normals' dot product is below -this
+    press_friction: bool = True     # the body's friction comes from the contact's approach alone; False also from
+                                    # undoing older penetration (until 3 November)
 
     def to_dict(self):
         return asdict(self)
@@ -383,6 +392,7 @@ class Cloth:
             self.t_anchor = torch.as_tensor(anchor[keep], dtype=torch.int64, device=dev)
             self.t_len = torch.as_tensor(length[keep], **f32)
         self.has_body = False
+        self.squeezed = torch.zeros(V, dtype=torch.bool, device=dev)   # held between two body parts last substep
         # static inputs for the substep (filled by set_frame / set_fraction), so the substep can be a CUDA graph
         self.capA0 = self.capdA = self.capB0 = self.capdB = self.cap_r = None
         self.tg0 = torch.zeros((len(self.pin_idx), 3), **f32)
@@ -577,6 +587,8 @@ class Cloth:
         dist = d.norm(dim=1).clamp_min(1e-9)
         n = d / dist[:, None]
         pen = (self.d_self - dist).clamp_min(0.0) * self.pvalid
+        if self.s.squeeze_between:          # layers squeezed between two body parts lie together, as cloth does
+            pen = pen * ~(self.squeezed[pi] & self.squeezed[pj])
         approach = (-((disp[pi] - disp[pj]) * n).sum(1)).clamp_min(0.0)
         p_pos = torch.minimum(pen, approach + self.s.depenetration_speed * self.dt_now)
         p_vel = torch.minimum(pen, approach)
@@ -628,12 +640,31 @@ class Cloth:
         approach = (((c_now - c_was) * nb).sum(1) - (disp * nb).sum(1)).clamp_min(0)
         depth = torch.minimum(pmax.clamp_min(0), approach + self.s.depenetration_speed * self.dt_now) * act
         depth_v = torch.minimum(pmax.clamp_min(0), approach) * act
+        surf = c_now - c_was                                  # the surface's motion the cloth rides on
+        if self.s.squeeze_between:
+            # Squeezed between two parts whose surfaces face each other (shins passing, an arm closing on the head),
+            # cloth pushed out of the deeper part alone is driven into the other faster than that one undoes it,
+            # until it leaves through the far side and hangs hooked round the limb. Held instead where it reaches
+            # equally into both, it stays between them and rides on their mean motion, so two parts sliding past
+            # each other drag it both ways and its own tension draws it out of the gap.
+            p2, best2 = pen.scatter(1, best[:, None], -1.0).max(dim=1)
+            n2 = d[ar, best2] / dist[ar, best2].clamp_min(1e-9)[:, None]
+            sq = act & (p2 > 0) & ((nb * n2).sum(1) < -self.s.squeeze_facing)
+            t2 = t[ar, best2]
+            surf2 = cpt[ar, best2] - (a0[best2] + t2[:, None] * (b0[best2] - a0[best2]))
+            surf = torch.where(sq[:, None], 0.5 * (surf + surf2), surf)
+            bal = 0.5 * (pmax - p2).clamp_min(0)
+            depth = torch.where(sq, torch.minimum(bal, approach + self.s.depenetration_speed * self.dt_now), depth)
+            depth_v = torch.where(sq, torch.minimum(bal, approach), depth_v)
+            self.squeezed.copy_(sq)
         push = nb * depth[:, None]
-        # Coulomb friction relative to the moving surface (the axis point's motion over the substep)
-        rel = (disp + push) - (c_now - c_was)
+        # Coulomb friction relative to the moving surface (the axis point's motion over the substep), from the
+        # contact's push in this substep: with press_friction only from the surface's approach, since undoing older
+        # penetration corrects the solver's own overlap and presses nothing
+        rel = (disp + push) - surf
         rel_t = rel - (rel * nb).sum(1, keepdim=True) * nb
         rt = rel_t.norm(dim=1).clamp_min(1e-12)
-        k = torch.clamp(mu * depth / rt, max=1.0) * act
+        k = torch.clamp(mu * (depth_v if self.s.press_friction else depth) / rt, max=1.0) * act
         fr = -rel_t * k[:, None]
         return push + fr, nb * depth_v[:, None] + fr
 

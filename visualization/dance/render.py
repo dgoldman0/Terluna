@@ -763,8 +763,50 @@ def fabric_fill(body, leo, iters=60):
     log('fabric fill: max %.1f mm, mean over leotard %.2f mm' % (1e3 * d.max(), 1e3 * d[leo > 0.5].mean()))
 
 
+LID_DROP_DEG = 13.0         # the upper lid's turn down over the eyeball at the middle of the lid: it covers the iris's top
+LID_RAISE_DEG = 4.0         # the lower lid's turn up
+MOUTH_LIFT_M = 0.0012       # how far the corners of the mouth rise (and 0.4 of it back into the cheek)
+
+
+def soften_face(body, eyes):
+    """A calm face in place of the base mesh's wide-eyed stare, which showed white all round each iris (6 November):
+    each upper lid lowered over its eyeball until it covers the top of the iris, each lower lid raised a little, and
+    the corners of the mouth lifted about a millimetre. The lids turn about the eye's centre, so they slide over the
+    eyeball and stay outside it; the turn is full over the middle of the lid and fades to nothing at the eye's corners,
+    toward the brow and down the cheek."""
+    V = mesh_coords(body)
+    D = np.zeros_like(V)
+    for e in eyes:
+        Ve = mesh_coords(e)
+        c = Ve.mean(0)
+        r = np.linalg.norm(Ve - c, axis=1).max()
+        p = V - c
+        dist = np.linalg.norm(p, axis=1)
+        el = np.degrees(np.arctan2(p[:, 2], p[:, 0]))            # elevation from the eye's forward axis (+x)
+        near = smoothstep(r + 0.010, r + 0.004, dist) * smoothstep(0.014, 0.008, np.abs(p[:, 1])) * (p[:, 0] > -0.004)
+        ang = np.radians(LID_DROP_DEG * near * (el > 0) * smoothstep(80.0, 45.0, el)
+                         - LID_RAISE_DEG * near * (el < 0) * smoothstep(-75.0, -40.0, el))
+        x, z = p[:, 0], p[:, 2]
+        D[:, 0] += x * np.cos(ang) + z * np.sin(ang) - x
+        D[:, 2] += -x * np.sin(ang) + z * np.cos(ang) - z
+    fs = face_sets(body)
+    lipv = np.unique([v for poly, s_ in zip(body.data.polygons, fs) if s_ in (7, 8) for v in poly.vertices])
+    for side in (1.0, -1.0):
+        k = lipv[np.argmax(side * V[lipv, 1])]                  # the corner of the mouth on that side
+        w = smoothstep(0.012, 0.0, np.linalg.norm(V - V[k], axis=1))
+        D[:, 2] += MOUTH_LIFT_M * w
+        D[:, 0] -= 0.4 * MOUTH_LIFT_M * w
+    body.data.vertices.foreach_set('co', (V + D).ravel())
+    body.data.update()
+    log('face: upper lids %.0f deg down, lower lids %.0f deg up, mouth corners %.1f mm up; largest move %.1f mm'
+        % (LID_DROP_DEG, LID_RAISE_DEG, 1e3 * MOUTH_LIFT_M, 1e3 * np.linalg.norm(D, axis=1).max()))
+
+
 def face_paint(body, eyes):
-    """Lips (the artist's lip face sets) and brows (an arch above each eye) as soft vertex fields."""
+    """Lips (the artist's lip face sets), brows (an arch above each eye) and a lash line along each lid's margin, dense
+    along the upper lid and light along the lower, as soft vertex fields. From 6 November the brows sit 2.5 mm lower
+    and fuller at their inner end, tapering to the tail; at the size the dancer is seen, the lash line reads as the
+    lashes' dark edge round the eye."""
     V = mesh_coords(body)
     E = mesh_edges(body)
     fs = face_sets(body)
@@ -774,15 +816,24 @@ def face_paint(body, eyes):
             lips[list(poly.vertices)] = 1.0
     lips = smooth_field(lips, E, 3)
     brow = np.zeros(len(V))
+    lash = np.zeros(len(V))
     for e in eyes:
-        c = mesh_coords(e).mean(0)
+        Ve = mesh_coords(e)
+        c = Ve.mean(0)
+        r = np.linalg.norm(Ve - c, axis=1).max()
         dy = (V[:, 1] - c[1]) * np.sign(c[1])          # outward from the nose
-        zc = c[2] + 0.021 + 0.005 * (1 - np.clip(((dy - 0.004) / 0.022) ** 2, 0, 1))
-        band = smoothstep(0.0045, 0.002, np.abs(V[:, 2] - zc)) * smoothstep(-0.018, -0.012, dy) \
+        zc = c[2] + 0.0185 + 0.005 * (1 - np.clip(((dy - 0.004) / 0.022) ** 2, 0, 1))
+        hw = 0.003 - 0.0015 * np.clip((dy + 0.012) / 0.04, 0, 1)          # half the brow's full height, to the tail
+        band = smoothstep(hw + 0.0025, hw, np.abs(V[:, 2] - zc)) * smoothstep(-0.018, -0.012, dy) \
             * smoothstep(0.03, 0.024, dy) * smoothstep(c[0] - 0.02, c[0] - 0.008, V[:, 0])
         brow = np.maximum(brow, band)
+        p = V - c
+        rim = smoothstep(r + 0.0035, r + 0.0012, np.linalg.norm(p, axis=1)) \
+            * smoothstep(0.0155, 0.0125, np.abs(p[:, 1])) * (p[:, 0] > 0)
+        lash = np.maximum(lash, rim * np.where(p[:, 2] > 0, 1.0, 0.4))
     brow = smooth_field(brow, E, 2)
-    for nm, val in (('lips', lips), ('brow', brow)):
+    lash = smooth_field(lash, E, 1)
+    for nm, val in (('lips', lips), ('brow', brow), ('lash', lash)):
         a = body.data.attributes.get(nm) or body.data.attributes.new(nm, 'FLOAT', 'POINT')
         a.data.foreach_set('value', np.clip(val, 0, 1).astype(np.float32))
 
@@ -1003,17 +1054,18 @@ def body_material():
     ramp.color_ramp.elements[0].color = srgb(*SKIN_RAMP[0])
     ramp.color_ramp.elements[1].color = srgb(*SKIN_RAMP[1])
     L.new(noise.outputs['Fac'], ramp.inputs['Fac'])
-    skin = principled(nt, **{'Roughness': 0.55, 'Subsurface Weight': 1.0, 'Subsurface Scale': 0.0035,
-                             'Subsurface Radius': (1.0, 0.30, 0.15), 'Specular IOR Level': 0.38})
+    # (6 November: rougher, with less specular and shallower scattering, from 0.55, 0.38 and 3.5 mm, which read as wax)
+    skin = principled(nt, **{'Roughness': 0.6, 'Subsurface Weight': 1.0, 'Subsurface Scale': 0.003,
+                             'Subsurface Radius': (1.0, 0.30, 0.15), 'Specular IOR Level': 0.32})
     a_lip = nt.nodes.new('ShaderNodeAttribute')
     a_lip.attribute_name = 'lips'
     a_brow = nt.nodes.new('ShaderNodeAttribute')
     a_brow.attribute_name = 'brow'
     mlip = nt.nodes.new('ShaderNodeMixRGB')
-    mlip.inputs['Color2'].default_value = srgb(0.40, 0.16, 0.15)
+    mlip.inputs['Color2'].default_value = srgb(0.36, 0.14, 0.13)
     flip = nt.nodes.new('ShaderNodeMath')
     flip.operation = 'MULTIPLY'
-    flip.inputs[1].default_value = 0.8
+    flip.inputs[1].default_value = 0.85
     L.new(a_lip.outputs['Fac'], flip.inputs[0])
     L.new(flip.outputs['Value'], mlip.inputs['Fac'])
     L.new(ramp.outputs['Color'], mlip.inputs['Color1'])
@@ -1025,7 +1077,17 @@ def body_material():
     L.new(a_brow.outputs['Fac'], fbrow.inputs[0])
     L.new(fbrow.outputs['Value'], mbrow.inputs['Fac'])
     L.new(mlip.outputs['Color'], mbrow.inputs['Color1'])
-    L.new(mbrow.outputs['Color'], skin.inputs['Base Color'])
+    a_lash = nt.nodes.new('ShaderNodeAttribute')
+    a_lash.attribute_name = 'lash'
+    mlash = nt.nodes.new('ShaderNodeMixRGB')
+    mlash.inputs['Color2'].default_value = srgb(0.025, 0.018, 0.014)
+    flash = nt.nodes.new('ShaderNodeMath')
+    flash.operation = 'MULTIPLY'
+    flash.inputs[1].default_value = 0.9
+    L.new(a_lash.outputs['Fac'], flash.inputs[0])
+    L.new(flash.outputs['Value'], mlash.inputs['Fac'])
+    L.new(mbrow.outputs['Color'], mlash.inputs['Color1'])
+    L.new(mlash.outputs['Color'], skin.inputs['Base Color'])
     pores = nt.nodes.new('ShaderNodeTexNoise')
     pores.inputs['Scale'].default_value = 900.0
     L.new(tex.outputs['Object'], pores.inputs['Vector'])
@@ -1071,17 +1133,22 @@ def hair_material(comb=False):
     m, nt, out = node_mat('hair_cap' if comb else 'hair_bun')
     L = nt.links
     tex = nt.nodes.new('ShaderNodeTexCoord')
-    if comb:   # sin(140 phi + noise): continuous across the azimuth seam because 140 is whole
+    if comb:   # sin(260 phi + 6 noise): continuous across the azimuth seam because 260 is whole; the noise, six times
+        # what it was until 6 November, breaks the combing's even ridges, which read as a swim cap
         at = nt.nodes.new('ShaderNodeAttribute')
         at.attribute_name = 'hair_phi'
         nz = nt.nodes.new('ShaderNodeTexNoise')
         nz.inputs['Scale'].default_value = 40.0
         L.new(tex.outputs['Object'], nz.inputs['Vector'])
+        nz6 = nt.nodes.new('ShaderNodeMath')
+        nz6.operation = 'MULTIPLY'
+        nz6.inputs[1].default_value = 6.0
+        L.new(nz.outputs['Fac'], nz6.inputs[0])
         m1 = nt.nodes.new('ShaderNodeMath')
         m1.operation = 'MULTIPLY_ADD'
         m1.inputs[1].default_value = 260.0
         L.new(at.outputs['Fac'], m1.inputs[0])
-        L.new(nz.outputs['Fac'], m1.inputs[2])
+        L.new(nz6.outputs['Value'], m1.inputs[2])
         wave = nt.nodes.new('ShaderNodeMath')
         wave.operation = 'SINE'
         L.new(m1.outputs['Value'], wave.inputs[0])
@@ -1094,10 +1161,10 @@ def hair_material(comb=False):
         wave.inputs['Detail'].default_value = 4.0
         L.new(tex.outputs['Object'], wave.inputs['Vector'])
         wave_out = wave.outputs['Fac']
-    p = principled(nt, **{'Base Color': srgb(0.05, 0.032, 0.026), 'Roughness': 0.42, 'Specular IOR Level': 0.4,
+    p = principled(nt, **{'Base Color': srgb(0.05, 0.032, 0.026), 'Roughness': 0.5, 'Specular IOR Level': 0.3,
                           'Sheen Weight': 0.5, 'Sheen Tint': srgb(0.45, 0.32, 0.24)})
     b = nt.nodes.new('ShaderNodeBump')
-    b.inputs['Strength'].default_value = 0.18 if comb else 0.35
+    b.inputs['Strength'].default_value = 0.08 if comb else 0.35
     b.inputs['Distance'].default_value = 0.0004
     L.new(wave_out, b.inputs['Height'])
     L.new(b.outputs['Normal'], p.inputs['Normal'])
@@ -1139,10 +1206,12 @@ def eye_material():
     el[1].position, el[1].color = 0.17, srgb(0.20, 0.11, 0.06)
     e = el.new(0.43)
     e.color = srgb(0.30, 0.17, 0.09)
-    e = el.new(0.47)
-    e.color = srgb(0.86, 0.83, 0.80)
+    e = el.new(0.445)                   # the limbal ring, the iris's dark edge
+    e.color = srgb(0.09, 0.055, 0.035)
+    e = el.new(0.47)                    # the white, softer than until 6 November (0.86, 0.83, 0.80), which glared
+    e.color = srgb(0.80, 0.76, 0.72)
     e = el.new(1.0)
-    e.color = srgb(0.80, 0.74, 0.72)
+    e.color = srgb(0.72, 0.66, 0.62)
     L.new(mp.outputs['Result'], r.inputs['Fac'])
     p = principled(nt, **{'Roughness': 0.05, 'Coat Weight': 1.0, 'Coat Roughness': 0.02, 'Specular IOR Level': 0.6})
     L.new(r.outputs['Color'], p.inputs['Base Color'])
@@ -1196,6 +1265,7 @@ def build(args):
     leo, _slip = leotard_and_slipper_masks(body, names)
     yoke_mask(body, names)
     fabric_fill(body, leo)
+    soften_face(body, eyes)
     face_paint(body, eyes)
     cap, bun, strands = build_hair(body, names)
     for e in eyes:
@@ -1388,18 +1458,22 @@ def garment_render(z):
         return {}
 
 
+GARMENT_MATERIALS = {}       # one material per look: garments that look alike share it (6 November)
+
+
 def add_garment(npz_path, motion_fps, t_render, pc2_dir: Path, index, sheer='hashed'):
     with np.load(npz_path, allow_pickle=False) as z:
         faces = z['faces'].astype(int)
-        verts = z['verts'].astype(float)
+        verts = z['verts'].astype(np.float32)
         gfps = float(z['fps']) if 'fps' in z.files else motion_fps
         fabric = garment_fabric(z)
         own = garment_render(z)
     f = np.clip(t_render * gfps, 0, len(verts) - 1)
     i0 = np.floor(f).astype(int)
     i1 = np.minimum(i0 + 1, len(verts) - 1)
-    a = (f - i0)[:, None, None]
-    vs = verts[i0] * (1 - a) + verts[i1] * a
+    a = (f - i0).astype(np.float32)[:, None, None]
+    vs = verts[i0] + (verts[i1] - verts[i0]) * a
+    del verts
     pc2_dir.mkdir(parents=True, exist_ok=True)
     pc2 = pc2_dir / f'{Path(npz_path).stem}_{index}.pc2'
     write_pc2(pc2, vs, RENDER_FPS)
@@ -1419,14 +1493,29 @@ def add_garment(npz_path, motion_fps, t_render, pc2_dir: Path, index, sheer='has
     mc.frame_scale = 1.0
     sm = ob.modifiers.new('smooth', 'SUBSURF')    # one level of smoothing: folds read as cloth, not facets
     sm.levels = sm.render_levels = 1
+    # its points where the one level puts them, not pushed to the limit surface: on the cloth's triangles the limit
+    # surface's tables held 7.6 GB for the tiered gown's seven sheer parts in a still (8.75 GB in all, 1.27 GB without
+    # them; 6 November), and at one level the two differ by a fraction of a millimetre
+    sm.use_limit_surface = False
     look = own.get('look') or FABRIC_LOOK.get(fabric, 'sheer')
     if look != 'sheer':
         # opaque cloth is given its 1.5 mm thickness; a sheer layer stays one surface seen from both sides (backface
         # culling off), since a solidified one is two veils 1.5 mm apart and stacked layers then read as opaque white
         so = ob.modifiers.new('thickness', 'SOLIDIFY')
         so.thickness, so.offset = 0.0015, 0.0
-    m, nt, out = node_mat(f'garment_{index}')
     sleeves = 'sleeve' in Path(npz_path).stem
+    ob.data.materials.append(garment_material(look, own, sleeves, sheer))
+    return ob
+
+
+def garment_material(look, own, sleeves, sheer):
+    """The material for a garment's look, made once and shared by every garment that looks alike (6 November): the
+    tiered gown's fifteen files share six, where each had a material and a shader of its own."""
+    key = (look, tuple(own.get('color') or ()), own.get('alpha'), sleeves, sheer)
+    if key in GARMENT_MATERIALS:
+        return GARMENT_MATERIALS[key]
+    m, nt, out = node_mat(f'garment_{len(GARMENT_MATERIALS)}')
+    GARMENT_MATERIALS[key] = m
     if look != 'sheer':
         # opaque cloth: a pale gold silk, satin or wool; satin with a silk satin's sheen, silk soft, wool and jersey
         # matte, velvet deep. Satin was glossier until 2 November (roughness 0.22, specular 0.7, anisotropy 0.6), which
@@ -1442,8 +1531,7 @@ def add_garment(npz_path, motion_fps, t_render, pc2_dir: Path, index, sheer='has
                               'Anisotropic': 0.3 if look == 'satin' else 0.0})
         nt.links.new(p.outputs['BSDF'], out.inputs['Surface'])
         m.use_backface_culling = False
-        ob.data.materials.append(m)
-        return ob
+        return m
     # sheer silk (chiffon, georgette): pale rose, translucent, partly see-through (alpha hashed)
     tint = own.get('color') or (0.93, 0.74, 0.74)
     p = principled(nt, **{'Base Color': srgb(*tint), 'Roughness': 0.5, 'Sheen Weight': 0.9,
@@ -1468,8 +1556,7 @@ def add_garment(npz_path, motion_fps, t_render, pc2_dir: Path, index, sheer='has
     m.show_transparent_back = True
     m.shadow_method = 'HASHED'
     m.use_backface_culling = False
-    ob.data.materials.append(m)
-    return ob
+    return m
 
 
 # ----------------------------------------------------------------------------------------------- render: stage
@@ -1723,10 +1810,33 @@ def camera_plan(com, t, pelvis_quat, az_arg, dist_arg):
     return az, dist, sm
 
 
-def follow_camera(com, t, az_deg=30.0, dist=5.5, height=1.1, aim_dz=0.06, sigma_s=0.8, rig=None, fstop=2.8):
+HALF_VFOV = math.atan(10.125 / 50.0)    # the camera's half height of view: a 50 mm lens on the 16:9 crop of a 36 mm sensor
+# m beyond a segment's origin that the body reaches: the crown above the head's, the fingertips past the wrist, the
+# toes' tips and soles; other segments' origins lie inside the body
+FIT_MARGIN = dict(head=0.22, hand=0.20, toes=0.12, foot=0.10)
+FIT_SLACK = 1.15                        # the frame's height kept free beyond the farthest reach, as a share
+
+
+def fit_distance(pos, zs, aim_dz, base, dt, names):
+    """The camera's distance frame by frame when none is set (6 November): the default, or farther while the body
+    reaches beyond the frame's height above or below the aim (the segments' origins with FIT_MARGIN), as at the top
+    of a salto, whose feet left the frame at 5.5 m. The camera starts pulling back 0.7 s before it is needed (a running
+    maximum) and the curve is smoothed (sigma 0.35 s), so the move reads as a gentle dolly."""
+    aim = zs + aim_dz
+    m = np.array([FIT_MARGIN.get(n.split('_', 1)[-1], 0.08) for n in names])
+    reach = np.maximum((pos[:, :, 2] + m).max(1) - aim, aim - (pos[:, :, 2] - m).min(1))
+    d = np.maximum(base, FIT_SLACK * reach / math.tan(HALF_VFOV))
+    w = int(round(0.7 / dt))
+    d = np.array([d[max(0, i - w):i + w + 1].max() for i in range(len(d))])
+    return gauss_smooth(d, dt, 0.35)
+
+
+def follow_camera(com, t, az_deg=30.0, dist=5.5, height=1.1, aim_dz=0.06, sigma_s=0.8, rig=None, fstop=2.8,
+                  seg_pos=None, names=None):
     """A camera at a fixed bearing that follows the smoothed centre of mass: across the floor (sigma 0.8 s) and, more
     closely, in height (sigma 0.35 s), so a leap stays framed. It aims `aim_dz` above the centre of mass and rises
-    with its aim above the default 6 cm, so a close still of the bodice is taken level."""
+    with its aim above the default 6 cm, so a close still of the bodice is taken level. Given the segments' positions
+    (seg_pos, frames x segments x 3, with their names), its distance follows fit_distance from `dist` up."""
     sc = bpy.context.scene
     cd = bpy.data.cameras.new('camera')
     cd.lens = 50.0
@@ -1744,7 +1854,8 @@ def follow_camera(com, t, az_deg=30.0, dist=5.5, height=1.1, aim_dz=0.06, sigma_
     zs = gauss_smooth(com[:, 2], dt, 0.35)
     zref = float(np.median(com[:, 2]))
     az = math.radians(az_deg)
-    off = np.array([math.cos(az), math.sin(az)]) * dist
+    dists = (fit_distance(seg_pos, zs, aim_dz, dist, dt, names) if seg_pos is not None
+             else np.full(len(sm), float(dist)))
     ct = cam.constraints.new('TRACK_TO')
     ct.target = tgt
     ct.track_axis = 'TRACK_NEGATIVE_Z'
@@ -1752,6 +1863,7 @@ def follow_camera(com, t, az_deg=30.0, dist=5.5, height=1.1, aim_dz=0.06, sigma_
     cd.dof.focus_object = tgt
     for i, p in enumerate(sm):
         f = i + 1
+        off = np.array([math.cos(az), math.sin(az)]) * dists[i]
         cam.location = (p[0] + off[0], p[1] + off[1], height + 0.8 * (zs[i] - zref))
         cam.keyframe_insert('location', frame=f)
         tgt.location = (p[0], p[1], zs[i] + aim_dz)
@@ -1759,7 +1871,7 @@ def follow_camera(com, t, az_deg=30.0, dist=5.5, height=1.1, aim_dz=0.06, sigma_
         if rig is not None:
             rig.location = (p[0], p[1], 0.0)
             rig.keyframe_insert('location', frame=f)
-    return cam, sm
+    return cam, sm, dists
 
 
 # The bodice's looks (--bodice-look). matte: a matte silk to sit with sheer chiffon skirts, its light spread wide
@@ -2059,6 +2171,137 @@ def bodice_material(style, rgb, trim):
     return m
 
 
+BAND_SPAN = (1.00, 1.13)    # m, rest heights of an obi-style band's edges: 2 cm below the natural waist to 11 cm above
+BAND_LIFT = 0.020           # m off the smoothed torso, clear of the bodice shell and the skirts' gathered waistbands
+
+
+def waist_band(body, names, style='obi', rgb=(0.70, 0.52, 0.25)):
+    """A stiff waist band drawn over the gown at render time (6 November), for runs dressed without a sash: an
+    obi-style band 13 cm tall from just below the natural waist up the midriff, skinned as the body is. Built as the
+    bodice shell is, from the body's rest mesh, but smoothed further (a stiff band spans the navel, the abdomen's
+    relief and the spine's groove as a nearly straight-sided ring) and lifted BAND_LIFT; its edges are piped and a
+    cord runs round its middle, without tassels. The band cannot press the skirts' tops in as a tied band would; drawn
+    2 cm out, it covers their gathered waistbands."""
+    import bmesh
+    if style != 'obi':
+        raise SystemExit("waist band: style 'obi'")
+    V = mesh_coords(body)
+    W = weights_matrix(body, names)
+    col = {n: j for j, n in enumerate(names)}
+    arm = sum(W[:, col[f'{s}_{q}']] for s in 'LR' for q in ('upper_arm', 'forearm', 'hand'))
+    z = V[:, 2]
+    keep = (arm < 0.3) & (z > BAND_SPAN[0] - 0.015) & (z < BAND_SPAN[1] + 0.015)
+    band = body.copy()
+    band.data = body.data.copy()
+    band.name = band.data.name = 'waist_band'
+    bpy.context.scene.collection.objects.link(band)
+    bm = bmesh.new()
+    bm.from_mesh(band.data)
+    bm.verts.ensure_lookup_table()
+    bmesh.ops.delete(bm, geom=[bm.verts[i] for i in np.where(~keep)[0]], context='VERTS')
+    bm.verts.ensure_lookup_table()
+    boundary = np.array([v.is_boundary for v in bm.verts])
+    bm.to_mesh(band.data)
+    bm.free()
+    band.data.update()
+    V = mesh_coords(band)
+    E = mesh_edges(band)
+    N = np.empty(len(V) * 3)
+    band.data.vertices.foreach_get('normal', N)
+    N = N.reshape(-1, 3)
+    rest = V.copy()
+    S = V.copy()
+    for _ in range(150):
+        S = smooth_field(smooth_field(S, E, 1, mask=~boundary, lam=0.5), E, 1, mask=~boundary, lam=-0.53)
+    dn = np.clip(((S - V) * N).sum(1), -0.0015, 0.03)
+    for _ in range(300):
+        X = V + N * dn[:, None]
+        rise = ((smooth_field(X, E, 1, mask=~boundary) - X) * N).sum(1)
+        dn = np.minimum(dn + np.maximum(rise, 0.0), 0.03)
+    D = smooth_field(N * (dn + BAND_LIFT)[:, None], E, 8)
+    band.data.vertices.foreach_set('co', (V + D).ravel())
+    band.data.update()
+    with bpy.context.temp_override(object=band, active_object=band, selected_objects=[band],
+                                   selected_editable_objects=[band]):
+        bpy.ops.mesh.customdata_custom_splitnormals_clear()
+    a = band.data.attributes.get('rest_co') or band.data.attributes.new('rest_co', 'FLOAT_VECTOR', 'POINT')
+    a.data.foreach_set('vector', rest.astype(np.float32).ravel())
+    for m in list(band.modifiers):
+        if m.type == 'DISPLACE':
+            band.modifiers.remove(m)
+    so = band.modifiers.new('thickness', 'SOLIDIFY')
+    so.thickness, so.offset = 0.003, 1.0
+    sm = band.modifiers.new('smooth', 'SUBSURF')
+    sm.levels = sm.render_levels = 1
+    band.data.materials.clear()
+    band.data.materials.append(band_material(rgb))
+    log('waist band: %s, %d vertices, %.2f-%.2f m; lift %.1f-%.1f mm' % (
+        style, len(V), *BAND_SPAN, 1e3 * np.linalg.norm(D, axis=1).min(), 1e3 * np.linalg.norm(D, axis=1).max()))
+    return band
+
+
+def band_material(rgb):
+    """Satin in rgb with a fine woven texture, its edges cut by alpha clipping at BAND_SPAN and piped 6 mm deep in a
+    darker shade, and a round cord 7 mm wide at mid-height in a lighter one."""
+    m, nt, out = node_mat('waist_band')
+    L = nt.links.new
+    rest = nt.nodes.new('ShaderNodeAttribute')
+    rest.attribute_name = 'rest_co'
+    sep = nt.nodes.new('ShaderNodeSeparateXYZ')
+    L(rest.outputs['Vector'], sep.inputs[0])
+    Z = sep.outputs[2]
+
+    def op(kind, a, b=None):
+        n = nt.nodes.new('ShaderNodeMath')
+        n.operation = kind
+        for k, v in enumerate((a, b)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                n.inputs[k].default_value = float(v)
+            else:
+                L(v, n.inputs[k])
+        return n.outputs[0]
+
+    lo, hi = BAND_SPAN
+    mid = 0.5 * (lo + hi)
+    inside = op('MULTIPLY', op('GREATER_THAN', Z, lo), op('LESS_THAN', Z, hi))
+    edge = op('LESS_THAN', op('MINIMUM', op('SUBTRACT', Z, lo), op('SUBTRACT', hi, Z)), 0.006)
+    dc = op('ABSOLUTE', op('SUBTRACT', Z, mid))
+    cord = op('LESS_THAN', dc, 0.0035)
+    cord_h = op('SQRT', op('MAXIMUM', op('SUBTRACT', 1.0, op('POWER', op('DIVIDE', dc, 0.0035), 2.0)), 0.0))
+    weave = nt.nodes.new('ShaderNodeTexNoise')
+    weave.inputs['Scale'].default_value = 1400.0
+    L(rest.outputs['Vector'], weave.inputs['Vector'])
+    height = op('ADD', cord_h, op('MULTIPLY', weave.outputs['Fac'], 0.15))
+    bump = nt.nodes.new('ShaderNodeBump')
+    bump.inputs['Strength'].default_value = 0.5
+    bump.inputs['Distance'].default_value = 0.002
+    L(height, bump.inputs['Height'])
+    shade = lambda f: tuple(min(1.0, c * f) for c in rgb)
+    base = principled(nt, **{'Base Color': srgb(*rgb), 'Roughness': 0.32, 'Specular IOR Level': 0.5,
+                             'Anisotropic': 0.4})
+    pipe = principled(nt, **{'Base Color': srgb(*shade(0.7)), 'Roughness': 0.3, 'Specular IOR Level': 0.5})
+    rope = principled(nt, **{'Base Color': srgb(*shade(1.15)), 'Roughness': 0.4, 'Specular IOR Level': 0.45})
+    for b in (base, pipe, rope):
+        L(bump.outputs['Normal'], b.inputs['Normal'])
+        L(inside, b.inputs['Alpha'])
+    m1 = nt.nodes.new('ShaderNodeMixShader')
+    L(edge, m1.inputs['Fac'])
+    L(base.outputs['BSDF'], m1.inputs[1])
+    L(pipe.outputs['BSDF'], m1.inputs[2])
+    m2 = nt.nodes.new('ShaderNodeMixShader')
+    L(cord, m2.inputs['Fac'])
+    L(m1.outputs['Shader'], m2.inputs[1])
+    L(rope.outputs['BSDF'], m2.inputs[2])
+    L(m2.outputs['Shader'], out.inputs['Surface'])
+    m.blend_method = 'CLIP'
+    m.alpha_threshold = 0.5
+    m.shadow_method = 'CLIP'
+    m.use_backface_culling = False
+    return m
+
+
 def render(args):
     bpy.ops.wm.open_mainfile(filepath=str(args.blend))
     spec = body_spec()
@@ -2080,13 +2323,17 @@ def render(args):
         rgb = [float(v) for v in args.bodice.split(',')] if args.bodice else [0.93, 0.90, 0.84]
         bodice_shell(bpy.data.objects['dancer_body'], names, style, neckline, rgb,
                      [float(v) for v in args.trim.split(',')])
+    if args.waist_band:
+        waist_band(bpy.data.objects['dancer_body'], names, args.waist_band,
+                   [float(v) for v in args.waist_band_rgb.split(',')])
     az, dist, path = camera_plan(com, t, quat[:, names.index('pelvis')], args.cam_az, args.cam_dist)
     centre = 0.5 * (path.min(0) + path.max(0))
     radius = 7.5 + 0.5 * float(np.linalg.norm(path.max(0) - path.min(0)))
     _f, _c, _l, light_rig = build_stage(az, tuple(centre), radius, args.light)
-    follow_camera(com, t, az_deg=az, dist=dist, rig=light_rig, aim_dz=args.cam_aim, fstop=args.cam_fstop)
-    log('camera bearing %.1f deg, distance %.1f m; cyclorama centre (%.2f, %.2f), radius %.1f m'
-        % (az, dist, centre[0], centre[1], radius))
+    _cam, _sm, dists = follow_camera(com, t, az_deg=az, dist=dist, rig=light_rig, aim_dz=args.cam_aim,
+                                     fstop=args.cam_fstop, seg_pos=None if args.cam_dist else pos, names=names)
+    log('camera bearing %.1f deg, distance %.1f-%.1f m; cyclorama centre (%.2f, %.2f), radius %.1f m'
+        % (az, dists.min(), dists.max(), centre[0], centre[1], radius))
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     for i, g in enumerate(args.garment or []):
@@ -2134,6 +2381,8 @@ def main():
                     help='sRGB r,g,b and strength a (0-1): a sheer chiffon yoke over the skin above the bodice')
     ap.add_argument('--sheer', default='hashed', choices=list(SHEER_METHOD))
     ap.add_argument('--bodice-shell', default='')
+    ap.add_argument('--waist-band', default='')
+    ap.add_argument('--waist-band-rgb', default='0.70,0.52,0.25')
     ap.add_argument('--trim', default='0.70,0.52,0.25')
     ap.add_argument('--samples', type=int, default=0)
     ap.add_argument('--stills', default='')

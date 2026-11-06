@@ -9,7 +9,7 @@ Work in order; each stage ends in something the author can watch or read, with i
    of *Under the Canopy* were realised, dressed and rendered on 1 November. The stage closes with the whole phrase:
    its grammar junctions and its engine (pivots with the floor's turning friction, kneeling, footholds planned for the
    whole phrase, solving in windows) were written on 1 November, and on 2 November the whole phrase was solved and checked
-   (friction, contact force, joint ranges, torques within strength, every body part above the floor); its whirl was
+   (friction, contact force, joint ranges, torques within strength, every body part above the floor; on 3 November a scan found the legs passing through each other for 7.2 s of it, up to 14 cm deep, which no check had looked for; a barrier in the solve now keeps the body out of itself, and re-solved with it on 6 November the legs touch for 0.03 s at most, 3 cm deep); its whirl was
    rendered in two skirts, and a longer phrase built on it, ending on the hanging salto, was rendered dressed. Its replay waits for the
    tracking controller (stage 2).
 2. **The body's fidelity.** First, one body for physics and picture. The rendered mesh's hips and knees sit 3 cm
