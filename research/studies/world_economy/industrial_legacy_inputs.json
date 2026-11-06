@@ -7,7 +7,7 @@
     },
     "research/studies/world_economy/results/industrial_markets.json": {
       "schema": "terluna.research.industrial-markets/1",
-      "sha256": "e4d098ad270e44fdb213b12c3c446537f8006383a4f6e6ff0d25ab0182c71147"
+      "sha256": "c291ad1aec8141b687e3c99ee8287230eefbff875043d4215e8b6b1bf43eca9d"
     }
   },
   "evidence": "Conditional preservation, storage and ownership scenarios. Losses, compatibility, prices, asset yields and routes are unvalidated; no automatic additional GDP or independent construction finance.",

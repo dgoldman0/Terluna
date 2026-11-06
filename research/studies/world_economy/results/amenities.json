@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "c0f85f1e85665650bcb163b8a8ef14c5e06209a87bffe768355c90f40ab1d239",
+      "research/studies/world_economy/amenities_inputs.json": "cee01f6798b427fd0ef85190aa52e47424254a86dd50990e82b147a168c60820",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "efb48bac74b81e78d2ee64076203a1493e57f32647b5d8f2a6df906310b1b16a"
+        "sha256": "091babc7f7f16b83ce51cac0227e7c2093b1bab4ab75684ddece13345038051d"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "782946565042066d36951ec42fa3622b3f45814a71cc65bf4744ee4b9e2d169d"
+        "sha256": "8bf4e2ada8f5fa2d65c0cd47bb9421a1abcfa65350f845bd87f6a50330757d22"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "5d8c731a47d122168335ac364de86849f3d72b9c28881952f51ad8f6199564b8"
+        "sha256": "b7d5104e8f74cd9a3886f6d4d5f83a27d3f040af2308f8471eb6a8fd7b717af9"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "b39c2faefb62d11f6e1db5e49129e2d20e6dcebe5b1dc8e5a24cadb640340ba9"
+        "sha256": "692366278384034b175ecced77c62326f1ac8b7716cca49ae272ffebf0943f7d"
       }
     }
   },

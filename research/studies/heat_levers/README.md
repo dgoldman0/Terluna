@@ -250,7 +250,7 @@ the window tiles.
 | Rank | Lever | Points saved | What it costs | Side effects | Evidence |
 |---|---|---|---|---|---|
 | 1 | The glow's set-aside answers: annulus absorber or ultraviolet mirror | 0.62–0.83 | A film change and a check above the limb, or 60% more fleet mass | Less of the glow's rain to make up | Screen on the fleet's products |
-| 2 | Food made in orbit with the beams' power | 0.13–0.98 | Food plants in the array's industry | Its carbon, 1.5–6.2 times the import, needs a return path; nutrients from orbit | Arithmetic on the synthesis's ledgers |
+| 2 | Food made in orbit with the beams' power (not taken up, register 5 November) | 0.13–0.98 | Food plants in the array's industry | Its carbon, 1.5–6.2 times the import, needs a return path; nutrients from orbit | Arithmetic on the synthesis's ledgers |
 | 3 | Methane and N2O at the low pair | 0.79–0.81 | Contactors through 1.0–1.4% of the air a year; 1.0–1.6 TW | None on health or growth; warm lakes push the other way | Column forcing; design-guess costs |
 | 4 | White roofs and silver foliage | 0.07–0.39 | Little beyond adopted designs | Cooler cities | Kernel arithmetic |
 | 5 | Night-side cirrus thinning | 0 to 1.0, sign open | 12–240 kt of feldspar a year from high platforms | Adds to the rain, which dimming takes | Earth's models; first the GCM's high-cloud range |
@@ -265,9 +265,10 @@ at the glow's efficacy and food made in orbit at the beams' end, they save 43–
 of the plan's added heat; bringing the Moon down to the resort or the lock stays mostly dimming. The gas pairs carry
 their own overlap, and the others act on separate terms.
 
-Questions for the author: whether the glow's set-aside answers come back if the resort or the lock is chosen; whether
-food for the beams may be made in orbit, with a return path for the carbon it brings beyond the import; and whether the
-GCM's high-cloud range runs before the target is chosen, since it moves every target's dimming.
+Questions for the author: whether the glow's set-aside answers come back if the resort or the lock is chosen; and whether the
+GCM's high-cloud range runs before the target is chosen, since it moves every target's dimming. Food for the beams stays on
+the Moon, and computing runs in the array as far as latency allows: three-quarters of close computing at the ring radius
+takes 0.06 points off the beams' heat (register, 5 November; domain/provisioning's energy options, mix A2).
 
 ## Assumptions and limits
 

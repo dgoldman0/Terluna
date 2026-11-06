@@ -5,7 +5,7 @@
   "products": {
     "research/studies/world_economy/results/mature_industry.json": {
       "schema": "terluna.research.mature-industry/1",
-      "sha256": "4dc3680de71b36fc84f1de8b2ebf9d9f6b99c33e3e3d7b2a8b7fe0cc226b51cc",
+      "sha256": "3ff0749cf7fb892a23229a61b9806cc7534319c31efd068aa0fd07c6631ce128",
       "use": "environment.earth_pressure_Pa and environment.moon_pressure_Pa; retained 1.2 atm lock"
     }
   },

@@ -5,7 +5,7 @@
   "products": {
     "research/studies/world_economy/results/early_exports.json": {
       "schema": "terluna.research.early-exports/1",
-      "sha256": "c699330a46a158e3688c8a4208cb03f82381c6a6b34367ec0ecab9ae92b4a2ad",
+      "sha256": "f9ea251f00389f374c63425efbfdc0c029603a3a0e50952fe28c7c6880e62eb2",
       "use": "scenarios.reference[0]: stay, nightly destination receipts, visitor capital per bed and replacement life; these remain synthetic assumptions"
     }
   },

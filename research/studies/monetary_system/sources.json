@@ -118,12 +118,12 @@
   "local_context": [
     {
       "path": "research/studies/world_economy/results/comparison.json",
-      "sha256": "efb48bac74b81e78d2ee64076203a1493e57f32647b5d8f2a6df906310b1b16a",
+      "sha256": "091babc7f7f16b83ce51cac0227e7c2093b1bab4ab75684ddece13345038051d",
       "use": "Unchanged mature product, construction and financing scenarios; U is a real numeraire."
     },
     {
       "path": "research/studies/world_economy/inputs.json",
-      "sha256": "dc87a912dbc0994ffd6e87f3b2bd1d9cc1d5ab09a0af5782b52cce40505f50b1",
+      "sha256": "0327fa6423a84fa07414a9e4f66101546121987abb1daf29338aa3f92c4934e7",
       "use": "Prior population and physical/economic scenario definitions; no nominal-currency regime."
     }
   ],

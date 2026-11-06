@@ -84,7 +84,9 @@ heat is 32.5–33.0 TW and 155–157 TW against their 30–145 TW, and its dimmi
 electricity at the tiles. The light the planned 5% dimmer already takes gives 117–176 TW at 20–30% conversion
 ([the shield's ledger](../solar_shield_array/results/integrated_ledger.json)), which covers the low-cost end; at the
 high-cost end collectors also take light the Moon never receives, of the 851 PW the night half intercepts, and each
-further 1% of dimming taken to answer heat gives another 23–35 TW.
+further 1% of dimming taken to answer heat gives another 23–35 TW. Since 5 November computing runs in the array as
+far as latency allows and the food stays on the Moon: three-quarters of close computing at the ring radius takes
+0.06 points off the beams' heat (register; domain/provisioning's energy options, mix A2).
 - **The sky towns take theirs on their own crowns.** Their control, hydrogen remade, trips and the aloft half of the
   residents come to 8.3–45 TW, 12–65 MW a town. The 696,000 towns' crowns, a kilometre across, make 547,000 km², so
   the towns take it at 15–82 W/m², without lines or night storage. From the ring, 17,600–20,500 km away, a transmitter
