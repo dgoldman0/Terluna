@@ -25,6 +25,13 @@ hatcheries provide a transitional route. The accompanying
 [scenario accounts](results/eel_budget.json) expose assumptions and sensitivities
 without assigning lunar production capacity or demonstrated breeding success.
 
+The [sturgeon habitat-and-food dossier](sturgeon_habitat_foods.md) assesses sterlet,
+Siberian sturgeon, beluga and derivatives across habitat networks, autonomous
+recruitment, ecological effects, lifetime feed/oxygen accounts, meat and caviar.
+It compares thermal adaptation with the eel reproductive route as one part of
+that broader assessment. Founder priorities and culinary outcomes remain proposals;
+the study introduces no new production coefficients or harvest allocation.
+
 ## Production accounts
 
 This study prices eight ways of growing the lunar design's plant-rich diet for each billion residents, fits each to the

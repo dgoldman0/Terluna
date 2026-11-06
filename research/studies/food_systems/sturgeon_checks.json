@@ -1,0 +1,101 @@
+{
+  "schema": "terluna.research.sturgeon-checks/1",
+  "checked_at_utc": "2026-11-06T01:35:06.844437+00:00",
+  "branch": "domain/food-systems",
+  "base_commit": "426bc7001e35cc873e6bfa1858667714c8043509",
+  "evidence": "Literature assessment, document verification and repository checks. No new biological trials, ecological simulations, empirical yields or production coefficients.",
+  "document_checks": {
+    "source_register": "19 unique source IDs; all cited in dossier; kind/access/support/limits recorded for every source",
+    "relative_links": "Passed: all 43 local links resolve across the dossier and three modified study index/decision files",
+    "markdown_fences": "balanced across the four checked Markdown files",
+    "status_scope": "Only aquatic_food_systems topic changed; all other status content preserved",
+    "protected_files_unchanged": [
+      "aquatic_basis.json",
+      "aquatic_biomes.md",
+      "sources.json",
+      "parameters.py",
+      "run.py",
+      "results/food_systems.json",
+      "results/food_blend.json",
+      "eel_habitat_hatchery.md",
+      "eel_budget.py",
+      "eel_sources.json",
+      "eel_checks.json",
+      "results/eel_budget.json"
+    ],
+    "source_review": "Targeted passages and abstracts as documented. No claim of complete full-method review. Citation metadata, thermal-stage distinctions, yield denominators and accounting units reviewed."
+  },
+  "checks": {
+    "food_systems": {
+      "command": "python -m pytest research/studies/food_systems -q",
+      "passed": 45,
+      "skipped": 4,
+      "failed": 0
+    },
+    "make_check": {
+      "command": "make check",
+      "result": "Stopped at test-python",
+      "layer_check": "1492 files, 0 violations; rechecked after the verification record was added",
+      "python": {
+        "passed": 4320,
+        "skipped": 312,
+        "failed": 47,
+        "duration_seconds": 229.52
+      },
+      "prior_baseline_record": "aquatic_checks.json: checks.repository.baseline_failed_test_ids",
+      "matching_prior_failed_ids": 43,
+      "additional_failed_ids": [
+        "visualization/rain-audio/tests/test_texture.py::test_a_short_render_reproduces_the_recovered_renderers_samples[concrete]",
+        "visualization/rain-audio/tests/test_texture.py::test_a_short_render_reproduces_the_recovered_renderers_samples[grass-leaves]",
+        "visualization/rain-audio/tests/test_texture.py::test_a_short_render_reproduces_the_recovered_renderers_samples[puddles]",
+        "visualization/rain-audio/tests/test_texture.py::test_the_concrete_master_reproduces_the_archive_bit_for_bit"
+      ],
+      "prior_failed_ids_now_passing": [
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process"
+      ],
+      "baseline_reproduction": {
+        "commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+        "worktree_tracked_changes": false,
+        "command": "OPENBLAS_NUM_THREADS=1 python -m pytest -q <the four additional failed IDs>",
+        "result": "All four additional audio hash failures reproduced on unchanged main; 4 failed in 14.76 seconds",
+        "interpretation": "No newly observed failure attributable to the documentation change. The cause of the audio hash mismatch was not diagnosed."
+      }
+    },
+    "remaining_targets": {
+      "command": "make -k test-js test-calendar check-provenance check-ensemble",
+      "javascript_harness": "Existing directory-argument failure in Node; npm pretest bake succeeded. Explicit test-file runs completed below.",
+      "javascript_explicit": {
+        "commands": [
+          "cd immersion && node --test --test-concurrency=1 tests/unit/*.test.*",
+          "node --test --test-concurrency=1 atmosphere/column/tests/*.test.* illumination/references/tests/*.test.* visualization/atmospheric-columns/tests/*.test.*"
+        ],
+        "passed": 177,
+        "failed": 0
+      },
+      "calendar": {
+        "passed": 13,
+        "skipped": 1,
+        "failed": 0,
+        "skip_reason": "Optional sky-page assets absent"
+      },
+      "provenance": "PASS",
+      "ensemble": "PASS; planning snapshot and workspace integrity"
+    },
+    "environment": "Initial make check lacked pytest. Installed declared research dependencies plus shapely; successful test execution used Python 3.12.14, NumPy 2.3.5, SciPy 1.17.0 and pytest 9.2.0.",
+    "diff_check": "git diff --check passed"
+  },
+  "not_performed": [
+    "Complete full-text appraisal for abstract-only sources",
+    "Biological, food-safety or sensory validation",
+    "Site-resolved sturgeon population or resource simulation",
+    "New production or harvest allocation"
+  ],
+  "files": {
+    "research/studies/food_systems/sturgeon_habitat_foods.md": "33bbaf10218bca9b99fcf92da99c3fa77a26a6d0562e36bcac56eee42477752f",
+    "research/studies/food_systems/sturgeon_sources.json": "818b4a102c34c4dbc9cbb97278e0e2aff9772be77da93ab22814b8db6693d6ee",
+    "research/studies/food_systems/README.md": "69ab4b20f357f02fac8533e6e1c80670c9ec59e7b12104d10dde4c724191a055",
+    "research/studies/food_systems/aquatic_novelty.md": "9941606d4614dcc010b2d1ac7b6de9a50f9d8fd3ec6bb6475e009c85896a303c",
+    "research/studies/food_systems/aquatic_decisions.md": "846a36886823abbc762ac9cd52b7c58ff9296adc00a4e8b3e29be6056c86e166",
+    "research/status.json": "d6a0546978707416a591a2c036d968be527b8893a6f4f2672ff1e28ca0a7b5d5"
+  }
+}
