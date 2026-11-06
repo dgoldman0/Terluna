@@ -1,0 +1,778 @@
+{
+ "schema": "terluna.research.seawater-lakes/1",
+ "producer": {
+  "file": "research/studies/seawater_lakes/run.py",
+  "sha256": "f5daa1b8895122e9aeec5d7877dbdec899b7174d848f825499ad08083fb3b19a",
+  "imports": {
+   "research/studies/sea_chemistry/run.py": "5f36557c4d691d74d10b93acbff87197dfdd8f786b4faad50ad2f597a65f60cf",
+   "shared/constants.json": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72"
+  }
+ },
+ "inputs": {
+  "research/studies/sea_chemistry/results/sea_chemistry.json": "b9df6182e14cd0d4cd1a754f6819ffd7504fe1f42a114e128631c73ae777d931"
+ },
+ "evidence": "Closed-form screens (calculation) on project products and published or recalled values: the design years and the turned run with the refit for open water, the storm-water pools for dryland lakes, the sea chemistry's held fresh sea and seawater, the springs' water, geography's groundwater. No model was run. Densities by UNESCO EOS-80 at one atmosphere. Every design guess and Earth calibration is named in run.py; the arrest, lock-exchange and Rayleigh criteria are recalled textbook results. Nothing here is validated against a lunar observation.",
+ "reading_rule": "Per km2 values are per km2 of lake surface; rates per year. Ranges are (low, high) across the dry belt from semi-arid land with the pools' evaporation to desert with Lake Mead's factor, or across the wet belt's rain. Chemistry budgets are for a lake of REFERENCE_DEPTH_M (20 m), whose inflow equals its net evaporation; times scale with depth. Moon and Earth entries differ only in gravity. Concentrations in mmol/kg and alkalinity in meq/kg.",
+ "seawater": {
+  "reference_salinity_g_kg": 35.165,
+  "practical_salinity": 34.99996018773191,
+  "temperature_c": 29.5,
+  "density_kg_m3": 1021.8984012388196,
+  "fresh_density_kg_m3": 995.9073738734539,
+  "density_difference_kg_m3": 25.991027365365653,
+  "reduced_gravity_m_s2": {
+   "moon": 0.04184259732895911,
+   "earth": 0.25263572109499083
+  },
+  "salt_kg_m3": 35.93505727956309,
+  "chloride_kg_m3": 19.776160643476775,
+  "g_moon_m_s2": 1.6242188765608128,
+  "g_earth_m_s2": 9.80665
+ },
+ "fill": {
+  "salt_kt_per_km2_per_m": 35.93505727956309,
+  "chloride_kt_per_km2_per_m": 19.776160643476775,
+  "salt_mt_per_km3": 35.93505727956309,
+  "lakes": [
+   {
+    "area_km2": 1.0,
+    "mean_depth_m": 10.0,
+    "volume_km3": 0.01,
+    "salt_mt": 0.3593505727956309,
+    "chloride_mt": 0.19776160643476776,
+    "delivered_water_km3_for_its_chloride": 0.706291451552742
+   },
+   {
+    "area_km2": 10.0,
+    "mean_depth_m": 20.0,
+    "volume_km3": 0.2,
+    "salt_mt": 7.187011455912618,
+    "chloride_mt": 3.9552321286953553,
+    "delivered_water_km3_for_its_chloride": 14.125829031054838
+   },
+   {
+    "area_km2": 100.0,
+    "mean_depth_m": 30.0,
+    "volume_km3": 3.0,
+    "salt_mt": 107.80517183868928,
+    "chloride_mt": 59.328481930430335,
+    "delivered_water_km3_for_its_chloride": 211.8874354658226
+   },
+   {
+    "area_km2": 1000.0,
+    "mean_depth_m": 50.0,
+    "volume_km3": 50.0,
+    "salt_mt": 1796.7528639781547,
+    "chloride_mt": 988.8080321738388,
+    "delivered_water_km3_for_its_chloride": 3531.4572577637095
+   }
+  ],
+  "delivered_water_km3_per_km3_of_seawater": 70.62914515527419,
+  "seawater_km3_yr_from_the_crust_top_up_chloride": 24.069383768735214
+ },
+ "water": {
+  "design_years": {
+   "source": "climate/gcm/README.md, \"The design run (1 November)\": A28R_301k_design_l15_snow_s934, years 10-19",
+   "sea_rain_mm_day": 1.51,
+   "sea_evaporation_mm_day": 2.68,
+   "land_rain_mm_day": 2.3,
+   "land_rain_less_evaporation_mm_day": 0.73,
+   "semi_arid_rain_mm_yr": 243.0
+  },
+  "turned_refit_years": {
+   "run": "A28R_301k_design_l15_snow_s924_turned_refit",
+   "source": "the drift check of A28R_301k_design_l15_snow_s924_turned_refit, years 10-19 (session-tools/turned_design/drift_check_step2.out on the research drive, sha256 407ea30b075c4e65)",
+   "years": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "land_evaporation_mm_day": 1.503,
+   "land_rain_mm_day": 2.1925,
+   "sea_evaporation_mm_day": 2.7343,
+   "sea_rain_mm_day": 1.6317
+  },
+  "open_water_net_evaporation_m_yr": {
+   "design_years": 0.42734250000000007,
+   "turned_refit": 0.40272465000000013
+  },
+  "dryland_lake_evaporation_m_yr": {
+   "pools": [
+    0.8361126547082195,
+    0.8039544756809802
+   ],
+   "pools_with_lake_mead_factor": [
+    0.9319687652701825,
+    0.876619591752146
+   ],
+   "range": [
+    0.8039544756809802,
+    0.9319687652701825
+   ],
+   "source": "research/studies/storm_water/README.md, phase 2b, \"The night costs a pool a few millimetres\""
+  },
+  "dry_belt": {
+   "semi_arid_rain_m_yr": 0.243,
+   "desert_rain_m_yr": 0.0620925,
+   "net_evaporation_semi_arid_m_yr": [
+    0.5609544756809802,
+    0.6889687652701825
+   ],
+   "net_evaporation_desert_m_yr": [
+    0.7418619756809802,
+    0.8698762652701825
+   ],
+   "net_evaporation_m_yr": [
+    0.5609544756809802,
+    0.8698762652701825
+   ],
+   "inflow_m3_yr_per_km2": [
+    560954.4756809802,
+    869876.2652701825
+   ],
+   "inflow_l_s_per_km2": [
+    17.77557468505147,
+    27.564715481221082
+   ]
+  },
+  "wet_belt": {
+   "rain_m_yr": [
+    1.554,
+    2.548
+   ],
+   "open_water_evaporation_m_yr": [
+    0.97887,
+    0.998703075
+   ],
+   "surplus_m_yr": [
+    0.555296925,
+    1.56913
+   ],
+   "surplus_m3_yr_per_km2": [
+    555296.925,
+    1569130.0
+   ],
+   "reverse_osmosis_mw_per_km2": [
+    0.19004001540041068,
+    0.7160073009354323
+   ],
+   "salt_lost_if_spilled_mixed_kt_yr_per_km2": [
+    19.954626807040253,
+    56.386776429080825
+   ],
+   "years_to_spill_a_reference_lakes_salt": [
+    36.016767065655905,
+    12.745916526992666
+   ]
+  }
+ },
+ "feeds": {
+  "held_fresh_sea": {
+   "alkalinity": 1.6806,
+   "ca": 0.840301,
+   "mg": 0.0,
+   "na_k": 0.0
+  },
+  "held_fresh_sea_mg_0.05": {
+   "alkalinity": 1.7806000000000002,
+   "ca": 0.840301,
+   "mg": 0.05,
+   "na_k": 0.0
+  },
+  "held_fresh_sea_mg_0.5": {
+   "alkalinity": 2.6806,
+   "ca": 0.840301,
+   "mg": 0.5,
+   "na_k": 0.0
+  },
+  "springs_15_30": {
+   "alkalinity": 1.54,
+   "ca": 0.33,
+   "mg": 0.41
+  },
+  "springs_30_45": {
+   "alkalinity": 1.34,
+   "ca": 0.24,
+   "mg": 0.41
+  }
+ },
+ "chemistry": {
+  "held_fresh_sea": {
+   "0.561_m_yr": {
+    "inflow_m3_yr_km2": 560954.4756809802,
+    "inflow_l_s_km2": 17.77557468505147,
+    "calcite_from_feed_t_yr_km2": 47.17806992971796,
+    "excess_alkalinity_meq_kg": 0.0,
+    "lake_calcium_tenth_lost_yr": null,
+    "lake_calcium_spent_yr": null,
+    "calcium_chloride_dose_t_yr_km2": 0.0,
+    "bleed_share_of_inflow": 0.0,
+    "bleed_terms": {
+     "mg": 0.0,
+     "na_k": 0.0,
+     "dose_chloride": 0.0
+    },
+    "bleed_m3_yr_km2": 0.0,
+    "salt_top_up_t_yr_km2": 0.0,
+    "salt_top_up_with_halite_returned_t_yr_km2": 0.0,
+    "dose_chloride_t_yr_km2": 0.0,
+    "pan_area_share_of_lake": 0.0
+   },
+   "0.870_m_yr": {
+    "inflow_m3_yr_km2": 869876.2652701825,
+    "inflow_l_s_km2": 27.564715481221082,
+    "calcite_from_feed_t_yr_km2": 73.15938289519566,
+    "excess_alkalinity_meq_kg": 0.0,
+    "lake_calcium_tenth_lost_yr": null,
+    "lake_calcium_spent_yr": null,
+    "calcium_chloride_dose_t_yr_km2": 0.0,
+    "bleed_share_of_inflow": 0.0,
+    "bleed_terms": {
+     "mg": 0.0,
+     "na_k": 0.0,
+     "dose_chloride": 0.0
+    },
+    "bleed_m3_yr_km2": 0.0,
+    "salt_top_up_t_yr_km2": 0.0,
+    "salt_top_up_with_halite_returned_t_yr_km2": 0.0,
+    "dose_chloride_t_yr_km2": 0.0,
+    "pan_area_share_of_lake": 0.0
+   }
+  },
+  "held_fresh_sea_mg_0.05": {
+   "0.561_m_yr": {
+    "inflow_m3_yr_km2": 560954.4756809802,
+    "inflow_l_s_km2": 17.77557468505147,
+    "calcite_from_feed_t_yr_km2": 47.17806992971796,
+    "excess_alkalinity_meq_kg": 0.09999800000000025,
+    "lake_calcium_tenth_lost_yr": 733.0509729248333,
+    "lake_calcium_spent_yr": 7330.509729248332,
+    "calcium_chloride_dose_t_yr_km2": 3.112674130826056,
+    "bleed_share_of_inflow": 0.00946611132146914,
+    "bleed_terms": {
+     "mg": 0.00946611132146914,
+     "na_k": 0.0,
+     "dose_chloride": 0.0018319349283699162
+    },
+    "bleed_m3_yr_km2": 5310.057513072513,
+    "salt_top_up_t_yr_km2": 190.81722089003506,
+    "salt_top_up_with_halite_returned_t_yr_km2": 42.06349758465124,
+    "dose_chloride_t_yr_km2": 1.9887121275937316,
+    "pan_area_share_of_lake": 0.011937893294387047
+   },
+   "0.870_m_yr": {
+    "inflow_m3_yr_km2": 869876.2652701825,
+    "inflow_l_s_km2": 27.564715481221082,
+    "calcite_from_feed_t_yr_km2": 73.15938289519566,
+    "excess_alkalinity_meq_kg": 0.09999800000000025,
+    "lake_calcium_tenth_lost_yr": 472.72036332289343,
+    "lake_calcium_spent_yr": 4727.2036332289335,
+    "calcium_chloride_dose_t_yr_km2": 4.826846857116335,
+    "bleed_share_of_inflow": 0.00946611132146914,
+    "bleed_terms": {
+     "mg": 0.00946611132146914,
+     "na_k": 0.0,
+     "dose_chloride": 0.0018319349283699162
+    },
+    "bleed_m3_yr_km2": 8234.345562951368,
+    "salt_top_up_t_yr_km2": 295.9016794643736,
+    "salt_top_up_with_halite_returned_t_yr_km2": 65.22817763191685,
+    "dose_chloride_t_yr_km2": 3.0839106438159205,
+    "pan_area_share_of_lake": 0.011937893294387047
+   }
+  },
+  "held_fresh_sea_mg_0.5": {
+   "0.561_m_yr": {
+    "inflow_m3_yr_km2": 560954.4756809802,
+    "inflow_l_s_km2": 17.77557468505147,
+    "calcite_from_feed_t_yr_km2": 47.17806992971796,
+    "excess_alkalinity_meq_kg": 0.9999980000000002,
+    "lake_calcium_tenth_lost_yr": 73.30377779809325,
+    "lake_calcium_spent_yr": 733.0377779809324,
+    "calcium_chloride_dose_t_yr_km2": 31.127301600809886,
+    "bleed_share_of_inflow": 0.09466111321469141,
+    "bleed_terms": {
+     "mg": 0.09466111321469141,
+     "na_k": 0.0,
+     "dose_chloride": 0.018319679038581324
+    },
+    "bleed_m3_yr_km2": 53100.57513072513,
+    "salt_top_up_t_yr_km2": 1908.1722089003506,
+    "salt_top_up_with_halite_returned_t_yr_km2": 420.63497584651236,
+    "dose_chloride_t_yr_km2": 19.88747925127974,
+    "pan_area_share_of_lake": 0.11937893294387049
+   },
+   "0.870_m_yr": {
+    "inflow_m3_yr_km2": 869876.2652701825,
+    "inflow_l_s_km2": 27.564715481221082,
+    "calcite_from_feed_t_yr_km2": 73.15938289519566,
+    "excess_alkalinity_meq_kg": 0.9999980000000002,
+    "lake_calcium_tenth_lost_yr": 47.271185433933674,
+    "lake_calcium_spent_yr": 472.7118543393367,
+    "calcium_chloride_dose_t_yr_km2": 48.26933742097452,
+    "bleed_share_of_inflow": 0.09466111321469141,
+    "bleed_terms": {
+     "mg": 0.09466111321469141,
+     "na_k": 0.0,
+     "dose_chloride": 0.018319679038581324
+    },
+    "bleed_m3_yr_km2": 82343.45562951369,
+    "salt_top_up_t_yr_km2": 2959.016794643736,
+    "salt_top_up_with_halite_returned_t_yr_km2": 652.2817763191686,
+    "dose_chloride_t_yr_km2": 30.839661553177322,
+    "pan_area_share_of_lake": 0.11937893294387049
+   }
+  },
+  "springs_15_30": {
+   "0.561_m_yr": {
+    "inflow_m3_yr_km2": 560954.4756809802,
+    "inflow_l_s_km2": 17.77557468505147,
+    "calcite_from_feed_t_yr_km2": 18.52760270046915,
+    "excess_alkalinity_meq_kg": 0.88,
+    "lake_calcium_tenth_lost_yr": 83.29958089833826,
+    "lake_calcium_spent_yr": 832.9958089833825,
+    "calcium_chloride_dose_t_yr_km2": 27.39208019287308,
+    "bleed_share_of_inflow": 0.07762211283604695,
+    "bleed_terms": {
+     "mg": 0.07762211283604695,
+     "na_k": 0.001279154052786425,
+     "dose_chloride": 0.016121349796651155
+    },
+    "bleed_m3_yr_km2": 43542.4716071946,
+    "salt_top_up_t_yr_km2": 1564.7012112982877,
+    "salt_top_up_with_halite_returned_t_yr_km2": 344.9206801941401,
+    "dose_chloride_t_yr_km2": 17.50101674315966,
+    "pan_area_share_of_lake": 0.09789072501397378
+   },
+   "0.870_m_yr": {
+    "inflow_m3_yr_km2": 869876.2652701825,
+    "inflow_l_s_km2": 27.564715481221082,
+    "calcite_from_feed_t_yr_km2": 28.730890901491932,
+    "excess_alkalinity_meq_kg": 0.88,
+    "lake_calcium_tenth_lost_yr": 53.7171487404123,
+    "lake_calcium_spent_yr": 537.1714874041229,
+    "calcium_chloride_dose_t_yr_km2": 42.47710188466134,
+    "bleed_share_of_inflow": 0.07762211283604695,
+    "bleed_terms": {
+     "mg": 0.07762211283604695,
+     "na_k": 0.001279154052786425,
+     "dose_chloride": 0.016121349796651155
+    },
+    "bleed_m3_yr_km2": 67521.63361620122,
+    "salt_top_up_t_yr_km2": 2426.3937716078635,
+    "salt_top_up_with_halite_returned_t_yr_km2": 534.8710565817181,
+    "dose_chloride_t_yr_km2": 27.138956444708928,
+    "pan_area_share_of_lake": 0.09789072501397378
+   }
+  },
+  "springs_30_45": {
+   "0.561_m_yr": {
+    "inflow_m3_yr_km2": 560954.4756809802,
+    "inflow_l_s_km2": 17.77557468505147,
+    "calcite_from_feed_t_yr_km2": 13.474620145795745,
+    "excess_alkalinity_meq_kg": 0.8600000000000001,
+    "lake_calcium_tenth_lost_yr": 85.23678045411356,
+    "lake_calcium_spent_yr": 852.3678045411355,
+    "calcium_chloride_dose_t_yr_km2": 26.769532915762333,
+    "bleed_share_of_inflow": 0.07762211283604695,
+    "bleed_terms": {
+     "mg": 0.07762211283604695,
+     "na_k": 0.000852769368524288,
+     "dose_chloride": 0.0157549554830909
+    },
+    "bleed_m3_yr_km2": 43542.4716071946,
+    "salt_top_up_t_yr_km2": 1564.7012112982877,
+    "salt_top_up_with_halite_returned_t_yr_km2": 344.9206801941401,
+    "dose_chloride_t_yr_km2": 17.103266362633306,
+    "pan_area_share_of_lake": 0.09789072501397378
+   },
+   "0.870_m_yr": {
+    "inflow_m3_yr_km2": 869876.2652701825,
+    "inflow_l_s_km2": 27.564715481221082,
+    "calcite_from_feed_t_yr_km2": 20.895193382903223,
+    "excess_alkalinity_meq_kg": 0.8600000000000001,
+    "lake_calcium_tenth_lost_yr": 54.966384757631175,
+    "lake_calcium_spent_yr": 549.6638475763117,
+    "calcium_chloride_dose_t_yr_km2": 41.51171320546449,
+    "bleed_share_of_inflow": 0.07762211283604695,
+    "bleed_terms": {
+     "mg": 0.07762211283604695,
+     "na_k": 0.000852769368524288,
+     "dose_chloride": 0.0157549554830909
+    },
+    "bleed_m3_yr_km2": 67521.63361620122,
+    "salt_top_up_t_yr_km2": 2426.3937716078635,
+    "salt_top_up_with_halite_returned_t_yr_km2": 534.8710565817181,
+    "dose_chloride_t_yr_km2": 26.522161980056453,
+    "pan_area_share_of_lake": 0.09789072501397378
+   }
+  }
+ },
+ "isolation": {
+  "perched_lake_through_a_liner": [
+   {
+    "k_earth_m_s": 1e-09,
+    "seepage_m_yr": 0.10976076866188411,
+    "seepage_earth_m_yr": 0.6627096000000001,
+    "salt_t_yr_per_km2": 3944.259508913679,
+    "share_of_reference_salt_per_yr": 0.005488038433094205
+   },
+   {
+    "k_earth_m_s": 1e-10,
+    "seepage_m_yr": 0.01097607686618841,
+    "seepage_earth_m_yr": 0.06627096,
+    "salt_t_yr_per_km2": 394.42595089136785,
+    "share_of_reference_salt_per_yr": 0.0005488038433094205
+   },
+   {
+    "k_earth_m_s": 1e-11,
+    "seepage_m_yr": 0.0010976076866188408,
+    "seepage_earth_m_yr": 0.006627096,
+    "salt_t_yr_per_km2": 39.44259508913677,
+    "share_of_reference_salt_per_yr": 5.488038433094204e-05
+   }
+  ],
+  "gaining_lake": {
+   "inflow_m_yr": 0.05,
+   "salt_reach_against_inflow_m": 0.631152
+  },
+  "seepage_from_the_fresh_neighbour": [
+   {
+    "area_km2": 1.0,
+    "margin_m": 1.0,
+    "distance_m": 1000.0,
+    "transmissivity_m2_s": 0.00052,
+    "m3_yr": 58171.76523114935,
+    "share_of_inflow": [
+     0.10370140136689478,
+     0.066873608987459
+    ]
+   },
+   {
+    "area_km2": 1.0,
+    "margin_m": 3.0,
+    "distance_m": 1000.0,
+    "transmissivity_m2_s": 0.00052,
+    "m3_yr": 174515.29569344805,
+    "share_of_inflow": [
+     0.31110420410068435,
+     0.200620826962377
+    ]
+   },
+   {
+    "area_km2": 10.0,
+    "margin_m": 1.0,
+    "distance_m": 1000.0,
+    "transmissivity_m2_s": 0.00052,
+    "m3_yr": 183955.27364302325,
+    "share_of_inflow": [
+     0.032793262487068604,
+     0.021147291975587696
+    ]
+   },
+   {
+    "area_km2": 10.0,
+    "margin_m": 3.0,
+    "distance_m": 1000.0,
+    "transmissivity_m2_s": 0.00052,
+    "m3_yr": 551865.8209290697,
+    "share_of_inflow": [
+     0.09837978746120579,
+     0.06344187592676308
+    ]
+   },
+   {
+    "area_km2": 100.0,
+    "margin_m": 1.0,
+    "distance_m": 1000.0,
+    "transmissivity_m2_s": 0.00052,
+    "m3_yr": 581717.6523114935,
+    "share_of_inflow": [
+     0.010370140136689479,
+     0.0066873608987459005
+    ]
+   },
+   {
+    "area_km2": 100.0,
+    "margin_m": 3.0,
+    "distance_m": 1000.0,
+    "transmissivity_m2_s": 0.00052,
+    "m3_yr": 1745152.9569344802,
+    "share_of_inflow": [
+     0.03111042041006843,
+     0.020062082696237698
+    ]
+   },
+   {
+    "area_km2": 1000.0,
+    "margin_m": 1.0,
+    "distance_m": 1000.0,
+    "transmissivity_m2_s": 0.00052,
+    "m3_yr": 1839552.7364302324,
+    "share_of_inflow": [
+     0.00327932624870686,
+     0.0021147291975587698
+    ]
+   },
+   {
+    "area_km2": 1000.0,
+    "margin_m": 3.0,
+    "distance_m": 1000.0,
+    "transmissivity_m2_s": 0.00052,
+    "m3_yr": 5518658.209290695,
+    "share_of_inflow": [
+     0.009837978746120577,
+     0.006344187592676307
+    ]
+   }
+  ],
+  "convective_floor": {
+   "layer_m": 10.0,
+   "critical_permeability_moon_m2": 2.99255206450887e-14,
+   "critical_permeability_earth_m2": 4.9563913795907246e-15
+  },
+  "interface_depth_per_m_of_fresh_head": 38.31735313397232,
+  "wind_setup_m": [
+   {
+    "u10_m_s": 10.0,
+    "fetch_km": 3.0,
+    "depth_m": 5.0,
+    "moon": 0.06635858220787717,
+    "earth": 0.010990589227090454
+   },
+   {
+    "u10_m_s": 10.0,
+    "fetch_km": 3.0,
+    "depth_m": 20.0,
+    "moon": 0.016589645551969293,
+    "earth": 0.0027476473067726136
+   },
+   {
+    "u10_m_s": 10.0,
+    "fetch_km": 10.0,
+    "depth_m": 5.0,
+    "moon": 0.22119527402625724,
+    "earth": 0.03663529742363485
+   },
+   {
+    "u10_m_s": 10.0,
+    "fetch_km": 10.0,
+    "depth_m": 20.0,
+    "moon": 0.05529881850656431,
+    "earth": 0.009158824355908712
+   },
+   {
+    "u10_m_s": 10.0,
+    "fetch_km": 30.0,
+    "depth_m": 5.0,
+    "moon": 0.6635858220787717,
+    "earth": 0.10990589227090454
+   },
+   {
+    "u10_m_s": 10.0,
+    "fetch_km": 30.0,
+    "depth_m": 20.0,
+    "moon": 0.16589645551969293,
+    "earth": 0.027476473067726135
+   },
+   {
+    "u10_m_s": 20.0,
+    "fetch_km": 3.0,
+    "depth_m": 5.0,
+    "moon": 0.2654343288315087,
+    "earth": 0.04396235690836182
+   },
+   {
+    "u10_m_s": 20.0,
+    "fetch_km": 3.0,
+    "depth_m": 20.0,
+    "moon": 0.06635858220787717,
+    "earth": 0.010990589227090454
+   },
+   {
+    "u10_m_s": 20.0,
+    "fetch_km": 10.0,
+    "depth_m": 5.0,
+    "moon": 0.884781096105029,
+    "earth": 0.1465411896945394
+   },
+   {
+    "u10_m_s": 20.0,
+    "fetch_km": 10.0,
+    "depth_m": 20.0,
+    "moon": 0.22119527402625724,
+    "earth": 0.03663529742363485
+   },
+   {
+    "u10_m_s": 20.0,
+    "fetch_km": 30.0,
+    "depth_m": 5.0,
+    "moon": 2.654343288315087,
+    "earth": 0.43962356908361816
+   },
+   {
+    "u10_m_s": 20.0,
+    "fetch_km": 30.0,
+    "depth_m": 20.0,
+    "moon": 0.6635858220787717,
+    "earth": 0.10990589227090454
+   }
+  ],
+  "spray": {
+   "diameter_um": 20.0,
+   "settling_moon_m_s": 0.001990982786986944,
+   "settling_earth_m_s": 0.0120210838759295,
+   "drift_km_from_10_m_at_5_m_s": {
+    "moon": 25.113225652577118,
+    "earth": 4.159358716406418
+   }
+  }
+ },
+ "channel": {
+  "arrest": [
+   {
+    "sill_depth_m": 0.3,
+    "moon_m2_s": 0.033611755798855496,
+    "earth_m2_s": 0.08259034126073551,
+    "speed_moon_m_s": 0.11203918599618498,
+    "speed_earth_m_s": 0.27530113753578506
+   },
+   {
+    "sill_depth_m": 0.5,
+    "moon_m2_s": 0.07232098358097662,
+    "earth_m2_s": 0.17770612014467552,
+    "speed_moon_m_s": 0.14464196716195324,
+    "speed_earth_m_s": 0.35541224028935103
+   },
+   {
+    "sill_depth_m": 1.0,
+    "moon_m2_s": 0.20455463164875812,
+    "earth_m2_s": 0.5026288104506056,
+    "speed_moon_m_s": 0.20455463164875812,
+    "speed_earth_m_s": 0.5026288104506056
+   },
+   {
+    "sill_depth_m": 2.0,
+    "moon_m2_s": 0.578567868647813,
+    "earth_m2_s": 1.4216489611574041,
+    "speed_moon_m_s": 0.2892839343239065,
+    "speed_earth_m_s": 0.7108244805787021
+   }
+  ],
+  "sills": [
+   {
+    "area_km2": 1.0,
+    "net_evaporation_m_yr": 0.5609544756809802,
+    "inflow_m3_s": 0.01777557468505147,
+    "width_at_0_5_m_moon": 0.2457872363578746,
+    "width_at_0_5_m_earth": 0.10002792627839648
+   },
+   {
+    "area_km2": 1.0,
+    "net_evaporation_m_yr": 0.8698762652701825,
+    "inflow_m3_s": 0.027564715481221084,
+    "width_at_0_5_m_moon": 0.38114409008773126,
+    "width_at_0_5_m_earth": 0.15511404705015155
+   },
+   {
+    "area_km2": 10.0,
+    "net_evaporation_m_yr": 0.5609544756809802,
+    "inflow_m3_s": 0.17775574685051468,
+    "width_at_0_5_m_moon": 2.457872363578746,
+    "width_at_0_5_m_earth": 1.0002792627839647
+   },
+   {
+    "area_km2": 10.0,
+    "net_evaporation_m_yr": 0.8698762652701825,
+    "inflow_m3_s": 0.27564715481221086,
+    "width_at_0_5_m_moon": 3.8114409008773125,
+    "width_at_0_5_m_earth": 1.5511404705015157
+   },
+   {
+    "area_km2": 100.0,
+    "net_evaporation_m_yr": 0.5609544756809802,
+    "inflow_m3_s": 1.777557468505147,
+    "width_at_0_5_m_moon": 24.578723635787462,
+    "width_at_0_5_m_earth": 10.002792627839648
+   },
+   {
+    "area_km2": 100.0,
+    "net_evaporation_m_yr": 0.8698762652701825,
+    "inflow_m3_s": 2.7564715481221085,
+    "width_at_0_5_m_moon": 38.11440900877312,
+    "width_at_0_5_m_earth": 15.511404705015156
+   },
+   {
+    "area_km2": 1000.0,
+    "net_evaporation_m_yr": 0.5609544756809802,
+    "inflow_m3_s": 17.775574685051467,
+    "width_at_0_5_m_moon": 245.78723635787458,
+    "width_at_0_5_m_earth": 100.02792627839646
+   },
+   {
+    "area_km2": 1000.0,
+    "net_evaporation_m_yr": 0.8698762652701825,
+    "inflow_m3_s": 27.564715481221086,
+    "width_at_0_5_m_moon": 381.1440900877313,
+    "width_at_0_5_m_earth": 155.11404705015158
+   }
+  ],
+  "fishway": [
+   {
+    "jet_m_s": 1.0,
+    "drop_moon_m": 0.30784028385307305,
+    "drop_earth_m": 0.050985810648896415,
+    "pools_for_2_m_moon": 7,
+    "pools_for_2_m_earth": 40,
+    "jet_densimetric_froude_moon_1_m_pool": 4.888669554630792
+   },
+   {
+    "jet_m_s": 1.5,
+    "drop_moon_m": 0.6926406386694144,
+    "drop_earth_m": 0.11471807396001693,
+    "pools_for_2_m_moon": 3,
+    "pools_for_2_m_earth": 18,
+    "jet_densimetric_froude_moon_1_m_pool": 7.333004331946188
+   }
+  ],
+  "lock": {
+   "chamber": {
+    "length": 20.0,
+    "width": 4.0,
+    "depth": 2.0
+   },
+   "volume_m3": 160.0,
+   "front_moon_m_s": 0.14464196716195324,
+   "front_earth_m_s": 0.35541224028935103,
+   "exchange_s_moon": 276.54491144477214,
+   "exchange_s_earth": 112.54536413105774,
+   "salt_per_cycle_unflushed_t": 5.749609164730095,
+   "salt_per_cycle_flushed_t": [
+    0.05749609164730094,
+    0.2874804582365047
+   ],
+   "flush_m3": 240.0,
+   "cycles_a_day_the_inflow_flushes_per_10_km2": [
+    63.99206886618528,
+    99.23297573239591
+   ]
+  }
+ },
+ "fish": {
+  "eel_spawning_depth_earth_m": [
+   150.0,
+   200.0
+  ],
+  "lunar_depth_for_the_same_pressure_m": [
+   905.6645758943216,
+   1207.5527678590954
+  ]
+ }
+}
