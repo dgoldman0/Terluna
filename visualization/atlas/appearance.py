@@ -18,6 +18,10 @@ Called by render.py. Every input is a domain product, and each piece says what k
   water colour from depth, and the
   cloud decks' shapes (noise the page evaluates, thresholded to the run's cover) and opacity. The
   biosphere and climate work replace it.
+
+On the turned Moon (7 November 2026) render.py hands build() the heights already carried into the turned frame
+(climate.gcm.turned's rotation), a climatology of a run on the turned Moon, which is in that frame already, and the
+rotation, with which drainage_grids carries the rivers and lakes, routed on today's ground, into the same frame.
 """
 from __future__ import annotations
 import json
@@ -186,9 +190,47 @@ def climate_field(clim, name, shape):
     return cv2.resize(pad, (pad.shape[1] * s, shape[0]), interpolation=cv2.INTER_LINEAR)[:, s:s + shape[1]]
 
 
-def drainage_grids(shape, path=DRAINAGE):
+def turn_texture(a, rotation, left_lon=-180.0, nearest=False, chunk=256):
+    """An equirectangular texture (rows from 90 N, columns eastward from left_lon) carried into the turned frame: each
+    pixel of the result takes the texture at its place today, bilinear or nearest."""
+    import cv2
+    from climate.gcm.turned import to_today
+    rows, cols = a.shape[:2]
+    ppd, pad = cols / 360.0, 2
+    extra = [(0, 0)] * (a.ndim - 2)
+    src = np.pad(np.pad(a, [(0, 0), (pad, pad)] + extra, mode='wrap'), [(pad, pad), (0, 0)] + extra, mode='edge')
+    lon_t = left_lon + (np.arange(cols) + 0.5) / ppd
+    out = np.empty_like(a)
+    for r in range(0, rows, chunk):
+        lat_t = 90.0 - (np.arange(r, min(r + chunk, rows)) + 0.5) / ppd
+        lat0, lon0 = to_today(*np.meshgrid(lat_t, lon_t, indexing='ij'), rotation)
+        map_y = ((90.0 - lat0) * ppd - 0.5 + pad).astype(np.float32)
+        map_x = (((lon0 - left_lon) % 360.0) * ppd - 0.5 + pad).astype(np.float32)
+        out[r:r + chunk] = cv2.remap(src, map_x, map_y, cv2.INTER_NEAREST if nearest else cv2.INTER_LINEAR,
+                                     borderMode=cv2.BORDER_REPLICATE)
+    return out
+
+
+def turn_channels(q, rotation, left_lon=-180.0):
+    """Channel discharge carried into the turned frame: every channel cell lands in the turned pixel that holds its
+    centre, and every turned pixel whose centre lies in a channel cell today takes that cell, keeping the larger
+    discharge, so channels stay continuous where the turned pixels are smaller or larger than today's."""
+    from climate.gcm.turned import to_turned
+    rows, cols = q.shape
+    ppd = cols / 360.0
+    r, c = np.nonzero(q > 0)
+    lat_t, lon_t = to_turned(90.0 - (r + 0.5) / ppd, left_lon + (c + 0.5) / ppd, rotation)
+    rt = np.clip(np.floor((90.0 - lat_t) * ppd).astype(int), 0, rows - 1)
+    ct = np.floor(((lon_t - left_lon) % 360.0) * ppd).astype(int) % cols
+    out = turn_texture(q, rotation, left_lon, nearest=True)
+    np.maximum.at(out, (rt, ct), q[r, c])
+    return out
+
+
+def drainage_grids(shape, path=DRAINAGE, rotation=None):
     """Discharge (m3/s) along channels and the level of rain-fed lakes above sea level on the texture grid
-    (180 W at the left edge), from the geography domain's drainage product; None when it is absent."""
+    (180 W at the left edge), from the geography domain's drainage product, carried into the turned frame when a
+    rotation is given; None when the product is absent."""
     if not Path(path).is_file():
         return None
     z = np.load(path)
@@ -200,8 +242,10 @@ def drainage_grids(shape, path=DRAINAGE):
     lake = np.full(shape[0] * shape[1], np.nan, np.float32)
     lake[z['lake_cell']] = z['lake_level_m']
     roll = shape[1] // 2
-    return dict(discharge=np.roll(q.reshape(shape), roll, axis=1), lake_level=np.roll(lake.reshape(shape), roll, axis=1),
-                metadata=meta)
+    q, lake = np.roll(q.reshape(shape), roll, axis=1), np.roll(lake.reshape(shape), roll, axis=1)
+    if rotation is not None:
+        q, lake = turn_channels(q, rotation), turn_texture(lake, rotation, nearest=True)
+    return dict(discharge=q, lake_level=lake, metadata=meta)
 
 
 def surface_colour(height, level, clim, ppd, drainage=None):
@@ -407,18 +451,19 @@ def cloud_quantiles(samples=200_000, seed=3):
     return [np.quantile(cloud_field(n, layer), q).round(5).tolist() for layer in (0, 1)]
 
 
-def build(height, level, ppd):
+def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, rotation=None):
     """Appearance data for the globe page: textures (arrays, 180 W at the left edge) and parameters.
 
-    height: metres above the geoid at ppd pixels per degree, 0 E at the left edge as LOLA has it."""
+    height: metres above the geoid at ppd pixels per degree, 0 E at the left edge as LOLA has it, in the globe's frame;
+    climatology: in the same frame; rotation: the turned frame's, which carries the drainage product into it."""
     moon, engine = engine_atmosphere()
     colour_rel = np.array(moon['sun_colour_linear_srgb'])
     sun_rgb_lux = moon['sun_illuminance_lux'] * colour_rel / float(LUMINANCE @ colour_rel)
-    clim = dict(np.load(CLIMATOLOGY))
+    clim = dict(np.load(climatology))
     clim_meta = json.loads(str(clim.pop('metadata')))
     clim['deck_sigma'] = clim_meta['deck_sigma']
     h = np.roll(height, height.shape[1] // 2, axis=1)
-    drainage = drainage_grids(h.shape)
+    drainage = drainage_grids(h.shape, drainage_path, rotation)
     colour, water, river, _ = surface_colour(h, level, clim, ppd, drainage)
     albedo = np.empty(colour.shape, np.uint8)
     for c in range(3):
@@ -470,8 +515,8 @@ def build(height, level, ppd):
                 ['Deep water', DEEP_WATER]])
     params['legend'] = [[name, '#' + ''.join(f'{int(round(v * 255)):02x}' for v in srgb_encode(np.asarray(rgb)))]
                         for name, rgb in params['legend']]
-    sources = dict(engine=ENGINE, sky_atlas=SKY_ATLAS, climatology=CLIMATOLOGY)
+    sources = dict(engine=ENGINE, sky_atlas=SKY_ATLAS, climatology=Path(climatology))
     if drainage is not None:
-        sources['drainage'] = DRAINAGE
+        sources['drainage'] = Path(drainage_path)
         params['drainage'] = dict(schema=drainage['metadata']['schema'], riverWidthPerRootDischarge=RIVER_WIDTH)
     return textures, params, sources, dict(sea=h < level, water=water)

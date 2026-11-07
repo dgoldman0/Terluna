@@ -3,6 +3,13 @@
 and an interactive globe page with an appearance mode and a topography mode.
 
     python visualization/atlas/render.py      # writes visualization/atlas/out/ (kept out of Git)
+    python visualization/atlas/render.py --frame <moon_orientation.json> --source <branch@commit:path> \
+        --climatology <a turned run's climatology> --drainage geography/turned       # the globe on the turned Moon
+
+With --frame the globe is drawn on the turned Moon (7 November 2026): its heights, rivers, lakes and labels are carried
+into the frame of domain/geology's orientation product with climate.gcm.turned's rotation, its clouds and ground
+cover come from a run on the turned Moon, and its rivers and lakes from the drainage routed on that run's climate
+carried back to today's ground (climate.gcm.turned_climatology). The sheets stay on today's grid.
 
 Reads the geography atlas product (geography/results/atlas.json and its grid in
 geography/products) and the conservation study's register and targets. Water is
@@ -36,6 +43,7 @@ sys.path.insert(0, str(ROOT))
 from geography import atlas as ga
 from geography import topography as tp
 from shared.constants import MOON_RADIUS
+from climate.gcm.turned import read_frame, to_turned
 import appearance
 
 HERE = Path(__file__).resolve().parent
@@ -209,8 +217,31 @@ def decode_relief(rgb, low):
     return rgb[..., 0].astype(np.int64) * 256 + rgb[..., 1] + low + 0.5
 
 
-def write_globe(atlas, height, ppd, sites, targets, hashes):
+def turned_note(turn, drained, clim_run):
+    """The page's paragraph on the turned Moon: the turn, the run whose clouds and rain it shows, and the lakes."""
+    lakes, rivers = drained['lakes'], drained['rivers']
+    return ('<b>The turned Moon.</b> The weight of the seas and lakes turns the Moon about '
+            f"{turn['pole_moved_deg']:.1f}° into a new stable orientation, the orientation study's elastic state, so the "
+            "globe's poles, equator, grid and the point beneath Earth are the turned Moon's, and every place keeps its "
+            'ground. In today\'s coordinates the turned north pole stands at 81.95° N, 167.14° W and the point beneath '
+            'Earth at 8.00° N, 6.09° E: near-side places move about 8° south and far-side places north. The water level, '
+            "the lakes' levels and every height stay on the dry Moon's geoid until the atlas folds in the water's own "
+            "gravity and the crust's sag. The clouds and the ground cover follow the design run on the turned Moon at the "
+            f'target, {clim_run}: the ground at 301.3 K, rain of 1.98 mm/day over the globe and 2.19 over land, 59.5% of '
+            'the land dry (an aridity below 0.65) and the drylands moved south by the turn. The rivers and rain-fed lakes '
+            f"are routed on that run's rain and evaporation carried back to the ground: {lakes['area_share']:.1%} of the "
+            f"Moon in {lakes['bodies']:,} lakes holding {lakes['volume_km3'] / 1e6:.1f} million km³, with "
+            f"{rivers['discharge_to_sea_m3s']:,} m³/s reaching the seas. The run itself was set with the earlier "
+            "estimate's lakes, routed on September's climate.")
+
+
+def write_globe(atlas, height, ppd, sites, targets, hashes, turn=None):
     level = atlas['sea_level_m']
+    rotation = turn['rotation'] if turn else None
+    if turn:
+        height = appearance.turn_texture(height.astype(np.float32), rotation, left_lon=0.0, nearest=True).astype(float)
+    place = (lambda la, lo: tuple(round(float(v), 3) for v in to_turned(la, lo, rotation))) if turn \
+        else (lambda la, lo: (la, lo))
     relief, low, decoded = relief_texture(height, level)
     water = decoded < 0
     exact = np.roll(height, height.shape[1] // 2, axis=1) - level
@@ -219,7 +250,13 @@ def write_globe(atlas, height, ppd, sites, targets, hashes):
     highest, lowest = round(float(exact.max())), round(float(exact.min()))
     del exact
     fine, _, _ = tp.height_above_geoid(SURFACE_PPD, atlas['grid']['geoid_degree'])
-    looks, params, sources, masks = appearance.build(fine.astype(np.float32), level, SURFACE_PPD)
+    fine = fine.astype(np.float32)
+    if turn:
+        fine = appearance.turn_texture(fine, rotation, left_lon=0.0, nearest=True)   # keeps the atlas's water share
+    looks, params, sources, masks = appearance.build(
+        fine, level, SURFACE_PPD, climatology=turn['climatology'] if turn else appearance.CLIMATOLOGY,
+        drainage_path=(turn['drainage'] if turn else ROOT / 'geography') / 'products' / appearance.DRAINAGE.name,
+        rotation=rotation)
     del fine
     share = lambda mask, ppd_: float((mask * np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_))[:, None]).sum()
                                      / (np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_)).sum() * mask.shape[1]))
@@ -227,7 +264,8 @@ def write_globe(atlas, height, ppd, sites, targets, hashes):
     surface_water = share(masks['sea'], SURFACE_PPD)
     lake_water = share(masks['water'], SURFACE_PPD) - surface_water
     mask_water = share(looks['water'] / 255.0, SURFACE_PPD)
-    drained = json.loads((ROOT / 'geography' / 'results' / 'drainage.json').read_text()) if 'drainage' in sources else None
+    drained = json.loads(((turn['drainage'] if turn else ROOT / 'geography') / 'results' / 'drainage.json').read_text()) \
+        if 'drainage' in sources else None
     bodies = atlas['bodies']
     comparison = next(r for r in atlas['share_comparison'] if abs(r['share'] - atlas['share']) < 1e-9)
     minus = lambda v: f'{v:,.0f}'.replace('-', '\u2212')
@@ -244,23 +282,26 @@ def write_globe(atlas, height, ppd, sites, targets, hashes):
                 + ([['Rain-fed lakes above sea level', f"{drained['lakes']['area_share']:.1%} \u00b7 "
                      f"{drained['lakes']['bodies']:,} lakes"],
                     ['Water in those lakes', f"{drained['lakes']['volume_km3'] / 1e6:.1f} million km\u00b3"],
-                    ['Rivers into the seas', f"{drained['rivers']['discharge_to_sea_m3s']:,} m\u00b3/s"]] if drained else []),
+                    ['Rivers into the seas', f"{drained['rivers']['discharge_to_sea_m3s']:,} m\u00b3/s"]] if drained else [])
+                + ([['Turn of the pole', f"{turn['pole_moved_deg']:.2f}\u00b0"]] if turn else []),
         textures=dict(relief=png_data_uri(relief), normal=jpeg_data_uri(looks['normal']), albedo=jpeg_data_uri(looks['albedo']),
                       water=png_data_uri(looks['water']), cloudSun=png_data_uri(looks['cloud_sun']),
                       cloudGeo=png_data_uri(looks['cloud_geo'])),
         appearance=params,
         labels=dict(
-            seas=[[name.replace('\n', ' '), la, lo] for name, la, lo in SEA_LABELS],
-            islands=[[name, la, lo, i['summit_m']] for (name, la, lo), i in
+            seas=[[name.replace('\n', ' '), *place(la, lo)] for name, la, lo in SEA_LABELS],
+            islands=[[name, *place(la, lo), i['summit_m']] for (name, la, lo), i in
                      zip(island_labels(atlas), [i for i in atlas['islands'] if i['area_km2'] >= 4000.0 and i['features']])],
-            sites=[dict(id=s['id'], name=s['name'], year=s['year'], lat=s['lat'], lon=s['lon'], status=s['status'],
+            sites=[dict(id=s['id'], name=s['name'], year=s['year'], **dict(zip(('lat', 'lon'), place(s['lat'], s['lon']))),
+                        status=s['status'],
                         short=SITE_LABELS.get(s['id'], ('', None))[0], depth=s.get('depth_m', 0),
                         pressure=s.get('pressure_atm', 0.0), nearestLand=s.get('nearest_land_km', 0),
                         nearestWater=s.get('nearest_water_km', 0), aboveSea=max(s.get('above_sea_m', 0), 0),
                         marks=s['marks'], treatment=s['treatment_type'].capitalize(),
                         evaluation=s['evaluation_status']) for s in sites],
             targets=[dict(id=t['name'], name=next((t['name'].replace(k, v) for k, v in DISPLAY.items() if k in t['name']), t['name']),
-                          lat=float(t['lat']), lon=float(t['lon']), aboveSea=int(t['height_relative_to_sea_m']),
+                          **dict(zip(('lat', 'lon'), place(float(t['lat']), float(t['lon'])))),
+                          aboveSea=int(t['height_relative_to_sea_m']),
                           zone=t['zone'], record=t['record'][0].upper() + t['record'][1:] + '.', sample=t['sample'])
                      for t in targets]),
         provenance=('Geography atlas product <code>terluna.geography.atlas/1</code> (atlas.json '
@@ -270,9 +311,16 @@ def write_globe(atlas, height, ppd, sites, targets, hashes):
                     f"the climate domain's <code>{params['climatology']['schema']}</code> for run "
                     f"{params['climatology']['run']} ({digest(sources['climatology'])[:12]})"
                     + (f"; the geography domain's drainage product ({digest(sources['drainage'])[:12]})" if drained else '')
+                    + (f"; the turned Moon's frame, domain/geology's orientation product ({turn['source']}, "
+                       f"{digest(turn['orientation'])[:12]})" if turn else '')
                     + '. '
                     f"Surface {looks['albedo'].shape[1]}\u00d7{looks['albedo'].shape[0]} ({SURFACE_PPD} pixels per degree), "
                     f"relief at {SURFACE_PPD // 2}, the map at {ppd}."))
+    if turn:
+        years = params['climatology']['years']
+        data['frame'] = dict(
+            note=turned_note(turn, drained, f"{params['climatology']['run']}, model years {years[0]}–{years[-1]}"),
+            lede=' It shows the Moon as its seas turn it, with the clouds and rain of the design run on the turned Moon.')
     template = (HERE / 'globe.template.html').read_text()
     page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
     (OUT / 'globe.html').write_text(page)
@@ -288,7 +336,16 @@ def write_globe(atlas, height, ppd, sites, targets, hashes):
                 passed=passed, page_bytes=len(page.encode()), appearance_products=products)
 
 
-def main():
+def main(argv=None):
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument('--frame', type=Path, help="domain/geology's orientation product: the globe on the turned Moon")
+    parser.add_argument('--source', help='where the orientation product was read, as branch@commit:path')
+    parser.add_argument('--climatology', type=Path, default=appearance.CLIMATOLOGY,
+                        help="the clouds and ground cover: a climatology in the globe's frame")
+    parser.add_argument('--drainage', type=Path, default=ROOT / 'geography',
+                        help="the folder holding the drainage product's results/ and products/")
+    args = parser.parse_args(argv)
     atlas_path = ROOT / 'geography' / 'results' / 'atlas.json'
     atlas = json.loads(atlas_path.read_text())
     if atlas.get('schema') != ga.SCHEMA:
@@ -414,10 +471,18 @@ def main():
 
     product_disk = next(r['earth_facing_disk_water'] for r in atlas['share_comparison'] if abs(r['share'] - atlas['share']) < 1e-9)
     products = {str(p.relative_to(ROOT)): digest(p) for p in (atlas_path, grid_path, reg_path, tgt_path)}
+    turn = None
+    if args.frame:
+        if not args.source:
+            raise SystemExit('--frame needs --source, where the orientation product was read')
+        frame = read_frame(args.frame)
+        turn = dict(rotation=frame['rotation'], orientation=args.frame, source=args.source,
+                    climatology=args.climatology.absolute(), drainage=args.drainage.absolute(),
+                    pole_moved_deg=float(np.degrees(np.arccos(np.clip(frame['rotation'][2, 2], -1, 1)))))
     globe = write_globe(atlas, height, ppd, sites, targets,
                         dict(atlas_json=products[str(atlas_path.relative_to(ROOT))],
                              atlas_grid=products[str(grid_path.relative_to(ROOT))],
-                             register=products[str(reg_path.relative_to(ROOT))]))
+                             register=products[str(reg_path.relative_to(ROOT))]), turn)
     manifest = dict(products=products, renderer=digest(Path(__file__)), template=digest(HERE / 'globe.template.html'),
                     faithfulness=dict(rendered_near_side_disk_water=round(disk_water, 4), product_disk_water=product_disk,
                                       difference=round(disk_water - product_disk, 4), tolerance=0.01,

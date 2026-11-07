@@ -4508,7 +4508,11 @@ $T/prep_refit.sh                # the longwave refit on year 19, the escape it c
 <climate venv>/bin/python $T/preflight_target.py run_turned_step2.sh   # a run's flags through the runner's own configuration
 $T/run_turned_target.sh; $T/run_turned_step2.sh                  # at 0.926 and 0.924 with l15_turned, watched
 $T/checks_target.sh; $T/checks_step2.sh                          # each run's checks and the rule's sunlight
-python3 -m pytest climate/tests/test_turned.py climate/tests/test_carry.py      # 13 tests
+<climate venv>/bin/python -m climate.gcm.climatology A28R_301k_design_l15_snow_s924_turned_refit:10-19   # for display
+<climate venv>/bin/python -m climate.gcm.turned_climatology <domain/geology checkout>/geology/results/moon_orientation.json \
+    climate/gcm/products/climatology_A28R_301k_design_l15_snow_s924_turned_refit.npz \
+    --source domain/geology@45c3d817:geology/results/moon_orientation.json   # carried to today's ground, for the drainage
+python3 -m pytest climate/tests/test_turned.py climate/tests/test_carry.py climate/tests/test_turned_climatology.py   # 16 tests
 ```
 
 #### The hollows' store in PlaSim's land (3 November, second pass the same day)
