@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "e7a43b6124a54b9c159f30c7a49b318447cb0b7b765c296165d94655e91425d5",
+      "research/studies/world_economy/amenities_inputs.json": "b19768d41beab5ca73a325497cd966aa7ff3f3e079be00690250cce8bfe7b02d",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "44bb32cf252ef5b84e80756fb1f04a4095bf9e719f5972b4e75bb5ee89622a05"
+        "sha256": "d960651e9fbad020abe2b997e7494749deec29a6e40a78355326c33686d53fd4"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "c7221f5b81f7961f7e269edf2412a1c6d1eb630fa6fd794b9a64f4d8540ecc0b"
+        "sha256": "9ef07655c668a7165c2be5458f5a2bf2c7afd3e25b7d0e23fbeeb4ecf4c4445d"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "36a386f361da8d1f2dddcf12889d41c81723959e9a86b057e99fc84a04d28940"
+        "sha256": "1b7209f681818088c36bb2e2d4054c8ecfa0644e21a3d1750b49263633bcebd0"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "17aa706d679b8622a1f0bbaaff88f2b1ed3b8de3df568d2a7ec01134fd02a369"
+        "sha256": "f764f7ddddb224755bfaaaf50bdea955c59373e196f3a079bf774dc44c373792"
       }
     }
   },

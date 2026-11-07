@@ -25089,7 +25089,7 @@
     }
    ],
    "inputs": {
-    "research/studies/climate_targets/results/climate_targets.json": "d087257b933b414596c0e262dfb673111530262bfba461c73390f65a7147c9d2"
+    "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
    },
    "cloud_depth_m": 5426.840314459445
   },
@@ -50181,7 +50181,7 @@
     }
    ],
    "inputs": {
-    "research/studies/climate_targets/results/climate_targets.json": "d087257b933b414596c0e262dfb673111530262bfba461c73390f65a7147c9d2"
+    "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
    },
    "cloud_depth_m": 5426.840314459445
   },
@@ -87363,7 +87363,7 @@
     }
    ],
    "inputs": {
-    "research/studies/climate_targets/results/climate_targets.json": "d087257b933b414596c0e262dfb673111530262bfba461c73390f65a7147c9d2"
+    "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
    },
    "cloud_depth_m": 10853.680628918893
   },
@@ -124545,7 +124545,7 @@
     }
    ],
    "inputs": {
-    "research/studies/climate_targets/results/climate_targets.json": "d087257b933b414596c0e262dfb673111530262bfba461c73390f65a7147c9d2"
+    "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
    },
    "cloud_depth_m": 10853.680628918893
   }
@@ -124563,7 +124563,7 @@
    "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
   },
   "inputs": {
-   "research/studies/climate_targets/results/climate_targets.json": "d087257b933b414596c0e262dfb673111530262bfba461c73390f65a7147c9d2"
+   "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
   },
   "constants": {
    "AVOGADRO": 6.02214076e+23,
@@ -124599,15 +124599,15 @@
   "status": "exploratory_numerically_unresolved",
   "audit": {
    "path": "atmosphere/snow/results/numerical_audit.json",
-   "sha256": "ae0ae403ac47c9d67d683fd25eb0debb68ae6707c6c02ab4177472427b2f0b75"
+   "sha256": "7791cdb6cc2281e259ca4ff210df18ba6e862a5291a713a74043883375dfd1a7"
   },
   "assessor": {
    "path": "atmosphere/snow/assessment.py",
    "sha256": "0b8963147b368e2c70268fec70f7ca95e71d2f3af23a5692426e9f5b352ccc2f"
   },
   "original_product_sha256": "b738e2c360f6f4e2e6ec9d80aacdf61cfe4be6c663ec34d030bae182f872e231",
-  "original_canonical_sha256": "396e8cc5b8844d901a2ff748c11db06e618169a2b3d032e611a091fbe6a7680a",
-  "numerical_payload_sha256": "d8eb026a10eceee9879e53c2887b17c9ef64cf0e102b7441ca375de36842179e",
+  "original_canonical_sha256": "0809877f4b7eab29e154b37ef8a91db3992d1b8d0d844833c06e8a945467c5e4",
+  "numerical_payload_sha256": "66b5763c323e47c1a982266f00598724d543c2f1af0937cbf4a5848148fc82b8",
   "original_evidence": "Four conditional one-dimensional, persistent, liquid-saturated cloud calculations. Only cloud-top temperature and depth change relative to the central population cases. Total imposed water supply is fixed at each compared rate; condensation per unit depth therefore increases in a shorter cloud. Single seed, inherited collision/fragmentation laws, no resolved turbulence or large-aggregate mechanical fracture.",
   "original_reading_rule": "Runs have the snow-population/1 run structure, with cloud_depth_m added. Compare top -5 and -10 C to the same-rate top -15 C population case; do not infer cloud occurrence from these imposed depths. Summaries weight arriving mass; number and area bins retain their original moments. The 100/L parameter normalizes injected number flux with the speed of a 0.2 mm crystal, not a fixed size-resolved concentration boundary. Dendrite-area geometry is held for the controlled comparison; warmer cloud tops do not establish dendritic crystal production. These runs retain a saturated column rather than the intermittent dry gaps in archived weather.",
   "scope": "Evidence metadata only. Original producer/input identities and every run are preserved."
