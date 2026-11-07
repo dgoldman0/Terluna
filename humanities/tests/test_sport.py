@@ -160,22 +160,38 @@ def test_collisions_and_tosses_keep_momentum_and_the_force_balance():
     assert toss['earth'] is None                                  # 350 N does not lift 55 kg on Earth
 
 
-@pytest.mark.skipif(not wb.MOTION.is_file(), reason='the solved phrase lives on the research drive')
-def test_the_whole_body_record_regenerates_and_its_flights_fall_freely():
+@pytest.mark.skipif(not wb.MOTION.is_file(), reason='the solved motions live on the research drive')
+def test_the_whole_body_record_regenerates_and_reads_the_landings_as_they_were_solved():
     product = json.loads(wb.OUT.read_text())
     assert product == json.loads(json.dumps(wb.results()))
     for path, h in product['producer']['inputs'].items():
         assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == h
     for path, h in product['producer']['files'].items():
         assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest()[:16] == h
-    shares = [f['share_of_gravity'] for f in product['flights']]
+    m = product['motions']
+    # 6 November, Euler flights and no landing cost: flights fall freely, hard landings carried by the impulse.
+    old = m['phrase_2026_11_06']
+    shares = [f['share_of_gravity'] for f in old['flights']]
     assert all(0.88 < s < 1.06 for s in shares) and abs(np.median(shares) - 1) < 0.02
-    for s in product['stances_between_flights']:
+    for s in old['stances_between_flights']:
         assert s['most_friction_used'] <= wb.FLOOR_FRICTION + 0.01      # the engine's own friction cone
         assert s['travel_change_m_s'] <= s['friction_bound_on_travel_change_m_s'] + 0.05
-    # the hard landings: the touchdown impulse carries most of the vertical speed in one instant
-    carve = next(s for s in product['stances_between_flights'] if s['unit'].startswith('carve_landing'))
+    carve = next(s for s in old['stances_between_flights'] if s['unit'].startswith('carve_landing'))
     assert carve['landing_impulse_m_s']['vertical'] > 0.7 * -carve['before']['vertical_m_s']
-    assert product['salto_landing']['landing_impulse_m_s']['vertical'] > 0.9 * -product['salto_landing']['before']['vertical_m_s']
-    take_off = product['salto_standing_take_off']
-    assert take_off['descent_s'] > 3 * take_off['dip_to_lift_off_s']
+    assert old['salto_landing']['landing_impulse_m_s']['vertical'] > 0.9 * -old['salto_landing']['before']['vertical_m_s']
+    assert old['salto_standing_take_off']['descent_s'] > 3 * old['salto_standing_take_off']['dip_to_lift_off_s']
+    # The landing costed on Euler flights: the long flights float down on the integration error.
+    for key in ('salto_landing_cost_euler_2026_11_07', 'leap_landing_cost_euler_2026_11_07'):
+        if key in m:
+            assert min(f['share_of_gravity'] for f in m[key]['flights']) < 0.6, key
+    # Runge-Kutta flights fall at g; landing on the balls of the feet the impulse carries a fifth of the landing's
+    # vertical speed or less, inside the floor's grip, and the body ends still over its feet.
+    for key in ('salto_flat_landing_rk4_2026_11_07', 'salto_ball_landing_rk4_2026_11_07'):
+        if key in m:
+            assert all(abs(f['share_of_gravity'] - 1) < 0.01 for f in m[key]['flights']), key
+    if 'salto_ball_landing_rk4_2026_11_07' in m:
+        ball = m['salto_ball_landing_rk4_2026_11_07']
+        land = ball['landings'][-1]
+        assert land['landing_impulse_m_s']['vertical'] < 0.2 * -land['before']['vertical_m_s']
+        assert land['landing_impulse_m_s']['along_over_vertical'] is None or land['landing_impulse_m_s']['along_over_vertical'] <= wb.FLOOR_FRICTION + 0.02
+        assert ball['finish']['com_speed_m_s'] < 0.05 and ball['finish']['com_over_feet_m'] < 0.1

@@ -19,7 +19,11 @@ problem over the dancer's full rigid-body dynamics at lunar gravity (body.json t
 - each flight node is free fall of the articulated body, so angular momentum is conserved and the centre of mass
   follows its ballistic arc exactly;
 - each landing (a foot from the air, a heel coming down from demi-pointe, a pivot planting, a knee touching down)
-  passes an impulse model that stops the new contact, as a rigid contact does;
+  passes an impulse model that stops the new contact, as a rigid contact does. The impulse may stop the arriving
+  foot but not the body: a cost on the change it makes to the centre of mass's velocity (until 7 November it
+  took 86-97% of a hard landing's vertical speed at once) leaves the stance's pushes, inside the friction cone and
+  the body's strength, to absorb the landing as the body sinks through a stroke, and the impulse itself stays
+  inside the friction cone and its centre of pressure inside the foot;
 - joint torques stay inside the body's strength (box-constrained FDDP), joint ranges inside barrier costs, every point
   of the soles and knees that bears no weight at or above the floor;
 - no part of the body passes into another: a barrier keeps the legs, the arms and each arm and the head at or above
@@ -75,6 +79,19 @@ APART_BETWEEN = tuple(k / 8 for k in range(1, 8))   # where the barrier looks be
                              # two looks at 21.07 s, where the run turns into the whirl, and caught the longest skirt
                              # tier there, which the whirl then wound round her right leg (6 November)
 APART_MARGIN = 0.003         # m kept between the pairs' surfaces: parts nearly touch, as legs in fifth do
+# Which nodes integrate with fourth-order Runge-Kutta in place of the semi-implicit Euler step: 'flight' (free fall),
+# 'landing' (a stance's first LANDING_RK4_S after a touchdown from the air) and 'push' (a stance's last PUSH_RK4_S
+# before a take-off). Euler gains momentum where the body changes shape fast (the salto variants of 2 November found
+# 0.4 m/s in a salto's flight), and an optimiser asked to land softly uses that gain to float down; Runge-Kutta
+# keeps free fall exact. Flights integrate with Runge-Kutta by default since 7 November, the author's choice for the
+# drafting stages, to be reconsidered nearer final renders; () restores Euler everywhere.
+RK4_ON = ('flight',)
+LANDING_RK4_S = 0.5
+PUSH_RK4_S = 0.35
+IMPULSE_COM_WEIGHT = 1e2     # on the change a landing impulse makes to the centre of mass's velocity (m/s); it applies
+                             # only where flights integrate with Runge-Kutta, since on Euler's step the optimiser
+                             # meets it by floating down on the integration error (7 November)
+IMPULSE_CONE_WEIGHT = 1e2    # on the impulse's friction cone and centre of pressure, as on a stance's forces
 MAX_FOOT_FORCE_N = 900.0     # a foot's peak push, about 10 lunar body weights (1.7 of Earth's): a jump's take-off peak
 # Contact kinds: the frame that holds the floor, how many directions it holds (6: no slip and no swivel; 3: a point
 # that cannot slip but may swivel), and the body's points that rest on the floor with it.
@@ -951,6 +968,28 @@ class Problem:
                 self.state, act, self.contact_model(node, self.placed_at[i]), costs, 0.0, True)
         return crocoddyl.DifferentialActionModelFreeFwdDynamics(self.state, act, costs)
 
+    def rk4_node(self, i):
+        """Whether node i integrates with Runge-Kutta (RK4_ON): a flight node, a stance node within LANDING_RK4_S of a
+        touchdown from the air, or a stance node within PUSH_RK4_S of the take-off that ends it."""
+        node = self.nodes[i]
+        if not RK4_ON:
+            return False
+        if not node.contacts:
+            return 'flight' in RK4_ON
+        if 'landing' in RK4_ON:
+            j = i
+            while j > 0 and self.nodes[j - 1].contacts and node.t - self.nodes[j].t < LANDING_RK4_S:
+                j -= 1
+            if j > 0 and not self.nodes[j - 1].contacts and node.t - self.nodes[j].t < LANDING_RK4_S:
+                return True
+        if 'push' in RK4_ON:
+            j = i
+            while j + 1 < len(self.nodes) and self.nodes[j + 1].contacts and self.nodes[j + 1].t - node.t < PUSH_RK4_S:
+                j += 1
+            if j + 1 < len(self.nodes) and not self.nodes[j + 1].contacts and self.nodes[j + 1].t - node.t <= PUSH_RK4_S:
+                return True
+        return False
+
     def running(self, a, b):
         """The running models of nodes a..b-1 as (node index, model): an impulse before each landing, then the node's
         integrated dynamics over DT."""
@@ -968,6 +1007,23 @@ class Problem:
                 icosts.addCost('posture', crocoddyl.CostModelResidual(
                     self.state, crocoddyl.ActivationModelWeightedQuad(self.state_weights(node) ** 2),
                     crocoddyl.ResidualModelState(self.state, xr, 0)), 1.0)
+                # The impulse stops the arriving foot; what it does to the centre of mass is a rigid landing's,
+                # left to the stance's pushes (inside the cone and the body's strength) as the body sinks.
+                if 'flight' in RK4_ON and IMPULSE_COM_WEIGHT > 0:
+                    icosts.addCost('impulse_com', crocoddyl.CostModelResidual(
+                        self.state, crocoddyl.ResidualModelImpulseCoM(self.state)), IMPULSE_COM_WEIGHT)
+                for side in node.landing:
+                    kind = node.contacts[side]
+                    fid = self.fid[(side, kind)]
+                    if CONTACTS[kind][1] == 6:
+                        cone = crocoddyl.WrenchCone(np.eye(3), MU, np.array(FOOT_HALF[kind]) * 2, 4, True, 0.0, 1e6)
+                        res = crocoddyl.ResidualModelContactWrenchCone(self.state, fid, cone, 0, True)
+                    else:
+                        cone = crocoddyl.FrictionCone(np.eye(3), MU, 4, True, 0.0, 1e6)
+                        res = crocoddyl.ResidualModelContactFrictionCone(self.state, fid, cone, 0, True)
+                    icosts.addCost(f'{side}_impulse_cone', crocoddyl.CostModelResidual(
+                        self.state, crocoddyl.ActivationModelQuadraticBarrier(crocoddyl.ActivationBounds(cone.lb, cone.ub)),
+                        res), IMPULSE_CONE_WEIGHT)
                 out.append((i, crocoddyl.ActionModelImpulseFwdDynamics(self.state, imp, icosts)))
             landing_targets = {}
             if i + 1 < len(self.nodes):
@@ -978,7 +1034,11 @@ class Problem:
                         continue                            # a heel or a pivot on a foot already down
                     M = self.placed_at[i + 1][(side, kind)]
                     landing_targets[side] = (self.fid[(side, kind)], M if CONTACTS[kind][1] == 6 else M.translation)
-            iam = crocoddyl.IntegratedActionModelEuler(self._dam(node, i, landing_targets=landing_targets), DT)
+            dam = self._dam(node, i, landing_targets=landing_targets)
+            if self.rk4_node(i):
+                iam = crocoddyl.IntegratedActionModelRK(dam, crocoddyl.RKType.four, DT)
+            else:
+                iam = crocoddyl.IntegratedActionModelEuler(dam, DT)
             iam.u_lb = self.bounds['effort_lower'][6:]
             iam.u_ub = self.bounds['effort_upper'][6:]
             out.append((i, iam))
@@ -1028,6 +1088,10 @@ class Problem:
         return self.problem
 
     def warm_start(self):
+        """The reference states with quasi-static torques, or an earlier solution of the same problem (self.init, a
+        Solution: a staged solve, which adds costs to a problem already solved without them)."""
+        if getattr(self, 'init', None) is not None and len(self.init.us) == len(self.ms):
+            return [np.array(x) for x in self.init.xs], [np.array(u) for u in self.init.us]
         xs = self.reference_states(self.ms, self.x0)
         return xs, self.problem.quasiStatic(xs[:-1])
 
@@ -1048,6 +1112,12 @@ def contact_forces(model, data):
     """The floor's force on each contact of a running node, by contact name ({} in flight or at an impulse)."""
     if isinstance(model, crocoddyl.ActionModelImpulseFwdDynamics):
         return {}
+    if isinstance(model, crocoddyl.IntegratedActionModelRK):
+        try:                       # a Runge-Kutta node: its first stage, at the node's own state, as an Euler node records
+            contacts = data.differential[0].multibody.contacts.contacts.todict()
+        except (AttributeError, IndexError, TypeError):
+            return {}
+        return {cn: np.r_[c.f.linear, c.f.angular] for cn, c in contacts.items()}
     try:
         contacts = data.differential.multibody.contacts.contacts.todict()
     except AttributeError:
@@ -1247,12 +1317,14 @@ def contact_report(prob, sol):
 
 
 def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=False, windows=False, span=None,
-            finish_s=0.0, window_log=None, window_s=3.5, step_s=1.0):
+            finish_s=0.0, window_log=None, window_s=3.5, step_s=1.0, init=None):
     """Realise the phrase (or units[i:j] of it, or the nodes in span=(t0, t1) seconds) and write its motion file and
-    report. finish_s holds the last shape at rest at the end."""
+    report. finish_s holds the last shape at rest at the end. init, a Solution of the same phrase solved whole, warm-starts
+    the solve (a staged solve)."""
     placed = phrase.placed if units is None else phrase.placed[units[0]:units[1]]
     nodes = timeline(placed, finish_s=finish_s)
     prob = Problem(nodes)
+    prob.init = init
     if span is not None:
         a = next(i for i, n in enumerate(nodes) if n.t >= span[0] - 1e-9)
         b = next((i for i, n in enumerate(nodes) if n.t >= span[1] - 1e-9), len(nodes))

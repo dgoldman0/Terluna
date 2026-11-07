@@ -49,6 +49,12 @@ questions move to the decisions register (section "Dance and the movement arts, 
    register's rule? *Answered on 2 November: on their merits at most, as a vague influence only; no style follows the
    conlang's culture (register, section of 2-3 November).*
 
+9. **The flight integrator.** The engine steps every node with semi-implicit Euler, which gains momentum where the body changes shape fast: 0.4 m/s in the salto's flight on 2 November, when changing it was left for the author. Since 7 November landing impulses can be costed on what they do to the centre of mass, and on Euler's step the optimiser meets that cost by floating down (the salto's flight at 0.39 of g, the grand jeté's at 0.50). Fourth-order Runge-Kutta on the flight nodes (realise.RK4_ON = ('flight',)) keeps free fall exact and lets landings be costed. The options:
+   - Runge-Kutta on flights as the engine's default (recommended: every flight becomes physical and landings can sink through a stroke);
+   - Runge-Kutta on flights and on the stances around them ('landing', 'push'), which also closes the take-off's remaining gain of 0.1-0.4 m/s, at more memory;
+   - Euler as now, with landings left rigid.
+   Cost: a salto solved alone peaks at 5.8 GB against 2.6 GB on Euler, and from the reference start its first stage took 20 minutes; a whole phrase needs windows sized to that memory, not yet run. *Answered on 7 November: Runge-Kutta on flights as the default for now, in these early drafting stages, to be reconsidered nearer final renders of the dance or the sports (register, section "Sport from the body, 7 November 2026").*
+
 Answered on 1 November: the garments (light and weighted fabrics both, combined to suit each dance), the next step
 (the whole phrase, before the replay controller), partnering and levels (each a future study, neither now), the
 renderer's priorities (the meshes' physics and the dance's clarity before fine detail), the body's proportions (to be

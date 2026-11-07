@@ -318,3 +318,31 @@ def test_the_barrier_follows_the_body_between_nodes():
         num[:, k] = (r(state.integrate(x, dx))[0] - r(state.integrate(x, -dx))[0]) / (2 * eps)
     assert np.allclose(data.Rx, num, atol=1e-5)
 
+
+
+def test_landing_impulses_keep_the_cone_and_cost_the_centre_of_mass_only_with_exact_flights():
+    ph = gr.build('Hanging Salto', gr.motif(('hanging_salto', 'R', {'rise_m': 1.6})))
+    nodes = rz.timeline(ph.placed, finish_s=0.5)
+    # The salto lands on the balls of both feet, then lowers its heels: two landings, from the air and from the ball.
+    i = next(k for k, n in enumerate(nodes) if n.landing and k > 0 and not nodes[k - 1].contacts)
+    assert set(nodes[i].contacts.values()) == {'ball'} and set(nodes[i].landing) == {'L', 'R'}
+    heels = next(k for k in range(i + 1, len(nodes)) if nodes[k].landing)
+    assert set(nodes[heels].contacts.values()) == {'flat'} and (heels - i) * rz.DT == pytest.approx(0.15, abs=rz.DT)
+    assert rz.RK4_ON == ('flight',)                       # flights integrate with Runge-Kutta by default
+    old = rz.RK4_ON
+    try:
+        for on, with_com in (((), False), (('flight',), True)):
+            rz.RK4_ON = on
+            prob = rz.Problem(nodes)
+            prob.plan()
+            ms = prob.running(i, i + 1)
+            imp = ms[0][1]
+            assert isinstance(imp, crocoddyl.ActionModelImpulseFwdDynamics)
+            names = set(imp.costs.costs.todict())
+            assert {'L_impulse_cone', 'R_impulse_cone'} <= names
+            assert ('impulse_com' in names) == with_com
+            flights = [k for k, n in enumerate(nodes) if not n.contacts]
+            assert all(prob.rk4_node(k) == bool(on) for k in flights)
+            assert not prob.rk4_node(heels + 5)                  # a stance node stays Euler unless 'landing' is named
+    finally:
+        rz.RK4_ON = old

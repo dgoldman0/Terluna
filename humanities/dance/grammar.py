@@ -77,6 +77,12 @@ def descend_s(depth, share=0.7):
     return 2 * math.sqrt(depth / (share * G))
 
 
+def rise_s(depth, share=0.7):
+    """Raising the centre of mass by depth and arriving at rest on the floor, with the rise slowing at most at
+    share * g: the floor cannot pull, so the end of a rise is gravity's, as the start of a sinking is."""
+    return 2 * math.sqrt(depth / (share * G))
+
+
 def topple_s(a0, a1):
     return env.topple_seconds(a0, a1, G, _com_height())
 
@@ -140,7 +146,7 @@ def stride_dv(stride_rise_m=0.08):
     return MU * (G * push_s(vz) + 2 * vz)
 
 
-PHYSICS = dict(takeoff=takeoff, flight_s=flight_s, push_s=push_s, absorb_s=absorb_s, descend_s=descend_s,
+PHYSICS = dict(takeoff=takeoff, flight_s=flight_s, push_s=push_s, absorb_s=absorb_s, descend_s=descend_s, rise_s=rise_s,
                topple_s=topple_s, fall_speed=fall_speed, prep_s=prep_s, shift_s=shift_s, max=max, min=min,
                sqrt=math.sqrt)
 

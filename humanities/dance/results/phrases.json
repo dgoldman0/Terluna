@@ -3,9 +3,9 @@
  "producer": {
   "domain": "humanities",
   "files": {
-   "humanities/dance/grammar.py": "a57426d049169c30",
+   "humanities/dance/grammar.py": "33a115ad079f49fb",
    "humanities/dance/envelope.py": "660f3247df5da23d",
-   "humanities/dance/vocabulary/units.json": "c86901e3c33e2ceb",
+   "humanities/dance/vocabulary/units.json": "3075f59232428569",
    "humanities/dance/vocabulary/poses.json": "128fac64dc50a3ed",
    "humanities/dance/body/model.py": "2b553c5592ee07a5"
   },
@@ -2046,10 +2046,10 @@
   {
    "name": "Air Study",
    "evaluation": {
-    "duration_s": 27.89,
+    "duration_s": 29.21,
     "units": 7,
     "connectors": 2,
-    "connector_share": 0.098,
+    "connector_share": 0.094,
     "families": [
      "flight",
      "level",
@@ -2057,9 +2057,9 @@
      "turn"
     ],
     "time_aloft_s": 15.49,
-    "share_aloft": 0.555,
+    "share_aloft": 0.53,
     "flights_over_1_s": 5,
-    "lunar_native_share": 0.753,
+    "lunar_native_share": 0.764,
     "effort_changes": 9,
     "levels": [
      "air",
@@ -2069,7 +2069,7 @@
     "travel_m": 9.1,
     "heading_change_deg": 15,
     "stops": 3,
-    "climax_at": 0.72,
+    "climax_at": 0.73,
     "aerial_revolutions": {
      "cartwheel": 1.0,
      "somersault": 2.0,
@@ -2322,7 +2322,7 @@
     {
      "count": 7.28,
      "time_s": 6.28,
-     "seconds": 4.28,
+     "seconds": 5.6,
      "unit": "hanging salto",
      "unit_id": "hanging_salto",
      "gesture_side": "R",
@@ -2416,7 +2416,7 @@
        "kind": "stance",
        "support": "both",
        "t0": 10.214,
-       "seconds": 0.351,
+       "seconds": 0.15,
        "shapes": [
         {
          "at": 1.0,
@@ -2429,12 +2429,35 @@
        "cartwheel_rev": null,
        "twist_rev": null,
        "body": null
+      },
+      {
+       "kind": "stance",
+       "support": "both",
+       "t0": 10.364,
+       "seconds": 1.521,
+       "shapes": [
+        {
+         "at": 0.15,
+         "legs": "grand_plie_prep",
+         "arms": "second"
+        },
+        {
+         "at": 1.0,
+         "legs": "turned_out",
+         "arms": "bras_bas"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null,
+       "cartwheel_rev": null,
+       "twist_rev": null,
+       "body": null
       }
      ]
     },
     {
-     "count": 11.56,
-     "time_s": 10.56,
+     "count": 12.89,
+     "time_s": 11.89,
      "seconds": 4.28,
      "unit": "corkscrew",
      "unit_id": "corkscrew",
@@ -2464,7 +2487,7 @@
       {
        "kind": "stance",
        "support": "both",
-       "t0": 10.565,
+       "t0": 11.885,
        "seconds": 1.124,
        "shapes": [
         {
@@ -2482,7 +2505,7 @@
       {
        "kind": "flight",
        "support": "none",
-       "t0": 11.689,
+       "t0": 13.009,
        "seconds": 2.807,
        "shapes": [
         {
@@ -2511,7 +2534,7 @@
       {
        "kind": "stance",
        "support": "both",
-       "t0": 14.496,
+       "t0": 15.816,
        "seconds": 0.351,
        "shapes": [
         {
@@ -2529,8 +2552,8 @@
      ]
     },
     {
-     "count": 15.85,
-     "time_s": 14.85,
+     "count": 17.17,
+     "time_s": 16.17,
      "seconds": 1.73,
      "unit": "weight shift",
      "unit_id": "weight_shift",
@@ -2556,7 +2579,7 @@
       {
        "kind": "shift",
        "support": "both",
-       "t0": 14.847,
+       "t0": 16.167,
        "seconds": 1.731,
        "shapes": [],
        "turn_rev": null,
@@ -2568,8 +2591,8 @@
      ]
     },
     {
-     "count": 17.58,
-     "time_s": 16.58,
+     "count": 18.9,
+     "time_s": 17.9,
      "seconds": 3.5,
      "unit": "sleeve flight",
      "unit_id": "sleeve_flight",
@@ -2598,7 +2621,7 @@
       {
        "kind": "stance",
        "support": "L",
-       "t0": 16.578,
+       "t0": 17.898,
        "seconds": 0.498,
        "shapes": [
         {
@@ -2621,7 +2644,7 @@
       {
        "kind": "flight",
        "support": "none",
-       "t0": 17.076,
+       "t0": 18.396,
        "seconds": 2.626,
        "shapes": [
         {
@@ -2646,7 +2669,7 @@
       {
        "kind": "stance",
        "support": "R",
-       "t0": 19.702,
+       "t0": 21.022,
        "seconds": 0.375,
        "shapes": [
         {
@@ -2665,8 +2688,8 @@
      ]
     },
     {
-     "count": 21.08,
-     "time_s": 20.08,
+     "count": 22.4,
+     "time_s": 21.4,
      "seconds": 3.66,
      "unit": "flat spin",
      "unit_id": "flat_spin",
@@ -2696,7 +2719,7 @@
       {
        "kind": "flight",
        "support": "none",
-       "t0": 20.077,
+       "t0": 21.398,
        "seconds": 3.366,
        "shapes": [
         {
@@ -2720,7 +2743,7 @@
       {
        "kind": "stance",
        "support": "L",
-       "t0": 23.443,
+       "t0": 24.763,
        "seconds": 0.293,
        "shapes": [
         {
@@ -2738,8 +2761,8 @@
      ]
     },
     {
-     "count": 24.74,
-     "time_s": 23.74,
+     "count": 26.06,
+     "time_s": 25.06,
      "seconds": 4.15,
      "unit": "spiral descent",
      "unit_id": "spiral_descent",
@@ -2765,7 +2788,7 @@
       {
        "kind": "turn",
        "support": "L",
-       "t0": 23.736,
+       "t0": 25.056,
        "seconds": 2.0,
        "shapes": [
         {
@@ -2789,7 +2812,7 @@
       {
        "kind": "stance",
        "support": "both",
-       "t0": 25.736,
+       "t0": 27.056,
        "seconds": 1.041,
        "shapes": [
         {
@@ -2808,7 +2831,7 @@
       {
        "kind": "kneel",
        "support": "kneel",
-       "t0": 26.776,
+       "t0": 28.097,
        "seconds": 1.11,
        "shapes": [
         {
@@ -2827,15 +2850,15 @@
      ]
     }
    ],
-   "text": "Air Study: 27.9 s at 60 beats a minute\n    1.00    0.00 s  orbit run                  G=R  both->L     0.0->0.8 m/s  aloft 0.63+0.63 s\n    2.93    1.93 s  star wheel                 G=R     L->R     0.8->0.8 m/s  aloft 2.63 s\n    6.28    5.28 s  glide step                 G=R     R->both  0.8->0.0 m/s  (link)  close to both feet, stopping 0.8 m/s\n    7.28    6.28 s  hanging salto              G=R  both->both  0.0->0.0 m/s  aloft 2.81 s\n   11.56   10.56 s  corkscrew                  G=R  both->both  0.0->0.0 m/s  aloft 2.81 s\n   15.85   14.85 s  weight shift               G=R  both->L     0.0->0.0 m/s  (link)  weight onto L in place\n   17.58   16.58 s  sleeve flight              G=R     L->R     0.0->0.8 m/s  aloft 2.63 s\n   21.08   20.08 s  flat spin                  G=L     R->L     0.8->0.6 m/s  aloft 3.37 s\n   24.74   23.74 s  spiral descent             G=R     L->floor 0.6->0.0 m/s"
+   "text": "Air Study: 29.2 s at 60 beats a minute\n    1.00    0.00 s  orbit run                  G=R  both->L     0.0->0.8 m/s  aloft 0.63+0.63 s\n    2.93    1.93 s  star wheel                 G=R     L->R     0.8->0.8 m/s  aloft 2.63 s\n    6.28    5.28 s  glide step                 G=R     R->both  0.8->0.0 m/s  (link)  close to both feet, stopping 0.8 m/s\n    7.28    6.28 s  hanging salto              G=R  both->both  0.0->0.0 m/s  aloft 2.81 s\n   12.89   11.89 s  corkscrew                  G=R  both->both  0.0->0.0 m/s  aloft 2.81 s\n   17.17   16.17 s  weight shift               G=R  both->L     0.0->0.0 m/s  (link)  weight onto L in place\n   18.90   17.90 s  sleeve flight              G=R     L->R     0.0->0.8 m/s  aloft 2.63 s\n   22.40   21.40 s  flat spin                  G=L     R->L     0.8->0.6 m/s  aloft 3.37 s\n   26.06   25.06 s  spiral descent             G=R     L->floor 0.6->0.0 m/s"
   },
   {
    "name": "Under the Canopy, with the hanging salto",
    "evaluation": {
-    "duration_s": 35.72,
+    "duration_s": 37.04,
     "units": 8,
     "connectors": 4,
-    "connector_share": 0.183,
+    "connector_share": 0.176,
     "families": [
      "fabric",
      "flight",
@@ -2845,9 +2868,9 @@
      "upper"
     ],
     "time_aloft_s": 9.0,
-    "share_aloft": 0.252,
+    "share_aloft": 0.243,
     "flights_over_1_s": 2,
-    "lunar_native_share": 0.726,
+    "lunar_native_share": 0.736,
     "effort_changes": 21,
     "levels": [
      "air",
@@ -2857,7 +2880,7 @@
     "travel_m": 11.8,
     "heading_change_deg": 173,
     "stops": 2,
-    "climax_at": 0.91,
+    "climax_at": 0.88,
     "aerial_revolutions": {
      "somersault": 1.0
     }
@@ -3681,7 +3704,7 @@
     {
      "count": 32.44,
      "time_s": 31.44,
-     "seconds": 4.28,
+     "seconds": 5.6,
      "unit": "hanging salto",
      "unit_id": "hanging_salto",
      "gesture_side": "R",
@@ -3775,7 +3798,7 @@
        "kind": "stance",
        "support": "both",
        "t0": 35.367,
-       "seconds": 0.351,
+       "seconds": 0.15,
        "shapes": [
         {
          "at": 1.0,
@@ -3788,11 +3811,34 @@
        "cartwheel_rev": null,
        "twist_rev": null,
        "body": null
+      },
+      {
+       "kind": "stance",
+       "support": "both",
+       "t0": 35.517,
+       "seconds": 1.521,
+       "shapes": [
+        {
+         "at": 0.15,
+         "legs": "grand_plie_prep",
+         "arms": "second"
+        },
+        {
+         "at": 1.0,
+         "legs": "turned_out",
+         "arms": "bras_bas"
+        }
+       ],
+       "turn_rev": null,
+       "somersault_rev": null,
+       "cartwheel_rev": null,
+       "twist_rev": null,
+       "body": null
       }
      ]
     }
    ],
-   "text": "Under the Canopy, with the hanging salto: 35.7 s at 60 beats a minute\n    1.00    0.00 s  port de bras               G=R  both->both  0.0->0.0 m/s\n    4.00    3.00 s  canopy                     G=R  both->both  0.0->0.0 m/s\n    9.10    8.10 s  weight shift               G=R  both->L     0.0->0.0 m/s  (link)  weight onto L in place\n   10.83    9.83 s  long fall                  G=R     L->R     0.0->0.6 m/s\n   14.32   13.32 s  orbit run                  G=L     R->L     0.6->1.6 m/s  aloft 0.63+0.63+0.63 s\n   16.88   15.88 s  grand jet\u00e9 (suspended)     G=R     L->none  1.6->1.6 m/s  aloft 2.43 s\n   19.71   18.71 s  carve                      G=R  none->R     1.6->1.6 m/s\n   20.11   19.11 s  orbit run                  G=L     R->L     1.6->0.1 m/s  aloft 0.63+0.63+0.63 s  (link)  3 strides to spend speed to 0.15 m/s\n   22.67   21.67 s  whirl                      G=R     L->L     0.1->0.0 m/s\n   30.20   29.20 s  pas de bourr\u00e9e             G=R     L->R     0.0->0.0 m/s  (link)  brake the turn\n   31.10   30.10 s  glide step                 G=R     R->both  0.0->0.0 m/s  (link)  close to both feet\n   32.44   31.44 s  hanging salto              G=R  both->both  0.0->0.0 m/s  aloft 2.81 s"
+   "text": "Under the Canopy, with the hanging salto: 37.0 s at 60 beats a minute\n    1.00    0.00 s  port de bras               G=R  both->both  0.0->0.0 m/s\n    4.00    3.00 s  canopy                     G=R  both->both  0.0->0.0 m/s\n    9.10    8.10 s  weight shift               G=R  both->L     0.0->0.0 m/s  (link)  weight onto L in place\n   10.83    9.83 s  long fall                  G=R     L->R     0.0->0.6 m/s\n   14.32   13.32 s  orbit run                  G=L     R->L     0.6->1.6 m/s  aloft 0.63+0.63+0.63 s\n   16.88   15.88 s  grand jet\u00e9 (suspended)     G=R     L->none  1.6->1.6 m/s  aloft 2.43 s\n   19.71   18.71 s  carve                      G=R  none->R     1.6->1.6 m/s\n   20.11   19.11 s  orbit run                  G=L     R->L     1.6->0.1 m/s  aloft 0.63+0.63+0.63 s  (link)  3 strides to spend speed to 0.15 m/s\n   22.67   21.67 s  whirl                      G=R     L->L     0.1->0.0 m/s\n   30.20   29.20 s  pas de bourr\u00e9e             G=R     L->R     0.0->0.0 m/s  (link)  brake the turn\n   31.10   30.10 s  glide step                 G=R     R->both  0.0->0.0 m/s  (link)  close to both feet\n   32.44   31.44 s  hanging salto              G=R  both->both  0.0->0.0 m/s  aloft 2.81 s"
   },
   {
    "name": "Generated, seed 25 (best of 40 by lunar share, contrast, linking and climax)",

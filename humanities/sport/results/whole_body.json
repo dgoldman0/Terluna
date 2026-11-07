@@ -3,7 +3,7 @@
  "producer": {
   "domain": "humanities",
   "files": {
-   "humanities/sport/whole_body.py": "21af8cbb1a01fbc3"
+   "humanities/sport/whole_body.py": "cdf36cacbd39f534"
   },
   "constants": {
    "MOON_SURFACE_GRAVITY": 1.6242188765608128,
@@ -11,325 +11,1340 @@
   },
   "inputs": {
    "/media/projectspace/terluna-research/humanities/dance-runs/motion_apart/canopy_and_salto.npz": "575b2cd8fef8f19941154549eb2a5feb3600b1a8c832eb8ee285d73b51c9189a",
-   "/media/projectspace/terluna-research/humanities/dance-runs/motion_apart/canopy_and_salto_report.json": "08db847186da0b72041d96734f9f96dceabf0da33747bf51ed93243a427e1fab"
+   "/media/projectspace/terluna-research/humanities/dance-runs/motion_apart/canopy_and_salto_report.json": "08db847186da0b72041d96734f9f96dceabf0da33747bf51ed93243a427e1fab",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/hanging_salto_stroke.npz": "a66cdb13550f45478873d4ecfd6fda59d0d57359dd8ab73561c7d18f47bfec94",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/hanging_salto_stroke_report.json": "fc05a32bb75ab97a222b17562fdd024f37a1f1b5161a84591488ea30ecee2831",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/leap_stroke.npz": "180e974c0288158cbd171c3e3143ee0207d3f77a683ec105053ff34bea7a9bda",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/leap_stroke_report.json": "94deda1ad9f0948c5fcc558689034268e62e7efbef127aa5242017d37c726113",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_flatfoot_staged_rk4_flight_w100_stage2.npz": "a48c74d452610a421c91a62eaf1e8984d1dd2e353791a52fc9e4e479428197b8",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_flatfoot_staged_rk4_flight_w100_stage2_report.json": "4035268714bb8a7712aa7d7a94c5333b4554e006a585f1229bc63a9311c3d8ec",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_staged_rk4_flight_w100_stage2.npz": "d6f18301a7fa5d3aca251fefa94c713bc41b519bb95405e3f121449e66e090da",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_staged_rk4_flight_w100_stage2_report.json": "3599a78b484284706f562f3280992d100820b9b2d9dafe1e38043fb51c69ff05"
   }
  },
- "evidence": "Measurements of one solved whole-body motion (multiple-shooting optimal control with rigid contacts, friction cones on the stance forces, torque bounds and landing impulses, Euler steps of 25 ms) for one 55 kg body on a 0.5 friction floor; feasible motions of that model, not measured human movement.",
- "motion": {
-  "phrase": "Under the Canopy, with the hanging salto",
-  "span_s": [
-   0.0,
-   36.725
-  ],
-  "gravity": 1.6242188765608128,
-  "floor_friction": 0.5,
-  "mass_kg": 55.0
+ "evidence": "Measurements of solved whole-body motions (multiple-shooting optimal control with rigid contacts, friction cones on the stance forces, torque bounds and landing impulses, Euler steps of 25 ms) for one 55 kg body on a 0.5 friction floor; feasible motions of that model, not measured human movement.",
+ "body": {
+  "mass_kg": 55.0,
+  "floor_friction": 0.5
  },
- "flights": [
-  {
-   "t": [
-    13.333,
-    13.95
+ "motions": {
+  "phrase_2026_11_06": {
+   "motion": {
+    "file": "/media/projectspace/terluna-research/humanities/dance-runs/motion_apart/canopy_and_salto.npz",
+    "phrase": "Under the Canopy, with the hanging salto",
+    "span_s": [
+     0.0,
+     36.725
+    ],
+    "iterations": 3427,
+    "dynamic_gap": 1.249000902703301e-16
+   },
+   "flights": [
+    {
+     "t": [
+      13.333,
+      13.95
+     ],
+     "vertical_acceleration_m_s2": -1.622,
+     "share_of_gravity": 0.999
+    },
+    {
+     "t": [
+      14.317,
+      14.917
+     ],
+     "vertical_acceleration_m_s2": -1.608,
+     "share_of_gravity": 0.99
+    },
+    {
+     "t": [
+      15.25,
+      15.883
+     ],
+     "vertical_acceleration_m_s2": -1.69,
+     "share_of_gravity": 1.041
+    },
+    {
+     "t": [
+      16.3,
+      18.717
+     ],
+     "vertical_acceleration_m_s2": -1.492,
+     "share_of_gravity": 0.919
+    },
+    {
+     "t": [
+      19.133,
+      19.733
+     ],
+     "vertical_acceleration_m_s2": -1.637,
+     "share_of_gravity": 1.008
+    },
+    {
+     "t": [
+      20.083,
+      20.717
+     ],
+     "vertical_acceleration_m_s2": -1.614,
+     "share_of_gravity": 0.993
+    },
+    {
+     "t": [
+      21.05,
+      21.667
+     ],
+     "vertical_acceleration_m_s2": -1.673,
+     "share_of_gravity": 1.03
+    },
+    {
+     "t": [
+      32.583,
+      35.367
+     ],
+     "vertical_acceleration_m_s2": -1.613,
+     "share_of_gravity": 0.993
+    }
    ],
-   "vertical_acceleration_m_s2": -1.622,
-   "share_of_gravity": 0.999
+   "stances_between_flights": [
+    {
+     "unit": "orbit_run into orbit_run",
+     "t": [
+      13.967,
+      14.3
+     ],
+     "stance_s": 0.367,
+     "before": {
+      "along_m_s": 0.9,
+      "vertical_m_s": -0.37
+     },
+     "after": {
+      "along_m_s": 1.09,
+      "vertical_m_s": 0.56
+     },
+     "travel_change_m_s": 0.31,
+     "travel_turn_deg": 14.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.65,
+     "landing_impulse_m_s": {
+      "along": 0.07,
+      "vertical": -0.13,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.82,
+     "share_of_bound_used": 0.37,
+     "peak_push": {
+      "N": 627.0,
+      "lunar_bw": 7.0,
+      "earth_bw": 1.16
+     },
+     "most_friction_used": 0.5
+    },
+    {
+     "unit": "orbit_run into orbit_run",
+     "t": [
+      14.933,
+      15.233
+     ],
+     "stance_s": 0.333,
+     "before": {
+      "along_m_s": 1.09,
+      "vertical_m_s": -0.4
+     },
+     "after": {
+      "along_m_s": 1.26,
+      "vertical_m_s": 0.56
+     },
+     "travel_change_m_s": 0.3,
+     "travel_turn_deg": 12.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.32,
+     "landing_impulse_m_s": {
+      "along": 0.11,
+      "vertical": 0.18,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.75,
+     "share_of_bound_used": 0.4,
+     "peak_push": {
+      "N": 535.0,
+      "lunar_bw": 6.0,
+      "earth_bw": 0.99
+     },
+     "most_friction_used": 0.49
+    },
+    {
+     "unit": "orbit_run into grand_jete",
+     "t": [
+      15.9,
+      16.283
+     ],
+     "stance_s": 0.417,
+     "before": {
+      "along_m_s": 1.32,
+      "vertical_m_s": -0.58
+     },
+     "after": {
+      "along_m_s": 1.28,
+      "vertical_m_s": 1.55
+     },
+     "travel_change_m_s": 0.06,
+     "travel_turn_deg": 2.0,
+     "floor_vertical_impulse_per_kg_m_s": 2.71,
+     "landing_impulse_m_s": {
+      "along": 0.13,
+      "vertical": 0.1,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 1.4,
+     "share_of_bound_used": 0.04,
+     "peak_push": {
+      "N": 900.0,
+      "lunar_bw": 10.1,
+      "earth_bw": 1.67
+     },
+     "most_friction_used": 0.5
+    },
+    {
+     "unit": "carve_landing into orbit_run",
+     "t": [
+      18.733,
+      19.117
+     ],
+     "stance_s": 0.417,
+     "before": {
+      "along_m_s": 1.76,
+      "vertical_m_s": -1.86
+     },
+     "after": {
+      "along_m_s": 1.34,
+      "vertical_m_s": 0.4
+     },
+     "travel_change_m_s": 0.7,
+     "travel_turn_deg": -21.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.33,
+     "landing_impulse_m_s": {
+      "along": 0.46,
+      "vertical": 1.6,
+      "along_over_vertical": 0.29
+     },
+     "friction_bound_on_travel_change_m_s": 1.46,
+     "share_of_bound_used": 0.48,
+     "peak_push": {
+      "N": 408.0,
+      "lunar_bw": 4.6,
+      "earth_bw": 0.76
+     },
+     "most_friction_used": 0.5
+    },
+    {
+     "unit": "orbit_run into orbit_run",
+     "t": [
+      19.75,
+      20.067
+     ],
+     "stance_s": 0.35,
+     "before": {
+      "along_m_s": 1.34,
+      "vertical_m_s": -0.58
+     },
+     "after": {
+      "along_m_s": 0.84,
+      "vertical_m_s": 0.54
+     },
+     "travel_change_m_s": 0.51,
+     "travel_turn_deg": 6.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.57,
+     "landing_impulse_m_s": {
+      "along": 0.05,
+      "vertical": 0.12,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.85,
+     "share_of_bound_used": 0.61,
+     "peak_push": {
+      "N": 340.0,
+      "lunar_bw": 3.8,
+      "earth_bw": 0.63
+     },
+     "most_friction_used": 0.36
+    },
+    {
+     "unit": "orbit_run into orbit_run",
+     "t": [
+      20.733,
+      21.033
+     ],
+     "stance_s": 0.333,
+     "before": {
+      "along_m_s": 0.85,
+      "vertical_m_s": -0.49
+     },
+     "after": {
+      "along_m_s": 0.31,
+      "vertical_m_s": 0.64
+     },
+     "travel_change_m_s": 0.55,
+     "travel_turn_deg": 12.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.52,
+     "landing_impulse_m_s": {
+      "along": 0.12,
+      "vertical": 0.14,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.83,
+     "share_of_bound_used": 0.66,
+     "peak_push": {
+      "N": 329.0,
+      "lunar_bw": 3.7,
+      "earth_bw": 0.61
+     },
+     "most_friction_used": 0.48
+    }
+   ],
+   "landings": [
+    {
+     "unit": "orbit_run landing",
+     "t": [
+      13.967,
+      14.3
+     ],
+     "stance_s": 0.367,
+     "before": {
+      "along_m_s": 0.9,
+      "vertical_m_s": -0.37
+     },
+     "after": {
+      "along_m_s": 1.09,
+      "vertical_m_s": 0.56
+     },
+     "travel_change_m_s": 0.31,
+     "travel_turn_deg": 14.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.65,
+     "landing_impulse_m_s": {
+      "along": 0.07,
+      "vertical": -0.13,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.82,
+     "share_of_bound_used": 0.37,
+     "peak_push": {
+      "N": 627.0,
+      "lunar_bw": 7.0,
+      "earth_bw": 1.16
+     },
+     "most_friction_used": 0.5,
+     "stroke": {
+      "com_at_touchdown_m": 0.925,
+      "lowest_m": 0.835,
+      "sinks_m": 0.09,
+      "lowest_after_s": 0.233
+     }
+    },
+    {
+     "unit": "orbit_run landing",
+     "t": [
+      14.933,
+      15.233
+     ],
+     "stance_s": 0.333,
+     "before": {
+      "along_m_s": 1.09,
+      "vertical_m_s": -0.4
+     },
+     "after": {
+      "along_m_s": 1.26,
+      "vertical_m_s": 0.56
+     },
+     "travel_change_m_s": 0.3,
+     "travel_turn_deg": 12.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.32,
+     "landing_impulse_m_s": {
+      "along": 0.11,
+      "vertical": 0.18,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.75,
+     "share_of_bound_used": 0.4,
+     "peak_push": {
+      "N": 535.0,
+      "lunar_bw": 6.0,
+      "earth_bw": 0.99
+     },
+     "most_friction_used": 0.49,
+     "stroke": {
+      "com_at_touchdown_m": 0.919,
+      "lowest_m": 0.859,
+      "sinks_m": 0.06,
+      "lowest_after_s": 0.217
+     }
+    },
+    {
+     "unit": "orbit_run landing",
+     "t": [
+      15.9,
+      16.283
+     ],
+     "stance_s": 0.417,
+     "before": {
+      "along_m_s": 1.32,
+      "vertical_m_s": -0.58
+     },
+     "after": {
+      "along_m_s": 1.28,
+      "vertical_m_s": 1.55
+     },
+     "travel_change_m_s": 0.06,
+     "travel_turn_deg": 2.0,
+     "floor_vertical_impulse_per_kg_m_s": 2.71,
+     "landing_impulse_m_s": {
+      "along": 0.13,
+      "vertical": 0.1,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 1.4,
+     "share_of_bound_used": 0.04,
+     "peak_push": {
+      "N": 900.0,
+      "lunar_bw": 10.1,
+      "earth_bw": 1.67
+     },
+     "most_friction_used": 0.5,
+     "stroke": {
+      "com_at_touchdown_m": 0.842,
+      "lowest_m": 0.752,
+      "sinks_m": 0.089,
+      "lowest_after_s": 0.267
+     }
+    },
+    {
+     "unit": "grand_jete landing",
+     "t": [
+      18.733,
+      19.117
+     ],
+     "stance_s": 0.417,
+     "before": {
+      "along_m_s": 1.76,
+      "vertical_m_s": -1.86
+     },
+     "after": {
+      "along_m_s": 1.34,
+      "vertical_m_s": 0.4
+     },
+     "travel_change_m_s": 0.7,
+     "travel_turn_deg": -21.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.33,
+     "landing_impulse_m_s": {
+      "along": 0.46,
+      "vertical": 1.6,
+      "along_over_vertical": 0.29
+     },
+     "friction_bound_on_travel_change_m_s": 1.46,
+     "share_of_bound_used": 0.48,
+     "peak_push": {
+      "N": 408.0,
+      "lunar_bw": 4.6,
+      "earth_bw": 0.76
+     },
+     "most_friction_used": 0.5,
+     "stroke": {
+      "com_at_touchdown_m": 0.956,
+      "lowest_m": 0.859,
+      "sinks_m": 0.097,
+      "lowest_after_s": 0.3
+     }
+    },
+    {
+     "unit": "orbit_run landing",
+     "t": [
+      19.75,
+      20.067
+     ],
+     "stance_s": 0.35,
+     "before": {
+      "along_m_s": 1.34,
+      "vertical_m_s": -0.58
+     },
+     "after": {
+      "along_m_s": 0.84,
+      "vertical_m_s": 0.54
+     },
+     "travel_change_m_s": 0.51,
+     "travel_turn_deg": 6.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.57,
+     "landing_impulse_m_s": {
+      "along": 0.05,
+      "vertical": 0.12,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.85,
+     "share_of_bound_used": 0.61,
+     "peak_push": {
+      "N": 340.0,
+      "lunar_bw": 3.8,
+      "earth_bw": 0.63
+     },
+     "most_friction_used": 0.36,
+     "stroke": {
+      "com_at_touchdown_m": 0.818,
+      "lowest_m": 0.785,
+      "sinks_m": 0.033,
+      "lowest_after_s": 0.15
+     }
+    },
+    {
+     "unit": "orbit_run landing",
+     "t": [
+      20.733,
+      21.033
+     ],
+     "stance_s": 0.333,
+     "before": {
+      "along_m_s": 0.85,
+      "vertical_m_s": -0.49
+     },
+     "after": {
+      "along_m_s": 0.31,
+      "vertical_m_s": 0.64
+     },
+     "travel_change_m_s": 0.55,
+     "travel_turn_deg": 12.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.52,
+     "landing_impulse_m_s": {
+      "along": 0.12,
+      "vertical": 0.14,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.83,
+     "share_of_bound_used": 0.66,
+     "peak_push": {
+      "N": 329.0,
+      "lunar_bw": 3.7,
+      "earth_bw": 0.61
+     },
+     "most_friction_used": 0.48,
+     "stroke": {
+      "com_at_touchdown_m": 0.851,
+      "lowest_m": 0.823,
+      "sinks_m": 0.028,
+      "lowest_after_s": 0.133
+     }
+    },
+    {
+     "unit": "orbit_run landing",
+     "t": [
+      21.683,
+      23.667
+     ],
+     "stance_s": 2.017,
+     "before": {
+      "along_m_s": 0.37,
+      "vertical_m_s": -0.43
+     },
+     "after": {
+      "along_m_s": 0.08,
+      "vertical_m_s": -0.02
+     },
+     "travel_change_m_s": 0.36,
+     "travel_turn_deg": null,
+     "floor_vertical_impulse_per_kg_m_s": 3.37,
+     "landing_impulse_m_s": {
+      "along": 0.05,
+      "vertical": 0.32,
+      "along_over_vertical": 0.16
+     },
+     "friction_bound_on_travel_change_m_s": 1.84,
+     "share_of_bound_used": 0.2,
+     "peak_push": {
+      "N": 258.0,
+      "lunar_bw": 2.9,
+      "earth_bw": 0.48
+     },
+     "most_friction_used": 0.41,
+     "stroke": {
+      "com_at_touchdown_m": 0.918,
+      "lowest_m": 0.903,
+      "sinks_m": 0.015,
+      "lowest_after_s": 0.467
+     }
+    },
+    {
+     "unit": "hanging_salto landing",
+     "t": [
+      35.383,
+      36.717
+     ],
+     "stance_s": 1.35,
+     "before": {
+      "along_m_s": 0.06,
+      "vertical_m_s": -2.27
+     },
+     "after": {
+      "along_m_s": 0.05,
+      "vertical_m_s": -0.01
+     },
+     "travel_change_m_s": 0.1,
+     "travel_turn_deg": null,
+     "floor_vertical_impulse_per_kg_m_s": 2.21,
+     "landing_impulse_m_s": {
+      "along": 0.11,
+      "vertical": 2.24,
+      "along_over_vertical": 0.05
+     },
+     "friction_bound_on_travel_change_m_s": 2.23,
+     "share_of_bound_used": 0.05,
+     "peak_push": {
+      "N": 185.0,
+      "lunar_bw": 2.1,
+      "earth_bw": 0.34
+     },
+     "most_friction_used": 0.36,
+     "stroke": {
+      "com_at_touchdown_m": 0.904,
+      "lowest_m": 0.849,
+      "sinks_m": 0.056,
+      "lowest_after_s": 1.333
+     }
+    }
+   ],
+   "salto_standing_take_off": {
+    "unit": "hanging_salto, standing take-off",
+    "stance_from_s": 31.45,
+    "descent_starts_s": 31.517,
+    "dip_m": 0.223,
+    "dip_lowest_at_s": 32.4,
+    "descent_s": 0.883,
+    "dip_to_lift_off_s": 0.183,
+    "onset_to_lift_off_s": 1.067,
+    "lift_off_vertical_m_s": 2.11,
+    "peak_push": {
+     "N": 1365.0,
+     "lunar_bw": 15.3
+    }
+   },
+   "salto_landing": {
+    "unit": "hanging_salto, landing (first 0.4 s)",
+    "t": [
+     35.383,
+     35.767
+    ],
+    "stance_s": 0.417,
+    "before": {
+     "along_m_s": 0.06,
+     "vertical_m_s": -2.27
+    },
+    "after": {
+     "along_m_s": 0.19,
+     "vertical_m_s": -0.01
+    },
+    "travel_change_m_s": 0.25,
+    "travel_turn_deg": null,
+    "floor_vertical_impulse_per_kg_m_s": 0.74,
+    "landing_impulse_m_s": {
+     "along": 0.15,
+     "vertical": 2.2,
+     "along_over_vertical": 0.07
+    },
+    "friction_bound_on_travel_change_m_s": 1.47,
+    "share_of_bound_used": 0.17,
+    "peak_push": {
+     "N": 185.0,
+     "lunar_bw": 2.1,
+     "earth_bw": 0.34
+    },
+    "most_friction_used": 0.2
+   },
+   "finish": {
+    "com_speed_m_s": 0.046,
+    "com_over_feet_m": 0.091,
+    "floor_push_N": 80.1
+   }
   },
-  {
-   "t": [
-    14.317,
-    14.917
+  "salto_landing_cost_euler_2026_11_07": {
+   "motion": {
+    "file": "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/hanging_salto_stroke.npz",
+    "phrase": "Hanging Salto",
+    "span_s": [
+     0.0,
+     6.975
+    ],
+    "iterations": 250,
+    "dynamic_gap": 0.0
+   },
+   "flights": [
+    {
+     "t": [
+      1.133,
+      3.95
+     ],
+     "vertical_acceleration_m_s2": -0.636,
+     "share_of_gravity": 0.391
+    }
    ],
-   "vertical_acceleration_m_s2": -1.608,
-   "share_of_gravity": 0.99
+   "stances_between_flights": [],
+   "landings": [
+    {
+     "unit": "hanging_salto landing",
+     "t": [
+      3.967,
+      5.95
+     ],
+     "stance_s": 2.017,
+     "before": {
+      "along_m_s": 0.38,
+      "vertical_m_s": 0.05
+     },
+     "after": {
+      "along_m_s": 0.03,
+      "vertical_m_s": 0.0
+     },
+     "travel_change_m_s": 0.42,
+     "travel_turn_deg": null,
+     "floor_vertical_impulse_per_kg_m_s": 3.15,
+     "landing_impulse_m_s": {
+      "along": 0.03,
+      "vertical": 0.08,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 1.61,
+     "share_of_bound_used": 0.26,
+     "peak_push": {
+      "N": 105.0,
+      "lunar_bw": 1.2,
+      "earth_bw": 0.19
+     },
+     "most_friction_used": 0.34,
+     "stroke": {
+      "com_at_touchdown_m": 0.871,
+      "lowest_m": 0.871,
+      "sinks_m": 0.0,
+      "lowest_after_s": 0.0
+     }
+    }
+   ],
+   "salto_standing_take_off": {
+    "unit": "hanging_salto, standing take-off",
+    "stance_from_s": 0.0,
+    "descent_starts_s": 0.15,
+    "dip_m": 0.201,
+    "dip_lowest_at_s": 0.95,
+    "descent_s": 0.8,
+    "dip_to_lift_off_s": 0.183,
+    "onset_to_lift_off_s": 0.983,
+    "lift_off_vertical_m_s": 1.53,
+    "peak_push": {
+     "N": 941.0,
+     "lunar_bw": 10.5
+    }
+   },
+   "salto_landing": {
+    "unit": "hanging_salto, landing (first 0.4 s)",
+    "t": [
+     3.967,
+     4.35
+    ],
+    "stance_s": 0.417,
+    "before": {
+     "along_m_s": 0.38,
+     "vertical_m_s": 0.05
+    },
+    "after": {
+     "along_m_s": 0.23,
+     "vertical_m_s": 0.0
+    },
+    "travel_change_m_s": 0.16,
+    "travel_turn_deg": -5.0,
+    "floor_vertical_impulse_per_kg_m_s": 0.55,
+    "landing_impulse_m_s": {
+     "along": 0.03,
+     "vertical": 0.08,
+     "along_over_vertical": null
+    },
+    "friction_bound_on_travel_change_m_s": 0.31,
+    "share_of_bound_used": 0.5,
+    "peak_push": {
+     "N": 105.0,
+     "lunar_bw": 1.2,
+     "earth_bw": 0.19
+    },
+    "most_friction_used": 0.34
+   },
+   "finish": {
+    "com_speed_m_s": 0.007,
+    "com_over_feet_m": 0.054,
+    "floor_push_N": 89.9
+   }
   },
-  {
-   "t": [
-    15.25,
-    15.883
+  "leap_landing_cost_euler_2026_11_07": {
+   "motion": {
+    "file": "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/leap_stroke.npz",
+    "phrase": "Under the Canopy, with the hanging salto",
+    "span_s": [
+     12.5,
+     19.75
+    ],
+    "iterations": 89,
+    "dynamic_gap": 0.0
+   },
+   "flights": [
+    {
+     "t": [
+      0.833,
+      1.433
+     ],
+     "vertical_acceleration_m_s2": -1.594,
+     "share_of_gravity": 0.982
+    },
+    {
+     "t": [
+      1.8,
+      2.417
+     ],
+     "vertical_acceleration_m_s2": -1.571,
+     "share_of_gravity": 0.967
+    },
+    {
+     "t": [
+      2.75,
+      3.383
+     ],
+     "vertical_acceleration_m_s2": -1.646,
+     "share_of_gravity": 1.013
+    },
+    {
+     "t": [
+      3.8,
+      6.217
+     ],
+     "vertical_acceleration_m_s2": -0.808,
+     "share_of_gravity": 0.497
+    },
+    {
+     "t": [
+      6.633,
+      7.25
+     ],
+     "vertical_acceleration_m_s2": -1.648,
+     "share_of_gravity": 1.015
+    }
    ],
-   "vertical_acceleration_m_s2": -1.69,
-   "share_of_gravity": 1.041
+   "stances_between_flights": [
+    {
+     "unit": "orbit_run into orbit_run",
+     "t": [
+      1.45,
+      1.783
+     ],
+     "stance_s": 0.367,
+     "before": {
+      "along_m_s": 0.67,
+      "vertical_m_s": -0.4
+     },
+     "after": {
+      "along_m_s": 1.27,
+      "vertical_m_s": 0.3
+     },
+     "travel_change_m_s": 0.61,
+     "travel_turn_deg": 5.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.15,
+     "landing_impulse_m_s": {
+      "along": 0.59,
+      "vertical": 0.15,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.65,
+     "share_of_bound_used": 0.93,
+     "peak_push": {
+      "N": 635.0,
+      "lunar_bw": 7.1,
+      "earth_bw": 1.18
+     },
+     "most_friction_used": 0.5
+    },
+    {
+     "unit": "orbit_run into orbit_run",
+     "t": [
+      2.433,
+      2.733
+     ],
+     "stance_s": 0.333,
+     "before": {
+      "along_m_s": 1.29,
+      "vertical_m_s": -0.66
+     },
+     "after": {
+      "along_m_s": 1.39,
+      "vertical_m_s": 0.48
+     },
+     "travel_change_m_s": 0.44,
+     "travel_turn_deg": 18.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.64,
+     "landing_impulse_m_s": {
+      "along": 0.07,
+      "vertical": 0.04,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.84,
+     "share_of_bound_used": 0.52,
+     "peak_push": {
+      "N": 839.0,
+      "lunar_bw": 9.4,
+      "earth_bw": 1.56
+     },
+     "most_friction_used": 0.5
+    },
+    {
+     "unit": "orbit_run into grand_jete",
+     "t": [
+      3.4,
+      3.783
+     ],
+     "stance_s": 0.417,
+     "before": {
+      "along_m_s": 1.39,
+      "vertical_m_s": -0.51
+     },
+     "after": {
+      "along_m_s": 1.65,
+      "vertical_m_s": 1.2
+     },
+     "travel_change_m_s": 0.26,
+     "travel_turn_deg": 3.0,
+     "floor_vertical_impulse_per_kg_m_s": 2.22,
+     "landing_impulse_m_s": {
+      "along": 0.07,
+      "vertical": 0.17,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 1.19,
+     "share_of_bound_used": 0.22,
+     "peak_push": {
+      "N": 900.0,
+      "lunar_bw": 10.1,
+      "earth_bw": 1.67
+     },
+     "most_friction_used": 0.5
+    },
+    {
+     "unit": "carve_landing into orbit_run",
+     "t": [
+      6.233,
+      6.617
+     ],
+     "stance_s": 0.417,
+     "before": {
+      "along_m_s": 1.07,
+      "vertical_m_s": -0.75
+     },
+     "after": {
+      "along_m_s": 1.01,
+      "vertical_m_s": 0.02
+     },
+     "travel_change_m_s": 0.19,
+     "travel_turn_deg": -10.0,
+     "floor_vertical_impulse_per_kg_m_s": 0.58,
+     "landing_impulse_m_s": {
+      "along": 0.19,
+      "vertical": 0.87,
+      "along_over_vertical": 0.22
+     },
+     "friction_bound_on_travel_change_m_s": 0.73,
+     "share_of_bound_used": 0.26,
+     "peak_push": {
+      "N": 228.0,
+      "lunar_bw": 2.5,
+      "earth_bw": 0.42
+     },
+     "most_friction_used": 0.5
+    }
+   ],
+   "landings": [
+    {
+     "unit": "orbit_run landing",
+     "t": [
+      1.45,
+      1.783
+     ],
+     "stance_s": 0.367,
+     "before": {
+      "along_m_s": 0.67,
+      "vertical_m_s": -0.4
+     },
+     "after": {
+      "along_m_s": 1.27,
+      "vertical_m_s": 0.3
+     },
+     "travel_change_m_s": 0.61,
+     "travel_turn_deg": 5.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.15,
+     "landing_impulse_m_s": {
+      "along": 0.59,
+      "vertical": 0.15,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.65,
+     "share_of_bound_used": 0.93,
+     "peak_push": {
+      "N": 635.0,
+      "lunar_bw": 7.1,
+      "earth_bw": 1.18
+     },
+     "most_friction_used": 0.5,
+     "stroke": {
+      "com_at_touchdown_m": 0.958,
+      "lowest_m": 0.876,
+      "sinks_m": 0.082,
+      "lowest_after_s": 0.2
+     }
+    },
+    {
+     "unit": "orbit_run landing",
+     "t": [
+      2.433,
+      2.733
+     ],
+     "stance_s": 0.333,
+     "before": {
+      "along_m_s": 1.29,
+      "vertical_m_s": -0.66
+     },
+     "after": {
+      "along_m_s": 1.39,
+      "vertical_m_s": 0.48
+     },
+     "travel_change_m_s": 0.44,
+     "travel_turn_deg": 18.0,
+     "floor_vertical_impulse_per_kg_m_s": 1.64,
+     "landing_impulse_m_s": {
+      "along": 0.07,
+      "vertical": 0.04,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 0.84,
+     "share_of_bound_used": 0.52,
+     "peak_push": {
+      "N": 839.0,
+      "lunar_bw": 9.4,
+      "earth_bw": 1.56
+     },
+     "most_friction_used": 0.5,
+     "stroke": {
+      "com_at_touchdown_m": 0.816,
+      "lowest_m": 0.741,
+      "sinks_m": 0.075,
+      "lowest_after_s": 0.167
+     }
+    },
+    {
+     "unit": "orbit_run landing",
+     "t": [
+      3.4,
+      3.783
+     ],
+     "stance_s": 0.417,
+     "before": {
+      "along_m_s": 1.39,
+      "vertical_m_s": -0.51
+     },
+     "after": {
+      "along_m_s": 1.65,
+      "vertical_m_s": 1.2
+     },
+     "travel_change_m_s": 0.26,
+     "travel_turn_deg": 3.0,
+     "floor_vertical_impulse_per_kg_m_s": 2.22,
+     "landing_impulse_m_s": {
+      "along": 0.07,
+      "vertical": 0.17,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 1.19,
+     "share_of_bound_used": 0.22,
+     "peak_push": {
+      "N": 900.0,
+      "lunar_bw": 10.1,
+      "earth_bw": 1.67
+     },
+     "most_friction_used": 0.5,
+     "stroke": {
+      "com_at_touchdown_m": 0.792,
+      "lowest_m": 0.744,
+      "sinks_m": 0.048,
+      "lowest_after_s": 0.167
+     }
+    },
+    {
+     "unit": "grand_jete landing",
+     "t": [
+      6.233,
+      6.617
+     ],
+     "stance_s": 0.417,
+     "before": {
+      "along_m_s": 1.07,
+      "vertical_m_s": -0.75
+     },
+     "after": {
+      "along_m_s": 1.01,
+      "vertical_m_s": 0.02
+     },
+     "travel_change_m_s": 0.19,
+     "travel_turn_deg": -10.0,
+     "floor_vertical_impulse_per_kg_m_s": 0.58,
+     "landing_impulse_m_s": {
+      "along": 0.19,
+      "vertical": 0.87,
+      "along_over_vertical": 0.22
+     },
+     "friction_bound_on_travel_change_m_s": 0.73,
+     "share_of_bound_used": 0.26,
+     "peak_push": {
+      "N": 228.0,
+      "lunar_bw": 2.5,
+      "earth_bw": 0.42
+     },
+     "most_friction_used": 0.5,
+     "stroke": {
+      "com_at_touchdown_m": 0.909,
+      "lowest_m": 0.909,
+      "sinks_m": 0.0,
+      "lowest_after_s": 0.017
+     }
+    }
+   ],
+   "salto_standing_take_off": null,
+   "salto_landing": null,
+   "finish": {
+    "com_speed_m_s": 1.412
+   }
   },
-  {
-   "t": [
-    16.3,
-    18.717
+  "salto_flat_landing_rk4_2026_11_07": {
+   "motion": {
+    "file": "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_flatfoot_staged_rk4_flight_w100_stage2.npz",
+    "phrase": "Hanging Salto",
+    "span_s": [
+     0.0,
+     6.975
+    ],
+    "iterations": 90,
+    "dynamic_gap": 0.0
+   },
+   "flights": [
+    {
+     "t": [
+      1.133,
+      3.95
+     ],
+     "vertical_acceleration_m_s2": -1.623,
+     "share_of_gravity": 0.999
+    }
    ],
-   "vertical_acceleration_m_s2": -1.492,
-   "share_of_gravity": 0.919
+   "stances_between_flights": [],
+   "landings": [
+    {
+     "unit": "hanging_salto landing",
+     "t": [
+      3.967,
+      5.95
+     ],
+     "stance_s": 2.017,
+     "before": {
+      "along_m_s": 0.01,
+      "vertical_m_s": -2.24
+     },
+     "after": {
+      "along_m_s": 0.01,
+      "vertical_m_s": 0.0
+     },
+     "travel_change_m_s": 0.02,
+     "travel_turn_deg": null,
+     "floor_vertical_impulse_per_kg_m_s": 4.34,
+     "landing_impulse_m_s": {
+      "along": 0.06,
+      "vertical": 1.17,
+      "along_over_vertical": 0.05
+     },
+     "friction_bound_on_travel_change_m_s": 2.76,
+     "share_of_bound_used": 0.01,
+     "peak_push": {
+      "N": 891.0,
+      "lunar_bw": 10.0,
+      "earth_bw": 1.65
+     },
+     "most_friction_used": 0.48,
+     "stroke": {
+      "com_at_touchdown_m": 0.909,
+      "lowest_m": 0.863,
+      "sinks_m": 0.046,
+      "lowest_after_s": 0.133
+     }
+    }
+   ],
+   "salto_standing_take_off": {
+    "unit": "hanging_salto, standing take-off",
+    "stance_from_s": 0.0,
+    "descent_starts_s": 0.1,
+    "dip_m": 0.297,
+    "dip_lowest_at_s": 0.967,
+    "descent_s": 0.867,
+    "dip_to_lift_off_s": 0.167,
+    "onset_to_lift_off_s": 1.033,
+    "lift_off_vertical_m_s": 2.34,
+    "peak_push": {
+     "N": 1093.0,
+     "lunar_bw": 12.2
+    }
+   },
+   "salto_landing": {
+    "unit": "hanging_salto, landing (first 0.4 s)",
+    "t": [
+     3.967,
+     4.35
+    ],
+    "stance_s": 0.417,
+    "before": {
+     "along_m_s": 0.01,
+     "vertical_m_s": -2.24
+    },
+    "after": {
+     "along_m_s": 0.08,
+     "vertical_m_s": 0.03
+    },
+    "travel_change_m_s": 0.08,
+    "travel_turn_deg": null,
+    "floor_vertical_impulse_per_kg_m_s": 1.77,
+    "landing_impulse_m_s": {
+     "along": 0.05,
+     "vertical": 1.17,
+     "along_over_vertical": 0.05
+    },
+    "friction_bound_on_travel_change_m_s": 1.47,
+    "share_of_bound_used": 0.05,
+    "peak_push": {
+     "N": 891.0,
+     "lunar_bw": 10.0,
+     "earth_bw": 1.65
+    },
+    "most_friction_used": 0.48
+   },
+   "finish": {
+    "com_speed_m_s": 0.006,
+    "com_over_feet_m": 0.057,
+    "floor_push_N": 98.4
+   }
   },
-  {
-   "t": [
-    19.133,
-    19.733
+  "salto_ball_landing_rk4_2026_11_07": {
+   "motion": {
+    "file": "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_staged_rk4_flight_w100_stage2.npz",
+    "phrase": "Hanging Salto",
+    "span_s": [
+     0.0,
+     7.125
+    ],
+    "iterations": 14,
+    "dynamic_gap": 0.0
+   },
+   "flights": [
+    {
+     "t": [
+      1.133,
+      3.95
+     ],
+     "vertical_acceleration_m_s2": -1.623,
+     "share_of_gravity": 0.999
+    }
    ],
-   "vertical_acceleration_m_s2": -1.637,
-   "share_of_gravity": 1.008
-  },
-  {
-   "t": [
-    20.083,
-    20.717
+   "stances_between_flights": [],
+   "landings": [
+    {
+     "unit": "hanging_salto landing",
+     "t": [
+      3.967,
+      5.95
+     ],
+     "stance_s": 2.017,
+     "before": {
+      "along_m_s": 0.04,
+      "vertical_m_s": -2.25
+     },
+     "after": {
+      "along_m_s": 0.01,
+      "vertical_m_s": 0.0
+     },
+     "travel_change_m_s": 0.05,
+     "travel_turn_deg": null,
+     "floor_vertical_impulse_per_kg_m_s": 5.13,
+     "landing_impulse_m_s": {
+      "along": 0.2,
+      "vertical": 0.4,
+      "along_over_vertical": 0.5
+     },
+     "friction_bound_on_travel_change_m_s": 2.76,
+     "share_of_bound_used": 0.02,
+     "peak_push": {
+      "N": 1537.0,
+      "lunar_bw": 17.2,
+      "earth_bw": 2.85
+     },
+     "most_friction_used": 0.39,
+     "stroke": {
+      "com_at_touchdown_m": 0.918,
+      "lowest_m": 0.864,
+      "sinks_m": 0.053,
+      "lowest_after_s": 0.083
+     }
+    }
    ],
-   "vertical_acceleration_m_s2": -1.614,
-   "share_of_gravity": 0.993
-  },
-  {
-   "t": [
-    21.05,
-    21.667
-   ],
-   "vertical_acceleration_m_s2": -1.673,
-   "share_of_gravity": 1.03
-  },
-  {
-   "t": [
-    32.583,
-    35.367
-   ],
-   "vertical_acceleration_m_s2": -1.613,
-   "share_of_gravity": 0.993
+   "salto_standing_take_off": {
+    "unit": "hanging_salto, standing take-off",
+    "stance_from_s": 0.0,
+    "descent_starts_s": 0.1,
+    "dip_m": 0.273,
+    "dip_lowest_at_s": 0.917,
+    "descent_s": 0.817,
+    "dip_to_lift_off_s": 0.217,
+    "onset_to_lift_off_s": 1.033,
+    "lift_off_vertical_m_s": 2.33,
+    "peak_push": {
+     "N": 938.0,
+     "lunar_bw": 10.5
+    }
+   },
+   "salto_landing": {
+    "unit": "hanging_salto, landing (first 0.4 s)",
+    "t": [
+     3.967,
+     4.35
+    ],
+    "stance_s": 0.417,
+    "before": {
+     "along_m_s": 0.04,
+     "vertical_m_s": -2.25
+    },
+    "after": {
+     "along_m_s": 0.18,
+     "vertical_m_s": -0.06
+    },
+    "travel_change_m_s": 0.2,
+    "travel_turn_deg": null,
+    "floor_vertical_impulse_per_kg_m_s": 2.48,
+    "landing_impulse_m_s": {
+     "along": 0.19,
+     "vertical": 0.39,
+     "along_over_vertical": 0.49
+    },
+    "friction_bound_on_travel_change_m_s": 1.43,
+    "share_of_bound_used": 0.14,
+    "peak_push": {
+     "N": 1537.0,
+     "lunar_bw": 17.2,
+     "earth_bw": 2.85
+    },
+    "most_friction_used": 0.39
+   },
+   "finish": {
+    "com_speed_m_s": 0.015,
+    "com_over_feet_m": 0.059,
+    "floor_push_N": 90.9
+   }
   }
- ],
- "stances_between_flights": [
-  {
-   "unit": "orbit_run into orbit_run",
-   "t": [
-    13.967,
-    14.3
-   ],
-   "stance_s": 0.367,
-   "before": {
-    "along_m_s": 0.9,
-    "vertical_m_s": -0.37
-   },
-   "after": {
-    "along_m_s": 1.09,
-    "vertical_m_s": 0.56
-   },
-   "travel_change_m_s": 0.31,
-   "travel_turn_deg": 14.0,
-   "floor_vertical_impulse_per_kg_m_s": 1.65,
-   "landing_impulse_m_s": {
-    "along": 0.07,
-    "vertical": -0.13,
-    "along_over_vertical": null
-   },
-   "friction_bound_on_travel_change_m_s": 0.82,
-   "share_of_bound_used": 0.37,
-   "peak_push": {
-    "N": 627.0,
-    "lunar_bw": 7.0,
-    "earth_bw": 1.16
-   },
-   "most_friction_used": 0.5
-  },
-  {
-   "unit": "orbit_run into orbit_run",
-   "t": [
-    14.933,
-    15.233
-   ],
-   "stance_s": 0.333,
-   "before": {
-    "along_m_s": 1.09,
-    "vertical_m_s": -0.4
-   },
-   "after": {
-    "along_m_s": 1.26,
-    "vertical_m_s": 0.56
-   },
-   "travel_change_m_s": 0.3,
-   "travel_turn_deg": 12.0,
-   "floor_vertical_impulse_per_kg_m_s": 1.32,
-   "landing_impulse_m_s": {
-    "along": 0.11,
-    "vertical": 0.18,
-    "along_over_vertical": null
-   },
-   "friction_bound_on_travel_change_m_s": 0.75,
-   "share_of_bound_used": 0.4,
-   "peak_push": {
-    "N": 535.0,
-    "lunar_bw": 6.0,
-    "earth_bw": 0.99
-   },
-   "most_friction_used": 0.49
-  },
-  {
-   "unit": "orbit_run into grand_jete",
-   "t": [
-    15.9,
-    16.283
-   ],
-   "stance_s": 0.417,
-   "before": {
-    "along_m_s": 1.32,
-    "vertical_m_s": -0.58
-   },
-   "after": {
-    "along_m_s": 1.28,
-    "vertical_m_s": 1.55
-   },
-   "travel_change_m_s": 0.06,
-   "travel_turn_deg": 2.0,
-   "floor_vertical_impulse_per_kg_m_s": 2.71,
-   "landing_impulse_m_s": {
-    "along": 0.13,
-    "vertical": 0.1,
-    "along_over_vertical": null
-   },
-   "friction_bound_on_travel_change_m_s": 1.4,
-   "share_of_bound_used": 0.04,
-   "peak_push": {
-    "N": 900.0,
-    "lunar_bw": 10.1,
-    "earth_bw": 1.67
-   },
-   "most_friction_used": 0.5
-  },
-  {
-   "unit": "carve_landing into orbit_run",
-   "t": [
-    18.733,
-    19.117
-   ],
-   "stance_s": 0.417,
-   "before": {
-    "along_m_s": 1.76,
-    "vertical_m_s": -1.86
-   },
-   "after": {
-    "along_m_s": 1.34,
-    "vertical_m_s": 0.4
-   },
-   "travel_change_m_s": 0.7,
-   "travel_turn_deg": -21.0,
-   "floor_vertical_impulse_per_kg_m_s": 1.33,
-   "landing_impulse_m_s": {
-    "along": 0.46,
-    "vertical": 1.6,
-    "along_over_vertical": 0.29
-   },
-   "friction_bound_on_travel_change_m_s": 1.46,
-   "share_of_bound_used": 0.48,
-   "peak_push": {
-    "N": 408.0,
-    "lunar_bw": 4.6,
-    "earth_bw": 0.76
-   },
-   "most_friction_used": 0.5
-  },
-  {
-   "unit": "orbit_run into orbit_run",
-   "t": [
-    19.75,
-    20.067
-   ],
-   "stance_s": 0.35,
-   "before": {
-    "along_m_s": 1.34,
-    "vertical_m_s": -0.58
-   },
-   "after": {
-    "along_m_s": 0.84,
-    "vertical_m_s": 0.54
-   },
-   "travel_change_m_s": 0.51,
-   "travel_turn_deg": 6.0,
-   "floor_vertical_impulse_per_kg_m_s": 1.57,
-   "landing_impulse_m_s": {
-    "along": 0.05,
-    "vertical": 0.12,
-    "along_over_vertical": null
-   },
-   "friction_bound_on_travel_change_m_s": 0.85,
-   "share_of_bound_used": 0.61,
-   "peak_push": {
-    "N": 340.0,
-    "lunar_bw": 3.8,
-    "earth_bw": 0.63
-   },
-   "most_friction_used": 0.36
-  },
-  {
-   "unit": "orbit_run into orbit_run",
-   "t": [
-    20.733,
-    21.033
-   ],
-   "stance_s": 0.333,
-   "before": {
-    "along_m_s": 0.85,
-    "vertical_m_s": -0.49
-   },
-   "after": {
-    "along_m_s": 0.31,
-    "vertical_m_s": 0.64
-   },
-   "travel_change_m_s": 0.55,
-   "travel_turn_deg": 12.0,
-   "floor_vertical_impulse_per_kg_m_s": 1.52,
-   "landing_impulse_m_s": {
-    "along": 0.12,
-    "vertical": 0.14,
-    "along_over_vertical": null
-   },
-   "friction_bound_on_travel_change_m_s": 0.83,
-   "share_of_bound_used": 0.66,
-   "peak_push": {
-    "N": 329.0,
-    "lunar_bw": 3.7,
-    "earth_bw": 0.61
-   },
-   "most_friction_used": 0.48
-  }
- ],
- "salto_standing_take_off": {
-  "unit": "hanging_salto, standing take-off",
-  "stance_from_s": 31.45,
-  "descent_starts_s": 31.517,
-  "dip_m": 0.223,
-  "dip_lowest_at_s": 32.4,
-  "descent_s": 0.883,
-  "dip_to_lift_off_s": 0.183,
-  "onset_to_lift_off_s": 1.067,
-  "lift_off_vertical_m_s": 2.11,
-  "peak_push": {
-   "N": 1365.0,
-   "lunar_bw": 15.3
-  }
- },
- "salto_landing": {
-  "unit": "hanging_salto, landing (first 0.4 s)",
-  "t": [
-   35.383,
-   35.767
-  ],
-  "stance_s": 0.417,
-  "before": {
-   "along_m_s": 0.06,
-   "vertical_m_s": -2.27
-  },
-  "after": {
-   "along_m_s": 0.19,
-   "vertical_m_s": -0.01
-  },
-  "travel_change_m_s": 0.25,
-  "travel_turn_deg": null,
-  "floor_vertical_impulse_per_kg_m_s": 0.74,
-  "landing_impulse_m_s": {
-   "along": 0.15,
-   "vertical": 2.2,
-   "along_over_vertical": 0.07
-  },
-  "friction_bound_on_travel_change_m_s": 1.47,
-  "share_of_bound_used": 0.17,
-  "peak_push": {
-   "N": 185.0,
-   "lunar_bw": 2.1,
-   "earth_bw": 0.34
-  },
-  "most_friction_used": 0.2
  }
 }

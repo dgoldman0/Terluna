@@ -2,18 +2,24 @@
 
     python -m humanities.sport.whole_body     # writes humanities/sport/results/whole_body.json (needs the drive)
 
-The envelope (envelope.py) sets bounds by closed forms; this record measures the one whole phrase the motion engine has
-solved with the body kept out of itself, *Under the Canopy, with the hanging salto* (6 November 2026, the motion file
-and its per-node report on the research drive). The dancer is the 55 kg body model on the dance's vinyl floor
-(friction 0.5) at lunar gravity.
+The envelope (envelope.py) sets bounds by closed forms; this record measures solved motions of the motion engine, the
+55 kg body model on the dance's vinyl floor (friction 0.5) at lunar gravity, each from its motion file and per-node
+report on the research drive:
+- the whole phrase *Under the Canopy, with the hanging salto* as solved on 6 November 2026, before landings had a
+  stroke;
+- the hanging salto as a short phrase of its own and the run, grand jete and carve landing of the longer phrase, solved
+  on 7 November with the engine's landing impulses costed on what they do to the centre of mass and held inside the
+  friction cone: first with the engine's Euler flights, then the salto with Runge-Kutta flights in two stages, landing
+  flat-footed and then on the balls of the feet, rolling down into a deep bend and rising out of it.
 
-For every stance that a flight ends and another flight starts (the run's strides, the grand jete's take-off and its
-carve landing), and for the hanging salto's standing take-off and its landing, it reads the centre of mass's velocity
-before and after, the floor's forces through the stance, and the change of velocity the forces do not account for.
-The engine stops each landing foot with an instant impulse (realise.py), which the motion file's forces leave out, so
-that unaccounted change is the landing impulse; its sideways share against its vertical share shows whether it stayed
-inside the floor's grip, which the engine does not check. Velocities come from central differences of the 60 frames a
-second the motion file carries; the flights' own free fall checks them.
+For every stance that a flight ends and another flight starts (strides, the grand jete's take-off and its carve
+landing), every landing from a flight, the hanging salto's standing take-off and each motion's last state, it reads the
+centre of mass's velocity before and after, the floor's forces through the stance, the change of velocity the forces do
+not account for, how far the centre of mass sinks after touchdown and where it ends over the feet. The engine stops each
+landing foot with an instant impulse (realise.py), which the motion file's forces leave out, so that unaccounted change
+is the landing impulse; its sideways share against its vertical share shows whether it stayed inside the floor's grip.
+Velocities come from fits to the free-flight frames on either side of a stance, or central differences of the 60 frames
+a second the motion file carries inside one; the flights' own free fall checks them.
 """
 from __future__ import annotations
 
@@ -32,9 +38,20 @@ ROOT = HERE.parents[1]
 SCHEMA = 'terluna.humanities.sport-whole-body/1'
 OUT = HERE / 'results' / 'whole_body.json'
 FILES = ('humanities/sport/whole_body.py',)
-RUN = Path('/media/projectspace/terluna-research/humanities/dance-runs/motion_apart')
-MOTION = RUN / 'canopy_and_salto.npz'
-REPORT = RUN / 'canopy_and_salto_report.json'
+DRIVE = Path('/media/projectspace/terluna-research/humanities/dance-runs')
+LANDING = DRIVE / 'landing_2026-11-07' / 'motion'
+MOTIONS = {
+    # the whole phrase before landings were costed: rigid landings
+    'phrase_2026_11_06': DRIVE / 'motion_apart' / 'canopy_and_salto',
+    # the landing impulse costed (weight 1e3) with Euler flights: the optimiser floats down on the integration error
+    'salto_landing_cost_euler_2026_11_07': LANDING / 'hanging_salto_stroke',
+    'leap_landing_cost_euler_2026_11_07': LANDING / 'leap_stroke',
+    # Runge-Kutta flights, solved in two stages (the landing cost, weight 1e2, added to a solution without it): the
+    # salto landing flat-footed with straight legs, then touching down on the balls of the feet and rolling down
+    'salto_flat_landing_rk4_2026_11_07': LANDING / 'salto_flatfoot_staged_rk4_flight_w100_stage2',
+    'salto_ball_landing_rk4_2026_11_07': LANDING / 'salto_staged_rk4_flight_w100_stage2',
+}
+MOTION = MOTIONS['phrase_2026_11_06'].with_suffix('.npz')        # the reference motion the tests need
 MASS_KG = 55.0
 FLOOR_FRICTION = 0.5
 
@@ -47,11 +64,16 @@ def r(x, n=3):
     return round(float(x), n)
 
 
-def load():
-    with np.load(MOTION, allow_pickle=False) as z:
-        m = {k: z[k] for k in ('time', 'com', 'contact_on', 'contact_force')}
+def paths(stem):
+    return stem.with_suffix('.npz'), stem.parent / (stem.name + '_report.json')
+
+
+def load(stem):
+    motion, report = paths(stem)
+    with np.load(motion, allow_pickle=False) as z:
+        m = {k: z[k] for k in ('time', 'com', 'contact_on', 'contact_force', 'seg_pos', 'segments')}
         m['meta'] = json.loads(str(z['meta']))
-    return m, json.loads(REPORT.read_text())
+    return m, json.loads(report.read_text())
 
 
 def spans(on):
@@ -144,31 +166,15 @@ def stance_record(m, v, a, b, unit, g, ends_in_flight=True):
         most_friction_used=r(ratio.max(), 2))
 
 
-def results():
-    m, rep = load()
-    g = m['meta']['gravity']
-    assert abs(g - MOON_SURFACE_GRAVITY) < 1e-9
+def salto_take_off_and_landing(m, v, rep, stances, on, g):
+    """The hanging salto's standing take-off, from its own stance in the report (in the longer phrase the whirl, the
+    pas de bourree and the glide step stand on the floor before it without a flight) from the start of the dip to
+    lift-off, and the first 0.4 s of its landing."""
     t, com = m['time'], m['com']
-    v = velocity(com, t)
-    on = m['contact_on'].any(axis=1)
-    stances = spans(on)
-    unit_at = {round(n['t'], 3): n['unit'] for n in rep['nodes']}
-
-    def unit_of(time):
-        keys = np.array(list(unit_at))
-        return unit_at[float(keys[np.argmin(np.abs(keys - time))])]
-
-    between = []
-    for k, (a, b) in enumerate(stances):
-        flight_before = a > 0 and not on[a - 1]
-        flight_after = b < len(t) and not on[b]
-        if flight_before and flight_after and t[b] - t[a - 1] <= 1.0:      # strides, take-offs and landings
-            between.append(stance_record(m, v, a, b, f'{unit_of(t[a - 1])} into {unit_of(t[b])}', g))
-    # The hanging salto's standing take-off: its own stance in the report (the whirl, the pas de bourree and the glide
-    # step stand on the floor before it without a flight), from the start of the dip to lift-off.
-    salto = rep['meta']['aerial'][0]
-    t_off, t_land = salto['t']
-    st = [n['t'] for n in rep['nodes'] if n['unit'] == 'hanging_salto' and n['phase'] == 'stance' and n['t'] < t_off]
+    t0 = rep['nodes'][0]['t']                           # the report's time of the motion file's zero
+    salto = next(a for a in rep['meta']['aerial'] if a['unit'] == 'hanging_salto')
+    t_off, t_land = (x - t0 for x in salto['t'])
+    st = [n['t'] - t0 for n in rep['nodes'] if n['unit'] == 'hanging_salto' and n['phase'] == 'stance' and n['t'] - t0 < t_off]
     a = int(np.searchsorted(t, st[0]))
     b = int(np.searchsorted(t, t_off - 1e-9))
     while b < len(t) and on[b]:
@@ -187,18 +193,82 @@ def results():
     a, b = stances[kl]
     landing = stance_record(m, v, a, min(b, a + int(round(0.4 / float(t[1] - t[0])))),
                             'hanging_salto, landing (first 0.4 s)', g, ends_in_flight=False)
+    return standing, landing
+
+
+def measure(stem):
+    m, rep = load(stem)
+    g = m['meta']['gravity']
+    assert abs(g - MOON_SURFACE_GRAVITY) < 1e-9
+    t, com = m['time'], m['com']
+    v = velocity(com, t)
+    on = m['contact_on'].any(axis=1)
+    stances = spans(on)
+    # The motion file's time starts at zero at the first node solved; the report keeps the phrase's own times.
+    t0 = rep['nodes'][0]['t']
+    unit_at = {round(n['t'] - t0, 3): n['unit'] for n in rep['nodes']}
+
+    def unit_of(time):
+        keys = np.array(list(unit_at))
+        return unit_at[float(keys[np.argmin(np.abs(keys - time))])]
+
+    between = []
+    for k, (a, b) in enumerate(stances):
+        flight_before = a > 0 and not on[a - 1]
+        flight_after = b < len(t) and not on[b]
+        if flight_before and flight_after and t[b] - t[a - 1] <= 1.0:      # strides, take-offs and landings
+            between.append(stance_record(m, v, a, b, f'{unit_of(t[a - 1])} into {unit_of(t[b])}', g))
+    standing = landing = None
+    if any(n['unit'] == 'hanging_salto' and n['phase'] == 'flight' for n in rep['nodes']):
+        standing, landing = salto_take_off_and_landing(m, v, rep, stances, on, g)
+    landings = []
+    for a, b in spans(~on):
+        if a == 0 or b >= len(t) or b - a < 12:
+            continue                                     # a flight with a landing after it
+        e = b
+        while e < len(t) and on[e] and t[e] - t[b] < 2.0:
+            e += 1
+        rec = stance_record(m, v, b, e, f'{unit_of(t[a])} landing', g, ends_in_flight=e < len(t) and not on[e])
+        low = b + int(np.argmin(com[b:e, 2]))
+        rec['stroke'] = dict(com_at_touchdown_m=r(com[b, 2]), lowest_m=r(com[low, 2]), sinks_m=r(com[b, 2] - com[low, 2]),
+                             lowest_after_s=r(t[low] - t[b]))
+        landings.append(rec)
+    return dict(motion=dict(file=str(paths(stem)[0]), phrase=rep['meta'].get('phrase'), span_s=rep['meta']['span_s'],
+                            iterations=rep['meta'].get('iterations'), dynamic_gap=rep['meta'].get('dynamic_gap')),
+                flights=flight_checks(m, v), stances_between_flights=between, landings=landings,
+                salto_standing_take_off=standing, salto_landing=landing, finish=finish(m, v))
+
+
+def finish(m, v):
+    """Where the body ends at the last frame: how far its centre of mass stands, in the horizontal, from the midpoint
+    of the two ankles (the feet's segment frames; the motion file carries no contact positions), how hard the floor
+    still pushes and how fast the body still moves."""
+    F = m['contact_force'][-1]
+    names = [str(n) for n in m['segments']]
+    w = F[:, 2]
+    out = dict(com_speed_m_s=r(np.linalg.norm(v[-1]), 3))
+    if w.sum() > 1.0:
+        feet = [names.index(f'{s}_foot') for s in 'LR']
+        mid = m['seg_pos'][-1][feet].mean(axis=0)
+        out.update(com_over_feet_m=r(np.linalg.norm(m['com'][-1, :2] - mid[:2]), 3), floor_push_N=r(w.sum(), 1))
+    return out
+
+
+def results():
+    present = {k: stem for k, stem in MOTIONS.items() if paths(stem)[0].is_file()}
+    inputs = {}
+    for stem in present.values():
+        for path in paths(stem):
+            inputs[str(path)] = sha(path)
     return dict(
         schema=SCHEMA,
         producer=dict(domain='humanities', files={f: hashlib.sha256((ROOT / f).read_bytes()).hexdigest()[:16] for f in FILES},
-                      constants=constants_used([ROOT / f for f in FILES]),
-                      inputs={str(MOTION): sha(MOTION), str(REPORT): sha(REPORT)}),
-        evidence='Measurements of one solved whole-body motion (multiple-shooting optimal control with rigid contacts, '
+                      constants=constants_used([ROOT / f for f in FILES]), inputs=inputs),
+        evidence='Measurements of solved whole-body motions (multiple-shooting optimal control with rigid contacts, '
                  'friction cones on the stance forces, torque bounds and landing impulses, Euler steps of 25 ms) for '
                  'one 55 kg body on a 0.5 friction floor; feasible motions of that model, not measured human movement.',
-        motion=dict(phrase=rep['meta']['phrase'] if isinstance(rep['meta'].get('phrase'), str) else 'canopy_and_salto',
-                    span_s=rep['meta']['span_s'], gravity=g, floor_friction=FLOOR_FRICTION, mass_kg=MASS_KG),
-        flights=flight_checks(m, v), stances_between_flights=between, salto_standing_take_off=standing,
-        salto_landing=landing)
+        body=dict(mass_kg=MASS_KG, floor_friction=FLOOR_FRICTION),
+        motions={k: measure(stem) for k, stem in present.items()})
 
 
 def main() -> int:
