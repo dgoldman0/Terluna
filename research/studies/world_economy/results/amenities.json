@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "b19768d41beab5ca73a325497cd966aa7ff3f3e079be00690250cce8bfe7b02d",
+      "research/studies/world_economy/amenities_inputs.json": "d606e797badd15a54ccb9cf1b1fbbf8b4f9310d501b5daf73a6d99e139e09ebd",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "d960651e9fbad020abe2b997e7494749deec29a6e40a78355326c33686d53fd4"
+        "sha256": "d5fbffb9373e1f94094970c8b8ef1e50714f14195b0743694a27fe1dc66158dc"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "9ef07655c668a7165c2be5458f5a2bf2c7afd3e25b7d0e23fbeeb4ecf4c4445d"
+        "sha256": "a0e1dcdb5ad0710bb2ff5d0312f42b3b51636dca6d379bbc9cfa38119613639b"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "1b7209f681818088c36bb2e2d4054c8ecfa0644e21a3d1750b49263633bcebd0"
+        "sha256": "31a13dcad8a85a380d2178b3ec99c50be0325864e875e8468dd7ee2f2dba0ca5"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "f764f7ddddb224755bfaaaf50bdea955c59373e196f3a079bf774dc44c373792"
+        "sha256": "fad20f10413a2c9d3cb3bcfe1eb72bd2dbbba7adef609094549ea40c02df73a4"
       }
     }
   },

@@ -9,7 +9,7 @@
     "products": {
       "research/studies/world_economy/results/early_exports.json": {
         "schema": "terluna.research.early-exports/1",
-        "sha256": "9efca9315f73ab25ccf296c77c9d4c5db7d195ab287575c06c0d9b733370f41a",
+        "sha256": "3278f4358bd98ea598a7bdc3f557a3e0f106e82ba6ceab6be29f51bc4c75f353",
         "use": "scenarios.reference[0]: stay, nightly destination receipts, visitor capital per bed and replacement life; these remain synthetic assumptions"
       }
     },
@@ -131,8 +131,8 @@
     "files": {
       "research/studies/world_economy/sports_finance.py": "6992242f4b1c679b49118f4da6364935ac5ca24149326fe799024647c15ed7db",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
-      "research/studies/world_economy/sports_finance_inputs.json": "c18c68a6b4487a21e66d62b1d6588cf6659078dfa1eeded3023355df8d528f43",
-      "research/studies/world_economy/sports_finance_sources.json": "64f5669049a6c69e34b3af90b7dbb08a07e6e5ce218f591f22dee2083e66bd79"
+      "research/studies/world_economy/sports_finance_inputs.json": "51c62d1be3819b82c6483d5df222bfd9a5eb90c8eb1f3cce6ae99ebf52a587dd",
+      "research/studies/world_economy/sports_finance_sources.json": "2108441f3b1b9f319788789e774fcdb54f1ad5a16fe9d13f7d3cef1ae50d57a3"
     },
     "constants": {
       "JULIAN_YEAR_DAYS": 365.25

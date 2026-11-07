@@ -462,7 +462,7 @@
             "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
           },
           "inputs": {
-            "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+            "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
           },
           "constants": {
             "AVOGADRO": 6.02214076e+23,
@@ -9676,7 +9676,7 @@
             "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
           },
           "inputs": {
-            "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+            "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
           },
           "constants": {
             "AVOGADRO": 6.02214076e+23,
@@ -18890,7 +18890,7 @@
             "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
           },
           "inputs": {
-            "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+            "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
           },
           "constants": {
             "AVOGADRO": 6.02214076e+23,
@@ -28104,7 +28104,7 @@
             "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
           },
           "inputs": {
-            "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+            "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
           },
           "constants": {
             "AVOGADRO": 6.02214076e+23,
@@ -39579,7 +39579,7 @@
             "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
           },
           "inputs": {
-            "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+            "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
           },
           "constants": {
             "AVOGADRO": 6.02214076e+23,
@@ -49063,7 +49063,7 @@
             "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
           },
           "inputs": {
-            "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+            "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
           },
           "constants": {
             "AVOGADRO": 6.02214076e+23,
@@ -58279,7 +58279,7 @@
             "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
           },
           "inputs": {
-            "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+            "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
           },
           "constants": {
             "AVOGADRO": 6.02214076e+23,
@@ -67495,7 +67495,7 @@
             "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
           },
           "inputs": {
-            "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+            "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
           },
           "constants": {
             "AVOGADRO": 6.02214076e+23,
@@ -76712,7 +76712,7 @@
             "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
           },
           "inputs": {
-            "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+            "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
           },
           "constants": {
             "AVOGADRO": 6.02214076e+23,
@@ -85929,7 +85929,7 @@
             "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
           },
           "inputs": {
-            "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+            "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
           },
           "constants": {
             "AVOGADRO": 6.02214076e+23,
@@ -109238,7 +109238,7 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+          "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -112506,7 +112506,7 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+          "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -115774,7 +115774,7 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+          "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -119042,7 +119042,7 @@
           "atmosphere/radiative_convective/thermodynamics.py": "0200e9dd64e130cfaa5d132f73ae87067efcc4a7b038784bbdd8152cdabbcc8f"
         },
         "inputs": {
-          "research/studies/climate_targets/results/climate_targets.json": "46072ee2f44056ce86afc87648ffcf8d06c9f6ef49d13e388389da8e68316889"
+          "research/studies/climate_targets/results/climate_targets.json": "2712b3434c805a628d393a731e2b272c0c42b46078906f453a0991d744f9619a"
         },
         "constants": {
           "AVOGADRO": 6.02214076e+23,
@@ -119062,7 +119062,7 @@
   "missing_or_failed": [],
   "original_product": {
     "path": "atmosphere/snow/results/event_column.json",
-    "sha256": "4c3bbaf3af49265c48e4d2d41c61a6278ea01b598cc2db7acd2259dfd6a69dfd"
+    "sha256": "c2aa049f44fabca991ea47ceb6c9852756a11b71bef9a5b509b49cc74f8bdd97"
   },
   "evidence": "Full-duration numerical sensitivity and refinement calculations. Matched lunar forcing, different microphysical closures. No lunar observation, contact-fracture validation or predicted storm optics.",
   "reading_rule": "Use the eight-column mean/standard-error summaries for comparisons with original means of realization quantiles; pooled arrival quantiles are retained separately. Native packet refinement is distinct from custom individual-particle statistical-volume refinement. The timestep comparison holds injected packets per minute fixed while refining their release timing. Reservoir experiments start with 48.34 kg/m2 vapor and impose a source ceiling, rather than an instantaneous deposition ceiling. Native thermal experiment has no imposed radiative/dynamical cooling. Neither moisture allowance is an observed storm supply."
