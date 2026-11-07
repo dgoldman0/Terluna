@@ -18,7 +18,7 @@ ROOT=model.ROOT
 CACHE=ROOT/'research/runs/snow_column_diagnosis'
 OUT=ROOT/'atmosphere/snow/results/column_diagnosis.json'
 BASELINE=old.OUT
-BASELINE_SHA='6b213d58b9c25015b96f69679109223cb88c38e6d595cb3830c0fb43ab518dd4'
+BASELINE_SHA='afb521c4fd1af6da488cb5bfc2e55651fdfaf9d15c25d532dee279a5f05a1658'
 FIELDS=model.DIAGNOSTIC_COLUMNS
 
 
