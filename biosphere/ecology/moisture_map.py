@@ -517,8 +517,9 @@ def settings(lat, lon, rotation=None, drainage=DRAINAGE[YEARS]):
 
 # ==== The map ========================================================================================================
 def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, drainage=None, orientation=ORIENTATION):
-    """The map of one window of years: the run's cells, carried to today's ground through the orientation product
-    when one is given (None for a run on today's ground), with the lakes of the drainage folder."""
+    """The map of one window of years in the run's own frame, with the lakes of the drainage folder. With an
+    orientation product, geography's pixels, which stand on today's ground, are counted in the cells that hold them on
+    the turned Moon; None for a run on today's ground."""
     drainage = drainage or DRAINAGE.get(tuple(years), DRAINAGE[YEARS])
     frame = read_frame(ROOT / orientation) if orientation else None
     c = read_run(run, years)
@@ -652,6 +653,7 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
                 cells_with_closed_lakes_in_dry_cells=int((dry & (geo['closed_lake_km2'] > 0)).sum()),
                 sea_level_lake_km2_in_dry_cells=round(float(geo['sea_level_lake_km2'][dry].sum())),
                 closed_rainfed_lake_km2_on_land=round(float(geo['closed_lake_km2'][L].sum())),
+                rainfed_lake_km2_on_land=round(float((geo['rainfed_lake_fraction'] * area)[L].sum())),
                 note=f'Closed rain-fed lakes are the non-spilling lakes of the drainage routed on these years\' climate '
                      f'({drainage}); the sea-level lakes are the atlas\'s small closed depressions below the seas\' '
                      'level. Where they stand in dry cells they are the soda lakes\' candidates.')
@@ -816,8 +818,9 @@ def compare_windows(product, compare, run=RUN, decades=DECADES):
     class_shares = lambda x: {cl['key']: round(float(w[x == i].sum()), 4) for i, cl in enumerate(CLASSES)}  # noqa: E731
     names = list(dec)
     pairs = {f'{p} | {q}': agree(dec[p], dec[q]) for i, p in enumerate(names) for q in names[i + 1:]}
-    area = np.array(c['area_km2'])
-    lake_km2 = lambda cells, key: round(float((np.array(cells[key], float) * area).sum()))      # noqa: E731
+    five = lambda x: np.minimum(x, 4)            # UNEP's five classes, the humid and wet merged         # noqa: E731
+    pairs5 = {f'{p} | {q}': agree(five(dec[p]), five(dec[q])) for i, p in enumerate(names) for q in names[i + 1:]}
+    lakes = lambda pr, key: pr['settings']['soda_lakes'][key]                                      # noqa: E731
     c['moisture_compare'] = k['moisture']
     c['moisture_decades'] = [[int(x) for x in dec[n]] for n in names]
     return dict(
@@ -825,14 +828,19 @@ def compare_windows(product, compare, run=RUN, decades=DECADES):
         main_against_compare=dict(
             land_keeping_class=agree(main_cls, cmp_cls), shares_main=class_shares(main_cls), shares_compare=class_shares(cmp_cls),
             drylands_main=product['mix']['drylands_share'], drylands_compare=compare['mix']['drylands_share'],
-            rainfed_lake_km2_on_land=[lake_km2(c, 'rainfed_lake_fraction'), lake_km2(k, 'rainfed_lake_fraction')],
-            closed_lake_km2_on_land=[lake_km2(c, 'closed_lake_fraction'), lake_km2(k, 'closed_lake_fraction')],
+            land_keeping_unep_class=agree(five(main_cls), five(cmp_cls)),
+            robust_main=product['shares']['robust'], robust_compare=compare['shares']['robust'],
+            rainfed_lake_km2_on_land=[lakes(product, 'rainfed_lake_km2_on_land'), lakes(compare, 'rainfed_lake_km2_on_land')],
+            closed_lake_km2_on_land=[lakes(product, 'closed_rainfed_lake_km2_on_land'), lakes(compare, 'closed_rainfed_lake_km2_on_land')],
             rainfed_lake_fraction_mean_abs_difference=round(float(np.mean(np.abs(np.array(c['rainfed_lake_fraction'], float)
                                                                                  - np.array(k['rainfed_lake_fraction'], float)))), 5),
-            compare_checks=compare['checks'], compare_drainage=compare['producer']['drainage']),
+            compare_checks=compare['checks'], compare_drainage=compare['producer']['drainage'],
+            compare_inputs={k: v for k, v in compare['producer']['inputs'].items() if k.startswith(compare['producer']['drainage'] + '/')}),
         decades_alone=dict(shares={n: class_shares(x) for n, x in dec.items()}, land_keeping_class_between=pairs,
                            between_mean=round(float(np.mean(list(pairs.values()))), 4),
                            between_range=[min(pairs.values()), max(pairs.values())],
+                           unep_keeping_class_between=pairs5, unep_between_mean=round(float(np.mean(list(pairs5.values()))), 4),
+                           unep_between_range=[min(pairs5.values()), max(pairs5.values())],
                            against_main={n: agree(x, main_cls) for n, x in dec.items()}),
         note=('Both windows read the same run\'s land cells. The compare window overlaps the main one, so their '
               'agreement exceeds that of independent windows; the decades classed alone are independent samples, and '

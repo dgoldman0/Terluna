@@ -122,7 +122,7 @@ def test_product_binding(product):
         assert hashlib.sha256((R.ROOT / rel).read_bytes()).hexdigest() == digest, rel
     for key in ('drainage', 'groundwater', 'cold_waters', 'atlas_bodies'):
         entry = product['inputs'][key]
-        assert R.sha256(entry['path']) == entry['sha256'], key
+        assert R.sha256(R.ROOT / entry['path']) == entry['sha256'], key       # repository paths, or absolute outside it
     assert product['evidence'] and product['reading_rule']
 
 

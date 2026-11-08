@@ -30,7 +30,8 @@ Some products bind inputs that settle does not follow. Where such a product's pi
 - the coast tide and the seawater lakes to the integration's sea chemistry, coast-water and climate-target products;
 - the storm-water products and the biome map to climate's CM1 site code, of which they call only `subsolar_longitude`, unchanged;
 - the energy options and the ring fault to the integration's power product, the domain synthesis's ledgers and the heat levers;
-- the eel calculator to the rebound food-systems product.
+- the eel calculator to the rebound food-systems product;
+- the cold waters, and the river deltas that read them, to the integration's lake oxygen, which the independent review found.
 
 Five files were joined by hand. Geology and humanities each added a lane, and the layer check, the shared README, AGENTS.md and pytest's paths take both. Humanities had kept its decisions in its own copy of the register, in four sections dated 1, 2–3, 6 and 7 November; they stand among main's sections at their dates, every line of both kept (`integration6/join_register_humanities.py`).
 
@@ -43,6 +44,7 @@ The branch's Codex work of 4–5 November was reworked on its review of 6 Novemb
 - The seawater lakes' README gives the eel chapter's new ranking, and its source register keeps the first state it read.
 - The seawater sites read the turned surface in this tree by repository path; their product's values are unchanged.
 - Geology's interior response keeps its fallback to hydrosphere's worktree, read only when the in-tree crustal-loading product is missing: editing that code would change the orientation product's digest, which names the climate's turned surface. The fallback goes at geology's next rebuild.
+- Climate's commit `12673b97` let four CM1 readers (`wave_forcing.py`, `ring_analysis.py`, `gcm_profiles.py`, `cloud_scene.py`) read output kept raw or compressed, bit for bit, without rebinding the products that pin them as producer files: the waves' forcing, ring coverage and coastal verification, the snow's moist history and the cloud twilight's scenes. Their values stand; the pins are rebound or the products rebuilt at their next build, since a rebind now would also rewrite dated check snapshots.
 - An output option for the climatology tool was tried and withdrawn: the zonal winds product pins the tool, and the rebind spread through 126 files. The forty-year climatology was written by copying the ten-year product aside, running the tool and restoring the canonical file, checked identical.
 
 ## The moisture map
@@ -55,15 +57,16 @@ The first biome map classed the design run of 1 November at today's orientation 
 | Arid | 21.1% | 12.7% | 23.0% |
 | Semi-arid | 26.9% | 9.3% | 27.6% |
 | Dry sub-humid | 8.0% | 0.0% | 6.8% |
-| Humid and wet | 42.1% | 23.1% | 40.5% |
+| Humid and wet | 42.1% | 23.0% | 40.5% |
 
-The drylands are 57.9% of the land over the forty years and 59.5% over years 10–19. Forty years leave 46% of the land robust across the gap's scale and the years' band together, against 36% on the first map's ten. Classed alone, two independent decades of the one run differ in class on 30.5% of the land (28–34%), or 25.8% in UNEP's five classes (24–29%): that is how far a ten-year map moves by chance, and it accounts for about 26 points of the 45% of ground whose five-class aridity changed between the first map and the turned run's ten years. Years 10–19 keep the forty years' class on 75.8% of the land, and their rain-fed lakes on land cover 2.458 million km² against the forty years' 2.457 million; the forty-year drainage holds 33,686 lakes over 10.30% of the Moon against 33,262 over 10.28%. The turned design years' products, the globe and its rivers and lakes among them, therefore stand, and the forty-year versions confirm them. The 10–19 shares reproduce the turned years' land readings to within 3×10⁻¹⁷. The gap's scale and the night ratio still come from the CM1 boxes of the design years of 1 November, and the hollows' store runs, which belong to that run's land, do not enter.
+The drylands are 57.9% of the land over the forty years and 59.5% over years 10–19. Forty years leave 46% of the land robust across the gap's scale and the years' band together, against 37% for the turned run's own years 10–19 and 36% in the first map. Classed alone, two independent decades of the one run differ in class on 30.5% of the land (28–34%), or 25.8% in UNEP's five classes (24–29%): that is how far a ten-year map moves by chance. The 45% of ground whose five-class aridity changed between the first map and the turned run's ten years therefore exceeds chance by about 19 points, which bounds from above what the turn and the new climate changed, since matching each cell across the two frames adds to it; the review's rough estimate puts that matching near 14 points, a bound and not a measure. Years 10–19 keep the forty years' class on 75.8% of the land, and their rain-fed lakes on land cover 2.458 million km² against the forty years' 2.457 million; the forty-year drainage holds 33,686 lakes over 10.30% of the Moon against 33,262 over 10.28%. The turned design years' products, the globe and its rivers and lakes among them, therefore stand, and the forty-year versions confirm them. The 10–19 shares reproduce the turned years' land readings to within 3×10⁻¹⁷. The gap's scale and the night ratio still come from the CM1 boxes of the design years of 1 November, and the hollows' store runs, which belong to that run's land, do not enter.
 
 ## Outside Git
 
 - The forty-year climatology and its companion on today's ground (`climate/gcm/products/climatology_A28R_301k_design_l15_snow_s924_turned_refit_y10-49.npz` and `_y10-49_today.npz`) and the ten-year product's named copy (`_y10-19.npz`) lie in main's products folder, which every worktree links.
 - The drainage grids of both windows (`geography/turned/products/` and `geography/turned_y10-49/products/`), ignored by Git, are copied into main's checkout when it moves up, the ten-year one byte-identical to the grid the globe pinned.
 - The moisture map's year sums are cached on the research drive (`session-tools/moisture_map/cache`), and its sheet is drawn there.
+- The moisture map's tests bind both windows' drainage grids, so `make check` fails in main's checkout until they are copied in.
 
 ## Checks
 
@@ -80,12 +83,22 @@ Each merge and each commit of the round passed `make check` before it was commit
 | Humanities | 5,177 passed, 33 skipped |
 | Food-systems with the follow-through | 5,209 passed, 33 skipped |
 | The moisture map | 5,210 passed, 33 skipped |
+| The records | 5,210 passed, 33 skipped |
+| The answering commit | 5,210 passed, 33 skipped |
 
 From 21:00 the machine rested thirty minutes between full test runs.
 
 ## The review
 
-To come: an independent reviewer reads the merged tree on a snapshot before main moves.
+An independent reviewer read the merged tree at `d291b2f2` without changing it, before main moved (its findings on the research drive, `session-tools/integration6_review/findings.md`). It found nothing blocking, three points to fix and eleven minor ones. It confirmed that every branch's work is in the tree, that both merges' conflicts reproduce and hold under a stricter mask, that every rebind's input holds the values its reader read, that the hand joins keep both lanes and every register line, and that the moisture map's frame, lakes, windows and decades recompute from its inputs. The answering commit:
+- **The cold waters' pin** to the lake oxygen, which settle had rebound in the hydrosphere merge, follows it with its values unchanged, and the river deltas after it.
+- **The river deltas' inputs.** The deltas recorded their inputs by absolute path in hydrosphere's worktree, and their test read them there. They now record each input by its path in the repository; all eleven in the tree match their recorded digests, and the product's values are unchanged.
+- **The 45%.** The decades show that two ten-year maps of one climate differ on about 26% of the land in five classes, so the 45% exceeds chance by about 19 points, an upper bound on the turn's and the climate's share, since matching cells across the two frames adds to it. The account, the register and the ecology README say so.
+- **The compare window's lakes** are recorded in the product with their digests, beside its robust share (37% for the turned run's own years 10–19) and the five-class figures, and the lake totals are summed at full precision.
+- **The records**: the robust share of the humid and wet land (23.0%), the README's comparison of robust shares, the status file's next climate task and date, the soils row's map, the missing log line, the moisture map's docstring, and the note that main's checkout needs both windows' grids before its tests pass.
+- **Climate's code pins** left stale by its commit `12673b97` are recorded above, for the products' next builds.
+- **The resolver's masks**, which the review found looser than intended though they hid nothing this round, are tightened in the drive's scripts for reuse.
+- **The quotation in ecology finding 15**, which predates this round, stays as it stands.
 
 ## Still to do from the integration
 
@@ -93,4 +106,5 @@ To come: an independent reviewer reads the merged tree on a snapshot before main
 - **A further axis beside the moisture**, among the conditions the builders will not set, with the Codex mockups of 7 November tried on the exact data where it exists ([register](../decisions.md), 7 November).
 - **The soils study and the lakes' distribution** among fresh, soda and seawater lakes, with the water-balance screen of the dry belts' closed basins, after the integration.
 - **Geology's fallback** to hydrosphere's worktree, dropped at geology's next rebuild.
+- **Climate's stale code pins** in the waves', the snow's and the cloud twilight's products, rebound or rebuilt at their next build.
 - **The CM1 boxes on the turned years**, which would give the moisture map a gap scale and night ratio of the turned climate's own.

@@ -2,7 +2,7 @@
  "schema": "terluna.research.river-deltas/1",
  "producer": {
   "files": {
-   "research/studies/river_deltas/run.py": "5ed0d194f25d144f3f16e4cb97e030a9dda8acc01905c8d7c955fa38b4e1c1f3",
+   "research/studies/river_deltas/run.py": "bdc808857101a174a76e604b1d9c99689437d429f2613a0449b7a4754c77aad2",
    "research/studies/river_deltas/physics.py": "9b7e4b1fd0a5a8348fd4a437d0c734df2907bffa664ce4ffb4fe6f6d5dcc317c"
   }
  },
@@ -23,47 +23,47 @@
  "reading_rule": "States: young (regolith, bare banks, own-catchment rock times the young yield factor, drier rivers, soft young seas) and mature (each candidate soil, rooted banks, the terrain study's cases, held seas). Shares of mouths are by count, of discharge by mean flow, of load by rock. Plume shares are of the ten tenths of the lunar day, at mean flow and at bankfull. Dominance follows Nienhuis et al. (2020): the largest of the river's, the waves' and the tide's sediment flux. Lengths in m unless named in km, times in years, discharges m3/s, loads kg/s or Mt a year as named.",
  "inputs": {
   "drainage": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/geography/results/drainage.json",
+   "path": "geography/results/drainage.json",
    "sha256": "18494e3d3656ead71536512816095ba6006cc63bbade984314bcaaaa77df7c2d"
   },
   "lakes": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/geography/products/drainage_28pct_16ppd.npz",
+   "path": "geography/products/drainage_28pct_16ppd.npz",
    "sha256": "98842fc2a648f8899bd4f5d712445f78c8882c85a1bc30bf631ac9dd14ab1c03"
   },
   "atlas": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/geography/products/atlas_28pct_4ppd.npz",
+   "path": "geography/products/atlas_28pct_4ppd.npz",
    "sha256": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693"
   },
   "atlas_bodies": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/geography/results/atlas.json",
+   "path": "geography/results/atlas.json",
    "sha256": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e"
   },
   "tides": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/geography/products/tides_28pct_4ppd.npz",
+   "path": "geography/products/tides_28pct_4ppd.npz",
    "sha256": "56529233b8ce20685691174381ab5c32d35e9092819e61fc5cdb42293a536777"
   },
   "groundwater": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/geography/results/groundwater_table.json",
+   "path": "geography/results/groundwater_table.json",
    "sha256": "e84e7f71867124734916d4af0d4909b5bba564cb6ff61710997f865b7776853d"
   },
   "climatology": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/climate/gcm/products/climatology_A28_dim5_moon.npz",
+   "path": "climate/gcm/products/climatology_A28_dim5_moon.npz",
    "sha256": "3fb185c8087ea9b5bffdfbfb191cfed5cc3f4397a9a7d0eb52269f925ee6f05c"
   },
   "nearside_waves": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/climate/waves/results/nearside.json",
+   "path": "climate/waves/results/nearside.json",
    "sha256": "974bc0e29c7ef563b5a72b0ffc0003fbd8d3a5d732269cc817277eac48dffe2b"
   },
   "smythii_waves": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/climate/waves/results/cycle.json",
+   "path": "climate/waves/results/cycle.json",
    "sha256": "a15ef85b3efb9eb86641eed996fdc84acf3e4cc1ef387011e00edaff9c0cb1ce"
   },
   "cold_waters": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/research/studies/cold_waters/results/cold_waters.json",
-   "sha256": "0b387fa896e87c61712cf59ca6e0c5da6e8e5dba07a92e924d295863cfeba5fe"
+   "path": "research/studies/cold_waters/results/cold_waters.json",
+   "sha256": "03faad0aadc2dbfedf5902b09f1f1add8222be03a575ca5c302280497f507c27"
   },
   "terrain": {
-   "path": "/home/kir/Documents/Projects/terluna-hydrosphere/research/runs/resources/terrain/terrain_16ppd.npz",
+   "path": "research/runs/resources/terrain/terrain_16ppd.npz",
    "sha256": "60de530db01cf1107c622057d260080727f8a696b1420a2d25f8585b4f336f1e"
   },
   "design_years": {

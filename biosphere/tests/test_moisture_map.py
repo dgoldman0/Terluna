@@ -150,4 +150,13 @@ def test_the_windows_agree_with_the_classes_they_store():
     for shares in [wd['main_against_compare']['shares_main'], wd['main_against_compare']['shares_compare'],
                    *wd['decades_alone']['shares'].values()]:
         assert abs(sum(shares.values()) - 1.0) < 1e-3
+    five = lambda x: np.minimum(x, 4)
+    assert abs(w[five(main) == five(compare)].sum() - wd['main_against_compare']['land_keeping_unep_class']) < 2e-4
+    pairs5 = wd['decades_alone']['unep_keeping_class_between']
+    for (i, a), (j, b) in [(x, y) for n_, x in enumerate(enumerate(decades)) for y in list(enumerate(decades))[n_ + 1:]]:
+        name = f"{wd['decades'][i]} | {wd['decades'][j]}"
+        assert abs(w[five(a) == five(b)].sum() - pairs5[name]) < 2e-4, name
+    for path, h in wd['main_against_compare']['compare_inputs'].items():   # the compare window's lakes, bound
+        assert digest(ROOT / path) == h, path
+    assert len(wd['main_against_compare']['compare_inputs']) == 2
     assert PRODUCT['producer']['frame']['orientation'] == mm.ORIENTATION

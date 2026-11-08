@@ -162,6 +162,13 @@ READING_RULE = ('States: young (regolith, bare banks, own-catchment rock times t
                 'named in km, times in years, discharges m3/s, loads kg/s or Mt a year as named.')
 
 
+def repo_path(path) -> str:
+    """The path from the repository's root where it lies inside it, so the product names the same file in every
+    checkout; an outside path stays absolute."""
+    path = Path(path)
+    return str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path)
+
+
 def sha256(path) -> str:
     h = hashlib.sha256()
     with open(path, 'rb') as f:
@@ -851,7 +858,7 @@ def run():
     product = dict(
         schema=SCHEMA, producer=dict(files={c: sha256(ROOT / c) for c in CODE}), young_sea_level=sea_level,
         evidence=EVIDENCE, reading_rule=READING_RULE,
-        inputs={k: dict(path=str(p), sha256=sha256(p)) for k, p in INPUTS.items()},
+        inputs={k: dict(path=repo_path(p), sha256=sha256(p)) for k, p in INPUTS.items()},
         climate=dict(flows_run='A28_dim5_moon years 20-29 (geography drainage)', temperatures_run=dc['run'],
                      design_land_runoff_mm_day=dc['runoff_mm_day'], flow_bracket=flow,
                      young_flow_factor_by_band={k: dict(zip(gw_bands, v.tolist())) for k, v in young_flows.items()},

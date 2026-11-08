@@ -4,7 +4,7 @@
   "domain": "biosphere",
   "model": "biosphere/ecology/moisture_map.py",
   "files": {
-   "biosphere/ecology/moisture_map.py": "b28544c2a464dec18b6dd9fe8511391013013b24688ea1cd19dd34512679aa75",
+   "biosphere/ecology/moisture_map.py": "7d859aa39c626c4f00e6a04af1f5c40c672e4eda25d58c30841df8d9542ed2bd",
    "climate/crm/gcm_site.py": "70df7df9498d14d2d39ece66656205019d3dec65c47871eeec89c15e02be7038",
    "climate/gcm/year_files.py": "b338b013a0079a8221ae57692884a2adaaa58831486fcf027f057d925325485d",
    "climate/gcm/turned.py": "0048cd6ac13ab7e9fc6975437f04c2a83e0be3e2c6d8764aae4d68bff4cb629a"
@@ -1021,6 +1021,7 @@
    "cells_with_closed_lakes_in_dry_cells": 180,
    "sea_level_lake_km2_in_dry_cells": 1184590,
    "closed_rainfed_lake_km2_on_land": 89425,
+   "rainfed_lake_km2_on_land": 2456777,
    "note": "Closed rain-fed lakes are the non-spilling lakes of the drainage routed on these years' climate (geography/turned_y10-49); the sea-level lakes are the atlas's small closed depressions below the seas' level. Where they stand in dry cells they are the soda lakes' candidates."
   },
   "soil_zones": {
@@ -102123,13 +102124,16 @@
    },
    "drylands_main": 0.5791,
    "drylands_compare": 0.5953,
+   "land_keeping_unep_class": 0.8028,
+   "robust_main": 0.4604,
+   "robust_compare": 0.372,
    "rainfed_lake_km2_on_land": [
-    2456773,
-    2457686
+    2456777,
+    2457808
    ],
    "closed_lake_km2_on_land": [
-    89415,
-    91509
+    89425,
+    91508
    ],
    "rainfed_lake_fraction_mean_abs_difference": 0.006,
    "compare_checks": {
@@ -102139,7 +102143,11 @@
     "turned_years_aridity_shares_max_difference": 2.7755575615628914e-17,
     "turned_years_land_json_sha256": "d153d1a5347380af3250457fa12d91d69e5d25c2257cba54f45e89f3e593a5e6"
    },
-   "compare_drainage": "geography/turned"
+   "compare_drainage": "geography/turned",
+   "compare_inputs": {
+    "geography/turned/results/drainage.json": "8e47bebc893dbf51b4cf74d9ee0fa9c65fe1640cf7469bb54eb15e8534e8839f",
+    "geography/turned/products/drainage_28pct_16ppd.npz": "f49411f91d06b20111b9686c9b2379b57cc4aa595ec392ee3ef5ea44ee12694a"
+   }
   },
   "decades_alone": {
    "shares": {
@@ -102188,6 +102196,19 @@
    "between_range": [
     0.6569,
     0.7189
+   ],
+   "unep_keeping_class_between": {
+    "10-19 | 20-29": 0.7565,
+    "10-19 | 30-39": 0.7246,
+    "10-19 | 40-49": 0.7122,
+    "20-29 | 30-39": 0.762,
+    "20-29 | 40-49": 0.7459,
+    "30-39 | 40-49": 0.7534
+   },
+   "unep_between_mean": 0.7424,
+   "unep_between_range": [
+    0.7122,
+    0.762
    ],
    "against_main": {
     "10-19": 0.7579,
