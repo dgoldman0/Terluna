@@ -1,0 +1,2979 @@
+{
+ "schema": "terluna.humanities.sport-envelope/1",
+ "producer": {
+  "domain": "humanities",
+  "files": {
+   "humanities/sport/envelope.py": "df4abe3934e22013",
+   "humanities/dance/envelope.py": "660f3247df5da23d",
+   "humanities/dance/body/model.py": "2b553c5592ee07a5",
+   "humanities/dance/body/pose.py": "a8c420d770df0a9d",
+   "habitation/low_gravity/movement.py": "af012c7a4d59ea6f"
+  },
+  "constants": {
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "STANDARD_GRAVITY": 9.80665
+  },
+  "inputs": {
+   "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
+   "humanities/dance/vocabulary/poses.json": "128fac64dc50a3ed"
+  }
+ },
+ "evidence": "Closed-form and one-dimensional mechanics for two representative bodies (the dance body model and the same body scaled to 1.80 m and 80 kg) at the shared gravity and the design run's air, with stated parameter choices beside each figure. A screen of what a body can do for sport; the whole-body motion engine tests it, and the whole-body record (whole_body.json) measures what its solved motions did.",
+ "gravity": {
+  "moon": 1.6242188765608128,
+  "earth": 9.80665,
+  "ratio": 6.0378
+ },
+ "air_density_kg_m3": {
+  "moon_sea_level": 1.4036,
+  "earth": 1.225
+ },
+ "bodies": {
+  "dancer, 1.64 m and 55 kg": {
+   "stature_m": 1.64,
+   "mass_kg": 54.99,
+   "com_height_m": 0.909,
+   "inertia_kg_m2": {
+    "layout": 9.38,
+    "tuck": 2.369,
+    "twist": 0.824
+   },
+   "push_off_m": 0.36,
+   "side_reach_m": 0.13,
+   "fore_aft_reach_m": 0.1,
+   "split_reach_m": 0.5,
+   "ready_half_stance_m": 0.35,
+   "ready_com_m": 0.75,
+   "release_above_com_m": 1.0,
+   "leg": {
+    "mass_kg": 11.48,
+    "inertia_about_hip_kg_m2": 1.49
+   }
+  },
+  "larger athlete, 1.80 m and 80 kg (scaled)": {
+   "stature_m": 1.8,
+   "mass_kg": 80.0,
+   "com_height_m": 0.998,
+   "inertia_kg_m2": {
+    "layout": 16.436,
+    "tuck": 4.151,
+    "twist": 1.444
+   },
+   "push_off_m": 0.395,
+   "side_reach_m": 0.143,
+   "fore_aft_reach_m": 0.11,
+   "split_reach_m": 0.549,
+   "ready_half_stance_m": 0.384,
+   "ready_com_m": 0.823,
+   "release_above_com_m": 1.098,
+   "leg": {
+    "mass_kg": 16.7,
+    "inertia_about_hip_kg_m2": 2.611
+   }
+  }
+ },
+ "by_body": {
+  "dancer, 1.64 m and 55 kg": {
+   "ground": {
+    "friction": 0.8,
+    "balance_clock_s": {
+     "moon": 0.748,
+     "earth": 0.304
+    },
+    "lean_start": [
+     {
+      "distance_m": 0.1,
+      "moon": {
+       "seconds": 0.877,
+       "speed_m_s": 0.25
+      },
+      "earth": {
+       "seconds": 0.357,
+       "speed_m_s": 0.62
+      }
+     },
+     {
+      "distance_m": 0.3,
+      "moon": {
+       "seconds": 1.396,
+       "speed_m_s": 0.55
+      },
+      "earth": {
+       "seconds": 0.568,
+       "speed_m_s": 1.35
+      }
+     }
+    ],
+    "friction_limited_start": [
+     {
+      "speed_m_s": 2.0,
+      "moon": {
+       "seconds": 1.54,
+       "metres": 1.54
+      },
+      "earth": {
+       "seconds": 0.25,
+       "metres": 0.25
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "moon": {
+       "seconds": 2.31,
+       "metres": 3.46
+      },
+      "earth": {
+       "seconds": 0.38,
+       "metres": 0.57
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "moon": {
+       "seconds": 3.08,
+       "metres": 6.16
+      },
+      "earth": {
+       "seconds": 0.51,
+       "metres": 1.02
+      }
+     }
+    ],
+    "stride_change_m_s": {
+     "vertical_0.4_m_s_each_way": {
+      "moon": 1.07,
+      "earth": 3.23
+     },
+     "vertical_0.6_m_s_each_way": {
+      "moon": 1.39,
+      "earth": 3.55
+     }
+    },
+    "stops": [
+     {
+      "speed_m_s": 2.0,
+      "sliding_m": {
+       "moon": 1.54,
+       "earth": 0.25
+      },
+      "braking_landing_from_1.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 1.893,
+        "left_m_s": 0.107,
+        "distance_in_landing_m": 0.562,
+        "slide_after_m": 0.004,
+        "total_m": 0.566,
+        "mean_push_body_weights": {
+         "lunar": 2.73,
+         "earth": 0.45
+        }
+       },
+       "earth": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 2.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.533,
+        "slide_after_m": 0.0,
+        "total_m": 0.533,
+        "mean_push_body_weights": {
+         "lunar": 7.77,
+         "earth": 1.29
+        }
+       }
+      },
+      "braking_landing_from_2.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 2.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.32,
+        "slide_after_m": 0.0,
+        "total_m": 0.32,
+        "mean_push_body_weights": {
+         "lunar": 5.81,
+         "earth": 0.96
+        }
+       },
+       "earth": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 2.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.32,
+        "slide_after_m": 0.0,
+        "total_m": 0.32,
+        "mean_push_body_weights": {
+         "lunar": 10.85,
+         "earth": 1.8
+        }
+       }
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "sliding_m": {
+       "moon": 3.46,
+       "earth": 0.57
+      },
+      "braking_landing_from_1.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 1.893,
+        "left_m_s": 1.107,
+        "distance_in_landing_m": 1.095,
+        "slide_after_m": 0.472,
+        "total_m": 1.567,
+        "mean_push_body_weights": {
+         "lunar": 2.73,
+         "earth": 0.45
+        }
+       },
+       "earth": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 3.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.8,
+        "slide_after_m": 0.0,
+        "total_m": 0.8,
+        "mean_push_body_weights": {
+         "lunar": 7.77,
+         "earth": 1.29
+        }
+       }
+      },
+      "braking_landing_from_2.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 2.416,
+        "left_m_s": 0.584,
+        "distance_in_landing_m": 0.573,
+        "slide_after_m": 0.131,
+        "total_m": 0.705,
+        "mean_push_body_weights": {
+         "lunar": 5.81,
+         "earth": 0.96
+        }
+       },
+       "earth": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 3.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.48,
+        "slide_after_m": 0.0,
+        "total_m": 0.48,
+        "mean_push_body_weights": {
+         "lunar": 10.85,
+         "earth": 1.8
+        }
+       }
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "sliding_m": {
+       "moon": 6.16,
+       "earth": 1.02
+      },
+      "braking_landing_from_1.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 1.893,
+        "left_m_s": 2.107,
+        "distance_in_landing_m": 1.629,
+        "slide_after_m": 1.708,
+        "total_m": 3.337,
+        "mean_push_body_weights": {
+         "lunar": 2.73,
+         "earth": 0.45
+        }
+       },
+       "earth": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 4.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 1.067,
+        "slide_after_m": 0.0,
+        "total_m": 1.067,
+        "mean_push_body_weights": {
+         "lunar": 7.77,
+         "earth": 1.29
+        }
+       }
+      },
+      "braking_landing_from_2.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 2.416,
+        "left_m_s": 1.584,
+        "distance_in_landing_m": 0.893,
+        "slide_after_m": 0.966,
+        "total_m": 1.859,
+        "mean_push_body_weights": {
+         "lunar": 5.81,
+         "earth": 0.96
+        }
+       },
+       "earth": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 4.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.64,
+        "slide_after_m": 0.0,
+        "total_m": 0.64,
+        "mean_push_body_weights": {
+         "lunar": 10.85,
+         "earth": 1.8
+        }
+       }
+      }
+     }
+    ],
+    "steady_turn_radius_m": [
+     {
+      "speed_m_s": 2.0,
+      "mu_0.5": {
+       "moon": 4.93,
+       "earth": 0.82
+      },
+      "mu_0.8": {
+       "moon": 3.08,
+       "earth": 0.51
+      },
+      "mu_1.2": {
+       "moon": 2.05,
+       "earth": 0.34
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "mu_0.5": {
+       "moon": 11.08,
+       "earth": 1.84
+      },
+      "mu_0.8": {
+       "moon": 6.93,
+       "earth": 1.15
+      },
+      "mu_1.2": {
+       "moon": 4.62,
+       "earth": 0.76
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "mu_0.5": {
+       "moon": 19.7,
+       "earth": 3.26
+      },
+      "mu_0.8": {
+       "moon": 12.31,
+       "earth": 2.04
+      },
+      "mu_1.2": {
+       "moon": 8.21,
+       "earth": 1.36
+      }
+     }
+    ],
+    "bank_for_a_5_m_circle_deg": {
+     "2.0_m_s": 0.0,
+     "3.0_m_s": 9.3,
+     "4.0_m_s": 24.4
+    },
+    "cuts_through_one_stance": [
+     {
+      "speed_m_s": 2.0,
+      "angle_deg": 30,
+      "moon": {
+       "velocity_change_m_s": 1.035,
+       "vertical_speed_each_way_m_s": 0.379,
+       "bounce_rise_m": 0.044,
+       "bounce_airtime_s": 0.467
+      },
+      "earth": {
+       "velocity_change_m_s": 1.035,
+       "vertical_speed_each_way_m_s": 0.0,
+       "bounce_rise_m": 0.0,
+       "bounce_airtime_s": 0.0
+      }
+     },
+     {
+      "speed_m_s": 2.0,
+      "angle_deg": 60,
+      "moon": {
+       "velocity_change_m_s": 2.0,
+       "vertical_speed_each_way_m_s": 0.982,
+       "bounce_rise_m": 0.297,
+       "bounce_airtime_s": 1.209
+      },
+      "earth": {
+       "velocity_change_m_s": 2.0,
+       "vertical_speed_each_way_m_s": 0.0,
+       "bounce_rise_m": 0.0,
+       "bounce_airtime_s": 0.0
+      }
+     },
+     {
+      "speed_m_s": 2.0,
+      "angle_deg": 90,
+      "moon": {
+       "velocity_change_m_s": 2.828,
+       "vertical_speed_each_way_m_s": 1.5,
+       "bounce_rise_m": 0.692,
+       "bounce_airtime_s": 1.847
+      },
+      "earth": {
+       "velocity_change_m_s": 2.828,
+       "vertical_speed_each_way_m_s": 0.15,
+       "bounce_rise_m": 0.001,
+       "bounce_airtime_s": 0.031
+      }
+     },
+     {
+      "speed_m_s": 2.0,
+      "angle_deg": 180,
+      "moon": {
+       "velocity_change_m_s": 4.0,
+       "vertical_speed_each_way_m_s": 2.232,
+       "bounce_rise_m": 1.534,
+       "bounce_airtime_s": 2.748
+      },
+      "earth": {
+       "velocity_change_m_s": 4.0,
+       "vertical_speed_each_way_m_s": 0.882,
+       "bounce_rise_m": 0.04,
+       "bounce_airtime_s": 0.18
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "angle_deg": 30,
+      "moon": {
+       "velocity_change_m_s": 1.553,
+       "vertical_speed_each_way_m_s": 0.703,
+       "bounce_rise_m": 0.152,
+       "bounce_airtime_s": 0.865
+      },
+      "earth": {
+       "velocity_change_m_s": 1.553,
+       "vertical_speed_each_way_m_s": 0.0,
+       "bounce_rise_m": 0.0,
+       "bounce_airtime_s": 0.0
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "angle_deg": 60,
+      "moon": {
+       "velocity_change_m_s": 3.0,
+       "vertical_speed_each_way_m_s": 1.607,
+       "bounce_rise_m": 0.795,
+       "bounce_airtime_s": 1.979
+      },
+      "earth": {
+       "velocity_change_m_s": 3.0,
+       "vertical_speed_each_way_m_s": 0.257,
+       "bounce_rise_m": 0.003,
+       "bounce_airtime_s": 0.052
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "angle_deg": 90,
+      "moon": {
+       "velocity_change_m_s": 4.243,
+       "vertical_speed_each_way_m_s": 2.384,
+       "bounce_rise_m": 1.749,
+       "bounce_airtime_s": 2.935
+      },
+      "earth": {
+       "velocity_change_m_s": 4.243,
+       "vertical_speed_each_way_m_s": 1.034,
+       "bounce_rise_m": 0.054,
+       "bounce_airtime_s": 0.211
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "angle_deg": 180,
+      "moon": {
+       "velocity_change_m_s": 6.0,
+       "vertical_speed_each_way_m_s": 3.482,
+       "bounce_rise_m": 3.732,
+       "bounce_airtime_s": 4.288
+      },
+      "earth": {
+       "velocity_change_m_s": 6.0,
+       "vertical_speed_each_way_m_s": 2.132,
+       "bounce_rise_m": 0.232,
+       "bounce_airtime_s": 0.435
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "angle_deg": 30,
+      "moon": {
+       "velocity_change_m_s": 2.071,
+       "vertical_speed_each_way_m_s": 1.026,
+       "bounce_rise_m": 0.324,
+       "bounce_airtime_s": 1.263
+      },
+      "earth": {
+       "velocity_change_m_s": 2.071,
+       "vertical_speed_each_way_m_s": 0.0,
+       "bounce_rise_m": 0.0,
+       "bounce_airtime_s": 0.0
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "angle_deg": 60,
+      "moon": {
+       "velocity_change_m_s": 4.0,
+       "vertical_speed_each_way_m_s": 2.232,
+       "bounce_rise_m": 1.534,
+       "bounce_airtime_s": 2.748
+      },
+      "earth": {
+       "velocity_change_m_s": 4.0,
+       "vertical_speed_each_way_m_s": 0.882,
+       "bounce_rise_m": 0.04,
+       "bounce_airtime_s": 0.18
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "angle_deg": 90,
+      "moon": {
+       "velocity_change_m_s": 5.657,
+       "vertical_speed_each_way_m_s": 3.268,
+       "bounce_rise_m": 3.287,
+       "bounce_airtime_s": 4.024
+      },
+      "earth": {
+       "velocity_change_m_s": 5.657,
+       "vertical_speed_each_way_m_s": 1.917,
+       "bounce_rise_m": 0.187,
+       "bounce_airtime_s": 0.391
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "angle_deg": 180,
+      "moon": {
+       "velocity_change_m_s": 8.0,
+       "vertical_speed_each_way_m_s": 4.732,
+       "bounce_rise_m": 6.893,
+       "bounce_airtime_s": 5.827
+      },
+      "earth": {
+       "velocity_change_m_s": 8.0,
+       "vertical_speed_each_way_m_s": 3.382,
+       "bounce_rise_m": 0.583,
+       "bounce_airtime_s": 0.69
+      }
+     }
+    ]
+   },
+   "jumps": {
+    "moon": {
+     "take_off_m_s": 3.047,
+     "rise_m": 2.857,
+     "airtime_s": 3.752,
+     "push_s": 0.236
+    },
+    "earth": {
+     "take_off_m_s": 2.381,
+     "rise_m": 0.289,
+     "airtime_s": 0.486,
+     "push_s": 0.302
+    },
+    "countermovement": {
+     "dip_m": 0.29,
+     "dip_s": {
+      "moon": 0.629,
+      "earth": 0.313
+     },
+     "dip_and_push_s": {
+      "moon": 0.865,
+      "earth": 0.615
+     },
+     "note": "a standing jump announces itself by its dip; a jump out of a landing (a rebound) needs none"
+    },
+    "lateral_hop": {
+     "push_ratio": 0.467,
+     "limited_by": "stance",
+     "hops": [
+      {
+       "vertical_m_s": 1.0,
+       "sideways_m_s": 0.467,
+       "moon": {
+        "rise_m": 0.308,
+        "airtime_s": 1.231,
+        "covered_m": 0.575
+       },
+       "earth": {
+        "rise_m": 0.051,
+        "airtime_s": 0.204,
+        "covered_m": 0.095
+       }
+      },
+      {
+       "vertical_m_s": 1.5,
+       "sideways_m_s": 0.7,
+       "moon": {
+        "rise_m": 0.693,
+        "airtime_s": 1.847,
+        "covered_m": 1.293
+       },
+       "earth": {
+        "rise_m": 0.115,
+        "airtime_s": 0.306,
+        "covered_m": 0.214
+       }
+      },
+      {
+       "vertical_m_s": 2.3,
+       "sideways_m_s": 1.073,
+       "moon": {
+        "rise_m": 1.628,
+        "airtime_s": 2.832,
+        "covered_m": 3.04
+       },
+       "earth": {
+        "rise_m": 0.27,
+        "airtime_s": 0.469,
+        "covered_m": 0.503
+       }
+      }
+     ]
+    },
+    "commitment": [
+     {
+      "rise_m": 0.3,
+      "take_off_m_s": 0.987,
+      "airtime_s": 1.216,
+      "shapes_in_flight": 1.6,
+      "earth_airtime_same_take_off_s": 0.201
+     },
+     {
+      "rise_m": 0.6,
+      "take_off_m_s": 1.396,
+      "airtime_s": 1.719,
+      "shapes_in_flight": 2.3,
+      "earth_airtime_same_take_off_s": 0.285
+     },
+     {
+      "rise_m": 1.0,
+      "take_off_m_s": 1.802,
+      "airtime_s": 2.219,
+      "shapes_in_flight": 3.0,
+      "earth_airtime_same_take_off_s": 0.368
+     },
+     {
+      "rise_m": 1.6,
+      "take_off_m_s": 2.28,
+      "airtime_s": 2.807,
+      "shapes_in_flight": 3.7,
+      "earth_airtime_same_take_off_s": 0.465
+     },
+     {
+      "rise_m": 2.86,
+      "take_off_m_s": 3.048,
+      "airtime_s": 3.753,
+      "shapes_in_flight": 5.0,
+      "earth_airtime_same_take_off_s": 0.622
+     }
+    ]
+   },
+   "flight": {
+    "moon": {
+     "take_off_m_s": 3.047,
+     "airtime_s": 3.752,
+     "shapes": 5.0,
+     "take_off_can_give": {
+      "push_s": 0.236,
+      "mean_push_N": 798.2,
+      "somersault_N_m_s": 47.2
+     },
+     "one_somersault_needs_N_m_s": {
+      "layout": 15.7,
+      "tuck": 4.0
+     },
+     "somersault_rev_s": 0.27
+    },
+    "earth": {
+     "take_off_m_s": 2.381,
+     "airtime_s": 0.486,
+     "shapes": 0.6,
+     "take_off_can_give": {
+      "push_s": 0.302,
+      "mean_push_N": 972.3,
+      "somersault_N_m_s": 73.5
+     },
+     "one_somersault_needs_N_m_s": {
+      "layout": 121.4,
+      "tuck": 30.7
+     },
+     "somersault_rev_s": 2.06
+    },
+    "note": "the centre of mass keeps its arc: shape changes orientation and turn rate; contact alone changes the arc"
+   },
+   "landings": {
+    "loads": [
+     {
+      "landing_m_s": 1.5,
+      "stroke_0.2_m": {
+       "stance_s": 0.267,
+       "moon": {
+        "mean_push_own_bw": 4.5,
+        "mean_push_earth_bw": 0.74,
+        "brakes_or_turns_m_s": 1.55
+       },
+       "earth": {
+        "mean_push_own_bw": 1.6,
+        "mean_push_earth_bw": 1.57,
+        "brakes_or_turns_m_s": 3.29
+       }
+      },
+      "stroke_0.4_m": {
+       "stance_s": 0.533,
+       "moon": {
+        "mean_push_own_bw": 2.7,
+        "mean_push_earth_bw": 0.45,
+        "brakes_or_turns_m_s": 1.89
+       },
+       "earth": {
+        "mean_push_own_bw": 1.3,
+        "mean_push_earth_bw": 1.29,
+        "brakes_or_turns_m_s": 5.38
+       }
+      },
+      "stroke_0.6_m": {
+       "stance_s": 0.8,
+       "moon": {
+        "mean_push_own_bw": 2.2,
+        "mean_push_earth_bw": 0.36,
+        "brakes_or_turns_m_s": 2.24
+       },
+       "earth": {
+        "mean_push_own_bw": 1.2,
+        "mean_push_earth_bw": 1.19,
+        "brakes_or_turns_m_s": 7.48
+       }
+      }
+     },
+     {
+      "landing_m_s": 2.5,
+      "stroke_0.2_m": {
+       "stance_s": 0.16,
+       "moon": {
+        "mean_push_own_bw": 10.6,
+        "mean_push_earth_bw": 1.76,
+        "brakes_or_turns_m_s": 2.21
+       },
+       "earth": {
+        "mean_push_own_bw": 2.6,
+        "mean_push_earth_bw": 2.59,
+        "brakes_or_turns_m_s": 3.26
+       }
+      },
+      "stroke_0.4_m": {
+       "stance_s": 0.32,
+       "moon": {
+        "mean_push_own_bw": 5.8,
+        "mean_push_earth_bw": 0.96,
+        "brakes_or_turns_m_s": 2.42
+       },
+       "earth": {
+        "mean_push_own_bw": 1.8,
+        "mean_push_earth_bw": 1.8,
+        "brakes_or_turns_m_s": 4.51
+       }
+      },
+      "stroke_0.6_m": {
+       "stance_s": 0.48,
+       "moon": {
+        "mean_push_own_bw": 4.2,
+        "mean_push_earth_bw": 0.7,
+        "brakes_or_turns_m_s": 2.62
+       },
+       "earth": {
+        "mean_push_own_bw": 1.5,
+        "mean_push_earth_bw": 1.53,
+        "brakes_or_turns_m_s": 5.77
+       }
+      }
+     },
+     {
+      "landing_m_s": 3.0,
+      "stroke_0.2_m": {
+       "stance_s": 0.133,
+       "moon": {
+        "mean_push_own_bw": 14.9,
+        "mean_push_earth_bw": 2.46,
+        "brakes_or_turns_m_s": 2.57
+       },
+       "earth": {
+        "mean_push_own_bw": 3.3,
+        "mean_push_earth_bw": 3.29,
+        "brakes_or_turns_m_s": 3.45
+       }
+      },
+      "stroke_0.4_m": {
+       "stance_s": 0.267,
+       "moon": {
+        "mean_push_own_bw": 7.9,
+        "mean_push_earth_bw": 1.31,
+        "brakes_or_turns_m_s": 2.75
+       },
+       "earth": {
+        "mean_push_own_bw": 2.1,
+        "mean_push_earth_bw": 2.15,
+        "brakes_or_turns_m_s": 4.49
+       }
+      },
+      "stroke_0.6_m": {
+       "stance_s": 0.4,
+       "moon": {
+        "mean_push_own_bw": 5.6,
+        "mean_push_earth_bw": 0.93,
+        "brakes_or_turns_m_s": 2.92
+       },
+       "earth": {
+        "mean_push_own_bw": 1.8,
+        "mean_push_earth_bw": 1.76,
+        "brakes_or_turns_m_s": 5.54
+       }
+      }
+     }
+    ],
+    "drops": [
+     {
+      "drop_m": 1.0,
+      "lands_m_s": 1.8,
+      "like_an_earth_drop_of_m": 0.17
+     },
+     {
+      "drop_m": 2.0,
+      "lands_m_s": 2.55,
+      "like_an_earth_drop_of_m": 0.33
+     },
+     {
+      "drop_m": 3.0,
+      "lands_m_s": 3.12,
+      "like_an_earth_drop_of_m": 0.5
+     },
+     {
+      "drop_m": 5.0,
+      "lands_m_s": 4.03,
+      "like_an_earth_drop_of_m": 0.83
+     }
+    ],
+    "attitude_after_a_bump_at_the_top": {
+     "take_off_m_s": 2.3,
+     "descent_s": {
+      "moon": 1.416,
+      "earth": 0.235
+     },
+     "rows": [
+      {
+       "angular_momentum_N_m_s": 1.0,
+       "moon": {
+        "layout_deg": 9.0,
+        "tuck_deg": 34.0
+       },
+       "earth": {
+        "layout_deg": 1.0,
+        "tuck_deg": 6.0
+       }
+      },
+      {
+       "angular_momentum_N_m_s": 3.0,
+       "moon": {
+        "layout_deg": 26.0,
+        "tuck_deg": 103.0
+       },
+       "earth": {
+        "layout_deg": 4.0,
+        "tuck_deg": 17.0
+       }
+      },
+      {
+       "angular_momentum_N_m_s": 5.0,
+       "moon": {
+        "layout_deg": 43.0,
+        "tuck_deg": 171.0
+       },
+       "earth": {
+        "layout_deg": 7.0,
+        "tuck_deg": 28.0
+       }
+      },
+      {
+       "angular_momentum_N_m_s": 10.0,
+       "moon": {
+        "layout_deg": 86.0,
+        "tuck_deg": 342.0
+       },
+       "earth": {
+        "layout_deg": 14.0,
+        "tuck_deg": 57.0
+       }
+      }
+     ]
+    }
+   },
+   "throws": {
+    "ball": "handball (size 3)",
+    "ball_kg": 0.45,
+    "push_s": 0.15,
+    "release_above_com_m": 1.0,
+    "standing": [
+     {
+      "release_m_s": 5.0,
+      "hand_force_N": 15.0,
+      "moon": {
+       "friction_share_braced": 0.21,
+       "reach_needed_recoiling_m": 0.17,
+       "reach_needed_braced_m": 0.32,
+       "held_feet_under": false
+      },
+      "earth": {
+       "friction_share_braced": 0.03,
+       "reach_needed_recoiling_m": 0.03,
+       "reach_needed_braced_m": 0.05,
+       "held_feet_under": true
+      }
+     },
+     {
+      "release_m_s": 10.0,
+      "hand_force_N": 30.0,
+      "moon": {
+       "friction_share_braced": 0.42,
+       "reach_needed_recoiling_m": 0.34,
+       "reach_needed_braced_m": 0.64,
+       "held_feet_under": false
+      },
+      "earth": {
+       "friction_share_braced": 0.07,
+       "reach_needed_recoiling_m": 0.06,
+       "reach_needed_braced_m": 0.11,
+       "held_feet_under": true
+      }
+     },
+     {
+      "release_m_s": 15.0,
+      "hand_force_N": 45.0,
+      "moon": {
+       "friction_share_braced": 0.63,
+       "reach_needed_recoiling_m": 0.5,
+       "reach_needed_braced_m": 0.96,
+       "held_feet_under": false
+      },
+      "earth": {
+       "friction_share_braced": 0.1,
+       "reach_needed_recoiling_m": 0.08,
+       "reach_needed_braced_m": 0.16,
+       "held_feet_under": true
+      }
+     }
+    ],
+    "fastest_release_held_m_s": {
+     "feet under the body": {
+      "moon": 3.0,
+      "earth": 18.0
+     },
+     "long split stance": {
+      "moon": 14.9,
+      "earth": 89.9
+     },
+     "in a landing, feet under": {
+      "moon": 17.3,
+      "earth": 32.3
+     }
+    },
+    "in_the_air": [
+     {
+      "throw": "chest pass, near the centre of mass",
+      "release_m_s": 5.0,
+      "angular_momentum_N_m_s": 0.67,
+      "moon": {
+       "layout_deg": 6.0,
+       "tuck_deg": 23.0
+      },
+      "earth": {
+       "layout_deg": 1.0,
+       "tuck_deg": 4.0
+      }
+     },
+     {
+      "throw": "chest pass, near the centre of mass",
+      "release_m_s": 10.0,
+      "angular_momentum_N_m_s": 1.35,
+      "moon": {
+       "layout_deg": 12.0,
+       "tuck_deg": 46.0
+      },
+      "earth": {
+       "layout_deg": 2.0,
+       "tuck_deg": 8.0
+      }
+     },
+     {
+      "throw": "overhead, at arm's length",
+      "release_m_s": 5.0,
+      "angular_momentum_N_m_s": 1.8,
+      "moon": {
+       "layout_deg": 16.0,
+       "tuck_deg": 62.0
+      },
+      "earth": {
+       "layout_deg": 3.0,
+       "tuck_deg": 10.0
+      }
+     },
+     {
+      "throw": "overhead, at arm's length",
+      "release_m_s": 10.0,
+      "angular_momentum_N_m_s": 3.6,
+      "moon": {
+       "layout_deg": 31.0,
+       "tuck_deg": 123.0
+      },
+      "earth": {
+       "layout_deg": 5.0,
+       "tuck_deg": 20.0
+      }
+     }
+    ],
+    "catches": "a catch takes the same impulse in reverse: the tables hold for a ball caught at that speed",
+    "kick": {
+     "leg_angular_momentum_N_m_s": 22.4,
+     "mean_moment_N_m": 149.0,
+     "one_foot_can_hold_N_m": {
+      "moon": 8.9,
+      "earth": 53.9
+     },
+     "note": "what one foot cannot hold, the arms and trunk must take by turning against the leg"
+    }
+   },
+   "floor_and_falls": {
+    "topple_s": {
+     "2_to_15_deg": {
+      "moon": 2.02,
+      "earth": 0.82
+     },
+     "2_to_35_deg": {
+      "moon": 2.67,
+      "earth": 1.08
+     },
+     "5_to_90_deg": {
+      "moon": 2.72,
+      "earth": 1.11
+     }
+    },
+    "get_down_s": {
+     "0.3_m": {
+      "moon": 0.64,
+      "earth": 0.318
+     },
+     "0.45_m": {
+      "moon": 0.784,
+      "earth": 0.39
+     }
+    },
+    "stand_up_and_stop_s": {
+     "moon": {
+      "0.3_m": 0.645,
+      "0.45_m": 0.79,
+      "push_acceleration_m_s2": 12.9
+     },
+     "earth": {
+      "0.3_m": 0.371,
+      "0.45_m": 0.454,
+      "push_acceleration_m_s2": 7.9
+     }
+    },
+    "note": "a change of height that must end at rest takes about twice as long as on Earth at either end: a body sinks no faster than g, and a rise slows no faster than g; one that ends in motion (a jump, a drop into a landing) is quick at its muscle end"
+   }
+  },
+  "larger athlete, 1.80 m and 80 kg (scaled)": {
+   "ground": {
+    "friction": 0.8,
+    "balance_clock_s": {
+     "moon": 0.784,
+     "earth": 0.319
+    },
+    "lean_start": [
+     {
+      "distance_m": 0.1,
+      "moon": {
+       "seconds": 0.88,
+       "speed_m_s": 0.25
+      },
+      "earth": {
+       "seconds": 0.358,
+       "speed_m_s": 0.62
+      }
+     },
+     {
+      "distance_m": 0.3,
+      "moon": {
+       "seconds": 1.408,
+       "speed_m_s": 0.53
+      },
+      "earth": {
+       "seconds": 0.573,
+       "speed_m_s": 1.31
+      }
+     }
+    ],
+    "friction_limited_start": [
+     {
+      "speed_m_s": 2.0,
+      "moon": {
+       "seconds": 1.54,
+       "metres": 1.54
+      },
+      "earth": {
+       "seconds": 0.25,
+       "metres": 0.25
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "moon": {
+       "seconds": 2.31,
+       "metres": 3.46
+      },
+      "earth": {
+       "seconds": 0.38,
+       "metres": 0.57
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "moon": {
+       "seconds": 3.08,
+       "metres": 6.16
+      },
+      "earth": {
+       "seconds": 0.51,
+       "metres": 1.02
+      }
+     }
+    ],
+    "stride_change_m_s": {
+     "vertical_0.4_m_s_each_way": {
+      "moon": 1.07,
+      "earth": 3.23
+     },
+     "vertical_0.6_m_s_each_way": {
+      "moon": 1.39,
+      "earth": 3.55
+     }
+    },
+    "stops": [
+     {
+      "speed_m_s": 2.0,
+      "sliding_m": {
+       "moon": 1.54,
+       "earth": 0.25
+      },
+      "braking_landing_from_1.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 1.893,
+        "left_m_s": 0.107,
+        "distance_in_landing_m": 0.562,
+        "slide_after_m": 0.004,
+        "total_m": 0.566,
+        "mean_push_body_weights": {
+         "lunar": 2.73,
+         "earth": 0.45
+        }
+       },
+       "earth": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 2.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.533,
+        "slide_after_m": 0.0,
+        "total_m": 0.533,
+        "mean_push_body_weights": {
+         "lunar": 7.77,
+         "earth": 1.29
+        }
+       }
+      },
+      "braking_landing_from_2.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 2.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.32,
+        "slide_after_m": 0.0,
+        "total_m": 0.32,
+        "mean_push_body_weights": {
+         "lunar": 5.81,
+         "earth": 0.96
+        }
+       },
+       "earth": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 2.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.32,
+        "slide_after_m": 0.0,
+        "total_m": 0.32,
+        "mean_push_body_weights": {
+         "lunar": 10.85,
+         "earth": 1.8
+        }
+       }
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "sliding_m": {
+       "moon": 3.46,
+       "earth": 0.57
+      },
+      "braking_landing_from_1.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 1.893,
+        "left_m_s": 1.107,
+        "distance_in_landing_m": 1.095,
+        "slide_after_m": 0.472,
+        "total_m": 1.567,
+        "mean_push_body_weights": {
+         "lunar": 2.73,
+         "earth": 0.45
+        }
+       },
+       "earth": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 3.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.8,
+        "slide_after_m": 0.0,
+        "total_m": 0.8,
+        "mean_push_body_weights": {
+         "lunar": 7.77,
+         "earth": 1.29
+        }
+       }
+      },
+      "braking_landing_from_2.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 2.416,
+        "left_m_s": 0.584,
+        "distance_in_landing_m": 0.573,
+        "slide_after_m": 0.131,
+        "total_m": 0.705,
+        "mean_push_body_weights": {
+         "lunar": 5.81,
+         "earth": 0.96
+        }
+       },
+       "earth": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 3.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.48,
+        "slide_after_m": 0.0,
+        "total_m": 0.48,
+        "mean_push_body_weights": {
+         "lunar": 10.85,
+         "earth": 1.8
+        }
+       }
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "sliding_m": {
+       "moon": 6.16,
+       "earth": 1.02
+      },
+      "braking_landing_from_1.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 1.893,
+        "left_m_s": 2.107,
+        "distance_in_landing_m": 1.629,
+        "slide_after_m": 1.708,
+        "total_m": 3.337,
+        "mean_push_body_weights": {
+         "lunar": 2.73,
+         "earth": 0.45
+        }
+       },
+       "earth": {
+        "stance_s": 0.533,
+        "shed_in_landing_m_s": 4.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 1.067,
+        "slide_after_m": 0.0,
+        "total_m": 1.067,
+        "mean_push_body_weights": {
+         "lunar": 7.77,
+         "earth": 1.29
+        }
+       }
+      },
+      "braking_landing_from_2.5_m_s_down": {
+       "moon": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 2.416,
+        "left_m_s": 1.584,
+        "distance_in_landing_m": 0.893,
+        "slide_after_m": 0.966,
+        "total_m": 1.859,
+        "mean_push_body_weights": {
+         "lunar": 5.81,
+         "earth": 0.96
+        }
+       },
+       "earth": {
+        "stance_s": 0.32,
+        "shed_in_landing_m_s": 4.0,
+        "left_m_s": 0.0,
+        "distance_in_landing_m": 0.64,
+        "slide_after_m": 0.0,
+        "total_m": 0.64,
+        "mean_push_body_weights": {
+         "lunar": 10.85,
+         "earth": 1.8
+        }
+       }
+      }
+     }
+    ],
+    "steady_turn_radius_m": [
+     {
+      "speed_m_s": 2.0,
+      "mu_0.5": {
+       "moon": 4.93,
+       "earth": 0.82
+      },
+      "mu_0.8": {
+       "moon": 3.08,
+       "earth": 0.51
+      },
+      "mu_1.2": {
+       "moon": 2.05,
+       "earth": 0.34
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "mu_0.5": {
+       "moon": 11.08,
+       "earth": 1.84
+      },
+      "mu_0.8": {
+       "moon": 6.93,
+       "earth": 1.15
+      },
+      "mu_1.2": {
+       "moon": 4.62,
+       "earth": 0.76
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "mu_0.5": {
+       "moon": 19.7,
+       "earth": 3.26
+      },
+      "mu_0.8": {
+       "moon": 12.31,
+       "earth": 2.04
+      },
+      "mu_1.2": {
+       "moon": 8.21,
+       "earth": 1.36
+      }
+     }
+    ],
+    "bank_for_a_5_m_circle_deg": {
+     "2.0_m_s": 0.0,
+     "3.0_m_s": 9.3,
+     "4.0_m_s": 24.4
+    },
+    "cuts_through_one_stance": [
+     {
+      "speed_m_s": 2.0,
+      "angle_deg": 30,
+      "moon": {
+       "velocity_change_m_s": 1.035,
+       "vertical_speed_each_way_m_s": 0.379,
+       "bounce_rise_m": 0.044,
+       "bounce_airtime_s": 0.467
+      },
+      "earth": {
+       "velocity_change_m_s": 1.035,
+       "vertical_speed_each_way_m_s": 0.0,
+       "bounce_rise_m": 0.0,
+       "bounce_airtime_s": 0.0
+      }
+     },
+     {
+      "speed_m_s": 2.0,
+      "angle_deg": 60,
+      "moon": {
+       "velocity_change_m_s": 2.0,
+       "vertical_speed_each_way_m_s": 0.982,
+       "bounce_rise_m": 0.297,
+       "bounce_airtime_s": 1.209
+      },
+      "earth": {
+       "velocity_change_m_s": 2.0,
+       "vertical_speed_each_way_m_s": 0.0,
+       "bounce_rise_m": 0.0,
+       "bounce_airtime_s": 0.0
+      }
+     },
+     {
+      "speed_m_s": 2.0,
+      "angle_deg": 90,
+      "moon": {
+       "velocity_change_m_s": 2.828,
+       "vertical_speed_each_way_m_s": 1.5,
+       "bounce_rise_m": 0.692,
+       "bounce_airtime_s": 1.847
+      },
+      "earth": {
+       "velocity_change_m_s": 2.828,
+       "vertical_speed_each_way_m_s": 0.15,
+       "bounce_rise_m": 0.001,
+       "bounce_airtime_s": 0.031
+      }
+     },
+     {
+      "speed_m_s": 2.0,
+      "angle_deg": 180,
+      "moon": {
+       "velocity_change_m_s": 4.0,
+       "vertical_speed_each_way_m_s": 2.232,
+       "bounce_rise_m": 1.534,
+       "bounce_airtime_s": 2.748
+      },
+      "earth": {
+       "velocity_change_m_s": 4.0,
+       "vertical_speed_each_way_m_s": 0.882,
+       "bounce_rise_m": 0.04,
+       "bounce_airtime_s": 0.18
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "angle_deg": 30,
+      "moon": {
+       "velocity_change_m_s": 1.553,
+       "vertical_speed_each_way_m_s": 0.703,
+       "bounce_rise_m": 0.152,
+       "bounce_airtime_s": 0.865
+      },
+      "earth": {
+       "velocity_change_m_s": 1.553,
+       "vertical_speed_each_way_m_s": 0.0,
+       "bounce_rise_m": 0.0,
+       "bounce_airtime_s": 0.0
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "angle_deg": 60,
+      "moon": {
+       "velocity_change_m_s": 3.0,
+       "vertical_speed_each_way_m_s": 1.607,
+       "bounce_rise_m": 0.795,
+       "bounce_airtime_s": 1.979
+      },
+      "earth": {
+       "velocity_change_m_s": 3.0,
+       "vertical_speed_each_way_m_s": 0.257,
+       "bounce_rise_m": 0.003,
+       "bounce_airtime_s": 0.052
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "angle_deg": 90,
+      "moon": {
+       "velocity_change_m_s": 4.243,
+       "vertical_speed_each_way_m_s": 2.384,
+       "bounce_rise_m": 1.749,
+       "bounce_airtime_s": 2.935
+      },
+      "earth": {
+       "velocity_change_m_s": 4.243,
+       "vertical_speed_each_way_m_s": 1.034,
+       "bounce_rise_m": 0.054,
+       "bounce_airtime_s": 0.211
+      }
+     },
+     {
+      "speed_m_s": 3.0,
+      "angle_deg": 180,
+      "moon": {
+       "velocity_change_m_s": 6.0,
+       "vertical_speed_each_way_m_s": 3.482,
+       "bounce_rise_m": 3.732,
+       "bounce_airtime_s": 4.288
+      },
+      "earth": {
+       "velocity_change_m_s": 6.0,
+       "vertical_speed_each_way_m_s": 2.132,
+       "bounce_rise_m": 0.232,
+       "bounce_airtime_s": 0.435
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "angle_deg": 30,
+      "moon": {
+       "velocity_change_m_s": 2.071,
+       "vertical_speed_each_way_m_s": 1.026,
+       "bounce_rise_m": 0.324,
+       "bounce_airtime_s": 1.263
+      },
+      "earth": {
+       "velocity_change_m_s": 2.071,
+       "vertical_speed_each_way_m_s": 0.0,
+       "bounce_rise_m": 0.0,
+       "bounce_airtime_s": 0.0
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "angle_deg": 60,
+      "moon": {
+       "velocity_change_m_s": 4.0,
+       "vertical_speed_each_way_m_s": 2.232,
+       "bounce_rise_m": 1.534,
+       "bounce_airtime_s": 2.748
+      },
+      "earth": {
+       "velocity_change_m_s": 4.0,
+       "vertical_speed_each_way_m_s": 0.882,
+       "bounce_rise_m": 0.04,
+       "bounce_airtime_s": 0.18
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "angle_deg": 90,
+      "moon": {
+       "velocity_change_m_s": 5.657,
+       "vertical_speed_each_way_m_s": 3.268,
+       "bounce_rise_m": 3.287,
+       "bounce_airtime_s": 4.024
+      },
+      "earth": {
+       "velocity_change_m_s": 5.657,
+       "vertical_speed_each_way_m_s": 1.917,
+       "bounce_rise_m": 0.187,
+       "bounce_airtime_s": 0.391
+      }
+     },
+     {
+      "speed_m_s": 4.0,
+      "angle_deg": 180,
+      "moon": {
+       "velocity_change_m_s": 8.0,
+       "vertical_speed_each_way_m_s": 4.732,
+       "bounce_rise_m": 6.893,
+       "bounce_airtime_s": 5.827
+      },
+      "earth": {
+       "velocity_change_m_s": 8.0,
+       "vertical_speed_each_way_m_s": 3.382,
+       "bounce_rise_m": 0.583,
+       "bounce_airtime_s": 0.69
+      }
+     }
+    ]
+   },
+   "jumps": {
+    "moon": {
+     "take_off_m_s": 3.137,
+     "rise_m": 3.03,
+     "airtime_s": 3.863,
+     "push_s": 0.252
+    },
+    "earth": {
+     "take_off_m_s": 2.445,
+     "rise_m": 0.305,
+     "airtime_s": 0.499,
+     "push_s": 0.323
+    },
+    "countermovement": {
+     "dip_m": 0.29,
+     "dip_s": {
+      "moon": 0.629,
+      "earth": 0.313
+     },
+     "dip_and_push_s": {
+      "moon": 0.881,
+      "earth": 0.636
+     },
+     "note": "a standing jump announces itself by its dip; a jump out of a landing (a rebound) needs none"
+    },
+    "lateral_hop": {
+     "push_ratio": 0.467,
+     "limited_by": "stance",
+     "hops": [
+      {
+       "vertical_m_s": 1.0,
+       "sideways_m_s": 0.467,
+       "moon": {
+        "rise_m": 0.308,
+        "airtime_s": 1.231,
+        "covered_m": 0.575
+       },
+       "earth": {
+        "rise_m": 0.051,
+        "airtime_s": 0.204,
+        "covered_m": 0.095
+       }
+      },
+      {
+       "vertical_m_s": 1.5,
+       "sideways_m_s": 0.7,
+       "moon": {
+        "rise_m": 0.693,
+        "airtime_s": 1.847,
+        "covered_m": 1.293
+       },
+       "earth": {
+        "rise_m": 0.115,
+        "airtime_s": 0.306,
+        "covered_m": 0.214
+       }
+      },
+      {
+       "vertical_m_s": 2.3,
+       "sideways_m_s": 1.073,
+       "moon": {
+        "rise_m": 1.628,
+        "airtime_s": 2.832,
+        "covered_m": 3.039
+       },
+       "earth": {
+        "rise_m": 0.27,
+        "airtime_s": 0.469,
+        "covered_m": 0.503
+       }
+      }
+     ]
+    },
+    "commitment": [
+     {
+      "rise_m": 0.3,
+      "take_off_m_s": 0.987,
+      "airtime_s": 1.216,
+      "shapes_in_flight": 1.6,
+      "earth_airtime_same_take_off_s": 0.201
+     },
+     {
+      "rise_m": 0.6,
+      "take_off_m_s": 1.396,
+      "airtime_s": 1.719,
+      "shapes_in_flight": 2.3,
+      "earth_airtime_same_take_off_s": 0.285
+     },
+     {
+      "rise_m": 1.0,
+      "take_off_m_s": 1.802,
+      "airtime_s": 2.219,
+      "shapes_in_flight": 3.0,
+      "earth_airtime_same_take_off_s": 0.368
+     },
+     {
+      "rise_m": 1.6,
+      "take_off_m_s": 2.28,
+      "airtime_s": 2.807,
+      "shapes_in_flight": 3.7,
+      "earth_airtime_same_take_off_s": 0.465
+     },
+     {
+      "rise_m": 3.03,
+      "take_off_m_s": 3.137,
+      "airtime_s": 3.863,
+      "shapes_in_flight": 5.2,
+      "earth_airtime_same_take_off_s": 0.64
+     }
+    ]
+   },
+   "flight": {
+    "moon": {
+     "take_off_m_s": 3.137,
+     "airtime_s": 3.863,
+     "shapes": 5.2,
+     "take_off_can_give": {
+      "push_s": 0.252,
+      "mean_push_N": 1126.7,
+      "somersault_N_m_s": 77.8
+     },
+     "one_somersault_needs_N_m_s": {
+      "layout": 26.7,
+      "tuck": 6.8
+     },
+     "somersault_rev_s": 0.26
+    },
+    "earth": {
+     "take_off_m_s": 2.445,
+     "airtime_s": 0.499,
+     "shapes": 0.7,
+     "take_off_can_give": {
+      "push_s": 0.323,
+      "mean_push_N": 1390.0,
+      "somersault_N_m_s": 123.2
+     },
+     "one_somersault_needs_N_m_s": {
+      "layout": 207.1,
+      "tuck": 52.3
+     },
+     "somersault_rev_s": 2.01
+    },
+    "note": "the centre of mass keeps its arc: shape changes orientation and turn rate; contact alone changes the arc"
+   },
+   "landings": {
+    "loads": [
+     {
+      "landing_m_s": 1.5,
+      "stroke_0.2_m": {
+       "stance_s": 0.267,
+       "moon": {
+        "mean_push_own_bw": 4.5,
+        "mean_push_earth_bw": 0.74,
+        "brakes_or_turns_m_s": 1.55
+       },
+       "earth": {
+        "mean_push_own_bw": 1.6,
+        "mean_push_earth_bw": 1.57,
+        "brakes_or_turns_m_s": 3.29
+       }
+      },
+      "stroke_0.4_m": {
+       "stance_s": 0.533,
+       "moon": {
+        "mean_push_own_bw": 2.7,
+        "mean_push_earth_bw": 0.45,
+        "brakes_or_turns_m_s": 1.89
+       },
+       "earth": {
+        "mean_push_own_bw": 1.3,
+        "mean_push_earth_bw": 1.29,
+        "brakes_or_turns_m_s": 5.38
+       }
+      },
+      "stroke_0.6_m": {
+       "stance_s": 0.8,
+       "moon": {
+        "mean_push_own_bw": 2.2,
+        "mean_push_earth_bw": 0.36,
+        "brakes_or_turns_m_s": 2.24
+       },
+       "earth": {
+        "mean_push_own_bw": 1.2,
+        "mean_push_earth_bw": 1.19,
+        "brakes_or_turns_m_s": 7.48
+       }
+      }
+     },
+     {
+      "landing_m_s": 2.5,
+      "stroke_0.2_m": {
+       "stance_s": 0.16,
+       "moon": {
+        "mean_push_own_bw": 10.6,
+        "mean_push_earth_bw": 1.76,
+        "brakes_or_turns_m_s": 2.21
+       },
+       "earth": {
+        "mean_push_own_bw": 2.6,
+        "mean_push_earth_bw": 2.59,
+        "brakes_or_turns_m_s": 3.26
+       }
+      },
+      "stroke_0.4_m": {
+       "stance_s": 0.32,
+       "moon": {
+        "mean_push_own_bw": 5.8,
+        "mean_push_earth_bw": 0.96,
+        "brakes_or_turns_m_s": 2.42
+       },
+       "earth": {
+        "mean_push_own_bw": 1.8,
+        "mean_push_earth_bw": 1.8,
+        "brakes_or_turns_m_s": 4.51
+       }
+      },
+      "stroke_0.6_m": {
+       "stance_s": 0.48,
+       "moon": {
+        "mean_push_own_bw": 4.2,
+        "mean_push_earth_bw": 0.7,
+        "brakes_or_turns_m_s": 2.62
+       },
+       "earth": {
+        "mean_push_own_bw": 1.5,
+        "mean_push_earth_bw": 1.53,
+        "brakes_or_turns_m_s": 5.77
+       }
+      }
+     },
+     {
+      "landing_m_s": 3.0,
+      "stroke_0.2_m": {
+       "stance_s": 0.133,
+       "moon": {
+        "mean_push_own_bw": 14.9,
+        "mean_push_earth_bw": 2.46,
+        "brakes_or_turns_m_s": 2.57
+       },
+       "earth": {
+        "mean_push_own_bw": 3.3,
+        "mean_push_earth_bw": 3.29,
+        "brakes_or_turns_m_s": 3.45
+       }
+      },
+      "stroke_0.4_m": {
+       "stance_s": 0.267,
+       "moon": {
+        "mean_push_own_bw": 7.9,
+        "mean_push_earth_bw": 1.31,
+        "brakes_or_turns_m_s": 2.75
+       },
+       "earth": {
+        "mean_push_own_bw": 2.1,
+        "mean_push_earth_bw": 2.15,
+        "brakes_or_turns_m_s": 4.49
+       }
+      },
+      "stroke_0.6_m": {
+       "stance_s": 0.4,
+       "moon": {
+        "mean_push_own_bw": 5.6,
+        "mean_push_earth_bw": 0.93,
+        "brakes_or_turns_m_s": 2.92
+       },
+       "earth": {
+        "mean_push_own_bw": 1.8,
+        "mean_push_earth_bw": 1.76,
+        "brakes_or_turns_m_s": 5.54
+       }
+      }
+     }
+    ],
+    "drops": [
+     {
+      "drop_m": 1.0,
+      "lands_m_s": 1.8,
+      "like_an_earth_drop_of_m": 0.17
+     },
+     {
+      "drop_m": 2.0,
+      "lands_m_s": 2.55,
+      "like_an_earth_drop_of_m": 0.33
+     },
+     {
+      "drop_m": 3.0,
+      "lands_m_s": 3.12,
+      "like_an_earth_drop_of_m": 0.5
+     },
+     {
+      "drop_m": 5.0,
+      "lands_m_s": 4.03,
+      "like_an_earth_drop_of_m": 0.83
+     }
+    ],
+    "attitude_after_a_bump_at_the_top": {
+     "take_off_m_s": 2.3,
+     "descent_s": {
+      "moon": 1.416,
+      "earth": 0.235
+     },
+     "rows": [
+      {
+       "angular_momentum_N_m_s": 1.0,
+       "moon": {
+        "layout_deg": 5.0,
+        "tuck_deg": 20.0
+       },
+       "earth": {
+        "layout_deg": 1.0,
+        "tuck_deg": 3.0
+       }
+      },
+      {
+       "angular_momentum_N_m_s": 3.0,
+       "moon": {
+        "layout_deg": 15.0,
+        "tuck_deg": 59.0
+       },
+       "earth": {
+        "layout_deg": 2.0,
+        "tuck_deg": 10.0
+       }
+      },
+      {
+       "angular_momentum_N_m_s": 5.0,
+       "moon": {
+        "layout_deg": 25.0,
+        "tuck_deg": 98.0
+       },
+       "earth": {
+        "layout_deg": 4.0,
+        "tuck_deg": 16.0
+       }
+      },
+      {
+       "angular_momentum_N_m_s": 10.0,
+       "moon": {
+        "layout_deg": 49.0,
+        "tuck_deg": 195.0
+       },
+       "earth": {
+        "layout_deg": 8.0,
+        "tuck_deg": 32.0
+       }
+      }
+     ]
+    }
+   },
+   "throws": {
+    "ball": "handball (size 3)",
+    "ball_kg": 0.45,
+    "push_s": 0.15,
+    "release_above_com_m": 1.098,
+    "standing": [
+     {
+      "release_m_s": 5.0,
+      "hand_force_N": 15.0,
+      "moon": {
+       "friction_share_braced": 0.14,
+       "reach_needed_recoiling_m": 0.13,
+       "reach_needed_braced_m": 0.24,
+       "held_feet_under": false
+      },
+      "earth": {
+       "friction_share_braced": 0.02,
+       "reach_needed_recoiling_m": 0.02,
+       "reach_needed_braced_m": 0.04,
+       "held_feet_under": true
+      }
+     },
+     {
+      "release_m_s": 10.0,
+      "hand_force_N": 30.0,
+      "moon": {
+       "friction_share_braced": 0.29,
+       "reach_needed_recoiling_m": 0.25,
+       "reach_needed_braced_m": 0.48,
+       "held_feet_under": false
+      },
+      "earth": {
+       "friction_share_braced": 0.05,
+       "reach_needed_recoiling_m": 0.04,
+       "reach_needed_braced_m": 0.08,
+       "held_feet_under": true
+      }
+     },
+     {
+      "release_m_s": 15.0,
+      "hand_force_N": 45.0,
+      "moon": {
+       "friction_share_braced": 0.43,
+       "reach_needed_recoiling_m": 0.38,
+       "reach_needed_braced_m": 0.73,
+       "held_feet_under": false
+      },
+      "earth": {
+       "friction_share_braced": 0.07,
+       "reach_needed_recoiling_m": 0.06,
+       "reach_needed_braced_m": 0.12,
+       "held_feet_under": true
+      }
+     }
+    ],
+    "fastest_release_held_m_s": {
+     "feet under the body": {
+      "moon": 4.3,
+      "earth": 26.2
+     },
+     "long split stance": {
+      "moon": 21.7,
+      "earth": 130.8
+     },
+     "in a landing, feet under": {
+      "moon": 25.2,
+      "earth": 47.1
+     }
+    },
+    "in_the_air": [
+     {
+      "throw": "chest pass, near the centre of mass",
+      "release_m_s": 5.0,
+      "angular_momentum_N_m_s": 0.67,
+      "moon": {
+       "layout_deg": 3.0,
+       "tuck_deg": 13.0
+      },
+      "earth": {
+       "layout_deg": 1.0,
+       "tuck_deg": 2.0
+      }
+     },
+     {
+      "throw": "chest pass, near the centre of mass",
+      "release_m_s": 10.0,
+      "angular_momentum_N_m_s": 1.35,
+      "moon": {
+       "layout_deg": 7.0,
+       "tuck_deg": 26.0
+      },
+      "earth": {
+       "layout_deg": 1.0,
+       "tuck_deg": 4.0
+      }
+     },
+     {
+      "throw": "overhead, at arm's length",
+      "release_m_s": 5.0,
+      "angular_momentum_N_m_s": 1.8,
+      "moon": {
+       "layout_deg": 9.0,
+       "tuck_deg": 35.0
+      },
+      "earth": {
+       "layout_deg": 1.0,
+       "tuck_deg": 6.0
+      }
+     },
+     {
+      "throw": "overhead, at arm's length",
+      "release_m_s": 10.0,
+      "angular_momentum_N_m_s": 3.6,
+      "moon": {
+       "layout_deg": 18.0,
+       "tuck_deg": 70.0
+      },
+      "earth": {
+       "layout_deg": 3.0,
+       "tuck_deg": 12.0
+      }
+     }
+    ],
+    "catches": "a catch takes the same impulse in reverse: the tables hold for a ball caught at that speed",
+    "kick": {
+     "leg_angular_momentum_N_m_s": 39.2,
+     "mean_moment_N_m": 261.0,
+     "one_foot_can_hold_N_m": {
+      "moon": 14.3,
+      "earth": 86.3
+     },
+     "note": "what one foot cannot hold, the arms and trunk must take by turning against the leg"
+    }
+   },
+   "floor_and_falls": {
+    "topple_s": {
+     "2_to_15_deg": {
+      "moon": 2.12,
+      "earth": 0.86
+     },
+     "2_to_35_deg": {
+      "moon": 2.79,
+      "earth": 1.14
+     },
+     "5_to_90_deg": {
+      "moon": 2.85,
+      "earth": 1.16
+     }
+    },
+    "get_down_s": {
+     "0.3_m": {
+      "moon": 0.64,
+      "earth": 0.318
+     },
+     "0.45_m": {
+      "moon": 0.784,
+      "earth": 0.39
+     }
+    },
+    "stand_up_and_stop_s": {
+     "moon": {
+      "0.3_m": 0.646,
+      "0.45_m": 0.791,
+      "push_acceleration_m_s2": 12.5
+     },
+     "earth": {
+      "0.3_m": 0.375,
+      "0.45_m": 0.459,
+      "push_acceleration_m_s2": 7.6
+     }
+    },
+    "note": "a change of height that must end at rest takes about twice as long as on Earth at either end: a body sinks no faster than g, and a rise slows no faster than g; one that ends in motion (a jump, a drop into a landing) is quick at its muscle end"
+   }
+  }
+ },
+ "balls": {
+  "basketball (size 7)": {
+   "mass_kg": 0.62,
+   "diameter_m": 0.239,
+   "drag_area_m2": 0.02109,
+   "terminal_m_s": {
+    "moon": 8.25,
+    "earth": 21.7
+   },
+   "throws": [
+    {
+     "release_m_s": 5.0,
+     "moon": {
+      "best_angle_deg": 39.0,
+      "range_m": 13.7,
+      "flight_s": 4.26,
+      "arrives_m_s": 4.5
+     },
+     "earth": {
+      "best_angle_deg": 31.0,
+      "range_m": 3.9,
+      "flight_s": 0.96,
+      "arrives_m_s": 7.6
+     },
+     "moon_without_air": {
+      "best_angle_deg": 42.0,
+      "range_m": 17.3,
+      "flight_s": 4.65,
+      "arrives_m_s": 5.6
+     }
+    },
+    {
+     "release_m_s": 10.0,
+     "moon": {
+      "best_angle_deg": 38.0,
+      "range_m": 32.6,
+      "flight_s": 6.64,
+      "arrives_m_s": 5.8
+     },
+     "earth": {
+      "best_angle_deg": 38.0,
+      "range_m": 10.4,
+      "flight_s": 1.5,
+      "arrives_m_s": 10.2
+     },
+     "moon_without_air": {
+      "best_angle_deg": 44.0,
+      "range_m": 63.5,
+      "flight_s": 8.83,
+      "arrives_m_s": 10.3
+     }
+    },
+    {
+     "release_m_s": 15.0,
+     "moon": {
+      "best_angle_deg": 36.0,
+      "range_m": 48.1,
+      "flight_s": 8.11,
+      "arrives_m_s": 6.4
+     },
+     "earth": {
+      "best_angle_deg": 40.0,
+      "range_m": 18.6,
+      "flight_s": 2.03,
+      "arrives_m_s": 12.4
+     },
+     "moon_without_air": {
+      "best_angle_deg": 45.0,
+      "range_m": 140.5,
+      "flight_s": 13.25,
+      "arrives_m_s": 15.2
+     }
+    }
+   ]
+  },
+  "handball (size 3)": {
+   "mass_kg": 0.45,
+   "diameter_m": 0.19,
+   "drag_area_m2": 0.01333,
+   "terminal_m_s": {
+    "moon": 8.84,
+    "earth": 23.25
+   },
+   "throws": [
+    {
+     "release_m_s": 5.0,
+     "moon": {
+      "best_angle_deg": 39.0,
+      "range_m": 14.1,
+      "flight_s": 4.28,
+      "arrives_m_s": 4.6
+     },
+     "earth": {
+      "best_angle_deg": 32.0,
+      "range_m": 3.9,
+      "flight_s": 0.97,
+      "arrives_m_s": 7.7
+     },
+     "moon_without_air": {
+      "best_angle_deg": 42.0,
+      "range_m": 17.3,
+      "flight_s": 4.65,
+      "arrives_m_s": 5.6
+     }
+    },
+    {
+     "release_m_s": 10.0,
+     "moon": {
+      "best_angle_deg": 38.0,
+      "range_m": 34.6,
+      "flight_s": 6.75,
+      "arrives_m_s": 6.1
+     },
+     "earth": {
+      "best_angle_deg": 39.0,
+      "range_m": 10.6,
+      "flight_s": 1.52,
+      "arrives_m_s": 10.4
+     },
+     "moon_without_air": {
+      "best_angle_deg": 44.0,
+      "range_m": 63.5,
+      "flight_s": 8.83,
+      "arrives_m_s": 10.3
+     }
+    },
+    {
+     "release_m_s": 15.0,
+     "moon": {
+      "best_angle_deg": 36.0,
+      "range_m": 51.8,
+      "flight_s": 8.32,
+      "arrives_m_s": 6.7
+     },
+     "earth": {
+      "best_angle_deg": 40.0,
+      "range_m": 19.2,
+      "flight_s": 2.04,
+      "arrives_m_s": 12.7
+     },
+     "moon_without_air": {
+      "best_angle_deg": 45.0,
+      "range_m": 140.5,
+      "flight_s": 13.25,
+      "arrives_m_s": 15.2
+     }
+    }
+   ]
+  },
+  "football (size 5)": {
+   "mass_kg": 0.43,
+   "diameter_m": 0.22,
+   "drag_area_m2": 0.01787,
+   "terminal_m_s": {
+    "moon": 7.46,
+    "earth": 19.63
+   },
+   "throws": [
+    {
+     "release_m_s": 5.0,
+     "moon": {
+      "best_angle_deg": 38.0,
+      "range_m": 13.1,
+      "flight_s": 4.16,
+      "arrives_m_s": 4.3
+     },
+     "earth": {
+      "best_angle_deg": 33.0,
+      "range_m": 3.9,
+      "flight_s": 0.98,
+      "arrives_m_s": 7.5
+     },
+     "moon_without_air": {
+      "best_angle_deg": 42.0,
+      "range_m": 17.3,
+      "flight_s": 4.65,
+      "arrives_m_s": 5.6
+     }
+    },
+    {
+     "release_m_s": 10.0,
+     "moon": {
+      "best_angle_deg": 37.0,
+      "range_m": 29.9,
+      "flight_s": 6.36,
+      "arrives_m_s": 5.4
+     },
+     "earth": {
+      "best_angle_deg": 38.0,
+      "range_m": 10.1,
+      "flight_s": 1.49,
+      "arrives_m_s": 9.9
+     },
+     "moon_without_air": {
+      "best_angle_deg": 44.0,
+      "range_m": 63.5,
+      "flight_s": 8.83,
+      "arrives_m_s": 10.3
+     }
+    },
+    {
+     "release_m_s": 15.0,
+     "moon": {
+      "best_angle_deg": 35.0,
+      "range_m": 42.9,
+      "flight_s": 7.66,
+      "arrives_m_s": 5.9
+     },
+     "earth": {
+      "best_angle_deg": 39.0,
+      "range_m": 17.7,
+      "flight_s": 1.97,
+      "arrives_m_s": 11.8
+     },
+     "moon_without_air": {
+      "best_angle_deg": 45.0,
+      "range_m": 140.5,
+      "flight_s": 13.25,
+      "arrives_m_s": 15.2
+     }
+    }
+   ]
+  },
+  "volleyball": {
+   "mass_kg": 0.27,
+   "diameter_m": 0.21,
+   "drag_area_m2": 0.01628,
+   "terminal_m_s": {
+    "moon": 6.2,
+    "earth": 16.3
+   },
+   "throws": [
+    {
+     "release_m_s": 5.0,
+     "moon": {
+      "best_angle_deg": 37.0,
+      "range_m": 12.0,
+      "flight_s": 4.03,
+      "arrives_m_s": 4.0
+     },
+     "earth": {
+      "best_angle_deg": 31.0,
+      "range_m": 3.8,
+      "flight_s": 0.96,
+      "arrives_m_s": 7.3
+     },
+     "moon_without_air": {
+      "best_angle_deg": 42.0,
+      "range_m": 17.3,
+      "flight_s": 4.65,
+      "arrives_m_s": 5.6
+     }
+    },
+    {
+     "release_m_s": 10.0,
+     "moon": {
+      "best_angle_deg": 36.0,
+      "range_m": 24.9,
+      "flight_s": 5.92,
+      "arrives_m_s": 4.8
+     },
+     "earth": {
+      "best_angle_deg": 37.0,
+      "range_m": 9.5,
+      "flight_s": 1.46,
+      "arrives_m_s": 9.3
+     },
+     "moon_without_air": {
+      "best_angle_deg": 44.0,
+      "range_m": 63.5,
+      "flight_s": 8.83,
+      "arrives_m_s": 10.3
+     }
+    },
+    {
+     "release_m_s": 15.0,
+     "moon": {
+      "best_angle_deg": 33.0,
+      "range_m": 34.3,
+      "flight_s": 6.83,
+      "arrives_m_s": 5.1
+     },
+     "earth": {
+      "best_angle_deg": 38.0,
+      "range_m": 15.8,
+      "flight_s": 1.9,
+      "arrives_m_s": 10.8
+     },
+     "moon_without_air": {
+      "best_angle_deg": 45.0,
+      "range_m": 140.5,
+      "flight_s": 13.25,
+      "arrives_m_s": 15.2
+     }
+    }
+   ]
+  },
+  "soft ball (illustrative)": {
+   "mass_kg": 0.1,
+   "diameter_m": 0.2,
+   "drag_area_m2": 0.01477,
+   "terminal_m_s": {
+    "moon": 3.96,
+    "earth": 10.41
+   },
+   "throws": [
+    {
+     "release_m_s": 5.0,
+     "moon": {
+      "best_angle_deg": 33.0,
+      "range_m": 8.7,
+      "flight_s": 3.59,
+      "arrives_m_s": 3.1
+     },
+     "earth": {
+      "best_angle_deg": 29.0,
+      "range_m": 3.5,
+      "flight_s": 0.95,
+      "arrives_m_s": 6.6
+     },
+     "moon_without_air": {
+      "best_angle_deg": 42.0,
+      "range_m": 17.3,
+      "flight_s": 4.65,
+      "arrives_m_s": 5.6
+     }
+    },
+    {
+     "release_m_s": 10.0,
+     "moon": {
+      "best_angle_deg": 30.0,
+      "range_m": 14.9,
+      "flight_s": 4.59,
+      "arrives_m_s": 3.4
+     },
+     "earth": {
+      "best_angle_deg": 34.0,
+      "range_m": 7.5,
+      "flight_s": 1.35,
+      "arrives_m_s": 7.6
+     },
+     "moon_without_air": {
+      "best_angle_deg": 44.0,
+      "range_m": 63.5,
+      "flight_s": 8.83,
+      "arrives_m_s": 10.3
+     }
+    },
+    {
+     "release_m_s": 15.0,
+     "moon": {
+      "best_angle_deg": 28.0,
+      "range_m": 18.9,
+      "flight_s": 5.1,
+      "arrives_m_s": 3.5
+     },
+     "earth": {
+      "best_angle_deg": 34.0,
+      "range_m": 11.1,
+      "flight_s": 1.65,
+      "arrives_m_s": 8.2
+     },
+     "moon_without_air": {
+      "best_angle_deg": 45.0,
+      "range_m": 140.5,
+      "flight_s": 13.25,
+      "arrives_m_s": 15.2
+     }
+    }
+   ]
+  },
+  "shuttlecock": {
+   "mass_kg": 0.0052,
+   "diameter_m": null,
+   "drag_area_m2": 0.00185,
+   "terminal_m_s": {
+    "moon": 2.55,
+    "earth": 6.7
+   },
+   "throws": [
+    {
+     "release_m_s": 5.0,
+     "moon": {
+      "best_angle_deg": 27.0,
+      "range_m": 5.7,
+      "flight_s": 3.11,
+      "arrives_m_s": 2.3
+     },
+     "earth": {
+      "best_angle_deg": 25.0,
+      "range_m": 2.9,
+      "flight_s": 0.94,
+      "arrives_m_s": 5.4
+     },
+     "moon_without_air": {
+      "best_angle_deg": 42.0,
+      "range_m": 17.3,
+      "flight_s": 4.65,
+      "arrives_m_s": 5.6
+     }
+    },
+    {
+     "release_m_s": 10.0,
+     "moon": {
+      "best_angle_deg": 24.0,
+      "range_m": 8.4,
+      "flight_s": 3.6,
+      "arrives_m_s": 2.3
+     },
+     "earth": {
+      "best_angle_deg": 28.0,
+      "range_m": 5.2,
+      "flight_s": 1.21,
+      "arrives_m_s": 5.8
+     },
+     "moon_without_air": {
+      "best_angle_deg": 44.0,
+      "range_m": 63.5,
+      "flight_s": 8.83,
+      "arrives_m_s": 10.3
+     }
+    },
+    {
+     "release_m_s": 15.0,
+     "moon": {
+      "best_angle_deg": 23.0,
+      "range_m": 10.0,
+      "flight_s": 3.88,
+      "arrives_m_s": 2.4
+     },
+     "earth": {
+      "best_angle_deg": 27.0,
+      "range_m": 6.9,
+      "flight_s": 1.36,
+      "arrives_m_s": 5.9
+     },
+     "moon_without_air": {
+      "best_angle_deg": 45.0,
+      "range_m": 140.5,
+      "flight_s": 13.25,
+      "arrives_m_s": 15.2
+     }
+    }
+   ]
+  }
+ },
+ "contact": {
+  "friction": 0.8,
+  "ground_collisions": [
+   {
+    "bodies": [
+     "dancer, 1.64 m and 55 kg",
+     "dancer, 1.64 m and 55 kg"
+    ],
+    "closing_m_s": 1.0,
+    "speed_change_m_s": [
+     0.5,
+     0.5
+    ],
+    "energy_J": 14.0,
+    "moon": {
+     "slide_m": [
+      0.1,
+      0.1
+     ],
+     "to_absorb_by_grip_s": [
+      0.38,
+      0.38
+     ]
+    },
+    "earth": {
+     "slide_m": [
+      0.02,
+      0.02
+     ],
+     "to_absorb_by_grip_s": [
+      0.06,
+      0.06
+     ]
+    }
+   },
+   {
+    "bodies": [
+     "dancer, 1.64 m and 55 kg",
+     "dancer, 1.64 m and 55 kg"
+    ],
+    "closing_m_s": 2.0,
+    "speed_change_m_s": [
+     1.0,
+     1.0
+    ],
+    "energy_J": 55.0,
+    "moon": {
+     "slide_m": [
+      0.38,
+      0.38
+     ],
+     "to_absorb_by_grip_s": [
+      0.77,
+      0.77
+     ]
+    },
+    "earth": {
+     "slide_m": [
+      0.06,
+      0.06
+     ],
+     "to_absorb_by_grip_s": [
+      0.13,
+      0.13
+     ]
+    }
+   },
+   {
+    "bodies": [
+     "dancer, 1.64 m and 55 kg",
+     "dancer, 1.64 m and 55 kg"
+    ],
+    "closing_m_s": 3.0,
+    "speed_change_m_s": [
+     1.5,
+     1.5
+    ],
+    "energy_J": 124.0,
+    "moon": {
+     "slide_m": [
+      0.87,
+      0.87
+     ],
+     "to_absorb_by_grip_s": [
+      1.15,
+      1.15
+     ]
+    },
+    "earth": {
+     "slide_m": [
+      0.14,
+      0.14
+     ],
+     "to_absorb_by_grip_s": [
+      0.19,
+      0.19
+     ]
+    }
+   },
+   {
+    "bodies": [
+     "dancer, 1.64 m and 55 kg",
+     "larger athlete, 1.80 m and 80 kg (scaled)"
+    ],
+    "closing_m_s": 1.0,
+    "speed_change_m_s": [
+     0.59,
+     0.41
+    ],
+    "energy_J": 16.0,
+    "moon": {
+     "slide_m": [
+      0.14,
+      0.06
+     ],
+     "to_absorb_by_grip_s": [
+      0.46,
+      0.31
+     ]
+    },
+    "earth": {
+     "slide_m": [
+      0.02,
+      0.01
+     ],
+     "to_absorb_by_grip_s": [
+      0.08,
+      0.05
+     ]
+    }
+   },
+   {
+    "bodies": [
+     "dancer, 1.64 m and 55 kg",
+     "larger athlete, 1.80 m and 80 kg (scaled)"
+    ],
+    "closing_m_s": 2.0,
+    "speed_change_m_s": [
+     1.19,
+     0.81
+    ],
+    "energy_J": 65.0,
+    "moon": {
+     "slide_m": [
+      0.54,
+      0.26
+     ],
+     "to_absorb_by_grip_s": [
+      0.91,
+      0.63
+     ]
+    },
+    "earth": {
+     "slide_m": [
+      0.09,
+      0.04
+     ],
+     "to_absorb_by_grip_s": [
+      0.15,
+      0.1
+     ]
+    }
+   },
+   {
+    "bodies": [
+     "dancer, 1.64 m and 55 kg",
+     "larger athlete, 1.80 m and 80 kg (scaled)"
+    ],
+    "closing_m_s": 3.0,
+    "speed_change_m_s": [
+     1.78,
+     1.22
+    ],
+    "energy_J": 147.0,
+    "moon": {
+     "slide_m": [
+      1.22,
+      0.57
+     ],
+     "to_absorb_by_grip_s": [
+      1.37,
+      0.94
+     ]
+    },
+    "earth": {
+     "slide_m": [
+      0.2,
+      0.1
+     ],
+     "to_absorb_by_grip_s": [
+      0.23,
+      0.16
+     ]
+    }
+   },
+   {
+    "bodies": [
+     "larger athlete, 1.80 m and 80 kg (scaled)",
+     "larger athlete, 1.80 m and 80 kg (scaled)"
+    ],
+    "closing_m_s": 1.0,
+    "speed_change_m_s": [
+     0.5,
+     0.5
+    ],
+    "energy_J": 20.0,
+    "moon": {
+     "slide_m": [
+      0.1,
+      0.1
+     ],
+     "to_absorb_by_grip_s": [
+      0.38,
+      0.38
+     ]
+    },
+    "earth": {
+     "slide_m": [
+      0.02,
+      0.02
+     ],
+     "to_absorb_by_grip_s": [
+      0.06,
+      0.06
+     ]
+    }
+   },
+   {
+    "bodies": [
+     "larger athlete, 1.80 m and 80 kg (scaled)",
+     "larger athlete, 1.80 m and 80 kg (scaled)"
+    ],
+    "closing_m_s": 2.0,
+    "speed_change_m_s": [
+     1.0,
+     1.0
+    ],
+    "energy_J": 80.0,
+    "moon": {
+     "slide_m": [
+      0.38,
+      0.38
+     ],
+     "to_absorb_by_grip_s": [
+      0.77,
+      0.77
+     ]
+    },
+    "earth": {
+     "slide_m": [
+      0.06,
+      0.06
+     ],
+     "to_absorb_by_grip_s": [
+      0.13,
+      0.13
+     ]
+    }
+   },
+   {
+    "bodies": [
+     "larger athlete, 1.80 m and 80 kg (scaled)",
+     "larger athlete, 1.80 m and 80 kg (scaled)"
+    ],
+    "closing_m_s": 3.0,
+    "speed_change_m_s": [
+     1.5,
+     1.5
+    ],
+    "energy_J": 180.0,
+    "moon": {
+     "slide_m": [
+      0.87,
+      0.87
+     ],
+     "to_absorb_by_grip_s": [
+      1.15,
+      1.15
+     ]
+    },
+    "earth": {
+     "slide_m": [
+      0.14,
+      0.14
+     ],
+     "to_absorb_by_grip_s": [
+      0.19,
+      0.19
+     ]
+    }
+   }
+  ],
+  "standing_push_N": {
+   "dancer, 1.64 m and 55 kg": {
+    "moon": 71.0,
+    "earth": 431.0
+   },
+   "larger athlete, 1.80 m and 80 kg (scaled)": {
+    "moon": 104.0,
+    "earth": 628.0
+   }
+  },
+  "bumps_in_the_air_change_the_arcs": [
+   {
+    "bodies": [
+     "dancer, 1.64 m and 55 kg",
+     "dancer, 1.64 m and 55 kg"
+    ],
+    "closing_m_s": 0.5,
+    "speed_change_m_s": 0.25,
+    "landing_moves_m": {
+     "moon": 0.35,
+     "earth": 0.06
+    }
+   },
+   {
+    "bodies": [
+     "dancer, 1.64 m and 55 kg",
+     "dancer, 1.64 m and 55 kg"
+    ],
+    "closing_m_s": 1.0,
+    "speed_change_m_s": 0.5,
+    "landing_moves_m": {
+     "moon": 0.71,
+     "earth": 0.12
+    }
+   },
+   {
+    "bodies": [
+     "dancer, 1.64 m and 55 kg",
+     "larger athlete, 1.80 m and 80 kg (scaled)"
+    ],
+    "closing_m_s": 0.5,
+    "speed_change_m_s": 0.3,
+    "landing_moves_m": {
+     "moon": 0.42,
+     "earth": 0.07
+    }
+   },
+   {
+    "bodies": [
+     "dancer, 1.64 m and 55 kg",
+     "larger athlete, 1.80 m and 80 kg (scaled)"
+    ],
+    "closing_m_s": 1.0,
+    "speed_change_m_s": 0.59,
+    "landing_moves_m": {
+     "moon": 0.84,
+     "earth": 0.14
+    }
+   },
+   {
+    "bodies": [
+     "larger athlete, 1.80 m and 80 kg (scaled)",
+     "larger athlete, 1.80 m and 80 kg (scaled)"
+    ],
+    "closing_m_s": 0.5,
+    "speed_change_m_s": 0.25,
+    "landing_moves_m": {
+     "moon": 0.35,
+     "earth": 0.06
+    }
+   },
+   {
+    "bodies": [
+     "larger athlete, 1.80 m and 80 kg (scaled)",
+     "larger athlete, 1.80 m and 80 kg (scaled)"
+    ],
+    "closing_m_s": 1.0,
+    "speed_change_m_s": 0.5,
+    "landing_moves_m": {
+     "moon": 0.71,
+     "earth": 0.12
+    }
+   }
+  ],
+  "toss": {
+   "push_N": 350.0,
+   "stroke_m": 0.6,
+   "flyers": {
+    "dancer, 1.64 m and 55 kg": {
+     "moon": {
+      "take_off_m_s": 2.385,
+      "rise_m": 1.751,
+      "airtime_s": 2.937
+     },
+     "earth": null
+    },
+    "larger athlete, 1.80 m and 80 kg (scaled)": {
+     "moon": {
+      "take_off_m_s": 1.817,
+      "rise_m": 1.016,
+      "airtime_s": 2.237
+     },
+     "earth": null
+    }
+   }
+  },
+  "note": "a bump in the air also turns the bodies; landings holds the attitude it leaves at the landing"
+ },
+ "microgravity": {
+  "ground": "no weight presses the feet: no grip, no stop, no turn without a surface to push against",
+  "jumps": "every push sets an endless drift; nothing returns a player to play",
+  "balls": "a ball flies straight until the air or a wall stops it; there is no arc to read",
+  "falls": "there is no falling, landing or getting up, and no down to play against"
+ }
+}

@@ -1,0 +1,206 @@
+<mujoco model="terluna_dancer">
+  <option timestep="0.001" gravity="0 0 -1.6242" density="1.4" viscosity="1.8e-05" integrator="implicitfast"/>
+  <compiler angle="radian" autolimits="true"/>
+  <default>
+    <geom contype="0" conaffinity="0" friction="0.6 0.02 0.002" fluidshape="ellipsoid"/>
+    <joint damping="0.5" armature="0.01"/>
+  </default>
+  <worldbody>
+    <geom name="floor" type="plane" size="50 50 0.1" contype="1" conaffinity="1" friction="0.6 0.02 0.002" fluidshape="none"/>
+    <body name="pelvis" pos="0 0 0.828507">
+      <freejoint name="root"/>
+      <inertial pos="-0.01 0 0.087153" mass="6.8585" diaginertia="0.0378484 0.0326229 0.0397958"/>
+      <geom name="pelvis_cap0" type="capsule" fromto="-0.015 0.085 0.035 -0.015 -0.085 0.035" size="0.1" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+      <geom name="pelvis_cap1" type="capsule" fromto="-0.02 0 -0.01 -0.02 0 0.151562" size="0.115" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+      <body name="abdomen" pos="-0.04 0 0.171562">
+        <joint name="lumbar_flex" type="hinge" axis="0 1 0" range="-0.610865 1.0472"/>
+        <joint name="lumbar_bend" type="hinge" axis="-1 0 0" range="-0.523599 0.523599"/>
+        <joint name="lumbar_rot" type="hinge" axis="0 0 1" range="-0.349066 0.349066"/>
+        <inertial pos="0.03 0 0.106499" mass="8.0575" diaginertia="0.0568909 0.0380254 0.0522593"/>
+        <geom name="abdomen_cap0" type="capsule" fromto="0.035 0 0.01 0.035 0 0.184059" size="0.108" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+        <body name="thorax" pos="-0.01 0 0.194059">
+          <joint name="thoracic_flex" type="hinge" axis="0 1 0" range="-0.523599 0.698132"/>
+          <joint name="thoracic_bend" type="hinge" axis="-1 0 0" range="-0.436332 0.436332"/>
+          <joint name="thoracic_rot" type="hinge" axis="0 0 1" range="-0.698132 0.698132"/>
+          <inertial pos="0.03 0 0.10668" mass="8.0575" diaginertia="0.0812701 0.0368993 0.0754486"/>
+          <geom name="thorax_cap0" type="capsule" fromto="0.04 0.075 0.115 0.04 -0.075 0.115" size="0.115" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+          <geom name="thorax_cap1" type="capsule" fromto="0.03 0 0.02 0.03 0 0.155516" size="0.11" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+          <body name="neck" pos="0.005 0 0.205516">
+            <joint name="neck_flex" type="hinge" axis="0 1 0" range="-0.872665 0.785398"/>
+            <joint name="neck_bend" type="hinge" axis="-1 0 0" range="-0.610865 0.610865"/>
+            <joint name="neck_rot" type="hinge" axis="0 0 1" range="-1.22173 1.22173"/>
+            <inertial pos="0.015 0 0.055478" mass="0.55" diaginertia="0.00067375 0.00067375 0.000495"/>
+            <geom name="neck_cap0" type="capsule" fromto="0.015 0 0 0.025 0 0.100956" size="0.05" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+            <body name="head" pos="0.03 0 0.100956">
+              <joint name="head_nod" type="hinge" axis="0 1 0" range="-0.436332 0.436332"/>
+              <inertial pos="0.02 0 0.027885" mass="3.124" diaginertia="0.0121744 0.0144263 0.0112926"/>
+              <geom name="head_cap0" type="capsule" fromto="0.025 0 0.0444 0.015 0 0.0694" size="0.092" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+            </body>
+          </body>
+          <body name="L_clavicle" pos="0.085 0.02 0.180516">
+            <joint name="L_clav_elev" type="hinge" axis="1 0 0" range="-0.174533 0.610865"/>
+            <joint name="L_clav_prot" type="hinge" axis="0 0 -1" range="-0.261799 0.349066"/>
+            <inertial pos="-0.025 0.07 -0.015" mass="0.22" diaginertia="3.168e-05 0.000352 0.000352"/>
+            <geom name="L_clavicle_cap0" type="capsule" fromto="0 0 0 -0.035 0.13 -0.034644" size="0.03" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+            <body name="L_upper_arm" pos="-0.045 0.15 -0.074644">
+              <joint name="L_shoulder" type="ball" range="0 3.14159"/>
+              <inertial pos="0 0.004 -0.149625" mass="1.4025" diaginertia="0.0073293 0.00641091 0.00207729"/>
+              <geom name="L_upper_arm_cap0" type="capsule" fromto="0 0 -0.01 0 0.008 -0.240037" size="0.043" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+              <body name="L_forearm" pos="0 0.008 -0.260037">
+                <joint name="L_elbow" type="hinge" axis="0 -1 0" range="0 2.61799"/>
+                <joint name="L_pronation" type="hinge" axis="0 0 -1" range="-1.39626 1.39626"/>
+                <inertial pos="0.005 0.002 -0.113897" mass="0.759" diaginertia="0.0031289 0.00322705 0.00041858"/>
+                <geom name="L_forearm_cap0" type="capsule" fromto="0 0 -0.01 0.013 0.004 -0.234828" size="0.034" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+                <body name="L_hand" pos="0.015 0.005 -0.249828">
+                  <joint name="L_wrist_flex" type="hinge" axis="-1 0 0" range="-1.22173 1.39626"/>
+                  <joint name="L_wrist_dev" type="hinge" axis="0 -1 0" range="-0.523599 0.349066"/>
+                  <inertial pos="0.003 0 -0.055105" mass="0.308" diaginertia="0.0003451 0.00047208 0.0001879"/>
+                  <geom name="L_hand_cap0" type="capsule" fromto="0.003 0 -0.01 0.005 0 -0.146855" size="0.024" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+                  <geom name="L_palm" type="sphere" pos="0.003 0 -0.087729" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+                  <site name="L_palm" pos="0.003 0 -0.093729" size="0.005"/>
+                </body>
+              </body>
+            </body>
+          </body>
+          <body name="R_clavicle" pos="0.085 -0.02 0.180516">
+            <joint name="R_clav_elev" type="hinge" axis="-1 0 0" range="-0.174533 0.610865"/>
+            <joint name="R_clav_prot" type="hinge" axis="0 0 1" range="-0.261799 0.349066"/>
+            <inertial pos="-0.025 -0.07 -0.015" mass="0.22" diaginertia="3.168e-05 0.000352 0.000352"/>
+            <geom name="R_clavicle_cap0" type="capsule" fromto="0 0 0 -0.035 -0.13 -0.034644" size="0.03" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+            <body name="R_upper_arm" pos="-0.045 -0.15 -0.074644">
+              <joint name="R_shoulder" type="ball" range="0 3.14159"/>
+              <inertial pos="0 -0.004 -0.149625" mass="1.4025" diaginertia="0.0073293 0.00641091 0.00207729"/>
+              <geom name="R_upper_arm_cap0" type="capsule" fromto="0 0 -0.01 0 -0.008 -0.240037" size="0.043" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+              <body name="R_forearm" pos="0 -0.008 -0.260037">
+                <joint name="R_elbow" type="hinge" axis="0 -1 0" range="0 2.61799"/>
+                <joint name="R_pronation" type="hinge" axis="0 0 1" range="-1.39626 1.39626"/>
+                <inertial pos="0.005 -0.002 -0.113897" mass="0.759" diaginertia="0.0031289 0.00322705 0.00041858"/>
+                <geom name="R_forearm_cap0" type="capsule" fromto="0 0 -0.01 0.013 -0.004 -0.234828" size="0.034" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+                <body name="R_hand" pos="0.015 -0.005 -0.249828">
+                  <joint name="R_wrist_flex" type="hinge" axis="1 0 0" range="-1.22173 1.39626"/>
+                  <joint name="R_wrist_dev" type="hinge" axis="0 -1 0" range="-0.523599 0.349066"/>
+                  <inertial pos="0.003 0 -0.055105" mass="0.308" diaginertia="0.0003451 0.00047208 0.0001879"/>
+                  <geom name="R_hand_cap0" type="capsule" fromto="0.003 0 -0.01 0.005 0 -0.146855" size="0.024" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+                  <geom name="R_palm" type="sphere" pos="0.003 0 -0.087729" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+                  <site name="R_palm" pos="0.003 0 -0.093729" size="0.005"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="L_thigh" pos="0 0.082 0">
+        <joint name="L_hip" type="ball" range="0 2.61799"/>
+        <inertial pos="0.005 0 -0.125814" mass="8.129" diaginertia="0.134293 0.130678 0.025884"/>
+        <geom name="L_thigh_cap0" type="capsule" fromto="0 0.008 -0.03 0 0 -0.308323" size="0.072" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+        <body name="L_shank" pos="0 0 -0.348323">
+          <joint name="L_knee" type="hinge" axis="0 1 0" range="-0.0872665 2.61799"/>
+          <inertial pos="-0.01 0 -0.180451" mass="2.6455" diaginertia="0.0324419 0.0314912 0.00382061"/>
+          <geom name="L_shank_cap0" type="capsule" fromto="-0.005 0 -0.02 -0.005 0 -0.380629" size="0.048" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+          <geom name="L_kneecap" type="sphere" pos="0.045 0 -0.039" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+          <site name="L_kneecap" pos="0.045 0 -0.045" size="0.005"/>
+          <body name="L_foot" pos="0 0 -0.410629">
+            <joint name="L_ankle" type="hinge" axis="0 1 0" range="-0.436332 1.48353"/>
+            <joint name="L_subtalar" type="hinge" axis="-1 0 0" range="-0.349066 0.523599"/>
+            <inertial pos="0.007 0 -0.034555" mass="0.55" diaginertia="0.00056214 0.00226478 0.00260112"/>
+            <geom name="L_foot_cap0" type="capsule" fromto="-0.03 0 -0.037555 0.1194 0 -0.045555" size="0.03" mass="0" contype="0" conaffinity="0" rgba="0.8 0.7 0.6 1"/>
+            <geom name="L_heel_m" type="sphere" pos="-0.04 -0.018 -0.063555" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+            <site name="L_heel_m" pos="-0.04 -0.018 -0.069555" size="0.005"/>
+            <geom name="L_heel_l" type="sphere" pos="-0.04 0.018 -0.063555" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+            <site name="L_heel_l" pos="-0.04 0.018 -0.069555" size="0.005"/>
+            <geom name="L_ball_m" type="sphere" pos="0.1294 -0.032 -0.063555" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+            <site name="L_ball_m" pos="0.1294 -0.032 -0.069555" size="0.005"/>
+            <geom name="L_ball_l" type="sphere" pos="0.1044 0.036 -0.063555" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+            <site name="L_ball_l" pos="0.1044 0.036 -0.069555" size="0.005"/>
+            <body name="L_toes" pos="0.1294 0 -0.047555">
+              <joint name="L_mtp" type="hinge" axis="0 -1 0" range="-0.523599 1.48353"/>
+              <inertial pos="0.035 0 -0.01" mass="0.1595" diaginertia="2.297e-05 6.38e-05 6.38e-05"/>
+              <geom name="L_toes_cap0" type="capsule" fromto="0.005 0 -0.008 0.0386 0 -0.01" size="0.013" mass="0" contype="0" conaffinity="0" rgba="0.8 0.7 0.6 1"/>
+              <geom name="L_toe" type="sphere" pos="0.0406 -0.01 -0.016" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+              <site name="L_toe" pos="0.0406 -0.01 -0.022" size="0.005"/>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="R_thigh" pos="0 -0.082 0">
+        <joint name="R_hip" type="ball" range="0 2.61799"/>
+        <inertial pos="0.005 0 -0.125814" mass="8.129" diaginertia="0.134293 0.130678 0.025884"/>
+        <geom name="R_thigh_cap0" type="capsule" fromto="0 -0.008 -0.03 0 0 -0.308323" size="0.072" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+        <body name="R_shank" pos="0 0 -0.348323">
+          <joint name="R_knee" type="hinge" axis="0 1 0" range="-0.0872665 2.61799"/>
+          <inertial pos="-0.01 0 -0.180451" mass="2.6455" diaginertia="0.0324419 0.0314912 0.00382061"/>
+          <geom name="R_shank_cap0" type="capsule" fromto="-0.005 0 -0.02 -0.005 0 -0.380629" size="0.048" mass="0" contype="2" conaffinity="1" rgba="0.8 0.7 0.6 1"/>
+          <geom name="R_kneecap" type="sphere" pos="0.045 0 -0.039" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+          <site name="R_kneecap" pos="0.045 0 -0.045" size="0.005"/>
+          <body name="R_foot" pos="0 0 -0.410629">
+            <joint name="R_ankle" type="hinge" axis="0 1 0" range="-0.436332 1.48353"/>
+            <joint name="R_subtalar" type="hinge" axis="1 0 0" range="-0.349066 0.523599"/>
+            <inertial pos="0.007 0 -0.034555" mass="0.55" diaginertia="0.00056214 0.00226478 0.00260112"/>
+            <geom name="R_foot_cap0" type="capsule" fromto="-0.03 0 -0.037555 0.1194 0 -0.045555" size="0.03" mass="0" contype="0" conaffinity="0" rgba="0.8 0.7 0.6 1"/>
+            <geom name="R_heel_m" type="sphere" pos="-0.04 0.018 -0.063555" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+            <site name="R_heel_m" pos="-0.04 0.018 -0.069555" size="0.005"/>
+            <geom name="R_heel_l" type="sphere" pos="-0.04 -0.018 -0.063555" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+            <site name="R_heel_l" pos="-0.04 -0.018 -0.069555" size="0.005"/>
+            <geom name="R_ball_m" type="sphere" pos="0.1294 0.032 -0.063555" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+            <site name="R_ball_m" pos="0.1294 0.032 -0.069555" size="0.005"/>
+            <geom name="R_ball_l" type="sphere" pos="0.1044 -0.036 -0.063555" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+            <site name="R_ball_l" pos="0.1044 -0.036 -0.069555" size="0.005"/>
+            <body name="R_toes" pos="0.1294 0 -0.047555">
+              <joint name="R_mtp" type="hinge" axis="0 -1 0" range="-0.523599 1.48353"/>
+              <inertial pos="0.035 0 -0.01" mass="0.1595" diaginertia="2.297e-05 6.38e-05 6.38e-05"/>
+              <geom name="R_toes_cap0" type="capsule" fromto="0.005 0 -0.008 0.0386 0 -0.01" size="0.013" mass="0" contype="0" conaffinity="0" rgba="0.8 0.7 0.6 1"/>
+              <geom name="R_toe" type="sphere" pos="0.0406 0.01 -0.016" size="0.006" mass="0" contype="1" conaffinity="1" fluidshape="none" rgba="0.2 0.8 0.3 1"/>
+              <site name="R_toe" pos="0.0406 0.01 -0.022" size="0.005"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <contact>
+  </contact>
+  <actuator>
+    <motor name="lumbar_flex" joint="lumbar_flex" ctrlrange="-100 120"/>
+    <motor name="lumbar_bend" joint="lumbar_bend" ctrlrange="-90 90"/>
+    <motor name="lumbar_rot" joint="lumbar_rot" ctrlrange="-60 60"/>
+    <motor name="thoracic_flex" joint="thoracic_flex" ctrlrange="-90 100"/>
+    <motor name="thoracic_bend" joint="thoracic_bend" ctrlrange="-80 80"/>
+    <motor name="thoracic_rot" joint="thoracic_rot" ctrlrange="-60 60"/>
+    <motor name="neck_flex" joint="neck_flex" ctrlrange="-25 25"/>
+    <motor name="neck_bend" joint="neck_bend" ctrlrange="-20 20"/>
+    <motor name="neck_rot" joint="neck_rot" ctrlrange="-15 15"/>
+    <motor name="head_nod" joint="head_nod" ctrlrange="-10 10"/>
+    <motor name="L_clav_elev" joint="L_clav_elev" ctrlrange="-40 40"/>
+    <motor name="L_clav_prot" joint="L_clav_prot" ctrlrange="-40 40"/>
+    <motor name="L_shoulder_x" joint="L_shoulder" gear="1 0 0 0 0 0" ctrlrange="-45 45"/>
+    <motor name="L_shoulder_y" joint="L_shoulder" gear="0 1 0 0 0 0" ctrlrange="-50 50"/>
+    <motor name="L_shoulder_z" joint="L_shoulder" gear="0 0 1 0 0 0" ctrlrange="-30 30"/>
+    <motor name="L_elbow" joint="L_elbow" ctrlrange="-35 35"/>
+    <motor name="L_pronation" joint="L_pronation" ctrlrange="-8 8"/>
+    <motor name="L_wrist_flex" joint="L_wrist_flex" ctrlrange="-15 15"/>
+    <motor name="L_wrist_dev" joint="L_wrist_dev" ctrlrange="-12 12"/>
+    <motor name="R_clav_elev" joint="R_clav_elev" ctrlrange="-40 40"/>
+    <motor name="R_clav_prot" joint="R_clav_prot" ctrlrange="-40 40"/>
+    <motor name="R_shoulder_x" joint="R_shoulder" gear="1 0 0 0 0 0" ctrlrange="-45 45"/>
+    <motor name="R_shoulder_y" joint="R_shoulder" gear="0 1 0 0 0 0" ctrlrange="-50 50"/>
+    <motor name="R_shoulder_z" joint="R_shoulder" gear="0 0 1 0 0 0" ctrlrange="-30 30"/>
+    <motor name="R_elbow" joint="R_elbow" ctrlrange="-35 35"/>
+    <motor name="R_pronation" joint="R_pronation" ctrlrange="-8 8"/>
+    <motor name="R_wrist_flex" joint="R_wrist_flex" ctrlrange="-15 15"/>
+    <motor name="R_wrist_dev" joint="R_wrist_dev" ctrlrange="-12 12"/>
+    <motor name="L_hip_x" joint="L_hip" gear="1 0 0 0 0 0" ctrlrange="-100 100"/>
+    <motor name="L_hip_y" joint="L_hip" gear="0 1 0 0 0 0" ctrlrange="-150 150"/>
+    <motor name="L_hip_z" joint="L_hip" gear="0 0 1 0 0 0" ctrlrange="-50 50"/>
+    <motor name="L_knee" joint="L_knee" ctrlrange="-178 90"/>
+    <motor name="L_ankle" joint="L_ankle" ctrlrange="-29 120"/>
+    <motor name="L_subtalar" joint="L_subtalar" ctrlrange="-30 30"/>
+    <motor name="L_mtp" joint="L_mtp" ctrlrange="-20 20"/>
+    <motor name="R_hip_x" joint="R_hip" gear="1 0 0 0 0 0" ctrlrange="-100 100"/>
+    <motor name="R_hip_y" joint="R_hip" gear="0 1 0 0 0 0" ctrlrange="-150 150"/>
+    <motor name="R_hip_z" joint="R_hip" gear="0 0 1 0 0 0" ctrlrange="-50 50"/>
+    <motor name="R_knee" joint="R_knee" ctrlrange="-178 90"/>
+    <motor name="R_ankle" joint="R_ankle" ctrlrange="-29 120"/>
+    <motor name="R_subtalar" joint="R_subtalar" ctrlrange="-30 30"/>
+    <motor name="R_mtp" joint="R_mtp" ctrlrange="-20 20"/>
+  </actuator>
+</mujoco>

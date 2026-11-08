@@ -1,0 +1,3742 @@
+{
+ "schema": "terluna.humanities.dance-garments/1",
+ "producer": {
+  "domain": "humanities",
+  "files": {
+   "humanities/dance/garment/screen.py": "447934a3750b5826",
+   "humanities/dance/garment/materials.py": "a51f15efecb2b963",
+   "humanities/dance/garment/cloth.py": "568af9150a75ff1e",
+   "humanities/dance/garment/garments.py": "f5fedfca30ad8865",
+   "humanities/dance/envelope.py": "660f3247df5da23d"
+  },
+  "constants": {
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "STANDARD_GRAVITY": 9.80665
+  },
+  "inputs": {
+   "humanities/dance/body/body.json": "d3ad9784f806ecab",
+   "humanities/dance/garment/sources.json": "4d1c0be6d253f05f",
+   "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1"
+  }
+ },
+ "evidence": "Closed-form and one-dimensional estimates for the fabric library in materials.py (values and their standing in sources.json) at the shared gravity and the design run's sea-level air, against Earth. Falls use the solver's normal-pressure law; swings add a strip's potential-flow added mass (a Morison-type estimate); turns use a meridian string in still air without air and with skin friction alone (a fold-free skirt), and an upper-bound index of the folds' drag against the centrifugal pull. A screen for choosing fabrics and cuts; the cloth solver's trial runs test it.",
+ "worlds": {
+  "moon": {
+   "gravity_m_s2": 1.6242188765608128,
+   "air_kg_m3": 1.4036
+  },
+  "earth": {
+   "gravity_m_s2": 9.80665,
+   "air_kg_m3": 1.225
+  }
+ },
+ "scalings": {
+  "gravity_clock": 2.457,
+  "bending_length_moon_over_earth": 1.821,
+  "forced_load_over_weight_moon_over_earth": 6.92
+ },
+ "coefficients": {
+  "normal": 1.17,
+  "skin_friction": 0.01
+ },
+ "settings": {
+  "skirt_length_m": 0.85,
+  "waist_radius_m": 0.114,
+  "panel": {
+   "length_m": 0.85,
+   "width_m": 0.4,
+   "release_deg": 30.0
+  },
+  "fold_scale_m": 0.2,
+  "garment_scale_m": 1.0,
+  "travel_m_s": [
+   1.0,
+   2.0,
+   3.0
+  ],
+  "turn_rpm": [
+   15.0,
+   27.0,
+   60.0
+  ],
+  "hem_kg_m": [
+   0.0,
+   0.025,
+   0.05,
+   0.1,
+   0.2
+  ]
+ },
+ "fabrics": [
+  {
+   "fabric": "silk_chiffon",
+   "areal_density_kg_m2": 0.0261,
+   "bending_rigidity_uN_m": 0.502,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 2.28,
+    "face_on_fall_m_s": 0.227,
+    "fall_0_5_m_s": 2.3,
+    "fall_1_5_m_s": 6.7,
+    "drag_length_cm": 3.18,
+    "added_mass_over_fabric": {
+     "fold": 8.4,
+     "garment": 42.2
+    },
+    "swing": {
+     "added_mass_ratio": 16.89,
+     "first_through_vertical_s": 4.52,
+     "largest_swing_back_deg": 16.5
+    },
+    "trail_deg": {
+     "1_m_s": 13.0,
+     "2_m_s": 6.5,
+     "3_m_s": 4.3
+    }
+   },
+   "earth": {
+    "bending_length_cm": 1.25,
+    "face_on_fall_m_s": 0.598,
+    "fall_0_5_m_s": 0.88,
+    "fall_1_5_m_s": 2.55,
+    "drag_length_cm": 3.64,
+    "added_mass_over_fabric": {
+     "fold": 7.4,
+     "garment": 36.9
+    },
+    "swing": {
+     "added_mass_ratio": 14.75,
+     "first_through_vertical_s": 1.72,
+     "largest_swing_back_deg": 16.6
+    },
+    "trail_deg": {
+     "1_m_s": 33.2,
+     "2_m_s": 17.0,
+     "3_m_s": 11.4
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 3.03,
+   "falls_and_trails_as_on_earth_kg_m2": 0.0038,
+   "bending_status": "measured"
+  },
+  {
+   "fabric": "silk_georgette",
+   "areal_density_kg_m2": 0.0343,
+   "bending_rigidity_uN_m": 0.602,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 2.21,
+    "face_on_fall_m_s": 0.26,
+    "fall_0_5_m_s": 2.03,
+    "fall_1_5_m_s": 5.87,
+    "drag_length_cm": 4.18,
+    "added_mass_over_fabric": {
+     "fold": 6.4,
+     "garment": 32.1
+    },
+    "swing": {
+     "added_mass_ratio": 12.86,
+     "first_through_vertical_s": 3.97,
+     "largest_swing_back_deg": 16.6
+    },
+    "trail_deg": {
+     "1_m_s": 14.8,
+     "2_m_s": 7.5,
+     "3_m_s": 5.0
+    }
+   },
+   "earth": {
+    "bending_length_cm": 1.21,
+    "face_on_fall_m_s": 0.685,
+    "fall_0_5_m_s": 0.78,
+    "fall_1_5_m_s": 2.24,
+    "drag_length_cm": 4.79,
+    "added_mass_over_fabric": {
+     "fold": 5.6,
+     "garment": 28.0
+    },
+    "swing": {
+     "added_mass_ratio": 11.22,
+     "first_through_vertical_s": 1.51,
+     "largest_swing_back_deg": 16.7
+    },
+    "trail_deg": {
+     "1_m_s": 37.6,
+     "2_m_s": 19.4,
+     "3_m_s": 13.0
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 3.63,
+   "falls_and_trails_as_on_earth_kg_m2": 0.005,
+   "bending_status": "measured"
+  },
+  {
+   "fabric": "silk_crepe_de_chine",
+   "areal_density_kg_m2": 0.065,
+   "bending_rigidity_uN_m": 1.5,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 2.42,
+    "face_on_fall_m_s": 0.359,
+    "fall_0_5_m_s": 1.55,
+    "fall_1_5_m_s": 4.34,
+    "drag_length_cm": 7.92,
+    "added_mass_over_fabric": {
+     "fold": 3.4,
+     "garment": 17.0
+    },
+    "swing": {
+     "added_mass_ratio": 6.78,
+     "first_through_vertical_s": 2.95,
+     "largest_swing_back_deg": 17.1
+    },
+    "trail_deg": {
+     "1_m_s": 20.3,
+     "2_m_s": 10.2,
+     "3_m_s": 6.8
+    }
+   },
+   "earth": {
+    "bending_length_cm": 1.33,
+    "face_on_fall_m_s": 0.943,
+    "fall_0_5_m_s": 0.6,
+    "fall_1_5_m_s": 1.66,
+    "drag_length_cm": 9.07,
+    "added_mass_over_fabric": {
+     "fold": 3.0,
+     "garment": 14.8
+    },
+    "swing": {
+     "added_mass_ratio": 5.92,
+     "first_through_vertical_s": 1.13,
+     "largest_swing_back_deg": 17.3
+    },
+    "trail_deg": {
+     "1_m_s": 49.5,
+     "2_m_s": 26.5,
+     "3_m_s": 17.9
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 9.06,
+   "falls_and_trails_as_on_earth_kg_m2": 0.0094,
+   "bending_status": "bracket"
+  },
+  {
+   "fabric": "silk_satin_heavy",
+   "areal_density_kg_m2": 0.09,
+   "bending_rigidity_uN_m": 3.0,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 2.74,
+    "face_on_fall_m_s": 0.422,
+    "fall_0_5_m_s": 1.37,
+    "fall_1_5_m_s": 3.74,
+    "drag_length_cm": 10.96,
+    "added_mass_over_fabric": {
+     "fold": 2.4,
+     "garment": 12.2
+    },
+    "swing": {
+     "added_mass_ratio": 4.9,
+     "first_through_vertical_s": 2.56,
+     "largest_swing_back_deg": 17.5
+    },
+    "trail_deg": {
+     "1_m_s": 23.8,
+     "2_m_s": 12.0,
+     "3_m_s": 8.0
+    }
+   },
+   "earth": {
+    "bending_length_cm": 1.5,
+    "face_on_fall_m_s": 1.11,
+    "fall_0_5_m_s": 0.53,
+    "fall_1_5_m_s": 1.43,
+    "drag_length_cm": 12.56,
+    "added_mass_over_fabric": {
+     "fold": 2.1,
+     "garment": 10.7
+    },
+    "swing": {
+     "added_mass_ratio": 4.28,
+     "first_through_vertical_s": 0.98,
+     "largest_swing_back_deg": 17.7
+    },
+    "trail_deg": {
+     "1_m_s": 56.0,
+     "2_m_s": 30.9,
+     "3_m_s": 20.9
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 18.11,
+   "falls_and_trails_as_on_earth_kg_m2": 0.013,
+   "bending_status": "bracket"
+  },
+  {
+   "fabric": "wool_plain",
+   "areal_density_kg_m2": 0.1995,
+   "bending_rigidity_uN_m": 11.65,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 3.3,
+    "face_on_fall_m_s": 0.628,
+    "fall_0_5_m_s": 1.06,
+    "fall_1_5_m_s": 2.66,
+    "drag_length_cm": 24.3,
+    "added_mass_over_fabric": {
+     "fold": 1.1,
+     "garment": 5.5
+    },
+    "swing": {
+     "added_mass_ratio": 2.21,
+     "first_through_vertical_s": 1.85,
+     "largest_swing_back_deg": 18.9
+    },
+    "trail_deg": {
+     "1_m_s": 34.7,
+     "2_m_s": 17.8,
+     "3_m_s": 12.0
+    }
+   },
+   "earth": {
+    "bending_length_cm": 1.81,
+    "face_on_fall_m_s": 1.652,
+    "fall_0_5_m_s": 0.42,
+    "fall_1_5_m_s": 1.02,
+    "drag_length_cm": 27.84,
+    "added_mass_over_fabric": {
+     "fold": 1.0,
+     "garment": 4.8
+    },
+    "swing": {
+     "added_mass_ratio": 1.93,
+     "first_through_vertical_s": 0.72,
+     "largest_swing_back_deg": 19.2
+    },
+    "trail_deg": {
+     "1_m_s": 70.9,
+     "2_m_s": 44.3,
+     "3_m_s": 30.7
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 70.34,
+   "falls_and_trails_as_on_earth_kg_m2": 0.0288,
+   "bending_status": "measured"
+  },
+  {
+   "fabric": "cotton_plain",
+   "areal_density_kg_m2": 0.0919,
+   "bending_rigidity_uN_m": 5.565,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 3.34,
+    "face_on_fall_m_s": 0.426,
+    "fall_0_5_m_s": 1.35,
+    "fall_1_5_m_s": 3.7,
+    "drag_length_cm": 11.19,
+    "added_mass_over_fabric": {
+     "fold": 2.4,
+     "garment": 12.0
+    },
+    "swing": {
+     "added_mass_ratio": 4.8,
+     "first_through_vertical_s": 2.53,
+     "largest_swing_back_deg": 17.5
+    },
+    "trail_deg": {
+     "1_m_s": 24.0,
+     "2_m_s": 12.2,
+     "3_m_s": 8.1
+    }
+   },
+   "earth": {
+    "bending_length_cm": 1.83,
+    "face_on_fall_m_s": 1.121,
+    "fall_0_5_m_s": 0.53,
+    "fall_1_5_m_s": 1.42,
+    "drag_length_cm": 12.82,
+    "added_mass_over_fabric": {
+     "fold": 2.1,
+     "garment": 10.5
+    },
+    "swing": {
+     "added_mass_ratio": 4.19,
+     "first_through_vertical_s": 0.97,
+     "largest_swing_back_deg": 17.7
+    },
+    "trail_deg": {
+     "1_m_s": 56.5,
+     "2_m_s": 31.2,
+     "3_m_s": 21.2
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 33.6,
+   "falls_and_trails_as_on_earth_kg_m2": 0.0133,
+   "bending_status": "measured"
+  },
+  {
+   "fabric": "silk_satin",
+   "areal_density_kg_m2": 0.069,
+   "bending_rigidity_uN_m": 0.8,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 1.93,
+    "face_on_fall_m_s": 0.369,
+    "fall_0_5_m_s": 1.51,
+    "fall_1_5_m_s": 4.22,
+    "drag_length_cm": 8.4,
+    "added_mass_over_fabric": {
+     "fold": 3.2,
+     "garment": 16.0
+    },
+    "swing": {
+     "added_mass_ratio": 6.39,
+     "first_through_vertical_s": 2.87,
+     "largest_swing_back_deg": 17.2
+    },
+    "trail_deg": {
+     "1_m_s": 20.9,
+     "2_m_s": 10.6,
+     "3_m_s": 7.0
+    }
+   },
+   "earth": {
+    "bending_length_cm": 1.06,
+    "face_on_fall_m_s": 0.972,
+    "fall_0_5_m_s": 0.58,
+    "fall_1_5_m_s": 1.61,
+    "drag_length_cm": 9.63,
+    "added_mass_over_fabric": {
+     "fold": 2.8,
+     "garment": 13.9
+    },
+    "swing": {
+     "added_mass_ratio": 5.58,
+     "first_through_vertical_s": 1.1,
+     "largest_swing_back_deg": 17.3
+    },
+    "trail_deg": {
+     "1_m_s": 50.7,
+     "2_m_s": 27.3,
+     "3_m_s": 18.4
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 4.83,
+   "falls_and_trails_as_on_earth_kg_m2": 0.01,
+   "bending_status": "inferred"
+  },
+  {
+   "fabric": "silk_organza",
+   "areal_density_kg_m2": 0.026,
+   "bending_rigidity_uN_m": 6.9,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 5.47,
+    "face_on_fall_m_s": 0.227,
+    "fall_0_5_m_s": 2.3,
+    "fall_1_5_m_s": 6.71,
+    "drag_length_cm": 3.17,
+    "added_mass_over_fabric": {
+     "fold": 8.5,
+     "garment": 42.4
+    },
+    "swing": {
+     "added_mass_ratio": 16.96,
+     "first_through_vertical_s": 4.53,
+     "largest_swing_back_deg": 16.5
+    },
+    "trail_deg": {
+     "1_m_s": 12.9,
+     "2_m_s": 6.5,
+     "3_m_s": 4.3
+    }
+   },
+   "earth": {
+    "bending_length_cm": 3.0,
+    "face_on_fall_m_s": 0.596,
+    "fall_0_5_m_s": 0.88,
+    "fall_1_5_m_s": 2.56,
+    "drag_length_cm": 3.63,
+    "added_mass_over_fabric": {
+     "fold": 7.4,
+     "garment": 37.0
+    },
+    "swing": {
+     "added_mass_ratio": 14.8,
+     "first_through_vertical_s": 1.73,
+     "largest_swing_back_deg": 16.6
+    },
+    "trail_deg": {
+     "1_m_s": 33.1,
+     "2_m_s": 17.0,
+     "3_m_s": 11.4
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 41.66,
+   "falls_and_trails_as_on_earth_kg_m2": 0.0038,
+   "bending_status": "chosen"
+  },
+  {
+   "fabric": "silk_habotai",
+   "areal_density_kg_m2": 0.035,
+   "bending_rigidity_uN_m": 0.75,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 2.36,
+    "face_on_fall_m_s": 0.263,
+    "fall_0_5_m_s": 2.01,
+    "fall_1_5_m_s": 5.81,
+    "drag_length_cm": 4.26,
+    "added_mass_over_fabric": {
+     "fold": 6.3,
+     "garment": 31.5
+    },
+    "swing": {
+     "added_mass_ratio": 12.6,
+     "first_through_vertical_s": 3.93,
+     "largest_swing_back_deg": 16.6
+    },
+    "trail_deg": {
+     "1_m_s": 15.0,
+     "2_m_s": 7.5,
+     "3_m_s": 5.0
+    }
+   },
+   "earth": {
+    "bending_length_cm": 1.3,
+    "face_on_fall_m_s": 0.692,
+    "fall_0_5_m_s": 0.77,
+    "fall_1_5_m_s": 2.22,
+    "drag_length_cm": 4.88,
+    "added_mass_over_fabric": {
+     "fold": 5.5,
+     "garment": 27.5
+    },
+    "swing": {
+     "added_mass_ratio": 11.0,
+     "first_through_vertical_s": 1.5,
+     "largest_swing_back_deg": 16.7
+    },
+    "trail_deg": {
+     "1_m_s": 37.9,
+     "2_m_s": 19.6,
+     "3_m_s": 13.2
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 4.53,
+   "falls_and_trails_as_on_earth_kg_m2": 0.0051,
+   "bending_status": "chosen"
+  },
+  {
+   "fabric": "silk_taffeta",
+   "areal_density_kg_m2": 0.07,
+   "bending_rigidity_uN_m": 29.4,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 6.37,
+    "face_on_fall_m_s": 0.372,
+    "fall_0_5_m_s": 1.5,
+    "fall_1_5_m_s": 4.19,
+    "drag_length_cm": 8.53,
+    "added_mass_over_fabric": {
+     "fold": 3.1,
+     "garment": 15.7
+    },
+    "swing": {
+     "added_mass_ratio": 6.3,
+     "first_through_vertical_s": 2.86,
+     "largest_swing_back_deg": 17.2
+    },
+    "trail_deg": {
+     "1_m_s": 21.1,
+     "2_m_s": 10.6,
+     "3_m_s": 7.1
+    }
+   },
+   "earth": {
+    "bending_length_cm": 3.5,
+    "face_on_fall_m_s": 0.979,
+    "fall_0_5_m_s": 0.58,
+    "fall_1_5_m_s": 1.6,
+    "drag_length_cm": 9.77,
+    "added_mass_over_fabric": {
+     "fold": 2.7,
+     "garment": 13.7
+    },
+    "swing": {
+     "added_mass_ratio": 5.5,
+     "first_through_vertical_s": 1.09,
+     "largest_swing_back_deg": 17.3
+    },
+    "trail_deg": {
+     "1_m_s": 51.0,
+     "2_m_s": 27.5,
+     "3_m_s": 18.5
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 177.51,
+   "falls_and_trails_as_on_earth_kg_m2": 0.0101,
+   "bending_status": "chosen"
+  },
+  {
+   "fabric": "silk_velvet",
+   "areal_density_kg_m2": 0.17,
+   "bending_rigidity_uN_m": 8.2,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 3.1,
+    "face_on_fall_m_s": 0.58,
+    "fall_0_5_m_s": 1.11,
+    "fall_1_5_m_s": 2.83,
+    "drag_length_cm": 20.7,
+    "added_mass_over_fabric": {
+     "fold": 1.3,
+     "garment": 6.5
+    },
+    "swing": {
+     "added_mass_ratio": 2.59,
+     "first_through_vertical_s": 1.97,
+     "largest_swing_back_deg": 18.5
+    },
+    "trail_deg": {
+     "1_m_s": 32.2,
+     "2_m_s": 16.5,
+     "3_m_s": 11.0
+    }
+   },
+   "earth": {
+    "bending_length_cm": 1.7,
+    "face_on_fall_m_s": 1.525,
+    "fall_0_5_m_s": 0.44,
+    "fall_1_5_m_s": 1.09,
+    "drag_length_cm": 23.72,
+    "added_mass_over_fabric": {
+     "fold": 1.1,
+     "garment": 5.7
+    },
+    "swing": {
+     "added_mass_ratio": 2.26,
+     "first_through_vertical_s": 0.76,
+     "largest_swing_back_deg": 18.8
+    },
+    "trail_deg": {
+     "1_m_s": 68.2,
+     "2_m_s": 41.4,
+     "3_m_s": 28.5
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 49.51,
+   "falls_and_trails_as_on_earth_kg_m2": 0.0246,
+   "bending_status": "chosen"
+  },
+  {
+   "fabric": "nylon_tulle",
+   "areal_density_kg_m2": 0.015,
+   "bending_rigidity_uN_m": 1.18,
+   "normal_factor": 0.6,
+   "moon": {
+    "bending_length_cm": 3.65,
+    "face_on_fall_m_s": 0.222,
+    "fall_0_5_m_s": 2.34,
+    "fall_1_5_m_s": 6.84,
+    "drag_length_cm": 3.04,
+    "added_mass_over_fabric": {
+     "fold": 8.8,
+     "garment": 44.1
+    },
+    "swing": {
+     "added_mass_ratio": 17.64,
+     "first_through_vertical_s": 4.61,
+     "largest_swing_back_deg": 16.5
+    },
+    "trail_deg": {
+     "1_m_s": 12.7,
+     "2_m_s": 6.4,
+     "3_m_s": 4.2
+    }
+   },
+   "earth": {
+    "bending_length_cm": 2.0,
+    "face_on_fall_m_s": 0.585,
+    "fall_0_5_m_s": 0.9,
+    "fall_1_5_m_s": 2.61,
+    "drag_length_cm": 3.49,
+    "added_mass_over_fabric": {
+     "fold": 7.7,
+     "garment": 38.5
+    },
+    "swing": {
+     "added_mass_ratio": 15.39,
+     "first_through_vertical_s": 1.76,
+     "largest_swing_back_deg": 16.5
+    },
+    "trail_deg": {
+     "1_m_s": 32.5,
+     "2_m_s": 16.6,
+     "3_m_s": 11.1
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 7.12,
+   "falls_and_trails_as_on_earth_kg_m2": 0.0022,
+   "bending_status": "chosen"
+  },
+  {
+   "fabric": "viscose_jersey",
+   "areal_density_kg_m2": 0.16,
+   "bending_rigidity_uN_m": 3.45,
+   "normal_factor": 1.0,
+   "moon": {
+    "bending_length_cm": 2.37,
+    "face_on_fall_m_s": 0.563,
+    "fall_0_5_m_s": 1.13,
+    "fall_1_5_m_s": 2.91,
+    "drag_length_cm": 19.49,
+    "added_mass_over_fabric": {
+     "fold": 1.4,
+     "garment": 6.9
+    },
+    "swing": {
+     "added_mass_ratio": 2.76,
+     "first_through_vertical_s": 2.01,
+     "largest_swing_back_deg": 18.4
+    },
+    "trail_deg": {
+     "1_m_s": 31.3,
+     "2_m_s": 16.0,
+     "3_m_s": 10.7
+    }
+   },
+   "earth": {
+    "bending_length_cm": 1.3,
+    "face_on_fall_m_s": 1.48,
+    "fall_0_5_m_s": 0.44,
+    "fall_1_5_m_s": 1.12,
+    "drag_length_cm": 22.33,
+    "added_mass_over_fabric": {
+     "fold": 1.2,
+     "garment": 6.0
+    },
+    "swing": {
+     "added_mass_ratio": 2.41,
+     "first_through_vertical_s": 0.78,
+     "largest_swing_back_deg": 18.7
+    },
+    "trail_deg": {
+     "1_m_s": 67.2,
+     "2_m_s": 40.3,
+     "3_m_s": 27.7
+    }
+   },
+   "earth_bending_rigidity_for_the_moon_drape_uN_m": 20.83,
+   "falls_and_trails_as_on_earth_kg_m2": 0.0231,
+   "bending_status": "chosen"
+  }
+ ],
+ "turns": [
+  {
+   "fabric": "silk_chiffon",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 22.78,
+    "earth": 19.88
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.607,
+      "drop_m": 0.68,
+      "flare_deg": 35.9,
+      "lag_deg": 27.3,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.84,
+      "drop_m": 0.247,
+      "flare_deg": 71.2,
+      "lag_deg": 72.1,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.852,
+      "drop_m": 0.052,
+      "flare_deg": 86.0,
+      "lag_deg": 83.7,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.5,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 3.9,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.852,
+      "drop_m": 0.291,
+      "flare_deg": 68.5,
+      "lag_deg": 57.6,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_chiffon",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 12.81,
+    "earth": 11.18
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.534,
+      "drop_m": 0.732,
+      "flare_deg": 29.8,
+      "lag_deg": 22.9,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.538,
+      "drop_m": 0.679,
+      "flare_deg": 32.0,
+      "lag_deg": 63.5,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.53,
+      "drop_m": 0.627,
+      "flare_deg": 33.6,
+      "lag_deg": 84.1,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.4,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.274,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 3.8,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.7,
+      "flare_deg": 31.3,
+      "lag_deg": 51.0,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_georgette",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 17.33,
+    "earth": 15.13
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.618,
+      "drop_m": 0.676,
+      "flare_deg": 36.7,
+      "lag_deg": 21.2,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.881,
+      "drop_m": 0.235,
+      "flare_deg": 73.0,
+      "lag_deg": 51.8,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.905,
+      "drop_m": 0.048,
+      "flare_deg": 86.5,
+      "lag_deg": 56.7,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.3,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 3.0,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.881,
+      "drop_m": 0.282,
+      "flare_deg": 69.8,
+      "lag_deg": 42.8,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_georgette",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 9.75,
+    "earth": 8.51
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.536,
+      "drop_m": 0.734,
+      "flare_deg": 29.9,
+      "lag_deg": 17.5,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.701,
+      "flare_deg": 31.2,
+      "lag_deg": 50.2,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.67,
+      "flare_deg": 32.4,
+      "lag_deg": 63.8,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.3,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 2.9,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.715,
+      "flare_deg": 30.7,
+      "lag_deg": 40.0,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_crepe_de_chine",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 9.15,
+    "earth": 7.98
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.631,
+      "drop_m": 0.671,
+      "flare_deg": 37.6,
+      "lag_deg": 11.4,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.226,
+      "flare_deg": 74.3,
+      "lag_deg": 26.4,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.947,
+      "drop_m": 0.046,
+      "flare_deg": 86.8,
+      "lag_deg": 28.4,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.2,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 1.6,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.908,
+      "drop_m": 0.275,
+      "flare_deg": 70.9,
+      "lag_deg": 22.2,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_crepe_de_chine",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 5.15,
+    "earth": 4.49
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.538,
+      "drop_m": 0.735,
+      "flare_deg": 30.0,
+      "lag_deg": 9.3,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.726,
+      "flare_deg": 30.4,
+      "lag_deg": 27.8,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.717,
+      "flare_deg": 30.7,
+      "lag_deg": 36.3,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.2,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 1.5,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.73,
+      "flare_deg": 30.2,
+      "lag_deg": 21.8,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_satin_heavy",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 6.61,
+    "earth": 5.77
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.633,
+      "drop_m": 0.67,
+      "flare_deg": 37.7,
+      "lag_deg": 8.3,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.926,
+      "drop_m": 0.224,
+      "flare_deg": 74.6,
+      "lag_deg": 19.0,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.955,
+      "drop_m": 0.046,
+      "flare_deg": 86.9,
+      "lag_deg": 20.3,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 1.1,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.913,
+      "drop_m": 0.273,
+      "flare_deg": 71.1,
+      "lag_deg": 16.0,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_satin_heavy",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 3.72,
+    "earth": 3.24
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.538,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": 6.7,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.731,
+      "flare_deg": 30.2,
+      "lag_deg": 20.3,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.726,
+      "flare_deg": 30.3,
+      "lag_deg": 26.7,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 1.1,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.733,
+      "flare_deg": 30.1,
+      "lag_deg": 15.8,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "wool_plain",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 2.98,
+    "earth": 2.6
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.635,
+      "drop_m": 0.67,
+      "flare_deg": 37.9,
+      "lag_deg": 3.8,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.932,
+      "drop_m": 0.223,
+      "flare_deg": 74.7,
+      "lag_deg": 8.5,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.961,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": 9.1,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 0.5,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.918,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": 7.2,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "wool_plain",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 1.68,
+    "earth": 1.46
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": 3.0,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.735,
+      "flare_deg": 30.0,
+      "lag_deg": 9.2,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.734,
+      "flare_deg": 30.1,
+      "lag_deg": 12.2,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 0.5,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.735,
+      "flare_deg": 30.0,
+      "lag_deg": 7.2,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "cotton_plain",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 6.47,
+    "earth": 5.65
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.633,
+      "drop_m": 0.67,
+      "flare_deg": 37.8,
+      "lag_deg": 8.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.927,
+      "drop_m": 0.224,
+      "flare_deg": 74.6,
+      "lag_deg": 18.6,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.955,
+      "drop_m": 0.046,
+      "flare_deg": 86.9,
+      "lag_deg": 19.9,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 1.1,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.913,
+      "drop_m": 0.273,
+      "flare_deg": 71.1,
+      "lag_deg": 15.7,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "cotton_plain",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 3.64,
+    "earth": 3.18
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.538,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": 6.6,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.731,
+      "flare_deg": 30.2,
+      "lag_deg": 19.9,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.727,
+      "flare_deg": 30.3,
+      "lag_deg": 26.1,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 1.1,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.733,
+      "flare_deg": 30.1,
+      "lag_deg": 15.5,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_satin",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 8.62,
+    "earth": 7.52
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.631,
+      "drop_m": 0.671,
+      "flare_deg": 37.6,
+      "lag_deg": 10.8,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.921,
+      "drop_m": 0.226,
+      "flare_deg": 74.4,
+      "lag_deg": 24.9,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.949,
+      "drop_m": 0.046,
+      "flare_deg": 86.8,
+      "lag_deg": 26.7,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.2,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 1.5,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.909,
+      "drop_m": 0.274,
+      "flare_deg": 71.0,
+      "lag_deg": 20.9,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_satin",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 4.85,
+    "earth": 4.23
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.538,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": 8.8,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.727,
+      "flare_deg": 30.3,
+      "lag_deg": 26.3,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.719,
+      "flare_deg": 30.6,
+      "lag_deg": 34.4,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.2,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 1.4,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.731,
+      "flare_deg": 30.2,
+      "lag_deg": 20.5,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_organza",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 22.87,
+    "earth": 19.96
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.606,
+      "drop_m": 0.68,
+      "flare_deg": 35.9,
+      "lag_deg": 27.4,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.839,
+      "drop_m": 0.247,
+      "flare_deg": 71.2,
+      "lag_deg": 72.4,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.851,
+      "drop_m": 0.052,
+      "flare_deg": 86.0,
+      "lag_deg": 84.4,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.5,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 3.9,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.852,
+      "drop_m": 0.291,
+      "flare_deg": 68.5,
+      "lag_deg": 57.9,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_organza",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 12.86,
+    "earth": 11.23
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.534,
+      "drop_m": 0.732,
+      "flare_deg": 29.8,
+      "lag_deg": 23.0,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.538,
+      "drop_m": 0.679,
+      "flare_deg": 32.0,
+      "lag_deg": 63.8,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.529,
+      "drop_m": 0.626,
+      "flare_deg": 33.6,
+      "lag_deg": 84.6,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.5,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.274,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 3.8,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.7,
+      "flare_deg": 31.3,
+      "lag_deg": 51.2,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_habotai",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 16.99,
+    "earth": 14.83
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.619,
+      "drop_m": 0.675,
+      "flare_deg": 36.8,
+      "lag_deg": 20.8,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.883,
+      "drop_m": 0.235,
+      "flare_deg": 73.0,
+      "lag_deg": 50.7,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.908,
+      "drop_m": 0.048,
+      "flare_deg": 86.5,
+      "lag_deg": 55.4,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.3,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 2.9,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.882,
+      "drop_m": 0.282,
+      "flare_deg": 69.9,
+      "lag_deg": 41.9,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_habotai",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 9.56,
+    "earth": 8.34
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.536,
+      "drop_m": 0.734,
+      "flare_deg": 29.9,
+      "lag_deg": 17.2,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.702,
+      "flare_deg": 31.2,
+      "lag_deg": 49.3,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.673,
+      "flare_deg": 32.3,
+      "lag_deg": 62.7,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.3,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 2.9,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.715,
+      "flare_deg": 30.7,
+      "lag_deg": 39.2,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_taffeta",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 8.49,
+    "earth": 7.41
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.631,
+      "drop_m": 0.671,
+      "flare_deg": 37.6,
+      "lag_deg": 10.6,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.921,
+      "drop_m": 0.226,
+      "flare_deg": 74.4,
+      "lag_deg": 24.5,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.949,
+      "drop_m": 0.046,
+      "flare_deg": 86.9,
+      "lag_deg": 26.3,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.2,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 1.5,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.91,
+      "drop_m": 0.274,
+      "flare_deg": 71.0,
+      "lag_deg": 20.6,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_taffeta",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 4.78,
+    "earth": 4.17
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.538,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": 8.6,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.727,
+      "flare_deg": 30.3,
+      "lag_deg": 25.9,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.72,
+      "flare_deg": 30.6,
+      "lag_deg": 33.9,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.2,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 1.4,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.731,
+      "flare_deg": 30.2,
+      "lag_deg": 20.3,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_velvet",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 3.5,
+    "earth": 3.05
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.635,
+      "drop_m": 0.67,
+      "flare_deg": 37.9,
+      "lag_deg": 4.4,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.932,
+      "drop_m": 0.223,
+      "flare_deg": 74.7,
+      "lag_deg": 10.0,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.96,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": 10.7,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 0.6,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.917,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": 8.4,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "silk_velvet",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 1.97,
+    "earth": 1.72
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": 3.6,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.735,
+      "flare_deg": 30.1,
+      "lag_deg": 10.8,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.733,
+      "flare_deg": 30.1,
+      "lag_deg": 14.3,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 0.6,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.735,
+      "flare_deg": 30.0,
+      "lag_deg": 8.4,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "nylon_tulle",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 23.78,
+    "earth": 20.76
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.561,
+      "drop_m": 0.696,
+      "flare_deg": 32.7,
+      "lag_deg": 43.5,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.661,
+      "drop_m": 0.319,
+      "flare_deg": 59.8,
+      "lag_deg": 178.2,
+      "converged": false
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.754,
+      "drop_m": 0.061,
+      "flare_deg": 84.5,
+      "lag_deg": -103.6,
+      "converged": false
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.8,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.834,
+      "flare_deg": 10.9,
+      "lag_deg": 6.8,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.886,
+      "drop_m": 0.273,
+      "flare_deg": 70.5,
+      "lag_deg": 16.6,
+      "converged": false
+     }
+    }
+   }
+  },
+  {
+   "fabric": "nylon_tulle",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 13.38,
+    "earth": 11.68
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.519,
+      "drop_m": 0.729,
+      "flare_deg": 29.0,
+      "lag_deg": 38.6,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.538,
+      "drop_m": 0.718,
+      "flare_deg": 30.6,
+      "lag_deg": 5.8,
+      "converged": false
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.495,
+      "drop_m": 0.695,
+      "flare_deg": 28.8,
+      "lag_deg": -45.5,
+      "converged": false
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.8,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.274,
+      "drop_m": 0.835,
+      "flare_deg": 10.8,
+      "lag_deg": 6.6,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.518,
+      "drop_m": 0.656,
+      "flare_deg": 31.7,
+      "lag_deg": 87.1,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "viscose_jersey",
+   "cut": "full circle",
+   "wind_up_index": {
+    "moon": 3.72,
+    "earth": 3.24
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.636,
+      "drop_m": 0.669,
+      "flare_deg": 37.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.635,
+      "drop_m": 0.67,
+      "flare_deg": 37.9,
+      "lag_deg": 4.7,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.934,
+      "drop_m": 0.223,
+      "flare_deg": 74.8,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.931,
+      "drop_m": 0.223,
+      "flare_deg": 74.7,
+      "lag_deg": 10.7,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.963,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.96,
+      "drop_m": 0.045,
+      "flare_deg": 86.9,
+      "lag_deg": 11.4,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.276,
+      "drop_m": 0.834,
+      "flare_deg": 11.0,
+      "lag_deg": 0.6,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.919,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.917,
+      "drop_m": 0.272,
+      "flare_deg": 71.3,
+      "lag_deg": 9.0,
+      "converged": true
+     }
+    }
+   }
+  },
+  {
+   "fabric": "viscose_jersey",
+   "cut": "half circle",
+   "wind_up_index": {
+    "moon": 2.09,
+    "earth": 1.82
+   },
+   "moon": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": 3.8,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.734,
+      "flare_deg": 30.1,
+      "lag_deg": 11.5,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.733,
+      "flare_deg": 30.1,
+      "lag_deg": 15.2,
+      "converged": true
+     }
+    }
+   },
+   "earth": {
+    "15_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.143,
+      "drop_m": 0.849,
+      "flare_deg": 2.0,
+      "lag_deg": 0.1,
+      "converged": true
+     }
+    },
+    "27_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.275,
+      "drop_m": 0.835,
+      "flare_deg": 10.9,
+      "lag_deg": 0.6,
+      "converged": true
+     }
+    },
+    "60_rpm": {
+     "no_air": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.736,
+      "flare_deg": 30.0,
+      "lag_deg": -0.0,
+      "converged": true
+     },
+     "skin_friction": {
+      "hem_radius_m": 0.539,
+      "drop_m": 0.735,
+      "flare_deg": 30.0,
+      "lag_deg": 8.9,
+      "converged": true
+     }
+    }
+   }
+  }
+ ],
+ "weighted_hems": [
+  {
+   "fabric": "silk_chiffon",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 22.78,
+    "25_g_m": 5.71,
+    "50_g_m": 3.27,
+    "100_g_m": 1.76,
+    "200_g_m": 0.92
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.182,
+    "0.5": 0.373
+   }
+  },
+  {
+   "fabric": "silk_georgette",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 17.33,
+    "25_g_m": 5.3,
+    "50_g_m": 3.13,
+    "100_g_m": 1.72,
+    "200_g_m": 0.9
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.18,
+    "0.5": 0.37
+   }
+  },
+  {
+   "fabric": "silk_crepe_de_chine",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 9.15,
+    "25_g_m": 4.16,
+    "50_g_m": 2.69,
+    "100_g_m": 1.58,
+    "200_g_m": 0.86
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.17,
+    "0.5": 0.361
+   }
+  },
+  {
+   "fabric": "silk_satin_heavy",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 6.61,
+    "25_g_m": 3.54,
+    "50_g_m": 2.42,
+    "100_g_m": 1.48,
+    "200_g_m": 0.83
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.162,
+    "0.5": 0.353
+   }
+  },
+  {
+   "fabric": "wool_plain",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 2.98,
+    "25_g_m": 2.14,
+    "50_g_m": 1.67,
+    "100_g_m": 1.16,
+    "200_g_m": 0.72
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.127,
+    "0.5": 0.317
+   }
+  },
+  {
+   "fabric": "cotton_plain",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 6.47,
+    "25_g_m": 3.5,
+    "50_g_m": 2.4,
+    "100_g_m": 1.47,
+    "200_g_m": 0.83
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.161,
+    "0.5": 0.352
+   }
+  },
+  {
+   "fabric": "silk_satin",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 8.62,
+    "25_g_m": 4.05,
+    "50_g_m": 2.64,
+    "100_g_m": 1.56,
+    "200_g_m": 0.86
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.169,
+    "0.5": 0.359
+   }
+  },
+  {
+   "fabric": "silk_organza",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 22.87,
+    "25_g_m": 5.72,
+    "50_g_m": 3.27,
+    "100_g_m": 1.76,
+    "200_g_m": 0.92
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.182,
+    "0.5": 0.373
+   }
+  },
+  {
+   "fabric": "silk_habotai",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 16.99,
+    "25_g_m": 5.26,
+    "50_g_m": 3.11,
+    "100_g_m": 1.71,
+    "200_g_m": 0.9
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.179,
+    "0.5": 0.37
+   }
+  },
+  {
+   "fabric": "silk_taffeta",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 8.49,
+    "25_g_m": 4.02,
+    "50_g_m": 2.63,
+    "100_g_m": 1.56,
+    "200_g_m": 0.86
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.168,
+    "0.5": 0.359
+   }
+  },
+  {
+   "fabric": "silk_velvet",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 3.5,
+    "25_g_m": 2.4,
+    "50_g_m": 1.82,
+    "100_g_m": 1.23,
+    "200_g_m": 0.75
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.136,
+    "0.5": 0.327
+   }
+  },
+  {
+   "fabric": "nylon_tulle",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 23.78,
+    "25_g_m": 3.84,
+    "50_g_m": 2.09,
+    "100_g_m": 1.09,
+    "200_g_m": 0.56
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.11,
+    "0.5": 0.224
+   }
+  },
+  {
+   "fabric": "viscose_jersey",
+   "cut": "full circle",
+   "wind_up_index_moon": {
+    "0_g_m": 3.72,
+    "25_g_m": 2.5,
+    "50_g_m": 1.88,
+    "100_g_m": 1.26,
+    "200_g_m": 0.76
+   },
+   "hem_kg_m_for_index": {
+    "1": 0.139,
+    "0.5": 0.33
+   }
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "schema": "terluna.humanities.sport-sources/1",
+ "compiled": "2026-11-07",
+ "evidence_states": {
+  "assumption": "a value chosen for this screen, stated beside the figures it sets; no source was retrieved this round",
+  "general_knowledge": "a published specification or widely given value stated from general knowledge; the document was not retrieved this round",
+  "solved_motion": "read from the dance's solved whole-body motion (whole_body.json measures it)",
+  "reused": "a value the repository already holds with its own source record (named)",
+  "calculation": "derived here from the values above; the derivation is in the code beside it"
+ },
+ "entries": [
+  {"quantity": "shoe-floor friction coefficient, athletic shoe on a sports floor", "value": 0.8, "bracket": [0.5, 1.2], "evidence_state": "assumption", "note": "the earlier sports screens used 0.8 and a 0.4-1.2 range; the dance's vinyl floor 0.5 (humanities/dance/sources.json, open); the habitation note 0.6"},
+  {"quantity": "the floor's push beside the standing centre of mass", "value_m": 0.13, "evidence_state": "assumption", "note": "half the dance body's hip width (body/model.py HIP_Y 0.082 m) and half a foot's width"},
+  {"quantity": "the floor's push ahead of or behind the centre of mass, feet under the body", "value_m": 0.10, "evidence_state": "assumption"},
+  {"quantity": "a rear foot's distance behind the centre of mass in a long split stance", "value_m": 0.50, "evidence_state": "assumption"},
+  {"quantity": "a wide ready stance: half the feet's spacing; the centre of mass's height", "value_m": [0.35, 0.75], "evidence_state": "assumption"},
+  {"quantity": "a running stride's stance", "value_s": 0.33, "evidence_state": "solved_motion", "note": "the solved phrase's strides last 0.33-0.37 s"},
+  {"quantity": "a landing's stroke", "value_m": 0.4, "evidence_state": "assumption", "note": "the dance envelope's landing redirect uses the same 0.4 m"},
+  {"quantity": "the legs' braking of a drop into a crouch", "value_m_s2": 15.0, "evidence_state": "assumption", "note": "muscle-limited on either world; about 1.5 Earth g"},
+  {"quantity": "the hand's push on a thrown or caught ball", "value_s": 0.15, "evidence_state": "assumption"},
+  {"quantity": "an overhand release above the standing centre of mass", "value_m": 1.0, "evidence_state": "assumption"},
+  {"quantity": "a kicking leg's swing at impact; the time to build it", "value": {"rad_s": 15.0, "s": 0.15}, "evidence_state": "assumption", "note": "a foot speed of about 13 m/s on a 0.9 m leg"},
+  {"quantity": "ball masses and diameters", "value": {"basketball size 7": [0.62, 0.239], "handball size 3": [0.45, 0.19], "football size 5": [0.43, 0.22], "volleyball": [0.27, 0.21]}, "units": "kg, m", "evidence_state": "general_knowledge", "note": "the governing bodies' specifications (FIBA, IHF, IFAB, FIVB), stated from general knowledge; their documents were not retrieved"},
+  {"quantity": "drag coefficient of a ball", "value": 0.47, "evidence_state": "general_knowledge", "note": "a smooth sphere below the drag crisis; lunar ball speeds give Reynolds numbers near 1e5, where seamed balls can fall into the crisis (C_D near 0.2-0.3)"},
+  {"quantity": "a shuttlecock's mass and Earth terminal speed", "value": {"kg": 0.0052, "m_s": 6.7}, "evidence_state": "general_knowledge"},
+  {"quantity": "a soft ball", "value": {"kg": 0.10, "m": 0.20}, "evidence_state": "assumption", "note": "illustrative"},
+  {"quantity": "the larger athlete", "value": {"stature_m": 1.80, "mass_kg": 80.0}, "evidence_state": "calculation", "note": "the dance body scaled geometrically (inertias by mass times length squared, push-off and reaches by stature) with the same force-velocity profile per kilogram; a stand-in for a male body model"},
+  {"quantity": "a teammate's two-arm push and its stroke", "value": {"N": 350.0, "m": 0.6}, "evidence_state": "reused", "note": "the dance envelope's partner throw (humanities/dance/envelope.py)"},
+  {"quantity": "force-velocity profile, push-off, segment inertias, take-off lean", "evidence_state": "reused", "note": "humanities/dance/envelope.py and body/model.py, with their sources in humanities/dance/sources.json (Palinkas et al. 2025; de Leva 1996; Yeadon)"},
+  {"quantity": "air density at the sea-level datum", "evidence_state": "reused", "note": "the design run's global winds product (climate/results/gcm/global_winds_A28_dim5_moon.json), read through the dance envelope"}
+ ],
+ "open_items": [
+  "Shoe-floor friction for athletic shoes on candidate lunar floors: measurement or a sourced range.",
+  "Throw, catch and kick timings and release heights from throwing and kicking biomechanics.",
+  "The governing bodies' ball specifications, read in their documents; ball drag across the drag crisis at lunar speeds.",
+  "A male body model with athletic strength (the dance's question 2), in place of the scaled stand-in.",
+  "Landings with a stroke and friction on the touchdown impulse in the motion engine, before whole-body solves of braking landings, rebounds and landing loads."
+ ]
+}

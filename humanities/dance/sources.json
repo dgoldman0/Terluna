@@ -1,0 +1,1071 @@
+{
+ "schema": "terluna.humanities.dance-literature/1",
+ "compiled": "2026-11-01",
+ "compiled_by": "literature helper for the domain/humanities dance work (45 min, 70 tool-call budget)",
+ "evidence_states": {
+  "primary_read": "the value was read in the primary publication's own text or tables (full text retrieved)",
+  "transcription_crosschecked": "the value comes from a third-party transcription of the primary table, checked against an independent reproduction and by internal consistency; the printed page itself was not read",
+  "abstract_or_summary": "the value or finding comes from an abstract, a secondary statement inside a paper, or an encyclopaedia",
+  "identity_only": "the publication was identified (authors, title, venue, DOI or catalogue record); its values were not retrieved",
+  "search_snippet_unverified": "the value appeared only in a search engine's summary of a page that could not be opened",
+  "calculation": "a number derived here from published values; the derivation is stated beside it"
+ },
+ "entries": [
+  {
+   "id": "deleva1996",
+   "citation": "de Leva P (1996). Adjustments to Zatsiorsky-Seluyanov's segment inertia parameters. Journal of Biomechanics 29(9):1223-1230.",
+   "doi_or_url": "https://doi.org/10.1016/0021-9290(95)00178-6",
+   "retrieval": "The primary PDF copy found (ebm.ufabc.edu.br/wp-content/uploads/2013/12/Leva-1996.pdf) failed TLS certificate verification and was not opened; the Elsevier copy is paywalled. Values below come from the transcription in https://raw.githubusercontent.com/D-sorganization/UpstreamDrift/main/src/shared/python/body_segment_parameters/data/de_leva_1996_table4.json (retrieved 2026-11-01, sha256 f9afb52b883ede994b1048f8b759611a890b20af663287921290e30cbda104c4), which states 'Table 4 (page 1228), both parts: easy-to-use endpoints and alternative endpoints', 'values exactly as printed'. Cross-checks: (1) the SimTK lab entry (simtk_lab_deleva) reproduces every primary female row from an independent computation; (2) the alternative rows reproduce the primary rows' physical quantities in millimetres (head CM 0.4841 x 243.7 = 118.0 mm = 0.5894 x 200.2; upper-trunk CM below CERV 0.505 x 228.0 = 115.1 mm = (228.0 - 142.5) + 0.2077 x 142.5; head sagittal radius 0.271 x 243.7 = 66.0 mm = 0.330 x 200.2; upper-trunk radii 106.2/71.6/102.4 mm by either row), which a transcription slip would break.",
+   "evidence_state": "transcription_crosschecked",
+   "values": [
+    {
+     "quantity": "reference subject, female",
+     "value": {
+      "stature_m": 1.735,
+      "mass_kg": 61.9
+     },
+     "units": "m; kg",
+     "conditions": "Zatsiorsky-Seluyanov female sample as adjusted by de Leva",
+     "location": "Table 4 header (as transcribed)"
+    },
+    {
+     "quantity": "head, VERT-MIDG (primary row)",
+     "value": {
+      "length_mm": 200.2,
+      "mass_pct": 6.68,
+      "com_pct": 58.94,
+      "r_sag_pct": 33.0,
+      "r_trans_pct": 35.9,
+      "r_long_pct": 31.8
+     },
+     "units": "mm; % body mass; % of length from origin (VERT); radii % of length",
+     "conditions": "female; head segment includes the neck (trunk starts at CERV or SUPR); adjusted",
+     "location": "Table 4, p. 1228, easy-to-use endpoints"
+    },
+    {
+     "quantity": "head, VERT-CERV (alternative row)",
+     "value": {
+      "length_mm": 243.7,
+      "mass_pct": 6.68,
+      "com_pct": 48.41,
+      "r_sag_pct": 27.1,
+      "r_trans_pct": 29.5,
+      "r_long_pct": 26.1
+     },
+     "units": "as above",
+     "conditions": "female; marked unadjusted (*) in the transcription",
+     "location": "Table 4, alternative endpoints"
+    },
+    {
+     "quantity": "trunk, SUPR-MIDH (primary row)",
+     "value": {
+      "length_mm": 529.3,
+      "mass_pct": 42.57,
+      "com_pct": 41.51,
+      "r_sag_pct": 35.7,
+      "r_trans_pct": 33.9,
+      "r_long_pct": 17.1
+     },
+     "units": "as above",
+     "conditions": "female; adjusted",
+     "location": "Table 4, easy-to-use endpoints"
+    },
+    {
+     "quantity": "trunk, CERV-MIDH (alternative row)",
+     "value": {
+      "length_mm": 614.8,
+      "mass_pct": 42.57,
+      "com_pct": 49.64,
+      "r_sag_pct": 30.7,
+      "r_trans_pct": 29.2,
+      "r_long_pct": 14.7
+     },
+     "units": "as above",
+     "conditions": "female; adjusted",
+     "location": "Table 4, alternative endpoints"
+    },
+    {
+     "quantity": "trunk, MIDS-MIDH (alternative row)",
+     "value": {
+      "length_mm": 497.9,
+      "mass_pct": 42.57,
+      "com_pct": 37.82,
+      "r_sag_pct": 37.9,
+      "r_trans_pct": 36.1,
+      "r_long_pct": 18.2
+     },
+     "units": "as above",
+     "conditions": "female; adjusted; MIDS = mid-point of the shoulder joint centres",
+     "location": "Table 4, alternative endpoints"
+    },
+    {
+     "quantity": "upper trunk UPT, SUPR-XYPH (primary row)",
+     "value": {
+      "length_mm": 142.5,
+      "mass_pct": 15.45,
+      "com_pct": 20.77,
+      "r_sag_pct": 74.6,
+      "r_trans_pct": 50.2,
+      "r_long_pct": 71.8
+     },
+     "units": "as above",
+     "conditions": "female; adjusted",
+     "location": "Table 4, easy-to-use endpoints"
+    },
+    {
+     "quantity": "upper trunk UPT, CERV-XYPH (alternative row)",
+     "value": {
+      "length_mm": 228.0,
+      "mass_pct": 15.45,
+      "com_pct": 50.5,
+      "r_sag_pct": 46.6,
+      "r_trans_pct": 31.4,
+      "r_long_pct": 44.9
+     },
+     "units": "as above",
+     "conditions": "female; marked unadjusted (*)",
+     "location": "Table 4, alternative endpoints"
+    },
+    {
+     "quantity": "middle trunk MPT, XYPH-OMPH",
+     "value": {
+      "length_mm": 205.3,
+      "mass_pct": 14.65,
+      "com_pct": 45.12,
+      "r_sag_pct": 43.3,
+      "r_trans_pct": 35.4,
+      "r_long_pct": 41.5
+     },
+     "units": "as above",
+     "conditions": "female; marked unadjusted (*)",
+     "location": "Table 4"
+    },
+    {
+     "quantity": "lower trunk LPT, OMPH-MIDH",
+     "value": {
+      "length_mm": 181.5,
+      "mass_pct": 12.47,
+      "com_pct": 49.2,
+      "r_sag_pct": 43.3,
+      "r_trans_pct": 40.2,
+      "r_long_pct": 44.4
+     },
+     "units": "as above",
+     "conditions": "female; adjusted",
+     "location": "Table 4"
+    },
+    {
+     "quantity": "upper arm, SJC-EJC",
+     "value": {
+      "length_mm": 275.1,
+      "mass_pct": 2.55,
+      "com_pct": 57.54,
+      "r_sag_pct": 27.8,
+      "r_trans_pct": 26.0,
+      "r_long_pct": 14.8
+     },
+     "units": "as above",
+     "conditions": "female; adjusted",
+     "location": "Table 4"
+    },
+    {
+     "quantity": "forearm, EJC-WJC",
+     "value": {
+      "length_mm": 264.3,
+      "mass_pct": 1.38,
+      "com_pct": 45.59,
+      "r_sag_pct": 26.1,
+      "r_trans_pct": 25.7,
+      "r_long_pct": 9.4
+     },
+     "units": "as above",
+     "conditions": "female; adjusted",
+     "location": "Table 4"
+    },
+    {
+     "quantity": "hand, WJC-MET3",
+     "value": {
+      "length_mm": 78.0,
+      "mass_pct": 0.56,
+      "com_pct": 74.74,
+      "r_sag_pct": 53.1,
+      "r_trans_pct": 45.4,
+      "r_long_pct": 33.5
+     },
+     "units": "as above",
+     "conditions": "female; adjusted; anatomical position (palm forward)",
+     "location": "Table 4"
+    },
+    {
+     "quantity": "thigh, HJC-KJC",
+     "value": {
+      "length_mm": 368.5,
+      "mass_pct": 14.78,
+      "com_pct": 36.12,
+      "r_sag_pct": 36.9,
+      "r_trans_pct": 36.4,
+      "r_long_pct": 16.2
+     },
+     "units": "as above",
+     "conditions": "female; adjusted",
+     "location": "Table 4"
+    },
+    {
+     "quantity": "shank, KJC-LMAL (primary row)",
+     "value": {
+      "length_mm": 432.3,
+      "mass_pct": 4.81,
+      "com_pct": 44.16,
+      "r_sag_pct": 27.1,
+      "r_trans_pct": 26.7,
+      "r_long_pct": 9.3
+     },
+     "units": "as above",
+     "conditions": "female; adjusted",
+     "location": "Table 4, easy-to-use endpoints"
+    },
+    {
+     "quantity": "shank, KJC-AJC (alternative row)",
+     "value": {
+      "length_mm": 438.6,
+      "mass_pct": 4.81,
+      "com_pct": 43.52,
+      "r_sag_pct": 26.7,
+      "r_trans_pct": 26.3,
+      "r_long_pct": 9.2
+     },
+     "units": "as above",
+     "conditions": "female; adjusted",
+     "location": "Table 4, alternative endpoints"
+    },
+    {
+     "quantity": "foot, HEEL-TTIP",
+     "value": {
+      "length_mm": 228.3,
+      "mass_pct": 1.29,
+      "com_pct": 40.14,
+      "r_sag_pct": 29.9,
+      "r_trans_pct": 27.9,
+      "r_long_pct": 13.9
+     },
+     "units": "as above",
+     "conditions": "female; marked unadjusted (*)",
+     "location": "Table 4"
+    },
+    {
+     "quantity": "axis convention",
+     "value": "radii of gyration about the sagittal (antero-posterior), transverse (medio-lateral) and longitudinal axes",
+     "units": "",
+     "conditions": "stated in the transcription's conventions; the SimTK lab assigns r_sag to I_xx with x along the antero-posterior axis; the trunk rows require it (upper trunk r_sag 74.6 > r_trans 50.2 because the trunk is wider than deep)",
+     "location": "Table 4 column heads (as transcribed)"
+    }
+   ],
+   "model_comparison": {
+    "model_file": "/home/kir/Documents/Projects/terluna-humanities/humanities/dance/body/model.py (untracked; sha256 d549baae81e3fec64f168aaaf837bff82d944d2a80abb2a4c887527668463744)",
+    "mismatches": [
+     "Head centre of mass: model takes 58.94% (the VERT-MIDG row's value) of the VERT-CERV length (243.7 mm row); the coherent VERT-CERV value is 48.41%. At 1.64 m the model's head CM sits 0.1358 m below the vertex; de Leva puts it 0.1115 m below, 24 mm higher.",
+     "Head radii of gyration: model applies the VERT-MIDG percentages (35.9, 33.0, 31.8) to the VERT-CERV length; the coherent VERT-CERV percentages are 27.1 sagittal, 29.5 transverse, 26.1 longitudinal. With the axis swap below, the model's head inertias are x 1.75, y 1.25, z 1.48 times de Leva's.",
+     "Thorax (upper trunk) centre of mass: model takes 20.77% (the SUPR-XYPH row's value, measured from SUPR) of the CERV-XYPH length (228.0 mm row) measured from CERV; the coherent value is 50.50% of CERV-XYPH from CERV. At 1.64 m the model's thorax CM sits 0.0448 m below CERV; de Leva puts it 0.1088 m below, 64 mm lower.",
+     "Thorax radii of gyration: model applies the SUPR-XYPH percentages (74.6, 50.2, 71.8) to the 228.0 mm length; the coherent CERV-XYPH percentages are 46.6 sagittal, 31.4 transverse, 44.9 longitudinal. With the axis swap, the model's thorax inertias are x 1.16, y 5.64, z 2.56 times de Leva's.",
+     "Sagittal and transverse radii are exchanged for every segment: model.py puts r_trans about x (forward) and r_sag about y (left). Ratios of model to de Leva inertia (x, y): abdomen 0.67, 1.50; pelvis 0.86, 1.16; upper arm 0.87, 1.14; thigh 0.97, 1.03; shank 0.97, 1.03. For the foot, whose long axis is x, de Leva's r_sag (29.9) belongs about the vertical axis z and r_trans (27.9) about y; the model has y 29.9, z 27.9. For the forearm and hand the exchange suits the model's rest pose, whose palms face the thighs (90 degrees of pronation from the palm-forward anatomical position in which the data are defined), so those two can stay as they are with a note.",
+     "Foot and toes centre of mass: the foot (1.00%) and toes (0.29%) combine at 0.114 m from the heel, 49.6% of the 0.230 m heel-toe length (heel at x = -0.050 m, as the toe-tip formula implies); de Leva's 40.14% puts it 0.092 m from the heel, 22 mm further back.",
+     "Comments in model.py lines 113 and 131 describe the thorax CM as '20.77% from CERV' and the head CM as '58.94% of VERT-CERV'; both percentages belong to the other endpoint rows."
+    ],
+    "agreements": "Segment lengths are Table 4 lengths for the endpoints used (VERT-CERV 243.7, CERV-XYPH 228.0, XYPH-OMPH 205.3, OMPH-MIDH 181.5, SJC-EJC 275.1, EJC-WJC 264.3, WJC-MET3 78.0, HJC-KJC 368.5, KJC-LMAL 432.3, scaled by 1.64/1.735). Mass shares sum to 99.99% and match Table 4 (neck 1.00% taken from the head and 0.40% per clavicle from the upper trunk are recorded placements). CM percentages for MPT, LPT, upper arm, forearm, hand, thigh and shank match. The foot length 0.230 m is a recorded choice (de Leva scaled gives 0.216 m).",
+    "consequence_for_turns": "calculation: whole-body moment of inertia about the vertical axis through the CoM in the rest pose, from model.py's segments, is 0.701 kg m^2; with de Leva's coherent thorax and head longitudinal radii it is 0.578 kg m^2 (18% lower). A turn with a given angular momentum spins about 21% faster with the corrected values."
+   },
+   "supports": "segment masses, centres of mass and inertias of the dancer body (humanities/dance/body/model.py)",
+   "limits": "Zatsiorsky-Seluyanov female reference subject 1.735 m and 61.9 kg (sample size and method from general knowledge, unchecked here: 15 young women, physical-education students, gamma-ray scanning); radii are for the anatomical position (palms forward); scaling by stature alone assumes the dancer has the sample's proportions.",
+   "open": [
+    "Read the printed Table 4 (p. 1228) to confirm the transcription and the column heads; the PDF copy with a valid certificate chain or a library copy is needed."
+   ]
+  },
+  {
+   "id": "simtk_lab_deleva",
+   "citation": "SimTK course lab '4.5 Lab: Human body segments mass properties' (Lab 4: Mass distribution of rigid bodies in Simbody), Stanford/SimTK document 199/632; author not printed in the extracted text.",
+   "doi_or_url": "https://simtk.org/docman/view.php/199/632/handwrittenPartLabHumanBodySegment.pdf",
+   "retrieval": "PDF read in memory 2026-11-01 (sha256 prefix a452db8f0e72f3f2).",
+   "evidence_state": "primary_read",
+   "values": [
+    {
+     "quantity": "standard female, computed from de Leva (1996)",
+     "value": {
+      "head": {
+       "length_mm": 200.2,
+       "mass_kg": 4.1349,
+       "cm_mm": 118.0,
+       "Ixx": 18048,
+       "Iyy": 16759,
+       "Izz": 21359
+      },
+      "trunk": {
+       "length_mm": 529.3,
+       "mass_kg": 26.351,
+       "cm_mm": 219.71,
+       "Ixx": 940880,
+       "Iyy": 215870,
+       "Izz": 848390
+      },
+      "upper_arm": {
+       "length_mm": 275.1,
+       "mass_kg": 1.5784,
+       "cm_mm": 158.29
+      },
+      "thigh": {
+       "length_mm": 368.5,
+       "mass_kg": 9.1488,
+       "cm_mm": 133.1
+      },
+      "foot": {
+       "length_mm": 228.3,
+       "mass_kg": 0.79851,
+       "cm_mm": 91.64,
+       "Ixx": 804.12,
+       "Iyy": 3720.8,
+       "Izz": 3239.7
+      }
+     },
+     "units": "mm; kg; kg mm^2 about the segment CM",
+     "conditions": "female 61.9 kg, 1735 mm, whole-body scaling; axes x, y, z of the lab figure",
+     "location": "p. 1 results table"
+    },
+    {
+     "quantity": "axis assignment implied by the lab's numbers",
+     "value": "I_xx uses r_sag, I_yy r_long, I_zz r_trans for limb and trunk segments; for the foot I_xx uses r_long, I_yy r_sag, I_zz r_trans",
+     "units": "",
+     "conditions": "inference: radii back-computed from the printed inertias (e.g. head sqrt(18048/4.1349) = 66.1 mm = 33.0% of 200.2 mm); x is along the foot, so x is antero-posterior",
+     "location": "p. 1"
+    }
+   ],
+   "supports": "independent check of the de Leva primary rows and of the sagittal-axis reading",
+   "limits": "course material; the figure with the axes was not seen, so the axis reading rests on the foot row."
+  },
+  {
+   "id": "almasi2025",
+   "citation": "Almasi T, Exner-Grave E, Ohlendorf D, Groneberg DA, Wanke EM (2025). Musculoskeletal characteristics of the lower limbs of students at a vocational ballet institution - retrospective analysis of cross-sectional data. BMC Musculoskeletal Disorders.",
+   "doi_or_url": "https://doi.org/10.1186/s12891-025-08692-y (PMC12054260)",
+   "retrieval": "Europe PMC full-text XML, tables read 2026-11-01.",
+   "evidence_state": "primary_read",
+   "values": [
+    {
+     "quantity": "hip external rotation, passive",
+     "value": "60.0 +- 7.5 (range 35-80)",
+     "units": "deg",
+     "conditions": "all students, n = 604, ages 5-22, sexes pooled",
+     "location": "Table 3"
+    },
+    {
+     "quantity": "hip internal rotation, passive",
+     "value": "43.5 +- 11.3 (range 10-72)",
+     "units": "deg",
+     "conditions": "as above",
+     "location": "Table 3"
+    },
+    {
+     "quantity": "hip ER / IR / ER+IR, age 18 and over",
+     "value": "60.7 +- 6.3 / 35.8 +- 9.3 / 96.5 +- 10.1",
+     "units": "deg",
+     "conditions": "students aged 18 and over, sexes pooled",
+     "location": "Table 4"
+    },
+    {
+     "quantity": "turnout (hip ER + tibial torsion), age 18 and over",
+     "value": "85.6 +- 8.8",
+     "units": "deg",
+     "conditions": "n = 392 for tibial torsion and turnout (all ages)",
+     "location": "Table 4"
+    },
+    {
+     "quantity": "ankle dorsiflexion / plantarflexion, passive",
+     "value": "23.6 +- 4.7 (10-45) / 70.1 +- 7.5 (40-90)",
+     "units": "deg",
+     "conditions": "n = 534, all ages",
+     "location": "Table 6"
+    },
+    {
+     "quantity": "ankle dorsiflexion / plantarflexion, age 18 and over",
+     "value": "22.5 +- 5.2 / 69.9 +- 6.7",
+     "units": "deg",
+     "conditions": "sexes pooled",
+     "location": "Table 7"
+    },
+    {
+     "quantity": "first MTP dorsiflexion (extension) / plantarflexion",
+     "value": "88.9 +- 6.3 (40-110) / 62.3 +- 5.2 (50-90)",
+     "units": "deg",
+     "conditions": "n = 576 / 575, all ages",
+     "location": "Table 6"
+    },
+    {
+     "quantity": "first MTP dorsiflexion / plantarflexion, age 18 and over",
+     "value": "86.6 +- 8.9 / 62.7 +- 6.0",
+     "units": "deg",
+     "conditions": "sexes pooled",
+     "location": "Table 7"
+    }
+   ],
+   "model_comparison": "model.py hip twist 40 internal / 65 external lies within one SD of the 18-and-over values; ankle plantarflexion 85 sits 2.2 SD above the passive goniometric 69.9 (the model's single ankle hinge also carries midfoot plantarflexion, which a goniometer at the talocrural joint excludes); dorsiflexion 30 sits 1.4 SD above 22.5; MTP extension 85 matches 86.6.",
+   "supports": "joint ranges of the dancer body (hip rotation, ankle, first MTP)",
+   "limits": "students of one German state school, 414 female and 192 male, mean age 13.9 +- 3.5; tables pool the sexes; one examiner; the instrument and test positions were not captured in this extraction.",
+   "open": [
+    "Female-only values and the measurement method (goniometer, positions) from the Methods section."
+   ]
+  },
+  {
+   "id": "applsci2023_ballet_gender",
+   "citation": "Musculoskeletal and Sociodemographic Gender Differences between Vocational Ballet Students. Applied Sciences 13(1):108 (2023). Authors not retrieved.",
+   "doi_or_url": "https://www.mdpi.com/2076-3417/13/1/108",
+   "retrieval": "page returned HTTP 403; values appear only in a search engine's summary.",
+   "evidence_state": "search_snippet_unverified",
+   "values": [
+    {
+     "quantity": "hip external rotation, female / male",
+     "value": "59 / 62",
+     "units": "deg",
+     "conditions": "vocational ballet students",
+     "location": "not seen"
+    },
+    {
+     "quantity": "turnout, female / male",
+     "value": "82 / 86",
+     "units": "deg",
+     "conditions": "as above",
+     "location": "not seen"
+    },
+    {
+     "quantity": "ankle plantarflexion, female / male",
+     "value": "72 / 68",
+     "units": "deg",
+     "conditions": "as above",
+     "location": "not seen"
+    }
+   ],
+   "supports": "female-specific hip and ankle values",
+   "limits": "unverified; use only after reading the article.",
+   "open": [
+    "Open the article and confirm the female values and methods."
+   ]
+  },
+  {
+   "id": "harbo2012",
+   "citation": "Harbo T, Brincks J, Andersen H (2012). Maximal isokinetic and isometric muscle strength of major muscle groups related to age, body mass, height, and sex in 178 healthy subjects. European Journal of Applied Physiology 112:267-275.",
+   "doi_or_url": "https://doi.org/10.1007/s00421-011-1975-3",
+   "retrieval": "PDF copy at paulogentil.com read in memory 2026-11-01 (sha256 8422a773c0de67924d69dc8f2bfb1b8acbe0ed0404446e6987f9855075813588).",
+   "evidence_state": "primary_read",
+   "values": [
+    {
+     "quantity": "knee extension, isometric",
+     "value": "185 +- 47",
+     "units": "N m",
+     "conditions": "women under 30, Biodex System 3 PRO, neutral joint position, non-dominant leg",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "knee extension / flexion, isokinetic 90 deg/s",
+     "value": "138 +- 17 / 76 +- 9",
+     "units": "N m",
+     "conditions": "women under 30",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "hip flexion, isometric",
+     "value": "101 +- 11",
+     "units": "N m",
+     "conditions": "women under 30",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "hip flexion / extension, isokinetic 60 deg/s",
+     "value": "96 +- 10 / 151 +- 41",
+     "units": "N m",
+     "conditions": "women under 30",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "ankle plantarflexion ('ankle flexion'), isokinetic 60 deg/s",
+     "value": "89 +- 28",
+     "units": "N m",
+     "conditions": "women under 30; no isometric plantarflexion test in the protocol",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "ankle dorsiflexion ('ankle extension'), isometric / isokinetic",
+     "value": "29 +- 5 / 22 +- 2",
+     "units": "N m",
+     "conditions": "women under 30; 'extension' read as dorsiflexion from its magnitude against 'flexion'",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "shoulder abduction, isometric / isokinetic 60 deg/s; adduction isokinetic",
+     "value": "43 +- 13 / 42 +- 8; 46 +- 14",
+     "units": "N m",
+     "conditions": "women under 30, dominant arm",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "elbow flexion isometric / isokinetic; extension isokinetic (60 deg/s)",
+     "value": "30 +- 7 / 30 +- 6; 28 +- 5",
+     "units": "N m",
+     "conditions": "women under 30",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "wrist flexion, isometric",
+     "value": "15 +- 4",
+     "units": "N m",
+     "conditions": "women under 30",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "predicted isometric torques for a woman of 25 years, 1.64 m, 55 kg",
+     "value": {
+      "knee_extension": 177.6,
+      "hip_flexion": 99.5,
+      "ankle_dorsiflexion": 27.4,
+      "shoulder_abduction": 39.9,
+      "elbow_flexion": 28.3,
+      "wrist_flexion": 14.5
+     },
+     "units": "N m",
+     "conditions": "calculation from the female regression models (intercept + b1 age + b2 height + b3 mass); 95% prediction interval +- 1.96 RSD (e.g. knee extension RSD 30.1, hip flexion 15.1, shoulder abduction 6.95, elbow flexion 4.99 N m)",
+     "location": "Tables 1, 2, 3, 4"
+    }
+   ],
+   "model_comparison": "model.py: knee extension 150 (below the 185 +- 47 mean), knee flexion 90, hip flexion/extension 150 about y (hip flexion isometric 101 +- 11; extension isokinetic 151 +- 41), ankle plantarflexion 120, dorsiflexion 35 (29 +- 5), shoulder 45-50 (43 +- 13), elbow 40 (30 +- 7), wrist 10 (15 +- 4). These are untrained Danish adults; a trained dancer's legs are likely stronger.",
+   "supports": "torque bounds of the dancer body",
+   "limits": "85 non-athletic Danish women, median 52 years (21-75), 1.67 m, 62 kg; isometric tests at neutral positions only; no trunk, hip abduction or hip rotation tests.",
+   "open": [
+    "Trunk flexion/extension/rotation isometric torques of young women.",
+    "Hip abduction and rotation isometric torques.",
+    "Isometric plantarflexion torque (only isokinetic here)."
+   ]
+  },
+  {
+   "id": "palinkas2025",
+   "citation": "Palinkas G, Okros C, Troznai Z, Utczas K, Petridis L (2025). The effects of short-term heavy load squat vs. moderate load Olympic weightlifting training on maximal strength and force-velocity profile in young female handball players. Journal of Functional Morphology and Kinesiology 10(2):187.",
+   "doi_or_url": "https://doi.org/10.3390/jfmk10020187 (PMC12194710)",
+   "retrieval": "Europe PMC full-text XML, tables read 2026-11-01.",
+   "evidence_state": "primary_read",
+   "values": [
+    {
+     "quantity": "F0 (pre-training, three groups)",
+     "value": "28.8 +- 3.1; 27.8 +- 3.7; 29.0 +- 3.1",
+     "units": "N/kg",
+     "conditions": "Samozino method from countermovement jumps at 0, 25, 50, 75% body mass; 27 female handball players, 17.6 +- 0.98 y, 1.689 m, 64.9 kg",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "V0 (pre-training)",
+     "value": "3.0 +- 0.7; 3.1 +- 1.7; 3.1 +- 1.2",
+     "units": "m/s",
+     "conditions": "as above",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "Pmax (pre-training)",
+     "value": "21.3 +- 3.8; 22.2 +- 7.8; 21.8 +- 5.9",
+     "units": "printed 'W'; magnitudes are W/kg",
+     "conditions": "as above",
+     "location": "Table 5"
+    },
+    {
+     "quantity": "countermovement jump height (pre-training)",
+     "value": "26.9 +- 3.0; 26.7 +- 4.7; 28.4 +- 2.2",
+     "units": "cm",
+     "conditions": "unloaded",
+     "location": "Table 3"
+    },
+    {
+     "quantity": "take-off velocity",
+     "value": "2.3-2.4",
+     "units": "m/s",
+     "conditions": "unloaded CMJ",
+     "location": "Table 3"
+    },
+    {
+     "quantity": "push-off distance definition",
+     "value": "vertical displacement of the centre of mass from the lowest point of the countermovement to take-off",
+     "units": "m",
+     "conditions": "numeric value not printed in the retrieved text",
+     "location": "Methods"
+    }
+   ],
+   "supports": "lower-limb force-velocity capacity for jump optimisation",
+   "limits": "adolescent handball players, not dancers; hpo value not retrieved.",
+   "open": [
+    "F-V profiles of dancers; numeric hpo for women (expected order 0.3-0.4 m, unsourced)."
+   ]
+  },
+  {
+   "id": "arens2026",
+   "citation": "Arens T, Hauschild A, Richter M, Fohrmann D, Zech A, Junge A (2026). Functional performance tests in male and female professional dancers from four classical ballet companies - a cohort study. BMC Sports Science, Medicine and Rehabilitation.",
+   "doi_or_url": "https://doi.org/10.1186/s13102-026-01836-0 (PMC13693026)",
+   "retrieval": "Europe PMC full-text XML, Table 2 read 2026-11-01.",
+   "evidence_state": "primary_read",
+   "values": [
+    {
+     "quantity": "single-leg vertical countermovement hop height",
+     "value": "12.6 +- 2.1 (8.0-16.5)",
+     "units": "cm",
+     "conditions": "female professional ballet dancers, n = 60, hands on hips, flight time from an inertial sensor at the tibial tuberosity; four German companies, 2022/23 season",
+     "location": "Table 2"
+    },
+    {
+     "quantity": "single-leg vertical countermovement hop height, male",
+     "value": "18.5 +- 3.5 (10.5-26.5)",
+     "units": "cm",
+     "conditions": "n = 55",
+     "location": "Table 2"
+    }
+   ],
+   "supports": "a measured jump capacity of professional female ballet dancers",
+   "limits": "single-leg hop with arms fixed; two-leg CMJ and sauté heights are not in this paper.",
+   "open": [
+    "Two-leg CMJ and sauté heights of female ballet dancers (not found in this pass)."
+   ]
+  },
+  {
+   "id": "swain2026",
+   "citation": "Swain P, Santos F, Hughes L, Gordon D, Caplan N (2026). Jumping on the moon as a potential exercise countermeasure. Experimental Physiology 111(9):4073-4088.",
+   "doi_or_url": "https://doi.org/10.1113/EP092155 (PMC13394199)",
+   "retrieval": "Europe PMC full-text XML, Tables 1-3 read 2026-11-01.",
+   "evidence_state": "primary_read",
+   "values": [
+    {
+     "quantity": "jump height achieved at targets 30-70 cm",
+     "value": "30, 36, 41, 46, 51, 55, 60, 66, 71 (SD 1-3)",
+     "units": "cm",
+     "conditions": "19 adults (15 male, 4 female), 25 +- 7 y, 73 kg, 1.81 m; 9.5 deg head-up tilt suspension (g_eff = 9.81 sin 9.5 = 1.62 m/s^2); repeated CMJs in 4-min stages",
+     "location": "Table 3"
+    },
+    {
+     "quantity": "flight time",
+     "value": "0.91 +- 0.08 at 30 cm to 1.22 +- 0.03 at 70 cm",
+     "units": "s",
+     "conditions": "as above",
+     "location": "Table 3"
+    },
+    {
+     "quantity": "contact time; jump depth; jump frequency",
+     "value": "0.63-0.68 s; -25 to -43 cm; 38 to 32 jumps/min",
+     "units": "",
+     "conditions": "as above",
+     "location": "Table 3"
+    },
+    {
+     "quantity": "peak vertical GRF",
+     "value": "78 +- 48 to 119 +- 17",
+     "units": "% Earth bodyweight",
+     "conditions": "as above",
+     "location": "Table 3"
+    },
+    {
+     "quantity": "take-off velocity",
+     "value": "0.74-0.99 from flight time (v = g t / 2); 0.99-1.52 from reported heights (v = sqrt(2 g h))",
+     "units": "m/s",
+     "conditions": "calculation at 1.62 m/s^2; the two disagree, so the paper's definition of jump height needs reading",
+     "location": "derived"
+    }
+   ],
+   "supports": "jumping and hopping at lunar gravity",
+   "limits": "a tilt-suspension analogue, mostly male; submaximal prescribed heights, not preferred heights.",
+   "open": [
+    "How jump height was defined and measured (it does not match the flight times)."
+   ]
+  },
+  {
+   "id": "weber2019",
+   "citation": "Weber T, Green DA, Attias J, Sies W, Frechette A, Braunstein B, Rittweger J (2019). Hopping in hypogravity - A rationale for a plyometric exercise countermeasure in planetary exploration missions. PLoS ONE 14(2):e0211263.",
+   "doi_or_url": "https://doi.org/10.1371/journal.pone.0211263 (PMC6373893)",
+   "retrieval": "Europe PMC abstract and full text searched 2026-11-01; numeric tables not extracted.",
+   "evidence_state": "abstract_or_summary",
+   "values": [
+    {
+     "quantity": "findings",
+     "value": "peak vertical GRF falls with simulated gravity and rises with hop height; contact time falls with increasing gravity and does not depend on hop height; flight time rises with lower gravity and greater hop height",
+     "units": "",
+     "conditions": "Verticalised Treadmill Facility at 0.16, 0.27, 0.38 and 0.7 g; submaximal plyometric hopping",
+     "location": "Abstract"
+    }
+   ],
+   "supports": "hopping mechanics at 0.16 g",
+   "limits": "numbers not extracted.",
+   "open": [
+    "Hop heights, contact and flight times at 0.16 g from the results figures/tables."
+   ]
+  },
+  {
+   "id": "kim2014",
+   "citation": "Kim J, Wilson MA, Singhal K, Gamblin S, Suh CY, Kwon YH (2014). Generation of vertical angular momentum in single, double, and triple-turn pirouette en dehors in ballet. Sports Biomechanics 13:215-229.",
+   "doi_or_url": "https://doi.org/10.1080/14763141.2014.933580",
+   "retrieval": "abstract via Europe PMC.",
+   "evidence_state": "identity_only",
+   "values": [
+    {
+     "quantity": "finding",
+     "value": "vertical angular momentum rises with the number of turns, mainly through a faster rate of generation by the upper trunk and arms; the trail (closing) arm contributes most, then the lead arm",
+     "units": "",
+     "conditions": "nine skilled collegiate dancers, 3D motion analysis",
+     "location": "Abstract"
+    }
+   ],
+   "supports": "whole-body angular momentum in pirouettes",
+   "limits": "numbers not retrieved.",
+   "open": [
+    "Peak whole-body vertical angular momentum for single, double and triple pirouettes (Tables in the paper)."
+   ]
+  },
+  {
+   "id": "zaferiou2016",
+   "citation": "Zaferiou AM, Wilcox RR, McNitt-Gray JL (2016). Modification of impulse generation during pirouette turns with increased rotational demands. Journal of Applied Biomechanics 32:425-432.",
+   "doi_or_url": "https://doi.org/10.1123/jab.2015-0314",
+   "retrieval": "abstract via Europe PMC.",
+   "evidence_state": "identity_only",
+   "values": [
+    {
+     "quantity": "finding",
+     "value": "net angular impulse rises from single to double pirouettes; net horizontal impulse stays small through coordination of the two legs' reaction forces",
+     "units": "",
+     "conditions": "11 skilled dancers, each foot on a force plate",
+     "location": "Abstract"
+    }
+   ],
+   "supports": "angular impulse at pirouette take-off",
+   "limits": "numbers not retrieved.",
+   "open": [
+    "Net angular impulse values (N m s) per turn type; tour en l'air and grand jete angular momentum (no source found)."
+   ]
+  },
+  {
+   "id": "fuss2024",
+   "citation": "Fuss FK (2024). Drag measurements of fluttering fabrics and their application for sportswear. Sports Engineering 27:38.",
+   "doi_or_url": "https://doi.org/10.1007/s12283-024-00477-1",
+   "retrieval": "open-access PDF from epub.uni-bayreuth.de/id/eprint/8277 read in memory 2026-11-01 (sha256 prefix 61a114d7d030c3c0).",
+   "evidence_state": "primary_read",
+   "values": [
+    {
+     "quantity": "silk chiffon: weight w; flexural rigidity G (Griesser-Taylor; Peirce cantilever); G/w",
+     "value": "0.256; 0.527; 0.502; 2.057 / 1.960",
+     "units": "N/m^2; uN m; uN m; as printed",
+     "conditions": "retail fabric; modified ASTM D1388 cantilever and Griesser-Taylor methods",
+     "location": "Table 1, fabric C"
+    },
+    {
+     "quantity": "silk georgette: w; G (GT; Peirce)",
+     "value": "0.336; 0.681; 0.602",
+     "units": "N/m^2; uN m",
+     "conditions": "as above",
+     "location": "Table 1, fabric G"
+    },
+    {
+     "quantity": "crepe lavable: w; G (GT; Peirce)",
+     "value": "0.361; 0.580; 0.581",
+     "units": "N/m^2; uN m",
+     "conditions": "as above",
+     "location": "Table 1, fabric D"
+    },
+    {
+     "quantity": "silk tulle: w; G (GT; Peirce)",
+     "value": "0.114; 0.016; 0.019",
+     "units": "N/m^2; uN m",
+     "conditions": "as above",
+     "location": "Table 1, fabric T"
+    },
+    {
+     "quantity": "areal density (from w / g)",
+     "value": "chiffon 26.1; georgette 34.3; crepe lavable 36.8; tulle 11.6",
+     "units": "g/m^2",
+     "conditions": "calculation with g = 9.81 m/s^2",
+     "location": "derived from Table 1"
+    },
+    {
+     "quantity": "bending rigidity in KES units (from G)",
+     "value": "chiffon 0.0051-0.0054; georgette 0.0061-0.0069; crepe lavable 0.0059",
+     "units": "gf cm^2/cm",
+     "conditions": "calculation: G read as per-unit-width rigidity (Peirce G = w C^3, N m^2/m), divided by 9.80665e-5; cantilever methods differ from KES-FB2 pure bending, so these are equivalents, not KES measurements",
+     "location": "derived from Table 1"
+    },
+    {
+     "quantity": "drag coefficient of fluttering fabric strips on a cylinder",
+     "value": "mean 0.87-1.07 for ten fabrics (minimum 0.76-1), one fabric 1.27; bare cylinder about 1.1",
+     "units": "",
+     "conditions": "550 x 320 mm strips on a 125 mm cylinder, 25-120 km/h, Re 60k-280k; subcritical regime",
+     "location": "Abstract and Results"
+    }
+   ],
+   "supports": "garment simulation: areal density and bending stiffness of silk chiffon and georgette",
+   "limits": "single retail samples; no KES shear rigidity; drag is for strips on a cylinder, not free sheets.",
+   "open": [
+    "KES-F bending B and shear G for silk chiffon, georgette, crepe de chine, habotai and satin (search found no accessible table; Springer and CORE copies blocked)."
+   ]
+  },
+  {
+   "id": "morris_thomas_steen2009",
+   "citation": "Morris-Thomas MT, Steen S (2009). Experiments on the stability and drag of a flexible sheet under in-plane tension in uniform flow. Journal of Fluids and Structures (journal details from memory); arXiv:0901.4884.",
+   "doi_or_url": "https://arxiv.org/abs/0901.4884",
+   "retrieval": "arXiv PDF read in memory 2026-11-01 (sha256 prefix b8d748868de76947).",
+   "evidence_state": "primary_read",
+   "values": [
+    {
+     "quantity": "flag drag coefficient definition",
+     "value": "C_D = F_D / (0.5 rho A U^2), A = sheet area",
+     "units": "",
+     "conditions": "flags (zero applied tension) of aspect ratio 1, 0.75, 0.6, 0.5, 0.43 (span/length), compared with Carruthers & Filippone's cotton flags at 0.1, 0.05, 0.03",
+     "location": "Section 4.2, Figure 9"
+    },
+    {
+     "quantity": "trend",
+     "value": "drag coefficient of a flexible sheet decreases with increasing length-to-span ratio, as for a flat plate",
+     "units": "",
+     "conditions": "citing Taneda 1968, Auman & Dahlke 2001, Carruthers & Filippone 2005",
+     "location": "Introduction"
+    }
+   ],
+   "supports": "aerodynamic drag of free sheets (skirts, sleeves, scarves)",
+   "limits": "values are plotted in Figure 9 and were not transcribed.",
+   "open": [
+    "Read C_D against Re from Figure 9; obtain Carruthers & Filippone (2005, Journal of Aircraft) correlation."
+   ]
+  },
+  {
+   "id": "carruthers_filippone2005",
+   "citation": "Carruthers AC, Filippone A (2005). Aerodynamic drag of streamers and flags. Journal of Aircraft 42(4):976-982 (volume and pages from memory).",
+   "doi_or_url": "https://www.semanticscholar.org/paper/2884484b40cce384f4822ee5d29e52a54f5e38d2",
+   "retrieval": "search listing only.",
+   "evidence_state": "identity_only",
+   "values": [
+    {
+     "quantity": "test range",
+     "value": "streamers of aspect ratio 10-30 and a flag of 3.3; Re 2e5-2e6; three fabrics of different weight, bending rigidity and hysteresis; semi-empirical C_D(aspect ratio) correlation for cotton streamers",
+     "units": "",
+     "conditions": "wind tunnel",
+     "location": "search summary"
+    }
+   ],
+   "supports": "flag and streamer drag",
+   "limits": "no values retrieved.",
+   "open": [
+    "C_D values and the correlation."
+   ]
+  },
+  {
+   "id": "clifton2009",
+   "citation": "Clifton G (2009). The coefficient of friction of the pointe shoe and implications for current manufacturing processes. Senior Seminar in Dance, Barnard College (cited in McGuire N, 'Tribology on the dance floor', Tribology & Lubrication Technology, December 2024).",
+   "doi_or_url": "https://www.stle.org/files/TLTArchives/2024/12_December/Feature.aspx",
+   "retrieval": "TLT feature read 2026-11-01; it gives no numbers.",
+   "evidence_state": "identity_only",
+   "values": [
+    {
+     "quantity": "scope",
+     "value": "coefficients of friction of several pointe-shoe brands on several floor samples; rotational friction as a function of the shoe-floor contact area",
+     "units": "",
+     "conditions": "undergraduate thesis",
+     "location": "as described by McGuire 2024"
+    }
+   ],
+   "supports": "shoe-floor friction",
+   "limits": "no values found for leather or suede soles on vinyl (Marley) floors.",
+   "open": [
+    "Static, dynamic and rotational friction coefficients of leather and suede soles on vinyl dance floors; model.py uses sliding 0.6, torsional 0.02 m, rolling 0.002 without a source."
+   ]
+  },
+  {
+   "id": "laban_lawrence1947",
+   "citation": "Laban R, Lawrence FC (1947). Effort. London: Macdonald & Evans. Later editions 1965 (Macdonald & Evans) and 1974 as 'Effort: Economy in Body Movement' (Boston: Plays, Inc., ISBN 0823801608).",
+   "doi_or_url": "https://openlibrary.org/works/OL6375863W",
+   "retrieval": "Open Library catalogue; Open Library lists Laban as author; F. C. Lawrence as co-author is from general knowledge.",
+   "evidence_state": "identity_only",
+   "values": [],
+   "supports": "the Effort factors (Weight, Time, Space, Flow) of Laban Movement Analysis",
+   "limits": "bibliographic identity only."
+  },
+  {
+   "id": "laban1960",
+   "citation": "Laban R (1960). The Mastery of Movement. 2nd ed., revised and enlarged by Lisa Ullmann. London: Macdonald & Evans (first published 1950 as 'The Mastery of Movement on the Stage').",
+   "doi_or_url": "https://openlibrary.org/works/OL6375864W",
+   "retrieval": "Open Library catalogue (1960 edition record; the 1950 title and Ullmann's revision are from general knowledge).",
+   "evidence_state": "identity_only",
+   "values": [],
+   "supports": "Laban Movement Analysis, Effort",
+   "limits": "bibliographic identity only."
+  },
+  {
+   "id": "hutchinson_guest_labanotation",
+   "citation": "Hutchinson Guest A (1954; 4th ed. 2005). Labanotation: The System of Analyzing and Recording Movement. New York: Theatre Arts Books / New Directions (1954); 4th ed. New York and London: Routledge (ISBN 9780415965613, 9780415965620).",
+   "doi_or_url": "https://openlibrary.org/works/OL4279998W",
+   "retrieval": "Open Library catalogue (first publication 1954; Routledge ISBNs listed there; the 2005 date of the 4th edition is from general knowledge).",
+   "evidence_state": "identity_only",
+   "values": [],
+   "supports": "Labanotation",
+   "limits": "bibliographic identity only."
+  },
+  {
+   "id": "humphrey1959",
+   "citation": "Humphrey D (1959). The Art of Making Dances. Ed. B. Pollack. New York: Rinehart; reprinted Grove Press (ISBN 0394172418), Princeton Book Company and Dance Books (ISBN 9781852730536).",
+   "doi_or_url": "https://openlibrary.org/works/OL2966537W",
+   "retrieval": "Open Library catalogue; the editor's name is from general knowledge.",
+   "evidence_state": "identity_only",
+   "values": [],
+   "supports": "choreographic craft (design, dynamics, rhythm, motivation)",
+   "limits": "bibliographic identity only."
+  },
+  {
+   "id": "blom_chaplin1982",
+   "citation": "Blom LA, Chaplin LT (1982). The Intimate Act of Choreography. Pittsburgh: University of Pittsburgh Press (ISBN 0822934639 cloth, 0822953420 paper); London: Dance Books (ISBN 9781852730109).",
+   "doi_or_url": "https://openlibrary.org/works/OL5091450W",
+   "retrieval": "Open Library catalogue (lists Blom; Chaplin as co-author is from the title page as generally cited).",
+   "evidence_state": "identity_only",
+   "values": [],
+   "supports": "choreographic devices (manipulation of motifs, form, structure)",
+   "limits": "bibliographic identity only."
+  },
+  {
+   "id": "forsythe_improvisation_technologies",
+   "citation": "Forsythe W (1999; book and DVD edition 2012). Improvisation Technologies: A Tool for the Analytical Dance Eye. CD-ROM, ZKM Karlsruhe (1999); Ostfildern: Hatje Cantz (2012, ISBN 9783775721844).",
+   "doi_or_url": "https://openlibrary.org/works/OL17555626W",
+   "retrieval": "Open Library lists the 2012 Hatje Cantz edition; the 1999 ZKM CD-ROM first edition is from general knowledge.",
+   "evidence_state": "identity_only",
+   "values": [],
+   "supports": "Forsythe's improvisation operations (point-line-plane geometry, inscription, extrusion)",
+   "limits": "bibliographic identity only; first-edition details unverified."
+  },
+  {
+   "id": "smith_autard2010",
+   "citation": "Smith-Autard JM (2010). Dance Composition: A Practical Guide to Creative Success in Dance Making. 6th ed. London: Methuen Drama (ISBN 9781408115640). First published 1976 (Lepus Books) under the name Jacqueline M. Smith.",
+   "doi_or_url": "https://openlibrary.org/works/OL19839376W",
+   "retrieval": "Open Library catalogue (2010 Methuen Drama record and 1976 first publication); the 6th-edition number and subtitle are from general knowledge.",
+   "evidence_state": "identity_only",
+   "values": [],
+   "supports": "choreographic devices (motif development, repetition, canon, contrast)",
+   "limits": "bibliographic identity only."
+  },
+  {
+   "id": "water_sleeves_encyclopaedia",
+   "citation": "Baidu Baike, 'Water Sleeve Technique' and 'Water Sleeves' (English pages); Wikipedia, 'Water sleeves'.",
+   "doi_or_url": "https://baike.baidu.com/en/item/Water%20Sleeve%20Technique/3280842 ; https://en.wikipedia.org/wiki/Water_sleeves",
+   "retrieval": "search-engine summary of the pages, 2026-11-01; pages themselves not opened.",
+   "evidence_state": "abstract_or_summary",
+   "values": [
+    {
+     "quantity": "opera water-sleeve length",
+     "value": "male about 33 (1 chi), female about 66 (2 chi), longest about 99",
+     "units": "cm",
+     "conditions": "traditional Chinese opera",
+     "location": "Baidu Baike summary"
+    },
+    {
+     "quantity": "extended dance and stage lengths",
+     "value": "about 2 m (6 chi), up to 2.67-3 m (8-9 chi); contemporary dance usage 1-2 m",
+     "units": "m",
+     "conditions": "Chinese classical dance and later stage practice",
+     "location": "Baidu Baike / Wikipedia summary"
+    },
+    {
+     "quantity": "fabric",
+     "value": "white silk",
+     "units": "",
+     "conditions": "traditional",
+     "location": "Baidu Baike summary"
+    }
+   ],
+   "supports": "water-sleeve garment dimensions",
+   "limits": "tertiary sources; fabric weight and weave not given.",
+   "open": [
+    "A scholarly or costume-maker's source for dance water-sleeve length, width and fabric (silk or polyester georgette/chiffon, unsourced)."
+   ]
+  },
+  {
+   "id": "cakmak2017",
+   "citation": "Cakmak YO, et al. (2017). A possible role of prolonged whirling episodes on structural plasticity of the cortical networks and altered vertigo perception: the cortex of Sufi whirling dervishes. Frontiers in Human Neuroscience 11 (author list beyond the first and article number not checked).",
+   "doi_or_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5253366/",
+   "retrieval": "search-engine summary of the article's introduction.",
+   "evidence_state": "abstract_or_summary",
+   "values": [
+    {
+     "quantity": "Mevlevi whirling rate",
+     "value": "20-30 revolutions per minute (0.33-0.50 rev/s), sustained up to 1 hour",
+     "units": "rev/min",
+     "conditions": "statement in the paper's introduction about trained dervishes (up to 1000 days of training), not a measurement made in the study",
+     "location": "Introduction"
+    }
+   ],
+   "supports": "whirling turn rate",
+   "limits": "secondary statement; tennure skirt dimensions not found.",
+   "open": [
+    "Measured Mevlevi turn rates; tennure skirt radius, length, fabric and the cone angle while whirling."
+   ]
+  },
+  {
+   "id": "follow_up_identities_rom",
+   "citation": "Candidate primary sources for dancer ranges of motion, identified by search: Hamilton WG, Hamilton LH, Marshall P, Molnar M (1992) A profile of the musculoskeletal characteristics of elite professional ballet dancers, Am J Sports Med 20(3):267-273, doi:10.1177/036354659202000306; Steinberg N, Hershkovitz I, Peleg S, Dar G, Masharawi Y, Heim M, Siev-Ner I (2006) Range of joint movement in female dancers and nondancers aged 8 to 16 years, Am J Sports Med, doi:10.1177/0363546505281805; Nilsson C et al. (1993) Spinal sagittal mobility and joint laxity in young ballet dancers, Knee Surg Sports Traumatol Arthrosc, doi:10.1007/BF01560208; Bennell K et al. (1999) Hip and ankle range of motion and hip muscle strength in young female ballet dancers and controls, Br J Sports Med (PMC1756204).",
+   "doi_or_url": "see citation",
+   "retrieval": "search listings only.",
+   "evidence_state": "identity_only",
+   "values": [],
+   "supports": "hip flexion, extension and abduction and spinal ranges of trained dancers",
+   "limits": "values not retrieved.",
+   "open": [
+    "Hip flexion, extension, abduction of trained adult female dancers; lumbar and thoracic flexion, extension and rotation of dancers."
+   ]
+  },
+  {
+   "id": "samozino2008",
+   "citation": "Samozino P, Morin J-B, Hintzy F, Belli A (2008). A simple method for measuring force, velocity and power output during squat jump. Journal of Biomechanics 41:2940-2945.",
+   "doi_or_url": "10.1016/j.jbiomech.2008.07.028",
+   "retrieval": "bibliographic identity from general knowledge; not retrieved in this pass",
+   "evidence_state": "cited model",
+   "values": [],
+   "supports": "The macroscopic force-velocity model of the lower limb in jumping used by humanities/dance/envelope.py: mean force at mean speed over the push-off distance.",
+   "limits": "Model form only; its parameters come from Palinkas et al. 2025."
+  },
+  {
+   "id": "yeadon1990",
+   "citation": "Yeadon MR (1990). The simulation of aerial movement - II. A mathematical inertia model of the human body. Journal of Biomechanics 23:67-74.",
+   "doi_or_url": "10.1016/0021-9290(90)90370-I",
+   "retrieval": "bibliographic identity from general knowledge; not retrieved in this pass",
+   "evidence_state": "cited model; ratios open",
+   "values": [
+    {
+     "quantity": "tuck and pike somersault inertia as shares of the layout",
+     "value": "0.30 and 0.55",
+     "units": "ratio",
+     "conditions": "assumed from the general magnitude of Yeadon-model values; not read from the paper",
+     "location": "open"
+    }
+   ],
+   "supports": "The tuck and pike shares in humanities/dance/envelope.py.",
+   "limits": "The shares are stated assumptions until read from the paper."
+  },
+  {
+   "id": "hoerner1965",
+   "citation": "Hoerner SF (1965). Fluid-Dynamic Drag. Midland Park, NJ: published by the author.",
+   "doi_or_url": "ISBN 9789993623938",
+   "retrieval": "bibliographic identity from general knowledge; not retrieved in this pass",
+   "evidence_state": "standard value",
+   "values": [
+    {
+     "quantity": "drag coefficient of a square flat plate normal to the flow",
+     "value": 1.17,
+     "units": "",
+     "conditions": "rigid plate, high Reynolds number",
+     "location": "chapter 3 (from general knowledge)"
+    }
+   ],
+   "supports": "The face-on normal-force coefficient of falling fabric in humanities/dance/envelope.py.",
+   "limits": "Rigid plate; fabric flutters and is porous."
+  }
+ ],
+ "open_items": [
+  "de Leva Table 4: confirm the transcription on the printed page.",
+  "Dancer hip flexion, extension and abduction; lumbar and thoracic flexion, extension and rotation (no value retrieved; model.py's hip cone 150/35/110/30 and spine ranges stay unsupported).",
+  "Female-only ballet ROM (Applied Sciences 2023 values are unverified).",
+  "Trunk, hip abduction and hip rotation isometric torques of young women.",
+  "Two-leg CMJ and sauté heights of female ballet dancers; F-V profiles of dancers; numeric hpo.",
+  "Swain et al. 2026 jump-height definition; Weber et al. 2019 hop heights at 0.16 g.",
+  "Whole-body angular momentum values for pirouettes, tours en l'air and grands jetes.",
+  "KES-F bending and shear for silk chiffon, georgette, crepe de chine, habotai and satin; flag drag coefficients (Figure 9 of Morris-Thomas & Steen; Carruthers & Filippone); air permeability of chiffon (no value or defensible bracket found).",
+  "Shoe-floor static, dynamic and rotational friction for leather and suede on vinyl.",
+  "Water-sleeve fabric and width; Mevlevi measured turn rate and tennure dimensions."
+ ],
+ "note_on_this_copy": "Copied into the repository on 1 November 2026 from the literature helper's record on the research drive (humanities/agents/literature/sources.json), with three entries for works the dance code cites (samozino2008, yeadon1990, hoerner1965) added from general knowledge and marked as such."
+}

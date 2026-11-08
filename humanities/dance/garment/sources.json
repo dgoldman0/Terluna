@@ -1,0 +1,198 @@
+{
+ "schema": "terluna.humanities.dance-garment-sources/1",
+ "note": "Every number the garment solver takes from outside, what it supports and how solid it is. 'measured' means an instrument measurement on a named fabric; 'bracket' means a stated range with a chosen central value where no measurement was found in the time allowed.",
+ "fabrics": {
+  "silk_chiffon": {
+   "areal_density_kg_m2": 0.0261, "bending_rigidity_N_m": 0.502e-6, "bending_length_earth_m": 0.0125,
+   "status": "measured pair (one fabric, one laboratory, weft direction only)",
+   "basis": "Fabric weight 0.256 N/m2 (ASTM D3776) and flexural rigidity G_P = 0.502 uN m from a modified ASTM D1388 cantilever (Shirley tester, 42.9 deg, strips 152 x 25 mm cut along the weft); a Griesser-Taylor fit gave 0.527 uN m.",
+   "citation": "Fuss F.K. (2024) Drag measurements of fluttering fabrics and their application for sportswear. Sports Engineering 27:38, Table 1. doi:10.1007/s12283-024-00477-1",
+   "bracket": "Common chiffon is 6-8 momme, 0.026-0.035 kg/m2 (the lead's bracket 0.03-0.04 kg/m2); B scales with weight roughly as weight^2 to weight^3, so a heavier chiffon is stiffer.",
+   "supports": "skirt fabric in the delivered sequences; terminal speed and bending-length validation"
+  },
+  "silk_georgette": {
+   "areal_density_kg_m2": 0.0343, "bending_rigidity_N_m": 0.602e-6, "bending_length_earth_m": 0.0121,
+   "status": "measured pair (one fabric, one laboratory, weft direction only)",
+   "basis": "Fabric weight 0.336 N/m2 and G_P = 0.602 uN m (Griesser-Taylor 0.681 uN m), same method as the chiffon.",
+   "citation": "Fuss F.K. (2024), Sports Engineering 27:38, Table 1. doi:10.1007/s12283-024-00477-1",
+   "bracket": "Georgette ranges 8-14 momme, 0.034-0.06 kg/m2 (the lead's bracket 0.05-0.06 kg/m2 is a heavier georgette).",
+   "supports": "water-sleeve fabric in the delivered sequences (modern dance sleeves are sold as chiffon and are properly georgette, see water_sleeves)"
+  },
+  "silk_crepe_de_chine": {
+   "areal_density_kg_m2": 0.065, "bending_rigidity_N_m": 1.5e-6,
+   "status": "bracket; no measurement found",
+   "basis": "Areal density bracket 0.06-0.07 kg/m2 (12-16 momme). Bending rigidity bracket 1-3 uN m (bending length 1.2-1.7 cm on Earth), central 1.5 uN m chosen. The nearest measured fabric, a 'crepe lavable' of unstated fibre at 0.0368 kg/m2, had G_P = 0.581 uN m (Fuss 2024, Table 1).",
+   "citation": "KES-F data for silk crepe de chine exist in Matsudaira M. & Kawabata S. (1988) A study of the mechanical properties of woven silk fabrics, Part I, J. Text. Inst. 79(3):458-475, doi:10.1080/00405008808658280 (paywalled, not read).",
+   "supports": "validation cases only"
+  },
+  "silk_satin_heavy": {
+   "areal_density_kg_m2": 0.090, "bending_rigidity_N_m": 3.0e-6,
+   "status": "bracket; no measurement found",
+   "basis": "Areal density bracket 0.08-0.10 kg/m2 (19-23 momme charmeuse to a light duchess satin). Bending rigidity bracket 2-6 uN m, central 3 uN m chosen (bending length 1.5 cm on Earth). No woven-satin KES-F or cantilever value was found; the knit 'charmeuse' fabrics in Fuss (2024) are warp knits and were not used.",
+   "citation": "none measured; Matsudaira & Kawabata (1988) as above for silk weaves generally",
+   "supports": "validation cases only"
+  },
+  "wool_plain": {
+   "areal_density_kg_m2": 0.1995,
+   "bending_rigidity_N_m": 1.165e-05,
+   "bending_length_earth_m": 0.0181,
+   "status": "measured pair (one fabric, KES-F2, warp and weft)",
+   "basis": "Sample 14: 100% wool, plain weave, 0.70 mm, 199.5 g/m2; KES-F2 bending rigidity 14.3 (warp) and 9.00 (weft) uN m; the solver takes their mean, 11.65 uN m. The same paper measured 11.0/6.52 with its own beam tester and 13.4/6.60 with FAST-2. A wool/acetate twill of 211 g/m2 measured 12.85/8.22 uN m by KES-F (Ancutiene, Strazdiene & Nesterova 2010, Materials Science (Medziagotyra) 16(4):346-352), close to it.",
+   "citation": "Sun F., Du Z., Yu W., Zhi C. & Chen N. (2017) A quasi-fixed-supported beam method for characterizing fabric bending rigidity and drape behaviour by calculus of variations. Journal of Fiber Science and Technology 73(8):202-209, Tables 1 and 3. doi:10.2115/fiberst.2017-0026",
+   "supports": "the library's light wool dress fabric"
+  },
+  "cotton_plain": {
+   "areal_density_kg_m2": 0.0919,
+   "bending_rigidity_N_m": 5.565e-06,
+   "bending_length_earth_m": 0.0183,
+   "status": "measured pair (one fabric, KES-F2, warp and weft)",
+   "basis": "Sample 1: 100% cotton, plain weave, 0.34 mm, 91.9 g/m2; KES-F2 B 7.30 (warp) and 3.83 (weft) uN m, mean 5.565 uN m. It stands for a light cotton (lawn or shirting weight); the source does not name it lawn.",
+   "citation": "Sun F., Du Z., Yu W., Zhi C. & Chen N. (2017) A quasi-fixed-supported beam method for characterizing fabric bending rigidity and drape behaviour by calculus of variations. Journal of Fiber Science and Technology 73(8):202-209, Tables 1 and 3. doi:10.2115/fiberst.2017-0026",
+   "supports": "the library's light cotton"
+  },
+  "silk_satin": {
+   "areal_density_kg_m2": 0.069,
+   "bending_rigidity_N_m": 8e-07,
+   "bending_length_earth_m": 0.0106,
+   "status": "weight and drape coefficient measured; bending inferred through the solver",
+   "basis": "Silk woven satin, 0.17 mm, 69 g/m2, drape coefficient 21.9% (30 cm specimen on an 18 cm support, KS K 0115:2002). No bending rigidity is given. Earth drape trials of a 69 g/m2 fabric in the solver at 0.5, 0.75, 1, 2, 4 and 8 uN m gave drape coefficients of 0.146, 0.210, 0.248, 0.384, 0.589 and 0.775; interpolating log B at 0.219 gives 0.80 uN m. The value assumes the solver's drape test is right, and carries its error. It sits below the heavy satin's bracket (2-6 uN m at 90 g/m2) scaled by weight, which may be stiff.",
+   "citation": "Lee M., Sohn H. & Kim J. (2011) Journal of Fashion Business 15(3):97-111, Table 1; the satin grid in humanities/dance/garment/trials.py (dance-runs/garment_study_2026-11-01 on the research drive)",
+   "supports": "a soft silk satin (charmeuse type; the source calls it a woven silk satin)"
+  },
+  "silk_organza": {
+   "areal_density_kg_m2": 0.026,
+   "bending_rigidity_N_m": 6.9e-06,
+   "bending_length_earth_m": 0.03,
+   "status": "weight from a supplier; bending a modelling choice",
+   "basis": "6 momme organza at 26 g/m2 (supplier; organza is sold at 5.5-12 momme). No bending measurement was found (two literature passes, 1-2 November 2026: the KES-F tables for silk weaves in Matsudaira & Kawabata 1988, J. Text. Inst. 79(3), and the drape study of Matsudaira & Yang 2003, Text. Res. J. 73(3), were not reachable). B = c^3 m g from a bending length c chosen on Earth for the fabric's kind; a modelling choice. Organza is a sized, hard-twisted sheer: c = 3.0 cm chosen, bracket 2.5-3.5 cm (B 4.0-10.9 uN m).",
+   "citation": "Silk World Australia, \"Silk Weights and Measures\" (supplier page, accessed 2026-11-02); Reach Silk, \"Silk Fabric Specifications\" (supplier page, accessed 2026-11-02)",
+   "supports": "a crisp sheer"
+  },
+  "silk_habotai": {
+   "areal_density_kg_m2": 0.035,
+   "bending_rigidity_N_m": 7.5e-07,
+   "bending_length_earth_m": 0.013,
+   "status": "weight from a supplier; bending a modelling choice",
+   "basis": "8 momme habotai at 35 g/m2 (supplier; sold at 5-12 momme). No bending measurement was found (two literature passes, 1-2 November 2026: the KES-F tables for silk weaves in Matsudaira & Kawabata 1988, J. Text. Inst. 79(3), and the drape study of Matsudaira & Yang 2003, Text. Res. J. 73(3), were not reachable). B = c^3 m g from a bending length c chosen on Earth for the fabric's kind; a modelling choice. A soft plain weave near the measured chiffon and georgette (1.2-1.25 cm): c = 1.3 cm chosen, bracket 1.1-1.5 cm (B 0.46-1.16 uN m).",
+   "citation": "Silk World Australia, \"Silk Weights and Measures\" (supplier page, accessed 2026-11-02); Reach Silk, \"Silk Fabric Specifications\" (supplier page, accessed 2026-11-02)",
+   "supports": "a soft light silk"
+  },
+  "silk_taffeta": {
+   "areal_density_kg_m2": 0.07,
+   "bending_rigidity_N_m": 2.94e-05,
+   "bending_length_earth_m": 0.035,
+   "status": "weight bracket from a supplier; bending a modelling choice",
+   "basis": "Taffeta sold at 14-19 momme, about 60-82 g/m2; 70 g/m2 chosen. No bending measurement was found (two literature passes, 1-2 November 2026: the KES-F tables for silk weaves in Matsudaira & Kawabata 1988, J. Text. Inst. 79(3), and the drape study of Matsudaira & Yang 2003, Text. Res. J. 73(3), were not reachable). B = c^3 m g from a bending length c chosen on Earth for the fabric's kind; a modelling choice. A dense, crisp plain weave: c = 3.5 cm chosen, bracket 3.0-4.0 cm (B 18.5-43.9 uN m).",
+   "citation": "Reach Silk, \"Silk Fabric Specifications\" (supplier page, accessed 2026-11-02)",
+   "supports": "a crisp silk that holds a shape"
+  },
+  "silk_velvet": {
+   "areal_density_kg_m2": 0.17,
+   "bending_rigidity_N_m": 8.2e-06,
+   "bending_length_earth_m": 0.017,
+   "status": "weight from a supplier; bending a modelling choice",
+   "basis": "Silk (silk-viscose) velvet at 170 g/m2 (supplier). No bending measurement was found (two literature passes, 1-2 November 2026: the KES-F tables for silk weaves in Matsudaira & Kawabata 1988, J. Text. Inst. 79(3), and the drape study of Matsudaira & Yang 2003, Text. Res. J. 73(3), were not reachable). B = c^3 m g from a bending length c chosen on Earth for the fabric's kind; a modelling choice. A heavy pile that drapes closely: c = 1.7 cm chosen, bracket 1.4-2.0 cm (B 4.6-13.3 uN m).",
+   "citation": "Reach Silk, \"Silk Fabric Specifications\" (supplier page, accessed 2026-11-02)",
+   "supports": "a heavy fabric that drapes"
+  },
+  "nylon_tulle": {
+   "areal_density_kg_m2": 0.015,
+   "bending_rigidity_N_m": 1.18e-06,
+   "bending_length_earth_m": 0.02,
+   "normal_factor": 0.6,
+   "status": "weight from suppliers; bending and open-weave pressure modelling choices",
+   "basis": "Dance and bridal tulle at 14 and 19 g/m2 (two suppliers); 15 g/m2 chosen. No bending measurement was found (two literature passes, 1-2 November 2026: the KES-F tables for silk weaves in Matsudaira & Kawabata 1988, J. Text. Inst. 79(3), and the drape study of Matsudaira & Yang 2003, Text. Res. J. 73(3), were not reachable). B = c^3 m g from a bending length c chosen on Earth for the fabric's kind; a modelling choice. A sized net: c = 2.0 cm chosen, bracket 1.5-3.0 cm (B 0.50-3.97 uN m); the lightest plain nylon in Sun et al. (2017), 33.9 g/m2, measured 1.29/0.30 uN m. Its open area was not found; about half is assumed. Perforated plates take a drag coefficient of about 1.0 at an open area of 0.3 and 0.6 at 0.6 against 4/3 when solid (Steiros & Hultmark 2018, read off their Fig. 5), so an open half takes about 0.6 of a closed sheet's pressure; fine filaments at dance speeds (a filament Reynolds number of order 1-10) resist more than plates do, which would raise the share toward 1: bracket 0.45-1.0.",
+   "citation": "Rijs Textiles and MH Chine tulle pages (accessed 2026-11-02); Steiros K. & Hultmark M. (2018) Drag on flat plates of arbitrary porosity. J. Fluid Mech. 853:R3, doi:10.1017/jfm.2018.621; Sun F., Du Z., Yu W., Zhi C. & Chen N. (2017) A quasi-fixed-supported beam method for characterizing fabric bending rigidity and drape behaviour by calculus of variations. Journal of Fiber Science and Technology 73(8):202-209, Tables 1 and 3. doi:10.2115/fiberst.2017-0026",
+   "supports": "a light, open net"
+  },
+  "viscose_jersey": {
+   "areal_density_kg_m2": 0.16,
+   "bending_rigidity_N_m": 3.45e-06,
+   "bending_length_earth_m": 0.013,
+   "tensile_stiffness_N_m": 200.0,
+   "status": "weight bracket from a supplier; bending and stretch modelling choices",
+   "basis": "Viscose single jersey at 140-180 g/m2 (fabric guide); 160 g/m2 chosen. No bending measurement was found (two literature passes, 1-2 November 2026: the KES-F tables for silk weaves in Matsudaira & Kawabata 1988, J. Text. Inst. 79(3), and the drape study of Matsudaira & Yang 2003, Text. Res. J. 73(3), were not reachable). B = c^3 m g from a bending length c chosen on Earth for the fabric's kind; a modelling choice. A limp knit: c = 1.3 cm chosen, bracket 1.0-1.6 cm (B 1.6-6.4 uN m). A knit stretches (25-30% across, at no stated load): 200 N/m chosen, still below 1% strain at the loads met here.",
+   "citation": "Nooteboom Textiles, \"Viscose Jersey\" (fabric guide, accessed 2026-11-02)",
+   "supports": "a heavy knit that drapes"
+  },
+  "shear_stiffness": {
+   "value": "0.3-0.5 gf/cm/deg (16.9-28.1 N/m per radian) by fabric",
+   "status": "bracket", "basis": "Usual KES-F shear rigidity G of light silk weaves, about 0.2-0.6 gf/cm/deg; no value read from a primary source in this work.",
+   "supports": "in-plane shear (bias) compliance; it has little effect at these loads"
+  },
+  "tensile_stiffness": {
+   "value": "5000 N/m along warp and weft", "status": "modelling choice",
+   "basis": "KES-F extensibility EM of 3-10% at 490 N/m gives secant stiffness 5000-16000 N/m; at the loads met here (below 1 N/m) any value in that range keeps strains below 1e-3, and the one-pass solver is stiffer than this in practice.",
+   "supports": "near-inextensibility"
+  }
+ },
+ "aerodynamics": {
+  "c_normal": {
+   "value": 1.17, "bracket": [1.0, 1.2], "status": "handbook value (recalled, not re-read here)",
+   "basis": "Drag coefficient of a thin flat plate normal to the flow, disc and square plate about 1.17-1.18 at Re above 1e4; it rises toward 2 for long plates. Aspect ratio changes it little up to 10.",
+   "citation": "Hoerner S.F. (1965) Fluid-Dynamic Drag, ch. 3; Fail R., Lawford J.A. & Eyre R.C.W. (1957) Low-speed experiments on the wake characteristics of flat plates normal to an air stream, ARC R&M 3120 (abstract seen).",
+   "supports": "normal pressure on every triangle, -1/2 rho C_N |v_n| v_n A; it also carries the lift of inclined panels (as C_N sin^2 of incidence)"
+  },
+  "c_tangent": {
+   "value": 0.01, "bracket": [0.005, 0.03], "status": "textbook formula applied to the case",
+   "basis": "Both faces together, on the one-sided area: 2 x 1.328 / sqrt(Re_L) for a laminar plate is 0.008-0.027 for Re_L = 1e4-1e5 (garment panels 0.1-1 m at 0.2-3 m/s; nu = 1.3e-5 m2/s on the Moon, 1.5e-5 on Earth).",
+   "citation": "Blasius laminar skin friction, e.g. Schlichting H. & Gersten K., Boundary-Layer Theory.",
+   "supports": "skin friction along every triangle, -1/2 rho C_T |v_t| v_t A"
+  },
+  "flag_drag_context": {
+   "status": "context, not used as input",
+   "basis": "Flexible sheets aligned with the flow carry time-averaged drag coefficients from about 0.02 to 2 depending on flutter; the solver resolves flutter itself, so only skin friction is added along the surface.",
+   "citation": "Carruthers A.C. & Filippone A. (2005) Aerodynamic drag of streamers and flags, J. Aircraft 42(4):976-982; Raynaud & Mulleners (2026) arXiv:2602.06237; Fuss (2024)."
+  },
+  "air_density": {
+   "moon": 1.40, "earth": 1.225, "units": "kg/m3",
+   "basis": "Moon: sea-level datum of the project's climate, climate/results/gcm/global_winds_A28_dim5_moon.json at height 0 km (common.md); Earth: ISA sea level.",
+   "supports": "both aerodynamic terms"
+  },
+  "permeability": {
+   "status": "order-of-magnitude assumption",
+   "basis": "Air bleeding through an open chiffon weave is neglected: at dynamic pressures of about 1 Pa the Darcy through-flow of light silks is of order 1% of the panel speed (air permeability of order 10^2-10^3 L/m2/s at 100 Pa, scaled linearly). Not checked against a measured chiffon value here."
+  }
+ },
+ "measured_drape": {
+  "status": "measured (one sample each)",
+  "basis": "Cusick-type drape coefficients, 30 cm specimens on an 18 cm support (KS K 0115:2002, DrapeMeter): silk satin 69 g/m2, 0.17 mm, 21.9%; wool twill 160 g/m2, 44.3%; wool herringbone 328 g/m2, 52.0%; plain cotton 81 g/m2, 64.1%. No bending rigidity is given for them.",
+  "citation": "Lee M., Sohn H. & Kim J. (2011) A study on representation of 3D virtual fabric simulation with drape image analysis II. Journal of Fashion Business 15(3):97-111, Table 1.",
+  "supports": "context for the drape trials; the satin's drape coefficient sets the bending rigidity of the library's silk_satin through the solver's drape test"
+ },
+ "hem_weights": {
+  "status": "bracket (products)",
+  "basis": "Weighted hem tape (lead pellets in a tape) is sold at 15, 25, 35, 70 and 100 g/m, up to 400 g/m; the study tries 25-200 g/m. Horsehair braid (crin) for stiffened hems is sold 30-150 mm wide; its stiffness was not found.",
+  "citation": "Sew Irish and Blinds Parts Direct product listings (accessed 2026-11-02)",
+  "supports": "the weighted hems in the screen and the turn trials"
+ },
+ "gravity": {"moon": 1.6242, "earth": 9.80665, "units": "m/s2", "basis": "shared/constants.json (GM/R^2) and standard gravity"},
+ "friction": {
+  "value": 0.3, "satin": 0.25, "bracket": [0.15, 0.6], "status": "bracket",
+  "basis": "KES-SE mean friction MIU of spun-silk fabric 0.141 against a steel-wire contactor; forearm skin 0.42 +/- 0.19 against the same contactor; skin against fabric 0.2-0.35 at 25% skin moisture and 0.55-0.65 at 52%.",
+  "citation": "Inoue M. (2011) Surface friction properties of fabrics and human skin. In Ghrib T. (ed.) New Tribological Ways, InTech, pp. 265-272.",
+  "supports": "Coulomb friction of cloth on the body's capsules and on the floor (the floor value has no source)"
+ },
+ "water_sleeves": {
+  "length_m": 1.5, "circumference_m": 0.50, "fabric": "silk_georgette",
+  "status": "popular and commercial sources; choice inside the brief's 1.2-2.0 m",
+  "basis": "Opera water sleeves: men's about 1 chi (33 cm), women's about 2 chi (67 cm), at most 3 chi; in particular plays and since the 1970s dan sleeves of 6-8 chi (2.0-2.7 m) or more. Classical-dance sleeves are sold at 1.2, 1.5, 2 and 3 m, about 1.5 m recommended, panel width 72 cm; fabric originally silk, now mostly sold as chiffon and properly georgette. The circumference 0.50 m (a loose cuff) is a modelling choice between a fitted cuff (0.3 m) and the 0.72 m panel.",
+  "citation": "NetEase, '戏曲知识之水袖' (2019-02-21), https://www.163.com/dy/article/E8HL4K7L053734RJ.html; Baidu Baike '水袖功' and a ximalaya Q&A page (seen only as search summaries).",
+  "supports": "the sleeve garment's dimensions"
+ },
+ "circle_skirt": {
+  "length_m": 0.85, "waist": "2 cm above the omphalion, band radius 6 mm outside the abdomen capsule",
+  "status": "modelling choice", "basis": "Natural waist just above the navel; skirt length leaves the hem 17 cm above the floor standing (mid-calf to above the ankle).",
+  "supports": "the skirt garment's dimensions"
+ },
+ "cross_check": "The dance literature helper's record (/media/projectspace/terluna-research/humanities/agents/literature/sources.json, entries fuss2024, morris_thomas_steen2009, water_sleeves_encyclopaedia) reads the same Fuss (2024) Table 1 values; it lists KES-F bending and shear of silk crepe de chine, habotai and satin, flag drag coefficients and the air permeability of chiffon as open. Fuss (2024) also measured mean drag coefficients of 0.87-1.07 for ten fluttering fabric strips on a cylinder (Re 6e4-2.8e5), context for C_N near 1.",
+ "methods": [
+  "Macklin M., Mueller M. & Chentanez N. (2016) XPBD: position-based simulation of compliant constrained dynamics. Motion in Games.",
+  "Macklin M., Storey K., Lu M., Terdiman P., Chentanez N., Jeschke S. & Mueller M. (2019) Small steps in physics simulation. SCA.",
+  "Mueller M., Chentanez N., Kim T.-Y. & Macklin M. (2014) Strain based dynamics. SCA.",
+  "Bergou M., Wardetzky M., Harmon D., Zorin D. & Grinspun E. (2006) A quadratic bending model for inextensible surfaces. SGP.",
+  "Wardetzky M., Bergou M., Harmon D., Zorin D. & Grinspun E. (2007) Discrete quadratic curvature energies. CAGD 24.",
+  "Meyer M., Desbrun M., Schroeder P. & Barr A. (2003) Discrete differential-geometry operators for triangulated 2-manifolds.",
+  "Peirce F.T. (1930) The handle of cloth as a measurable quantity. J. Text. Inst. 21:T377-T416 (bending length c = (B/w)^(1/3); 41.5 deg cantilever)."
+ ]
+}
