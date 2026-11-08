@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""The Open Moon's first biome map as one sheet: the biomes as run with their uncertain cells hatched, where the
+"""The Open Moon's moisture map as one sheet: the moisture classes as run with their uncertain cells set apart, where the
 uncertainty comes from, the night's light, and the land's shares with their robust parts.
 
-    python3 visualization/biome-map/render.py [--out DIR]     # PNG and a manifest; default the research drive's folder
+    python3 visualization/moisture-map/render.py [--out DIR]     # PNG and a manifest; default the research drive's folder
 
-Reads biosphere/ecology/results/biome_map.json (schema terluna.biosphere.ecology-biome-map/1) and draws its cells as
-they stand: each T21 land cell a box of its biome's colour, sea cells grey-blue, no smoothing or downscaling. The
+Reads biosphere/ecology/results/moisture_map.json (schema terluna.biosphere.ecology-moisture-map/1) and draws its cells
+as they stand, in the run's own frame (the turned Moon's): each T21 land cell a box of its class's colour, sea cells grey-blue, no smoothing or downscaling. The
 manifest records the product's hash and a faithfulness check, the land shares counted from the drawn grid against the
-product's. Colours: the biomes' ramp runs from sand to dark green in falling lightness; the uncertainty sources
+product's. Colours: the classes' ramp runs from sand to dark green in falling lightness; the uncertainty sources
 take the first three slots of the reference categorical palette; the night ramp runs from the dark belt to the bright
 nights. The images stay out of Git.
 """
@@ -27,10 +27,10 @@ from matplotlib.collections import PatchCollection               # noqa: E402
 from matplotlib.patches import Patch, Rectangle                  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-PRODUCT = ROOT / 'biosphere' / 'ecology' / 'results' / 'biome_map.json'
-SCHEMA = 'terluna.biosphere.ecology-biome-map/1'
-OUT = Path('/media/projectspace/terluna-research/session-tools/agents/biome_map')
-BIOME_COLOURS = ['#faf5ea', '#ebc98c', '#aeb041', '#6a9c50', '#2a6a4a', '#0c3528']   # neighbours 15.9-22 apart (CIEDE2000)
+PRODUCT = ROOT / 'biosphere' / 'ecology' / 'results' / 'moisture_map.json'
+SCHEMA = 'terluna.biosphere.ecology-moisture-map/1'
+OUT = Path('/media/projectspace/terluna-research/session-tools/moisture_map')
+CLASS_COLOURS = ['#faf5ea', '#ebc98c', '#aeb041', '#6a9c50', '#2a6a4a', '#0c3528']   # neighbours 15.9-22 apart (CIEDE2000)
 POLAR_DOTS_DEG = 83.0              # the outermost rows' cells crowd into a line on the projection: counted there, not dotted
 SEA = '#cfdbe3'
 UNCERTAIN = '#d8d6d0'
@@ -106,34 +106,34 @@ def main(argv=None) -> int:
     p = json.loads(PRODUCT.read_text())
     if p['schema'] != SCHEMA:
         raise ValueError(f"expected {SCHEMA}, found {p['schema']}")
-    c = {k: np.array(v) for k, v in p['cells'].items() if not isinstance(v[0], list)}
-    names = [x['name'] for x in p['biomes']]
+    c = {k: np.array(v) for k, v in p['cells'].items() if v and not isinstance(v[0], list)}
+    names = [x['name'] for x in p['classes']]
     robust = c['robust'].astype(bool)
     store_only = robust & ~c['robust_store'].astype(bool)
-    soda = (c['closed_lake_fraction'].astype(float) > 0) & (c['biome'] <= 3)
+    soda = (c['closed_lake_fraction'].astype(float) > 0) & (c['moisture'] <= 3)
 
     fig = plt.figure(figsize=(13.5, 12.6), dpi=150, facecolor='white')
     gs = fig.add_gridspec(3, 2, height_ratios=[1.0, 1.0, 0.82], hspace=0.30, wspace=0.06,
                           left=0.155, right=0.985, top=0.905, bottom=0.05)
     run = p['producer']
-    fig.text(0.02, 0.968, 'The Open Moon\'s biomes on the design climate: a first map', fontsize=14,
+    fig.text(0.02, 0.968, 'The Open Moon\'s moisture on the turned Moon at the target', fontsize=14,
              color=INK, weight='bold')
     fig.text(0.02, 0.928, f"{run['run']}, years {run['years'][0]}–{run['years'][1]}; T21 cells about 170 km across, "
-             f"drawn as computed on an equal-area map, the near side at the centre and the limbs dashed.\nProvisional: "
-             f"remade if the convection work changes the design climate. The rain scaled by {p['gap']['scale']:.2f} toward CM1 is a "
+             f"drawn as computed on an equal-area map in the turned Moon's frame, the near side at the centre and the limbs dashed.\n"
+             f"Provisional while the GCM-CM1 gap stands. The rain scaled by {p['gap']['scale']:.2f} toward CM1 is a "
              f"sensitivity of the classes from three boxes, never a corrected climate.", fontsize=8.6, color=INK2,
              linespacing=1.5)
-    biome_handles = [Patch(facecolor=col, edgecolor=INK3, linewidth=0.4, label=n)
-                         for col, n in zip(BIOME_COLOURS, names)]
+    class_handles = [Patch(facecolor=col, edgecolor=INK3, linewidth=0.4, label=n)
+                         for col, n in zip(CLASS_COLOURS, names)]
     sea_handle = Patch(facecolor=SEA, edgecolor='none', label='seas and large lakes (GCM water cells)')
 
     ax = fig.add_subplot(gs[0, 0], projection='mollweide')
-    drawn = draw_map(ax, p, c['biome'].astype(float), BIOME_COLOURS,
-                     'A. Biomes as run; dots: closed lakes in dry cells', dots=soda)
+    drawn = draw_map(ax, p, c['moisture'].astype(float), CLASS_COLOURS,
+                     'A. Moisture classes as run; dots: closed lakes in dry cells', dots=soda)
     axb = fig.add_subplot(gs[0, 1], projection='mollweide')
-    core = np.where(robust, c['biome'].astype(float), 6.0)
-    draw_map(axb, p, core, BIOME_COLOURS + [UNCERTAIN], 'B. The robust core: grey where the class is uncertain')
-    fig.legend(handles=biome_handles + [Patch(facecolor=UNCERTAIN, edgecolor=INK3, linewidth=0.4,
+    core = np.where(robust, c['moisture'].astype(float), 6.0)
+    draw_map(axb, p, core, CLASS_COLOURS + [UNCERTAIN], 'B. The robust core: grey where the class is uncertain')
+    fig.legend(handles=class_handles + [Patch(facecolor=UNCERTAIN, edgecolor=INK3, linewidth=0.4,
                                                   label='uncertain (B)'), sea_handle],
                loc='upper center', bbox_to_anchor=(0.57, 0.648), ncol=4, fontsize=7.6, frameon=False,
                handlelength=1.6, columnspacing=1.4)
@@ -142,7 +142,8 @@ def main(argv=None) -> int:
     src = np.where(robust, 0, np.where(~c['robust_gap'].astype(bool) & ~c['robust_years'].astype(bool), 3,
                    np.where(~c['robust_gap'].astype(bool), 1, np.where(~c['robust_years'].astype(bool), 2, 3))))
     draw_map(ax2, p, src.astype(float), list(SOURCE_COLOURS.values()),
-             'C. What makes a cell uncertain; dots: robust cells a hollows\' store run moves', dots=store_only)
+             'C. What makes a cell uncertain' + ('; dots: robust cells a hollows\' store run moves' if p['producer']['store_runs'] else ''),
+             dots=store_only if p['producer']['store_runs'] else None)
     ax2.legend(handles=[Patch(facecolor=v, edgecolor=INK3, linewidth=0.4, label=k) for k, v in SOURCE_COLOURS.items()],
                loc='upper center', bbox_to_anchor=(0.5, -0.03), ncol=2, fontsize=7.4, frameon=False)
     ax3 = fig.add_subplot(gs[1, 1], projection='mollweide')
@@ -153,9 +154,9 @@ def main(argv=None) -> int:
                loc='upper center', bbox_to_anchor=(0.5, -0.03), ncol=2, fontsize=7.4, frameon=False)
 
     ax4 = fig.add_subplot(gs[2, :])
-    rows = [p['shares']['by_biome'][x['key']] for x in p['biomes']]
+    rows = [p['shares']['by_class'][x['key']] for x in p['classes']]
     y = np.arange(len(rows))[::-1]
-    for yi, row, col in zip(y, rows, BIOME_COLOURS):
+    for yi, row, col in zip(y, rows, CLASS_COLOURS):
         ax4.barh(yi, row['robust_share'] * 100, height=0.62, color=col, edgecolor=INK3, linewidth=0.4)
         ax4.barh(yi, (row['share'] - row['robust_share']) * 100, left=row['robust_share'] * 100, height=0.62,
                  color=col, edgecolor=INK3, linewidth=0.4, hatch='////', alpha=0.85)
@@ -182,13 +183,13 @@ def main(argv=None) -> int:
     ax4.set_axisbelow(True)
     sh = p['shares']
     ax4.set_title(f"E. Shares of the land. Robust {sh['robust'] * 100:.0f}% (the gap alone {sh['robust_gap'] * 100:.0f}%, "
-                  f"the years alone {sh['robust_years'] * 100:.0f}%; with the hollows' store {sh['robust_all'] * 100:.0f}%). "
+                  f"the years alone {sh['robust_years'] * 100:.0f}%" + (f"; with the hollows' store {sh['robust_all'] * 100:.0f}%" if p['producer']['store_runs'] else '') + "). "
                   f"Drylands {p['mix']['drylands_share'] * 100:.0f}% of the land, Earth's {p['mix']['earth_drylands']['drylands'] * 100:.0f}%.",
                   loc='left', fontsize=9.4, color=INK, pad=5)
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    png = out / 'biome_map.png'
+    png = out / 'moisture_map.png'
     fig.savefig(png, dpi=150, facecolor='white')
     # faithfulness: the shares counted from the drawn grid against the product's
     lat = np.array(p['grid']['lat'])
@@ -196,14 +197,14 @@ def main(argv=None) -> int:
     land = np.isfinite(drawn)
     drawn_shares = {n: float((w * (drawn == k)).sum() / (w * land).sum()) for k, n in enumerate(names)}
     worst = max(abs(drawn_shares[n] - r['share']) for n, r in zip(names, rows))
-    manifest = dict(product='biosphere/ecology/results/biome_map.json',
+    manifest = dict(product='biosphere/ecology/results/moisture_map.json',
                     product_sha256=hashlib.sha256(PRODUCT.read_bytes()).hexdigest(),
-                    renderer='visualization/biome-map/render.py',
+                    renderer='visualization/moisture-map/render.py',
                     renderer_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                     image=str(png), image_sha256=hashlib.sha256(png.read_bytes()).hexdigest(),
                     faithfulness=dict(drawn_land_cells=int(land.sum()), product_land_cells=p['land']['cells'],
                                       worst_share_difference=worst, passes=bool(worst < 1e-3 and land.sum() == p['land']['cells'])))
-    (out / 'biome_map_figure.json').write_text(json.dumps(manifest, indent=1) + '\n')
+    (out / 'moisture_map_figure.json').write_text(json.dumps(manifest, indent=1) + '\n')
     print(json.dumps(manifest['faithfulness']), png)
     return 0 if manifest['faithfulness']['passes'] else 1
 

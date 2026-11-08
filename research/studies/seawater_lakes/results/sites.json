@@ -2,7 +2,7 @@
  "schema": "terluna.research.seawater-lake-sites/1",
  "producer": {
   "file": "research/studies/seawater_lakes/sites.py",
-  "sha256": "2d86bcda4c80fe991e51806bea6dcdcb43b63149a1f4067aa10c849f23db925a"
+  "sha256": "81a697b6998c3bbae7ec8b0f530cd290f9b2d6873925248fbfa4126a8e3320fd"
  },
  "inputs": {
   "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",

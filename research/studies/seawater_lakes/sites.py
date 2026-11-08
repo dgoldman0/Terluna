@@ -9,7 +9,7 @@ MAX_DISTANCE_KM of one of them:
   has to cross (the minimax height along 8-connected paths within a local window), above the sea level;
 - its net evaporation on the turned design years with the refit, A28R_301k_design_l15_snow_s924_turned_refit, years
   10-19, read from the biome map's cached sums of that run (session-tools/turned_design/peek/cache) as
-  biosphere/ecology/biome_map.py reads them: rain, and Priestley-Taylor's demand on the mean net radiation. The place
+  biosphere/ecology/moisture_map.py reads them: rain, and Priestley-Taylor's demand on the mean net radiation. The place
   is followed with the turn by the frame record's rotation, as climate/gcm/turned.py does. The lake evaporates as
   the storm-water study's pools did on the design years' semi-arid air, scaled by the nearest land cell's demand over
   that air's (714 mm a year), and its net evaporation is that less the cell's rain.
@@ -40,7 +40,7 @@ LAND_READING = DRIVE / 'turned_years_land_A28R_301k_design_l15_snow_s924_turned_
 RUN, YEARS = 'A28R_301k_design_l15_snow_s924_turned_refit', (10, 19)
 
 KEYS = ('pr', 'rss', 'rls', 'tas', 'ps')
-LATENT, CP_AIR = 2.5e6, 1004.0          # as biome_map.py and the design run's land readings take them
+LATENT, CP_AIR = 2.5e6, 1004.0          # as moisture_map.py and the design run's land readings take them
 MM_DAY = 86400e3                        # m/s of water to mm/day
 R_KM = MOON_RADIUS / 1e3
 

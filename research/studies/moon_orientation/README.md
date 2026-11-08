@@ -118,7 +118,7 @@ The water opens no route back to volcanism. The Moon's large eruptions ended abo
 The turn leaves the atlas's geometry, the seas' volumes, the crustal loading, the shield and the air as they are. The shield's frame is the orbit and the Sun, and the spin axis keeps its place in space. The permanent tidal and rotational bulge, already part of the atlas's equipotential, turns with the face; at Earth's 12.9 m tide on the Moon, a 10° turn moves sea level against the ground by at most a few metres. Everything computed from sunlight by latitude, or from Earth's direction, sits on today's grid:
 - the climate model's design cases and the products read from them, among them the climate targets, heat levers, the resort at 301 K, and the CM1 rings and boxes at fixed latitudes;
 - geography's drainage and rain-fed lakes, the groundwater uptake's thaw times by latitude band and the water table;
-- the coast water, the lakes' and seas' oxygen and methane studies, light limitation, food systems by band, and the biome map on `domain/ecology`;
+- the coast water, the lakes' and seas' oxygen and methane studies, light limitation, food systems by band, and the moisture map, the biome map of 4 November, which the sixth integration remade on the turned run;
 - the tides' forcing pattern, and the views of Earth in sea appearance, living light and cloud twilight;
 - the conservation study's statements about the face seen from Earth and the polar sites, and the polar cold-trap work still to come.
 
