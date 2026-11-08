@@ -24,6 +24,8 @@ problem over the dancer's full rigid-body dynamics at lunar gravity (body.json t
   took 86-97% of a hard landing's vertical speed at once) leaves the stance's pushes, inside the friction cone and
   the body's strength, to absorb the landing as the body sinks through a stroke, and the impulse itself stays
   inside the friction cone and its centre of pressure inside the foot;
+- the floor's push through each landing is costed as the loads people avoid in their joints (LANDING_FORCE_WEIGHT),
+  in the body's Earth weight on either world, so a landing spreads its stop over the stroke its shapes leave it;
 - joint torques stay inside the body's strength (box-constrained FDDP), joint ranges inside barrier costs, every point
   of the soles and knees that bears no weight at or above the floor;
 - no part of the body passes into another: a barrier keeps the legs, the arms and each arm and the head at or above
@@ -92,6 +94,19 @@ IMPULSE_COM_WEIGHT = 1e2     # on the change a landing impulse makes to the cent
                              # only where flights integrate with Runge-Kutta, since on Euler's step the optimiser
                              # meets it by floating down on the integration error (7 November)
 IMPULSE_CONE_WEIGHT = 1e2    # on the impulse's friction cone and centre of pressure, as on a stance's forces
+# The floor's push through each landing, costed as the loads people avoid in their joints: each contact's normal force,
+# as a share of the body's weight on Earth, at every stance node within LANDING_LOAD_S of a touchdown from the air. The
+# tissues that carry the load are the same on either world, so the cost is on the force itself, the same on both. Like
+# the impulse's cost it applies only where flights integrate with Runge-Kutta, so that a landing cannot shed its load by
+# floating down on Euler's integration error. LANDING_LOAD_S outlasts the strokes the vocabulary's landings ask for, so
+# a landing cannot defer its stop past the cost. The weight is set by an Earth check (8 November; dance-runs/
+# landing_force_2026-11-08 on the research drive): a sauté landing on the balls of the feet at 1.7-1.9 m/s pushes,
+# without the cost, a third of the way from people's soft drop landings at that speed to their natural ones (2.72
+# Earth body weights against 2.35 and 3.45; Verniba et al. 2017, sources.json), and at 100 as softly as people asked
+# to land softly (2.25 against 2.17), sinking 15 cm instead of 12. Dancers land softly by training.
+LANDING_FORCE_WEIGHT = 100.0
+LANDING_LOAD_S = 1.0
+EARTH_WEIGHT_N = env.MASS_KG * env.G_E
 MAX_FOOT_FORCE_N = 900.0     # a foot's peak push, about 10 lunar body weights (1.7 of Earth's): a jump's take-off peak
 # Contact kinds: the frame that holds the floor, how many directions it holds (6: no slip and no swivel; 3: a point
 # that cannot slip but may swivel), and the body's points that rest on the floor with it.
@@ -623,7 +638,7 @@ class Problem:
         w[nv + 6:] = 0.2
         return w
 
-    def costs(self, node, landing_targets=None, terminal=False):
+    def costs(self, node, landing_targets=None, terminal=False, load=False):
         cm = crocoddyl.CostModelSum(self.state, self.nu)
         x_ref = np.concatenate([self.reference_q(node), np.zeros(self.model.nv)])
         act = crocoddyl.ActivationModelWeightedQuad(self.state_weights(node) ** 2)
@@ -697,6 +712,18 @@ class Problem:
                     b = crocoddyl.ActivationBounds(np.array([1.0]), np.array([MAX_FOOT_FORCE_N]))
                     cm.addCost(f'{side}_{pt}_press', crocoddyl.CostModelResidual(
                         self.state, crocoddyl.ActivationModelQuadraticBarrier(b), res), 1e2)
+            if load:
+                # A landing's load: the floor's push on the contact (and on a pivot's metatarsal heads), in Earth weights.
+                parts = [(fid, CONTACTS[kind][1], 2)]
+                if kind == 'pivot':
+                    parts += [(self.model.getFrameId(f'{side}_{pt}'), 1, 0) for pt in PIVOT_SUPPORTS]
+                for k, (f, nc, normal) in enumerate(parts):
+                    w = np.zeros(nc)
+                    w[normal] = 1.0 / EARTH_WEIGHT_N ** 2
+                    cm.addCost(f'{side}_load' + (f'_{k}' if k else ''), crocoddyl.CostModelResidual(
+                        self.state, crocoddyl.ActivationModelWeightedQuad(w),
+                        crocoddyl.ResidualModelContactForce(self.state, f, pin.Force.Zero(), nc, self.nu, True)),
+                        LANDING_FORCE_WEIGHT)
         # The floor: every sole or knee point that bears no weight at this node stays at or above it (a 2 mm margin),
         # so swing feet, toes under a flat foot, heels over demi-pointe and knees never pass through the floor.
         for side in ('L', 'R'):
@@ -960,8 +987,10 @@ class Problem:
             v = v - J.T @ np.linalg.solve(J @ J.T + 1e-9 * np.eye(J.shape[0]), J @ v)
         return np.concatenate([q, v])
 
-    def _dam(self, node, i, terminal=False, landing_targets=None):
-        costs = self.costs(node, landing_targets, terminal=terminal)
+    def _dam(self, node, i, terminal=False, landing_targets=None, load=None):
+        if load is None:
+            load = not terminal and self.landing_load(i)
+        costs = self.costs(node, landing_targets, terminal=terminal, load=load)
         act = self.actuation_for(node)
         if node.contacts:
             return crocoddyl.DifferentialActionModelContactFwdDynamics(
@@ -989,6 +1018,17 @@ class Problem:
             if j + 1 < len(self.nodes) and not self.nodes[j + 1].contacts and self.nodes[j + 1].t - node.t <= PUSH_RK4_S:
                 return True
         return False
+
+    def landing_load(self, i):
+        """Whether stance node i carries the cost on a landing's load (LANDING_FORCE_WEIGHT): within LANDING_LOAD_S of a
+        touchdown from the air, on the floor ever since, where flights integrate with Runge-Kutta."""
+        node = self.nodes[i]
+        if not node.contacts or LANDING_FORCE_WEIGHT <= 0 or 'flight' not in RK4_ON:
+            return False
+        j = i
+        while j > 0 and self.nodes[j - 1].contacts and node.t - self.nodes[j].t < LANDING_LOAD_S:
+            j -= 1
+        return j > 0 and not self.nodes[j - 1].contacts and node.t - self.nodes[j].t < LANDING_LOAD_S
 
     def running(self, a, b):
         """The running models of nodes a..b-1 as (node index, model): an impulse before each landing, then the node's
@@ -1024,7 +1064,18 @@ class Problem:
                     icosts.addCost(f'{side}_impulse_cone', crocoddyl.CostModelResidual(
                         self.state, crocoddyl.ActivationModelQuadraticBarrier(crocoddyl.ActivationBounds(cone.lb, cone.ub)),
                         res), IMPULSE_CONE_WEIGHT)
-                out.append((i, crocoddyl.ActionModelImpulseFwdDynamics(self.state, imp, icosts)))
+                    if self.landing_load(i):
+                        # The impulse's load in a stance's currency, as its push spread over one node: without it a
+                        # landing sheds its load into the impulse, which stops the foot at no cost on force.
+                        w = np.zeros(CONTACTS[kind][1])
+                        w[2] = 1.0 / EARTH_WEIGHT_N ** 2
+                        icosts.addCost(f'{side}_impulse_load', crocoddyl.CostModelResidual(
+                            self.state, crocoddyl.ActivationModelWeightedQuad(w),
+                            crocoddyl.ResidualModelContactForce(self.state, fid, pin.Force.Zero(), CONTACTS[kind][1], 0, True)),
+                            LANDING_FORCE_WEIGHT / DT)
+                # enable_force: the impulse's derivatives, without which its cone and load costs carry no gradient
+                # (until 8 November the cone acted on the line search alone)
+                out.append((i, crocoddyl.ActionModelImpulseFwdDynamics(self.state, imp, icosts, 0.0, 0.0, True)))
             landing_targets = {}
             if i + 1 < len(self.nodes):
                 nxt = self.nodes[i + 1]
@@ -1047,7 +1098,7 @@ class Problem:
     def terminal(self, b):
         """The terminal model of a window ending before node b (the phrase's own end when b is past the last node)."""
         if b < len(self.nodes):
-            return crocoddyl.IntegratedActionModelEuler(self._dam(self.nodes[b], b), 0.0)
+            return crocoddyl.IntegratedActionModelEuler(self._dam(self.nodes[b], b, load=False), 0.0)
         return crocoddyl.IntegratedActionModelEuler(self._dam(self.nodes[-1], len(self.nodes) - 1, terminal=True), 0.0)
 
     def reference_states(self, ms, x_start):
@@ -1323,7 +1374,7 @@ def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=Fal
     the solve (a staged solve)."""
     placed = phrase.placed if units is None else phrase.placed[units[0]:units[1]]
     nodes = timeline(placed, finish_s=finish_s)
-    prob = Problem(nodes)
+    prob = Problem(nodes, gravity=gr.G)          # the grammar's gravity, which timed the phrase
     prob.init = init
     if span is not None:
         a = next(i for i, n in enumerate(nodes) if n.t >= span[0] - 1e-9)

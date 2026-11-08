@@ -346,3 +346,57 @@ def test_landing_impulses_keep_the_cone_and_cost_the_centre_of_mass_only_with_ex
             assert not prob.rk4_node(heels + 5)                  # a stance node stays Euler unless 'landing' is named
     finally:
         rz.RK4_ON = old
+
+
+def test_landing_loads_are_costed_from_touchdown_through_the_stroke_in_earth_weights():
+    ph = gr.build('Hanging Salto', gr.motif(('hanging_salto', 'R', {'rise_m': 1.6})))
+    nodes = rz.timeline(ph.placed, finish_s=0.5)
+    i = next(k for k, n in enumerate(nodes) if n.landing and k > 0 and not nodes[k - 1].contacts)
+    last = i + round(rz.LANDING_LOAD_S / rz.DT) - 1
+    old = rz.RK4_ON, rz.LANDING_FORCE_WEIGHT
+    try:
+        rz.LANDING_FORCE_WEIGHT = old[1] or 1.0
+        prob = rz.Problem(nodes)
+        # From the touchdown through LANDING_LOAD_S, never in the take-off's stance or in the air.
+        loaded = [k for k in range(len(nodes)) if prob.landing_load(k)]
+        assert loaded == list(range(i, last + 1)) and last + 1 < len(nodes)
+        prob.plan()
+        ms = [(k, m) for k, m in prob.running(i, i + 1) if not isinstance(m, crocoddyl.ActionModelImpulseFwdDynamics)]
+        k, m = ms[0]
+        costs = m.differential.costs.costs.todict()
+        assert {'L_load', 'R_load'} <= set(costs)
+        assert costs['L_load'].weight == rz.LANDING_FORCE_WEIGHT
+        assert not any('load' in c for c in prob.terminal(i).differential.costs.costs.todict())
+        # Each foot's cost is half the square of its push on the floor in the body's Earth weights.
+        d = m.createData()
+        m.calc(d, prob.state_at(i), np.zeros(m.nu))
+        forces = d.differential.multibody.contacts.contacts.todict()
+        for side in 'LR':
+            fz = next(c.f.linear[2] for name, c in forces.items() if name.startswith(side))
+            assert d.differential.costs.costs.todict()[f'{side}_load'].cost == pytest.approx(
+                0.5 * (fz / (rz.env.MASS_KG * rz.env.G_E)) ** 2, rel=1e-9)
+        # The touchdown's impulse carries the same load, as its push spread over one node, with exact derivatives: the
+        # impulse model computes its forces' derivatives, without which its costs on them carry no gradient.
+        imp = prob.running(i, i + 1)[0][1]
+        assert isinstance(imp, crocoddyl.ActionModelImpulseFwdDynamics)
+        assert imp.costs.costs.todict()['L_impulse_load'].weight == pytest.approx(rz.LANDING_FORCE_WEIGHT / rz.DT)
+        x = prob.state_at(i)
+        x[prob.model.nq + 2] = -2.0                          # arriving downward
+        di = imp.createData()
+        imp.calc(di, x, np.zeros(0))
+        imp.calcDiff(di, x, np.zeros(0))
+
+        def load(xx):
+            dd = imp.createData()
+            imp.calc(dd, xx, np.zeros(0))
+            return dd.costs.costs.todict()['L_impulse_load'].cost
+
+        dx = np.zeros(prob.state.ndx)
+        dx[prob.model.nv + 2] = 1e-6
+        numeric = (load(prob.state.integrate(x, dx)) - load(prob.state.integrate(x, -dx))) / 2e-6
+        analytic = di.costs.costs.todict()['L_impulse_load'].Lx[prob.model.nv + 2]
+        assert abs(numeric) > 1e-9 and analytic == pytest.approx(numeric, rel=1e-4)    # (0.6 N s / 539 N)^2 is small
+        rz.RK4_ON = ()                                       # on Euler's step a landing could float down instead
+        assert not any(prob.landing_load(k) for k in range(len(nodes)))
+    finally:
+        rz.RK4_ON, rz.LANDING_FORCE_WEIGHT = old

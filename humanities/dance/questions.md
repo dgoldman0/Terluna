@@ -55,6 +55,12 @@ questions move to the decisions register (section "Dance and the movement arts, 
    - Euler as now, with landings left rigid.
    Cost: a salto solved alone peaks at 5.8 GB against 2.6 GB on Euler, and from the reference start its first stage took 20 minutes; a whole phrase needs windows sized to that memory, not yet run. *Answered on 7 November: Runge-Kutta on flights as the default for now, in these early drafting stages, to be reconsidered nearer final renders of the dance or the sports (register, section "Sport from the body, 7 November 2026").*
 
+10. **How the hanging salto lands into its deep bend.** The finish chosen on 6 November lands and carries on downward into a deep bend, then rises. As written on 7 November the heels come down 0.15 s after touchdown into that bend, with the feet together and the torso upright, and on flat feet the bend needs about 40 degrees of ankle dorsiflexion against the body's 25 (a dancer's demi-plié reaches 30-35), so the body cannot sink and stops on the balls instead, which made the landing stiff. A dancer's heels rise in a grand plié for the same reason, except in second position. The options:
+   - she sinks on the balls of the feet with the heels raised through the bend and lowers them as she rises (recommended: the feet stay together and the bend reaches 100 degrees at the knee; solved on 8 November with the landing cost, it pushes at most 7.7 lunar body weights against 17 for the finish as written, sinks 21 cm into a 100-degree bend 0.35 s after touchdown, rises, lowers the heels and ends still over her feet; dance-runs/landing_force_2026-11-08 on the drive);
+   - she lands in a wide second position, where the heels can stay down through a deep plié, the legs opening in the air before she lands;
+   - she leans the torso forward over flat feet, as an athlete lands, giving up the upright carriage.
+   Cost: the vocabulary's change (new leg shapes, held with both feet down) and its tests, then the whole phrase solved again with Runge-Kutta flights and the landing cost, in windows sized to their memory (the salto alone peaks near 6 GB and takes about an hour and a quarter in its three stages), then the phrase dressed and rendered again at 480p.
+
 Answered on 1 November: the garments (light and weighted fabrics both, combined to suit each dance), the next step
 (the whole phrase, before the replay controller), partnering and levels (each a future study, neither now), the
 renderer's priorities (the meshes' physics and the dance's clarity before fine detail), the body's proportions (to be

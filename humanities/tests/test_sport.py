@@ -195,3 +195,20 @@ def test_the_whole_body_record_regenerates_and_reads_the_landings_as_they_were_s
         assert land['landing_impulse_m_s']['vertical'] < 0.2 * -land['before']['vertical_m_s']
         assert land['landing_impulse_m_s']['along_over_vertical'] is None or land['landing_impulse_m_s']['along_over_vertical'] <= wb.FLOOR_FRICTION + 0.02
         assert ball['finish']['com_speed_m_s'] < 0.05 and ball['finish']['com_over_feet_m'] < 0.1
+    # 8 November: the check landing sinking on the balls of the feet, on both worlds, without and with the cost on
+    # landing forces. The impulse takes almost none of the landing, the cost lowers the peak push and lengthens the
+    # stroke, and the same landing pushes less on the Moon than on Earth.
+    checks = ('check_earth_2026_11_08', 'check_earth_landing_cost_2026_11_08', 'check_moon_2026_11_08',
+              'check_moon_landing_cost_2026_11_08')
+    if all(k in m for k in checks):
+        land = {k: m[k]['landings'][-1] for k in checks}
+        for k in checks:
+            assert all(abs(f['share_of_gravity'] - 1) < 0.01 for f in m[k]['flights']), k
+            assert land[k]['landing_impulse_m_s']['vertical'] < 0.1 * -land[k]['before']['vertical_m_s'], k
+            assert land[k]['stroke']['sinks_m'] > 0.1, k
+        for world in ('earth', 'moon'):
+            bare, costed = land[f'check_{world}_2026_11_08'], land[f'check_{world}_landing_cost_2026_11_08']
+            assert costed['peak_push']['N'] < bare['peak_push']['N'], world
+            assert costed['stroke']['sinks_m'] > bare['stroke']['sinks_m'], world
+        assert land['check_moon_2026_11_08']['peak_push']['N'] < land['check_earth_2026_11_08']['peak_push']['N']
+        assert land['check_earth_landing_cost_2026_11_08']['peak_push']['earth_bw'] < 2.5

@@ -3,7 +3,7 @@
  "producer": {
   "domain": "humanities",
   "files": {
-   "humanities/sport/whole_body.py": "cdf36cacbd39f534"
+   "humanities/sport/whole_body.py": "d895b8c481c742b8"
   },
   "constants": {
    "MOON_SURFACE_GRAVITY": 1.6242188765608128,
@@ -19,10 +19,20 @@
    "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_flatfoot_staged_rk4_flight_w100_stage2.npz": "a48c74d452610a421c91a62eaf1e8984d1dd2e353791a52fc9e4e479428197b8",
    "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_flatfoot_staged_rk4_flight_w100_stage2_report.json": "4035268714bb8a7712aa7d7a94c5333b4554e006a585f1229bc63a9311c3d8ec",
    "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_staged_rk4_flight_w100_stage2.npz": "d6f18301a7fa5d3aca251fefa94c713bc41b519bb95405e3f121449e66e090da",
-   "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_staged_rk4_flight_w100_stage2_report.json": "3599a78b484284706f562f3280992d100820b9b2d9dafe1e38043fb51c69ff05"
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_2026-11-07/motion/salto_staged_rk4_flight_w100_stage2_report.json": "3599a78b484284706f562f3280992d100820b9b2d9dafe1e38043fb51c69ff05",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_earth_stage2.npz": "cffe30619eb5afbf2be85a3c9418493f5ccdd4d31ede339b46f45d3499eb318b",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_earth_stage2_report.json": "a40179926fb3a0369d38e060e7d9d8acb89dec84e117cf571ea9245c8ce9c817",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_earth_stage3_w100.npz": "8d2797811a53047adba4c235fc6e762b0dc8afc8330ca29843fa7c69ad93c103",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_earth_stage3_w100_report.json": "9fc79ffc2d23a198c35e3ff9c8fa87e72fbcdda2d9c09549f21b4cc49f04c982",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_moon_stage2.npz": "7371b7dc32397afbb3294273c03f2f82ac01f843c5e519def6d56310b1e7116b",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_moon_stage2_report.json": "2e7b3428eb7dcc083306b2a507e0eb5300d49bc15e8609e4412a82095645cdf3",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_moon_stage3_w100.npz": "c2889aa53d489e37d4a5d338d330db95d2d0fdf5894847e691749fc97e09da8b",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_moon_stage3_w100_report.json": "51b0e3111503a74a9c183d6585f2004d246efd5965c360a6e8dc8600a5215105",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/salto_balls_stage3_w100.npz": "21ef02e45942d176df4513dcb810a9cfef7d8e956c312ecdc7c971e1d92dc172",
+   "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/salto_balls_stage3_w100_report.json": "815c93ea3ab940c4f35a4b29f8e6d60e9f1041a7254561af05f3775ff1f618eb"
   }
  },
- "evidence": "Measurements of solved whole-body motions (multiple-shooting optimal control with rigid contacts, friction cones on the stance forces, torque bounds and landing impulses, Euler steps of 25 ms) for one 55 kg body on a 0.5 friction floor; feasible motions of that model, not measured human movement.",
+ "evidence": "Measurements of solved whole-body motions (multiple-shooting optimal control with rigid contacts, friction cones on the stance forces, torque bounds and landing impulses, steps of 25 ms by Euler or, in flight, Runge-Kutta; since 8 November a cost on landing forces) for one 55 kg body on a 0.5 friction floor at lunar gravity, and on Earth for a check; feasible motions of that model, not measured human movement.",
  "body": {
   "mass_kg": 55.0,
   "floor_friction": 0.5
@@ -1344,6 +1354,401 @@
     "com_speed_m_s": 0.015,
     "com_over_feet_m": 0.059,
     "floor_push_N": 90.9
+   }
+  },
+  "check_earth_2026_11_08": {
+   "motion": {
+    "file": "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_earth_stage2.npz",
+    "phrase": "Landing check",
+    "span_s": [
+     0.0,
+     2.475
+    ],
+    "iterations": 250,
+    "dynamic_gap": 0.0
+   },
+   "flights": [
+    {
+     "t": [
+      0.583,
+      1.033
+     ],
+     "vertical_acceleration_m_s2": -9.799,
+     "share_of_gravity": 0.999
+    }
+   ],
+   "stances_between_flights": [],
+   "landings": [
+    {
+     "unit": "landing_check landing",
+     "t": [
+      1.05,
+      2.467
+     ],
+     "stance_s": 1.433,
+     "before": {
+      "along_m_s": 0.07,
+      "vertical_m_s": -1.85
+     },
+     "after": {
+      "along_m_s": 0.0,
+      "vertical_m_s": -0.0
+     },
+     "travel_change_m_s": 0.07,
+     "travel_turn_deg": null,
+     "floor_vertical_impulse_per_kg_m_s": 16.19,
+     "landing_impulse_m_s": {
+      "along": 0.03,
+      "vertical": -0.28,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 8.09,
+     "share_of_bound_used": 0.01,
+     "peak_push": {
+      "N": 1469.0,
+      "lunar_bw": 16.4,
+      "earth_bw": 2.72
+     },
+     "most_friction_used": 0.03,
+     "stroke": {
+      "com_at_touchdown_m": 0.95,
+      "lowest_m": 0.833,
+      "sinks_m": 0.117,
+      "lowest_after_s": 0.15
+     }
+    }
+   ],
+   "salto_standing_take_off": null,
+   "salto_landing": null,
+   "finish": {
+    "com_speed_m_s": 0.002,
+    "com_over_feet_m": 0.111,
+    "floor_push_N": 543.1
+   }
+  },
+  "check_earth_landing_cost_2026_11_08": {
+   "motion": {
+    "file": "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_earth_stage3_w100.npz",
+    "phrase": "Landing check",
+    "span_s": [
+     0.0,
+     2.475
+    ],
+    "iterations": 250,
+    "dynamic_gap": 0.0
+   },
+   "flights": [
+    {
+     "t": [
+      0.583,
+      1.033
+     ],
+     "vertical_acceleration_m_s2": -9.797,
+     "share_of_gravity": 0.999
+    }
+   ],
+   "stances_between_flights": [],
+   "landings": [
+    {
+     "unit": "landing_check landing",
+     "t": [
+      1.05,
+      2.467
+     ],
+     "stance_s": 1.433,
+     "before": {
+      "along_m_s": 0.07,
+      "vertical_m_s": -1.69
+     },
+     "after": {
+      "along_m_s": 0.0,
+      "vertical_m_s": -0.0
+     },
+     "travel_change_m_s": 0.08,
+     "travel_turn_deg": null,
+     "floor_vertical_impulse_per_kg_m_s": 15.91,
+     "landing_impulse_m_s": {
+      "along": 0.04,
+      "vertical": -0.17,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 7.96,
+     "share_of_bound_used": 0.01,
+     "peak_push": {
+      "N": 1214.0,
+      "lunar_bw": 13.6,
+      "earth_bw": 2.25
+     },
+     "most_friction_used": 0.08,
+     "stroke": {
+      "com_at_touchdown_m": 0.991,
+      "lowest_m": 0.839,
+      "sinks_m": 0.152,
+      "lowest_after_s": 0.2
+     }
+    }
+   ],
+   "salto_standing_take_off": null,
+   "salto_landing": null,
+   "finish": {
+    "com_speed_m_s": 0.003,
+    "com_over_feet_m": 0.1,
+    "floor_push_N": 522.8
+   }
+  },
+  "check_moon_2026_11_08": {
+   "motion": {
+    "file": "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_moon_stage2.npz",
+    "phrase": "Landing check",
+    "span_s": [
+     0.0,
+     6.2
+    ],
+    "iterations": 250,
+    "dynamic_gap": 0.0
+   },
+   "flights": [
+    {
+     "t": [
+      1.05,
+      3.833
+     ],
+     "vertical_acceleration_m_s2": -1.624,
+     "share_of_gravity": 1.0
+    }
+   ],
+   "stances_between_flights": [],
+   "landings": [
+    {
+     "unit": "landing_check landing",
+     "t": [
+      3.85,
+      5.85
+     ],
+     "stance_s": 2.033,
+     "before": {
+      "along_m_s": 0.02,
+      "vertical_m_s": -2.19
+     },
+     "after": {
+      "along_m_s": 0.0,
+      "vertical_m_s": -0.0
+     },
+     "travel_change_m_s": 0.02,
+     "travel_turn_deg": null,
+     "floor_vertical_impulse_per_kg_m_s": 5.56,
+     "landing_impulse_m_s": {
+      "along": 0.05,
+      "vertical": -0.06,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 2.78,
+     "share_of_bound_used": 0.01,
+     "peak_push": {
+      "N": 1098.0,
+      "lunar_bw": 12.3,
+      "earth_bw": 2.04
+     },
+     "most_friction_used": 0.15,
+     "stroke": {
+      "com_at_touchdown_m": 0.939,
+      "lowest_m": 0.779,
+      "sinks_m": 0.159,
+      "lowest_after_s": 0.2
+     }
+    }
+   ],
+   "salto_standing_take_off": null,
+   "salto_landing": null,
+   "finish": {
+    "com_speed_m_s": 0.01,
+    "com_over_feet_m": 0.058,
+    "floor_push_N": 90.0
+   }
+  },
+  "check_moon_landing_cost_2026_11_08": {
+   "motion": {
+    "file": "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/check2_moon_stage3_w100.npz",
+    "phrase": "Landing check",
+    "span_s": [
+     0.0,
+     6.2
+    ],
+    "iterations": 250,
+    "dynamic_gap": 0.0
+   },
+   "flights": [
+    {
+     "t": [
+      1.05,
+      3.833
+     ],
+     "vertical_acceleration_m_s2": -1.624,
+     "share_of_gravity": 1.0
+    }
+   ],
+   "stances_between_flights": [],
+   "landings": [
+    {
+     "unit": "landing_check landing",
+     "t": [
+      3.85,
+      5.85
+     ],
+     "stance_s": 2.033,
+     "before": {
+      "along_m_s": 0.02,
+      "vertical_m_s": -2.19
+     },
+     "after": {
+      "along_m_s": 0.0,
+      "vertical_m_s": -0.0
+     },
+     "travel_change_m_s": 0.02,
+     "travel_turn_deg": null,
+     "floor_vertical_impulse_per_kg_m_s": 5.51,
+     "landing_impulse_m_s": {
+      "along": 0.05,
+      "vertical": -0.02,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 2.75,
+     "share_of_bound_used": 0.01,
+     "peak_push": {
+      "N": 746.0,
+      "lunar_bw": 8.3,
+      "earth_bw": 1.38
+     },
+     "most_friction_used": 0.22,
+     "stroke": {
+      "com_at_touchdown_m": 0.955,
+      "lowest_m": 0.725,
+      "sinks_m": 0.23,
+      "lowest_after_s": 0.283
+     }
+    }
+   ],
+   "salto_standing_take_off": null,
+   "salto_landing": null,
+   "finish": {
+    "com_speed_m_s": 0.009,
+    "com_over_feet_m": 0.059,
+    "floor_push_N": 90.2
+   }
+  },
+  "salto_on_the_balls_landing_cost_2026_11_08": {
+   "motion": {
+    "file": "/media/projectspace/terluna-research/humanities/dance-runs/landing_force_2026-11-08/motion/salto_balls_stage3_w100.npz",
+    "phrase": "Hanging Salto, landing on the balls",
+    "span_s": [
+     0.0,
+     7.4
+    ],
+    "iterations": 250,
+    "dynamic_gap": 0.0
+   },
+   "flights": [
+    {
+     "t": [
+      1.133,
+      3.95
+     ],
+     "vertical_acceleration_m_s2": -1.623,
+     "share_of_gravity": 0.999
+    }
+   ],
+   "stances_between_flights": [],
+   "landings": [
+    {
+     "unit": "hanging_salto_balls landing",
+     "t": [
+      3.967,
+      5.95
+     ],
+     "stance_s": 2.017,
+     "before": {
+      "along_m_s": 0.01,
+      "vertical_m_s": -2.24
+     },
+     "after": {
+      "along_m_s": 0.03,
+      "vertical_m_s": 0.0
+     },
+     "travel_change_m_s": 0.04,
+     "travel_turn_deg": null,
+     "floor_vertical_impulse_per_kg_m_s": 5.26,
+     "landing_impulse_m_s": {
+      "along": 0.17,
+      "vertical": 0.26,
+      "along_over_vertical": null
+     },
+     "friction_bound_on_travel_change_m_s": 2.76,
+     "share_of_bound_used": 0.01,
+     "peak_push": {
+      "N": 692.0,
+      "lunar_bw": 7.7,
+      "earth_bw": 1.28
+     },
+     "most_friction_used": 0.29,
+     "stroke": {
+      "com_at_touchdown_m": 0.901,
+      "lowest_m": 0.688,
+      "sinks_m": 0.212,
+      "lowest_after_s": 0.283
+     }
+    }
+   ],
+   "salto_standing_take_off": {
+    "unit": "hanging_salto, standing take-off",
+    "stance_from_s": 0.0,
+    "descent_starts_s": 0.1,
+    "dip_m": 0.349,
+    "dip_lowest_at_s": 0.917,
+    "descent_s": 0.817,
+    "dip_to_lift_off_s": 0.217,
+    "onset_to_lift_off_s": 1.033,
+    "lift_off_vertical_m_s": 2.34,
+    "peak_push": {
+     "N": 932.0,
+     "lunar_bw": 10.4
+    }
+   },
+   "salto_landing": {
+    "unit": "hanging_salto, landing (first 0.4 s)",
+    "t": [
+     3.967,
+     4.35
+    ],
+    "stance_s": 0.417,
+    "before": {
+     "along_m_s": 0.01,
+     "vertical_m_s": -2.24
+    },
+    "after": {
+     "along_m_s": 0.12,
+     "vertical_m_s": 0.34
+    },
+    "travel_change_m_s": 0.13,
+    "travel_turn_deg": null,
+    "floor_vertical_impulse_per_kg_m_s": 2.97,
+    "landing_impulse_m_s": {
+     "along": 0.18,
+     "vertical": 0.28,
+     "along_over_vertical": null
+    },
+    "friction_bound_on_travel_change_m_s": 1.63,
+    "share_of_bound_used": 0.08,
+    "peak_push": {
+     "N": 692.0,
+     "lunar_bw": 7.7,
+     "earth_bw": 1.28
+    },
+    "most_friction_used": 0.28
+   },
+   "finish": {
+    "com_speed_m_s": 0.013,
+    "com_over_feet_m": 0.045,
+    "floor_push_N": 89.8
    }
   }
  }

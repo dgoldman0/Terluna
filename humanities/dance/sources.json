@@ -1053,6 +1053,56 @@
    ],
    "supports": "The face-on normal-force coefficient of falling fabric in humanities/dance/envelope.py.",
    "limits": "Rigid plate; fabric flutters and is porous."
+  },
+  {
+   "id": "verniba2017",
+   "citation": "Verniba D, Vescovi JD, Hood DA, Gage WH (2017). The analysis of knee joint loading during drop landing from different heights and under different instruction sets in healthy males. Sports Medicine - Open 3:6.",
+   "doi_or_url": "https://doi.org/10.1186/s40798-016-0072-x (PMC5243232)",
+   "retrieval": "Full text read on PubMed Central, 8 November 2026 (methods and Table 2).",
+   "evidence_state": "primary_read",
+   "values": [
+    {
+     "quantity": "peak vertical ground reaction force per limb, normalised to body mass, soft / natural / stiff instruction",
+     "value": "low drop: 12.71 / 18.18 / 22.36; high drop: 17.24 / 23.05 / 26.60",
+     "units": "N/kg, mean (SE 0.32-1.06)",
+     "conditions": "20 healthy males (22.0 +/- 2.8 years) stepping off 22 cm (low) and 44 cm (high) platforms onto two force plates, one foot on each, hands over the abdomen; measures averaged across the lower limbs",
+     "location": "Table 2; Methods"
+    },
+    {
+     "quantity": "peak knee flexion, soft / natural / stiff instruction",
+     "value": "low drop: 75.49 / 51.31 / 45.17; high drop: 87.71 / 67.26 / 59.17",
+     "units": "deg, mean (SE 1.71-2.88)",
+     "conditions": "as above",
+     "location": "Table 2"
+    }
+   ],
+   "supports": "The Earth check that sets the motion engine's cost on landing forces (humanities/dance/motion/realise.py, LANDING_FORCE_WEIGHT): interpolated to the check's touchdown at 2.28 m/s between the drops' 2.08 and 2.94 m/s, a natural two-foot landing peaks near 3.9 Earth body weights on both feet together (soft 2.8, stiff 4.8; a calculation from the per-limb values, doubled).",
+   "limits": "Untrained men stepping down, not dancers jumping; foot contact pattern not reported; per-limb peaks doubled assume the two feet peak together; the landing speeds are the free-fall speeds from the platform heights."
+  },
+  {
+   "id": "you2022",
+   "citation": "You C-H, Huang C-H (2022). Effects of leg stiffness regulated by different landing styles on vertical drop jump performance. Journal of Human Kinetics 83:29-37.",
+   "doi_or_url": "https://doi.org/10.2478/hukin-2022-0066 (PMC9465758)",
+   "retrieval": "Full text read on PubMed Central, 8 November 2026 (methods and Table 3).",
+   "evidence_state": "primary_read",
+   "values": [
+    {
+     "quantity": "centre-of-mass depth after the first landing, soft / self-selected / stiff",
+     "value": "0.43 / 0.37 / 0.23",
+     "units": "m, mean (SD 0.09 / 0.08 / 0.04)",
+     "conditions": "24 male lacrosse athletes, drop jumps from a 0.42 m box, one foot on each of two force plates whose signals were summed",
+     "location": "Table 3; Methods"
+    },
+    {
+     "quantity": "peak vertical ground reaction force, both feet, soft / self-selected / stiff",
+     "value": "33.13 / 36.26 / 52.55",
+     "units": "N/kg, mean (SD 4.81 / 5.26 / 6.38)",
+     "conditions": "as above",
+     "location": "Table 3"
+    }
+   ],
+   "supports": "A cross-check of the Earth check's sink and peak push: a self-selected landing at 2.9 m/s pushes 3.7 Earth body weights and sinks 0.37 m.",
+   "limits": "Drop jumps rebound at once, so their depth and contact time belong to a jump, not a held landing."
   }
  ],
  "open_items": [
@@ -1065,7 +1115,8 @@
   "Whole-body angular momentum values for pirouettes, tours en l'air and grands jetes.",
   "KES-F bending and shear for silk chiffon, georgette, crepe de chine, habotai and satin; flag drag coefficients (Figure 9 of Morris-Thomas & Steen; Carruthers & Filippone); air permeability of chiffon (no value or defensible bracket found).",
   "Shoe-floor static, dynamic and rotational friction for leather and suede on vinyl.",
-  "Water-sleeve fabric and width; Mevlevi measured turn rate and tennure dimensions."
+  "Water-sleeve fabric and width; Mevlevi measured turn rate and tennure dimensions.",
+  "Two-foot landing forces and sink of trained dancers at known landing speeds (sauté and drop landings), for the engine's landing-force check; the check uses untrained men and athletes."
  ],
  "note_on_this_copy": "Copied into the repository on 1 November 2026 from the literature helper's record on the research drive (humanities/agents/literature/sources.json), with three entries for works the dance code cites (samozino2008, yeadon1990, hoerner1965) added from general knowledge and marked as such."
 }
