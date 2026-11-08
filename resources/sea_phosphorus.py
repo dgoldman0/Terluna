@@ -60,10 +60,10 @@ BOUND = {
     "ways_of_living": dict(path="research/studies/ways_of_living/results/ways_of_living.json",
                            schema="terluna.research.ways-of-living/1", branch="main", commit=None,
                            sha256="9ef2b91e2d80edf9703036d011045f83655d10d4fccc39968fafa738c0d38148"),
-    "provisioning_decisions": dict(path="research/decisions.md", schema=None, branch="main",
-                                   commit=None,
-                                   sha256="c3b456251ba0c721c3a3a7d8e52b6d77637d9692f6710af5706659065a414d2d"),
 }
+# The register is not bound here: the product takes only the working range of 4-8 billion people from it, and a test
+# checks that the register still holds that row, so edits elsewhere in the register leave this product and its readers
+# as they are.
 # Held unbound: provisioning's food-systems study, in the tree since 12 October, reads this product, so binding its
 # per-system phosphorus back would close a loop; the systems below stand alone, on the per-person loss the food study
 # also takes.
@@ -414,13 +414,11 @@ def food_system(eaten, food_loss, efficiency, excreta_return, waste_return):
                 unrecovered_on_farms=unrecovered_on_farms, lost_from_towns=lost_from_towns, new=applied - returned)
 
 
-def people_p(people, ways, decisions):
+def people_p(people, ways):
     """P per person in the lunar design's diet, by food system, and the new P per billion and for 4-8 billion."""
     design = people["needs"]["practices"]["lunar_design"]
     eaten = design["p_eaten_kg"]
-    if "4–8 billion people on the Moon itself" not in decisions:
-        raise ValueError("The working range is not in the bound decisions")
-    population = (4e9, 8e9)
+    population = (4e9, 8e9)  # the register's working range of 11 October, checked in the tests
     feed = AQUAPONIC_FEED_P
     efficiency = dict(
         field_crops=list(FIELD_P_EFFICIENCY),
@@ -741,7 +739,7 @@ def run():
     sea = seas(part, loss, people, data["resources/results/first_screen.json"],
                data["resources/results/phosphorus.json"], ways, data["geography/results/atlas.json"], waters)
     gather = gathering(part, loss, waters, data["geography/results/drainage.json"], living)
-    folks = people_p(people, ways, bound["provisioning_decisions"])
+    folks = people_p(people, ways)
     rt = routes(part, sea, loss, folks, people, ways)
     dist = distribution(rt, ways, folks)
     nat = natural(loss, part, rt, people, sky, register, ways)

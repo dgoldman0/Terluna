@@ -3,11 +3,11 @@
   "evidence": "Conditional competitive-cost and industrial-capacity scenarios. All process qualification, future costs, orders, power, reserves and capital funding are assumed. No lunar cost advantage is inferred from the physical calculation.",
   "products": {
     "research/studies/world_economy/results/construction.json": {
-      "sha256": "2fc6bc4ca371d441e0bd9e17ddb7a493bc379418bf336c039a2770285ae702e9",
+      "sha256": "52ba25819701028421971d45d914821dfeaf2b4fb3ed1bc6f0f3e0211e01a06e",
       "schema": "terluna.research.world-economy-construction/1"
     },
     "research/studies/world_economy/results/comparison.json": {
-      "sha256": "b885746c3fe5574913bdb4e58b84e02a47c75a8099dd27c9370b34bad97f720a",
+      "sha256": "2ab8aa90f964e895fdb6ef1bbdcec8548b634842990c4ef4e069bed218cfea05",
       "schema": "terluna.research.world-economy-comparison/1"
     },
     "resources/results/industry.json": {

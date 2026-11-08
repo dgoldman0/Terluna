@@ -4,7 +4,7 @@
     "study": "world_economy",
     "files": {
       "research/studies/world_economy/amenities.py": "c06302b9be96e6dbd678bda35af44a115f720c525b7094791cde4cfd4730c2db",
-      "research/studies/world_economy/amenities_inputs.json": "506de45c8a4c22219a3cd4e449c14adaff0d9874d53adadd93781da26d691b81",
+      "research/studies/world_economy/amenities_inputs.json": "91bc267ca05042dbbad00b2ff4385e9a10d19c3fbe0b8a58e33690987b7a29b7",
       "research/studies/world_economy/tourism.py": "21e091e62b52645fec64fdfbd6b7856841223d4f14edcf3ff9c6224bec1c2e68",
       "research/studies/world_economy/development.py": "419e7b3524a01b2fbde0ba4cfd73c5f2541e485980d5f808e26a91e263fe47d9",
       "research/studies/world_economy/finance.py": "c285d6951ac415dadfaad71340ae553c67b2ae1afb151e075d73dedfcba81e11",
@@ -17,19 +17,19 @@
     "input_products": {
       "research/studies/world_economy/results/comparison.json": {
         "schema": "terluna.research.world-economy-comparison/1",
-        "sha256": "b885746c3fe5574913bdb4e58b84e02a47c75a8099dd27c9370b34bad97f720a"
+        "sha256": "2ab8aa90f964e895fdb6ef1bbdcec8548b634842990c4ef4e069bed218cfea05"
       },
       "research/studies/world_economy/results/construction.json": {
         "schema": "terluna.research.world-economy-construction/1",
-        "sha256": "2fc6bc4ca371d441e0bd9e17ddb7a493bc379418bf336c039a2770285ae702e9"
+        "sha256": "52ba25819701028421971d45d914821dfeaf2b4fb3ed1bc6f0f3e0211e01a06e"
       },
       "research/studies/distributions/results/distributions.json": {
         "schema": "terluna.research.distributions/1",
-        "sha256": "83546444ab15e8aa9276576c6f72da0c00de80ac9c899bbcb4a5fc45f76831c4"
+        "sha256": "969bf2093309d09f9980da7cb6a7762b1cd109e8e326f61022b9dcc749e9ebd8"
       },
       "resources/results/sea_phosphorus.json": {
         "schema": "terluna.resources.sea-phosphorus/1",
-        "sha256": "1146ec36643f523f24162bb6cad649c5c10218fb3f72a4eecbca3c6d6c64da13"
+        "sha256": "ffedda6b8737f53ec66cbcff4e7a88d2731d4cfee1453c97c1d7db645f1b743a"
       }
     }
   },

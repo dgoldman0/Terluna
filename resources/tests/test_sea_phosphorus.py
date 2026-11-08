@@ -74,7 +74,12 @@ def test_bound_values_match_their_sources():
         target["food_p_share_of_seas_input"][0], rel=1e-9)
     assert PRODUCT["seas"]["discharge_m3_yr"] == ways["moon"]["drainage_discharge_to_sea_km3_year"] * 1e9
     assert PRODUCT["routes"]["sorption"]["pump_efficiency"] == ways["assumptions"]["inherited"]["pump_efficiency"]
-    assert "4–8 billion people on the Moon itself" in sp.load_bound("provisioning_decisions")
+
+
+def test_the_register_still_holds_the_working_population_range():
+    # The product sizes its routes for 4-8 billion people, the register's working range of 11 October. The register is
+    # read here, unbound, so that edits elsewhere in it leave the product and its readers unchanged.
+    assert "4–8 billion people on the Moon itself" in (sp.ROOT / "research/decisions.md").read_text()
 
 
 def test_register_and_box_model_values_match():
