@@ -223,14 +223,36 @@ def test_the_third_box_on_the_design_years_is_the_land_box_at_the_dry_site_with_
     # the latitude turns the box (the land box on the equator has no Coriolis force)
     assert c.turning_rate(case, -44.3) == pytest.approx(-3.718e-6, rel=1e-3) and c.turning_rate(land, 0.0) == 0.0
     # its land is the placeholder land's own row at the GCM's wetness to two decimals, as the circles of latitude
-    # have it; every other box keeps the wetness class nearest its site's wetness
+    # have it, as the boxes copied from it do; every other box keeps the wetness class nearest its site's wetness
     index = c.PLACEHOLDER_LAND[0]
     assert c.site_land_row(case, 0.0823) == index and c.site_land_row(land, 0.794) == c.wetness_class(0.794) == 29
     assert c.site_land_row(land, 0.0823) == c.wetness_class(0.0823) == 21
     assert all(c.site_land_row(v, 0.5) == c.wetness_class(0.5) for k, v in c.CASES.items()
-               if not k.startswith((name, 'box_se_dry_dgw')))
+               if not k.startswith((name, 'box_se_dry_dgw', 'box_se_dry_turned')))
     row = c.landuse_rows(((index, round(0.0823, 2)),))[index]
     assert row.startswith(f'{index},') and '   .08,' in row and 'wetness 0.08' in row
+
+
+def test_the_turned_boxes_are_the_design_years_boxes_on_the_turned_run():
+    # each turned box is its design-years box forced by the turned run at the target over years 10-49, its site carried
+    # with the ground into the turned frame and its start at the site's sunrise, with nothing else departing; its third
+    # to fifth lunar days chain from its own restarts
+    for name, source, lat, lon in (('box_near_side_sea_turned', 'box_near_side_sea_design_years', -9.24, -52.01),
+                                   ('box_0e_turned', 'box_0e_design_years', -7.85, -6.28),
+                                   ('box_se_dry_turned', 'box_se_dry_design_years', -49.85, 56.39)):
+        case, base = c.CASES[name], c.CASES[source]
+        departs = {k for k in set(case) | set(base) if case.get(k) != base.get(k)}
+        assert departs == {'gcm', 'site', 'start_hour_angle_deg', 'purpose'}
+        assert case['gcm'] == (c.GCM_TURNED_RUN, c.GCM_TURNED_YEARS) == ('A28R_301k_design_l15_snow_s924_turned_refit',
+                                                                        (10, 49))
+        assert case['site'] == dict(base['site'], lat_deg=lat, lon_deg=lon)
+        assert case['start_hour_angle_deg'] == -90.0 - lon
+        for day, before, start, end in ((3, name, 59.0, 88.5), (4, f'{name}_day3', 88.5, 118.0),
+                                        (5, f'{name}_day4', 118.0, 147.5)):
+            run_on = c.CASES[f'{name}_day{day}']
+            assert run_on['restart_from'] == dict(case=before, day=start) and run_on['days'] == end
+            assert {k: v for k, v in run_on.items() if k not in ('restart_from', 'days', 'purpose')} == \
+                {k: v for k, v in case.items() if k not in ('days', 'purpose')}
 
 
 def test_the_dry_box_takes_six_cells_at_two_gaussian_rows_and_three_columns():
