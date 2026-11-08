@@ -1506,6 +1506,35 @@ ICE_FACTOR_EDITS = [
      "       zwp = 1000.*dql(jhor,jlev)*dp(jhor)/ga*dsigma(jlev)*zicewf(jlev)\n"
      "       ztaucc(jhor) = 1.-dcc(jhor,jlev)*(1.-exp(-1.66*(0.005+1./(ice_radius(dt(jhor,jlev))*zicerf(jlev)))*zwp))\n"),
 ]
+# Each sunlight pass from zero where the Sun is down (2026-11-08). radstep zeroes dswfl, dfu and dfd once and, with
+# the clear-sky diagnostic on (NDIAGCF 1, every run with the twilight so far), calls swr twice: the clear pass with no
+# cloud, then the all-sky pass. swr writes the three only where the Sun stands above the horizon (losun), and
+# twilight_term adds the curved air's light wherever the solar elevation lies in its table, below the horizon too.
+# Below the horizon the all-sky pass therefore kept the clear pass's twilight and added its own: the ground took the
+# clear twilight T and T (1 - cover) on top, each layer its clear term and its term in the clear share above it, where
+# the all-sky pass's own terms alone were meant. NTWLZERO 1 zeroes the three where the Sun is down before
+# twilight_term adds, so each pass starts there from zero as lwr starts its own; 0, the default, leaves the model as it
+# was. Where the Sun is up swr overwrites every level, so the sunlit columns are unchanged.
+TWILIGHT_ZERO_MARKER = 'Terluna: 1 starts each sunlight pass from zero where the Sun is down'
+TWILIGHT_ZERO_EDITS = [
+    ("      integer :: ntwlclear = 0   ! Terluna: 1 puts the twilight's terms in the clear share above each layer\n",
+     "      integer :: ntwlclear = 0   ! Terluna: 1 puts the twilight's terms in the clear share above each layer\n"
+     f"      integer :: ntwlzero = 0    ! {TWILIGHT_ZERO_MARKER}\n"),
+    ("     &               ,ntwlclear,zicew,zicewf,zicerf\n",
+     "     &               ,ntwlclear,zicew,zicewf,zicerf,ntwlzero\n"),
+    ("      call mpbcrn(zicerf,NLEV)\n", "      call mpbcrn(zicerf,NLEV)\n      call mpbci(ntwlzero)\n"),
+    ("      if (ntwilight == 1) call twilight_term ! Terluna: the curved air's twilight and side light\n",
+     "      if (ntwlzero == 1) then   ! Terluna: where the Sun is down, this pass's fluxes from zero\n"
+     "       do jlev=1,NLEP\n"
+     "        where(.not. losun(:))\n"
+     "         dfu(:,jlev)=0.0\n"
+     "         dfd(:,jlev)=0.0\n"
+     "         dswfl(:,jlev)=0.0\n"
+     "        endwhere\n"
+     "       enddo\n"
+     "      endif\n"
+     "      if (ntwilight == 1) call twilight_term ! Terluna: the curved air's twilight and side light\n"),
+]
 # The 10 m wind (2026-10-19). PlaSim 3.4.2 writes no wind below its lowest level, about 0.9 km up in the lunar air, and
 # the lake model brought that wind down on a neutral log profile. NWIND10 1 has the surface layer (surflx) take the
 # 10 m wind on Geleyn's (1988) profile through the lowest layer, u(z) = u_L (ln(1 + z/z0) - (z/z_L)(B_N - B_D)) / B_D,
@@ -1596,6 +1625,7 @@ TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", T
                     ('radmod.f90', "Terluna: 1 puts the twilight's terms in the clear share", TWILIGHT_CLEAR_EDITS),
                     ('radmod.f90', 'world-crafting: ice bands 2-5 in band 2', ICE_WEIGHTS_EDITS)] + WIND10_PATCHES
 TWILIGHT_PATCHES += [('radmod.f90', "Terluna: the cold cloud's water factor by level", ICE_FACTOR_EDITS)]
+TWILIGHT_PATCHES += [('radmod.f90', TWILIGHT_ZERO_MARKER, TWILIGHT_ZERO_EDITS)]   # from 2026-11-08
 TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
 # ExoPlaSim 3.4.2's PlaSim sources as its pip wheel holds them, untouched by any patch (manifest.json beside the folder
 # gives the wheel and each file's hash): patch_ledger checks a patched folder against them and rebuilds a file from them.
@@ -2344,6 +2374,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         if twilight_clear_share and twilight in ('curved', 'full'):
             cfg['twilight']['clear_share'] = ('each layer\'s sunlight in the cover clear above it, its infrared and the '
                                               'ground\'s through the clouds above at their longwave transmissivity')
+        if twilight in ('curved', 'full'):
+            cfg['twilight']['from_zero'] = ('each sunlight pass from zero where the Sun is down, so the clear-sky '
+                                            'pass\'s twilight stays out of the all-sky pass (TWILIGHT_ZERO_EDITS)')
     if gas_bands:
         fits = json.loads(GASES_PRODUCT.read_text())
         air = json.loads(SLANT_PRODUCT.read_text())['magnification_air']
@@ -2638,6 +2671,8 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         model._edit_namelist('radmod_namelist', 'NTWILW', '1')
         if cfg['twilight'].get('clear_share'):
             model._edit_namelist('radmod_namelist', 'NTWLCLEAR', '1')
+        if cfg['twilight'].get('from_zero'):
+            model._edit_namelist('radmod_namelist', 'NTWLZERO', '1')
     if 'longwave_correction' in cfg:
         c = cfg['longwave_correction']
         (workdir / 'lwcorr.dat').write_text(''.join(' '.join(f'{x:.6e}' for x in c[k]) + '\n' for k in ('land', 'sea', 'tref')))
