@@ -97,7 +97,8 @@ ORIENTATION = 'geology/results/moon_orientation.json'
 TURNED_YEARS_LAND = DRIVE / 'turned_design' / 'turned_years_land_A28R_301k_design_l15_snow_s924_turned_refit.json'
 LIVING_LIGHT = 'research/studies/living_light/results/living_light.json'
 PLANT = 'biosphere/canopy/results/plant.json'
-SCHEMAS = {LIVING_LIGHT: 'terluna.research.living-light/1', GEOGRAPHY['atlas']: 'terluna.geography.atlas/1'}
+POLAR_LIGHT = 'research/studies/polar_light/results/polar_light.json'
+SCHEMAS = {LIVING_LIGHT: 'terluna.research.living-light/1', POLAR_LIGHT: 'terluna.research.polar-light/1', GEOGRAPHY['atlas']: 'terluna.geography.atlas/1'}
 
 # The gap boxes' readings on the design years (session-tools/agents/gap_boxes/read_rules_*.out): lunar-day rain in
 # mm/day, CM1 then the GCM; the land boxes' aridity (R1b); each box's share of rain from sunset to sunrise (R2a's
@@ -400,14 +401,33 @@ def night_light(lat2, lon2):
 
 
 def dark_hours(lat2):
-    """Hours a cycle with photosynthetic light under 1 umol/m2/s, from the plant model's bands (0, 30 and 60 deg) and
-    none poleward of 65 deg (ecology finding 15)."""
+    """Hours a cycle with photosynthetic light under 1 umol/m2/s under a clear sky: equatorward of 60 deg from the plant
+    model's bands (0, 30 and 60 deg), poleward of it from the polar light study's year means at the design tilt in the
+    turned frame, where the tall air's twilight ends them from 66 N and 67 S. Beside them, poleward of 60 deg, the
+    study's hours under the run's clouds, which go on to 72 deg; equatorward, where the study has no table, none. The
+    study finds where the hours end on a 1 deg grid and tabulates them on a coarser one, so each column falls to zero at
+    the study's own limit instead of running on to the next tabulated latitude."""
     plant = json.loads((ROOT / PLANT).read_text())['results']['near']
     hours = []
     for band in ('0', '30', '60'):
         row = plant[band]
         hours.append(next(v['dark_hours'] for v in row.values() if isinstance(v, dict) and 'dark_hours' in v))
-    return np.interp(np.abs(lat2), [0.0, 30.0, 60.0, 65.0], hours + [0.0]), dict(zip(('0', '30', '60'), hours))
+    alat = np.abs(np.asarray(lat2, float))
+    clear = np.interp(alat, [0.0, 30.0, 60.0], hours)
+    cloudy = np.full(alat.shape, np.nan)
+    study = json.loads((ROOT / POLAR_LIGHT).read_text())
+    table, limits = study['light']['tilt 1.613'], study['thresholds']['tilt 1.613']
+    for sign, hemi in ((1.0, 'north'), (-1.0, 'south')):
+        keys = sorted((k for k in table if float(k) * sign >= 60.0), key=lambda k: abs(float(k)))
+        at = np.array([abs(float(k)) for k in keys])
+        side = (np.sign(lat2) == sign) & (alat >= 60.0)
+        for out, field, limit in ((clear, 'dark_hours_clear', 'no_dark_hours_clear_from'),
+                                  (cloudy, 'dark_hours_cloud', 'no_dark_hours_cloud_from')):
+            edge = limits[hemi][limit]
+            below = at < edge
+            values = np.array([float(np.mean(table[k][field])) for k in keys])[below]
+            out[side] = np.interp(alat[side], np.append(at[below], edge), np.append(values, 0.0), right=0.0)
+    return clear, dict(zip(('0', '30', '60'), hours)), cloudy
 
 
 # ==== The settings ===================================================================================================
@@ -536,7 +556,14 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
     rob = robustness(c['ai'], ai_se, [s['ai'] for s in stores])
     lux, elev = night_light(lat2, lon2)
     regime = night_regime(lux, elev)
-    hours, hour_bands = dark_hours(lat2)
+    hours, hour_bands, hours_cloudy = dark_hours(lat2)
+    edge = json.loads((ROOT / POLAR_LIGHT).read_text())['thresholds']['tilt 1.613']
+    polar_dark = dict(source=POLAR_LIGHT, from_deg=60.0,
+                      none_clear_from_deg={h: edge[h]['no_dark_hours_clear_from'] for h in ('north', 'south')},
+                      none_cloud_from_deg={h: edge[h]['no_dark_hours_cloud_from'] for h in ('north', 'south')},
+                      note='poleward of 60 deg plant_dark_hours is the polar light study\'s clear-sky year mean at the '
+                           'design tilt and plant_dark_hours_cloudy its mean under the run\'s clouds; equatorward the '
+                           'plant model\'s clear-sky bands, and plant_dark_hours_cloudy is null')
     geo = settings(lat, lon, frame['rotation'] if frame else None, drainage)
     night_share = np.tensordot(NIGHT, c['tenth']['pr'], axes=(0, 0)) / np.maximum(c['tenth']['pr'].sum(axis=0), 1e-30)
     tas = c['mean']['tas'] - 273.15
@@ -693,12 +720,14 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
                  night_rain_flag=col(night_share >= NIGHT_FLAG), beside_sea=col(beside_sea), class_kept_in_resamples=col(keep_prob, 3), night_rh_lowest_level=col(c['night_rh'], 3),
                  soil_water_mm=col(c['mean']['mrso'] * 1e3, 4), darkest_lux=col(lux, 4), earth_elevation_deg=col(elev, 4),
                  night_regime=col(regime), plant_dark_hours=col(hours, 4),
+                 plant_dark_hours_cloudy=[None if not np.isfinite(x) else round(float(x), 4)
+                                          for x in np.asarray(hours_cloudy)[L]],
                  sea_fraction=col(geo['sea_fraction'], 3), sea_level_lake_fraction=col(geo['sea_level_lake_fraction'], 3),
                  rainfed_lake_fraction=col(geo['rainfed_lake_fraction'], 3),
                  closed_lake_fraction=col(geo['closed_lake_fraction'], 3), coast_km=col(geo['coast_km'], 4),
                  tide_m=col(geo['tide_m'], 3), tide_class=col(tclass))
     lakes = [f'{drainage}/results/drainage.json', f'{drainage}/products/drainage_28pct_16ppd.npz']
-    inputs = {path: sha(ROOT / path) for path in [*GEOGRAPHY.values(), *lakes, LIVING_LIGHT, PLANT, *([orientation] if frame else [])]}
+    inputs = {path: sha(ROOT / path) for path in [*GEOGRAPHY.values(), *lakes, LIVING_LIGHT, PLANT, POLAR_LIGHT, *([orientation] if frame else [])]}
     for s in (c, *stores):
         for name, ident in s['files'].items():
             inputs[f'climate/gcm/runs/{name}'] = ident
@@ -791,7 +820,7 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
                  class_and_night_pairs_over_1_percent=int(sum(v >= 0.01 for v in combo_shares)),
                  drylands_share=round(float(wl[dry].sum()), 4), earth_drylands=EARTH_DRYLANDS),
         warmth=frost,
-        light=dict(plant_dark_hours_by_band=hour_bands, source=LIVING_LIGHT),
+        light=dict(plant_dark_hours_by_band=hour_bands, source=LIVING_LIGHT, polar=polar_dark),
         settings=dict(shores=shore, soda_lakes=soda, soil_zones=SOIL_ZONES, storm_water_surfaces=STORM_WATER_SURFACES,
                       night_humidity=dict(lowest_level_night_rh_median_dry=round(float(np.median(c['night_rh'][dry])), 3),
                                           lowest_level_night_rh_median_humid=round(float(np.median(c['night_rh'][L & ~dry])), 3),

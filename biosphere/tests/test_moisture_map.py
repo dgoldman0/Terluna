@@ -160,3 +160,17 @@ def test_the_windows_agree_with_the_classes_they_store():
         assert digest(ROOT / path) == h, path
     assert len(wd['main_against_compare']['compare_inputs']) == 2
     assert PRODUCT['producer']['frame']['orientation'] == mm.ORIENTATION
+
+
+def test_plant_darkness_follows_the_polar_light_study():
+    lat, clear = CELLS['lat'], CELLS['plant_dark_hours']
+    cloudy = np.array([np.nan if v is None else v for v in PRODUCT['cells']['plant_dark_hours_cloudy']], float)
+    pole = np.abs(lat) >= 60.0
+    assert np.isnan(cloudy[~pole]).all() and np.isfinite(cloudy[pole]).all()
+    assert (cloudy[pole] >= clear[pole] - 1e-6).all()
+    edge = PRODUCT['light']['polar']['none_clear_from_deg']
+    assert (clear[lat >= edge['north']] == 0).all() and (clear[lat <= -edge['south']] == 0).all()
+    edge = PRODUCT['light']['polar']['none_cloud_from_deg']                # the study's limit, between its table rows
+    assert (cloudy[lat >= edge['north']] == 0).all() and (cloudy[lat <= -edge['south']] == 0).all()
+    hours, _, hours_cloudy = mm.dark_hours(lat)                       # the stored latitudes are rounded
+    assert np.allclose(hours, clear, atol=0.05) and np.allclose(hours_cloudy[pole], cloudy[pole], atol=0.05)

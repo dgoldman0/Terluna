@@ -408,8 +408,9 @@ def night_sheet(mp, lat_t, lon_t, inside, out):
              f"40% or more on {100 * w[rain >= .40].sum():.0f}%.",
              f"Drylands under long darkness (C, both): {100 * w[(ai < .65) & (dark > 220)].sum():.0f}% of the land.",
              '',
-             'The darkness is the moisture map\'s plant-dark hours, which depend on latitude alone: the plant model\'s',
-             'bands at 0°, 30° and 60°, interpolated, and none poleward of 65°.',
+             'The darkness is the moisture map\'s clear-sky plant-dark hours, which depend on latitude alone: the plant',
+             'model\'s bands at 0°, 30° and 60°, interpolated, and poleward of 60° the polar light study\'s hours,',
+             'which end at 66° N and 67° S.',
              'Night rain falls while plants cannot use it, so the share that falls at night is the',
              'lunar counterpart of a dry season. Both are descriptors; plant stress is not diagnosed.']
     fig.text(.53, .40, 'D. Shares of the land (the moisture map\'s land weights)', fontsize=9.6, color=INK)
