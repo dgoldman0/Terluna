@@ -1,0 +1,137 @@
+{
+ "schema": "terluna.research.seawater-lakes-sources/1",
+ "accessed": "2026-11-06",
+ "scope": "Values the screens and the README carry, each with how far it was read on 6 November 2026, in about seven minutes of searching within the brief's 20-minute bound. Search summaries are second-hand; recalled values were not re-read in this study and stay open until checked. The follow-up of the same day added the eel dossier on domain/food-systems (commit cb85374c, on the remote only), read with git show, and the values it cites second-hand.",
+ "sources": [
+  {
+   "citation": "FishBase species summary, Lates calcarifer (barramundi)",
+   "use": "Gonad maturation in estuarine waters at 28-36 per mille; spawning on coastal grounds in the late dry season",
+   "read": "Search-engine summary of the page; page not opened",
+   "url": "https://www.fishbase.se/Country/CountrySpeciesSummary.php?c_code=144&id=346"
+  },
+  {
+   "citation": "Barramundi hatchery and life-history summaries (OzFish habitat factsheet, Queensland; Fish the Top End; hatchery guides), with the ResearchGate abstract on temperature and embryonic development of the Australian strain",
+   "use": "Spawning around new and full moon on incoming tides; pelagic, buoyant eggs hatching in 12-15 h; incubation at 28-30 C and 28-32 ppt",
+   "read": "Search-engine summaries only; pages not opened. The larvae's move into brackish swamps is recalled (Moore 1982, Spawning and early life history of barramundi in Papua New Guinea), not re-read",
+   "url": "https://ozfish.org.au/wp-content/uploads/2020/05/Habitat-factsheet_Qld_Barramundi-FINAL.pdf"
+  },
+  {
+   "citation": "Harris, J. H. (1986). Reproduction of the Australian bass, Macquaria novemaculeata, in the Sydney Basin. Australian Journal of Marine and Freshwater Research 37, 209",
+   "use": "Spawning in the estuary at 8-14 g/kg; final ovarian maturation and the females' migration to the brackish spawning zone dependent on flooding",
+   "read": "Search-engine summary of the abstract; paper not opened",
+   "url": "https://www.publish.csiro.au/mf/MF9860209"
+  },
+  {
+   "citation": "van der Wal, E. J. (1985). Effects of temperature and salinity on the hatch rate and survival of Australian bass (Macquaria novemaculeata) eggs and yolk-sac larvae. Aquaculture",
+   "use": "Optimum temperature for survival 20 C; hatch rates 89-97% at 25, 30 and 35 per mille",
+   "read": "Search-engine summary of the abstract; paper not opened",
+   "url": "https://www.sciencedirect.com/science/article/abs/pii/0044848685900705"
+  },
+  {
+   "citation": "Australian bass species pages (Victorian Fisheries Authority; Wikipedia; EcoRisk Projector)",
+   "use": "Winter spawning, June-September, at 14-20 C; dependence on winter floods",
+   "read": "Search-engine summaries; pages not opened",
+   "url": "https://en.wikipedia.org/wiki/Australian_bass"
+  },
+  {
+   "citation": "Animal Diversity Web, Mugil cephalus",
+   "use": "Autumn-winter spawning far offshore in large aggregations; Gulf of Mexico spawning 65-80 km offshore over water deeper than 1,000 m",
+   "read": "Search-engine summary; page not opened",
+   "url": "https://animaldiversity.org/accounts/Mugil_cephalus/"
+  },
+  {
+   "citation": "Effects of salinity on egg development and hatching in grey mullet (Mugil cephalus), ResearchGate record; and the Mumbai-coast breeding-ground study (Environmental Monitoring and Assessment 2023)",
+   "use": "Eggs buoyant above 34 per mille; optimal 30-40 per mille, peak 35, at 22-25.5 C; one population spawning at 35 ppt and 33 C",
+   "read": "Search-engine summaries; papers not opened",
+   "url": "https://www.researchgate.net/publication/230244102_Effects_of_salinity_on_egg_development_and_hatching_in_grey_mullet_Mugil_Cephalus"
+  },
+  {
+   "citation": "Tsukamoto, K. et al. (2011). Oceanic spawning ecology of freshwater eels in the western North Pacific. Nature Communications 2, 179",
+   "use": "Japanese eel eggs collected; spawning in the nights 2-4 days before the new moon at 150-200 m along the West Mariana Ridge",
+   "read": "Search-engine summaries of the paper and the University of Tokyo's release; paper not opened",
+   "url": "https://www.nature.com/articles/ncomms1174"
+  },
+  {
+   "citation": "Fish Migration River Afsluitdijk, Layman's report (English), 1 May 2025",
+   "use": "Design requirements (no passage of salt water into the IJsselmeer; always open for fish except at extreme water levels or excessive salt, when valves close); a winding river several kilometres long following the Wadden Sea's tides; about EUR 80 million; around 250 million fish a year trying to migrate, 70% expected to pass",
+   "read": "Text extracted from the PDF; sections 2.1-2.3 and 10.2-10.4 read; no salt-leakage record found or read",
+   "url": "https://deafsluitdijk.nl/wp-content/uploads/2025/07/Laymans-report-English.pdf"
+  },
+  {
+   "citation": "Wageningen University & Research / Dutch delta fact sheet: Salt intrusion",
+   "use": "Measures at locks: air bubble screens (Terneuzen, Krammerjachten pilot), fresh-water flushing, the salt-fresh separation that pumps salt water from the chamber floor and fresh water in from the top",
+   "read": "Text extracted from the PDF and skimmed for the lock measures; no exchange rates or reduction percentages found in the passages read",
+   "url": "https://edepot.wur.nl/539348"
+  },
+  {
+   "citation": "Innovative Salt-Freshwater Separation System at the Krammer Locks, The Netherlands (Springer conference chapter, 2022)",
+   "use": "The boundary between salt and fresh water in the chamber lowered by withdrawing salt water through the floor while fresh water enters through the walls; bubble screens at both lockheads and a flushing discharge",
+   "read": "Search-engine summary; chapter not opened",
+   "url": "https://link.springer.com/chapter/10.1007/978-981-19-6138-0_42"
+  },
+  {
+   "citation": "Bubble-screen salt transmission studies (PIANC abstract on bubble-screen performance; Numerical study of bubble screens for mitigating salt intrusion in sea locks)",
+   "use": "The salt transmission factor as the measure of a screen's effect; an optimal air Froude number near 0.9-1.1",
+   "read": "Search-engine summaries; the PIANC abstract refused access (HTTP 403); no reduction figure obtained, so the study does not rely on bubble screens",
+   "url": "https://www.sciencedirect.com/science/article/pii/S0301932219309346"
+  },
+  {
+   "citation": "USACE ETL 1110-2-347, Densimetric Froude number; Farmer & Armi (1986), Maximal two-layer exchange over a sill and through the combination of a sill and contraction with barotropic flow, J. Fluid Mech. 164",
+   "use": "No salt wedge forms where the fresh flow's densimetric Froude number exceeds 1 (values of 0.6-0.7 already prevent one in practice); a fresh Froude number above 1 expels the wedge from the channel",
+   "read": "Search-engine summaries; Farmer and Armi recalled, not re-read",
+   "url": "https://usacetechnicalletters.tpub.com/ETL-1110-2-347/ETL-1110-2-3470004.htm"
+  },
+  {
+   "citation": "Benjamin (1968), Gravity currents and related phenomena, J. Fluid Mech. 31; Shin, Dalziel & Linden (2004), Gravity currents produced by lock exchange, J. Fluid Mech. 521, 1-34",
+   "use": "Full-depth lock-exchange front speed of half of sqrt(g'H)",
+   "read": "Recalled; the 2004 paper's PDF failed on a certificate error, and a search summary gave a different form, so the value stays open until checked",
+   "url": "https://www.researchgate.net/publication/232004765_Gravity_Currents_Produced_by_Lock_Exchange"
+  },
+  {
+   "citation": "Salton Sea status reports (California Legislative Analyst's Office, The Salton Sea: A Status Update; saltonsea.com history)",
+   "use": "About 3,500 ppm in 1907; above 40 ppt by 1985, near 45 by 1995 and about 57 ppt in 2015, as a terminal lake gathers its inflow's salts",
+   "read": "Search-engine summaries; pages not opened",
+   "url": "https://lao.ca.gov/Publications/Report/3879"
+  },
+  {
+   "citation": "UNESCO (1981) one-atmosphere equation of state of seawater, EOS-80 (Millero & Poisson 1981; Bigg 1967 for pure water); check values in Fofonoff & Millard (1983), UNESCO Technical Papers in Marine Science 44",
+   "use": "Seawater and fresh-water densities",
+   "read": "Recalled coefficients and check values; the three check values agree with the implementation to 1e-4 kg/m3 in the tests, which supports both"
+  },
+  {
+   "citation": "Millero, Feistel, Wright & McDougall (2008), The composition of Standard Seawater and the definition of the Reference-Composition Salinity Scale, Deep-Sea Research I 55",
+   "use": "Seawater's composition at 35.165 g/kg and the factor 35.16504/35 between reference and practical salinity",
+   "read": "Composition taken from the sea chemistry study's constants (its own sources.json); the conversion factor recalled"
+  },
+  {
+   "citation": "Recalled values not sourced in this study",
+   "use": "Seawater reverse osmosis at 3-4 kWh/m3; a compacted-clay landfill liner standard of 1e-9 m/s on Earth; the porous Rayleigh onset at 4 pi^2 (Horton & Rogers 1945; Lapwood 1948); NaCl's diffusivity near 1.5e-9 m2/s; water's viscosity near 0.80 mPa s at 29.5 C; air's near 1.85e-5 Pa s; a 10 m drag coefficient of 1.3e-3; hatcheries' hormone-induced spawning of barramundi and mullet; captive eel maturation needing hormones and research-scale glass-eel production in Japan; permeability ranges of clays, silts and sands",
+   "read": "Recalled; not re-read"
+  },
+  {
+   "citation": "Eel dossier: research/studies/food_systems/eel_habitat_hatchery.md, domain/food-systems cb85374c (remote), 5 November 2026",
+   "use": "The preferred endpoint (route R3, a complete freshwater life cycle recruiting on its own), route R1 (selection for a local spawning site, potentially in an artificial saline lake) and the fallback (an autonomously recruiting local saline population); habitats; stage-by-stage gates; the salt accounts of section 6; recruitment measures of section 7",
+   "read": "Opening, scope, sections 1, 2 (with its Earth-evidence list and stage gates), 6 and 7 read in full; sections 3-5 and 8-9 not read"
+  },
+  {
+   "citation": "Eel dossier's parameters and accounts: eel_parameters.json and results/eel_budget.json, domain/food-systems cb85374c (remote)",
+   "use": "Glass eel of 0.2 g; a 270-day larval cycle and 1% larva-to-glass-eel survival as scenario assumptions",
+   "read": "eel_parameters.json read in full; eel_budget.json's top-level keys listed only"
+  },
+  {
+   "citation": "The dossier's cited studies E04-E08 (Nomura et al. on the captive life cycle and metamorphic traits; a 2009 larval salinity study; a 24-42 psu egg and embryo exposure study; a 2026 unfed-larva ion study; a 2026 three-facility juvenile production study)",
+   "use": "Eggs and early embryos best near 34-35 psu; larval survival over two months 18.2% at half-strength seawater against 8.2% at full strength; unfed larvae best near 13-16 psu; larvae dead within six days in fresh water and 10% seawater; captive life cycle closed in seawater; 560, 2,269 and 1,347 juveniles at three facilities",
+   "read": "Second-hand, as the dossier reports them; the studies themselves not opened"
+  },
+  {
+   "citation": "lunar_cycle_fisheries.md, aquatic_biomes.md, aquatic_decisions.md and sturgeon_habitat_foods.md, domain/food-systems cb85374c (remote)",
+   "use": "The eel's place among the aquatic habitats, the unresolved magnesium floor, the decisions behind the dossier's endpoint, and the anadromous sturgeon case (beluga spawning in rivers) for the channel's reverse use",
+   "read": "Searched for eel, salt, spawning, migration and passage; matching lines read only"
+  },
+  {
+   "citation": "Horizontal eddy diffusivity in lakes at kilometre scales, 1-10 m2/s",
+   "use": "A larval cohort's spread over 120-270 days, the basis of the nursery's size",
+   "read": "Recalled; not re-read"
+  }
+ ]
+}

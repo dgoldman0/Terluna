@@ -201,6 +201,10 @@ spectra. [SWASH shore profiles](waves/runup.md) add individual-wave breaking
 and run-up, with explicit beach geometries, lunar gravity controls and
 separate numerical and physical limits.
 
+## The seas' tides and circulation
+
+[ocean/](ocean/) sets up two ocean models for the Moon's seas from pinned sources: MITgcm, whose lunar gravity, radius, rotation and tidal geopotential are run-time settings, and SCHISM, through a patch for the Moon's gravity and rotation and the Moon's tide. Its first study runs Mare Fecunditatis's monthly tide through its straits at 16 pixels per degree with quadratic bed friction. The seas' circulation under the GCM's weather waits on the base climate.
+
 ## Next step
 
 The atmosphere domain's [radiative–convective column](../atmosphere/radiative_convective/)

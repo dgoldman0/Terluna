@@ -4,19 +4,19 @@
   "products": {
     "research/studies/world_economy/results/comparison.json": {
       "schema": "terluna.research.world-economy-comparison/1",
-      "sha256": "2ab8aa90f964e895fdb6ef1bbdcec8548b634842990c4ef4e069bed218cfea05"
+      "sha256": "5df21400ee013617904c9160c2ff7253e96c20382ede04a492c92416b143e0cb"
     },
     "research/studies/world_economy/results/construction.json": {
       "schema": "terluna.research.world-economy-construction/1",
-      "sha256": "52ba25819701028421971d45d914821dfeaf2b4fb3ed1bc6f0f3e0211e01a06e"
+      "sha256": "e5c957d42181067fb0a4e7e5e4c80b058f1587ec374c43bf8e2e65f97580fdb8"
     },
     "research/studies/distributions/results/distributions.json": {
       "schema": "terluna.research.distributions/1",
-      "sha256": "969bf2093309d09f9980da7cb6a7762b1cd109e8e326f61022b9dcc749e9ebd8"
+      "sha256": "7a540b0fc2aefccfa2e3d7bddfb23a3a33899147cb793934b9e7cba13342b36b"
     },
     "resources/results/sea_phosphorus.json": {
       "schema": "terluna.resources.sea-phosphorus/1",
-      "sha256": "ffedda6b8737f53ec66cbcff4e7a88d2731d4cfee1453c97c1d7db645f1b743a"
+      "sha256": "cc6dffd09a6a9d7eba9c9a1ad0c7886f424fabbefc1e8bf745d84f71c70cf2f1"
     }
   },
   "evidence": "Scenario assumptions on accepted hybrid land and the committed economic reference. No observed future demand, engineered transport capacity, commissioned industrial timetable or fiscal institution.",

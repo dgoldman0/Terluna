@@ -1,0 +1,89 @@
+{
+ "source_admission": "Published values the study uses, with how far each was read on 4 November 2026. No outside dataset or full paper is committed; the study's other inputs are the project's committed products and run archives, listed with their sha256 in results/underwater_light.json. 'read' means the pages or rows holding the values were read in full text; 'abstract' means the abstract; 'summary' means a search engine's summary of the abstract or record, not checked against it; 'known' means a standard value used without re-reading. The search was held to the values the study's brief names, about thirty minutes in all; what it did not find is marked open.",
+ "sources": [
+  {
+   "key": "ioccg2018",
+   "citation": "IOCCG Protocol Series (2018). Inherent Optical Property Measurements and Protocols: Absorption Coefficient, Neeley AR and Mannino A (eds.), IOCCG Ocean Optics and Biogeochemistry Protocols for Satellite Ocean Colour Sensor Validation, Volume 1.0, IOCCG, Dartmouth, NS, Canada",
+   "doi_or_url": "https://ioccg.org/wp-content/uploads/2020/09/absorption_protocol_final-incl-cover_rev.pdf",
+   "use": "Pure water's absorption from 250 to 415 nm (Table 1.1): Jonasz and Fournier's (2007) model from 180 to 340 nm and Morel et al.'s (2007) values from 340 to 415 nm, joining Pope and Fry (1997) at 420 nm; 0.0147 per metre at 300 nm, 0.0071 at 350, 0.0052 at 380, 0.0046 at 400. The protocol notes that it has not taken up Mason et al. (2016).",
+   "access": "read: section 1's account of pure-water absorption in the ultraviolet and Table 1.1's rows from 180 to 445 nm"
+  },
+  {
+   "key": "mason2016",
+   "citation": "Mason JD, Cone MT, Fry ES 2016, Ultraviolet (250-550 nm) absorption spectrum of pure water, Applied Optics 55, 7163-7172",
+   "doi_or_url": "https://opg.optica.org/ao/abstract.cfm?uri=ao-55-25-7163",
+   "use": "Integrating-cavity measurements below the IOCCG composite: a minimum of 0.000811 +- 0.000227 per metre at 344 nm. Its table was not reached; the study bounds it by setting pure water's absorption below 420 nm to zero as a sensitivity.",
+   "access": "summary"
+  },
+  {
+   "key": "smith1981",
+   "citation": "Smith RC, Baker KS 1981, Optical properties of the clearest natural waters (200-800 nm), Applied Optics 20, 177-184",
+   "doi_or_url": "https://omlc.org/spectra/water/data/smith81.txt",
+   "use": "Identifies the illumination domain's absorption below 380 nm: the table's 0.141, 0.105, 0.0844, 0.0463 and 0.0300 per metre at 300, 310, 320, 350 and 370 nm are Smith and Baker's values for the clearest natural waters, upper bounds for pure water.",
+   "access": "read: the Oregon Medical Laser Center's transcription of the table at those wavelengths"
+  },
+  {
+   "key": "zhang2009",
+   "citation": "Zhang X, Hu L, He M-X 2009, Scattering by pure seawater: effect of salinity, Optics Express 17, 5698-5710",
+   "doi_or_url": "https://misclab.umeoce.maine.edu/ftp/classes/OO2011/incoming/zhang_et_al_2009_oe.pdf",
+   "use": "Seawater at 38.4 g/kg scatters 30% more than pure water (Morel's measurements at 366-578 nm, which the fluctuation model reproduces within 1%); the increase is close to linear in salinity (a linear adjustment errs by 2% on average); the spectral slope runs from -4.286 at 0 to -4.306 at 40 g/kg.",
+   "access": "read: abstract, introduction, section 3's discussion of the salinity dependence and the conclusions"
+  },
+  {
+   "key": "gattuso2006",
+   "citation": "Gattuso J-P, Gentili B, Duarte CM, Kleypas JA, Middelburg JJ, Antoine D 2006, Light availability in the coastal ocean: impact on the distribution of benthic photosynthetic organisms and their contribution to primary production, Biogeosciences 3, 489-513",
+   "doi_or_url": "https://bg.copernicus.org/articles/3/489/2006/",
+   "use": "Minimum light requirements as daily benthic irradiance: seagrasses' median 5.1 mol photons m-2 d-1 (88 records, species medians 0.06-14.1; Table 4); macroalgae's grand median 0.31 (crustose 0.02); microphytobenthos 0.4, the lowest benthic irradiance at which community metabolism has been reported, used as a very conservative minimum; corals' median at their maximum depth 0.35 (mean 1.2) and coral reefs 1.41 (Table 7); instantaneous community compensation 28.1 (seagrass beds) and 2.8 (microphytobenthos) umol m-2 s-1 (Table 7). The paper maps the same quantity over Earth's coastal ocean.",
+   "access": "read: abstract, section 2.6, Tables 3, 4, 5 and 7, and the sections on seagrasses, microphytobenthos and corals"
+  },
+  {
+   "key": "schwarz2002",
+   "citation": "Species-specific depth zonation in New Zealand charophytes as a function of light availability, Aquatic Botany (2002); authors and pages not checked",
+   "doi_or_url": "https://www.sciencedirect.com/science/article/abs/pii/S0304377001002017",
+   "use": "Charophyte species in New Zealand lakes reach 9-12 m, where 3-9% of the sub-surface light remains. The study converts the percentages to doses with the Earth control's clear-sky equinoctial day-mean surface light at 40 degrees, 509.5 umol m-2 s-1, which gives 1.32-3.96 mol m-2 d-1; clouds would lower Earth's real surface light and the doses with it. Open: the abstract was not reached.",
+   "access": "summary"
+  },
+  {
+   "key": "ono2010",
+   "citation": "Ono K, Simenstad CA, Toft JD, Southard SL, Sobocinski KL, Borde A 2010, Assessing and mitigating dock shading impacts on the behavior of juvenile Pacific salmon (Oncorhynchus spp.): can artificial light mitigate the effects?, Washington State Department of Transportation report WA-RD 755.1",
+   "doi_or_url": "https://rosap.ntl.bts.gov/view/dot/18232/dot_18232_DS1.pdf",
+   "use": "Its review of visual feeding thresholds: juvenile salmon generally stop feeding at 0.1 lux (Ali and Hoar 1959), plaice at 1 lux (Blaxter 1968a), juvenile turbot at 100 lux, and herring larvae at about 0.1 lux falling to 0.01 lux with age (Blaxter 1966). The study takes 0.01, 0.1 and 1 lux.",
+   "access": "read: the review passage on feeding light thresholds (pages 10-11); the primary papers were not read"
+  },
+  {
+   "key": "warrant2004",
+   "citation": "Warrant EJ, Locket NA 2004, Vision in the deep sea, Biological Reviews 79, 671-712",
+   "doi_or_url": "https://doi.org/10.1017/S1464793103006420",
+   "use": "Downwelling daylight dims and narrows to blue through the mesopelagic zone, 150-1000 m, and below 1000 m no daylight remains for vision. The study defines the deep-sea fishes' limit as the rod catch this study's optics give at 1000 m in Earth's clearest open ocean under an overhead Sun.",
+   "access": "summary"
+  },
+  {
+   "key": "temis_dna",
+   "citation": "TEMIS UV v2.0 action spectra (action_v20.dat, KNMI implementation, April 2017): DNA damage after Setlow RB 1974, The wavelengths in sunlight effective in producing skin cancer, PNAS 71, 3363-3366, normalised at 300 nm after Bernhard G and Seckmeyer G 1997",
+   "doi_or_url": "https://www.temis.nl/uvradiation/product/figs/action_v20.dat",
+   "use": "The DNA-damage action spectrum. The analytic form exp(13.82 (1/(1 + exp((lambda - 310)/9)) - 1)), normalised at 300 nm, reproduces the file's values to six figures from 250 to 400 nm, including its level tail of 3.05e-5 above about 360 nm. File sha256 ebbb891363176adc9ba7a4554ba08d3ab1e1b3fd38d37f9924e087482cfaa7ce.",
+   "access": "read: the file's header and its values at 10 nm steps from 280 to 400 nm; Setlow's paper was not re-read"
+  },
+  {
+   "key": "helms2008",
+   "citation": "Helms JR, Stubbins A, Ritchie JD, Minor EC, Kieber DJ, Mopper K 2008, Absorption spectral slopes and slope ratios as indicators of molecular weight, source, and photobleaching of chromophoric dissolved organic matter, Limnology and Oceanography 53, 955-969",
+   "doi_or_url": "https://doi.org/10.4319/lo.2008.53.3.0955",
+   "use": "Marine dissolved organic matter has a steeper spectral slope at 275-295 nm than at 350-400 nm. No value was taken: the steeper ultraviolet slope of 0.025 per nm below 350 nm is a sensitivity bracket, open.",
+   "access": "summary"
+  },
+  {
+   "key": "water_index",
+   "citation": "Pure water's refractive index near 20-30 C at visible wavelengths, 1.333",
+   "doi_or_url": "",
+   "use": "Fresnel transmission and refraction at the surface; the domain's 1.34 for seawater moves the transmission by under 0.1%.",
+   "access": "known"
+  },
+  {
+   "key": "rod_peak",
+   "citation": "A mesopelagic fish's rod pigment peaking at 480 nm (assumption; deep-sea fishes' rods commonly peak at 470-500 nm)",
+   "doi_or_url": "",
+   "use": "Weights the photon catch for the deep-sea limit with the repository's A1 template (Govardovskii et al. 2000, biosphere/ecology/screen.py). The limit is defined and read with the same weighting, so the peak's choice moves its depths little.",
+   "access": "known; open"
+  }
+ ]
+}

@@ -1,0 +1,2500 @@
+{
+ "schema": "terluna.geography.crustal-loading/1",
+ "producer": {
+  "domain": "geography",
+  "files": {
+   "geography/love_numbers.py": "1262c86a7106cecc9e3ff304562b55189828a4ad70c681a45295282f699d8b84",
+   "geography/crustal_loading.py": "b57a36e705b8b4e4294a7549ab1ccccd2086f83e9008230464adb1723491f954",
+   "geography/topography.py": "228e08f79efca868b49bcae0687c7f80a239b18234629c4390c147075b3f5c29",
+   "geography/basins.py": "038c3675d532fde0a07b106d679726cf7f384f703a119bb75bf9a57ce5af0cb4"
+  },
+  "inputs": {
+   "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+   "geography/results/drainage.json": "18494e3d3656ead71536512816095ba6006cc63bbade984314bcaaaa77df7c2d",
+   "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
+   "geography/crustal_loading_sources.json": "674db27ab627cf6114662fb51b1b46d8017e1eec2e02a5cabc3580cedc2bfd6d",
+   "shared/constants.json": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72"
+  },
+  "ignored_inputs": {
+   "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f8899bd4f5d712445f78c8882c85a1bc30bf631ac9dd14ab1c03",
+   "geography/inputs/ldem_16.img": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+   "geography/inputs/ldem_4.img": "c04632eba6449af49e3108ed7c25b3b1c450600abd3690df4fc815853a1af476",
+   "geography/inputs/jggrx_0420a_sha.tab": "962355f81ae40dab0ec39753e3820d731d4505633a262fc543afd6f6c7c0e50d"
+  }
+ },
+ "evidence": "A calculation on committed products and published values: load Love numbers of a published lunar interior (Briaud et al. 2023's tidal fit: density and rigidity by layer, fluid core), elastic by integration of the static self-gravitating equations, relaxed as a thin elastic shell over an interior in hydrostatic equilibrium with the published effective elastic thicknesses of the mare basins; the sea-level equation with migrating shorelines solved on LOLA at 16 px/deg with spherical harmonics to degree 359. Checked against closed forms (homogeneous sphere, Boussinesq limit, fluid limit) and against the Moon's measured k2 and h2. Not validated against any observed loading on the Moon, which has none of this size.",
+ "reading_rule": "Read 'elastic' as the response within years of the water's arrival and 'relaxed, Te' as the state the mantle's flow approaches over the relaxation times given (thousands to hundreds of thousands of years). 'volume' holds today's water (the atlas's 28% inventory) and lets the shore move; 'share' holds 28% cover and gives the water that takes. Sill depths are below the sea surface, four-connected cells at 16 px/deg. Sag is the ground's radial fall (degrees 2 and up, and degree 1 in the solid Moon's frame); 'relative' is the fall below the sea's equipotential. The products of geography are not regenerated: whether to move the shorelines is a decision this informs.",
+ "settings": {
+  "nmax": 359,
+  "transform_ppd": 4,
+  "fine_ppd": 16,
+  "water_density_kg_m3": 1000.0,
+  "te_cases_km": [
+   20.0,
+   40.0,
+   75.0
+  ],
+  "thick_te_sensitivity_km": 150.0,
+  "young_pa": 100000000000.0,
+  "poisson": 0.25,
+  "mean_density_kg_m3": 3343.88,
+  "tolerance_m": 0.01,
+  "air": {
+   "pressure_atm": 1.2,
+   "temperature_k": 290.0,
+   "molar_mass_kg_mol": 0.02896
+  }
+ },
+ "relaxation_times": [
+  {
+   "te_km": 20.0,
+   "viscosity_pa_s": 1e+20,
+   "years": {
+    "3": 2330.0,
+    "5": 3650.0,
+    "10": 6860.0,
+    "20": 10890.0,
+    "50": 3280.0
+   }
+  },
+  {
+   "te_km": 20.0,
+   "viscosity_pa_s": 1e+21,
+   "years": {
+    "3": 23250.0,
+    "5": 36500.0,
+    "10": 68580.0,
+    "20": 108880.0,
+    "50": 32750.0
+   }
+  },
+  {
+   "te_km": 20.0,
+   "viscosity_pa_s": 1e+22,
+   "years": {
+    "3": 232510.0,
+    "5": 364970.0,
+    "10": 685830.0,
+    "20": 1088770.0,
+    "50": 327500.0
+   }
+  },
+  {
+   "te_km": 40.0,
+   "viscosity_pa_s": 1e+20,
+   "years": {
+    "3": 2320.0,
+    "5": 3620.0,
+    "10": 6130.0,
+    "20": 4530.0,
+    "50": 450.0
+   }
+  },
+  {
+   "te_km": 40.0,
+   "viscosity_pa_s": 1e+21,
+   "years": {
+    "3": 23220.0,
+    "5": 36170.0,
+    "10": 61290.0,
+    "20": 45280.0,
+    "50": 4480.0
+   }
+  },
+  {
+   "te_km": 40.0,
+   "viscosity_pa_s": 1e+22,
+   "years": {
+    "3": 232160.0,
+    "5": 361690.0,
+    "10": 612950.0,
+    "20": 452750.0,
+    "50": 44760.0
+   }
+  },
+  {
+   "te_km": 75.0,
+   "viscosity_pa_s": 1e+20,
+   "years": {
+    "3": 2300.0,
+    "5": 3420.0,
+    "10": 3650.0,
+    "20": 960.0,
+    "50": 70.0
+   }
+  },
+  {
+   "te_km": 75.0,
+   "viscosity_pa_s": 1e+21,
+   "years": {
+    "3": 23000.0,
+    "5": 34200.0,
+    "10": 36500.0,
+    "20": 9570.0,
+    "50": 690.0
+   }
+  },
+  {
+   "te_km": 75.0,
+   "viscosity_pa_s": 1e+22,
+   "years": {
+    "3": 229970.0,
+    "5": 341990.0,
+    "10": 365040.0,
+    "20": 95660.0,
+    "50": 6870.0
+   }
+  }
+ ],
+ "convergence": {
+  "179": {
+   "elastic": {
+    "level_change_m": -50.73,
+    "sea_share": 0.26362,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": 22.2,
+     "Fecunditatis to Crisium (Crisium passage)": 111.36,
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": 225.48
+    },
+    "sag_max_m": 28.9
+   },
+   "relaxed, Te 20 km": {
+    "level_change_m": -162.13,
+    "sea_share": 0.23662,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": -148.81,
+     "Fecunditatis to Crisium (Crisium passage)": 41.08,
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": 118.73
+    },
+    "sag_max_m": 1044.2
+   }
+  },
+  "719": {
+   "elastic": {
+    "level_change_m": -50.8,
+    "sea_share": 0.26359,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": 22.08,
+     "Fecunditatis to Crisium (Crisium passage)": 111.54,
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": 226.08
+    },
+    "sag_max_m": 28.6
+   },
+   "relaxed, Te 20 km": {
+    "level_change_m": -162.19,
+    "sea_share": 0.2366,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": -148.87,
+     "Fecunditatis to Crisium (Crisium passage)": 40.92,
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": 119.35
+    },
+    "sag_max_m": 1044.2
+   }
+  },
+  "359": {
+   "elastic": {
+    "level_change_m": -50.79,
+    "sea_share": 0.2636,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": 22.13,
+     "Fecunditatis to Crisium (Crisium passage)": 111.63,
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": 226.02
+    },
+    "sag_max_m": 28.6
+   },
+   "relaxed, Te 20 km": {
+    "level_change_m": -162.18,
+    "sea_share": 0.2366,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": -148.84,
+     "Fecunditatis to Crisium (Crisium passage)": 40.86,
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": 119.3
+    },
+    "sag_max_m": 1044.2
+   }
+  }
+ },
+ "base": {
+  "sills": {
+   "Fecunditatis to the Near-side Sea (western channels)": {
+    "sill_level_m": -1762.84,
+    "sill_depth_m": 108.64
+   },
+   "Fecunditatis to Crisium (Crisium passage)": {
+    "sill_level_m": -1809.46,
+    "sill_depth_m": 155.26
+   },
+   "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+    "sill_level_m": -1729.24,
+    "sill_depth_m": 75.04
+   }
+  },
+  "nearside": {
+   "join_level_m": -1762.84,
+   "margin_m": 108.64,
+   "last_to_join": [
+    "Crisium",
+    "Fecunditatis"
+   ]
+  },
+  "shore": {
+   "sea_share": 0.27998,
+   "sea_share_change": 0.0,
+   "land_share": 0.72002,
+   "shore_rsl_change_m": {
+    "median": 0.0,
+    "p05": 0.0,
+    "p95": 0.0
+   },
+   "shoreline_mean_shift_km": 0.0,
+   "shoreline_length_km": 657897.0
+  },
+  "volume_km3": 10716218.0,
+  "global_layer_m": 282.51
+ },
+ "cases": {
+  "rigid": {
+   "volume": {
+    "level_m": -1701.64,
+    "level_change_m": -47.44,
+    "iterations": 7,
+    "seconds": 21.1,
+    "volume_km3": 10716218.0,
+    "extra_volume_km3": -0.0,
+    "extra_global_layer_m": -0.0,
+    "extra_mass_kg": -444666266000.0,
+    "sea_share": 0.26449,
+    "sea_share_change": -0.01548,
+    "land_share": 0.73551,
+    "shore_rsl_change_m": {
+     "median": -76.66,
+     "p05": -116.04,
+     "p95": 130.14
+    },
+    "shoreline_mean_shift_km": -0.893,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": -0.0,
+     "depth_weighted_fraction": 0.0,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": -0.0,
+       "relative_m": -45.7
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": -0.0,
+       "relative_m": 431.2
+      }
+     }
+    },
+    "land_uplift_max_m": 0.0,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1728.47,
+      "sill_depth_m": 26.83
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1815.49,
+      "sill_depth_m": 113.85
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -1924.46,
+      "sill_depth_m": 222.82
+     }
+    },
+    "nearside": {
+     "join_level_m": -1708.3,
+     "margin_m": 6.67,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    }
+   },
+   "share": {
+    "level_m": -1625.29,
+    "level_change_m": 28.91,
+    "iterations": 7,
+    "seconds": 25.0,
+    "volume_km3": 11550016.0,
+    "extra_volume_km3": 833797.0,
+    "extra_global_layer_m": 21.98,
+    "extra_mass_kg": 8.33797460544442e+17,
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": 0.8,
+     "p05": -41.6,
+     "p95": 210.44
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": -0.0,
+     "depth_weighted_fraction": 0.0,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": -0.0,
+       "relative_m": -42.3
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": -0.0,
+       "relative_m": 439.7
+      }
+     }
+    },
+    "land_uplift_max_m": 0.0,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1732.09,
+      "sill_depth_m": 106.8
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1819.5,
+      "sill_depth_m": 194.21
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -1930.3,
+      "sill_depth_m": 305.01
+     }
+    },
+    "nearside": {
+     "join_level_m": -1712.42,
+     "margin_m": 87.13,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    }
+   }
+  },
+  "elastic": {
+   "volume": {
+    "level_m": -1704.99,
+    "level_change_m": -50.79,
+    "iterations": 7,
+    "seconds": 22.6,
+    "volume_km3": 10716218.0,
+    "extra_volume_km3": -0.0,
+    "extra_global_layer_m": -0.0,
+    "extra_mass_kg": -439891360000.0,
+    "sea_share": 0.2636,
+    "sea_share_change": -0.01638,
+    "land_share": 0.7364,
+    "shore_rsl_change_m": {
+     "median": -81.2,
+     "p05": -121.52,
+     "p95": 132.7
+    },
+    "shoreline_mean_shift_km": -0.944,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 28.6,
+     "depth_weighted_fraction": 0.0048,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": -0.9,
+       "relative_m": -46.6
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 27.2,
+       "relative_m": 456.4
+      }
+     }
+    },
+    "land_uplift_max_m": 4.04,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1727.12,
+      "sill_depth_m": 22.13
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1816.62,
+      "sill_depth_m": 111.63
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -1931.01,
+      "sill_depth_m": 226.02
+     }
+    },
+    "nearside": {
+     "join_level_m": -1705.59,
+     "margin_m": 0.6,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    },
+    "lakes": [
+     {
+      "centre": [
+       7.22,
+       -122.03
+      ],
+      "area_km2": 200051.0,
+      "max_depth_m": 4723.0,
+      "spills": true,
+      "floor_fall_m": 3.8,
+      "floor_fall_below_equipotential_m": 47.4,
+      "outlet_fall_below_equipotential_m": 28.9,
+      "spill_level_rise_over_floor_m": 18.5,
+      "volume_gain_km3": 7859.0
+     },
+     {
+      "centre": [
+       0.53,
+       -156.41
+      ],
+      "area_km2": 140652.0,
+      "max_depth_m": 6670.0,
+      "spills": true,
+      "floor_fall_m": 12.1,
+      "floor_fall_below_equipotential_m": 173.1,
+      "outlet_fall_below_equipotential_m": 143.1,
+      "spill_level_rise_over_floor_m": 30.0,
+      "volume_gain_km3": 4599.0
+     },
+     {
+      "centre": [
+       26.53,
+       -171.09
+      ],
+      "area_km2": 46438.0,
+      "max_depth_m": 4615.0,
+      "spills": true,
+      "floor_fall_m": 1.8,
+      "floor_fall_below_equipotential_m": 18.1,
+      "outlet_fall_below_equipotential_m": 16.7,
+      "spill_level_rise_over_floor_m": 1.4,
+      "volume_gain_km3": 169.0
+     },
+     {
+      "centre": [
+       -19.09,
+       -79.97
+      ],
+      "area_km2": 39219.0,
+      "max_depth_m": 1925.0,
+      "spills": true,
+      "floor_fall_m": -2.3,
+      "floor_fall_below_equipotential_m": -36.9,
+      "outlet_fall_below_equipotential_m": -37.8,
+      "spill_level_rise_over_floor_m": 0.9,
+      "volume_gain_km3": 77.0
+     },
+     {
+      "centre": [
+       15.09,
+       -159.84
+      ],
+      "area_km2": 32179.0,
+      "max_depth_m": 4400.0,
+      "spills": true,
+      "floor_fall_m": 4.4,
+      "floor_fall_below_equipotential_m": 63.3,
+      "outlet_fall_below_equipotential_m": 28.9,
+      "spill_level_rise_over_floor_m": 34.5,
+      "volume_gain_km3": 607.0
+     },
+     {
+      "centre": [
+       -32.34,
+       -71.47
+      ],
+      "area_km2": 32062.0,
+      "max_depth_m": 1764.0,
+      "spills": true,
+      "floor_fall_m": -1.2,
+      "floor_fall_below_equipotential_m": -29.8,
+      "outlet_fall_below_equipotential_m": -36.8,
+      "spill_level_rise_over_floor_m": 7.0,
+      "volume_gain_km3": -131.0
+     },
+     {
+      "centre": [
+       19.47,
+       -147.16
+      ],
+      "area_km2": 29584.0,
+      "max_depth_m": 4969.0,
+      "spills": true,
+      "floor_fall_m": 7.3,
+      "floor_fall_below_equipotential_m": 84.0,
+      "outlet_fall_below_equipotential_m": 39.2,
+      "spill_level_rise_over_floor_m": 44.8,
+      "volume_gain_km3": 1167.0
+     },
+     {
+      "centre": [
+       -15.22,
+       -153.47
+      ],
+      "area_km2": 29155.0,
+      "max_depth_m": 5348.0,
+      "spills": true,
+      "floor_fall_m": 9.4,
+      "floor_fall_below_equipotential_m": 163.9,
+      "outlet_fall_below_equipotential_m": 151.4,
+      "spill_level_rise_over_floor_m": 12.6,
+      "volume_gain_km3": -126.0
+     },
+     {
+      "centre": [
+       18.34,
+       -141.41
+      ],
+      "area_km2": 26504.0,
+      "max_depth_m": 5307.0,
+      "spills": true,
+      "floor_fall_m": 3.9,
+      "floor_fall_below_equipotential_m": 51.8,
+      "outlet_fall_below_equipotential_m": 39.8,
+      "spill_level_rise_over_floor_m": 12.0,
+      "volume_gain_km3": 177.0
+     },
+     {
+      "centre": [
+       13.22,
+       -168.91
+      ],
+      "area_km2": 22554.0,
+      "max_depth_m": 4661.0,
+      "spills": true,
+      "floor_fall_m": 4.2,
+      "floor_fall_below_equipotential_m": 60.0,
+      "outlet_fall_below_equipotential_m": 12.7,
+      "spill_level_rise_over_floor_m": 47.3,
+      "volume_gain_km3": 727.0
+     },
+     {
+      "centre": [
+       -7.16,
+       -142.59
+      ],
+      "area_km2": 21172.0,
+      "max_depth_m": 3215.0,
+      "spills": true,
+      "floor_fall_m": 3.2,
+      "floor_fall_below_equipotential_m": 85.8,
+      "outlet_fall_below_equipotential_m": 88.0,
+      "spill_level_rise_over_floor_m": -2.2,
+      "volume_gain_km3": -157.0
+     },
+     {
+      "centre": [
+       2.78,
+       -177.47
+      ],
+      "area_km2": 20870.0,
+      "max_depth_m": 3926.0,
+      "spills": true,
+      "floor_fall_m": 3.1,
+      "floor_fall_below_equipotential_m": 60.5,
+      "outlet_fall_below_equipotential_m": 50.9,
+      "spill_level_rise_over_floor_m": 9.6,
+      "volume_gain_km3": -96.0
+     }
+    ],
+    "lakes_volume_gain_km3": 14872.0
+   },
+   "share": {
+    "level_m": -1624.04,
+    "level_change_m": 30.16,
+    "iterations": 7,
+    "seconds": 28.4,
+    "volume_km3": 11601569.0,
+    "extra_volume_km3": 885351.0,
+    "extra_global_layer_m": 23.34,
+    "extra_mass_kg": 8.8535090495167e+17,
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": 0.88,
+     "p05": -42.53,
+     "p95": 218.2
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 29.3,
+     "depth_weighted_fraction": 0.005,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": -0.8,
+       "relative_m": -42.9
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 27.8,
+       "relative_m": 465.9
+      }
+     }
+    },
+    "land_uplift_max_m": 4.26,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1731.1,
+      "sill_depth_m": 107.06
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1821.03,
+      "sill_depth_m": 196.98
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -1937.58,
+      "sill_depth_m": 313.54
+     }
+    },
+    "nearside": {
+     "join_level_m": -1710.11,
+     "margin_m": 86.07,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    }
+   }
+  },
+  "elastic, low-viscosity zone relaxed": {
+   "volume": {
+    "level_m": -1704.97,
+    "level_change_m": -50.77,
+    "iterations": 7,
+    "seconds": 16.0,
+    "volume_km3": 10716218.0,
+    "extra_volume_km3": -0.0,
+    "extra_global_layer_m": -0.0,
+    "extra_mass_kg": -463109202000.0,
+    "sea_share": 0.26358,
+    "sea_share_change": -0.0164,
+    "land_share": 0.73642,
+    "shore_rsl_change_m": {
+     "median": -81.25,
+     "p05": -121.78,
+     "p95": 133.3
+    },
+    "shoreline_mean_shift_km": -0.945,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 29.3,
+     "depth_weighted_fraction": 0.0049,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": -1.2,
+       "relative_m": -46.8
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 27.8,
+       "relative_m": 457.1
+      }
+     }
+    },
+    "land_uplift_max_m": 4.03,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1726.89,
+      "sill_depth_m": 21.93
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1816.36,
+      "sill_depth_m": 111.39
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -1931.56,
+      "sill_depth_m": 226.59
+     }
+    },
+    "nearside": {
+     "join_level_m": -1705.35,
+     "margin_m": 0.38,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    },
+    "lakes": [
+     {
+      "centre": [
+       7.22,
+       -122.03
+      ],
+      "area_km2": 200051.0,
+      "max_depth_m": 4723.0,
+      "spills": true,
+      "floor_fall_m": 3.9,
+      "floor_fall_below_equipotential_m": 47.6,
+      "outlet_fall_below_equipotential_m": 29.1,
+      "spill_level_rise_over_floor_m": 18.4,
+      "volume_gain_km3": 7858.0
+     },
+     {
+      "centre": [
+       0.53,
+       -156.41
+      ],
+      "area_km2": 140652.0,
+      "max_depth_m": 6670.0,
+      "spills": true,
+      "floor_fall_m": 12.4,
+      "floor_fall_below_equipotential_m": 173.5,
+      "outlet_fall_below_equipotential_m": 143.5,
+      "spill_level_rise_over_floor_m": 29.9,
+      "volume_gain_km3": 4591.0
+     },
+     {
+      "centre": [
+       26.53,
+       -171.09
+      ],
+      "area_km2": 46438.0,
+      "max_depth_m": 4615.0,
+      "spills": true,
+      "floor_fall_m": 1.9,
+      "floor_fall_below_equipotential_m": 18.2,
+      "outlet_fall_below_equipotential_m": 16.8,
+      "spill_level_rise_over_floor_m": 1.4,
+      "volume_gain_km3": 170.0
+     },
+     {
+      "centre": [
+       -19.09,
+       -79.97
+      ],
+      "area_km2": 39219.0,
+      "max_depth_m": 1925.0,
+      "spills": true,
+      "floor_fall_m": -2.4,
+      "floor_fall_below_equipotential_m": -36.9,
+      "outlet_fall_below_equipotential_m": -37.8,
+      "spill_level_rise_over_floor_m": 0.9,
+      "volume_gain_km3": 78.0
+     },
+     {
+      "centre": [
+       15.09,
+       -159.84
+      ],
+      "area_km2": 32179.0,
+      "max_depth_m": 4400.0,
+      "spills": true,
+      "floor_fall_m": 4.6,
+      "floor_fall_below_equipotential_m": 63.5,
+      "outlet_fall_below_equipotential_m": 29.0,
+      "spill_level_rise_over_floor_m": 34.5,
+      "volume_gain_km3": 608.0
+     },
+     {
+      "centre": [
+       -32.34,
+       -71.47
+      ],
+      "area_km2": 32062.0,
+      "max_depth_m": 1764.0,
+      "spills": true,
+      "floor_fall_m": -1.2,
+      "floor_fall_below_equipotential_m": -29.7,
+      "outlet_fall_below_equipotential_m": -36.7,
+      "spill_level_rise_over_floor_m": 7.0,
+      "volume_gain_km3": -133.0
+     },
+     {
+      "centre": [
+       19.47,
+       -147.16
+      ],
+      "area_km2": 29584.0,
+      "max_depth_m": 4969.0,
+      "spills": true,
+      "floor_fall_m": 7.4,
+      "floor_fall_below_equipotential_m": 84.2,
+      "outlet_fall_below_equipotential_m": 39.3,
+      "spill_level_rise_over_floor_m": 44.8,
+      "volume_gain_km3": 1169.0
+     },
+     {
+      "centre": [
+       -15.22,
+       -153.47
+      ],
+      "area_km2": 29155.0,
+      "max_depth_m": 5348.0,
+      "spills": true,
+      "floor_fall_m": 9.9,
+      "floor_fall_below_equipotential_m": 164.4,
+      "outlet_fall_below_equipotential_m": 151.8,
+      "spill_level_rise_over_floor_m": 12.6,
+      "volume_gain_km3": -126.0
+     },
+     {
+      "centre": [
+       18.34,
+       -141.41
+      ],
+      "area_km2": 26504.0,
+      "max_depth_m": 5307.0,
+      "spills": true,
+      "floor_fall_m": 4.0,
+      "floor_fall_below_equipotential_m": 51.9,
+      "outlet_fall_below_equipotential_m": 39.9,
+      "spill_level_rise_over_floor_m": 12.0,
+      "volume_gain_km3": 177.0
+     },
+     {
+      "centre": [
+       13.22,
+       -168.91
+      ],
+      "area_km2": 22554.0,
+      "max_depth_m": 4661.0,
+      "spills": true,
+      "floor_fall_m": 4.4,
+      "floor_fall_below_equipotential_m": 60.2,
+      "outlet_fall_below_equipotential_m": 12.9,
+      "spill_level_rise_over_floor_m": 47.3,
+      "volume_gain_km3": 728.0
+     },
+     {
+      "centre": [
+       -7.16,
+       -142.59
+      ],
+      "area_km2": 21172.0,
+      "max_depth_m": 3215.0,
+      "spills": true,
+      "floor_fall_m": 3.6,
+      "floor_fall_below_equipotential_m": 86.2,
+      "outlet_fall_below_equipotential_m": 88.4,
+      "spill_level_rise_over_floor_m": -2.3,
+      "volume_gain_km3": -158.0
+     },
+     {
+      "centre": [
+       2.78,
+       -177.47
+      ],
+      "area_km2": 20870.0,
+      "max_depth_m": 3926.0,
+      "spills": true,
+      "floor_fall_m": 3.4,
+      "floor_fall_below_equipotential_m": 60.8,
+      "outlet_fall_below_equipotential_m": 51.2,
+      "spill_level_rise_over_floor_m": 9.6,
+      "volume_gain_km3": -96.0
+     }
+    ],
+    "lakes_volume_gain_km3": 14865.0
+   },
+   "share": {
+    "level_m": -1623.91,
+    "level_change_m": 30.29,
+    "iterations": 7,
+    "seconds": 23.7,
+    "volume_km3": 11602811.0,
+    "extra_volume_km3": 886593.0,
+    "extra_global_layer_m": 23.37,
+    "extra_mass_kg": 8.8659253386848e+17,
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": 0.92,
+     "p05": -42.7,
+     "p95": 218.9
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 29.9,
+     "depth_weighted_fraction": 0.0051,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": -1.0,
+       "relative_m": -43.0
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 28.5,
+       "relative_m": 466.6
+      }
+     }
+    },
+    "land_uplift_max_m": 4.25,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1730.89,
+      "sill_depth_m": 106.98
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1820.78,
+      "sill_depth_m": 196.88
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -1938.14,
+      "sill_depth_m": 314.24
+     }
+    },
+    "nearside": {
+     "join_level_m": -1709.88,
+     "margin_m": 85.97,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    }
+   }
+  },
+  "relaxed, Te 20 km": {
+   "volume": {
+    "level_m": -1816.38,
+    "level_change_m": -162.18,
+    "iterations": 10,
+    "seconds": 21.2,
+    "volume_km3": 10716219.0,
+    "extra_volume_km3": 1.0,
+    "extra_global_layer_m": 0.0,
+    "extra_mass_kg": 586200998000.0,
+    "sea_share": 0.2366,
+    "sea_share_change": -0.04338,
+    "land_share": 0.7634,
+    "shore_rsl_change_m": {
+     "median": -228.1,
+     "p05": -267.07,
+     "p95": 56.64
+    },
+    "shoreline_mean_shift_km": -2.501,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 1044.2,
+     "depth_weighted_fraction": 0.1777,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": 26.2,
+       "relative_m": -11.5
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 1035.1,
+       "relative_m": 1197.5
+      }
+     }
+    },
+    "land_uplift_max_m": 206.31,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1667.54,
+      "sill_depth_m": -148.84
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1857.25,
+      "sill_depth_m": 40.86
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -1935.68,
+      "sill_depth_m": 119.3
+     }
+    },
+    "nearside": {
+     "join_level_m": -1667.54,
+     "margin_m": -148.84,
+     "last_to_join": [
+      "Crisium",
+      "Fecunditatis"
+     ]
+    },
+    "lakes": [
+     {
+      "centre": [
+       7.22,
+       -122.03
+      ],
+      "area_km2": 200051.0,
+      "max_depth_m": 4723.0,
+      "spills": true,
+      "floor_fall_m": 65.2,
+      "floor_fall_below_equipotential_m": 108.2,
+      "outlet_fall_below_equipotential_m": 6.8,
+      "spill_level_rise_over_floor_m": 101.3,
+      "volume_gain_km3": 39570.0
+     },
+     {
+      "centre": [
+       0.53,
+       -156.41
+      ],
+      "area_km2": 140652.0,
+      "max_depth_m": 6670.0,
+      "spills": true,
+      "floor_fall_m": 490.0,
+      "floor_fall_below_equipotential_m": 585.0,
+      "outlet_fall_below_equipotential_m": 295.2,
+      "spill_level_rise_over_floor_m": 289.9,
+      "volume_gain_km3": 42147.0
+     },
+     {
+      "centre": [
+       26.53,
+       -171.09
+      ],
+      "area_km2": 46438.0,
+      "max_depth_m": 4615.0,
+      "spills": true,
+      "floor_fall_m": 67.1,
+      "floor_fall_below_equipotential_m": 101.6,
+      "outlet_fall_below_equipotential_m": 98.7,
+      "spill_level_rise_over_floor_m": 2.8,
+      "volume_gain_km3": -916.0
+     },
+     {
+      "centre": [
+       -19.09,
+       -79.97
+      ],
+      "area_km2": 39219.0,
+      "max_depth_m": 1925.0,
+      "spills": true,
+      "floor_fall_m": -67.8,
+      "floor_fall_below_equipotential_m": -55.4,
+      "outlet_fall_below_equipotential_m": -24.0,
+      "spill_level_rise_over_floor_m": -31.4,
+      "volume_gain_km3": -453.0
+     },
+     {
+      "centre": [
+       15.09,
+       -159.84
+      ],
+      "area_km2": 32179.0,
+      "max_depth_m": 4400.0,
+      "spills": true,
+      "floor_fall_m": 6.5,
+      "floor_fall_below_equipotential_m": 65.5,
+      "outlet_fall_below_equipotential_m": 17.0,
+      "spill_level_rise_over_floor_m": 48.5,
+      "volume_gain_km3": 423.0
+     },
+     {
+      "centre": [
+       -32.34,
+       -71.47
+      ],
+      "area_km2": 32062.0,
+      "max_depth_m": 1764.0,
+      "spills": true,
+      "floor_fall_m": -39.2,
+      "floor_fall_below_equipotential_m": -14.7,
+      "outlet_fall_below_equipotential_m": -33.6,
+      "spill_level_rise_over_floor_m": 18.9,
+      "volume_gain_km3": -56.0
+     },
+     {
+      "centre": [
+       19.47,
+       -147.16
+      ],
+      "area_km2": 29584.0,
+      "max_depth_m": 4969.0,
+      "spills": true,
+      "floor_fall_m": 296.0,
+      "floor_fall_below_equipotential_m": 351.0,
+      "outlet_fall_below_equipotential_m": 141.2,
+      "spill_level_rise_over_floor_m": 209.8,
+      "volume_gain_km3": 5115.0
+     },
+     {
+      "centre": [
+       -15.22,
+       -153.47
+      ],
+      "area_km2": 29155.0,
+      "max_depth_m": 5348.0,
+      "spills": true,
+      "floor_fall_m": 187.7,
+      "floor_fall_below_equipotential_m": 301.6,
+      "outlet_fall_below_equipotential_m": 217.5,
+      "spill_level_rise_over_floor_m": 84.1,
+      "volume_gain_km3": 540.0
+     },
+     {
+      "centre": [
+       18.34,
+       -141.41
+      ],
+      "area_km2": 26504.0,
+      "max_depth_m": 5307.0,
+      "spills": true,
+      "floor_fall_m": 54.1,
+      "floor_fall_below_equipotential_m": 95.3,
+      "outlet_fall_below_equipotential_m": 41.4,
+      "spill_level_rise_over_floor_m": 53.9,
+      "volume_gain_km3": 592.0
+     },
+     {
+      "centre": [
+       13.22,
+       -168.91
+      ],
+      "area_km2": 22554.0,
+      "max_depth_m": 4661.0,
+      "spills": true,
+      "floor_fall_m": 81.0,
+      "floor_fall_below_equipotential_m": 144.4,
+      "outlet_fall_below_equipotential_m": -29.7,
+      "spill_level_rise_over_floor_m": 174.1,
+      "volume_gain_km3": 3067.0
+     },
+     {
+      "centre": [
+       -7.16,
+       -142.59
+      ],
+      "area_km2": 21172.0,
+      "max_depth_m": 3215.0,
+      "spills": true,
+      "floor_fall_m": -85.6,
+      "floor_fall_below_equipotential_m": -6.8,
+      "outlet_fall_below_equipotential_m": -14.5,
+      "spill_level_rise_over_floor_m": 7.7,
+      "volume_gain_km3": 167.0
+     },
+     {
+      "centre": [
+       2.78,
+       -177.47
+      ],
+      "area_km2": 20870.0,
+      "max_depth_m": 3926.0,
+      "spills": true,
+      "floor_fall_m": 18.6,
+      "floor_fall_below_equipotential_m": 95.3,
+      "outlet_fall_below_equipotential_m": 72.4,
+      "spill_level_rise_over_floor_m": 22.9,
+      "volume_gain_km3": -128.0
+     }
+    ],
+    "lakes_volume_gain_km3": 90066.0
+   },
+   "share": {
+    "level_m": -1586.38,
+    "level_change_m": 67.82,
+    "iterations": 11,
+    "seconds": 31.6,
+    "volume_km3": 13354749.0,
+    "extra_volume_km3": 2638531.0,
+    "extra_global_layer_m": 69.56,
+    "extra_mass_kg": 2.638530545208818e+18,
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": 2.46,
+     "p05": -50.52,
+     "p95": 329.19
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 1107.4,
+     "depth_weighted_fraction": 0.2009,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": 49.8,
+       "relative_m": 24.1
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 1098.3,
+       "relative_m": 1261.0
+      }
+     }
+    },
+    "land_uplift_max_m": 216.35,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1678.94,
+      "sill_depth_m": 92.55
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1876.38,
+      "sill_depth_m": 289.99
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -1982.18,
+      "sill_depth_m": 395.79
+     }
+    },
+    "nearside": {
+     "join_level_m": -1678.64,
+     "margin_m": 92.25,
+     "last_to_join": [
+      "Cognitum",
+      "Crisium",
+      "Fecunditatis",
+      "Humorum",
+      "Nubium"
+     ]
+    }
+   }
+  },
+  "relaxed, Te 40 km": {
+   "volume": {
+    "level_m": -1789.98,
+    "level_change_m": -135.78,
+    "iterations": 10,
+    "seconds": 20.0,
+    "volume_km3": 10716219.0,
+    "extra_volume_km3": 0.0,
+    "extra_global_layer_m": 0.0,
+    "extra_mass_kg": 398775252000.0,
+    "sea_share": 0.24371,
+    "sea_share_change": -0.03627,
+    "land_share": 0.75629,
+    "shore_rsl_change_m": {
+     "median": -191.92,
+     "p05": -233.74,
+     "p95": 87.34
+    },
+    "shoreline_mean_shift_km": -2.091,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 866.3,
+     "depth_weighted_fraction": 0.1405,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": 20.8,
+       "relative_m": -18.3
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 865.2,
+       "relative_m": 1069.9
+      }
+     }
+    },
+    "land_uplift_max_m": 168.57,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1702.12,
+      "sill_depth_m": -87.86
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1921.79,
+      "sill_depth_m": 131.81
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -2017.99,
+      "sill_depth_m": 228.01
+     }
+    },
+    "nearside": {
+     "join_level_m": -1676.37,
+     "margin_m": -113.61,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    },
+    "lakes": [
+     {
+      "centre": [
+       7.22,
+       -122.03
+      ],
+      "area_km2": 200051.0,
+      "max_depth_m": 4723.0,
+      "spills": true,
+      "floor_fall_m": 60.2,
+      "floor_fall_below_equipotential_m": 102.6,
+      "outlet_fall_below_equipotential_m": 22.5,
+      "spill_level_rise_over_floor_m": 80.1,
+      "volume_gain_km3": 28214.0
+     },
+     {
+      "centre": [
+       0.53,
+       -156.41
+      ],
+      "area_km2": 140652.0,
+      "max_depth_m": 6670.0,
+      "spills": true,
+      "floor_fall_m": 325.2,
+      "floor_fall_below_equipotential_m": 436.2,
+      "outlet_fall_below_equipotential_m": 294.0,
+      "spill_level_rise_over_floor_m": 142.1,
+      "volume_gain_km3": 22510.0
+     },
+     {
+      "centre": [
+       26.53,
+       -171.09
+      ],
+      "area_km2": 46438.0,
+      "max_depth_m": 4615.0,
+      "spills": true,
+      "floor_fall_m": 25.4,
+      "floor_fall_below_equipotential_m": 57.9,
+      "outlet_fall_below_equipotential_m": 55.3,
+      "spill_level_rise_over_floor_m": 2.6,
+      "volume_gain_km3": 158.0
+     },
+     {
+      "centre": [
+       -19.09,
+       -79.97
+      ],
+      "area_km2": 39219.0,
+      "max_depth_m": 1925.0,
+      "spills": true,
+      "floor_fall_m": -55.3,
+      "floor_fall_below_equipotential_m": -50.6,
+      "outlet_fall_below_equipotential_m": -41.6,
+      "spill_level_rise_over_floor_m": -9.0,
+      "volume_gain_km3": -114.0
+     },
+     {
+      "centre": [
+       15.09,
+       -159.84
+      ],
+      "area_km2": 32179.0,
+      "max_depth_m": 4400.0,
+      "spills": true,
+      "floor_fall_m": -1.0,
+      "floor_fall_below_equipotential_m": 56.7,
+      "outlet_fall_below_equipotential_m": 43.5,
+      "spill_level_rise_over_floor_m": 13.2,
+      "volume_gain_km3": -134.0
+     },
+     {
+      "centre": [
+       -32.34,
+       -71.47
+      ],
+      "area_km2": 32062.0,
+      "max_depth_m": 1764.0,
+      "spills": true,
+      "floor_fall_m": -49.9,
+      "floor_fall_below_equipotential_m": -32.6,
+      "outlet_fall_below_equipotential_m": -44.9,
+      "spill_level_rise_over_floor_m": 12.4,
+      "volume_gain_km3": 62.0
+     },
+     {
+      "centre": [
+       19.47,
+       -147.16
+      ],
+      "area_km2": 29584.0,
+      "max_depth_m": 4969.0,
+      "spills": true,
+      "floor_fall_m": 139.9,
+      "floor_fall_below_equipotential_m": 203.4,
+      "outlet_fall_below_equipotential_m": 128.5,
+      "spill_level_rise_over_floor_m": 74.9,
+      "volume_gain_km3": 1680.0
+     },
+     {
+      "centre": [
+       -15.22,
+       -153.47
+      ],
+      "area_km2": 29155.0,
+      "max_depth_m": 5348.0,
+      "spills": true,
+      "floor_fall_m": 62.9,
+      "floor_fall_below_equipotential_m": 187.7,
+      "outlet_fall_below_equipotential_m": 135.2,
+      "spill_level_rise_over_floor_m": 52.6,
+      "volume_gain_km3": 1111.0
+     },
+     {
+      "centre": [
+       18.34,
+       -141.41
+      ],
+      "area_km2": 26504.0,
+      "max_depth_m": 5307.0,
+      "spills": true,
+      "floor_fall_m": 52.3,
+      "floor_fall_below_equipotential_m": 93.9,
+      "outlet_fall_below_equipotential_m": 38.4,
+      "spill_level_rise_over_floor_m": 55.5,
+      "volume_gain_km3": 727.0
+     },
+     {
+      "centre": [
+       13.22,
+       -168.91
+      ],
+      "area_km2": 22554.0,
+      "max_depth_m": 4661.0,
+      "spills": true,
+      "floor_fall_m": 9.8,
+      "floor_fall_below_equipotential_m": 74.5,
+      "outlet_fall_below_equipotential_m": -8.9,
+      "spill_level_rise_over_floor_m": 83.4,
+      "volume_gain_km3": 1391.0
+     },
+     {
+      "centre": [
+       -7.16,
+       -142.59
+      ],
+      "area_km2": 21172.0,
+      "max_depth_m": 3215.0,
+      "spills": true,
+      "floor_fall_m": -69.3,
+      "floor_fall_below_equipotential_m": 8.8,
+      "outlet_fall_below_equipotential_m": 16.1,
+      "spill_level_rise_over_floor_m": -7.3,
+      "volume_gain_km3": -113.0
+     },
+     {
+      "centre": [
+       2.78,
+       -177.47
+      ],
+      "area_km2": 20870.0,
+      "max_depth_m": 3926.0,
+      "spills": true,
+      "floor_fall_m": -30.6,
+      "floor_fall_below_equipotential_m": 45.5,
+      "outlet_fall_below_equipotential_m": 31.6,
+      "spill_level_rise_over_floor_m": 14.0,
+      "volume_gain_km3": 41.0
+     }
+    ],
+    "lakes_volume_gain_km3": 55532.0
+   },
+   "share": {
+    "level_m": -1600.01,
+    "level_change_m": 54.19,
+    "iterations": 10,
+    "seconds": 30.9,
+    "volume_km3": 12870041.0,
+    "extra_volume_km3": 2153823.0,
+    "extra_global_layer_m": 56.78,
+    "extra_mass_kg": 2.153823189694396e+18,
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": -1.41,
+     "p05": -52.76,
+     "p95": 304.86
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 910.9,
+     "depth_weighted_fraction": 0.1556,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": 34.8,
+       "relative_m": 5.5
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 909.7,
+       "relative_m": 1118.0
+      }
+     }
+    },
+    "land_uplift_max_m": 178.27,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1716.26,
+      "sill_depth_m": 116.25
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1940.63,
+      "sill_depth_m": 340.62
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -2055.53,
+      "sill_depth_m": 455.52
+     }
+    },
+    "nearside": {
+     "join_level_m": -1687.97,
+     "margin_m": 87.96,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    }
+   }
+  },
+  "relaxed, Te 75 km": {
+   "volume": {
+    "level_m": -1764.99,
+    "level_change_m": -110.79,
+    "iterations": 9,
+    "seconds": 23.6,
+    "volume_km3": 10716219.0,
+    "extra_volume_km3": 1.0,
+    "extra_global_layer_m": 0.0,
+    "extra_mass_kg": 872483564000.0,
+    "sea_share": 0.25001,
+    "sea_share_change": -0.02996,
+    "land_share": 0.74999,
+    "shore_rsl_change_m": {
+     "median": -157.69,
+     "p05": -202.25,
+     "p95": 114.75
+    },
+    "shoreline_mean_shift_km": -1.727,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 673.0,
+     "depth_weighted_fraction": 0.1048,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": 7.4,
+       "relative_m": -32.1
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 671.1,
+       "relative_m": 923.7
+      }
+     }
+    },
+    "land_uplift_max_m": 132.14,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1724.75,
+      "sill_depth_m": -40.24
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1900.83,
+      "sill_depth_m": 135.84
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -2031.5,
+      "sill_depth_m": 266.51
+     }
+    },
+    "nearside": {
+     "join_level_m": -1684.63,
+     "margin_m": -80.35,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    },
+    "lakes": [
+     {
+      "centre": [
+       7.22,
+       -122.03
+      ],
+      "area_km2": 200051.0,
+      "max_depth_m": 4723.0,
+      "spills": true,
+      "floor_fall_m": 44.5,
+      "floor_fall_below_equipotential_m": 88.4,
+      "outlet_fall_below_equipotential_m": 37.4,
+      "spill_level_rise_over_floor_m": 50.9,
+      "volume_gain_km3": 16046.0
+     },
+     {
+      "centre": [
+       0.53,
+       -156.41
+      ],
+      "area_km2": 140652.0,
+      "max_depth_m": 6670.0,
+      "spills": true,
+      "floor_fall_m": 179.8,
+      "floor_fall_below_equipotential_m": 308.8,
+      "outlet_fall_below_equipotential_m": 224.3,
+      "spill_level_rise_over_floor_m": 84.5,
+      "volume_gain_km3": 12073.0
+     },
+     {
+      "centre": [
+       26.53,
+       -171.09
+      ],
+      "area_km2": 46438.0,
+      "max_depth_m": 4615.0,
+      "spills": true,
+      "floor_fall_m": 3.4,
+      "floor_fall_below_equipotential_m": 34.2,
+      "outlet_fall_below_equipotential_m": 32.2,
+      "spill_level_rise_over_floor_m": 2.0,
+      "volume_gain_km3": 314.0
+     },
+     {
+      "centre": [
+       -19.09,
+       -79.97
+      ],
+      "area_km2": 39219.0,
+      "max_depth_m": 1925.0,
+      "spills": true,
+      "floor_fall_m": -37.9,
+      "floor_fall_below_equipotential_m": -40.7,
+      "outlet_fall_below_equipotential_m": -42.0,
+      "spill_level_rise_over_floor_m": 1.3,
+      "volume_gain_km3": 83.0
+     },
+     {
+      "centre": [
+       15.09,
+       -159.84
+      ],
+      "area_km2": 32179.0,
+      "max_depth_m": 4400.0,
+      "spills": true,
+      "floor_fall_m": 20.7,
+      "floor_fall_below_equipotential_m": 75.7,
+      "outlet_fall_below_equipotential_m": 48.1,
+      "spill_level_rise_over_floor_m": 27.6,
+      "volume_gain_km3": 373.0
+     },
+     {
+      "centre": [
+       -32.34,
+       -71.47
+      ],
+      "area_km2": 32062.0,
+      "max_depth_m": 1764.0,
+      "spills": true,
+      "floor_fall_m": -50.2,
+      "floor_fall_below_equipotential_m": -40.1,
+      "outlet_fall_below_equipotential_m": -49.5,
+      "spill_level_rise_over_floor_m": 9.4,
+      "volume_gain_km3": -23.0
+     },
+     {
+      "centre": [
+       19.47,
+       -147.16
+      ],
+      "area_km2": 29584.0,
+      "max_depth_m": 4969.0,
+      "spills": true,
+      "floor_fall_m": 66.6,
+      "floor_fall_below_equipotential_m": 135.5,
+      "outlet_fall_below_equipotential_m": 91.9,
+      "spill_level_rise_over_floor_m": 43.6,
+      "volume_gain_km3": 1013.0
+     },
+     {
+      "centre": [
+       -15.22,
+       -153.47
+      ],
+      "area_km2": 29155.0,
+      "max_depth_m": 5348.0,
+      "spills": true,
+      "floor_fall_m": 30.8,
+      "floor_fall_below_equipotential_m": 162.3,
+      "outlet_fall_below_equipotential_m": 132.2,
+      "spill_level_rise_over_floor_m": 30.2,
+      "volume_gain_km3": 538.0
+     },
+     {
+      "centre": [
+       18.34,
+       -141.41
+      ],
+      "area_km2": 26504.0,
+      "max_depth_m": 5307.0,
+      "spills": true,
+      "floor_fall_m": 36.5,
+      "floor_fall_below_equipotential_m": 79.6,
+      "outlet_fall_below_equipotential_m": 48.3,
+      "spill_level_rise_over_floor_m": 31.2,
+      "volume_gain_km3": 399.0
+     },
+     {
+      "centre": [
+       13.22,
+       -168.91
+      ],
+      "area_km2": 22554.0,
+      "max_depth_m": 4661.0,
+      "spills": true,
+      "floor_fall_m": -3.1,
+      "floor_fall_below_equipotential_m": 59.4,
+      "outlet_fall_below_equipotential_m": -2.2,
+      "spill_level_rise_over_floor_m": 61.6,
+      "volume_gain_km3": 941.0
+     },
+     {
+      "centre": [
+       -7.16,
+       -142.59
+      ],
+      "area_km2": 21172.0,
+      "max_depth_m": 3215.0,
+      "spills": true,
+      "floor_fall_m": -15.1,
+      "floor_fall_below_equipotential_m": 59.9,
+      "outlet_fall_below_equipotential_m": 50.7,
+      "spill_level_rise_over_floor_m": 9.2,
+      "volume_gain_km3": 8.0
+     },
+     {
+      "centre": [
+       2.78,
+       -177.47
+      ],
+      "area_km2": 20870.0,
+      "max_depth_m": 3926.0,
+      "spills": true,
+      "floor_fall_m": -37.9,
+      "floor_fall_below_equipotential_m": 35.1,
+      "outlet_fall_below_equipotential_m": 23.8,
+      "spill_level_rise_over_floor_m": 11.3,
+      "volume_gain_km3": 12.0
+     }
+    ],
+    "lakes_volume_gain_km3": 31778.0
+   },
+   "share": {
+    "level_m": -1610.25,
+    "level_change_m": 43.95,
+    "iterations": 9,
+    "seconds": 22.5,
+    "volume_km3": 12450222.0,
+    "extra_volume_km3": 1734004.0,
+    "extra_global_layer_m": 45.71,
+    "extra_mass_kg": 1.734004315003462e+18,
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": -1.93,
+     "p05": -54.26,
+     "p95": 288.67
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 704.7,
+     "depth_weighted_fraction": 0.1138,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": 13.7,
+       "relative_m": -17.8
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 702.7,
+       "relative_m": 960.8
+      }
+     }
+    },
+    "land_uplift_max_m": 139.93,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1737.9,
+      "sill_depth_m": 127.65
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1915.92,
+      "sill_depth_m": 305.67
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -2057.35,
+      "sill_depth_m": 447.1
+     }
+    },
+    "nearside": {
+     "join_level_m": -1695.06,
+     "margin_m": 84.81,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    }
+   }
+  },
+  "relaxed, Te 150 km": {
+   "volume": {
+    "level_m": -1740.88,
+    "level_change_m": -86.68,
+    "iterations": 8,
+    "seconds": 12.5,
+    "volume_km3": 10716220.0,
+    "extra_volume_km3": 1.0,
+    "extra_global_layer_m": 0.0,
+    "extra_mass_kg": 1339639356000.0,
+    "sea_share": 0.25573,
+    "sea_share_change": -0.02424,
+    "land_share": 0.74427,
+    "shore_rsl_change_m": {
+     "median": -126.68,
+     "p05": -171.63,
+     "p95": 141.3
+    },
+    "shoreline_mean_shift_km": -1.398,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 429.9,
+     "depth_weighted_fraction": 0.0677,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": -4.0,
+       "relative_m": -43.5
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 423.2,
+       "relative_m": 736.0
+      }
+     }
+    },
+    "land_uplift_max_m": 89.81,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1727.91,
+      "sill_depth_m": -12.97
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1848.04,
+      "sill_depth_m": 107.16
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -2014.71,
+      "sill_depth_m": 273.83
+     }
+    },
+    "nearside": {
+     "join_level_m": -1691.49,
+     "margin_m": -49.4,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    },
+    "lakes": [
+     {
+      "centre": [
+       7.22,
+       -122.03
+      ],
+      "area_km2": 200051.0,
+      "max_depth_m": 4723.0,
+      "spills": true,
+      "floor_fall_m": 18.5,
+      "floor_fall_below_equipotential_m": 65.2,
+      "outlet_fall_below_equipotential_m": 28.1,
+      "spill_level_rise_over_floor_m": 37.1,
+      "volume_gain_km3": 11344.0
+     },
+     {
+      "centre": [
+       0.53,
+       -156.41
+      ],
+      "area_km2": 140652.0,
+      "max_depth_m": 6670.0,
+      "spills": true,
+      "floor_fall_m": 73.7,
+      "floor_fall_below_equipotential_m": 219.2,
+      "outlet_fall_below_equipotential_m": 163.4,
+      "spill_level_rise_over_floor_m": 55.7,
+      "volume_gain_km3": 7135.0
+     },
+     {
+      "centre": [
+       26.53,
+       -171.09
+      ],
+      "area_km2": 46438.0,
+      "max_depth_m": 4615.0,
+      "spills": true,
+      "floor_fall_m": -6.1,
+      "floor_fall_below_equipotential_m": 22.1,
+      "outlet_fall_below_equipotential_m": 20.4,
+      "spill_level_rise_over_floor_m": 1.6,
+      "volume_gain_km3": 350.0
+     },
+     {
+      "centre": [
+       -19.09,
+       -79.97
+      ],
+      "area_km2": 39219.0,
+      "max_depth_m": 1925.0,
+      "spills": true,
+      "floor_fall_m": -32.5,
+      "floor_fall_below_equipotential_m": -41.8,
+      "outlet_fall_below_equipotential_m": -42.5,
+      "spill_level_rise_over_floor_m": 0.7,
+      "volume_gain_km3": 77.0
+     },
+     {
+      "centre": [
+       15.09,
+       -159.84
+      ],
+      "area_km2": 32179.0,
+      "max_depth_m": 4400.0,
+      "spills": true,
+      "floor_fall_m": 28.5,
+      "floor_fall_below_equipotential_m": 83.9,
+      "outlet_fall_below_equipotential_m": 45.5,
+      "spill_level_rise_over_floor_m": 38.5,
+      "volume_gain_km3": 712.0
+     },
+     {
+      "centre": [
+       -32.34,
+       -71.47
+      ],
+      "area_km2": 32062.0,
+      "max_depth_m": 1764.0,
+      "spills": true,
+      "floor_fall_m": -46.4,
+      "floor_fall_below_equipotential_m": -44.2,
+      "outlet_fall_below_equipotential_m": -52.5,
+      "spill_level_rise_over_floor_m": 8.2,
+      "volume_gain_km3": -8.0
+     },
+     {
+      "centre": [
+       19.47,
+       -147.16
+      ],
+      "area_km2": 29584.0,
+      "max_depth_m": 4969.0,
+      "spills": true,
+      "floor_fall_m": 39.2,
+      "floor_fall_below_equipotential_m": 111.4,
+      "outlet_fall_below_equipotential_m": 66.1,
+      "spill_level_rise_over_floor_m": 45.4,
+      "volume_gain_km3": 1185.0
+     },
+     {
+      "centre": [
+       -15.22,
+       -153.47
+      ],
+      "area_km2": 29155.0,
+      "max_depth_m": 5348.0,
+      "spills": true,
+      "floor_fall_m": 26.8,
+      "floor_fall_below_equipotential_m": 162.3,
+      "outlet_fall_below_equipotential_m": 146.4,
+      "spill_level_rise_over_floor_m": 15.9,
+      "volume_gain_km3": 3.0
+     },
+     {
+      "centre": [
+       18.34,
+       -141.41
+      ],
+      "area_km2": 26504.0,
+      "max_depth_m": 5307.0,
+      "spills": true,
+      "floor_fall_m": 28.9,
+      "floor_fall_below_equipotential_m": 73.2,
+      "outlet_fall_below_equipotential_m": 57.6,
+      "spill_level_rise_over_floor_m": 15.6,
+      "volume_gain_km3": 251.0
+     },
+     {
+      "centre": [
+       13.22,
+       -168.91
+      ],
+      "area_km2": 22554.0,
+      "max_depth_m": 4661.0,
+      "spills": true,
+      "floor_fall_m": 5.9,
+      "floor_fall_below_equipotential_m": 65.8,
+      "outlet_fall_below_equipotential_m": 7.8,
+      "spill_level_rise_over_floor_m": 58.0,
+      "volume_gain_km3": 871.0
+     },
+     {
+      "centre": [
+       -7.16,
+       -142.59
+      ],
+      "area_km2": 21172.0,
+      "max_depth_m": 3215.0,
+      "spills": true,
+      "floor_fall_m": 7.9,
+      "floor_fall_below_equipotential_m": 82.6,
+      "outlet_fall_below_equipotential_m": 74.9,
+      "spill_level_rise_over_floor_m": 7.7,
+      "volume_gain_km3": -43.0
+     },
+     {
+      "centre": [
+       2.78,
+       -177.47
+      ],
+      "area_km2": 20870.0,
+      "max_depth_m": 3926.0,
+      "spills": true,
+      "floor_fall_m": -25.5,
+      "floor_fall_below_equipotential_m": 42.6,
+      "outlet_fall_below_equipotential_m": 31.8,
+      "spill_level_rise_over_floor_m": 10.8,
+      "volume_gain_km3": 17.0
+     }
+    ],
+    "lakes_volume_gain_km3": 21894.0
+   },
+   "share": {
+    "level_m": -1618.38,
+    "level_change_m": 35.82,
+    "iterations": 9,
+    "seconds": 23.2,
+    "volume_km3": 12073562.0,
+    "extra_volume_km3": 1357344.0,
+    "extra_global_layer_m": 35.78,
+    "extra_mass_kg": 1.357344102997024e+18,
+    "sea_share": 0.28,
+    "sea_share_change": 2e-05,
+    "land_share": 0.72,
+    "shore_rsl_change_m": {
+     "median": -2.62,
+     "p05": -52.86,
+     "p95": 275.45
+    },
+    "shoreline_mean_shift_km": 0.001,
+    "shoreline_length_km": 657897.0,
+    "sag_m": {
+     "max": 449.6,
+     "depth_weighted_fraction": 0.0724,
+     "at_deepest": {
+      "Near-side Sea": {
+       "depth_m": 3217.0,
+       "sag_m": -3.0,
+       "relative_m": -36.1
+      },
+      "South Pole-Aitken Sea": {
+       "depth_m": 6514.0,
+       "sag_m": 442.3,
+       "relative_m": 762.1
+      }
+     }
+    },
+    "land_uplift_max_m": 95.49,
+    "sills": {
+     "Fecunditatis to the Near-side Sea (western channels)": {
+      "sill_level_m": -1736.13,
+      "sill_depth_m": 117.75
+     },
+     "Fecunditatis to Crisium (Crisium passage)": {
+      "sill_level_m": -1856.62,
+      "sill_depth_m": 238.24
+     },
+     "Tenebrarum sub-basin to the South Pole-Aitken Sea": {
+      "sill_level_m": -2031.1,
+      "sill_depth_m": 412.72
+     }
+    },
+    "nearside": {
+     "join_level_m": -1698.92,
+     "margin_m": 80.55,
+     "last_to_join": [
+      "Cognitum",
+      "Humorum",
+      "Nubium"
+     ]
+    }
+   }
+  }
+ },
+ "love": {
+  "interior": {
+   "mass_kg": 7.341562390395446e+22,
+   "mass_over_gm_g": 0.99942,
+   "moment_of_inertia": 0.39412,
+   "tidal": {
+    "compressible, Poisson's ratio 0.25": {
+     "k2": 0.02473,
+     "h2": 0.04328
+    },
+    "incompressible, as the source": {
+     "k2": 0.02427,
+     "h2": 0.04078
+    },
+    "compressible, low-viscosity zone relaxed": {
+     "k2": 0.02592,
+     "h2": 0.04531
+    }
+   },
+   "elastic_load_love": [
+    {
+     "n": 1,
+     "h_load": -0.02226,
+     "k_load": 0.0
+    },
+    {
+     "n": 2,
+     "h_load": -0.05994,
+     "k_load": -0.018545
+    },
+    {
+     "n": 3,
+     "h_load": -0.06633,
+     "k_load": -0.014197
+    },
+    {
+     "n": 5,
+     "h_load": -0.0777,
+     "k_load": -0.010273
+    },
+    {
+     "n": 10,
+     "h_load": -0.09717,
+     "k_load": -0.006178
+    },
+    {
+     "n": 20,
+     "h_load": -0.12781,
+     "k_load": -0.003838
+    },
+    {
+     "n": 50,
+     "h_load": -0.20627,
+     "k_load": -0.002811
+    },
+    {
+     "n": 359,
+     "h_load": -0.29398,
+     "k_load": -0.00066
+    }
+   ]
+  },
+  "relaxed, Te 20 km": [
+   {
+    "n": 1,
+    "h_load": -0.0271,
+    "k_load": 0.0
+   },
+   {
+    "n": 2,
+    "h_load": -1.4536,
+    "k_load": -0.8464
+   },
+   {
+    "n": 3,
+    "h_load": -2.0677,
+    "k_load": -0.8592
+   },
+   {
+    "n": 5,
+    "h_load": -3.2816,
+    "k_load": -0.8627
+   },
+   {
+    "n": 10,
+    "h_load": -6.2041,
+    "k_load": -0.8384
+   },
+   {
+    "n": 20,
+    "h_load": -10.0057,
+    "k_load": -0.6678
+   },
+   {
+    "n": 30,
+    "h_load": -8.6765,
+    "k_load": -0.3769
+   },
+   {
+    "n": 50,
+    "h_load": -3.4028,
+    "k_load": -0.0841
+   },
+   {
+    "n": 100,
+    "h_load": -0.7285,
+    "k_load": -0.0077
+   },
+   {
+    "n": 200,
+    "h_load": -0.3508,
+    "k_load": -0.0015
+   }
+  ],
+  "relaxed, Te 40 km": [
+   {
+    "n": 1,
+    "h_load": -0.0271,
+    "k_load": 0.0
+   },
+   {
+    "n": 2,
+    "h_load": -1.238,
+    "k_load": -0.7183
+   },
+   {
+    "n": 3,
+    "h_load": -1.797,
+    "k_load": -0.7449
+   },
+   {
+    "n": 5,
+    "h_load": -2.879,
+    "k_load": -0.7556
+   },
+   {
+    "n": 10,
+    "h_load": -5.0455,
+    "k_load": -0.6805
+   },
+   {
+    "n": 20,
+    "h_load": -4.2053,
+    "k_load": -0.2779
+   },
+   {
+    "n": 30,
+    "h_load": -1.9423,
+    "k_load": -0.0815
+   },
+   {
+    "n": 50,
+    "h_load": -0.6461,
+    "k_load": -0.014
+   },
+   {
+    "n": 100,
+    "h_load": -0.3326,
+    "k_load": -0.0028
+   },
+   {
+    "n": 200,
+    "h_load": -0.3005,
+    "k_load": -0.0012
+   }
+  ],
+  "relaxed, Te 75 km": [
+   {
+    "n": 1,
+    "h_load": -0.0271,
+    "k_load": 0.0
+   },
+   {
+    "n": 2,
+    "h_load": -1.0231,
+    "k_load": -0.5907
+   },
+   {
+    "n": 3,
+    "h_load": -1.4986,
+    "k_load": -0.6189
+   },
+   {
+    "n": 5,
+    "h_load": -2.3545,
+    "k_load": -0.616
+   },
+   {
+    "n": 10,
+    "h_load": -2.9468,
+    "k_load": -0.3945
+   },
+   {
+    "n": 20,
+    "h_load": -1.03,
+    "k_load": -0.0645
+   },
+   {
+    "n": 30,
+    "h_load": -0.4563,
+    "k_load": -0.0164
+   },
+   {
+    "n": 50,
+    "h_load": -0.2742,
+    "k_load": -0.0045
+   },
+   {
+    "n": 100,
+    "h_load": -0.2843,
+    "k_load": -0.0023
+   },
+   {
+    "n": 200,
+    "h_load": -0.2944,
+    "k_load": -0.0012
+   }
+  ],
+  "relaxed, Te 150 km": [
+   {
+    "n": 1,
+    "h_load": -0.0271,
+    "k_load": 0.0
+   },
+   {
+    "n": 2,
+    "h_load": -0.7867,
+    "k_load": -0.4502
+   },
+   {
+    "n": 3,
+    "h_load": -1.1227,
+    "k_load": -0.4602
+   },
+   {
+    "n": 5,
+    "h_load": -1.5028,
+    "k_load": -0.3894
+   },
+   {
+    "n": 10,
+    "h_load": -0.8369,
+    "k_load": -0.107
+   },
+   {
+    "n": 20,
+    "h_load": -0.2527,
+    "k_load": -0.0122
+   },
+   {
+    "n": 30,
+    "h_load": -0.1946,
+    "k_load": -0.0049
+   },
+   {
+    "n": 50,
+    "h_load": -0.2148,
+    "k_load": -0.003
+   },
+   {
+    "n": 100,
+    "h_load": -0.2767,
+    "k_load": -0.0022
+   },
+   {
+    "n": 200,
+    "h_load": -0.2934,
+    "k_load": -0.0012
+   }
+  ]
+ },
+ "extra_loads": {
+  "groundwater, central, 10,000 years": {
+   "load_range_kg_m2": [
+    -512774.0,
+    364708.0
+   ],
+   "sea_share_change": 0.00185,
+   "shore_rsl_change_m": {
+    "median": -35.51,
+    "p05": -144.14,
+    "p95": -44.27
+   },
+   "sill_depth_change_m": {
+    "Fecunditatis to the Near-side Sea (western channels)": 74.37,
+    "Fecunditatis to Crisium (Crisium passage)": 77.77,
+    "Tenebrarum sub-basin to the South Pole-Aitken Sea": -185.33
+   },
+   "nearside_margin_change_m": 68.83
+  },
+  "groundwater, central, 100,000 years": {
+   "load_range_kg_m2": [
+    -1060307.0,
+    353231.0
+   ],
+   "sea_share_change": 0.00079,
+   "shore_rsl_change_m": {
+    "median": 8.47,
+    "p05": -279.85,
+    "p95": -42.86
+   },
+   "sill_depth_change_m": {
+    "Fecunditatis to the Near-side Sea (western channels)": 63.72,
+    "Fecunditatis to Crisium (Crisium passage)": 67.35,
+    "Tenebrarum sub-basin to the South Pole-Aitken Sea": -190.72
+   },
+   "nearside_margin_change_m": 55.89
+  },
+  "air, 1.2 atm at the sea surface": {
+   "load_range_kg_m2": [
+    -12984.0,
+    2376.0
+   ],
+   "sea_share_change": -1e-05,
+   "shore_rsl_change_m": {
+    "median": -0.27,
+    "p05": -0.26,
+    "p95": -0.06
+   },
+   "sill_depth_change_m": {
+    "Fecunditatis to the Near-side Sea (western channels)": 0.11,
+    "Fecunditatis to Crisium (Crisium passage)": 0.07,
+    "Tenebrarum sub-basin to the South Pole-Aitken Sea": 0.05
+   },
+   "nearside_margin_change_m": 0.11
+  },
+  "air_scale_height_km": 51.3
+ },
+ "nmax": 359,
+ "seconds": 507.0,
+ "seeds": {
+  "Fecunditatis to the Near-side Sea (western channels)": [
+   [
+    1526,
+    846
+   ],
+   [
+    1727,
+    559
+   ]
+  ],
+  "Fecunditatis to Crisium (Crisium passage)": [
+   [
+    1526,
+    846
+   ],
+   [
+    1203,
+    968
+   ]
+  ],
+  "Tenebrarum sub-basin to the South Pole-Aitken Sea": [
+   [
+    2678,
+    1926
+   ],
+   [
+    2416,
+    3139
+   ]
+  ]
+ }
+}

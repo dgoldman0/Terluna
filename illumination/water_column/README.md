@@ -23,6 +23,8 @@ remote-sensing reflectance and the diffuse attenuation of daylight:
   carried into water, for grains of a stated size and density;
 - reflectance by Lee et al. (2002), attenuation by Lee et al. (2005).
 
+[fresh_water.py](fresh_water.py) gives pure water as the Open Moon's fresh seas hold it, at about 0.14 g/kg, and the same constituents over it: scattering 0.770 of the seawater table's, from Zhang et al.'s (2009) salinity dependence, and pure water's absorption below 420 nm from the IOCCG protocol's composite (2018, Table 1.1), where the table holds Smith and Baker's (1981) bounds for natural water below 380 nm, about ten times pure water's. The [underwater light study](../../research/studies/underwater_light/README.md) reads it; the sea-appearance study keeps the seawater table until its next rerun.
+
 At Earth's chlorophyll levels of 0.1–3 mg/m³ its reflectance ratios give back
 the chlorophyll within a factor of two through NASA's OC4 algorithm, and its
 attenuation at 490 nm in clear water follows Morel's relation within a quarter.

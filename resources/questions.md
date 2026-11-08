@@ -13,7 +13,7 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
    - **What decides it:**
      - where the common-level crater waters and pits spill once they fill, which sets the great seas' inflow (geography);
      - how lunar lakes keep phosphorus: uptake, diagenesis and release from beds without oxygen;
-     - delta sediment grades by catchment, highland to KREEP-rich, and how much of each delta can be dredged;
+     - delta sediment grades by catchment, highland to KREEP-rich, and how much of each delta can be dredged; the river deltas screen (research/studies/river_deltas, 4 November 2026) keeps 0.08–0.42 of the load on the delta plains, with the plunging underflows carrying most of the fines, where particulate phosphorus rides, to the delta fronts and the floors beyond, so dredging for phosphorus reaches past the plains;
      - the provisioning study's food systems and their efficiencies;
      - whether the seas' living waters and sea-feeding flyers need phosphorus delivered with the water or sent from
        the deltas, a choice for the author with ecology.
@@ -129,10 +129,7 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
     monthly tide, the plants' draw from the climate's demand, the capillary reach at lunar gravity and the load's
     balance; by latitude, shore slope and ground, with Jura Island as the worked case. Minutes on one core.
 
-    **Part answered 18 October** by [the coast-water study](../research/studies/coast_water/README.md): the belts
-    Moon-wide at 16 px/deg by shore class, latitude and island, with a 100 m check on four non-desert coasts that
-    converges on one. The tide, the load's balance, desert coasts at tens of metres and Jura Island's worked case
-    remain.
+    **Part answered 18 October and 4 November** by [the coast-water study](../research/studies/coast_water/README.md): the belts Moon-wide at 16 px/deg by shore class, latitude and island, with a 100 m check on four non-desert coasts that converges on one; then [the monthly tide and the load](../research/studies/coast_water/README.md#the-monthly-tide-and-where-the-seas-load-settles). The tide reaches 45–140 m into the ground and widens the desert belts by about 2% at 16 px/deg, the sea and island coasts' by 6%, less at 100 m on eight desert coasts at 45–61°, and up to 29% on gentle shores where its high water spreads over the land; the lakes' own tides reach decimetres only in lakes over a few hundred km². The held seas leave a calcrete hardpan at the roots, about a centimetre of cemented soil a century under the desert belts, which neither the tide nor the rain carries back, and the delivered water's chloride would salt their root zones within two years. Jura Island's worked case remains.
 17. **The delivered water's own chlorine.** The sea chemistry delivers pure water. Ice like comet 67P's carries about
     1% of seawater's chloride, which has no sink: delivered as it comes it would hold the seas near 0.28 g/kg of
     chloride, about 0.5–0.6 g/kg in all with the cations that balance it, at the line between fresh and brackish

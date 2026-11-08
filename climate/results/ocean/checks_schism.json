@@ -1,0 +1,92 @@
+{
+ "schema": "terluna.climate.ocean-checks/1",
+ "model": "schism",
+ "seiches_smythii": {
+  "cells": 4746,
+  "nodes": 5290,
+  "elements": 9492,
+  "deltat_s": 120.0,
+  "days": 14.0,
+  "modes": [
+   {
+    "mode": 1,
+    "solver_hours": 40.17854774486047,
+    "schism_hours": 33.469710948942975,
+    "relative_difference": -0.16697559201292111
+   },
+   {
+    "mode": 2,
+    "solver_hours": 20.646557614110183,
+    "schism_hours": 17.72276069538978,
+    "relative_difference": -0.1416118354142597
+   },
+   {
+    "mode": 3,
+    "solver_hours": 16.734439154502237,
+    "schism_hours": 13.902039016350306,
+    "relative_difference": -0.16925575527219872
+   }
+  ],
+  "uniform_depth_m": null,
+  "reading_rule": "SCHISM's depths sit at the cell corners (the mean of the cells sharing each corner) and vary linearly across each triangle; the solver gives each face the shallower cell's depth, which slows waves across Smythii's craters. Its periods with the mean or the deeper cell's depth at each face are 34.9 and 32.5 hours for the slowest mode, bracketing SCHISM's."
+ },
+ "channel": {
+  "analytic_hours": 4.180058915076198,
+  "solver_hours": 4.1809228544834705,
+  "model_hours": 4.179899212098521,
+  "model_over_analytic": -3.8205915495859166e-05
+ },
+ "seiches_smythii_uniform": {
+  "cells": 4746,
+  "nodes": 5290,
+  "elements": 9492,
+  "deltat_s": 120.0,
+  "days": 14.0,
+  "modes": [
+   {
+    "mode": 1,
+    "solver_hours": 24.335674534467845,
+    "schism_hours": 23.740494363900893,
+    "relative_difference": -0.02445710595463335
+   },
+   {
+    "mode": 2,
+    "solver_hours": 9.61206757293601,
+    "schism_hours": 9.296709126909981,
+    "relative_difference": -0.03280859644744483
+   },
+   {
+    "mode": 3,
+    "solver_hours": 8.196362200308025,
+    "schism_hours": 7.769666477435672,
+    "relative_difference": -0.052059158983520426
+   }
+  ],
+  "uniform_depth_m": 1000.0,
+  "reading_rule": "Every cell at one depth: the solver's face depths and SCHISM's corner depths are the same floor, so the periods test gravity, radius and the numerics."
+ },
+ "forced_monthly_smythii": {
+  "line": {
+   "argument": "M'",
+   "period_days": 27.554549885482196
+  },
+  "body": 874,
+  "days": 110.0,
+  "fit_days": 55.0,
+  "nodes": 5290,
+  "elements": 9492,
+  "schism_on_solver": {
+   "gain": 0.9997840578913935,
+   "phase_deg": 0.03814597032323279
+  },
+  "schism_on_equilibrium": {
+   "gain": 1.0002641435496498,
+   "phase_deg": 0.0365895244351814
+  },
+  "solver_on_equilibrium": {
+   "gain": 1.0004800510521707,
+   "phase_deg": -0.0015547685942489428
+  },
+  "reading_rule": "Complex least-squares gain of one response on another over the sea's cells (area-weighted); a sign error would show as a 180-degree phase, a wrong pattern as a gain far from one."
+ }
+}

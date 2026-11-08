@@ -62,3 +62,32 @@ def test_a_dry_depression_keeps_a_smaller_closed_lake():
     evaporation = float((20.0 * dr.MM_DAY * r['area'])[kept].sum())
     assert evaporation <= r['inflow'][k] + 1e-12
     assert evaporation + float((20.0 * dr.MM_DAY * r['area'])[full & ~kept].min()) > r['inflow'][k]
+
+
+def test_a_supplied_runoff_field_replaces_rain_less_evaporation():
+    lat, lon = np.array([60.0, 0.0, -60.0]), np.array([0.0, 120.0, 240.0])
+    clim = dict(lat=lat, lon=lon, pr_mm_day=np.full((3, 3), 3.0), evap_mm_day=np.full((3, 3), 1.0))
+    default = dr.runoff_field(clim, 8, 16)
+    assert np.allclose(default, 2.0)
+    field = np.random.default_rng(1).uniform(0.0, 5.0, (8, 16))
+    got = dr.runoff_field(clim, 8, 16, field)
+    assert got.dtype == np.float32 and np.allclose(got, field, rtol=1e-6)
+    for bad in (np.ones((8, 15)), -field, np.where(field > 4.0, np.nan, field)):
+        try:
+            dr.runoff_field(clim, 8, 16, bad)
+        except ValueError:
+            continue
+        raise AssertionError('a malformed runoff field was accepted')
+
+
+def test_supplied_storm_water_upslope_of_a_dry_hollow_all_reaches_it():
+    h, outlet = slope_to_sea(bowl_depth=80.0)
+    r0 = dr.route(h, outlet, LAT, CELL_KM, np.zeros_like(h), np.full_like(h, -2000.0))
+    k = r0['label'][12 * COLS + 20]
+    inside = (r0['label'] == k).reshape(h.shape) & ~outlet
+    storm = np.where(inside, 4.0, 0.0)                      # storm water only within the hollow's catchment
+    r = dr.route(h, outlet, LAT, CELL_KM, storm, np.full_like(h, -2000.0))   # a hollow too dry to fill
+    full = ~r['outlet'] & (h.ravel() < r['level'][r['label']])
+    generated = total(r, np.where(inside.ravel() & ~full, 4.0, 0.0) * dr.MM_DAY)
+    assert r['closed'][k] and np.isclose(r['inflow'][k], generated, rtol=1e-9)
+    assert r['discharge'][r['outlet']].sum() == 0.0

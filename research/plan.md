@@ -155,6 +155,7 @@ studies answered, each reviewed independently:
 - **Living light** (ecology, `studies/living_light`). A beetle-class glow could light a path for 2–10% of a plant's
   night store; the natural night serves walking on 48% of the dry land, and the land under a light-polluted sky falls
   to 0.9–40% at 4–8 billion.
+- **Light under the water** (hydrosphere, `studies/underwater_light`). Counted as a lunar-day dose, photosynthetic light reaches 71 m in the open sea at the equator and 42 m at 75°. Water as clear as the open sea lights 171,000–325,000 km² of the seas' floor for charophytes, productive-coast water a fifth of that, and the lakes add 235,000–362,000 km², over today's latitudes and the turned Moon's, which differ by under 2%. No UV-B reaches the water, and fish see by day to about 690 m.
 
 Step six followed on the same day (provisioning, `studies/distributions`): four distributions of 25–30 billion for the
 author's choice, Earth at 9 billion in each. A puts the Moon at 4 billion (2 aloft), the array at 7 and the colonies at
@@ -228,7 +229,7 @@ deposits are stone for the built land; travertine builds while the young soils w
 the small streams' ponds. The author set the next round, once these details are worked out, as a large round of
 atlas building down to districts, in which the young-Moon landforms to keep are chosen as a set. Delta growth followed
 at the author's word: deltas move the shorelines first, covering 6.5% of the lake area within 10,000 years at the
-central rate and adding 104,000 km² of land at the common-level waters. The author keeps water delivery going to
+central rate and adding 104,000 km² of land at the common-level waters. The [river deltas screen](studies/river_deltas/README.md) (4 November 2026) worked out how they form at lunar gravity, on the young Moon and the mature one: the young rivers braid over bare banks and the mature rooted ones run in single, narrow channels; the rivers enter the fresh seas and lakes as plunging underflows, and no plume turns along a coast at its mouth; waves shape most mouths and the monthly tide only some young sea deltas on gentle slopes; and the delta plains keep 0.08–0.42 of the load, less than the half to all assumed, the rest settling on the fronts and floors. The author keeps water delivery going to
 balance what the crust takes up, and wants groundwater modelled: the crust's uptake through time, the water table
 with its springs, baseflow and lake seepage, then the springs' load. Its first stage followed: the cold airless crust
 thaws from above in centuries at the equator and tens of thousands of years near the poles, and once thawed takes water
@@ -517,10 +518,9 @@ limits and CM1's radiation read at constant volume. What follows ranks what the 
    for the author; the tile inventory matched to the eccentric rings' length, about 11% fewer tiles; illumination's
    fleet light on the layout's radii, whose sunward crossings it puts 11–16% too far out, with the films' specular
    light on the night; and the coupled design search at the later date the author set.
-8. **The shores and the waters:** groundwater by the fresh seas (resources, question 16), the delivered water's
+8. **The shores and the waters:** groundwater by the fresh seas (resources, question 16; its tide and load answered 4 November, [coast water](studies/coast_water/README.md#the-monthly-tide-and-where-the-seas-load-settles)), the delivered water's
    chlorine (question 17) and the polar drainage grid; then the Jura Island rerun with its planted shores.
-9. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set, the author's next
-   round once these details are worked out.
+9. **The atlas round** down to districts, with the young-Moon landforms to keep chosen as a set and the shorelines redrawn with the water's own gravity and the crust's sag ([geography](../geography/README.md#the-crusts-response-to-the-water)), the author's next round once these details are worked out.
 10. **A district wind study for the summit metropolis**, the largest megacity, round the central sky tower: layouts
    denser than the sparse pilot, the author's direction of 15 and 17 October
    ([register](decisions.md#the-chatgpt-work-of-15-october-confirmed-17-october-2026)), by the method recovered from
@@ -562,7 +562,7 @@ Each irreversible step waits for the record it destroys, so the gates in the stu
 
 The atlas at the selected 28% water share places everything. Its next refinements are:
 
-- groundwater storage in the porous crust and crustal loading, which fix the delivered inventory and the shoreline;
+- groundwater storage in the porous crust, and the water's own gravity and the crust's sag ([geography](../geography/README.md#the-crusts-response-to-the-water)), which the atlas work carries; together they fix the delivered inventory and the shoreline;
 - lake levels from each catchment's rainfall and evaporation in a climate run at 28%;
 - LOLA polar stereographic grids for the cold traps;
 - a three-dimensional atlas through time: the air's currents and weather by height in the travel bands, and the drifting days at each band redone on the turned Moon and the refined model (register, 5 November).
