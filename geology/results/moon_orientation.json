@@ -1,0 +1,3646 @@
+{
+ "schema": "terluna.geology.moon-orientation/1",
+ "producer": {
+  "domain": "geology",
+  "files": {
+   "geology/interior_response.py": "55c45fe6052f88b4b7cfe8b1db09dafa81c9b836f046e24f9bdc8fe23a494f4a",
+   "geology/thermal_state.py": "8fca06e04b5fa74f0915d16be7c92027c6e08e2c1b1bdff220df57691c7dabc1",
+   "geology/viscoelastic.py": "eee81d57c8e2ff85e6b3486d83bf879548c721c25dd0c02025334c24b3f8cb74",
+   "geology/orientation.py": "3de7c0493969c0063aefcc65598baefcb46e16a6eaa39e491a3292f00e5f41d6",
+   "geology/interior_sources.json": "18493f81b1145eddba64734c67b56db99f3c295e2a6961d6fa3c6a7e75ae59c3"
+  },
+  "inputs": {
+   "/media/projectspace/terluna-research/crustal-loading/crustal_loading_nmax359.npz": "4b408e82d708c7af5cf667a775719495c39c980ba55f56bebaa2122cc56e969e",
+   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693",
+   "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f8899bd4f5d712445f78c8882c85a1bc30bf631ac9dd14ab1c03",
+   "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
+   "domain/hydrosphere@c2c8624a:geography/results/crustal_loading.json": "e1b1b2fca964fb98d0269574c65f8a128381fb524abe038fc8c041cd49db7670"
+  },
+  "constants": {
+   "AVOGADRO": 6.02214076e+23,
+   "BOLTZMANN": 1.380649e-23,
+   "EARTH_GM": 398600441800000.0,
+   "GRAVITATIONAL_CONSTANT": 6.6743e-11,
+   "JULIAN_DAY": 86400.0,
+   "JULIAN_YEAR_DAYS": 365.25,
+   "MOON_GM": 4902800118000.0,
+   "MOON_ORBIT_INCLINATION_DEG": 5.145,
+   "MOON_RADIUS": 1737400.0,
+   "SIDEREAL_MONTH_DAYS": 27.321661
+  }
+ },
+ "evidence": "A calculation: today's moments from lunar laser ranging (beta, gamma; Murphy 2013) and C/MR^2 (Williams et al. 2014); the water's degree-2 inertia from the crustal-loading study's geoid changes (seas held at 28% with the rain-fed lakes) and the groundwater uptake's central bands; the response through time from results/interior_response.json. The elastic frame reproduces the orientation report's elastic state.",
+ "reading_rule": "'elastic_frame' is the orientation set for the second set of full climate simulations: rows of rotation_today_to_turned are the turned Moon's axes (toward Earth, the third, north) in today's body frame (x toward 0 N 0 E, z north); a point's turned coordinates are R @ n(today). orientation.to_turned and to_today convert latitude and longitude. Time series hold the Moon after the seas and lakes arrive at t = 0, years after that; 'pole_deg' is the pole's move from today's pole.",
+ "elastic_frame": {
+  "rotation_today_to_turned": [
+   [
+    0.9846855719087231,
+    0.10503940127938541,
+    0.13914398533051775
+   ],
+   [
+    -0.10834127436348502,
+    0.9939792870708228,
+    0.016350692446348673
+   ],
+   [
+    -0.13658877239395323,
+    -0.03117532763335884,
+    0.990137165347744
+   ]
+  ],
+  "north_pole": {
+   "lat_deg": 81.94628788358153,
+   "lon_deg": -167.14292426123106
+  },
+  "south_pole": {
+   "lat_deg": -81.94628788358153,
+   "lon_deg": 12.857075738768941
+  },
+  "sub_earth_point": {
+   "lat_deg": 7.998315406406375,
+   "lon_deg": 6.088889089043695
+  },
+  "pole_move_deg": 8.054,
+  "pole_toward_lon_deg": -167.14,
+  "face_move_deg": 10.04,
+  "places": {
+   "Jura Island's centre (the CM1 box)": {
+    "today": [
+     45.0,
+     -36.1
+    ],
+    "turned": [
+     39.43,
+     -36.96
+    ]
+   },
+   "Mare Imbrium": {
+    "today": [
+     34.7,
+     -14.9
+    ],
+    "turned": [
+     27.5,
+     -18.87
+    ]
+   },
+   "Mare Serenitatis": {
+    "today": [
+     27.3,
+     18.4
+    ],
+    "turned": [
+     19.28,
+     11.92
+    ]
+   },
+   "Mare Tranquillitatis": {
+    "today": [
+     8.3,
+     30.8
+    ],
+    "turned": [
+     0.63,
+     24.45
+    ]
+   },
+   "Apollo 11": {
+    "today": [
+     0.674,
+     23.473
+    ],
+    "turned": [
+     -7.24,
+     17.4
+    ]
+   },
+   "Copernicus": {
+    "today": [
+     9.6,
+     -20.1
+    ],
+    "turned": [
+     2.82,
+     -25.78
+    ]
+   },
+   "Tycho": {
+    "today": [
+     -43.3,
+     -11.2
+    ],
+    "turned": [
+     -50.55,
+     -21.13
+    ]
+   },
+   "Korolev": {
+    "today": [
+     -4.2,
+     -157.4
+    ],
+    "turned": [
+     3.74,
+     -163.56
+    ]
+   },
+   "Hertzsprung": {
+    "today": [
+     1.4,
+     -128.7
+    ],
+    "turned": [
+     7.69,
+     -134.45
+    ]
+   },
+   "Chang'e 4": {
+    "today": [
+     -45.44,
+     177.6
+    ],
+    "turned": [
+     -37.64,
+     173.22
+    ]
+   },
+   "South Pole-Aitken sea's centre": {
+    "today": [
+     -53.0,
+     -169.0
+    ],
+    "turned": [
+     -44.95,
+     -174.88
+    ]
+   }
+  }
+ },
+ "moments": {
+  "beta": 0.0006310213,
+  "gamma": 0.0002277317,
+  "c_mr2": 0.393112,
+  "radius_m": 1738000.0,
+  "A": 8.71726572349288e+34,
+  "B": 8.719252174222964e+34,
+  "C": 8.722767757334889e+34,
+  "fluid_love": 1.436258715005323,
+  "q": 7.586180702672684e-06
+ },
+ "load_tensors_kg_m2": {
+  "rigid_share": [
+   [
+    -1.8238718578696068e+30,
+    -2.7538416141266375e+30,
+    -7.847641942509447e+30
+   ],
+   [
+    -2.753841614126638e+30,
+    4.159846346204833e+30,
+    -1.3282523962203193e+30
+   ],
+   [
+    -7.847641942509446e+30,
+    -1.3282523962203193e+30,
+    -2.3359744883352258e+30
+   ]
+  ],
+  "elastic_share": [
+   [
+    -1.7921159632907148e+30,
+    -2.7114128944302867e+30,
+    -7.75535225174104e+30
+   ],
+   [
+    -2.7114128944302867e+30,
+    4.115780696690649e+30,
+    -1.313184806447462e+30
+   ],
+   [
+    -7.75535225174104e+30,
+    -1.313184806447462e+30,
+    -2.323664733399934e+30
+   ]
+  ],
+  "relaxed_Te_20_km_share": [
+   [
+    -2.9390938507069194e+29,
+    -4.6070591675984696e+29,
+    -1.434437476688086e+30
+   ],
+   [
+    -4.6070591675984696e+29,
+    7.568866630204451e+29,
+    -2.5704675996208548e+29
+   ],
+   [
+    -1.434437476688086e+30,
+    -2.5704675996208533e+29,
+    -4.629772779497532e+29
+   ]
+  ],
+  "relaxed_Te_40_km_share": [
+   [
+    -5.356527611702605e+29,
+    -8.278936697754535e+29,
+    -2.5446037809887246e+30
+   ],
+   [
+    -8.278936697754536e+29,
+    1.3535054110083849e+30,
+    -4.494217213798426e+29
+   ],
+   [
+    -2.544603780988725e+30,
+    -4.494217213798426e+29,
+    -8.178526498381246e+29
+   ]
+  ],
+  "relaxed_Te_75_km_share": [
+   [
+    -7.698660546470894e+29,
+    -1.1746566717427177e+30,
+    -3.576107818085293e+30
+   ],
+   [
+    -1.1746566717427177e+30,
+    1.917216454788335e+30,
+    -6.183333893442036e+29
+   ],
+   [
+    -3.576107818085293e+30,
+    -6.183333893442036e+29,
+    -1.1473504001412458e+30
+   ]
+  ],
+  "relaxed_Te_150_km_share": [
+   [
+    -1.0216705034633588e+30,
+    -1.550615192129964e+30,
+    -4.6326793951297997e+30
+   ],
+   [
+    -1.5506151921299634e+30,
+    2.4862016248663944e+30,
+    -7.875910401591928e+29
+   ],
+   [
+    -4.6326793951297997e+30,
+    -7.875910401591928e+29,
+    -1.4645311214030357e+30
+   ]
+  ],
+  "south_pole_aitken_rigid": [
+   [
+    2.0604755842062383e+29,
+    -8.720648758724316e+29,
+    -6.422361389799422e+30
+   ],
+   [
+    -8.720648758724316e+29,
+    4.6705582368819646e+30,
+    -1.2440042812677988e+30
+   ],
+   [
+    -6.422361389799422e+30,
+    -1.2440042812677988e+30,
+    -4.876605795302586e+30
+   ]
+  ],
+  "pores_by_year": {
+   "10": [
+    [
+     -1.2426733953203213e+28,
+     -1.1996551881846775e+26,
+     -4.521161332902896e+27
+    ],
+    [
+     -1.199655188184675e+26,
+     -8.882934815164776e+27,
+     2.609424120819481e+26
+    ],
+    [
+     -4.5211613329028964e+27,
+     2.609424120819481e+26,
+     2.1309668768367972e+28
+    ]
+   ],
+   "100": [
+    [
+     -4.648856125207718e+28,
+     -1.895239863693902e+26,
+     -1.3588420546998661e+28
+    ],
+    [
+     -1.895239863693894e+26,
+     -4.0591392641005285e+28,
+     6.0027843380250406e+26
+    ],
+    [
+     -1.3588420546998661e+28,
+     6.0027843380250296e+26,
+     8.707995389308243e+28
+    ]
+   ],
+   "1000": [
+    [
+     -1.8327305208436497e+30,
+     3.5415811907056772e+28,
+     -7.492722161680608e+28
+    ],
+    [
+     3.54158119070568e+28,
+     -1.5509729540359485e+30,
+     -1.7030251734484236e+28
+    ],
+    [
+     -7.492722161680616e+28,
+     -1.703025173448423e+28,
+     3.3837034748795994e+30
+    ]
+   ],
+   "10000": [
+    [
+     -5.490942026550849e+30,
+     -1.512973787235471e+29,
+     -1.680345143801279e+30
+    ],
+    [
+     -1.5129737872354718e+29,
+     -4.4577918766724965e+30,
+     1.7896018587229666e+29
+    ],
+    [
+     -1.6803451438012785e+30,
+     1.7896018587229666e+29,
+     9.94873390322334e+30
+    ]
+   ],
+   "100000": [
+    [
+     -7.365377717601494e+30,
+     -1.578561976428907e+29,
+     -2.3894803205213082e+30
+    ],
+    [
+     -1.5785619764289088e+29,
+     -6.656352427321177e+30,
+     -2.788724673629701e+29
+    ],
+    [
+     -2.3894803205213088e+30,
+     -2.788724673629701e+29,
+     1.4021730144922667e+31
+    ]
+   ],
+   "1e+06": [
+    [
+     -5.751031307539399e+30,
+     -1.98739325524133e+28,
+     -2.380603269064023e+30
+    ],
+    [
+     -1.9873932552413092e+28,
+     -5.096788970527501e+30,
+     -3.337693933295684e+29
+    ],
+    [
+     -2.3806032690640222e+30,
+     -3.337693933295683e+29,
+     1.084782027806689e+31
+    ]
+   ],
+   "1e+07": [
+    [
+     -6.613455016286878e+28,
+     -2.3751437394933096e+24,
+     -4.623916386630953e+27
+    ],
+    [
+     -2.3751437395379864e+24,
+     -6.6006632576744455e+28,
+     -1.232538241228918e+27
+    ],
+    [
+     -4.62391638663101e+27,
+     -1.232538241228983e+27,
+     1.321411827396217e+29
+    ]
+   ]
+  }
+ },
+ "load_masses_kg": {
+  "rigid_water": 1.154100660158201e+19,
+  "south_pole_aitken": 5.548324062302626e+18,
+  "pores_by_year": {
+   "10": 4.251731320782463e+16,
+   "100": 1.767058778617569e+17,
+   "1000": 4.3070084625009664e+18,
+   "10000": 1.98713671407952e+19,
+   "100000": 4.087642475224415e+19,
+   "1e+06": 5.1141681746778415e+19,
+   "1e+07": 5.923136545797248e+19
+  }
+ },
+ "report_states": {
+  "rigid": {
+   "pole_deg": 8.1391,
+   "pole_toward_lon_deg": -167.1989,
+   "sub_earth_lat_deg": 8.0852,
+   "sub_earth_lon_deg": 6.1616,
+   "face_move_deg": 10.153,
+   "b_minus_a_change": 0.3868,
+   "c_minus_a_change": 0.0371,
+   "tilt_to_ecliptic_deg": 1.6159,
+   "libration_days": 887.6029
+  },
+  "elastic": {
+   "pole_deg": 8.0537,
+   "pole_toward_lon_deg": -167.1429,
+   "sub_earth_lat_deg": 7.9983,
+   "sub_earth_lon_deg": 6.0889,
+   "face_move_deg": 10.0402,
+   "b_minus_a_change": 0.3809,
+   "c_minus_a_change": 0.0357,
+   "tilt_to_ecliptic_deg": 1.613,
+   "libration_days": 889.5003
+  },
+  "relaxed_Te_20_km": {
+   "pole_deg": 1.5495,
+   "pole_toward_lon_deg": -164.5373,
+   "sub_earth_lat_deg": 1.5023,
+   "sub_earth_lon_deg": 1.2774,
+   "face_move_deg": 1.9719,
+   "b_minus_a_change": 0.0557,
+   "c_minus_a_change": -0.0015,
+   "tilt_to_ecliptic_deg": 1.5381,
+   "libration_days": 1017.3119
+  },
+  "relaxed_Te_40_km": {
+   "pole_deg": 2.7387,
+   "pole_toward_lon_deg": -164.952,
+   "sub_earth_lat_deg": 2.6704,
+   "sub_earth_lon_deg": 2.2193,
+   "face_move_deg": 3.4717,
+   "b_minus_a_change": 0.1041,
+   "c_minus_a_change": -0.0001,
+   "tilt_to_ecliptic_deg": 1.5408,
+   "libration_days": 994.7875
+  },
+  "relaxed_Te_75_km": {
+   "pole_deg": 3.8292,
+   "pole_toward_lon_deg": -165.4902,
+   "sub_earth_lat_deg": 3.753,
+   "sub_earth_lon_deg": 3.0445,
+   "face_move_deg": 4.8313,
+   "b_minus_a_change": 0.153,
+   "c_minus_a_change": 0.0029,
+   "tilt_to_ecliptic_deg": 1.547,
+   "libration_days": 973.4487
+  },
+  "relaxed_Te_150_km": {
+   "pole_deg": 4.9279,
+   "pole_toward_lon_deg": -166.0321,
+   "sub_earth_lat_deg": 4.8521,
+   "sub_earth_lon_deg": 3.8766,
+   "face_move_deg": 6.2077,
+   "b_minus_a_change": 0.2065,
+   "c_minus_a_change": 0.0084,
+   "tilt_to_ecliptic_deg": 1.5578,
+   "libration_days": 951.6246
+  }
+ },
+ "relaxed_states_rigid_load_scaled": {
+  "te_20_km": {
+   "k_load_2": -0.8464,
+   "pole_rigid_load_scaled": 1.295,
+   "pole_study": 1.55
+  },
+  "te_40_km": {
+   "k_load_2": -0.7183,
+   "pole_rigid_load_scaled": 2.369,
+   "pole_study": 2.739
+  },
+  "te_75_km": {
+   "k_load_2": -0.5907,
+   "pole_rigid_load_scaled": 3.428,
+   "pole_study": 3.829
+  },
+  "te_150_km": {
+   "k_load_2": -0.4502,
+   "pole_rigid_load_scaled": 4.581,
+   "pole_study": 4.928
+  }
+ },
+ "time_series": {
+  "central": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.935,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.88,
+     "sub_earth_lon_deg": 6.05,
+     "face_move_deg": 9.92,
+     "b_minus_a_change": 0.3739,
+     "c_minus_a_change": 0.035,
+     "tilt_to_ecliptic_deg": 1.611
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.86,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.8,
+     "sub_earth_lon_deg": 6.01,
+     "face_move_deg": 9.84,
+     "b_minus_a_change": 0.3692,
+     "c_minus_a_change": 0.0342,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.758,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.7,
+     "sub_earth_lon_deg": 5.95,
+     "face_move_deg": 9.72,
+     "b_minus_a_change": 0.3629,
+     "c_minus_a_change": 0.0331,
+     "tilt_to_ecliptic_deg": 1.608
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.625,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.57,
+     "sub_earth_lon_deg": 5.87,
+     "face_move_deg": 9.57,
+     "b_minus_a_change": 0.3547,
+     "c_minus_a_change": 0.0318,
+     "tilt_to_ecliptic_deg": 1.605
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.457,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.4,
+     "sub_earth_lon_deg": 5.77,
+     "face_move_deg": 9.38,
+     "b_minus_a_change": 0.3444,
+     "c_minus_a_change": 0.0302,
+     "tilt_to_ecliptic_deg": 1.602
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.242,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.18,
+     "sub_earth_lon_deg": 5.65,
+     "face_move_deg": 9.13,
+     "b_minus_a_change": 0.3315,
+     "c_minus_a_change": 0.0281,
+     "tilt_to_ecliptic_deg": 1.598
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 6.961,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.9,
+     "sub_earth_lon_deg": 5.48,
+     "face_move_deg": 8.8,
+     "b_minus_a_change": 0.3149,
+     "c_minus_a_change": 0.0256,
+     "tilt_to_ecliptic_deg": 1.592
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 6.591,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.53,
+     "sub_earth_lon_deg": 5.25,
+     "face_move_deg": 8.37,
+     "b_minus_a_change": 0.2936,
+     "c_minus_a_change": 0.0224,
+     "tilt_to_ecliptic_deg": 1.586
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.146,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 6.08,
+     "sub_earth_lon_deg": 4.98,
+     "face_move_deg": 7.85,
+     "b_minus_a_change": 0.2687,
+     "c_minus_a_change": 0.0189,
+     "tilt_to_ecliptic_deg": 1.579
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 5.623,
+     "pole_toward_lon_deg": -166.6,
+     "sub_earth_lat_deg": 5.56,
+     "sub_earth_lon_deg": 4.63,
+     "face_move_deg": 7.23,
+     "b_minus_a_change": 0.2405,
+     "c_minus_a_change": 0.0152,
+     "tilt_to_ecliptic_deg": 1.572
+    }
+   ],
+   "seas_lakes_and_pores": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.935,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.88,
+     "sub_earth_lon_deg": 6.05,
+     "face_move_deg": 9.92,
+     "b_minus_a_change": 0.3739,
+     "c_minus_a_change": 0.035,
+     "tilt_to_ecliptic_deg": 1.612
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.859,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.8,
+     "sub_earth_lon_deg": 6.0,
+     "face_move_deg": 9.83,
+     "b_minus_a_change": 0.3694,
+     "c_minus_a_change": 0.0348,
+     "tilt_to_ecliptic_deg": 1.611
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.752,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.7,
+     "sub_earth_lon_deg": 5.95,
+     "face_move_deg": 9.72,
+     "b_minus_a_change": 0.3632,
+     "c_minus_a_change": 0.0355,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.087,
+     "pole_toward_lon_deg": -167.3,
+     "sub_earth_lat_deg": 7.04,
+     "sub_earth_lon_deg": 5.74,
+     "face_move_deg": 9.07,
+     "b_minus_a_change": 0.364,
+     "c_minus_a_change": 0.1183,
+     "tilt_to_ecliptic_deg": 1.785
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.128,
+     "pole_toward_lon_deg": -172.5,
+     "sub_earth_lat_deg": 7.13,
+     "sub_earth_lon_deg": 5.77,
+     "face_move_deg": 9.16,
+     "b_minus_a_change": 0.402,
+     "c_minus_a_change": 0.2924,
+     "tilt_to_ecliptic_deg": 2.177
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 6.992,
+     "pole_toward_lon_deg": -169.3,
+     "sub_earth_lat_deg": 6.97,
+     "sub_earth_lon_deg": 5.82,
+     "face_move_deg": 9.07,
+     "b_minus_a_change": 0.3766,
+     "c_minus_a_change": 0.3796,
+     "tilt_to_ecliptic_deg": 2.39
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.19,
+     "pole_toward_lon_deg": -168.5,
+     "sub_earth_lat_deg": 7.15,
+     "sub_earth_lon_deg": 5.43,
+     "face_move_deg": 8.97,
+     "b_minus_a_change": 0.3565,
+     "c_minus_a_change": 0.2877,
+     "tilt_to_ecliptic_deg": 2.166
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 6.566,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.5,
+     "sub_earth_lon_deg": 5.26,
+     "face_move_deg": 8.35,
+     "b_minus_a_change": 0.2923,
+     "c_minus_a_change": 0.0177,
+     "tilt_to_ecliptic_deg": 1.577
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.133,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 6.07,
+     "sub_earth_lon_deg": 4.97,
+     "face_move_deg": 7.84,
+     "b_minus_a_change": 0.2686,
+     "c_minus_a_change": 0.0211,
+     "tilt_to_ecliptic_deg": 1.583
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 5.612,
+     "pole_toward_lon_deg": -166.6,
+     "sub_earth_lat_deg": 5.55,
+     "sub_earth_lon_deg": 4.63,
+     "face_move_deg": 7.22,
+     "b_minus_a_change": 0.2405,
+     "c_minus_a_change": 0.0175,
+     "tilt_to_ecliptic_deg": 1.576
+    }
+   ],
+   "seas_and_lakes_without_bulge": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.013,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.3792,
+     "c_minus_a_change": 0.0358,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.923,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.87,
+     "sub_earth_lon_deg": 6.03,
+     "face_move_deg": 9.9,
+     "b_minus_a_change": 0.3738,
+     "c_minus_a_change": 0.0349,
+     "tilt_to_ecliptic_deg": 1.611
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.843,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.79,
+     "sub_earth_lon_deg": 5.98,
+     "face_move_deg": 9.81,
+     "b_minus_a_change": 0.369,
+     "c_minus_a_change": 0.0341,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.735,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.68,
+     "sub_earth_lon_deg": 5.92,
+     "face_move_deg": 9.68,
+     "b_minus_a_change": 0.3626,
+     "c_minus_a_change": 0.033,
+     "tilt_to_ecliptic_deg": 1.607
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.595,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.54,
+     "sub_earth_lon_deg": 5.83,
+     "face_move_deg": 9.52,
+     "b_minus_a_change": 0.3543,
+     "c_minus_a_change": 0.0316,
+     "tilt_to_ecliptic_deg": 1.605
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.418,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.36,
+     "sub_earth_lon_deg": 5.72,
+     "face_move_deg": 9.31,
+     "b_minus_a_change": 0.3439,
+     "c_minus_a_change": 0.0299,
+     "tilt_to_ecliptic_deg": 1.601
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.193,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 7.13,
+     "sub_earth_lon_deg": 5.58,
+     "face_move_deg": 9.05,
+     "b_minus_a_change": 0.3309,
+     "c_minus_a_change": 0.0278,
+     "tilt_to_ecliptic_deg": 1.597
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 6.899,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.84,
+     "sub_earth_lon_deg": 5.4,
+     "face_move_deg": 8.7,
+     "b_minus_a_change": 0.3142,
+     "c_minus_a_change": 0.0252,
+     "tilt_to_ecliptic_deg": 1.592
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 6.513,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 6.45,
+     "sub_earth_lon_deg": 5.15,
+     "face_move_deg": 8.24,
+     "b_minus_a_change": 0.2927,
+     "c_minus_a_change": 0.022,
+     "tilt_to_ecliptic_deg": 1.585
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.054,
+     "pole_toward_lon_deg": -166.5,
+     "sub_earth_lat_deg": 5.99,
+     "sub_earth_lon_deg": 4.84,
+     "face_move_deg": 7.69,
+     "b_minus_a_change": 0.2678,
+     "c_minus_a_change": 0.0185,
+     "tilt_to_ecliptic_deg": 1.578
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 5.516,
+     "pole_toward_lon_deg": -166.4,
+     "sub_earth_lat_deg": 5.45,
+     "sub_earth_lon_deg": 4.48,
+     "face_move_deg": 7.05,
+     "b_minus_a_change": 0.2395,
+     "c_minus_a_change": 0.0148,
+     "tilt_to_ecliptic_deg": 1.571
+    }
+   ],
+   "seas_and_lakes_with_sea_level_feedback": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.035,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.98,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.03,
+     "b_minus_a_change": 0.3799,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.952,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.9,
+     "sub_earth_lon_deg": 6.05,
+     "face_move_deg": 9.94,
+     "b_minus_a_change": 0.3747,
+     "c_minus_a_change": 0.035,
+     "tilt_to_ecliptic_deg": 1.612
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.88,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.82,
+     "sub_earth_lon_deg": 6.01,
+     "face_move_deg": 9.85,
+     "b_minus_a_change": 0.3701,
+     "c_minus_a_change": 0.0342,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.784,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.73,
+     "sub_earth_lon_deg": 5.95,
+     "face_move_deg": 9.74,
+     "b_minus_a_change": 0.364,
+     "c_minus_a_change": 0.0332,
+     "tilt_to_ecliptic_deg": 1.608
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.661,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.6,
+     "sub_earth_lon_deg": 5.88,
+     "face_move_deg": 9.6,
+     "b_minus_a_change": 0.3563,
+     "c_minus_a_change": 0.0319,
+     "tilt_to_ecliptic_deg": 1.605
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.509,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.45,
+     "sub_earth_lon_deg": 5.79,
+     "face_move_deg": 9.42,
+     "b_minus_a_change": 0.3467,
+     "c_minus_a_change": 0.0303,
+     "tilt_to_ecliptic_deg": 1.602
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.319,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 7.26,
+     "sub_earth_lon_deg": 5.67,
+     "face_move_deg": 9.2,
+     "b_minus_a_change": 0.3348,
+     "c_minus_a_change": 0.0283,
+     "tilt_to_ecliptic_deg": 1.598
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.074,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 7.01,
+     "sub_earth_lon_deg": 5.51,
+     "face_move_deg": 8.91,
+     "b_minus_a_change": 0.3197,
+     "c_minus_a_change": 0.0258,
+     "tilt_to_ecliptic_deg": 1.593
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 6.754,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 6.69,
+     "sub_earth_lon_deg": 5.3,
+     "face_move_deg": 8.52,
+     "b_minus_a_change": 0.3003,
+     "c_minus_a_change": 0.0227,
+     "tilt_to_ecliptic_deg": 1.587
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.369,
+     "pole_toward_lon_deg": -166.5,
+     "sub_earth_lat_deg": 6.3,
+     "sub_earth_lon_deg": 5.03,
+     "face_move_deg": 8.06,
+     "b_minus_a_change": 0.2777,
+     "c_minus_a_change": 0.0192,
+     "tilt_to_ecliptic_deg": 1.579
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 5.905,
+     "pole_toward_lon_deg": -166.4,
+     "sub_earth_lat_deg": 5.83,
+     "sub_earth_lon_deg": 4.71,
+     "face_move_deg": 7.49,
+     "b_minus_a_change": 0.2514,
+     "c_minus_a_change": 0.0153,
+     "tilt_to_ecliptic_deg": 1.572
+    }
+   ]
+  },
+  "soft": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 6.777,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.72,
+     "sub_earth_lon_deg": 5.37,
+     "face_move_deg": 8.59,
+     "b_minus_a_change": 0.3041,
+     "c_minus_a_change": 0.024,
+     "tilt_to_ecliptic_deg": 1.589
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 5.851,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 5.79,
+     "sub_earth_lon_deg": 4.79,
+     "face_move_deg": 7.5,
+     "b_minus_a_change": 0.2526,
+     "c_minus_a_change": 0.0168,
+     "tilt_to_ecliptic_deg": 1.575
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 3.685,
+     "pole_toward_lon_deg": -166.3,
+     "sub_earth_lat_deg": 3.62,
+     "sub_earth_lon_deg": 3.26,
+     "face_move_deg": 4.87,
+     "b_minus_a_change": 0.1446,
+     "c_minus_a_change": 0.005,
+     "tilt_to_ecliptic_deg": 1.551
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 1.897,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.79,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0693,
+     "c_minus_a_change": 0.0004,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 1.892,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 1.892,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 1.892,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 1.892,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 1.892,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 1.892,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    }
+   ],
+   "seas_lakes_and_pores": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 6.777,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.72,
+     "sub_earth_lon_deg": 5.37,
+     "face_move_deg": 8.59,
+     "b_minus_a_change": 0.3042,
+     "c_minus_a_change": 0.024,
+     "tilt_to_ecliptic_deg": 1.589
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 5.852,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 5.79,
+     "sub_earth_lon_deg": 4.79,
+     "face_move_deg": 7.5,
+     "b_minus_a_change": 0.2527,
+     "c_minus_a_change": 0.0172,
+     "tilt_to_ecliptic_deg": 1.576
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 3.687,
+     "pole_toward_lon_deg": -166.3,
+     "sub_earth_lat_deg": 3.63,
+     "sub_earth_lon_deg": 3.26,
+     "face_move_deg": 4.88,
+     "b_minus_a_change": 0.1448,
+     "c_minus_a_change": 0.0063,
+     "tilt_to_ecliptic_deg": 1.554
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 1.867,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.82,
+     "sub_earth_lon_deg": 1.75,
+     "face_move_deg": 2.53,
+     "b_minus_a_change": 0.0732,
+     "c_minus_a_change": 0.0272,
+     "tilt_to_ecliptic_deg": 1.596
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 2.134,
+     "pole_toward_lon_deg": -170.6,
+     "sub_earth_lat_deg": 2.12,
+     "sub_earth_lon_deg": 1.86,
+     "face_move_deg": 2.82,
+     "b_minus_a_change": 0.0818,
+     "c_minus_a_change": 0.0626,
+     "tilt_to_ecliptic_deg": 1.668
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 2.254,
+     "pole_toward_lon_deg": -167.5,
+     "sub_earth_lat_deg": 2.22,
+     "sub_earth_lon_deg": 1.88,
+     "face_move_deg": 2.9,
+     "b_minus_a_change": 0.0785,
+     "c_minus_a_change": 0.0849,
+     "tilt_to_ecliptic_deg": 1.715
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 2.298,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 2.25,
+     "sub_earth_lon_deg": 1.79,
+     "face_move_deg": 2.88,
+     "b_minus_a_change": 0.0777,
+     "c_minus_a_change": 0.0662,
+     "tilt_to_ecliptic_deg": 1.676
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0011,
+     "tilt_to_ecliptic_deg": 1.543
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0011,
+     "tilt_to_ecliptic_deg": 1.543
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0011,
+     "tilt_to_ecliptic_deg": 1.543
+    }
+   ],
+   "seas_and_lakes_without_bulge": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.013,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.3792,
+     "c_minus_a_change": 0.0358,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 6.705,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 6.64,
+     "sub_earth_lon_deg": 5.27,
+     "face_move_deg": 8.47,
+     "b_minus_a_change": 0.3033,
+     "c_minus_a_change": 0.0236,
+     "tilt_to_ecliptic_deg": 1.588
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 5.748,
+     "pole_toward_lon_deg": -166.5,
+     "sub_earth_lat_deg": 5.68,
+     "sub_earth_lon_deg": 4.64,
+     "face_move_deg": 7.33,
+     "b_minus_a_change": 0.2515,
+     "c_minus_a_change": 0.0163,
+     "tilt_to_ecliptic_deg": 1.574
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 3.55,
+     "pole_toward_lon_deg": -165.9,
+     "sub_earth_lat_deg": 3.48,
+     "sub_earth_lon_deg": 3.04,
+     "face_move_deg": 4.62,
+     "b_minus_a_change": 0.1439,
+     "c_minus_a_change": 0.0047,
+     "tilt_to_ecliptic_deg": 1.55
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 1.811,
+     "pole_toward_lon_deg": -165.5,
+     "sub_earth_lat_deg": 1.77,
+     "sub_earth_lon_deg": 1.62,
+     "face_move_deg": 2.4,
+     "b_minus_a_change": 0.069,
+     "c_minus_a_change": 0.0002,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 1.806,
+     "pole_toward_lon_deg": -165.5,
+     "sub_earth_lat_deg": 1.76,
+     "sub_earth_lon_deg": 1.62,
+     "face_move_deg": 2.39,
+     "b_minus_a_change": 0.0688,
+     "c_minus_a_change": 0.0002,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 1.806,
+     "pole_toward_lon_deg": -165.5,
+     "sub_earth_lat_deg": 1.76,
+     "sub_earth_lon_deg": 1.62,
+     "face_move_deg": 2.39,
+     "b_minus_a_change": 0.0688,
+     "c_minus_a_change": 0.0002,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 1.806,
+     "pole_toward_lon_deg": -165.5,
+     "sub_earth_lat_deg": 1.76,
+     "sub_earth_lon_deg": 1.62,
+     "face_move_deg": 2.39,
+     "b_minus_a_change": 0.0688,
+     "c_minus_a_change": 0.0002,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 1.806,
+     "pole_toward_lon_deg": -165.5,
+     "sub_earth_lat_deg": 1.76,
+     "sub_earth_lon_deg": 1.62,
+     "face_move_deg": 2.39,
+     "b_minus_a_change": 0.0688,
+     "c_minus_a_change": 0.0002,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 1.806,
+     "pole_toward_lon_deg": -165.5,
+     "sub_earth_lat_deg": 1.76,
+     "sub_earth_lon_deg": 1.62,
+     "face_move_deg": 2.39,
+     "b_minus_a_change": 0.0688,
+     "c_minus_a_change": 0.0002,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 1.806,
+     "pole_toward_lon_deg": -165.5,
+     "sub_earth_lat_deg": 1.76,
+     "sub_earth_lon_deg": 1.62,
+     "face_move_deg": 2.39,
+     "b_minus_a_change": 0.0688,
+     "c_minus_a_change": 0.0002,
+     "tilt_to_ecliptic_deg": 1.542
+    }
+   ],
+   "seas_and_lakes_with_sea_level_feedback": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.035,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.98,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.03,
+     "b_minus_a_change": 0.3799,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 6.906,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.84,
+     "sub_earth_lon_deg": 5.4,
+     "face_move_deg": 8.71,
+     "b_minus_a_change": 0.3095,
+     "c_minus_a_change": 0.0242,
+     "tilt_to_ecliptic_deg": 1.59
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 6.079,
+     "pole_toward_lon_deg": -166.5,
+     "sub_earth_lat_deg": 6.01,
+     "sub_earth_lon_deg": 4.85,
+     "face_move_deg": 7.72,
+     "b_minus_a_change": 0.2615,
+     "c_minus_a_change": 0.0169,
+     "tilt_to_ecliptic_deg": 1.575
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 4.021,
+     "pole_toward_lon_deg": -165.8,
+     "sub_earth_lat_deg": 3.95,
+     "sub_earth_lon_deg": 3.37,
+     "face_move_deg": 5.19,
+     "b_minus_a_change": 0.1561,
+     "c_minus_a_change": 0.0043,
+     "tilt_to_ecliptic_deg": 1.55
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 2.156,
+     "pole_toward_lon_deg": -165.4,
+     "sub_earth_lat_deg": 2.1,
+     "sub_earth_lon_deg": 1.89,
+     "face_move_deg": 2.82,
+     "b_minus_a_change": 0.0771,
+     "c_minus_a_change": -0.0007,
+     "tilt_to_ecliptic_deg": 1.54
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 2.163,
+     "pole_toward_lon_deg": -165.4,
+     "sub_earth_lat_deg": 2.11,
+     "sub_earth_lon_deg": 1.88,
+     "face_move_deg": 2.83,
+     "b_minus_a_change": 0.0773,
+     "c_minus_a_change": -0.0008,
+     "tilt_to_ecliptic_deg": 1.54
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 2.163,
+     "pole_toward_lon_deg": -165.4,
+     "sub_earth_lat_deg": 2.11,
+     "sub_earth_lon_deg": 1.88,
+     "face_move_deg": 2.83,
+     "b_minus_a_change": 0.0773,
+     "c_minus_a_change": -0.0008,
+     "tilt_to_ecliptic_deg": 1.54
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 2.163,
+     "pole_toward_lon_deg": -165.4,
+     "sub_earth_lat_deg": 2.11,
+     "sub_earth_lon_deg": 1.88,
+     "face_move_deg": 2.83,
+     "b_minus_a_change": 0.0773,
+     "c_minus_a_change": -0.0008,
+     "tilt_to_ecliptic_deg": 1.54
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 2.163,
+     "pole_toward_lon_deg": -165.4,
+     "sub_earth_lat_deg": 2.11,
+     "sub_earth_lon_deg": 1.88,
+     "face_move_deg": 2.83,
+     "b_minus_a_change": 0.0773,
+     "c_minus_a_change": -0.0008,
+     "tilt_to_ecliptic_deg": 1.54
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 2.163,
+     "pole_toward_lon_deg": -165.4,
+     "sub_earth_lat_deg": 2.11,
+     "sub_earth_lon_deg": 1.88,
+     "face_move_deg": 2.83,
+     "b_minus_a_change": 0.0773,
+     "c_minus_a_change": -0.0008,
+     "tilt_to_ecliptic_deg": 1.54
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 2.163,
+     "pole_toward_lon_deg": -165.4,
+     "sub_earth_lat_deg": 2.11,
+     "sub_earth_lon_deg": 1.88,
+     "face_move_deg": 2.83,
+     "b_minus_a_change": 0.0773,
+     "c_minus_a_change": -0.0008,
+     "tilt_to_ecliptic_deg": 1.54
+    }
+   ]
+  },
+  "stiff": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 8.015,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.379,
+     "c_minus_a_change": 0.0358,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 8.013,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.3788,
+     "c_minus_a_change": 0.0358,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.999,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.94,
+     "sub_earth_lon_deg": 6.08,
+     "face_move_deg": 9.99,
+     "b_minus_a_change": 0.378,
+     "c_minus_a_change": 0.0356,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.966,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.91,
+     "sub_earth_lon_deg": 6.06,
+     "face_move_deg": 9.96,
+     "b_minus_a_change": 0.3759,
+     "c_minus_a_change": 0.0353,
+     "tilt_to_ecliptic_deg": 1.612
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.911,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.86,
+     "sub_earth_lon_deg": 6.03,
+     "face_move_deg": 9.89,
+     "b_minus_a_change": 0.3724,
+     "c_minus_a_change": 0.0347,
+     "tilt_to_ecliptic_deg": 1.611
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.833,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.78,
+     "sub_earth_lon_deg": 5.99,
+     "face_move_deg": 9.81,
+     "b_minus_a_change": 0.3676,
+     "c_minus_a_change": 0.0339,
+     "tilt_to_ecliptic_deg": 1.609
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.737,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.68,
+     "sub_earth_lon_deg": 5.94,
+     "face_move_deg": 9.7,
+     "b_minus_a_change": 0.3616,
+     "c_minus_a_change": 0.0329,
+     "tilt_to_ecliptic_deg": 1.607
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 7.624,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.57,
+     "sub_earth_lon_deg": 5.87,
+     "face_move_deg": 9.57,
+     "b_minus_a_change": 0.3546,
+     "c_minus_a_change": 0.0318,
+     "tilt_to_ecliptic_deg": 1.605
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 7.487,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.43,
+     "sub_earth_lon_deg": 5.79,
+     "face_move_deg": 9.41,
+     "b_minus_a_change": 0.3462,
+     "c_minus_a_change": 0.0304,
+     "tilt_to_ecliptic_deg": 1.602
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 7.332,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.27,
+     "sub_earth_lon_deg": 5.7,
+     "face_move_deg": 9.23,
+     "b_minus_a_change": 0.3369,
+     "c_minus_a_change": 0.029,
+     "tilt_to_ecliptic_deg": 1.599
+    }
+   ],
+   "seas_lakes_and_pores": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 8.015,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.379,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 8.012,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.379,
+     "c_minus_a_change": 0.0364,
+     "tilt_to_ecliptic_deg": 1.614
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.993,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.94,
+     "sub_earth_lon_deg": 6.08,
+     "face_move_deg": 9.99,
+     "b_minus_a_change": 0.3783,
+     "c_minus_a_change": 0.0381,
+     "tilt_to_ecliptic_deg": 1.618
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.382,
+     "pole_toward_lon_deg": -167.4,
+     "sub_earth_lat_deg": 7.33,
+     "sub_earth_lon_deg": 5.93,
+     "face_move_deg": 9.42,
+     "b_minus_a_change": 0.3852,
+     "c_minus_a_change": 0.1253,
+     "tilt_to_ecliptic_deg": 1.8
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.471,
+     "pole_toward_lon_deg": -172.6,
+     "sub_earth_lat_deg": 7.47,
+     "sub_earth_lon_deg": 6.01,
+     "face_move_deg": 9.58,
+     "b_minus_a_change": 0.4332,
+     "c_minus_a_change": 0.3131,
+     "tilt_to_ecliptic_deg": 2.227
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.409,
+     "pole_toward_lon_deg": -169.5,
+     "sub_earth_lat_deg": 7.39,
+     "sub_earth_lon_deg": 6.15,
+     "face_move_deg": 9.6,
+     "b_minus_a_change": 0.4167,
+     "c_minus_a_change": 0.4161,
+     "tilt_to_ecliptic_deg": 2.483
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.806,
+     "pole_toward_lon_deg": -168.7,
+     "sub_earth_lat_deg": 7.77,
+     "sub_earth_lon_deg": 5.87,
+     "face_move_deg": 9.73,
+     "b_minus_a_change": 0.4086,
+     "c_minus_a_change": 0.329,
+     "tilt_to_ecliptic_deg": 2.265
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 7.603,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.55,
+     "sub_earth_lon_deg": 5.87,
+     "face_move_deg": 9.55,
+     "b_minus_a_change": 0.3541,
+     "c_minus_a_change": 0.0327,
+     "tilt_to_ecliptic_deg": 1.607
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 7.467,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.41,
+     "sub_earth_lon_deg": 5.79,
+     "face_move_deg": 9.39,
+     "b_minus_a_change": 0.3461,
+     "c_minus_a_change": 0.0335,
+     "tilt_to_ecliptic_deg": 1.608
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 7.313,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.25,
+     "sub_earth_lon_deg": 5.7,
+     "face_move_deg": 9.22,
+     "b_minus_a_change": 0.3368,
+     "c_minus_a_change": 0.0321,
+     "tilt_to_ecliptic_deg": 1.606
+    }
+   ],
+   "seas_and_lakes_without_bulge": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.013,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.3792,
+     "c_minus_a_change": 0.0358,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 8.008,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.95,
+     "sub_earth_lon_deg": 6.08,
+     "face_move_deg": 10.0,
+     "b_minus_a_change": 0.3789,
+     "c_minus_a_change": 0.0358,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 8.005,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.95,
+     "sub_earth_lon_deg": 6.08,
+     "face_move_deg": 10.0,
+     "b_minus_a_change": 0.3787,
+     "c_minus_a_change": 0.0357,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.991,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.94,
+     "sub_earth_lon_deg": 6.07,
+     "face_move_deg": 9.98,
+     "b_minus_a_change": 0.3779,
+     "c_minus_a_change": 0.0356,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.955,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.9,
+     "sub_earth_lon_deg": 6.05,
+     "face_move_deg": 9.94,
+     "b_minus_a_change": 0.3757,
+     "c_minus_a_change": 0.0352,
+     "tilt_to_ecliptic_deg": 1.612
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.897,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.84,
+     "sub_earth_lon_deg": 6.02,
+     "face_move_deg": 9.87,
+     "b_minus_a_change": 0.3722,
+     "c_minus_a_change": 0.0346,
+     "tilt_to_ecliptic_deg": 1.611
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.815,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.76,
+     "sub_earth_lon_deg": 5.97,
+     "face_move_deg": 9.78,
+     "b_minus_a_change": 0.3673,
+     "c_minus_a_change": 0.0338,
+     "tilt_to_ecliptic_deg": 1.609
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.714,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.66,
+     "sub_earth_lon_deg": 5.91,
+     "face_move_deg": 9.66,
+     "b_minus_a_change": 0.3613,
+     "c_minus_a_change": 0.0328,
+     "tilt_to_ecliptic_deg": 1.607
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 7.594,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.54,
+     "sub_earth_lon_deg": 5.83,
+     "face_move_deg": 9.52,
+     "b_minus_a_change": 0.3542,
+     "c_minus_a_change": 0.0316,
+     "tilt_to_ecliptic_deg": 1.605
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 7.449,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.39,
+     "sub_earth_lon_deg": 5.74,
+     "face_move_deg": 9.35,
+     "b_minus_a_change": 0.3457,
+     "c_minus_a_change": 0.0302,
+     "tilt_to_ecliptic_deg": 1.602
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 7.287,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 7.23,
+     "sub_earth_lon_deg": 5.64,
+     "face_move_deg": 9.16,
+     "b_minus_a_change": 0.3363,
+     "c_minus_a_change": 0.0287,
+     "tilt_to_ecliptic_deg": 1.599
+    }
+   ],
+   "seas_and_lakes_with_sea_level_feedback": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.035,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.98,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.03,
+     "b_minus_a_change": 0.3799,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 8.03,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.03,
+     "b_minus_a_change": 0.3796,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 8.027,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3795,
+     "c_minus_a_change": 0.0358,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 8.014,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.3786,
+     "c_minus_a_change": 0.0357,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.981,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.93,
+     "sub_earth_lon_deg": 6.07,
+     "face_move_deg": 9.97,
+     "b_minus_a_change": 0.3766,
+     "c_minus_a_change": 0.0353,
+     "tilt_to_ecliptic_deg": 1.612
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.928,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.87,
+     "sub_earth_lon_deg": 6.04,
+     "face_move_deg": 9.91,
+     "b_minus_a_change": 0.3732,
+     "c_minus_a_change": 0.0348,
+     "tilt_to_ecliptic_deg": 1.611
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.855,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.8,
+     "sub_earth_lon_deg": 6.0,
+     "face_move_deg": 9.83,
+     "b_minus_a_change": 0.3685,
+     "c_minus_a_change": 0.034,
+     "tilt_to_ecliptic_deg": 1.609
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.765,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.71,
+     "sub_earth_lon_deg": 5.94,
+     "face_move_deg": 9.72,
+     "b_minus_a_change": 0.3628,
+     "c_minus_a_change": 0.033,
+     "tilt_to_ecliptic_deg": 1.607
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 7.661,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.6,
+     "sub_earth_lon_deg": 5.88,
+     "face_move_deg": 9.6,
+     "b_minus_a_change": 0.3562,
+     "c_minus_a_change": 0.0319,
+     "tilt_to_ecliptic_deg": 1.605
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 7.536,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.48,
+     "sub_earth_lon_deg": 5.8,
+     "face_move_deg": 9.46,
+     "b_minus_a_change": 0.3484,
+     "c_minus_a_change": 0.0306,
+     "tilt_to_ecliptic_deg": 1.603
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 7.399,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 7.34,
+     "sub_earth_lon_deg": 5.72,
+     "face_move_deg": 9.29,
+     "b_minus_a_change": 0.3398,
+     "c_minus_a_change": 0.0291,
+     "tilt_to_ecliptic_deg": 1.6
+    }
+   ]
+  },
+  "spa_far_50_rest_near": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.956,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.9,
+     "sub_earth_lon_deg": 6.04,
+     "face_move_deg": 9.93,
+     "b_minus_a_change": 0.3745,
+     "c_minus_a_change": 0.0344,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.895,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.84,
+     "sub_earth_lon_deg": 5.99,
+     "face_move_deg": 9.85,
+     "b_minus_a_change": 0.3702,
+     "c_minus_a_change": 0.0334,
+     "tilt_to_ecliptic_deg": 1.608
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.807,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.75,
+     "sub_earth_lon_deg": 5.92,
+     "face_move_deg": 9.74,
+     "b_minus_a_change": 0.3642,
+     "c_minus_a_change": 0.032,
+     "tilt_to_ecliptic_deg": 1.605
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.693,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.63,
+     "sub_earth_lon_deg": 5.84,
+     "face_move_deg": 9.6,
+     "b_minus_a_change": 0.3565,
+     "c_minus_a_change": 0.0302,
+     "tilt_to_ecliptic_deg": 1.602
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.549,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 7.49,
+     "sub_earth_lon_deg": 5.72,
+     "face_move_deg": 9.42,
+     "b_minus_a_change": 0.3468,
+     "c_minus_a_change": 0.0279,
+     "tilt_to_ecliptic_deg": 1.597
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.371,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 7.31,
+     "sub_earth_lon_deg": 5.57,
+     "face_move_deg": 9.18,
+     "b_minus_a_change": 0.3347,
+     "c_minus_a_change": 0.0249,
+     "tilt_to_ecliptic_deg": 1.591
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.144,
+     "pole_toward_lon_deg": -166.6,
+     "sub_earth_lat_deg": 7.07,
+     "sub_earth_lon_deg": 5.37,
+     "face_move_deg": 8.87,
+     "b_minus_a_change": 0.3193,
+     "c_minus_a_change": 0.0208,
+     "tilt_to_ecliptic_deg": 1.583
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 6.855,
+     "pole_toward_lon_deg": -166.4,
+     "sub_earth_lat_deg": 6.78,
+     "sub_earth_lon_deg": 5.11,
+     "face_move_deg": 8.48,
+     "b_minus_a_change": 0.3002,
+     "c_minus_a_change": 0.0159,
+     "tilt_to_ecliptic_deg": 1.573
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.484,
+     "pole_toward_lon_deg": -166.1,
+     "sub_earth_lat_deg": 6.4,
+     "sub_earth_lon_deg": 4.77,
+     "face_move_deg": 7.98,
+     "b_minus_a_change": 0.277,
+     "c_minus_a_change": 0.0102,
+     "tilt_to_ecliptic_deg": 1.562
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 6.04,
+     "pole_toward_lon_deg": -165.8,
+     "sub_earth_lat_deg": 5.95,
+     "sub_earth_lon_deg": 4.31,
+     "face_move_deg": 7.34,
+     "b_minus_a_change": 0.2492,
+     "c_minus_a_change": 0.0025,
+     "tilt_to_ecliptic_deg": 1.546
+    }
+   ]
+  },
+  "spa_far_75_rest_near": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.964,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.91,
+     "sub_earth_lon_deg": 6.03,
+     "face_move_deg": 9.93,
+     "b_minus_a_change": 0.3746,
+     "c_minus_a_change": 0.0342,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.909,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.85,
+     "sub_earth_lon_deg": 5.98,
+     "face_move_deg": 9.86,
+     "b_minus_a_change": 0.3704,
+     "c_minus_a_change": 0.0329,
+     "tilt_to_ecliptic_deg": 1.607
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.827,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.77,
+     "sub_earth_lon_deg": 5.91,
+     "face_move_deg": 9.75,
+     "b_minus_a_change": 0.3646,
+     "c_minus_a_change": 0.0314,
+     "tilt_to_ecliptic_deg": 1.604
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.721,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 7.66,
+     "sub_earth_lon_deg": 5.81,
+     "face_move_deg": 9.61,
+     "b_minus_a_change": 0.357,
+     "c_minus_a_change": 0.0294,
+     "tilt_to_ecliptic_deg": 1.6
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.587,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 7.52,
+     "sub_earth_lon_deg": 5.69,
+     "face_move_deg": 9.42,
+     "b_minus_a_change": 0.3475,
+     "c_minus_a_change": 0.0267,
+     "tilt_to_ecliptic_deg": 1.595
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.421,
+     "pole_toward_lon_deg": -166.6,
+     "sub_earth_lat_deg": 7.35,
+     "sub_earth_lon_deg": 5.52,
+     "face_move_deg": 9.19,
+     "b_minus_a_change": 0.3354,
+     "c_minus_a_change": 0.023,
+     "tilt_to_ecliptic_deg": 1.587
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.213,
+     "pole_toward_lon_deg": -166.4,
+     "sub_earth_lat_deg": 7.14,
+     "sub_earth_lon_deg": 5.29,
+     "face_move_deg": 8.88,
+     "b_minus_a_change": 0.3201,
+     "c_minus_a_change": 0.0181,
+     "tilt_to_ecliptic_deg": 1.577
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 6.953,
+     "pole_toward_lon_deg": -166.2,
+     "sub_earth_lat_deg": 6.87,
+     "sub_earth_lon_deg": 5.0,
+     "face_move_deg": 8.49,
+     "b_minus_a_change": 0.3016,
+     "c_minus_a_change": 0.0122,
+     "tilt_to_ecliptic_deg": 1.566
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.618,
+     "pole_toward_lon_deg": -165.8,
+     "sub_earth_lat_deg": 6.53,
+     "sub_earth_lon_deg": 4.63,
+     "face_move_deg": 7.99,
+     "b_minus_a_change": 0.2786,
+     "c_minus_a_change": 0.005,
+     "tilt_to_ecliptic_deg": 1.551
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 6.19,
+     "pole_toward_lon_deg": -165.2,
+     "sub_earth_lat_deg": 6.08,
+     "sub_earth_lon_deg": 4.04,
+     "face_move_deg": 7.3,
+     "b_minus_a_change": 0.2489,
+     "c_minus_a_change": -0.006,
+     "tilt_to_ecliptic_deg": 1.529
+    }
+   ]
+  },
+  "spa_far_100_rest_near": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.971,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.91,
+     "sub_earth_lon_deg": 6.02,
+     "face_move_deg": 9.93,
+     "b_minus_a_change": 0.3746,
+     "c_minus_a_change": 0.0338,
+     "tilt_to_ecliptic_deg": 1.609
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.921,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.86,
+     "sub_earth_lon_deg": 5.96,
+     "face_move_deg": 9.86,
+     "b_minus_a_change": 0.3706,
+     "c_minus_a_change": 0.0325,
+     "tilt_to_ecliptic_deg": 1.606
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.846,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 7.79,
+     "sub_earth_lon_deg": 5.89,
+     "face_move_deg": 9.75,
+     "b_minus_a_change": 0.3648,
+     "c_minus_a_change": 0.0307,
+     "tilt_to_ecliptic_deg": 1.603
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.746,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 7.68,
+     "sub_earth_lon_deg": 5.79,
+     "face_move_deg": 9.61,
+     "b_minus_a_change": 0.3573,
+     "c_minus_a_change": 0.0284,
+     "tilt_to_ecliptic_deg": 1.598
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.62,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 7.55,
+     "sub_earth_lon_deg": 5.65,
+     "face_move_deg": 9.42,
+     "b_minus_a_change": 0.3477,
+     "c_minus_a_change": 0.0253,
+     "tilt_to_ecliptic_deg": 1.592
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.463,
+     "pole_toward_lon_deg": -166.5,
+     "sub_earth_lat_deg": 7.39,
+     "sub_earth_lon_deg": 5.46,
+     "face_move_deg": 9.18,
+     "b_minus_a_change": 0.3354,
+     "c_minus_a_change": 0.0209,
+     "tilt_to_ecliptic_deg": 1.583
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.271,
+     "pole_toward_lon_deg": -166.2,
+     "sub_earth_lat_deg": 7.19,
+     "sub_earth_lon_deg": 5.21,
+     "face_move_deg": 8.87,
+     "b_minus_a_change": 0.3201,
+     "c_minus_a_change": 0.0152,
+     "tilt_to_ecliptic_deg": 1.571
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 7.033,
+     "pole_toward_lon_deg": -165.9,
+     "sub_earth_lat_deg": 6.94,
+     "sub_earth_lon_deg": 4.88,
+     "face_move_deg": 8.48,
+     "b_minus_a_change": 0.3017,
+     "c_minus_a_change": 0.0082,
+     "tilt_to_ecliptic_deg": 1.557
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.723,
+     "pole_toward_lon_deg": -165.4,
+     "sub_earth_lat_deg": 6.62,
+     "sub_earth_lon_deg": 4.42,
+     "face_move_deg": 7.95,
+     "b_minus_a_change": 0.2779,
+     "c_minus_a_change": -0.0014,
+     "tilt_to_ecliptic_deg": 1.538
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 6.302,
+     "pole_toward_lon_deg": -164.5,
+     "sub_earth_lat_deg": 6.17,
+     "sub_earth_lon_deg": 3.67,
+     "face_move_deg": 7.17,
+     "b_minus_a_change": 0.2453,
+     "c_minus_a_change": -0.0164,
+     "tilt_to_ecliptic_deg": 1.509
+    }
+   ]
+  },
+  "sensitivity_profile_cool": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 8.009,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.95,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.3786,
+     "c_minus_a_change": 0.0357,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.986,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.93,
+     "sub_earth_lon_deg": 6.08,
+     "face_move_deg": 9.98,
+     "b_minus_a_change": 0.3771,
+     "c_minus_a_change": 0.0355,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.941,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.89,
+     "sub_earth_lon_deg": 6.05,
+     "face_move_deg": 9.93,
+     "b_minus_a_change": 0.3743,
+     "c_minus_a_change": 0.035,
+     "tilt_to_ecliptic_deg": 1.612
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.872,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.82,
+     "sub_earth_lon_deg": 6.01,
+     "face_move_deg": 9.85,
+     "b_minus_a_change": 0.37,
+     "c_minus_a_change": 0.0343,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.783,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.73,
+     "sub_earth_lon_deg": 5.96,
+     "face_move_deg": 9.75,
+     "b_minus_a_change": 0.3644,
+     "c_minus_a_change": 0.0334,
+     "tilt_to_ecliptic_deg": 1.608
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.677,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.62,
+     "sub_earth_lon_deg": 5.9,
+     "face_move_deg": 9.63,
+     "b_minus_a_change": 0.3579,
+     "c_minus_a_change": 0.0323,
+     "tilt_to_ecliptic_deg": 1.606
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.549,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.49,
+     "sub_earth_lon_deg": 5.83,
+     "face_move_deg": 9.48,
+     "b_minus_a_change": 0.35,
+     "c_minus_a_change": 0.0311,
+     "tilt_to_ecliptic_deg": 1.604
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 7.401,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.34,
+     "sub_earth_lon_deg": 5.74,
+     "face_move_deg": 9.31,
+     "b_minus_a_change": 0.341,
+     "c_minus_a_change": 0.0296,
+     "tilt_to_ecliptic_deg": 1.601
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 7.234,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.17,
+     "sub_earth_lon_deg": 5.64,
+     "face_move_deg": 9.12,
+     "b_minus_a_change": 0.331,
+     "c_minus_a_change": 0.028,
+     "tilt_to_ecliptic_deg": 1.597
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 7.041,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.98,
+     "sub_earth_lon_deg": 5.53,
+     "face_move_deg": 8.9,
+     "b_minus_a_change": 0.3196,
+     "c_minus_a_change": 0.0263,
+     "tilt_to_ecliptic_deg": 1.594
+    }
+   ]
+  },
+  "sensitivity_profile_warm": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.938,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.88,
+     "sub_earth_lon_deg": 6.05,
+     "face_move_deg": 9.93,
+     "b_minus_a_change": 0.3741,
+     "c_minus_a_change": 0.035,
+     "tilt_to_ecliptic_deg": 1.612
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.817,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.76,
+     "sub_earth_lon_deg": 5.98,
+     "face_move_deg": 9.79,
+     "b_minus_a_change": 0.3665,
+     "c_minus_a_change": 0.0337,
+     "tilt_to_ecliptic_deg": 1.609
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.59,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.53,
+     "sub_earth_lon_deg": 5.85,
+     "face_move_deg": 9.53,
+     "b_minus_a_change": 0.3525,
+     "c_minus_a_change": 0.0315,
+     "tilt_to_ecliptic_deg": 1.604
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.185,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.13,
+     "sub_earth_lon_deg": 5.61,
+     "face_move_deg": 9.06,
+     "b_minus_a_change": 0.3281,
+     "c_minus_a_change": 0.0276,
+     "tilt_to_ecliptic_deg": 1.597
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 6.499,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.44,
+     "sub_earth_lon_deg": 5.2,
+     "face_move_deg": 8.27,
+     "b_minus_a_change": 0.2883,
+     "c_minus_a_change": 0.0217,
+     "tilt_to_ecliptic_deg": 1.585
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 5.006,
+     "pole_toward_lon_deg": -166.5,
+     "sub_earth_lat_deg": 4.94,
+     "sub_earth_lon_deg": 4.22,
+     "face_move_deg": 6.49,
+     "b_minus_a_change": 0.2083,
+     "c_minus_a_change": 0.0113,
+     "tilt_to_ecliptic_deg": 1.564
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 2.212,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 2.16,
+     "sub_earth_lon_deg": 2.07,
+     "face_move_deg": 3.0,
+     "b_minus_a_change": 0.0813,
+     "c_minus_a_change": 0.0008,
+     "tilt_to_ecliptic_deg": 1.543
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 1.89,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.069,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 1.89,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.069,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 1.89,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.069,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    }
+   ]
+  },
+  "sensitivity_wet": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.701,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.64,
+     "sub_earth_lon_deg": 5.92,
+     "face_move_deg": 9.66,
+     "b_minus_a_change": 0.3594,
+     "c_minus_a_change": 0.0326,
+     "tilt_to_ecliptic_deg": 1.607
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.582,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.52,
+     "sub_earth_lon_deg": 5.85,
+     "face_move_deg": 9.52,
+     "b_minus_a_change": 0.3521,
+     "c_minus_a_change": 0.0314,
+     "tilt_to_ecliptic_deg": 1.604
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.439,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.38,
+     "sub_earth_lon_deg": 5.76,
+     "face_move_deg": 9.35,
+     "b_minus_a_change": 0.3433,
+     "c_minus_a_change": 0.03,
+     "tilt_to_ecliptic_deg": 1.601
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.261,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.2,
+     "sub_earth_lon_deg": 5.66,
+     "face_move_deg": 9.15,
+     "b_minus_a_change": 0.3327,
+     "c_minus_a_change": 0.0283,
+     "tilt_to_ecliptic_deg": 1.598
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.034,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.97,
+     "sub_earth_lon_deg": 5.52,
+     "face_move_deg": 8.89,
+     "b_minus_a_change": 0.3192,
+     "c_minus_a_change": 0.0262,
+     "tilt_to_ecliptic_deg": 1.594
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 6.732,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.67,
+     "sub_earth_lon_deg": 5.34,
+     "face_move_deg": 8.54,
+     "b_minus_a_change": 0.3016,
+     "c_minus_a_change": 0.0236,
+     "tilt_to_ecliptic_deg": 1.588
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 6.353,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.29,
+     "sub_earth_lon_deg": 5.11,
+     "face_move_deg": 8.09,
+     "b_minus_a_change": 0.2802,
+     "c_minus_a_change": 0.0205,
+     "tilt_to_ecliptic_deg": 1.582
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 5.899,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 5.83,
+     "sub_earth_lon_deg": 4.82,
+     "face_move_deg": 7.56,
+     "b_minus_a_change": 0.2553,
+     "c_minus_a_change": 0.0171,
+     "tilt_to_ecliptic_deg": 1.575
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 5.336,
+     "pole_toward_lon_deg": -166.6,
+     "sub_earth_lat_deg": 5.27,
+     "sub_earth_lon_deg": 4.44,
+     "face_move_deg": 6.89,
+     "b_minus_a_change": 0.2255,
+     "c_minus_a_change": 0.0134,
+     "tilt_to_ecliptic_deg": 1.568
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 4.522,
+     "pole_toward_lon_deg": -166.4,
+     "sub_earth_lat_deg": 4.46,
+     "sub_earth_lon_deg": 3.87,
+     "face_move_deg": 5.9,
+     "b_minus_a_change": 0.1846,
+     "c_minus_a_change": 0.0088,
+     "tilt_to_ecliptic_deg": 1.559
+    }
+   ]
+  },
+  "sensitivity_grain_1_mm": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.845,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.79,
+     "sub_earth_lon_deg": 6.0,
+     "face_move_deg": 9.82,
+     "b_minus_a_change": 0.3683,
+     "c_minus_a_change": 0.034,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.724,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.67,
+     "sub_earth_lon_deg": 5.93,
+     "face_move_deg": 9.68,
+     "b_minus_a_change": 0.3608,
+     "c_minus_a_change": 0.0328,
+     "tilt_to_ecliptic_deg": 1.607
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.57,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.51,
+     "sub_earth_lon_deg": 5.84,
+     "face_move_deg": 9.51,
+     "b_minus_a_change": 0.3513,
+     "c_minus_a_change": 0.0313,
+     "tilt_to_ecliptic_deg": 1.604
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.379,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.32,
+     "sub_earth_lon_deg": 5.73,
+     "face_move_deg": 9.29,
+     "b_minus_a_change": 0.3397,
+     "c_minus_a_change": 0.0294,
+     "tilt_to_ecliptic_deg": 1.6
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.136,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 7.08,
+     "sub_earth_lon_deg": 5.59,
+     "face_move_deg": 9.01,
+     "b_minus_a_change": 0.3252,
+     "c_minus_a_change": 0.0271,
+     "tilt_to_ecliptic_deg": 1.596
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 6.817,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.76,
+     "sub_earth_lon_deg": 5.39,
+     "face_move_deg": 8.64,
+     "b_minus_a_change": 0.3065,
+     "c_minus_a_change": 0.0243,
+     "tilt_to_ecliptic_deg": 1.59
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 6.409,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.35,
+     "sub_earth_lon_deg": 5.14,
+     "face_move_deg": 8.16,
+     "b_minus_a_change": 0.2834,
+     "c_minus_a_change": 0.021,
+     "tilt_to_ecliptic_deg": 1.583
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 5.932,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 5.87,
+     "sub_earth_lon_deg": 4.84,
+     "face_move_deg": 7.6,
+     "b_minus_a_change": 0.2571,
+     "c_minus_a_change": 0.0174,
+     "tilt_to_ecliptic_deg": 1.576
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 5.354,
+     "pole_toward_lon_deg": -166.6,
+     "sub_earth_lat_deg": 5.29,
+     "sub_earth_lon_deg": 4.45,
+     "face_move_deg": 6.91,
+     "b_minus_a_change": 0.2265,
+     "c_minus_a_change": 0.0135,
+     "tilt_to_ecliptic_deg": 1.568
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 4.532,
+     "pole_toward_lon_deg": -166.4,
+     "sub_earth_lat_deg": 4.47,
+     "sub_earth_lon_deg": 3.88,
+     "face_move_deg": 5.92,
+     "b_minus_a_change": 0.1851,
+     "c_minus_a_change": 0.0088,
+     "tilt_to_ecliptic_deg": 1.559
+    }
+   ]
+  },
+  "sensitivity_grain_10_mm": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.945,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.89,
+     "sub_earth_lon_deg": 6.05,
+     "face_move_deg": 9.93,
+     "b_minus_a_change": 0.3746,
+     "c_minus_a_change": 0.0351,
+     "tilt_to_ecliptic_deg": 1.612
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.883,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.83,
+     "sub_earth_lon_deg": 6.02,
+     "face_move_deg": 9.86,
+     "b_minus_a_change": 0.3707,
+     "c_minus_a_change": 0.0344,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.801,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.75,
+     "sub_earth_lon_deg": 5.97,
+     "face_move_deg": 9.77,
+     "b_minus_a_change": 0.3656,
+     "c_minus_a_change": 0.0336,
+     "tilt_to_ecliptic_deg": 1.609
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.703,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.65,
+     "sub_earth_lon_deg": 5.92,
+     "face_move_deg": 9.66,
+     "b_minus_a_change": 0.3594,
+     "c_minus_a_change": 0.0326,
+     "tilt_to_ecliptic_deg": 1.607
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.583,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.53,
+     "sub_earth_lon_deg": 5.85,
+     "face_move_deg": 9.52,
+     "b_minus_a_change": 0.3521,
+     "c_minus_a_change": 0.0314,
+     "tilt_to_ecliptic_deg": 1.604
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.44,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.38,
+     "sub_earth_lon_deg": 5.76,
+     "face_move_deg": 9.36,
+     "b_minus_a_change": 0.3434,
+     "c_minus_a_change": 0.03,
+     "tilt_to_ecliptic_deg": 1.601
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.262,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.2,
+     "sub_earth_lon_deg": 5.66,
+     "face_move_deg": 9.15,
+     "b_minus_a_change": 0.3327,
+     "c_minus_a_change": 0.0283,
+     "tilt_to_ecliptic_deg": 1.598
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 7.034,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.97,
+     "sub_earth_lon_deg": 5.52,
+     "face_move_deg": 8.89,
+     "b_minus_a_change": 0.3192,
+     "c_minus_a_change": 0.0262,
+     "tilt_to_ecliptic_deg": 1.594
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.732,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.67,
+     "sub_earth_lon_deg": 5.34,
+     "face_move_deg": 8.54,
+     "b_minus_a_change": 0.3016,
+     "c_minus_a_change": 0.0236,
+     "tilt_to_ecliptic_deg": 1.588
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 6.352,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.29,
+     "sub_earth_lon_deg": 5.11,
+     "face_move_deg": 8.09,
+     "b_minus_a_change": 0.2801,
+     "c_minus_a_change": 0.0205,
+     "tilt_to_ecliptic_deg": 1.582
+    }
+   ]
+  },
+  "sensitivity_stress_0.3_mpa": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.961,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.91,
+     "sub_earth_lon_deg": 6.06,
+     "face_move_deg": 9.95,
+     "b_minus_a_change": 0.3755,
+     "c_minus_a_change": 0.0352,
+     "tilt_to_ecliptic_deg": 1.612
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.887,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.83,
+     "sub_earth_lon_deg": 6.02,
+     "face_move_deg": 9.87,
+     "b_minus_a_change": 0.3709,
+     "c_minus_a_change": 0.0345,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.78,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.72,
+     "sub_earth_lon_deg": 5.96,
+     "face_move_deg": 9.74,
+     "b_minus_a_change": 0.3642,
+     "c_minus_a_change": 0.0334,
+     "tilt_to_ecliptic_deg": 1.608
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.641,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.58,
+     "sub_earth_lon_deg": 5.88,
+     "face_move_deg": 9.59,
+     "b_minus_a_change": 0.3556,
+     "c_minus_a_change": 0.032,
+     "tilt_to_ecliptic_deg": 1.605
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.467,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.41,
+     "sub_earth_lon_deg": 5.78,
+     "face_move_deg": 9.39,
+     "b_minus_a_change": 0.345,
+     "c_minus_a_change": 0.0302,
+     "tilt_to_ecliptic_deg": 1.602
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.248,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.19,
+     "sub_earth_lon_deg": 5.65,
+     "face_move_deg": 9.14,
+     "b_minus_a_change": 0.3319,
+     "c_minus_a_change": 0.0282,
+     "tilt_to_ecliptic_deg": 1.598
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 6.965,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.9,
+     "sub_earth_lon_deg": 5.48,
+     "face_move_deg": 8.81,
+     "b_minus_a_change": 0.3152,
+     "c_minus_a_change": 0.0256,
+     "tilt_to_ecliptic_deg": 1.593
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 6.593,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.53,
+     "sub_earth_lon_deg": 5.26,
+     "face_move_deg": 8.38,
+     "b_minus_a_change": 0.2937,
+     "c_minus_a_change": 0.0224,
+     "tilt_to_ecliptic_deg": 1.586
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.148,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 6.08,
+     "sub_earth_lon_deg": 4.98,
+     "face_move_deg": 7.85,
+     "b_minus_a_change": 0.2688,
+     "c_minus_a_change": 0.0189,
+     "tilt_to_ecliptic_deg": 1.579
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 5.624,
+     "pole_toward_lon_deg": -166.6,
+     "sub_earth_lat_deg": 5.56,
+     "sub_earth_lon_deg": 4.63,
+     "face_move_deg": 7.23,
+     "b_minus_a_change": 0.2406,
+     "c_minus_a_change": 0.0152,
+     "tilt_to_ecliptic_deg": 1.572
+    }
+   ]
+  },
+  "sensitivity_stress_3_mpa": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.867,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.81,
+     "sub_earth_lon_deg": 6.01,
+     "face_move_deg": 9.84,
+     "b_minus_a_change": 0.3697,
+     "c_minus_a_change": 0.0342,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.781,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.72,
+     "sub_earth_lon_deg": 5.96,
+     "face_move_deg": 9.75,
+     "b_minus_a_change": 0.3643,
+     "c_minus_a_change": 0.0334,
+     "tilt_to_ecliptic_deg": 1.608
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.676,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.62,
+     "sub_earth_lon_deg": 5.9,
+     "face_move_deg": 9.63,
+     "b_minus_a_change": 0.3578,
+     "c_minus_a_change": 0.0323,
+     "tilt_to_ecliptic_deg": 1.606
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.547,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.49,
+     "sub_earth_lon_deg": 5.83,
+     "face_move_deg": 9.48,
+     "b_minus_a_change": 0.3499,
+     "c_minus_a_change": 0.031,
+     "tilt_to_ecliptic_deg": 1.603
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.388,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.33,
+     "sub_earth_lon_deg": 5.73,
+     "face_move_deg": 9.3,
+     "b_minus_a_change": 0.3403,
+     "c_minus_a_change": 0.0295,
+     "tilt_to_ecliptic_deg": 1.6
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.184,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.12,
+     "sub_earth_lon_deg": 5.61,
+     "face_move_deg": 9.06,
+     "b_minus_a_change": 0.3281,
+     "c_minus_a_change": 0.0276,
+     "tilt_to_ecliptic_deg": 1.597
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 6.916,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.85,
+     "sub_earth_lon_deg": 5.45,
+     "face_move_deg": 8.75,
+     "b_minus_a_change": 0.3123,
+     "c_minus_a_change": 0.0252,
+     "tilt_to_ecliptic_deg": 1.592
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 6.558,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.5,
+     "sub_earth_lon_deg": 5.23,
+     "face_move_deg": 8.33,
+     "b_minus_a_change": 0.2917,
+     "c_minus_a_change": 0.0222,
+     "tilt_to_ecliptic_deg": 1.586
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.127,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 6.06,
+     "sub_earth_lon_deg": 4.96,
+     "face_move_deg": 7.83,
+     "b_minus_a_change": 0.2677,
+     "c_minus_a_change": 0.0188,
+     "tilt_to_ecliptic_deg": 1.579
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 5.612,
+     "pole_toward_lon_deg": -166.6,
+     "sub_earth_lat_deg": 5.55,
+     "sub_earth_lon_deg": 4.63,
+     "face_move_deg": 7.22,
+     "b_minus_a_change": 0.24,
+     "c_minus_a_change": 0.0152,
+     "tilt_to_ecliptic_deg": 1.571
+    }
+   ]
+  },
+  "sensitivity_lvz_4.5e16": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 7.935,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.88,
+     "sub_earth_lon_deg": 6.05,
+     "face_move_deg": 9.92,
+     "b_minus_a_change": 0.3739,
+     "c_minus_a_change": 0.035,
+     "tilt_to_ecliptic_deg": 1.611
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 7.86,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.8,
+     "sub_earth_lon_deg": 6.01,
+     "face_move_deg": 9.84,
+     "b_minus_a_change": 0.3692,
+     "c_minus_a_change": 0.0342,
+     "tilt_to_ecliptic_deg": 1.61
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 7.758,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.7,
+     "sub_earth_lon_deg": 5.95,
+     "face_move_deg": 9.72,
+     "b_minus_a_change": 0.3629,
+     "c_minus_a_change": 0.0331,
+     "tilt_to_ecliptic_deg": 1.608
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.625,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.57,
+     "sub_earth_lon_deg": 5.87,
+     "face_move_deg": 9.57,
+     "b_minus_a_change": 0.3547,
+     "c_minus_a_change": 0.0318,
+     "tilt_to_ecliptic_deg": 1.605
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.457,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.4,
+     "sub_earth_lon_deg": 5.77,
+     "face_move_deg": 9.38,
+     "b_minus_a_change": 0.3444,
+     "c_minus_a_change": 0.0302,
+     "tilt_to_ecliptic_deg": 1.602
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.242,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.18,
+     "sub_earth_lon_deg": 5.65,
+     "face_move_deg": 9.13,
+     "b_minus_a_change": 0.3315,
+     "c_minus_a_change": 0.0281,
+     "tilt_to_ecliptic_deg": 1.598
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 6.961,
+     "pole_toward_lon_deg": -166.9,
+     "sub_earth_lat_deg": 6.9,
+     "sub_earth_lon_deg": 5.48,
+     "face_move_deg": 8.8,
+     "b_minus_a_change": 0.3149,
+     "c_minus_a_change": 0.0256,
+     "tilt_to_ecliptic_deg": 1.592
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 6.591,
+     "pole_toward_lon_deg": -166.8,
+     "sub_earth_lat_deg": 6.53,
+     "sub_earth_lon_deg": 5.25,
+     "face_move_deg": 8.37,
+     "b_minus_a_change": 0.2936,
+     "c_minus_a_change": 0.0224,
+     "tilt_to_ecliptic_deg": 1.586
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.146,
+     "pole_toward_lon_deg": -166.7,
+     "sub_earth_lat_deg": 6.08,
+     "sub_earth_lon_deg": 4.98,
+     "face_move_deg": 7.85,
+     "b_minus_a_change": 0.2687,
+     "c_minus_a_change": 0.0189,
+     "tilt_to_ecliptic_deg": 1.579
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 5.623,
+     "pole_toward_lon_deg": -166.6,
+     "sub_earth_lat_deg": 5.56,
+     "sub_earth_lon_deg": 4.63,
+     "face_move_deg": 7.23,
+     "b_minus_a_change": 0.2405,
+     "c_minus_a_change": 0.0152,
+     "tilt_to_ecliptic_deg": 1.572
+    }
+   ]
+  },
+  "sensitivity_soft_near_75": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 5.408,
+     "pole_toward_lon_deg": -166.6,
+     "sub_earth_lat_deg": 5.34,
+     "sub_earth_lon_deg": 4.5,
+     "face_move_deg": 6.98,
+     "b_minus_a_change": 0.2287,
+     "c_minus_a_change": 0.0137,
+     "tilt_to_ecliptic_deg": 1.569
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 2.631,
+     "pole_toward_lon_deg": -166.1,
+     "sub_earth_lat_deg": 2.58,
+     "sub_earth_lon_deg": 2.43,
+     "face_move_deg": 3.54,
+     "b_minus_a_change": 0.0983,
+     "c_minus_a_change": 0.0017,
+     "tilt_to_ecliptic_deg": 1.544
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 1.891,
+     "pole_toward_lon_deg": -166.0,
+     "sub_earth_lat_deg": 1.85,
+     "sub_earth_lon_deg": 1.78,
+     "face_move_deg": 2.57,
+     "b_minus_a_change": 0.0691,
+     "c_minus_a_change": 0.0003,
+     "tilt_to_ecliptic_deg": 1.542
+    }
+   ]
+  },
+  "sensitivity_stiff_far_75": {
+   "seas_and_lakes": [
+    {
+     "years": 0.0,
+     "pole_deg": 8.02,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.97,
+     "sub_earth_lon_deg": 6.1,
+     "face_move_deg": 10.02,
+     "b_minus_a_change": 0.3793,
+     "c_minus_a_change": 0.0359,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1.0,
+     "pole_deg": 8.016,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.379,
+     "c_minus_a_change": 0.0358,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 10.0,
+     "pole_deg": 8.015,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.379,
+     "c_minus_a_change": 0.0358,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 100.0,
+     "pole_deg": 8.011,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.96,
+     "sub_earth_lon_deg": 6.09,
+     "face_move_deg": 10.01,
+     "b_minus_a_change": 0.3787,
+     "c_minus_a_change": 0.0358,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 7.993,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.94,
+     "sub_earth_lon_deg": 6.08,
+     "face_move_deg": 9.99,
+     "b_minus_a_change": 0.3775,
+     "c_minus_a_change": 0.0356,
+     "tilt_to_ecliptic_deg": 1.613
+    },
+    {
+     "years": 10000.0,
+     "pole_deg": 7.956,
+     "pole_toward_lon_deg": -167.2,
+     "sub_earth_lat_deg": 7.9,
+     "sub_earth_lon_deg": 6.06,
+     "face_move_deg": 9.94,
+     "b_minus_a_change": 0.3752,
+     "c_minus_a_change": 0.0352,
+     "tilt_to_ecliptic_deg": 1.612
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 7.9,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.84,
+     "sub_earth_lon_deg": 6.03,
+     "face_move_deg": 9.88,
+     "b_minus_a_change": 0.3717,
+     "c_minus_a_change": 0.0346,
+     "tilt_to_ecliptic_deg": 1.611
+    },
+    {
+     "years": 1000000.0,
+     "pole_deg": 7.826,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.77,
+     "sub_earth_lon_deg": 5.99,
+     "face_move_deg": 9.8,
+     "b_minus_a_change": 0.3671,
+     "c_minus_a_change": 0.0338,
+     "tilt_to_ecliptic_deg": 1.609
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 7.74,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.68,
+     "sub_earth_lon_deg": 5.94,
+     "face_move_deg": 9.7,
+     "b_minus_a_change": 0.3617,
+     "c_minus_a_change": 0.0329,
+     "tilt_to_ecliptic_deg": 1.607
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 7.641,
+     "pole_toward_lon_deg": -167.1,
+     "sub_earth_lat_deg": 7.58,
+     "sub_earth_lon_deg": 5.88,
+     "face_move_deg": 9.59,
+     "b_minus_a_change": 0.3557,
+     "c_minus_a_change": 0.032,
+     "tilt_to_ecliptic_deg": 1.605
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 7.525,
+     "pole_toward_lon_deg": -167.0,
+     "sub_earth_lat_deg": 7.47,
+     "sub_earth_lon_deg": 5.81,
+     "face_move_deg": 9.45,
+     "b_minus_a_change": 0.3485,
+     "c_minus_a_change": 0.0308,
+     "tilt_to_ecliptic_deg": 1.603
+    }
+   ]
+  }
+ },
+ "seconds": 414
+}
