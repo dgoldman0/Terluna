@@ -380,6 +380,8 @@ The author's direction of 11 October: count current and emerging agriculture, hy
 deserts with water extraction, in the food system. The study is
 [food systems](../research/studies/food_systems/README.md); numbers here are from it.
 
+The study's [aquatic foods](../research/studies/food_systems/aquatic_novelty.md) design fish and shellfish for the waters, from founders bred from Earth stock to cooked and raw products.
+
 38. **Rain-fed fields feed the plant-rich diet at the least cost, and the rain alone feeds 9.1–27.0 billion people
     outside a kept 30%.** A billion residents crop 141,000–401,000 km² at the crop model's yields, 2.6–7.7% of what the
     rain grows in the wet bands, for 6.3–14 W a resident of nitrogen fixation, once the crops' water need is held to

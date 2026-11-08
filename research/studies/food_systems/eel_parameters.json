@@ -1,0 +1,88 @@
+{
+  "schema": "terluna.research.eel-parameters/2",
+  "evidence": "Illustrative design assumptions for sensitivity arithmetic. Every biological rate and yield below is an assumption chosen for the arithmetic; the cited sources motivate the questions the numbers pose. The per-person cases scale these per-tonne accounts and take their gas, energy, crop and phosphorus factors from the older food study's product.",
+  "routes": "The leading route is a migration of the Moon's own: eels grow in the large fresh seas and spawn in a held seawater lake (register, 6 November). The all-freshwater life cycle stays a longer-term engineered option. Fed eel are kept in closed systems.",
+  "cohort": {
+    "harvest_live_kg": 1000.0,
+    "harvest_individual_kg": 0.25,
+    "nursery_exit_individual_kg": 0.01,
+    "glass_eel_individual_kg": 0.0002,
+    "growout_survival": 0.9,
+    "nursery_survival": 0.8,
+    "fertilization_fraction": 0.7,
+    "normal_hatch_fraction_of_fertilized": 0.6,
+    "larva_to_glass_survival": 0.01,
+    "nursery_economic_dry_fcr": 1.2,
+    "growout_economic_dry_fcr": 1.5,
+    "cut_yield_of_live": 0.65,
+    "cook_yield_of_cut": 0.8,
+    "portion_cooked_fish_kg": 0.1,
+    "feed_crude_protein_fraction_dry": 0.48,
+    "whole_fish_protein_fraction_wet": 0.18,
+    "feed_phosphorus_fraction_dry": 0.01,
+    "whole_fish_phosphorus_fraction_wet": 0.004,
+    "protein_to_nitrogen_factor": 6.25
+  },
+  "oxygen": {
+    "standing_biomass_kg": 1000.0,
+    "feed_dry_kg_per_day": 10.0,
+    "fish_respiration_mg_o2_per_kg_per_hour": 200.0,
+    "tan_n_kg_per_kg_dry_feed": 0.03,
+    "nitrified_fraction_of_tan": 1.0,
+    "other_biological_o2_kg_per_kg_dry_feed": 0.2,
+    "capacity_factor": 1.5,
+    "inlet_do_mg_per_l": 7.0,
+    "outlet_floor_do_mg_per_l": 5.0,
+    "connected_water_m3": 100.0,
+    "nitrification_o2_kg_per_kg_n": 4.57,
+    "nitrification_alkalinity_kg_caco3_per_kg_n": 7.14
+  },
+  "hatchery": {
+    "annual_live_harvest_kg": 1000.0,
+    "glass_eels_per_successful_batch": 1000.0,
+    "successful_batch_fraction": 0.8,
+    "larval_cycle_days": 270.0,
+    "turnaround_days": 30.0,
+    "water_inventory_m3": 100.0,
+    "daily_liquid_discharge_m3": 1.0,
+    "discharged_salt_recovery_fraction": 0.0,
+    "water_density_kg_per_m3": 1000.0
+  },
+  "per_person": {
+    "people_billion": [4.0, 8.0],
+    "cooked_eel_kg_per_person_year": [0.1, 1.0, 2.0],
+    "heritage_meat_kg_per_person_year": [1.0, 2.0],
+    "open_ponds": [
+      {"name": "carp_ponds", "ch4_mg_m2_h": 0.48, "yield_t_ha": 13.12, "source": "yuan2019_ncc in sources.json: carp ponds, Xinghua (Yuan et al. 2019, Supplementary Information)"},
+      {"name": "bream_ponds", "ch4_mg_m2_h": 16.17, "yield_t_ha": 2.25, "source": "yuan2019_ncc in sources.json: semi-intensive blunt snout bream ponds, Shanghai (Yuan et al. 2019, Supplementary Information)"}
+    ]
+  },
+  "spawning_run": {
+    "wild_glass_eel_to_spawner_survival": [0.1, 0.01]
+  },
+  "sensitivity": {
+    "larva_to_glass_survival": [0.001, 0.01, 0.05],
+    "processing_and_feed_cases": [
+      {"name": "efficient_example", "growout_economic_dry_fcr": 1.2, "cut_yield_of_live": 0.75, "cook_yield_of_cut": 0.85},
+      {"name": "reference_example", "growout_economic_dry_fcr": 1.5, "cut_yield_of_live": 0.65, "cook_yield_of_cut": 0.8},
+      {"name": "higher_resource_example", "growout_economic_dry_fcr": 2.0, "cut_yield_of_live": 0.55, "cook_yield_of_cut": 0.7}
+    ],
+    "oxygen_cases": [
+      {"name": "lower_demand", "fish_respiration_mg_o2_per_kg_per_hour": 100.0, "feed_dry_kg_per_day": 5.0, "other_biological_o2_kg_per_kg_dry_feed": 0.1},
+      {"name": "reference_demand", "fish_respiration_mg_o2_per_kg_per_hour": 200.0, "feed_dry_kg_per_day": 10.0, "other_biological_o2_kg_per_kg_dry_feed": 0.2},
+      {"name": "higher_demand", "fish_respiration_mg_o2_per_kg_per_hour": 300.0, "feed_dry_kg_per_day": 15.0, "other_biological_o2_kg_per_kg_dry_feed": 0.3}
+    ],
+    "salt_concentration_g_per_kg": [35.0, 17.5, 13.0, 0.14]
+  },
+  "reading_rules": {
+    "fcr": "Dry feed supplied divided by net stage biomass gain (outgoing live biomass minus incoming live biomass). Economic FCR includes feed lost and mortality effects; do not add a second mortality feed multiplier. This is not a claim of constant FCR as survival changes. The eel cases keep the eel's own 1.2-2.0; the older study's tilapia range of 1.1-2.24 is carried in the product for comparison.",
+    "composition": "Use the same assumed wet whole-fish N and P content at entry and exit. Nonretained material includes uneaten feed, mortalities, dissolved excretion and solids; it is not all water discharge. The eel feed's 1% phosphorus lies inside the older study's 0.71-1.41%; its 48% protein lies above that study's tilapia feed, as a carnivore's feed does.",
+    "oxygen": "Separate instantaneous standing-stock calculation. Fish respiration excludes nitrification and other biological demand. The latter excludes fish and nitrifiers. Basal nitrogen excretion and delayed decomposition are unresolved; feed-proportional terms do not model fasting or system upsets. The capacity factor is a design allowance, not a proven peak multiplier. Nitrification coefficients are oxidation-only stoichiometry from E10; other coefficients are assumptions. The respiration rate carries no temperature: E15's resting rates were measured at 25 C and E03's growth trials at 23.4-25 C, below the fresh seas' 25-32.5 C. The inlet's 7 mg/L is 91% of saturation in fresh water at 29.6 C under the design air and above saturation in seawater, where saturation is 6.31 mg/L.",
+    "hatchery": "Batch yield is a planning assumption motivated by E08, not a validated count at the assumed cycle time or survival. Nominal water inventory is a separate hydraulic unit, not the volume of a 1000-glass-eel tank. Salt calculation assumes density 1000 kg/m3, tracks liquid losses, and excludes evaporation losses of salt.",
+    "freshwater": "The 0.14 g/kg case is a physical inventory comparison only. No successful egg or larval performance is assigned to it; the actual calcium-bicarbonate ion recipe and magnesium floor remain unresolved.",
+    "per_person": "Each case scales the cohort of one processing example to a population eating a set mass of cooked eel a year. Heritage meat is 1-2 kg a person a year (register, 12 October), counted by the older study as boneless meat; 1 kg of cooked eel comes from 1.18-1.43 kg of prepared raw cut across the three processing examples. Fed eel are kept in closed systems, whose sludge takes the unretained phosphorus back to the fields; its ratio to the waters' spare phosphorus (21.1-56.2 kt a year, the older study's reading of resources' sea-phosphorus study, a design-guess harvest share of 30%) measures what open water would receive. N2O is 0.8-1.9% of the feed's nitrogen (the older study's aquaponics factor) and accumulates at 3.07 Tg N per ppb, the design air having no N2O sink; the feed crops' own N2O is left out. Crop land prices the feed by its energy at the older study's crop yields, which rest on the September climatology. Electricity and water are a recirculating tilapia farm's 3.09 kWh and 76 L per kg live with water held near 30 C.",
+    "methane": "Open ponds' methane pairs a measured flux with the same ponds' yield and holds the flux for one year against that yield as a year's harvest; the two Earth pond systems bracket a 200-fold range and stand for no eel farm. A closed system's methane depends on how its sludge is treated and is not priced here.",
+    "spawning_run": "Spawners take the cohort's 250 g harvest size and glass eels 0.2 g, with the same 0.4% whole-body phosphorus. In a steady population each spawner is replaced by one spawner, which takes 1/s glass eels for survival s from glass eel to spawner, so the young carry back glass/(s x spawner) of the phosphorus their parents carried down. The culture case uses the cohort's nursery and grow-out survival (0.72); the wild survivals of 10% and 1% are design guesses. Larger spawners lower the share.",
+    "scope": "Feed and nutrient totals start at glass-eel entry. Broodstock, egg and larval feed, their wastes/oxygen/energy, and processing energy remain unquantified, not zero. Cooked fish excludes sauce, rice and coproduct credits. No annual yield per area or profitability is estimated."
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema": "terluna.research.eel-checks/1",
+  "checked_at_utc": "2026-11-08T01:07:51Z",
+  "branch": "domain/food-systems",
+  "base": "domain/food-systems with main merged in; the merge staged and uncommitted when these checks ran",
+  "evidence": "Computational, source and document checks of the reworked eel chapter and its accounts. No biological trials, field validation, lake model or measured processing yields.",
+  "checks": [
+    {
+      "command": "python3 -m research.studies.food_systems.eel_budget",
+      "result": "Wrote results/eel_budget.json (schema terluna.research.eel-budget/2); a second run left it byte-identical, as the product test also checks"
+    },
+    {
+      "command": "ulimit -v 6000000; nice -n 10 python3 -m pytest -q research/studies/food_systems",
+      "result": "59 passed in 6.14 s (Python 3.13.7, pytest 9.0.2): the older study's 27 tests and 32 eel tests, 10 of them new for the per-person cases, the older study's factors, the pond methane and the spawning run"
+    },
+    {
+      "check": "per-person cases against the review",
+      "result": "8 billion people at 1 kg of cooked eel each, reference processing: 167.04 kt of phosphorus a year not retained, 2.97-7.92 times the waters' spare 21.1-56.2 kt; matches the review's 167 kt and 3-8 times"
+    },
+    {
+      "check": "older study's factors",
+      "result": "Read from results/food_systems.json's basis (sha256 57fe8726cead4cd498043f9516bbf36a20505cf919b119dfce39784bf01f37d9): N2O 0.8-1.9% of feed N, 3.09 kWh and 76 L per kg live, 3.07 Tg N per ppb, waters' spare phosphorus 21.1-56.2 kt a year, crop yields 30.2-41.9 kcal per m2 a day with variety factors 1.5-2.5"
+    },
+    {
+      "check": "oxygen saturation under the design air",
+      "command": "biosphere.ecology.lake.oxygen_saturation at 1.2 atm with an O2 fraction of 0.17436 (21.2 kPa)",
+      "result": "7.656 mg/L fresh at 29.6 C, 8.941 mg/L at 21 C, 6.312 mg/L at 35 g/kg and 29.6 C; the review's 7.66, 8.94 and 6.32 confirmed"
+    },
+    {
+      "check": "un-ionized ammonia",
+      "result": "Emerson's relation: 13.5% at pH 8.3 and 29.6 C, 0.8% at pH 7, 89% at pH 10; the review's shares confirmed"
+    },
+    {
+      "check": "pressure cue",
+      "result": "150-200 m of seawater on Earth (1,025 kg/m3, 9.80665 m/s2) is 1.51-2.01 MPa, which takes 0.91-1.21 km of seawater at 1,022 kg/m3 and 1.6242 m/s2; hollow 547's 102 m is 0.17 MPa, 16.8 m of Earth's sea"
+    },
+    {
+      "check": "document screen",
+      "result": "No hard wraps (no two consecutive prose lines); no narration of the author; no 'Gaean' or undefined 'qualified'; every relative link resolves; all 17 source IDs cited in the text resolve to the register"
+    },
+    {
+      "check": "sources added",
+      "result": "E16 Okamura et al. 2007 (publisher abstract) and E17 Kaifu et al. 2025 (full text, Red List history), read 2026-11-07"
+    }
+  ],
+  "not_run": [
+    "make check (run by the lead)",
+    "The seawater lake's temperature by depth",
+    "Biological, ecological or processing validation of the scenario assumptions"
+  ],
+  "files": {
+    "research/studies/food_systems/eel_habitat_hatchery.md": "fa27274f38b1fc40f877b34f7e399898c6f0175a6c4333f112a01acce5134500",
+    "research/studies/food_systems/eel_budget.py": "f036654ef3bc68f6750f5aebe974d165ce5626fbf2146db04e2e215f3384219b",
+    "research/studies/food_systems/eel_parameters.json": "1ffb3c9e56b7752f83d62fdbbae146b7d306ce4b89d96315581dce69c3e5691f",
+    "research/studies/food_systems/eel_sources.json": "73c277c90e40785393f977d998084b1349bf40d3de39ca8d5008e0859c749200",
+    "research/studies/food_systems/test_eel_budget.py": "03843db77962417c6f638ebb210b3338131b86551347fe777eb55a748b55b827",
+    "research/studies/food_systems/results/eel_budget.json": "733fe9beed1019e00a0d9e850efd0ea6856b93c7f57ca2f860b57066eed8f19a"
+  }
+}

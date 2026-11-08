@@ -1,0 +1,239 @@
+{
+  "schema": "terluna.research.sturgeon-sources/1",
+  "access_date": "2026-11-07",
+  "scope": "Earth evidence for the lunar sturgeon assessment, rebuilt on the hydrosphere's cold-waters study. Literature synthesis and proposed accounting and trials; no new biological validation.",
+  "sources": [
+    {
+      "id": "ST01",
+      "title": "Acipenser baerii: Cultured aquatic species fact sheet",
+      "year": 2009,
+      "url": "https://www.fao.org/fishery/docs/DOCUMENT/aquaculture/CulturedSpecies/file/en/en_acipenser.htm",
+      "kind": "Official expert species and culture account",
+      "access": "Full account; habitat, reproduction, production-cycle and rearing passages inspected",
+      "supports": "Freshwater migration, differing native/culture maturation, stage-specific temperatures and reproductive egg collection.",
+      "limits": "Historical practice summary. Ovulated egg collection of 8-14% female mass is not finished caviar yield; tolerance is not a production optimum. No current production statistics inferred."
+    },
+    {
+      "id": "ST02",
+      "title": "Huso huso: Caspian Biodiversity Information System species account",
+      "url": "https://archive.iwlearn.org/caspianenvironment.org/CaspBIS/Taxons/Taxonb070.html?taxonid=1",
+      "kind": "Archived regional expert account compiling field observations",
+      "access": "Thermal occurrence, reproduction, migrations and diet passages inspected; re-read on 2026-11-07 for spawning, development and maturity values",
+      "supports": "Beluga anadromy and piscivory; spawning in the Ural at 7-11 C (winter run) and 10-15 C (spring run) and in the Volga at 6-16 C, at 10-30 m depth and 1-2.5 m/s; eggs and larvae developing at 9-15 C; underyearlings and juveniles at 15-26 C; adults through 20-31 C in summer; most males mature at 12-15 years and females at 15-20.",
+      "limits": "Occurrence temperatures are not chronic controlled tolerances. Historical populations and conservation classifications do not establish present status or lunar capacity."
+    },
+    {
+      "id": "ST03",
+      "title": "Sturgeon hatchery practices and management for release: Guidelines",
+      "year": 2011,
+      "url": "https://www.fao.org/4/i2428e/i2428e.pdf",
+      "kind": "FAO Fisheries and Aquaculture Technical Paper 570, Chebanov et al.",
+      "access": "Official PDF and indexed sterlet species passage; relevant species/habitat sections, not a complete manual audit",
+      "supports": "Sterlet freshwater habitat, gravel spawning, benthic feeding and population-dependent maturity.",
+      "limits": "Earth species/population accounts; no prediction of lunar spawning cues, site suitability or generations to adaptation."
+    },
+    {
+      "id": "ST04",
+      "title": "Sturgeon reproduction manual",
+      "url": "https://www.dfw.state.or.us/fish/license_permits_apps/docs/Sturgeon%20Manual.pdf",
+      "kind": "Coppens International industry manual, hosted by Oregon DFW",
+      "access": "PDF biology, commercial products and reproduction passages inspected",
+      "supports": "Cultured species/products and managed reproduction involving conditioning, induction, fertilization and incubation.",
+      "limits": "Government hosting does not make this a government-authored standard. Practical guidance is not a controlled comparative experiment or evidence of autonomous recruitment."
+    },
+    {
+      "id": "ST05",
+      "title": "Developmental responses of sterlet (Acipenser ruthenus) to temperature modulation with insights into intestinal and morphological traits",
+      "year": 2025,
+      "url": "https://doi.org/10.1038/s41598-025-02566-y",
+      "kind": "Primary experiment",
+      "access": "Publisher abstract and full-text methods passages including Table 3 thermal schedule; direct access intermittent",
+      "supports": "Early developmental plasticity under 18, 21 and 27 C treatments; 27 C reached at day 17 and held through day 32 after fertilization, followed by return to ambient treatment.",
+      "limits": "Three replicates per treatment. Warming started after early development; no warm fertilization, lifetime exposure, inherited response or autonomous reproduction demonstrated."
+    },
+    {
+      "id": "ST06",
+      "title": "Oxythermal window drastically constraints the survival and development of European sturgeon early life phases",
+      "year": 2020,
+      "online_year": 2019,
+      "url": "https://doi.org/10.1007/s11356-018-4021-8",
+      "kind": "Primary experiment",
+      "access": "PubMed primary abstract, https://pubmed.ncbi.nlm.nih.gov/30632040/",
+      "supports": "Embryonic interaction of temperature and oxygen: no survival at 30 C and no hatch at oxygen saturation at or below 50% in the tested conditions.",
+      "limits": "Results are specific to A. sturio embryos. They supply no beluga, bester or sterlet limits."
+    },
+    {
+      "id": "ST07",
+      "title": "Preliminary observations on the effects of holding temperature on reproductive performance of female white sturgeon, Acipenser transmontanus Richardson",
+      "year": 1999,
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0044848699001088",
+      "kind": "Primary experiment",
+      "access": "Indexed publisher abstract; direct publisher open blocked",
+      "supports": "Small comparison of seasonal 10-15 C, constant 15 C and constant 18 C holding; reproductive performance depended on thermal history.",
+      "limits": "Five females per group and induced reproduction. Does not establish a universal sturgeon cold-conditioning requirement or autonomous spawning."
+    },
+    {
+      "id": "ST08",
+      "title": "Increases in the mean and variability of thermal regimes result in differential phenotypic responses among genotypes during early ontogenetic stages of lake sturgeon (Acipenser fulvescens)",
+      "year": 2016,
+      "url": "https://doi.org/10.1111/eva.12409",
+      "kind": "Primary family experiment",
+      "access": "PubMed abstract and indexed full-text family/heritability passages; direct PMC access intermittent",
+      "supports": "Family-by-thermal-treatment differences in early traits; reason to examine family-specific responses.",
+      "limits": "Family effects and broad-sense estimates do not isolate additive genetic gain or transfer a heritability to another species. No forecast of warm-life-cycle selection response."
+    },
+    {
+      "id": "ST09",
+      "title": "The influence of oocyte maturational stage on hatching and triploidy rates in hybrid bester sturgeon Huso huso x Acipenser ruthenus",
+      "year": 2005,
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S004484860400626X",
+      "kind": "Primary reproductive experiment",
+      "access": "Indexed publisher abstract; direct publisher open blocked",
+      "supports": "Second-generation bester broodstock, variable hatch and spontaneous triploidy associated with oocyte maturation state.",
+      "limits": "Does not imply all hybrids are sterile or all F2 fish have poor hatch; managed reproduction does not demonstrate natural recruitment."
+    },
+    {
+      "id": "ST10",
+      "title": "Temperature influence in embryogenesis on fish-breeding parameters of bester hybrid juveniles",
+      "year": 2018,
+      "url": "https://doi.org/10.24143/2073-5529-2018-1-98-110",
+      "kind": "Primary experiment, Zuevskiy et al.",
+      "access": "Indexed publisher English abstract and bibliographic metadata; full methods not inspected",
+      "supports": "Aksay sterlet-backcross F4; different incubation temperatures optimize different hatch/survival/growth outcomes.",
+      "limits": "The reported 16 C optimum is the authors' treatment-level conclusion, not a universal optimum. Faster growth after 18-20 C incubation included early egg losses."
+    },
+    {
+      "id": "ST11",
+      "title": "Oogenesis of bester hybrids (female Huso huso (Linnaeus, 1758) x male Acipenser ruthenus (Linnaeus, 1758)) during the inter-spawning period while cultured in a recycling system",
+      "year": 2015,
+      "url": "https://doi.org/10.1111/jai.12897",
+      "kind": "Primary captive reproductive study",
+      "access": "Publisher abstract; full conditioning and intervention methods not inspected",
+      "supports": "Reported 10-12-month interspawning intervals in captive hybrid forms under 20-21 C holding conditions.",
+      "limits": "No inference of unassisted spawning, absence of colder conditioning, warm embryos or universal annual caviar yield."
+    },
+    {
+      "id": "ST12",
+      "title": "Effect of different oxygen levels on growth performance, stress response and oxygen consumption in two weight groups of great sturgeon Huso huso",
+      "year": 2013,
+      "url": "https://agris.fao.org/search/en/providers/124569/records/68010ee3974c899542f821dc",
+      "full_text_url": "https://www.researchgate.net/publication/258358216_Effect_of_different_oxygen_levels_on_growth_performance_stress_response_and_oxygen_consumption_in_2_weight_groups_of_great_sturgeon_Huso_huso",
+      "kind": "Primary experiment, Bagherzadeh Lakani et al., Iranian Journal of Fisheries Sciences 12(3), 533-549",
+      "access": "Primary abstract in AGRIS and author-uploaded text; methods inspected for sizes, temperature and diet",
+      "supports": "Eight-week 2-3, 5-6 and 9-10 mg/L treatments at 18 +/- 0.7 C; low oxygen impaired feeding/growth in approximately 281 g and 1.22 kg fish.",
+      "limits": "No oxygen design rate adopted for warm lunar fish. Some secondary index snippets lose decimal points in starting weights; inspected methods retain them."
+    },
+    {
+      "id": "ST13",
+      "title": "Effects of Alternative Dietary Lipid Sources on Growth Performance and Fatty Acid Composition of Beluga Sturgeon, Huso huso, Juveniles",
+      "year": 2010,
+      "url": "https://doi.org/10.1111/j.1749-7345.2010.00389.x",
+      "kind": "Primary feeding experiment",
+      "access": "Indexed publisher abstract",
+      "supports": "120-day fish/soybean/canola-oil comparison: no detected growth or feed-conversion penalty under tested conditions, with altered fatty-acid profiles.",
+      "limits": "Approximately 206 g initial juveniles; no lifetime, broodstock, sensory or total feed-resource equivalence established."
+    },
+    {
+      "id": "ST14",
+      "title": "The influence of different lipid sources and levels on growth, body composition and haematology of Huso huso",
+      "year": 2011,
+      "url": "https://doi.org/10.1111/j.1439-0396.2010.01094.x",
+      "kind": "Primary feeding experiment, Ahmadi Fackjouri et al.",
+      "access": "PubMed primary abstract, https://pubmed.ncbi.nlm.nih.gov/21231966/",
+      "supports": "Six-week dietary-oil trial; muscle and liver lipid increased with dietary lipid level.",
+      "limits": "Approximately 215 g initial juveniles. No inference of caviar response, desirable fat distribution, lunar physiology or superior taste."
+    },
+    {
+      "id": "ST15",
+      "title": "Production value, chemical composition and colour of fillets of the reciprocal hybrid of Siberian sturgeon with green sturgeon",
+      "year": 2005,
+      "url": "https://doi.org/10.17221/4160-CJAS",
+      "kind": "Primary composition/yield comparison, Jankowska et al.",
+      "access": "Publisher abstract; full-text retrieval attempts blocked",
+      "supports": "Ancestry-related tissue differences and fillet yield expressed relative to gutted/deheaded carcass. Pink parental-hybrid color was not preserved in the studied derivative.",
+      "limits": "No numeric live-to-cooked yield adopted. Abstract cannot establish diet-independent genetic causation or transfer to bester."
+    },
+    {
+      "id": "ST16",
+      "title": "Fatty acid composition and volatile compounds of caviar from farmed white sturgeon (Acipenser transmontanus)",
+      "year": 2008,
+      "url": "https://doi.org/10.1016/j.aca.2008.02.005",
+      "kind": "Primary caviar/diet experiment, Caprino et al.",
+      "access": "PubMed primary abstract, https://pubmed.ncbi.nlm.nih.gov/18486649/",
+      "supports": "Twenty caviar samples from two dietary lipid treatments; caviar fatty-acid composition changed only minimally.",
+      "limits": "Specific diets, exposure and species; neither general dietary immunity of roe nor a measure of beluga flesh response."
+    },
+    {
+      "id": "ST17",
+      "title": "The contribution of sturgeon species and processing conditions on caviar texture, metabolomic profile and sensory traits",
+      "year": 2025,
+      "online_year": 2024,
+      "url": "https://doi.org/10.1016/j.foodchem.2024.141516",
+      "kind": "Primary product/metabolomic/sensory comparison, Rocchetti et al.",
+      "access": "PubMed primary abstract, https://pubmed.ncbi.nlm.nih.gov/39369608/",
+      "supports": "Eight products from six species; beluga peptide profile, sensory differences and effects associated with processing.",
+      "limits": "Products/treatments are not a clean common-garden ancestry experiment. Tested additives are not endorsed as a lunar processing formulation."
+    },
+    {
+      "id": "ST18",
+      "title": "Effects of microbial diversity and phospholipids on flavor profile of caviar from hybrid sturgeon (Huso dauricus x Acipenser schrencki)",
+      "year": 2022,
+      "url": "https://www.sciencedirect.com/science/article/pii/S0308814621029757",
+      "kind": "Primary caviar study",
+      "access": "Indexed publisher and PubMed abstract; direct PubMed open challenged",
+      "supports": "Flavor-associated microbial and phospholipid differences in Kaluga-Amur hybrid caviar.",
+      "limits": "No causal culinary recipe, full life-cycle thermal suitability or equivalence to Huso huso inferred."
+    },
+    {
+      "id": "ST19",
+      "title": "Fish and Fishery Products Hazards and Controls",
+      "year": 2022,
+      "url": "https://www.fda.gov/food/seafood-guidance-documents-regulatory-information/fish-and-fishery-products-hazards-and-controls",
+      "kind": "Official FDA guidance",
+      "access": "Current index rechecked; relevant parasite, harvest-area and toxin guidance previously inspected for this food study",
+      "supports": "Product-specific hazard controls for raw, cooked, cured and packaged seafood.",
+      "limits": "No certification of a lunar fishery or preparation; a freezing-speed description is not a validated parasite-control process."
+    },
+    {
+      "id": "ST20",
+      "title": "Migratory monarch butterfly now Endangered - IUCN Red List",
+      "year": 2022,
+      "url": "https://iucn.org/press-release/202207/migratory-monarch-butterfly-now-endangered-iucn-red-list",
+      "kind": "Official IUCN press release of the Red List update of 21 July 2022",
+      "access": "Press release read in full for its sturgeon passages, 2026-11-07",
+      "supports": "All 26 surviving sturgeon species threatened (85% in 2009); 17 Critically Endangered, 3 Endangered, 5 Vulnerable; the Yangtze sturgeon Extinct in the Wild and the Chinese paddlefish extinct; beluga Huso huso Critically Endangered.",
+      "limits": "Names few species; the categories of sterlet, Siberian and Russian sturgeon come from ST21. The species assessments themselves were not opened."
+    },
+    {
+      "id": "ST21",
+      "title": "Sturgeon slipping towards extinction: chances of survival dimming for world's most threatened group of species",
+      "year": 2022,
+      "url": "https://wwfcee.org/news/sturgeon-slipping-towards-extinction-chances-of-survival-dimming-for-worlds-most-threatened-group-of-species",
+      "kind": "WWF Central and Eastern Europe news account of the IUCN update of 21 July 2022",
+      "access": "Page read in full, 2026-11-07",
+      "supports": "Sterlet moved to a higher category and classified Endangered; wild Siberian sturgeon moved to Critically Endangered; Europe's eight species seven Critically Endangered and one Endangered (the sterlet), from which the Russian sturgeon's Critically Endangered status follows; almost two-thirds of the group Critically Endangered.",
+      "limits": "A secondary account by a conservation organization; kaluga, Amur, white and lake sturgeon not covered. Congiu, Gessner and Ludwig's note in Oryx 57(1): 9-10 (2023) was consulted and gave no species categories in its readable text."
+    }
+  ],
+  "inherited_references": [
+    {
+      "path": "domain/hydrosphere 1ac9357d: research/studies/cold_waters/README.md",
+      "scope": "Fresh water above about 15 C everywhere; the highland lakes' air and water (543 lakes below 20 C covering 220,000 km2, 15 below 18 C covering 583 km2; a 30 m lake's floor at 21.1-21.7 C); the ponds' cold hours; no polar winter with the axis 1.5 degrees from the ecliptic. A first estimate on the design years, today's orientation."
+    },
+    {
+      "path": "research/decisions.md",
+      "scope": "The deep lakes' oxygen of 5.7-6.3 mg/L by Osborn's rule and 3.5 under Shih and Bouffard's form at 301 K (19 October); the rules for what lives wild (12 October and 6 November); the waters' trophic design (19 October); organisms crossing between worlds (6 November)."
+    },
+    {
+      "path": "eel_sources.json",
+      "ids": [
+        "E10"
+      ],
+      "scope": "Nitrification stoichiometry; no new sturgeon coefficients"
+    },
+    {
+      "path": "results/eel_budget.json",
+      "scope": "The closed systems' mean power for fed eel at 8 billion people and 1 kg of cooked eel each, used as a scale for chilling"
+    }
+  ]
+}

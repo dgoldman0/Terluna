@@ -33,7 +33,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 ATLAS = ROOT / 'geography' / 'results' / 'atlas.json'
 ATLAS_GRID = ROOT / 'geography' / 'products' / 'atlas_28pct_4ppd.npz'
-FRAME = Path('/home/kir/Documents/Projects/terluna-climate/climate/results/gcm/turned_surface_8d71fd350ca4c6cd.json')
+FRAME = ROOT / 'climate' / 'results' / 'gcm' / 'turned_surface_8d71fd350ca4c6cd.json'
 DRIVE = Path('/media/projectspace/terluna-research/session-tools/turned_design')
 CACHE = DRIVE / 'peek' / 'cache'
 LAND_READING = DRIVE / 'turned_years_land_A28R_301k_design_l15_snow_s924_turned_refit.json'
@@ -209,7 +209,7 @@ def screen(margin_m=MARGIN_M, max_km=MAX_DISTANCE_KM):
     large = {b['label']: NAMED.get(b['label'], f"unnamed common-level lake (atlas body {b['label']})")
              for b in atlas['bodies']}
     frame = json.loads(FRAME.read_text())
-    inputs[str(FRAME)] = sha256(FRAME)
+    inputs[str(FRAME.relative_to(ROOT))] = sha256(FRAME)
     rot = np.asarray(frame['frame']['rotation_today_to_turned'], float)
     clim, run_inputs = read_run()
     inputs.update(run_inputs)

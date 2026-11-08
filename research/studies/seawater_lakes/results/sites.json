@@ -2,12 +2,12 @@
  "schema": "terluna.research.seawater-lake-sites/1",
  "producer": {
   "file": "research/studies/seawater_lakes/sites.py",
-  "sha256": "97bdcdeebb435b50b3c60ad58558489219cb467bfa7567c233bb6a93d66a334a"
+  "sha256": "2d86bcda4c80fe991e51806bea6dcdcb43b63149a1f4067aa10c849f23db925a"
  },
  "inputs": {
   "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693",
-  "/home/kir/Documents/Projects/terluna-climate/climate/results/gcm/turned_surface_8d71fd350ca4c6cd.json": "e1957b8f36f1b04ba9b673c6a97b0d4bfb83bc54cf93a837e1ac3e1783bbbe58",
+  "climate/results/gcm/turned_surface_8d71fd350ca4c6cd.json": "e1957b8f36f1b04ba9b673c6a97b0d4bfb83bc54cf93a837e1ac3e1783bbbe58",
   "/media/projectspace/terluna-research/session-tools/turned_design/peek/cache/A28R_301k_design_l15_snow_s924_turned_refit.00010.0.npz": "ee1f43a55fe13c5b02bd7bf6acfeb05552965e9a6b4cd0cdac43817b8616c091",
   "/media/projectspace/terluna-research/session-tools/turned_design/peek/cache/A28R_301k_design_l15_snow_s924_turned_refit.00011.0.npz": "239e5941d6564f74b945b21ddd585a84df84fd02469a81777492e210f488a845",
   "/media/projectspace/terluna-research/session-tools/turned_design/peek/cache/A28R_301k_design_l15_snow_s924_turned_refit.00012.0.npz": "8f0076369edf5e95e9efa3862d3b846af268ed63fde10c7ff1247c3fc3d9a18f",

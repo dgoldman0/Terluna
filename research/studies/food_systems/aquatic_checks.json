@@ -1,0 +1,116 @@
+{
+  "schema": "terluna.research.food-systems-aquatic-checks/2",
+  "date": "2026-11-07",
+  "scope": "Checks on the aquatic study's documents and records. The study runs no model and changes no product or production coefficient.",
+  "reading_rule": "revision_2026_11_07 records the checks of the 7 November revision. checks and review keep the record of 4 November at base_main_commit, with the reading of its failures added; other records cite checks.repository by that path.",
+  "revision_2026_11_07": {
+    "tree": "domain/food-systems at cb85374c with main f30408f7 merged and staged, in the worktree terluna-food-systems; the eel and sturgeon chapters were being reworked beside these files at the same time",
+    "tests": {
+      "command": "ulimit -v 6000000; nice -n 10 python3 -m pytest -q research/studies/food_systems",
+      "result": "59 passed at 20:01 (6.5 s) and again at 20:05 after the last edits (7.4 s): test_run.py 21, test_blend.py 6, test_eel_budget.py 32, with the eel and sturgeon files mid-rework"
+    },
+    "relative_links": "PASS: 316 relative links and their heading anchors resolve across the seven aquatic chapters, the study README and the three domain READMEs (a script in the session's scratchpad)",
+    "whitespace": "PASS: git diff --check on every file changed",
+    "hard_wraps": "PASS: no paragraph or list item spans two lines in the seven chapters or the README's aquatic section",
+    "values_checked": [
+      "Basin oxygen in the habitats chapter against research/studies/sea_oxygen/README.md at f30408f7: all seven central values and the Procellarum and Ingenii bounds match.",
+      "The 29.53059-day cycle against shared/constants.json, and the held fresh seas' 0.14 g/kg and pH 8.3 against the sea chemistry's README.",
+      "Every register row cited, read at f30408f7: the diet's blend and heritage meat, the rules for what lives wild, engineered organisms, salt water and soda lakes, the waters of 19 October, the energy supply, the design climate at the target and the seawater lakes, the evaluation, wild lines, the eel's seawater spawning and the crossing between worlds, and the world on the turned Moon.",
+      "The fifteen pins of the first reading compared at f30408f7: six of the fourteen main files differ (the plan, the register and four products); the cold-waters README is the same blob on domain/hydrosphere at f6fe4026."
+    ],
+    "sources_added": [
+      "A10 (alkaline_foods.md): Bills (2019), IUCN Red List assessment of Oreochromis mossambicus, Vulnerable; read through the Wikipedia article's status box, citation and account of hybridization.",
+      "A11 (alkaline_foods.md): Bayona and Akinyi (2006), IUCN Red List assessment of Alcolapia grahami, Vulnerable; read through the Wikipedia article's status box, citation and range.",
+      "R15 (reef_shellfish_cuisine.md): Kaifu et al. (2025), PLoS ONE 20(10) e0331511; PMC full text, targeted at its statements that the Japanese eel has been Endangered since 2014 and stayed so at the 2020 reassessment."
+    ],
+    "sources_carried": "R3 and R4 (deeper reading) and R16-R18 in the carbonate chapter, and C4-C7 in the culinary chapter, carry the follow-up note's source register of 4 November into the chapters that took up its jade perch and raw-preparation material, at that note's read depth.",
+    "not_run": [
+      "make check, which the lead runs on the merged tree.",
+      "Any model, product regeneration or computation beyond the study's tests."
+    ]
+  },
+  "base_main_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
+  "checks": {
+    "source_manifest": "14 parent-commit SHA256 checks passed; supplementary cold-water README blob verified at the recorded hydrosphere commit.",
+    "relative_links": "PASS: 42 relative links across 8 Markdown files, including 2 local heading anchors; every new status material exists.",
+    "whitespace": "PASS: git diff --check.",
+    "repository": {
+      "command": "make check",
+      "result": "PARTIAL: layer check passed; Python suite completed with 4301 passed, 312 skipped, 44 failed; make stopped at test-python.",
+      "failure_diagnosis": "43 missing-data/file failures and one process-visibility assertion. All 44 failing test IDs were rerun on an untouched detached worktree at the parent main commit and all 44 failed there too.",
+      "failure_reading": "These 44 failures, and the 290 skips beyond main's count, came from a checkout without the project's ignored inputs, as the diagnosis found; the review of 6 November ran main on the research machine with none failed. The list records that environment.",
+      "baseline_failed_test_ids": [
+        "atmosphere/tests/test_absorption.py::test_design_case_covers_the_heating_near_the_exobase",
+        "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
+        "atmosphere/tests/test_absorption.py::test_ionization_rate_is_of_the_tabulated_order",
+        "atmosphere/tests/test_cycle.py::ProductTests::test_product_is_current_with_its_code_and_inputs",
+        "atmosphere/tests/test_exosphere.py::test_charge_exchange_thin_limit_counts_the_swept_exosphere",
+        "atmosphere/tests/test_exosphere.py::test_dissociation_rates_agree_with_heays",
+        "atmosphere/tests/test_exosphere.py::test_ions_made_match_the_absorption_step",
+        "atmosphere/tests/test_exosphere.py::test_levels_are_ordered_and_wider_shadows_never_lose_more",
+        "atmosphere/tests/test_exosphere.py::test_magnetosphere_accounts_for_every_ion_and_a_stronger_one_keeps_more",
+        "atmosphere/tests/test_limb_heat.py::ProductTests::test_the_bands_weighted_by_activity_give_the_detailed_table",
+        "atmosphere/tests/test_snow_mcsnow_diffusivity.py::test_the_corrected_runs_take_the_corrected_lunar_build_and_keep_the_earth_build",
+        "atmosphere/tests/test_snow_mcsnow_joint.py::test_full_contract_ages_fit_new_native_driver_capacity",
+        "atmosphere/tests/test_snow_optics.py::test_committed_optics_product_records_conserved_inputs_and_light_height",
+        "climate/tests/test_box_upper_air.py::test_the_levels_share_out_over_the_layers_and_keep_their_total",
+        "climate/tests/test_cm1_run.py::test_a_box_on_a_parallel_ring_takes_the_rows_reference_and_the_columns_round_it",
+        "climate/tests/test_cm1_run.py::test_the_terrain_build_forces_each_column_at_its_own_height",
+        "climate/tests/test_exoplasim_run.py::RunnerTests::test_process_lookup_finds_this_process",
+        "climate/tests/test_rain_drops.py::test_the_runner_records_the_rule_and_writes_its_namelist",
+        "climate/tests/test_ring_comfort.py::test_hours_are_shares_of_the_lunar_day",
+        "climate/tests/test_ring_comfort.py::test_the_rings_land_is_pooled_by_latitude_and_height_and_counted_in_shares",
+        "illumination/earthlight/test_model.py::test_beyond_the_observed_phases_the_earth_fades_to_dark_without_a_step",
+        "illumination/earthlight/test_model.py::test_calibration_reproduces_the_visual_brightness_and_keeps_the_spectral_shape",
+        "illumination/earthlight/test_model.py::test_phase_curves_are_one_at_full_phase_and_fall",
+        "illumination/earthlight/test_model.py::test_the_earth_is_bluer_than_the_sun",
+        "illumination/earthlight/test_model.py::test_the_table_spans_the_visible_and_near_infrared",
+        "illumination/water_column/test_model.py::test_case_one_waters_follow_the_ocean_colour_band_ratios",
+        "illumination/water_column/test_model.py::test_clear_water_attenuation_matches_morel",
+        "illumination/water_column/test_model.py::test_constituents_add",
+        "illumination/water_column/test_model.py::test_highland_fines_scatter_more_and_mare_fines_absorb_more",
+        "illumination/water_column/test_model.py::test_pure_water_is_clearest_in_the_violet_blue",
+        "illumination/water_column/test_model.py::test_the_hapke_inversion_returns_the_measured_reflectance",
+        "provisioning/tests/test_screen.py::test_product_binds_producer_inputs_and_constants",
+        "research/studies/aerophytes/test_run.py::test_saved_product_binds_all_producers_inputs_and_named_constants",
+        "research/studies/aerophytes/test_run.py::test_saved_product_regenerates_exactly",
+        "research/studies/aerophytes/test_sailing.py::test_evaluate_profile_and_rings",
+        "research/studies/aerophytes/test_water.py::test_evaluate_needs_and_closure_widen_with_thrift",
+        "research/studies/aerophytes/test_water.py::test_zonal_rain_reproduces_the_gcm_moon_mean",
+        "research/studies/heat_levers/test_run.py::test_product_binds_its_code_and_inputs",
+        "research/studies/joint_synthesis/test_products.py::test_product_binds_producer_and_inputs[magnets_map]",
+        "research/studies/joint_synthesis/test_products.py::test_product_binds_producer_and_inputs[places]",
+        "research/studies/lake_oxygen/test_run.py::test_lakes_product_binds_its_code_and_inputs",
+        "research/studies/protection_architecture/test_run.py::test_a_measured_year_matches_its_point",
+        "research/studies/protection_architecture/test_run.py::test_design_point_holds_together",
+        "research/studies/summit_tower/test_run.py::SummitTowerTests::test_stored_results"
+      ],
+      "scope_tests": "python3 -m pytest research/studies/food_systems -q: 23 passed, 4 skipped.",
+      "remaining_checks": {
+        "javascript": "177 passed using explicit *.test.* file paths across the four Makefile test directories. The installed Node 24 runner rejected directory arguments used by the existing harness; no harness change made.",
+        "calendar": "13 passed, 1 skipped; optional sky-page assets absent.",
+        "provenance": "research/check.py PASS after exact-hash external protection inputs were restored.",
+        "ensemble": "ensemble/tools/validate_setup.py PASS for workspace/snapshot integrity."
+      }
+    }
+  },
+  "review": {
+    "scope": "Independent scientific and cross-document review by the four contributing research agents; not full-paper scholarly admission.",
+    "corrections_applied": [
+      "Kept the inherited managed-route zero magnesium and unresolved essential-ion floor explicit.",
+      "Removed a prawn alkalinity threshold whose measurement convention was not confirmed.",
+      "Kept conflicting saline-alkali prawn flavor results; calculated umami is not sensory preference.",
+      "Separated dietary mediation from direct habitat/light effects when interpreting matched-diet and matched-ration controls.",
+      "Preserved twilight and food-web lag; did not assign a richest-flesh phase.",
+      "Replaced a secondary eel overview with primary evidence and explicit unresolved scaling requirements.",
+      "Moved the session's directions to a linked scoped register (aquatic_decisions.md), to leave the byte-pinned project register unchanged."
+    ]
+  },
+  "not_performed": [
+    "Biological experiments, breeding generations, sensory panels or food-safety validation.",
+    "New coupled food-web, circulation or climate simulations; the habitats are read from existing products.",
+    "A complete appraisal of methods for sources recorded at abstract or excerpt depth.",
+    "Founder acquisition, introductions or allocation of fisheries.",
+    "The IUCN assessment pages behind A10, A11 and R15, read through secondary sources."
+  ]
+}

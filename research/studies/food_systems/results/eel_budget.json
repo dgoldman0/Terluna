@@ -1,0 +1,1278 @@
+{
+  "schema": "terluna.research.eel-budget/2",
+  "evidence": "Illustrative design assumptions for sensitivity arithmetic. Every biological rate and yield below is an assumption chosen for the arithmetic; the cited sources motivate the questions the numbers pose. The per-person cases scale these per-tonne accounts and take their gas, energy, crop and phosphorus factors from the older food study's product.",
+  "producer": {
+    "module": "research.studies.food_systems.eel_budget",
+    "files": {
+      "research/studies/food_systems/eel_budget.py": "f036654ef3bc68f6750f5aebe974d165ce5626fbf2146db04e2e215f3384219b",
+      "research/studies/food_systems/eel_parameters.json": "1ffb3c9e56b7752f83d62fdbbae146b7d306ce4b89d96315581dce69c3e5691f",
+      "research/studies/food_systems/eel_sources.json": "73c277c90e40785393f977d998084b1349bf40d3de39ca8d5008e0859c749200"
+    },
+    "inputs": {
+      "research/studies/food_systems/results/food_systems.json": "57fe8726cead4cd498043f9516bbf36a20505cf919b119dfce39784bf01f37d9"
+    },
+    "constants": {
+      "JULIAN_YEAR_DAYS": 365.25
+    }
+  },
+  "assumptions": {
+    "schema": "terluna.research.eel-parameters/2",
+    "evidence": "Illustrative design assumptions for sensitivity arithmetic. Every biological rate and yield below is an assumption chosen for the arithmetic; the cited sources motivate the questions the numbers pose. The per-person cases scale these per-tonne accounts and take their gas, energy, crop and phosphorus factors from the older food study's product.",
+    "routes": "The leading route is a migration of the Moon's own: eels grow in the large fresh seas and spawn in a held seawater lake (register, 6 November). The all-freshwater life cycle stays a longer-term engineered option. Fed eel are kept in closed systems.",
+    "cohort": {
+      "harvest_live_kg": 1000.0,
+      "harvest_individual_kg": 0.25,
+      "nursery_exit_individual_kg": 0.01,
+      "glass_eel_individual_kg": 0.0002,
+      "growout_survival": 0.9,
+      "nursery_survival": 0.8,
+      "fertilization_fraction": 0.7,
+      "normal_hatch_fraction_of_fertilized": 0.6,
+      "larva_to_glass_survival": 0.01,
+      "nursery_economic_dry_fcr": 1.2,
+      "growout_economic_dry_fcr": 1.5,
+      "cut_yield_of_live": 0.65,
+      "cook_yield_of_cut": 0.8,
+      "portion_cooked_fish_kg": 0.1,
+      "feed_crude_protein_fraction_dry": 0.48,
+      "whole_fish_protein_fraction_wet": 0.18,
+      "feed_phosphorus_fraction_dry": 0.01,
+      "whole_fish_phosphorus_fraction_wet": 0.004,
+      "protein_to_nitrogen_factor": 6.25
+    },
+    "oxygen": {
+      "standing_biomass_kg": 1000.0,
+      "feed_dry_kg_per_day": 10.0,
+      "fish_respiration_mg_o2_per_kg_per_hour": 200.0,
+      "tan_n_kg_per_kg_dry_feed": 0.03,
+      "nitrified_fraction_of_tan": 1.0,
+      "other_biological_o2_kg_per_kg_dry_feed": 0.2,
+      "capacity_factor": 1.5,
+      "inlet_do_mg_per_l": 7.0,
+      "outlet_floor_do_mg_per_l": 5.0,
+      "connected_water_m3": 100.0,
+      "nitrification_o2_kg_per_kg_n": 4.57,
+      "nitrification_alkalinity_kg_caco3_per_kg_n": 7.14
+    },
+    "hatchery": {
+      "annual_live_harvest_kg": 1000.0,
+      "glass_eels_per_successful_batch": 1000.0,
+      "successful_batch_fraction": 0.8,
+      "larval_cycle_days": 270.0,
+      "turnaround_days": 30.0,
+      "water_inventory_m3": 100.0,
+      "daily_liquid_discharge_m3": 1.0,
+      "discharged_salt_recovery_fraction": 0.0,
+      "water_density_kg_per_m3": 1000.0
+    },
+    "per_person": {
+      "people_billion": [
+        4.0,
+        8.0
+      ],
+      "cooked_eel_kg_per_person_year": [
+        0.1,
+        1.0,
+        2.0
+      ],
+      "heritage_meat_kg_per_person_year": [
+        1.0,
+        2.0
+      ],
+      "open_ponds": [
+        {
+          "name": "carp_ponds",
+          "ch4_mg_m2_h": 0.48,
+          "yield_t_ha": 13.12,
+          "source": "yuan2019_ncc in sources.json: carp ponds, Xinghua (Yuan et al. 2019, Supplementary Information)"
+        },
+        {
+          "name": "bream_ponds",
+          "ch4_mg_m2_h": 16.17,
+          "yield_t_ha": 2.25,
+          "source": "yuan2019_ncc in sources.json: semi-intensive blunt snout bream ponds, Shanghai (Yuan et al. 2019, Supplementary Information)"
+        }
+      ]
+    },
+    "spawning_run": {
+      "wild_glass_eel_to_spawner_survival": [
+        0.1,
+        0.01
+      ]
+    },
+    "sensitivity": {
+      "larva_to_glass_survival": [
+        0.001,
+        0.01,
+        0.05
+      ],
+      "processing_and_feed_cases": [
+        {
+          "name": "efficient_example",
+          "growout_economic_dry_fcr": 1.2,
+          "cut_yield_of_live": 0.75,
+          "cook_yield_of_cut": 0.85
+        },
+        {
+          "name": "reference_example",
+          "growout_economic_dry_fcr": 1.5,
+          "cut_yield_of_live": 0.65,
+          "cook_yield_of_cut": 0.8
+        },
+        {
+          "name": "higher_resource_example",
+          "growout_economic_dry_fcr": 2.0,
+          "cut_yield_of_live": 0.55,
+          "cook_yield_of_cut": 0.7
+        }
+      ],
+      "oxygen_cases": [
+        {
+          "name": "lower_demand",
+          "fish_respiration_mg_o2_per_kg_per_hour": 100.0,
+          "feed_dry_kg_per_day": 5.0,
+          "other_biological_o2_kg_per_kg_dry_feed": 0.1
+        },
+        {
+          "name": "reference_demand",
+          "fish_respiration_mg_o2_per_kg_per_hour": 200.0,
+          "feed_dry_kg_per_day": 10.0,
+          "other_biological_o2_kg_per_kg_dry_feed": 0.2
+        },
+        {
+          "name": "higher_demand",
+          "fish_respiration_mg_o2_per_kg_per_hour": 300.0,
+          "feed_dry_kg_per_day": 15.0,
+          "other_biological_o2_kg_per_kg_dry_feed": 0.3
+        }
+      ],
+      "salt_concentration_g_per_kg": [
+        35.0,
+        17.5,
+        13.0,
+        0.14
+      ]
+    },
+    "reading_rules": {
+      "fcr": "Dry feed supplied divided by net stage biomass gain (outgoing live biomass minus incoming live biomass). Economic FCR includes feed lost and mortality effects; do not add a second mortality feed multiplier. This is not a claim of constant FCR as survival changes. The eel cases keep the eel's own 1.2-2.0; the older study's tilapia range of 1.1-2.24 is carried in the product for comparison.",
+      "composition": "Use the same assumed wet whole-fish N and P content at entry and exit. Nonretained material includes uneaten feed, mortalities, dissolved excretion and solids; it is not all water discharge. The eel feed's 1% phosphorus lies inside the older study's 0.71-1.41%; its 48% protein lies above that study's tilapia feed, as a carnivore's feed does.",
+      "oxygen": "Separate instantaneous standing-stock calculation. Fish respiration excludes nitrification and other biological demand. The latter excludes fish and nitrifiers. Basal nitrogen excretion and delayed decomposition are unresolved; feed-proportional terms do not model fasting or system upsets. The capacity factor is a design allowance, not a proven peak multiplier. Nitrification coefficients are oxidation-only stoichiometry from E10; other coefficients are assumptions. The respiration rate carries no temperature: E15's resting rates were measured at 25 C and E03's growth trials at 23.4-25 C, below the fresh seas' 25-32.5 C. The inlet's 7 mg/L is 91% of saturation in fresh water at 29.6 C under the design air and above saturation in seawater, where saturation is 6.31 mg/L.",
+      "hatchery": "Batch yield is a planning assumption motivated by E08, not a validated count at the assumed cycle time or survival. Nominal water inventory is a separate hydraulic unit, not the volume of a 1000-glass-eel tank. Salt calculation assumes density 1000 kg/m3, tracks liquid losses, and excludes evaporation losses of salt.",
+      "freshwater": "The 0.14 g/kg case is a physical inventory comparison only. No successful egg or larval performance is assigned to it; the actual calcium-bicarbonate ion recipe and magnesium floor remain unresolved.",
+      "per_person": "Each case scales the cohort of one processing example to a population eating a set mass of cooked eel a year. Heritage meat is 1-2 kg a person a year (register, 12 October), counted by the older study as boneless meat; 1 kg of cooked eel comes from 1.18-1.43 kg of prepared raw cut across the three processing examples. Fed eel are kept in closed systems, whose sludge takes the unretained phosphorus back to the fields; its ratio to the waters' spare phosphorus (21.1-56.2 kt a year, the older study's reading of resources' sea-phosphorus study, a design-guess harvest share of 30%) measures what open water would receive. N2O is 0.8-1.9% of the feed's nitrogen (the older study's aquaponics factor) and accumulates at 3.07 Tg N per ppb, the design air having no N2O sink; the feed crops' own N2O is left out. Crop land prices the feed by its energy at the older study's crop yields, which rest on the September climatology. Electricity and water are a recirculating tilapia farm's 3.09 kWh and 76 L per kg live with water held near 30 C.",
+      "methane": "Open ponds' methane pairs a measured flux with the same ponds' yield and holds the flux for one year against that yield as a year's harvest; the two Earth pond systems bracket a 200-fold range and stand for no eel farm. A closed system's methane depends on how its sludge is treated and is not priced here.",
+      "spawning_run": "Spawners take the cohort's 250 g harvest size and glass eels 0.2 g, with the same 0.4% whole-body phosphorus. In a steady population each spawner is replaced by one spawner, which takes 1/s glass eels for survival s from glass eel to spawner, so the young carry back glass/(s x spawner) of the phosphorus their parents carried down. The culture case uses the cohort's nursery and grow-out survival (0.72); the wild survivals of 10% and 1% are design guesses. Larger spawners lower the share.",
+      "scope": "Feed and nutrient totals start at glass-eel entry. Broodstock, egg and larval feed, their wastes/oxygen/energy, and processing energy remain unquantified, not zero. Cooked fish excludes sauce, rice and coproduct credits. No annual yield per area or profitability is estimated."
+    }
+  },
+  "reference_cohort": {
+    "harvest_live_kg": 1000.0,
+    "harvest_individuals": 4000.0,
+    "nursery_exit_individuals": 4444.444444444444,
+    "glass_eels_required": 5555.555555555555,
+    "normal_hatchlings_required": 555555.5555555555,
+    "fertilized_eggs_required": 925925.9259259258,
+    "eggs_before_fertilization_required": 1322751.3227513228,
+    "incoming_glass_eel_kg": 1.111111111111111,
+    "nursery_exit_live_kg": 44.44444444444444,
+    "nursery_dry_feed_kg": 51.99999999999999,
+    "growout_dry_feed_kg": 1433.3333333333333,
+    "post_glass_dry_feed_kg": 1485.3333333333333,
+    "prepared_raw_cut_kg": 650.0,
+    "processing_coproducts_and_trim_kg": 350.0,
+    "cooking_loss_kg": 130.0,
+    "cooked_fish_kg": 520.0,
+    "cooked_portions": 5200.0,
+    "post_glass_dry_feed_per_kg_cooked": 2.8564102564102565,
+    "nutrients_kg": {
+      "feed_n": 114.07359999999998,
+      "seed_n": 0.031999999999999994,
+      "harvest_n": 28.8,
+      "nonretained_n": 85.30559999999998,
+      "feed_p": 14.853333333333333,
+      "seed_p": 0.004444444444444444,
+      "harvest_p": 4.0,
+      "nonretained_p": 10.857777777777779
+    }
+  },
+  "reference_oxygen": {
+    "standing_biomass_kg": 1000.0,
+    "fish_o2_kg_per_day": 4.8,
+    "tan_n_kg_per_day": 0.3,
+    "nitrification_o2_kg_per_day": 1.371,
+    "other_biological_o2_kg_per_day": 2.0,
+    "total_o2_kg_per_day": 8.171,
+    "capacity_o2_kg_per_day": 12.256499999999999,
+    "capacity_o2_kg_per_hour": 0.5106875,
+    "nitrification_alkalinity_kg_caco3_per_day": 2.142,
+    "equivalent_flow_without_reoxygenation_m3_per_hour": 255.34374999999997,
+    "water_o2_inventory_above_floor_kg": 0.2,
+    "ideal_inventory_minutes_at_capacity_demand": 23.497735895239263
+  },
+  "reference_hatchery_throughput": {
+    "annual_live_harvest_kg": 1000.0,
+    "glass_eels_required_per_year": 5555.555555555555,
+    "expected_glass_eels_per_occupied_batch_slot_year": 974.0,
+    "batch_slots_continuous_equivalent": 5.70385580652521,
+    "batch_slots_rounded_up": 6,
+    "note": "Mean throughput screen; integer rounding is not a reliability or redundancy design."
+  },
+  "larval_survival_sensitivity": [
+    {
+      "larva_to_glass_survival": 0.001,
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 5555555.555555555,
+        "fertilized_eggs_required": 9259259.25925926,
+        "eggs_before_fertilization_required": 13227513.227513228,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1433.3333333333333,
+        "post_glass_dry_feed_kg": 1485.3333333333333,
+        "prepared_raw_cut_kg": 650.0,
+        "processing_coproducts_and_trim_kg": 350.0,
+        "cooking_loss_kg": 130.0,
+        "cooked_fish_kg": 520.0,
+        "cooked_portions": 5200.0,
+        "post_glass_dry_feed_per_kg_cooked": 2.8564102564102565,
+        "nutrients_kg": {
+          "feed_n": 114.07359999999998,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 85.30559999999998,
+          "feed_p": 14.853333333333333,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 10.857777777777779
+        }
+      }
+    },
+    {
+      "larva_to_glass_survival": 0.01,
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 555555.5555555555,
+        "fertilized_eggs_required": 925925.9259259258,
+        "eggs_before_fertilization_required": 1322751.3227513228,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1433.3333333333333,
+        "post_glass_dry_feed_kg": 1485.3333333333333,
+        "prepared_raw_cut_kg": 650.0,
+        "processing_coproducts_and_trim_kg": 350.0,
+        "cooking_loss_kg": 130.0,
+        "cooked_fish_kg": 520.0,
+        "cooked_portions": 5200.0,
+        "post_glass_dry_feed_per_kg_cooked": 2.8564102564102565,
+        "nutrients_kg": {
+          "feed_n": 114.07359999999998,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 85.30559999999998,
+          "feed_p": 14.853333333333333,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 10.857777777777779
+        }
+      }
+    },
+    {
+      "larva_to_glass_survival": 0.05,
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 111111.1111111111,
+        "fertilized_eggs_required": 185185.18518518517,
+        "eggs_before_fertilization_required": 264550.2645502645,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1433.3333333333333,
+        "post_glass_dry_feed_kg": 1485.3333333333333,
+        "prepared_raw_cut_kg": 650.0,
+        "processing_coproducts_and_trim_kg": 350.0,
+        "cooking_loss_kg": 130.0,
+        "cooked_fish_kg": 520.0,
+        "cooked_portions": 5200.0,
+        "post_glass_dry_feed_per_kg_cooked": 2.8564102564102565,
+        "nutrients_kg": {
+          "feed_n": 114.07359999999998,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 85.30559999999998,
+          "feed_p": 14.853333333333333,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 10.857777777777779
+        }
+      }
+    }
+  ],
+  "processing_and_feed_sensitivity": [
+    {
+      "name": "efficient_example",
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 555555.5555555555,
+        "fertilized_eggs_required": 925925.9259259258,
+        "eggs_before_fertilization_required": 1322751.3227513228,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1146.6666666666665,
+        "post_glass_dry_feed_kg": 1198.6666666666665,
+        "prepared_raw_cut_kg": 750.0,
+        "processing_coproducts_and_trim_kg": 250.0,
+        "cooking_loss_kg": 112.5,
+        "cooked_fish_kg": 637.5,
+        "cooked_portions": 6375.0,
+        "post_glass_dry_feed_per_kg_cooked": 1.8802614379084965,
+        "nutrients_kg": {
+          "feed_n": 92.05759999999998,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 63.28959999999998,
+          "feed_p": 11.986666666666665,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 7.99111111111111
+        }
+      }
+    },
+    {
+      "name": "reference_example",
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 555555.5555555555,
+        "fertilized_eggs_required": 925925.9259259258,
+        "eggs_before_fertilization_required": 1322751.3227513228,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1433.3333333333333,
+        "post_glass_dry_feed_kg": 1485.3333333333333,
+        "prepared_raw_cut_kg": 650.0,
+        "processing_coproducts_and_trim_kg": 350.0,
+        "cooking_loss_kg": 130.0,
+        "cooked_fish_kg": 520.0,
+        "cooked_portions": 5200.0,
+        "post_glass_dry_feed_per_kg_cooked": 2.8564102564102565,
+        "nutrients_kg": {
+          "feed_n": 114.07359999999998,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 85.30559999999998,
+          "feed_p": 14.853333333333333,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 10.857777777777779
+        }
+      }
+    },
+    {
+      "name": "higher_resource_example",
+      "budget": {
+        "harvest_live_kg": 1000.0,
+        "harvest_individuals": 4000.0,
+        "nursery_exit_individuals": 4444.444444444444,
+        "glass_eels_required": 5555.555555555555,
+        "normal_hatchlings_required": 555555.5555555555,
+        "fertilized_eggs_required": 925925.9259259258,
+        "eggs_before_fertilization_required": 1322751.3227513228,
+        "incoming_glass_eel_kg": 1.111111111111111,
+        "nursery_exit_live_kg": 44.44444444444444,
+        "nursery_dry_feed_kg": 51.99999999999999,
+        "growout_dry_feed_kg": 1911.111111111111,
+        "post_glass_dry_feed_kg": 1963.111111111111,
+        "prepared_raw_cut_kg": 550.0,
+        "processing_coproducts_and_trim_kg": 450.0,
+        "cooking_loss_kg": 165.0,
+        "cooked_fish_kg": 385.0,
+        "cooked_portions": 3850.0,
+        "post_glass_dry_feed_per_kg_cooked": 5.098989898989899,
+        "nutrients_kg": {
+          "feed_n": 150.76693333333333,
+          "seed_n": 0.031999999999999994,
+          "harvest_n": 28.8,
+          "nonretained_n": 121.99893333333334,
+          "feed_p": 19.63111111111111,
+          "seed_p": 0.004444444444444444,
+          "harvest_p": 4.0,
+          "nonretained_p": 15.635555555555555
+        }
+      }
+    }
+  ],
+  "oxygen_sensitivity": [
+    {
+      "name": "lower_demand",
+      "budget": {
+        "standing_biomass_kg": 1000.0,
+        "fish_o2_kg_per_day": 2.4,
+        "tan_n_kg_per_day": 0.15,
+        "nitrification_o2_kg_per_day": 0.6855,
+        "other_biological_o2_kg_per_day": 0.5,
+        "total_o2_kg_per_day": 3.5854999999999997,
+        "capacity_o2_kg_per_day": 5.3782499999999995,
+        "capacity_o2_kg_per_hour": 0.22409374999999998,
+        "nitrification_alkalinity_kg_caco3_per_day": 1.071,
+        "equivalent_flow_without_reoxygenation_m3_per_hour": 112.04687499999999,
+        "water_o2_inventory_above_floor_kg": 0.2,
+        "ideal_inventory_minutes_at_capacity_demand": 53.54901687351835
+      }
+    },
+    {
+      "name": "reference_demand",
+      "budget": {
+        "standing_biomass_kg": 1000.0,
+        "fish_o2_kg_per_day": 4.8,
+        "tan_n_kg_per_day": 0.3,
+        "nitrification_o2_kg_per_day": 1.371,
+        "other_biological_o2_kg_per_day": 2.0,
+        "total_o2_kg_per_day": 8.171,
+        "capacity_o2_kg_per_day": 12.256499999999999,
+        "capacity_o2_kg_per_hour": 0.5106875,
+        "nitrification_alkalinity_kg_caco3_per_day": 2.142,
+        "equivalent_flow_without_reoxygenation_m3_per_hour": 255.34374999999997,
+        "water_o2_inventory_above_floor_kg": 0.2,
+        "ideal_inventory_minutes_at_capacity_demand": 23.497735895239263
+      }
+    },
+    {
+      "name": "higher_demand",
+      "budget": {
+        "standing_biomass_kg": 1000.0,
+        "fish_o2_kg_per_day": 7.2,
+        "tan_n_kg_per_day": 0.44999999999999996,
+        "nitrification_o2_kg_per_day": 2.0564999999999998,
+        "other_biological_o2_kg_per_day": 4.5,
+        "total_o2_kg_per_day": 13.756499999999999,
+        "capacity_o2_kg_per_day": 20.634749999999997,
+        "capacity_o2_kg_per_hour": 0.8597812499999998,
+        "nitrification_alkalinity_kg_caco3_per_day": 3.2129999999999996,
+        "equivalent_flow_without_reoxygenation_m3_per_hour": 429.89062499999994,
+        "water_o2_inventory_above_floor_kg": 0.2,
+        "ideal_inventory_minutes_at_capacity_demand": 13.957038490895217
+      }
+    }
+  ],
+  "salt_inventory_sensitivity": [
+    {
+      "salt_concentration_g_per_kg": 35.0,
+      "salt_inventory_kg": 3500.0,
+      "makeup_salt_after_recovery_kg_per_day": 35.0,
+      "note": "Physical salt accounting only; concentration does not specify ion composition or biological suitability."
+    },
+    {
+      "salt_concentration_g_per_kg": 17.5,
+      "salt_inventory_kg": 1750.0,
+      "makeup_salt_after_recovery_kg_per_day": 17.5,
+      "note": "Physical salt accounting only; concentration does not specify ion composition or biological suitability."
+    },
+    {
+      "salt_concentration_g_per_kg": 13.0,
+      "salt_inventory_kg": 1300.0,
+      "makeup_salt_after_recovery_kg_per_day": 13.0,
+      "note": "Physical salt accounting only; concentration does not specify ion composition or biological suitability."
+    },
+    {
+      "salt_concentration_g_per_kg": 0.14,
+      "salt_inventory_kg": 14.000000000000002,
+      "makeup_salt_after_recovery_kg_per_day": 0.14,
+      "note": "Physical salt accounting only; concentration does not specify ion composition or biological suitability."
+    }
+  ],
+  "older_study_factors": {
+    "n2o_n_share_of_feed_n": [
+      0.008,
+      0.019
+    ],
+    "closed_system_kwh_per_kg_live": 3.09,
+    "closed_system_water_l_per_kg_live": 76.0,
+    "older_fcr": [
+      1.1,
+      2.24
+    ],
+    "older_feed_phosphorus_share": [
+      0.0071,
+      0.0141
+    ],
+    "feed_kcal_per_g": 3.27,
+    "crop_kcal_m2_day": [
+      30.2,
+      41.9
+    ],
+    "variety_factor": [
+      1.5,
+      2.5
+    ],
+    "n2o_tg_n_per_ppb": 3.07,
+    "waters_spare_phosphorus_kt_year": [
+      21.1,
+      56.2
+    ],
+    "common_level_spare_phosphorus_kt_year": [
+      1.37,
+      3.66
+    ]
+  },
+  "open_pond_methane_kg_per_t_live": {
+    "carp_ponds": 3.2070731707317073,
+    "bream_ponds": 629.9832
+  },
+  "per_person_cases": [
+    {
+      "processing": "efficient_example",
+      "people_billion": 4.0,
+      "cooked_eel_kg_per_person_year": 0.1,
+      "share_of_heritage_meat_allowance": [
+        0.05,
+        0.1
+      ],
+      "live_harvest_mt_year": 0.6274509803921569,
+      "post_glass_dry_feed_mt_year": 0.7521045751633986,
+      "feed_crop_land_km2": [
+        241.0532519281082,
+        557.4023871847536
+      ],
+      "feed_nitrogen_kt_year": 57.761631372549004,
+      "feed_phosphorus_kt_year": 7.521045751633986,
+      "harvest_phosphorus_kt_year": 2.5098039215686274,
+      "nonretained_nitrogen_kt_year": 39.71112156862744,
+      "nonretained_phosphorus_kt_year": 5.014030501089325,
+      "nonretained_phosphorus_over_waters_spare": [
+        0.08921762457454314,
+        0.23763177730281157
+      ],
+      "n2o_kt_n_year": [
+        0.46209305098039205,
+        1.0974709960784312
+      ],
+      "n2o_ppb_per_year": [
+        0.00015051890911413422,
+        0.0003574824091460688
+      ],
+      "closed_system_electricity_twh_year": 1.9388235294117646,
+      "closed_system_mean_power_gw": 0.22117539692125993,
+      "closed_system_water_km3_year": 0.047686274509803915,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.0020122812051649925,
+        "bream_ponds": 0.39528357647058826
+      }
+    },
+    {
+      "processing": "efficient_example",
+      "people_billion": 4.0,
+      "cooked_eel_kg_per_person_year": 1.0,
+      "share_of_heritage_meat_allowance": [
+        0.5,
+        1.0
+      ],
+      "live_harvest_mt_year": 6.2745098039215685,
+      "post_glass_dry_feed_mt_year": 7.521045751633986,
+      "feed_crop_land_km2": [
+        2410.532519281082,
+        5574.023871847537
+      ],
+      "feed_nitrogen_kt_year": 577.61631372549,
+      "feed_phosphorus_kt_year": 75.21045751633987,
+      "harvest_phosphorus_kt_year": 25.098039215686278,
+      "nonretained_nitrogen_kt_year": 397.1112156862744,
+      "nonretained_phosphorus_kt_year": 50.14030501089324,
+      "nonretained_phosphorus_over_waters_spare": [
+        0.8921762457454313,
+        2.3763177730281155
+      ],
+      "n2o_kt_n_year": [
+        4.620930509803921,
+        10.974709960784311
+      ],
+      "n2o_ppb_per_year": [
+        0.0015051890911413424,
+        0.003574824091460688
+      ],
+      "closed_system_electricity_twh_year": 19.388235294117646,
+      "closed_system_mean_power_gw": 2.211753969212599,
+      "closed_system_water_km3_year": 0.4768627450980392,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.020122812051649928,
+        "bream_ponds": 3.9528357647058825
+      }
+    },
+    {
+      "processing": "efficient_example",
+      "people_billion": 4.0,
+      "cooked_eel_kg_per_person_year": 2.0,
+      "share_of_heritage_meat_allowance": [
+        1.0,
+        2.0
+      ],
+      "live_harvest_mt_year": 12.549019607843137,
+      "post_glass_dry_feed_mt_year": 15.042091503267972,
+      "feed_crop_land_km2": [
+        4821.065038562164,
+        11148.047743695073
+      ],
+      "feed_nitrogen_kt_year": 1155.23262745098,
+      "feed_phosphorus_kt_year": 150.42091503267974,
+      "harvest_phosphorus_kt_year": 50.196078431372555,
+      "nonretained_nitrogen_kt_year": 794.2224313725488,
+      "nonretained_phosphorus_kt_year": 100.28061002178649,
+      "nonretained_phosphorus_over_waters_spare": [
+        1.7843524914908626,
+        4.752635546056231
+      ],
+      "n2o_kt_n_year": [
+        9.241861019607843,
+        21.949419921568623
+      ],
+      "n2o_ppb_per_year": [
+        0.003010378182282685,
+        0.007149648182921376
+      ],
+      "closed_system_electricity_twh_year": 38.77647058823529,
+      "closed_system_mean_power_gw": 4.423507938425198,
+      "closed_system_water_km3_year": 0.9537254901960784,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.040245624103299855,
+        "bream_ponds": 7.905671529411765
+      }
+    },
+    {
+      "processing": "efficient_example",
+      "people_billion": 8.0,
+      "cooked_eel_kg_per_person_year": 0.1,
+      "share_of_heritage_meat_allowance": [
+        0.05,
+        0.1
+      ],
+      "live_harvest_mt_year": 1.2549019607843137,
+      "post_glass_dry_feed_mt_year": 1.5042091503267971,
+      "feed_crop_land_km2": [
+        482.1065038562164,
+        1114.8047743695072
+      ],
+      "feed_nitrogen_kt_year": 115.52326274509801,
+      "feed_phosphorus_kt_year": 15.042091503267972,
+      "harvest_phosphorus_kt_year": 5.019607843137255,
+      "nonretained_nitrogen_kt_year": 79.42224313725488,
+      "nonretained_phosphorus_kt_year": 10.02806100217865,
+      "nonretained_phosphorus_over_waters_spare": [
+        0.1784352491490863,
+        0.47526355460562314
+      ],
+      "n2o_kt_n_year": [
+        0.9241861019607841,
+        2.1949419921568625
+      ],
+      "n2o_ppb_per_year": [
+        0.00030103781822826844,
+        0.0007149648182921376
+      ],
+      "closed_system_electricity_twh_year": 3.8776470588235292,
+      "closed_system_mean_power_gw": 0.44235079384251985,
+      "closed_system_water_km3_year": 0.09537254901960783,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.004024562410329985,
+        "bream_ponds": 0.7905671529411765
+      }
+    },
+    {
+      "processing": "efficient_example",
+      "people_billion": 8.0,
+      "cooked_eel_kg_per_person_year": 1.0,
+      "share_of_heritage_meat_allowance": [
+        0.5,
+        1.0
+      ],
+      "live_harvest_mt_year": 12.549019607843137,
+      "post_glass_dry_feed_mt_year": 15.042091503267972,
+      "feed_crop_land_km2": [
+        4821.065038562164,
+        11148.047743695073
+      ],
+      "feed_nitrogen_kt_year": 1155.23262745098,
+      "feed_phosphorus_kt_year": 150.42091503267974,
+      "harvest_phosphorus_kt_year": 50.196078431372555,
+      "nonretained_nitrogen_kt_year": 794.2224313725488,
+      "nonretained_phosphorus_kt_year": 100.28061002178649,
+      "nonretained_phosphorus_over_waters_spare": [
+        1.7843524914908626,
+        4.752635546056231
+      ],
+      "n2o_kt_n_year": [
+        9.241861019607843,
+        21.949419921568623
+      ],
+      "n2o_ppb_per_year": [
+        0.003010378182282685,
+        0.007149648182921376
+      ],
+      "closed_system_electricity_twh_year": 38.77647058823529,
+      "closed_system_mean_power_gw": 4.423507938425198,
+      "closed_system_water_km3_year": 0.9537254901960784,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.040245624103299855,
+        "bream_ponds": 7.905671529411765
+      }
+    },
+    {
+      "processing": "efficient_example",
+      "people_billion": 8.0,
+      "cooked_eel_kg_per_person_year": 2.0,
+      "share_of_heritage_meat_allowance": [
+        1.0,
+        2.0
+      ],
+      "live_harvest_mt_year": 25.098039215686274,
+      "post_glass_dry_feed_mt_year": 30.084183006535945,
+      "feed_crop_land_km2": [
+        9642.130077124328,
+        22296.095487390146
+      ],
+      "feed_nitrogen_kt_year": 2310.46525490196,
+      "feed_phosphorus_kt_year": 300.8418300653595,
+      "harvest_phosphorus_kt_year": 100.39215686274511,
+      "nonretained_nitrogen_kt_year": 1588.4448627450977,
+      "nonretained_phosphorus_kt_year": 200.56122004357297,
+      "nonretained_phosphorus_over_waters_spare": [
+        3.5687049829817252,
+        9.505271092112462
+      ],
+      "n2o_kt_n_year": [
+        18.483722039215685,
+        43.898839843137246
+      ],
+      "n2o_ppb_per_year": [
+        0.00602075636456537,
+        0.014299296365842751
+      ],
+      "closed_system_electricity_twh_year": 77.55294117647058,
+      "closed_system_mean_power_gw": 8.847015876850396,
+      "closed_system_water_km3_year": 1.9074509803921569,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.08049124820659971,
+        "bream_ponds": 15.81134305882353
+      }
+    },
+    {
+      "processing": "reference_example",
+      "people_billion": 4.0,
+      "cooked_eel_kg_per_person_year": 0.1,
+      "share_of_heritage_meat_allowance": [
+        0.05,
+        0.1
+      ],
+      "live_harvest_mt_year": 0.7692307692307693,
+      "post_glass_dry_feed_mt_year": 1.1425641025641027,
+      "feed_crop_land_km2": [
+        366.1974698127071,
+        846.781125008412
+      ],
+      "feed_nitrogen_kt_year": 87.74892307692308,
+      "feed_phosphorus_kt_year": 11.425641025641026,
+      "harvest_phosphorus_kt_year": 3.076923076923077,
+      "nonretained_nitrogen_kt_year": 65.61969230769229,
+      "nonretained_phosphorus_kt_year": 8.352136752136753,
+      "nonretained_phosphorus_over_waters_spare": [
+        0.14861453295616997,
+        0.3958358650301778
+      ],
+      "n2o_kt_n_year": [
+        0.7019913846153846,
+        1.6672295384615383
+      ],
+      "n2o_ppb_per_year": [
+        0.00022866168879979954,
+        0.0005430715108995239
+      ],
+      "closed_system_electricity_twh_year": 2.376923076923077,
+      "closed_system_mean_power_gw": 0.2711525298794293,
+      "closed_system_water_km3_year": 0.05846153846153847,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.002466979362101313,
+        "bream_ponds": 0.4846024615384616
+      }
+    },
+    {
+      "processing": "reference_example",
+      "people_billion": 4.0,
+      "cooked_eel_kg_per_person_year": 1.0,
+      "share_of_heritage_meat_allowance": [
+        0.5,
+        1.0
+      ],
+      "live_harvest_mt_year": 7.6923076923076925,
+      "post_glass_dry_feed_mt_year": 11.425641025641026,
+      "feed_crop_land_km2": [
+        3661.9746981270705,
+        8467.811250084122
+      ],
+      "feed_nitrogen_kt_year": 877.4892307692307,
+      "feed_phosphorus_kt_year": 114.25641025641028,
+      "harvest_phosphorus_kt_year": 30.76923076923077,
+      "nonretained_nitrogen_kt_year": 656.196923076923,
+      "nonretained_phosphorus_kt_year": 83.52136752136754,
+      "nonretained_phosphorus_over_waters_spare": [
+        1.4861453295617,
+        3.9583586503017787
+      ],
+      "n2o_kt_n_year": [
+        7.019913846153846,
+        16.672295384615385
+      ],
+      "n2o_ppb_per_year": [
+        0.0022866168879979954,
+        0.005430715108995239
+      ],
+      "closed_system_electricity_twh_year": 23.76923076923077,
+      "closed_system_mean_power_gw": 2.711525298794293,
+      "closed_system_water_km3_year": 0.5846153846153846,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.024669793621013136,
+        "bream_ponds": 4.846024615384616
+      }
+    },
+    {
+      "processing": "reference_example",
+      "people_billion": 4.0,
+      "cooked_eel_kg_per_person_year": 2.0,
+      "share_of_heritage_meat_allowance": [
+        1.0,
+        2.0
+      ],
+      "live_harvest_mt_year": 15.384615384615385,
+      "post_glass_dry_feed_mt_year": 22.851282051282052,
+      "feed_crop_land_km2": [
+        7323.949396254141,
+        16935.622500168243
+      ],
+      "feed_nitrogen_kt_year": 1754.9784615384615,
+      "feed_phosphorus_kt_year": 228.51282051282055,
+      "harvest_phosphorus_kt_year": 61.53846153846154,
+      "nonretained_nitrogen_kt_year": 1312.393846153846,
+      "nonretained_phosphorus_kt_year": 167.04273504273507,
+      "nonretained_phosphorus_over_waters_spare": [
+        2.9722906591234,
+        7.916717300603557
+      ],
+      "n2o_kt_n_year": [
+        14.039827692307693,
+        33.34459076923077
+      ],
+      "n2o_ppb_per_year": [
+        0.004573233775995991,
+        0.010861430217990478
+      ],
+      "closed_system_electricity_twh_year": 47.53846153846154,
+      "closed_system_mean_power_gw": 5.423050597588586,
+      "closed_system_water_km3_year": 1.1692307692307693,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.04933958724202627,
+        "bream_ponds": 9.692049230769232
+      }
+    },
+    {
+      "processing": "reference_example",
+      "people_billion": 8.0,
+      "cooked_eel_kg_per_person_year": 0.1,
+      "share_of_heritage_meat_allowance": [
+        0.05,
+        0.1
+      ],
+      "live_harvest_mt_year": 1.5384615384615385,
+      "post_glass_dry_feed_mt_year": 2.2851282051282054,
+      "feed_crop_land_km2": [
+        732.3949396254142,
+        1693.562250016824
+      ],
+      "feed_nitrogen_kt_year": 175.49784615384615,
+      "feed_phosphorus_kt_year": 22.851282051282052,
+      "harvest_phosphorus_kt_year": 6.153846153846154,
+      "nonretained_nitrogen_kt_year": 131.23938461538458,
+      "nonretained_phosphorus_kt_year": 16.704273504273505,
+      "nonretained_phosphorus_over_waters_spare": [
+        0.29722906591233994,
+        0.7916717300603556
+      ],
+      "n2o_kt_n_year": [
+        1.4039827692307691,
+        3.3344590769230766
+      ],
+      "n2o_ppb_per_year": [
+        0.0004573233775995991,
+        0.0010861430217990477
+      ],
+      "closed_system_electricity_twh_year": 4.753846153846154,
+      "closed_system_mean_power_gw": 0.5423050597588586,
+      "closed_system_water_km3_year": 0.11692307692307694,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.004933958724202626,
+        "bream_ponds": 0.9692049230769232
+      }
+    },
+    {
+      "processing": "reference_example",
+      "people_billion": 8.0,
+      "cooked_eel_kg_per_person_year": 1.0,
+      "share_of_heritage_meat_allowance": [
+        0.5,
+        1.0
+      ],
+      "live_harvest_mt_year": 15.384615384615385,
+      "post_glass_dry_feed_mt_year": 22.851282051282052,
+      "feed_crop_land_km2": [
+        7323.949396254141,
+        16935.622500168243
+      ],
+      "feed_nitrogen_kt_year": 1754.9784615384615,
+      "feed_phosphorus_kt_year": 228.51282051282055,
+      "harvest_phosphorus_kt_year": 61.53846153846154,
+      "nonretained_nitrogen_kt_year": 1312.393846153846,
+      "nonretained_phosphorus_kt_year": 167.04273504273507,
+      "nonretained_phosphorus_over_waters_spare": [
+        2.9722906591234,
+        7.916717300603557
+      ],
+      "n2o_kt_n_year": [
+        14.039827692307693,
+        33.34459076923077
+      ],
+      "n2o_ppb_per_year": [
+        0.004573233775995991,
+        0.010861430217990478
+      ],
+      "closed_system_electricity_twh_year": 47.53846153846154,
+      "closed_system_mean_power_gw": 5.423050597588586,
+      "closed_system_water_km3_year": 1.1692307692307693,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.04933958724202627,
+        "bream_ponds": 9.692049230769232
+      }
+    },
+    {
+      "processing": "reference_example",
+      "people_billion": 8.0,
+      "cooked_eel_kg_per_person_year": 2.0,
+      "share_of_heritage_meat_allowance": [
+        1.0,
+        2.0
+      ],
+      "live_harvest_mt_year": 30.76923076923077,
+      "post_glass_dry_feed_mt_year": 45.702564102564104,
+      "feed_crop_land_km2": [
+        14647.898792508282,
+        33871.24500033649
+      ],
+      "feed_nitrogen_kt_year": 3509.956923076923,
+      "feed_phosphorus_kt_year": 457.0256410256411,
+      "harvest_phosphorus_kt_year": 123.07692307692308,
+      "nonretained_nitrogen_kt_year": 2624.787692307692,
+      "nonretained_phosphorus_kt_year": 334.08547008547015,
+      "nonretained_phosphorus_over_waters_spare": [
+        5.9445813182468,
+        15.833434601207115
+      ],
+      "n2o_kt_n_year": [
+        28.079655384615386,
+        66.68918153846154
+      ],
+      "n2o_ppb_per_year": [
+        0.009146467551991982,
+        0.021722860435980956
+      ],
+      "closed_system_electricity_twh_year": 95.07692307692308,
+      "closed_system_mean_power_gw": 10.846101195177171,
+      "closed_system_water_km3_year": 2.3384615384615386,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.09867917448405254,
+        "bream_ponds": 19.384098461538464
+      }
+    },
+    {
+      "processing": "higher_resource_example",
+      "people_billion": 4.0,
+      "cooked_eel_kg_per_person_year": 0.1,
+      "share_of_heritage_meat_allowance": [
+        0.05,
+        0.1
+      ],
+      "live_harvest_mt_year": 1.0389610389610389,
+      "post_glass_dry_feed_mt_year": 2.0395959595959594,
+      "feed_crop_land_km2": [
+        653.7006354112693,
+        1511.5925289035424
+      ],
+      "feed_nitrogen_kt_year": 156.64096969696968,
+      "feed_phosphorus_kt_year": 20.395959595959592,
+      "harvest_phosphorus_kt_year": 4.1558441558441555,
+      "nonretained_nitrogen_kt_year": 126.75213852813853,
+      "nonretained_phosphorus_kt_year": 16.244733044733042,
+      "nonretained_phosphorus_over_waters_spare": [
+        0.2890521894080612,
+        0.7698925613617555
+      ],
+      "n2o_kt_n_year": [
+        1.2531277575757576,
+        2.976178424242424
+      ],
+      "n2o_ppb_per_year": [
+        0.00040818493732109365,
+        0.0009694392261375974
+      ],
+      "closed_system_electricity_twh_year": 3.21038961038961,
+      "closed_system_mean_power_gw": 0.3662319884085798,
+      "closed_system_water_km3_year": 0.07896103896103895,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.003332024073487488,
+        "bream_ponds": 0.654528
+      }
+    },
+    {
+      "processing": "higher_resource_example",
+      "people_billion": 4.0,
+      "cooked_eel_kg_per_person_year": 1.0,
+      "share_of_heritage_meat_allowance": [
+        0.5,
+        1.0
+      ],
+      "live_harvest_mt_year": 10.38961038961039,
+      "post_glass_dry_feed_mt_year": 20.395959595959596,
+      "feed_crop_land_km2": [
+        6537.006354112694,
+        15115.925289035424
+      ],
+      "feed_nitrogen_kt_year": 1566.4096969696968,
+      "feed_phosphorus_kt_year": 203.95959595959596,
+      "harvest_phosphorus_kt_year": 41.55844155844156,
+      "nonretained_nitrogen_kt_year": 1267.5213852813854,
+      "nonretained_phosphorus_kt_year": 162.44733044733044,
+      "nonretained_phosphorus_over_waters_spare": [
+        2.8905218940806128,
+        7.698925613617556
+      ],
+      "n2o_kt_n_year": [
+        12.531277575757574,
+        29.761784242424238
+      ],
+      "n2o_ppb_per_year": [
+        0.004081849373210936,
+        0.009694392261375973
+      ],
+      "closed_system_electricity_twh_year": 32.103896103896105,
+      "closed_system_mean_power_gw": 3.6623198840857976,
+      "closed_system_water_km3_year": 0.7896103896103897,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.03332024073487488,
+        "bream_ponds": 6.54528
+      }
+    },
+    {
+      "processing": "higher_resource_example",
+      "people_billion": 4.0,
+      "cooked_eel_kg_per_person_year": 2.0,
+      "share_of_heritage_meat_allowance": [
+        1.0,
+        2.0
+      ],
+      "live_harvest_mt_year": 20.77922077922078,
+      "post_glass_dry_feed_mt_year": 40.79191919191919,
+      "feed_crop_land_km2": [
+        13074.012708225388,
+        30231.850578070847
+      ],
+      "feed_nitrogen_kt_year": 3132.8193939393936,
+      "feed_phosphorus_kt_year": 407.9191919191919,
+      "harvest_phosphorus_kt_year": 83.11688311688312,
+      "nonretained_nitrogen_kt_year": 2535.042770562771,
+      "nonretained_phosphorus_kt_year": 324.8946608946609,
+      "nonretained_phosphorus_over_waters_spare": [
+        5.7810437881612255,
+        15.397851227235112
+      ],
+      "n2o_kt_n_year": [
+        25.06255515151515,
+        59.523568484848475
+      ],
+      "n2o_ppb_per_year": [
+        0.008163698746421873,
+        0.019388784522751945
+      ],
+      "closed_system_electricity_twh_year": 64.20779220779221,
+      "closed_system_mean_power_gw": 7.324639768171595,
+      "closed_system_water_km3_year": 1.5792207792207793,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.06664048146974975,
+        "bream_ponds": 13.09056
+      }
+    },
+    {
+      "processing": "higher_resource_example",
+      "people_billion": 8.0,
+      "cooked_eel_kg_per_person_year": 0.1,
+      "share_of_heritage_meat_allowance": [
+        0.05,
+        0.1
+      ],
+      "live_harvest_mt_year": 2.0779220779220777,
+      "post_glass_dry_feed_mt_year": 4.079191919191919,
+      "feed_crop_land_km2": [
+        1307.4012708225387,
+        3023.185057807085
+      ],
+      "feed_nitrogen_kt_year": 313.28193939393935,
+      "feed_phosphorus_kt_year": 40.791919191919185,
+      "harvest_phosphorus_kt_year": 8.311688311688311,
+      "nonretained_nitrogen_kt_year": 253.50427705627706,
+      "nonretained_phosphorus_kt_year": 32.489466089466084,
+      "nonretained_phosphorus_over_waters_spare": [
+        0.5781043788161224,
+        1.539785122723511
+      ],
+      "n2o_kt_n_year": [
+        2.506255515151515,
+        5.952356848484848
+      ],
+      "n2o_ppb_per_year": [
+        0.0008163698746421873,
+        0.0019388784522751947
+      ],
+      "closed_system_electricity_twh_year": 6.42077922077922,
+      "closed_system_mean_power_gw": 0.7324639768171596,
+      "closed_system_water_km3_year": 0.1579220779220779,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.006664048146974976,
+        "bream_ponds": 1.309056
+      }
+    },
+    {
+      "processing": "higher_resource_example",
+      "people_billion": 8.0,
+      "cooked_eel_kg_per_person_year": 1.0,
+      "share_of_heritage_meat_allowance": [
+        0.5,
+        1.0
+      ],
+      "live_harvest_mt_year": 20.77922077922078,
+      "post_glass_dry_feed_mt_year": 40.79191919191919,
+      "feed_crop_land_km2": [
+        13074.012708225388,
+        30231.850578070847
+      ],
+      "feed_nitrogen_kt_year": 3132.8193939393936,
+      "feed_phosphorus_kt_year": 407.9191919191919,
+      "harvest_phosphorus_kt_year": 83.11688311688312,
+      "nonretained_nitrogen_kt_year": 2535.042770562771,
+      "nonretained_phosphorus_kt_year": 324.8946608946609,
+      "nonretained_phosphorus_over_waters_spare": [
+        5.7810437881612255,
+        15.397851227235112
+      ],
+      "n2o_kt_n_year": [
+        25.06255515151515,
+        59.523568484848475
+      ],
+      "n2o_ppb_per_year": [
+        0.008163698746421873,
+        0.019388784522751945
+      ],
+      "closed_system_electricity_twh_year": 64.20779220779221,
+      "closed_system_mean_power_gw": 7.324639768171595,
+      "closed_system_water_km3_year": 1.5792207792207793,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.06664048146974975,
+        "bream_ponds": 13.09056
+      }
+    },
+    {
+      "processing": "higher_resource_example",
+      "people_billion": 8.0,
+      "cooked_eel_kg_per_person_year": 2.0,
+      "share_of_heritage_meat_allowance": [
+        1.0,
+        2.0
+      ],
+      "live_harvest_mt_year": 41.55844155844156,
+      "post_glass_dry_feed_mt_year": 81.58383838383838,
+      "feed_crop_land_km2": [
+        26148.025416450775,
+        60463.701156141695
+      ],
+      "feed_nitrogen_kt_year": 6265.638787878787,
+      "feed_phosphorus_kt_year": 815.8383838383838,
+      "harvest_phosphorus_kt_year": 166.23376623376623,
+      "nonretained_nitrogen_kt_year": 5070.085541125542,
+      "nonretained_phosphorus_kt_year": 649.7893217893218,
+      "nonretained_phosphorus_over_waters_spare": [
+        11.562087576322451,
+        30.795702454470224
+      ],
+      "n2o_kt_n_year": [
+        50.1251103030303,
+        119.04713696969695
+      ],
+      "n2o_ppb_per_year": [
+        0.016327397492843745,
+        0.03877756904550389
+      ],
+      "closed_system_electricity_twh_year": 128.41558441558442,
+      "closed_system_mean_power_gw": 14.64927953634319,
+      "closed_system_water_km3_year": 3.1584415584415586,
+      "open_pond_methane_mt_year": {
+        "carp_ponds": 0.1332809629394995,
+        "bream_ponds": 26.18112
+      }
+    }
+  ],
+  "spawning_run_phosphorus": {
+    "spawner_individual_kg": 0.25,
+    "glass_eel_individual_kg": 0.0002,
+    "phosphorus_carried_down_kg_per_t_spawners": 4.0,
+    "cases": [
+      {
+        "case": "culture",
+        "glass_eel_to_spawner_survival": 0.7200000000000001,
+        "phosphorus_share_carried_back": 0.0011111111111111111
+      },
+      {
+        "case": "wild",
+        "glass_eel_to_spawner_survival": 0.1,
+        "phosphorus_share_carried_back": 0.008
+      },
+      {
+        "case": "wild",
+        "glass_eel_to_spawner_survival": 0.01,
+        "phosphorus_share_carried_back": 0.08
+      }
+    ]
+  },
+  "unquantified": [
+    "Broodstock and pre-glass feed and wastes",
+    "Hatchery oxygen and energy",
+    "Grow-out duration and biomass trajectory",
+    "Low-gravity oxygen transfer and electrical energy",
+    "Local prey production and habitat carrying capacity",
+    "Processing energy and coproduct recovery",
+    "Survival or yield of locally spawning or fully freshwater breeding lines",
+    "Methane from closed systems' sludge, which depends on its treatment",
+    "The feed crops' own N2O and the land of feed made from power",
+    "The seawater lake's temperature by depth and the eggs' exposure",
+    "A wild population's size, and so the spawning run's phosphorus in tonnes a year"
+  ]
+}

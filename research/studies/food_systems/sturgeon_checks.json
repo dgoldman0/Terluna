@@ -1,0 +1,44 @@
+{
+  "schema": "terluna.research.sturgeon-checks/1",
+  "checked_at_utc": "2026-11-08T01:07:51Z",
+  "branch": "domain/food-systems",
+  "base": "domain/food-systems with main merged in; the merge staged and uncommitted when these checks ran",
+  "evidence": "Literature assessment rebuilt on the hydrosphere's cold-waters study, with source and document checks. No biological trials, ecological simulations, lake model, empirical yields or new production coefficients.",
+  "document_checks": {
+    "source_register": "21 unique source IDs (ST01-ST21), every one cited in the chapter; access, support and limits recorded for each",
+    "relative_links": "Every relative link in the chapter resolves (eel_habitat_hatchery.md, culinary_evaluation.md, eel_sources.json, sturgeon_sources.json, sturgeon_checks.json, biosphere/ecology/machines.md, resources/sea_phosphorus.md)",
+    "markdown_fences": "Balanced",
+    "hard_wraps": "None: one line per paragraph or list item",
+    "narration": "No narration of the author and no attribution of decisions; ideas from the ideation session of 4-5 November and the review of 6 November labelled as ideas",
+    "temperatures_on_rates": "Every rate carries its temperature, or the chapter states that the abstract read gave none (ST13, ST14)"
+  },
+  "source_checks": {
+    "ST02_reread": "Caspian Biodiversity Information System page re-read 2026-11-07: spawning at 6-16 C (Ural runs at 7-11 and 10-15 C), eggs and larvae at 9-15 C, juveniles at 15-26 C, adults at 20-31 C in summer, most females mature at 15-20 years; the chapter of 6 November gave female maturity as 16-22 years, replaced by these values",
+    "ST20_added": "IUCN press release of 21 July 2022, read in full for its sturgeon passages",
+    "ST21_added": "WWF Central and Eastern Europe account of the same update, read in full",
+    "consulted_not_cited": "Congiu, Gessner and Ludwig (2023), Oryx 57(1): 9-10; no species categories in its readable text"
+  },
+  "product_checks": {
+    "cold_waters": "Values taken from research/studies/cold_waters/README.md on domain/hydrosphere (1ac9357d) and read against it: 543 lakes below 20 C covering 220,000 km2; 15 below 18 C covering 583 km2; a 30 m lake's floor at 21.1-21.7 C; 0.5 m pond below 20 C for 244 h and below 18 C for 39 h, 1 m pond 181 h and 4.5 h, 2 m pond 24 h and 0 h, of each 709-hour lunar day",
+    "oxygen": "8.941 mg/L at saturation at 21 C under the design air (biosphere.ecology.lake.oxygen_saturation, 1.2 atm, O2 fraction 0.17436), so the register's 3.5-6.3 mg/L in the deep lakes' deepest tenth is 39-70% of saturation",
+    "eel_scale": "The closed systems' 5.42 GW for fed eel at 8 billion people and 1 kg of cooked eel each, from results/eel_budget.json"
+  },
+  "decisions_cited": "research/decisions.md on main: the rules for what lives wild (12 October) and their application to every wild line bred from Earth stock (6 November); the waters' trophic design and the deep lakes' oxygen (19 October); organisms crossing between worlds (6 November); the food-systems branch's register read as ideation (7 November); the turned design years at the target (6 and 7 November)",
+  "tests": {
+    "command": "ulimit -v 6000000; nice -n 10 python3 -m pytest -q research/studies/food_systems",
+    "passed": 59,
+    "failed": 0,
+    "note": "The chapter has no code of its own; the run covers the study's tests, the eel accounts it cites among them"
+  },
+  "not_performed": [
+    "make check (run by the lead)",
+    "Complete full-text appraisal of abstract-only sources",
+    "The hydrosphere's lake model for shaded inflows at the coldest lakes",
+    "A sized chilled hatchery's energy",
+    "Biological, food-safety or sensory validation"
+  ],
+  "files": {
+    "research/studies/food_systems/sturgeon_habitat_foods.md": "d5fb4cc9ce3d70a9f7e05abfe05fceafe58b048249fe02a416b02ae42f028d8c",
+    "research/studies/food_systems/sturgeon_sources.json": "25d0fe88a877f58120f1f31df28d6fdf968aa2d2f0fd9699cd763d6adc302d10"
+  }
+}
