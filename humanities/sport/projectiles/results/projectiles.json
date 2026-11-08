@@ -1,0 +1,1483 @@
+{
+ "schema": "terluna.humanities.sport-projectiles/1",
+ "producer": {
+  "domain": "humanities",
+  "files": {
+   "humanities/sport/projectiles/aimed.py": "63c1960874d5b00a",
+   "humanities/sport/state.py": "9a8e995c0621bea6",
+   "humanities/sport/reach.py": "ac31790edc43d4aa",
+   "humanities/sport/envelope.py": "df4abe3934e22013",
+   "humanities/dance/envelope.py": "660f3247df5da23d",
+   "humanities/dance/body/model.py": "2b553c5592ee07a5",
+   "humanities/dance/body/pose.py": "a8c420d770df0a9d",
+   "habitation/low_gravity/movement.py": "af012c7a4d59ea6f"
+  },
+  "constants": {
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "STANDARD_GRAVITY": 9.80665
+  },
+  "inputs": {
+   "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
+   "humanities/dance/vocabulary/poses.json": "128fac64dc50a3ed"
+  }
+ },
+ "evidence": "Point-mass flights with stated drag (and a disc's lift for the clay) in the design run's air at the shared gravity beside Earth's, with specifications from a marker manual, a maker's ballistic table, arrow and clay-target aerodynamics papers and stated assumptions (sources.json); shooters and dodging targets from the sport study's bodies and reach engine. Screens, not measurements: nothing was fired, thrown or dodged.",
+ "heights_m": {
+  "muzzle": 1.4,
+  "chest": 1.2
+ },
+ "projectiles": {
+  "paintball": {
+   "kg": 0.0032,
+   "diameter_m": 0.0173,
+   "drag_coefficient": 0.47,
+   "muzzle_m_s": 91.44,
+   "moon": {
+    "k_per_m": 0.024229,
+    "speed_e_folding_m": 41.3,
+    "terminal_m_s": 8.19,
+    "table": [
+     {
+      "distance_m": 10,
+      "flat": {
+       "flight_s": 0.124,
+       "speed_m_s": 71.8,
+       "drop_m": 0.012
+      },
+      "aimed": {
+       "elevation_deg": -1.08,
+       "flight_s": 0.124,
+       "speed_m_s": 71.8,
+       "energy_J": 8.24,
+       "drift_per_m_s_wind_m": 0.014
+      }
+     },
+     {
+      "distance_m": 20,
+      "flat": {
+       "flight_s": 0.281,
+       "speed_m_s": 56.3,
+       "drop_m": 0.055
+      },
+      "aimed": {
+       "elevation_deg": -0.415,
+       "flight_s": 0.281,
+       "speed_m_s": 56.3,
+       "energy_J": 5.08,
+       "drift_per_m_s_wind_m": 0.063
+      }
+     },
+     {
+      "distance_m": 30,
+      "flat": {
+       "flight_s": 0.482,
+       "speed_m_s": 44.2,
+       "drop_m": 0.151
+      },
+      "aimed": {
+       "elevation_deg": -0.094,
+       "flight_s": 0.482,
+       "speed_m_s": 44.2,
+       "energy_J": 3.13,
+       "drift_per_m_s_wind_m": 0.154
+      }
+     },
+     {
+      "distance_m": 40,
+      "flat": {
+       "flight_s": 0.738,
+       "speed_m_s": 34.7,
+       "drop_m": 0.332
+      },
+      "aimed": {
+       "elevation_deg": 0.189,
+       "flight_s": 0.738,
+       "speed_m_s": 34.7,
+       "energy_J": 1.93,
+       "drift_per_m_s_wind_m": 0.301
+      }
+     },
+     {
+      "distance_m": 50,
+      "flat": {
+       "flight_s": 1.065,
+       "speed_m_s": 27.2,
+       "drop_m": 0.65
+      },
+      "aimed": {
+       "elevation_deg": 0.516,
+       "flight_s": 1.065,
+       "speed_m_s": 27.2,
+       "energy_J": 1.19,
+       "drift_per_m_s_wind_m": 0.518
+      }
+     },
+     {
+      "distance_m": 60,
+      "flat": {
+       "flight_s": 1.48,
+       "speed_m_s": 21.4,
+       "drop_m": 1.192
+      },
+      "aimed": {
+       "elevation_deg": 0.947,
+       "flight_s": 1.48,
+       "speed_m_s": 21.4,
+       "energy_J": 0.73,
+       "drift_per_m_s_wind_m": 0.824
+      }
+     }
+    ],
+    "farthest": {
+     "elevation_deg": 24.1,
+     "range_m": 124.9,
+     "flight_s": 11.83,
+     "apex_m": 32.7
+    }
+   },
+   "earth": {
+    "k_per_m": 0.021146,
+    "speed_e_folding_m": 47.3,
+    "terminal_m_s": 21.53,
+    "table": [
+     {
+      "distance_m": 10,
+      "flat": {
+       "flight_s": 0.122,
+       "speed_m_s": 74.0,
+       "drop_m": 0.068
+      },
+      "aimed": {
+       "elevation_deg": -0.757,
+       "flight_s": 0.122,
+       "speed_m_s": 74.0,
+       "energy_J": 8.77,
+       "drift_per_m_s_wind_m": 0.012
+      }
+     },
+     {
+      "distance_m": 20,
+      "flat": {
+       "flight_s": 0.272,
+       "speed_m_s": 59.9,
+       "drop_m": 0.318
+      },
+      "aimed": {
+       "elevation_deg": 0.337,
+       "flight_s": 0.272,
+       "speed_m_s": 59.9,
+       "energy_J": 5.75,
+       "drift_per_m_s_wind_m": 0.054
+      }
+     },
+     {
+      "distance_m": 30,
+      "flat": {
+       "flight_s": 0.458,
+       "speed_m_s": 48.6,
+       "drop_m": 0.845
+      },
+      "aimed": {
+       "elevation_deg": 1.231,
+       "flight_s": 0.458,
+       "speed_m_s": 48.5,
+       "energy_J": 3.77,
+       "drift_per_m_s_wind_m": 0.13
+      }
+     },
+     {
+      "distance_m": 40,
+      "flat": {
+       "flight_s": null,
+       "speed_m_s": null,
+       "drop_m": null
+      },
+      "aimed": {
+       "elevation_deg": 2.288,
+       "flight_s": 0.688,
+       "speed_m_s": 39.3,
+       "energy_J": 2.47,
+       "drift_per_m_s_wind_m": 0.251
+      }
+     },
+     {
+      "distance_m": 50,
+      "flat": {
+       "flight_s": null,
+       "speed_m_s": null,
+       "drop_m": null
+      },
+      "aimed": {
+       "elevation_deg": 3.672,
+       "flight_s": 0.974,
+       "speed_m_s": 32.0,
+       "energy_J": 1.63,
+       "drift_per_m_s_wind_m": 0.426
+      }
+     },
+     {
+      "distance_m": 60,
+      "flat": {
+       "flight_s": null,
+       "speed_m_s": null,
+       "drop_m": null
+      },
+      "aimed": {
+       "elevation_deg": 5.569,
+       "flight_s": 1.331,
+       "speed_m_s": 26.1,
+       "energy_J": 1.09,
+       "drift_per_m_s_wind_m": 0.672
+      }
+     }
+    ],
+    "farthest": {
+     "elevation_deg": 30.4,
+     "range_m": 95.0,
+     "flight_s": 4.51,
+     "apex_m": 27.2
+    }
+   }
+  },
+  "arrow": {
+   "kg": 0.0194,
+   "diameter_m": 0.0055,
+   "drag_coefficient": 3.1,
+   "muzzle_m_s": 60.0,
+   "moon": {
+    "k_per_m": 0.002664,
+    "speed_e_folding_m": 375.3,
+    "terminal_m_s": 24.69,
+    "table": [
+     {
+      "distance_m": 18,
+      "flat": {
+       "flight_s": 0.307,
+       "speed_m_s": 57.2,
+       "drop_m": 0.075
+      },
+      "aimed": {
+       "elevation_deg": -0.396,
+       "flight_s": 0.307,
+       "speed_m_s": 57.2,
+       "energy_J": 31.73,
+       "drift_per_m_s_wind_m": 0.007
+      }
+     },
+     {
+      "distance_m": 30,
+      "flat": {
+       "flight_s": 0.521,
+       "speed_m_s": 55.4,
+       "drop_m": 0.214
+      },
+      "aimed": {
+       "elevation_deg": 0.027,
+       "flight_s": 0.521,
+       "speed_m_s": 55.4,
+       "energy_J": 29.77,
+       "drift_per_m_s_wind_m": 0.021
+      }
+     },
+     {
+      "distance_m": 50,
+      "flat": {
+       "flight_s": 0.891,
+       "speed_m_s": 52.5,
+       "drop_m": 0.618
+      },
+      "aimed": {
+       "elevation_deg": 0.479,
+       "flight_s": 0.891,
+       "speed_m_s": 52.5,
+       "energy_J": 26.76,
+       "drift_per_m_s_wind_m": 0.058
+      }
+     },
+     {
+      "distance_m": 70,
+      "flat": {
+       "flight_s": 1.283,
+       "speed_m_s": 49.8,
+       "drop_m": 1.257
+      },
+      "aimed": {
+       "elevation_deg": 0.865,
+       "flight_s": 1.283,
+       "speed_m_s": 49.8,
+       "energy_J": 24.05,
+       "drift_per_m_s_wind_m": 0.116
+      }
+     },
+     {
+      "distance_m": 90,
+      "flat": {
+       "flight_s": null,
+       "speed_m_s": null,
+       "drop_m": null
+      },
+      "aimed": {
+       "elevation_deg": 1.247,
+       "flight_s": 1.696,
+       "speed_m_s": 47.2,
+       "energy_J": 21.63,
+       "drift_per_m_s_wind_m": 0.195
+      }
+     }
+    ],
+    "farthest": {
+     "elevation_deg": 34.75,
+     "range_m": 530.8,
+     "flight_s": 26.52,
+     "apex_m": 149.0
+    },
+    "low_drag": {
+     "drag_coefficient": 1.5,
+     "table": [
+      {
+       "distance_m": 18,
+       "flat": {
+        "flight_s": 0.304,
+        "speed_m_s": 58.6,
+        "drop_m": 0.074
+       },
+       "aimed": {
+        "elevation_deg": -0.4,
+        "flight_s": 0.304,
+        "speed_m_s": 58.6,
+        "energy_J": 33.34,
+        "drift_per_m_s_wind_m": 0.004
+       }
+      },
+      {
+       "distance_m": 30,
+       "flat": {
+        "flight_s": 0.51,
+        "speed_m_s": 57.7,
+        "drop_m": 0.208
+       },
+       "aimed": {
+        "elevation_deg": 0.016,
+        "flight_s": 0.51,
+        "speed_m_s": 57.7,
+        "energy_J": 32.33,
+        "drift_per_m_s_wind_m": 0.01
+       }
+      },
+      {
+       "distance_m": 50,
+       "flat": {
+        "flight_s": 0.861,
+        "speed_m_s": 56.3,
+        "drop_m": 0.589
+       },
+       "aimed": {
+        "elevation_deg": 0.446,
+        "flight_s": 0.861,
+        "speed_m_s": 56.3,
+        "energy_J": 30.7,
+        "drift_per_m_s_wind_m": 0.027
+       }
+      },
+      {
+       "distance_m": 70,
+       "flat": {
+        "flight_s": 1.221,
+        "speed_m_s": 54.9,
+        "drop_m": 1.175
+       },
+       "aimed": {
+        "elevation_deg": 0.798,
+        "flight_s": 1.221,
+        "speed_m_s": 54.8,
+        "energy_J": 29.16,
+        "drift_per_m_s_wind_m": 0.054
+       }
+      },
+      {
+       "distance_m": 90,
+       "flat": {
+        "flight_s": null,
+        "speed_m_s": null,
+        "drop_m": null
+       },
+       "aimed": {
+        "elevation_deg": 1.132,
+        "flight_s": 1.591,
+        "speed_m_s": 53.4,
+        "energy_J": 27.7,
+        "drift_per_m_s_wind_m": 0.091
+       }
+      }
+     ],
+     "farthest": {
+      "elevation_deg": 37.45,
+      "range_m": 815.1,
+      "flight_s": 32.93,
+      "apex_m": 225.8
+     }
+    }
+   },
+   "earth": {
+    "k_per_m": 0.002325,
+    "speed_e_folding_m": 430.0,
+    "terminal_m_s": 64.94,
+    "table": [
+     {
+      "distance_m": 18,
+      "flat": {
+       "flight_s": 0.306,
+       "speed_m_s": 57.6,
+       "drop_m": 0.454
+      },
+      "aimed": {
+       "elevation_deg": 0.809,
+       "flight_s": 0.306,
+       "speed_m_s": 57.6,
+       "energy_J": 32.15,
+       "drift_per_m_s_wind_m": 0.006
+      }
+     },
+     {
+      "distance_m": 30,
+      "flat": {
+       "flight_s": 0.518,
+       "speed_m_s": 56.2,
+       "drop_m": 1.285
+      },
+      "aimed": {
+       "elevation_deg": 2.074,
+       "flight_s": 0.518,
+       "speed_m_s": 56.0,
+       "energy_J": 30.41,
+       "drift_per_m_s_wind_m": 0.018
+      }
+     },
+     {
+      "distance_m": 50,
+      "flat": {
+       "flight_s": null,
+       "speed_m_s": null,
+       "drop_m": null
+      },
+      "aimed": {
+       "elevation_deg": 4.008,
+       "flight_s": 0.886,
+       "speed_m_s": 53.5,
+       "energy_J": 27.73,
+       "drift_per_m_s_wind_m": 0.051
+      }
+     },
+     {
+      "distance_m": 70,
+      "flat": {
+       "flight_s": null,
+       "speed_m_s": null,
+       "drop_m": null
+      },
+      "aimed": {
+       "elevation_deg": 5.99,
+       "flight_s": 1.274,
+       "speed_m_s": 51.1,
+       "energy_J": 25.3,
+       "drift_per_m_s_wind_m": 0.101
+      }
+     },
+     {
+      "distance_m": 90,
+      "flat": {
+       "flight_s": null,
+       "speed_m_s": null,
+       "drop_m": null
+      },
+      "aimed": {
+       "elevation_deg": 8.103,
+       "flight_s": 1.686,
+       "speed_m_s": 48.8,
+       "energy_J": 23.12,
+       "drift_per_m_s_wind_m": 0.171
+      }
+     }
+    ],
+    "farthest": {
+     "elevation_deg": 41.3,
+     "range_m": 231.6,
+     "flight_s": 7.1,
+     "apex_m": 62.7
+    },
+    "low_drag": {
+     "drag_coefficient": 1.5,
+     "table": [
+      {
+       "distance_m": 18,
+       "flat": {
+        "flight_s": 0.303,
+        "speed_m_s": 58.9,
+        "drop_m": 0.447
+       },
+       "aimed": {
+        "elevation_deg": 0.788,
+        "flight_s": 0.303,
+        "speed_m_s": 58.8,
+        "energy_J": 33.57,
+        "drift_per_m_s_wind_m": 0.003
+       }
+      },
+      {
+       "distance_m": 30,
+       "flat": {
+        "flight_s": 0.509,
+        "speed_m_s": 58.2,
+        "drop_m": 1.254
+       },
+       "aimed": {
+        "elevation_deg": 2.015,
+        "flight_s": 0.509,
+        "speed_m_s": 58.0,
+        "energy_J": 32.68,
+        "drift_per_m_s_wind_m": 0.009
+       }
+      },
+      {
+       "distance_m": 50,
+       "flat": {
+        "flight_s": null,
+        "speed_m_s": null,
+        "drop_m": null
+       },
+       "aimed": {
+        "elevation_deg": 3.836,
+        "flight_s": 0.859,
+        "speed_m_s": 56.8,
+        "energy_J": 31.25,
+        "drift_per_m_s_wind_m": 0.024
+       }
+      },
+      {
+       "distance_m": 70,
+       "flat": {
+        "flight_s": null,
+        "speed_m_s": null,
+        "drop_m": null
+       },
+       "aimed": {
+        "elevation_deg": 5.636,
+        "flight_s": 1.22,
+        "speed_m_s": 55.5,
+        "energy_J": 29.89,
+        "drift_per_m_s_wind_m": 0.047
+       }
+      },
+      {
+       "distance_m": 90,
+       "flat": {
+        "flight_s": null,
+        "speed_m_s": null,
+        "drop_m": null
+       },
+       "aimed": {
+        "elevation_deg": 7.484,
+        "flight_s": 1.592,
+        "speed_m_s": 54.3,
+        "energy_J": 28.61,
+        "drift_per_m_s_wind_m": 0.08
+       }
+      }
+     ],
+     "farthest": {
+      "elevation_deg": 42.9,
+      "range_m": 283.2,
+      "flight_s": 7.78,
+      "apex_m": 74.8
+     }
+    }
+   }
+  },
+  "air-rifle pellet": {
+   "kg": 0.00053,
+   "diameter_m": 0.0045,
+   "drag_coefficient": 0.65,
+   "muzzle_m_s": 175.0,
+   "moon": {
+    "k_per_m": 0.013689,
+    "speed_e_folding_m": 73.1,
+    "terminal_m_s": 10.89,
+    "table": [
+     {
+      "distance_m": 10,
+      "flat": {
+       "flight_s": 0.061,
+       "speed_m_s": 152.6,
+       "drop_m": 0.003
+      },
+      "aimed": {
+       "elevation_deg": -1.129,
+       "flight_s": 0.061,
+       "speed_m_s": 152.6,
+       "energy_J": 6.17,
+       "drift_per_m_s_wind_m": 0.004
+      }
+     }
+    ],
+    "farthest": {
+     "elevation_deg": 22.75,
+     "range_m": 248.5,
+     "flight_s": 16.3,
+     "apex_m": 63.0
+    }
+   },
+   "earth": {
+    "k_per_m": 0.011947,
+    "speed_e_folding_m": 83.7,
+    "terminal_m_s": 28.65,
+    "table": [
+     {
+      "distance_m": 10,
+      "flat": {
+       "flight_s": 0.061,
+       "speed_m_s": 155.3,
+       "drop_m": 0.017
+      },
+      "aimed": {
+       "elevation_deg": -1.046,
+       "flight_s": 0.061,
+       "speed_m_s": 155.3,
+       "energy_J": 6.39,
+       "drift_per_m_s_wind_m": 0.004
+      }
+     }
+    ],
+    "farthest": {
+     "elevation_deg": 27.75,
+     "range_m": 199.8,
+     "flight_s": 6.33,
+     "apex_m": 54.3
+    }
+   }
+  },
+  "small-bore bullet": {
+   "kg": 0.002592,
+   "diameter_m": 0.0057,
+   "drag_coefficient": 0.3,
+   "muzzle_m_s": 326.1,
+   "moon": {
+    "k_per_m": 0.002073,
+    "speed_e_folding_m": 482.5,
+    "terminal_m_s": 27.99,
+    "table": [
+     {
+      "distance_m": 25,
+      "flat": {
+       "flight_s": 0.079,
+       "speed_m_s": 309.6,
+       "drop_m": 0.005
+      },
+      "aimed": {
+       "elevation_deg": -0.447,
+       "flight_s": 0.079,
+       "speed_m_s": 309.6,
+       "energy_J": 124.25,
+       "drift_per_m_s_wind_m": 0.002
+      }
+     },
+     {
+      "distance_m": 50,
+      "flat": {
+       "flight_s": 0.162,
+       "speed_m_s": 294.0,
+       "drop_m": 0.02
+      },
+      "aimed": {
+       "elevation_deg": -0.206,
+       "flight_s": 0.162,
+       "speed_m_s": 294.0,
+       "energy_J": 112.02,
+       "drift_per_m_s_wind_m": 0.008
+      }
+     },
+     {
+      "distance_m": 100,
+      "flat": {
+       "flight_s": 0.341,
+       "speed_m_s": 265.1,
+       "drop_m": 0.088
+      },
+      "aimed": {
+       "elevation_deg": -0.064,
+       "flight_s": 0.341,
+       "speed_m_s": 265.1,
+       "energy_J": 91.05,
+       "drift_per_m_s_wind_m": 0.034
+      }
+     }
+    ],
+    "farthest": {
+     "elevation_deg": 24.3,
+     "range_m": 1476.4,
+     "flight_s": 40.41,
+     "apex_m": 378.7
+    }
+   },
+   "earth": {
+    "k_per_m": 0.001809,
+    "speed_e_folding_m": 552.8,
+    "terminal_m_s": 73.63,
+    "table": [
+     {
+      "distance_m": 25,
+      "flat": {
+       "flight_s": 0.078,
+       "speed_m_s": 311.7,
+       "drop_m": 0.03
+      },
+      "aimed": {
+       "elevation_deg": -0.39,
+       "flight_s": 0.078,
+       "speed_m_s": 311.7,
+       "energy_J": 125.9,
+       "drift_per_m_s_wind_m": 0.002
+      }
+     },
+     {
+      "distance_m": 50,
+      "flat": {
+       "flight_s": 0.16,
+       "speed_m_s": 297.9,
+       "drop_m": 0.123
+      },
+      "aimed": {
+       "elevation_deg": -0.089,
+       "flight_s": 0.16,
+       "speed_m_s": 297.9,
+       "energy_J": 115.02,
+       "drift_per_m_s_wind_m": 0.007
+      }
+     },
+     {
+      "distance_m": 100,
+      "flat": {
+       "flight_s": 0.336,
+       "speed_m_s": 272.2,
+       "drop_m": 0.522
+      },
+      "aimed": {
+       "elevation_deg": 0.185,
+       "flight_s": 0.336,
+       "speed_m_s": 272.1,
+       "energy_J": 95.98,
+       "drift_per_m_s_wind_m": 0.029
+      }
+     }
+    ],
+    "farthest": {
+     "elevation_deg": 30.0,
+     "range_m": 1128.6,
+     "flight_s": 15.27,
+     "apex_m": 307.8
+    }
+   }
+  }
+ },
+ "clay": {
+  "high house, long": {
+   "measured_on_earth_m": [
+    61.08,
+    63.18
+   ],
+   "moon": {
+    "range_m": 135.1,
+    "flight_s": 18.04,
+    "apex_m": 19.7
+   },
+   "earth": {
+    "range_m": 62.6,
+    "flight_s": 4.01,
+    "apex_m": 6.8
+   },
+   "moon_for_the_same_range": {
+    "throw_m_s": 12.55,
+    "flight_s": 10.28,
+    "apex_m": 7.3
+   }
+  },
+  "low house, long": {
+   "measured_on_earth_m": [
+    68.22,
+    69.54
+   ],
+   "moon": {
+    "range_m": 134.3,
+    "flight_s": 20.3,
+    "apex_m": 26.9
+   },
+   "earth": {
+    "range_m": 60.9,
+    "flight_s": 4.35,
+    "apex_m": 8.5
+   },
+   "moon_for_the_same_range": {
+    "throw_m_s": 14.11,
+    "flight_s": 12.25,
+    "apex_m": 10.9
+   }
+  }
+ },
+ "shooter": {
+  "dancer": {
+   "recoil": {
+    "moon": {
+     "paintball marker": {
+      "impulse_N_s": 0.293,
+      "speed_change_m_s": 0.0052,
+      "grip_stops_it_s": 0.004,
+      "rock_back_deg": 0.001,
+      "rock_stops_s": 0.015
+     },
+     "recurve bow": {
+      "impulse_N_s": 1.164,
+      "speed_change_m_s": 0.0206,
+      "grip_stops_it_s": 0.016,
+      "rock_back_deg": 0.017,
+      "rock_stops_s": 0.059
+     },
+     "air rifle": {
+      "impulse_N_s": 0.093,
+      "speed_change_m_s": 0.0015,
+      "grip_stops_it_s": 0.001,
+      "rock_back_deg": 0.0,
+      "rock_stops_s": 0.005
+     },
+     "small-bore rifle": {
+      "impulse_N_s": 1.005,
+      "speed_change_m_s": 0.0168,
+      "grip_stops_it_s": 0.013,
+      "rock_back_deg": 0.012,
+      "rock_stops_s": 0.051
+     },
+     "shotgun, 24 g trap load": {
+      "impulse_N_s": 11.2,
+      "speed_change_m_s": 0.1915,
+      "grip_stops_it_s": 0.147,
+      "rock_back_deg": 1.541,
+      "rock_stops_s": 0.564
+     }
+    },
+    "earth": {
+     "paintball marker": {
+      "impulse_N_s": 0.293,
+      "speed_change_m_s": 0.0052,
+      "grip_stops_it_s": 0.001,
+      "rock_back_deg": 0.0,
+      "rock_stops_s": 0.002
+     },
+     "recurve bow": {
+      "impulse_N_s": 1.164,
+      "speed_change_m_s": 0.0206,
+      "grip_stops_it_s": 0.003,
+      "rock_back_deg": 0.003,
+      "rock_stops_s": 0.01
+     },
+     "air rifle": {
+      "impulse_N_s": 0.093,
+      "speed_change_m_s": 0.0015,
+      "grip_stops_it_s": 0.0,
+      "rock_back_deg": 0.0,
+      "rock_stops_s": 0.001
+     },
+     "small-bore rifle": {
+      "impulse_N_s": 1.005,
+      "speed_change_m_s": 0.0168,
+      "grip_stops_it_s": 0.002,
+      "rock_back_deg": 0.002,
+      "rock_stops_s": 0.008
+     },
+     "shotgun, 24 g trap load": {
+      "impulse_N_s": 11.2,
+      "speed_change_m_s": 0.1915,
+      "grip_stops_it_s": 0.024,
+      "rock_back_deg": 0.255,
+      "rock_stops_s": 0.093
+     }
+    }
+   },
+   "sway": {
+    "moon": {
+     "stiffness_0.91_of_earth_mgh": {
+      "share_of_toppling": 5.49,
+      "passively_stable": true,
+      "sway_period_s": 2.39
+     },
+     "stiffness_0.68_of_earth_mgh": {
+      "share_of_toppling": 4.11,
+      "passively_stable": true,
+      "sway_period_s": 2.88
+     },
+     "stiffness_1.14_of_earth_mgh": {
+      "share_of_toppling": 6.88,
+      "passively_stable": true,
+      "sway_period_s": 2.09
+     }
+    },
+    "earth": {
+     "stiffness_0.91_of_earth_mgh": {
+      "share_of_toppling": 0.91,
+      "passively_stable": false,
+      "sway_period_s": null
+     },
+     "stiffness_0.68_of_earth_mgh": {
+      "share_of_toppling": 0.68,
+      "passively_stable": false,
+      "sway_period_s": null
+     },
+     "stiffness_1.14_of_earth_mgh": {
+      "share_of_toppling": 1.14,
+      "passively_stable": true,
+      "sway_period_s": 5.51
+     }
+    }
+   }
+  },
+  "larger": {
+   "recoil": {
+    "moon": {
+     "paintball marker": {
+      "impulse_N_s": 0.293,
+      "speed_change_m_s": 0.0036,
+      "grip_stops_it_s": 0.003,
+      "rock_back_deg": 0.0,
+      "rock_stops_s": 0.009
+     },
+     "recurve bow": {
+      "impulse_N_s": 1.164,
+      "speed_change_m_s": 0.0143,
+      "grip_stops_it_s": 0.011,
+      "rock_back_deg": 0.006,
+      "rock_stops_s": 0.037
+     },
+     "air rifle": {
+      "impulse_N_s": 0.093,
+      "speed_change_m_s": 0.0011,
+      "grip_stops_it_s": 0.001,
+      "rock_back_deg": 0.0,
+      "rock_stops_s": 0.003
+     },
+     "small-bore rifle": {
+      "impulse_N_s": 1.005,
+      "speed_change_m_s": 0.0118,
+      "grip_stops_it_s": 0.009,
+      "rock_back_deg": 0.004,
+      "rock_stops_s": 0.032
+     },
+     "shotgun, 24 g trap load": {
+      "impulse_N_s": 11.2,
+      "speed_change_m_s": 0.1341,
+      "grip_stops_it_s": 0.103,
+      "rock_back_deg": 0.549,
+      "rock_stops_s": 0.353
+     }
+    },
+    "earth": {
+     "paintball marker": {
+      "impulse_N_s": 0.293,
+      "speed_change_m_s": 0.0036,
+      "grip_stops_it_s": 0.0,
+      "rock_back_deg": 0.0,
+      "rock_stops_s": 0.002
+     },
+     "recurve bow": {
+      "impulse_N_s": 1.164,
+      "speed_change_m_s": 0.0143,
+      "grip_stops_it_s": 0.002,
+      "rock_back_deg": 0.001,
+      "rock_stops_s": 0.006
+     },
+     "air rifle": {
+      "impulse_N_s": 0.093,
+      "speed_change_m_s": 0.0011,
+      "grip_stops_it_s": 0.0,
+      "rock_back_deg": 0.0,
+      "rock_stops_s": 0.0
+     },
+     "small-bore rifle": {
+      "impulse_N_s": 1.005,
+      "speed_change_m_s": 0.0118,
+      "grip_stops_it_s": 0.002,
+      "rock_back_deg": 0.001,
+      "rock_stops_s": 0.005
+     },
+     "shotgun, 24 g trap load": {
+      "impulse_N_s": 11.2,
+      "speed_change_m_s": 0.1341,
+      "grip_stops_it_s": 0.017,
+      "rock_back_deg": 0.091,
+      "rock_stops_s": 0.058
+     }
+    }
+   },
+   "sway": {
+    "moon": {
+     "stiffness_0.91_of_earth_mgh": {
+      "share_of_toppling": 5.49,
+      "passively_stable": true,
+      "sway_period_s": 2.51
+     },
+     "stiffness_0.68_of_earth_mgh": {
+      "share_of_toppling": 4.11,
+      "passively_stable": true,
+      "sway_period_s": 3.01
+     },
+     "stiffness_1.14_of_earth_mgh": {
+      "share_of_toppling": 6.88,
+      "passively_stable": true,
+      "sway_period_s": 2.19
+     }
+    },
+    "earth": {
+     "stiffness_0.91_of_earth_mgh": {
+      "share_of_toppling": 0.91,
+      "passively_stable": false,
+      "sway_period_s": null
+     },
+     "stiffness_0.68_of_earth_mgh": {
+      "share_of_toppling": 0.68,
+      "passively_stable": false,
+      "sway_period_s": null
+     },
+     "stiffness_1.14_of_earth_mgh": {
+      "share_of_toppling": 1.14,
+      "passively_stable": true,
+      "sway_period_s": 5.78
+     }
+    }
+   }
+  }
+ },
+ "paintball_dodge": {
+  "moon": {
+   "by_body": {
+    "dancer": {
+     "need_m": 0.209,
+     "flight_s": {
+      "10": 0.124,
+      "20": 0.281,
+      "30": 0.482,
+      "40": 0.738,
+      "50": 1.065,
+      "60": 1.48,
+      "80": 2.689
+     },
+     "postures": {
+      "ready": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.002,
+        "30": 0.031,
+        "40": 0.116,
+        "50": 0.324,
+        "60": 0.784,
+        "80": 3.402
+       },
+       "least_dodge_m": 45.5
+      },
+      "upright": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.001,
+        "30": 0.009,
+        "40": 0.046,
+        "50": 0.218,
+        "60": 0.636,
+        "80": 3.129
+       },
+       "least_dodge_m": 49.7
+      },
+      "moving, foot down": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.004,
+        "30": 0.052,
+        "40": 0.188,
+        "50": 0.486,
+        "60": 1.064,
+        "80": 4.025
+       },
+       "least_dodge_m": 41.0
+      },
+      "moving, mid-bound": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.0,
+        "30": 0.001,
+        "40": 0.054,
+        "50": 0.246,
+        "60": 0.689,
+        "80": 3.257
+       },
+       "least_dodge_m": 48.7
+      },
+      "aloft": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.0,
+        "30": 0.0,
+        "40": 0.0,
+        "50": 0.0,
+        "60": 0.0,
+        "80": 0.0
+       },
+       "least_dodge_m": null
+      }
+     }
+    },
+    "larger": {
+     "need_m": 0.228,
+     "flight_s": {
+      "10": 0.124,
+      "20": 0.281,
+      "30": 0.482,
+      "40": 0.738,
+      "50": 1.065,
+      "60": 1.48,
+      "80": 2.689
+     },
+     "postures": {
+      "ready": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.002,
+        "30": 0.031,
+        "40": 0.115,
+        "50": 0.32,
+        "60": 0.775,
+        "80": 3.376
+       },
+       "least_dodge_m": 46.5
+      },
+      "upright": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.001,
+        "30": 0.009,
+        "40": 0.046,
+        "50": 0.217,
+        "60": 0.634,
+        "80": 3.124
+       },
+       "least_dodge_m": 50.4
+      },
+      "moving, foot down": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.004,
+        "30": 0.052,
+        "40": 0.188,
+        "50": 0.486,
+        "60": 1.064,
+        "80": 4.025
+       },
+       "least_dodge_m": 41.8
+      },
+      "moving, mid-bound": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.0,
+        "30": 0.001,
+        "40": 0.054,
+        "50": 0.246,
+        "60": 0.689,
+        "80": 3.257
+       },
+       "least_dodge_m": 49.4
+      },
+      "aloft": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.0,
+        "30": 0.0,
+        "40": 0.0,
+        "50": 0.0,
+        "60": 0.0,
+        "80": 0.0
+       },
+       "least_dodge_m": null
+      }
+     }
+    }
+   },
+   "aloft_sure_hit": [
+    {
+     "rise_m": 0.3,
+     "airtime_s": 1.22,
+     "sure_hit_window_s": {
+      "10": 1.09,
+      "20": 0.93,
+      "30": 0.73,
+      "40": 0.48,
+      "50": 0.15,
+      "60": 0.0,
+      "80": 0.0
+     }
+    },
+    {
+     "rise_m": 1.0,
+     "airtime_s": 2.22,
+     "sure_hit_window_s": {
+      "10": 2.1,
+      "20": 1.94,
+      "30": 1.74,
+      "40": 1.48,
+      "50": 1.15,
+      "60": 0.74,
+      "80": 0.0
+     }
+    },
+    {
+     "rise_m": 2.0,
+     "airtime_s": 3.14,
+     "sure_hit_window_s": {
+      "10": 3.01,
+      "20": 2.86,
+      "30": 2.66,
+      "40": 2.4,
+      "50": 2.07,
+      "60": 1.66,
+      "80": 0.45
+     }
+    },
+    {
+     "rise_m": 2.86,
+     "airtime_s": 3.75,
+     "sure_hit_window_s": {
+      "10": 3.63,
+      "20": 3.47,
+      "30": 3.27,
+      "40": 3.01,
+      "50": 2.69,
+      "60": 2.27,
+      "80": 1.06
+     }
+    }
+   ],
+   "duck_by_gravity_s": {
+    "0.5_m": 0.83
+   }
+  },
+  "earth": {
+   "by_body": {
+    "dancer": {
+     "need_m": 0.209,
+     "flight_s": {
+      "10": 0.122,
+      "20": 0.272,
+      "30": 0.458,
+      "40": 0.688,
+      "50": 0.974,
+      "60": 1.331,
+      "80": 2.382
+     },
+     "postures": {
+      "ready": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.012,
+        "30": 0.164,
+        "40": 0.619,
+        "50": 1.541,
+        "60": 3.129,
+        "80": 9.609
+       },
+       "least_dodge_m": 31.5
+      },
+      "upright": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.004,
+        "30": 0.05,
+        "40": 0.206,
+        "50": 0.83,
+        "60": 2.154,
+        "80": 8.189
+       },
+       "least_dodge_m": 40.1
+      },
+      "moving, foot down": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.018,
+        "30": 0.217,
+        "40": 0.732,
+        "50": 1.714,
+        "60": 3.359,
+        "80": 9.933
+       },
+       "least_dodge_m": 29.7
+      },
+      "moving, mid-bound": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.0,
+        "30": 0.0,
+        "40": 0.186,
+        "50": 0.837,
+        "60": 2.163,
+        "80": 8.203
+       },
+       "least_dodge_m": 40.5
+      },
+      "aloft": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.0,
+        "30": 0.0,
+        "40": 0.0,
+        "50": 0.0,
+        "60": 0.0,
+        "80": 0.0
+       },
+       "least_dodge_m": null
+      }
+     }
+    },
+    "larger": {
+     "need_m": 0.228,
+     "flight_s": {
+      "10": 0.122,
+      "20": 0.272,
+      "30": 0.458,
+      "40": 0.688,
+      "50": 0.974,
+      "60": 1.331,
+      "80": 2.382
+     },
+     "postures": {
+      "ready": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.012,
+        "30": 0.163,
+        "40": 0.616,
+        "50": 1.536,
+        "60": 3.121,
+        "80": 9.598
+       },
+       "least_dodge_m": 32.1
+      },
+      "upright": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.004,
+        "30": 0.049,
+        "40": 0.203,
+        "50": 0.83,
+        "60": 2.154,
+        "80": 8.189
+       },
+       "least_dodge_m": 40.9
+      },
+      "moving, foot down": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.018,
+        "30": 0.217,
+        "40": 0.732,
+        "50": 1.714,
+        "60": 3.359,
+        "80": 9.933
+       },
+       "least_dodge_m": 30.3
+      },
+      "moving, mid-bound": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.0,
+        "30": 0.0,
+        "40": 0.186,
+        "50": 0.837,
+        "60": 2.163,
+        "80": 8.203
+       },
+       "least_dodge_m": 41.0
+      },
+      "aloft": {
+       "escape_m": {
+        "10": 0.0,
+        "20": 0.0,
+        "30": 0.0,
+        "40": 0.0,
+        "50": 0.0,
+        "60": 0.0,
+        "80": 0.0
+       },
+       "least_dodge_m": null
+      }
+     }
+    }
+   },
+   "aloft_sure_hit": [
+    {
+     "rise_m": 0.29,
+     "airtime_s": 0.49,
+     "sure_hit_window_s": {
+      "10": 0.36,
+      "20": 0.21,
+      "30": 0.03,
+      "40": 0.0,
+      "50": 0.0,
+      "60": 0.0,
+      "80": 0.0
+     }
+    }
+   ],
+   "duck_by_gravity_s": {
+    "0.5_m": 0.41
+   }
+  }
+ },
+ "for_games": {
+  "paintball": {
+   "kg": 0.0032,
+   "diameter_m": 0.0173,
+   "drag_coefficient": 0.47,
+   "muzzle_m_s": 91.44,
+   "law": "a = -k |v - w| (v - w) - g z, k = rho C_D (pi d^2 / 4) / (2 m), w the wind"
+  },
+  "player": {
+   "reaction_s": 0.2,
+   "sprint_profile": {
+    "F0_N_kg": 7.0,
+    "V0_m_s": 8.5
+   },
+   "top_speed_m_s": 7.0,
+   "hands_up_m": 2.181,
+   "hands_out_m": 0.6,
+   "floor_law": "horizontal push per kg <= min(mu g, (g/h)(lead + x), F0 (1 - v/V0)) (reach.py)",
+   "jump_timing": "state.Body.jump_timing: a dip only as deep as the take-off needs"
+  },
+  "worlds": {
+   "moon": {
+    "gravity_m_s2": 1.6242,
+    "air_density_kg_m3": 1.4036,
+    "paintball_k_per_m": 0.024229,
+    "floor_push_limit_m_s2": {
+     "0.5": 0.812,
+     "0.8": 1.299,
+     "1.2": 1.949
+    },
+    "full_take_off_m_s": 3.047,
+    "crouch_take_off_m_s": 2.616
+   },
+   "earth": {
+    "gravity_m_s2": 9.8066,
+    "air_density_kg_m3": 1.225,
+    "paintball_k_per_m": 0.021146,
+    "floor_push_limit_m_s2": {
+     "0.5": 4.903,
+     "0.8": 7.845,
+     "1.2": 11.768
+    },
+    "full_take_off_m_s": 2.381,
+    "crouch_take_off_m_s": 2.07
+   }
+  }
+ }
+}

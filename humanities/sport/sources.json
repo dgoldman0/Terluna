@@ -6,7 +6,8 @@
   "general_knowledge": "a published specification or widely given value stated from general knowledge; the document was not retrieved this round",
   "solved_motion": "read from the dance's solved whole-body motion (whole_body.json measures it)",
   "reused": "a value the repository already holds with its own source record (named)",
-  "calculation": "derived here from the values above; the derivation is in the code beside it"
+  "calculation": "derived here from the values above; the derivation is in the code beside it",
+  "source_summary": "taken from a source's abstract or summary as retrieved, the full text not read"
  },
  "entries": [
   {"quantity": "shoe-floor friction coefficient, athletic shoe on a sports floor", "value": 0.8, "bracket": [0.5, 1.2], "evidence_state": "assumption", "note": "the earlier sports screens used 0.8 and a 0.4-1.2 range; the dance's vinyl floor 0.5 (humanities/dance/sources.json, open); the habitation note 0.6"},
@@ -45,7 +46,11 @@
   {"quantity": "the pass contest's settings", "value": {"distances_m": [6, 10, 15], "head_starts_s": [0.3, 1.0], "fake_jump_m": 0.7, "fake_before_release_s": 0.2, "receiver_give_s": 0.30}, "evidence_state": "assumption", "note": "contest_pass.py; one interceptor on a grid beside the line, facing back toward the passer's end; the fake's jump capped at the crouch's best take-off (Earth 0.22 m)"},
   {"quantity": "the lob contest's settings", "value": {"lob_m": 12, "elevations_deg": [45, 60, 70], "release_m": 2.0, "defender_m": 3}, "evidence_state": "assumption", "note": "contest_lob.py; the handball; a touch with the hands counts, without a check of the hold"},
   {"quantity": "the chase's settings", "value": {"start_gap_m": 4, "courts_m": [10, 20, 40], "tactic_within_m": 2, "cut_deg": 60, "hop_rise_m": 1.0}, "evidence_state": "assumption", "note": "contest_chase.py; simple pursuing and fleeing rules, players already in a gait, hard walls"},
-  {"quantity": "the shove's settings", "value": {"moved_m": 0.5, "shove_aloft_s": 0.2, "longest_recovery_step_m": 1.5}, "evidence_state": "assumption", "note": "contest_shove.py; horizontal contact, a steady hold while the holder is moved"}
+  {"quantity": "the shove's settings", "value": {"moved_m": 0.5, "shove_aloft_s": 0.2, "longest_recovery_step_m": 1.5}, "evidence_state": "assumption", "note": "contest_shove.py; horizontal contact, a steady hold while the holder is moved"},
+  {"quantity": "a two-arm pull, with its stroke, give and hang", "value": {"earth_body_weights": 1.5, "bracket": [1.0, 2.0], "stroke_m": 0.60, "give_m": 0.30, "hang_below_hands_m": 1.05}, "evidence_state": "assumption", "note": "surfaces.py; one value for catches, climbs, vaults, pull-downs and bars, the same on either world"},
+  {"quantity": "pushing off a surface: the legs' yield, a one-footed push, a wall's or an obstacle's grip, the wall's reach", "value": {"yield_share_of_F0": 1.5, "one_leg_share": 0.6, "wall_grip": 0.8, "wall_reach_m": 0.90}, "evidence_state": "assumption", "note": "surfaces.py; the push itself is the jump's force-velocity profile with no gravity along it"},
+  {"quantity": "vaults, precision landings, rolls, slides and corners", "value": {"vault_clearance_m": {"speed": 0.15, "kong": 0.25}, "landing_lead_m": 0.30, "roll_spread_m": 1.0, "slide_grip": 0.4, "corner_radius_m": 1.0}, "evidence_state": "assumption", "note": "surfaces.py"},
+  {"quantity": "running round a curved wall at lunar gravity", "value": {"radius_m": 4.7, "held_m_s": [5.4, 6.5], "least_m_s": 3.5}, "evidence_state": "source_summary", "note": "Minetti, Luciano, Natalucci and Pavei (2024), Horizontal running inside circular walls of Moon settlements, Royal Society Open Science 11: 231906, doi 10.1098/rsos.231906; the abstract and the journal page's summary figures, read by the helper agent (session-tools/agents/sport_reach/report_phase4.md)"}
  ],
  "open_items": [
   "Shoe-floor friction for athletic shoes on candidate lunar floors: measurement or a sourced range.",

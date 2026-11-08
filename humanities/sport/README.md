@@ -114,13 +114,47 @@ These are candidate play loops drawn from the contests, unnamed; none is chosen,
 3. **The two together.** Passing carries the ball safely, and a team chooses the moment to put it into the air, where the contest opens. The rhythm alternates quick reads with slow gatherings, which suits both players and viewers, and the commitment controls of the second form meet the gathering of the first.
 4. **Bounding raids.** A chase-based loop of raids across a wide floor, where turns take room and cuts are tells. The screen suggests it is the weakest of the four: evasion gives the pursuer reads, and chases are slow.
 
+## Moving by obstacles (8 November)
+
+A paintball arena is built of obstacles, and on the Moon obstacles are the fast way to move. The floor's grip caps a stance's change of velocity at about μ g on average, so a cut at speed is a visible jump. A foot or a hand pushing on a wall or a box presses into it, so its grip grows with the push. [surfaces.py](surfaces.py) times the moves that use surfaces and routes a player across an arena with them. [parkour.py](parkour.py) writes those moves as units in the athletic vocabulary's form ([vocabulary/parkour_units.json](vocabulary/parkour_units.json), product [results/parkour.json](results/parkour.json)) and joins them to the athletic units in one graph through the ready crouch. Two postures join the athletic ones: hanging from a ledge or bar, and low behind cover. Figures are for the dance body at a grip of 0.8, Earth's in brackets.
+
+**Walls make the sharp turns.** Running at 3 m/s and meeting a wall 45° from its normal, a foot's push changes the velocity by 5.3 m/s in 0.38 s and turns the travel 101°, or up to 6.7 m/s and 168°. One floor stance can change it by 0.43 m/s, and the floor's cut through the same turn needs a 2.1 m bounce and 6.8 s. The wall gives twelve times a stance's change on the Moon, against twice on Earth, because the stance scales with g and the push does not. Reversing at 4 m/s toward a goal behind the runner takes 2.5 s off a wall against 7.0 s on the floor (Earth 2.2 against 2.0 s).
+
+**Walls also lift.** Running into a wall at 3 m/s and kicking off it throws the body 7.5 m up, the hands to 9.7 m (Earth 1.2 m and 3.4 m, close to what parkour runners reach). Stepping up and staying at the wall lifts it 1.8 m (Earth 0.3 m). A flat wall throws a runner off, but a curved one holds a run round it once friction on its push carries the weight. On a 4.7 m radius that needs 3.1 m/s on the Moon, inside the legs' range, and 7.6 m/s on Earth, beyond it. Minetti and colleagues (2024) had runners at simulated lunar gravity hold 5.4-6.5 m/s on such a wall.
+
+**Ledges and drops: catching is easy and stopping is slow.** The arms catch a descent of up to 2.8 m/s on a ledge (Earth 1.7) and throw the body up over it in a fifth of a second. The body then coasts to rest on gravity's clock, 1.5 s in all (1.0). A 3 m drop lands like a 0.5 m drop on Earth: 1.4 Earth body weights in the legs, 0.5 with a roll (Earth 8.5 and 3.1). A precision jump can stop on a 0.2 m edge across a gap of up to 5.8 m (1.3 m). A bar caught at 3 m/s releases the body into a 1.9 s flight that lands 5.4 m beyond it, but spins it 308° on the way unless its shape slows it (Earth 51°), a hazard for a game's landings.
+
+**Into cover.** Dropping into a slide takes 0.83 s, since the sink runs on gravity's clock. A slide from 3 m/s then runs 4.7 m for 3.8 s (Earth 0.36 m), carrying a player 7 m into cover low the whole way. With the hands on cover the arms pull the body down 0.5 m in 0.36 s, half the 0.83 s its weight alone takes; on Earth the pull saves 0.08 s. Rising back into the crouch takes 0.75 s.
+
+**Vaults keep the run.** Over a box 1 m high and 1.5 m long at 3 m/s, a speed vault flies 1.5 s and keeps the speed (Earth 0.8 s). A kong vault's hands push forward and send the body on 1.4 m/s faster, landing 3.5 m beyond the box. A lunar runner clears a 1.2 m box that the model's Earth runner cannot. That limit on Earth, where trained runners do vault such boxes, suggests the model understates the arms' push.
+
+**Cover to cover.** Across two arenas, a route search over up to three surface moves compares three ways of crossing: around the boxes on the floor, through them with the moves, and an open floor with no boxes.
+- **Detours cost more on the Moon,** 3.7-4.4 s against 1.6-3.3 s on Earth, because corners are slow there.
+- **A 1 m barrier across the way:** a kong vault recovers nearly all the detour, crossing in 5.0 s against 9.3 s round it and 4.9 s on an open floor (Earth 2.95, 4.6 and 3.0 s).
+- **A 3 m wall:** climbing over is slower on the Moon than running round it, because the climb's stop and the drop both run on gravity's clock.
+- **Wall pushes:** in an arena of bunkers, a low box, a 3 m wall and a bar, no surface move gained on the Moon, whose route has no sharp turn at speed. Two wall pushes saved 1.3 s on Earth.
+
+Near cover a lunar runner is still slow: reaching 3 m/s takes 2.3 s. The search is a heuristic over few moves, so its times can be off by tenths of a second.
+
+**For a game.** A lunar arena's obstacles do the work an Earth floor does.
+- **Walls** turn and lift players sharply.
+- **Low boxes** let a run keep its speed.
+- **Curved walls** carry a run round them.
+- **Cover** is reached by a long slide or a pull-down.
+
+The moves' commitments are in the units. Wall runs, drops, bar releases and vault flights hold the player to an arc for one to three seconds, and the [projectiles study](projectiles/README.md) shows a player in the air is a sure hit. What the screens leave out:
+- the reach engine has no hanging posture;
+- the moves are screens of single bodies;
+- no contest yet uses surfaces;
+- the arms' pull (1.5 Earth body weights), the legs' yield and the walls' grip are assumptions (surfaces.py, [sources.json](sources.json)).
+
 ## Open and next
 
 The larger athlete is a scaled stand-in for a male body model, which the dance work's question 2 leaves for later, with athletic strength data. The motion engine's landings now keep the friction cone and, with exact flights, cost a rigid impulse; they still need a cost on landing forces, so that the body sinks through a stroke, before whole-body solves can test the moves the play forms lean on: a jump from the crouch to a catch overhead, a throw timed into a landing, a catch in the air and its spin, a braking landing out of a forward flight, a sideways hop from the ready crouch, a cut through a landing, and two bodies meeting in the air. Contact between players needs the two-body model that partnering also waits on.
 
 The second round's contests are screens of simple settings: one interceptor, two players under a lob, simple chasing and fleeing rules, and a steady shove. Players are centres of mass with a reach, and their choices are the rules stated in each module, not the best play. A game of several players a side, with players who learn each other's habits, would be the next test of what stays open. It would be a reduced-order simulator that runs these limits in real time, which is also the physics core an e-sport needs. Reaction (0.20 s), the quick step, the sprint profile, the hands' reach, the catch's give, the contests' settings and the values the first round chose are assumptions stated beside their figures ([sources.json](sources.json)).
 
-Choosing among the forms of play, or asking for others, is the author's next step. Hand-held implements, levels and walls, and wings are later stages of what may emerge. Aimed projectiles are to be studied as a stage and study of their own: the flights of an arrow, an air-rifle pellet, a small-bore bullet, a paintball and a clay target in the design air, the shooter's sway and recoil, and paintball's dodge contest on the reach engine. Their flights and the shooter's steadiness are simpler than whole-body motion, and paintball's movement uses the reach engine.
+Choosing among the forms of play, or asking for others, is the author's next step. Hand-held implements, levels and walls, and wings are later stages of what may emerge. Aimed projectiles are a stage and study of their own, [projectiles/README.md](projectiles/README.md) (8 November). It covers the flights of an arrow, an air-rifle pellet, a small-bore bullet, a paintball and a clay target in the design air, the shooter's recoil and sway, and whether a seen paintball can be dodged. On the Moon a seen paintball can be dodged only from 41-50 m and beyond (Earth 30-41 m), so at the usual ranges play turns on cover and on moving where a shooter does not expect. Walls, ledges and bars in the reach engine and parkour moves on them follow it for a paintball game (above, "Moving by obstacles").
 
 ## Evidence
 

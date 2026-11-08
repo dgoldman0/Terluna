@@ -1,0 +1,40 @@
+{
+ "schema": "terluna.humanities.sport-projectile-sources/1",
+ "compiled": "2026-11-08",
+ "evidence_states": {
+  "assumption": "a value chosen for this screen, stated beside the figures it sets; typical of the sport, from general knowledge, not retrieved",
+  "source_summary": "taken from a source's text as a web search returned it, the document itself not opened",
+  "source_read": "read in the source itself",
+  "fitted": "fitted here to a source's figures",
+  "reused": "a value the repository already holds with its own record (named)"
+ },
+ "sources": [
+  {"id": "marker_manual", "what": "a .68 calibre paintball marker's manual (Mongoose, Diablo / Paintball Solutions), meeting ASTM standards", "url": "https://www.paintballsolutions.com/pdf/manuals/diablo/mongoose/Mong-BBS-LED-MANUAL.pdf", "read": "source_summary: the velocity limit, never above 91.44 m/s (300 ft/s); the .68 inch (17.3 mm) calibre"},
+  {"id": "park_arrow", "what": "J. L. Park, The aerodynamic drag and axial rotation of an arrow, Proc. IMechE Part P 225 (2011); J. L. Park et al., Air flow around the point of an arrow, Proc. IMechE Part P 227 (2013)", "url": "https://doi.org/10.1177/1754337111407124", "read": "source_summary: C_D about 1.5 on the shaft's section for an aligned arrow with a laminar boundary layer (Re above 1e4), about 3.1 at 0.75 degrees' yaw with transition near Re 1.1e4"},
+  {"id": "cci_standard_velocity", "what": "CCI Standard Velocity .22 LR, 40 grain lead round nose: the maker's velocity table", "url": "https://www.cci-ammunition.com/rimfire/cci/standard-velocity/6-35.html", "read": "source_summary: 1070 ft/s at the muzzle, 977 at 50 yards, 940 at 75, 908 at 100; ballistic coefficient 0.120"},
+  {"id": "andert_2016", "what": "F. Andert, S. Freudenthal and S. Levedag, Visual target tracking in clay pigeon shooting sports: estimation of flight parameters and throwing range, VISAPP 2016, pp. 297-304, doi 10.5220/0005674602970302", "url": "https://www.scitepress.org/papers/2016/56746/56746.pdf", "read": "source_read, all eight pages: the clay's 0.105 kg, 0.11 m, 0.0095 m^2 and inertia; a launch of 30 m/s along the disc's plane with 73 rad/s of spin from houses 3.15 m and 1.42 m high; the starting coefficients C_L0 0.1, C_Lalpha 1.9, C_D0 0.2, K 0.8; sixteen measured skeet throws of 49-70 m"},
+  {"id": "loram_lakie_2002", "what": "I. D. Loram and M. Lakie, Direct measurement of human ankle stiffness during quiet standing: the intrinsic mechanical stiffness is insufficient for stability, J. Physiol. 545 (2002) 1041-1053", "url": "https://e-space.mmu.ac.uk/85063/", "read": "source_summary: the intrinsic ankle stiffness averaged 91 +- 23% of the stiffness needed for minimal stabilisation"}
+ ],
+ "entries": [
+  {"quantity": "paintball calibre and muzzle-speed limit", "value": {"d_m": 0.0173, "m_s": 91.44}, "evidence_state": "source_summary", "source": "marker_manual"},
+  {"quantity": "paintball mass", "value_kg": 0.0032, "evidence_state": "assumption"},
+  {"quantity": "paintball drag coefficient, a smooth sphere below the drag crisis", "value": 0.47, "evidence_state": "reused", "note": "humanities/sport/envelope.py CD_SPHERE; Reynolds number about 1.2e5 at the muzzle in either air"},
+  {"quantity": "arrow: shaft, mass and launch speed", "value": {"d_m": 0.0055, "kg": 0.0194, "m_s": 60.0}, "evidence_state": "assumption", "note": "typical of an outdoor recurve target arrow"},
+  {"quantity": "arrow drag coefficient on the shaft's section", "value": 3.1, "low": 1.5, "evidence_state": "source_summary", "source": "park_arrow", "note": "Reynolds number about 2.5e4 in either air, in the measured regime"},
+  {"quantity": "air-rifle pellet", "value": {"d_m": 0.0045, "kg": 0.00053, "m_s": 175.0, "cd": 0.65}, "evidence_state": "assumption", "note": "a 10 m match wadcutter"},
+  {"quantity": ".22 LR standard velocity: mass, calibre, muzzle speed", "value": {"kg": 0.002592, "d_m": 0.0057, "m_s": 326.1}, "evidence_state": "source_summary", "source": "cci_standard_velocity"},
+  {"quantity": ".22 LR drag coefficient", "value": 0.30, "evidence_state": "fitted", "source": "cci_standard_velocity", "note": "constant, fitted over 100 yards; the model keeps the table within 2% at 50 and 100 yards"},
+  {"quantity": "clay target: size, mass, launch and coefficients; skeet houses' heights and pitches", "evidence_state": "source_read", "source": "andert_2016", "note": "the coefficients are the paper's starting values, not its fitted ones; with them the high house's long throw comes out 62.6 m (measured 61.1-63.2) and the low house's 60.9 m (measured 68.2-69.5); C_L held at its 30-degree value beyond"},
+  {"quantity": "ankle stiffness as a share of the toppling stiffness m g h", "value": [0.91, 0.68, 1.14], "evidence_state": "source_summary", "source": "loram_lakie_2002", "note": "carried unchanged to the Moon (assumed)"},
+  {"quantity": "muzzle height, a target's chest", "value_m": [1.4, 1.2], "evidence_state": "assumption"},
+  {"quantity": "recoil: the gun's or bow's mass, the powder gases' momentum, a 24 g trap load at 400 m/s, the impulse's height above the centre of mass", "value": {"gun_kg": {"marker": 1.2, "bow": 1.5, "air rifle": 5.0, ".22 rifle": 5.0, "shotgun": 3.5}, "gases_N_s": {".22": 0.16, "shotgun": 1.6}, "lever_m": 0.45}, "evidence_state": "assumption"},
+  {"quantity": "a torso's half-width for a dodge, and a bounding runner's wait for its next stance", "value": {"torso_half_m": 0.20, "mid_bound_s": 0.25}, "evidence_state": "assumption", "note": "the dance body; scaled by stature for the larger"},
+  {"quantity": "reaction, the floor law, jump timing and the bodies", "evidence_state": "reused", "note": "humanities/sport/state.py and reach.py, with their own sources in humanities/sport/sources.json"}
+ ],
+ "open_items": [
+  "A measured paintball mass and drag coefficient, and a paintball's spin and curve.",
+  "The clay's fitted coefficients, in place of the paper's starting values, and its low-house shortfall.",
+  "Aim error and a paintball's scatter, which spread hits and change how chancy long shots are.",
+  "How a shooter's ankle stiffness and balance control retune at a sixth of the weight."
+ ]
+}
