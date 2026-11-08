@@ -9,6 +9,19 @@ climate/gcm/.venv/bin/python -m climate.gcm.climatology A28_corrected_970:10-19 
 python visualization/atlas/render.py      # out/: three sheets, globe.html and manifest.json (kept out of Git)
 ```
 
+The globe on the turned Moon (7 November 2026), from the climate domain's run at the target:
+
+```sh
+V=climate/gcm/.venv/bin/python; O=<domain/geology checkout>/geology/results/moon_orientation.json
+$V -m climate.gcm.climatology A28R_301k_design_l15_snow_s924_turned_refit:10-19
+$V -m climate.gcm.turned_climatology $O climate/gcm/products/climatology_A28R_301k_design_l15_snow_s924_turned_refit.npz \
+    --source domain/geology@45c3d817:geology/results/moon_orientation.json
+$V -m geography.drainage --out geography/turned \
+    --climatology climate/gcm/products/climatology_A28R_301k_design_l15_snow_s924_turned_refit_today.npz
+python3 visualization/atlas/render.py --frame $O --source domain/geology@45c3d817:geology/results/moon_orientation.json \
+    --climatology climate/gcm/products/climatology_A28R_301k_design_l15_snow_s924_turned_refit.npz --drainage geography/turned
+```
+
 | Sheet | Shows |
 |---|---|
 | `atlas_<pct>pct_near_far.png` | The near side as seen from Earth and the far side, in orthographic projection |
@@ -40,6 +53,8 @@ republished to its private claude.ai page. The lakes follow the design case once
 ([register](../../research/decisions.md#the-globe-and-the-glow-pair-16-october-2026)). The same day the
 topography replaced the map mode, as a mode of its own and as an overlay on the appearance, and the globe gained
 the fully lit option, the grid's spacings, going to a place and the readout of a clicked place.
+
+On 7 November the globe was redrawn on the turned Moon and republished to the same page. With `--frame`, render.py carries the 4 and 16 pixel/degree heights, the rivers, the lakes and every label into the frame of domain/geology's orientation product with climate.gcm.turned's rotation; each turned pixel takes the height at its place today, the nearest cell's, which keeps the atlas's water share (appearance.turn_texture), and each channel cell lands in the turned pixel holding its centre as well, so channels stay continuous (turn_channels). The clouds and the ground cover come from the design run on the turned Moon at the target (`A28R_301k_design_l15_snow_s924_turned_refit`, years 10–19), whose climatology is in the turned frame already. The rivers and lakes come from the drainage routed on that run's rain and evaporation carried back to today's ground (climate.gcm.turned_climatology, `geography/turned/`): 33,262 rain-fed lakes over 10.28% of the Moon holding 2.84 million km³ and 199,217 m³/s reaching the seas, against the September climate's 27,865 lakes, 3.11 million km³ and 229,410 m³/s. The water level, the lakes' levels and every height stay on the dry Moon's geoid, as on the turned run's own surface. The sheets stay on today's grid.
 
 **Appearance mode** estimates how the Open Moon looks from outside its air. One full-screen pass traces each
 pixel's ray through the atmosphere, two cloud decks and the surface:

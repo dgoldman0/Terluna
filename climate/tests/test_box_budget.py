@@ -90,10 +90,9 @@ def test_the_water_budget_closes_and_reads_the_boundary_layer_against_the_evapor
         bb.water('box', 29.5, to_day=30.0)
 
 
-def test_the_inflow_of_the_reference_s_air_is_reckoned_from_its_written_rates(tmp_path, monkeypatch):
-    """The water test's two levels on the inflow build: the lower draws the reference's air in at 1e-5 /s, the upper
-    lets the box's own out; the box stands 1 then 0.5 g/kg below the reference there, so the inflow brings
-    1e-5 * 0.75e-3 kg/kg * 1000 kg/m2 a second, 0.648 mm/day, and the rest takes it back out of the closure."""
+def _inflow_box(tmp_path, monkeypatch, windows):
+    """The water test's two levels on the inflow build, the lower drawing the reference's air in at 1e-5 /s and the
+    upper letting the box's own out, with one nudging window for each (start s, end s, vapour g/kg at 500 m)."""
     import json
     monkeypatch.setattr(bb.ra, 'RUNS', tmp_path)
     case = tmp_path / 'box'
@@ -104,10 +103,12 @@ def test_the_inflow_of_the_reference_s_air_is_reckoned_from_its_written_rates(tm
     (case / 'terluna_surface.txt').write_text('1\n0 1000 2 16 300 300\n')
     (case / 'namelist.input').write_text(' var7 = 1.0,\n var11 = 0.0,\n var18 = 0.0,\n var19 = 1.0,\n')
     (case / bb.INFLOW_RATES).write_text(' 2\n   500.0   1.0E-05\n   2000.0   0.0\n')
-    (case / 'lsnudge_0001.dat').write_text(' *  Header:   lsnudge_time1 (s)   lsnudge_time2 (s)\n   0.0   7.0e4\n'
-                                           ' *  Profile.\n *    z (m)   theta (K)    qv (g/kg)  u  v\n'
-                                           '  0.0  300.0  11.0  1.0  0.0\n  500.0  301.0  11.0  1.0  0.0\n'
-                                           '  2000.0  305.0  5.5  1.0  0.0\n  3000.0  308.0  5.5  1.0  0.0\n')
+    for k, (t1, t2, low) in enumerate(windows, 1):
+        (case / f'lsnudge_{k:04d}.dat').write_text(
+            f' *  Header:   lsnudge_time1 (s)   lsnudge_time2 (s)\n   {t1}   {t2}\n'
+            ' *  Profile.\n *    z (m)   theta (K)    qv (g/kg)  u  v\n'
+            f'  0.0  300.0  {low}  1.0  0.0\n  500.0  301.0  {low}  1.0  0.0\n'
+            '  2000.0  305.0  5.5  1.0  0.0\n  3000.0  308.0  5.5  1.0  0.0\n')
     names = ('qv', 'qc', 'rho', 'qvb_pbl', 'qvb_mp', 'qvb_lsw', 'qvb_nudge', 'qvb_hadv', 'qvb_vadv')
     (case / 'cm1out_diag_s.ctl').write_text('xdef 1 linear 0 1\nydef 1 linear 0 1\nzdef 2 levels\n500\n2000\n'
                                             f'vars {3 + len(names)}\nmtime 0 99 t\nqfx 0 99 e\nprate 0 99 p\n'
@@ -118,6 +119,13 @@ def test_the_inflow_of_the_reference_s_air_is_reckoned_from_its_written_rates(tm
                       qvb_lsw=(-0.5 * per, 0.0), qvb_nudge=(0.0, -0.5 * per), qvb_hadv=(0.0, 0.0), qvb_vadv=(0.0, 0.0))
         values = [day * bb.DAY, 3.0 / bb.DAY, 1.0 / bb.DAY] + [v for name in names for v in fields[name]]
         np.array(values, dtype='<f4').tofile(case / f'cm1out_diag_{n:06d}_s.dat')
+    return case
+
+
+def test_the_inflow_of_the_reference_s_air_is_reckoned_from_its_written_rates(tmp_path, monkeypatch):
+    """The box stands 1 then 0.5 g/kg below the reference at 500 m, so the inflow brings 1e-5 * 0.75e-3 kg/kg *
+    1000 kg/m2 a second, 0.648 mm/day, and the rest takes it back out of the closure."""
+    case = _inflow_box(tmp_path, monkeypatch, [(0.0, 7.0e4, 11.0)])
     inflow = bb.read_inflow(case, (case / 'namelist.input').read_text())
     assert inflow['z'] == pytest.approx([500.0, 2000.0]) and inflow['rate'] == pytest.approx([1.0e-5, 0.0])
     assert inflow['theta'] == pytest.approx([301.0, 305.0]) and inflow['qv'] == pytest.approx([0.011, 0.0055])
@@ -125,6 +133,22 @@ def test_the_inflow_of_the_reference_s_air_is_reckoned_from_its_written_rates(tm
     assert w['column_mm_day']['inflow'] == pytest.approx(1.0e-5 * 0.75e-3 * 1000.0 * bb.DAY, rel=1e-4)
     assert w['rest_mm_day'] == pytest.approx(-w['column_mm_day']['inflow'], rel=1e-3)   # 3 - 0.5 - 0.5 - 1 + inflow + rest = 1
     assert bb.read_inflow(case, ' var7 = 0.0,\n') is None and bb.read_inflow(case, ' var11 = 1.0,\n') is None
+
+
+def test_the_inflow_draws_the_air_of_the_window_cm1_holds(tmp_path, monkeypatch):
+    """A weather case's windows follow the GCM's air: the first ends at day 30 with 11 g/kg at 500 m, the second holds
+    12. The box stands 1 g/kg below the first at day 29.5 and 1.5 below the second at day 30.5, so the inflow brings
+    1e-5 * 1.25e-3 kg/kg * 1000 kg/m2 a second, 1.08 mm/day; the first window's air alone would give 0.648."""
+    case = _inflow_box(tmp_path, monkeypatch, [(0.0, 30.0 * bb.DAY, 11.0), (30.0 * bb.DAY, 1.0e30, 12.0)])
+    inflow = bb.read_inflow(case, (case / 'namelist.input').read_text())
+    assert [w['end_s'] for w in inflow['windows']] == pytest.approx([30.0 * bb.DAY, 1.0e30])
+    assert bb.inflow_reference(inflow, 29.5 * bb.DAY)['qv'] == pytest.approx([0.011, 0.0055])
+    assert bb.inflow_reference(inflow, 30.0 * bb.DAY)['qv'] == pytest.approx([0.011, 0.0055])   # held to its end
+    assert bb.inflow_reference(inflow, 30.5 * bb.DAY)['qv'] == pytest.approx([0.012, 0.0055])
+    assert bb.inflow_reference(inflow, 2.0e30)['qv'] == pytest.approx([0.012, 0.0055])          # stays on the last
+    w = bb.water('box', 29.5)
+    assert w['column_mm_day']['inflow'] == pytest.approx(1.0e-5 * 1.25e-3 * 1000.0 * bb.DAY, rel=1e-4)
+    assert w['rest_mm_day'] == pytest.approx(-w['column_mm_day']['inflow'], rel=1e-3)
 
 
 def test_a_term_only_the_case_holds_counts_as_nil_in_the_reference():

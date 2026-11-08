@@ -611,6 +611,81 @@ class RunnerTests(unittest.TestCase):
             er._clean_partial(work, 3)
             self.assertEqual(sorted(p.name for p in work.iterdir()), ['MOST.00002.nc', 'MOST_REST.00002'])
 
+    def test_a_year_plasim_finished_keeps_its_raw_output_for_the_pieces(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp)
+            for name in ('plasim_output', 'MOST.00003', 'MOST_DIAG.00003', 'MOST_REST.00003', 'MOST.00003.nc',
+                         'MOST.00003.piece000', 'MOST.00003.piece000.nc'):
+                (work / name).touch()
+            er._clean_partial(work, 3, keep_raw=True)
+            self.assertEqual(sorted(p.name for p in work.iterdir()), ['MOST.00003', 'MOST_DIAG.00003', 'MOST_REST.00003'])
+
+    @staticmethod
+    def _raw(path, steps, codes=((139, 1), (130, 2))):
+        """A raw file in PlaSim's form: Fortran records with 4-byte markers, a main header and the sigma levels,
+        then a header (code, level, ..., the step count seventh) and a field for each code and level at each time."""
+        import struct
+
+        def rec(payload):
+            return struct.pack('<i', len(payload)) + payload + struct.pack('<i', len(payload))
+
+        body = rec(struct.pack('<8i', 0, 0, 0, 0, 4, 2, 2, 21)) + rec(struct.pack('<4f', 0.5, 1.0, 0.3, 0.7))
+        fields = []
+        for step in steps:
+            for code, levels in codes:
+                for level in range(levels):
+                    one = rec(struct.pack('<8i', code, level, 0, 0, 4, 2, step, 0)) + rec(
+                        struct.pack('<8f', *(float(step + code + level + k) for k in range(8))))
+                    fields.append(one)
+                    body += one
+        path.write_bytes(body)
+        return body, fields
+
+    def test_a_raw_year_splits_into_pieces_by_output_time(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp)
+            body, fields = self._raw(work / 'MOST.00000', steps=(11, 22, 33, 44, 55))
+            lead = body[:len(body) - sum(len(f) for f in fields)]
+            pieces = er.split_raw(work / 'MOST.00000', 2, work)
+            self.assertEqual([n for _, n in pieces], [2, 2, 1])
+            per_time = 3                                           # one surface field and two levels of another
+            for k, (p, n) in enumerate(pieces):
+                data = p.read_bytes()
+                self.assertTrue(data.startswith(lead))
+                self.assertEqual(data[len(lead):], b''.join(fields[2 * k * per_time:(2 * k + n) * per_time]))
+            self._raw(work / 'MOST.00001', steps=(11, 22), codes=((130, 2),))      # no surface field to time it
+            with self.assertRaises(RuntimeError):
+                er.split_raw(work / 'MOST.00001', 1, work)
+
+    def test_pieces_join_along_time_into_the_whole(self):
+        netCDF4 = __import__('pytest').importorskip('netCDF4')
+        with tempfile.TemporaryDirectory() as tmp:
+            work = Path(tmp)
+            values = np.arange(5 * 2 * 3, dtype='f4').reshape(5, 2, 3)
+
+            def write(path, times):
+                with netCDF4.Dataset(path, 'w') as d:
+                    d.title = 'pieces'
+                    d.createDimension('time', len(times))
+                    d.createDimension('lat', 2)
+                    d.createDimension('lon', 3)
+                    d.createVariable('time', 'f8', ('time',))[:] = np.asarray(times, float) * 2.5
+                    d.createVariable('lat', 'f4', ('lat',))[:] = [-30.0, 30.0]
+                    t = d.createVariable('ts', 'f4', ('time', 'lat', 'lon'), zlib=True)
+                    t.units = 'K'
+                    t[:] = values[list(times)]
+
+            write(work / 'whole.nc', range(5))
+            write(work / 'a.nc', range(0, 2))
+            write(work / 'b.nc', range(2, 5))
+            er.join_along_time([work / 'a.nc', work / 'b.nc'], work / 'joined.nc')
+            with netCDF4.Dataset(work / 'whole.nc') as a, netCDF4.Dataset(work / 'joined.nc') as b:
+                self.assertEqual(b.title, 'pieces')
+                self.assertEqual({k: len(v) for k, v in a.dimensions.items()}, {k: len(v) for k, v in b.dimensions.items()})
+                for name in ('time', 'lat', 'ts'):
+                    np.testing.assert_array_equal(a[name][:], b[name][:])
+                self.assertEqual(b['ts'].units, 'K')
+
     def test_process_lookup_finds_this_process(self):
         self.assertIn(os.getpid(), er._members(os.getpgrp()))
         self.assertIn(os.getpid(), er._using(Path(os.getcwd())))

@@ -21,6 +21,7 @@ import json
 from pathlib import Path
 import numpy as np
 
+from climate.crm import cm1_files
 from climate.crm import cm1_output as co
 
 HERE = Path(__file__).resolve().parent
@@ -71,7 +72,7 @@ def compare(case_name, from_day, every_snapshot=8, every_column=40):
     equation_set = co.eqtset(case)
     air = td.earthlike_air(121590.0, 400.0)
     model = ck.CKLongwave()
-    outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    outputs = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     span = [n for n in outputs if (n - 1) * tap >= from_day * DAY][::every_snapshot]
     cm1, written, kd, mass, kept, skipped = [], [], [], [], 0, 0
     for n in span:

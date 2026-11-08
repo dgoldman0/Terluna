@@ -12,6 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
+from climate.crm import cm1_files
 from climate.crm.ring_analysis import case_geometry, grads_layout
 from shared.constants import CM1_DRY_AIR_GAS_CONSTANT, CM1_VAPOUR_GAS_CONSTANT
 
@@ -39,15 +40,14 @@ def read_surface(path, nx, layout):
                 raise ValueError("Expected a surface variable: " + key)
             offsets[key] = cursor
         cursor += levels * nx * 4
-    if set(offsets) != set(FIELDS) or path.stat().st_size != cursor:
+    if set(offsets) != set(FIELDS) or cm1_files.size(path) != cursor:
         raise ValueError("Missing fields or snapshot size inconsistent with control file")
     fields, h = {}, hashlib.sha256()
-    with path.open("rb") as stream:
-        for key in FIELDS:
-            stream.seek(offsets[key])
-            raw = stream.read(nx * 4)
-            h.update(raw)
-            fields[key] = np.frombuffer(raw, dtype="<f4").copy()
+    data = cm1_files.memmap(path, dtype="u1", mode="r")                 # the snapshot's bytes, kept raw or compressed
+    for key in FIELDS:
+        raw = data[offsets[key]:offsets[key] + nx * 4].tobytes()
+        h.update(raw)
+        fields[key] = np.frombuffer(raw, dtype="<f4").copy()
     if not all(np.isfinite(v).all() and np.all(v > -99999) for v in fields.values()):
         raise ValueError("Missing/nonfinite CM1 surface values")
     return fields, dict(file=path.name, size_bytes=cursor, selected_bytes_sha256=h.hexdigest(),

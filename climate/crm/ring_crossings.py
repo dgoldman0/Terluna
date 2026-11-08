@@ -21,6 +21,7 @@ import json
 from pathlib import Path
 import sys
 import numpy as np
+from climate.crm import cm1_files
 from climate.crm import ring_analysis as ra
 
 RUNS, RESULTS = ra.RUNS, ra.RESULTS
@@ -166,7 +167,7 @@ def day_night_advection(names, lat_deg: float, lon_deg: float, from_day: float, 
         nx, dx, zh = record['grid']['nx'], geo['dx'], geo['zh']
         cols = patch_columns(nx, ring_position(record, lat_deg, lon_deg), radius_m, dx)
         th, qv, count = np.zeros((bins, zh.size)), np.zeros((bins, zh.size)), np.zeros(bins)
-        outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+        outputs = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
         for n in [n for n in outputs if (n - 1) * tap >= from_day * 86400.0]:
             b = min(int(np.digitize(local_hour_angle(start, lon_deg, (n - 1) * tap, day_s), edges)) - 1, bins - 1)
             dth, dqv = planet_scale_advection(ra.read_snapshot(case, n), cols, wavenumbers, dx, zh)
@@ -271,7 +272,7 @@ def patch_series(case: Path, patches: list, from_day: float, to_day: float | Non
     level; fields gives a snapshot's variables column by column."""
     geo = ra.case_geometry(case)
     tap = geo['record']['configuration']['output_s']
-    outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    outputs = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     use = [n for n in outputs if from_day * 86400.0 <= (n - 1) * tap <= (np.inf if to_day is None else to_day * 86400.0)]
     out = dict(time_s=[], patches=[{surface: {key: [] for key in keys} for surface in cols} for cols in patches])
     for n in use:

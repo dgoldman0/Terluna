@@ -23,6 +23,7 @@ import json
 from pathlib import Path
 import sys
 import numpy as np
+from climate.crm import cm1_files
 from climate.crm import ring_analysis as ra
 from climate.crm import ring_crossings as rc
 from climate.crm import ring_comfort as rcf
@@ -112,7 +113,7 @@ def reader(case: Path):
     low = int(np.searchsorted(zh, FOG_TOP_M))
 
     def read(n: int) -> dict:
-        raw = np.memmap(case / f'cm1out_t{n:06d}_s.dat', dtype='<f4', mode='r')
+        raw = cm1_files.memmap(case / f'cm1out_t{n:06d}_s.dat', dtype='<f4', mode='r')     # raw or compressed
         flat = {k: np.array(raw[offsets[k][0]:offsets[k][0] + nx], float) for k in
                 ('t2', 'q2', 'psfc', 'prate', 'u10', 'v10', 's10', 'coszen')}
         cond = sum(np.array(raw[offsets[k][0]:offsets[k][0] + offsets[k][1] * nx], float).reshape(offsets[k][1], nx)

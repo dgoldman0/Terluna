@@ -34,6 +34,7 @@ import numpy as np
 
 from climate.crm import box_budget as bb
 from climate.crm import box_lid as bl
+from climate.crm import cm1_files
 from climate.crm import cm1_output as co
 from climate.crm import ring_analysis as ra
 
@@ -85,7 +86,7 @@ def output_times(case: Path) -> dict:
         table = table[:table.size // len(names) * len(names)].reshape(-1, len(names))
         for n, t in zip(table[:, names.index('nwrite')], table[:, names.index('mtime')]):
             path = case / f'cm1out_t{int(round(float(n))):06d}_s{suffix}.dat'
-            if n > 0 and path.exists():
+            if n > 0 and cm1_files.exists(path):                       # raw or compressed
                 out[round(float(t))] = (path, case / f'cm1out_s{suffix}.ctl')
     return out
 
@@ -93,7 +94,7 @@ def output_times(case: Path) -> dict:
 def read_snapshot(path: Path, ctl: Path) -> dict:
     """One 3-D output by its control file's layout, as ring_analysis.read_snapshot reads it: sections (nz, columns)."""
     nx, layout = ra.grads_layout(ctl)
-    raw = np.fromfile(path, dtype='<f4')
+    raw = cm1_files.fromfile(path, dtype='<f4')                         # raw or compressed
     out, offset = {}, 0
     for name, levels in layout:
         field = raw[offset:offset + levels * nx].reshape(levels, nx)
@@ -295,7 +296,7 @@ def run_record(name: str) -> dict | None:
         return None
     progress = json.loads((case / 'progress.json').read_text())
     record = json.loads((case / 'case.json').read_text())
-    written = sum(p.stat().st_size for p in case.iterdir() if p.is_file() and not p.is_symlink())
+    written = cm1_files.written_bytes(case)                             # as CM1 wrote it, compressed files at their raw size
     return dict(case=name, runner=record.get('runner'), executable=record['build'].get('executable_sha256'),
                 segments=len(progress['segments']),
                 wall_hours=round(sum(s['wall_s'] for s in progress['segments']) / HOUR, 3),

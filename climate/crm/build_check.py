@@ -25,6 +25,7 @@ import shutil
 import subprocess
 import sys
 import numpy as np
+from climate.crm import cm1_files
 from climate.crm import cm1_run as c
 from climate.crm import ring_analysis as ra
 
@@ -40,8 +41,8 @@ NUDGES = 2                                  # nudged copies of the reference, ea
 
 def nudge(path: Path, which: int) -> dict:
     """Flip in place the last bit of every value of a restart file that is neither zero nor a whole number (which 0),
-    or of every other such value (which 1)."""
-    raw = np.fromfile(path, dtype='<u4')
+    or of every other such value (which 1). The file is a copy's, written raw (copy_case)."""
+    raw = cm1_files.fromfile(path, dtype='<u4')
     values = raw.view('<f4')
     fit = np.isfinite(values) & (values != 0.0) & (values != np.round(values))
     if which:
@@ -63,8 +64,8 @@ def copy_case(case: Path, name: str, label: str, restart: int, days: float, whic
             (out / item).symlink_to(src.resolve())
         elif src.exists():
             shutil.copy2(src, out / item)
-    for part in 'isuvwx':
-        shutil.copy2(case / f'cm1rst_t{restart:06d}_{part}.dat', out / f'cm1rst_t{restart:06d}_{part}.dat')
+    for part in 'isuvwx':                                               # raw copies, from compressed ones checked
+        cm1_files.copy_raw(case / f'cm1rst_t{restart:06d}_{part}.dat', out / f'cm1rst_t{restart:06d}_{part}.dat')
     (out / 'cm1.exe').symlink_to(c.CM1_HOME / 'build' / label / 'cm1.exe')
     text = (out / 'namelist.template').read_text()
     text = c.set_namelist(text, 'param2', 'irst', 1)
@@ -104,8 +105,8 @@ def rms(a, b) -> float:
 
 def differences(copy: Path, reference: Path) -> dict:
     """Root-mean-square and domain-mean differences from the reference, field by field, over the snapshots both wrote."""
-    numbers = sorted(int(p.name[8:14]) for p in reference.glob('cm1out_t*_s.dat'))
-    numbers = [n for n in numbers if (copy / f'cm1out_t{n:06d}_s.dat').exists()]
+    numbers = sorted(int(p.name[8:14]) for p in cm1_files.glob(reference, 'cm1out_t*_s.dat'))
+    numbers = [n for n in numbers if cm1_files.exists(copy / f'cm1out_t{n:06d}_s.dat')]
     out = {}
     for key in (*SURFACE, *SECTIONS):
         pairs = [(ra.read_snapshot(copy, n)[key], ra.read_snapshot(reference, n)[key]) for n in numbers]
@@ -114,9 +115,8 @@ def differences(copy: Path, reference: Path) -> dict:
 
 
 def restart_bytes_match(copy: Path, reference: Path, restart: int) -> bool:
-    return all(hashlib.sha256((copy / f'cm1rst_t{restart:06d}_{part}.dat').read_bytes()).digest()
-               == hashlib.sha256((reference / f'cm1rst_t{restart:06d}_{part}.dat').read_bytes()).digest()
-               for part in 'isuvwx')
+    return all(cm1_files.sha256(copy / f'cm1rst_t{restart:06d}_{part}.dat')
+               == cm1_files.sha256(reference / f'cm1rst_t{restart:06d}_{part}.dat') for part in 'isuvwx')
 
 
 def verdict(build: dict, nudged: list) -> dict:

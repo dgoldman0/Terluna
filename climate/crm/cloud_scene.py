@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import numpy as np
+from climate.crm import cm1_files
 from climate.crm.cloud_columns import dry_density, read_cm1_constants,sha256,SPECIES,NUMBERS
 from climate.crm.ring_analysis import case_geometry,read_snapshot,hour_angle
 from climate.crm.cm1_run import RUNS
@@ -22,7 +23,7 @@ def export(case_name,snapshot,observer_column,expected_hash,output,half_columns=
     if record['reference']['run']!='A28_dim5_moon' or not record.get('path'):
         raise ValueError('A corrected flat great-circle ring is required')
     scalar=case/f'cm1out_t{snapshot:06d}_s.dat'
-    if sha256(scalar)!=expected_hash:
+    if cm1_files.sha256(scalar)!=expected_hash:                         # its raw bytes, kept raw or compressed
         raise ValueError('Selected cloud snapshot differs from regional input admission')
     d=read_snapshot(case,snapshot)
     constants,source_hashes=read_cm1_constants(record)

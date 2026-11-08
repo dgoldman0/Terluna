@@ -19,10 +19,14 @@ The water: the column's vapour by CM1's own budget terms (rho times each, level 
 prescribed moistening reckoned as for the heat, against the evaporation, the rain and the change of the column's
 vapour and condensate from the span's first output to its last; what is left closes it. On the inflow build with
 var7 = 1 (cm1_run.INFLOW_PATCH) the air the mean wind draws in carries the reference's, a tendency outside CM1's
-budget too, reckoned at each output as the written rate times the reference less the domain mean. CM1 splits its
+budget too, reckoned at each output as the written rate times the reference less the domain mean, the reference's
+air being that of the nudging window CM1 holds then (a weather case's windows follow the GCM's air). CM1 splits its
 vertical advection from its implicit diffusion with the imposed sinking taken out twice (adv.F: the slot for the
 diffusion holds the sinking too), so only their sum with the horizontal advection, the box's own transport, stands;
-over a doubly periodic box it is near nil. The boundary layer's column over the evaporation, and its heating over the
+over a doubly periodic box it is near nil. On the damped-gravity-wave build with var9 = 1 (cm1_run.DGW_PATCHES) the large-scale
+vertical wind is the box's own, changing every step: CM1's own terms (ptb_lsw, qvb_lsw) book its advection, and the
+inflow and the table's heating as applied (below the boundary layer's top only) are taken from the build's record of
+their means over each diagnostic interval (DGW_RECORD), the interval ending at each output. The boundary layer's column over the evaporation, and its heating over the
 sensible heat, should be one: they stood at 1.32-1.51 in CM1's simple boundary layer before its density was divided
 out (cm1_run.PBL_DENSITY_PATCH). Writes results/crm/box_budget_<case>.json.
 """
@@ -55,6 +59,7 @@ WATER = {                         # CM1's vapour budget terms (domain diagnostic
 }
 CONDENSATE = ('qc', 'qr', 'qi', 'qs', 'qg')  # the condensate's mixing ratios, kg/kg by level
 INFLOW_RATES = 'terluna_inflow_rate.txt'      # cm1_run.INFLOW_RATES: the inflow build's rates by level
+DGW_RECORD = 'terluna_dgw.txt'                # cm1_run.DGW_RECORD: the damped gravity wave's means by interval
 GROUPS = {                        # CM1's potential-temperature budget terms (domain diagnostics) by process
     'radiation': ('ptb_rad',),
     'microphysics': ('ptb_mp',),
@@ -105,7 +110,9 @@ def read_day_night(path: Path, field: str = 'theta'):
 def read_inflow(case: Path, text: str):
     """The mean wind's inflow at the reference's air (cm1_run.INFLOW_PATCH) when the namelist text sets var7 = 1: the
     rates (1/s) by level as the build wrote them, and the reference's potential temperature (K) and vapour (kg/kg)
-    there from the first nudging window, which CM1 interpolates to its levels linearly; None otherwise."""
+    there in each nudging window, which CM1 interpolates to its levels linearly, with the window's end (s); theta and
+    qv are the first window's. None otherwise. CM1 draws the air toward the window it holds (inflow_reference): the
+    same air in every window of a mean-forced box, the GCM's changing air in a weather case's."""
     try:
         if namelist_value(text, 'var7') <= 0.5:
             return None
@@ -114,12 +121,69 @@ def read_inflow(case: Path, text: str):
     words = (case / INFLOW_RATES).read_text().split()
     nk = int(words[0])
     values = np.array([float(v) for v in words[1:1 + 2 * nk]]).reshape(nk, 2)
-    rows = [line.split() for line in (case / 'lsnudge_0001.dat').read_text().splitlines()[4:]
-            if line.strip() and not line.lstrip().startswith('*')]
-    ref = np.array([[float(v) for v in row[:3]] for row in rows])
     z = values[:, 0]
-    return dict(z=z, rate=values[:, 1], theta=np.interp(z, ref[:, 0], ref[:, 1]),
-                qv=np.interp(z, ref[:, 0], ref[:, 2]) * 1.0e-3)
+    windows = []
+    for path in sorted(case.glob('lsnudge_*.dat')):
+        lines = path.read_text().splitlines()
+        rows = [line.split() for line in lines[4:] if line.strip() and not line.lstrip().startswith('*')]
+        ref = np.array([[float(v) for v in row[:3]] for row in rows])
+        windows.append(dict(end_s=float(lines[1].split()[1]), theta=np.interp(z, ref[:, 0], ref[:, 1]),
+                            qv=np.interp(z, ref[:, 0], ref[:, 2]) * 1.0e-3))
+    return dict(z=z, rate=values[:, 1], theta=windows[0]['theta'], qv=windows[0]['qv'], windows=windows)
+
+
+def read_dgw(case: Path, text: str):
+    """The damped gravity wave's record (cm1_run.DGW_PATCHES) when the namelist text sets var9 = 1, else None: for each
+    diagnostic interval its end (s), its steps, the boundary layer's mean top (m) and, by level, the large-scale vertical
+    wind (m/s, on the w levels zf), the inflow's potential-temperature (K/s) and vapour (kg/kg/s) tendencies and the
+    table's heating as applied (K/s of potential temperature), each the interval's mean."""
+    try:
+        if namelist_value(text, 'var9') <= 0.5:
+            return None
+    except KeyError:
+        return None
+    words = (case / DGW_RECORD).read_text().split()
+    rows, i = [], 0
+    while i < len(words):
+        nk = int(float(words[i + 3]))
+        block = np.array([float(v) for v in words[i + 4:i + 4 + 6 * nk]]).reshape(nk, 6)
+        rows.append(dict(end_s=float(words[i]), steps=float(words[i + 1]), zb_m=float(words[i + 2]), zh=block[:, 0],
+                         zf=block[:, 1], w=block[:, 2], inflow_theta=block[:, 3], inflow_qv=block[:, 4],
+                         table_theta=block[:, 5]))
+        i += 4 + 6 * nk
+    return rows
+
+
+def dgw_at(rows: list, mtime: float, interval: float) -> dict:
+    """The damped gravity wave's record for the diagnostic output at mtime (s): the interval ending nearest it, within half
+    an interval (the build closes an interval at the first step at or past each multiple of the diagnostic period).
+
+    The record misses the interval ending at each run segment's end, 1 in 8 with one-day segments and 3-hour intervals.
+    There the interval's means are estimated as the mean of the intervals ending one period before and one after, exact
+    for a trend linear across the three, and at the record's end, with nothing after, the interval before is carried.
+    An estimated row has no steps and says how it was made under 'estimated' ('between' or 'carried')."""
+    ends = np.array([r['end_s'] for r in rows])
+    k = int(np.argmin(np.abs(ends - mtime)))
+    if abs(ends[k] - mtime) <= 0.5 * interval:
+        return rows[k]
+    before = [r for r in rows if abs(r['end_s'] - (mtime - interval)) <= 0.5 * interval]
+    after = [r for r in rows if abs(r['end_s'] - (mtime + interval)) <= 0.5 * interval]
+    if before and after:
+        means = {key: 0.5 * (before[0][key] + after[0][key])
+                 for key in ('zb_m', 'w', 'inflow_theta', 'inflow_qv', 'table_theta')}
+        return dict(before[0], end_s=mtime, steps=0.0, estimated='between', **means)
+    if before and ends.max() < mtime:
+        return dict(before[0], end_s=mtime, steps=0.0, estimated='carried')
+    raise ValueError(f'no damped-gravity-wave interval ends near {mtime:.0f} s (nearest {ends[k]:.0f} s)')
+
+
+def inflow_reference(inflow: dict, mtime: float) -> dict:
+    """The nudging window whose air the inflow draws in at model time mtime (s): CM1 moves on to the next window once
+    a step's time passes the end of the one it holds (solve1.F, lsnudge_count), and stays on the last."""
+    for window in inflow['windows']:
+        if mtime <= window['end_s']:
+            return window
+    return inflow['windows'][-1]
 
 
 def day_night_heating(z_table, th_table, zh, mtime, var18, var19):
@@ -196,8 +260,10 @@ def budget(name: str, from_day: float) -> dict:
         table = read_day_night(case / 'terluna_lsadv.txt')
         var18, var19 = namelist_value(text, 'var18'), namelist_value(text, 'var19')
     inflow = read_inflow(case, text)
+    dgw = read_dgw(case, text)
+    interval = namelist_value(text, 'diagfrq') if dgw else None
     layout = ra.grads_layout(case / 'cm1out_diag_s.ctl')[1]
-    times, t_mean, rho, day_night, pbl, inflowing = [], [], [], [], [], []
+    times, t_mean, rho, day_night, pbl, inflowing, wave, tops = [], [], [], [], [], [], [], []
     terms = {k: [] for k in GROUPS}
     parts = {k: [] for k in MICROPHYSICS}
     surface = {k: [] for k in ('t2_k', 'q2_g_kg', 'sensible_w_m2', 'latent_w_m2', 'net_sunlight_w_m2',
@@ -216,10 +282,16 @@ def budget(name: str, from_day: float) -> dict:
             terms[k].append(sum(d[n] for n in names) * exner * DAY)
         for k, n in MICROPHYSICS.items():
             parts[k].append(d[n] * exner * DAY)
+        row = dgw_at(dgw, d['mtime'], interval) if dgw else None
+        if row is not None:                       # the build's own means: the table's heating as applied, the inflow
+            wave.append(row['w'])
+            tops.append(row['zb_m'])
         if prescribed:
-            day_night.append(day_night_heating(*table, zh, d['mtime'], var18, var19) * exner * DAY)
+            day_night.append((row['table_theta'] if row is not None else
+                              day_night_heating(*table, zh, d['mtime'], var18, var19)) * exner * DAY)
         if inflow is not None:
-            inflowing.append(inflow['rate'] * (inflow['theta'] - d['th']) * exner * DAY)
+            inflowing.append((row['inflow_theta'] if row is not None else
+                              inflow['rate'] * (inflow_reference(inflow, d['mtime'])['theta'] - d['th'])) * exner * DAY)
         surface['t2_k'].append(d['t2'])
         surface['q2_g_kg'].append(d['q2'] * 1000.0)
         surface['sensible_w_m2'].append(d['hfx'])
@@ -242,8 +314,10 @@ def budget(name: str, from_day: float) -> dict:
     micro = {k: np.mean(v, axis=0) for k, v in parts.items()}
     top = zh < 23060.0
     sensible = float(np.mean(surface['sensible_w_m2']))
+    own = (dict(w_mm_s=(1e3 * np.mean(wave, axis=0)).tolist(), zw_m=zw[:-1].tolist(),
+                boundary_layer_top_m=float(np.mean(tops))) if wave else None)
     return dict(case=name, span_days=[float(times[0]), float(times[-1])], outputs=int(times.size),
-                z_m=zh[top].tolist(),
+                damped_gravity_wave=own, z_m=zh[top].tolist(),
                 profiles_k_day={k: v[top].tolist() for k, v in prof.items()},
                 microphysics_k_day={k: v[top].tolist() for k, v in micro.items()},
                 layers_w_m2={k: layer_sums(v, rho, zw) for k, v in prof.items()},
@@ -267,6 +341,8 @@ def water(name: str, from_day: float, to_day: float | None = None) -> dict:
         z_table, qv_table = read_day_night(case / 'terluna_lsadv.txt', 'qv')
         var18, var19 = namelist_value(text, 'var18'), namelist_value(text, 'var19')
     inflow = read_inflow(case, text)
+    dgw = read_dgw(case, text)
+    interval = namelist_value(text, 'diagfrq') if dgw else None
     layout = ra.grads_layout(case / 'cm1out_diag_s.ctl')[1]
     present = {name for name, _ in layout}
     groups = {k: [n for n in names if n in present] for k, names in WATER.items()}
@@ -287,7 +363,8 @@ def water(name: str, from_day: float, to_day: float | None = None) -> dict:
         if prescribed:
             rates['day_night_prescribed'] = day_night_heating(z_table, qv_table, zh, d['mtime'], var18, var19)
         if inflow is not None:
-            rates['inflow'] = inflow['rate'] * (inflow['qv'] - d['qv'])
+            rates['inflow'] = (dgw_at(dgw, d['mtime'], interval)['inflow_qv'] if dgw else
+                               inflow['rate'] * (inflow_reference(inflow, d['mtime'])['qv'] - d['qv']))
         for k, r in rates.items():
             columns[k].append(float((r * mass).sum()) * DAY)
             bands[k].append([float((r * mass)[(zh >= a * 1000.0) & (zh < b * 1000.0)].sum()) * DAY
@@ -305,6 +382,8 @@ def water(name: str, from_day: float, to_day: float | None = None) -> dict:
                 evaporation_mm_day=e, rain_mm_day=p, storage_mm_day=storage,
                 column_water_kg_m2=dict(start=held[0], end=held[-1]),
                 microphysics_less_rain_mm_day=column['microphysics'] + p, rest_mm_day=rest,
+                own_large_scale_convergence_mm_day=(column.get('imposed_ascent', 0.0) + column.get('inflow', 0.0)
+                                                    if dgw else None),
                 boundary_layer_over_evaporation=column['boundary_layer'] / e if e > 0.0 else None)
 
 
@@ -340,7 +419,10 @@ def analyse(name: str, reference: str | None, from_day: float) -> dict:
                            'storage and the rain. At the ground the heat into the air and the evaporation are positive '
                            'upward, the radiation positive downward; the difference is the case minus the reference. '
                            'Products before schema 2 counted the imposed sinking\'s heating in turbulence and took it '
-                           'from resolved transport.')
+                           'from resolved transport. On the damped-gravity-wave build (var9 = 1) imposed sinking and '
+                           'imposed ascent hold the advection by the box\'s own large-scale vertical wind, the inflow and '
+                           'the table\'s heating are the build\'s interval means, and own_large_scale_convergence_mm_day '
+                           'is the column\'s vapour brought by that wind and the inflow together.')
     return out
 
 

@@ -219,6 +219,7 @@
   </div>
 
   <section class="notes" aria-label="What the globe shows">
+    <p id="frame-note" hidden></p>
     <h2>What the appearance shows</h2>
     <p><b>Computed.</b> Land, sea and water depth come from LOLA topography above the GRAIL geoid at 16 pixels per
       degree (1.9 km), filled to the geography atlas's common sea level. Rivers and the rain-fed lakes above sea level
@@ -721,13 +722,19 @@
 
   // Header, figures and provenance from the products.
   const pct = Math.round(D.share * 100) + '%';
-  document.getElementById('headline').textContent = 'The Open Moon at ' + pct + ' water';
+  document.getElementById('headline').textContent = (D.frame ? 'The turned Open Moon at ' : 'The Open Moon at ') + pct +
+    ' water';
   document.getElementById('figs-title').textContent = 'At ' + pct;
   document.getElementById('lede').textContent =
     'An estimate of how the Open Moon looks from space: its air, clouds and a guessed cover of plants, over the ' +
-    'geography atlas with sea level ' + D.levelText + ' above the lunar geoid. Drag to turn it, scroll or pinch to ' +
-    'zoom, click for the height or depth of a place, and move the Sun to see the halo, the twilight and the view ' +
-    'from Earth.';
+    'geography atlas with sea level ' + D.levelText + ' above the lunar geoid.' + (D.frame ? D.frame.lede : '') +
+    ' Drag to turn it, scroll or pinch to zoom, click for the height or depth of a place, and move the Sun to see the ' +
+    'halo, the twilight and the view from Earth.';
+  if (D.frame) {
+    const note = document.getElementById('frame-note');
+    note.innerHTML = D.frame.note;
+    note.hidden = false;
+  }
   const figs = document.getElementById('figs');
   const tau = P.tau0.map((v) => v.toFixed(2));
   const skyFigures = [['Air above the surface', 'τ ' + tau.join(' / ')], ['Scale height', P.scaleHeightKm.toFixed(1) + ' km'],

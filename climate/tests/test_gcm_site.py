@@ -1,6 +1,8 @@
 """The GCM site forcing: the spherical harmonics it differentiates with, the continuity that gives its vertical wind,
 the fits by local time, the cells it takes and its table as CM1 reads it; on the GCM's own output where it is at hand,
 the budget it holds."""
+import math
+
 import numpy as np
 import pytest
 from scipy.special import assoc_legendre_p_all
@@ -210,3 +212,62 @@ def test_the_wind_windows_follow_the_day():
         assert w['u_m_s'][0] == pytest.approx(np.cos(np.radians(w['hour_angle_deg'])))    # held down to the ground
         assert w['u_m_s'][1] == pytest.approx(np.cos(np.radians(w['hour_angle_deg'])))
     assert windows[36]['hour_angle_deg'] == pytest.approx(windows[0]['hour_angle_deg'])  # a day later, the same
+
+
+def sun_sequence(period_s=2.55e6, hour0=-90.0):
+    """A sequence with only its Sun and three records' departures, for the readers of site_sequence's output."""
+    t = np.array([1.0e5, 2.0e5, 3.0e5])
+    states = dict(time_s=t, hour_angle_deg=np.zeros(3), **{f'{k}_departure': np.array([[0.0], [1.0], [4.0]])
+                                                            for k in ('theta', 'q', 'u', 'v')})
+    boundaries = dict(time_s=np.array([1.5e5, 2.5e5]), theta_k_s=np.array([[1.0], [3.0]]), qv_kg_kg_s=np.array([[2.0], [6.0]]))
+    coefficients = {k: np.vstack([[10.0], [1.0], [0.0]] + [[0.0]] * (2 * gs.HARMONICS - 2)) for k in ('theta', 'q', 'u', 'v')}
+    return dict(sun=dict(period_s=period_s, hour_at_zero_deg=hour0), states=states, boundaries=boundaries,
+                coefficients=coefficients)
+
+
+def test_the_sequence_finds_the_sites_hour_and_reads_its_departures_in_time():
+    seq = sun_sequence()
+    for hour, after in ((-90.0, 0.0), (45.0, 3.0e6), (179.0, 1.0e5)):
+        t = gs.gcm_time(seq, hour, after)
+        assert after <= t < after + seq['sun']['period_s']
+        assert abs(((-90.0 + 360.0 * t / 2.55e6) - hour + 180.0) % 360.0 - 180.0) < 1e-9
+    # the fit by local time (undamped) plus the departures, linear in time between the records' centres
+    x = gs.sequence_state(seq, 'u', [1.5e5, 2.75e5], [0.0, 90.0])
+    assert np.allclose(x[:, 0], [10.0 + 1.0 + 0.5, 10.0 + 0.0 + 3.25])
+    assert np.allclose(gs.sequence_tendency(seq, 'theta', [2.0e5]), [[2.0]])
+    assert np.allclose(gs.sequence_tendency(seq, 'q', [1.5e5, 2.5e5]), [[2.0], [6.0]])
+    with pytest.raises(ValueError):
+        gs.sequence_state(seq, 'u', [0.5e5], [0.0])                           # before the first record
+    with pytest.raises(ValueError):
+        gs.sequence_tendency(seq, 'q', [2.9e5])                              # after the last boundary
+
+
+def test_redamping_carries_a_fit_from_one_mean_to_another():
+    coef = np.array([2.0, 1.0, 0.5, 0.25, 0.1, 0.0, 0.0, 0.0, 0.0])
+    assert np.allclose(gs.redamped(coef, 36.0, 36.0), coef)
+    assert np.allclose(gs.redamped(coef, 36.0, 1e-6), gs.undamped(coef, 36.0))
+    # a harmonic seen through 36-degree means, carried to 3-degree means, is that harmonic seen through 3-degree means
+    for window in (36.0, 3.0):
+        x = math.radians(2 * window / 2.0)
+        assert np.isclose(gs.redamped(np.array([0, 0, 0, 1.0 * math.sin(math.radians(36.0)) / math.radians(36.0), 0, 0, 0, 0, 0]),
+                                      36.0, window)[3], math.sin(x) / x)
+
+
+def test_the_sequence_holds_its_column_and_departs_from_its_own_fit_by_nothing_on_average():
+    pytest.importorskip('netCDF4')
+    if not BRANCH.exists():
+        pytest.skip(f'{BRANCH} is not at hand')
+    seq = gs.site_sequence('A28R_301k_cold_moist', (0, 0), SEA)
+    st, b = seq['states'], seq['boundaries']
+    assert st['time_s'].size == 118 and b['time_s'].size == 117
+    for k in ('theta', 'q', 'u', 'v'):                                       # least-squares residuals: nil on average
+        dep = st[f'{k}_departure']
+        assert np.all(np.abs(dep.mean(axis=0)) <= 1e-9 * (np.abs(dep).max(axis=0) + 1e-30))
+    mass = np.asarray(seq['forcing']['sigma'])                               # the column's vapour held exactly
+    f, s = gs.site_forcing('A28R_301k_cold_moist', (0, 0), SEA, series=True)
+    held = b['qv_kg_kg_s'] @ s['mass']
+    assert np.allclose(held, b['column_vapour_kg_m2_s'] - b['column_vapour_fit_kg_m2_s'], rtol=1e-9, atol=1e-15)
+    # the site's Sun turns once a synodic month, its hour angle a straight line in time to a hundredth of a degree
+    from climate.crm.cm1_run import solar_day_s
+    assert abs(seq['sun']['period_s'] / solar_day_s() - 1.0) < 1e-4 and seq['sun']['residual_deg'] < 0.01
+    assert seq['record_s'] == 143 * 1800.0 and mass.size == 10

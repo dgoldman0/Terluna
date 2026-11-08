@@ -33,6 +33,7 @@ import numpy as np
 from scipy import ndimage
 from scipy import stats as sstats
 
+from climate.crm import cm1_files
 from climate.crm import elec_analysis as ea
 from climate.crm import ring_analysis as ra
 from climate.crm.mixed_phase_analysis import significant, stats
@@ -376,7 +377,7 @@ def analyse(name: str) -> dict:
     progress = json.loads((case / 'progress.json').read_text())
     start = float(progress.get('start_s', 0.0))
     times = ea.output_times(case)
-    outputs = sorted(n for n in (int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat')) if n in times)
+    outputs = sorted(n for n in (int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat')) if n in times)
     output_s = record['configuration']['output_s'] * record.get('time_scale', 1.0)
     fields_list, domain = [], []
     for n in outputs:

@@ -1,6 +1,7 @@
 """Checks of the CM1 runner's pure pieces: patching, namelist editing, grids, surfaces and restarts."""
 import hashlib
 import json
+import math
 
 import numpy as np
 import pytest
@@ -100,7 +101,7 @@ def test_the_gust_build_takes_beljaars_gust_over_water_and_changes_nothing_else(
         c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind'] + [c.GUST_PATCH]
     assert all(c.GUST_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
                if label not in ('moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft',
-                                c.INFLOW_BUILD))
+                                c.INFLOW_BUILD, c.DGW_BUILD))
     for day in ('day3', 'day4'):
         case, wind = c.CASES[f'box_near_side_sea_l15_wind_gust_{day}'], c.CASES[f'box_near_side_sea_l15_wind_{day}']
         assert case['build'] == 'moon_omp_rain_law_pbl_wind_gust'
@@ -121,7 +122,7 @@ def test_the_aloft_build_pulls_the_wind_from_var8_up_and_new_cases_take_the_corr
     assert c.BUILD_PATCHES[c.ALOFT_BUILD] == c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust'] + [c.WIND_ALOFT_PATCH]
     assert c.BUILDS[c.ALOFT_BUILD] == c.BUILDS['moon_omp']
     assert all(c.WIND_ALOFT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
-               if label not in (c.ALOFT_BUILD, c.INFLOW_BUILD))
+               if label not in (c.ALOFT_BUILD, c.INFLOW_BUILD, c.DGW_BUILD))
     # the corrected wind follows the build: none on the old builds, the time scale on the wind's, both on the new one
     assert c.corrected_wind('moon_omp_rain_law_pbl', 312.69) == {}
     assert c.corrected_wind('moon_omp_rain_law_pbl_wind_gust', 312.69) == dict(var10=7200.0)
@@ -164,7 +165,8 @@ def test_the_inflow_build_draws_the_reference_s_air_in_where_the_mean_wind_conve
         '') + '      if(timestats.ge.1) time_misc=time_misc+mytime()\n' == source
     assert c.BUILD_PATCHES[c.INFLOW_BUILD] == c.BUILD_PATCHES['moon_omp_rain_law_pbl_wind_gust_aloft'] + [c.INFLOW_PATCH]
     assert c.BUILDS[c.INFLOW_BUILD] == c.BUILDS['moon_omp']
-    assert all(c.INFLOW_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label != c.INFLOW_BUILD)
+    assert all(c.INFLOW_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
+               if label not in (c.INFLOW_BUILD, c.DGW_BUILD))
     assert c.corrected_inflow(c.INFLOW_BUILD) == dict(var7=1.0)
     assert c.corrected_inflow(c.ALOFT_BUILD) == {} and c.corrected_inflow('moon_omp') == {}
     # the default for the boxes forced by the GCM's column at their site; a ring on the build keeps var7 0
@@ -178,6 +180,73 @@ def test_the_inflow_build_draws_the_reference_s_air_in_where_the_mean_wind_conve
     assert case['restart_from'] == dict(case='box_near_side_sea_l15', day=59.0)
 
 
+def test_the_boxes_on_the_design_years_are_the_site_boxes_on_the_corrected_build_and_the_design_run():
+    # each differs from the site box it repeats in its build and its forcing run alone, and its run-on days chain
+    # from its own restarts as the fifteen-level sea box's did, a fifth lunar day (where the gap test's rules call
+    # one) from the fourth's day-118 restart
+    assert (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS) == ('A28R_301k_design_l15_snow_s934', (10, 19))
+    same = lambda d: {k: v for k, v in d.items() if k not in ('build', 'gcm', 'purpose')}
+    for name, source in (('box_near_side_sea_design_years', 'box_near_side_sea'), ('box_0e_design_years', 'box_0e_design')):
+        case = c.CASES[name]
+        assert case['build'] == c.CORRECTED_BUILD and case['gcm'] == (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS)
+        assert same(case) == same(c.CASES[source]) and case['days'] == 59.06
+        assert c.corrected_inflow(case['build'], case) == dict(var7=1.0)
+        assert c.corrected_wind(case['build'], 316.1) == dict(var10=c.WIND_TAU_S, var8=316.1)
+        day3, day4, day5 = (c.CASES[f'{name}_day{k}'] for k in (3, 4, 5))
+        assert day3['restart_from'] == dict(case=name, day=59.0) and day3['days'] == 88.5
+        assert day4['restart_from'] == dict(case=f'{name}_day3', day=88.5) and day4['days'] == 118.0
+        assert day5['restart_from'] == dict(case=f'{name}_day4', day=118.0) and day5['days'] == 147.5
+        for run_on in (day3, day4, day5):
+            assert {k: v for k, v in run_on.items() if k not in ('restart_from', 'days', 'purpose')} == \
+                {k: v for k, v in case.items() if k not in ('days', 'purpose')}
+
+
+def test_the_third_box_on_the_design_years_is_the_land_box_at_the_dry_site_with_its_own_wetness_row():
+    # box_se_dry_design_years departs from box_0e_design_years in its site, with the start at the site's sunrise, and
+    # in its land row at the GCM's own wetness alone; its run-on days chain from its own restarts, a fifth lunar day
+    # (where the gap test's rules call one) from the fourth's day-118 restart
+    name, land = 'box_se_dry_design_years', c.CASES['box_0e_design_years']
+    case = c.CASES[name]
+    assert {k for k in set(case) | set(land) if case.get(k) != land.get(k)} == {'site', 'start_hour_angle_deg', 'land_row',
+                                                                              'purpose'}
+    assert case['site'] == dict(land['site'], lat_deg=-44.3, lon_deg=56.25) and case['site']['surface'] == 'land'
+    assert case['start_hour_angle_deg'] == -90.0 - case['site']['lon_deg'] and case['land_row'] == 'gcm'
+    assert case['build'] == c.CORRECTED_BUILD and case['gcm'] == (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS)
+    assert c.corrected_inflow(case['build'], case) == dict(var7=1.0) and case['days'] == 59.06
+    day3, day4, day5 = (c.CASES[f'{name}_day{k}'] for k in (3, 4, 5))
+    assert day3['restart_from'] == dict(case=name, day=59.0) and day3['days'] == 88.5
+    assert day4['restart_from'] == dict(case=f'{name}_day3', day=88.5) and day4['days'] == 118.0
+    assert day5['restart_from'] == dict(case=f'{name}_day4', day=118.0) and day5['days'] == 147.5
+    for run_on in (day3, day4, day5):
+        assert {k: v for k, v in run_on.items() if k not in ('restart_from', 'days', 'purpose')} == \
+            {k: v for k, v in case.items() if k not in ('days', 'purpose')}
+    # the latitude turns the box (the land box on the equator has no Coriolis force)
+    assert c.turning_rate(case, -44.3) == pytest.approx(-3.718e-6, rel=1e-3) and c.turning_rate(land, 0.0) == 0.0
+    # its land is the placeholder land's own row at the GCM's wetness to two decimals, as the circles of latitude
+    # have it; every other box keeps the wetness class nearest its site's wetness
+    index = c.PLACEHOLDER_LAND[0]
+    assert c.site_land_row(case, 0.0823) == index and c.site_land_row(land, 0.794) == c.wetness_class(0.794) == 29
+    assert c.site_land_row(land, 0.0823) == c.wetness_class(0.0823) == 21
+    assert all(c.site_land_row(v, 0.5) == c.wetness_class(0.5) for k, v in c.CASES.items()
+               if not k.startswith((name, 'box_se_dry_dgw')))
+    row = c.landuse_rows(((index, round(0.0823, 2)),))[index]
+    assert row.startswith(f'{index},') and '   .08,' in row and 'wetness 0.08' in row
+
+
+def test_the_dry_box_takes_six_cells_at_two_gaussian_rows_and_three_columns():
+    # the land box's footprint about 44.3 S, 56.25 E on PlaSim's T21 grid (Gaussian rows, 5.625-degree columns) holds
+    # the rows at 41.53 and 47.07 S and the columns at 50.625, 56.25 and 61.875 E; all six are land on the design run
+    # (checked on its mask at setup)
+    from climate.crm import gcm_site as gs
+    lat = np.degrees(np.arcsin(np.polynomial.legendre.leggauss(32)[0]))[::-1]
+    lon = np.arange(64) * 5.625
+    site = c.CASES['box_se_dry_design_years']['site']
+    cells = gs.site_cells(lat, lon, np.ones((32, 64), bool), np.zeros((32, 64)), site)
+    jj, ii = np.nonzero(cells)
+    assert sorted({round(float(lat[j]), 2) for j in jj}) == [-47.07, -41.53]
+    assert sorted({float(lon[i]) for i in ii}) == [50.625, 56.25, 61.875] and cells.sum() == 6
+
+
 def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     name, marker, edits = c.TWILIGHT_PATCH
     assert name == 'radiation_driver.F' and any(marker in new for _, new, _ in edits)
@@ -186,7 +255,7 @@ def test_the_twilight_build_adds_its_hook_after_the_sun_and_only_there():
     # wind's own nudging time scale, the gust over water at lunar gravity and the wind pulled from aloft)
     with_hook = {'moon_omp_twilight', 'moon_omp_terrain_sea_twilight', 'moon_omp_rain_law', 'moon_omp_rain_law_pbl',
                  'moon_omp_rain_law_pbl_wind', 'moon_omp_rain_law_pbl_wind_gust', 'moon_omp_rain_law_pbl_wind_gust_aloft',
-                 c.INFLOW_BUILD}
+                 c.INFLOW_BUILD, c.DGW_BUILD}
     assert all(c.TWILIGHT_PATCH not in patches for label, patches in c.BUILD_PATCHES.items() if label not in with_hook)
     sun = next(p for p in c.PATCHES if p[0] == 'radiation_driver.F')
     added = ''.join(new for _, new, _ in sun[2])
@@ -243,7 +312,8 @@ def test_a_case_set_up_from_another_takes_its_inputs_and_only_a_new_executable(t
     source = tmp_path / 'runs' / 'box_0e_small'
     source.mkdir(parents=True)
     for name in ('input_sounding', 'namelist.template', 'terluna_surface.txt', 'progress.json', 'namelist.input',
-                 'cm1out_t000001_s.dat', 'cm1rst_t000002_s.dat', 'cm1_segment_001.log'):
+                 'cm1out_t000001_s.dat', 'cm1rst_t000002_s.dat', 'cm1_segment_001.log',
+                 'cm1out_t000003_s.dat.zst', 'compression_manifest.jsonl'):      # compressed outputs and their record stay
         (source / name).write_text(name)
     (source / 'RRTMG_LW_DATA').symlink_to(source / 'input_sounding')
     (source / 'case.json').write_text(json.dumps(dict(case='box_0e_small', build=dict(label='moon_omp', executable_sha256='old'))))
@@ -333,6 +403,48 @@ def test_a_run_on_from_a_restart_carries_the_wind_windows_on_by_whole_lunar_days
     single.mkdir()
     (single / 'lsnudge_0001.dat').write_text(' *  Header\n  0.0 1.0e+30\n')
     assert c.restart_windows(single, case, 0.0, 100.0) is None
+
+
+def test_a_forcing_change_holds_the_table_at_its_mean_or_removes_the_forcing(tmp_path):
+    z = np.array([0.0, 500.0, 2000.0, 9000.0])
+    th = np.array([[1.0e-5, 2.0e-5, -1.0e-5, 0.0], [3.0e-5, -2.0e-5, 1.0e-5, 4.0e-6], [-1.0e-5, 0.0, 2.0e-5, 2.0e-6]])
+    qv = th * 1.0e-3
+    wind = dict(z_m=[0.0, 1000.0, 5000.0, 20000.0], w_m_s=[0.0, 0.004, 0.011, 0.002])
+    for change in c.FORCING_CHANGES:
+        case = tmp_path / change
+        case.mkdir()
+        c.write_day_night(case / 'terluna_lsadv.txt', dict(z_m=z, theta_k_s=th, qv_kg_kg_s=qv))
+        c.write_vertical_wind(case / 'terluna_wls.txt', wind, 30000.0)
+        before = (case / 'terluna_wls.txt').read_text()
+        record = c.change_forcing(case, change)
+        table = c.read_day_night(case / 'terluna_lsadv.txt')
+        assert record['change'] == change and record['bins'] == 3 and record['levels'] == 4
+        assert np.allclose(table['z_m'], z) and table['theta_k_s'].shape == th.shape
+        lines = (case / 'terluna_wls.txt').read_text().splitlines()
+        if change == 'cycle_to_mean':                     # every bin the mean, the wind as it was
+            for got, want in ((table['theta_k_s'], th), (table['qv_kg_kg_s'], qv)):
+                assert np.allclose(got, want.mean(axis=0)[None, :], rtol=1e-6, atol=0.0)
+            assert (case / 'terluna_wls.txt').read_text() == before
+        else:                                             # no table and no wind, at the same levels
+            assert not table['theta_k_s'].any() and not table['qv_kg_kg_s'].any()
+            assert int(lines[0]) == 5 and [float(r.split()[0]) for r in lines[1:]] == wind['z_m'] + [30000.0]
+            assert all(float(r.split()[1]) == 0.0 for r in lines[1:])
+    with pytest.raises(ValueError):
+        c.change_forcing(tmp_path / 'off', 'halved')
+
+
+def test_the_mechanism_cases_differ_from_the_sea_box_only_in_their_forcing_and_span():
+    control = c.CASES['box_near_side_sea_l15_inflow_day3']
+    restart_day = control['restart_s'] / 86400.0
+    for name, change, day in (('box_near_side_sea_l15_inflow_cycle_mean', 'cycle_to_mean', 59.5),
+                              ('box_near_side_sea_l15_inflow_forcing_off', 'off', 69.0)):
+        cfg = c.CASES[name]
+        assert cfg['forcing_change'] == change and cfg['days'] == 86.5
+        assert cfg['restart_from'] == dict(case='box_near_side_sea_l15_inflow_day3', day=day)
+        assert abs(day / restart_day - round(day / restart_day)) < 1e-9 and 59.0 < day < 86.5 <= control['days']
+        assert cfg['purpose'].startswith(control['purpose'])
+        same = {k for k in set(cfg) | set(control)} - {'forcing_change', 'days', 'restart_from', 'purpose'}
+        assert all(cfg.get(k) == control.get(k) for k in same)
 
 
 def test_a_run_on_from_a_run_on_case_takes_its_windows_from_the_first_case(tmp_path, monkeypatch):
@@ -1139,9 +1251,11 @@ def test_the_earth_length_cases_differ_from_their_sources_in_the_length_and_what
         {k: v for k, v in night.items() if k not in ('namelist', 'purpose')}
     assert night75['namelist'] == dict(c.NIGHT_OUTPUT, param3=dict(l_inf=75.0))
     # no case set up before them takes either new key, so the runner sets them up and runs them as before (the
-    # wind's own time scale of 28 October, and the gust beside it, take restart_namelist after them)
+    # wind's own time scale of 28 October, and the gust beside it, take restart_namelist after them; the sea and land
+    # boxes' weather chains of 2 November keep their newest two restart sets)
     new = {'box_near_side_sea_day3_linf75', 'box_near_side_sea_night_6km_linf75', 'box_near_side_sea_l15_wind_day3',
            'box_near_side_sea_l15_wind_day4', 'box_near_side_sea_l15_wind_gust_day3', 'box_near_side_sea_l15_wind_gust_day4'}
+    new |= {n for n in c.CASES if n.startswith(('box_near_side_sea_design_years_weather', 'box_0e_design_years_weather'))}
     assert not [n for n, v in c.CASES.items() if n not in new and ('restart_namelist' in v or 'keep_restarts' in v)]
 
 
@@ -1155,6 +1269,106 @@ def test_pruning_keeps_the_starting_restart_the_newest_and_any_incomplete_set(tm
     left = sorted({p.name[8:14] for p in tmp_path.glob('cm1rst_t*_s.dat')})
     assert left == ['000118', '000121', '000122', '000123'] and c.latest_restart(tmp_path) == 122
     assert len(list(tmp_path.glob('cm1rst_t000121_*.dat'))) == 6 and c.prune_restarts(tmp_path, 2, start=118) == []
+
+
+def compress_restarts(case, numbers, monkeypatch):
+    """Compress some of a case's restart sets as cm1_files.compress does, with no CM1 process about and no floor."""
+    from climate.crm import cm1_files as cf
+    monkeypatch.setattr(cf, 'cm1_processes', lambda: [])
+    for n in numbers:
+        for path in cf.restart_files(case, n):
+            assert cf.compress_file(path, floor_bytes=0)['status'] == 'compressed'
+
+
+def test_restart_sets_kept_compressed_count_as_sets_and_are_pruned_whole(tmp_path, monkeypatch):
+    from climate.crm import cm1_files as cf
+    for n in (118, 119, 120, 121, 122):
+        for part in 'isuvwx':
+            (tmp_path / f'cm1rst_t{n:06d}_{part}.dat').write_bytes(f'{n}{part}'.encode())
+    compress_restarts(tmp_path, (118, 119, 122), monkeypatch)
+    (tmp_path / 'cm1rst_t000121_v.dat').unlink()                          # 121 incomplete
+    assert c.latest_restart(tmp_path) == 122
+    assert c.prune_restarts(tmp_path, 1, start=118) == [119, 120]
+    assert cf.restart_numbers(tmp_path) == [118, 122]
+    assert not list(tmp_path.glob('cm1rst_t000119_*')) and not list(tmp_path.glob('cm1rst_t000120_*'))
+    assert len(list(tmp_path.glob('cm1rst_t000121_*.dat'))) == 5           # the incomplete set stays
+
+
+def test_a_rerun_from_a_compressed_restart_gets_raw_copies_checked_against_the_manifest(tmp_path, monkeypatch, capsys):
+    from climate.crm import cm1_files as cf
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(c, 'CM1_HOME', tmp_path / 'cm1')
+    monkeypatch.setattr(cf, 'free_bytes', lambda folder: 10 ** 15)
+    tree = tmp_path / 'tree'
+    (tree / 'run').mkdir(parents=True)
+    for name in ('RRTMG_LW_DATA', 'RRTMG_SW_DATA'):
+        (tree / 'run' / name).write_text(name)
+    monkeypatch.setattr(c, 'fetch', lambda: tree)
+    build = tmp_path / 'cm1' / 'build' / 'moon_omp_elec'
+    build.mkdir(parents=True)
+    (build / 'cm1.exe').write_text('exe')
+    (build / 'build.json').write_text(json.dumps(dict(label='moon_omp_elec', executable_sha256='rerun')))
+    source = tmp_path / 'runs' / 'coarse'
+    coarse_run(source)
+    for part in 'isuvwx':
+        (source / f'cm1rst_t000015_{part}.dat').write_text(part * 100)
+    (source / 'progress.json').write_text(json.dumps(dict(segments=[
+        dict(segment=7, model_s=604800.0, executable='first'), dict(segment=8, model_s=691200.0, executable='second')])))
+    (source / 'terluna_ez_648000.bin').write_text('ez')
+    compress_restarts(source, (15,), monkeypatch)
+    assert not (source / 'cm1rst_t000015_s.dat').exists()
+    monkeypatch.setitem(c.CASES, 'again', dict(c.CASES['box_0e_elec_uncapped_corona'],
+                                               restart_from=dict(case='coarse', day=7.5)))
+    case = c.setup('again')
+    assert all((case / f'cm1rst_t000015_{part}.dat').read_text() == part * 100 for part in 'isuvwx')
+    assert not list(case.glob('*.zst')) and not (case / cf.MANIFEST).exists() and not list(case.glob('*.part'))
+    assert all(cf.compressed(source / f'cm1rst_t000015_{part}.dat').exists() for part in 'isuvwx')  # the source stays
+    record = json.loads((case / 'case.json').read_text())
+    assert record['restart_from']['decompressed'] == [f'cm1rst_t000015_{part}.dat' for part in 'isuvwx']
+    assert record['restart_from']['restart'] == 15 and (case / 'terluna_ez_648000.bin').read_text() == 'ez'
+    assert 'restart 15 decompressed' in capsys.readouterr().out
+
+
+def test_a_run_resumed_from_compressed_restart_files_decompresses_them_before_cm1_starts(tmp_path, monkeypatch, capsys):
+    import subprocess
+    from climate.crm import cm1_files as cf
+    monkeypatch.setattr(c, 'RUNS', tmp_path / 'runs')
+    monkeypatch.setattr(cf, 'free_bytes', lambda folder: 10 ** 15)
+    case = tmp_path / 'runs' / 'resumed'
+    case.mkdir(parents=True)
+    (case / 'cm1.exe').write_text('exe')
+    (case / 'case.json').write_text(json.dumps(dict(case='resumed')))
+    (case / 'namelist.template').write_text(' &param1\n run_time = -999.9,\n /\n &param2\n irst = 0,\n rstnum = 1,\n /\n')
+    for part in 'isuvwx':
+        (case / f'cm1rst_t000002_{part}.dat').write_bytes(part.encode() * 1000)
+    compress_restarts(case, (2,), monkeypatch)
+    c._save_progress(case, dict(segments=[dict(segment=1, model_s=7200.0, wall_s=1.0, log='cm1_segment_001.log')],
+                                case='resumed'))
+    monkeypatch.setitem(c.CASES, 'resumed', dict(restart_s=3600.0, segment_s=3600.0, days=3 * 3600.0 / 86400.0))
+    seen, real = {}, subprocess.run
+
+    def cm1(args, **kw):                                                  # CM1 reads its restart and writes the next
+        if args[:1] != ['nice']:
+            return real(args, **kw)
+        cwd = kw['cwd']
+        seen['restart'] = {p: (cwd / f'cm1rst_t000002_{p}.dat').read_bytes() for p in 'isuvwx'}
+        seen['namelist'] = (cwd / 'namelist.input').read_text()
+        for p in 'isuvwx':
+            (cwd / f'cm1rst_t000003_{p}.dat').write_bytes(b'next')
+        kw['stdout'].write(' Program terminated normally\n')
+        return subprocess.CompletedProcess(args, 0)
+
+    monkeypatch.setattr(c.subprocess, 'run', cm1)
+    progress = c.run('resumed', hours=1.0, threads=1)
+    assert seen['restart'] == {p: p.encode() * 1000 for p in 'isuvwx'}
+    assert c.namelist_value(seen['namelist'], 'param2', 'irst') == '1'
+    assert c.namelist_value(seen['namelist'], 'param2', 'rstnum') == '2'
+    log = (case / 'cm1_segment_002.log').read_text().splitlines()
+    assert log[0].startswith('cm1_run: restart 2 decompressed from cm1rst_t000002_i.dat.zst') and cf.MANIFEST in log[0]
+    assert log[-1].strip() == 'Program terminated normally'
+    assert [s['model_s'] for s in progress['segments']] == [7200.0, 10800.0] and not (case / 'run.lock').exists()
+    assert all(cf.compressed(case / f'cm1rst_t000002_{p}.dat').exists() for p in 'isuvwx')     # kept beside
+    assert 'restart 2 decompressed' in capsys.readouterr().out
 
 
 LENGTH_TEMPLATE = FINE_TEMPLATE + (' &param3\n fcor    = -1.155e-06,\n l_inf   =     453.0,\n /\n'
@@ -1259,3 +1473,114 @@ def test_the_held_night_with_earth_s_length_takes_it_over_the_source_s(tmp_path,
     assert (long_, short) == ('453.0', '75.0')
     a, b = ((c.RUNS / n / 'namelist.template').read_text().splitlines() for n in ('night', 'night75'))
     assert [(x, y) for x, y in zip(a, b) if x != y] == [(' l_inf   =     453.0,', ' l_inf   =     75.0,')]
+
+
+def test_the_weather_cases_run_on_lunar_day_by_lunar_day_from_the_fourth_days_restart():
+    # each design-years box's weather chain: from its fourth lunar day's day-118 restart, one lunar day a case, each from
+    # the one before's restart, all following the rerun of the design run's years 15-16 (source (b): its year 0 the
+    # stretch's year, its 11-step means 2.7937 degrees of hour angle) with the design years' fits, and otherwise the box
+    # itself
+    assert c.WEATHER_DAYS == 14
+    for box in ('box_near_side_sea_design_years', 'box_0e_design_years', 'box_se_dry_design_years'):
+        base = c.CASES[box]
+        for j in range(1, c.WEATHER_DAYS + 1):
+            case, day = c.CASES[f'{box}_weather{j}'], 118.0 + 29.5 * (j - 1)
+            assert case['restart_from'] == dict(case=f'{box}_day4' if j == 1 else f'{box}_weather{j - 1}', day=day)
+            assert case['days'] == day + 29.5
+            w = case['weather']
+            assert w['stretch'] == dict(year=0, box_day=118.0) and w['run'] == c.WEATHER_RUN
+            assert w['fits'] == (c.GCM_DESIGN_RUN, c.GCM_DESIGN_YEARS) and w['years'] == (0, 1)
+            assert w['window_deg'] == 2.7937
+            # the sea and land chains keep their newest two restart sets, the dry box's every restart
+            assert case.get('keep_restarts') == (None if box == 'box_se_dry_design_years' else 2)
+            assert {k: v for k, v in case.items() if k not in ('restart_from', 'days', 'weather', 'purpose',
+                                                               'keep_restarts')} == \
+                {k: v for k, v in base.items() if k not in ('days', 'purpose')}
+    assert c.WEATHER_WINDOWS == 100 and c.WEATHER_BINS % 4 == 0
+
+
+def weather_sequence(departure=0.0):
+    """A three-level GCM column whose fits by local time hold a mean and a first harmonic, its records departing from
+    them by departure in theta and u (and in heating, 1e-6 times it) at every level."""
+    from climate.crm import gcm_site as gs
+    zeros = [np.zeros(3)] * (2 * gs.HARMONICS - 2)
+    coef = lambda mean, amp: np.vstack([np.full(3, mean), np.full(3, amp), np.zeros(3)] + zeros)
+    step = 257400.0
+    t = (np.arange(400) + 0.5) * step
+    full = lambda x: np.full((t.size, 3), x)
+    return dict(forcing=dict(profile=dict(z_m=[60000.0, 20000.0, 4000.0]), sigma=[0.2, 0.6, 0.9],
+                             surface=dict(pressure_pa=1.2e5)),
+                record_s=step, year_s=120 * step, window_deg=36.0,
+                sun=dict(period_s=c.solar_day_s(), hour_at_zero_deg=-90.0),
+                coefficients=dict(theta=coef(300.0, 1.0), q=coef(0.01, 0.0), u=coef(2.0, 1.0), v=coef(0.0, 0.0)),
+                mean_profile=dict(theta_k=np.full(3, 300.0), qv_kg_kg=np.full(3, 0.01)),
+                states=dict(time_s=t, hour_angle_deg=np.zeros(t.size), theta_departure=full(departure),
+                            q_departure=full(0.0), u_departure=full(departure), v_departure=full(0.0)),
+                boundaries=dict(time_s=t[:-1] + 0.5 * step, theta_k_s=np.full((t.size - 1, 3), 1e-6 * departure),
+                                qv_kg_kg_s=np.zeros((t.size - 1, 3))))
+
+
+def weather_cfg(box_day=118.0):
+    return dict(start_hour_angle_deg=-45.0, site=dict(lon_deg=-45.0), weather=dict(stretch=dict(year=1, box_day=box_day)))
+
+
+def test_the_weather_clock_matches_the_boxs_hour_to_the_gcms_and_refuses_another_sun():
+    seq = weather_sequence()
+    clock = c.weather_clock(weather_cfg(), seq)
+    assert 120 * seq['record_s'] - 1e-6 <= clock['gcm_start_s'] < 120 * seq['record_s'] + c.solar_day_s()
+    gcm_hour = (-90.0 + 360.0 * clock['gcm_start_s'] / c.solar_day_s() + 180.0) % 360.0 - 180.0
+    assert abs((gcm_hour - clock['hour_at_start_deg'] + 180.0) % 360.0 - 180.0) < 1e-9
+    with pytest.raises(ValueError):
+        c.weather_clock(weather_cfg(), dict(seq, sun=dict(seq['sun'], period_s=c.solar_day_s() * 1.001)))
+
+
+def test_the_weather_windows_carry_the_fit_and_the_departures_and_the_reference_air():
+    heights = np.array([0.0, 2000.0, 10000.0, 40000.0, 100000.0])
+    reference = dict(z_m=heights, theta_k=np.full(5, 290.0), qv_kg_kg=np.full(5, 0.005))
+    for departure in (0.0, 0.5):
+        seq = weather_sequence(departure)
+        clock = c.weather_clock(weather_cfg(), seq)
+        start = 118.0 * 86400.0
+        windows = c.weather_windows(weather_cfg(), seq, clock, reference, start, start + 29.5 * 86400.0)
+        assert len(windows) == 100 and windows[0]['time_s'][0] == start
+        assert abs(windows[-1]['time_s'][1] - (start + 29.5 * 86400.0)) < 1e-6
+        for w in windows[::17]:
+            fit = 2.0 + math.cos(math.radians(w['hour_angle_deg'])) + departure
+            assert np.allclose(w['u_m_s'], fit) and np.allclose(w['v_m_s'], 0.0)
+            above = heights > 60000.0                                        # nil departure above the GCM's top
+            assert np.allclose(w['theta_k'][~above], 290.0 + math.cos(math.radians(w['hour_angle_deg'])) + departure)
+            assert np.allclose(w['theta_k'][above], 290.0) and np.allclose(w['qv_kg_kg'], 0.005)
+            gcm_hour = (-90.0 + 360.0 * w['gcm_s'] / c.solar_day_s() + 180.0) % 360.0 - 180.0
+            assert abs((gcm_hour - w['hour_angle_deg'] + 180.0) % 360.0 - 180.0) < 1e-6
+
+
+def test_the_weather_table_is_the_mean_table_in_local_time_plus_the_departure_laid_by_pressure():
+    zw = np.array([0.0, 1000.0, 3000.0, 10000.0, 30000.0, 80000.0, 150000.0])
+    zh = 0.5 * (zw[1:] + zw[:-1])
+    pressure = 1.2e5 * np.exp(-zw / 50000.0)
+    hours = np.array([-135.0, -45.0, 45.0, 135.0])
+    mean_table = dict(z_m=zh, hour_angle_deg=hours, theta_k_s=np.outer([1.0, 2.0, 3.0, 4.0], np.ones(6)) * 1e-5,
+                      qv_kg_kg_s=np.zeros((4, 6)))
+    for departure in (0.0, 1.0):
+        seq = weather_sequence(departure)
+        clock = c.weather_clock(weather_cfg(), seq)
+        start = 118.0 * 86400.0
+        table = c.weather_table(seq, clock, mean_table, pressure, start)
+        h = table['hour_angle_deg']
+        assert h.size == c.WEATHER_BINS and np.isclose(h[0], -179.5)
+        expect = np.interp(h, np.r_[-225.0, hours, 225.0], [4.0, 1.0, 2.0, 3.0, 4.0, 1.0]) * 1e-5
+        assert np.allclose(table['theta_k_s'], expect[:, None] + 1e-6 * departure, rtol=1e-9, atol=1e-15)
+        assert np.all((table['box_s'] >= start) & (table['box_s'] < start + c.solar_day_s()))
+
+
+def test_the_nudging_and_table_files_read_back_as_written(tmp_path):
+    z = np.array([0.0, 50.0, 1000.0])
+    c.write_nudging(tmp_path / 'lsnudge_0001.dat', 10.0, 1.0e30, z, [300.0, 301.5, 302.25], [0.014, 0.0125, 0.001],
+                    [1.5, -2.0, 0.0], [0.25, 0.0, 3.0])
+    w = c.read_nudging(tmp_path / 'lsnudge_0001.dat')
+    assert w['time_s'] == (10.0, 1.0e30) and np.allclose(w['z_m'], z) and np.allclose(w['theta_k'], [300.0, 301.5, 302.25])
+    assert np.allclose(w['qv_kg_kg'], [0.014, 0.0125, 0.001]) and np.allclose(w['u_m_s'], [1.5, -2.0, 0.0])
+    table = dict(z_m=z, theta_k_s=np.array([[1e-5, 2e-5, 3e-5], [4e-5, 5e-5, 6e-5]]), qv_kg_kg_s=np.ones((2, 3)) * 1e-9)
+    c.write_day_night(tmp_path / 'terluna_lsadv.txt', table)
+    back = c.read_day_night(tmp_path / 'terluna_lsadv.txt')
+    assert np.allclose(back['theta_k_s'], table['theta_k_s']) and np.allclose(back['hour_angle_deg'], [-90.0, 90.0])

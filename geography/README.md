@@ -103,6 +103,8 @@ polar stereographic grids.
 [results/drainage.json](results/drainage.json) (schema `terluna.geography.drainage/1`) and the grid product
 `products/drainage_28pct_16ppd.npz`, which is kept out of Git and takes about 20 seconds to regenerate.
 
+On the turned Moon (7 November 2026) the same routing takes the design run at the target (`A28R_301k_design_l15_snow_s924_turned_refit`, years 10–19), its climatology carried back to today's ground by climate.gcm.turned_climatology, and writes [turned/results/drainage.json](turned/results/drainage.json) and `turned/products/`: 33,262 rain-fed lakes over 10.28% of the Moon holding 2.84 million km³, with 199,217 m³/s reaching the seas. The atlas's heights and sea level stay on the dry Moon's geoid. The globe on the turned Moon reads it (visualization/atlas).
+
 - **Routing.** Each cell drains to the steepest of its eight neighbours. The floor of each closed depression spills
   through the lowest pass on its way to the sea. A priority flood over the graph of catchments and their shared
   passes finds those passes.

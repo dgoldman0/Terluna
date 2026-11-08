@@ -44,6 +44,7 @@ import numpy as np
 
 from climate.crm import box_budget as bb
 from climate.crm import box_onset as bo
+from climate.crm import cm1_files
 from climate.crm import cm1_output as co
 from climate.crm import ring_analysis as ra
 
@@ -352,7 +353,7 @@ def read_source(name: str = SOURCE['case'], span=(SOURCE['first_day'], SOURCE['l
     info = case_info(name)
     cfg = info['record']['configuration']
     groups = {p[0]: dict(rows=[], tops=[], outputs=[], columns=0) for p in PERIODS}
-    for n in sorted(int(f.name[8:14]) for f in info['case'].glob('cm1out_t*_s.dat')):
+    for n in sorted(int(f.name[8:14]) for f in cm1_files.glob(info['case'], 'cm1out_t*_s.dat')):
         t = (n - 1) * info['tap']
         if not span[0] * DAY + 1.0 < t <= span[1] * DAY + 1.0:
             continue
@@ -369,7 +370,7 @@ def read_source(name: str = SOURCE['case'], span=(SOURCE['first_day'], SOURCE['l
 def read_night_test(name: str, from_h: float = NIGHT_TEST_FROM_H) -> dict:
     info = case_info(name)
     rows, tops, outputs, columns = [], [], [], 0
-    for n in sorted(int(f.name[8:14]) for f in info['case'].glob('cm1out_t*_s.dat')):
+    for n in sorted(int(f.name[8:14]) for f in cm1_files.glob(info['case'], 'cm1out_t*_s.dat')):
         if (n - 1) * info['tap'] / 3600.0 < from_h - 1e-6:
             continue
         x = thermo(ra.read_snapshot(info['case'], n), info['zh'], info['g'])

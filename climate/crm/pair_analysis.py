@@ -14,6 +14,7 @@ from pathlib import Path
 import sys
 import numpy as np
 
+from climate.crm import cm1_files
 from climate.crm.ring_analysis import read_snapshot, RUNS, PRODUCTS, RESULTS, CLOUD_KG_KG
 
 SCHEMA = 'terluna.climate.crm-gravity-pair/1'
@@ -41,7 +42,7 @@ def run_means(case: Path, first_fraction=0.5):
     record = json.loads((case / 'case.json').read_text())
     scale = record['time_scale']
     tap = record['configuration']['output_s'] * scale
-    outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    outputs = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     last = outputs[-1]
     use = [n for n in outputs if n - 1 >= first_fraction * (last - 1)]
     acc, count = {}, 0

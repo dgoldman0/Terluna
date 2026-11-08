@@ -18,7 +18,8 @@ def test_only_the_new_build_carries_the_patch_and_the_site_boxes_take_it():
     assert all(c.PBL_DENSITY_PATCH not in patches for label, patches in c.BUILD_PATCHES.items()
                if label not in ('moon_omp_rain_law_pbl', 'moon_omp_rain_law_pbl_wind', 'moon_omp_rain_law_pbl_wind_gust',
                                 'moon_omp_rain_law_pbl_wind_gust_aloft',
-                                'moon_omp_rain_law_pbl_wind_gust_aloft_inflow'))
+                                'moon_omp_rain_law_pbl_wind_gust_aloft_inflow',
+                                'moon_omp_rain_law_pbl_wind_gust_aloft_inflow_dgw'))
     for name in ('box_near_side_sea', 'box_0e_design'):
         assert c.CASES[name]['build'] == 'moon_omp_rain_law_pbl'
         assert c.CASES[name]['nudge']['held_from'] == 'convection_top'

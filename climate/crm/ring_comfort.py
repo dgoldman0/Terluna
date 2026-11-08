@@ -24,6 +24,7 @@ import json
 from pathlib import Path
 import sys
 import numpy as np
+from climate.crm import cm1_files
 from climate.crm import ring_analysis as ra
 from climate.crm import ring_crossings as rc
 
@@ -68,7 +69,7 @@ def surface_reader(case: Path, sigma: float | None = None):
     levels = int(np.searchsorted(ra.case_geometry(case)['zh'], 2500.0)) + 1 if sigma else 1
 
     def read(n: int) -> dict:
-        raw = np.memmap(case / f'cm1out_t{n:06d}_s.dat', dtype='<f4', mode='r')
+        raw = cm1_files.memmap(case / f'cm1out_t{n:06d}_s.dat', dtype='<f4', mode='r')     # raw or compressed
         f = {k: np.array(raw[offsets[k]:offsets[k] + nx], dtype=float) for k in ('t2', 'q2', 'psfc', 'coszen', 'qvflux', 'prate')}
         section = {k: np.array(raw[offsets[k]:offsets[k] + levels * nx], dtype=float).reshape(levels, nx)
                    for k in ('th', 'prs', 'qv')}                               # a section's lowest level first
@@ -100,8 +101,8 @@ def column_wetness(case: Path, x) -> np.ndarray:
 
 
 def snapshots(case: Path, output_s: float, from_s: float, to_s: float) -> list:
-    """The output numbers of case whose model times lie from from_s to to_s (seconds)."""
-    outputs = sorted(int(p.name[8:14]) for p in case.glob('cm1out_t*_s.dat'))
+    """The output numbers of case whose model times lie from from_s to to_s (seconds), raw or compressed."""
+    outputs = sorted(int(p.name[8:14]) for p in cm1_files.glob(case, 'cm1out_t*_s.dat'))
     return [n for n in outputs if from_s <= (n - 1) * output_s <= to_s]
 
 

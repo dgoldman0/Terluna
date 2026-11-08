@@ -30,7 +30,9 @@ SIGHUP to the runner) takes ExoPlaSim's MPI ranks down with it. A run refuses to
 that determines the model changed: its settings, the number of MPI ranks, ExoPlaSim's version or
 the input files the runner writes (land mask, topography, spectrum). Tested by killing a run with
 SIGKILL a minute into its second year: the resumed year's restart and output were byte-identical
-to an uninterrupted run's.
+to an uninterrupted run's. With --convert-pieces N, each year's raw output is converted in pieces of N output times,
+several at a time (convert_in_pieces), since ExoPlaSim's postprocessor costs time and memory as the square of a file's
+length; a year PlaSim finished whose conversion did not is then converted on resume rather than run again.
 
 The planet (radius, gravity, rotation, orbit), the land-sea mask and topography come from
 climate/gcm/products (python -m climate.gcm.boundary). The mask is binary per cell, as PlaSim
@@ -61,7 +63,7 @@ restart carried there by levels.py's conservative remap and its twilight terms, 
 factors on those levels, and --sbm-shallow-cap holds a shallow cloud's top within the depth test's threshold of its own
 base in place of PlaSim's 700 hPa (SBM_CAP_PATCHES); without either a run is as before. --levels l15 adds a thin bottom
 layer, the ground to 0.6 km, to the fourteen, and --longwave-fit l15_provisional gives a run on it the longwave
-correction refitted on its own levels' columns; since 2026-10-31 --longwave-fit l15_design gives the design run the correction refitted on its configuration's bridge at 300.9 K. --convection massflux runs the mass-flux scheme of massflux.py in
+correction refitted on its own levels' columns; since 2026-10-31 --longwave-fit l15_design gives the design run the correction refitted on its configuration's bridge at 300.9 K, and since 2026-11-05 --longwave-fit l15_turned gives the design run on the turned geography the correction refitted on the turned design run's year 19. --convection massflux runs the mass-flux scheme of massflux.py in
 Kuo's place (rainmod's nprc 3; massflux_fortran.py's patch, applied only for a run that sets it); a run without it is as
 before. --free-convection lunar takes the free-convection constant in the heat and vapour transfer over water (Miller
 and others 1992; FREE_CONVECTION_EDITS) from Earth's 0.0016 to the Moon's gravity and surface pressure, and
@@ -84,12 +86,33 @@ evaporated where the air is unsaturated and turned to rain by autoconversion and
 --humidity-mean writes the humidity's true 3-day mean as hus_mean (HUS_MEAN_PATCHES); without them a run is as
 before. --rain-drops evaporates PlaSim's falling rain from its drops' sizes and fall speeds at lunar gravity in place
 of gamma, with the birth rule it names for the size of new rain (rain_drops.py; RAIN_DROP_PATCHES, rainmod's
-nevapprec 2); snow keeps gamma.
+nevapprec 2); snow keeps gamma. --land-store PRODUCT adds the storm-water study's hollows' store to PlaSim's land in
+the drylands (land_store.py; LAND_STORE_PATCHES, landmod's nlstore): the slopes' runoff as the storm library's storms
+at a running mean of each cell's rain, the store's evaporation at the pools' own rate and its seepage into a slow
+store, with the floor, surface, storm library and hollow age its companion options name and the tables the runner
+writes from the product; a run without it is as before. --sbm-closure c takes closure (c) in the Betts-Miller scheme
+(sbm_closure.py; SBM_CLOSURE_PATCHES, rainmod's nclos_bm): the whole convecting column relaxed over 18 hours toward the
+parcel diluted 2e-4 per metre and toward Romps's humidity for each layer's detrainment, on the 200 hPa depth test with
+the shallow cap; --sbm-route-l adds route L (nroutel_bm), closure (c) launched aloft from a layer the processes other
+than convection have moistened over 24 hours, its history carried in the restart; a run without them is as before.
+--sbm-closure redesign takes the redesigned closure (sbm_redesign.py; SBM_REDESIGN_PATCHES over closure (c)'s, rainmod's
+nclos_bm 2): the design scheme's undiluted parcel as the trigger, the column from its source to that parcel's top
+relaxed over 18 hours toward the parcel diluted 2e-4 per metre and toward Romps's humidity in the buoyant cloud, the
+air's own vapour beneath it, a layer warmed only toward a reference above it, the excess vapour raining and a column
+below its reference moistening without rain by Frierson's qref form; it takes closure (c)'s requirements and no route
+L, and a run without it is as before. --sbm-closure redesign2 takes the second redesign (sbm_redesign2.py;
+SBM_REDESIGN2_PATCHES over the first redesign's and closure (c)'s, rainmod's nclos_bm 3): the design scheme's undiluted
+parcel as the trigger with its level of free convection at or above the condensation level, the column from its source
+to the parcel's top relaxed over 12 hours toward the zero-buoyancy state of a plume from the lowest level's air and
+toward 0.70 of the air's own saturation, the vapour above that reference raining with at most a tenth of it moistening
+the layers below theirs, and the rain's heat warming only the layers below their reference temperature; it takes the
+first redesign's requirements, and a run without it is as before.
 """
 from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import inspect
 import json
 import os
 from pathlib import Path
@@ -109,6 +132,13 @@ from climate.gcm import surface_similarity as ssf
 from climate.gcm import condensate as cnd
 from climate.gcm import rain_drops as rdr
 from climate.gcm import snow_sublimation as sns
+from climate.gcm import land_store as lsf
+from climate.gcm import patch_ledger as plg
+from climate.gcm import sbm_closure as scl
+from climate.gcm import sbm_redesign as srd
+from climate.gcm import sbm_redesign2 as sr2
+from climate.gcm import sbm_redesign2_heat as srh
+from climate.gcm import sbm_redesign2_subcloud as srs
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -1054,6 +1084,31 @@ SWITCH_RESTART_EDITS = [
 PLASIM_SWITCH_PATCHES = [('plasimmod.f90', SWITCH_MARKER, SWITCH_PLASIMMOD_EDITS),
                          ('plasim.f90', SWITCH_MARKER, SWITCH_PLASIM_EDITS),
                          ('restartmod.f90', SWITCH_MARKER, SWITCH_RESTART_EDITS)]
+# Closure (c) and route L for the simplified Betts-Miller scheme (3 November; sbm_closure.py), each behind a switch that
+# defaults off (rainmod's nclos_bm and nroutel_bm), one patch for both so that runs with and without route L build from
+# the same source. It goes over the depth test's and the shallow cap's text and calls the gust patch's gustcol, and
+# route L's history travels in the restart through the switch patch's restart_has_array; with both switches 0 the
+# routine's arithmetic is as before.
+SBM_CLOSURE_PATCHES = [('rainmod.f90', scl.CLOSURE_MARKER, scl.SBM_CLOSURE_EDITS),
+                       ('restartmod.f90', SWITCH_MARKER, SWITCH_RESTART_EDITS)]
+# The redesigned closure (4 November; sbm_redesign.py), behind closure (c)'s switch at its value 2 (rainmod's nclos_bm),
+# a patch of its own over closure (c)'s, whose sbmdilp, sbmromps and sbmapply it calls, so that closure (c)'s patch
+# stays as it was and a source that carries it takes this one where its marker is missing; with nclos_bm 0 or 1 the
+# routine's arithmetic is as before.
+SBM_REDESIGN_PATCHES = [('rainmod.f90', srd.REDESIGN_MARKER, srd.SBM_REDESIGN_EDITS)]
+# The second redesign (4 November; sbm_redesign2.py), behind closure (c)'s switch at its value 3 (rainmod's nclos_bm),
+# a patch of its own over the first redesign's, whose hook it follows, and over closure (c)'s, whose sbmapply it calls,
+# so that both stay as they were and a source that carries them takes this one where its marker is missing; with
+# nclos_bm 0, 1 or 2 the routine's arithmetic is as before.
+SBM_REDESIGN2_PATCHES = [('rainmod.f90', sr2.REDESIGN2_MARKER, sr2.SBM_REDESIGN2_EDITS)]
+# The second redesign's heat beyond its reference (4 November, evening; sbm_redesign2_heat.py), a switch on its energy
+# rule (rainmod's nheat_bm), a patch of its own over the second redesign's, which it edits; with nheat_bm 0 the routine
+# is the second redesign's.
+SBM_HEAT_PATCHES = [('rainmod.f90', srh.HEAT_MARKER, srh.SBM_HEAT_EDITS)]
+# The second redesign's cloud layers only (4 November, night; sbm_redesign2_subcloud.py), a switch on which levels it
+# relaxes (rainmod's nsubcl_bm), a patch of its own over the heat rule's, whose lines it follows; with nsubcl_bm 0 the
+# routine relaxes every level, as the second redesign does.
+SBM_SUBCLOUD_PATCHES = [('rainmod.f90', srs.SUBCLOUD_MARKER, srs.SBM_SUBCLOUD_EDITS)]
 HUS_MEAN_MARKER = "Terluna: the humidity's true mean"
 HUS_MEAN_CODE = 233
 HUS_MEAN = ('hus_mean', 'specific_humidity_mean_over_the_output_interval', '1')
@@ -1542,6 +1597,9 @@ TWILIGHT_PATCHES = [('radmod.f90', "Terluna: the curved air's twilight table", T
                     ('radmod.f90', 'world-crafting: ice bands 2-5 in band 2', ICE_WEIGHTS_EDITS)] + WIND10_PATCHES
 TWILIGHT_PATCHES += [('radmod.f90', "Terluna: the cold cloud's water factor by level", ICE_FACTOR_EDITS)]
 TWILIGHT_PACKAGE = Path('/media/projectspace/terluna-research/exoplasim-twilight')
+# ExoPlaSim 3.4.2's PlaSim sources as its pip wheel holds them, untouched by any patch (manifest.json beside the folder
+# gives the wheel and each file's hash): patch_ledger checks a patched folder against them and rebuilds a file from them.
+UNTOUCHED_SOURCE = Path('/media/projectspace/terluna-research/exoplasim-untouched/3.4.2/src')
 # The curved air's ledgers (twilight.py): on the design climate's 301 K column, the standard since 2026-10-19, and on
 # the 294.9 K column every run from 14 to 19 October took. The Moon's slant factors (ZMLUNAR, ZMAIRLUNAR) stay the 294.9 K
 # ledger's, with which the shortwave calibration was refitted (shortwave_fit_A28_dim5_lunar.json); the 301 K ledger
@@ -1556,12 +1614,15 @@ SLANT_PRODUCT = TWILIGHT_LEDGERS['294.9k']
 # the correction refitted on the 15-level month trial's own cloud-free columns (plasim_longwave.py refit), for tests on
 # those levels until the configuration chosen for a long run is refitted; a run on another set refuses it.
 # 'l15_design' (2026-10-31) is the correction refitted on year 5 of the design configuration's bridge at 300.9 K (the snow from its flakes, the rain from its drops, Beljaars's gust with the similarity over water, Betts-Miller at 0.7 on fifteen levels), for the design run.
+# 'l15_turned' (2026-11-05) is the correction refitted on year 19 of the turned design run at 301.7 K, where 'l15_design' strays past its 2.5 W/m² rule at sea, for the design run on the turned geography.
 LONGWAVE_FITS = {'301k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_lw_ice.json',
                  '295k': ROOT / 'climate' / 'results' / 'gcm' / 'longwave_A28_corrected_970_heating.json',
                  'l15_provisional': ROOT / 'climate' / 'results' / 'gcm'
                  / 'longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_month_refit.json',
                  'l15_design': ROOT / 'climate' / 'results' / 'gcm'
-                 / 'longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_bridge_s958_refit.json'}
+                 / 'longwave_A28R_301k_cold_sbm_rh07_deep200_l15cap_gustsim_raindrops_share_snow_bridge_s958_refit.json',
+                 'l15_turned': ROOT / 'climate' / 'results' / 'gcm'
+                 / 'longwave_A28R_301k_design_l15_snow_s934_turned_refit.json'}
 LONGWAVE_PRODUCT = LONGWAVE_FITS['301k']
 GASES_PRODUCT = ROOT / 'climate' / 'results' / 'gcm' / 'shortwave_gases.json'
 GAS_ORDER = ('co2_nir', 'o2_nir', 'o2_vis')                     # PlaSim's ZGASQ columns
@@ -1586,11 +1647,61 @@ def use_twilight_package():
     sys.path.insert(0, str(TWILIGHT_PACKAGE))
 
 
+def patch_chain(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
+                massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
+                boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
+                cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
+                similarity: bool = False, land_store: bool = False, closure: bool = False,
+                redesign: bool = False, redesign2: bool = False, heat: bool = False, subcloud: bool = False) -> list:
+    """The Terluna patches a run with these settings takes, as (file, marker, edits), in the order ensure_patched
+    applies them; the redesigned closure takes closure (c)'s patch beneath its own, the second redesign both, and the
+    second redesign's cloud layers only the heat rule's."""
+    return (PATCHES + (TWILIGHT_PATCHES if twilight else [])
+            + (SBM_TRIGGER_PATCHES if trigger or night else [])
+            + (SBM_DEPTH_PATCHES if depth or cap or night else [])
+            + (SBM_CAP_PATCHES if cap or night else [])
+            + (mff.MASSFLUX_PATCHES if massflux or boundary_layer or night or cloud_water or gust else [])
+            + (mff.START_PATCHES if massflux_start else [])
+            + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer or gust else [])
+            + (pbf.PBL_PATCHES if boundary_layer or gust else [])
+            + (sgf.GUST_PATCHES if gust else [])
+            + (ssf.SIMW_PATCHES if similarity else [])
+            + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night or cloud_water or gust else [])
+            + (SBM_NIGHT_PATCHES if night else [])
+            + (PLASIM_SWITCH_PATCHES if humidity_mean or cloud_water else [])
+            + (HUS_MEAN_PATCHES if humidity_mean else [])
+            + (cnd.CLOUD_WATER_PATCHES if cloud_water else [])
+            + (rdr.RAIN_DROP_PATCHES if rain_drops else [])
+            + ([('restartmod.f90', SWITCH_MARKER, SWITCH_RESTART_EDITS)] + lsf.LAND_STORE_PATCHES
+               if land_store else [])
+            + (SBM_CLOSURE_PATCHES if closure or redesign or redesign2 else [])
+            + (SBM_REDESIGN_PATCHES if redesign or redesign2 else [])
+            + (SBM_REDESIGN2_PATCHES if redesign2 else [])
+            + (SBM_HEAT_PATCHES if heat or subcloud else [])
+            + (SBM_SUBCLOUD_PATCHES if subcloud else []))
+
+
+def patch_catalogue() -> list:
+    """Every Terluna patch once, in the order ensure_patched applies them: the chain of a run that sets every switch,
+    a patch that two switches share kept at its first place. Two different patches may not share a marker in a file,
+    since the marker is how ensure_patched and the ledger know a patch is there."""
+    out, seen = [], {}
+    for name, marker, edits in patch_chain(**{key: True for key in inspect.signature(patch_chain).parameters}):
+        if (name, marker) in seen:
+            if plg.fingerprint(seen[name, marker]) != plg.fingerprint(edits):
+                raise RuntimeError(f'two different Terluna patches share the marker {marker!r} in {name}')
+            continue
+        seen[name, marker] = edits
+        out.append((name, marker, edits))
+    return out
+
+
 def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = False, cap: bool = False,
                    massflux: bool = False, free_convection: bool = False, massflux_start: bool = False,
                    boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
                    cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
-                   similarity: bool = False) -> dict:
+                   similarity: bool = False, land_store: bool = False, closure: bool = False,
+                   redesign: bool = False, redesign2: bool = False, heat: bool = False, subcloud: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
@@ -1604,8 +1715,16 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     (HUS_MEAN_PATCHES) and the cloud water (condensate.CLOUD_WATER_PATCHES, with the convection's vapour diagnostic),
     and Beljaars's gust in the surface transfer (surface_gust.GUST_PATCHES, over the nonlocal boundary layer's patch,
     with the convection's vapour diagnostic) with CM1's similarity over water (surface_similarity.SIMW_PATCHES, over
-    the gust's patch), and the rain evaporated from its drops (rain_drops.RAIN_DROP_PATCHES), for a run that sets them,
-    and return each patched file's hash for the run key."""
+    the gust's patch), and the rain evaporated from its drops (rain_drops.RAIN_DROP_PATCHES), and the hollows' store
+    (land_store.LAND_STORE_PATCHES, with the switch patch's restart_has_array in restartmod.f90, reading the 10 m wind
+    patch's wind), and the scheme's closure (c) with route L (SBM_CLOSURE_PATCHES, over the depth test's and the
+    cap's patches, calling the gust patch's gustcol, with restart_has_array for route L's history), and the
+    redesigned closure (SBM_REDESIGN_PATCHES, over closure (c)'s) with the second redesign (SBM_REDESIGN2_PATCHES, over
+    both), its heat rule (SBM_HEAT_PATCHES, over it) and its cloud layers only (SBM_SUBCLOUD_PATCHES, over the heat
+    rule's), for a run that sets them (patch_chain), and return
+    each patched file's hash for the run key. The
+    folder's ledger (patch_ledger.py) records the version of each patch applied, and a file that carries a patch's
+    marker is refused unless the ledger holds the runner's version of that patch for it."""
     import exoplasim
     src = Path(exoplasim.__file__).parent / 'plasim' / 'src'
     if twilight != str(src).startswith(str(TWILIGHT_PACKAGE)):
@@ -1620,37 +1739,42 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
         raise RuntimeError("the gust's patch goes into the twilight copy, over the boundary-layer patch")
     if similarity and not gust:
         raise RuntimeError("the similarity over water goes over the gust's patch")
+    if land_store and not twilight:
+        raise RuntimeError("the hollows' store reads the 10 m wind patch's wind; it goes into the twilight copy")
     if night and not twilight:
         raise RuntimeError("the night switch reads the twilight patch's cosine below the horizon; it goes into the "
                            'twilight copy')
+    if closure and not (depth and cap and gust):
+        raise RuntimeError("closure (c)'s patch goes over the depth test's and the shallow cap's and calls the gust "
+                           "patch's gustcol")
+    if redesign and not (depth and cap and gust):
+        raise RuntimeError("the redesigned closure's patch goes over closure (c)'s, which goes over the depth test's "
+                           "and the shallow cap's and calls the gust patch's gustcol")
+    if redesign2 and not (depth and cap and gust):
+        raise RuntimeError("the second redesign's patch goes over the first redesign's and closure (c)'s, which go over "
+                           "the depth test's and the shallow cap's and call the gust patch's gustcol")
+    if subcloud and not redesign2:
+        raise RuntimeError("the cloud layers' patch edits the second redesign's routine; it needs the second redesign")
+    if heat and not redesign2:
+        raise RuntimeError("the heat rule's patch edits the second redesign's routine; it needs the second redesign")
     hashes = {}
-    for name, marker, edits in (PATCHES + (TWILIGHT_PATCHES if twilight else [])
-                                + (SBM_TRIGGER_PATCHES if trigger or night else [])
-                                + (SBM_DEPTH_PATCHES if depth or cap or night else [])
-                                + (SBM_CAP_PATCHES if cap or night else [])
-                                + (mff.MASSFLUX_PATCHES if massflux or boundary_layer or night or cloud_water
-                                   else [])
-                                + (mff.START_PATCHES if massflux_start else [])
-                                + (FREE_CONVECTION_PATCHES if free_convection or boundary_layer or gust else [])
-                                + (pbf.PBL_PATCHES if boundary_layer or gust else [])
-                                + (sgf.GUST_PATCHES if gust else [])
-                                + (ssf.SIMW_PATCHES if similarity else [])
-                                + (pbf.DIAGNOSTIC_PATCHES if boundary_layer or night or cloud_water or gust else [])
-                                + (SBM_NIGHT_PATCHES if night else [])
-                                + (PLASIM_SWITCH_PATCHES if humidity_mean or cloud_water else [])
-                                + (HUS_MEAN_PATCHES if humidity_mean else [])
-                                + (cnd.CLOUD_WATER_PATCHES if cloud_water else [])
-                                + (rdr.RAIN_DROP_PATCHES if rain_drops else [])):
+    ledger = plg.read(src)
+    for name, marker, edits in patch_chain(twilight=twilight, trigger=trigger, depth=depth, cap=cap, massflux=massflux,
+                                           free_convection=free_convection, massflux_start=massflux_start,
+                                           boundary_layer=boundary_layer, night=night, humidity_mean=humidity_mean,
+                                           cloud_water=cloud_water, gust=gust, rain_drops=rain_drops,
+                                           similarity=similarity, land_store=land_store, closure=closure,
+                                           redesign=redesign, redesign2=redesign2, heat=heat, subcloud=subcloud):
         path = src / name
         text = path.read_text()
         if marker not in text:
-            for old, new in edits:
-                if text.count(old) != 1:
-                    raise RuntimeError(f'ExoPlaSim {name} is not the version the Terluna patch expects near {old.strip()!r}')
-                text = text.replace(old, new)
-            path.write_text(text)
+            path.write_text(plg.apply(text, edits, name))
+            plg.note(ledger, name, marker, edits)
+            plg.write(src, ledger)
             for exe in (src.parent / 'run').glob('most_plasim_*.x'):
                 exe.unlink()
+        else:
+            plg.check(ledger, src, name, marker, edits)
         hashes[path.stem] = hashlib.sha256(path.read_bytes()).hexdigest()[:16]
     return hashes
 
@@ -1773,6 +1897,7 @@ SBM_TRIGGER_SETTINGS = ('cape_j_kg', 'trigger_eps')                   # the CAPE
 SBM_DEPTH_SETTINGS = ('deep_hpa', 'mixing_steps')                     # SBM_DEPTH_PATCHES' options, likewise
 SBM_CAP_SETTINGS = ('shallow_cap',)                                   # SBM_CAP_PATCHES' option, likewise
 SBM_NIGHT_SETTINGS = ('diagnostic_night',)                            # SBM_NIGHT_PATCHES' diagnostic, likewise
+SBM_CLOSURE_SETTINGS = ('closure', 'route_l', 'heat', 'subcloud')   # closure (c), route L, the second redesign's rules
 SBM_NIGHT_RECORD = dict(rule='no deep convection where the geometric cosine of the Sun\'s zenith at the grid point is '
                              'at most 0; such a column takes PlaSim\'s shallow scheme, its top held by the shallow cap '
                              'where that is set',
@@ -1792,7 +1917,13 @@ def convection_setting(scheme='sbm', **values) -> dict:
     when set: deep_hpa above 0, the depth (hPa) the parcel's cloud must exceed for deep convection, and mixing_steps
     above 1, the steps of the parcel's mixing within each layer, which need eps above 0. The shallow cap of
     SBM_CAP_PATCHES joins it only when shallow_cap is true, and it needs the depth test. The night switch of
-    SBM_NIGHT_PATCHES, a diagnostic, joins it as SBM_NIGHT_RECORD only when diagnostic_night is true."""
+    SBM_NIGHT_PATCHES, a diagnostic, joins it as SBM_NIGHT_RECORD only when diagnostic_night is true. closure 'c'
+    takes closure (c) of SBM_CLOSURE_PATCHES (sbm_closure.closure_record) in place of the design scheme's ('design',
+    the default, left out): its own relaxation time and Romps's humidity in place of rh, which the record then leaves
+    out, on the 200 hPa depth test with the shallow cap and with none of the other options; route_l adds route L to
+    it (sbm_closure.route_l_record). closure 'redesign' takes the redesigned closure of SBM_REDESIGN_PATCHES
+    (sbm_redesign.redesign_record) on the same terms, and no route L; closure 'redesign2' takes the second redesign of
+    SBM_REDESIGN2_PATCHES (sbm_redesign2.record) on the same terms with its own 12-hour relaxation."""
     if scheme == 'massflux':
         values = dict(values)
         start = values.pop('start', None)
@@ -1807,7 +1938,7 @@ def convection_setting(scheme='sbm', **values) -> dict:
         raise ValueError(f"the convection scheme is 'sbm' or 'massflux' (Kuo's is the default, left out), "
                          f"not {scheme!r}")
     unknown = (set(values) - set(SBM_DEFAULTS) - set(SBM_TRIGGER_SETTINGS) - set(SBM_DEPTH_SETTINGS)
-               - set(SBM_CAP_SETTINGS) - set(SBM_NIGHT_SETTINGS))
+               - set(SBM_CAP_SETTINGS) - set(SBM_NIGHT_SETTINGS) - set(SBM_CLOSURE_SETTINGS))
     if unknown:
         raise ValueError(f'unknown settings of the simplified Betts-Miller scheme: {sorted(unknown)}')
     s = {k: float(values.get(k, v) if values.get(k) is not None else v) for k, v in SBM_DEFAULTS.items()}
@@ -1839,6 +1970,48 @@ def convection_setting(scheme='sbm', **values) -> dict:
         s['shallow_cap'] = True
     if values.get('diagnostic_night'):
         s['diagnostic_night'] = dict(SBM_NIGHT_RECORD)
+    closure, route_l = values.get('closure'), values.get('route_l')
+    if closure not in (None, 'design', 'c', 'redesign', 'redesign2'):
+        raise ValueError(f"the closure is the design scheme's ('design'), closure (c) ('c'), the redesigned closure "
+                         f"('redesign') or the second redesign ('redesign2'), not {closure!r}")
+    if route_l and closure != 'c':
+        raise ValueError('route L launches closure (c); it needs closure c')
+    if closure in ('c', 'redesign', 'redesign2'):
+        name = {'c': 'closure (c)', 'redesign': 'the redesigned closure', 'redesign2': 'the second redesign'}[closure]
+        tau = sr2.TAU_S if closure == 'redesign2' else scl.TAU_S
+        if values.get('rh') is not None:
+            humidity = "0.70 of the air's own saturation" if closure == 'redesign2' else "Romps's humidity"
+            raise ValueError(f"{name} relaxes toward {humidity}, which takes the place of rh; leave rh out")
+        if values.get('tau_s') is not None and float(values['tau_s']) != tau:
+            raise ValueError(f'{name} relaxes over its own {tau:.0f} s; leave tau_s out')
+        if s.get('deep_hpa') != scl.DEEP_PA / 100.0 or not s.get('shallow_cap'):
+            raise ValueError(f'{name} takes the {scl.DEEP_PA / 100.0:.0f} hPa depth test with the shallow cap')
+        others = [k for k in ('cape_j_kg', 'mixing_steps', 'diagnostic_night') if k in s]
+        others += [k for k in ('eps', 'cin_j_kg') if s[k] != 0.0]
+        if others:
+            raise ValueError(f'{name} runs with none of the options {others}')
+        del s['rh']
+        s.update(tau_s=tau, closure={'c': scl.closure_record, 'redesign': srd.redesign_record,
+                                     'redesign2': sr2.record}[closure]())
+        if route_l:
+            s['route_l'] = scl.route_l_record()
+    heat = values.get('heat')
+    if heat not in (None, 'reference', 'spread'):
+        raise ValueError(f"the second redesign's heat rule is 'reference' (its own) or 'spread', not {heat!r}")
+    if heat == 'spread':
+        if closure != 'redesign2':
+            raise ValueError("the heat rule 'spread' belongs to the second redesign (closure redesign2)")
+        s['heat'] = srh.record()
+    subcloud = values.get('subcloud')
+    if subcloud not in (None, 'all', 'cloud'):
+        raise ValueError(f"the second redesign's levels are 'all' (its own) or 'cloud', not {subcloud!r}")
+    if subcloud == 'cloud':
+        if closure != 'redesign2':
+            raise ValueError("the sub-cloud rule 'cloud' belongs to the second redesign (closure redesign2)")
+        if heat == 'spread':
+            raise ValueError("the sub-cloud rule 'cloud' is tested with the second redesign's own heat rule; "
+                             'leave heat out')
+        s['subcloud'] = srs.record()
     return dict(scheme='sbm', nprc=2, **s)
 
 
@@ -1863,7 +2036,47 @@ def convection_namelist(c: dict) -> list:
         entries.append(('NSHCAP_BM', '1'))
     if c.get('diagnostic_night'):
         entries.append(('NDIAGNIGHT_BM', '1'))                       # the night switch, a diagnostic
+    if 'closure' in c:       # closure (c) (1), the redesign (2) or the second (3), and route L, with their constants
+        entries.append(('NCLOS_BM', {'c': '1', 'redesign': '2', 'redesign2': '3'}[c['closure']['form']]))
+        entries += [(name.upper(), str(value) if isinstance(value, int) else repr(float(value)))
+                    for name, value in c['closure']['constants'].items()]
+    if 'heat' in c:                                                   # the second redesign's heat rule, spread
+        entries.append(('NHEAT_BM', '1'))
+    if 'subcloud' in c:                                               # the second redesign's cloud layers only
+        entries.append(('NSUBCL_BM', '1'))
+    if 'route_l' in c:
+        entries.append(('NROUTEL_BM', '1'))
+        entries += [(name.upper(), repr(float(value))) for name, value in c['route_l']['constants'].items()]
     return entries
+
+
+def uses_closure_patch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) take closure (c) of SBM_CLOSURE_PATCHES."""
+    return bool(convection) and convection.get('closure') == 'c'
+
+
+def uses_redesign_patch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) take the redesigned closure of
+    SBM_REDESIGN_PATCHES, which goes over closure (c)'s patch."""
+    return bool(convection) and convection.get('closure') == 'redesign'
+
+
+def uses_redesign2_patch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) take the second redesign of
+    SBM_REDESIGN2_PATCHES, which goes over the first redesign's and closure (c)'s patches."""
+    return bool(convection) and convection.get('closure') == 'redesign2'
+
+
+def uses_heat_patch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) take the second redesign's heat rule of
+    SBM_HEAT_PATCHES, which goes over the second redesign's patch."""
+    return bool(convection) and convection.get('heat') == 'spread'
+
+
+def uses_subcloud_patch(convection: dict | None) -> bool:
+    """Whether a run's convection settings (as given to configuration) take the second redesign's cloud layers only of
+    SBM_SUBCLOUD_PATCHES, which goes over the heat rule's patch."""
+    return bool(convection) and convection.get('subcloud') == 'cloud'
 
 
 def uses_depth_patch(convection: dict | None) -> bool:
@@ -1925,7 +2138,7 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
                   cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
                   free_convection=None, mixing_length=None, boundary_layer=None, large_scale_condensate=None,
-                  humidity_mean=False, surface_gust=None, rain_drops=None, snow=None):
+                  humidity_mean=False, surface_gust=None, rain_drops=None, snow=None, land_store=None, frame=None):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces the
     air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and twilight
     (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the ledger
@@ -1950,9 +2163,13 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     too), 'beljaars_similarity' with CM1's similarity over ice-free water as well, and rain_drops, a birth rule of rain_drops.BIRTH_RULES, the rain's evaporation from its drops' sizes and fall
     speeds in place of gamma, which the snow keeps (rain_drops.setting), unless snow, a choice of
     snow_sublimation.CHOICES, sublimates it by its flakes' closure and Morrison's graupel with their diagnostics and
-    shadows (snow_sublimation.setting; with the rain's drops only). Each is recorded when given, and left out the
+    shadows (snow_sublimation.setting; with the rain's drops only), and land_store, a dict of the store tables' product
+    and the floor, surface, library and hollows, adds the hollows' store to the drylands' land
+    (land_store.setting; with the 10 m wind, which its pools' evaporation reads). Each is recorded when given, and left out the
     configuration is the one every earlier run had; the 294.9 K ledger without the clear share records the twilight as
-    the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did."""
+    the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did. frame, a
+    turned surface's record (turned.py), runs the turned Moon: that record's surface in place of today's and its spin
+    axis's tilt to the ecliptic (frame_setting); left out, the Moon stands as it does today."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -1996,6 +2213,23 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if snow is not None and rain_drops is None:
         raise ValueError("the snow from its flakes runs inside the rain's drops patch (nevapprec 2); set rain_drops")
     flakes = sns.setting(snow) if snow is not None else None                  # refuses an unknown choice
+    if land_store is not None and not wind10:
+        raise ValueError("the hollows' store evaporates on PlaSim's 10 m wind; set wind10")
+    store = (lsf.setting(land_store['product'], land_store['floor'], land_store['surface'], land_store['library'],
+                         land_store['hollows'], planet['gravity_m_s2'], exp['pressure_pa'], root=ROOT)
+             if land_store is not None else None)                                              # refuses a bad choice
+    redesigned = (uses_redesign_patch(convection) or uses_redesign2_patch(convection) or uses_heat_patch(convection)
+                  or uses_subcloud_patch(convection))
+    if uses_closure_patch(convection) or redesigned:                         # refused before a patch reaches the source
+        convection_setting(**convection)
+        if surface_gust is None and redesigned:
+            raise ValueError("the redesigned closure's patch goes over closure (c)'s, which calls the gust patch's "
+                             'gustcol; set surface_gust')
+        if surface_gust is None:
+            raise ValueError("closure (c)'s patch calls the gust patch's gustcol for route L; set surface_gust")
+        if convection.get('route_l') and float(model['timestep_min']) * 60.0 * scl.WINDOW != scl.WINDOW_S:
+            raise ValueError(f"route L's history holds {scl.WINDOW} steps of 30 minutes; it needs PlaSim's 30-minute "
+                             'step')
     cfg = dict(experiment=name, **exp, model=model, output=output_variables(model), ncpus=ncpus,
                exoplasim=version('exoplasim'),
                source=ensure_patched(True, trigger=bool(convection and (convection.get('cape_j_kg') or 0.0) > 0.0),
@@ -2007,12 +2241,19 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      night=uses_night_switch(convection), humidity_mean=bool(humidity_mean),
                                      cloud_water=cloud, gust=surface_gust is not None,
                                      rain_drops=rain_drops is not None,
-                                     similarity=surface_gust == 'beljaars_similarity'),
+                                     similarity=surface_gust == 'beljaars_similarity',
+                                     land_store=store is not None, closure=uses_closure_patch(convection),
+                                     redesign=uses_redesign_patch(convection),
+                                     redesign2=uses_redesign2_patch(convection),
+                                     heat=uses_heat_patch(convection), subcloud=uses_subcloud_patch(convection)),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
                gases_bar=dict(pN2=n2_ar / (1 + AR_PER_N2), pO2=O2_PA / 1e5, pAr=n2_ar * AR_PER_N2 / (1 + AR_PER_N2),
                               pCO2=co2))
+    if frame is not None:
+        cfg['frame'] = frame_setting(frame, exp)
+        cfg['planet']['obliquity'] = cfg['frame']['tilt_deg']
     if level_set != lv.DEFAULT:
         cfg['levels'] = dict(name=level_set, half_levels=[float(x) for x in half],
                              full_levels=[float(x) for x in lv.full_levels(half)],
@@ -2052,6 +2293,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
         cfg['snow'] = flakes
         cfg['rain_drops'] = dict(drops, snow='sublimates by its flakes and graupel in place of gamma (the snow entry)')
         cfg['output'] = cfg['output'] + [name for name, _, _ in sns.DIAGNOSTICS.values()]
+    if store is not None:
+        cfg['land_store'] = store
+        cfg['output'] = cfg['output'] + [lsf.RUNOFF_NAME] + [name for name, _, _ in lsf.CODES.values()]
     if cloud:
         cfg['large_scale_condensate'] = cnd.setting()
     if humidity_mean:
@@ -2183,7 +2427,8 @@ def run_key(cfg, inputs) -> str:
     """Changes if the settings or any written input file change, so a resume never mixes models."""
     digest = hashlib.sha256(json.dumps(cfg, sort_keys=True).encode())
     for path in (inputs['landmap'], inputs['topomap'], inputs['starspec'], inputs['starspec'][:-4] + '_hr.dat',
-                 *([inputs['twilight']] if 'twilight' in inputs else [])):
+                 *([inputs['twilight']] if 'twilight' in inputs else []),
+                 *([inputs['land_store']] if 'land_store' in inputs else [])):
         digest.update(Path(path).read_bytes())
     return digest.hexdigest()[:16]
 
@@ -2219,12 +2464,35 @@ def surface_product(water, lakes):
     return f'moon_{water}pct_water_gaussian_T21.nc'
 
 
+def frame_setting(record, exp) -> dict:
+    """The turned Moon a run takes from a turned surface's record (turned.py; turned_surface_<frame>.json in
+    ../results/gcm): the T21 surface it names, which must be built from the experiment's own lakes and stand in
+    PRODUCTS as the record wrote it, and the spin axis's tilt to the ecliptic in that frame. The record's sha256 and the
+    surface's go into the configuration, so the run key follows them."""
+    from climate.gcm import turned
+    path = Path(record) if Path(record).is_absolute() else ROOT / record
+    r = json.loads(path.read_text())
+    if r.get('schema') != turned.SCHEMA:
+        raise ValueError(f'{path} is not a {turned.SCHEMA} record')
+    if not exp.get('lakes') or not r['surface'].startswith(f"moon_{exp['water']}pct_water_lakes_{exp['lakes']}_turned_"):
+        raise ValueError(f"{path} turns another surface than the experiment's ({exp['water']}% water, lakes "
+                         f"{exp.get('lakes')})")
+    surface = PRODUCTS / r['surface']
+    if not surface.is_file() or hashlib.sha256(surface.read_bytes()).hexdigest() != r['files'][r['surface']]:
+        raise ValueError(f'{surface} is missing or differs from its record; rebuild it with python -m climate.gcm.turned')
+    return dict(record=str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path),
+                sha256=hashlib.sha256(path.read_bytes()).hexdigest()[:16], surface=r['surface'],
+                surface_sha256=r['files'][r['surface']][:16], state=r['frame']['state'],
+                tilt_deg=float(r['frame']['tilt_to_ecliptic_deg']))
+
+
 def surface_files(cfg, folder: Path):
     """Land mask (code 172) and surface geopotential (code 129) at T21 from the geography product. With
-    lakes, the water share is the product's (seas and lakes) and water cells stand at their water surface."""
+    lakes, the water share is the product's (seas and lakes) and water cells stand at their water surface; with a
+    frame, the product is the turned surface it names (frame_setting)."""
     import netCDF4
     lakes = cfg.get('lakes', False)
-    name = surface_product(cfg['water'], lakes)
+    name = cfg['frame']['surface'] if 'frame' in cfg else surface_product(cfg['water'], lakes)
     with netCDF4.Dataset(PRODUCTS / name) as d:
         land = np.asarray(d['land_fraction'][:], dtype=float)
         height = np.asarray(d['land_elevation_m'][:], dtype=float)
@@ -2293,7 +2561,23 @@ def prepare_inputs(cfg, rundir: Path) -> dict:
     if cfg.get('twilight', {}).get('mode') in ('curved', 'full'):
         out['twilight'] = str(twilight_table(folder / 'twilight.dat', cfg['twilight']['mode'],
                                              ROOT / cfg['twilight']['product']))
+    if 'land_store' in cfg:
+        out['land_store'] = str(land_store_table(cfg['land_store'], landmap, folder / lsf.TABLE_NAME))
     return out
+
+
+def land_store_table(s: dict, landmap: Path, path: Path) -> Path:
+    """The hollows' store's tables for a run (land_store.write_table) from the product its configuration names, refused
+    if the product changed since the configuration read it or holds a store where the run's mask has sea."""
+    product_path = Path(s['product']) if Path(s['product']).is_absolute() else ROOT / s['product']
+    if hashlib.sha256(product_path.read_bytes()).hexdigest()[:16] != s['sha256']:
+        raise ValueError(f'{product_path} changed since the configuration read it')
+    product = lsf.read_product(product_path)
+    *_, rows = lsf.table_rows(product, s['library'], s['hollows'])
+    sea = (rows[:, 0] > 0.0) & ~lsf.land_mask_cells(landmap)
+    if sea.any():
+        raise ValueError(f'{product_path} holds a store in {int(sea.sum())} cells that are sea in the run\'s land mask')
+    return lsf.write_table(product, s['library'], s['hollows'], path)
 
 
 def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dict):
@@ -2394,6 +2678,11 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         model._edit_namelist('fluxmod_namelist', 'GUST_UMIN', repr(float(cfg['surface_gust']['least_wind_m_s'])))
         if 'similarity_over_water' in cfg['surface_gust']:
             model._edit_namelist('fluxmod_namelist', 'NSIMW', '1')
+    if 'land_store' in cfg:                                           # land_store.py's hollows' store
+        shutil.copy2(inputs['land_store'], workdir / lsf.TABLE_NAME)
+        for name, text in lsf.namelist_values(cfg['land_store']).items():
+            model._edit_namelist('landmod_namelist', name, text)
+        model._edit_namelist('plasim_namelist', 'NDIAGGP2D', str(lsf.NLSOUT))     # its means, codes 1-7
     if cfg.get('twilight', {}).get('magnification'):
         for i, x in enumerate(cfg['twilight']['magnification'], 1):
             model._edit_namelist('radmod_namelist', f'ZMLUNAR({i})', repr(float(x)))
@@ -2436,6 +2725,10 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
     if 'humidity_mean' in cfg:
         pyburn.ilibrary[str(HUS_MEAN_CODE)] = list(HUS_MEAN)
         pyburn.slibrary[HUS_MEAN[0]] = [HUS_MEAN_CODE, HUS_MEAN[1], HUS_MEAN[2]]
+    if 'land_store' in cfg:
+        for code, (name, long_name, units) in lsf.CODES.items():
+            pyburn.ilibrary[str(code)] = [name, long_name, units]
+            pyburn.slibrary[name] = [code, long_name, units]
     model.cfgpostprocessor(ftype='regular', extension='.nc', variables=cfg['output'],
                            times=m['writes_per_lunar_day'] * m['lunar_days_per_year'], timeaverage=True,
                            interpolatetimes=False)
@@ -2446,12 +2739,155 @@ def _free_gb(path: Path) -> float:
     return shutil.disk_usage(path).free / 1e9
 
 
-def _clean_partial(workdir: Path, year: int):
-    """Remove whatever an interrupted year left in the working folder."""
+def _clean_partial(workdir: Path, year: int, keep_raw: bool = False):
+    """Remove whatever an interrupted year left in the working folder. With keep_raw, a year PlaSim finished keeps its
+    raw output, restart and diagnostics for its conversion, and only a partial conversion (the year's netCDF file and
+    pieces) goes."""
     for name in ('plasim_output', 'plasim_status', 'plasim_snapshot', 'plasim_diag', 'plasim_hcadence', 'Abort_Message'):
         (workdir / name).unlink(missing_ok=True)
     for p in workdir.glob(f'MOST*.{year:05d}*'):
-        p.unlink()
+        if not keep_raw or p.name == f'MOST.{year:05d}.nc' or '.piece' in p.name:
+            p.unlink()
+
+
+def split_raw(raw: Path, times_per_piece: int, folder: Path) -> list:
+    """PlaSim's raw output split by output time into pieces of times_per_piece times each, every piece led by the file's
+    own first two records (the main header and the sigma levels), as pyburn expects a raw file to begin. It streams
+    record by record, so the year never sits in memory. An output time begins where a field's header carries a new
+    step count, its seventh word, which pyburn reads as the time; each piece must hold one surface-temperature field
+    per time, as pyburn's time axis assumes. Returns [(piece, times)] in order."""
+    import struct
+    pieces = []
+    with open(raw, 'rb') as f:
+        head = f.read(8)                       # the first record's marker gives the byte order and marker length,
+        ml = 8 if struct.unpack('=i', head[:4])[0] == 0 else 4             # as pyburn's _getEndian reads it
+        native = '<' if sys.byteorder == 'little' else '>'
+        en = native if struct.unpack('=' + ('i' if ml == 4 else 'q'), head[:ml])[0] <= 1024 else \
+            {'<': '>', '>': '<'}[native]
+        mf = 'i' if ml == 4 else 'q'
+        f.seek(0)
+
+        def record():
+            marker = f.read(ml)
+            if not marker:
+                return None
+            n = struct.unpack(en + mf, marker)[0]
+            payload, tail = f.read(n), f.read(ml)
+            if len(payload) != n or tail != marker:
+                raise RuntimeError(f'{raw.name}: a damaged record before byte {f.tell()}')
+            return marker + payload + tail, payload
+
+        lead = record()[0] + record()[0]
+        out, path, times, ts, step = None, None, 0, 0, None
+        while (header := record()) is not None:
+            field = record()
+            if field is None:
+                raise RuntimeError(f'{raw.name}: a field header without its field at the end')
+            words = struct.unpack(en + 'i' * (len(header[1]) // 4), header[1])
+            if words[6] != step:                                          # a new output time
+                step = words[6]
+                if out is None or times == times_per_piece:
+                    if out is not None:
+                        out.close()
+                        pieces.append((path, times, ts))
+                    path = folder / f'{raw.name}.piece{len(pieces):03d}'
+                    out = open(path, 'wb')
+                    out.write(lead)
+                    times, ts = 0, 0
+                times += 1
+            ts += words[0] == 139
+            out.write(header[0])
+            out.write(field[0])
+        if out is not None:
+            out.close()
+            pieces.append((path, times, ts))
+    bad = [(p.name, n, k) for p, n, k in pieces if n != k]
+    if bad:
+        raise RuntimeError(f'{raw.name}: pieces whose output times and surface-temperature fields differ: {bad}')
+    return [(p, n) for p, n, _ in pieces]
+
+
+def _pyburn_names(ilibrary: dict, slibrary: dict) -> None:
+    """A fresh worker's pyburn given the runner's variable names, the codes build_model teaches it included."""
+    from exoplasim import pyburn
+    pyburn.ilibrary.update(ilibrary)
+    pyburn.slibrary.update(slibrary)
+
+
+def _convert_piece(job):
+    """One piece through pyburn, from the model's folder, with the whole file's settings and its own count of times."""
+    piece, times, kwargs, workdir = job
+    from exoplasim import pyburn
+    os.chdir(workdir)
+    pyburn.postprocess(str(piece), f'{piece}.nc', logfile=f'{piece}.log', **dict(kwargs, times=times))
+    return f'{piece}.nc'
+
+
+def finite_surface(out: Path) -> None:
+    """ExoPlaSim's integrity check on a year file, its surface temperature present and finite, reading that field
+    alone; ExoPlaSim's own (integritycheck) loads the whole file first, 2.9 GB for a year written every 11 steps, and
+    the runner keeps that memory."""
+    import netCDF4
+    with netCDF4.Dataset(out) as d:
+        if 'ts' not in d.variables:
+            raise RuntimeError(f'{out.name} has no surface temperature; see the conversion logs')
+        if not np.isfinite(np.ma.getdata(d['ts'][:])).all():
+            raise RuntimeError(f'{out.name} holds non-finite surface temperatures')
+
+
+def join_along_time(parts: list, out: Path) -> None:
+    """netCDF files that differ only in their times, joined along time in order into out: the dimensions, variables,
+    attributes and storage settings of the first, every value copied as stored. A variable with a time dimension
+    must hold it first."""
+    import netCDF4
+    with netCDF4.Dataset(parts[0]) as first, netCDF4.Dataset(out, 'w', format=first.data_model) as dst:
+        first.set_auto_maskandscale(False)
+        dst.setncatts({k: first.getncattr(k) for k in first.ncattrs()})
+        for name, dim in first.dimensions.items():
+            dst.createDimension(name, None if name == 'time' else len(dim))
+        for name, v in first.variables.items():
+            if 'time' in v.dimensions and v.dimensions[0] != 'time':
+                raise RuntimeError(f'{name}: time is not its first dimension')
+            f = v.filters() or {}
+            w = dst.createVariable(name, v.dtype, v.dimensions, zlib=bool(f.get('zlib')), complevel=f.get('complevel') or 4,
+                                   shuffle=bool(f.get('shuffle')), fill_value=v.getncattr('_FillValue')
+                                   if '_FillValue' in v.ncattrs() else None)
+            w.set_auto_maskandscale(False)
+            w.setncatts({k: v.getncattr(k) for k in v.ncattrs() if k != '_FillValue'})
+            if 'time' not in v.dimensions:
+                w[:] = v[:]
+        start = 0
+        for part in parts:
+            with netCDF4.Dataset(part) as src:
+                src.set_auto_maskandscale(False)
+                n = len(src.dimensions['time'])
+                for name, v in src.variables.items():
+                    if 'time' in v.dimensions:
+                        dst[name][start:start + n] = v[:]
+                start += n
+
+
+def convert_in_pieces(model, raw: Path, out: Path, times_per_piece: int, workers: int = 2) -> dict:
+    """A year's raw output converted as the model's postprocessor converts a whole file (its configured settings and
+    the model's radius, gravity and gas constant), in pieces of times_per_piece output times, `workers` at a time,
+    joined along time into out. pyburn grows each variable field by field with np.append, so a file's conversion
+    costs time and memory as the square of its length: a year written every 11 steps (1,560 times) held 12 GB and
+    ran for hours, where its lunar-day pieces need about 2 GB each. The workers start fresh (spawn) with the runner's
+    variable names, so none carries a copy of the runner's own memory, as forked workers did once the runner had
+    checked a year. The pieces and their logs are removed once out is written. Returns a record of the conversion."""
+    import multiprocessing
+    from exoplasim import pyburn
+    folder = raw.parent
+    kwargs = dict(model.postprocessorcfgs['regular'], radius=model.radius, gravity=model.gravity, gascon=model.gascon)
+    pieces = split_raw(raw, times_per_piece, folder)
+    with multiprocessing.get_context('spawn').Pool(workers, initializer=_pyburn_names,
+                                                   initargs=(dict(pyburn.ilibrary), dict(pyburn.slibrary))) as pool:
+        parts = pool.map(_convert_piece, [(p, n, kwargs, str(folder)) for p, n in pieces], chunksize=1)
+    join_along_time([Path(p) for p in parts], out)
+    for p, _ in pieces:
+        for q in (p, Path(f'{p}.nc'), Path(f'{p}.log')):
+            q.unlink(missing_ok=True)
+    return dict(pieces=len(pieces), times=sum(n for _, n in pieces), times_per_piece=times_per_piece, workers=workers)
 
 
 def _prune(workdir: Path, year: int):
@@ -2608,7 +3044,8 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         levels: str | None = None, free_convection: str | None = None, mixing_length: str | None = None,
         boundary_layer: str | None = None, large_scale_condensate: str | None = None,
         humidity_mean: bool = False, surface_gust: str | None = None, rain_drops: str | None = None,
-        snow: str | None = None) -> int:
+        snow: str | None = None, pieces: int = 0, workers: int = 2, land_store: dict | None = None,
+        frame: str | None = None) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
@@ -2616,7 +3053,8 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
                         moisture=moisture, convection=convection, levels=levels, free_convection=free_convection,
                         mixing_length=mixing_length, boundary_layer=boundary_layer,
                         large_scale_condensate=large_scale_condensate, humidity_mean=humidity_mean,
-                        surface_gust=surface_gust, rain_drops=rain_drops, snow=snow)
+                        surface_gust=surface_gust, rain_drops=rain_drops, snow=snow, land_store=land_store,
+                        frame=frame)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -2654,32 +3092,49 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
             return 1
         done = len(progress['years'])
         workdir = rundir / 'model'
-        restart = workdir / f'MOST_REST.{done - 1:05d}' if done else None
-        if not done and isinstance(cfg['initial_state'], dict):
+        # With the conversion in pieces, a year PlaSim finished whose conversion did not keeps its raw output and
+        # restart: the run takes up from its conversion, and its restart starts the next year.
+        pending = bool(pieces) and all((workdir / f'{stem}.{done:05d}').is_file() for stem in ('MOST', 'MOST_REST'))
+        last = done if pending else done - 1
+        restart = workdir / f'MOST_REST.{last:05d}' if last >= 0 else None
+        if last < 0 and isinstance(cfg['initial_state'], dict):
             restart = Path(cfg['initial_state']['path'])
         if restart is not None and not restart.is_file():
-            print(f'{name}: restart for year {done - 1} is missing; cannot resume.', file=sys.stderr)
+            print(f'{name}: restart for year {last} is missing; cannot resume.', file=sys.stderr)
             return 1
         if workdir.exists():
-            _clean_partial(workdir, done)
+            _clean_partial(workdir, done, keep_raw=pending)
         if restart is not None:                                       # keep it safe from configure()'s copy
             kept = rundir / 'resume_from'
             shutil.copy2(restart, kept)
             restart = kept
         model = build_model(cfg, rundir, ncpus, restart, inputs)
-        model.currentyear = done
+        model.currentyear = done + pending
         for year in range(done, years):
             if _free_gb(rundir) < MIN_FREE_GB:
                 print(f'{name}: less than {MIN_FREE_GB} GB free; pausing after year {year - 1}.', file=sys.stderr)
                 return 2
             start = time.time()
-            model.run(years=1, crashifbroken=True)
             out, rest = workdir / f'MOST.{year:05d}.nc', workdir / f'MOST_REST.{year:05d}'
+            conversion = None
+            if pieces:                                                # PlaSim's year, then its output in pieces
+                if not (pending and year == done):
+                    model.run(years=1, crashifbroken=False, postprocess=False, clean=False)
+                raw = workdir / f'MOST.{year:05d}'
+                if not (raw.is_file() and rest.is_file()):
+                    print(f'{name}: year {year} produced no raw output or restart; stopping.', file=sys.stderr)
+                    return 1
+                conversion = convert_in_pieces(model, raw, out, pieces, workers)
+                finite_surface(out)
+                raw.unlink()
+            else:
+                model.run(years=1, crashifbroken=True)
             if not (out.is_file() and rest.is_file()):
                 print(f'{name}: year {year} produced no output or restart; stopping.', file=sys.stderr)
                 return 1
             writes = cfg['model']['writes_per_lunar_day'] * cfg['model']['lunar_days_per_year']
-            entry = dict(year=year, seconds=round(time.time() - start, 1), **summarise_year(out, writes))
+            entry = dict(year=year, seconds=round(time.time() - start, 1), **summarise_year(out, writes),
+                         **({'conversion': conversion} if conversion else {}))
             if 'model_sunlight' not in progress:
                 # The Sun's light splits about evenly across 0.75 um; anything far off means a broken spectrum.
                 progress['model_sunlight'] = model_reported_sunlight(workdir)
@@ -2778,6 +3233,37 @@ def main(argv=None) -> int:
     parser.add_argument('--sbm-shallow-cap', action='store_true',
                         help="with --sbm-deep-hpa, a shallow cloud's top no higher than that depth above its own base, "
                              "in place of PlaSim's 700 hPa (SBM_CAP_PATCHES; part of the run key)")
+    parser.add_argument('--sbm-closure', choices=('design', 'c', 'redesign', 'redesign2'), default='design',
+                        help="the scheme's closure: the design run's (rh of the parcel's saturation over tau), "
+                             "closure (c), the whole convecting column relaxed over 18 h toward the parcel diluted "
+                             "2e-4 per metre and Romps's humidity for each layer's detrainment (sbm_closure.py; "
+                             'SBM_CLOSURE_PATCHES), or the redesign, triggered by the design scheme\'s undiluted '
+                             "parcel and relaxed toward the diluted parcel, Romps's humidity in the buoyant cloud and "
+                             "the air's own vapour beneath it, warming only toward a reference above the air and "
+                             "moistening without rain where the column holds less vapour than its reference "
+                             '(sbm_redesign.py; SBM_REDESIGN_PATCHES over closure (c)\'s), or the second redesign, '
+                             "its trigger's level of free convection at or above the condensation level, relaxed over "
+                             '12 h toward the zero-buoyancy state of a plume from the lowest level\'s air and 0.70 of '
+                             "the air's own saturation, the rain's heat warming only the layers below their reference "
+                             '(sbm_redesign2.py; SBM_REDESIGN2_PATCHES over both); c, redesign and redesign2 need '
+                             '--sbm-deep-hpa 200, --sbm-shallow-cap and --surface-gust, and take no --sbm-rh or '
+                             '--sbm-tau; part of the run key')
+    parser.add_argument('--sbm-heat', choices=('reference', 'spread'), default='reference',
+                        help="with --sbm-closure redesign2, the rain's heat: 'reference', the second redesign's own "
+                             "rule (only the layers below their reference warm, the rain held to what they take), or "
+                             "'spread', where that limit would bind the rain unheld and the rest of its heat spread "
+                             "over the cloud layers by one increment (sbm_redesign2_heat.py; SBM_HEAT_PATCHES; part "
+                             "of the run key only when spread)")
+    parser.add_argument('--sbm-subcloud', choices=('all', 'cloud'), default='all',
+                        help="with --sbm-closure redesign2, the levels it relaxes: 'all', the second redesign's own "
+                             "(every level from the top to the source), or 'cloud', the levels below the condensation "
+                             "level left alone (sbm_redesign2_subcloud.py; SBM_SUBCLOUD_PATCHES over the heat rule's; "
+                             "part of the run key only when cloud)")
+    parser.add_argument('--sbm-route-l', action='store_true',
+                        help='with --sbm-closure c, route L: closure (c) launched from the most humid layer between '
+                             "0.60 and 0.94 of the surface pressure above the boundary layer's top where the lowest "
+                             "level's parcel does not convect deep, started by the layers' moistening over 24 hours "
+                             'and run on 12 hours after its last start (sbm_closure.py; part of the run key)')
     parser.add_argument('--levels', choices=tuple(lv.LEVEL_SETS), default=lv.DEFAULT,
                         help="PlaSim's levels: its own ten, or a set of levels.py (l14: fourteen, more of them near "
                              'the ground; l15: those and a bottom layer 0.6 km thick), which needs a restart on the '
@@ -2820,6 +3306,24 @@ def main(argv=None) -> int:
                              'gamma, with the rain from its drops: flakes (its shadows on), flakes_highest_top (the '
                              "snow top at its highest forming layer) or flakes_no_shadows (snow_sublimation.py; part "
                              'of the run key)')
+    parser.add_argument('--land-store', metavar='PRODUCT',
+                        help="the storm-water study's store tables (store_tables.json, schema /2): the drylands' "
+                             "slopes shed runoff as the storm library's storms into a store of their hollows' water, "
+                             "which evaporates at the pools' own rate and seeps into a slow store (land_store.py; "
+                             'LAND_STORE_PATCHES; needs --wind10 and every --land-store-* option; part of the run key)')
+    parser.add_argument('--frame', metavar='RECORD',
+                        help="a turned surface's record (turned.py; climate/results/gcm/turned_surface_<frame>.json): "
+                             "the Moon turned into that frame, its surface in place of today's and the spin axis's "
+                             'tilt to the ecliptic for that state (frame_setting; part of the run key)')
+    parser.add_argument('--land-store-floor', choices=lsf.FLOORS, help="the hollows' floor design")
+    parser.add_argument('--land-store-surface', choices=lsf.SURFACES, help="the slopes' surface")
+    parser.add_argument('--land-store-library', choices=lsf.LIBRARIES,
+                        help="the storm library the slopes' runoff, the routing and the store's curve follow")
+    parser.add_argument('--land-store-hollows', choices=lsf.HOLLOWS, help="the hollows' age")
+    parser.add_argument('--convert-pieces', type=int, default=0, metavar='TIMES',
+                        help='convert each year in pieces of this many output times (convert_in_pieces); 0 leaves '
+                             "the whole file to ExoPlaSim's postprocessor (not part of the run key)")
+    parser.add_argument('--convert-workers', type=int, default=2, help='pieces converted at once')
     parser.add_argument('--humidity-mean', action='store_true',
                         help="write the humidity's true 3-day mean as hus_mean, code 233, where a year file's hus "
                              "holds the humidity at each interval's start (HUS_MEAN_PATCHES; year_files.py; part of "
@@ -2863,6 +3367,17 @@ def main(argv=None) -> int:
                      '(--convection sbm)')
     if args.massflux_start != 'ifs' and args.convection != 'massflux':
         parser.error('--massflux-start belongs to the mass-flux scheme (--convection massflux)')
+    if (args.sbm_closure != 'design' or args.sbm_route_l) and args.convection != 'sbm':
+        parser.error('--sbm-closure and --sbm-route-l belong to the simplified Betts-Miller scheme (--convection sbm)')
+    if args.sbm_closure == 'c' and args.surface_gust == 'none':
+        parser.error("--sbm-closure c calls the gust patch's depth for route L; set --surface-gust")
+    if args.sbm_subcloud != 'all' and args.sbm_closure != 'redesign2':
+        parser.error('--sbm-subcloud cloud belongs to the second redesign (--sbm-closure redesign2)')
+    if args.sbm_heat != 'reference' and args.sbm_closure != 'redesign2':
+        parser.error('--sbm-heat spread belongs to the second redesign (--sbm-closure redesign2)')
+    if args.sbm_closure in ('redesign', 'redesign2') and args.surface_gust == 'none':
+        parser.error(f"--sbm-closure {args.sbm_closure} goes over closure (c)'s patch, which calls the gust patch's "
+                     'depth; set --surface-gust')
     sbm_given = [k for k in ('sbm_tau', 'sbm_rh', 'sbm_eps', 'sbm_cin', 'sbm_cape', 'sbm_trigger_eps', 'sbm_deep_hpa',
                              'sbm_mixing_steps') if getattr(args, k) is not None]
     if sbm_given and args.convection != 'sbm':
@@ -2872,9 +3387,26 @@ def main(argv=None) -> int:
         convection = dict(tau_s=args.sbm_tau, rh=args.sbm_rh, eps=args.sbm_eps, cin_j_kg=args.sbm_cin,
                           cape_j_kg=args.sbm_cape, trigger_eps=args.sbm_trigger_eps, deep_hpa=args.sbm_deep_hpa,
                           mixing_steps=args.sbm_mixing_steps, shallow_cap=args.sbm_shallow_cap or None,
-                          diagnostic_night=args.sbm_diagnostic_night or None)
+                          diagnostic_night=args.sbm_diagnostic_night or None,
+                          closure=None if args.sbm_closure == 'design' else args.sbm_closure,
+                          route_l=args.sbm_route_l or None,
+                          heat=None if args.sbm_heat == 'reference' else args.sbm_heat,
+                          subcloud=None if args.sbm_subcloud == 'all' else args.sbm_subcloud)
+        if (uses_closure_patch(convection) or uses_redesign_patch(convection) or uses_redesign2_patch(convection)
+                or uses_heat_patch(convection) or uses_subcloud_patch(convection) or args.sbm_route_l):
+            try:                       # closure (c)'s, the redesigns' and route L's combinations, refused here
+                convection_setting(**convection)
+            except ValueError as err:
+                parser.error(str(err))
     elif args.convection == 'massflux':
         convection = dict(scheme='massflux', start=None if args.massflux_start == 'ifs' else args.massflux_start)
+    store_options = dict(floor=args.land_store_floor, surface=args.land_store_surface, library=args.land_store_library,
+                         hollows=args.land_store_hollows)
+    if args.land_store and any(v is None for v in store_options.values()):
+        parser.error('--land-store needs --land-store-floor, -surface, -library and -hollows')
+    if not args.land_store and any(v is not None for v in store_options.values()):
+        parser.error('the --land-store-* options belong to --land-store')
+    land_store = dict(product=args.land_store, **store_options) if args.land_store else None
     return run(args.experiment, args.years, args.ncpus, args.folder, args.prune, overrides, args.start_from,
                args.co2_ppm, tuple(args.top_infrared) if args.top_infrared else None,
                None if args.twilight == 'none' else args.twilight, args.gas_bands, args.heating_diagnostics,
@@ -2886,7 +3418,8 @@ def main(argv=None) -> int:
                None if args.boundary_layer == 'local' else args.boundary_layer,
                None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean,
                None if args.surface_gust == 'none' else args.surface_gust,
-               None if args.rain_drops == 'none' else args.rain_drops, None if args.snow == 'none' else args.snow)
+               None if args.rain_drops == 'none' else args.rain_drops, None if args.snow == 'none' else args.snow,
+               args.convert_pieces, args.convert_workers, land_store, args.frame)
 
 
 if __name__ == '__main__':

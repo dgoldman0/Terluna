@@ -149,6 +149,38 @@ climate/gcm/.venv/bin/python -m climate.crm.cm1_run build moon_omp_o3 moon_omp_o
 climate/gcm/.venv/bin/python -m climate.crm.build_check ring_equator moon_omp_o3 moon_omp_o3_strict --threads 1    # about 25 minutes
 ```
 
+## How the runs are kept: compressed outputs and restarts
+
+A case's 3-D outputs (`cm1out_tNNNNNN_s.dat`) and restart files (`cm1rst_tNNNNNN_{i,s,u,v,w,x}.dat`) hold nearly
+everything CM1 writes, and [cm1_files.py](cm1_files.py) keeps them raw or compressed with zstd at level 3, without
+loss. A sea box's outputs shrink about 1.9 times and its largest restart file about 3.6 times; `box_jura`'s outputs
+shrink 3 times. Each compressed file, `<file>.zst`, keeps the raw file's times and has a line in its case's
+`compression_manifest.jsonl` giving its name, its raw size, SHA-256 and modification time, its compressed size, the
+zstd version and the time the line was written. The readers in this folder go through
+cm1_files: given the raw file's path, they read the `.zst` when the raw file is gone and return the same bytes
+(`fromfile` for `np.fromfile`, a read-only `memmap` for `np.memmap`, `sha256` and `size`), and the listings (`glob`,
+`restart_numbers`) find files kept either way. A run resumed from a compressed restart set decompresses it first,
+checks it against the manifest and notes this at the top of the segment's log. A case set up from another case's
+compressed restart gets raw copies, checked the same way and listed under `restart_from` in its `case.json`.
+Statistics, diagnostics, metadata, control files, the other output kinds (`_u`, `_v`, `_w` and the vorticities),
+namelists and logs stay raw.
+
+```sh
+climate/gcm/.venv/bin/python -m climate.crm.cm1_files compress box_jura     # one file at a time, resumable
+climate/gcm/.venv/bin/python -m climate.crm.cm1_files verify box_jura       # every .zst against its manifest line
+climate/gcm/.venv/bin/python -m climate.crm.cm1_files decompress box_jura cm1rst_t000085_s.dat
+```
+
+compress stops when the drive would keep less than 30 GB free beyond the next file. It streams each file through a
+SHA-256 and `zstd -3 -T1` into `<file>.zst.part`, then decompresses the `.part` back from the drive into a second hash.
+Only when the two hashes agree does it rename the `.part`, append and fsync the manifest line, and remove the raw
+file. Taken up again after a stop, it settles each state the stop can leave. It leaves alone a case that holds
+`run.lock` or that a CM1 process is working in. Since 3 November 2026 most older runs on the research drive are kept
+this way. Runs in current use stay raw, and so do the runs that code outside this folder reads raw (the snow and
+atmospheric-electricity studies, the sea-appearance scan, `climate/gcm/massflux.py`) until that code goes through
+cm1_files. `cloud_columns.py` still hashes `ring_equator`'s outputs raw: the cloud-twilight study's check of its saved
+local clouds pins the module's bytes.
+
 ## The equatorial ring
 
 Case `ring` is the equator as a two-dimensional ring 10,916 km round, in 1,816
@@ -3066,6 +3098,40 @@ the mean state.
 ```sh
 E=/media/projectspace/terluna-research/session-tools/evaporation
 PYTHONPATH=. climate/gcm/.venv/bin/python $E/evap_trace.py       # rules EV1-EV3; evap_trace.json
+```
+
+### Boxes that make their own large-scale motion: the damped gravity wave (5 November)
+
+The design-years boxes take the GCM's mean vertical wind as given, and much of their free troposphere's temperature comes from it. Their band (σ 0.38–0.73) cools 3.5–7.2 K from the GCM's air over their days and still cools 0.25–0.35 K a lunar day at days 3–4. On land the imposed ascent makes most of that cooling (`session-tools/agents/gap_boxes/refinement/report_free_troposphere.md` on the research drive). Such a box can judge the GCM's upper air only through motion the GCM supplied, and it cannot say how much moisture its storms should draw in. That inflow is the quantity on which the land's rain turns: +2.87 mm/day at the land box in the design years against about nil under the GCM's second convection refinement.
+
+**The method** (`session-tools/agents/gap_boxes/yardstick/`: rules_wtg.txt, report_wtg.md). With `var9` = 1 the build `moon_omp_rain_law_pbl_wind_gust_aloft_inflow_dgw` makes the box's own large-scale vertical wind each step by the damped gravity wave (Kuang 2008; Blossey, Bretherton and Wyant 2009). It solves d²ω/dp² = (k²/ε) R_d T_v′/p for the domain-mean ω, nil at the ground and at a lid at the GCM's convection top at the site, about 73 km. T_v′ is the domain-mean virtual temperature less the reference air's between the box's boundary-layer top and the lid; below that top ω falls linearly in pressure to the ground. The wind replaces the imposed one, CM1's large-scale vertical advection carries it, and the inflow patch draws the reference air in where it converges. The wave was chosen over the weak temperature gradient on two grounds. In the comparison of Daleu et al. (2015) its runs always settled into a raining state, while the weak temperature gradient's sometimes fell into a dry one, a hazard the Moon's 14.8-day nights would favour. Romps (2012) found the weak temperature gradient's steady profiles too top-heavy for the import's shape. Rotation does not enter: the first mode's equatorial deformation radius, 3,640–5,190 km, exceeds the boxes' distance from the equator.
+
+**Its settings, from the lunar column.**
+- **Speed and time.** The first baroclinic mode's speed is 40.5 m/s, the WKB integral of the buoyancy frequency to the convection top. Over the 418 km footprint the box stands for (354 km at the dry box) it gives an adjustment time of 2.87 h (2.43 h), the only parameter, since k²/ε = 1/(Lc) for the first mode. No Earth damping rate remains, and 0.65–18.7 h is carried as the range.
+- **The boundary layer's top.** The domain mean of CM1's own boundary-layer depth, bounded below by the GCM's lowest level and above by the lid. That depth swings from 0.06 to 8.4 km over the lunar day on land.
+- **The reference air.** The site's own GCM column by local time, through the nudging windows. Within 3 hours a tenth of a kelvin turns into 3 cm/s of large-scale motion, so a tropical-mean reference would drive spurious motion; the site's band stands within 0.17 K of the tropical mean.
+- **The day-night table.** It keeps only the GCM circulation's horizontal part: its heating below the boundary-layer top and its moistening at every level.
+- **The start.** Each box starts from the GCM's air at local sunrise, so the wave starts from rest.
+
+**What the boxes can judge.** At the land box the second refinement's collapse of convergence lies almost wholly in the horizontal part of the import. The vertical advection by the GCM's own wind stands at +11.25 mm/day in the design years' afternoon and +9.64 in the second refinement's, while the horizontal remainder falls from +3.09 to −9.37 mm/day (GCM output; the parts carry the fits' errors, only the total is exact). Boxes forced by the design years take the design years' horizontal part, so they test the vertical import and the rain it feeds. Judging the second refinement's dry land needs a set forced by its state.
+
+**The cases and checks.**
+- **Cases.** `box_near_side_sea_dgw`, `box_0e_dgw` and `box_se_dry_dgw`, each with `_day3` and `_day4`. A comment in `cm1_run.py` names their five departures from the design-years boxes.
+- **Inputs and budget.** `gcm_site.dgw_forcing` and `first_mode` give the air by hour, the horizontal tendencies and the mode's speed, recorded in each case's case.json. `box_budget` books the inflow and the table's heating from the record `terluna_dgw.txt`, and writes the box's own import (`own_large_scale_convergence_mm_day`). The record misses the interval ending at each run segment's end, 1 in 8 with one-day segments and 3-hour intervals, because a segment stops at the interval's end, before the step at which the build writes it, and the restart begins the next interval afresh. The budget estimates such an interval as the mean of the intervals ending one period before and after it, or carries the one before at the record's end, and marks the row as estimated. A later build should write the interval before a segment stops.
+- **Tests** ([test_cm1_dgw.py](../tests/test_cm1_dgw.py), 7 tests):
+  - with the switch off the build's sources are the inflow build's;
+  - a reference equal to the box's mean gives no wind;
+  - warm departures rise and cool ones sink at the first mode's rate within 5%;
+  - the inflow keeps heat, water and air mass;
+  - the budget reads the record;
+  - it estimates the intervals a segment's end misses from their neighbours.
+- **Builds.** Compiled and set up on scratch copies; no CM1 run has yet tested the wave against a 192 km box's convective noise.
+- **Earth-calibrated values met.** Morrison's ice processes, the 100 cm⁻³ droplets, the boundary layer's length scale and Rayleigh time (stretched by the gravity ratio), its critical Richardson number of 0.125 and the surface similarity functions (`yardstick/audit.md`).
+
+```sh
+Y=/media/projectspace/terluna-research/session-tools/agents/gap_boxes/yardstick
+$Y/run_wtg_boxes.sh            # land, sea, dry in turn: build, setup, two lunar days, day 3, day 4; guarded, resumable
+python3 -m pytest climate/tests/test_cm1_dgw.py
 ```
 
 ## A box over the highlands
