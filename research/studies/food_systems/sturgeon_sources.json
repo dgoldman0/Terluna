@@ -1,7 +1,7 @@
 {
   "schema": "terluna.research.sturgeon-sources/1",
-  "access_date": "2026-11-06",
-  "scope": "Earth evidence for a broad lunar sturgeon assessment. Literature synthesis and proposed accounting/trials; no new biological validation.",
+  "access_date": "2026-11-07",
+  "scope": "Earth evidence for the lunar sturgeon assessment, rebuilt on the hydrosphere's cold-waters study. Literature synthesis and proposed accounting and trials; no new biological validation.",
   "sources": [
     {
       "id": "ST01",
@@ -18,8 +18,8 @@
       "title": "Huso huso: Caspian Biodiversity Information System species account",
       "url": "https://archive.iwlearn.org/caspianenvironment.org/CaspBIS/Taxons/Taxonb070.html?taxonid=1",
       "kind": "Archived regional expert account compiling field observations",
-      "access": "Thermal occurrence, reproduction, migrations and diet passages inspected",
-      "supports": "Beluga anadromy, warm summer occurrence, cooler early development, piscivory and historical Volga maturation ages.",
+      "access": "Thermal occurrence, reproduction, migrations and diet passages inspected; re-read on 2026-11-07 for spawning, development and maturity values",
+      "supports": "Beluga anadromy and piscivory; spawning in the Ural at 7-11 C (winter run) and 10-15 C (spring run) and in the Volga at 6-16 C, at 10-30 m depth and 1-2.5 m/s; eggs and larvae developing at 9-15 C; underyearlings and juveniles at 15-26 C; adults through 20-31 C in summer; most males mature at 12-15 years and females at 15-20.",
       "limits": "Occurrence temperatures are not chronic controlled tolerances. Historical populations and conservation classifications do not establish present status or lunar capacity."
     },
     {
@@ -193,20 +193,47 @@
       "access": "Current index rechecked; relevant parasite, harvest-area and toxin guidance previously inspected for this food study",
       "supports": "Product-specific hazard controls for raw, cooked, cured and packaged seafood.",
       "limits": "No certification of a lunar fishery or preparation; a freezing-speed description is not a validated parasite-control process."
+    },
+    {
+      "id": "ST20",
+      "title": "Migratory monarch butterfly now Endangered - IUCN Red List",
+      "year": 2022,
+      "url": "https://iucn.org/press-release/202207/migratory-monarch-butterfly-now-endangered-iucn-red-list",
+      "kind": "Official IUCN press release of the Red List update of 21 July 2022",
+      "access": "Press release read in full for its sturgeon passages, 2026-11-07",
+      "supports": "All 26 surviving sturgeon species threatened (85% in 2009); 17 Critically Endangered, 3 Endangered, 5 Vulnerable; the Yangtze sturgeon Extinct in the Wild and the Chinese paddlefish extinct; beluga Huso huso Critically Endangered.",
+      "limits": "Names few species; the categories of sterlet, Siberian and Russian sturgeon come from ST21. The species assessments themselves were not opened."
+    },
+    {
+      "id": "ST21",
+      "title": "Sturgeon slipping towards extinction: chances of survival dimming for world's most threatened group of species",
+      "year": 2022,
+      "url": "https://wwfcee.org/news/sturgeon-slipping-towards-extinction-chances-of-survival-dimming-for-worlds-most-threatened-group-of-species",
+      "kind": "WWF Central and Eastern Europe news account of the IUCN update of 21 July 2022",
+      "access": "Page read in full, 2026-11-07",
+      "supports": "Sterlet moved to a higher category and classified Endangered; wild Siberian sturgeon moved to Critically Endangered; Europe's eight species seven Critically Endangered and one Endangered (the sterlet), from which the Russian sturgeon's Critically Endangered status follows; almost two-thirds of the group Critically Endangered.",
+      "limits": "A secondary account by a conservation organization; kaluga, Amur, white and lake sturgeon not covered. Congiu, Gessner and Ludwig's note in Oryx 57(1): 9-10 (2023) was consulted and gave no species categories in its readable text."
     }
   ],
   "inherited_references": [
     {
-      "path": "aquatic_biomes.md",
-      "scope": "Pinned environmental context, oxygen alternatives, model-version boundaries and supplementary highland study"
+      "path": "domain/hydrosphere 1ac9357d: research/studies/cold_waters/README.md",
+      "scope": "Fresh water above about 15 C everywhere; the highland lakes' air and water (543 lakes below 20 C covering 220,000 km2, 15 below 18 C covering 583 km2; a 30 m lake's floor at 21.1-21.7 C); the ponds' cold hours; no polar winter with the axis 1.5 degrees from the ecliptic. A first estimate on the design years, today's orientation."
+    },
+    {
+      "path": "research/decisions.md",
+      "scope": "The deep lakes' oxygen of 5.7-6.3 mg/L by Osborn's rule and 3.5 under Shih and Bouffard's form at 301 K (19 October); the rules for what lives wild (12 October and 6 November); the waters' trophic design (19 October); organisms crossing between worlds (6 November)."
     },
     {
       "path": "eel_sources.json",
       "ids": [
-        "E10",
-        "E14"
+        "E10"
       ],
-      "scope": "Previously verified nitrification stoichiometry and ammonia interpretation; no new sturgeon coefficients"
+      "scope": "Nitrification stoichiometry; no new sturgeon coefficients"
+    },
+    {
+      "path": "results/eel_budget.json",
+      "scope": "The closed systems' mean power for fed eel at 8 billion people and 1 kg of cooked eel each, used as a scale for chilling"
     }
   ]
 }

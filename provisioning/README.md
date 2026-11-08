@@ -56,14 +56,6 @@ The author's decisions frame it:
 - **The network:** a mesh of aerostats drifting near 30 km, fixed posts, fibre and towers, linked to the array
   ([network.md](network.md)).
 
-## Aquatic foods, 4 November 2026
-
-The [aquatic-food programme](../research/studies/food_systems/aquatic_novelty.md),
-opened on `domain/food-systems`, extends the food accounts with biome-to-cuisine
-research: Earth founders, selective breeding, hatchery needs, raw and cooked
-products, and shared food/mineral budgets. It introduces no new production
-coefficients or adopted harvest allocation.
-
 ## The economy, 31 October 2026
 
 The [world-economy study](../research/studies/world_economy/README.md) compares the Moon, the inhabited array and an equally advanced Earth as three interconnected economies at the accepted population, with the colonies and the source economies as a fourth account still outside them. **Production follows population and an assumed output per resident**: at the Moon's assumed 1.049 of Earth's value added per resident and the array's 1, Earth:Moon:array gross product is **100:93:56**, and net product **100:91:53** before unpriced local depletion. **The build's physical demand is the firmer result**: delivering the middle inventory's 3.2×10¹⁹ kg of air and water over 500 years takes 46–366 PW of purchased process power at the source sites, 99 PW in the advanced case with 82% of it departure propulsion, and with the hubs' braking 120–440 PW against the 19 September civilization envelope of 501 PW ([industry](../resources/industry.md)). At an assumed 0.1 U/MWh for that energy the build costs about 97 years of future Earth's output. A patient-debt example leaves the Moon and the array 100:75:48 of Earth's resources after replacement and principal; who lends, owns and decides are arrangements the communities choose ([register](../research/decisions.md#automation-the-network-and-food-12-october-2026)), and the [monetary-system study](../research/studies/monetary_system/README.md) treats money, settlement and credit.
@@ -383,6 +375,8 @@ Step five of the approved order: each setting through the lunar cycle, in the
 The author's direction of 11 October: count current and emerging agriculture, hydroponics and aquaponics, and the fog
 deserts with water extraction, in the food system. The study is
 [food systems](../research/studies/food_systems/README.md); numbers here are from it.
+
+The study's [aquatic foods](../research/studies/food_systems/aquatic_novelty.md) design fish and shellfish for the waters, from founders bred from Earth stock to cooked and raw products.
 
 38. **Rain-fed fields feed the plant-rich diet at the least cost, and the rain alone feeds 9.1–27.0 billion people
     outside a kept 30%.** A billion residents crop 141,000–401,000 km² at the crop model's yields, 2.6–7.7% of what the

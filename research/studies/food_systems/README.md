@@ -1,39 +1,5 @@
 # Food systems for the Open Moon
 
-## Aquatic foods: biomes, breeding and cuisine, 4 November 2026
-
-The new [aquatic-food study](aquatic_novelty.md) develops three proposals: lunar-cycle
-energy storage and fatty fish; alkaline habitats and taste-active compounds; and
-carbonate communities, pale fish and shellfish. It connects inherited biome models,
-Earth founder species, genomic-informed selective breeding and separate raw/cooked
-culinary objectives, including unagi. It is a sourced initial synthesis and trial
-design; no new biological results or fishery capacities are claimed. Its
-[environmental basis](aquatic_biomes.md) distinguishes current decisions from older
-model forcing and separately inspected hydrosphere work. The production accounts
-and their numerical products below retain their existing scope.
-
-The [follow-up on jade perch, raw-fish habitats and unagi](fish_cuisine_followup.md)
-distils the subsequent discussion: edible-fat allocation and diet, potential
-lunar culinary traits, qualification across the wider aquatic landscape, and eel
-grow-out with an initial reproductive hatchery and possible selection for local
-spawning or a complete freshwater life cycle.
-
-The [eel habitat-and-hatchery dossier](eel_habitat_hatchery.md) develops juvenile
-supply, grow-out habitats, ecological effects, feed and oxygen budgets, and cooked
-yield. Its preferred Gaean endpoint is autonomous freshwater recruitment; saline
-hatcheries provide a transitional route. The accompanying
-[scenario accounts](results/eel_budget.json) expose assumptions and sensitivities
-without assigning lunar production capacity or demonstrated breeding success.
-
-The [sturgeon habitat-and-food dossier](sturgeon_habitat_foods.md) assesses sterlet,
-Siberian sturgeon, beluga and derivatives across habitat networks, autonomous
-recruitment, ecological effects, lifetime feed/oxygen accounts, meat and caviar.
-It compares thermal adaptation with the eel reproductive route as one part of
-that broader assessment. Founder priorities and culinary outcomes remain proposals;
-the study introduces no new production coefficients or harvest allocation.
-
-## Production accounts
-
 This study prices eight ways of growing the lunar design's plant-rich diet for each billion residents, fits each to the
 29.5-day light cycle, and combines them into seven mixes for 4, 6 and 8 billion people. It reads ecology's diets,
 crop-model yields and nutrient targets and resources' phosphorus accounts for the sky and the waters (from their
@@ -41,6 +7,22 @@ branches, read in the tree at pinned hashes since the joint integration), the ca
 and power products, and published measurements for every food system (`sources.json`, 100 sources).
 Numbers computed here are marked *screen*; arithmetic on cited values is marked *derived*. The product is
 `results/food_systems.json` (schema `terluna.research.food-systems/1`).
+
+## Aquatic foods
+
+The study's aquatic part designs fish, crustaceans and shellfish for the Moon's waters, bred from Earth stock and followed from their habitats through founders and breeding to the table ([aquatic_novelty.md](aquatic_novelty.md)). It works inside the diet that the register and these accounts set: meat from animals is a luxury of 1–2 kg a person a year, part of which fishing can supply where the parasite risk is kept low ([register, 12 October](../../decisions.md#the-domain-synthesiss-decisions-12-october-2026)), and the waters' life can spare 21–56 kt of phosphorus a year (finding 8), so the aquatic part grows fed fish in closed systems and open-water harvests take what the waters feed. Its three hypotheses, fat stored over the lunar cycle, taste chemistry in alkaline water, and pale fish and shellfish from carbonate shores, are trial designs on Earth evidence. Where the chapters say "Gaean", they use the world-crafting project's term for worlds with nitrogen–oxygen air and an active water cycle at broadly Earthlike pressures and temperatures ([world-crafting README](https://github.com/dgoldman0/world-crafting#readme)); the Open Moon is one.
+
+- [aquatic_biomes.md](aquatic_biomes.md): the waters' habitats on the turned Moon's design climate, read from the project's products, and the accounts that bound a harvest.
+- [lunar_cycle_fisheries.md](lunar_cycle_fisheries.md): H1, fat stored over the lunar cycle.
+- [alkaline_foods.md](alkaline_foods.md): H2, taste chemistry in alkaline water.
+- [reef_shellfish_cuisine.md](reef_shellfish_cuisine.md): H3, carbonate shores, jade perch, shellfish and kabayaki-style fish.
+- [breeding_and_trials.md](breeding_and_trials.md): founders, selective breeding and the trials that separate the three mechanisms.
+- [culinary_evaluation.md](culinary_evaluation.md): product targets and raw and cooked qualification.
+- [`eel_habitat_hatchery.md`](eel_habitat_hatchery.md): the eel chapter, leading with a migration through a held seawater lake, with per-person cases for fed eel against the heritage meat and the waters' phosphorus ([`eel_budget.py`](eel_budget.py), product [`results/eel_budget.json`](results/eel_budget.json)).
+- [`sturgeon_habitat_foods.md`](sturgeon_habitat_foods.md): the sturgeon chapter, with adults deep in the coldest highland lakes, bester first, and reproduction through hatcheries.
+- [aquatic_basis.json](aquatic_basis.json) and [aquatic_checks.json](aquatic_checks.json): the identity of every source the aquatic part read, and its checks.
+
+The findings and sections below belong to the production accounts.
 
 ## Findings
 

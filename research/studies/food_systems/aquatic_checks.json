@@ -1,7 +1,34 @@
 {
-  "schema": "terluna.research.food-systems-aquatic-checks/1",
-  "date": "2026-11-04",
-  "scope": "Documentation, environmental source identity and study design only; no numerical model or production coefficient changed.",
+  "schema": "terluna.research.food-systems-aquatic-checks/2",
+  "date": "2026-11-07",
+  "scope": "Checks on the aquatic study's documents and records. The study runs no model and changes no product or production coefficient.",
+  "reading_rule": "revision_2026_11_07 records the checks of the 7 November revision. checks and review keep the record of 4 November at base_main_commit, with the reading of its failures added; other records cite checks.repository by that path.",
+  "revision_2026_11_07": {
+    "tree": "domain/food-systems at cb85374c with main f30408f7 merged and staged, in the worktree terluna-food-systems; the eel and sturgeon chapters were being reworked beside these files at the same time",
+    "tests": {
+      "command": "ulimit -v 6000000; nice -n 10 python3 -m pytest -q research/studies/food_systems",
+      "result": "59 passed at 20:01 (6.5 s) and again at 20:05 after the last edits (7.4 s): test_run.py 21, test_blend.py 6, test_eel_budget.py 32, with the eel and sturgeon files mid-rework"
+    },
+    "relative_links": "PASS: 316 relative links and their heading anchors resolve across the seven aquatic chapters, the study README and the three domain READMEs (a script in the session's scratchpad)",
+    "whitespace": "PASS: git diff --check on every file changed",
+    "hard_wraps": "PASS: no paragraph or list item spans two lines in the seven chapters or the README's aquatic section",
+    "values_checked": [
+      "Basin oxygen in the habitats chapter against research/studies/sea_oxygen/README.md at f30408f7: all seven central values and the Procellarum and Ingenii bounds match.",
+      "The 29.53059-day cycle against shared/constants.json, and the held fresh seas' 0.14 g/kg and pH 8.3 against the sea chemistry's README.",
+      "Every register row cited, read at f30408f7: the diet's blend and heritage meat, the rules for what lives wild, engineered organisms, salt water and soda lakes, the waters of 19 October, the energy supply, the design climate at the target and the seawater lakes, the evaluation, wild lines, the eel's seawater spawning and the crossing between worlds, and the world on the turned Moon.",
+      "The fifteen pins of the first reading compared at f30408f7: six of the fourteen main files differ (the plan, the register and four products); the cold-waters README is the same blob on domain/hydrosphere at f6fe4026."
+    ],
+    "sources_added": [
+      "A10 (alkaline_foods.md): Bills (2019), IUCN Red List assessment of Oreochromis mossambicus, Vulnerable; read through the Wikipedia article's status box, citation and account of hybridization.",
+      "A11 (alkaline_foods.md): Bayona and Akinyi (2006), IUCN Red List assessment of Alcolapia grahami, Vulnerable; read through the Wikipedia article's status box, citation and range.",
+      "R15 (reef_shellfish_cuisine.md): Kaifu et al. (2025), PLoS ONE 20(10) e0331511; PMC full text, targeted at its statements that the Japanese eel has been Endangered since 2014 and stayed so at the 2020 reassessment."
+    ],
+    "sources_carried": "R3 and R4 (deeper reading) and R16-R18 in the carbonate chapter, and C4-C7 in the culinary chapter, carry the follow-up note's source register of 4 November into the chapters that took up its jade perch and raw-preparation material, at that note's read depth.",
+    "not_run": [
+      "make check, which the lead runs on the merged tree.",
+      "Any model, product regeneration or computation beyond the study's tests."
+    ]
+  },
   "base_main_commit": "b7eddacd674270ba8365f82a2d1bd5c3001ca883",
   "checks": {
     "source_manifest": "14 parent-commit SHA256 checks passed; supplementary cold-water README blob verified at the recorded hydrosphere commit.",
@@ -11,6 +38,7 @@
       "command": "make check",
       "result": "PARTIAL: layer check passed; Python suite completed with 4301 passed, 312 skipped, 44 failed; make stopped at test-python.",
       "failure_diagnosis": "43 missing-data/file failures and one process-visibility assertion. All 44 failing test IDs were rerun on an untouched detached worktree at the parent main commit and all 44 failed there too.",
+      "failure_reading": "These 44 failures, and the 290 skips beyond main's count, came from a checkout without the project's ignored inputs, as the diagnosis found; the review of 6 November ran main on the research machine with none failed. The list records that environment.",
       "baseline_failed_test_ids": [
         "atmosphere/tests/test_absorption.py::test_design_case_covers_the_heating_near_the_exobase",
         "atmosphere/tests/test_absorption.py::test_ion_production_falls_with_the_shadow_and_ends_at_the_outer_radius",
@@ -75,13 +103,14 @@
       "Separated dietary mediation from direct habitat/light effects when interpreting matched-diet and matched-ration controls.",
       "Preserved twilight and food-web lag; did not assign a richest-flesh phase.",
       "Replaced a secondary eel overview with primary evidence and explicit unresolved scaling requirements.",
-      "Moved the new author decisions to a linked scoped register to preserve the historical resource model's byte-pinned project decision input."
+      "Moved the session's directions to a linked scoped register (aquatic_decisions.md), to leave the byte-pinned project register unchanged."
     ]
   },
   "not_performed": [
-    "Biological experiments, selective-breeding generations, sensory panels or food-safety validation.",
-    "New coupled food-web, circulation or climate simulations.",
-    "Complete primary-paper methods appraisal for sources explicitly recorded as abstract/excerpt access.",
-    "Founder acquisition, organism introductions or new fisheries allocation."
+    "Biological experiments, breeding generations, sensory panels or food-safety validation.",
+    "New coupled food-web, circulation or climate simulations; the habitats are read from existing products.",
+    "A complete appraisal of methods for sources recorded at abstract or excerpt depth.",
+    "Founder acquisition, introductions or allocation of fisheries.",
+    "The IUCN assessment pages behind A10, A11 and R15, read through secondary sources."
   ]
 }

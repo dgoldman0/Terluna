@@ -1,96 +1,62 @@
-# Aquatic biomes and the environmental basis
+# The waters' habitats and the environmental basis
 
-4 November 2026. Basis for the [aquatic-food study](aquatic_novelty.md), read from
-main `b7eddacd674270ba8365f82a2d1bd5c3001ca883`. Exact source hashes are in
-[aquatic_basis.json](aquatic_basis.json). Values below are inherited model results
-or design choices, not new observations or fishery capacities.
+4 November 2026, revised 7 November 2026. The basis of the [aquatic-food study](aquatic_novelty.md): the habitats each hypothesis needs, read from the project's products, with the identity of every source in [aquatic_basis.json](aquatic_basis.json). The values are inherited model results and design choices, each given with its source and the forcing it ran on.
 
-## Baseline and version boundaries
+## The climate and the products' forcings
 
-| Input | Working basis | Consequence for food research |
+The design climate is the turned design years at the target, and the waters' products ran on earlier forcings. Each habitat value below therefore names the forcing behind it; the waters' studies are rerun on the design climate in the plan's next work, and their values here are the ones to replace then.
+
+| Input | What it gives | How the study reads it |
 |---|---|---|
-| Climate design | 301 K target; latest adopted design years at this main revision give global surface mean 300.84 K, `A28R_301k_design_l15_snow_s934` years 10–19 ([plan](../../plan.md)) | Global surface temperature is not a local sea temperature |
-| Sea thermal/oxygen study | [sea_oxygen](../sea_oxygen/README.md), 18 October: sea surface median 29.6 °C, approximate basin means 25–32.5 °C, on interpolated target-climate forcing | Useful warm-water habitat screen; do not relabel these columns as runs of the latest GCM years |
-| Geography and forthcoming changes | Current main's atlas; the author has chosen an approximately 8° reorientation and deferred coastline changes from water loading to atlas work ([decisions](../../decisions.md)) | Named sites are provisional. Record reference frame, source revision and scenario; refresh locations before detailed stocking maps |
-| Fresh seas | [sea_chemistry](../sea_chemistry/README.md): maintained water near 0.14 g/kg and pH 8.3 | Hard fresh water, chemically different from both chloride seawater and concentrated soda lakes |
-| Essential minerals | [Aquatic plan](../aquatic_biogeochemistry/plan.md): the original managed sink route leaves no magnesium; a retained magnesium floor is unresolved | The old salt total is not proof of a complete physiological medium. Specify Ca, Mg, Na, K, chloride, sulfate, alkalinity and diet mineral provision before trials |
-| Oxygen | Basin-specific column results under alternative mixing/trophic assumptions | Mean oxygen, saturation concentration and the minimum available to a growing fish are distinct quantities |
-| Light and gravity | [shared constants](../../../shared/constants.json), [lunar ecology](../lunar_cycle_ecology/README.md), [sea appearance](../sea_appearance/README.md) | Use the actual 29.53059-day cycle and site-dependent underwater light. Low gravity changes hydrostatic gradients and settling; it does not remove swimming drag |
-| Nutrients and harvest | [Sea phosphorus](../../../resources/sea_phosphorus.md), existing [food accounts](README.md) | Productive local fisheries must fit retained nutrient and oxygen budgets; vast water area alone supplies no harvest estimate |
+| Design climate | The turned design years at the target, `A28R_301k_design_l15_snow_s924_turned_refit` years 10–19: the ground at 301.3 K (mean 301.33), rain of 1.98 mm/day over the globe and 2.19 over the land, drylands on 59.5% of the land (*product*; climate on domain/climate, 4d6d2cfe; [register, 6 November](../../decisions.md#the-design-climate-at-the-target-on-the-turned-moon-its-comfort-and-the-seawater-lakes-6-november-2026)) | The climate every new reading takes. The ground's mean is a global value; water temperatures come from the waters' products below |
+| The Moon's turn | The water's load turns the Moon about 8°: near-side places lie about 8° further south and far-side places north. Rivers and lakes routed on the turned climatology give 33,262 rain-fed lakes over 10.28% of the Moon, against the September climate's 27,865 (*product*; geography/turned on domain/climate, 5145d80f; [register, 7 November](../../decisions.md#the-food-systems-branch-as-ideation-the-registers-pin-the-world-on-the-turned-moon-and-the-sixth-integration-7-november-2026)) | Named sites stay provisional until the atlas round; each site records its frame, scenario and source revision |
+| Seas' temperature and oxygen | [The seas' oxygen](../sea_oxygen/README.md), 18 October: the seas' surface at 29.6 °C in the median and basin means of about 25–32.5 °C, on forcing interpolated to 301 K (*product*) | The warm-water screen for the seas until the rerun |
+| Cold waters | `research/studies/cold_waters` on domain/hydrosphere (1ac9357d), on the design years of 1 November (`A28R_301k_design_l15_snow_s934` years 10–19) and today's orientation: fresh water above about 15 °C everywhere; the deep highland lakes near 21 °C at depth; ponds of 0.5–1 m on the highest ground below 18 °C for 4.5–39 hours at the end of each lunar night; 543 lakes, 220,000 km², whose coldest 3-day air falls below 20 °C (*product*) | The coolest habitat the Moon has. Its lakes are the September climate's 27,865 |
+| Fresh seas' chemistry | [The sea chemistry](../sea_chemistry/README.md): held water near 0.14 g/kg and pH 8.3, calcium–bicarbonate (*product*) | Hard fresh water, chemically distinct from chloride seawater and from soda lakes |
+| Essential ions | The managed route leaves the seas no magnesium; the seas' chemistry is to be worked out on domain/resources with magnesium kept at 0.05–0.5 mmol/kg and calcium at 0.5–2 mmol/kg, which raises 0.14 g/kg to about 0.15–0.21 ([register, 19 October](../../decisions.md#the-design-climate-and-the-waters-19-october-2026)) | Until that study lands, each rearing medium specifies its calcium, magnesium, sodium, potassium, chloride, sulphate and alkalinity, and the diet's minerals |
+| Seawater lakes | `research/studies/seawater_lakes` on domain/hydrosphere (f6fe4026): held terminal lakes in the dry belts, a metre or more below a fresh sea and fed by one channel with a pool fishway and an eel ramp; hollow 547 beside the Near-side Sea recommended (789 km², 40 m mean depth); barramundi realistic in lakes of about 10 km² and 5–10 m or more; every lake screened at the design years' sea surface of 29.5 °C without a lake model (*product*; register, 6 November) | The salt-water habitat for fish that live in the fresh seas and spawn in salt water. Its temperature by depth is open |
+| Underwater light | `research/studies/underwater_light` on domain/hydrosphere (register, 4 November): photosynthetic light to 71 m in the open sea at the equator and 42 m at 75° as a lunar-day dose; just below the surface, light under 1 µmol m⁻² s⁻¹ for 255 hours of each lunar day at the equator, 208 at 45° and 123 at 60°, and never that dark poleward of 65°; no UV-B reaches the water (*product*) | The light exposures for H1 and for the carbonate shores |
+| Gravity and the cycle | [Shared constants](../../../shared/constants.json): the 29.53059-day cycle; a sixth of Earth's gravity changes hydrostatic gradients and settling, and swimming drag is unchanged | Trials run on the actual cycle and the site's light |
+| Nutrients | [Sea phosphorus](../../../resources/sea_phosphorus.md) and the production accounts ([README](README.md#findings), finding 8): the waters' life can spare 21–56 kt of phosphorus a year in all (*product*) | Every harvest fits that budget (below) |
 
-The cold-water study exists on **domain/hydrosphere**, not in this main checkout.
-Its [README at the inspected revision](https://github.com/dgoldman0/Terluna/blob/6ac19391f2728f9a2899f5f4492248653575db67/research/studies/cold_waters/README.md)
-was read as a supplementary result: deep highland lakes near 21 °C, shallow high
-ponds near 17 °C late in the night, with roughly 15 °C possible when unresolved
-cold hours are considered. It uses the newer design years but has lapse-rate,
-local-atmosphere and temporal-resolution limits. It does not justify cold-water
-fish in every deep basin or establish a universal minimum temperature. No
-hydrosphere commits are merged by this study.
+## Basin oxygen
 
-## Basin oxygen: preserve both results and uncertainty
+These are saved-decade mean oxygen concentrations in the deepest tenth of each basin's typical column, in nutrient-poor water, from [the seas' oxygen](../sea_oxygen/README.md) on the 18 October forcing. Saturation sets their ceiling: the design air's 21.2 kPa of oxygen saturates fresh water at 7.66 mg/L at 29.6 °C and 8.94 mg/L at 21 °C, and water of 35 g/kg at 6.32 mg/L at 29.6 °C (*computed* in the review of 6 November with `biosphere/ecology/lake.py`).
 
-These are **saved-decade average oxygen concentrations in the deepest tenth of
-the model's typical column**, in nutrient-poor water. They are not habitat-wide
-minima, species tolerance thresholds or abundance predictions.
-
-| Basin/habitat | Osborn central case, mg/L | Relevant bound or limitation | Food-system use |
+| Basin or habitat | Osborn central case, mg/L | Bound or limit | Use for food |
 |---|---:|---|---|
-| Procellarum | 5.57 | Alternative energetic-mixing case averages at most 1.54 and was not settled | Surface pelagic programme is distinct from conditional deep-slope fisheries |
-| Ingenii | 2.49 | Alternative mixing gives anoxic deep water | Surface/upper-water habitats first; no automatic deep predator allocation |
-| Nubium | 5.93 | Alternative energetic form not run here | Oxygenated slope candidate pending profiles and extremes |
-| Humboldtianum | 5.87 | Alternative energetic form not run here | Cooler warm-water basin comparison, not a salmon analogue |
-| Fecunditatis | 5.22 | Alternative energetic form not run here | Shallow/coastal and conditional slope comparison |
-| Western Procellarum shallows | 6.30 | Local productivity can increase bottom oxygen demand | Leading carbonate/prey-community test setting |
-| Smythii | 0.55 | Even the central nutrient-poor deep case is severely oxygen-limited | Warm upper-water and shore study; exclude the deep typical column from initial food-fish habitats |
+| Procellarum | 5.57 | The alternative energetic mixing averages at most 1.54 and was not settled | A surface pelagic programme, with deep-slope fisheries conditional on the mixing |
+| Ingenii | 2.49 | Alternative mixing leaves the deep water anoxic | Surface and upper-water habitats first |
+| Nubium | 5.93 | Alternative energetic form not run | An oxygenated slope candidate, pending profiles and extremes |
+| Humboldtianum | 5.87 | Alternative energetic form not run | A cooler warm basin, for comparison |
+| Fecunditatis | 5.22 | Alternative energetic form not run | Shallow, coastal and conditional slope comparisons |
+| Western Procellarum shallows | 6.30 | Local productivity can raise the floor's oxygen demand | The leading setting for carbonate and prey-community tests |
+| Smythii | 0.55 | Even the nutrient-poor central case is severely short of oxygen at depth | Warm upper water and shores; the deep typical column stays out of the first habitats |
 
-Values and qualifications are from [sea_oxygen](../sea_oxygen/README.md), including
-the unsettled Procellarum alternative. Cooler basin ends can have different oxygen
-than the typical cells. The column model can also produce short surface oxygen
-crashes during overturn; a model that mixes an entire basin simultaneously is
-not a resolved three-dimensional event. A food organism needs sufficient oxygen
-for feeding, growth and reproduction, not merely survival through a mean value.
+The cooler ends of a basin can hold different oxygen from its typical cells, and the column model makes short surface crashes during overturn that a three-dimensional basin would spread over time and space. A food organism needs oxygen enough for feeding, growth and reproduction at the depth it occupies through the whole cycle, and the minimum it meets lies below a decade's mean.
 
-## Biomes to trophic roles and dishes
+## Habitats, food webs and dishes
 
-| Biome | Basal resources and community to evaluate | Candidate culinary niche | Principal gate |
+| Habitat | Basal resources and community to evaluate | Culinary niche | Principal gate |
 |---|---|---|---|
-| Nutrient-poor pelagic sea, productive edges | Phytoplankton and microbial loop → zooplankton → small fish; predators only after the prey budget | H1 cyclic rich small fish; later larger fillet fish; cooked whole fish and qualified raw portions | Underwater light, actual prey continuity, reproductive thermal limits, trophic export |
-| Clear carbonate coast, tufa/marl structures and shellfish beds | Attached algae, biofilms, invertebrates, molluscs and grazers; structure may include mineral substrate rather than animal-built reef | H3 pale fish, edible crustaceans, selected bivalves, local grilled and steamed foods | Essential ions, habitat persistence, suspended food, night oxygen and biodeposition |
-| Lake/river margins and vegetated deltas | Detritus, insects, plants, invertebrates and small fish, with controlled nutrient loads | Catfish, eel where recruitment is solved, rich cooked fillets, broth; feeder source for other habitats only if sustainable | Off-flavor, flood/recruitment cycles, sediment contaminants and oxygen minima |
-| Moderately mineral-concentrating lake | Chemically characterized mixed food web with moderate carbonate/bicarbonate, evaluated separately from chloride salinity | H2 sweet/savory fish or prawns; springy cooked flesh; possible qualified raw finfish | Independent pH/alkalinity/ion effects, acclimation and full life cycle |
-| Extreme soda lake | Specialist microbial producers, grazers and alkali-adapted fish only where measured tolerances permit | Mechanistic comparison, possible small specialist foods after evidence | Small body size, ion exclusion, nitrogen metabolism, conservation and source ecology; no generic shellfish farm |
-| Highland lake and night-cooled pond | The modeled warm-to-mildly-cool exposure, with lake depth and shading specified | Regional texture/diet comparisons; a refuge from the hottest shore conditions | Entire cycle including warm days, not the coldest pond reading alone |
-| Controlled hatchery/grow-out/finishing | Known broodstock, feeds and water treatment; saline larval system where needed | Reliable culinary reference, lineage comparisons, qualified raw/cooked products | Complete nutrient/feed/energy accounting, isolation of treatments and monitoring |
+| Nutrient-poor pelagic sea with productive edges | Phytoplankton and the microbial loop, zooplankton, small fish; predators only after the prey budget | H1's cyclically rich small fish; later larger fillet fish; cooked whole fish and [qualified](aquatic_novelty.md#terms) raw portions | Underwater light, the continuity of prey, thermal limits on reproduction, export of the harvest's nutrients |
+| Clear carbonate coast, tufa and marl structures, shellfish beds | Attached algae, biofilms, invertebrates, molluscs and grazers, on mineral or living structure | H3's pale fish, edible crustaceans, selected bivalves, local grilled and steamed foods | Essential ions, the habitat's persistence, suspended food, night oxygen, biodeposition |
+| Lake and river margins, vegetated deltas | Detritus, insects, plants, invertebrates and small fish under controlled nutrient loads | Catfish, eel, rich cooked fillets, broth | Off-flavour, flood and recruitment cycles, contaminants in sediment, oxygen minima |
+| Moderately mineral-concentrating lake | A mixed food web of measured chemistry, moderate in carbonate and bicarbonate, kept distinct from chloride salinity | H2's sweet and savoury fish or prawns; springy cooked flesh; qualified raw finfish | The separate effects of pH, alkalinity and ions; acclimation; the full life cycle |
+| Soda lake | Specialist microbial producers, grazers and alkali-adapted fish where measured tolerances permit; the soda lakes are their own local ecosystems ([register, 15 October](../../decisions.md#soda-lakes-15-october-2026)) | Comparisons of mechanism; small specialist foods if the evidence and that row allow | Small bodies, ion exclusion, nitrogen excretion at pH near 10, conservation of the source species |
+| Held seawater lake | Seawater of Earth's make-up, 35 g/kg at a pH near 8.1, in a terminal lake below a fresh sea, with a brackish reach of about 13–17 psu at the fishway's mouth | Fish that live in the fresh seas and spawn in salt water: eel (`eel_habitat_hatchery.md`), barramundi | The salt's upkeep, the spawning layer's temperature, larval food in a productive nursery |
+| Highland lake and night-cooled pond | Deep lakes near 21 °C at depth under a warmer surface; ponds of 0.5–1 m dipping below 18 °C at the night's end | Regional comparisons of texture and diet; adult habitat for the most warmth-tolerant cold-water fish (`sturgeon_habitat_foods.md`) | The whole cycle, warm days included: a 30 m lake's surface averages 26.7 °C |
+| Hatchery, closed grow-out and finishing | Known broodstock, feeds and water treatment; saline larval water where needed | Reference products, comparisons of lines, qualified raw and cooked products | Complete accounts of nutrients, feed and energy; separate treatments; monitoring |
 
-The first field map should be a **habitat eligibility map**, with unmeasured cells
-left unknown. For each cell or site record: coordinate frame and scenario;
-temperature range by depth and phase; oxygen duration below life-stage criteria;
-light spectrum/PAR and attenuation; pH, alkalinity and individual ions;
-hydraulic residence and connections; primary/prey production; substrate and
-sediment load; harvest access and chilling delay. A single water-body mean cannot
-stand in for these exposures.
+The first field map is a map of habitat eligibility, with unmeasured cells left unknown. Each cell or site records its frame and scenario; temperature by depth and phase; the hours of oxygen below each life stage's criterion; light spectrum, photosynthetic light and attenuation; pH, alkalinity and the individual ions; hydraulic residence and connections; primary and prey production; substrate and sediment load; and harvest access and the delay before chilling. A water body's mean stands in for none of these exposures.
 
-## Budgets that keep the portfolio coherent
+## The accounts that bound a harvest
 
-Maintain four linked accounts for each site and farm:
+Four linked accounts, kept for each site and each farm, hold the portfolio together.
 
-1. **Carbon and food:** production, respiration, prey grazing, fish maintenance,
-   reproduction, edible harvest and all imported feed. Lipid content changes the
-   energy density of prey; it does not create additional carbon or energy.
-2. **Oxygen and wastes:** community respiration throughout the light cycle,
-   atmosphere/water exchange, circulation, sediment oxygen demand, methane and
-   nitrogen by-products. Filter feeding shifts particles into feces and
-   pseudofeces as well as animal tissue.
-3. **Nutrients and minerals:** phosphorus and nitrogen in all feed, living biomass,
-   food, shell/nacre, feces, sediment and return flows; calcium and magnesium
-   tracked separately. Shells returned or dissolved are not permanent mineral
-   removal, and a harvested pearl mussel cannot also remain a living filter.
-4. **Recruitment:** broodstock, spawning/larval habitat, host fish when required,
-   nursery survival and return of the breeding population. Edible adults in
-   suitable water do not demonstrate a self-sustaining population.
+1. **Phosphorus and nitrogen.** The waters' life can spare 21–56 kt of phosphorus a year in all, 1.4–3.7 kt of it from the common-level waters, and the rain-fed lakes keep 96% of the land's phosphorus (*product*; finding 8). Fed eel at 1 kg cooked a person a year for 8 billion people would release 167 kt a year of feed phosphorus the fish do not retain, three to eight times that (*computed* in the review; [register, 6 November](../../decisions.md#the-food-systems-branchs-evaluation-wild-lines-from-earth-stock-the-eels-seawater-spawning-and-organisms-crossing-between-worlds-6-november-2026)), so fed fish grow in closed systems whose effluent returns to the land, and open-water harvests take only what the waters feed; the eel chapter carries the current per-person cases. Aquaponic fish emit 0.8–1.9% of their feed's nitrogen as N2O (finding 9), which has no sink in the design air. The toxic, un-ionized share of ammonia rises with pH and warmth: at 29.6 °C it is 0.8% of ammonia nitrogen at pH 7, 13.5% at the held seas' pH 8.3 and 89% at a soda lake's pH 10 (*computed* in the review).
+2. **Oxygen and wastes.** Community respiration through the 708.7-hour cycle, exchange with the air, circulation, sediment oxygen demand, methane and nitrogen by-products. Saturation caps the fresh seas at 7.66 mg/L at 29.6 °C; the basins' deepest tenth keeps 0.55–6.30 mg/L (above), and that of the deep, nutrient-poor lakes 3.5–6.3 mg/L ([register, 19 October](../../decisions.md#the-design-climate-and-the-waters-19-october-2026)). Fed fish pens in a Chinese lake emit 40 g of methane a square metre a year above open water (Pu et al. 2023, in finding 8). Filter feeders move particles into faeces and pseudofaeces as well as into tissue.
+3. **Minerals.** Calcium and magnesium are tracked separately. The held seas already take 150 Mt of calcite a year by calcifiers and 282 Mt of opal by silica-building life, and biology makes magnesium carbonate readily only in alkaline, magnesium-rich water (register, 19 October). A shell returned or dissolved leaves the sink, and a harvested pearl mussel leaves the filter.
+4. **Recruitment.** Broodstock, spawning and larval habitat, host fish where needed, nursery survival and the return of breeders. Adults in suitable water show a habitat; a population that recruits on its own needs every stage. On the Moon that means, for instance, a seawater nursery that holds the eel's eggs and larvae over four to nine lunar days (seawater lakes), and spawning water for sturgeon colder than any open fresh water reaches (cold waters; register, 6 November).
 
-The earlier fish-equivalent phosphorus ceilings and broad aquaculture accounts
-are screening constraints, not quotas that may be added together for every
-candidate. New local feed or phosphorus delivery changes the inflow account and
-the oxygen/greenhouse-gas burden. The author’s nutrient-poor open-water direction
-remains the basis; productive margins and contained culture are separate cases.
+The fish-equivalent phosphorus limits of the earlier food work are screening limits shared by every candidate, and a new feed or delivery of phosphorus changes both the inflow account and the oxygen and greenhouse-gas burden. The waters' trophic design holds the open water nutrient-poor, with productive habitats at the deltas, shelves, lake margins and farms (register, 19 October).

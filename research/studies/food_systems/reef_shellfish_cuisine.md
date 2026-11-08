@@ -1,176 +1,101 @@
-# Carbonate shores, shellfish and the butterfish hypothesis
+# Carbonate shores, shellfish and the butterperch
 
-4 November 2026 · H3 literature screen and proposed experiments. No lunar organism, culinary phenotype, carrying
-capacity or food-safety outcome has been demonstrated. Candidate introductions below are a research shortlist.
+4 November 2026, revised 7 November 2026. H3 within the [aquatic-food study](aquatic_novelty.md): a screen of Earth literature and proposed experiments on carbonate habitats and their food webs, the founders that could use them, and the cooked foods that share those founders. The founders form a research shortlist for contained trials.
 
-## Biome to food web
+## From habitat to food web
 
-The [aquatic programme](../aquatic_biogeochemistry/plan.md) already proposes stonewort meadows, microbial carbonate
-structures, shellfish beds and grazers in suitable shallows. Its maintained-sea reference is approximately 29.6 °C,
-pH 8.32 and 0.142 g/kg dissolved salts. These are model conditions to refine against the current basin products;
-they are neither universal coastal conditions nor a complete animal-rearing recipe. In particular, the reference
-box's zero magnesium cannot be treated as a nutritionally adequate design for every organism.
+The [aquatic programme](../aquatic_biogeochemistry/plan.md) proposes stonewort meadows, microbial carbonate structures, shellfish beds and grazers in suitable shallows, with a maintained-sea reference near 29.6 °C, pH 8.32 and 0.142 g/kg of dissolved salts. These are model conditions to refine against the basins' products and the design climate. The reference leaves the seas no magnesium, and the seas' chemistry is to be worked out with magnesium kept at 0.05–0.5 mmol/kg ([register, 19 October](../../decisions.md#the-design-climate-and-the-waters-19-october-2026)), so until then each organism's magnesium need is specified on its own. Water as clear as the open sea's lights 171,000–325,000 km² of sea floor for stoneworts, over today's frame and the turned Moon's, against the programme's 140,000–380,000 km² of meadow (underwater light study; register, 4 November).
 
-Freshwater carbonate structures have Earth precedents. Yanez-Montalvo et al. measured microbialites, their microbial
-communities and hydrochemistry in five Yucatan waters, including Bacalar [R1]. This supports investigating living
-carbonate habitat in warm freshwater. It does not establish a transplanted marine coral reef, an edible microbial
-community, or a mechanism producing buttery fish.
+Freshwater carbonate structures have Earth precedents: Yanez-Montalvo et al. measured microbialites, their microbial communities and the hydrochemistry in five waters of the Yucatán, Bacalar among them [R1]. They support investigating living carbonate habitat in warm fresh water, and the edible community and any buttery fish are what the trials test.
 
-Three related habitats deserve separate treatments:
+Three related habitats get separate treatments:
 
-| Proposed habitat | Food-web pathway | Candidate harvest and possible signature | Main ecological test |
+| Habitat | Food-web pathway | Harvest and possible signature | Main ecological test |
 |---|---|---|---|
-| Clear, flushed carbonate shelf | Periphyton and plankton → small grazers and crustaceans → omnivorous fish | Pale fish with a distinctive prey-derived lipid profile; selected raw preparations or delicate cooked fillets | Does the community remain productive through the night without stripping nutrients or depressing bottom oxygen? |
-| Productive inlet with managed bivalve beds | Suspended food → bivalves; biodeposits → benthic consumers | Cooked shellfish, selected fish, nacre and pearls as separately accounted products | Filtration, sediment oxygen demand and loss of plankton available to fish |
-| Connected vegetated backwater and pond margin | Plants, detritus and invertebrates → crayfish and omnivorous fish | Crayfish tails, rich skin-on grilled fish and kabayaki-style products | Sediment disturbance, ammonia, predator pressure and escape into adjoining habitats |
+| Clear, flushed carbonate shelf | Periphyton and plankton, small grazers and crustaceans, omnivorous fish | Pale fish with a distinctive prey-derived lipid profile; selected raw preparations or delicate cooked fillets | Does the community stay productive through the night without stripping nutrients or depressing the floor's oxygen? |
+| Productive inlet with managed bivalve beds | Suspended food to bivalves; biodeposits to benthic consumers | Cooked shellfish, selected fish, and nacre and pearls as separately accounted products | Filtration, the sediment's oxygen demand and the plankton lost to fish |
+| Connected vegetated backwater and pond margin | Plants, detritus and invertebrates, to crayfish and omnivorous fish | Crayfish tails, rich skin-on grilled fish and kabayaki-style products | Disturbed sediment, ammonia, predation and escape into neighbouring habitats |
 
-These are habitat mosaics. Dense food production should not be assumed compatible with every slowly growing
-microbialite or pearl bed. Retain lightly harvested reference patches and place intensive grow-out where exchange,
-food and waste recovery can support it. Local oxygen minima over the lunar cycle determine admission; a basin's
-surface mean or deepest-tenth oxygen value cannot alone certify a shallow farm.
+These habitats form mosaics. Dense food production and slow-growing microbialites or pearl beds need their own places: lightly harvested reference patches are kept, and intensive grow-out goes where water exchange, food and the recovery of waste can carry it. The oxygen minima over the lunar cycle decide admission, since a basin's surface mean or deepest-tenth value says little about a shallow farm.
 
-## Founder shortlist and the full life cycle
+## Founders and the full life cycle
 
-All culinary entries are proposed uses to evaluate. The shortlist deliberately includes species already reproduced
-in freshwater, alongside valuable comparators needing a saline hatchery. A grow-out animal's freshwater tolerance
-does not establish a self-replacing wild population.
+The shortlist pairs species already reproduced in fresh water with valuable comparators that spawn in salt water. Grow-out in fresh water shows a habitat for adults; a population that replaces itself needs every stage.
 
-| Earth founder | Place and role in the study | Culinary direction | Constraint that must be resolved |
+| Earth founder | Place and role in the study | Culinary direction | What must be resolved |
 |---|---|---|---|
-| Jade perch, *Scortum barcoo* | First fish for controlled productive-margin trials; omnivore able to use invertebrate and plant pathways [R2] | Pale fatty fillets; belly versus loin; grilled skin-on portions; raw evaluation only after separate qualification | Riverine founder, with reef use untested; oxygen and feed control, off-flavors, full-cycle lunar lighting |
-| Barramundi, *Lates calcarifer* | White-flesh predator comparator in freshwater grow-out [R5] | Firm fillets, steaming, grilling and a conditional raw-quality comparator | Established hatchery route includes saline reproduction; keep separate from a freshwater-only wild-founder claim; prey/feed demand |
-| Pearl mussel, *Sinohyriopsis cumingii* (often *Hyriopsis cumingii* in literature) | Filtration, habitat, pearl and nacre line; edible tissue is a separately evaluated coproduct | Cooked meat only if food quality and contaminant tests support it | Compatible fish hosts for glochidia [R6], food supply, bottom oxygen, contaminant accumulation and harvest conflicts |
-| Redclaw crayfish, *Cherax quadricarinatus* | First crustacean for sheltered freshwater ponds and bounded habitat trials | Poached or grilled tails; cooked sushi toppings; shell stock where qualified | Molting refuges, cannibalism, photoperiod-dependent reproduction, warm-end stress and escape [R7, R8] |
-| Giant river prawn, *Macrobrachium rosenbergii* | High-value freshwater grow-out comparator; links to [alkaline foods](alkaline_foods.md) | Cooked sweet, firm tails; chemistry and texture comparison | Larvae require brackish water; FAO describes separate inland hatcheries [R9]. A freshwater sea lacks that reproductive habitat |
-| African catfish, *Clarias gariepinus* | Managed backwater/pond comparator with established seed production [R10] | Proposed boneless, skin-on kabayaki-style fillets and smoked or braised products | Sensory comparison with eel remains to be done; predation, dispersal, off-flavors and sediment effects need containment trials |
-| Japanese eel, *Anguilla japonica* | Dedicated full-cycle aquaculture line; cooked-food comparator | Actual unagi: grilled, glazed or steamed-and-grilled | Saline larval culture, maturation and larval feeding are substantial infrastructure needs; no autonomous freshwater-sea reproduction is assumed [R11] |
+| Jade perch, *Scortum barcoo* | The first fish for controlled trials on productive margins; an omnivore that uses invertebrate and plant pathways [R2] | Pale fatty fillets; belly against loin; grilled skin-on portions; raw evaluation once [qualified](aquatic_novelty.md#terms) | A riverine founder whose use of carbonate habitat is untested; oxygen and feed control, off-flavours, lighting over the full lunar cycle |
+| Barramundi, *Lates calcarifer* | A white-fleshed predator for comparison in freshwater grow-out [R5] | Firm fillets, steaming, grilling, a raw-quality comparator | It spawns in salt water; a held seawater lake of about 10 km² and 5–10 m deep or more could hold its spawning (seawater lakes; [register, 6 November](../../decisions.md#the-design-climate-at-the-target-on-the-turned-moon-its-comfort-and-the-seawater-lakes-6-november-2026)); a predator's demand for prey or feed |
+| Pearl mussel, *Sinohyriopsis cumingii* (often *Hyriopsis cumingii* in the literature) | Filtration, habitat, and a line for pearls and nacre; its edible tissue is a separately evaluated coproduct | Cooked meat if food quality and contaminant tests support it | Compatible fish hosts for its glochidia [R6], food supply, the floor's oxygen, accumulated contaminants, competing harvests |
+| Redclaw crayfish, *Cherax quadricarinatus* | The first crustacean for sheltered freshwater ponds and bounded habitat trials | Poached or grilled tails; cooked sushi toppings; shell stock | Moulting refuges, cannibalism, reproduction tied to photoperiod, escape; its best growth at 26–29 °C [R7] sits just below the seas' 29.6 °C median |
+| Giant river prawn, *Macrobrachium rosenbergii* | A high-value freshwater grow-out comparator, linked to [alkaline foods](alkaline_foods.md) | Sweet, firm cooked tails; comparisons of chemistry and texture | Its larvae need brackish water, which FAO's manual supplies in separate inland hatcheries [R9], so the line breeds in hatcheries |
+| African catfish, *Clarias gariepinus* | A comparator for managed backwaters and ponds, with established seed production [R10] | Boneless, skin-on kabayaki-style fillets; smoked or braised products | A sensory comparison with eel; predation, dispersal, off-flavours and effects on sediment, tested in containment |
+| Japanese eel, *Anguilla japonica* | A dedicated line for unagi from captive-bred founders; Endangered on the IUCN Red List since 2014 [R15] | Grilled, glazed or steamed-and-grilled unagi | Maturation without hormones; spawning in a held seawater lake, the leading route; eggs that hatch at 19–28 °C with none at 31 °C, against seas near 29.6 °C ([register, 6 November](../../decisions.md#the-food-systems-branchs-evaluation-wild-lines-from-earth-stock-the-eels-seawater-spawning-and-organisms-crossing-between-worlds-6-november-2026); `eel_habitat_hatchery.md`) |
 
-The warm freshwater founders are useful because they offer existing biology for breeding. Their ecological
-compatibility still requires evidence. Keep introductions confined initially and record competition, predation,
-hybridization opportunities, parasites and movement between waters. Earth ancestry and conventional breeding do not
-by themselves make a lineage harmless if it reaches another biome or returns to Earth.
+The warm freshwater founders bring biology that breeding can work with, and their ecological fit is tested in contained trials that record competition, predation, hybridization, parasites and movement between waters. Every line meant to live wild meets the rules for what lives wild ([aquatic foods](aquatic_novelty.md#wild-lines-and-the-rules-for-what-lives-wild)), and a line bred from Earth stock has its effects assessed wherever it could reach, on the Moon or back on Earth, since organisms will cross between the worlds.
 
-### Why jade perch is a particularly useful starting point
+### Jade perch as the first test animal
 
-Its feeding ecology already includes small crustaceans and molluscs [R2]. More directly relevant to cuisine, Song et
-al. found that increasing dietary lipid increased muscle lipid in juvenile jade perch [R3]. That is evidence that
-the edible compartment can respond to food composition. It supports a feeding-and-breeding experiment, while leaving
-the adult sensory result, fine marbling, fat melting behavior and lunar-cycle response open.
+Jade perch eats small crustaceans and molluscs among its foods [R2]. In Song et al.'s 60-day trial on juveniles, muscle lipid rose with dietary lipid; the groups' muscle held roughly 24–28% lipid by dry mass, about 7.2–9.8 g of fat per 100 g of fresh muscle (*derived* from the groups' mean lipid and dry-matter fractions) [R3]. The edible compartment answers to food, which supports a feeding-and-breeding experiment, while adult eating quality, fine marbling, melting behaviour and the response to the lunar cycle remain the questions; a bulk lipid measurement counts fat between muscle bundles and droplets within cells together.
 
-Elhag et al. separately measured fatty acids in different edible and inedible tissues [R4]. This reinforces the need
-to sample belly, loin, skin and viscera separately. Neither total body fat nor a favorable whole-fish omega-3 claim
-is an adequate proxy for a desirable sashimi cut. A high-fat fish can also produce an oily, oxidized or poorly
-textured product; maximizing fat alone is not the selection objective.
+The fish keeps distinct abdominal reserves beside its muscle lipid, and its skin and head hold substantial fatty acids, one comparison finding the highest omega-3 concentrations there [R4]. Belly, loin, skin and viscera are therefore sampled separately: fat around the organs is a different product from belly muscle, and whole-fish composition says little about a served cut. Its genome carries fatty-acid desaturase and elongase genes [R16], and in feeding trials it made long-chain omega-3 and omega-6 fatty acids from dietary precursors, strongly shaped by the feed [R17]. Linseed oil gave the least long-chain omega-3 in the fillet and slightly slower growth than fish oil; a mixture of *Schizochytrium* and linseed matched fish oil's growth and deposited DHA efficiently; four weeks of that finishing diet moved the fillet towards the fish-oil fillet without lowering its sensory scores, and fourteen weeks lowered them. Diet composition and duration are tested together, and a higher omega-3 reading is a chemical measurement whose flavour is tested on its own. A finishing diet changes flesh chemistry and leaves infections acquired earlier in life in place. Fasting changes the fish's energy metabolism and antioxidant defences [R18], so the lunar night enters the trials as measured prey, light and oxygen, with withheld feed as a separate treatment.
 
-The proposed “carbonate-reef butterperch” is therefore a working culinary phenotype, not a taxon. A selected jade-perch
-line is the first practical test animal, while a stable reef-associated population remains a separate ecological
-question. Feeding on sweet shellfish does not imply that the predator retains shellfish sweetness: digestion and
-metabolism intervene. Measure free amino acids and nucleotides in its flesh rather than inferring taste from prey.
+The butterperch is a working culinary phenotype: a selected jade perch line is its first test animal, and a stable population on carbonate shores is a separate ecological question. Its loin would be evaluated as thin sashimi or nigiri, its belly as richer nigiri and its intermediate cuts as sashimi or lightly cured products, each once qualified, with fine fat distribution, clean aroma, slice integrity and a pleasant finish as the selection objectives; total fat or omega-3 alone would be an inadequate objective, since a high-fat fish can be oily, oxidized or poorly textured. A predator that eats sweet shellfish need not taste sweet, because digestion and metabolism intervene, so free amino acids and nucleotides are measured in its own flesh.
 
-## Shellfish connect food and mineral work, with tradeoffs
+## Shellfish join food and mineral work, with trade-offs
 
-Preserve the aquatic programme's separation between wild beds, pearl/nacre farms and bulk mineral producers. Its
-shellfish are primarily calcium-carbonate producers; magnesium sequestration has its own microbial/mineral pathway.
-Shell material becomes a sustained mineral sink only to the extent that it is retained in lasting products or
-burial. Dissolution and processing returns belong in the balance.
+The aquatic programme separates wild beds, pearl and nacre farms and bulk mineral producers. Its shellfish mainly make calcium carbonate, and magnesium has its own microbial and mineral pathway. Shell becomes a lasting mineral sink only where it is kept in lasting products or buried, and its dissolution and the returns from processing belong in the balance.
 
-For *S. cumingii*, the first breeding gate is successful metamorphosis with appropriate host fish and subsequent
-recruitment. A 2017 host experiment examined glochidial development on fish gills [R6]. It supplies a reason to test
-host identity explicitly; it does not license assuming that jade perch, barramundi or any chosen lunar fish is a
-compatible host. Retain separate host and food-fish cohorts if their husbandry requirements conflict.
+For *S. cumingii* the first breeding gate is metamorphosis on a suitable host fish and the recruitment that follows. A 2017 host experiment examined glochidial development on fish gills [R6], which is reason to test host identity explicitly; jade perch, barramundi or any other fish chosen for the Moon becomes a host only once shown compatible. Host and food-fish cohorts stay separate where their husbandry conflicts.
 
-The earlier programme cites a pearl-deposition temperature study as support for warm-water nacre production.
-That endpoint must not be promoted to an optimum for lifelong survival, fecundity, meat quality or lunar-night
-performance; the original study still needs a full methods appraisal [R13].
+The programme cites a study of pearl deposition against temperature for warm-water nacre [R13]. Its optimum applies to deposition, and lifelong survival, fecundity, meat quality and performance through the night each need their own evidence, after a full reading of the study's methods.
 
-Redclaw offers a simpler freshwater reproductive starting point. Queensland's account gives natural pond breeding
-and an optimal growth range of 26–29 °C [R7]; a primary hatchery study achieved reproduction under a 14:10-hour light
-cycle [R8]. Both are encouraging near the design climate, and neither validates a two-week night. The warmest sites
-and poorly ventilated bottoms may be unsuitable even if annual mean temperature looks favorable.
+Redclaw is the simpler freshwater start. Queensland's account gives natural breeding in ponds and best growth at 26–29 °C [R7], and a hatchery study achieved reproduction under a 14:10-hour light cycle [R8]. The seas' surface median of 29.6 °C lies just above that range, so the warmest sites and poorly ventilated floors are screened out, and a 354-hour night is a condition the trials test.
 
-Track each cohort's tissue growth, edible fraction, shell growth, excretion and biodeposition. Harvesting a shellfish
-for food, retaining it for pearls, and feeding it to a fish are competing uses of that individual. Fish and shellfish
-also share the [phosphorus ceiling](../../../resources/sea_phosphorus.md): prey consumed by a predator cannot be
-counted again as human harvest. Supplemental feeds import nutrients into the farm ledger. Clearer water after
-filtration is not proof of greater net food production.
+Each cohort's tissue growth, edible fraction, shell growth, excretion and biodeposition are tracked. Harvesting a shellfish for food, keeping it for pearls and feeding it to a fish are competing uses of one animal. Fish and shellfish also share the waters' phosphorus: the waters' life can spare 21–56 kt a year in all, which holds sea farms to the animal part of the diet for 0.04–0.26 billion people (the production accounts' [finding 8](README.md#findings)), and prey a predator eats is never counted again as human harvest. Supplemental feed imports nutrients into the farm's account, and clearer water after filtration measures filtration, while net food production is measured on its own.
 
-## The cooked branch has its own breeding objectives
+## Cooked foods have their own breeding objectives
 
-Unagi deserves a dedicated line even if it never becomes a wild freshwater fishery. Japanese eel's life cycle was
-closed experimentally in captivity; Nomura et al. then demonstrated heritable variation in larval metamorphic
-traits [R11]. This is directly relevant to selection using pedigrees and genetic analysis. Their larvae were reared
-in seawater. For Terluna, the proposed feasibility gate is to quantify larval survival, development time, feed
-production and hatchery cost before assigning a production scale. A saline hatchery is a plausible development
-path, with imported salts, energy and effluent recovery explicitly costed.
+Unagi gets a dedicated line, whatever the eel's prospects as a wild fishery. The Japanese eel's life cycle has been closed in captivity, and Nomura et al. found heritable variation in its larval metamorphic traits [R11], which suits selection with pedigrees and genetics; their larvae were reared in seawater. The eel's route on the Moon, a migration from the fresh seas to spawn in a held seawater lake, and its hatchery, feed and costs are in `eel_habitat_hatchery.md`.
 
-For a nearer-term freshwater-only route, test catfish and jade-perch fillets with the same glaze, steaming and
-grilling sequence used for the eel comparator. Label the result by its actual species and as *kabayaki-style*.
-Select for skin integrity, edible yield, gelatinous mouthfeel after heating, fat retention, boning effort and
-reheating quality. A fish less attractive raw may excel here; heat changes which tissue properties are useful.
-These are proposed sensory targets, not findings that catfish already duplicates eel.
+For a route in fresh water alone, catfish and jade perch fillets go through the same glaze, steaming and grilling sequence as the eel comparator, labelled by species and as kabayaki-style. The selection targets are skin integrity, edible yield, a gelatinous mouthfeel after heating, fat retention, the work of boning and quality on reheating. A fish less attractive raw may excel here, since heat changes which tissue properties matter, and whether catfish can stand beside eel is what the sensory comparison finds.
 
-Use three product tracks: qualified raw preparations, thoroughly cooked preparations, and material/ecological
-production without a food claim. FDA's hazard framework distinguishes parasites, harvest-area pathogens, toxins
-and chemical contaminants [R14]. Validated freezing or cooking addresses particular hazards; neither rescues every
-contaminated catch. Bivalve filtration can concentrate hazards. Surface searing, curing and a clean smell do not
-establish a raw product's safety. Cooked sushi toppings remain part of the food programme rather than a failed raw
-product.
+The study keeps three product tracks: qualified raw preparations, thoroughly cooked preparations, and material or ecological production with no food claim. FDA's hazard framework separates parasites, pathogens from the harvest area, toxins and chemical contaminants [R14]. A validated freezing or cooking process controls particular hazards, while natural toxins and chemical contaminants survive both; bivalve filtration can concentrate hazards, and searing, curing or a clean smell leave a raw product's safety to be shown. Cooked sushi toppings are part of the food programme in their own right.
 
-## Experiments that distinguish a lunar food web from ordinary feeding effects
+## Experiments that separate a lunar food web from ordinary feeding
 
-Start with separate species trials; combine communities only after identifying viable conditions and complete
-reproductive cycles. The following design is a proposal. No effect size, sample size or harvest window has yet
-been established.
+Separate species trials come first, and communities are combined once viable conditions and complete reproductive cycles are known. Effect sizes, sample sizes and harvest windows come from the pilots.
 
-1. **Founder and habitat screen.** Use documented, genetically characterized source families. Test current coastal
-   chemistry, temperature and oxygen traces, including night minima and a realistic magnesium supply. Measure
-   survival, behavior, feeding, growth and reproduction. Keep a standard aquaculture control. Repeated stress or
-   reproductive failure disqualifies a habitat assignment even when the animals survive.
-2. **Separate structure from nutrition.** Compare equal-area bare controls, inert habitat with matched geometry,
-   and living carbonate habitat. A controlled-feeding series holds diet and ration constant; a food-web series
-   measures the prey each habitat actually produces. This distinguishes shelter/exercise effects from altered diet.
-3. **Test prey chemistry.** Rear split-family jade perch on matched-energy, matched-protein diets representing
-   pelagic prey, cultured benthic prey and a conventional control. Measure digestible intake and actual fatty-acid
-   delivery; a “reef diet” label is insufficient. Add the lunar versus Earth light treatment only with tank-level
-   replication and phase-resolved prey measurements. Avoid confounding light with chronic underfeeding.
-4. **Measure the product.** Sample anatomically matched loin, belly, skin and liver at standardized size, sex,
-   reproductive state and postharvest interval. Quantify lipid classes, fatty acids, thermal transitions, free
-   amino acids, IMP and its degradation products, collagen, firmness, water holding, freeze/thaw loss and oxidation.
-   Test geosmin and 2-MIB alongside blind sensory evaluation. Pair raw-qualified and cooked cuts from the same fish.
-5. **Select and retest.** Estimate family and genotype-by-environment effects using parentage and genomic relatedness.
-   Retain an unselected reference and genetic diversity. Advance lines only when replicated progeny show the desired
-   edible-tissue improvement with acceptable growth, fertility, health and resource demand. A feeding effect in one
-   cohort is not a breeding response.
+1. **Founder and habitat screen.** Documented, genetically characterized source families are tested in the coasts' chemistry, temperature and oxygen traces, night minima and a realistic magnesium supply included, against a standard aquaculture control. Survival, behaviour, feeding, growth and reproduction are measured. Repeated stress or failed reproduction disqualifies a habitat assignment even when the animals survive.
+2. **Structure separated from nutrition.** Equal-area bare controls, inert habitat of matched geometry and living carbonate habitat are compared. A controlled-feeding series holds diet and ration constant, and a food-web series measures the prey each habitat produces, which separates the effects of shelter and exercise from those of diet.
+3. **Prey chemistry.** Split families of jade perch are reared on diets matched for energy and protein that represent pelagic prey, cultured benthic prey and a conventional control, with digestible intake and the fatty acids actually delivered measured, since a "carbonate-shore diet" is defined by its composition. Lunar against Earth light enters only with replication at the tank level and prey measured through the phases, so that light is never confounded with chronic underfeeding.
+4. **The product measured.** Anatomically matched loin, belly, skin and liver are sampled at standard size, sex, reproductive state and interval after harvest. The panel covers lipid classes, fatty acids, thermal transitions, free amino acids, IMP and its breakdown products, collagen, firmness, water holding, loss on freezing and thawing, oxidation, geosmin and 2-MIB, beside blind sensory evaluation, with raw-qualified and cooked cuts paired from the same fish.
+5. **Selection and retesting.** Family and genotype-by-environment effects are estimated from parentage and genomic relatedness, with an unselected reference and genetic diversity kept. Lines advance only when replicated progeny show the improvement in edible tissue at acceptable growth, fertility, health and resource demand; a feeding effect in one cohort is a different thing from a response to selection.
 
-H3 gains support if a viable carbonate-associated food web reproducibly changes desirable flesh qualities through
-identified prey chemistry or fish behavior, and those qualities persist under the relevant lunar conditions. If
-matched diets erase the habitat difference, that supports diet mediation and weakens a claim about habitat structure
-acting independently. It does not refute the proposed food-web pathway. If matched lunar and Earth-like communities
-produce the same outcomes, there is no demonstrated lunar advantage. The culinary hypothesis weakens if only
-unrelated visceral fat increases, sensory quality declines, or the community requires unacceptable oxygen/nutrient
-inputs. A successful farmed food may remain useful without a distinct planetary advantage.
+H3 gains support if a viable carbonate-associated food web reproducibly changes desirable flesh qualities through identified prey chemistry or fish behaviour, and those qualities persist under the lunar conditions. If matched diets erase the habitat difference, diet mediates the effect: the claim for habitat structure acting alone weakens, and the food-web pathway stands. If matched lunar and Earth-like communities give the same outcomes, the lunar advantage is absent. The culinary hypothesis weakens if only visceral fat rises, sensory quality falls, or the community needs unacceptable inputs of oxygen or nutrients. A successful farmed food remains useful without a planetary advantage.
 
-The first decision-ready output should be a family-by-diet-by-habitat comparison with measured product quality and
-resource costs. It should retain successful cooked foods and shell products independently of whether the raw
-butterfish hypothesis succeeds.
+The first output ready for a decision is a family-by-diet-by-habitat comparison with measured product quality and resource costs. It keeps the successful cooked foods and shell products whatever becomes of the raw butterperch.
 
-## Sources and actual access
+## Sources and access
 
-Access checked 4 November 2026. “Full text available; targeted reading” means the relevant sections were inspected,
-not that the entire paper underwent scholarly review. No reported Earth rate is transferred as a lunar yield.
+Access checked 4 November 2026; R15 was added on 7 November, and R3, R4 and R16–R18 carry the deeper reading of the follow-up note of 4 November. "Targeted reading" means the relevant sections were read. No Earth rate is carried over as a lunar yield.
 
 | ID | Source and durable link | Support and access |
 |---|---|---|
-| R1 | Yanez-Montalvo et al. (2025), *Karst-environments of the southeastern Yucatan Peninsula*, [doi:10.1371/journal.pone.0322625](https://doi.org/10.1371/journal.pone.0322625) | Primary hydrochemistry/microbialite study. Full text available; abstract, introduction and methods targeted reading. No fish-flavor evidence. |
-| R2 | Queensland Government, [Barcoo grunter aquaculture](https://www.business.qld.gov.au/industries/farms-fishing-forestry/fisheries/aquaculture/species/barcoo-grunter) | Official husbandry, diet, freshwater breeding and water-quality account; page read. |
-| R3 | Song et al. (2009), *Effects of Dietary Lipids on Growth and Feed Utilization of Jade Perch*, [doi:10.1111/j.1749-7345.2009.00249.x](https://doi.org/10.1111/j.1749-7345.2009.00249.x) | Primary experiment; publisher abstract read, full-text request failed. Direction of muscle-lipid response only. |
-| R4 | Elhag et al. (2022), *Fatty acids in the inedible parts of jade perch*, [doi:10.1007/s10499-022-00901-y](https://doi.org/10.1007/s10499-022-00901-y) | Primary tissue analysis; [author institution abstract](https://researchonline.jcu.edu.au/83181/) read, PDF restricted. No quantitative nutritional target adopted. |
+| R1 | Yanez-Montalvo et al. (2025), *Karst-environments of the southeastern Yucatan Peninsula*, [doi:10.1371/journal.pone.0322625](https://doi.org/10.1371/journal.pone.0322625) | Primary study of hydrochemistry and microbialites; full text available; abstract, introduction and methods, targeted reading. No evidence on fish flavour. |
+| R2 | Queensland Government, [Barcoo grunter aquaculture](https://www.business.qld.gov.au/industries/farms-fishing-forestry/fisheries/aquaculture/species/barcoo-grunter) | Official account of husbandry, diet, freshwater breeding and water quality; page read. |
+| R3 | Song et al. (2009), *Effects of Dietary Lipids on Growth and Feed Utilization of Jade Perch*, [doi:10.1111/j.1749-7345.2009.00249.x](https://doi.org/10.1111/j.1749-7345.2009.00249.x) | Primary experiment; publisher full text, its methods, results and Table 3 read; the conversion from dry to fresh mass is derived. |
+| R4 | Elhag et al. (2022), *Fatty acids in the inedible parts of jade perch*, [doi:10.1007/s10499-022-00901-y](https://doi.org/10.1007/s10499-022-00901-y) | Primary tissue analysis; publisher and [author-institution abstract](https://researchonline.jcu.edu.au/83181/) read, PDF restricted. No nutritional target or marbling inference taken from it. |
 | R5 | FAO/Rimmer (2009), [*Lates calcarifer*](https://www.fao.org/fishery/docs/CDrom/aquaculture/I1129m/file/en/en_barramundi.htm) | Official species and life-cycle account; relevant sections read. |
-| R6 | Zou et al. (2017), *Parasitic encystments of glochidia…*, [doi:10.16535/j.cnki.dlhyxb.2017.06.001](https://doi.org/10.16535/j.cnki.dlhyxb.2017.06.001) | Primary host experiment; publisher metadata and indexed English abstract accessed. Dynamic abstract did not render on open; no host performance rate adopted. |
-| R7 | Queensland Government, [Redclaw crayfish aquaculture](https://www.business.qld.gov.au/industries/farms-fishing-forestry/fisheries/aquaculture/species/redclaw-crayfish) | Official freshwater life cycle, temperature, oxygen, shelter and reproduction account; page read. |
+| R6 | Zou et al. (2017), *Parasitic encystments of glochidia…*, [doi:10.16535/j.cnki.dlhyxb.2017.06.001](https://doi.org/10.16535/j.cnki.dlhyxb.2017.06.001) | Primary host experiment; publisher metadata and indexed English abstract; the dynamic abstract did not render. No host performance rate taken from it. |
+| R7 | Queensland Government, [Redclaw crayfish aquaculture](https://www.business.qld.gov.au/industries/farms-fishing-forestry/fisheries/aquaculture/species/redclaw-crayfish) | Official account of the freshwater life cycle, temperature, oxygen, shelter and reproduction; page read. |
 | R8 | Jones (1995), *Production of juvenile redclaw crayfish… I*, [doi:10.1016/0044-8486(95)00068-2](https://doi.org/10.1016/0044-8486(95)00068-2) | Primary hatchery experiment; [government repository abstract](https://era.dpi.qld.gov.au/id/eprint/11192/) read. |
-| R9 | New/FAO (2002), [*Farming freshwater prawns*, site selection](https://www.fao.org/4/y4100e/y4100e04.htm) | Official hatchery requirements; relevant chapter read. Brackish larvae and freshwater grow-out remain separate. |
-| R10 | FAO, [*Manual on Seed Production of African Catfish*](https://www.fao.org/4/ac378e/AC378E01.htm) | Official introduction documents seed production and pond/intensive rearing; no kabayaki sensory claim. |
-| R11 | Nomura et al. (2018), *Genetic parameters… in captive-bred Japanese eels*, [doi:10.1371/journal.pone.0201784](https://doi.org/10.1371/journal.pone.0201784) | Primary pedigree/genetic study; full text available, abstract/introduction/rearing methods read. |
-| R13 | Jin et al., *Effect of temperature on pearl deposition rate…*, [doi:10.1016/j.aaf.2021.06.006](https://doi.org/10.1016/j.aaf.2021.06.006) | Existing aquatic-plan source, identity verified in indexed record; DOI open failed. Pearl-temperature optimum not independently admitted here. |
-| R14 | FDA, [Fish and Fishery Products Hazards and Controls](https://www.fda.gov/food/seafood-guidance-documents-regulatory-information/fish-and-fishery-products-hazards-and-controls), particularly [natural toxins](https://www.fda.gov/media/80235/download) and [harvest-area pathogens](https://www.fda.gov/media/80766/download) | Official guidance; index and relevant chapter text inspected. Hazard categories guide future species/process validation; no Terlunan certification established. |
+| R9 | New/FAO (2002), [*Farming freshwater prawns*, site selection](https://www.fao.org/4/y4100e/y4100e04.htm) | Official hatchery requirements; relevant chapter read. Brackish larvae and freshwater grow-out kept separate. |
+| R10 | FAO, [*Manual on Seed Production of African Catfish*](https://www.fao.org/4/ac378e/AC378E01.htm) | Official introduction on seed production and pond and intensive rearing; no kabayaki sensory claim. |
+| R11 | Nomura et al. (2018), *Genetic parameters… in captive-bred Japanese eels*, [doi:10.1371/journal.pone.0201784](https://doi.org/10.1371/journal.pone.0201784) | Primary pedigree and genetic study; full text available; abstract, introduction and rearing methods read. |
+| R13 | Jin et al., *Effect of temperature on pearl deposition rate…*, [doi:10.1016/j.aaf.2021.06.006](https://doi.org/10.1016/j.aaf.2021.06.006) | A source of the aquatic programme; identity verified in an indexed record, DOI open failed. Its temperature optimum is not adopted here. |
+| R14 | FDA, [Fish and Fishery Products Hazards and Controls](https://www.fda.gov/food/seafood-guidance-documents-regulatory-information/fish-and-fishery-products-hazards-and-controls), particularly [natural toxins](https://www.fda.gov/media/80235/download) and [harvest-area pathogens](https://www.fda.gov/media/80766/download) | Official guidance; index and relevant chapter text read. The hazard categories guide species and process validation. |
+| R15 | Kaifu, Shiraishi, Ishii and Sugimoto (2025), *The IUCN Red List and newspaper coverage of threatened freshwater eel species in Japan: A variable but limited influence*, PLoS ONE 20(10): e0331511, [doi:10.1371/journal.pone.0331511](https://doi.org/10.1371/journal.pone.0331511) | Read 7 November 2026 in [PMC full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC12571305/), targeted at its statements of the Red List categories: the Japanese eel Endangered since its first assessment in 2014, unchanged at the reassessment published in 2020. A secondary source for the IUCN assessments, which were not opened. |
+| R16 | Lu et al. (2022), [chromosome-level genome of jade perch](https://doi.org/10.1038/s41597-022-01523-y) | Abstract and the discussion of polyunsaturated fatty-acid genes; genomic potential, distinct from measured metabolic flux. |
+| R17 | Van Hoestenberghe et al. (2016), [*Schizochytrium* replacing fish oil in jade perch feed](https://doi.org/10.1111/are.12631) | Publisher abstract; dietary conversion, deposition and sensory comparisons, raw eating quality untested. |
+| R18 | Xie et al. (2021), [proteomics of starved jade perch](https://doi.org/10.1111/are.15135) | Publisher abstract; metabolism and antioxidant response, with no sequence of depot depletion. |

@@ -1,7 +1,9 @@
-"""Scenario accounts for eel seed supply, feed, cooked yield, oxygen and salts.
+"""Scenario accounts for eel seed supply, feed, cooked yield, oxygen and salts; per-person cases for fed eel against
+heritage meat and the waters' phosphorus; and the phosphorus a wild spawning run carries downhill.
 
 Run from the repository root: python -m research.studies.food_systems.eel_budget
-These accounts are independent of the historical global food-system products.
+The per-person cases read the older food study's product, results/food_systems.json, for its fish, gas, crop and
+phosphorus factors and pin it by sha256; the older study's code and coefficients are unchanged.
 """
 from __future__ import annotations
 
@@ -17,7 +19,8 @@ from shared.provenance import constants_used
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 OUT = HERE / "results" / "eel_budget.json"
-SCHEMA = "terluna.research.eel-budget/1"
+OLDER = HERE / "results" / "food_systems.json"
+SCHEMA = "terluna.research.eel-budget/2"
 
 
 def positive(value: float, name: str, *, zero: bool = False) -> float:
@@ -166,13 +169,103 @@ def salt_inventory(concentration_g_per_kg: float, p: dict) -> dict:
     }
 
 
+def older_factors(path: Path = OLDER) -> dict:
+    """The older food study's factors the per-person cases reuse, read from its product's basis: N2O per unit of feed
+    nitrogen and a recirculating farm's electricity and water per kg of live fish (its aquaponics block), the feed's
+    crop energy and the diet's crop yields, N2O's Tg N per ppb, and the phosphorus the waters' life can spare. Its
+    feed conversion and feed phosphorus are carried for comparison; the eel cases keep the eel's own."""
+    basis = json.loads(path.read_text())["basis"]
+    fish, gases, waters, diet = basis["aquaponics"], basis["gases"], basis["seas_phosphorus"], basis["diet"]
+    return {
+        "n2o_n_share_of_feed_n": list(fish["n2o_share_of_n"]),
+        "closed_system_kwh_per_kg_live": fish["kwh_per_kg_fish"],
+        "closed_system_water_l_per_kg_live": fish["water_l_per_kg_fish"],
+        "older_fcr": list(fish["fcr"]),
+        "older_feed_phosphorus_share": list(fish["feed_p_share"]),
+        "feed_kcal_per_g": fish["feed_kcal_per_g"],
+        "crop_kcal_m2_day": list(diet["crop_kcal_m2_day"]),
+        "variety_factor": list(diet["variety_factor"]),
+        "n2o_tg_n_per_ppb": gases["n2o_tg_n_per_ppb"],
+        "waters_spare_phosphorus_kt_year": list(waters["all_waters_ceiling_kt_year"]),
+        "common_level_spare_phosphorus_kt_year": list(waters["common_level_ceiling_kt_year"]),
+    }
+
+
+def pond_methane_kg_per_t(pond: dict) -> float:
+    """Methane per tonne of fish from an open pond: its measured flux in mg CH4 per m2 per hour, held for a year, over
+    the same ponds' yield in t per ha."""
+    flux = positive(pond["ch4_mg_m2_h"], "pond methane flux", zero=True)
+    harvest = positive(pond["yield_t_ha"], "pond yield")
+    return flux * 24 * JULIAN_YEAR_DAYS * 1e4 / 1e6 / harvest     # mg per m2 a year as kg per ha, over t per ha
+
+
+def per_person(people_billion: float, cooked_kg: float, c: dict, f: dict, ponds: dict, heritage: list) -> dict:
+    """Fed eel for people_billion residents who each eat cooked_kg of cooked eel a year, scaled from cohort c's
+    per-tonne accounts: the harvest, the feed and its crop land, the feed's nitrogen and phosphorus, the phosphorus
+    the fish leave unretained against what the waters can spare, N2O, a closed system's electricity and water, and
+    open ponds' methane for comparison."""
+    positive(people_billion, "people (billions)")
+    positive(cooked_kg, "cooked eel per person")
+    live = people_billion * 1e9 * cooked_kg * c["harvest_live_kg"] / c["cooked_fish_kg"]      # kg live a year
+    scale = live / c["harvest_live_kg"]
+    n = c["nutrients_kg"]
+    feed = c["post_glass_dry_feed_kg"] * scale
+    feed_n, feed_p, lost_p = n["feed_n"] * scale, n["feed_p"] * scale, n["nonretained_p"] * scale
+    # Crop land for the feed at the older study's crop energy, paired as its aquaponics block pairs them: the best
+    # yield with the least variety, then the poorest yield with the most.
+    land = [feed * f["feed_kcal_per_g"] * 1e3 * v / (y * JULIAN_YEAR_DAYS) / 1e6
+            for v, y in ((min(f["variety_factor"]), max(f["crop_kcal_m2_day"])),
+                         (max(f["variety_factor"]), min(f["crop_kcal_m2_day"])))]
+    n2o = [feed_n * share / 1e6 for share in f["n2o_n_share_of_feed_n"]]        # kt N a year
+    spare = f["waters_spare_phosphorus_kt_year"]
+    kwh = live * f["closed_system_kwh_per_kg_live"]
+    return {
+        "people_billion": people_billion,
+        "cooked_eel_kg_per_person_year": cooked_kg,
+        "share_of_heritage_meat_allowance": [cooked_kg / max(heritage), cooked_kg / min(heritage)],
+        "live_harvest_mt_year": live / 1e9,
+        "post_glass_dry_feed_mt_year": feed / 1e9,
+        "feed_crop_land_km2": land,
+        "feed_nitrogen_kt_year": feed_n / 1e6,
+        "feed_phosphorus_kt_year": feed_p / 1e6,
+        "harvest_phosphorus_kt_year": n["harvest_p"] * scale / 1e6,
+        "nonretained_nitrogen_kt_year": n["nonretained_n"] * scale / 1e6,
+        "nonretained_phosphorus_kt_year": lost_p / 1e6,
+        "nonretained_phosphorus_over_waters_spare": [lost_p / 1e6 / max(spare), lost_p / 1e6 / min(spare)],
+        "n2o_kt_n_year": n2o,
+        "n2o_ppb_per_year": [x / (f["n2o_tg_n_per_ppb"] * 1e3) for x in n2o],
+        "closed_system_electricity_twh_year": kwh / 1e9,
+        "closed_system_mean_power_gw": kwh / (24 * JULIAN_YEAR_DAYS) / 1e6,
+        "closed_system_water_km3_year": live * f["closed_system_water_l_per_kg_live"] / 1e12,
+        "open_pond_methane_mt_year": {name: live / 1e3 * k / 1e9 for name, k in ponds.items()},
+    }
+
+
+def spawning_run(p: dict, wild_survivals: list) -> dict:
+    """The phosphorus a spawning run carries down per tonne of spawners, and the share the returning glass eels carry
+    back for each survival from glass eel to spawner, with spawners at the cohort's harvest size and spawners and glass
+    eels of the same whole-body phosphorus."""
+    spawner, glass = p["harvest_individual_kg"], p["glass_eel_individual_kg"]
+    cases = []
+    for name, s in [("culture", p["growout_survival"] * p["nursery_survival"])] + [("wild", s) for s in wild_survivals]:
+        fraction(s, "glass-eel-to-spawner survival")
+        cases.append({"case": name, "glass_eel_to_spawner_survival": s,
+                      "phosphorus_share_carried_back": glass / (s * spawner)})
+    return {
+        "spawner_individual_kg": spawner,
+        "glass_eel_individual_kg": glass,
+        "phosphorus_carried_down_kg_per_t_spawners": 1000 * p["whole_fish_phosphorus_fraction_wet"],
+        "cases": cases,
+    }
+
+
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def results() -> dict:
     p = json.loads((HERE / "eel_parameters.json").read_text())
-    if p["schema"] != "terluna.research.eel-parameters/1":
+    if p["schema"] != "terluna.research.eel-parameters/2":
         raise ValueError("Unexpected eel parameter schema")
     base = cohort(p["cohort"])
     larval_cases = []
@@ -187,6 +280,15 @@ def results() -> dict:
     for case in p["sensitivity"]["oxygen_cases"]:
         overrides = {k: v for k, v in case.items() if k != "name"}
         oxygen_cases.append({"name": case["name"], "budget": oxygen(dict(p["oxygen"], **overrides))})
+    f = older_factors()
+    pp = p["per_person"]
+    ponds = {pond["name"]: pond_methane_kg_per_t(pond) for pond in pp["open_ponds"]}
+    person_cases = []
+    for case in processing_cases:
+        for people in pp["people_billion"]:
+            for cooked in pp["cooked_eel_kg_per_person_year"]:
+                person_cases.append({"processing": case["name"], **per_person(
+                    people, cooked, case["budget"], f, ponds, pp["heritage_meat_kg_per_person_year"])})
     return {
         "schema": SCHEMA,
         "evidence": p["evidence"],
@@ -194,7 +296,7 @@ def results() -> dict:
             "module": "research.studies.food_systems.eel_budget",
             "files": {str((HERE / name).relative_to(ROOT)): digest(HERE / name)
                       for name in ("eel_budget.py", "eel_parameters.json", "eel_sources.json")},
-            "environment_manifest": {"path": "research/studies/food_systems/aquatic_basis.json", "sha256": digest(HERE / "aquatic_basis.json"), "use": "Context only; no environmental carrying capacity is computed."},
+            "inputs": {str(OLDER.relative_to(ROOT)): digest(OLDER)},
             "constants": constants_used([Path(__file__)]),
         },
         "assumptions": copy.deepcopy(p),
@@ -205,7 +307,11 @@ def results() -> dict:
         "processing_and_feed_sensitivity": processing_cases,
         "oxygen_sensitivity": oxygen_cases,
         "salt_inventory_sensitivity": [salt_inventory(s, p["hatchery"]) for s in p["sensitivity"]["salt_concentration_g_per_kg"]],
-        "unquantified": ["Broodstock and pre-glass feed and wastes", "Hatchery oxygen and energy", "Grow-out duration and biomass trajectory", "Low-gravity oxygen transfer and electrical energy", "Local prey production and habitat carrying capacity", "Processing energy and coproduct recovery", "Survival or yield of locally spawning or fully freshwater breeding lines"],
+        "older_study_factors": f,
+        "open_pond_methane_kg_per_t_live": ponds,
+        "per_person_cases": person_cases,
+        "spawning_run_phosphorus": spawning_run(p["cohort"], p["spawning_run"]["wild_glass_eel_to_spawner_survival"]),
+        "unquantified": ["Broodstock and pre-glass feed and wastes", "Hatchery oxygen and energy", "Grow-out duration and biomass trajectory", "Low-gravity oxygen transfer and electrical energy", "Local prey production and habitat carrying capacity", "Processing energy and coproduct recovery", "Survival or yield of locally spawning or fully freshwater breeding lines", "Methane from closed systems' sludge, which depends on its treatment", "The feed crops' own N2O and the land of feed made from power", "The seawater lake's temperature by depth and the eggs' exposure", "A wild population's size, and so the spawning run's phosphorus in tonnes a year"],
     }
 
 

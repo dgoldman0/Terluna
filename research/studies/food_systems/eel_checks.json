@@ -1,72 +1,59 @@
 {
   "schema": "terluna.research.eel-checks/1",
-  "checked_at_utc": "2026-11-05T02:17:46.075863+00:00",
+  "checked_at_utc": "2026-11-08T01:07:51Z",
   "branch": "domain/food-systems",
-  "base_commit": "e7b0292843dfd38cf40d6e13399b38441e9f770d",
-  "evidence": "Computational and document checks only; no biological trials, field validation or measured processing yields.",
+  "base": "domain/food-systems with main merged in; the merge staged and uncommitted when these checks ran",
+  "evidence": "Computational, source and document checks of the reworked eel chapter and its accounts. No biological trials, field validation, lake model or measured processing yields.",
   "checks": [
     {
-      "command": "python -m research.studies.food_systems.eel_budget",
-      "result": "passed; generated product reproduced by tests"
+      "command": "python3 -m research.studies.food_systems.eel_budget",
+      "result": "Wrote results/eel_budget.json (schema terluna.research.eel-budget/2); a second run left it byte-identical, as the product test also checks"
     },
     {
-      "command": "python -m pytest research/studies/food_systems -q",
-      "result": "45 passed, 4 skipped in 0.71 s"
+      "command": "ulimit -v 6000000; nice -n 10 python3 -m pytest -q research/studies/food_systems",
+      "result": "59 passed in 6.14 s (Python 3.13.7, pytest 9.0.2): the older study's 27 tests and 32 eel tests, 10 of them new for the per-person cases, the older study's factors, the pond methane and the spawning run"
     },
     {
-      "command": "python shared/check_layers.py",
-      "result": "1490 files checked, 0 violations"
+      "check": "per-person cases against the review",
+      "result": "8 billion people at 1 kg of cooked eel each, reference processing: 167.04 kt of phosphorus a year not retained, 2.97-7.92 times the waters' spare 21.1-56.2 kt; matches the review's 167 kt and 3-8 times"
     },
     {
-      "command": "git diff --check",
-      "result": "passed"
+      "check": "older study's factors",
+      "result": "Read from results/food_systems.json's basis (sha256 c45929d6dac41b3ba0f4b4332c75f35396b0b4868411464143790f16700537b4): N2O 0.8-1.9% of feed N, 3.09 kWh and 76 L per kg live, 3.07 Tg N per ppb, waters' spare phosphorus 21.1-56.2 kt a year, crop yields 30.2-41.9 kcal per m2 a day with variety factors 1.5-2.5"
     },
     {
-      "check": "relative Markdown links and fences",
-      "result": "passed: 40 local links across 5 files; balanced code fences"
+      "check": "oxygen saturation under the design air",
+      "command": "biosphere.ecology.lake.oxygen_saturation at 1.2 atm with an O2 fraction of 0.17436 (21.2 kPa)",
+      "result": "7.656 mg/L fresh at 29.6 C, 8.941 mg/L at 21 C, 6.312 mg/L at 35 g/kg and 29.6 C; the review's 7.66, 8.94 and 6.32 confirmed"
     },
     {
-      "check": "source IDs",
-      "result": "all 15 dossier IDs resolve to unique source-register entries"
+      "check": "un-ionized ammonia",
+      "result": "Emerson's relation: 13.5% at pH 8.3 and 29.6 C, 0.8% at pH 7, 89% at pH 10; the review's shares confirmed"
     },
     {
-      "check": "rounded dossier values",
-      "result": "passed: seed, feed, cooked mass, reference oxygen, flow, and feed/oxygen sensitivity values"
+      "check": "pressure cue",
+      "result": "150-200 m of seawater on Earth (1,025 kg/m3, 9.80665 m/s2) is 1.51-2.01 MPa, which takes 0.91-1.21 km of seawater at 1,022 kg/m3 and 1.6242 m/s2; hollow 547's 102 m is 0.17 MPa, 16.8 m of Earth's sea"
     },
     {
-      "check": "status scope and historical inputs",
-      "result": "passed: all other status topics unchanged; six protected food/environment files byte-identical to HEAD"
+      "check": "document screen",
+      "result": "No hard wraps (no two consecutive prose lines); no narration of the author; no 'Gaean' or undefined 'qualified'; every relative link resolves; all 17 source IDs cited in the text resolve to the register"
+    },
+    {
+      "check": "sources added",
+      "result": "E16 Okamura et al. 2007 (publisher abstract) and E17 Kaifu et al. 2025 (full text, Red List history), read 2026-11-07"
     }
   ],
   "not_run": [
-    "New biological or ecosystem simulations",
-    "Experimental validation of scenario assumptions"
+    "make check (run by the lead)",
+    "The seawater lake's temperature by depth",
+    "Biological, ecological or processing validation of the scenario assumptions"
   ],
-  "source_access": "15 primary or official sources; source register distinguishes full-text passages, abstract-only access and the 2026 larval-minerals correction.",
   "files": {
-    "research/studies/food_systems/eel_habitat_hatchery.md": "ccc4d5011a25375f56d7191af4e7dc9d4545ae9da4bfa1faaee2bd8e0a65e196",
-    "research/studies/food_systems/eel_budget.py": "428b2cef9f6b091deac39400d7e34a4e25f85c414c6364332e83b5a74b637987",
-    "research/studies/food_systems/eel_parameters.json": "9e07ca2333eb0c0da49b167703356884f43edc607299fd437dd1888f9feaa36d",
-    "research/studies/food_systems/eel_sources.json": "af90cd81fa91dc35b188b73492dc20468993b98f4a2fe563c4b4830b1f7e5f4b",
-    "research/studies/food_systems/test_eel_budget.py": "619def1f0497d1791a4e18ef3c594f8da4524d9addb889c996369fdb8ef5c8fb",
-    "research/studies/food_systems/results/eel_budget.json": "36617f9004a7157b86a37c4cf7c14830c12e09ae05a88c07179221111ec02c7e"
-  },
-  "precommit_verification": {
-    "checked_at_utc": "2026-11-05T02:31:11.459699+00:00",
-    "make_check": {
-      "result": "PARTIAL: layer check passed; Python completed with 4323 passed, 312 skipped and 44 failed; make stopped at test-python.",
-      "failed_test_ids_match_recorded_baseline": true,
-      "baseline_record": "aquatic_checks.json: checks.repository.baseline_failed_test_ids",
-      "interpretation": "All 44 failing IDs match the prior record, which includes reproduction on an untouched main worktree. No new failing IDs in this run; no baseline rerun was needed."
-    },
-    "remaining_make_targets": {
-      "command": "make -k test-js test-calendar check-provenance check-ensemble",
-      "javascript_harness": "Node 24 rejected the existing tests/unit/ directory argument; pretest bake succeeded. Re-ran the same suites using explicit test-file globs.",
-      "javascript_explicit_files": "177 passed, 0 failed: 129 immersion tests plus 48 atmospheric-column, illumination-reference and column-viewer tests.",
-      "calendar": "13 passed, 1 skipped; optional sky-page assets absent.",
-      "provenance": "PASS",
-      "ensemble": "PASS: planning snapshot and workspace integrity."
-    },
-    "scope": "Commit verification only; scientific evidence boundaries remain unchanged."
+    "research/studies/food_systems/eel_habitat_hatchery.md": "fa27274f38b1fc40f877b34f7e399898c6f0175a6c4333f112a01acce5134500",
+    "research/studies/food_systems/eel_budget.py": "f036654ef3bc68f6750f5aebe974d165ce5626fbf2146db04e2e215f3384219b",
+    "research/studies/food_systems/eel_parameters.json": "1ffb3c9e56b7752f83d62fdbbae146b7d306ce4b89d96315581dce69c3e5691f",
+    "research/studies/food_systems/eel_sources.json": "73c277c90e40785393f977d998084b1349bf40d3de39ca8d5008e0859c749200",
+    "research/studies/food_systems/test_eel_budget.py": "03843db77962417c6f638ebb210b3338131b86551347fe777eb55a748b55b827",
+    "research/studies/food_systems/results/eel_budget.json": "0a52c43c232c02d8da541089dbd54058968979eadcc77f00743964dd43375a42"
   }
 }

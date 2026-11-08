@@ -1383,48 +1383,6 @@
         "Currency use, access to settlement and emergency lending, and the bearing of losses are separate functions; three worlds need not mean three currencies or three issuers.",
         "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs."
       ]
-    },
-    {
-      "topic": "aquatic_food_systems",
-      "condition": "author_authorized_domain_food_systems_2026_11_04; initial_literature_synthesis_and_trial_design; earth_founders_and_genomic_informed_selective_breeding_first; no_new_biological_or_fishery_validation; eel_dossier_and_assumption_based_accounts; preferred_autonomous_freshwater_recruitment; broad_sturgeon_habitat_and_food_dossier",
-      "material": [
-        "studies/food_systems/aquatic_novelty.md",
-        "studies/food_systems/aquatic_biomes.md",
-        "studies/food_systems/aquatic_basis.json",
-        "studies/food_systems/lunar_cycle_fisheries.md",
-        "studies/food_systems/alkaline_foods.md",
-        "studies/food_systems/reef_shellfish_cuisine.md",
-        "studies/food_systems/breeding_and_trials.md",
-        "studies/food_systems/culinary_evaluation.md",
-        "studies/food_systems/aquatic_checks.json",
-        "studies/food_systems/aquatic_decisions.md",
-        "studies/food_systems/fish_cuisine_followup.md",
-        "studies/food_systems/eel_habitat_hatchery.md",
-        "studies/food_systems/eel_budget.py",
-        "studies/food_systems/eel_parameters.json",
-        "studies/food_systems/eel_sources.json",
-        "studies/food_systems/results/eel_budget.json",
-        "studies/food_systems/eel_checks.json",
-        "studies/food_systems/test_eel_budget.py",
-        "studies/food_systems/sturgeon_habitat_foods.md",
-        "studies/food_systems/sturgeon_sources.json",
-        "studies/food_systems/sturgeon_checks.json"
-      ],
-      "findings": [
-        "Earth evidence provides candidate mechanisms and selectable variation for edible fat, tissue chemistry and food-web-derived foods; lunar culinary novelty remains hypothetical.",
-        "Lunar-cycle, moderate alkaline and carbonate-associated studies require independent light/feed/chemistry/diet contrasts and complete founder life cycles.",
-        "Cooked foods, actual eel/unagi, shellfish and qualified raw candidates have separate product objectives; connected Earth-Terluna biological exchange remains an assumption.",
-        "Eel dossier distinguishes initial saline hatchery production, local spawning, stage-specific salinity reduction and the preferred autonomous freshwater life cycle. Complete freshwater recruitment remains unproven. Reproducible seed/feed/oxygen/nutrient/cooked-yield accounts are illustrative assumptions, not lunar production estimates.",
-        "Sturgeon assessment prioritizes sterlet and Siberian freshwater references plus bester, with pure beluga as a separate large-fish/caviar and predator track. It covers habitat networks, autonomous recruitment, ecology, lifetime feed/oxygen accounts, meat and roe. Thermal adaptation has stronger precedent than freshwater eel reproduction only for specified habitat/target combinations; an entirely warm sturgeon life cycle remains unproven."
-      ],
-      "unresolved": [
-        "Named founder populations, full methods appraisal where sources were accessed at abstract level, life-stage tolerances and complete reproductive routes.",
-        "Site-resolved environments after reorientation and climate refresh; preserve inherited basin mixing brackets and the unresolved magnesium floor.",
-        "Replicated ecological and multigeneration trials, resource/oxygen budgets, sensory outcomes and product-specific raw/cooked qualification.",
-        "Eel founder families, stage-specific ion requirements, complete larval feed and oxygen costs, grow-out biomass trajectories, weighed cooked yields and unassisted habitat-level reproductive replacement.",
-        "Sturgeon founder pedigrees and hybrid ploidy/fertility, complete reproductive thermal histories, habitat-level recruitment, prey capacity, fed respiration across sizes, cohort feed costs and weighed meat/caviar processing yields; full-method appraisal of abstract-only sources."
-      ],
-      "next_session_task": "Obtain traceable sterlet, Siberian, bester and beluga family/life-stage records and identify connected spawning-nursery-feeding habitats under refreshed climate/geography. Measure lifetime resource costs and meat/roe recovery alongside autonomous recruitment. Continue eel work toward the preferred freshwater Gaean endpoint and the paired jade-perch/tilapia, moderate-alkaline and carbonate-community dossiers. No organism releases or biological trials have been performed."
     }
   ]
 }
