@@ -10,4 +10,4 @@ its products through the immersion's bake when they mature.
 | Subject | Holds |
 |---|---|
 | [dance](dance/README.md) | A dancer's body, the physics of dancing at lunar gravity in dense air, a movement vocabulary and grammar, a whole-body motion engine and the garments, toward flowing dances that only the Moon allows |
-| [sport](sport/README.md) | What an athlete's body can do at lunar gravity against Earth, from the dance's body model and a larger scaled body, what the dance's solved phrase did in its landings and take-offs, and where that points for play, toward one sport that works on the Moon and as an e-sport |
+| [sport](sport/README.md) | What an athlete's body can do at lunar gravity against Earth, from the dance's body model and a larger scaled body; what the dance's solved phrase did in its landings and take-offs; a vocabulary of 24 athletic moves, where players can be and when, and four contests between players across the floor's grips, with candidate forms of play; toward one sport that works on the Moon and as an e-sport |

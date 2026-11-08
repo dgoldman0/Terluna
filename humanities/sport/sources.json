@@ -27,13 +27,33 @@
   {"quantity": "the larger athlete", "value": {"stature_m": 1.80, "mass_kg": 80.0}, "evidence_state": "calculation", "note": "the dance body scaled geometrically (inertias by mass times length squared, push-off and reaches by stature) with the same force-velocity profile per kilogram; a stand-in for a male body model"},
   {"quantity": "a teammate's two-arm push and its stroke", "value": {"N": 350.0, "m": 0.6}, "evidence_state": "reused", "note": "the dance envelope's partner throw (humanities/dance/envelope.py)"},
   {"quantity": "force-velocity profile, push-off, segment inertias, take-off lean", "evidence_state": "reused", "note": "humanities/dance/envelope.py and body/model.py, with their sources in humanities/dance/sources.json (Palinkas et al. 2025; de Leva 1996; Yeadon)"},
-  {"quantity": "air density at the sea-level datum", "evidence_state": "reused", "note": "the design run's global winds product (climate/results/gcm/global_winds_A28_dim5_moon.json), read through the dance envelope"}
+  {"quantity": "air density at the sea-level datum", "evidence_state": "reused", "note": "the design run's global winds product (climate/results/gcm/global_winds_A28_dim5_moon.json), read through the dance envelope"},
+  {"quantity": "a player's reaction to a cue (a release, an opponent's take-off)", "value_s": 0.20, "evidence_state": "assumption", "note": "second round (state.py); the same on both worlds, on the nervous system's clock"},
+  {"quantity": "a quick step placing a foot", "value_s": 0.25, "evidence_state": "assumption", "note": "state.py; the muscles' clock"},
+  {"quantity": "top running speed, set by the legs' swing", "value_m_s": 7.0, "evidence_state": "assumption", "note": "state.py; on the Moon the grip binds long before it"},
+  {"quantity": "the legs' horizontal push in a sprint start, F0 (1 - v/V0)", "value": {"F0_N_kg": 7.0, "V0_m_s": 8.5}, "evidence_state": "general_knowledge", "note": "state.py; a team-sport athlete's sprint force-velocity profile (Samozino and Morin's profiling), not retrieved; the same per kilogram for both bodies"},
+  {"quantity": "the hands' reach: up, out from the centre of mass, and the lowest catch without a dip", "value": {"up_statures": 1.33, "out_m": 0.60, "low_m": 0.50}, "evidence_state": "assumption", "note": "state.py; the dance body, the larger body scaled by stature; standing fingertip reach near 1.33 statures is general anthropometry"},
+  {"quantity": "the least dip of a jump from upright", "value_m": 0.05, "evidence_state": "assumption", "note": "state.py; deeper dips as the take-off's stroke needs, on the dance envelope's vertical force-velocity profile"},
+  {"quantity": "a catch's give, and the arm's fastest release", "value": {"give_s": 0.15, "release_m_s": 20.0}, "evidence_state": "assumption", "note": "state.py; the give mirrors the throw's push"},
+  {"quantity": "a throwing arm's or a kicking leg's wind-up", "value_s": 0.20, "evidence_state": "assumption", "note": "vocabulary.py"},
+  {"quantity": "a kicked ball's speed over the foot's", "value": 1.2, "evidence_state": "general_knowledge", "note": "vocabulary.py; instep kicks"},
+  {"quantity": "a shove's hands above the crouched centre of mass", "value_m": 0.40, "evidence_state": "assumption", "note": "vocabulary.py"},
+  {"quantity": "the fastest walk-like gait with a foot always down", "value": "sqrt(g h)", "evidence_state": "calculation", "note": "vocabulary.py; the inverted pendulum leaves the floor above it (a Froude number of one)"},
+  {"quantity": "the reach engine's own choices", "value": {"landing_least_down_m_s": 0.05}, "evidence_state": "assumption", "note": "reach.py: a fallen player's hands reach from the floor to the standing band's low end until it is up; rising out of the crouch to the standing top is taken as free; a jump keeps the floor speed it had through its dip and push, leaving out the push's own horizontal build-up"},
+  {"quantity": "the arm's limit on a catch", "value_m_s": 20.0, "evidence_state": "assumption", "note": "windows.py; taken to hold for a catch as for a throw"},
+  {"quantity": "two players reaching a ball within this of each other contest it", "value_s": 0.30, "evidence_state": "assumption", "note": "state.py; a pass is safe with this much to spare"},
+  {"quantity": "the pass contest's settings", "value": {"distances_m": [6, 10, 15], "head_starts_s": [0.3, 1.0], "fake_jump_m": 0.7, "fake_before_release_s": 0.2, "receiver_give_s": 0.30}, "evidence_state": "assumption", "note": "contest_pass.py; one interceptor on a grid beside the line, facing back toward the passer's end; the fake's jump capped at the crouch's best take-off (Earth 0.22 m)"},
+  {"quantity": "the lob contest's settings", "value": {"lob_m": 12, "elevations_deg": [45, 60, 70], "release_m": 2.0, "defender_m": 3}, "evidence_state": "assumption", "note": "contest_lob.py; the handball; a touch with the hands counts, without a check of the hold"},
+  {"quantity": "the chase's settings", "value": {"start_gap_m": 4, "courts_m": [10, 20, 40], "tactic_within_m": 2, "cut_deg": 60, "hop_rise_m": 1.0}, "evidence_state": "assumption", "note": "contest_chase.py; simple pursuing and fleeing rules, players already in a gait, hard walls"},
+  {"quantity": "the shove's settings", "value": {"moved_m": 0.5, "shove_aloft_s": 0.2, "longest_recovery_step_m": 1.5}, "evidence_state": "assumption", "note": "contest_shove.py; horizontal contact, a steady hold while the holder is moved"}
  ],
  "open_items": [
   "Shoe-floor friction for athletic shoes on candidate lunar floors: measurement or a sourced range.",
   "Throw, catch and kick timings and release heights from throwing and kicking biomechanics.",
   "The governing bodies' ball specifications, read in their documents; ball drag across the drag crisis at lunar speeds.",
   "A male body model with athletic strength (the dance's question 2), in place of the scaled stand-in.",
-  "Landings with a stroke and friction on the touchdown impulse in the motion engine, before whole-body solves of braking landings, rebounds and landing loads."
+  "Landings with a stroke and friction on the touchdown impulse in the motion engine, before whole-body solves of braking landings, rebounds and landing loads.",
+  "Reaction and anticipation times in court and field sports, and the perception of a ball's flight, from the literature.",
+  "A horizontal force-velocity profile for each body, and the walk-run limit and skipping in reduced gravity, from reduced-gravity studies."
  ]
 }

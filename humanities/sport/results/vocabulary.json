@@ -1,0 +1,6460 @@
+{
+ "schema": "terluna.humanities.sport-vocabulary/1",
+ "producer": {
+  "domain": "humanities",
+  "files": {
+   "humanities/sport/vocabulary.py": "6e0e8fe32f18edfd",
+   "humanities/sport/vocabulary/units.json": "82305d7805978f89",
+   "humanities/sport/state.py": "9a8e995c0621bea6",
+   "humanities/sport/envelope.py": "df4abe3934e22013",
+   "humanities/dance/envelope.py": "660f3247df5da23d",
+   "humanities/dance/body/model.py": "2b553c5592ee07a5",
+   "humanities/dance/body/pose.py": "a8c420d770df0a9d",
+   "habitation/low_gravity/movement.py": "af012c7a4d59ea6f"
+  },
+  "constants": {
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "STANDARD_GRAVITY": 9.80665
+  },
+  "inputs": {
+   "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
+   "humanities/dance/vocabulary/poses.json": "128fac64dc50a3ed"
+  }
+ },
+ "evidence": "Physics screens of each move's timing from the envelope's closed forms, for two representative bodies at the shared gravity, with every assumption stated beside its value (units.json, vocabulary.py, state.py, envelope.py). The units are drawn from the practice of court and field sports, athletics, gymnastics and the martial arts, and designed for the Moon; none is measured in low gravity or played.",
+ "grips": [
+  0.5,
+  0.8,
+  1.2
+ ],
+ "bodies": {
+  "dancer": "dancer, 1.64 m and 55 kg",
+  "larger": "larger athlete, 1.80 m and 80 kg (scaled)"
+ },
+ "units": [
+  {
+   "id": "ready_crouch",
+   "name": "ready crouch",
+   "family": "going",
+   "entry": {
+    "posture": [
+     "upright",
+     "split",
+     "moving"
+    ],
+    "momentum": [
+     "still",
+     "slow"
+    ],
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "ready",
+    "momentum": "still",
+    "ball": "same"
+   },
+   "successors": [
+    "drop_step",
+    "shuffle",
+    "bound",
+    "pivot",
+    "crouch_jump",
+    "side_hop",
+    "chest_pass",
+    "catch",
+    "scoop",
+    "kick",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.466,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.466
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.133,
+       "two_metres_aside_s": 2.23
+      },
+      "0.8": {
+       "duration_s": 0.466,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.466
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.133,
+       "two_metres_aside_s": 1.95
+      },
+      "1.2": {
+       "duration_s": 0.466,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.466
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.133,
+       "two_metres_aside_s": 1.83
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.232,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.232
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.133,
+       "two_metres_aside_s": 0.916
+      },
+      "0.8": {
+       "duration_s": 0.232,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.232
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.133,
+       "two_metres_aside_s": 0.887
+      },
+      "1.2": {
+       "duration_s": 0.232,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.232
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.133,
+       "two_metres_aside_s": 0.887
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.489,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.489
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.134,
+       "two_metres_aside_s": 2.231
+      },
+      "0.8": {
+       "duration_s": 0.489,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.489
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.134,
+       "two_metres_aside_s": 1.958
+      },
+      "1.2": {
+       "duration_s": 0.489,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.489
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.134,
+       "two_metres_aside_s": 1.846
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.243,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.243
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.134,
+       "two_metres_aside_s": 0.916
+      },
+      "0.8": {
+       "duration_s": 0.243,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.243
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.134,
+       "two_metres_aside_s": 0.889
+      },
+      "1.2": {
+       "duration_s": 0.243,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lower",
+         0.243
+        ]
+       ],
+       "push_sideways_g": 0.467,
+       "push_ahead_g": 0.134,
+       "two_metres_aside_s": 0.889
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "lean_start",
+   "name": "lean start",
+   "family": "going",
+   "entry": {
+    "posture": "upright",
+    "momentum": "still",
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "moving",
+    "momentum": "slow",
+    "ball": "same"
+   },
+   "successors": [
+    "ready_crouch",
+    "shuffle",
+    "bound",
+    "braking_landing",
+    "rebound_jump",
+    "running_leap",
+    "chest_pass",
+    "catch",
+    "scoop",
+    "kick",
+    "shove",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 1.395,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         1.395
+        ]
+       ],
+       "first_tenth_s": 0.877,
+       "first_metre_s": 2.198,
+       "two_metres_s": 2.876
+      },
+      "0.8": {
+       "duration_s": 1.395,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         1.395
+        ]
+       ],
+       "first_tenth_s": 0.877,
+       "first_metre_s": 2.142,
+       "two_metres_s": 2.708
+      },
+      "1.2": {
+       "duration_s": 1.395,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         1.395
+        ]
+       ],
+       "first_tenth_s": 0.877,
+       "first_metre_s": 2.134,
+       "two_metres_s": 2.636
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.568,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         0.568
+        ]
+       ],
+       "first_tenth_s": 0.357,
+       "first_metre_s": 0.894,
+       "two_metres_s": 1.177
+      },
+      "0.8": {
+       "duration_s": 0.568,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         0.568
+        ]
+       ],
+       "first_tenth_s": 0.357,
+       "first_metre_s": 0.889,
+       "two_metres_s": 1.169
+      },
+      "1.2": {
+       "duration_s": 0.568,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         0.568
+        ]
+       ],
+       "first_tenth_s": 0.357,
+       "first_metre_s": 0.889,
+       "two_metres_s": 1.169
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 1.408,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         1.408
+        ]
+       ],
+       "first_tenth_s": 0.88,
+       "first_metre_s": 2.221,
+       "two_metres_s": 2.903
+      },
+      "0.8": {
+       "duration_s": 1.408,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         1.408
+        ]
+       ],
+       "first_tenth_s": 0.88,
+       "first_metre_s": 2.174,
+       "two_metres_s": 2.746
+      },
+      "1.2": {
+       "duration_s": 1.408,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         1.408
+        ]
+       ],
+       "first_tenth_s": 0.88,
+       "first_metre_s": 2.169,
+       "two_metres_s": 2.683
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.573,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         0.573
+        ]
+       ],
+       "first_tenth_s": 0.358,
+       "first_metre_s": 0.904,
+       "two_metres_s": 1.188
+      },
+      "0.8": {
+       "duration_s": 0.573,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         0.573
+        ]
+       ],
+       "first_tenth_s": 0.358,
+       "first_metre_s": 0.899,
+       "two_metres_s": 1.181
+      },
+      "1.2": {
+       "duration_s": 0.573,
+       "tell_s": 0.0,
+       "commits_s": 0.25,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "lean",
+         0.573
+        ]
+       ],
+       "first_tenth_s": 0.358,
+       "first_metre_s": 0.899,
+       "two_metres_s": 1.181
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "drop_step",
+   "name": "drop step",
+   "family": "going",
+   "entry": {
+    "posture": [
+     "upright",
+     "ready"
+    ],
+    "momentum": "still",
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "split",
+    "momentum": "still",
+    "ball": "same"
+   },
+   "successors": [
+    "ready_crouch",
+    "shuffle",
+    "bound",
+    "pivot",
+    "crouch_jump",
+    "chest_pass",
+    "split_throw",
+    "catch",
+    "kick",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.5,
+       "first_metre_s": 1.819,
+       "two_metres_s": 2.469
+      },
+      "0.8": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.667,
+       "first_metre_s": 1.533,
+       "two_metres_s": 2.048
+      },
+      "1.2": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.667,
+       "first_metre_s": 1.462,
+       "two_metres_s": 1.896
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.5,
+       "first_metre_s": 0.889,
+       "two_metres_s": 1.161
+      },
+      "0.8": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.667,
+       "first_metre_s": 0.829,
+       "two_metres_s": 1.095
+      },
+      "1.2": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.667,
+       "first_metre_s": 0.829,
+       "two_metres_s": 1.095
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.5,
+       "first_metre_s": 1.819,
+       "two_metres_s": 2.469
+      },
+      "0.8": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.667,
+       "first_metre_s": 1.534,
+       "two_metres_s": 2.05
+      },
+      "1.2": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.667,
+       "first_metre_s": 1.469,
+       "two_metres_s": 1.904
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.5,
+       "first_metre_s": 0.889,
+       "two_metres_s": 1.161
+      },
+      "0.8": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.667,
+       "first_metre_s": 0.829,
+       "two_metres_s": 1.095
+      },
+      "1.2": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "push_g": 0.667,
+       "first_metre_s": 0.829,
+       "two_metres_s": 1.095
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "shuffle",
+   "name": "shuffle",
+   "family": "going",
+   "entry": {
+    "posture": [
+     "ready",
+     "split",
+     "moving"
+    ],
+    "momentum": [
+     "still",
+     "slow"
+    ],
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "moving",
+    "momentum": "slow",
+    "ball": "same"
+   },
+   "successors": [
+    "ready_crouch",
+    "shuffle",
+    "bound",
+    "braking_landing",
+    "rebound_jump",
+    "running_leap",
+    "chest_pass",
+    "catch",
+    "scoop",
+    "kick",
+    "shove",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 2.405,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         2.405
+        ]
+       ],
+       "top_m_s": 1.215,
+       "stop_m": 0.909
+      },
+      "0.8": {
+       "duration_s": 2.289,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         2.289
+        ]
+       ],
+       "top_m_s": 1.215,
+       "stop_m": 0.568
+      },
+      "1.2": {
+       "duration_s": 2.279,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         2.279
+        ]
+       ],
+       "top_m_s": 1.215,
+       "stop_m": 0.379
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.979,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         0.979
+        ]
+       ],
+       "top_m_s": 2.986,
+       "stop_m": 0.909
+      },
+      "0.8": {
+       "duration_s": 0.956,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         0.956
+        ]
+       ],
+       "top_m_s": 2.986,
+       "stop_m": 0.568
+      },
+      "1.2": {
+       "duration_s": 0.956,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         0.956
+        ]
+       ],
+       "top_m_s": 2.986,
+       "stop_m": 0.379
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 2.366,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         2.366
+        ]
+       ],
+       "top_m_s": 1.273,
+       "stop_m": 0.998
+      },
+      "0.8": {
+       "duration_s": 2.244,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         2.244
+        ]
+       ],
+       "top_m_s": 1.273,
+       "stop_m": 0.624
+      },
+      "1.2": {
+       "duration_s": 2.234,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         2.234
+        ]
+       ],
+       "top_m_s": 1.273,
+       "stop_m": 0.416
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.963,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         0.963
+        ]
+       ],
+       "top_m_s": 3.128,
+       "stop_m": 0.998
+      },
+      "0.8": {
+       "duration_s": 0.941,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         0.941
+        ]
+       ],
+       "top_m_s": 3.128,
+       "stop_m": 0.624
+      },
+      "1.2": {
+       "duration_s": 0.941,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "steps",
+         0.941
+        ]
+       ],
+       "top_m_s": 3.128,
+       "stop_m": 0.416
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "bound",
+   "name": "bounding run",
+   "family": "going",
+   "entry": {
+    "posture": [
+     "moving",
+     "ready",
+     "split"
+    ],
+    "momentum": "any",
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "moving",
+    "momentum": "travelling",
+    "ball": "same"
+   },
+   "successors": [
+    "bound",
+    "bounce_cut",
+    "braking_landing",
+    "rebound_jump",
+    "running_leap",
+    "chest_pass",
+    "catch",
+    "kick",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.826,
+       "tell_s": 0.0,
+       "commits_s": 0.496,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.496
+        ]
+       ],
+       "stride_change_m_s": 0.671,
+       "stride_m": 2.479,
+       "build_s": 3.694,
+       "build_m": 5.541,
+       "stop_m": 5.541,
+       "turn_radius_m": 11.082
+      },
+      "0.8": {
+       "duration_s": 0.826,
+       "tell_s": 0.0,
+       "commits_s": 0.496,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.496
+        ]
+       ],
+       "stride_change_m_s": 1.074,
+       "stride_m": 2.479,
+       "build_s": 2.309,
+       "build_m": 3.463,
+       "stop_m": 3.463,
+       "turn_radius_m": 6.926
+      },
+      "1.2": {
+       "duration_s": 0.826,
+       "tell_s": 0.0,
+       "commits_s": 0.496,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.496
+        ]
+       ],
+       "stride_change_m_s": 1.61,
+       "stride_m": 2.479,
+       "build_s": 1.539,
+       "build_m": 2.309,
+       "stop_m": 2.309,
+       "turn_radius_m": 4.618
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.532,
+       "tell_s": 0.0,
+       "commits_s": 0.202,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.202
+        ]
+       ],
+       "stride_change_m_s": 2.608,
+       "stride_m": 1.596,
+       "build_s": 0.612,
+       "build_m": 0.918,
+       "stop_m": 0.918,
+       "turn_radius_m": 1.835
+      },
+      "0.8": {
+       "duration_s": 0.532,
+       "tell_s": 0.0,
+       "commits_s": 0.202,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.202
+        ]
+       ],
+       "stride_change_m_s": 4.173,
+       "stride_m": 1.596,
+       "build_s": 0.382,
+       "build_m": 0.574,
+       "stop_m": 0.574,
+       "turn_radius_m": 1.147
+      },
+      "1.2": {
+       "duration_s": 0.532,
+       "tell_s": 0.0,
+       "commits_s": 0.202,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.202
+        ]
+       ],
+       "stride_change_m_s": 6.26,
+       "stride_m": 1.596,
+       "build_s": 0.255,
+       "build_m": 0.382,
+       "stop_m": 0.382,
+       "turn_radius_m": 0.765
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.826,
+       "tell_s": 0.0,
+       "commits_s": 0.496,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.496
+        ]
+       ],
+       "stride_change_m_s": 0.671,
+       "stride_m": 2.479,
+       "build_s": 3.694,
+       "build_m": 5.541,
+       "stop_m": 5.541,
+       "turn_radius_m": 11.082
+      },
+      "0.8": {
+       "duration_s": 0.826,
+       "tell_s": 0.0,
+       "commits_s": 0.496,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.496
+        ]
+       ],
+       "stride_change_m_s": 1.074,
+       "stride_m": 2.479,
+       "build_s": 2.309,
+       "build_m": 3.463,
+       "stop_m": 3.463,
+       "turn_radius_m": 6.926
+      },
+      "1.2": {
+       "duration_s": 0.826,
+       "tell_s": 0.0,
+       "commits_s": 0.496,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.496
+        ]
+       ],
+       "stride_change_m_s": 1.61,
+       "stride_m": 2.479,
+       "build_s": 1.539,
+       "build_m": 2.309,
+       "stop_m": 2.309,
+       "turn_radius_m": 4.618
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.532,
+       "tell_s": 0.0,
+       "commits_s": 0.202,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.202
+        ]
+       ],
+       "stride_change_m_s": 2.608,
+       "stride_m": 1.596,
+       "build_s": 0.612,
+       "build_m": 0.918,
+       "stop_m": 0.918,
+       "turn_radius_m": 1.835
+      },
+      "0.8": {
+       "duration_s": 0.532,
+       "tell_s": 0.0,
+       "commits_s": 0.202,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.202
+        ]
+       ],
+       "stride_change_m_s": 4.173,
+       "stride_m": 1.596,
+       "build_s": 0.382,
+       "build_m": 0.574,
+       "stop_m": 0.574,
+       "turn_radius_m": 1.147
+      },
+      "1.2": {
+       "duration_s": 0.532,
+       "tell_s": 0.0,
+       "commits_s": 0.202,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.202
+        ]
+       ],
+       "stride_change_m_s": 6.26,
+       "stride_m": 1.596,
+       "build_s": 0.255,
+       "build_m": 0.382,
+       "stop_m": 0.382,
+       "turn_radius_m": 0.765
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "bounce_cut",
+   "name": "cut through a bounce",
+   "family": "going",
+   "entry": {
+    "posture": "moving",
+    "momentum": "travelling",
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "moving",
+    "momentum": "travelling",
+    "ball": "same"
+   },
+   "successors": [
+    "bound",
+    "bounce_cut",
+    "braking_landing",
+    "rebound_jump",
+    "running_leap",
+    "chest_pass",
+    "catch",
+    "kick",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 5.325,
+       "tell_s": 2.497,
+       "commits_s": 2.497,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         2.497
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         2.497
+        ]
+       ],
+       "bounce_rise_m": 1.266,
+       "velocity_change_m_s": 2.296
+      },
+      "0.8": {
+       "duration_s": 3.204,
+       "tell_s": 1.437,
+       "commits_s": 1.437,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         1.437
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         1.437
+        ]
+       ],
+       "bounce_rise_m": 0.419,
+       "velocity_change_m_s": 2.296
+      },
+      "1.2": {
+       "duration_s": 2.026,
+       "tell_s": 0.848,
+       "commits_s": 0.848,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         0.848
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.848
+        ]
+       ],
+       "bounce_rise_m": 0.146,
+       "velocity_change_m_s": 2.296
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.607,
+       "tell_s": 0.138,
+       "commits_s": 0.138,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         0.138
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.138
+        ]
+       ],
+       "bounce_rise_m": 0.023,
+       "velocity_change_m_s": 2.296
+      },
+      "0.8": {
+       "duration_s": 0.33,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         0.0
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.0
+        ]
+       ],
+       "bounce_rise_m": 0.0,
+       "velocity_change_m_s": 2.296
+      },
+      "1.2": {
+       "duration_s": 0.33,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         0.0
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.0
+        ]
+       ],
+       "bounce_rise_m": 0.0,
+       "velocity_change_m_s": 2.296
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 5.325,
+       "tell_s": 2.497,
+       "commits_s": 2.497,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         2.497
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         2.497
+        ]
+       ],
+       "bounce_rise_m": 1.266,
+       "velocity_change_m_s": 2.296
+      },
+      "0.8": {
+       "duration_s": 3.204,
+       "tell_s": 1.437,
+       "commits_s": 1.437,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         1.437
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         1.437
+        ]
+       ],
+       "bounce_rise_m": 0.419,
+       "velocity_change_m_s": 2.296
+      },
+      "1.2": {
+       "duration_s": 2.026,
+       "tell_s": 0.848,
+       "commits_s": 0.848,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         0.848
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.848
+        ]
+       ],
+       "bounce_rise_m": 0.146,
+       "velocity_change_m_s": 2.296
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.607,
+       "tell_s": 0.138,
+       "commits_s": 0.138,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         0.138
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.138
+        ]
+       ],
+       "bounce_rise_m": 0.023,
+       "velocity_change_m_s": 2.296
+      },
+      "0.8": {
+       "duration_s": 0.33,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         0.0
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.0
+        ]
+       ],
+       "bounce_rise_m": 0.0,
+       "velocity_change_m_s": 2.296
+      },
+      "1.2": {
+       "duration_s": 0.33,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "flight",
+         0.0
+        ],
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.0
+        ]
+       ],
+       "bounce_rise_m": 0.0,
+       "velocity_change_m_s": 2.296
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "braking_landing",
+   "name": "braking landing",
+   "family": "going",
+   "entry": {
+    "posture": [
+     "aloft",
+     "moving"
+    ],
+    "momentum": "any",
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "ready",
+    "momentum": "still",
+    "ball": "same"
+   },
+   "successors": [
+    "drop_step",
+    "shuffle",
+    "bound",
+    "pivot",
+    "crouch_jump",
+    "side_hop",
+    "chest_pass",
+    "catch",
+    "scoop",
+    "kick",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 2.463,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 2.063,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         2.063
+        ]
+       ],
+       "shed_m_s": 1.325,
+       "stop_m": 2.663,
+       "push_earth_bw": 0.675
+      },
+      "0.8": {
+       "duration_s": 1.077,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 0.677,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         0.677
+        ]
+       ],
+       "shed_m_s": 2.12,
+       "stop_m": 1.074,
+       "push_earth_bw": 0.675
+      },
+      "1.2": {
+       "duration_s": 0.4,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         0.0
+        ]
+       ],
+       "shed_m_s": 3.0,
+       "stop_m": 0.6,
+       "push_earth_bw": 0.675
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.408,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 0.008,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         0.008
+        ]
+       ],
+       "shed_m_s": 2.961,
+       "stop_m": 0.608,
+       "push_earth_bw": 1.51
+      },
+      "0.8": {
+       "duration_s": 0.4,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         0.0
+        ]
+       ],
+       "shed_m_s": 3.0,
+       "stop_m": 0.6,
+       "push_earth_bw": 1.51
+      },
+      "1.2": {
+       "duration_s": 0.4,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         0.0
+        ]
+       ],
+       "shed_m_s": 3.0,
+       "stop_m": 0.6,
+       "push_earth_bw": 1.51
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 2.463,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 2.063,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         2.063
+        ]
+       ],
+       "shed_m_s": 1.325,
+       "stop_m": 2.663,
+       "push_earth_bw": 0.675
+      },
+      "0.8": {
+       "duration_s": 1.077,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 0.677,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         0.677
+        ]
+       ],
+       "shed_m_s": 2.12,
+       "stop_m": 1.074,
+       "push_earth_bw": 0.675
+      },
+      "1.2": {
+       "duration_s": 0.4,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         0.0
+        ]
+       ],
+       "shed_m_s": 3.0,
+       "stop_m": 0.6,
+       "push_earth_bw": 0.675
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.408,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 0.008,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         0.008
+        ]
+       ],
+       "shed_m_s": 2.961,
+       "stop_m": 0.608,
+       "push_earth_bw": 1.51
+      },
+      "0.8": {
+       "duration_s": 0.4,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         0.0
+        ]
+       ],
+       "shed_m_s": 3.0,
+       "stop_m": 0.6,
+       "push_earth_bw": 1.51
+      },
+      "1.2": {
+       "duration_s": 0.4,
+       "tell_s": 0.0,
+       "commits_s": 0.4,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.4
+        ],
+        [
+         "slide",
+         0.0
+        ]
+       ],
+       "shed_m_s": 3.0,
+       "stop_m": 0.6,
+       "push_earth_bw": 1.51
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "pivot",
+   "name": "pivot",
+   "family": "going",
+   "entry": {
+    "posture": [
+     "upright",
+     "ready",
+     "split"
+    ],
+    "momentum": [
+     "still",
+     "slow"
+    ],
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "same",
+    "momentum": "same",
+    "ball": "same"
+   },
+   "successors": [
+    "ready_crouch",
+    "lean_start",
+    "drop_step",
+    "shuffle",
+    "bound",
+    "pivot",
+    "standing_jump",
+    "crouch_jump",
+    "side_hop",
+    "chest_pass",
+    "split_throw",
+    "catch",
+    "scoop",
+    "kick",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.576,
+       "tell_s": 0.0,
+       "commits_s": 0.576,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.576
+        ]
+       ],
+       "half_turn_s": 0.814
+      },
+      "0.8": {
+       "duration_s": 0.455,
+       "tell_s": 0.0,
+       "commits_s": 0.455,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.455
+        ]
+       ],
+       "half_turn_s": 0.643
+      },
+      "1.2": {
+       "duration_s": 0.372,
+       "tell_s": 0.0,
+       "commits_s": 0.372,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.372
+        ]
+       ],
+       "half_turn_s": 0.525
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.234,
+       "tell_s": 0.0,
+       "commits_s": 0.234,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.234
+        ]
+       ],
+       "half_turn_s": 0.331
+      },
+      "0.8": {
+       "duration_s": 0.185,
+       "tell_s": 0.0,
+       "commits_s": 0.185,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.185
+        ]
+       ],
+       "half_turn_s": 0.262
+      },
+      "1.2": {
+       "duration_s": 0.151,
+       "tell_s": 0.0,
+       "commits_s": 0.151,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.151
+        ]
+       ],
+       "half_turn_s": 0.214
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.603,
+       "tell_s": 0.0,
+       "commits_s": 0.603,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.603
+        ]
+       ],
+       "half_turn_s": 0.853
+      },
+      "0.8": {
+       "duration_s": 0.477,
+       "tell_s": 0.0,
+       "commits_s": 0.477,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.477
+        ]
+       ],
+       "half_turn_s": 0.674
+      },
+      "1.2": {
+       "duration_s": 0.389,
+       "tell_s": 0.0,
+       "commits_s": 0.389,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.389
+        ]
+       ],
+       "half_turn_s": 0.551
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.245,
+       "tell_s": 0.0,
+       "commits_s": 0.245,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.245
+        ]
+       ],
+       "half_turn_s": 0.347
+      },
+      "0.8": {
+       "duration_s": 0.194,
+       "tell_s": 0.0,
+       "commits_s": 0.194,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.194
+        ]
+       ],
+       "half_turn_s": 0.274
+      },
+      "1.2": {
+       "duration_s": 0.158,
+       "tell_s": 0.0,
+       "commits_s": 0.158,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "turn",
+         0.158
+        ]
+       ],
+       "half_turn_s": 0.224
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "standing_jump",
+   "name": "standing jump",
+   "family": "jumps",
+   "entry": {
+    "posture": "upright",
+    "momentum": "still",
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "aloft",
+    "momentum": "same",
+    "ball": "same"
+   },
+   "successors": [
+    "braking_landing",
+    "rebound_jump",
+    "landing_throw",
+    "air_pass",
+    "catch"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 2.595,
+       "tell_s": 0.376,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.261
+        ],
+        [
+         "push",
+         0.114
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "dip_m": 0.05,
+       "hands_reach_m": 3.251,
+       "best_rise_m": 2.857,
+       "best_tell_s": 0.865
+      },
+      "0.8": {
+       "duration_s": 2.595,
+       "tell_s": 0.376,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.261
+        ],
+        [
+         "push",
+         0.114
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "dip_m": 0.05,
+       "hands_reach_m": 3.251,
+       "best_rise_m": 2.857,
+       "best_tell_s": 0.865
+      },
+      "1.2": {
+       "duration_s": 2.595,
+       "tell_s": 0.376,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.261
+        ],
+        [
+         "push",
+         0.114
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "dip_m": 0.05,
+       "hands_reach_m": 3.251,
+       "best_rise_m": 2.857,
+       "best_tell_s": 0.865
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 1.101,
+       "tell_s": 0.615,
+       "commits_s": 0.486,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.313
+        ],
+        [
+         "push",
+         0.302
+        ],
+        [
+         "flight",
+         0.486
+        ]
+       ],
+       "take_off_m_s": 2.381,
+       "rise_m": 0.289,
+       "dip_m": 0.29,
+       "hands_reach_m": 2.54,
+       "best_rise_m": 0.289,
+       "best_tell_s": 0.615
+      },
+      "0.8": {
+       "duration_s": 1.101,
+       "tell_s": 0.615,
+       "commits_s": 0.486,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.313
+        ],
+        [
+         "push",
+         0.302
+        ],
+        [
+         "flight",
+         0.486
+        ]
+       ],
+       "take_off_m_s": 2.381,
+       "rise_m": 0.289,
+       "dip_m": 0.29,
+       "hands_reach_m": 2.54,
+       "best_rise_m": 0.289,
+       "best_tell_s": 0.615
+      },
+      "1.2": {
+       "duration_s": 1.101,
+       "tell_s": 0.615,
+       "commits_s": 0.486,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.313
+        ],
+        [
+         "push",
+         0.302
+        ],
+        [
+         "flight",
+         0.486
+        ]
+       ],
+       "take_off_m_s": 2.381,
+       "rise_m": 0.289,
+       "dip_m": 0.29,
+       "hands_reach_m": 2.54,
+       "best_rise_m": 0.289,
+       "best_tell_s": 0.615
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 2.599,
+       "tell_s": 0.379,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.261
+        ],
+        [
+         "push",
+         0.118
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "dip_m": 0.05,
+       "hands_reach_m": 3.471,
+       "best_rise_m": 3.03,
+       "best_tell_s": 0.911
+      },
+      "0.8": {
+       "duration_s": 2.599,
+       "tell_s": 0.379,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.261
+        ],
+        [
+         "push",
+         0.118
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "dip_m": 0.05,
+       "hands_reach_m": 3.471,
+       "best_rise_m": 3.03,
+       "best_tell_s": 0.911
+      },
+      "1.2": {
+       "duration_s": 2.599,
+       "tell_s": 0.379,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.261
+        ],
+        [
+         "push",
+         0.118
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "dip_m": 0.05,
+       "hands_reach_m": 3.471,
+       "best_rise_m": 3.03,
+       "best_tell_s": 0.911
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 1.149,
+       "tell_s": 0.651,
+       "commits_s": 0.499,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.328
+        ],
+        [
+         "push",
+         0.323
+        ],
+        [
+         "flight",
+         0.499
+        ]
+       ],
+       "take_off_m_s": 2.445,
+       "rise_m": 0.305,
+       "dip_m": 0.318,
+       "hands_reach_m": 2.776,
+       "best_rise_m": 0.305,
+       "best_tell_s": 0.651
+      },
+      "0.8": {
+       "duration_s": 1.149,
+       "tell_s": 0.651,
+       "commits_s": 0.499,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.328
+        ],
+        [
+         "push",
+         0.323
+        ],
+        [
+         "flight",
+         0.499
+        ]
+       ],
+       "take_off_m_s": 2.445,
+       "rise_m": 0.305,
+       "dip_m": 0.318,
+       "hands_reach_m": 2.776,
+       "best_rise_m": 0.305,
+       "best_tell_s": 0.651
+      },
+      "1.2": {
+       "duration_s": 1.149,
+       "tell_s": 0.651,
+       "commits_s": 0.499,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.328
+        ],
+        [
+         "push",
+         0.323
+        ],
+        [
+         "flight",
+         0.499
+        ]
+       ],
+       "take_off_m_s": 2.445,
+       "rise_m": 0.305,
+       "dip_m": 0.318,
+       "hands_reach_m": 2.776,
+       "best_rise_m": 0.305,
+       "best_tell_s": 0.651
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "crouch_jump",
+   "name": "jump from the crouch",
+   "family": "jumps",
+   "entry": {
+    "posture": [
+     "ready",
+     "split"
+    ],
+    "momentum": "still",
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "aloft",
+    "momentum": "same",
+    "ball": "same"
+   },
+   "successors": [
+    "braking_landing",
+    "rebound_jump",
+    "landing_throw",
+    "air_pass",
+    "catch"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 2.394,
+       "tell_s": 0.175,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.175
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.251,
+       "best_rise_m": 2.106
+      },
+      "0.8": {
+       "duration_s": 2.394,
+       "tell_s": 0.175,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.175
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.251,
+       "best_rise_m": 2.106
+      },
+      "1.2": {
+       "duration_s": 2.394,
+       "tell_s": 0.175,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.175
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.251,
+       "best_rise_m": 2.106
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.643,
+       "tell_s": 0.221,
+       "commits_s": 0.422,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.221
+        ],
+        [
+         "flight",
+         0.422
+        ]
+       ],
+       "take_off_m_s": 2.07,
+       "rise_m": 0.218,
+       "hands_reach_m": 2.469,
+       "best_rise_m": 0.218
+      },
+      "0.8": {
+       "duration_s": 0.643,
+       "tell_s": 0.221,
+       "commits_s": 0.422,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.221
+        ],
+        [
+         "flight",
+         0.422
+        ]
+       ],
+       "take_off_m_s": 2.07,
+       "rise_m": 0.218,
+       "hands_reach_m": 2.469,
+       "best_rise_m": 0.218
+      },
+      "1.2": {
+       "duration_s": 0.643,
+       "tell_s": 0.221,
+       "commits_s": 0.422,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.221
+        ],
+        [
+         "flight",
+         0.422
+        ]
+       ],
+       "take_off_m_s": 2.07,
+       "rise_m": 0.218,
+       "hands_reach_m": 2.469,
+       "best_rise_m": 0.218
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 2.407,
+       "tell_s": 0.188,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.188
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.471,
+       "best_rise_m": 2.25
+      },
+      "0.8": {
+       "duration_s": 2.407,
+       "tell_s": 0.188,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.188
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.471,
+       "best_rise_m": 2.25
+      },
+      "1.2": {
+       "duration_s": 2.407,
+       "tell_s": 0.188,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.188
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.471,
+       "best_rise_m": 2.25
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.671,
+       "tell_s": 0.236,
+       "commits_s": 0.435,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.236
+        ],
+        [
+         "flight",
+         0.435
+        ]
+       ],
+       "take_off_m_s": 2.134,
+       "rise_m": 0.232,
+       "hands_reach_m": 2.703,
+       "best_rise_m": 0.232
+      },
+      "0.8": {
+       "duration_s": 0.671,
+       "tell_s": 0.236,
+       "commits_s": 0.435,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.236
+        ],
+        [
+         "flight",
+         0.435
+        ]
+       ],
+       "take_off_m_s": 2.134,
+       "rise_m": 0.232,
+       "hands_reach_m": 2.703,
+       "best_rise_m": 0.232
+      },
+      "1.2": {
+       "duration_s": 0.671,
+       "tell_s": 0.236,
+       "commits_s": 0.435,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.236
+        ],
+        [
+         "flight",
+         0.435
+        ]
+       ],
+       "take_off_m_s": 2.134,
+       "rise_m": 0.232,
+       "hands_reach_m": 2.703,
+       "best_rise_m": 0.232
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "rebound_jump",
+   "name": "rebound jump",
+   "family": "jumps",
+   "entry": {
+    "posture": [
+     "aloft",
+     "moving"
+    ],
+    "momentum": "any",
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "aloft",
+    "momentum": "same",
+    "ball": "same"
+   },
+   "successors": [
+    "braking_landing",
+    "rebound_jump",
+    "landing_throw",
+    "air_pass",
+    "catch"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 2.549,
+       "tell_s": 0.0,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.251
+      },
+      "0.8": {
+       "duration_s": 2.549,
+       "tell_s": 0.0,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.251
+      },
+      "1.2": {
+       "duration_s": 2.549,
+       "tell_s": 0.0,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.251
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.816,
+       "tell_s": 0.0,
+       "commits_s": 0.486,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.486
+        ]
+       ],
+       "take_off_m_s": 2.381,
+       "rise_m": 0.289,
+       "hands_reach_m": 2.54
+      },
+      "0.8": {
+       "duration_s": 0.816,
+       "tell_s": 0.0,
+       "commits_s": 0.486,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.486
+        ]
+       ],
+       "take_off_m_s": 2.381,
+       "rise_m": 0.289,
+       "hands_reach_m": 2.54
+      },
+      "1.2": {
+       "duration_s": 0.816,
+       "tell_s": 0.0,
+       "commits_s": 0.486,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.486
+        ]
+       ],
+       "take_off_m_s": 2.381,
+       "rise_m": 0.289,
+       "hands_reach_m": 2.54
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 2.549,
+       "tell_s": 0.0,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.471
+      },
+      "0.8": {
+       "duration_s": 2.549,
+       "tell_s": 0.0,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.471
+      },
+      "1.2": {
+       "duration_s": 2.549,
+       "tell_s": 0.0,
+       "commits_s": 2.219,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         2.219
+        ]
+       ],
+       "take_off_m_s": 1.802,
+       "rise_m": 1.0,
+       "hands_reach_m": 3.471
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.829,
+       "tell_s": 0.0,
+       "commits_s": 0.499,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.499
+        ]
+       ],
+       "take_off_m_s": 2.445,
+       "rise_m": 0.305,
+       "hands_reach_m": 2.776
+      },
+      "0.8": {
+       "duration_s": 0.829,
+       "tell_s": 0.0,
+       "commits_s": 0.499,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.499
+        ]
+       ],
+       "take_off_m_s": 2.445,
+       "rise_m": 0.305,
+       "hands_reach_m": 2.776
+      },
+      "1.2": {
+       "duration_s": 0.829,
+       "tell_s": 0.0,
+       "commits_s": 0.499,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.499
+        ]
+       ],
+       "take_off_m_s": 2.445,
+       "rise_m": 0.305,
+       "hands_reach_m": 2.776
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "side_hop",
+   "name": "side hop",
+   "family": "jumps",
+   "entry": {
+    "posture": "ready",
+    "momentum": "still",
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "aloft",
+    "momentum": "slow",
+    "ball": "same"
+   },
+   "successors": [
+    "braking_landing",
+    "rebound_jump",
+    "landing_throw",
+    "air_pass",
+    "catch"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 1.469,
+       "tell_s": 0.254,
+       "commits_s": 1.216,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.254
+        ],
+        [
+         "flight",
+         1.216
+        ]
+       ],
+       "sideways_m_s": 0.461,
+       "covers_m": 0.56
+      },
+      "0.8": {
+       "duration_s": 1.469,
+       "tell_s": 0.254,
+       "commits_s": 1.216,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.254
+        ],
+        [
+         "flight",
+         1.216
+        ]
+       ],
+       "sideways_m_s": 0.461,
+       "covers_m": 0.56
+      },
+      "1.2": {
+       "duration_s": 1.469,
+       "tell_s": 0.254,
+       "commits_s": 1.216,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.254
+        ],
+        [
+         "flight",
+         1.216
+        ]
+       ],
+       "sideways_m_s": 0.461,
+       "covers_m": 0.56
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.643,
+       "tell_s": 0.221,
+       "commits_s": 0.422,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.221
+        ],
+        [
+         "flight",
+         0.422
+        ]
+       ],
+       "sideways_m_s": 0.966,
+       "covers_m": 0.408
+      },
+      "0.8": {
+       "duration_s": 0.643,
+       "tell_s": 0.221,
+       "commits_s": 0.422,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.221
+        ],
+        [
+         "flight",
+         0.422
+        ]
+       ],
+       "sideways_m_s": 0.966,
+       "covers_m": 0.408
+      },
+      "1.2": {
+       "duration_s": 0.643,
+       "tell_s": 0.221,
+       "commits_s": 0.422,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.221
+        ],
+        [
+         "flight",
+         0.422
+        ]
+       ],
+       "sideways_m_s": 0.966,
+       "covers_m": 0.408
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 1.492,
+       "tell_s": 0.277,
+       "commits_s": 1.216,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.277
+        ],
+        [
+         "flight",
+         1.216
+        ]
+       ],
+       "sideways_m_s": 0.461,
+       "covers_m": 0.56
+      },
+      "0.8": {
+       "duration_s": 1.492,
+       "tell_s": 0.277,
+       "commits_s": 1.216,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.277
+        ],
+        [
+         "flight",
+         1.216
+        ]
+       ],
+       "sideways_m_s": 0.461,
+       "covers_m": 0.56
+      },
+      "1.2": {
+       "duration_s": 1.492,
+       "tell_s": 0.277,
+       "commits_s": 1.216,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.277
+        ],
+        [
+         "flight",
+         1.216
+        ]
+       ],
+       "sideways_m_s": 0.461,
+       "covers_m": 0.56
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.671,
+       "tell_s": 0.236,
+       "commits_s": 0.435,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.236
+        ],
+        [
+         "flight",
+         0.435
+        ]
+       ],
+       "sideways_m_s": 0.996,
+       "covers_m": 0.433
+      },
+      "0.8": {
+       "duration_s": 0.671,
+       "tell_s": 0.236,
+       "commits_s": 0.435,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.236
+        ],
+        [
+         "flight",
+         0.435
+        ]
+       ],
+       "sideways_m_s": 0.996,
+       "covers_m": 0.433
+      },
+      "1.2": {
+       "duration_s": 0.671,
+       "tell_s": 0.236,
+       "commits_s": 0.435,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.236
+        ],
+        [
+         "flight",
+         0.435
+        ]
+       ],
+       "sideways_m_s": 0.996,
+       "covers_m": 0.433
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "running_leap",
+   "name": "running leap",
+   "family": "jumps",
+   "entry": {
+    "posture": "moving",
+    "momentum": [
+     "slow",
+     "travelling"
+    ],
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "aloft",
+    "momentum": "travelling",
+    "ball": "same"
+   },
+   "successors": [
+    "braking_landing",
+    "rebound_jump",
+    "landing_throw",
+    "air_pass",
+    "catch"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 1.899,
+       "tell_s": 0.0,
+       "commits_s": 1.569,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         1.569
+        ]
+       ],
+       "covers_m": 4.708
+      },
+      "0.8": {
+       "duration_s": 1.899,
+       "tell_s": 0.0,
+       "commits_s": 1.569,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         1.569
+        ]
+       ],
+       "covers_m": 4.708
+      },
+      "1.2": {
+       "duration_s": 1.899,
+       "tell_s": 0.0,
+       "commits_s": 1.569,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         1.569
+        ]
+       ],
+       "covers_m": 4.708
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.816,
+       "tell_s": 0.0,
+       "commits_s": 0.486,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.486
+        ]
+       ],
+       "covers_m": 1.457
+      },
+      "0.8": {
+       "duration_s": 0.816,
+       "tell_s": 0.0,
+       "commits_s": 0.486,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.486
+        ]
+       ],
+       "covers_m": 1.457
+      },
+      "1.2": {
+       "duration_s": 0.816,
+       "tell_s": 0.0,
+       "commits_s": 0.486,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.486
+        ]
+       ],
+       "covers_m": 1.457
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 1.899,
+       "tell_s": 0.0,
+       "commits_s": 1.569,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         1.569
+        ]
+       ],
+       "covers_m": 4.708
+      },
+      "0.8": {
+       "duration_s": 1.899,
+       "tell_s": 0.0,
+       "commits_s": 1.569,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         1.569
+        ]
+       ],
+       "covers_m": 4.708
+      },
+      "1.2": {
+       "duration_s": 1.899,
+       "tell_s": 0.0,
+       "commits_s": 1.569,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         1.569
+        ]
+       ],
+       "covers_m": 4.708
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.829,
+       "tell_s": 0.0,
+       "commits_s": 0.499,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.499
+        ]
+       ],
+       "covers_m": 1.496
+      },
+      "0.8": {
+       "duration_s": 0.829,
+       "tell_s": 0.0,
+       "commits_s": 0.499,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.499
+        ]
+       ],
+       "covers_m": 1.496
+      },
+      "1.2": {
+       "duration_s": 0.829,
+       "tell_s": 0.0,
+       "commits_s": 0.499,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "stance",
+         0.33
+        ],
+        [
+         "flight",
+         0.499
+        ]
+       ],
+       "covers_m": 1.496
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "chest_pass",
+   "name": "chest pass",
+   "family": "ball",
+   "entry": {
+    "posture": [
+     "upright",
+     "ready",
+     "split",
+     "moving"
+    ],
+    "momentum": "any",
+    "ball": "held"
+   },
+   "exit": {
+    "posture": "same",
+    "momentum": "same",
+    "ball": "free"
+   },
+   "successors": [
+    "ready_crouch",
+    "lean_start",
+    "drop_step",
+    "shuffle",
+    "bound",
+    "bounce_cut",
+    "braking_landing",
+    "pivot",
+    "standing_jump",
+    "crouch_jump",
+    "rebound_jump",
+    "side_hop",
+    "running_leap",
+    "catch",
+    "scoop",
+    "kick",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 9.924,
+       "overhand_held_m_s": 2.977
+      },
+      "0.8": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 9.924,
+       "overhand_held_m_s": 2.977
+      },
+      "1.2": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 9.924,
+       "overhand_held_m_s": 2.977
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0,
+       "overhand_held_m_s": 17.976
+      },
+      "0.8": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0,
+       "overhand_held_m_s": 17.976
+      },
+      "1.2": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0,
+       "overhand_held_m_s": 17.976
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 15.881,
+       "overhand_held_m_s": 4.339
+      },
+      "0.8": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 15.881,
+       "overhand_held_m_s": 4.339
+      },
+      "1.2": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 15.881,
+       "overhand_held_m_s": 4.339
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0,
+       "overhand_held_m_s": 20.0
+      },
+      "0.8": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0,
+       "overhand_held_m_s": 20.0
+      },
+      "1.2": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0,
+       "overhand_held_m_s": 20.0
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "split_throw",
+   "name": "throw from a split stance",
+   "family": "ball",
+   "entry": {
+    "posture": "split",
+    "momentum": [
+     "still",
+     "slow"
+    ],
+    "ball": "held"
+   },
+   "exit": {
+    "posture": "split",
+    "momentum": "same",
+    "ball": "free"
+   },
+   "successors": [
+    "ready_crouch",
+    "shuffle",
+    "bound",
+    "pivot",
+    "crouch_jump",
+    "catch",
+    "kick",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 14.886
+      },
+      "0.8": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 14.886
+      },
+      "1.2": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 14.886
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "0.8": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "1.2": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "0.8": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "1.2": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "0.8": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "1.2": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "release_held_m_s": 20.0
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "landing_throw",
+   "name": "throw into a landing",
+   "family": "ball",
+   "entry": {
+    "posture": "aloft",
+    "momentum": "any",
+    "ball": "held"
+   },
+   "exit": {
+    "posture": "moving",
+    "momentum": "same",
+    "ball": "free"
+   },
+   "successors": [
+    "ready_crouch",
+    "shuffle",
+    "bound",
+    "bounce_cut",
+    "braking_landing",
+    "rebound_jump",
+    "running_leap",
+    "catch",
+    "scoop",
+    "kick",
+    "shove",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 17.298
+      },
+      "0.8": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 17.298
+      },
+      "1.2": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 17.298
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "0.8": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "1.2": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 20.0
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "0.8": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "1.2": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 20.0
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "0.8": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 20.0
+      },
+      "1.2": {
+       "duration_s": 0.32,
+       "tell_s": 0.0,
+       "commits_s": 0.32,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "landing",
+         0.32
+        ]
+       ],
+       "release_held_m_s": 20.0
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "air_pass",
+   "name": "pass in the air",
+   "family": "ball",
+   "entry": {
+    "posture": "aloft",
+    "momentum": "any",
+    "ball": "held"
+   },
+   "exit": {
+    "posture": "aloft",
+    "momentum": "same",
+    "ball": "free"
+   },
+   "successors": [
+    "braking_landing",
+    "rebound_jump",
+    "catch"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 31.139,
+       "turn_tucked_deg": 123.294
+      },
+      "0.8": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 31.139,
+       "turn_tucked_deg": 123.294
+      },
+      "1.2": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 31.139,
+       "turn_tucked_deg": 123.294
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 5.157,
+       "turn_tucked_deg": 20.421
+      },
+      "0.8": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 5.157,
+       "turn_tucked_deg": 20.421
+      },
+      "1.2": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 5.157,
+       "turn_tucked_deg": 20.421
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 17.771,
+       "turn_tucked_deg": 70.365
+      },
+      "0.8": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 17.771,
+       "turn_tucked_deg": 70.365
+      },
+      "1.2": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 17.771,
+       "turn_tucked_deg": 70.365
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 2.943,
+       "turn_tucked_deg": 11.654
+      },
+      "0.8": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 2.943,
+       "turn_tucked_deg": 11.654
+      },
+      "1.2": {
+       "duration_s": 0.0,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "push",
+         0.15
+        ]
+       ],
+       "turn_laid_out_deg": 2.943,
+       "turn_tucked_deg": 11.654
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "catch",
+   "name": "catch",
+   "family": "ball",
+   "entry": {
+    "posture": [
+     "upright",
+     "ready",
+     "split",
+     "moving",
+     "aloft"
+    ],
+    "momentum": "any",
+    "ball": "free"
+   },
+   "exit": {
+    "posture": "same",
+    "momentum": "same",
+    "ball": "held"
+   },
+   "successors": [
+    "ready_crouch",
+    "lean_start",
+    "drop_step",
+    "shuffle",
+    "bound",
+    "bounce_cut",
+    "braking_landing",
+    "pivot",
+    "standing_jump",
+    "crouch_jump",
+    "rebound_jump",
+    "side_hop",
+    "running_leap",
+    "chest_pass",
+    "split_throw",
+    "landing_throw",
+    "air_pass",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 9.924,
+       "overhead_holds_m_s": 2.977,
+       "split_overhead_holds_m_s": 14.886
+      },
+      "0.8": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 9.924,
+       "overhead_holds_m_s": 2.977,
+       "split_overhead_holds_m_s": 14.886
+      },
+      "1.2": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 9.924,
+       "overhead_holds_m_s": 2.977,
+       "split_overhead_holds_m_s": 14.886
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 20.0,
+       "overhead_holds_m_s": 17.976,
+       "split_overhead_holds_m_s": 20.0
+      },
+      "0.8": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 20.0,
+       "overhead_holds_m_s": 17.976,
+       "split_overhead_holds_m_s": 20.0
+      },
+      "1.2": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 20.0,
+       "overhead_holds_m_s": 17.976,
+       "split_overhead_holds_m_s": 20.0
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 15.881,
+       "overhead_holds_m_s": 4.339,
+       "split_overhead_holds_m_s": 20.0
+      },
+      "0.8": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 15.881,
+       "overhead_holds_m_s": 4.339,
+       "split_overhead_holds_m_s": 20.0
+      },
+      "1.2": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 15.881,
+       "overhead_holds_m_s": 4.339,
+       "split_overhead_holds_m_s": 20.0
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 20.0,
+       "overhead_holds_m_s": 20.0,
+       "split_overhead_holds_m_s": 20.0
+      },
+      "0.8": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 20.0,
+       "overhead_holds_m_s": 20.0,
+       "split_overhead_holds_m_s": 20.0
+      },
+      "1.2": {
+       "duration_s": 0.15,
+       "tell_s": 0.0,
+       "commits_s": 0.15,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "give",
+         0.15
+        ]
+       ],
+       "chest_holds_m_s": 20.0,
+       "overhead_holds_m_s": 20.0,
+       "split_overhead_holds_m_s": 20.0
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "scoop",
+   "name": "scoop from the floor",
+   "family": "ball",
+   "entry": {
+    "posture": [
+     "upright",
+     "ready",
+     "moving"
+    ],
+    "momentum": [
+     "still",
+     "slow"
+    ],
+    "ball": "free"
+   },
+   "exit": {
+    "posture": "ready",
+    "momentum": "still",
+    "ball": "held"
+   },
+   "successors": [
+    "drop_step",
+    "shuffle",
+    "bound",
+    "pivot",
+    "crouch_jump",
+    "side_hop",
+    "chest_pass",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 1.569,
+       "tell_s": 0.784,
+       "commits_s": 0.785,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.784
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.635
+        ]
+       ]
+      },
+      "0.8": {
+       "duration_s": 1.569,
+       "tell_s": 0.784,
+       "commits_s": 0.785,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.784
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.635
+        ]
+       ]
+      },
+      "1.2": {
+       "duration_s": 1.569,
+       "tell_s": 0.784,
+       "commits_s": 0.785,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.784
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.635
+        ]
+       ]
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.905,
+       "tell_s": 0.39,
+       "commits_s": 0.515,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.39
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.365
+        ]
+       ]
+      },
+      "0.8": {
+       "duration_s": 0.905,
+       "tell_s": 0.39,
+       "commits_s": 0.515,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.39
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.365
+        ]
+       ]
+      },
+      "1.2": {
+       "duration_s": 0.905,
+       "tell_s": 0.39,
+       "commits_s": 0.515,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.39
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.365
+        ]
+       ]
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 1.552,
+       "tell_s": 0.784,
+       "commits_s": 0.769,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.784
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.619
+        ]
+       ]
+      },
+      "0.8": {
+       "duration_s": 1.552,
+       "tell_s": 0.784,
+       "commits_s": 0.769,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.784
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.619
+        ]
+       ]
+      },
+      "1.2": {
+       "duration_s": 1.552,
+       "tell_s": 0.784,
+       "commits_s": 0.769,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.784
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.619
+        ]
+       ]
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.898,
+       "tell_s": 0.39,
+       "commits_s": 0.509,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.39
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.359
+        ]
+       ]
+      },
+      "0.8": {
+       "duration_s": 0.898,
+       "tell_s": 0.39,
+       "commits_s": 0.509,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.39
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.359
+        ]
+       ]
+      },
+      "1.2": {
+       "duration_s": 0.898,
+       "tell_s": 0.39,
+       "commits_s": 0.509,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "dip",
+         0.39
+        ],
+        [
+         "gather",
+         0.15
+        ],
+        [
+         "rise",
+         0.359
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "kick",
+   "name": "kick",
+   "family": "ball",
+   "entry": {
+    "posture": [
+     "upright",
+     "ready",
+     "split",
+     "moving"
+    ],
+    "momentum": "any",
+    "ball": "free"
+   },
+   "exit": {
+    "posture": "moving",
+    "momentum": "same",
+    "ball": "free"
+   },
+   "successors": [
+    "ready_crouch",
+    "shuffle",
+    "bound",
+    "bounce_cut",
+    "braking_landing",
+    "rebound_jump",
+    "running_leap",
+    "catch",
+    "scoop",
+    "kick",
+    "shove",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.592,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 22.351,
+       "foot_holds_N_m": 8.932
+      },
+      "0.8": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.592,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 22.351,
+       "foot_holds_N_m": 8.932
+      },
+      "1.2": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.592,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 22.351,
+       "foot_holds_N_m": 8.932
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.098,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 22.351,
+       "foot_holds_N_m": 53.927
+      },
+      "0.8": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.098,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 22.351,
+       "foot_holds_N_m": 53.927
+      },
+      "1.2": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.098,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 22.351,
+       "foot_holds_N_m": 53.927
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.413,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 39.17,
+       "foot_holds_N_m": 14.293
+      },
+      "0.8": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.413,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 39.17,
+       "foot_holds_N_m": 14.293
+      },
+      "1.2": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.413,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 39.17,
+       "foot_holds_N_m": 14.293
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.068,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 39.17,
+       "foot_holds_N_m": 86.299
+      },
+      "0.8": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.068,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 39.17,
+       "foot_holds_N_m": 86.299
+      },
+      "1.2": {
+       "duration_s": 0.35,
+       "tell_s": 0.2,
+       "commits_s": 0.15,
+       "recover_s": 0.068,
+       "phases": [
+        [
+         "windup",
+         0.2
+        ],
+        [
+         "swing",
+         0.15
+        ]
+       ],
+       "ball_m_s": 16.2,
+       "leg_momentum_N_m_s": 39.17,
+       "foot_holds_N_m": 86.299
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "shove",
+   "name": "shove",
+   "family": "contact",
+   "entry": {
+    "posture": [
+     "split",
+     "ready",
+     "moving"
+    ],
+    "momentum": [
+     "still",
+     "slow"
+    ],
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "same",
+    "momentum": "same",
+    "ball": "same"
+   },
+   "successors": [
+    "ready_crouch",
+    "drop_step",
+    "shuffle",
+    "bound",
+    "braking_landing",
+    "pivot",
+    "crouch_jump",
+    "rebound_jump",
+    "side_hop",
+    "running_leap",
+    "chest_pass",
+    "split_throw",
+    "catch",
+    "scoop",
+    "kick",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 38.833,
+       "slip_N": 44.658,
+       "topple_N": 38.833,
+       "push_g": 0.435
+      },
+      "0.8": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 38.833,
+       "slip_N": 71.453,
+       "topple_N": 38.833,
+       "push_g": 0.435
+      },
+      "1.2": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 38.833,
+       "slip_N": 107.179,
+       "topple_N": 38.833,
+       "push_g": 0.435
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 234.464,
+       "slip_N": 269.634,
+       "topple_N": 234.464,
+       "push_g": 0.435
+      },
+      "0.8": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 234.464,
+       "slip_N": 431.414,
+       "topple_N": 234.464,
+       "push_g": 0.435
+      },
+      "1.2": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 234.464,
+       "slip_N": 647.121,
+       "topple_N": 234.464,
+       "push_g": 0.435
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 58.328,
+       "slip_N": 64.969,
+       "topple_N": 58.328,
+       "push_g": 0.449
+      },
+      "0.8": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 58.328,
+       "slip_N": 103.95,
+       "topple_N": 58.328,
+       "push_g": 0.449
+      },
+      "1.2": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 58.328,
+       "slip_N": 155.925,
+       "topple_N": 58.328,
+       "push_g": 0.449
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 352.173,
+       "slip_N": 392.266,
+       "topple_N": 352.173,
+       "push_g": 0.449
+      },
+      "0.8": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 352.173,
+       "slip_N": 627.626,
+       "topple_N": 352.173,
+       "push_g": 0.449
+      },
+      "1.2": {
+       "duration_s": 0.5,
+       "tell_s": 0.0,
+       "commits_s": 0.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "contact",
+         0.5
+        ]
+       ],
+       "push_N": 352.173,
+       "slip_N": 941.438,
+       "topple_N": 352.173,
+       "push_g": 0.449
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "brace",
+   "name": "brace",
+   "family": "contact",
+   "entry": {
+    "posture": [
+     "upright",
+     "ready",
+     "split"
+    ],
+    "momentum": [
+     "still",
+     "slow"
+    ],
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "split",
+    "momentum": "still",
+    "ball": "same"
+   },
+   "successors": [
+    "ready_crouch",
+    "shuffle",
+    "bound",
+    "pivot",
+    "crouch_jump",
+    "chest_pass",
+    "split_throw",
+    "catch",
+    "kick",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 38.833,
+       "squared_up_holds_N": 7.767,
+       "turned_holds_N": 27.183,
+       "slip_N": 44.658
+      },
+      "0.8": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 38.833,
+       "squared_up_holds_N": 7.767,
+       "turned_holds_N": 27.183,
+       "slip_N": 71.453
+      },
+      "1.2": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 38.833,
+       "squared_up_holds_N": 7.767,
+       "turned_holds_N": 27.183,
+       "slip_N": 107.179
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 234.464,
+       "squared_up_holds_N": 46.893,
+       "turned_holds_N": 164.125,
+       "slip_N": 269.634
+      },
+      "0.8": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 234.464,
+       "squared_up_holds_N": 46.893,
+       "turned_holds_N": 164.125,
+       "slip_N": 431.414
+      },
+      "1.2": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 234.464,
+       "squared_up_holds_N": 46.893,
+       "turned_holds_N": 164.125,
+       "slip_N": 647.121
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 58.328,
+       "squared_up_holds_N": 11.687,
+       "turned_holds_N": 40.798,
+       "slip_N": 64.969
+      },
+      "0.8": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 58.328,
+       "squared_up_holds_N": 11.687,
+       "turned_holds_N": 40.798,
+       "slip_N": 103.95
+      },
+      "1.2": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 58.328,
+       "squared_up_holds_N": 11.687,
+       "turned_holds_N": 40.798,
+       "slip_N": 155.925
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 352.173,
+       "squared_up_holds_N": 70.563,
+       "turned_holds_N": 246.329,
+       "slip_N": 392.266
+      },
+      "0.8": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 352.173,
+       "squared_up_holds_N": 70.563,
+       "turned_holds_N": 246.329,
+       "slip_N": 627.626
+      },
+      "1.2": {
+       "duration_s": 0.25,
+       "tell_s": 0.0,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "step",
+         0.25
+        ]
+       ],
+       "holds_N": 352.173,
+       "squared_up_holds_N": 70.563,
+       "turned_holds_N": 246.329,
+       "slip_N": 941.438
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "boost",
+   "name": "teammate's boost",
+   "family": "contact",
+   "entry": {
+    "posture": [
+     "ready",
+     "moving",
+     "split"
+    ],
+    "momentum": [
+     "still",
+     "slow"
+    ],
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "aloft",
+    "momentum": "same",
+    "ball": "same"
+   },
+   "successors": [
+    "braking_landing",
+    "rebound_jump",
+    "landing_throw",
+    "air_pass",
+    "catch"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 3.69,
+       "tell_s": 0.753,
+       "commits_s": 2.937,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.503
+        ],
+        [
+         "flight",
+         2.937
+        ]
+       ],
+       "lifts": 1.0,
+       "take_off_m_s": 2.385,
+       "rise_m": 1.751
+      },
+      "0.8": {
+       "duration_s": 3.69,
+       "tell_s": 0.753,
+       "commits_s": 2.937,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.503
+        ],
+        [
+         "flight",
+         2.937
+        ]
+       ],
+       "lifts": 1.0,
+       "take_off_m_s": 2.385,
+       "rise_m": 1.751
+      },
+      "1.2": {
+       "duration_s": 3.69,
+       "tell_s": 0.753,
+       "commits_s": 2.937,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.503
+        ],
+        [
+         "flight",
+         2.937
+        ]
+       ],
+       "lifts": 1.0,
+       "take_off_m_s": 2.385,
+       "rise_m": 1.751
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.0
+        ],
+        [
+         "flight",
+         0.0
+        ]
+       ],
+       "lifts": 0.0,
+       "take_off_m_s": 0.0,
+       "rise_m": 0.0
+      },
+      "0.8": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.0
+        ],
+        [
+         "flight",
+         0.0
+        ]
+       ],
+       "lifts": 0.0,
+       "take_off_m_s": 0.0,
+       "rise_m": 0.0
+      },
+      "1.2": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.0
+        ],
+        [
+         "flight",
+         0.0
+        ]
+       ],
+       "lifts": 0.0,
+       "take_off_m_s": 0.0,
+       "rise_m": 0.0
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 3.148,
+       "tell_s": 0.91,
+       "commits_s": 2.237,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.66
+        ],
+        [
+         "flight",
+         2.237
+        ]
+       ],
+       "lifts": 1.0,
+       "take_off_m_s": 1.817,
+       "rise_m": 1.016
+      },
+      "0.8": {
+       "duration_s": 3.148,
+       "tell_s": 0.91,
+       "commits_s": 2.237,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.66
+        ],
+        [
+         "flight",
+         2.237
+        ]
+       ],
+       "lifts": 1.0,
+       "take_off_m_s": 1.817,
+       "rise_m": 1.016
+      },
+      "1.2": {
+       "duration_s": 3.148,
+       "tell_s": 0.91,
+       "commits_s": 2.237,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.66
+        ],
+        [
+         "flight",
+         2.237
+        ]
+       ],
+       "lifts": 1.0,
+       "take_off_m_s": 1.817,
+       "rise_m": 1.016
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.0
+        ],
+        [
+         "flight",
+         0.0
+        ]
+       ],
+       "lifts": 0.0,
+       "take_off_m_s": 0.0,
+       "rise_m": 0.0
+      },
+      "0.8": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.0
+        ],
+        [
+         "flight",
+         0.0
+        ]
+       ],
+       "lifts": 0.0,
+       "take_off_m_s": 0.0,
+       "rise_m": 0.0
+      },
+      "1.2": {
+       "duration_s": 0.25,
+       "tell_s": 0.25,
+       "commits_s": 0.0,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "set",
+         0.25
+        ],
+        [
+         "push",
+         0.0
+        ],
+        [
+         "flight",
+         0.0
+        ]
+       ],
+       "lifts": 0.0,
+       "take_off_m_s": 0.0,
+       "rise_m": 0.0
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "fall_and_rise",
+   "name": "fall and rise",
+   "family": "contact",
+   "entry": {
+    "posture": [
+     "upright",
+     "ready",
+     "split",
+     "moving"
+    ],
+    "momentum": "any",
+    "ball": "any"
+   },
+   "exit": {
+    "posture": "ready",
+    "momentum": "still",
+    "ball": "same"
+   },
+   "successors": [
+    "drop_step",
+    "shuffle",
+    "bound",
+    "pivot",
+    "crouch_jump",
+    "side_hop",
+    "chest_pass",
+    "catch",
+    "scoop",
+    "kick",
+    "shove",
+    "brace",
+    "boost",
+    "fall_and_rise"
+   ],
+   "by_body": {
+    "dancer": {
+     "moon": {
+      "0.5": {
+       "duration_s": 3.477,
+       "tell_s": 1.977,
+       "commits_s": 1.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         2.395
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.833
+        ]
+       ]
+      },
+      "0.8": {
+       "duration_s": 3.477,
+       "tell_s": 1.977,
+       "commits_s": 1.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         2.395
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.833
+        ]
+       ]
+      },
+      "1.2": {
+       "duration_s": 3.477,
+       "tell_s": 1.977,
+       "commits_s": 1.5,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         2.395
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.833
+        ]
+       ]
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 1.703,
+       "tell_s": 0.805,
+       "commits_s": 0.899,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         0.975
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.479
+        ]
+       ]
+      },
+      "0.8": {
+       "duration_s": 1.703,
+       "tell_s": 0.805,
+       "commits_s": 0.899,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         0.975
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.479
+        ]
+       ]
+      },
+      "1.2": {
+       "duration_s": 1.703,
+       "tell_s": 0.805,
+       "commits_s": 0.899,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         0.975
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.479
+        ]
+       ]
+      }
+     }
+    },
+    "larger": {
+     "moon": {
+      "0.5": {
+       "duration_s": 3.652,
+       "tell_s": 2.072,
+       "commits_s": 1.58,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         2.509
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.893
+        ]
+       ]
+      },
+      "0.8": {
+       "duration_s": 3.652,
+       "tell_s": 2.072,
+       "commits_s": 1.58,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         2.509
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.893
+        ]
+       ]
+      },
+      "1.2": {
+       "duration_s": 3.652,
+       "tell_s": 2.072,
+       "commits_s": 1.58,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         2.509
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.893
+        ]
+       ]
+      }
+     },
+     "earth": {
+      "0.5": {
+       "duration_s": 1.789,
+       "tell_s": 0.843,
+       "commits_s": 0.946,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         1.021
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.518
+        ]
+       ]
+      },
+      "0.8": {
+       "duration_s": 1.789,
+       "tell_s": 0.843,
+       "commits_s": 0.946,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         1.021
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.518
+        ]
+       ]
+      },
+      "1.2": {
+       "duration_s": 1.789,
+       "tell_s": 0.843,
+       "commits_s": 0.946,
+       "recover_s": 0.0,
+       "phases": [
+        [
+         "fall",
+         1.021
+        ],
+        [
+         "floor",
+         0.25
+        ],
+        [
+         "rise",
+         0.518
+        ]
+       ]
+      }
+     }
+    }
+   }
+  }
+ ],
+ "transitions": {
+  "units": 24,
+  "edges": 271,
+  "reach_all_from_ready_crouch": true
+ },
+ "readings": {
+  "body": "dancer",
+  "grip": 0.8,
+  "rows": [
+   {
+    "unit": "ready_crouch",
+    "duration_s_moon": 0.47,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.0,
+    "duration_s_earth": 0.23,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.0
+   },
+   {
+    "unit": "lean_start",
+    "duration_s_moon": 1.4,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.25,
+    "duration_s_earth": 0.57,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.25
+   },
+   {
+    "unit": "drop_step",
+    "duration_s_moon": 0.25,
+    "tell_s_moon": 0.25,
+    "commits_s_moon": 0.0,
+    "duration_s_earth": 0.25,
+    "tell_s_earth": 0.25,
+    "commits_s_earth": 0.0
+   },
+   {
+    "unit": "shuffle",
+    "duration_s_moon": 2.29,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.0,
+    "duration_s_earth": 0.96,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.0
+   },
+   {
+    "unit": "bound",
+    "duration_s_moon": 0.83,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.5,
+    "duration_s_earth": 0.53,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.2
+   },
+   {
+    "unit": "bounce_cut",
+    "duration_s_moon": 3.2,
+    "tell_s_moon": 1.44,
+    "commits_s_moon": 1.44,
+    "duration_s_earth": 0.33,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.0
+   },
+   {
+    "unit": "braking_landing",
+    "duration_s_moon": 1.08,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.4,
+    "duration_s_earth": 0.4,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.4
+   },
+   {
+    "unit": "pivot",
+    "duration_s_moon": 0.45,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.45,
+    "duration_s_earth": 0.19,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.19
+   },
+   {
+    "unit": "standing_jump",
+    "duration_s_moon": 2.6,
+    "tell_s_moon": 0.38,
+    "commits_s_moon": 2.22,
+    "duration_s_earth": 1.1,
+    "tell_s_earth": 0.62,
+    "commits_s_earth": 0.49
+   },
+   {
+    "unit": "crouch_jump",
+    "duration_s_moon": 2.39,
+    "tell_s_moon": 0.17,
+    "commits_s_moon": 2.22,
+    "duration_s_earth": 0.64,
+    "tell_s_earth": 0.22,
+    "commits_s_earth": 0.42
+   },
+   {
+    "unit": "rebound_jump",
+    "duration_s_moon": 2.55,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 2.22,
+    "duration_s_earth": 0.82,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.49
+   },
+   {
+    "unit": "side_hop",
+    "duration_s_moon": 1.47,
+    "tell_s_moon": 0.25,
+    "commits_s_moon": 1.22,
+    "duration_s_earth": 0.64,
+    "tell_s_earth": 0.22,
+    "commits_s_earth": 0.42
+   },
+   {
+    "unit": "running_leap",
+    "duration_s_moon": 1.9,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 1.57,
+    "duration_s_earth": 0.82,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.49
+   },
+   {
+    "unit": "chest_pass",
+    "duration_s_moon": 0.15,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.15,
+    "duration_s_earth": 0.15,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.15
+   },
+   {
+    "unit": "split_throw",
+    "duration_s_moon": 0.35,
+    "tell_s_moon": 0.2,
+    "commits_s_moon": 0.15,
+    "duration_s_earth": 0.35,
+    "tell_s_earth": 0.2,
+    "commits_s_earth": 0.15
+   },
+   {
+    "unit": "landing_throw",
+    "duration_s_moon": 0.32,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.32,
+    "duration_s_earth": 0.32,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.32
+   },
+   {
+    "unit": "air_pass",
+    "duration_s_moon": 0.0,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.15,
+    "duration_s_earth": 0.0,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.15
+   },
+   {
+    "unit": "catch",
+    "duration_s_moon": 0.15,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.15,
+    "duration_s_earth": 0.15,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.15
+   },
+   {
+    "unit": "scoop",
+    "duration_s_moon": 1.57,
+    "tell_s_moon": 0.78,
+    "commits_s_moon": 0.79,
+    "duration_s_earth": 0.9,
+    "tell_s_earth": 0.39,
+    "commits_s_earth": 0.52
+   },
+   {
+    "unit": "kick",
+    "duration_s_moon": 0.35,
+    "tell_s_moon": 0.2,
+    "commits_s_moon": 0.15,
+    "duration_s_earth": 0.35,
+    "tell_s_earth": 0.2,
+    "commits_s_earth": 0.15
+   },
+   {
+    "unit": "shove",
+    "duration_s_moon": 0.5,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.5,
+    "duration_s_earth": 0.5,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.5
+   },
+   {
+    "unit": "brace",
+    "duration_s_moon": 0.25,
+    "tell_s_moon": 0.0,
+    "commits_s_moon": 0.0,
+    "duration_s_earth": 0.25,
+    "tell_s_earth": 0.0,
+    "commits_s_earth": 0.0
+   },
+   {
+    "unit": "boost",
+    "duration_s_moon": 3.69,
+    "tell_s_moon": 0.75,
+    "commits_s_moon": 2.94,
+    "duration_s_earth": 0.25,
+    "tell_s_earth": 0.25,
+    "commits_s_earth": 0.0
+   },
+   {
+    "unit": "fall_and_rise",
+    "duration_s_moon": 3.48,
+    "tell_s_moon": 1.98,
+    "commits_s_moon": 1.5,
+    "duration_s_earth": 1.7,
+    "tell_s_earth": 0.8,
+    "commits_s_earth": 0.9
+   }
+  ],
+  "no_tell": [
+   "ready_crouch",
+   "lean_start",
+   "shuffle",
+   "bound",
+   "braking_landing",
+   "pivot",
+   "rebound_jump",
+   "running_leap",
+   "chest_pass",
+   "landing_throw",
+   "air_pass",
+   "catch",
+   "shove",
+   "brace"
+  ],
+  "committed_over_1_s_on_the_moon": [
+   "bounce_cut",
+   "standing_jump",
+   "crouch_jump",
+   "rebound_jump",
+   "side_hop",
+   "running_leap",
+   "boost",
+   "fall_and_rise"
+  ]
+ }
+}
