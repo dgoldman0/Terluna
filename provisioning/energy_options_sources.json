@@ -1,0 +1,113 @@
+{
+ "about": "Sources for the energy-options study (energy_options.md, energy_options.py), searched on 5 November 2026 within the study's literature allowance. 'access' says how far each was read: most were read only as search-result summaries or abstracts, and their values are used as published figures at that depth. Values the study recalls without a source checked this session are labelled 'recalled' in the product's assumptions.",
+ "sources": [
+  {
+   "citation": "Fraunhofer ISE 2025, Photovoltaics Report",
+   "doi_or_url": "https://www.ise.fraunhofer.de/en/publications/studies/photovoltaics-report.html",
+   "use": "Commercial wafer-based modules from new production reached 22% in 2024; energy payback about 1 year in Europe (0.9-1.1 years by location)",
+   "access": "search-result summary of the report (not opened)"
+  },
+  {
+   "citation": "Mirletz, Ovaitt, Sridhar & Barnes 2022, Circular economy priorities for photovoltaics in the energy transition, PLoS ONE 17, e0274351",
+   "doi_or_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9462576/",
+   "use": "1.75 TW of US PV by 2050 demands 97 Mt of virgin material cumulatively, about 55 t per MW of modules",
+   "access": "search-result summary (not opened)"
+  },
+  {
+   "citation": "Search summaries of PV material intensity (Smart Energy Council 2026, aluminium in solar panels; LCA summaries)",
+   "doi_or_url": "https://smartenergy.org.au/wp-content/uploads/2026/03/Aluminium-in-Solar-Panels-1.pdf",
+   "use": "About 21 t of aluminium per MW (18-35 by mounting); 60-67 t of steel, 4-5 t of copper and 6-8 t of aluminium per MW of panels",
+   "access": "search-result summaries (not opened); used only for the order of magnitude"
+  },
+  {
+   "citation": "Fraunhofer ISE 2021, Record efficiency of 68.9% for GaAs thin-film photovoltaic cell under laser light (48th IEEE PVSC; Helmers et al. 2021)",
+   "doi_or_url": "https://www.ise.fraunhofer.de/en/press-media/press-releases/2021/record-efficiency-68-9-percent-for-gaas-thin-film-photovoltaic-cell.html",
+   "use": "The best laser power converter: 68.9% under 858 nm laser light",
+   "access": "search-result summaries of the press release"
+  },
+  {
+   "citation": "DARPA POWER programme 2025, optical power beaming record (The Register, 19 May 2025; NRL news)",
+   "doi_or_url": "https://www.theregister.com/2025/05/19/darpa_energy_beaming_record/",
+   "use": "More than 800 W delivered over 8.6 km for 30 s; just over 20% from laser output to electricity at the receiver, at shorter distances",
+   "access": "search-result summaries"
+  },
+  {
+   "citation": "Laser wall-plug efficiencies: a 780 nm GaAsP laser diode at 71% (Optics and Laser Technology 2023); IPG YLS-ECO fibre lasers above 50%",
+   "doi_or_url": "https://www.sciencedirect.com/science/article/abs/pii/S0030399223007600",
+   "use": "Transmitter efficiencies for an optical link, 50-70%",
+   "access": "search-result summaries and the article's listing"
+  },
+  {
+   "citation": "Brown 1977 rectenna record, as cited in rectenna reviews (90.6% at 2.45 GHz with 8 W input, GaAs-Pt Schottky diode); an 82% rectenna at 5.8 GHz",
+   "doi_or_url": "https://www.researchgate.net/publication/303845511_Rectenna_Designs_for_RF_Energy_Harvesting_System_a_Review",
+   "use": "Rectenna element efficiencies at the two bands; the screen keeps the power screen's 85% at both",
+   "access": "search-result summaries of reviews; Rodenbeck et al. 2021 (power_sources.json) carries the field's review"
+  },
+  {
+   "citation": "Caltech Space Solar Power Project 2023, MAPLE demonstrates wireless power transfer in space",
+   "doi_or_url": "https://www.caltech.edu/about/news/in-a-first-caltechs-space-solar-power-demonstrator-wirelessly-transmits-power-in-space",
+   "use": "The first wireless power transfer in space (milliwatts to LEDs about 30 cm away, detectable power to Earth): maturity of space power beaming",
+   "access": "search-result summaries of the news release"
+  },
+  {
+   "citation": "US Congress OTA 1981, Solar Power Satellites (NTIS PB82-108846)",
+   "doi_or_url": "https://digital.library.unt.edu/ark:/67531/metadc39859/m2/1/high_res_d/8124.pdf",
+   "use": "The 1978 reference satellite at about 5e4 t for 5 GW (0.1 kW/kg); its rectenna an ellipse of about 10 by 13 km on continuous concrete footings",
+   "access": "search-result summaries only; the rectenna's materials were not found and stay a design guess"
+  },
+  {
+   "citation": "ITER Organization 2024, Baseline 2024 press conference summary",
+   "doi_or_url": "https://www.iter.org/sites/default/files/media/2024-07/baseline_press_conference_summary_july-2024_b.pdf",
+   "use": "Start of research operation in 2034, deuterium-tritium operation in 2039",
+   "access": "search-result summaries of the summary and of IPP's note"
+  },
+  {
+   "citation": "LLNL 2025, National Ignition Facility annual report FY2025",
+   "doi_or_url": "https://annual.llnl.gov/fy-2025/national-ignition-facility-2025",
+   "use": "8.6 MJ from 2.08 MJ of laser energy on 7 April 2025, a target gain of 4.13; no net electricity at the wall",
+   "access": "search-result summaries"
+  },
+  {
+   "citation": "Langseth, Keihm & Peters 1976, Revised lunar heat-flow values, Proc. Lunar Sci. Conf. 7, 3143; Siegler & Smrekar 2014, JGR Planets 119, 47",
+   "doi_or_url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2013JE004453",
+   "use": "Apollo 15 and 17 heat flow, 21 and 14-16 mW/m2; an internal heat flow of 9-13 mW/m2 after the crust's effects",
+   "access": "search-result summaries and the 2014 abstract"
+  },
+  {
+   "citation": "Lawrence et al., Lunar Prospector gamma-ray thorium maps, as summarised by Chevrel et al. 2002 and later work",
+   "doi_or_url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2000JE001419",
+   "use": "The Procellarum KREEP Terrane holds 4-12 ppm thorium at the surface, about 5.5 on average",
+   "access": "search-result summaries"
+  },
+  {
+   "citation": "Miller & Keith 2018, Climatic impacts of wind power, Joule 2, 2618; Miller & Keith 2018, Environ. Res. Lett. 13, 104008",
+   "doi_or_url": "https://www.cell.com/joule/fulltext/S2542-4351(18)30446-X",
+   "use": "Large wind farms realise about 0.5 W/m2 (US farms in 2016); modelled onshore 0.32-0.37 W/m2",
+   "access": "search-result summaries and the abstracts"
+  },
+  {
+   "citation": "Rajagopalan & Nihous 2013, Estimates of global OTEC resources using an ocean general circulation model, Renewable Energy 50, 532",
+   "doi_or_url": "https://econpapers.repec.org/article/eeerenene/v_3a50_3ay_3a2013_3ai_3ac_3ap_3a532-540.htm",
+   "use": "Global OTEC net power peaks at 12-14 TW; about 7 TW without much effect on ocean temperatures",
+   "access": "search-result summaries"
+  },
+  {
+   "citation": "Form Energy iron-air battery, round-trip efficiency (Energy-Storage.news and other secondary sources, 2023-2026)",
+   "doi_or_url": "https://www.energy-storage.news/google-bets-big-on-30gwh-of-form-energys-iron-air-battery-storage-despite-efficiency-trade-offs/",
+   "use": "100-hour iron-air storage at about 40-45% round trip",
+   "access": "search-result summaries of secondary sources"
+  },
+  {
+   "citation": "Badger et al., The Global Wind Atlas (DTU Wind Energy and the World Bank Group), presentation of the microscale atlas",
+   "doi_or_url": "https://tethys.pnnl.gov/sites/default/files/CESCbadger.pdf",
+   "use": "Earth's mean wind power density, 323 W/m2 over the atlas's whole area and 410 W/m2 over its windiest half, the comparison for the Moon's low winds",
+   "access": "search-result summary (not opened); the height of the figures was not confirmed"
+  },
+  {
+   "citation": "Reused from the provisioning lane's records: ITU-R P.676-13, P.838-3, P.835-6 and P.453-14; US DOE & NASA 1978; Rodenbeck et al. 2021; ICNIRP 2020; US EIA 2018; Headley & Schoenung 2020; US NRC 2012; Hitachi Energy (Changji-Guquan); Rodgers et al. 2024 (NASA OTPS); Frazer-Nash 2022; Stocks et al. 2021; Guzik et al. 2017; Barth et al. 2022",
+   "doi_or_url": "power_sources.json and sources.json in this folder",
+   "use": "The absorption and rain models, the link chain, the exposure limit, HVDC losses, hydrogen's round trip, a week of emergency fuel, a 12 GW UHVDC line, space solar costs and lunar night storage",
+   "access": "as recorded in those files"
+  }
+ ]
+}

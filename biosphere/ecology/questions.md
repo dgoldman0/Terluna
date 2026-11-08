@@ -83,6 +83,8 @@ on this laptop. The findings behind them are in the [README](README.md).
    **How:** zoning on committed products; the lever is a question for the shield and climate work. The map also
    carries the shore belts fed by the fresh seas (resources' question 16, the shores' water table) and the soda lakes
    of the dry belts' closed basins: how many there are and where.
+
+   **Status, 4 November 2026:** a first map on the design run, provisional while the GCM–CM1 gap stands ([README](README.md#the-first-biome-map-4-november-2026), [biome_map.py](biome_map.py)). Water and light give five biomes over 5% of the land each and four kinds of night; the class shares move by under a point (one standard deviation) across the years' sampling, while 36% of the land keeps its class across the gap's scale and the years' band together. The land stays warm everywhere (coldest 3-day mean 19.3 °C), so any cooler biome needs a lever or the built winter parks. The shore belts and the soda lakes' candidates are counted, the lakes on an older run's drainage. Open: the land cover for the climate models' placeholders, the downscaling by terrain in the atlas round, the soils' choice in the follow-up study, and the map's remaking on the redesigned convection with a longer run.
 10. **The waters as living systems.**
    - The seas' chemistry through time and the delivered water's salts, with the resources domain. Done there on 13
      October ([sea chemistry](../../research/studies/sea_chemistry/README.md)): every lasting state is a held one, and

@@ -1,5 +1,7 @@
 # Solar shield and habitat array
 
+The [fault across the ring](ring_fault.md) of 5 November 2026 ([ring_fault.py](ring_fault.py)) sorts what can stop every beam at once into ten classes. With the beams' control kept apart from the tiles' attitude and keeping, only space weather, shared navigation and timing, and a collision cascade at the rings' common line of nodes can still open the shade. Tiles that lose attitude or keeping touch their neighbours within minutes to hours, 28,000–254,000 lost tiles carry the UV transmission past the upper air's latch, and radius neighbours pass at the nodes at up to 390 m/s. With the separation the week of stores covers every restart but an extreme solar proton event (8 days) and an intrusion (up to 15). Its design rules and their cost of 0.28–2.8 Mt over the fleet are proposals, and the upper air's response time is open.
+
 The [constraints review](constraints_review.md) of 14 October 2026 reads the
 tile, support and flexible work below against the fleet as designed and the
 climate's corrected radiation ([climate/gcm](../../../climate/gcm/README.md)). The tiles' areal mass and the
