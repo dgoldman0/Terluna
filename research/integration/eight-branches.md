@@ -85,6 +85,7 @@ Each merge and each commit of the round passed `make check` before it was commit
 | The moisture map | 5,210 passed, 33 skipped |
 | The records | 5,210 passed, 33 skipped |
 | The answering commit | 5,210 passed, 33 skipped |
+| Main's checkout after the fast-forward, with both windows' drainage grids | 5,212 passed, 31 skipped |
 
 From 21:00 the machine rested thirty minutes between full test runs.
 
@@ -100,10 +101,11 @@ An independent reviewer read the merged tree at `d291b2f2` without changing it, 
 - **The resolver's masks**, which the review found looser than intended though they hid nothing this round, are tightened in the drive's scripts for reuse.
 - **The quotation in ecology finding 15**, which predates this round, stays as it stands.
 
+Main fast-forwarded to the round's head, `bdda5a07`, on 8 November at the author's word, and the eleven branches came up to it by fast-forward; the two windows' drainage grids went into every checkout, and main's checkout passed `make check` with 5,212 tests, two more than the integration worktree, whose checkout lacks two ignored inputs.
+
 ## Still to do from the integration
 
-- **The independent review** and its answers, then main's fast-forward at the author's word and the branches brought up to main.
-- **A further axis beside the moisture**, among the conditions the builders will not set, with the Codex mockups of 7 November tried on the exact data where it exists ([register](../decisions.md), 7 November).
+- **A further axis beside the moisture**, among the conditions the builders will not set, with the Codex mockups of 7 November tried on the exact data where it exists ([register](../decisions.md), 7 November); the trial ran on 8 November on domain/ecology (7472f0a8), and how the axes combine into the biome map stays open.
 - **The soils study and the lakes' distribution** among fresh, soda and seawater lakes, with the water-balance screen of the dry belts' closed basins, after the integration.
 - **Geology's fallback** to hydrosphere's worktree, dropped at geology's next rebuild.
 - **Climate's stale code pins** in the waves', the snow's and the cloud twilight's products, rebound or rebuilt at their next build.
