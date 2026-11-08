@@ -313,7 +313,7 @@ on hold for later, with its open choices and the aerophytes' scientific name.
 
 ## Next work, in order
 
-**Next, as of 7 November.** The food-systems branch is reworked on its review's findings (register, 6–7 November; the plan is `session-tools/agents/food_systems_review/rework_plan.md` on the research drive), and the sixth joint integration follows. The globe on the turned Moon at the target shows the world with the turn and the design climate (visualization/atlas on domain/climate, 5145d80f).
+**Next, as of 7 November.** The food-systems branch is reworked on its review's findings (register, 6–7 November; the plan is `session-tools/agents/food_systems_review/rework_plan.md` on the research drive), and the sixth joint integration follows. The globe on the turned Moon at the target shows the world with the turn and the design climate (visualization/atlas on domain/climate, 5145d80f). In the integration's joint computation the first biome map, renamed the moisture map, is remade on the turned run at the target over its forty years 10–49 and compared with its years 10–19, with the climate averages and the rivers and lakes on both windows; the soils study and the lakes' distribution among fresh, soda and seawater lakes follow the integration (register, 7 November).
 
 Done since 17 October and merged on 19 October ([integration/six-branches.md](integration/six-branches.md)): the three
 target climates compared and the resort set at 301 K; the coasts' and islands' water; the corrected lake model with the
