@@ -134,6 +134,7 @@ from climate.gcm import rain_drops as rdr
 from climate.gcm import snow_sublimation as sns
 from climate.gcm import land_store as lsf
 from climate.gcm import patch_ledger as plg
+from climate.gcm import precession as prc
 from climate.gcm import sbm_closure as scl
 from climate.gcm import sbm_redesign as srd
 from climate.gcm import sbm_redesign2 as sr2
@@ -1682,10 +1683,11 @@ def patch_chain(twilight: bool = False, trigger: bool = False, depth: bool = Fal
                 boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
                 cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
                 similarity: bool = False, land_store: bool = False, closure: bool = False,
-                redesign: bool = False, redesign2: bool = False, heat: bool = False, subcloud: bool = False) -> list:
+                redesign: bool = False, redesign2: bool = False, heat: bool = False, subcloud: bool = False,
+                precession: bool = False) -> list:
     """The Terluna patches a run with these settings takes, as (file, marker, edits), in the order ensure_patched
     applies them; the redesigned closure takes closure (c)'s patch beneath its own, the second redesign both, and the
-    second redesign's cloud layers only the heat rule's."""
+    second redesign's cloud layers only the heat rule's; the equinox's regression (precession.PATCHES) comes last."""
     return (PATCHES + (TWILIGHT_PATCHES if twilight else [])
             + (SBM_TRIGGER_PATCHES if trigger or night else [])
             + (SBM_DEPTH_PATCHES if depth or cap or night else [])
@@ -1708,7 +1710,8 @@ def patch_chain(twilight: bool = False, trigger: bool = False, depth: bool = Fal
             + (SBM_REDESIGN_PATCHES if redesign or redesign2 else [])
             + (SBM_REDESIGN2_PATCHES if redesign2 else [])
             + (SBM_HEAT_PATCHES if heat or subcloud else [])
-            + (SBM_SUBCLOUD_PATCHES if subcloud else []))
+            + (SBM_SUBCLOUD_PATCHES if subcloud else [])
+            + (prc.PATCHES if precession else []))
 
 
 def patch_catalogue() -> list:
@@ -1731,7 +1734,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                    boundary_layer: bool = False, night: bool = False, humidity_mean: bool = False,
                    cloud_water: bool = False, gust: bool = False, rain_drops: bool = False,
                    similarity: bool = False, land_store: bool = False, closure: bool = False,
-                   redesign: bool = False, redesign2: bool = False, heat: bool = False, subcloud: bool = False) -> dict:
+                   redesign: bool = False, redesign2: bool = False, heat: bool = False, subcloud: bool = False,
+                   precession: bool = False) -> dict:
     """Apply the Terluna patches to ExoPlaSim's source where missing (removing the compiled executables
     so ExoPlaSim rebuilds them), with the twilight patch in the twilight copy, and the scheme's CAPE trigger
     (SBM_TRIGGER_PATCHES), its cloud-depth test and mixing within layers (SBM_DEPTH_PATCHES) and its shallow cap
@@ -1751,7 +1755,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
     cap's patches, calling the gust patch's gustcol, with restart_has_array for route L's history), and the
     redesigned closure (SBM_REDESIGN_PATCHES, over closure (c)'s) with the second redesign (SBM_REDESIGN2_PATCHES, over
     both), its heat rule (SBM_HEAT_PATCHES, over it) and its cloud layers only (SBM_SUBCLOUD_PATCHES, over the heat
-    rule's), for a run that sets them (patch_chain), and return
+    rule's), and the equinox's regression with the orbit's node (precession.PATCHES), for a run that sets them
+    (patch_chain), and return
     each patched file's hash for the run key. The
     folder's ledger (patch_ledger.py) records the version of each patch applied, and a file that carries a patch's
     marker is refused unless the ledger holds the runner's version of that patch for it."""
@@ -1794,7 +1799,8 @@ def ensure_patched(twilight: bool = False, trigger: bool = False, depth: bool = 
                                            boundary_layer=boundary_layer, night=night, humidity_mean=humidity_mean,
                                            cloud_water=cloud_water, gust=gust, rain_drops=rain_drops,
                                            similarity=similarity, land_store=land_store, closure=closure,
-                                           redesign=redesign, redesign2=redesign2, heat=heat, subcloud=subcloud):
+                                           redesign=redesign, redesign2=redesign2, heat=heat, subcloud=subcloud,
+                                           precession=precession):
         path = src / name
         text = path.read_text()
         if marker not in text:
@@ -2168,7 +2174,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                   twilight_clear_share=True, longwave_fit='301k', wind10=False, ice_weights='shield',
                   cold_cloud=None, rain_evaporation=None, moisture=False, convection=None, levels=None,
                   free_convection=None, mixing_length=None, boundary_layer=None, large_scale_condensate=None,
-                  humidity_mean=False, surface_gust=None, rain_drops=None, snow=None, land_store=None, frame=None):
+                  humidity_mean=False, surface_gust=None, rain_drops=None, snow=None, land_store=None, frame=None,
+                  precession=False):
     """Everything that determines the run apart from the input files the runner writes. co2_ppm, when given, replaces the
     air's 400 ppm of CO2, top_infrared, (day, night) W/m2, adds infrared from space at the top of the air, and twilight
     (TWILIGHT_MODES) adds the curved air's sunlight, its term, the Moon's slant path or both, from the ledger
@@ -2199,7 +2206,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     configuration is the one every earlier run had; the 294.9 K ledger without the clear share records the twilight as
     the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did. frame, a
     turned surface's record (turned.py), runs the turned Moon: that record's surface in place of today's and its spin
-    axis's tilt to the ecliptic (frame_setting); left out, the Moon stands as it does today."""
+    axis's tilt to the ecliptic (frame_setting); left out, the Moon stands as it does today. precession lets the spin
+    axis precess with the orbit's node, the equinox regressing once a nodal period from the run's first step
+    (precession.py); left out, the equinox stands still, as in every earlier run."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -2275,7 +2284,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
                                      land_store=store is not None, closure=uses_closure_patch(convection),
                                      redesign=uses_redesign_patch(convection),
                                      redesign2=uses_redesign2_patch(convection),
-                                     heat=uses_heat_patch(convection), subcloud=uses_subcloud_patch(convection)),
+                                     heat=uses_heat_patch(convection), subcloud=uses_subcloud_patch(convection),
+                                     precession=bool(precession)),
                planet=dict(radius=planet['radius_m'] / EARTH_RADIUS_M, gravity=planet['gravity_m_s2'],
                            rotationperiod=planet['rotation_period_days'], year=365.25636,
                            obliquity=planet['obliquity_deg'], eccentricity=0.016715),
@@ -2284,6 +2294,8 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     if frame is not None:
         cfg['frame'] = frame_setting(frame, exp)
         cfg['planet']['obliquity'] = cfg['frame']['tilt_deg']
+    if precession:
+        cfg['precession'] = prc.setting(cfg['planet']['year'])
     if level_set != lv.DEFAULT:
         cfg['levels'] = dict(name=level_set, half_levels=[float(x) for x in half],
                              full_levels=[float(x) for x in lv.full_levels(half)],
@@ -2642,6 +2654,9 @@ def build_model(cfg, rundir: Path, ncpus: int, restart: Path | None, inputs: dic
         model._edit_namelist('plasim_namelist', name, text)               # a level set's half levels and top friction
     model._edit_namelist('radmod_namelist', 'RAYSCALE', str(m['rayleigh_scale']))
     model._edit_namelist('radmod_namelist', 'NSUNCLOCK', str(SUN_CLOCKS.index(m['sun_clock'])))
+    if 'precession' in cfg:                                       # the equinox regresses with the node
+        for key, value in prc.namelist(cfg['precession']):
+            model._edit_namelist('radmod_namelist', key, value)
     model._edit_namelist('radmod_namelist', 'SWH2OSCALE', str(m['sw_water_absorption']))
     model._edit_namelist('radmod_namelist', 'TH2OC', str(m['h2o_continuum']))
     gref, scale = cloud_water_namelist(m['cloud_water'], p['gravity'])
@@ -3080,7 +3095,7 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
         boundary_layer: str | None = None, large_scale_condensate: str | None = None,
         humidity_mean: bool = False, surface_gust: str | None = None, rain_drops: str | None = None,
         snow: str | None = None, pieces: int = 0, workers: int = 2, land_store: dict | None = None,
-        frame: str | None = None) -> int:
+        frame: str | None = None, precession: bool = False) -> int:
     use_twilight_package()
     cfg = configuration(name, ncpus, overrides, co2_ppm, top_infrared, twilight, gas_bands, heating, longwave_correction,
                         ice_optics, twilight_ledger, twilight_clear_share, longwave_fit, wind10=wind10,
@@ -3089,7 +3104,7 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
                         mixing_length=mixing_length, boundary_layer=boundary_layer,
                         large_scale_condensate=large_scale_condensate, humidity_mean=humidity_mean,
                         surface_gust=surface_gust, rain_drops=rain_drops, snow=snow, land_store=land_store,
-                        frame=frame)
+                        frame=frame, precession=precession)
     rundir = RUNS / (folder or name)
     rundir.mkdir(parents=True, exist_ok=True)
     lock = rundir / 'run.lock'
@@ -3119,6 +3134,9 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
             cfg['initial_state'] = stored['configuration'].get('initial_state', 'exoplasim default')
         else:
             cfg['initial_state'] = 'exoplasim default'
+        if 'precession' in cfg:                   # the equinox's regression counts from the run's first step
+            held = ((stored or {}).get('configuration', {}).get('precession') or {}).get('step0', 0)
+            cfg['precession']['step0'] = prc.restart_step(start_from) if start_from else held
         cfg['key'] = run_key(cfg, inputs)
         progress = stored or dict(configuration=cfg, inputs=inputs, years=[])
         if progress['configuration']['key'] != cfg['key']:
@@ -3350,6 +3368,10 @@ def main(argv=None) -> int:
                         help="a turned surface's record (turned.py; climate/results/gcm/turned_surface_<frame>.json): "
                              "the Moon turned into that frame, its surface in place of today's and the spin axis's "
                              'tilt to the ecliptic for that state (frame_setting; part of the run key)')
+    parser.add_argument('--precession', action='store_true',
+                        help="the spin axis precesses with the orbit's node: the equinox regresses once a nodal "
+                             "period (18.6 years, geology's source) from the run's first step (precession.py; part "
+                             'of the run key)')
     parser.add_argument('--land-store-floor', choices=lsf.FLOORS, help="the hollows' floor design")
     parser.add_argument('--land-store-surface', choices=lsf.SURFACES, help="the slopes' surface")
     parser.add_argument('--land-store-library', choices=lsf.LIBRARIES,
@@ -3454,7 +3476,7 @@ def main(argv=None) -> int:
                None if args.large_scale_condensate == 'rain' else args.large_scale_condensate, args.humidity_mean,
                None if args.surface_gust == 'none' else args.surface_gust,
                None if args.rain_drops == 'none' else args.rain_drops, None if args.snow == 'none' else args.snow,
-               args.convert_pieces, args.convert_workers, land_store, args.frame)
+               args.convert_pieces, args.convert_workers, land_store, args.frame, args.precession)
 
 
 if __name__ == '__main__':
