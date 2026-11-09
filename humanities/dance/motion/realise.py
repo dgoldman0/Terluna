@@ -44,6 +44,8 @@ phrase is solved in overlapping windows (solve_windows), which can resume from a
 from __future__ import annotations
 
 import argparse
+import ctypes
+import gc
 import hashlib
 import json
 import math
@@ -93,6 +95,11 @@ APART_MARGIN = 0.003         # m kept between the pairs' surfaces: parts nearly 
 RK4_ON = ('flight',)
 LANDING_RK4_S = 0.5
 PUSH_RK4_S = 0.35
+# The Runge-Kutta order of the nodes RK4_ON names. 4 is the default and the most accurate; 3 and 2 keep three or two
+# stages of derivatives a node in place of four, for long phrases on a machine with less memory to spare: a flight
+# node of the dancer's 21 costs holds 38 MB at 4, 29 at 3, 19 at 2 and 11 on Euler's step (9 November).
+RK_ORDER = 4
+RK_TYPES = {2: crocoddyl.RKType.two, 3: crocoddyl.RKType.three, 4: crocoddyl.RKType.four}
 IMPULSE_COM_WEIGHT = 1e2     # on the change a landing impulse makes to the centre of mass's velocity (m/s); it applies
                              # only where flights integrate with Runge-Kutta, since on Euler's step the optimiser
                              # meets it by floating down on the integration error (7 November)
@@ -1093,7 +1100,7 @@ class Problem:
                     landing_targets[side] = (self.fid[(side, kind)], M if CONTACTS[kind][1] == 6 else M.translation)
             dam = self._dam(node, i, landing_targets=landing_targets)
             if self.rk4_node(i):
-                iam = crocoddyl.IntegratedActionModelRK(dam, crocoddyl.RKType.four, DT)
+                iam = crocoddyl.IntegratedActionModelRK(dam, RK_TYPES[RK_ORDER], DT)
             else:
                 iam = crocoddyl.IntegratedActionModelEuler(dam, DT)
             iam.u_lb = self.bounds['effort_lower'][6:]
@@ -1231,12 +1238,33 @@ def solve_span(prob, a, b, maxiter=150, verbose=False):
     return Solution(prob, ms, sub, solver, len(ms), solver.cost, solver.iter, solver.ffeas, solver.stop)
 
 
+def rss_gb():
+    """This process's resident memory now, in GB (None where /proc is missing)."""
+    try:
+        with open('/proc/self/statm') as f:
+            return round(int(f.read().split()[1]) * os.sysconf('SC_PAGE_SIZE') / 1e9, 2)
+    except OSError:
+        return None
+
+
+def release_memory():
+    """Hand back a finished window's memory: collect the cycles its Python-written costs leave and return the freed
+    heap to the system. Without it a whole phrase's solve held 8.7 GB at its thirteenth window (9 November), against
+    5.9 GB for the hanging salto solved alone."""
+    gc.collect()
+    try:
+        ctypes.CDLL('libc.so.6').malloc_trim(0)
+    except (OSError, AttributeError):
+        pass
+
+
 def window_key(prob, window_s, step_s, maxiter):
     """What a windowed solve depends on: this module's code, the phrase's schedule and the settings of its costs."""
     h = hashlib.sha256(Path(__file__).read_bytes())
     schedule = [(round(n.t, 6), n.unit, n.phase, sorted(n.contacts.items()), n.landing) for n in prob.nodes]
     settings = dict(window_s=window_s, step_s=step_s, maxiter=maxiter, gravity=float(prob.model.gravity.linear[2]),
-                    rk4=list(RK4_ON), impulse=IMPULSE_COM_WEIGHT, landing=LANDING_FORCE_WEIGHT, foot=MAX_FOOT_FORCE_N)
+                    rk4=list(RK4_ON), rk_order=RK_ORDER, impulse=IMPULSE_COM_WEIGHT, landing=LANDING_FORCE_WEIGHT,
+                    foot=MAX_FOOT_FORCE_N)
     h.update(json.dumps([schedule, settings]).encode())
     return h.hexdigest()
 
@@ -1306,9 +1334,10 @@ def solve_windows(prob, window_s=3.5, step_s=1.0, maxiter=150, verbose=False, lo
         if log:
             log(dict(nodes=[a, b], t=[round(prob.nodes[a].t, 2), round(prob.nodes[b - 1].t + DT, 2)], kept=keep_nodes,
                      iterations=solver.iter, cost=round(solver.cost, 3), gap=float(solver.ffeas),
-                     seconds=round(before + time.time() - t0, 1)))
+                     seconds=round(before + time.time() - t0, 1), memory_gb=rss_gb()))
         a += keep_nodes
-        del sub, solver, ms
+        del sub, solver, ms, part
+        release_memory()
     prob.seconds = before + time.time() - t0
     return Solution(prob, None, None, None, 0, total_cost, iters, worst_gap, records=records, x_end=x)
 

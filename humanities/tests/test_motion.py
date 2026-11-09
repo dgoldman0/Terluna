@@ -359,6 +359,23 @@ def test_landing_impulses_keep_the_cone_and_cost_the_centre_of_mass_only_with_ex
         rz.RK4_ON = old
 
 
+def test_the_flight_integrators_order_is_a_switch_with_fourth_order_by_default():
+    ph = gr.build('Hanging Salto', gr.motif(('hanging_salto', 'R', {'rise_m': 1.6})))
+    nodes = rz.timeline(ph.placed, finish_s=0.5)
+    k = next(i for i, n in enumerate(nodes) if not n.contacts)
+    assert rz.RK_ORDER == 4
+    old = rz.RK_ORDER
+    try:
+        for order in (2, 3, 4):
+            rz.RK_ORDER = order
+            prob = rz.Problem(nodes)
+            prob.plan()
+            (i, m), = prob.running(k, k + 1)
+            assert isinstance(m, crocoddyl.IntegratedActionModelRK) and m.ni == order
+    finally:
+        rz.RK_ORDER = old
+
+
 def test_landing_loads_are_costed_from_touchdown_through_the_stroke_in_earth_weights():
     ph = gr.build('Hanging Salto', gr.motif(('hanging_salto', 'R', {'rise_m': 1.6})))
     nodes = rz.timeline(ph.placed, finish_s=0.5)
