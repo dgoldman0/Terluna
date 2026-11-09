@@ -4560,6 +4560,33 @@ The Moon keeps Cassini state 2, so its spin axis precesses with its orbit's node
 python3 -m pytest climate/tests/test_precession.py                        # 7 tests
 ```
 
+#### The corrected design climate on the turned Moon (8 November)
+
+The corrected run, `A28R_301k_design_l15_snow_s938_turned_refit_precession`, is the turned design run's configuration with each sunlight pass started from zero where the Sun is down (NTWLZERO 1, the twilight counted once; above) and the equinox regressing with the node (`--precession`, the section before), at sunlight 0.938: the rule of 31 October's step once the double count's 2.70 W/m² leaves the target run's balance, 0.924 × (1 + 2.72/175.5). It branches from the target run's year-49 restart, so the orbit continues unbroken and the equinox starts regressing at the branch. It ran twenty years under the design run's watch on 8 November, the smoke year from 13:52 and years 1–19 from 14:46 to 17:37, at about 520 s a year on four ranks, with runner and watch exiting 0 (`session-tools/precession/` on the research drive: `run_precession.sh`, `checks_corrected.sh`, `jura_night.py`, `corrected_land.py` and their outputs).
+
+**At the target.** Years 10–19 stand at 301.04 K (single years 301.01–301.10) with the top of the air at −0.23 W/m², and `compare --settle` places the run near 301.0 K, its own leftover −0.19 ± 0.04 W/m². The rule of 31 October over years 1–19 gives S** = 0.940 (0.9399–0.9402), an imbalance of −0.39 W/m² at 301.25 K, so removing the double count cooled the climate about 0.3 K more than the step to 0.938 carried (the target run's years 10–19 stood at 301.33 K and its forty years at 301.20 K). The years stand 0.21 K below the 301.25 K warm edge and are taken at the target without a second step: they are the design climate on the turned geography (main's register, 8 November).
+
+**Checks.**
+- The twilight is counted once to the last year: in year 19 the night-side ground follows T(1 − c) with a slope of 1.003 and an rms of 0.36 W/m², against 7.0 for the double count (`check_zero.py`).
+- The longwave correction holds on l15_turned at years 5, 9, 14 and 19, its largest layer 1.82 W/m² in the cloud-free sea columns ([longwave_check_A28R_301k_design_l15_snow_s938_turned_refit_precession.json](../results/gcm/longwave_check_A28R_301k_design_l15_snow_s938_turned_refit_precession.json)).
+- The exobase holds: over years 10–19 the top level stands at 166.8–167.0 K with 0.042–0.044 ppmv of vapour, inside the target run's 166.7–167.2 K and 0.041–0.045 (the watch's record).
+
+**Against the target run.** The comparison takes the target run's forty years (10–49) and, for the land's classes, its four ten-year blocks, since a ten-year mean's classes read about 1.5 points drier than the forty years' from the averaging alone (drylands 59.1–59.9% in the blocks against 57.9% over the forty years).
+- The air poleward of 70° cools 0.7 K, from 300.9 to 300.2 K, where the double count added up to 17.7 W/m².
+- The clouds' shortwave effect strengthens from −48.1 to −51.6 W/m² while the cover holds (0.377 to 0.379): the double count leaves the all-sky pass, and the sunlight rises 1.5%. The clouds' net effect moves from −0.5 to −3.9 W/m².
+- The land dries slightly. Its rain is 2.15 mm/day against 2.16–2.19 in the blocks, and the drylands cover 60.7% of it against 59.1–59.9%, the north 63.2% against 58.3–61.6% and the south 58.4% against 58.3–60.1%; land under 0.5 mm/day is 37.0% against 34.3% over the forty years. The share of the land's rain falling at night drops from 9.8% to 9.5% (4 standard errors).
+- The night rain where the gap lies does not drop. Over the Near-side Sea box's site (its sea cells as `gcm_site` reads them) 296 mm a year fall at night against 264 (+12%, 2.6 standard errors), 54% of its rain against 52%. Jura's cells (8, 57) and (9, 57) take 564 and 770 mm a year at night against 453 and 672, and rain 598 and 848 mm a year (aridity 0.64 and 0.80) against 503 and 782 (0.54 and 0.74).
+
+The run changes the twilight, the equinox and the sunlight together, so none of these differences belongs to the fix alone.
+
+**The gap carried as a range.** The CM1 boxes bracket the climate model according to how they meet the large scale. Under the model's imposed motion the turned sea box rains 0.75 of the model's rain, 0.09 mm/day of it at night against the model's 0.70. Making its own motion by the damped gravity wave, the sea box forced by the design years rains twice the model's rain there, its night rain 0.66 against 0.72 mm/day and the excess in the afternoon ([the CRM README](../crm/README.md)). Both read as observations by their rules. With the spread between the two methods larger than the gap, the local climates, the Jura study and the other readers of the design climate carry the gap as a range: the climate model's reading and the dry end of the boxes driven by its motion, with the places that rain at night designed to work at the dry end (main's register, 8 November). On the moisture map's reading of the target run, 78% of the land keeps its moisture class under the gap's scaling, and 23% takes a quarter or more of its rain at night, mostly beside the sea (16% of the land) and poleward of 60° (9%). The land and dry boxes stay paused at day 3 with their restarts kept. The products still read the turned design run's forty years.
+
+```sh
+S=/media/projectspace/terluna-research/session-tools/precession
+RESUME=1 YEARS=20 $S/run_precession.sh      # the run, resumable, under its watch
+$S/checks_corrected.sh                       # its checks in turn, one thread
+```
+
 #### The hollows' store in PlaSim's land (3 November, second pass the same day)
 
 PlaSim holds each land cell's water in one bucket of 0.5 m that sheds water only when full, so on the design years the drylands return all their rain to the air. The storm-water study on `domain/hydrosphere` (`research/studies/storm_water/`) worked out offline what their storms do instead: runoff from the slopes, water standing in the hollows, seepage through the hollows' floors. Its leverage passed the plan's thresholds on the loams under both storm libraries and on every surface under CM1's storms, through the water the hollows send into the ground. Stage (b) of the plan puts that water's path into PlaSim's land behind a switch, with the three floor designs and the four slope surfaces as ranges. The first build read each step's rain as a storm of its own, filled the hollows by their capacity and started the store empty; the second pass reads the rain as the storm library's storms, fills the hollows by their own inflow and starts the store balanced. It is built and checked offline; no PlaSim step has run with it.
