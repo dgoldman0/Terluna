@@ -1,5 +1,5 @@
-"""The terrain beside the moisture map on the turned Moon at the target: the Codex mockups of 7 November tried on the exact
-data (8 November 2026).
+"""The terrain beside the moisture map on the turned Moon's design climate: the Codex mockups of 7 November tried on the
+exact data (8 November 2026; on the corrected design climate from 9 November).
 
 The moisture map classes the land by its water balance alone, and natural ground varies too little in temperature to
 divide it further, so the biome analysis looks for a further axis among the conditions the world's builders will not set,
@@ -16,7 +16,7 @@ Moon:
   10°), crests and rims (local highs), hollows and footslopes (local lows), plains (under 2°) and gentle slopes (the
   rest), each taking the first of those that applies;
 - a topographic wetness index, ln(a / tan b), where a is the area drained through a pixel per unit width in the routing
-  of the turned run's forty years and b its slope, floored at 0.1°;
+  of the design climate's forty years and b its slope, floored at 0.1°;
 - the wetland cues of that mockup's second panel: humid local lows (the humid and wet classes on local lows under 2°)
   and low ground near water (within 15 km of a sea or rain-fed lake, 0–100 m above its surface, under 2° and not a local
   high).
@@ -52,8 +52,8 @@ SCHEMA = 'terluna.biosphere.ecology-terrain-axis/1'
 MOISTURE = 'biosphere/ecology/results/moisture_map.json'
 MOISTURE_SCHEMA = 'terluna.biosphere.ecology-moisture-map/1'
 ORIENTATION = 'geology/results/moon_orientation.json'
-DRAINAGE = 'geography/turned_y10-49'                        # the lakes routed on the run's forty years
-CLIMATOLOGY = 'climate/gcm/products/climatology_A28R_301k_design_l15_snow_s924_turned_refit_y10-49_today.npz'
+DRAINAGE = 'geography/turned_corrected_y10-49'              # the lakes routed on the run's forty years
+CLIMATOLOGY = 'climate/gcm/products/climatology_A28R_301k_design_l15_snow_s938_turned_refit_precession_y10-49_today.npz'
 OUT = HERE / 'results' / 'terrain_axis.json'
 FIELDS = Path('/media/projectspace/terluna-research/session-tools/terrain_axis/terrain_axis_16ppd.npz')
 PPD = 16
@@ -69,7 +69,7 @@ SETTINGS = (dict(key='crest', name='crests and rims'), dict(key='steep', name='s
             dict(key='hollow', name='hollows and footslopes'), dict(key='basin', name='basin floors'))
 CUES = ('few cues', 'humid local low', 'low ground near water', 'both cues')
 EVIDENCE = ('Geometric classes of measured terrain (LOLA above the GRAIL geoid, 16 px/deg) and a wetness index from '
-            'the drainage routed on the turned design run\'s forty years, joined to the moisture map\'s modelled classes '
+            'the drainage routed on the design climate\'s forty years, joined to the moisture map\'s modelled classes '
             'cell by cell. The thresholds are proposals; no soil, groundwater, flooding or vegetation model enters, and '
             'nothing here is validated against ecology.')
 READING_RULE = ('Shares are of the land at 16 px/deg (seas below the atlas\'s sea level and the rain-fed lakes of the '

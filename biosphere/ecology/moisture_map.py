@@ -2,24 +2,27 @@
 the warmth, night light and settings beside each class, and the years, the GCM-CM1 gap and windows of years carried as
 its uncertainty.
 
-The water. Each T21 land cell of the turned run at the target (A28R_301k_design_l15_snow_s924_turned_refit, years 10-49)
-takes its aridity, the rain over a Priestley-Taylor demand (alpha 1.26) on the cell's own mean net radiation at the
-ground, its air at 2 m and its pressure, read as the design run's land readings read it: each field's means by tenth of
-the lunar day, placed by each 3-day mean's hour angle (climate/crm/gcm_site.py), then averaged over the ten tenths. The
-classes are UNEP's aridity classes (Middleton & Thomas 1997, as the Millennium Ecosystem Assessment's dryland chapter
-tabulates them, Safriel & Adeel 2005, table 22.1), with the humid class divided where the rain meets the demand (aridity
-1, below which a place has a yearly moisture deficit). The demand is radiation-based where the World Atlas's is
-Thornthwaite's temperature-based one: on the Moon the warmth and the sunlight do not keep Earth's relation, so the
-boundaries are UNEP's and the demand is the project's. The classes are named by their moisture, and beside each stands
-the broad biome the dryland chapter gives the class on Earth, as a reference only. Which organisms each class holds on
-the Moon is a design question, and none enters the map; a biome map comes when the moisture is joined by further axes.
+The water. Each T21 land cell of the design climate on the turned Moon
+(A28R_301k_design_l15_snow_s938_turned_refit_precession, years 10-49, with PlaSim's night-side twilight counted once and
+the equinox regressing) takes its aridity, the rain over a Priestley-Taylor demand (alpha 1.26) on the cell's own mean
+net radiation at the ground, its air at 2 m and its pressure, read as the design run's land readings read it: each
+field's means by tenth of the lunar day, placed by each 3-day mean's hour angle (climate/crm/gcm_site.py), then averaged
+over the ten tenths. The classes are UNEP's aridity classes (Middleton & Thomas 1997, as the Millennium Ecosystem
+Assessment's dryland chapter tabulates them, Safriel & Adeel 2005, table 22.1), with the humid class divided where the
+rain meets the demand (aridity 1, below which a place has a yearly moisture deficit). The demand is radiation-based
+where the World Atlas's is Thornthwaite's temperature-based one: on the Moon the warmth and the sunlight do not keep
+Earth's relation, so the boundaries are UNEP's and the demand is the project's. The classes are named by their moisture,
+and beside each stands the broad biome the dryland chapter gives the class on Earth, as a reference only. Which
+organisms each class holds on the Moon is a design question, and none enters the map; a biome map comes when the
+moisture is joined by further axes.
 
 The frame. The run lives in the turned Moon's frame, geology's orientation product at the elastic state: its cells,
 their latitudes and the Earth above the sub-Earth point at 0 N 0 E are the turned Moon's. Geography's grids stand on
 today's ground, so each pixel of the 28% atlas (4 px/deg) with its tides, and each rain-fed lake pixel (16 px/deg), is
-counted in the cell that holds it on the turned Moon, carried by the orientation's rotation (climate/gcm/turned.py);
-the pixels keep today's areas, which are the ground's. The lakes come from the drainage routed on the same years'
-climatology carried back to today's ground: geography/turned_y10-49 for the forty years, geography/turned for 10-19.
+counted in the cell that holds it on the turned Moon, carried by the orientation's rotation (climate/gcm/turned.py); the
+pixels keep today's areas, which are the ground's. The lakes come from the drainage routed on the same years'
+climatology carried back to today's ground: geography/turned_corrected_y10-49 for the forty years,
+geography/turned_corrected for 10-19.
 
 The warmth. The 2 m air's mean, its coldest and warmest 3-day means and the interval minima PlaSim writes (mint)
 recheck ecology finding 15: no frost, alpine, boreal or seasonal biome on natural ground. A cell whose mean air lies
@@ -82,8 +85,9 @@ DRIVE = Path('/media/projectspace/terluna-research/session-tools')
 DESIGN_YEARS = DRIVE / 'design_run' / 'design_years.json'           # the established land readings, checked against
 CLASS_SENSITIVITY = DRIVE / 'design_run' / 'class_sensitivity.json'
 
-RUN, YEARS = 'A28R_301k_design_l15_snow_s924_turned_refit', (10, 49)        # the turned run at the target
-COMPARE_YEARS = (10, 19)                # the turned design years, mapped whole beside the forty years
+TARGET_RUN = 'A28R_301k_design_l15_snow_s924_turned_refit'                  # the turned run at the target, 6-8 November
+RUN, YEARS = 'A28R_301k_design_l15_snow_s938_turned_refit_precession', (10, 49)   # the design climate, 9 November
+COMPARE_YEARS = (10, 19)                # the design years, mapped whole beside the forty years
 DECADES = ((10, 19), (20, 29), (30, 39), (40, 49))
 DESIGN_RUN = 'A28R_301k_design_l15_snow_s934'          # the design run of 1 November, whose land readings check it
 STORE_RUNS = ()                         # the hollows' store runs belong to the design run of 1 November
@@ -92,9 +96,13 @@ SPAN = 2                        # years in each span of the years' spread
 
 GEOGRAPHY = {'atlas': 'geography/results/atlas.json', 'atlas_grid': 'geography/products/atlas_28pct_4ppd.npz',
              'tides_grid': 'geography/products/tides_28pct_4ppd.npz'}
-DRAINAGE = {(10, 49): 'geography/turned_y10-49', (10, 19): 'geography/turned'}     # each window's lakes
+# each window's lakes, routed on its own years' climate
+DRAINAGE = {(TARGET_RUN, (10, 49)): 'geography/turned_y10-49', (TARGET_RUN, (10, 19)): 'geography/turned',
+            (RUN, (10, 49)): 'geography/turned_corrected_y10-49', (RUN, (10, 19)): 'geography/turned_corrected'}
 ORIENTATION = 'geology/results/moon_orientation.json'
-TURNED_YEARS_LAND = DRIVE / 'turned_design' / 'turned_years_land_A28R_301k_design_l15_snow_s924_turned_refit.json'
+# each run's land readings over years 10-19, which the map's own shares are checked against
+LAND_READINGS = {TARGET_RUN: DRIVE / 'turned_design' / f'turned_years_land_{TARGET_RUN}.json',
+                 RUN: DRIVE / 'precession' / f'turned_years_land_{RUN}.json'}
 LIVING_LIGHT = 'research/studies/living_light/results/living_light.json'
 PLANT = 'biosphere/canopy/results/plant.json'
 POLAR_LIGHT = 'research/studies/polar_light/results/polar_light.json'
@@ -450,7 +458,7 @@ def cell_areas_km2(lat, lon):
     return band[:, None] * np.ones((1, lon.size))
 
 
-def settings(lat, lon, rotation=None, drainage=DRAINAGE[YEARS]):
+def settings(lat, lon, rotation=None, drainage=DRAINAGE[(RUN, YEARS)]):
     """Seas, lakes, closed lakes, the coast's length and the tide along it, for each T21 cell. Geography's pixels
     stand on today's ground; with a rotation (today to the run's frame) each is counted in the cell that holds it in the
     run's frame, and keeps its area. drainage is the folder whose products hold the lakes routed on the run's
@@ -540,7 +548,7 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
     """The map of one window of years in the run's own frame, with the lakes of the drainage folder. With an
     orientation product, geography's pixels, which stand on today's ground, are counted in the cells that hold them on
     the turned Moon; None for a run on today's ground."""
-    drainage = drainage or DRAINAGE.get(tuple(years), DRAINAGE[YEARS])
+    drainage = drainage or DRAINAGE[(run, tuple(years))]                    # a window's own lakes, never another's
     frame = read_frame(ROOT / orientation) if orientation else None
     c = read_run(run, years)
     lat, lon, land = c['lat'], c['lon'], c['land']
@@ -648,11 +656,12 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
             abs(ref['aridity'][n]['land_share'] - float(wl[L & (unep_run == j)].sum())) for j, (n, _, _) in enumerate(UNEP))
         checks['design_years_land_rain_difference_mm_day'] = abs(ref['land_rain_mm_day'] - float((c['rain'] * wl).sum()))
         checks['design_years_json_sha256'] = sha(DESIGN_YEARS)
-    if TURNED_YEARS_LAND.exists() and run == RUN and tuple(years) == COMPARE_YEARS:
-        ref = json.loads(TURNED_YEARS_LAND.read_text())['turned_years']['unep_share']
+    readings = LAND_READINGS.get(run)
+    if readings and readings.exists() and tuple(years) == COMPARE_YEARS:
+        ref = json.loads(readings.read_text())['turned_years']['unep_share']
         checks['turned_years_aridity_shares_max_difference'] = max(
             abs(ref[n] - float(wl[L & (unep_run == j)].sum())) for j, (n, _, _) in enumerate(UNEP))
-        checks['turned_years_land_json_sha256'] = sha(TURNED_YEARS_LAND)
+        checks['turned_years_land_json_sha256'] = sha(readings)
     if CLASS_SENSITIVITY.exists() and run == DESIGN_RUN and tuple(years) == (10, 19):
         ref = json.loads(CLASS_SENSITIVITY.read_text())['by_rain_scale']
         checks['class_sensitivity_max_difference'] = max(
@@ -743,7 +752,8 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
                       frame=(dict(orientation=orientation, sha256=frame['sha256'], tilt_deg=frame['tilt_deg']) if frame else None),
                       drainage=drainage, inputs=inputs, input_schemas={**SCHEMAS, lakes[0]: 'terluna.geography.drainage/1'}),
         evidence=('A zoning of the design climate by its water balance, not a model of vegetation: each T21 land cell '
-                  '(about 170 km across at the equator) of the turned run at the target takes the moisture class its '
+                  '(about 170 km across at the equator) of the design climate on the turned Moon takes the moisture '
+                  'class its '
                   'aridity gives it, with its warmth, night light and settings beside it. The aridity is the GCM\'s rain '
                   'over a Priestley-Taylor demand without wind or humidity, over the years named; the classes are UNEP\'s, '
                   'the humid class divided at aridity 1, each with the broad biome the Millennium Ecosystem Assessment '

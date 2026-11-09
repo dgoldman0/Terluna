@@ -212,7 +212,7 @@ def humidity_sheet(p, mp, f, idx, inside, rotation, out):
     joint = np.where(water, -1, m.astype(int) * 3 + pos.astype(int))
     fig = plt.figure(figsize=(14.4, 17.0), dpi=160, facecolor='white')
     run = p['producer']
-    fig.text(.028, .978, 'The Open Moon: humidity × terrain on the turned Moon at the target', fontsize=17, color=INK,
+    fig.text(.028, .978, "The Open Moon: humidity × terrain on the turned Moon's design climate", fontsize=17, color=INK,
              weight='bold', va='top')
     fig.text(.028, .958, f"The moisture map's classes ({run['run']}, years {run['years'][0]}–{run['years'][1]}, T21 cells "
              f"about 170 km across) under LOLA's terrain at 16 px/deg (1.9 km), with the lakes routed on the same forty "
@@ -286,7 +286,7 @@ def humidity_sheet(p, mp, f, idx, inside, rotation, out):
          f"boundary.\nLand {p['land']['area_km2'] / 1e6:.2f} million km², {p['land']['share_of_moon']:.1%} of the Moon.",
          size=7.6)
     fig.text(.028, .004, 'Sources: biosphere/ecology/results/terrain_axis.json and moisture_map.json; LOLA above the GRAIL '
-             'geoid; the drainage of geography/turned_y10-49.', fontsize=7.0, color=INK2)
+             'geoid; the drainage of geography/turned_corrected_y10-49.', fontsize=7.0, color=INK2)
     path = out / 'humidity_terrain.png'
     fig.savefig(path, dpi=160, facecolor='white')
     plt.close(fig)

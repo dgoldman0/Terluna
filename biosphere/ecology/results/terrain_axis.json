@@ -4,13 +4,13 @@
   "domain": "biosphere",
   "module": "biosphere/ecology/terrain_axis.py",
   "files": {
-   "biosphere/ecology/terrain_axis.py": "625172661948d565",
-   "biosphere/ecology/moisture_map.py": "4282dcf854c9afc5",
+   "biosphere/ecology/terrain_axis.py": "a1532eff2cd2a0b9",
+   "biosphere/ecology/moisture_map.py": "58f66fc944acdd81",
    "geography/drainage.py": "2c7380850863ba14",
    "geography/topography.py": "228e08f79efca868",
    "climate/gcm/turned.py": "0048cd6ac13ab7e9"
   },
-  "run": "A28R_301k_design_l15_snow_s924_turned_refit",
+  "run": "A28R_301k_design_l15_snow_s938_turned_refit_precession",
   "years": [
    10,
    49
@@ -20,11 +20,11 @@
    "sha256": "8d71fd350ca4c6cd2e1c6766478543708b537a51c62f42d6a4bafb907a446ba3"
   },
   "inputs": {
-   "biosphere/ecology/results/moisture_map.json": "75b93c2ebc56501bfdff392c4b3177f38e9a91c427c0d6395d3f7f38b5af2b92",
+   "biosphere/ecology/results/moisture_map.json": "d8373614b7cf73c2ee8c94e8b90cd0d1f66254615aef49efb549a412abf5138b",
    "geology/results/moon_orientation.json": "8d71fd350ca4c6cd2e1c6766478543708b537a51c62f42d6a4bafb907a446ba3",
-   "climate/gcm/products/climatology_A28R_301k_design_l15_snow_s924_turned_refit_y10-49_today.npz": "9ca6844255948f1ea2934c04e3026560ba82a39910f3a81194e463f7564d74dd",
-   "geography/turned_y10-49/results/drainage.json": "2ff0303d33316cf448debd1c6a3ec64c66d9315740994a0ecfa0328fe4d34523",
-   "geography/turned_y10-49/products/drainage_28pct_16ppd.npz": "5c3944b17371522a6ccd03ab65a2859410265cbffb8f38ee10c1e4fbc6a43a8b",
+   "climate/gcm/products/climatology_A28R_301k_design_l15_snow_s938_turned_refit_precession_y10-49_today.npz": "a88c1ff4059a75e1302d19b9ec1c9a5c86bbe6faa36e35963e040313448dd864",
+   "geography/turned_corrected_y10-49/results/drainage.json": "7500b039b59a94a5b397e1a845e9e1e3237f333bea0062e52c50ecdc751effc2",
+   "geography/turned_corrected_y10-49/products/drainage_28pct_16ppd.npz": "f981fcbe8b7ce80cf1ce58283a83ae75f42a71a59e9028011ac824f5c42f0399",
    "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
    "geography/inputs/ldem_16.img": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
    "geography/inputs/ldem_4.img": "c04632eba6449af49e3108ed7c25b3b1c450600abd3690df4fc815853a1af476",
@@ -32,7 +32,7 @@
    "shared/constants.json": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72"
   }
  },
- "evidence": "Geometric classes of measured terrain (LOLA above the GRAIL geoid, 16 px/deg) and a wetness index from the drainage routed on the turned design run's forty years, joined to the moisture map's modelled classes cell by cell. The thresholds are proposals; no soil, groundwater, flooding or vegetation model enters, and nothing here is validated against ecology.",
+ "evidence": "Geometric classes of measured terrain (LOLA above the GRAIL geoid, 16 px/deg) and a wetness index from the drainage routed on the design climate's forty years, joined to the moisture map's modelled classes cell by cell. The thresholds are proposals; no soil, groundwater, flooding or vegetation model enters, and nothing here is validated against ecology.",
  "reading_rule": "Shares are of the land at 16 px/deg (seas below the atlas's sea level and the rain-fed lakes of the forty-year routing excluded), by exact spherical area. moisture_by_position[m][p] and settings_by_moisture[m][s] index the moisture map's classes (hyper-arid to wet) and the positions or settings in the order listed. Land the run treats as sea at T21 carries the nearest land cell's class and is counted in land.spread_share; robust follows the moisture map's flag for the cell.",
  "thresholds": {
   "neighbourhood_radius_km": 30.0,
@@ -97,220 +97,220 @@
   ]
  },
  "land": {
-  "area_km2": 23405967,
-  "share_of_moon": 0.617,
-  "spread_share": 0.1979,
-  "robust_share": 0.4629
+  "area_km2": 23607833,
+  "share_of_moon": 0.6224,
+  "spread_share": 0.1986,
+  "robust_share": 0.4559
  },
  "shares": {
   "moisture": [
-   0.0194,
-   0.2071,
-   0.2787,
-   0.08,
-   0.1108,
-   0.304
+   0.0196,
+   0.2284,
+   0.2745,
+   0.0766,
+   0.0961,
+   0.3048
   ],
   "positions": [
-   0.2866,
-   0.4597,
-   0.2537
+   0.2863,
+   0.4594,
+   0.2543
   ],
   "moisture_by_position": [
    [
     0.0058,
-    0.0084,
-    0.0052
+    0.0089,
+    0.0049
    ],
    [
-    0.0609,
-    0.0934,
-    0.0528
+    0.0666,
+    0.1033,
+    0.0585
    ],
    [
-    0.081,
-    0.1253,
-    0.0723
+    0.0798,
+    0.1237,
+    0.071
    ],
    [
-    0.0217,
-    0.0381,
-    0.0202
+    0.0203,
+    0.0369,
+    0.0194
    ],
    [
-    0.03,
-    0.0539,
-    0.0269
+    0.0272,
+    0.0444,
+    0.0245
    ],
    [
-    0.0872,
-    0.1406,
-    0.0762
+    0.0866,
+    0.1421,
+    0.076
    ]
   ],
   "settings": [
    0.2125,
-   0.1283,
-   0.2184,
-   0.1215,
-   0.1535,
-   0.1658
+   0.1275,
+   0.2164,
+   0.1203,
+   0.1504,
+   0.1728
   ],
   "settings_by_moisture": [
    [
-    0.0042,
-    0.0032,
-    0.0046,
-    0.0009,
-    0.003,
-    0.0035
+    0.0041,
+    0.0026,
+    0.0048,
+    0.0022,
+    0.0033,
+    0.0026
    ],
    [
-    0.0445,
-    0.0272,
-    0.043,
-    0.0244,
-    0.0285,
-    0.0395
+    0.0492,
+    0.0299,
+    0.0471,
+    0.0265,
+    0.031,
+    0.0446
    ],
    [
-    0.0608,
-    0.0342,
-    0.056,
-    0.0311,
-    0.034,
-    0.0624
+    0.0596,
+    0.0336,
+    0.0545,
+    0.0313,
+    0.0328,
+    0.0627
    ],
    [
-    0.0168,
-    0.0086,
-    0.0157,
+    0.0162,
+    0.0081,
+    0.0147,
+    0.011,
+    0.0075,
+    0.019
+   ],
+   [
+    0.02,
     0.0113,
-    0.0082,
-    0.0193
+    0.0195,
+    0.0112,
+    0.0117,
+    0.0225
    ],
    [
-    0.0226,
-    0.0123,
-    0.0223,
-    0.0175,
-    0.0141,
-    0.022
-   ],
-   [
-    0.0636,
-    0.0427,
-    0.0767,
-    0.0363,
-    0.0657,
-    0.0191
+    0.0633,
+    0.042,
+    0.0757,
+    0.0381,
+    0.064,
+    0.0216
    ]
   ],
   "settings_within_moisture": [
    [
-    0.2184,
-    0.1637,
-    0.2355,
-    0.0472,
-    0.1537,
-    0.1815
-   ],
-   [
-    0.2149,
-    0.1315,
-    0.2076,
-    0.1176,
-    0.1377,
-    0.1906
-   ],
-   [
-    0.2182,
-    0.1228,
-    0.2011,
+    0.2117,
+    0.1305,
+    0.2473,
     0.1117,
-    0.1221,
-    0.224
+    0.1681,
+    0.1306
    ],
    [
-    0.2103,
-    0.1075,
-    0.1965,
-    0.1409,
-    0.1029,
-    0.2419
+    0.2154,
+    0.1309,
+    0.2064,
+    0.1162,
+    0.1359,
+    0.1952
    ],
    [
-    0.2037,
-    0.1114,
-    0.2012,
-    0.1583,
-    0.1269,
-    0.1986
+    0.2172,
+    0.1224,
+    0.1985,
+    0.1141,
+    0.1195,
+    0.2282
    ],
    [
-    0.2092,
-    0.1405,
-    0.2523,
-    0.1193,
-    0.216,
-    0.0627
+    0.2121,
+    0.1064,
+    0.1918,
+    0.1437,
+    0.0984,
+    0.2476
+   ],
+   [
+    0.2077,
+    0.1178,
+    0.203,
+    0.1161,
+    0.1217,
+    0.2336
+   ],
+   [
+    0.2078,
+    0.1379,
+    0.2484,
+    0.1251,
+    0.21,
+    0.0708
    ]
   ],
   "cues": [
-   0.9142,
-   0.0131,
-   0.0534,
-   0.0193
+   0.917,
+   0.0129,
+   0.0518,
+   0.0182
   ]
  },
  "lakes": {
   "note": "the forty years' rain-fed lakes, each pixel classed by the cell that holds it on the turned Moon as the land is; share_of_ground is lake over lake and land",
   "area_km2_by_moisture": [
-   182,
-   41939,
-   210168,
-   135392,
-   334099,
-   3184453
+   5,
+   57025,
+   252381,
+   89777,
+   258486,
+   3046692
   ],
   "share_of_ground_by_moisture": [
-   0.0004,
-   0.0086,
-   0.0312,
-   0.0674,
-   0.1141,
-   0.3092
+   0.0,
+   0.0105,
+   0.0375,
+   0.0473,
+   0.1023,
+   0.2974
   ]
  },
  "wetness": {
   "index": "ln(a / tan b): a the drained area per unit width (m), b the slope floored at 0.1\u00b0",
-  "land_p10": 9.52,
+  "land_p10": 9.51,
   "land_median": 10.81,
   "land_p90": 13.31,
   "by_moisture": [
    {
-    "median": 10.48,
-    "share_above_land_p90": 0.0545
+    "median": 10.68,
+    "share_above_land_p90": 0.0965
    },
    {
     "median": 10.76,
-    "share_above_land_p90": 0.096
+    "share_above_land_p90": 0.0954
    },
    {
-    "median": 10.85,
-    "share_above_land_p90": 0.1017
+    "median": 10.86,
+    "share_above_land_p90": 0.1039
    },
    {
-    "median": 10.94,
-    "share_above_land_p90": 0.1179
+    "median": 10.95,
+    "share_above_land_p90": 0.122
    },
    {
-    "median": 10.96,
-    "share_above_land_p90": 0.1321
+    "median": 10.84,
+    "share_above_land_p90": 0.1104
    },
    {
-    "median": 10.75,
-    "share_above_land_p90": 0.0876
+    "median": 10.77,
+    "share_above_land_p90": 0.0913
    }
   ]
  },
@@ -321,18 +321,18 @@
   "analytic_slope_max_error_deg": 2.616165534694015e-06,
   "longitude_seam_max_error_m": 3.001332515850663e-11,
   "lakes_reproduced": true,
-  "lake_cells": 1161151,
+  "lake_cells": 1094089,
   "lake_level_max_difference_m": 0.0,
   "global_area_closure": 8.881784197001252e-16,
-  "joint_partition_error": -2.892130979148533e-13,
-  "settings_partition_error": 2.431388423929093e-13,
-  "cue_partition_error": -3.3487657091768597e-12,
+  "joint_partition_error": -3.432809592140984e-13,
+  "settings_partition_error": 1.5654144647214707e-13,
+  "cue_partition_error": -4.205302772675168e-12,
   "land_classes_complete": true,
   "water_unclassed": true,
   "wetness_finite_on_land": true
  },
  "fields": {
   "path": "/media/projectspace/terluna-research/session-tools/terrain_axis/terrain_axis_16ppd.npz",
-  "sha256": "8fae5441ecdd38f765a1667b25fe046a9882e0ac036e8a739ca95ca2ce8ef151"
+  "sha256": "456f05e9f48f807a1e95f882f6aa48b05c5133abbd5d73fdf940cc0760c0a74f"
  }
 }
