@@ -22,7 +22,7 @@
   },
   "inputs": {
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
-   "humanities/dance/vocabulary/poses.json": "128fac64dc50a3ed"
+   "humanities/dance/vocabulary/poses.json": "f7d3de312b2dead3"
   }
  },
  "evidence": "Screens of the surface moves (surfaces.py: pushes on the jump's force-velocity profile, friction on surfaces, an assumed arm pull, the reach engine's floor law) for two representative bodies at the shared gravity and Earth's, written as vocabulary units and joined to the athletic units; the routes come from a beam search over up to three surface moves. Nothing was solved on the whole body, measured in low gravity or run.",

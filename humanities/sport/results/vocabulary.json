@@ -18,7 +18,7 @@
   },
   "inputs": {
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
-   "humanities/dance/vocabulary/poses.json": "128fac64dc50a3ed"
+   "humanities/dance/vocabulary/poses.json": "f7d3de312b2dead3"
   }
  },
  "evidence": "Physics screens of each move's timing from the envelope's closed forms, for two representative bodies at the shared gravity, with every assumption stated beside its value (units.json, vocabulary.py, state.py, envelope.py). The units are drawn from the practice of court and field sports, athletics, gymnastics and the martial arts, and designed for the Moon; none is measured in low gravity or played.",

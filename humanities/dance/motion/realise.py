@@ -39,13 +39,16 @@ problem over the dancer's full rigid-body dynamics at lunar gravity (body.json t
 The solution is a torque, force and motion history that satisfies the equations of motion at every node; the replay
 (replay.py) runs those torques through MuJoCo's independent contact dynamics as a check. Air drag on the body is left
 out of the optimisation: the envelope shows it changes a jump's height by under 4% even with large sleeves. A long
-phrase is solved in overlapping windows (solve_windows).
+phrase is solved in overlapping windows (solve_windows), which can resume from a checkpoint after a stop.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
+import os
+import pickle
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -191,7 +194,8 @@ def shape_targets(shape, side):
 
 CARRIAGE = {   # the dancer's carriage between shapes: lifted, arms low and rounded, slight turnout
     'legs': 'turned_out', 'arms': 'bras_bas', 'torso': 'upright', 'head': 'forward'}
-TWO_FOOT_LEGS = {'parallel', 'turned_out', 'demi_plie', 'grand_plie_prep', 'releve', 'lunge_forward', 'kneel_one'}
+TWO_FOOT_LEGS = {'parallel', 'turned_out', 'turned_out_flat', 'demi_plie', 'grand_plie_prep', 'grand_plie_demi_pointe',
+                 'demi_pointe_low', 'landing_prep', 'releve', 'lunge_forward', 'kneel_one'}
 
 
 def place_feet(model, data, q, targets, iters=80, damping=1e-6, com=None):
@@ -296,7 +300,8 @@ class Node:
     # the take-off on the ballistic arc; Problem fills in the pelvis's planned attitude and the angular momentum.
     air: dict | None = None
     air_frac: float = 0.0
-    z_rel: float | None = None
+    z_rel: float | None = None       # in flight, the height above the take-off on the ballistic arc
+    flight_s: float | None = None    # in flight, the flight's duration
     R_air: np.ndarray | None = None
     L_air: np.ndarray | None = None
     w_air: np.ndarray | None = None  # the pelvis's planned angular velocity (world axes, rad/s)
@@ -482,10 +487,11 @@ def timeline(placed, dt=DT, finish_s=0.0):
                 for j, deg in RELEVE.items():
                     tg[f'{s}_{j}'] = ('hinge', math.radians(deg))
         tau = t - ph['t0']
+        T = ph['duration'] if ph['kind'] == 'flight' else None
         nodes.append(Node(t=float(t), contacts=contacts, landing=landing, targets=tg, yaw=heading + yaw_turn,
                           yaw_rate=yaw_rate, com=pos.copy(), com_vel=(pos - before) / dt, phase=ph['kind'],
                           unit=pl.unit, family=u['family'], side=pl.side, phase_id=pid, air=air, air_frac=frac,
-                          z_rel=(0.5 * gr.G * ph['duration'] * tau - 0.5 * gr.G * tau * tau) if air else None))
+                          z_rel=(0.5 * gr.G * T * tau - 0.5 * gr.G * tau * tau) if T else None, flight_s=T))
         if shapes:
             reached = [s for s in shapes if s['at'] <= frac + 1e-9]
             if reached:
@@ -1114,20 +1120,22 @@ class Problem:
             j = min(i + 1, len(self.nodes) - 1)
             qn = self.reference_q(self.nodes[j])
             if self.nodes[j].z_rel is not None:
-                qn[2] = z_base + self.nodes[j].z_rel        # an aerial figure rises and falls on its arc
+                qn[2] = z_base + self.nodes[j].z_rel        # a flight rises and falls on its arc
             else:
                 qn[2] = z_base = xs[-1][2]
             if self.nodes[j].contacts:
                 qn = place_feet(self.model, data, qn, self.node_targets[j], iters=30, com=self.nodes[j].com)
             vn = np.zeros(self.model.nv)
             nj = self.nodes[j]
-            if nj.w_air is not None:
-                # an aerial figure starts warm with its planned turn and its ballistic arc
+            if nj.flight_s is not None:
+                # a flight starts warm on its ballistic arc (from the floor's height the Moon's 2.8 s saute did not
+                # converge with Runge-Kutta flights, 8 November), and an aerial figure with its planned turn
                 R = pin.Quaternion(qn[6], qn[3], qn[4], qn[5]).toRotationMatrix()
-                tau = nj.air_frac * nj.air['duration']
-                v_up = 0.5 * gr.G * nj.air['duration'] - gr.G * tau
+                tau = nj.air_frac * nj.flight_s
+                v_up = 0.5 * gr.G * nj.flight_s - gr.G * tau
                 vn[:3] = R.T @ np.array([nj.com_vel[0], nj.com_vel[1], v_up])
-                vn[3:6] = R.T @ nj.w_air
+                if nj.w_air is not None:
+                    vn[3:6] = R.T @ nj.w_air
             xs.append(np.concatenate([qn, vn]))
         return xs
 
@@ -1223,18 +1231,38 @@ def solve_span(prob, a, b, maxiter=150, verbose=False):
     return Solution(prob, ms, sub, solver, len(ms), solver.cost, solver.iter, solver.ffeas, solver.stop)
 
 
-def solve_windows(prob, window_s=3.5, step_s=1.0, maxiter=150, verbose=False, log=None):
+def window_key(prob, window_s, step_s, maxiter):
+    """What a windowed solve depends on: this module's code, the phrase's schedule and the settings of its costs."""
+    h = hashlib.sha256(Path(__file__).read_bytes())
+    schedule = [(round(n.t, 6), n.unit, n.phase, sorted(n.contacts.items()), n.landing) for n in prob.nodes]
+    settings = dict(window_s=window_s, step_s=step_s, maxiter=maxiter, gravity=float(prob.model.gravity.linear[2]),
+                    rk4=list(RK4_ON), impulse=IMPULSE_COM_WEIGHT, landing=LANDING_FORCE_WEIGHT, foot=MAX_FOOT_FORCE_N)
+    h.update(json.dumps([schedule, settings]).encode())
+    return h.hexdigest()
+
+
+def solve_windows(prob, window_s=3.5, step_s=1.0, maxiter=150, verbose=False, log=None, checkpoint=None):
     """Solve the phrase window by window: each window of `window_s` starts from the state the previous one reached
     after `step_s`, so every window is short enough to converge and long enough to see a whole flight from its
     push to its landing. An aerial figure is never cut: a window that reaches into one is lengthened to hold it to
-    its landing, and a window keeps either all of it or none. Only one window's models exist at a time; the kept pieces join into one trajectory that
-    satisfies the dynamics throughout. `log`, a callable, hears each window's result as it finishes."""
+    its landing, and a window keeps either all of it or none. Only one window's models exist at a time; the kept
+    pieces join into one trajectory that satisfies the dynamics throughout. `log`, a callable, hears each window's
+    result as it finishes. With `checkpoint`, a path, each window's kept records, the state reached and the next
+    window's warm start are written there (atomically) before the window is reported, and a solve that finds a
+    checkpoint of the same code, phrase and settings resumes from it."""
     x = prob.plan()
     N = len(prob.nodes)
     W, S = int(round(window_s / DT)), int(round(step_s / DT))
     records, tail = [], None
     a, total_cost, iters, worst_gap = 0, 0.0, 0, 0.0
-    t0 = time.time()
+    t0, before = time.time(), 0.0
+    key = window_key(prob, window_s, step_s, maxiter) if checkpoint else None
+    if checkpoint and Path(checkpoint).is_file():
+        with open(checkpoint, 'rb') as f:
+            kept = pickle.load(f)
+        if kept['key'] == key:
+            records, tail, a, x = kept['records'], kept['tail'], kept['a'], kept['x']
+            total_cost, iters, worst_gap, before = kept['cost'], kept['iters'], kept['gap'], kept['seconds']
     blocks = getattr(prob, 'air_blocks', [])
     while a < N:
         b = min(N, a + W)
@@ -1268,14 +1296,20 @@ def solve_windows(prob, window_s=3.5, step_s=1.0, maxiter=150, verbose=False, lo
         total_cost += solver.cost
         iters += solver.iter
         worst_gap = max(worst_gap, solver.ffeas)
+        x = part.x_end
+        if checkpoint:
+            tmp = Path(f'{checkpoint}.tmp')
+            with open(tmp, 'wb') as f:
+                pickle.dump(dict(key=key, records=records, tail=tail, a=a + keep_nodes, x=x, cost=total_cost,
+                                 iters=iters, gap=worst_gap, seconds=before + time.time() - t0), f, protocol=4)
+            os.replace(tmp, checkpoint)
         if log:
             log(dict(nodes=[a, b], t=[round(prob.nodes[a].t, 2), round(prob.nodes[b - 1].t + DT, 2)], kept=keep_nodes,
                      iterations=solver.iter, cost=round(solver.cost, 3), gap=float(solver.ffeas),
-                     seconds=round(time.time() - t0, 1)))
-        x = part.x_end
+                     seconds=round(before + time.time() - t0, 1)))
         a += keep_nodes
         del sub, solver, ms
-    prob.seconds = time.time() - t0
+    prob.seconds = before + time.time() - t0
     return Solution(prob, None, None, None, 0, total_cost, iters, worst_gap, records=records, x_end=x)
 
 
@@ -1368,10 +1402,10 @@ def contact_report(prob, sol):
 
 
 def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=False, windows=False, span=None,
-            finish_s=0.0, window_log=None, window_s=3.5, step_s=1.0, init=None):
+            finish_s=0.0, window_log=None, window_s=3.5, step_s=1.0, init=None, checkpoint=None):
     """Realise the phrase (or units[i:j] of it, or the nodes in span=(t0, t1) seconds) and write its motion file and
     report. finish_s holds the last shape at rest at the end. init, a Solution of the same phrase solved whole, warm-starts
-    the solve (a staged solve)."""
+    the solve (a staged solve). checkpoint, a path, lets a windowed solve resume after a stop (solve_windows)."""
     placed = phrase.placed if units is None else phrase.placed[units[0]:units[1]]
     nodes = timeline(placed, finish_s=finish_s)
     prob = Problem(nodes, gravity=gr.G)          # the grammar's gravity, which timed the phrase
@@ -1382,7 +1416,8 @@ def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=Fal
         solver = solve_span(prob, a, b, maxiter=maxiter, verbose=verbose)
         nodes = nodes[a:b]
     elif windows:
-        solver = solve_windows(prob, window_s=window_s, step_s=step_s, maxiter=maxiter, verbose=verbose, log=window_log)
+        solver = solve_windows(prob, window_s=window_s, step_s=step_s, maxiter=maxiter, verbose=verbose, log=window_log,
+                               checkpoint=checkpoint)
     else:
         solver = prob.solve(maxiter=maxiter, verbose=verbose)
     times, P, Q, C, QS = segment_frames(prob, solver)

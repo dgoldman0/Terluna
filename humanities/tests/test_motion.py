@@ -2,6 +2,7 @@
 carries the grammar's contact schedule. Runs in the dance environment (Pinocchio, Crocoddyl, MuJoCo); elsewhere it
 skips."""
 import math
+import pickle
 
 import numpy as np
 import pytest
@@ -241,10 +242,18 @@ def test_the_corkscrew_twists_once_and_the_flat_spin_lies_flat_about_the_vertica
     assert flight[0].R_air[2, 2] > 0.99 and flight[-1].R_air[2, 2] > 0.99
 
 
-def test_phrases_without_aerial_figures_are_planned_as_before():
+def test_phrases_without_aerial_figures_plan_no_attitude_and_start_each_flight_on_its_arc():
     nodes = rz.timeline(gr.first_phrase().placed, finish_s=1.0)
     prob = rz.Problem(nodes)
-    assert prob.air_plans == [] and not any(n.lean_free or n.z_rel is not None for n in nodes)
+    assert prob.air_plans == [] and not any(n.lean_free or n.R_air is not None for n in nodes)
+    # Every flight node, and only a flight node, carries its height on the ballistic arc for the warm start: it rises
+    # from the take-off, peaks at the middle of the flight and comes back down.
+    assert all((n.z_rel is not None) == (n.phase == 'flight') for n in nodes)
+    flight = [n for n in nodes if n.phase == 'flight']
+    assert flight
+    for n in flight:
+        tau = n.air_frac * n.flight_s
+        assert n.z_rel == pytest.approx(0.5 * gr.G * tau * (n.flight_s - tau)) and n.z_rel >= 0.0
 
 
 def test_self_distance_measures_the_capsules_it_keeps_apart():
@@ -323,11 +332,13 @@ def test_the_barrier_follows_the_body_between_nodes():
 def test_landing_impulses_keep_the_cone_and_cost_the_centre_of_mass_only_with_exact_flights():
     ph = gr.build('Hanging Salto', gr.motif(('hanging_salto', 'R', {'rise_m': 1.6})))
     nodes = rz.timeline(ph.placed, finish_s=0.5)
-    # The salto lands on the balls of both feet, then lowers its heels: two landings, from the air and from the ball.
+    # The salto lands on the balls of both feet, sinks on them into its deep bend and rises on them, then lowers its
+    # heels: two landings, from the air and from the ball.
     i = next(k for k, n in enumerate(nodes) if n.landing and k > 0 and not nodes[k - 1].contacts)
     assert set(nodes[i].contacts.values()) == {'ball'} and set(nodes[i].landing) == {'L', 'R'}
     heels = next(k for k in range(i + 1, len(nodes)) if nodes[k].landing)
-    assert set(nodes[heels].contacts.values()) == {'flat'} and (heels - i) * rz.DT == pytest.approx(0.15, abs=rz.DT)
+    on_balls = gr.absorb_s(gr.takeoff(1.6), 0.35) + gr.rise_s(0.37)
+    assert set(nodes[heels].contacts.values()) == {'flat'} and (heels - i) * rz.DT == pytest.approx(on_balls, abs=rz.DT)
     assert rz.RK4_ON == ('flight',)                       # flights integrate with Runge-Kutta by default
     old = rz.RK4_ON
     try:
@@ -400,3 +411,38 @@ def test_landing_loads_are_costed_from_touchdown_through_the_stroke_in_earth_wei
         assert not any(prob.landing_load(k) for k in range(len(nodes)))
     finally:
         rz.RK4_ON, rz.LANDING_FORCE_WEIGHT = old
+
+
+def test_a_windowed_solve_stopped_and_resumed_from_its_checkpoint_matches_one_never_stopped(tmp_path):
+    ph = gr.build('t', gr.motif(('plie_rise', 'R', {'depth_m': 0.12})))
+
+    def solve(log=None, checkpoint=None):
+        prob = rz.Problem(rz.timeline(ph.placed))
+        return rz.solve_windows(prob, window_s=0.75, step_s=0.5, maxiter=1, log=log, checkpoint=checkpoint)
+
+    class Stop(Exception):
+        pass
+
+    def stop_after_two(report, seen=[]):
+        seen.append(report)
+        if len(seen) == 2:
+            raise Stop
+
+    whole = solve()
+    path = tmp_path / 'windows.pkl'
+    with pytest.raises(Stop):
+        solve(log=stop_after_two, checkpoint=path)
+    resumed = solve(checkpoint=path)
+    assert len(resumed.records) == len(whole.records) > 0
+    for p, q in zip(whole.records, resumed.records):
+        assert p['node'] == q['node'] and np.allclose(p['x'], q['x'], rtol=1e-9, atol=1e-12)
+        assert np.allclose(p['u'], q['u'], rtol=1e-9, atol=1e-9)
+    assert resumed.cost == pytest.approx(whole.cost, rel=1e-9)
+    # A checkpoint made under other settings is not taken up: the solve starts afresh.
+    old = rz.LANDING_FORCE_WEIGHT
+    try:
+        rz.LANDING_FORCE_WEIGHT = old + 1.0
+        prob = rz.Problem(rz.timeline(ph.placed))
+        assert rz.window_key(prob, 0.75, 0.5, 1) != pickle.loads(path.read_bytes())['key']
+    finally:
+        rz.LANDING_FORCE_WEIGHT = old
