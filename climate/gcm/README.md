@@ -4585,10 +4585,20 @@ The run changes the twilight, the equinox and the sunlight together, so none of 
 
 **The products.** The globe shows the design years, 10–19, from 9 November, with their own drainage (`geography/turned_corrected`; [visualization/atlas/README.md](../../visualization/atlas/README.md)). The moisture map and the terrain sheets read the forty years with the forty years' drainage (`geography/turned_corrected_y10-49`; biosphere/ecology/README.md on domain/ecology), the forty-year climatology written beside the ten-year one by the copy-aside method (`climatology_<run>_y10-49.npz`, the canonical file restored byte-identical).
 
+**The year written every 6.5 hours (10 November).** `A28R_301k_design_l15_snow_s938_turned_refit_precession_eddies` is the corrected run's year 10, the first of the design years, run again from that run's own year-9 restart with every flag of the corrected run and its writing interval alone changed: `writes_per_lunar_day` 110, a record every 13 half-hour steps, eleven to each 3-day mean, the output converted in model-day pieces (`--convert-pieces 110`). It took 17 minutes on four ranks, 7.5 of them the model's year and the rest the conversion, and its year file holds 2.4 GB. The equinox's regression continues the corrected run's count (the runner's fix, in the section before): the year's `czen` matches the orbit with that count to 3.5 × 10⁻⁵ rms, the 13-step records sampling the grid's 64 longitudes more coarsely than the 143-step ones, against 0.014 with the equinox held, the angle running from 189.3° to 208.2°.
+
+The model's path does not depend on the writing interval, as the weather rerun of 2 November found on the design run. The year ends on the corrected run's year-10 restart byte for byte, its summary is that year's (301.10 K at the surface, −0.41 W/m² at the top of the air, 1.942 mm/day of rain), and 77 of its 84 fields aggregate to the year's 3-day records to rounding: 52 as means, 23 as single steps at each interval's end and 2 as the interval's extremes. The other seven are the same seven as in that rerun, the fields from the spectral side. As means, the two surface pressures stand within 2 × 10⁻⁵ of their largest values, the temperature within 8 × 10⁻⁵, the winds within 3–8 × 10⁻³ and the vertical wind within 4 × 10⁻²; the humidity is no mean, each record holding it at its interval's start ("The humidity in the year files", above), and the year's first record holds a quarter of the vapour where the first record of the corrected run's 3-day year files holds 2%, three steps' worth of the first interval in each.
+
+The record serves the littoral study on domain/ecology (research/studies/littoral_community there), which reads the wind inside the design year's own 3-day means at the level where the surface exchange is paired. Over the water cells the mean of the 6.5-hour speeds stands 1.13 times the mean speed of the 3-day vectors, and over the land 1.16 times, against 1.16 and 1.18 in `A28_corrected_970_eddies` at the lowest of its ten levels, about 0.9 km up.
+
 ```sh
 S=/media/projectspace/terluna-research/session-tools/precession
 RESUME=1 YEARS=50 $S/run_precession.sh      # the run to year 49, resumable, under its watch
 $S/checks_corrected.sh                       # its checks in turn, one thread
+E=/media/projectspace/terluna-research/session-tools/corrected_eddies
+$E/run_eddies.sh                             # year 10 again, written every 6.5 hours, four ranks
+climate/gcm/.venv/bin/python $E/check_eddies.py    # its restart and records against the corrected run's year 10
+climate/gcm/.venv/bin/python -m climate.gcm.precession check A28R_301k_design_l15_snow_s938_turned_refit_precession_eddies 0
 ```
 
 #### The hollows' store in PlaSim's land (3 November, second pass the same day)
