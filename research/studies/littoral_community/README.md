@@ -2,7 +2,7 @@
 
 9 November 2026, on domain/ecology. The study asks what a self-sustaining community of the Open Moon's fresh shallows needs: producers, decomposers, grazers and predators that feed one another and reproduce on their own through the 708.7-hour lunar day, on the shores of the held fresh seas and at the margins of the rain-fed lakes. It belongs to the aquatic programme's shelves, shallow reefs and lake margins ([plan](../aquatic_biogeochemistry/plan.md#habitats)).
 
-The folder holds two finished pieces. The first is the shore water's physical setting through the design climate's lunar days, computed. The second is a community simulator, built and tested and then shelved: its mechanics work and its species traits are placeholders, so it produces no result about the Moon.
+The folder holds three pieces. The first is the shore water's physical setting through the design climate's lunar days, computed. The second is a review of founder species ([founders.md](founders.md)): which Earth species could found the community, what makes each easy to select, where each belongs and in what order they go in. The third is a community simulator, built and tested and then shelved: its mechanics work and its species traits are placeholders, so it produces no result about the Moon.
 
 ## The shore's water through the lunar month
 
@@ -57,6 +57,18 @@ Each site's water is computed two ways. A closed pan of 1, 2 or 4 m runs in the 
 ### Limits
 
 The setting is a model result at T21 on 3-day windows, a first physical setting for shore life. Weather within a window, waves and the shore's own circulation are absent; the slabs' exchange is a stated range. On the sea shores the monthly tide moves the water level by 2.5–3.7 m ([ecology, finding 18](../../../biosphere/ecology/README.md#waters)), so the fixed depths stand for the shelf below low water. The lake margin takes its land cell's 10 m wind, a wind over land's roughness that a lake's fetch would raise, which makes its daytime heat an upper-side estimate. The climate model and CM1 differ on the air near the ground, a gap the project carries as a range ([register, 8–9 November](../../decisions.md)). Fourteen tests ([test_forcing.py](test_forcing.py)) check the product's binding and its own checks, the coast mask, the Sun's fit, the clear-sky reading and the slab against its limits and against the lake model, and drive the shelved simulator with one site's series.
+
+## The founders' review
+
+[founders.md](founders.md) is a bounded literature review, 44 searches and two papers' pages read on 9 November, of the species that could found the littoral community; [sources.json](sources.json) gives each source with how far it was read. Its placements and its first community are proposals. In brief:
+
+- **Heat sorts the candidates first.** Upper heat tolerance barely answers selection in a fish (0.04 °C a generation in zebrafish), while algae, water fleas, growth and timing answer within tens of generations, so the founders are animals that already stand the shore's heat.
+- **The gentlest shores lie between 45° and 65°**, on shelves from 2 m, open to the sea: 27–34 °C and 110–210 dark hours. A first self-sustaining community is best tried there.
+- **The hard, clear, phosphorus-poor design water favours stonewort meadows and a food web fed from the floor**, once a rich first decade has passed; fast colonisers fill that decade and recede.
+- **Plants first, then crayfish, then their predators** holds against Earth's lakes on two conditions: meadows established and fenced before crayfish arrive, and predators that take crayfish small and moulting arriving with them.
+- **The night's stores already exist** as turions, bulbils, tubers and resting eggs; their cue, moved to the lunar dusk, is the breeding target. No stonewort has been measured through 110–260 warm dark hours.
+- **Founding stocks mixed from many sources** adapt and diversify, and aggressive founders bring spoiled catches, fluke-hosting snails, stripped small fishes and fouled intakes to design around.
+- **Leads by guild:** warm-water stoneworts, greater duckweed and heat-tolerant azolla; water fleas and bladder snails; redclaw crayfish on open shores; spangled perch, jade perch and tilapia of the GIFT lines; stocked eels against the crayfish; mixed cichlid stocks for the crater lakes.
 
 ## The community simulator, shelved
 

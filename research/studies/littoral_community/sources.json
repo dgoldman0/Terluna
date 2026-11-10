@@ -1,0 +1,322 @@
+{
+ "note": "Sources of founders.md and of the round-0 checks in the README, 9 November 2026. read: \"page read\" means the source's own page was fetched and its numbers extracted; \"search summary\" means the figures come from a search tool's summary of the page; \"repository source\" is held in another sources file of this repository. Working notes: /media/projectspace/terluna-research/littoral-community/review/notes.md.",
+ "searches": 44,
+ "pages_read": 2,
+ "sources": [
+  {
+   "key": "morgan2020",
+   "citation": "Morgan, Finnoen, Jensen, Pelabon & Jutfelt 2020. Low potential for evolutionary rescue from climate change in a tropical fish. PNAS 117(52): 33365-33372",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7776906",
+   "read": "page read",
+   "used_for": "Zebrafish CTmax under selection: +0.04 +/- 0.008 C a generation, +0.22 and -0.74 C after six generations, realised heritability 0.10 and 0.24, acclimation gain 1.31 to 0.98 C, a hard upper limit suggested"
+  },
+  {
+   "key": "padfield2016",
+   "citation": "Padfield, Yvon-Durocher, Buckling, Jennings & Yvon-Durocher 2016. Rapid evolution of metabolic traits explains thermal adaptation in phytoplankton. Ecology Letters 19: 133-142",
+   "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4991271/",
+   "read": "search summary",
+   "used_for": "Chlorella vulgaris: high-temperature tolerance after about 100 generations by down-regulating respiration relative to photosynthesis; experiment to 33 C"
+  },
+  {
+   "key": "geerts2015",
+   "citation": "Geerts and others 2015. Rapid evolution of thermal tolerance in the water flea Daphnia. Nature Climate Change 5: 665-668, doi:10.1038/nclimate2628",
+   "url": "https://lirias.kuleuven.be/handle/123456789/497998",
+   "read": "search summary",
+   "used_for": "Daphnia magna CTmax rose in a two-year +4 C selection experiment on 150 clones and between the 1960s and 2000s in a lake egg bank"
+  },
+  {
+   "key": "gift",
+   "citation": "GIFT tilapia genetic gains: WorldFish abstracts and archive (three generations in Malaysia, 6-13%; sixteen generations, 5-6%), Global Seafood Advocate (about 17% over the first five generations), trade press quoting WorldFish (about 10%)",
+   "url": "https://digitalarchive.worldfishcenter.org/handle/20.500.12348/1690",
+   "read": "search summary",
+   "used_for": "Nile tilapia growth gain of 5-17% a generation across reports spanning sixteen generations"
+  },
+  {
+   "key": "mcphee2004",
+   "citation": "McPhee, Jones and others 2004. Selection for increased weight at 9 months in redclaw crayfish (Cherax quadricarinatus). Aquaculture (James Cook University record 27657); Jones, McPhee and others 1997, Selection for weight gain in redclaw crayfish (record 31594); a 2022 study of 350 families",
+   "url": "https://researchonline.jcu.edu.au/27657/",
+   "read": "search summary",
+   "used_for": "Redclaw realised heritability of harvest weight 0.38 falling to 0.13 over four generations; 0.24 in fresh stock; 0.07-0.14 across 350 families; outcrossing advised"
+  },
+  {
+   "key": "vadeboncoeur2003",
+   "citation": "Vadeboncoeur and others 2003. From Greenland to green lakes: cultural eutrophication and the loss of benthic pathways in lakes. Limnology and Oceanography 48; Vadeboncoeur and others 2001, Ecology 82",
+   "url": "https://corescholar.libraries.wright.edu/biology/617",
+   "read": "search summary",
+   "used_for": "Periphyton 80-98% of primary production in shallow oligotrophic Greenland lakes; benthic share falls with phosphorus; epipelic algae 50-80% in Michigan lakes"
+  },
+  {
+   "key": "marshall1981",
+   "citation": "Marshall & Junor 1981. The decline of Salvinia molesta on Lake Kariba. Hydrobiologia 83: 477-484; with the ILEC World Lake Database entry for Lake Kariba",
+   "url": "https://link.springer.com/doi/10.1007/BF02187043",
+   "read": "search summary",
+   "used_for": "Salvinia covered 22% of Lake Kariba by 1962 and fell to 10-15%; the lake turned oligotrophic after filling; kapenta introduced from Lake Tanganyika"
+  },
+  {
+   "key": "paterson2019",
+   "citation": "Paterson and others 2019, Can. J. Fish. Aquat. Sci. 76: 1459, as held in biosphere/ecology/sources.json",
+   "url": "",
+   "read": "repository source",
+   "used_for": "New reservoirs run eutrophic for about a decade"
+  },
+  {
+   "key": "vanderwal2013",
+   "citation": "van der Wal and others 2013. Invasive crayfish threaten the development of submerged macrophytes in lake restoration. PLoS ONE 8(10): e78579",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3813481",
+   "read": "page read",
+   "used_for": "Lake Terra Nova: Procambarus clarkii at 150 g/m2 strongly reduced biomass and survival of Chara virgata, Elodea nuttallii and Myriophyllum spicatum in six weeks; fish and waterfowl without added effect; gut contents"
+  },
+  {
+   "key": "crayfish_tanks",
+   "citation": "A mesocosm study of Procambarus clarkii in temporary ponds (Hydrobiologia; reference to confirm)",
+   "url": "https://link.springer.com/article/10.1023/B:HYDR.0000008626.07042.87",
+   "read": "search summary",
+   "used_for": "Macrophyte biomass about 40% less at 1 crayfish per m2 and about 80% less at 3 per m2"
+  },
+  {
+   "key": "rodriguez2003",
+   "citation": "Rodriguez, Becares & Fernandez-Alaez 2003. Shift from clear to turbid phase in Lake Chozas (NW Spain) due to the introduction of American red swamp crayfish (Procambarus clarkii). Hydrobiologia 506: 421-426",
+   "url": "https://link.springer.com/article/10.1023/B:HYDR.0000008626.07042.87",
+   "read": "search summary",
+   "used_for": "Lake Chozas turned from clear to turbid after the crayfish"
+  },
+  {
+   "key": "naivasha",
+   "citation": "Harper and others 2002 (crayfish feeding and distribution); Smart and others 2002; Hickley & Harper 2002; Britton and others 2007 (carp); Gherardi and others 2011 (23 alien species): Lake Naivasha, Kenya",
+   "url": "https://filetransfer.itc.nl/pub/naivasha/Harper2002crayfish.pdf",
+   "read": "search summary",
+   "used_for": "P. clarkii introduced 1970; crayfish and submerged plants cycle inversely; bass and tilapias fished since 1959; carp arrived 1999 and led the fishery by 2004"
+  },
+  {
+   "key": "vallisneria_brisbane",
+   "citation": "Transplanted Vallisneria nana in the Brisbane River. Journal of Freshwater Ecology 2011, doi:10.1080/02705060.2011.553925",
+   "url": "https://informahealthcare.com/doi/full/10.1080/02705060.2011.553925",
+   "read": "search summary",
+   "used_for": "Grazing cut cover; removing exclosure fences lost the beds rapidly and completely"
+  },
+  {
+   "key": "aquiloni2010",
+   "citation": "Aquiloni and others 2010. Biological control of invasive populations of crayfish: the European eel (Anguilla anguilla) as a predator of Procambarus clarkii. Biological Invasions 12: 3817-3824",
+   "url": "https://flore.unifi.it/handle/2158/390892",
+   "read": "search summary",
+   "used_for": "Eels take small and soft crayfish from behind and reduce crayfish feeding; a complement to trapping"
+  },
+  {
+   "key": "eels_french_ponds",
+   "citation": "Native European eels as a potential biological control for invasive crayfish. Freshwater Biology 2015, doi:10.1111/fwb.12510",
+   "url": "https://openpolar.no/Record/crwiley:10.1111%2Ffwb.12510",
+   "read": "search summary",
+   "used_for": "Eel density near carrying capacity collapsed P. clarkii populations in French ponds without eradicating them"
+  },
+  {
+   "key": "sharpe2017",
+   "citation": "Sharpe, De Leon, Gonzalez & Torchin 2017. Tropical fish community does not recover 45 years after predator introduction. Ecology 98: 412-424; Zaret & Paine 1973",
+   "url": "https://insider.si.edu/2016/12/peacock-bass-invasion-devastating-long-term-effects-native-panamanian-fish/",
+   "read": "search summary",
+   "used_for": "Lake Gatun: native littoral fish abundance 96% below its pre-introduction level 45 years after Cichla"
+  },
+  {
+   "key": "nitellopsis2023",
+   "citation": "Starch in Nitellopsis obtusa of Lake Koronis, Minnesota. Journal of Freshwater Ecology 2023",
+   "url": "https://doaj.org/article/acb62573598942bb9522390669d09f0b",
+   "read": "search summary",
+   "used_for": "Bulbils 42-55% starch, thallus 3-10%; carbohydrate moves into bulbils July-September"
+  },
+  {
+   "key": "adamec_turions",
+   "citation": "Adamec, turion respiration of aquatic plants (Fundamental and Applied Limnology 2011)",
+   "url": "https://www.butbn.cas.cz/adamec/FAL11Turions.pdf",
+   "read": "search summary",
+   "used_for": "Turions respire 2-4 times less than shoots; Q10 1.8-2.6 when dormant"
+  },
+  {
+   "key": "kuehdorf2014",
+   "citation": "Kuehdorf and others 2014, clonal dependence of turion formation in Spirodela polyrhiza (doi:10.1111/ppl.12065); Appenroth 2002; Mejbel & Simons 2018, Ecology and Evolution (PMC5817126)",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5817126",
+   "read": "search summary",
+   "used_for": "27 clones keep different turion yields after years in culture; clonal differences in turion induction; birth order shifts turion timing"
+  },
+  {
+   "key": "hydrilla",
+   "citation": "Hydrilla verticillata: UF/IFAS factsheet (archived); OSTI record 6640164 (adaptation to low light); Barko & Smart 1981, Ecological Monographs",
+   "url": "https://www.osti.gov/biblio/6640164",
+   "read": "search summary",
+   "used_for": "Grows at 1% of full sunlight; optimum 20-27 C, maximum 30 C by IFAS, good growth at 30 C in another study; tubers germinate 15-35 C and form under short days and low nutrients"
+  },
+  {
+   "key": "dark_algae",
+   "citation": "Dark survival of freshwater algae: Journal of Japan Society on Water Environment 24: 27 (20-day dark test); Microorganisms 2023 (a year of darkness); Journal of Phycology doi:10.1111/jpy.13374 (temperature)",
+   "url": "https://www.jstage.jst.go.jp/article/jswe/24/1/24_1_27/_article/-char/ja",
+   "read": "search summary",
+   "used_for": "Scenedesmus quadricauda and Melosira ambigua kept biomass through 20 dark days, Microcystis aeruginosa fell to 1% of its cells; Microcystis recovers after a year dark; warmth shortens dark survival"
+  },
+  {
+   "key": "charophyte_pioneers",
+   "citation": "Charophytes as pioneers: Schubert and others, Ecology of charophytes: permanent pioneers and ecosystem engineers; Botany Letters 2017, doi:10.1080/23818107.2017.1393460; a Loughborough study of colonisation",
+   "url": "https://www.schweizerbart.de//papers/pip/detail/5/89102/Ecology_of_charophytes_permanent_pioneers_and_ecosystem_engineers",
+   "read": "search summary",
+   "used_for": "Often the first macrophytes in new water bodies; Chara globularis in a 9 ha reservoir 20 days after treatment; oospore banks re-establish after decades"
+  },
+  {
+   "key": "tropical_chara",
+   "citation": "Tropical charophytes: stonewort weed guide (herbiguide.com.au); Anderson & Lommasson 1956 on Chara zeylanica; Chara braunii studies (J. Freshwater Ecology 2023; Aust. J. Bot. BT97104); Vieira & Necchi 2003 on Brazilian stream species",
+   "url": "https://www.herbiguide.com.au/Descriptions/hg_Stonewort.htm",
+   "read": "search summary",
+   "used_for": "Tropical Characeae survive in waters to about 30 C; no growth data at 30-35 C found; Chara photosynthesis peaked at 10-15 C and dark respiration rose to 25 C in the Brazilian study"
+  },
+  {
+   "key": "azolla",
+   "citation": "Azolla: FAO review i1141e02 citing Cagauan & Pullin 1991; Plants 2022 (PMC9032100)",
+   "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9032100/",
+   "read": "search summary",
+   "used_for": "Heat tolerance ranked from A. mexicana to A. filiculoides; optimum near 25 C, A. mexicana about 30 C; doubling 2.16 d at best, 3.7-9.5 d outdoors; 53-1,000 kg N per ha"
+  },
+  {
+   "key": "kolbe2004",
+   "citation": "Kolbe and others 2004. Genetic variation increases during biological invasion by a Cuban lizard. Nature 431: 177-181; Dlugosch & Parker 2008, Molecular Ecology 17: 431-449",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/15356629",
+   "read": "search summary",
+   "used_for": "At least eight introductions and more variation than in the native range; multiple introductions raise diversity across invasions"
+  },
+  {
+   "key": "meier2017",
+   "citation": "Meier, Marques, Mwaiko, Wagner, Excoffier & Seehausen 2017. Ancient hybridization fuels rapid cichlid fish adaptive radiations. Nature Communications 8: 14363",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5309898",
+   "read": "search summary",
+   "used_for": "About 700 species of the Lake Victoria Region Superflock descend from a hybrid swarm of two lineages"
+  },
+  {
+   "key": "barluenga2006",
+   "citation": "Barluenga, Stolting, Salzburger, Muschick & Meyer 2006. Sympatric speciation in Nicaraguan crater lake cichlid fish. Nature 439: 719-723; reply to Schliewen and others 2006",
+   "url": "https://www.nature.com/articles/nature05419",
+   "read": "search summary",
+   "used_for": "Amphilophus zaliosus arose in Lake Apoyo within less than about 10,000 years; the sympatric reading is disputed"
+  },
+  {
+   "key": "gutekunst2018",
+   "citation": "Gutekunst and others 2018, Nature Ecology & Evolution, with the authors' account \"Invasion of the clones\"",
+   "url": "https://communities.springernature.com/posts/invasion-of-the-clones",
+   "read": "search summary",
+   "used_for": "Marbled crayfish: one all-female triploid clone; Madagascar range from about 1,000 to over 100,000 km2 in ten years; sold as food"
+  },
+  {
+   "key": "redclaw_zambezi",
+   "citation": "Redclaw in the Zambezi basin: Biological Invasions 2023 (Rufford Foundation PDF); Socioeconomic impacts of Australian redclaw crayfish (White Rose eprint 198654); Mongabay 2025",
+   "url": "https://eprints.whiterose.ac.uk/id/eprint/198654",
+   "read": "search summary",
+   "used_for": "Wild in the Kafue 2001 and Lake Kariba 2002; nearly the whole 1,600 km Kafue; Kariba gillnet fishers lose about 212 t a year"
+  },
+  {
+   "key": "redclaw_thermal",
+   "citation": "Redclaw thermal limits: Iheringia (SciELO) paper; CICESE thesis, Baja California Sur; CSIRO Marine and Freshwater Research MF9900735; a review of tropical crustaceans (PMC10907542)",
+   "url": "https://scielo.br/j/isz/a/TbCNNKnTvt79fcy5bBm6kHG/?lang=en",
+   "read": "search summary",
+   "used_for": "Lethal at 10 and 36 C; growth optimum 25-30 C; CTmax 36 to 42 C with acclimation 20 to 32 C; preferred 28.7 C"
+  },
+  {
+   "key": "clarkii_thermal",
+   "citation": "Procambarus clarkii: Buckle and others 1996, Rev. Biol. Trop. 44; Effects of thermal stress on growth and reproduction of Procambarus clarkii, Animals 2026, 16(3): 495; University of Florence abstract; Auburn MSc thesis 2024",
+   "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12896617/",
+   "read": "search summary",
+   "used_for": "Preferendum 23.4 C; growth optimum 20-25 C, reproduction 18-22 C; adults to 37 C; burrowing follows the groundwater"
+  },
+  {
+   "key": "corbicula",
+   "citation": "Corbicula fluminea: Johnson & McMahon 1998, CJFAS (f98-030); Matthews & McMahon 1999; Virginia Tech thesis on the New River",
+   "url": "https://www.sciencegate.app/document/10.1139/f98-030",
+   "read": "search summary",
+   "used_for": "High mortality near 36 C; LT50 of 144-216 h under low oxygen at 25 C"
+  },
+  {
+   "key": "melanoides",
+   "citation": "Melanoides tuberculata: Acta Limnologica Brasiliensia (temperature and salinity tolerance); NeoBiota 2025; Potential for emergence of foodborne trematodiases transmitted by an introduced snail, medRxiv 2022.01.21.22269661 (preprint)",
+   "url": "https://www.medrxiv.org/content/10.1101/2022.01.21.22269661v1.full.pdf",
+   "read": "search summary",
+   "used_for": "Tolerates 16-37 C, optimum 29-34 C; first reproduction about 275 d at 25 C; first host of at least 11 human-infecting trematodes; infected snails at 19 of 41 Californian fishing sites"
+  },
+  {
+   "key": "physa",
+   "citation": "Physa acuta life tables: National Academy Science Letters 2018, doi:10.1007/s40009-018-0709-z; a West Bengal cohort study 2017",
+   "url": "https://link.springer.com/article/10.1007/s40009-018-0709-z",
+   "read": "search summary",
+   "used_for": "Generation about 47 d; maturity at 28-42 d; higher temperature and salinity tolerance than a native competitor; survives drying"
+  },
+  {
+   "key": "neocaridina",
+   "citation": "Neocaridina davidi: temperature and offspring sex ratio (Turkish study); temperature and reproduction (Argentine study, Acta Zoologica doi:10.1111/azo.12336)",
+   "url": "https://zendy.io/title/10.1111/azo.12336",
+   "read": "search summary",
+   "used_for": "Offspring 80% female at 20 C, 18% at 26 C; 20 C depresses reproduction against 24 and 28 C"
+  },
+  {
+   "key": "daphnia_lumholtzi",
+   "citation": "Daphnia lumholtzi: Lennon and others 2001; Engel & Tollrian 2009 (PMC2674494); Mantovano and others 2021",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2674494",
+   "read": "search summary",
+   "used_for": "Tropical origin; spread through North American reservoirs in about thirty years in the summer thermal niche; inducible spines against fish"
+  },
+  {
+   "key": "sinanodonta",
+   "citation": "Sinanodonta woodiana: a 2012 host experiment (Institute of Vertebrate Biology PDF); NeoBiota 103 (2025), doi:10.3897/neobiota.103.160537",
+   "url": "https://neobiota.pensoft.net/article_preview.php?id=160537",
+   "read": "search summary",
+   "used_for": "Completes development on all eight fish species tested; larvae on all eight wild species sampled; lowers a native mussel's metamorphosis on shared hosts"
+  },
+  {
+   "key": "limnoperna",
+   "citation": "Limnoperna fortunei: Biofouling study of upper lethal temperature; reviews of its hypoxia tolerance and Pantanal die-offs (CONICET; EMBRAPA)",
+   "url": "https://ri.conicet.gov.ar/handle/11336/68613",
+   "read": "search summary",
+   "used_for": "More heat-resistant than Dreissena polymorpha; withstands 0.5 mg/L of oxygen for long periods and dies in the Pantanal oxygen crashes; fouls intakes"
+  },
+  {
+   "key": "spangled_perch",
+   "citation": "Leiopotherapon unicolor: desertfishes.org species account (citing Llewellyn 1973, Glover 1990); Fishes of Australia species 694; FishBase mirror",
+   "url": "https://www.desertfishes.org/australia/fish/leiounic.shtml",
+   "read": "search summary",
+   "used_for": "Waters of 5-44 C; LD50 about 39 C; 24,000-113,200 eggs; 16.6 km overland in six hours; diet of invertebrates, crustaceans, molluscs, fish"
+  },
+  {
+   "key": "jade_perch",
+   "citation": "Scortum barcoo: Queensland Government aquaculture pages; Fishes of Australia species 701",
+   "url": "https://www.business.qld.gov.au/industries/farms-fishing-forestry/fisheries/aquaculture/species/barcoo-grunter",
+   "read": "search summary",
+   "used_for": "Tolerates water to 40 C by two accounts, 12-34 C by a farming guide; spawns in summer floods above 23 C; omnivore taking crustaceans and molluscs"
+  },
+  {
+   "key": "tilapia",
+   "citation": "Oreochromis niloticus: FAO cultured aquatic species fact sheet (excerpt); Global Invasive Species Database; Campos-Mendoza and others 2004 (Stirling record 1893/31035); Rad and others 2006; Martinez-Chavez and others 2021",
+   "url": "https://storre.stir.ac.uk/handle/1893/31035",
+   "read": "search summary",
+   "used_for": "Lethal at 11-12 and 42 C, preferred 31-36 C; maturity at 5-6 months; under continuous light the second-highest fecundity and short spawning intervals of four regimes"
+  },
+  {
+   "key": "oscar",
+   "citation": "Astronotus ocellatus: Florida Museum species profile; Hydrobiologia 2016, doi:10.1007/s10750-016-2740-8",
+   "url": "https://www.floridamuseum.ufl.edu/discover-fish/species-profiles/oscar/",
+   "read": "search summary",
+   "used_for": "Diet includes crayfish and snails; lower lethal about 12.9 C; southern Everglades waters 13.2-35.5 C; biparental; mature at about a year"
+  },
+  {
+   "key": "cichla",
+   "citation": "Cichla: reproduction in Brazilian reservoirs (Rev. Biol. Trop. 59(2); J. Fish Biology doi:10.1111/jfb.14618); Swingle 1966, SEAFWA (temperature tolerance and a pond test)",
+   "url": "https://seafwa.org/journal/1966/temperature-tolerance-peacock-bass-and-pond-test-its-value-piscivorous-species",
+   "read": "search summary",
+   "used_for": "Reproductive activity through almost the whole year; fingerlings die below 61 F"
+  },
+  {
+   "key": "clarias",
+   "citation": "Clarias gariepinus early life: Aquatic Living Resources 1995 (alr95423)",
+   "url": "https://www.alr-journal.org/articles/alr/pdf/1995/04/alr95423.pdf",
+   "read": "search summary",
+   "used_for": "Early-life thermal zone 18.9-33.2 C; embryos die above about 35 C"
+  },
+  {
+   "key": "rio_negro",
+   "citation": "Wood and others 2003 (Potamotrygon in Rio Negro blackwater); Gonzalez and others 1998, 2002; Gonzalez, Wilson & Wood 2005, Ionoregulation in tropical fishes from ion-poor, acidic blackwaters, Fish Physiology 21",
+   "url": "https://repositorio.inpa.gov.br/handle/1/19016",
+   "read": "search summary",
+   "used_for": "Rio Negro water holds 30 umol/L or less of Na+, Cl- and Ca2+; its fishes keep their salts there; sodium uptake affinity differs by lineage"
+  }
+ ]
+}
