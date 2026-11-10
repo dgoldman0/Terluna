@@ -18,7 +18,8 @@ and the polar light study take it. PlaSim's orbit turns once in n_steps_per_year
 in its 30-minute steps (17,532; plasim.f90), whatever the length of the run's output years (12 lunar days, 17,160
 steps), so PRECYEARS is the nodal period in those orbital years, 18.61, and the declination repeats every eclipse year,
 346.6 days. A run counts the regression from its own first step, the step its initial restart holds, so a branch from a
-run without precession continues that run's orbit unbroken.
+run without precession continues that run's orbit unbroken. A branch from a run that precesses counts from that run's
+first step (branch_step0), so the equinox it inherits keeps regressing where the restart left it.
 
     <climate venv>/bin/python -m climate.gcm.precession check FOLDER YEAR [--out JSON]
         # a run's zonal-mean cosine of the Sun's zenith angle in one year against the orbit's, with and without the
@@ -89,6 +90,21 @@ def restart_step(path) -> int:
         if name.strip() == 'nstep':
             return int(struct.unpack('<q' if len(data) == 8 else '<i', data)[0])
     raise ValueError(f'{path} holds no nstep record')
+
+
+def branch_step0(start_from) -> int:
+    """The step a branch from the restart start_from counts the regression from. A restart in the model folder of a
+    run that precesses hands on that run's first step, read from the run's progress.json, so the equinox keeps
+    regressing where the restart left it; any other restart starts the count at its own step."""
+    path = Path(start_from)
+    record = path.parent.parent / 'progress.json'
+    if path.parent.name == 'model' and record.is_file():
+        held = (json.loads(record.read_text()).get('configuration', {}).get('precession') or {}).get('step0')
+        if held is not None:
+            if int(held) > restart_step(path):
+                raise ValueError(f'{record} counts the regression from step {held}, after {path} was written')
+            return int(held)
+    return restart_step(path)
 
 
 def namelist(entry: dict) -> list:

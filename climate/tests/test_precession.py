@@ -90,3 +90,28 @@ def test_the_first_step_and_the_namelist(tmp_path):
     assert prc.restart_step(path) == 2934936
     entry = dict(prc.setting(365.25636), step0=prc.restart_step(path))
     assert prc.namelist(entry) == [('PRECYEARS', repr(6798.38 / 365.25636)), ('PRECSTEP0', '2934936.0')]
+
+
+def test_a_branch_from_a_precessing_run_keeps_counting_from_that_runs_first_step(tmp_path):
+    # the corrected design run: counted from the target run's year-49 restart, its own year-9 restart 171,600 steps on
+    import json
+    model = tmp_path / 'parent' / 'model'
+    model.mkdir(parents=True)
+    restart = model / 'MOST_REST.00009'
+    lv.write_records(restart, [('nstep', struct.pack('<i', 2934936 + 10 * 17160))])
+    record = tmp_path / 'parent' / 'progress.json'
+    record.write_text(json.dumps(dict(configuration=dict(precession=dict(prc.setting(365.25636), step0=2934936)))))
+    assert prc.restart_step(restart) == 3106536
+    assert prc.branch_step0(restart) == 2934936                  # the regression continues unbroken
+    # a parent without precession, or a restart outside a run's model folder, starts the count at the restart's step
+    record.write_text(json.dumps(dict(configuration=dict(model=dict(layers=15)))))
+    assert prc.branch_step0(restart) == 3106536
+    record.unlink()
+    assert prc.branch_step0(restart) == 3106536
+    loose = tmp_path / 'MOST_REST.00009'
+    lv.write_records(loose, [('nstep', struct.pack('<i', 3106536))])
+    assert prc.branch_step0(loose) == 3106536
+    # a record that counts from after the restart belongs to another state: refused
+    record.write_text(json.dumps(dict(configuration=dict(precession=dict(step0=3106537)))))
+    with pytest.raises(ValueError):
+        prc.branch_step0(restart)

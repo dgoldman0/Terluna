@@ -2207,8 +2207,9 @@ def configuration(name, ncpus, overrides=None, co2_ppm=None, top_infrared=None, 
     the runs of 14 to 19 October did, and the 295 K fit the longwave correction as those of 17 October did. frame, a
     turned surface's record (turned.py), runs the turned Moon: that record's surface in place of today's and its spin
     axis's tilt to the ecliptic (frame_setting); left out, the Moon stands as it does today. precession lets the spin
-    axis precess with the orbit's node, the equinox regressing once a nodal period from the run's first step
-    (precession.py); left out, the equinox stands still, as in every earlier run."""
+    axis precess with the orbit's node, the equinox regressing once a nodal period from the run's first step, or from
+    its parent's where it branches from a run that precesses (precession.py); left out, the equinox stands still, as
+    in every earlier run."""
     from importlib.metadata import version
     exp = EXPERIMENTS[name]
     planet = json.loads((PRODUCTS / 'moon_gcm_configuration.json').read_text())['planet']
@@ -3134,9 +3135,10 @@ def run(name: str, years: int, ncpus: int, folder: str | None = None, prune: boo
             cfg['initial_state'] = stored['configuration'].get('initial_state', 'exoplasim default')
         else:
             cfg['initial_state'] = 'exoplasim default'
-        if 'precession' in cfg:                   # the equinox's regression counts from the run's first step
+        if 'precession' in cfg:                   # the equinox's regression counts from the run's first step, or
+            # from its parent's where the branch starts from a run that precesses (precession.branch_step0)
             held = ((stored or {}).get('configuration', {}).get('precession') or {}).get('step0', 0)
-            cfg['precession']['step0'] = prc.restart_step(start_from) if start_from else held
+            cfg['precession']['step0'] = prc.branch_step0(start_from) if start_from else held
         cfg['key'] = run_key(cfg, inputs)
         progress = stored or dict(configuration=cfg, inputs=inputs, years=[])
         if progress['configuration']['key'] != cfg['key']:
@@ -3370,8 +3372,9 @@ def main(argv=None) -> int:
                              'tilt to the ecliptic for that state (frame_setting; part of the run key)')
     parser.add_argument('--precession', action='store_true',
                         help="the spin axis precesses with the orbit's node: the equinox regresses once a nodal "
-                             "period (18.6 years, geology's source) from the run's first step (precession.py; part "
-                             'of the run key)')
+                             "period (18.6 years, geology's source) from the run's first step, or from its "
+                             "parent's where it branches from a run that precesses (precession.py; part of the "
+                             'run key)')
     parser.add_argument('--land-store-floor', choices=lsf.FLOORS, help="the hollows' floor design")
     parser.add_argument('--land-store-surface', choices=lsf.SURFACES, help="the slopes' surface")
     parser.add_argument('--land-store-library', choices=lsf.LIBRARIES,
