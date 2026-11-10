@@ -26,15 +26,22 @@ research/studies/underwater_light reads it: the clear sky's photosynthetic photo
 elevation, the long twilight included) times the window's cloud factor, clouds taken to dim photosynthetic light as
 they dim the whole shortwave.
 
-The water. The project's lake model (biosphere/ecology/lake.py) on pans of 1, 2 and 4 m, forced as the cold-waters and
-waters' oxygen studies force it from the run's means (research/studies/cold_waters/run.py, site_forcing): the air and
-the lowest level's humidity, the sky infrared rls + sigma ts^4, the surface pressure and the 10 m wind, each linear in
-time between the windows' centres. The sunlight is sharpened: each window keeps the run's all-sky downwelling
+The water. The project's lake model (biosphere/ecology/lake.py) on pans of 1, 2 and 4 m, forced from the run's means
+as the waters' oxygen study forces it since its correction of 18 October (research/studies/lake_oxygen/run.py, windows
+and hourly): the sky infrared rls + sigma ts^4, the surface pressure, and the air the bulk exchange meets, paired as
+PlaSim pairs it, the lowest level's wind and humidity and that level's potential temperature at the surface (the run's
+tas) with the transfer coefficient at the level's own height, about 313 m on the run's fifteen levels; each linear in
+time between the windows' centres. The wind of a 3-day mean is the speed of its mean vector, which the wind's turning
+inside the window leaves below the mean speed; it is raised as that study raises it, by the factor it measured in the
+two years of the earlier design case written every 6.4 hours (wind_raise: the mean of its six cells' factors, 1.21;
+wind_record.py looks at the same record over the whole grid), after PlaSim's least wind of 1 m/s at the level. The
+wind at 10 m, which the oxygen transfer's wind form takes, is that level's wind brought down the neutral profile over
+water (lake.reduce_wind). The sunlight is sharpened: each window keeps the run's all-sky downwelling
 shortwave, rss / (1 - alb), as its mean, shared over the window's steps in proportion to the run's clear-sky shortwave
 at each step's elevation, so the water warms from dawn and cools from dusk instead of across a smeared 3-day mean. The
-lake margin takes a third of its land cell's 10 m wind (SHELTER), as the cold-waters study's sheltered ponds do; the
-open lake beside it takes the whole of it, a wind over land's roughness that a lake's fetch would raise, so the lake
-site's daytime heat is an upper-side estimate. The oxygen transfer velocity at each step is the lake model's
+lake margin takes a third of its cell's wind (SHELTER), as the cold-waters study's sheltered ponds do; the open lake
+beside it takes the whole of it, the lowest level's wind over water's own roughness, as a lake wide enough for the wind
+to settle over it would meet. The oxygen transfer velocity at each step is the lake model's
 surface-renewal form (Tedford et al. 2014) on the run's water friction velocity and the cooling buoyancy flux of the
 surface's own heat loss (its infrared, sensible and latent heat at the recorded surface temperature), with Cole and
 Caraco's (1998) wind form beside it.
@@ -86,7 +93,8 @@ BANDS = {'shore_0': (0.0, 10.0), 'shore_30': (25.0, 35.0), 'shore_45': (40.0, 50
 LAKE_BAND = (0.0, 15.0)
 DEPTHS_M = (1.0, 2.0, 4.0)
 LAYER_M = {1.0: 0.1, 2.0: 0.1, 4.0: 0.2, 20.0: 0.5}
-SHELTER = 0.3                           # a sheltered margin's share of the 10 m wind (cold_waters' ponds)
+SHELTER = 0.3                           # a sheltered margin's share of the wind (cold_waters' ponds)
+LEVEL_FLOOR_MS = 1.0                    # PlaSim's least wind at its lowest level (fluxmod.f90 zumin), as lake_oxygen floors it
 CLEAR_FLOOR_W = 5.0                     # W/m2: below this window-mean clear shortwave the cloud factor is not read
 CLOUD_CAP = 1.05                        # the largest cloud factor photosynthetic light takes from a window
 PAR_DARK = 1.0                          # umol m-2 s-1, the underwater light study's darkness
@@ -113,16 +121,19 @@ def read_years():
     """The ten years' windows of the fields the forcing needs (float32), with the grid."""
     import netCDF4
     keys = ('tas', 'ts', 'rss', 'rsscs', 'rls', 'alb', 'ps', 'uas', 'vas', 'czen')
-    out = {k: [] for k in keys + ('hus_low',)}
+    low = ('hus', 'ta', 'ua', 'va')                    # at the lowest level, where PlaSim pairs its surface exchange
+    out = {k: [] for k in keys + tuple(f'{k}_low' for k in low)}
     for path in year_files():
         with netCDF4.Dataset(path) as nc:
             lat, lon = np.array(nc['lat'][:], dtype=float), np.array(nc['lon'][:], dtype=float)
             lsm = np.array(nc['lsm'][0], dtype=float)
+            sigma = float(np.array(nc['lev'][:], dtype=float)[-1])
             for k in keys:
                 out[k].append(np.array(nc[k][:], dtype=np.float32))
-            out['hus_low'].append(np.array(nc['hus'][:, -1], dtype=np.float32))
+            for k in low:
+                out[f'{k}_low'].append(np.array(nc[k][:, -1], dtype=np.float32))
     data = {k: np.concatenate(v) for k, v in out.items()}
-    data.update(lat=lat, lon=lon, lsm=lsm)
+    data.update(lat=lat, lon=lon, lsm=lsm, sigma_low=sigma)
     return data
 
 
@@ -228,9 +239,41 @@ def air_constants():
     return float(s['air_gas_constant']), float(s['air_cp']), float(s['o2_fraction']), float(s['salinity_g_kg'])
 
 
+def wind_factors():
+    """The waters' oxygen study's factors at its six cells: by how much the mean speed of the 6.4-hour means exceeds
+    the speed of their 3-day mean vector, in its cube (lake_oxygen.json, setting.eddy_wind_factor)."""
+    return [float(x) for x in json.loads(LAKE_OXYGEN.read_text())['setting']['eddy_wind_factor']]
+
+
+def wind_raise():
+    """The factor that raises the speed of a 3-day mean wind vector to the wind the water meets: the mean of the
+    waters' oxygen study's six factors."""
+    return float(np.mean(wind_factors()))
+
+
+def level_wind(data, j, i, gas_constant):
+    """A cell's wind at the run's lowest level in each window (m/s) and that level's height (m), as the waters'
+    oxygen study takes them: the speed of the mean vector, floored at PlaSim's least wind and raised by wind_raise();
+    the height from the level's sigma and the mean of its temperature and the run's tas."""
+    tas = data['tas'][:, j, i].astype(float)
+    z_low = gas_constant * 0.5 * (data['ta_low'][:, j, i].astype(float) + tas) / MOON_SURFACE_GRAVITY * math.log(
+        1.0 / data['sigma_low'])
+    speed = np.hypot(data['ua_low'][:, j, i], data['va_low'][:, j, i]).astype(float)
+    return np.maximum(speed, LEVEL_FLOOR_MS) * wind_raise(), z_low
+
+
+def paired(forcing, n):
+    """The wind and the height the bulk exchange pairs at step n: the level's where the forcing carries them, the
+    10 m wind at the air's own height where it does not."""
+    if forcing.wind_level is None:
+        return float(forcing.wind10[n]), None
+    return float(forcing.wind_level[n]), float(forcing.level_height[n])
+
+
 def site_forcing(data, site, sun, sky, wind_share=None):
-    """The lake model's step forcing at a site and the step series of light and the Sun; wind_share replaces the
-    site's own share of the cell's 10 m wind."""
+    """The lake model's step forcing at a site and the step series of light and the Sun, the bulk exchange paired at
+    the run's lowest level; wind_share replaces the site's own share of the cell's wind, the speed of each window's
+    mean vector at that level floored at PlaSim's least wind and raised by wind_raise()."""
     rd, _, o2_fraction, _ = air_constants()
     j, i = site['j'], site['i']
     n_w = data['tas'].shape[0]
@@ -242,14 +285,15 @@ def site_forcing(data, site, sun, sky, wind_share=None):
     q = q_open.copy()
     q[:-1] = 0.5 * (q_open[:-1] + q_open[1:])        # the output's humidity is the value opening each window
     p = data['ps'][:, j, i].astype(float) * 100.0
-    wind = np.hypot(data['uas'][:, j, i], data['vas'][:, j, i]).astype(float) * (
-        site['wind_share'] if wind_share is None else wind_share)
+    level, z_low = level_wind(data, j, i, rd)
+    level = level * (site['wind_share'] if wind_share is None else wind_share)
+    wind = np.array([L.reduce_wind(u, z, 10.0, MOON_SURFACE_GRAVITY) for u, z in zip(level, z_low)])
     qs = np.array([L.saturation_humidity(a, pp) for a, pp in zip(tas, p)])
     q = np.minimum(q, qs)
     dt = WINDOW_H * 3600.0 / STEPS_PER_WINDOW
     centres = (np.arange(n_w) + 0.5) * WINDOW_H * 3600.0
     t = (np.arange(n_w * STEPS_PER_WINDOW) + 0.5) * dt
-    f = {k: np.interp(t, centres, v) for k, v in dict(lw=lw, air=tas, q=q, u=wind, p=p).items()}
+    f = {k: np.interp(t, centres, v) for k, v in dict(lw=lw, air=tas, q=q, u=wind, ul=level, zl=z_low, p=p).items()}
     # the Sun at every step; the run's clear sky from its end-of-window values; each window's clouds and sunlight
     elevation, hour = elevation_at(site['lat'], t / 3600.0, sun)
     elevation_end, _ = elevation_at(site['lat'], (np.arange(n_w) + 1.0) * WINDOW_H, sun)
@@ -267,7 +311,7 @@ def site_forcing(data, site, sun, sky, wind_share=None):
     sw = np.maximum(clear_sw * ratio[w], 0.0)
     par = np.maximum(clear_par * cloud[w], 0.0)
     forcing = L.Forcing(dt=dt, sw_down=sw, lw_down=f['lw'], air_k=f['air'], q_air=f['q'], wind10=f['u'],
-                        pressure=f['p'], o2_fraction=o2_fraction)
+                        pressure=f['p'], o2_fraction=o2_fraction, wind_level=f['ul'], level_height=f['zl'])
     sun_end = np.maximum(np.sin(np.radians(elevation_end)), 0.0)
     solved = np.interp(grid_e, sky['elevation'], sky['shortwave'])
     high = grid_e >= 10.0
@@ -301,8 +345,9 @@ def transfer(forcing, out):
     renewal = np.zeros(ts.size)
     cole = np.zeros(ts.size)
     for n in range(ts.size):
+        wind, z = paired(forcing, n)
         sens, latent, _, _ = L.bulk_fluxes(float(ts[n]), float(forcing.air_k[n]), float(forcing.q_air[n]),
-                                           float(forcing.wind10[n]), float(forcing.pressure[n]), air)
+                                           wind, float(forcing.pressure[n]), air, z)
         loss = L.WATER_EMISSIVITY * (STEFAN_BOLTZMANN * (ts[n] + 273.15) ** 4 - forcing.lw_down[n]) + sens + latent
         b = MOON_SURFACE_GRAVITY * L._expansion(float(ts[n])) * loss / L.RHO_CP if loss > 0.0 else 0.0
         renewal[n] = L.transfer_velocity('renewal', float(forcing.wind10[n]), float(out['u_star'][n]), b, float(ts[n]))
@@ -329,8 +374,9 @@ def slab(forcing, depth, exchange_per_day, open_c, start_c):
     temp, k = np.zeros(n), np.zeros(n)
     t = float(start_c)
     for i in range(n):
+        wind, z = paired(forcing, i)
         sens, latent, _, tau = L.bulk_fluxes(t, float(forcing.air_k[i]), float(forcing.q_air[i]),
-                                             float(forcing.wind10[i]), float(forcing.pressure[i]), air)
+                                             wind, float(forcing.pressure[i]), air, z)
         emitted = L.WATER_EMISSIVITY * (STEFAN_BOLTZMANN * (t + 273.15) ** 4 - forcing.lw_down[i])
         net = (1.0 - ph.albedo) * forcing.sw_down[i] - emitted - sens - latent + ph.heat_flow
         loss = emitted + sens + latent
@@ -356,7 +402,8 @@ def summarise_water(tw, k, dt_h):
 def summarise_site(common, dt_h):
     lunar_days = common['par0'].size * dt_h / SYNODIC_H
     par = common['par0']
-    return dict(wind10_mean=float(common['wind10'].mean()), open_water_mean_c=float(common['open_c'].mean()),
+    return dict(wind10_mean=float(common['wind10'].mean()), wind_level_mean=float(common['wind_level'].mean()),
+                open_water_mean_c=float(common['open_c'].mean()),
                 open_water_min_c=float(common['open_c'].min()), open_water_max_c=float(common['open_c'].max()),
                 par0_day_mean_umol=float(par.mean()), par0_mol_m2_d=float(par.mean() * 0.0864),
                 dark_hours_per_lunar_day=float((par < PAR_DARK).sum() * dt_h / lunar_days),
@@ -406,14 +453,16 @@ def main(argv=None) -> int:
                 series[key + '_t'], series[key + '_k'] = tw, k
                 cases[key] = summarise_water(tw[start:], k[start:], dt_h)
         common = dict(t_h=light['t_h'], elevation=light['elevation'], par0=light['par0'], cloud=light['cloud'],
-                      wind10=np.asarray(forcing.wind10), air_c=np.asarray(forcing.air_k) - 273.15,
+                      wind10=np.asarray(forcing.wind10), wind_level=np.asarray(forcing.wind_level),
+                      air_c=np.asarray(forcing.air_k) - 273.15,
                       sw_down=np.asarray(forcing.sw_down), pressure_pa=np.asarray(forcing.pressure), open_c=open_c)
         arrays = {k: np.asarray(v[start:], dtype=np.float64 if k == 't_h' else np.float32)
                   for k, v in (common | series).items()}
         path = BULK / f'{name}.npz'
         np.savez_compressed(path, dt_s=np.float64(forcing.dt), **arrays)
         files[name] = dict(path=str(path), sha256=sha256(path))
-        record_sites[name] = site | dict(sun=sun, light_checks=checks,
+        own10 = float(np.hypot(data['uas'][:, site['j'], site['i']], data['vas'][:, site['j'], site['i']]).mean())
+        record_sites[name] = site | dict(sun=sun, light_checks=checks, run_wind10_vector_mean=own10,
                                          setting=summarise_site({k: arrays[k] for k in common}, dt_h), cases=cases)
         print(name, json.dumps(record_sites[name]['setting']), flush=True)
         for key, c in cases.items():
@@ -429,9 +478,11 @@ def main(argv=None) -> int:
         evidence=('Model results on the corrected design climate (the run named in settings, years 10-19), carried '
                   'into the project\'s lake model on shallow pans and into exchanging slabs at five sites, with the '
                   'solved clear sky\'s light scaled by the run\'s cloud factor by window. A first physical setting '
-                  'for shore life at T21: the run\'s 3-day means hold no weather within a window, the pans stand '
+                  'for shore life at T21: the run\'s 3-day means hold no weather within a window, the exchange is '
+                  'paired at the lowest level as the waters\' oxygen study pairs it, with that level\'s wind raised '
+                  'by one factor measured on an earlier run\'s 6.4-hour means, the pans stand '
                   'closed and the slabs\' exchange with the open water is a stated range, the lake site\'s wind is '
-                  'its land cell\'s, and the climate model and CM1 differ on the air near the ground, a gap the '
+                  'its cell\'s lowest level\'s over water, and the climate model and CM1 differ on the air near the ground, a gap the '
                   'project carries as a range.'),
         reading_rule=('Times in hours from the first window kept (after the spin-up). A pan\'s water temperature is '
                       'the mean of its surface and floor layers; a slab is one mixed layer trading the stated share of '
@@ -440,7 +491,12 @@ def main(argv=None) -> int:
         settings=dict(run=RUN, years=list(YEARS), window_h=WINDOW_H, steps_per_window=STEPS_PER_WINDOW,
                       spin_windows=SPIN_WINDOWS, depths_m=list(DEPTHS_M), layers_m={f'{k:g}': v for k, v in LAYER_M.items()},
                       shelter=SHELTER, clear_floor_w=CLEAR_FLOOR_W, cloud_cap=CLOUD_CAP, par_dark=PAR_DARK, bands=BANDS,
-                      lake_band=LAKE_BAND, exchange_per_day=list(EXCHANGE_PER_DAY), open_lake_m=OPEN_LAKE_M),
+                      lake_band=LAKE_BAND, exchange_per_day=list(EXCHANGE_PER_DAY), open_lake_m=OPEN_LAKE_M,
+                      pairing='the lowest level, as PlaSim pairs it', lowest_sigma=data['sigma_low'],
+                      level_floor_m_s=LEVEL_FLOOR_MS,
+                      wind_raise=dict(factor=wind_raise(), cells=wind_factors(),
+                                      source='research/studies/lake_oxygen/results/lake_oxygen.json, '
+                                             'setting.eddy_wind_factor')),
         sites=record_sites,
         series=files,
         inputs={str(p.relative_to(RUNS)): sha256(p) for p in year_files()}

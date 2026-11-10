@@ -102,19 +102,20 @@ def test_product_agrees_with_the_five_sites(product):
 
 def test_a_calm_deep_waters_surface_lies_between_the_still_layers(product):
     """At the forcing's five sites the lake model's 20 m column, which resolves the day's warm layer, puts its surface
-    in its hottest hundredth of hours above the open water's body and between the still 4 m and 2 m layers."""
+    in its hottest hundredth of hours above the open water's body, below the still 2 m layer and at or above the
+    still 4 m layer to within 0.3 K."""
     sites = product['checks']['sites']
     assert set(sites) == {'shore_0', 'shore_30', 'shore_45', 'shore_60', 'lake_0'}
     for name, site in sites.items():
         column = site['calm_column']
         assert column['depth_m'] == F.OPEN_LAKE_M
-        assert site['still_4m_p99_c'] - 0.1 <= column['surface_p99_c'] <= site['still_2m_p99_c'] + 0.1, name
-        assert column['surface_p99_c'] > site['body_p99_c'] + 1.0, name
+        assert site['still_4m_p99_c'] - 0.3 <= column['surface_p99_c'] <= site['still_2m_p99_c'], name
+        assert column['surface_p99_c'] > site['body_p99_c'] + 0.5, name
         assert column['floor_mean_c'] < column['surface_mean_c'] < column['surface_p99_c'] <= column['surface_max_c'], name
         assert column['surface_hours_above_34'] >= column['surface_hours_above_36'] >= column['surface_hours_above_38']
     # the 10 m layer under the run's near-surface air stands within about a kelvin of the run's own sea surface
     apart = product['checks']['mixed_10m_minus_the_runs_sea_surface_means']
-    assert -1.0 < apart['mean_c'] < 0.0 and -1.6 < apart['range_c'][0] <= apart['range_c'][1] < 0.5
+    assert -0.6 < apart['mean_c'] < 0.0 and -1.6 < apart['range_c'][0] <= apart['range_c'][1] < 0.5
 
 
 # ---- the pieces --------------------------------------------------------------------------------------------------------
@@ -134,6 +135,15 @@ def test_bulk_exchange_for_arrays_is_the_lake_models():
         assert sens[i] == pytest.approx(s, rel=1e-10, abs=1e-9) and latent[i] == pytest.approx(l, rel=1e-10, abs=1e-9)
         stable += s < 0
     assert 20 < stable < n - 20                                    # both branches of the stability factor were met
+    # paired at a level's own height, as the forcing pairs it, and the level's wind brought down to 10 m
+    z = rng.uniform(250.0, 900.0, n)
+    sens, latent = W.bulk_fluxes(ts, air_k, q, wind, p, air, z)
+    low = W.reduce_wind(np.maximum(wind, 0.05), z)
+    for i in range(n):
+        s, l, _, _ = L.bulk_fluxes(float(ts[i]), float(air_k[i]), float(q[i]), float(wind[i]), float(p[i]), air, float(z[i]))
+        assert sens[i] == pytest.approx(s, rel=1e-10, abs=1e-9) and latent[i] == pytest.approx(l, rel=1e-10, abs=1e-9)
+        assert low[i] == pytest.approx(L.reduce_wind(max(float(wind[i]), 0.05), float(z[i]), 10.0, MOON_SURFACE_GRAVITY), rel=1e-10)
+    assert np.all(low < np.maximum(wind, 0.05))
     earth = L.Air(287.05, 1004.0, STANDARD_GRAVITY)
     s, l, _, _ = L.bulk_fluxes(30.0, 300.0, 0.015, 2.0, 101325.0, earth)
     sv, lv = W.bulk_fluxes(np.array([30.0]), np.array([300.0]), np.array([0.015]), np.array([2.0]), np.array([101325.0]), earth)
@@ -194,7 +204,10 @@ def synthetic(n_w=60, lat=(20.0, -40.0), lon=(0.0, 90.0), period=708.7, noon0=10
                 ts=(302.0 + rng.normal(0, 0.5, shape)).astype(np.float32), rls=np.full(shape, -70.0, np.float32),
                 ps=np.full(shape, 1215.9, np.float32), uas=rng.uniform(0.2, 3.0, shape).astype(np.float32),
                 vas=rng.uniform(-1.0, 1.0, shape).astype(np.float32),
-                hus_low=rng.uniform(0.012, 0.02, shape).astype(np.float32))
+                hus_low=rng.uniform(0.012, 0.02, shape).astype(np.float32),
+                ta_low=(297.0 + rng.normal(0, 1.0, shape)).astype(np.float32),
+                ua_low=rng.uniform(0.2, 4.0, shape).astype(np.float32),
+                va_low=rng.uniform(-1.5, 1.5, shape).astype(np.float32), sigma_low=0.99415)
     return data, dict(noon0_h=noon0, period_h=period)
 
 

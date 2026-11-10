@@ -1,7 +1,7 @@
 {
- "note": "Sources of founders.md and of the round-0 checks in the README, 9 November 2026. read: \"page read\" means the source's own page was fetched and its numbers extracted; \"search summary\" means the figures come from a search tool's summary of the page; \"repository source\" is held in another sources file of this repository. Working notes: /media/projectspace/terluna-research/littoral-community/review/notes.md.",
- "searches": 44,
- "pages_read": 2,
+ "note": "Sources of founders.md and of the round-0 checks in the README, 9 November 2026, and of the README's account of the calm-air exchange at lunar gravity, from a helper's bounded review of 10 November (12 searches, 6 pages; its report, notes and full source list are on the research drive, session-tools/agents/lunar_free_convection/). read: \"page read\" means the source's own page was fetched and its numbers extracted; \"search summary\" means the figures come from a search tool's summary of the page; \"repository source\" is held in another sources file or record of this repository. Working notes: /media/projectspace/terluna-research/littoral-community/review/notes.md.",
+ "searches": 56,
+ "pages_read": 8,
  "sources": [
   {
    "key": "morgan2020",
@@ -317,6 +317,69 @@
    "url": "https://repositorio.inpa.gov.br/handle/1/19016",
    "read": "search summary",
    "used_for": "Rio Negro water holds 30 umol/L or less of Na+, Cl- and Ca2+; its fishes keep their salts there; sodium uptake affinity differs by lineage"
+  },
+  {
+   "key": "miller1992",
+   "citation": "Miller MJ, Beljaars ACM, Palmer TN 1992. The sensitivity of the ECMWF model to the parameterization of evaporation from the tropical oceans. Journal of Climate 5: 418-434",
+   "url": "https://doi.org/10.1175/1520-0442(1992)005<0418:TSOTEM>2.0.CO;2",
+   "read": "repository source",
+   "used_for": "The free-convection transfer over water in unstable air, 0.0016 dtheta^(1/3) m/s, from tank experiments; held in research/studies/lake_oxygen/sources.json and derived in climate/gcm/README.md (26 October), which scales it by the cube root of gravity over pressure"
+  },
+  {
+   "key": "beljaars1995",
+   "citation": "Beljaars 1995, as the climate lane cites it for the gust in the surface exchange (climate/gcm/README.md, \"Beljaars's gust in PlaSim's surface transfer over four years (28 October)\"); the paper was not opened for this study",
+   "url": "climate/gcm/README.md",
+   "read": "repository source",
+   "used_for": "The gust of the boundary layer's large eddies in the surface exchange, w* = (g/theta_v h B)^(1/3), as climate/gcm/README.md records it (28 October); the review's inference that the transfer then goes as the square root of gravity times the layer's depth at a given contrast"
+  },
+  {
+   "key": "funfschilling2005",
+   "citation": "Funfschilling D, Brown E, Nikolaenko A, Ahlers G 2005. Heat transport by turbulent Rayleigh-Benard convection in cylindrical samples with aspect ratio one and larger. Journal of Fluid Mechanics, doi:10.1017/S0022112005005057",
+   "url": "https://arxiv.org/abs/physics/0507050",
+   "read": "page read",
+   "used_for": "Water, Prandtl number 4.38: the effective exponent of the heat transfer on the Rayleigh number rises from 0.28 near 1e8 to 0.333 near 7e10 (the arXiv abstract, read by the helper)"
+  },
+  {
+   "key": "jiang2020",
+   "citation": "Jiang H, Zhu X, Wang D, Huisman SG, Sun C 2020. Supergravitational turbulent thermal convection. Science Advances 6: eabb8676",
+   "url": "https://arxiv.org/abs/2010.07189",
+   "read": "page read",
+   "used_for": "A rotating annulus of water at 5-60 g: the heat transfer follows the Rayleigh-number law with an exponent of 0.27 +/- 0.01 below 1e10, a third near 1e10 and more above 4e10; the Coriolis force keeps the flow nearly two-dimensional (full text, read by the helper)"
+  },
+  {
+   "key": "lotto2017",
+   "citation": "Lotto MA, Johnson KM, Nie CW, Klaus DM 2017. The impact of reduced gravity on free convective heat transfer from a finite, flat, vertical plate. Microgravity Science and Technology 29(5): 371-379, doi:10.1007/s12217-017-9555-8",
+   "url": "https://doi.org/10.1007/s12217-017-9555-8",
+   "read": "page read",
+   "used_for": "Parabolic flights averaging 0.05 g: Nusselt number 19.05 +/- 1.41 against 18.90 +/- 0.63 from the Churchill-Chu correlation (N = 13), 61% less heat transfer than at 1 g; laminar by its Nusselt number (the abstract, read by the helper)"
+  },
+  {
+   "key": "tillman1994",
+   "citation": "Tillman and others 1994. The Martian atmospheric planetary boundary layer stability, fluxes, spectra, and similarity. Report, as its record gives it; a journal version was not checked",
+   "url": "https://ui.adsabs.harvard.edu/abs/1994wuse.rept.....T/abstract",
+   "read": "search summary",
+   "used_for": "Viking Lander 2's data: Earth's surface-layer similarity theory applies to Mars"
+  },
+  {
+   "key": "spiga2010",
+   "citation": "Spiga A, Forget F, Lewis SR, Hinson DP 2010. Structure and dynamics of the convective boundary layer on Mars as inferred from large-eddy simulations and remote-sensing measurements. Quarterly Journal of the Royal Meteorological Society 136: 414-428",
+   "url": "https://web.lmd.jussieu.fr/~aspiga/pub/REF/2010QJRMS.136..414S.pdf",
+   "read": "page read",
+   "used_for": "Large-eddy simulations at 3.72 m/s2 reproduce the boundary-layer depths measured by radio occultation, up to 9 km; the surface-flux convective velocity is less relevant there, since infrared heating within the air leaves the surface flux near 0.15 of the layer's maximum (the paper's text, read by the helper)"
+  },
+  {
+   "key": "sears_moore2005",
+   "citation": "Sears DWG, Moore SR 2005. On laboratory simulation and the evaporation rate of water on Mars. Geophysical Research Letters 32, doi:10.1029/2005GL023443",
+   "url": "https://doi.org/10.1029/2005GL023443",
+   "read": "search summary",
+   "used_for": "Water at 0 C and 7 mbar in a chamber at Earth gravity: 1.01 +/- 0.19 mm/h, and 0.73 +/- 0.14 mm/h after the correction to Mars gravity, the cube root of 0.38"
+  },
+  {
+   "key": "luspay_kuti2012",
+   "citation": "Luspay-Kuti A and others 2012. Experimental simulations of CH4 evaporation on Titan. Geophysical Research Letters, doi:10.1029/2012GL054003",
+   "url": "https://doi.org/10.1029/2012GL054003",
+   "read": "search summary",
+   "used_for": "Methane at 94 K and 1.5 bar in a chamber at Earth gravity: (3.1 +/- 0.6)e-4 kg m-2 s-1, and (1.6 +/- 0.3)e-4 after the correction to Titan gravity, the cube root of 0.14"
   }
  ]
 }

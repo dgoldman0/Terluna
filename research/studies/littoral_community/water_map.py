@@ -5,7 +5,8 @@ The forcing of five shore sites (forcing.py) is carried to every T21 cell of the
 turned Moon, A28R_301k_design_l15_snow_s938_turned_refit_precession, years 10-19, by the same steps: the fitted Sun,
 the run's clear sky read from its end-of-window snapshots as a function of the Sun's elevation, each window's cloud
 factor from its all-sky sunlight over that clear sky averaged through the window, the sunlight shaped within the
-window, and the air, humidity, sky infrared, pressure and 10 m wind linear in time between the windows' centres. One
+window, and the sky infrared, the pressure and the lowest level's air, humidity, wind and height, at which the bulk
+exchange is paired as PlaSim pairs it, linear in time between the windows' centres. One
 Sun serves every cell: the noon time and the period are fitted on the row nearest the equator and carried along the
 longitude, the declination taken as zero.
 
@@ -28,7 +29,9 @@ layers 2 and 4 m deep show what a calm surface does. As a check the lake model's
 under the cell's unsheltered wind, runs at the forcing's five sites, and its surface is recorded beside the layers
 there (checks.sites, calm_column).
 
-Every cell takes its own 10 m wind unsheltered; the lake model's exchange floors the wind at 0.5 m/s. A land cell's
+Every cell takes its own lowest level's wind unsheltered, the speed of each window's mean vector floored at PlaSim's
+least wind and raised by the forcing's factor (forcing.level_wind, forcing.wind_raise), over water's own roughness: on
+a land cell that is the wind a water wide enough for the air to settle over it would meet. A land cell's
 waters stand at its mean ground level in the run. The statistics are over the hourly steps of the ten years after two
 lunar days of spin-up: the mean, the 1st and 99th percentiles (from counts in quarter-kelvin bins), the extremes and
 the hours of each lunar day above 34, 36 and 38 C, each rounded to a hundredth.
@@ -88,20 +91,33 @@ def saturation_humidity(t_k, p_pa):
     return 0.622 * e / (p_pa - 0.378 * e)
 
 
-def bulk_fluxes(ts_c, air_k, q_air, wind, p_pa, air: L.Air):
-    """lake.bulk_fluxes for arrays at the 10 m reference height: sensible and latent heat leaving the water (W/m2)."""
+def neutral(u, z, gravity):
+    """lake.neutral_coefficient for arrays: PlaSim's neutral coefficient over water at height z and its roughness."""
+    z0 = np.full(np.broadcast(u, z).shape, EXOPLASIM_SEA_ROUGHNESS_FLOOR)
+    for _ in range(4):
+        cn = (EXOPLASIM_VON_KARMAN / np.log(z / z0 + 1.0)) ** 2
+        z0 = np.maximum(EXOPLASIM_CHARNOCK * cn * u * u / gravity, EXOPLASIM_SEA_ROUGHNESS_FLOOR)
+    return (EXOPLASIM_VON_KARMAN / np.log(z / z0 + 1.0)) ** 2, z0
+
+
+def reduce_wind(u_level, z_level, z=10.0, gravity=MOON_SURFACE_GRAVITY):
+    """lake.reduce_wind for arrays of positive wind: the wind at z under u_level at z_level on the neutral profile
+    over water."""
+    cn, z0 = neutral(u_level, z_level, gravity)
+    return np.sqrt(cn) * u_level / EXOPLASIM_VON_KARMAN * np.log(z / z0 + 1.0)
+
+
+def bulk_fluxes(ts_c, air_k, q_air, wind, p_pa, air: L.Air, z=None):
+    """lake.bulk_fluxes for arrays: sensible and latent heat leaving the water (W/m2), the wind, air and humidity
+    paired at height z (the air's 10 m reference where none is given)."""
     tsk = ts_c + 273.15
     u = np.maximum(wind, air.min_wind)
     qs = saturation_humidity(tsk, p_pa)
     q_air = np.minimum(q_air, saturation_humidity(air_k, p_pa))
     tv_air, tv_s = air_k * (1.0 + 0.608 * q_air), tsk * (1.0 + 0.608 * qs)
     rho_air = p_pa / (air.gas_constant * tv_air)
-    z = air.wind_height_m
-    z0 = np.full(np.shape(u), EXOPLASIM_SEA_ROUGHNESS_FLOOR)
-    for _ in range(4):
-        cn = (EXOPLASIM_VON_KARMAN / np.log(z / z0 + 1.0)) ** 2
-        z0 = np.maximum(EXOPLASIM_CHARNOCK * cn * u * u / air.gravity, EXOPLASIM_SEA_ROUGHNESS_FLOOR)
-    cn = (EXOPLASIM_VON_KARMAN / np.log(z / z0 + 1.0)) ** 2
+    z = air.wind_height_m if z is None else z
+    cn, _ = neutral(u, z, air.gravity)
     ri = air.gravity * z * (tv_air - tv_s) / (0.5 * (tv_air + tv_s) * u * u)
     g_fc = air.gravity if air.free_convection_gravity is None else air.free_convection_gravity
     w_fc = L.FREE_CONVECTION * (g_fc / STANDARD_GRAVITY) ** (1.0 / 3.0) * np.cbrt(np.maximum(tv_s - tv_air, 0.0))
@@ -173,7 +189,10 @@ def windows(data, sun):
     q[:-1] = 0.5 * (q_open[:-1] + q_open[1:])            # the output's humidity is the value opening each window
     p = flat('ps') * 100.0
     q = np.minimum(q, saturation_humidity(tas, p))
-    wind = np.hypot(flat('uas'), flat('vas'))
+    # the lowest level's wind and height, as forcing.level_wind takes them at one cell
+    z_low = F.air_constants()[0] * 0.5 * (flat('ta_low') + tas) / MOON_SURFACE_GRAVITY * math.log(1.0 / data['sigma_low'])
+    level = np.maximum(np.hypot(flat('ua_low'), flat('va_low')), F.LEVEL_FLOOR_MS) * F.wind_raise()
+    wind = reduce_wind(level, z_low)
     lw = flat('rls') + SB * ts ** 4
     # the run's clear sky by the Sun's elevation, each cell's own (forcing.run_clear_sky on its end-of-window values)
     elev_end = np.stack([elevation(lat2, noon2, sun['period_h'], (w + 1.0) * F.WINDOW_H) for w in range(n_w)])
@@ -191,7 +210,8 @@ def windows(data, sun):
     lit = mean_clear > F.CLEAR_FLOOR_W
     cloud_all = np.where(lit, sw_all, 0.0).sum(0) / np.maximum(np.where(lit, mean_clear, 0.0).sum(0), 1e-9)
     ratio = np.where(lit, sw_all / np.maximum(mean_clear, 1e-9), cloud_all[None, :])
-    return dict(n_w=n_w, lat2=lat2, lon2=lon2, noon2=noon2, air=tas, q=q, p=p, wind=wind, lw=lw, sea_c=ts - 273.15,
+    return dict(n_w=n_w, lat2=lat2, lon2=lon2, noon2=noon2, air=tas, q=q, p=p, wind=wind, level=level, z=z_low, lw=lw,
+                sea_c=ts - 273.15,
                 tables=tables, ratio=ratio, cloud_all=cloud_all)
 
 
@@ -219,10 +239,10 @@ def run(win, sun, sea, cases=CASES, spin_windows=F.SPIN_WINDOWS, progress=None):
         for k in range(F.STEPS_PER_WINDOW):
             a, b, wt = between(k, n_w, w)
             mix = lambda x: x[a] * (1.0 - wt) + x[b] * wt
-            air_k, q, p, wind, lw, sea_c = (mix(win[key]) for key in ('air', 'q', 'p', 'wind', 'lw', 'sea_c'))
+            air_k, q, p, level, z, lw, sea_c = (mix(win[key]) for key in ('air', 'q', 'p', 'level', 'z', 'lw', 'sea_c'))
             t_h = (w * F.STEPS_PER_WINDOW + k + 0.5) * dt_h
             sw = np.maximum(lookup(win['tables'], elevation(win['lat2'], win['noon2'], sun['period_h'], t_h)) * win['ratio'][w], 0.0)
-            sens, latent = bulk_fluxes(temp, air_k[None, :], q[None, :], wind[None, :], p[None, :], air)
+            sens, latent = bulk_fluxes(temp, air_k[None, :], q[None, :], level[None, :], p[None, :], air, z[None, :])
             emitted = L.WATER_EMISSIVITY * (SB * (temp + 273.15) ** 4 - lw[None, :])
             net = (1.0 - ph.albedo) * sw[None, :] - emitted - sens - latent + ph.heat_flow
             temp = temp + net * dt / (L.RHO_CP * depth)
@@ -401,6 +421,8 @@ def main(argv=None) -> int:
     cells = dict(row=np.repeat(np.arange(lat.size), lon.size).tolist(), col=np.tile(np.arange(lon.size), lat.size).tolist(),
                  sea=sea.astype(int).tolist(), coastal_sea=coast2.ravel().astype(int).tolist(),
                  area_km2=r2(area2), air_mean_c=r2(air_mean), wind_mean_m_s=r2(win['wind'].mean(0)),
+                 wind_level_mean_m_s=r2(win['level'].mean(0)),
+                 run_wind10_vector_mean_m_s=r2(np.hypot(data['uas'], data['vas']).reshape(win['n_w'], -1).mean(0)),
                  cloud_factor=r2(win['cloud_all']))
     for n, name in enumerate(names):
         cells[name] = {k: r2(v[n]) for k, v in stats.items()}
@@ -413,8 +435,10 @@ def main(argv=None) -> int:
                       files={f: F.sha256(ROOT / f) for f in files_used}, constants=constants_used(files_used)),
         evidence=('Model results on the corrected design climate (the run named in settings, years 10-19) at T21: '
                   'mixed slabs of water under each cell\'s sunlight, sky, air and 10 m wind, with the lake model\'s '
-                  'bulk exchange. The still cases trade no water and take the climate model\'s light winds, which '
-                  'hold no sea breeze, so they are the warm end for sheltered water; the shore cases\' exchange is a '
+                  'bulk exchange paired at the run\'s lowest level as the waters\' oxygen study pairs it. The still '
+                  'cases trade no water and take that level\'s wind over water, raised by the forcing\'s one factor '
+                  'for the wind inside a 3-day mean, with no shelter, no sea breeze and no gust of the boundary '
+                  'layer\'s eddies; the shore cases\' exchange is a '
                   'stated share, taken with the open water\'s body. A calm deep water\'s own surface late in the '
                   'lunar day lies above its body: at the five sites of checks the lake model\'s 20 m column puts it '
                   'between the still 4 m and 2 m layers. The climate model and CM1 differ on the air near the '
@@ -426,10 +450,15 @@ def main(argv=None) -> int:
                       'mixed_10m is the body of a lake\'s upper water. Read the body as the surface only where the '
                       'surface is kept mixed into it; a calm surface follows the still layers. hours_above_X '
                       'are hours of each lunar day (708.7 h). Classes are bins of 2 K from under 28 C to 40 C and '
-                      'more. by_latitude gives area-weighted means over the cells of each band of |latitude|.'),
+                      'more. by_latitude gives area-weighted means over the cells of each band of |latitude|; '
+                      'wind_level_mean_m_s is the lowest level\'s wind the waters take, floored and raised; '
+                      'wind_mean_m_s is that wind at 10 m over water; run_wind10_vector_mean_m_s is the run\'s own '
+                      '10 m wind, the speed of its mean vectors over each cell\'s own ground.'),
         settings=dict(run=F.RUN, years=list(F.YEARS), cases=[dict(name=c[0], depth_m=c[1], exchange_per_day=c[2]) for c in CASES],
                       open_water=dict(water_cells="the run's sea surface", land_cells='mixed_10m'),
                       spin_windows=F.SPIN_WINDOWS, steps_per_window=F.STEPS_PER_WINDOW, window_h=F.WINDOW_H,
+                      pairing='the lowest level, as PlaSim pairs it', lowest_sigma=data['sigma_low'],
+                      level_floor_m_s=F.LEVEL_FLOOR_MS, wind_raise=F.wind_raise(),
                       bins=dict(first_c=BIN0, width_k=BIN_W, count=NBINS), thresholds_c=list(THRESHOLDS_C)),
         classes=dict(edges_c=list(CLASS_EDGES_C), names=list(CLASS_NAMES)),
         grid=dict(lat=lat.tolist(), lon=lon.tolist(), lat_edges=cell_edges(lat).tolist(),

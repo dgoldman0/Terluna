@@ -10,7 +10,8 @@ draws its cells as they stand, in the run's own frame (the turned Moon's): each 
 no smoothing or downscaling, as the moisture map's sheet draws its cells. The climate model's water cells are outlined:
 inside the outline a cell shows the sea and its shores, outside it the lakes and ponds of a land cell at its mean
 ground level. The sheet's footnote gives the product's own check on how to read a mixed layer: the lake model's calm
-column at five sites, whose surface lies above the body and between the two still layers. The manifest records the
+column at five sites, whose surface lies above the body, at the still 4 m layer's warmth or between the two still
+layers. The manifest records the
 product's hash and a faithfulness check, the seas' and the land's class shares counted from the drawn grids against
 the same shares counted from the product's cells.
 
@@ -210,8 +211,8 @@ def main(argv=None) -> int:
         f"A mixed layer has one temperature through its depth. Late in the lunar day the top few metres of calm deep water "
         f"run warmer than the body below: at the study's five sites the project's lake model puts the surface of a still "
         f"{sites[0]['calm_column']['depth_m']:.0f} m water at {whole(column)} °C in its hottest 1% of hours, "
-        f"{min(above):.0f}–{max(above):.0f} K above the body there and between the still 4 m layer "
-        f"({whole([v['still_4m_p99_c'] for v in sites])} °C) and the still 2 m layer ({whole([v['still_2m_p99_c'] for v in sites])} °C). "
+        f"{min(above):.0f}–{max(above):.0f} K above the body there, at the still 4 m layer's warmth "
+        f"({whole([v['still_4m_p99_c'] for v in sites])} °C) or between it and the still 2 m layer's ({whole([v['still_2m_p99_c'] for v in sites])} °C). "
         f"The body's figures in A, B and the shore rows hold for a surface that waves, currents and tides keep mixed into it; "
         f"where the water lies calm, read C and D.", width=205)
     if len(note) > 3:

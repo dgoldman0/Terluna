@@ -11,6 +11,7 @@ import pytest
 from biosphere.ecology import lake as L
 from biosphere.ecology import littoral as M
 from research.studies.littoral_community import forcing as F
+from shared.constants import MOON_SURFACE_GRAVITY
 from shared.provenance import constants_changed
 
 PRODUCT = F.OUT
@@ -34,6 +35,46 @@ def test_product_schema_files_and_constants(product):
 def test_design_air_matches_the_waters_oxygen_study(product):
     current = dict(zip(('air_gas_constant', 'air_cp', 'o2_fraction', 'salinity_g_kg'), F.air_constants()))
     assert product['design_air'] == pytest.approx(current, rel=1e-12)
+
+
+def test_the_exchange_is_paired_and_the_wind_raised_as_the_waters_oxygen_study_has_them(product):
+    """The bulk exchange meets the lowest level's wind at that level's height: the speed of each 3-day mean vector,
+    floored at PlaSim's least wind and raised by the waters' oxygen study's mean factor; the 10 m wind is that wind
+    brought down the neutral profile over water; and the product records what it took."""
+    settings = product['settings']
+    assert settings['wind_raise']['factor'] == pytest.approx(F.wind_raise(), rel=1e-12)
+    assert settings['wind_raise']['cells'] == F.wind_factors() and settings['level_floor_m_s'] == F.LEVEL_FLOOR_MS
+    assert 1.15 < F.wind_raise() < 1.27 and 0.99 < settings['lowest_sigma'] < 1.0
+    n_w = 6
+    shape = (n_w, 1, 2)
+    full = lambda x: np.full(shape, x, np.float32)
+    ua = full(3.0)
+    ua[:, 0, 1] = 0.3                                              # a calm cell, under the floor
+    va = full(-4.0)
+    va[:, 0, 1] = 0.4
+    data = dict(lat=np.array([10.0]), lon=np.array([0.0, 5.625]), lsm=np.zeros((1, 2)),
+                czen=np.linspace(0.1, 0.5, n_w, dtype=np.float32)[:, None, None] * np.ones(shape, np.float32),
+                rsscs=np.linspace(200.0, 700.0, n_w, dtype=np.float32)[:, None, None] * np.ones(shape, np.float32),
+                rss=full(300.0), alb=full(0.07), tas=full(300.0), ts=full(302.0), rls=full(-70.0), ps=full(1215.9),
+                uas=full(1.0), vas=full(0.0), hus_low=full(0.015), ta_low=full(298.0), ua_low=ua, va_low=va,
+                sigma_low=0.99415)
+    sky = dict(elevation=np.array([-90.0, 90.0]), shortwave=np.array([1.0, 1.0]), par0=np.array([0.0, 0.0]))
+    sun = dict(noon_h=100.0, period_h=F.SYNODIC_H)
+    rd = F.air_constants()[0]
+    z = rd * 0.5 * (298.0 + 300.0) / MOON_SURFACE_GRAVITY * math.log(1.0 / 0.99415)
+    assert 300.0 < z < 330.0                                       # the fifteen levels' lowest, about 313 m
+    for i, speed in ((0, 5.0), (1, F.LEVEL_FLOOR_MS)):
+        site = dict(j=0, i=i, lat=10.0, lon=float(data['lon'][i]), wind_share=1.0)
+        forcing = F.site_forcing(data, site, sun, sky)[0]
+        level = speed * F.wind_raise()
+        assert np.asarray(forcing.wind_level) == pytest.approx(level, rel=1e-6)
+        assert np.asarray(forcing.level_height) == pytest.approx(z, rel=1e-5)
+        assert np.asarray(forcing.wind10) == pytest.approx(L.reduce_wind(level, z, 10.0, MOON_SURFACE_GRAVITY), rel=1e-5)
+        assert F.paired(forcing, 3) == (pytest.approx(level, rel=1e-6), pytest.approx(z, rel=1e-5))
+        sheltered = F.site_forcing(data, site, sun, sky, wind_share=F.SHELTER)[0]
+        assert np.asarray(sheltered.wind_level) == pytest.approx(level * F.SHELTER, rel=1e-6)
+    # a forcing without a level pairs at 10 m, as the steady forcings of the tests below do
+    assert F.paired(steady(4, wind=2.5), 1) == (2.5, None)
 
 
 def test_series_on_the_drive_are_the_recorded_ones(product):
