@@ -77,6 +77,24 @@ def test_the_exchange_is_paired_and_the_wind_raised_as_the_waters_oxygen_study_h
     assert F.paired(steady(4, wind=2.5), 1) == (2.5, None)
 
 
+def test_window_humidity_fills_each_years_empty_first_record(product):
+    """The run writes its humidity as the value opening each window and leaves each year file's first record nearly
+    empty: those are filled from their neighbours, then each window takes the mean of its opening value and the
+    next's; and the product records the ten records it filled and how empty the run wrote them."""
+    q = np.array([0.0002, 0.012, 0.014, 0.016, 0.0003, 0.020, 0.022, 0.024])        # two years of four windows
+    out = F.window_humidity(q, (0, 4))
+    opening = np.array([0.012, 0.012, 0.014, 0.016, 0.018, 0.020, 0.022, 0.024])
+    assert out[:-1] == pytest.approx(0.5 * (opening[:-1] + opening[1:])) and out[-1] == pytest.approx(0.024)
+    assert q[0] == 0.0002                                                  # the records themselves are left alone
+    # without year files' starts the records stand as written; fields with cells keep their shape
+    assert F.window_humidity(q)[0] == pytest.approx(0.5 * (0.0002 + 0.012))
+    grid = np.stack([q, 2.0 * q], 1).reshape(8, 1, 2)
+    assert F.window_humidity(grid, (0, 4))[:, 0, 1] == pytest.approx(2.0 * out)
+    humidity = product['settings']['humidity']
+    assert humidity['year_first_records'] == list(range(0, 1200, 120))
+    assert 0.01 < humidity['year_first_records_as_written'] < 0.04
+
+
 def test_series_on_the_drive_are_the_recorded_ones(product):
     for name, entry in product['series'].items():
         path = F.Path(entry['path'])

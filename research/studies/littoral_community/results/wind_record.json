@@ -1,11 +1,11 @@
 {
- "schema": "terluna.research.littoral-wind-record/1",
+ "schema": "terluna.research.littoral-wind-record/2",
  "producer": {
   "lane": "research",
   "runner": "research/studies/littoral_community/wind_record.py",
   "files": {
-   "research/studies/littoral_community/wind_record.py": "f5ff28d55ec3edf190ad4312a7a18f7d16cae91835496a2e4cb79c001118b91a",
-   "research/studies/littoral_community/forcing.py": "e76b979d96a7aec02ed30f02b8214147170b542588cb41edda87fbd0b15e855f",
+   "research/studies/littoral_community/wind_record.py": "0c4418d7f302713b41e2dfaed817262bb2166e4b40af6c90a922a89e66f0e370",
+   "research/studies/littoral_community/forcing.py": "42a20ae3e041faf205db4a0a72c8080ededf7e402bbbb072449c5775c57efe6a",
    "biosphere/ecology/moisture_map.py": "58f66fc944acdd8124723a701ac467090f287f7029a62fe4874807adb4387d37"
   },
   "constants": {
@@ -16,18 +16,13 @@
    "SYNODIC_MONTH_DAYS": 29.53059
   }
  },
- "evidence": "Read from one climate-model record, the two years of the earlier design case written every 6.4 hours: the lowest level's wind, about 0.9 km up, on today's ground and ten levels. It shows what 3-day means smooth away in that run; the 10 m wind inside the corrected design climate's windows is not measured.",
- "reading_rule": "mean_speed_over_vector is the mean speed of the 6.4-hour means over the mean speed of their 3-day mean vectors; cube_ratio is the waters' oxygen study's factor, the cube root of the mean cubed speed over the mean cubed vector speed. excess_rms_m_s is the root of the mean square speed the windows hold beyond their mean vectors. by_vector_speed groups windows of all cells by their mean vector's speed. Band and surface means weight cells by area.",
+ "evidence": "Read from two climate-model records written every 13 half-hour steps (6.5 hours). corrected is the corrected design run's year 10 again, from its own year-9 restart, ending on that run's year-10 restart byte for byte: the weather inside one of the design years' own 3-day means, at the level the waters' exchange is paired at and at 10 m over each cell's own ground. earlier is two years of the earlier design case, on today's ground and ten levels, the record the forcing's raise was measured on. One year and two years are short records; the 6.5-hour means are themselves means, and what the wind does inside them is in neither.",
+ "reading_rule": "mean_speed_over_vector is the mean speed of the 6.5-hour means over the mean speed of their 3-day mean vectors; cube_ratio is the waters' oxygen study's factor, the cube root of the mean cubed speed over the mean cubed vector speed. excess_rms_m_s is the root of the mean square speed the windows hold beyond their mean vectors. by_vector_speed groups windows of all cells by their mean vector's speed. floored reads the forcing's operation at the lowest level: factor is the mean of the 6.5-hour speeds floored at PlaSim's least wind over the mean of the floored 3-day vector speeds, and quadrature_excess_m_s the excess that, added to the floored vector speed in quadrature, gives a cell's windows their mean speed. Band and surface means weight cells by area; the cells entries are percentiles over cells.",
  "settings": {
-  "run": "A28_corrected_970_eddies",
-  "years": [
-   0,
-   1
-  ],
-  "lowest_sigma": 0.9833002090454102,
   "writes_per_window": 11,
-  "write_h": 6.443,
-  "windows": 240,
+  "write_steps": 13,
+  "write_h": 6.5,
+  "window_h": 71.5,
   "bands": [
    [
     0,
@@ -49,208 +44,849 @@
     60,
     90
    ]
+  ],
+  "speed_edges_m_s": [
+   0.0,
+   0.5,
+   1.0,
+   2.0,
+   3.0,
+   5.0,
+   8.0
   ]
  },
- "grid": {
-  "mean_speed_over_vector": {
-   "area_mean": 1.17,
-   "water": 1.164,
-   "land": 1.175,
-   "cells": {
-    "lowest": 1.074,
-    "p05": 1.1,
-    "median": 1.163,
-    "p95": 1.282,
-    "highest": 1.56
+ "records": {
+  "corrected": {
+   "run": "A28R_301k_design_l15_snow_s938_turned_refit_precession_eddies",
+   "years": [
+    0,
+    0
+   ],
+   "what": "the corrected design run's year 10, run again from its own year-9 restart and written every 13 steps",
+   "lowest_sigma": 0.9941501617431641,
+   "lowest_level_height_m": 312.8,
+   "windows": 120,
+   "water_share_of_area": 0.3839,
+   "lowest_level": {
+    "grid": {
+     "mean_speed_over_vector": {
+      "area_mean": 1.146,
+      "water": 1.13,
+      "land": 1.155,
+      "cells": {
+       "lowest": 1.028,
+       "p05": 1.062,
+       "median": 1.115,
+       "p95": 1.25,
+       "highest": 1.605
+      }
+     },
+     "cube_ratio": {
+      "area_mean": 1.164,
+      "water": 1.156,
+      "land": 1.17,
+      "cells": {
+       "lowest": 1.053,
+       "p05": 1.07,
+       "median": 1.127,
+       "p95": 1.289,
+       "highest": 1.576
+      }
+     },
+     "speed_m_s": {
+      "water": 2.671,
+      "land": 1.93
+     },
+     "vector_m_s": {
+      "water": 2.376,
+      "land": 1.686
+     },
+     "excess_rms_m_s": {
+      "all": 1.142,
+      "water": 1.368,
+      "land": 1.016
+     }
+    },
+    "by_latitude": [
+     {
+      "band_deg": [
+       0,
+       15
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.145,
+       "cube_ratio": 1.181,
+       "excess_rms_m_s": 1.435
+      },
+      "land": {
+       "mean_speed_over_vector": 1.205,
+       "cube_ratio": 1.235,
+       "excess_rms_m_s": 1.205
+      }
+     },
+     {
+      "band_deg": [
+       15,
+       30
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.137,
+       "cube_ratio": 1.161,
+       "excess_rms_m_s": 1.506
+      },
+      "land": {
+       "mean_speed_over_vector": 1.173,
+       "cube_ratio": 1.194,
+       "excess_rms_m_s": 1.168
+      }
+     },
+     {
+      "band_deg": [
+       30,
+       45
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.127,
+       "cube_ratio": 1.149,
+       "excess_rms_m_s": 1.434
+      },
+      "land": {
+       "mean_speed_over_vector": 1.154,
+       "cube_ratio": 1.166,
+       "excess_rms_m_s": 1.119
+      }
+     },
+     {
+      "band_deg": [
+       45,
+       60
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.104,
+       "cube_ratio": 1.121,
+       "excess_rms_m_s": 1.309
+      },
+      "land": {
+       "mean_speed_over_vector": 1.134,
+       "cube_ratio": 1.138,
+       "excess_rms_m_s": 1.032
+      }
+     },
+     {
+      "band_deg": [
+       60,
+       90
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.089,
+       "cube_ratio": 1.088,
+       "excess_rms_m_s": 0.994
+      },
+      "land": {
+       "mean_speed_over_vector": 1.094,
+       "cube_ratio": 1.096,
+       "excess_rms_m_s": 0.824
+      }
+     }
+    ],
+    "by_vector_speed": [
+     {
+      "vector_m_s": [
+       0.0,
+       0.5
+      ],
+      "share_of_windows": 0.07,
+      "mean_vector_m_s": 0.327,
+      "mean_speed_m_s": 0.833,
+      "ratio": 2.544,
+      "excess_rms_m_s": 0.948
+     },
+     {
+      "vector_m_s": [
+       0.5,
+       1.0
+      ],
+      "share_of_windows": 0.1626,
+      "mean_vector_m_s": 0.763,
+      "mean_speed_m_s": 1.086,
+      "ratio": 1.423,
+      "excess_rms_m_s": 0.98
+     },
+     {
+      "vector_m_s": [
+       1.0,
+       2.0
+      ],
+      "share_of_windows": 0.3585,
+      "mean_vector_m_s": 1.487,
+      "mean_speed_m_s": 1.707,
+      "ratio": 1.148,
+      "excess_rms_m_s": 1.075
+     },
+     {
+      "vector_m_s": [
+       2.0,
+       3.0
+      ],
+      "share_of_windows": 0.2431,
+      "mean_vector_m_s": 2.455,
+      "mean_speed_m_s": 2.633,
+      "ratio": 1.073,
+      "excess_rms_m_s": 1.216
+     },
+     {
+      "vector_m_s": [
+       3.0,
+       5.0
+      ],
+      "share_of_windows": 0.1557,
+      "mean_vector_m_s": 3.646,
+      "mean_speed_m_s": 3.798,
+      "ratio": 1.041,
+      "excess_rms_m_s": 1.358
+     },
+     {
+      "vector_m_s": [
+       5.0,
+       8.0
+      ],
+      "share_of_windows": 0.0101,
+      "mean_vector_m_s": 5.51,
+      "mean_speed_m_s": 5.641,
+      "ratio": 1.024,
+      "excess_rms_m_s": 1.57
+     }
+    ],
+    "floored": {
+     "floor_m_s": 1.0,
+     "factor": {
+      "water": 1.123,
+      "land": 1.126,
+      "water_cells": {
+       "p05": 1.062,
+       "median": 1.106,
+       "p95": 1.204
+      },
+      "land_cells": {
+       "p05": 1.059,
+       "median": 1.093,
+       "p95": 1.207
+      }
+     },
+     "quadrature_excess_m_s": {
+      "water": 1.109,
+      "land": 0.833,
+      "water_cells": {
+       "p05": 0.743,
+       "median": 1.056,
+       "p95": 1.423
+      },
+      "land_cells": {
+       "p05": 0.575,
+       "median": 0.746,
+       "p95": 1.043
+      }
+     },
+     "writes_under_the_floor": {
+      "water": 0.1042,
+      "land": 0.2297
+     },
+     "windows_with_vector_under_the_floor": {
+      "water": 0.1282,
+      "land": 0.283
+     },
+     "by_latitude": [
+      {
+       "band_deg": [
+        0,
+        15
+       ],
+       "water": {
+        "factor": 1.136,
+        "quadrature_excess_m_s": 1.121
+       },
+       "land": {
+        "factor": 1.171,
+        "quadrature_excess_m_s": 0.957
+       }
+      },
+      {
+       "band_deg": [
+        15,
+        30
+       ],
+       "water": {
+        "factor": 1.13,
+        "quadrature_excess_m_s": 1.2
+       },
+       "land": {
+        "factor": 1.145,
+        "quadrature_excess_m_s": 0.908
+       }
+      },
+      {
+       "band_deg": [
+        30,
+        45
+       ],
+       "water": {
+        "factor": 1.121,
+        "quadrature_excess_m_s": 1.125
+       },
+       "land": {
+        "factor": 1.124,
+        "quadrature_excess_m_s": 0.839
+       }
+      },
+      {
+       "band_deg": [
+        45,
+        60
+       ],
+       "water": {
+        "factor": 1.099,
+        "quadrature_excess_m_s": 1.034
+       },
+       "land": {
+        "factor": 1.104,
+        "quadrature_excess_m_s": 0.765
+       }
+      },
+      {
+       "band_deg": [
+        60,
+        90
+       ],
+       "water": {
+        "factor": 1.079,
+        "quadrature_excess_m_s": 0.83
+       },
+       "land": {
+        "factor": 1.074,
+        "quadrature_excess_m_s": 0.655
+       }
+      }
+     ]
+    }
+   },
+   "at_10_m": {
+    "grid": {
+     "mean_speed_over_vector": {
+      "area_mean": 1.153,
+      "water": 1.133,
+      "land": 1.166,
+      "cells": {
+       "lowest": 1.028,
+       "p05": 1.064,
+       "median": 1.124,
+       "p95": 1.264,
+       "highest": 1.641
+      }
+     },
+     "cube_ratio": {
+      "area_mean": 1.161,
+      "water": 1.146,
+      "land": 1.171,
+      "cells": {
+       "lowest": 1.05,
+       "p05": 1.066,
+       "median": 1.12,
+       "p95": 1.304,
+       "highest": 1.756
+      }
+     },
+     "speed_m_s": {
+      "water": 2.381,
+      "land": 0.851
+     },
+     "vector_m_s": {
+      "water": 2.112,
+      "land": 0.74
+     },
+     "excess_rms_m_s": {
+      "all": 0.772,
+      "water": 1.172,
+      "land": 0.469
+     }
+    },
+    "by_latitude": [
+     {
+      "band_deg": [
+       0,
+       15
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.147,
+       "cube_ratio": 1.167,
+       "excess_rms_m_s": 1.268
+      },
+      "land": {
+       "mean_speed_over_vector": 1.218,
+       "cube_ratio": 1.255,
+       "excess_rms_m_s": 0.48
+      }
+     },
+     {
+      "band_deg": [
+       15,
+       30
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.14,
+       "cube_ratio": 1.15,
+       "excess_rms_m_s": 1.304
+      },
+      "land": {
+       "mean_speed_over_vector": 1.181,
+       "cube_ratio": 1.203,
+       "excess_rms_m_s": 0.47
+      }
+     },
+     {
+      "band_deg": [
+       30,
+       45
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.131,
+       "cube_ratio": 1.141,
+       "excess_rms_m_s": 1.234
+      },
+      "land": {
+       "mean_speed_over_vector": 1.164,
+       "cube_ratio": 1.159,
+       "excess_rms_m_s": 0.521
+      }
+     },
+     {
+      "band_deg": [
+       45,
+       60
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.108,
+       "cube_ratio": 1.117,
+       "excess_rms_m_s": 1.078
+      },
+      "land": {
+       "mean_speed_over_vector": 1.145,
+       "cube_ratio": 1.128,
+       "excess_rms_m_s": 0.506
+      }
+     },
+     {
+      "band_deg": [
+       60,
+       90
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.095,
+       "cube_ratio": 1.093,
+       "excess_rms_m_s": 0.782
+      },
+      "land": {
+       "mean_speed_over_vector": 1.106,
+       "cube_ratio": 1.087,
+       "excess_rms_m_s": 0.418
+      }
+     }
+    ],
+    "by_vector_speed": [
+     {
+      "vector_m_s": [
+       0.0,
+       0.5
+      ],
+      "share_of_windows": 0.2409,
+      "mean_vector_m_s": 0.303,
+      "mean_speed_m_s": 0.479,
+      "ratio": 1.581,
+      "excess_rms_m_s": 0.478
+     },
+     {
+      "vector_m_s": [
+       0.5,
+       1.0
+      ],
+      "share_of_windows": 0.2847,
+      "mean_vector_m_s": 0.735,
+      "mean_speed_m_s": 0.875,
+      "ratio": 1.191,
+      "excess_rms_m_s": 0.609
+     },
+     {
+      "vector_m_s": [
+       1.0,
+       2.0
+      ],
+      "share_of_windows": 0.2962,
+      "mean_vector_m_s": 1.429,
+      "mean_speed_m_s": 1.581,
+      "ratio": 1.107,
+      "excess_rms_m_s": 0.849
+     },
+     {
+      "vector_m_s": [
+       2.0,
+       3.0
+      ],
+      "share_of_windows": 0.1251,
+      "mean_vector_m_s": 2.439,
+      "mean_speed_m_s": 2.588,
+      "ratio": 1.061,
+      "excess_rms_m_s": 1.078
+     },
+     {
+      "vector_m_s": [
+       3.0,
+       5.0
+      ],
+      "share_of_windows": 0.0523,
+      "mean_vector_m_s": 3.539,
+      "mean_speed_m_s": 3.666,
+      "ratio": 1.036,
+      "excess_rms_m_s": 1.199
+     },
+     {
+      "vector_m_s": [
+       5.0,
+       8.0
+      ],
+      "share_of_windows": 0.0008,
+      "mean_vector_m_s": 5.262,
+      "mean_speed_m_s": 5.349,
+      "ratio": 1.017,
+      "excess_rms_m_s": 1.218
+     }
+    ]
    }
   },
-  "cube_ratio": {
-   "area_mean": 1.188,
-   "water": 1.186,
-   "land": 1.189,
-   "cells": {
-    "lowest": 1.071,
-    "p05": 1.108,
-    "median": 1.183,
-    "p95": 1.286,
-    "highest": 1.463
+  "earlier": {
+   "run": "A28_corrected_970_eddies",
+   "years": [
+    0,
+    1
+   ],
+   "what": "two years of the earlier design case, on today's ground and ten levels, written every 13 steps",
+   "lowest_sigma": 0.9833002090454102,
+   "lowest_level_height_m": 877.6,
+   "windows": 240,
+   "water_share_of_area": 0.4005,
+   "lowest_level": {
+    "grid": {
+     "mean_speed_over_vector": {
+      "area_mean": 1.17,
+      "water": 1.164,
+      "land": 1.175,
+      "cells": {
+       "lowest": 1.074,
+       "p05": 1.1,
+       "median": 1.163,
+       "p95": 1.282,
+       "highest": 1.56
+      }
+     },
+     "cube_ratio": {
+      "area_mean": 1.188,
+      "water": 1.186,
+      "land": 1.189,
+      "cells": {
+       "lowest": 1.071,
+       "p05": 1.108,
+       "median": 1.183,
+       "p95": 1.286,
+       "highest": 1.463
+      }
+     },
+     "speed_m_s": {
+      "water": 3.574,
+      "land": 2.914
+     },
+     "vector_m_s": {
+      "water": 3.098,
+      "land": 2.496
+     },
+     "excess_rms_m_s": {
+      "all": 1.757,
+      "water": 1.948,
+      "land": 1.633
+     }
+    },
+    "by_latitude": [
+     {
+      "band_deg": [
+       0,
+       15
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.181,
+       "cube_ratio": 1.205,
+       "excess_rms_m_s": 2.112
+      },
+      "land": {
+       "mean_speed_over_vector": 1.2,
+       "cube_ratio": 1.217,
+       "excess_rms_m_s": 1.78
+      }
+     },
+     {
+      "band_deg": [
+       15,
+       30
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.162,
+       "cube_ratio": 1.189,
+       "excess_rms_m_s": 2.077
+      },
+      "land": {
+       "mean_speed_over_vector": 1.194,
+       "cube_ratio": 1.201,
+       "excess_rms_m_s": 1.772
+      }
+     },
+     {
+      "band_deg": [
+       30,
+       45
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.144,
+       "cube_ratio": 1.169,
+       "excess_rms_m_s": 1.98
+      },
+      "land": {
+       "mean_speed_over_vector": 1.161,
+       "cube_ratio": 1.171,
+       "excess_rms_m_s": 1.641
+      }
+     },
+     {
+      "band_deg": [
+       45,
+       60
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.136,
+       "cube_ratio": 1.159,
+       "excess_rms_m_s": 1.863
+      },
+      "land": {
+       "mean_speed_over_vector": 1.15,
+       "cube_ratio": 1.159,
+       "excess_rms_m_s": 1.593
+      }
+     },
+     {
+      "band_deg": [
+       60,
+       90
+      ],
+      "water": {
+       "mean_speed_over_vector": 1.209,
+       "cube_ratio": 1.204,
+       "excess_rms_m_s": 1.721
+      },
+      "land": {
+       "mean_speed_over_vector": 1.164,
+       "cube_ratio": 1.19,
+       "excess_rms_m_s": 1.533
+      }
+     }
+    ],
+    "by_vector_speed": [
+     {
+      "vector_m_s": [
+       0.0,
+       0.5
+      ],
+      "share_of_windows": 0.0248,
+      "mean_vector_m_s": 0.333,
+      "mean_speed_m_s": 1.581,
+      "ratio": 4.751,
+      "excess_rms_m_s": 1.778
+     },
+     {
+      "vector_m_s": [
+       0.5,
+       1.0
+      ],
+      "share_of_windows": 0.0715,
+      "mean_vector_m_s": 0.775,
+      "mean_speed_m_s": 1.707,
+      "ratio": 2.202,
+      "excess_rms_m_s": 1.776
+     },
+     {
+      "vector_m_s": [
+       1.0,
+       2.0
+      ],
+      "share_of_windows": 0.2478,
+      "mean_vector_m_s": 1.541,
+      "mean_speed_m_s": 2.117,
+      "ratio": 1.374,
+      "excess_rms_m_s": 1.755
+     },
+     {
+      "vector_m_s": [
+       2.0,
+       3.0
+      ],
+      "share_of_windows": 0.2979,
+      "mean_vector_m_s": 2.493,
+      "mean_speed_m_s": 2.846,
+      "ratio": 1.142,
+      "excess_rms_m_s": 1.738
+     },
+     {
+      "vector_m_s": [
+       3.0,
+       5.0
+      ],
+      "share_of_windows": 0.3094,
+      "mean_vector_m_s": 3.769,
+      "mean_speed_m_s": 4.015,
+      "ratio": 1.065,
+      "excess_rms_m_s": 1.772
+     },
+     {
+      "vector_m_s": [
+       5.0,
+       8.0
+      ],
+      "share_of_windows": 0.0483,
+      "mean_vector_m_s": 5.683,
+      "mean_speed_m_s": 5.842,
+      "ratio": 1.028,
+      "excess_rms_m_s": 1.744
+     },
+     {
+      "vector_m_s": [
+       8.0,
+       null
+      ],
+      "share_of_windows": 0.0004,
+      "mean_vector_m_s": 8.446,
+      "mean_speed_m_s": 8.521,
+      "ratio": 1.009,
+      "excess_rms_m_s": 1.515
+     }
+    ],
+    "floored": {
+     "floor_m_s": 1.0,
+     "factor": {
+      "water": 1.16,
+      "land": 1.168,
+      "water_cells": {
+       "p05": 1.091,
+       "median": 1.159,
+       "p95": 1.267
+      },
+      "land_cells": {
+       "p05": 1.106,
+       "median": 1.158,
+       "p95": 1.258
+      }
+     },
+     "quadrature_excess_m_s": {
+      "water": 1.644,
+      "land": 1.386,
+      "water_cells": {
+       "p05": 1.331,
+       "median": 1.576,
+       "p95": 1.918
+      },
+      "land_cells": {
+       "p05": 1.205,
+       "median": 1.326,
+       "p95": 1.568
+      }
+     },
+     "writes_under_the_floor": {
+      "water": 0.0594,
+      "land": 0.0798
+     },
+     "windows_with_vector_under_the_floor": {
+      "water": 0.0808,
+      "land": 0.1053
+     },
+     "by_latitude": [
+      {
+       "band_deg": [
+        0,
+        15
+       ],
+       "water": {
+        "factor": 1.176,
+        "quadrature_excess_m_s": 1.731
+       },
+       "land": {
+        "factor": 1.191,
+        "quadrature_excess_m_s": 1.472
+       }
+      },
+      {
+       "band_deg": [
+        15,
+        30
+       ],
+       "water": {
+        "factor": 1.16,
+        "quadrature_excess_m_s": 1.706
+       },
+       "land": {
+        "factor": 1.185,
+        "quadrature_excess_m_s": 1.469
+       }
+      },
+      {
+       "band_deg": [
+        30,
+        45
+       ],
+       "water": {
+        "factor": 1.142,
+        "quadrature_excess_m_s": 1.619
+       },
+       "land": {
+        "factor": 1.155,
+        "quadrature_excess_m_s": 1.355
+       }
+      },
+      {
+       "band_deg": [
+        45,
+        60
+       ],
+       "water": {
+        "factor": 1.134,
+        "quadrature_excess_m_s": 1.531
+       },
+       "land": {
+        "factor": 1.144,
+        "quadrature_excess_m_s": 1.316
+       }
+      },
+      {
+       "band_deg": [
+        60,
+        90
+       ],
+       "water": {
+        "factor": 1.195,
+        "quadrature_excess_m_s": 1.448
+       },
+       "land": {
+        "factor": 1.158,
+        "quadrature_excess_m_s": 1.284
+       }
+      }
+     ]
+    }
    }
-  },
-  "speed_m_s": {
-   "water": 3.574,
-   "land": 2.914
-  },
-  "vector_m_s": {
-   "water": 3.098,
-   "land": 2.496
-  },
-  "excess_rms_m_s": {
-   "all": 1.757,
-   "water": 1.948,
-   "land": 1.633
   }
  },
- "by_latitude": [
-  {
-   "band_deg": [
-    0,
-    15
-   ],
-   "water": {
-    "mean_speed_over_vector": 1.181,
-    "cube_ratio": 1.205,
-    "excess_rms_m_s": 2.112
-   },
-   "land": {
-    "mean_speed_over_vector": 1.2,
-    "cube_ratio": 1.217,
-    "excess_rms_m_s": 1.78
-   }
-  },
-  {
-   "band_deg": [
-    15,
-    30
-   ],
-   "water": {
-    "mean_speed_over_vector": 1.162,
-    "cube_ratio": 1.189,
-    "excess_rms_m_s": 2.077
-   },
-   "land": {
-    "mean_speed_over_vector": 1.194,
-    "cube_ratio": 1.201,
-    "excess_rms_m_s": 1.772
-   }
-  },
-  {
-   "band_deg": [
-    30,
-    45
-   ],
-   "water": {
-    "mean_speed_over_vector": 1.144,
-    "cube_ratio": 1.169,
-    "excess_rms_m_s": 1.98
-   },
-   "land": {
-    "mean_speed_over_vector": 1.161,
-    "cube_ratio": 1.171,
-    "excess_rms_m_s": 1.641
-   }
-  },
-  {
-   "band_deg": [
-    45,
-    60
-   ],
-   "water": {
-    "mean_speed_over_vector": 1.136,
-    "cube_ratio": 1.159,
-    "excess_rms_m_s": 1.863
-   },
-   "land": {
-    "mean_speed_over_vector": 1.15,
-    "cube_ratio": 1.159,
-    "excess_rms_m_s": 1.593
-   }
-  },
-  {
-   "band_deg": [
-    60,
-    90
-   ],
-   "water": {
-    "mean_speed_over_vector": 1.209,
-    "cube_ratio": 1.204,
-    "excess_rms_m_s": 1.721
-   },
-   "land": {
-    "mean_speed_over_vector": 1.164,
-    "cube_ratio": 1.19,
-    "excess_rms_m_s": 1.533
-   }
-  }
- ],
- "by_vector_speed": [
-  {
-   "vector_m_s": [
-    0.0,
-    0.5
-   ],
-   "share_of_windows": 0.0248,
-   "mean_vector_m_s": 0.333,
-   "mean_speed_m_s": 1.581,
-   "ratio": 4.751,
-   "excess_rms_m_s": 1.778
-  },
-  {
-   "vector_m_s": [
-    0.5,
-    1.0
-   ],
-   "share_of_windows": 0.0715,
-   "mean_vector_m_s": 0.775,
-   "mean_speed_m_s": 1.707,
-   "ratio": 2.202,
-   "excess_rms_m_s": 1.776
-  },
-  {
-   "vector_m_s": [
-    1.0,
-    2.0
-   ],
-   "share_of_windows": 0.2478,
-   "mean_vector_m_s": 1.541,
-   "mean_speed_m_s": 2.117,
-   "ratio": 1.374,
-   "excess_rms_m_s": 1.755
-  },
-  {
-   "vector_m_s": [
-    2.0,
-    3.0
-   ],
-   "share_of_windows": 0.2979,
-   "mean_vector_m_s": 2.493,
-   "mean_speed_m_s": 2.846,
-   "ratio": 1.142,
-   "excess_rms_m_s": 1.738
-  },
-  {
-   "vector_m_s": [
-    3.0,
-    5.0
-   ],
-   "share_of_windows": 0.3094,
-   "mean_vector_m_s": 3.769,
-   "mean_speed_m_s": 4.015,
-   "ratio": 1.065,
-   "excess_rms_m_s": 1.772
-  },
-  {
-   "vector_m_s": [
-    5.0,
-    8.0
-   ],
-   "share_of_windows": 0.0483,
-   "mean_vector_m_s": 5.683,
-   "mean_speed_m_s": 5.842,
-   "ratio": 1.028,
-   "excess_rms_m_s": 1.744
-  },
-  {
-   "vector_m_s": [
-    8.0,
-    null
-   ],
-   "share_of_windows": 0.0004,
-   "mean_vector_m_s": 8.446,
-   "mean_speed_m_s": 8.521,
-   "ratio": 1.009,
-   "excess_rms_m_s": 1.515
-  }
- ],
  "the_forcings_raise": {
   "factor": 1.2138333333333333,
   "cells": [
@@ -263,9 +899,10 @@
   ]
  },
  "inputs": {
+  "A28R_301k_design_l15_snow_s938_turned_refit_precession_eddies/model/MOST.00000.nc": "95462f6a17e8b4299dc3875bbc32630567d87bd993719189e7dd8402cf7e174f",
   "A28_corrected_970_eddies/model/MOST.00000.nc": "0b6e4ef514af10a412926d12aabc8805354ee6f8cd9e123dec49d52486b68a95",
   "A28_corrected_970_eddies/model/MOST.00001.nc": "9d48f44944b9d49ee4fe79ee5406cc42e7a897c882199aa6f8584b8c0369023e",
   "research/studies/lake_oxygen/results/lake_oxygen.json": "bd08203b5d7dc5ee85593406472d73b045523e2e7af5fa4dd3c1092d11cbc00b"
  },
- "seconds": 2.9
+ "seconds": 12.3
 }

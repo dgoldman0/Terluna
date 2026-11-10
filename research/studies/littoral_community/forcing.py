@@ -31,9 +31,11 @@ as the waters' oxygen study forces it since its correction of 18 October (resear
 and hourly): the sky infrared rls + sigma ts^4, the surface pressure, and the air the bulk exchange meets, paired as
 PlaSim pairs it, the lowest level's wind and humidity and that level's potential temperature at the surface (the run's
 tas) with the transfer coefficient at the level's own height, about 313 m on the run's fifteen levels; each linear in
-time between the windows' centres. The wind of a 3-day mean is the speed of its mean vector, which the wind's turning
+time between the windows' centres. The run writes that humidity as the value opening each window, and leaves each year
+file's first record nearly empty: those records are filled from their neighbours and each window takes the mean of its
+opening value and the next's (window_humidity). The wind of a 3-day mean is the speed of its mean vector, which the wind's turning
 inside the window leaves below the mean speed; it is raised as that study raises it, by the factor it measured in the
-two years of the earlier design case written every 6.4 hours (wind_raise: the mean of its six cells' factors, 1.21;
+two years of the earlier design case written every 6.5 hours (wind_raise: the mean of its six cells' factors, 1.21;
 wind_record.py looks at the same record over the whole grid), after PlaSim's least wind of 1 m/s at the level. The
 wind at 10 m, which the oxygen transfer's wind form takes, is that level's wind brought down the neutral profile over
 water (lake.reduce_wind). The sunlight is sharpened: each window keeps the run's all-sky downwelling
@@ -117,13 +119,15 @@ def year_files():
     return [RUNS / RUN / 'model' / f'MOST.{y:05d}.nc' for y in range(YEARS[0], YEARS[1] + 1)]
 
 
-def read_years():
-    """The ten years' windows of the fields the forcing needs (float32), with the grid."""
+def read_years(files=None):
+    """The windows of the fields the forcing needs (float32) from year files in order, the ten design years unless
+    others are named, with the grid and the index of each file's first record (year_starts)."""
     import netCDF4
     keys = ('tas', 'ts', 'rss', 'rsscs', 'rls', 'alb', 'ps', 'uas', 'vas', 'czen')
     low = ('hus', 'ta', 'ua', 'va')                    # at the lowest level, where PlaSim pairs its surface exchange
     out = {k: [] for k in keys + tuple(f'{k}_low' for k in low)}
-    for path in year_files():
+    starts, n = [], 0
+    for path in (year_files() if files is None else files):
         with netCDF4.Dataset(path) as nc:
             lat, lon = np.array(nc['lat'][:], dtype=float), np.array(nc['lon'][:], dtype=float)
             lsm = np.array(nc['lsm'][0], dtype=float)
@@ -132,9 +136,38 @@ def read_years():
                 out[k].append(np.array(nc[k][:], dtype=np.float32))
             for k in low:
                 out[f'{k}_low'].append(np.array(nc[k][:, -1], dtype=np.float32))
+        starts.append(n)
+        n += out['tas'][-1].shape[0]
     data = {k: np.concatenate(v) for k, v in out.items()}
-    data.update(lat=lat, lon=lon, lsm=lsm, sigma_low=sigma)
+    data.update(lat=lat, lon=lon, lsm=lsm, sigma_low=sigma, year_starts=np.array(starts, dtype=int))
     return data
+
+
+def window_humidity(q_open, year_starts=()):
+    """Each window's humidity from the run's records (time first). The run writes its specific humidity as the value
+    at the step that opens each window, held through it, where its other fields are means (climate/gcm/year_files.py),
+    and that value is not in the restart, so each year file's first record is nearly empty (2% of the vapour). Those
+    records, at year_starts, are filled first: the mean of the record before and the record after, the series' first
+    from the record after it. Each window then takes the mean of its opening value and the next window's, the last
+    window its own."""
+    q = np.array(q_open, dtype=float)
+    for k in np.asarray(year_starts, dtype=int):
+        q[k] = q[k + 1] if k == 0 else 0.5 * (q[k - 1] + q[k + 1])
+    out = q.copy()
+    out[:-1] = 0.5 * (q[:-1] + q[1:])
+    return out
+
+
+def humidity_setting(data):
+    """What a product records of the humidity's reading: the rule, the year files' first records and how nearly empty
+    the run wrote them (their mean over the records after them, over the cells)."""
+    starts = np.asarray(data['year_starts'], dtype=int)
+    q = data['hus_low']
+    return dict(records="each window's opening value at the lowest level",
+                windows="the mean of the window's opening value and the next window's",
+                year_first_records=[int(k) for k in starts],
+                year_first_records_as_written=float(np.mean([q[k].mean() / q[k + 1].mean() for k in starts])),
+                fill='the mean of the record before and the record after; the first from the record after')
 
 
 def coastal(lsm):
@@ -240,7 +273,7 @@ def air_constants():
 
 
 def wind_factors():
-    """The waters' oxygen study's factors at its six cells: by how much the mean speed of the 6.4-hour means exceeds
+    """The waters' oxygen study's factors at its six cells: by how much the mean speed of the 6.5-hour means exceeds
     the speed of their 3-day mean vector, in its cube (lake_oxygen.json, setting.eddy_wind_factor)."""
     return [float(x) for x in json.loads(LAKE_OXYGEN.read_text())['setting']['eddy_wind_factor']]
 
@@ -281,9 +314,7 @@ def site_forcing(data, site, sun, sky, wind_share=None):
     alb = data['alb'][:, j, i].astype(float)
     sw_all = np.where(alb < 0.999, data['rss'][:, j, i] / np.maximum(1.0 - alb, 1e-3), 0.0)
     lw = data['rls'][:, j, i] + STEFAN_BOLTZMANN * data['ts'][:, j, i].astype(float) ** 4
-    q_open = data['hus_low'][:, j, i].astype(float)
-    q = q_open.copy()
-    q[:-1] = 0.5 * (q_open[:-1] + q_open[1:])        # the output's humidity is the value opening each window
+    q = window_humidity(data['hus_low'][:, j, i], data.get('year_starts', ()))
     p = data['ps'][:, j, i].astype(float) * 100.0
     level, z_low = level_wind(data, j, i, rd)
     level = level * (site['wind_share'] if wind_share is None else wind_share)
@@ -480,7 +511,7 @@ def main(argv=None) -> int:
                   'solved clear sky\'s light scaled by the run\'s cloud factor by window. A first physical setting '
                   'for shore life at T21: the run\'s 3-day means hold no weather within a window, the exchange is '
                   'paired at the lowest level as the waters\' oxygen study pairs it, with that level\'s wind raised '
-                  'by one factor measured on an earlier run\'s 6.4-hour means, the pans stand '
+                  'by one factor measured on an earlier run\'s 6.5-hour means, the pans stand '
                   'closed and the slabs\' exchange with the open water is a stated range, the lake site\'s wind is '
                   'its cell\'s lowest level\'s over water, and the climate model and CM1 differ on the air near the ground, a gap the '
                   'project carries as a range.'),
@@ -493,7 +524,7 @@ def main(argv=None) -> int:
                       shelter=SHELTER, clear_floor_w=CLEAR_FLOOR_W, cloud_cap=CLOUD_CAP, par_dark=PAR_DARK, bands=BANDS,
                       lake_band=LAKE_BAND, exchange_per_day=list(EXCHANGE_PER_DAY), open_lake_m=OPEN_LAKE_M,
                       pairing='the lowest level, as PlaSim pairs it', lowest_sigma=data['sigma_low'],
-                      level_floor_m_s=LEVEL_FLOOR_MS,
+                      level_floor_m_s=LEVEL_FLOOR_MS, humidity=humidity_setting(data),
                       wind_raise=dict(factor=wind_raise(), cells=wind_factors(),
                                       source='research/studies/lake_oxygen/results/lake_oxygen.json, '
                                              'setting.eddy_wind_factor')),

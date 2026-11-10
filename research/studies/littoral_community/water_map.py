@@ -6,7 +6,8 @@ turned Moon, A28R_301k_design_l15_snow_s938_turned_refit_precession, years 10-19
 the run's clear sky read from its end-of-window snapshots as a function of the Sun's elevation, each window's cloud
 factor from its all-sky sunlight over that clear sky averaged through the window, the sunlight shaped within the
 window, and the sky infrared, the pressure and the lowest level's air, humidity, wind and height, at which the bulk
-exchange is paired as PlaSim pairs it, linear in time between the windows' centres. One
+exchange is paired as PlaSim pairs it, linear in time between the windows' centres; the humidity is read as the
+forcing reads it, each year file's empty first record filled from its neighbours (forcing.window_humidity). One
 Sun serves every cell: the noon time and the period are fitted on the row nearest the equator and carried along the
 longitude, the declination taken as zero.
 
@@ -159,9 +160,9 @@ def lookup(tables, elev):
     return tables[rows, i0] * (1.0 - f) + tables[rows, i0 + 1] * f
 
 
-def between(k, n_w, w):
+def between(k, n_w, w, steps_per_window=F.STEPS_PER_WINDOW):
     """The two windows whose centres bracket step k of window w, and the later one's weight (np.interp's ends)."""
-    x = (k + 0.5) / F.STEPS_PER_WINDOW - 0.5
+    x = (k + 0.5) / steps_per_window - 0.5
     if x < 0.0:
         a, b, wt = w - 1, w, x + 1.0
     else:
@@ -173,45 +174,71 @@ def between(k, n_w, w):
     return a, b, wt
 
 
-def windows(data, sun):
-    """Each window's fields for every cell (windows x cells), the clear-sky tables and the cloud factors."""
-    n_w = data['tas'].shape[0]
-    flat = lambda k: data[k].reshape(n_w, -1).astype(float)
+def cell_suns(data, sun):
+    """Every cell's latitude, longitude and noon time (hours from the first window's start), row by row."""
     lat2 = np.repeat(data['lat'], data['lon'].size)
     lon2 = np.tile(data['lon'], data['lat'].size)
-    noon2 = sun['noon0_h'] - lon2 / 360.0 * sun['period_h']
-    tas, alb, ts = flat('tas'), flat('alb'), flat('ts')
-    lit_ground = alb < 0.999
-    sw_all = np.where(lit_ground, flat('rss') / np.maximum(1.0 - alb, 1e-3), 0.0)
-    clear_end = np.where(lit_ground, flat('rsscs') / np.maximum(1.0 - alb, 1e-3), 0.0)
-    q_open = flat('hus_low')
-    q = q_open.copy()
-    q[:-1] = 0.5 * (q_open[:-1] + q_open[1:])            # the output's humidity is the value opening each window
-    p = flat('ps') * 100.0
-    q = np.minimum(q, saturation_humidity(tas, p))
-    # the lowest level's wind and height, as forcing.level_wind takes them at one cell
-    z_low = F.air_constants()[0] * 0.5 * (flat('ta_low') + tas) / MOON_SURFACE_GRAVITY * math.log(1.0 / data['sigma_low'])
-    level = np.maximum(np.hypot(flat('ua_low'), flat('va_low')), F.LEVEL_FLOOR_MS) * F.wind_raise()
-    wind = reduce_wind(level, z_low)
-    lw = flat('rls') + SB * ts ** 4
-    # the run's clear sky by the Sun's elevation, each cell's own (forcing.run_clear_sky on its end-of-window values)
-    elev_end = np.stack([elevation(lat2, noon2, sun['period_h'], (w + 1.0) * F.WINDOW_H) for w in range(n_w)])
+    return lat2, lon2, sun['noon0_h'] - lon2 / 360.0 * sun['period_h']
+
+
+def clear_sky_end(data):
+    """The run's clear-sky downwelling shortwave at the surface at the end of each window (windows x cells)."""
+    n_w = data['tas'].shape[0]
+    alb = data['alb'].reshape(n_w, -1).astype(float)
+    return np.where(alb < 0.999, data['rsscs'].reshape(n_w, -1).astype(float) / np.maximum(1.0 - alb, 1e-3), 0.0)
+
+
+def clear_tables(clear_end, lat2, noon2, period_h, window_h=F.WINDOW_H):
+    """Each cell's clear-sky downwelling shortwave against the Sun's elevation (cells x CENTRES), from the values at
+    the end of each window (windows x cells): forcing.run_clear_sky at every cell."""
+    n_w = clear_end.shape[0]
+    elev_end = np.stack([elevation(lat2, noon2, period_h, (w + 1.0) * window_h) for w in range(n_w)])
     tables = np.zeros((lat2.size, CENTRES.size))
     for c in range(lat2.size):
         e, f = F.run_clear_sky(clear_end[:, c], elev_end[:, c])
         tables[c] = np.interp(CENTRES, e, f)
+    return tables
+
+
+def windows(data, sun, window_h=F.WINDOW_H, steps_per_window=F.STEPS_PER_WINDOW, wind_raise=None, level=None,
+            tables=None):
+    """Each window's fields for every cell (windows x cells), the clear-sky tables and the cloud factors. The design
+    years' 3-day windows and the forcing's raise unless told otherwise: window_h and steps_per_window for a record
+    written at another interval, wind_raise for another factor on the floored speed of each window's mean vector,
+    level for the wind at the lowest level given outright (windows x cells), and tables for clear-sky tables read
+    elsewhere (cells x CENTRES)."""
+    n_w = data['tas'].shape[0]
+    flat = lambda k: data[k].reshape(n_w, -1).astype(float)
+    lat2, lon2, noon2 = cell_suns(data, sun)
+    tas, alb, ts = flat('tas'), flat('alb'), flat('ts')
+    lit_ground = alb < 0.999
+    sw_all = np.where(lit_ground, flat('rss') / np.maximum(1.0 - alb, 1e-3), 0.0)
+    clear_end = clear_sky_end(data)
+    q = F.window_humidity(flat('hus_low'), data.get('year_starts', ()))    # the records hold each window's opening value
+    p = flat('ps') * 100.0
+    q = np.minimum(q, saturation_humidity(tas, p))
+    # the lowest level's wind and height, as forcing.level_wind takes them at one cell
+    z_low = F.air_constants()[0] * 0.5 * (flat('ta_low') + tas) / MOON_SURFACE_GRAVITY * math.log(1.0 / data['sigma_low'])
+    if level is None:
+        level = (np.maximum(np.hypot(flat('ua_low'), flat('va_low')), F.LEVEL_FLOOR_MS)
+                 * (F.wind_raise() if wind_raise is None else wind_raise))
+    wind = reduce_wind(level, z_low)
+    lw = flat('rls') + SB * ts ** 4
+    # the run's clear sky by the Sun's elevation, each cell's own (forcing.run_clear_sky on its end-of-window values)
+    if tables is None:
+        tables = clear_tables(clear_end, lat2, noon2, sun['period_h'], window_h)
     # each window's mean clear sky and its cloud factor
-    dt_h = F.WINDOW_H / F.STEPS_PER_WINDOW
+    dt_h = window_h / steps_per_window
     mean_clear = np.zeros((n_w, lat2.size))
     for w in range(n_w):
-        for k in range(F.STEPS_PER_WINDOW):
-            mean_clear[w] += lookup(tables, elevation(lat2, noon2, sun['period_h'], (w * F.STEPS_PER_WINDOW + k + 0.5) * dt_h))
-    mean_clear /= F.STEPS_PER_WINDOW
+        for k in range(steps_per_window):
+            mean_clear[w] += lookup(tables, elevation(lat2, noon2, sun['period_h'], (w * steps_per_window + k + 0.5) * dt_h))
+    mean_clear /= steps_per_window
     lit = mean_clear > F.CLEAR_FLOOR_W
     cloud_all = np.where(lit, sw_all, 0.0).sum(0) / np.maximum(np.where(lit, mean_clear, 0.0).sum(0), 1e-9)
     ratio = np.where(lit, sw_all / np.maximum(mean_clear, 1e-9), cloud_all[None, :])
     return dict(n_w=n_w, lat2=lat2, lon2=lon2, noon2=noon2, air=tas, q=q, p=p, wind=wind, level=level, z=z_low, lw=lw,
-                sea_c=ts - 273.15,
+                sea_c=ts - 273.15, window_h=window_h, steps_per_window=steps_per_window,
                 tables=tables, ratio=ratio, cloud_all=cloud_all)
 
 
@@ -223,7 +250,8 @@ def run(win, sun, sea, cases=CASES, spin_windows=F.SPIN_WINDOWS, progress=None):
     air = L.Air(rd, cp, MOON_SURFACE_GRAVITY)
     ph = L.Physics()
     n_w, n_c = win['n_w'], win['lat2'].size
-    dt = F.WINDOW_H * 3600.0 / F.STEPS_PER_WINDOW
+    per = win.get('steps_per_window', F.STEPS_PER_WINDOW)
+    dt = win.get('window_h', F.WINDOW_H) * 3600.0 / per
     dt_h = dt / 3600.0
     depth = np.array([c[1] for c in cases])[:, None]
     keep = np.exp(-np.array([c[2] for c in cases]) * dt / 86400.0)[:, None]
@@ -236,11 +264,11 @@ def run(win, sun, sea, cases=CASES, spin_windows=F.SPIN_WINDOWS, progress=None):
     ki, ci = np.meshgrid(np.arange(n_k + 1), np.arange(n_c), indexing='ij')
     steps = 0
     for w in range(n_w):
-        for k in range(F.STEPS_PER_WINDOW):
-            a, b, wt = between(k, n_w, w)
+        for k in range(per):
+            a, b, wt = between(k, n_w, w, per)
             mix = lambda x: x[a] * (1.0 - wt) + x[b] * wt
             air_k, q, p, level, z, lw, sea_c = (mix(win[key]) for key in ('air', 'q', 'p', 'level', 'z', 'lw', 'sea_c'))
-            t_h = (w * F.STEPS_PER_WINDOW + k + 0.5) * dt_h
+            t_h = (w * per + k + 0.5) * dt_h
             sw = np.maximum(lookup(win['tables'], elevation(win['lat2'], win['noon2'], sun['period_h'], t_h)) * win['ratio'][w], 0.0)
             sens, latent = bulk_fluxes(temp, air_k[None, :], q[None, :], level[None, :], p[None, :], air, z[None, :])
             emitted = L.WATER_EMISSIVITY * (SB * (temp + 273.15) ** 4 - lw[None, :])
@@ -458,7 +486,7 @@ def main(argv=None) -> int:
                       open_water=dict(water_cells="the run's sea surface", land_cells='mixed_10m'),
                       spin_windows=F.SPIN_WINDOWS, steps_per_window=F.STEPS_PER_WINDOW, window_h=F.WINDOW_H,
                       pairing='the lowest level, as PlaSim pairs it', lowest_sigma=data['sigma_low'],
-                      level_floor_m_s=F.LEVEL_FLOOR_MS, wind_raise=F.wind_raise(),
+                      level_floor_m_s=F.LEVEL_FLOOR_MS, wind_raise=F.wind_raise(), humidity=F.humidity_setting(data),
                       bins=dict(first_c=BIN0, width_k=BIN_W, count=NBINS), thresholds_c=list(THRESHOLDS_C)),
         classes=dict(edges_c=list(CLASS_EDGES_C), names=list(CLASS_NAMES)),
         grid=dict(lat=lat.tolist(), lon=lon.tolist(), lat_edges=cell_edges(lat).tolist(),
