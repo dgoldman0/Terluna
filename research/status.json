@@ -608,7 +608,14 @@
           "price_units": "USD2041",
           "adoption_boundary": "Timing and inflation are adopted scenario assumptions; sources, sites, fleets and power system remain proposals.",
           "U_conversion": "Proposed procurement-basket calibration only; universal conversion unset.",
-          "next": "Qualify sources and routes, water recovery and local fleet manufacture; reconcile the settlement dollar account without duplicated supplier purchases."
+          "next": "Complete revenue and resource-horizon scenarios with matched U calibration; qualify routes, sources, water recovery and localization without assuming a minimum Earth launch cadence.",
+          "transport_comparison": {
+            "commit": "300224c8",
+            "path": "studies/initial_industrial_system/transport.md",
+            "state": "conditional alternatives; original launch cadence is not a minimum or adopted requirement"
+          },
+          "revenue_scope": "Consolidate the 250,000-person settlement and supporting off-Earth industry against Earth; include returned goods and delivery costs; gross receipts, operating balance and balance after renewal/resource allowances, with debt separate.",
+          "resource_horizon": "Assess million-year endurance and earlier source transitions; beyond-local expansion and socioeconomic boundary remain future unresolved work."
         }
       },
       "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_heat_ledger_with_fleet_infrared_food_land_night_tides_rivers_transit_fusion_fuel; inhabited_volume_and_shared_population_comparisons_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; drifting_days_holds_and_gathering_from_the_design_winds_2026_10_09; ways_of_living_eighteen_settings_costs_per_billion_and_shared_case_mixes_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_lava_tubes_against_the_atlas_and_highland_tall_cities_2026_10_11; food_systems_costs_cycle_fit_mixes_and_feasibility_2026_10_11; distributions_of_25_to_30_billion_with_moon_bands_and_synergies_2026_10_11; cprime_authors_distribution_with_homesteads_and_the_middle_latitudes_moved_2026_10_11; authors_wild_share_half_wild_or_30_wild_with_20_hybrid_applied_to_food_and_distributions_2026_10_11; authors_automation_network_uptime_and_food_blend_2026_10_12; beamed_power_chosen_and_screened_absorption_rain_tiles_grid_reserves_2026_10_12; cprime_placed_with_the_blend_every_corner_fits_2026_10_12",
@@ -848,7 +855,14 @@
           "price_units": "USD2041",
           "adoption_boundary": "Timing and inflation are adopted scenario assumptions; sources, sites, fleets and power system remain proposals.",
           "U_conversion": "Proposed procurement-basket calibration only; universal conversion unset.",
-          "next": "Qualify sources and routes, water recovery and local fleet manufacture; reconcile the settlement dollar account without duplicated supplier purchases."
+          "next": "Complete revenue and resource-horizon scenarios with matched U calibration; qualify routes, sources, water recovery and localization without assuming a minimum Earth launch cadence.",
+          "transport_comparison": {
+            "commit": "300224c8",
+            "path": "studies/initial_industrial_system/transport.md",
+            "state": "conditional alternatives; original launch cadence is not a minimum or adopted requirement"
+          },
+          "revenue_scope": "Consolidate the 250,000-person settlement and supporting off-Earth industry against Earth; include returned goods and delivery costs; gross receipts, operating balance and balance after renewal/resource allowances, with debt separate.",
+          "resource_horizon": "Assess million-year endurance and earlier source transitions; beyond-local expansion and socioeconomic boundary remain future unresolved work."
         }
       },
       "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28; reviewed_against_main_and_the_other_branches_2026-10-08; branch_closed_merge_waits_for_the_joint_integration; inhabited_volume_requirement_screen_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; ways_of_living_settings_light_air_hazards_and_sky_town_drift_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_tubes_and_highland_towers_2026_10_11; low_gravity_design_note_guards_stairs_handholds_ramps_movement_halls_2026_10_17",
