@@ -1,0 +1,269 @@
+{
+  "schema": "terluna.research.initial-economy-inputs/1",
+  "date": "2026-11-12",
+  "inputs": {
+    "industrial": {
+      "path": "research/studies/initial_industrial_system/results/industrial_system.json",
+      "sha256": "4bf5c8a00838735b7716aeca07bb9cf1a43265c75a69b02cf4ab183b3b19e9e7"
+    },
+    "industrial_inputs": {
+      "path": "research/studies/initial_industrial_system/industrial_inputs.json",
+      "sha256": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade"
+    },
+    "transport": {
+      "path": "research/studies/initial_industrial_system/results/transport.json",
+      "sha256": "26f37dcc0c110402ea5d5a23be7338acdaf9501ddd6e4289c9b46053882aa507"
+    },
+    "transport_inputs": {
+      "path": "research/studies/initial_industrial_system/transport_inputs.json",
+      "sha256": "ba335eb4625bef2f5fddeab66964df543f240aa6373153b5356ae08314682d1f"
+    },
+    "revenue": {
+      "path": "research/studies/initial_industrial_system/results/revenue.json",
+      "sha256": "eb2b955e3fa35d76be5b6bba4e393a74108f4cfa9b55232d41ca2d328d1b9822"
+    },
+    "revenue_inputs": {
+      "path": "research/studies/initial_industrial_system/revenue_inputs.json",
+      "sha256": "7d8884f8e2386536789f29f6b532ccd9ae1e49511a32455c1a3d7bf5c1c61b94"
+    },
+    "settlement": {
+      "path": "research/studies/lava_tube_cities/results/buildout.json",
+      "sha256": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de"
+    },
+    "crater_programme": {
+      "path": "research/studies/vacuum_crater_buildout/results/buildout.json",
+      "sha256": "521503f0cf9079dd7d67c7879122fcb76288f299e2b43ce6defa17584cd60fe0"
+    },
+    "manufacturing_markets": {
+      "path": "research/studies/world_economy/industrial_markets_inputs.json",
+      "sha256": "721f03eb3bb91d929a13c080ef54fe11dc5b0b5f49887cf8b995591a179930d8"
+    },
+    "settlement_inputs": {
+      "path": "research/studies/lava_tube_cities/buildout_inputs.json",
+      "sha256": "dbe184ee7fba99bb0cb9b6e0251ffe11685e87a0b0afb0dbb7390dda8128da91"
+    }
+  },
+  "evidence": "Capacity and supply-use scenarios, with explicit component partitions, prices and qualification gates; no adopted architecture, market forecast, automatic demographic growth or proven self-reproduction.",
+  "supply_case": "local_structures_space_chemical",
+  "profiles": {
+    "inherited": {
+      "modular": false,
+      "localize": false
+    },
+    "modular_imported": {
+      "modular": true,
+      "localize": false
+    },
+    "local_structures": {
+      "modular": true,
+      "localize": true
+    }
+  },
+  "components": {
+    "machine": {
+      "structural_mass_fraction": 0.7,
+      "structural_life_years": 30
+    },
+    "vehicle": {
+      "structural_mass_fraction": 0.8,
+      "structural_life_years": 50
+    },
+    "lander": {
+      "structural_mass_fraction": 0.65,
+      "structural_life_years": 30
+    },
+    "solar": {
+      "structural_mass_fraction": 0.7,
+      "structural_life_years": 40
+    },
+    "radiator": {
+      "structural_mass_fraction": 0.9,
+      "structural_life_years": 40
+    },
+    "chemistry": {
+      "structural_mass_fraction": 0.5,
+      "structural_life_years": 30
+    },
+    "tank": {
+      "structural_mass_fraction": 0.85,
+      "structural_life_years": 50
+    },
+    "pressure": {
+      "structural_mass_fraction": 0,
+      "structural_life_years": 50
+    },
+    "ordinary": {
+      "structural_mass_fraction": 0.6,
+      "structural_life_years": 30
+    },
+    "building": {
+      "structural_mass_fraction": 0.9,
+      "structural_life_years": 80
+    },
+    "computer": {
+      "structural_mass_fraction": 0,
+      "structural_life_years": 20
+    }
+  },
+  "production": {
+    "alloy_import_fraction_of_virgin_local_metal": 0.02,
+    "local_fabrication_finish_kWh_kg": 10,
+    "local_fabrication_value_USD2026_kg": 30,
+    "local_bulk_value_USD2026_kg": 1,
+    "structural_metal_value_USD2026_kg": 10,
+    "source_water_value_USD2026_kg": 5,
+    "source_nitrogen_value_USD2026_kg": 50,
+    "special_component_price_multiplier": 1,
+    "component_price_sensitivity": [
+      1,
+      2,
+      4
+    ],
+    "source_recovery": 0.95,
+    "qualification_capital_USD2026": 10000000000,
+    "qualification_import_hardware_kg": 5000000,
+    "qualification_years": 5,
+    "process_consumables_fraction_of_imported_renewal": 0.05,
+    "external_engineering_contract_USD2026_year": 2000000000
+  },
+  "growth": {
+    "years": 40,
+    "comparison_rates": [
+      0,
+      0.01,
+      0.03
+    ],
+    "industrial_stock_policy": "Maintain the initial supplier-stock intensity per resident in balanced expansion; new capacity enters the next annual step. Also test fixed plant and maintenance-only rightsizing.",
+    "no_new_tube_site_denominator": true,
+    "eventual_estate_factor": "2.0",
+    "initial_population_case": "representative",
+    "commissioning_duration_years": 2
+  },
+  "exports": {
+    "finished_goods_kg_year_grid": [
+      0,
+      15750000,
+      50000000,
+      100000000,
+      200000000
+    ],
+    "prices_USD2026_kg": [
+      3,
+      300,
+      750,
+      2000
+    ],
+    "factory_yield": 0.9,
+    "factory_Earth_input_fraction": 0.2,
+    "factory_utilization": 0.7,
+    "factory_equipment_kg_per_nameplate_kg_year": 0.05,
+    "factory_equipment_life_years": 20,
+    "factory_floor_m2_per_nameplate_kg_year": 0.01,
+    "factory_bulk_kg_m2": 500,
+    "factory_metal_kg_m2": 100,
+    "factory_finish_kWh_kg": 5,
+    "compute_W_grid": [
+      0,
+      200000000,
+      1000000000,
+      3000000000
+    ],
+    "compute_earth_electricity_USD2026_kWh": [
+      0.05,
+      0.1,
+      0.2
+    ],
+    "compute_Earth_overhead_USD2026_W_year": 1,
+    "compute_earth_markups": [
+      1,
+      1.5,
+      2
+    ],
+    "compute_duty": 0.6,
+    "compute_IT_kg_W": 0.0256,
+    "compute_IT_USD2026_W": 45,
+    "compute_life_years": 5,
+    "compute_communications_kg_W": 0.001,
+    "compute_communications_USD2026_W": 2,
+    "source_goods_kg_year_grid": [
+      0,
+      50000000,
+      100000000,
+      200000000
+    ],
+    "source_goods_prices_USD2026_kg": [
+      3,
+      30,
+      300,
+      750
+    ],
+    "commercial_commission_years": 5,
+    "service_portfolio": "Retain the earlier reference research, media, remote-work and destination-service scenario as an explicit option, with its facilities and imports. It is not a market ceiling; passenger access requires separate qualification.",
+    "compute_common_Earth_service_share": 0.2
+  },
+  "valuation": {
+    "inherited_U_service_normalization_USD2041_per_U": 30,
+    "status": "An illustrative price convention for inherited civic services only, not an estimated exchange rate or a conversion of entire old budgets.",
+    "routine_service_value_added_fraction": 0.5,
+    "routine_service_fraction_sensitivity": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "civic_service_growth_USD2026_per_new_resident": 100000,
+    "minimum_resident_service_value_added_U_person_year": 5000,
+    "power_USD2026_kWh": 0.1,
+    "domestic_transport_service_fraction_of_external_cost": 0.05,
+    "stock_installation_fraction_of_hardware_value": 0.1
+  },
+  "rules": [
+    "Domestic gross output counts intermediate production; GDP/GVA subtracts domestic and imported intermediate inputs. Imports of capital enter investment and imports once; depreciation is subtracted only for net product.",
+    "Growth is domestic capital formation and increases future maintenance, resources and funding needs; it is not external revenue.",
+    "The prior 100 kg/resident export-factory constraint and customer-budget ceilings are absent from capacity calculations. Prices, demand and qualification remain independent gates.",
+    "The same spare capacity cannot simultaneously support maximum exports, replacement and maximum growth.",
+    "Component partitions and extended structural lives are design comparisons; imported active modules retain their original lives. Price-density sensitivity prevents mass localization from being treated as a guaranteed equal percentage of value localization.",
+    "Local fabrication consumes metal, alloy imports, energy, machine capacity and delivery of recovered stock. Pressure-composite production and advanced semiconductor production remain imported.",
+    "The 2.5% crater site quota is the eventual programme ceiling. Its architectural population is not a demographic target. The initial vacuum quota and uncounted lava-tube quota remain separate.",
+    "No scenario establishes permitted source reserves or a terraforming date. No indefinite exponential growth or free autonomous self-reproduction is assumed."
+  ],
+  "coproducts": {
+    "screen": [
+      "water",
+      "nitrogen",
+      "aggregate_recoverable_metals"
+    ],
+    "unassayed": [
+      "carbon-bearing compounds",
+      "phosphorus-bearing minerals",
+      "sulfur-bearing compounds",
+      "nickel/cobalt split within aggregate metals",
+      "platinum-group and other trace metals"
+    ],
+    "raw_residue_annual_sales_credit_USD": 0,
+    "metal_refinery_expansion_kg_year": 1000000000,
+    "rule": "Aggregate metal grades may not also be counted as separate iron, nickel or precious-metal output. Unassayed products receive no invented concentration, reserve or revenue. All residues remain controlled; release/capture chemistry and storage need process-specific verification.",
+    "carbon_analogue": {
+      "mass_fraction": 0.047,
+      "recovery_comparison": 0.5,
+      "source": "NASA NTRS 20240006219, Keller et al. (2024), preliminary Bennu carbon measurement; analogue only, not a designated source. Recovery is an engineering sensitivity, not a reported result."
+    },
+    "nutrient_recovery_comparison": 0.5,
+    "stock_containment_kg_per_kg": 0.002,
+    "platinum_sensitivity": {
+      "grade_ppm_trials": [
+        0.01,
+        0.1,
+        1
+      ],
+      "recovery_trial": 0.5,
+      "USD2025_kg_rounded": 38600,
+      "world_mine_production_2025_kg": 170000,
+      "evidence": "USGS Mineral Commodity Summaries 2026: 2025 estimated platinum price 1200 USD/troy ounce, approximately 38600 USD/kg, and mine output 170000 kg. Grade and recovery trials are not asteroid assays; frozen historical price only."
+    },
+    "refined_inventory_prices_USD2026_kg": [
+      3,
+      10,
+      30
+    ]
+  }
+}
