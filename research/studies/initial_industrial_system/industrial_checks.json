@@ -1,0 +1,52 @@
+{
+  "schema": "terluna.research.initial-industrial-checks/1",
+  "checked_at_utc": "2026-11-12T19:53:29.477239+00:00",
+  "base_commit": "1563baaa87d442749d0daffa13b562aa09f93714",
+  "worktree": "/home/kir/Documents/Projects/terluna-provisioning",
+  "evidence": "Numerical, accounting, identity, structural, editorial and visual checks; no empirical engineering validation.",
+  "selected_checks": {
+    "command": "env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 make check",
+    "passed": 19,
+    "new_model_tests": 16,
+    "seconds_for_tests": 0.11,
+    "full_suite": false
+  },
+  "consistency": {
+    "stale": 0,
+    "rebuilt": 0,
+    "rebound": 0
+  },
+  "audit": {
+    "relative_report_links": 9,
+    "historical_pins_unchanged": 111,
+    "bound_previous_inputs": 5,
+    "unrelated_status_fields": "preserved"
+  },
+  "editorial_reading": "Full report and synthesis read; units, cost overlap, qualified price claims, conservation and scope reviewed.",
+  "visual_inspection": "Final PNG inspected at delivered resolution; labels and scale legible.",
+  "not_performed": [
+    "Full scholarly source review",
+    "Qualified source/site/trajectory and reserve survey",
+    "Structural, cryogenic, power-beam or propulsion qualification",
+    "Environmental or conservation clearance",
+    "Complete settlement dollar repricing and currency definition"
+  ],
+  "artifact_sha256": {
+    "research/studies/initial_industrial_system/README.md": "94a704df7bbd1c99d72a7aa3bff855541508b5ab9c4ad984fb083fb47cc70cf6",
+    "research/studies/initial_industrial_system/checks.md": "90d01f6031a8b900bc1f12bbd86b5344aae8b7de575b61c257bd3dae2f9eb65b",
+    "research/studies/initial_industrial_system/industrial_inputs.json": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade",
+    "research/studies/initial_industrial_system/industrial_sources.json": "8b469e12e34d8a577ab8244fb216bf725e6d04ce7b68d3ffebaa71b8118010b0",
+    "research/studies/initial_industrial_system/plot.py": "bb3373731365290e3f8a89871ac8db2e2b86e19cab89bd9977e51bccca4b569c",
+    "research/studies/initial_industrial_system/results/industrial_system.json": "4bf5c8a00838735b7716aeca07bb9cf1a43265c75a69b02cf4ab183b3b19e9e7",
+    "research/studies/initial_industrial_system/results/industrial_system.png": "f747d9d57dd14ea0182062a7e2bbf90e015029e89a1ad52ae34f61a5e442cd0c",
+    "research/studies/initial_industrial_system/run.py": "43c9531a8196cd420940c2ee52d84b32fc6c5a25de69b1ce72ad954649aa7500",
+    "research/studies/initial_industrial_system/test_run.py": "33de35434b265b7b96cfec07fa2c38f7e9c65bfca4acf5c68c019e4ae083f34c"
+  },
+  "external_logs_sha256": {
+    "plan.log": "ba4166a6dc42b2382d2477b75dc3c8d2ab5424291762a4dba4248ced6435c671",
+    "selected.log": "5b2fff7f5db50f0408caaf07224f2e3254dbd7c4395278369af2dee7d8533f34",
+    "focused.log": "a69d2990726df276b5a4cfaeacac7f9093820d18ffed4eb92ce996c1b18f0c44",
+    "consistency.log": "bd3055d769a5a07133e29fa6344cf2c9a72e1f14d3cdd6452f76d94cde7eebd1",
+    "plan_descriptive_names.log": "2c646f4f8e401a8cc0eb64bb7696b9b70788ab8598384607f67626bb1fd66779"
+  }
+}

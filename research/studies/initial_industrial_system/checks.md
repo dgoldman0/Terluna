@@ -1,0 +1,13 @@
+# Verification of the initial industrial study
+
+The final `make check` run selected the new study and three affected verification controls: **19 tests passed in 0.11 seconds**, including all **16 industrial-model tests**. The layer check passed. The full repository suite was not requested because the new producer and its consumers are bounded. Source, test and input bytes remained unchanged while the report and verification records were finalized.
+
+The numerical controls check input identity, conservation through both rocket burns, water-derived hydrogen and oxygen, source yields, installed fleet capacity, replacement feedback, shared-hardware credits, inflation, source fabrication and electric-tug power mass. They establish implementation behaviour; they do not qualify an engine, factory, source body, trajectory, power beam or future procurement price.
+
+The registered-product consistency run reported **nothing stale, zero rebuilt and zero rebound**. Historical pinned files and prior settlement inputs receive separate hash checks in `industrial_checks.json`. Descriptive input filenames avoid false basename dependency matches to unrelated sky calculations; the verification plan and its corrected scope remain in the external check archive.
+
+The full report and modified synthesis passages were read in context. That review corrected the source-fabrication throughput unit from tonnes to thousands of tonnes, clarified the staff population and future-price basis, and bounded the water-recovery and electric-propulsion comparisons. It preserved the distinction between an owned supply system, a funded material campaign and a complete settlement budget. The final two-panel figure was inspected at its delivered resolution; labels, units, logarithmic scale and exclusions were legible.
+
+The source register records each primary source, its use and reading coverage. The NASA reactor slides, selected solar-power report sections, Bennu main-article composition passages, DOE table and first-party programme pages were consulted. Publisher access to the water-Hall paper remained unavailable; its indexed abstract supports only a laboratory precedent. No full scholarly review, engineering qualification, launch environmental approval, site clearance or validated reserve inventory is claimed.
+
+Logs and source copies are stored under `/media/projectspace/terluna-research/initial-industrial-system/`. The future Moon-wide lava-tube distribution study remains separate.

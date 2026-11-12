@@ -1,0 +1,102 @@
+{
+  "schema": "terluna.research.initial-industrial-sources/1",
+  "retrieved": "2026-11-12",
+  "scope": "Bounded primary-source engineering review and inherited settlement products; source identity and reading coverage recorded separately from forecasts.",
+  "sources": [
+    {
+      "key": "nasa_mre2026",
+      "title": "Large-scale Demonstration of Molten Regolith Electrolysis for Oxygen Production in a Relevant Environment",
+      "url": "https://ntrs.nasa.gov/api/citations/20260006167/downloads/MRE%20GCD%20ICES26_v3.pdf",
+      "archive": {
+        "file": "nasa_mre2026.pdf",
+        "url": "https://ntrs.nasa.gov/api/citations/20260006167/downloads/MRE%20GCD%20ICES26_v3.pdf",
+        "sha256": "029e91ac426e47bf4c4921bda188ba8430a056c7ff40e5da66e1f652f6a5b5b4",
+        "bytes": 2473049,
+        "status": "retrieved"
+      },
+      "coverage": "Presentation slides 5\u201316, including equipment, nine-hour experiment and remaining development work.",
+      "supports": "25 kg simulant, about 9 kW, 0.07 kg oxygen/hour in vacuum. These demonstrate a small reactor, not industrial metal quality, continuous production or the assumed 35 kWh/kg metal."
+    },
+    {
+      "key": "nasa_sbsp2024",
+      "title": "NASA Office of Technology, Policy, and Strategy, Space Based Solar Power, January 2024",
+      "url": "https://ntrs.nasa.gov/api/citations/20230018600/downloads/OTPS%20SBSP%20Report%20Final_Tagged_Approved_1_5_24.pdf",
+      "archive": {
+        "file": "nasa_sbsp2024.pdf",
+        "url": "https://ntrs.nasa.gov/api/citations/20230018600/downloads/OTPS%20SBSP%20Report%20Final_Tagged_Approved_1_5_24.pdf",
+        "sha256": "95cf6a9669bebc3b488a482c9a8dcdcdcc651d88ef425d49385d96789d5cd850",
+        "bytes": 4293329,
+        "status": "retrieved"
+      },
+      "coverage": "Executive summary and selected manufacturing, assembly and renewal tables. No full-report reading claimed.",
+      "supports": "Conceptual 2050 systems and large uncertainty; example system masses 5.9 and 10 million kg per 2 GW design. Study prices are FY2022 dollars and are not copied into the 2026 price inputs."
+    },
+    {
+      "key": "glavin2025",
+      "title": "Glavin et al., Abundant ammonia and nitrogen-rich soluble organic matter in samples from asteroid (101955) Bennu, Nature Astronomy 9, 199\u2013210",
+      "url": "https://doi.org/10.1038/s41550-024-02472-9",
+      "archive": {
+        "file": "glavin2025.pdf",
+        "url": "https://science.gsfc.nasa.gov/sed/content/uploadFiles/publication_files/Glavin%20Dworkin%202025.pdf",
+        "sha256": "280bcb398302c3f44766ee21e0f70db2880d36fb102301ba068c4a7172866a06",
+        "bytes": 20515548,
+        "status": "retrieved"
+      },
+      "coverage": "Abstract and main-article sample/composition passages, including 4.5\u20134.7 wt% C and 0.23\u20130.25 wt% N. NASA-hosted PDF obtained after publisher access failed. Text extraction reports an annotation problem on page 21; supplementary material and full article not reviewed.",
+      "supports": "Measured chemical precedent for the nitrogen grade; not an extractable reserve, accessible flight target, water yield or approval to mine Bennu."
+    },
+    {
+      "key": "doe_pem",
+      "title": "Department of Energy technical targets for PEM electrolysis",
+      "url": "https://www.energy.gov/cmei/fuels/technical-targets-proton-exchange-membrane-electrolysis",
+      "archive": {
+        "file": "doe_pem.html",
+        "url": "https://www.energy.gov/cmei/fuels/technical-targets-proton-exchange-membrane-electrolysis",
+        "sha256": "d380caa725f516cd9b686e20635e70fabb86482f3095bc84a8cf47760f7ea4c1",
+        "bytes": 118265,
+        "status": "retrieved"
+      },
+      "coverage": "Full table and explanatory footnotes.",
+      "supports": "2022 system status 55 kWh/kg H2 and $1,000/kW uninstalled; ultimate targets 46 kWh/kg and $150/kW. These exclude installation and space adaptation. Model uses 55\u201380 kWh/kg including liquefaction and a separate space-plant allowance."
+    },
+    {
+      "key": "nasa_optical2017",
+      "title": "Optical Mining of Asteroids, Moons, and Planets to Enable Sustainable Human Exploration and Space Industrialization",
+      "url": "https://www.nasa.gov/general/optical-mining-of-asteroids-moons-and-planets-to-enable-sustainable-human-exploration-and-space-industrialization/",
+      "coverage": "NASA NIAC project article body.",
+      "supports": "Small optical-mining vacuum experiments and proposed scale-up. No operational asteroid mine."
+    },
+    {
+      "key": "dressler1993",
+      "title": "Dressler et al., Test results from a simple, low-cost, pressure-fed liquid hydrogen/liquid oxygen rocket combustor",
+      "url": "https://ntrs.nasa.gov/citations/19950009913",
+      "coverage": "NTRS abstract; no downloadable paper available in that record.",
+      "supports": "Hot-fire mixture ratios 5.8\u20138.4 and an adjusted 430 s vacuum result for a particular engine/nozzle. Does not demonstrate 430 s at mixture eight with the long reusable life assumed here."
+    },
+    {
+      "key": "water_hall2024",
+      "title": "Experimental demonstration of a water electrolysis Hall Effect Thruster (WET-HET) operating with a hydrogen cathode",
+      "url": "https://doi.org/10.1016/j.actaastro.2024.03.043",
+      "coverage": "Indexed publisher abstract and highlights; direct publisher page returned 403. No full-paper reading or numerical transfer of the reported krypton-cathode efficiency to hydrogen.",
+      "supports": "Laboratory oxygen/hydrogen operation using bottled gases. The 2,000 s and 30\u201350 percent total efficiency comparison is a future design assumption, not a qualified megawatt engine."
+    },
+    {
+      "key": "fortescue2024",
+      "title": "Fortescue signs US$2.8 billion green equipment partnership with Liebherr",
+      "url": "https://www.fortescue.com/en/articles/fortescue-signs-us-28-billion-green-equipment-partnership-with-liebherr",
+      "coverage": "Company release body, dated 25 September 2024.",
+      "supports": "475 machines including roughly 360 autonomous battery trucks, 55 electric excavators and 60 dozers; historical package price only, not a unit quotation or demonstration of independent lunar maintenance."
+    },
+    {
+      "key": "spacex_rideshare",
+      "title": "SpaceX Smallsat Rideshare Program",
+      "url": "https://new.spacex.com/rideshare",
+      "coverage": "Current indexed first-party page text, retrieved 12 November 2026.",
+      "supports": "$350,000 for 50 kg to sun-synchronous orbit and $7,000/kg additional mass. This is a smallsat service, not a comparable bulk launch contract. The $50\u20131,000/kg future launch scenarios are assumptions."
+    }
+  ],
+  "retrieval_issues": [
+    "The SpaceX Capabilities and Services PDF URL redirected to its homepage; no Falcon 9 numerical price input is taken from that failed retrieval.",
+    "Publisher access to the water-Hall paper failed; only its indexed abstract is used."
+  ]
+}
