@@ -1413,6 +1413,30 @@
         "Rights and club governance, ownership and integration within the existing planetary accounts."
       ],
       "next_session_task": "Test sport and audience propositions, cost the visiting circuit against qualified host and transport services, and use measured cohorts to replace hypothetical commercial parameters."
+    },
+    {
+      "topic": "cultural_economics_entertainment",
+      "condition": "conditional_portfolio_with_shared_audiences_and_facilities; commercial_and_physical_validation_open",
+      "material": [
+        "../humanities/economics/entertainment.md",
+        "../humanities/economics/entertainment.py",
+        "../humanities/economics/entertainment_inputs.json",
+        "../humanities/economics/entertainment_sources.json",
+        "../humanities/economics/results/entertainment.json",
+        "../humanities/economics/checks.json"
+      ],
+      "findings": [
+        "A worked portfolio contains 140 million unique fans and 200 million genre memberships; one bundle is counted once, producing 1.202 billion U of annual exports, 602 million U above the pinned sports circuit.",
+        "The programme has 104 resident workers and 592 annual visitor arrivals, using 30,912 guest-nights and 4,552 of 4,800 arena hours. Capacity screens are conditional, not a qualified timetable.",
+        "Expanded annual cash before debt is 336.069 million U. Extra programmes with the same audience and viewing price reduce cash by 6.778 million U; audience breadth alone does not guarantee incremental profit."
+      ],
+      "unresolved": [
+        "Measured cross-genre audience overlap, willingness to pay, retention and customer acquisition.",
+        "Programme quality, participation agreements, production costs and crew/venue schedules.",
+        "Host and travel qualification, upfront audience acquisition and a dated funding plan.",
+        "Actual rights, employment and ownership arrangements and integration with territorial accounts."
+      ],
+      "next_session_task": "Test distinct programme and bundle propositions with paying cohorts, measure production requirements, and replace conditional inputs with observed demand and qualified costs."
     }
   ]
 }

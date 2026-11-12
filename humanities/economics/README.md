@@ -8,7 +8,8 @@ support for the human paper, with no change to the five manuscript roles.
 
 | Study | Contribution | Evidence state |
 |---|---|---|
-| [Professional lunar sports](sports.md) | Resident clubs, a season, audience acquisition, rights, digital adaptations, production, trade and project cash | Reproducible conditional accounts; no selected sport, qualified venue, observed lunar demand or financed league |
+| [Professional lunar sports](sports.md) | Large fan followings, multiple competitions, resident and visiting clubs, audience acquisition, rights, digital adaptations, trade and project cash | Reproducible conditional accounts; no selected sports, qualified venues, observed lunar demand or financed leagues |
+| [Entertainment and lunar life](entertainment.md) | Everyday-life programming, performances, factual work, games and commissioned production; overlapping audiences and shared facilities | Conditional portfolio and incremental comparison with sport; no measured demand or qualified production programme |
 
 The [world-economy study](../../research/studies/world_economy/README.md) owns the
 cross-domain planetary accounts. These studies identify cultural activity within
@@ -25,12 +26,14 @@ Run from the repository root:
 
 ```sh
 python3 -m humanities.economics.sports
-python3 -m pytest -q humanities/tests/test_cultural_economics.py
+python3 -m humanities.economics.entertainment
+python3 -m pytest -q humanities/tests/test_cultural_economics.py humanities/tests/test_entertainment_economics.py
 ```
 
 Normal runs write to ignored `research/runs/cultural_economics/`. The reviewed
-product is [results/sports.json](results/sports.json); updating it requires an
-explicit `--output humanities/economics/results/sports.json`. Its versioned schema,
+products are [results/sports.json](results/sports.json) and
+[results/entertainment.json](results/entertainment.json); updating either requires an
+explicit `--output` path. Each product's versioned schema,
 producer hashes, input identities, units and reading rule accompany the results.
 The source register records targeted reading and unresolved retrievals;
 [checks.json](checks.json) records verification separately from commercial evidence.

@@ -21,3 +21,10 @@ A four-competition scenario has 32 organizations and 256 registered athletes, wi
 600 million U annually in exports, conditional on explicit audience and cost
 assumptions. The study separates earned receipts, patron transfers, investment,
 value added, resident income and cash; the physical research selects no sport.
+
+The [entertainment study](economics/entertainment.md) extends that account to
+everyday life, performance, factual programming, games and commissioned production.
+Its shared-audience model compares the added costs with new fans and purchases,
+while visiting artists, crew time and shared facilities remain explicit. A worked
+140-million-fan case earns 1.202 billion U of annual exports, with 104 resident
+workers; all audience and commercial quantities remain scenario assumptions.

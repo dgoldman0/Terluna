@@ -22,5 +22,27 @@
       "Transport, habitat or venue engineering quotation",
       "Full repository suite, full scholarly literature review or PDF rendering review"
     ]
+  },
+  "entertainment": {
+    "numerical_checks": {
+      "command": "python3 -m pytest -q humanities/tests/test_cultural_economics.py humanities/tests/test_entertainment_economics.py",
+      "result": "34 passed (24 sports/accounting and 10 entertainment/portfolio tests)",
+      "scope": "Both products reproduce with pinned inputs; the entertainment sports-only control recovers the committed sports account; bundle deduplication, incremental costs, visiting capacity, fixed-payroll shock and patron transfers are checked."
+    },
+    "selected_checks": {
+      "command": "python3 /tmp/run-cultural-checks.py",
+      "selector_source": "Current main shared/check_changed.py, with ROOT set to the isolated humanities checkout, as for the sports commit.",
+      "selector_sha256": "a0c0ef2340b62953a23a10c79f5154d11e859d283e4a241dc66993fc003e5bdd",
+      "result": "Changed-file structural validation, layer check (1,639 files; zero violations) and 10 selected entertainment tests passed. The earlier 24 sports tests also passed in the joint command.",
+      "record_update": "This check record and final synthesis prose were reviewed after the selected pass; they do not change executable inputs or product bytes."
+    },
+    "editorial_review": "Read the complete 3,345-word entertainment study and its index in context; checked displayed cash figures against the generated products and resolved new-study local links. The sports study is 4,681 words. This is substantive internal reading and numerical comparison, not peer review or audience validation.",
+    "sources": "Targeted YouTube, NASA and ECB passages read. UNCTAD summary and full PDF returned HTTP 403; their numerical market claims are excluded and retrieval remains unresolved.",
+    "not_performed": [
+      "Observed audience, paid demand or programme-quality trials",
+      "Clinical, physical, host, transport or detailed timetable qualification",
+      "Quoted investment costs or dated financing plan",
+      "Full repository suite, full scholarly literature review, PDF typesetting or rendering inspection"
+    ]
   }
 }
