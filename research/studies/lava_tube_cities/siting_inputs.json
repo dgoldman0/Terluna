@@ -1,0 +1,184 @@
+{
+  "schema": "terluna.research.lava-tube-city-siting-inputs/1",
+  "date": "2026-11-12",
+  "evidence": "Bounded primary-source assessment, inherited population arithmetic and coarse hydrostatic point sampling. No subsurface survey, likelihood fit, site selection or engineering qualification.",
+  "inputs": {
+    "atlas": {
+      "path": "geography/products/atlas_28pct_4ppd.npz",
+      "schema": "terluna.geography.atlas-grid/1",
+      "sha256": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693"
+    },
+    "town_construction_inputs": {
+      "path": "research/studies/vacuum_crater_buildout/first_hundred_inputs.json",
+      "schema": "terluna.research.first-hundred-inputs/1",
+      "sha256": "335b0f584986e45942aa350a5a88cc35a413788852f031a288c81033d8155bd4"
+    },
+    "town_design": {
+      "path": "habitation/crater_gardens/design.json",
+      "schema": "terluna.habitation.crater-garden-design/1",
+      "sha256": "b232179b23261d67fe59137f9a3a96f4cc749d402112f378d89877616825c6ff"
+    },
+    "land_cities": {
+      "path": "research/studies/land_cities/results/land_cities.json",
+      "schema": "terluna.research.land-cities/1",
+      "sha256": "7469606e06b406c9d3ddd48e1c98453fb90e7ab47a7f32723afc34a361d60106"
+    }
+  },
+  "candidates": [
+    {
+      "key": "tranquillitatis",
+      "name": "Mare Tranquillitatis pit",
+      "latitude_deg": 8.3355,
+      "longitude_east_deg": 33.222,
+      "coordinate_basis": "mapped pit",
+      "investigation_priority": "first reconnaissance",
+      "historical_key": "mare_tranquillitatis_pit",
+      "sources": [
+        "lroc_tranquillitatis",
+        "nasa_cave_2024",
+        "carrer_2024"
+      ],
+      "evidence_summary": "Radar-supported conduit from the pit; extent beyond tens of metres and city-sized usable volume remain unknown.",
+      "demonstrated_city_volume": false
+    },
+    {
+      "key": "marius",
+      "name": "Marius Hills pit and rille A",
+      "latitude_deg": 14.0917,
+      "longitude_east_deg": 303.2299,
+      "coordinate_basis": "mapped pit; regional radar search separately spans 13–15 N, 301.85–304.01 E",
+      "investigation_priority": "first reconnaissance",
+      "historical_key": "marius_hills_pit",
+      "sources": [
+        "lroc_marius",
+        "kaku_2017",
+        "chappaz_2017",
+        "nasa_gimli_2026"
+      ],
+      "evidence_summary": "Overhang and regional radar/gravity evidence. A traversable connection and connected city-scale volume have not been established.",
+      "demonstrated_city_volume": false
+    },
+    {
+      "key": "mairan",
+      "name": "West of Rima Mairan: radar point P0",
+      "latitude_deg": 35.892,
+      "longitude_east_deg": 313.235,
+      "coordinate_basis": "published radar point; search region spans 35–37 N, 312.5–314.5 E",
+      "investigation_priority": "geophysical follow-up",
+      "historical_key": "lrs_rima_mairan",
+      "sources": [
+        "kaku_2018",
+        "chappaz_2017"
+      ],
+      "evidence_summary": "Co-located radar echoes and regional mass deficit; no surveyed accessible cavern or entrance.",
+      "demonstrated_city_volume": false
+    },
+    {
+      "key": "schroter_extension",
+      "name": "Schröter extension gravity anomaly",
+      "latitude_deg": 24.0,
+      "longitude_east_deg": 306.0,
+      "coordinate_basis": "approximate anomaly location in Chappaz Table 1; not the named valley centre",
+      "investigation_priority": "geophysical follow-up",
+      "historical_key": "grail_vallis_schroteri",
+      "sources": [
+        "chappaz_2017"
+      ],
+      "evidence_summary": "Gravity inversion permits a large cavity model; no mapped entrance, connected interior or qualified dimensions.",
+      "demonstrated_city_volume": false
+    },
+    {
+      "key": "ingenii",
+      "name": "Mare Ingenii pit",
+      "latitude_deg": -35.9494,
+      "longitude_east_deg": 166.0559,
+      "coordinate_basis": "mapped pit",
+      "investigation_priority": "entrance comparison",
+      "historical_key": "mare_ingenii_pit",
+      "sources": [
+        "lroc_ingenii"
+      ],
+      "evidence_summary": "Visible 10–20 m overhangs; no measured extensive connected interior.",
+      "demonstrated_city_volume": false
+    },
+    {
+      "key": "mortis",
+      "name": "Lacus Mortis pit",
+      "latitude_deg": 44.9608,
+      "longitude_east_deg": 25.6119,
+      "coordinate_basis": "mapped pit",
+      "investigation_priority": "entrance comparison",
+      "historical_key": "lacus_mortis_pit",
+      "sources": [
+        "lroc_mortis"
+      ],
+      "evidence_summary": "Ramp reaches the floor; shallow north-wall overhang has an apparently visible back wall, so access does not demonstrate an extensive tube.",
+      "demonstrated_city_volume": false
+    },
+    {
+      "key": "south_marius",
+      "name": "South Marius Hills pit",
+      "latitude_deg": 13.0188,
+      "longitude_east_deg": 303.0678,
+      "coordinate_basis": "2025 paper coordinate; converted from 56.9322 W",
+      "investigation_priority": "new entrance follow-up",
+      "historical_key": null,
+      "sources": [
+        "le_corre_2025"
+      ],
+      "evidence_summary": "Possible overhang near a proposed collapse chain; shallow 14–15 m depression and unverified cave entrance. It belongs to the Marius province, not a separate independent region.",
+      "demonstrated_city_volume": false
+    },
+    {
+      "key": "belkovich_a",
+      "name": "Belkovich A pit",
+      "latitude_deg": 58.6979,
+      "longitude_east_deg": 87.599,
+      "coordinate_basis": "2025 paper coordinate",
+      "investigation_priority": "new entrance follow-up",
+      "historical_key": null,
+      "sources": [
+        "le_corre_2025"
+      ],
+      "evidence_summary": "Possible overhang; illumination limits confirmation and no connected interior is measured.",
+      "demonstrated_city_volume": false
+    },
+    {
+      "key": "schluter",
+      "name": "Schlüter pit",
+      "latitude_deg": -5.8395,
+      "longitude_east_deg": 276.95,
+      "coordinate_basis": "mapped highland pit near mare patch",
+      "investigation_priority": "reserve comparison",
+      "historical_key": "schluter_pit",
+      "sources": [
+        "lroc_schluter"
+      ],
+      "evidence_summary": "Small pit with overhang; favourable coarse surface-water position does not establish a volcanic city cavity.",
+      "demonstrated_city_volume": false
+    }
+  ],
+  "illustrative_geometry": {
+    "width_m": 300,
+    "length_m": 5000,
+    "levels": 4,
+    "ordinary_floor_share": 0.6,
+    "status": "Arithmetic illustration only; not an observed cavity or adopted city architecture. Extra agriculture, bulk industry and open landscape require their own space accounts."
+  },
+  "assessment": {
+    "four_high_confidence_city_locations_established": false,
+    "selected_city_sites": [],
+    "basis": "Several credible reconnaissance regions exist, with two leading targets. Available observations do not establish four locations with connected usable volume at the requested population scale. Confidence is qualitative and is not a calibrated probability.",
+    "next_decision": "Report the evidence gap before dependent city construction, cost, maintenance and agriculture studies. A conditional four-site planning scenario or a reconnaissance-first programme would require direction."
+  },
+  "reading_rules": [
+    "Longitudes are east in the present Moon-fixed coordinate frame. Approximate regional anomaly coordinates are not precise entrances.",
+    "The 28% atlas uses 0.25-degree cells, about 7.6 km north–south. A point sample and its 3-by-3 neighbourhood do not map a cave, a drainage route or a safe shoreline.",
+    "Common-level water is the inherited hydrostatic scenario. Rain-fed lakes, groundwater, future loading/deformation, tides and site-scale terrain are outside this new point calculation.",
+    "Water above a candidate is a design burden, not automatic rejection: lasting submarine cities remain an existing project possibility.",
+    "The old land-city capacity range assigned hypothetical dimensions to mapped leads. It is not an inventory of verified habitable volume. The original product remains intact.",
+    "The first 100 towns have a construction scenario but no approved geographic allocation. The 8,886-site vacuum set is a broader provisional programme and is not the first-100 location list.",
+    "Food, agriculture and city industry remain in the conditional next phase. The town reference already includes local food-process power; relocation to a city must count shared facilities once.",
+    "Four cities have no assumed geographic separation: multiple sites in one province remain possible, but separate usable cavities have to be established rather than counted from repeated observations."
+  ]
+}

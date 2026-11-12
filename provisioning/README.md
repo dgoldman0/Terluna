@@ -427,6 +427,8 @@ summit metropolis, taller cities, and the large lava tubes as the first phase's 
 ([register](../research/decisions.md#people-on-the-moon-and-beyond-11-october-2026)). The study is
 [land cities](../research/studies/land_cities/README.md); numbers here are from it.
 
+The [four-city location investigation](../research/studies/lava_tube_cities/README.md), 12 November 2026, qualifies the historical tube capacities below: they assign hypothetical dimensions to leads whose interiors remain unsurveyed. Two leading entrance targets and two geophysical follow-ups support a reconnaissance shortlist, with no four-city allocation yet established. The Schröter gravity anomaly also lies away from the valley-centre point used in the older water calculation; its new coarse sample is below common sea level. Food production, hydroponics, city industry and shared town services remain in the conditional next phase.
+
 44. **The known lava-tube candidates lie in the low basins' mare basalt, and the 28% sea covers most of them.** Of the
     17 pit sites in and beside the maria, 13 lie under the sea, 54 m to 2.25 km down, and one under a rain-fed lake;
     three stand on land, the Mare Tranquillitatis pit highest at 784 m. Of the 19 places of Coombs & Hawke's roofed
@@ -438,8 +440,7 @@ summit metropolis, taller cities, and the large lava tubes as the first phase's 
     Keeping a 1 km by 50 km tube dry takes 0.03–2.9 MW with the water table at the ground and 2.5–245 MW under 500 m of
     sea, beside its residents' 5.2–28 GW.
 46. **The rough estimate of 7 million in a 1 km by 50 km tube with ten floors holds in arithmetic; as a 50 m vault with
-    streets and courts it holds 2.6–4.7 million.** The mapped tubes, each counted once, hold 2–52 million, those on dry
-    land 0.6–14 million; with the GRAIL candidates at the size gravity sees, 5–129 million.
+    streets and courts it holds 2.6–4.7 million.** The historical leads, each counted once with assumed tube dimensions, yield 2–52 million, those classified on dry land 0.6–14 million; with assumed GRAIL-scale cavities, 5–129 million. These are geometric capacity scenarios, with no surveyed inventory of that habitable space.
 47. **Before the air, a tube roof is the Moon's best shelter, and the air ends that role once the surface pressure
     reaches 16.8 kPa,** when its column weighs as much as Earth's atmosphere. A roof holds 1 atm by its weight from
     19–21 m of basalt. The tubes matter most in the build's first steps.
@@ -582,6 +583,7 @@ in other folders. They belong to main and are unchanged on this branch. The larg
 | [sources.json](sources.json) | Every source cited, its use and how far it was read |
 | [../research/studies/food_systems/README.md](../research/studies/food_systems/README.md) | Food systems per billion residents, their fit to the lunar cycle and seven mixes for 4, 6 and 8 billion, with each mix's feasible range |
 | [../research/studies/land_cities/README.md](../research/studies/land_cities/README.md) | Lava tubes against the 28% atlas, their water and capacity, and highland and tall cities |
+| [../research/studies/lava_tube_cities/README.md](../research/studies/lava_tube_cities/README.md) | Initial location evidence for four cities of 50,000 residents each at the smaller reference, with future-water comparisons and the limits of existing tube observations |
 | [../research/studies/crater_gardens/README.md](../research/studies/crater_gardens/README.md) | Catalogue counts of 200–1,000 m craters with depth, quality, broad water and climate exclusions, and architectural population scenarios |
 | [../research/studies/distributions/README.md](../research/studies/distributions/README.md) | Four distributions of 25–30 billion across Earth, the Moon, the array and the colonies, with the Moon's land bands, energy, water, phosphorus, light and sky at 4–8 billion and the synergies among places |
 

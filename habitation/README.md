@@ -78,9 +78,11 @@ for the land: lava tubes as the first phase's shelter and as lasting cities, and
 day by heliostats feeding light guides (mirrors over 1.4–7.1% of the lit floor), moved by fans, since the stack effect
 is a fifth of Earth's, and kept dry by membranes and pumps. The 28% sea covers most of the known candidates; on land the
 rain lifts the water table over the pit floors within years to four centuries unless the basalt drains freely. The
-mapped tubes hold 2–52 million people at 70 m² a person. Before the air, 6 m of rock stops all observable cosmic-ray
+earlier hypothetical tube dimensions yield 2–52 million people at 70 m² a person; the interiors remain unsurveyed. Before the air, 6 m of rock stops all observable cosmic-ray
 dose, and a roof holds 1 atm of air by its weight from 19–21 m. The author's direction of the same day connects the
 undersea cities with the tubes, and step six takes it up.
+
+The [initial four-city location investigation](../research/studies/lava_tube_cities/README.md), 12 November 2026, identifies Tranquillitatis and Marius Hills as leading reconnaissance targets, with west Rima Mairan and the Schröter extension as geophysical follow-ups. It establishes a conditional regional shortlist, with four city locations still open. The reference is 50,000 residents per city. The older capacity ranges describe assumed geometry, and the earlier Schröter water classification sampled the valley centre rather than the published anomaly; the new coarse anomaly sample falls below the planned common water level. Local conservation, accessible space and future-water engineering remain unresolved.
 
 **Highland cities.** 3.90 million km² of dry ground stands 4 km or more above the sea, 91% of it on the far side, and
 1.35 million km² of it poleward of 30°, where both climate models find the most comfort. Towers rise three to four

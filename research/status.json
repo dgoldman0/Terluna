@@ -584,7 +584,9 @@
       "topic": "provisioning",
       "four_lava_tube_city_programme": {
         "date": "2026-11-12",
-        "status": "location_evidence_investigation_authorized",
+        "status": "initial_location_review_complete_four_city_selection_open",
+        "initial_assessment": "Four plausible search regions; two leading entrance targets. Connected city-scale space and four high-confidence locations are not established. The Schröter anomaly uses its published location, which changes the coarse future-water comparison.",
+        "study": "studies/lava_tube_cities/README.md",
         "cities": 4,
         "population_rule": "Each city approximately equals the first 100-town population; 50,000 residents at the smaller reference and 100,000 at the larger comparison.",
         "first_task": "Determine whether four high-confidence candidate areas can be established; distinguish entrances, inferred void extent and engineered capacity, then report gaps before dependent city design.",
@@ -841,7 +843,9 @@
       "topic": "habitation",
       "four_lava_tube_city_programme": {
         "date": "2026-11-12",
-        "status": "location_evidence_investigation_authorized",
+        "status": "initial_location_review_complete_four_city_selection_open",
+        "initial_assessment": "Four plausible search regions; two leading entrance targets. Connected city-scale space and four high-confidence locations are not established. The Schröter anomaly uses its published location, which changes the coarse future-water comparison.",
+        "study": "studies/lava_tube_cities/README.md",
         "cities": 4,
         "population_rule": "Each city approximately equals the first 100-town population; 50,000 residents at the smaller reference and 100,000 at the larger comparison.",
         "first_task": "Determine whether four high-confidence candidate areas can be established; distinguish entrances, inferred void extent and engineered capacity, then report gaps before dependent city design.",
