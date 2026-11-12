@@ -1,0 +1,34 @@
+{
+  "schema": "terluna.habitation.crater-garden-design/1",
+  "adopted": "2026-11-12",
+  "evidence": "Adopted architectural planning dimensions and floor-space population scenarios, derived from a reference illustration and explicit coverage and occupancy assumptions.",
+  "diameter_m": [500, 1000],
+  "representative_diameter_m": 750,
+  "comparison_diameter_m": [200, 500],
+  "comparison_status": "Authorized smaller-crater census, including possible vacuum-era enclosures. Dome span, pressure, material and shielding proposals remain open.",
+  "representative_lake_diameter_m": [300, 400],
+  "representative_rim_above_lake_m": [40, 70],
+  "terrace_bands": [4, 6],
+  "building_storeys": [2, 4],
+  "representative_estate_diameter_m": 1500,
+  "population_lake_to_settlement_diameter": 0.5,
+  "population_cases": {
+    "spacious": {"non_lake_ground_building_share": 0.3, "mean_storeys": 2, "floor_m2_per_resident": 100},
+    "representative": {"non_lake_ground_building_share": 0.35, "mean_storeys": 3, "floor_m2_per_resident": 70},
+    "fuller": {"non_lake_ground_building_share": 0.45, "mean_storeys": 4, "floor_m2_per_resident": 70}
+  },
+  "rounded_population_by_diameter_m": {
+    "500": {"spacious": 900, "representative": 2200, "fuller": 3800},
+    "750": {"spacious": 2000, "representative": 5000, "fuller": 8500},
+    "1000": {"spacious": 3500, "representative": 9000, "fuller": 15000}
+  },
+  "initial_site_scenario": {
+    "global_craters_estimate": 3000000,
+    "dry_land_share_approx": 0.62,
+    "usable_land_crater_share_assumed": [0.01, 0.05],
+    "rounded_sites": [20000, 100000],
+    "mean_residents_assumed": 5000,
+    "status": "Conditional abundance extrapolation and suitability assumptions, pending a catalogue count."
+  },
+  "reading_rule": "Diameters describe the built ring and crater rim; the estate includes outer gardens. Population equals pi/4 times diameter_m squared times (1 minus population_lake_to_settlement_diameter squared) times non_lake_ground_building_share times mean_storeys divided by floor_m2_per_resident. The supplied population table retains the adopted rounded planning figures."
+}

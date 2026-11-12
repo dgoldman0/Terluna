@@ -597,3 +597,7 @@ The bounded screens do not reopen the paused climate programme or select a popul
 The [main summary](integration/floater_viability.md) records the ecology-owned coupled evaluation. Persistent
 twilight and wind-assisted Sun-following are included. Next: one assembled wet gas-barrier test and a coupled
 water/gas/pressure/flight route, then development and recruitment. The climate programme remains paused.
+
+## Crater garden settlements, 12 November 2026
+
+The [adopted settlement brief](../habitation/crater_gardens/README.md) fixes the 500–1,000 m diameter range and the floor-space population cases, with 5,000 residents in the representative 750 m town. The first catalogue count is authorized on `domain/provisioning`, in `research/studies/crater_gardens/`: identify craters in that size band and the additional 200–500 m comparison band with published depth estimates and apply broad water and climate exclusions. Preserve the input catalogue's size coverage, the definitions of its depth fields, quality flags and missing measurements alongside the count. The initial 20,000–100,000-site scenario remains conditional on its assumed usable fraction until compared with that evidence.

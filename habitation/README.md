@@ -92,6 +92,8 @@ people from the nearest lakes and 7–21 GW from the sea, a tenth of that with 9
 
 ## Parks and gardens
 
+The [crater garden settlement brief](crater_gardens/README.md), adopted on 12 November 2026, sets out towns 500–1,000 m across, with arcaded terraces around a lake and outer gardens. Their floor-space scenarios hold roughly 900–15,000 residents, with 5,000 in the representative 750 m settlement. The initial 20,000–100,000-site scenario carries an assumed usable fraction; a first catalogue count on `domain/provisioning` tests diameter and depth with broad water and climate exclusions.
+
 The author set the hybrid land as heavily manicured megaparks and great gardens, food gardens among them, for leisure
 and entertainment, with the shops, restrooms and places to rest so much land needs, used by residents and visitors and
 kept by automation ([register](../research/decisions.md#people-on-the-moon-and-beyond-11-october-2026)). Under the
