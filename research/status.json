@@ -622,7 +622,10 @@
         "../habitation/crater_gardens/buildout.json",
         "studies/vacuum_crater_buildout/first_hundred.md",
         "studies/vacuum_crater_buildout/results/first_hundred.json",
-        "studies/vacuum_crater_buildout/first_hundred_checks.json"
+        "studies/vacuum_crater_buildout/first_hundred_checks.json",
+        "studies/vacuum_crater_buildout/maintenance.md",
+        "studies/vacuum_crater_buildout/results/maintenance.json",
+        "studies/vacuum_crater_buildout/maintenance_checks.json"
       ],
       "unresolved": [
         "the ring fleet's own infrared, 5.7-9.9 W/m2 on the Moon by the corrected first screen, which the design climate leaves out; the author decided on 2026-10-09 that the investigated climate is the planned one, so the glow is answered with added solar protection, by redirecting it away from the Moon, or both: the stack's radiative transfer, where the column absorbs the glow, its warming, its effect on the upper air's CO2 cooling, and the means (less absorbing films, a heat mirror on Moon-facing faces, which the stack's two overlapping layers weaken, strong outer emitters, added dimming)",
@@ -657,6 +660,14 @@
         "reference_years_from_regional_mobilisation": 17.833333333333332,
         "external_condition": "Advanced specialist supply, controlled volatile deliveries and firm power must be orderable; local establishment and qualification included in the assumed lead.",
         "resource_condition": "Scientific/heritage clearance and site/element-specific future reserves precede extraction; local products/tails and imported stocks tracked separately."
+      },
+      "crater_town_maintenance": {
+        "evidence": "Conditional engineering service budgets using unchanged future U replacement prices and assumed asset lives. No demonstrated lunar failure rate, qualified dome lifetime, observed service labour requirement or household budget.",
+        "reference_residents": 500,
+        "reference_annual_funding_U": 35657481.054037526,
+        "recurring_cash_before_renewal_U": 17722188.45814635,
+        "renewal_fund_U": 17935292.595891178,
+        "scope": "Physical upkeep, stated operating services and major replacement provision, including regional operating share; household/social-service/debt costs separate."
       }
     },
     {
@@ -867,7 +878,10 @@
         "../habitation/crater_gardens/buildout.json",
         "studies/vacuum_crater_buildout/first_hundred.md",
         "studies/vacuum_crater_buildout/results/first_hundred.json",
-        "studies/vacuum_crater_buildout/first_hundred_checks.json"
+        "studies/vacuum_crater_buildout/first_hundred_checks.json",
+        "studies/vacuum_crater_buildout/maintenance.md",
+        "studies/vacuum_crater_buildout/results/maintenance.json",
+        "studies/vacuum_crater_buildout/maintenance_checks.json"
       ],
       "unresolved": [
         "supported floor area and mass",
@@ -937,6 +951,14 @@
         "reference_years_from_regional_mobilisation": 17.833333333333332,
         "external_condition": "Advanced specialist supply, controlled volatile deliveries and firm power must be orderable; local establishment and qualification included in the assumed lead.",
         "resource_condition": "Scientific/heritage clearance and site/element-specific future reserves precede extraction; local products/tails and imported stocks tracked separately."
+      },
+      "crater_town_maintenance": {
+        "evidence": "Conditional engineering service budgets using unchanged future U replacement prices and assumed asset lives. No demonstrated lunar failure rate, qualified dome lifetime, observed service labour requirement or household budget.",
+        "reference_residents": 500,
+        "reference_annual_funding_U": 35657481.054037526,
+        "recurring_cash_before_renewal_U": 17722188.45814635,
+        "renewal_fund_U": 17935292.595891178,
+        "scope": "Physical upkeep, stated operating services and major replacement provision, including regional operating share; household/social-service/debt costs separate."
       }
     },
     {

@@ -20,7 +20,7 @@ The budget includes the full initial regional infrastructure requirement attribu
 
 The supplier network beyond the region is assumed to accept orders. Its delivered prices recover the attributable cost of manufacture, freight and controlled capture, while the dedicated power allowance buys the programme's required supply capacity. Building a civilization-wide transport, volatile extraction or orbital power industry from today's starting point is outside this clock and bill. If those services are unavailable, their development becomes an additional predecessor whose cost and duration are not established here. The finished Open Moon's atmosphere, seas, global protection programme and complete orbital array are separate projects.
 
-The monetary total covers construction and initial inventories. Resident consumption, migration fares, financing and long-vacuum operation and replacement require continuing budgets. Services already supporting occupied towns must be funded while the rest are built. Reusable factories and utilities continue to support the subsequent programme, with no assumed resale receipt reducing the first-100 bill.
+The [annual maintenance account](maintenance.md) now estimates recurring physical upkeep, operating supplies and component renewal alongside this construction bill. The monetary total covers construction and initial inventories. Resident consumption, migration fares, financing and long-vacuum operation and replacement require continuing budgets. Services already supporting occupied towns must be funded while the rest are built. Reusable factories and utilities continue to support the subsequent programme, with no assumed resale receipt reducing the first-100 bill.
 
 ## Local material, imported material and conservation
 
