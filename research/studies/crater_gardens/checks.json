@@ -1,0 +1,64 @@
+{
+  "schema": "terluna.research.crater-gardens-checks/1",
+  "date": "2026-11-12",
+  "branch": "domain/provisioning",
+  "base_commit": "1ad87d46",
+  "scope": "First published-catalogue census, architectural floor-space scenarios and broad regional exclusions.",
+  "tests": {
+    "study": {
+      "command": "python -m pytest research/studies/crater_gardens -q",
+      "passed": 7,
+      "seconds": 3.34
+    },
+    "repository": {
+      "command": "make check",
+      "result": "PASS",
+      "python_passed": 5219,
+      "python_skipped": 31,
+      "python_warnings": 17,
+      "javascript_passed": 191,
+      "layer_check": "PASS",
+      "calendar": "PASS",
+      "provenance": "PASS",
+      "ensemble_workspace_integrity": "PASS",
+      "elapsed_seconds": 915.46,
+      "maximum_resident_KiB": 2658824,
+      "virtual_memory_cap_GiB": 12,
+      "numerical_threads": 1,
+      "log": "/media/projectspace/terluna-research/crater-settlements/study-make-check.log"
+    },
+    "settle": {
+      "result": "nothing stale; rebuilt 0, rebound 0",
+      "log": "/media/projectspace/terluna-research/crater-settlements/study-settle.log"
+    }
+  },
+  "numerical_controls": [
+    "Independent sum of five annular building strips and diameter-squared population scaling.",
+    "Every adopted rounded population lies within 2.5 percent of its unrounded floor-space calculation.",
+    "Pole, antimeridian and pixel-boundary water-cell controls.",
+    "Bilinear climate sampling against an analytic field and its periodic longitude seam.",
+    "Unsorted synthetic catalogue rows, inclusive diameter caps, missing depth and changed-input rejection.",
+    "Depth, source quality, rainfall, temperature and water exclusion boundaries.",
+    "The exported candidate list reproduces stage totals and independently summed floor-space populations."
+  ],
+  "source_checks": {
+    "published_rows": 10699651,
+    "csv_rows_read": 10699651,
+    "archive_sha256": "cd6d4d3e9d36c2329005966355dda1165af5e999ddb27d69c0ba3021add3d6e5",
+    "csv_crc32": "196bdeb0",
+    "archive_integrity": "Complete CSV streamed to EOF; ZIP CRC and the recorded archive SHA-256 verified.",
+    "source_reading": "Publisher abstract and availability statement, official dataset README, CSV header and records. Full article methods remain unread.",
+    "field_difference": "The README describes three extra fields absent from the twelve-column full CSV. The calculation uses present fields and retains the secondary flag without a cut."
+  },
+  "evidence": "Numerical and software verification of a count on published detections and modelled regional masks. Local site suitability and engineering remain to be assessed.",
+  "editorial": {
+    "purpose": "Give the project author and future contributors a reproducible first terrain inventory against the adopted settlement design.",
+    "voice": "Technical report, with adopted choices, model outputs and enclosure proposals distinguished.",
+    "review": "Read the complete new report, design brief and added synthesis passages in context against the common, public/professional and scholarly profiles; verified table values against the saved product. Markdown prose uses one paragraph per line."
+  },
+  "remaining": [
+    "Full reading of the original crater-catalogue methods and an independent catalogue comparison.",
+    "Finer rim and lake-level profiles, estate spacing, local water supply, foundations, access and heritage evaluation.",
+    "Pressure-envelope structure, shielding, anchors and failure containment for vacuum-era enclosures."
+  ]
+}

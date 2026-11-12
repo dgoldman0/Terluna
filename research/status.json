@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08",
+  "updated": "2026-11-12",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -793,7 +793,7 @@
     },
     {
       "topic": "habitation",
-      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28; reviewed_against_main_and_the_other_branches_2026-10-08; branch_closed_merge_waits_for_the_joint_integration; inhabited_volume_requirement_screen_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; ways_of_living_settings_light_air_hazards_and_sky_town_drift_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_tubes_and_highland_towers_2026_10_11; low_gravity_design_note_guards_stairs_handholds_ramps_movement_halls_2026_10_17",
+      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28; reviewed_against_main_and_the_other_branches_2026-10-08; branch_closed_merge_waits_for_the_joint_integration; inhabited_volume_requirement_screen_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; ways_of_living_settings_light_air_hazards_and_sky_town_drift_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_tubes_and_highland_towers_2026_10_11; low_gravity_design_note_guards_stairs_handholds_ramps_movement_halls_2026_10_17; crater_garden_design_and_population_adopted_2026_11_12; first_catalogue_count_200_1000m_with_published_depths_and_broad_water_climate_exclusions",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
@@ -831,7 +831,12 @@
         "studies/land_cities/results/land_cities.json",
         "../habitation/low_gravity/README.md",
         "../habitation/low_gravity/movement.py",
-        "../habitation/low_gravity/results/low_gravity.json"
+        "../habitation/low_gravity/results/low_gravity.json",
+        "../habitation/crater_gardens/README.md",
+        "../habitation/crater_gardens/design.json",
+        "studies/crater_gardens/README.md",
+        "studies/crater_gardens/results/first_count.json",
+        "studies/crater_gardens/checks.json"
       ],
       "unresolved": [
         "supported floor area and mass",
@@ -863,7 +868,26 @@
         "lava-tube cities as lasting places: daylight by heliostats and light guides, fans for air, membranes and pumps against the water table, quakes near young scarps; highland towers: wind-led frames with anchored windward legs from about 400 storeys, heat and daylight capping density (studies/land_cities)",
         "low-gravity architecture (habitation/low_gravity, 2026-10-17): guards, stairs, handholds, ramps and halls for moving derived from the shared gravity, with the guard bands, the guard's form, the stairs, landings, ramps and halls as design choices for the author's review; open are human-factors tests in low gravity, the take-off speeds people use (the same leg work would carry jumps up to about twice the heights taken), the guard for young children beside long drops (2.8-3.9 m by the energy rule, or play kept back), children's jumps and grips, how far a tumbling body turns in a fall six times as long, and the two lower balustrades in the summit's ring 0 section"
       ],
-      "next_session_task": "The branch merged in the joint integration of 2026-10-08, where its four studies were rerun with the corrected climate products, ring_equator and main's drainage and sunlight, and their READMEs and the metropolis brief brought to the new numbers (research/integration). Next, in an order for the author to choose (studies/infrastructure_review, section 7; research/plan.md): the crown as a lightning conductor (the joint synthesis's screen, atmosphere/electricity/tower.py, puts it past the upward leader's inception about a tenth of the time) and lightning protection for its berths; the chosen form's own programme for the crown's traffic and berths; the frame resized with a design gust that varies with height; the long-haul class and the crown's wind and wake; the sky boats' traffic system with storms and the night."
+      "next_session_task": "The branch merged in the joint integration of 2026-10-08, where its four studies were rerun with the corrected climate products, ring_equator and main's drainage and sunlight, and their READMEs and the metropolis brief brought to the new numbers (research/integration). Next, in an order for the author to choose (studies/infrastructure_review, section 7; research/plan.md): the crown as a lightning conductor (the joint synthesis's screen, atmosphere/electricity/tower.py, puts it past the upward leader's inception about a tenth of the time) and lightning protection for its berths; the chosen form's own programme for the crown's traffic and berths; the frame resized with a design gust that varies with height; the long-haul class and the crown's wind and wake; the sky boats' traffic system with storms and the night.",
+      "crater_gardens": {
+        "date": "2026-11-12",
+        "state": "first_catalogue_count_complete",
+        "branch": "domain/provisioning",
+        "catalogue": "LUC-GRAS200, version 1.0.0, 10,699,651 source records",
+        "selected_candidates": {
+          "200_300m_proportional_relief": 249677,
+          "300_500m_proportional_relief": 280486,
+          "500_1000m_depth_40_70m": 372128
+        },
+        "evidence": "Published detections and depth estimates under source-quality, coarse standing-water and regional climate cuts; architectural floor-space population scenarios.",
+        "open": "Local terrain and estate spacing, the lake level and water supply, foundations and access, heritage evaluation, and the vacuum-era pressure envelope. The initial 20,000–100,000-settlement comparison retains its assumed usable fraction.",
+        "smaller_crater_construction_phase_comparison": {
+          "proportional_relief_and_source_quality": 1480315,
+          "also_outside_projected_waters": 995649,
+          "also_passing_future_garden_climate": 530163,
+          "meaning": "The vacuum-era terrain comparison starts before the future water and rainfall cuts; the latter describe later Open Moon conditions. Enclosure engineering remains open."
+        }
+      }
     },
     {
       "topic": "engineering",

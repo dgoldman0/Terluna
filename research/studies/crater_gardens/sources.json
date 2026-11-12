@@ -1,0 +1,45 @@
+{
+  "schema": "terluna.research.sources/1",
+  "scope": "Bounded source admission for a first diameter-and-depth census, with no review of enclosure engineering.",
+  "sources": [
+    {
+      "id": "luc_gras200",
+      "title": "LUC-GRAS200: A Global Lunar Crater Catalog at Sub-Kilometer Scale–Construction, Validation and Spatial Characteristics",
+      "doi": "10.1029/2025JE009551",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025JE009551",
+      "data_url": "https://moon.bao.ac.cn/Moon/LUC-GRAS200.jsp",
+      "dataset_doi": "10.12350/CLPDS.GRAS.CE2.LUC-GRAS200.vA",
+      "read": "Publisher abstract, plain-language summary and data-availability statement; official README and downloaded CSV header and initial records. Full paper methods have not been read.",
+      "use": "Positions, diameter, positive rim-to-floor depth, detection confidence and resolution flags in the 200–1000 m band.",
+      "limits": "Published automated detections and DEM-derived relief; quality classes carry source uncertainty. The downloaded full CSV contains twelve fields, while its README also lists three scores/labels absent from this release. Only fields present in the CSV are used; the secondary flag is retained without filtering."
+    },
+    {
+      "id": "wang2021",
+      "title": "An Improved Global Catalog of Lunar Impact Craters (≥1 km) With 3D Morphometric Information and Updates on Global Crater Analysis",
+      "doi": "10.1029/2020JE006728",
+      "url": "https://zenodo.org/records/4983248",
+      "read": "Publisher description and repository metadata in the preceding planning discussion.",
+      "use": "Coverage comparison.",
+      "limits": "The released catalogue starts at 1 km and supplies essentially no coverage within the adopted 500–1000 m range; it is not the census input."
+    },
+    {
+      "id": "lu6m371tgt",
+      "title": "From the Moon to Mercury: Release of Global Crater Catalogs Using Multimodal Deep Learning for Crater Detection and Morphometric Analysis",
+      "doi": "10.3390/rs17193287",
+      "url": "https://www.mdpi.com/2072-4292/17/19/3287",
+      "data_url": "https://doi.org/10.6084/m9.figshare.30188149.v1",
+      "read": "Depth-extraction equations and data-availability statement; Figshare version-1 file metadata and licence.",
+      "use": "An available alternative covering small craters with depth estimates.",
+      "limits": "Its 673 MB archive was not downloaded. The selected LUC-GRAS200 release covers the full requested 200–1000 m range with explicit depth and quality fields."
+    },
+    {
+      "id": "vacuum_enclosures",
+      "title": "Supplied discussion of vacuum-era pressure enclosures",
+      "file": "/media/projectspace/terluna-research/crater-settlements/reference/vacuum_enclosures_discussion.txt",
+      "sha256": "c779a1d09f3f9f4a0718be17654e06e5ca6a5d38ca3c71e30c06b982ae22ed7a",
+      "read": "Complete supplied text.",
+      "use": "Motivates separate 200–300 m and 300–500 m comparison bands.",
+      "limits": "Engineering proposals and source claims awaiting their own review; pressure, material allowable, shielding and roof spans are outside this census."
+    }
+  ]
+}

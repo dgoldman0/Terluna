@@ -1,0 +1,505 @@
+{
+  "schema": "terluna.research.crater-gardens/1",
+  "evidence": "A streamed count of published crater detections under adopted size and floor-space assumptions, published rim-to-floor depth estimates, source quality classes, a coarse standing-water mask and regional climate means. Candidate counts precede terrain, water-level, foundation, access, heritage, spacing and services assessment.",
+  "reading_rule": "Counts retain source detections once each. The reference selection uses diameter 500\u20131000 m inclusive, depth 40\u201370 m inclusive, high or medium detection confidence, resolution flag 0, a dry centre cell, mean ground temperature 283.15\u2013308.15 K and rain at least 1 mm/day. Depth is a proxy for the representative bowl relief; lake level and bed shaping are open. The 200\u2013300 m and 300\u2013500 m comparison bands use scaled relief (40/750 to 70/750 of diameter) for their selected CSV entries; all bands also retain counts under the same absolute depth cuts and with every positive depth. Bands are lower-inclusive and upper-exclusive except for the 1000 m upper cap. Candidate CSV coordinates remain in today's frame; the climate product was carried back to that frame by its producer. Population sums are architectural capacity scenarios.",
+  "criteria": {
+    "diameter_groups_m": {
+      "200_300": [
+        200,
+        300
+      ],
+      "300_500": [
+        300,
+        500
+      ],
+      "500_1000": [
+        500,
+        1000
+      ]
+    },
+    "depth_windows_m": {
+      "reference": [
+        40.0,
+        70.0
+      ],
+      "broader": [
+        30.0,
+        100.0
+      ]
+    },
+    "scaled_depth_to_diameter": [
+      0.05333333333333334,
+      0.09333333333333334
+    ],
+    "rain_thresholds_mm_day": [
+      0.5,
+      1.0,
+      2.0
+    ],
+    "mean_ground_temperature_K": [
+      283.15,
+      308.15
+    ]
+  },
+  "catalogue": {
+    "csv_bytes": 1278351288,
+    "csv_crc32": "196bdeb0",
+    "header": [
+      "crater_id",
+      "latitude",
+      "longitude",
+      "diameter_m",
+      "depth_m",
+      "rim_height_m",
+      "slope_mean_deg",
+      "slope_max_deg",
+      "d_D_ratio",
+      "confidence_level",
+      "secondary_flag",
+      "flag_resolution_boundary"
+    ],
+    "catalogue_rows": 10699651,
+    "diameter_band_rows": 8886558
+  },
+  "counts": {
+    "200_300": {
+      "positive_measured_depth": 2550759,
+      "confidence_high": 2169591,
+      "confidence_medium": 326227,
+      "confidence_low": 54941,
+      "other_confidence": 0,
+      "resolution_flag_0": 2197406,
+      "resolution_flag_1": 143827,
+      "resolution_flag_2": 209526,
+      "dry_centres_all_depths": 1684097,
+      "diameter_band_rows": 2550759,
+      "reference_depth": 207200,
+      "reference_confidence": 207146,
+      "reference_quality": 189912,
+      "reference_outside_common_water": 167140,
+      "reference_dry": 143486,
+      "reference_ground_temperature": 143486,
+      "reference_rain_0.5": 113668,
+      "reference_rain_1": 89168,
+      "reference_rain_2": 55846,
+      "reference_all_quality_rain_1": 89179,
+      "reference_high_only_rain_1": 47384,
+      "broader_depth": 510048,
+      "broader_confidence": 509991,
+      "broader_quality": 458966,
+      "broader_outside_common_water": 400823,
+      "broader_dry": 347465,
+      "broader_ground_temperature": 347465,
+      "broader_rain_0.5": 267006,
+      "broader_rain_1": 208322,
+      "broader_rain_2": 129827,
+      "broader_all_quality_rain_1": 208337,
+      "broader_high_only_rain_1": 163040,
+      "scaled_depth": 845423,
+      "scaled_confidence": 845421,
+      "scaled_quality": 696058,
+      "scaled_outside_common_water": 554104,
+      "scaled_dry": 479983,
+      "scaled_ground_temperature": 479983,
+      "scaled_rain_0.5": 340521,
+      "scaled_rain_1": 249677,
+      "scaled_rain_2": 141926,
+      "scaled_all_quality_rain_1": 249682,
+      "scaled_high_only_rain_1": 245494,
+      "all_measured_depth": 2550759,
+      "all_measured_confidence": 2495818,
+      "all_measured_quality": 2146563,
+      "all_measured_outside_common_water": 1652661,
+      "all_measured_dry": 1402534,
+      "all_measured_ground_temperature": 1402534,
+      "all_measured_rain_0.5": 1044751,
+      "all_measured_rain_1": 776762,
+      "all_measured_rain_2": 451969,
+      "all_measured_all_quality_rain_1": 784435,
+      "all_measured_high_only_rain_1": 690212,
+      "selected": 249677,
+      "selected_adjacent_water_cell": 44713,
+      "selected_today_latitude_0_15": 80335,
+      "selected_today_latitude_15_30": 89111,
+      "selected_today_latitude_30_45": 72693,
+      "selected_today_latitude_45_60": 6916,
+      "selected_today_latitude_60_90.01": 622
+    },
+    "300_500": {
+      "positive_measured_depth": 2892722,
+      "confidence_high": 2489188,
+      "confidence_medium": 343826,
+      "confidence_low": 59708,
+      "other_confidence": 0,
+      "resolution_flag_0": 2492596,
+      "resolution_flag_1": 167568,
+      "resolution_flag_2": 232558,
+      "dry_centres_all_depths": 1813607,
+      "diameter_band_rows": 2892722,
+      "reference_depth": 575551,
+      "reference_confidence": 575534,
+      "reference_quality": 502585,
+      "reference_outside_common_water": 424968,
+      "reference_dry": 371279,
+      "reference_ground_temperature": 371279,
+      "reference_rain_0.5": 280465,
+      "reference_rain_1": 216681,
+      "reference_rain_2": 131807,
+      "reference_all_quality_rain_1": 216691,
+      "reference_high_only_rain_1": 205398,
+      "broader_depth": 1148092,
+      "broader_confidence": 1148056,
+      "broader_quality": 989760,
+      "broader_outside_common_water": 822246,
+      "broader_dry": 716158,
+      "broader_ground_temperature": 716158,
+      "broader_rain_0.5": 537975,
+      "broader_rain_1": 412175,
+      "broader_rain_2": 247794,
+      "broader_all_quality_rain_1": 412199,
+      "broader_high_only_rain_1": 375903,
+      "scaled_depth": 942973,
+      "scaled_confidence": 942973,
+      "scaled_quality": 784257,
+      "scaled_outside_common_water": 601674,
+      "scaled_dry": 515666,
+      "scaled_ground_temperature": 515666,
+      "scaled_rain_0.5": 380646,
+      "scaled_rain_1": 280486,
+      "scaled_rain_2": 161126,
+      "scaled_all_quality_rain_1": 280492,
+      "scaled_high_only_rain_1": 275225,
+      "all_measured_depth": 2892722,
+      "all_measured_confidence": 2833014,
+      "all_measured_quality": 2438255,
+      "all_measured_outside_common_water": 1777559,
+      "all_measured_dry": 1498829,
+      "all_measured_ground_temperature": 1498829,
+      "all_measured_rain_0.5": 1133291,
+      "all_measured_rain_1": 840238,
+      "all_measured_rain_2": 489561,
+      "all_measured_all_quality_rain_1": 847871,
+      "all_measured_high_only_rain_1": 755521,
+      "selected": 280486,
+      "selected_adjacent_water_cell": 49718,
+      "selected_today_latitude_0_15": 93387,
+      "selected_today_latitude_15_30": 96526,
+      "selected_today_latitude_30_45": 81141,
+      "selected_today_latitude_45_60": 8800,
+      "selected_today_latitude_60_90.01": 632
+    },
+    "500_1000": {
+      "positive_measured_depth": 3443077,
+      "confidence_high": 3132571,
+      "confidence_medium": 283020,
+      "confidence_low": 27486,
+      "other_confidence": 0,
+      "resolution_flag_0": 2961772,
+      "resolution_flag_1": 162059,
+      "resolution_flag_2": 319246,
+      "dry_centres_all_depths": 2177704,
+      "diameter_band_rows": 3443077,
+      "reference_depth": 1089130,
+      "reference_confidence": 1089129,
+      "reference_quality": 938695,
+      "reference_outside_common_water": 725962,
+      "reference_dry": 626790,
+      "reference_ground_temperature": 626790,
+      "reference_rain_0.5": 476453,
+      "reference_rain_1": 372128,
+      "reference_rain_2": 236368,
+      "reference_all_quality_rain_1": 372129,
+      "reference_high_only_rain_1": 366970,
+      "broader_depth": 2109835,
+      "broader_confidence": 2109834,
+      "broader_quality": 1823475,
+      "broader_outside_common_water": 1398372,
+      "broader_dry": 1204140,
+      "broader_ground_temperature": 1204140,
+      "broader_rain_0.5": 916498,
+      "broader_rain_1": 715470,
+      "broader_rain_2": 454436,
+      "broader_all_quality_rain_1": 715475,
+      "broader_high_only_rain_1": 704323,
+      "scaled_depth": 1161620,
+      "scaled_confidence": 1161620,
+      "scaled_quality": 1004163,
+      "scaled_outside_common_water": 765341,
+      "scaled_dry": 658843,
+      "scaled_ground_temperature": 658843,
+      "scaled_rain_0.5": 502138,
+      "scaled_rain_1": 390404,
+      "scaled_rain_2": 246092,
+      "scaled_all_quality_rain_1": 390405,
+      "scaled_high_only_rain_1": 383887,
+      "all_measured_depth": 3443077,
+      "all_measured_confidence": 3415591,
+      "all_measured_quality": 2940990,
+      "all_measured_outside_common_water": 2130052,
+      "all_measured_dry": 1805685,
+      "all_measured_ground_temperature": 1805685,
+      "all_measured_rain_0.5": 1382246,
+      "all_measured_rain_1": 1074886,
+      "all_measured_rain_2": 681555,
+      "all_measured_all_quality_rain_1": 1078932,
+      "all_measured_high_only_rain_1": 998361,
+      "selected": 372128,
+      "selected_adjacent_water_cell": 70986,
+      "selected_today_latitude_0_15": 152302,
+      "selected_today_latitude_15_30": 129605,
+      "selected_today_latitude_30_45": 79708,
+      "selected_today_latitude_45_60": 9921,
+      "selected_today_latitude_60_90.01": 592
+    }
+  },
+  "context": {
+    "schema": "terluna.research.crater-gardens-context/1",
+    "frame": "today",
+    "evidence": "The atlas's common-level water at 4 pixels/degree, repeated categorically onto the 16 pixels/degree rain-fed lake grid. The latter is recomputed with the same corrected design climate used for the regional rain and mean ground-temperature exclusions.",
+    "reading_rule": "water has bit 1 for common-level water and bit 2 for rain-fed lakes; zero means neither mask covers the cell. Water rows run north to south, columns east from 0 degrees. Climate fields retain their own Gaussian grid and are sampled bilinearly. The common-water mask resolves about 7.6 km and the lakes about 1.9 km at the equator.",
+    "climate": {
+      "run": "A28R_301k_design_l15_snow_s938_turned_refit_precession",
+      "years": [
+        10,
+        49
+      ],
+      "frame": "today",
+      "carried": {
+        "method": "each cell of today's grid takes the turned field at its turned place, bilinear on the turned grid; the Sun composites are left out",
+        "climatology": {
+          "file": "climatology_A28R_301k_design_l15_snow_s938_turned_refit_precession_y10-49.npz",
+          "sha256": "ab75379cb66fb2d524e671e21ccf6821424338bc79d790a4fe1c86b7a75fd347"
+        },
+        "orientation": {
+          "source": "domain/geology@45c3d817:geology/results/moon_orientation.json",
+          "sha256": "8d71fd350ca4c6cd2e1c6766478543708b537a51c62f42d6a4bafb907a446ba3"
+        },
+        "producer": {
+          "climate/gcm/turned_climatology.py": "454374ea179ba6bd",
+          "climate/gcm/turned.py": "0048cd6ac13ab7e9"
+        }
+      }
+    },
+    "lake_summary": {
+      "bodies": 32170,
+      "closed_bodies": 4048,
+      "area_share": 0.0977,
+      "volume_km3": 2643774,
+      "median_depth_m": 313,
+      "largest": [
+        {
+          "centre": [
+            -4.33,
+            -157.69
+          ],
+          "area_km2": 140652,
+          "volume_km3": 400210,
+          "max_depth_m": 6670,
+          "level_above_sea_m": 7849,
+          "spills": true
+        },
+        {
+          "centre": [
+            0.18,
+            -128.25
+          ],
+          "area_km2": 124458,
+          "volume_km3": 144468,
+          "max_depth_m": 4723,
+          "level_above_sea_m": 5052,
+          "spills": false
+        },
+        {
+          "centre": [
+            25.18,
+            -170.52
+          ],
+          "area_km2": 51560,
+          "volume_km3": 73922,
+          "max_depth_m": 5054,
+          "level_above_sea_m": 5065,
+          "spills": false
+        },
+        {
+          "centre": [
+            14.63,
+            -160.33
+          ],
+          "area_km2": 31183,
+          "volume_km3": 20029,
+          "max_depth_m": 4400,
+          "level_above_sea_m": 5464,
+          "spills": false
+        },
+        {
+          "centre": [
+            18.61,
+            -148.77
+          ],
+          "area_km2": 29584,
+          "volume_km3": 76751,
+          "max_depth_m": 4969,
+          "level_above_sea_m": 7303,
+          "spills": true
+        },
+        {
+          "centre": [
+            -14.5,
+            -152.71
+          ],
+          "area_km2": 29279,
+          "volume_km3": 60820,
+          "max_depth_m": 5348,
+          "level_above_sea_m": 6070,
+          "spills": true
+        },
+        {
+          "centre": [
+            -26.07,
+            -132.23
+          ],
+          "area_km2": 25373,
+          "volume_km3": 27586,
+          "max_depth_m": 4515,
+          "level_above_sea_m": 4638,
+          "spills": true
+        },
+        {
+          "centre": [
+            13.57,
+            -170.91
+          ],
+          "area_km2": 22554,
+          "volume_km3": 31383,
+          "max_depth_m": 4661,
+          "level_above_sea_m": 5285,
+          "spills": true
+        },
+        {
+          "centre": [
+            -17.2,
+            -141.24
+          ],
+          "area_km2": 21345,
+          "volume_km3": 34507,
+          "max_depth_m": 4973,
+          "level_above_sea_m": 5111,
+          "spills": true
+        },
+        {
+          "centre": [
+            -8.8,
+            -142.26
+          ],
+          "area_km2": 21172,
+          "volume_km3": 11073,
+          "max_depth_m": 3215,
+          "level_above_sea_m": 6519,
+          "spills": true
+        },
+        {
+          "centre": [
+            -26.34,
+            -125.32
+          ],
+          "area_km2": 19334,
+          "volume_km3": 13736,
+          "max_depth_m": 3619,
+          "level_above_sea_m": 4669,
+          "spills": true
+        },
+        {
+          "centre": [
+            14.63,
+            -142.37
+          ],
+          "area_km2": 18268,
+          "volume_km3": 10745,
+          "max_depth_m": 3029,
+          "level_above_sea_m": 6368,
+          "spills": false
+        }
+      ]
+    },
+    "sources": {
+      "/home/kir/Documents/Projects/terluna/geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693",
+      "/home/kir/Documents/Projects/terluna/climate/gcm/products/climatology_A28R_301k_design_l15_snow_s938_turned_refit_precession_y10-49_today.npz": "a88c1ff4059a75e1302d19b9ec1c9a5c86bbe6faa36e35963e040313448dd864",
+      "/media/projectspace/terluna-research/crater-settlements/hydrology/products/drainage_28pct_16ppd.npz": "a2022c336b17f75a51e7bc410089ccfdb37f8fadbdd1fa1796747d52268a4572"
+    },
+    "hydrology_producer": {
+      "domain": "geography",
+      "files": {
+        "geography/drainage.py": "2c7380850863ba14",
+        "geography/topography.py": "228e08f79efca868",
+        "geography/atlas.py": "e5ce62df01c94097"
+      }
+    },
+    "producer": {
+      "file": "research/studies/crater_gardens/prepare.py",
+      "sha256": "4dbc8c8f815615efc55e24cc7b06cf2b022871fe799bb7f9f2c0c7a5ce408acc",
+      "source_commit": "59dcda1c6ad0194c7aea4e091b2dd59b06694c6a"
+    }
+  },
+  "population_by_diameter": {
+    "200": {
+      "spacious": 141.372,
+      "representative": 353.429,
+      "fuller": 605.879
+    },
+    "300": {
+      "spacious": 318.086,
+      "representative": 795.216,
+      "fuller": 1363.227
+    },
+    "500": {
+      "spacious": 883.573,
+      "representative": 2208.932,
+      "fuller": 3786.741
+    },
+    "750": {
+      "spacious": 1988.039,
+      "representative": 4970.098,
+      "fuller": 8520.168
+    },
+    "1000": {
+      "spacious": 3534.292,
+      "representative": 8835.729,
+      "fuller": 15146.965
+    }
+  },
+  "design_source": "/home/kir/Documents/Projects/terluna/habitation/crater_gardens/design.json",
+  "summed_floor_space_population": {
+    "200_300": {
+      "spacious": 55526126,
+      "representative": 138815315,
+      "fuller": 237969111
+    },
+    "300_500": {
+      "spacious": 149098074,
+      "representative": 372745185,
+      "fuller": 638991745
+    },
+    "500_1000": {
+      "spacious": 686710674,
+      "representative": 1716776684,
+      "fuller": 2943045744
+    }
+  },
+  "candidates": {
+    "path": "/media/projectspace/terluna-research/crater-settlements/candidates.csv.gz",
+    "rows": 902291,
+    "sha256": "ede1a1fbbcde20dadaf90a1ff08748fd252fe12f0690598c8583cdb910543ad2"
+  },
+  "producer": {
+    "files": {
+      "research/studies/crater_gardens/count.py": "c10936d5924f0f83118c911f87e72cc46fb620e5a6d6b741c1f84a372eb09a66",
+      "research/studies/crater_gardens/inputs.json": "85745970fb35a9d3ceb74ca0985c4c1cb637def0e2df6d002771d43ef4bd65f4"
+    },
+    "inputs": {
+      "/media/projectspace/terluna-research/crater-settlements/inputs/LUC-GRAS200_full.zip": "cd6d4d3e9d36c2329005966355dda1165af5e999ddb27d69c0ba3021add3d6e5",
+      "/media/projectspace/terluna-research/crater-settlements/context.npz": "49202d847d6c79726620638a2d8ebdf240f22760bb538d94954ae976d38f1835",
+      "habitation/crater_gardens/design.json": "b232179b23261d67fe59137f9a3a96f4cc749d402112f378d89877616825c6ff"
+    }
+  },
+  "seconds": 64.379
+}
