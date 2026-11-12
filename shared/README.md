@@ -68,8 +68,61 @@ separate research inputs.
 | immersion bake | `immersion/bake/` | shared, all of immersion, domains |
 
 Nothing imports `archive/`. [check_layers.py](check_layers.py) enforces the table
-for Python imports and JavaScript import/require/URL specifiers; `make check`
-runs it.
+for Python imports and JavaScript import/require/URL specifiers. Local checks
+run it when source files change; the full suite always runs it.
+
+## Checks
+
+`make check` verifies the affected work before a local commit. It compares the
+working tree with `HEAD`, including staged, unstaged and untracked files. It
+checks changed JSON, TOML and Python syntax and the tracked diff's whitespace,
+then runs the selected tests and validators. `make check-plan` prints the
+commands and dependency paths without running them. A clean tree produces no
+test selection; use a base revision when checking work already committed:
+
+```sh
+make check-plan CHECK_ARGS='--base main'
+make check CHECK_ARGS='--base <revision-before-the-work>'
+make check CHECK_ARGS='--include research/runs/example/forcing.json'
+make check-full
+```
+
+[check_changed.py](check_changed.py) follows imports and literal file references
+through the current source and the paths in product metadata, including paths
+used as JSON keys. It follows downstream consumers transitively. A reference
+inside a single Python test can select that test alone; a module-level input
+or import selects its test file. Test fixtures in `conftest.py` affect the tests
+below them. Uncovered code or data changes fall back to their domain or study's
+configured tests. Changes to shared scientific foundations, Python collection
+configuration or unrecognized repository-wide inputs request the full suite.
+
+The selector reads source without importing models or regenerating products.
+It caches dependency extraction under `.pytest_cache/check_changed/` and hashes
+the source bytes again on each invocation; changes to the inventory or selector
+invalidate the resolved graph. Explanatory citations in prose and JSON records
+do not become input dependencies; actual file reads and pinned identities do.
+It cannot establish every dependency assembled at runtime, supplied by an
+external program or kept outside Git. Review its printed scope and include
+known affected inputs or run the relevant explicit test command when those
+dependencies change. A reported lack of configured coverage requires the
+artifact's documented checks and inspection. A passing selected check reports
+only its selected scope. Product freshness tests can require a separate
+product rebuild; selecting tests never performs that rebuild automatically.
+
+`make check-full` preserves the complete configured suite. Use it for substantial
+integrations, changes with unbounded effects and explicit full verification.
+Its component targets also remain available: `test-python`, `test-js`,
+`test-immersion`, `test-column`, `test-light-transport`, `test-column-viewer`,
+`test-calendar`, `check-layers`, `check-provenance` and `check-ensemble`.
+The runners use one numerical thread by default and launch checks sequentially.
+
+Successful results can cover later local commits if their relevant code, tests,
+inputs, installed dependencies and environment remain unchanged. Record what
+ran and reuse that evidence when only an unrelated record changes. The tool
+does not cache test successes: ignored scientific inputs can change independently
+of Git, so an unchanged commit identifier is insufficient evidence for reuse.
+For selection audits, `python3 shared/check_changed.py --json --files <paths>`
+prints a plan for explicitly named paths instead of the Git diff.
 
 ## Data products
 
