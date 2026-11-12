@@ -1,0 +1,95 @@
+{
+  "schema": "terluna.research.vacuum-crater-checks/1",
+  "date": "2026-11-12",
+  "programme_commit": "fbeaae1c",
+  "study_base_commit": "4f93e90f",
+  "unit_tests": {
+    "result": "PASS",
+    "passed": 15,
+    "seconds": 0.25
+  },
+  "export_verification": {
+    "path": "results/verification.json",
+    "result": "PASS",
+    "source_matched_rows": 222163,
+    "initial_rows": 8886,
+    "estate_pairs_checked": 49911
+  },
+  "run": {
+    "seconds": 27.82,
+    "max_resident_KiB": 230080,
+    "numerical_workers": 1,
+    "address_space_cap_GiB": 4
+  },
+  "product_consistency": {
+    "result": "PASS",
+    "rebuilt": 0,
+    "rebound": 0
+  },
+  "full_make_check": {
+    "result": "PASS",
+    "python_passed": 5234,
+    "python_skipped": 31,
+    "javascript_passed": 191,
+    "wall_seconds": 983.51,
+    "max_resident_KiB": 2671276,
+    "numerical_threads": 1,
+    "address_space_cap_GiB": 12,
+    "other_checks": [
+      "layer boundaries",
+      "calendar",
+      "pinned provenance",
+      "ensemble workspace"
+    ],
+    "log_sha256": "75601ac93ca154c4e63201fc733f1266f838bc11306c0d89599c6ffc6e7771dc"
+  },
+  "reviews": {
+    "engineering_report.md": {
+      "path": "/media/projectspace/terluna-research/session-tools/agents/vacuum_crater_buildout/engineering_report.md",
+      "sha256": "d10a1a7d2f5d6f9ebbde8809169b5fd4e000f1bdf5215de1cb40b1e9167503de"
+    },
+    "final_engineering_review.md": {
+      "path": "/media/projectspace/terluna-research/session-tools/agents/vacuum_crater_buildout/final_engineering_review.md",
+      "sha256": "b17b12f6065d96dd7aba363c081b3c8e5ba3b8faf7eba48d94ad624e07b1b26a"
+    },
+    "materials_addendum.md": {
+      "path": "/media/projectspace/terluna-research/session-tools/agents/vacuum_crater_buildout/materials_addendum.md",
+      "sha256": "27e6e382fba8609ac2db84b24eb31f067c85131c5371beab6e437652e260b8c8"
+    },
+    "review_record.md": {
+      "path": "/media/projectspace/terluna-research/session-tools/agents/vacuum_crater_buildout/review_record.md",
+      "sha256": "3e0d596d90743c55fe19b610814d8d31973680719e9877bd473cd9e3ae6eebd1"
+    },
+    "siting_implementation_review.md": {
+      "path": "/media/projectspace/terluna-research/session-tools/agents/vacuum_crater_buildout/siting_implementation_review.md",
+      "sha256": "bfa65a4844bea9b5c233ec7595dfcdc4939a17770836c1f95172f6948bbad767"
+    },
+    "siting_report.md": {
+      "path": "/media/projectspace/terluna-research/session-tools/agents/vacuum_crater_buildout/siting_report.md",
+      "sha256": "0e6cb4e28b5545bd6534f024d9cdd02ceb2d9d9b4e02c32913433daea7e8e1fc"
+    }
+  },
+  "review_scope": "Two bounded model-assisted reviews of engineering and siting, followed by a materials addendum, implementation review and substantive technical/editorial reading. Original reports retained; subsequent architectural direction governs the delivered study.",
+  "not_performed": [
+    "Local terrain and heritage approval",
+    "Complete structural, foundation and pressure-barrier design",
+    "Radiation transport and daylight design",
+    "Vacuum agriculture and complete heat balance",
+    "Terrain routing, service capacity and redundancy",
+    "Empirical lifetime, material allowable and habitation validation"
+  ],
+  "logs_directory": "/media/projectspace/terluna-research/vacuum-crater-buildout/checks",
+  "programme_make_check": {
+    "result": "PASS",
+    "python_passed": 5212,
+    "python_skipped": 31,
+    "javascript_passed": 191,
+    "wall_seconds": 887.12,
+    "max_resident_KiB": 2667716
+  },
+  "editorial_reading": {
+    "result": "completed",
+    "scope": "Full report read for design fidelity, evidence state and technical prose; final illumination and effective-allowable wording corrections applied. Catalogue source-field limits and the unequal populations and regional coverage in the transport comparison are explicit.",
+    "delivered_readme_sha256": "e00ae08bc008f4da964d7d48e28d734cbe65d55709f798b88a2f05e2f433af22"
+  }
+}

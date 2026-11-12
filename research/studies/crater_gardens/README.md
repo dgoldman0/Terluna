@@ -2,6 +2,8 @@
 
 This study counts published crater bowls against the [adopted garden-town design](../../../habitation/crater_gardens/README.md): a built ring 500–1,000 m across, with a lake, arcaded terraces and gardens, holding about 5,000 residents in the representative 750 m town. The further 200–500 m comparison examines smaller versions and possible sites for vacuum-era enclosures. The census measures available terrain under stated exclusions; the floor-space calculation measures architectural population.
 
+The subsequent [vacuum-to-open study](../vacuum_crater_buildout/README.md) uses this census for the adopted 2.5% eventual and 0.1% initial buildout fractions across all 200–1,000 m craters. Its initial 500–1,000-person communities occupy one contiguous dome and retain the future-water and climate requirements from the beginning. The earlier abundance scenario below remains the comparison made by this first census.
+
 ## Results
 
 The catalogue contains **3,443,077 detections in the adopted 500–1,000 m band**. Of these, **2,177,704 centres fall outside the coarse standing-water masks**, before depth and quality exclusions. The reference depth, source quality, water and regional climate criteria retain **372,128 candidates**. The initial 20,000–100,000-settlement scenario would use about **5–27% of this candidate set** after detailed terrain, spacing, water-supply and engineering assessment.

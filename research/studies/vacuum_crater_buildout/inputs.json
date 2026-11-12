@@ -1,0 +1,36 @@
+{
+  "schema": "terluna.research.vacuum-crater-inputs/1",
+  "inputs": {
+    "census": {
+      "path": "research/studies/crater_gardens/results/first_count.json",
+      "sha256": "d6ad91f11a50daf02650e5bd4afb7cd5d888b2c1eddf4bce16e358c6944a7d09",
+      "bytes": 17311
+    },
+    "plan": {
+      "path": "habitation/crater_gardens/buildout.json",
+      "sha256": "2b0fff4428956805305b1f4883023aa58819cf7fe06457cefec55900738504d0",
+      "bytes": 2173
+    },
+    "design": {
+      "path": "habitation/crater_gardens/design.json",
+      "sha256": "b232179b23261d67fe59137f9a3a96f4cc749d402112f378d89877616825c6ff",
+      "bytes": 2125
+    },
+    "candidates": {
+      "path": "/media/projectspace/terluna-research/crater-settlements/candidates.csv.gz",
+      "sha256": "ede1a1fbbcde20dadaf90a1ff08748fd252fe12f0690598c8583cdb910543ad2",
+      "bytes": 27971674
+    },
+    "context": {
+      "path": "/media/projectspace/terluna-research/crater-settlements/context.npz",
+      "sha256": "49202d847d6c79726620638a2d8ebdf240f22760bb538d94954ae976d38f1835",
+      "bytes": 526448
+    },
+    "food": {
+      "path": "research/studies/food_systems/results/food_systems.json",
+      "sha256": "57fe8726cead4cd498043f9516bbf36a20505cf919b119dfce39784bf01f37d9",
+      "bytes": 501224
+    }
+  },
+  "reading_rule": "All inputs are pinned; the candidate and context products retain the first census sources. The adopted plan may be read from another checkout only with identical bytes. External catalogue-derived lists remain on the research drive."
+}

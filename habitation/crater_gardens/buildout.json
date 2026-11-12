@@ -1,0 +1,24 @@
+{
+  "schema": "terluna.habitation.crater-buildout-plan/1",
+  "adopted": "2026-11-12",
+  "evidence": "Adopted programme fractions and transition requirements. The fractions set planning targets; they do not measure site feasibility, construction rate or supported population.",
+  "diameter_m": [200, 1000],
+  "denominator": "All catalogue detections in the inclusive 200–1,000 m diameter range, before geometry, water, climate and location exclusions.",
+  "eventual_fraction": 0.025,
+  "initial_vacuum_fraction": 0.001,
+  "rounding": "floor",
+  "initial_sites_are_subset_of_eventual_sites": true,
+  "initial_community_population": [500, 1000],
+  "initial_population_calculation_case": "representative",
+  "initial_enclosure": "One contiguous dome over a complete community, with its eventual lifestyle and layout substantially in place. Subdivision is an option for larger settlements.",
+  "technology_scope": "Existing engineering and materials together with reasonably confident improvements already under development. Record their evidence and distinguish projected component performance from a qualified complete design.",
+  "end_state": "Domeless communities after a sustainable breathable atmosphere is established; remove the pressure enclosures.",
+  "requirements": [
+    "Choose geometry and location for both long vacuum operation and the completed Open Moon.",
+    "Provide fully functional, efficient communities through a potentially long vacuum period, without assuming an opening date.",
+    "Plan travel and freight between communities throughout the airless period.",
+    "Design enclosure structure, services and removal for the changing loads of atmospheric transition."
+  ],
+  "supersedes": "The earlier 20,000–100,000-site abundance scenario as the current buildout target; its assumptions and history remain in design.json and the decisions register.",
+  "reading_rule": "Multiply each fraction by the same size-limited catalogue count and round down. Initial sites belong to the eventual set; the two counts are not additive. Geometry rankings, enclosure construction, operational loads and transport designs require study and site assessment."
+}
