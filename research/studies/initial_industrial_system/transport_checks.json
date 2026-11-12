@@ -1,0 +1,41 @@
+{
+  "schema": "terluna.research.industrial-transport-checks/1",
+  "date": "2026-11-12",
+  "worktree": "/home/kir/Documents/Projects/terluna-provisioning",
+  "base_commit": "e4d22a44",
+  "commands": [
+    {
+      "command": "python -m pytest -q research/studies/initial_industrial_system/test_transport.py",
+      "result": "29 passed"
+    },
+    {
+      "command": "make check",
+      "result": "48 passed; changed-file structural checks and layer check passed; full suite not selected"
+    },
+    {
+      "command": "python /media/projectspace/terluna-research/session-tools/settle.py /home/kir/Documents/Projects/terluna-provisioning",
+      "result": "nothing stale; rebuilt 0, rebound 0"
+    }
+  ],
+  "logs": "/media/projectspace/terluna-research/initial-industrial-system/transport",
+  "review": [
+    "Substantive report reading against result quantities and assumption boundaries",
+    "Rendered comparison image inspected at full size",
+    "Original industrial and settlement products preserved"
+  ],
+  "unperformed": [
+    "Integrated trajectories and dispatch simulation",
+    "Empirical engine, array, depot and manufacturing qualification",
+    "Environmental release and permitted source reserves",
+    "Full repository suite"
+  ],
+  "checked_files": {
+    "research/studies/initial_industrial_system/transport.py": "075271cbc3d177e5f421597ac3437590825f884647ee8222f523abc4101a85fd",
+    "research/studies/initial_industrial_system/transport_inputs.json": "ba335eb4625bef2f5fddeab66964df543f240aa6373153b5356ae08314682d1f",
+    "research/studies/initial_industrial_system/transport_sources.json": "523e0b77352c5296324d57f719130f6bc7fc29374de4a7378a64e446e788745c",
+    "research/studies/initial_industrial_system/results/transport.json": "26f37dcc0c110402ea5d5a23be7338acdaf9501ddd6e4289c9b46053882aa507",
+    "research/studies/initial_industrial_system/test_transport.py": "5d663b868a4328d1e7654f3b9fa6aa55837c89e18a1601edc39277e1c0189d56",
+    "research/studies/initial_industrial_system/plot_transport.py": "948a9eea048b986ef3ab6468d14fdc01b71812e2f611424e691134bac5ff3bac",
+    "research/studies/initial_industrial_system/results/transport.png": "e9480c04589cd17ca5180f7bd41db9d13261bb4433618013ee07abe539c61c44"
+  }
+}

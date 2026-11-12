@@ -1599,7 +1599,7 @@
       "findings": [
         "At the 2041 automation scenario and 3% inflation for fifteen years, reference industrial establishment is 16.2 trillion USD2041 and the industrial/material campaign 51.4 trillion; annual sustaining supply is 1.41 trillion with growth capacity retained.",
         "Local cargo-fleet fabrication lowers establishment to 10.8 trillion USD2041 and the campaign to 37.4 trillion under additional source-metal and manufacturing assumptions.",
-        "131 Mt/year source feed and 25,550 Earth launches/year are rated requirements, not verified capacity. Hydrogen, oxygen, propulsion, industrial replacement and shared-hardware credits are explicitly accounted.",
+        "The original 25,550 Earth launches/year is conditional on Earth-supplied transfer propellant; 66.9% of launch mass is that propellant. The transport extension compares depot refuelling, space-supplied fuel and electric freight with their coupled hardware and renewal costs; no minimum cadence is established.",
         "The matched procurement basket gives about 68 USD2041/U; materially different component ratios prevent blanket conversion of earlier settlement U accounts."
       ],
       "unresolved": [
@@ -1607,7 +1607,13 @@
         "Water recovery, Earth launch capacity and environmental effects, source conservation and nutrient reservations, plume transport and future atmospheric transition.",
         "A unified settlement dollar budget that reprices living services and credits matching supplier purchases; full critical-path and occupation schedule."
       ],
-      "next_session_task": "Qualify candidate source and route requirements; refine water recovery and local cargo-fleet manufacture before integrating the settlement dollar and U accounts."
+      "next_session_task": "Qualify candidate source and route requirements; refine water recovery and local cargo-fleet manufacture before integrating the settlement dollar and U accounts.",
+      "transport_comparison": {
+        "path": "studies/initial_industrial_system/transport.md",
+        "product": "studies/initial_industrial_system/results/transport.json",
+        "state": "conditional comparisons; no architecture adopted",
+        "next": "Trajectory and propulsion qualification, manufacturing localization, water recovery and fleet retirement; carry alternatives into gross/net revenue and resource-horizon accounts."
+      }
     }
   ]
 }

@@ -1,0 +1,47 @@
+{
+  "schema": "terluna.research.industrial-transport-sources/1",
+  "date": "2026-11-12",
+  "scope": "Bounded supplemental primary-source review; earlier industrial source register remains applicable.",
+  "sources": [
+    {
+      "key": "water_hall2024",
+      "url": "https://doi.org/10.1016/j.actaastro.2024.03.043",
+      "archive": {
+        "file": "water_hall2024.pdf",
+        "url": "https://spiral.imperial.ac.uk/server/api/core/bitstreams/ab3884e8-130c-4451-9d20-31b60b8607a9/content",
+        "sha256": "48eb8bbb4b72aadb8ad1a0286cb9fa351259c4053243c7a16b0dd2b611fdf749",
+        "bytes": 2358813,
+        "status": "retrieved"
+      },
+      "coverage": "Abstract, performance definitions, discussion and conclusion. Institutional PDF resolves the earlier publisher-access failure for this comparison.",
+      "supports": "Laboratory operation with bottled O2/H2; reported best point at H:O mass ratio 1:25 has 2130 s anode Isp and 10.1% total efficiency. Neither 2000 s on all supplied water nor 30-50% bus-to-jet efficiency is demonstrated."
+    },
+    {
+      "key": "zero_boiloff2017",
+      "url": "https://ntrs.nasa.gov/citations/20170006481",
+      "archive": {
+        "file": "zero_boiloff2017.pdf",
+        "url": "https://ntrs.nasa.gov/api/citations/20170006481/downloads/20170006481.pdf",
+        "sha256": "ea554c588c423c32cfed913e604b6a4c566050029b7ca744aec6766939fa7e64",
+        "bytes": 625812,
+        "status": "retrieved"
+      },
+      "coverage": "Abstract, system description and conclusion.",
+      "supports": "Ground 125000-litre hydrogen tank with 390 W cooling at 20 K, and over 13 months of testing. No claim of a flight-qualified million-tonne orbital depot or demonstrated model cooling specific power."
+    },
+    {
+      "key": "nasa_sep2024",
+      "url": "https://ntrs.nasa.gov/api/citations/20240011790/downloads/IAC%20NASA%20Progress%20on%20SEP%20Thruster%20prsnt%20rev1.pdf",
+      "coverage": "Indexed qualification-goal passage; not a complete presentation review.",
+      "supports": "12 kW AEPS qualification target of 23000 powered hours. This is a xenon-system goal, not demonstrated water-thruster life; used only as a prospective replaceable-module target."
+    },
+    {
+      "key": "nasa_lunar_transfer2015",
+      "url": "https://ntrs.nasa.gov/citations/20150001297",
+      "coverage": "NTRS abstract.",
+      "supports": "Electric LEO-to-lunar trajectories require departure, eccentric-orbit and lunar-arrival design. The present 6-10 km/s Earth-leg range is an engineering bracket, not a value fitted to this source or a solved trajectory."
+    }
+  ],
+  "archive_root": "/media/projectspace/terluna-research/initial-industrial-system/transport",
+  "price_basis": "All new component and lifetime prices are explicit future engineering assumptions in 2026 purchasing power; no supplier bid or market-price validation."
+}
