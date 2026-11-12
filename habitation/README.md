@@ -96,6 +96,8 @@ The [crater garden settlement brief](crater_gardens/README.md), adopted on 12 No
 
 The [first count](../research/studies/crater_gardens/README.md), completed on `domain/provisioning`, retains 372,128 candidates in the 500–1,000 m band under its 40–70 m depth and regional water and climate cuts. The 200–500 m comparison adds 530,163 candidates under proportional relief. These are terrain inventories for subsequent site assessment; the adopted 20,000–100,000-settlement comparison remains conditional on which places can accommodate the gardens, services and construction.
 
+The [four-city study programme](../research/plan.md#four-lava-tube-cities-and-their-supply-programme-12-november-2026) begins with lava-tube location evidence. Each initial city is to house approximately the population of the first 100-town system: 50,000 in its smaller reference, or 100,000 in the larger comparison. Construction, maintenance, local agriculture and the cities' links to the towns follow only if four sufficiently credible candidate areas can be established. Mining, manufacturing and Earth/near-Earth procurement form the following study, which will establish the initial economic conversion for U.
+
 The author set the hybrid land as heavily manicured megaparks and great gardens, food gardens among them, for leisure
 and entertainment, with the shops, restrooms and places to rest so much land needs, used by residents and visitors and
 kept by automation ([register](../research/decisions.md#people-on-the-moon-and-beyond-11-october-2026)). Under the
