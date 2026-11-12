@@ -6,6 +6,8 @@ The calculation retains the [250,000-person settlement design](../lava_tube_citi
 
 The [freight architecture comparison](transport.md) now separates Earth-launched propellant from manufactured cargo and compares depot refuelling and electric transport. The figures on this page preserve the original scenario for reproduction; its launch count is not a demonstrated system requirement or an optimized transport solution.
 
+The [consolidated revenue and resource study](revenue.md) adds Earth-bound goods, their return-flight and entry costs, independent external customers, and separate operating and replacement cash balances. Its illustrative local-structure, space-fuelled reference case earns $56.65 billion/year but has a $46.36 billion operating deficit and a $683.79 billion deficit after external renewal and resource provision, in 2041 dollars. These are market and procurement scenarios, not a demonstrated sustainable business. The proposed $30/U normalization remains provisional; permitted resource lifetimes and a self-financing supply design are unresolved. The original industrial products below remain the baseline.
+
 ![Reference industrial capital and connected material flows](results/industrial_system.png)
 
 ## What the estimate pays for

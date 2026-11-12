@@ -1,0 +1,48 @@
+{
+  "schema": "terluna.research.initial-revenue-checks/1",
+  "date": "2026-11-12",
+  "worktree": "/home/kir/Documents/Projects/terluna-provisioning",
+  "base_commit": "8b187339",
+  "commands": [
+    {
+      "command": "python -m pytest -q research/studies/initial_industrial_system/test_revenue.py",
+      "result": "28 passed; exact external snapshot test executed"
+    },
+    {
+      "command": "make check",
+      "result": "76 passed; changed-file structural checks passed; layer check inspected 1645 files with 0 violations; full suite not selected"
+    },
+    {
+      "command": "python /media/projectspace/terluna-research/session-tools/settle.py /home/kir/Documents/Projects/terluna-provisioning",
+      "result": "nothing stale; rebuilt 0, rebound 0"
+    }
+  ],
+  "logs": "/media/projectspace/terluna-research/initial-industrial-system/revenue",
+  "checked_files": {
+    "research/studies/initial_industrial_system/revenue.py": "4ea6ea175a3c87cc371b09346df142e7ee3f51b1c2eb7d0d20cd852aec206e6a",
+    "research/studies/initial_industrial_system/revenue_inputs.json": "7d8884f8e2386536789f29f6b532ccd9ae1e49511a32455c1a3d7bf5c1c61b94",
+    "research/studies/initial_industrial_system/revenue_sources.json": "a0e422009c113e20ad3d6ba5ef0d19521c50151efbb5a45c39267e4fd2f523e6",
+    "research/studies/initial_industrial_system/results/revenue.json": "eb2b955e3fa35d76be5b6bba4e393a74108f4cfa9b55232d41ca2d328d1b9822",
+    "research/studies/initial_industrial_system/resource_inventory.py": "91a4864c97b899522560530f5492eec7178c9a2f24e161da11c29db9acbe4256",
+    "research/studies/initial_industrial_system/results/resource_inventory.json": "5c2a25bea8a212e2c89e9af8adf04cb19838a87c595a72520c6f1e32fe8b84b0",
+    "research/studies/initial_industrial_system/test_revenue.py": "3d7c0cf77186271673c752bce2eee055a902d72f40ee064495425c857b5b06c6",
+    "research/studies/initial_industrial_system/plot_revenue.py": "3eb385ad7aa07118871aca83d445fa8e1e3928651e13719b7194c0cdb22988fd",
+    "research/studies/initial_industrial_system/results/revenue.png": "7047c5fe8e1b907f5a8cdbda9736f89d301d2516f695f8aee793e941e7d216ba",
+    "research/studies/initial_industrial_system/revenue.md": "a4987bddc90cc4877fa2a6e1b2bdfc298837bb54e02ed88fd369fdc3a29ab61c"
+  },
+  "review": [
+    "Substantive report reading against the numerical product, input scopes and source coverage",
+    "Rendered comparison image inspected at full size",
+    "Seven bound input hashes and archived NASA source hash matched; exact JPL archive reproduced in tests",
+    "Original industrial, transport and settlement products preserved"
+  ],
+  "unperformed": [
+    "Full repository suite",
+    "Market and customer validation",
+    "Integrated trajectory and dispatch design",
+    "Hardware and passenger-route qualification",
+    "Environmental clearance and permitted source reserves",
+    "Reconciled full settlement dollar account",
+    "OECD direct byte archive remains unavailable after HTTP 403"
+  ]
+}

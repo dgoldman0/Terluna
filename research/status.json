@@ -1597,7 +1597,7 @@
     },
     {
       "topic": "initial_industrial_system",
-      "condition": "conditional_engineering_and_procurement_2026_11_12",
+      "condition": "conditional_engineering_procurement_and_external_accounts_2026_11_12",
       "material": [
         "studies/initial_industrial_system/README.md",
         "studies/initial_industrial_system/run.py",
@@ -1608,25 +1608,48 @@
         "studies/initial_industrial_system/checks.md",
         "studies/initial_industrial_system/industrial_checks.json",
         "studies/initial_industrial_system/plot.py",
-        "studies/initial_industrial_system/results/industrial_system.png"
+        "studies/initial_industrial_system/results/industrial_system.png",
+        "studies/initial_industrial_system/revenue.md",
+        "studies/initial_industrial_system/revenue.py",
+        "studies/initial_industrial_system/revenue_inputs.json",
+        "studies/initial_industrial_system/revenue_sources.json",
+        "studies/initial_industrial_system/results/revenue.json",
+        "studies/initial_industrial_system/resource_inventory.py",
+        "studies/initial_industrial_system/results/resource_inventory.json",
+        "studies/initial_industrial_system/test_revenue.py",
+        "studies/initial_industrial_system/revenue_checks.md",
+        "studies/initial_industrial_system/revenue_checks.json",
+        "studies/initial_industrial_system/plot_revenue.py",
+        "studies/initial_industrial_system/results/revenue.png"
       ],
       "findings": [
         "At the 2041 automation scenario and 3% inflation for fifteen years, reference industrial establishment is 16.2 trillion USD2041 and the industrial/material campaign 51.4 trillion; annual sustaining supply is 1.41 trillion with growth capacity retained.",
         "Local cargo-fleet fabrication lowers establishment to 10.8 trillion USD2041 and the campaign to 37.4 trillion under additional source-metal and manufacturing assumptions.",
         "The original 25,550 Earth launches/year is conditional on Earth-supplied transfer propellant; 66.9% of launch mass is that propellant. The transport extension compares depot refuelling, space-supplied fuel and electric freight with their coupled hardware and renewal costs; no minimum cadence is established.",
-        "The matched procurement basket gives about 68 USD2041/U; materially different component ratios prevent blanket conversion of earlier settlement U accounts."
+        "The matched procurement basket gives about 68 USD2041/U; materially different component ratios prevent blanket conversion of earlier settlement U accounts.",
+        "The illustrative local-tug-structure, space-fuelled reference portfolio earns 56.65 billion USD2041/year, with a 46.36 billion operating external cash deficit and a 683.79 billion deficit after external renewal and a resource provision; debt remains separate. Earth-delivered goods, their extra propulsion, capsules, entry, recovery and renewal are included.",
+        "A proposed 30 USD2041/U normalization follows scoped destination-service and original pressure-procurement price comparisons; it is not an adopted currency peg or a universal conversion of old U accounts.",
+        "The reference source flow is 189 million tonnes of feed per year: a specified usable 100-billion-tonne pool would last 528 years. The JPL snapshot has 43,050 objects but only 1,246 catalogue diameters; its assumed-density volumes establish no permitted reserve or exhaustion date."
       ],
       "unresolved": [
         "Qualified ordinary-body inventories and actual trajectories; lunar and source metallurgy, reusable pressure/cryogenic hardware, autonomous maintenance and power-beam qualification.",
         "Water recovery, Earth launch capacity and environmental effects, source conservation and nutrient reservations, plume transport and future atmospheric transition.",
-        "A unified settlement dollar budget that reprices living services and credits matching supplier purchases; full critical-path and occupation schedule."
+        "A unified settlement dollar budget that reprices living services and credits matching supplier purchases; full critical-path and occupation schedule.",
+        "Product-specific external demand; commercial and passenger qualification; further manufacturing localization, modular repair, asset lives and retirement of excess construction capacity; a funded transition and positive external balance.",
+        "Surveyed source composition, actual routes, protected extraction fractions and long-term inventories; constant vacuum-period flows do not establish million-year sustainability."
       ],
-      "next_session_task": "Qualify candidate source and route requirements; refine water recovery and local cargo-fleet manufacture before integrating the settlement dollar and U accounts.",
+      "next_session_task": "Engineer the retained fleet and replacement bill before claiming financial self-sufficiency; qualify source stocks and external customers. Reprice old U accounts consistently before adopting a conversion.",
       "transport_comparison": {
         "path": "studies/initial_industrial_system/transport.md",
         "product": "studies/initial_industrial_system/results/transport.json",
         "state": "conditional comparisons; no architecture adopted",
-        "next": "Trajectory and propulsion qualification, manufacturing localization, water recovery and fleet retirement; carry alternatives into gross/net revenue and resource-horizon accounts."
+        "next": "Trajectory and propulsion qualification, manufacturing localization, water recovery and fleet retirement; revenue and resource comparisons are now recorded separately, without adopting a route."
+      },
+      "revenue_comparison": {
+        "path": "studies/initial_industrial_system/revenue.md",
+        "product": "studies/initial_industrial_system/results/revenue.json",
+        "state": "conditional post-occupation portfolios in 2041 dollars; no sustainable business, currency peg or reserve established",
+        "net_definition": "operating external cash balance, then external renewal and resource provision; debt separate; internal transactions cancel"
       }
     }
   ]
