@@ -608,19 +608,33 @@
           "price_units": "USD2041",
           "adoption_boundary": "Timing and inflation are adopted scenario assumptions; sources, sites, fleets and power system remain proposals.",
           "U_conversion": "Proposed working normalization 30 USD2041/U from scoped destination-service and original pressure comparisons; no peg or universal conversion adopted; earlier procurement relative prices remain to reconcile.",
-          "next": "Engineer replacement imports, modular repair, asset lives, local manufacture and retirement of excess construction capacity; qualify external customers, source stocks and routes; reconcile full settlement dollar and U prices.",
+          "next": "Qualify products, modular components, sources and customer demand; fund the commissioning and import requirements; resolve site distribution and monetary policy.",
           "transport_comparison": {
             "commit": "300224c8",
             "path": "studies/initial_industrial_system/transport.md",
             "state": "conditional alternatives; original launch cadence is not a minimum or adopted requirement"
           },
-          "revenue_scope": "Consolidate the 250,000-person settlement and supporting off-Earth industry against Earth; include returned goods and delivery costs; gross receipts, operating balance and balance after renewal/resource allowances, with debt separate.",
+          "revenue_scope": "Earlier prescribed external-cash comparison; current economy study also accounts for domestic production, co-products and growth.",
           "resource_horizon": "Pinned incomplete catalogue and specified usable-stock lifetimes; no certified reserve or exhaustion date. Million-year sustainability and the beyond-local socioeconomic boundary remain unresolved.",
           "revenue_comparison": {
             "commit": "0de81db5",
             "path": "studies/initial_industrial_system/revenue.md",
             "state": "conditional post-occupation accounts completed; tested portfolios do not finance external renewal; no sustainable business or route adopted",
             "verification": "76 selected tests, structural and layer checks passed; dependency consistency found nothing stale; report and rendered figure reviewed"
+          },
+          "economy_comparison": {
+            "path": "studies/initial_industrial_system/economy.md",
+            "product": "studies/initial_industrial_system/results/economy.json",
+            "state": "Conditional reconciled domestic/trade accounts, joint co-product recovery and capacity-supported growth; no architecture, market forecast or currency peg adopted",
+            "boundary": "All off-Earth production included; internal transfers cancel externally, while useful inventories and growth enter domestic capital formation",
+            "growth": "Derive construction from capacity; retain the 2.5% eventual crater quota and the separate initial vacuum quota; no uncounted tube expansion",
+            "next": "Qualify products, modular components, sources and customer demand; fund the commissioning and import requirements; resolve site distribution and monetary policy."
+          },
+          "economy_verification": {
+            "commit": "593b0631",
+            "branch": "domain/provisioning",
+            "checks": "105 selected tests, structural and layer checks passed; product consistency found nothing stale; report and source limits read, chart and delivered PDF visually inspected",
+            "adoption": "Capacity-derived growth with the existing crater quotas, whole-system co-product accounting and distinct domestic/external accounts. No numerical growth rate, manufacturing qualification, market forecast, source permission or currency peg adopted."
           }
         }
       },
@@ -861,19 +875,33 @@
           "price_units": "USD2041",
           "adoption_boundary": "Timing and inflation are adopted scenario assumptions; sources, sites, fleets and power system remain proposals.",
           "U_conversion": "Proposed working normalization 30 USD2041/U from scoped destination-service and original pressure comparisons; no peg or universal conversion adopted; earlier procurement relative prices remain to reconcile.",
-          "next": "Engineer replacement imports, modular repair, asset lives, local manufacture and retirement of excess construction capacity; qualify external customers, source stocks and routes; reconcile full settlement dollar and U prices.",
+          "next": "Qualify products, modular components, sources and customer demand; fund the commissioning and import requirements; resolve site distribution and monetary policy.",
           "transport_comparison": {
             "commit": "300224c8",
             "path": "studies/initial_industrial_system/transport.md",
             "state": "conditional alternatives; original launch cadence is not a minimum or adopted requirement"
           },
-          "revenue_scope": "Consolidate the 250,000-person settlement and supporting off-Earth industry against Earth; include returned goods and delivery costs; gross receipts, operating balance and balance after renewal/resource allowances, with debt separate.",
+          "revenue_scope": "Earlier prescribed external-cash comparison; current economy study also accounts for domestic production, co-products and growth.",
           "resource_horizon": "Pinned incomplete catalogue and specified usable-stock lifetimes; no certified reserve or exhaustion date. Million-year sustainability and the beyond-local socioeconomic boundary remain unresolved.",
           "revenue_comparison": {
             "commit": "0de81db5",
             "path": "studies/initial_industrial_system/revenue.md",
             "state": "conditional post-occupation accounts completed; tested portfolios do not finance external renewal; no sustainable business or route adopted",
             "verification": "76 selected tests, structural and layer checks passed; dependency consistency found nothing stale; report and rendered figure reviewed"
+          },
+          "economy_comparison": {
+            "path": "studies/initial_industrial_system/economy.md",
+            "product": "studies/initial_industrial_system/results/economy.json",
+            "state": "Conditional reconciled domestic/trade accounts, joint co-product recovery and capacity-supported growth; no architecture, market forecast or currency peg adopted",
+            "boundary": "All off-Earth production included; internal transfers cancel externally, while useful inventories and growth enter domestic capital formation",
+            "growth": "Derive construction from capacity; retain the 2.5% eventual crater quota and the separate initial vacuum quota; no uncounted tube expansion",
+            "next": "Qualify products, modular components, sources and customer demand; fund the commissioning and import requirements; resolve site distribution and monetary policy."
+          },
+          "economy_verification": {
+            "commit": "593b0631",
+            "branch": "domain/provisioning",
+            "checks": "105 selected tests, structural and layer checks passed; product consistency found nothing stale; report and source limits read, chart and delivered PDF visually inspected",
+            "adoption": "Capacity-derived growth with the existing crater quotas, whole-system co-product accounting and distinct domestic/external accounts. No numerical growth rate, manufacturing qualification, market forecast, source permission or currency peg adopted."
           }
         }
       },
