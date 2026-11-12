@@ -1,0 +1,26 @@
+{
+  "schema": "terluna.humanities.cultural-economics-checks/1",
+  "date": "2026-11-12",
+  "sports": {
+    "numerical_checks": {
+      "command": "python3 -m pytest -q humanities/tests/test_cultural_economics.py",
+      "result": "24 passed",
+      "scope": "Product reproduction and pinned inputs; debt amortization and independent audience-root calculation; consolidation, imported content, retained earnings, fan transfers, multiple competitions, nonresident compensation and annual/block capacity rejection."
+    },
+    "selected_checks": {
+      "command": "python3 /tmp/run-cultural-checks.py",
+      "selector_source": "shared/check_changed.py from main, with ROOT set to the isolated humanities checkout",
+      "selector_sha256": "a0c0ef2340b62953a23a10c79f5154d11e859d283e4a241dc66993fc003e5bdd",
+      "reason": "The humanities branch predates the changed-file Makefile. The current working agreement selects affected checks; the current main selector was used without changing branch tooling.",
+      "result": "Layer check and the 24 cultural-economics tests passed; changed-file structural validation passed."
+    },
+    "editorial_review": "Study read in context, including opportunity scale, visiting-team programme, accounting definitions, scenario tables and closing research programme. Table values checked against generated JSON. This is substantive internal reading, not independent peer review.",
+    "sources": "Targeted original-company, authored-report and official-definition reading recorded in sports_sources.json. WEF detailed PDF retrieval remains unresolved and its detailed sector figures are excluded.",
+    "not_performed": [
+      "Audience research or paid-demand measurement",
+      "Physical or medical qualification of any sport or visiting programme",
+      "Transport, habitat or venue engineering quotation",
+      "Full repository suite, full scholarly literature review or PDF rendering review"
+    ]
+  }
+}

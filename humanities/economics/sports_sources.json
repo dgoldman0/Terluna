@@ -1,0 +1,82 @@
+{
+  "as_of": "2026-11-12",
+  "admission": "Targeted primary-source reading and repository-product inspection; no full literature review. External full texts remain external. All scenario prices and audience values are assumptions.",
+  "brief": {
+    "title": "Terluna: Lunar Sports, Professional Leagues, and Their Economic Potential",
+    "kind": "Exported working synthesis, supplied as Pasted text.txt",
+    "sha256": "163675d1067d46e1c49ec548e12a6cd1dfa42d5905cc2fe16909a4017c14e604",
+    "bytes": 40006,
+    "status": "Idea inventory and prior-work leads; historical narrative and market claims checked separately; not empirical demand evidence."
+  },
+  "repository_base": "91b1a5ac",
+  "sources": [
+    {
+      "id": "liberty_2025",
+      "title": "Liberty Media 2025 financial and operating results",
+      "url": "https://www.libertymedia.com/news/detail/579/liberty-media-corporation-reports-fourth-quarter-and-year",
+      "accessed": "2026-11-12",
+      "read": "F1 revenue, categories, team payments and one-time movie income paragraphs.",
+      "supports": "2025 F1 revenue about USD 3.9 billion; media 31.3%, sponsorship 21.7%, race promotion 26.7%, other 20.3%.",
+      "limits": "Issuer disclosure of an established property; central operation, not the entire racing economy. Revenue mix includes exceptional movie income; margins and audience do not transfer to the Moon."
+    },
+    {
+      "id": "two_circles_2026",
+      "title": "Two Circles, Sports IP Revenue League 2026",
+      "url": "https://www.esb-online.com/fileadmin/user_upload/06_News/2026/Sports_IP_Revenue_League_2026.pdf",
+      "accessed": "2026-11-12",
+      "read": "Pages 2-4 and 16, aggregate estimate, ranking and de-duplication methodology; original authored report hosted by ESB.",
+      "supports": "USD 174 billion sports-property receipts in 2025; NFL central revenue USD 14.9 billion. Internal distributions excluded, annualized and standardized to USD.",
+      "limits": "Consultancy estimates from public disclosures, not national-account value added or a lunar market. NFL central revenue is not league-plus-club turnover."
+    },
+    {
+      "id": "wef_2026",
+      "title": "World Economic Forum, The sports economy: What is it and how could it improve the health of both people and planet?",
+      "url": "https://www.weforum.org/stories/economic-growth/what-is-the-sports-economy-improve-health-livelihoods",
+      "accessed": "2026-11-12",
+      "read": "Publisher summary dated 15 January 2026, aggregate revenue and scope.",
+      "supports": "Broad sports economy estimate USD 2.3 trillion annually, including participation and tourism.",
+      "limits": "The underlying Sports for People and Planet PDF timed out twice. Its detailed category figures remain unverified here and are not used; publisher summary supports only the aggregate and broad scope."
+    },
+    {
+      "id": "newzoo_2026",
+      "title": "Newzoo, 2026 Global games market key numbers",
+      "url": "https://new.newzoo.com/articles/2026-global-games-market-key-numbers",
+      "accessed": "2026-11-12",
+      "read": "Revenue/platform passage, dated 25 August 2026.",
+      "supports": "USD 213.9 billion forecast games revenue for 2026.",
+      "limits": "Forecast, not realized receipts; all games, not esports or sports games. Export date attribution to November is not the page publication date."
+    },
+    {
+      "id": "bea_value_added",
+      "title": "BEA, Gross output and value added by industry",
+      "url": "https://www.bea.gov/help/faq/1197",
+      "accessed": "2026-11-12",
+      "read": "Complete short definition and kayak example.",
+      "supports": "Value added equals output minus domestic and imported intermediate inputs; wages remain part of value added.",
+      "limits": "Definition only; this study omits inventory changes and product taxes, and calculates a narrow producer boundary."
+    },
+    {
+      "id": "nasa_delay",
+      "title": "K. Elliott Cramer, NASA Advanced NDE Needs to Enable Deep Space Exploration",
+      "url": "https://ntrs.nasa.gov/api/citations/20240007214/downloads/NDE%20Needs%20to%20Enable%20Deep%20Space%20Exploration.pdf",
+      "accessed": "2026-11-12",
+      "read": "Title and communications slide, PDF page 28 (index 27).",
+      "supports": "About 1.28 seconds one-way Earth-Moon light-time at the stated distance.",
+      "limits": "Propagation minimum; relay, coding, buffering and networks add delay. No commercial bandwidth/cost claim."
+    }
+  ],
+  "export_claims_not_adopted": [
+    {
+      "claim": "USD 65.82 billion media rights and USD 2.6 billion esports, and their ratio to elite sport",
+      "status": "Not inputs or comparative conclusions here. Media-rights figure found in secondary reporting and publisher social summary; complete methodology not read. Esports estimate not independently admitted. Unlike market definitions cannot justify an exact relative opportunity ratio."
+    },
+    {
+      "claim": "Moon Mark, GRU Space and Atlas Cup investment examples",
+      "status": "No independently verified financing record admitted; these names are not evidence that a human lunar league is financed."
+    },
+    {
+      "claim": "Paintball parkour is intrinsically advantageous for spectators",
+      "status": "Proposal; newer projectile product shows long predictable airborne exposure and slow reactive escape. Sport quality remains to be tested."
+    }
+  ]
+}

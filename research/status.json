@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08",
+  "updated": "2026-11-12",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -1389,6 +1389,30 @@
         "Currency use, access to settlement and emergency lending, and the bearing of losses are separate functions; three worlds need not mean three currencies or three issuers.",
         "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs."
       ]
+    },
+    {
+      "topic": "cultural_economics_sport",
+      "condition": "conditional_multi_competition_and_fan_support_accounts; no_demand_forecast_or_qualified_programme",
+      "material": [
+        "../humanities/economics/README.md",
+        "../humanities/economics/sports.md",
+        "../humanities/economics/sports_inputs.json",
+        "../humanities/economics/sports_sources.json",
+        "../humanities/economics/results/sports.json",
+        "../humanities/economics/checks.json"
+      ],
+      "findings": [
+        "Fan-support scales of 10, 100 and 500 million imply 75 million, 750 million and 3.75 billion U of annual exports at assumed average net receipts of 7.5 U per fan; gifts and investment are separately recorded.",
+        "Four competitions with eight organizations each register 256 athletes, including 224 visitors. Seventy-two resident workers, two venues and 200 guest beds fit the modeled annual and block allowances. Eighty million distinct fans, after overlap, yield 600 million U annual exports and 149.647 million U cash before debt under the stated costs.",
+        "The small resident league has 25.1 million U annual revenue and 11.46 million U direct gross value added at one million paid equivalents, but only 0.496 million U cash before debt. Its 20-million-U debt assumption is not supported at the stated coverage."
+      ],
+      "unresolved": [
+        "Sport selection, physical qualification and the complete visiting-team schedule.",
+        "Paid conversion, retention, rights yield, fan support and buyer commitments.",
+        "Transport quotations and capacity, host services, imported content, staffing and capital requirements.",
+        "Rights and club governance, ownership and integration within the existing planetary accounts."
+      ],
+      "next_session_task": "Test sport and audience propositions, cost the visiting circuit against qualified host and transport services, and use measured cohorts to replace hypothetical commercial parameters."
     }
   ]
 }
