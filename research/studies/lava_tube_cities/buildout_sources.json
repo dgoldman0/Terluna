@@ -1,0 +1,45 @@
+{
+  "schema": "terluna.research.lava-tube-buildout-sources/1",
+  "date": "2026-11-12",
+  "scope": "Bounded engineering review supplementing the hash-bound project food, town and siting products. No new comprehensive review, cave survey or source-price validation.",
+  "sources": [
+    {
+      "key": "martin_benaroya2023",
+      "citation": "Martin and Benaroya (2023). Pressurized lunar lava tubes for habitation. Acta Astronautica 204, 157–174.",
+      "url": "https://doi.org/10.1016/j.actaastro.2022.12.013",
+      "retrieval": "Publisher indexed abstract and section preview read. Direct publisher access returned 403; Rutgers repository PDF retrieval also failed. Full paper remains unretrieved.",
+      "use": "Pressure-induced failure in the models motivates independent pressure containment; the preview does not establish a universal maximum pressure or qualify any actual tube. No numerical rock allowable is transferred."
+    },
+    {
+      "key": "johnson2021",
+      "citation": "Johnson et al. (2021). Supplemental Food Production With Plants: A Review of NASA Research. Frontiers in Astronomy and Space Sciences 8, 734343.",
+      "url": "https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2021.734343/full",
+      "retrieval": "Abstract, introduction and discussion read from publisher HTML.",
+      "use": "Ground-based crop area estimates of about 40–50 square metres per person for calories; lunar agriculture and complete nutrition remain unvalidated."
+    },
+    {
+      "key": "nasa_water2023",
+      "citation": "NASA (2023; page updated 2026). NASA Achieves Water Recovery Milestone on International Space Station.",
+      "url": "https://www.nasa.gov/missions/station/iss-research/nasa-achieves-water-recovery-milestone-on-international-space-station/",
+      "retrieval": "Article body read.",
+      "use": "98% recovery within the collected station-water system. Does not justify 98% or 99.5% whole-city closure; crop, fish and industrial loops have separate assumed recoveries."
+    }
+  ],
+  "inherited_source_keys": [
+    "wheeler2003_tm",
+    "wheeler2020_tm",
+    "kusuma2020",
+    "bergman2020",
+    "fry2018",
+    "jarvio2021_natfood",
+    "garciamartinez2021",
+    "leger2021",
+    "willett2019_eatlancet"
+  ],
+  "inherited_reading": "The bound food-system source register retains original source identity, evidence notes and prior reading coverage. This study reuses those reviewed coefficients without claiming new full-paper reading.",
+  "parameter_status": {
+    "observed_precedents": "Ground-based crop yield and photon demand, measured lamp efficacy, commercial aquaculture energy/water/feed precedents, station water recovery.",
+    "engineering_assumptions": "Cavity dimensions, pressure-module arrangement and reinforcement allowable; all installation masses, nutrient and water recovery, capacity margins, useful lives, production rates, labour and U prices.",
+    "design_limits": "No confirmed city-sized void, qualified pressure joint, full menu, element-by-element nutrient closure, lunar crop/fish trial, radiator or beamed-power system design."
+  }
+}

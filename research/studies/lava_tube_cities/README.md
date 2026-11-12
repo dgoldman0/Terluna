@@ -1,8 +1,10 @@
-# Four lava-tube cities: initial location investigation
+# Four lava-tube cities: location and engineering studies
 
 The literature examined identifies four plausible search regions, with Mare Tranquillitatis and Marius Hills as the two leading targets. West Rima Mairan and the Schröter extension supply two further geophysical leads, but the evidence is weaker and their access is unknown. This supports a conditional regional shortlist; it does not yet support treating all four as high-confidence locations for the planned cities. No city location is selected by this study.
 
 This is the first stage of the [adopted four-city programme](../../plan.md#four-lava-tube-cities-and-their-supply-programme-12-november-2026), assessed on 12 November 2026. Its purpose is to determine how far existing observations can support location choices before construction, maintenance, agriculture and city industry are costed. The assessment combines a bounded reading of primary observations with the existing town population scenarios and a coarse calculation of future surface water. It includes recent entrance discoveries and announced exploration, without treating a proposed mission as a completed survey.
+
+The [conditional construction and sustaining study](buildout.md) now estimates the four cities and 100 towns together for 250,000 residents, including shared agriculture, aquaculture and everyday light industry. Its reference is 578 billion U initially and 22.2 billion U/year. It specifies assumed dry caves and pressure halls without selecting locations. A Moon-wide distribution study targeting 2.5% buildout remains future work.
 
 ## The population and space to investigate
 
@@ -67,13 +69,13 @@ Conservation screening is also incomplete. Entrances and pristine interiors may 
 
 The first 100 towns have a construction scenario but no approved geographic allocation. The broader provisional vacuum-crater set therefore cannot supply a first-100 route map. City–town distances, pressure-safe surface travel, freight, emergency access, shared utilities and the allocation of towns to cities remain to be determined together once candidate city areas are usable. No four equal town catchments are imposed.
 
-## What would permit the next stage
+## Reconnaissance and conditional engineering
 
 A useful next reconnaissance phase would seek connected geometry, roof and rock condition, accessible entrances and the cave floor's relation to future water. Surface radar, gravity and seismic measurements can narrow the cavity interpretation; robotic interior mapping would then establish which spaces actually connect. The location assessment must also identify surface land for power and heat rejection, transport approaches and areas protected for science. Detailed construction qualification follows an area choice; it is not a prerequisite for merely investigating a region.
 
-Local food production remains part of the adopted city programme. The town account already includes food-process power, so any transfer of production into the cities must remove the corresponding town allocation before counting a shared facility. The later comparison should test hydroponics and other intensive systems against complete diets, crop yields, lighting and lunar-night power, water and nutrient recovery, waste heat, reserve capacity and food transport. Suitable bulk processes need their own space and service accounts. Protected underground space alone does not establish that agriculture is cheaper there, and this location investigation does not make that claim.
+The [conditional engineering study](buildout.md) now includes local food production, hydroponic crop beds, recirculating aquaculture and suitable everyday industry, while accounting for the town allocations they replace. Food calories, fish feed, crop yields, light, lunar-night power, water and nutrients, waste heat, reserve capacity and food transport share the same 250,000-person population. Protected underground space alone does not establish that agriculture is cheaper there; the present study does not make that comparison.
 
-The present recommendation is to keep Tranquillitatis and Marius as leading reconnaissance targets, retain Mairan and Schröter as geophysical follow-ups, and report the unfilled four-location requirement before city design and cost work proceeds. A conditional four-city scenario remains possible if explicitly authorized, with assumed cavities labelled throughout. The following mining, manufacturing and Earth/near-Earth procurement study remains planned; the initial economic conversion for U is still unset.
+Tranquillitatis and Marius remain the leading reconnaissance targets, with Mairan and Schröter retained as geophysical follow-ups. The conditional cost study proceeds under the [subsequent programme direction](../../decisions.md#conditional-four-city-engineering-and-future-tube-distribution-12-november-2026), while the four-location requirement remains open. The following mining, manufacturing and Earth/near-Earth procurement study will establish the supplying infrastructure and the initial economic conversion for U.
 
 ## Reproduction and source limits
 
