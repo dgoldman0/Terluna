@@ -1,0 +1,3043 @@
+{
+  "schema": "terluna.research.first-hundred-crater-communities/1",
+  "evidence": "Conditional planning quantities, capacity requirements and future-price allowances. No selected sites, qualified roof, surveyed extraction allocation, supplier quotation or completion-date forecast.",
+  "numeraire": "U: the world-economy transferable common-price real unit; no conversion to present dollars.",
+  "inputs": {
+    "design": {
+      "path": "habitation/crater_gardens/design.json",
+      "sha256": "b232179b23261d67fe59137f9a3a96f4cc749d402112f378d89877616825c6ff",
+      "schema": "terluna.habitation.crater-garden-design/1"
+    },
+    "plan": {
+      "path": "habitation/crater_gardens/buildout.json",
+      "sha256": "2b0fff4428956805305b1f4883023aa58819cf7fe06457cefec55900738504d0",
+      "schema": "terluna.habitation.crater-buildout-plan/1"
+    },
+    "vacuum_scenarios": {
+      "path": "research/studies/vacuum_crater_buildout/scenarios.json",
+      "sha256": "32798c1d046e29b69904c6b00242ab2151e879f06f741d538f25a3f57188d4c2",
+      "schema": "terluna.research.vacuum-crater-scenarios/1"
+    },
+    "vacuum_result": {
+      "path": "research/studies/vacuum_crater_buildout/results/buildout.json",
+      "sha256": "521503f0cf9079dd7d67c7879122fcb76288f299e2b43ce6defa17584cd60fe0",
+      "schema": "terluna.research.vacuum-crater-buildout/1"
+    },
+    "economy": {
+      "path": "research/studies/world_economy/construction_inputs.json",
+      "sha256": "960b3a44206d7747577e668be62ca252cbb2a02b6f8df8b9e87c81a79a31b819",
+      "schema": "terluna.research.world-economy-construction-inputs/1"
+    },
+    "food": {
+      "path": "research/studies/food_systems/results/food_systems.json",
+      "sha256": "57fe8726cead4cd498043f9516bbf36a20505cf919b119dfce39784bf01f37d9",
+      "schema": "terluna.research.food-systems/1"
+    }
+  },
+  "producer": {
+    "files": {
+      "research/studies/vacuum_crater_buildout/first_hundred.py": "682a75aad1ac93c29a68f18aef7fc3bd39174c5f881bf6aff4c32ae911862751",
+      "research/studies/vacuum_crater_buildout/run.py": "aafb366efc87fa726b41bf7fda12b92fd3cf2f4d7030ed75594cde30bd00a557",
+      "research/studies/vacuum_crater_buildout/first_hundred_inputs.json": "335b0f584986e45942aa350a5a88cc35a413788852f031a288c81033d8155bd4"
+    },
+    "constants": {
+      "GAS_CONSTANT": 8.31446261815324,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_RADIUS": 1737400.0,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "STANDARD_ATMOSPHERE": 101325.0,
+      "STEFAN_BOLTZMANN": 5.670374419e-08,
+      "SYNODIC_MONTH_DAYS": 29.53059
+    }
+  },
+  "food_process_bracket_kW_resident": [
+    5.2,
+    53.0
+  ],
+  "cases": {
+    "500": {
+      "quantities": {
+        "communities": 100,
+        "population": 50000,
+        "residents_per_community": 500,
+        "dome_diameter_m": 237.88321548703618,
+        "reference_depth_m": 17.444769135715987,
+        "total_plan_area_m2": 4444444.444444445,
+        "total_roof_area_m2": 5155555.555555557,
+        "garden_area_m2": 2166666.666666667,
+        "estate_area_km2": 17.77777777777778,
+        "pressure_ideal_kg": 120124785.99441387,
+        "pressure_reinforcement_kg": 240249571.98882774,
+        "barriers_kg": 169777777.7777778,
+        "pressure_system_kg": 410027349.7666055,
+        "independent_support_kg": 515555555.5555557,
+        "foundations_kg": 1333333333.3333335,
+        "shielding_kg": 24746666666.666676,
+        "ordinary_stock_kg": 5000000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 34644395942.33481,
+        "raw_feed_kg": 43072107571.496185,
+        "retained_tails_kg": 8427711629.161376,
+        "quarry_area_km2": 2.6920067232185114,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 410027349.7666055,
+          "ordinary_equipment_kg": 250000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 35611111.111111104,
+          "reserve_hardware_kg": 35999999.99999999,
+          "garden_lamps_kg": 10833333.333333336,
+          "biosphere_kg": 25000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 5884038.67792477
+        },
+        "establishment_import_kg": 85611111.1111111,
+        "air_including_reserve_kg": 198885598.10990444,
+        "water_inventory": {
+          "lakes_kg": 2222222222.2222223,
+          "process_inventory_kg": 150000000,
+          "garden_inventory_kg": 325000000.00000006
+        },
+        "local_share_of_all_delivered_material": 0.9025771849776656,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 7330176361.931805,
+            "annual_raw_feed_kg": 36650881.80965902,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 3665088180.965906,
+            "annual_raw_feed_kg": 18325440.904829532,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 733017636.1931812,
+            "annual_raw_feed_kg": 3665088.180965906,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 250000000,
+          "food_W": 500000000,
+          "garden_average_W": 216666666.66666672,
+          "garden_peak_W": 325000000.00000006,
+          "mean_occupied_W": 966666666.6666667,
+          "peak_occupied_W": 1075000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 1780555555.5555553,
+          "reserve_Wh": 11999999999.999998,
+          "full_night_storage_Wh": 570924740000.0,
+          "radiator_emitting_area_m2": 5884038.67792477
+        },
+        "production_demand": {
+          "handling_kg": 50183218682.6073,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 757744721.7778635,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 696989148.3695458,
+          "bulk_kWh": 10081481481.481482,
+          "metal_kWh": 16487918846.696068
+        },
+        "annual_makeup": {
+          "air_kg": 1808050.891908222,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 36525000.00000003,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "costs": {
+        "lower": {
+          "direct_U": {
+            "ordinary_installed_capital": 15000000000,
+            "pressure_system": 8200546995.332109,
+            "independent_support_and_foundations": 1848888888.8888893,
+            "local_shielding": 494933333.3333335,
+            "regional_roads": 500000000.0,
+            "pressurised_transport_and_docking": 200000000.0,
+            "dedicated_firm_power": 1780555555.5555553,
+            "emergency_reserves": 359999999.99999994,
+            "exterior_radiators": 294201933.8962385,
+            "civic_garden_lighting": 108333333.33333334,
+            "initial_air_and_water": 289610782.03321266,
+            "ordinary_extra_delivery": 500000000.0,
+            "initial_biosphere_imports": 25000000,
+            "survey_and_preservation": 200000000.0,
+            "incremental_qualification": 2000000000.0,
+            "regional_industrial_establishment_increment": 3000000000.0,
+            "construction_utility_operation": 27266389.476547096,
+            "disturbed_ground_restoration": 430721075.7149619
+          },
+          "direct_total_U": 35260058287.56418,
+          "contingency_U": 7052011657.512836,
+          "removal_reserve_U": 1763002914.378209,
+          "total_initial_funding_U": 44075072859.45522,
+          "per_community_U": 440750728.5945522,
+          "per_resident_U": 881501.4571891045,
+          "full_night_storage_only_U": 17127742200.0
+        },
+        "reference": {
+          "direct_U": {
+            "ordinary_installed_capital": 25000000000,
+            "pressure_system": 24601640985.99633,
+            "independent_support_and_foundations": 5546666666.666668,
+            "local_shielding": 2474666666.6666675,
+            "regional_roads": 1500000000.0,
+            "pressurised_transport_and_docking": 500000000.0,
+            "dedicated_firm_power": 8902777777.777777,
+            "emergency_reserves": 1199999999.9999998,
+            "exterior_radiators": 1176807735.584954,
+            "civic_garden_lighting": 433333333.3333334,
+            "initial_air_and_water": 2896107820.3321266,
+            "ordinary_extra_delivery": 2500000000.0,
+            "initial_biosphere_imports": 250000000,
+            "survey_and_preservation": 700000000.0,
+            "incremental_qualification": 5000000000.0,
+            "regional_industrial_establishment_increment": 8000000000.0,
+            "construction_utility_operation": 136331947.3827355,
+            "disturbed_ground_restoration": 1292163227.1448855
+          },
+          "direct_total_U": 92110496160.88548,
+          "contingency_U": 32238673656.309917,
+          "removal_reserve_U": 4605524808.044274,
+          "total_initial_funding_U": 128954694625.23969,
+          "per_community_U": 1289546946.2523968,
+          "per_resident_U": 2579093.8925047936,
+          "full_night_storage_only_U": 57092474000.0
+        },
+        "upper": {
+          "direct_U": {
+            "ordinary_installed_capital": 50000000000,
+            "pressure_system": 61504102464.99082,
+            "independent_support_and_foundations": 18488888888.888893,
+            "local_shielding": 12373333333.333338,
+            "regional_roads": 5000000000.0,
+            "pressurised_transport_and_docking": 1500000000.0,
+            "dedicated_firm_power": 35611111111.11111,
+            "emergency_reserves": 3599999999.9999995,
+            "exterior_radiators": 4707230942.339816,
+            "civic_garden_lighting": 1083333333.3333335,
+            "initial_air_and_water": 28961078203.321266,
+            "ordinary_extra_delivery": 12500000000.0,
+            "initial_biosphere_imports": 1250000000,
+            "survey_and_preservation": 2000000000.0,
+            "incremental_qualification": 15000000000.0,
+            "regional_industrial_establishment_increment": 25000000000.0,
+            "construction_utility_operation": 545327789.530942,
+            "disturbed_ground_restoration": 4307210757.149619
+          },
+          "direct_total_U": 283431616823.99915,
+          "contingency_U": 170058970094.39948,
+          "removal_reserve_U": 14171580841.199959,
+          "total_initial_funding_U": 467662167759.5986,
+          "per_community_U": 4676621677.595985,
+          "per_resident_U": 9353243.355191972,
+          "full_night_storage_only_U": 171277422000.0
+        }
+      },
+      "schedules": {
+        "rapid": {
+          "lead_years": 4,
+          "establishment_delivery_minimum_years": 1.265679012345679,
+          "production_and_completion_years": 6.75,
+          "total_years": 10.75,
+          "occupation_years": {
+            "1": 5.25,
+            "10": 6.416666666666666,
+            "25": 7.416666666666666,
+            "50": 8.666666666666666,
+            "100": 10.75
+          },
+          "steady_communities_per_year": {
+            "handling_kg": 23.83926245949988,
+            "bulk_finished_kg": 27.553269654665684,
+            "metal_finished_kg": 23.81556702278073,
+            "pressure_system_kg": 24.38861701711403,
+            "special_import_kg": 39.51091740162108,
+            "volatile_import_kg": 34.529101195041825,
+            "building_floor_m2": 25.71428571428571,
+            "road_km": 30.0,
+            "site_teams": 24.0
+          },
+          "slowest_steady_stream": "metal_finished_kg",
+          "last_start_year": 9.75,
+          "consumed": {
+            "handling_kg": 50337127754.630035,
+            "bulk_finished_kg": 9073333333.333324,
+            "metal_finished_kg": 839786849.5370717,
+            "pressure_system_kg": 410027349.766606,
+            "special_import_kg": 759283812.4980916,
+            "volatile_import_kg": 2896107820.332129,
+            "building_floor_m2": 3500000.0,
+            "road_km": 500.0
+          },
+          "produced_before_last_start": {
+            "handling_kg": 50337127754.62998,
+            "bulk_finished_kg": 9073333333.333334,
+            "metal_finished_kg": 839786849.5370715,
+            "pressure_system_kg": 410027349.7666055,
+            "special_import_kg": 759283812.4980904,
+            "volatile_import_kg": 2896107820.3321266,
+            "building_floor_m2": 3500000.0,
+            "road_km": 500.0
+          },
+          "remaining_inventory_at_last_start": {
+            "handling_kg": 1.0728836059570312e-06,
+            "bulk_finished_kg": 2.7120113372802734e-06,
+            "metal_finished_kg": 5.494803190231323e-07,
+            "pressure_system_kg": 1.1827796697616577e-07,
+            "special_import_kg": 1.7136335372924805e-07,
+            "volatile_import_kg": 1.4379620552062988e-06,
+            "building_floor_m2": 0.0,
+            "road_km": 0.0
+          },
+          "power_capacity_W": 2246296296.296296,
+          "reference_price_funding_U": 132654459083.50362
+        },
+        "reference": {
+          "lead_years": 6,
+          "establishment_delivery_minimum_years": 1.712222222222222,
+          "production_and_completion_years": 11.833333333333332,
+          "total_years": 17.833333333333332,
+          "occupation_years": {
+            "1": 7.833333333333333,
+            "10": 9.416666666666666,
+            "25": 10.75,
+            "50": 13.166666666666666,
+            "100": 17.833333333333332
+          },
+          "steady_communities_per_year": {
+            "handling_kg": 15.941584079326246,
+            "bulk_finished_kg": 16.53196179279941,
+            "metal_finished_kg": 14.556112401541352,
+            "pressure_system_kg": 14.633170210268418,
+            "special_import_kg": 26.394113248423384,
+            "volatile_import_kg": 17.264550597520913,
+            "building_floor_m2": 17.142857142857142,
+            "road_km": 20.0,
+            "site_teams": 10.666666666666666
+          },
+          "slowest_steady_stream": "site_teams",
+          "last_start_year": 16.333333333333332,
+          "consumed": {
+            "handling_kg": 50183218682.60728,
+            "bulk_finished_kg": 9073333333.333324,
+            "metal_finished_kg": 824395942.3348039,
+            "pressure_system_kg": 410027349.766606,
+            "special_import_kg": 757744721.7778643,
+            "volatile_import_kg": 2896107820.332129,
+            "building_floor_m2": 3500000.0,
+            "road_km": 500.0
+          },
+          "produced_before_last_start": {
+            "handling_kg": 50183218682.6073,
+            "bulk_finished_kg": 9073333333.333334,
+            "metal_finished_kg": 824395942.3348033,
+            "pressure_system_kg": 410027349.7666055,
+            "special_import_kg": 757744721.7778635,
+            "volatile_import_kg": 2896107820.3321266,
+            "building_floor_m2": 3500000.0,
+            "road_km": 500.0
+          },
+          "remaining_inventory_at_last_start": {
+            "handling_kg": 3.3020973205566406e-05,
+            "bulk_finished_kg": 0.0,
+            "metal_finished_kg": 0.0,
+            "pressure_system_kg": 0.0,
+            "special_import_kg": 1.0598450899124146e-06,
+            "volatile_import_kg": 1.55717134475708e-06,
+            "building_floor_m2": 0.0,
+            "road_km": 5.400124791776761e-13
+          },
+          "power_capacity_W": 1780555555.5555553,
+          "reference_price_funding_U": 128954694625.23969
+        },
+        "constrained": {
+          "lead_years": 10,
+          "establishment_delivery_minimum_years": 3.1422222222222222,
+          "production_and_completion_years": 22.833333333333332,
+          "total_years": 32.83333333333333,
+          "occupation_years": {
+            "1": 12.583333333333332,
+            "10": 14.833333333333332,
+            "25": 17.916666666666664,
+            "50": 22.833333333333332,
+            "100": 32.83333333333333
+          },
+          "steady_communities_per_year": {
+            "handling_kg": 7.989351880471425,
+            "bulk_finished_kg": 8.265980896399705,
+            "metal_finished_kg": 7.382452724945169,
+            "pressure_system_kg": 7.316585105134209,
+            "special_import_kg": 13.217391618197514,
+            "volatile_import_kg": 8.632275298760456,
+            "building_floor_m2": 8.571428571428571,
+            "road_km": 10.0,
+            "site_teams": 5.0
+          },
+          "slowest_steady_stream": "site_teams",
+          "last_start_year": 30.833333333333332,
+          "consumed": {
+            "handling_kg": 50066639445.15076,
+            "bulk_finished_kg": 9073333333.333324,
+            "metal_finished_kg": 812738018.5891501,
+            "pressure_system_kg": 410027349.766606,
+            "special_import_kg": 756578929.4032971,
+            "volatile_import_kg": 2896107820.332129,
+            "building_floor_m2": 3500000.0,
+            "road_km": 500.0
+          },
+          "produced_before_last_start": {
+            "handling_kg": 50066639445.15076,
+            "bulk_finished_kg": 9073333333.333334,
+            "metal_finished_kg": 812738018.589149,
+            "pressure_system_kg": 410027349.7666055,
+            "special_import_kg": 756578929.4032981,
+            "volatile_import_kg": 2896107820.3321266,
+            "building_floor_m2": 3500000.0,
+            "road_km": 500.0
+          },
+          "remaining_inventory_at_last_start": {
+            "handling_kg": 0.0,
+            "bulk_finished_kg": 0.0,
+            "metal_finished_kg": 2.421438694000244e-07,
+            "pressure_system_kg": 0.0,
+            "special_import_kg": 0.0,
+            "volatile_import_kg": 3.650784492492676e-07,
+            "building_floor_m2": 0.0,
+            "road_km": 0.0
+          },
+          "power_capacity_W": 1427777777.7777777,
+          "reference_price_funding_U": 126152288544.5268
+        }
+      },
+      "ready_industry_schedule": {
+        "lead_years": 0,
+        "establishment_delivery_minimum_years": 1.712222222222222,
+        "production_and_completion_years": 10.833333333333332,
+        "total_years": 10.833333333333332,
+        "occupation_years": {
+          "1": 1.5833333333333333,
+          "10": 2.25,
+          "25": 3.6666666666666665,
+          "50": 6.166666666666666,
+          "100": 10.833333333333332
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 15.941584079326246,
+          "bulk_finished_kg": 16.53196179279941,
+          "metal_finished_kg": 14.556112401541352,
+          "pressure_system_kg": 14.633170210268418,
+          "special_import_kg": 26.394113248423384,
+          "volatile_import_kg": 17.264550597520913,
+          "building_floor_m2": 17.142857142857142,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "site_teams",
+        "last_start_year": 9.333333333333332,
+        "consumed": {
+          "handling_kg": 50183218682.60728,
+          "bulk_finished_kg": 9073333333.333324,
+          "metal_finished_kg": 824395942.3348039,
+          "pressure_system_kg": 410027349.766606,
+          "special_import_kg": 757744721.7778643,
+          "volatile_import_kg": 2896107820.332129,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 50183218682.6073,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 757744721.7778635,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 3.3020973205566406e-05,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 0.0,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 1.2386590242385864e-06,
+          "volatile_import_kg": 2.034008502960205e-06,
+          "building_floor_m2": 0.0,
+          "road_km": 5.684341886080801e-13
+        }
+      }
+    },
+    "750": {
+      "quantities": {
+        "communities": 100,
+        "population": 75000,
+        "residents_per_community": 750,
+        "dome_diameter_m": 291.34624815788777,
+        "reference_depth_m": 21.365391531578435,
+        "total_plan_area_m2": 6666666.666666668,
+        "total_roof_area_m2": 7733333.333333334,
+        "garden_area_m2": 3250000.000000001,
+        "estate_area_km2": 26.66666666666667,
+        "pressure_ideal_kg": 220683323.36050576,
+        "pressure_reinforcement_kg": 441366646.7210115,
+        "barriers_kg": 254666666.6666667,
+        "pressure_system_kg": 696033313.3876781,
+        "independent_support_kg": 773333333.3333334,
+        "foundations_kg": 2000000000.0000005,
+        "shielding_kg": 37120000000.0,
+        "ordinary_stock_kg": 7500000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 50334935989.756546,
+        "raw_feed_kg": 62691582119.78773,
+        "retained_tails_kg": 12356646130.031178,
+        "quarry_area_km2": 3.9182238824867333,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 696033313.3876781,
+          "ordinary_equipment_kg": 375000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 46361111.111111104,
+          "reserve_hardware_kg": 54000000.0,
+          "garden_lamps_kg": 16250000.000000004,
+          "biosphere_kg": 37500000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 7660265.642321717
+        },
+        "establishment_import_kg": 96361111.1111111,
+        "air_including_reserve_kg": 365376174.41813123,
+        "water_inventory": {
+          "lakes_kg": 3333333333.333334,
+          "process_inventory_kg": 225000000,
+          "garden_inventory_kg": 487500000.0000001
+        },
+        "local_share_of_all_delivered_material": 0.8980531449962517,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 10228632847.915089,
+            "annual_raw_feed_kg": 51143164.239575446,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 5114316423.95755,
+            "annual_raw_feed_kg": 25571582.11978775,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 1022863284.79151,
+            "annual_raw_feed_kg": 5114316.42395755,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 375000000,
+          "food_W": 750000000,
+          "garden_average_W": 325000000.00000006,
+          "garden_peak_W": 487500000.0000001,
+          "mean_occupied_W": 1450000000.0,
+          "peak_occupied_W": 1612500000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 2318055555.5555553,
+          "reserve_Wh": 18000000000.0,
+          "full_night_storage_Wh": 856387109999.9999,
+          "radiator_emitting_area_m2": 7660265.642321717
+        },
+        "production_demand": {
+          "handling_kg": 73358248786.45439,
+          "bulk_finished_kg": 11990000000.0,
+          "metal_finished_kg": 1224935989.7565508,
+          "pressure_system_kg": 696033313.3876781,
+          "special_import_kg": 1206443579.0299997,
+          "volatile_import_kg": 4411209507.751465,
+          "building_floor_m2": 5250000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 1018864566.4785331,
+          "bulk_kWh": 13322222222.222221,
+          "metal_kWh": 24498719795.131016
+        },
+        "annual_makeup": {
+          "air_kg": 3321601.5856193746,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 54787500.00000005,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "costs": {
+        "lower": {
+          "direct_U": {
+            "ordinary_installed_capital": 22500000000,
+            "pressure_system": 13920666267.753563,
+            "independent_support_and_foundations": 2773333333.333334,
+            "local_shielding": 742400000.0,
+            "regional_roads": 500000000.0,
+            "pressurised_transport_and_docking": 200000000.0,
+            "dedicated_firm_power": 2318055555.5555553,
+            "emergency_reserves": 540000000.0,
+            "exterior_radiators": 383013282.1160858,
+            "civic_garden_lighting": 162500000.00000006,
+            "initial_air_and_water": 441120950.7751465,
+            "ordinary_extra_delivery": 750000000.0,
+            "initial_biosphere_imports": 37500000,
+            "survey_and_preservation": 200000000.0,
+            "incremental_qualification": 2000000000.0,
+            "regional_industrial_establishment_increment": 3000000000.0,
+            "construction_utility_operation": 38839806.58383177,
+            "disturbed_ground_restoration": 626915821.1978773
+          },
+          "direct_total_U": 51134345017.31539,
+          "contingency_U": 10226869003.46308,
+          "removal_reserve_U": 2556717250.86577,
+          "total_initial_funding_U": 63917931271.64424,
+          "per_community_U": 639179312.7164425,
+          "per_resident_U": 852239.0836219232,
+          "full_night_storage_only_U": 25691613299.999996
+        },
+        "reference": {
+          "direct_U": {
+            "ordinary_installed_capital": 37500000000,
+            "pressure_system": 41761998803.26069,
+            "independent_support_and_foundations": 8320000000.000002,
+            "local_shielding": 3712000000.0,
+            "regional_roads": 1500000000.0,
+            "pressurised_transport_and_docking": 500000000.0,
+            "dedicated_firm_power": 11590277777.777777,
+            "emergency_reserves": 1800000000.0,
+            "exterior_radiators": 1532053128.4643433,
+            "civic_garden_lighting": 650000000.0000002,
+            "initial_air_and_water": 4411209507.751465,
+            "ordinary_extra_delivery": 3750000000.0,
+            "initial_biosphere_imports": 375000000,
+            "survey_and_preservation": 700000000.0,
+            "incremental_qualification": 5000000000.0,
+            "regional_industrial_establishment_increment": 8000000000.0,
+            "construction_utility_operation": 194199032.91915888,
+            "disturbed_ground_restoration": 1880747463.5936317
+          },
+          "direct_total_U": 133177485713.76706,
+          "contingency_U": 46612119999.81847,
+          "removal_reserve_U": 6658874285.688354,
+          "total_initial_funding_U": 186448479999.27386,
+          "per_community_U": 1864484799.9927387,
+          "per_resident_U": 2485979.7333236514,
+          "full_night_storage_only_U": 85638711000.0
+        },
+        "upper": {
+          "direct_U": {
+            "ordinary_installed_capital": 75000000000,
+            "pressure_system": 104404997008.15172,
+            "independent_support_and_foundations": 27733333333.33334,
+            "local_shielding": 18560000000.0,
+            "regional_roads": 5000000000.0,
+            "pressurised_transport_and_docking": 1500000000.0,
+            "dedicated_firm_power": 46361111111.11111,
+            "emergency_reserves": 5400000000.0,
+            "exterior_radiators": 6128212513.857373,
+            "civic_garden_lighting": 1625000000.0000005,
+            "initial_air_and_water": 44112095077.51465,
+            "ordinary_extra_delivery": 18750000000.0,
+            "initial_biosphere_imports": 1875000000,
+            "survey_and_preservation": 2000000000.0,
+            "incremental_qualification": 15000000000.0,
+            "regional_industrial_establishment_increment": 25000000000.0,
+            "construction_utility_operation": 776796131.6766355,
+            "disturbed_ground_restoration": 6269158211.978773
+          },
+          "direct_total_U": 405495703387.6236,
+          "contingency_U": 243297422032.57416,
+          "removal_reserve_U": 20274785169.38118,
+          "total_initial_funding_U": 669067910589.579,
+          "per_community_U": 6690679105.89579,
+          "per_resident_U": 8920905.47452772,
+          "full_night_storage_only_U": 256916132999.99994
+        }
+      },
+      "schedules": {
+        "rapid": {
+          "lead_years": 4,
+          "establishment_delivery_minimum_years": 1.4090123456790122,
+          "production_and_completion_years": 9.5,
+          "total_years": 13.5,
+          "occupation_years": {
+            "1": 5.333333333333333,
+            "10": 6.916666666666666,
+            "25": 8.25,
+            "50": 10.0,
+            "100": 13.5
+          },
+          "steady_communities_per_year": {
+            "handling_kg": 16.3238304378195,
+            "bulk_finished_kg": 20.85070892410342,
+            "metal_finished_kg": 16.124781337112324,
+            "pressure_system_kg": 14.36712842281757,
+            "special_import_kg": 24.834793371831292,
+            "volatile_import_kg": 22.669519510301654,
+            "building_floor_m2": 17.142857142857142,
+            "road_km": 30.0,
+            "site_teams": 24.0
+          },
+          "slowest_steady_stream": "pressure_system_kg",
+          "last_start_year": 12.5,
+          "consumed": {
+            "handling_kg": 73512157858.47708,
+            "bulk_finished_kg": 11990000000.0,
+            "metal_finished_kg": 1240326896.9588182,
+            "pressure_system_kg": 696033313.3876791,
+            "special_import_kg": 1207982669.7502272,
+            "volatile_import_kg": 4411209507.751465,
+            "building_floor_m2": 5250000.0,
+            "road_km": 500.0
+          },
+          "produced_before_last_start": {
+            "handling_kg": 73512157858.47708,
+            "bulk_finished_kg": 11990000000.0,
+            "metal_finished_kg": 1240326896.9588187,
+            "pressure_system_kg": 696033313.3876781,
+            "special_import_kg": 1207982669.7502267,
+            "volatile_import_kg": 4411209507.751465,
+            "building_floor_m2": 5250000.0,
+            "road_km": 500.0
+          },
+          "remaining_inventory_at_last_start": {
+            "handling_kg": 0.0,
+            "bulk_finished_kg": 0.0,
+            "metal_finished_kg": 1.0058283805847168e-07,
+            "pressure_system_kg": 0.0,
+            "special_import_kg": 8.456408977508545e-07,
+            "volatile_import_kg": 0.0,
+            "building_floor_m2": 0.0,
+            "road_km": 0.0
+          },
+          "power_capacity_W": 2783796296.296296,
+          "reference_price_funding_U": 190148244457.53784
+        },
+        "reference": {
+          "lead_years": 6,
+          "establishment_delivery_minimum_years": 1.9272222222222222,
+          "production_and_completion_years": 14.666666666666666,
+          "total_years": 20.666666666666664,
+          "occupation_years": {
+            "1": 8.0,
+            "10": 10.083333333333332,
+            "25": 11.916666666666666,
+            "50": 14.833333333333332,
+            "100": 20.666666666666664
+          },
+          "steady_communities_per_year": {
+            "handling_kg": 10.905385736903252,
+            "bulk_finished_kg": 12.51042535446205,
+            "metal_finished_kg": 9.796430262764124,
+            "pressure_system_kg": 8.620277053690542,
+            "special_import_kg": 16.577650499064635,
+            "volatile_import_kg": 11.334759755150827,
+            "building_floor_m2": 11.428571428571429,
+            "road_km": 20.0,
+            "site_teams": 10.666666666666666
+          },
+          "slowest_steady_stream": "pressure_system_kg",
+          "last_start_year": 19.166666666666664,
+          "consumed": {
+            "handling_kg": 73358248786.45459,
+            "bulk_finished_kg": 11990000000.0,
+            "metal_finished_kg": 1224935989.7565506,
+            "pressure_system_kg": 696033313.3876791,
+            "special_import_kg": 1206443579.0299997,
+            "volatile_import_kg": 4411209507.751465,
+            "building_floor_m2": 5250000.0,
+            "road_km": 500.0
+          },
+          "produced_before_last_start": {
+            "handling_kg": 73358248786.45439,
+            "bulk_finished_kg": 11990000000.0,
+            "metal_finished_kg": 1224935989.7565508,
+            "pressure_system_kg": 696033313.3876781,
+            "special_import_kg": 1206443579.0299997,
+            "volatile_import_kg": 4411209507.751465,
+            "building_floor_m2": 5250000.0,
+            "road_km": 500.0
+          },
+          "remaining_inventory_at_last_start": {
+            "handling_kg": 3.814697265625e-05,
+            "bulk_finished_kg": 0.0,
+            "metal_finished_kg": 0.0,
+            "pressure_system_kg": 0.0,
+            "special_import_kg": 0.0,
+            "volatile_import_kg": 4.0531158447265625e-06,
+            "building_floor_m2": 0.0,
+            "road_km": 5.115907697472721e-13
+          },
+          "power_capacity_W": 2318055555.5555553,
+          "reference_price_funding_U": 186448479999.27386
+        },
+        "constrained": {
+          "lead_years": 10,
+          "establishment_delivery_minimum_years": 3.572222222222222,
+          "production_and_completion_years": 26.75,
+          "total_years": 36.75,
+          "occupation_years": {
+            "1": 13.0,
+            "10": 15.833333333333332,
+            "25": 19.333333333333332,
+            "50": 25.166666666666664,
+            "100": 36.75
+          },
+          "steady_communities_per_year": {
+            "handling_kg": 5.461371954832413,
+            "bulk_finished_kg": 6.255212677231025,
+            "metal_finished_kg": 4.945280202523759,
+            "pressure_system_kg": 4.310138526845271,
+            "special_import_kg": 8.296842529346977,
+            "volatile_import_kg": 5.667379877575414,
+            "building_floor_m2": 5.714285714285714,
+            "road_km": 10.0,
+            "site_teams": 5.0
+          },
+          "slowest_steady_stream": "pressure_system_kg",
+          "last_start_year": 34.75,
+          "consumed": {
+            "handling_kg": 73241669548.99768,
+            "bulk_finished_kg": 11990000000.0,
+            "metal_finished_kg": 1213278066.0108957,
+            "pressure_system_kg": 696033313.3876791,
+            "special_import_kg": 1205277786.6554346,
+            "volatile_import_kg": 4411209507.751465,
+            "building_floor_m2": 5250000.0,
+            "road_km": 500.0
+          },
+          "produced_before_last_start": {
+            "handling_kg": 73241669548.99785,
+            "bulk_finished_kg": 11990000000.0,
+            "metal_finished_kg": 1213278066.0108962,
+            "pressure_system_kg": 696033313.3876781,
+            "special_import_kg": 1205277786.6554344,
+            "volatile_import_kg": 4411209507.751465,
+            "building_floor_m2": 5250000.0,
+            "road_km": 500.0
+          },
+          "remaining_inventory_at_last_start": {
+            "handling_kg": 0.0,
+            "bulk_finished_kg": 0.0,
+            "metal_finished_kg": 5.811452865600586e-07,
+            "pressure_system_kg": 0.0,
+            "special_import_kg": 0.0,
+            "volatile_import_kg": 0.0,
+            "building_floor_m2": 0.0,
+            "road_km": 0.0
+          },
+          "power_capacity_W": 1965277777.7777777,
+          "reference_price_funding_U": 183646073918.561
+        }
+      },
+      "ready_industry_schedule": {
+        "lead_years": 0,
+        "establishment_delivery_minimum_years": 1.9272222222222222,
+        "production_and_completion_years": 13.166666666666666,
+        "total_years": 13.166666666666666,
+        "occupation_years": {
+          "1": 1.6666666666666667,
+          "10": 2.6666666666666665,
+          "25": 4.416666666666666,
+          "50": 7.333333333333333,
+          "100": 13.166666666666666
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 10.905385736903252,
+          "bulk_finished_kg": 12.51042535446205,
+          "metal_finished_kg": 9.796430262764124,
+          "pressure_system_kg": 8.620277053690542,
+          "special_import_kg": 16.577650499064635,
+          "volatile_import_kg": 11.334759755150827,
+          "building_floor_m2": 11.428571428571429,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "pressure_system_kg",
+        "last_start_year": 11.666666666666666,
+        "consumed": {
+          "handling_kg": 73358248786.45459,
+          "bulk_finished_kg": 11990000000.0,
+          "metal_finished_kg": 1224935989.7565506,
+          "pressure_system_kg": 696033313.3876791,
+          "special_import_kg": 1206443579.0299997,
+          "volatile_import_kg": 4411209507.751465,
+          "building_floor_m2": 5250000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 73358248786.45439,
+          "bulk_finished_kg": 11990000000.0,
+          "metal_finished_kg": 1224935989.7565508,
+          "pressure_system_kg": 696033313.3876781,
+          "special_import_kg": 1206443579.0299997,
+          "volatile_import_kg": 4411209507.751465,
+          "building_floor_m2": 5250000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 3.62396240234375e-05,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 0.0,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 0.0,
+          "volatile_import_kg": 4.0531158447265625e-06,
+          "building_floor_m2": 0.0,
+          "road_km": 4.547473508864641e-13
+        }
+      }
+    },
+    "1000": {
+      "quantities": {
+        "communities": 100,
+        "population": 100000,
+        "residents_per_community": 1000,
+        "dome_diameter_m": 336.417669602688,
+        "reference_depth_m": 24.670629104197122,
+        "total_plan_area_m2": 8888888.88888889,
+        "total_roof_area_m2": 10311111.111111112,
+        "garden_area_m2": 4333333.333333334,
+        "estate_area_km2": 35.55555555555556,
+        "pressure_ideal_kg": 339764203.0609314,
+        "pressure_reinforcement_kg": 679528406.1218628,
+        "barriers_kg": 339555555.5555556,
+        "pressure_system_kg": 1019083961.6774184,
+        "independent_support_kg": 1031111111.1111112,
+        "foundations_kg": 2666666666.666667,
+        "shielding_kg": 49493333333.333336,
+        "ordinary_stock_kg": 10000000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 66025476037.1783,
+        "raw_feed_kg": 82311056668.07927,
+        "retained_tails_kg": 16285580630.900976,
+        "quarry_area_km2": 5.144441041754955,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 1019083961.6774184,
+          "ordinary_equipment_kg": 500000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 57111111.111111104,
+          "reserve_hardware_kg": 71999999.99999999,
+          "garden_lamps_kg": 21666666.66666667,
+          "biosphere_kg": 50000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 9436492.606718663
+        },
+        "establishment_import_kg": 107111111.1111111,
+        "air_including_reserve_kg": 562533420.4154232,
+        "water_inventory": {
+          "lakes_kg": 4444444444.444445,
+          "process_inventory_kg": 300000000,
+          "garden_inventory_kg": 650000000.0000001
+        },
+        "local_share_of_all_delivered_material": 0.8948754146848591,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 13127089333.89837,
+            "annual_raw_feed_kg": 65635446.669491865,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 6563544666.949194,
+            "annual_raw_feed_kg": 32817723.33474597,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 1312708933.3898387,
+            "annual_raw_feed_kg": 6563544.666949194,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 500000000,
+          "food_W": 1000000000,
+          "garden_average_W": 433333333.33333343,
+          "garden_peak_W": 650000000.0000001,
+          "mean_occupied_W": 1933333333.3333335,
+          "peak_occupied_W": 2150000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 2855555555.5555553,
+          "reserve_Wh": 23999999999.999996,
+          "full_night_storage_Wh": 1141849480000.0,
+          "radiator_emitting_area_m2": 9436492.606718663
+        },
+        "production_demand": {
+          "handling_kg": 96533278890.3015,
+          "bulk_finished_kg": 14906666666.666668,
+          "metal_finished_kg": 1625476037.1782978,
+          "pressure_system_kg": 1019083961.6774184,
+          "special_import_kg": 1692187120.9508035,
+          "volatile_import_kg": 5956977864.859868,
+          "building_floor_m2": 7000000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 1340739984.5875208,
+          "bulk_kWh": 16562962962.962963,
+          "metal_kWh": 32509520743.565956
+        },
+        "annual_makeup": {
+          "air_kg": 5113940.185594756,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 73050000.00000006,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "costs": {
+        "lower": {
+          "direct_U": {
+            "ordinary_installed_capital": 30000000000,
+            "pressure_system": 20381679233.548367,
+            "independent_support_and_foundations": 3697777777.777778,
+            "local_shielding": 989866666.6666667,
+            "regional_roads": 500000000.0,
+            "pressurised_transport_and_docking": 200000000.0,
+            "dedicated_firm_power": 2855555555.5555553,
+            "emergency_reserves": 719999999.9999999,
+            "exterior_radiators": 471824630.33593315,
+            "civic_garden_lighting": 216666666.6666667,
+            "initial_air_and_water": 595697786.4859868,
+            "ordinary_extra_delivery": 1000000000.0,
+            "initial_biosphere_imports": 50000000,
+            "survey_and_preservation": 200000000.0,
+            "incremental_qualification": 2000000000.0,
+            "regional_industrial_establishment_increment": 3000000000.0,
+            "construction_utility_operation": 50413223.69111644,
+            "disturbed_ground_restoration": 823110566.6807927
+          },
+          "direct_total_U": 67752592107.40887,
+          "contingency_U": 13550518421.481773,
+          "removal_reserve_U": 3387629605.3704433,
+          "total_initial_funding_U": 84690740134.26108,
+          "per_community_U": 846907401.3426108,
+          "per_resident_U": 846907.4013426108,
+          "full_night_storage_only_U": 34255484400.0
+        },
+        "reference": {
+          "direct_U": {
+            "ordinary_installed_capital": 50000000000,
+            "pressure_system": 61145037700.6451,
+            "independent_support_and_foundations": 11093333333.333334,
+            "local_shielding": 4949333333.333334,
+            "regional_roads": 1500000000.0,
+            "pressurised_transport_and_docking": 500000000.0,
+            "dedicated_firm_power": 14277777777.777777,
+            "emergency_reserves": 2399999999.9999995,
+            "exterior_radiators": 1887298521.3437326,
+            "civic_garden_lighting": 866666666.6666667,
+            "initial_air_and_water": 5956977864.859868,
+            "ordinary_extra_delivery": 5000000000.0,
+            "initial_biosphere_imports": 500000000,
+            "survey_and_preservation": 700000000.0,
+            "incremental_qualification": 5000000000.0,
+            "regional_industrial_establishment_increment": 8000000000.0,
+            "construction_utility_operation": 252066118.4555822,
+            "disturbed_ground_restoration": 2469331700.042378
+          },
+          "direct_total_U": 176497823016.4578,
+          "contingency_U": 61774238055.76022,
+          "removal_reserve_U": 8824891150.82289,
+          "total_initial_funding_U": 247096952223.0409,
+          "per_community_U": 2470969522.230409,
+          "per_resident_U": 2470969.522230409,
+          "full_night_storage_only_U": 114184948000.0
+        },
+        "upper": {
+          "direct_U": {
+            "ordinary_installed_capital": 100000000000,
+            "pressure_system": 152862594251.61276,
+            "independent_support_and_foundations": 36977777777.77778,
+            "local_shielding": 24746666666.666668,
+            "regional_roads": 5000000000.0,
+            "pressurised_transport_and_docking": 1500000000.0,
+            "dedicated_firm_power": 57111111111.11111,
+            "emergency_reserves": 7199999999.999999,
+            "exterior_radiators": 7549194085.37493,
+            "civic_garden_lighting": 2166666666.666667,
+            "initial_air_and_water": 59569778648.59868,
+            "ordinary_extra_delivery": 25000000000.0,
+            "initial_biosphere_imports": 2500000000,
+            "survey_and_preservation": 2000000000.0,
+            "incremental_qualification": 15000000000.0,
+            "regional_industrial_establishment_increment": 25000000000.0,
+            "construction_utility_operation": 1008264473.8223288,
+            "disturbed_ground_restoration": 8231105666.807927
+          },
+          "direct_total_U": 533423159348.43884,
+          "contingency_U": 320053895609.0633,
+          "removal_reserve_U": 26671157967.421944,
+          "total_initial_funding_U": 880148212924.9242,
+          "per_community_U": 8801482129.249243,
+          "per_resident_U": 8801482.129249241,
+          "full_night_storage_only_U": 342554844000.0
+        }
+      },
+      "schedules": {
+        "rapid": {
+          "lead_years": 4,
+          "establishment_delivery_minimum_years": 1.5523456790123458,
+          "production_and_completion_years": 12.75,
+          "total_years": 16.75,
+          "occupation_years": {
+            "1": 5.416666666666666,
+            "10": 7.416666666666666,
+            "25": 9.083333333333332,
+            "50": 11.666666666666666,
+            "100": 16.75
+          },
+          "steady_communities_per_year": {
+            "handling_kg": 12.411158347759587,
+            "bulk_finished_kg": 16.77101967799642,
+            "metal_finished_kg": 12.188678715537222,
+            "pressure_system_kg": 9.81273415738968,
+            "special_import_kg": 17.712425888716687,
+            "volatile_import_kg": 16.787035686316486,
+            "building_floor_m2": 12.857142857142856,
+            "road_km": 30.0,
+            "site_teams": 24.0
+          },
+          "slowest_steady_stream": "pressure_system_kg",
+          "last_start_year": 15.75,
+          "consumed": {
+            "handling_kg": 96687187962.32439,
+            "bulk_finished_kg": 14906666666.666647,
+            "metal_finished_kg": 1640866944.380568,
+            "pressure_system_kg": 1019083961.6774195,
+            "special_import_kg": 1693726211.6710262,
+            "volatile_import_kg": 5956977864.859868,
+            "building_floor_m2": 7000000.0,
+            "road_km": 500.0
+          },
+          "produced_before_last_start": {
+            "handling_kg": 96687187962.32419,
+            "bulk_finished_kg": 14906666666.666668,
+            "metal_finished_kg": 1640866944.380566,
+            "pressure_system_kg": 1019083961.6774184,
+            "special_import_kg": 1693726211.6710305,
+            "volatile_import_kg": 5956977864.859868,
+            "building_floor_m2": 7000000.0,
+            "road_km": 500.0
+          },
+          "remaining_inventory_at_last_start": {
+            "handling_kg": 3.5762786865234375e-05,
+            "bulk_finished_kg": 0.0,
+            "metal_finished_kg": 0.0,
+            "pressure_system_kg": 0.0,
+            "special_import_kg": 0.0,
+            "volatile_import_kg": 2.8461217880249023e-06,
+            "building_floor_m2": 0.0,
+            "road_km": 0.0
+          },
+          "power_capacity_W": 3321296296.296296,
+          "reference_price_funding_U": 250796716681.30484
+        },
+        "reference": {
+          "lead_years": 6,
+          "establishment_delivery_minimum_years": 2.1422222222222222,
+          "production_and_completion_years": 20.0,
+          "total_years": 26.0,
+          "occupation_years": {
+            "1": 8.25,
+            "10": 10.75,
+            "25": 13.25,
+            "50": 17.5,
+            "100": 26.0
+          },
+          "steady_communities_per_year": {
+            "handling_kg": 8.287297491563548,
+            "bulk_finished_kg": 10.062611806797852,
+            "metal_finished_kg": 7.3824527249451695,
+            "pressure_system_kg": 5.887640494433809,
+            "special_import_kg": 11.819023884759524,
+            "volatile_import_kg": 8.393517843158243,
+            "building_floor_m2": 8.571428571428571,
+            "road_km": 20.0,
+            "site_teams": 10.666666666666666
+          },
+          "slowest_steady_stream": "pressure_system_kg",
+          "last_start_year": 24.5,
+          "consumed": {
+            "handling_kg": 96533278890.3015,
+            "bulk_finished_kg": 14906666666.666647,
+            "metal_finished_kg": 1625476037.1783001,
+            "pressure_system_kg": 1019083961.6774195,
+            "special_import_kg": 1692187120.9508014,
+            "volatile_import_kg": 5956977864.859868,
+            "building_floor_m2": 7000000.0,
+            "road_km": 500.0
+          },
+          "produced_before_last_start": {
+            "handling_kg": 96533278890.3015,
+            "bulk_finished_kg": 14906666666.666668,
+            "metal_finished_kg": 1625476037.1782978,
+            "pressure_system_kg": 1019083961.6774184,
+            "special_import_kg": 1692187120.9508035,
+            "volatile_import_kg": 5956977864.859868,
+            "building_floor_m2": 7000000.0,
+            "road_km": 500.0
+          },
+          "remaining_inventory_at_last_start": {
+            "handling_kg": 0.0,
+            "bulk_finished_kg": 0.0,
+            "metal_finished_kg": 3.3527612686157227e-08,
+            "pressure_system_kg": 7.450580596923828e-08,
+            "special_import_kg": 0.0,
+            "volatile_import_kg": 0.0,
+            "building_floor_m2": 0.0,
+            "road_km": 2.8421709430404007e-13
+          },
+          "power_capacity_W": 2855555555.5555553,
+          "reference_price_funding_U": 247096952223.0409
+        },
+        "constrained": {
+          "lead_years": 10,
+          "establishment_delivery_minimum_years": 4.002222222222222,
+          "production_and_completion_years": 37.5,
+          "total_years": 47.5,
+          "occupation_years": {
+            "1": 13.25,
+            "10": 16.916666666666664,
+            "25": 22.0,
+            "50": 30.5,
+            "100": 47.5
+          },
+          "steady_communities_per_year": {
+            "handling_kg": 4.148658909091764,
+            "bulk_finished_kg": 5.031305903398926,
+            "metal_finished_kg": 3.7178910994113243,
+            "pressure_system_kg": 2.9438202472169044,
+            "special_import_kg": 5.913585967847927,
+            "volatile_import_kg": 4.1967589215791214,
+            "building_floor_m2": 4.285714285714286,
+            "road_km": 10.0,
+            "site_teams": 5.0
+          },
+          "slowest_steady_stream": "pressure_system_kg",
+          "last_start_year": 45.5,
+          "consumed": {
+            "handling_kg": 96416699652.84477,
+            "bulk_finished_kg": 14906666666.666647,
+            "metal_finished_kg": 1613818113.4326453,
+            "pressure_system_kg": 1019083961.6774195,
+            "special_import_kg": 1691021328.5762367,
+            "volatile_import_kg": 5956977864.859868,
+            "building_floor_m2": 7000000.0,
+            "road_km": 500.0
+          },
+          "produced_before_last_start": {
+            "handling_kg": 96416699652.84496,
+            "bulk_finished_kg": 14906666666.666668,
+            "metal_finished_kg": 1613818113.4326434,
+            "pressure_system_kg": 1019083961.6774184,
+            "special_import_kg": 1691021328.5762382,
+            "volatile_import_kg": 5956977864.859868,
+            "building_floor_m2": 7000000.0,
+            "road_km": 500.0
+          },
+          "remaining_inventory_at_last_start": {
+            "handling_kg": 6.341934204101562e-05,
+            "bulk_finished_kg": 0.0,
+            "metal_finished_kg": 0.0,
+            "pressure_system_kg": 7.450580596923828e-08,
+            "special_import_kg": 4.656612873077393e-06,
+            "volatile_import_kg": 5.707144737243652e-06,
+            "building_floor_m2": 0.0,
+            "road_km": 0.0
+          },
+          "power_capacity_W": 2502777777.7777777,
+          "reference_price_funding_U": 244294546142.32803
+        }
+      },
+      "ready_industry_schedule": {
+        "lead_years": 0,
+        "establishment_delivery_minimum_years": 2.1422222222222222,
+        "production_and_completion_years": 18.5,
+        "total_years": 18.5,
+        "occupation_years": {
+          "1": 1.75,
+          "10": 3.25,
+          "25": 5.75,
+          "50": 10.0,
+          "100": 18.5
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 8.287297491563548,
+          "bulk_finished_kg": 10.062611806797852,
+          "metal_finished_kg": 7.3824527249451695,
+          "pressure_system_kg": 5.887640494433809,
+          "special_import_kg": 11.819023884759524,
+          "volatile_import_kg": 8.393517843158243,
+          "building_floor_m2": 8.571428571428571,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "pressure_system_kg",
+        "last_start_year": 17.0,
+        "consumed": {
+          "handling_kg": 96533278890.3015,
+          "bulk_finished_kg": 14906666666.666647,
+          "metal_finished_kg": 1625476037.1783001,
+          "pressure_system_kg": 1019083961.6774195,
+          "special_import_kg": 1692187120.9508014,
+          "volatile_import_kg": 5956977864.859868,
+          "building_floor_m2": 7000000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 96533278890.3015,
+          "bulk_finished_kg": 14906666666.666668,
+          "metal_finished_kg": 1625476037.1782978,
+          "pressure_system_kg": 1019083961.6774184,
+          "special_import_kg": 1692187120.9508035,
+          "volatile_import_kg": 5956977864.859868,
+          "building_floor_m2": 7000000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 0.0,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 3.3527612686157227e-08,
+          "pressure_system_kg": 7.450580596923828e-08,
+          "special_import_kg": 0.0,
+          "volatile_import_kg": 0.0,
+          "building_floor_m2": 0.0,
+          "road_km": 2.2737367544323206e-13
+        }
+      }
+    }
+  },
+  "sensitivities": {
+    "reference": {
+      "quantities": {
+        "communities": 100,
+        "population": 50000,
+        "residents_per_community": 500,
+        "dome_diameter_m": 237.88321548703618,
+        "reference_depth_m": 17.444769135715987,
+        "total_plan_area_m2": 4444444.444444445,
+        "total_roof_area_m2": 5155555.555555557,
+        "garden_area_m2": 2166666.666666667,
+        "estate_area_km2": 17.77777777777778,
+        "pressure_ideal_kg": 120124785.99441387,
+        "pressure_reinforcement_kg": 240249571.98882774,
+        "barriers_kg": 169777777.7777778,
+        "pressure_system_kg": 410027349.7666055,
+        "independent_support_kg": 515555555.5555557,
+        "foundations_kg": 1333333333.3333335,
+        "shielding_kg": 24746666666.666676,
+        "ordinary_stock_kg": 5000000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 34644395942.33481,
+        "raw_feed_kg": 43072107571.496185,
+        "retained_tails_kg": 8427711629.161376,
+        "quarry_area_km2": 2.6920067232185114,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 410027349.7666055,
+          "ordinary_equipment_kg": 250000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 35611111.111111104,
+          "reserve_hardware_kg": 35999999.99999999,
+          "garden_lamps_kg": 10833333.333333336,
+          "biosphere_kg": 25000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 5884038.67792477
+        },
+        "establishment_import_kg": 85611111.1111111,
+        "air_including_reserve_kg": 198885598.10990444,
+        "water_inventory": {
+          "lakes_kg": 2222222222.2222223,
+          "process_inventory_kg": 150000000,
+          "garden_inventory_kg": 325000000.00000006
+        },
+        "local_share_of_all_delivered_material": 0.9025771849776656,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 7330176361.931805,
+            "annual_raw_feed_kg": 36650881.80965902,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 3665088180.965906,
+            "annual_raw_feed_kg": 18325440.904829532,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 733017636.1931812,
+            "annual_raw_feed_kg": 3665088.180965906,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 250000000,
+          "food_W": 500000000,
+          "garden_average_W": 216666666.66666672,
+          "garden_peak_W": 325000000.00000006,
+          "mean_occupied_W": 966666666.6666667,
+          "peak_occupied_W": 1075000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 1780555555.5555553,
+          "reserve_Wh": 11999999999.999998,
+          "full_night_storage_Wh": 570924740000.0,
+          "radiator_emitting_area_m2": 5884038.67792477
+        },
+        "production_demand": {
+          "handling_kg": 50183218682.6073,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 757744721.7778635,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 696989148.3695458,
+          "bulk_kWh": 10081481481.481482,
+          "metal_kWh": 16487918846.696068
+        },
+        "annual_makeup": {
+          "air_kg": 1808050.891908222,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 36525000.00000003,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "cost": {
+        "direct_U": {
+          "ordinary_installed_capital": 25000000000,
+          "pressure_system": 24601640985.99633,
+          "independent_support_and_foundations": 5546666666.666668,
+          "local_shielding": 2474666666.6666675,
+          "regional_roads": 1500000000.0,
+          "pressurised_transport_and_docking": 500000000.0,
+          "dedicated_firm_power": 8902777777.777777,
+          "emergency_reserves": 1199999999.9999998,
+          "exterior_radiators": 1176807735.584954,
+          "civic_garden_lighting": 433333333.3333334,
+          "initial_air_and_water": 2896107820.3321266,
+          "ordinary_extra_delivery": 2500000000.0,
+          "initial_biosphere_imports": 250000000,
+          "survey_and_preservation": 700000000.0,
+          "incremental_qualification": 5000000000.0,
+          "regional_industrial_establishment_increment": 8000000000.0,
+          "construction_utility_operation": 136331947.3827355,
+          "disturbed_ground_restoration": 1292163227.1448855
+        },
+        "direct_total_U": 92110496160.88548,
+        "contingency_U": 32238673656.309917,
+        "removal_reserve_U": 4605524808.044274,
+        "total_initial_funding_U": 128954694625.23969,
+        "per_community_U": 1289546946.2523968,
+        "per_resident_U": 2579093.8925047936,
+        "full_night_storage_only_U": 57092474000.0
+      },
+      "schedule": {
+        "lead_years": 6,
+        "establishment_delivery_minimum_years": 1.712222222222222,
+        "production_and_completion_years": 11.833333333333332,
+        "total_years": 17.833333333333332,
+        "occupation_years": {
+          "1": 7.833333333333333,
+          "10": 9.416666666666666,
+          "25": 10.75,
+          "50": 13.166666666666666,
+          "100": 17.833333333333332
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 15.941584079326246,
+          "bulk_finished_kg": 16.53196179279941,
+          "metal_finished_kg": 14.556112401541352,
+          "pressure_system_kg": 14.633170210268418,
+          "special_import_kg": 26.394113248423384,
+          "volatile_import_kg": 17.264550597520913,
+          "building_floor_m2": 17.142857142857142,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "site_teams",
+        "last_start_year": 16.333333333333332,
+        "consumed": {
+          "handling_kg": 50183218682.60728,
+          "bulk_finished_kg": 9073333333.333324,
+          "metal_finished_kg": 824395942.3348039,
+          "pressure_system_kg": 410027349.766606,
+          "special_import_kg": 757744721.7778643,
+          "volatile_import_kg": 2896107820.332129,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 50183218682.6073,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 757744721.7778635,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 3.3020973205566406e-05,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 0.0,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 1.0598450899124146e-06,
+          "volatile_import_kg": 1.55717134475708e-06,
+          "building_floor_m2": 0.0,
+          "road_km": 5.400124791776761e-13
+        }
+      }
+    },
+    "allowable_400MPa": {
+      "quantities": {
+        "communities": 100,
+        "population": 50000,
+        "residents_per_community": 500,
+        "dome_diameter_m": 237.88321548703618,
+        "reference_depth_m": 17.444769135715987,
+        "total_plan_area_m2": 4444444.444444445,
+        "total_roof_area_m2": 5155555.555555557,
+        "garden_area_m2": 2166666.666666667,
+        "estate_area_km2": 17.77777777777778,
+        "pressure_ideal_kg": 180187178.99162084,
+        "pressure_reinforcement_kg": 360374357.9832417,
+        "barriers_kg": 169777777.7777778,
+        "pressure_system_kg": 530152135.76101947,
+        "independent_support_kg": 515555555.5555557,
+        "foundations_kg": 1333333333.3333335,
+        "shielding_kg": 24746666666.666676,
+        "ordinary_stock_kg": 5000000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 34644395942.33481,
+        "raw_feed_kg": 43072107571.496185,
+        "retained_tails_kg": 8427711629.161376,
+        "quarry_area_km2": 2.6920067232185114,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 530152135.76101947,
+          "ordinary_equipment_kg": 250000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 35611111.111111104,
+          "reserve_hardware_kg": 35999999.99999999,
+          "garden_lamps_kg": 10833333.333333336,
+          "biosphere_kg": 25000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 5884038.67792477
+        },
+        "establishment_import_kg": 85611111.1111111,
+        "air_including_reserve_kg": 198885598.10990444,
+        "water_inventory": {
+          "lakes_kg": 2222222222.2222223,
+          "process_inventory_kg": 150000000,
+          "garden_inventory_kg": 325000000.00000006
+        },
+        "local_share_of_all_delivered_material": 0.8997613233745003,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 7330176361.931805,
+            "annual_raw_feed_kg": 36650881.80965902,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 3665088180.965906,
+            "annual_raw_feed_kg": 18325440.904829532,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 733017636.1931812,
+            "annual_raw_feed_kg": 3665088.180965906,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 250000000,
+          "food_W": 500000000,
+          "garden_average_W": 216666666.66666672,
+          "garden_peak_W": 325000000.00000006,
+          "mean_occupied_W": 966666666.6666667,
+          "peak_occupied_W": 1075000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 1780555555.5555553,
+          "reserve_Wh": 11999999999.999998,
+          "full_night_storage_Wh": 570924740000.0,
+          "radiator_emitting_area_m2": 5884038.67792477
+        },
+        "production_demand": {
+          "handling_kg": 50183218682.6073,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 530152135.76101947,
+          "special_import_kg": 877869507.7722776,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 696989148.3695458,
+          "bulk_kWh": 10081481481.481482,
+          "metal_kWh": 16487918846.696068
+        },
+        "annual_makeup": {
+          "air_kg": 1808050.891908222,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 36525000.00000003,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "cost": {
+        "direct_U": {
+          "ordinary_installed_capital": 25000000000,
+          "pressure_system": 31809128145.661167,
+          "independent_support_and_foundations": 5546666666.666668,
+          "local_shielding": 2474666666.6666675,
+          "regional_roads": 1500000000.0,
+          "pressurised_transport_and_docking": 500000000.0,
+          "dedicated_firm_power": 8902777777.777777,
+          "emergency_reserves": 1199999999.9999998,
+          "exterior_radiators": 1176807735.584954,
+          "civic_garden_lighting": 433333333.3333334,
+          "initial_air_and_water": 2896107820.3321266,
+          "ordinary_extra_delivery": 2500000000.0,
+          "initial_biosphere_imports": 250000000,
+          "survey_and_preservation": 700000000.0,
+          "incremental_qualification": 5000000000.0,
+          "regional_industrial_establishment_increment": 8000000000.0,
+          "construction_utility_operation": 136331947.3827355,
+          "disturbed_ground_restoration": 1292163227.1448855
+        },
+        "direct_total_U": 99317983320.55031,
+        "contingency_U": 34761294162.192604,
+        "removal_reserve_U": 4965899166.027515,
+        "total_initial_funding_U": 139045176648.77045,
+        "per_community_U": 1390451766.4877045,
+        "per_resident_U": 2780903.5329754087,
+        "full_night_storage_only_U": 57092474000.0
+      },
+      "schedule": {
+        "lead_years": 6,
+        "establishment_delivery_minimum_years": 1.712222222222222,
+        "production_and_completion_years": 12.333333333333332,
+        "total_years": 18.333333333333332,
+        "occupation_years": {
+          "1": 7.916666666666666,
+          "10": 9.75,
+          "25": 11.25,
+          "50": 13.666666666666666,
+          "100": 18.333333333333332
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 15.941584079326246,
+          "bulk_finished_kg": 16.53196179279941,
+          "metal_finished_kg": 14.556112401541352,
+          "pressure_system_kg": 11.31750604265162,
+          "special_import_kg": 22.782429305185605,
+          "volatile_import_kg": 17.264550597520913,
+          "building_floor_m2": 17.142857142857142,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "site_teams",
+        "last_start_year": 16.833333333333332,
+        "consumed": {
+          "handling_kg": 50183218682.60728,
+          "bulk_finished_kg": 9073333333.333324,
+          "metal_finished_kg": 824395942.3348039,
+          "pressure_system_kg": 530152135.7610181,
+          "special_import_kg": 877869507.7722785,
+          "volatile_import_kg": 2896107820.332129,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 50183218682.6073,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 530152135.76101947,
+          "special_import_kg": 877869507.7722776,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 3.1113624572753906e-05,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 0.0,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 4.470348358154297e-08,
+          "volatile_import_kg": 1.7955899238586426e-06,
+          "building_floor_m2": 0.0,
+          "road_km": 5.968558980384842e-13
+        }
+      }
+    },
+    "allowable_800MPa": {
+      "quantities": {
+        "communities": 100,
+        "population": 50000,
+        "residents_per_community": 500,
+        "dome_diameter_m": 237.88321548703618,
+        "reference_depth_m": 17.444769135715987,
+        "total_plan_area_m2": 4444444.444444445,
+        "total_roof_area_m2": 5155555.555555557,
+        "garden_area_m2": 2166666.666666667,
+        "estate_area_km2": 17.77777777777778,
+        "pressure_ideal_kg": 90093589.49581042,
+        "pressure_reinforcement_kg": 180187178.99162084,
+        "barriers_kg": 169777777.7777778,
+        "pressure_system_kg": 349964956.7693986,
+        "independent_support_kg": 515555555.5555557,
+        "foundations_kg": 1333333333.3333335,
+        "shielding_kg": 24746666666.666676,
+        "ordinary_stock_kg": 5000000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 34644395942.33481,
+        "raw_feed_kg": 43072107571.496185,
+        "retained_tails_kg": 8427711629.161376,
+        "quarry_area_km2": 2.6920067232185114,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 349964956.7693986,
+          "ordinary_equipment_kg": 250000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 35611111.111111104,
+          "reserve_hardware_kg": 35999999.99999999,
+          "garden_lamps_kg": 10833333.333333336,
+          "biosphere_kg": 25000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 5884038.67792477
+        },
+        "establishment_import_kg": 85611111.1111111,
+        "air_including_reserve_kg": 198885598.10990444,
+        "water_inventory": {
+          "lakes_kg": 2222222222.2222223,
+          "process_inventory_kg": 150000000,
+          "garden_inventory_kg": 325000000.00000006
+        },
+        "local_share_of_all_delivered_material": 0.9039917354541727,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 7330176361.931805,
+            "annual_raw_feed_kg": 36650881.80965902,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 3665088180.965906,
+            "annual_raw_feed_kg": 18325440.904829532,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 733017636.1931812,
+            "annual_raw_feed_kg": 3665088.180965906,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 250000000,
+          "food_W": 500000000,
+          "garden_average_W": 216666666.66666672,
+          "garden_peak_W": 325000000.00000006,
+          "mean_occupied_W": 966666666.6666667,
+          "peak_occupied_W": 1075000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 1780555555.5555553,
+          "reserve_Wh": 11999999999.999998,
+          "full_night_storage_Wh": 570924740000.0,
+          "radiator_emitting_area_m2": 5884038.67792477
+        },
+        "production_demand": {
+          "handling_kg": 50183218682.6073,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 349964956.7693986,
+          "special_import_kg": 697682328.7806568,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 696989148.3695458,
+          "bulk_kWh": 10081481481.481482,
+          "metal_kWh": 16487918846.696068
+        },
+        "annual_makeup": {
+          "air_kg": 1808050.891908222,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 36525000.00000003,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "cost": {
+        "direct_U": {
+          "ordinary_installed_capital": 25000000000,
+          "pressure_system": 20997897406.163918,
+          "independent_support_and_foundations": 5546666666.666668,
+          "local_shielding": 2474666666.6666675,
+          "regional_roads": 1500000000.0,
+          "pressurised_transport_and_docking": 500000000.0,
+          "dedicated_firm_power": 8902777777.777777,
+          "emergency_reserves": 1199999999.9999998,
+          "exterior_radiators": 1176807735.584954,
+          "civic_garden_lighting": 433333333.3333334,
+          "initial_air_and_water": 2896107820.3321266,
+          "ordinary_extra_delivery": 2500000000.0,
+          "initial_biosphere_imports": 250000000,
+          "survey_and_preservation": 700000000.0,
+          "incremental_qualification": 5000000000.0,
+          "regional_industrial_establishment_increment": 8000000000.0,
+          "construction_utility_operation": 136331947.3827355,
+          "disturbed_ground_restoration": 1292163227.1448855
+        },
+        "direct_total_U": 88506752581.05307,
+        "contingency_U": 30977363403.368572,
+        "removal_reserve_U": 4425337629.052653,
+        "total_initial_funding_U": 123909453613.4743,
+        "per_community_U": 1239094536.134743,
+        "per_resident_U": 2478189.0722694863,
+        "full_night_storage_only_U": 57092474000.0
+      },
+      "schedule": {
+        "lead_years": 6,
+        "establishment_delivery_minimum_years": 1.712222222222222,
+        "production_and_completion_years": 11.833333333333332,
+        "total_years": 17.833333333333332,
+        "occupation_years": {
+          "1": 7.833333333333333,
+          "10": 9.416666666666666,
+          "25": 10.75,
+          "50": 13.166666666666666,
+          "100": 17.833333333333332
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 15.941584079326246,
+          "bulk_finished_kg": 16.53196179279941,
+          "metal_finished_kg": 14.556112401541352,
+          "pressure_system_kg": 17.144573717858165,
+          "special_import_kg": 28.666341650008693,
+          "volatile_import_kg": 17.264550597520913,
+          "building_floor_m2": 17.142857142857142,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "site_teams",
+        "last_start_year": 16.333333333333332,
+        "consumed": {
+          "handling_kg": 50183218682.60728,
+          "bulk_finished_kg": 9073333333.333324,
+          "metal_finished_kg": 824395942.3348039,
+          "pressure_system_kg": 349964956.769399,
+          "special_import_kg": 697682328.7806556,
+          "volatile_import_kg": 2896107820.332129,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 50183218682.6073,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 349964956.7693986,
+          "special_import_kg": 697682328.7806568,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 3.3020973205566406e-05,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 0.0,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 1.6763806343078613e-08,
+          "volatile_import_kg": 1.55717134475708e-06,
+          "building_floor_m2": 0.0,
+          "road_km": 5.400124791776761e-13
+        }
+      }
+    },
+    "shield_7m": {
+      "quantities": {
+        "communities": 100,
+        "population": 50000,
+        "residents_per_community": 500,
+        "dome_diameter_m": 237.88321548703618,
+        "reference_depth_m": 17.444769135715987,
+        "total_plan_area_m2": 4444444.444444445,
+        "total_roof_area_m2": 5155555.555555557,
+        "garden_area_m2": 2166666.666666667,
+        "estate_area_km2": 17.77777777777778,
+        "pressure_ideal_kg": 120124785.99441387,
+        "pressure_reinforcement_kg": 240249571.98882774,
+        "barriers_kg": 169777777.7777778,
+        "pressure_system_kg": 410027349.7666055,
+        "independent_support_kg": 515555555.5555557,
+        "foundations_kg": 1333333333.3333335,
+        "shielding_kg": 57742222222.22223,
+        "ordinary_stock_kg": 5000000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 67639951497.890366,
+        "raw_feed_kg": 76067663127.05174,
+        "retained_tails_kg": 8427711629.161376,
+        "quarry_area_km2": 4.754228945440734,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 410027349.7666055,
+          "ordinary_equipment_kg": 250000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 35611111.111111104,
+          "reserve_hardware_kg": 35999999.99999999,
+          "garden_lamps_kg": 10833333.333333336,
+          "biosphere_kg": 25000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 5884038.67792477
+        },
+        "establishment_import_kg": 85611111.1111111,
+        "air_including_reserve_kg": 198885598.10990444,
+        "water_inventory": {
+          "lakes_kg": 2222222222.2222223,
+          "process_inventory_kg": 150000000,
+          "garden_inventory_kg": 325000000.00000006
+        },
+        "local_share_of_all_delivered_material": 0.9476114556934294,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 7330176361.931805,
+            "annual_raw_feed_kg": 36650881.80965902,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 3665088180.965906,
+            "annual_raw_feed_kg": 18325440.904829532,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 733017636.1931812,
+            "annual_raw_feed_kg": 3665088.180965906,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 250000000,
+          "food_W": 500000000,
+          "garden_average_W": 216666666.66666672,
+          "garden_peak_W": 325000000.00000006,
+          "mean_occupied_W": 966666666.6666667,
+          "peak_occupied_W": 1075000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 1780555555.5555553,
+          "reserve_Wh": 11999999999.999998,
+          "full_night_storage_Wh": 570924740000.0,
+          "radiator_emitting_area_m2": 5884038.67792477
+        },
+        "production_demand": {
+          "handling_kg": 83178774238.16286,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 757744721.7778635,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 1155260753.3078175,
+          "bulk_kWh": 10081481481.481482,
+          "metal_kWh": 16487918846.696068
+        },
+        "annual_makeup": {
+          "air_kg": 1808050.891908222,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 36525000.00000003,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "cost": {
+        "direct_U": {
+          "ordinary_installed_capital": 25000000000,
+          "pressure_system": 24601640985.99633,
+          "independent_support_and_foundations": 5546666666.666668,
+          "local_shielding": 5774222222.222223,
+          "regional_roads": 1500000000.0,
+          "pressurised_transport_and_docking": 500000000.0,
+          "dedicated_firm_power": 8902777777.777777,
+          "emergency_reserves": 1199999999.9999998,
+          "exterior_radiators": 1176807735.584954,
+          "civic_garden_lighting": 433333333.3333334,
+          "initial_air_and_water": 2896107820.3321266,
+          "ordinary_extra_delivery": 2500000000.0,
+          "initial_biosphere_imports": 250000000,
+          "survey_and_preservation": 700000000.0,
+          "incremental_qualification": 5000000000.0,
+          "regional_industrial_establishment_increment": 8000000000.0,
+          "construction_utility_operation": 138623305.40742683,
+          "disturbed_ground_restoration": 2282029893.811552
+        },
+        "direct_total_U": 96402209741.13239,
+        "contingency_U": 33740773409.39633,
+        "removal_reserve_U": 4820110487.05662,
+        "total_initial_funding_U": 134963093637.58534,
+        "per_community_U": 1349630936.3758535,
+        "per_resident_U": 2699261.8727517067,
+        "full_night_storage_only_U": 57092474000.0
+      },
+      "schedule": {
+        "lead_years": 6,
+        "establishment_delivery_minimum_years": 1.712222222222222,
+        "production_and_completion_years": 13.416666666666666,
+        "total_years": 19.416666666666664,
+        "occupation_years": {
+          "1": 7.916666666666666,
+          "10": 9.916666666666666,
+          "25": 11.666666666666666,
+          "50": 14.25,
+          "100": 19.416666666666664
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 9.617838292608019,
+          "bulk_finished_kg": 16.53196179279941,
+          "metal_finished_kg": 14.556112401541352,
+          "pressure_system_kg": 14.633170210268418,
+          "special_import_kg": 26.394113248423384,
+          "volatile_import_kg": 17.264550597520913,
+          "building_floor_m2": 17.142857142857142,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "handling_kg",
+        "last_start_year": 17.916666666666664,
+        "consumed": {
+          "handling_kg": 83178774238.16283,
+          "bulk_finished_kg": 9073333333.333324,
+          "metal_finished_kg": 824395942.3348039,
+          "pressure_system_kg": 410027349.766606,
+          "special_import_kg": 757744721.7778643,
+          "volatile_import_kg": 2896107820.332129,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 83178774238.16286,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 757744721.7778635,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 0.0,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 0.0,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 1.3578683137893677e-06,
+          "volatile_import_kg": 3.46451997756958e-06,
+          "building_floor_m2": 0.0,
+          "road_km": 6.252776074688882e-13
+        }
+      }
+    },
+    "food_53kW_person": {
+      "quantities": {
+        "communities": 100,
+        "population": 50000,
+        "residents_per_community": 500,
+        "dome_diameter_m": 237.88321548703618,
+        "reference_depth_m": 17.444769135715987,
+        "total_plan_area_m2": 4444444.444444445,
+        "total_roof_area_m2": 5155555.555555557,
+        "garden_area_m2": 2166666.666666667,
+        "estate_area_km2": 17.77777777777778,
+        "pressure_ideal_kg": 120124785.99441387,
+        "pressure_reinforcement_kg": 240249571.98882774,
+        "barriers_kg": 169777777.7777778,
+        "pressure_system_kg": 410027349.7666055,
+        "independent_support_kg": 515555555.5555557,
+        "foundations_kg": 1333333333.3333335,
+        "shielding_kg": 24746666666.666676,
+        "ordinary_stock_kg": 5000000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 34715445020.91069,
+        "raw_feed_kg": 43782598357.25497,
+        "retained_tails_kg": 9067153336.34428,
+        "quarry_area_km2": 2.7364123973284356,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 410027349.7666055,
+          "ordinary_equipment_kg": 250000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 78611111.1111111,
+          "reserve_hardware_kg": 35999999.99999999,
+          "garden_lamps_kg": 10833333.333333336,
+          "biosphere_kg": 25000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 12988946.535512557
+        },
+        "establishment_import_kg": 128611111.1111111,
+        "air_including_reserve_kg": 198885598.10990444,
+        "water_inventory": {
+          "lakes_kg": 2222222222.2222223,
+          "process_inventory_kg": 150000000,
+          "garden_inventory_kg": 325000000.00000006
+        },
+        "local_share_of_all_delivered_material": 0.9015824639820086,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 7614372676.235316,
+            "annual_raw_feed_kg": 38071863.38117658,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 3807186338.1176624,
+            "annual_raw_feed_kg": 19035931.69058831,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 761437267.6235325,
+            "annual_raw_feed_kg": 3807186.338117663,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 250000000,
+          "food_W": 2650000000,
+          "garden_average_W": 216666666.66666672,
+          "garden_peak_W": 325000000.00000006,
+          "mean_occupied_W": 3116666666.6666665,
+          "peak_occupied_W": 3225000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 3930555555.5555553,
+          "reserve_Wh": 11999999999.999998,
+          "full_night_storage_Wh": 1840740109999.9998,
+          "radiator_emitting_area_m2": 12988946.535512557
+        },
+        "production_demand": {
+          "handling_kg": 50893709468.36608,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 895445020.9106812,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 764849629.6354513,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 706857075.9495288,
+          "bulk_kWh": 10081481481.481482,
+          "metal_kWh": 17908900418.213623
+        },
+        "annual_makeup": {
+          "air_kg": 1808050.891908222,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 36525000.00000003,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "cost": {
+        "direct_U": {
+          "ordinary_installed_capital": 25000000000,
+          "pressure_system": 24601640985.99633,
+          "independent_support_and_foundations": 5546666666.666668,
+          "local_shielding": 2474666666.6666675,
+          "regional_roads": 1500000000.0,
+          "pressurised_transport_and_docking": 500000000.0,
+          "dedicated_firm_power": 19652777777.77778,
+          "emergency_reserves": 1199999999.9999998,
+          "exterior_radiators": 2597789307.1025114,
+          "civic_garden_lighting": 433333333.3333334,
+          "initial_air_and_water": 2896107820.3321266,
+          "ordinary_extra_delivery": 2500000000.0,
+          "initial_biosphere_imports": 250000000,
+          "survey_and_preservation": 700000000.0,
+          "incremental_qualification": 5000000000.0,
+          "regional_industrial_establishment_increment": 8000000000.0,
+          "construction_utility_operation": 143486194.87822318,
+          "disturbed_ground_restoration": 1313477950.717649
+        },
+        "direct_total_U": 104309946703.47128,
+        "contingency_U": 36508481346.21494,
+        "removal_reserve_U": 5215497335.173565,
+        "total_initial_funding_U": 146033925384.85977,
+        "per_community_U": 1460339253.8485978,
+        "per_resident_U": 2920678.5076971953,
+        "full_night_storage_only_U": 184074011000.0
+      },
+      "schedule": {
+        "lead_years": 6,
+        "establishment_delivery_minimum_years": 2.572222222222222,
+        "production_and_completion_years": 12.0,
+        "total_years": 18.0,
+        "occupation_years": {
+          "1": 7.833333333333333,
+          "10": 9.5,
+          "25": 10.916666666666666,
+          "50": 13.333333333333332,
+          "100": 18.0
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 15.719034991883518,
+          "bulk_finished_kg": 16.53196179279941,
+          "metal_finished_kg": 13.40115777046347,
+          "pressure_system_kg": 14.633170210268418,
+          "special_import_kg": 26.148930750652987,
+          "volatile_import_kg": 17.264550597520913,
+          "building_floor_m2": 17.142857142857142,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "site_teams",
+        "last_start_year": 16.5,
+        "consumed": {
+          "handling_kg": 50893709468.36618,
+          "bulk_finished_kg": 9073333333.333324,
+          "metal_finished_kg": 895445020.9106805,
+          "pressure_system_kg": 410027349.766606,
+          "special_import_kg": 764849629.6354524,
+          "volatile_import_kg": 2896107820.332129,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 50893709468.36608,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 895445020.9106812,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 764849629.6354513,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 3.6835670471191406e-05,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 1.1175870895385742e-08,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 0.0,
+          "volatile_import_kg": 1.4379620552062988e-06,
+          "building_floor_m2": 0.0,
+          "road_km": 5.684341886080801e-13
+        }
+      }
+    },
+    "lake_depth_1m": {
+      "quantities": {
+        "communities": 100,
+        "population": 50000,
+        "residents_per_community": 500,
+        "dome_diameter_m": 237.88321548703618,
+        "reference_depth_m": 17.444769135715987,
+        "total_plan_area_m2": 4444444.444444445,
+        "total_roof_area_m2": 5155555.555555557,
+        "garden_area_m2": 2166666.666666667,
+        "estate_area_km2": 17.77777777777778,
+        "pressure_ideal_kg": 120124785.99441387,
+        "pressure_reinforcement_kg": 240249571.98882774,
+        "barriers_kg": 169777777.7777778,
+        "pressure_system_kg": 410027349.7666055,
+        "independent_support_kg": 515555555.5555557,
+        "foundations_kg": 1333333333.3333335,
+        "shielding_kg": 24746666666.666676,
+        "ordinary_stock_kg": 5000000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 34644395942.33481,
+        "raw_feed_kg": 43072107571.496185,
+        "retained_tails_kg": 8427711629.161376,
+        "quarry_area_km2": 2.6920067232185114,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 410027349.7666055,
+          "ordinary_equipment_kg": 250000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 35611111.111111104,
+          "reserve_hardware_kg": 35999999.99999999,
+          "garden_lamps_kg": 10833333.333333336,
+          "biosphere_kg": 25000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 5884038.67792477
+        },
+        "establishment_import_kg": 85611111.1111111,
+        "air_including_reserve_kg": 198885598.10990444,
+        "water_inventory": {
+          "lakes_kg": 1111111111.1111112,
+          "process_inventory_kg": 150000000,
+          "garden_inventory_kg": 325000000.00000006
+        },
+        "local_share_of_all_delivered_material": 0.9294832646106875,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 7330176361.931805,
+            "annual_raw_feed_kg": 36650881.80965902,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 3665088180.965906,
+            "annual_raw_feed_kg": 18325440.904829532,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 733017636.1931812,
+            "annual_raw_feed_kg": 3665088.180965906,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 250000000,
+          "food_W": 500000000,
+          "garden_average_W": 216666666.66666672,
+          "garden_peak_W": 325000000.00000006,
+          "mean_occupied_W": 966666666.6666667,
+          "peak_occupied_W": 1075000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 1780555555.5555553,
+          "reserve_Wh": 11999999999.999998,
+          "full_night_storage_Wh": 570924740000.0,
+          "radiator_emitting_area_m2": 5884038.67792477
+        },
+        "production_demand": {
+          "handling_kg": 50183218682.6073,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 757744721.7778635,
+          "volatile_import_kg": 1784996709.2210157,
+          "building_floor_m2": 3500000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 696989148.3695458,
+          "bulk_kWh": 10081481481.481482,
+          "metal_kWh": 16487918846.696068
+        },
+        "annual_makeup": {
+          "air_kg": 1808050.891908222,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 36525000.00000003,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "cost": {
+        "direct_U": {
+          "ordinary_installed_capital": 25000000000,
+          "pressure_system": 24601640985.99633,
+          "independent_support_and_foundations": 5546666666.666668,
+          "local_shielding": 2474666666.6666675,
+          "regional_roads": 1500000000.0,
+          "pressurised_transport_and_docking": 500000000.0,
+          "dedicated_firm_power": 8902777777.777777,
+          "emergency_reserves": 1199999999.9999998,
+          "exterior_radiators": 1176807735.584954,
+          "civic_garden_lighting": 433333333.3333334,
+          "initial_air_and_water": 1784996709.2210157,
+          "ordinary_extra_delivery": 2500000000.0,
+          "initial_biosphere_imports": 250000000,
+          "survey_and_preservation": 700000000.0,
+          "incremental_qualification": 5000000000.0,
+          "regional_industrial_establishment_increment": 8000000000.0,
+          "construction_utility_operation": 136331947.3827355,
+          "disturbed_ground_restoration": 1292163227.1448855
+        },
+        "direct_total_U": 90999385049.77437,
+        "contingency_U": 31849784767.42103,
+        "removal_reserve_U": 4549969252.488719,
+        "total_initial_funding_U": 127399139069.68413,
+        "per_community_U": 1273991390.6968412,
+        "per_resident_U": 2547982.7813936826,
+        "full_night_storage_only_U": 57092474000.0
+      },
+      "schedule": {
+        "lead_years": 6,
+        "establishment_delivery_minimum_years": 1.712222222222222,
+        "production_and_completion_years": 11.833333333333332,
+        "total_years": 17.833333333333332,
+        "occupation_years": {
+          "1": 7.833333333333333,
+          "10": 9.416666666666666,
+          "25": 10.75,
+          "50": 13.166666666666666,
+          "100": 17.833333333333332
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 15.941584079326246,
+          "bulk_finished_kg": 16.53196179279941,
+          "metal_finished_kg": 14.556112401541352,
+          "pressure_system_kg": 14.633170210268418,
+          "special_import_kg": 26.394113248423384,
+          "volatile_import_kg": 28.01125612260671,
+          "building_floor_m2": 17.142857142857142,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "site_teams",
+        "last_start_year": 16.333333333333332,
+        "consumed": {
+          "handling_kg": 50183218682.60728,
+          "bulk_finished_kg": 9073333333.333324,
+          "metal_finished_kg": 824395942.3348039,
+          "pressure_system_kg": 410027349.766606,
+          "special_import_kg": 757744721.7778643,
+          "volatile_import_kg": 1784996709.2210126,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 50183218682.6073,
+          "bulk_finished_kg": 9073333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 757744721.7778635,
+          "volatile_import_kg": 1784996709.2210157,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 3.3020973205566406e-05,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 0.0,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 1.0598450899124146e-06,
+          "volatile_import_kg": 0.0,
+          "building_floor_m2": 0.0,
+          "road_km": 5.400124791776761e-13
+        }
+      }
+    },
+    "roads_1000km": {
+      "quantities": {
+        "communities": 100,
+        "population": 50000,
+        "residents_per_community": 500,
+        "dome_diameter_m": 237.88321548703618,
+        "reference_depth_m": 17.444769135715987,
+        "total_plan_area_m2": 4444444.444444445,
+        "total_roof_area_m2": 5155555.555555557,
+        "garden_area_m2": 2166666.666666667,
+        "estate_area_km2": 17.77777777777778,
+        "pressure_ideal_kg": 120124785.99441387,
+        "pressure_reinforcement_kg": 240249571.98882774,
+        "barriers_kg": 169777777.7777778,
+        "pressure_system_kg": 410027349.7666055,
+        "independent_support_kg": 515555555.5555557,
+        "foundations_kg": 1333333333.3333335,
+        "shielding_kg": 24746666666.666676,
+        "ordinary_stock_kg": 5000000000,
+        "road_material_kg": 6480000000.0,
+        "local_finished_kg": 37884395942.33481,
+        "raw_feed_kg": 46672107571.496185,
+        "retained_tails_kg": 8787711629.161377,
+        "quarry_area_km2": 2.9170067232185115,
+        "road_corridor_area_km2": 20.0,
+        "special_imports": {
+          "pressure_system_kg": 410027349.7666055,
+          "ordinary_equipment_kg": 250000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 35611111.111111104,
+          "reserve_hardware_kg": 35999999.99999999,
+          "garden_lamps_kg": 10833333.333333336,
+          "biosphere_kg": 25000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 5884038.67792477
+        },
+        "establishment_import_kg": 85611111.1111111,
+        "air_including_reserve_kg": 198885598.10990444,
+        "water_inventory": {
+          "lakes_kg": 2222222222.2222223,
+          "process_inventory_kg": 150000000,
+          "garden_inventory_kg": 325000000.00000006
+        },
+        "local_share_of_all_delivered_material": 0.9101605740179761,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 8770176361.931803,
+            "annual_raw_feed_kg": 43850881.80965901,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 4385088180.965906,
+            "annual_raw_feed_kg": 21925440.904829532,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 877017636.1931813,
+            "annual_raw_feed_kg": 4385088.180965906,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 250000000,
+          "food_W": 500000000,
+          "garden_average_W": 216666666.66666672,
+          "garden_peak_W": 325000000.00000006,
+          "mean_occupied_W": 966666666.6666667,
+          "peak_occupied_W": 1075000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 1780555555.5555553,
+          "reserve_Wh": 11999999999.999998,
+          "full_night_storage_Wh": 570924740000.0,
+          "radiator_emitting_area_m2": 5884038.67792477
+        },
+        "production_demand": {
+          "handling_kg": 53783218682.6073,
+          "bulk_finished_kg": 12313333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 757744721.7778635,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000,
+          "road_km": 1000
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 746989148.3695459,
+          "bulk_kWh": 13681481481.481482,
+          "metal_kWh": 16487918846.696068
+        },
+        "annual_makeup": {
+          "air_kg": 1808050.891908222,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 36525000.00000003,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "cost": {
+        "direct_U": {
+          "ordinary_installed_capital": 25000000000,
+          "pressure_system": 24601640985.99633,
+          "independent_support_and_foundations": 5546666666.666668,
+          "local_shielding": 2474666666.6666675,
+          "regional_roads": 3000000000.0,
+          "pressurised_transport_and_docking": 500000000.0,
+          "dedicated_firm_power": 8902777777.777777,
+          "emergency_reserves": 1199999999.9999998,
+          "exterior_radiators": 1176807735.584954,
+          "civic_garden_lighting": 433333333.3333334,
+          "initial_air_and_water": 2896107820.3321266,
+          "ordinary_extra_delivery": 2500000000.0,
+          "initial_biosphere_imports": 250000000,
+          "survey_and_preservation": 700000000.0,
+          "incremental_qualification": 5000000000.0,
+          "regional_industrial_establishment_increment": 8000000000.0,
+          "construction_utility_operation": 154581947.3827355,
+          "disturbed_ground_restoration": 1400163227.1448855
+        },
+        "direct_total_U": 93736746160.88548,
+        "contingency_U": 32807861156.309917,
+        "removal_reserve_U": 4686837308.044274,
+        "total_initial_funding_U": 131231444625.23969,
+        "per_community_U": 1312314446.2523968,
+        "per_resident_U": 2624628.8925047936,
+        "full_night_storage_only_U": 57092474000.0
+      },
+      "schedule": {
+        "lead_years": 6,
+        "establishment_delivery_minimum_years": 1.712222222222222,
+        "production_and_completion_years": 13.0,
+        "total_years": 19.0,
+        "occupation_years": {
+          "1": 7.916666666666666,
+          "10": 9.833333333333332,
+          "25": 11.5,
+          "50": 14.0,
+          "100": 19.0
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 14.8745281445699,
+          "bulk_finished_kg": 12.181916621548456,
+          "metal_finished_kg": 14.556112401541352,
+          "pressure_system_kg": 14.633170210268418,
+          "special_import_kg": 26.394113248423384,
+          "volatile_import_kg": 17.264550597520913,
+          "building_floor_m2": 17.142857142857142,
+          "road_km": 10.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "road_km",
+        "last_start_year": 17.5,
+        "consumed": {
+          "handling_kg": 53783218682.60728,
+          "bulk_finished_kg": 12313333333.333344,
+          "metal_finished_kg": 824395942.3348039,
+          "pressure_system_kg": 410027349.766606,
+          "special_import_kg": 757744721.7778643,
+          "volatile_import_kg": 2896107820.332129,
+          "building_floor_m2": 3500000.0,
+          "road_km": 1000.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 53783218682.6073,
+          "bulk_finished_kg": 12313333333.333334,
+          "metal_finished_kg": 824395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 757744721.7778635,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000.0,
+          "road_km": 1000.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 5.364418029785156e-05,
+          "bulk_finished_kg": 2.8312206268310547e-06,
+          "metal_finished_kg": 0.0,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 1.298263669013977e-06,
+          "volatile_import_kg": 2.987682819366455e-06,
+          "building_floor_m2": 0.0,
+          "road_km": 0.0
+        }
+      }
+    },
+    "ordinary_stock_43t": {
+      "quantities": {
+        "communities": 100,
+        "population": 50000,
+        "residents_per_community": 500,
+        "dome_diameter_m": 237.88321548703618,
+        "reference_depth_m": 17.444769135715987,
+        "total_plan_area_m2": 4444444.444444445,
+        "total_roof_area_m2": 5155555.555555557,
+        "garden_area_m2": 2166666.666666667,
+        "estate_area_km2": 17.77777777777778,
+        "pressure_ideal_kg": 120124785.99441387,
+        "pressure_reinforcement_kg": 240249571.98882774,
+        "barriers_kg": 169777777.7777778,
+        "pressure_system_kg": 410027349.7666055,
+        "independent_support_kg": 515555555.5555557,
+        "foundations_kg": 1333333333.3333335,
+        "shielding_kg": 24746666666.666676,
+        "ordinary_stock_kg": 2150000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 31936895942.334812,
+        "raw_feed_kg": 38797107571.496185,
+        "retained_tails_kg": 6860211629.161376,
+        "quarry_area_km2": 2.4248192232185115,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 410027349.7666055,
+          "ordinary_equipment_kg": 107500000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 35611111.111111104,
+          "reserve_hardware_kg": 35999999.99999999,
+          "garden_lamps_kg": 10833333.333333336,
+          "biosphere_kg": 25000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 5884038.67792477
+        },
+        "establishment_import_kg": 85611111.1111111,
+        "air_including_reserve_kg": 198885598.10990444,
+        "water_inventory": {
+          "lakes_kg": 2222222222.2222223,
+          "process_inventory_kg": 150000000,
+          "garden_inventory_kg": 325000000.00000006
+        },
+        "local_share_of_all_delivered_material": 0.8987736290354748,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 5620176361.931805,
+            "annual_raw_feed_kg": 28100881.80965902,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 2810088180.965905,
+            "annual_raw_feed_kg": 14050440.904829526,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 562017636.193181,
+            "annual_raw_feed_kg": 2810088.180965905,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 250000000,
+          "food_W": 500000000,
+          "garden_average_W": 216666666.66666672,
+          "garden_peak_W": 325000000.00000006,
+          "mean_occupied_W": 966666666.6666667,
+          "peak_occupied_W": 1075000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 1780555555.5555553,
+          "reserve_Wh": 11999999999.999998,
+          "full_night_storage_Wh": 570924740000.0,
+          "radiator_emitting_area_m2": 5884038.67792477
+        },
+        "production_demand": {
+          "handling_kg": 45908218682.6073,
+          "bulk_finished_kg": 6508333333.333334,
+          "metal_finished_kg": 681895942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 615244721.7778635,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 637614148.3695458,
+          "bulk_kWh": 7231481481.481482,
+          "metal_kWh": 13637918846.696068
+        },
+        "annual_makeup": {
+          "air_kg": 1808050.891908222,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 36525000.00000003,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "cost": {
+        "direct_U": {
+          "ordinary_installed_capital": 25000000000,
+          "pressure_system": 24601640985.99633,
+          "independent_support_and_foundations": 5546666666.666668,
+          "local_shielding": 2474666666.6666675,
+          "regional_roads": 1500000000.0,
+          "pressurised_transport_and_docking": 500000000.0,
+          "dedicated_firm_power": 8902777777.777777,
+          "emergency_reserves": 1199999999.9999998,
+          "exterior_radiators": 1176807735.584954,
+          "civic_garden_lighting": 433333333.3333334,
+          "initial_air_and_water": 2896107820.3321266,
+          "ordinary_extra_delivery": 1075000000.0,
+          "initial_biosphere_imports": 250000000,
+          "survey_and_preservation": 700000000.0,
+          "incremental_qualification": 5000000000.0,
+          "regional_industrial_establishment_increment": 8000000000.0,
+          "construction_utility_operation": 107535072.38273548,
+          "disturbed_ground_restoration": 1163913227.1448855
+        },
+        "direct_total_U": 90528449285.88548,
+        "contingency_U": 31684957250.059917,
+        "removal_reserve_U": 4526422464.294274,
+        "total_initial_funding_U": 126739829000.23969,
+        "per_community_U": 1267398290.0023968,
+        "per_resident_U": 2534796.5800047936,
+        "full_night_storage_only_U": 57092474000.0
+      },
+      "schedule": {
+        "lead_years": 6,
+        "establishment_delivery_minimum_years": 1.712222222222222,
+        "production_and_completion_years": 11.833333333333332,
+        "total_years": 17.833333333333332,
+        "occupation_years": {
+          "1": 7.833333333333333,
+          "10": 9.416666666666666,
+          "25": 10.75,
+          "50": 13.166666666666666,
+          "100": 17.833333333333332
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 17.426073652103746,
+          "bulk_finished_kg": 23.047375160051214,
+          "metal_finished_kg": 17.597992970763467,
+          "pressure_system_kg": 14.633170210268418,
+          "special_import_kg": 32.507389811010974,
+          "volatile_import_kg": 17.264550597520913,
+          "building_floor_m2": 17.142857142857142,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "site_teams",
+        "last_start_year": 16.333333333333332,
+        "consumed": {
+          "handling_kg": 45908218682.60728,
+          "bulk_finished_kg": 6508333333.333327,
+          "metal_finished_kg": 681895942.3348033,
+          "pressure_system_kg": 410027349.766606,
+          "special_import_kg": 615244721.7778634,
+          "volatile_import_kg": 2896107820.332129,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 45908218682.6073,
+          "bulk_finished_kg": 6508333333.333334,
+          "metal_finished_kg": 681895942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 615244721.7778635,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 1.919269561767578e-05,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 0.0,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 6.463378667831421e-07,
+          "volatile_import_kg": 1.55717134475708e-06,
+          "building_floor_m2": 0.0,
+          "road_km": 5.400124791776761e-13
+        }
+      }
+    },
+    "ordinary_stock_200t": {
+      "quantities": {
+        "communities": 100,
+        "population": 50000,
+        "residents_per_community": 500,
+        "dome_diameter_m": 237.88321548703618,
+        "reference_depth_m": 17.444769135715987,
+        "total_plan_area_m2": 4444444.444444445,
+        "total_roof_area_m2": 5155555.555555557,
+        "garden_area_m2": 2166666.666666667,
+        "estate_area_km2": 17.77777777777778,
+        "pressure_ideal_kg": 120124785.99441387,
+        "pressure_reinforcement_kg": 240249571.98882774,
+        "barriers_kg": 169777777.7777778,
+        "pressure_system_kg": 410027349.7666055,
+        "independent_support_kg": 515555555.5555557,
+        "foundations_kg": 1333333333.3333335,
+        "shielding_kg": 24746666666.666676,
+        "ordinary_stock_kg": 10000000000,
+        "road_material_kg": 3240000000.0,
+        "local_finished_kg": 39394395942.33481,
+        "raw_feed_kg": 50572107571.496185,
+        "retained_tails_kg": 11177711629.161377,
+        "quarry_area_km2": 3.1607567232185114,
+        "road_corridor_area_km2": 10.0,
+        "special_imports": {
+          "pressure_system_kg": 410027349.7666055,
+          "ordinary_equipment_kg": 500000000.0,
+          "construction_plant_kg": 50000000.0,
+          "power_hardware_kg": 35611111.111111104,
+          "reserve_hardware_kg": 35999999.99999999,
+          "garden_lamps_kg": 10833333.333333336,
+          "biosphere_kg": 25000000,
+          "transport_and_docking_kg": 20000000,
+          "radiator_controls_kg": 5884038.67792477
+        },
+        "establishment_import_kg": 85611111.1111111,
+        "air_including_reserve_kg": 198885598.10990444,
+        "water_inventory": {
+          "lakes_kg": 2222222222.2222223,
+          "process_inventory_kg": 150000000,
+          "garden_inventory_kg": 325000000.00000006
+        },
+        "local_share_of_all_delivered_material": 0.9080426755384907,
+        "future_raw_feed_reservation": [
+          {
+            "usable_return_fraction": 0.9,
+            "horizon_years": 200,
+            "raw_feed_kg": 10330176361.931803,
+            "annual_raw_feed_kg": 51650881.80965901,
+            "processed_asset_inventory_cycle_years": 500.0000000000001
+          },
+          {
+            "usable_return_fraction": 0.95,
+            "horizon_years": 200,
+            "raw_feed_kg": 5165088180.965907,
+            "annual_raw_feed_kg": 25825440.904829536,
+            "processed_asset_inventory_cycle_years": 999.9999999999991
+          },
+          {
+            "usable_return_fraction": 0.99,
+            "horizon_years": 200,
+            "raw_feed_kg": 1033017636.1931815,
+            "annual_raw_feed_kg": 5165088.180965908,
+            "processed_asset_inventory_cycle_years": 4999.999999999995
+          }
+        ],
+        "services": {
+          "basic_W": 250000000,
+          "food_W": 500000000,
+          "garden_average_W": 216666666.66666672,
+          "garden_peak_W": 325000000.00000006,
+          "mean_occupied_W": 966666666.6666667,
+          "peak_occupied_W": 1075000000.0,
+          "industrial_peak_W": 705555555.5555555,
+          "firm_capacity_W": 1780555555.5555553,
+          "reserve_Wh": 11999999999.999998,
+          "full_night_storage_Wh": 570924740000.0,
+          "radiator_emitting_area_m2": 5884038.67792477
+        },
+        "production_demand": {
+          "handling_kg": 57683218682.6073,
+          "bulk_finished_kg": 13573333333.333334,
+          "metal_finished_kg": 1074395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 1007744721.7778637,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000,
+          "road_km": 500
+        },
+        "construction_energy_kWh": {
+          "handling_kWh": 801155815.0362126,
+          "bulk_kWh": 15081481481.481482,
+          "metal_kWh": 21487918846.696068
+        },
+        "annual_makeup": {
+          "air_kg": 1808050.891908222,
+          "air_inventory_cycle_years": 100,
+          "processed_water_kg": 36525000.00000003,
+          "boundary": "Air: 1% of operating gross inventory; water: only the 100 kg/person/day processed loop at 98% recovery. Lake/crop losses, lock cycles and accidents require additional accounts."
+        }
+      },
+      "cost": {
+        "direct_U": {
+          "ordinary_installed_capital": 25000000000,
+          "pressure_system": 24601640985.99633,
+          "independent_support_and_foundations": 5546666666.666668,
+          "local_shielding": 2474666666.6666675,
+          "regional_roads": 1500000000.0,
+          "pressurised_transport_and_docking": 500000000.0,
+          "dedicated_firm_power": 8902777777.777777,
+          "emergency_reserves": 1199999999.9999998,
+          "exterior_radiators": 1176807735.584954,
+          "civic_garden_lighting": 433333333.3333334,
+          "initial_air_and_water": 2896107820.3321266,
+          "ordinary_extra_delivery": 5000000000.0,
+          "initial_biosphere_imports": 250000000,
+          "survey_and_preservation": 700000000.0,
+          "incremental_qualification": 5000000000.0,
+          "regional_industrial_establishment_increment": 8000000000.0,
+          "construction_utility_operation": 186852780.7160688,
+          "disturbed_ground_restoration": 1517163227.1448855
+        },
+        "direct_total_U": 94886016994.21881,
+        "contingency_U": 33210105947.97658,
+        "removal_reserve_U": 4744300849.71094,
+        "total_initial_funding_U": 132840423791.90633,
+        "per_community_U": 1328404237.9190633,
+        "per_resident_U": 2656808.4758381266,
+        "full_night_storage_only_U": 57092474000.0
+      },
+      "schedule": {
+        "lead_years": 6,
+        "establishment_delivery_minimum_years": 1.712222222222222,
+        "production_and_completion_years": 12.333333333333332,
+        "total_years": 18.333333333333332,
+        "occupation_years": {
+          "1": 7.916666666666666,
+          "10": 9.75,
+          "25": 11.333333333333332,
+          "50": 13.666666666666666,
+          "100": 18.333333333333332
+        },
+        "steady_communities_per_year": {
+          "handling_kg": 13.868851604864012,
+          "bulk_finished_kg": 11.05108055009823,
+          "metal_finished_kg": 11.169066753847213,
+          "pressure_system_kg": 14.633170210268418,
+          "special_import_kg": 19.846295959472744,
+          "volatile_import_kg": 17.264550597520913,
+          "building_floor_m2": 17.142857142857142,
+          "road_km": 20.0,
+          "site_teams": 10.666666666666666
+        },
+        "slowest_steady_stream": "site_teams",
+        "last_start_year": 16.833333333333332,
+        "consumed": {
+          "handling_kg": 57683218682.60728,
+          "bulk_finished_kg": 13573333333.33335,
+          "metal_finished_kg": 1074395942.3348045,
+          "pressure_system_kg": 410027349.766606,
+          "special_import_kg": 1007744721.7778653,
+          "volatile_import_kg": 2896107820.332129,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "produced_before_last_start": {
+          "handling_kg": 57683218682.6073,
+          "bulk_finished_kg": 13573333333.333334,
+          "metal_finished_kg": 1074395942.3348033,
+          "pressure_system_kg": 410027349.7666055,
+          "special_import_kg": 1007744721.7778637,
+          "volatile_import_kg": 2896107820.3321266,
+          "building_floor_m2": 3500000.0,
+          "road_km": 500.0
+        },
+        "remaining_inventory_at_last_start": {
+          "handling_kg": 5.936622619628906e-05,
+          "bulk_finished_kg": 0.0,
+          "metal_finished_kg": 1.0058283805847168e-07,
+          "pressure_system_kg": 0.0,
+          "special_import_kg": 1.7583370208740234e-06,
+          "volatile_import_kg": 2.034008502960205e-06,
+          "building_floor_m2": 0.0,
+          "road_km": 6.252776074688882e-13
+        }
+      }
+    }
+  },
+  "construction_cost_boundary": [
+    "All new U prices and fixed allowances are scenarios, not converted contemporary dollar quotations. Ordinary capital uses the existing economic allowance without adding its stock-times-price proxy.",
+    "Installed unit charges include fabrication, delivery/placement, supplier equipment, operation and capital recovery within their boundary. Supplier factories, freight fleets and generation capital are not added a second time.",
+    "The industrial-establishment increment covers extra regional mobilization, construction camps, commissioning and start-up losses above normal supplier capital recovery already included in installed charges. It is an unengineered allowance, not a second complete factory bill.",
+    "The qualification allowance is the incremental full-scale pressure/protection/repair/transition development programme beyond ordinary R&D. No revenue or residual asset sale offsets it.",
+    "The entire new regional infrastructure requirement and establishment increment are assigned to the first 100; future towns receive no advance allocation credit. Upstream industries must be orderable and charge attributable service/capacity; their civilization-wide creation is outside this estimate.",
+    "The ordinary-import freight increment is only the extra vacuum delivery burden above normal logistics in ordinary installed capital. Pressure, power and volatile imports are already delivered in their own rows.",
+    "Contingency applies once to direct construction. The separate removal reserve is 5% of direct construction, an initial funding allowance rather than a present engineering estimate or future recovery performance.",
+    "Cost excludes financing, migration fares, resident consumption and long-vacuum operation/renewal. Protective qualification and site clearance are conditions; allowances do not establish their success.",
+    "On-site material and road supplier prices exclude project-provided electricity and exterior cooling. Dedicated generation/beam hardware and radiators are capitalized here once; construction electricity adds only variable utility operating cost, with no second generation capital charge. Off-site manufacture and delivery remain inside their installed unit prices."
+  ],
+  "unresolved": [
+    "Site selection, heritage judgement, scientific sampling, geological reserves and future wild/dark-land corridors.",
+    "Qualified whole pressure boundary, anchors, independent shielding supports and transition/removal design.",
+    "Radiation transport and civic light quality; 3 m and 7 m remain mass comparisons.",
+    "Industrial yields, fleet productivity, supplier capacity, prices and qualification duration.",
+    "Regional roads, port/relay location, traffic capacity and a food/heat/water system with measured performance."
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "schema": "terluna.research.first-hundred-checks/1",
+  "date": "2026-11-12",
+  "study_base_commit": "3e70233db9a8042e39f5fc45dc87e4d5f2c295b4",
+  "unit_tests": {
+    "result": "PASS",
+    "first_hundred_passed": 15,
+    "entire_vacuum_study_passed": 30,
+    "seconds": 0.37,
+    "scope": "Independent area and scaling identities, closed feed/product/tails accounts, monetary inclusion, finite crews, exact rate limits, integrated ramp, bootstrap delivery, quantity caps, timestep sensitivity, source binding and committed reproduction."
+  },
+  "product_consistency": {
+    "result": "PASS",
+    "rebuilt": 0,
+    "rebound": 0
+  },
+  "full_make_check": {
+    "result": "PASS",
+    "python_passed": 5249,
+    "python_skipped": 31,
+    "javascript_passed": 191,
+    "wall_seconds": 947.08,
+    "max_resident_KiB": 2679020,
+    "numerical_threads": 1,
+    "address_space_cap_GiB": 12,
+    "log_sha256": "c585e3e9a524eab7fd5d81d5705b75b31c6cf50822edb53002047cd53599dde0",
+    "other_checks": [
+      "layer boundaries",
+      "calendar",
+      "pinned provenance",
+      "ensemble workspace"
+    ],
+    "scope": "Construction study and the complete existing repository; maintenance follow-up has its own later checks."
+  },
+  "reviews": {
+    "engineering_cost_review.md": {
+      "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/reviews/engineering_cost_review.md",
+      "sha256": "070703f6a668863b4872d5cb748ad7afef7b82e070049b2261d4449edde9555a"
+    },
+    "engineering_cost_sources.json": {
+      "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/reviews/engineering_cost_sources.json",
+      "sha256": "8a61256878af56f0e8a7fceaf2202367196dde5692e0dc9837b2d503d6d5c19b"
+    },
+    "final_engineering_cost_review.md": {
+      "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/reviews/final_engineering_cost_review.md",
+      "sha256": "0f6fc8bf413e9af94020da70c60cbbdff1d43df5ccc7ebb15518c031bfb58c1b"
+    },
+    "final_report_review.md": {
+      "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/reviews/final_report_review.md",
+      "sha256": "fcb86fed86e8f2621466771e2b2173127d5f021204eab4ac050eae0cabcab47d"
+    },
+    "final_resource_review.md": {
+      "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/reviews/final_resource_review.md",
+      "sha256": "b986f3cc786118620fa602489d7a9df1cc14b899c189a778603e97198eab43db"
+    },
+    "resolutions.md": {
+      "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/reviews/resolutions.md",
+      "sha256": "c10b16988f9bcf7b2e5d3c3845ce1abe6a3733a3112605ce2f7b14540b12f96b"
+    },
+    "resource_review.md": {
+      "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/reviews/resource_review.md",
+      "sha256": "888ccb1656701b45fcc64842bd24f1400261dc6e45e5011dddca7d6eff4476bf"
+    }
+  },
+  "editorial_reading": {
+    "result": "completed",
+    "scope": "Full report read by parent and bounded resource reviewer for accepted design, evidence state, conservation, price and clock boundaries. Parent corrected a rounded upper-cost range and removed an ambiguous qualification label after reviewer reading. Final read placed pressure, temperature and fixed-price material assumptions beside the quantities and clarified accessible tailings storage after future flooding.",
+    "delivered_report_sha256": "b2e4697044b8abf7126532290564d1e56e8af2b19a4e3c92c877e6bec246a842"
+  },
+  "logs_directory": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/checks",
+  "not_performed": [
+    "Full engineering design or empirical structural/protection qualification.",
+    "Selected-site geotechnical survey, heritage decision, resource or ecological reservation approval.",
+    "Validated mining, fabrication or construction rates; commissioned upstream supply or supplier quotations.",
+    "A construction finance and long-duration operation/replacement budget.",
+    "Exact architectural daylight/comfort, radiation and thermal verification."
+  ]
+}

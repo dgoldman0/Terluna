@@ -1,0 +1,258 @@
+{
+  "schema": "terluna.research.first-hundred-inputs/1",
+  "evidence": "Conditional planning quantities, capacity requirements and future-price allowances. No selected sites, qualified roof, surveyed extraction allocation, supplier quotation or completion-date forecast.",
+  "numeraire": "U: the world-economy transferable common-price real unit; no conversion to present dollars.",
+  "inputs": {
+    "design": {
+      "path": "habitation/crater_gardens/design.json",
+      "sha256": "b232179b23261d67fe59137f9a3a96f4cc749d402112f378d89877616825c6ff",
+      "schema": "terluna.habitation.crater-garden-design/1"
+    },
+    "plan": {
+      "path": "habitation/crater_gardens/buildout.json",
+      "sha256": "2b0fff4428956805305b1f4883023aa58819cf7fe06457cefec55900738504d0",
+      "schema": "terluna.habitation.crater-buildout-plan/1"
+    },
+    "vacuum_scenarios": {
+      "path": "research/studies/vacuum_crater_buildout/scenarios.json",
+      "sha256": "32798c1d046e29b69904c6b00242ab2151e879f06f741d538f25a3f57188d4c2",
+      "schema": "terluna.research.vacuum-crater-scenarios/1"
+    },
+    "vacuum_result": {
+      "path": "research/studies/vacuum_crater_buildout/results/buildout.json",
+      "sha256": "521503f0cf9079dd7d67c7879122fcb76288f299e2b43ce6defa17584cd60fe0",
+      "schema": "terluna.research.vacuum-crater-buildout/1"
+    },
+    "economy": {
+      "path": "research/studies/world_economy/construction_inputs.json",
+      "sha256": "960b3a44206d7747577e668be62ca252cbb2a02b6f8df8b9e87c81a79a31b819",
+      "schema": "terluna.research.world-economy-construction-inputs/1"
+    },
+    "food": {
+      "path": "research/studies/food_systems/results/food_systems.json",
+      "sha256": "57fe8726cead4cd498043f9516bbf36a20505cf919b119dfce39784bf01f37d9",
+      "schema": "terluna.research.food-systems/1"
+    }
+  },
+  "communities": 100,
+  "population_cases": [
+    500,
+    750,
+    1000
+  ],
+  "reference_population_per_community": 500,
+  "quantity": {
+    "reference_allowable_Pa": 600000000.0,
+    "pressure_detail_mass_factor": 2.0,
+    "roof_barrier_kg_m2": 20,
+    "ground_barrier_kg_m2": 15,
+    "independent_support_kg_m2_roof": 100,
+    "foundation_kg_m2_plan": 300,
+    "shield_thickness_m": 3,
+    "ordinary_stock_case": "advanced_industrial",
+    "ordinary_local_bulk_fraction": 0.9,
+    "ordinary_local_metal_fraction": 0.05,
+    "ordinary_import_fraction": 0.05,
+    "bulk_process_yield": 0.9,
+    "metal_product_per_raw_feed": 0.1,
+    "grading_mean_depth_m": 1,
+    "quarry_working_depth_m": 10,
+    "regional_road_km": 500,
+    "road_width_m": 12,
+    "road_layer_m": 0.3,
+    "road_density_kg_m3": 1800,
+    "road_corridor_width_m": 20,
+    "water_density_kg_m3": 1000,
+    "lake_mean_depth_m": 2,
+    "water_inventory_days": 30,
+    "garden_water_kg_m2": 150,
+    "biosphere_import_kg_resident": 500,
+    "gas_reserve_fraction": 0.1,
+    "construction_plant_import_kg": 50000000.0,
+    "power_hardware_import_kg_W": 0.02,
+    "reserve_import_kg_Wh": 0.003,
+    "garden_lamp_import_kg_m2": 5,
+    "radiator_local_metal_kg_m2": 10,
+    "handling_MJ_kg": 0.05,
+    "bulk_manufacturing_MJ_kg": 4,
+    "metal_manufacturing_kWh_kg": 20,
+    "status": "All added coefficients are study assumptions. Ordinary stock is held at the existing 100t/person reference in every price case. Bulk and metal yields include rejects; retained tails get no reuse credit. The independent-support and foundation quantities are allowances, not a solved load path. Effective handling is a complete short-haul excavation/transport/placement system, assumed at 50 t/hour for 4,000 available hours/year; an individual digger rate alone cannot meet it. Haul distance awaits actual sites. Regional vehicle/docking mass and radiator pumps/controls are separate import allowances; power hardware includes receivers, converters and distribution.",
+    "transport_and_docking_import_kg_community": 200000,
+    "radiator_controls_import_kg_m2": 1
+  },
+  "services": {
+    "basic_kW_resident": 5,
+    "food_kW_resident": 10,
+    "garden_lamp_W_m2_on": 150,
+    "garden_light_hours_day": 16,
+    "garden_area": "All nonlake ground outside building footprints; roof and balcony planting need an additional lighting design.",
+    "critical_kW_resident": 2,
+    "critical_reserve_hours": 72,
+    "radiator_temperature_K": 330,
+    "radiator_area_factor": 2,
+    "industrial_operating_hours_year": 6000,
+    "commissioning_and_ordinary_capital_rule": "Ordinary buildings, food plants, routine services and their normal capital are included in the economic allowance. Power, storage, exterior vacuum radiators, public-garden lighting and the townwide enclosure are additions. Food uses the existing fully lamp-lit process bracket, with an explicit 10kW/person reference, not the incomplete power-made-food route."
+  },
+  "prices": {
+    "lower": {
+      "ordinary_case": "patient_automation",
+      "pressure_system_U_kg": 20,
+      "incremental_local_structure_U_kg": 1,
+      "shield_installed_U_kg": 0.02,
+      "regional_road_U_km": 1000000.0,
+      "transport_access_U_community": 2000000.0,
+      "firm_power_U_W": 1,
+      "reserve_U_Wh": 0.03,
+      "radiator_U_m2": 50,
+      "garden_light_U_m2": 50,
+      "volatile_delivered_U_kg": 0.1,
+      "ordinary_import_freight_increment_U_kg": 2,
+      "biosphere_delivered_U_kg": 1,
+      "survey_and_preservation_U": 200000000.0,
+      "qualification_U": 2000000000.0,
+      "industrial_establishment_increment_U": 3000000000.0,
+      "restoration_U_kg_raw_feed": 0.01,
+      "contingency_fraction": 0.2,
+      "removal_reserve_fraction": 0.05,
+      "construction_utility_variable_U_MWh": 1
+    },
+    "reference": {
+      "ordinary_case": "advanced_industrial",
+      "pressure_system_U_kg": 60,
+      "incremental_local_structure_U_kg": 3,
+      "shield_installed_U_kg": 0.1,
+      "regional_road_U_km": 3000000.0,
+      "transport_access_U_community": 5000000.0,
+      "firm_power_U_W": 5,
+      "reserve_U_Wh": 0.1,
+      "radiator_U_m2": 200,
+      "garden_light_U_m2": 200,
+      "volatile_delivered_U_kg": 1,
+      "ordinary_import_freight_increment_U_kg": 10,
+      "biosphere_delivered_U_kg": 10,
+      "survey_and_preservation_U": 700000000.0,
+      "qualification_U": 5000000000.0,
+      "industrial_establishment_increment_U": 8000000000.0,
+      "restoration_U_kg_raw_feed": 0.03,
+      "contingency_fraction": 0.35,
+      "removal_reserve_fraction": 0.05,
+      "construction_utility_variable_U_MWh": 5
+    },
+    "upper": {
+      "ordinary_case": "expensive_energy_dilute_ore",
+      "pressure_system_U_kg": 150,
+      "incremental_local_structure_U_kg": 10,
+      "shield_installed_U_kg": 0.5,
+      "regional_road_U_km": 10000000.0,
+      "transport_access_U_community": 15000000.0,
+      "firm_power_U_W": 20,
+      "reserve_U_Wh": 0.3,
+      "radiator_U_m2": 800,
+      "garden_light_U_m2": 500,
+      "volatile_delivered_U_kg": 10,
+      "ordinary_import_freight_increment_U_kg": 50,
+      "biosphere_delivered_U_kg": 50,
+      "survey_and_preservation_U": 2000000000.0,
+      "qualification_U": 15000000000.0,
+      "industrial_establishment_increment_U": 25000000000.0,
+      "restoration_U_kg_raw_feed": 0.1,
+      "contingency_fraction": 0.6,
+      "removal_reserve_fraction": 0.05,
+      "construction_utility_variable_U_MWh": 20
+    }
+  },
+  "price_rules": [
+    "All new U prices and fixed allowances are scenarios, not converted contemporary dollar quotations. Ordinary capital uses the existing economic allowance without adding its stock-times-price proxy.",
+    "Installed unit charges include fabrication, delivery/placement, supplier equipment, operation and capital recovery within their boundary. Supplier factories, freight fleets and generation capital are not added a second time.",
+    "The industrial-establishment increment covers extra regional mobilization, construction camps, commissioning and start-up losses above normal supplier capital recovery already included in installed charges. It is an unengineered allowance, not a second complete factory bill.",
+    "The qualification allowance is the incremental full-scale pressure/protection/repair/transition development programme beyond ordinary R&D. No revenue or residual asset sale offsets it.",
+    "The entire new regional infrastructure requirement and establishment increment are assigned to the first 100; future towns receive no advance allocation credit. Upstream industries must be orderable and charge attributable service/capacity; their civilization-wide creation is outside this estimate.",
+    "The ordinary-import freight increment is only the extra vacuum delivery burden above normal logistics in ordinary installed capital. Pressure, power and volatile imports are already delivered in their own rows.",
+    "Contingency applies once to direct construction. The separate removal reserve is 5% of direct construction, an initial funding allowance rather than a present engineering estimate or future recovery performance.",
+    "Cost excludes financing, migration fares, resident consumption and long-vacuum operation/renewal. Protective qualification and site clearance are conditions; allowances do not establish their success.",
+    "On-site material and road supplier prices exclude project-provided electricity and exterior cooling. Dedicated generation/beam hardware and radiators are capitalized here once; construction electricity adds only variable utility operating cost, with no second generation capital charge. Off-site manufacture and delivery remain inside their installed unit prices."
+  ],
+  "production": {
+    "rapid": {
+      "lead_years": {
+        "survey_preservation": 1.5,
+        "regional_industry": 3,
+        "enclosure_qualification": 4,
+        "firm_power_and_access": 3
+      },
+      "effective_handling_systems": 60,
+      "handling_tonnes_hour_system": 50,
+      "handling_hours_year": 4000,
+      "bulk_finished_kg_year": 2500000000.0,
+      "metal_finished_kg_year": 200000000.0,
+      "pressure_system_kg_year": 100000000.0,
+      "special_import_kg_year": 300000000.0,
+      "volatile_import_kg_year": 1000000000.0,
+      "building_floor_m2_year": 900000,
+      "road_km_year": 150,
+      "site_teams": 24,
+      "site_cycle_years": 1
+    },
+    "reference": {
+      "lead_years": {
+        "survey_preservation": 2,
+        "regional_industry": 4,
+        "enclosure_qualification": 6,
+        "firm_power_and_access": 4
+      },
+      "effective_handling_systems": 40,
+      "handling_tonnes_hour_system": 50,
+      "handling_hours_year": 4000,
+      "bulk_finished_kg_year": 1500000000.0,
+      "metal_finished_kg_year": 120000000.0,
+      "pressure_system_kg_year": 60000000.0,
+      "special_import_kg_year": 200000000.0,
+      "volatile_import_kg_year": 500000000.0,
+      "building_floor_m2_year": 600000,
+      "road_km_year": 100,
+      "site_teams": 16,
+      "site_cycle_years": 1.5
+    },
+    "constrained": {
+      "lead_years": {
+        "survey_preservation": 3,
+        "regional_industry": 7,
+        "enclosure_qualification": 10,
+        "firm_power_and_access": 7
+      },
+      "effective_handling_systems": 20,
+      "handling_tonnes_hour_system": 50,
+      "handling_hours_year": 4000,
+      "bulk_finished_kg_year": 750000000.0,
+      "metal_finished_kg_year": 60000000.0,
+      "pressure_system_kg_year": 30000000.0,
+      "special_import_kg_year": 100000000.0,
+      "volatile_import_kg_year": 250000000.0,
+      "building_floor_m2_year": 300000,
+      "road_km_year": 50,
+      "site_teams": 10,
+      "site_cycle_years": 2
+    }
+  },
+  "schedule": {
+    "ramp_fractions": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "steps_per_year": 12,
+    "maximum_years": 200,
+    "rule": "All lead tasks start together. Production begins after their maximum, and reaches 25/50/75/100% in successive production years. Each stream accumulates complete-town kits; a site starts only with every kit and a free team. Occupation follows a whole site cycle including environmental commissioning and garden establishment. This conservative kit model permits upstream stockpiling and separates steady throughput from site concurrency; it is not a site-level construction programme. Each production stream stops at this programme's quantity; unused capacity creates no unpriced inventory. Construction-plant and full dedicated-power hardware arrive during the lead, charged once and removed from later town kits. Their minimum delivery time uses25% of the special-import capacity; it is an additional parallel prerequisite."
+  },
+  "reserve_diagnostic": {
+    "horizon_years": 200,
+    "mean_processed_asset_life_years": 50,
+    "usable_end_to_end_return_fractions": [
+      0.9,
+      0.95,
+      0.99
+    ],
+    "reference_return_fraction": 0.95,
+    "rule": "Prospective raw-feed reservation for processed local bulk and metals over the horizon, after a complete collection/treatment/usable-return fraction. Loose shielding stays in recoverable stock and is excluded from replacement throughput. No existing reserve or achieved recovery rate is asserted; element-specific grades, losses and future requirements still govern extraction."
+  }
+}
