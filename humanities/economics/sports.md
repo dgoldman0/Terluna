@@ -205,6 +205,126 @@ today's transport prices, physiological readiness, the assumed audience or a
 qualified timetable. The circuit replaces the smaller league in this comparison;
 its receipts are not added to that league's receipts.
 
+## Building the sports industry
+
+The early creative work can begin with little purchased equipment. An illustrative
+small prototype uses **1–4 person-years** of design, programming, production and
+community work, plus **50,000–200,000 U** of purchased tools and services. Valuing
+that effort at the existing production-worker allowance of 120,000 U per
+person-year gives **0.17–0.68 million U** in economic development cost. Deferred
+founder pay or volunteer effort can lower immediate cash expenditure, while the
+work still consumes time. A persuasive sport and lasting interest also require
+judgement, iteration and favourable audience response; spending the budget cannot
+ensure them.
+
+Developing a full four-competition programme is a larger undertaking. The quick
+[build-out calculation](results/buildout.json) allows **5.5–17 million U** for
+discovery, playable products, event formats, production tools, rights arrangements
+and community development, followed by **4.0–11.9 million U** for physical trials
+and commissioning. These stages contain **43–129 person-years** altogether, valued
+at the same compensation proxy. The trial allowance includes sixteen people
+making two 28-night visits, priced at the existing scenario's return fares and
+host charges. Equipment rentals, consumables and specialist services are included;
+permanent assets already in the venue budget are counted there once. The small
+prototype above is part of discovery, not an extra charge.
+
+For the **32-organization visiting circuit**, the resulting full programme uses are:
+
+| Development or funding use | Lower illustrative case, million U | Higher illustrative case, million U |
+|---|---:|---:|
+| Creative development and physical pilots | 9.5 | 28.9 |
+| Two venues and 200 guest beds, inherited installed allowance | 200.0 | 200.0 |
+| Asset contingency, assumed 20–40% | 40.0 | 80.0 |
+| Six to twelve months of operations without receipts, at base compensation | 34.9 | 69.8 |
+| Separately funded renewal reserve for the same period | 5.0 | 10.0 |
+| Initial paid promotion while building the target audience | 12.8 | 128.0 |
+| **Gross uses before financing costs or early receipts** | **302.2** | **516.8** |
+
+These are planning combinations, not confidence limits or a requirement to spend
+the whole amount before the first event. The 200 million U remains an unquoted
+installed-capital allowance. Suitable shared halls, modular obstacles, mats,
+camera and scoring systems can make the incremental equipment relatively modest;
+constructing pressurized space, guest accommodation or new host infrastructure is
+a different cost. Leasing existing space substitutes rent and availability
+obligations for ownership. This screen retains the existing dedicated facilities
+and excludes construction of the host settlement. Freight and installation must
+fit the installed allowance or be added when priced; contingency cannot establish
+the adequacy of an unspecified engineering design.
+
+Audience development is deliberately separated from purchasing promotion. The
+circuit's target is sixteen million paying viewers. If paid promotion supplies
+10%, 30% or 100% of them at an assumed 8 U per paid-sourced customer, the purchased
+promotion costs **12.8, 38.4 or 128 million U**. The remainder arrive through the
+programmes, players, recommendations or existing communities, whose creative and
+community work is already budgeted. This creates effective initial promotion
+costs of 0.8, 2.4 or 8 U per paying viewer; neither the paid share nor successful
+organic growth has been measured. The annual accounts retain their original
+8 U acquisition assumption until evidence warrants changing it. Large fan support
+can therefore arise without buying every relationship, while its development
+still has real costs and an uncertain outcome.
+
+The operating allowance funds the full programme's minimum payroll and physical
+services for six to twelve months without receipts, before revenue-linked pay
+increases. Initial promotion is counted separately, and a renewal reserve funds
+the existing replacement allowance once. No second generic working-capital
+percentage, the earlier small-venue launch budget, or the value of the audience
+is added. With the inherited illustrative 20 million U loan, construction interest,
+issuance fees and a debt reserve add about **2.2–3.7 million U** of uses across the
+specified draw schedules; debt is a funding source, not a reduction in economic
+cost. A dated payment and revenue schedule is needed to determine peak outside
+funding. [Project-finance guidance](https://ppp.worldbank.org/financing/issues-in-project-financed-transactions)
+likewise treats revenue certainty and construction-cost sensitivity as separate
+questions.
+
+This supports gradual commitment: inexpensive prototypes and early programmes
+can establish whether people return, followed by physical trials and contracted
+seasons as the evidence improves. Shared tools and existing work should reduce
+the incremental budget where they actually substitute for new development.
+Successful early receipts could fund later expansion; the totals above give no
+credit for such receipts and assign no probability to success. The scale of Earth
+support remains independent of the size of the initial creative team.
+
+### Spectators, accommodation and the visitor economy
+
+Fans who travel to watch a competition could support hotels, guest apartments,
+restaurants, shops, guides and local transport as well as the event itself. The
+existing [early-tourism account](../../research/studies/world_economy/early_exports.md)
+already budgets visitor accommodation, food and destination activities, their
+capital and operations. Its first milestone has 100,000 residents, so its visitor
+totals cannot be transferred to this 500-resident host. The
+[earlier small-venue account](../../research/studies/world_economy/sports_finance.md)
+also sells public visitor packages including accommodation, training and sport.
+Neither account estimates the additional spectator demand induced by this larger
+professional circuit.
+
+The present circuit pays for its visiting athletes and support staff. Its
+200 guest beds and host-service purchases provide that workforce's accommodation;
+**paying spectator trips, hospitality sales and admission receipts are absent from
+its annual totals**. Any shared beds would need a schedule combining workers,
+fans and other guests. Additional hotels or guest apartments would require their
+own construction, utilities, staff, supplies, renewal and operating funds beyond
+the build-out screen above.
+
+The economic connection should allocate each purchase to its supplier:
+
+| Fan purchase | Account receiving the income |
+|---|---|
+| Event admission or a separately priced club experience | Event or club receipts, with the cost of serving spectators |
+| Accommodation, meals, tours and local journeys | Hospitality and local-service suppliers, including any new capacity they must fund |
+| Merchandise | Retail and production accounts, with imported goods and any league royalty separated |
+| Earth–Moon travel | The transport operator's account; lunar transport income depends on who supplies the service |
+
+A package containing a hotel stay and admission must allocate its receipts between
+those services before combining the accounts. The
+[existing tourism accounting method](../../research/studies/world_economy/tourism.py)
+likewise treats visitor services as activity within the economy. Hotels' gross
+sales, their purchases from suppliers and the suppliers' sales cannot all be
+added as new value. Estimating the benefit attributable to a league also requires
+distinguishing new trips and longer stays from spending by people who would have
+visited anyway, and subtracting activity displaced when beds or routes fill.
+Spectator tourism is therefore a plausible additional source of income whose
+demand, accommodation budget and contribution remain unestimated here.
+
 ## From a venue business to clubs and a season
 
 The unchanged [earlier venue account](../../research/studies/world_economy/sports_finance.md)

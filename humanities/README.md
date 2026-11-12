@@ -28,3 +28,9 @@ Its shared-audience model compares the added costs with new fans and purchases,
 while visiting artists, crew time and shared facilities remain explicit. A worked
 140-million-fan case earns 1.202 billion U of annual exports, with 104 resident
 workers; all audience and commercial quantities remain scenario assumptions.
+
+Both economic studies now include a quick build-out screen: creative effort,
+physical pilots, installed facilities, initial promotion and operating reserves.
+The complete sports cases use 302-517 million U and the combined portfolio
+359-679 million U before financing and early receipts; these retain the existing
+facility allowances and are planning scenarios, not engineering quotations.

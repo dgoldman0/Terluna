@@ -253,14 +253,78 @@ Reinvested foreign earnings remain distinct from dividends paid in cash. These
 qualifications matter because an export industry can earn substantial foreign
 receipts while much of the benefit reaches workers, suppliers or offworld owners.
 
-Initial funding also differs from the annual account. Acquiring the full modeled
-28 million paid audience at 8 U per customer requires **224 million U** before the
-steady replacement assumption is applicable. The studio adds **30 million U** of
-capital, and launch losses and working capital require a dated development budget.
-The cash tables do not establish that a new company begins with those customers
-or can borrow against a hypothetical stabilized year. Digital releases,
-commissioning advances, patrons and fan investment could help build toward that
-state; each needs its own timing and obligations.
+## Build-out and audience development
+
+A small creator or game team can start with shared tools and substantial personal
+effort. The [sports study's build-out screen](sports.md#building-the-sports-industry)
+prices an exploratory 1–4 person-years and 50,000–200,000 U of purchased tools and
+services at **0.17–0.68 million U** in economic cost, using the existing compensation
+proxy. A lunar-life programme could be one such experiment. Sustaining a whole
+portfolio then requires creative development, recording and production systems,
+participant agreements, distribution, host services and time to find an audience.
+Unpaid or deferred work changes cash requirements without making the effort free.
+
+For the full shared programme, [buildout.py](buildout.py) adds an allowance for
+developing the non-sport formats and uses the existing physical and staffing
+accounts. The following are paired planning cases, with every amount in million U:
+
+| Use through development, launch and initial audience growth | Lower case | Higher case |
+|---|---:|---:|
+| Shared development, pilots and additional entertainment formats | 11.0 | 33.9 |
+| Installed sports facilities, guest beds and added studio | 230.0 | 230.0 |
+| Asset contingency, assumed 20–40% | 46.0 | 92.0 |
+| Six to twelve months of operations without receipts, at base compensation | 43.8 | 87.7 |
+| Renewal reserve for that period | 5.8 | 11.5 |
+| Initial paid promotion | 22.4 | 224.0 |
+| **Gross programme uses before financing or early receipts** | **359.0** | **679.1** |
+| **Increment beyond the corresponding sports programme** | **56.8** | **162.3** |
+
+The development allowance represents **53–159 person-years** across the complete
+programme, including the sports work. The additional entertainment formats account
+for 10–30 of those person-years and 1.5–5 million U of the development cost. The
+230 million U physical allowance includes the sports programme's 200 million U;
+it is not added to that amount again. The same applies to shared audiences,
+facilities, workers and reserves. This is an incremental industry budget within
+an already funded host, with no new engineering quotation or full settlement cost.
+
+The **22.4–224 million U** promotion range is consequential. At the target of
+28 million paid viewers, it assumes paid promotion supplies 10–100% of customers
+at 8 U each, with the remainder attracted by the work and its communities. It
+does not assume that organic attention can be bought or that it costs no effort.
+The earlier 224 million U figure is retained as the case in which every customer
+carries the full acquisition allowance; neither case measures actual acquisition
+cost. Content development and community labour remain explicit, and the annual
+operating model's acquisition costs are unchanged.
+
+The budget gives no credit for early sales, commissions or patron receipts that
+could fund later development, so it is not a claim that 359–679 million U must
+be raised before making the first programme. Conversely, failed formats, delayed
+opening, inadequate host facilities or prolonged audience development could cost
+more. The planned **six-to-twelve-month operating support** funds base payroll and
+physical services without receipts; it is distinct from the successful property's
+higher revenue-linked compensation. Renewal liquidity is counted once, and no
+second general working-capital charge is stacked on it. Construction financing
+and the timing of receipts need their own schedule. The economic opportunity can
+be large after an audience develops, while inexpensive early experiments limit
+how much must be committed before that audience is known.
+
+Visiting audiences can extend the benefit to hotels and guest apartments, meals,
+shops, tours and local transport. Festivals, concerts and competitions could
+encourage a trip or a longer stay, with the resulting income distributed among
+the performers, venue and hospitality suppliers. The
+[sports study's visitor-economy account](sports.md#spectators-accommodation-and-the-visitor-economy)
+identifies the existing tourism budgets and the allocation needed to combine them.
+General hospitality is already considered in that research; the additional fans
+attracted by this portfolio have no separate demand or hotel-expansion estimate.
+
+The combined programme's 200 guest beds currently serve visiting athletes,
+artists and crews, with no paying audience trips in its receipts. Its annual
+accommodation allowance does not establish space for spectators at a particular
+event. Adding fans would require a shared calendar for guest beds, transport,
+seating and host services, and funding for any expansion. Those costs and receipts
+would enter once: a hotel package containing a performance ticket cannot be
+counted in full as both tourism income and entertainment income. The present
+export and build-out totals leave this additional visitor business unestimated.
 
 ## Institutions that let a community earn from its culture
 

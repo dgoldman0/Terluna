@@ -1399,18 +1399,25 @@
         "../humanities/economics/sports_inputs.json",
         "../humanities/economics/sports_sources.json",
         "../humanities/economics/results/sports.json",
-        "../humanities/economics/checks.json"
+        "../humanities/economics/checks.json",
+        "../humanities/economics/buildout.py",
+        "../humanities/economics/buildout_inputs.json",
+        "../humanities/economics/results/buildout.json"
       ],
       "findings": [
         "Fan-support scales of 10, 100 and 500 million imply 75 million, 750 million and 3.75 billion U of annual exports at assumed average net receipts of 7.5 U per fan; gifts and investment are separately recorded.",
         "Four competitions with eight organizations each register 256 athletes, including 224 visitors. Seventy-two resident workers, two venues and 200 guest beds fit the modeled annual and block allowances. Eighty million distinct fans, after overlap, yield 600 million U annual exports and 149.647 million U cash before debt under the stated costs.",
-        "The small resident league has 25.1 million U annual revenue and 11.46 million U direct gross value added at one million paid equivalents, but only 0.496 million U cash before debt. Its 20-million-U debt assumption is not supported at the stated coverage."
+        "The small resident league has 25.1 million U annual revenue and 11.46 million U direct gross value added at one million paid equivalents, but only 0.496 million U cash before debt. Its 20-million-U debt assumption is not supported at the stated coverage.",
+        "Quick build-out screen: 302-517 million U gross uses for the full sports circuit; 359-679 million U for the combined entertainment programme, including sports. Includes development effort, pilots, asset contingency, 6-12 months of no-receipt support and alternative paid-promotion shares. No peak funding schedule or engineering quotation is established.",
+        "Existing tourism studies budget hospitality and visitor facilities. These cultural accounts accommodate visiting workers but exclude paying spectators, their purchases and any additional hotel capacity; shared costs and package receipts must be reconciled before combination."
       ],
       "unresolved": [
         "Sport selection, physical qualification and the complete visiting-team schedule.",
         "Paid conversion, retention, rights yield, fan support and buyer commitments.",
         "Transport quotations and capacity, host services, imported content, staffing and capital requirements.",
-        "Rights and club governance, ownership and integration within the existing planetary accounts."
+        "Rights and club governance, ownership and integration within the existing planetary accounts.",
+        "Replace inherited facility allowances with engineering quotations; measure development effort and organic versus paid audience acquisition; time costs and early receipts to determine peak outside funding.",
+        "Estimate event-induced spectator trips, lengths of stay, spending and hospitality expansion against shared beds, seating, transport and host capacity, net of displaced tourism."
       ],
       "next_session_task": "Test sport and audience propositions, cost the visiting circuit against qualified host and transport services, and use measured cohorts to replace hypothetical commercial parameters."
     },
@@ -1423,18 +1430,25 @@
         "../humanities/economics/entertainment_inputs.json",
         "../humanities/economics/entertainment_sources.json",
         "../humanities/economics/results/entertainment.json",
-        "../humanities/economics/checks.json"
+        "../humanities/economics/checks.json",
+        "../humanities/economics/buildout.py",
+        "../humanities/economics/buildout_inputs.json",
+        "../humanities/economics/results/buildout.json"
       ],
       "findings": [
         "A worked portfolio contains 140 million unique fans and 200 million genre memberships; one bundle is counted once, producing 1.202 billion U of annual exports, 602 million U above the pinned sports circuit.",
         "The programme has 104 resident workers and 592 annual visitor arrivals, using 30,912 guest-nights and 4,552 of 4,800 arena hours. Capacity screens are conditional, not a qualified timetable.",
-        "Expanded annual cash before debt is 336.069 million U. Extra programmes with the same audience and viewing price reduce cash by 6.778 million U; audience breadth alone does not guarantee incremental profit."
+        "Expanded annual cash before debt is 336.069 million U. Extra programmes with the same audience and viewing price reduce cash by 6.778 million U; audience breadth alone does not guarantee incremental profit.",
+        "Quick build-out screen: 302-517 million U gross uses for the full sports circuit; 359-679 million U for the combined entertainment programme, including sports. Includes development effort, pilots, asset contingency, 6-12 months of no-receipt support and alternative paid-promotion shares. No peak funding schedule or engineering quotation is established.",
+        "Existing tourism studies budget hospitality and visitor facilities. These cultural accounts accommodate visiting workers but exclude paying spectators, their purchases and any additional hotel capacity; shared costs and package receipts must be reconciled before combination."
       ],
       "unresolved": [
         "Measured cross-genre audience overlap, willingness to pay, retention and customer acquisition.",
         "Programme quality, participation agreements, production costs and crew/venue schedules.",
         "Host and travel qualification, upfront audience acquisition and a dated funding plan.",
-        "Actual rights, employment and ownership arrangements and integration with territorial accounts."
+        "Actual rights, employment and ownership arrangements and integration with territorial accounts.",
+        "Replace inherited facility allowances with engineering quotations; measure development effort and organic versus paid audience acquisition; time costs and early receipts to determine peak outside funding.",
+        "Estimate event-induced spectator trips, lengths of stay, spending and hospitality expansion against shared beds, seating, transport and host capacity, net of displaced tourism."
       ],
       "next_session_task": "Test distinct programme and bundle propositions with paying cohorts, measure production requirements, and replace conditional inputs with observed demand and qualified costs."
     }

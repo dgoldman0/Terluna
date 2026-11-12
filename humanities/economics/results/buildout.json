@@ -1,0 +1,369 @@
+{
+  "schema": "terluna.humanities.cultural-buildout/1",
+  "producer": {
+    "domain": "humanities",
+    "files": {
+      "humanities/economics/accounts.py": "1b3b180283e5c22d789a9322fe23a387946a60481521c2fccb5a706af56d89de",
+      "humanities/economics/buildout.py": "f6d43d697d9b8161738b3dfbb39094369ac914a2566220a90593c88fc67c1b11",
+      "humanities/economics/buildout_inputs.json": "7aea9c65af9ebac05d34975d91125efdb2e91e6fb7f65af2e9fc2ef3181f2548"
+    },
+    "constants": {}
+  },
+  "evidence": "Quick planning allowances and arithmetic on the committed sports and entertainment scenarios. No engineering quotation, acquisition-cost measurement, success probability, peak funding schedule or optimal build-out is established. Lower/middle/higher are illustrative combinations, not confidence limits.",
+  "reading_rule": "Gross uses through development, full hosted build-out and initial audience growth, before crediting early receipts. Includes development effort at a compensation proxy, installed assets once, construction contingency, 6-12 months of full-programme operations at base pay without receipts, a separate renewal reserve, and initial paid promotion. No generic working-capital percentage or earlier small-venue launch total is added. Entertainment includes sports; only its difference is incremental. Pilot work precedes regular operations and excludes assets already in installed capital.",
+  "units": "Real U, person-years of effort, and months of funded operating exposure; no USD conversion.",
+  "inputs": {
+    "schema": "terluna.humanities.cultural-buildout-inputs/1",
+    "evidence": "Quick planning allowances and arithmetic on the committed sports and entertainment scenarios. No engineering quotation, acquisition-cost measurement, success probability, peak funding schedule or optimal build-out is established. Lower/middle/higher are illustrative combinations, not confidence limits.",
+    "reading_rule": "Gross uses through development, full hosted build-out and initial audience growth, before crediting early receipts. Includes development effort at a compensation proxy, installed assets once, construction contingency, 6-12 months of full-programme operations at base pay without receipts, a separate renewal reserve, and initial paid promotion. No generic working-capital percentage or earlier small-venue launch total is added. Entertainment includes sports; only its difference is incremental. Pilot work precedes regular operations and excludes assets already in installed capital.",
+    "products": {
+      "humanities/economics/results/sports.json": {
+        "schema": "terluna.humanities.sports-economics/1",
+        "sha256": "809b2cec731454bbf6c0e1a58fc20ff05e589ba986a0b2a70ec51d08ca080518",
+        "use": "Existing physical capital, participant costs, acquired audience and renewal; kept unchanged."
+      },
+      "humanities/economics/results/entertainment.json": {
+        "schema": "terluna.humanities.entertainment-economics/1",
+        "sha256": "ef178d43eb545f3b8d138ac48e70093b65030075384f484995697fd28f03bb49",
+        "use": "Existing physical capital, participant costs, acquired audience and renewal; kept unchanged."
+      }
+    },
+    "development_U_person_year": 120000,
+    "promotion_U_paid_customer": 8,
+    "small_exploration": {
+      "person_years": {
+        "lower": 1,
+        "middle": 2,
+        "higher": 4
+      },
+      "purchased_U": {
+        "lower": 50000,
+        "middle": 100000,
+        "higher": 200000
+      },
+      "scope": "Small digital or content prototype; a subset of the larger discovery allowance, not an extra line in full build-out."
+    },
+    "programmes": {
+      "discovery": {
+        "person_years": {
+          "lower": 10,
+          "middle": 20,
+          "higher": 30
+        },
+        "purchased_services_U": {
+          "lower": 300000,
+          "middle": 600000,
+          "higher": 1400000
+        },
+        "scope": "Several sport concepts, low-cost motion and gameplay work, audience interviews and short media experiments."
+      },
+      "games_and_formats": {
+        "person_years": {
+          "lower": 25,
+          "middle": 50,
+          "higher": 75
+        },
+        "purchased_services_U": {
+          "lower": 1000000,
+          "middle": 2000000,
+          "higher": 3000000
+        },
+        "scope": "Playable digital products, event formats, rights and club administration, brand/production tools and community development; owned effort is costed even if cash pay is deferred."
+      },
+      "physical_pilot": {
+        "person_years": {
+          "lower": 8,
+          "middle": 16,
+          "higher": 24
+        },
+        "purchased_services_U": {
+          "lower": 2000000,
+          "middle": 4000000,
+          "higher": 8000000
+        },
+        "scope": "Qualification, instruction, medical and engineering services, practice events and production commissioning; rented equipment and consumables only. Travel and guest nights added explicitly."
+      },
+      "additional_entertainment_formats": {
+        "person_years": {
+          "lower": 10,
+          "middle": 20,
+          "higher": 30
+        },
+        "purchased_services_U": {
+          "lower": 300000,
+          "middle": 800000,
+          "higher": 1400000
+        },
+        "scope": "Additional documentary, performance and commissioned-production development beyond shared sports work."
+      }
+    },
+    "pilot": {
+      "people": 16,
+      "visits_each": 2,
+      "nights_each": 28
+    },
+    "cases": [
+      {
+        "name": "lower",
+        "asset_contingency_fraction": 0.2,
+        "runway_months": 6,
+        "paid_promotion_share": 0.1,
+        "construction_years": 1,
+        "average_debt_draw_fraction": 0.5
+      },
+      {
+        "name": "middle",
+        "asset_contingency_fraction": 0.3,
+        "runway_months": 9,
+        "paid_promotion_share": 0.3,
+        "construction_years": 1.5,
+        "average_debt_draw_fraction": 0.75
+      },
+      {
+        "name": "higher",
+        "asset_contingency_fraction": 0.4,
+        "runway_months": 12,
+        "paid_promotion_share": 1,
+        "construction_years": 2,
+        "average_debt_draw_fraction": 1
+      }
+    ],
+    "assumption_notes": {
+      "capital": "Inherited 200 million U for two sports venues and 200 guest beds; 230 million U including entertainment studio. No new component-level construction estimate. All cases require an already funded host; host construction and infrastructure expansions remain outside these uses. Freight/installation must fit installed allowances or be added when priced. A 20-40% contingency does not bound missing engineering.",
+      "audience": "Alternative initial-promotion cases assume paid promotion reaches 10%, 30% or 100% of paying customers at an assumed 8 U per paid-sourced customer. Organic reach carries no extra purchased-promotion charge here; content and community labour are separately budgeted. The old 8 U averaged across every acquired customer remains in the annual operating models. No paid share, virality or guaranteed interest is inferred.",
+      "runway": "Cash support for the full programme at base payroll and fixed physical purchases, without receipts for 6-12 months. Successful-property revenue-linked pay is excluded because receipts are zero. Existing variable commercial costs and churn acquisition are excluded from this runway; initial audience promotion is separate. Renewal is funded once as a liquidity reserve. With revenues and obligations timed, actual peak outside funding could differ substantially.",
+      "financing": "Optional 20-million-U debt memo inherits rate, fees and reserve convention; construction interest uses explicit duration and average drawn fraction. No debt or investor commitment is assumed in gross uses. Supplier advances and payroll are covered by runway liquidity; no dated receivables, tax or contract-payment schedule is modeled.",
+      "effort": "The 120,000 U per person-year proxy inherits the prior production-worker assumption. It is an economic effort cost, not an assertion that every founder must draw that cash salary; the apparent saving from unpaid work does not guarantee successful products.",
+      "spectator_hospitality": "Guest accommodation here serves visiting athletes, artists and crews. General hospitality is budgeted in research/studies/world_economy/early_exports.md and visitor packages in sports_finance.md, but additional spectators and their hotel expansion are not estimated in this screen. Shared capacity and package receipts require reconciliation before combination; extra beds, services and transport cannot be assumed free."
+    },
+    "source_review": {
+      "title": "World Bank PPP Resource Center: Key Issues in Developing Project Financed Transactions",
+      "url": "https://ppp.worldbank.org/financing/issues-in-project-financed-transactions",
+      "accessed": "2026-11-12",
+      "read": "Revenue-certainty and financial-ratio/sensitivity passages.",
+      "use": "Separate operating revenue expectations from construction funding and test cost/revenue sensitivities.",
+      "limit": "No source price, recommended contingency percentage or lunar financing standard transferred; all new amounts are scenario choices."
+    }
+  },
+  "small_exploration": {
+    "lower": {
+      "person_years": 1,
+      "purchased_U": 50000,
+      "total_U": 170000
+    },
+    "middle": {
+      "person_years": 2,
+      "purchased_U": 100000,
+      "total_U": 340000
+    },
+    "higher": {
+      "person_years": 4,
+      "purchased_U": 200000,
+      "total_U": 680000
+    }
+  },
+  "programmes": {
+    "sports": {
+      "base_payroll_U_year": 28800000,
+      "fixed_purchases_U_year": 41041600,
+      "paid_audience_target": 16000000.0,
+      "cases": {
+        "lower": {
+          "stages_U": {
+            "discovery": 1500000,
+            "games_and_formats": 4000000,
+            "physical_pilot": 4028800
+          },
+          "uses": {
+            "prelaunch_development_U": 9528800,
+            "installed_assets_U": 200000000,
+            "asset_contingency_U": 40000000.0,
+            "no_receipt_operating_runway_U": 34920800.0,
+            "renewal_reserve_U": 5000000.0,
+            "initial_paid_promotion_U": 12800000.0
+          },
+          "gross_uses_before_financing_U": 302249600.0,
+          "development_person_years": 43,
+          "paid_promotion_share": 0.1,
+          "blended_initial_promotion_U_customer": 0.8,
+          "optional_inherited_debt": {
+            "principal_U": 20000000,
+            "construction_interest_U": 500000.0,
+            "issuance_fees_U": 400000.0,
+            "debt_reserve_U": 1295045.7496545669,
+            "other_funding_U": 284444645.7496546
+          }
+        },
+        "middle": {
+          "stages_U": {
+            "discovery": 3000000,
+            "games_and_formats": 8000000,
+            "physical_pilot": 6988800
+          },
+          "uses": {
+            "prelaunch_development_U": 17988800,
+            "installed_assets_U": 200000000,
+            "asset_contingency_U": 60000000.0,
+            "no_receipt_operating_runway_U": 52381200.0,
+            "renewal_reserve_U": 7500000.0,
+            "initial_paid_promotion_U": 38400000.0
+          },
+          "gross_uses_before_financing_U": 376270000.0,
+          "development_person_years": 86,
+          "paid_promotion_share": 0.3,
+          "blended_initial_promotion_U_customer": 2.4,
+          "optional_inherited_debt": {
+            "principal_U": 20000000,
+            "construction_interest_U": 1125000.0,
+            "issuance_fees_U": 400000.0,
+            "debt_reserve_U": 1295045.7496545669,
+            "other_funding_U": 359090045.7496546
+          }
+        },
+        "higher": {
+          "stages_U": {
+            "discovery": 5000000,
+            "games_and_formats": 12000000,
+            "physical_pilot": 11948800
+          },
+          "uses": {
+            "prelaunch_development_U": 28948800,
+            "installed_assets_U": 200000000,
+            "asset_contingency_U": 80000000.0,
+            "no_receipt_operating_runway_U": 69841600.0,
+            "renewal_reserve_U": 10000000.0,
+            "initial_paid_promotion_U": 128000000.0
+          },
+          "gross_uses_before_financing_U": 516790400.0,
+          "development_person_years": 129,
+          "paid_promotion_share": 1,
+          "blended_initial_promotion_U_customer": 8,
+          "optional_inherited_debt": {
+            "principal_U": 20000000,
+            "construction_interest_U": 2000000.0,
+            "issuance_fees_U": 400000.0,
+            "debt_reserve_U": 1295045.7496545669,
+            "other_funding_U": 500485445.7496546
+          }
+        }
+      }
+    },
+    "entertainment": {
+      "base_payroll_U_year": 34240000,
+      "fixed_purchases_U_year": 53413600,
+      "paid_audience_target": 28000000.0,
+      "cases": {
+        "lower": {
+          "stages_U": {
+            "discovery": 1500000,
+            "games_and_formats": 4000000,
+            "physical_pilot": 4028800,
+            "additional_entertainment_formats": 1500000
+          },
+          "uses": {
+            "prelaunch_development_U": 11028800,
+            "installed_assets_U": 230000000,
+            "asset_contingency_U": 46000000.0,
+            "no_receipt_operating_runway_U": 43826800.0,
+            "renewal_reserve_U": 5750000.0,
+            "initial_paid_promotion_U": 22400000.0
+          },
+          "gross_uses_before_financing_U": 359005600.0,
+          "development_person_years": 53,
+          "paid_promotion_share": 0.1,
+          "blended_initial_promotion_U_customer": 0.8,
+          "optional_inherited_debt": {
+            "principal_U": 20000000,
+            "construction_interest_U": 500000.0,
+            "issuance_fees_U": 400000.0,
+            "debt_reserve_U": 1295045.7496545669,
+            "other_funding_U": 341200645.7496546
+          }
+        },
+        "middle": {
+          "stages_U": {
+            "discovery": 3000000,
+            "games_and_formats": 8000000,
+            "physical_pilot": 6988800,
+            "additional_entertainment_formats": 3200000
+          },
+          "uses": {
+            "prelaunch_development_U": 21188800,
+            "installed_assets_U": 230000000,
+            "asset_contingency_U": 69000000.0,
+            "no_receipt_operating_runway_U": 65740200.0,
+            "renewal_reserve_U": 8625000.0,
+            "initial_paid_promotion_U": 67200000.0
+          },
+          "gross_uses_before_financing_U": 461754000.0,
+          "development_person_years": 106,
+          "paid_promotion_share": 0.3,
+          "blended_initial_promotion_U_customer": 2.4,
+          "optional_inherited_debt": {
+            "principal_U": 20000000,
+            "construction_interest_U": 1125000.0,
+            "issuance_fees_U": 400000.0,
+            "debt_reserve_U": 1295045.7496545669,
+            "other_funding_U": 444574045.7496546
+          }
+        },
+        "higher": {
+          "stages_U": {
+            "discovery": 5000000,
+            "games_and_formats": 12000000,
+            "physical_pilot": 11948800,
+            "additional_entertainment_formats": 5000000
+          },
+          "uses": {
+            "prelaunch_development_U": 33948800,
+            "installed_assets_U": 230000000,
+            "asset_contingency_U": 92000000.0,
+            "no_receipt_operating_runway_U": 87653600.0,
+            "renewal_reserve_U": 11500000.0,
+            "initial_paid_promotion_U": 224000000.0
+          },
+          "gross_uses_before_financing_U": 679102400.0,
+          "development_person_years": 159,
+          "paid_promotion_share": 1,
+          "blended_initial_promotion_U_customer": 8,
+          "optional_inherited_debt": {
+            "principal_U": 20000000,
+            "construction_interest_U": 2000000.0,
+            "issuance_fees_U": 400000.0,
+            "debt_reserve_U": 1295045.7496545669,
+            "other_funding_U": 662797445.7496545
+          }
+        }
+      }
+    }
+  },
+  "entertainment_increment_after_sports": {
+    "lower": {
+      "prelaunch_development_U": 1500000,
+      "installed_assets_U": 30000000,
+      "asset_contingency_U": 6000000.0,
+      "no_receipt_operating_runway_U": 8906000.0,
+      "renewal_reserve_U": 750000.0,
+      "initial_paid_promotion_U": 9600000.0,
+      "total_U": 56756000.0
+    },
+    "middle": {
+      "prelaunch_development_U": 3200000,
+      "installed_assets_U": 30000000,
+      "asset_contingency_U": 9000000.0,
+      "no_receipt_operating_runway_U": 13359000.0,
+      "renewal_reserve_U": 1125000.0,
+      "initial_paid_promotion_U": 28800000.0,
+      "total_U": 85484000.0
+    },
+    "higher": {
+      "prelaunch_development_U": 5000000,
+      "installed_assets_U": 30000000,
+      "asset_contingency_U": 12000000.0,
+      "no_receipt_operating_runway_U": 17812000.0,
+      "renewal_reserve_U": 1500000.0,
+      "initial_paid_promotion_U": 96000000.0,
+      "total_U": 162312000.0
+    }
+  }
+}

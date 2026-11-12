@@ -44,5 +44,29 @@
       "Quoted investment costs or dated financing plan",
       "Full repository suite, full scholarly literature review, PDF typesetting or rendering inspection"
     ]
+  },
+  "buildout": {
+    "numerical_checks": {
+      "command": "python3 -m pytest -q humanities/tests/test_cultural_buildout.py humanities/tests/test_cultural_economics.py humanities/tests/test_entertainment_economics.py",
+      "result": "40 passed (6 build-out, 24 sports/accounting and 10 entertainment/portfolio tests)",
+      "scope": "Reproduction and input hashes; sports plus incremental entertainment reconciliation; financing sources and uses; minimum-payroll operating reserves; separate renewal reserves; and promotion shares at unchanged audience targets. The two earlier annual products remain byte-identical."
+    },
+    "selected_checks": {
+      "command": "python3 /tmp/check-cultural-buildout.py --files humanities/README.md humanities/economics/README.md humanities/economics/entertainment.md humanities/economics/sports.md research/status.json humanities/economics/buildout.py humanities/economics/buildout_inputs.json humanities/economics/results/buildout.json humanities/tests/test_cultural_buildout.py",
+      "selector_source": "Current main shared/check_changed.py, imported with ROOT set to the isolated humanities checkout, as in the preceding two checks.",
+      "selector_sha256": "a0c0ef2340b62953a23a10c79f5154d11e859d283e4a241dc66993fc003e5bdd",
+      "result": "Selected checks passed: layer check (1,641 files; zero violations) and all 6 build-out tests.",
+      "record_update": "Repeated the selected check after adding the spectator-tourism boundary and regenerating the build-out product. This record was then finalized without changing tested inputs or products.",
+      "scope": "All nine changed implementation, input, product, test and synthesis paths. The evidence-only checks.json record is excluded from this rerun: its owner fallback selects unrelated humanities physics tests. The earlier annual-model tests remain covered by the joint 40-test pass because their sources, inputs and products are unchanged."
+    },
+    "editorial_review": "Read both added build-out sections with adjacent study passages, their tables and synthesis entries. Checked stage totals, effort, shared-capital treatment, reserves and promotion assumptions against the input and generated result. The ranges are gross planning uses, not engineering quotations, confidence bounds or peak outside financing. Internal substantive reading is distinct from independent review. Read the added spectator sections in context and compared their coverage statements with early_exports.md, sports_finance.md, amenities.md and tourism.py. Checked all 38 local link targets in the studies and economics index; git diff --check passed. The additional fan demand and hotel expansion remain explicitly unestimated.",
+    "sources": "Targeted World Bank project-finance passages read; identity and limited methodological use are recorded in buildout_inputs.json. New numerical allowances are scenario choices, not source prices.",
+    "not_performed": [
+      "Spectator-trip demand, incremental hospitality revenue or additional hotel capacity estimation",
+      "Measured development effort, paid acquisition or organic audience growth",
+      "Engineering quotations, physical qualification or settlement-wide construction costing",
+      "Dated cost and receipt schedule, peak funding calculation or investor commitment",
+      "Full repository suite, complete scholarly source review or PDF rendering inspection"
+    ]
   }
 }

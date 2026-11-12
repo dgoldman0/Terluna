@@ -22,17 +22,28 @@ All modeled financial amounts use **U**, the project's hypothetical real
 accounting unit. Published market comparisons retain their original US dollars
 and observation years. There is no assumed exchange rate between them.
 
+Both studies include a quick build-out evaluation, from exploratory effort to
+dedicated facilities, physical pilots, audience development and operating reserves.
+[buildout_inputs.json](buildout_inputs.json) records the assumptions and source
+scope; [results/buildout.json](results/buildout.json) reconciles the sports and
+combined programme costs without counting their shared investment twice.
+The studies also connect event attendance to the existing tourism accounts:
+hospitality is already considered there, while additional spectator demand,
+spending and accommodation expansion remain unestimated in these programmes.
+
 Run from the repository root:
 
 ```sh
 python3 -m humanities.economics.sports
 python3 -m humanities.economics.entertainment
-python3 -m pytest -q humanities/tests/test_cultural_economics.py humanities/tests/test_entertainment_economics.py
+python3 -m humanities.economics.buildout
+python3 -m pytest -q humanities/tests/test_cultural_economics.py humanities/tests/test_entertainment_economics.py humanities/tests/test_cultural_buildout.py
 ```
 
 Normal runs write to ignored `research/runs/cultural_economics/`. The reviewed
-products are [results/sports.json](results/sports.json) and
-[results/entertainment.json](results/entertainment.json); updating either requires an
+products are [results/sports.json](results/sports.json),
+[results/entertainment.json](results/entertainment.json) and
+[results/buildout.json](results/buildout.json); updating a product requires an
 explicit `--output` path. Each product's versioned schema,
 producer hashes, input identities, units and reading rule accompany the results.
 The source register records targeted reading and unresolved retrievals;
