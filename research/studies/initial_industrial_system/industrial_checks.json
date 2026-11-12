@@ -33,7 +33,7 @@
   ],
   "artifact_sha256": {
     "research/studies/initial_industrial_system/README.md": "94a704df7bbd1c99d72a7aa3bff855541508b5ab9c4ad984fb083fb47cc70cf6",
-    "research/studies/initial_industrial_system/checks.md": "90d01f6031a8b900bc1f12bbd86b5344aae8b7de575b61c257bd3dae2f9eb65b",
+    "research/studies/initial_industrial_system/checks.md": "bb55c399871d48ece925b93952af1ee64bbdaab9d2715f9c050c004f389aae38",
     "research/studies/initial_industrial_system/industrial_inputs.json": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade",
     "research/studies/initial_industrial_system/industrial_sources.json": "8b469e12e34d8a577ab8244fb216bf725e6d04ce7b68d3ffebaa71b8118010b0",
     "research/studies/initial_industrial_system/plot.py": "bb3373731365290e3f8a89871ac8db2e2b86e19cab89bd9977e51bccca4b569c",
@@ -47,6 +47,24 @@
     "selected.log": "5b2fff7f5db50f0408caaf07224f2e3254dbd7c4395278369af2dee7d8533f34",
     "focused.log": "a69d2990726df276b5a4cfaeacac7f9093820d18ffed4eb92ce996c1b18f0c44",
     "consistency.log": "bd3055d769a5a07133e29fa6344cf2c9a72e1f14d3cdd6452f76d94cde7eebd1",
-    "plan_descriptive_names.log": "2c646f4f8e401a8cc0eb64bb7696b9b70788ab8598384607f67626bb1fd66779"
+    "plan_descriptive_names.log": "2c646f4f8e401a8cc0eb64bb7696b9b70788ab8598384607f67626bb1fd66779",
+    "main_consistency.log": "46f7f9b90fa69943840d98162248db907e135b8099ad10f4420a0285af6a0468",
+    "main_selected.log": "5f4555f03c097ce46575f9764ad407f2f1cea0609ca1a6966846be3bdfaf9fb5",
+    "main_record_final.log": "b0030cf329358b9ff9161f4a044de19fda811f9ba935b158cedabc52c5f7c020",
+    "main_record_final_corrected.log": "ba687f67e739d608d0c2920e1525f9fa9c54bbaf5dbf028d4955aed5701ab533",
+    "alignment_consistency.log": "bd3055d769a5a07133e29fa6344cf2c9a72e1f14d3cdd6452f76d94cde7eebd1",
+    "alignment_selected.log": "de64e7027e9fa2b273dae3c3794575ca204d9bedfe8b055cadd48a4c506aa88c"
+  },
+  "programme_alignment": {
+    "study_commit": "5c962613",
+    "main_record_commit": "1514c880",
+    "main_record_tests_passed": 4,
+    "alignment_tests_passed": 4,
+    "alignment_seconds": 0.17,
+    "stale": 0,
+    "rebuilt": 0,
+    "rebound": 0,
+    "preservation": "The ten study files matched the scientific commit before this verification-record update; prior domain city findings were retained.",
+    "command_correction": "An initially mistyped final record-test node collected no tests. The corrected invocation used the selector-listed node and passed all four tests."
   }
 }
