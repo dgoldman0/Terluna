@@ -7,6 +7,7 @@ experience and labels what is computed, informed by research, or artistic.
 
 | Tool | What it shows | Model it displays |
 |---|---|---|
+| [complex-returns](complex-returns/) | Funding recovery, slow growth, Earth demand and socioeconomic switching values | [Founding complex appraisal](../research/studies/complex_returns/README.md); conditional scenarios in constant USD2041 |
 | [light-calendar](light-calendar/) | Open Moon Skies, a one-screen public page of the sky now and through the coming month at six places; and the light almanac for 2000–2500: topocentric sky positions, finite spectral Earthlight, brightness through each month, rise/set and lux crossings, daily summaries and CSV export | [illumination/calendar](../illumination/calendar/) products, [geography's date ephemeris](../geography/CALENDAR_EPHEMERIS.md) and the [solved sky atlas](../illumination/sky/) |
 | [atmospheric-columns](atmospheric-columns/) | Preset column soundings, Open Moon beside Earth: temperature, humidity, condensate and cloud diagnostics | [atmosphere/column](../atmosphere/column/) column set |
 | [month-of-light](month-of-light/) | A fixed-viewpoint 360° view of clear-sky light across the synodic month, Earth vs Open Moon | [illumination/sky](../illumination/sky/) clear-sky atlases |

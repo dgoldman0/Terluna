@@ -1451,6 +1451,30 @@
         "Estimate event-induced spectator trips, lengths of stay, spending and hospitality expansion against shared beds, seating, transport and host capacity, net of displaced tourism."
       ],
       "next_session_task": "Test distinct programme and bundle propositions with paying cohorts, measure production requirements, and replace conditional inputs with observed demand and qualified costs."
+    },
+    {
+      "topic": "founding_complex_socioeconomic_returns",
+      "condition": "conditional_multimethod_appraisal_on_pinned_provisioning_products; no_validated_global_welfare_estimate",
+      "material": [
+        "studies/complex_returns/README.md",
+        "studies/complex_returns/run.py",
+        "studies/complex_returns/returns_inputs.json",
+        "studies/complex_returns/returns_sources.json",
+        "studies/complex_returns/results/returns.json",
+        "studies/complex_returns/checks.md"
+      ],
+      "findings": [
+        "The matched current provisioning context is 14.501 trillion USD2041 for establishment and 41.892 trillion for the campaign, plus separately costed commercial commissioning. Earlier 16.211/10.790-trillion establishment comparisons are distinct architectures.",
+        "The larger tested export portfolio has a 136.562-billion-USD2041 annual external residual. With 33 uniform construction draws and 100 operating years, its 3% funding NPV is -25.639 trillion; the commercial upgrade versus continuing the already funded modest programme has +7.088 trillion incremental NPV over 30 operating years. Neither result is an investor entitlement or complete welfare value.",
+        "Slow 0.5%/1% growth paths respect the larger-export initial capacity ceiling, taper to the enclosed 6.468-million architectural reference and sustain its stock. Demand is separate; eight-century outcomes remain conditional extensions.",
+        "Stakeholder appraisal includes Earth-based investors, funders, customers, researchers, workers and affected communities as well as residents. Purchase-value socioeconomic sensitivity and required net-benefit thresholds retain unresolved counterfactual and nonmarket valuation."
+      ],
+      "unresolved": [
+        "Unified dated campaign budget and retained civil/service costs; component cohort renewal and source permissions.",
+        "Demand, product qualification, capital claims and benefit distribution; counterfactual Earth production and full opportunity costs.",
+        "Measured research, customer and public benefits and environmental or heritage losses; no generic multiplier or perpetuity credited."
+      ],
+      "next_session_task": "Replace investment timing and shadow-value assumptions with engineering and contract evidence; test additional cultural and service demand within the consolidated account."
     }
   ]
 }

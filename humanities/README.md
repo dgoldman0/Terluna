@@ -34,3 +34,9 @@ physical pilots, installed facilities, initial promotion and operating reserves.
 The complete sports cases use 302-517 million U and the combined portfolio
 359-679 million U before financing and early receipts; these retain the existing
 facility allowances and are planning scenarios, not engineering quotations.
+
+The cross-domain [complex returns study](../research/studies/complex_returns/README.md)
+uses the current provisioning account to compare whole-programme funding,
+incremental industry, capital-provider claims and socioeconomic benefits across
+all stakeholders. Residents are one group; Earth customers, workers, funders and
+research users also enter the appraisal.

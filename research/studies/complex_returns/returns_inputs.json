@@ -1,0 +1,61 @@
+{
+  "schema": "terluna.research.complex-returns-inputs/1",
+  "evidence": "Research-informed conditional appraisal on pinned provisioning products. Financial recovery envelope and purchase-price socioeconomic proxy; not a demand forecast, investor offer or validated full welfare estimate.",
+  "boundary": "Whole founding off-Earth industrial and settlement complex; Earth-based capital providers, workers, customers, research users and affected people are stakeholders. No planetary array or Open Moon is introduced. USD2041 is constant purchasing power; the complex name and hypothetical monetary U are distinct.",
+  "products": {
+    "economy": {
+      "snapshot": "inputs/economy.json",
+      "sha256": "960f413d25d2d9a61dea32cfa9c1695df57268ec708b1ab1a86b59bffcc44961",
+      "schema": "terluna.research.initial-system-economy/1",
+      "source_repository_path": "research/studies/initial_industrial_system/results/economy.json",
+      "source_commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888"
+    },
+    "industrial": {
+      "snapshot": "inputs/industrial_system.json",
+      "sha256": "4bf5c8a00838735b7716aeca07bb9cf1a43265c75a69b02cf4ab183b3b19e9e7",
+      "schema": "terluna.research.initial-industrial-system/1",
+      "source_repository_path": "research/studies/initial_industrial_system/results/industrial_system.json",
+      "source_commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888"
+    }
+  },
+  "campaign_years": 33,
+  "campaign_scope_multiplier": 1,
+  "horizons_operating_years": [
+    10,
+    30,
+    100,
+    500
+  ],
+  "real_rates": [
+    0,
+    0.01,
+    0.03,
+    0.07
+  ],
+  "growth_rates": [
+    0,
+    0.005,
+    0.01
+  ],
+  "growth_horizon_years": 800,
+  "commissioning_delay_years": 2,
+  "taper_fraction": 0.7,
+  "resident_work_fraction": 0.6,
+  "alternative_USD2041_worker_year": 155796.7416600765,
+  "unpriced_local_resource_USD2041_year": 0,
+  "assumptions": [
+    "Campaign spread uniformly over33 annual draws; commercial commissioning over final5. First operating receipt at elapsedyear33. No early external receipts credited; no perpetuity or residual asset value. This is a timing scenario, not an actual procurement schedule.",
+    "Annual renewal already contained in provisioning imports is deducted once. No second depreciation, full fleet replacement or buildout reserve charged. Long-run level renewal approximates a staggered asset stock, not its exact age cohorts.",
+    "Initial campaign is the matching14.50T/41.89T space-fuel/local-tug context, not the cheaper10.79T Earth-chemicalvariant. Modular maintenance and initialdeployment are different evidence states; initialredesign remains open.",
+    "Growth uses initiallarge-exportcapacity ceiling, newcapacityafter2years and the vacuumarchitecturalcap. Taperisnew quadratic planningpath. Linear replication of capacities and costs, sourceaccess and Earth demand require new qualification.",
+    "Financial cash is the consolidated external residual after operatingimports, renewal, resourceprovision and expansion, before rights to dividends, tax or debt. Collectionfractions are sensitivities, not ownershipcontracts.",
+    "Economic proxy values finalEarthsales at purchaserprices and residentservices at inheritedimputedprices, less imports includingrenewal, opportunityearnings, growth and optionaladditionallocalcost. This is conditional on those prices representing social value and resourcecost. No customer surplus, researchspillover, supplier profit,wages orGDP added again.",
+    "Residentalternativeearnings assume60%working at100000 USD2026/year with inheritedinflationfactor. Opportunitycost, servicevaluefraction and missinglocalcost are explicit new scenarios, not measuredcounterfactuals.",
+    "Resourceprovision is restrictedcash, not a priced environmental loss; environmental/heritage externalities remain unvalued. Zero extra localresourcecost is an optimistic lower-cost bound.",
+    "All beyond125-year discounting is a project sensitivity, not an extension of UK GreenBook guidance. Cappedphysicalcapacity does not establish perpetual markets or sourcepermission.",
+    "Export economic value is a switching assumption: avoided Earth resource cost for equivalent output or incremental willingness to pay for new services; purchase price alone does not establish either. Test zero, half and full price. Extra net knowledge/customer/public spillover of0/100B/1T USD2041 yearly is an illustration, not measured benefit.",
+    "Domestic capital invoice value is not added to the central economic proxy because its internal inputs and labour overlap the consolidated ledger. Unpriced incremental local growth resource costs require decomposition; local_growth_cost_fraction can test0-1 of that invoice without claiming empirical calibration.",
+    "Campaign cash includes earlier annualized renewal provision; socioeconomic use of its aggregate is a procurement-resource price proxy, not independently shadow-priced realcost. The separatelyidentified commercial resource reserve is removed from the economic numerator/denominator."
+  ],
+  "local_growth_cost_fraction": 0
+}
