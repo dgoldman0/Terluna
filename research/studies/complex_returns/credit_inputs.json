@@ -1,0 +1,115 @@
+{
+  "schema": "terluna.research.credit-inputs/1",
+  "evidence": "Conditional comparison of retained earnings, funded debt and U-created credit. Capital supplier partitions, credit underwriting and price response are scenario assumptions; no qualified borrowers, exchange rate or CPI target is established.",
+  "boundary": "U is the general economic unit and possible single currency or basket of U-related currencies serving the planned off-Earth economic zone before the Open Moon, planetary array and subsequent outer Solar System buildout.",
+  "strategy_result_sha256": "685a27c5b6820adf4b1e188e19906a1c747f2a34ef8b0da8f97c8326b62ed4dc",
+  "horizons": [
+    30,
+    100,
+    300,
+    800
+  ],
+  "financing": {
+    "retained_earnings": {
+      "external_credit": false,
+      "U_credit": false,
+      "rate": 0.03,
+      "amortization_years": 20,
+      "require_project_NPV": true
+    },
+    "funded_loans": {
+      "external_credit": true,
+      "U_credit": false,
+      "rate": 0.03,
+      "amortization_years": 20,
+      "require_project_NPV": true
+    },
+    "U_local_credit": {
+      "external_credit": false,
+      "U_credit": true,
+      "rate": 0.03,
+      "amortization_years": 20,
+      "require_project_NPV": true
+    },
+    "mixed_credit": {
+      "external_credit": true,
+      "U_credit": true,
+      "rate": 0.03,
+      "amortization_years": 20,
+      "require_project_NPV": true
+    },
+    "development_mix": {
+      "external_credit": true,
+      "U_credit": true,
+      "rate": 0.015,
+      "amortization_years": 40,
+      "require_project_NPV": false
+    },
+    "international_U_mix": {
+      "external_credit": true,
+      "U_credit": true,
+      "rate": 0.03,
+      "amortization_years": 20,
+      "require_project_NPV": true,
+      "outside_supplier_U_fraction": 0.25
+    }
+  },
+  "underwriting": {
+    "min_DSCR": 1.5,
+    "pledgeable_operating_cash_fraction": 0.7,
+    "max_loan_fraction_of_budget": 0.75,
+    "max_debt_fraction_of_seed": 0.25,
+    "principal_grace_years": 2,
+    "project_appraisal_years": 40,
+    "project_discount_rate": 0.03,
+    "external_benchmark_rate": 0.03
+  },
+  "monetary": {
+    "initial_reserve_fraction_of_seed": 0.05,
+    "reserve_contribution_fraction": 0.2,
+    "base_reserve_years_core_imports": 1.0,
+    "U_credit_conversion_buffer_fraction": 0.25,
+    "U_credit_loss_capital_fraction": 0.15,
+    "unclassified_capital_local_fraction": 0.5,
+    "service_capital_local_fraction": 0.1,
+    "domestic_holding_days": 90.0,
+    "customer_holding_days": 7.0,
+    "settlement_initial_share": 0.25,
+    "settlement_final_share": 0.85,
+    "settlement_transition_years": 10,
+    "incremental_distribution_spending_fraction": 0.01,
+    "supply_elasticity": 1.0,
+    "annual_relative_price_limit": 0.005,
+    "cumulative_relative_price_limit": 0.05
+  },
+  "stress": {
+    "start_year": 40,
+    "end_year": 44,
+    "buyer_budget_factor": 0.5
+  },
+  "checkpoint_years": [
+    8,
+    10,
+    12,
+    15,
+    20,
+    30,
+    40,
+    44,
+    50,
+    100,
+    300,
+    800
+  ],
+  "policy_rules": [
+    "The annual price rule limits growth in a positive price premium: ratio_t / max(1,ratio_previous) <= 1.005. It permits return from below-control prices toward parity; it is not an absolute CPI inflation target.",
+    "The intended one-percent domestic payout allocation may be deferred in separately owned custody assets earning zero real return, then released as price headroom allows. Those assets cannot finance construction or issuer reserves simultaneously.",
+    "Admission checks current prices and unavoidable remaining construction prepayments against the matched control schedule. Discretionary orders and local payout release can be delayed; irreducible breaches remain explicit.",
+    "Other monetary issuance accommodates required transaction balances residually. U credit replaces part of otherwise required issuance; only unabsorbed balances above that requirement add monetary pressure.",
+    "Pooled earned receipts are assumed convertible into external purchasing power at reference quotes. U settlement alone does not establish that convertibility or preserve these results under floating adjustment.",
+    "Principal is paid from operating cash before dividends. Loan proceeds remain outside earnings; U proceeds may only fund eligible local capital. Lenders do not fund existing operating losses in the core comparison.",
+    "Local eligibility is a sensitivity classification of unallocated capital costs, not an observed supplier split. No extra assumed productivity increase or relaxed physical growth target is included.",
+    "Failure uses limited-liability cash-only recovery including accrued interest; no factory resale, automatic bailout or disappearance of created deposits is assumed.",
+    "The international-U arm permits25% of identified external capital purchases to be paid into supplier-held U term claims with principal and interest matched to the financing loans. This is external supplier finance in U, not free imports or assumed immediate dollar convertibility. Supplier claims are separate from customer transaction balances and domestic circulating money."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "terluna.research.credit-sources/1",
+  "accessed": "2026-11-13",
+  "evidence": "Targeted primary-source reading informs the institutional mechanisms. Interest rates, covenants, supplier partitions, demand shocks and price rules are scenario choices, not empirical U observations or lender offers.",
+  "sources": [
+    {
+      "title": "Money creation in the modern economy",
+      "organization": "Bank of England",
+      "url": "https://www.bankofengland.co.uk/quarterly-bulletin/2014/q1/money-creation-in-the-modern-economy",
+      "read": "Official article summary; bounded methods review inspected PDF printed pages16–20.",
+      "use": "Distinguish loan-created deposits, repayments, capital/liquidity constraints and externally funded lending. No reserve multiplier is assumed."
+    },
+    {
+      "title": "Key Issues in Developing Project Financed Transactions",
+      "organization": "World Bank PPP Resource Center",
+      "url": "https://ppp.worldbank.org/financing/issues-in-project-financed-transactions",
+      "read": "Revenue certainty and financial-covenant sections.",
+      "use": "Current qualified revenues, debt-service coverage, sensitivities and restrictions on distributions. Terrestrial leverage examples do not calibrate the U cases."
+    },
+    {
+      "title": "Government Guarantees",
+      "organization": "World Bank PPP Resource Center",
+      "url": "https://ppp.worldbank.org/government-guarantees",
+      "read": "Valuation and management of direct and contingent liabilities.",
+      "use": "Public development support has an explicit cost and risk-bearing institution; concessional terms are not free funding."
+    }
+  ],
+  "project_sources": [
+    "strategies.py", "strategy_inputs.json", "inputs/strategy_profiles.json",
+    "staged.py", "staged_inputs.json", "inputs/transport.json",
+    "../monetary_system/pressure.md", "../monetary_system/trade_transition.md"
+  ],
+  "limits": "Source reading establishes relevant financial mechanisms, not the ability of a proposed U institution to implement them. Full scholarly reading, actual contracts and empirical validation remain outstanding."
+}

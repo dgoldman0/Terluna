@@ -74,3 +74,11 @@ domestic price levels over a ten-year transition when issuance meets balance
 demand and supply expands 5%; under-issuance instead contracts domestic balances.
 These conditional results distinguish local scarcity, monetary contraction,
 imported costs and external currency pressure.
+
+The [credit-supported expansion study](../research/studies/complex_returns/credit.md)
+compares six financing arrangements across the nine portfolios while preserving
+the existing physical growth limits. It finds selective benefits from earlier
+service-and-support capacity, tests outside suppliers retaining U term claims,
+and records the cost of development finance. Its low additional-price-pressure
+policy also requires investment scheduling and separately funded payout deferral;
+credit creation alone does not guarantee low inflation.

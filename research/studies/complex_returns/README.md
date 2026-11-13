@@ -161,3 +161,12 @@ MPLCONFIGDIR=/tmp/terluna-roi-mpl python3 visualization/complex-returns/plot.py
 ```
 
 Normal calculation output goes to ignored `research/runs/complex_returns/`. The reviewed [results](results/returns.json) require an explicit `--output` path. The [input specification](returns_inputs.json) binds exact provisioning snapshots and states every new time, counterfactual and growth assumption. [Checks](checks.md) record numerical tests, source and substantive reading, the bounded accounting reviews and visual inspection separately from empirical validation.
+
+The [credit-supported expansion comparison](credit.md) adds externally funded
+loans, local U-created credit, negotiated supplier-U finance and concessional
+funding beside a matched retained-earnings control. Six strong-demand portfolios
+improve their 100-year operating-minus-capital NPV by 7.3–22.8 billion USD2041 under
+commercial mixed credit. Admission, construction scheduling and funded payout
+deferral limit additional domestic price premiums; the rule is not a CPI forecast.
+Debt service, restricted proceeds, lender losses, reserve providers and terminal
+claims have separate accounts. The pinned earlier financial results remain intact.

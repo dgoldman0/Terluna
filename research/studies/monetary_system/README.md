@@ -56,3 +56,10 @@ The default runner writes under ignored `research/runs/monetary_system/`. Use `-
 Ranking monetary arrangements needs more than population, low gravity or the scale of construction. The next comparison needs staged domestic supply and import accounts; the currencies of invoices, deposits and debt; creditor residence and maturities; collective revenue and guarantees; and possible joint shocks to the Moon, Earth and array. Those inputs would show where monetary flexibility preserves output, where a common currency reduces risk, and how much external liquidity remains necessary.
 
 The collective decisions are substantive too, and they belong to the communities' decision-making ([register](../../decisions.md#automation-the-network-and-food-12-october-2026)): banking support needs a bearer of losses, a monetary union representation and common rules, and an independent issuer a mandate and a relationship with the collective budget. Automation can improve the administration of each while those choices stay with the people who make them. The present result is an institutional and accounting foundation for evaluating them, with the construction, commercial and monetary evidence kept at their respective scales.
+
+The [credit-supported financial comparison](../complex_returns/credit.md) applies
+this monetary work to six investment-financing policies, including outside
+suppliers accepting U term claims. It maintains separate external purchasing
+power, loan-created deposits, restricted prepayments, loss capital and funded
+payout deferral. Its continuous matched price-premium rule is a policy experiment,
+with actual consumer inflation and floating exchange rates still uncalibrated.
