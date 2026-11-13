@@ -1,0 +1,211 @@
+{
+  "schema": "terluna.research.u-pressure-inputs/1",
+  "evidence": "Conditional price, monetary-stock and reserve-funding experiments on pinned financial paths. Parameters are planning sensitivities, not calibrated U behavior or exchange-rate forecasts.",
+  "boundary": "U is the established general economic unit and proposed currency or U-related currency basket serving the planned off-Earth economic zone before the Open Moon, planetary array and subsequent outer Solar System buildout.",
+  "horizons": [
+    30,
+    100,
+    300,
+    800
+  ],
+  "window_years": 10,
+  "opening_U_settlement_share": 0.25,
+  "closing_U_settlement_share": 0.85,
+  "initial_reserve_fraction_of_original_seed": 0.05,
+  "reference_quote": "Held constant only within the controlled monetary-transfer experiment. Values use USD2041-equivalent source purchasing power, not a U/USD rate or an adopted peg.",
+  "cases": {
+    "reserve_build": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.0,
+      "issuance_accommodation": 1.0,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "supply_expansion": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.05,
+      "issuance_accommodation": 1.0,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "issuance_shortfall": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.05,
+      "issuance_accommodation": 0.9,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "issuance_excess": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.05,
+      "issuance_accommodation": 1.1,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "higher_local_spending": {
+      "distribution_spending_share": 0.05,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.05,
+      "issuance_accommodation": 1.0,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "fixed_supply": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 0.0,
+      "extra_supply": 0.0,
+      "issuance_accommodation": 1.0,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "elastic_supply": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 3.0,
+      "extra_supply": 0.0,
+      "issuance_accommodation": 1.0,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "long_customer_holding": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.05,
+      "issuance_accommodation": 0.9,
+      "customer_holding_days": 30.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "dealer_buffer": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.05,
+      "issuance_accommodation": 0.9,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.5,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 2.0
+    },
+    "reserves_already_funded": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.0,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.05,
+      "issuance_accommodation": 1.0,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "local_construction": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.1,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.05,
+      "issuance_accommodation": 1.0,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 1.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "half_basket": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.05,
+      "issuance_accommodation": 1.0,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 0.5,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    },
+    "double_basket": {
+      "distribution_spending_share": 0.01,
+      "reserve_cash_share": 0.2,
+      "investment_local_share": 0.0,
+      "supply_elasticity": 1.0,
+      "extra_supply": 0.05,
+      "issuance_accommodation": 1.0,
+      "customer_holding_days": 7.0,
+      "domestic_holding_days": 90.0,
+      "dealer_inventory_absorption": 0.0,
+      "basket_multiplier": 2.0,
+      "opening_dealer_inventory_multiple_of_customer_balances": 0.0
+    }
+  },
+  "strategy_result_sha256": "685a27c5b6820adf4b1e188e19906a1c747f2a34ef8b0da8f97c8326b62ed4dc",
+  "import_stress": {
+    "U_external_value_factors": [
+      0.9,
+      1.1
+    ],
+    "basket_external_cost_shares": [
+      0.1,
+      0.3
+    ],
+    "pass_through_fractions": [
+      0.25,
+      0.75
+    ]
+  },
+  "reversal_stress": {
+    "export_receipt_fraction": 0.75,
+    "new_customer_holding_days": 1.0,
+    "retirement_fractions": [
+      0.0,
+      0.9,
+      1.0
+    ]
+  }
+}

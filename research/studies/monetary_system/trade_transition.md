@@ -146,3 +146,5 @@ The [inputs](trade_transition_inputs.json), [results](results/trade_transition.j
 python3 -m research.studies.monetary_system.trade_transition
 python3 -m pytest -q research/studies/monetary_system/tests/test_trade_transition.py
 ```
+
+The [portfolio pressure study](pressure.md) applies this architecture to conditional ten-year monetary transitions across the nine financial portfolios. It supplies explicit stock accommodation, reserve funding and reversal cases while keeping the external quote controlled; floating exchange-rate responses and constituent-specific clearing remain open.

@@ -66,3 +66,11 @@ financial claims. It compares a single U with a basket of U-related currencies,
 keeps Earth trading currencies separate, and funds partial reserves from explicit
 investment and earnings allocations. The plan measures invoicing, settlement and
 retained balances separately.
+
+The [U monetary-pressure study](../research/studies/monetary_system/pressure.md)
+compares the nine portfolios under explicit reserve funding, international U
+holdings and issuance assumptions. Strong year-100 cases give 1.0–2.5% higher
+domestic price levels over a ten-year transition when issuance meets balance
+demand and supply expands 5%; under-issuance instead contracts domestic balances.
+These conditional results distinguish local scarcity, monetary contraction,
+imported costs and external currency pressure.

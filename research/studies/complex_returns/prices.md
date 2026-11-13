@@ -94,3 +94,5 @@ The [calculation](prices.py), [assumptions](prices_inputs.json), [source record]
 python3 -m research.studies.complex_returns.prices
 python3 -m pytest -q research/studies/complex_returns/tests/test_prices.py
 ```
+
+The subsequent [U monetary-pressure study](../monetary_system/pressure.md) adds reserve contributions, transaction-balance demand and an explicit issuance rule. Its annual transition paths use actual dated payouts, whereas this study compares decade-average flows. Differences between their price indices must therefore be decomposed into timing, reserve, supply and monetary assumptions.
