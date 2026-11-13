@@ -24,6 +24,8 @@ The word reaches past industry to everything a settled world provides itself wit
 
 Its open questions, in order, are in [questions.md](questions.md).
 
+The enclosed phase has a separate [local and beamed power comparison](enclosed_power/README.md). It compares solar storage, solar thermal storage, fission, hybrid supplies and the inherited beam design without Open Moon atmospheric or shield benefits. Local generation is a primary development candidate; a beaming network is not assumed necessary for first productive facilities. The physical baseline and financial returns retain their recorded coefficients until the selected supply is propagated through their producers.
+
 **People and their ways of living, 9 October 2026.** The author found the first population distribution wrong:
 it left the sky empty of people and read heat and runoff as ceilings. The author set
 [shared comparison cases](../shared/scenarios/population.json) with lunar surface and aerial residents, and the
@@ -58,7 +60,7 @@ The author's decisions frame it:
 
 ## Enclosed engineering feasibility, 13 November 2026
 
-The [engineering feasibility study](../research/studies/enclosed_feasibility/README.md) assesses the entire planned off-Earth economic zone served by U with fifteen years of development before the 2041 construction start. It retains the staged, demand-sized physical model and all nine portfolios. The 2049 opening remains conditional on an executable deployment sequence: the reference seed averages 37.4 Mt of source feed per year, while its first occupied year requires 547 MW of firm lunar electricity. New screens identify receiver size, outage autonomy, source processing and freight, pressure loads, repair lifetime and biological closure as qualification work. The 2026–2041 demonstration programme is proposed; no source is released, architecture changed or financial return revalued. All 81 primary cases retain their existing capacity passes, which remain separate from engineering qualification.
+The [engineering feasibility study](../research/studies/enclosed_feasibility/README.md) assesses the entire planned off-Earth economic zone served by U with fifteen years of development before the 2041 construction start. It retains the staged, demand-sized physical model and all nine portfolios. The 2049 opening remains conditional on an executable deployment sequence: the reference seed averages 37.4 Mt of source feed per year, while its first occupied year requires 547 MW of firm lunar electricity. The inherited-beam screen identifies receiver-size constraints; local alternatives are evaluated in the separate surface-power comparison. Other screens address outage autonomy, source processing and freight, pressure loads, repair lifetime and biological closure. The 2026–2041 demonstration programme is proposed; no source is released, architecture changed or financial return revalued. All 81 primary cases retain their existing capacity passes, which remain separate from engineering qualification.
 
 ## The economy, 31 October 2026
 

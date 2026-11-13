@@ -25,6 +25,8 @@ Models live in their domain folders. This folder holds what spans domains:
 
 The [enclosed engineering feasibility study](studies/enclosed_feasibility/README.md) examines the planned off-Earth economic zone served by U before Open Moon, the habitat array and outer-system buildout. It preserves the staged physical model, compares nine portfolios and uses a proposed 2026–2041 demonstration programme to distinguish start readiness from year-200 industrial scale. The calculation adds power-delivery, storage, thermal, cargo, pressure and repaired-life sensitivities; source access, the initial deployment sequence and integrated habitation remain qualification conditions.
 
+The [enclosed surface-power comparison](../provisioning/enclosed_power/README.md) reopens the choice between local generation and beams. It supplies cyclic energy balances, storage and delivery costs, development stresses and crossover conditions; Open Moon climate and shield benefits do not enter the enclosed choice. The inherited beam audit remains reproducible, while actual power selection and its effect on financial returns require subsequent integration.
+
 ## Domains
 
 | Topic | Current calculation | Principal open condition |

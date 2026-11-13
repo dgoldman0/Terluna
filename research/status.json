@@ -1741,7 +1741,22 @@
         "studies/enclosed_feasibility/checks.md"
       ],
       "boundary": "The planned off-Earth economic zone served by U before Open Moon, habitat array or outer-system development; U remains the general economic unit.",
-      "next": "Qualify the dated initial deployment, source-to-depot routes, real-site power links, pressure enclosures, biological services and repaired equipment life; propagate measured coefficients and explicit stresses through the coupled physical and financial producers."
+      "next": "Qualify the dated initial deployment, source-to-depot routes, local and beamed power alternatives at real sites, pressure enclosures, biological services and repaired equipment life; propagate measured coefficients and explicit stresses through the coupled physical and financial producers."
+    },
+    {
+      "topic": "enclosed_surface_power",
+      "condition": "conditional local-versus-beamed comparison; six architectures, three technology bundles, delivery and localization sensitivities; power selection reopened without changing the inherited physical or financial baseline",
+      "material": [
+        "../provisioning/enclosed_power/README.md",
+        "../provisioning/enclosed_power/model.py",
+        "../provisioning/enclosed_power/enclosed_power_inputs.json",
+        "../provisioning/enclosed_power/enclosed_power_sources.json",
+        "../provisioning/enclosed_power/results/power_comparison.json",
+        "../provisioning/enclosed_power/checks.md"
+      ],
+      "boundary": "Lunar surface electrical service in the enclosed off-Earth programme served by U. No atmospheric heating penalty, shield credit or habitat array; remote sources and depots retain separate supplies.",
+      "finding": "Local fission has the lowest cost under middle assumptions; solar thermal storage can compete under development targets; beam utilization, reactor mass and the import burden of long-night storage determine crossovers. Neither technology bundles nor future prices are probability distributions or qualified hardware.",
+      "next": "Qualify actual sites, complete plants and commissioning sequences; allocate existing development expenditure once; recouple chosen generating and storage cohorts, freight, maintenance and load scheduling into the industrial and financial producers."
     }
   ]
 }

@@ -1,0 +1,85 @@
+{
+  "schema": "terluna.provisioning.enclosed-power-sources/1",
+  "review_date": "2026-11-13",
+  "method": "Primary programme material and selected technical sections. All future factory prices, freight surcharges, localization shares and technology bundles are disclosed study assumptions. No external datasets or full publications are redistributed.",
+  "sources": [
+    {
+      "id": "nasa_rfc_2022",
+      "title": "Regenerative Fuel Cell Systems for Lunar Surface Applications",
+      "publication_year": 2022,
+      "url": "https://ntrs.nasa.gov/api/citations/20220005243/downloads/RFC%20for%20Lunar%20Surface%20Applications%20SPW%2004062022.pdf",
+      "reading_scope": "PDF text, presentation pages on architecture, long-duration mass comparisons, balance of plant and thermal control (PDF pages 3–9).",
+      "supports": "Long-duration regenerative storage, approximately half round-trip efficiency and the importance of complete fluid and thermal hardware.",
+      "limit": "Development presentation; not a lunar utility demonstration or price quotation."
+    },
+    {
+      "id": "nasa_lunar_power_2022",
+      "title": "On the Moon to Stay: Challenges Presented to Power Distribution by Sustained Operations on the Lunar Surface",
+      "publication_year": 2022,
+      "url": "https://ntrs.nasa.gov/api/citations/20220005105/downloads/SWEDE%20Lunar%20Surface%20Power%20Draft%203-30-22.pdf",
+      "reading_scope": "PDF text, overview pages on illumination, photovoltaic, regenerative and fission options (PDF pages 4–12).",
+      "supports": "Ordinary lunar nights and substantial polar interruptions; multiple supply technologies under development.",
+      "limit": "Dated development targets, not a surveyed site profile or 2026 delivered hardware."
+    },
+    {
+      "id": "nasa_rfc_testing_2026",
+      "title": "NASA Regenerative Fuel Cell Testing",
+      "publication_year": 2026,
+      "url": "https://www.nasa.gov/general/nasa-regenerative-fuel-cell-testing/",
+      "reading_scope": "Article body describing 2025 tests and planned 2026 integrated work.",
+      "supports": "Stage of closed-loop hardware development.",
+      "limit": "Planned closed-loop and environmental testing are not reported as completed qualification."
+    },
+    {
+      "id": "nasa_fission_40kW_2022",
+      "title": "A Deployable 40 kWe Lunar Fission Surface Power Concept",
+      "publication_year": 2022,
+      "url": "https://ntrs.nasa.gov/api/citations/20220004670/downloads/40%20kW%20Deployable%20FSP%20Paper_FINAL.pdf",
+      "reading_scope": "PDF text, mass table and conversion system discussion, PDF pages 3–4.",
+      "supports": "Concept mass 10046 kg for power, controls and cable at 40 kW; separate mobility 2080 kg; limited conversion efficiency.",
+      "limit": "Concept with margins, not flight hardware. Mobility is separate; the middle 50 kg/kW assumption is not drawn from this design."
+    },
+    {
+      "id": "nasa_fission_10MW_2006",
+      "title": "Multi-Megawatt Gas Turbine Power Systems for Lunar Colonies",
+      "publication_year": 2006,
+      "url": "https://ntrs.nasa.gov/api/citations/20070001535/downloads/20070001535.pdf",
+      "reading_scope": "Abstract and introduction, conversion discussion and Table 2 (PDF pages 5–6 and 11–13); NTRS publication metadata.",
+      "supports": "Calculated 43170 kg lunar concept at 10 MWe; scale and conversion design change specific mass. Introduction identifies difficult high-temperature heat storage and retrieval as an objection to regolith thermal storage.",
+      "limit": "Lunar power concept with instrument shielding and unresolved development issues, not a complete qualified inhabited-site installation. Its thermal-storage judgment is an engineering assessment, not a demonstration that later designs cannot work."
+    },
+    {
+      "id": "nasa_regolith_store_1991",
+      "title": "Analysis of lunar regolith thermal energy storage",
+      "publication_year": 1991,
+      "url": "https://ntrs.nasa.gov/citations/19920005262",
+      "reading_scope": "NTRS abstract and publication metadata; the full paper was not reviewed for this comparison.",
+      "supports": "Analytical study of heat retention, cylindrical and spherical geometries and repeated lunar cycles.",
+      "limit": "Thermal behavior in a mathematical model does not establish recoverable electric output, the assumed 80% retention or lightweight containment."
+    },
+    {
+      "id": "nasa_card_2026",
+      "title": "Sunlight Extracts Oxygen From Regolith Using Solar Chemistry",
+      "publication_year": 2026,
+      "url": "https://www.nasa.gov/centers-and-facilities/johnson/sunlight-extracts-oxygen-from-regolith-using-solar-chemistry/",
+      "reading_scope": "Agency account of the CaRD integrated concentrator, reactor and controls; read with the enclosed feasibility source review.",
+      "supports": "Direct solar process heat and reported carbon-monoxide production support a process-specific alternative to all-electric heating.",
+      "limit": "Prototype result, not continuous production at the programme scale or a substitute for all electrical loads."
+    },
+    {
+      "id": "caltech_maple_2024",
+      "title": "Space Solar Power Project Ends First In-Space Mission with Successes and Lessons",
+      "publication_year": 2024,
+      "url": "https://www.caltech.edu/about/news/space-solar-power-project-ends-first-in-space-mission-with-successes-and-lessons",
+      "reading_scope": "Caltech mission account, transfer demonstrations and hardware lessons; read with the enclosed feasibility source review.",
+      "supports": "Demonstrated wireless transfer and lessons about space deployment and thermal performance.",
+      "limit": "No utility-scale delivered power, kilometre aperture qualification or cost established."
+    }
+  ],
+  "retrieval_limits": [
+    {
+      "url": "https://www.esa.int/articles/how-to-keep-warm-on-the-moon",
+      "result": "Retrieval failed with cache miss; not used as evidence or a numerical input."
+    }
+  ]
+}
