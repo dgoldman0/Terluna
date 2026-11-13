@@ -1,0 +1,153 @@
+{
+  "schema": "terluna.resources.enclosed-mining-inputs/1",
+  "evidence": "Conditional source-inventory and excavation-area assessment of dated physical demand. Sample chemistry and catalogue geometry do not establish qualified economic reserves.",
+  "inventory_product": {
+    "path": "inputs/resource_inventory.json",
+    "schema": "terluna.research.initial-resource-inventory/1",
+    "sha256": "5c2a25bea8a212e2c89e9af8adf04cb19838a87c595a72520c6f1e32fe8b84b0"
+  },
+  "lunar_footprint": {
+    "bulk_density_kg_m3": 1500,
+    "worked_depth_m": 5,
+    "accessible_area_fraction": 0.25,
+    "status": "Explicit geometric assumptions; no site survey or land allocation. Prospective area includes inaccessible terrain; excavated area does not."
+  },
+  "access_scenarios": {
+    "narrow_only": {
+      "narrow_extractable_fraction": 0.1,
+      "broader_remainder_extractable_fraction": 0.0
+    },
+    "broader_one_percent": {
+      "narrow_extractable_fraction": 0.1,
+      "broader_remainder_extractable_fraction": 0.01
+    },
+    "broader_ten_percent": {
+      "narrow_extractable_fraction": 0.1,
+      "broader_remainder_extractable_fraction": 0.1
+    },
+    "broader_ten_percent_without_largest": {
+      "narrow_extractable_fraction": 0.1,
+      "broader_remainder_extractable_fraction": 0.1,
+      "exclude_largest_broad_object": true
+    },
+    "narrow_all_mass_ceiling": {
+      "narrow_extractable_fraction": 1.0,
+      "broader_remainder_extractable_fraction": 0.0,
+      "status": "Absolute mass ceiling of this known screen, before extraction loss; not a feasible mining proposal."
+    },
+    "wider_geometry_ten_percent": {
+      "narrow_extractable_fraction": 0.1,
+      "broader_remainder_extractable_fraction": 0.1,
+      "broader_group": "wider_geometry_excluding_named_science_targets"
+    },
+    "wider_geometry_all_mass_ceiling": {
+      "narrow_extractable_fraction": 1.0,
+      "broader_remainder_extractable_fraction": 1.0,
+      "broader_group": "wider_geometry_excluding_named_science_targets",
+      "status": "Absolute mass ceiling of this known geometry screen, before extraction loss; no route or recovery qualification."
+    }
+  },
+  "access_rule": "The first tier draws on the narrow 17-body geometry/science-name screen. The second uses only the mass of the broader dark catalogue outside that set. Fractions represent hypothetical qualified feed allowances, not assigned mines. All allowances are assumed available from the first modeled year for a stock-only comparison; annual qualification and delivery rates remain unestablished.",
+  "checkpoints": [
+    50,
+    100,
+    200,
+    220
+  ],
+  "rules": [
+    "Consume physical feed from the dated producer once, including whatever initial provisioning its declared boundary includes. Population does not multiply mining throughput in this consumer.",
+    "The two catalogue tiers are disjoint. Summing the complete broad and narrow masses would double-count the narrow set.",
+    "Track each year's requested, hypothetically supplied and unallocated feed. Unallocated demand is not silently imported or recovered from a fictional source.",
+    "The accessible fraction limits raw feed. Product grade, recovery, quality and recycling belong in the physical producer and are not multiplied into inventory consumption a second time.",
+    "A source-inventory pass only meets the stated hypothetical mass budget. It proves neither composition, route availability, mining approval, extraction capability nor economic reserves.",
+    "Grade and recovery sensitivities must be supplied as physical reruns with actual feed, processing, equipment and transport responses. This consumer imposes no multiplier on an economy's operating or capital costs."
+  ],
+  "physical_products": [
+    {
+      "path": "inputs/industry.json.gz",
+      "schema": "terluna.provisioning.enclosed-industry/1",
+      "compression": "gzip",
+      "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+      "content_sha256": "bc448d041b2498350216fa39d3e1718f441285675662d3efd024090b5932ab31",
+      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
+      "source_path": "provisioning/enclosed_industry/results/industry.json.gz",
+      "manifest_path": "inputs/industry.json.manifest.json",
+      "manifest_sha256": "f7339ecf7e596adc9626ec238d3eda8c2a1419822fea665d3cac0e39f104473d"
+    },
+    {
+      "path": "inputs/poor_lunar.json.gz",
+      "schema": "terluna.provisioning.enclosed-industry/1",
+      "compression": "gzip",
+      "sha256": "94db53e1c6afa9ae0bc3319b7901e6b3a80143643bf196e429c14224180b565b",
+      "content_sha256": "2b3e5a1f086fae717c9f5a35c6e8f51815d662be4f066de07b8334eb0b08add4",
+      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
+      "source_path": "provisioning/enclosed_industry/results/poor_lunar.json.gz",
+      "manifest_path": "inputs/poor_lunar.json.manifest.json",
+      "manifest_sha256": "de96964dc70df269fab4a2d14127bf47545ed2d78683e77b3d7d3dee33527236"
+    },
+    {
+      "path": "inputs/poor_source.json.gz",
+      "schema": "terluna.provisioning.enclosed-industry/1",
+      "compression": "gzip",
+      "sha256": "d5d015e09667ab3c63a220f8bdb32aea81e4eb1ba41dcc1689d86a8b5d27c191",
+      "content_sha256": "9039a5887ef8d42f4206a04a5dfbe8f4e953523f4b3a13ee10f04ec423a42e83",
+      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
+      "source_path": "provisioning/enclosed_industry/results/poor_source.json.gz",
+      "manifest_path": "inputs/poor_source.json.manifest.json",
+      "manifest_sha256": "b375c6cacdadc9d9b8fc2623ef47646bd71f78b53978fa6cd7a92facf8eb507e"
+    },
+    {
+      "path": "inputs/lifetimes.json.gz",
+      "schema": "terluna.provisioning.enclosed-industry/1",
+      "compression": "gzip",
+      "sha256": "15ea5ada5f1a33c0db82e92a43fe6cf49cebb33b6d6a52a4937fe99a16b28422",
+      "content_sha256": "446cbb56054a2037c880c05510bac262e1a822497db6a650c0b34023064e8d8c",
+      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
+      "source_path": "provisioning/enclosed_industry/results/lifetimes.json.gz",
+      "manifest_path": "inputs/lifetimes.json.manifest.json",
+      "manifest_sha256": "6ca4472792e807f62c9aa3f05a8a8f018bbe902ae46a99801ff31dd6ebbac6df"
+    }
+  ],
+  "annual_fields": {
+    "year": "year",
+    "lunar_virgin_feed_kg": [
+      "physical",
+      "lunar_raw_kg_year"
+    ],
+    "source_feed_kg": [
+      "physical",
+      "source_feed_kg_year"
+    ]
+  },
+  "catalogue_source": {
+    "url": "https://ssd-api.jpl.nasa.gov/sbdb_query.api?fields=spkid%2Cfull_name%2Cdiameter%2Cdiameter_sigma%2Calbedo%2Cspec_B%2Cspec_T%2Ca%2Ce%2Cq%2Ci%2CH&sb-group=neo&sb-kind=a&full-prec=true",
+    "sha256": "14f20ec966039c91e884e7c4ae58508a10f0ecf87acd5e971392f912b38baaa0",
+    "bytes": 6186497,
+    "archive": "/media/projectspace/terluna-research/initial-industrial-system/revenue/nea_catalogue.json",
+    "signature": {
+      "version": "1.0",
+      "source": "NASA/JPL SBDB (Small-Body DataBase) Query API"
+    }
+  },
+  "wider_geometry_screen": {
+    "density_assumption_kg_m3": 1500,
+    "limits": {
+      "maximum_albedo": 0.1,
+      "maximum_semimajor_axis_AU": 1.8,
+      "maximum_eccentricity": 0.5,
+      "maximum_inclination_deg": 30,
+      "excluded_science_names": [
+        "Bennu",
+        "Ryugu",
+        "Itokawa",
+        "Eros"
+      ]
+    },
+    "status": "Proposed geometry screen only; no route or cargo-cycle qualification."
+  },
+  "geometry_product": {
+    "path": "inputs/geometry_screen.json",
+    "schema": "terluna.resources.enclosed-source-screen/1",
+    "sha256": "57d43a73cae6c3b41168fb716997f80a3682520be04ae337a6a0079c030d5322"
+  }
+}

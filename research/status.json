@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08",
+  "updated": "2026-11-13",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -527,7 +527,7 @@
     },
     {
       "topic": "resources",
-      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11; carbon_cycle_box_model_to_year_10000_with_the_managed_return_2026_10_12; industry_burial_basis_lakes_at_lake_rates_seas_at_marine_rates; sea_chemistry_through_a_billion_years_alkaline_unless_held_2026_10_13; terrain_through_time_small_waters_first_upkeep_a_few_gigawatts_2026_10_13; terrain_deltas_move_the_shorelines_first_2026_10_13; groundwater_model_prepared_2026_10_13; groundwater_stage_1_the_crust_drinks_more_than_the_seas_hold_2026_10_13; groundwater_stage_2_water_table_a_third_of_the_land_seeps_2026_10_13; groundwater_stage_3_springs_carry_the_soils_load_and_build_little_travertine_2026_10_14; carbon_cycle_and_sea_chemistry_take_the_groundwater_2026_10_14; river_deltas_screen_young_braid_mature_single_thread_plumes_plunge_deltas_keep_0_08_to_0_42_2026_11_04",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11; carbon_cycle_box_model_to_year_10000_with_the_managed_return_2026_10_12; industry_burial_basis_lakes_at_lake_rates_seas_at_marine_rates; sea_chemistry_through_a_billion_years_alkaline_unless_held_2026_10_13; terrain_through_time_small_waters_first_upkeep_a_few_gigawatts_2026_10_13; terrain_deltas_move_the_shorelines_first_2026_10_13; groundwater_model_prepared_2026_10_13; groundwater_stage_1_the_crust_drinks_more_than_the_seas_hold_2026_10_13; groundwater_stage_2_water_table_a_third_of_the_land_seeps_2026_10_13; groundwater_stage_3_springs_carry_the_soils_load_and_build_little_travertine_2026_10_14; carbon_cycle_and_sea_chemistry_take_the_groundwater_2026_10_14; river_deltas_screen_young_braid_mature_single_thread_plumes_plunge_deltas_keep_0_08_to_0_42_2026_11_04; enclosed_build_dated_feed_87_cases_finite_catalogue_and_geometry_bounds_2026_11_13",
       "material": [
         "../resources/README.md",
         "../resources/state.md",
@@ -562,9 +562,17 @@
         "studies/springs/results/springs.json",
         "studies/springs/results/springs_carbon.json",
         "studies/springs/carbon.py",
-        "studies/carbon_cycle/results/carbon_cycle.json"
+        "studies/carbon_cycle/results/carbon_cycle.json",
+        "../resources/enclosed_mining/README.md",
+        "../resources/enclosed_mining/run.py",
+        "../resources/enclosed_mining/catalogue.py",
+        "../resources/enclosed_mining/inputs.json",
+        "../resources/enclosed_mining/sources.json",
+        "../resources/enclosed_mining/checks.json",
+        "../resources/enclosed_mining/results/assessment.json.gz"
       ],
       "unresolved": [
+        "Enclosed 200-year build: all 81 base cases exceed the entire original 17-body source inventory before year 100. At year 200 all need more than 10% of the wider 131-body geometry screen. Broad catalogue allowances remain hypothetical and concentrated; no economic reserve, permitted mine or dated chemical-cargo route has been qualified. Source grade and recovery, prospecting, transport alternatives and actual equipment survival remain material conditions on the coupled financial results.",
         "The aerial phosphorus cycle: nutrient-specific stocks and annual throughput, natural retention, collection-to-delivery harvest return, land/sea donor depletion, sediment recovery and genuine irreversible losses. Six conservative box sensitivities are arithmetic, not a demonstrated lunar ecology; 1% footprint reference requires9.228MtP/year throughput and4.153–41.527Mt stock; at99.9% natural retention and99% food return the low assumed upward supply leaves10,726tP/year to return.",
         "Population distribution remains unselected. New resource accounts read shared/scenarios/population.json; historical industry allocations are superseded for joint planning. Generic lunar material stocks overlap aerial district inventory and cannot be added wholesale; SP-413 shielding applies only to the orbital comparator.",
         "the nitrogen's extraction plan, which the author asked for on 2026-10-09: feasible, sustainable and protecting the major celestial bodies as conservation principle 5 plans; ordinary icy bodies hold the air's 2.5e18 kg of N2 bound as ammonia, ammonium salts and organics, the Kuiper belt's small bodies 80-800 times the need by a rough count, so supplying it means processing 1e20-1e21 kg with the ammonia cracked to N2 at the source (resources/questions.md)",

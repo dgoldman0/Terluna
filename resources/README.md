@@ -31,6 +31,12 @@ The author's decisions frame it:
 - The protection is a formation of replaceable units supplied over the long term.
 - Construction takes up to 500 years, and operation at least 10⁹.
 
+## Enclosed build before an Open Moon
+
+The [enclosed mining assessment](enclosed_mining/README.md) follows dated industrial demand for the planned 6.468-million-resident enclosed build at year 200, then 20 years of continued operation. It consumes 81 base cases and six grade/lifetime sensitivities from committed provisioning products. Cumulative source feed reaches 1.643–2.915×10¹⁴ kg by year 200 in the base cases; assumed lunar excavation covers 494–1,092 km². Seed production is included once, and factories, transport and renewal follow the supplied physical work rather than a replicated founding campaign.
+
+The original 17-body source screen is too small even at its entire-mass ceiling before year 100 in every base case. A proposed wider geometry screen also falls short at 10% extraction by year 200. The broad dark catalogue is dominated by Don Quixote, whose orbit does not establish the inherited near-Earth cargo route; excluding it materially reduces the upper stock allowance. These are finite catalogue comparisons, with composition, extraction, conservation and dated delivery still unqualified. Financial completion remains conditional on those resource requirements. This enclosed-phase study assumes no Open Moon, habitat array or outer Solar System buildout.
+
 ## What the project already says
 
 Each finding follows from results the repository already holds, read together with the literature. Numbers marked

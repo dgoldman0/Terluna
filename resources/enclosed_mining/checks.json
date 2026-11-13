@@ -1,0 +1,24 @@
+{
+  "schema": "terluna.resources.enclosed-mining-checks/1",
+  "date": "2026-11-13",
+  "scope": "Resources-domain numerical controls, exact producer-input checks and substantive read of the completed resource note. No empirical mine or cargo validation.",
+  "commands": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 python -m pytest resources -q --tb=short -p no:cacheprovider",
+      "result": "64 passed, 1 skipped in 4.98 seconds",
+      "skip": "Existing optional phosphorus water-grid regeneration requires TERLUNA_WATERS_REGENERATE=1 and restored grids; not part of the enclosed-resource calculation."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python shared/check_layers.py",
+      "result": "1,620 tracked and staged source files checked; zero violations."
+    }
+  ],
+  "source_identity": "All four committed provisioning archive and decompressed-content hashes matched their manifests. The archived JPL catalogue matched 14f20ec966039c91e884e7c4ae58508a10f0ecf87acd5e971392f912b38baaa0, and the additional geometry product reproduced exactly.",
+  "artifact": "results/assessment.json.gz",
+  "artifact_sha256": "d703ac4050c2ee7a3d615808c7231e9abcdb63f4c0ea4f74304ec3699439aaae",
+  "limitations": [
+    "The existing domain/resources Makefile has no check-plan target. Relevant domain tests were selected directly rather than running unrelated whole-repository numerical models.",
+    "Full primary-source reading and empirical validation are not implied by the recorded inspected scopes or numerical controls."
+  ],
+  "editorial_review": "Completed substantive read of the resource note and domain synthesis: checked scenario scope, table quantities, allowance-versus-reserve distinctions, seed timing, transport mechanism and explicit limitations against the saved product and recorded source scopes."
+}
