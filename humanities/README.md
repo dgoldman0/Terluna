@@ -91,3 +91,11 @@ conditional facility repays by month eight using foreign reserves and voluntary
 term holdings, with only 91 million in additional circulating local balances.
 Its benefit depends on collateral, saving contracts and reserve access; neither
 low inflation nor a U-related currency basket supplies those automatically.
+
+The [integrated returns synthesis](../research/studies/complex_returns/consolidated.md)
+brings staged capital, worldwide services, U financing and resilience into one
+set of dated accounts. Strong-demand sponsor cash NPV is 2.64–4.47 trillion
+USD2041-equivalent at 3% over 100 years, including initial monetary-reserve funding;
+all portfolios remain negative at 7%. It reports payback, internal return rates,
+socioeconomic switching values and payment stress separately, and distinguishes
+profitable staged capacity from completing the enclosed architectural build-out.

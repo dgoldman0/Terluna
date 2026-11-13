@@ -18,3 +18,11 @@ all scenario assumptions belong to the producing study.
 `strategies.png`, `strategies.svg` and `strategies_manifest.json` in the same
 ignored directory. It compares whole-enterprise NPV, incremental operating
 contributions, appraisal horizons and imposed enclosed-cap operation.
+
+`consolidated.py` reads the [consolidated return product](../../research/studies/complex_returns/results/consolidated.json) and verifies its producer and every declared dependency hash before plotting. It compares the latest U package's sponsor cash NPV across four horizons, middle and strong demand, and real discount rates of 3% and 7%. The plotted account deducts initial seed and monetary-reserve funding, includes the conditional annual release of interest savings to outside saving assets, and excludes terminal book claims. Reproduce it from the repository root with:
+
+```sh
+MPLCONFIGDIR=/tmp/terluna-returns-mpl XDG_CACHE_HOME=/tmp/terluna-returns-cache python3 visualization/complex-returns/consolidated.py
+```
+
+The PNG, SVG and `.manifest.json` files use the ignored output stem `research/runs/complex_returns/consolidated-returns`. Both images embed the product, producer, renderer and dependency identities; the manifest also records every displayed source value and the image hashes. The renderer imports no economic model and performs only selection and display-unit conversion. The figure states the conditional evidence and keeps sponsor returns distinct from global welfare.

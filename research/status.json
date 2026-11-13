@@ -1395,7 +1395,13 @@
         "studies/complex_returns/policy_inputs.json",
         "studies/complex_returns/policy_sources.json",
         "studies/complex_returns/results/policy.json",
-        "studies/complex_returns/policy_checks.md"
+        "studies/complex_returns/policy_checks.md",
+        "studies/complex_returns/consolidated.md",
+        "studies/complex_returns/consolidated.py",
+        "studies/complex_returns/consolidated_inputs.json",
+        "studies/complex_returns/consolidated_sources.json",
+        "studies/complex_returns/results/consolidated.json",
+        "studies/complex_returns/consolidated_checks.md"
       ],
       "unresolved": [
         "The arrangement itself, its mandates, collective revenue and guarantees, chosen through the communities' collective decisions.",
@@ -1403,9 +1409,10 @@
         "Inflation, exchange rates, interest rates, credit demand and production responses.",
         "Single-currency or constituent-basket monetary constitution, admission/exit/default rules, domestic price objective, reserve ownership and funded contributions; actual invoice/payment currencies, liquidity access and balance holding periods.",
         "Measured holding periods, spending propensities, supplier-currency exposures, constituent clearing, reserve commitments and engineering-constrained supply response; jointly endogenous currency prices, exports, credit and investment remain unmodeled.",
-        "Qualified receivables, payment-delay frequencies, voluntary local and outside term holdings, their redemption destination, supplier geography, facility and clearing agreements, undrawn commitment costs, and full monthly legacy-loan evolution. Rate-savings reinvestment and avoided-disruption value remain unestimated."
+        "Qualified receivables, payment-delay frequencies, voluntary local and outside term holdings, their redemption destination, supplier geography, facility and clearing agreements, undrawn commitment costs, and full monthly legacy-loan evolution. Rate-savings reinvestment and avoided-disruption value remain unestimated.",
+        "A qualified mature enclosed-economy design and funded route to the architectural cap; validated small-module costs, full supplier shadow prices, stakeholder contracts, value of avoided payment disruption and actual business/international demand for liquid U. Interest-saving reinvestment remains outside the fixed-path release assumption."
       ],
-      "next_session_task": "Qualify payment and saving contracts and supplier geography, cost a collateralized U liquidity facility and constituent access agreements, and estimate the consequences and frequency of interrupted operations before assigning expected risk-adjusted returns.",
+      "next_session_task": "Qualify the worldwide service and industrial demand assumptions and minimum productive module; develop a mature enclosed-economy configuration with a funded route to the cap, then connect measured social outcomes and payment risks to stakeholder returns.",
       "findings": [
         "Currency use, access to settlement and emergency lending, and the bearing of losses are separate functions; three worlds need not mean three currencies or three issuers.",
         "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs.",
@@ -1416,7 +1423,10 @@
         "Reserve contributions use released distributions and preserve original expansion orders, while reducing immediate investor payouts. Outside-demand reversals distinguish income contraction from unretired money balances; the U-related currency-basket interpretation requires coordinated liquidity and fixed internal reference conversions in this aggregate experiment.",
         "The credit-supported financial comparison now models continuous loan and repayment paths, residual monetary accommodation, domestic and outside U holdings, separate reserve allocations, and funded deferral of intended local payouts. Its 0.5% annual rule limits growth in a positive price premium over the matched control, with a 5% cumulative guard; it is not an absolute CPI target.",
         "A separate U-policy comparison holds external rates fixed, reprices only U-local loan portions and reruns wider voluntary capital-supplier acceptance. At strong year 100, 50 bp local rate relief gives 0–138 million USD2041-equivalent borrower NPV saving, offset by lower bank gross income; wider acceptance adds 11.54 billion operating-minus-capital NPV in the computing portfolio while chiefly substituting funding in others.",
-        "A monthly receivables facility tests three-, six- and twelve-month collection delays at 30/100/300/800 years. Under strong demand, six-month payment survival rises from 8/9 to 9/9 at 100 years and from 0/9 to 6/9 at 800 years with 50% outside supplier acceptance, paid term absorption and emergency reserve access. These are conditional scenario counts, not default probabilities; foreign reserves and saving contracts carry most of the bridge."
+        "A monthly receivables facility tests three-, six- and twelve-month collection delays at 30/100/300/800 years. Under strong demand, six-month payment survival rises from 8/9 to 9/9 at 100 years and from 0/9 to 6/9 at 800 years with 50% outside supplier acceptance, paid term absorption and emergency reserve access. These are conditional scenario counts, not default probabilities; foreign reserves and saving contracts carry most of the bridge.",
+        "The integrated returns synthesis reconciles original distributions, reserve funding, matched controllers, commercial U lending, wider supplier acceptance and an explicit owner-saving release rule. Across nine strong-demand portfolios at 100 years, sponsor cash NPV is 2.643–4.466 trillion USD2041-equivalent at 3%; finite-horizon real internal returns are 5.23–6.59%, and all portfolios remain negative at 7%.",
+        "Full purchaser-price and resident-service proxies give 3.475–5.122 trillion of socioeconomic net value at 100 years and 3%, after removing identified financial provisions and embedded resident payroll before opportunity costs. Halving both benefit proxies makes all strong cases negative. Middle cases require 30.7–79.7 billion of additional annual net benefit, separate from 55.9–100.5 billion of annual sponsor cash needed to close their financial gap.",
+        "The latest strong paths support 16,500–25,700 residents of physical capacity at 100 years and 66,000–406,000 at 800 years, with worldwide stakeholders and mostly service receipts. They remain below the 6.468-million enclosed architectural cap. Under preserved full-density replication and buyer assumptions, eight of nine strong cap-operation portfolios have 6.15–10.54 trillion annual deficits; the earlier manufacturing mix has a positive 2.83-trillion operating residual without a funded staged path to that cap."
       ]
     },
     {
@@ -1483,7 +1493,7 @@
     },
     {
       "topic": "founding_complex_socioeconomic_returns",
-      "condition": "conditional_integrated_financial_and_credit_comparison; preserved_provisioning_baseline; no_qualified_market_or_monetary_forecast",
+      "condition": "conditional_integrated_returns_with_U_financing_and_resilience; preserved_provisioning_baseline; no_qualified_market_or_global_welfare_forecast",
       "material": [
         "studies/complex_returns/README.md",
         "studies/complex_returns/run.py",
@@ -1519,7 +1529,13 @@
         "studies/complex_returns/policy_inputs.json",
         "studies/complex_returns/policy_sources.json",
         "studies/complex_returns/results/policy.json",
-        "studies/complex_returns/policy_checks.md"
+        "studies/complex_returns/policy_checks.md",
+        "studies/complex_returns/consolidated.md",
+        "studies/complex_returns/consolidated.py",
+        "studies/complex_returns/consolidated_inputs.json",
+        "studies/complex_returns/consolidated_sources.json",
+        "studies/complex_returns/results/consolidated.json",
+        "studies/complex_returns/consolidated_checks.md"
       ],
       "findings": [
         "The matched current provisioning context is 14.501 trillion USD2041 for establishment and 41.892 trillion for the campaign, plus separately costed commercial commissioning. Earlier 16.211/10.790-trillion establishment comparisons are distinct architectures.",
@@ -1537,7 +1553,10 @@
         "Negotiated supplier-U term claims can finance identified external capital purchases. In the diversified strong case, about 21.4 billion USD2041-equivalent of supplier claims replaces other external finance with the productive outcome unchanged. Claims remain outside domestic circulation and match loan terms; supplier acceptance and intermediation costs remain unqualified.",
         "Middle-demand credit programmes can reduce portfolio returns despite affordable debt service. Concessional development finance can add capacity while imposing explicit financing costs. The original financial products remain intact; matched-controller differences are recorded separately.",
         "A separate U-policy comparison holds external rates fixed, reprices only U-local loan portions and reruns wider voluntary capital-supplier acceptance. At strong year 100, 50 bp local rate relief gives 0–138 million USD2041-equivalent borrower NPV saving, offset by lower bank gross income; wider acceptance adds 11.54 billion operating-minus-capital NPV in the computing portfolio while chiefly substituting funding in others.",
-        "A monthly receivables facility tests three-, six- and twelve-month collection delays at 30/100/300/800 years. Under strong demand, six-month payment survival rises from 8/9 to 9/9 at 100 years and from 0/9 to 6/9 at 800 years with 50% outside supplier acceptance, paid term absorption and emergency reserve access. These are conditional scenario counts, not default probabilities; foreign reserves and saving contracts carry most of the bridge."
+        "A monthly receivables facility tests three-, six- and twelve-month collection delays at 30/100/300/800 years. Under strong demand, six-month payment survival rises from 8/9 to 9/9 at 100 years and from 0/9 to 6/9 at 800 years with 50% outside supplier acceptance, paid term absorption and emergency reserve access. These are conditional scenario counts, not default probabilities; foreign reserves and saving contracts carry most of the bridge.",
+        "The integrated returns synthesis reconciles original distributions, reserve funding, matched controllers, commercial U lending, wider supplier acceptance and an explicit owner-saving release rule. Across nine strong-demand portfolios at 100 years, sponsor cash NPV is 2.643–4.466 trillion USD2041-equivalent at 3%; finite-horizon real internal returns are 5.23–6.59%, and all portfolios remain negative at 7%.",
+        "Full purchaser-price and resident-service proxies give 3.475–5.122 trillion of socioeconomic net value at 100 years and 3%, after removing identified financial provisions and embedded resident payroll before opportunity costs. Halving both benefit proxies makes all strong cases negative. Middle cases require 30.7–79.7 billion of additional annual net benefit, separate from 55.9–100.5 billion of annual sponsor cash needed to close their financial gap.",
+        "The latest strong paths support 16,500–25,700 residents of physical capacity at 100 years and 66,000–406,000 at 800 years, with worldwide stakeholders and mostly service receipts. They remain below the 6.468-million enclosed architectural cap. Under preserved full-density replication and buyer assumptions, eight of nine strong cap-operation portfolios have 6.15–10.54 trillion annual deficits; the earlier manufacturing mix has a positive 2.83-trillion operating residual without a funded staged path to that cap."
       ],
       "unresolved": [
         "Unified dated campaign budget and retained civil/service costs; component cohort renewal and source permissions.",
@@ -1547,9 +1566,10 @@
         "Raw-resource production design, buyer-qualified lunar advantages, empirical orders and actual synergy effects; exact service installation schedules and an optimized portfolio/growth policy.",
         "Observed domestic expenditure baskets and supplier geography, incremental local spending, construction disbursement, current-U expenditure/credit dynamics and engineering-constrained supply response; price feedback into finance and production remains unmodeled.",
         "Qualified borrower and supplier-U contracts, reconciled local capital cash costs, bank fees and resolution; measured consumer prices, saving and constituent clearing. Source-valued costs do not respond endogenously to the pressure index.",
-        "Qualified receivables, payment-delay frequencies, voluntary local and outside term holdings, their redemption destination, supplier geography, facility and clearing agreements, undrawn commitment costs, and full monthly legacy-loan evolution. Rate-savings reinvestment and avoided-disruption value remain unestimated."
+        "Qualified receivables, payment-delay frequencies, voluntary local and outside term holdings, their redemption destination, supplier geography, facility and clearing agreements, undrawn commitment costs, and full monthly legacy-loan evolution. Rate-savings reinvestment and avoided-disruption value remain unestimated.",
+        "A qualified mature enclosed-economy design and funded route to the architectural cap; validated small-module costs, full supplier shadow prices, stakeholder contracts, value of avoided payment disruption and actual business/international demand for liquid U. Interest-saving reinvestment remains outside the fixed-path release assumption."
       ],
-      "next_session_task": "Qualify payment and saving contracts and supplier geography, cost a collateralized U liquidity facility and constituent access agreements, and estimate the consequences and frequency of interrupted operations before assigning expected risk-adjusted returns."
+      "next_session_task": "Qualify the worldwide service and industrial demand assumptions and minimum productive module; develop a mature enclosed-economy configuration with a funded route to the cap, then connect measured social outcomes and payment risks to stakeholder returns."
     }
   ]
 }

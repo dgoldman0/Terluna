@@ -1,0 +1,22 @@
+{
+  "schema": "terluna.research.consolidated-returns-inputs/1",
+  "policy_result_sha256": "016773d53fec06f6029fbb849ca33f5affa58b2dfa7fee85f4154b0490c23f6e",
+  "horizons": [30, 100, 300, 800],
+  "real_discount_rates": [0.0, 0.01, 0.03, 0.07],
+  "local_U_rate_reduction": 0.005,
+  "latest_capital_supplier_U_share": 0.5,
+  "economic_export_value_fractions": [0.0, 0.5, 1.0],
+  "resident_service_value_fractions": [0.0, 0.5, 1.0],
+  "resident_opportunity_cost_multipliers": [0.5, 1.0, 2.0],
+  "evidence": "Consolidated conditional return accounts on pinned engineering, market and financing paths. New owner-saving release and socioeconomic valuation assumptions do not establish contracts, market demand, actual inflation or a global welfare total.",
+  "rules": [
+    "The latest package combines wider 50% capital-supplier U eligibility with a 50 basis-point reduction only on U-local loan portions. Each dated interest saving is released into owners' external saving assets, with no extra domestic spending or investment feedback. Contractual baseline distributions remain separately visible.",
+    "Project and monetary-reserve sponsors pay the dated seed and initial reserve. Their return is an incidence account, not the aggregate return to every lender, supplier, customer and bank. U-bank gross margin loses exactly the borrower interest saving.",
+    "Monetary reserve assets and owner custody are terminal book claims, not realized payouts. Resource provisions remain financial outgoings without an assumed recoverable fund. No terminal factory resale, goodwill or perpetuity is credited.",
+    "Economic costs use procurement prices as proxies. Remove identified operating, bootstrap and capital resource provisions; exclude startup working balances and monetary reserve assets. Remove known resident service, premium and logistics payroll before adding resident opportunity earnings during operation. Startup procurement and carry otherwise retain their market-price proxies.",
+    "Final export benefits are zero, half or full purchaser-price value; resident-service benefits independently use zero, half or full inherited imputation. Neither GDP, wages, supplier turnover, finance transfers nor research spillovers are added as separate benefits.",
+    "Failed paths retain cash paid through failure but receive no later hypothetical economic valuation, recovery claim, sales or bridge collateral. Liquidation and resolution remain outstanding.",
+    "Liquidity episodes are rerun on latest-package checkpoints with operating and debt-service rates frozen. Their conditional survival, finance costs and payout-delay exposure remain separate from undisturbed long-run NPV; no event probability or avoided-disruption value is invented.",
+    "All values are constant USD2041 equivalents. U remains the general economic unit and possible currency or basket of U-related currencies; no external exchange rate or Earth-currency basket is prescribed."
+  ]
+}

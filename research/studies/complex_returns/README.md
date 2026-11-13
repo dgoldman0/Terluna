@@ -2,6 +2,20 @@
 
 The founding cities, crater towns, mines, factories, power systems and transport network form a shared productive system. Its return concerns the people and institutions who finance it, work in it, buy its products, use its research and experience its consequences. Most of those stakeholders need not reside on the Moon. This appraisal covers the planned economic zone beyond Earth through the enclosed-development stages, including the source operations and depots in the current provisioning account. The Open Moon, planetary array and subsequent outer Solar System buildout lie outside this boundary.
 
+The [integrated returns analysis](consolidated.md) is the current synthesis of
+staged investment, nine export strategies, worldwide services, U credit, funded
+reserves and payment resilience. Under strong worldwide demand, its latest package
+produces 2.64–4.47 trillion USD2041-equivalent sponsor cash NPV at 3% over 100 elapsed
+years, after initial reserve funding. Its 5.23–6.59% real internal rates of return
+leave every portfolio negative at a 7% hurdle. Middle-demand cases remain negative
+at 3% through year 800. The socioeconomic account separately tests purchaser-price
+value, resident services, opportunity costs and missing net benefits.
+
+These returns concern the capacity actually funded by the staged programme.
+Most paths remain far below the enclosed architectural cap; the sustained-cap
+operating test requires a separate mature-economy design and funding case.
+The earlier fixed-campaign appraisal below remains a reproducible benchmark.
+
 Several measures are necessary. The larger tested manufacturing portfolio produces a conditional **$136.56 billion annual external surplus after renewal and resource provision**, while the matched industrial and material campaign costs **$41.89 trillion** before the separately costed commercial addition. Positive annual trade therefore establishes neither rapid capital recovery nor a complete socioeconomic return. Conversely, a financial deficit does not establish that research, customer, public or cultural benefits are valueless. Those benefits require their own counterfactual and evidence.
 
 The calculations below distinguish external funding recovery, capital-provider returns, production and income, a socioeconomic valuation screen, and decision thresholds for unmeasured benefits. They use **constant 2041 US dollars**, with no subsequent inflation. **U remains the general economic unit used across the earlier studies**, a common unit for valuing goods, services, assets and financial claims. It serves the economic zone considered here; it does not name the territory or prescribe a currency issuer. Earlier constant-U accounts fix prices for their comparisons without establishing permanently indexed contracts. No U-to-dollar exchange rate is adopted. All population, demand, pricing, longevity and valuation extensions remain scenarios. The research reader is assumed to know the founding industrial design; the accounts and comparison methods are defined here.

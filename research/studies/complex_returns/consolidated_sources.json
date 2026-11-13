@@ -1,0 +1,28 @@
+{
+  "schema": "terluna.research.consolidated-returns-sources/1",
+  "accessed": "2026-11-13",
+  "purpose": "Research-informed appraisal structure, with project scenario values retained as assumptions. No official discount rate, welfare coefficient or lending terms are transferred to U.",
+  "sources": [
+    {
+      "organization": "HM Treasury",
+      "title": "The Green Book 2026",
+      "url": "https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026",
+      "read": "Appraisal overview and, in bounded methods review, transfer payments, opportunity cost, residual value, distributional analysis and switching values.",
+      "use": "Separate incidence and financial affordability from social value; make uncertainty, counterfactuals and unmonetized effects explicit.",
+      "limit": "Constant 0%, 1%, 3% and 7% real rates are project sensitivities. The 800-year cases are not an extrapolation of UK guidance."
+    },
+    {
+      "organization": "Millennium Challenge Corporation",
+      "title": "Guidelines for Economic and Beneficiary Analysis",
+      "url": "https://www.mcc.gov/publications-sections/story-cdg-guidelines-for-economic-and-beneficiary-analysis/",
+      "read": "Economic and beneficiary distinction; bounded review of without-project comparison and labour opportunity-cost treatment.",
+      "use": "Treat worldwide customers, workers, funders and affected people as distinct beneficiaries; avoid adding gross wage bills to aggregate benefits.",
+      "limit": "No MCC hurdle rate, poverty coefficient or causal impact estimate is used."
+    }
+  ],
+  "project_records": [
+    "returns_sources.json", "staged.md", "strategies.md", "credit.md", "policy.md",
+    "../monetary_system/trade_transition.md", "../monetary_system/pressure.md"
+  ],
+  "unresolved": "Qualified demand, minimum-module engineering, ownership and saving contracts, external liquidity access, administrative and commitment costs, shadow prices, environmental losses, research and customer surplus, and the frequency/value of avoided disruptions remain unmeasured."
+}
