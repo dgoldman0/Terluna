@@ -47,3 +47,9 @@ facilities. Worldwide sports, cultural, licensing and institutional demand devel
 independently of resident population. Successful service scenarios can sustain
 expansion; capital recovery still depends strongly on prices, margins, shared
 infrastructure and commissioning, whose small-system engineering remains open.
+
+The [integrated export-strategy comparison](../research/studies/complex_returns/strategies.md)
+compares commodity, specialty and premium materials, propellant/logistics and
+computing alongside worldwide services. It accounts for shared customer budgets,
+production limits, qualification costs and earned-cash expansion, and distinguishes
+combined enterprise returns from each industrial activity's contribution.

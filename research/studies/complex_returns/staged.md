@@ -8,6 +8,8 @@ The principal result is conditional but consequential. With a **$2.789 trillion 
 
 These are reproducible financing scenarios for researchers assessing the build, rather than forecasts or investment offers. The small first module, common infrastructure requirement, service capabilities and paying demand remain unqualified. All monetary amounts are constant **USD2041**. The hypothetical monetary unit U supplies no exchange rate for the new service prices.
 
+The [integrated successor](strategies.md) compares industrial portfolios alongside these services. It adds shared customer budgets and physical headroom, contracted computing and mission limits, commercial-asset replication costs, and fully funded joint host/service programmes. The results below preserve the earlier fixed industrial mix and its explicit service-capacity allowances.
+
 ![Staged expansion, service income and capital recovery](../../runs/complex_returns/figures/staged.png)
 
 The [renderer](../../../visualization/complex-returns/staged_plot.py) reads the reviewed [numerical product](results/staged.json). The figure shows that worldwide service receipts can develop before large physical expansion, while financing failure, discounting and production constraints remain visible. Generated images are kept outside Git; the [vector version](../../runs/complex_returns/figures/staged.svg) uses the same product.

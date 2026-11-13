@@ -13,3 +13,8 @@ writes `staged.png`, `staged.svg` and `staged_manifest.json` to the same ignored
 figure directory. It shows service invoices, industrial capacity, capital-recovery
 NPV and sensitivity cases. Product and renderer SHA-256 identities are embedded;
 all scenario assumptions belong to the producing study.
+
+`strategy_plot.py` reads the integrated export-strategy product and produces
+`strategies.png`, `strategies.svg` and `strategies_manifest.json` in the same
+ignored directory. It compares whole-enterprise NPV, incremental operating
+contributions, appraisal horizons and imposed enclosed-cap operation.

@@ -1466,7 +1466,14 @@
         "studies/complex_returns/staged.py",
         "studies/complex_returns/staged_inputs.json",
         "studies/complex_returns/staged_sources.json",
-        "studies/complex_returns/results/staged.json"
+        "studies/complex_returns/results/staged.json",
+        "studies/complex_returns/strategies.md",
+        "studies/complex_returns/strategies.py",
+        "studies/complex_returns/strategy_inputs.json",
+        "studies/complex_returns/strategy_sources.json",
+        "studies/complex_returns/inputs/strategy_profiles.json",
+        "studies/complex_returns/results/strategies.json",
+        "studies/complex_returns/provenance/export_profiles.py"
       ],
       "findings": [
         "The matched current provisioning context is 14.501 trillion USD2041 for establishment and 41.892 trillion for the campaign, plus separately costed commercial commissioning. Earlier 16.211/10.790-trillion establishment comparisons are distinct architectures.",
@@ -1475,15 +1482,19 @@
         "Stakeholder appraisal includes Earth-based investors, funders, customers, researchers, workers and affected communities as well as residents. Purchase-value socioeconomic sensitivity and required net-benefit thresholds retain unresolved counterfactual and nonmarket valuation.",
         "Staged cash model reconciles the 41.892-trillion campaign into 17.171 trillion of one-time establishment/material deliveries and 24.721 trillion of legacy recurring support, then replaces the latter with dated operations. Commercial commissioning remains additional.",
         "A conditional 2.789-trillion-USD2041 seed opens a five-percent module after eight years. New capital orders use only earned cash after costs, losses and reserves. The limited service market fails in year19; global and breakthrough demand sustain expansion, with undiscounted seed recovery in years152 and24.",
-        "At 100 elapsed years and 3% real, global-service capital-recovery NPV is -2.208 trillion USD2041 and breakthrough is +2.947 trillion. Worldwide audiences are independent of resident population; new-service revenues replace overlapping baseline channels. Small-module design, institutional contracts and service capacity remain unqualified."
+        "At 100 elapsed years and 3% real, global-service capital-recovery NPV is -2.208 trillion USD2041 and breakthrough is +2.947 trillion. Worldwide audiences are independent of resident population; new-service revenues replace overlapping baseline channels. Small-module design, institutional contracts and service capacity remain unqualified.",
+        "Integrated export comparison uses nine alternative portfolios with three worldwide-service markets. Frozen joint provisioning responses enforce shared production and commercial-asset replication; combining individual maxima exceeds source heat capacity by78.2%.",
+        "At100elapsedyears and3%real, strong-service propellant/logistics gives+4.599trillionUSD2041 capital-recovery NPV, services/domestic support+3.781trillion and diversification+3.320trillion. All middle-market100yearNPVs are negative. Positive combined returns do not prove profitable commodity exports.",
+        "Premium recipes retain development, rejected-batch and qualification costs. Computing, research, mission fuel/support and cultural products share explicit capacity and buyer limits; internal use and inventory generate no duplicated sales. Sustained-cap operation is tested separately from cash-constrained paths."
       ],
       "unresolved": [
         "Unified dated campaign budget and retained civil/service costs; component cohort renewal and source permissions.",
         "Demand, product qualification, capital claims and benefit distribution; counterfactual Earth production and full opportunity costs.",
         "Measured research, customer and public benefits and environmental or heritage losses; no generic multiplier or perpetuity credited.",
-        "Engineering-qualified minimum productive module and common cost floor; dated startup carrying costs, service staff-hours/power/communications, rights, paid retention and acquisition. Staging is a conditional policy, not an optimized or probabilistic real-option valuation."
+        "Engineering-qualified minimum productive module and common cost floor; dated startup carrying costs, service staff-hours/power/communications, rights, paid retention and acquisition. Staging is a conditional policy, not an optimized or probabilistic real-option valuation.",
+        "Raw-resource production design, buyer-qualified lunar advantages, empirical orders and actual synergy effects; exact service installation schedules and an optimized portfolio/growth policy."
       ],
-      "next_session_task": "Qualify the first productive module and its common dependencies, obtain scoped service contracts and paid cohort evidence, and replace scenario prices, costs and commissioning assumptions in the earned-cash expansion model."
+      "next_session_task": "Qualify concrete product/mission/service contracts and the first module; replace strategy price, yield, cost and buyer-budget assumptions, and test capacity-allocation policies that preserve funded industrial expansion."
     }
   ]
 }
