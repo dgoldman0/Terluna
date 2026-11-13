@@ -1,5 +1,7 @@
 # Money, productive assets and ownership in the enclosed economy
 
+**Prior-baseline account.** The numerical results below retain the original physical recovery and replacement assumptions. The [revised money and ownership analysis](revised.md) recomputes all 54 paths with improved recovery and equipment refurbishment, preserving the same saving, ownership and U-accounting rules. Its matched comparisons distinguish cash gains, lower required physical stocks and the claims retained by local institutions.
+
 Terluna can accumulate substantial productive capacity while much of its financial benefit continues to belong to outside investors. The decisive distinction is between assets located in the off-Earth economy and claims owned by its people and institutions. A large stock of U payment balances answers a third question: how much liquid purchasing power participants choose to hold in the U system.
 
 This study adds annual monetary and wealth accounts to the [staged industrial returns](../enclosed_returns/README.md). It follows nine commercial portfolios under two demand-growth assumptions, with three ownership arrangements for each, from year 0 through year 220. The accounting boundary covers the entire planned off-Earth enclosed economic zone. It ends before Open Moon, the planetary array and outer-system expansion. U retains its established meaning as the general economic unit, potentially one currency or a basket of U-related currencies.

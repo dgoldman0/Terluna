@@ -1589,36 +1589,45 @@
     },
     {
       "topic": "enclosed_industrial_returns",
-      "condition": "conditional_financial_and_socioeconomic_appraisal; source_and_deployment_unqualified",
+      "condition": "revised_conditional_financial_and_socioeconomic_appraisal_with_recovery_refurbishment_and_source_distributions; source_and_deployment_unqualified",
       "material": [
         "studies/enclosed_returns/README.md",
         "studies/enclosed_returns/results/returns.json",
         "studies/enclosed_returns/checks.md",
         "studies/enclosed_returns/bottlenecks.md",
         "studies/enclosed_returns/results/bottlenecks.json",
-        "studies/enclosed_returns/bottleneck_checks.md"
+        "studies/enclosed_returns/bottleneck_checks.md",
+        "studies/enclosed_returns/revised.md",
+        "studies/enclosed_returns/revised_inputs.json",
+        "studies/enclosed_returns/results/revised.json.gz",
+        "studies/enclosed_returns/results/revised_flows.json.gz",
+        "studies/enclosed_returns/revised_checks.md"
       ],
       "source_commits": {
-        "provisioning": "3e04591148223b079ecd255416555b8d4a4d4f7e",
-        "resources": "38cd446f361f19ff732e8f511ee87104dd51a083"
+        "provisioning": "a8af87614e9c30b6fa4879440765f7e74fe094be",
+        "resources": "1d652941"
       },
       "findings": [
-        "87 physical cases and three financing modes are evaluated at years 100, 200 and 220; residential capacity reaches 6468289 people in year 200.",
-        "The central comparison includes a 35 percent capital-cost allowance. At breakthrough demand with 0.5 percent real growth, three portfolios fund the prescribed build without additional equity and two have positive year-200 operating cash.",
-        "Higher worldwide spending and contract growth changes the results materially; catalogue mass, proposed chemical transport and financial returns remain separate evidence states.",
-        "A stratification of all81 baseline cases reconciles initial investment, cumulative distributions, discounted funder cash, commercial costs and the carrying cost of retained financial balances without changing the baseline.",
-        "Twenty-eight demand, rollout and component-life physical cases reproduce four controls exactly. Twenty-one pass the numerical workforce/equipment screens; seven retain workforce failures and receive no completed financial return estimate.",
-        "At breakthrough demand and0.5percent real growth, faster propellant/service rollout raises year200 funder NPV from5.91 to13.25trillion USD2041 at unchanged demand, but does not change the negative final operating margin. Stronger demand and longer component life address different sustaining constraints.",
-        "Purchased commercial inputs consume much of early discounted revenue; zero-real-yield retained cash also reduces funder NPV. Unpriced research spillovers, option value and supplier transfers remain separate from sponsor cash."
+        "The prior 81 primary financial cases reproduce exactly across three financing modes and three horizons. The revised physical product supplies 81 passing combined-recovery cases, six passing poorer-source cases and four of six passing faster-rollout cases.",
+        "At breakthrough demand and 0.5 percent real growth, three portfolios fund the prescribed build without further equity and four have positive year-200 operating cash. At 1 percent growth, all nine labels fund construction and retain positive operation through year 220.",
+        "The propellant/reference annual year-200 operating balance changes from a 0.38 trillion deficit to a 0.75 trillion surplus; funder NPV at 3 percent real rises from 5.91 to 8.79 trillion USD2041.",
+        "Recovery/refurbishment plus feasible faster propellant rollout at 1 percent demand growth gives 507.91 trillion USD2041 of cumulative year-200 payouts and 23.16 trillion funder NPV, against 4.17 trillion of modeled initial funding. Both faster diversified cases fail workforce from year 24.",
+        "Broader population distributions support substantially larger material potential. Qualified grades and routes remain separate; poorer sources raise opening funding to about 11 trillion USD2041 for the tested portfolios.",
+        "Nine of 81 primary cases draw U credit; maximum cumulative draw is 1.026 billion USD2041 through year 200, with no relative-price breach. A six-month invoice interruption with only 25 percent of cash accessible passes 6 of 54 dated cases without credit and 18 with the assumed bridge.",
+        "Permanent late sales losses can require large new funding while barely changing year-zero NPV. Ownership, productive assets, monetary stocks and net external claims are evaluated in the revised wealth companion."
       ],
       "diagnostic_source_commits": {
         "provisioning": "a6df1bec78ad533f8868ef40a7df81906a3baa38",
         "resources": "0d4aee389de1bbe46f6d78ff7dfca7fa50301a89"
       },
       "unresolved": [
-        "An economically qualified workforce and deployment schedule for accelerated manufacturing; source supply; verified commercial input margins and demand; liquid investment arrangements for retained funds."
+        "Qualified selective sources and delivery routes; full deployment costs; demonstrated repair lifetime and loss coefficients; commercial commitments and margins; complete nutrient/carbon closure; workforce-feasible diversified acceleration; funded treasury and ownership arrangements."
       ],
-      "next_session_task": "Assess dated labor and production alternatives, priced reductions in transport/replacement costs and treasury arrangements against the stratified baseline without admitting failed capacity cases."
+      "next_session_task": "Integrate the revised return, physical-resource and ownership products while preserving distinct evidence states; prioritize source selection, repair qualification and early commercial rollout.",
+      "baseline_source_commits": {
+        "provisioning": "3e04591148223b079ecd255416555b8d4a4d4f7e",
+        "resources": "38cd446f361f19ff732e8f511ee87104dd51a083"
+      }
     },
     {
       "topic": "monetary_wealth",
@@ -1627,24 +1636,31 @@
         "studies/monetary_wealth/README.md",
         "studies/monetary_wealth/wealth_inputs.json",
         "studies/monetary_wealth/results/wealth.json.gz",
-        "studies/monetary_wealth/checks.md"
+        "studies/monetary_wealth/checks.md",
+        "studies/monetary_wealth/revised.md",
+        "studies/monetary_wealth/revised_inputs.json",
+        "studies/monetary_wealth/results/revised.json.gz"
       ],
       "source_commits": {
-        "provisioning_asset_export": "c9e37d59803ec568e41111b857f76d7bf5741e05",
-        "resources_source_access": "b73457e7",
-        "humanities_financial_baseline": "65804012"
+        "provisioning_asset_export": "a8af87614e9c30b6fa4879440765f7e74fe094be",
+        "resources_source_potential": "1d652941"
       },
       "findings": [
-        "Fifty-four annual paths retain nine portfolios, two breakthrough-demand growth rates and three ownership arrangements; checkpoints cover years 0, 32, 100, 200 and 220.",
-        "The optimistic propellant case retains 347.655 trillion USD2041 of cumulative year-200 owner payouts and has 38.914 trillion of remaining-service physical assets plus construction in progress, separate from cash and reserves.",
-        "At 15 percent net payroll saving, continued outside ownership yields 0.509 trillion USD2041 of local year-200 wealth. Paid purchases at a conditional 3 percent cash-claim quote yield 1.056 trillion and a 1.27 percent local share. A negotiated 75 percent community transfer with full payout retention yields 285.414 trillion; outside investors still receive 110.043 trillion and a 5.79 percent dated cash IRR.",
-        "The worked outside-ownership money stock is valued at 15.147 trillion USD2041; outside retention sensitivities change money without changing consolidated wealth. Nominal U faces, constituent exchange rates and currency-price equilibrium are unspecified.",
-        "Outside equity is subtracted in consolidated wealth; domestic claims cancel. Cash-claim market proxies and own-funds values remain separate, including negative enterprise residuals where equity is marked above included assets."
+        "Fifty-four revised annual paths retain nine portfolios, two breakthrough-demand growth rates and three ownership arrangements, with 270 matched checkpoints at years 0, 32, 100, 200 and 220. The previous 54 paths reproduce exactly under unchanged accounting rules.",
+        "The primary strong propellant case has 415.568 trillion USD2041 of cumulative year-200 payouts and 33.023 trillion of included real assets, compared with 347.655 and 38.914 trillion in the previous baseline.",
+        "At 15 percent payroll saving, included local year-200 wealth is 0.525 trillion USD2041 under outside ownership, 0.908 trillion under paid purchases, and 329.780 trillion under negotiated 75 percent community ownership with retained distributions. Outside payouts in the negotiated case total 127.503 trillion, with 5.98 percent real cash IRR.",
+        "The transaction-money equivalents for those ownership arrangements are 14.777, 14.648 and 26.300 trillion USD2041. These are liquid claims, not nominal U faces or net wealth.",
+        "The paid-purchase outcome falls from 1.056 trillion of local book wealth despite better programme cash: the conditional share quote rises while the required replacement-cost asset stock falls. Avoided purchases and refurbished cores are not counted as duplicate assets."
       ],
       "unresolved": [
         "Qualified assets and source supply; intangible capital and inventories; household income and saving evidence; negotiated economic and voting rights; funded public spending; jointly endogenous money demand, exchange rates and lending."
       ],
-      "next_session_task": "Integrate ownership contracts, public spending and household accounts with the monetary and fiscal design while preserving paired claims and source qualifications."
+      "next_session_task": "Integrate the revised ownership and currency balances with the return comparison; keep valuation, saving, distribution policy and economic/voting rights explicit.",
+      "baseline_source_commits": {
+        "provisioning_asset_export": "c9e37d59803ec568e41111b857f76d7bf5741e05",
+        "resources_source_access": "b73457e7",
+        "humanities_financial_baseline": "65804012"
+      }
     }
   ]
 }

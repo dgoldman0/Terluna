@@ -1,5 +1,17 @@
 # Returns from staged industrial expansion and U financing
 
+The [full revised appraisal](revised.md) incorporates costed material recovery, equipment refurbishment, broader resource distributions, U financing and ownership accounts. It reruns all nine portfolios across three worldwide market levels and three demand-growth paths, with checkpoints at years 100, 200 and 220. The earlier physical and financial baseline remains reproducible below.
+
+At breakthrough worldwide demand and 0.5% annual real growth, the revised propellant/logistics portfolio has a year-200 operating surplus of 0.75 trillion USD2041, compared with the previous 0.38-trillion deficit. Its funder cash net present value (NPV) at 3% real rises from 5.91 to 8.79 trillion. Three portfolios still fund the prescribed build without further equity; four now have positive mature operating cash, although specialty products need additional construction funding. With 1% demand growth, all nine labels fund the build and retain positive operating cash at years 200 and 220.
+
+Combining recovery and refurbishment with the feasible faster propellant rollout gives 507.91 trillion USD2041 of cumulative year-200 payouts, a 23.16-trillion funder NPV at 3% real, and a 7.55% real cash internal rate of return, against 4.17 trillion of modeled initial funding. Both faster diversified cases fail workforce capacity from year 24. Broader geological potential does not qualify routes or source grades: the poorer-source comparison raises modeled initial funding to roughly 11 trillion and materially lowers returns.
+
+The [revised monetary and wealth account](../monetary_wealth/revised.md) follows the primary recovery/refurbishment paths under three ownership arrangements. In the propellant/1% case, included year-200 local net wealth is 0.525 trillion USD2041 with continued outside ownership, 0.908 trillion with community purchases, and 329.780 trillion under a negotiated 75% community transfer with retained distributions. These are different ownership bargains; money, equity and underlying assets are not added twice. The [verification record](revised_checks.md) identifies the actual checks and unresolved evidence.
+
+## Preserved previous baseline
+
+Everything below this heading describes the preceding financial baseline and its original resource screen. The revised study above supersedes its current return and resource interpretation while retaining these figures for exact comparison. The earlier narrow catalogue allowance is not a cap on the broader geological opportunity now modeled.
+
 The corrected account follows staged industrial construction to the planned capacity of 6.47 million residents in year 200, with worldwide customers and all funders included in the appraisal. It distinguishes funding construction from sustaining the completed system. Under the highest-market scenario—a potential audience of two billion people with the associated institutional and industrial demand—and 0.5% annual growth in real spending and funded demand, three portfolios reach the year-200 target without additional equity after their initial funding. Two have positive operating cash at that checkpoint. With 1% real demand growth, all nine portfolio labels meet both tests; with static breakthrough demand, none does. These comparisons assume the specified worldwide sales and a source supply that has not yet been qualified.
 
 U remains the general economic unit and possible currency or basket of U-related currencies serving this off-Earth economic zone. The scope ends before the Open Moon, planetary array and outer-Solar-System buildout.
@@ -8,7 +20,7 @@ Equipment is now sized from actual work, retained when useful and replaced by co
 
 The [stratified bottleneck analysis](bottlenecks.md) now separates payout timing, commercial expenses, physical sustaining costs and financial retention. It preserves this baseline and adds 28 controlled physical cases: 21 pass the modeled capacity screens and seven faster manufacturing/service combinations exceed the workforce allowance. In the propellant/reference case, faster rollout raises year-200 funder NPV from 5.91 to 13.25 trillion USD2041 at unchanged demand, while leaving the final operating deficit unchanged. The analysis also reconciles the optimistic 11.94 trillion NPV with 347.65 trillion of cumulative payouts and a 6.20% real annual return; those are different measures of the same cash path.
 
-## Financial comparison at years 100 and 200
+### Financial comparison at years 100 and 200
 
 The table uses the breakthrough market, 0.5% real demand growth and the U financing arm. All amounts are **trillion constant USD2041**; operating cash is an annual flow after renewal and provisions, before new capital and debt service. Sponsor net present value (NPV) discounts actual distributions less all funder contributions at 3% real, without adding terminal asset claims. Completion after an additional-equity requirement is conditional on receiving that funding.
 
@@ -32,7 +44,7 @@ The services case still carries a large physical supply bill: 4.13 trillion USD2
 
 The raw and commodity Earth-return material offers fail the ground-handling price floor. Their remaining receipts come from other permitted activities; the raw-price case consequently matches the services case. The table does not demonstrate profitable bulk exports at commodity prices.
 
-## How much the worldwide market changes the result
+### How much the worldwide market changes the result
 
 Each row below contains nine portfolio labels with the same residential schedule. Counts describe model cases, not probabilities or independent investment opportunities. The potential audience ceilings are 150 million, 600 million and 2 billion in the limited, global and breakthrough scenarios. Growth changes real spending intensity and funded contract volumes, while physical facilities and customer budgets still constrain delivered sales.
 
@@ -52,7 +64,7 @@ Worldwide services can therefore support an economy much larger than its residen
 
 U credit changes funding timing only modestly in this fixed-schedule comparison. Six of the 81 base cases draw U credit, with a maximum cumulative draw of 1.21 billion USD2041 through year 200. No case breaches the relative price rule. Successful cases mostly have sufficient retained earnings already; weaker cases lose repayment capacity as costs overtake receipts. These results concern the stated underwriting and fixed construction schedule, rather than the full range of monetary, tax or public-investment policies that U could support.
 
-## Wider value and sensitivity
+### Wider value and sensitivity
 
 The socioeconomic account includes customers and residents alongside funders, workers and suppliers. The following values are year-200 NPVs at 3% real, in trillion USD2041. Full and half prices are valuation assumptions applied to the same physical deliveries; they are not confidence bounds.
 
@@ -78,7 +90,7 @@ For the diversified portfolio in the breakthrough/0.5% case, the direct-cost com
 
 Cash and monetary reserves earn zero real return in this model. Holding funds for later construction therefore carries an opportunity cost. The alternate payout comparison, temporary receipt shock and monetary-basket sensitivities are saved with the main results. The financial account does not optimize an investment portfolio for retained funds or estimate a default recovery after the first unfunded requirement.
 
-## Source supply remains the principal qualification
+### Source supply remains the principal qualification
 
 The mining assessment does not establish a contracted, permitted or economically qualified feed supply for two centuries. Its narrow geometry catalogue is exhausted well before completion even at its unrealistic 100% mass ceiling. A wider geometry screen and broader catalogue allowances give larger stock bounds, but their delivery routes and feed composition remain unqualified. Don Quixote supplies 63.3% of the broad dark-body mass estimate and lies outside the narrow access geometry, so the assessment also excludes it in a separate comparison.
 
@@ -93,7 +105,7 @@ The following feed totals include the initial deployment once and use the same h
 
 Every return checkpoint records cumulative feed and the first shortage under each of seven inventory assumptions. These conditions travel with the financial figures. They prevent a positive cash appraisal from being mistaken for evidence that the needed mines and routes exist. The owning resources study contains the year-100/200/220 quantities, geometry rules and poorer-grade comparisons; its frozen product is [inputs/mining.json.gz](inputs/mining.json.gz).
 
-## What this account measures
+### What this account measures
 
 This study follows the planned off-Earth economic zone through a gradual construction programme, its year-100 checkpoint, completion in year 200 and twenty further years at the completed population. The architectural capacity remains 6,468,289 people. The programme begins with 12,500 residents and first commercial production in year 8; a smooth increase in the logarithm of population reaches 222,240 people in year 100 and the cap in year 200. Residential requirements follow that schedule. Industrial capacity follows the materials, energy, heat rejection and transport needed to serve households, construction and actual customer orders.
 
@@ -101,7 +113,7 @@ U retains its established meaning as the general economic unit, which may functi
 
 The financial account consolidates participating enterprises and their funders. It assumes that their retained earnings can support the shared programme under an agreed financing arrangement. That is a funding assumption, not an adopted tax system or a claim that all revenue belongs to one authority. Pooled funder returns include every dated contribution. They do not specify the return of the original shareholders after an unknown sequence of later equity issues.
 
-## Construction, replacement and worldwide demand
+### Construction, replacement and worldwide demand
 
 The provisioning model retains surviving equipment and orders additions only when dated work requires more capacity. Active components and structural parts have distinct lifetimes. Replacement follows their age distribution; surplus equipment can remain available, and unused equipment that reaches retirement is not automatically replaced. Each addition is manufactured and delivered over a two-year work window. The solver closes the interaction between equipment procurement, freight, propellant, source extraction and process capacity. Its Weibull retirement distribution is a scheduling assumption with the inherited mean service lives, tested separately from deterministic retirement.
 
@@ -117,7 +129,7 @@ Earth-bound material offers below the inherited 150 USD2026/kg ground-handling c
 
 Destination income pays for stays. Visitor beds, their construction and replacement, utilities, consumables and staff are included. Passenger access remains a condition of that demand: this account establishes neither a passenger-safe transport fleet nor a visitor access fare. It does not count the same accommodation receipts again as an independent tourism multiplier.
 
-## Financing and returns
+### Financing and returns
 
 The comparison uses equity funding, funded loans at 3% real interest, and a U financing package with 2.5% local credit and 3% outside loans or supplier-held U claims. Supplier claims may cover 50% of identified external capital purchases; they remain separate from domestic circulating balances. Loans require a 1.5 debt-service coverage ratio on 70% of operating cash, cover at most 75% of a capital package and keep total debt below 25% of the original seed funding. Principal has a two-year grace period and twenty-year repayment schedule. The lender also checks the next forty years of operating cash after scheduled capital. That screen concerns the remaining programme; it does not assign a marginal profit to each new resident.
 
@@ -133,7 +145,7 @@ Three return measures answer different questions. Dated sponsor cash includes th
 
 Discount rates of 0%, 1%, 3% and 7% show sensitivity to the timing of costs and benefits. The year 200 operating position and continued replacement through year 220 remain visible alongside discounted totals. This distinction matters for a programme whose later benefits have little weight at a high discount rate. HM Treasury's [2026 appraisal guidance](https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026) distinguishes transfers from consumed resources and warns against treating general spending multipliers as project benefits. Its [discount-rate review response](https://www.gov.uk/government/publications/green-book-discount-rate-review-2026/green-book-discount-rate-review-hm-treasury-response) also calls for other quantitative and qualitative treatment of effects beyond 125 years. The fixed rates here are project sensitivities, rather than an extension of an official appraisal schedule. The account also reports how much additional initial expenditure would reduce unlevered net present value to zero. That amount is a cost allowance for further design work, not proof that an unqualified deployment can be purchased for it.
 
-## Supply conditions and evidence
+### Supply conditions and evidence
 
 The resources account follows cumulative feed, including the initial deployment once, through disjoint catalogue allowances. A geometrically selected or dark, diameter-known body is not a qualified ore reserve. Composition, usable grade, recovery, permissions, actual trajectories and delivery rates remain separate requirements. Every financial checkpoint carries that conditional supply status. Broader catalogue mass cannot establish the affordability of the inherited three-year chemical-freight route.
 
@@ -141,7 +153,7 @@ Poorer-grade cases rerun extraction, processing, equipment and freight requireme
 
 The model supports decisions about which commercial portfolios, resource qualifications and industrial capabilities deserve further work. Its numerical checks establish accounting identities, annual rated capacity and consistency between producers and consumers. Freight uses annual rates and the inherited travel-cycle assumptions; transit inventories and individual departure and arrival dates still require a deployment model. These calculations do not constitute empirical validation of a plant, customer market, monetary institution, source reserve or two-century operating programme.
 
-## Reproduction and records
+### Reproduction and records
 
 The customer producer is [markets.py](markets.py), with assumptions in [enclosed_inputs.json](enclosed_inputs.json). The financing consumer is [finance.py](finance.py), with the source commits and exact input hashes in [finance_inputs.json](finance_inputs.json). The complete 783 checkpoint accounts are in [results/returns.json](results/returns.json). They cover 87 physical cases, three financing modes and three horizons. Market and resource conditions remain attached to those accounts.
 

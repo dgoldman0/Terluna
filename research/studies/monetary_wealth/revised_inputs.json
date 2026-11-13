@@ -1,0 +1,49 @@
+{
+  "schema": "terluna.humanities.revised-monetary-wealth-inputs/1",
+  "variant": "combined",
+  "expected_financial_cases": 18,
+  "expected_portfolios": 9,
+  "settings_product": {
+    "path": "wealth_inputs.json",
+    "sha256": "34631ef11554d87847555ef7db21be4cbb067afd14b6f029d280a22f6e4ba220",
+    "schema": "terluna.humanities.monetary-wealth-inputs/1"
+  },
+  "finance_product": {
+    "path": "../enclosed_returns/results/revised_flows.json.gz",
+    "sha256": "be8c3a956f8212873c3dc943030561634bdf38045b9fa4374506e5ca911c463c",
+    "schema": "terluna.humanities.wealth-finance-flows/1",
+    "dependency_base": "../enclosed_returns"
+  },
+  "asset_product": {
+    "path": "inputs/revised_asset_stock.json.gz",
+    "sha256": "28ff9108ddda9c771478c8388a82ea25594af4b7e539e9b3233b705e7e35466e",
+    "schema": "terluna.provisioning.enclosed-asset-stock/1",
+    "source_path": "provisioning/enclosed_industry/results/revised_asset_stock.json.gz",
+    "source_branch": "domain/provisioning",
+    "source_commit": "a8af87614e9c30b6fa4879440765f7e74fe094be"
+  },
+  "baseline_product": {
+    "path": "results/wealth.json.gz",
+    "sha256": "1531b43ba730e9f89a60f30399cc9d94535fd2b942b772cd0d385e54e95aa4f9",
+    "schema": "terluna.humanities.monetary-wealth/1"
+  },
+  "implementation_dependencies": {
+    "model.py": "2196f0642992bdc0349c18eb124359e87e64968ac28c6c29cdb6bbc80b90a12c",
+    "ledger.py": "2df16c8f7a0f2ec0fb0242728ee0f5ddacf2e1ed43af3fcc15112ce77761458a",
+    "sources.json": "6ccc01df36e44d7495a5fa6921d0cd5d357ab774e66cd90584c5f46b2dcb22ef",
+    "../complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef",
+    "../enclosed_returns/finance_inputs.json": "b859c68691e0fe38596460470cc1753f3def08b29955be7970a7c0ca5a0facf0"
+  },
+  "rules": [
+    "The retained wealth settings are used unchanged for all 54 ownership paths; only matched revised physical assets and financial flows replace their source products. Historical results remain intact.",
+    "Revised and historical accounts use the same 0\u2013220 annual boundary and checkpoints 0, 32, 100, 200 and 220. All amounts value the same U accounting convention in constant USD2041 equivalents, not nominal currency faces.",
+    "Worldwide services, commercial intellectual property, brands, software and unallocated service-package capital remain unvalued real assets. Geological potential and hypothetical accessible resource shares do not become permitted mining assets.",
+    "Programme reserve assets retain the matching restricted enterprise claim. Domestic deposits, loans, custody and equity have explicit counterparties; bank reserve money is not added to nonbank transaction money.",
+    "Ownership transfers allocate the same dated payouts. Community purchases pay the outside seller exactly; negotiated transfers are wealth transfers without additional output. New outside capital dilutes prior local stakes under the retained own-funds convention.",
+    "The source physical asset values are service-potential replacement-value proxies. A refurbished core enters the restored productive stock once; its restored service value is not a new cash receipt, production profit or market appraisal.",
+    "Distributed-cash return metrics exclude terminal claims. The separately labelled cash-plus-terminal comparison adds outside enterprise equity and outstanding outside custody once. Enterprise equity already includes net physical assets, work in progress, programme cash and restricted reserves less debt.",
+    "The residual foreign backing of assumed U balances is an accounting closure, not a solved balance of payments or independently available foreign currency. Neither revised savings nor the currency basket establish a currency-price or inflation forecast.",
+    "The accounting consumer does not qualify physical deployment, resource release, engineering recovery coefficients, markets or institutional ownership contracts."
+  ],
+  "finance_policy_path": "../enclosed_returns/finance_inputs.json"
+}
