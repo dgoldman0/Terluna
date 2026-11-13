@@ -1661,6 +1661,36 @@
         "resources_source_access": "b73457e7",
         "humanities_financial_baseline": "65804012"
       }
+    },
+    {
+      "topic": "production_income",
+      "condition": "conditional_year200_GDP_and_GNI_distributions; explicit_subjective_priors_and_direct_investment_income; no_empirical_completion_probability",
+      "material": [
+        "studies/production_income/README.md",
+        "studies/production_income/income_inputs.json",
+        "studies/production_income/income_sources.json",
+        "studies/production_income/extract.py",
+        "studies/production_income/model.py",
+        "studies/production_income/inputs/year200.json.gz",
+        "studies/production_income/results/year200.json.gz",
+        "studies/production_income/checks.md",
+        "../visualization/production_income/render.py"
+      ],
+      "source_commits": {
+        "humanities_revised_returns_and_wealth": "d06172c0",
+        "provisioning_asset_and_recovery_export": "a8af87614e9c30b6fa4879440765f7e74fe094be"
+      },
+      "findings": [
+        "Year-200 production and expenditure GDP reconcile with earned-income allocation across 81 market cases and 663552 paired draws. GNP and GNI coincide in the absence of a statistical discrepancy.",
+        "For the diversified portfolio under the balanced prior over previously self-financing paths, median GDP is 9.43 trillion USD2041 per year, with a central 80 percent interval of 7.67\u201320.62 trillion. GNI is separately conditional on ownership and foreign-income treatment.",
+        "The broader funded-completion distribution gives diversified GDP of 3.79 trillion at the median, with a 2.68\u20139.29 trillion central 80 percent interval; an expansive market prior gives 7.97 trillion and 3.27\u201320.76 trillion. These weights are modeling judgments, not empirical project-success frequencies.",
+        "Gross income includes depreciation and imputed resident services. Foreign direct-investment income includes retained earnings and signed losses; investor cash payouts do not substitute for earned income.",
+        "Eighteen cases use exported asset depreciation; 63 use a replacement-based proxy whose leave-one-out error against the available engineering accounts is -11.87 to +13.12 percent. Additional economic-life uncertainty remains explicit."
+      ],
+      "unresolved": [
+        "Completion probabilities and adaptive investment; empirical long-run market priors; full asset cohorts and inventories; domestic service production; fiscal and resource-provision counterparties; legal treatment of outside equity; external-asset yields and the balance of payments."
+      ],
+      "next_session_task": "Integrate annual GDP/GNI with the financial and wealth accounts while retaining the distinction between gross income, cash, ownership, externally funded losses and the conditions for completing the build."
     }
   ]
 }

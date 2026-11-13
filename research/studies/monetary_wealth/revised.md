@@ -82,6 +82,9 @@ Consolidated local net wealth equals included real assets plus external financia
 
 The banking account solves outside backing as the residual needed to reconcile the selected holdings. This establishes an accounting identity; it does not independently demonstrate available foreign exchange, a balance-of-payments path or stable currency prices. A 50/30/20 reporting split among three illustrative U-related constituent currencies allocates the same financial claims and money stock without adding another basket-issued currency. The [revised financial analysis](../enclosed_returns/revised.md) treats operating returns, monetary constraints and resource conditions separately.
 
+
+The [year-200 production and income study](../production_income/README.md) now uses these ownership histories alongside the revised financial and physical products to estimate GDP and GNI distributions. Its household service imputations and accrued foreign earnings are annual accounting entries, distinct from this study's cash saving and balance sheets. The new study preserves actual dilution and purchase shares in its matched ownership comparison and identifies the additional assumptions needed for national accounting.
+
 ## Evidence, checks and reproduction
 
 [revised_inputs.json](revised_inputs.json) pins the original ownership settings, retained historical result, revised financial flows, revised physical asset stock and accounting code. The cash and asset products must identify the same physical source, and cases join by explicit baseline identity and the combined intervention. Both the nested physical-case hash and the complete intervention-record hash must also match. Every year must be present; debt-sector balances, repayments and custody changes must reconcile before an ownership path is calculated.

@@ -1,0 +1,22 @@
+{
+  "schema": "terluna.humanities.production-income-sources/1",
+  "sources": [
+    {
+      "file": "sna2025.pdf",
+      "url": "https://unstats.un.org/unsd/nationalaccount/snaupdate/2025/2025_SNA_Combined.pdf",
+      "bytes": 16355877,
+      "sha256": "47fa283670e5f85bffc8df7e44f41db45e0bb2f00cead758db6435e709999d1f",
+      "reading_scope": "Targeted reading: 3.144–3.146; 7.92–7.103; 8.45–8.54. Gross product/income, residence, own-account production, capital-cost valuation and household benefits in kind. No full-standard reading claimed.",
+      "retrieved": "2026-11-13",
+      "redistribution": "Temporary research copy only; source linked, not added to the repository."
+    },
+    {
+      "url": "https://www.oecd.org/en/publications/oecd-benchmark-definition-of-foreign-direct-investment-fifth-edition_7f05c0a3-en/full-report/fdi-financial-and-income-transactions_af471eb5.html",
+      "title": "OECD Benchmark Definition of Foreign Direct Investment, Fifth Edition (2025), chapter 3",
+      "reading_scope": "Targeted web reading: paragraphs 213, 230, 239–243 and Annex Figure 3.A.1; accrued direct-investment income, retained earnings and losses. No full-book reading claimed.",
+      "retrieved": "2026-11-13",
+      "redistribution": "Linked official HTML; no outside dataset or full document redistributed."
+    }
+  ],
+  "probability_evidence": "The cited standards define the accounts. They do not provide probabilities for a year-200 off-Earth economy. All market weights and triangular priors in inputs.json are explicit analyst judgments."
+}
