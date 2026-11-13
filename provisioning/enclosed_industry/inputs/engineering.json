@@ -1,0 +1,1919 @@
+{
+  "common_programme_USD2041": 155796741660.0765,
+  "constants": {
+    "JULIAN_DAY": 86400.0,
+    "JULIAN_YEAR_DAYS": 365.25,
+    "STANDARD_GRAVITY": 9.80665,
+    "STEFAN_BOLTZMANN": 5.670374419e-08
+  },
+  "demand": {
+    "U_other_freight_kg": 10,
+    "U_pressure_kg": 60,
+    "U_volatile_kg": 1,
+    "air": 906392037.8434104,
+    "bulk": 47895887471.53333,
+    "earth_special": 4089691497.6543164,
+    "goods_virgin": 9999999.999999998,
+    "loose_and_grading": 52017777777.77777,
+    "metal": 6856959102.438558,
+    "occupied_W": 9589590477.001022,
+    "occupied_mean_W": 6302786128.321851,
+    "old_construction_W": 2000000000.0,
+    "old_radiator_m2": 47873821.18969137,
+    "old_total_W": 11589590477.001022,
+    "population": 250000,
+    "power_hardware_kg_W": 0.02,
+    "pressure": 1838666377.7653446,
+    "radiator_controls_kg_m2": 1,
+    "radiator_metal_kg_m2": 10,
+    "renewal_bulk": 882198593.3941667,
+    "renewal_metal": 137139182.04877114,
+    "reserve_Wh": 104999999999.99998,
+    "roads": 22680000000.0,
+    "water": 4051179962.2222223,
+    "yearly_air": 8239927.616758276,
+    "yearly_earth": 155824104.87009352,
+    "yearly_pressure": 51315756.50062361,
+    "yearly_water": 846554404.9710002
+  },
+  "economy": {
+    "components": {
+      "building": {
+        "structural_life_years": 80,
+        "structural_mass_fraction": 0.9
+      },
+      "chemistry": {
+        "structural_life_years": 30,
+        "structural_mass_fraction": 0.5
+      },
+      "computer": {
+        "structural_life_years": 20,
+        "structural_mass_fraction": 0
+      },
+      "lander": {
+        "structural_life_years": 30,
+        "structural_mass_fraction": 0.65
+      },
+      "machine": {
+        "structural_life_years": 30,
+        "structural_mass_fraction": 0.7
+      },
+      "ordinary": {
+        "structural_life_years": 30,
+        "structural_mass_fraction": 0.6
+      },
+      "pressure": {
+        "structural_life_years": 50,
+        "structural_mass_fraction": 0
+      },
+      "radiator": {
+        "structural_life_years": 40,
+        "structural_mass_fraction": 0.9
+      },
+      "solar": {
+        "structural_life_years": 40,
+        "structural_mass_fraction": 0.7
+      },
+      "tank": {
+        "structural_life_years": 50,
+        "structural_mass_fraction": 0.85
+      },
+      "vehicle": {
+        "structural_life_years": 50,
+        "structural_mass_fraction": 0.8
+      }
+    },
+    "coproducts": {
+      "carbon_analogue": {
+        "mass_fraction": 0.047,
+        "recovery_comparison": 0.5,
+        "source": "NASA NTRS 20240006219, Keller et al. (2024), preliminary Bennu carbon measurement; analogue only, not a designated source. Recovery is an engineering sensitivity, not a reported result."
+      },
+      "metal_refinery_expansion_kg_year": 1000000000,
+      "nutrient_recovery_comparison": 0.5,
+      "platinum_sensitivity": {
+        "USD2025_kg_rounded": 38600,
+        "evidence": "USGS Mineral Commodity Summaries 2026: 2025 estimated platinum price 1200 USD/troy ounce, approximately 38600 USD/kg, and mine output 170000 kg. Grade and recovery trials are not asteroid assays; frozen historical price only.",
+        "grade_ppm_trials": [
+          0.01,
+          0.1,
+          1
+        ],
+        "recovery_trial": 0.5,
+        "world_mine_production_2025_kg": 170000
+      },
+      "raw_residue_annual_sales_credit_USD": 0,
+      "refined_inventory_prices_USD2026_kg": [
+        3,
+        10,
+        30
+      ],
+      "rule": "Aggregate metal grades may not also be counted as separate iron, nickel or precious-metal output. Unassayed products receive no invented concentration, reserve or revenue. All residues remain controlled; release/capture chemistry and storage need process-specific verification.",
+      "screen": [
+        "water",
+        "nitrogen",
+        "aggregate_recoverable_metals"
+      ],
+      "stock_containment_kg_per_kg": 0.002,
+      "unassayed": [
+        "carbon-bearing compounds",
+        "phosphorus-bearing minerals",
+        "sulfur-bearing compounds",
+        "nickel/cobalt split within aggregate metals",
+        "platinum-group and other trace metals"
+      ]
+    },
+    "date": "2026-11-12",
+    "evidence": "Capacity and supply-use scenarios, with explicit component partitions, prices and qualification gates; no adopted architecture, market forecast, automatic demographic growth or proven self-reproduction.",
+    "exports": {
+      "commercial_commission_years": 5,
+      "compute_Earth_overhead_USD2026_W_year": 1,
+      "compute_IT_USD2026_W": 45,
+      "compute_IT_kg_W": 0.0256,
+      "compute_W_grid": [
+        0,
+        200000000,
+        1000000000,
+        3000000000
+      ],
+      "compute_common_Earth_service_share": 0.2,
+      "compute_communications_USD2026_W": 2,
+      "compute_communications_kg_W": 0.001,
+      "compute_duty": 0.6,
+      "compute_earth_electricity_USD2026_kWh": [
+        0.05,
+        0.1,
+        0.2
+      ],
+      "compute_earth_markups": [
+        1,
+        1.5,
+        2
+      ],
+      "compute_life_years": 5,
+      "factory_Earth_input_fraction": 0.2,
+      "factory_bulk_kg_m2": 500,
+      "factory_equipment_kg_per_nameplate_kg_year": 0.05,
+      "factory_equipment_life_years": 20,
+      "factory_finish_kWh_kg": 5,
+      "factory_floor_m2_per_nameplate_kg_year": 0.01,
+      "factory_metal_kg_m2": 100,
+      "factory_utilization": 0.7,
+      "factory_yield": 0.9,
+      "finished_goods_kg_year_grid": [
+        0,
+        15750000,
+        50000000,
+        100000000,
+        200000000
+      ],
+      "prices_USD2026_kg": [
+        3,
+        300,
+        750,
+        2000
+      ],
+      "service_portfolio": "Retain the earlier reference research, media, remote-work and destination-service scenario as an explicit option, with its facilities and imports. It is not a market ceiling; passenger access requires separate qualification.",
+      "source_goods_kg_year_grid": [
+        0,
+        50000000,
+        100000000,
+        200000000
+      ],
+      "source_goods_prices_USD2026_kg": [
+        3,
+        30,
+        300,
+        750
+      ]
+    },
+    "growth": {
+      "commissioning_duration_years": 2,
+      "comparison_rates": [
+        0,
+        0.01,
+        0.03
+      ],
+      "eventual_estate_factor": "2.0",
+      "industrial_stock_policy": "Maintain the initial supplier-stock intensity per resident in balanced expansion; new capacity enters the next annual step. Also test fixed plant and maintenance-only rightsizing.",
+      "initial_population_case": "representative",
+      "no_new_tube_site_denominator": true,
+      "years": 40
+    },
+    "inputs": {
+      "crater_programme": {
+        "path": "research/studies/vacuum_crater_buildout/results/buildout.json",
+        "sha256": "521503f0cf9079dd7d67c7879122fcb76288f299e2b43ce6defa17584cd60fe0"
+      },
+      "industrial": {
+        "path": "research/studies/initial_industrial_system/results/industrial_system.json",
+        "sha256": "4bf5c8a00838735b7716aeca07bb9cf1a43265c75a69b02cf4ab183b3b19e9e7"
+      },
+      "industrial_inputs": {
+        "path": "research/studies/initial_industrial_system/industrial_inputs.json",
+        "sha256": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade"
+      },
+      "manufacturing_markets": {
+        "path": "research/studies/world_economy/industrial_markets_inputs.json",
+        "sha256": "721f03eb3bb91d929a13c080ef54fe11dc5b0b5f49887cf8b995591a179930d8"
+      },
+      "revenue": {
+        "path": "research/studies/initial_industrial_system/results/revenue.json",
+        "sha256": "eb2b955e3fa35d76be5b6bba4e393a74108f4cfa9b55232d41ca2d328d1b9822"
+      },
+      "revenue_inputs": {
+        "path": "research/studies/initial_industrial_system/revenue_inputs.json",
+        "sha256": "7d8884f8e2386536789f29f6b532ccd9ae1e49511a32455c1a3d7bf5c1c61b94"
+      },
+      "settlement": {
+        "path": "research/studies/lava_tube_cities/results/buildout.json",
+        "sha256": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de"
+      },
+      "settlement_inputs": {
+        "path": "research/studies/lava_tube_cities/buildout_inputs.json",
+        "sha256": "dbe184ee7fba99bb0cb9b6e0251ffe11685e87a0b0afb0dbb7390dda8128da91"
+      },
+      "transport": {
+        "path": "research/studies/initial_industrial_system/results/transport.json",
+        "sha256": "26f37dcc0c110402ea5d5a23be7338acdaf9501ddd6e4289c9b46053882aa507"
+      },
+      "transport_inputs": {
+        "path": "research/studies/initial_industrial_system/transport_inputs.json",
+        "sha256": "ba335eb4625bef2f5fddeab66964df543f240aa6373153b5356ae08314682d1f"
+      }
+    },
+    "production": {
+      "alloy_import_fraction_of_virgin_local_metal": 0.02,
+      "component_price_sensitivity": [
+        1,
+        2,
+        4
+      ],
+      "external_engineering_contract_USD2026_year": 2000000000,
+      "local_bulk_value_USD2026_kg": 1,
+      "local_fabrication_finish_kWh_kg": 10,
+      "local_fabrication_value_USD2026_kg": 30,
+      "process_consumables_fraction_of_imported_renewal": 0.05,
+      "qualification_capital_USD2026": 10000000000,
+      "qualification_import_hardware_kg": 5000000,
+      "qualification_years": 5,
+      "source_nitrogen_value_USD2026_kg": 50,
+      "source_recovery": 0.95,
+      "source_water_value_USD2026_kg": 5,
+      "special_component_price_multiplier": 1,
+      "structural_metal_value_USD2026_kg": 10
+    },
+    "profiles": {
+      "inherited": {
+        "localize": false,
+        "modular": false
+      },
+      "local_structures": {
+        "localize": true,
+        "modular": true
+      },
+      "modular_imported": {
+        "localize": false,
+        "modular": true
+      }
+    },
+    "rules": [
+      "Domestic gross output counts intermediate production; GDP/GVA subtracts domestic and imported intermediate inputs. Imports of capital enter investment and imports once; depreciation is subtracted only for net product.",
+      "Growth is domestic capital formation and increases future maintenance, resources and funding needs; it is not external revenue.",
+      "The prior 100 kg/resident export-factory constraint and customer-budget ceilings are absent from capacity calculations. Prices, demand and qualification remain independent gates.",
+      "The same spare capacity cannot simultaneously support maximum exports, replacement and maximum growth.",
+      "Component partitions and extended structural lives are design comparisons; imported active modules retain their original lives. Price-density sensitivity prevents mass localization from being treated as a guaranteed equal percentage of value localization.",
+      "Local fabrication consumes metal, alloy imports, energy, machine capacity and delivery of recovered stock. Pressure-composite production and advanced semiconductor production remain imported.",
+      "The 2.5% crater site quota is the eventual programme ceiling. Its architectural population is not a demographic target. The initial vacuum quota and uncounted lava-tube quota remain separate.",
+      "No scenario establishes permitted source reserves or a terraforming date. No indefinite exponential growth or free autonomous self-reproduction is assumed."
+    ],
+    "schema": "terluna.research.initial-economy-inputs/1",
+    "supply_case": "local_structures_space_chemical",
+    "valuation": {
+      "civic_service_growth_USD2026_per_new_resident": 100000,
+      "domestic_transport_service_fraction_of_external_cost": 0.05,
+      "inherited_U_service_normalization_USD2041_per_U": 30,
+      "minimum_resident_service_value_added_U_person_year": 5000,
+      "power_USD2026_kWh": 0.1,
+      "routine_service_fraction_sensitivity": [
+        0.25,
+        0.5,
+        0.75
+      ],
+      "routine_service_value_added_fraction": 0.5,
+      "status": "An illustrative price convention for inherited civic services only, not an estimated exchange rate or a conversion of entire old budgets.",
+      "stock_installation_fraction_of_hardware_value": 0.1
+    }
+  },
+  "evidence": "Inherited engineering scenario inputs, frozen separately from the former population-proportional architecture. Component partitions, source grades and trajectories are unqualified designs.",
+  "industrial": {
+    "assumption_status": {
+      "economics": "Scenario procurement rates and engineering allowances, not quotes or validated forecasts. Low launch prices require sustained high flight rate. No automatic productivity reduction is inferred from inflation.",
+      "engineering": "Chemical rockets, modular mineral processing, solar power and cryogenic storage use known physical mechanisms. Autonomous maintenance, industrial scale, large pressure materials and GW beaming require qualification.",
+      "local_fleet_fabrication": "Separate design comparison: 70 percent of tug structural mass made from source metals after a 5 percent Earth-built seed, giving 66.5 percent locally made across the fleet; dry-to-payload ratio increases from 0.10 to 0.12. Earth supplies engines, electronics, specialty joints and alloyants. Aggregate 8 percent recoverable-metal grade and 60 percent recovery are unqualified source assumptions. No pressure-composite or semiconductor self-replication is inferred.",
+      "propellant": "Near-stoichiometric water-derived H2/O2 avoids an indefinite oxygen-surplus inventory. 430 s at mixture near 8 is a design assumption, with 450 and 390 s bounds; chamber cooling and reusable life need qualification. Air oxygen is taken from the same electrolysis stream, making lander mixture slightly hydrogen-rich. Earth launch is a purchased methalox service with a separate gross resource screen.",
+      "renewal": "Additional physical replacement account: roads 40 years, other bulk 80, metals 50, 95 percent end-to-end recovered mass. This adds missing supplier throughput without rewriting earlier U maintenance accounts.",
+      "source": "Bennu measurements illustrate possible chemistry only; mining targets must be ordinary, independently surveyed and cleared. Water yield, extractability and energetically accessible inventory are assumptions.",
+      "startup": "Eight-year qualification/source bootstrap, five-year linear ramp, 20 equivalent years of stock delivery, then two-year final commissioning. Parallel site qualification assumed; no completion in 2041."
+    },
+    "boundary": "Conditional owned supply system and material procurement. Prior settlement designs unchanged. No source/deposit, orbit, flight rate or technology is qualified. USD are 2026 real purchasing power inflated once to 2041.",
+    "case_overrides": {
+      "local_fleet_fabrication": {
+        "source.tug_local_mass_fraction": 0.665,
+        "transport.nea_dry_to_payload": 0.12
+      },
+      "lower": {
+        "economics.programme_contingency": 0.2,
+        "economics.research_qualification_USD2026": 50000000000.0,
+        "lunar.metal_kWh_kg": 20,
+        "power.source_solar_flux_fraction": 1,
+        "power.space_USD2026_W": 1.5,
+        "power.space_system_W_kg": 200,
+        "prices.lunar_hardware_USD2026_kg": 250,
+        "prices.other_special_USD2026_kg": 75,
+        "prices.pressure_USD2026_kg": 30,
+        "prices.source_mine_USD2026_kg": 500,
+        "prices.spacecraft_USD2026_kg": 600,
+        "source.electrolysis_liquefaction_kWh_kg_H2": 55,
+        "source.ore_kWh_kg": 0.3,
+        "source.water_grade": 0.15,
+        "source.water_recovery": 0.8,
+        "transport.Isp_s": 450,
+        "transport.LEO_USD2026_kg": 50,
+        "transport.lander_dry_to_payload": 0.2,
+        "transport.nea_cycle_years": 2,
+        "transport.nea_dry_to_payload": 0.08,
+        "transport.nea_dv_oneway_m_s": 1800
+      },
+      "reference": {},
+      "upper": {
+        "economics.programme_contingency": 0.5,
+        "economics.research_qualification_USD2026": 200000000000.0,
+        "lunar.metal_kWh_kg": 60,
+        "power.source_solar_flux_fraction": 0.5,
+        "power.space_USD2026_W": 6,
+        "power.space_system_W_kg": 60,
+        "prices.lunar_hardware_USD2026_kg": 1000,
+        "prices.other_special_USD2026_kg": 300,
+        "prices.pressure_USD2026_kg": 120,
+        "prices.source_mine_USD2026_kg": 2000,
+        "prices.spacecraft_USD2026_kg": 3000,
+        "source.electrolysis_liquefaction_kWh_kg_H2": 80,
+        "source.nitrogen_grade": 0.0009,
+        "source.nitrogen_recovery": 0.4,
+        "source.ore_kWh_kg": 0.8,
+        "source.water_grade": 0.05,
+        "source.water_recovery": 0.5,
+        "transport.Isp_s": 390,
+        "transport.LEO_USD2026_kg": 1000,
+        "transport.lander_dry_to_payload": 0.6,
+        "transport.nea_cycle_years": 5,
+        "transport.nea_dry_to_payload": 0.15,
+        "transport.nea_dv_oneway_m_s": 3500
+      }
+    },
+    "date": "2026-11-12",
+    "economics": {
+      "automation_year": 2041,
+      "base_year": 2026,
+      "capacity_margin": 1.25,
+      "inflation": 0.03,
+      "loaded_staff_USD2026_year": 200000,
+      "local_restoration_USD2026_kg_feed": 0.03,
+      "post_start_inflation": 0,
+      "programme_contingency": 0.35,
+      "real_discount_rate": 0,
+      "research_qualification_USD2026": 100000000000.0,
+      "source_preservation_fraction_of_supplier_capital": 0.05,
+      "staff": 15000,
+      "supplier_upkeep_fraction_year": 0.025
+    },
+    "electric_tug_comparison": {
+      "Isp_s": 2000,
+      "dv_oneway_m_s": 4000,
+      "efficiencies": [
+        0.3,
+        0.5
+      ],
+      "power_processing_kg_W": 0.0005,
+      "powered_days_per_roundtrip": 365.25,
+      "rule": "Water electric propulsion comparison, not part of the budget. Lab precedents do not qualify these efficiencies, MW power or lifetime.",
+      "structural_dry_to_payload": 0.08
+    },
+    "inputs": {
+      "constants": {
+        "path": "shared/constants.json",
+        "schema": "terluna.shared.constants/1",
+        "sha256": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72"
+      },
+      "settlement": {
+        "path": "research/studies/lava_tube_cities/results/buildout.json",
+        "schema": "terluna.research.lava-tube-buildout/1",
+        "sha256": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de"
+      },
+      "settlement_inputs": {
+        "path": "research/studies/lava_tube_cities/buildout_inputs.json",
+        "schema": "terluna.research.lava-tube-buildout-inputs/1",
+        "sha256": "dbe184ee7fba99bb0cb9b6e0251ffe11685e87a0b0afb0dbb7390dda8128da91"
+      },
+      "town_inputs": {
+        "path": "research/studies/vacuum_crater_buildout/first_hundred_inputs.json",
+        "schema": "terluna.research.first-hundred-inputs/1",
+        "sha256": "335b0f584986e45942aa350a5a88cc35a413788852f031a288c81033d8155bd4"
+      },
+      "towns": {
+        "path": "research/studies/vacuum_crater_buildout/results/first_hundred.json",
+        "schema": "terluna.research.first-hundred-crater-communities/1",
+        "sha256": "7d9c3f01c130f5dc1fb9a74e31a72cac9920f5c6ba6e50cc8f97224924bd9086"
+      }
+    },
+    "lunar": {
+      "bulk_kWh_kg": 1.5,
+      "bulk_life_years": 80,
+      "bulk_train_hardware_kg": 200000,
+      "bulk_train_kg_hr": 10000,
+      "bulk_yield": 0.9,
+      "construction_plant_kg": 150000000.0,
+      "excavator_kg": 30000,
+      "excavator_kg_hr": 100000,
+      "fabrication_cell_hardware_kg": 50000,
+      "fabrication_cell_kg_hr": 500,
+      "handling_kWh_kg": 0.01388888888888889,
+      "haul_roundtrip_hr": 3,
+      "hauler_kg": 75000,
+      "hauler_payload_kg": 50000,
+      "infrastructure_bulk_per_hardware_kg": 5,
+      "infrastructure_metal_per_hardware_kg": 1,
+      "metal_kWh_kg": 35,
+      "metal_life_years": 50,
+      "metal_train_hardware_kg": 500000,
+      "metal_train_kg_hr": 1000,
+      "metal_yield": 0.1,
+      "mine_availability": 0.5,
+      "old_embedded_plant_kg": 150000000.0,
+      "plant_floor_m2_per_hardware_kg": 0.015,
+      "plant_life_years": 15,
+      "process_availability": 0.8,
+      "recovery": 0.95,
+      "road_life_years": 40,
+      "robot_life_years": 10
+    },
+    "power": {
+      "PV_efficiency": 0.32,
+      "RF_efficiency": 0.8,
+      "aperture_m": 1200,
+      "beam_capture": 0.8,
+      "common_eclipse_hours": 6,
+      "emissivity": 0.9,
+      "end_of_life_factor": 0.85,
+      "latitude_limit_deg": 45,
+      "microwave_Hz": 2450000000.0,
+      "orbital_altitude_m": 10000000.0,
+      "radiator_K": 350,
+      "radiator_kg_m2": 5,
+      "receiver_efficiency": 0.8,
+      "receiver_mean_flux_W_m2": 200,
+      "source_capacity_margin": 1.25,
+      "source_solar_flux_fraction": 0.7,
+      "space_USD2026_W": 3,
+      "space_life_years": 20,
+      "space_system_W_kg": 100,
+      "stations": 10
+    },
+    "prices": {
+      "ground_radiator_assembly_USD2026_m2": 40,
+      "ground_receiver_USD2026_W": 1,
+      "lunar_hardware_USD2026_kg": 500,
+      "other_special_USD2026_kg": 150,
+      "pressure_USD2026_kg": 60,
+      "source_mine_USD2026_kg": 1000,
+      "spacecraft_USD2026_kg": 1500
+    },
+    "schedule": {
+      "bootstrap_years": 8,
+      "commission_years": 2,
+      "delivery_equivalent_years": 20,
+      "ramp_years": 5,
+      "reserve_horizon_years": 200,
+      "seed_reserve_factor": 2,
+      "seed_source_fraction": 0.05,
+      "seed_surface_fraction": 0.02
+    },
+    "schema": "terluna.research.initial-industrial-inputs/1",
+    "source": {
+      "air_nitrogen_mass_fraction": 0.77,
+      "chemistry_USD2026_W": 1.5,
+      "chemistry_hardware_kg_W": 0.002,
+      "chemistry_life_years": 10,
+      "electrolysis_liquefaction_kWh_kg_H2": 65,
+      "hydrogen_HHV_kWh_kg": 39.4,
+      "metal_grade": 0.08,
+      "metal_recovery": 0.6,
+      "metal_refining_and_fabrication_kWh_kg": 45,
+      "mine_availability": 0.65,
+      "mine_module_hardware_kg": 250000,
+      "mine_module_kg_hr": 25000,
+      "nitrogen_grade": 0.0024,
+      "nitrogen_kWh_kg": 5,
+      "nitrogen_recovery": 0.6,
+      "ore_kWh_kg": 0.5,
+      "oxygen_to_hydrogen_mass_ratio": 8,
+      "source_density_kg_m3": 1500,
+      "tug_local_mass_fraction": 0.665,
+      "water_grade": 0.1,
+      "water_recovery": 0.7,
+      "water_to_hydrogen_mass_ratio": 9
+    },
+    "transport": {
+      "Isp_s": 430,
+      "LEO_USD2026_kg": 200,
+      "depot_inventory_years": 0.25,
+      "earth_cycles_year": 8,
+      "earth_dry_to_payload": 0.1,
+      "earth_dv_oneway_m_s": 3800,
+      "earth_payload_kg": 200000,
+      "earth_propellant_USD2026_kg": 3,
+      "earth_tug_life_years": 20,
+      "fleet_availability": 0.8,
+      "lander_cycles_year": 30,
+      "lander_dry_to_payload": 0.4,
+      "lander_dv_oneway_m_s": 2800,
+      "lander_life_years": 10,
+      "lander_payload_kg": 100000,
+      "launch_payload_kg": 100000,
+      "launcher_O_to_CH4": 3.6,
+      "launcher_propellant_kg_per_kg_LEO": 50,
+      "launches_per_pad_year": 200,
+      "methane_CO2_mass_ratio": 2.75,
+      "mixture_O_to_H": 8,
+      "nea_cycle_years": 3,
+      "nea_dry_to_payload": 0.12,
+      "nea_dv_oneway_m_s": 2500,
+      "nea_life_years": 20,
+      "nea_payload_kg": 10000000.0,
+      "propellant_margin": 1.03,
+      "synthetic_methane_kWh_kg": 30,
+      "tank_dry_to_contents": 0.05,
+      "tank_life_years": 25
+    }
+  },
+  "normalization": {
+    "USD2026_to_USD2041": 1.557967416600765,
+    "population": 250000
+  },
+  "original_architecture": {
+    "assets": {
+      "Earth_cryocooling": {
+        "destination": "leo",
+        "group": "earth_transfer",
+        "life_years": 10,
+        "manufacture_USD2026": 698340479.2506182,
+        "mass_kg": 698340.4792506183,
+        "vehicle_count": 948
+      },
+      "Earth_hull_tanks": {
+        "destination": "leo",
+        "group": "earth_transfer",
+        "life_years": 20,
+        "manufacture_USD2026": 115732559906.32729,
+        "mass_kg": 77155039.93755151,
+        "vehicle_count": 948
+      },
+      "Earth_radiators": {
+        "destination": "leo",
+        "group": "earth_transfer",
+        "life_years": 20,
+        "manufacture_USD2026": 113985814.31006676,
+        "mass_kg": 227971.6286201335,
+        "vehicle_count": 948
+      },
+      "Earth_solar": {
+        "destination": "leo",
+        "group": "earth_transfer",
+        "life_years": 20,
+        "manufacture_USD2026": 123236555.1618738,
+        "mass_kg": 410788.51720624603,
+        "vehicle_count": 948
+      },
+      "LEO_route_storage_controls": {
+        "destination": "leo",
+        "group": "earth_transfer",
+        "life_years": 10,
+        "manufacture_USD2026": 415443414.7862878,
+        "mass_kg": 593749.1536280513
+      },
+      "LEO_route_tanks": {
+        "destination": "leo",
+        "group": "earth_transfer",
+        "life_years": 25,
+        "manufacture_USD2026": 38762889337.0857,
+        "mass_kg": 25841926.2247238
+      },
+      "additional_ground_radiator_controls": {
+        "destination": "surface",
+        "group": "lunar",
+        "life_years": 30,
+        "manufacture_USD2026": 343451113.9913425,
+        "mass_kg": 8586277.849783562
+      },
+      "additional_ground_receivers": {
+        "destination": "surface",
+        "group": "lunar",
+        "life_years": 20,
+        "manufacture_USD2026": 2078619202.0570126,
+        "mass_kg": 41572384.04114025
+      },
+      "asteroid_tugs": {
+        "destination": "source",
+        "group": "source",
+        "import_fraction": 0.33499999999999996,
+        "life_years": 20,
+        "manufacture_USD2026": 2948066999999.9995,
+        "mass_kg": 5866800000.0
+      },
+      "bulk_trains": {
+        "destination": "surface",
+        "group": "lunar",
+        "life_years": 15,
+        "manufacture_USD2026": 6100000000,
+        "mass_kg": 12200000
+      },
+      "construction_and_service_robots": {
+        "destination": "surface",
+        "group": "lunar",
+        "life_years": 10,
+        "manufacture_USD2026": 75000000000.0,
+        "mass_kg": 150000000.0
+      },
+      "depot_chemistry": {
+        "destination": "depot",
+        "group": "landing",
+        "life_years": 10,
+        "manufacture_USD2026": 14425097911.721283,
+        "mass_kg": 19233463.882295046
+      },
+      "depot_radiators": {
+        "destination": "depot",
+        "group": "landing",
+        "life_years": 20,
+        "manufacture_USD2026": 12364247914.287947,
+        "mass_kg": 24728495.828575894
+      },
+      "depot_route_storage_controls": {
+        "destination": "depot",
+        "group": "earth_transfer",
+        "life_years": 10,
+        "manufacture_USD2026": 1208271291.2612288,
+        "mass_kg": 1726853.8409941506
+      },
+      "depot_solar": {
+        "destination": "depot",
+        "group": "landing",
+        "life_years": 20,
+        "manufacture_USD2026": 33941406851.108902,
+        "mass_kg": 113138022.83702967
+      },
+      "depots_and_orbital_workshops": {
+        "destination": "depot",
+        "group": "landing",
+        "life_years": 25,
+        "manufacture_USD2026": 254972263522.52484,
+        "mass_kg": 169981509.01501656
+      },
+      "excavators": {
+        "destination": "surface",
+        "group": "lunar",
+        "life_years": 10,
+        "manufacture_USD2026": 390000000,
+        "mass_kg": 780000
+      },
+      "fabrication_cells": {
+        "destination": "surface",
+        "group": "lunar",
+        "life_years": 15,
+        "manufacture_USD2026": 4525000000,
+        "mass_kg": 9050000
+      },
+      "haulers": {
+        "destination": "surface",
+        "group": "lunar",
+        "life_years": 10,
+        "manufacture_USD2026": 5850000000,
+        "mass_kg": 11700000
+      },
+      "lunar_beam_constellation": {
+        "destination": "depot",
+        "group": "power",
+        "life_years": 20,
+        "manufacture_USD2026": 471100976989.5921,
+        "mass_kg": 1570336589.965307
+      },
+      "lunar_landers": {
+        "destination": "depot",
+        "group": "landing",
+        "import_fraction": 1,
+        "life_years": 10,
+        "manufacture_USD2026": 46920000000.0,
+        "mass_kg": 31280000.0
+      },
+      "metal_trains": {
+        "destination": "surface",
+        "group": "lunar",
+        "life_years": 15,
+        "manufacture_USD2026": 22750000000,
+        "mass_kg": 45500000
+      },
+      "source_chemistry": {
+        "destination": "source",
+        "group": "source",
+        "life_years": 10,
+        "manufacture_USD2026": 57132884290.28447,
+        "mass_kg": 76177179.05371264
+      },
+      "source_fabrication_cells": {
+        "destination": "source",
+        "group": "source",
+        "life_years": 15,
+        "manufacture_USD2026": 7000000000,
+        "mass_kg": 7000000
+      },
+      "source_metal_trains": {
+        "destination": "source",
+        "group": "source",
+        "life_years": 15,
+        "manufacture_USD2026": 35000000000,
+        "mass_kg": 35000000
+      },
+      "source_mine_trains": {
+        "destination": "source",
+        "group": "source",
+        "life_years": 15,
+        "manufacture_USD2026": 707750000000,
+        "mass_kg": 707750000
+      },
+      "source_radiators": {
+        "destination": "source",
+        "group": "source",
+        "life_years": 20,
+        "manufacture_USD2026": 99491765281.03676,
+        "mass_kg": 198983530.56207353
+      },
+      "source_solar": {
+        "destination": "source",
+        "group": "source",
+        "life_years": 20,
+        "manufacture_USD2026": 192043308538.77133,
+        "mass_kg": 640144361.7959045
+      }
+    },
+    "engineering": {
+      "LEO_route_storage_kg": 516838524.494476,
+      "added_ground_firm_W": 2078619202.0570126,
+      "added_ground_radiator_m2": 8586277.849783562,
+      "additional_route_storage_kg": 2020006294.4920678,
+      "beam_PV_area_m2": 360565895.9325191,
+      "beam_PV_nameplate_W": 157033658996.5307,
+      "beam_converter_radiator_m2": 34859025.98552328,
+      "counts": {
+        "Earth_route_ships": 948,
+        "asteroid_tugs": 4889,
+        "bulk_trains": 61,
+        "excavators": 26,
+        "fabrication_cells": 181,
+        "haulers": 156,
+        "lunar_landers": 782,
+        "metal_trains": 91,
+        "source_fabrication_cells": 140,
+        "source_metal_trains": 70,
+        "source_mine_trains": 2831
+      },
+      "depot_process_radiator_m2": 4945699.1657151785,
+      "depot_route_storage_kg": 1503167769.9975917,
+      "local_industry_firm_W": 4078619202.0570126,
+      "process_radiator_flux_W_m2": 765.8195051260687,
+      "source_process_radiator_m2": 39796706.1124147,
+      "total_ground_firm_W": 13668209679.058035
+    },
+    "peak_flows": {
+      "Earth_route_LEO_inventory_kg": 516838524.4951743,
+      "Earth_route_depot_inventory_kg": 1503167769.9996223,
+      "Earth_route_fuel_backhaul_kg_year": 2135914310.4137304,
+      "Earth_route_handling_loss_kg_year": 164320467.18670076,
+      "Earth_route_inventory_fill_kg_year": 101000314.72473983,
+      "Earth_route_source_water_kg_year": 6155267437.421281,
+      "Earth_route_space_fuel_consumed_kg_year": 5889946655.509841,
+      "Earth_vehicle": {
+        "Isp_s": 430,
+        "burns": {
+          "ascent_kg": 425975.9242801933,
+          "backhaul_kg": 440102.6768711181,
+          "descent_kg": 787640.7817270153,
+          "handling_loss_kg": 33858.04248840471,
+          "inventory_delivery_kg": 5324.699053502416,
+          "peak_tank_contents_kg": 1227743.4585981334,
+          "supplied_kg": 1252799.4475491156
+        },
+        "cargo_kg": 200000,
+        "cycle_days": 45.65625,
+        "delta_v_oneway_m_s": 3800,
+        "dry_kg": 82797.61662724527,
+        "electric_bus_W": 36832.303757944,
+        "iterations": 19,
+        "parts": {
+          "cryocooling": {
+            "life_years": 10,
+            "manufacture_USD2026": 736646.07515888,
+            "mass_kg": 736.64607515888
+          },
+          "hull_tanks": {
+            "life_years": 20,
+            "manufacture_USD2026": 122080759.39486,
+            "mass_kg": 81387.17292990666
+          },
+          "radiators": {
+            "life_years": 20,
+            "manufacture_USD2026": 120238.20074901557,
+            "mass_kg": 240.47640149803112
+          },
+          "solar": {
+            "life_years": 20,
+            "manufacture_USD2026": 129996.36620450823,
+            "mass_kg": 433.3212206816941
+          }
+        },
+        "powered_days": 0,
+        "radiator_emitting_m2": 48.09528029960622,
+        "solar_nameplate_W": 43332.12206816941,
+        "source_return_ratio": 0,
+        "thrust_N": null
+      },
+      "LEO_kg_year": 980942601.8846909,
+      "Source_route_water_kg_year": 12192920718.805613,
+      "additional_bulk_stock_kg": 1396943309.454619,
+      "additional_metal_stock_kg": 365251440.38875943,
+      "bulk_kg_year": 3374301923.811747,
+      "depot_effective_O_to_H": 7.965164357072079,
+      "depot_excess_oxygen_kg_year": 0.0,
+      "depot_heat_W": 3030010310.075025,
+      "depot_hydrogen_kg_year": 353623207.4873013,
+      "depot_mean_W": 7693385552.924869,
+      "depot_oxygen_to_fuel_kg_year": 2816666968.1113567,
+      "depot_water_for_propellant_kg_year": 3182608867.3857117,
+      "earth_deep_kg_year": 970643635.0711962,
+      "earth_launch_propellant_kg_year": 0.0,
+      "earth_round_trip": {
+        "mass_ratio": 2.4624198869240463,
+        "outbound": 1.8225290681835453,
+        "returning": 0.14624198869240465,
+        "total": 1.96877105687595
+      },
+      "earth_surface_kg_year": 397340941.311072,
+      "earth_transfer_propellant_kg_year": 5889946655.509841,
+      "handling_kg_year": 9083799108.272505,
+      "lander_round_trip": {
+        "mass_ratio": 1.9425494405616779,
+        "outbound": 1.6749289959476017,
+        "returning": 0.3770197762246712,
+        "total": 2.051948772172273
+      },
+      "local_mean_W": 2610316289.3164883,
+      "lunar_propellant_kg_year": 3170290175.598658,
+      "metal_kg_year": 505554737.9979122,
+      "moon_air_kg_year": 53559529.50892879,
+      "moon_payload_kg_year": 1500013873.902112,
+      "moon_water_kg_year": 1049113403.0821114,
+      "nea_payload_kg_year": 10428230545.61098,
+      "nea_propellant_kg_year": 12192920718.805613,
+      "nea_return_hardware_kg_year": 379347999.42718804,
+      "nea_round_trip": {
+        "mass_ratio": 1.8091520654064868,
+        "outbound": 1.008634583618519,
+        "returning": 0.12653279246320648,
+        "total": 1.1351673760817256
+      },
+      "payload_destination_kg_year": {
+        "depot": 193954694.33293614,
+        "leo": 10298966.813494733,
+        "source": 379347999.42718804,
+        "surface": 37032261.55826266
+      },
+      "raw_lunar_kg_year": 6482910219.3836155,
+      "source_heat_W": 24381675024.544655,
+      "source_mean_W": 30470871621.509453,
+      "source_metal_kg_year": 390142200.0,
+      "source_nitrogen_kg_year": 41240837.72187517,
+      "source_ore_kg_year": 322570148952.78174,
+      "source_ore_metal_bound_kg_year": 4267180312.5000005,
+      "source_ore_nitrogen_bound_kg_year": 28639470640.191093,
+      "source_ore_water_bound_kg_year": 322570148952.78174,
+      "source_retained_tails_kg_year": 299744173033.3652,
+      "source_virgin_metal_kg_year": 204824655.00000003,
+      "source_water_kg_year": 22579910426.694717
+    }
+  },
+  "producer": {
+    "path": "research/studies/initial_industrial_system/export_enclosed.py",
+    "sha256": "55d282306018da7ca1c39d2c83c9defac2916e96e1e07e06cc45fc708528d0ff"
+  },
+  "reading_rule": "Prices are USD2026 unless named USD2041. Convert once using normalization. Original architecture is a coefficient/control source, never a population multiplier.",
+  "revenue": {
+    "boundary": {
+      "commercial_ramp_years": 5,
+      "comparison_focus": "local_structures_space_chemical",
+      "debt_service_USD2041": null,
+      "focus_is_adopted_architecture": false,
+      "internal_transactions_are_revenue": false,
+      "net_definition": "Consolidated off-Earth external operating cash balance, then balance after external equipment renewal and a resource-transition provision; debt separate. Internal payments cancel.",
+      "population": 250000
+    },
+    "computing": {
+      "Earth_service_share_of_receipts": 0.2,
+      "IT_USD2026_W": 45,
+      "IT_kg_W": 0.0128,
+      "IT_life_years": 5,
+      "billable_duty": 0.6,
+      "communications_USD2026_W": 2,
+      "communications_kg_W": 0.001,
+      "space_packaging_factor": 2,
+      "staff_per_MW": 2
+    },
+    "date": "2026-11-12",
+    "evidence": "Conditional full-occupation market and external-purchase scenarios; no customer contracts, market-clearing exchange rate, resource rights or certified reserves.",
+    "finance": {
+      "annual_maintenance_fraction_commerce_capital": 0.02,
+      "commerce_maintenance_Earth_fraction": 0.3,
+      "ground_radiator_assembly_Earth_fraction": 0.5,
+      "import_service_reserve_fraction": 0.35,
+      "maintenance_services_Earth_fraction": 0.3,
+      "maintenance_services_Earth_fraction_sensitivity": [
+        0,
+        0.1,
+        0.3,
+        0.6,
+        1
+      ],
+      "source_transition_USD2026_per_kg_feed": 0.1,
+      "source_transition_sensitivity_USD2026_per_kg_feed": [
+        0,
+        0.03,
+        0.1,
+        0.3
+      ],
+      "staff_Earth_fraction": 0.5
+    },
+    "inputs": {
+      "early_exports": {
+        "path": "research/studies/world_economy/early_exports_inputs.json",
+        "sha256": "f9187baa20f7147f84dfc67bd93f773a7f9637323bf2da62327cd65b7e0b47b4"
+      },
+      "industrial": {
+        "path": "research/studies/initial_industrial_system/results/industrial_system.json",
+        "sha256": "4bf5c8a00838735b7716aeca07bb9cf1a43265c75a69b02cf4ab183b3b19e9e7"
+      },
+      "industrial_configuration": {
+        "path": "research/studies/initial_industrial_system/industrial_inputs.json",
+        "sha256": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade"
+      },
+      "inventory": {
+        "path": "research/studies/initial_industrial_system/results/resource_inventory.json",
+        "sha256": "5c2a25bea8a212e2c89e9af8adf04cb19838a87c595a72520c6f1e32fe8b84b0"
+      },
+      "settlement": {
+        "path": "research/studies/lava_tube_cities/results/buildout.json",
+        "sha256": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de"
+      },
+      "transport": {
+        "path": "research/studies/initial_industrial_system/results/transport.json",
+        "sha256": "26f37dcc0c110402ea5d5a23be7338acdaf9501ddd6e4289c9b46053882aa507"
+      },
+      "transport_configuration": {
+        "path": "research/studies/initial_industrial_system/transport_inputs.json",
+        "sha256": "ba335eb4625bef2f5fddeab66964df543f240aa6373153b5356ae08314682d1f"
+      }
+    },
+    "manufacturing": {
+      "Earth_input_mass_fraction": 0.2,
+      "air_kg_m2": 4,
+      "bulk_kg_m2": 500,
+      "civil_and_commissioning_USD2026_per_nameplate_kg_year": 100,
+      "delivered_quality_yield": 0.98,
+      "equipment_kg_per_nameplate_kg_year": 0.05,
+      "equipment_life_years": 20,
+      "finish_kWh_per_finished_kg": 5,
+      "floor_m2_per_nameplate_kg_year": 0.01,
+      "metal_kg_m2": 100,
+      "nameplate_finished_kg_per_resident_year": 100,
+      "retained_U_price_per_kg": 50,
+      "saleable_yield": 0.9,
+      "staff": 1000,
+      "transport_packaging_mass_fraction": 0.05
+    },
+    "markets": {
+      "reference": {
+        "compute_USD2026_per_W_billable_year": 30,
+        "compute_W": 200000000,
+        "factory_USD2026_kg": 750,
+        "factory_customer_budget_USD2026_year": 20000000000,
+        "factory_utilization": 0.7,
+        "media_receipts_USD2026_year": 1000000000,
+        "media_staff": 1000,
+        "mission_customer_budget_USD2026_year": 30000000000,
+        "propellant_USD2026_kg": 300,
+        "propellant_customer_kg_year": 25000000,
+        "remote_USD2026_staff_year": 200000,
+        "remote_staff": 25000,
+        "research_receipts_USD2026_year": 5000000000,
+        "research_staff": 5000,
+        "visitor_USD2026_night": 20000,
+        "visitors_year": 10000
+      },
+      "strong": {
+        "compute_USD2026_per_W_billable_year": 40,
+        "compute_W": 1000000000,
+        "factory_USD2026_kg": 2000,
+        "factory_customer_budget_USD2026_year": 50000000000,
+        "factory_utilization": 0.9,
+        "media_receipts_USD2026_year": 5000000000,
+        "media_staff": 5000,
+        "mission_customer_budget_USD2026_year": 100000000000,
+        "propellant_USD2026_kg": 600,
+        "propellant_customer_kg_year": 100000000,
+        "remote_USD2026_staff_year": 300000,
+        "remote_staff": 50000,
+        "research_receipts_USD2026_year": 15000000000,
+        "research_staff": 15000,
+        "visitor_USD2026_night": 50000,
+        "visitors_year": 30000
+      },
+      "weak": {
+        "compute_USD2026_per_W_billable_year": 15,
+        "compute_W": 50000000,
+        "factory_USD2026_kg": 300,
+        "factory_customer_budget_USD2026_year": 2000000000,
+        "factory_utilization": 0.2,
+        "media_receipts_USD2026_year": 250000000,
+        "media_staff": 250,
+        "mission_customer_budget_USD2026_year": 5000000000,
+        "propellant_USD2026_kg": 150,
+        "propellant_customer_kg_year": 5000000,
+        "remote_USD2026_staff_year": 100000,
+        "remote_staff": 10000,
+        "research_receipts_USD2026_year": 1000000000,
+        "research_staff": 1000,
+        "visitor_USD2026_night": 10000,
+        "visitors_year": 2000
+      }
+    },
+    "normalization": {
+      "basis": "Pioneer destination spending gives 31.16 USD2041/U at the reference price; original pressure-component procurement gives 25.32. Manufacturing delivery scope was unpriced in the older U study, so its inferred basket is only a separately labelled illustration.",
+      "proposed_USD2041_per_U": 30,
+      "status": "Proposal only; no currency peg adopted."
+    },
+    "propellant_customers": {
+      "Earth_alternative_price_fraction_ceiling": 0.8,
+      "buyers": "Independently funded Earth mission customers; excludes all own fleet, settlement growth and intra-system demand.",
+      "no_assured_offtake": true
+    },
+    "resources": {
+      "equivalent_body_density_kg_m3": 1500,
+      "horizons_years": [
+        1000000,
+        10000000
+      ],
+      "rule": "Specified usable-feed pools are conditional planning quantities, not approved fractions of the catalogue or reserve discoveries.",
+      "usable_feed_pools_kg": [
+        1000000000000,
+        10000000000000,
+        100000000000000,
+        1000000000000000
+      ]
+    },
+    "return": {
+      "Earth_ground_service_USD2026_per_payload_kg": 150,
+      "LEO_altitude_m": 400000,
+      "capsule_dry_to_payload": 0.5,
+      "capsule_payload_kg": 10000,
+      "cycles_year": 10,
+      "deorbit_Isp_s": 300,
+      "deorbit_dv_m_s": 150,
+      "durable_calendar_life_years": 20,
+      "durable_life_flights": 10,
+      "loss_probability_flight": 0.01,
+      "shield_fraction_of_dry": 0.2
+    },
+    "rules": [
+      "Receipts from Earth require independent external buyers; internal supplier sales, residents spending U, taxes, borrowing and equity are not additional consolidated earned revenue.",
+      "Operating balance is the external cash position of the whole modeled society, not corporate profit or GDP. Domestic wages and retained domestic replacement work are internal.",
+      "New commercial facilities and ordinary imported materials are explicit. Existing post-construction capacity may be used only within rated throughput, preserving the separate 25 percent spare margin.",
+      "Manufacturing and computing activities are suppressed if their incremental external costs, renewal and resource provision exceed receipts; rejected demand cases remain visible.",
+      "The Earth-return service fee covers ground recovery/handling only. Capsules, shields, deorbit fuel and relaunch are priced separately once.",
+      "No return spacecraft is assumed empty or to brake for free; outward cargo, fuel backhaul and sale goods share the stated mass and tank limits.",
+      "USD inputs are prospective 2026-purchasing-power prices, inflated once; no future vendor quote or million-year economic forecast is asserted.",
+      "The proposed 30 USD2041/U normalization is checked against matched destination-service and original pressure-procurement prices. Manufacturing-price comparison is separately hypothetical because the earlier 50 U/kg quote left freight scope unpriced. No currency peg or universal price consistency is adopted.",
+      "Resource-transition provision is a stated funding requirement, not a validated depletion valuation or demonstration of adequate million-year sustainability.",
+      "Passenger access fares and any unmodelled passenger-carrier surplus are excluded; destination facilities have additional food/life-support provision.",
+      "Beyond-local Solar System expansion and its socioeconomic boundary remain unresolved future work."
+    ],
+    "schema": "terluna.research.initial-revenue-inputs/1",
+    "services": {
+      "air_kg_m2": 4,
+      "bulk_kg_m2": 500,
+      "media_Earth_service_share": 0.15,
+      "media_hardware_kg_staff": 100,
+      "media_hardware_life_years": 5,
+      "metal_kg_m2": 100,
+      "office_W_staff": 500,
+      "remote_Earth_service_share": 0.1,
+      "remote_hardware_kg_staff": 20,
+      "remote_hardware_life_years": 5,
+      "research_Earth_service_share": 0.2,
+      "research_W_staff": 5000,
+      "research_civil_USD2026_staff": 1000000,
+      "research_consumables_kg_staff_year": 50,
+      "research_floor_m2_staff": 100,
+      "research_hardware_kg_staff": 500,
+      "research_hardware_life_years": 10
+    },
+    "visitors": {
+      "Earth_service_share_of_receipts": 0.1,
+      "U_basis": "Pioneer destination-service price from the existing early-export study; no access fare or gravity-productivity premium.",
+      "civil_USD2026_bed": 3000000,
+      "equipment_life_years": 20,
+      "initial_air_kg_bed": 320,
+      "initial_water_kg_bed": 3000,
+      "local_bulk_kg_bed": 100000,
+      "local_metal_kg_bed": 15000,
+      "mean_W_bed": 25000,
+      "occupancy": 0.7,
+      "retained_U_per_night": 1000,
+      "staff_per_bed": 0.25,
+      "stay_nights": 14,
+      "surface_hardware_kg_bed": 2000
+    }
+  },
+  "schema": "terluna.provisioning.enclosed-engineering-inputs/1",
+  "settlement": {
+    "food_operators": 1000.0,
+    "industry_operators": 2000.0,
+    "operating_import_kg_year": {
+      "air": 8239927.616758276,
+      "biosphere": 2525000.0,
+      "everyday_carbon_feed": 2499999.9999999995,
+      "food_nutrients_and_carbon": 9679481.02488426,
+      "specialist_consumables": 2500000,
+      "water": 846554404.9710002
+    },
+    "production": {
+      "final_commissioning_years": 2,
+      "floor_m2_year": 1800000.0,
+      "handling_kg_year": 24000000000.0,
+      "lead_years": 8,
+      "local_bulk_kg_year": 4500000000.0,
+      "local_metal_kg_year": 360000000.0,
+      "other_imports_kg_year": 600000000.0,
+      "pressure_components_kg_year": 180000000.0,
+      "ramp_allowance_years": 1.5,
+      "route_km_year": 300,
+      "volatile_imports_kg_year": 1500000000.0
+    },
+    "production_demand": {
+      "floor": 33960567.28666666,
+      "handling": 173805021548.3115,
+      "local_bulk": 47895887471.53333,
+      "local_metal": 6856959102.438558,
+      "other_imports": 2401025119.888972,
+      "pressure_components": 1838666377.7653446,
+      "route": 3500,
+      "volatile_imports": 4957572000.065633
+    }
+  },
+  "source_commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888",
+  "source_files": {
+    "research/studies/initial_industrial_system/economy.py": "85ba2822ad2f5c954a89e141b7f1e69091ce58bd829879060499a9d31b32566d",
+    "research/studies/initial_industrial_system/economy_inputs.json": "03b162bd1486e468a5b9516727ec4d885afb5f541a7bb75589f9369d05214f36",
+    "research/studies/initial_industrial_system/evolution.py": "46864748d555132b7f55d46bb40b236cebddb92358d8e907da3bf0a7563b3ecd",
+    "research/studies/initial_industrial_system/industrial_inputs.json": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade",
+    "research/studies/initial_industrial_system/results/industrial_system.json": "4bf5c8a00838735b7716aeca07bb9cf1a43265c75a69b02cf4ab183b3b19e9e7",
+    "research/studies/initial_industrial_system/results/revenue.json": "eb2b955e3fa35d76be5b6bba4e393a74108f4cfa9b55232d41ca2d328d1b9822",
+    "research/studies/initial_industrial_system/results/transport.json": "26f37dcc0c110402ea5d5a23be7338acdaf9501ddd6e4289c9b46053882aa507",
+    "research/studies/initial_industrial_system/revenue.py": "4ea6ea175a3c87cc371b09346df142e7ee3f51b1c2eb7d0d20cd852aec206e6a",
+    "research/studies/initial_industrial_system/revenue_inputs.json": "7d8884f8e2386536789f29f6b532ccd9ae1e49511a32455c1a3d7bf5c1c61b94",
+    "research/studies/initial_industrial_system/run.py": "43c9531a8196cd420940c2ee52d84b32fc6c5a25de69b1ce72ad954649aa7500",
+    "research/studies/initial_industrial_system/transport.py": "075271cbc3d177e5f421597ac3437590825f884647ee8222f523abc4101a85fd",
+    "research/studies/initial_industrial_system/transport_inputs.json": "ba335eb4625bef2f5fddeab66964df543f240aa6373153b5356ae08314682d1f",
+    "research/studies/lava_tube_cities/buildout_inputs.json": "dbe184ee7fba99bb0cb9b6e0251ffe11685e87a0b0afb0dbb7390dda8128da91",
+    "research/studies/lava_tube_cities/results/buildout.json": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de",
+    "research/studies/vacuum_crater_buildout/results/buildout.json": "521503f0cf9079dd7d67c7879122fcb76288f299e2b43ce6defa17584cd60fe0",
+    "research/studies/world_economy/industrial_markets_inputs.json": "721f03eb3bb91d929a13c080ef54fe11dc5b0b5f49887cf8b995591a179930d8"
+  },
+  "templates": {
+    "Earth_cryocooling": {
+      "class": "chemistry",
+      "destination": "leo",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 698340.4792506183,
+      "name": "Earth_cryocooling",
+      "owner": "industry",
+      "price": 1000.0,
+      "structural_life": 30,
+      "structural_share": 0.5
+    },
+    "Earth_hull_tanks": {
+      "class": "vehicle",
+      "destination": "leo",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 77155039.93755151,
+      "name": "Earth_hull_tanks",
+      "owner": "industry",
+      "price": 1500.0000000000002,
+      "structural_life": 50,
+      "structural_share": 0.8
+    },
+    "Earth_radiators": {
+      "class": "radiator",
+      "destination": "leo",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 227971.6286201335,
+      "name": "Earth_radiators",
+      "owner": "industry",
+      "price": 500.00000000000006,
+      "structural_life": 40,
+      "structural_share": 0.9
+    },
+    "Earth_solar": {
+      "class": "solar",
+      "destination": "leo",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 410788.51720624603,
+      "name": "Earth_solar",
+      "owner": "industry",
+      "price": 300.0,
+      "structural_life": 40,
+      "structural_share": 0.7
+    },
+    "LEO_route_storage_controls": {
+      "class": "ordinary",
+      "destination": "leo",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 593749.1536280513,
+      "name": "LEO_route_storage_controls",
+      "owner": "industry",
+      "price": 699.6951696650982,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "LEO_route_tanks": {
+      "class": "tank",
+      "destination": "leo",
+      "inherited_local": 0,
+      "life": 25,
+      "mass": 25841926.2247238,
+      "name": "LEO_route_tanks",
+      "owner": "industry",
+      "price": 1500.0,
+      "structural_life": 50,
+      "structural_share": 0.85
+    },
+    "additional_ground_radiator_controls": {
+      "class": "radiator",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 30,
+      "mass": 8586277.849783562,
+      "name": "additional_ground_radiator_controls",
+      "owner": "industry",
+      "price": 40.0,
+      "structural_life": 40,
+      "structural_share": 0.9
+    },
+    "additional_ground_receivers": {
+      "class": "solar",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 41572384.04114025,
+      "name": "additional_ground_receivers",
+      "owner": "industry",
+      "price": 50.0,
+      "structural_life": 40,
+      "structural_share": 0.7
+    },
+    "asteroid_tugs": {
+      "class": "vehicle",
+      "destination": "source",
+      "inherited_local": 0.665,
+      "life": 20,
+      "mass": 5866800000.0,
+      "name": "asteroid_tugs",
+      "owner": "industry",
+      "price": 1500.0,
+      "structural_life": 50,
+      "structural_share": 0.8
+    },
+    "bulk_trains": {
+      "class": "machine",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 15,
+      "mass": 12200000,
+      "name": "bulk_trains",
+      "owner": "industry",
+      "price": 500.0,
+      "structural_life": 30,
+      "structural_share": 0.7
+    },
+    "construction_and_service_robots": {
+      "class": "machine",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 150000000.0,
+      "name": "construction_and_service_robots",
+      "owner": "industry",
+      "price": 500.0,
+      "structural_life": 30,
+      "structural_share": 0.7
+    },
+    "depot_chemistry": {
+      "class": "chemistry",
+      "destination": "depot",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 19233463.882295046,
+      "name": "depot_chemistry",
+      "owner": "industry",
+      "price": 749.9999999999999,
+      "structural_life": 30,
+      "structural_share": 0.5
+    },
+    "depot_radiators": {
+      "class": "radiator",
+      "destination": "depot",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 24728495.828575894,
+      "name": "depot_radiators",
+      "owner": "industry",
+      "price": 500.0,
+      "structural_life": 40,
+      "structural_share": 0.9
+    },
+    "depot_route_storage_controls": {
+      "class": "tank",
+      "destination": "depot",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 1726853.8409941506,
+      "name": "depot_route_storage_controls",
+      "owner": "industry",
+      "price": 699.6951696650982,
+      "structural_life": 50,
+      "structural_share": 0.85
+    },
+    "depot_solar": {
+      "class": "solar",
+      "destination": "depot",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 113138022.83702967,
+      "name": "depot_solar",
+      "owner": "industry",
+      "price": 300.0,
+      "structural_life": 40,
+      "structural_share": 0.7
+    },
+    "depots_and_orbital_workshops": {
+      "class": "tank",
+      "destination": "depot",
+      "inherited_local": 0,
+      "life": 25,
+      "mass": 169981509.01501656,
+      "name": "depots_and_orbital_workshops",
+      "owner": "industry",
+      "price": 1500.0,
+      "structural_life": 50,
+      "structural_share": 0.85
+    },
+    "excavators": {
+      "class": "machine",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 780000,
+      "name": "excavators",
+      "owner": "industry",
+      "price": 500.0,
+      "structural_life": 30,
+      "structural_share": 0.7
+    },
+    "fabrication_cells": {
+      "class": "machine",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 15,
+      "mass": 9050000,
+      "name": "fabrication_cells",
+      "owner": "industry",
+      "price": 500.0,
+      "structural_life": 30,
+      "structural_share": 0.7
+    },
+    "haulers": {
+      "class": "machine",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 11700000,
+      "name": "haulers",
+      "owner": "industry",
+      "price": 500.0,
+      "structural_life": 30,
+      "structural_share": 0.7
+    },
+    "lunar_beam_constellation": {
+      "class": "solar",
+      "destination": "depot",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 1570336589.965307,
+      "name": "lunar_beam_constellation",
+      "owner": "industry",
+      "price": 300.0,
+      "structural_life": 40,
+      "structural_share": 0.7
+    },
+    "lunar_landers": {
+      "class": "lander",
+      "destination": "depot",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 31280000.0,
+      "name": "lunar_landers",
+      "owner": "industry",
+      "price": 1500.0,
+      "structural_life": 30,
+      "structural_share": 0.65
+    },
+    "metal_trains": {
+      "class": "machine",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 15,
+      "mass": 45500000,
+      "name": "metal_trains",
+      "owner": "industry",
+      "price": 500.0,
+      "structural_life": 30,
+      "structural_share": 0.7
+    },
+    "new_access": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 100,
+      "mass": 8000000.0,
+      "name": "new_access",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 100,
+      "structural_share": 0.6
+    },
+    "new_aquaculture": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 4971458.333333333,
+      "name": "new_aquaculture",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "new_farm_equipment": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 28086775.08,
+      "name": "new_farm_equipment",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "new_farm_lighting": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 8,
+      "mass": 12037189.319999998,
+      "name": "new_farm_lighting",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "new_farm_structure": {
+      "class": "building",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 80,
+      "mass": 217338140.5,
+      "name": "new_farm_structure",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 80,
+      "structural_share": 0.9
+    },
+    "new_fermentation": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 4375000.0,
+      "name": "new_fermentation",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "new_food_processing": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 35000000.0,
+      "name": "new_food_processing",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "new_garden_lighting": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 15000000.0,
+      "name": "new_garden_lighting",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "new_light_industry_equipment": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 61249999.99999999,
+      "name": "new_light_industry_equipment",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "new_light_industry_structure": {
+      "class": "building",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 80,
+      "mass": 26250000.0,
+      "name": "new_light_industry_structure",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 80,
+      "structural_share": 0.9
+    },
+    "new_ordinary_equipment": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 750000000.0,
+      "name": "new_ordinary_equipment",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "new_power": {
+      "class": "solar",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 40,
+      "mass": 191791809.54002047,
+      "name": "new_power",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 40,
+      "structural_share": 0.7
+    },
+    "new_pressure_liners": {
+      "class": "pressure",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 25,
+      "mass": 557343669.488058,
+      "name": "new_pressure_liners",
+      "owner": "settlement",
+      "price": 60,
+      "structural_life": 50,
+      "structural_share": 0
+    },
+    "new_pressure_reinforcement": {
+      "class": "pressure",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 50,
+      "mass": 871295358.5106813,
+      "name": "new_pressure_reinforcement",
+      "owner": "settlement",
+      "price": 60,
+      "structural_life": 50,
+      "structural_share": 0
+    },
+    "new_radiators": {
+      "class": "radiator",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 30,
+      "mass": 39612300.42505441,
+      "name": "new_radiators",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 40,
+      "structural_share": 0.9
+    },
+    "new_storage": {
+      "class": "tank",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 314999999.99999994,
+      "name": "new_storage",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 50,
+      "structural_share": 0.85
+    },
+    "new_transport": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 15,
+      "mass": 50000000.0,
+      "name": "new_transport",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "source_chemistry": {
+      "class": "chemistry",
+      "destination": "source",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 76177179.05371264,
+      "name": "source_chemistry",
+      "owner": "industry",
+      "price": 749.9999999999999,
+      "structural_life": 30,
+      "structural_share": 0.5
+    },
+    "source_fabrication_cells": {
+      "class": "machine",
+      "destination": "source",
+      "inherited_local": 0,
+      "life": 15,
+      "mass": 7000000,
+      "name": "source_fabrication_cells",
+      "owner": "industry",
+      "price": 1000.0,
+      "structural_life": 30,
+      "structural_share": 0.7
+    },
+    "source_metal_trains": {
+      "class": "machine",
+      "destination": "source",
+      "inherited_local": 0,
+      "life": 15,
+      "mass": 35000000,
+      "name": "source_metal_trains",
+      "owner": "industry",
+      "price": 1000.0,
+      "structural_life": 30,
+      "structural_share": 0.7
+    },
+    "source_mine_trains": {
+      "class": "machine",
+      "destination": "source",
+      "inherited_local": 0,
+      "life": 15,
+      "mass": 707750000,
+      "name": "source_mine_trains",
+      "owner": "industry",
+      "price": 1000.0,
+      "structural_life": 30,
+      "structural_share": 0.7
+    },
+    "source_radiators": {
+      "class": "radiator",
+      "destination": "source",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 198983530.56207353,
+      "name": "source_radiators",
+      "owner": "industry",
+      "price": 499.99999999999994,
+      "structural_life": 40,
+      "structural_share": 0.9
+    },
+    "source_solar": {
+      "class": "solar",
+      "destination": "source",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 640144361.7959045,
+      "name": "source_solar",
+      "owner": "industry",
+      "price": 299.99999999999994,
+      "structural_life": 40,
+      "structural_share": 0.7
+    },
+    "town_garden_lighting": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 10,
+      "mass": 10833333.333333336,
+      "name": "town_garden_lighting",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "town_ordinary_equipment": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 20,
+      "mass": 187500000.0,
+      "name": "town_ordinary_equipment",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    },
+    "town_pressure_barriers": {
+      "class": "pressure",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 25,
+      "mass": 169777777.7777778,
+      "name": "town_pressure_barriers",
+      "owner": "settlement",
+      "price": 60,
+      "structural_life": 50,
+      "structural_share": 0
+    },
+    "town_pressure_reinforcement": {
+      "class": "pressure",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 50,
+      "mass": 240249571.98882774,
+      "name": "town_pressure_reinforcement",
+      "owner": "settlement",
+      "price": 60,
+      "structural_life": 50,
+      "structural_share": 0
+    },
+    "town_transport_docking": {
+      "class": "ordinary",
+      "destination": "surface",
+      "inherited_local": 0,
+      "life": 15,
+      "mass": 20000000.0,
+      "name": "town_transport_docking",
+      "owner": "settlement",
+      "price": 150,
+      "structural_life": 30,
+      "structural_share": 0.6
+    }
+  },
+  "transport": {
+    "architecture_cases": {
+      "earth_chemical": {
+        "earth_route": "earth_chemical",
+        "source_route": "chemical"
+      },
+      "electric_both_legs": {
+        "earth_route": "electric",
+        "source_route": "electric"
+      },
+      "electric_earth_leg": {
+        "earth_route": "electric",
+        "source_route": "chemical"
+      },
+      "space_chemical": {
+        "earth_route": "space_chemical",
+        "source_route": "chemical"
+      },
+      "split_chemical": {
+        "earth_route": "split_chemical",
+        "source_route": "chemical"
+      }
+    },
+    "chemical": {
+      "cooling_electric_W_per_stored_kg": 0.03,
+      "cooling_hardware_USD2026_W": 20,
+      "cooling_hardware_kg_W": 0.02,
+      "fixed_dry_to_payload": 0.1,
+      "handling_retention": 0.98,
+      "tank_dry_to_peak_propellant": 0.05
+    },
+    "date": "2026-11-12",
+    "depots": {
+      "inventory_years": 0.25,
+      "life_years": 25,
+      "seed_earth_fleet_fraction": 0.02,
+      "tank_mass_per_stored_kg": 0.05
+    },
+    "electric": {
+      "Isp_s": 2000,
+      "drive_USD2026_W": 5,
+      "drive_kg_W": 0.0005,
+      "drive_powered_life_hours": 23000,
+      "earth_array_life_years": 10,
+      "earth_cycle_days": 550,
+      "earth_dv_oneway_m_s": 8000,
+      "earth_powered_days": 365.25,
+      "handling_retention": 0.99,
+      "hull_life_years": 20,
+      "radiator_life_years": 20,
+      "source_array_life_years": 20,
+      "source_cycle_days": 1095.75,
+      "source_dv_oneway_m_s": 4000,
+      "source_powered_days": 365.25,
+      "structural_dry_to_payload": 0.08,
+      "tank_dry_to_propellant": 0.05,
+      "thermal_control_USD2026_W": 10,
+      "thermal_control_W_per_stored_kg": 0.002,
+      "thermal_control_kg_W": 0.01,
+      "total_efficiency": 0.3
+    },
+    "evidence": "Comparative engineering scenarios with the same settlement demand; no trajectory-qualified fleet, permitted source reserve or adopted architecture.",
+    "inputs": {
+      "industrial_configuration": {
+        "path": "research/studies/initial_industrial_system/industrial_inputs.json",
+        "sha256": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade"
+      },
+      "industrial_producer": {
+        "path": "research/studies/initial_industrial_system/run.py",
+        "sha256": "43c9531a8196cd420940c2ee52d84b32fc6c5a25de69b1ce72ad954649aa7500"
+      },
+      "industrial_result": {
+        "path": "research/studies/initial_industrial_system/results/industrial_system.json",
+        "sha256": "4bf5c8a00838735b7716aeca07bb9cf1a43265c75a69b02cf4ab183b3b19e9e7"
+      }
+    },
+    "rules": [
+      "Original industrial results remain unchanged; Earth launch flow is conditional on architecture.",
+      "All chemical Earth-return braking is propulsive; no aerocapture, free braking or propellant at LEO without delivery.",
+      "Electric efficiency is from stored water and electrical bus to exhaust kinetic energy, including feed processing and all gas use; current oxygen-anode specific impulse is not a demonstrated total-water specific impulse.",
+      "All new fleet modules are Earth-manufactured in this comparison; the earlier source-structure localization case remains independent.",
+      "Additional route inventories are filled from the source network and enter construction material flows; a 2 percent first-dispatch Earth-fuel seed is an explicit bootstrap allowance, not continuing Earth propellant procurement.",
+      "Quarter-year depot inventories, 25 percent installed spare margin and 80 percent fleet availability are separate allowances.",
+      "Core city/town geometry, population, source protections and ordinary material demand remain fixed."
+    ],
+    "schema": "terluna.research.industrial-transport-inputs/1",
+    "sensitivities": {
+      "electric_drive_life_10000h": {
+        "electric.drive_powered_life_hours": 10000
+      },
+      "electric_earth_delta_v_10000": {
+        "electric.earth_dv_oneway_m_s": 10000
+      },
+      "electric_earth_delta_v_6000": {
+        "electric.earth_dv_oneway_m_s": 6000
+      },
+      "electric_efficiency_15pct": {
+        "electric.total_efficiency": 0.15
+      },
+      "electric_efficiency_50pct": {
+        "electric.total_efficiency": 0.5
+      },
+      "electric_powered_730days": {
+        "electric.earth_cycle_days": 1000,
+        "electric.earth_powered_days": 730.5
+      }
+    }
+  }
+}

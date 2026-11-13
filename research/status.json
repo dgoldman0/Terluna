@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12",
+  "updated": "2026-11-13",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -651,7 +651,7 @@
           }
         }
       },
-      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_heat_ledger_with_fleet_infrared_food_land_night_tides_rivers_transit_fusion_fuel; inhabited_volume_and_shared_population_comparisons_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; drifting_days_holds_and_gathering_from_the_design_winds_2026_10_09; ways_of_living_eighteen_settings_costs_per_billion_and_shared_case_mixes_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_lava_tubes_against_the_atlas_and_highland_tall_cities_2026_10_11; food_systems_costs_cycle_fit_mixes_and_feasibility_2026_10_11; distributions_of_25_to_30_billion_with_moon_bands_and_synergies_2026_10_11; cprime_authors_distribution_with_homesteads_and_the_middle_latitudes_moved_2026_10_11; authors_wild_share_half_wild_or_30_wild_with_20_hybrid_applied_to_food_and_distributions_2026_10_11; authors_automation_network_uptime_and_food_blend_2026_10_12; beamed_power_chosen_and_screened_absorption_rain_tiles_grid_reserves_2026_10_12; cprime_placed_with_the_blend_every_corner_fits_2026_10_12; vacuum_to_open_crater_buildout_single_dome_500_1000_people_nested_catalogue_targets_2026_11_12",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_heat_ledger_with_fleet_infrared_food_land_night_tides_rivers_transit_fusion_fuel; inhabited_volume_and_shared_population_comparisons_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; drifting_days_holds_and_gathering_from_the_design_winds_2026_10_09; ways_of_living_eighteen_settings_costs_per_billion_and_shared_case_mixes_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_lava_tubes_against_the_atlas_and_highland_tall_cities_2026_10_11; food_systems_costs_cycle_fit_mixes_and_feasibility_2026_10_11; distributions_of_25_to_30_billion_with_moon_bands_and_synergies_2026_10_11; cprime_authors_distribution_with_homesteads_and_the_middle_latitudes_moved_2026_10_11; authors_wild_share_half_wild_or_30_wild_with_20_hybrid_applied_to_food_and_distributions_2026_10_11; authors_automation_network_uptime_and_food_blend_2026_10_12; beamed_power_chosen_and_screened_absorption_rain_tiles_grid_reserves_2026_10_12; cprime_placed_with_the_blend_every_corner_fits_2026_10_12; vacuum_to_open_crater_buildout_single_dome_500_1000_people_nested_catalogue_targets_2026_11_12; enclosed_industry_demand_sized_cohorts_and_consolidated_cash_2026_11_13",
       "material": [
         "../provisioning/README.md",
         "../provisioning/state.md",
@@ -744,6 +744,20 @@
         "recurring_cash_before_renewal_U": 17722188.45814635,
         "renewal_fund_U": 17935292.595891178,
         "scope": "Physical upkeep, stated operating services and major replacement provision, including regional operating share; household/social-service/debt costs separate."
+      },
+      "enclosed_industry": {
+        "date": "2026-11-13",
+        "state": "Demand-sized cohort and physical cash calculation; conditional engineering requirements, not qualified sources or funded completion",
+        "model": "provisioning/enclosed_industry/model.py",
+        "writeup": "provisioning/enclosed_industry/README.md",
+        "product": "provisioning/enclosed_industry/results/industry.json.gz",
+        "seed_population": 12500,
+        "cap_population": 6468289.238000949,
+        "completion_year": 200,
+        "reported_through_year": 220,
+        "reference": "Inherited chemical transport, grades, component partitions, prices and mean lifetimes; no automatic learning",
+        "accounting": "Separate residential stocks and throughput-sized equipment; seed common programme once; explicit orders, retirement, reuse and consolidated cash without duplicate local transfer values",
+        "limits": "Conditional source access, site qualification, bootstrap sequence, service-facility proxies, staffing intensity and passenger migration remain open"
       }
     },
     {
