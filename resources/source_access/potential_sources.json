@@ -1,0 +1,34 @@
+{
+  "schema": "terluna.resources.potential-sources/1",
+  "review_date": "2026-11-13",
+  "sources": [
+    {
+      "id": "population",
+      "source_record": "population_sources.json",
+      "use": "Conditional geological mass and material draws; broad population and composition priors remain explicit."
+    },
+    {
+      "id": "lunar",
+      "source_record": "lunar_potential_sources.json",
+      "use": "Mapped regional oxide variability and formal covariance, with separate density/depth/process priors."
+    },
+    {
+      "id": "reclamation",
+      "producer_commit": "210a20bd2cf16ec951f02a01f6ee3758b497df03",
+      "source_record": "provisioning/enclosed_industry/reclamation_sources.json",
+      "source_product_sha256": "f6b43f00ea585af509e0f9e4ec3545ccf1956ed8c04348dd3404cf965bb54f2c",
+      "use": "Exact dated virgin-material demands, selected-loop balances and operating cash in 36 bounded engineering scenarios. Imported as a pinned product, not a cross-domain implementation import."
+    },
+    {
+      "id": "baseline",
+      "source_record": "../enclosed_mining/inputs.json",
+      "source_product_sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+      "use": "Original 81-case dated raw feed and lunar demand ranges, with seed included once."
+    },
+    {
+      "id": "process_cost",
+      "source_record": "access_inputs.json",
+      "use": "Existing partial process-gate equipment and energy costs; explicitly excludes delivered/qualified total price."
+    }
+  ]
+}

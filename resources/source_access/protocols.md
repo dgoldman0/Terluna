@@ -87,3 +87,7 @@ Reproduce the focused checks from the repository root:
 ```sh
 PYTHONDONTWRITEBYTECODE=1 python3 -m pytest resources/source_access/tests/test_protection.py -q
 ```
+
+## Reading resource-potential distributions
+
+An unresolved release condition leaves an accessible or permitted fraction unknown. It does not erase the geological stock estimated from surveys and population models. The [population-potential study](potential.md) therefore reports conditional geological quantities separately from assumed availability fractions and source-specific release evidence. Its fractions are scenario variables; the full-inventory ceiling authorizes no extraction and retains no allowance for additional future-use reserves. Existing scientific holds are excluded before every population comparison, including subtraction of known objects from the inferred undiscovered population. Every other physical, archive and future-access obligation above remains applicable to a proposed source.

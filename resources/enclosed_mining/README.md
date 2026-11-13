@@ -1,5 +1,7 @@
 # Mining requirements for the enclosed build
 
+For current availability estimates, read the [population-potential and reclamation assessment](../source_access/potential.md). It expands beyond the characterized source samples used below and quantifies fresh demand after recovery and refurbishment. The calculations here remain the reproducible physical-demand baseline and finite-sample comparison; their sample shortfalls do not establish a shortage in the wider near-Earth population.
+
 This assessment follows the raw material required by an enclosed lunar settlement and its industrial support. The physical producer determines what must be built, replaced, processed and transported each year; the resources account compares that dated feed with explicitly hypothetical source allowances. Global service sales enter the demand study through their own machinery and operating needs. A larger audience does not automatically require a proportionate increase in mining or a replicated construction fleet.
 
 Earth-side ore extraction is outside this feed comparison.

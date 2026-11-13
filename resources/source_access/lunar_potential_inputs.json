@@ -1,0 +1,94 @@
+{
+  "schema": "terluna.resources.lunar-potential-inputs/1",
+  "draws": 16384,
+  "random_seed": 20261113,
+  "lunar_product": {
+    "path": "results/lunar.json.gz",
+    "sha256": "a5e6b64d6dc650397fca66f68be22406f1eafa571e60e162b55795d9ce42d081"
+  },
+  "cost_coefficients": {
+    "path": "inputs/cost_coefficients.json",
+    "sha256": "c7c191c8726b4f440cb0dc6f5c28c15120cedacbbe7be268deb4f8420bc2f7cb"
+  },
+  "nonpolar_latitude_bounds": [
+    -80,
+    80
+  ],
+  "depth_scenarios_m": [
+    1,
+    5,
+    10
+  ],
+  "prospective_footprints_km2": [
+    100,
+    1000,
+    10000
+  ],
+  "deep_density_kg_m3_triangular": [
+    1500,
+    1800,
+    1900
+  ],
+  "surface_density_kg_m3": 1100,
+  "density_scale_height_m_triangular": [
+    0.02,
+    0.06,
+    0.2
+  ],
+  "grade_depth_factors": [
+    0.5,
+    1,
+    1.5
+  ],
+  "oxide_recovery_triangular": [
+    0.5,
+    0.7,
+    0.9
+  ],
+  "cost_priors": {
+    "equipment_cost_multiplier": [
+      0.5,
+      1,
+      2
+    ],
+    "electricity_USD2041_kWh": [
+      0.05,
+      0.15,
+      0.5
+    ],
+    "availability_multiplier": [
+      0.6,
+      1,
+      1.2
+    ]
+  },
+  "capital_rate": 0.03,
+  "quantile_probabilities": [
+    0.05,
+    0.5,
+    0.95
+  ],
+  "selection": {
+    "nonpolar": null,
+    "iron_prospect": {
+      "oxide": "FeO",
+      "top_area_fraction": 0.25
+    },
+    "aluminium_prospect": {
+      "oxide": "Al2O3",
+      "top_area_fraction": 0.25
+    },
+    "titanium_prospect": {
+      "oxide": "TiO2",
+      "top_area_fraction": 0.1
+    }
+  },
+  "rules": [
+    "Choose a regional source pixel with probability proportional to its spherical area within the stated prospecting pool. Joint six-oxide normal draws use the measured pixel covariance and reject negative abundances; the original six-oxide nonclosure is not normalized. These are model-based regional predictive intervals, not global-average sampling confidence intervals.",
+    "Prospecting pools are regional ranking scenarios, not mine designations or independent additive inventories. The nonpolar cut excludes both polar caps geometrically, but does not release nonpolar scientific or heritage sites.",
+    "Density-depth follows the Hayne et al. form. Its parameter distributions are disclosed planning priors around published thermal/sample constraints, not measured confidence distributions at 5 or 10 metres.",
+    "Global bulk potential integrates area and the assumed density profile. Regional composition is extrapolated at fixed 0.5/1/1.5 depth factors, reported separately; no probability is assigned to this structural choice.",
+    "Recovery and process-cost priors use the existing bounded engineering coefficients. Costs cover feed handling and inherited bulk processing, not complete specified-metal extraction, fabrication, freight or qualified extraction rights.",
+    "Footprint allowances are alternative planning areas before site-specific exclusions, archives and future-use reserves; no area is authorized by this calculation."
+  ]
+}
