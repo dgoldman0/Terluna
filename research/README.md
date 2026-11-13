@@ -46,6 +46,7 @@ the explorable experience, which reads them as baked products, is in
 
 | Study | What it couples | Boundary |
 |---|---|---|
+| [vacuum_buildout](studies/vacuum_buildout/README.md) | Gradually increasing extraction, fabrication and enclosed capacity to 6.468 million people by year 200; mining inventory and grade sensitivity | Added machinery is priced; source reserves, funding and poor-feed expansion remain unqualified |
 | [environment_screens](studies/environment_screens/) | Thermal column, band ledger, climate screen, carbon and oxygen requirements, protection plume heat | Conditional consequences of selected equations; the spectrum/material/chemistry interface is unfilled |
 | [megaforest_wind](studies/megaforest_wind/README.md) | Lower air (atmosphere), canopy flow (climate), tree mechanics (biosphere): 480 static load envelopes | Material and soil traits hypothetical; wind climate, gusts and evolution unmodelled |
 | [conservation](studies/conservation/README.md) | Geography (the atlas), atmosphere (design pressure), climate (albedo, polar temperature), engineering (enclosures, sourcing) and a written heritage evaluation: the two preservation programmes, gates, register, scientific zones and community settings | Heritage evaluation is a first pass awaiting the author's review; numbers are hydrostatic geometry and screening estimates |

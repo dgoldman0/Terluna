@@ -1570,6 +1570,32 @@
         "A qualified mature enclosed-economy design and funded route to the architectural cap; validated small-module costs, full supplier shadow prices, stakeholder contracts, value of avoided payment disruption and actual business/international demand for liquid U. Interest-saving reinvestment remains outside the fixed-path release assumption."
       ],
       "next_session_task": "Qualify the worldwide service and industrial demand assumptions and minimum productive module; develop a mature enclosed-economy configuration with a funded route to the cap, then connect measured social outcomes and payment risks to stakeholder returns."
+    },
+    {
+      "topic": "enclosed_buildout_year200",
+      "condition": "conditional_capacity_schedule_and_mining_sensitivity",
+      "material": [
+        "studies/vacuum_buildout/README.md",
+        "studies/vacuum_buildout/run.py",
+        "studies/vacuum_buildout/exporter.py",
+        "studies/vacuum_buildout/buildout_inputs.json",
+        "studies/vacuum_buildout/inputs/engineering.json",
+        "studies/vacuum_buildout/results/buildout.json",
+        "studies/vacuum_buildout/mining-evidence.md",
+        "studies/vacuum_buildout/sources.json",
+        "studies/vacuum_buildout/checks.md"
+      ],
+      "findings": [
+        "A smooth log-capacity ramp reaches 222240 people in year100 and the existing 6468289-person enclosed cap in year200; construction is ordered two years ahead and peaks at5.313% of installed capacity per year.",
+        "Selectively enlarged physical assets pass all nine base-feed equipment schedules; added seed installation is49.341billionUSD2041 and modular replication adds248.669billion per250000-person scale, with recurring costs separately charged.",
+        "Base source feed throughyear200 is201.54–266.55billion tonnes, exceeding the narrow17-body hypothetical catalogue mass inyears88–93. Broad catalogue mass is not a qualified accessible reserve.",
+        "Poor asteroid feed progressively introduced fromyear50 exceeds source capacity in all nine portfolios inyears64–86. Lunar feed sensitivity remains feasible for this gradual timing; deeper excavation and route changes remain unpriced."
+      ],
+      "unresolved": [
+        "Surveyed recoverable reserves and source access; mining depth, mineral-specific processing and replenishment routes.",
+        "Funding for the fixed completion target, service additions and further machinery required by poor source feed."
+      ],
+      "next_session_task": "Appraise years100 and200 using the committed schedule, added costs and latest U financing; expose external support requirements."
     }
   ]
 }
