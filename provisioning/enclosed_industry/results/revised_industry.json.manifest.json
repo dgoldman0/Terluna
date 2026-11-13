@@ -1,0 +1,35 @@
+{
+  "compression": "gzip; mtime0",
+  "decompressed_sha256": "44ea1528c6bc3e544caa3bdad39ced7f8ccbc45865cf0dea01f038d62dedb5fc",
+  "dependencies": {
+    "provisioning/enclosed_industry/asset_export.py": "5d4b6189fa1389cb89a0c22aec0778e89a2a8fcdc98e002f8a980a1147308e83",
+    "provisioning/enclosed_industry/asset_export_inputs.json": "7504139435dd4c73db7ed20623ae4cd013499bb040d4f3f8f3ce0d1316e80812",
+    "provisioning/enclosed_industry/bootstrap.py": "f3a5bc9ad762c232f215a84110f5769a770b74759eacd4e2875964df557a17a1",
+    "provisioning/enclosed_industry/inputs/engineering.json": "e15aec1a0da1b41f23326d1ce15a587addc994e69b4cdca53c1516990365eed2",
+    "provisioning/enclosed_industry/inputs/identity.json": "65bdfb147d810179a2de33c228802a838774ad3fed3bdcff4a2b2ebad9623e99",
+    "provisioning/enclosed_industry/inputs/orders.json": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
+    "provisioning/enclosed_industry/inputs/revised_rollout_orders.json": "ac55713bd79f5007e93eee5d7b891e500b0ea8feeda8aceb278fd5cc7778ee3e",
+    "provisioning/enclosed_industry/model.py": "a338d56ea03c864ae0ccf65594a3b6b514a9e9e0fab4f09e7437b9cb34677805",
+    "provisioning/enclosed_industry/package.py": "af95b8bec1cbbde2c62b569005f3d3f18abd6a3bc675e08351f9fa846d708b58",
+    "provisioning/enclosed_industry/reclamation.py": "0c798c0b7aa0763451c495dad4326a6b637e38a3744cdb4b35dafa3ea7a2a68c",
+    "provisioning/enclosed_industry/reclamation_inputs.json": "3197ec5b8d7608a6528f5d162990ba204183056b5dd41548c2ceb86bfd7b7264",
+    "provisioning/enclosed_industry/reclamation_sources.json": "6a1ef631cfcc2ee0df0fa4732b04a271d8a9cf9b6bca07deebe29b441c230d6c",
+    "provisioning/enclosed_industry/results/industry.json.gz": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+    "provisioning/enclosed_industry/results/reclamation.json.gz": "f6b43f00ea585af509e0f9e4ec3545ccf1956ed8c04348dd3404cf965bb54f2c",
+    "provisioning/enclosed_industry/revised_industry_inputs.json": "21c63619e03df564b59849f03506a6586fa7e29ddea518c295602486aff6bb40",
+    "provisioning/enclosed_industry/run.py": "f06699d48b9b134c4b171cd726f312807813b4a82b7500d4609e85e93ec3ee83"
+  },
+  "packager": {
+    "path": "provisioning/enclosed_industry/package.py",
+    "sha256": "af95b8bec1cbbde2c62b569005f3d3f18abd6a3bc675e08351f9fa846d708b58"
+  },
+  "path": "revised_industry.json.gz",
+  "producer": {
+    "path": "provisioning/enclosed_industry/revised_industry.py",
+    "sha256": "d926c4d55bf0256b95dd9bb5b320fa7f9865e3664520aab91e543daa7d9b867a"
+  },
+  "product_schema": "terluna.provisioning.revised-industry/1",
+  "reading_rule": "Verify compressed hash, decompress, verify decompressed hash and parse the unchanged engineering-product schema. Compression changes storage only; every annual row is retained.",
+  "schema": "terluna.provisioning.compressed-product/1",
+  "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f"
+}
