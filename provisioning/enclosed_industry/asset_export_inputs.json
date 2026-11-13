@@ -1,0 +1,42 @@
+{
+  "schema": "terluna.provisioning.enclosed-asset-inputs/1",
+  "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
+  "market": "breakthrough",
+  "growths": [
+    "reference",
+    "wider"
+  ],
+  "last_year": 220,
+  "dependencies": {
+    "model.py": "a338d56ea03c864ae0ccf65594a3b6b514a9e9e0fab4f09e7437b9cb34677805",
+    "run.py": "f06699d48b9b134c4b171cd726f312807813b4a82b7500d4609e85e93ec3ee83",
+    "bootstrap.py": "f3a5bc9ad762c232f215a84110f5769a770b74759eacd4e2875964df557a17a1",
+    "inputs/engineering.json": "e15aec1a0da1b41f23326d1ce15a587addc994e69b4cdca53c1516990365eed2",
+    "inputs/orders.json": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
+    "results/industry.json.gz": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7"
+  },
+  "rules": [
+    "Only the 18 existing breakthrough/reference and breakthrough/wider cases are exported. Each source case is solved unchanged and its complete compact record, including the original fuel addendum, must equal the admitted base product before valuation.",
+    "All registered physical assets are included: settlement enclosures and utilities, housing materials and roads, industry, freighters, power, computers, commercial factories, research/service facilities and hotels. Functional-sector labels do not assign legal ownership.",
+    "Gross stock is surviving active/structural mass times its inherited component replacement quote. Local structure quotes remain account values; they are not added to cash purchases or internal profits. Freight, common programme cost, payroll, fuel, resource provisions and the finance capital allowance are not automatically capitalized.",
+    "Net stock is an undiscounted remaining-service proxy: for original cohort quantity q, price p and survival S(age), q*p*sum_{j>=age}S(j)/sum_{j>=0}S(j). It equals new replacement value on commissioning and declines under the existing uncalibrated survival law. It is not a sale, collateral or market value.",
+    "Fresh commissioning adds both growth and replacement components once. Expected retirements remove surviving gross stock; remaining-service consumption changes net stock. Replacement expenditure is not added again to asset stock. Service lives and the Weibull shape remain unchanged.",
+    "Normal construction WIP follows the source half-order in each of the two years before commissioning. Seed commissions preserve the exact source cohorts in years 0\u20137. For seed WIP only, the same two-year convention is used with negative manufacture dates moved to year zero. Year-zero equipment is immediately commissioned. This added valuation convention does not establish a deployable bootstrap schedule or change finance's uniform seed-spending dates.",
+    "End-year WIP includes already fabricated parts of cohorts commissioning after year 220. It remains separate from commissioned assets. Asset stock identities reconcile at replacement-quote values, not to the differently scoped cash procurement account.",
+    "Core physical service/hotel assets are included once. The separate commercial package residual, intellectual property, goodwill, legal resource rights and ownership shares require a consumer-side specification and have no inferred value here.",
+    "The tracked product retains every annual total and functional-sector balance, and full component stocks at years 8/32/100/200/220. Complete cohorts and annual component states can be regenerated into ignored run files; their canonical identity is retained. Net-value retirement uses retired mass at its prior surviving-unit book value, with the residual net decrease attributed to aging. These two terms sum to the total remaining-service consumption proxy."
+  ],
+  "unvalued_assets": [
+    "Unitemized service/culture/premium/logistics package residual above identified physical facilities; its quoted stock is available in the humanities orderbook, not identified component cohorts.",
+    "Internally developed intellectual property, software, brands, sports rights, research knowledge and goodwill: no inventory, capitalization split, useful lives, market or collateral values are established.",
+    "Public/community ownership claims, equity ownership, land and mineral rights, ecosystem/cultural heritage and human capital: no legal allocation or exchange value is established.",
+    "Priced seed launch fuel and cash working/reserve balances are excluded from fixed equipment. Transit inventories, remaining first-source sequence and passenger access are not qualified."
+  ],
+  "component_checkpoint_years": [
+    8,
+    32,
+    100,
+    200,
+    220
+  ]
+}
