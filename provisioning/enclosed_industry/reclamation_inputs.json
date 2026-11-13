@@ -1,0 +1,119 @@
+{
+  "schema": "terluna.provisioning.reclamation-inputs/1",
+  "dependencies": {
+    "provisioning/enclosed_industry/model.py": "a338d56ea03c864ae0ccf65594a3b6b514a9e9e0fab4f09e7437b9cb34677805",
+    "provisioning/enclosed_industry/bootstrap.py": "f3a5bc9ad762c232f215a84110f5769a770b74759eacd4e2875964df557a17a1",
+    "provisioning/enclosed_industry/run.py": "f06699d48b9b134c4b171cd726f312807813b4a82b7500d4609e85e93ec3ee83",
+    "provisioning/enclosed_industry/inputs/engineering.json": "e15aec1a0da1b41f23326d1ce15a587addc994e69b4cdca53c1516990365eed2",
+    "provisioning/enclosed_industry/inputs/orders.json": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
+    "provisioning/enclosed_industry/results/industry.json.gz": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+    "research/studies/lava_tube_cities/buildout_inputs.json": "dbe184ee7fba99bb0cb9b6e0251ffe11685e87a0b0afb0dbb7390dda8128da91",
+    "research/studies/lava_tube_cities/results/buildout.json": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de",
+    "research/studies/vacuum_crater_buildout/maintenance_inputs.json": "57ea8129999509a02d0f27edcd48a188e150b1fa48392c6ab82cd459e6791dcf",
+    "research/studies/vacuum_crater_buildout/scenarios.json": "32798c1d046e29b69904c6b00242ab2151e879f06f741d538f25a3f57188d4c2",
+    "research/studies/vacuum_crater_buildout/maintenance.md": "ea839e16a585ff43225b269230bcb59113d358857ffbd10b0e974d2b8e3dc852"
+  },
+  "portfolios": [
+    "services",
+    "propellant_logistics",
+    "diversified"
+  ],
+  "market": "breakthrough",
+  "growth": [
+    "reference",
+    "wider"
+  ],
+  "variants": [
+    "baseline",
+    "closure",
+    "refurbishment",
+    "combined",
+    "tug_life_30",
+    "combined_without_residual_allowance"
+  ],
+  "normalization_population": 250000,
+  "water": {
+    "domestic": {
+      "gross_kg_year": 9131250000.0,
+      "recovery": 0.98,
+      "improved_recovery": 0.995
+    },
+    "industrial": {
+      "gross_kg_year": 1826250000.0,
+      "recovery": 0.98,
+      "improved_recovery": 0.995
+    },
+    "crop": {
+      "gross_kg_year": 29310555994.2,
+      "recovery": 0.995,
+      "improved_recovery": 0.997
+    },
+    "fish_purge": {
+      "gross_kg_year": 485782500.0,
+      "recovery": 0.95,
+      "improved_recovery": 0.98
+    }
+  },
+  "goods": {
+    "gross_kg_person_year": 500,
+    "baseline_recovery": 0.9,
+    "collection": 0.98,
+    "quality": 0.97,
+    "carbon_share": 0.2
+  },
+  "structural": {
+    "collection": 0.99,
+    "quality": 0.99,
+    "bulk_extra_sort_kWh_kg": 0.02,
+    "metal_extra_sort_kWh_kg": 1.0,
+    "bulk_processing_fraction_of_existing_train": 0.1
+  },
+  "water_equipment": {
+    "extra_kWh_per_kg_gross": 0.02,
+    "train_kg_hr": 1000,
+    "hardware_kg": 1000,
+    "active_life": 10,
+    "structure_life": 30
+  },
+  "refurbishment": {
+    "eligible_assets": [
+      "asteroid_tugs",
+      "lunar_landers",
+      "source_mine_trains",
+      "source_metal_trains",
+      "source_fabrication_cells",
+      "excavators",
+      "haulers",
+      "bulk_trains",
+      "metal_trains",
+      "fabrication_cells"
+    ],
+    "collection": 0.8,
+    "quality": 0.6,
+    "repair_part_mass_fraction": 0.2,
+    "inspection_delay_years": 1,
+    "inspection_kWh_kg": 1.0,
+    "remanufacture_kWh_kg": 10.0,
+    "consumables_fraction_of_processed_mass": 0.005,
+    "inspection_kg_worker_year": 100000.0,
+    "remanufacture_kg_worker_year": 20000.0,
+    "workshop_kg_hr": 500,
+    "workshop_hardware_kg": 50000,
+    "workshop_active_life": 15,
+    "workshop_structural_life": 30
+  },
+  "evidence": "All changes are conditional engineering hypotheses. Baseline loop coefficients are inherited scenarios; NASA evidence supports mechanisms and limitations, not the industrial recovery, cost or service-life coefficients.",
+  "assumptions": [
+    "Water quality recovery applies to four already processed streams. The separate 5 kg/person/day additional makeup stays unchanged because its recoverability is not established.",
+    "Structural recovery changes from inherited net 95% to 99% collection times 99% quality. Existing full bulk/metal conversion energy remains; extra sorting and equipment are charged.",
+    "Household goods use a steady annual return approximation already implicit in the baseline; no recovered goods are added to the capital scrap bank.",
+    "Eligible active hardware is inspected at its inherited destination. Source workshops are co-located with source tugs and plants; lunar-lander workshops are at the depot. No lunar-to-source movement is implied.",
+    "A retired component becomes eligible only one year after retirement, before the existing two-year refurbishment/commissioning work period. Requalified units receive the original expected life; this is an engineering hypothesis.",
+    "Repair kit mass displaces equal old component mass. No value or recovery credit is assigned to rejects, displaced parts, or chemical exhaust.",
+    "Equipment intensities, processing energy, direct staff productivity and quality acceptance are explicit sensitivity assumptions, not demonstrated lunar industrial performance.",
+    "Seed flows are represented by the inherited eight-year average; no new executable deployment sequence is claimed.",
+    "The retained 5 kg/person/day allowance originally covered landscape/agricultural losses before explicit crop/fish balances were added. Potential overlap remains unquantified; the baseline and all primary variants retain the allowance.",
+    "A separate combined_without_residual_allowance endpoint sets only the legacy 5 kg/person/day allowance to zero. This is a 100 percent overlap or complete-capture credit ceiling, not a measured correction; explicit domestic, crop, fish and industrial water losses remain."
+  ],
+  "landscape_agriculture_allowance_kg_year": 456562500.0
+}
