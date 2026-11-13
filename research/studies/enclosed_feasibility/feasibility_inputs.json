@@ -1,0 +1,117 @@
+{
+  "schema": "terluna.research.enclosed-feasibility-inputs/1",
+  "evidence_date": "2026-11-13",
+  "programme_start_year": 2041,
+  "lead_years": 15,
+  "source_revision": "a8af8761",
+  "inputs": {
+    "industry": {
+      "path": "provisioning/enclosed_industry/results/revised_industry.json.gz",
+      "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f"
+    },
+    "engineering": {
+      "path": "provisioning/enclosed_industry/inputs/engineering.json",
+      "sha256": "e15aec1a0da1b41f23326d1ce15a587addc994e69b4cdca53c1516990365eed2"
+    },
+    "constants": {
+      "path": "shared/constants.json",
+      "sha256": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72"
+    },
+    "crater": {
+      "path": "research/studies/vacuum_crater_buildout/scenarios.json",
+      "sha256": "32798c1d046e29b69904c6b00242ab2151e879f06f741d538f25a3f57188d4c2"
+    },
+    "city": {
+      "path": "research/studies/lava_tube_cities/buildout_inputs.json",
+      "sha256": "dbe184ee7fba99bb0cb9b6e0251ffe11685e87a0b0afb0dbb7390dda8128da91"
+    },
+    "reclamation": {
+      "path": "provisioning/enclosed_industry/reclamation_inputs.json",
+      "sha256": "3197ec5b8d7608a6528f5d162990ba204183056b5dd41548c2ceb86bfd7b7264"
+    }
+  },
+  "boundary": "The planned off-Earth economic zone served by U before Open Moon, the habitat array or outer-system buildout. U remains its general economic unit; it is not an engineering asset.",
+  "reference_case": "propellant_logistics:breakthrough:wider:combined",
+  "checkpoints": [
+    8,
+    32,
+    100,
+    200,
+    220
+  ],
+  "sensitivity": {
+    "beam_delivered_site_MW": [
+      5,
+      50,
+      250,
+      500
+    ],
+    "slant_range_m": [
+      10000000,
+      12000000,
+      14000000
+    ],
+    "radiator_temperature_K": [
+      300,
+      350,
+      400,
+      500
+    ],
+    "effective_radiator_fraction": [
+      1,
+      0.7
+    ],
+    "critical_load_fractions": [
+      0.1,
+      0.25,
+      0.5
+    ],
+    "cargo_loss_probability_per_trip": [
+      0.0001,
+      1e-05,
+      1e-06,
+      1e-07
+    ],
+    "illustrative_annual_loss_limit": 0.01,
+    "demonstration_confidence": 0.95,
+    "cargo_speed_m_s": [
+      2500,
+      5000
+    ],
+    "one_way_transit_years": [
+      0.5,
+      1,
+      1.5
+    ],
+    "refurbished_life_fractions": [
+      1,
+      0.75,
+      0.5,
+      0.25,
+      0
+    ],
+    "metabolic_O2_kg_person_day": 0.9,
+    "volatiles_recovered_yield_cases": [
+      0.03,
+      0.07,
+      0.12
+    ],
+    "source_distances_AU": [
+      1,
+      1.2,
+      1.5,
+      2
+    ],
+    "dome_spans_m": [
+      250,
+      300,
+      330
+    ],
+    "metabolic_O2_basis": "NASA BVAD Rev2 (February 2022), Table 3-25: reference crewmember long mission, a screening analogue, not a population forecast."
+  },
+  "reading_rule": "Requirements preserve the admitted staged producer. New calculations are bounded analytical screens and proposed qualification gates, not completed designs, source-release decisions, measured reliability or financial revaluations. No probability of programme success is assigned.",
+  "coefficient_definitions": {
+    "receiver_mean_flux_W_m2": "Delivered electric power per receiver area, not incident radio-frequency flux; initial_industrial_system/run.py receiver_active_area_m2 and its README.",
+    "reserve_Wh": "Nominal energy sized as critical load times target hours times (1 + reserve fraction) / (discharge efficiency * usable fraction); lava_tube_cities/buildout.py utilities calculation."
+  }
+}

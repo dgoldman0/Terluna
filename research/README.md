@@ -21,6 +21,10 @@ Models live in their domain folders. This folder holds what spans domains:
 | [studies/](studies/) | Cross-domain studies, each with its runner, results and write-up |
 | [integration/](integration/README.md) | The joint integrations: of 8 October 2026, the five lines merged, the conflicts and repairs, the checks, and Codex's review that planned it; and [of 12 October 2026](integration/domains.md), the three domains merged with four refreshes of main's studies |
 
+## Enclosed programme engineering
+
+The [enclosed engineering feasibility study](studies/enclosed_feasibility/README.md) examines the planned off-Earth economic zone served by U before Open Moon, the habitat array and outer-system buildout. It preserves the staged physical model, compares nine portfolios and uses a proposed 2026–2041 demonstration programme to distinguish start readiness from year-200 industrial scale. The calculation adds power-delivery, storage, thermal, cargo, pressure and repaired-life sensitivities; source access, the initial deployment sequence and integrated habitation remain qualification conditions.
+
 ## Domains
 
 | Topic | Current calculation | Principal open condition |

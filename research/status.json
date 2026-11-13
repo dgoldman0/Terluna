@@ -1728,6 +1728,20 @@
         "growth": "Derive construction from capacity; retain the 2.5% eventual crater quota and the separate initial vacuum quota; no uncounted tube expansion",
         "next": "Qualify products, modular components, sources and customer demand; fund the commissioning and import requirements; resolve site distribution and monetary policy."
       }
+    },
+    {
+      "topic": "enclosed_engineering_feasibility",
+      "condition": "bounded engineering study with a fifteen-year development allowance; nine portfolios and all 93 physical cases retained; numerical capacity passes remain separate from integrated qualification",
+      "material": [
+        "studies/enclosed_feasibility/README.md",
+        "studies/enclosed_feasibility/feasibility.py",
+        "studies/enclosed_feasibility/feasibility_inputs.json",
+        "studies/enclosed_feasibility/feasibility_sources.json",
+        "studies/enclosed_feasibility/results/feasibility.json",
+        "studies/enclosed_feasibility/checks.md"
+      ],
+      "boundary": "The planned off-Earth economic zone served by U before Open Moon, habitat array or outer-system development; U remains the general economic unit.",
+      "next": "Qualify the dated initial deployment, source-to-depot routes, real-site power links, pressure enclosures, biological services and repaired equipment life; propagate measured coefficients and explicit stresses through the coupled physical and financial producers."
     }
   ]
 }
