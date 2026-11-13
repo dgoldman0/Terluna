@@ -1,0 +1,20 @@
+{
+  "physical_product": {
+    "compression": "gzip",
+    "content_sha256": "f238dddcdbb5aee057408daabecf7ce3e479e3dd45b5cebada5451d091503a56",
+    "manifest_path": "inputs/bottlenecks.json.manifest.json",
+    "manifest_sha256": "8c06f2a2a1338b35bc3754fd9106af7f787fffdf2617e9ce659ca6f96c47ce8d",
+    "path": "inputs/bottlenecks.json.gz",
+    "schema": "terluna.provisioning.enclosed-industry/1",
+    "sha256": "64b3ecb13980b4e0fe6bdb52075338c22670d293b31aa37a67d094b67aaec74e",
+    "source_base_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
+    "source_commit": "a6df1bec78ad533f8868ef40a7df81906a3baa38",
+    "source_path": "provisioning/enclosed_industry/results/bottlenecks.json.gz"
+  },
+  "reference_dependencies": {
+    "inputs.json": "b0ee1d80e96e1e91b764eae05d7db4d31fd733a834b0f2f339e07d7b5eb7b9d3",
+    "run.py": "fa9924fe003fb6b759d1a4572c97bde97abd53570a2503f43fe3b8507395caf3",
+    "sources.json": "e94020e2b2720ec7e812ff3b139bce21f28d9c9460de290e621acbb9dcd12a46"
+  },
+  "schema": "terluna.resources.enclosed-bottleneck-inputs/1"
+}

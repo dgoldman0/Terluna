@@ -37,6 +37,8 @@ The [enclosed mining assessment](enclosed_mining/README.md) follows dated indust
 
 The original 17-body source screen is too small even at its entire-mass ceiling before year 100 in every base case. A proposed wider geometry screen also falls short at 10% extraction by year 200. The broad dark catalogue is dominated by Don Quixote, whose orbit does not establish the inherited near-Earth cargo route; excluding it materially reduces the upper stock allowance. These are finite catalogue comparisons, with composition, extraction, conservation and dated delivery still unqualified. Financial completion remains conditional on those resource requirements. This enclosed-phase study assumes no Open Moon, habitat array or outer Solar System buildout.
 
+The separate [bounded-intervention assessment](enclosed_mining/bottlenecks.md) applies the same source inventory and access assumptions to 28 commercial-rollout and tug-life variants. All four resource baselines reproduce exactly, and seven workforce-infeasible physical plans retain their failure status. Longer source-tug active life lowers cumulative feed by about 1.5 percent through year 200; it does not resolve source qualification or make the narrow catalogue sufficient.
+
 ## What the project already says
 
 Each finding follows from results the repository already holds, read together with the literature. Numbers marked
