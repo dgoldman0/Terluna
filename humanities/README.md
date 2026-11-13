@@ -40,3 +40,10 @@ uses the current provisioning account to compare whole-programme funding,
 incremental industry, capital-provider claims and socioeconomic benefits across
 all stakeholders. Residents are one group; Earth customers, workers, funders and
 research users also enter the appraisal.
+
+The [staged financing extension](../research/studies/complex_returns/staged.md)
+starts with a funded productive module and uses earned cash for later industrial
+facilities. Worldwide sports, cultural, licensing and institutional demand develop
+independently of resident population. Successful service scenarios can sustain
+expansion; capital recovery still depends strongly on prices, margins, shared
+infrastructure and commissioning, whose small-system engineering remains open.

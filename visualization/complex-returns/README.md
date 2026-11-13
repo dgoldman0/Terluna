@@ -7,3 +7,9 @@ MPLCONFIGDIR=/tmp/terluna-roi-mpl XDG_CACHE_HOME=/tmp/terluna-roi-cache python3 
 ```
 
 PNG and SVG figures and a source-hash manifest are written to ignored `research/runs/complex_returns/figures/`. Each image includes the source product and renderer hashes. The study states the scope, units and conditional assumptions; figures preserve those limits. Generated images are not committed.
+
+The companion `staged_plot.py` reads the reviewed staged-finance product and
+writes `staged.png`, `staged.svg` and `staged_manifest.json` to the same ignored
+figure directory. It shows service invoices, industrial capacity, capital-recovery
+NPV and sensitivity cases. Product and renderer SHA-256 identities are embedded;
+all scenario assumptions belong to the producing study.
