@@ -1619,6 +1619,32 @@
         "An economically qualified workforce and deployment schedule for accelerated manufacturing; source supply; verified commercial input margins and demand; liquid investment arrangements for retained funds."
       ],
       "next_session_task": "Assess dated labor and production alternatives, priced reductions in transport/replacement costs and treasury arrangements against the stratified baseline without admitting failed capacity cases."
+    },
+    {
+      "topic": "monetary_wealth",
+      "condition": "conditional_annual_counterparty_balance_sheets_and_ownership_scenarios; no_nominal_U_exchange_rate_or_complete_asset_valuation",
+      "material": [
+        "studies/monetary_wealth/README.md",
+        "studies/monetary_wealth/wealth_inputs.json",
+        "studies/monetary_wealth/results/wealth.json.gz",
+        "studies/monetary_wealth/checks.md"
+      ],
+      "source_commits": {
+        "provisioning_asset_export": "c9e37d59803ec568e41111b857f76d7bf5741e05",
+        "resources_source_access": "b73457e7",
+        "humanities_financial_baseline": "65804012"
+      },
+      "findings": [
+        "Fifty-four annual paths retain nine portfolios, two breakthrough-demand growth rates and three ownership arrangements; checkpoints cover years 0, 32, 100, 200 and 220.",
+        "The optimistic propellant case retains 347.655 trillion USD2041 of cumulative year-200 owner payouts and has 38.914 trillion of remaining-service physical assets plus construction in progress, separate from cash and reserves.",
+        "At 15 percent net payroll saving, continued outside ownership yields 0.509 trillion USD2041 of local year-200 wealth. Paid purchases at a conditional 3 percent cash-claim quote yield 1.056 trillion and a 1.27 percent local share. A negotiated 75 percent community transfer with full payout retention yields 285.414 trillion; outside investors still receive 110.043 trillion and a 5.79 percent dated cash IRR.",
+        "The worked outside-ownership money stock is valued at 15.147 trillion USD2041; outside retention sensitivities change money without changing consolidated wealth. Nominal U faces, constituent exchange rates and currency-price equilibrium are unspecified.",
+        "Outside equity is subtracted in consolidated wealth; domestic claims cancel. Cash-claim market proxies and own-funds values remain separate, including negative enterprise residuals where equity is marked above included assets."
+      ],
+      "unresolved": [
+        "Qualified assets and source supply; intangible capital and inventories; household income and saving evidence; negotiated economic and voting rights; funded public spending; jointly endogenous money demand, exchange rates and lending."
+      ],
+      "next_session_task": "Integrate ownership contracts, public spending and household accounts with the monetary and fiscal design while preserving paired claims and source qualifications."
     }
   ]
 }

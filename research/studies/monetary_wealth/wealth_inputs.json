@@ -1,0 +1,88 @@
+{
+  "schema": "terluna.humanities.monetary-wealth-inputs/1",
+  "checkpoints": [
+    0,
+    32,
+    100,
+    200,
+    220
+  ],
+  "years": 221,
+  "market": "breakthrough",
+  "growth_cases": [
+    "reference",
+    "wider"
+  ],
+  "reference_case": "propellant_logistics:breakthrough:wider",
+  "asset_product": {
+    "path": "inputs/asset_stock.json.gz",
+    "sha256": "737d2af75ace3ada9462291dcbc00b858edc94b61617efc46e6132a2af72ea4f",
+    "schema": "terluna.provisioning.enclosed-asset-stock/1",
+    "source_path": "provisioning/enclosed_industry/results/asset_stock.json.gz",
+    "source_branch": "domain/provisioning",
+    "source_commit": "c9e37d59803ec568e41111b857f76d7bf5741e05"
+  },
+  "source_access": {
+    "path": "inputs/source_access.json.gz",
+    "sha256": "ccccc09a4eef587a58099ef68164f4b7dc9fe4943f12fe7cb68580e2ea624881",
+    "schema": "terluna.resources.source-access/1",
+    "source_commit": "b73457e7"
+  },
+  "finance_dependencies": {
+    "../enclosed_returns/finance.py": "4a212ba856b682fe9a8925df87d61fa052ea061c5febb63c3db65debb26a288d",
+    "../enclosed_returns/finance_inputs.json": "b859c68691e0fe38596460470cc1753f3def08b29955be7970a7c0ca5a0facf0",
+    "../enclosed_returns/results/returns.json": "a1de3348cb5e3c9ab110297ff176d347c077a9856f256e6406b0c508198abebf"
+  },
+  "household_net_saving_fraction": 0.15,
+  "household_saving_sensitivities": [
+    0.05,
+    0.3
+  ],
+  "household_savings_to_purchase_fund_fraction": 0.5,
+  "household_U_liquid_fraction": 0.5,
+  "enterprise_U_cash_fraction": 0.9,
+  "community_U_liquid_fraction": 0.05,
+  "external_investor_U_retention_fraction": 0.01,
+  "external_investor_U_retention_sensitivities": [
+    0,
+    0.05
+  ],
+  "bank_settlement_reserve_fraction": 0.1,
+  "bank_operating_cost_fraction_of_local_interest": 0.25,
+  "local_purchase_start_year": 32,
+  "purchase_discount_rate": 0.03,
+  "purchase_rate_sensitivities": [
+    0.05,
+    0.07
+  ],
+  "vesting_end_year": 100,
+  "vesting_target_fraction": 0.75,
+  "ownership_scenarios": [
+    "external_equity",
+    "community_purchase",
+    "negotiated_vesting"
+  ],
+  "initial_household_wealth": 0,
+  "initial_community_wealth": 0,
+  "currency_value_convention": "All values are constant USD2041 purchasing-power equivalents in the established U accounting convention; nominal U faces and constituent exchange rates remain unspecified. No Earth currency peg or reserve basket is adopted.",
+  "constituent_reporting_value_shares": {
+    "u1": 0.5,
+    "u2": 0.3,
+    "u3": 0.2
+  },
+  "constituent_rule": "Illustrative value allocation of one money total and every sector U-denominated financial asset/liability across U-related constituent currencies. No additional basket money or claims are added. Common weights are reporting scenarios, not measured exposures, exchange rates or an adopted currency constitution.",
+  "household_closure": "Net saving applies to identified resident payroll, including construction and preopening work. The unretained part is assigned to outside consumption/services in this bounded closure; local secondary income, taxes, migration wealth and additional household borrowing are not invented. Voluntary contributions to a collective fund reduce household savings; no additional household beneficiary security is issued.",
+  "reserve_ownership": "Enterprises retain a restricted claim on a reserve institution; the institution holds matching outside assets. This does not transfer beneficial ownership of the programme reserve to the public sector.",
+  "valuation_rule": "Constructed physical assets use remaining-service replacement-value proxies plus construction WIP. Productive IP, unallocated commercial packages, natural resources and circulating material inventories remain unvalued. Own-funds shares and finite-horizon cash-claim quotes are reported separately, never added as real assets.",
+  "ownership_rule": "Outside investors meet all baseline capital calls. New calls dilute local stakes at the disclosed own-funds convention. Transfers and purchases change rights to the same payout, not total programme cash. Purchases require no remaining modelled capital calls; negotiated vesting transfers rights without consideration and therefore records an outside capital transfer.",
+  "monetary_rule": "Deposit holdings follow explicit retention/adoption assumptions. Domestic loan creation/repayment, restricted funding, custody, retained bank income and net external backing are reconciled annually. Outside-held supplier U term claims are financing, not transaction money. Price or exchange-rate equilibrium is not solved.",
+  "owner_custody_fraction": 0.01,
+  "U_settlement_start_fraction": 0.25,
+  "U_settlement_end_fraction": 0.85,
+  "U_settlement_transition_years": 10,
+  "outside_customer_holding_days": 7,
+  "retained_financial_assets_real_return": 0,
+  "community_distribution_fraction": 0,
+  "outside_counterparty_rule": "Outside actors contain only claims against or held by off-Earth actors. Their reported positions are not complete outside-investor net worth. Dated capital contributions, payouts and buyout receipts are reported separately; disposition of other outside wealth remains unspecified.",
+  "community_retention_rule": "Community funds retain all allocated payouts at zero real yield, alongside zero-yield household savings. Public spending and beneficiary distributions would reduce these stocks; the case is accumulation capacity, not an adopted spending policy."
+}

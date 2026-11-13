@@ -1,0 +1,32 @@
+{
+  "schema": "terluna.humanities.monetary-wealth-sources/1",
+  "sources": [
+    {
+      "file": "mfsmcg.pdf",
+      "url": "https://www.imf.org/-/media/files/data/guides/mfsmcg-final.pdf",
+      "bytes": 5954003,
+      "sha256": "b5c677959553bab0059746763d63d7562a4909d7bf0010481d6bfdf170683c6e",
+      "reading_scope": "Targeted reading: 4.130\u20134.133 (financial-corporation book equity); 6.10\u20136.13, 6.57, 6.70\u20136.73 (broad money and holders); 6.89\u20136.94 (monetary base). No complete-manual reading claimed.",
+      "retrieved": "2026-11-13",
+      "redistribution": "Temporary research copy only; source linked, not added to the repository."
+    },
+    {
+      "file": "sna2025.pdf",
+      "url": "https://unstats.un.org/unsd/nationalaccount/snaupdate/2025/2025_SNA_Combined.pdf",
+      "bytes": 16355877,
+      "sha256": "47fa283670e5f85bffc8df7e44f41db45e0bb2f00cead758db6435e709999d1f",
+      "reading_scope": "Targeted reading: 4.252\u20134.255; 11.24\u201311.25; 12.90, 12.99\u201312.100; 14.2\u201314.13, 14.16, 14.26\u201314.27, 14.30, 14.81\u201314.82, 14.86\u201314.89, 14.102\u201314.108. Pre-edit 2025 release. Search/locator inspection elsewhere; no complete-manual reading claimed.",
+      "retrieved": "2026-11-13",
+      "redistribution": "Temporary research copy only; source linked, not added to the repository."
+    },
+    {
+      "file": "bpm7.pdf",
+      "url": "https://www.imf.org/-/media/files/data/statistics/bpm6/draft-bpm7-wcv.pdf",
+      "bytes": 7400489,
+      "sha256": "c98252999905d0256f1ffd82ab31715afe88da46614f6ba36b68ff8cb8f7d248",
+      "reading_scope": "Targeted reading: 7.1\u20137.6 (net external position and national wealth), 7.16\u20137.19 and Box 7.1 (unlisted/negative equity); targeted verification of reinvested-earnings references. White Cover/pre-edited release; no complete-manual reading claimed.",
+      "retrieved": "2026-11-13",
+      "redistribution": "Temporary research copy only; source linked, not added to the repository."
+    }
+  ]
+}
