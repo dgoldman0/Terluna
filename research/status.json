@@ -1367,7 +1367,7 @@
     },
     {
       "topic": "monetary_system",
-      "condition": "capped_for_the_merge_2026_10_31; the_functions_any_arrangement_performs_and_four_currency_arrangements_of_the_present_day_family; verified_ledger_at_normalized_sizes",
+      "condition": "conditional_U_trade_transition_and_partial_reserve_plan; preserved_institutional_reference_and_verified_transaction_arithmetic; no_monetary_forecast",
       "material": [
         "studies/monetary_system/README.md",
         "studies/monetary_system/institutions.md",
@@ -1377,17 +1377,28 @@
         "studies/monetary_system/inputs.json",
         "studies/monetary_system/sources.json",
         "studies/monetary_system/results/reference.json",
-        "studies/monetary_system/checks.json"
+        "studies/monetary_system/checks.json",
+        "studies/monetary_system/trade_transition.md",
+        "studies/monetary_system/trade_transition.py",
+        "studies/monetary_system/trade_transition_inputs.json",
+        "studies/monetary_system/trade_transition_sources.json",
+        "studies/monetary_system/results/trade_transition.json",
+        "studies/monetary_system/trade_transition_checks.md"
       ],
       "unresolved": [
         "The arrangement itself, its mandates, collective revenue and guarantees, chosen through the communities' collective decisions.",
         "Staged domestic supply, invoicing currencies, imports, debt ownership and maturities for a quantitative comparison.",
-        "Inflation, exchange rates, interest rates, credit demand and production responses."
+        "Inflation, exchange rates, interest rates, credit demand and production responses.",
+        "Single-currency or constituent-basket monetary constitution, admission/exit/default rules, domestic price objective, reserve ownership and funded contributions; actual invoice/payment currencies, liquidity access and balance holding periods.",
+        "Joint price, trade, credit, clearing, reserve and investment responses; the existing domestic spending screen does not determine monetary inflation or external purchasing power."
       ],
-      "next_session_task": "Merged in the fifth joint integration (c5aa9ac; research/integration/four-branches.md): settle follows its two context identities, the world economy's comparison and inputs, in place of its run in the order. The open items are the unresolved list's.",
+      "next_session_task": "Specify the U monetary and clearing constitution and collect activity-level contract, payment, debt and reserve data; couple these choices to the nine portfolios before estimating monetary inflation or exchange-rate paths. The original L/S reference remains unchanged.",
       "findings": [
         "Currency use, access to settlement and emergency lending, and the bearing of losses are separate functions; three worlds need not mean three currencies or three issuers.",
-        "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs."
+        "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs.",
+        "The U transition plan compares one U currency with a basket of participating U-related currencies. Earth currencies remain external trade currencies; partial reserve assets do not define the basket or establish an external peg. Proposed adoption stages distinguish U price setting, invoice denomination, settlement and retained balances.",
+        "Normalized dealer transactions keep U stock fixed at120 while exports100 and imports60 improve the zone external position by40 under three holding patterns. A separate reserve budget allocates investment and earned cash once; greater currency turnover or reserve assets are not added to financial returns.",
+        "Pinned nine-portfolio payment flows supply conditional transaction-balance comparisons at30/100/300/800years. The study does not infer adoption rates, U exchange rates, annual inflation or reserve adequacy from those flows."
       ]
     },
     {

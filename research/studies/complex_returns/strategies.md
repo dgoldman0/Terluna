@@ -12,6 +12,8 @@ The [figure renderer](../../../visualization/complex-returns/strategy_plot.py) r
 
 The [U price companion](prices.md) follows distributions and investment into explicit domestic-spending experiments across the same nine portfolios. Its conditional price indices and import-cost sensitivities preserve this calculation as their fixed-price counterfactual; capacity-use percentages alone do not establish an inflation rate.
 
+The [trade and monetary transition plan](../monetary_system/trade_transition.md) compares substantial U adoption through pricing, payments and finance, including a basket of U-related currencies and separately funded partial reserves. It reads these portfolio receipts to test transaction-balance scenarios without adding turnover, reserve assets or currency appreciation to investment returns.
+
 ## Comparable industrial portfolios
 
 The comparison uses new joint evaluations of the existing provisioning producer. Each retains the same founding support system and its domestic obligations. Commodity and specialty cases reproduce the earlier saved accounts; an additional control reproduces the earlier larger manufacturing portfolio exactly. The [frozen response](inputs/strategy_profiles.json) records producer and input hashes, physical arguments, costs, commissioning and joint expansion responses. The financial model reads that product without importing the physical implementation.

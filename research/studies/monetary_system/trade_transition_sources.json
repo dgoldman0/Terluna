@@ -1,0 +1,75 @@
+{
+  "schema": "terluna.research.trade-transition-sources/1",
+  "accessed": "2026-11-12",
+  "evidence": "Targeted primary research and institutional explanations. The monetary architecture, adoption targets, constituents, reserves and holdings scenarios are proposals or synthetic calculations, not observed U institutions.",
+  "sources": [
+    {
+      "title": "ECB glossary: European Currency Unit and European Monetary System",
+      "url": "https://www.ecb.europa.eu/services/glossary/html/act4e.en.html",
+      "read": "ECU/EMS definitions.",
+      "use": "A unit composed of fixed amounts of participating currencies is distinct from a single currency; structural comparison only."
+    },
+    {
+      "title": "EMU: the building of one monetary system in the European Union",
+      "author": "Willem F. Duisenberg",
+      "date": "1998-01-16",
+      "url": "https://www.ecb.europa.eu/press/key/date/1998/html/sp980116.en.html",
+      "read": "Organising the transition to the single currency, especially ECU/euro distinction and changeover preparations.",
+      "use": "Member-currency basket versus single-currency transition; no European institutional or conversion rule adopted for U."
+    },
+    {
+      "title": "Patterns of Invoicing Currency in Global Trade in a Fragmenting World Economy, IMF WP25/178",
+      "authors": "Emine Boz, Anja Brüggen, Camila Casas, Georgios Georgiadis, Gita Gopinath and Arnaud Mehl",
+      "url": "https://www.imf.org/-/media/files/publications/wp/2025/english/wpiea2025178-source-pdf.pdf",
+      "read": "Abstract, section2.4 and currency-choice discussion in sections4–5.",
+      "use": "Settlement statistics need not identify invoice currency; pricing incentives and contract denomination matter separately."
+    },
+    {
+      "title": "The international role of the euro, June2026",
+      "organization": "ECB",
+      "url": "https://www.ecb.europa.eu/press/other-publications/ire/html/ecb.ire202606.en.html",
+      "read": "Foreword, institutional discussion and payment/invoicing passages.",
+      "use": "Credibility, liquid asset markets and liquidity support can contribute to international currency use; no timetable or U adoption coefficient transferred."
+    },
+    {
+      "title": "Foreign currency funding risk and cross-border liquidity",
+      "organization": "BIS/CGFS",
+      "url": "https://www.bis.org/publications/cgfs-paper-71-foreign-currency-funding-risk-and-cross-border-liquidity.pdf",
+      "read": "Executive summary, conceptual framework and facility-access discussion.",
+      "use": "Currency matching differs from liquidity; hedges and funding require maturity/collateral/access analysis."
+    },
+    {
+      "title": "Inaugural RAMP Survey on Reserve Management Practices",
+      "organization": "World Bank",
+      "url": "https://documents1.worldbank.org/curated/en/332371555391833025/pdf/Inaugural-RAMP-Survey-on-the-Reserve-Management-Practices-of-Central-Banks-Results-and-Observations.pdf",
+      "read": "Printed pages19–20 on reserve currency composition and liquidity/investment portfolios.",
+      "use": "Reserve composition can follow debt, intervention and liquidity obligations. It is separate from the U-family basket definition."
+    }
+  ],
+  "comparison_not_selected": [
+    {
+      "title": "MAS monetary-policy framework FAQ section2",
+      "url": "https://www.mas.gov.sg/monetary-policy/Singapores-Monetary-Policy-Framework/faqs/section-2",
+      "read": "Sections2.1–2.4.",
+      "scope": "External currency basket policy comparison; not the proposed meaning of the U basket."
+    },
+    {
+      "title": "IMF SDR FAQ",
+      "url": "https://www.imf.org/en/About/FAQ/special-drawing-right",
+      "read": "Valuation, unit-of-account and holder-eligibility sections.",
+      "scope": "External basket comparison only. SDR membership/access and its currency composition are not adopted."
+    }
+  ],
+  "unresolved_retrievals": [
+    "The IMF eLibrary page for the1995 private-ECU article returned403; no detailed claim from that unavailable article is used."
+  ],
+  "project_sources": [
+    "../world_economy/comparison.md",
+    "institutions.md",
+    "external_accounts.md",
+    "ledger.py",
+    "../complex_returns/strategies.md",
+    "../complex_returns/prices.md"
+  ],
+  "limits": "No constituent list, basket weight, issuer, external peg, legal mandate, reserve target, policy rate, adoption probability or U/USD conversion is selected. Source reading does not calibrate the numerical cases."
+}

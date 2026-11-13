@@ -59,3 +59,10 @@ the established economic unit serving the planned off-Earth zone. It tests
 domestic spending from actual distributions and expansion commitments, separate
 from Earth purchases, against explicit basket and supply assumptions. Its
 conditional price-level comparisons are not annual inflation forecasts.
+
+The [U trade transition](../research/studies/monetary_system/trade_transition.md)
+sets out how worldwide exports could help establish U prices, payments and
+financial claims. It compares a single U with a basket of U-related currencies,
+keeps Earth trading currencies separate, and funds partial reserves from explicit
+investment and earnings allocations. The plan measures invoicing, settlement and
+retained balances separately.
