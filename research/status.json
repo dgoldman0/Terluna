@@ -1573,7 +1573,7 @@
     },
     {
       "topic": "enclosed_buildout_year200",
-      "condition": "conditional_capacity_schedule_and_mining_sensitivity",
+      "condition": "conditional_year200_completion_returns_with_explicit_residual_equity_and_reference_mining",
       "material": [
         "studies/vacuum_buildout/README.md",
         "studies/vacuum_buildout/run.py",
@@ -1583,19 +1583,29 @@
         "studies/vacuum_buildout/results/buildout.json",
         "studies/vacuum_buildout/mining-evidence.md",
         "studies/vacuum_buildout/sources.json",
-        "studies/vacuum_buildout/checks.md"
+        "studies/vacuum_buildout/checks.md",
+        "studies/vacuum_buildout/returns.md",
+        "studies/vacuum_buildout/returns.py",
+        "studies/vacuum_buildout/returns_inputs.json",
+        "studies/vacuum_buildout/results/returns.json",
+        "studies/vacuum_buildout/returns-checks.md"
       ],
       "findings": [
         "A smooth log-capacity ramp reaches 222240 people in year100 and the existing 6468289-person enclosed cap in year200; construction is ordered two years ahead and peaks at5.313% of installed capacity per year.",
         "Selectively enlarged physical assets pass all nine base-feed equipment schedules; added seed installation is49.341billionUSD2041 and modular replication adds248.669billion per250000-person scale, with recurring costs separately charged.",
         "Base source feed throughyear200 is201.54–266.55billion tonnes, exceeding the narrow17-body hypothetical catalogue mass inyears88–93. Broad catalogue mass is not a qualified accessible reserve.",
-        "Poor asteroid feed progressively introduced fromyear50 exceeds source capacity in all nine portfolios inyears64–86. Lunar feed sensitivity remains feasible for this gradual timing; deeper excavation and route changes remain unpriced."
+        "Poor asteroid feed progressively introduced fromyear50 exceeds source capacity in all nine portfolios inyears64–86. Lunar feed sensitivity remains feasible for this gradual timing; deeper excavation and route changes remain unpriced.",
+        "On identical prescribed build/customer paths, latest U finance gives strong-demand sponsor cash NPV of2.763–5.111trillionUSD2041 atyear100 and-2.126to+2.483trillion atyear200, at3%real. Completion requires383.535–612.797trillion additional undiscounted equity and retains6.574–10.943trillion annual operating deficits atyear200.",
+        "All strong year200 sponsor balances are negative at0%,1%and7%real. Positive3%values in some portfolios depend on earlier receipts carrying more weight than late funding needs; they do not establish self-financing or sustained operation.",
+        "Full purchaser-price and resident-service proxies give1.799–6.394trillion socioeconomic NPV atyear200/3%; half-price proxies are negative. Middle-market annual additional-net-social-benefit thresholds are145–250billionUSD2041.",
+        "Local U interest relief adds up to51.6million of sponsor NPV at3%on matched balances, with equal lender margin loss. The real operating/capital and socioeconomic paths are unchanged by funding substitution."
       ],
       "unresolved": [
-        "Surveyed recoverable reserves and source access; mining depth, mineral-specific processing and replenishment routes.",
-        "Funding for the fixed completion target, service additions and further machinery required by poor source feed."
+        "Qualified sources and priced remedies for poor asteroid feed; geological and route cost evolution.",
+        "Sustaining the completed population through greater worldwide services, industrial dispatch, selective replication and lower logistics/import costs; actual equity and supplier commitments.",
+        "Full service-facility material, floor and freight requirements; measured welfare counterfactuals, U purchasing power and lender default risk."
       ],
-      "next_session_task": "Appraise years100 and200 using the committed schedule, added costs and latest U financing; expose external support requirements."
+      "next_session_task": "Evaluate demand-responsive industrial production and lower-cost sustaining infrastructure against the completed-build operating deficit, preserving the year200 target and reference-account provenance."
     }
   ]
 }

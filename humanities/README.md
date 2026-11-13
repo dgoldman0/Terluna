@@ -99,3 +99,5 @@ USD2041-equivalent at 3% over 100 years, including initial monetary-reserve fund
 all portfolios remain negative at 7%. It reports payback, internal return rates,
 socioeconomic switching values and payment stress separately, and distinguishes
 profitable staged capacity from completing the enclosed architectural build-out.
+
+The [year-200 enclosed-build returns](../research/studies/vacuum_buildout/returns.md) apply the latest U financing to a prescribed ramp reaching 222,240 people at year 100 and 6.468 million at year 200. Strong-demand year-100 sponsor NPV is positive, but completion requires $384–613 trillion of additional undiscounted equity under the current cost and market assumptions; every strong portfolio has a year-200 operating deficit. Mining inventory, poorer-source capacity, socioeconomic valuation and discount-rate sensitivity remain visible alongside financial returns.
