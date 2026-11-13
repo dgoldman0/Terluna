@@ -1,0 +1,139 @@
+{
+  "schema": "terluna.humanities.enclosed-finance-inputs/1",
+  "horizons": [
+    100,
+    200,
+    220
+  ],
+  "rates": [
+    0.0,
+    0.01,
+    0.03,
+    0.07
+  ],
+  "retain_through_year": 200,
+  "initial_runway_years": 5,
+  "liquidity_buffer_years": 1,
+  "external_rate": 0.03,
+  "local_U_rate": 0.025,
+  "loan_term_years": 20,
+  "supplier_U_fraction": 0.5,
+  "service_capital_local_fraction": 0.1,
+  "monetary": {
+    "initial_reserve_fraction_of_seed": 0.05,
+    "reserve_contribution_fraction": 0.2,
+    "base_reserve_years_core_imports": 1.0,
+    "U_credit_conversion_buffer_fraction": 0.25,
+    "U_credit_loss_capital_fraction": 0.15,
+    "unclassified_capital_local_fraction": 0.5,
+    "service_capital_local_fraction": 0.1,
+    "domestic_holding_days": 90.0,
+    "customer_holding_days": 7.0,
+    "settlement_initial_share": 0.25,
+    "settlement_final_share": 0.85,
+    "settlement_transition_years": 10,
+    "incremental_distribution_spending_fraction": 0.01,
+    "supply_elasticity": 1.0,
+    "annual_relative_price_limit": 0.005,
+    "cumulative_relative_price_limit": 0.05
+  },
+  "underwriting": {
+    "min_DSCR": 1.5,
+    "pledgeable_operating_cash_fraction": 0.7,
+    "max_loan_fraction_of_budget": 0.75,
+    "max_debt_fraction_of_seed": 0.25,
+    "principal_grace_years": 2,
+    "project_appraisal_years": 40,
+    "project_discount_rate": 0.03,
+    "external_benchmark_rate": 0.03
+  },
+  "resident_work_fraction": 0.6,
+  "opportunity_USD2041_worker_year": 155796.7416600765,
+  "resident_service_value_USD2041_person_year": 942717.9059875613,
+  "preopening_commercial_fixed_USD2041_year": 1137500000,
+  "preopening_commercial_payroll_USD2041_year": 137500000,
+  "operating_external_keys": [
+    "operating_external_replacement_USD2041",
+    "operating_external_logistics_materials_USD2041",
+    "operating_external_services_USD2041"
+  ],
+  "inherited_dependencies": {
+    "../complex_returns/credit.py": "d2a2ae1efc0c41d9ef78fe1ee524f9dc451ade280d7372c3363e645060830ea8",
+    "../complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef",
+    "../complex_returns/credit_inputs.json": "cc64e28175fe66424e223b369350008b4cd546a280b1cdf02f9ebec2031a1329",
+    "../complex_returns/returns_inputs.json": "7ce3e23c1fb215fc45fdac6f2629952f238f98edc806cd38223b1776a8d1c2b0"
+  },
+  "physical_product": {
+    "snapshot": "inputs/industry.json.gz",
+    "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+    "schema": "terluna.provisioning.enclosed-industry/1",
+    "source_repository_path": "provisioning/enclosed_industry/results/industry.json.gz",
+    "source_branch": "domain/provisioning",
+    "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e"
+  },
+  "resources_product": {
+    "snapshot": "inputs/mining.json.gz",
+    "sha256": "d703ac4050c2ee7a3d615808c7231e9abcdb63f4c0ea4f74304ec3699439aaae",
+    "schema": "terluna.resources.enclosed-mining/1",
+    "source_commit": "38cd446f361f19ff732e8f511ee87104dd51a083",
+    "source_branch": "domain/resources",
+    "source_repository_path": "resources/enclosed_mining/results/assessment.json.gz"
+  },
+  "rules": [
+    "All money uses constant USD2041 purchasing-power equivalents. U is the general economic unit and possible currency or basket of U-related currencies; no U/USD peg or calibrated CPI forecast is implied.",
+    "The whole programme is consolidated across off-Earth operations. Sponsors, lenders, external workers and suppliers, customers and affected people remain stakeholders. Sponsor returns and a purchase-price socioeconomic proxy are separate accounts.",
+    "The producer sizes and prices initial assets once, then dates additions and component renewals from actual physical work. The historical 14.50T establishment/41.89T campaign is provenance, not a recurrent cost multiplier.",
+    "Surplus may be distributed only after cash covers the worst remaining cumulative deficit and annual liquidity buffers throughyear 220, using the same scenario receipts, existing debt service, scheduled capital and reserve contributions, with no assumed future loans. This is a conditional completion-funding test, not a forecast. An additional contribution above 1 USD2041 identifies failure to fund the prescribed schedule from seed, retained earnings and eligible credit. Post-gap results assume that the reported additional funding is supplied.",
+    "Credit requires positive 40 year remaining-programme cash coverage including later capital, current DSCR headroom, reserve support and original-seed leverage limit. This is an aggregate lender screen, not a causal marginal-profit estimate.",
+    "Returns include actual dated seed, working cash and reserve contributions, later equity, payouts and separately identified terminal financial assets less debt. No factory sale or perpetual-value multiple is assumed.",
+    "The price rule compares financing arms on identical real deliveries and supplier costs. It limits added price pressure to 0.5 percent/year and 5 percent cumulatively relative to equity; it does not establish absolute inflation or exchange-rate behavior.",
+    "The socioeconomic proxy removes identified resident payroll and resource transfers, substitutes opportunitycost, and tests 0/50/100 percent purchaserprice value. Unmeasured research spillovers, consumer surplus, external harms and option value remain unpriced. GDP and credit are not extra benefits.",
+    "Constantreal discount rates 0/1/3/7 percent are project sensitivities through 200 years, not a claim that official appraisal guidance validates centuries-long forecasts. Year 200 annual operations and continuing renewal through 220 are reported separately.",
+    "Domestic transaction basket and social resident-service value are independent inputs, initially using the inherited illustrative consumption valuation. The monetary basket is tested at 0.5/1/2 times that reference; the resident benefit proxy is tested separately. Neither is observed domestic spending or measured willingness to pay.",
+    "Hotel staffing adds 0.25 resident worker per bed at the inherited 250000 USD2041 service-worker annual cost. Physical facilities and visitor consumption are supplied by provisioning; the commercial orderbook did not include these hotel wages, so this consumer adds them once.",
+    "The reference financial comparison carries the inherited 35 percent capital budget margin as an additional cost allowance on priced seed deployment and later capital, excluding earmarked resource provisions and working cash. It treats that allowance as spent, without creating additional output, and applies no operating-cost multiplier. Direct costs and a 100 percent capital allowance are separate sensitivities. This allowance does not qualify remaining installation, first-source sequencing or transit inventories.",
+    "Cash, custody and reserves earn zero real return in this comparison. Their opportunity cost is reflected in discounted sponsor cash; no investment yield or terminal factory sale is supplied."
+  ],
+  "distribution_policy": "completion_funded",
+  "domestic_transaction_basket_USD2041_person_year": 942717.9059875613,
+  "monetary_basket_multiplier": 1.0,
+  "monetary_basket_sensitivity": [
+    0.5,
+    1.0,
+    2.0
+  ],
+  "hotel_staff_per_bed": 0.25,
+  "hotel_staff_USD2041_year": 250000,
+  "physical_stress_products": [
+    {
+      "snapshot": "inputs/poor_lunar.json.gz",
+      "sha256": "94db53e1c6afa9ae0bc3319b7901e6b3a80143643bf196e429c14224180b565b",
+      "schema": "terluna.provisioning.enclosed-industry/1",
+      "source_repository_path": "provisioning/enclosed_industry/results/poor_lunar.json.gz",
+      "source_branch": "domain/provisioning",
+      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e"
+    },
+    {
+      "snapshot": "inputs/poor_source.json.gz",
+      "sha256": "d5d015e09667ab3c63a220f8bdb32aea81e4eb1ba41dcc1689d86a8b5d27c191",
+      "schema": "terluna.provisioning.enclosed-industry/1",
+      "source_repository_path": "provisioning/enclosed_industry/results/poor_source.json.gz",
+      "source_branch": "domain/provisioning",
+      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e"
+    },
+    {
+      "snapshot": "inputs/lifetimes.json.gz",
+      "sha256": "15ea5ada5f1a33c0db82e92a43fe6cf49cebb33b6d6a52a4937fe99a16b28422",
+      "schema": "terluna.provisioning.enclosed-industry/1",
+      "source_repository_path": "provisioning/enclosed_industry/results/lifetimes.json.gz",
+      "source_branch": "domain/provisioning",
+      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e"
+    }
+  ],
+  "capital_cost_allowance_fraction": 0.35,
+  "capital_cost_allowance_sensitivity": [
+    0.0,
+    1.0
+  ],
+  "cash_real_return": 0.0
+}

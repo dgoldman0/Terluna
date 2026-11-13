@@ -1,0 +1,52 @@
+{
+  "schema": "terluna.humanities.enclosed-market-inputs/1",
+  "first_productive_year": 8,
+  "ramp_start_year": 10,
+  "completion_year": 200,
+  "last_year": 220,
+  "commissioning_years": 2,
+  "seed_population": 12500,
+  "founding_population": 250000,
+  "cap_population": 6468289.238000949,
+  "seed_commercial_fraction": 0.05,
+  "commercial_capture_growth": 0.04,
+  "service_staff_fraction": 0.1,
+  "market_growth": {
+    "static": 0.0,
+    "reference": 0.005,
+    "wider": 0.01
+  },
+  "Earth_ground_service_USD2026_per_payload_kg": 150,
+  "delivered_quality_yield": 0.98,
+  "return_loss_probability": 0.01,
+  "reference_visitors_year": 10000,
+  "visitor_stay_nights": 14,
+  "visitor_occupancy": 0.7,
+  "visitor_USD2026_night": 20000,
+  "visitor_Earth_service_fraction": 0.1,
+  "year_days": 365.25,
+  "inherited_inputs": {
+    "../complex_returns/strategy_inputs.json": "ad8d3af2ec0a5614492536abd3bb10a21681cf08c17b8e52a46ab8af65500284",
+    "../complex_returns/staged_inputs.json": "31eb2fee9cda8744ba4e9c729c62d54f132a16ecb6c2c60ea52e3d6dc11cf2a5",
+    "../complex_returns/inputs/strategy_profiles.json": "68de393762a3411e0fc3fb2956c8d16c936c46019db70995cc3ccd5654449a9c",
+    "../complex_returns/inputs/economy.json": "960f413d25d2d9a61dea32cfa9c1695df57268ec708b1ab1a86b59bffcc44961",
+    "../complex_returns/strategies.py": "f33d10804a4018e9de888272254b56fe3178016731d1c87063ea35f97f80cd19",
+    "../complex_returns/staged.py": "49635fa8607a5f8b1d5b467765aeff419daac4cf701eeeef2d35dea955e0198a"
+  },
+  "additional_source": {
+    "path": "/home/kir/Documents/Projects/terluna-provisioning/research/studies/initial_industrial_system/revenue_inputs.json",
+    "sha256": "7d8884f8e2386536789f29f6b532ccd9ae1e49511a32455c1a3d7bf5c1c61b94",
+    "commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888",
+    "fields": "return,manufacturing,visitors,markets.reference"
+  },
+  "rules": [
+    "The established population target supplies residential demand, not a multiplier for industrial plants, fleets or exported goods. First seed production is in year8; the cap is reached in year200 and held throughyear220.",
+    "Customer scenarios retain their original initial audience, acceptance, competition and price assumptions. Annual real spending intensity, institutional contract counts and budget envelopes are tested at0,0.5,1percent growth throughyear200, then held; none is a forecast. Audience headcounts remain bounded at their scenario level.",
+    "Commercial supplier capture starts at5percent of the inherited reference portfolio, increases at an assumed4percent peryear, and is clipped to actual customer budgets. Provisioning must price and deliver that request; finance must separately establish that it can be funded. No population-linked replication or automatic unlimited demand is permitted.",
+    "A necessary cost screen rejects Earth-bound material offers below the inherited150USD2026/kg ground-service cost before counting revenue or production. Other positive-price offers are not certified profitable by that screen.",
+    "Service capacity starts with one kit. Additional kits are requested at most one peryear, with two-year lead and a10percent resident workforce planning allowance. The old20-kit ceiling is removed; the production consumer must still verify simultaneous jobs, physical installation and power.",
+    "Cultural and institutional exports retain variable partner/platform costs, acquisition, wages, fixed purchases and quoted capital/renewal allowances. Identified service facility costs must be credited against these allowances to avoid paying for the same assets twice.",
+    "Destination receipts purchase only stays. Beds, staff, utilities and materials are passed to provisioning. Travel access fares and passenger-safe fleet qualification remain separate; no visitor transport receipt is counted.",
+    "Research/compute/professional invoices share institutional budgets; mission research/fuel/support share a mission budget; culture/licensing/stays share a household budget. Internal computing and research are capacity uses rather than extra receipts."
+  ]
+}

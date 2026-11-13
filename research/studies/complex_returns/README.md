@@ -1,6 +1,6 @@
 # Socioeconomic returns of the founding off Earth complex
 
-The [year-200 completion appraisal](../vacuum_buildout/returns.md) evaluates the newer prescribed ramp to 6.468 million people, with a year-100 checkpoint, added machinery and explicit outside funding. The studies below preserve the earlier cash-constrained paths and their accounting methods.
+The [proportional year-200 appraisal](../vacuum_buildout/README.md) is withdrawn. The earlier studies below retain historical cash-constrained comparisons; their proportional capacity assumptions do not establish the cost of a mature enclosed economy.
 
 The founding cities, crater towns, mines, factories, power systems and transport network form a shared productive system. Its return concerns the people and institutions who finance it, work in it, buy its products, use its research and experience its consequences. Most of those stakeholders need not reside on the Moon. This appraisal covers the planned economic zone beyond Earth through the enclosed-development stages, including the source operations and depots in the current provisioning account. The Open Moon, planetary array and subsequent outer Solar System buildout lie outside this boundary.
 
