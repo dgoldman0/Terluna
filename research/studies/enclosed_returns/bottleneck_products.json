@@ -1,0 +1,25 @@
+{
+  "orders": {
+    "path": "results/bottleneck_orders.json",
+    "sha256": "5a47a037110c425fe91d153b577243ce8866d92ce7a2b8a2d07435227d120ff6",
+    "schema": "terluna.humanities.enclosed-bottleneck-orders/1",
+    "source_branch": "domain/humanities",
+    "source_path": "research/studies/enclosed_returns/results/bottleneck_orders.json"
+  },
+  "physical": {
+    "path": "inputs/bottleneck_industry.json.gz",
+    "sha256": "64b3ecb13980b4e0fe6bdb52075338c22670d293b31aa37a67d094b67aaec74e",
+    "schema": "terluna.provisioning.enclosed-industry/1",
+    "source_branch": "domain/provisioning",
+    "source_path": "provisioning/enclosed_industry/results/bottlenecks.json.gz",
+    "source_commit": "a6df1bec78ad533f8868ef40a7df81906a3baa38"
+  },
+  "resources": {
+    "path": "inputs/bottleneck_mining.json.gz",
+    "sha256": "4ed0496b68e95806c8a823e823a84088117f9478a2f4b636293a00c28cc3cb71",
+    "schema": "terluna.resources.enclosed-mining/1",
+    "source_branch": "domain/resources",
+    "source_path": "resources/enclosed_mining/results/bottlenecks.json.gz",
+    "source_commit": "0d4aee389de1bbe46f6d78ff7dfca7fa50301a89"
+  }
+}

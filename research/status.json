@@ -1583,9 +1583,9 @@
         "The replacement uses actual dated work and component stocks in provisioning, finite inventory conditions in resources, and a separate financial consumer."
       ],
       "unresolved": [
-        "A demand-sized operating and replacement asset account, finite source assessment and linked financial reappraisal."
+        "Qualified source access, dated deployment, staffing performance and investment commitments remain unestablished."
       ],
-      "next_session_task": "Replace proportional plant replication with demand-driven production, transport and asset cohorts in the owning domains; recalculate financing and socioeconomic returns."
+      "next_session_task": "Use the replacement domain products and stratified economic account to assess feasible industrial schedules; retain the proportional-model withdrawal."
     },
     {
       "topic": "enclosed_industrial_returns",
@@ -1593,7 +1593,10 @@
       "material": [
         "studies/enclosed_returns/README.md",
         "studies/enclosed_returns/results/returns.json",
-        "studies/enclosed_returns/checks.md"
+        "studies/enclosed_returns/checks.md",
+        "studies/enclosed_returns/bottlenecks.md",
+        "studies/enclosed_returns/results/bottlenecks.json",
+        "studies/enclosed_returns/bottleneck_checks.md"
       ],
       "source_commits": {
         "provisioning": "3e04591148223b079ecd255416555b8d4a4d4f7e",
@@ -1602,8 +1605,20 @@
       "findings": [
         "87 physical cases and three financing modes are evaluated at years 100, 200 and 220; residential capacity reaches 6468289 people in year 200.",
         "The central comparison includes a 35 percent capital-cost allowance. At breakthrough demand with 0.5 percent real growth, three portfolios fund the prescribed build without additional equity and two have positive year-200 operating cash.",
-        "Higher worldwide spending and contract growth changes the results materially; catalogue mass, proposed chemical transport and financial returns remain separate evidence states."
-      ]
+        "Higher worldwide spending and contract growth changes the results materially; catalogue mass, proposed chemical transport and financial returns remain separate evidence states.",
+        "A stratification of all81 baseline cases reconciles initial investment, cumulative distributions, discounted funder cash, commercial costs and the carrying cost of retained financial balances without changing the baseline.",
+        "Twenty-eight demand, rollout and component-life physical cases reproduce four controls exactly. Twenty-one pass the numerical workforce/equipment screens; seven retain workforce failures and receive no completed financial return estimate.",
+        "At breakthrough demand and0.5percent real growth, faster propellant/service rollout raises year200 funder NPV from5.91 to13.25trillion USD2041 at unchanged demand, but does not change the negative final operating margin. Stronger demand and longer component life address different sustaining constraints.",
+        "Purchased commercial inputs consume much of early discounted revenue; zero-real-yield retained cash also reduces funder NPV. Unpriced research spillovers, option value and supplier transfers remain separate from sponsor cash."
+      ],
+      "diagnostic_source_commits": {
+        "provisioning": "a6df1bec78ad533f8868ef40a7df81906a3baa38",
+        "resources": "0d4aee389de1bbe46f6d78ff7dfca7fa50301a89"
+      },
+      "unresolved": [
+        "An economically qualified workforce and deployment schedule for accelerated manufacturing; source supply; verified commercial input margins and demand; liquid investment arrangements for retained funds."
+      ],
+      "next_session_task": "Assess dated labor and production alternatives, priced reductions in transport/replacement costs and treasury arrangements against the stratified baseline without admitting failed capacity cases."
     }
   ]
 }

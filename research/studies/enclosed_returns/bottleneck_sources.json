@@ -1,0 +1,18 @@
+{
+  "schema": "terluna.research.selected-method-reading/1",
+  "accessed": "2026-11-13",
+  "sources": [
+    {
+      "title": "HM Treasury, The Green Book 2026",
+      "updated": "2026-10-28",
+      "url": "https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026",
+      "sections_read": [
+        "Shortlist appraisal: Discounting",
+        "Shortlist appraisal: Sensitivity analysis and switching values",
+        "Overview: monetisable and unmonetisable considerations"
+      ],
+      "use": "Methodological support for separating dates, monetary and unpriced effects, and conditional parameter tests. No empirical lunar market or engineering calibration.",
+      "limits": "Selected sections, not a full scholarly source review. Project constant discount rates are sensitivities; the official declining social-rate schedule is not adopted."
+    }
+  ]
+}

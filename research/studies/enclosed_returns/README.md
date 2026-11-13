@@ -6,6 +6,8 @@ U remains the general economic unit and possible currency or basket of U-related
 
 Equipment is now sized from actual work, retained when useful and replaced by component age. Population no longer multiplies the founding fleet. The results also include a 35% capital-cost allowance, the existing U credit and partial-reserve rules, and costs for commercial facilities and visitor accommodation. They replace the withdrawn proportional year-200 calculation; its original code and numbers remain in Git history.
 
+The [stratified bottleneck analysis](bottlenecks.md) now separates payout timing, commercial expenses, physical sustaining costs and financial retention. It preserves this baseline and adds 28 controlled physical cases: 21 pass the modeled capacity screens and seven faster manufacturing/service combinations exceed the workforce allowance. In the propellant/reference case, faster rollout raises year-200 funder NPV from 5.91 to 13.25 trillion USD2041 at unchanged demand, while leaving the final operating deficit unchanged. The analysis also reconciles the optimistic 11.94 trillion NPV with 347.65 trillion of cumulative payouts and a 6.20% real annual return; those are different measures of the same cash path.
+
 ## Financial comparison at years 100 and 200
 
 The table uses the breakthrough market, 0.5% real demand growth and the U financing arm. All amounts are **trillion constant USD2041**; operating cash is an annual flow after renewal and provisions, before new capital and debt service. Sponsor net present value (NPV) discounts actual distributions less all funder contributions at 3% real, without adding terminal asset claims. Completion after an additional-equity requirement is conditional on receiving that funding.
