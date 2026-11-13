@@ -1,0 +1,84 @@
+{
+  "schema": "terluna.resources.composition-inputs/1",
+  "archive_directory": "research/runs/source_access/inputs/composition",
+  "retrieved": "2026-11-13",
+  "jpl": {
+    "path": "/media/projectspace/terluna-research/initial-industrial-system/revenue/nea_catalogue.json",
+    "sha256": "14f20ec966039c91e884e7c4ae58508a10f0ecf87acd5e971392f912b38baaa0",
+    "bytes": 6186497,
+    "expected_rows": 43050,
+    "url": "https://ssd-api.jpl.nasa.gov/sbdb_query.api?fields=spkid%2Cfull_name%2Cdiameter%2Cdiameter_sigma%2Calbedo%2Cspec_B%2Cspec_T%2Ca%2Ce%2Cq%2Ci%2CH&sb-group=neo&sb-kind=a&full-prec=true",
+    "cache_path": "research/runs/source_access/inputs/neo/nea_catalogue.json"
+  },
+  "survey": {
+    "name": "MITHNEOS Marsset et al. (2022) Table 7",
+    "filename": "ajac532ft7_mrt.txt",
+    "url": "https://content.cld.iop.org/journals/1538-3881/163/4/165/revision1/ajac532ft7_mrt.txt",
+    "bytes": 191205,
+    "sha256": "fe8d6ff486fc1342a19ef45b2aa6050e407f5a0656d9d4f3f6c1a9704d6a8876",
+    "paper_doi": "10.3847/1538-3881/ac532f",
+    "author_version": "https://arxiv.org/html/2202.13796v1",
+    "catalogue_doi": "10.26093/cds/vizier.51630165",
+    "expected_observations": 491,
+    "expected_identifier_groups": 419,
+    "published_object_count": 420,
+    "record_layout": "Journal machine-readable Table 7; byte offsets 1-32 filename, 34-39 number, 41-50 designation, 124-129 taxonomy; source includes the complete byte-layout header."
+  },
+  "wider_screen": {
+    "a_max_au": 1.8,
+    "e_max": 0.5,
+    "i_max_deg": 30,
+    "albedo_max": 0.1,
+    "positive_measured_diameter_required": true,
+    "excluded_numbers": [
+      433,
+      25143,
+      101955,
+      162173
+    ],
+    "expected_count": 131
+  },
+  "source_reading": [
+    {
+      "url": "https://arxiv.org/html/2202.13796v1",
+      "scope": "Sections 2.1-2.2 on survey and taxonomy; 3.1 on selection/debiasing; Appendix E Table 7 definitions. Near-infrared C/X degeneracy, uncertain colon flags and low-SNR exclusion are implemented; published global debiasing weights are not transplanted."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/ReadMe/J/AJ/163/165?format=html&tex=true",
+      "scope": "Complete catalogue description and byte layout, checked against journal original and retrieved CDS Harvard mirror."
+    },
+    {
+      "url": "http://smass.mit.edu/minus.html",
+      "scope": "Survey provenance, spectral coverage and data-use statement. MIT calls the spectra public domain and requests acknowledgement; that statement is not extended to every publisher-hosted derivative."
+    },
+    {
+      "url": "https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html",
+      "scope": "spkid, full_name, orbital and spectral-type query field definitions."
+    }
+  ],
+  "rights_scope": "The full publisher table and catalogue mirror remain ignored external inputs. The committed product contains derived summaries, object-level joins and minimal identifying classifications with citation. No redistribution permission for the full publisher-hosted table is inferred from the MIT spectra data-use statement.",
+  "aggregation": "Each matched JPL object is counted once. Source classes remain attached to observations. Colon uncertainty is recorded; double-colon low-SNR and U are excluded from usable groups. Subclasses are grouped only by explicit mapping; cross-family disagreements remain conflicts. No majority vote or SNR ranking is invented.",
+  "limits": [
+    "Observed-sample fractions are not an unbiased NEA population estimate. Discovery, brightness, size, sky access, observing choices, albedo screening and frozen-catalogue membership affect selection.",
+    "Taxonomy is a spectral resemblance, not a water, nitrogen or metal assay; no resource grade, recovery or reserve quantity is derived.",
+    "JPL and MITHNEOS can cite overlapping underlying observations. Their union adds catalogue coverage, not independent statistical samples.",
+    "The source paper reports 420 objects; published Table 7 has 419 distinct number/designation identities and 420 filename prefixes because numbered 381677 is also au2009bj81. The implementation preserves this discrepancy.",
+    "Uniform density 1500 kg/m3 and spherical diameter-derived volumes are inherited screening assumptions, not measured masses. Missing diameters retain unknown mass. Completion scenarios and finite-catalogue identification bounds are conditional on accepted labels; neither is a statistically unbiased composition estimate."
+  ],
+  "density_assumption_kg_m3": 1500,
+  "narrow_screen": {
+    "a_max_au": 1.3,
+    "e_max": 0.3,
+    "i_max_deg": 15,
+    "albedo_max": 0.1,
+    "positive_measured_diameter_required": true,
+    "excluded_numbers": [
+      433,
+      25143,
+      101955,
+      162173
+    ],
+    "expected_count": 17,
+    "a_min_au": 0.8
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "schema": "terluna.resources.source-lightcurve-inputs/1",
+  "archive_directory": "research/runs/source_access/inputs/lightcurves",
+  "neo_inputs": "access_inputs.json",
+  "source_release_date": "2023-10-01",
+  "retrieved": "2026-11-13",
+  "archive": {
+    "filename": "LCLIST_PUB_CURRENT.zip",
+    "url": "https://minplanobs.org/MPInfo/datazips/LCLIST_PUB_CURRENT.zip",
+    "sha256": "1a200680375897fbd62143572b2078137a0d42b170eabb764b1b1eef620640e2",
+    "bytes": 39966552,
+    "restoration_rule": "The public current-release URL is mutable. Changed bytes fail identity checks; obtain the pinned 2023 snapshot or explicitly review a new release rather than substituting it silently."
+  },
+  "members": [
+    {
+      "name": "lc_summary_pub.txt",
+      "sha256": "e5ae1e95416e934e9e5b5bf7ca6cbadb3ce35c90b08656a8c4c241102e73cf31",
+      "bytes": 7941242
+    },
+    {
+      "name": "readme.pdf",
+      "sha256": "2ef73c2aa4531666cd4b74f816ca821c7501cc926c17e2cfbe3c11ae86564f5e",
+      "bytes": 708543
+    }
+  ],
+  "quality_codes_for_statistical_studies": [
+    "2-",
+    "2",
+    "2+",
+    "3-",
+    "3"
+  ],
+  "column_map_source": "LCDB 2023 README section 4.1.3; period-quality interpretation sections 4.1.2 and 4.1.6.",
+  "rights": {
+    "citation": "Warner, B.D., Harris, A.W., Pravec, P. (2009), Icarus 202, 134\u2013146. Updated 1 October 2023.",
+    "source_page": "https://minorplanet.info/php/lcdb.php",
+    "status": "Public files distributed for general research use with requested citation; the site retains copyright. No blanket raw-data redistribution license is asserted. Only factual derived coverage and selected rotational fields are included here; raw archives remain ignored."
+  },
+  "reading_rule": "Period quality measures solution reliability, not resource grade or all underlying data quality. Greater/less-than/uncertain flags, survey and unpublished flags remain attached. A quality-2 solution can have substantial or integer-ratio error. Binary/tumbling notes require detail/original-record review; blank flags do not establish a single non-tumbling body. No contact-binary status is inferred. LCDB sizes/albedos/taxonomies may be assumed and are deliberately not imported. Unmatched objects remain unknown; the source predates the retained JPL catalogue.",
+  "auxiliary_sources": [
+    {
+      "name": "ALCDEF scientific-use and data-sharing policy",
+      "url": "https://alcdef.org/php/alcdef_dataPolicy.html",
+      "retrieved": "2026-11-13",
+      "sha256": "8ac9fae7093c839d9e4521c45ff4400da6a96b5fa730095fc631da8d24b771c8",
+      "status": "Metadata only. Downloaded data are restricted to scientific research and exclude commercial-gain uses. This result distributes no ALCDEF photometry or personal contact information.",
+      "community_evidence_url": "https://sbn.psi.edu/pds/resource/alcdef.html"
+    },
+    {
+      "name": "ALCDEF 2007 BT2 coverage",
+      "url": "https://alcdef.org/php/alcdef_GenerateALCDEFPage.php",
+      "retrieval": "Public search and object-display forms, object 256412 / 2007 BT2; selected download IDs 722292,722294,722293,722295.",
+      "retrieved": "2026-11-13",
+      "raw_response_sha256": "da1a4d5b445097e8674c4d25c316c13def564cb67f0603d32caad0a6465f8ab1",
+      "raw_response_bytes": 8226,
+      "blocks": 4,
+      "photometric_measurements": 36,
+      "first_date": "2009-03-27",
+      "last_date": "2009-04-22",
+      "status": "Access demonstration only; no photometry distributed, no independent fitting or spin qualification. LCDB summary remains a period lower limit above 20 hours without a quality rating."
+    },
+    {
+      "name": "ALCDEF 1989 UQ coverage",
+      "url": "https://alcdef.org/php/alcdef_GenerateALCDEFPage.php",
+      "retrieval": "Public object-display form, selectedObject=1989 UQ.",
+      "retrieved": "2026-11-13",
+      "page_sha256": "5999ed8b185ca2908b481e9de7068e0c0e04c37e2a60cc19e76e2f81ece2227f",
+      "blocks_listed": 7,
+      "first_date": "2010-10-08",
+      "last_date": "2017-10-13",
+      "status": "Metadata only; blocks can overlap or duplicate and are not seven independent observing nights. No photometry distributed."
+    }
+  ]
+}

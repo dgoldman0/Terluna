@@ -1,0 +1,77 @@
+{
+  "schema": "terluna.resources.source-access-sources/1",
+  "retrieved": "2026-11-13",
+  "sources": [
+    {
+      "id": "sbdb",
+      "title": "NASA/JPL Small-Body Database",
+      "url": "https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html",
+      "reading_scope": "Complete retained catalogue and 13 detailed object records; API field, uncertainty and signature documentation inspected. Individual parameter references and caveats retained in product.",
+      "limits": "A mixed curated catalogue, not an independent mine assay; missing diameters and taxonomies remain missing."
+    },
+    {
+      "id": "nhats",
+      "title": "NASA/JPL NHATS",
+      "url": "https://ssd-api.jpl.nasa.gov/doc/nhats.html",
+      "reading_scope": "API query parameters, result definitions and complete selected summary response read.",
+      "limits": "Human Earth round trips in a finite launch window; no recurring cislunar cargo route qualification."
+    },
+    {
+      "id": "nugent2016",
+      "title": "Nugent et al., NEOWISE Reactivation Year Two",
+      "url": "https://arxiv.org/abs/1606.08923",
+      "reading_scope": "Abstract and diameter/albedo comparison discussion, PDF pp.13\u201315; selected model-error interpretation.",
+      "limits": "20% diameter/40% albedo comparison scatter is sample/method dependent; no universal prior or confidence interval imposed."
+    },
+    {
+      "id": "masiero2021",
+      "title": "Masiero et al., NEOWISE Reactivation Years Six and Seven",
+      "url": "https://arxiv.org/abs/2107.07481",
+      "reading_scope": "Abstract, formal fitting uncertainty discussion and diameter accuracy section 5.1 inspected.",
+      "limits": "30% comparison scatter motivates an additional structural scenario, not a pooled Gaussian error law."
+    },
+    {
+      "id": "yokoyama2023",
+      "title": "Yokoyama et al., Samples returned from Ryugu",
+      "url": "https://doi.org/10.1126/science.abn7850",
+      "reading_scope": "Author-institution PDF abstract and journal p.7 water-release/content discussion; https://faculty.epss.ucla.edu/~eyoung/reprints/Yokoyama_2022.pdf",
+      "limits": "6.84 \u00b1 0.34 wt% sample H2O equivalent; structural hydroxyl dominates. No candidate-wide assay or industrial recovery estimate."
+    },
+    {
+      "id": "engineering",
+      "title": "Frozen enclosed-industry engineering product",
+      "url": "../../provisioning/enclosed_industry/inputs/engineering.json",
+      "reading_scope": "Subset copied with upstream SHA-256 and source commit in inputs/cost_coefficients.json. Equipment rates, prices, lifetimes, margins and allowances inspected.",
+      "limits": "Engineering assumptions, not observed industrial costs. A chemistry-per-watt proxy for thermal extraction is newly proposed and explicitly unqualified."
+    },
+    {
+      "id": "lunar",
+      "title": "Lunar primary survey and process sources",
+      "url": "lunar_sources.json",
+      "reading_scope": "Detailed per-source reading and archive identities in the companion register.",
+      "limits": "Spatial composition and formal covariance, not approved site reserves."
+    },
+    {
+      "id": "protection",
+      "title": "Project conservation and cargo requirements",
+      "url": "protocols.md",
+      "reading_scope": "Seven pinned local source records; accepted decisions and proposed conditions distinguished individually.",
+      "limits": "Evaluator tests supporting-record completeness; does not verify attestation truth or authorize extraction."
+    },
+    {
+      "id": "mithneos",
+      "title": "Marsset et al. (2022) MITHNEOS spectral catalogue",
+      "url": "https://doi.org/10.3847/1538-3881/ac532f",
+      "reading_scope": "Methods, class flags and selection/debiasing discussion; complete publisher Table 7 joined by object identity, checked against CDS mirror. Exact bytes and reading record in composition_inputs.json.",
+      "limits": "Taxonomic families and conditional missing-label allocation, not measured ore grades; published 420-object versus 419-identity discrepancy retained."
+    },
+    {
+      "id": "lightcurves",
+      "title": "LCDB 2023 and pro-am observation coverage",
+      "url": "https://minorplanet.info/php/lcdb.php",
+      "reading_scope": "Complete fixed-width summary, README field map and reliability definitions. Independent ALCDEF access checked; identities and terms in lightcurve_inputs.json.",
+      "limits": "Rotation/shape context only. No LCDB assumed sizes/composition imported; no ALCDEF photometry redistributed. BAA yielded no candidate spectra; M4AST retrieval failed, with no substitute data or claim."
+    }
+  ],
+  "rights": "External raw catalogues and full papers remain outside Git. Derived calculations include source credit and hashes. Independent catalogue rights and source identities are retained in their own products."
+}

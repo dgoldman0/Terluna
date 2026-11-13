@@ -1,0 +1,258 @@
+{
+  "schema": "terluna.resources.source-access-inputs/1",
+  "archive_directory": "research/runs/source_access/inputs/neo",
+  "external_files": [
+    {
+      "path": "nea_catalogue.json",
+      "url": null,
+      "sha256": "14f20ec966039c91e884e7c4ae58508a10f0ecf87acd5e971392f912b38baaa0",
+      "bytes": 6186497,
+      "accessed": "2026-11-12",
+      "archive": "/media/projectspace/terluna-research/initial-industrial-system/revenue/nea_catalogue.json",
+      "status": "retained historical snapshot; fresh API query cannot guarantee same bytes"
+    },
+    {
+      "path": "nhats_summary.json",
+      "url": "https://ssd-api.jpl.nasa.gov/nhats.api?dv=12&dur=450&stay=8&launch=2020-2045",
+      "sha256": "92c35bd3c3196db00b8c6aacddd24c24b8abb8e586d9d03eb3dbec13c665ff41",
+      "bytes": 2580410,
+      "accessed": "2026-11-13",
+      "signature": {
+        "source": "NASA/JPL NHATS Data API",
+        "version": "1.3"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20256412.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20256412&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "da33a8a6e7180ed3c91f13385d9db7fee72ef9e8173d81e34fa6ebf331c42777",
+      "bytes": 3225,
+      "accessed": "2026-11-13",
+      "signature": {
+        "source": "NASA/JPL Small-Body Database (SBDB) API",
+        "version": "1.3"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20003554.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20003554&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "a745006d64f42f8d1a935b2851b3cc73df188657d43475879ff857873e429ca1",
+      "bytes": 4258,
+      "accessed": "2026-11-13",
+      "signature": {
+        "version": "1.3",
+        "source": "NASA/JPL Small-Body Database (SBDB) API"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20025330.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20025330&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "679d95b33d49fb4c5ad8cd256a804e18ba9ac1d801a8964c08fa8d4cedcf0df2",
+      "bytes": 3236,
+      "accessed": "2026-11-13",
+      "signature": {
+        "version": "1.3",
+        "source": "NASA/JPL Small-Body Database (SBDB) API"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20248926.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20248926&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "00ce9c202dc19f460831a0f1fc7da97a3fb22156433e2446807a4466dd355a05",
+      "bytes": 3130,
+      "accessed": "2026-11-13",
+      "signature": {
+        "version": "1.3",
+        "source": "NASA/JPL Small-Body Database (SBDB) API"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20153271.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20153271&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "67831ccc53746c40b4c9fd2a01e7d9b780b2d34513d8986725221f70504ec4b8",
+      "bytes": 2840,
+      "accessed": "2026-11-13",
+      "signature": {
+        "version": "1.3",
+        "source": "NASA/JPL Small-Body Database (SBDB) API"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20007350.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20007350&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "75376b58aac85ba448ccdb0965d5c72411a23e960cb71667a9c81c429b837634",
+      "bytes": 4199,
+      "accessed": "2026-11-13",
+      "signature": {
+        "version": "1.3",
+        "source": "NASA/JPL Small-Body Database (SBDB) API"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20161989.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20161989&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "b184dfd018fd3d40ec99d93f659680d11f8a262207db98b2a8a02fa776151ab4",
+      "bytes": 5171,
+      "accessed": "2026-11-13",
+      "signature": {
+        "version": "1.3",
+        "source": "NASA/JPL Small-Body Database (SBDB) API"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20363505.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20363505&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "58bcaa190fc04da1f11b7ea9677a784368c4f0b63923c7a8a7a29f0111847dcf",
+      "bytes": 4140,
+      "accessed": "2026-11-13",
+      "signature": {
+        "source": "NASA/JPL Small-Body Database (SBDB) API",
+        "version": "1.3"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20434632.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20434632&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "b7869373cdbbfbfa258ac0a7e644ba235ea9ab58001b3dcc5e2510f30461d5c9",
+      "bytes": 3736,
+      "accessed": "2026-11-13",
+      "signature": {
+        "version": "1.3",
+        "source": "NASA/JPL Small-Body Database (SBDB) API"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20464798.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20464798&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "cec8fd47329f7992e3fed7344d6ed82b7edd9519bc0ee24c3520e9ff0638a17f",
+      "bytes": 3229,
+      "accessed": "2026-11-13",
+      "signature": {
+        "version": "1.3",
+        "source": "NASA/JPL Small-Body Database (SBDB) API"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20065679.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20065679&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "361e6631428c712cbc03b41c27de75f36c478ac3a42e3a09bfee36810f6b730a",
+      "bytes": 4533,
+      "accessed": "2026-11-13",
+      "signature": {
+        "version": "1.3",
+        "source": "NASA/JPL Small-Body Database (SBDB) API"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20101955.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20101955&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "4d21fc30bc6454d791ade9a536657426e99b3a287f708d07b9ad5798f2beac6f",
+      "bytes": 5766,
+      "accessed": "2026-11-13",
+      "signature": {
+        "source": "NASA/JPL Small-Body Database (SBDB) API",
+        "version": "1.3"
+      },
+      "status": "retrieved"
+    },
+    {
+      "path": "sbdb_20162173.json",
+      "url": "https://ssd-api.jpl.nasa.gov/sbdb.api?spk=20162173&phys-par=1&full-prec=1&alt-des=1",
+      "sha256": "4c24988604f3c49c894d3bf2d1bde37d6e2477a30c0a4349a7859f38baf6d6d0",
+      "bytes": 5201,
+      "accessed": "2026-11-13",
+      "signature": {
+        "source": "NASA/JPL Small-Body Database (SBDB) API",
+        "version": "1.3"
+      },
+      "status": "retrieved"
+    }
+  ],
+  "density_reference_kg_m3": 1500,
+  "density_scenario_kg_m3": [
+    1000,
+    2200
+  ],
+  "common_diameter_scale_scenarios": [
+    0.2,
+    0.3
+  ],
+  "diameter_scale_rule": "Common multiplicative stress, not a probability distribution or a confidence limit; density bracket is a proposal informed by sample-return body densities, not an assay of candidates.",
+  "geometry": {
+    "narrow": {
+      "a_min": 0.8,
+      "a_max": 1.3,
+      "e_max": 0.3,
+      "i_max": 15
+    },
+    "wider": {
+      "a_min": 0,
+      "a_max": 1.8,
+      "e_max": 0.5,
+      "i_max": 30
+    }
+  },
+  "maximum_albedo": 0.1,
+  "cost_coefficients": {
+    "path": "inputs/cost_coefficients.json",
+    "sha256": "c7c191c8726b4f440cb0dc6f5c28c15120cedacbbe7be268deb4f8420bc2f7cb"
+  },
+  "demand": {
+    "path": "../enclosed_mining/inputs/industry.json.gz",
+    "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+    "schema": "terluna.provisioning.enclosed-industry/1"
+  },
+  "checkpoints": [
+    100,
+    200,
+    220
+  ],
+  "costs": {
+    "real_capital_rate": 0.03,
+    "cases": {
+      "favorable": {
+        "equipment_cost_multiplier": 0.5,
+        "electricity_USD2041_kWh": 0.05,
+        "availability_multiplier": 1.2,
+        "water_grade": 0.1,
+        "water_recovery": 0.8,
+        "ore_energy_multiplier": 0.5
+      },
+      "reference": {
+        "equipment_cost_multiplier": 1,
+        "electricity_USD2041_kWh": 0.15,
+        "availability_multiplier": 1,
+        "water_grade": 0.0684,
+        "water_recovery": 0.7,
+        "ore_energy_multiplier": 1
+      },
+      "adverse": {
+        "equipment_cost_multiplier": 2,
+        "electricity_USD2041_kWh": 0.5,
+        "availability_multiplier": 0.6,
+        "water_grade": 0.03,
+        "water_recovery": 0.5,
+        "ore_energy_multiplier": 2
+      }
+    },
+    "water_grade_status": "Reference is a Ryugu returned-sample analogue (Yokoyama et al.), with 3 and 10 wt% scenario bounds. None is an assay or population quantile of a candidate source. Ryugu itself remains excluded.",
+    "oxide_equivalent_recovery_trials": [
+      0.5,
+      0.7,
+      0.9
+    ],
+    "unit_cost_status": "Partial standalone equipment, energy and feed provisions at the process gate, expressed in constant USD2041 for continuity. Not U exchange rates, consolidated project cash, delivered prices or empirically qualified total costs."
+  }
+}

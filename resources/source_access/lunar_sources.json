@@ -1,0 +1,88 @@
+{
+  "schema": "terluna.resources.lunar-composition-sources/1",
+  "accessed": "2026-11-13",
+  "sources": [
+    {
+      "id": "prettyman_pds_2012",
+      "title": "Lunar Prospector GRS Elemental Abundance V1.0",
+      "url": "https://pds-geosciences.wustl.edu/missions/lunarp/grs_elem_abundance.html",
+      "data_product_lidvid": "urn:nasa:pds:lp_grs_derived:data:lpgrs_high1_elem_abundance_5deg::1.1",
+      "reading_scope": "Archive introduction, full dataset.cat, PDS4 identifier and all field descriptions; every row of the 5-degree table parsed. Exact bytes and hashes in lunar_inputs.json.",
+      "claims": "Peer-reviewed archive of oxide mass fractions and formal covariance; metadata label revision 2024-07-09 changes XML schema syntax only.",
+      "limits": "Surface composition; no mineral extraction, deposit depth or economic reserve. The older special-products archive is not substituted."
+    },
+    {
+      "id": "prettyman_2006",
+      "title": "Elemental composition of the lunar surface: Analysis of gamma ray spectroscopy data from Lunar Prospector",
+      "doi": "10.1029/2005JE002656",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2005JE002656",
+      "reading_scope": "Introduction and data description; formal covariance and systematic errors paragraphs 63\u201367; Si/Ca discussion paragraphs 95\u201396; conclusions.",
+      "claims": "Shallow sensing, approximately five-degree resolution; covariance beyond diagonal variances; documented systematic errors and nonclosure.",
+      "limits": "Formal covariance omits systematic uncertainty and does not rigorously model every constraint. Spatial cells are not demonstrated independent."
+    },
+    {
+      "id": "usgs_sourcebook_7_15",
+      "title": "Lunar Sourcebook Table 7.15: Chemical compositions of lunar soils",
+      "url": "https://lunar-consortium.astrogeology.usgs.gov/data/chem_min/tab7_15.pdf",
+      "reading_scope": "Two-page PDF and ASCII table, sample/site columns and references.",
+      "claims": "Contextual mare/highland sampled-composition contrasts; institutional compilation, not new original analysis.",
+      "limits": "Original measurement papers not separately read; apparent Na2O and phosphorus-label transcription errors preclude silent automatic ingestion; not consumed by this model."
+    },
+    {
+      "id": "colaprete_2010",
+      "title": "Detection of Water in the LCROSS Ejecta Plume",
+      "doi": "10.1126/science.1186986",
+      "url": "https://cfpl.ae.utexas.edu/wp-content/uploads/2010/10/science_article.pdf",
+      "reading_scope": "Abstract, Table 1 journal page 465/PDF page 4, interpretation and limitations journal page 467/PDF page 6.",
+      "claims": "Cabeus observed-ejecta water estimate 5.6 \u00b1 2.9 wt%; site-specific depth/footprint/heating limitations.",
+      "limits": "No polar reserve or full geological confidence distribution; full article not redistributed."
+    },
+    {
+      "id": "li_2018",
+      "title": "Direct evidence of surface exposed water ice in the lunar polar regions",
+      "doi": "10.1073/pnas.1802345115",
+      "url": "https://www.pnas.org/doi/full/10.1073/pnas.1802345115",
+      "reading_scope": "Abstract, distribution discussion, Figure 4 and Methods.",
+      "claims": "Approximately 280 m optical-surface pixels; patchy ice exposure.",
+      "limits": "Surface exposure fraction and spectral mixing estimates do not determine excavatable depth, bulk water grade or permitted access."
+    },
+    {
+      "id": "leger_2025",
+      "title": "Modeling energy requirements for oxygen production on the Moon",
+      "doi": "10.1073/pnas.2306146122",
+      "url": "https://publikationen.bibliothek.kit.edu/1000180152/157902327",
+      "reading_scope": "Tables 1\u20132, discussion, mass-yield/energy methods, reactor assumptions PDF pages 5\u20139.",
+      "claims": "Grade/enrichment-sensitive hydrogen-reduction chain; 24.3\u00b15.8 kWh/kg LOX at 10 wt% ilmenite. Reported spread derives from chosen parameter ranges, not plant measurements.",
+      "limits": "Oxygen-led model not finished-metal energy calibration; 100% uptime assumed. No process coefficient adopted by lunar.py."
+    },
+    {
+      "id": "sanders_kleinhenz_2025",
+      "title": "Progress Review of NASA Lunar ISRU Development, 2019 to 2025",
+      "url": "https://ntrs.nasa.gov/api/citations/20250003730/downloads/Progress%20Review%20NASA%20Lunar%20ISRU_Sanders.pdf",
+      "reading_scope": "Slides 6\u20139 on oxygen/metal and polar-water demonstrations.",
+      "claims": "Apparatus-specific extraction and processing evidence.",
+      "limits": "No mature industrial cost, equipment-lifetime or universal recovery calibration."
+    },
+    {
+      "id": "ciaaw_2024",
+      "title": "Abridged Standard Atomic Weights 2024",
+      "url": "https://ciaaw.org/abridged-atomic-weights.htm",
+      "reading_scope": "Table rows O, Al, Ti, Fe and applicability/version notes.",
+      "claims": "Standard atomic weights allow explicit oxide-to-contained-element stoichiometry.",
+      "limits": "Not chemical mineralogy or extraction recovery; constants not used by this parser."
+    },
+    {
+      "id": "carlson_2024",
+      "title": "System Modeling of a Lunar Molten Regolith Electrolysis Plant",
+      "url": "https://ntrs.nasa.gov/citations/20240013999",
+      "reading_scope": "Full NTRS abstract and linked one-page poster.",
+      "claims": "Model considers metal alloys alongside oxygen but omits downstream metal processing and beneficiation.",
+      "limits": "No finished-metal industrial cost calibration from this bounded source review."
+    }
+  ],
+  "local_boundary": "The enclosed-mining source register and conservation README principles/D5 were read. No polar water supply is admitted; science/heritage and site access require separate treatment.",
+  "retrieval_notes": [
+    "ScienceDirect full-text endpoint for the 2025 FFC metal-characterization paper returned 403; no numerical claim adopted from its search snippet.",
+    "Initial sandbox urllib DNS failed; public PDS/USGS downloads succeeded with network authorization, then exact bytes were hashed."
+  ]
+}

@@ -39,6 +39,8 @@ The original 17-body source screen is too small even at its entire-mass ceiling 
 
 The separate [bounded-intervention assessment](enclosed_mining/bottlenecks.md) applies the same source inventory and access assumptions to 28 commercial-rollout and tug-life variants. All four resource baselines reproduce exactly, and seven workforce-infeasible physical plans retain their failure status. Longer source-tug active life lowers cumulative feed by about 1.5 percent through year 200; it does not resolve source qualification or make the narrow catalogue sufficient.
 
+The [source-access study](source_access/README.md) adds regional Lunar Prospector composition and formal covariance, independent asteroid spectroscopy and pro-am light curves, diameter-error propagation, partial process-cost scenarios and explicit physical/data-preservation conditions. It distinguishes candidate mass from qualified supply and repairs the broad-pool reintroduction of retained scientific exclusions. These survey and access findings supersede the earlier simple-stock interpretation for new planning; the prior products remain reproducible.
+
 ## What the project already says
 
 Each finding follows from results the repository already holds, read together with the literature. Numbers marked
