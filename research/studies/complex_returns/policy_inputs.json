@@ -1,0 +1,43 @@
+{
+  "schema": "terluna.research.u-policy-inputs/1",
+  "credit_result_sha256": "fd41767332965429974db0b960c5dfd224652543a56559b9f92bde62f1da8626",
+  "evidence": "Conditional financing and monthly liquidity experiments on unchanged physical paths; no empirical U interest-rate transmission, customer credit quality, supplier acceptance or inflation forecast.",
+  "horizons": [30, 100, 300, 800],
+  "local_rate_reductions": [0.0025, 0.005],
+  "wider_capital_supplier_U_fraction": 0.5,
+  "liquidity": {
+    "outage_months": [3, 6, 12],
+    "delayed_fraction": 1.0,
+    "unclassified_operating_external_fraction": 0.5,
+    "collateral_haircut": 0.25,
+    "facility_fraction_of_seed": 0.25,
+    "bridge_rate": 0.03,
+    "external_bridge_rate": 0.06,
+    "term_claim_rate": 0.03,
+    "origination_fee": 0.0025,
+    "future_core_import_floor_years": 0.25,
+    "conversion_buffer_fraction": 0.25,
+    "capital_fraction_of_loans": 0.15,
+    "maximum_incremental_price_premium": 0.005,
+    "collection_tail_months": 12,
+    "loss_fractions": [0.1, 0.25, 0.75]
+  },
+  "policies": {
+    "cash_only": {"facility": false, "outside_U_share": 0.0, "term_absorption": false, "FX_access": 1.0},
+    "U_unabsorbed": {"facility": true, "outside_U_share": 0.25, "term_absorption": false, "FX_access": 1.0},
+    "U_term_25": {"facility": true, "outside_U_share": 0.25, "term_absorption": true, "FX_access": 1.0},
+    "U_term_50": {"facility": true, "outside_U_share": 0.5, "term_absorption": true, "FX_access": 1.0},
+    "U_term_50_half_FX_access": {"facility": true, "outside_U_share": 0.5, "term_absorption": true, "FX_access": 0.5},
+    "external_bridge": {"facility": true, "outside_U_share": 0.0, "term_absorption": false, "FX_access": 1.0, "external_funded": true}
+  },
+  "rules": [
+    "Rate relief applies to the local portion of U loans offered on each original origination date; outside lender and supplier claim rates remain unchanged. Investment schedules are held fixed in this overlay.",
+    "A dated liquidity episode holds annual activity constant; it cannot predict centuries of contractual behavior. All ordinary payouts, new investment orders and reserve contributions pause; existing restricted construction proceeds remain unavailable.",
+    "Delayed invoices are collected after the specified lag. Continued operations produce new invoices; a collection tail closes the receivables queue. Permanent losses are a separate collateral-recovery stress.",
+    "Operating supplier U acceptance is a new voluntary contract scenario, separate from the capital supplier programme. Local term absorption also requires willing holders and maturity matching.",
+    "The balance allowance uses one fixed annual price reference throughout each episode. Locked principal and interest are redeemed into matched nonspendable saving assets on repayment, or remain restricted until price headroom permits release; free local spending of redemption is not assumed.",
+    "Reserve assets, loan assets, deposit and term liabilities, and capital remain separate. Foreign conversion consumes external reserve assets; capitalization does not create them. Half access freezes assets without destroying their value.",
+    "Existing external debt service is treated as requiring external settlement; existing U debt service is treated as U-settleable. The unresolved supplier geography of operating costs is sensitized.",
+    "The external bridge is a committed funded benchmark at an assumed real6% rate, not a demonstrated credit offer. All interest rates and USD2041 equivalents are real scenario valuations."
+  ]
+}

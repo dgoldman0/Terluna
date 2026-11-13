@@ -63,3 +63,12 @@ suppliers accepting U term claims. It maintains separate external purchasing
 power, loan-created deposits, restricted prepayments, loss capital and funded
 payout deferral. Its continuous matched price-premium rule is a policy experiment,
 with actual consumer inflation and floating exchange rates still uncalibrated.
+
+The [U monetary-policy comparison](../complex_returns/policy.md)
+separates modest local loan-rate relief, wider supplier acceptance and temporary
+receivables support. In the strong year-100 propellant/logistics case, a six-month
+payment delay requires 144.1 billion USD2041-equivalent of bridge funding. A
+conditional facility repays by month eight using foreign reserves and voluntary
+term holdings, with only 91 million in additional circulating local balances.
+Its benefit depends on collateral, saving contracts and reserve access; neither
+low inflation nor a U-related currency basket supplies those automatically.

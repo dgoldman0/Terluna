@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12",
+  "updated": "2026-11-13",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -1389,16 +1389,23 @@
         "studies/monetary_system/pressure_inputs.json",
         "studies/monetary_system/pressure_sources.json",
         "studies/monetary_system/results/pressure.json",
-        "studies/monetary_system/pressure_checks.md"
+        "studies/monetary_system/pressure_checks.md",
+        "studies/complex_returns/policy.md",
+        "studies/complex_returns/policy.py",
+        "studies/complex_returns/policy_inputs.json",
+        "studies/complex_returns/policy_sources.json",
+        "studies/complex_returns/results/policy.json",
+        "studies/complex_returns/policy_checks.md"
       ],
       "unresolved": [
         "The arrangement itself, its mandates, collective revenue and guarantees, chosen through the communities' collective decisions.",
         "Staged domestic supply, invoicing currencies, imports, debt ownership and maturities for a quantitative comparison.",
         "Inflation, exchange rates, interest rates, credit demand and production responses.",
         "Single-currency or constituent-basket monetary constitution, admission/exit/default rules, domestic price objective, reserve ownership and funded contributions; actual invoice/payment currencies, liquidity access and balance holding periods.",
-        "Measured holding periods, spending propensities, supplier-currency exposures, constituent clearing, reserve commitments and engineering-constrained supply response; jointly endogenous currency prices, exports, credit and investment remain unmodeled."
+        "Measured holding periods, spending propensities, supplier-currency exposures, constituent clearing, reserve commitments and engineering-constrained supply response; jointly endogenous currency prices, exports, credit and investment remain unmodeled.",
+        "Qualified receivables, payment-delay frequencies, voluntary local and outside term holdings, their redemption destination, supplier geography, facility and clearing agreements, undrawn commitment costs, and full monthly legacy-loan evolution. Rate-savings reinvestment and avoided-disruption value remain unestimated."
       ],
-      "next_session_task": "Qualify actual U payment/holding and supplier-finance agreements, consumer expenditure and constituent-clearing data, and issuer loss-resolution and intermediation costs before converting conditional price-premium controls into an operational inflation policy.",
+      "next_session_task": "Qualify payment and saving contracts and supplier geography, cost a collateralized U liquidity facility and constituent access agreements, and estimate the consequences and frequency of interrupted operations before assigning expected risk-adjusted returns.",
       "findings": [
         "Currency use, access to settlement and emergency lending, and the bearing of losses are separate functions; three worlds need not mean three currencies or three issuers.",
         "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs.",
@@ -1407,7 +1414,9 @@
         "Pinned nine-portfolio payment flows supply conditional transaction-balance comparisons at30/100/300/800years. The study does not infer adoption rates, U exchange rates, annual inflation or reserve adequacy from those flows.",
         "Nine portfolios at four dates and three market levels yield 73 funded monetary-pressure experiments and 35 excluded failed paths. In the strong year-100 cases, neutral issuance, finite reserve funding and a total 5% supply shift give 1.02–2.46% higher domestic price levels over ten years; a 10% issuance shortfall drains 10.3–14.2% of modeled domestic transaction balances. These are conditional reference-quote calculations, not annual-rate forecasts.",
         "Reserve contributions use released distributions and preserve original expansion orders, while reducing immediate investor payouts. Outside-demand reversals distinguish income contraction from unretired money balances; the U-related currency-basket interpretation requires coordinated liquidity and fixed internal reference conversions in this aggregate experiment.",
-        "The credit-supported financial comparison now models continuous loan and repayment paths, residual monetary accommodation, domestic and outside U holdings, separate reserve allocations, and funded deferral of intended local payouts. Its 0.5% annual rule limits growth in a positive price premium over the matched control, with a 5% cumulative guard; it is not an absolute CPI target."
+        "The credit-supported financial comparison now models continuous loan and repayment paths, residual monetary accommodation, domestic and outside U holdings, separate reserve allocations, and funded deferral of intended local payouts. Its 0.5% annual rule limits growth in a positive price premium over the matched control, with a 5% cumulative guard; it is not an absolute CPI target.",
+        "A separate U-policy comparison holds external rates fixed, reprices only U-local loan portions and reruns wider voluntary capital-supplier acceptance. At strong year 100, 50 bp local rate relief gives 0–138 million USD2041-equivalent borrower NPV saving, offset by lower bank gross income; wider acceptance adds 11.54 billion operating-minus-capital NPV in the computing portfolio while chiefly substituting funding in others.",
+        "A monthly receivables facility tests three-, six- and twelve-month collection delays at 30/100/300/800 years. Under strong demand, six-month payment survival rises from 8/9 to 9/9 at 100 years and from 0/9 to 6/9 at 800 years with 50% outside supplier acceptance, paid term absorption and emergency reserve access. These are conditional scenario counts, not default probabilities; foreign reserves and saving contracts carry most of the bridge."
       ]
     },
     {
@@ -1504,7 +1513,13 @@
         "studies/complex_returns/credit_inputs.json",
         "studies/complex_returns/credit_sources.json",
         "studies/complex_returns/results/credit.json",
-        "studies/complex_returns/credit_checks.md"
+        "studies/complex_returns/credit_checks.md",
+        "studies/complex_returns/policy.md",
+        "studies/complex_returns/policy.py",
+        "studies/complex_returns/policy_inputs.json",
+        "studies/complex_returns/policy_sources.json",
+        "studies/complex_returns/results/policy.json",
+        "studies/complex_returns/policy_checks.md"
       ],
       "findings": [
         "The matched current provisioning context is 14.501 trillion USD2041 for establishment and 41.892 trillion for the campaign, plus separately costed commercial commissioning. Earlier 16.211/10.790-trillion establishment comparisons are distinct architectures.",
@@ -1520,7 +1535,9 @@
         "U retains its established meaning as the general economic unit serving the currently planned off-Earth zone before the Open Moon, planetary array and subsequent outer Solar System buildout. Conditional price experiments use actual distributions and investment commitments, not gross exports or capacity-headroom percentages. They preserve fixed-price financial paths and report level comparisons rather than annual inflation forecasts.",
         "Six financing arrangements across nine portfolios, three markets and four horizons produce 648 financial records. Under strong demand, commercial mixed credit adds 7.3–22.8 billion USD2041 of 100-year operating-minus-capital NPV in six portfolios; three take no additional credit. The low-price-pressure policy also schedules investment and defers some intended local payout spending.",
         "Negotiated supplier-U term claims can finance identified external capital purchases. In the diversified strong case, about 21.4 billion USD2041-equivalent of supplier claims replaces other external finance with the productive outcome unchanged. Claims remain outside domestic circulation and match loan terms; supplier acceptance and intermediation costs remain unqualified.",
-        "Middle-demand credit programmes can reduce portfolio returns despite affordable debt service. Concessional development finance can add capacity while imposing explicit financing costs. The original financial products remain intact; matched-controller differences are recorded separately."
+        "Middle-demand credit programmes can reduce portfolio returns despite affordable debt service. Concessional development finance can add capacity while imposing explicit financing costs. The original financial products remain intact; matched-controller differences are recorded separately.",
+        "A separate U-policy comparison holds external rates fixed, reprices only U-local loan portions and reruns wider voluntary capital-supplier acceptance. At strong year 100, 50 bp local rate relief gives 0–138 million USD2041-equivalent borrower NPV saving, offset by lower bank gross income; wider acceptance adds 11.54 billion operating-minus-capital NPV in the computing portfolio while chiefly substituting funding in others.",
+        "A monthly receivables facility tests three-, six- and twelve-month collection delays at 30/100/300/800 years. Under strong demand, six-month payment survival rises from 8/9 to 9/9 at 100 years and from 0/9 to 6/9 at 800 years with 50% outside supplier acceptance, paid term absorption and emergency reserve access. These are conditional scenario counts, not default probabilities; foreign reserves and saving contracts carry most of the bridge."
       ],
       "unresolved": [
         "Unified dated campaign budget and retained civil/service costs; component cohort renewal and source permissions.",
@@ -1529,9 +1546,10 @@
         "Engineering-qualified minimum productive module and common cost floor; dated startup carrying costs, service staff-hours/power/communications, rights, paid retention and acquisition. Staging is a conditional policy, not an optimized or probabilistic real-option valuation.",
         "Raw-resource production design, buyer-qualified lunar advantages, empirical orders and actual synergy effects; exact service installation schedules and an optimized portfolio/growth policy.",
         "Observed domestic expenditure baskets and supplier geography, incremental local spending, construction disbursement, current-U expenditure/credit dynamics and engineering-constrained supply response; price feedback into finance and production remains unmodeled.",
-        "Qualified borrower and supplier-U contracts, reconciled local capital cash costs, bank fees and resolution; measured consumer prices, saving and constituent clearing. Source-valued costs do not respond endogenously to the pressure index."
+        "Qualified borrower and supplier-U contracts, reconciled local capital cash costs, bank fees and resolution; measured consumer prices, saving and constituent clearing. Source-valued costs do not respond endogenously to the pressure index.",
+        "Qualified receivables, payment-delay frequencies, voluntary local and outside term holdings, their redemption destination, supplier geography, facility and clearing agreements, undrawn commitment costs, and full monthly legacy-loan evolution. Rate-savings reinvestment and avoided-disruption value remain unestimated."
       ],
-      "next_session_task": "Qualify selective commercial and supplier-U financing packages, reconcile local and external capital cash costs and bank fees, and compare additional social benefits with the explicit cost of concessional finance."
+      "next_session_task": "Qualify payment and saving contracts and supplier geography, cost a collateralized U liquidity facility and constituent access agreements, and estimate the consequences and frequency of interrupted operations before assigning expected risk-adjusted returns."
     }
   ]
 }

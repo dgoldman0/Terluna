@@ -82,3 +82,12 @@ service-and-support capacity, tests outside suppliers retaining U term claims,
 and records the cost of development finance. Its low additional-price-pressure
 policy also requires investment scheduling and separately funded payout deferral;
 credit creation alone does not guarantee low inflation.
+
+The [U monetary-policy comparison](../research/studies/complex_returns/policy.md)
+separates modest local loan-rate relief, wider supplier acceptance and temporary
+receivables support. In the strong year-100 propellant/logistics case, a six-month
+payment delay requires 144.1 billion USD2041-equivalent of bridge funding. A
+conditional facility repays by month eight using foreign reserves and voluntary
+term holdings, with only 91 million in additional circulating local balances.
+Its benefit depends on collateral, saving contracts and reserve access; neither
+low inflation nor a U-related currency basket supplies those automatically.

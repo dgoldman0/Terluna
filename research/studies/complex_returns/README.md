@@ -170,3 +170,12 @@ commercial mixed credit. Admission, construction scheduling and funded payout
 deferral limit additional domestic price premiums; the rule is not a CPI forecast.
 Debt service, restricted proceeds, lender losses, reserve providers and terminal
 claims have separate accounts. The pinned earlier financial results remain intact.
+
+The [U monetary-policy comparison](policy.md)
+separates modest local loan-rate relief, wider supplier acceptance and temporary
+receivables support. In the strong year-100 propellant/logistics case, a six-month
+payment delay requires 144.1 billion USD2041-equivalent of bridge funding. A
+conditional facility repays by month eight using foreign reserves and voluntary
+term holdings, with only 91 million in additional circulating local balances.
+Its benefit depends on collateral, saving contracts and reserve access; neither
+low inflation nor a U-related currency basket supplies those automatically.
