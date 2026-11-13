@@ -5,7 +5,7 @@
   "producer_sha256": "49635fa8607a5f8b1d5b467765aeff419daac4cf701eeeef2d35dea955e0198a",
   "dependency_sha256": {
     "run.py": "7c51b2f490b82a528df8676020f798b59d6e0be086b47bc138d2eccdbe458ffb",
-    "returns_inputs.json": "2168c03b72f179bb18b7933f06ccb1259d242c5197aef10ec067e17c80ace47f"
+    "returns_inputs.json": "7ce3e23c1fb215fc45fdac6f2629952f238f98edc806cd38223b1776a8d1c2b0"
   },
   "capital_account": {
     "establishment_USD2041": 14500614390350.58,

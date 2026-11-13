@@ -1,6 +1,6 @@
 # Industrial exports and worldwide services in one investment account
 
-The U socioecosystem can sell several kinds of output whose economics differ sharply. Raw and commodity materials compete on delivered cost; specialty products require exact specifications and qualified buyers; a technical lunar premium requires a useful production advantage. Propellant and logistics serve missions with particular routes and compatible equipment. Sports, entertainment, research, computing and digital products can reach customers far beyond the people who live in the complex. A financing strategy must compare these activities while charging their shared infrastructure once and allocating its limited capacity among them.
+The planned economic zone beyond Earth can sell several kinds of output whose economics differ sharply. Raw and commodity materials compete on delivered cost; specialty products require exact specifications and qualified buyers; a technical lunar premium requires a useful production advantage. Propellant and logistics serve missions with particular routes and compatible equipment. Sports, entertainment, research, computing and digital products can reach customers far beyond the people who live in the zone. A financing strategy must compare these activities while charging their shared infrastructure once and allocating its limited capacity among them. U retains its established meaning as the general economic unit; the present financial account keeps the provisioning source's constant-dollar valuation.
 
 This model extends the [staged financing study](staged.md) with nine explicit industrial portfolios, three worldwide-service markets and joint resource and customer-budget constraints. It retains the founding off-Earth complex, its source operations and transport network, and the **$14.501 trillion establishment / $41.892 trillion campaign** account. Earth customers, capital providers, suppliers and research users remain stakeholders. The physical scenario is enclosed; no planetary array or Open Moon market is introduced.
 
@@ -8,7 +8,9 @@ Under the strong worldwide-service assumptions, the propellant-and-mission-suppo
 
 ![Industrial strategy, services and shared constraints](../../runs/complex_returns/figures/strategies.png)
 
-The [figure renderer](../../../visualization/complex-returns/strategy_plot.py) reads the reviewed [results](results/strategies.json); the [vector figure](../../runs/complex_returns/figures/strategies.svg) uses the same product. All dollars below are constant **USD2041**, except explicitly identified source price assumptions in USD2026. No monetary-U exchange rate is used.
+The [figure renderer](../../../visualization/complex-returns/strategy_plot.py) reads the reviewed [results](results/strategies.json); the [vector figure](../../runs/complex_returns/figures/strategies.svg) uses the same product. All dollars below are constant **USD2041**, except explicitly identified source price assumptions in USD2026. No U-to-dollar exchange rate is used.
+
+The [U price companion](prices.md) follows distributions and investment into explicit domestic-spending experiments across the same nine portfolios. Its conditional price indices and import-cost sensitivities preserve this calculation as their fixed-price counterfactual; capacity-use percentages alone do not establish an inflation rate.
 
 ## Comparable industrial portfolios
 

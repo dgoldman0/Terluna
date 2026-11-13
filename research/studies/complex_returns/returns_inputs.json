@@ -1,7 +1,7 @@
 {
   "schema": "terluna.research.complex-returns-inputs/1",
   "evidence": "Research-informed conditional appraisal on pinned provisioning products. Financial recovery envelope and purchase-price socioeconomic proxy; not a demand forecast, investor offer or validated full welfare estimate.",
-  "boundary": "Whole founding off-Earth industrial and settlement complex; Earth-based capital providers, workers, customers, research users and affected people are stakeholders. No planetary array or Open Moon is introduced. USD2041 is constant purchasing power; the complex name and hypothetical monetary U are distinct.",
+  "boundary": "Whole founding off-Earth industrial and settlement complex; Earth-based capital providers, workers, customers, research users and affected people are stakeholders. The economic zone includes the currently planned off-Earth system before the Open Moon, planetary array and subsequent outer Solar System buildout. USD2041 is constant purchasing power; U retains its established meaning as the general economic unit, without an adopted dollar exchange rate.",
   "products": {
     "economy": {
       "snapshot": "inputs/economy.json",

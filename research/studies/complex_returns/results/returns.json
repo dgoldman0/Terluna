@@ -1,11 +1,11 @@
 {
   "schema": "terluna.research.complex-returns/1",
   "evidence": "Research-informed conditional appraisal on pinned provisioning products. Financial recovery envelope and purchase-price socioeconomic proxy; not a demand forecast, investor offer or validated full welfare estimate.",
-  "boundary": "Whole founding off-Earth industrial and settlement complex; Earth-based capital providers, workers, customers, research users and affected people are stakeholders. No planetary array or Open Moon is introduced. USD2041 is constant purchasing power; the complex name and hypothetical monetary U are distinct.",
+  "boundary": "Whole founding off-Earth industrial and settlement complex; Earth-based capital providers, workers, customers, research users and affected people are stakeholders. The economic zone includes the currently planned off-Earth system before the Open Moon, planetary array and subsequent outer Solar System buildout. USD2041 is constant purchasing power; U retains its established meaning as the general economic unit, without an adopted dollar exchange rate.",
   "inputs": {
     "schema": "terluna.research.complex-returns-inputs/1",
     "evidence": "Research-informed conditional appraisal on pinned provisioning products. Financial recovery envelope and purchase-price socioeconomic proxy; not a demand forecast, investor offer or validated full welfare estimate.",
-    "boundary": "Whole founding off-Earth industrial and settlement complex; Earth-based capital providers, workers, customers, research users and affected people are stakeholders. No planetary array or Open Moon is introduced. USD2041 is constant purchasing power; the complex name and hypothetical monetary U are distinct.",
+    "boundary": "Whole founding off-Earth industrial and settlement complex; Earth-based capital providers, workers, customers, research users and affected people are stakeholders. The economic zone includes the currently planned off-Earth system before the Open Moon, planetary array and subsequent outer Solar System buildout. USD2041 is constant purchasing power; U retains its established meaning as the general economic unit, without an adopted dollar exchange rate.",
     "products": {
       "economy": {
         "snapshot": "inputs/economy.json",
@@ -66,7 +66,7 @@
   "producer": {
     "path": "research/studies/complex_returns/run.py",
     "sha256": "7c51b2f490b82a528df8676020f798b59d6e0be086b47bc138d2eccdbe458ffb",
-    "inputs_sha256": "2168c03b72f179bb18b7933f06ccb1259d242c5197aef10ec067e17c80ace47f"
+    "inputs_sha256": "7ce3e23c1fb215fc45fdac6f2629952f238f98edc806cd38223b1776a8d1c2b0"
   },
   "historical_architectures": {
     "reference": {

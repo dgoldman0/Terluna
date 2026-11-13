@@ -53,3 +53,9 @@ compares commodity, specialty and premium materials, propellant/logistics and
 computing alongside worldwide services. It accounts for shared customer budgets,
 production limits, qualification costs and earned-cash expansion, and distinguishes
 combined enterprise returns from each industrial activity's contribution.
+
+The [U price study](../research/studies/complex_returns/prices.md) retains U as
+the established economic unit serving the planned off-Earth zone. It tests
+domestic spending from actual distributions and expansion commitments, separate
+from Earth purchases, against explicit basket and supply assumptions. Its
+conditional price-level comparisons are not annual inflation forecasts.

@@ -1473,7 +1473,12 @@
         "studies/complex_returns/strategy_sources.json",
         "studies/complex_returns/inputs/strategy_profiles.json",
         "studies/complex_returns/results/strategies.json",
-        "studies/complex_returns/provenance/export_profiles.py"
+        "studies/complex_returns/provenance/export_profiles.py",
+        "studies/complex_returns/prices.md",
+        "studies/complex_returns/prices.py",
+        "studies/complex_returns/prices_inputs.json",
+        "studies/complex_returns/prices_sources.json",
+        "studies/complex_returns/results/prices.json"
       ],
       "findings": [
         "The matched current provisioning context is 14.501 trillion USD2041 for establishment and 41.892 trillion for the campaign, plus separately costed commercial commissioning. Earlier 16.211/10.790-trillion establishment comparisons are distinct architectures.",
@@ -1485,14 +1490,16 @@
         "At 100 elapsed years and 3% real, global-service capital-recovery NPV is -2.208 trillion USD2041 and breakthrough is +2.947 trillion. Worldwide audiences are independent of resident population; new-service revenues replace overlapping baseline channels. Small-module design, institutional contracts and service capacity remain unqualified.",
         "Integrated export comparison uses nine alternative portfolios with three worldwide-service markets. Frozen joint provisioning responses enforce shared production and commercial-asset replication; combining individual maxima exceeds source heat capacity by78.2%.",
         "At100elapsedyears and3%real, strong-service propellant/logistics gives+4.599trillionUSD2041 capital-recovery NPV, services/domestic support+3.781trillion and diversification+3.320trillion. All middle-market100yearNPVs are negative. Positive combined returns do not prove profitable commodity exports.",
-        "Premium recipes retain development, rejected-batch and qualification costs. Computing, research, mission fuel/support and cultural products share explicit capacity and buyer limits; internal use and inventory generate no duplicated sales. Sustained-cap operation is tested separately from cash-constrained paths."
+        "Premium recipes retain development, rejected-batch and qualification costs. Computing, research, mission fuel/support and cultural products share explicit capacity and buyer limits; internal use and inventory generate no duplicated sales. Sustained-cap operation is tested separately from cash-constrained paths.",
+        "U retains its established meaning as the general economic unit serving the currently planned off-Earth zone before the Open Moon, planetary array and subsequent outer Solar System buildout. Conditional price experiments use actual distributions and investment commitments, not gross exports or capacity-headroom percentages. They preserve fixed-price financial paths and report level comparisons rather than annual inflation forecasts."
       ],
       "unresolved": [
         "Unified dated campaign budget and retained civil/service costs; component cohort renewal and source permissions.",
         "Demand, product qualification, capital claims and benefit distribution; counterfactual Earth production and full opportunity costs.",
         "Measured research, customer and public benefits and environmental or heritage losses; no generic multiplier or perpetuity credited.",
         "Engineering-qualified minimum productive module and common cost floor; dated startup carrying costs, service staff-hours/power/communications, rights, paid retention and acquisition. Staging is a conditional policy, not an optimized or probabilistic real-option valuation.",
-        "Raw-resource production design, buyer-qualified lunar advantages, empirical orders and actual synergy effects; exact service installation schedules and an optimized portfolio/growth policy."
+        "Raw-resource production design, buyer-qualified lunar advantages, empirical orders and actual synergy effects; exact service installation schedules and an optimized portfolio/growth policy.",
+        "Observed domestic expenditure baskets and supplier geography, incremental local spending, construction disbursement, current-U expenditure/credit dynamics and engineering-constrained supply response; price feedback into finance and production remains unmodeled."
       ],
       "next_session_task": "Qualify concrete product/mission/service contracts and the first module; replace strategy price, yield, cost and buyer-budget assumptions, and test capacity-allocation policies that preserve funded industrial expansion."
     }
