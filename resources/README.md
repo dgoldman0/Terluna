@@ -45,6 +45,8 @@ The separate [bounded-intervention assessment](enclosed_mining/bottlenecks.md) a
 
 The [source-access study](source_access/README.md) adds regional Lunar Prospector composition and formal covariance, independent asteroid spectroscopy and pro-am light curves, diameter-error propagation, partial process-cost scenarios and explicit physical/data-preservation conditions. It distinguishes candidate mass from qualified supply and repairs the broad-pool reintroduction of retained scientific exclusions. These survey and access findings supersede the earlier simple-stock interpretation for new planning; the prior products remain reproducible.
 
+The [first-eight-year coproduct calculation](source_access/coproducts.md#earth-receipts-during-the-initial-eight-year-build) retains the actual 12,500-person opening and its 299-million-tonne reference asteroid feed. Refinery ramps reaching 1%, 10% and 100% of that feed in year 8 give about 1.1, 10.7 and 107 tonnes of platinum-group metals received on Earth by the cutoff under the middle assumptions. Refining, off-Earth retention and delayed arrivals are distinct quantities; the calculation does not book new revenue.
+
 ## What the project already says
 
 Each finding follows from results the repository already holds, read together with the literature. Numbers marked

@@ -112,8 +112,46 @@ The element balance distinguishes untreated inventory, material outside the sele
 
 The operating economy also needs return paths for catalysts, magnets, electronics, tools and fabrication scrap. Collection, disassembly, alloy sorting and purification determine how much of each element comes back. The existing bulk-reclamation benefits remain in the inherited feed calculation; no additional perfect-closure or trace-metal recycling credit is added here. A future stock-and-flow account can reduce replacement demand using measured element-specific lifetimes and recovery, while charging collection and treatment once.
 
+## Earth receipts during the initial eight-year build
+
+The accepted slow-growth schedule opens with **12,500 residents at year 8**. Its eight-year founding account processes **298.94 million tonnes of asteroid feed** and **7.703 million tonnes of lunar raw material** in the propellant/logistics reference case. These totals include late founding procurement once and exclude the operating year beginning at time 8. Across the 81 portfolios and market combinations, asteroid feed spans 291.90–307.11 million tonnes. This short-period estimate uses those existing totals; it changes neither the opening population nor the long-run growth schedule.
+
+At the reference CI composition, the asteroid feed contains approximately **964 tonnes of the six platinum-group metals**. If every tonne of feed received the middle recovery process, it could yield **513 tonnes refined**. Earth receipts within eight years depend on when that refining capacity becomes available and when its cargo arrives. The [startup-delivery calculation](startup_deliveries.py) therefore separates production, retention within the off-Earth economy, successful arrival, return loss and cargo still awaiting delivery.
+
+The illustrative programme starts coproduct refining in build year 3. Its source-feed treatment fractions during build years 1–8 are **0%, 0%, 1%, 2%, 4%, 6%, 8% and 10%**. Refinery alternatives use one tenth or ten times those fractions, reaching 1% or 100% of feed by year 8. Each assumes 80% of refined output is allocated to Earth, with 20% retained off Earth. A 1.5-year source-to-Earth delay and the existing capsule model's 1% return loss apply. The delay is a planning proxy alongside the inherited three-year source round trip, not a trajectory calculation.
+
+| Source refinery coverage reached in year 8 | Platinum-group metals received on Earth within eight years, middle assumptions | Geological/recovery scenario range |
+|---|---:|---:|
+| 1% of asteroid feed | 1.07 tonnes | 0.12–3.60 tonnes |
+| 10% of asteroid feed | 10.72 tonnes | 1.21–36.00 tonnes |
+| 100% of asteroid feed | 107.18 tonnes | 12.09–360.03 tonnes |
+
+These are capacity alternatives, not probability bands or an estimate of the geological fraction available. With no added coproduct refinery, this programme delivers zero. Across the existing 81 industrial cases, the 10%-coverage middle estimate varies only from **10.47 to 11.01 tonnes**: refinery scale, recovery and arrival timing matter much more than the portfolio differences during startup.
+
+The middle 10%-coverage case treats **16.86 million tonnes of asteroid feed** cumulatively and refines **28.93 tonnes of platinum-group metals**. Approximately **5.79 tonnes stay off Earth**, **12.32 tonnes remain awaiting delivery or in transit at year 8**, **0.11 tonnes are lost on completed returns**, and **10.72 tonnes reach Earth**. Expected annual Earth receipts are zero in build years 1–3, followed by **0.17, 0.62, 1.58, 3.16 and 5.19 tonnes** in years 4–8. These smooth flows describe an assumed schedule; actual dispatch would batch cargo.
+
+| Additional product, same 10%-coverage source case | Cumulative physical receipt on Earth by year 8, middle assumptions |
+|---|---:|
+| Gold | 0.50 tonnes |
+| Silver | 0.68 tonnes |
+| Rare earths plus yttrium from selected lunar feed | 148.92 tonnes |
+| Rare earths plus yttrium from asteroid feed | 13.79 tonnes |
+| Neodymium and praseodymium, already within the two rare-earth totals | 27.60 tonnes |
+| Gallium from asteroid feed | 31.71 tonnes |
+| Germanium from asteroid feed | 111.34 tonnes |
+
+The lunar comparison separately assumes selected KREEP-like feed can supply the treatment ramp, reaching **10% of total lunar excavation in year 8**. It treats 0.434 million tonnes cumulatively, uses a quarter-year refining-to-Earth handling and delivery lag, and retains the same Earth allocation and return-loss assumptions. Its source selection remains hypothetical. The lunar total does not increase when asteroid refinery coverage changes. The combined rare-earth delivery is about **163 tonnes**, with **18–421 tonnes** across the fixed-capacity geological/recovery scenarios; neodymium and praseodymium must not be added a second time.
+
+These quantities are potential physical receipts, conditional on product quality, funded refining and transport, and buyers. Bulk nickel and cobalt illustrate why recoverability alone is insufficient: the source circuit also refines approximately **100,300 tonnes of nickel** and **4,610 tonnes of cobalt** in this case. Applying the same export allocation and timing mechanically would deliver 37,157 and 1,708 tonnes. Those bulk flows are not included as expected Earth sales. The inherited return model already charges **$150/kg in 2026 purchasing units for Earth ground service alone**, before the other transport and refining costs. For scale, the USGS estimates 2025 nickel at about **$15/kg**; lower return costs or higher-value products would be needed to support that bulk export comparison. This contemporary price is context, not a future quotation. [USGS, Mineral Commodity Summaries 2026, nickel table](https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf).
+
+The original model supplies an eight-year average, without a qualified mining deployment sequence. For this estimate, base feed rises in annual weights 1:2:3:4:5:6:7:8, while the separately recorded late procurement is split between build years 7 and 8. This preserves total extraction, but the last year's base flow is 1.78 times the inherited average. Peak mining capacity, the new refinery's equipment, power and staff, and their extra construction feed have not been solved together. The 10%-coverage case reaches about **6.65 million tonnes/year of source refining** and **0.171 million tonnes/year of selected lunar refining** in its final year. These are required capacities, not existing assets.
+
+Holding composition and recovery at their middle values, alternative feed schedules and source-delivery lags of 0.5–3 years give approximately **3.3–21.5 tonnes of platinum-group metals received within eight years** for the 10%-coverage programme. That sensitivity is separate from the geological/recovery ranges. Cargo arriving after year 8 remains valuable inventory; it is excluded only from this receipt window. The calculation makes no revenue or investment-return credit, and the separate local-power comparison remains outside the inherited feed totals.
+
 ## Reproduction and integration
 
 The [calculation](coproducts.py) reads the assay register, disclosed [scenario inputs](coproduct_inputs.json), pinned [industrial flow extract](inputs/coproduct_flows.json), existing lunar density product and protection evaluator. Run `python -m resources.source_access.coproducts` from the resources checkout. The [result](results/coproducts.json.gz) contains per-feed yields, 243 case checkpoints, treatment-share sensitivities, the hypothetical lunar patch and economic thresholds. [Sources and retrieval limits](coproduct_sources.json) identify the exact PDFs, hashes, tables and reading scope; full papers are not redistributed. [Checks](coproduct_checks.md) distinguish numerical accounting from geological, engineering and commercial qualification.
 
 The industrial input is an exact extract of the committed combined-recovery product available at provisioning revision `adeaa8ea`. The extraction script records the original producer, product hash and its earlier source revision separately. The subsequent local-power comparison has not been recoupled into those physical cases. Integrating coproducts into returns will require a selected refining route and capacity, incremental capital and operating costs, an element account for existing exports, and demand-sensitive domestic and external prices. The present result makes that opportunity explicit without treating contained material as booked income.
+
+For the startup extension, run `python -m resources.source_access.startup_deliveries`. Its [pinned founding-feed extract](inputs/startup_feed.json), [assumptions](startup_delivery_inputs.json) and [result](results/startup_deliveries.json.gz) retain source identities and all 81 case comparisons. The feed exporter reads the same committed provisioning product as the long-run coproduct study.
