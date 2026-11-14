@@ -10,6 +10,8 @@ The [revised monetary and wealth account](../monetary_wealth/revised.md) follows
 
 The [cumulative Earth-purchase account](earth_purchases.md) separates goods returned to Earth, propellant delivered in space and service invoices in these same orders. Under the breakthrough diversified case, Earth purchases 5.52 million tonnes of goods through year 100 and 191–274 million tonnes through year 200 at 0.5–1% real demand growth. In-space propellant purchases separately reach 272–471 million tonnes through year 200. Individual precious-metal and rare-earth purchases remain unallocated within the generic product categories; recovery potential has not been added as new sales.
 
+The [product and processing-location study](../product_allocation/README.md) now tests what could fulfill those product categories. It favors local bulk materials and repair, selective compact specialty exports, Earth finishing where it avoids carrier mass or improves recovery, and orbital pilots for demonstrated microgravity products. Its 21 price benchmarks and 54 refining comparisons show which conditions reverse those choices. These are cost and product-selection screens; they do not add uncontracted coproduct revenue or establish the earlier generic export-price mix.
+
 ## Preserved previous baseline
 
 Everything below this heading describes the preceding financial baseline and its original resource screen. The revised study above supersedes its current return and resource interpretation while retaining these figures for exact comparison. The earlier narrow catalogue allowance is not a cap on the broader geological opportunity now modeled.

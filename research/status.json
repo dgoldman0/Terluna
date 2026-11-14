@@ -1635,6 +1635,34 @@
       }
     },
     {
+      "topic": "enclosed_product_allocation",
+      "condition": "conditional_product_and_processing_location_screen; no_global_optimum_or_new_export_receipts",
+      "material": [
+        "studies/product_allocation/README.md",
+        "studies/product_allocation/allocation_inputs.json",
+        "studies/product_allocation/market_benchmarks.json",
+        "studies/product_allocation/allocation_sources.json",
+        "studies/product_allocation/results/allocation.json",
+        "studies/product_allocation/checks.md"
+      ],
+      "source_commits": {
+        "resources": "84886850",
+        "provisioning": "adeaa8ea",
+        "humanities": "a63cd71b"
+      },
+      "findings": [
+        "Product routes favor local bulk materials and repair, compact specialty exports, Earth finishing where it reduces freight or improves recovery, and specific orbital manufacturing pilots. Lunar partial gravity and microgravity have distinct process evidence.",
+        "The inherited 150 USD2026/kg Earth-handling floor excludes ordinary aluminium, nickel, cobalt, titanium and NdPr-oxide exports at the admitted 2025 product benchmarks. Cheaper return routes are separate sensitivities, not adopted replacements.",
+        "For 10 percent platinum concentrate at equal 95 percent refining recovery, freight savings support at most 136 or 453 USD2026/kg concentrate of extra off-Earth treatment at 150 or 500 USD2026/kg return. Reducing off-Earth recovery to 90 percent can reverse the choice.",
+        "Existing assay and process scenarios produce annual specialty output large relative to some present markets even at 1 percent treatment of year-200 feed. This is a market-scale diagnostic, not a permanent demand ceiling."
+      ],
+      "unresolved": [
+        "Product-specific domestic requirements and future-stock allocations; assayed mineral forms and complete recoveries; priced plants, utilization and commissioning; joint power, heat, workers, reagents and freight capacity.",
+        "Buyer quantities, quality, market substitution and price-volume paths; qualified Earth refining and final-product offers; incremental export targets without double counting existing generic invoices."
+      ],
+      "next_session_task": "Develop named production chains and buyer tranches for local materials and repair, joint precious/specialty recovery, domestic magnet/alloy inputs and orbital fibre/crystal pilots; couple their measured costs and product recipes into the dated allocation and return models."
+    },
+    {
       "topic": "monetary_wealth",
       "condition": "conditional_annual_counterparty_balance_sheets_and_ownership_scenarios; no_nominal_U_exchange_rate_or_complete_asset_valuation",
       "material": [

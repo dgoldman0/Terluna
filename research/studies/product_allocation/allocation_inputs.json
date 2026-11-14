@@ -1,0 +1,118 @@
+{
+  "schema": "terluna.research.product-allocation-inputs/1",
+  "dependencies": {
+    "inputs/assays.json": "6a5a5d2d826a320f9bfd2a51449b94c74937a98887288ece4f45fc3df2f4ca29",
+    "inputs/flows.json": "4cf6bb10c49d9f91c22f991d08ead1b92f6af6b5a4a14e80ac6b41918caae592",
+    "inputs/recovery.json": "03d79706c9e550f0af8b87fae0b347ae0c783d38276747dcccc557dfb6b28b4b",
+    "inputs/basis.json": "229c0ecefdf696bac14b31f55a726bf97486b66ca6c4dfc25884c959da65902a",
+    "market_benchmarks.json": "f5c694a0f86c25b83cdc9e11849f925e788dbcb0158665caa23e6903bb69dcd2",
+    "allocation_sources.json": "460b0607f3a2918ac26cc662d81dc8017c9b7ac89b1d4491179c7c90e34c41d7",
+    "../enclosed_returns/results/earth_purchases.json.gz": "1721b41981f53c3b587c6be64b3c0c518644af4375a59c4822753cb57141c1f4",
+    "../enclosed_returns/enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
+    "../complex_returns/inputs/strategy_profiles.json": "68de393762a3411e0fc3fb2956c8d16c936c46019db70995cc3ccd5654449a9c"
+  },
+  "USD2025_to_USD2026_planning_index": 1.03,
+  "USD2026_to_USD2041": 1.557967416600765,
+  "reference_feed_kg": 1000000000.0,
+  "return_survival": 0.99,
+  "inherited_ground_floor_USD2026_kg": 150,
+  "freight_USD2026_kg": [
+    1,
+    10,
+    50,
+    150,
+    500,
+    1500
+  ],
+  "benchmark_price_multipliers": [
+    0.5,
+    1,
+    2
+  ],
+  "joint_circuit_priced_elements": [
+    "Pt",
+    "Pd",
+    "Ir",
+    "Rh",
+    "Ru",
+    "Au",
+    "Ag",
+    "Ga",
+    "Ge",
+    "Ni",
+    "Co"
+  ],
+  "refining": {
+    "earth_recovery": 0.95,
+    "space_recoveries": [
+      0.9,
+      0.95,
+      0.98
+    ],
+    "target_mass_fractions": [
+      0.01,
+      0.1,
+      0.5
+    ],
+    "freight_USD2026_kg": [
+      150,
+      500,
+      1500
+    ],
+    "Earth_treatment_USD2026_per_concentrate_kg": [
+      0,
+      50
+    ]
+  },
+  "fabrication_examples": [
+    {
+      "product": "Catalyst product with 0.5 percent active precious metal",
+      "active_fraction": 0.005
+    },
+    {
+      "product": "Magnet product with 30 percent rare-earth active material",
+      "active_fraction": 0.3
+    },
+    {
+      "product": "Structural alloy with 0.2 percent scandium",
+      "active_fraction": 0.002
+    }
+  ],
+  "Earth_electricity_comparison_USD2026_kWh": 0.1,
+  "processing_energy_kWh_per_kg": [
+    10,
+    100,
+    1000
+  ],
+  "physical_cases": [
+    "propellant_logistics:breakthrough:wider:combined",
+    "diversified:breakthrough:wider:combined"
+  ],
+  "checkpoints": [
+    100,
+    200
+  ],
+  "treated_feed_shares": [
+    0.01,
+    0.1
+  ],
+  "purchase_cases": [
+    "diversified:breakthrough:reference",
+    "diversified:breakthrough:wider"
+  ],
+  "evidence": "Research-informed location and product-form screening, conditional break-even calculations and normalized recovery opportunities. No globally optimal percentage mix, certified production line, sales forecast or revised total return is asserted.",
+  "boundary": "U is the established general economic unit, potentially a currency or basket of U-related currencies, serving the planned off-Earth economy before Open Moon, the habitat array and outer-system buildout. Small industrial orbital facilities serving this phase remain within scope.",
+  "rules": [
+    "Optimize the consolidated off-Earth lifecycle surplus after external purchases, renewal, losses, qualification and preservation requirements. Domestic transfers and avoided imports are not additional export invoices.",
+    "The 3 percent price-year adjustment is an explicit planning convention for comparing 2025 observations with USD2026 costs; it is not an observed 2025-2026 CPI statistic. No U exchange rate or future commodity price is inferred.",
+    "Return charges of 150 USD2026/kg retain only the inherited ground-handling floor; 500 and 1500 are total-return sensitivity cases, not quoted route costs. Cases below 150 require changing that inherited assumption and do not replace it here.",
+    "The raw feed already passes through the planned main operation. Joint circuit budgets are maximum incremental budgets before plant, refining, labour, power, recovery duties and uncounted transport costs; they cannot fund a new mine for free.",
+    "Missing element prices or assays remain unknown. Osmium has physical inventory but no assigned sales price. Oxide product prices are not multiplied by elemental assay masses.",
+    "Market production observations are scale checks, not future sales caps. No positive sale is booked without a matched product quality and customer allocation. The same element cannot be sold as metal and embedded product simultaneously.",
+    "Earth processing cost and off-Earth recovery are independent in the refining comparison. Shipping a concentrate can be preferable if an Earth refiner achieves higher recovery or lower treatment cost.",
+    "Fabrication mass fractions and processing energy intensities are explicit sensitivity examples, not measured product bills or engineering quotations. Their calculated thresholds exclude all other differences and do not assert the products are qualified.",
+    "Source or lunar extraction remains subject to pre-disturbance review, native-condition and unopened sample preservation, distributed physical/data archives, provenance and access, future accessible stocks, scarce-element recovery, and all standing cargo-safety requirements. No fixed protected percentage or approved extraction site is invented.",
+    "Local power generation competes with beamed electricity. The power comparison confers no shield credit, atmospheric heat penalty or free thermal sink on the enclosed phase. All new refining and thermal rejection equipment remains to be priced.",
+    "Maintain recycling and traceable residues, with remaining valuable elements available for later recovery. Refurbishment, internal reuse, Earth sales and retained stocks require disjoint allocations. The currently booked generic export invoices remain unchanged."
+  ]
+}

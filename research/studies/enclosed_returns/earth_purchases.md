@@ -67,6 +67,8 @@ Services account for most early receipts. In the 1% diversified case, goods deli
 
 The 1% diversified case reaches annual year-200 purchases of **8.99 million tonnes of Earth goods** and **11.07 million tonnes of in-space propellant**. Its annual gross customer invoices are **34.08 trillion USD2041**. The cumulative totals sum the actual gradual sales path; they do not multiply these mature annual rates by 100 or 200.
 
+The [product-selection and processing-location companion](../product_allocation/README.md) evaluates how these broad offers could become named products. It compares source concentration, off-Earth or Earth refining, and final fabrication at the customer or in a suitable gravity environment. The comparison supplies conditional cost thresholds and process priorities while preserving the purchase totals here; an element-specific commercial allocation still requires matching orders and production specifications.
+
 ## Calculation and interpretation
 
 The [purchase-account runner](earth_purchases.py) reads the existing annual orders, price and acceptance assumptions, then reconciles its invoices to the revised financial results. Sales begin in dated year 8; the year-100 checkpoint sums 93 annual rows and the year-200 checkpoint sums 193. That inclusive convention matches the existing returns exactly. Seed construction supplies neither additional commercial invoices nor repeated founding output.
