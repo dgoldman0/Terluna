@@ -8,6 +8,8 @@ Combining recovery and refurbishment with the feasible faster propellant rollout
 
 The [revised monetary and wealth account](../monetary_wealth/revised.md) follows the primary recovery/refurbishment paths under three ownership arrangements. In the propellant/1% case, included year-200 local net wealth is 0.525 trillion USD2041 with continued outside ownership, 0.908 trillion with community purchases, and 329.780 trillion under a negotiated 75% community transfer with retained distributions. These are different ownership bargains; money, equity and underlying assets are not added twice. The [verification record](revised_checks.md) identifies the actual checks and unresolved evidence.
 
+The [cumulative Earth-purchase account](earth_purchases.md) separates goods returned to Earth, propellant delivered in space and service invoices in these same orders. Under the breakthrough diversified case, Earth purchases 5.52 million tonnes of goods through year 100 and 191–274 million tonnes through year 200 at 0.5–1% real demand growth. In-space propellant purchases separately reach 272–471 million tonnes through year 200. Individual precious-metal and rare-earth purchases remain unallocated within the generic product categories; recovery potential has not been added as new sales.
+
 ## Preserved previous baseline
 
 Everything below this heading describes the preceding financial baseline and its original resource screen. The revised study above supersedes its current return and resource interpretation while retaining these figures for exact comparison. The earlier narrow catalogue allowance is not a cap on the broader geological opportunity now modeled.

@@ -1601,7 +1601,11 @@
         "studies/enclosed_returns/revised_inputs.json",
         "studies/enclosed_returns/results/revised.json.gz",
         "studies/enclosed_returns/results/revised_flows.json.gz",
-        "studies/enclosed_returns/revised_checks.md"
+        "studies/enclosed_returns/revised_checks.md",
+        "studies/enclosed_returns/earth_purchases.md",
+        "studies/enclosed_returns/earth_purchases_inputs.json",
+        "studies/enclosed_returns/results/earth_purchases.json.gz",
+        "studies/enclosed_returns/earth_purchases_checks.md"
       ],
       "source_commits": {
         "provisioning": "a8af87614e9c30b6fa4879440765f7e74fe094be",
@@ -1614,7 +1618,8 @@
         "Recovery/refurbishment plus feasible faster propellant rollout at 1 percent demand growth gives 507.91 trillion USD2041 of cumulative year-200 payouts and 23.16 trillion funder NPV, against 4.17 trillion of modeled initial funding. Both faster diversified cases fail workforce from year 24.",
         "Broader population distributions support substantially larger material potential. Qualified grades and routes remain separate; poorer sources raise opening funding to about 11 trillion USD2041 for the tested portfolios.",
         "Nine of 81 primary cases draw U credit; maximum cumulative draw is 1.026 billion USD2041 through year 200, with no relative-price breach. A six-month invoice interruption with only 25 percent of cash accessible passes 6 of 54 dated cases without credit and 18 with the assumed bridge.",
-        "Permanent late sales losses can require large new funding while barely changing year-zero NPV. Ownership, productive assets, monetary stocks and net external claims are evaluated in the revised wealth companion."
+        "Permanent late sales losses can require large new funding while barely changing year-zero NPV. Ownership, productive assets, monetary stocks and net external claims are evaluated in the revised wealth companion.",
+        "Existing orders reconcile to cumulative external purchases at years 100 and 200. The breakthrough diversified case sells 5.52 million tonnes of Earth goods by year 100 and 191-274 million tonnes by year 200 at 0.5-1 percent real demand growth, with separate in-space propellant sales. Individual precious-metal and rare-earth sales remain unallocated within generic products."
       ],
       "diagnostic_source_commits": {
         "provisioning": "a6df1bec78ad533f8868ef40a7df81906a3baa38",

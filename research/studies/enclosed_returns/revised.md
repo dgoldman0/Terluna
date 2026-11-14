@@ -6,6 +6,8 @@ Earlier commercial earnings make a further difference. With 1% annual real deman
 
 The revision compares the same commercial programme before and after explicitly costed material recovery and equipment refurbishment. It also brings the broader resource distributions, monetary accounts and ownership alternatives into one appraisal. **Cash returns, continuing operating capacity and locally retained wealth answer different questions.** The tables retain those distinctions rather than treating a large cumulative sales total, a discounted return and an asset balance as interchangeable measures.
 
+The [cumulative purchase breakdown](earth_purchases.md) expresses the same customer invoices in physical terms. The diversified breakthrough portfolio requires 5.52 million tonnes of purchased goods delivered to Earth through year 100 and 191–274 million tonnes through year 200 across 0.5–1% real demand growth. Its customer propellant, delivered in space, is a separate 272–471 million tonnes through year 200. Generic product categories still leave individual elemental sales unallocated, so the new resource coproduct potential is not additional revenue in these returns.
+
 ## Scope, valuation and comparison
 
 **U is the established general economic unit**, potentially one currency or a basket of U-related currencies. It serves the planned off-Earth economic zone. That zone includes its supporting lunar and near-Earth industry; Earth remains an external trading partner and a source of investors, suppliers and customers. The economic appraisal includes those stakeholders. Open Moon, the habitat array and outer-Solar-System development remain outside the scenario.

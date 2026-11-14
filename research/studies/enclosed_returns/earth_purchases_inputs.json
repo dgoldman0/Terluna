@@ -1,0 +1,29 @@
+{
+  "schema": "terluna.humanities.earth-purchases-inputs/1",
+  "horizons": [
+    100,
+    200
+  ],
+  "source_revision": "2b7df218",
+  "dependencies": {
+    "results/orders.json": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
+    "enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
+    "../complex_returns/strategy_inputs.json": "ad8d3af2ec0a5614492536abd3bb10a21681cf08c17b8e52a46ab8af65500284",
+    "../complex_returns/inputs/strategy_profiles.json": "68de393762a3411e0fc3fb2956c8d16c936c46019db70995cc3ccd5654449a9c",
+    "results/revised.json.gz": "b5236e5e0cab2d3941816441b59d943b54a99c9dec31c3b09deb2d0b2c41648d",
+    "markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb"
+  },
+  "evidence": "Arithmetic decomposition of existing conditional purchase scenarios, reconciled to the revised returns. No new market forecast, trace-element purchase allocation, extraction authorization or coproduct plant is supplied.",
+  "units": "Purchased product mass in kg; annual checkpoint rows in kg/year. Invoices in constant USD2041 purchasing equivalents, undiscounted. U remains the general economic unit; no exchange rate is assigned.",
+  "rules": [
+    "The 81 primary cases are alternatives: nine portfolios, three market levels and three demand-growth rates. Financing variants share the same invoices and must not be added.",
+    "Sum sales in dated years 8 through the checkpoint, inclusive, matching the financial accounts. Years 0 through 7 have no commercial receipts. The completed population remains about 6.47 million in year 200.",
+    "Earth goods exclude packaging, 2 percent quality rejection, 1 percent return loss and unrecovered premium rejection. They describe expected purchased product mass, not dispatched capsule payload or mined feed.",
+    "Premium output is recovered from the saved two-price invoice, with the original 80 percent fallback recovery. It is a subset of lunar products, not additional production.",
+    "Propellant is delivered to external customers in space and is not returned to Earth. Internal fuel, domestic water and construction materials are excluded from customer sales.",
+    "Recorded invoices are from the external customer budgets of the economic model. The orderbook does not classify future customers by nationality or ultimate beneficial ownership.",
+    "Source products are an asteroid-derived refined-product category; lunar goods are manufactured on the Moon and can contain imported components. Neither category specifies elemental mass fractions.",
+    "No new platinum-group, rare-earth or other coproduct receipts are added to generic goods. Physical recovery potential needs domestic allocation, product-specific orders and priced processing before it changes financial returns.",
+    "U serves the planned off-Earth economy before Open Moon, habitat-array and outer-system buildout. Currency stocks, investment contributions, credit draws, dividends and domestic transfers are not customer purchases."
+  ]
+}
