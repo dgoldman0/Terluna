@@ -1,6 +1,6 @@
 {
   "schema": "terluna.research.vacuum-economy-cases/1",
-  "reading_rule": "Each case names a scenario of demand, a population ramp from programme.json and the recovery measures of the industry. In the scenario first_pass the portfolio, the market and its growth are those of the staged studies' order book: nine export portfolios at their strongest market, with real demand growing 0.5% a year, and with material recovery and equipment refurbishment applied.",
+  "reading_rule": "Each case names a scenario of demand, a population ramp from programme.json and the recovery measures of the industry. In the scenario first_pass the portfolio, the market and its growth are those of the staged studies' order book: nine export portfolios at their strongest market, with real demand growing 0.5% a year, and with material recovery and equipment refurbishment applied. Each portfolio runs on the staged schedule, which reproduces the staged appraisal, and on the programme's two ramps.",
   "cases": [
     {
       "name": "first_pass:raw_resource_price",
@@ -78,6 +78,168 @@
       "name": "first_pass:prior_manufacturing_mix",
       "scenario": "first_pass",
       "ramp": "first_pass",
+      "portfolio": "prior_manufacturing_mix",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:raw_resource_price:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "raw_resource_price",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:commodity_refined:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "commodity_refined",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:specialty:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "specialty",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:premium_lunar:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "premium_lunar",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:propellant_logistics:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "propellant_logistics",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:compute_digital:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "compute_digital",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:services:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:diversified:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:prior_manufacturing_mix:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "prior_manufacturing_mix",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:raw_resource_price:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "raw_resource_price",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:commodity_refined:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "commodity_refined",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:specialty:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "specialty",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:premium_lunar:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "premium_lunar",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:propellant_logistics:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "propellant_logistics",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:compute_digital:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "compute_digital",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:services:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:diversified:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:prior_manufacturing_mix:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
       "portfolio": "prior_manufacturing_mix",
       "market": "breakthrough",
       "growth": "reference",

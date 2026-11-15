@@ -3,7 +3,8 @@ import gzip
 import json
 import math
 import pytest
-from research.studies.vacuum_economy import run
+from research.studies.enclosed_returns import markets
+from research.studies.vacuum_economy import programme as definition, run
 
 SAVED = json.loads((run.HERE / 'results/economy.json').read_text())
 CASES = {c['name']: c for c in SAVED['cases']}
@@ -30,6 +31,8 @@ def test_the_first_pass_cases_reproduce_the_staged_appraisal_exactly():
     compared = 0
     for case in SAVED['cases']:
         assert case['scenario'] == 'first_pass' and case['recovery'] == 'combined'
+        if case['ramp'] != 'first_pass':
+            continue
         old = {(c['mode'], c['horizon']): c for c in combined[':'.join((case['portfolio'], case['market'], case['growth']))]['checkpoints']}
         assert len(case['checkpoints']) == len(old) == 9
         for new in case['checkpoints']:
@@ -82,11 +85,31 @@ def test_material_drawn_only_grows_and_financing_changes_no_receipt(name):
         assert c['socioeconomic_NPV_USD2041'] == equity['socioeconomic_NPV_USD2041']
 
 
-def test_a_case_outside_the_first_pass_is_refused():
+def test_every_portfolio_runs_on_the_staged_schedule_and_on_both_programme_ramps():
+    by = {}
+    for case in SAVED['cases']:
+        by.setdefault(case['portfolio'], set()).add(case['ramp'])
+    assert len(by) == 9 and all(ramps == {'first_pass', 'constant_growth', 'front_loaded'} for ramps in by.values())
+
+
+@pytest.mark.parametrize('ramp', ['constant_growth', 'front_loaded'])
+def test_the_order_book_takes_its_residents_from_the_named_ramp_and_leaves_the_staged_module_alone(ramp):
+    programme = run.sources()['programme']
+    case = run.cases(['first_pass:services:' + ramp])[0]
+    book = run.orders(case)
+    for row in book['annual']:
+        assert row['population'] == definition.population(programme, ramp, row['year'])
+        assert row['new_residential_people'] == definition.population(programme, ramp, row['year'] + 2) - definition.population(programme, ramp, row['year'] + 1)
+    rules = markets.inputs()[0]
+    assert run.staged_demand(ramp) is not markets and run.staged_demand('first_pass') is markets
+    assert markets.population(100, rules) == definition.population(programme, 'first_pass', 100)
+
+
+def test_an_unknown_scenario_ramp_or_case_is_refused():
     case = dict(run.cases(['first_pass:services'])[0])
     with pytest.raises(ValueError):
         run.orders(dict(case, scenario='central'))
     with pytest.raises(ValueError):
-        run.orders(dict(case, ramp='constant_growth'))
+        run.orders(dict(case, ramp='stepwise'))
     with pytest.raises(ValueError):
         run.cases(['first_pass:unlisted'])

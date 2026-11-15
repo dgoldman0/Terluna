@@ -9,13 +9,14 @@ compact record: the funding, the receipts and the returns at each horizon, the r
 the share of the costs paid to Earth, and the material drawn from the Moon and the near-Earth sources.
 
 The scenario `first_pass` is the demand of the staged studies of 12 to 14 November 2026, with their prices, audiences
-and buyers' budgets, on the ramp of the same name. It is kept so that the figures of those studies can be reproduced
-through this entry point and every later change measured against them.
+and buyers' budgets. On the ramp of the same name it reproduces the figures of those studies, so that every later
+change can be measured against them; on the programme's two ramps it shows what the schedule of residents alone changes.
 """
 from __future__ import annotations
 import argparse
 from functools import lru_cache
 import hashlib
+import importlib.util
 import json
 import math
 from pathlib import Path
@@ -79,16 +80,33 @@ def dependencies():
     return {str(p.relative_to(ROOT)): digest(p) for p in sorted(paths)}
 
 
+@lru_cache(maxsize=None)
+def staged_demand(ramp):
+    """The staged studies' order-book module, drawing its residents from one of the programme's ramps.
+
+    That module takes its residents from a function of its own. For any ramp but the staged one, a private copy of
+    the module is loaded and that one function replaced; the staged module and its figures stay as they are.
+    """
+    programme = sources()['programme']
+    if ramp not in programme['ramps']:
+        raise ValueError('Unknown population ramp: ' + ramp)
+    if ramp == 'first_pass':
+        return markets
+    spec = importlib.util.spec_from_file_location('research.studies.enclosed_returns._markets_on_' + ramp, RETURNS / 'markets.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.population = lambda year, rules: definition.population(programme, ramp, year)
+    return module
+
+
 def orders(case):
     """The customers' orders and the residents of each year, for one case."""
     s = sources()
     if case['scenario'] != 'first_pass':
         raise ValueError('Unknown scenario of demand: ' + case['scenario'])
-    if case['ramp'] != 'first_pass':
-        raise ValueError('The first-pass demand is drawn up on the first-pass ramp alone')
     rules, strategies, staged, services, _, _ = s['demand']
-    book = markets.case(rules, strategies, staged, services, case['portfolio'], case['market'], case['growth'],
-                        rules['market_growth'][case['growth']])
+    book = staged_demand(case['ramp']).case(rules, strategies, staged, services, case['portfolio'], case['market'],
+                                            case['growth'], rules['market_growth'][case['growth']])
     for row in book['annual']:
         planned = definition.population(s['programme'], case['ramp'], row['year'])
         if not math.isclose(row['population'], planned, rel_tol=1e-12):

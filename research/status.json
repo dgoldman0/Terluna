@@ -2140,7 +2140,7 @@
     },
     {
       "topic": "vacuum_economy",
-      "condition": "conditional_accounts; first_pass_reproduces_staged_appraisal; evidence_scenarios_and_programme_ramps_not_yet_run",
+      "condition": "conditional_accounts; first_pass_reproduces_staged_appraisal; first_pass_run_on_both_programme_ramps; evidence_scenarios_not_yet_run",
       "material": [
         "studies/vacuum_economy/README.md",
         "studies/vacuum_economy/programme.json",
@@ -2156,7 +2156,8 @@
       "findings": [
         "One run draws up a case's orders, sizes its industry with provisioning's cohort model and finances it with the returns study's financing model; the nine headline cases of the staged appraisal are reproduced exactly, and all 81 staged order books were checked the same way on 15 November 2026.",
         "In the first pass the costs paid to Earth rise from 4 percent of all costs in years 8 to 25 to 63 percent in years 151 to 200 in the diversified case, because the working parts of every new machine and their launch are bought at fixed prices throughout.",
-        "The asteroid feed of the first pass, 134 to 213 trillion kg by year 200 across the nine cases, is set by water in every year; in the diversified case 94 percent of that water is propellant for the system's own tugs and ferries and 2 percent is propellant sold."
+        "The asteroid feed of the first pass, 134 to 213 trillion kg by year 200 across the nine cases, is set by water in every year; in the diversified case 94 percent of that water is propellant for the system's own tugs and ferries and 2 percent is propellant sold.",
+        "With the first pass's demand unchanged, constant growth of 3.3 percent a year improves every portfolio on the staged schedule (diversified funders' net present value at year 200 from 7.35 to 9.04 trillion USD2041; services' added equity from 48 to 7 trillion), and the front-loaded ramp lowers the net present value of the three self-financing portfolios by about 1.6 trillion; all 27 cases pass their capacity screens."
       ]
     }
   ]
