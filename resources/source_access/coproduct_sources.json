@@ -1,0 +1,85 @@
+{
+  "schema": "terluna.resources.coproduct-sources/1",
+  "sources": [
+    {
+      "id": "lodders2025",
+      "title": "Lodders, Bergemann & Palme (2025), Solar System Elemental Abundances from the Solar Photosphere and CI-Chondrites",
+      "url": "https://ntrs.nasa.gov/api/citations/20250008646/downloads/AbundancesLodders.pdf?attachment=true",
+      "retrieved": "2026-11-13",
+      "sha256": "b37eef771e9378f9c88171fb116390d91dcd9898a6c1c6638d03b24e94b5fc5c",
+      "bytes": 2532588,
+      "reading_scope": "Table 4 and CI compilation methodology/REE discussion; not a full independent review of the abundance literature.",
+      "raw_storage": "Retrieved to temporary research workspace; full paper not redistributed."
+    },
+    {
+      "id": "neal2003",
+      "title": "Neal & Kramer (2003), The composition of KREEP: A detailed study of KREEP basalt 15386",
+      "url": "https://www.lpi.usra.edu/meetings/lpsc2003/pdf/2023.pdf",
+      "retrieved": "2026-11-13",
+      "sha256": "a424b2527b753dee3981d4d7c4e29ee136c6f10661fd43bc8832db5a5698a5b8",
+      "bytes": 37926,
+      "reading_scope": "Both pages, Table 1, analytical methods and heterogeneity discussion; conference contribution.",
+      "raw_storage": "Retrieved to temporary research workspace; full paper not redistributed."
+    },
+    {
+      "id": "lunar_soils",
+      "title": "Lunar Sourcebook, Table 7.15, returned lunar soils (USGS-hosted compilation)",
+      "url": "https://lunar-consortium.astrogeology.usgs.gov/data/chem_min/tab7_15.pdf",
+      "retrieved": "2026-11-13",
+      "sha256": "2b4b66752f5f1a79911047c1be8cc606f6a350c512d124864c5d82445fc041b1",
+      "bytes": 10279,
+      "reading_scope": "Selected La and Sc rows only. La 5–70 ppm and Sc 8–63 ppm across the listed site/soil records. Do not use anomalous Na/P oxide entries or infer a total REY assay.",
+      "raw_storage": "Retrieved to temporary research workspace; full paper not redistributed."
+    },
+    {
+      "id": "harries2024",
+      "title": "Harries (2024), In-situ Resource Utilization of Asteroid Materials: Concepts and Challenges",
+      "url": "https://curation.isas.jaxa.jp/symposium/abstract/2024/P-1_Harries.pdf",
+      "retrieved": "2026-11-13",
+      "sha256": "c1f01229a53fcd6d23ab77c99a2108005b0f6660b2b3733a39092282b6f69c24",
+      "bytes": 225331,
+      "reading_scope": "Both pages; grade variability and processing discussion. A conference synthesis drawing metal grades from MetBase and cited works; not a new asteroid assay.",
+      "raw_storage": "Retrieved to temporary research workspace; full paper not redistributed."
+    },
+    {
+      "id": "day2016",
+      "title": "Day, Brandon & Walker (2016), Highly Siderophile Elements in Earth, Mars, the Moon, and Asteroids",
+      "url": "https://msaweb.org/wp-content/uploads/2022/05/REV081C04.pdf",
+      "retrieved": "2026-11-13",
+      "sha256": "ad10f85e63a14004e633ad757d5237a7deefe230d1d78d61a8c76b40d0543c42",
+      "bytes": 3796976,
+      "reading_scope": "Table 3 and adjacent chondrite/iron discussion. Original measurements cited by the review were not individually re-read.",
+      "raw_storage": "Retrieved to temporary research workspace; full paper not redistributed."
+    },
+    {
+      "id": "sanchez2021",
+      "title": "Sanchez et al. (2021), Physical Characterization of Metal-rich Near-Earth Asteroids 6178 (1986 DA) and 2016 ED85",
+      "url": "https://arxiv.org/pdf/2109.13950",
+      "retrieved": "2026-11-13",
+      "sha256": "31fa40d0f673fc58663af0c0496740f98da355d2b8c86948fcda0e49dd009171",
+      "bytes": 2177633,
+      "reading_scope": "Abstract, characterization/mixing model and inferred-resource methods. Metal-rich evidence retained; precious-metal grades, reserve language and headline market valuation are not adopted.",
+      "raw_storage": "Retrieved to temporary research workspace; full paper not redistributed."
+    },
+    {
+      "id": "compendium15386",
+      "title": "NASA Lunar Sample Compendium, 15386, C. Meyer (2011)",
+      "url": "https://www.lpi.usra.edu/lunar/samples/atlas/compendium/15386.pdf",
+      "retrieved": "2026-11-13",
+      "reading_scope": "Web-extracted pp.1–4: sample size, phosphate hosts and siderophile-poor composition. Used as context, not as an independent deposit assay.",
+      "sha256": null
+    },
+    {
+      "id": "cannon2023",
+      "title": "Cannon, Gialich & Acain (2023), Precious and structural metals on asteroids",
+      "url": "https://doi.org/10.1016/j.pss.2022.105608",
+      "reading_scope": "Indexed publisher abstract/introduction only. Publisher and mirror full PDF retrieval returned 403. No numerical inputs taken from this source.",
+      "unresolved": "Full-text reading not completed."
+    }
+  ],
+  "retrieval_notes": [
+    "Initial web retrieval of the intended NASA abundance PDF failed; the exact NASA PDF was subsequently downloaded and its hash recorded above.",
+    "The Cannon full-text issue remains unresolved and contributes no numerical assumption.",
+    "Published factual assay transcriptions are credited; full papers and underlying proprietary meteorite databases are not redistributed."
+  ]
+}

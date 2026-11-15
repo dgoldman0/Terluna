@@ -1,0 +1,1236 @@
+{
+  "schema": "terluna.resources.startup-feed/1",
+  "producer": {
+    "path": "resources/source_access/export_startup_feed.py",
+    "sha256": "a64c41e3b505e7407c38cd7a2a6423b6aa132a5279f95b5fe188e22b67b116d5"
+  },
+  "source": {
+    "path": "provisioning/enclosed_industry/results/revised_industry.json.gz",
+    "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f",
+    "producer": {
+      "path": "provisioning/enclosed_industry/revised_industry.py",
+      "sha256": "d926c4d55bf0256b95dd9bb5b320fa7f9865e3664520aab91e543daa7d9b867a"
+    },
+    "source_commit": "210a20bd2cf16ec951f02a01f6ee3758b497df03"
+  },
+  "evidence": "Exact eight-year seed aggregates from the existing 12,500-resident opening. No dated mining or refining sequence is supplied by the source.",
+  "units": "kg cumulative over elapsed years [0,8); year-8 operating flows excluded.",
+  "reading_rule": "Base plus late procurement equals total; do not add the total again. Late procurement belongs to model years 6/7 (human-readable build years 7/8). Case alternatives are not additive.",
+  "cases": [
+    {
+      "name": "raw_resource_price:limited:static:combined",
+      "portfolio": "raw_resource_price",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "commodity_refined:limited:static:combined",
+      "portfolio": "commodity_refined",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 292713502821.7677,
+        "base_kg": 292581682742.9736,
+        "late_years_6_7_kg": 131820078.79412495
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "specialty:limited:static:combined",
+      "portfolio": "specialty",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 300865078172.9953,
+        "base_kg": 300758328776.4059,
+        "late_years_6_7_kg": 106749396.58939451
+      },
+      "lunar_raw": {
+        "total_kg": 7835016695.969919,
+        "base_kg": 7818597267.35788,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "premium_lunar:limited:static:combined",
+      "portfolio": "premium_lunar",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 305895461382.09143,
+        "base_kg": 305769248857.0396,
+        "late_years_6_7_kg": 126212525.0517893
+      },
+      "lunar_raw": {
+        "total_kg": 7959660068.30054,
+        "base_kg": 7929821430.442635,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "propellant_logistics:limited:static:combined",
+      "portfolio": "propellant_logistics",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 298938653315.0383,
+        "base_kg": 298835477481.0329,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "compute_digital:limited:static:combined",
+      "portfolio": "compute_digital",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 293404920199.5027,
+        "base_kg": 293204880676.34644,
+        "late_years_6_7_kg": 200039523.15624908
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "services:limited:static:combined",
+      "portfolio": "services",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "diversified:limited:static:combined",
+      "portfolio": "diversified",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 302786745040.6722,
+        "base_kg": 302648671532.3615,
+        "late_years_6_7_kg": 138073508.31069112
+      },
+      "lunar_raw": {
+        "total_kg": 7835342616.528968,
+        "base_kg": 7818923187.916928,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "prior_manufacturing_mix:limited:static:combined",
+      "portfolio": "prior_manufacturing_mix",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 306943457321.00775,
+        "base_kg": 306757276439.446,
+        "late_years_6_7_kg": 186180881.56175196
+      },
+      "lunar_raw": {
+        "total_kg": 7958356386.064342,
+        "base_kg": 7928517748.206436,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "raw_resource_price:global:static:combined",
+      "portfolio": "raw_resource_price",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "commodity_refined:global:static:combined",
+      "portfolio": "commodity_refined",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 292717628365.6938,
+        "base_kg": 292581682742.9736,
+        "late_years_6_7_kg": 135945622.7202057
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "specialty:global:static:combined",
+      "portfolio": "specialty",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 300869203716.9214,
+        "base_kg": 300758328776.4059,
+        "late_years_6_7_kg": 110874940.51547527
+      },
+      "lunar_raw": {
+        "total_kg": 7835016695.969919,
+        "base_kg": 7818597267.35788,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "premium_lunar:global:static:combined",
+      "portfolio": "premium_lunar",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 305895461382.09143,
+        "base_kg": 305769248857.0396,
+        "late_years_6_7_kg": 126212525.0517893
+      },
+      "lunar_raw": {
+        "total_kg": 7959660068.30054,
+        "base_kg": 7929821430.442635,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "propellant_logistics:global:static:combined",
+      "portfolio": "propellant_logistics",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 298938653315.0383,
+        "base_kg": 298835477481.0329,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "compute_digital:global:static:combined",
+      "portfolio": "compute_digital",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 293927044761.46106,
+        "base_kg": 293683198751.27814,
+        "late_years_6_7_kg": 243846010.18292278
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "services:global:static:combined",
+      "portfolio": "services",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "diversified:global:static:combined",
+      "portfolio": "diversified",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 302929480524.3645,
+        "base_kg": 302766048195.34753,
+        "late_years_6_7_kg": 163432329.01695105
+      },
+      "lunar_raw": {
+        "total_kg": 7835342616.528968,
+        "base_kg": 7818923187.916928,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "prior_manufacturing_mix:global:static:combined",
+      "portfolio": "prior_manufacturing_mix",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 307026354570.7636,
+        "base_kg": 306814814868.4956,
+        "late_years_6_7_kg": 211539702.26801193
+      },
+      "lunar_raw": {
+        "total_kg": 7958356386.064342,
+        "base_kg": 7928517748.206436,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "raw_resource_price:breakthrough:static:combined",
+      "portfolio": "raw_resource_price",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "commodity_refined:breakthrough:static:combined",
+      "portfolio": "commodity_refined",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 292721753909.6199,
+        "base_kg": 292581682742.9736,
+        "late_years_6_7_kg": 140071166.64628637
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "specialty:breakthrough:static:combined",
+      "portfolio": "specialty",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 300873329260.8474,
+        "base_kg": 300758328776.4059,
+        "late_years_6_7_kg": 115000484.44155596
+      },
+      "lunar_raw": {
+        "total_kg": 7835016695.969919,
+        "base_kg": 7818597267.35788,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "premium_lunar:breakthrough:static:combined",
+      "portfolio": "premium_lunar",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 305895461382.09143,
+        "base_kg": 305769248857.0396,
+        "late_years_6_7_kg": 126212525.0517893
+      },
+      "lunar_raw": {
+        "total_kg": 7959660068.30054,
+        "base_kg": 7929821430.442635,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "propellant_logistics:breakthrough:static:combined",
+      "portfolio": "propellant_logistics",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 298938653315.0383,
+        "base_kg": 298835477481.0329,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "compute_digital:breakthrough:static:combined",
+      "portfolio": "compute_digital",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 294389331088.27985,
+        "base_kg": 294101678591.07025,
+        "late_years_6_7_kg": 287652497.20959634
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "services:breakthrough:static:combined",
+      "portfolio": "services",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "diversified:breakthrough:static:combined",
+      "portfolio": "diversified",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 303012377774.6065,
+        "base_kg": 302823586624.8833,
+        "late_years_6_7_kg": 188791149.72321096
+      },
+      "lunar_raw": {
+        "total_kg": 7835342616.528968,
+        "base_kg": 7818923187.916928,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "prior_manufacturing_mix:breakthrough:static:combined",
+      "portfolio": "prior_manufacturing_mix",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 307109251821.00543,
+        "base_kg": 306872353298.0312,
+        "late_years_6_7_kg": 236898522.97427177
+      },
+      "lunar_raw": {
+        "total_kg": 7958356386.064342,
+        "base_kg": 7928517748.206436,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "raw_resource_price:limited:reference:combined",
+      "portfolio": "raw_resource_price",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "commodity_refined:limited:reference:combined",
+      "portfolio": "commodity_refined",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 292713502821.7677,
+        "base_kg": 292581682742.9736,
+        "late_years_6_7_kg": 131820078.79412495
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "specialty:limited:reference:combined",
+      "portfolio": "specialty",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 300865078172.9953,
+        "base_kg": 300758328776.4059,
+        "late_years_6_7_kg": 106749396.58939451
+      },
+      "lunar_raw": {
+        "total_kg": 7835016695.969919,
+        "base_kg": 7818597267.35788,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "premium_lunar:limited:reference:combined",
+      "portfolio": "premium_lunar",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 305895461382.09143,
+        "base_kg": 305769248857.0396,
+        "late_years_6_7_kg": 126212525.0517893
+      },
+      "lunar_raw": {
+        "total_kg": 7959660068.30054,
+        "base_kg": 7929821430.442635,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "propellant_logistics:limited:reference:combined",
+      "portfolio": "propellant_logistics",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 298938653315.0383,
+        "base_kg": 298835477481.0329,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "compute_digital:limited:reference:combined",
+      "portfolio": "compute_digital",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 293404920199.5027,
+        "base_kg": 293204880676.34644,
+        "late_years_6_7_kg": 200039523.15624908
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "services:limited:reference:combined",
+      "portfolio": "services",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "diversified:limited:reference:combined",
+      "portfolio": "diversified",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 302786745040.6722,
+        "base_kg": 302648671532.3615,
+        "late_years_6_7_kg": 138073508.31069112
+      },
+      "lunar_raw": {
+        "total_kg": 7835342616.528968,
+        "base_kg": 7818923187.916928,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "prior_manufacturing_mix:limited:reference:combined",
+      "portfolio": "prior_manufacturing_mix",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 306943457321.00775,
+        "base_kg": 306757276439.446,
+        "late_years_6_7_kg": 186180881.56175196
+      },
+      "lunar_raw": {
+        "total_kg": 7958356386.064342,
+        "base_kg": 7928517748.206436,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "raw_resource_price:global:reference:combined",
+      "portfolio": "raw_resource_price",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "commodity_refined:global:reference:combined",
+      "portfolio": "commodity_refined",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 292717628365.6938,
+        "base_kg": 292581682742.9736,
+        "late_years_6_7_kg": 135945622.7202057
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "specialty:global:reference:combined",
+      "portfolio": "specialty",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 300869203716.9214,
+        "base_kg": 300758328776.4059,
+        "late_years_6_7_kg": 110874940.51547527
+      },
+      "lunar_raw": {
+        "total_kg": 7835016695.969919,
+        "base_kg": 7818597267.35788,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "premium_lunar:global:reference:combined",
+      "portfolio": "premium_lunar",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 305895461382.09143,
+        "base_kg": 305769248857.0396,
+        "late_years_6_7_kg": 126212525.0517893
+      },
+      "lunar_raw": {
+        "total_kg": 7959660068.30054,
+        "base_kg": 7929821430.442635,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "propellant_logistics:global:reference:combined",
+      "portfolio": "propellant_logistics",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 298938653315.0383,
+        "base_kg": 298835477481.0329,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "compute_digital:global:reference:combined",
+      "portfolio": "compute_digital",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 293927044761.46106,
+        "base_kg": 293683198751.27814,
+        "late_years_6_7_kg": 243846010.18292278
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "services:global:reference:combined",
+      "portfolio": "services",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "diversified:global:reference:combined",
+      "portfolio": "diversified",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 302929480524.3645,
+        "base_kg": 302766048195.34753,
+        "late_years_6_7_kg": 163432329.01695105
+      },
+      "lunar_raw": {
+        "total_kg": 7835342616.528968,
+        "base_kg": 7818923187.916928,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "prior_manufacturing_mix:global:reference:combined",
+      "portfolio": "prior_manufacturing_mix",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 307026354570.7636,
+        "base_kg": 306814814868.4956,
+        "late_years_6_7_kg": 211539702.26801193
+      },
+      "lunar_raw": {
+        "total_kg": 7958356386.064342,
+        "base_kg": 7928517748.206436,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "raw_resource_price:breakthrough:reference:combined",
+      "portfolio": "raw_resource_price",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "commodity_refined:breakthrough:reference:combined",
+      "portfolio": "commodity_refined",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 292721753909.6199,
+        "base_kg": 292581682742.9736,
+        "late_years_6_7_kg": 140071166.64628637
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "specialty:breakthrough:reference:combined",
+      "portfolio": "specialty",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 300873329260.8474,
+        "base_kg": 300758328776.4059,
+        "late_years_6_7_kg": 115000484.44155596
+      },
+      "lunar_raw": {
+        "total_kg": 7835016695.969919,
+        "base_kg": 7818597267.35788,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "premium_lunar:breakthrough:reference:combined",
+      "portfolio": "premium_lunar",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 305895461382.09143,
+        "base_kg": 305769248857.0396,
+        "late_years_6_7_kg": 126212525.0517893
+      },
+      "lunar_raw": {
+        "total_kg": 7959660068.30054,
+        "base_kg": 7929821430.442635,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "propellant_logistics:breakthrough:reference:combined",
+      "portfolio": "propellant_logistics",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 298938653315.0383,
+        "base_kg": 298835477481.0329,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "compute_digital:breakthrough:reference:combined",
+      "portfolio": "compute_digital",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 294389331088.27985,
+        "base_kg": 294101678591.07025,
+        "late_years_6_7_kg": 287652497.20959634
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "services:breakthrough:reference:combined",
+      "portfolio": "services",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "diversified:breakthrough:reference:combined",
+      "portfolio": "diversified",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 303012377774.6065,
+        "base_kg": 302823586624.8833,
+        "late_years_6_7_kg": 188791149.72321096
+      },
+      "lunar_raw": {
+        "total_kg": 7835342616.528968,
+        "base_kg": 7818923187.916928,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "prior_manufacturing_mix:breakthrough:reference:combined",
+      "portfolio": "prior_manufacturing_mix",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 307109251821.00543,
+        "base_kg": 306872353298.0312,
+        "late_years_6_7_kg": 236898522.97427177
+      },
+      "lunar_raw": {
+        "total_kg": 7958356386.064342,
+        "base_kg": 7928517748.206436,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "raw_resource_price:limited:wider:combined",
+      "portfolio": "raw_resource_price",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "commodity_refined:limited:wider:combined",
+      "portfolio": "commodity_refined",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 292713502821.7677,
+        "base_kg": 292581682742.9736,
+        "late_years_6_7_kg": 131820078.79412495
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "specialty:limited:wider:combined",
+      "portfolio": "specialty",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 300865078172.9953,
+        "base_kg": 300758328776.4059,
+        "late_years_6_7_kg": 106749396.58939451
+      },
+      "lunar_raw": {
+        "total_kg": 7835016695.969919,
+        "base_kg": 7818597267.35788,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "premium_lunar:limited:wider:combined",
+      "portfolio": "premium_lunar",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 305895461382.09143,
+        "base_kg": 305769248857.0396,
+        "late_years_6_7_kg": 126212525.0517893
+      },
+      "lunar_raw": {
+        "total_kg": 7959660068.30054,
+        "base_kg": 7929821430.442635,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "propellant_logistics:limited:wider:combined",
+      "portfolio": "propellant_logistics",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 298938653315.0383,
+        "base_kg": 298835477481.0329,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "compute_digital:limited:wider:combined",
+      "portfolio": "compute_digital",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 293404920199.5027,
+        "base_kg": 293204880676.34644,
+        "late_years_6_7_kg": 200039523.15624908
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "services:limited:wider:combined",
+      "portfolio": "services",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "diversified:limited:wider:combined",
+      "portfolio": "diversified",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 302786745040.6722,
+        "base_kg": 302648671532.3615,
+        "late_years_6_7_kg": 138073508.31069112
+      },
+      "lunar_raw": {
+        "total_kg": 7835342616.528968,
+        "base_kg": 7818923187.916928,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "prior_manufacturing_mix:limited:wider:combined",
+      "portfolio": "prior_manufacturing_mix",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 306943457321.00775,
+        "base_kg": 306757276439.446,
+        "late_years_6_7_kg": 186180881.56175196
+      },
+      "lunar_raw": {
+        "total_kg": 7958356386.064342,
+        "base_kg": 7928517748.206436,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "raw_resource_price:global:wider:combined",
+      "portfolio": "raw_resource_price",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "commodity_refined:global:wider:combined",
+      "portfolio": "commodity_refined",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 292717628365.6938,
+        "base_kg": 292581682742.9736,
+        "late_years_6_7_kg": 135945622.7202057
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "specialty:global:wider:combined",
+      "portfolio": "specialty",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 300869203716.9214,
+        "base_kg": 300758328776.4059,
+        "late_years_6_7_kg": 110874940.51547527
+      },
+      "lunar_raw": {
+        "total_kg": 7835016695.969919,
+        "base_kg": 7818597267.35788,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "premium_lunar:global:wider:combined",
+      "portfolio": "premium_lunar",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 305895461382.09143,
+        "base_kg": 305769248857.0396,
+        "late_years_6_7_kg": 126212525.0517893
+      },
+      "lunar_raw": {
+        "total_kg": 7959660068.30054,
+        "base_kg": 7929821430.442635,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "propellant_logistics:global:wider:combined",
+      "portfolio": "propellant_logistics",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 298938653315.0383,
+        "base_kg": 298835477481.0329,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "compute_digital:global:wider:combined",
+      "portfolio": "compute_digital",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 293927044761.46106,
+        "base_kg": 293683198751.27814,
+        "late_years_6_7_kg": 243846010.18292278
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "services:global:wider:combined",
+      "portfolio": "services",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "diversified:global:wider:combined",
+      "portfolio": "diversified",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 302929480524.3645,
+        "base_kg": 302766048195.34753,
+        "late_years_6_7_kg": 163432329.01695105
+      },
+      "lunar_raw": {
+        "total_kg": 7835342616.528968,
+        "base_kg": 7818923187.916928,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "prior_manufacturing_mix:global:wider:combined",
+      "portfolio": "prior_manufacturing_mix",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 307026354570.7636,
+        "base_kg": 306814814868.4956,
+        "late_years_6_7_kg": 211539702.26801193
+      },
+      "lunar_raw": {
+        "total_kg": 7958356386.064342,
+        "base_kg": 7928517748.206436,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "raw_resource_price:breakthrough:wider:combined",
+      "portfolio": "raw_resource_price",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "commodity_refined:breakthrough:wider:combined",
+      "portfolio": "commodity_refined",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 292721753909.6199,
+        "base_kg": 292581682742.9736,
+        "late_years_6_7_kg": 140071166.64628637
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "specialty:breakthrough:wider:combined",
+      "portfolio": "specialty",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 300873329260.8474,
+        "base_kg": 300758328776.4059,
+        "late_years_6_7_kg": 115000484.44155596
+      },
+      "lunar_raw": {
+        "total_kg": 7835016695.969919,
+        "base_kg": 7818597267.35788,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "premium_lunar:breakthrough:wider:combined",
+      "portfolio": "premium_lunar",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 305895461382.09143,
+        "base_kg": 305769248857.0396,
+        "late_years_6_7_kg": 126212525.0517893
+      },
+      "lunar_raw": {
+        "total_kg": 7959660068.30054,
+        "base_kg": 7929821430.442635,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    },
+    {
+      "name": "propellant_logistics:breakthrough:wider:combined",
+      "portfolio": "propellant_logistics",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 298938653315.0383,
+        "base_kg": 298835477481.0329,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "compute_digital:breakthrough:wider:combined",
+      "portfolio": "compute_digital",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 294389331088.27985,
+        "base_kg": 294101678591.07025,
+        "late_years_6_7_kg": 287652497.20959634
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "services:breakthrough:wider:combined",
+      "portfolio": "services",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 291896881374.4185,
+        "base_kg": 291793705540.4131,
+        "late_years_6_7_kg": 103175834.0054589
+      },
+      "lunar_raw": {
+        "total_kg": 7702686198.0891485,
+        "base_kg": 7699685978.722976,
+        "late_years_6_7_kg": 3000219.3661725647
+      }
+    },
+    {
+      "name": "diversified:breakthrough:wider:combined",
+      "portfolio": "diversified",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 303012377774.6065,
+        "base_kg": 302823586624.8833,
+        "late_years_6_7_kg": 188791149.72321096
+      },
+      "lunar_raw": {
+        "total_kg": 7835342616.528968,
+        "base_kg": 7818923187.916928,
+        "late_years_6_7_kg": 16419428.612039113
+      }
+    },
+    {
+      "name": "prior_manufacturing_mix:breakthrough:wider:combined",
+      "portfolio": "prior_manufacturing_mix",
+      "opening_population": 12500.0,
+      "source_feed": {
+        "total_kg": 307109251821.00543,
+        "base_kg": 306872353298.0312,
+        "late_years_6_7_kg": 236898522.97427177
+      },
+      "lunar_raw": {
+        "total_kg": 7958356386.064342,
+        "base_kg": 7928517748.206436,
+        "late_years_6_7_kg": 29838637.857905656
+      }
+    }
+  ]
+}

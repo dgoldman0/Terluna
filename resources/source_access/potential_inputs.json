@@ -1,0 +1,86 @@
+{
+  "schema": "terluna.resources.potential-inputs/1",
+  "products": {
+    "population": {
+      "path": "results/population.json.gz",
+      "schema": "terluna.resources.nea-population/1",
+      "sha256": "4592f5f5739c102b19b65f6ed291760602a5f458a738eb15f06c803b324ee19a"
+    },
+    "lunar": {
+      "path": "results/lunar_potential.json.gz",
+      "schema": "terluna.resources.lunar-potential/1",
+      "sha256": "635a919992ac6de03d613e52b759a078cfa914b027b8f8f31b3102bc09ef0f81"
+    },
+    "reclamation": {
+      "path": "inputs/reclamation.json.gz",
+      "schema": "terluna.provisioning.reclamation/1",
+      "sha256": "f6b43f00ea585af509e0f9e4ec3545ccf1956ed8c04348dd3404cf965bb54f2c",
+      "producer_commit": "210a20bd2cf16ec951f02a01f6ee3758b497df03",
+      "producer_path": "provisioning/enclosed_industry/reclamation.py",
+      "source_path": "provisioning/enclosed_industry/results/reclamation.json.gz"
+    },
+    "baseline": {
+      "path": "../enclosed_mining/inputs/industry.json.gz",
+      "schema": "terluna.provisioning.enclosed-industry/1",
+      "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7"
+    }
+  },
+  "checkpoints": [
+    100,
+    200,
+    220
+  ],
+  "available_resource_shares": [
+    0.01,
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "water_recovery": 0.7,
+  "native_iron_recovery": 0.6,
+  "partial_costs": {
+    "coefficients_path": "inputs/cost_coefficients.json",
+    "sha256": "c7c191c8726b4f440cb0dc6f5c28c15120cedacbbe7be268deb4f8420bc2f7cb",
+    "capital_rate": 0.03,
+    "cases": {
+      "favorable": {
+        "equipment_cost_multiplier": 0.5,
+        "electricity_USD2041_kWh": 0.05,
+        "availability_multiplier": 1.2,
+        "water_grade": 0.1,
+        "water_recovery": 0.7,
+        "ore_energy_multiplier": 0.5
+      },
+      "reference": {
+        "equipment_cost_multiplier": 1,
+        "electricity_USD2041_kWh": 0.15,
+        "availability_multiplier": 1,
+        "water_grade": 0.1,
+        "water_recovery": 0.7,
+        "ore_energy_multiplier": 1
+      },
+      "adverse": {
+        "equipment_cost_multiplier": 2,
+        "electricity_USD2041_kWh": 0.5,
+        "availability_multiplier": 0.6,
+        "water_grade": 0.1,
+        "water_recovery": 0.7,
+        "ore_energy_multiplier": 2
+      }
+    },
+    "rule": "Equipment, electricity, ore-energy intensity and availability vary between named cases. Water grade comes from the population draws; recovery is fixed at 70 percent across these cost comparisons."
+  },
+  "rules": [
+    "All amounts are kg; one Gt equals 1e12 kg. USD2041 costs retain the inherited common valuation with no U exchange rate.",
+    "Availability shares describe conditional aggregate stock access after exclusions and future reserves; they are not approved extraction fractions or probabilities of release.",
+    "Nested orbital pools and common Monte Carlo draws must not be added. Composition estimates are contained stocks, with recovery applied once. Raw feed is already raw and receives no further grade discount.",
+    "The physical cases retain selective mining at 10 percent water grade and 70 percent recovery. A stock sufficiency result does not prove that the required ore grade, production sequence, route or time-specific capacity is accessible. Representative whole-pool grade costs are a separate sensitivity, not a newly solved physical design.",
+    "Top-level reclamation variant identifies experiment; nested physical_case retains original orderbook metadata. Years 0–7 represent exact inherited seed totals as an eight-year average, counted once.",
+    "The 36 reclamation cases cover three portfolios, two real-growth paths and six variants. The original 81-case demand ranges remain context, not new physical reruns.",
+    "Native iron is a mass proxy only; no generic alloy qualification or calibrated nitrogen inventory is inferred. Complete elemental closure remains outside the represented loops.",
+    "Mature stock-equivalent years use fixed mean annual fresh demand in years 201–220, without geological replenishment or a new industrial schedule.",
+    "The 100 percent availability branch is an inventory ceiling only, incompatible with retaining any additional future-use or undiscovered-site exclusions. It is not a proposed extraction plan."
+  ]
+}

@@ -1,0 +1,591 @@
+{
+  "schema": "terluna.resources.source-protection-inputs/1",
+  "scope": "Enclosed lunar and near-Earth extraction and its actual supporting transport; no Open Moon, habitat array or outer-Solar-System buildout.",
+  "sources": {
+    "conservation": {
+      "path": "research/studies/conservation/README.md",
+      "sha256": "850534d9f0615a95e8dd20618c7fda7480b2e96852f64c821e75fc33c2863631",
+      "status": "Working framework 25 September 2026; decided items and proposals distinguished in the text."
+    },
+    "decisions": {
+      "path": "research/decisions.md",
+      "sha256": "f82f959838eebaeb1b86e560a48467f6c2e23e0782e969268b409992d420afa2",
+      "status": "Standing decisions; transport confirmed 26 September 2026, protected source direction 9 October 2026, retained lunar resources 31 October 2026."
+    },
+    "future_resources": {
+      "path": "research/studies/world_economy/development.md",
+      "sha256": "ec9c2034760f6b6f7b029b9f06eae03f448817c719d2ad7fc226a61c49a82e8f",
+      "status": "31 October 2026 economic study; reservation quantities are explicitly synthetic, not approved extraction fractions."
+    },
+    "protection_system": {
+      "path": "research/studies/protection_architecture/requirements.md",
+      "sha256": "b5c6d83181bd771fe21ac1a14b32dd0bd4118b6c272bb63c08fa25ca19acba25",
+      "status": "Protection-system requirements; S7 adopted 7 October 2026, numerical budget allocation open."
+    },
+    "heritage_sites": {
+      "path": "research/studies/conservation/sites.json",
+      "sha256": "cdfa3fcd37a32edccd0678cf7f698cde5f617de9188d258da62624a62b48ba26",
+      "status": "25 September 2026 first-pass evaluations, mostly awaiting review; individual decided designations remain distinct."
+    },
+    "science_targets": {
+      "path": "research/studies/conservation/targets.json",
+      "sha256": "0d12f8d6e570df0e2b316a11a500239d82c4c34d46d241bccff8d91d05bb5387",
+      "status": "31 mapped scientific targets; not a surveyed set of exclusion polygons."
+    },
+    "existing_science_screen": {
+      "path": "resources/enclosed_mining/inputs.json",
+      "sha256": "b0ee1d80e96e1e91b764eae05d7db4d31fd733a834b0f2f339e07d7b5eb7b9d3",
+      "status": "Existing illustrative exclusions in the enclosed-source geometry screen; the screen remains proposed and does not qualify extraction."
+    }
+  },
+  "gates": [
+    {
+      "id": "ordinary_source_selection",
+      "category": "source",
+      "requirement": "The source is ordinary/common material and its scientific and ethical protection status has been reviewed.",
+      "authority_status": "adopted_direction_with_case_review_required",
+      "source_ranges": [
+        {
+          "source": "decisions",
+          "first_line": 52,
+          "last_line": 53
+        },
+        {
+          "source": "conservation",
+          "first_line": 63,
+          "last_line": 66
+        }
+      ],
+      "scope": "near_earth"
+    },
+    {
+      "id": "scientific_heritage_review",
+      "category": "physical_protection",
+      "requirement": "Scientific and heritage values, place dependence and treatment have been reviewed separately; an archive does not substitute for place-dependent heritage.",
+      "authority_status": "working_protocol_from_decided_two_programmes",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 72,
+          "last_line": 91
+        },
+        {
+          "source": "conservation",
+          "first_line": 157,
+          "last_line": 173
+        },
+        {
+          "source": "conservation",
+          "first_line": 179,
+          "last_line": 212
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "pre_disturbance_survey",
+      "category": "scientific_preservation",
+      "requirement": "Survey, sampling and measurements cover the geological records the proposed disturbance would destroy before that disturbance begins.",
+      "authority_status": "proposed_origin_conservative_study_condition",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 59,
+          "last_line": 60
+        },
+        {
+          "source": "conservation",
+          "first_line": 283,
+          "last_line": 292
+        },
+        {
+          "source": "conservation",
+          "first_line": 301,
+          "last_line": 313
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "representative_samples",
+      "category": "scientific_preservation",
+      "requirement": "Representative materials and relevant pre-disturbance conditions have been sampled and documented.",
+      "authority_status": "working_protocol",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 138,
+          "last_line": 141
+        },
+        {
+          "source": "conservation",
+          "first_line": 283,
+          "last_line": 292
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "native_sample_conditions",
+      "category": "scientific_preservation",
+      "requirement": "Samples remain in their original condition, including sealed vacuum or dry inert gas and native-temperature preservation where required.",
+      "authority_status": "working_protocol",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 285,
+          "last_line": 285
+        },
+        {
+          "source": "conservation",
+          "first_line": 294,
+          "last_line": 296
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "unopened_samples",
+      "category": "scientific_preservation",
+      "requirement": "Part of each material category remains unopened for future methods; no numerical retained percentage is supplied by this protocol.",
+      "authority_status": "proposed_origin_conservative_study_condition",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 60,
+          "last_line": 60
+        },
+        {
+          "source": "conservation",
+          "first_line": 294,
+          "last_line": 299
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "multiple_archive_locations",
+      "category": "data_protection",
+      "requirement": "Copies of preserved samples and records are held in more than one location.",
+      "authority_status": "working_protocol",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 138,
+          "last_line": 140
+        },
+        {
+          "source": "conservation",
+          "first_line": 294,
+          "last_line": 299
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "institutional_continuity",
+      "category": "data_protection",
+      "requirement": "More than one organization maintains the archive and relevant preservation functions, with staff training and continuity.",
+      "authority_status": "proposed_origin_conservative_study_condition",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 62,
+          "last_line": 62
+        },
+        {
+          "source": "conservation",
+          "first_line": 343,
+          "last_line": 347
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "recorded_provenance",
+      "category": "data_protection",
+      "requirement": "Sample and record provenance is recorded and retained.",
+      "authority_status": "working_protocol",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 294,
+          "last_line": 299
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "open_scientific_review",
+      "category": "data_protection",
+      "requirement": "Scientific preservation and archive arrangements have open research review.",
+      "authority_status": "working_protocol",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 76,
+          "last_line": 78
+        },
+        {
+          "source": "conservation",
+          "first_line": 343,
+          "last_line": 347
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "open_record_access",
+      "category": "data_protection",
+      "requirement": "Preserved records are accessible to those who can use them.",
+      "authority_status": "working_protocol",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 67,
+          "last_line": 67
+        },
+        {
+          "source": "conservation",
+          "first_line": 76,
+          "last_line": 78
+        },
+        {
+          "source": "conservation",
+          "first_line": 294,
+          "last_line": 299
+        },
+        {
+          "source": "conservation",
+          "first_line": 343,
+          "last_line": 347
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "archive_before_disturbance",
+      "category": "data_protection",
+      "requirement": "The records needed to preserve the affected scientific information exist before the irreversible step; later promised archiving does not release it.",
+      "authority_status": "proposed_origin_conservative_study_condition",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 59,
+          "last_line": 59
+        },
+        {
+          "source": "conservation",
+          "first_line": 301,
+          "last_line": 313
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "future_accessible_stocks",
+      "category": "sustainability",
+      "requirement": "Accessible future-use, emergency, protected and uncertainty stocks are reserved before export; surveyed requirements and losses establish any surplus.",
+      "authority_status": "adopted_lunar_direction_conservative_source_application",
+      "source_ranges": [
+        {
+          "source": "decisions",
+          "first_line": 599,
+          "last_line": 599
+        },
+        {
+          "source": "future_resources",
+          "first_line": 64,
+          "last_line": 80
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "scarce_element_recovery",
+      "category": "sustainability",
+      "requirement": "Element-by-element assays, recovery losses and retained accessible nutrients and other scarce components support the proposed use; bulk mass alone is insufficient.",
+      "authority_status": "adopted_lunar_direction_conservative_source_application",
+      "source_ranges": [
+        {
+          "source": "decisions",
+          "first_line": 599,
+          "last_line": 599
+        },
+        {
+          "source": "future_resources",
+          "first_line": 66,
+          "last_line": 80
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "consent_and_stewardship",
+      "category": "governance",
+      "requirement": "Affected communities and relevant expertise participate in site stewardship and treatment; unresolved consent or designation decisions remain open.",
+      "authority_status": "decided_stewardship_with_proposed_consent_wording",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 68,
+          "last_line": 68
+        },
+        {
+          "source": "conservation",
+          "first_line": 170,
+          "last_line": 171
+        },
+        {
+          "source": "conservation",
+          "first_line": 205,
+          "last_line": 212
+        },
+        {
+          "source": "conservation",
+          "first_line": 343,
+          "last_line": 348
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "polar_record_protection",
+      "category": "physical_protection",
+      "requirement": "Any affected polar record receives clean coring and native-condition preservation before landing, mining or warming destroys it; untouched cold traps are retained until sampled.",
+      "authority_status": "decided_polar_preservation_with_working_gates",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 164,
+          "last_line": 164
+        },
+        {
+          "source": "conservation",
+          "first_line": 277,
+          "last_line": 285
+        },
+        {
+          "source": "conservation",
+          "first_line": 303,
+          "last_line": 310
+        }
+      ],
+      "scope": "lunar"
+    },
+    {
+      "id": "dust_exhaust_contamination",
+      "category": "physical_protection",
+      "requirement": "The proposed activity assesses and controls dust, exhaust and contamination of scientific records and protected settings before disturbance.",
+      "authority_status": "working_protocol_conservative_study_condition",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 278,
+          "last_line": 286
+        },
+        {
+          "source": "conservation",
+          "first_line": 303,
+          "last_line": 313
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "scientific_function_continuity",
+      "category": "physical_protection",
+      "requirement": "Any scientific function the activity would remove has an at-least-as-useful replacement ready before loss, or a documented determination that it is unaffected.",
+      "authority_status": "decided_replacement_principle",
+      "source_ranges": [
+        {
+          "source": "conservation",
+          "first_line": 76,
+          "last_line": 79
+        },
+        {
+          "source": "conservation",
+          "first_line": 159,
+          "last_line": 159
+        },
+        {
+          "source": "conservation",
+          "first_line": 333,
+          "last_line": 341
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "passive_failure_misses",
+      "category": "transport_protection",
+      "requirement": "Passive transfer failures and dispersions miss inhabited bodies unless capture is verified.",
+      "authority_status": "adopted_26_September_2026",
+      "source_ranges": [
+        {
+          "source": "decisions",
+          "first_line": 84,
+          "last_line": 95
+        },
+        {
+          "source": "decisions",
+          "first_line": 90,
+          "last_line": 90
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "earth_not_behind_catcher",
+      "category": "transport_protection",
+      "requirement": "A missed lunar capture cannot become an Earth-impact trajectory by geometry.",
+      "authority_status": "adopted_26_September_2026",
+      "source_ranges": [
+        {
+          "source": "decisions",
+          "first_line": 84,
+          "last_line": 95
+        },
+        {
+          "source": "decisions",
+          "first_line": 91,
+          "last_line": 91
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "remote_braking",
+      "category": "transport_protection",
+      "requirement": "High-energy cargo approaches inhabited destinations only after verified remote capture and deceleration.",
+      "authority_status": "adopted_26_September_2026",
+      "source_ranges": [
+        {
+          "source": "decisions",
+          "first_line": 84,
+          "last_line": 95
+        },
+        {
+          "source": "decisions",
+          "first_line": 92,
+          "last_line": 92
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "packet_energy_limit",
+      "category": "transport_protection",
+      "requirement": "A stated packet-energy risk limit is qualified; the historical 10^6\u201310^8 kg range is not a universal approved cap.",
+      "authority_status": "adopted_26_September_2026",
+      "source_ranges": [
+        {
+          "source": "decisions",
+          "first_line": 84,
+          "last_line": 95
+        },
+        {
+          "source": "decisions",
+          "first_line": 93,
+          "last_line": 93
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "tracking_interception_corridors",
+      "category": "transport_protection",
+      "requirement": "Tracking, interception/tug capability and assigned arrival corridors exist as infrastructure.",
+      "authority_status": "adopted_26_September_2026",
+      "source_ranges": [
+        {
+          "source": "decisions",
+          "first_line": 84,
+          "last_line": 95
+        },
+        {
+          "source": "decisions",
+          "first_line": 94,
+          "last_line": 94
+        }
+      ],
+      "scope": "both"
+    },
+    {
+      "id": "verified_capture_before_intercept",
+      "category": "transport_protection",
+      "requirement": "No civilization-threatening kinetic payload enters a planetary intercept corridor before verified capture.",
+      "authority_status": "adopted_26_September_2026",
+      "source_ranges": [
+        {
+          "source": "decisions",
+          "first_line": 84,
+          "last_line": 95
+        },
+        {
+          "source": "decisions",
+          "first_line": 95,
+          "last_line": 95
+        }
+      ],
+      "scope": "both"
+    }
+  ],
+  "named_science_holds": [
+    {
+      "source_id": "20101955",
+      "name": "Bennu"
+    },
+    {
+      "source_id": "20162173",
+      "name": "Ryugu"
+    },
+    {
+      "source_id": "20025143",
+      "name": "Itokawa"
+    },
+    {
+      "source_id": "20000433",
+      "name": "Eros"
+    }
+  ],
+  "named_science_hold_status": "Retained illustrative exclusions from the existing catalogue screens; this list is not an approved or comprehensive protected-source registry.",
+  "protected_categories": [
+    "saturn_rings",
+    "titan_atmosphere",
+    "ocean_world"
+  ],
+  "protected_category_basis": {
+    "authority_status": "adopted_source_selection_direction_9_October_2026",
+    "source_ranges": [
+      {
+        "source": "decisions",
+        "first_line": 53,
+        "last_line": 53
+      }
+    ]
+  },
+  "protection_system_scope": {
+    "source": "protection_system",
+    "first_line": 196,
+    "last_line": 216,
+    "applicable": "S4 invokes the standing traffic rules. General outflow tracing is a conservative contamination/hazard condition here.",
+    "not_transferred": "S1\u2013S3/S5\u2013S6 describe the planetary protection architecture, duration and atmospheric tradeoff. The S7 escape-region/R1 numerical budget is not a numerical threshold for this enclosed phase; its allocated share remains open."
+  },
+  "rules": [
+    "No new extraction fractions, preserved percentages, buffers, legal permissions or approved mine locations are created.",
+    "Unknown evidence is unresolved, not a failure or an attested pass. An explicit failed condition or hold blocks release.",
+    "Even all passed attestations report conditions_satisfied, never extraction authorization; this tool checks recorded evidence status and completeness, not its empirical truth or legal sufficiency.",
+    "Project principles with proposed origins are applied as conservative study conditions with that status preserved.",
+    "The same retained named-science holds apply before every union or broad-minus-narrow set operation. Removing a source from a narrow set never releases it into a broad remainder.",
+    "Sealed/native sample condition, unopened retention, multiple locations, institutional continuity, provenance, review and access remain separate gates.",
+    "All current catalogue candidates lack these site-specific attestations and therefore remain unresolved or held. A hypothetical mass allowance and a cash provision cannot satisfy the gates."
+  ],
+  "named_science_hold_basis": {
+    "source": "existing_science_screen",
+    "first_line": 132,
+    "last_line": 146,
+    "catalogue_identity": "resources/enclosed_mining/inputs.json#/catalogue_source",
+    "identifier_rule": "JPL source IDs preserve the same named exclusions across changes of catalogue display names."
+  }
+}

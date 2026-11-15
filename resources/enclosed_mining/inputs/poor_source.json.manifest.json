@@ -1,0 +1,24 @@
+{
+  "compression": "gzip; mtime0",
+  "decompressed_sha256": "9039a5887ef8d42f4206a04a5dfbe8f4e953523f4b3a13ee10f04ec423a42e83",
+  "dependencies": {
+    "provisioning/enclosed_industry/inputs/engineering.json": "e15aec1a0da1b41f23326d1ce15a587addc994e69b4cdca53c1516990365eed2",
+    "provisioning/enclosed_industry/inputs/identity.json": "65bdfb147d810179a2de33c228802a838774ad3fed3bdcff4a2b2ebad9623e99",
+    "provisioning/enclosed_industry/inputs/orders.json": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737"
+  },
+  "packager": {
+    "path": "provisioning/enclosed_industry/package.py",
+    "sha256": "af95b8bec1cbbde2c62b569005f3d3f18abd6a3bc675e08351f9fa846d708b58"
+  },
+  "path": "poor_source.json.gz",
+  "producer": {
+    "model_path": "provisioning/enclosed_industry/model.py",
+    "model_sha256": "a338d56ea03c864ae0ccf65594a3b6b514a9e9e0fab4f09e7437b9cb34677805",
+    "path": "provisioning/enclosed_industry/run.py",
+    "sha256": "f06699d48b9b134c4b171cd726f312807813b4a82b7500d4609e85e93ec3ee83"
+  },
+  "product_schema": "terluna.provisioning.enclosed-industry/1",
+  "reading_rule": "Verify compressed hash, decompress, verify decompressed hash and parse the unchanged engineering-product schema. Compression changes storage only; every annual row is retained.",
+  "schema": "terluna.provisioning.compressed-product/1",
+  "sha256": "d5d015e09667ab3c63a220f8bdb32aea81e4eb1ba41dcc1689d86a8b5d27c191"
+}

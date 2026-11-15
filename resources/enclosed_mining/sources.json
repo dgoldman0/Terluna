@@ -1,0 +1,146 @@
+{
+  "schema": "terluna.resources.enclosed-mining-sources/1",
+  "source_admission": "Sample measurements and primary process studies at the recorded reading scopes. The five composition/access sources are retained from the preceding inspected register. New process evidence constrains interpretation, not a calibrated mature production cost. Hypothetical access fractions are scenarios, not economic reserves.",
+  "sources": [
+    {
+      "id": "meyer_10084_2009",
+      "title": "Meyer, C. (2009): Lunar Sample Compendium, 10084 — Soil",
+      "url": "https://www.lpi.usra.edu/lunar/samples/atlas/compendium/10084.pdf",
+      "accessed": "2026-11-13",
+      "reading_scope": "Description and chemistry discussion; chemical Tables 1 and 2, especially Table 2 on PDF page 7. Retrieved PDF text inspected; original papers cited by the compendium and all remaining sample-history passages were not separately reviewed.",
+      "inspected_excerpt": "All of the Apollo 11 soils were found to be of similar composition.",
+      "observations": "Table 2 reports a weighted-average example of mare soil: SiO2 42, TiO2 7.54, Al2O3 13.55, FeO 15.81, MgO 7.88 and CaO 11.96 wt%. These are oxide concentrations in sampled soil.",
+      "use": "Illustrate the Fe/Ti-rich mare feedstock end of the material-distribution comparison.",
+      "limits": "Sample chemistry supplies no mine-wide grade model, deposit tonnage, process recovery or product acceptance rate. Oxide abundance is not elemental-metal yield. The compendium is a NASA institutional compilation of primary sample measurements."
+    },
+    {
+      "id": "meyer_67461_2010",
+      "title": "Meyer, C. (2010): Lunar Sample Compendium, 67460 / 67461 — Soil",
+      "url": "https://www.lpi.usra.edu/lunar/samples/atlas/compendium/67461.pdf",
+      "accessed": "2026-11-13",
+      "reading_scope": "Sample description and chemistry discussion, PDF pages 1–3; chemical Table 1 on PDF page 4. Retrieved PDF text inspected; original analytical papers were not separately reviewed.",
+      "inspected_excerpt": "one of the most aluminous lunar soils",
+      "observations": "The table gives approximately 28–30 wt% Al2O3, 16.5–17.6 wt% CaO, 4.2–4.35 wt% FeO and 0.29–0.50 wt% TiO2 across its analyses and comparison column. One analysis reports 4.6 ppm Cu. The discussion associates the unusually aluminous composition with an adjacent boulder.",
+      "use": "Demonstrate compositional contrast with the mare sample and the need to assess specialist elements separately.",
+      "limits": "This specific highland soil is not a representative mine assay or global highland mean. The compendium is a NASA institutional compilation of primary sample measurements."
+    },
+    {
+      "id": "li_polar_ice_2018",
+      "title": "Li et al. (2018): Direct evidence of surface exposed water ice in the lunar polar regions",
+      "doi": "10.1073/pnas.1802345115",
+      "url": "https://www.pnas.org/doi/full/10.1073/pnas.1802345115",
+      "accessed": "2026-11-13",
+      "reading_scope": "Publisher full text: abstract, surface-ice results, distribution discussion, figure captions and spectral-mixing/detection methods. Supplementary data were not independently reprocessed.",
+      "inspected_excerpt": "only ∼3.5% of cold traps exhibit ice exposures",
+      "observations": "The study detects patchy optical-surface ice in approximately 280 by 280 m pixels. Some intimate-mixture spectral models imply approximately 30 wt% ice; inferred concentration depends on the mixing model.",
+      "use": "Explain why polar cold-trap area and ice detections cannot be converted directly into bulk mineable water inventory.",
+      "limits": "Optical sensing of the upper few millimetres does not determine excavatable thickness, subsurface continuity or economically recoverable tonnage. The study does not qualify a source for this build."
+    },
+    {
+      "id": "glavin_bennu_2025",
+      "title": "Glavin et al. (2025): Abundant ammonia and nitrogen-rich soluble organic matter in samples from asteroid (101955) Bennu",
+      "doi": "10.1038/s41550-024-02472-9",
+      "url": "https://ntrs.nasa.gov/api/citations/20250001355/downloads/GlavinAbundantSTI.pdf",
+      "accessed": "2026-11-13",
+      "reading_scope": "NASA-hosted article PDF: sample context and bulk C/N results on PDF pages 1–2, plus bulk-element and hot-water-extraction methods on PDF pages 8–9. Remaining molecular analyses were not comprehensively reviewed.",
+      "inspected_excerpt": "N (0.23–0.25 wt%)",
+      "observations": "The sampled material contains 4.5–4.7 wt% carbon and 0.23–0.25 wt% nitrogen. The paper describes hydrated mineralogy and laboratory extraction in water at 100 degrees Celsius for 24 hours.",
+      "use": "Chemical precedent for the inherited 0.24 wt% asteroid nitrogen assumption and investigation of volatile recovery.",
+      "limits": "The sample establishes neither 60% industrial nitrogen recovery nor the assumed water grade. Its composition is not assigned to every dark asteroid. Bennu is a scientific comparison, not an extraction target."
+    },
+    {
+      "id": "jpl_nhats_api",
+      "title": "NASA/JPL: NHATS API documentation, version 1.3",
+      "url": "https://ssd-api.jpl.nasa.gov/doc/nhats.html",
+      "accessed": "2026-11-13",
+      "reading_scope": "Query constraints, object/trajectory output examples, field definitions and launch-window change log in the official documentation. No new NHATS trajectory search was run.",
+      "inspected_excerpt": "Launch window (year range)",
+      "observations": "Accessibility is reported with total velocity change, mission duration, stay time, departure date and individual trajectory legs. The documented launch windows span 2020–2045.",
+      "use": "Require date- and route-specific accessibility analysis rather than interpreting a simple orbital-geometry filter as an assured cargo route.",
+      "limits": "Human round-trip trajectories from Earth are not the inherited lunar-depot cargo route. This API coverage does not establish accessibility over the proposed 200-year programme and contains no mining-reserve assessment."
+    },
+    {
+      "id": "leger_oxygen_energy_2025",
+      "title": "Leger et al. (2025): Modeling energy requirements for oxygen production on the Moon",
+      "doi": "10.1073/pnas.2306146122",
+      "url": "https://publikationen.bibliothek.kit.edu/1000180152/157902327",
+      "accessed": "2026-11-13",
+      "reading_scope": "Author article in the KIT repository: abstract; sensitivity and discussion on PDF pages 5–7; process-energy table and mass/energy methods on PDF pages 7–8. No independent replication or supplementary-data review.",
+      "observations": "The particular hydrogen-reduction chain gives 24.3 plus/minus 5.8 kWh per kg liquid oxygen at 10 wt% ilmenite. It calculates mass yields before multiplying each process intensity by actual inlet mass; enrichment strongly affects heating of unreactive feed.",
+      "use": "Separate feed-bound heating, useful-product conversion and downstream liquefaction/storage. Retain recovery losses and beneficiation throughput.",
+      "limits": "A modeled oxygen chain, not a measured metal-production intensity or an industrial asteroid coefficient. The reported uncertainty summarizes input sensitivities, not a validated lunar operating distribution."
+    },
+    {
+      "id": "sanders_kleinhenz_isru_2025",
+      "title": "Sanders and Kleinhenz (19 May 2025): Progress Review of NASA Lunar ISRU Development, 2019 to 2025",
+      "url": "https://ntrs.nasa.gov/api/citations/20250003730/downloads/Progress%20Review%20NASA%20Lunar%20ISRU_Sanders.pdf",
+      "accessed": "2026-11-13",
+      "reading_scope": "NASA presentation pages 6–9: oxygen/metals tests, excavation and polar-water extraction/capture. Programme projections are not treated as completed tests.",
+      "observations": "Reported molten-regolith testing processed 25 kg of highland simulant over 36 hours, including 24 hours of electrolysis. Carbothermal tests achieved greater than 20 g oxygen per kWh thermal and greater than 20% oxygen mass yield. A specific volatile-extractor configuration achieved 43–56% extraction from 4–6 wt% icy material.",
+      "use": "State laboratory scale, heat/electricity distinctions and configuration-dependent recovery.",
+      "limits": "These demonstrations do not establish industrial module output, multiyear repair rates, personnel requirements or a learning curve. Polar-ice apparatus is not directly calibrated to hydrated asteroid feed."
+    },
+    {
+      "id": "sercel_optical_mining_2017",
+      "title": "Sercel (2017): Optical Mining of Asteroids, Moons, and Planets to Enable Sustainable Human Exploration and Space Industrialization",
+      "url": "https://www.nasa.gov/general/optical-mining-of-asteroids-moons-and-planets-to-enable-sustainable-human-exploration-and-space-industrialization/",
+      "accessed": "2026-11-13",
+      "reading_scope": "NASA-hosted principal-investigator account, Phase 1 accomplishments and Phase 2 plans. Underlying experimental report was not independently reviewed.",
+      "observations": "Reports an 8 kW solar demonstration on a CI-type asteroid simulant in vacuum, following small-sample tests; a 30 kW apparatus was planned.",
+      "use": "Optical excavation and volatile-release process precedent, with solar-thermal input distinguished from electrical demand.",
+      "limits": "The account supplies no qualified mass-production energy coefficient, complete collection/cleanup yield, equipment lifetime or economic reserve. Its projected programme savings are not adopted."
+    }
+  ],
+  "local_context": [
+    {
+      "path": "research/studies/initial_industrial_system/README.md",
+      "repository_commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888",
+      "location_at_inspection": "/home/kir/Documents/Projects/terluna-provisioning",
+      "reading_scope": "Lunar production, source feed and chemistry, renewal, source-to-depot transport and local fabrication descriptions.",
+      "use": "Identify inherited process and transport assumptions; historical whole-campaign costs are not adopted in this evidence note."
+    },
+    {
+      "path": "research/studies/initial_industrial_system/industrial_inputs.json",
+      "repository_commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888",
+      "sha256": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade",
+      "reading_scope": "Lunar and source input objects.",
+      "use": "Baseline lunar yields, asteroid grades/recoveries and 95% lunar end-to-end material recovery."
+    },
+    {
+      "path": "research/studies/initial_industrial_system/results/resource_inventory.json",
+      "repository_commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888",
+      "sha256": "5c2a25bea8a212e2c89e9af8adf04cb19838a87c595a72520c6f1e32fe8b84b0",
+      "reading_scope": "Source identity, density assumption, catalogue group counts, calculated masses and filters; corresponding resource_inventory.py read in full.",
+      "catalogue_date": "2026-11-12",
+      "catalogue_source_url": "https://ssd-api.jpl.nasa.gov/sbdb_query.api?fields=spkid%2Cfull_name%2Cdiameter%2Cdiameter_sigma%2Calbedo%2Cspec_B%2Cspec_T%2Ca%2Ce%2Cq%2Ci%2CH&sb-group=neo&sb-kind=a&full-prec=true",
+      "catalogue_sha256": "14f20ec966039c91e884e7c4ae58508a10f0ecf87acd5e971392f912b38baaa0",
+      "catalogue_hash_check": "The 6186497-byte archived catalogue was read on 2026-11-13; its SHA-256 matched this recorded value. No fresh catalogue query was substituted.",
+      "use": "17 bodies after the narrow geometry/science-name screen contain 3.1188112554468115e12 kg at assumed density; the 498-body dark diameter catalogue contains 8.511203050095491e15 kg. These are overlapping screening inventories, not additive supplies or qualified reserves."
+    },
+    {
+      "path": "resources/enclosed_mining/inputs/geometry_screen.json",
+      "source_catalogue_sha256": "14f20ec966039c91e884e7c4ae58508a10f0ecf87acd5e971392f912b38baaa0",
+      "reading_scope": "Exact retained catalogue re-read and hashed; all rows screened on diameter, albedo, semimajor axis, eccentricity, inclination and named-science exclusions. Selected IDs and top masses are retained in the derived product.",
+      "use": "A proposed wider geometry comparison and identification of broad-catalogue concentration. It supplies no cargo trajectory or qualified resource."
+    },
+    {
+      "path": "provisioning/enclosed_industry/results/industry.json.gz",
+      "repository_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
+      "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+      "reading_scope": "Four manifest identities, complete seed and annual feed fields across81 base and6 sensitivity cases, scenario coefficients and physical feasibility metadata. Conditional physical model results, not measured mine operation.",
+      "use": "Dated actual-demand feed and transport-driver checkpoints; poor_lunar,poor_source andlifetimes products are separately pinned with their exact manifests ininputs.json."
+    }
+  ],
+  "access_notes": [
+    "The publisher endpoint for the Bennu paper failed during retrieval; the NASA-hosted article PDF supplied the inspected passages. No finding relies on the failed endpoint.",
+    "The first lunar-ice repository endpoint returned an access challenge; the publisher full text supplied the inspected results and methods.",
+    "NHATS introductory/caveat pages returned incomplete rendered text. The accessibility claims here use the successfully inspected official API documentation.",
+    "The first PMC endpoint for Leger et al. returned an access challenge; the complete publisher-format article hosted by KIT supplied the inspected passages.",
+    "Supplemental attempts to retrieve the USGS Mineral Commodity Summaries 2026 and 2025 appendixes and Circular 831 through pubs.usgs.gov returned HTTP 403. No definition or numerical finding from those inaccessible documents is adopted; the qualification limits here remain the explicit evidence assessment of the inspected space-resource sources."
+  ],
+  "retained_register": {
+    "path": "research/studies/vacuum_buildout/sources.json",
+    "sha256": "6293f395b810eca9e0f28cdf3710715315ab2ba58ed6d1374aa824d87c0b4712",
+    "scope": "Five previously inspected composition, polar-ice, Bennu and trajectory sources; no previous replicated-industry cost results are adopted."
+  }
+}

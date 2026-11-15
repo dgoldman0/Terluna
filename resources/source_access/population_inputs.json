@@ -1,0 +1,349 @@
+{
+  "schema": "terluna.resources.nea-population-inputs/1",
+  "draws": 2048,
+  "random_seed": 20261113,
+  "catalogue_block_size": 128,
+  "moment_samples": 65536,
+  "explicit_count_threshold": 128,
+  "archive_directory": "research/runs/source_access/inputs/population",
+  "source_files": {
+    "catalogue": {
+      "path": "research/runs/source_access/inputs/neo/nea_catalogue.json",
+      "sha256": "14f20ec966039c91e884e7c4ae58508a10f0ecf87acd5e971392f912b38baaa0"
+    },
+    "taxonomy": {
+      "path": "research/runs/source_access/inputs/composition/ajac532ft7_mrt.txt",
+      "sha256": "fe8d6ff486fc1342a19ef45b2aa6050e407f5a0656d9d4f3f6c1a9704d6a8876"
+    },
+    "neomod_grid": {
+      "filename": "input_neomod3.dat",
+      "url": "https://www.boulder.swri.edu/~davidn/NEOMOD_Simulator/input_neomod3.dat",
+      "bytes": 64619435,
+      "sha256": "279c0b39ad90e023e430a92778dbb97fb9ed6d8f99910010319005d02aa4d581",
+      "tls_chain_verified": false
+    }
+  },
+  "geometry": {
+    "narrow": {
+      "a_min": 0.8,
+      "a_max": 1.3,
+      "e_max": 0.3,
+      "i_max": 15
+    },
+    "wider": {
+      "a_min": 0,
+      "a_max": 1.8,
+      "e_max": 0.5,
+      "i_max": 30
+    }
+  },
+  "population_count_bins": [
+    {
+      "H_low": 15.25,
+      "H_high": 15.75,
+      "count_low": 55.2,
+      "count_central": 61.2,
+      "count_high": 68.2,
+      "published_cumulative_low": 124.0,
+      "published_cumulative_central": 130.0,
+      "published_cumulative_high": 137.0
+    },
+    {
+      "H_low": 15.75,
+      "H_high": 16.25,
+      "count_low": 95.0,
+      "count_central": 104.0,
+      "count_high": 113.0,
+      "published_cumulative_low": 219.0,
+      "published_cumulative_central": 234.0,
+      "published_cumulative_high": 250.0
+    },
+    {
+      "H_low": 16.25,
+      "H_high": 16.75,
+      "count_low": 146.0,
+      "count_central": 156.0,
+      "count_high": 166.0,
+      "published_cumulative_low": 365.0,
+      "published_cumulative_central": 390.0,
+      "published_cumulative_high": 416.0
+    },
+    {
+      "H_low": 16.75,
+      "H_high": 17.25,
+      "count_low": 214.0,
+      "count_central": 218.0,
+      "count_high": 223.0,
+      "published_cumulative_low": 579.0,
+      "published_cumulative_central": 608.0,
+      "published_cumulative_high": 639.0
+    },
+    {
+      "H_low": 17.25,
+      "H_high": 17.75,
+      "count_low": 319.0,
+      "count_central": 328.0,
+      "count_high": 338.0,
+      "published_cumulative_low": 898.0,
+      "published_cumulative_central": 936.0,
+      "published_cumulative_high": 977.0
+    },
+    {
+      "H_low": 17.75,
+      "H_high": 18.25,
+      "count_low": 502.0,
+      "count_central": 514.0,
+      "count_high": 533.0,
+      "published_cumulative_low": 1400.0,
+      "published_cumulative_central": 1450.0,
+      "published_cumulative_high": 1510.0
+    },
+    {
+      "H_low": 18.25,
+      "H_high": 18.75,
+      "count_low": 770.0,
+      "count_central": 790.0,
+      "count_high": 810.0,
+      "published_cumulative_low": 2170.0,
+      "published_cumulative_central": 2240.0,
+      "published_cumulative_high": 2320.0
+    },
+    {
+      "H_low": 18.75,
+      "H_high": 19.25,
+      "count_low": 1140.0,
+      "count_central": 1170.0,
+      "count_high": 1180.0,
+      "published_cumulative_low": 3310.0,
+      "published_cumulative_central": 3410.0,
+      "published_cumulative_high": 3500.0
+    },
+    {
+      "H_low": 19.25,
+      "H_high": 19.75,
+      "count_low": 1610.0,
+      "count_central": 1640.0,
+      "count_high": 1670.0,
+      "published_cumulative_low": 4920.0,
+      "published_cumulative_central": 5050.0,
+      "published_cumulative_high": 5170.0
+    },
+    {
+      "H_low": 19.75,
+      "H_high": 20.25,
+      "count_low": 2110.0,
+      "count_central": 2160.0,
+      "count_high": 2200.0,
+      "published_cumulative_low": 7030.0,
+      "published_cumulative_central": 7210.0,
+      "published_cumulative_high": 7370.0
+    },
+    {
+      "H_low": 20.25,
+      "H_high": 20.75,
+      "count_low": 2670.0,
+      "count_central": 2710.0,
+      "count_high": 2730.0,
+      "published_cumulative_low": 9700.0,
+      "published_cumulative_central": 9920.0,
+      "published_cumulative_high": 10100.0
+    },
+    {
+      "H_low": 20.75,
+      "H_high": 21.25,
+      "count_low": 3400.0,
+      "count_central": 3480.0,
+      "count_high": 3600.0,
+      "published_cumulative_low": 13100.0,
+      "published_cumulative_central": 13400.0,
+      "published_cumulative_high": 13700.0
+    },
+    {
+      "H_low": 21.25,
+      "H_high": 21.75,
+      "count_low": 4700.0,
+      "count_central": 4700.0,
+      "count_high": 4800.0,
+      "published_cumulative_low": 17800.0,
+      "published_cumulative_central": 18100.0,
+      "published_cumulative_high": 18500.0
+    },
+    {
+      "H_low": 21.75,
+      "H_high": 22.25,
+      "count_low": 6600.0,
+      "count_central": 6800.0,
+      "count_high": 6900.0,
+      "published_cumulative_low": 24400.0,
+      "published_cumulative_central": 24900.0,
+      "published_cumulative_high": 25400.0
+    },
+    {
+      "H_low": 22.25,
+      "H_high": 22.75,
+      "count_low": 10100.0,
+      "count_central": 10400.0,
+      "count_high": 10600.0,
+      "published_cumulative_low": 34500.0,
+      "published_cumulative_central": 35300.0,
+      "published_cumulative_high": 36000.0
+    },
+    {
+      "H_low": 22.75,
+      "H_high": 23.25,
+      "count_low": 16900.0,
+      "count_central": 17200.0,
+      "count_high": 17600.0,
+      "published_cumulative_low": 51400.0,
+      "published_cumulative_central": 52500.0,
+      "published_cumulative_high": 53600.0
+    },
+    {
+      "H_low": 23.25,
+      "H_high": 23.75,
+      "count_low": 30400.0,
+      "count_central": 31100.0,
+      "count_high": 31700.0,
+      "published_cumulative_low": 81800.0,
+      "published_cumulative_central": 83600.0,
+      "published_cumulative_high": 85300.0
+    },
+    {
+      "H_low": 23.75,
+      "H_high": 24.25,
+      "count_low": 60200.0,
+      "count_central": 60400.0,
+      "count_high": 61700.0,
+      "published_cumulative_low": 142000.0,
+      "published_cumulative_central": 144000.0,
+      "published_cumulative_high": 147000.0
+    },
+    {
+      "H_low": 24.25,
+      "H_high": 24.75,
+      "count_low": 118000.0,
+      "count_central": 122000.0,
+      "count_high": 125000.0,
+      "published_cumulative_low": 260000.0,
+      "published_cumulative_central": 266000.0,
+      "published_cumulative_high": 272000.0
+    },
+    {
+      "H_low": 24.75,
+      "H_high": 25.25,
+      "count_low": 222000.0,
+      "count_central": 228000.0,
+      "count_high": 234000.0,
+      "published_cumulative_low": 482000.0,
+      "published_cumulative_central": 494000.0,
+      "published_cumulative_high": 506000.0
+    },
+    {
+      "H_low": 25.25,
+      "H_high": 25.75,
+      "count_low": 400000.0,
+      "count_central": 411000.0,
+      "count_high": 422000.0,
+      "published_cumulative_low": 882000.0,
+      "published_cumulative_central": 905000.0,
+      "published_cumulative_high": 928000.0
+    },
+    {
+      "H_low": 25.75,
+      "H_high": 26.25,
+      "count_low": 708000.0,
+      "count_central": 725000.0,
+      "count_high": 752000.0,
+      "published_cumulative_low": 1590000.0,
+      "published_cumulative_central": 1630000.0,
+      "published_cumulative_high": 1680000.0
+    },
+    {
+      "H_low": 26.25,
+      "H_high": 26.75,
+      "count_low": 1250000.0,
+      "count_central": 1290000.0,
+      "count_high": 1320000.0,
+      "published_cumulative_low": 2840000.0,
+      "published_cumulative_central": 2920000.0,
+      "published_cumulative_high": 3000000.0
+    },
+    {
+      "H_low": 26.75,
+      "H_high": 27.25,
+      "count_low": 2160000.0,
+      "count_central": 2250000.0,
+      "count_high": 2340000.0,
+      "published_cumulative_low": 5000000.0,
+      "published_cumulative_central": 5170000.0,
+      "published_cumulative_high": 5340000.0
+    },
+    {
+      "H_low": 27.25,
+      "H_high": 27.75,
+      "count_low": 3750000.0,
+      "count_central": 3950000.0,
+      "count_high": 4150000.0,
+      "published_cumulative_low": 8750000.0,
+      "published_cumulative_central": 9120000.0,
+      "published_cumulative_high": 9490000.0
+    }
+  ],
+  "population_count_rule": "NEOMOD2 Table 3 differential counts are reconstructed from each published cumulative low/central/high column. Missing mean is calculated separately for disjoint geometric categories after subtracting every catalogued object in the same H/orbit domain, including scientific holds. Nonnegative residuals and lower/upper per-bin envelopes are imposed; these branches are not draws from the unknown joint parameter posterior. No probability weights are assigned to branches. The current catalogue uses a later H calibration; no arbitrary discovery/magnitude recalibration is silently applied.",
+  "scope": "Known asteroid catalogue in full, with nested all-albedo geometric pools and a separate Don Quixote exclusion. Inferred missing objects only for 15.25<=H<27.75, q<1.3 AU, a<4.2 AU, i<88 degrees. No main-belt inventory, Open Moon, planetary array or outer-system infrastructure is added. The all-NEA comparison is geological potential; the narrower geometric cuts are still not trajectories.",
+  "evidence": "Conditional predictive Monte Carlo ranges under explicit observational, analogue and population assumptions. They are not empirically calibrated confidence limits, approved extractable stocks, route capability or project-success probabilities. The count model branches and common calibration/grade stress branches carry no probability weights.",
+  "albedo_bounds": [
+    0.005,
+    1.0
+  ],
+  "albedo_bound_rule": "Positive 0.005 lower truncation is an explicit numerical/physical prior limiting the unobserved ultra-dark tail, not an observed population minimum. Upper 1 is physical. Conditional p(albedo|H) weights the size-dependent NEOMOD3 Rayleigh distribution by its supplied differential log-diameter model, using quarter-magnitude lookup cells. Known taxonomy uses C/S component likelihoods. H<15 and H>28 imputation is extrapolation; measured diameter always takes precedence.",
+  "reported_albedo_log_sigma": 0.3364722366212129,
+  "missing_diameter_sigma_fraction": 0.2,
+  "measurement_rule": "Reported diameter sigma is used where supplied; a 20% standard-deviation scenario covers diameters lacking sigma. Reported albedos use an assumed log sigma ln1.4, motivated by cross-method scatter rather than an object-specific fit uncertainty. A common \u00b120% diameter calibration is separately stressed, never given a probability. Missing H and diameter produces an unquantified record, not zero geological mass.",
+  "composition_prior": {
+    "stony": 0.42,
+    "carbonaceous": 0.48,
+    "ambiguous_other": 0.1
+  },
+  "ambiguous_metal_probability": 0.125,
+  "composition_rule": "MITHNEOS global debiased 42% S/Q and 48% carbonaceous fractions inform a broad prior; remaining 10% is ambiguous, not 10% metallic. Unknown groups are updated by C/S albedo likelihoods. X/ambiguous bodies take a metallic analogue with probability 0.125, midpoint of the cited 5\u201320% range; otherwise their C/stony ambiguity remains albedo-conditioned. Published classifications are not assigned to previously unknown objects in the catalogue evidence record. This is an explicit analogue model, not a published joint taxonomic posterior.",
+  "density_bounds_kg_m3": [
+    [
+      1468,
+      3940
+    ],
+    [
+      577,
+      3595
+    ],
+    [
+      1391,
+      5574
+    ]
+  ],
+  "density_rule": "Uniform per-object priors over Carry-derived ranges tabulated by USGS 2017 for stony, carbonaceous and metal-rich analogues. Neither measured density nor a confidence interval for each candidate is inferred.",
+  "grade_rule": "Independent per-object random meteorite ranks use USGS 2017 Appendix 1/Figure 4 analogue fits for water equivalent and native iron, converting wt.% by dividing 100 and clipping nonnegative fractions so water+nativeiron<=bodymass. These are compositional potential, not extraction recovery. Mineral-bound hydrogen is reported as water equivalent; recoverability, energy and nitrogen are not inferred. Shared .5x/1.5x grade branches expose analogue calibration uncertainty.",
+  "sensitivity_branches": [
+    [
+      "diameter_scale_low",
+      0.8,
+      1.0
+    ],
+    [
+      "diameter_scale_high",
+      1.2,
+      1.0
+    ],
+    [
+      "grade_scale_low",
+      1.0,
+      0.5
+    ],
+    [
+      "grade_scale_high",
+      1.0,
+      1.5
+    ]
+  ],
+  "numerical_rule": "Individual catalogue bodies are sampled. Undiscovered categories use independent compound-Poisson counts under each fixed count branch; branch increments are coupled to guarantee monotonic total populations. Counts below 128 are explicitly summed. Larger sums use first and second compound moments estimated from 65536 synthetic bodies per H bin, with joint normal approximation and nonnegative physical projection. Conditional H within each half-magnitude count bin is uniform; this is a declared quadrature approximation. Source orbital cells are integrated as piecewise constant with 16-point Gauss quadrature. No replenishment from main-belt sources is credited over 220 years."
+}
