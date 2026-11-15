@@ -2383,6 +2383,33 @@ CASES['box_se_dry_design_years_day5'] = dict(
     CASES['box_se_dry_design_years'], restart_from=dict(case='box_se_dry_design_years_day4', day=118.0), days=147.5,
     purpose=CASES['box_se_dry_design_years']['purpose'] + "; its fifth lunar day, days 118-147.5, from the fourth day's "
             'day-118 restart')
+# The gap on the turned Moon (8 November 2026): the three design-years boxes forced by the turned run at the target over
+# its forty settled years (A28R_301k_design_l15_snow_s924_turned_refit, years 10-49), each site carried with the ground
+# into the turned frame by geology's orientation product (climate/gcm/turned.py): the Near-side Sea's 5 S, 45 W to
+# 9.24 S, 52.01 W, over six sea cells; the land's 0 N, 0 E to 7.85 S, 6.28 W, over six wet and humid land cells; the dry
+# block's 44.3 S, 56.25 E to 49.85 S, 56.39 E, over six semi-arid and arid land cells. Each is its design-years box with
+# these departures alone: the GCM run and years, the site and with it the run's column there, the start at the site's
+# sunrise and its latitude's Coriolis force. They measure the gap on the turned climate, read by the design years' rules
+# (session-tools/agents/gap_boxes/rules.txt); nothing in either model changes. Two lunar days from sunrise, then the
+# third, fourth and fifth from the restarts, the fifth run for every box and read only where the rules call it.
+GCM_TURNED_RUN, GCM_TURNED_YEARS = 'A28R_301k_design_l15_snow_s924_turned_refit', (10, 49)
+for _name, _source, _lat, _lon, _where in (
+        ('box_near_side_sea_turned', 'box_near_side_sea_design_years', -9.24, -52.01,
+         'over the Near-side Sea at 9.24 S, 52.01 W on the turned Moon'),
+        ('box_0e_turned', 'box_0e_design_years', -7.85, -6.28, 'over the land at 7.85 S, 6.28 W on the turned Moon'),
+        ('box_se_dry_turned', 'box_se_dry_design_years', -49.85, 56.39,
+         "over the semi-arid block of the near side's south-east at 49.85 S, 56.39 E on the turned Moon")):
+    CASES[_name] = dict(
+        CASES[_source], gcm=(GCM_TURNED_RUN, GCM_TURNED_YEARS),
+        site=dict(CASES[_source]['site'], lat_deg=_lat, lon_deg=_lon), start_hour_angle_deg=-90.0 - _lon,
+        purpose=f"a 3-D box 192 km square {_where}: {_source} with its site carried with the ground, forced by the "
+                "turned run at the target over its years 10-49; otherwise as that box, two lunar days from sunrise")
+    for _day, _from, _start, _end in ((3, _name, 59.0, 88.5), (4, f'{_name}_day3', 88.5, 118.0),
+                                      (5, f'{_name}_day4', 118.0, 147.5)):
+        CASES[f'{_name}_day{_day}'] = dict(
+            CASES[_name], restart_from=dict(case=_from, day=_start), days=_end,
+            purpose=CASES[_name]['purpose'] + f"; its lunar day {_day}, days {_start:g}-{_end:g}, from the restart at "
+                    f"day {_start:g}")
 # The damped-gravity-wave boxes (5 November 2026; session-tools/agents/gap_boxes/yardstick/rules_wtg.txt, fixed before the
 # material that decided them was read, and rules_wtg_boxes.txt, fixed before any of them runs). The design-years boxes
 # take much of their free troposphere's temperature from the GCM's imposed motion; these make their own, so that they
