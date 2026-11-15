@@ -91,6 +91,38 @@ def test_source_hash_change_fails_closed(config,tmp_path):
     with pytest.raises(ValueError,match='Changed protection'):p.load_inputs(path)
 
 
+def _with_register(config, tmp_path, text):
+    """The inputs with the decisions register read from a changed copy."""
+    register = tmp_path/'decisions.md'; register.write_text(text)
+    changed = deepcopy(config); changed['sources']['decisions']['path'] = str(register)
+    path = tmp_path/'inputs.json'; path.write_text(json.dumps(changed))
+    return path
+
+
+def test_register_is_bound_by_its_cited_lines_and_accepts_appended_entries(config, tmp_path):
+    text = (p.ROOT/config['sources']['decisions']['path']).read_text()
+    assert p.cited_lines(config, 'decisions') == [52, 53, *range(84, 96), 599]
+    assert 'sha256' not in config['sources']['decisions']
+    grown = text + '\n## A later section\n\n| Decision | Source | Status |\n|---|---|---|\n| A later entry. | A later source. | Set. |\n'
+    loaded = p.load_inputs(_with_register(config, tmp_path, grown))
+    assert loaded['sources']['decisions']['cited_lines_sha256'] == config['sources']['decisions']['cited_lines_sha256']
+
+
+@pytest.mark.parametrize('line', [53, 90, 599])
+def test_changed_cited_register_line_fails_closed(config, tmp_path, line):
+    lines = (p.ROOT/config['sources']['decisions']['path']).read_text().split('\n')
+    lines[line - 1] += ' Altered.'
+    with pytest.raises(ValueError, match='Changed protection protocol source: decisions'):
+        p.load_inputs(_with_register(config, tmp_path, '\n'.join(lines)))
+
+
+def test_shifted_or_truncated_register_fails_closed(config, tmp_path):
+    lines = (p.ROOT/config['sources']['decisions']['path']).read_text().split('\n')
+    for changed in (['An inserted line.', *lines], lines[:400]):
+        with pytest.raises(ValueError, match='Changed protection protocol source: decisions'):
+            p.load_inputs(_with_register(config, tmp_path, '\n'.join(changed)))
+
+
 def test_protected_id_alias_cannot_be_hidden_by_another_field(config):
     s=dict(subject(),spkid='20101955',name='Renamed catalogue display')
     assert p.exclusion_reasons(s,config)[0]['name']=='Bennu'

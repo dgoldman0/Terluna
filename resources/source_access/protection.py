@@ -17,14 +17,36 @@ ROOT = HERE.parents[1]
 STATUSES = {'passed', 'failed', 'unknown', 'hold'}
 
 
+def cited_lines(config, name):
+    """The line numbers of one source that the gates and the protected categories cite."""
+    holders = [*config['gates'], config['protected_category_basis']]
+    return sorted({number for holder in holders for cited in holder.get('source_ranges', [])
+                   if cited['source'] == name for number in range(cited['first_line'], cited['last_line'] + 1)})
+
+
+def cited_lines_digest(config, name, text):
+    """SHA-256 of the cited lines of a source, each with its line number; a source too short to hold them is changed."""
+    lines = text.split('\n')
+    numbers = cited_lines(config, name)
+    if not numbers or numbers[-1] > len(lines):
+        raise ValueError('Changed protection protocol source: '+name)
+    return hashlib.sha256('\n'.join(f'{number}:{lines[number - 1]}' for number in numbers).encode()).hexdigest()
+
+
 def load_inputs(path=None):
     path = Path(path or HERE/'protection_inputs.json')
     config = json.loads(path.read_text())
     if config.get('schema') != 'terluna.resources.source-protection-inputs/1':
         raise ValueError('Unexpected source protection schema')
     for name, source in config['sources'].items():
-        actual = hashlib.sha256((ROOT/source['path']).read_bytes()).hexdigest()
-        if actual != source['sha256']:
+        data = (ROOT/source['path']).read_bytes()
+        if 'cited_lines_sha256' in source:
+            # A record that grows by appended entries is bound by the lines the gates cite, so later entries leave
+            # it valid; a change to a cited line, or a shift of the cited lines, fails closed.
+            actual, expected = cited_lines_digest(config, name, data.decode()), source['cited_lines_sha256']
+        else:
+            actual, expected = hashlib.sha256(data).hexdigest(), source['sha256']
+        if actual != expected:
             raise ValueError('Changed protection protocol source: '+name)
     identifiers = [gate['id'] for gate in config['gates']]
     if len(identifiers) != len(set(identifiers)):

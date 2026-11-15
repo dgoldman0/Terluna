@@ -4,7 +4,7 @@
     "population": {
       "path": "results/population.json.gz",
       "schema": "terluna.resources.nea-population/1",
-      "sha256": "4592f5f5739c102b19b65f6ed291760602a5f458a738eb15f06c803b324ee19a"
+      "sha256": "c9a992c7507e688e4caea64a71d4b2c7c60ca94969e9fb50d133886a677ebbe1"
     },
     "lunar": {
       "path": "results/lunar_potential.json.gz",

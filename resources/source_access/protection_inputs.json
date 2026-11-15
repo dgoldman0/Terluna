@@ -9,8 +9,9 @@
     },
     "decisions": {
       "path": "research/decisions.md",
-      "sha256": "f82f959838eebaeb1b86e560a48467f6c2e23e0782e969268b409992d420afa2",
-      "status": "Standing decisions; transport confirmed 26 September 2026, protected source direction 9 October 2026, retained lunar resources 31 October 2026."
+      "status": "Standing decisions; transport confirmed 26 September 2026, protected source direction 9 October 2026, retained lunar resources 31 October 2026.",
+      "cited_lines_sha256": "f415134d424c02f588476e3e0142c9a53846072c93aa9963c808c9b050a5c84a",
+      "binding": "The lines the gates cite (52, 53, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 599), each hashed with its line number; entries appended to the register leave the binding valid."
     },
     "future_resources": {
       "path": "research/studies/world_economy/development.md",
