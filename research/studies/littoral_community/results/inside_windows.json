@@ -1,0 +1,2550 @@
+{
+ "schema": "terluna.research.littoral-inside-windows/1",
+ "producer": {
+  "lane": "research",
+  "runner": "research/studies/littoral_community/inside_windows.py",
+  "files": {
+   "research/studies/littoral_community/inside_windows.py": "3eab435381e5edf9a2d4bebbf3ecad9add471490991d2c92b1b2ee06b3b2294f",
+   "research/studies/littoral_community/water_map.py": "d46ee7f3f5b137605e08a2b6f3c4f2818bf3e0810e8124df4ee4559d6fd4ada4",
+   "research/studies/littoral_community/forcing.py": "42a20ae3e041faf205db4a0a72c8080ededf7e402bbbb072449c5775c57efe6a",
+   "research/studies/littoral_community/wind_record.py": "0c4418d7f302713b41e2dfaed817262bb2166e4b40af6c90a922a89e66f0e370",
+   "biosphere/ecology/lake.py": "9a34ba697128d918df964c58096b58249c238cfb1d93ee0034591ab4f59777aa",
+   "biosphere/ecology/moisture_map.py": "58f66fc944acdd8124723a701ac467090f287f7029a62fe4874807adb4387d37"
+  },
+  "constants": {
+   "BOLTZMANN": 1.380649e-23,
+   "EARTH_MOON_DISTANCE": 384400000.0,
+   "ELEMENTARY_CHARGE": 1.602176634e-19,
+   "EXOPLASIM_CHARNOCK": 0.018,
+   "EXOPLASIM_SEA_ROUGHNESS_FLOOR": 1.5e-05,
+   "EXOPLASIM_VON_KARMAN": 0.4,
+   "LEGACY_MOON_GRAVITY": 1.62,
+   "MOON_RADIUS": 1737400.0,
+   "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+   "STANDARD_GRAVITY": 9.80665,
+   "STEFAN_BOLTZMANN": 5.670374419e-08,
+   "SYNODIC_MONTH_DAYS": 29.53059
+  }
+ },
+ "evidence": "Model results on one year of the corrected design climate, its year 10, read twice: as the design run's own 3-day means and as the same year run again and written every 6.5 hours, the two ending on one restart. The waters are the map's mixed slabs under each forcing. The differences between passes are paired, the same weather under each; the year is one of ten, and the 6.5-hour means are themselves means. The cell-by-cell raises are fitted on the year they are tried on.",
+ "reading_rule": "agreement gives each field's largest and root-mean-square difference between the record's aggregated values and the 3-day record, over the field's largest magnitude (scale). passes gives each pass less six_hourly for a case and a statistic: the area-weighted mean and root mean square over the water cells and the land cells, and the mean by band of |latitude| (settings.bands). mean_c and p99_c are in K, hours_above_36 in hours of each lunar day. levels gives the two named passes' own band means. wind_at_the_level is each pass's mean wind at the lowest level, m/s. A positive difference means the pass runs warmer than the 6.5-hour forcing.",
+ "settings": {
+  "record": "A28R_301k_design_l15_snow_s938_turned_refit_precession_eddies",
+  "record_year": 0,
+  "design_run": "A28R_301k_design_l15_snow_s938_turned_refit_precession",
+  "design_year": 10,
+  "records_per_window": 11,
+  "record_h": 6.5,
+  "window_h": 71.5,
+  "steps": {
+   "six_hourly": 13,
+   "means": 72
+  },
+  "spin_windows": 20,
+  "level_floor_m_s": 1.0,
+  "wind_raise": 1.2138333333333333,
+  "cases": [
+   {
+    "name": "still_1m",
+    "depth_m": 1.0,
+    "exchange_per_day": 0.0
+   },
+   {
+    "name": "still_2m",
+    "depth_m": 2.0,
+    "exchange_per_day": 0.0
+   },
+   {
+    "name": "still_4m",
+    "depth_m": 4.0,
+    "exchange_per_day": 0.0
+   },
+   {
+    "name": "mixed_10m",
+    "depth_m": 10.0,
+    "exchange_per_day": 0.0
+   },
+   {
+    "name": "shore_2m_x0.3",
+    "depth_m": 2.0,
+    "exchange_per_day": 0.3
+   },
+   {
+    "name": "shore_2m_x1",
+    "depth_m": 2.0,
+    "exchange_per_day": 1.0
+   }
+  ],
+  "bands": [
+   [
+    0,
+    15
+   ],
+   [
+    15,
+    30
+   ],
+   [
+    30,
+    45
+   ],
+   [
+    45,
+    60
+   ],
+   [
+    60,
+    90
+   ]
+  ],
+  "reference": "six_hourly",
+  "passes": [
+   "six_hourly",
+   "means_raised",
+   "means_unraised",
+   "means_true_speed",
+   "means_cell_factor",
+   "means_cell_excess"
+  ]
+ },
+ "sun": {
+  "noon0_h": 631.8028354197583,
+  "period_h": 708.7340155913995,
+  "row_lat": 2.7689027786254883,
+  "noon_spread_h": 0.003684150747290005,
+  "fit_rms_max": 0.0006633633375040945
+ },
+ "checks": {
+  "agreement": {
+   "tas": {
+    "largest": 8.10691595492912e-08,
+    "rms": 2.988966565378499e-08,
+    "scale": 307.9953918457031
+   },
+   "ts": {
+    "largest": 8.038811742026712e-08,
+    "rms": 2.9618502820386415e-08,
+    "scale": 310.6047058105469
+   },
+   "rss": {
+    "largest": 5.786979039062354e-08,
+    "rms": 5.675368555177156e-09,
+    "scale": 575.2898559570312
+   },
+   "rls": {
+    "largest": 5.756147580047143e-08,
+    "rms": 7.728307618536435e-09,
+    "scale": 48.19760513305664
+   },
+   "alb": {
+    "largest": 0.0,
+    "rms": 0.0,
+    "scale": 0.20000000298023224
+   },
+   "ps": {
+    "largest": 1.9611832422811402e-05,
+    "rms": 1.6735762437540989e-06,
+    "scale": 1228.454345703125
+   },
+   "uas": {
+    "largest": 5.283978042357765e-08,
+    "rms": 5.2023227823224476e-09,
+    "scale": 5.742677688598633
+   },
+   "vas": {
+    "largest": 5.500820779887535e-08,
+    "rms": 4.681075604997845e-09,
+    "scale": 5.713311672210693
+   },
+   "czen": {
+    "largest": 4.409147135389184e-08,
+    "rms": 8.643134903135708e-09,
+    "scale": 0.9831568598747253
+   },
+   "ta_low": {
+    "largest": 8.008132681527705e-05,
+    "rms": 5.7965954825280006e-06,
+    "scale": 306.7712707519531
+   },
+   "ua_low": {
+    "largest": 0.006311872172044802,
+    "rms": 0.0006587139504309069,
+    "scale": 7.239296913146973
+   },
+   "va_low": {
+    "largest": 0.006418082900201813,
+    "rms": 0.0006555378099742514,
+    "scale": 7.10379695892334
+   },
+   "rsscs": {
+    "largest": 0.0,
+    "rms": 0.0,
+    "scale": 628.9713134765625
+   },
+   "hus_low": {
+    "largest": 0.05242812654320425,
+    "rms": 0.0031493559776256427,
+    "scale": 0.020443536341190338
+   }
+  },
+  "restart_identical": true,
+  "humidity_at_the_years_ends": {
+   "as_written_over_the_next_record": 0.0211,
+   "start_fill_against_6h5_inside": {
+    "rms": 0.1105,
+    "mean": 0.0344
+   },
+   "end_fill_against_6h5_inside": {
+    "rms": 0.0797,
+    "mean": 0.0052
+   },
+   "a_window_of_real_change": {
+    "rms": 0.0942,
+    "mean": 0.0148
+   }
+  }
+ },
+ "wind_at_the_level": {
+  "six_hourly": {
+   "water": 2.704,
+   "land": 2.012
+  },
+  "means_raised": {
+   "water": 2.937,
+   "land": 2.179
+  },
+  "means_unraised": {
+   "water": 2.42,
+   "land": 1.795
+  },
+  "means_true_speed": {
+   "water": 2.704,
+   "land": 2.012
+  },
+  "means_cell_factor": {
+   "water": 2.704,
+   "land": 2.012
+  },
+  "means_cell_excess": {
+   "water": 2.704,
+   "land": 2.012
+  }
+ },
+ "cell_raises": {
+  "factor": {
+   "water": 1.123,
+   "land": 1.126
+  },
+  "excess_m_s": {
+   "water": 1.109,
+   "land": 0.833
+  }
+ },
+ "passes": {
+  "means_raised": {
+   "still_2m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": -0.071,
+      "rms": 0.155,
+      "by_band": [
+       -0.02,
+       -0.058,
+       -0.101,
+       -0.142,
+       -0.129
+      ]
+     },
+     "land_cells": {
+      "mean": -0.063,
+      "rms": 0.126,
+      "by_band": [
+       0.018,
+       -0.038,
+       -0.079,
+       -0.108,
+       -0.127
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": -0.139,
+      "rms": 0.466,
+      "by_band": [
+       -0.045,
+       -0.151,
+       -0.21,
+       -0.151,
+       -0.365
+      ]
+     },
+     "land_cells": {
+      "mean": -0.139,
+      "rms": 0.422,
+      "by_band": [
+       0.061,
+       -0.121,
+       -0.173,
+       -0.188,
+       -0.331
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 2.338,
+      "rms": 11.339,
+      "by_band": [
+       7.457,
+       0.57,
+       -1.574,
+       -0.607,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 1.966,
+      "rms": 9.282,
+      "by_band": [
+       8.045,
+       1.963,
+       -1.311,
+       0.063,
+       0.0
+      ]
+     }
+    }
+   },
+   "still_4m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": -0.104,
+      "rms": 0.173,
+      "by_band": [
+       -0.064,
+       -0.098,
+       -0.131,
+       -0.16,
+       -0.13
+      ]
+     },
+     "land_cells": {
+      "mean": -0.093,
+      "rms": 0.139,
+      "by_band": [
+       -0.017,
+       -0.071,
+       -0.113,
+       -0.141,
+       -0.14
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": -0.016,
+      "rms": 0.329,
+      "by_band": [
+       0.107,
+       0.005,
+       -0.105,
+       -0.123,
+       -0.226
+      ]
+     },
+     "land_cells": {
+      "mean": -0.054,
+      "rms": 0.272,
+      "by_band": [
+       0.136,
+       0.022,
+       -0.095,
+       -0.156,
+       -0.221
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 2.968,
+      "rms": 9.888,
+      "by_band": [
+       6.59,
+       2.775,
+       0.173,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 1.008,
+      "rms": 4.467,
+      "by_band": [
+       3.841,
+       0.406,
+       0.107,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "mixed_10m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": -0.152,
+      "rms": 0.2,
+      "by_band": [
+       -0.114,
+       -0.154,
+       -0.175,
+       -0.207,
+       -0.146
+      ]
+     },
+     "land_cells": {
+      "mean": -0.114,
+      "rms": 0.15,
+      "by_band": [
+       -0.046,
+       -0.103,
+       -0.147,
+       -0.156,
+       -0.131
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": -0.086,
+      "rms": 0.208,
+      "by_band": [
+       -0.015,
+       -0.071,
+       -0.136,
+       -0.169,
+       -0.16
+      ]
+     },
+     "land_cells": {
+      "mean": -0.091,
+      "rms": 0.176,
+      "by_band": [
+       0.022,
+       -0.054,
+       -0.133,
+       -0.156,
+       -0.156
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 0.0,
+      "rms": 0.0,
+      "by_band": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 0.0,
+      "rms": 0.0,
+      "by_band": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "shore_2m_x0.3": {
+    "mean_c": {
+     "water_cells": {
+      "mean": -0.065,
+      "rms": 0.092,
+      "by_band": [
+       -0.039,
+       -0.063,
+       -0.078,
+       -0.1,
+       -0.084
+      ]
+     },
+     "land_cells": {
+      "mean": -0.105,
+      "rms": 0.145,
+      "by_band": [
+       -0.03,
+       -0.089,
+       -0.131,
+       -0.15,
+       -0.136
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": -0.237,
+      "rms": 0.35,
+      "by_band": [
+       -0.257,
+       -0.256,
+       -0.24,
+       -0.15,
+       -0.253
+      ]
+     },
+     "land_cells": {
+      "mean": -0.238,
+      "rms": 0.358,
+      "by_band": [
+       -0.147,
+       -0.264,
+       -0.282,
+       -0.244,
+       -0.273
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": -0.075,
+      "rms": 5.744,
+      "by_band": [
+       0.694,
+       -1.018,
+       -0.529,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": -0.082,
+      "rms": 4.033,
+      "by_band": [
+       0.879,
+       -1.362,
+       -0.263,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "means_unraised": {
+   "still_2m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.33,
+      "rms": 0.361,
+      "by_band": [
+       0.395,
+       0.373,
+       0.316,
+       0.223,
+       0.089
+      ]
+     },
+     "land_cells": {
+      "mean": 0.254,
+      "rms": 0.279,
+      "by_band": [
+       0.347,
+       0.31,
+       0.277,
+       0.211,
+       0.09
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.468,
+      "rms": 0.636,
+      "by_band": [
+       0.551,
+       0.497,
+       0.433,
+       0.437,
+       0.036
+      ]
+     },
+     "land_cells": {
+      "mean": 0.348,
+      "rms": 0.508,
+      "by_band": [
+       0.534,
+       0.393,
+       0.351,
+       0.317,
+       0.077
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 18.891,
+      "rms": 27.609,
+      "by_band": [
+       26.756,
+       24.005,
+       17.194,
+       2.178,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 11.997,
+      "rms": 20.287,
+      "by_band": [
+       27.745,
+       19.116,
+       9.105,
+       0.452,
+       0.0
+      ]
+     }
+    }
+   },
+   "still_4m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.332,
+      "rms": 0.363,
+      "by_band": [
+       0.396,
+       0.375,
+       0.324,
+       0.222,
+       0.083
+      ]
+     },
+     "land_cells": {
+      "mean": 0.231,
+      "rms": 0.257,
+      "by_band": [
+       0.337,
+       0.295,
+       0.246,
+       0.166,
+       0.075
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.48,
+      "rms": 0.577,
+      "by_band": [
+       0.608,
+       0.535,
+       0.425,
+       0.334,
+       0.053
+      ]
+     },
+     "land_cells": {
+      "mean": 0.326,
+      "rms": 0.42,
+      "by_band": [
+       0.536,
+       0.445,
+       0.321,
+       0.214,
+       0.051
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 11.324,
+      "rms": 23.206,
+      "by_band": [
+       19.746,
+       14.71,
+       5.376,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 4.081,
+      "rms": 11.795,
+      "by_band": [
+       13.617,
+       3.993,
+       0.712,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "mixed_10m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.314,
+      "rms": 0.342,
+      "by_band": [
+       0.366,
+       0.359,
+       0.312,
+       0.212,
+       0.086
+      ]
+     },
+     "land_cells": {
+      "mean": 0.191,
+      "rms": 0.219,
+      "by_band": [
+       0.305,
+       0.253,
+       0.188,
+       0.112,
+       0.066
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.386,
+      "rms": 0.435,
+      "by_band": [
+       0.468,
+       0.439,
+       0.363,
+       0.257,
+       0.091
+      ]
+     },
+     "land_cells": {
+      "mean": 0.224,
+      "rms": 0.278,
+      "by_band": [
+       0.379,
+       0.312,
+       0.217,
+       0.119,
+       0.053
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 0.0,
+      "rms": 0.0,
+      "by_band": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 0.0,
+      "rms": 0.0,
+      "by_band": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "shore_2m_x0.3": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.16,
+      "rms": 0.175,
+      "by_band": [
+       0.187,
+       0.183,
+       0.157,
+       0.111,
+       0.042
+      ]
+     },
+     "land_cells": {
+      "mean": 0.216,
+      "rms": 0.243,
+      "by_band": [
+       0.327,
+       0.279,
+       0.225,
+       0.148,
+       0.064
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.088,
+      "rms": 0.269,
+      "by_band": [
+       0.066,
+       0.099,
+       0.102,
+       0.154,
+       -0.046
+      ]
+     },
+     "land_cells": {
+      "mean": 0.158,
+      "rms": 0.301,
+      "by_band": [
+       0.275,
+       0.177,
+       0.148,
+       0.139,
+       0.012
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 4.454,
+      "rms": 11.118,
+      "by_band": [
+       8.424,
+       5.231,
+       1.581,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 3.437,
+      "rms": 9.966,
+      "by_band": [
+       11.344,
+       3.553,
+       0.579,
+       0.008,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "means_true_speed": {
+   "still_2m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.068,
+      "rms": 0.074,
+      "by_band": [
+       0.079,
+       0.073,
+       0.065,
+       0.052,
+       0.021
+      ]
+     },
+     "land_cells": {
+      "mean": 0.06,
+      "rms": 0.067,
+      "by_band": [
+       0.075,
+       0.071,
+       0.071,
+       0.056,
+       0.019
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": -0.197,
+      "rms": 0.344,
+      "by_band": [
+       -0.239,
+       -0.292,
+       -0.185,
+       -0.015,
+       -0.114
+      ]
+     },
+     "land_cells": {
+      "mean": -0.119,
+      "rms": 0.272,
+      "by_band": [
+       -0.113,
+       -0.155,
+       -0.163,
+       -0.083,
+       -0.076
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 3.216,
+      "rms": 8.0,
+      "by_band": [
+       5.709,
+       3.636,
+       1.758,
+       0.075,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 2.13,
+      "rms": 6.602,
+      "by_band": [
+       7.313,
+       3.299,
+       -0.761,
+       0.001,
+       0.0
+      ]
+     }
+    }
+   },
+   "still_4m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.062,
+      "rms": 0.069,
+      "by_band": [
+       0.075,
+       0.068,
+       0.058,
+       0.041,
+       0.014
+      ]
+     },
+     "land_cells": {
+      "mean": 0.041,
+      "rms": 0.052,
+      "by_band": [
+       0.066,
+       0.059,
+       0.047,
+       0.019,
+       0.005
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.016,
+      "rms": 0.144,
+      "by_band": [
+       0.045,
+       -0.01,
+       0.006,
+       0.017,
+       -0.04
+      ]
+     },
+     "land_cells": {
+      "mean": 0.016,
+      "rms": 0.13,
+      "by_band": [
+       0.092,
+       0.068,
+       -0.013,
+       -0.03,
+       -0.05
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 0.637,
+      "rms": 3.26,
+      "by_band": [
+       1.503,
+       0.389,
+       0.067,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 0.437,
+      "rms": 2.223,
+      "by_band": [
+       1.577,
+       0.366,
+       -0.003,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "mixed_10m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.054,
+      "rms": 0.062,
+      "by_band": [
+       0.067,
+       0.062,
+       0.05,
+       0.029,
+       0.012
+      ]
+     },
+     "land_cells": {
+      "mean": 0.02,
+      "rms": 0.041,
+      "by_band": [
+       0.052,
+       0.036,
+       0.01,
+       -0.009,
+       0.006
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.063,
+      "rms": 0.096,
+      "by_band": [
+       0.089,
+       0.067,
+       0.052,
+       0.029,
+       0.011
+      ]
+     },
+     "land_cells": {
+      "mean": 0.018,
+      "rms": 0.078,
+      "by_band": [
+       0.069,
+       0.048,
+       -0.001,
+       -0.022,
+       -0.01
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 0.0,
+      "rms": 0.0,
+      "by_band": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 0.0,
+      "rms": 0.0,
+      "by_band": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "shore_2m_x0.3": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.027,
+      "rms": 0.031,
+      "by_band": [
+       0.033,
+       0.03,
+       0.026,
+       0.018,
+       0.001
+      ]
+     },
+     "land_cells": {
+      "mean": 0.031,
+      "rms": 0.043,
+      "by_band": [
+       0.06,
+       0.048,
+       0.03,
+       0.009,
+       -0.0
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": -0.254,
+      "rms": 0.331,
+      "by_band": [
+       -0.34,
+       -0.314,
+       -0.218,
+       -0.067,
+       -0.119
+      ]
+     },
+     "land_cells": {
+      "mean": -0.176,
+      "rms": 0.267,
+      "by_band": [
+       -0.2,
+       -0.225,
+       -0.212,
+       -0.136,
+       -0.092
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": -1.747,
+      "rms": 4.43,
+      "by_band": [
+       -2.566,
+       -2.971,
+       -0.986,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": -0.686,
+      "rms": 3.013,
+      "by_band": [
+       -1.37,
+       -1.612,
+       -0.378,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "means_cell_factor": {
+   "still_2m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.103,
+      "rms": 0.127,
+      "by_band": [
+       0.138,
+       0.118,
+       0.086,
+       0.056,
+       0.006
+      ]
+     },
+     "land_cells": {
+      "mean": 0.069,
+      "rms": 0.086,
+      "by_band": [
+       0.098,
+       0.089,
+       0.078,
+       0.057,
+       0.012
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.126,
+      "rms": 0.407,
+      "by_band": [
+       0.181,
+       0.117,
+       0.081,
+       0.168,
+       -0.118
+      ]
+     },
+     "land_cells": {
+      "mean": 0.073,
+      "rms": 0.344,
+      "by_band": [
+       0.182,
+       0.07,
+       0.062,
+       0.078,
+       -0.066
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 7.874,
+      "rms": 14.229,
+      "by_band": [
+       13.29,
+       9.317,
+       4.793,
+       0.512,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 4.688,
+      "rms": 10.305,
+      "by_band": [
+       12.337,
+       7.309,
+       2.103,
+       0.174,
+       0.0
+      ]
+     }
+    }
+   },
+   "still_4m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.081,
+      "rms": 0.103,
+      "by_band": [
+       0.111,
+       0.093,
+       0.069,
+       0.043,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 0.041,
+      "rms": 0.059,
+      "by_band": [
+       0.07,
+       0.062,
+       0.046,
+       0.019,
+       -0.0
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.198,
+      "rms": 0.338,
+      "by_band": [
+       0.298,
+       0.223,
+       0.129,
+       0.122,
+       -0.045
+      ]
+     },
+     "land_cells": {
+      "mean": 0.105,
+      "rms": 0.238,
+      "by_band": [
+       0.235,
+       0.177,
+       0.088,
+       0.038,
+       -0.049
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 4.678,
+      "rms": 11.272,
+      "by_band": [
+       8.696,
+       5.998,
+       1.491,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 1.436,
+      "rms": 4.83,
+      "by_band": [
+       4.888,
+       1.205,
+       0.298,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "mixed_10m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.048,
+      "rms": 0.065,
+      "by_band": [
+       0.069,
+       0.054,
+       0.042,
+       0.018,
+       -0.003
+      ]
+     },
+     "land_cells": {
+      "mean": 0.011,
+      "rms": 0.038,
+      "by_band": [
+       0.04,
+       0.026,
+       0.001,
+       -0.016,
+       -0.002
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.117,
+      "rms": 0.176,
+      "by_band": [
+       0.168,
+       0.137,
+       0.086,
+       0.06,
+       -0.002
+      ]
+     },
+     "land_cells": {
+      "mean": 0.038,
+      "rms": 0.112,
+      "by_band": [
+       0.114,
+       0.075,
+       0.018,
+       -0.016,
+       -0.017
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 0.0,
+      "rms": 0.0,
+      "by_band": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 0.0,
+      "rms": 0.0,
+      "by_band": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "shore_2m_x0.3": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.034,
+      "rms": 0.042,
+      "by_band": [
+       0.048,
+       0.038,
+       0.029,
+       0.016,
+       -0.005
+      ]
+     },
+     "land_cells": {
+      "mean": 0.027,
+      "rms": 0.045,
+      "by_band": [
+       0.058,
+       0.044,
+       0.026,
+       0.005,
+       -0.006
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": -0.094,
+      "rms": 0.256,
+      "by_band": [
+       -0.134,
+       -0.105,
+       -0.088,
+       0.021,
+       -0.117
+      ]
+     },
+     "land_cells": {
+      "mean": -0.073,
+      "rms": 0.242,
+      "by_band": [
+       -0.044,
+       -0.103,
+       -0.093,
+       -0.044,
+       -0.088
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 0.822,
+      "rms": 5.429,
+      "by_band": [
+       1.903,
+       0.712,
+       -0.02,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 0.463,
+      "rms": 3.782,
+      "by_band": [
+       2.218,
+       -0.319,
+       -0.047,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  },
+  "means_cell_excess": {
+   "still_2m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.145,
+      "rms": 0.165,
+      "by_band": [
+       0.178,
+       0.162,
+       0.136,
+       0.098,
+       0.028
+      ]
+     },
+     "land_cells": {
+      "mean": 0.117,
+      "rms": 0.133,
+      "by_band": [
+       0.148,
+       0.138,
+       0.137,
+       0.108,
+       0.037
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.148,
+      "rms": 0.393,
+      "by_band": [
+       0.188,
+       0.127,
+       0.119,
+       0.204,
+       -0.068
+      ]
+     },
+     "land_cells": {
+      "mean": 0.161,
+      "rms": 0.364,
+      "by_band": [
+       0.256,
+       0.158,
+       0.162,
+       0.179,
+       0.013
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 10.926,
+      "rms": 18.073,
+      "by_band": [
+       17.382,
+       13.898,
+       7.585,
+       0.483,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 7.389,
+      "rms": 13.72,
+      "by_band": [
+       17.67,
+       11.751,
+       5.052,
+       0.233,
+       0.0
+      ]
+     }
+    }
+   },
+   "still_4m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.118,
+      "rms": 0.136,
+      "by_band": [
+       0.145,
+       0.131,
+       0.112,
+       0.078,
+       0.019
+      ]
+     },
+     "land_cells": {
+      "mean": 0.078,
+      "rms": 0.094,
+      "by_band": [
+       0.112,
+       0.102,
+       0.093,
+       0.055,
+       0.015
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.234,
+      "rms": 0.347,
+      "by_band": [
+       0.324,
+       0.254,
+       0.179,
+       0.162,
+       -0.013
+      ]
+     },
+     "land_cells": {
+      "mean": 0.176,
+      "rms": 0.274,
+      "by_band": [
+       0.3,
+       0.251,
+       0.175,
+       0.114,
+       0.003
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 5.508,
+      "rms": 12.908,
+      "by_band": [
+       10.457,
+       6.599,
+       1.795,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 2.074,
+      "rms": 6.782,
+      "by_band": [
+       7.082,
+       1.777,
+       0.38,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "mixed_10m": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.08,
+      "rms": 0.094,
+      "by_band": [
+       0.1,
+       0.09,
+       0.078,
+       0.045,
+       0.012
+      ]
+     },
+     "land_cells": {
+      "mean": 0.036,
+      "rms": 0.055,
+      "by_band": [
+       0.073,
+       0.056,
+       0.033,
+       0.006,
+       0.006
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": 0.149,
+      "rms": 0.195,
+      "by_band": [
+       0.199,
+       0.167,
+       0.126,
+       0.081,
+       0.021
+      ]
+     },
+     "land_cells": {
+      "mean": 0.077,
+      "rms": 0.129,
+      "by_band": [
+       0.148,
+       0.12,
+       0.069,
+       0.024,
+       0.008
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 0.0,
+      "rms": 0.0,
+      "by_band": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 0.0,
+      "rms": 0.0,
+      "by_band": [
+       0.0,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   },
+   "shore_2m_x0.3": {
+    "mean_c": {
+     "water_cells": {
+      "mean": 0.05,
+      "rms": 0.059,
+      "by_band": [
+       0.064,
+       0.056,
+       0.047,
+       0.03,
+       0.001
+      ]
+     },
+     "land_cells": {
+      "mean": 0.058,
+      "rms": 0.074,
+      "by_band": [
+       0.095,
+       0.08,
+       0.065,
+       0.034,
+       0.005
+      ]
+     }
+    },
+    "p99_c": {
+     "water_cells": {
+      "mean": -0.075,
+      "rms": 0.242,
+      "by_band": [
+       -0.12,
+       -0.093,
+       -0.061,
+       0.042,
+       -0.094
+      ]
+     },
+     "land_cells": {
+      "mean": -0.011,
+      "rms": 0.229,
+      "by_band": [
+       0.016,
+       -0.039,
+       -0.021,
+       0.018,
+       -0.042
+      ]
+     }
+    },
+    "hours_above_36": {
+     "water_cells": {
+      "mean": 1.352,
+      "rms": 6.367,
+      "by_band": [
+       3.459,
+       0.68,
+       -0.135,
+       0.0,
+       0.0
+      ]
+     },
+     "land_cells": {
+      "mean": 1.138,
+      "rms": 5.359,
+      "by_band": [
+       4.452,
+       0.392,
+       0.051,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   }
+  }
+ },
+ "levels": {
+  "six_hourly": {
+   "still_2m": {
+    "mean_c": {
+     "water_cells": [
+      29.17,
+      29.73,
+      29.64,
+      29.52,
+      27.82
+     ],
+     "land_cells": [
+      29.29,
+      28.8,
+      28.45,
+      27.68,
+      26.53
+     ]
+    },
+    "p99_c": {
+     "water_cells": [
+      37.3,
+      37.02,
+      36.16,
+      34.18,
+      30.35
+     ],
+     "land_cells": [
+      37.93,
+      37.03,
+      35.79,
+      33.26,
+      29.71
+     ]
+    },
+    "hours_above_36": {
+     "water_cells": [
+      55.93,
+      51.48,
+      31.82,
+      2.92,
+      0.0
+     ],
+     "land_cells": [
+      72.41,
+      42.98,
+      15.67,
+      0.33,
+      0.0
+     ]
+    }
+   },
+   "still_4m": {
+    "mean_c": {
+     "water_cells": [
+      29.35,
+      29.81,
+      29.7,
+      29.52,
+      27.83
+     ],
+     "land_cells": [
+      29.61,
+      29.11,
+      28.76,
+      27.96,
+      26.68
+     ]
+    },
+    "p99_c": {
+     "water_cells": [
+      34.57,
+      34.59,
+      34.06,
+      32.77,
+      29.64
+     ],
+     "land_cells": [
+      35.12,
+      34.3,
+      33.46,
+      31.62,
+      28.95
+     ]
+    },
+    "hours_above_36": {
+     "water_cells": [
+      12.57,
+      8.43,
+      3.04,
+      0.0,
+      0.0
+     ],
+     "land_cells": [
+      8.37,
+      1.84,
+      0.12,
+      0.0,
+      0.0
+     ]
+    }
+   },
+   "mixed_10m": {
+    "mean_c": {
+     "water_cells": [
+      29.55,
+      29.96,
+      29.85,
+      29.59,
+      27.89
+     ],
+     "land_cells": [
+      29.85,
+      29.36,
+      29.01,
+      28.19,
+      26.85
+     ]
+    },
+    "p99_c": {
+     "water_cells": [
+      31.95,
+      32.17,
+      31.89,
+      31.2,
+      28.91
+     ],
+     "land_cells": [
+      32.39,
+      31.76,
+      31.2,
+      29.98,
+      28.11
+     ]
+    },
+    "hours_above_36": {
+     "water_cells": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "land_cells": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    }
+   },
+   "shore_2m_x0.3": {
+    "mean_c": {
+     "water_cells": [
+      29.53,
+      29.96,
+      29.86,
+      29.68,
+      27.94
+     ],
+     "land_cells": [
+      29.73,
+      29.23,
+      28.86,
+      28.02,
+      26.72
+     ]
+    },
+    "p99_c": {
+     "water_cells": [
+      34.96,
+      34.84,
+      34.14,
+      32.69,
+      29.62
+     ],
+     "land_cells": [
+      35.64,
+      34.85,
+      33.81,
+      31.75,
+      28.95
+     ]
+    },
+    "hours_above_36": {
+     "water_cells": [
+      14.9,
+      8.35,
+      2.28,
+      0.0,
+      0.0
+     ],
+     "land_cells": [
+      14.04,
+      4.56,
+      0.54,
+      0.0,
+      0.0
+     ]
+    }
+   }
+  },
+  "means_raised": {
+   "still_2m": {
+    "mean_c": {
+     "water_cells": [
+      29.15,
+      29.67,
+      29.54,
+      29.37,
+      27.69
+     ],
+     "land_cells": [
+      29.31,
+      28.76,
+      28.37,
+      27.57,
+      26.4
+     ]
+    },
+    "p99_c": {
+     "water_cells": [
+      37.26,
+      36.87,
+      35.95,
+      34.03,
+      29.99
+     ],
+     "land_cells": [
+      37.99,
+      36.91,
+      35.62,
+      33.07,
+      29.38
+     ]
+    },
+    "hours_above_36": {
+     "water_cells": [
+      63.39,
+      52.05,
+      30.24,
+      2.32,
+      0.0
+     ],
+     "land_cells": [
+      80.46,
+      44.94,
+      14.36,
+      0.4,
+      0.0
+     ]
+    }
+   },
+   "still_4m": {
+    "mean_c": {
+     "water_cells": [
+      29.28,
+      29.71,
+      29.57,
+      29.36,
+      27.7
+     ],
+     "land_cells": [
+      29.59,
+      29.04,
+      28.65,
+      27.82,
+      26.54
+     ]
+    },
+    "p99_c": {
+     "water_cells": [
+      34.68,
+      34.59,
+      33.96,
+      32.65,
+      29.42
+     ],
+     "land_cells": [
+      35.26,
+      34.32,
+      33.37,
+      31.46,
+      28.73
+     ]
+    },
+    "hours_above_36": {
+     "water_cells": [
+      19.16,
+      11.21,
+      3.21,
+      0.0,
+      0.0
+     ],
+     "land_cells": [
+      12.21,
+      2.25,
+      0.23,
+      0.0,
+      0.0
+     ]
+    }
+   },
+   "mixed_10m": {
+    "mean_c": {
+     "water_cells": [
+      29.43,
+      29.81,
+      29.67,
+      29.38,
+      27.74
+     ],
+     "land_cells": [
+      29.8,
+      29.26,
+      28.87,
+      28.04,
+      26.72
+     ]
+    },
+    "p99_c": {
+     "water_cells": [
+      31.93,
+      32.1,
+      31.76,
+      31.03,
+      28.75
+     ],
+     "land_cells": [
+      32.42,
+      31.7,
+      31.07,
+      29.82,
+      27.95
+     ]
+    },
+    "hours_above_36": {
+     "water_cells": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "land_cells": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    }
+   },
+   "shore_2m_x0.3": {
+    "mean_c": {
+     "water_cells": [
+      29.49,
+      29.9,
+      29.78,
+      29.58,
+      27.86
+     ],
+     "land_cells": [
+      29.71,
+      29.14,
+      28.72,
+      27.87,
+      26.58
+     ]
+    },
+    "p99_c": {
+     "water_cells": [
+      34.71,
+      34.59,
+      33.9,
+      32.54,
+      29.37
+     ],
+     "land_cells": [
+      35.49,
+      34.58,
+      33.53,
+      31.51,
+      28.67
+     ]
+    },
+    "hours_above_36": {
+     "water_cells": [
+      15.59,
+      7.33,
+      1.75,
+      0.0,
+      0.0
+     ],
+     "land_cells": [
+      14.92,
+      3.2,
+      0.28,
+      0.0,
+      0.0
+     ]
+    }
+   }
+  }
+ },
+ "sites": {
+  "shore_0": {
+   "kind": "sea shore",
+   "lat": 8.306702613830566,
+   "wind_factor": 1.117,
+   "wind_excess_m_s": 0.944,
+   "passes": {
+    "six_hourly": {
+     "still_2m": {
+      "mean_c": 29.26,
+      "p99_c": 38.62,
+      "hours_above_36": 53.63
+     },
+     "still_4m": {
+      "mean_c": 29.61,
+      "p99_c": 35.61,
+      "hours_above_36": 1.24
+     }
+    },
+    "means_raised": {
+     "still_2m": {
+      "mean_c": 29.18,
+      "p99_c": 38.33,
+      "hours_above_36": 50.99
+     },
+     "still_4m": {
+      "mean_c": 29.5,
+      "p99_c": 35.58,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_unraised": {
+     "still_2m": {
+      "mean_c": 29.57,
+      "p99_c": 38.94,
+      "hours_above_36": 87.02
+     },
+     "still_4m": {
+      "mean_c": 29.91,
+      "p99_c": 36.1,
+      "hours_above_36": 8.37
+     }
+    },
+    "means_true_speed": {
+     "still_2m": {
+      "mean_c": 29.31,
+      "p99_c": 38.35,
+      "hours_above_36": 56.21
+     },
+     "still_4m": {
+      "mean_c": 29.66,
+      "p99_c": 35.51,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_cell_factor": {
+     "still_2m": {
+      "mean_c": 29.36,
+      "p99_c": 38.62,
+      "hours_above_36": 71.86
+     },
+     "still_4m": {
+      "mean_c": 29.69,
+      "p99_c": 35.83,
+      "hours_above_36": 4.82
+     }
+    },
+    "means_cell_excess": {
+     "still_2m": {
+      "mean_c": 29.37,
+      "p99_c": 38.67,
+      "hours_above_36": 74.61
+     },
+     "still_4m": {
+      "mean_c": 29.69,
+      "p99_c": 35.87,
+      "hours_above_36": 5.51
+     }
+    }
+   }
+  },
+  "shore_30": {
+   "kind": "sea shore",
+   "lat": -30.45755386352539,
+   "wind_factor": 1.099,
+   "wind_excess_m_s": 1.233,
+   "passes": {
+    "six_hourly": {
+     "still_2m": {
+      "mean_c": 30.61,
+      "p99_c": 38.35,
+      "hours_above_36": 42.18
+     },
+     "still_4m": {
+      "mean_c": 30.58,
+      "p99_c": 35.96,
+      "hours_above_36": 5.95
+     }
+    },
+    "means_raised": {
+     "still_2m": {
+      "mean_c": 30.45,
+      "p99_c": 37.75,
+      "hours_above_36": 40.75
+     },
+     "still_4m": {
+      "mean_c": 30.39,
+      "p99_c": 35.78,
+      "hours_above_36": 4.43
+     }
+    },
+    "means_unraised": {
+     "still_2m": {
+      "mean_c": 30.92,
+      "p99_c": 38.5,
+      "hours_above_36": 83.77
+     },
+     "still_4m": {
+      "mean_c": 30.86,
+      "p99_c": 36.34,
+      "hours_above_36": 10.24
+     }
+    },
+    "means_true_speed": {
+     "still_2m": {
+      "mean_c": 30.64,
+      "p99_c": 38.0,
+      "hours_above_36": 47.35
+     },
+     "still_4m": {
+      "mean_c": 30.6,
+      "p99_c": 36.01,
+      "hours_above_36": 7.28
+     }
+    },
+    "means_cell_factor": {
+     "still_2m": {
+      "mean_c": 30.7,
+      "p99_c": 38.15,
+      "hours_above_36": 60.34
+     },
+     "still_4m": {
+      "mean_c": 30.64,
+      "p99_c": 36.09,
+      "hours_above_36": 8.07
+     }
+    },
+    "means_cell_excess": {
+     "still_2m": {
+      "mean_c": 30.7,
+      "p99_c": 38.12,
+      "hours_above_36": 56.21
+     },
+     "still_4m": {
+      "mean_c": 30.64,
+      "p99_c": 36.06,
+      "hours_above_36": 7.78
+     }
+    }
+   }
+  },
+  "shore_45": {
+   "kind": "sea shore",
+   "lat": 47.06964111328125,
+   "wind_factor": 1.111,
+   "wind_excess_m_s": 1.3,
+   "passes": {
+    "six_hourly": {
+     "still_2m": {
+      "mean_c": 29.75,
+      "p99_c": 34.7,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 29.72,
+      "p99_c": 33.22,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_raised": {
+     "still_2m": {
+      "mean_c": 29.56,
+      "p99_c": 34.76,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 29.5,
+      "p99_c": 33.31,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_unraised": {
+     "still_2m": {
+      "mean_c": 29.99,
+      "p99_c": 35.56,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 29.98,
+      "p99_c": 33.91,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_true_speed": {
+     "still_2m": {
+      "mean_c": 29.78,
+      "p99_c": 34.52,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 29.75,
+      "p99_c": 33.22,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_cell_factor": {
+     "still_2m": {
+      "mean_c": 29.76,
+      "p99_c": 35.11,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 29.71,
+      "p99_c": 33.6,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_cell_excess": {
+     "still_2m": {
+      "mean_c": 29.84,
+      "p99_c": 35.25,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 29.79,
+      "p99_c": 33.64,
+      "hours_above_36": 0.0
+     }
+    }
+   }
+  },
+  "shore_60": {
+   "kind": "sea shore",
+   "lat": -63.67863464355469,
+   "wind_factor": 1.088,
+   "wind_excess_m_s": 0.875,
+   "passes": {
+    "six_hourly": {
+     "still_2m": {
+      "mean_c": 28.87,
+      "p99_c": 32.49,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 28.8,
+      "p99_c": 31.27,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_raised": {
+     "still_2m": {
+      "mean_c": 28.72,
+      "p99_c": 32.09,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 28.64,
+      "p99_c": 31.08,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_unraised": {
+     "still_2m": {
+      "mean_c": 28.97,
+      "p99_c": 32.52,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 28.89,
+      "p99_c": 31.42,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_true_speed": {
+     "still_2m": {
+      "mean_c": 28.9,
+      "p99_c": 32.4,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 28.81,
+      "p99_c": 31.25,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_cell_factor": {
+     "still_2m": {
+      "mean_c": 28.86,
+      "p99_c": 32.35,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 28.78,
+      "p99_c": 31.27,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_cell_excess": {
+     "still_2m": {
+      "mean_c": 28.9,
+      "p99_c": 32.42,
+      "hours_above_36": 0.0
+     },
+     "still_4m": {
+      "mean_c": 28.81,
+      "p99_c": 31.28,
+      "hours_above_36": 0.0
+     }
+    }
+   }
+  },
+  "lake_0": {
+   "kind": "lake margin",
+   "lat": -13.844483375549316,
+   "wind_factor": 1.11,
+   "wind_excess_m_s": 0.84,
+   "passes": {
+    "six_hourly": {
+     "still_2m": {
+      "mean_c": 28.45,
+      "p99_c": 36.73,
+      "hours_above_36": 17.69
+     },
+     "still_4m": {
+      "mean_c": 28.8,
+      "p99_c": 33.98,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_raised": {
+     "still_2m": {
+      "mean_c": 28.32,
+      "p99_c": 36.13,
+      "hours_above_36": 7.78
+     },
+     "still_4m": {
+      "mean_c": 28.69,
+      "p99_c": 34.01,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_unraised": {
+     "still_2m": {
+      "mean_c": 28.73,
+      "p99_c": 36.88,
+      "hours_above_36": 17.52
+     },
+     "still_4m": {
+      "mean_c": 29.1,
+      "p99_c": 34.46,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_true_speed": {
+     "still_2m": {
+      "mean_c": 28.55,
+      "p99_c": 36.64,
+      "hours_above_36": 13.49
+     },
+     "still_4m": {
+      "mean_c": 28.91,
+      "p99_c": 34.28,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_cell_factor": {
+     "still_2m": {
+      "mean_c": 28.52,
+      "p99_c": 36.5,
+      "hours_above_36": 11.81
+     },
+     "still_4m": {
+      "mean_c": 28.89,
+      "p99_c": 34.23,
+      "hours_above_36": 0.0
+     }
+    },
+    "means_cell_excess": {
+     "still_2m": {
+      "mean_c": 28.6,
+      "p99_c": 36.71,
+      "hours_above_36": 15.45
+     },
+     "still_4m": {
+      "mean_c": 28.95,
+      "p99_c": 34.32,
+      "hours_above_36": 0.0
+     }
+    }
+   }
+  }
+ },
+ "inputs": {
+  "A28R_301k_design_l15_snow_s938_turned_refit_precession_eddies/model/MOST.00000.nc": "95462f6a17e8b4299dc3875bbc32630567d87bd993719189e7dd8402cf7e174f",
+  "A28R_301k_design_l15_snow_s938_turned_refit_precession/model/MOST.00010.nc": "6674af8732dac51324e9257139e9883d2a3b6f75b53b29ff4ab94cbcedded9ef",
+  "A28R_301k_design_l15_snow_s938_turned_refit_precession/model/MOST.00011.nc": "47b1c5f345430efdc7c4b86b480440637a4b7c3771d40ebb699320ce413ca835",
+  "research/studies/littoral_community/results/forcing.json": "7c3e2646a89e2b43fe6594f132d0d295c13de17fe8ef71fa4dff32195b09d57b"
+ },
+ "seconds": 94.1
+}
