@@ -3,11 +3,13 @@ import gzip
 import json
 import math
 import pytest
+from provisioning.vacuum_industry import model
 from research.studies.enclosed_returns import markets
 from research.studies.vacuum_economy import programme as definition, run
 
 SAVED = json.loads((run.HERE / 'results/economy.json').read_text())
 CASES = {c['name']: c for c in SAVED['cases']}
+SCENARIO_CASES = sorted(name for name, c in CASES.items() if c['scenario'] != 'first_pass')
 STAGED = [('receipts_USD2041_year', 'annual_gross'), ('operating_cash_USD2041_year', 'annual_operating_available'),
           ('cumulative_receipts_USD2041', 'cumulative_gross_receipts'), ('payouts_USD2041', 'owner_payouts'),
           ('initial_funding_USD2041', 'initial_full_funding'), ('additional_equity_USD2041', 'additional_equity_required'),
@@ -30,8 +32,8 @@ def test_the_first_pass_cases_reproduce_the_staged_appraisal_exactly():
     combined = {c['name']: c for c in staged['primary_cases'] if c['variant'] == 'combined'}
     compared = 0
     for case in SAVED['cases']:
-        assert case['scenario'] == 'first_pass' and case['recovery'] == 'combined'
-        if case['ramp'] != 'first_pass':
+        assert case['recovery'] == 'combined'
+        if case['scenario'] != 'first_pass' or case['ramp'] != 'first_pass':
             continue
         old = {(c['mode'], c['horizon']): c for c in combined[':'.join((case['portfolio'], case['market'], case['growth']))]['checkpoints']}
         assert len(case['checkpoints']) == len(old) == 9
@@ -88,7 +90,8 @@ def test_material_drawn_only_grows_and_financing_changes_no_receipt(name):
 def test_every_portfolio_runs_on_the_staged_schedule_and_on_both_programme_ramps():
     by = {}
     for case in SAVED['cases']:
-        by.setdefault(case['portfolio'], set()).add(case['ramp'])
+        if case['scenario'] == 'first_pass':
+            by.setdefault(case['portfolio'], set()).add(case['ramp'])
     assert len(by) == 9 and all(ramps == {'first_pass', 'constant_growth', 'front_loaded'} for ramps in by.values())
 
 
@@ -154,12 +157,17 @@ def test_fuelling_the_first_years_from_earth_lowers_the_opening_funding_and_ends
 @pytest.mark.parametrize('name', sorted(CASES))
 def test_the_workforce_record_shows_working_parts_made_only_where_a_case_asks_for_them(name):
     case = CASES[name]
-    asked = 'economy.production.local_working_parts.share' in case.get('engineering', {})
+    able = model.local_working_parts(run.engineering(case))['share']
     for horizon in ('100', '200', '220'):
         at = case['workforce'][horizon]
+        asked = model.at(able, int(horizon)) > 0
         assert 0 < at['share_of_workforce_in_use'] <= 1 + 1e-9 and at['jobs'] > at['working_parts_jobs'] >= 0
-        assert (at['working_parts_jobs'] > 0) == asked == (at['working_parts_made_share'] > 0)
-        assert at['working_parts_made_share'] <= 0.78 + 1e-12
+        if case['scenario'] == 'first_pass':
+            assert (at['working_parts_jobs'] > 0) == asked == (at['working_parts_made_share'] > 0)
+        else:
+            # A scenario's lines of sale take the residents' hands first, and may leave none for this work.
+            assert asked or at['working_parts_jobs'] == at['working_parts_made_share'] == 0
+        assert at['working_parts_made_share'] <= model.at(able, int(horizon)) + 1e-12
 
 
 @pytest.mark.parametrize('portfolio', ['diversified', 'services'])
@@ -173,3 +181,61 @@ def test_making_working_parts_in_place_lowers_what_is_paid_to_earth_and_launched
     assert all(value(a) < value(b) for a, b in zip(series, series[1:]))
     assert all(a['traffic']['200']['launches_year'] >= b['traffic']['200']['launches_year'] for a, b in zip(series, series[1:]))
     assert all(a['workforce']['100']['working_parts_made_share'] < b['workforce']['100']['working_parts_made_share'] for a, b in zip(made, made[1:]))
+
+
+@pytest.mark.parametrize('name', SCENARIO_CASES)
+def test_a_scenario_case_serves_only_lines_that_pay_and_that_its_residents_can_staff(name):
+    case = CASES[name]
+    lines = case['sales']['lines']
+    assert set(lines) == set(run.scenarios.LINES)
+    assert any(record['served'] for record in lines.values())
+    for record in lines.values():
+        assert not (record['served'] and record['dropped_as_unprofitable'])
+        for at in record['at_horizon'].values():
+            assert 0 <= at['share_of_demand_served'] <= 1
+            if not record['served']:
+                assert at['quantity'] == at['receipts_USD2041'] == 0
+    for horizon in (100, 200, 220):
+        assert case['workforce'][str(horizon)]['share_of_workforce_in_use'] <= 1 + 1e-9
+        at = next(c for c in case['checkpoints'] if c['financing'] == 'U_credit' and c['horizon'] == horizon)
+        by_line = math.fsum(record['at_horizon'][str(horizon)]['receipts_USD2041'] for record in lines.values())
+        assert at['receipts_USD2041_year'] == pytest.approx(by_line)
+
+
+@pytest.mark.parametrize('name', SCENARIO_CASES)
+def test_a_scenario_case_takes_its_launch_price_and_local_manufacture_from_its_scenario_unless_it_states_its_own(name):
+    case = CASES[name]
+    stated = run.sources()['scenarios']['scenarios'][case['scenario']]['engineering']
+    used = run.engineering(case)
+    own = case.get('engineering', {})
+    for path, entry in stated.items():
+        *parents, leaf = path.split('.')
+        node = used
+        for key in parents:
+            node = node[key]
+        assert node[leaf] == own.get(path, entry['value'])
+
+
+@pytest.mark.parametrize('name', sorted(CASES))
+def test_the_resource_account_uses_no_more_than_the_feed_yields(name):
+    case = CASES[name]
+    for horizon in ('100', '200', '220'):
+        at = case['resources'][horizon]
+        assert at['asteroid_feed_kg'] == pytest.approx(case['material_drawn'][horizon]['asteroid_feed_kg'])
+        for stream in ('water', 'nitrogen', 'metal'):
+            flow = at[stream]
+            assert flow['used_kg'] <= flow['recoverable_kg'] * (1 + 1e-9)
+            assert flow['idle_kg'] == pytest.approx(max(0.0, flow['recoverable_kg'] - flow['used_kg']))
+        assert at['water']['sold_as_propellant_kg'] <= at['water']['used_kg']
+        assert 0 <= at['precious_metals']['sold_kg'] <= at['precious_metals']['contained_kg']
+        assert at['held_back_kg'] == 0
+
+
+@pytest.mark.parametrize('name', SCENARIO_CASES)
+def test_the_metals_a_scenario_sells_come_from_feed_it_mines(name):
+    case = CASES[name]
+    stated = run.sources()['scenarios']
+    per_kg = stated['scenarios'][case['scenario']]['metals']['refined_PGM_per_kg_feed']['value'] * (1 + stated['lines']['metals']['gold_per_PGM']['value'])
+    for horizon in ('100', '200', '220'):
+        at = case['resources'][horizon]
+        assert at['precious_metals']['sold_kg'] <= at['asteroid_feed_kg'] * per_kg * (1 + 1e-9)

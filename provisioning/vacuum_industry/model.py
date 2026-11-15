@@ -161,7 +161,7 @@ def commercial_targets(data, row):
     rr = data['revenue']['return']
     sv = data['revenue']['services']
     s = data['industrial']
-    goods = row.get('goods_capacity', row.get('goods', 0.0))
+    goods = row.get('goods_capacity', row.get('goods', 0.0) + row.get('space_goods', 0.0))
     compute = row.get('compute_capacity', row.get('compute', 0.0))
     plate = goods / (ex['factory_yield'] * ex['factory_utilization'])
     jobs = row.get('service_jobs', 0.0)
@@ -368,6 +368,12 @@ def physical(data, row, f, bank=None, measures=None):
     source_goods = row.get('source_goods', 0.0)
     fuel = row.get('propellant_sales', 0.0)
     compute = row.get('compute', 0.0)
+    # Goods handed to customers at the depot are made as the goods for Earth are and travel no further.
+    space_goods = row.get('space_goods', 0.0)
+    space_source_goods = row.get('space_source_goods', 0.0)
+    # Travellers: the mass launched for them from Earth, and the cabins that carry them each way beyond low orbit.
+    travellers_launched = row.get('passenger_launch_kg_year', 0.0)
+    cabins = row.get('passenger_cabin_kg_year', 0.0)
     resident_consumables = sum((v for k, v in data['settlement']['operating_import_kg_year'].items() if k not in ('water', 'air'))) * ps
     industrial_consumables = p['process_consumables_fraction_of_imported_renewal'] * f.get('industry_replacement_import_kg', 0.0)
     guest_years = row.get('visitor_nights_year', 0.0) / JULIAN_YEAR_DAYS
@@ -375,11 +381,11 @@ def physical(data, row, f, bank=None, measures=None):
     research_consumables = row.get('service_jobs', 0.0) * rv['services']['research_consumables_kg_staff_year']
     imports['surface'] += resident_consumables + visitor_consumables + research_consumables
     imports['source'] += industrial_consumables
-    factory_feed = goods / ex['factory_yield']
+    factory_feed = (goods + space_goods) / ex['factory_yield']
     earthfeed = factory_feed * ex['factory_Earth_input_fraction']
     imports['surface'] += earthfeed
     factory_local = factory_feed - earthfeed + goods * rv['manufacturing']['transport_packaging_mass_fraction']
-    source_product = source_goods / ex['factory_yield'] + source_goods * rv['manufacturing']['transport_packaging_mass_fraction']
+    source_product = (source_goods + space_source_goods) / ex['factory_yield'] + source_goods * rv['manufacturing']['transport_packaging_mass_fraction']
     surface_alloy = virgin['surface'] * p['alloy_import_fraction_of_virgin_local_metal']
     source_alloy = (sum((virgin[k] for k in ('source', 'depot', 'leo'))) + source_product) * p['alloy_import_fraction_of_virgin_local_metal']
     imports['surface'] += surface_alloy
@@ -390,7 +396,7 @@ def physical(data, row, f, bank=None, measures=None):
     metal = local['surface'] + factory_local
     raw = freshbulk / l['bulk_yield'] + freshmetal / l['metal_yield']
     handling = raw + d['loose_and_grading'] * gs
-    lunar_W = (bulk * l['bulk_kWh_kg'] + metal * l['metal_kWh_kg'] + handling * l['handling_kWh_kg'] + local['surface'] * p['local_fabrication_finish_kWh_kg'] + goods * ex['factory_finish_kWh_kg']) * 1000 / HOURS + row.get('service_power_W', 0.0) + row.get('premium_power_W', 0.0) + row.get('visitor_beds', 0.0) * rv['visitors']['mean_W_bed']
+    lunar_W = (bulk * l['bulk_kWh_kg'] + metal * l['metal_kWh_kg'] + handling * l['handling_kWh_kg'] + local['surface'] * p['local_fabrication_finish_kWh_kg'] + (goods + space_goods) * ex['factory_finish_kWh_kg']) * 1000 / HOURS + row.get('service_power_W', 0.0) + row.get('premium_power_W', 0.0) + row.get('visitor_beds', 0.0) * rv['visitors']['mean_W_bed']
     water = d['yearly_water'] * (ps + guest_years / data['normalization']['population']) + d['water'] * gs + f.get('new_visitor_beds', 0.0) * rv['visitors']['initial_water_kg_bed']
     air = d['yearly_air'] * (ps + guest_years / data['normalization']['population']) + d['air'] * gs + f.get('new_visitor_beds', 0.0) * rv['visitors']['initial_air_kg_bed']
     # New commercial enclosure air follows the explicitly priced floor proxy.
@@ -408,8 +414,8 @@ def physical(data, row, f, bank=None, measures=None):
     recycle_back = f['recycled']['depot'] + f['recycled']['leo']
     leo_recycle = f['recycled']['leo']
     r = routes(data, row['year'])
-    earth = ferry(imports['surface'] + imports['depot'] + imports['source'] + leo_recycle, packed + local['leo'], r['Earth'])
-    moon = ferry(imports['surface'] + water + air, packed - source_packed, r['Moon'])
+    earth = ferry(imports['surface'] + imports['depot'] + imports['source'] + leo_recycle + cabins, packed + local['leo'] + cabins, r['Earth'])
+    moon = ferry(imports['surface'] + water + air + cabins, packed - source_packed + space_goods + cabins, r['Moon'])
     nitrogen = air * z['air_nitrogen_mass_fraction']
     oxygen = air - nitrogen
     # The Earth leg's propellant: what the depot supplies from asteroid water, and what is bought on Earth and launched.
@@ -417,7 +423,7 @@ def physical(data, row, f, bank=None, measures=None):
     earth_space = 0.0 if leg == 'earth' else earth['space_supply']
     earth_launched = earth['burned'] if leg == 'earth' else earth['out'] if leg == 'split' else 0.0
     depot_water = moon['burned'] + oxygen + earth_space + fuel
-    source_cargo = water + nitrogen + depot_water + local['depot'] + local['leo'] + source_packed
+    source_cargo = water + nitrogen + depot_water + local['depot'] + local['leo'] + source_packed + space_source_goods
     source = ferry(source_cargo, imports['source'] + recycle_back, r['source'])
     source_water = water + depot_water + source['burned']
     source_metal = sum((local[k] for k in ('source', 'depot', 'leo'))) + source_product
@@ -431,8 +437,8 @@ def physical(data, row, f, bank=None, measures=None):
     ground = d['occupied_W'] * ps + lunar_W * s['economics']['capacity_margin'] / l['process_availability']
     operating_material = (resident_consumables + visitor_consumables + research_consumables + industrial_consumables + surface_alloy + source_alloy + earthfeed) * s['prices']['other_special_USD2026_kg']
     capsule_op = flights * (shield * s['prices']['spacecraft_USD2026_kg'] + deorbit * t['earth_propellant_USD2026_kg']) + packed * rr['Earth_ground_service_USD2026_per_payload_kg']
-    LEO = sum(imports.values()) + earth_launched
-    out = dict(lunar_raw_kg_year=raw, lunar_bulk_kg_year=bulk, lunar_metal_kg_year=metal, lunar_recycled_bulk_kg_year=rebulk, lunar_virgin_metal_kg_year=freshmetal, lunar_handling_kg_year=handling, lunar_process_W=lunar_W, source_feed_kg_year=feed, source_water_kg_year=source_water, source_nitrogen_kg_year=nitrogen, source_virgin_metal_kg_year=source_virgin, source_metal_kg_year=source_metal, source_process_W=source_W, source_heat_W=heat, source_feed_process_W=feed * z['ore_kWh_kg'] * 1000 / HOURS, source_product_refining_W=(nitrogen * z['nitrogen_kWh_kg'] + source_metal * z['metal_refining_and_fabrication_kWh_kg']) * 1000 / HOURS, depot_W=depot_W, depot_water_kg_year=depot_water, ground_firm_W=ground, Earth=earth, Moon=moon, source=source, source_cargo_kg_year=source_cargo, source_cargo_breakdown_kg_year=dict(resident_and_guest_water=water, nitrogen=nitrogen, depot_water=depot_water, local_offsite_structures=local['depot'] + local['leo'], source_exports=source_packed), depot_water_breakdown_kg_year=dict(lunar_ferry_fuel=moon['burned'], oxygen_makeup=oxygen, Earth_ferry_fuel=earth_space, external_fuel_sales=fuel), source_water_breakdown_kg_year=dict(resident_and_guest_water=water, depot_water=depot_water, source_ferry_fuel=source['burned']), source_retained_tails_kg_year=feed - source_water - nitrogen - source_virgin, LEO_kg_year=LEO, imports_by_destination_kg_year=imports, local_fabrication_by_destination_kg_year=local, recycled_inventory_kg=bank, factory_floor_new_m2=newfloor, construction_floor_m2=data['settlement']['production_demand']['floor'] * gs + newfloor, operating_material_USD2026=operating_material, capsule_operations_USD2026=capsule_op, Earth_launch_USD2026=LEO * at(t['LEO_USD2026_kg'], row['year']) + earth_launched * t['earth_propellant_USD2026_kg'], Earth_leg_propellant_launched_kg_year=earth_launched, resource_provision_USD2026=raw * s['economics']['local_restoration_USD2026_kg_feed'] + feed * rv['finance']['source_transition_USD2026_per_kg_feed'])
+    LEO = sum(imports.values()) + earth_launched + travellers_launched
+    out = dict(lunar_raw_kg_year=raw, lunar_bulk_kg_year=bulk, lunar_metal_kg_year=metal, lunar_recycled_bulk_kg_year=rebulk, lunar_virgin_metal_kg_year=freshmetal, lunar_handling_kg_year=handling, lunar_process_W=lunar_W, source_feed_kg_year=feed, source_water_kg_year=source_water, source_nitrogen_kg_year=nitrogen, source_virgin_metal_kg_year=source_virgin, source_metal_kg_year=source_metal, source_process_W=source_W, source_heat_W=heat, source_feed_process_W=feed * z['ore_kWh_kg'] * 1000 / HOURS, source_product_refining_W=(nitrogen * z['nitrogen_kWh_kg'] + source_metal * z['metal_refining_and_fabrication_kWh_kg']) * 1000 / HOURS, depot_W=depot_W, depot_water_kg_year=depot_water, ground_firm_W=ground, Earth=earth, Moon=moon, source=source, source_cargo_kg_year=source_cargo, source_cargo_breakdown_kg_year=dict(resident_and_guest_water=water, nitrogen=nitrogen, depot_water=depot_water, local_offsite_structures=local['depot'] + local['leo'], source_exports=source_packed + space_source_goods), depot_water_breakdown_kg_year=dict(lunar_ferry_fuel=moon['burned'], oxygen_makeup=oxygen, Earth_ferry_fuel=earth_space, external_fuel_sales=fuel), source_water_breakdown_kg_year=dict(resident_and_guest_water=water, depot_water=depot_water, source_ferry_fuel=source['burned']), source_retained_tails_kg_year=feed - source_water - nitrogen - source_virgin, LEO_kg_year=LEO, imports_by_destination_kg_year=imports, local_fabrication_by_destination_kg_year=local, recycled_inventory_kg=bank, factory_floor_new_m2=newfloor, construction_floor_m2=data['settlement']['production_demand']['floor'] * gs + newfloor, operating_material_USD2026=operating_material, capsule_operations_USD2026=capsule_op, Earth_launch_USD2026=LEO * at(t['LEO_USD2026_kg'], row['year']) + earth_launched * t['earth_propellant_USD2026_kg'], Earth_leg_propellant_launched_kg_year=earth_launched, resource_provision_USD2026=raw * s['economics']['local_restoration_USD2026_kg_feed'] + feed * rv['finance']['source_transition_USD2026_per_kg_feed'])
     if measures is not None:
         measures.after_physical(data, row, f, out)
     return out
@@ -585,7 +591,7 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
     rows = deepcopy(annual)
     if not rows or any((b['year'] != a['year'] + 1 for a, b in zip(rows, rows[1:]))):
         raise ValueError('Consecutive annual request rows required')
-    if any((row.get(k, 0) < 0 for row in rows for k in ('population', 'goods', 'source_goods', 'compute', 'propellant_sales', 'new_residential_people'))):
+    if any((row.get(k, 0) < 0 for row in rows for k in ('population', 'goods', 'source_goods', 'space_goods', 'space_source_goods', 'compute', 'propellant_sales', 'new_residential_people', 'passenger_launch_kg_year', 'passenger_cabin_kg_year'))):
         raise ValueError('Negative physical demand')
     # Two forward years prevent final observations receiving free expired plant.
     end = rows[-1]['year']
@@ -639,7 +645,7 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
         ex = data['economy']['exports']
         rv = data['revenue']
         P0 = data['normalization']['population']
-        factory_jobs = row.get('goods_capacity', row.get('goods', 0.0)) / (ex['factory_yield'] * ex['factory_utilization']) / (P0 * rv['manufacturing']['nameplate_finished_kg_per_resident_year']) * rv['manufacturing']['staff']
+        factory_jobs = row.get('goods_capacity', row.get('goods', 0.0) + row.get('space_goods', 0.0)) / (ex['factory_yield'] * ex['factory_utilization']) / (P0 * rv['manufacturing']['nameplate_finished_kg_per_resident_year']) * rv['manufacturing']['staff']
         compute_jobs = row.get('compute_capacity', row.get('compute', 0.0)) / 1000000.0 * rv['computing']['staff_per_MW']
         base_jobs = (data['settlement']['food_operators'] + data['settlement']['industry_operators']) * row['population'] / P0
         working_parts_jobs = (f['local_working_capital'] + f['local_working_replacement']) / data['industrial']['economics']['loaded_staff_USD2026_year']
@@ -668,7 +674,7 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
         variable = ('Earth_launch_USD2026', 'operating_material_USD2026', 'capsule_operations_USD2026')
         construction_logistics = sum((physical_row[k] - op_physical[k] for k in variable))
         cap_resource = physical_row['resource_provision_USD2026'] - op_physical['resource_provision_USD2026']
-        production_value = (row.get('goods', 0.0) + row.get('source_goods', 0.0)) * data['economy']['production']['structural_metal_value_USD2026_kg']
+        production_value = (row.get('goods', 0.0) + row.get('source_goods', 0.0) + row.get('space_goods', 0.0) + row.get('space_source_goods', 0.0)) * data['economy']['production']['structural_metal_value_USD2026_kg']
         construction_fraction = f['local_capital'] / max(1.0, f['local_capital'] + f['local_replacement'] + production_value)
         construction_payroll = staffing / 2 * data['industrial']['economics']['loaded_staff_USD2026_year'] * construction_fraction
         costs = dict(capital_external_USD2041=(f['external_capital'] + construction_logistics) * I, capital_local_USD2041=(construction_payroll + f['local_working_capital']) * I, local_capital_account_value_USD2041=f['local_capital'] * I, local_replacement_account_value_USD2041=f['local_replacement'] * I, capital_resource_provision_USD2041=cap_resource * I, operating_external_replacement_USD2041=f['external_replacement'] * I, operating_external_logistics_materials_USD2041=sum((op_physical[k] for k in variable)) * I, operating_external_services_USD2041=external_staff * I, operating_local_replacement_USD2041=f['local_working_replacement'] * I, operating_local_payroll_USD2041=(payroll - construction_payroll - f['local_working_capital'] - f['local_working_replacement']) * I, resident_payroll_USD2041=payroll * I, operating_resource_provision_USD2041=op_physical['resource_provision_USD2026'] * I, resource_provision_USD2041=physical_row['resource_provision_USD2026'] * I, identified_service_capital_USD2041=(f['service_external_capital'] + construction_payroll * max(0.0, f['service_capital'] - f['service_external_capital']) / max(1.0, f['local_capital'])) * I, identified_service_replacement_USD2041=f['service_external_replacement'] * I, identified_hospitality_capital_USD2041=f['hospitality_external_capital'] * I, identified_hospitality_replacement_USD2041=f['hospitality_external_replacement'] * I, Earth_launch_USD2041=physical_row['Earth_launch_USD2026'] * I, operating_material_USD2041=physical_row['operating_material_USD2026'] * I, capsule_operations_USD2041=physical_row['capsule_operations_USD2026'] * I)

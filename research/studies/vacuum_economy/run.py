@@ -1,12 +1,17 @@
 """One run of the vacuum buildout's economy: each case's orders, the industry that fills them and its financing.
 
-usage: python3 -m research.studies.vacuum_economy.run [--case NAME ...] [--output PATH]      (in the repository root)
+usage: python3 -m research.studies.vacuum_economy.run [--case NAME ...] [--jobs N] [--output PATH]      (in the repository root)
 
 A case names a scenario of demand, a population ramp and the recovery measures the industry applies. For each case
 the run draws up the customers' orders year by year, sizes the industry that fills them with the cohort model of
 provisioning/vacuum_industry, finances that industry with the financing model of the returns study, and writes one
 compact record: the funding, the receipts and the returns at each horizon, the receipts and costs of each period with
-the share of the costs paid to Earth, and the material drawn from the Moon and the near-Earth sources.
+the share of the costs paid to Earth, the material drawn from the Moon and the near-Earth sources, and what the mined
+feed makes available beside what the system uses and sells of it.
+
+The scenarios `low`, `central` and `high` are the demand of scenarios.json, judged at each year's date, each with the
+launch price and the local manufacture that scenario states. For them mix.py decides from the system's own costs
+which lines of sale are served, at what price and how far, and the record adds the account of each line.
 
 The scenario `first_pass` is the demand of the staged studies of 12 to 14 November 2026, with their prices, audiences
 and buyers' budgets. On the ramp of the same name it reproduces the figures of those studies, so that every later
@@ -20,12 +25,13 @@ import hashlib
 import importlib.util
 import json
 import math
+import multiprocessing
 from pathlib import Path
 import time
 
 from provisioning.vacuum_industry import industry, model
 from research.studies.enclosed_returns import finance, markets, revised
-from . import programme as definition
+from . import demand as scenarios, mix, programme as definition
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -37,6 +43,7 @@ EARTH = ('capital_external_USD2041', 'operating_external_replacement_USD2041',
          'operating_external_logistics_materials_USD2041', 'operating_external_services_USD2041')
 # The files a first-pass case is computed from, beside those the order book and the financing name themselves.
 READ = (HERE / 'programme.json', HERE / 'programme.py', HERE / 'cases.json',
+        HERE / 'scenarios.json', HERE / 'demand.py', HERE / 'mix.py',
         INDUSTRY / 'model.py', INDUSTRY / 'recovery.py', INDUSTRY / 'industry.py',
         INDUSTRY / 'engineering.json', INDUSTRY / 'recovery.json',
         RETURNS / 'markets.py', RETURNS / 'enclosed_inputs.json', RETURNS / 'finance.py', RETURNS / 'finance_inputs.json',
@@ -68,7 +75,7 @@ def sources():
         raise ValueError('The financing rules and the programme definition disagree on horizons or discount rates')
     if periods[0][0] != 0 or periods[-1][1] != calendar['last_year']:
         raise ValueError('The reporting periods do not span the programme')
-    return dict(programme=programme, demand=demand, money=money, periods=periods,
+    return dict(programme=programme, demand=demand, money=money, periods=periods, scenarios=scenarios.load(),
                 engineering=json.loads((INDUSTRY / 'engineering.json').read_text()),
                 recovery=json.loads((INDUSTRY / 'recovery.json').read_text()))
 
@@ -122,7 +129,8 @@ def engineering(case):
     coefficient must exist, so that a misspelt path fails where it is read.
     """
     data = sources()['engineering']
-    changes = case.get('engineering')
+    stated = sources()['scenarios']['scenarios'].get(case['scenario'], {}).get('engineering', {})
+    changes = {**{path: entry['value'] for path, entry in stated.items()}, **case.get('engineering', {})}
     if not changes:
         return data
     data = deepcopy(data)
@@ -186,6 +194,65 @@ def periods_account(book, physical, path, financed, money, periods):
     return out
 
 
+def decide(case):
+    """The orders of a scenario case: prices from the system's own costs, and the lines its residents can staff."""
+    s = sources()
+    hotel = s['money']['hotel_staff_per_bed'] * s['money']['hotel_staff_USD2041_year']
+    decision = mix.Decision(s['programme'], case['ramp'], s['scenarios'], case['scenario'], engineering(case), s['recovery'],
+                            case['recovery'], s['periods'], hotel, log=lambda *a: print('  ', case['name'], *a, flush=True),
+                            pricing=case.get('pricing', 'seller'), allowance=s['money']['capital_cost_allowance_fraction'])
+    return decision.decide()
+
+
+def lines_record(decided, horizons):
+    """Each line of sale as served: its worth, its account by period, and its price and quantity at each horizon."""
+    rows = {row['year']: row for row in decided['book']['annual']}
+    out = {}
+    for line in scenarios.LINES:
+        account = decided['final'].get(line)
+        at = {}
+        for h in horizons:
+            detail = rows[h]['lines'][line]
+            at[str(h)] = dict(quantity=detail['quantity'], price_USD2041=detail['price_USD2041'], receipts_USD2041=detail['receipts_USD2041'],
+                              share_of_demand_served=decided['scale'][line][h])
+        out[line] = dict(unit=rows[horizons[0]]['lines'][line]['unit'], served=account is not None,
+                         dropped_as_unprofitable=line in decided['dropped'],
+                         first_year_served=(decided['starts'].get(line, min(decided['scale'][line])) if account is not None else None),
+                         worth_USD2041=account['worth_USD2041'] if account else None,
+                         worth_at_first_prices_USD2041=decided['first'][line]['worth_USD2041'] if line in decided['first'] else None,
+                         periods=account['periods'] if account else [], at_horizon=at)
+    return dict(comparison_rate=mix.RATE, order_of_worth_per_job=decided['order'], lines=out, industry_solutions=decided['solves'])
+
+
+def resources(book, physical, loops, coefficients, horizons):
+    """What the mined feed makes available to each horizon, what the system uses and sells of it, and what lies idle."""
+    source = coefficients['industrial']['source']
+    metals = sources()['scenarios']['lines']['metals']
+    out = {}
+    for h in horizons:
+        drawn = revised.cumulative_demand(physical, loops, h)
+        mined = drawn['feed_kg']
+
+        def sold(key):
+            return math.fsum(row.get(key, 0.0) for row in book['annual'] if row['year'] <= h)
+
+        def stream(name, used):
+            recoverable = mined * source[name + '_grade'] * source[name + '_recovery']
+            return dict(recoverable_kg=recoverable, used_kg=used, idle_kg=max(0.0, recoverable - used))
+
+        # In a scenario the goods the sources return to Earth are precious metals; in the first pass they are metal products.
+        precious = sold('source_goods') if 'lines' in book['annual'][0] else 0.0
+        products = sold('space_source_goods') + sold('source_goods') - precious
+        contained = mined * (metals['contained_PGM_per_kg_feed'] + metals['contained_gold_per_kg_feed'])
+        out[str(h)] = dict(asteroid_feed_kg=mined, lunar_raw_kg=drawn['lunar_raw_kg'],
+                           water=dict(stream('water', drawn['water_kg_bounds'][0]), sold_as_propellant_kg=sold('propellant_sales')),
+                           nitrogen=stream('nitrogen', drawn['nitrogen_kg']),
+                           metal=dict(stream('metal', drawn['virgin_metal_kg']), sold_as_products_kg=products),
+                           precious_metals=dict(contained_kg=contained, sold_kg=precious, left_in_tailings_kg=contained - precious),
+                           held_back_kg=0.0)
+    return out
+
+
 def checkpoint(measure):
     """The headline measures of one financing arrangement at one horizon."""
     return dict(horizon=measure['horizon'], financing=measure['mode'], population=measure['population'],
@@ -203,9 +270,14 @@ def solve(case):
     """Orders, industry and financing for one case, as a compact record."""
     s = sources()
     money = dict(s['money'], horizons=s['programme']['horizons'])
-    book = orders(case)
     coefficients = engineering(case)
-    physical, loops = industry.build(coefficients, s['recovery'], book, case['recovery'])
+    if case['scenario'] == 'first_pass':
+        decided = None
+        book = orders(case)
+        physical, loops = industry.build(coefficients, s['recovery'], book, case['recovery'])
+    else:
+        decided = decide(case)
+        book, physical, loops = decided['book'], decided['physical'], decided['loops']
     record = dict(case, convergence=physical['convergence'], first_capacity_shortfall=physical['first_capacity_shortfall'])
     if not revised.valid(physical):
         return dict(record, status='physical_requirements_unresolved')
@@ -218,7 +290,9 @@ def solve(case):
         drawn[str(horizon)] = dict(asteroid_feed_kg=demand['feed_kg'], lunar_raw_kg=demand['lunar_raw_kg'],
                                    water_kg=demand['water_kg_bounds'][0], nitrogen_kg=demand['nitrogen_kg'],
                                    virgin_metal_kg=demand['virgin_metal_kg'])
-    return dict(record, status='conditional_account',
+    if decided:
+        record = dict(record, sales=lines_record(decided, money['horizons']))
+    return dict(record, status='conditional_account', resources=resources(book, physical, loops, coefficients, money['horizons']),
                 opening=dict(founding_cost_USD2041=path['seed_hardware_and_carry'], working_cash_USD2041=path['initial_working'],
                              reserve_USD2041=equity['initial_reserve']),
                 checkpoints=[checkpoint(revised.measures(path, financed[mode], money, horizon))
@@ -241,12 +315,19 @@ def cases(names=None):
     return listed
 
 
-def product(selected):
-    records = []
-    for case in selected:
-        start = time.monotonic()
-        records.append(solve(case))
-        print(case['name'], records[-1]['status'], round(time.monotonic() - start, 1), 'seconds', flush=True)
+def timed(case):
+    start = time.monotonic()
+    record = solve(case)
+    print(case['name'], record['status'], round(time.monotonic() - start, 1), 'seconds', flush=True)
+    return record
+
+
+def product(selected, jobs=1):
+    if jobs > 1:
+        with multiprocessing.Pool(jobs) as pool:
+            records = pool.map(timed, selected, chunksize=1)
+    else:
+        records = [timed(case) for case in selected]
     return dict(schema=SCHEMA, producer=dict(path=str(Path(__file__).resolve().relative_to(ROOT)), sha256=digest(__file__)),
                 dependencies=dependencies(),
                 evidence='Conditional accounts. The industry is a numerically closed sizing of equipment, freight and '
@@ -263,7 +344,15 @@ def product(selected):
                              'stated payload and the pads those launches need at the stated launches a pad a year, and the round '
                              'trips of the ferries, the lunar landers and the tugs to the sources. Workforce gives the jobs of the same '
                              'year, the share of the available workforce they fill, the jobs that make working parts of machinery '
-                             'and the share of those parts made in place for orders of that year.',
+                             'and the share of those parts made in place for orders of that year. Resources give, cumulatively to each '
+                             'horizon, the feed mined at the sources, what its water, nitrogen and metal yield at the stated grades '
+                             'and recoveries, what the system uses of each, what it sells, and what lies idle; nothing is held back '
+                             'while the protection gates reserve no quantity. A scenario case adds its sales: for each line whether '
+                             'it is served and from which year or was dropped as costing more than it brings, its worth at the '
+                             'comparison rate, its receipts, cost, quantity and mean jobs by period against the same orders without '
+                             'the line, and its quantity, price, receipts and the share of its demand served in the year of each '
+                             'horizon. A line\'s cost counts the financing\'s allowance on capital and, where residents cannot staff '
+                             'all the working parts the industry is able to make, the parts its jobs would have made.',
                 cases=records)
 
 
@@ -271,8 +360,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('--case', action='append', help='a case named in cases.json; repeat for several (default: all)')
     parser.add_argument('--output', type=Path, default=HERE / 'results/economy.json')
+    parser.add_argument('--jobs', type=int, default=1, help='cases solved at once (default: one)')
     args = parser.parse_args()
-    result = product(cases(args.case))
+    result = product(cases(args.case), args.jobs)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=1, sort_keys=True, allow_nan=False) + '\n')
     print(args.output)

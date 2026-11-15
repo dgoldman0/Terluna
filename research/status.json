@@ -2140,13 +2140,16 @@
     },
     {
       "topic": "vacuum_economy",
-      "condition": "conditional_accounts; first_pass_reproduces_staged_appraisal; first_pass_run_on_both_programme_ramps_three_Earth_leg_arrangements_and_local_working_parts; evidence_scenarios_not_yet_run",
+      "condition": "conditional_accounts; first_pass_reproduces_staged_appraisal; first_pass_run_on_both_programme_ramps_three_Earth_leg_arrangements_and_local_working_parts; three_scenarios_of_demand_at_their_own_date_run_on_both_ramps; residents_not_yet_a_result; freight_and_power_as_staged",
       "material": [
         "studies/vacuum_economy/README.md",
         "studies/vacuum_economy/programme.json",
         "studies/vacuum_economy/programme.py",
         "studies/vacuum_economy/cases.json",
         "studies/vacuum_economy/run.py",
+        "studies/vacuum_economy/scenarios.json",
+        "studies/vacuum_economy/demand.py",
+        "studies/vacuum_economy/mix.py",
         "studies/vacuum_economy/results/economy.json",
         "../provisioning/vacuum_industry/README.md",
         "../provisioning/vacuum_industry/model.py",
@@ -2160,7 +2163,12 @@
         "With the first pass's demand unchanged, constant growth of 3.3 percent a year improves every portfolio on the staged schedule (diversified funders' net present value at year 200 from 7.35 to 9.04 trillion USD2041; services' added equity from 48 to 7 trillion), and the front-loaded ramp lowers the net present value of the three self-financing portfolios by about 1.6 trillion; all 27 cases pass their capacity screens.",
         "Fuelling the Earth leg's outward burn with propellant launched from Earth until year 20, and from the depot afterwards, halves the funding at the opening (4.2 to 2.0 trillion USD2041 at 200 USD2026 a kg) and raises funders' net present value at year 200 by 1.8 to 2.0 trillion in the diversified and services portfolios at launch prices of 200, 100 and 50 USD2026 a kg; the launch price alone moves the services portfolio from -3.7 to 2.4 trillion between 200 and 100.",
         "The diversified first-pass case implies 61,000 launches from Earth and 259,000 lunar landings in year 200, and 5,200 and 13,700 in year 100.",
-        "Where the industry may make 78 percent of its machinery's working parts and the residents staff what they can, the workforce limits the share (a tenth to a half of working parts in year 100 in the diversified portfolio, for labour at 50 to 10 percent of the import price); the services portfolio then finances itself with a funders' net present value of 5.8 to 7.7 trillion USD2041 against -3.7 trillion, and the diversified portfolio gains 0.4 to 2.2 trillion. The labour of a locally made part is the study's assumption; no source gives it."
+        "Where the industry may make 78 percent of its machinery's working parts and the residents staff what they can, the workforce limits the share (a tenth to a half of working parts in year 100 in the diversified portfolio, for labour at 50 to 10 percent of the import price); the services portfolio then finances itself with a funders' net present value of 5.8 to 7.7 trillion USD2041 against -3.7 trillion, and the diversified portfolio gains 0.4 to 2.2 trillion. The labour of a locally made part is the study's assumption; no source gives it.",
+        "The first pass's order book counts what the system sells in founding systems: 5 percent of the founding export mix at the opening and 4 percent more each year, costs per founding scale, and identical service facilities of 350 staff that each bring 65 billion dollars a year. The correction of 13 November 2026 reached the sizing of equipment and left the order book as it was; the scenarios of demand replace it, and the first returns chain and the monetary-system study were never rebuilt on the corrected model.",
+        "Judged at each year's date from the opened evidence, the central demand brings 0.28 trillion USD2041 a year at year 100 and 1.02 at year 200, a thirteenth of the first pass's diversified portfolio. On constant growth it covers each year's costs through year 100 (211 against 165 billion a year in years 51 to 100), pays the funders nothing on an opening of 1.34 trillion (net present value -1.40 trillion at year 200 and 3 percent), and needs 37 trillion of added equity for the growth from 250,000 to 6.47 million residents. The low scenario covers its costs in no period (0.1 trillion a year of receipts at year 200, 152 trillion of added equity); the high scenario finances the programme with a net present value of 17 trillion, three quarters of its year-200 receipts being 28 million visitors a year.",
+        "On the central demand, fuelling the ferries' outward burn from Earth until year 20 lowers the opening funding from 3.59 to 1.34 trillion USD2041, because the staged arrangement buys about 570 tugs on Earth before the opening to fetch the water for the founding freight's propellant; making working parts in place lowers the equity added by year 200 from 130 to 37 trillion and the share of costs paid to Earth in years 151 to 200 from 68 to 39 percent; a launch price of 200 against 100 USD2026 a kg costs 0.36 trillion of net present value.",
+        "In the central scenario the system's propellant costs it about 20 USD2041 a kg at the depot against 600 for a kilogram launched from Earth at 100 USD2026 a kg to low orbit, and the published demand takes 13,200 tonnes in year 100; a visit costs 0.6 to 0.7 million USD2041 and sells at 2.6 to 3.1 million to 33,600 visitors in year 100 and 182,200 in year 200, or at cost and a half to 151,000 and 820,000 for 0.3 trillion less net present value. Computing at the price of the same service on Earth does not repay its hardware, launch and power in any scenario and is dropped.",
+        "By year 200 the central scenario mines 80.9 trillion kg of feed for its water, uses all 5.67 trillion kg of that water and sells 2.9 billion kg as propellant; of 3.88 trillion kg of recoverable metal it uses 0.11 trillion and sells 2.9 billion, and 97 percent lies idle with 93 of 117 billion kg of nitrogen. No quantity is held back, because the protection gates reserve none yet."
       ]
     }
   ]

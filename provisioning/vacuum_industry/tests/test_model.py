@@ -275,3 +275,46 @@ def test_local_working_parts_are_paid_as_resident_labour_and_the_accounts_still_
     assert all(a['working_parts_jobs'] > 0 for _, a in late)
     assert sum(a['cash']['operating_external_replacement_USD2041'] for _, a in late) < sum(b['cash']['operating_external_replacement_USD2041'] for b, _ in late)
     assert sum(a['physical']['LEO_kg_year'] for _, a in late) < sum(b['physical']['LEO_kg_year'] for b, _ in late)
+
+
+def test_material_handed_over_at_the_depot_rides_the_tugs_and_goes_no_further(data):
+    row = dict(year=8, population=12500., new_residential_people=0.)
+    plain = m.physical(data, row, m.blank_flow())
+    sold = m.physical(data, dict(row, space_source_goods=1e7), m.blank_flow())
+    returned = m.physical(data, dict(row, source_goods=1e7), m.blank_flow())
+    # The tugs carry the material itself, and the propellant that fetches the alloying metals it needs from Earth.
+    assert sold['source_cargo_breakdown_kg_year']['source_exports'] - plain['source_cargo_breakdown_kg_year']['source_exports'] == pytest.approx(1e7)
+    assert sold['source_cargo_kg_year'] - plain['source_cargo_kg_year'] >= 1e7
+    assert sum(sold['source_cargo_breakdown_kg_year'].values()) == pytest.approx(sold['source_cargo_kg_year'])
+    assert sold['source_metal_kg_year'] - plain['source_metal_kg_year'] == pytest.approx(1e7 / data['economy']['exports']['factory_yield'])
+    # No capsule flies and the ferries to Earth carry nothing down for it.
+    assert sold['capsule_operations_USD2026'] == plain['capsule_operations_USD2026'] < returned['capsule_operations_USD2026']
+    assert sold['Earth']['burned'] < returned['Earth']['burned']
+
+
+def test_lunar_goods_handed_over_at_the_depot_are_made_and_lifted_and_need_no_capsule(data):
+    row = dict(year=8, population=12500., new_residential_people=0.)
+    plain = m.physical(data, row, m.blank_flow())
+    sold = m.physical(data, dict(row, space_goods=1e7), m.blank_flow())
+    returned = m.physical(data, dict(row, goods=1e7), m.blank_flow())
+    assert sold['lunar_metal_kg_year'] > plain['lunar_metal_kg_year']
+    assert sold['Moon']['burned'] > plain['Moon']['burned']
+    assert sold['capsule_operations_USD2026'] == plain['capsule_operations_USD2026'] < returned['capsule_operations_USD2026']
+    # The factory and its staff are sized for both kinds of goods together.
+    both = dict(row, goods=1e7, space_goods=1e7)
+    assert m.commercial_targets(data, both)['export_factory'] == pytest.approx(2 * m.commercial_targets(data, dict(row, goods=1e7))['export_factory'])
+
+
+def test_travellers_are_launched_from_earth_and_carried_both_ways_on_both_legs(data):
+    row = dict(year=8, population=12500., new_residential_people=0.)
+    plain = m.physical(data, row, m.blank_flow())
+    carried = m.physical(data, dict(row, passenger_launch_kg_year=2.7e6, passenger_cabin_kg_year=1e7), m.blank_flow())
+    assert carried['LEO_kg_year'] == pytest.approx(plain['LEO_kg_year'] + 2.7e6)
+    assert carried['Earth']['burned'] > plain['Earth']['burned'] and carried['Moon']['burned'] > plain['Moon']['burned']
+    assert carried['source_feed_kg_year'] > plain['source_feed_kg_year']
+
+
+@pytest.mark.parametrize('kind', ['space_goods', 'space_source_goods', 'passenger_launch_kg_year', 'passenger_cabin_kg_year'])
+def test_a_negative_order_of_the_kinds_delivered_in_space_is_refused(data, kind):
+    with pytest.raises(ValueError, match='Negative physical demand'):
+        m.solve(data, [dict(year=8, population=12500., new_residential_people=0., **{kind: -1.})])

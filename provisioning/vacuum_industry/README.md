@@ -42,6 +42,10 @@ The residents limit the share. [industry.py](industry.py) solves the industry fi
 
 The published studies of industry beyond Earth give the imported remainder by mass: 10%, 5% or 1% of all equipment, reached within 12 to 30 years of the first plant, with microelectronics, bearings, instruments, motors and sensors the last to be made in place. Working parts are 23% of the founding industry's mass, so a remainder of 5% of equipment is a share of 78% of working parts. All of those figures are from paper studies. None gives a cost, and the labour fraction is this model's own assumption, to be carried as a range.
 
+## Goods handed over in space, and travellers
+
+Four kinds of order go no further than the depot, and the staged order books state none of them. `space_source_goods` is material made at the sources from the metal of the mined feed and carried to the depot by the tugs. `space_goods` is goods made in the lunar factory and lifted to the depot by the landers; the factory and its staff are sized for these and the goods for Earth together. Neither kind is packed for return, rides a ferry to Earth or needs a capsule. `passenger_launch_kg_year` is the mass launched from Earth for travellers, charged at the launch price. `passenger_cabin_kg_year` is the cabins that carry them, which ride the ferries of the Earth leg and the landers in both directions.
+
 ## Evidence
 
 The model's results are conditional engineering requirements. Convergence shows that the stated equipment carries the stated flows under the stated coefficients; it qualifies no plant, source, trajectory or price. The lifetime curve is a scheduling assumption with the stated mean. The recovery and refurbishment coefficients are hypotheses: the cited practice supports the mechanisms, and the industrial fractions, costs and restored service lives await demonstration.
@@ -50,4 +54,4 @@ This model is the staged studies' cohort model ([provisioning/enclosed_industry]
 
 ## Tests
 
-`provisioning/vacuum_industry/tests` checks the freight against the founding study's controls, the three arrangements of the Earth leg and the schedules by year, the locally made share of working parts with its labour, its staffing and its part in refurbishment, the lifetime curve's mean, the dating of orders, the feed as the largest of its three needs, the conservation of mass and money through refurbishment, the closure of every year's water and material balances on a small settlement, and that a run with no measures is the plain model.
+`provisioning/vacuum_industry/tests` checks the freight against the founding study's controls, the three arrangements of the Earth leg and the schedules by year, the goods handed over at the depot and the travellers, the locally made share of working parts with its labour, its staffing and its part in refurbishment, the lifetime curve's mean, the dating of orders, the feed as the largest of its three needs, the conservation of mass and money through refurbishment, the closure of every year's water and material balances on a small settlement, and that a run with no measures is the plain model.
