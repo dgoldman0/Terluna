@@ -1,9 +1,11 @@
-"""Tests for the polar-light study: product binding, the refraction integral, the ephemeris's geometry, the photon
-conversion, the two-state clouds and the terrain's horizons, each against an independent expectation."""
+"""Tests for the polar-light study: product binding, the corrected run behind its clouds and lakes, the refraction
+integral, the ephemeris's geometry, the photon conversion, the two-state clouds, the run's sunlight beside them and the
+terrain's horizons, each against an independent expectation."""
 from __future__ import annotations
 
 import json
 import math
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -38,6 +40,27 @@ def test_product_schema_and_files(product):
 
 def test_constants_current(product):
     assert constants_changed(product['producer']['constants']) == {}
+
+
+def test_product_reads_the_corrected_design_climate(product):
+    """The clouds, the lakes and the sunlight diagnostic come from one climate: the corrected run's years 10-49 and
+    the drainage routed on them."""
+    p = product['producer']
+    assert p['run'] == run.RUN == 'A28R_301k_design_l15_snow_s938_turned_refit_precession'
+    assert p['climatology_years'] == list(run.RUN_YEARS) == [10, 49]
+    assert run.INPUTS['climatology'][0] == f'climate/gcm/products/climatology_{run.RUN}_y10-49.npz'
+    for key in ('climatology', 'drainage', 'lakes'):
+        assert run.INPUTS[key][0] in p['inputs']
+    meta = json.loads(str(np.load(run.ROOT / run.INPUTS['climatology'][0])['metadata']))
+    assert meta['run'] == run.RUN and list(meta['years']) == list(run.RUN_YEARS)
+    assert meta['configuration']['precession']['period_years'] == pytest.approx(18.61, abs=0.01)
+    routed = run.read_json('drainage')['climatology']
+    assert routed['run'] == run.RUN and list(routed['years']) == list(run.RUN_YEARS)
+    assert Path(run.INPUTS['lakes'][0]).parts[:2] == Path(run.INPUTS['drainage'][0]).parts[:2]
+    d = product['clouds']['run_sunlight_diagnostic']
+    assert d['run'] == run.RUN and d['years'] == list(run.RUN_YEARS)
+    for cap in ('north', 'south'):
+        assert 'corrected' in Path(product['terrain'][cap]['horizon_cache']['path']).name
 
 
 def test_product_checks(product):
@@ -139,6 +162,38 @@ def test_two_state_cloud_limits():
     over = run.hours_below(series * 0.25, 1.0, 1.0)
     assert np.allclose(run.hours_below_cloud(series, 1.0, 1.0, np.ones_like(series), 0.25), over)
     assert np.all(over > clear)
+
+
+def test_run_sunlight_diagnostic_recovers_a_two_state_sky(tmp_path):
+    """Sums built from a two-state sky of cover c whose overcast passes t return t, and the screen's factor at c."""
+    lat = np.array([80.0, 0.0, -80.0])
+    clear = np.array([0.5, 2.0, 20.0, 60.0, 90.0, 60.0, 20.0, 2.0, 0.5, 0.1])[:, None] * np.ones((1, 3))
+    n = np.full((10, 3), 4.0)
+    c, t = 0.3, 0.4
+    path = tmp_path / 'extract.npz'
+    np.savez(path, lat=lat, tenths=run.TENTHS, n_land=n, rsscs_land=clear * n, rss_land=clear * n * (1 - (1 - t) * c),
+             clt_land=c * n, czen_land=0.1 * n, run='synthetic', years=np.array([0, 1]))
+    d = run.run_sunlight_diagnostic(path, overcast=0.25)
+    assert sorted(d['rows']) == ['-80.00', '80.00']                 # the polar rows only
+    for row in d['rows'].values():
+        assert row['cloud_cover_day'] == pytest.approx(c)
+        assert row['land_all_over_clear_day'] == pytest.approx(1 - (1 - t) * c)
+        assert row['implied_overcast_transmission_day'] == pytest.approx(t)
+        assert row['two_state_factor_day'] == pytest.approx(1 - 0.75 * c)
+        assert np.allclose(row['all_sky_w_m2'], clear[:, 0] * (1 - (1 - t) * c))
+
+
+def test_run_sunlight_over_the_lunar_day(product):
+    """With the twilight counted once, the run's all-sky sunlight stays below its clear-sky sunlight over the whole
+    lunar day in every polar row, near the two-state screen's mean factor at the run's cover; the overcast
+    transmission it implies lies inside the product's sensitivity range."""
+    d = product['clouds']['run_sunlight_diagnostic']
+    low, high = run.OVERCAST_RANGE
+    assert len(d['rows']) == 12
+    for row in d['rows'].values():
+        assert 0.7 < row['land_all_over_clear_day'] < 0.9
+        assert abs(row['land_all_over_clear_day'] / row['two_state_factor_day'] - 1) < 0.12
+        assert low < row['implied_overcast_transmission_day'] < high
 
 
 # ---- terrain ---------------------------------------------------------------------------------------------------------

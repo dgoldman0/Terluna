@@ -7,9 +7,11 @@ both hemispheres, for plants and for people, and how much of it the spin axis's 
   spin axis keeps its tilt eps to the ecliptic (1.613 deg in the design state, up to 2.5 deg while the pores fill) and
   precesses with the orbit's node every 18.6 years. The Sun's declination is asin(sin eps sin u), u advancing through
   the eclipse year; the Sun's distance follows Earth's orbit with the run's year and eccentricity. The precession's phase
-  psi is the value of u at perihelion; the run holds psi at 270 deg, the south's summer at perihelion every year. The
-  Earth stands at sub-Earth latitude -asin(sin(i + eps) sin F), F = D + u, with D the synodic phase (0 at full Earth),
-  and at sub-Earth longitude -L sin M, the optical libration in longitude over the anomalistic month (shared constants).
+  psi is the value of u at perihelion. The corrected run's equinox regresses with the node from psi = 270 deg, the
+  south's summer at perihelion, so its years pass through every phase; the study takes psi = 270 deg as its reference
+  phase and gives the opposite phase, 9.3 years on, beside it. The Earth stands at sub-Earth latitude
+  -asin(sin(i + eps) sin F), F = D + u, with D the synodic phase (0 at full Earth), and at sub-Earth longitude
+  -L sin M, the optical libration in longitude over the anomalistic month (shared constants).
 - Refraction. Bouguer's invariant n r cos(h) integrated through the design column (the middle atmosphere's 1.2-atm
   profiles at 288 and 298 K, blended in log density to the solved column's 294.9 K surface), with the refractivity of
   standard air at 550 nm (Edlen 1966) scaled by number density. The Earth control's column is the check against Earth's
@@ -17,9 +19,9 @@ both hemispheres, for plants and for people, and how much of it the spin axis's 
 - The light at the ground. The light calendar's evaluator (illumination/calendar, Response) gives direct and diffuse
   sunlight and the Earth's light by elevation and phase on the solved 1.2-atm column. Photosynthetic photons per lux
   come from the solved standard solution's 114 channels: the diffuse ground flux of each channel at every solar
-  elevation from -90 to 90 deg, and the direct beam by slant optical depth through its 100 shells. Clouds are the run's
-  cover by latitude and hour angle (climatology y10-49) in a two-state sky, clear or overcast, overcast passing 0.25 of
-  the clear sky's light (Kasten & Czeplak 1980 at eight oktas).
+  elevation from -90 to 90 deg, and the direct beam by slant optical depth through its 100 shells. Clouds are the
+  corrected run's cover by latitude and hour angle (climatology y10-49) in a two-state sky, clear or overcast, overcast
+  passing 0.25 of the clear sky's light (Kasten & Czeplak 1980 at eight oktas).
 - Terrain. LOLA's heights above the GRAIL geoid at 16 px/deg, with the seas and the forty-year routing's rain-fed lakes
   as flat water, carried to the turned frame and resampled on polar stereographic grids of 1.9 km about each turned
   pole; horizons in 72 azimuths out to 265 km with the Moon's curvature exact; the Sun's centre against the horizon
@@ -54,12 +56,13 @@ SPHERICAL = Path('/media/projectspace/terluna-research/optical-comfort-runs/sphe
 SOLUTION = SPHERICAL / 'moon_1.2atm_standard.npz'       # the solved sky's standard solution (its atlas's source)
 ATLAS = SPHERICAL / 'moon_1.2atm_atlas.npz'
 
-RUN = 'A28R_301k_design_l15_snow_s924_turned_refit'
+RUN = 'A28R_301k_design_l15_snow_s938_turned_refit_precession'     # the corrected design climate on the turned Moon
 RUN_YEARS = (10, 49)
 RUN_DIR = ROOT / 'climate' / 'gcm' / 'runs' / RUN / 'model'
-RUN_EXTRACT = DRIVE / 'run_sunlight_y10-49.npz'
+RUN_EXTRACT = DRIVE / 'run_sunlight_corrected_y10-49.npz'
 HEIGHTS_CACHE = DRIVE / 'heights_16ppd.npy'
-HORIZON_CACHE = DRIVE / 'horizons_{cap}.npz'
+HORIZON_CACHE = DRIVE / 'horizons_{cap}_corrected.npz'             # the surface holds the corrected routing's lakes
+FIGURE_TAG = '_corrected'                                         # figures of the corrected run's product
 TENTHS = np.array([-180.0 + 36.0 * (k + 0.5) for k in range(10)])     # hour-angle bins of the run's 3-day means
 
 INPUTS = {
@@ -73,8 +76,8 @@ INPUTS = {
     'light_limitation': ('research/studies/light_limitation/results/light_limitation.json',
                          'terluna.research.light-limitation/1'),
     'atlas': ('geography/results/atlas.json', 'terluna.geography.atlas/1'),
-    'drainage': ('geography/turned_y10-49/results/drainage.json', 'terluna.geography.drainage/1'),
-    'lakes': ('geography/turned_y10-49/products/drainage_28pct_16ppd.npz', None),
+    'drainage': ('geography/turned_corrected_y10-49/results/drainage.json', 'terluna.geography.drainage/1'),
+    'lakes': ('geography/turned_corrected_y10-49/products/drainage_28pct_16ppd.npz', None),
     'profile_288': ('atmosphere/middle_atmosphere/results/profiles/moon_1.2atm_titania_stack.csv', None),
     'profile_298': ('atmosphere/middle_atmosphere/results/profiles/moon_1.2atm_titania_stack_ts298.csv', None),
     'profile_earth': ('atmosphere/middle_atmosphere/results/profiles/earth_control.csv', None),
@@ -90,7 +93,7 @@ IMPORTED = ('illumination/calendar/validate.py', 'illumination/calendar/disk.py'
 
 # ---- study settings -------------------------------------------------------------------------------------------------
 TILTS = (1.613, 2.5)                    # the design state with seas and lakes; the elastic crust's top while pores fill
-PSI_RUN, PSI_NORTH = 270.0, 90.0        # precession phase: the south's summer at perihelion (the run), the north's
+PSI_RUN, PSI_NORTH = 270.0, 90.0        # precession phase: the south's summer at perihelion (the reference), the north's
 LATS = np.concatenate([np.arange(60.0, 85.0, 1.0), np.arange(85.0, 90.01, 0.5)])
 TABLE_LATS = (60.0, 62.0, 64.0, 65.0, 66.0, 68.0, 70.0, 72.0, 75.0, 78.0, 80.0, 82.0, 84.0, 86.0, 88.0, 89.0, 90.0)
 SEASONS = np.arange(0.0, 360.0, 5.0)    # eclipse-year phase u at the lunar day's local noon
@@ -435,22 +438,33 @@ def cover_pixels(cc, lat_pix, H):
     return out
 
 
-def run_sunlight_diagnostic(path=RUN_EXTRACT):
-    """The run's all-sky over clear-sky surface sunlight by polar row and tenth of the lunar day (from the extract)."""
+def run_sunlight_diagnostic(path=RUN_EXTRACT, overcast=OVERCAST):
+    """The run's all-sky over clear-sky surface sunlight on land by polar row (from the extract): by tenth of the lunar
+    day, and over the whole lunar day beside the two-state screen's mean factor at the run's cover. The run's 3-day
+    records hold the all-sky flux, the cover and the Sun's height as means and the clear-sky flux as the single step at
+    the record's end, half a tenth later (climate/gcm/README.md, the year written every 6.5 hours). A tenth's ratio
+    therefore sets a mean against a later moment, while the whole lunar day's sums compare like with like. The day's
+    cover is weighted by the clear-sky flux moved back that half tenth, the mean of each tenth and the one before."""
     if not path.exists():
         return None
     z = np.load(path)
     lat = z['lat']
     rows = np.flatnonzero(np.abs(lat) > 55)
     out = dict(path=str(path), sha256=sha(path), run=str(z['run']), years=z['years'].tolist(), tenths_deg=TENTHS,
-               rows={})
+               timing='rss, clt and czen are means over each 3-day record; rsscs is the single step at the record\'s '
+                      'end, 18 deg of hour angle after its middle',
+               overcast_transmission=overcast, rows={})
     for r in rows:
         n = np.maximum(z['n_land'][:, r], 1)
+        clear, cover = z['rsscs_land'][:, r] / n, z['clt_land'][:, r] / n
+        weight = 0.5 * (clear + np.roll(clear, 1))
+        day = float(z['rss_land'][:, r].sum() / max(z['rsscs_land'][:, r].sum(), 1e-12))
+        c = float((cover * weight).sum() / weight.sum())
         out['rows'][f'{lat[r]:.2f}'] = dict(
             land_all_over_clear=z['rss_land'][:, r] / np.maximum(z['rsscs_land'][:, r], 1e-12),
-            land_all_over_clear_day=z['rss_land'][:, r].sum() / max(z['rsscs_land'][:, r].sum(), 1e-12),
-            clear_sky_w_m2=z['rsscs_land'][:, r] / n, mean_cos_zenith=z['czen_land'][:, r] / n,
-            cloud_cover=z['clt_land'][:, r] / n)
+            land_all_over_clear_day=day, all_sky_w_m2=z['rss_land'][:, r] / n, clear_sky_w_m2=clear,
+            mean_cos_zenith=z['czen_land'][:, r] / n, cloud_cover=cover, cloud_cover_day=c,
+            two_state_factor_day=1.0 - (1.0 - overcast) * c, implied_overcast_transmission_day=1.0 - (1.0 - day) / c)
     return out
 
 
@@ -944,8 +958,8 @@ def extract_run_sunlight(path=RUN_EXTRACT, years=RUN_YEARS):
 
 # ==== assembly ======================================================================================================
 def flat_ground(light, per, cc, refr0, log=print):
-    """Every latitude's 72 seasonal lunar days for each tilt: the Sun alone at the run's precession phase, at the
-    north's and at the mean distance, and with the Earth in each sector at the run's phase."""
+    """Every latitude's 72 seasonal lunar days for each tilt: the Sun alone at the reference precession phase (keys
+    named run), at the north's and at the mean distance, and with the Earth in each sector at the reference phase."""
     out = {}
     for eps in TILTS:
         rows = {}
@@ -1112,9 +1126,9 @@ def tilt_and_precession(annual_tab, light_tab, sun_path, thr, per):
             summer_dli_clear_precession=[l1[lat]['dli_clear'][summer], l1[lat]['dli_clear_north_perihelion'][summer]],
             winter_dli_clear_precession=[l1[lat]['dli_clear'][winter], l1[lat]['dli_clear_north_perihelion'][winter]])
     out['toa_polar_band_75_90'] = {
-        'tilt 1.613, run phase (south summer at perihelion)': toa_swing(per, 1.613, PSI_RUN),
+        'tilt 1.613, reference phase (south summer at perihelion)': toa_swing(per, 1.613, PSI_RUN),
         'tilt 1.613, north summer at perihelion': toa_swing(per, 1.613, PSI_NORTH),
-        'tilt 2.5, run phase': toa_swing(per, 2.5, PSI_RUN),
+        'tilt 2.5, reference phase': toa_swing(per, 2.5, PSI_RUN),
         'tilt 1.613, circular orbit': toa_swing(dict(per, eccentricity=0.0), 1.613, PSI_RUN)}
     out['thresholds'] = thr
     return out
@@ -1122,7 +1136,7 @@ def tilt_and_precession(annual_tab, light_tab, sun_path, thr, per):
 
 def overcast_sensitivity(light, per, cc, refr0):
     """The flat ground's dark hours and photons under the run's clouds with an overcast passing 0.1 or 0.5 of the light
-    (tilt 1.613, the run's phase), beside the central 0.25."""
+    (tilt 1.613, the reference phase), beside the central 0.25."""
     P = per['synodic_days']
     w = season_weights(SEASONS, PSI_RUN, per)
     out = {}
@@ -1178,7 +1192,7 @@ def figures(product, flat, terr, light, per):
         ax.grid(alpha=0.3)
     axes[0].legend(fontsize=8)
     fig.suptitle('The Sun\'s path over the turned Moon\'s north polar region')
-    p = DRIVE / 'sun_path_north.png'
+    p = DRIVE / f'sun_path_north{FIGURE_TAG}.png'
     fig.savefig(p, dpi=110)
     plt.close(fig)
     written.append(p)
@@ -1196,7 +1210,7 @@ def figures(product, flat, terr, light, per):
         ax.set_ylim(0.05, 2000)
     axes[0].set_ylabel('photosynthetic photons on level ground, clear sky (umol/m2/s)')
     axes[1].legend(title='latitude N')
-    p = DRIVE / 'lunar_day_light.png'
+    p = DRIVE / f'lunar_day_light{FIGURE_TAG}.png'
     fig.savefig(p, dpi=110)
     plt.close(fig)
     written.append(p)
@@ -1227,7 +1241,7 @@ def figures(product, flat, terr, light, per):
                 rho = 2 * MOON_RADIUS / 1000 * math.tan(math.radians(c_deg) / 2) / DX_KM
                 ax.add_patch(plt.Circle((0, 0), rho, fill=False, color='w', lw=0.6, ls=':'))
         fig.suptitle(f'Turned {cap} polar cap, 60 deg to the pole (dotted: 80, 70, 60 deg), polar stereographic, 1.9 km')
-        p = DRIVE / f'terrain_{cap}.png'
+        p = DRIVE / f'terrain_{cap}{FIGURE_TAG}.png'
         fig.savefig(p, dpi=100)
         plt.close(fig)
         written.append(p)
@@ -1246,10 +1260,10 @@ READING_RULE = ('Latitudes are the turned Moon\'s (north positive). The eclipse-
                 'dli values are mol/m2 per 24 hours averaged over the lunar day (the lunar day\'s photons / 29.53); '
                 'dli24 the lowest and highest 24-hour window inside it. Hours are per lunar day. "cloud" is the '
                 'expected value in the two-state sky with the run\'s cover; "overcast" the whole day under cloud. '
-                'Light is on level, open ground unless a terrain section says otherwise; the run\'s precession phase '
-                '(south summer at perihelion) unless a key names another. Annual values weight each season by the '
-                'time the Sun spends there. Pairs in tilt_and_precession are [tilt 1.613, tilt 2.5] or [run phase, '
-                'north summer at perihelion]. Terrain quantiles are [10th, 50th, 90th] percentiles by area.')
+                'Light is on level, open ground unless a terrain section says otherwise; the reference precession '
+                'phase (south summer at perihelion, from which the run\'s equinox regresses with the node) unless a '
+                'key names another. Annual values weight each season by the time the Sun spends there. Pairs in '
+                'tilt_and_precession are [tilt 1.613, tilt 2.5] or [reference phase, north summer at perihelion]. Terrain quantiles are [10th, 50th, 90th] percentiles by area.')
 ASSUMPTIONS = [
     'Mean geometry: uniform rotation, the Sun\'s hour angle at the mean synodic rate, the Sun\'s declination from the '
     'eclipse-year phase, the Earth\'s orbit with the run\'s year and eccentricity; a mean Earth distance and sinusoidal '
@@ -1257,8 +1271,8 @@ ASSUMPTIONS = [
     'Clear-sky light is the calendar evaluator\'s: one horizontally uniform 1.2-atm molecular column, Lambertian ground '
     'of albedo 0.1, no aerosol; refraction is computed apart and enters only the hours the Sun is up',
     'Clouds: the run\'s cover by latitude and hour angle in a two-state sky; overcast passes 0.25 of the clear sky\'s '
-    'light at every Sun height and in twilight (an Earth relation); the run\'s own surface sunlight cannot serve as a '
-    'cloud transmission in the polar rows (see clouds.run_sunlight_diagnostic)',
+    'light at every Sun height and in twilight (an Earth relation); the run\'s own surface sunlight over the whole '
+    'lunar day stands beside that screen\'s mean factor in clouds.run_sunlight_diagnostic',
     'Terrain: horizons on a 1.9 km grid to 265 km, nearest-neighbour samples; light on horizontal ground, no light '
     'reflected from the terrain itself, no sloped surfaces; seas at the atlas\'s level and the routed lakes as flat water',
     'Earthlight carries sunlight\'s photons per lux for the sky at the Earth\'s height; at most a few lux at the poles',
@@ -1315,7 +1329,7 @@ def build(workers=4, with_figures=False, log=print):
                                                                   numpy=np.__version__),
                       run=RUN, climatology_years=list(RUN_YEARS)),
         evidence=EVIDENCE, reading_rule=READING_RULE, assumptions=ASSUMPTIONS, sources=SOURCES,
-        settings=dict(tilts_deg=TILTS, precession_phase_run_deg=PSI_RUN, precession_phase_north_deg=PSI_NORTH,
+        settings=dict(tilts_deg=TILTS, precession_phase_reference_deg=PSI_RUN, precession_phase_north_deg=PSI_NORTH,
                       latitudes=LATS, season_phases_deg=SEASON_TABLE, step_hours=STEP_H, dark_umol=DARK_UMOL,
                       overcast_transmission=OVERCAST, people_lux=PEOPLE_LUX, ek_umol=EK_UMOL,
                       vgpm_half_mol=VGPM_HALF_MOL, dli_needs=DLI_NEEDS, faust_range=FAUST_RANGE,
@@ -1343,7 +1357,8 @@ def build(workers=4, with_figures=False, log=print):
         comparisons=dict(
             plant_model_dark_hours=plant['results']['near']['60']['earth_like']['dark_hours'],
             plant_model_bands=plant['settings']['bands_abs_latitude'],
-            moisture_map_rule='plant dark hours fall to none at 65 deg (biosphere/ecology/moisture_map.py, dark_hours)',
+            moisture_map_rule='poleward of 60 deg the moisture map takes its plant dark hours, clear and under the '
+                              'run\'s clouds, from this product (biosphere/ecology/moisture_map.py, dark_hours)',
             light_limitation_ek_umol=ll['guesses']['ek_umol_m2_s'],
             living_light_polar_plain_75N_darkest_lux=living['needs']['places'].get('polar_plain', {}).get('darkest_lux')),
         checks=checks, seconds=round(time.time() - t0, 1))
