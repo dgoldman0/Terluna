@@ -40,6 +40,7 @@ JS_GROUPS = {
 }
 CONTROL = {"Makefile", "shared/check_changed.py"}
 GLOBAL = {"pyproject.toml", "conftest.py", "research/requirements.txt"}
+PYTEST_NONE_COLLECTED = 5  # pytest's exit status when it collects no test, as when every selected module skips
 # These are planning/check records, not executable inputs by default. Actual
 # readers still participate in the graph; this only disables the owner fallback.
 RECORDS = {
@@ -519,7 +520,13 @@ def main(argv: list[str] | None = None) -> int:
         for key in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
             env.setdefault(key, "1")
         for job in commands(selected, sys.executable):
-            subprocess.run(job, cwd=ROOT, env=env, check=True)
+            done = subprocess.run(job, cwd=ROOT, env=env)
+            if done.returncode == PYTEST_NONE_COLLECTED and job[1:3] == ["-m", "pytest"]:
+                # Every selected test was skipped at import, as when an optional dependency is absent.
+                print("No selected test ran: each was skipped; pytest reports the skips above.", flush=True)
+                continue
+            if done.returncode:
+                raise subprocess.CalledProcessError(done.returncode, job)
         print("Selected checks passed. Full repository verification: " + ("performed." if selected.full else "not requested."))
         return 0
     except (OSError, ValueError, SyntaxError, subprocess.CalledProcessError) as exc:

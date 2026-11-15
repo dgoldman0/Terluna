@@ -4,6 +4,8 @@ import math
 import numpy as np
 import pytest
 
+pytest.importorskip("numba")  # without numba these tests are skipped when a file is named directly, as conftest.py leaves them uncollected
+
 from illumination.cloud_light.model import MolecularColumn
 from illumination.sky.colour_matching import cmf
 from illumination.sky.solved_optics import adaptive_spectrum, reduce_spectrum
