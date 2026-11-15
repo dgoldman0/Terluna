@@ -1,0 +1,1525 @@
+{
+ "schema": "terluna.research.south-sea-inflows/1",
+ "producer": {
+  "files": {
+   "research/studies/south_sea_ocean/inflows.py": "c51a34dd93933b125371d08ce8511776acd180c1012db31a6f65d1d8b1acfaee",
+   "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5",
+   "geography/topography.py": "228e08f79efca868b49bcae0687c7f80a239b18234629c4390c147075b3f5c29",
+   "geography/atlas.py": "e5ce62df01c940976901f0308620116fbce3657c4945098a70ce0f301f4ee14b",
+   "climate/gcm/turned.py": "0048cd6ac13ab7e9fc6975437f04c2a83e0be3e2c6d8764aae4d68bff4cb629a"
+  }
+ },
+ "inputs": {
+  "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+  "geography/turned_corrected/results/drainage.json": "e8dc8e257b1fe897cda702f8bc7039374e5f26887de1005b5c8b9eb8043292d0",
+  "climate/results/gcm/turned_surface_8d71fd350ca4c6cd.json": "e1957b8f36f1b04ba9b673c6a97b0d4bfb83bc54cf93a837e1ac3e1783bbbe58"
+ },
+ "ignored_inputs": {
+  "climate/gcm/products/climatology_A28R_301k_design_l15_snow_s938_turned_refit_precession_today.npz": "75cec86b2ec6a13dab883471bd64e0f88d6390ebc336ccf525dcace19955b718"
+ },
+ "climatology": {
+  "run": "A28R_301k_design_l15_snow_s938_turned_refit_precession",
+  "years": [
+   10,
+   19
+  ]
+ },
+ "evidence": "A calculation: geography's steady annual routing of the design years' runoff (ExoPlaSim at T21, rain less evaporation over land) over LOLA's 16 pixel/degree heights, repeated with three choices of the waters that take rivers in. The first reproduces geography's drainage product. The rules bracket where the rivers end; the climate, the lakes' open-water balance and the sea level stay the design years' in all three, so none is a prediction of the levels the waters would find. The model's rain differs from the cloud-resolving boxes' by a factor the climate lane carries as a range.",
+ "reading_rule": "Discharges in m3/s and km3 a year (a Julian year). A mouth is a cell of the receiving water that a channel enters; its basin is the land draining through it. Places are [latitude, longitude east] in degrees on today's Moon and on the turned Moon of the frame record. to_other_waters_m3s is the discharge reaching outlet waters other than the seas listed. hollows_filling lists the hollows, other than the six seas, that take 5,000 m3/s or more of river water at the common level, and smaller_seas_filling the four smaller seas in the two_seas run: the height above the common level at which each basin spills (the level of the depressions under its cells, as the area-weighted median with its lowest and highest values), its area at the common level, the area that spill level floods and the volume of water between the two levels.",
+ "sea_level_m": -1654.2,
+ "seas": {
+  "near_side": {
+   "area_km2": 5192381,
+   "atlas_area_km2": 5288444,
+   "centroid_today": [
+    25.95,
+    -12.52
+   ]
+  },
+  "south_pole_aitken": {
+   "area_km2": 2307272,
+   "atlas_area_km2": 2322833,
+   "centroid_today": [
+    -55.88,
+    -171.46
+   ]
+  },
+  "humboldtianum": {
+   "area_km2": 276995,
+   "atlas_area_km2": 284341,
+   "centroid_today": [
+    57.79,
+    85.14
+   ]
+  },
+  "smythii_marginis": {
+   "area_km2": 268141,
+   "atlas_area_km2": 285480,
+   "centroid_today": [
+    4.54,
+    88.03
+   ]
+  },
+  "orientale": {
+   "area_km2": 83983,
+   "atlas_area_km2": 88056,
+   "centroid_today": [
+    -19.4,
+    -94.14
+   ]
+  },
+  "moscoviense": {
+   "area_km2": 64841,
+   "atlas_area_km2": 66449,
+   "centroid_today": [
+    26.88,
+    148.53
+   ]
+  }
+ },
+ "hollows_below_the_common_level_km2": 2426516,
+ "reproduces": {
+  "product": "geography/turned_corrected/results/drainage.json",
+  "discharge_to_sea_m3s": 199973
+ },
+ "rules": {
+  "every_water": {
+   "rule": "every water below the common level takes its rivers in (geography's drainage)",
+   "to_the_outlets_m3s": 199972.7,
+   "to_other_waters_m3s": 176611.0,
+   "seas": {
+    "near_side": {
+     "inflow_m3s": 6700.7,
+     "inflow_km3_yr": 211.5,
+     "mouths_of_1_m3s": 351,
+     "mouths_of_100_m3s": 16,
+     "largest": [
+      {
+       "today": [
+        -10.78,
+        21.59
+       ],
+       "turned": [
+        -18.74,
+        15.77
+       ],
+       "discharge_m3s": 580.1,
+       "basin_km2": 21990
+      },
+      {
+       "today": [
+        -0.53,
+        22.78
+       ],
+       "turned": [
+        -8.46,
+        16.74
+       ],
+       "discharge_m3s": 553.2,
+       "basin_km2": 25432
+      },
+      {
+       "today": [
+        16.91,
+        -25.22
+       ],
+       "turned": [
+        10.51,
+        -30.18
+       ],
+       "discharge_m3s": 319.6,
+       "basin_km2": 16536
+      },
+      {
+       "today": [
+        15.97,
+        14.16
+       ],
+       "turned": [
+        7.92,
+        7.96
+       ],
+       "discharge_m3s": 281.5,
+       "basin_km2": 15756
+      },
+      {
+       "today": [
+        25.97,
+        49.28
+       ],
+       "turned": [
+        19.4,
+        41.17
+       ],
+       "discharge_m3s": 271.2,
+       "basin_km2": 7471
+      },
+      {
+       "today": [
+        -5.28,
+        20.91
+       ],
+       "turned": [
+        -13.25,
+        14.94
+       ],
+       "discharge_m3s": 243.2,
+       "basin_km2": 8566
+      },
+      {
+       "today": [
+        15.22,
+        -25.16
+       ],
+       "turned": [
+        8.82,
+        -30.27
+       ],
+       "discharge_m3s": 187.2,
+       "basin_km2": 10436
+      },
+      {
+       "today": [
+        21.53,
+        35.41
+       ],
+       "turned": [
+        14.07,
+        28.28
+       ],
+       "discharge_m3s": 187.1,
+       "basin_km2": 21684
+      }
+     ]
+    },
+    "south_pole_aitken": {
+     "inflow_m3s": 820.2,
+     "inflow_km3_yr": 25.9,
+     "mouths_of_1_m3s": 20,
+     "mouths_of_100_m3s": 2,
+     "largest": [
+      {
+       "today": [
+        -29.84,
+        -146.28
+       ],
+       "turned": [
+        -22.28,
+        -153.8
+       ],
+       "discharge_m3s": 531.3,
+       "basin_km2": 25811
+      },
+      {
+       "today": [
+        -34.41,
+        -142.41
+       ],
+       "turned": [
+        -27.03,
+        -150.49
+       ],
+       "discharge_m3s": 103.2,
+       "basin_km2": 13743
+      },
+      {
+       "today": [
+        -27.28,
+        -154.97
+       ],
+       "turned": [
+        -19.4,
+        -161.84
+       ],
+       "discharge_m3s": 38.4,
+       "basin_km2": 2389
+      },
+      {
+       "today": [
+        -21.72,
+        177.84
+       ],
+       "turned": [
+        -13.93,
+        172.35
+       ],
+       "discharge_m3s": 32.9,
+       "basin_km2": 5912
+      },
+      {
+       "today": [
+        -28.97,
+        -148.22
+       ],
+       "turned": [
+        -21.32,
+        -155.56
+       ],
+       "discharge_m3s": 30.2,
+       "basin_km2": 2888
+      },
+      {
+       "today": [
+        -29.22,
+        -147.34
+       ],
+       "turned": [
+        -21.61,
+        -154.76
+       ],
+       "discharge_m3s": 11.3,
+       "basin_km2": 2326
+      },
+      {
+       "today": [
+        -28.72,
+        159.59
+       ],
+       "turned": [
+        -21.9,
+        155.47
+       ],
+       "discharge_m3s": 10.4,
+       "basin_km2": 6054
+      },
+      {
+       "today": [
+        -27.53,
+        -153.72
+       ],
+       "turned": [
+        -19.68,
+        -160.67
+       ],
+       "discharge_m3s": 9.8,
+       "basin_km2": 1012
+      }
+     ]
+    },
+    "humboldtianum": {
+     "inflow_m3s": 0.0,
+     "inflow_km3_yr": 0.0,
+     "mouths_of_1_m3s": 0,
+     "mouths_of_100_m3s": 0,
+     "largest": []
+    },
+    "smythii_marginis": {
+     "inflow_m3s": 591.5,
+     "inflow_km3_yr": 18.7,
+     "mouths_of_1_m3s": 43,
+     "mouths_of_100_m3s": 0,
+     "largest": [
+      {
+       "today": [
+        -3.16,
+        80.16
+       ],
+       "turned": [
+        -6.23,
+        74.61
+       ],
+       "discharge_m3s": 82.0,
+       "basin_km2": 2906
+      },
+      {
+       "today": [
+        14.72,
+        94.78
+       ],
+       "turned": [
+        13.45,
+        86.63
+       ],
+       "discharge_m3s": 60.7,
+       "basin_km2": 5864
+      },
+      {
+       "today": [
+        -0.03,
+        80.53
+       ],
+       "turned": [
+        -3.08,
+        74.58
+       ],
+       "discharge_m3s": 44.4,
+       "basin_km2": 1408
+      },
+      {
+       "today": [
+        -8.34,
+        86.84
+       ],
+       "turned": [
+        -10.48,
+        81.98
+       ],
+       "discharge_m3s": 40.5,
+       "basin_km2": 3222
+      },
+      {
+       "today": [
+        -1.53,
+        80.59
+       ],
+       "turned": [
+        -4.56,
+        74.84
+       ],
+       "discharge_m3s": 28.8,
+       "basin_km2": 976
+      },
+      {
+       "today": [
+        -8.47,
+        84.72
+       ],
+       "turned": [
+        -10.89,
+        79.88
+       ],
+       "discharge_m3s": 26.2,
+       "basin_km2": 1786
+      },
+      {
+       "today": [
+        -2.84,
+        79.78
+       ],
+       "turned": [
+        -5.97,
+        74.2
+       ],
+       "discharge_m3s": 24.4,
+       "basin_km2": 761
+      },
+      {
+       "today": [
+        -0.84,
+        80.53
+       ],
+       "turned": [
+        -3.89,
+        74.68
+       ],
+       "discharge_m3s": 18.4,
+       "basin_km2": 596
+      }
+     ]
+    },
+    "orientale": {
+     "inflow_m3s": 14439.5,
+     "inflow_km3_yr": 455.7,
+     "mouths_of_1_m3s": 23,
+     "mouths_of_100_m3s": 2,
+     "largest": [
+      {
+       "today": [
+        -18.34,
+        -100.03
+       ],
+       "turned": [
+        -15.06,
+        -108.4
+       ],
+       "discharge_m3s": 13819.0,
+       "basin_km2": 651294
+      },
+      {
+       "today": [
+        -14.03,
+        -89.97
+       ],
+       "turned": [
+        -12.12,
+        -97.94
+       ],
+       "discharge_m3s": 461.9,
+       "basin_km2": 108243
+      },
+      {
+       "today": [
+        -25.09,
+        -93.66
+       ],
+       "turned": [
+        -22.57,
+        -103.2
+       ],
+       "discharge_m3s": 12.0,
+       "basin_km2": 2979
+      },
+      {
+       "today": [
+        -21.72,
+        -100.34
+       ],
+       "turned": [
+        -18.37,
+        -109.18
+       ],
+       "discharge_m3s": 11.1,
+       "basin_km2": 2001
+      },
+      {
+       "today": [
+        -23.28,
+        -98.28
+       ],
+       "turned": [
+        -20.18,
+        -107.4
+       ],
+       "discharge_m3s": 10.0,
+       "basin_km2": 3560
+      },
+      {
+       "today": [
+        -24.78,
+        -95.22
+       ],
+       "turned": [
+        -22.06,
+        -104.66
+       ],
+       "discharge_m3s": 9.9,
+       "basin_km2": 4898
+      },
+      {
+       "today": [
+        -23.84,
+        -91.03
+       ],
+       "turned": [
+        -21.68,
+        -100.45
+       ],
+       "discharge_m3s": 9.7,
+       "basin_km2": 1923
+      },
+      {
+       "today": [
+        -16.72,
+        -99.84
+       ],
+       "turned": [
+        -13.48,
+        -107.99
+       ],
+       "discharge_m3s": 8.4,
+       "basin_km2": 2170
+      }
+     ]
+    },
+    "moscoviense": {
+     "inflow_m3s": 809.8,
+     "inflow_km3_yr": 25.6,
+     "mouths_of_1_m3s": 15,
+     "mouths_of_100_m3s": 1,
+     "largest": [
+      {
+       "today": [
+        32.03,
+        146.91
+       ],
+       "turned": [
+        37.43,
+        136.59
+       ],
+       "discharge_m3s": 619.5,
+       "basin_km2": 35518
+      },
+      {
+       "today": [
+        29.59,
+        142.41
+       ],
+       "turned": [
+        34.51,
+        132.25
+       ],
+       "discharge_m3s": 82.7,
+       "basin_km2": 2348
+      },
+      {
+       "today": [
+        31.03,
+        143.66
+       ],
+       "turned": [
+        36.08,
+        133.33
+       ],
+       "discharge_m3s": 21.2,
+       "basin_km2": 852
+      },
+      {
+       "today": [
+        30.03,
+        143.28
+       ],
+       "turned": [
+        35.04,
+        133.09
+       ],
+       "discharge_m3s": 9.6,
+       "basin_km2": 359
+      },
+      {
+       "today": [
+        29.78,
+        142.59
+       ],
+       "turned": [
+        34.72,
+        132.41
+       ],
+       "discharge_m3s": 9.0,
+       "basin_km2": 307
+      },
+      {
+       "today": [
+        21.03,
+        148.09
+       ],
+       "turned": [
+        26.63,
+        139.37
+       ],
+       "discharge_m3s": 7.7,
+       "basin_km2": 1433
+      },
+      {
+       "today": [
+        29.16,
+        142.22
+       ],
+       "turned": [
+        34.05,
+        132.12
+       ],
+       "discharge_m3s": 3.5,
+       "basin_km2": 138
+      },
+      {
+       "today": [
+        30.97,
+        143.59
+       ],
+       "turned": [
+        36.01,
+        133.27
+       ],
+       "discharge_m3s": 3.0,
+       "basin_km2": 120
+      }
+     ]
+    }
+   }
+  },
+  "six_seas": {
+   "rule": "the six large seas take rivers in; every other hollow below the common level fills by its own balance and spills when full",
+   "to_the_outlets_m3s": 202464.4,
+   "to_other_waters_m3s": -0.1,
+   "seas": {
+    "near_side": {
+     "inflow_m3s": 59944.4,
+     "inflow_km3_yr": 1891.7,
+     "mouths_of_1_m3s": 424,
+     "mouths_of_100_m3s": 47,
+     "largest": [
+      {
+       "today": [
+        -5.03,
+        63.34
+       ],
+       "turned": [
+        -10.12,
+        58.02
+       ],
+       "discharge_m3s": 19234.1,
+       "basin_km2": 1272796
+      },
+      {
+       "today": [
+        10.53,
+        -13.34
+       ],
+       "turned": [
+        3.29,
+        -19.07
+       ],
+       "discharge_m3s": 8686.9,
+       "basin_km2": 390181
+      },
+      {
+       "today": [
+        16.78,
+        13.47
+       ],
+       "turned": [
+        8.73,
+        7.29
+       ],
+       "discharge_m3s": 5964.4,
+       "basin_km2": 292515
+      },
+      {
+       "today": [
+        43.78,
+        58.84
+       ],
+       "turned": [
+        37.94,
+        47.88
+       ],
+       "discharge_m3s": 4287.2,
+       "basin_km2": 318826
+      },
+      {
+       "today": [
+        17.28,
+        -39.22
+       ],
+       "turned": [
+        12.23,
+        -43.72
+       ],
+       "discharge_m3s": 1495.2,
+       "basin_km2": 89489
+      },
+      {
+       "today": [
+        -17.47,
+        -4.84
+       ],
+       "turned": [
+        -25.12,
+        -11.98
+       ],
+       "discharge_m3s": 1394.2,
+       "basin_km2": 105152
+      },
+      {
+       "today": [
+        22.59,
+        36.03
+       ],
+       "turned": [
+        15.16,
+        28.81
+       ],
+       "discharge_m3s": 1171.7,
+       "basin_km2": 57018
+      },
+      {
+       "today": [
+        25.53,
+        48.84
+       ],
+       "turned": [
+        18.93,
+        40.8
+       ],
+       "discharge_m3s": 1088.7,
+       "basin_km2": 31993
+      }
+     ]
+    },
+    "south_pole_aitken": {
+     "inflow_m3s": 31631.6,
+     "inflow_km3_yr": 998.2,
+     "mouths_of_1_m3s": 33,
+     "mouths_of_100_m3s": 11,
+     "largest": [
+      {
+       "today": [
+        -23.16,
+        -167.78
+       ],
+       "turned": [
+        -15.1,
+        -173.91
+       ],
+       "discharge_m3s": 16030.9,
+       "basin_km2": 426937
+      },
+      {
+       "today": [
+        -47.16,
+        -129.72
+       ],
+       "turned": [
+        -40.57,
+        -140.34
+       ],
+       "discharge_m3s": 6319.2,
+       "basin_km2": 492823
+      },
+      {
+       "today": [
+        -23.34,
+        176.09
+       ],
+       "turned": [
+        -15.61,
+        170.74
+       ],
+       "discharge_m3s": 3999.1,
+       "basin_km2": 329582
+      },
+      {
+       "today": [
+        -39.16,
+        -142.28
+       ],
+       "turned": [
+        -31.78,
+        -150.75
+       ],
+       "discharge_m3s": 1187.9,
+       "basin_km2": 49159
+      },
+      {
+       "today": [
+        -41.09,
+        154.72
+       ],
+       "turned": [
+        -34.59,
+        152.27
+       ],
+       "discharge_m3s": 1004.7,
+       "basin_km2": 76611
+      },
+      {
+       "today": [
+        -34.41,
+        -142.41
+       ],
+       "turned": [
+        -27.03,
+        -150.49
+       ],
+       "discharge_m3s": 764.6,
+       "basin_km2": 57257
+      },
+      {
+       "today": [
+        -35.91,
+        158.97
+       ],
+       "turned": [
+        -29.11,
+        155.58
+       ],
+       "discharge_m3s": 575.4,
+       "basin_km2": 48378
+      },
+      {
+       "today": [
+        -29.84,
+        -146.28
+       ],
+       "turned": [
+        -22.28,
+        -153.8
+       ],
+       "discharge_m3s": 531.3,
+       "basin_km2": 25811
+      }
+     ]
+    },
+    "humboldtianum": {
+     "inflow_m3s": 249.1,
+     "inflow_km3_yr": 7.9,
+     "mouths_of_1_m3s": 1,
+     "mouths_of_100_m3s": 1,
+     "largest": [
+      {
+       "today": [
+        64.03,
+        107.03
+       ],
+       "turned": [
+        63.46,
+        84.51
+       ],
+       "discharge_m3s": 249.1,
+       "basin_km2": 146024
+      }
+     ]
+    },
+    "smythii_marginis": {
+     "inflow_m3s": 33947.4,
+     "inflow_km3_yr": 1071.3,
+     "mouths_of_1_m3s": 58,
+     "mouths_of_100_m3s": 10,
+     "largest": [
+      {
+       "today": [
+        15.28,
+        94.03
+       ],
+       "turned": [
+        13.9,
+        85.81
+       ],
+       "discharge_m3s": 28029.1,
+       "basin_km2": 1041477
+      },
+      {
+       "today": [
+        7.84,
+        79.84
+       ],
+       "turned": [
+        4.64,
+        72.88
+       ],
+       "discharge_m3s": 2334.5,
+       "basin_km2": 102932
+      },
+      {
+       "today": [
+        1.59,
+        94.34
+       ],
+       "turned": [
+        0.39,
+        88.05
+       ],
+       "discharge_m3s": 1370.0,
+       "basin_km2": 56898
+      },
+      {
+       "today": [
+        -3.16,
+        80.16
+       ],
+       "turned": [
+        -6.23,
+        74.61
+       ],
+       "discharge_m3s": 334.5,
+       "basin_km2": 32148
+      },
+      {
+       "today": [
+        18.22,
+        81.66
+       ],
+       "turned": [
+        15.16,
+        73.26
+       ],
+       "discharge_m3s": 216.6,
+       "basin_km2": 39478
+      },
+      {
+       "today": [
+        13.47,
+        96.78
+       ],
+       "turned": [
+        12.49,
+        88.78
+       ],
+       "discharge_m3s": 207.2,
+       "basin_km2": 20781
+      },
+      {
+       "today": [
+        14.72,
+        94.78
+       ],
+       "turned": [
+        13.45,
+        86.63
+       ],
+       "discharge_m3s": 197.2,
+       "basin_km2": 11697
+      },
+      {
+       "today": [
+        9.91,
+        78.34
+       ],
+       "turned": [
+        6.49,
+        71.14
+       ],
+       "discharge_m3s": 180.9,
+       "basin_km2": 20709
+      }
+     ]
+    },
+    "orientale": {
+     "inflow_m3s": 16487.0,
+     "inflow_km3_yr": 520.3,
+     "mouths_of_1_m3s": 25,
+     "mouths_of_100_m3s": 4,
+     "largest": [
+      {
+       "today": [
+        -18.34,
+        -100.03
+       ],
+       "turned": [
+        -15.06,
+        -108.4
+       ],
+       "discharge_m3s": 13819.0,
+       "basin_km2": 651294
+      },
+      {
+       "today": [
+        -24.78,
+        -95.22
+       ],
+       "turned": [
+        -22.06,
+        -104.66
+       ],
+       "discharge_m3s": 1132.7,
+       "basin_km2": 204993
+      },
+      {
+       "today": [
+        -17.41,
+        -88.16
+       ],
+       "turned": [
+        -15.7,
+        -96.66
+       ],
+       "discharge_m3s": 881.5,
+       "basin_km2": 81676
+      },
+      {
+       "today": [
+        -14.03,
+        -89.97
+       ],
+       "turned": [
+        -12.12,
+        -97.94
+       ],
+       "discharge_m3s": 497.5,
+       "basin_km2": 114659
+      },
+      {
+       "today": [
+        -25.09,
+        -93.66
+       ],
+       "turned": [
+        -22.57,
+        -103.2
+       ],
+       "discharge_m3s": 12.0,
+       "basin_km2": 2979
+      },
+      {
+       "today": [
+        -21.72,
+        -100.34
+       ],
+       "turned": [
+        -18.37,
+        -109.18
+       ],
+       "discharge_m3s": 11.1,
+       "basin_km2": 2001
+      },
+      {
+       "today": [
+        -23.28,
+        -98.28
+       ],
+       "turned": [
+        -20.18,
+        -107.4
+       ],
+       "discharge_m3s": 10.0,
+       "basin_km2": 3560
+      },
+      {
+       "today": [
+        -23.84,
+        -91.03
+       ],
+       "turned": [
+        -21.68,
+        -100.45
+       ],
+       "discharge_m3s": 9.7,
+       "basin_km2": 1923
+      }
+     ]
+    },
+    "moscoviense": {
+     "inflow_m3s": 60205.0,
+     "inflow_km3_yr": 1899.9,
+     "mouths_of_1_m3s": 22,
+     "mouths_of_100_m3s": 3,
+     "largest": [
+      {
+       "today": [
+        23.28,
+        152.16
+       ],
+       "turned": [
+        29.27,
+        143.33
+       ],
+       "discharge_m3s": 59004.2,
+       "basin_km2": 2107456
+      },
+      {
+       "today": [
+        32.03,
+        146.91
+       ],
+       "turned": [
+        37.43,
+        136.59
+       ],
+       "discharge_m3s": 619.5,
+       "basin_km2": 35518
+      },
+      {
+       "today": [
+        29.09,
+        142.66
+       ],
+       "turned": [
+        34.04,
+        132.59
+       ],
+       "discharge_m3s": 336.1,
+       "basin_km2": 27324
+      },
+      {
+       "today": [
+        29.59,
+        142.41
+       ],
+       "turned": [
+        34.51,
+        132.25
+       ],
+       "discharge_m3s": 82.7,
+       "basin_km2": 2348
+      },
+      {
+       "today": [
+        21.72,
+        147.22
+       ],
+       "turned": [
+        27.22,
+        138.38
+       ],
+       "discharge_m3s": 34.4,
+       "basin_km2": 9468
+      },
+      {
+       "today": [
+        31.03,
+        143.66
+       ],
+       "turned": [
+        36.08,
+        133.33
+       ],
+       "discharge_m3s": 21.2,
+       "basin_km2": 852
+      },
+      {
+       "today": [
+        31.03,
+        144.16
+       ],
+       "turned": [
+        36.13,
+        133.85
+       ],
+       "discharge_m3s": 11.1,
+       "basin_km2": 977
+      },
+      {
+       "today": [
+        30.03,
+        143.28
+       ],
+       "turned": [
+        35.04,
+        133.09
+       ],
+       "discharge_m3s": 9.6,
+       "basin_km2": 359
+      }
+     ]
+    }
+   },
+   "hollows_filling": [
+    {
+     "centroid_today": [
+      3.47,
+      170.96
+     ],
+     "inflow_at_the_common_level_m3s": 32897.6,
+     "spill_level_above_common_m": 3321.4,
+     "lowest_m": 3321.4,
+     "highest_m": 3321.4,
+     "area_at_the_common_level_km2": 208,
+     "area_flooded_at_the_spill_level_km2": 954,
+     "volume_above_the_common_level_km3": 2014
+    },
+    {
+     "centroid_today": [
+      -19.87,
+      -157.82
+     ],
+     "inflow_at_the_common_level_m3s": 13185.6,
+     "spill_level_above_common_m": 2494.3,
+     "lowest_m": 2494.3,
+     "highest_m": 2494.3,
+     "area_at_the_common_level_km2": 277,
+     "area_flooded_at_the_spill_level_km2": 984,
+     "volume_above_the_common_level_km3": 1624
+    },
+    {
+     "centroid_today": [
+      22.03,
+      -178.47
+     ],
+     "inflow_at_the_common_level_m3s": 10551.4,
+     "spill_level_above_common_m": 3321.4,
+     "lowest_m": 3321.4,
+     "highest_m": 3321.4,
+     "area_at_the_common_level_km2": 70,
+     "area_flooded_at_the_spill_level_km2": 436,
+     "volume_above_the_common_level_km3": 826
+    },
+    {
+     "centroid_today": [
+      -35.47,
+      -124.16
+     ],
+     "inflow_at_the_common_level_m3s": 5514.7,
+     "spill_level_above_common_m": 4502.8,
+     "lowest_m": 4502.8,
+     "highest_m": 4502.8,
+     "area_at_the_common_level_km2": 3,
+     "area_flooded_at_the_spill_level_km2": 350,
+     "volume_above_the_common_level_km3": 1021
+    }
+   ]
+  },
+  "two_seas": {
+   "rule": "the Near-side and South Pole-Aitken seas take rivers in; every other water fills by its own balance and spills when full",
+   "to_the_outlets_m3s": 202049.2,
+   "to_other_waters_m3s": -0.0,
+   "seas": {
+    "near_side": {
+     "inflow_m3s": 110654.4,
+     "inflow_km3_yr": 3492.0,
+     "mouths_of_1_m3s": 425,
+     "mouths_of_100_m3s": 48,
+     "largest": [
+      {
+       "today": [
+        43.78,
+        58.84
+       ],
+       "turned": [
+        37.94,
+        47.88
+       ],
+       "discharge_m3s": 39118.2,
+       "basin_km2": 1910714
+      },
+      {
+       "today": [
+        -5.03,
+        63.34
+       ],
+       "turned": [
+        -10.12,
+        58.02
+       ],
+       "discharge_m3s": 19234.1,
+       "basin_km2": 1272796
+      },
+      {
+       "today": [
+        12.16,
+        -77.47
+       ],
+       "turned": [
+        12.08,
+        -81.89
+       ],
+       "discharge_m3s": 15879.0,
+       "basin_km2": 1182046
+      },
+      {
+       "today": [
+        10.53,
+        -13.34
+       ],
+       "turned": [
+        3.29,
+        -19.07
+       ],
+       "discharge_m3s": 8686.9,
+       "basin_km2": 390181
+      },
+      {
+       "today": [
+        16.78,
+        13.47
+       ],
+       "turned": [
+        8.73,
+        7.29
+       ],
+       "discharge_m3s": 5964.4,
+       "basin_km2": 292515
+      },
+      {
+       "today": [
+        17.28,
+        -39.22
+       ],
+       "turned": [
+        12.23,
+        -43.72
+       ],
+       "discharge_m3s": 1495.2,
+       "basin_km2": 89489
+      },
+      {
+       "today": [
+        -17.47,
+        -4.84
+       ],
+       "turned": [
+        -25.12,
+        -11.98
+       ],
+       "discharge_m3s": 1394.2,
+       "basin_km2": 105152
+      },
+      {
+       "today": [
+        22.59,
+        36.03
+       ],
+       "turned": [
+        15.16,
+        28.81
+       ],
+       "discharge_m3s": 1171.7,
+       "basin_km2": 57018
+      }
+     ]
+    },
+    "south_pole_aitken": {
+     "inflow_m3s": 91394.8,
+     "inflow_km3_yr": 2884.2,
+     "mouths_of_1_m3s": 33,
+     "mouths_of_100_m3s": 11,
+     "largest": [
+      {
+       "today": [
+        -23.34,
+        176.09
+       ],
+       "turned": [
+        -15.61,
+        170.74
+       ],
+       "discharge_m3s": 63762.3,
+       "basin_km2": 2516381
+      },
+      {
+       "today": [
+        -23.16,
+        -167.78
+       ],
+       "turned": [
+        -15.1,
+        -173.91
+       ],
+       "discharge_m3s": 16030.9,
+       "basin_km2": 426937
+      },
+      {
+       "today": [
+        -47.16,
+        -129.72
+       ],
+       "turned": [
+        -40.57,
+        -140.34
+       ],
+       "discharge_m3s": 6319.2,
+       "basin_km2": 492823
+      },
+      {
+       "today": [
+        -39.16,
+        -142.28
+       ],
+       "turned": [
+        -31.78,
+        -150.75
+       ],
+       "discharge_m3s": 1187.9,
+       "basin_km2": 49159
+      },
+      {
+       "today": [
+        -41.09,
+        154.72
+       ],
+       "turned": [
+        -34.59,
+        152.27
+       ],
+       "discharge_m3s": 1004.7,
+       "basin_km2": 76611
+      },
+      {
+       "today": [
+        -34.41,
+        -142.41
+       ],
+       "turned": [
+        -27.03,
+        -150.49
+       ],
+       "discharge_m3s": 764.6,
+       "basin_km2": 57257
+      },
+      {
+       "today": [
+        -35.91,
+        158.97
+       ],
+       "turned": [
+        -29.11,
+        155.58
+       ],
+       "discharge_m3s": 575.4,
+       "basin_km2": 48378
+      },
+      {
+       "today": [
+        -29.84,
+        -146.28
+       ],
+       "turned": [
+        -22.28,
+        -153.8
+       ],
+       "discharge_m3s": 531.3,
+       "basin_km2": 25811
+      }
+     ]
+    }
+   },
+   "hollows_filling": [
+    {
+     "centroid_today": [
+      3.47,
+      170.96
+     ],
+     "inflow_at_the_common_level_m3s": 32897.6,
+     "spill_level_above_common_m": 3545.2,
+     "lowest_m": 3545.2,
+     "highest_m": 3545.2,
+     "area_at_the_common_level_km2": 208,
+     "area_flooded_at_the_spill_level_km2": 986,
+     "volume_above_the_common_level_km3": 2232
+    },
+    {
+     "centroid_today": [
+      -19.87,
+      -157.82
+     ],
+     "inflow_at_the_common_level_m3s": 13185.6,
+     "spill_level_above_common_m": 2494.3,
+     "lowest_m": 2494.3,
+     "highest_m": 2494.3,
+     "area_at_the_common_level_km2": 277,
+     "area_flooded_at_the_spill_level_km2": 984,
+     "volume_above_the_common_level_km3": 1624
+    },
+    {
+     "centroid_today": [
+      22.03,
+      -178.47
+     ],
+     "inflow_at_the_common_level_m3s": 10551.4,
+     "spill_level_above_common_m": 3545.2,
+     "lowest_m": 3545.2,
+     "highest_m": 3545.2,
+     "area_at_the_common_level_km2": 70,
+     "area_flooded_at_the_spill_level_km2": 436,
+     "volume_above_the_common_level_km3": 924
+    },
+    {
+     "centroid_today": [
+      -35.47,
+      -124.16
+     ],
+     "inflow_at_the_common_level_m3s": 5514.7,
+     "spill_level_above_common_m": 4502.8,
+     "lowest_m": 4502.8,
+     "highest_m": 4502.8,
+     "area_at_the_common_level_km2": 3,
+     "area_flooded_at_the_spill_level_km2": 350,
+     "volume_above_the_common_level_km3": 1021
+    }
+   ],
+   "smaller_seas_filling": {
+    "humboldtianum": {
+     "spill_level_above_common_m": 937.6,
+     "lowest_m": 937.6,
+     "highest_m": 937.6,
+     "area_at_the_common_level_km2": 276995,
+     "area_flooded_at_the_spill_level_km2": 317429,
+     "volume_above_the_common_level_km3": 283784
+    },
+    "smythii_marginis": {
+     "spill_level_above_common_m": 766.6,
+     "lowest_m": 766.6,
+     "highest_m": 766.6,
+     "area_at_the_common_level_km2": 268141,
+     "area_flooded_at_the_spill_level_km2": 311738,
+     "volume_above_the_common_level_km3": 225948
+    },
+    "orientale": {
+     "spill_level_above_common_m": 2341.6,
+     "lowest_m": 2341.6,
+     "highest_m": 2341.6,
+     "area_at_the_common_level_km2": 83983,
+     "area_flooded_at_the_spill_level_km2": 107945,
+     "volume_above_the_common_level_km3": 231144
+    },
+    "moscoviense": {
+     "spill_level_above_common_m": 3545.2,
+     "lowest_m": 3545.2,
+     "highest_m": 3545.2,
+     "area_at_the_common_level_km2": 64841,
+     "area_flooded_at_the_spill_level_km2": 82806,
+     "volume_above_the_common_level_km3": 271950
+    }
+   }
+  }
+ }
+}

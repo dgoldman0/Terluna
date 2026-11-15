@@ -1,0 +1,707 @@
+{
+ "schema": "terluna.research.south-sea-ocean/1",
+ "producer": {
+  "file": "research/studies/south_sea_ocean/run.py",
+  "sha256": "82cfd53979b359c3dc1cdd2cc4328b9e03e03dcdffbed202e20517a80872aafd",
+  "imports": {
+   "research/studies/sea_chemistry/run.py": "5f36557c4d691d74d10b93acbff87197dfdd8f786b4faad50ad2f597a65f60cf",
+   "research/studies/seawater_lakes/run.py": "f5daa1b8895122e9aeec5d7877dbdec899b7174d848f825499ad08083fb3b19a",
+   "climate/gcm/turned.py": "0048cd6ac13ab7e9fc6975437f04c2a83e0be3e2c6d8764aae4d68bff4cb629a",
+   "shared/constants.json": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72"
+  }
+ },
+ "inputs": {
+  "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+  "climate/results/gcm/turned_surface_8d71fd350ca4c6cd.json": "e1957b8f36f1b04ba9b673c6a97b0d4bfb83bc54cf93a837e1ac3e1783bbbe58",
+  "research/studies/south_sea_ocean/results/inflows.json": "5636ea4a59fb4566411a4545a3d19043f78371e8fd12e12a6f892be01d686386",
+  "geography/results/groundwater_uptake.json": "2e0cbd10dc37b906f014c8d678fa970964774814eb72efa1b40a09cd9daf119e",
+  "research/studies/sea_chemistry/results/sea_chemistry.json": "af74b2f19ac0cf4f91946e2a8ee90430679bd5ea31f1d0affb7f2319e2b7589f"
+ },
+ "ignored_inputs": {
+  "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693",
+  "climate/gcm/products/climatology_A28R_301k_design_l15_snow_s938_turned_refit_precession.npz": "5a0b510a899e22589a7b81263df11637bf0cd217437de95338a8d4e42a14edca"
+ },
+ "climatology": {
+  "run": "A28R_301k_design_l15_snow_s938_turned_refit_precession",
+  "years": [
+   10,
+   19
+  ]
+ },
+ "evidence": "Calculations on project products; no model was run here. The sea is the atlas's body at the 28% water share. Rain, evaporation and surface temperature are ten-year means of ExoPlaSim at T21 with a prescribed 50 m slab of fresh water, read at the model's water cells under the sea; the model's rain carries the range the climate lane states against the cloud-resolving boxes, applied to the rain on the sea alone. The rivers are inflows.py's three routings of the same years. The floor's uptake is geography's stage 1, computed for fresh water. Densities are UNESCO's EOS-80 at one atmosphere. Salt lowers the vapour pressure of water by about 2%, which this reading leaves out. Nothing here is validated against a lunar observation.",
+ "reading_rule": "Masses in kg, volumes in km3, rates per Julian year. Ranges are (low, high). A positive net evaporation is water the sea loses to the air beyond its rain; the fresh inflow that holds its level equals it. In rivers, surplus is inflow less net evaporation and balanced_area is the sea area whose net evaporation the inflow would meet at the same loss per area. In filling, years_to_fill is the water between the common level and a basin's spill level over the river water it takes (a hollow) or over its surplus under the six_seas rule (a smaller sea; null where it has none), without the evaporation of the growing lake. Salinities are reference salinities in g per kg of sea water. Latitudes of rows are the model's, on the turned Moon.",
+ "sea": {
+  "atlas_label": 1417,
+  "area_km2": 2322833.0,
+  "share_of_the_moon": 0.06124,
+  "volume_km3": 4836569.0,
+  "mean_depth_m": 2082.0,
+  "greatest_depth_m": 6693.0,
+  "latitudes_today": [
+   -87.375,
+   -21.875
+  ],
+  "latitudes_turned": [
+   -82.18265006825293,
+   -13.823854237653276
+  ]
+ },
+ "salt": {
+  "ion_g_per_kg": {
+   "na": 10.783689399999998,
+   "k": 0.39919058,
+   "mg": 1.2837901,
+   "ca": 0.41200184,
+   "cl": 19.352374580000003,
+   "so4": 2.7127344,
+   "alkalinity": 0.1403391,
+   "minor": 0.08088000000000051
+  },
+  "temperature_c": 29.5,
+  "strengths": {
+   "ocean": {
+    "salinity_g_kg": 35.165,
+    "density_kg_m3": 1021.8984012388196,
+    "sea_mass_kg": 4.942482128581237e+18,
+    "salt_kg": 1.7380238405155917e+17,
+    "ions_kg": {
+     "na": 5.329819213967091e+16,
+     "k": 1972992307547978.5,
+     "mg": 6345109626099520.0,
+     "ca": 2036311731142586.2,
+     "cl": 9.564876550725982e+16,
+     "so4": 1.3407641291587544e+16,
+     "alkalinity": 693623493691175.0,
+     "minor": 399747954559652.94
+    }
+   },
+   "half": {
+    "salinity_g_kg": 17.5825,
+    "density_kg_m3": 1008.827484579383,
+    "sea_mass_kg": 4.879263738264622e+18,
+    "salt_kg": 8.578965467803771e+16,
+    "ions_kg": {
+     "na": 2.6308232327064284e+16,
+     "k": 973878060825411.4,
+     "mg": 3131975241236557.0,
+     "ca": 1005132819005151.4,
+     "cl": 4.721266976875403e+16,
+     "so4": 6618073294731518.0,
+     "alkalinity": 342375740845346.3,
+     "minor": 197317425575422.56
+    }
+   },
+   "fifth": {
+    "salinity_g_kg": 7.033,
+    "density_kg_m3": 1001.0206928770174,
+    "sea_mass_kg": 4.841505651527503e+18,
+    "salt_kg": 3.405030924719293e+16,
+    "ions_kg": {
+     "na": 1.0441858634883444e+16,
+     "k": 386536689821308.44,
+     "mg": 1243095404905011.8,
+     "ca": 398941847359946.06,
+     "cl": 1.8738926179909444e+16,
+     "so4": 2626743785738614.5,
+     "alkalinity": 135890509156056.69,
+     "minor": 78316195419109.39
+    }
+   }
+  },
+  "salt_kg_per_km3": 35935057279.56309,
+  "share_of_the_six_seas_volume": 0.5321263759283611
+ },
+ "water": {
+  "near_side": {
+   "share_of_area_in_model_water_cells": 0.943226666974126,
+   "model_cells": 331,
+   "model_water_cells": 245,
+   "rain_mm_day": 1.270005226857899,
+   "evaporation_mm_day": 3.1634237487555987,
+   "surface_c": 30.901776329262077,
+   "net_evaporation_m_yr": 0.6915711151231348,
+   "net_evaporation_km3_yr": 3657.335114346252,
+   "net_evaporation_m_yr_over_the_rain_range": [
+    0.22770170601328726,
+    0.8075384674005968
+   ],
+   "net_evaporation_km3_yr_over_the_rain_range": [
+    1204.187720955733,
+    4270.621962693881
+   ]
+  },
+  "south_pole_aitken": {
+   "share_of_area_in_model_water_cells": 0.9649221052354572,
+   "model_cells": 199,
+   "model_water_cells": 160,
+   "rain_mm_day": 0.5145613105963068,
+   "evaporation_mm_day": 2.4461299861161407,
+   "surface_c": 30.20060927625792,
+   "net_evaporation_m_yr": 0.7055054587336194,
+   "net_evaporation_km3_yr": 1638.7713612265893,
+   "net_evaporation_m_yr_over_the_rain_range": [
+    0.5175619400383183,
+    0.7524913384074448
+   ],
+   "net_evaporation_km3_yr_over_the_rain_range": [
+    1202.209953865027,
+    1747.9117130669802
+   ],
+   "rows": [
+    {
+     "latitude_turned": -13.84,
+     "area_km2": 1047,
+     "rain_mm_day": 1.189,
+     "evaporation_mm_day": 2.653,
+     "surface_c": 30.27
+    },
+    {
+     "latitude_turned": -19.38,
+     "area_km2": 107798,
+     "rain_mm_day": 1.228,
+     "evaporation_mm_day": 2.863,
+     "surface_c": 30.67
+    },
+    {
+     "latitude_turned": -24.92,
+     "area_km2": 223353,
+     "rain_mm_day": 1.04,
+     "evaporation_mm_day": 2.896,
+     "surface_c": 30.94
+    },
+    {
+     "latitude_turned": -30.46,
+     "area_km2": 224151,
+     "rain_mm_day": 1.258,
+     "evaporation_mm_day": 2.945,
+     "surface_c": 31.38
+    },
+    {
+     "latitude_turned": -36.0,
+     "area_km2": 232768,
+     "rain_mm_day": 0.796,
+     "evaporation_mm_day": 2.911,
+     "surface_c": 31.35
+    },
+    {
+     "latitude_turned": -41.53,
+     "area_km2": 277210,
+     "rain_mm_day": 0.51,
+     "evaporation_mm_day": 2.814,
+     "surface_c": 30.82
+    },
+    {
+     "latitude_turned": -47.07,
+     "area_km2": 263730,
+     "rain_mm_day": 0.318,
+     "evaporation_mm_day": 2.675,
+     "surface_c": 30.48
+    },
+    {
+     "latitude_turned": -52.61,
+     "area_km2": 265182,
+     "rain_mm_day": 0.173,
+     "evaporation_mm_day": 2.418,
+     "surface_c": 29.96
+    },
+    {
+     "latitude_turned": -58.14,
+     "area_km2": 212006,
+     "rain_mm_day": 0.098,
+     "evaporation_mm_day": 2.031,
+     "surface_c": 29.57
+    },
+    {
+     "latitude_turned": -63.68,
+     "area_km2": 161840,
+     "rain_mm_day": 0.07,
+     "evaporation_mm_day": 1.663,
+     "surface_c": 29.09
+    },
+    {
+     "latitude_turned": -69.21,
+     "area_km2": 152437,
+     "rain_mm_day": 0.059,
+     "evaporation_mm_day": 1.441,
+     "surface_c": 28.2
+    },
+    {
+     "latitude_turned": -74.74,
+     "area_km2": 99707,
+     "rain_mm_day": 0.06,
+     "evaporation_mm_day": 1.212,
+     "surface_c": 27.68
+    },
+    {
+     "latitude_turned": -80.27,
+     "area_km2": 20124,
+     "rain_mm_day": 0.082,
+     "evaporation_mm_day": 0.966,
+     "surface_c": 27.1
+    }
+   ]
+  },
+  "smythii_marginis": {
+   "share_of_area_in_model_water_cells": 0.9261528308824082,
+   "model_cells": 25,
+   "model_water_cells": 17,
+   "rain_mm_day": 2.355683031425051,
+   "evaporation_mm_day": 3.3885505412836574,
+   "surface_c": 31.791772678736834,
+   "net_evaporation_m_yr": 0.377254857975856,
+   "net_evaporation_km3_yr": 107.69871685494738,
+   "net_evaporation_m_yr_over_the_rain_range": [
+    -0.4831583692521439,
+    0.592358164782856
+   ],
+   "net_evaporation_km3_yr_over_the_rain_range": [
+    -137.93205125410202,
+    169.1064088822097
+   ]
+  },
+  "humboldtianum": {
+   "share_of_area_in_model_water_cells": 0.8855824690612083,
+   "model_cells": 33,
+   "model_water_cells": 20,
+   "rain_mm_day": 0.20247844606827606,
+   "evaporation_mm_day": 2.21216757315421,
+   "surface_c": 30.110182572379586,
+   "net_evaporation_m_yr": 0.7340389536681373,
+   "net_evaporation_km3_yr": 208.71737012495183,
+   "net_evaporation_m_yr_over_the_rain_range": [
+    0.6600837012416996,
+    0.7525277667747468
+   ],
+   "net_evaporation_km3_yr_over_the_rain_range": [
+    187.68885969476608,
+    213.9744977324983
+   ]
+  },
+  "orientale": {
+   "share_of_area_in_model_water_cells": 0.9024288965053262,
+   "model_cells": 9,
+   "model_water_cells": 4,
+   "rain_mm_day": 1.3988264963842052,
+   "evaporation_mm_day": 2.3582556932734406,
+   "surface_c": 29.989388785587437,
+   "net_evaporation_m_yr": 0.35043151416379326,
+   "net_evaporation_km3_yr": 30.857597411206978,
+   "net_evaporation_m_yr_over_the_rain_range": [
+    -0.16048986364053772,
+    0.47816185861487603
+   ],
+   "net_evaporation_km3_yr_over_the_rain_range": [
+    -14.13209543273119,
+    42.105020622191525
+   ]
+  },
+  "moscoviense": {
+   "share_of_area_in_model_water_cells": 0.9044710900157237,
+   "model_cells": 9,
+   "model_water_cells": 4,
+   "rain_mm_day": 1.2188905107646322,
+   "evaporation_mm_day": 2.1651515621578574,
+   "surface_c": 29.461541894978495,
+   "net_evaporation_m_yr": 0.34562184902137555,
+   "net_evaporation_km3_yr": 22.96622624562138,
+   "net_evaporation_m_yr_over_the_rain_range": [
+    -0.09957791003540638,
+    0.45692178878557105
+   ],
+   "net_evaporation_km3_yr_over_the_rain_range": [
+    -6.616852543942719,
+    30.36199594301241
+   ]
+  }
+ },
+ "rivers": {
+  "every_water": {
+   "near_side": {
+    "inflow_km3_yr": 211.5,
+    "share_of_need": 0.057828991160905854,
+    "surplus_km3_yr": -3445.835114346252,
+    "surplus_m3s": -109191.92569606852,
+    "level_change_m_yr": -0.6515782552195413,
+    "balanced_area_km2": 305825.3813309456,
+    "balanced_area_share_of_sea": 0.057828991160905854
+   },
+   "south_pole_aitken": {
+    "inflow_km3_yr": 25.9,
+    "share_of_need": 0.015804523201219688,
+    "surplus_km3_yr": -1612.8713612265892,
+    "surplus_m3s": -51108.80932728056,
+    "level_change_m_yr": -0.6943552813424767,
+    "balanced_area_km2": 36711.26804105873,
+    "balanced_area_share_of_sea": 0.015804523201219688,
+    "share_of_need_over_the_rain_range": [
+     0.014817682041019372,
+     0.021543657924918337
+    ]
+   },
+   "humboldtianum": {
+    "inflow_km3_yr": 0.0,
+    "share_of_need": 0.0,
+    "surplus_km3_yr": -208.71737012495183,
+    "surplus_m3s": -6613.854352832655,
+    "level_change_m_yr": -0.7340389536681373,
+    "balanced_area_km2": 0.0,
+    "balanced_area_share_of_sea": 0.0
+   },
+   "smythii_marginis": {
+    "inflow_km3_yr": 18.7,
+    "share_of_need": 0.1736325236370815,
+    "surplus_km3_yr": -88.99871685494738,
+    "surplus_m3s": -2820.199155035471,
+    "level_change_m_yr": -0.31175114493115935,
+    "balanced_area_km2": 49568.61284791403,
+    "balanced_area_share_of_sea": 0.1736325236370815
+   },
+   "orientale": {
+    "inflow_km3_yr": 455.7,
+    "share_of_need": 14.76783801173377,
+    "surplus_km3_yr": 424.842402588793,
+    "surplus_m3s": 13462.443360356712,
+    "level_change_m_yr": 4.824684321213693,
+    "balanced_area_km2": 1300396.7439612288,
+    "balanced_area_share_of_sea": 14.767838011733769
+   },
+   "moscoviense": {
+    "inflow_km3_yr": 25.6,
+    "share_of_need": 1.114680301683467,
+    "surplus_km3_yr": 2.6337737543786197,
+    "surplus_m3s": 83.45925401103442,
+    "level_change_m_yr": 0.039636017914169056,
+    "balanced_area_km2": 74069.3913665647,
+    "balanced_area_share_of_sea": 1.114680301683467
+   }
+  },
+  "six_seas": {
+   "near_side": {
+    "inflow_km3_yr": 1891.7,
+    "share_of_need": 0.5172345275606884,
+    "surplus_km3_yr": -1765.6351143462518,
+    "surplus_m3s": -55949.60055093708,
+    "level_change_m_yr": -0.3338666561178017,
+    "balanced_area_km2": 2735365.8338711574,
+    "balanced_area_share_of_sea": 0.5172345275606884
+   },
+   "south_pole_aitken": {
+    "inflow_km3_yr": 998.2,
+    "share_of_need": 0.609114867160521,
+    "surplus_km3_yr": -640.5713612265893,
+    "surplus_m3s": -20298.48154570022,
+    "level_change_m_yr": -0.2757715949560684,
+    "balanced_area_km2": 1414872.1142310745,
+    "balanced_area_share_of_sea": 0.609114867160521,
+    "share_of_need_over_the_rain_range": [
+     0.5710814754187467,
+     0.8303042216468528
+    ]
+   },
+   "humboldtianum": {
+    "inflow_km3_yr": 7.9,
+    "share_of_need": 0.037850227775822136,
+    "surplus_km3_yr": -200.81737012495182,
+    "surplus_m3s": -6363.518459101827,
+    "level_change_m_yr": -0.7062554120754722,
+    "balanced_area_km2": 10762.37161600504,
+    "balanced_area_share_of_sea": 0.03785022777582213
+   },
+   "smythii_marginis": {
+    "inflow_km3_yr": 1071.3,
+    "share_of_need": 9.947193720449487,
+    "surplus_km3_yr": 963.6012831450525,
+    "surplus_m3s": 30534.6820780114,
+    "level_change_m_yr": 3.375372296290642,
+    "balanced_area_km2": 2839724.86331392,
+    "balanced_area_share_of_sea": 9.947193720449489
+   },
+   "orientale": {
+    "inflow_km3_yr": 520.3,
+    "share_of_need": 16.861325691255388,
+    "surplus_km3_yr": 489.44240258879296,
+    "surplus_m3s": 15509.493833142982,
+    "level_change_m_yr": 5.5583083786317,
+    "balanced_area_km2": 1484740.8950691845,
+    "balanced_area_share_of_sea": 16.861325691255388
+   },
+   "moscoviense": {
+    "inflow_km3_yr": 1899.9,
+    "share_of_need": 82.72582442064137,
+    "surplus_km3_yr": 1876.9337737543788,
+    "surplus_m3s": 59476.4422438455,
+    "level_change_m_yr": 28.246230549058357,
+    "balanced_area_km2": 5497048.306927198,
+    "balanced_area_share_of_sea": 82.72582442064136
+   }
+  },
+  "two_seas": {
+   "near_side": {
+    "inflow_km3_yr": 3492.0,
+    "share_of_need": 0.9547935561885732,
+    "surplus_km3_yr": -165.33511434625188,
+    "surplus_m3s": -5239.153622146548,
+    "level_change_m_yr": -0.03126347075741974,
+    "balanced_area_km2": 5049372.253464123,
+    "balanced_area_share_of_sea": 0.9547935561885733
+   },
+   "south_pole_aitken": {
+    "inflow_km3_yr": 2884.2,
+    "share_of_need": 1.7599770585698,
+    "surplus_km3_yr": 1245.4286387734105,
+    "surplus_m3s": 39465.25207155837,
+    "level_change_m_yr": 0.5361679633333134,
+    "balanced_area_km2": 4088132.790888864,
+    "balanced_area_share_of_sea": 1.7599770585698,
+    "share_of_need_over_the_rain_range": [
+     1.6500833414173002,
+     2.3990817832837634
+    ]
+   }
+  }
+ },
+ "filling": {
+  "hollows": [
+   {
+    "centroid_today": [
+     3.47,
+     170.96
+    ],
+    "inflow_km3_yr": 1038.1693017599998,
+    "spill_level_above_common_m": 3321.4,
+    "volume_above_the_common_level_km3": 2014,
+    "years_to_fill": 1.9399533357282694
+   },
+   {
+    "centroid_today": [
+     -19.87,
+     -157.82
+    ],
+    "inflow_km3_yr": 416.10589056,
+    "spill_level_above_common_m": 2494.3,
+    "volume_above_the_common_level_km3": 1624,
+    "years_to_fill": 3.9028527037057863
+   },
+   {
+    "centroid_today": [
+     22.03,
+     -178.47
+    ],
+    "inflow_km3_yr": 332.97686064,
+    "spill_level_above_common_m": 3321.4,
+    "volume_above_the_common_level_km3": 826,
+    "years_to_fill": 2.480652855013355
+   },
+   {
+    "centroid_today": [
+     -35.47,
+     -124.16
+    ],
+    "inflow_km3_yr": 174.03069671999998,
+    "spill_level_above_common_m": 4502.8,
+    "volume_above_the_common_level_km3": 1021,
+    "years_to_fill": 5.866781086572899
+   }
+  ],
+  "smaller_seas": {
+   "humboldtianum": {
+    "spill_level_above_common_m": 937.6,
+    "volume_above_the_common_level_km3": 283784,
+    "surplus_km3_yr": -200.81737012495182,
+    "years_to_fill": null
+   },
+   "smythii_marginis": {
+    "spill_level_above_common_m": 766.6,
+    "volume_above_the_common_level_km3": 225948,
+    "surplus_km3_yr": 963.6012831450525,
+    "years_to_fill": 234.48287580371317
+   },
+   "orientale": {
+    "spill_level_above_common_m": 2341.6,
+    "volume_above_the_common_level_km3": 231144,
+    "surplus_km3_yr": 489.44240258879296,
+    "years_to_fill": 472.25985892807205
+   },
+   "moscoviense": {
+    "spill_level_above_common_m": 3545.2,
+    "volume_above_the_common_level_km3": 271950,
+    "surplus_km3_yr": 1876.9337737543788,
+    "years_to_fill": 144.89056769223453
+   }
+  }
+ },
+ "held": {
+  "fresh_inflow_km3_yr": 1638.7713612265893,
+  "fresh_inflow_m3s": 51929.530801663925,
+  "fresh_inflow_km3_yr_over_the_rain_range": [
+   1202.209953865027,
+   1747.9117130669802
+  ],
+  "fresh_inflow_m3s_over_the_rain_range": [
+   38095.73458897467,
+   55387.979854836245
+  ],
+  "years_to_evaporate_its_volume": 2951.3384932355175,
+  "inflow_salinity_g_kg": 0.142231,
+  "inflow_load_kg_yr": 232130163444.33664,
+  "inflow_load_share_of_salt_a_year": 1.3355982699033305e-06
+ },
+ "floor": {
+  "sea_area_by_band_km2": {
+   "0-15": 0.0,
+   "15-30": 139312.67206968268,
+   "30-45": 627175.216092961,
+   "45-60": 768032.6764622187,
+   "60-75": 562870.5202039557,
+   "75-90": 225443.5057905194
+  },
+  "by_case": {
+   "slow": {
+    "100": {
+     "water_km3": 6858.744732411988,
+     "share_of_the_sea": 0.0014181012888293308,
+     "salt_kg": 246469384825126.38,
+     "water_km3_yr_since_last": 68.58744732411988,
+     "salt_kg_yr_since_last": 2464693848251.264
+    },
+    "1000": {
+     "water_km3": 24158.21490855224,
+     "share_of_the_sea": 0.004994907528157303,
+     "salt_kg": 868126836510819.8,
+     "water_km3_yr_since_last": 19.221633529044727,
+     "salt_kg_yr_since_last": 690730501872.9928
+    },
+    "10000": {
+     "water_km3": 194563.23744731443,
+     "share_of_the_sea": 0.04022753266774741,
+     "salt_kg": 6991641082166479.0,
+     "water_km3_yr_since_last": 18.9338913931958,
+     "salt_kg_yr_since_last": 680390471739.5177
+    },
+    "100000": {
+     "water_km3": 1119713.8358671356,
+     "share_of_the_sea": 0.23150994762343627,
+     "salt_kg": 4.023698082860482e+16,
+     "water_km3_yr_since_last": 10.279451093553568,
+     "salt_kg_yr_since_last": 369392663849.31494
+    },
+    "1e+06": {
+     "water_km3": 2394677.6910617542,
+     "share_of_the_sea": 0.49511910014346,
+     "salt_kg": 8.605287999439602e+16,
+     "water_km3_yr_since_last": 1.4166265057717986,
+     "salt_kg_yr_since_last": 50906554628.65689
+    }
+   },
+   "central": {
+    "100": {
+     "water_km3": 9452.523306200479,
+     "share_of_the_sea": 0.0019543861167287137,
+     "salt_kg": 339676966444719.3,
+     "water_km3_yr_since_last": 94.52523306200479,
+     "salt_kg_yr_since_last": 3396769664447.1924
+    },
+    "1000": {
+     "water_km3": 64399.15412348173,
+     "share_of_the_sea": 0.013315049185379497,
+     "salt_kg": 2314187292182727.0,
+     "water_km3_yr_since_last": 61.051812019201385,
+     "salt_kg_yr_since_last": 2193900361931.12
+    },
+    "10000": {
+     "water_km3": 1025924.2075061436,
+     "share_of_the_sea": 0.21211817871432076,
+     "salt_kg": 3.686664516122364e+16,
+     "water_km3_yr_since_last": 106.83611704251798,
+     "salt_kg_yr_since_last": 3839161985448.9907
+    },
+    "100000": {
+     "water_km3": 2529438.148429073,
+     "share_of_the_sea": 0.5229819213638993,
+     "salt_kg": 9.089550474891074e+16,
+     "water_km3_yr_since_last": 16.705710454699215,
+     "salt_kg_yr_since_last": 600320662085.4122
+    },
+    "1e+06": {
+     "water_km3": 3631357.000552929,
+     "share_of_the_sea": 0.7508126112855888,
+     "salt_kg": 1.3049302181741194e+17,
+     "water_km3_yr_since_last": 1.224354280137618,
+     "salt_kg_yr_since_last": 43997241187.22353
+    }
+   },
+   "fast": {
+    "100": {
+     "water_km3": 13425.683487655615,
+     "share_of_the_sea": 0.0027758693172072217,
+     "salt_kg": 482452705146188.9,
+     "water_km3_yr_since_last": 134.25683487655616,
+     "salt_kg_yr_since_last": 4824527051461.889
+    },
+    "1000": {
+     "water_km3": 503273.61589549604,
+     "share_of_the_sea": 0.10405591564919182,
+     "salt_kg": 1.8085166214497484e+16,
+     "water_km3_yr_since_last": 544.2754804531561,
+     "salt_kg_yr_since_last": 19558570565945.883
+    },
+    "10000": {
+     "water_km3": 2480273.6703227656,
+     "share_of_the_sea": 0.5128167654225062,
+     "salt_kg": 8.912877641204077e+16,
+     "water_km3_yr_since_last": 219.66667271414107,
+     "salt_kg_yr_since_last": 7893734466393.698
+    },
+    "100000": {
+     "water_km3": 3472081.163711927,
+     "share_of_the_sea": 0.7178810358566015,
+     "salt_kg": 1.2476943549728018e+17,
+     "water_km3_yr_since_last": 11.02008325987957,
+     "salt_kg_yr_since_last": 396007323169.3267
+    },
+    "1e+06": {
+     "water_km3": 3631357.000552929,
+     "share_of_the_sea": 0.7508126112855888,
+     "salt_kg": 1.3049302181741194e+17,
+     "water_km3_yr_since_last": 0.17697315204555789,
+     "salt_kg_yr_since_last": 6359540355.70195
+    }
+   }
+  }
+ },
+ "mixing": {
+  "density_slopes": {
+   "kg_m3_per_k_of_cooling": 0.3377642032270387,
+   "kg_m3_per_g_kg": 0.746762419063657,
+   "k_of_cooling_per_g_kg": 2.2108986444655816
+  },
+  "salting_of_a_closed_surface_layer": {
+   "50_m": {
+    "g_kg_a_year": 0.4961819891273545,
+    "kg_m3_a_year": 0.3705300624965604,
+    "equal_to_cooling_k_a_year": 1.097008087169904
+   },
+   "100_m": {
+    "g_kg_a_year": 0.24809099456367725,
+    "kg_m3_a_year": 0.1852650312482802,
+    "equal_to_cooling_k_a_year": 0.548504043584952
+   },
+   "200_m": {
+    "g_kg_a_year": 0.12404549728183863,
+    "kg_m3_a_year": 0.0926325156241401,
+    "equal_to_cooling_k_a_year": 0.274252021792476
+   }
+  },
+  "warmest_row": {
+   "latitude_turned": -30.46,
+   "surface_c": 31.38
+  },
+  "coldest_row": {
+   "latitude_turned": -80.27,
+   "surface_c": 27.1
+  },
+  "cold_end_denser_kg_m3": 1.4456307898117249,
+  "salt_that_would_offset_it_g_kg": 1.935864410027968,
+  "fresh_water_lighter_than_the_sea_kg_m3": 25.991027365365653
+ }
+}
