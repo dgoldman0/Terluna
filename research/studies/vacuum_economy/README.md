@@ -2,7 +2,7 @@
 
 This study follows the economy of the settlements beyond Earth through the vacuum period: from the opening of production in year 8 of the programme (2049) to the planned population of 6.47 million residents in year 200, and for twenty years past it. Its unit of account is U, the general economic unit of the whole planned system beyond Earth before the Open Moon, the array and the outer Solar System's buildout. For each case it draws up what customers order in each year, sizes the industry that fills those orders, finances that industry, and reports what the funders, the residents and the sources each give and receive.
 
-The study couples parts that live in their own lanes and reads each where it is kept. The cohort model of industry is [provisioning/enclosed_industry/model.py](../../../provisioning/enclosed_industry/model.py), with the recovery and refurbishment measures of [reclamation.py](../../../provisioning/enclosed_industry/reclamation.py) beside it. The financing model is [enclosed_returns/finance.py](../enclosed_returns/finance.py). The run in this folder joins them for one case at a time.
+The study couples parts that live in their own lanes and reads each where it is kept. The cohort model of industry is [provisioning/vacuum_industry](../../../provisioning/vacuum_industry/README.md), with its measures of material recovery and equipment refurbishment. The financing model is [enclosed_returns/finance.py](../enclosed_returns/finance.py). The run in this folder joins them for one case at a time.
 
 ## The programme definition
 

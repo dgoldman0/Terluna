@@ -5665,12 +5665,11 @@
   }
  ],
  "dependencies": {
-  "provisioning/enclosed_industry/bootstrap.py": "f3a5bc9ad762c232f215a84110f5769a770b74759eacd4e2875964df557a17a1",
-  "provisioning/enclosed_industry/inputs/engineering.json": "e15aec1a0da1b41f23326d1ce15a587addc994e69b4cdca53c1516990365eed2",
-  "provisioning/enclosed_industry/model.py": "a338d56ea03c864ae0ccf65594a3b6b514a9e9e0fab4f09e7437b9cb34677805",
-  "provisioning/enclosed_industry/reclamation.py": "0c798c0b7aa0763451c495dad4326a6b637e38a3744cdb4b35dafa3ea7a2a68c",
-  "provisioning/enclosed_industry/reclamation_inputs.json": "e73dd16d97aa5e4d56dade53f30c5980451ad37233a150ff17712bc0ee90ffc8",
-  "provisioning/enclosed_industry/run.py": "c0b3fdd6f65f7be3fe7630dfcc0ce15563a310fb46b9d08ccad4e392ab320248",
+  "provisioning/vacuum_industry/engineering.json": "e15aec1a0da1b41f23326d1ce15a587addc994e69b4cdca53c1516990365eed2",
+  "provisioning/vacuum_industry/industry.py": "f72da59c1d0aad874e4aea8bbe8546ecd6a731476518cdc2b399ee20933b4c1a",
+  "provisioning/vacuum_industry/model.py": "a960383af32f1cd3326875d5ebc28aab7c3ea5b75689edb988558a43f29d35c7",
+  "provisioning/vacuum_industry/recovery.json": "7cb1d7c240155bba64a9b55eca60d01caae8e81ce697f7e078baef3aa0bc4ed0",
+  "provisioning/vacuum_industry/recovery.py": "48b6b5b72326567fc27bfd8e16a6fe49ef866836b39d4f762ff186ff2113bcaf",
   "research/studies/complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef",
   "research/studies/complex_returns/credit.py": "d2a2ae1efc0c41d9ef78fe1ee524f9dc451ade280d7372c3363e645060830ea8",
   "research/studies/complex_returns/credit_inputs.json": "cc64e28175fe66424e223b369350008b4cd546a280b1cdf02f9ebec2031a1329",
@@ -5695,7 +5694,7 @@
  "evidence": "Conditional accounts. The industry is a numerically closed sizing of equipment, freight and power for the stated orders; the orders are scenarios of demand, and the financing follows stated rules. Sources, plant, markets and prices await qualification.",
  "producer": {
   "path": "research/studies/vacuum_economy/run.py",
-  "sha256": "74ccd836329c3128c914b421c325b1a3e01b683172b1776abd5324206ecbaeea"
+  "sha256": "874bcb7c647cf0605f62f5c86031c3bf23917623fa50af53a6c4fda68949b535"
  },
  "reading_rule": "Each case stands alone: one scenario of demand on one population ramp with one set of recovery measures. A checkpoint gives one financing arrangement at one horizon. The periods use the financing in U credit and are undiscounted; costs paid to Earth are imported machinery and its replacement, launch and imported materials, and outside services; the period of the founding deployment gives none, because that deployment is one amount. Material drawn is cumulative from year zero.",
  "schema": "terluna.research.vacuum-economy/1",

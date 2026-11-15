@@ -4,7 +4,7 @@ usage: python3 -m research.studies.vacuum_economy.run [--case NAME ...] [--outpu
 
 A case names a scenario of demand, a population ramp and the recovery measures the industry applies. For each case
 the run draws up the customers' orders year by year, sizes the industry that fills them with the cohort model of
-provisioning/enclosed_industry, finances that industry with the financing model of the returns study, and writes one
+provisioning/vacuum_industry, finances that industry with the financing model of the returns study, and writes one
 compact record: the funding, the receipts and the returns at each horizon, the receipts and costs of each period with
 the share of the costs paid to Earth, and the material drawn from the Moon and the near-Earth sources.
 
@@ -21,22 +21,22 @@ import math
 from pathlib import Path
 import time
 
-from provisioning.enclosed_industry import reclamation
+from provisioning.vacuum_industry import industry
 from research.studies.enclosed_returns import finance, markets, revised
 from . import programme as definition
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 SCHEMA = 'terluna.research.vacuum-economy/1'
-INDUSTRY = ROOT / 'provisioning/enclosed_industry'
+INDUSTRY = ROOT / 'provisioning/vacuum_industry'
 RETURNS = ROOT / 'research/studies/enclosed_returns'
 FINANCING = ('equity', 'funded_credit', 'U_credit')
 EARTH = ('capital_external_USD2041', 'operating_external_replacement_USD2041',
          'operating_external_logistics_materials_USD2041', 'operating_external_services_USD2041')
 # The files a first-pass case is computed from, beside those the order book and the financing name themselves.
 READ = (HERE / 'programme.json', HERE / 'programme.py', HERE / 'cases.json',
-        INDUSTRY / 'model.py', INDUSTRY / 'reclamation.py', INDUSTRY / 'bootstrap.py', INDUSTRY / 'run.py',
-        INDUSTRY / 'inputs/engineering.json', INDUSTRY / 'reclamation_inputs.json',
+        INDUSTRY / 'model.py', INDUSTRY / 'recovery.py', INDUSTRY / 'industry.py',
+        INDUSTRY / 'engineering.json', INDUSTRY / 'recovery.json',
         RETURNS / 'markets.py', RETURNS / 'enclosed_inputs.json', RETURNS / 'finance.py', RETURNS / 'finance_inputs.json',
         RETURNS / 'revised.py', RETURNS / 'revised_inputs.json', RETURNS / 'bottlenecks.py')
 
@@ -67,8 +67,8 @@ def sources():
     if periods[0][0] != 0 or periods[-1][1] != calendar['last_year']:
         raise ValueError('The reporting periods do not span the programme')
     return dict(programme=programme, demand=demand, money=money, periods=periods,
-                engineering=json.loads((INDUSTRY / 'inputs/engineering.json').read_text()),
-                recovery=json.loads((INDUSTRY / 'reclamation_inputs.json').read_text()))
+                engineering=json.loads((INDUSTRY / 'engineering.json').read_text()),
+                recovery=json.loads((INDUSTRY / 'recovery.json').read_text()))
 
 
 def dependencies():
@@ -133,7 +133,7 @@ def solve(case):
     s = sources()
     money = dict(s['money'], horizons=s['programme']['horizons'])
     book = orders(case)
-    physical, loops = reclamation.solve_case(s['recovery'], s['engineering'], book, case['recovery'])
+    physical, loops = industry.build(s['engineering'], s['recovery'], book, case['recovery'])
     record = dict(case, convergence=physical['convergence'], first_capacity_shortfall=physical['first_capacity_shortfall'])
     if not revised.valid(physical):
         return dict(record, status='physical_requirements_unresolved')

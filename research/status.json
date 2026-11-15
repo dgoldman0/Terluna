@@ -2147,7 +2147,11 @@
         "studies/vacuum_economy/programme.py",
         "studies/vacuum_economy/cases.json",
         "studies/vacuum_economy/run.py",
-        "studies/vacuum_economy/results/economy.json"
+        "studies/vacuum_economy/results/economy.json",
+        "../provisioning/vacuum_industry/README.md",
+        "../provisioning/vacuum_industry/model.py",
+        "../provisioning/vacuum_industry/recovery.py",
+        "../provisioning/vacuum_industry/industry.py"
       ],
       "findings": [
         "One run draws up a case's orders, sizes its industry with provisioning's cohort model and finances it with the returns study's financing model; the nine headline cases of the staged appraisal are reproduced exactly, and all 81 staged order books were checked the same way on 15 November 2026.",

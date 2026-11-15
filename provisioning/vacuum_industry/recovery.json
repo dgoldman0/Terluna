@@ -1,0 +1,88 @@
+{
+  "schema": "terluna.provisioning.vacuum-industry-recovery/1",
+  "normalization_population": 250000,
+  "water": {
+    "domestic": {
+      "gross_kg_year": 9131250000.0,
+      "recovery": 0.98,
+      "improved_recovery": 0.995
+    },
+    "industrial": {
+      "gross_kg_year": 1826250000.0,
+      "recovery": 0.98,
+      "improved_recovery": 0.995
+    },
+    "crop": {
+      "gross_kg_year": 29310555994.2,
+      "recovery": 0.995,
+      "improved_recovery": 0.997
+    },
+    "fish_purge": {
+      "gross_kg_year": 485782500.0,
+      "recovery": 0.95,
+      "improved_recovery": 0.98
+    }
+  },
+  "landscape_agriculture_allowance_kg_year": 456562500.0,
+  "goods": {
+    "gross_kg_person_year": 500,
+    "baseline_recovery": 0.9,
+    "collection": 0.98,
+    "quality": 0.97,
+    "carbon_share": 0.2
+  },
+  "structural": {
+    "collection": 0.99,
+    "quality": 0.99,
+    "bulk_extra_sort_kWh_kg": 0.02,
+    "metal_extra_sort_kWh_kg": 1.0,
+    "bulk_processing_fraction_of_existing_train": 0.1
+  },
+  "water_equipment": {
+    "extra_kWh_per_kg_gross": 0.02,
+    "train_kg_hr": 1000,
+    "hardware_kg": 1000,
+    "active_life": 10,
+    "structure_life": 30
+  },
+  "refurbishment": {
+    "eligible_assets": [
+      "asteroid_tugs",
+      "lunar_landers",
+      "source_mine_trains",
+      "source_metal_trains",
+      "source_fabrication_cells",
+      "excavators",
+      "haulers",
+      "bulk_trains",
+      "metal_trains",
+      "fabrication_cells"
+    ],
+    "collection": 0.8,
+    "quality": 0.6,
+    "repair_part_mass_fraction": 0.2,
+    "inspection_delay_years": 1,
+    "inspection_kWh_kg": 1.0,
+    "remanufacture_kWh_kg": 10.0,
+    "consumables_fraction_of_processed_mass": 0.005,
+    "inspection_kg_worker_year": 100000.0,
+    "remanufacture_kg_worker_year": 20000.0,
+    "workshop_kg_hr": 500,
+    "workshop_hardware_kg": 50000,
+    "workshop_active_life": 15,
+    "workshop_structural_life": 30
+  },
+  "evidence": "All changes are conditional engineering hypotheses. Baseline loop coefficients are inherited scenarios; NASA evidence supports mechanisms and limitations, not the industrial recovery, cost or service-life coefficients.",
+  "assumptions": [
+    "Water quality recovery applies to four already processed streams. The separate 5 kg/person/day additional makeup stays unchanged because its recoverability is not established.",
+    "Structural recovery changes from inherited net 95% to 99% collection times 99% quality. Existing full bulk/metal conversion energy remains; extra sorting and equipment are charged.",
+    "Household goods use a steady annual return approximation already implicit in the baseline; no recovered goods are added to the capital scrap bank.",
+    "Eligible active hardware is inspected at its inherited destination. Source workshops are co-located with source tugs and plants; lunar-lander workshops are at the depot. No lunar-to-source movement is implied.",
+    "A retired component becomes eligible only one year after retirement, before the existing two-year refurbishment/commissioning work period. Requalified units receive the original expected life; this is an engineering hypothesis.",
+    "Repair kit mass displaces equal old component mass. No value or recovery credit is assigned to rejects, displaced parts, or chemical exhaust.",
+    "Equipment intensities, processing energy, direct staff productivity and quality acceptance are explicit sensitivity assumptions, not demonstrated lunar industrial performance.",
+    "Seed flows are represented by the inherited eight-year average; no new executable deployment sequence is claimed.",
+    "The retained 5 kg/person/day allowance originally covered landscape/agricultural losses before explicit crop/fish balances were added. Potential overlap remains unquantified; the baseline and all primary variants retain the allowance.",
+    "A separate combined_without_residual_allowance endpoint sets only the legacy 5 kg/person/day allowance to zero. This is a 100 percent overlap or complete-capture credit ceiling, not a measured correction; explicit domestic, crop, fish and industrial water losses remain."
+  ]
+}
