@@ -2137,6 +2137,23 @@
         "Completion probabilities and adaptive investment; empirical long-run market priors; full asset cohorts and inventories; domestic service production; fiscal and resource-provision counterparties; legal treatment of outside equity; external-asset yields and the balance of payments."
       ],
       "next_session_task": "Integrate annual GDP/GNI with the financial and wealth accounts while retaining the distinction between gross income, cash, ownership, externally funded losses and the conditions for completing the build."
+    },
+    {
+      "topic": "vacuum_economy",
+      "condition": "conditional_accounts; first_pass_reproduces_staged_appraisal; evidence_scenarios_and_programme_ramps_not_yet_run",
+      "material": [
+        "studies/vacuum_economy/README.md",
+        "studies/vacuum_economy/programme.json",
+        "studies/vacuum_economy/programme.py",
+        "studies/vacuum_economy/cases.json",
+        "studies/vacuum_economy/run.py",
+        "studies/vacuum_economy/results/economy.json"
+      ],
+      "findings": [
+        "One run draws up a case's orders, sizes its industry with provisioning's cohort model and finances it with the returns study's financing model; the nine headline cases of the staged appraisal are reproduced exactly, and all 81 staged order books were checked the same way on 15 November 2026.",
+        "In the first pass the costs paid to Earth rise from 4 percent of all costs in years 8 to 25 to 63 percent in years 151 to 200 in the diversified case, because the working parts of every new machine and their launch are bought at fixed prices throughout.",
+        "The asteroid feed of the first pass, 134 to 213 trillion kg by year 200 across the nine cases, is set by water in every year; in the diversified case 94 percent of that water is propellant for the system's own tugs and ferries and 2 percent is propellant sold."
+      ]
     }
   ]
 }

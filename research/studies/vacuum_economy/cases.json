@@ -1,0 +1,87 @@
+{
+  "schema": "terluna.research.vacuum-economy-cases/1",
+  "reading_rule": "Each case names a scenario of demand, a population ramp from programme.json and the recovery measures of the industry. In the scenario first_pass the portfolio, the market and its growth are those of the staged studies' order book: nine export portfolios at their strongest market, with real demand growing 0.5% a year, and with material recovery and equipment refurbishment applied.",
+  "cases": [
+    {
+      "name": "first_pass:raw_resource_price",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "raw_resource_price",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:commodity_refined",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "commodity_refined",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:specialty",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "specialty",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:premium_lunar",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "premium_lunar",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:propellant_logistics",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "propellant_logistics",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:compute_digital",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "compute_digital",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:services",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:diversified",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:prior_manufacturing_mix",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "prior_manufacturing_mix",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    }
+  ]
+}
