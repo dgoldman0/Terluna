@@ -1,0 +1,182 @@
+{
+  "schema": "terluna.research.export-strategies-inputs/1",
+  "evidence": "Research-informed accounting scenarios on exact joint provisioning responses. Physical export portfolios are conditional; small-module replication, premium recipes and global markets remain unqualified.",
+  "profile_snapshot": "inputs/strategy_profiles.json",
+  "profile_sha256": "68de393762a3411e0fc3fb2956c8d16c936c46019db70995cc3ccd5654449a9c",
+  "horizons": [
+    30,
+    100,
+    300,
+    800
+  ],
+  "rates": [
+    0,
+    0.01,
+    0.03,
+    0.07
+  ],
+  "strategies": {
+    "raw_resource_price": {
+      "profile": "source_refined",
+      "lunar_price_USD2026_kg": 0,
+      "source_price_USD2026_kg": 3,
+      "premium_share": 0,
+      "label": "Raw-resource price / refined-route proxy"
+    },
+    "commodity_refined": {
+      "profile": "commodity_mixed",
+      "lunar_price_USD2026_kg": 3,
+      "source_price_USD2026_kg": 3,
+      "premium_share": 0,
+      "label": "Commodity refined and manufactured stock"
+    },
+    "specialty": {
+      "profile": "specialty_mixed",
+      "lunar_price_USD2026_kg": 750,
+      "source_price_USD2026_kg": 750,
+      "premium_share": 0,
+      "label": "Specialty metals and manufactured products"
+    },
+    "premium_lunar": {
+      "profile": "goods_heavy",
+      "lunar_price_USD2026_kg": 750,
+      "source_price_USD2026_kg": 750,
+      "premium_share": 1,
+      "label": "Buyer-qualified premium lunar manufacturing"
+    },
+    "propellant_logistics": {
+      "profile": "logistics_1Mt",
+      "lunar_price_USD2026_kg": 0,
+      "source_price_USD2026_kg": 0,
+      "premium_share": 0,
+      "label": "Propellant and mission support"
+    },
+    "compute_digital": {
+      "profile": "computing_5GW",
+      "lunar_price_USD2026_kg": 0,
+      "source_price_USD2026_kg": 0,
+      "premium_share": 0,
+      "label": "Computing with worldwide digital services"
+    },
+    "services": {
+      "profile": "domestic_services",
+      "lunar_price_USD2026_kg": 0,
+      "source_price_USD2026_kg": 0,
+      "premium_share": 0,
+      "label": "Worldwide services with domestic support"
+    },
+    "diversified": {
+      "profile": "balanced",
+      "lunar_price_USD2026_kg": 750,
+      "source_price_USD2026_kg": 750,
+      "premium_share": 0.5,
+      "label": "Diversified materials, logistics, computing and services"
+    },
+    "prior_manufacturing_mix": {
+      "profile": "current_large",
+      "lunar_price_USD2026_kg": 2000,
+      "source_price_USD2026_kg": 30,
+      "premium_share": 0,
+      "label": "Earlier larger manufacturing mix"
+    }
+  },
+  "markets": {
+    "limited": {
+      "industrial_budget_USD2041_year": 100000000000.0,
+      "mission_budget_USD2041_year": 46739022498.02295,
+      "household_budget_USD2041_year": 10000000000.0,
+      "premium_demand_kg_year": 10000000.0,
+      "compute_price_factor": 0.75,
+      "compute_contracted_capacity_W": 1000000000.0,
+      "compute_capacity_offtake_fraction": 0.5,
+      "funded_compatible_missions_year": 100,
+      "institutional_services_budget_USD2041_year": 30000000000.0
+    },
+    "global": {
+      "industrial_budget_USD2041_year": 500000000000.0,
+      "mission_budget_USD2041_year": 100000000000.0,
+      "household_budget_USD2041_year": 90000000000.0,
+      "premium_demand_kg_year": 60000000.0,
+      "compute_price_factor": 1,
+      "compute_contracted_capacity_W": 5000000000.0,
+      "compute_capacity_offtake_fraction": 0.75,
+      "funded_compatible_missions_year": 1000,
+      "institutional_services_budget_USD2041_year": 200000000000.0
+    },
+    "breakthrough": {
+      "industrial_budget_USD2041_year": 2000000000000.0,
+      "mission_budget_USD2041_year": 1000000000000.0,
+      "household_budget_USD2041_year": 600000000000.0,
+      "premium_demand_kg_year": 150000000.0,
+      "compute_price_factor": 1,
+      "compute_contracted_capacity_W": 20000000000.0,
+      "compute_capacity_offtake_fraction": 1,
+      "funded_compatible_missions_year": 10000,
+      "institutional_services_budget_USD2041_year": 1500000000000.0
+    }
+  },
+  "premium": {
+    "equivalent_product_offer_USD2026_kg": 2000,
+    "willingness_to_pay_multiple": 1.5,
+    "accepted_fraction": 0.6,
+    "qualification_years_after_first_production": 10,
+    "fallback_recovery_fraction": 0.8,
+    "common_development_USD2041": 8000000000.0,
+    "installed_capital_USD2041_per_founding_scale": 20000000000.0,
+    "life_years": 20,
+    "annual_development_USD2041_per_founding_scale": 400000000.0,
+    "incremental_cost_USD2041_attempted_kg": 20,
+    "additional_mean_W_per_attempted_kg_year": 0.5,
+    "staff_per_founding_scale": 300
+  },
+  "logistics": {
+    "delivered_fuel_kg_per_mission": 1000000.0,
+    "support_invoice_USD2041_per_mission": 30000000.0,
+    "support_variable_cost_fraction": 0.6,
+    "support_capital_USD2041_per_founding_scale": 5000000000.0,
+    "life_years": 20,
+    "support_fixed_USD2041_per_founding_scale_year": 200000000.0,
+    "support_staff_per_founding_scale": 100,
+    "additional_depot_use_fraction": 0.02
+  },
+  "synergies": {
+    "internal_compute_W_for_culture": 5000000.0,
+    "internal_compute_W_per_service_kit": 10000000.0,
+    "avoided_external_digital_cost_fraction": 0.03,
+    "premium_accepted_fraction_gain": 0.1,
+    "premium_qualification_years_saved": 2,
+    "additional_separate_branded_license_fraction": 0.05,
+    "qualification_research_slots_per_founding_scale": 100
+  },
+  "competition": {
+    "mission_share_of_research_invoices": 0.25,
+    "annual_industrial_budget_growth": 0.005,
+    "industrial_budget_cap_multiple": 30,
+    "Earth_launch_cost_factor": 1,
+    "Earth_fuel_price_floor_share_of_delivered_alternative": 0.02,
+    "premium_competitor_price_factor": 1,
+    "service_cost_multiplier": 1
+  },
+  "workforce": {
+    "total_working_fraction": 0.6,
+    "civic_and_other_reserved_fraction": 0.2
+  },
+  "additional_commissioning_capacity_fraction": 0.5,
+  "assumptions": [
+    "All strategies include the same selected worldwide-service demand case; sector-only rows distinguish industrial contribution from that shared support. Costs for retained founding infrastructure remain charged once.",
+    "The raw-resource case prices a refined-source logistics response at commodity value. No raw-ore extraction or transport design is supplied; this is a route-cost stress proxy, not qualified raw-resource production.",
+    "Premium fractions, prices, extra energy, capital, staff and process costs are new hypotheses. Source attempts/delivery losses precede premium qualification; fallback recovery and separately budgeted customer orders constrain sales.",
+    "Final Earth buyers fund external propellant and separately invoiced support. The complex's internal fuel and transport remain costs or internal transfers. Research and mission purchases share an explicit external budget.",
+    "All enhanced services and premium processing draw from the same residual power and staff. Growth uses the remaining jointly available capacity; one-at-a-time maxima are never added.",
+    "Uncontracted quantities receive no revenue, but the installed response retains planned operating and renewal costs. The model tests market exposure without claiming optimal dispatch, shutdown or migration between product recipes.",
+    "Common development capital and recurring qualification costs are paid even when a premium never qualifies. The existence of an accepted premium is an explicit scenario, not an inference from lunar gravity.",
+    "Computing used internally is removed from billable external capacity. A conditional saving in purchased digital delivery is credited once; Earth partners and creators still receive the other specified variable costs.",
+    "Household spending limits jointly constrain paid cultural output, advertising/rights and separate licenses. They are a consolidated revenue exposure screen, not a measured household-only expenditure survey; advertisers also fund part of these receipts.",
+    "No generic synergy multiplier, unpriced knowledge benefit, asset resale, growth beyond the enclosed cap, or planetary array enters. Long-run sources and markets remain conditional.",
+    "Commercial factories and IT replicate with their host: their full commissioning allowance is added to post-founding capital once, and a joint source response constrains simultaneous host and commercial construction. Repeating qualification in that allowance is conservative; it is not an optimized procurement schedule.",
+    "Computing needs contracted workload capacity as well as installed hardware. Its uptake fraction is distinct from the billable duty already in the source price. Mission fuel also requires an independently assumed number of compatible funded missions.",
+    "Non-mission research, professional work and computing share an institutional spending cap. Mission research competes with fuel/support in its separate budget; cultural and licensing income share another revenue cap.",
+    "Premium qualification reserves internal research slots from the same service facilities that sell outside contracts. Learning, yield and brand effects remain uncalibrated sensitivities.",
+    "A complete host-plus-service programme may justify growth when its current-demand incremental cash is positive. The fund first reserves all host and service capital, commissioning/ramp carrying costs and extra operating liquidity; annual construction remains within the joint physical ceiling. This is a mission-development policy, not NPV optimization."
+  ]
+}

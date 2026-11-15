@@ -1,0 +1,56 @@
+{
+  "as_of": "2026-11-12",
+  "admission": "Targeted publisher and official-statistical passages; no full literature or company-filing audit. Primary reading supports mechanisms and definitions, not lunar revenue inputs.",
+  "sources": [
+    {
+      "id": "youtube_2026",
+      "title": "YouTube, From the CEO: What is coming to YouTube in 2026",
+      "url": "https://blog.youtube/inside-youtube/the-future-of-youtube-2026/",
+      "accessed": "2026-11-12",
+      "read": "Creator-business and revenue-sharing paragraphs.",
+      "supports": "YouTube reports over USD 100 billion paid to creators, artists and media companies over the preceding four years.",
+      "limits": "Cumulative platform payout, not annual creator income, profit or a typical creator outcome. It gives no estimate of a lunar audience."
+    },
+    {
+      "id": "nasa_programming",
+      "title": "NASA, Ways to Watch",
+      "url": "https://www.nasa.gov/ways-to-watch/",
+      "accessed": "2026-11-12",
+      "read": "NASA+ description and distribution section.",
+      "supports": "Mission coverage, documentaries and series are offered as a free, advertising-free service.",
+      "limits": "An example of multiple space-programming formats and distribution, not commercial willingness to pay."
+    },
+    {
+      "id": "ecb_external_accounts",
+      "title": "ECB, EU Balance of Payments and International Investment Position statistical sources and methods, July 2025",
+      "url": "https://www.ecb.europa.eu/press/pubbydate/2025/html/ecb.bopiipbook202507.en.html",
+      "accessed": "2026-11-12",
+      "read": "Sections 3.1 on employee compensation and 3.2 on investment income, including retained direct-investment earnings.",
+      "supports": "Nonresident employee pay is primary income; without an employment relationship payment is for services. Direct-investment retained earnings are recorded when earned.",
+      "limits": "Definitions and classification choices; the scenarios assume employee relationships and direct-investment equity and do not select future legal institutions."
+    }
+  ],
+  "related_register": "humanities/economics/sports_sources.json: company sports comparisons, Newzoo games forecast, value-added definition and communication light-time.",
+  "repository_context": [
+    {
+      "path": "humanities/dance/README.md",
+      "use": "Physical motion research supports a distinctive performance possibility; no audience claim or completed live performance."
+    },
+    {
+      "path": "research/studies/daily_life/README.md",
+      "use": "Research about human routines and environments; open-air landscapes depend on later environmental stages."
+    },
+    {
+      "path": "humanities/economics/results/sports.json",
+      "use": "Pinned calculation product supplies the baseline; all assumptions retain their conditional status."
+    }
+  ],
+  "unresolved_retrievals": [
+    {
+      "title": "UNCTAD Creative Economy Outlook 2024",
+      "url": "https://unctad.org/system/files/official-document/ditctsce2024d2_en.pdf",
+      "status": "Official summary and PDF returned HTTP 403. Search excerpts reported broad creative-service export figures; these are not admitted as quantitative comparators or used in calculations."
+    }
+  ],
+  "assumptions": "All audience, production, monetary and physical-capacity inputs not explicitly inherited from the pinned sports product are new scenario assumptions in entertainment_inputs.json."
+}

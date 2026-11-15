@@ -1,0 +1,138 @@
+{
+  "schema": "terluna.research.staged-returns-inputs/1",
+  "evidence": "Conditional modular-finance and worldwide service-demand scenarios, using the matched provisioning account. Small-seed engineering, markets and collective revenue rights are unqualified.",
+  "transport_snapshot": "inputs/transport.json",
+  "transport_sha256": "26f37dcc0c110402ea5d5a23be7338acdaf9501ddd6e4289c9b46053882aa507",
+  "transport_source_commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888",
+  "transport_source_path": "research/studies/initial_industrial_system/results/transport.json",
+  "bootstrap_years": 8,
+  "production_ramp_years": 5,
+  "seed_scale": 0.05,
+  "common_capital_fraction_of_establishment": 0.1,
+  "common_recurring_fraction": 0.05,
+  "seed_no_receipt_runway_years": 5,
+  "liquidity_buffer_years": 1,
+  "commissioning_years": 2,
+  "desired_growth_rate": 0.01,
+  "taper_fraction": 0.7,
+  "retained_fraction": 0.8,
+  "collectible_fraction": 1,
+  "material_compute_demand_cap_multiple": 30,
+  "marginal_capital_multiplier": 1,
+  "horizons_elapsed_years": [
+    30,
+    100,
+    300,
+    800
+  ],
+  "discount_rates": [
+    0,
+    0.01,
+    0.03,
+    0.07
+  ],
+  "service_demand_initial_fraction": 0.1,
+  "service_demand_annual_growth": 0.35,
+  "service_kit": {
+    "capital_USD2041": 15000000000,
+    "life_years": 20,
+    "staff": 350,
+    "power_W": 20000000,
+    "research_contracts_year": 1000,
+    "professional_clients_year": 5000,
+    "fixed_purchases_USD2041_year": 400000000,
+    "max_units": 20
+  },
+  "cultural_platform": {
+    "capital_USD2041": 10000000000,
+    "life_years": 10,
+    "staff": 200,
+    "power_W": 5000000,
+    "fixed_purchases_USD2041_year": 600000000,
+    "sports": 4,
+    "organizations_per_sport": 8,
+    "resident_athletes_and_crew_included": true,
+    "visiting_personnel_travel_in_variable_costs": true
+  },
+  "service_staff_USD2041_year": 250000,
+  "maximum_new_service_staff_fraction_of_residents": 0.15,
+  "reserved_service_power_W_per_founding_scale": 500000000,
+  "paid_churn": 0.25,
+  "paid_acquisition_USD2041": 30,
+  "license_renewal_churn": 0.2,
+  "license_acquisition_USD2041": 8,
+  "variable_cost_fractions": {
+    "culture": 0.5,
+    "licenses": 0.55,
+    "research": 0.65,
+    "professional": 0.7
+  },
+  "replaced_baseline_Earth_service_fractions": {
+    "media_and_licensing": 0.15,
+    "research_services": 0.2,
+    "remote_professional_services": 0.1
+  },
+  "scenarios": {
+    "limited": {
+      "audience": 150000000,
+      "paid_fraction": 0.2,
+      "paid_USD2041_year": 120,
+      "advertising_and_rights_USD2041_fan_year": 6,
+      "licenses": 20000000,
+      "license_USD2041_year": 100,
+      "research_contracts": 2000,
+      "research_USD2041_contract": 5000000,
+      "professional_clients": 10000,
+      "professional_USD2041_client_year": 1000000
+    },
+    "global": {
+      "audience": 600000000,
+      "paid_fraction": 0.3,
+      "paid_USD2041_year": 240,
+      "advertising_and_rights_USD2041_fan_year": 18,
+      "licenses": 80000000,
+      "license_USD2041_year": 300,
+      "research_contracts": 5000,
+      "research_USD2041_contract": 20000000,
+      "professional_clients": 25000,
+      "professional_USD2041_client_year": 2000000
+    },
+    "breakthrough": {
+      "audience": 2000000000,
+      "paid_fraction": 0.4,
+      "paid_USD2041_year": 360,
+      "advertising_and_rights_USD2041_fan_year": 36,
+      "licenses": 400000000,
+      "license_USD2041_year": 500,
+      "research_contracts": 20000,
+      "research_USD2041_contract": 40000000,
+      "professional_clients": 100000,
+      "professional_USD2041_client_year": 5000000
+    }
+  },
+  "assumptions": [
+    "All new prices are directly specified constant USD2041 scenarios; no U exchange rate or automatic inflation of Earth-company comparators is used.",
+    "The full matched campaign is reconciled, then its recurring allowances are replaced by dated operating charges. The one-time establishment, initial delivered stocks and additional commercial commissioning remain in the capital allocation. This is a new schedule, not a cheaper transport architecture.",
+    "Common capital is charged in full before first production; the remaining one-time bill is allocated to complete functional modules up to founding scale. Neither five-percent modules nor this common floor are engineering-qualified. After founding scale, the pinned marginal expansion purchases plus resource provision price extensions of the established system; the original bootstrap and initial-delivery bill is not repeated. The civil and wage reconciliation remains incomplete. A multiplier tests additional capital requirements.",
+    "New service receipts replace baseline media, research and professional sales and their identified variable Earth-service costs. Original facilities, logistics and all other costs remain charged. Tourism and computing stay in the core account and are not added again.",
+    "One shared cultural platform can reach the whole scenario audience. Four sports do not multiply its unique viewers. Paid members are a subset of the audience; advertisements/rights are separate receipts, with no downstream merchandise turnover. Games, education and IP licenses are additional purchases and may involve the same people.",
+    "Variable service costs include Earth production partners, platforms, delivery, rights, visiting personnel travel and purchased inputs. Additional fixed purchases, wages, acquisition and renewal are charged separately. Unit staff, power, capital and output capacities are design allowances, not qualified installations.",
+    "Default growth seeks one percent industrial expansion subject to cash, commissioning, positive marginal operating contribution and the inherited 1.122-percent capacity screen. Applying that screen to small modules is an unqualified proportional extrapolation, not a proof of bootstrap engineering.",
+    "No external funding arrives after first production. Negative cash stops the path and reports the liquidity shortfall. Capital for every new module is paid on order before commissioning. No future contract revenue, GDP, resource inventory or unpriced social benefit pays an invoice.",
+    "The capital fund collects the specified share of positive available cash after service wages and all modeled costs. The remainder stays with other stakeholders. These are explicit pooling assumptions, not agreed ownership contracts. Growth is a mission policy, not a return-maximizing optimum.",
+    "At a horizon, only uncommitted liquid cash is distributed; neither industrial assets nor prepaid unfinished construction receive a terminal sale value. Long-run operation, sources, prices and renewal remain conditional. No Open Moon or planetary array enters.",
+    "Before first production, eight years of carrying costs at half the seed module's no-sales annual cost are funded externally as a new allowance. After production starts, five years of no-sales runway protects ramp-up, declining to one annual cost buffer. Neither is an engineering quotation.",
+    "Annual audiences and billable account-equivalents represent average in-year service, not end-year signups. Acquisition is charged for growth plus replacements for churn. Lower opening demand and slower adoption are separate sensitivities; within-year subscription months are not individually simulated.",
+    "All service prices are gross invoices received by the project before the specified variable partner, platform, production and rights expenses. Advertising and rights income excludes consideration already in paid subscriptions. Licensing excludes bundled products and downstream customer turnover. Earth contractors supply purchased production and are not counted as lunar jobs or local value added.",
+    "The service kit is a remote-access, data, software and outsourced professional platform. It does not sell 1000 visitor trips or establish safe transport. Simultaneous staff-hours, equipment occupancy, contractual budgets and communications remain unqualified. Visitor hospitality stays in the inherited destination account; no extra spectator or visitor revenue is added.",
+    "The fund normally distributes twenty percent of positive pooled cash. It retains the rest for approved industrial orders and accumulates across years for a demanded, physically admissible service kit. Cash without such a use is distributed above the operating reserve. This is a specified cash-management policy, not an optimal financial control.",
+    "Service asset cost divided by life is a continuing replacement funding allowance, deducted once and unavailable for growth or terminal distributions. Individual asset retirement dates are not simulated."
+  ],
+  "bootstrap_carrying_fraction": 0.5,
+  "baseline_variable_cost_source": {
+    "path": "research/studies/initial_industrial_system/revenue_inputs.json",
+    "source_commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888",
+    "sha256": "7d8884f8e2386536789f29f6b532ccd9ae1e49511a32455c1a3d7bf5c1c61b94",
+    "fields": "services.media_Earth_service_share, services.research_Earth_service_share, services.remote_Earth_service_share"
+  }
+}

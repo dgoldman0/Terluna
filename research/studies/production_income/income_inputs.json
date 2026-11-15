@@ -1,0 +1,160 @@
+{
+  "schema": "terluna.humanities.production-income-specification/1",
+  "year": 200,
+  "products": {
+    "orders": {
+      "path": "../enclosed_returns/results/orders.json",
+      "sha256": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
+      "schema": "terluna.humanities.enclosed-orders/1"
+    },
+    "assets": {
+      "path": "../monetary_wealth/inputs/revised_asset_stock.json.gz",
+      "sha256": "28ff9108ddda9c771478c8388a82ea25594af4b7e539e9b3233b705e7e35466e",
+      "schema": "terluna.provisioning.enclosed-asset-stock/1"
+    },
+    "wealth": {
+      "path": "../monetary_wealth/results/revised.json.gz",
+      "sha256": "beb90522a6ff7807114d7c9353ad665b774a5fb296c5033e6c445d6d86b296b6",
+      "schema": "terluna.humanities.revised-monetary-wealth/1"
+    },
+    "returns": {
+      "path": "../enclosed_returns/results/revised.json.gz",
+      "sha256": "b5236e5e0cab2d3941816441b59d943b54a99c9dec31c3b09deb2d0b2c41648d",
+      "schema": "terluna.humanities.revised-enclosed-returns/1"
+    },
+    "physical": {
+      "path": "../enclosed_returns/inputs/revised_industry.json.gz",
+      "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f",
+      "schema": "terluna.provisioning.revised-industry/1"
+    },
+    "flows": {
+      "path": "../enclosed_returns/results/revised_flows.json.gz",
+      "sha256": "be8c3a956f8212873c3dc943030561634bdf38045b9fa4374506e5ca911c463c",
+      "schema": "terluna.humanities.wealth-finance-flows/1"
+    }
+  },
+  "finance_config": "../enclosed_returns/finance_inputs.json",
+  "implementation_dependencies": {
+    "../enclosed_returns/finance.py": "4a212ba856b682fe9a8925df87d61fa052ea061c5febb63c3db65debb26a288d",
+    "../enclosed_returns/finance_inputs.json": "b859c68691e0fe38596460470cc1753f3def08b29955be7970a7c0ca5a0facf0",
+    "../enclosed_returns/markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb",
+    "../complex_returns/credit.py": "d2a2ae1efc0c41d9ef78fe1ee524f9dc451ade280d7372c3363e645060830ea8",
+    "../complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef"
+  },
+  "portfolios": [
+    "raw_resource_price",
+    "commodity_refined",
+    "specialty",
+    "premium_lunar",
+    "propellant_logistics",
+    "compute_digital",
+    "services",
+    "diversified",
+    "prior_manufacturing_mix"
+  ],
+  "seed": 2041200,
+  "samples_per_case": 8192,
+  "triangular_priors": {
+    "sales_realization": [
+      0.75,
+      1.0,
+      1.0
+    ],
+    "current_import_price": [
+      0.8,
+      1.0,
+      1.25
+    ],
+    "capital_freight_share": [
+      0.25,
+      0.65,
+      0.9
+    ],
+    "routine_repair_share": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "depreciation_multiplier": [
+      0.75,
+      1.0,
+      1.3
+    ],
+    "local_capital_value": [
+      0.75,
+      1.0,
+      1.25
+    ],
+    "resident_support_share": [
+      0.5,
+      0.8,
+      0.95
+    ],
+    "cost_valuation_return": [
+      0.0,
+      0.02,
+      0.04
+    ]
+  },
+  "scenario_priors": {
+    "balanced": {
+      "market": [
+        0.25,
+        0.5,
+        0.25
+      ],
+      "growth": [
+        0.25,
+        0.5,
+        0.25
+      ]
+    },
+    "restrained": {
+      "market": [
+        0.5,
+        0.35,
+        0.15
+      ],
+      "growth": [
+        0.5,
+        0.35,
+        0.15
+      ]
+    },
+    "expansive": {
+      "market": [
+        0.1,
+        0.3,
+        0.6
+      ],
+      "growth": [
+        0.1,
+        0.3,
+        0.6
+      ]
+    }
+  },
+  "market_order": [
+    "limited",
+    "global",
+    "breakthrough"
+  ],
+  "growth_order": [
+    "static",
+    "reference",
+    "wider"
+  ],
+  "ownership_shares": {
+    "outside_ownership": 0.0,
+    "half_local": 0.5,
+    "three_quarters_local": 0.75
+  },
+  "commercial_variable_cost_share": 0.75,
+  "base_resident_case": "services:limited:static",
+  "evidence": "Conditional subjective planning distributions. Scenario and triangular weights are analyst assumptions, not measured likelihoods. Completion and finance availability have no estimated probabilities. Gross product and gross income are annual flows in constant USD2041 equivalents; U remains the established general economic unit, potentially a currency or basket of U-related currencies.",
+  "extracted_input": {
+    "path": "inputs/year200.json.gz",
+    "sha256": "0b587c16ae83ed5a31d7fa5ef9a2b4f95200a6b85818b1bf7a031d905e707c3a",
+    "schema": "terluna.humanities.production-income-inputs/1"
+  }
+}

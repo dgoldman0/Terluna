@@ -1,0 +1,32 @@
+{
+  "schema": "terluna.research.u-pressure-sources/1",
+  "accessed": "2026-11-13",
+  "evidence": "Targeted primary-source reading informs mechanisms. All numerical monetary and behavioral coefficients are disclosed scenario choices, not empirical lunar estimates.",
+  "sources": [
+    {
+      "title": "Exchange Rates and External Adjustments, IMF External Sector Report 2019 chapter 2",
+      "url": "https://www.imf.org/-/media/files/publications/esr/2019/english/ch2.pdf",
+      "read": "Opening overview and introduction, especially pricing currency, import/export adjustment and value chains.",
+      "use": "Separate invoice conversion from prices sticky in a currency; no elasticity transferred."
+    },
+    {
+      "title": "Nonlinear state and shock dependence of exchange rate pass-through on prices, BIS Working Paper 690",
+      "url": "https://www.bis.org/publications/working-paper-690-nonlinear-state-and-shock-dependence-exchange-rate-pass-through-prices",
+      "read": "Author summary, findings and abstract; full paper not reviewed.",
+      "use": "Import-price transmission is incomplete and state/shock dependent; stress shares remain assumptions."
+    },
+    {
+      "title": "FX policy when financial markets are imperfect, BIS Working Paper 942",
+      "url": "https://www.bis.org/publications/working-paper-942-fx-policy-when-financial-markets-are-imperfect",
+      "read": "Author substantive overview inspected in bounded methods review; full paper not reviewed.",
+      "use": "Asset imbalances and intermediary absorption matter to currency quotes; no exchange-rate coefficient inferred."
+    }
+  ],
+  "project_sources": [
+    "trade_transition_sources.json",
+    "trade_transition.md",
+    "../complex_returns/prices.md",
+    "../complex_returns/strategies.md"
+  ],
+  "limits": "No observed U price basket, demand elasticity, monetary velocity, constituent allocation, reserve adequacy or exchange-rate path is established."
+}

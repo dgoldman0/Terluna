@@ -1,0 +1,171 @@
+{
+  "schema": "terluna.research.product-location-basis/1",
+  "producer": {
+    "path": "research/studies/product_allocation/export_inputs.py",
+    "sha256": "cb9b990dc6d2b1eb72c4d686d59badc76373728fbd7d92b2b4dff3e5e2683022"
+  },
+  "source_identities": {
+    "assays": {
+      "path": "resources/source_access/coproduct_assays.json",
+      "sha256": "6a5a5d2d826a320f9bfd2a51449b94c74937a98887288ece4f45fc3df2f4ca29",
+      "revision": "84886850",
+      "schema": "terluna.resources.coproduct-assays/1"
+    },
+    "flows": {
+      "path": "resources/source_access/inputs/coproduct_flows.json",
+      "sha256": "4cf6bb10c49d9f91c22f991d08ead1b92f6af6b5a4a14e80ac6b41918caae592",
+      "revision": "84886850",
+      "schema": "terluna.resources.coproduct-flows/1"
+    },
+    "recovery": {
+      "path": "resources/source_access/coproduct_inputs.json",
+      "sha256": "03d79706c9e550f0af8b87fae0b347ae0c783d38276747dcccc557dfb6b28b4b",
+      "revision": "84886850",
+      "schema": "terluna.resources.coproduct-inputs/1"
+    },
+    "power": {
+      "path": "provisioning/enclosed_power/results/power_comparison.json",
+      "sha256": "6bd746a53e1e0046866b048dce929c897962a16cc5e86e9aae48254d7d7746c6",
+      "revision": "adeaa8ea",
+      "schema": "terluna.provisioning.enclosed-power/1"
+    },
+    "protocols": {
+      "path": "resources/source_access/protocols.md",
+      "sha256": "b0128490e2f73102f46f0e7fbc587f29eb0c9e3fc01c9da13922f1ab275ad913",
+      "revision": "84886850"
+    },
+    "partial_gravity": {
+      "path": "research/studies/world_economy/manufacturing.md",
+      "sha256": "13923a1a205e78b08c98a0c095477ff2cf3b4686230d0b8b3d9de2f335c5df34",
+      "revision": "a63cd71b"
+    },
+    "slow_settling": {
+      "path": "research/studies/world_economy/slow_settling.md",
+      "sha256": "68e8b1f86f2696c729ef91af067c742c38b28f65f688b101bed1eb0c66c4ac8d",
+      "revision": "a63cd71b"
+    }
+  },
+  "power": [
+    {
+      "architecture": "beamed_legacy",
+      "imported_mass_fraction": 1,
+      "levelized_USD2026_kWh": 1.1104247596006334,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "beamed_legacy",
+      "imported_mass_fraction": 0.1,
+      "levelized_USD2026_kWh": 0.6841875973860149,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "solar_battery",
+      "imported_mass_fraction": 1,
+      "levelized_USD2026_kWh": 30.77891478480195,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "solar_battery",
+      "imported_mass_fraction": 0.1,
+      "levelized_USD2026_kWh": 7.371209182495489,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "solar_RFC",
+      "imported_mass_fraction": 1,
+      "levelized_USD2026_kWh": 5.028507649294958,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "solar_RFC",
+      "imported_mass_fraction": 0.1,
+      "levelized_USD2026_kWh": 1.4701246420127376,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "solar_thermal",
+      "imported_mass_fraction": 1,
+      "levelized_USD2026_kWh": 2.1602724814330356,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "solar_thermal",
+      "imported_mass_fraction": 0.1,
+      "levelized_USD2026_kWh": 0.8327039441701283,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "hybrid_50",
+      "imported_mass_fraction": 1,
+      "levelized_USD2026_kWh": 2.888784527280481,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "hybrid_50",
+      "imported_mass_fraction": 0.1,
+      "levelized_USD2026_kWh": 0.9062813914528587,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "fission",
+      "imported_mass_fraction": 1,
+      "levelized_USD2026_kWh": 0.7490614052660041,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    },
+    {
+      "architecture": "fission",
+      "imported_mass_fraction": 0.1,
+      "levelized_USD2026_kWh": 0.3424381408929801,
+      "source_horizon": 100,
+      "site": "ordinary",
+      "mean_MW": 1000,
+      "technology_case": "reference_assumptions",
+      "boundary": "Incremental generating and night-cycle storage systems. Common critical reserve, use-side heat and ordinary local grid retained separately. Fixed qualification, detailed installation, outage probabilities and whole-industry feedback unpriced."
+    }
+  ],
+  "reading_rule": "Exact assay, checkpoint-flow and recovery records are copied without changing their evidence state. Power entries select the reference equipment and freight cases at a 100-year costing horizon for continuous 1 GW mean service, with 100 or 10 percent imported mass. Neither these prices nor the physical flow flags qualify a new refining or manufacturing plant. Protocol records preserve separate physical and data requirements."
+}

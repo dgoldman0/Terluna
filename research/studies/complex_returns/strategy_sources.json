@@ -1,0 +1,52 @@
+{
+  "schema": "terluna.research.export-strategies-sources/1",
+  "accessed": "2026-11-12",
+  "inherited_service_and_appraisal_sources": [
+    "staged_sources.json",
+    "returns_sources.json"
+  ],
+  "sources": [
+    {
+      "title": "Additive Manufacturing Under Lunar Gravity and Microgravity",
+      "authors": "Reitz et al.",
+      "year": 2021,
+      "url": "https://link.springer.com/article/10.1007/s12217-021-09878-4",
+      "read": "Publisher experimental setup, geometry, microsections/CT and conclusions. Small simulant bead tests, not qualified products; no statistically established manufacturing-quality premium."
+    },
+    {
+      "title": "Space-Based Fabrication of ZBLAN Optical Fibers",
+      "authors": "Arat et al.",
+      "year": 2026,
+      "url": "https://orbit.dtu.dk/en/publications/space-based-fabrication-of-zblan-optical-fibers-a-breakthrough-in/",
+      "doi": "10.34133/space.0572",
+      "read": "Institutional abstract and metadata only. ISS microgravity production/selected characterization; commercial acceptance yield and lunar-gravity performance are unverified here."
+    },
+    {
+      "title": "Using ISRU and Surface Construction to Define Long-Term Lunar Infrastructure Needs",
+      "authors": "Sanders, Kleinhenz and Hilburger",
+      "year": 2024,
+      "url": "https://ntrs.nasa.gov/citations/20240008379",
+      "read": "Full PDF retrieved; targeted pp1\u20137 and13\u201316 on architecture, scalability, processing, storage/transport and power. Production milestones are design guidance, not funded contracts or a market ceiling."
+    },
+    {
+      "title": "Economics of In-Space Industry and Competitiveness of Lunar-Derived Rocket Propellant",
+      "authors": "Metzger",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2303.09011",
+      "read": "Author manuscript ground rules, cost equations, exogenous demand, learning and limitations. Equipment productivity and delivery costs inform the comparison; no price or demand path transferred."
+    }
+  ],
+  "project_reading": [
+    "research/studies/world_economy/manufacturing.md",
+    "research/studies/world_economy/manufacturing_sources.md",
+    "research/studies/world_economy/industrial_engineering.md",
+    "research/studies/world_economy/industrial_transition.md",
+    "research/studies/world_economy/slow_settling.md"
+  ],
+  "project_scope": "Product hypotheses and accounting mechanisms only. No array/colony market, Open Moon atmosphere or hypothetical-U price is transferred.",
+  "producer": "provenance/export_profiles.py executes read-only under provisioning commit146a558275f486c9fd9a5cf79908b7c6fdf21888. The frozen response binds all physical producer/input identities. The financial consumer imports none of that producer implementation.",
+  "unresolved_retrievals": [
+    "Arat publisher full text, institutional PDF and alternate Adelaide PDF retrieval failed. Detailed attenuation, strength and acceptance-yield claims from those unavailable bodies are not admitted."
+  ],
+  "limits": "Targeted primary reading and internal accounting review, not a full literature survey or empirical/engineering validation. All new product prices, premium yields, service synergies and customer budgets are explicit scenarios."
+}

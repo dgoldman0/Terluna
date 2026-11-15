@@ -1,0 +1,316 @@
+{
+  "schema": "terluna.humanities.entertainment-inputs/1",
+  "evidence": "Conditional cultural-production portfolio. Audience cohorts, prices, costs, staffing and visiting capacity are assumptions. No paying lunar audience, production contract, qualified facility or successful cultural product is demonstrated.",
+  "reading_rule": "Portfolio accounts replace the sports bundle, not add it a second time. Audience groups are disjoint people with overlapping genre interests. Incremental outcomes compare with the pinned four-competition sports circuit. All amounts use real U with no conversion to current USD. Net royalties exclude licensees sales. Patron gifts are transfers. Nonresident workers and direct-investment earnings are outward income, separately from imported inputs and debt principal.",
+  "products": {
+    "humanities/economics/results/sports.json": {
+      "schema": "terluna.humanities.sports-economics/1",
+      "sha256": "809b2cec731454bbf6c0e1a58fc20ff05e589ba986a0b2a70ec51d08ca080518",
+      "use": "Consolidated touring sports circuit, physical capacity, costs and common accounting assumptions."
+    }
+  },
+  "membership_share": 0.05,
+  "membership_yield_U": 40,
+  "royalty_U_fan": 1,
+  "sponsor_U_fan": 0.5,
+  "variable_cost_fraction": 0.35,
+  "acquisition_U_customer": 8,
+  "payroll_revenue_fraction": 0.2,
+  "resident_pay_U_year": 120000,
+  "visitor_pay_U_visit": 20000,
+  "work_hours_per_resident_year": 1500,
+  "patron_share": 0.01,
+  "patron_gift_U": 20,
+  "production": {
+    "resident_workers": 32,
+    "visiting_workers": 40,
+    "visits_year": 2,
+    "nights_visit": 28,
+    "commission_receipts_U_year": 12000000,
+    "studio_operations_U_year": 1000000,
+    "studio_capital_U": 30000000,
+    "studio_available_hours_year": 2400,
+    "programmes": [
+      {
+        "name": "ordinary_life",
+        "units_year": 150,
+        "purchased_capture_U_unit": 10000,
+        "studio_hours_unit": 2,
+        "arena_hours_unit": 0,
+        "crew": 3,
+        "hours_per_crew_member_unit": 8
+      },
+      {
+        "name": "documentaries",
+        "units_year": 12,
+        "purchased_capture_U_unit": 150000,
+        "studio_hours_unit": 20,
+        "arena_hours_unit": 0,
+        "crew": 6,
+        "hours_per_crew_member_unit": 80
+      },
+      {
+        "name": "performances",
+        "units_year": 24,
+        "purchased_capture_U_unit": 50000,
+        "studio_hours_unit": 0,
+        "arena_hours_unit": 12,
+        "crew": 8,
+        "hours_per_crew_member_unit": 24
+      },
+      {
+        "name": "interactive_classes",
+        "units_year": 40,
+        "purchased_capture_U_unit": 5000,
+        "studio_hours_unit": 3,
+        "arena_hours_unit": 0,
+        "crew": 3,
+        "hours_per_crew_member_unit": 6
+      },
+      {
+        "name": "location_commissions",
+        "units_year": 8,
+        "purchased_capture_U_unit": 100000,
+        "studio_hours_unit": 30,
+        "arena_hours_unit": 0,
+        "crew": 6,
+        "hours_per_crew_member_unit": 60
+      }
+    ]
+  },
+  "empty_production": {
+    "resident_workers": 0,
+    "visiting_workers": 0,
+    "visits_year": 0,
+    "nights_visit": 0,
+    "commission_receipts_U_year": 0,
+    "studio_operations_U_year": 0,
+    "studio_capital_U": 0,
+    "studio_available_hours_year": 0,
+    "programmes": []
+  },
+  "cases": {
+    "expanded": {
+      "extra_programme": true,
+      "audience_groups": [
+        {
+          "genres": [
+            "sports"
+          ],
+          "fans": 40000000
+        },
+        {
+          "genres": [
+            "ordinary_life"
+          ],
+          "fans": 30000000
+        },
+        {
+          "genres": [
+            "performance"
+          ],
+          "fans": 10000000
+        },
+        {
+          "genres": [
+            "factual"
+          ],
+          "fans": 10000000
+        },
+        {
+          "genres": [
+            "sports",
+            "ordinary_life"
+          ],
+          "fans": 20000000
+        },
+        {
+          "genres": [
+            "sports",
+            "performance"
+          ],
+          "fans": 10000000
+        },
+        {
+          "genres": [
+            "sports",
+            "factual"
+          ],
+          "fans": 10000000
+        },
+        {
+          "genres": [
+            "ordinary_life",
+            "performance",
+            "factual"
+          ],
+          "fans": 10000000
+        }
+      ],
+      "paid_share": 0.2,
+      "owner_viewing_yield_U": 25,
+      "retention": 0.75
+    },
+    "sports_control": {
+      "extra_programme": false,
+      "audience_groups": [
+        {
+          "genres": [
+            "sports"
+          ],
+          "fans": 80000000
+        }
+      ],
+      "paid_share": 0.2,
+      "owner_viewing_yield_U": 20,
+      "retention": 0.75
+    },
+    "shared_audience_same_price": {
+      "extra_programme": true,
+      "audience_groups": [
+        {
+          "genres": [
+            "sports",
+            "ordinary_life",
+            "performance",
+            "factual"
+          ],
+          "fans": 80000000
+        }
+      ],
+      "paid_share": 0.2,
+      "owner_viewing_yield_U": 20,
+      "retention": 0.75
+    },
+    "lower_paid_conversion": {
+      "extra_programme": true,
+      "audience_groups": [
+        {
+          "genres": [
+            "sports"
+          ],
+          "fans": 40000000
+        },
+        {
+          "genres": [
+            "ordinary_life"
+          ],
+          "fans": 30000000
+        },
+        {
+          "genres": [
+            "performance"
+          ],
+          "fans": 10000000
+        },
+        {
+          "genres": [
+            "factual"
+          ],
+          "fans": 10000000
+        },
+        {
+          "genres": [
+            "sports",
+            "ordinary_life"
+          ],
+          "fans": 20000000
+        },
+        {
+          "genres": [
+            "sports",
+            "performance"
+          ],
+          "fans": 10000000
+        },
+        {
+          "genres": [
+            "sports",
+            "factual"
+          ],
+          "fans": 10000000
+        },
+        {
+          "genres": [
+            "ordinary_life",
+            "performance",
+            "factual"
+          ],
+          "fans": 10000000
+        }
+      ],
+      "paid_share": 0.1,
+      "owner_viewing_yield_U": 25,
+      "retention": 0.75
+    },
+    "audience_quarter": {
+      "extra_programme": true,
+      "audience_groups": [
+        {
+          "genres": [
+            "sports"
+          ],
+          "fans": 10000000.0
+        },
+        {
+          "genres": [
+            "ordinary_life"
+          ],
+          "fans": 7500000.0
+        },
+        {
+          "genres": [
+            "performance"
+          ],
+          "fans": 2500000.0
+        },
+        {
+          "genres": [
+            "factual"
+          ],
+          "fans": 2500000.0
+        },
+        {
+          "genres": [
+            "sports",
+            "ordinary_life"
+          ],
+          "fans": 5000000.0
+        },
+        {
+          "genres": [
+            "sports",
+            "performance"
+          ],
+          "fans": 2500000.0
+        },
+        {
+          "genres": [
+            "sports",
+            "factual"
+          ],
+          "fans": 2500000.0
+        },
+        {
+          "genres": [
+            "ordinary_life",
+            "performance",
+            "factual"
+          ],
+          "fans": 2500000.0
+        }
+      ],
+      "paid_share": 0.2,
+      "owner_viewing_yield_U": 25,
+      "retention": 0.75
+    }
+  },
+  "assumption_basis": {
+    "audience": "Expanded cohorts contain 140 million unique people with 200 million genre memberships, including the existing 80 million sports fans. One annual bundle charged once; additional membership services sold to a subset of paid viewers. The shared-audience case admits no new fans or increase in viewing yield.",
+    "costs": "Existing physical sport purchases retained, but portfolio commercial and acquisition costs recomputed once. Fixed capture services exclude employee payroll and variable postproduction/distribution services. Pay is the larger of baseline staffing costs or 20% of remote receipts, allocated among resident/visiting staff in the baseline pay proportions.",
+    "capacity": "Additional 32 residents and 40 visiting performers/producers in two 28-night rotations; 288 annual arena hours and 900 studio hours. The annual, peak-guest and crew-hour checks do not qualify a day-by-day timetable. Eight spare arrival places and 248 spare arena hours in the reference leave little scheduling slack.",
+    "capital": "An additional 30 million U studio/production allowance, with inherited 20-year renewal and 70% import share; no construction quote or funding commitment.",
+    "shock": "All remote earned revenue halves with the expanded programme, opening audience and payroll unchanged; fixed operations and acquisition continue and variable commercial services fall with delivered receipts. Patron transfers are not assumed to rescue contractual obligations.",
+    "income": "Foreign equity is represented as a direct-investment claim for the proportional retained-earnings memo. Dispersed portfolio equity needs its own statistical treatment. Artists modeled as employees; independent offworld production companies instead sell imported services."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "terluna.research.u-policy-sources/1",
+  "accessed": "2026-11-13",
+  "evidence": "Targeted primary-source mechanism reading. No source calibrates U interest rates, invoice quality, reserve access, supplier geography or willingness to hold term claims.",
+  "sources": [
+    {
+      "title": "Transmission mechanism of monetary policy",
+      "organization": "European Central Bank",
+      "url": "https://www.ecb.europa.eu/mopo/intro/transmission/html/index.en.html",
+      "read": "Policy rates, bank rates, credit supply, uncertainty and risk-taking sections.",
+      "use": "Treat25–50 basis-point loan-rate transmission as a scenario. Hold external borrowing and project appraisal rates fixed unless separately contracted."
+    },
+    {
+      "title": "Bank of England Market Operations Guide: Our tools",
+      "organization": "Bank of England",
+      "url": "https://www.bankofengland.co.uk/markets/bank-of-england-market-operations-guide/our-tools",
+      "read": "Facilities, operational readiness, eligibility and collateral risk-management sections.",
+      "use": "Separate temporary collateralized liquidity, appropriate haircuts, borrower qualification and implementation readiness from monetary easing. No terrestrial facility size is imported."
+    },
+    {
+      "title": "Foreign currency funding risk and cross-border liquidity",
+      "organization": "BIS Committee on the Global Financial System",
+      "url": "https://www.bis.org/publications/cgfs-paper-71-foreign-currency-funding-risk-and-cross-border-liquidity",
+      "read": "Official summary read in bounded research review. Linked PDF retrieval failed; full-paper evidence is not claimed.",
+      "use": "Currency matching does not remove foreign funding, refinancing or access risk; test external settlement assets separately."
+    }
+  ],
+  "project_sources": ["credit.py", "credit_inputs.json", "results/credit.json", "credit.md", "../monetary_system/trade_transition.md", "../monetary_system/pressure.md"],
+  "limits": "An operational U-family clearing agreement, qualified receivables registry, lender commitments, holder consent and empirical monetary calibration remain outstanding."
+}

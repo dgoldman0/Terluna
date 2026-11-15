@@ -1,0 +1,50 @@
+# Cultural production and lunar export income
+
+Humanities economics studies how people could earn income through lunar practices,
+performances and cultural work, and how that income reaches the settlement. It
+uses the domain's physical research as evidence about possible activities and
+keeps commercial assumptions separate from measured demand. This is research
+support for the human paper, with no change to the five manuscript roles.
+
+| Study | Contribution | Evidence state |
+|---|---|---|
+| [Professional lunar sports](sports.md) | Large fan followings, multiple competitions, resident and visiting clubs, audience acquisition, rights, digital adaptations, trade and project cash | Reproducible conditional accounts; no selected sports, qualified venues, observed lunar demand or financed leagues |
+| [Entertainment and lunar life](entertainment.md) | Everyday-life programming, performances, factual work, games and commissioned production; overlapping audiences and shared facilities | Conditional portfolio and incremental comparison with sport; no measured demand or qualified production programme |
+
+The [world-economy study](../../research/studies/world_economy/README.md) owns the
+cross-domain planetary accounts. These studies identify cultural activity within
+those accounts; their turnover is never added wholesale to existing world product.
+The earlier [venue finance study](../../research/studies/world_economy/sports_finance.md)
+remains a separate, unchanged scenario. Physical sport research remains in
+[sport](../sport/README.md), and art and motion research in [dance](../dance/README.md).
+
+All modeled financial amounts use **U**, the project's hypothetical real
+accounting unit. Published market comparisons retain their original US dollars
+and observation years. There is no assumed exchange rate between them.
+
+Both studies include a quick build-out evaluation, from exploratory effort to
+dedicated facilities, physical pilots, audience development and operating reserves.
+[buildout_inputs.json](buildout_inputs.json) records the assumptions and source
+scope; [results/buildout.json](results/buildout.json) reconciles the sports and
+combined programme costs without counting their shared investment twice.
+The studies also connect event attendance to the existing tourism accounts:
+hospitality is already considered there, while additional spectator demand,
+spending and accommodation expansion remain unestimated in these programmes.
+
+Run from the repository root:
+
+```sh
+python3 -m humanities.economics.sports
+python3 -m humanities.economics.entertainment
+python3 -m humanities.economics.buildout
+python3 -m pytest -q humanities/tests/test_cultural_economics.py humanities/tests/test_entertainment_economics.py humanities/tests/test_cultural_buildout.py
+```
+
+Normal runs write to ignored `research/runs/cultural_economics/`. The reviewed
+products are [results/sports.json](results/sports.json),
+[results/entertainment.json](results/entertainment.json) and
+[results/buildout.json](results/buildout.json); updating a product requires an
+explicit `--output` path. Each product's versioned schema,
+producer hashes, input identities, units and reading rule accompany the results.
+The source register records targeted reading and unresolved retrievals;
+[checks.json](checks.json) records verification separately from commercial evidence.

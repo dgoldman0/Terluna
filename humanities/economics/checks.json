@@ -1,0 +1,72 @@
+{
+  "schema": "terluna.humanities.cultural-economics-checks/1",
+  "date": "2026-11-12",
+  "sports": {
+    "numerical_checks": {
+      "command": "python3 -m pytest -q humanities/tests/test_cultural_economics.py",
+      "result": "24 passed",
+      "scope": "Product reproduction and pinned inputs; debt amortization and independent audience-root calculation; consolidation, imported content, retained earnings, fan transfers, multiple competitions, nonresident compensation and annual/block capacity rejection."
+    },
+    "selected_checks": {
+      "command": "python3 /tmp/run-cultural-checks.py",
+      "selector_source": "shared/check_changed.py from main, with ROOT set to the isolated humanities checkout",
+      "selector_sha256": "a0c0ef2340b62953a23a10c79f5154d11e859d283e4a241dc66993fc003e5bdd",
+      "reason": "The humanities branch predates the changed-file Makefile. The current working agreement selects affected checks; the current main selector was used without changing branch tooling.",
+      "result": "Layer check and the 24 cultural-economics tests passed; changed-file structural validation passed."
+    },
+    "editorial_review": "Study read in context, including opportunity scale, visiting-team programme, accounting definitions, scenario tables and closing research programme. Table values checked against generated JSON. This is substantive internal reading, not independent peer review.",
+    "sources": "Targeted original-company, authored-report and official-definition reading recorded in sports_sources.json. WEF detailed PDF retrieval remains unresolved and its detailed sector figures are excluded.",
+    "not_performed": [
+      "Audience research or paid-demand measurement",
+      "Physical or medical qualification of any sport or visiting programme",
+      "Transport, habitat or venue engineering quotation",
+      "Full repository suite, full scholarly literature review or PDF rendering review"
+    ]
+  },
+  "entertainment": {
+    "numerical_checks": {
+      "command": "python3 -m pytest -q humanities/tests/test_cultural_economics.py humanities/tests/test_entertainment_economics.py",
+      "result": "34 passed (24 sports/accounting and 10 entertainment/portfolio tests)",
+      "scope": "Both products reproduce with pinned inputs; the entertainment sports-only control recovers the committed sports account; bundle deduplication, incremental costs, visiting capacity, fixed-payroll shock and patron transfers are checked."
+    },
+    "selected_checks": {
+      "command": "python3 /tmp/run-cultural-checks.py",
+      "selector_source": "Current main shared/check_changed.py, with ROOT set to the isolated humanities checkout, as for the sports commit.",
+      "selector_sha256": "a0c0ef2340b62953a23a10c79f5154d11e859d283e4a241dc66993fc003e5bdd",
+      "result": "Changed-file structural validation, layer check (1,639 files; zero violations) and 10 selected entertainment tests passed. The earlier 24 sports tests also passed in the joint command.",
+      "record_update": "This check record and final synthesis prose were reviewed after the selected pass; they do not change executable inputs or product bytes."
+    },
+    "editorial_review": "Read the complete 3,345-word entertainment study and its index in context; checked displayed cash figures against the generated products and resolved new-study local links. The sports study is 4,681 words. This is substantive internal reading and numerical comparison, not peer review or audience validation.",
+    "sources": "Targeted YouTube, NASA and ECB passages read. UNCTAD summary and full PDF returned HTTP 403; their numerical market claims are excluded and retrieval remains unresolved.",
+    "not_performed": [
+      "Observed audience, paid demand or programme-quality trials",
+      "Clinical, physical, host, transport or detailed timetable qualification",
+      "Quoted investment costs or dated financing plan",
+      "Full repository suite, full scholarly literature review, PDF typesetting or rendering inspection"
+    ]
+  },
+  "buildout": {
+    "numerical_checks": {
+      "command": "python3 -m pytest -q humanities/tests/test_cultural_buildout.py humanities/tests/test_cultural_economics.py humanities/tests/test_entertainment_economics.py",
+      "result": "40 passed (6 build-out, 24 sports/accounting and 10 entertainment/portfolio tests)",
+      "scope": "Reproduction and input hashes; sports plus incremental entertainment reconciliation; financing sources and uses; minimum-payroll operating reserves; separate renewal reserves; and promotion shares at unchanged audience targets. The two earlier annual products remain byte-identical."
+    },
+    "selected_checks": {
+      "command": "python3 /tmp/check-cultural-buildout.py --files humanities/README.md humanities/economics/README.md humanities/economics/entertainment.md humanities/economics/sports.md research/status.json humanities/economics/buildout.py humanities/economics/buildout_inputs.json humanities/economics/results/buildout.json humanities/tests/test_cultural_buildout.py",
+      "selector_source": "Current main shared/check_changed.py, imported with ROOT set to the isolated humanities checkout, as in the preceding two checks.",
+      "selector_sha256": "a0c0ef2340b62953a23a10c79f5154d11e859d283e4a241dc66993fc003e5bdd",
+      "result": "Selected checks passed: layer check (1,641 files; zero violations) and all 6 build-out tests.",
+      "record_update": "Repeated the selected check after adding the spectator-tourism boundary and regenerating the build-out product. This record was then finalized without changing tested inputs or products.",
+      "scope": "All nine changed implementation, input, product, test and synthesis paths. The evidence-only checks.json record is excluded from this rerun: its owner fallback selects unrelated humanities physics tests. The earlier annual-model tests remain covered by the joint 40-test pass because their sources, inputs and products are unchanged."
+    },
+    "editorial_review": "Read both added build-out sections with adjacent study passages, their tables and synthesis entries. Checked stage totals, effort, shared-capital treatment, reserves and promotion assumptions against the input and generated result. The ranges are gross planning uses, not engineering quotations, confidence bounds or peak outside financing. Internal substantive reading is distinct from independent review. Read the added spectator sections in context and compared their coverage statements with early_exports.md, sports_finance.md, amenities.md and tourism.py. Checked all 38 local link targets in the studies and economics index; git diff --check passed. The additional fan demand and hotel expansion remain explicitly unestimated.",
+    "sources": "Targeted World Bank project-finance passages read; identity and limited methodological use are recorded in buildout_inputs.json. New numerical allowances are scenario choices, not source prices.",
+    "not_performed": [
+      "Spectator-trip demand, incremental hospitality revenue or additional hotel capacity estimation",
+      "Measured development effort, paid acquisition or organic audience growth",
+      "Engineering quotations, physical qualification or settlement-wide construction costing",
+      "Dated cost and receipt schedule, peak funding calculation or investor commitment",
+      "Full repository suite, complete scholarly source review or PDF rendering inspection"
+    ]
+  }
+}

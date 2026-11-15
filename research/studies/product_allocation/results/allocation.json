@@ -1,0 +1,2859 @@
+{
+  "schema": "terluna.research.product-allocation/1",
+  "producer": {
+    "path": "research/studies/product_allocation/allocation.py",
+    "sha256": "e2bdf05f9debbc885225c8a06d0021f95a1fa202e70b8e466410ec159bae16f4"
+  },
+  "dependencies": {
+    "allocation_inputs.json": "6721a4590d371fed035712263e03645b04f9a287e4613e347d14aeacdc451f6a",
+    "inputs/assays.json": "6a5a5d2d826a320f9bfd2a51449b94c74937a98887288ece4f45fc3df2f4ca29",
+    "inputs/flows.json": "4cf6bb10c49d9f91c22f991d08ead1b92f6af6b5a4a14e80ac6b41918caae592",
+    "inputs/recovery.json": "03d79706c9e550f0af8b87fae0b347ae0c783d38276747dcccc557dfb6b28b4b",
+    "inputs/basis.json": "229c0ecefdf696bac14b31f55a726bf97486b66ca6c4dfc25884c959da65902a",
+    "market_benchmarks.json": "f5c694a0f86c25b83cdc9e11849f925e788dbcb0158665caa23e6903bb69dcd2",
+    "allocation_sources.json": "460b0607f3a2918ac26cc662d81dc8017c9b7ac89b1d4491179c7c90e34c41d7",
+    "../enclosed_returns/results/earth_purchases.json.gz": "1721b41981f53c3b587c6be64b3c0c518644af4375a59c4822753cb57141c1f4",
+    "../enclosed_returns/enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
+    "../complex_returns/inputs/strategy_profiles.json": "68de393762a3411e0fc3fb2956c8d16c936c46019db70995cc3ccd5654449a9c"
+  },
+  "evidence": "Research-informed location and product-form screening, conditional break-even calculations and normalized recovery opportunities. No globally optimal percentage mix, certified production line, sales forecast or revised total return is asserted.",
+  "boundary": "U is the established general economic unit, potentially a currency or basket of U-related currencies, serving the planned off-Earth economy before Open Moon, the habitat array and outer-system buildout. Small industrial orbital facilities serving this phase remain within scope.",
+  "rules": [
+    "Optimize the consolidated off-Earth lifecycle surplus after external purchases, renewal, losses, qualification and preservation requirements. Domestic transfers and avoided imports are not additional export invoices.",
+    "The 3 percent price-year adjustment is an explicit planning convention for comparing 2025 observations with USD2026 costs; it is not an observed 2025-2026 CPI statistic. No U exchange rate or future commodity price is inferred.",
+    "Return charges of 150 USD2026/kg retain only the inherited ground-handling floor; 500 and 1500 are total-return sensitivity cases, not quoted route costs. Cases below 150 require changing that inherited assumption and do not replace it here.",
+    "The raw feed already passes through the planned main operation. Joint circuit budgets are maximum incremental budgets before plant, refining, labour, power, recovery duties and uncounted transport costs; they cannot fund a new mine for free.",
+    "Missing element prices or assays remain unknown. Osmium has physical inventory but no assigned sales price. Oxide product prices are not multiplied by elemental assay masses.",
+    "Market production observations are scale checks, not future sales caps. No positive sale is booked without a matched product quality and customer allocation. The same element cannot be sold as metal and embedded product simultaneously.",
+    "Earth processing cost and off-Earth recovery are independent in the refining comparison. Shipping a concentrate can be preferable if an Earth refiner achieves higher recovery or lower treatment cost.",
+    "Fabrication mass fractions and processing energy intensities are explicit sensitivity examples, not measured product bills or engineering quotations. Their calculated thresholds exclude all other differences and do not assert the products are qualified.",
+    "Source or lunar extraction remains subject to pre-disturbance review, native-condition and unopened sample preservation, distributed physical/data archives, provenance and access, future accessible stocks, scarce-element recovery, and all standing cargo-safety requirements. No fixed protected percentage or approved extraction site is invented.",
+    "Local power generation competes with beamed electricity. The power comparison confers no shield credit, atmospheric heat penalty or free thermal sink on the enclosed phase. All new refining and thermal rejection equipment remains to be priced.",
+    "Maintain recycling and traceable residues, with remaining valuable elements available for later recovery. Refurbishment, internal reuse, Earth sales and retained stocks require disjoint allocations. The currently booked generic export invoices remain unchanged."
+  ],
+  "market_products": [
+    {
+      "id": "Al",
+      "label": "Aluminium ingot",
+      "product_basis": "U.S. spot ingot average",
+      "USD2026_per_product_kg": 4.08737034090763,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 4.046496637498554,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 3.046496637498554,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -5.953503362501446,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -45.95350336250144,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -145.95350336250144,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -495.95350336250146,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -1495.9535033625014,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Ni",
+      "label": "Nickel metal",
+      "product_basis": "LME annual cash average",
+      "USD2026_per_product_kg": 15.450000000000001,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 15.2955,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 14.2955,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 5.2955000000000005,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -34.704499999999996,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -134.7045,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -484.7045,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -1484.7045,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Co",
+      "label": "Cobalt cathode",
+      "product_basis": "U.S. spot cathode average",
+      "USD2026_per_product_kg": 47.68598731058902,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 47.20912743748313,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 46.20912743748313,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 37.20912743748313,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -2.790872562516867,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -102.79087256251687,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -452.7908725625169,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -1452.7908725625168,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Ti",
+      "label": "Titanium sponge",
+      "product_basis": "Trade unit value; sponge",
+      "USD2026_per_product_kg": 12.36,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 12.2364,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 11.2364,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 2.2363999999999997,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -37.7636,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -137.7636,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -487.7636,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -1487.7636,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Ga",
+      "label": "Gallium metal",
+      "product_basis": "Average U.S. import unit value",
+      "USD2026_per_product_kg": 597.4,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 591.4259999999999,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 590.4259999999999,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 581.4259999999999,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 541.4259999999999,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 441.42599999999993,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 91.42599999999993,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -908.5740000000001,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Ge",
+      "label": "Germanium metal",
+      "product_basis": "Annual metal price",
+      "USD2026_per_product_kg": 4223.0,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 4180.7699999999995,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 4179.7699999999995,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 4170.7699999999995,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 4130.7699999999995,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 4030.7699999999995,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 3680.7699999999995,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 2680.7699999999995,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Pt",
+      "label": "Platinum",
+      "product_basis": "Unfabricated metal annual average",
+      "USD2026_per_product_kg": 39738.322758824186,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 39340.93953123594,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 39339.93953123594,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 39330.93953123594,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 39290.93953123594,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 39190.93953123594,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 38840.93953123594,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 37840.93953123594,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Pd",
+      "label": "Palladium",
+      "product_basis": "Unfabricated metal annual average",
+      "USD2026_per_product_kg": 36426.7958622555,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 36062.527903632945,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 36061.527903632945,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 36052.527903632945,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 36012.527903632945,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 35912.527903632945,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 35562.527903632945,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 34562.527903632945,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Ir",
+      "label": "Iridium",
+      "product_basis": "Unfabricated metal annual average",
+      "USD2026_per_product_kg": 145707.183449022,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 144250.11161453178,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 144249.11161453178,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 144240.11161453178,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 144200.11161453178,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 144100.11161453178,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 143750.11161453178,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 142750.11161453178,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Rh",
+      "label": "Rhodium",
+      "product_basis": "Unfabricated metal annual average",
+      "USD2026_per_product_kg": 192068.56000098356,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 190147.87440097373,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 190146.87440097373,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 190137.87440097373,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 190097.87440097373,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 189997.87440097373,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 189647.87440097373,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 188647.87440097373,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Ru",
+      "label": "Ruthenium",
+      "product_basis": "Unfabricated metal annual average",
+      "USD2026_per_product_kg": 22849.535586323906,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 22621.040230460665,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 22620.040230460665,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 22611.040230460665,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 22571.040230460665,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 22471.040230460665,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 22121.040230460665,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 21121.040230460665,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Au",
+      "label": "Gold",
+      "product_basis": "Annual metal price",
+      "USD2026_per_product_kg": 109280.38758676652,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 108187.58371089885,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 108186.58371089885,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 108177.58371089885,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 108137.58371089885,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 108037.58371089885,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 107687.58371089885,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 106687.58371089885,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Ag",
+      "label": "Silver",
+      "product_basis": "Bullion average price",
+      "USD2026_per_product_kg": 1258.380220696099,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 1245.796418489138,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 1244.796418489138,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 1235.796418489138,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 1195.796418489138,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 1095.796418489138,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 745.796418489138,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -254.20358151086202,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "NdPr_oxide",
+      "label": "NdPr oxide",
+      "product_basis": "99 percent minimum oxide; not elemental metal",
+      "USD2026_per_product_kg": 71.07000000000001,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 70.3593,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 69.3593,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 60.359300000000005,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 20.359300000000005,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -79.6407,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -429.6407,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -1429.6407,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "La_oxide",
+      "label": "Lanthanum oxide",
+      "product_basis": "99.5 percent minimum oxide",
+      "USD2026_per_product_kg": 1.03,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 1.0197,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 0.01970000000000005,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -8.9803,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -48.9803,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -148.9803,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -498.9803,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -1498.9803,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Ce_oxide",
+      "label": "Cerium oxide",
+      "product_basis": "99.5 percent minimum oxide",
+      "USD2026_per_product_kg": 1.7613,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 1.743687,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 0.743687,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -8.256313,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -48.256313,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -148.256313,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -498.256313,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -1498.256313,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Dy_oxide",
+      "label": "Dysprosium oxide",
+      "product_basis": "99.5 percent minimum oxide",
+      "USD2026_per_product_kg": 246.17000000000002,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 243.7083,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 242.7083,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 233.7083,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 193.7083,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 93.70830000000001,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -256.2917,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -1256.2917,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Tb_oxide",
+      "label": "Terbium oxide",
+      "product_basis": "99.99 percent minimum oxide",
+      "USD2026_per_product_kg": 1040.3,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 1029.897,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 1028.897,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 1019.8969999999999,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 979.8969999999999,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 879.8969999999999,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 529.8969999999999,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -470.10300000000007,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Sc_oxide",
+      "label": "Scandium oxide",
+      "product_basis": "99.99 percent powder, 5-100 kg lots",
+      "USD2026_per_product_kg": 659.2,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 652.6080000000001,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 651.6080000000001,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 642.6080000000001,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 602.6080000000001,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 502.60800000000006,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 152.60800000000006,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -847.3919999999999,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "Sc_metal",
+      "label": "Scandium metal",
+      "product_basis": "99.999 percent ingot, 1-10 kg lots; not a bulk quote",
+      "USD2026_per_product_kg": 5356.0,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 5302.44,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 5301.44,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 5292.44,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 5252.44,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 5152.44,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 4802.44,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 3802.4399999999996,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    },
+    {
+      "id": "ScAl2",
+      "label": "Aluminium scandium master alloy",
+      "product_basis": "2 percent scandium, 1-30 kg lots",
+      "USD2026_per_product_kg": 30.900000000000002,
+      "maximum_freight_before_any_other_cost_USD2026_kg": 30.591,
+      "transport_screens": [
+        {
+          "freight_USD2026_kg": 1,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 29.591,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 10,
+          "remaining_cost_budget_USD2026_per_kg_shipped": 20.591,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 50,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -19.409,
+          "at_or_above_inherited_ground_floor": false
+        },
+        {
+          "freight_USD2026_kg": 150,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -119.40899999999999,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -469.409,
+          "at_or_above_inherited_ground_floor": true
+        },
+        {
+          "freight_USD2026_kg": 1500,
+          "remaining_cost_budget_USD2026_per_kg_shipped": -1469.409,
+          "at_or_above_inherited_ground_floor": true
+        }
+      ]
+    }
+  ],
+  "normalized_recovery": [
+    {
+      "profile": "ci",
+      "scenario": "low",
+      "feed_kg": 1000000000.0,
+      "element_kg": {
+        "Sc": 345.59999999999997,
+        "Co": 30840.0,
+        "Ni": 670800.0,
+        "Cu": 7980.0,
+        "Ga": 572.4,
+        "Ge": 2010.0,
+        "Se": 1290.0,
+        "Y": 91.2,
+        "Zr": 219.0,
+        "Nb": 16.259999999999998,
+        "Ru": 40.8,
+        "Rh": 7.9799999999999995,
+        "Pd": 33.66,
+        "Ag": 12.36,
+        "In": 4.685999999999999,
+        "Sn": 100.2,
+        "Te": 138.0,
+        "La": 14.879999999999999,
+        "Ce": 37.98,
+        "Pr": 5.741999999999999,
+        "Nd": 28.919999999999998,
+        "Sm": 9.36,
+        "Eu": 3.6059999999999994,
+        "Gd": 12.66,
+        "Tb": 2.31,
+        "Dy": 15.54,
+        "Ho": 3.408,
+        "Er": 10.02,
+        "Tm": 1.5779999999999998,
+        "Yb": 10.2,
+        "Lu": 1.53,
+        "Hf": 6.42,
+        "Ta": 0.8939999999999999,
+        "W": 6.06,
+        "Re": 2.3939999999999997,
+        "Os": 29.459999999999997,
+        "Ir": 27.36,
+        "Pt": 54.239999999999995,
+        "Au": 9.0,
+        "Zn": 18600.0
+      },
+      "groups_kg": {
+        "PGM6": 193.49999999999997,
+        "REY": 248.934,
+        "NdPr": 34.662
+      }
+    },
+    {
+      "profile": "ci",
+      "scenario": "middle",
+      "feed_kg": 1000000000.0,
+      "element_kg": {
+        "Sc": 3064.3199999999997,
+        "Co": 273447.99999999994,
+        "Ni": 5947759.999999999,
+        "Cu": 70755.99999999999,
+        "Ga": 5075.279999999999,
+        "Ge": 17821.999999999996,
+        "Se": 11437.999999999998,
+        "Y": 808.6399999999999,
+        "Zr": 1941.7999999999997,
+        "Nb": 144.17199999999997,
+        "Ru": 361.75999999999993,
+        "Rh": 70.75599999999999,
+        "Pd": 298.45199999999994,
+        "Ag": 109.59199999999998,
+        "In": 41.54919999999999,
+        "Sn": 888.4399999999998,
+        "Te": 1223.6,
+        "La": 131.93599999999998,
+        "Ce": 336.756,
+        "Pr": 50.912399999999984,
+        "Nd": 256.424,
+        "Sm": 82.99199999999999,
+        "Eu": 31.97319999999999,
+        "Gd": 112.25199999999998,
+        "Tb": 20.481999999999996,
+        "Dy": 137.78799999999998,
+        "Ho": 30.217599999999994,
+        "Er": 88.84399999999998,
+        "Tm": 13.991599999999996,
+        "Yb": 90.43999999999998,
+        "Lu": 13.565999999999997,
+        "Hf": 56.92399999999999,
+        "Ta": 7.926799999999998,
+        "W": 53.73199999999999,
+        "Re": 21.226799999999997,
+        "Os": 261.21199999999993,
+        "Ir": 242.59199999999996,
+        "Pt": 480.92799999999994,
+        "Au": 79.79999999999998,
+        "Zn": 164919.99999999997
+      },
+      "groups_kg": {
+        "PGM6": 1715.6999999999996,
+        "REY": 2207.2147999999997,
+        "NdPr": 307.33639999999997
+      }
+    },
+    {
+      "profile": "ci",
+      "scenario": "high",
+      "feed_kg": 1000000000.0,
+      "element_kg": {
+        "Sc": 10292.831999999999,
+        "Co": 918492.2999999999,
+        "Ni": 19978100.999999996,
+        "Cu": 237664.34999999998,
+        "Ga": 17047.502999999997,
+        "Ge": 59862.825,
+        "Se": 38419.424999999996,
+        "Y": 2716.1639999999998,
+        "Zr": 6522.367499999999,
+        "Nb": 484.26345,
+        "Ru": 1215.126,
+        "Rh": 237.66434999999998,
+        "Pd": 1002.4789499999999,
+        "Ag": 368.1117,
+        "In": 139.56079499999998,
+        "Sn": 2984.2065,
+        "Te": 4109.985,
+        "La": 443.1636,
+        "Ce": 1131.13935,
+        "Pr": 171.01111499999996,
+        "Nd": 861.3098999999999,
+        "Sm": 278.76419999999996,
+        "Eu": 107.39569499999998,
+        "Gd": 377.04644999999994,
+        "Tb": 68.797575,
+        "Dy": 462.82005,
+        "Ho": 101.49875999999999,
+        "Er": 298.42064999999997,
+        "Tm": 46.99678499999999,
+        "Yb": 303.7815,
+        "Lu": 45.56722499999999,
+        "Hf": 191.20364999999998,
+        "Ta": 26.625554999999995,
+        "W": 180.48194999999998,
+        "Re": 71.29930499999999,
+        "Os": 877.3924499999999,
+        "Ir": 814.8491999999999,
+        "Pt": 1615.4027999999998,
+        "Au": 268.04249999999996,
+        "Zn": 553954.5
+      },
+      "groups_kg": {
+        "PGM6": 5762.91375,
+        "REY": 7413.8768549999995,
+        "NdPr": 1032.3210149999998
+      }
+    },
+    {
+      "profile": "kreep15386",
+      "scenario": "low",
+      "feed_kg": 1000000000.0,
+      "element_kg": {
+        "Li": 1902.0,
+        "Be": 382.8,
+        "Sc": 1302.0,
+        "V": 2868.0,
+        "Cr": 105600.0,
+        "Co": 1446.0,
+        "Ni": 834.0,
+        "Cu": 876.0,
+        "Zn": 1506.0,
+        "Ga": 408.0,
+        "Rb": 1122.0,
+        "Sr": 11190.0,
+        "Y": 14454.0,
+        "Zr": 54990.0,
+        "Nb": 4344.0,
+        "Mo": 12.6,
+        "Sn": 3.5999999999999996,
+        "Sb": 1.2,
+        "Cs": 45.6,
+        "Ba": 51156.0,
+        "La": 5046.0,
+        "Ce": 12786.0,
+        "Pr": 1800.0,
+        "Nd": 7536.0,
+        "Sm": 2190.0,
+        "Eu": 166.79999999999998,
+        "Gd": 2634.0,
+        "Tb": 450.59999999999997,
+        "Dy": 2742.0,
+        "Ho": 618.0,
+        "Er": 1698.0,
+        "Tm": 238.2,
+        "Yb": 1572.0,
+        "Lu": 215.4,
+        "Hf": 1638.0,
+        "Ta": 228.6,
+        "W": 82.8,
+        "Pb": 351.0,
+        "Th": 924.0,
+        "U": 240.0
+      },
+      "groups_kg": {
+        "PGM6": null,
+        "REY": 54147.0,
+        "NdPr": 9336.0
+      }
+    },
+    {
+      "profile": "kreep15386",
+      "scenario": "middle",
+      "feed_kg": 1000000000.0,
+      "element_kg": {
+        "Li": 16864.399999999998,
+        "Be": 3394.1599999999994,
+        "Sc": 11544.399999999998,
+        "V": 25429.599999999995,
+        "Cr": 936319.9999999999,
+        "Co": 12821.199999999999,
+        "Ni": 7394.799999999999,
+        "Cu": 7767.199999999999,
+        "Zn": 13353.199999999997,
+        "Ga": 3617.5999999999995,
+        "Rb": 9948.399999999998,
+        "Sr": 99217.99999999999,
+        "Y": 128158.79999999997,
+        "Zr": 487577.99999999994,
+        "Nb": 38516.799999999996,
+        "Mo": 111.71999999999998,
+        "Sn": 31.919999999999995,
+        "Sb": 10.639999999999999,
+        "Cs": 404.31999999999994,
+        "Ba": 453583.19999999995,
+        "La": 44741.19999999999,
+        "Ce": 113369.19999999998,
+        "Pr": 15959.999999999998,
+        "Nd": 66819.19999999998,
+        "Sm": 19417.999999999996,
+        "Eu": 1478.9599999999998,
+        "Gd": 23354.799999999996,
+        "Tb": 3995.3199999999993,
+        "Dy": 24312.399999999998,
+        "Ho": 5479.599999999999,
+        "Er": 15055.599999999999,
+        "Tm": 2112.0399999999995,
+        "Yb": 13938.399999999998,
+        "Lu": 1909.8799999999997,
+        "Hf": 14523.599999999999,
+        "Ta": 2026.9199999999996,
+        "W": 734.1599999999999,
+        "Pb": 3112.1999999999994,
+        "Th": 8192.8,
+        "U": 2127.9999999999995
+      },
+      "groups_kg": {
+        "PGM6": null,
+        "REY": 480103.3999999999,
+        "NdPr": 82779.19999999998
+      }
+    },
+    {
+      "profile": "kreep15386",
+      "scenario": "high",
+      "feed_kg": 1000000000.0,
+      "element_kg": {
+        "Li": 42484.736249999994,
+        "Be": 8550.55575,
+        "Sc": 29082.611249999998,
+        "V": 64062.157499999994,
+        "Cr": 2358773.9999999995,
+        "Co": 32299.121249999997,
+        "Ni": 18628.953749999997,
+        "Cu": 19567.102499999997,
+        "Zn": 33639.33375,
+        "Ga": 9113.445,
+        "Rb": 25061.973749999997,
+        "Sr": 249949.63124999998,
+        "Y": 322857.19125,
+        "Zr": 1228304.7562499999,
+        "Nb": 97031.385,
+        "Mo": 281.444625,
+        "Sn": 80.41274999999999,
+        "Sb": 26.804249999999996,
+        "Cs": 1018.5614999999999,
+        "Ba": 1142665.1775,
+        "La": 112711.87124999998,
+        "Ce": 285599.28374999994,
+        "Pr": 40206.37499999999,
+        "Nd": 168330.68999999997,
+        "Sm": 48917.75625,
+        "Eu": 3725.7907499999997,
+        "Gd": 58835.32874999999,
+        "Tb": 10064.995874999999,
+        "Dy": 61247.71124999999,
+        "Ho": 13804.18875,
+        "Er": 37928.01375,
+        "Tm": 5320.643625,
+        "Yb": 35113.5675,
+        "Lu": 4811.362875,
+        "Hf": 36587.80125,
+        "Ta": 5106.2096249999995,
+        "W": 1849.4932499999998,
+        "Pb": 7840.243124999999,
+        "Th": 20639.2725,
+        "U": 5360.849999999999
+      },
+      "groups_kg": {
+        "PGM6": null,
+        "REY": 1209474.770625,
+        "NdPr": 208537.06499999997
+      }
+    }
+  ],
+  "joint_circuit_budgets": [
+    {
+      "price_multiplier": 0.5,
+      "freight_USD2026_kg": 1,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.009459598755439117,
+        "Pd": 0.0053811683369475284,
+        "Ir": 0.017496718946396244,
+        "Rh": 0.006726980744557647,
+        "Ru": 0.004091331996885724,
+        "Au": 0.004316604790064863,
+        "Ag": 6.81550685475308e-05,
+        "Ga": 0.0014957509946399994,
+        "Ge": 0.03723701946999999,
+        "Ni": 0.03953922154,
+        "Co": 0.006181172739762442
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.13199372338324109,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.2056419202269041
+    },
+    {
+      "price_multiplier": 0.5,
+      "freight_USD2026_kg": 10,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.009455270403439117,
+        "Pd": 0.005378482268947529,
+        "Ir": 0.017494535618396246,
+        "Rh": 0.0067263439405576475,
+        "Ru": 0.004088076156885724,
+        "Au": 0.004315886590064863,
+        "Ag": 6.716874054753079e-05,
+        "Ga": 0.0014500734746399995,
+        "Ge": 0.037076621469999994,
+        "Ni": 0.0,
+        "Co": 0.003720140739762443
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.08977259940324109,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.1398627847738029
+    },
+    {
+      "price_multiplier": 0.5,
+      "freight_USD2026_kg": 50,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.009436033283439118,
+        "Pd": 0.005366544188947529,
+        "Ir": 0.017484831938396245,
+        "Rh": 0.006723513700557647,
+        "Ru": 0.004073605756885724,
+        "Au": 0.004312694590064863,
+        "Ag": 6.278506054753079e-05,
+        "Ga": 0.0012470622746399995,
+        "Ge": 0.03636374146999999,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.08507081226347865,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.1325375536102605
+    },
+    {
+      "price_multiplier": 0.5,
+      "freight_USD2026_kg": 150,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.009387940483439118,
+        "Pd": 0.005336698988947528,
+        "Ir": 0.01746057273839624,
+        "Rh": 0.006716438100557648,
+        "Ru": 0.004037429756885724,
+        "Au": 0.004304714590064863,
+        "Ag": 5.1825860547530796e-05,
+        "Ga": 0.0007395342746399996,
+        "Ge": 0.03458154146999999,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.08261669626347865,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.1287141208457019
+    },
+    {
+      "price_multiplier": 0.5,
+      "freight_USD2026_kg": 500,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.009219615683439118,
+        "Pd": 0.005232240788947529,
+        "Ir": 0.017375665538396243,
+        "Rh": 0.006691673500557647,
+        "Ru": 0.003910813756885724,
+        "Au": 0.004276784590064863,
+        "Ag": 1.3468660547530802e-05,
+        "Ga": 0.0,
+        "Ge": 0.028343841469999992,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.07506410398883864,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.11694742817094213
+    },
+    {
+      "price_multiplier": 0.5,
+      "freight_USD2026_kg": 1500,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.008738687683439118,
+        "Pd": 0.004933788788947529,
+        "Ir": 0.017133073538396243,
+        "Rh": 0.006620917500557647,
+        "Ru": 0.0035490537568857246,
+        "Au": 0.004196984590064862,
+        "Ag": 0.0,
+        "Ga": 0.0,
+        "Ge": 0.010521841469999993,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.055694347328291115,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.08676997842632343
+    },
+    {
+      "price_multiplier": 1,
+      "freight_USD2026_kg": 1,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.018919678438878238,
+        "Pd": 0.010762635125895056,
+        "Ir": 0.03499368048479248,
+        "Rh": 0.013454032245115296,
+        "Ru": 0.008183025753771448,
+        "Au": 0.008633289380129727,
+        "Ag": 0.0001364197290950616,
+        "Ga": 0.002996577269279999,
+        "Ge": 0.07449186093999999,
+        "Ni": 0.08502620307999999,
+        "Co": 0.012635793479524884
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.27023319592648215,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.4210145141373498
+    },
+    {
+      "price_multiplier": 1,
+      "freight_USD2026_kg": 10,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.018915350086878235,
+        "Pd": 0.010759949057895056,
+        "Ir": 0.034991497156792485,
+        "Rh": 0.013453395441115294,
+        "Ru": 0.008179769913771449,
+        "Au": 0.008632571180129726,
+        "Ag": 0.00013543340109506159,
+        "Ga": 0.002950899749279999,
+        "Ge": 0.07433146293999998,
+        "Ni": 0.03149636308,
+        "Co": 0.010174761479524886
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.21402145348648216,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.3334384509854754
+    },
+    {
+      "price_multiplier": 1,
+      "freight_USD2026_kg": 50,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.018896112966878237,
+        "Pd": 0.010748010977895057,
+        "Ir": 0.034981793476792485,
+        "Rh": 0.013450565201115296,
+        "Ru": 0.008165299513771448,
+        "Au": 0.008629379180129725,
+        "Ag": 0.0001310497210950616,
+        "Ga": 0.002747888549279999,
+        "Ge": 0.07361858293999998,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.17136868252695728,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.2669868236028003
+    },
+    {
+      "price_multiplier": 1,
+      "freight_USD2026_kg": 150,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.018848020166878234,
+        "Pd": 0.010718165777895057,
+        "Ir": 0.03495753427679249,
+        "Rh": 0.013443489601115294,
+        "Ru": 0.008129123513771448,
+        "Au": 0.008621399180129725,
+        "Ag": 0.00012009052109506159,
+        "Ga": 0.002240360549279999,
+        "Ge": 0.07183638293999998,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.1689145665269573,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.26316339083824175
+    },
+    {
+      "price_multiplier": 1,
+      "freight_USD2026_kg": 500,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.01867969536687824,
+        "Pd": 0.010613707577895058,
+        "Ir": 0.034872627076792485,
+        "Rh": 0.013418725001115295,
+        "Ru": 0.008002507513771448,
+        "Au": 0.008593469180129725,
+        "Ag": 8.17333210950616e-05,
+        "Ga": 0.00046401254927999955,
+        "Ge": 0.06559868293999997,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.16032516052695728,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.2497813761622866
+    },
+    {
+      "price_multiplier": 1,
+      "freight_USD2026_kg": 1500,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.018198767366878237,
+        "Pd": 0.010315255577895059,
+        "Ir": 0.034630035076792486,
+        "Rh": 0.013347969001115295,
+        "Ru": 0.007640747513771449,
+        "Au": 0.008513669180129725,
+        "Ag": 0.0,
+        "Ga": 0.0,
+        "Ge": 0.04777668293999998,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.14042312665658224,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.21877465586815747
+    },
+    {
+      "price_multiplier": 2,
+      "freight_USD2026_kg": 1,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.03783983780575647,
+        "Pd": 0.021525568703790115,
+        "Ir": 0.06998760356158498,
+        "Rh": 0.026908135246230588,
+        "Ru": 0.016366413267542897,
+        "Au": 0.017266658560259454,
+        "Ag": 0.0002729490501901232,
+        "Ga": 0.0059982298185599974,
+        "Ge": 0.14900154387999998,
+        "Ni": 0.17600016615999997,
+        "Co": 0.025545034959049768
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.5467121410129644,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.8517597019582414
+    },
+    {
+      "price_multiplier": 2,
+      "freight_USD2026_kg": 10,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.03783550945375647,
+        "Pd": 0.02152288263579011,
+        "Ir": 0.06998542023358496,
+        "Rh": 0.02690749844223059,
+        "Ru": 0.016363157427542897,
+        "Au": 0.01726594036025945,
+        "Ag": 0.0002719627221901232,
+        "Ga": 0.005952552298559998,
+        "Ge": 0.14884114587999997,
+        "Ni": 0.12247032615999998,
+        "Co": 0.02308400295904977
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.49050039857296435,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.7641836388063669
+    },
+    {
+      "price_multiplier": 2,
+      "freight_USD2026_kg": 50,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.03781627233375647,
+        "Pd": 0.021510944555790116,
+        "Ir": 0.06997571655358498,
+        "Rh": 0.026904668202230586,
+        "Ru": 0.016348687027542896,
+        "Au": 0.017262748360259452,
+        "Ag": 0.0002675790421901232,
+        "Ga": 0.005749541098559998,
+        "Ge": 0.14812826587999997,
+        "Ni": 0.0,
+        "Co": 0.012146082959049773
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.35611050601296435,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.5548085650774093
+    },
+    {
+      "price_multiplier": 2,
+      "freight_USD2026_kg": 150,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.037768179533756475,
+        "Pd": 0.021481099355790116,
+        "Ir": 0.06995145735358498,
+        "Rh": 0.02689759260223059,
+        "Ru": 0.016312511027542897,
+        "Au": 0.01725476836025945,
+        "Ag": 0.00025661984219012317,
+        "Ga": 0.005242013098559998,
+        "Ge": 0.14634606587999996,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.3415103070539146,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.5320619308233214
+    },
+    {
+      "price_multiplier": 2,
+      "freight_USD2026_kg": 500,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.037599854733756474,
+        "Pd": 0.021376641155790115,
+        "Ir": 0.06986655015358498,
+        "Rh": 0.02687282800223059,
+        "Ru": 0.016185895027542897,
+        "Au": 0.017226838360259452,
+        "Ag": 0.00021826264219012317,
+        "Ga": 0.0034656650985599984,
+        "Ge": 0.14010836587999997,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.3329209010539146,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.5186799161473662
+    },
+    {
+      "price_multiplier": 2,
+      "freight_USD2026_kg": 1500,
+      "individual_contributions_USD2026_per_feed_kg": {
+        "Pt": 0.037118926733756476,
+        "Pd": 0.021078189155790118,
+        "Ir": 0.06962395815358498,
+        "Rh": 0.026802072002230587,
+        "Ru": 0.015824135027542898,
+        "Au": 0.01714703836025945,
+        "Ag": 0.00010867064219012321,
+        "Ga": 0.0,
+        "Ge": 0.12228636587999997,
+        "Ni": 0.0,
+        "Co": 0.0
+      },
+      "maximum_joint_incremental_cost_USD2026_per_feed_kg": 0.3099893559553546,
+      "maximum_joint_incremental_cost_USD2041_per_feed_kg": 0.4829533160714988
+    }
+  ],
+  "raw_feed_screens": [
+    {
+      "element": "Pt",
+      "CI_grade_ppm": 0.904,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.01892015936687823,
+      "minimum_raw_grade_at_inherited_floor_fraction": 0.00716695865878288
+    },
+    {
+      "element": "Pd",
+      "CI_grade_ppm": 0.561,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.01076293357789506,
+      "minimum_raw_grade_at_inherited_floor_fraction": 0.007818500355035871
+    },
+    {
+      "element": "Ir",
+      "CI_grade_ppm": 0.456,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.034993923076792485,
+      "minimum_raw_grade_at_inherited_floor_fraction": 0.001954625088758968
+    },
+    {
+      "element": "Rh",
+      "CI_grade_ppm": 0.133,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.013454103001115297,
+      "minimum_raw_grade_at_inherited_floor_fraction": 0.0014828190328516307
+    },
+    {
+      "element": "Ru",
+      "CI_grade_ppm": 0.68,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.008183387513771451,
+      "minimum_raw_grade_at_inherited_floor_fraction": 0.012464275928318055
+    },
+    {
+      "element": "Au",
+      "CI_grade_ppm": 0.15,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.008633369180129727,
+      "minimum_raw_grade_at_inherited_floor_fraction": 0.002606166785011956
+    },
+    {
+      "element": "Ag",
+      "CI_grade_ppm": 0.206,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.00013652932109506157,
+      "minimum_raw_grade_at_inherited_floor_fraction": 0.2263250102773541
+    },
+    {
+      "element": "Ga",
+      "CI_grade_ppm": 9.54,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.0030016525492799987,
+      "minimum_raw_grade_at_inherited_floor_fraction": 0.47673738932350823
+    },
+    {
+      "element": "Ge",
+      "CI_grade_ppm": 33.5,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.07450968293999999,
+      "minimum_raw_grade_at_inherited_floor_fraction": 0.0674408989774719
+    },
+    {
+      "element": "Ni",
+      "CI_grade_ppm": 11180.0,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.09097396307999997,
+      "minimum_raw_grade_at_inherited_floor_fraction": 18.433845720508984
+    },
+    {
+      "element": "Co",
+      "CI_grade_ppm": 514.0,
+      "raw_feed_freight_ceiling_USD2026_kg": 0.012909241479524885,
+      "minimum_raw_grade_at_inherited_floor_fraction": 5.972465548985734
+    }
+  ],
+  "refining_location": [
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 128.97953023438205
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 178.47953023438205
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 475.82953023438205
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 525.329530234382
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1466.829530234382
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1516.329530234382
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 148.57500000000002
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 198.07500000000002
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 495.25
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 544.75
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1485.75
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1535.25
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 160.3322818593708
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 209.8322818593708
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 506.90228185937076
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 556.4022818593708
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1497.1022818593708
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.01,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1546.6022818593708
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": -60.20469765617946
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": -10.704697656179462
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 258.29530234382054
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 307.79530234382054
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1168.2953023438206
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1217.7953023438206
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 135.75
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 185.25
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 452.5
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 502.0
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1357.5
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1407.0
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 253.32281859370795
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 302.82281859370795
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 569.0228185937079
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 618.5228185937079
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1471.022818593708
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.1,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1520.522818593708
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": -901.0234882808973
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": -851.5234882808973
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": -708.5234882808973
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": -659.0234882808973
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": -158.52348828089714
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.9,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": -109.02348828089714
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 78.75
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 128.25
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 262.5
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 312.0
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 787.5
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.95,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 837.0
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 666.6140929685397
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 150,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 716.1140929685397
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 845.1140929685397
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 894.6140929685397
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 0,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1355.1140929685398
+    },
+    {
+      "target": "Pt",
+      "concentrate_target_mass_fraction": 0.5,
+      "earth_recovery": 0.95,
+      "space_recovery": 0.98,
+      "freight_USD2026_kg": 1500,
+      "earth_treatment_USD2026_per_concentrate_kg": 50,
+      "maximum_space_treatment_USD2026_per_concentrate_kg": 1404.6140929685398
+    }
+  ],
+  "fabrication_location": [
+    {
+      "product": "Catalyst product with 0.5 percent active precious metal",
+      "active_fraction": 0.005,
+      "freight_USD2026_kg": 150,
+      "added_freight_USD2026_per_active_kg": 29850.0
+    },
+    {
+      "product": "Catalyst product with 0.5 percent active precious metal",
+      "active_fraction": 0.005,
+      "freight_USD2026_kg": 500,
+      "added_freight_USD2026_per_active_kg": 99500.0
+    },
+    {
+      "product": "Catalyst product with 0.5 percent active precious metal",
+      "active_fraction": 0.005,
+      "freight_USD2026_kg": 1500,
+      "added_freight_USD2026_per_active_kg": 298500.0
+    },
+    {
+      "product": "Magnet product with 30 percent rare-earth active material",
+      "active_fraction": 0.3,
+      "freight_USD2026_kg": 150,
+      "added_freight_USD2026_per_active_kg": 350.0
+    },
+    {
+      "product": "Magnet product with 30 percent rare-earth active material",
+      "active_fraction": 0.3,
+      "freight_USD2026_kg": 500,
+      "added_freight_USD2026_per_active_kg": 1166.6666666666667
+    },
+    {
+      "product": "Magnet product with 30 percent rare-earth active material",
+      "active_fraction": 0.3,
+      "freight_USD2026_kg": 1500,
+      "added_freight_USD2026_per_active_kg": 3500.0
+    },
+    {
+      "product": "Structural alloy with 0.2 percent scandium",
+      "active_fraction": 0.002,
+      "freight_USD2026_kg": 150,
+      "added_freight_USD2026_per_active_kg": 74850.0
+    },
+    {
+      "product": "Structural alloy with 0.2 percent scandium",
+      "active_fraction": 0.002,
+      "freight_USD2026_kg": 500,
+      "added_freight_USD2026_per_active_kg": 249500.0
+    },
+    {
+      "product": "Structural alloy with 0.2 percent scandium",
+      "active_fraction": 0.002,
+      "freight_USD2026_kg": 1500,
+      "added_freight_USD2026_per_active_kg": 748500.0
+    }
+  ],
+  "power_cost_differences": [
+    {
+      "architecture": "beamed_legacy",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 10.104247596006333
+    },
+    {
+      "architecture": "beamed_legacy",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 101.04247596006333
+    },
+    {
+      "architecture": "beamed_legacy",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 1010.4247596006333
+    },
+    {
+      "architecture": "beamed_legacy",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 5.841875973860149
+    },
+    {
+      "architecture": "beamed_legacy",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 58.41875973860149
+    },
+    {
+      "architecture": "beamed_legacy",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 584.1875973860149
+    },
+    {
+      "architecture": "solar_battery",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 306.7891478480195
+    },
+    {
+      "architecture": "solar_battery",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 3067.891478480195
+    },
+    {
+      "architecture": "solar_battery",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 30678.91478480195
+    },
+    {
+      "architecture": "solar_battery",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 72.7120918249549
+    },
+    {
+      "architecture": "solar_battery",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 727.1209182495489
+    },
+    {
+      "architecture": "solar_battery",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 7271.20918249549
+    },
+    {
+      "architecture": "solar_RFC",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 49.28507649294958
+    },
+    {
+      "architecture": "solar_RFC",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 492.8507649294958
+    },
+    {
+      "architecture": "solar_RFC",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 4928.507649294958
+    },
+    {
+      "architecture": "solar_RFC",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 13.701246420127376
+    },
+    {
+      "architecture": "solar_RFC",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 137.01246420127376
+    },
+    {
+      "architecture": "solar_RFC",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 1370.1246420127375
+    },
+    {
+      "architecture": "solar_thermal",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 20.602724814330355
+    },
+    {
+      "architecture": "solar_thermal",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 206.02724814330355
+    },
+    {
+      "architecture": "solar_thermal",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 2060.2724814330354
+    },
+    {
+      "architecture": "solar_thermal",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 7.327039441701283
+    },
+    {
+      "architecture": "solar_thermal",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 73.27039441701282
+    },
+    {
+      "architecture": "solar_thermal",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 732.7039441701284
+    },
+    {
+      "architecture": "hybrid_50",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 27.887845272804807
+    },
+    {
+      "architecture": "hybrid_50",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 278.8784527280481
+    },
+    {
+      "architecture": "hybrid_50",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 2788.7845272804807
+    },
+    {
+      "architecture": "hybrid_50",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 8.062813914528586
+    },
+    {
+      "architecture": "hybrid_50",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 80.62813914528587
+    },
+    {
+      "architecture": "hybrid_50",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 806.2813914528587
+    },
+    {
+      "architecture": "fission",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 6.490614052660041
+    },
+    {
+      "architecture": "fission",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 64.90614052660041
+    },
+    {
+      "architecture": "fission",
+      "imported_mass_fraction": 1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 649.061405266004
+    },
+    {
+      "architecture": "fission",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 10,
+      "extra_energy_cost_USD2026_per_product_kg": 2.4243814089298006
+    },
+    {
+      "architecture": "fission",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 100,
+      "extra_energy_cost_USD2026_per_product_kg": 24.243814089298006
+    },
+    {
+      "architecture": "fission",
+      "imported_mass_fraction": 0.1,
+      "energy_kWh_per_kg": 1000,
+      "extra_energy_cost_USD2026_per_product_kg": 242.43814089298007
+    }
+  ],
+  "annual_opportunity": [
+    {
+      "case": "propellant_logistics:breakthrough:wider:combined",
+      "year": 100,
+      "treated_share": 0.01,
+      "inherited_physical_feasible": true,
+      "original_source_feed_kg_year": 204811426626.14682,
+      "treated_feed_kg_year": 2048114266.2614682,
+      "refined_element_kg_year": {
+        "Sc": 6276.077508390342,
+        "Co": 560052.7498806658,
+        "Ni": 12181692.108299308,
+        "Cu": 144916.37302359642,
+        "Ga": 10394.753373271502,
+        "Ge": 36501.492453311876,
+        "Se": 23426.330977498666,
+        "Y": 1656.1871202696734,
+        "Zr": 3977.0282822265185,
+        "Nb": 295.2807299954483,
+        "Ru": 740.9258169627485,
+        "Rh": 144.9163730235964,
+        "Pd": 611.2637989942676,
+        "Ag": 224.4569386681268,
+        "In": 85.09750927175098,
+        "Sn": 1819.6266387173384,
+        "Te": 2506.072616197532,
+        "La": 270.220003833473,
+        "Ce": 689.7147678491469,
+        "Pr": 104.27441276961034,
+        "Nd": 525.1856526118307,
+        "Sm": 169.97709918557175,
+        "Eu": 65.48476705803115,
+        "Gd": 229.9049226163823,
+        "Tb": 41.94947640156738,
+        "Dy": 282.2055685196351,
+        "Ho": 61.88909765218253,
+        "Er": 181.96266387173384,
+        "Tm": 28.656395567823953,
+        "Yb": 185.23145424068713,
+        "Lu": 27.784718136103074,
+        "Hf": 116.5868564926678,
+        "Ta": 16.234992165801405,
+        "W": 110.04927575476118,
+        "Re": 43.474911907078926,
+        "Os": 534.9920237186905,
+        "Ir": 496.856136080902,
+        "Pt": 984.9954978445952,
+        "Au": 163.43951844766514,
+        "Zn": 337775.00479184126
+      },
+      "ratio_to_2025_world_primary_output": {
+        "Ni": 0.003092275689029824,
+        "Co": 0.0017885555560705133,
+        "Ga": 0.011434228710598652,
+        "Pt": 0.005736150252153819,
+        "Pd": 0.0031850061105490788,
+        "Au": 4.903185553429954e-05,
+        "Ag": 8.546629587747905e-06
+      },
+      "receipts_booked_USD2041": 0,
+      "reading_rule": "Conditional recovery opportunity before domestic requirements, future stocks, priced refining capacity and product orders. Production ratios are scale diagnostics, not demand caps or market forecasts."
+    },
+    {
+      "case": "propellant_logistics:breakthrough:wider:combined",
+      "year": 100,
+      "treated_share": 0.1,
+      "inherited_physical_feasible": true,
+      "original_source_feed_kg_year": 204811426626.14682,
+      "treated_feed_kg_year": 20481142662.61468,
+      "refined_element_kg_year": {
+        "Sc": 62760.77508390341,
+        "Co": 5600527.498806658,
+        "Ni": 121816921.08299308,
+        "Cu": 1449163.730235964,
+        "Ga": 103947.53373271502,
+        "Ge": 365014.9245331187,
+        "Se": 234263.3097749867,
+        "Y": 16561.871202696733,
+        "Zr": 39770.28282226518,
+        "Nb": 2952.8072999544834,
+        "Ru": 7409.258169627486,
+        "Rh": 1449.163730235964,
+        "Pd": 6112.637989942676,
+        "Ag": 2244.569386681268,
+        "In": 850.9750927175097,
+        "Sn": 18196.266387173382,
+        "Te": 25060.72616197532,
+        "La": 2702.20003833473,
+        "Ce": 6897.1476784914685,
+        "Pr": 1042.7441276961033,
+        "Nd": 5251.856526118307,
+        "Sm": 1699.7709918557175,
+        "Eu": 654.8476705803115,
+        "Gd": 2299.049226163823,
+        "Tb": 419.4947640156738,
+        "Dy": 2822.0556851963515,
+        "Ho": 618.8909765218253,
+        "Er": 1819.6266387173384,
+        "Tm": 286.5639556782395,
+        "Yb": 1852.3145424068714,
+        "Lu": 277.8471813610307,
+        "Hf": 1165.868564926678,
+        "Ta": 162.349921658014,
+        "W": 1100.4927575476117,
+        "Re": 434.7491190707892,
+        "Os": 5349.920237186904,
+        "Ir": 4968.56136080902,
+        "Pt": 9849.954978445952,
+        "Au": 1634.3951844766511,
+        "Zn": 3377750.0479184124
+      },
+      "ratio_to_2025_world_primary_output": {
+        "Ni": 0.030922756890298244,
+        "Co": 0.017885555560705136,
+        "Ga": 0.11434228710598651,
+        "Pt": 0.057361502521538196,
+        "Pd": 0.03185006110549078,
+        "Au": 0.0004903185553429953,
+        "Ag": 8.546629587747905e-05
+      },
+      "receipts_booked_USD2041": 0,
+      "reading_rule": "Conditional recovery opportunity before domestic requirements, future stocks, priced refining capacity and product orders. Production ratios are scale diagnostics, not demand caps or market forecasts."
+    },
+    {
+      "case": "propellant_logistics:breakthrough:wider:combined",
+      "year": 200,
+      "treated_share": 0.01,
+      "inherited_physical_feasible": true,
+      "original_source_feed_kg_year": 2681426291609.669,
+      "treated_feed_kg_year": 26814262916.09669,
+      "refined_element_kg_year": {
+        "Sc": 82167.4821390534,
+        "Co": 7332306.565880806,
+        "Ni": 159484800.40184322,
+        "Cu": 1897269.986891337,
+        "Ga": 136089.8922928072,
+        "Ge": 477883.7936906751,
+        "Se": 306701.5392343139,
+        "Y": 21683.085564472425,
+        "Zr": 52067.93573047654,
+        "Nb": 3865.865913139491,
+        "Ru": 9700.327752527137,
+        "Rh": 1897.269986891337,
+        "Pd": 8002.7703958348875,
+        "Ag": 2938.6287015008684,
+        "In": 1114.1111727534844,
+        "Sn": 23822.863745176943,
+        "Te": 32809.93210413591,
+        "La": 3537.766592098132,
+        "Ce": 9029.863922573057,
+        "Pr": 1365.1784792894807,
+        "Nd": 6875.820553997178,
+        "Sm": 2225.3693079326963,
+        "Eu": 857.3377910689425,
+        "Gd": 3009.9546408576853,
+        "Tb": 549.2097330474924,
+        "Dy": 3694.6836586831305,
+        "Ho": 810.2626710934433,
+        "Er": 2382.2863745176937,
+        "Tm": 375.1744410168584,
+        "Yb": 2425.081938131784,
+        "Lu": 363.76229071976763,
+        "Hf": 1526.3751022358879,
+        "Ta": 212.55129928331522,
+        "W": 1440.7839750077073,
+        "Re": 569.1809960674011,
+        "Os": 7004.207244839447,
+        "Ir": 6504.925669341727,
+        "Pt": 12895.72983571255,
+        "Au": 2139.7781807045153,
+        "Zn": 4422208.240122666
+      },
+      "ratio_to_2025_world_primary_output": {
+        "Ni": 0.040484603178929435,
+        "Co": 0.023416075807167737,
+        "Ga": 0.1496988815220879,
+        "Pt": 0.07509866198444368,
+        "Pd": 0.041698645746718624,
+        "Au": 0.0006419334542113545,
+        "Ag": 0.00011189393901868691
+      },
+      "receipts_booked_USD2041": 0,
+      "reading_rule": "Conditional recovery opportunity before domestic requirements, future stocks, priced refining capacity and product orders. Production ratios are scale diagnostics, not demand caps or market forecasts."
+    },
+    {
+      "case": "propellant_logistics:breakthrough:wider:combined",
+      "year": 200,
+      "treated_share": 0.1,
+      "inherited_physical_feasible": true,
+      "original_source_feed_kg_year": 2681426291609.669,
+      "treated_feed_kg_year": 268142629160.96692,
+      "refined_element_kg_year": {
+        "Sc": 821674.8213905342,
+        "Co": 73323065.65880807,
+        "Ni": 1594848004.0184321,
+        "Cu": 18972699.86891337,
+        "Ga": 1360898.9229280718,
+        "Ge": 4778837.936906751,
+        "Se": 3067015.392343139,
+        "Y": 216830.85564472424,
+        "Zr": 520679.3573047655,
+        "Nb": 38658.65913139492,
+        "Ru": 97003.27752527138,
+        "Rh": 18972.699868913372,
+        "Pd": 80027.7039583489,
+        "Ag": 29386.287015008682,
+        "In": 11141.111727534844,
+        "Sn": 238228.6374517694,
+        "Te": 328099.3210413591,
+        "La": 35377.66592098133,
+        "Ce": 90298.63922573056,
+        "Pr": 13651.784792894809,
+        "Nd": 68758.20553997178,
+        "Sm": 22253.693079326964,
+        "Eu": 8573.377910689425,
+        "Gd": 30099.546408576854,
+        "Tb": 5492.097330474923,
+        "Dy": 36946.836586831305,
+        "Ho": 8102.626710934433,
+        "Er": 23822.863745176943,
+        "Tm": 3751.744410168584,
+        "Yb": 24250.819381317844,
+        "Lu": 3637.6229071976763,
+        "Hf": 15263.75102235888,
+        "Ta": 2125.512992833152,
+        "W": 14407.839750077072,
+        "Re": 5691.809960674012,
+        "Os": 70042.07244839448,
+        "Ir": 65049.25669341727,
+        "Pt": 128957.29835712549,
+        "Au": 21397.781807045158,
+        "Zn": 44222082.401226655
+      },
+      "ratio_to_2025_world_primary_output": {
+        "Ni": 0.40484603178929435,
+        "Co": 0.23416075807167738,
+        "Ga": 1.496988815220879,
+        "Pt": 0.7509866198444367,
+        "Pd": 0.4169864574671863,
+        "Au": 0.006419334542113547,
+        "Ag": 0.0011189393901868691
+      },
+      "receipts_booked_USD2041": 0,
+      "reading_rule": "Conditional recovery opportunity before domestic requirements, future stocks, priced refining capacity and product orders. Production ratios are scale diagnostics, not demand caps or market forecasts."
+    },
+    {
+      "case": "diversified:breakthrough:wider:combined",
+      "year": 100,
+      "treated_share": 0.01,
+      "inherited_physical_feasible": true,
+      "original_source_feed_kg_year": 227039067133.88364,
+      "treated_feed_kg_year": 2270390671.338836,
+      "refined_element_kg_year": {
+        "Sc": 6957.203541997022,
+        "Co": 620833.788296262,
+        "Ni": 13503738.819362273,
+        "Cu": 160643.76234125067,
+        "Ga": 11522.868366432567,
+        "Ge": 40462.90254460073,
+        "Se": 25968.728498773606,
+        "Y": 1835.9287124714363,
+        "Zr": 4408.644605605752,
+        "Nb": 327.3267638682626,
+        "Ru": 821.3365292635373,
+        "Rh": 160.64376234125066,
+        "Pd": 677.6026366424182,
+        "Ag": 248.8166544533657,
+        "In": 94.33291608159155,
+        "Sn": 2017.1058880442752,
+        "Te": 2778.0500254502,
+        "La": 299.54626361376063,
+        "Ce": 764.5676809173812,
+        "Pr": 115.59103801547133,
+        "Nd": 582.1826575073896,
+        "Sm": 188.42426259575268,
+        "Eu": 72.59165501285086,
+        "Gd": 254.85589363912698,
+        "Tb": 46.50214173036203,
+        "Dy": 312.8325898224355,
+        "Ho": 68.60575715024841,
+        "Er": 201.71058880442752,
+        "Tm": 31.766398117104455,
+        "Yb": 205.33413231588432,
+        "Lu": 30.800119847382646,
+        "Hf": 129.2397185752919,
+        "Ta": 17.996932773568684,
+        "W": 121.99263155237833,
+        "Re": 48.1931287023752,
+        "Os": 593.0532880417599,
+        "Ir": 550.778613741431,
+        "Pt": 1091.8944447856436,
+        "Au": 181.17717557283908,
+        "Zn": 374432.8295172008
+      },
+      "ratio_to_2025_world_primary_output": {
+        "Ni": 0.0034278721618381156,
+        "Co": 0.0019826627432687075,
+        "Ga": 0.012675155203075824,
+        "Pt": 0.00635867941375169,
+        "Pd": 0.003530666369873653,
+        "Au": 5.435315267185172e-05,
+        "Ag": 9.474172611878154e-06
+      },
+      "receipts_booked_USD2041": 0,
+      "reading_rule": "Conditional recovery opportunity before domestic requirements, future stocks, priced refining capacity and product orders. Production ratios are scale diagnostics, not demand caps or market forecasts."
+    },
+    {
+      "case": "diversified:breakthrough:wider:combined",
+      "year": 100,
+      "treated_share": 0.1,
+      "inherited_physical_feasible": true,
+      "original_source_feed_kg_year": 227039067133.88364,
+      "treated_feed_kg_year": 22703906713.388367,
+      "refined_element_kg_year": {
+        "Sc": 69572.03541997024,
+        "Co": 6208337.882962621,
+        "Ni": 135037388.19362277,
+        "Cu": 1606437.623412507,
+        "Ga": 115228.68366432568,
+        "Ge": 404629.0254460074,
+        "Se": 259687.2849877361,
+        "Y": 18359.287124714367,
+        "Zr": 44086.446056057524,
+        "Nb": 3273.267638682627,
+        "Ru": 8213.365292635373,
+        "Rh": 1606.4376234125068,
+        "Pd": 6776.026366424184,
+        "Ag": 2488.1665445336575,
+        "In": 943.3291608159158,
+        "Sn": 20171.058880442757,
+        "Te": 27780.500254502003,
+        "La": 2995.4626361376068,
+        "Ce": 7645.676809173812,
+        "Pr": 1155.9103801547137,
+        "Nd": 5821.826575073898,
+        "Sm": 1884.242625957527,
+        "Eu": 725.9165501285088,
+        "Gd": 2548.5589363912704,
+        "Tb": 465.0214173036204,
+        "Dy": 3128.325898224356,
+        "Ho": 686.0575715024842,
+        "Er": 2017.1058880442756,
+        "Tm": 317.6639811710446,
+        "Yb": 2053.3413231588434,
+        "Lu": 308.00119847382655,
+        "Hf": 1292.397185752919,
+        "Ta": 179.96932773568685,
+        "W": 1219.9263155237834,
+        "Re": 481.93128702375213,
+        "Os": 5930.532880417601,
+        "Ir": 5507.786137414309,
+        "Pt": 10918.94444785644,
+        "Au": 1811.7717557283913,
+        "Zn": 3744328.295172009
+      },
+      "ratio_to_2025_world_primary_output": {
+        "Ni": 0.034278721618381164,
+        "Co": 0.01982662743268708,
+        "Ga": 0.12675155203075825,
+        "Pt": 0.06358679413751692,
+        "Pd": 0.035306663698736536,
+        "Au": 0.0005435315267185174,
+        "Ag": 9.474172611878158e-05
+      },
+      "receipts_booked_USD2041": 0,
+      "reading_rule": "Conditional recovery opportunity before domestic requirements, future stocks, priced refining capacity and product orders. Production ratios are scale diagnostics, not demand caps or market forecasts."
+    },
+    {
+      "case": "diversified:breakthrough:wider:combined",
+      "year": 200,
+      "treated_share": 0.01,
+      "inherited_physical_feasible": true,
+      "original_source_feed_kg_year": 5244971923915.735,
+      "treated_feed_kg_year": 52449719239.15736,
+      "refined_element_kg_year": {
+        "Sc": 160722.72365893464,
+        "Co": 14342270.826509098,
+        "Ni": 311958342.1018905,
+        "Cu": 3711132.334485817,
+        "Ga": 266197.0110601105,
+        "Ge": 934758.8962802623,
+        "Se": 599919.8886574818,
+        "Y": 42412.940965552196,
+        "Zr": 101846.86481859573,
+        "Nb": 7561.780922147793,
+        "Ru": 18974.210431957563,
+        "Rh": 3711.1323344858174,
+        "Pd": 15653.723606364989,
+        "Ag": 5748.069630857733,
+        "In": 2179.2438746115963,
+        "Sn": 46598.428560836954,
+        "Te": 64177.47646103294,
+        "La": 6920.006157537464,
+        "Ce": 17662.75765210167,
+        "Pr": 2670.3410857916742,
+        "Nd": 13449.366806181686,
+        "Sm": 4352.907099096147,
+        "Eu": 1676.9853631774256,
+        "Gd": 5887.585884033891,
+        "Tb": 1074.2751494564209,
+        "Dy": 7226.941914525013,
+        "Ho": 1584.9046360811608,
+        "Er": 4659.842856083696,
+        "Tm": 733.8554917065939,
+        "Yb": 4743.552607989391,
+        "Lu": 711.5328911984086,
+        "Hf": 2985.647817969793,
+        "Ta": 415.7584344649525,
+        "W": 2818.228314158403,
+        "Re": 1113.339700345745,
+        "Os": 13700.496061898768,
+        "Ir": 12723.882289665658,
+        "Pt": 25224.538574249465,
+        "Au": 4185.487595284756,
+        "Zn": 8650007.69692183
+      },
+      "ratio_to_2025_world_primary_output": {
+        "Ni": 0.0791894253027876,
+        "Co": 0.04580273586530325,
+        "Ga": 0.2928167121661216,
+        "Pt": 0.14689584228533512,
+        "Pd": 0.08156413879105967,
+        "Au": 0.0012556462785854269,
+        "Ag": 0.0002188688051749675
+      },
+      "receipts_booked_USD2041": 0,
+      "reading_rule": "Conditional recovery opportunity before domestic requirements, future stocks, priced refining capacity and product orders. Production ratios are scale diagnostics, not demand caps or market forecasts."
+    },
+    {
+      "case": "diversified:breakthrough:wider:combined",
+      "year": 200,
+      "treated_share": 0.1,
+      "inherited_physical_feasible": true,
+      "original_source_feed_kg_year": 5244971923915.735,
+      "treated_feed_kg_year": 524497192391.57355,
+      "refined_element_kg_year": {
+        "Sc": 1607227.2365893465,
+        "Co": 143422708.26509097,
+        "Ni": 3119583421.018905,
+        "Cu": 37111323.34485817,
+        "Ga": 2661970.110601105,
+        "Ge": 9347588.962802622,
+        "Se": 5999198.886574817,
+        "Y": 424129.4096555219,
+        "Zr": 1018468.6481859573,
+        "Nb": 75617.80922147792,
+        "Ru": 189742.10431957562,
+        "Rh": 37111.323344858174,
+        "Pd": 156537.23606364988,
+        "Ag": 57480.69630857732,
+        "In": 21792.438746115964,
+        "Sn": 465984.2856083695,
+        "Te": 641774.7646103294,
+        "La": 69200.06157537464,
+        "Ce": 176627.57652101672,
+        "Pr": 26703.41085791674,
+        "Nd": 134493.66806181683,
+        "Sm": 43529.07099096147,
+        "Eu": 16769.853631774255,
+        "Gd": 58875.85884033891,
+        "Tb": 10742.751494564207,
+        "Dy": 72269.41914525013,
+        "Ho": 15849.04636081161,
+        "Er": 46598.428560836954,
+        "Tm": 7338.554917065939,
+        "Yb": 47435.526079893905,
+        "Lu": 7115.328911984085,
+        "Hf": 29856.47817969793,
+        "Ta": 4157.584344649525,
+        "W": 28182.283141584026,
+        "Re": 11133.39700345745,
+        "Os": 137004.96061898768,
+        "Ir": 127238.8228966566,
+        "Pt": 252245.38574249466,
+        "Au": 41854.875952847564,
+        "Zn": 86500076.96921828
+      },
+      "ratio_to_2025_world_primary_output": {
+        "Ni": 0.791894253027876,
+        "Co": 0.4580273586530325,
+        "Ga": 2.9281671216612155,
+        "Pt": 1.4689584228533512,
+        "Pd": 0.8156413879105967,
+        "Au": 0.012556462785854268,
+        "Ag": 0.0021886880517496747
+      },
+      "receipts_booked_USD2041": 0,
+      "reading_rule": "Conditional recovery opportunity before domestic requirements, future stocks, priced refining capacity and product orders. Production ratios are scale diagnostics, not demand caps or market forecasts."
+    }
+  ],
+  "existing_customer_requirements": [
+    {
+      "case": "diversified:breakthrough:reference",
+      "year": 100,
+      "Earth_goods_kg_year": 218402859.8006034,
+      "Earth_goods_invoices_USD2041_year": 474836375486.1926
+    },
+    {
+      "case": "diversified:breakthrough:reference",
+      "year": 200,
+      "Earth_goods_kg_year": 4010699216.76846,
+      "Earth_goods_invoices_USD2041_year": 5210913366554.646
+    },
+    {
+      "case": "diversified:breakthrough:wider",
+      "year": 100,
+      "Earth_goods_kg_year": 218402859.8006034,
+      "Earth_goods_invoices_USD2041_year": 474836375486.1926
+    },
+    {
+      "case": "diversified:breakthrough:wider",
+      "year": 200,
+      "Earth_goods_kg_year": 8986655668.36748,
+      "Earth_goods_invoices_USD2041_year": 13512439483092.094
+    }
+  ]
+}

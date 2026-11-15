@@ -1,0 +1,40 @@
+{
+  "schema": "terluna.research.staged-returns-sources/1",
+  "accessed": "2026-11-12",
+  "method_sources": "returns_sources.json",
+  "sources": [
+    {
+      "author": "Liberty Media",
+      "title": "2025 Form 10-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1560385/000110465926020653/lmca-20251231x10k.htm",
+      "read": "Targeted Formula 1 segment revenue, team payments, operating costs and contract descriptions. Audited financial disclosures; no fan-to-revenue calibration transferred."
+    },
+    {
+      "author": "Formula 1",
+      "title": "2025 season: a half-year review",
+      "url": "https://corp.formula1.com/formula-1-2025-season-a-half-year-review/",
+      "read": "Targeted audience and social metrics. Corporate operating claims, not audited unique paying customers."
+    },
+    {
+      "author": "Netflix",
+      "title": "2025 annual report",
+      "url": "https://s22.q4cdn.com/959853165/files/doc_financials/2025/ar/99482238-46b2-4d0d-b292-40e6781bdf03.pdf",
+      "read": "Targeted audited operations, cash flow, content accounting, membership retention risks and cost definitions."
+    },
+    {
+      "author": "Roblox",
+      "title": "2025 Form 10-K",
+      "url": "https://www.sec.gov/Archives/edgar/data/1315098/000131509826000024/rblx-20251231.htm",
+      "read": "Targeted daily active and paying accounts, bookings/revenue differences, audited operations and creator/infrastructure costs."
+    },
+    {
+      "author": "Alphabet",
+      "title": "Q4 2025 earnings call",
+      "url": "https://abc.xyz/investor/events/event-details/2026/2025-Q4-Earnings-Call-2026-Dr_C033hS6/default.aspx",
+      "read": "Targeted management disclosures on YouTube, consumer subscriptions, Cloud and group capital expenditure; not an audited standalone YouTube profit account."
+    }
+  ],
+  "uses": "Sources inform channel separation, worldwide reach, recurring production obligations and account definitions. New USD2041 prices, demand, common costs, churn, acquisition, staffing, power and service capital are project scenarios; none is estimated from these comparators.",
+  "provisioning": "The full transport product is frozen and SHA-256 pinned in staged_inputs.json. Existing economy and industrial identities remain in returns_inputs.json. All refer to source commit146a558275f486c9fd9a5cf79908b7c6fdf21888.",
+  "reading_limit": "Targeted primary-source reading and two bounded internal research/accounting reviews. No full literature review, observed lunar demand, engineering validation of startup modules, or market probability assessment."
+}

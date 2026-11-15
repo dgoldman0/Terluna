@@ -1,0 +1,31 @@
+{
+  "schema": "terluna.humanities.enclosed-finance-sources/1",
+  "review_date": "2026-11-13",
+  "scope": "Selected primary-source sections checked for appraisal method. No empirical calibration of lunar demand, equipment lives or U monetary transmission is claimed.",
+  "sources": [
+    {
+      "id": "hmt2026-transfers",
+      "title": "The Green Book (2026)",
+      "publisher": "HM Treasury",
+      "updated": "2026-10-28",
+      "url": "https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026",
+      "reviewed_sections": [
+        "Economic transfers",
+        "Macroeconomic effects"
+      ],
+      "use": "Distinguish financial transfers from real resource costs; do not add general spending multipliers to project benefits. The project uses a separate conditional purchase-price welfare proxy."
+    },
+    {
+      "id": "hmt2026-long-horizon",
+      "title": "Green Book Discount Rate Review: HM Treasury response",
+      "publisher": "HM Treasury",
+      "updated": "2026-10-28",
+      "url": "https://www.gov.uk/government/publications/green-book-discount-rate-review-2026/green-book-discount-rate-review-hm-treasury-response",
+      "reviewed_sections": [
+        "R.22: highly complex and ultra-long-term projects"
+      ],
+      "use": "Support reporting annual states, resource requirements and other quantitative evidence alongside discounted figures beyond125years. The study fixed-rate sensitivities are not the official discount schedule."
+    }
+  ],
+  "inherited_market_evidence": "Customer, cultural-industry, competition and commercial-service assumptions retain the source identities in enclosed_inputs.json and the earlier complex_returns study. Changed growth and capacity-admission rules are explicit scenarios, not newly estimated elasticities."
+}

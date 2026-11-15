@@ -1,5 +1,7 @@
 # Money, banking and interworld finance
 
+The current [U trade and currency transition plan](trade_transition.md) concerns the planned off-Earth economic zone before the Open Moon, planetary array and subsequent outer Solar System buildout. It develops a substantial transition from USD toward either a single U currency or a basket of U-related currencies, with separately funded partial reserves. Its transaction, basket and reserve calculations preserve the older institutional reference below. The [nine-portfolio pressure study](pressure.md) now couples actual distributions and reserve contributions to conditional monetary-stock transmission. It distinguishes domestic price levels, outside balance demand, issuance shortfalls/excesses, import costs and withdrawal stress. It does not forecast floating exchange rates or calibrate U inflation.
+
 31 October 2026. **Any monetary arrangement for the Open Moon has to issue the claims that circulate, settle payments, extend credit, bear losses and risk, and take its collective decisions through whoever holds the decision rights.** This study compares one family of arrangements, the currency areas, banks, fiscal authorities and central banks of present economies, for early settlement and for a mature Moon integrated with Earth, the array and the wider Solar System. The [sports and media account](../world_economy/sports_finance.md) remains a separate preliminary business scenario.
 
 It sets out which mechanisms could help development and what each would require, for a reader who knows the three-world production comparison. The descriptions of present institutions draw on primary sources, and the lunar arrangements are proposals for comparison; the choice among them belongs to the communities' collective decisions ([register](../../decisions.md#automation-the-network-and-food-12-october-2026)). The reference ledger tests specified transactions and balance-sheet identities at normalized sizes, leaving the money supply and the currency arrangement to those decisions.
@@ -27,6 +29,7 @@ It sets out which mechanisms could help development and what each would require,
 | [Reference ledger](ledger.py) and [runner](run.py) | Paired financial claims, explicit transaction effects, interbank settlement, credit loss, fiscal operations and external valuation | Arbitrary normalized balances; constant valuations except the stated currency revaluation |
 | [Inputs](inputs.json) and [result](results/reference.json) | Reproducible opening balance sheets, event sequences and residual checks | No mapping of illustrative monetary stocks onto mature world output |
 | [Sources](sources.json) and [checks](checks.json) | Targeted reading scopes, local baseline identities, verification and unresolved work | Targeted institutional research; empirical calibration and a full literature review outstanding |
+| [U trade transition](trade_transition.md), [calculation](trade_transition.py) and [results](results/trade_transition.json) | Single U versus constituent-currency basket, phased trade adoption, fixed-stock FX transactions, funded partial reserves and transaction-balance scenarios for nine portfolios | Proposed institutions and normalized demonstrations; no adopted constituents, issuer, peg or monetary forecast |
 
 The ledger's entities are two lunar banks, a monetary authority, a Treasury standing for the collective budget, firms, households, Earth and array counterparties, and an outside S issuer. L and S are hypothetical currencies; U only values their claims. Every scenario starts afresh from the same opening balances. The accounts include a matching outside issuer and real assets, so financial claims add no aggregate net worth of their own. Bank net worth is unallocated capital; shareholder securities and distributions sit outside the model.
 
@@ -53,3 +56,27 @@ The default runner writes under ignored `research/runs/monetary_system/`. Use `-
 Ranking monetary arrangements needs more than population, low gravity or the scale of construction. The next comparison needs staged domestic supply and import accounts; the currencies of invoices, deposits and debt; creditor residence and maturities; collective revenue and guarantees; and possible joint shocks to the Moon, Earth and array. Those inputs would show where monetary flexibility preserves output, where a common currency reduces risk, and how much external liquidity remains necessary.
 
 The collective decisions are substantive too, and they belong to the communities' decision-making ([register](../../decisions.md#automation-the-network-and-food-12-october-2026)): banking support needs a bearer of losses, a monetary union representation and common rules, and an independent issuer a mandate and a relationship with the collective budget. Automation can improve the administration of each while those choices stay with the people who make them. The present result is an institutional and accounting foundation for evaluating them, with the construction, commercial and monetary evidence kept at their respective scales.
+
+The [credit-supported financial comparison](../complex_returns/credit.md) applies
+this monetary work to six investment-financing policies, including outside
+suppliers accepting U term claims. It maintains separate external purchasing
+power, loan-created deposits, restricted prepayments, loss capital and funded
+payout deferral. Its continuous matched price-premium rule is a policy experiment,
+with actual consumer inflation and floating exchange rates still uncalibrated.
+
+The [U monetary-policy comparison](../complex_returns/policy.md)
+separates modest local loan-rate relief, wider supplier acceptance and temporary
+receivables support. In the strong year-100 propellant/logistics case, a six-month
+payment delay requires 144.1 billion USD2041-equivalent of bridge funding. A
+conditional facility repays by month eight using foreign reserves and voluntary
+term holdings, with only 91 million in additional circulating local balances.
+Its benefit depends on collateral, saving contracts and reserve access; neither
+low inflation nor a U-related currency basket supplies those automatically.
+
+The [integrated returns synthesis](../complex_returns/consolidated.md)
+brings staged capital, worldwide services, U financing and resilience into one
+set of dated accounts. Strong-demand sponsor cash NPV is 2.64–4.47 trillion
+USD2041-equivalent at 3% over 100 years, including initial monetary-reserve funding;
+all portfolios remain negative at 7%. It reports payback, internal return rates,
+socioeconomic switching values and payment stress separately, and distinguishes
+profitable staged capacity from completing the enclosed architectural build-out.

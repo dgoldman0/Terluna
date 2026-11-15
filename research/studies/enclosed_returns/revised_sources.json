@@ -1,0 +1,49 @@
+{
+  "schema": "terluna.humanities.revised-return-sources/1",
+  "review_date": "2026-11-13",
+  "sources": [
+    {
+      "id": "hmt2026",
+      "url": "https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026",
+      "read_scope": "Economic transfers, macroeconomic effects, sensitivity analysis and switching values, and distributional analysis, rechecked 2026-11-13.",
+      "use": "Separate financing transfers from resource costs and report switching values and distribution; no general GDP/spending multiplier is added to benefits."
+    },
+    {
+      "id": "hmt2026-long-horizon",
+      "url": "https://www.gov.uk/government/publications/green-book-discount-rate-review-2026/green-book-discount-rate-review-hm-treasury-response",
+      "read_scope": "R.22 and surrounding long-horizon appraisal discussion, rechecked 2026-11-13.",
+      "use": "Report annual physical/cash states and undiscounted outcomes beside long-horizon discounted sensitivities. Constant 0/1/3/7 percent project comparisons are not represented as the official discount schedule."
+    },
+    {
+      "id": "wealth-accounting",
+      "record": "../monetary_wealth/sources.json",
+      "use": "Unchanged counterparty consolidation, money-holder and ownership methods. The 2025 SNA web fetch exceeded tool size limits; the retained 16355877-byte PDF was located and its recorded SHA256 verified as 47fa283670e5f85bffc8df7e44f41db45e0bb2f00cead758db6435e709999d1f. No new full-document reading claimed."
+    },
+    {
+      "id": "resource-potential",
+      "producer_commit": "1d652941",
+      "record": "resources/source_access/population_sources.json",
+      "use": "Conditional population stock draws and separate structural uncertainty, plus lunar regional/depth assessment. Finite measured samples do not cap geological opportunity. The source study retains its specific retrieval and empirical-calibration limitations."
+    },
+    {
+      "id": "reclamation",
+      "producer_commit": "210a20bd",
+      "record": "provisioning/enclosed_industry/reclamation_sources.json",
+      "use": "Costed partial loops and refurbishment assumptions; new expanded physical product reruns them across the full financial scenario grid."
+    },
+    {
+      "id": "expanded-recovery-and-assets",
+      "producer_commit": "a8af87614e9c30b6fa4879440765f7e74fe094be",
+      "record": "provisioning/enclosed_industry/revised_industry.md",
+      "use": "Independent combined-recovery solutions for all 81 original orders, six poorer-source and six rollout variants, plus eighteen asset accounts; exact file and case digests govern consumer admission."
+    },
+    {
+      "id": "source-preservation-protocols",
+      "producer_commit": "1d652941",
+      "record": "resources/source_access/protocols.md",
+      "sha256": "b0128490e2f73102f46f0e7fbc587f29eb0c9e3fc01c9da13922f1ab275ad913",
+      "use": "Survey before disturbance, native-condition and unopened samples, provenance and distributed archives, physical heritage and functions, future stocks and safe cargo protocols remain requirements. Their complete cost is not established by the inherited resource provision."
+    }
+  ],
+  "boundary": "Research-informed scenario appraisal, not investment advice based on contracted sales, audited asset prices or demonstrated lunar industrial performance."
+}

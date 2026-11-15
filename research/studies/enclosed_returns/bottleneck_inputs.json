@@ -1,0 +1,98 @@
+{
+  "schema": "terluna.humanities.enclosed-bottleneck-inputs/1",
+  "market": "breakthrough",
+  "growth": "reference",
+  "experimental_portfolios": [
+    "services",
+    "diversified",
+    "propellant_logistics",
+    "prior_manufacturing_mix"
+  ],
+  "baseline_dependencies": {
+    "markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb",
+    "enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
+    "finance.py": "4a212ba856b682fe9a8925df87d61fa052ea061c5febb63c3db65debb26a288d",
+    "finance_inputs.json": "b859c68691e0fe38596460470cc1753f3def08b29955be7970a7c0ca5a0facf0",
+    "results/orders.json": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
+    "results/returns.json": "a1de3348cb5e3c9ab110297ff176d347c077a9856f256e6406b0c508198abebf"
+  },
+  "experiments": {
+    "baseline": {},
+    "demand_25": {
+      "demand_multiplier": 1.25
+    },
+    "capture_8": {
+      "market_config": {
+        "commercial_capture_growth": 0.08
+      }
+    },
+    "service_rollout": {
+      "market_config": {
+        "service_staff_fraction": 0.2
+      },
+      "service_orders_per_year": 4
+    },
+    "combined_rollout": {
+      "market_config": {
+        "commercial_capture_growth": 0.08,
+        "service_staff_fraction": 0.2
+      },
+      "service_orders_per_year": 4
+    },
+    "demand_and_rollout": {
+      "demand_multiplier": 1.25,
+      "market_config": {
+        "commercial_capture_growth": 0.08,
+        "service_staff_fraction": 0.2
+      },
+      "service_orders_per_year": 4
+    },
+    "tug_life_30": {
+      "engineering_overrides": {
+        "asteroid_tug_active_life_years": 30.0
+      }
+    }
+  },
+  "periods": [
+    [
+      0,
+      7
+    ],
+    [
+      8,
+      25
+    ],
+    [
+      26,
+      50
+    ],
+    [
+      51,
+      100
+    ],
+    [
+      101,
+      150
+    ],
+    [
+      151,
+      200
+    ],
+    [
+      201,
+      220
+    ]
+  ],
+  "evidence": "Controlled conditional sensitivity experiments, not forecasts, an optimized investment plan or demonstrated engineering improvements. Baseline identities are preserved.",
+  "rules": [
+    "The full baseline stratification covers all nine portfolios, three markets and three growth assumptions. Physical intervention experiments cover four representative portfolios at breakthrough demand and0.5percent real growth; rankings apply to these tested changes only.",
+    "The demand intervention raises all four buyer budgets and premium, compute, mission, research and professional quantities by25percent. It retains the2billion audience ceiling, raises paid conversion from40to50percent, licences from400to500million and advertising/rights spending per audience member by25percent. Subscription, licence, research, professional, material and fuel unit prices stay fixed; advertising/rights intensity is the explicit exception. Customer-budget competition remains in force.",
+    "The capture intervention changes commercial supplier-offer growth from4to8percent annually, retaining the5percent opening scale, five-year initial ramp, qualifications, buyer ceilings and all physical and financial requirements. This tests commercial expansion timing, not a demonstrated increase in plant productivity.",
+    "The service intervention raises the staff planning allowance from10to20percent of residents and the annual package-order limit from1to4. It retains package staffing, equipment, quotes, two-year lead, all-sector workforce screen and the residential schedule. These staffing and cadence choices were planning assumptions, not observed maxima.",
+    "The tug intervention changes only the source tug active-component mean life from20to30years, with its structural mean life50years and unit price fixed. It is an engineering performance target whose qualification or incremental development cost is unpriced, not an adopted technological forecast. The physical feedback is rerun.",
+    "Changed physical cases must pass dated capacity and workforce screens before financial returns are admitted. A failed screen is reported unresolved; it is never supplied with the requested sales.",
+    "No counterfactual is added to the accepted baseline. Demand and rollout interaction is computed as joint minus separate changes plus baseline; individual improvements cannot be summed as independent returns.",
+    "All money uses constant USD2041 equivalents. U retains its meaning as the general economic unit or basket of U-related currencies. Investment yields, terminal factory sales, option value and research spillovers remain absent from the baseline.",
+    "Common physical costs are kept shared. Sector revenue and directly identifiable commercial expenses can be stratified; allocating joint fleets and residential systems to individual export sectors would require additional counterfactuals."
+  ]
+}

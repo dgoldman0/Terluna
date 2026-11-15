@@ -1,0 +1,133 @@
+{
+  "schema": "terluna.humanities.cultural-buildout-inputs/1",
+  "evidence": "Quick planning allowances and arithmetic on the committed sports and entertainment scenarios. No engineering quotation, acquisition-cost measurement, success probability, peak funding schedule or optimal build-out is established. Lower/middle/higher are illustrative combinations, not confidence limits.",
+  "reading_rule": "Gross uses through development, full hosted build-out and initial audience growth, before crediting early receipts. Includes development effort at a compensation proxy, installed assets once, construction contingency, 6-12 months of full-programme operations at base pay without receipts, a separate renewal reserve, and initial paid promotion. No generic working-capital percentage or earlier small-venue launch total is added. Entertainment includes sports; only its difference is incremental. Pilot work precedes regular operations and excludes assets already in installed capital.",
+  "products": {
+    "humanities/economics/results/sports.json": {
+      "schema": "terluna.humanities.sports-economics/1",
+      "sha256": "809b2cec731454bbf6c0e1a58fc20ff05e589ba986a0b2a70ec51d08ca080518",
+      "use": "Existing physical capital, participant costs, acquired audience and renewal; kept unchanged."
+    },
+    "humanities/economics/results/entertainment.json": {
+      "schema": "terluna.humanities.entertainment-economics/1",
+      "sha256": "ef178d43eb545f3b8d138ac48e70093b65030075384f484995697fd28f03bb49",
+      "use": "Existing physical capital, participant costs, acquired audience and renewal; kept unchanged."
+    }
+  },
+  "development_U_person_year": 120000,
+  "promotion_U_paid_customer": 8,
+  "small_exploration": {
+    "person_years": {
+      "lower": 1,
+      "middle": 2,
+      "higher": 4
+    },
+    "purchased_U": {
+      "lower": 50000,
+      "middle": 100000,
+      "higher": 200000
+    },
+    "scope": "Small digital or content prototype; a subset of the larger discovery allowance, not an extra line in full build-out."
+  },
+  "programmes": {
+    "discovery": {
+      "person_years": {
+        "lower": 10,
+        "middle": 20,
+        "higher": 30
+      },
+      "purchased_services_U": {
+        "lower": 300000,
+        "middle": 600000,
+        "higher": 1400000
+      },
+      "scope": "Several sport concepts, low-cost motion and gameplay work, audience interviews and short media experiments."
+    },
+    "games_and_formats": {
+      "person_years": {
+        "lower": 25,
+        "middle": 50,
+        "higher": 75
+      },
+      "purchased_services_U": {
+        "lower": 1000000,
+        "middle": 2000000,
+        "higher": 3000000
+      },
+      "scope": "Playable digital products, event formats, rights and club administration, brand/production tools and community development; owned effort is costed even if cash pay is deferred."
+    },
+    "physical_pilot": {
+      "person_years": {
+        "lower": 8,
+        "middle": 16,
+        "higher": 24
+      },
+      "purchased_services_U": {
+        "lower": 2000000,
+        "middle": 4000000,
+        "higher": 8000000
+      },
+      "scope": "Qualification, instruction, medical and engineering services, practice events and production commissioning; rented equipment and consumables only. Travel and guest nights added explicitly."
+    },
+    "additional_entertainment_formats": {
+      "person_years": {
+        "lower": 10,
+        "middle": 20,
+        "higher": 30
+      },
+      "purchased_services_U": {
+        "lower": 300000,
+        "middle": 800000,
+        "higher": 1400000
+      },
+      "scope": "Additional documentary, performance and commissioned-production development beyond shared sports work."
+    }
+  },
+  "pilot": {
+    "people": 16,
+    "visits_each": 2,
+    "nights_each": 28
+  },
+  "cases": [
+    {
+      "name": "lower",
+      "asset_contingency_fraction": 0.2,
+      "runway_months": 6,
+      "paid_promotion_share": 0.1,
+      "construction_years": 1,
+      "average_debt_draw_fraction": 0.5
+    },
+    {
+      "name": "middle",
+      "asset_contingency_fraction": 0.3,
+      "runway_months": 9,
+      "paid_promotion_share": 0.3,
+      "construction_years": 1.5,
+      "average_debt_draw_fraction": 0.75
+    },
+    {
+      "name": "higher",
+      "asset_contingency_fraction": 0.4,
+      "runway_months": 12,
+      "paid_promotion_share": 1,
+      "construction_years": 2,
+      "average_debt_draw_fraction": 1
+    }
+  ],
+  "assumption_notes": {
+    "capital": "Inherited 200 million U for two sports venues and 200 guest beds; 230 million U including entertainment studio. No new component-level construction estimate. All cases require an already funded host; host construction and infrastructure expansions remain outside these uses. Freight/installation must fit installed allowances or be added when priced. A 20-40% contingency does not bound missing engineering.",
+    "audience": "Alternative initial-promotion cases assume paid promotion reaches 10%, 30% or 100% of paying customers at an assumed 8 U per paid-sourced customer. Organic reach carries no extra purchased-promotion charge here; content and community labour are separately budgeted. The old 8 U averaged across every acquired customer remains in the annual operating models. No paid share, virality or guaranteed interest is inferred.",
+    "runway": "Cash support for the full programme at base payroll and fixed physical purchases, without receipts for 6-12 months. Successful-property revenue-linked pay is excluded because receipts are zero. Existing variable commercial costs and churn acquisition are excluded from this runway; initial audience promotion is separate. Renewal is funded once as a liquidity reserve. With revenues and obligations timed, actual peak outside funding could differ substantially.",
+    "financing": "Optional 20-million-U debt memo inherits rate, fees and reserve convention; construction interest uses explicit duration and average drawn fraction. No debt or investor commitment is assumed in gross uses. Supplier advances and payroll are covered by runway liquidity; no dated receivables, tax or contract-payment schedule is modeled.",
+    "effort": "The 120,000 U per person-year proxy inherits the prior production-worker assumption. It is an economic effort cost, not an assertion that every founder must draw that cash salary; the apparent saving from unpaid work does not guarantee successful products.",
+    "spectator_hospitality": "Guest accommodation here serves visiting athletes, artists and crews. General hospitality is budgeted in research/studies/world_economy/early_exports.md and visitor packages in sports_finance.md, but additional spectators and their hotel expansion are not estimated in this screen. Shared capacity and package receipts require reconciliation before combination; extra beds, services and transport cannot be assumed free."
+  },
+  "source_review": {
+    "title": "World Bank PPP Resource Center: Key Issues in Developing Project Financed Transactions",
+    "url": "https://ppp.worldbank.org/financing/issues-in-project-financed-transactions",
+    "accessed": "2026-11-12",
+    "read": "Revenue-certainty and financial-ratio/sensitivity passages.",
+    "use": "Separate operating revenue expectations from construction funding and test cost/revenue sensitivities.",
+    "limit": "No source price, recommended contingency percentage or lunar financing standard transferred; all new amounts are scenario choices."
+  }
+}

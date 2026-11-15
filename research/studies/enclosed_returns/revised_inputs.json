@@ -1,0 +1,137 @@
+{
+  "schema": "terluna.humanities.revised-enclosed-inputs/1",
+  "horizons": [
+    100,
+    200,
+    220
+  ],
+  "products": {
+    "population": {
+      "path": "inputs/revised_population.json.gz",
+      "schema": "terluna.resources.nea-population/1",
+      "sha256": "4592f5f5739c102b19b65f6ed291760602a5f458a738eb15f06c803b324ee19a",
+      "source_commit": "1d652941",
+      "source_path": "resources/source_access/results/population.json.gz"
+    },
+    "lunar": {
+      "path": "inputs/revised_lunar.json.gz",
+      "schema": "terluna.resources.lunar-potential/1",
+      "sha256": "635a919992ac6de03d613e52b759a078cfa914b027b8f8f31b3102bc09ef0f81",
+      "source_commit": "1d652941",
+      "source_path": "resources/source_access/results/lunar_potential.json.gz"
+    },
+    "resource_comparison": {
+      "path": "inputs/revised_resource_comparison.json.gz",
+      "schema": "terluna.resources.potential-and-reclamation/1",
+      "sha256": "500b58fbce7c8af122c34d8c99698b8668e987bed5d33585376b1590fcca2233",
+      "source_commit": "1d652941",
+      "source_path": "resources/source_access/results/potential.json.gz"
+    },
+    "reclamation": {
+      "path": "inputs/reclamation.json.gz",
+      "schema": "terluna.provisioning.reclamation/1",
+      "sha256": "f6b43f00ea585af509e0f9e4ec3545ccf1956ed8c04348dd3404cf965bb54f2c",
+      "source_commit": "210a20bd",
+      "source_path": "provisioning/enclosed_industry/results/reclamation.json.gz"
+    },
+    "rollout_orders": {
+      "path": "results/revised_orders.json",
+      "schema": "terluna.humanities.enclosed-bottleneck-orders/1",
+      "sha256": "ac55713bd79f5007e93eee5d7b891e500b0ea8feeda8aceb278fd5cc7778ee3e",
+      "source_path": "research/studies/enclosed_returns/results/revised_orders.json"
+    },
+    "physical": {
+      "path": "inputs/revised_industry.json.gz",
+      "schema": "terluna.provisioning.revised-industry/1",
+      "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f",
+      "source_commit": "a8af87614e9c30b6fa4879440765f7e74fe094be",
+      "source_path": "provisioning/enclosed_industry/results/revised_industry.json.gz",
+      "source_branch": "domain/provisioning"
+    }
+  },
+  "dependencies": {
+    "finance.py": "4a212ba856b682fe9a8925df87d61fa052ea061c5febb63c3db65debb26a288d",
+    "finance_inputs.json": "b859c68691e0fe38596460470cc1753f3def08b29955be7970a7c0ca5a0facf0",
+    "markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb",
+    "enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
+    "bottlenecks.py": "5cea14e1212eb86cb81cb9f41cd257632d0ad105f1789ecac7fdf7e62acebc46",
+    "results/returns.json": "a1de3348cb5e3c9ab110297ff176d347c077a9856f256e6406b0c508198abebf",
+    "results/orders.json": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
+    "bottleneck_inputs.json": "15208570d7529787c26516724041a1e00df15303ba3cc7d6308898a02835e8a8",
+    "revised_orders.py": "52bf75362c85cc447cdcae633eaa086ccc349fcae3b325653e3b33c9180ff914",
+    "../complex_returns/credit.py": "d2a2ae1efc0c41d9ef78fe1ee524f9dc451ade280d7372c3363e645060830ea8",
+    "../complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef",
+    "../complex_returns/policy.py": "ab23ba83a5d91f495627caae56b3503060f29b070bb96d77ae9914d84239a189",
+    "../complex_returns/policy_inputs.json": "6ad3e674acf83905ee3e518c188561208e4620c2eb813202f2069c5f8f9ad440"
+  },
+  "water_recovery": 0.7,
+  "availability_shares": [
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "periods": [
+    [
+      0,
+      7
+    ],
+    [
+      8,
+      25
+    ],
+    [
+      26,
+      50
+    ],
+    [
+      51,
+      100
+    ],
+    [
+      101,
+      150
+    ],
+    [
+      151,
+      200
+    ],
+    [
+      201,
+      220
+    ]
+  ],
+  "receipt_shocks": [
+    {
+      "start": 40,
+      "end": 44,
+      "factor": 0.5,
+      "known_from": 40
+    },
+    {
+      "start": 195,
+      "end": 199,
+      "factor": 0.5,
+      "known_from": 195
+    }
+  ],
+  "margin_portfolios": [
+    "services",
+    "propellant_logistics",
+    "diversified"
+  ],
+  "evidence": "Conditional reappraisal of independently solved physical schedules with the unchanged dated financing engine, broader geological distributions and separate monetary/ownership accounts. No deposit, recovery process, worldwide-demand forecast, price equilibrium or mine route is empirically qualified by the calculation.",
+  "rules": [
+    "U is the established general economic unit, potentially one currency or a basket of U-related currencies, serving the planned off-Earth economy before Open Moon, the habitat array and outer-system buildout. Money retains constant USD2041 equivalents, not a fixed U exchange rate.",
+    "Primary comparison covers all nine portfolios, three market levels and three growth paths, with original and combined reclamation physics, three financing arms and years 100/200/220. Original baseline financial results must reproduce exactly. No founding campaign is repeated with population.",
+    "Customer budgets, competition, service synergies, hotel requirements and household cultural demand remain those already modelled. Recovery changes their supporting physical costs. Accelerated rollout is a separate, capacity-tested orderbook; unpriced margin targets remain separate financial sensitivities.",
+    "All existing capital allowances, debt constraints, U partial reserves, outside supplier holdings, completion-funding retention, local interest relief and mild relative-price limits remain explicit. They are already in both comparison arms and cannot be counted again as new revenue.",
+    "Broader resource probabilities quantify conditional stock sufficiency, not transport feasibility, permission or a probability of commercial success. They never multiply NPV. Preserved scientific holds and physical/data/future-stock obligations remain in force. The 100 percent availability case is only an inventory ceiling.",
+    "Baseline seed-stock calculations provide the exact inherited average; the small late-preproduction product omission remains a bounded interval. Combined loops supply exact inherited seed totals once. Raw feed is compared with body mass; contained water receives recovery once.",
+    "NPV of distributions, undiscounted payouts, IRR, completion funding, operating survival, socioeconomic value and productive/local wealth are different measures. Terminal financial claims and physical assets must not be added twice.",
+    "Household/community wealth uses the unchanged saving and ownership rules with revised financial and asset stocks. Resource stocks, brands, IP and research options remain unvalued pending suitable evidence. Local ownership is not implied by local production.",
+    "Permanent revenue losses and temporary delayed receipts are separate stresses. Monthly payment episodes pause discretionary investment/payouts and cannot establish uninterrupted construction.",
+    "Partial loop coefficients, repair requalification and restored equipment life remain engineering scenarios. No complete nutrient/carbon/metabolic-gas closure or rocket-exhaust recycling is credited."
+  ]
+}
