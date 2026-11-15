@@ -21,7 +21,14 @@ This runner sets MITgcm (climate/ocean/stratified.py) on the South Pole-Aitken S
 
 `trial` runs a few model days from rest, checks that the water stays sane and measures the machine time a model year
 takes; `run` continues the experiment in chunks of a model year, each ending in a pickup; `read` reduces what has run.
-Neither the monthly tide nor a tracer of the water's age is in this set-up yet.
+The monthly tide is not in this set-up yet.
+
+A patch of fine cells round one river's mouth sits in the same sea: `patch-trial` measures it, `patch-run` runs it
+from the water one of the coarse run's pickups holds, in chunks of a twelfth of the model year, and `patch-read`
+reduces it by the way over water from the mouth.
+
+    /media/projectspace/terluna-research/ocean/run.sh -m research.studies.south_sea_ocean.circulation patch-run --from-year 50 --deltat 900
+    /media/projectspace/terluna-research/ocean/run.sh -m research.studies.south_sea_ocean.circulation patch-read
 """
 from __future__ import annotations
 
@@ -321,9 +328,11 @@ def carry_over(parent_grid, parent_share, parent_fields, grid):
     return out
 
 
-def build_patch(box, fine, deltat, parent_step=1.0, spread_km=6.0, name=None, tiles=(2, 2)):
-    """The sea with a patch of fine cells round one shore, started from the coarse run's latest yearly means. The
-    levels are the coarse run's; rivers are shared among the wet cells within `spread_km` of each mouth."""
+def build_patch(box, fine, deltat, parent_step=1.0, spread_km=6.0, name=None, tiles=(2, 2), parent_iteration=None):
+    """The sea with a patch of fine cells round one shore, started at rest from the water of one of the coarse run's
+    pickups (its latest unless `parent_iteration` names one): temperature, salt and dye as that run left them at the
+    end of a model year. The levels are the coarse run's; rivers are shared among the wet cells within `spread_km`
+    of each mouth."""
     rotation = np.array(json.loads((ROOT / R.FRAME).read_text())['frame']['rotation_today_to_turned'])
     frame = frame_of_the_sea(rotation)
     parent_name = f'south_sea_{parent_step:g}deg'
@@ -341,12 +350,17 @@ def build_patch(box, fine, deltat, parent_step=1.0, spread_km=6.0, name=None, ti
         grid, _ = sea_floor(parent_step, rotation, frame, edges=edges)
         np.savez(cache, xg=grid.xg, yg=grid.yg, depth=grid.depth)
     grid.depth = np.minimum(grid.depth, float(delr.sum()))          # the coarse run's levels hold the floor
-    deep = sorted(parent_folder.glob('deep.*.data'))
-    if not deep:
-        raise SystemExit(f'{parent_folder} holds no yearly means to start from')
-    means = mitgcm.read_mds(str(deep[-1])[:-5])
+    parent = json.loads((parent_folder / 'experiment.json').read_text())
+    pickups = sorted(int(q.name.split('.')[1]) for q in parent_folder.glob('pickup.*.meta'))
+    if parent_iteration is None and not pickups:
+        raise SystemExit(f'{parent_folder} holds no pickup to start from')
+    parent_iteration = pickups[-1] if parent_iteration is None else int(parent_iteration)
+    if parent_iteration not in pickups:
+        raise SystemExit(f'{parent_folder} holds no pickup at iteration {parent_iteration}')
+    state = mitgcm.read_pickup(parent_folder / f'pickup.{parent_iteration:010d}', len(delr))
+    dye = mitgcm.read_mds(str(parent_folder / f'pickup_ptracers.{parent_iteration:010d}'))['pTr01']
     share = mitgcm.read_mds(str(parent_folder / 'hFacC'))
-    start = carry_over(parent_grid, share, dict(theta=means['THETA'], salt=means['SALT'], dye=means['TRAC01']), grid)
+    start = carry_over(parent_grid, share, dict(theta=state['Theta'], salt=state['Salt'], dye=dye), grid)
     forcing = forcing_on_grid(grid, frame, read_record())
     loss = float((forcing['sflux'].mean(axis=0) * grid.area).sum())
     runoff, rivers = rivers_on_grid(grid, frame, rotation, loss, spread_km=spread_km)
@@ -355,13 +369,13 @@ def build_patch(box, fine, deltat, parent_step=1.0, spread_km=6.0, name=None, ti
                  theta0=THETA0_C, salt0=salt0, rho_const=float(R.seawater_density(salt0, R.T_REF_C)), forcing=forcing,
                  runoff=runoff, forcing_period_s=SP.WRITE_S, sst_relax_s=SST_RELAX_DAYS * 86400.0,
                  viscosity_smag=2.2, visc_h=0.0, visc_grid=PATCH_VISC_GRID, start=start, output_s=MONTH_S,
-                 deep_output_s=YEAR_S)
+                 deep_output_s=MONTH_S)
     wet = grid.wet
     in_box = wet & (grid.xc[None, :] > box[0]) & (grid.xc[None, :] < box[1]) & (grid.yc[:, None] > box[2]) \
         & (grid.yc[:, None] < box[3])
     setting = dict(
-        parent=parent_name, started_from_year=int(deep[-1].name.split('.')[1]) * json.loads(
-            (parent_folder / 'experiment.json').read_text())['deltat'] / YEAR_S,
+        parent=parent_name, started_from_iteration=parent_iteration,
+        started_from_year=parent_iteration * parent['deltat'] / YEAR_S,
         box_grid_degrees=list(box), fine_deg=fine, frame_centre_turned=[frame.centre_lat, frame.centre_lon],
         nx=grid.nx, ny=grid.ny, levels=len(delr), wet_columns=int(wet.sum()), wet_columns_in_the_box=int(in_box.sum()),
         cell_km=[float(np.sqrt(grid.area[wet].min()) / 1e3), float(np.sqrt(grid.area[wet].max()) / 1e3)],
@@ -538,6 +552,164 @@ def run(args):
     return 0
 
 
+def note_patch(sea, done, end, in_box):
+    """After each chunk of the patch's run: one line on the patch's top layer, appended to the run's progress file."""
+    top = top_layer(sea)
+    line = dict(year=end * sea.deltat / YEAR_S, wall=time.strftime('%Y-%m-%d %H:%M'), monitor=monitor(sea.folder),
+                salinity_areas_in_the_box_km2=salinity_areas(sea, top['SALT'], in_box),
+                speed_in_the_box_m_s_max=float(np.hypot(top['UVEL'], top['VVEL'])[in_box].max()))
+    with open(sea.folder / 'progress.jsonl', 'a') as f:
+        f.write(json.dumps(line) + '\n')
+
+
+def patch_run(args):
+    """The patch's own run: chunks of a twelfth of the model year, each ending in a pickup and a line of progress,
+    with every level's means written at the same interval. A run already begun continues from its last pickup and
+    from the coarse state it first took; `--smoke` runs two chunks of a day under another name."""
+    box = tuple(args.box)
+    name = f'south_sea_{args.step:g}deg_patch_{args.fine:g}deg' + ('_smoke' if args.smoke else '')
+    folder = mitgcm.RUNS / 'mitgcm' / name
+    begun = (folder / 'setting.json').exists() and bool(list(folder.glob('pickup.*.meta')))
+    if begun:
+        iteration = json.loads((folder / 'setting.json').read_text())['started_from_iteration']
+    else:
+        iteration = None if args.from_year is None else int(round(args.from_year * YEAR_S / parent_deltat(args.step)))
+    sea, setting, in_box = build_patch(box, args.fine, args.deltat, parent_step=args.step, name=name,
+                                       parent_iteration=iteration)
+    chunk = 86400.0 if args.smoke else MONTH_S
+    sea.output_s = sea.deep_output_s = chunk
+    if not begun:
+        sea.write(fresh=True)
+        (sea.folder / 'setting.json').write_text(json.dumps(setting, indent=1) + '\n')
+    sea.run(2 * chunk if args.smoke else args.years * YEAR_S, chunk,
+            after_chunk=lambda s, done, end: note_patch(s, done, end, in_box))
+    return 0
+
+
+def parent_deltat(step):
+    return json.loads((mitgcm.RUNS / 'mitgcm' / f'south_sea_{step:g}deg' / 'experiment.json').read_text())['deltat']
+
+
+def water_distance_km(grid, start_ji):
+    """Each wet cell's shortest way over water from one cell, km (inf where no water leads there). The way steps
+    between cells that share a side, or a corner with water on at least one side of it."""
+    from scipy.sparse import coo_matrix
+    from scipy.sparse.csgraph import dijkstra
+    wet = grid.wet
+    ny, nx = wet.shape
+    yc, xc = np.meshgrid(grid.yc, grid.xc, indexing='ij')
+    place = ST.unit(yc.ravel(), xc.ravel())
+    index = np.arange(ny * nx).reshape(ny, nx)
+    rows, cols, lengths = [], [], []
+    for dj, di in ((0, 1), (1, 0), (1, 1), (1, -1)):
+        ai, bi = (slice(0, nx - di), slice(di, nx)) if di >= 0 else (slice(-di, nx), slice(0, nx + di))
+        a, b = index[0:ny - dj, ai], index[dj:ny, bi]
+        ok = wet.ravel()[a] & wet.ravel()[b]
+        if dj and di:                    # a corner: the two cells beside it
+            ok &= wet[0:ny - dj, bi] | wet[dj:ny, ai]
+        a, b = a[ok], b[ok]
+        chord = np.linalg.norm(place[a] - place[b], axis=1)
+        rows.append(a), cols.append(b), lengths.append(2.0 * np.arcsin(0.5 * chord) * lunar.RADIUS / 1000.0)
+    graph = coo_matrix((np.concatenate(lengths), (np.concatenate(rows), np.concatenate(cols))), shape=(ny * nx,) * 2)
+    out = dijkstra(graph.tocsr(), directed=False, indices=int(index[start_ji])).reshape(ny, nx)
+    return np.where(wet, out, np.inf)
+
+
+def reach(sea, salt, volume, distance_km, in_box, band_km=10.0):
+    """How the patch's water lies by its way over water from the river's mouth: for each band of distance the
+    water's area and mean depth, the top layer's salinity (g/kg; area-weighted mean, freshest and saltiest cell),
+    the salinity at the floor, and the mean thickness of the water fresher than 30, 18 and 5 g/kg. Also the
+    farthest distance at which the top layer stands under each of those strengths."""
+    g_kg = salt * R.sc.SEAWATER_G_KG / float(R.practical_from_reference(R.sc.SEAWATER_G_KG))
+    open_ = volume > 0
+    area = sea.grid.area
+    thick = volume / area[None]
+    floor = np.take_along_axis(g_kg, np.maximum(open_.sum(axis=0) - 1, 0)[None], axis=0)[0]
+    fresher = {limit: np.where(open_ & (g_kg < limit), thick, 0.0).sum(axis=0) for limit in (30.0, 18.0, 5.0)}
+    bands = []
+    for lo in np.arange(0.0, float(distance_km[in_box].max()) + band_km, band_km):
+        m = in_box & (distance_km >= lo) & (distance_km < lo + band_km)
+        if not m.any():
+            continue
+        w = area[m]
+        mean = lambda v: float((v[m] * w).sum() / w.sum())
+        bands.append(dict(from_km=float(lo), to_km=float(lo + band_km), area_km2=float(w.sum() / 1e6),
+                          depth_m=mean(thick.sum(axis=0)),
+                          top_layer_g_kg=dict(mean=mean(g_kg[0]), freshest=float(g_kg[0][m].min()),
+                                              saltiest=float(g_kg[0][m].max())),
+                          floor_g_kg=mean(floor),
+                          fresher_water_m={f'under {limit:g}': mean(v) for limit, v in fresher.items()}))
+    farthest = {f'under {limit:g}': float(distance_km[in_box & (g_kg[0] < limit)].max())
+                if (in_box & (g_kg[0] < limit)).any() else None for limit in (30.0, 18.0, 5.0, 0.5)}
+    return dict(bands=bands, top_layer_reaches_km=farthest)
+
+
+def patch_read(args):
+    """What the patch's run holds so far: each output interval's top layer and whole depth within the patch, as
+    results/circulation_patch_<fine>deg.json."""
+    box = tuple(args.box)
+    name = f'south_sea_{args.step:g}deg_patch_{args.fine:g}deg' + ('_smoke' if args.smoke else '')
+    folder = mitgcm.RUNS / 'mitgcm' / name
+    setting = json.loads((folder / 'setting.json').read_text())
+    written = json.loads((folder / 'experiment.json').read_text())
+    with np.load(folder / 'grid.npz') as z:
+        grid = mitgcm.Grid(xg=z['xg'], yg=z['yg'], depth=z['depth'])
+    sea = ST.Sea(name=name, grid=grid, deltat=written['deltat'], delr=np.array(written['delr']))
+    in_box = grid.wet & (grid.xc[None, :] > box[0]) & (grid.xc[None, :] < box[1]) & (grid.yc[:, None] > box[2]) \
+        & (grid.yc[:, None] < box[3])
+    rotation = np.array(json.loads((ROOT / R.FRAME).read_text())['frame']['rotation_today_to_turned'])
+    frame = ST.Frame(*setting['frame_centre_turned'])
+    mouth = frame.to_grid(*to_turned(np.array([MOSCOVIENSE_MOUTH_TODAY[0]]), np.array([MOSCOVIENSE_MOUTH_TODAY[1]]),
+                                     rotation))
+    yc, xc = np.meshgrid(sea.grid.yc, sea.grid.xc, indexing='ij')
+    wet = np.flatnonzero(sea.grid.wet.ravel())
+    _, k = cKDTree(ST.unit(yc.ravel()[wet], xc.ravel()[wet])).query(ST.unit(*mouth))
+    mouth_ji = np.unravel_index(int(wet[int(np.ravel(k)[0])]), sea.grid.wet.shape)
+    distance = water_distance_km(sea.grid, mouth_ji)
+    in_box = in_box & np.isfinite(distance)
+    volume = cell_volumes(sea)
+    inside = np.where(in_box[None], volume, 0.0)
+    factor = R.sc.SEAWATER_G_KG / float(R.practical_from_reference(R.sc.SEAWATER_G_KG))
+    intervals = []
+    for path in sorted(folder.glob('deep.*.data')):
+        deep = mitgcm.read_mds(str(path)[:-5])
+        top = mitgcm.read_mds(str(path)[:-5].replace('deep.', 'top.'))
+        g_kg = deep['SALT'] * factor
+        intervals.append(dict(
+            year=int(path.name.split('.')[1]) * sea.deltat / YEAR_S,
+            top_layer_areas_km2=salinity_areas(sea, top['SALT'], in_box),
+            volumes_km3={n: float(inside[(g_kg >= lo) & (g_kg < hi)].sum() / 1e9) for lo, hi, n in SALT_CLASSES},
+            top_layer_c=[float(top['THETA'][in_box].min()), float(top['THETA'][in_box].max())],
+            top_layer_speed_m_s=dict(mean=float((np.hypot(top['UVEL'], top['VVEL']) * sea.grid.area)[in_box].sum()
+                                                / sea.grid.area[in_box].sum()),
+                                     fastest=float(np.hypot(top['UVEL'], top['VVEL'])[in_box].max())),
+            salinity_by_depth_g_kg=[None if v is None else v * factor for v in by_depth(deep['SALT'], inside)],
+            temperature_by_depth_c=by_depth(deep['THETA'], inside),
+            old_water_by_depth=by_depth(deep['TRAC01'], inside),
+            **reach(sea, deep['SALT'], volume, distance, in_box)))
+    out = dict(schema='terluna.research.south-sea-circulation-patch/1',
+               evidence=('MITgcm at lunar gravity with cells of the patch\'s size round one river\'s mouth inside the '
+                         'coarse sea, started at rest from the coarse run\'s water and run under the same repeated '
+                         'model year of fluxes with a steady river. No tide; closure constants fitted on Earth. Not '
+                         'validated against any observation.'),
+               reading_rule=('each interval is a mean over a twelfth of the forcing\'s year (a day in a smoke run). '
+                             'Areas (km2) are the top 5 m by salinity class in g/kg, volumes (km3) all depths, both '
+                             'within the patch\'s box. Bands give the water by its way over water from the mouth of '
+                             'the Moscoviense route; fresher_water_m is the mean thickness of water under each '
+                             'strength; top_layer_reaches_km the farthest way at which the top layer stands under '
+                             'it. The first months hold the adjustment from a start at rest.'),
+               setting=setting, level_mid_m=[float(x) for x in np.cumsum(sea.delr) - 0.5 * sea.delr],
+               mouth_cell_depth_m=float(sea.grid.depth[mouth_ji]),
+               farthest_water_in_the_box_km=float(distance[in_box].max()), intervals=intervals)
+    path = HERE / 'results' / (f'circulation_patch_{args.fine:g}deg.json' if not args.smoke else
+                               f'circulation_patch_{args.fine:g}deg_smoke.json')
+    if args.smoke:
+        path = RUNS / path.name
+    path.write_text(json.dumps(out, indent=1) + '\n')
+    print(f'{len(intervals)} intervals read into {path}')
+    return 0
+
+
 def read(args):
     """What has run so far: each model year's note and each month's top layer, as results/circulation_<step>deg.json."""
     sea, setting = build(args.step, args.deltat)
@@ -586,7 +758,8 @@ def read(args):
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = p.add_subparsers(dest='command', required=True)
-    for name, fn in (('trial', trial), ('run', run), ('read', read), ('patch-trial', patch_trial)):
+    for name, fn in (('trial', trial), ('run', run), ('read', read), ('patch-trial', patch_trial),
+                     ('patch-run', patch_run), ('patch-read', patch_read)):
         s = sub.add_parser(name)
         s.add_argument('--box', type=float, nargs=4, default=MOSCOVIENSE_ARM_BOX,
                        help='the fine patch in the grid\'s own degrees: west east south north')
@@ -595,6 +768,9 @@ def main(argv=None) -> int:
         s.add_argument('--deltat', type=float, default=1800.0, help='the time step in seconds')
         s.add_argument('--days', type=float, default=30.0)
         s.add_argument('--years', type=float, default=1.0)
+        s.add_argument('--from-year', type=float, default=None,
+                       help='the coarse run\'s model year whose end state starts the patch (its latest by default)')
+        s.add_argument('--smoke', action='store_true', help='patch-run and patch-read: two chunks of a day under another name')
         s.set_defaults(fn=fn)
     args = p.parse_args(argv)
     return args.fn(args)

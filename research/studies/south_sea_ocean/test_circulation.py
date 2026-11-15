@@ -144,6 +144,43 @@ def test_a_start_is_carried_over_from_the_nearest_water_at_each_level():
     assert (out[2] == out[1]).all()                                     # below the parent's water the level above serves
 
 
+def test_the_way_over_water_goes_round_the_land():
+    # a U of water round a tongue of land, at the equator: cells of 0.1 degrees
+    depth = np.full((3, 5), 50.0)
+    depth[0:2, 2] = 0.0
+    grid = mitgcm.Grid(xg=np.linspace(0.0, 0.5, 6), yg=np.linspace(-0.15, 0.15, 4), depth=depth)
+    d = C.water_distance_km(grid, (0, 0))
+    cell = np.radians(0.1) * lunar.RADIUS / 1000.0
+    assert d[0, 0] == 0.0 and np.isinf(d[0, 2])
+    assert d[0, 1] == pytest.approx(cell, rel=1e-3)
+    # to the far foot of the U: four steps corner to corner, over the tongue's head
+    assert d[0, 4] == pytest.approx(4.0 * np.sqrt(2.0) * cell, rel=1e-3)
+    # two cells that meet at a corner with land on both sides of it are not joined
+    corner = mitgcm.Grid(xg=np.array([0.0, 0.1, 0.2]), yg=np.array([0.0, 0.1, 0.2]), depth=np.array([[50.0, 0.0], [0.0, 50.0]]))
+    assert np.isinf(C.water_distance_km(corner, (0, 0))[1, 1])
+
+
+def test_the_reach_is_read_by_distance_from_the_mouth(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, 'RUNS', tmp_path)
+    grid = mitgcm.Grid(xg=np.linspace(0.0, 0.4, 5), yg=np.array([0.0, 0.1]), depth=np.full((1, 4), 30.0))
+    sea = ST.Sea(name='arm', grid=grid, deltat=900.0, delr=np.array([10.0, 20.0]))
+    volume = C.cell_volumes(sea)
+    cell = np.radians(0.1) * lunar.RADIUS / 1000.0
+    distance = C.water_distance_km(grid, (0, 0))
+    salt = np.array([[[0.0, 10.0, 20.0, 35.0]], [[10.0, 35.0, 35.0, 35.0]]]) * C.R.practical_from_reference(
+        C.R.sc.SEAWATER_G_KG) / C.R.sc.SEAWATER_G_KG
+    out = C.reach(sea, salt, volume, distance, grid.wet, band_km=cell * 1.9)      # two cells to a band
+    near, far = out['bands']
+    assert near['area_km2'] == pytest.approx(grid.area[0, :2].sum() / 1e6) and near['depth_m'] == pytest.approx(30.0)
+    assert near['top_layer_g_kg'] == pytest.approx(dict(mean=5.0, freshest=0.0, saltiest=10.0), abs=1e-6)
+    assert near['floor_g_kg'] == pytest.approx(22.5) and far['floor_g_kg'] == pytest.approx(35.0)
+    assert near['fresher_water_m'] == pytest.approx({'under 30': 20.0, 'under 18': 20.0, 'under 5': 5.0})
+    assert far['fresher_water_m'] == pytest.approx({'under 30': 5.0, 'under 18': 0.0, 'under 5': 0.0})
+    reaches = out['top_layer_reaches_km']
+    assert reaches['under 30'] == pytest.approx(2.0 * cell, rel=1e-3) and reaches['under 18'] == pytest.approx(cell, rel=1e-3)
+    assert reaches['under 5'] == 0.0 and reaches['under 0.5'] == 0.0
+
+
 def test_the_trial_is_recorded_with_its_setting():
     out = json.loads((C.HERE / 'results' / 'circulation_trial_1deg.json').read_text())
     assert out['schema'] == C.SCHEMA

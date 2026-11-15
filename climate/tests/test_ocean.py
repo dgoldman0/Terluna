@@ -125,6 +125,21 @@ def test_mds_reader(tmp_path):
     assert np.array_equal(out["ETAN"], values) and np.array_equal(out["UVEL"], 2 * values)
 
 
+def test_pickup_reader_gives_each_field_its_levels(tmp_path):
+    # a pickup of two levels on a 4 by 3 grid: two whole-depth fields, then the surface's level
+    records = np.arange(5 * 12, dtype=">f8").reshape(5, 3, 4)
+    records.tofile(tmp_path / "pickup.0000000020.data")
+    meta = (" nDims = [   2 ];\n dimList = [\n     4,    1,    4,\n     3,    1,    3\n ];\n dataprec = [ 'float64' ];\n"
+            " nrecords = [     5 ];\n timeStepNumber = [         20 ];\n nFlds = [    3 ];\n fldList = {\n"
+            " 'Theta   ' 'Salt    ' 'EtaN    '\n };\n")
+    (tmp_path / "pickup.0000000020.meta").write_text(meta)
+    out = mitgcm.read_pickup(tmp_path / "pickup.0000000020", 2)
+    assert out["Theta"].shape == (2, 3, 4) and np.array_equal(out["Salt"], records[2:4])
+    assert np.array_equal(out["EtaN"], records[4])
+    with pytest.raises(ValueError):
+        mitgcm.read_pickup(tmp_path / "pickup.0000000020", 3)
+
+
 def test_cells_mesh_splits_corner_contacts_and_keeps_area():
     depth = np.array([[10.0, 0.0], [0.0, 10.0]])        # two cells touching at one corner
     m = mesh.from_cells(depth, np.array([0.125, 0.375]), np.array([0.125, 0.375]))
