@@ -373,10 +373,40 @@ def run(args):
     return 0
 
 
+def read(args):
+    """What has run so far: each model year's note and each month's top layer, as results/circulation_<step>deg.json."""
+    sea, setting = build(args.step, args.deltat)
+    notes = sea.folder / 'progress.jsonl'
+    years = [json.loads(line) for line in notes.read_text().splitlines()] if notes.exists() else []
+    factor = R.sc.SEAWATER_G_KG / float(R.practical_from_reference(R.sc.SEAWATER_G_KG))
+    wet, months = sea.grid.wet, []
+    for path in sorted(sea.folder.glob('top.*.data')):
+        top = mitgcm.read_mds(str(path)[:-5])
+        iteration = int(path.name.split('.')[1])
+        salt = top['SALT'][wet] * factor
+        months.append(dict(year=iteration * sea.deltat / YEAR_S, salinity_areas_km2=salinity_areas(sea, top['SALT']),
+                           salinity_g_kg=[float(salt.min()), float(salt.max())],
+                           theta_c=[float(top['THETA'][wet].min()), float(top['THETA'][wet].max())]))
+    out = dict(schema='terluna.research.south-sea-circulation/1',
+               evidence=('MITgcm at lunar gravity on one-degree cells under one repeated model year of the fresh-sea '
+                         'climate\'s fluxes; a first run from a uniform start, with no tide and with closure constants '
+                         'fitted on Earth. Not validated against any observation.'),
+               reading_rule=('months are means over a twelfth of the forcing\'s year for the top 5 m; areas in km2 by '
+                             'salinity class in g/kg (fresh under 0.5, nearly fresh to 5, brackish to 18, mixed to '
+                             '30, diluted sea water to 34, sea water to 36, saltier above). old_water_share is the '
+                             'dye: the share of the water below a depth that has not been at the surface since the '
+                             'start, as the last model year\'s mean.'),
+               setting=setting, model_years=len(years), years=years, months=months)
+    path = HERE / 'results' / f'circulation_{args.step:g}deg.json'
+    path.write_text(json.dumps(out, indent=1) + '\n')
+    print(f'{len(years)} model years, {len(months)} months read into {path}')
+    return 0
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = p.add_subparsers(dest='command', required=True)
-    for name, fn in (('trial', trial), ('run', run)):
+    for name, fn in (('trial', trial), ('run', run), ('read', read)):
         s = sub.add_parser(name)
         s.add_argument('--step', type=float, default=1.0, help='the grid\'s spacing in degrees (30 km a degree)')
         s.add_argument('--deltat', type=float, default=1800.0, help='the time step in seconds')
