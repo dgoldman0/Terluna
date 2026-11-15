@@ -12140,7 +12140,7 @@
     },
     "industry": {
       "path": "provisioning/enclosed_industry/results/revised_industry.json.gz",
-      "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f"
+      "sha256": "d6f937792fdc4732e25a6f69bb1570f99ad5e976b745c78dd7d3a067524f3f4f"
     },
     "constants": {
       "path": "shared/constants.json",
@@ -12148,7 +12148,7 @@
     },
     "power_inputs": {
       "path": "provisioning/enclosed_power/enclosed_power_inputs.json",
-      "sha256": "42997ff7d1007b0b8e295fdabb79cabbbf94d2621779016f26db0c63475321fe"
+      "sha256": "2a54a1b2fd8c7c39a5dc4e3a45e7293421be4b38d5833bc4f99f2d991a17763a"
     }
   },
   "producer": {

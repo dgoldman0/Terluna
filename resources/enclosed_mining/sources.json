@@ -126,7 +126,7 @@
     {
       "path": "provisioning/enclosed_industry/results/industry.json.gz",
       "repository_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
-      "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+      "sha256": "3130ea8d5d70219053675ac8da4af1a85f9c46a673774ea63717285d787e5bc7",
       "reading_scope": "Four manifest identities, complete seed and annual feed fields across81 base and6 sensitivity cases, scenario coefficients and physical feasibility metadata. Conditional physical model results, not measured mine operation.",
       "use": "Dated actual-demand feed and transport-driver checkpoints; poor_lunar,poor_source andlifetimes products are separately pinned with their exact manifests ininputs.json."
     }

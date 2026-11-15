@@ -107,7 +107,7 @@ The following feed totals include the initial deployment once and use the same h
 | Diversified | 6.10 | 231.01 | 720 | Year 129 |
 | Earlier manufacturing mix | 7.02 | 209.30 | 669 | Year 126 |
 
-Every return checkpoint records cumulative feed and the first shortage under each of seven inventory assumptions. These conditions travel with the financial figures. They prevent a positive cash appraisal from being mistaken for evidence that the needed mines and routes exist. The owning resources study contains the year-100/200/220 quantities, geometry rules and poorer-grade comparisons; its frozen product is [inputs/mining.json.gz](inputs/mining.json.gz).
+Every return checkpoint records cumulative feed and the first shortage under each of seven inventory assumptions. These conditions travel with the financial figures. They prevent a positive cash appraisal from being mistaken for evidence that the needed mines and routes exist. The owning resources study contains the year-100/200/220 quantities, geometry rules and poorer-grade comparisons; its product is [assessment.json.gz](../../../resources/enclosed_mining/results/assessment.json.gz), read where that study writes it.
 
 ### What this account measures
 

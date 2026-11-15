@@ -16,13 +16,13 @@
       "id": "reclamation",
       "producer_commit": "210a20bd2cf16ec951f02a01f6ee3758b497df03",
       "source_record": "provisioning/enclosed_industry/reclamation_sources.json",
-      "source_product_sha256": "f6b43f00ea585af509e0f9e4ec3545ccf1956ed8c04348dd3404cf965bb54f2c",
+      "source_product_sha256": "8e419ca26889371c6ebfcc114031a9d3163d29491873733006ec08871cfde161",
       "use": "Exact dated virgin-material demands, selected-loop balances and operating cash in 36 bounded engineering scenarios. Imported as a pinned product, not a cross-domain implementation import."
     },
     {
       "id": "baseline",
       "source_record": "../enclosed_mining/inputs.json",
-      "source_product_sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+      "source_product_sha256": "3130ea8d5d70219053675ac8da4af1a85f9c46a673774ea63717285d787e5bc7",
       "use": "Original 81-case dated raw feed and lunar demand ranges, with seed included once."
     },
     {

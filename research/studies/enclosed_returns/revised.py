@@ -37,7 +37,7 @@ def inputs():
         products[name]=data
     cfg,orders,old=finance.inputs()
     physical=products['physical']
-    for remote,local in [('provisioning/enclosed_industry/inputs/orders.json','results/orders.json'),('provisioning/enclosed_industry/inputs/revised_rollout_orders.json','results/revised_orders.json')]:
+    for remote,local in [('research/studies/enclosed_returns/results/orders.json','results/orders.json'),('research/studies/enclosed_returns/results/revised_orders.json','results/revised_orders.json')]:
         if physical['dependencies'].get(remote)!=sha(HERE/local):raise ValueError('Physical orderbook mismatch: '+remote)
     order_cases={c['name']:c for product in (orders,products['rollout_orders']) for c in product['cases']}
     for case in physical['cases']:

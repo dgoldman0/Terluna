@@ -30,7 +30,8 @@ def load():
     for path, expected in cfg['dependencies'].items():
         if digest(HERE / path) != expected:
             raise ValueError('Changed product-allocation dependency: ' + path)
-    return cfg, read(HERE / 'inputs/assays.json'), read(HERE / 'inputs/flows.json'), read(HERE / 'inputs/recovery.json'), read(HERE / 'market_benchmarks.json'), read(HERE / 'inputs/basis.json')
+    resources = HERE / '../../../resources/source_access'     # read where the resources study keeps them
+    return cfg, read(resources / 'coproduct_assays.json'), read(resources / 'inputs/coproduct_flows.json'), read(resources / 'coproduct_inputs.json'), read(HERE / 'market_benchmarks.json'), read(HERE / 'inputs/basis.json')
 
 
 def maximum_refining_cost(grade, earth_recovery, space_recovery, price,

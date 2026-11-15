@@ -1,38 +1,38 @@
-"""Admit existing resource and power records without importing their models."""
+"""Record the resource and power records the product-route screens read, with the power cases they select.
+
+The assays, the checkpoint flows and the recovery settings are read where the resources study keeps them; this
+script writes inputs/basis.json, which holds each record's path and digest and the twelve power alternatives.
+"""
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
 from pathlib import Path
-import shutil
-import subprocess
 
 
 def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def identity(root, relative, revision):
-    committed = subprocess.run(['git', 'show', f'{revision}:{relative}'], cwd=root,
-                               check=True, capture_output=True).stdout
-    expected = hashlib.sha256(committed).hexdigest()
-    if digest(root / relative) != expected:
-        raise ValueError('Source differs from its recorded revision: ' + relative)
-    return dict(path=relative, sha256=expected, revision=revision)
+ROOT = Path(__file__).resolve().parents[3]
+SOURCES = dict(assays='resources/source_access/coproduct_assays.json',
+               flows='resources/source_access/inputs/coproduct_flows.json',
+               recovery='resources/source_access/coproduct_inputs.json')
 
 
-def export(resources, provisioning, humanities, output):
-    resources, provisioning, humanities, output = map(Path, (resources, provisioning, humanities, output))
+def identity(root, relative):
+    return dict(path=relative, sha256=digest(root / relative))
+
+
+def export(root, output):
+    root, output = Path(root), Path(output)
+    resources = provisioning = humanities = root
     output.mkdir(parents=True, exist_ok=True)
     records = {}
-    for name, relative in [('assays', 'resources/source_access/coproduct_assays.json'),
-                           ('flows', 'resources/source_access/inputs/coproduct_flows.json'),
-                           ('recovery', 'resources/source_access/coproduct_inputs.json')]:
-        path = resources / relative
-        data = json.loads(path.read_text())
-        records[name] = dict(**identity(resources, relative, '84886850'), schema=data['schema'])
-        shutil.copyfile(path, output / (name + '.json'))
+    for name, relative in SOURCES.items():
+        data = json.loads((resources / relative).read_text())
+        records[name] = dict(**identity(resources, relative), schema=data['schema'])
     path = provisioning / 'provisioning/enclosed_power/results/power_comparison.json'
     power = json.loads(path.read_text())
     chosen = []
@@ -48,14 +48,14 @@ def export(resources, provisioning, humanities, output):
                                    technology_case=case['technology_case'], boundary=case['boundary']))
     if len(chosen) != 12:
         raise ValueError('Expected twelve admitted power alternatives')
-    records['power'] = dict(**identity(provisioning, str(path.relative_to(provisioning)), 'adeaa8ea'),
+    records['power'] = dict(**identity(provisioning, str(path.relative_to(provisioning))),
                             schema=power['schema'])
-    for name, root, relative, revision in [
-        ('protocols', resources, 'resources/source_access/protocols.md', '84886850'),
-        ('partial_gravity', humanities, 'research/studies/world_economy/manufacturing.md', 'a63cd71b'),
-        ('slow_settling', humanities, 'research/studies/world_economy/slow_settling.md', 'a63cd71b'),
+    for name, base, relative in [
+        ('protocols', resources, 'resources/source_access/protocols.md'),
+        ('partial_gravity', humanities, 'research/studies/world_economy/manufacturing.md'),
+        ('slow_settling', humanities, 'research/studies/world_economy/slow_settling.md'),
     ]:
-        records[name] = identity(root, relative, revision)
+        records[name] = identity(base, relative)
     data = dict(schema='terluna.research.product-location-basis/1',
                 producer=dict(path='research/studies/product_allocation/export_inputs.py', sha256=digest(__file__)),
                 source_identities=records, power=chosen,
@@ -66,12 +66,10 @@ def export(resources, provisioning, humanities, output):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--resources-root', type=Path, required=True)
-    parser.add_argument('--provisioning-root', type=Path, required=True)
-    parser.add_argument('--humanities-root', type=Path, required=True)
-    parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--root', type=Path, default=ROOT)
+    parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parent / 'inputs')
     args = parser.parse_args()
-    export(args.resources_root, args.provisioning_root, args.humanities_root, args.output)
+    export(args.root, args.output)
 
 
 if __name__ == '__main__':

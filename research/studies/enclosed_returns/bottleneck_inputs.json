@@ -11,10 +11,10 @@
   "baseline_dependencies": {
     "markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb",
     "enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
-    "finance.py": "4a212ba856b682fe9a8925df87d61fa052ea061c5febb63c3db65debb26a288d",
-    "finance_inputs.json": "b859c68691e0fe38596460470cc1753f3def08b29955be7970a7c0ca5a0facf0",
+    "finance.py": "3afd3842278f044caeec81a8ae05dd542d7045541cd750a8d593ae5edf16c647",
+    "finance_inputs.json": "6e40693196ce4c89e6c066a6187f3ecffc425a1c36818c1460dbc3c0fe74a287",
     "results/orders.json": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
-    "results/returns.json": "a1de3348cb5e3c9ab110297ff176d347c077a9856f256e6406b0c508198abebf"
+    "results/returns.json": "d70a765ecec255747444953e52fbd8378b000639cae2b16785080a732d579798"
   },
   "experiments": {
     "baseline": {},

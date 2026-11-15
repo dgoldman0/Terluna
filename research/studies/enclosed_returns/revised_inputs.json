@@ -7,57 +7,45 @@
   ],
   "products": {
     "population": {
-      "path": "inputs/revised_population.json.gz",
+      "path": "../../../resources/source_access/results/population.json.gz",
       "schema": "terluna.resources.nea-population/1",
-      "sha256": "4592f5f5739c102b19b65f6ed291760602a5f458a738eb15f06c803b324ee19a",
-      "source_commit": "1d652941",
-      "source_path": "resources/source_access/results/population.json.gz"
+      "sha256": "0615e385e90876742d91fffbfbd4877080e8e374a9cc9b16323ecf106368a934"
     },
     "lunar": {
-      "path": "inputs/revised_lunar.json.gz",
+      "path": "../../../resources/source_access/results/lunar_potential.json.gz",
       "schema": "terluna.resources.lunar-potential/1",
-      "sha256": "635a919992ac6de03d613e52b759a078cfa914b027b8f8f31b3102bc09ef0f81",
-      "source_commit": "1d652941",
-      "source_path": "resources/source_access/results/lunar_potential.json.gz"
+      "sha256": "635a919992ac6de03d613e52b759a078cfa914b027b8f8f31b3102bc09ef0f81"
     },
     "resource_comparison": {
-      "path": "inputs/revised_resource_comparison.json.gz",
+      "path": "../../../resources/source_access/results/potential.json.gz",
       "schema": "terluna.resources.potential-and-reclamation/1",
-      "sha256": "500b58fbce7c8af122c34d8c99698b8668e987bed5d33585376b1590fcca2233",
-      "source_commit": "1d652941",
-      "source_path": "resources/source_access/results/potential.json.gz"
+      "sha256": "d1a0131d4989252945d3e6dc3be33d3a267a16b35bdaf0a04558ac200cbd0114"
     },
     "reclamation": {
-      "path": "inputs/reclamation.json.gz",
+      "path": "../../../provisioning/enclosed_industry/results/reclamation.json.gz",
       "schema": "terluna.provisioning.reclamation/1",
-      "sha256": "f6b43f00ea585af509e0f9e4ec3545ccf1956ed8c04348dd3404cf965bb54f2c",
-      "source_commit": "210a20bd",
-      "source_path": "provisioning/enclosed_industry/results/reclamation.json.gz"
+      "sha256": "8e419ca26889371c6ebfcc114031a9d3163d29491873733006ec08871cfde161"
     },
     "rollout_orders": {
       "path": "results/revised_orders.json",
       "schema": "terluna.humanities.enclosed-bottleneck-orders/1",
-      "sha256": "ac55713bd79f5007e93eee5d7b891e500b0ea8feeda8aceb278fd5cc7778ee3e",
-      "source_path": "research/studies/enclosed_returns/results/revised_orders.json"
+      "sha256": "ac55713bd79f5007e93eee5d7b891e500b0ea8feeda8aceb278fd5cc7778ee3e"
     },
     "physical": {
-      "path": "inputs/revised_industry.json.gz",
+      "path": "../../../provisioning/enclosed_industry/results/revised_industry.json.gz",
       "schema": "terluna.provisioning.revised-industry/1",
-      "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f",
-      "source_commit": "a8af87614e9c30b6fa4879440765f7e74fe094be",
-      "source_path": "provisioning/enclosed_industry/results/revised_industry.json.gz",
-      "source_branch": "domain/provisioning"
+      "sha256": "d6f937792fdc4732e25a6f69bb1570f99ad5e976b745c78dd7d3a067524f3f4f"
     }
   },
   "dependencies": {
-    "finance.py": "4a212ba856b682fe9a8925df87d61fa052ea061c5febb63c3db65debb26a288d",
-    "finance_inputs.json": "b859c68691e0fe38596460470cc1753f3def08b29955be7970a7c0ca5a0facf0",
+    "finance.py": "3afd3842278f044caeec81a8ae05dd542d7045541cd750a8d593ae5edf16c647",
+    "finance_inputs.json": "6e40693196ce4c89e6c066a6187f3ecffc425a1c36818c1460dbc3c0fe74a287",
     "markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb",
     "enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
     "bottlenecks.py": "5cea14e1212eb86cb81cb9f41cd257632d0ad105f1789ecac7fdf7e62acebc46",
-    "results/returns.json": "a1de3348cb5e3c9ab110297ff176d347c077a9856f256e6406b0c508198abebf",
+    "results/returns.json": "d70a765ecec255747444953e52fbd8378b000639cae2b16785080a732d579798",
     "results/orders.json": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
-    "bottleneck_inputs.json": "15208570d7529787c26516724041a1e00df15303ba3cc7d6308898a02835e8a8",
+    "bottleneck_inputs.json": "ea0c291d54e4996b43724ab749ca752e41adb2c089bb9ddefb9d767e43d75743",
     "revised_orders.py": "52bf75362c85cc447cdcae633eaa086ccc349fcae3b325653e3b33c9180ff914",
     "../complex_returns/credit.py": "d2a2ae1efc0c41d9ef78fe1ee524f9dc451ade280d7372c3363e645060830ea8",
     "../complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef",

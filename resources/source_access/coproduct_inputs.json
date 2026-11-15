@@ -58,13 +58,13 @@
   "dependencies": {
     "coproduct_assays.json": "6a5a5d2d826a320f9bfd2a51449b94c74937a98887288ece4f45fc3df2f4ca29",
     "coproduct_sources.json": "85ce86c013ddc60ce9b8effc59ad2a71292c84e57608ae86c8f519e6afe10b1f",
-    "inputs/coproduct_flows.json": "4cf6bb10c49d9f91c22f991d08ead1b92f6af6b5a4a14e80ac6b41918caae592",
+    "inputs/coproduct_flows.json": "ec202015042ecda36bb0019fb3c311c84b6c7d258a362d86cc70d30e15c37726",
     "inputs/coproduct_candidates.json": "f3d9652b1a15b4263a3de9047e88868ca85b431ad17da226212daa7034a2207a",
     "export_coproduct_flows.py": "8eb9c5142720bfdf4aedd22105086daa8582ba140444659c940f655369cc8d8e",
     "results/lunar_potential.json.gz": "635a919992ac6de03d613e52b759a078cfa914b027b8f8f31b3102bc09ef0f81",
-    "../enclosed_mining/inputs.json": "602a03af4bea5ca5216fc6e7a315d5503f320c401cb75552ee046be3e8e3f033",
+    "../enclosed_mining/inputs.json": "61f10e483cea993600d95ffb2941fb72534df4f08a11cc38f58c2270569847ab",
     "protection.py": "f44593c4cc430ee3f04fba24bfb99f2a1c1c433bd25104ae3e94922dd50d603f",
-    "protection_inputs.json": "ea742788297e03bff9e727fc7007fae26f274f5f6a00556ab9ed3637eb354fda"
+    "protection_inputs.json": "03a9d0660473972a75bf7906705b577742f9be90c4b894c77c29a50f95383cc1"
   },
   "lunar_patch_area_km2": 100,
   "lunar_patch_depth_m": 5

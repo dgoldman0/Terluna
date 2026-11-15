@@ -11,6 +11,8 @@ from . import model
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
 SCHEMA='terluna.provisioning.enclosed-industry/1'
+ORDERS=ROOT/'research/studies/enclosed_returns/results/orders.json'   # the returns study's customer orders, read where it writes them
+SOURCES=dict(engineering=HERE/'inputs/engineering.json',orders=ORDERS)
 
 
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -19,8 +21,8 @@ def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def inputs():
     identities=json.loads((HERE/'inputs/identity.json').read_text())
     for name in ('engineering','orders'):
-        if digest(HERE/'inputs'/f'{name}.json')!=identities[name+'_sha256']:raise ValueError('Unreviewed '+name+' product')
-    data=json.loads((HERE/'inputs/engineering.json').read_text());orders=json.loads((HERE/'inputs/orders.json').read_text())
+        if digest(SOURCES[name])!=identities[name+'_sha256']:raise ValueError('Unreviewed '+name+' product')
+    data=json.loads((HERE/'inputs/engineering.json').read_text());orders=json.loads(ORDERS.read_text())
     if data['schema']!='terluna.provisioning.enclosed-engineering-inputs/1' or orders['schema']!='terluna.humanities.enclosed-orders/1':raise ValueError('Unexpected input schema')
     return data,orders
 
@@ -62,7 +64,7 @@ def product(data,orderbook,cases,scenario='base',details=None):
         saved=compact_case(case,result,scenario);out.append(saved);cache.write_text(json.dumps(saved,separators=(',',':'))+'\n')
         print(case['name'],scenario,'iterations',result['convergence']['iterations'],'first_shortfall',result['first_capacity_shortfall'],'seconds',round(time.monotonic()-start,2),flush=True)
     return dict(schema=SCHEMA,producer=dict(path=str(Path(__file__).relative_to(ROOT)),sha256=digest(__file__),model_path=str((HERE/'model.py').relative_to(ROOT)),model_sha256=digest(HERE/'model.py')),
-        dependencies={str((HERE/'inputs'/name).relative_to(ROOT)):digest(HERE/'inputs'/name) for name in ('engineering.json','orders.json','identity.json')},
+        dependencies={str(path.relative_to(ROOT)):digest(path) for path in (HERE/'inputs/engineering.json',ORDERS,HERE/'inputs/identity.json')},
         shared_constants={k:getattr(model,k) for k in ('JULIAN_DAY','JULIAN_YEAR_DAYS','STANDARD_GRAVITY','STEFAN_BOLTZMANN')},
         evidence='A demand-sized equipment/cohort and process calculation with inherited prices, chemical freight and proposed physical coefficients. Convergence and component mass balances are numerical checks, not plant, trajectory, source-reserve or market qualification.',
         units='kg, W, persons, constant USD2041. Annual physical flows are per year; source-tug counts are expected available equivalents after cohort retirement.',

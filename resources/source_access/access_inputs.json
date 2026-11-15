@@ -211,7 +211,7 @@
   },
   "demand": {
     "path": "../../provisioning/enclosed_industry/results/industry.json.gz",
-    "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+    "sha256": "3130ea8d5d70219053675ac8da4af1a85f9c46a673774ea63717285d787e5bc7",
     "schema": "terluna.provisioning.enclosed-industry/1"
   },
   "checkpoints": [

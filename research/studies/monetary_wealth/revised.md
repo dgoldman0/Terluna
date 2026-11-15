@@ -93,7 +93,7 @@ The sector identities and monetary classification retain the [existing source re
 
 The full monetary/wealth suite passed **51 tests**, including 11 revised-consumer tests. These cover source and per-case hash tampering, dated debt and custody reconciliation, unchanged payout allocation, separate terminal equity/custody, and the absence of invented cash receipts from restored service values. A separate historical control recomputed all 54 original ownership paths and all 270 checkpoints with a largest numerical change of exactly zero. The final revised run completed all 54 paths and their annual balance controls; programme receipts, capital calls, cash, reserves, debt and total payouts remain those of the supplied financial export.
 
-The frozen revised result has SHA-256 `beb90522a6ff7807114d7c9353ad665b774a5fb296c5033e6c445d6d86b296b6`. The physical asset source is provisioning commit `a8af87614e9c30b6fa4879440765f7e74fe094be`. These numerical and provenance checks establish reproducibility and accounting closure, separately from empirical validation of engineering, markets or institutional contracts.
+The frozen revised result has SHA-256 `b7f400c33201f62a865ca125c90421c9145d61dbb9535a584721dc8ff21e00d5`. The physical asset source is provisioning commit `a8af87614e9c30b6fa4879440765f7e74fe094be`. These numerical and provenance checks establish reproducibility and accounting closure, separately from empirical validation of engineering, markets or institutional contracts.
 
 ```sh
 PYTHONDONTWRITEBYTECODE=1 python -m research.studies.monetary_wealth.revised

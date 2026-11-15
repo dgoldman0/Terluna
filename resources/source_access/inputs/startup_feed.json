@@ -6,7 +6,7 @@
   },
   "source": {
     "path": "provisioning/enclosed_industry/results/revised_industry.json.gz",
-    "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f",
+    "sha256": "d6f937792fdc4732e25a6f69bb1570f99ad5e976b745c78dd7d3a067524f3f4f",
     "producer": {
       "path": "provisioning/enclosed_industry/revised_industry.py",
       "sha256": "d926c4d55bf0256b95dd9bb5b320fa7f9865e3664520aab91e543daa7d9b867a"

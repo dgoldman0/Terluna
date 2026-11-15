@@ -162,7 +162,7 @@ def product(reference, book, order_path, *, cases=None, cache_dir=None):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--orders',type=Path,default=HERE/'inputs/bottleneck_orders.json')
+    parser.add_argument('--orders',type=Path,default=ROOT/'research/studies/enclosed_returns/results/bottleneck_orders.json')
     parser.add_argument('--case',action='append')
     parser.add_argument('--output',type=Path,default=HERE/'results/bottlenecks.json.gz')
     parser.add_argument('--no-cache',action='store_true')

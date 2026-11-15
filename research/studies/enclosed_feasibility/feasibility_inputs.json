@@ -7,7 +7,7 @@
   "inputs": {
     "industry": {
       "path": "provisioning/enclosed_industry/results/revised_industry.json.gz",
-      "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f"
+      "sha256": "d6f937792fdc4732e25a6f69bb1570f99ad5e976b745c78dd7d3a067524f3f4f"
     },
     "engineering": {
       "path": "provisioning/enclosed_industry/inputs/engineering.json",
@@ -27,7 +27,7 @@
     },
     "reclamation": {
       "path": "provisioning/enclosed_industry/reclamation_inputs.json",
-      "sha256": "3197ec5b8d7608a6528f5d162990ba204183056b5dd41548c2ceb86bfd7b7264"
+      "sha256": "e73dd16d97aa5e4d56dade53f30c5980451ad37233a150ff17712bc0ee90ffc8"
     }
   },
   "boundary": "The planned off-Earth economic zone served by U before Open Moon, the habitat array or outer-system buildout. U remains its general economic unit; it is not an engineering asset.",

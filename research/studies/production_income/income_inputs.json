@@ -8,35 +8,35 @@
       "schema": "terluna.humanities.enclosed-orders/1"
     },
     "assets": {
-      "path": "../monetary_wealth/inputs/revised_asset_stock.json.gz",
-      "sha256": "28ff9108ddda9c771478c8388a82ea25594af4b7e539e9b3233b705e7e35466e",
+      "path": "../../../provisioning/enclosed_industry/results/revised_asset_stock.json.gz",
+      "sha256": "3479b003d38ab2f4d8152668c612be32b812d166f096821771a44f9d938be1bf",
       "schema": "terluna.provisioning.enclosed-asset-stock/1"
     },
     "wealth": {
       "path": "../monetary_wealth/results/revised.json.gz",
-      "sha256": "beb90522a6ff7807114d7c9353ad665b774a5fb296c5033e6c445d6d86b296b6",
+      "sha256": "b7f400c33201f62a865ca125c90421c9145d61dbb9535a584721dc8ff21e00d5",
       "schema": "terluna.humanities.revised-monetary-wealth/1"
     },
     "returns": {
       "path": "../enclosed_returns/results/revised.json.gz",
-      "sha256": "b5236e5e0cab2d3941816441b59d943b54a99c9dec31c3b09deb2d0b2c41648d",
+      "sha256": "29d5b03ca9db985fa9c26a24dce26eb47216570f292a6693a3788de20b9a70f6",
       "schema": "terluna.humanities.revised-enclosed-returns/1"
     },
     "physical": {
-      "path": "../enclosed_returns/inputs/revised_industry.json.gz",
-      "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f",
+      "path": "../../../provisioning/enclosed_industry/results/revised_industry.json.gz",
+      "sha256": "d6f937792fdc4732e25a6f69bb1570f99ad5e976b745c78dd7d3a067524f3f4f",
       "schema": "terluna.provisioning.revised-industry/1"
     },
     "flows": {
       "path": "../enclosed_returns/results/revised_flows.json.gz",
-      "sha256": "be8c3a956f8212873c3dc943030561634bdf38045b9fa4374506e5ca911c463c",
+      "sha256": "5c94273e1d54fa3f42d5c71037f2a3197bb63321e4f3eba5bb069018fed776d9",
       "schema": "terluna.humanities.wealth-finance-flows/1"
     }
   },
   "finance_config": "../enclosed_returns/finance_inputs.json",
   "implementation_dependencies": {
-    "../enclosed_returns/finance.py": "4a212ba856b682fe9a8925df87d61fa052ea061c5febb63c3db65debb26a288d",
-    "../enclosed_returns/finance_inputs.json": "b859c68691e0fe38596460470cc1753f3def08b29955be7970a7c0ca5a0facf0",
+    "../enclosed_returns/finance.py": "3afd3842278f044caeec81a8ae05dd542d7045541cd750a8d593ae5edf16c647",
+    "../enclosed_returns/finance_inputs.json": "6e40693196ce4c89e6c066a6187f3ecffc425a1c36818c1460dbc3c0fe74a287",
     "../enclosed_returns/markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb",
     "../complex_returns/credit.py": "d2a2ae1efc0c41d9ef78fe1ee524f9dc451ade280d7372c3363e645060830ea8",
     "../complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef"
@@ -154,7 +154,7 @@
   "evidence": "Conditional subjective planning distributions. Scenario and triangular weights are analyst assumptions, not measured likelihoods. Completion and finance availability have no estimated probabilities. Gross product and gross income are annual flows in constant USD2041 equivalents; U remains the established general economic unit, potentially a currency or basket of U-related currencies.",
   "extracted_input": {
     "path": "inputs/year200.json.gz",
-    "sha256": "0b587c16ae83ed5a31d7fa5ef9a2b4f95200a6b85818b1bf7a031d905e707c3a",
+    "sha256": "a05ec27694b788409db7ed6fc11bf58a2293c4de2a1f5316a44260ac1177ce8c",
     "schema": "terluna.humanities.production-income-inputs/1"
   }
 }

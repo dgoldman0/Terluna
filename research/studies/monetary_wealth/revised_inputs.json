@@ -5,26 +5,23 @@
   "expected_portfolios": 9,
   "settings_product": {
     "path": "wealth_inputs.json",
-    "sha256": "34631ef11554d87847555ef7db21be4cbb067afd14b6f029d280a22f6e4ba220",
+    "sha256": "bc4a5ea9477567f87f9ed5a64abe271004a837d32581762963cb485c59904e32",
     "schema": "terluna.humanities.monetary-wealth-inputs/1"
   },
   "finance_product": {
     "path": "../enclosed_returns/results/revised_flows.json.gz",
-    "sha256": "be8c3a956f8212873c3dc943030561634bdf38045b9fa4374506e5ca911c463c",
+    "sha256": "5c94273e1d54fa3f42d5c71037f2a3197bb63321e4f3eba5bb069018fed776d9",
     "schema": "terluna.humanities.wealth-finance-flows/1",
     "dependency_base": "../enclosed_returns"
   },
   "asset_product": {
-    "path": "inputs/revised_asset_stock.json.gz",
-    "sha256": "28ff9108ddda9c771478c8388a82ea25594af4b7e539e9b3233b705e7e35466e",
-    "schema": "terluna.provisioning.enclosed-asset-stock/1",
-    "source_path": "provisioning/enclosed_industry/results/revised_asset_stock.json.gz",
-    "source_branch": "domain/provisioning",
-    "source_commit": "a8af87614e9c30b6fa4879440765f7e74fe094be"
+    "path": "../../../provisioning/enclosed_industry/results/revised_asset_stock.json.gz",
+    "sha256": "3479b003d38ab2f4d8152668c612be32b812d166f096821771a44f9d938be1bf",
+    "schema": "terluna.provisioning.enclosed-asset-stock/1"
   },
   "baseline_product": {
     "path": "results/wealth.json.gz",
-    "sha256": "1531b43ba730e9f89a60f30399cc9d94535fd2b942b772cd0d385e54e95aa4f9",
+    "sha256": "76c21269cc537e679b1e4be366db6db8ba7876e125e3e7cfd399c0cd9e47a1a9",
     "schema": "terluna.humanities.monetary-wealth/1"
   },
   "implementation_dependencies": {
@@ -32,7 +29,7 @@
     "ledger.py": "2df16c8f7a0f2ec0fb0242728ee0f5ddacf2e1ed43af3fcc15112ce77761458a",
     "sources.json": "6ccc01df36e44d7495a5fa6921d0cd5d357ab774e66cd90584c5f46b2dcb22ef",
     "../complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef",
-    "../enclosed_returns/finance_inputs.json": "b859c68691e0fe38596460470cc1753f3def08b29955be7970a7c0ca5a0facf0"
+    "../enclosed_returns/finance_inputs.json": "6e40693196ce4c89e6c066a6187f3ecffc425a1c36818c1460dbc3c0fe74a287"
   },
   "rules": [
     "The retained wealth settings are used unchanged for all 54 ownership paths; only matched revised physical assets and financial flows replace their source products. Historical results remain intact.",

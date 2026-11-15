@@ -15,23 +15,19 @@
   ],
   "reference_case": "propellant_logistics:breakthrough:wider",
   "asset_product": {
-    "path": "inputs/asset_stock.json.gz",
-    "sha256": "737d2af75ace3ada9462291dcbc00b858edc94b61617efc46e6132a2af72ea4f",
-    "schema": "terluna.provisioning.enclosed-asset-stock/1",
-    "source_path": "provisioning/enclosed_industry/results/asset_stock.json.gz",
-    "source_branch": "domain/provisioning",
-    "source_commit": "c9e37d59803ec568e41111b857f76d7bf5741e05"
+    "path": "../../../provisioning/enclosed_industry/results/asset_stock.json.gz",
+    "sha256": "fc80c1174aa62406bc1e351557fddbc278416918933ac691c9d91d97c2ddd1ef",
+    "schema": "terluna.provisioning.enclosed-asset-stock/1"
   },
   "source_access": {
-    "path": "inputs/source_access.json.gz",
-    "sha256": "ccccc09a4eef587a58099ef68164f4b7dc9fe4943f12fe7cb68580e2ea624881",
-    "schema": "terluna.resources.source-access/1",
-    "source_commit": "b73457e7"
+    "path": "../../../resources/source_access/results/access.json.gz",
+    "sha256": "fdbb14e32beb7066665b833e9bd0f41ece28981080d17065f59075535dfdad9f",
+    "schema": "terluna.resources.source-access/1"
   },
   "finance_dependencies": {
-    "../enclosed_returns/finance.py": "4a212ba856b682fe9a8925df87d61fa052ea061c5febb63c3db65debb26a288d",
-    "../enclosed_returns/finance_inputs.json": "b859c68691e0fe38596460470cc1753f3def08b29955be7970a7c0ca5a0facf0",
-    "../enclosed_returns/results/returns.json": "a1de3348cb5e3c9ab110297ff176d347c077a9856f256e6406b0c508198abebf"
+    "../enclosed_returns/finance.py": "3afd3842278f044caeec81a8ae05dd542d7045541cd750a8d593ae5edf16c647",
+    "../enclosed_returns/finance_inputs.json": "6e40693196ce4c89e6c066a6187f3ecffc425a1c36818c1460dbc3c0fe74a287",
+    "../enclosed_returns/results/returns.json": "d70a765ecec255747444953e52fbd8378b000639cae2b16785080a732d579798"
   },
   "household_net_saving_fraction": 0.15,
   "household_saving_sensitivities": [

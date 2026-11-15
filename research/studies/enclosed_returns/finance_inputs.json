@@ -64,20 +64,14 @@
     "../complex_returns/returns_inputs.json": "7ce3e23c1fb215fc45fdac6f2629952f238f98edc806cd38223b1776a8d1c2b0"
   },
   "physical_product": {
-    "snapshot": "inputs/industry.json.gz",
-    "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
-    "schema": "terluna.provisioning.enclosed-industry/1",
-    "source_repository_path": "provisioning/enclosed_industry/results/industry.json.gz",
-    "source_branch": "domain/provisioning",
-    "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e"
+    "snapshot": "../../../provisioning/enclosed_industry/results/industry.json.gz",
+    "sha256": "3130ea8d5d70219053675ac8da4af1a85f9c46a673774ea63717285d787e5bc7",
+    "schema": "terluna.provisioning.enclosed-industry/1"
   },
   "resources_product": {
-    "snapshot": "inputs/mining.json.gz",
-    "sha256": "d703ac4050c2ee7a3d615808c7231e9abcdb63f4c0ea4f74304ec3699439aaae",
-    "schema": "terluna.resources.enclosed-mining/1",
-    "source_commit": "38cd446f361f19ff732e8f511ee87104dd51a083",
-    "source_branch": "domain/resources",
-    "source_repository_path": "resources/enclosed_mining/results/assessment.json.gz"
+    "snapshot": "../../../resources/enclosed_mining/results/assessment.json.gz",
+    "sha256": "1cbdc123b36910ec4d44230f272092a04118ad00e18a3612868214a0898b3a8d",
+    "schema": "terluna.resources.enclosed-mining/1"
   },
   "rules": [
     "All money uses constant USD2041 purchasing-power equivalents. U is the general economic unit and possible currency or basket of U-related currencies; no U/USD peg or calibrated CPI forecast is implied.",
@@ -106,28 +100,19 @@
   "hotel_staff_USD2041_year": 250000,
   "physical_stress_products": [
     {
-      "snapshot": "inputs/poor_lunar.json.gz",
-      "sha256": "94db53e1c6afa9ae0bc3319b7901e6b3a80143643bf196e429c14224180b565b",
-      "schema": "terluna.provisioning.enclosed-industry/1",
-      "source_repository_path": "provisioning/enclosed_industry/results/poor_lunar.json.gz",
-      "source_branch": "domain/provisioning",
-      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e"
+      "snapshot": "../../../provisioning/enclosed_industry/results/poor_lunar.json.gz",
+      "sha256": "eaed2fe3bbf6d94352bf65e9181f84bbe9a2209e92518f4092846a8211fdfe55",
+      "schema": "terluna.provisioning.enclosed-industry/1"
     },
     {
-      "snapshot": "inputs/poor_source.json.gz",
-      "sha256": "d5d015e09667ab3c63a220f8bdb32aea81e4eb1ba41dcc1689d86a8b5d27c191",
-      "schema": "terluna.provisioning.enclosed-industry/1",
-      "source_repository_path": "provisioning/enclosed_industry/results/poor_source.json.gz",
-      "source_branch": "domain/provisioning",
-      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e"
+      "snapshot": "../../../provisioning/enclosed_industry/results/poor_source.json.gz",
+      "sha256": "ab12b9bfca22c6f07a919ccac86d0afbb1dff5a38324dee61a5c13f31245993a",
+      "schema": "terluna.provisioning.enclosed-industry/1"
     },
     {
-      "snapshot": "inputs/lifetimes.json.gz",
-      "sha256": "15ea5ada5f1a33c0db82e92a43fe6cf49cebb33b6d6a52a4937fe99a16b28422",
-      "schema": "terluna.provisioning.enclosed-industry/1",
-      "source_repository_path": "provisioning/enclosed_industry/results/lifetimes.json.gz",
-      "source_branch": "domain/provisioning",
-      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e"
+      "snapshot": "../../../provisioning/enclosed_industry/results/lifetimes.json.gz",
+      "sha256": "0723ae8bca0f1cc83dd9a0826000de633915780c588a224174e4f7acd9996627",
+      "schema": "terluna.provisioning.enclosed-industry/1"
     }
   ],
   "capital_cost_allowance_fraction": 0.35,

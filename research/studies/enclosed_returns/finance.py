@@ -238,12 +238,12 @@ def inputs():
         if digest(path)!=spec['sha256']:raise ValueError('Changed physical stress product')
         stress=json.loads(gzip.decompress(path.read_bytes()) if path.suffix=='.gz' else path.read_bytes())
         if stress['schema']!=cfg['physical_product']['schema']:raise ValueError('Unexpected physical stress schema')
-        if stress['dependencies']['provisioning/enclosed_industry/inputs/orders.json']!=digest(HERE/'results/orders.json'):raise ValueError('Stress used different orders')
+        if stress['dependencies']['research/studies/enclosed_returns/results/orders.json']!=digest(HERE/'results/orders.json'):raise ValueError('Stress used different orders')
         if not any(v['sha256']==spec['sha256'] for v in products['resources']['physical_products']):raise ValueError('Resources did not assess stress product')
         products['physical']['cases'].extend(stress['cases'])
     names=[c['name'] for c in products['physical']['cases']]
     if len(names)!=len(set(names)):raise ValueError('Duplicate physical case')
-    linked=products['physical']['dependencies'].get('provisioning/enclosed_industry/inputs/orders.json')
+    linked=products['physical']['dependencies'].get('research/studies/enclosed_returns/results/orders.json')
     if linked!=digest(HERE/'results/orders.json'):raise ValueError('Physical product used different customer orders')
     if not any(v['sha256']==cfg['physical_product']['sha256'] for v in products['resources']['physical_products']):raise ValueError('Resources product did not assess this physical product')
     return cfg,orders,products

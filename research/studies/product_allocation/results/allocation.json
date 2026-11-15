@@ -2,17 +2,17 @@
   "schema": "terluna.research.product-allocation/1",
   "producer": {
     "path": "research/studies/product_allocation/allocation.py",
-    "sha256": "e2bdf05f9debbc885225c8a06d0021f95a1fa202e70b8e466410ec159bae16f4"
+    "sha256": "4ef54a7f13b1c7395f3bf8762f8d7a4895951e07371409158adb50425dc4493c"
   },
   "dependencies": {
-    "allocation_inputs.json": "6721a4590d371fed035712263e03645b04f9a287e4613e347d14aeacdc451f6a",
-    "inputs/assays.json": "6a5a5d2d826a320f9bfd2a51449b94c74937a98887288ece4f45fc3df2f4ca29",
-    "inputs/flows.json": "4cf6bb10c49d9f91c22f991d08ead1b92f6af6b5a4a14e80ac6b41918caae592",
-    "inputs/recovery.json": "03d79706c9e550f0af8b87fae0b347ae0c783d38276747dcccc557dfb6b28b4b",
-    "inputs/basis.json": "229c0ecefdf696bac14b31f55a726bf97486b66ca6c4dfc25884c959da65902a",
+    "allocation_inputs.json": "03a7ccec8f57ecaf1c505f9031ce5dc081324f22f492873b6e8834347241a91c",
+    "../../../resources/source_access/coproduct_assays.json": "6a5a5d2d826a320f9bfd2a51449b94c74937a98887288ece4f45fc3df2f4ca29",
+    "../../../resources/source_access/inputs/coproduct_flows.json": "ec202015042ecda36bb0019fb3c311c84b6c7d258a362d86cc70d30e15c37726",
+    "../../../resources/source_access/coproduct_inputs.json": "e8dfd0fe5761ba1576282bc13b509b2038f31a409182b9a6d807b002ddd67d63",
+    "inputs/basis.json": "596845554c98f7d1e1aae59a7275e0681499e0bcd5dcae5acbd2c1e2ae209473",
     "market_benchmarks.json": "f5c694a0f86c25b83cdc9e11849f925e788dbcb0158665caa23e6903bb69dcd2",
     "allocation_sources.json": "460b0607f3a2918ac26cc662d81dc8017c9b7ac89b1d4491179c7c90e34c41d7",
-    "../enclosed_returns/results/earth_purchases.json.gz": "1721b41981f53c3b587c6be64b3c0c518644af4375a59c4822753cb57141c1f4",
+    "../enclosed_returns/results/earth_purchases.json.gz": "979c73a81051e4a95ebbb2515d9ff7a68d22349cb998ed1e2b35b01f508e6a66",
     "../enclosed_returns/enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
     "../complex_returns/inputs/strategy_profiles.json": "68de393762a3411e0fc3fb2956c8d16c936c46019db70995cc3ccd5654449a9c"
   },

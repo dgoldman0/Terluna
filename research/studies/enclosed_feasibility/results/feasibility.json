@@ -24855,7 +24855,7 @@
   "dependencies": {
     "industry": {
       "path": "provisioning/enclosed_industry/results/revised_industry.json.gz",
-      "sha256": "bd3fe126aa750f640526ae7d47d8aba593e1ec1c95b604693048db23abb0692f"
+      "sha256": "d6f937792fdc4732e25a6f69bb1570f99ad5e976b745c78dd7d3a067524f3f4f"
     },
     "engineering": {
       "path": "provisioning/enclosed_industry/inputs/engineering.json",
@@ -24875,11 +24875,11 @@
     },
     "reclamation": {
       "path": "provisioning/enclosed_industry/reclamation_inputs.json",
-      "sha256": "3197ec5b8d7608a6528f5d162990ba204183056b5dd41548c2ceb86bfd7b7264"
+      "sha256": "e73dd16d97aa5e4d56dade53f30c5980451ad37233a150ff17712bc0ee90ffc8"
     },
     "study_inputs": {
       "path": "research/studies/enclosed_feasibility/feasibility_inputs.json",
-      "sha256": "d5a5c7ac12a8c989179e137bf0f1f75b324acd24982f807df4efe7b80b5a305b"
+      "sha256": "ca1feb68dae00147690af3f44f79339083b57960142fcc26223249ce594356b1"
     }
   }
 }

@@ -4,7 +4,7 @@
     "population": {
       "path": "results/population.json.gz",
       "schema": "terluna.resources.nea-population/1",
-      "sha256": "de8b5787ac46434ccc12f4977bbf8cd0013de18f8e6f844d985e61a24ec7de06"
+      "sha256": "0615e385e90876742d91fffbfbd4877080e8e374a9cc9b16323ecf106368a934"
     },
     "lunar": {
       "path": "results/lunar_potential.json.gz",
@@ -14,13 +14,13 @@
     "reclamation": {
       "path": "../../provisioning/enclosed_industry/results/reclamation.json.gz",
       "schema": "terluna.provisioning.reclamation/1",
-      "sha256": "f6b43f00ea585af509e0f9e4ec3545ccf1956ed8c04348dd3404cf965bb54f2c",
+      "sha256": "8e419ca26889371c6ebfcc114031a9d3163d29491873733006ec08871cfde161",
       "producer_path": "provisioning/enclosed_industry/reclamation.py"
     },
     "baseline": {
       "path": "../../provisioning/enclosed_industry/results/industry.json.gz",
       "schema": "terluna.provisioning.enclosed-industry/1",
-      "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7"
+      "sha256": "3130ea8d5d70219053675ac8da4af1a85f9c46a673774ea63717285d787e5bc7"
     }
   },
   "checkpoints": [

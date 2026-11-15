@@ -199,7 +199,7 @@ def inputs():
     for name,sha in cfg['dependencies'].items():
         if digest(HERE/name)!=sha:raise ValueError('Changed admitted asset-export dependency: '+name)
     data=json.loads((HERE/'inputs/engineering.json').read_text())
-    orders=json.loads((HERE/'inputs/orders.json').read_text())
+    orders=json.loads(run.ORDERS.read_text())
     physical=json.loads(gzip.decompress((HERE/'results/industry.json.gz').read_bytes()))
     return cfg,data,orders,physical
 

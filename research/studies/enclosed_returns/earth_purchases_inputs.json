@@ -10,7 +10,7 @@
     "enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
     "../complex_returns/strategy_inputs.json": "ad8d3af2ec0a5614492536abd3bb10a21681cf08c17b8e52a46ab8af65500284",
     "../complex_returns/inputs/strategy_profiles.json": "68de393762a3411e0fc3fb2956c8d16c936c46019db70995cc3ccd5654449a9c",
-    "results/revised.json.gz": "b5236e5e0cab2d3941816441b59d943b54a99c9dec31c3b09deb2d0b2c41648d",
+    "results/revised.json.gz": "29d5b03ca9db985fa9c26a24dce26eb47216570f292a6693a3788de20b9a70f6",
     "markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb"
   },
   "evidence": "Arithmetic decomposition of existing conditional purchase scenarios, reconciled to the revised returns. No new market forecast, trace-element purchase allocation, extraction authorization or coproduct plant is supplied.",
