@@ -3,14 +3,17 @@
     python -m humanities.sport.whole_body     # writes humanities/sport/results/whole_body.json (needs the drive)
 
 The envelope (envelope.py) sets bounds by closed forms; this record measures solved motions of the motion engine, the
-55 kg body model on the dance's vinyl floor (friction 0.5) at lunar gravity, each from its motion file and per-node
-report on the research drive:
+55 kg body model on the dance's vinyl floor (friction 0.5) at lunar gravity, and on Earth for a check, each from its
+motion file and per-node report on the research drive:
 - the whole phrase *Under the Canopy, with the hanging salto* as solved on 6 November 2026, before landings had a
   stroke;
 - the hanging salto as a short phrase of its own and the run, grand jete and carve landing of the longer phrase, solved
   on 7 November with the engine's landing impulses costed on what they do to the centre of mass and held inside the
   friction cone: first with the engine's Euler flights, then the salto with Runge-Kutta flights in two stages, landing
-  flat-footed and then on the balls of the feet, rolling down into a deep bend and rising out of it.
+  flat-footed and then on the balls of the feet, rolling down into a deep bend and rising out of it;
+- a check landing solved on 8 November on Earth and on the Moon, a sauté that touches down on the balls of the feet,
+  sinks on them into a deep bend and rises, without and with the engine's cost on landing forces (weight 100), and the
+  hanging salto landing the same way with the cost.
 
 For every stance that a flight ends and another flight starts (strides, the grand jete's take-off and its carve
 landing), every landing from a flight, the hanging salto's standing take-off and each motion's last state, it reads the
@@ -40,6 +43,7 @@ OUT = HERE / 'results' / 'whole_body.json'
 FILES = ('humanities/sport/whole_body.py',)
 DRIVE = Path('/media/projectspace/terluna-research/humanities/dance-runs')
 LANDING = DRIVE / 'landing_2026-11-07' / 'motion'
+LOADS = DRIVE / 'landing_force_2026-11-08' / 'motion'
 MOTIONS = {
     # the whole phrase before landings were costed: rigid landings
     'phrase_2026_11_06': DRIVE / 'motion_apart' / 'canopy_and_salto',
@@ -50,6 +54,13 @@ MOTIONS = {
     # salto landing flat-footed with straight legs, then touching down on the balls of the feet and rolling down
     'salto_flat_landing_rk4_2026_11_07': LANDING / 'salto_flatfoot_staged_rk4_flight_w100_stage2',
     'salto_ball_landing_rk4_2026_11_07': LANDING / 'salto_staged_rk4_flight_w100_stage2',
+    # The check landing on the balls of the feet into a deep bend, on Earth and on the Moon, without the cost on landing
+    # forces and with it (weight 100), and the salto landing the same way with the cost (8 November)
+    'check_earth_2026_11_08': LOADS / 'check2_earth_stage2',
+    'check_earth_landing_cost_2026_11_08': LOADS / 'check2_earth_stage3_w100',
+    'check_moon_2026_11_08': LOADS / 'check2_moon_stage2',
+    'check_moon_landing_cost_2026_11_08': LOADS / 'check2_moon_stage3_w100',
+    'salto_on_the_balls_landing_cost_2026_11_08': LOADS / 'salto_balls_stage3_w100',
 }
 MOTION = MOTIONS['phrase_2026_11_06'].with_suffix('.npz')        # the reference motion the tests need
 MASS_KG = 55.0
@@ -161,7 +172,7 @@ def stance_record(m, v, a, b, unit, g, ends_in_flight=True):
                                  along_over_vertical=r(np.linalg.norm(jump[:2]) / jump[2], 2) if jump[2] > 0.3 else None),
         friction_bound_on_travel_change_m_s=r(FLOOR_FRICTION * vert_impulse, 2),
         share_of_bound_used=r(dvh / (FLOOR_FRICTION * vert_impulse), 2) if vert_impulse > 0 else None,
-        peak_push=dict(N=r(N.max(), 0), lunar_bw=r(N.max() / (MASS_KG * g), 1),
+        peak_push=dict(N=r(N.max(), 0), lunar_bw=r(N.max() / (MASS_KG * MOON_SURFACE_GRAVITY), 1),
                        earth_bw=r(N.max() / (MASS_KG * STANDARD_GRAVITY), 2)),
         most_friction_used=r(ratio.max(), 2))
 
@@ -172,9 +183,9 @@ def salto_take_off_and_landing(m, v, rep, stances, on, g):
     lift-off, and the first 0.4 s of its landing."""
     t, com = m['time'], m['com']
     t0 = rep['nodes'][0]['t']                           # the report's time of the motion file's zero
-    salto = next(a for a in rep['meta']['aerial'] if a['unit'] == 'hanging_salto')
+    salto = next(a for a in rep['meta']['aerial'] if a['unit'].startswith('hanging_salto'))
     t_off, t_land = (x - t0 for x in salto['t'])
-    st = [n['t'] - t0 for n in rep['nodes'] if n['unit'] == 'hanging_salto' and n['phase'] == 'stance' and n['t'] - t0 < t_off]
+    st = [n['t'] - t0 for n in rep['nodes'] if n['unit'].startswith('hanging_salto') and n['phase'] == 'stance' and n['t'] - t0 < t_off]
     a = int(np.searchsorted(t, st[0]))
     b = int(np.searchsorted(t, t_off - 1e-9))
     while b < len(t) and on[b]:
@@ -188,7 +199,7 @@ def salto_take_off_and_landing(m, v, rep, stances, on, g):
                     descent_s=r(t[dip_i] - t[onset]), dip_to_lift_off_s=r(t[b] - t[dip_i]),
                     onset_to_lift_off_s=r(t[b] - t[onset]), lift_off_vertical_m_s=r(velocity_after(m, b)[2], 2),
                     peak_push=dict(N=r(m['contact_force'][a:b, :, 2].sum(axis=1).max(), 0),
-                                   lunar_bw=r(m['contact_force'][a:b, :, 2].sum(axis=1).max() / (MASS_KG * g), 1)))
+                                   lunar_bw=r(m['contact_force'][a:b, :, 2].sum(axis=1).max() / (MASS_KG * MOON_SURFACE_GRAVITY), 1)))
     kl = min(k for k, (a, b) in enumerate(stances) if t[a] > t_land - 0.05)
     a, b = stances[kl]
     landing = stance_record(m, v, a, min(b, a + int(round(0.4 / float(t[1] - t[0])))),
@@ -199,7 +210,7 @@ def salto_take_off_and_landing(m, v, rep, stances, on, g):
 def measure(stem):
     m, rep = load(stem)
     g = m['meta']['gravity']
-    assert abs(g - MOON_SURFACE_GRAVITY) < 1e-9
+    assert min(abs(g - MOON_SURFACE_GRAVITY), abs(g - STANDARD_GRAVITY)) < 1e-9     # the Moon, or Earth for a check
     t, com = m['time'], m['com']
     v = velocity(com, t)
     on = m['contact_on'].any(axis=1)
@@ -219,7 +230,7 @@ def measure(stem):
         if flight_before and flight_after and t[b] - t[a - 1] <= 1.0:      # strides, take-offs and landings
             between.append(stance_record(m, v, a, b, f'{unit_of(t[a - 1])} into {unit_of(t[b])}', g))
     standing = landing = None
-    if any(n['unit'] == 'hanging_salto' and n['phase'] == 'flight' for n in rep['nodes']):
+    if any(n['unit'].startswith('hanging_salto') and n['phase'] == 'flight' for n in rep['nodes']):
         standing, landing = salto_take_off_and_landing(m, v, rep, stances, on, g)
     landings = []
     for a, b in spans(~on):
@@ -265,8 +276,10 @@ def results():
         producer=dict(domain='humanities', files={f: hashlib.sha256((ROOT / f).read_bytes()).hexdigest()[:16] for f in FILES},
                       constants=constants_used([ROOT / f for f in FILES]), inputs=inputs),
         evidence='Measurements of solved whole-body motions (multiple-shooting optimal control with rigid contacts, '
-                 'friction cones on the stance forces, torque bounds and landing impulses, Euler steps of 25 ms) for '
-                 'one 55 kg body on a 0.5 friction floor; feasible motions of that model, not measured human movement.',
+                 'friction cones on the stance forces, torque bounds and landing impulses, steps of 25 ms by Euler or, '
+                 'in flight, Runge-Kutta; since 8 November a cost on landing forces) for one 55 kg body on a 0.5 '
+                 'friction floor at lunar gravity, and on Earth for a check; feasible motions of that model, not '
+                 'measured human movement.',
         body=dict(mass_kg=MASS_KG, floor_friction=FLOOR_FRICTION),
         motions={k: measure(stem) for k, stem in present.items()})
 

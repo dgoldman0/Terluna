@@ -2,6 +2,7 @@
 carries the grammar's contact schedule. Runs in the dance environment (Pinocchio, Crocoddyl, MuJoCo); elsewhere it
 skips."""
 import math
+import pickle
 
 import numpy as np
 import pytest
@@ -241,10 +242,18 @@ def test_the_corkscrew_twists_once_and_the_flat_spin_lies_flat_about_the_vertica
     assert flight[0].R_air[2, 2] > 0.99 and flight[-1].R_air[2, 2] > 0.99
 
 
-def test_phrases_without_aerial_figures_are_planned_as_before():
+def test_phrases_without_aerial_figures_plan_no_attitude_and_start_each_flight_on_its_arc():
     nodes = rz.timeline(gr.first_phrase().placed, finish_s=1.0)
     prob = rz.Problem(nodes)
-    assert prob.air_plans == [] and not any(n.lean_free or n.z_rel is not None for n in nodes)
+    assert prob.air_plans == [] and not any(n.lean_free or n.R_air is not None for n in nodes)
+    # Every flight node, and only a flight node, carries its height on the ballistic arc for the warm start: it rises
+    # from the take-off, peaks at the middle of the flight and comes back down.
+    assert all((n.z_rel is not None) == (n.phase == 'flight') for n in nodes)
+    flight = [n for n in nodes if n.phase == 'flight']
+    assert flight
+    for n in flight:
+        tau = n.air_frac * n.flight_s
+        assert n.z_rel == pytest.approx(0.5 * gr.G * tau * (n.flight_s - tau)) and n.z_rel >= 0.0
 
 
 def test_self_distance_measures_the_capsules_it_keeps_apart():
@@ -323,11 +332,13 @@ def test_the_barrier_follows_the_body_between_nodes():
 def test_landing_impulses_keep_the_cone_and_cost_the_centre_of_mass_only_with_exact_flights():
     ph = gr.build('Hanging Salto', gr.motif(('hanging_salto', 'R', {'rise_m': 1.6})))
     nodes = rz.timeline(ph.placed, finish_s=0.5)
-    # The salto lands on the balls of both feet, then lowers its heels: two landings, from the air and from the ball.
+    # The salto lands on the balls of both feet, sinks on them into its deep bend and rises on them, then lowers its
+    # heels: two landings, from the air and from the ball.
     i = next(k for k, n in enumerate(nodes) if n.landing and k > 0 and not nodes[k - 1].contacts)
     assert set(nodes[i].contacts.values()) == {'ball'} and set(nodes[i].landing) == {'L', 'R'}
     heels = next(k for k in range(i + 1, len(nodes)) if nodes[k].landing)
-    assert set(nodes[heels].contacts.values()) == {'flat'} and (heels - i) * rz.DT == pytest.approx(0.15, abs=rz.DT)
+    on_balls = gr.absorb_s(gr.takeoff(1.6), 0.35) + gr.rise_s(0.37)
+    assert set(nodes[heels].contacts.values()) == {'flat'} and (heels - i) * rz.DT == pytest.approx(on_balls, abs=rz.DT)
     assert rz.RK4_ON == ('flight',)                       # flights integrate with Runge-Kutta by default
     old = rz.RK4_ON
     try:
@@ -346,3 +357,109 @@ def test_landing_impulses_keep_the_cone_and_cost_the_centre_of_mass_only_with_ex
             assert not prob.rk4_node(heels + 5)                  # a stance node stays Euler unless 'landing' is named
     finally:
         rz.RK4_ON = old
+
+
+def test_the_flight_integrators_order_is_a_switch_with_fourth_order_by_default():
+    ph = gr.build('Hanging Salto', gr.motif(('hanging_salto', 'R', {'rise_m': 1.6})))
+    nodes = rz.timeline(ph.placed, finish_s=0.5)
+    k = next(i for i, n in enumerate(nodes) if not n.contacts)
+    assert rz.RK_ORDER == 4
+    old = rz.RK_ORDER
+    try:
+        for order in (2, 3, 4):
+            rz.RK_ORDER = order
+            prob = rz.Problem(nodes)
+            prob.plan()
+            (i, m), = prob.running(k, k + 1)
+            assert isinstance(m, crocoddyl.IntegratedActionModelRK) and m.ni == order
+    finally:
+        rz.RK_ORDER = old
+
+
+def test_landing_loads_are_costed_from_touchdown_through_the_stroke_in_earth_weights():
+    ph = gr.build('Hanging Salto', gr.motif(('hanging_salto', 'R', {'rise_m': 1.6})))
+    nodes = rz.timeline(ph.placed, finish_s=0.5)
+    i = next(k for k, n in enumerate(nodes) if n.landing and k > 0 and not nodes[k - 1].contacts)
+    last = i + round(rz.LANDING_LOAD_S / rz.DT) - 1
+    old = rz.RK4_ON, rz.LANDING_FORCE_WEIGHT
+    try:
+        rz.LANDING_FORCE_WEIGHT = old[1] or 1.0
+        prob = rz.Problem(nodes)
+        # From the touchdown through LANDING_LOAD_S, never in the take-off's stance or in the air.
+        loaded = [k for k in range(len(nodes)) if prob.landing_load(k)]
+        assert loaded == list(range(i, last + 1)) and last + 1 < len(nodes)
+        prob.plan()
+        ms = [(k, m) for k, m in prob.running(i, i + 1) if not isinstance(m, crocoddyl.ActionModelImpulseFwdDynamics)]
+        k, m = ms[0]
+        costs = m.differential.costs.costs.todict()
+        assert {'L_load', 'R_load'} <= set(costs)
+        assert costs['L_load'].weight == rz.LANDING_FORCE_WEIGHT
+        assert not any('load' in c for c in prob.terminal(i).differential.costs.costs.todict())
+        # Each foot's cost is half the square of its push on the floor in the body's Earth weights.
+        d = m.createData()
+        m.calc(d, prob.state_at(i), np.zeros(m.nu))
+        forces = d.differential.multibody.contacts.contacts.todict()
+        for side in 'LR':
+            fz = next(c.f.linear[2] for name, c in forces.items() if name.startswith(side))
+            assert d.differential.costs.costs.todict()[f'{side}_load'].cost == pytest.approx(
+                0.5 * (fz / (rz.env.MASS_KG * rz.env.G_E)) ** 2, rel=1e-9)
+        # The touchdown's impulse carries the same load, as its push spread over one node, with exact derivatives: the
+        # impulse model computes its forces' derivatives, without which its costs on them carry no gradient.
+        imp = prob.running(i, i + 1)[0][1]
+        assert isinstance(imp, crocoddyl.ActionModelImpulseFwdDynamics)
+        assert imp.costs.costs.todict()['L_impulse_load'].weight == pytest.approx(rz.LANDING_FORCE_WEIGHT / rz.DT)
+        x = prob.state_at(i)
+        x[prob.model.nq + 2] = -2.0                          # arriving downward
+        di = imp.createData()
+        imp.calc(di, x, np.zeros(0))
+        imp.calcDiff(di, x, np.zeros(0))
+
+        def load(xx):
+            dd = imp.createData()
+            imp.calc(dd, xx, np.zeros(0))
+            return dd.costs.costs.todict()['L_impulse_load'].cost
+
+        dx = np.zeros(prob.state.ndx)
+        dx[prob.model.nv + 2] = 1e-6
+        numeric = (load(prob.state.integrate(x, dx)) - load(prob.state.integrate(x, -dx))) / 2e-6
+        analytic = di.costs.costs.todict()['L_impulse_load'].Lx[prob.model.nv + 2]
+        assert abs(numeric) > 1e-9 and analytic == pytest.approx(numeric, rel=1e-4)    # (0.6 N s / 539 N)^2 is small
+        rz.RK4_ON = ()                                       # on Euler's step a landing could float down instead
+        assert not any(prob.landing_load(k) for k in range(len(nodes)))
+    finally:
+        rz.RK4_ON, rz.LANDING_FORCE_WEIGHT = old
+
+
+def test_a_windowed_solve_stopped_and_resumed_from_its_checkpoint_matches_one_never_stopped(tmp_path):
+    ph = gr.build('t', gr.motif(('plie_rise', 'R', {'depth_m': 0.12})))
+
+    def solve(log=None, checkpoint=None):
+        prob = rz.Problem(rz.timeline(ph.placed))
+        return rz.solve_windows(prob, window_s=0.75, step_s=0.5, maxiter=1, log=log, checkpoint=checkpoint)
+
+    class Stop(Exception):
+        pass
+
+    def stop_after_two(report, seen=[]):
+        seen.append(report)
+        if len(seen) == 2:
+            raise Stop
+
+    whole = solve()
+    path = tmp_path / 'windows.pkl'
+    with pytest.raises(Stop):
+        solve(log=stop_after_two, checkpoint=path)
+    resumed = solve(checkpoint=path)
+    assert len(resumed.records) == len(whole.records) > 0
+    for p, q in zip(whole.records, resumed.records):
+        assert p['node'] == q['node'] and np.allclose(p['x'], q['x'], rtol=1e-9, atol=1e-12)
+        assert np.allclose(p['u'], q['u'], rtol=1e-9, atol=1e-9)
+    assert resumed.cost == pytest.approx(whole.cost, rel=1e-9)
+    # A checkpoint made under other settings is not taken up: the solve starts afresh.
+    old = rz.LANDING_FORCE_WEIGHT
+    try:
+        rz.LANDING_FORCE_WEIGHT = old + 1.0
+        prob = rz.Problem(rz.timeline(ph.placed))
+        assert rz.window_key(prob, 0.75, 0.5, 1) != pickle.loads(path.read_bytes())['key']
+    finally:
+        rz.LANDING_FORCE_WEIGHT = old

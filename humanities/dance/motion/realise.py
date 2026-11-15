@@ -24,6 +24,8 @@ problem over the dancer's full rigid-body dynamics at lunar gravity (body.json t
   took 86-97% of a hard landing's vertical speed at once) leaves the stance's pushes, inside the friction cone and
   the body's strength, to absorb the landing as the body sinks through a stroke, and the impulse itself stays
   inside the friction cone and its centre of pressure inside the foot;
+- the floor's push through each landing is costed as the loads people avoid in their joints (LANDING_FORCE_WEIGHT),
+  in the body's Earth weight on either world, so a landing spreads its stop over the stroke its shapes leave it;
 - joint torques stay inside the body's strength (box-constrained FDDP), joint ranges inside barrier costs, every point
   of the soles and knees that bears no weight at or above the floor;
 - no part of the body passes into another: a barrier keeps the legs, the arms and each arm and the head at or above
@@ -37,13 +39,18 @@ problem over the dancer's full rigid-body dynamics at lunar gravity (body.json t
 The solution is a torque, force and motion history that satisfies the equations of motion at every node; the replay
 (replay.py) runs those torques through MuJoCo's independent contact dynamics as a check. Air drag on the body is left
 out of the optimisation: the envelope shows it changes a jump's height by under 4% even with large sleeves. A long
-phrase is solved in overlapping windows (solve_windows).
+phrase is solved in overlapping windows (solve_windows), which can resume from a checkpoint after a stop.
 """
 from __future__ import annotations
 
 import argparse
+import ctypes
+import gc
+import hashlib
 import json
 import math
+import os
+import pickle
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -88,10 +95,28 @@ APART_MARGIN = 0.003         # m kept between the pairs' surfaces: parts nearly 
 RK4_ON = ('flight',)
 LANDING_RK4_S = 0.5
 PUSH_RK4_S = 0.35
+# The Runge-Kutta order of the nodes RK4_ON names. 4 is the default and the most accurate; 3 and 2 keep three or two
+# stages of derivatives a node in place of four, for long phrases on a machine with less memory to spare: a flight
+# node of the dancer's 21 costs holds 38 MB at 4, 29 at 3, 19 at 2 and 11 on Euler's step (9 November).
+RK_ORDER = 4
+RK_TYPES = {2: crocoddyl.RKType.two, 3: crocoddyl.RKType.three, 4: crocoddyl.RKType.four}
 IMPULSE_COM_WEIGHT = 1e2     # on the change a landing impulse makes to the centre of mass's velocity (m/s); it applies
                              # only where flights integrate with Runge-Kutta, since on Euler's step the optimiser
                              # meets it by floating down on the integration error (7 November)
 IMPULSE_CONE_WEIGHT = 1e2    # on the impulse's friction cone and centre of pressure, as on a stance's forces
+# The floor's push through each landing, costed as the loads people avoid in their joints: each contact's normal force,
+# as a share of the body's weight on Earth, at every stance node within LANDING_LOAD_S of a touchdown from the air. The
+# tissues that carry the load are the same on either world, so the cost is on the force itself, the same on both. Like
+# the impulse's cost it applies only where flights integrate with Runge-Kutta, so that a landing cannot shed its load by
+# floating down on Euler's integration error. LANDING_LOAD_S outlasts the strokes the vocabulary's landings ask for, so
+# a landing cannot defer its stop past the cost. The weight is set by an Earth check (8 November; dance-runs/
+# landing_force_2026-11-08 on the research drive): a sauté landing on the balls of the feet at 1.7-1.9 m/s pushes,
+# without the cost, a third of the way from people's soft drop landings at that speed to their natural ones (2.72
+# Earth body weights against 2.35 and 3.45; Verniba et al. 2017, sources.json), and at 100 as softly as people asked
+# to land softly (2.25 against 2.17), sinking 15 cm instead of 12. Dancers land softly by training.
+LANDING_FORCE_WEIGHT = 100.0
+LANDING_LOAD_S = 1.0
+EARTH_WEIGHT_N = env.MASS_KG * env.G_E
 MAX_FOOT_FORCE_N = 900.0     # a foot's peak push, about 10 lunar body weights (1.7 of Earth's): a jump's take-off peak
 # Contact kinds: the frame that holds the floor, how many directions it holds (6: no slip and no swivel; 3: a point
 # that cannot slip but may swivel), and the body's points that rest on the floor with it.
@@ -176,7 +201,8 @@ def shape_targets(shape, side):
 
 CARRIAGE = {   # the dancer's carriage between shapes: lifted, arms low and rounded, slight turnout
     'legs': 'turned_out', 'arms': 'bras_bas', 'torso': 'upright', 'head': 'forward'}
-TWO_FOOT_LEGS = {'parallel', 'turned_out', 'demi_plie', 'grand_plie_prep', 'releve', 'lunge_forward', 'kneel_one'}
+TWO_FOOT_LEGS = {'parallel', 'turned_out', 'turned_out_flat', 'demi_plie', 'grand_plie_prep', 'grand_plie_demi_pointe',
+                 'demi_pointe_low', 'landing_prep', 'releve', 'lunge_forward', 'kneel_one'}
 
 
 def place_feet(model, data, q, targets, iters=80, damping=1e-6, com=None):
@@ -281,7 +307,8 @@ class Node:
     # the take-off on the ballistic arc; Problem fills in the pelvis's planned attitude and the angular momentum.
     air: dict | None = None
     air_frac: float = 0.0
-    z_rel: float | None = None
+    z_rel: float | None = None       # in flight, the height above the take-off on the ballistic arc
+    flight_s: float | None = None    # in flight, the flight's duration
     R_air: np.ndarray | None = None
     L_air: np.ndarray | None = None
     w_air: np.ndarray | None = None  # the pelvis's planned angular velocity (world axes, rad/s)
@@ -467,10 +494,11 @@ def timeline(placed, dt=DT, finish_s=0.0):
                 for j, deg in RELEVE.items():
                     tg[f'{s}_{j}'] = ('hinge', math.radians(deg))
         tau = t - ph['t0']
+        T = ph['duration'] if ph['kind'] == 'flight' else None
         nodes.append(Node(t=float(t), contacts=contacts, landing=landing, targets=tg, yaw=heading + yaw_turn,
                           yaw_rate=yaw_rate, com=pos.copy(), com_vel=(pos - before) / dt, phase=ph['kind'],
                           unit=pl.unit, family=u['family'], side=pl.side, phase_id=pid, air=air, air_frac=frac,
-                          z_rel=(0.5 * gr.G * ph['duration'] * tau - 0.5 * gr.G * tau * tau) if air else None))
+                          z_rel=(0.5 * gr.G * T * tau - 0.5 * gr.G * tau * tau) if T else None, flight_s=T))
         if shapes:
             reached = [s for s in shapes if s['at'] <= frac + 1e-9]
             if reached:
@@ -623,7 +651,7 @@ class Problem:
         w[nv + 6:] = 0.2
         return w
 
-    def costs(self, node, landing_targets=None, terminal=False):
+    def costs(self, node, landing_targets=None, terminal=False, load=False):
         cm = crocoddyl.CostModelSum(self.state, self.nu)
         x_ref = np.concatenate([self.reference_q(node), np.zeros(self.model.nv)])
         act = crocoddyl.ActivationModelWeightedQuad(self.state_weights(node) ** 2)
@@ -697,6 +725,18 @@ class Problem:
                     b = crocoddyl.ActivationBounds(np.array([1.0]), np.array([MAX_FOOT_FORCE_N]))
                     cm.addCost(f'{side}_{pt}_press', crocoddyl.CostModelResidual(
                         self.state, crocoddyl.ActivationModelQuadraticBarrier(b), res), 1e2)
+            if load:
+                # A landing's load: the floor's push on the contact (and on a pivot's metatarsal heads), in Earth weights.
+                parts = [(fid, CONTACTS[kind][1], 2)]
+                if kind == 'pivot':
+                    parts += [(self.model.getFrameId(f'{side}_{pt}'), 1, 0) for pt in PIVOT_SUPPORTS]
+                for k, (f, nc, normal) in enumerate(parts):
+                    w = np.zeros(nc)
+                    w[normal] = 1.0 / EARTH_WEIGHT_N ** 2
+                    cm.addCost(f'{side}_load' + (f'_{k}' if k else ''), crocoddyl.CostModelResidual(
+                        self.state, crocoddyl.ActivationModelWeightedQuad(w),
+                        crocoddyl.ResidualModelContactForce(self.state, f, pin.Force.Zero(), nc, self.nu, True)),
+                        LANDING_FORCE_WEIGHT)
         # The floor: every sole or knee point that bears no weight at this node stays at or above it (a 2 mm margin),
         # so swing feet, toes under a flat foot, heels over demi-pointe and knees never pass through the floor.
         for side in ('L', 'R'):
@@ -960,8 +1000,10 @@ class Problem:
             v = v - J.T @ np.linalg.solve(J @ J.T + 1e-9 * np.eye(J.shape[0]), J @ v)
         return np.concatenate([q, v])
 
-    def _dam(self, node, i, terminal=False, landing_targets=None):
-        costs = self.costs(node, landing_targets, terminal=terminal)
+    def _dam(self, node, i, terminal=False, landing_targets=None, load=None):
+        if load is None:
+            load = not terminal and self.landing_load(i)
+        costs = self.costs(node, landing_targets, terminal=terminal, load=load)
         act = self.actuation_for(node)
         if node.contacts:
             return crocoddyl.DifferentialActionModelContactFwdDynamics(
@@ -989,6 +1031,17 @@ class Problem:
             if j + 1 < len(self.nodes) and not self.nodes[j + 1].contacts and self.nodes[j + 1].t - node.t <= PUSH_RK4_S:
                 return True
         return False
+
+    def landing_load(self, i):
+        """Whether stance node i carries the cost on a landing's load (LANDING_FORCE_WEIGHT): within LANDING_LOAD_S of a
+        touchdown from the air, on the floor ever since, where flights integrate with Runge-Kutta."""
+        node = self.nodes[i]
+        if not node.contacts or LANDING_FORCE_WEIGHT <= 0 or 'flight' not in RK4_ON:
+            return False
+        j = i
+        while j > 0 and self.nodes[j - 1].contacts and node.t - self.nodes[j].t < LANDING_LOAD_S:
+            j -= 1
+        return j > 0 and not self.nodes[j - 1].contacts and node.t - self.nodes[j].t < LANDING_LOAD_S
 
     def running(self, a, b):
         """The running models of nodes a..b-1 as (node index, model): an impulse before each landing, then the node's
@@ -1024,7 +1077,18 @@ class Problem:
                     icosts.addCost(f'{side}_impulse_cone', crocoddyl.CostModelResidual(
                         self.state, crocoddyl.ActivationModelQuadraticBarrier(crocoddyl.ActivationBounds(cone.lb, cone.ub)),
                         res), IMPULSE_CONE_WEIGHT)
-                out.append((i, crocoddyl.ActionModelImpulseFwdDynamics(self.state, imp, icosts)))
+                    if self.landing_load(i):
+                        # The impulse's load in a stance's currency, as its push spread over one node: without it a
+                        # landing sheds its load into the impulse, which stops the foot at no cost on force.
+                        w = np.zeros(CONTACTS[kind][1])
+                        w[2] = 1.0 / EARTH_WEIGHT_N ** 2
+                        icosts.addCost(f'{side}_impulse_load', crocoddyl.CostModelResidual(
+                            self.state, crocoddyl.ActivationModelWeightedQuad(w),
+                            crocoddyl.ResidualModelContactForce(self.state, fid, pin.Force.Zero(), CONTACTS[kind][1], 0, True)),
+                            LANDING_FORCE_WEIGHT / DT)
+                # enable_force: the impulse's derivatives, without which its cone and load costs carry no gradient
+                # (until 8 November the cone acted on the line search alone)
+                out.append((i, crocoddyl.ActionModelImpulseFwdDynamics(self.state, imp, icosts, 0.0, 0.0, True)))
             landing_targets = {}
             if i + 1 < len(self.nodes):
                 nxt = self.nodes[i + 1]
@@ -1036,7 +1100,7 @@ class Problem:
                     landing_targets[side] = (self.fid[(side, kind)], M if CONTACTS[kind][1] == 6 else M.translation)
             dam = self._dam(node, i, landing_targets=landing_targets)
             if self.rk4_node(i):
-                iam = crocoddyl.IntegratedActionModelRK(dam, crocoddyl.RKType.four, DT)
+                iam = crocoddyl.IntegratedActionModelRK(dam, RK_TYPES[RK_ORDER], DT)
             else:
                 iam = crocoddyl.IntegratedActionModelEuler(dam, DT)
             iam.u_lb = self.bounds['effort_lower'][6:]
@@ -1047,7 +1111,7 @@ class Problem:
     def terminal(self, b):
         """The terminal model of a window ending before node b (the phrase's own end when b is past the last node)."""
         if b < len(self.nodes):
-            return crocoddyl.IntegratedActionModelEuler(self._dam(self.nodes[b], b), 0.0)
+            return crocoddyl.IntegratedActionModelEuler(self._dam(self.nodes[b], b, load=False), 0.0)
         return crocoddyl.IntegratedActionModelEuler(self._dam(self.nodes[-1], len(self.nodes) - 1, terminal=True), 0.0)
 
     def reference_states(self, ms, x_start):
@@ -1063,20 +1127,22 @@ class Problem:
             j = min(i + 1, len(self.nodes) - 1)
             qn = self.reference_q(self.nodes[j])
             if self.nodes[j].z_rel is not None:
-                qn[2] = z_base + self.nodes[j].z_rel        # an aerial figure rises and falls on its arc
+                qn[2] = z_base + self.nodes[j].z_rel        # a flight rises and falls on its arc
             else:
                 qn[2] = z_base = xs[-1][2]
             if self.nodes[j].contacts:
                 qn = place_feet(self.model, data, qn, self.node_targets[j], iters=30, com=self.nodes[j].com)
             vn = np.zeros(self.model.nv)
             nj = self.nodes[j]
-            if nj.w_air is not None:
-                # an aerial figure starts warm with its planned turn and its ballistic arc
+            if nj.flight_s is not None:
+                # a flight starts warm on its ballistic arc (from the floor's height the Moon's 2.8 s saute did not
+                # converge with Runge-Kutta flights, 8 November), and an aerial figure with its planned turn
                 R = pin.Quaternion(qn[6], qn[3], qn[4], qn[5]).toRotationMatrix()
-                tau = nj.air_frac * nj.air['duration']
-                v_up = 0.5 * gr.G * nj.air['duration'] - gr.G * tau
+                tau = nj.air_frac * nj.flight_s
+                v_up = 0.5 * gr.G * nj.flight_s - gr.G * tau
                 vn[:3] = R.T @ np.array([nj.com_vel[0], nj.com_vel[1], v_up])
-                vn[3:6] = R.T @ nj.w_air
+                if nj.w_air is not None:
+                    vn[3:6] = R.T @ nj.w_air
             xs.append(np.concatenate([qn, vn]))
         return xs
 
@@ -1172,18 +1238,59 @@ def solve_span(prob, a, b, maxiter=150, verbose=False):
     return Solution(prob, ms, sub, solver, len(ms), solver.cost, solver.iter, solver.ffeas, solver.stop)
 
 
-def solve_windows(prob, window_s=3.5, step_s=1.0, maxiter=150, verbose=False, log=None):
+def rss_gb():
+    """This process's resident memory now, in GB (None where /proc is missing)."""
+    try:
+        with open('/proc/self/statm') as f:
+            return round(int(f.read().split()[1]) * os.sysconf('SC_PAGE_SIZE') / 1e9, 2)
+    except OSError:
+        return None
+
+
+def release_memory():
+    """Hand back a finished window's memory: collect the cycles its Python-written costs leave and return the freed
+    heap to the system. Without it a whole phrase's solve held 8.7 GB at its thirteenth window (9 November), against
+    5.9 GB for the hanging salto solved alone."""
+    gc.collect()
+    try:
+        ctypes.CDLL('libc.so.6').malloc_trim(0)
+    except (OSError, AttributeError):
+        pass
+
+
+def window_key(prob, window_s, step_s, maxiter):
+    """What a windowed solve depends on: this module's code, the phrase's schedule and the settings of its costs."""
+    h = hashlib.sha256(Path(__file__).read_bytes())
+    schedule = [(round(n.t, 6), n.unit, n.phase, sorted(n.contacts.items()), n.landing) for n in prob.nodes]
+    settings = dict(window_s=window_s, step_s=step_s, maxiter=maxiter, gravity=float(prob.model.gravity.linear[2]),
+                    rk4=list(RK4_ON), rk_order=RK_ORDER, impulse=IMPULSE_COM_WEIGHT, landing=LANDING_FORCE_WEIGHT,
+                    foot=MAX_FOOT_FORCE_N)
+    h.update(json.dumps([schedule, settings]).encode())
+    return h.hexdigest()
+
+
+def solve_windows(prob, window_s=3.5, step_s=1.0, maxiter=150, verbose=False, log=None, checkpoint=None):
     """Solve the phrase window by window: each window of `window_s` starts from the state the previous one reached
     after `step_s`, so every window is short enough to converge and long enough to see a whole flight from its
     push to its landing. An aerial figure is never cut: a window that reaches into one is lengthened to hold it to
-    its landing, and a window keeps either all of it or none. Only one window's models exist at a time; the kept pieces join into one trajectory that
-    satisfies the dynamics throughout. `log`, a callable, hears each window's result as it finishes."""
+    its landing, and a window keeps either all of it or none. Only one window's models exist at a time; the kept
+    pieces join into one trajectory that satisfies the dynamics throughout. `log`, a callable, hears each window's
+    result as it finishes. With `checkpoint`, a path, each window's kept records, the state reached and the next
+    window's warm start are written there (atomically) before the window is reported, and a solve that finds a
+    checkpoint of the same code, phrase and settings resumes from it."""
     x = prob.plan()
     N = len(prob.nodes)
     W, S = int(round(window_s / DT)), int(round(step_s / DT))
     records, tail = [], None
     a, total_cost, iters, worst_gap = 0, 0.0, 0, 0.0
-    t0 = time.time()
+    t0, before = time.time(), 0.0
+    key = window_key(prob, window_s, step_s, maxiter) if checkpoint else None
+    if checkpoint and Path(checkpoint).is_file():
+        with open(checkpoint, 'rb') as f:
+            kept = pickle.load(f)
+        if kept['key'] == key:
+            records, tail, a, x = kept['records'], kept['tail'], kept['a'], kept['x']
+            total_cost, iters, worst_gap, before = kept['cost'], kept['iters'], kept['gap'], kept['seconds']
     blocks = getattr(prob, 'air_blocks', [])
     while a < N:
         b = min(N, a + W)
@@ -1217,14 +1324,21 @@ def solve_windows(prob, window_s=3.5, step_s=1.0, maxiter=150, verbose=False, lo
         total_cost += solver.cost
         iters += solver.iter
         worst_gap = max(worst_gap, solver.ffeas)
+        x = part.x_end
+        if checkpoint:
+            tmp = Path(f'{checkpoint}.tmp')
+            with open(tmp, 'wb') as f:
+                pickle.dump(dict(key=key, records=records, tail=tail, a=a + keep_nodes, x=x, cost=total_cost,
+                                 iters=iters, gap=worst_gap, seconds=before + time.time() - t0), f, protocol=4)
+            os.replace(tmp, checkpoint)
         if log:
             log(dict(nodes=[a, b], t=[round(prob.nodes[a].t, 2), round(prob.nodes[b - 1].t + DT, 2)], kept=keep_nodes,
                      iterations=solver.iter, cost=round(solver.cost, 3), gap=float(solver.ffeas),
-                     seconds=round(time.time() - t0, 1)))
-        x = part.x_end
+                     seconds=round(before + time.time() - t0, 1), memory_gb=rss_gb()))
         a += keep_nodes
-        del sub, solver, ms
-    prob.seconds = time.time() - t0
+        del sub, solver, ms, part
+        release_memory()
+    prob.seconds = before + time.time() - t0
     return Solution(prob, None, None, None, 0, total_cost, iters, worst_gap, records=records, x_end=x)
 
 
@@ -1317,13 +1431,13 @@ def contact_report(prob, sol):
 
 
 def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=False, windows=False, span=None,
-            finish_s=0.0, window_log=None, window_s=3.5, step_s=1.0, init=None):
+            finish_s=0.0, window_log=None, window_s=3.5, step_s=1.0, init=None, checkpoint=None):
     """Realise the phrase (or units[i:j] of it, or the nodes in span=(t0, t1) seconds) and write its motion file and
     report. finish_s holds the last shape at rest at the end. init, a Solution of the same phrase solved whole, warm-starts
-    the solve (a staged solve)."""
+    the solve (a staged solve). checkpoint, a path, lets a windowed solve resume after a stop (solve_windows)."""
     placed = phrase.placed if units is None else phrase.placed[units[0]:units[1]]
     nodes = timeline(placed, finish_s=finish_s)
-    prob = Problem(nodes)
+    prob = Problem(nodes, gravity=gr.G)          # the grammar's gravity, which timed the phrase
     prob.init = init
     if span is not None:
         a = next(i for i, n in enumerate(nodes) if n.t >= span[0] - 1e-9)
@@ -1331,7 +1445,8 @@ def realise(phrase, units=None, out_dir=RUNS, maxiter=200, tag=None, verbose=Fal
         solver = solve_span(prob, a, b, maxiter=maxiter, verbose=verbose)
         nodes = nodes[a:b]
     elif windows:
-        solver = solve_windows(prob, window_s=window_s, step_s=step_s, maxiter=maxiter, verbose=verbose, log=window_log)
+        solver = solve_windows(prob, window_s=window_s, step_s=step_s, maxiter=maxiter, verbose=verbose, log=window_log,
+                               checkpoint=checkpoint)
     else:
         solver = prob.solve(maxiter=maxiter, verbose=verbose)
     times, P, Q, C, QS = segment_frames(prob, solver)

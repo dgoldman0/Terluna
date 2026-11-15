@@ -15,7 +15,7 @@
   },
   "inputs": {
    "climate/results/gcm/global_winds_A28_dim5_moon.json": "4055b824d45c54b1",
-   "humanities/dance/vocabulary/poses.json": "128fac64dc50a3ed"
+   "humanities/dance/vocabulary/poses.json": "f7d3de312b2dead3"
   }
  },
  "evidence": "Closed-form and one-dimensional mechanics for two representative bodies (the dance body model and the same body scaled to 1.80 m and 80 kg) at the shared gravity and the design run's air, with stated parameter choices beside each figure. A screen of what a body can do for sport; the whole-body motion engine tests it, and the whole-body record (whole_body.json) measures what its solved motions did.",
