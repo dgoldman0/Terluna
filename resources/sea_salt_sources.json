@@ -1,0 +1,56 @@
+{
+ "access_date": "2026-11-15",
+ "source_admission": "Values come from a bounded lookup of 15 November 2026 (about 16 minutes, 34 sources: 10 read, 6 through an automated reader, 18 from an abstract or summary). Its record, with every value's locator and label, is kept on the research drive in session-tools/agents/south_sea_salt (values.md, sources.json). No outside dataset or full paper is committed. Each value below carries one of these labels: read (in the source's own table or text, extracted from the paper's file), read_via (in a later paper that tabulates the primary value), summary (abstract or search summary only), computed (one division of read values), recalled (not looked up) or project (a product or document of this repository). Earth values are reference points, never bounds on the lunar case.",
+ "values": {
+  "seawater_g_per_kg": {
+   "cl": 19.353, "na": 10.781, "so4": 2.712, "mg": 1.284, "ca": 0.412, "k": 0.399, "total": 35.165,
+   "source": "Millero2008", "evidence": "recalled by the lookup; equal, to the figures given, to the composition the sea chemistry study carries"
+  },
+  "seawater_density_kg_m3": {
+   "value": 1021.9, "evidence": "project: UNESCO EOS-80 at 29.5 C and practical salinity 35, as the seawater lakes study on domain/hydrosphere computes it"
+  },
+  "ci_rock": {
+   "cl_ppm": {"low": 600.0, "central": 717.0, "high": 800.0, "source": "LoddersFegley2023", "evidence": "read: Table 6, 717 +/- 110 ppm; the 600-800 span covers Orgueil by instrumental activation, 600 +/- 74 (PalmeZipfel2022, read_via), and Ryugu, 776 +/- 21 (read_via)"},
+   "cl_ppm_disputed_low": {"value": 115.0, "source": "Clay2017", "evidence": "read_via LoddersFegley2023 Tables 5-6: Orgueil 115 +/- 36 ppm from two samples of 1-2 mg by neutron irradiation and noble-gas mass spectrometry; the compilers reject it on stated analytical grounds; the 2017 paper itself was not opened"},
+   "na_ppm": {"value": 5100.0, "source": "Lodders2021", "evidence": "read: Table 1, 5100 +/- 500"},
+   "n_ppm": {"low": 2000.0, "high": 2500.0, "source": "Lodders2021; LoddersBergemannPalme2025", "evidence": "read: 2500 +/- 660 (2021, Table 1); computed about 2000 from the 2025 atomic ratio with silicon at 10.77 wt%"},
+   "h_ppm": {"value": 18600.0, "source": "Lodders2021", "evidence": "read: Table 1, 18600 +/- 3440; counted wholly as water it is 16.6 wt%"},
+   "water_soluble_share_of_cl": {"low": 0.35, "note": "about a third in one Orgueil analysis (Sharp et al. 2013, read_via); fresh falls suggest more; a working reading, no published group value", "evidence": "read_via"}
+  },
+  "other_chondrites_cl_ppm": {
+   "cm": 470.0, "cv": 280.0, "co": 290.0, "h": 87.0, "l": 99.0, "ll": 126.0, "eh": 670.0, "el": 210.0,
+   "source": "Lodders2021", "evidence": "read: Table 1; uncertainties for the halogens are stated as considerably larger than ten percent"
+  },
+  "comet_ice": {
+   "cl_per_water_by_mass": {"low": 0.4e-4, "central": 2.8e-4, "high": 12.0e-4, "source": "Rubin2019; Dhooghe2017", "evidence": "computed from HCl/H2O = 1.4e-4 by number (Rubin2019 Table 2, read); the range was decoded from a garbled extraction and needs checking against the paper's file; gas phase only, so a lower bound on the nucleus"},
+   "cl_per_n_gas": {"value": 0.035, "source": "Rubin2019", "evidence": "computed from Cl/O = 1.19e-4 and N/O = 8.51e-3 by number in the volatiles (Table 3, read)"},
+   "cl_per_n_gas_over_gas_and_dust_nitrogen": {"low": 0.005, "high": 0.011, "source": "Rubin2019", "evidence": "computed from Table 4 for dust-to-ice ratios of 3 and 1; the dust's chlorine is unmeasured, so a floor"},
+   "cl_per_water_solar_ceiling": {"value": 8.0e-4, "source": "LoddersBergemannPalme2025", "evidence": "computed: the gas value scaled to the protosolar Cl/O"},
+   "note": "No published bulk chlorine for a comet nucleus counts gas, ammonium salts and dust together. Ammonium chloride led the salts seen in one dust grain of comet 67P (Altwegg2020, read), and at least one further chlorine carrier is unidentified (Dhooghe2021, read)."
+  },
+  "moon": {
+   "na_weight_fraction_highland_soil": {"low": 0.0034, "high": 0.0037, "source": "LunarSourcebook", "evidence": "computed from Na2O 0.46-0.50 wt% (Table 7.15, read): Apollo 16 and Luna 20 soil averages"},
+   "na_weight_fraction_mare_soil": {"low": 0.0023, "high": 0.0040, "source": "LunarSourcebook", "evidence": "computed from Na2O 0.31-0.54 wt% (Table 7.15, read)"},
+   "cl_ppm_rock": {"low": 3.0, "high": 16.0, "source": "Gargano2020", "evidence": "read: Table 1; mare basalts 1.9-10.0 ppm water-soluble plus 1.1-5.8 ppm bound, three anorthosites averaging 9 ppm; 65 +/- 10% water-soluble in the basalts"},
+   "cl_ppm_soil": {"low": 7.0, "high": 70.0, "source": "LunarSourcebook", "evidence": "computed from a general statement (vapour-mobilised elements in soils are 10-100 times below CI), no chlorine measurement of soils was reached"}
+  },
+  "project": {
+   "small_bodies_processed_for_the_air_kg": {"low": 1.0e20, "high": 1.0e21, "evidence": "project: resources/README.md, finding 1 (derived there)"},
+   "kuiper_belt_small_bodies_kg": {"value": 7.0e22, "evidence": "project: resources/README.md, finding 1, from Pitjeva & Pitjev 2018"}
+  }
+ },
+ "sources": [
+  {"key": "LoddersFegley2023", "citation": "Lodders, K. and Fegley, B. Jr (2023), Solar System abundances and condensation temperatures of the halogens fluorine, chlorine, bromine, and iodine, Geochemistry 83, 125957", "doi_or_url": "https://doi.org/10.1016/j.chemer.2023.125957", "use": "CI chlorine 717 +/- 110 ppm, the individual laboratories' values by meteorite, the case against the 2017 low values, the water-soluble share and where chlorine sits in each chondrite class.", "access": "arXiv 2301.03674 read: abstract, sections 2-3, Tables 5, 6 and 8."},
+  {"key": "Lodders2021", "citation": "Lodders, K. (2021), Relative atomic Solar System abundances, mass fractions, and atomic masses of the elements and their isotopes, composition of the solar photosphere, and compositions of the major chondritic meteorite groups, Space Science Reviews 217, 44", "doi_or_url": "https://doi.org/10.1007/s11214-021-00825-8", "use": "Group means of H, C, N, Na, S, Cl and K in eleven chondrite groups.", "access": "Accepted manuscript read: Table 1 and section 2."},
+  {"key": "LoddersBergemannPalme2025", "citation": "Lodders, K., Bergemann, M. and Palme, H. (2025), Solar System elemental abundances from the solar photosphere and CI-chondrites, Space Science Reviews 221, 23", "doi_or_url": "https://doi.org/10.1007/s11214-025-01146-w", "use": "The 2023 chlorine carried forward; a lower CI nitrogen; protosolar mass fractions for the solar ceiling.", "access": "arXiv 2503.05402 read: Tables 1 and 4, section 8."},
+  {"key": "Clay2017", "citation": "Clay, P. L. and others (2017), Halogens in chondritic meteorites and terrestrial accretion, Nature 551, 614-618", "doi_or_url": "https://doi.org/10.1038/nature24625", "use": "Chondritic chlorine about six times below the compilations, the disputed low case.", "access": "Abstract only; individual values through LoddersFegley2023."},
+  {"key": "PalmeZipfel2022", "citation": "Palme, H. and Zipfel, J. (2022), The composition of CI chondrites and their contents of chlorine and bromine: results from instrumental neutron activation analysis, Meteoritics & Planetary Science 57, 317-333", "doi_or_url": "https://doi.org/10.1111/maps.13720", "use": "An independent activation study of four CI falls at 510-710 ppm chlorine.", "access": "Through LoddersFegley2023, Table 6, and a digest."},
+  {"key": "Rubin2019", "citation": "Rubin, M. and others (2019), Elemental and molecular abundances in comet 67P/Churyumov-Gerasimenko, Monthly Notices of the Royal Astronomical Society 489, 594-607", "doi_or_url": "https://doi.org/10.1093/mnras/stz2086", "use": "HCl/H2O, Cl/O and N/O in the comet's ices and the nitrogen of its dust.", "access": "arXiv 1907.11044 read: Tables 2-4; exponents and ranges decoded from a garbled text extraction."},
+  {"key": "Dhooghe2017", "citation": "Dhooghe, F. and others (2017), Halogens as tracers of protosolar nebula material in comet 67P/Churyumov-Gerasimenko, Monthly Notices of the Royal Astronomical Society 472, 1336-1345", "doi_or_url": "https://boris.unibe.ch/105628 (repository record)", "use": "The comet's Cl/O in the gas, carried into Rubin2019.", "access": "Abstract only; three attempts to open a full text were refused."},
+  {"key": "Altwegg2020", "citation": "Altwegg, K. and others (2020), Evidence of ammonium salts in comet 67P as explanation for the nitrogen depletion in cometary comae, Nature Astronomy 4, 533-540", "doi_or_url": "https://doi.org/10.1038/s41550-019-0991-9", "use": "Ammonium chloride leading the salts released from one dust grain; most halides released from salts.", "access": "arXiv 1911.13005 read."},
+  {"key": "Dhooghe2021", "citation": "Dhooghe, F. and others (2021), Chlorine-bearing species and the 37Cl/35Cl isotope ratio in the coma of comet 67P/Churyumov-Gerasimenko, Monthly Notices of the Royal Astronomical Society 508, 1020-1032", "doi_or_url": "https://doi.org/10.1093/mnras/stab1732", "use": "At least one chlorine carrier beyond HCl and ammonium chloride; no total chlorine budget.", "access": "Sections 1 and 4 read."},
+  {"key": "Gargano2020", "citation": "Gargano, A. and others (2020), The Cl isotope composition and halogen contents of Apollo-return samples, Proceedings of the National Academy of Sciences 117, 23418-23425", "doi_or_url": "https://doi.org/10.1073/pnas.2014503117", "use": "Chlorine of mare basalts and highland rocks, its water-soluble share, and the order-of-magnitude depletion against Earth's basalts.", "access": "NASA-hosted copy read: Table 1 and Results."},
+  {"key": "LunarSourcebook", "citation": "Heiken, G. H., Vaniman, D. T. and French, B. M., eds (1991), Lunar Sourcebook: A User's Guide to the Moon, Cambridge University Press", "doi_or_url": "https://www.lpi.usra.edu/publications/books/lunar_sourcebook/", "use": "Sodium of average soils by landing site; the leachable share of chlorine in soils; soils' depletion in vapour-mobilised elements.", "access": "Table 7.15 and section 8.7.8 read; the chlorine table of the appendix did not extract."},
+  {"key": "Millero2008", "citation": "Millero, F. J., Feistel, R., Wright, D. G. and McDougall, T. J. (2008), The composition of Standard Seawater and the definition of the Reference-Composition Salinity Scale, Deep-Sea Research I 55, 50-72", "doi_or_url": "https://doi.org/10.1016/j.dsr.2007.10.001", "use": "Seawater's major ions at a reference salinity of 35.165 g/kg.", "access": "Not opened: the values and the DOI are recalled, and the values agree with the composition the sea chemistry study carries."}
+ ]
+}

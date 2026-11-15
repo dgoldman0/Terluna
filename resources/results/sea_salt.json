@@ -1,0 +1,357 @@
+{
+  "schema": "terluna.resources.sea-salt/1",
+  "producer": {
+    "files": {
+      "resources/sea_salt.py": "66b316cc8b7e9c7c12c038ecf681f849b89141547df97e8182beaa0a63e2117a"
+    },
+    "inputs": {
+      "resources/sea_salt_sources.json": "d6e98dfafebe3095c3eda053b516ad36cf329d013546d248f72e5b585ca5f8aa",
+      "resources/results/first_screen.json": "d3f9ab9394b9543c8334a2441b9ac81f55da97c3c6b59a268cb293837c386a86",
+      "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+      "resources/source_access/results/potential.json.gz": "29be5f0d9f47ba9ff7bbcdd61b4cb145ae631b787bd01db39d6e11dedeabaa83"
+    },
+    "constants": {
+      "GRAVITATIONAL_CONSTANT": 6.6743e-11,
+      "JULIAN_DAY": 86400.0,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_GM": 4902800118000.0
+    }
+  },
+  "evidence": "Arithmetic on published grades and project inventories; nothing is modelled. Chlorine grades are group means of CI chondrites (read in the compilations; one 2017 study, rejected by the compilers, gives a grade six times lower and is carried as a disputed low case) and the gas of one comet, 67P, which bounds a nucleus's chlorine from below. No body the project would mine has been assayed for chlorine. Shares assume every atom of chlorine in the processed feed is kept; the processing that would keep it is not designed. Lunar soil chlorine is inferred from a general statement, not measured values. The sea's need is its fill at seawater's strength, without the salt the crust takes with the water it draws from the floor.",
+  "reading_rule": "Masses in kg; shares are of the South Pole-Aitken Sea's chloride at seawater's strength unless named otherwise. low, central and high follow the grade's range; a two-entry list is (low, high). In riding, each route gives the chlorine carried by all of that import if it came wholly from that kind of body; the routes are alternatives for one import and add across imports. Near-Earth asteroid figures are upper bounds at carbonaceous grades.",
+  "sea": "south_pole_aitken",
+  "needs": {
+    "near_side": {
+      "volume_km3": 3424489.0,
+      "share_of_seawater": 1.0,
+      "salt_kg": 1.2305940089450149e+17,
+      "cl_kg": 6.7725539187012296e+16,
+      "na_kg": 3.77279511174071e+16
+    },
+    "south_pole_aitken": {
+      "volume_km3": 4836569.0,
+      "share_of_seawater": 1.0,
+      "salt_kg": 1.738026559655815e+17,
+      "cl_kg": 9.565200628186832e+16,
+      "na_kg": 5.32849831925191e+16
+    },
+    "smythii_marginis": {
+      "volume_km3": 350811.0,
+      "share_of_seawater": 1.0,
+      "salt_kg": 1.26064331020485e+16,
+      "cl_kg": 6937929754697700.0,
+      "na_kg": 3864921236262900.5
+    },
+    "humboldtianum": {
+      "volume_km3": 331360.0,
+      "share_of_seawater": 1.0,
+      "salt_kg": 1.190745920936e+16,
+      "cl_kg": 6553250620752001.0,
+      "na_kg": 3650627548304000.0
+    },
+    "orientale": {
+      "volume_km3": 74776.0,
+      "share_of_seawater": 1.0,
+      "salt_kg": 2687084047076000.0,
+      "cl_kg": 1478832292423200.0,
+      "na_kg": 823814961226400.0
+    },
+    "moscoviense": {
+      "volume_km3": 71131.0,
+      "share_of_seawater": 1.0,
+      "salt_kg": 2556100558368500.0,
+      "cl_kg": 1406745744521700.2,
+      "na_kg": 783657617510900.1
+    }
+  },
+  "other_strengths": {
+    "half": {
+      "volume_km3": 4836569.0,
+      "share_of_seawater": 0.5,
+      "salt_kg": 8.690132798279075e+16,
+      "cl_kg": 4.782600314093416e+16,
+      "na_kg": 2.664249159625955e+16
+    },
+    "fifth": {
+      "volume_km3": 4836569.0,
+      "share_of_seawater": 0.2,
+      "salt_kg": 3.4760531193116304e+16,
+      "cl_kg": 1.9130401256373668e+16,
+      "na_kg": 1.0656996638503822e+16
+    }
+  },
+  "riding": {
+    "water_from_comet_like_ice": {
+      "basis": "gas-phase HCl of comet 67P per kg of water; a lower bound on the nucleus",
+      "cl_per_kg_water": {
+        "low": 4e-05,
+        "central": 0.00028,
+        "high": 0.0012,
+        "source": "Rubin2019; Dhooghe2017",
+        "evidence": "computed from HCl/H2O = 1.4e-4 by number (Rubin2019 Table 2, read); the range was decoded from a garbled extraction and needs checking against the paper's file; gas phase only, so a lower bound on the nucleus"
+      },
+      "standing_water_kg": 1.3815701215540812e+19,
+      "cl_kg": {
+        "low": 552628048621632.5,
+        "central": 3868396340351427.0,
+        "high": 1.6578841458648972e+16
+      },
+      "cl_kg_with_the_crusts_water": [
+        3868396340351427.0,
+        2.0472396340351428e+16
+      ],
+      "cl_kg_at_the_solar_ceiling": 1.105256097243265e+16,
+      "share_of_need": {
+        "low": 0.005777485178859108,
+        "central": 0.04044239625201375,
+        "high": 0.1733245553657732
+      },
+      "share_of_need_with_the_crusts_water": [
+        0.04044239625201375,
+        0.21402997319285869
+      ],
+      "share_of_need_at_the_solar_ceiling": 0.11554970357718215
+    },
+    "water_from_ci_like_rock": {
+      "basis": "group-mean chlorine of CI chondrites per kg of the water their hydrogen makes",
+      "water_share_of_rock": 0.1662098214285714,
+      "cl_per_kg_water": {
+        "low": 0.0036098949799897935,
+        "central": 0.004313824501087803,
+        "high": 0.004813193306653058
+      },
+      "rock_kg": 8.312205077169945e+19,
+      "cl_kg": {
+        "low": 4.987323046301966e+16,
+        "central": 5.95985104033085e+16,
+        "high": 6.649764061735956e+16
+      },
+      "cl_kg_at_the_disputed_low_grade": 9559035838745436.0,
+      "share_of_need": {
+        "low": 0.5214028686032232,
+        "central": 0.6230764279808516,
+        "high": 0.6952038248042977
+      },
+      "share_of_need_at_the_disputed_low_grade": 0.09993554981561778
+    },
+    "nitrogen_from_comet_like_ice": {
+      "basis": "chlorine over nitrogen in comet 67P: gas over gas, and gas chlorine over gas-and-dust nitrogen",
+      "n2_kg": 2.528670076846971e+18,
+      "cl_kg_gas_over_gas": 8.850345268964398e+16,
+      "cl_kg_floor": [
+        1.2643350384234854e+16,
+        2.781537084531668e+16
+      ],
+      "share_of_need_gas_over_gas": 0.9252649905621539,
+      "share_of_need_floor": [
+        0.13218071293745057,
+        0.29079756846239124
+      ]
+    },
+    "nitrogen_from_ci_like_rock": {
+      "basis": "group-mean chlorine over nitrogen of CI chondrites",
+      "cl_per_kg_n": {
+        "low": 0.24,
+        "central": 0.2868,
+        "high": 0.4
+      },
+      "rock_kg": [
+        1.0114680307387884e+21,
+        1.2643350384234854e+21
+      ],
+      "cl_kg": {
+        "low": 6.06880818443273e+17,
+        "central": 7.252225780397112e+17,
+        "high": 1.0114680307387884e+18
+      },
+      "cl_kg_at_the_disputed_low_grade": 1.1631882353496066e+17,
+      "share_of_need": {
+        "low": 6.344674220997627,
+        "central": 7.581885694092164,
+        "high": 10.574457034996046
+      },
+      "share_of_need_at_the_disputed_low_grade": 1.216062559024545
+    }
+  },
+  "rock": {
+    "ci_like_rock_kg": {
+      "at_800_ppm": 1.1956500785233542e+20,
+      "at_717_ppm": 1.334058665019084e+20,
+      "at_600_ppm": 1.5942001046978055e+20,
+      "at_the_disputed_115_ppm": 8.317565763640724e+20
+    },
+    "share_of_the_feed_planned_for_the_air": {
+      "planned_kg": [
+        1e+20,
+        1e+21
+      ],
+      "central_grade": [
+        0.1334058665019084,
+        1.334058665019084
+      ],
+      "disputed_low_grade": [
+        0.8317565763640724,
+        8.317565763640724
+      ]
+    },
+    "share_of_the_kuiper_belts_small_bodies": 0.0019057980928844057,
+    "sodium_in_that_rock_kg": 6.803699191597329e+17,
+    "sodium_over_the_seas_need": 12.768511471638275,
+    "na_over_cl_in_ci_rock": 7.112970711297071,
+    "na_over_cl_in_seawater": 0.557071255102568,
+    "lunar_soil_for_the_sodium_kg": [
+      1.4401346808788947e+19,
+      1.5672053880152678e+19
+    ],
+    "lunar_ground_for_the_chloride_kg": [
+      1.366457232598119e+21,
+      1.366457232598119e+22
+    ],
+    "lunar_ground_for_the_chloride_share_of_the_moon": [
+      0.018601911740285276,
+      0.18601911740285276
+    ]
+  },
+  "near_earth_asteroids": {
+    "grades_ppm": {
+      "cm": 470.0,
+      "ci": 717.0,
+      "ordinary": 99.0
+    },
+    "cl_kg_per_km3_of_seawater": 19776830700.0,
+    "feed_through_year_200": {
+      "feed_kg": [
+        164297971265441.2,
+        291470041119063.56
+      ],
+      "low": {
+        "cl_kg": {
+          "cm": 77220046494.75735,
+          "ci": 117801645397.32132,
+          "ordinary": 16265499155.278677
+        },
+        "seawater_km3": {
+          "cm": 3.904571347458486,
+          "ci": 5.9565482045270945,
+          "ordinary": 0.8224522625497662
+        },
+        "share_of_the_seas_need": {
+          "cm": 8.073019008843842e-07,
+          "ci": 1.2315648147534115e-06,
+          "ordinary": 1.7004869827139156e-07
+        }
+      },
+      "high": {
+        "cl_kg": {
+          "cm": 136990919325.95987,
+          "ci": 208984019482.36856,
+          "ordinary": 28855534070.787292
+        },
+        "seawater_km3": {
+          "cm": 6.926838855224658,
+          "ci": 10.567113742970381,
+          "ordinary": 1.459057546100513
+        },
+        "share_of_the_seas_need": {
+          "cm": 1.432180302860283e-06,
+          "ci": 2.184836759895368e-06,
+          "ordinary": 3.0167202124078304e-07
+        }
+      }
+    },
+    "pools": {
+      "all_no_don_quixote": {
+        "body_mass_kg_p05_p50_p95": [
+          6.640253420489136e+16,
+          9.712562697364563e+16,
+          1.2931078600127768e+17
+        ],
+        "at_the_median": {
+          "cl_kg": {
+            "cm": 45649044677613.445,
+            "ci": 69639074540103.914,
+            "ordinary": 9615437070390.916
+          },
+          "seawater_km3": {
+            "cm": 2308.2082953571244,
+            "ci": 3521.2454207894853,
+            "ordinary": 486.19706646884106
+          },
+          "share_of_the_seas_need": {
+            "cm": 0.0004772408489069677,
+            "ci": 0.0007280461460985018,
+            "ordinary": 0.00010052520008891446
+          }
+        }
+      },
+      "narrow": {
+        "body_mass_kg_p05_p50_p95": [
+          20824686781618.547,
+          37016302646276.234,
+          118130753126034.86
+        ],
+        "at_the_median": {
+          "cl_kg": {
+            "cm": 17397662243.74983,
+            "ci": 26540688997.38006,
+            "ordinary": 3664613961.9813466
+          },
+          "seawater_km3": {
+            "cm": 0.8796992049767524,
+            "ci": 1.3420092126985776,
+            "ordinary": 0.1852983431759542
+          },
+          "share_of_the_seas_need": {
+            "cm": 1.818849694849287e-07,
+            "ci": 2.774713257887104e-07,
+            "ordinary": 3.831194038086796e-08
+          }
+        }
+      },
+      "wider": {
+        "body_mass_kg_p05_p50_p95": [
+          1449027564685817.8,
+          1777090746133131.0,
+          2289370564157616.5
+        ],
+        "at_the_median": {
+          "cl_kg": {
+            "cm": 835232650682.5715,
+            "ci": 1274174064977.4548,
+            "ordinary": 175931983867.17996
+          },
+          "seawater_km3": {
+            "cm": 42.23288672247023,
+            "ci": 64.42761655321522,
+            "ordinary": 8.895863373456494
+          },
+          "share_of_the_seas_need": {
+            "cm": 8.731993014566776e-06,
+            "ci": 1.332093402434974e-05,
+            "ordinary": 1.8392921456215124e-06
+          }
+        }
+      }
+    }
+  },
+  "delivery": {
+    "delivery_mass_kg": [
+      1.7e+19,
+      7.63e+19
+    ],
+    "delivery_flow_kg_s": [
+      1070000000.0,
+      4830000000.0
+    ],
+    "build_years": 500.0,
+    "salt_share_of_the_delivery": [
+      0.0022778853992867823,
+      0.010223685645034206
+    ],
+    "years_of_the_stream": [
+      1.1402637317906437,
+      5.147171798643747
+    ],
+    "salt_share_of_the_standing_water": 0.012580082129315074
+  }
+}
