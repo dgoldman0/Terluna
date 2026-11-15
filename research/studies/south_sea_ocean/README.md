@@ -2,7 +2,7 @@
 
 15 November 2026, on `domain/hydrosphere`. The author asked to test the viability and the cost and benefit of making the south sea, the South Pole–Aitken Sea, an Earth-like ocean, the more so if it connects to brackish and fresh waterways, which would also give eels and other fish that hatch in salt water their sea. The request followed a conversation on why the Moon's waters turn to hard water and soda lakes, kept on the research drive (`conversation-exports/chatgpt-salt-seas-2026-11-15/`). The fresh seas and the leaning toward aquariums for saltwater life are the register's rows of [15 October](../../decisions.md#salt-water-and-the-fresh-seas-15-october-2026); the [seawater lakes](../seawater_lakes/README.md) of 6 November are the smaller alternative this study is weighed against.
 
-This first stage answers what the project's products already settle: how much salt the sea holds, whether its water balance lets it keep that salt, which rivers reach it, what its floor takes, and how salt changes its mixing. [inflows.py](inflows.py) repeats geography's river routing under three rules (3.5 minutes, 5 GB) and writes [results/inflows.json](results/inflows.json) (schema `terluna.research.south-sea-inflows/1`). [run.py](run.py) reads it with the design years' climatology, the atlas and geography's crust uptake, in seconds, and writes [results/south_sea_ocean.json](results/south_sea_ocean.json) (schema `terluna.research.south-sea-ocean/1`). Where the salt comes from is worked out on `domain/resources` (`resources/sea_salt.md` there) and summarised below. No ocean or climate model ran; the sea's circulation, its brackish reaches, its spray and its living value are named under [what is open](#what-is-open) with what each needs.
+This first stage answers what the project's products already settle: how much salt the sea holds, whether its water balance lets it keep that salt, which rivers reach it, what its floor takes, and how salt changes its mixing. [inflows.py](inflows.py) repeats geography's river routing under three rules (3.5 minutes, 5 GB) and writes [results/inflows.json](results/inflows.json) (schema `terluna.research.south-sea-inflows/1`). [run.py](run.py) reads it with the design years' climatology, the atlas and geography's crust uptake, in seconds, and writes [results/south_sea_ocean.json](results/south_sea_ocean.json) (schema `terluna.research.south-sea-ocean/1`). Where the salt comes from is worked out on `domain/resources` (`resources/sea_salt.md` there) and summarised below. A second stage the same day reads two costs off existing products, [what a salt sea does to its shores and its air](#what-a-salt-sea-does-to-its-shores-and-its-air). No ocean or climate model ran; the sea's circulation, its brackish reaches and its living value are named under [what is open](#what-is-open) with what each needs.
 
 ## What it finds
 
@@ -72,17 +72,85 @@ The salt goes down with the water and does not come back. Holding the sea at sea
 
 The atlas's one common level is a storage geometry, as geography states. Under the design years' rain three of the six seas would rise to their rims within centuries and the other three would fall unless water is moved between them. That belongs to the atlas round; it is recorded here because the south sea's supply depends on it.
 
+## What a salt sea does to its shores and its air
+
+The second stage, 15 November 2026, reads two costs off products the project already holds. [shores.py](shores.py) takes the sea's own shore from the [coast-water study](../coast_water/README.md)'s 16 pixel/degree shores and applies that study's rules to it ([results/shores.json](results/shores.json), schema `terluna.research.south-sea-shores/1`). [spray.py](spray.py) drives a sea-spray source with the design year's 10 m wind as written every 6.5 hours and follows the salt to the ground on the same record's winds and rain ([results/spray.json](results/spray.json), schema `terluna.research.south-sea-spray/1`).
+
+**The sea has 39,600 km of shore, and half of it lies in desert** *(computed on products)*. At 16 pixels per degree the mainland shore is 24,200 km and the sea's islands add 15,400 km, together 22% of the six large seas' shore. By the design years' rain at the model's land cell nearest each stretch:
+
+| Rain behind the shore | Shore | Of it on islands |
+|---|---|---|
+| Under 0.5 mm a day, desert | 20,700 km | 7,600 km |
+| 0.5–1 mm a day | 7,600 km | 4,800 km |
+| 1–2 mm a day | 3,100 km | 600 km |
+| 2 mm a day or more | 8,200 km | 2,400 km |
+
+Every kilometre of shore poleward of 60° S on the turned Moon is desert, 14,200 km, with 3,900 of the 7,100 km between 45° and 60° S. The wet shores are the northern ones, where the rivers arrive.
+
+**Along the desert shore a fresh sea feeds 4,000–6,800 km² of green rim, and a salt sea turns that ground to salt** *(computed with the coast-water study's rules)*. Plants there draw the sea's water through the ground, 1.9 mm a day in that study's deserts at 301 K. Under its six cases of ground and reach the belts along this sea's desert shore average 190–330 m in width, with a median strip of 160–290 m; they cover 4,400–6,100 km² at the central crust, hold 1,500–2,600 km² on the islands, and draw 2.8–4.9 km³ of the sea a year. That is about 28% of the belts the coast-water study counted on the Moon's desert sea and island coasts, on its own desert mask and the unturned Moon. From a sea at seawater's strength the same draw carries 100–175 Mt of salt a year under the roots, 25 kg onto each square metre of belt. By that study's rule for a saline root zone the soil water passes the threshold in 11 days; holding it fresh would take 9.9 m of water a year passing below the roots, where the desert's rain is 0.06 m; and left to dry, the salt builds 12 mm of rock salt a year. The desert rims of a salt sea are therefore salt ground. The coast-water study's tide run found that the monthly tide carries back a quarter to a third of a soluble load from the strip where high water lifts the water table near the surface, so salt-tolerant plants could hold in that strip and nowhere inland of it.
+
+**The monthly high water covers 1,900 km² of shore** *(computed; the slopes are 2 km pixels')*. The typical monthly range along this shore is 2.0–3.6 m, 2.7 m at the median (geography's tide), and at the pixels' slopes its high water reaches a median 15 m inland and 88 m on the gentlest tenth of the shore. This is the ground a salt sea wets with sea water each month on every shore, wet or dry; 990 km² of it lies in desert and 780 km² on the islands. At 100 m the coast-water study found its belts 1.0–2.7 times narrower than this resolution gives, and the same caution holds for this strip.
+
+**On the wet shores the land's own water holds the sea back** *(reading)*. Where the rain exceeds what the plants use, fresh groundwater flows to the sea and floats on the sea water beneath it, reaching 38 times as far below the sea's level as it stands above (the densities' ratio, *computed*). The 8,200 km of shore with 2 mm of rain a day or more keep fresh ground down to the high-water line. The 10,700 km between the two classes are undecided here: the plants' demand over the land is 2.9 mm a day in the coast-water study, more than that rain, so part of their water would come from the sea's side.
+
+**170 small waters below the common level stand within 12 km of the sea** *(computed; the consequence is a reading)*. The atlas holds them at the sea's level; they cover 46,400 km², 5,400 km² of it within that distance and 3,200 km² in desert. Fed by rivers they fill and overflow, as the first stage found. In desert a hollow that loses more water than it receives stands below the sea and draws sea water through the ground, laying its salt down as a pan. Which hollows do which is not worked out.
+
+**The sea would send about 2.4 Mt of salt a year into the air, a twenty-fifth of what the same area of Earth's ocean sends** *(computed; the lunar yield is an extrapolation)*. The record's wind at 10 m over the sea averages 2.3 m/s, stays under 3.5 m/s for 90% of the hours and under 4.6 m/s for 99%, and its strongest 6.5-hour mean is 7.2 m/s. The source is the function the aerosol study's marine note assembled (Gong 2003 with Jaeglé et al.'s weight for the water's warmth), carried to lunar gravity as that note proposes:
+
+| Source | Salt into the air | From each m² of sea |
+|---|---|---|
+| Earth's function at the lunar wind, unchanged | 1.3 Mt a year | 0.6 g a year |
+| Lunar, low yield | 0.8 Mt | 0.35 g |
+| Lunar, central | 2.4 Mt | 1.0 g |
+| Lunar, high yield | 5.8 Mt | 2.5 g |
+| Lunar, with the gentler wind law | 7.7 Mt | 3.3 g |
+| Earth's ocean, by the function fitted to the most measurements, with the range of published functions (Grythe et al. 2014, in the lookup) | | 25 g (8–190) |
+
+Winds of 3–5 m/s, 22% of the hours, raise 64% of the salt. The water's warmth doubles the source: Jaeglé et al.'s weight averages 2.06 over this sea, held at its value for 30 °C, where their data end. A fresh sea at 0.14 g/kg puts 250 times less salt into the same spray.
+
+**Three fifths of it falls back on the sea, and the land beside the sea receives about a kilogram of chloride per hectare a year** *(computed; three cases of removal on the central source)*:
+
+| | Slow removal | Central | Fast removal |
+|---|---|---|---|
+| Mean time in the air | 10 days | 5.8 days | 2.7 days |
+| Mean distance from where it rose | 770 km | 630 km | 440 km |
+| Falls back on the sea | 57% | 59% | 66% |
+| Falls on land and lakes | 43% | 40% | 34% |
+| Reaches the five other seas | 0.4% | 0.1% | 0.01% |
+| Chloride on the land beside the sea, kg per hectare a year | 0.9 | 1.1 | 1.2 |
+| On the most exposed land cell | 6.9 | 8.1 | 6.8 |
+| Mean over all the Moon's land | 0.17 | 0.17 | 0.14 |
+| Chloride in the rain beside the sea, mg/L | 0.07 | 0.10 | 0.11 |
+| Salt in the air over the sea, µg/m³ | 7.4 | 5.0 | 2.9 |
+| Salt in the air over the land beside it, µg/m³ | 0.9 | 0.6 | 0.3 |
+
+Every row scales with the source, 0.34 to 3.2 times these values across the lunar cases. The land beside the sea is the 1.7 million km² of the model's land cells that hold part of the sea or touch a cell that does.
+
+Set beside Earth, these are a continent's interior. Australia's measured transect gives 101 kg of chloride per hectare a year at the shore, 13 at 100 km, 2.8 at 500 km and 0.5 at 1,000 km (Wilkins et al. 2022, in the lookup), so the land beside this sea receives what Australia's does about 800 km inland, and its most exposed cell what Australia's does 230 km inland. Rain in the interior of the United States carries 0.1–0.2 mg/L of chloride and several mg/L at the coasts *(recalled)*. A river draining the land beside the sea with half a metre of runoff a year would carry 0.2 mg/L from this source *(computed here)*, against 5.75 mg/L in the world's average natural river *(recalled, in the lookup)*.
+
+**What that salt does** *(reading of the computed values)*:
+
+- **To the ground.** Where rain passes through the soil, the salt goes down the rivers to the sea of its catchment. In desert nothing flushes it: at the rate of the land beside the sea a root zone would reach the coast-water study's saline threshold in about 4,000 years (1,200–11,000 across the source cases), and the desert land as a whole receives a thirteenth of that rate.
+- **To the other waters.** The five other seas receive under half a percent of the salt between them. A closed lake gathers what falls on its catchment; at a kilogram per hectare a year over a catchment ten times its area, a lake 50 m deep gains 0.02 mg/L of chloride a year, 200 mg/L in 10,000 years *(computed here)*.
+- **To the sea.** The salt that leaves for good is 1.0 Mt a year (0.3–3.1), a thousandth of the sea's salt in 180,000 years (56,000–530,000). The crust takes 3.8 Gt a year.
+- **To aerial craft.** The air's lowest 1.7 km over the sea would hold 3–7 µg/m³ of salt (1–24 across the source cases) and the air over the land beside it under 1 µg/m³. Air over Earth's open ocean holds roughly 10–30 µg/m³ near the surface *(recalled; a short lookup on 15 November did not confirm a figure)*. Craft over this sea would fly in salt air at a tenth to a half of an Earth sea's, and over the rest of the Moon in almost none.
+
+**The reading stops short of the shore itself.** The model's cells are 170 km across, the source holds no surf and no drops coarser than 20 µm at 80% humidity, and on Earth those lay most of the shore's 84 kg per hectare a year within 25 km. At a sixth of the gravity such drops settle a sixth as fast, so they would carry several times as far, while the light winds raise fewer of them. The first kilometres behind a salt shore are therefore open, and with them the spray on the green rims of the wet northern shores.
+
 ## What is open
 
 - **The circulation, the brackish reaches and the deep oxygen.** A run of the sea with its rivers, evaporation and tide in one of the ocean models set up on this branch, and the lake model's columns with salt in the density. Neither is sized yet.
-- **Spray and salt in the rain.** A salt sea sends salt inland where the fresh seas send almost none. Earth's one measured transect in hand, Australia's, gives 101 kg of chloride per hectare a year at the shore, 13 at 100 km and 2.8 at 500 km (Wilkins et al. 2022, in the lookup), and the sea's own catchment returns what falls in it. The lunar case differs in wave breaking, bubble bursting and the slow settling of particles in tall, dense air, and has to be worked out before the cost to soils, to the fresh lakes downwind and to aerial craft can be stated.
-- **The shores.** The fresh seas feed green belts from the groundwater under their shores ([coast water](../coast_water/README.md)). Around a salt sea that groundwater is salt and the belts become salt shores; their length and area have not been taken off the products.
+- **The shore's first kilometres.** The spray of the surf and of coarse drops behind a salt shore; the belts along the 10,700 km of shore whose rain falls short of the plants' demand; which hollows beside the sea become salt pans. What would grow on a salt shore is the biosphere lane's question.
+- **The spray's yield at lunar gravity.** No study of whitecaps or bursting bubbles at reduced gravity was found by the aerosol study's lookup; the low and high cases here come from two opposite arguments, neither tested. The winds inside 6.5 hours are also outside the record, and the source rises with the 3.4th power of the wind.
 - **The living value.** What an ocean of this size adds in marine life, food and culture beside the seawater lakes and aquariums, and what the conservation programmes would do with it, is not assessed here.
 - **A weaker sea.** Half strength halves the salt and loses the eels' spawning; the reefs' and the open sea's limits (corals grow at 25–42 g/kg, summaries in the lookup) set how far a cheaper sea can go.
 - **The rain.** Every balance here rests on the model's rain at T21, which the climate lane carries as a range; the rivers were not rescaled with it.
 
 ## How it is set up
 
+- **The shores** are the coast-water study's: LOLA at 16 pixels per degree above the geoid against the atlas's sea level, each land pixel beside the sea counted with the length of its edges facing it (times π/4 for the staircase), its depth and its height. The belts follow that study's steady flow from the water's edge under the plants' draw, with its desert draw at 301 K and its six cases of ground and reach; the high water is half of geography's typical monthly range at the nearest tide node, spread over the pixel's slope. The rain behind a stretch of shore is the design years' at the nearest land cell of the model, since 82% of the shore lies under the model's water cells.
+- **The spray's source** is Gong's (2003) function as Jaeglé et al. (2011) print it, over drops of 0.035–20 µm radius at 80% humidity, with their weight for the water's warmth. The lunar wind is replaced by the Earth wind that puts the same energy into the waves, air density times friction velocity cubed, with a Charnock roughness at each gravity (the aerosol study's marine note, on the research drive under `atmospheric-electricity/aerosol_marine.md`, sections 1.5 and 7.1); 5 m/s over the lunar sea counts as 6.1 m/s. The note's low and high yields multiply the central case by 0.34 and 2.46, and its gentler wind law replaces the 3.41 power by 2.07. The wind is the 10 m wind of the design run's year 10 written again every 6.5 hours (`A28R_301k_design_l15_snow_s938_turned_refit_precession_eddies`, the record the littoral study measured its wind raise on), read at the model's water cells under the sea.
+- **The spray's fate** follows each 6.5 hours' salt from each of the sea's 160 model cells as a parcel on the mean wind of the record's lowest two levels, the lowest 1.9 km, along great circles. A parcel loses salt to the ground at a deposition speed plus each size's settling at lunar gravity, over a mixed layer of 1.7 km above water and 5 km above land, and to the rain at a scavenging ratio times the record's rain in the cell under it. The three cases take ratios of 100, 300 and 1,000 and speeds of 0.01, 0.05 and 0.3 cm/s, the aerosol study's three. The year's winds repeat until every parcel is spent, and every gram is accounted for.
 - **The sea** is the atlas's body 1417 at the 28% water share, on the 4 pixel/degree grid; its areas by latitude band and its place on the turned Moon follow the frame record's rotation.
 - **Rain, evaporation and surface temperature** are the design years, 10–19 of the corrected run on the turned Moon (`A28R_301k_design_l15_snow_s938_turned_refit_precession`), read at the model's water cells under the sea, each atlas cell given to the nearest model cell. The model's sea is a 50 m slab of fresh water.
 - **The rivers** are geography's routing of the same years' runoff over LOLA's 16 pixel/degree heights (`geography.drainage.route`), run three times with different outlet waters. The first run reproduces geography's own product, 199,973 m³/s to the waters below the common level. A basin's spill level is the level of the depressions under its cells, which is one value across each basin.
@@ -95,17 +163,21 @@ The atlas's one common level is a storage geometry, as geography states. Under t
 - Salt lowers water's vapour pressure by about 2%, which the evaporation here leaves out; so are the sea's own gravity and the crust's sag, which move its shore by tens of metres.
 - The times to fill leave out the growing lakes' evaporation, which is a few km³ a year for the craters and tens for the smaller seas.
 - Earth's seas named for comparison are recalled values and serve as reference points.
+- The shores' belts carry the coast-water study's limits: 2 km pixels, a draw computed on the earlier design case and the unturned Moon, and a tide on the dry Moon's geoid. The desert here is the design years' on the turned Moon, so the comparison with that study's Moon-wide belts crosses two desert masks.
+- The spray is a diagnostic on one model year at T21. Its source was fitted on Earth and its lunar yield is untested; its winds are 6.5-hour means; its parcels stay in the lowest levels and do not spread; its removal rates are choices that bracket Earth's models, in which rain takes 30–40% of sea salt and the ground the rest (a search summary of Gong's global budget) where these cases give 43–52% to the rain. The warmth weight is the printed polynomial; the marine note's own list of its values at 24–28 °C matches it only at 26 °C.
 - Nothing here is validated against a lunar observation.
 
 ## The checks
 
-[test_run.py](test_run.py) and [test_inflows.py](test_inflows.py): seawater's ions sum to its salinity and its charges balance; the salt agrees with the sea chemistry's 174,000 Gt and the seawater lakes' 35.94 Mt/km³; the sea keeps its area on the model's grid and turns with the frame; the balance reads only the model's water cells; the floor's take grows with time and carries its salt; waters join across the grid's seam; the six seas are named by the atlas's centroids; the routing reproduces geography's discharge; each rule passes more water to the two great seas than the one before; and both products regenerate (the routing's only with `TERLUNA_SOUTH_SEA_REGENERATE=1`).
+[test_run.py](test_run.py), [test_inflows.py](test_inflows.py), [test_shores.py](test_shores.py) and [test_spray.py](test_spray.py): seawater's ions sum to its salinity and its charges balance; the salt agrees with the sea chemistry's 174,000 Gt and the seawater lakes' 35.94 Mt/km³; the sea keeps its area on the model's grid and turns with the frame; the balance reads only the model's water cells; the floor's take grows with time and carries its salt; waters join across the grid's seam; the six seas are named by the atlas's centroids; the routing reproduces geography's discharge; each rule passes more water to the two great seas than the one before; and both products regenerate (the routing's only with `TERLUNA_SOUTH_SEA_REGENERATE=1`). For the shores: a pixel faces the sea beside it and across the seam; the rain is read over a place and at the nearest land; the high water stops at the pixel; a belt ends where a steep shore outruns the plants' reach; the shore's parts add up, and the belts' salt is their draw at seawater's strength. For the spray: the source reproduces the marine note's number fluxes, friction velocities, equal-energy winds and settling speeds; a parcel moves with the wind and crosses the pole; in still air every gram comes down where it rose, each size at its own rate; and the product's shares sum to one. The shores and the spray regenerate with the same switch, the spray in the ocean environment.
 
 ## Running it
 
 ```
 ulimit -v 9000000; python -m research.studies.south_sea_ocean.inflows   # 3.5 minutes, 5 GB
 python -m research.studies.south_sea_ocean.run                          # seconds
+ulimit -v 9000000; python -m research.studies.south_sea_ocean.shores    # a minute, 2 GB
+/media/projectspace/terluna-research/venvs/ocean/bin/python -m research.studies.south_sea_ocean.spray   # three minutes
 ```
 
-Each run's river mouths go to `research/runs/south_sea_ocean/`, ignored by Git.
+Each run's river mouths and the spray's maps go to `research/runs/south_sea_ocean/`, ignored by Git. The spray reads the 6.5-hour record on the research drive (2.3 GB) and needs `netCDF4`, which the ocean environment holds.
