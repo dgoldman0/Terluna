@@ -43,8 +43,9 @@ The complete suite ran on the merged tree at `f58a1e22`, as the project's checks
 | JavaScript tests, the calendar's 14 among them | 191 passed |
 | The calendar's build, the provenance reproduction and the ensemble's validation | passed |
 | The records commit and the answering commit | the one test selected for each passed |
+| The complete suite in one run in main's checkout at `595694ff`, with both grids | layers, 1,658 files and no violation; 5,455 Python tests passed, 31 skipped; 191 JavaScript tests passed; the calendar's build, the provenance reproduction and the ensemble's validation passed |
 
-Each of the 5,453 tests that run in this worktree passed in the configuration it needs, over the two runs together; neither run alone was clean. The second run came from a test selection that turned out empty and so ran everything; it stands as the record of the suite with the grids in place. The moisture map's 11 tests and the sky ecology's 18 were also rerun on their own under `make` once the grids were copied in, and passed; those two reruns were not logged. One clean run of the complete suite follows in main's checkout as soon as main moves up, before any branch is brought up to it.
+Each of the 5,453 tests that run in this worktree passed in the configuration it needs, over the two runs together; neither run alone was clean. The second run came from a test selection that turned out empty and so ran everything; it stands as the record of the suite with the grids in place. The moisture map's 11 tests and the sky ecology's 18 were also rerun on their own under `make` once the grids were copied in, and passed; those two reruns were not logged. The one clean run of the complete suite came in main's checkout, once main had moved up and before any branch was brought up to it. Two tests that skip in the integration worktree run there, where their ignored inputs lie.
 
 ## The review
 
@@ -57,9 +58,11 @@ An independent reviewer read the merged tree at the records commit, `b9285b9c`, 
 - **The attribution row** gives what its counts are, the scripts' place on the drive and the condition attached to the decision, and is set at the merge.
 - **Smaller points.** The branch yet to be made is described as such; the absolute paths recorded in three products are noted; the JavaScript count is said to include the calendar's tests; the settle pass was repeated with the grids in place; and the agents row states only what was accepted.
 
+Main fast-forwarded to the answering commit, `595694ff`, on 15 November, once the review was answered, and the complete suite passed there in one run. Climate, ecology and the six branches without work of their own then came up to main by fast-forward, each worktree given both corrected drainage grids.
+
 ## Still to do from the integration
 
-- **Main moves up** to the round's head now that the review is answered, with one clean run of the complete suite in its checkout ([register](../decisions.md#the-seventh-integration-and-the-refactoring-of-the-vacuum-buildouts-economy-15-november-2026)). Climate, ecology and the six branches without work of their own then come up to main by fast-forward, each worktree given both corrected drainage grids. Provisioning, resources and humanities keep their heads until the economy's round.
+- **Provisioning, resources and humanities** keep their heads, which carry the economy, until `research/vacuum-economy` takes them.
 - **The polar light on the corrected run.** The study's clouds, lakes and sunlight diagnostic come from the turned run before the correction, and the moisture map reads its polar darkness. Rebuilding it on the corrected run takes about twelve minutes on four workers, followed by the moisture map's and the terrain sheets' rebuilds; whether to rebuild or to state the limit is open.
 - **The vacuum buildout's economy**, refactored on `research/vacuum-economy` and merged at the eighth round, with the nine commits already on main reviewed alongside.
 - **The soils study and the lakes' distribution**, and how the moisture and the terrain combine into the biome map, carried over from the sixth round.
