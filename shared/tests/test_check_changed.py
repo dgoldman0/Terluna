@@ -337,6 +337,25 @@ def test_failed_check_stops_and_returns_failure(repo, monkeypatch):
     assert not (repo / "incorrectly-continued").exists()
 
 
+def test_selection_whose_tests_all_skip_passes_and_later_checks_still_run(repo, monkeypatch, capsys):
+    put(repo, "biosphere/tests/test_optional.py",
+        "import pytest\npytest.importorskip('a_module_that_is_not_installed')\n\ndef test_never_reached():\n    assert False\n")
+    monkeypatch.setattr(checks, "ROOT", repo)
+    monkeypatch.setattr(checks, "commands", lambda *_: [
+        [sys.executable, "-m", "pytest", "-q", "biosphere/tests/test_optional.py"],
+        [sys.executable, "-c", "from pathlib import Path; Path('continued').touch()"],
+    ])
+    assert checks.main([]) == 0
+    assert (repo / "continued").exists()
+    assert "No selected test ran" in capsys.readouterr().out
+
+
+def test_none_collected_status_from_another_command_is_a_failure(repo, monkeypatch):
+    monkeypatch.setattr(checks, "ROOT", repo)
+    monkeypatch.setattr(checks, "commands", lambda *_: [[sys.executable, "-c", "raise SystemExit(5)"]])
+    assert checks.main([]) == 1
+
+
 def test_malformed_json_fails_before_running_selected_checks(repo, monkeypatch):
     put(repo, "research/status.json", "{ invalid json\n")
     monkeypatch.setattr(checks, "ROOT", repo)

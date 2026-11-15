@@ -1,6 +1,8 @@
 """Fast analytic/numerical unit checks; no large atmosphere solve required."""
 import math, unittest
 import numpy as np
+import pytest
+pytest.importorskip("numba")  # without numba these tests are skipped when a file is named directly, as conftest.py leaves them uncollected
 from solver import EARTH,MOON,Atmosphere,densities,solar_columns,solar_table,ray_path,weights_path,angular_quadrature,bracket,interpolate
 from render_data import cmf,to_rgb,spherical_harmonics
 

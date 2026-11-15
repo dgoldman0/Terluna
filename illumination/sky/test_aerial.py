@@ -5,6 +5,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+pytest.importorskip("numba")  # without numba these tests are skipped when a file is named directly, as conftest.py leaves them uncollected
+
 from illumination.sky import aerial
 from illumination.sky.solved_transport import evaluate
 
