@@ -121,6 +121,29 @@ def test_the_dye_and_the_warmth_are_weighed_on_the_models_own_cells(tmp_path, mo
     assert w['bands']['45-60S']['at_or_under_the_limit_from_m']['share_of_area_with_any'] == pytest.approx(0.5, abs=0.01)
 
 
+def test_a_patch_holds_fine_cells_inside_the_coarse_grids_span():
+    xg, yg = np.arange(-33.0, 33.1, 1.0), np.arange(-37.0, 35.1, 1.0)
+    x, y = C.patch_edges(xg, yg, (-19.0, -9.0, 24.0, 34.0), 0.1)
+    assert x[0] == xg[0] and x[-1] == xg[-1] and y[0] == yg[0] and y[-1] == yg[-1]
+    assert (np.diff(x) > 0).all() and (np.diff(y) > 0).all()
+    inside = (x[:-1] >= -19.0 - 1e-9) & (x[1:] <= -9.0 + 1e-9)
+    assert np.diff(x)[inside] == pytest.approx(0.1) and inside.sum() == 100
+    assert np.diff(x).max() <= 1.0 + 1e-9
+    grow = np.diff(x)[np.flatnonzero(inside)[-1] + 1:][:5]
+    assert grow[1:] / grow[:-1] == pytest.approx(1.15, rel=1e-6)          # widening by the ratio away from the box
+
+
+def test_a_start_is_carried_over_from_the_nearest_water_at_each_level():
+    parent = mitgcm.Grid(xg=np.array([0.0, 1.0, 2.0]), yg=np.array([0.0, 1.0]), depth=np.array([[30.0, 10.0]]))
+    share = np.array([[[1.0, 1.0]], [[1.0, 0.0]], [[0.0, 0.0]]])        # the east column holds one level, none the third
+    fields = dict(theta=np.array([[[28.0, 30.0]], [[27.0, 0.0]], [[0.0, 0.0]]]))
+    child = mitgcm.Grid(xg=np.linspace(0.0, 2.0, 5), yg=np.array([0.0, 0.5, 1.0]), depth=np.ones((2, 4)))
+    out = C.carry_over(parent, share, fields, child)['theta']
+    assert out[0, 0].tolist() == [28.0, 28.0, 30.0, 30.0]
+    assert out[1, 0].tolist() == [27.0, 27.0, 27.0, 27.0]               # only the west column holds the second level
+    assert (out[2] == out[1]).all()                                     # below the parent's water the level above serves
+
+
 def test_the_trial_is_recorded_with_its_setting():
     out = json.loads((C.HERE / 'results' / 'circulation_trial_1deg.json').read_text())
     assert out['schema'] == C.SCHEMA

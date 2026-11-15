@@ -25,6 +25,10 @@ carries the water the rivers and the rain add and the evaporation takes (z-star 
 river dilutes the cell it enters to its own strength and the sea's salt is conserved. The sea surface can be drawn
 towards a prescribed temperature with a stated time scale.
 
+A patch of fine cells. The grid's spacing may vary (mitgcm.stretched_edges), so a shore can carry fine cells inside
+a coarse sea. The lateral viscosity then follows each cell's own size (viscAhGrid), and a run can start from fields
+carried over from a coarser run in place of one temperature and salinity.
+
 The old water. A dye starts at 1 everywhere and is drawn to 0 in the top layer within a day (pkg/ptracers with
 pkg/rbcs), and is otherwise carried and mixed like salt. What is left of it at a depth is the share of that water
 that has not been at the surface since the run began, so its fall measures how fast the deeps are renewed.
@@ -168,6 +172,8 @@ class Sea(Experiment):
     top_fields: tuple = ("SALT", "THETA", "UVEL", "VVEL")
     deep_fields: tuple = ("SALT", "THETA", "UVEL", "VVEL", "WVEL")
     deep_output_s: float = 0.0          # interval of the whole-depth means; 0 for none
+    visc_grid: float = 0.0              # lateral viscosity as a share of each cell's L^2 / (4 dt); for mixed cell sizes
+    start: dict = field(default_factory=dict)     # optional starting fields (levels, ny, nx): theta, salt, dye
     dye: bool = True                    # carry the old-water dye (TRAC01)
     dye_surface_s: float = 86400.0      # time scale drawing the top layer's dye to 0
 
@@ -195,7 +201,7 @@ class Sea(Experiment):
             exactConserv=True, useRealFreshWaterFlux=True,
             implicSurfPress=1.0, implicDiv2DFlow=1.0,
             momAdvection=True, momViscosity=True, viscAh=self.visc_h, viscC2smag=self.viscosity_smag,
-            viscAhGridMax=0.5, useFullLeith=False,
+            viscAhGrid=self.visc_grid, viscAhGridMax=0.5, useFullLeith=False,
             viscAr=self.visc_r, diffKrT=self.diff_r, diffKrS=self.diff_r,
             implicitDiffusion=True, implicitViscosity=True,
             bottomDragQuadratic=self.drag, no_slip_sides=False, no_slip_bottom=True,
@@ -208,7 +214,12 @@ class Sea(Experiment):
         text += namelist("PARM04", dict(usingSphericalPolarGrid=True, rSphere=lunar.RADIUS,
                                         xgOrigin=float(g.xg[0]), ygOrigin=float(g.yg[0]),
                                         delX=np.diff(g.xg), delY=np.diff(g.yg), delR=self.delr))
-        text += namelist("PARM05", dict(bathyFile="bathy.bin"))
+        files = dict(bathyFile="bathy.bin")
+        for key, name in (("theta", "hydrogThetaFile"), ("salt", "hydrogSaltFile")):
+            if key in self.start:
+                fields[f"start_{key}.bin"] = self.start[key]
+                files[name] = f"start_{key}.bin"
+        text += namelist("PARM05", files)
         texts = {"data.template": text,
                  "data.pkg": namelist("PACKAGES", dict(useEXF=True, useCAL=False, useDiagnostics=True, useGGL90=True)),
                  "eedata": " &EEPARMS\n nTx=1,\n nTy=1,\n &\n",
@@ -239,7 +250,10 @@ class Sea(Experiment):
             texts["data.ptracers"] = namelist("PTRACERS_PARM01", {
                 "PTRACERS_numInUse": 1, "PTRACERS_Iter0": 0, "PTRACERS_advScheme(1)": 33,
                 "PTRACERS_diffKh(1)": 0.0, "PTRACERS_diffKr(1)": self.diff_r,
-                f"PTRACERS_ref(1:{nr},1)": f"{nr}*1.", "PTRACERS_names(1)": "old"})
+                f"PTRACERS_ref(1:{nr},1)": f"{nr}*1.", "PTRACERS_names(1)": "old",
+                **({"PTRACERS_initialFile(1)": "start_dye.bin"} if "dye" in self.start else {})})
+            if "dye" in self.start:
+                fields["start_dye.bin"] = self.start["dye"]
             texts["data.rbcs"] = (namelist("RBCS_PARM01", {"relaxMaskFile(3)": "rbcs_mask.bin"})
                                   + namelist("RBCS_PARM02", {"useRBCpTrNum(1)": True,
                                                              "tauRelaxPTR(1)": float(self.dye_surface_s),
@@ -250,6 +264,7 @@ class Sea(Experiment):
             name=self.name, nx=g.nx, ny=g.ny, nr=nr, wet_columns=int(g.wet.sum()), deltat=self.deltat,
             delr=[float(x) for x in self.delr], theta0=self.theta0, salt0=self.salt0, rho_const=self.rho_const,
             drag=self.drag, viscosity_smag=self.viscosity_smag, visc_h=self.visc_h, visc_r=self.visc_r,
+            visc_grid=self.visc_grid, start=sorted(self.start),
             diff_r=self.diff_r, tiles=list(self.tiles), forcing=sorted(self.forcing),
             forcing_period_s=self.forcing_period_s, sst_relax_s=self.sst_relax_s, rivers=self.runoff is not None,
             closure="ggl90", equation_of_state="JMD95Z", dye=self.dye, dye_surface_s=self.dye_surface_s,

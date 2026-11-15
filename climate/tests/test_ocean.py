@@ -335,6 +335,17 @@ def test_a_stratified_sea_carries_the_moon_and_reads_its_fluxes(tmp_path, monkey
     sea.deep_output_s = 864000.0
     sea.write_diagnostics()
     assert "'TRAC01  '" in (sea.folder / "data.diagnostics").read_text()
+    # a run on mixed cell sizes: viscosity by the cell's size, and a start carried over from another run
+    cold = np.full((3, 4, 4), 26.0)
+    patch = stratified.Sea(name="p", grid=grid, deltat=900.0, delr=np.array([5.0, 6.0, 50.0]), coriolis=sea.coriolis,
+                           visc_h=0.0, visc_grid=0.0012, start=dict(theta=cold, salt=cold + 9.0, dye=cold * 0.0))
+    patch.write()
+    data = (patch.folder / "data.template").read_text()
+    assert "viscAhGrid=0.0012," in data and "viscAh=0," in data
+    assert "hydrogThetaFile='start_theta.bin'" in data and "hydrogSaltFile='start_salt.bin'" in data
+    assert "PTRACERS_initialFile(1)='start_dye.bin'" in (patch.folder / "data.ptracers").read_text()
+    assert np.fromfile(patch.folder / "start_salt.bin", dtype=">f8").tolist() == [35.0] * 48
+    assert "hydrogThetaFile" not in (sea.folder / "data.template").read_text()
     with pytest.raises(ValueError):
         stratified.Sea(name="b", grid=grid, deltat=1800.0, delr=np.array([5.0]), coriolis=sea.coriolis,
                        forcing=dict(ustress=np.zeros((3, 4, 4)), hflux=np.ones((2, 4, 4))),

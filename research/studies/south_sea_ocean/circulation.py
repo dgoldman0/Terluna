@@ -54,10 +54,12 @@ SST_RELAX_DAYS = 30.0
 YEAR_S = SP.WRITE_S * 1320              # the forcing's cycle, 357.5 days
 MONTH_S = YEAR_S / 12.0                 # the output's interval, 29.8 days: a twelfth of the forcing's year
 MOSCOVIENSE_MOUTH_TODAY = (-23.34, 176.09)     # where the Moscoviense route enters (inflows.json, two_seas)
+MOSCOVIENSE_ARM_BOX = (-19.0, -9.0, 24.0, 34.0)  # the arm that route enters, in the grid's own degrees
 OLD_WATER_DEPTHS_M = (0.0, 100.0, 500.0, 1000.0, 2000.0, 4000.0)
 WARMTH_BANDS = ((14, 30), (30, 45), (45, 60), (60, 81))     # degrees south, true latitude on the turned Moon
 EEL_WARM_LIMIT_C = 28.0                 # Japanese eel eggs hatch at 19-28 C (the register's row of 6 November)
 EEL_DEPTH_M = 1050.0                    # 0.9-1.2 km holds the pressure of the eels' 150-200 m on Earth (seawater lakes)
+PATCH_VISC_GRID = 0.0012                # 300 m2/s on a 30 km cell at a 900 s step, falling with the cell's area
 SALT_CLASSES = ((0.0, 0.5, 'fresh'), (0.5, 5.0, 'nearly fresh'), (5.0, 18.0, 'brackish'), (18.0, 30.0, 'mixed'),
                 (30.0, 34.0, 'diluted sea water'), (34.0, 36.0, 'sea water'), (36.0, 99.0, 'saltier than sea water'))
 
@@ -78,14 +80,19 @@ def cells(glat, glon, xg, yg):
     return j, i, (j >= 0) & (j < len(yg) - 1) & (i >= 0) & (i < len(xg) - 1)
 
 
-def floor_on_grid(glat, glon, depth_m, area, step, margin=1):
-    """A grid of `step` degrees covering the places with one land cell round them, and each cell's depth: the
-    area-weighted mean depth of the sea within it where the sea covers at least half of it, else land."""
-    x0 = (np.floor(glon.min() / step) - margin) * step
-    y0 = (np.floor(glat.min() / step) - margin) * step
-    nx = int(np.ceil((glon.max() - x0) / step)) + margin
-    ny = int(np.ceil((glat.max() - y0) / step)) + margin
-    xg, yg = x0 + step * np.arange(nx + 1), y0 + step * np.arange(ny + 1)
+def floor_on_grid(glat, glon, depth_m, area, step, margin=1, edges=None):
+    """A grid of `step` degrees covering the places with one land cell round them (or the grid of the given edges),
+    and each cell's depth: the area-weighted mean depth of the sea within it where the sea covers at least half of
+    it, else land."""
+    if edges is None:
+        x0 = (np.floor(glon.min() / step) - margin) * step
+        y0 = (np.floor(glat.min() / step) - margin) * step
+        nx = int(np.ceil((glon.max() - x0) / step)) + margin
+        ny = int(np.ceil((glat.max() - y0) / step)) + margin
+        xg, yg = x0 + step * np.arange(nx + 1), y0 + step * np.arange(ny + 1)
+    else:
+        xg, yg = (np.asarray(e, float) for e in edges)
+        nx, ny = len(xg) - 1, len(yg) - 1
     j, i, inside = cells(glat, glon, xg, yg)
     flat = j[inside] * nx + i[inside]
     wet = np.bincount(flat, weights=area[inside], minlength=ny * nx).reshape(ny, nx)
@@ -97,7 +104,7 @@ def floor_on_grid(glat, glon, depth_m, area, step, margin=1):
     return grid
 
 
-def sea_floor(step, rotation, frame):
+def sea_floor(step, rotation, frame, edges=None):
     """The South Pole-Aitken Sea's floor on the model's grid, with the fine pixels' area and volume for comparison."""
     from geography import topography as tp
     atlas = json.loads((ROOT / I.ATLAS).read_text())
@@ -115,7 +122,7 @@ def sea_floor(step, rotation, frame):
     area = row_area[pr]
     t_lat, t_lon = to_turned(lat[pr], lon[pc], rotation)
     glat, glon = frame.to_grid(t_lat, t_lon)
-    grid = floor_on_grid(glat, glon, depth, area, step)
+    grid = floor_on_grid(glat, glon, depth, area, step, edges=edges)
     deepest = np.unravel_index(int(np.argmax(grid.depth)), grid.depth.shape)
     grid.depth = mitgcm.keep_connected(grid.depth, [deepest])
     grid = mitgcm.pad_even(grid)
@@ -203,9 +210,11 @@ def read_record(path=SP.RECORD):
 
 # ---------------------------------------------------------------- the rivers
 
-def rivers_on_grid(grid, frame, rotation, loss_m3s):
+def rivers_on_grid(grid, frame, rotation, loss_m3s, spread_km=0.0):
     """The rivers' inflow as a speed into each cell (m/s): the six-seas routing's mouths on the sea, each given to
-    its own cell or the nearest wet one, and the rest of the sea's loss at the mouth of the Moscoviense route."""
+    its own cell or the nearest wet one, and the rest of the sea's loss at the mouth of the Moscoviense route. With
+    `spread_km`, a mouth's water is shared equally among the wet cells within that distance of it, so that a large
+    river does not enter through one fine cell."""
     inflows = json.loads((ROOT / R.INFLOWS).read_text())
     want = inflows['rules']['six_seas']['seas'][R.SEA_NAME]['inflow_m3s']
     with np.load(MOUTHS) as z:
@@ -224,9 +233,15 @@ def rivers_on_grid(grid, frame, rotation, loss_m3s):
     glat, glon = frame.to_grid(*to_turned(lat, lon, rotation))
     yc, xc = np.meshgrid(grid.yc, grid.xc, indexing='ij')
     wet = np.flatnonzero(grid.wet.ravel())
-    _, k = cKDTree(np.column_stack((yc.ravel()[wet], xc.ravel()[wet] * np.cos(np.radians(yc.ravel()[wet]))))).query(
-        np.column_stack((glat, glon * np.cos(np.radians(glat)))))
-    m3s = np.bincount(wet[k], weights=flow, minlength=grid.wet.size).reshape(grid.wet.shape)
+    tree = cKDTree(ST.unit(yc.ravel()[wet], xc.ravel()[wet]))
+    mouths = ST.unit(glat, glon)
+    _, k = tree.query(mouths)
+    m3s = np.zeros(grid.wet.size)
+    near = tree.query_ball_point(mouths, 2.0 * np.sin(0.5 * spread_km * 1000.0 / lunar.RADIUS)) if spread_km > 0 else None
+    for n in range(len(flow)):
+        share = wet[near[n]] if near is not None and len(near[n]) else wet[k[n]:k[n] + 1]
+        m3s[share] += flow[n] / len(share)
+    m3s = m3s.reshape(grid.wet.shape)
     info = dict(six_seas_m3s=totals[label], moscoviense_route_m3s=float(flow[-1]), mouths=int(sel.sum()),
                 cells_taking_rivers=int((m3s > 0).sum()), largest_cell_m3s=float(m3s.max()),
                 largest_cell_m_day=float((m3s / grid.area).max() * 86400.0))
@@ -277,6 +292,84 @@ def build(step, deltat, tiles=(2, 2), name=None):
         water_left_over_m3s=float(((forcing['sflux'].mean(axis=0) - runoff) * grid.area).sum()),
         start=dict(theta_c=THETA0_C, practical_salinity=salt0, rho_kg_m3=rho), deltat_s=deltat)
     return sea, setting
+
+
+def patch_edges(xg, yg, box, fine, ratio=1.15):
+    """Edges of a grid that covers the coarse grid's span with cells of `fine` degrees inside box = (x0, x1, y0, y1)
+    and cells growing by `ratio` back to the coarse spacing outside it."""
+    x0, x1, y0, y1 = box
+    return (mitgcm.stretched_edges(float(xg[0]), float(xg[-1]), (x0, x1), fine, float(xg[1] - xg[0]), ratio),
+            mitgcm.stretched_edges(float(yg[0]), float(yg[-1]), (y0, y1), fine, float(yg[1] - yg[0]), ratio))
+
+
+def carry_over(parent_grid, parent_share, parent_fields, grid):
+    """A coarser run's fields on another grid's cells, level by level: each cell takes the nearest parent cell that
+    holds water at that level; below the parent's deepest water the level above serves."""
+    py, px = np.meshgrid(parent_grid.yc, parent_grid.xc, indexing='ij')
+    cy, cx = np.meshgrid(grid.yc, grid.xc, indexing='ij')
+    target = ST.unit(cy.ravel(), cx.ravel())
+    out = {name: np.zeros((parent_share.shape[0],) + cy.shape) for name in parent_fields}
+    for k in range(parent_share.shape[0]):
+        open_ = parent_share[k] > 0
+        if not open_.any():
+            for name in out:
+                out[name][k] = out[name][k - 1]
+            continue
+        _, n = cKDTree(ST.unit(py[open_], px[open_])).query(target)
+        for name, values in parent_fields.items():
+            out[name][k] = values[k][open_][n].reshape(cy.shape)
+    return out
+
+
+def build_patch(box, fine, deltat, parent_step=1.0, spread_km=6.0, name=None, tiles=(2, 2)):
+    """The sea with a patch of fine cells round one shore, started from the coarse run's latest yearly means. The
+    levels are the coarse run's; rivers are shared among the wet cells within `spread_km` of each mouth."""
+    rotation = np.array(json.loads((ROOT / R.FRAME).read_text())['frame']['rotation_today_to_turned'])
+    frame = frame_of_the_sea(rotation)
+    parent_name = f'south_sea_{parent_step:g}deg'
+    parent_folder = mitgcm.RUNS / 'mitgcm' / parent_name
+    with np.load(RUNS / f'circulation_grid_{parent_step:g}deg.npz') as z:
+        parent_grid = mitgcm.Grid(xg=z['xg'], yg=z['yg'], depth=z['depth'])
+    delr = np.array(json.loads((parent_folder / 'experiment.json').read_text())['delr'])
+    name = name or f'{parent_name}_patch_{fine:g}deg'
+    cache = RUNS / f'circulation_grid_{name}.npz'
+    edges = patch_edges(parent_grid.xg, parent_grid.yg, box, fine)
+    if cache.exists() and np.array_equal(np.load(cache)['xg'], edges[0]) and np.array_equal(np.load(cache)['yg'], edges[1]):
+        with np.load(cache) as z:
+            grid = mitgcm.Grid(xg=z['xg'], yg=z['yg'], depth=z['depth'])
+    else:
+        grid, _ = sea_floor(parent_step, rotation, frame, edges=edges)
+        np.savez(cache, xg=grid.xg, yg=grid.yg, depth=grid.depth)
+    grid.depth = np.minimum(grid.depth, float(delr.sum()))          # the coarse run's levels hold the floor
+    deep = sorted(parent_folder.glob('deep.*.data'))
+    if not deep:
+        raise SystemExit(f'{parent_folder} holds no yearly means to start from')
+    means = mitgcm.read_mds(str(deep[-1])[:-5])
+    share = mitgcm.read_mds(str(parent_folder / 'hFacC'))
+    start = carry_over(parent_grid, share, dict(theta=means['THETA'], salt=means['SALT'], dye=means['TRAC01']), grid)
+    forcing = forcing_on_grid(grid, frame, read_record())
+    loss = float((forcing['sflux'].mean(axis=0) * grid.area).sum())
+    runoff, rivers = rivers_on_grid(grid, frame, rotation, loss, spread_km=spread_km)
+    salt0 = float(R.practical_from_reference(R.sc.SEAWATER_G_KG))
+    sea = ST.Sea(name=name, grid=grid, deltat=deltat, tiles=tiles, delr=delr, coriolis=coriolis(grid, frame),
+                 theta0=THETA0_C, salt0=salt0, rho_const=float(R.seawater_density(salt0, R.T_REF_C)), forcing=forcing,
+                 runoff=runoff, forcing_period_s=SP.WRITE_S, sst_relax_s=SST_RELAX_DAYS * 86400.0,
+                 viscosity_smag=2.2, visc_h=0.0, visc_grid=PATCH_VISC_GRID, start=start, output_s=MONTH_S,
+                 deep_output_s=YEAR_S)
+    wet = grid.wet
+    in_box = wet & (grid.xc[None, :] > box[0]) & (grid.xc[None, :] < box[1]) & (grid.yc[:, None] > box[2]) \
+        & (grid.yc[:, None] < box[3])
+    setting = dict(
+        parent=parent_name, started_from_year=int(deep[-1].name.split('.')[1]) * json.loads(
+            (parent_folder / 'experiment.json').read_text())['deltat'] / YEAR_S,
+        box_grid_degrees=list(box), fine_deg=fine, frame_centre_turned=[frame.centre_lat, frame.centre_lon],
+        nx=grid.nx, ny=grid.ny, levels=len(delr), wet_columns=int(wet.sum()), wet_columns_in_the_box=int(in_box.sum()),
+        cell_km=[float(np.sqrt(grid.area[wet].min()) / 1e3), float(np.sqrt(grid.area[wet].max()) / 1e3)],
+        area_km2=float(grid.area[wet].sum() / 1e6), box_water_km2=float(grid.area[in_box].sum() / 1e6),
+        volume_km3=float((grid.area * grid.depth).sum() / 1e9), rivers=rivers, river_spread_km=spread_km,
+        forcing=dict(loss_m3s=loss), visc_grid=PATCH_VISC_GRID, deltat_s=deltat,
+        water_left_over_m3s=float(((forcing['sflux'].mean(axis=0) - runoff) * grid.area).sum()))
+    return sea, setting, in_box
 
 
 def monitor(folder):
@@ -365,10 +458,10 @@ def warmth(sea, theta, volume, true_lat):
                                        warmest=float(t.max())))
 
 
-def salinity_areas(sea, salt):
-    """The sea's area (km2) by the top layer's salinity class, in g/kg."""
+def salinity_areas(sea, salt, where=None):
+    """The sea's area (km2) by the top layer's salinity class, in g/kg; `where` narrows it to some cells."""
     g_kg = salt * R.sc.SEAWATER_G_KG / float(R.practical_from_reference(R.sc.SEAWATER_G_KG))
-    wet, area = sea.grid.wet, sea.grid.area / 1e6
+    wet, area = sea.grid.wet if where is None else where, sea.grid.area / 1e6
     return {name: float(area[wet & (g_kg >= lo) & (g_kg < hi)].sum()) for lo, hi, name in SALT_CLASSES}
 
 
@@ -399,6 +492,31 @@ def trial(args):
     print(json.dumps({k: v for k, v in out.items() if k != 'setting'}, indent=1))
     print(f"{setting['wet_columns']} columns, {setting['wet_cells']} wet cells; {wall / steps:.3f} s a step; "
           f"{per_year:.2f} hours a model year on {out['ranks']} processes")
+    return 0
+
+
+def patch_trial(args):
+    box = tuple(args.box)
+    sea, setting, in_box = build_patch(box, args.fine, args.deltat, name=f'south_sea_1deg_patch_{args.fine:g}deg_trial')
+    exe = sea.binary()
+    sea.output_s = sea.deep_output_s = args.days * 86400.0 / 2.0
+    sea.write(fresh=True)
+    t0 = time.time()
+    sea.run(args.days * 86400.0, args.days * 86400.0)
+    wall = time.time() - t0
+    steps = int(round(args.days * 86400.0 / args.deltat))
+    top = top_layer(sea)
+    out = dict(schema='terluna.research.south-sea-circulation-patch-trial/1', setting=setting, build=exe.parent.name,
+               model_days=args.days, steps=steps, wall_s=round(wall, 1), seconds_a_step=wall / steps,
+               ranks=sea.tiles[0] * sea.tiles[1], hours_a_model_year=wall / steps * (YEAR_S / args.deltat) / 3600.0,
+               machine_load_at_the_end=float(open('/proc/loadavg').read().split()[0]), monitor=monitor(sea.folder),
+               top_layer_in_the_box=dict(salinity_areas_km2=salinity_areas(sea, top['SALT'], in_box),
+                                         speed_m_s_max=float(np.hypot(top['UVEL'], top['VVEL'])[in_box].max())))
+    path = HERE / 'results' / f'circulation_patch_trial_{args.fine:g}deg.json'
+    path.write_text(json.dumps(out, indent=1) + '\n')
+    print(json.dumps({k: v for k, v in out.items() if k != 'monitor'}, indent=1))
+    print(f"{setting['wet_columns']} columns ({setting['wet_columns_in_the_box']} in the box); {wall / steps:.3f} s a "
+          f"step; {out['hours_a_model_year']:.2f} hours a model year on {out['ranks']} processes")
     return 0
 
 
@@ -468,8 +586,11 @@ def read(args):
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = p.add_subparsers(dest='command', required=True)
-    for name, fn in (('trial', trial), ('run', run), ('read', read)):
+    for name, fn in (('trial', trial), ('run', run), ('read', read), ('patch-trial', patch_trial)):
         s = sub.add_parser(name)
+        s.add_argument('--box', type=float, nargs=4, default=MOSCOVIENSE_ARM_BOX,
+                       help='the fine patch in the grid\'s own degrees: west east south north')
+        s.add_argument('--fine', type=float, default=0.1, help='the patch\'s spacing in degrees')
         s.add_argument('--step', type=float, default=1.0, help='the grid\'s spacing in degrees (30 km a degree)')
         s.add_argument('--deltat', type=float, default=1800.0, help='the time step in seconds')
         s.add_argument('--days', type=float, default=30.0)
