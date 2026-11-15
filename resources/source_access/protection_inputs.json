@@ -35,7 +35,7 @@
     },
     "existing_science_screen": {
       "path": "resources/enclosed_mining/inputs.json",
-      "sha256": "b0ee1d80e96e1e91b764eae05d7db4d31fd733a834b0f2f339e07d7b5eb7b9d3",
+      "sha256": "602a03af4bea5ca5216fc6e7a315d5503f320c401cb75552ee046be3e8e3f033",
       "status": "Existing illustrative exclusions in the enclosed-source geometry screen; the screen remains proposed and does not qualify extraction."
     }
   },

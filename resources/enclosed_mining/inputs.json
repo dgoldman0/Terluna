@@ -64,47 +64,39 @@
   ],
   "physical_products": [
     {
-      "path": "inputs/industry.json.gz",
+      "path": "../../provisioning/enclosed_industry/results/industry.json.gz",
       "schema": "terluna.provisioning.enclosed-industry/1",
       "compression": "gzip",
       "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
       "content_sha256": "bc448d041b2498350216fa39d3e1718f441285675662d3efd024090b5932ab31",
-      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
-      "source_path": "provisioning/enclosed_industry/results/industry.json.gz",
-      "manifest_path": "inputs/industry.json.manifest.json",
+      "manifest_path": "../../provisioning/enclosed_industry/results/industry.json.manifest.json",
       "manifest_sha256": "f7339ecf7e596adc9626ec238d3eda8c2a1419822fea665d3cac0e39f104473d"
     },
     {
-      "path": "inputs/poor_lunar.json.gz",
+      "path": "../../provisioning/enclosed_industry/results/poor_lunar.json.gz",
       "schema": "terluna.provisioning.enclosed-industry/1",
       "compression": "gzip",
       "sha256": "94db53e1c6afa9ae0bc3319b7901e6b3a80143643bf196e429c14224180b565b",
       "content_sha256": "2b3e5a1f086fae717c9f5a35c6e8f51815d662be4f066de07b8334eb0b08add4",
-      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
-      "source_path": "provisioning/enclosed_industry/results/poor_lunar.json.gz",
-      "manifest_path": "inputs/poor_lunar.json.manifest.json",
+      "manifest_path": "../../provisioning/enclosed_industry/results/poor_lunar.json.manifest.json",
       "manifest_sha256": "de96964dc70df269fab4a2d14127bf47545ed2d78683e77b3d7d3dee33527236"
     },
     {
-      "path": "inputs/poor_source.json.gz",
+      "path": "../../provisioning/enclosed_industry/results/poor_source.json.gz",
       "schema": "terluna.provisioning.enclosed-industry/1",
       "compression": "gzip",
       "sha256": "d5d015e09667ab3c63a220f8bdb32aea81e4eb1ba41dcc1689d86a8b5d27c191",
       "content_sha256": "9039a5887ef8d42f4206a04a5dfbe8f4e953523f4b3a13ee10f04ec423a42e83",
-      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
-      "source_path": "provisioning/enclosed_industry/results/poor_source.json.gz",
-      "manifest_path": "inputs/poor_source.json.manifest.json",
+      "manifest_path": "../../provisioning/enclosed_industry/results/poor_source.json.manifest.json",
       "manifest_sha256": "b375c6cacdadc9d9b8fc2623ef47646bd71f78b53978fa6cd7a92facf8eb507e"
     },
     {
-      "path": "inputs/lifetimes.json.gz",
+      "path": "../../provisioning/enclosed_industry/results/lifetimes.json.gz",
       "schema": "terluna.provisioning.enclosed-industry/1",
       "compression": "gzip",
       "sha256": "15ea5ada5f1a33c0db82e92a43fe6cf49cebb33b6d6a52a4937fe99a16b28422",
       "content_sha256": "446cbb56054a2037c880c05510bac262e1a822497db6a650c0b34023064e8d8c",
-      "source_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e",
-      "source_path": "provisioning/enclosed_industry/results/lifetimes.json.gz",
-      "manifest_path": "inputs/lifetimes.json.manifest.json",
+      "manifest_path": "../../provisioning/enclosed_industry/results/lifetimes.json.manifest.json",
       "manifest_sha256": "6ca4472792e807f62c9aa3f05a8a8f018bbe902ae46a99801ff31dd6ebbac6df"
     }
   ],

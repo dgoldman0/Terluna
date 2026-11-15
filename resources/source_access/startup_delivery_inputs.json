@@ -88,7 +88,7 @@
     "inputs/startup_feed.json": "e9683502d6c010f3808953e285aeaed9a8556ae195a0b0b318193fd8f0168968",
     "export_startup_feed.py": "a64c41e3b505e7407c38cd7a2a6423b6aa132a5279f95b5fe188e22b67b116d5",
     "coproducts.py": "04fa8f146fe82287628466f065949d57b7a94c4b0f9bb424bc4437a31471e90a",
-    "coproduct_inputs.json": "1d68a8482c459105bb6153459a6388bd1758ce1f1a80fd4f1c3cc605f94e7d79",
+    "coproduct_inputs.json": "a890c4cbfc6b9cd47002ed540b6305a0b0bf436e91117c8cccd3cf907a8f18d7",
     "coproduct_assays.json": "6a5a5d2d826a320f9bfd2a51449b94c74937a98887288ece4f45fc3df2f4ca29"
   },
   "external_context_sources": [

@@ -4,7 +4,7 @@
     "population": {
       "path": "results/population.json.gz",
       "schema": "terluna.resources.nea-population/1",
-      "sha256": "c9a992c7507e688e4caea64a71d4b2c7c60ca94969e9fb50d133886a677ebbe1"
+      "sha256": "de8b5787ac46434ccc12f4977bbf8cd0013de18f8e6f844d985e61a24ec7de06"
     },
     "lunar": {
       "path": "results/lunar_potential.json.gz",
@@ -12,15 +12,13 @@
       "sha256": "635a919992ac6de03d613e52b759a078cfa914b027b8f8f31b3102bc09ef0f81"
     },
     "reclamation": {
-      "path": "inputs/reclamation.json.gz",
+      "path": "../../provisioning/enclosed_industry/results/reclamation.json.gz",
       "schema": "terluna.provisioning.reclamation/1",
       "sha256": "f6b43f00ea585af509e0f9e4ec3545ccf1956ed8c04348dd3404cf965bb54f2c",
-      "producer_commit": "210a20bd2cf16ec951f02a01f6ee3758b497df03",
-      "producer_path": "provisioning/enclosed_industry/reclamation.py",
-      "source_path": "provisioning/enclosed_industry/results/reclamation.json.gz"
+      "producer_path": "provisioning/enclosed_industry/reclamation.py"
     },
     "baseline": {
-      "path": "../enclosed_mining/inputs/industry.json.gz",
+      "path": "../../provisioning/enclosed_industry/results/industry.json.gz",
       "schema": "terluna.provisioning.enclosed-industry/1",
       "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7"
     }

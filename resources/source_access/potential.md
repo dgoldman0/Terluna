@@ -38,7 +38,7 @@ The [source audit](population_sources.json) also examines the historical [USGS a
 
 ## Fresh demand after recovery
 
-The [provisioning experiment’s pinned export](inputs/reclamation.json.gz) recalculates the physical system for services, propellant/logistics and diversified portfolios, each under strong markets and either 0.5% or 1% annual real market growth. Six variants produce 36 cases. This bounded comparison covers representative orderbooks, rather than claiming a fresh rerun of all nine financial portfolios. The resource consumer also retains the original 81-case demand ranges for context. The producer and its full interpretation are `provisioning/enclosed_industry/reclamation.py` and `reclamation.md` at provisioning commit `210a20bd2cf16ec951f02a01f6ee3758b497df03`.
+The [provisioning study's reclamation product](../../provisioning/enclosed_industry/results/reclamation.json.gz), read where it is produced, recalculates the physical system for services, propellant/logistics and diversified portfolios, each under strong markets and either 0.5% or 1% annual real market growth. Six variants produce 36 cases. This bounded comparison covers representative orderbooks, rather than claiming a fresh rerun of all nine financial portfolios. The resource consumer also retains the original 81-case demand ranges for context. The producer and its full interpretation are `provisioning/enclosed_industry/reclamation.py` and `reclamation.md` at provisioning commit `210a20bd2cf16ec951f02a01f6ee3758b497df03`.
 
 | Checkpoint | Original 81 cases: fresh source feed, Gt | Six matching controls: fresh source feed, Gt | Combined recovery/refurbishment: fresh source feed, Gt | Combined: source water product, Gt |
 |---|---:|---:|---:|---:|

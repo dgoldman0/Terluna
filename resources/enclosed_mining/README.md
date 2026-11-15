@@ -6,7 +6,7 @@ This assessment follows the raw material required by an enclosed lunar settlemen
 
 Earth-side ore extraction is outside this feed comparison.
 
-The saved assessment consumes 81 base cases and six physical sensitivities from provisioning commit `3e04591148223b079ecd255416555b8d4a4d4f7e`. It includes seed extraction in years 0–7 and annual operations from year 8 through year 220, with the prescribed 6.468 million residents reached in year 200. [inputs.json](inputs.json) pins all four physical products and their manifests. Deterministic gzip snapshots preserve the complete source bytes, and both compressed and decompressed hashes are checked. [sources.json](sources.json) distinguishes primary evidence from these conditional calculations; the earlier replicated-industry results supply no physical demand or costs here.
+The saved assessment consumes 81 base cases and six physical sensitivities from the staged industry products in `provisioning/enclosed_industry/results/`, read where they are produced and checked against their manifests. It includes seed extraction in years 0–7 and annual operations from year 8 through year 220, with the prescribed 6.468 million residents reached in year 200. [inputs.json](inputs.json) pins all four physical products and their manifests. Deterministic gzip snapshots preserve the complete source bytes, and both compressed and decompressed hashes are checked. [sources.json](sources.json) distinguishes primary evidence from these conditional calculations; the earlier replicated-industry results supply no physical demand or costs here.
 
 ## Dated feed requirements
 

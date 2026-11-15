@@ -210,7 +210,7 @@
     "sha256": "c7c191c8726b4f440cb0dc6f5c28c15120cedacbbe7be268deb4f8420bc2f7cb"
   },
   "demand": {
-    "path": "../enclosed_mining/inputs/industry.json.gz",
+    "path": "../../provisioning/enclosed_industry/results/industry.json.gz",
     "sha256": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
     "schema": "terluna.provisioning.enclosed-industry/1"
   },
