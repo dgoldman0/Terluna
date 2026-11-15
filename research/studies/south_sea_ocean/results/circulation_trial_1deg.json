@@ -1,0 +1,116 @@
+{
+ "schema": "terluna.research.south-sea-circulation-trial/1",
+ "setting": {
+  "step_deg": 1.0,
+  "frame_centre_turned": [
+   -47.84531975827012,
+   -176.90509832088878
+  ],
+  "nx": 66,
+  "ny": 72,
+  "levels": 32,
+  "top_layer_m": 5.0,
+  "wet_columns": 2651,
+  "wet_cells": 63714,
+  "cell_km": [
+   27.527786175561022,
+   30.322580674372986
+  ],
+  "area_km2": 2340143.753098705,
+  "volume_km3": 4876155.046749961,
+  "greatest_depth_m": 5575.7732482833,
+  "lola_pixels": {
+   "area_km2": 2307272.3771103118,
+   "volume_km3": 4823162.039428597,
+   "greatest_depth_m": 6795.307599751585
+  },
+  "true_latitudes": [
+   -79.95472882251666,
+   -14.321380100809405
+  ],
+  "forcing": {
+   "records": 1320,
+   "interval_h": 6.5,
+   "loss_m3s": 51673.70237140149,
+   "loss_m_yr": 0.6968366912487526,
+   "net_heat_w_m2": -0.6504214271579496,
+   "stress_pa_mean": 0.010055989221927693,
+   "surface_c": [
+    26.628528855919683,
+    32.91680608208469
+   ]
+  },
+  "rivers": {
+   "six_seas_m3s": 31631.59969228398,
+   "moscoviense_route_m3s": 20042.102679117506,
+   "mouths": 372,
+   "cells_taking_rivers": 31,
+   "largest_cell_m3s": 24041.17470060188,
+   "largest_cell_m_day": 2.649444234651487
+  },
+  "water_left_over_m3s": 0.0,
+  "start": {
+   "theta_c": 27.0,
+   "practical_salinity": 34.99996018773191,
+   "rho_kg_m3": 1021.8984012388196
+  },
+  "deltat_s": 1800.0
+ },
+ "build": "mitgcm-checkpoint69s-7d0e32f15a55",
+ "model_days": 30.0,
+ "steps": 1440,
+ "wall_s": 47.9,
+ "seconds_a_step": 0.03325660526752472,
+ "ranks": 4,
+ "hours_a_model_year": 0.15852315177520115,
+ "machine_load_at_the_end": 4.87,
+ "monitor": {
+  "time_secondsf": 2592000.0,
+  "dynstat_eta_max": 0.15877519255922,
+  "dynstat_eta_min": -0.010888376553138,
+  "dynstat_uvel_max": 0.52092250477971,
+  "dynstat_uvel_min": -0.25356677902401,
+  "dynstat_vvel_max": 0.25210354619945,
+  "dynstat_vvel_min": -0.38832211848457,
+  "dynstat_wvel_max": 0.0010554249178435,
+  "dynstat_theta_max": 28.40431990362,
+  "dynstat_theta_min": 25.780763462494,
+  "dynstat_salt_max": 35.089160646106,
+  "dynstat_salt_min": 3.7295198082931,
+  "dynstat_salt_mean": 34.999977224667,
+  "dynstat_theta_mean": 27.007695393985,
+  "advcfl_uvel_max": 0.034218793236523,
+  "advcfl_vvel_max": 0.023050876749937,
+  "advcfl_wvel_max": 0.039436564618965,
+  "advcfl_W_hf_max": 0.043384331827543,
+  "ke_mean": 0.0001474073759271
+ },
+ "old_water_share": {
+  "below 0 m": 0.9765730161204288,
+  "below 100 m": 0.991307536375538,
+  "below 500 m": 0.9939386288970657,
+  "below 1000 m": 0.9954338556205912,
+  "below 2000 m": 0.9952773311614649,
+  "below 4000 m": 0.9968802370192542
+ },
+ "top_layer": {
+  "salinity_areas_km2": {
+   "fresh": 0.0,
+   "nearly fresh": 783.9974387704883,
+   "brackish": 3919.5095674232407,
+   "mixed": 16249.665836262544,
+   "diluted sea water": 37742.65740140183,
+   "sea water": 2281447.922854847,
+   "saltier than sea water": 0.0
+  },
+  "practical_salinity": [
+   2.494562864303589,
+   35.10655212402344
+  ],
+  "theta_c": [
+   26.916296005249023,
+   29.37047004699707
+  ],
+  "speed_m_s_max": 0.29879332842533063
+ }
+}

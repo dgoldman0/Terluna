@@ -1,6 +1,6 @@
 # Ocean
 
-Two ocean models for the Open Moon's seas, set up from pinned sources with the Moon's gravity, radius and rotation, and checked against geography's linear tide solver. The first study run on them is Mare Fecunditatis's monthly tide through its straits. Climate-forced runs of the seas' circulation wait on the base climate work (the gap with CM1); the models are ready for them.
+Two ocean models for the Open Moon's seas, set up from pinned sources with the Moon's gravity, radius and rotation, and checked against geography's linear tide solver. The first study run on them is Mare Fecunditatis's monthly tide through its straits. Climate-forced runs of the seas' circulation wait on the base climate work (the gap with CM1); the models are ready for them. The first run of one sea's own circulation, with temperature and salt, is the South Pole–Aitken Sea's as a salt sea in the [south-sea study](../../research/studies/south_sea_ocean/README.md#the-circulation-run), set up through [stratified.py](stratified.py) on the design year's fluxes.
 
 | File | Holds |
 |---|---|
@@ -11,6 +11,7 @@ Two ocean models for the Open Moon's seas, set up from pinned sources with the M
 | [terrain.py](terrain.py) | The Near-side Sea's floor at 16 px/deg above the GRAIL geoid, and its connected water |
 | [forcing.py](forcing.py) | The Moon's tide as forcing: geography's degree-2 and degree-3 monomials, their self-attraction, and the files each model reads |
 | [mitgcm.py](mitgcm.py) | MITgcm experiments: grids with a fine region, namelists, the tide's geopotential, chunked runs with pickups, output readers |
+| [stratified.py](stratified.py) | MITgcm with levels, temperature and salt: a grid in a sea's own frame, seawater's equation of state, a turbulence closure, prescribed surface fluxes and rivers, and a dye for the water's renewal |
 | [mesh.py](mesh.py) | Triangle meshes for SCHISM from the terrain's pixels (a quadtree, no hanging nodes) |
 | [schism.py](schism.py) | SCHISM experiments: mesh files, namelists, the lunar tide files, chunked runs with hotstarts |
 | [checks.py](checks.py) | Both models against geography/tide_dynamics.py and an analytic channel ([results](../results/ocean/)) |
@@ -46,6 +47,18 @@ The build's ledger (`terluna_ledger.json` beside the binary) records the upstrea
 Bed friction is quadratic, tau = rho Cd |u| u, with Cd = 0.0025 and a bracket of 0.001-0.005. A drag coefficient from a logarithmic boundary layer holds no gravity, so it carries to the Moon unchanged; Manning's n, which hides g, is not used. MITgcm's strait run adds Smagorinsky viscosity (`viscC2smag = 2.2`), capped at the explicit scheme's stability limit (`viscAhGridMax = 0.5`, L²/8Δt). SCHISM's strait run takes its Smagorinsky-like Shapiro filter at the same strength (below). Both models solve the drag implicitly. SCHISM does by design; MITgcm does with `selectImplicitDrag = 2`, which solves it together with the surface pressure and needs `ALLOW_SOLVE4_PS_AND_DRAG` at compile time. MITgcm's default steps the drag explicitly within its Adams-Bashforth scheme, which holds only while r dt / H stays below about 1: the forced check at a hundred times the base friction reaches 4.5 on the solver's 1-m cells, and with explicit drag it ran away to NaN.
 
 A run proceeds in chunks and resumes from its last pickup or hotstart, and only under the setup it started with: each run folder stamps its namelists or settings, fields, mesh, tide files and build (`setup.sha256`), and a changed setup must start again from a cleared folder. Each check starts from a cleared folder.
+
+## A sea with temperature and salt
+
+[stratified.py](stratified.py) adds to MITgcm's tide set-up what a sea's own circulation needs, reusing its grids, files, builds and chunked runs with pickups.
+
+- **A frame of the sea's own.** A sea that reaches high latitudes runs on a spherical grid whose equator passes through the sea's centre, so its cells keep one size. The Coriolis parameter is then read from files holding 2 Ω sin of the true latitude at the cells' centres and corners (`selectCoriMap = 3`), and winds are turned into the grid's own east and north before they are written.
+- **The water.** Temperature and salinity step with a flux-limited advection scheme, and the density is Jackett and McDougall's (1995), whose pressure MITgcm builds as ρ g z from the namelist's gravity.
+- **The surface.** The forcing package reads wind stress, the net heat flux with its sunlight, evaporation less rain and the rivers' inflow on the model's grid, through a cycle of records that repeats; its bulk formulas, which hold Earth's constants, are compiled out. The free surface carries the water itself (z-star with real fresh-water flux), so a river dilutes the cell it enters and salt is conserved. The top layer can be drawn towards a prescribed temperature with a stated time scale.
+- **The mixing.** The closure is Gaspar et al.'s (1990) turbulent kinetic energy scheme (`ggl90`), which builds its buoyancy frequency from the namelist's gravity and carries convection itself.
+- **The old water.** A dye starts at 1 everywhere and is drawn to 0 in the top layer within a day (`ptracers` with `rbcs`); what is left at a depth is the share of that water that has not been at the surface since the start.
+
+Terms fitted on Earth and taken as they stand: the closure's dimensionless constants, among them the breaking waves' energy input; the clarity of the water to sunlight, Jerlov's type IA, which the source fixes; the background vertical diffusivity; the bed drag; and Smagorinsky's constant. Lists written at different intervals each need their own storage, the top layer's a whole column's; the set-up sizes the diagnostics for that.
 
 ## Checks
 
@@ -122,7 +135,7 @@ The models differ most where the passages' staircase coasts and the cube of the 
 ## Next work
 
 - The seas' circulation under the GCM's forcing (winds, heat and water through the lunar day and night), once the base climate settles: deep-water renewal past the sills against the sea-oxygen study's columns, the depth the night's convection mixes against the GCM's 50 m slab, and the heat the seas carry, returned to ExoPlaSim through its prescribed ocean heat flux (`nfluko = 1`) and its slab depth (`mldepth`).
-- MITgcm's forcing package's bulk formulas audited for Earth terms before any atmosphere-forced run.
+- MITgcm's forcing package's bulk formulas audited for Earth terms before any run that computes its fluxes from the air; [stratified.py](stratified.py) prescribes the fluxes and compiles those formulas out.
 - One lunar-night convection column against the sea-oxygen study's Procellarum column.
 - The South Pole-Aitken sea's Tenebrarum sub-basin, geography's other strait, on the same footing.
 - A screen of the strait study with geography's linear solver on the deformed, turned geography of the atlas work, which decides whether its two runs repeat.

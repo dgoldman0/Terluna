@@ -10,7 +10,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from climate.ocean import builds, checks, forcing, lunar, mesh, mitgcm
+from climate.ocean import builds, checks, forcing, lunar, mesh, mitgcm, stratified
 from shared.constants import MOON_RADIUS, MOON_SURFACE_GRAVITY, SIDEREAL_MONTH_DAYS
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -270,3 +270,88 @@ def test_schism_last_shorter_chunk_lines_up_its_files_and_ends_on_a_hotstart():
     assert schism.chunk_steps(19008000.0, 248400.0, 300.0, 10800.0, 864000.0) == (36, 64188)
     with pytest.raises(ValueError):
         schism.chunk_steps(19008000.0, 249000.0, 300.0, 10800.0, 864000.0)                    # ends between two snapshots
+
+
+def test_a_seas_own_frame_keeps_places_and_directions():
+    frame = stratified.Frame(-47.8, -176.9)
+    glat, glon = frame.to_grid(np.array([-47.8, -80.0, -14.0]), np.array([-176.9, 30.0, 170.0]))
+    assert glat[0] == pytest.approx(0.0, abs=1e-9) and glon[0] == pytest.approx(0.0, abs=1e-9)
+    lat, lon = frame.to_true(glat, glon)
+    assert lat == pytest.approx([-47.8, -80.0, -14.0]) and np.mod(lon, 360.0) == pytest.approx([183.1, 30.0, 170.0])
+    # a step to the true north of the centre is a step to the grid's north
+    north, _ = frame.to_grid(np.array([-47.7]), np.array([-176.9]))
+    assert north[0] == pytest.approx(0.1, abs=1e-6)
+    # a wind keeps its speed everywhere and its direction at the centre
+    u, v = frame.vector_to_grid(glat, glon, np.array([1.0, 3.0, 0.0]), np.array([0.0, 4.0, 2.0]))
+    assert np.hypot(u, v) == pytest.approx([1.0, 5.0, 2.0])
+    assert (u[0], v[0]) == pytest.approx((1.0, 0.0), abs=1e-9)
+    # and points where a short true-eastward step lands on the grid
+    step = 0.01
+    for la, lo in ((-70.0, 120.0), (-20.0, -150.0)):
+        g0, g1 = frame.to_grid(np.array([la]), np.array([lo])), frame.to_grid(np.array([la]), np.array([lo + step]))
+        de = (g1[1][0] - g0[1][0]) * math.cos(math.radians(g0[0][0]))
+        dn = g1[0][0] - g0[0][0]
+        ue, vn = frame.vector_to_grid(g0[0], g0[1], np.array([1.0]), np.array([0.0]))
+        assert (ue[0], vn[0]) == pytest.approx((de / math.hypot(de, dn), dn / math.hypot(de, dn)), abs=1e-4)
+
+
+def test_levels_thicken_downwards_to_hold_the_depth():
+    dz = stratified.levels(5576.0)
+    assert dz[0] == 5.0 and dz.max() == 500.0 and np.all(np.diff(dz) >= 0)
+    assert dz.sum() >= 5576.0 > dz[:-1].sum()
+    assert dz[1] / dz[0] == pytest.approx(1.2)
+
+
+def test_a_stratified_sea_carries_the_moon_and_reads_its_fluxes(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, "RUNS", tmp_path)
+    grid = mitgcm.Grid(xg=np.arange(-2.0, 2.01, 1.0), yg=np.arange(-2.0, 2.01, 1.0), depth=np.full((4, 4), 60.0))
+    flat = np.zeros((4, 4))
+    sea = stratified.Sea(name="s", grid=grid, deltat=1800.0, delr=np.array([5.0, 6.0, 50.0]),
+                         coriolis=dict(centre=flat - 3e-6, corner=flat - 3e-6, cosine=flat + 4e-6), theta0=27.0,
+                         salt0=35.0, forcing=dict(ustress=np.zeros((3, 4, 4)), hflux=np.ones((3, 4, 4))),
+                         runoff=flat + 1e-7, forcing_period_s=23400.0, sst_relax_s=0.0, output_s=86400.0)
+    sea.write()
+    data = (sea.folder / "data.template").read_text()
+    assert f"gravity={lunar.GRAVITY:.12g}" in data and "rSphere=1737400" in data
+    assert "selectCoriMap=3" in data and "eosType='JMD95Z'" in data and "selectP_inEOS_Zc=0" in data
+    assert "tRef=3*27," in data and "sRef=3*35," in data
+    assert "useRealFreshWaterFlux=.TRUE." in data and "nonlinFreeSurf=4" in data and "select_rStar=2" in data
+    assert "implicitDiffusion=.TRUE." in data and "implicitViscosity=.TRUE." in data     # the closure needs both
+    exf = (sea.folder / "data.exf").read_text()
+    assert "repeatPeriod=70200," in exf and "ustressperiod=23400," in exf and "ustressStartTime=11700," in exf
+    assert "hfluxfile='hflux.bin'" in exf and "runofffile='runoff.bin'" in exf and "climsst" not in exf
+    assert "useGGL90=.TRUE." in (sea.folder / "data.pkg").read_text()
+    # the old-water dye: 1 everywhere at the start, drawn to 0 in the top layer alone
+    assert "usePTRACERS=.TRUE." in (sea.folder / "data.pkg").read_text()
+    assert "PTRACERS_ref(1:3,1)=3*1.," in (sea.folder / "data.ptracers").read_text()
+    assert "tauRelaxPTR(1)=86400," in (sea.folder / "data.rbcs").read_text()
+    mask = np.fromfile(sea.folder / "rbcs_mask.bin", dtype=">f8").reshape(3, 4, 4)
+    assert mask[0].all() and not mask[1:].any()
+    assert np.fromfile(sea.folder / "fCoriC.bin", dtype=">f8").tolist() == [-3e-6] * 16
+    assert np.fromfile(sea.folder / "hflux.bin", dtype=">f8").size == 3 * 16
+    sea.write_diagnostics()
+    diag = (sea.folder / "data.diagnostics").read_text()
+    assert "fileName(1) = 'surface'" in diag and "levels(1,2) = 1.0" in diag and "'deep'" not in diag
+    sea.deep_output_s = 864000.0
+    sea.write_diagnostics()
+    assert "'TRAC01  '" in (sea.folder / "data.diagnostics").read_text()
+    with pytest.raises(ValueError):
+        stratified.Sea(name="b", grid=grid, deltat=1800.0, delr=np.array([5.0]), coriolis=sea.coriolis,
+                       forcing=dict(ustress=np.zeros((3, 4, 4)), hflux=np.ones((2, 4, 4))),
+                       forcing_period_s=1.0).inputs()
+
+
+def test_a_stratified_sea_compiles_out_the_bulk_formulas(tmp_path):
+    for sub in ("pkg/exf", "model/inc"):
+        (tmp_path / sub).mkdir(parents=True)
+    (tmp_path / "pkg/exf/EXF_OPTIONS.h").write_text(
+        "#define ALLOW_ATM_TEMP\n#define ALLOW_ATM_WIND\n#define ALLOW_DOWNWARD_RADIATION\n#ifdef ALLOW_ATM_TEMP\n"
+        "# define ALLOW_BULKFORMULAE\n#endif\n#define ALLOW_RUNOFF\n#define ALLOW_CLIMSST_RELAXATION\n")
+    text = stratified.exf_options(tmp_path)
+    assert "#undef ALLOW_ATM_TEMP" in text and "#undef ALLOW_ATM_WIND" in text and "#define ALLOW_RUNOFF" in text
+    assert not re.search(r"^#define\s+ALLOW_ATM_TEMP", text, re.M)
+    (tmp_path / "model/inc/CPP_OPTIONS.h").write_text(
+        "#undef SHORTWAVE_HEATING\n#undef ALLOW_SOLVE4_PS_AND_DRAG\n#define INCLUDE_IMPLVERTADV_CODE\n"
+        "#undef NONLIN_FRSURF\n")
+    text = stratified.model_options(tmp_path)
+    assert "#define SHORTWAVE_HEATING" in text and "#define NONLIN_FRSURF" in text
