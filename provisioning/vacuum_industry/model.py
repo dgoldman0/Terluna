@@ -18,8 +18,35 @@ from shared.constants import JULIAN_DAY, JULIAN_YEAR_DAYS, STANDARD_GRAVITY, STE
 HOURS = JULIAN_DAY * JULIAN_YEAR_DAYS / 3600
 DESTS = ('surface', 'source', 'depot', 'leo')
 
+def at(value, year):
+    """A coefficient's value in a year: the value itself, or read from a schedule {'by_year': [[year, value], ...]}.
+
+    A number is interpolated in a straight line between the listed years and held outside them. A name takes the
+    entry of the latest listed year that is not after the given one.
+    """
+    if not isinstance(value, dict):
+        return value
+    points = value['by_year']
+    if year <= points[0][0]:
+        return points[0][1]
+    for (y0, v0), (y1, v1) in zip(points, points[1:]):
+        if year < y1:
+            return v0 if isinstance(v0, str) else v0 + (v1 - v0) * (year - y0) / (y1 - y0)
+    return points[-1][1]
+
+
 def burns(cargo, back, dry, dv, isp, margin, mode, retention=1.0):
+    """Propellant for one round trip: `out` for the laden leg, `back` for the return.
+
+    In mode `earth_chemical` both burns' propellant is loaded where the trip begins. In `split_chemical` each burn's
+    propellant is loaded where that burn begins. In `space_chemical` the far end supplies everything: the return
+    carries the propellant of the next outward burn, at a handling loss.
+    """
     k = math.expm1(dv / (isp * STANDARD_GRAVITY))
+    if mode == 'split_chemical':
+        a = (cargo + dry) * k * margin
+        b = (dry + back) * k * margin
+        return dict(out=a, back=b, tank=max(a, b), burned=a + b, space_supply=b / retention)
     if mode == 'earth_chemical':
         b = (dry + back) * k
         a = (cargo + dry + b) * k
@@ -41,17 +68,56 @@ def ferry(cargo, back, route):
     room = route['tank_limit'] - empty['tank']
     if room <= 0:
         raise ValueError('Vehicle cannot carry its own return propellant')
-    n = max(cargo / route['payload'], back / route['payload'], (one['tank'] * cargo + ret['tank'] * back) / room)
+    if route['mode'] == 'split_chemical':
+        # Each leg carries its own burn alone, so the tanks limit a leg exactly as the payload does.
+        n = max(cargo, back) / route['payload']
+    else:
+        n = max(cargo / route['payload'], back / route['payload'], (one['tank'] * cargo + ret['tank'] * back) / room)
     if n <= 0:
         return dict(trips=0.0, out=0.0, back=0.0, tank=0.0, burned=0.0, space_supply=0.0)
     b = burns(cargo / n, back / n, **args)
     return dict(trips=n, **{k: v * n for k, v in b.items()})
 
-def routes(data):
+EARTH_LEGS = {'space': 'space_chemical', 'split': 'split_chemical', 'earth': 'earth_chemical'}
+
+
+def earth_route(data, year):
+    """The ferry between low Earth orbit and the depot, under the arrangement transport.earth_leg names for the year.
+
+    `space` supplies both burns from the depot, the returning ferry carrying the next outward burn's propellant
+    down to low Earth orbit. `earth` buys both burns' propellant on Earth and launches it. `split` launches the
+    outward burn's propellant and fuels the return at the depot. The founding study's ferry is sized for `space`;
+    for the others the ferry keeps its fixed mass and carries tanks for what it holds, at the same mass for each
+    kilogram stored.
+    """
+    t = data['industrial']['transport']
+    v = data['original_architecture']['peak_flows']['Earth_vehicle']
+    leg = at(t.get('earth_leg', 'space'), year)
+    if leg not in EARTH_LEGS:
+        raise ValueError('Unknown arrangement of the Earth leg: ' + str(leg))
+    route = dict(payload=t['earth_payload_kg'], dry=v['dry_kg'], dv=v['delta_v_oneway_m_s'], isp=v['Isp_s'], margin=t['propellant_margin'], mode='space_chemical', retention=data['transport']['chemical']['handling_retention'], tank_limit=v['burns']['peak_tank_contents_kg'], cycles=JULIAN_YEAR_DAYS / v['cycle_days'])
+    if leg == 'space':
+        return dict(route, leg=leg, dry_scale=1.0)
+    fixed = data['transport']['chemical']['fixed_dry_to_payload'] * route['payload']
+    per_stored = (v['dry_kg'] - fixed) / v['burns']['peak_tank_contents_kg']
+    args = {k: route[k] for k in ('dv', 'isp', 'margin', 'retention')}
+    dry = fixed
+    for _ in range(200):
+        tank = burns(route['payload'], 0.0, dry, mode=EARTH_LEGS[leg], **args)['tank']
+        closed = fixed + per_stored * tank
+        if abs(closed - dry) <= 1e-12 * closed:
+            break
+        dry = closed
+    else:
+        raise ValueError('The Earth-leg ferry does not close on its tanks')
+    return dict(route, dry=dry, mode=EARTH_LEGS[leg], tank_limit=tank, leg=leg, dry_scale=dry / v['dry_kg'])
+
+
+def routes(data, year):
     s = data['industrial']
     t = s['transport']
     v = data['original_architecture']['peak_flows']['Earth_vehicle']
-    out = {'Earth': dict(payload=t['earth_payload_kg'], dry=v['dry_kg'], dv=v['delta_v_oneway_m_s'], isp=v['Isp_s'], margin=t['propellant_margin'], mode='space_chemical', retention=data['transport']['chemical']['handling_retention'], tank_limit=v['burns']['peak_tank_contents_kg'], cycles=JULIAN_YEAR_DAYS / v['cycle_days'])}
+    out = {'Earth': earth_route(data, year)}
     for name, prefix in [('Moon', 'lander'), ('source', 'nea')]:
         payload = t[prefix + '_payload_kg']
         dry = payload * t[prefix + '_dry_to_payload']
@@ -312,12 +378,16 @@ def physical(data, row, f, bank=None, measures=None):
     imports['leo'] += flights * (bus + shield + deorbit) - f.get('capsule_purchases_kg', 0.0)
     recycle_back = f['recycled']['depot'] + f['recycled']['leo']
     leo_recycle = f['recycled']['leo']
-    r = routes(data)
+    r = routes(data, row['year'])
     earth = ferry(imports['surface'] + imports['depot'] + imports['source'] + leo_recycle, packed + local['leo'], r['Earth'])
     moon = ferry(imports['surface'] + water + air, packed - source_packed, r['Moon'])
     nitrogen = air * z['air_nitrogen_mass_fraction']
     oxygen = air - nitrogen
-    depot_water = moon['burned'] + oxygen + earth['space_supply'] + fuel
+    # The Earth leg's propellant: what the depot supplies from asteroid water, and what is bought on Earth and launched.
+    leg = r['Earth']['leg']
+    earth_space = 0.0 if leg == 'earth' else earth['space_supply']
+    earth_launched = earth['burned'] if leg == 'earth' else earth['out'] if leg == 'split' else 0.0
+    depot_water = moon['burned'] + oxygen + earth_space + fuel
     source_cargo = water + nitrogen + depot_water + local['depot'] + local['leo'] + source_packed
     source = ferry(source_cargo, imports['source'] + recycle_back, r['source'])
     source_water = water + depot_water + source['burned']
@@ -332,8 +402,8 @@ def physical(data, row, f, bank=None, measures=None):
     ground = d['occupied_W'] * ps + lunar_W * s['economics']['capacity_margin'] / l['process_availability']
     operating_material = (resident_consumables + visitor_consumables + research_consumables + industrial_consumables + surface_alloy + source_alloy + earthfeed) * s['prices']['other_special_USD2026_kg']
     capsule_op = flights * (shield * s['prices']['spacecraft_USD2026_kg'] + deorbit * t['earth_propellant_USD2026_kg']) + packed * rr['Earth_ground_service_USD2026_per_payload_kg']
-    LEO = sum(imports.values())
-    out = dict(lunar_raw_kg_year=raw, lunar_bulk_kg_year=bulk, lunar_metal_kg_year=metal, lunar_recycled_bulk_kg_year=rebulk, lunar_virgin_metal_kg_year=freshmetal, lunar_handling_kg_year=handling, lunar_process_W=lunar_W, source_feed_kg_year=feed, source_water_kg_year=source_water, source_nitrogen_kg_year=nitrogen, source_virgin_metal_kg_year=source_virgin, source_metal_kg_year=source_metal, source_process_W=source_W, source_heat_W=heat, source_feed_process_W=feed * z['ore_kWh_kg'] * 1000 / HOURS, source_product_refining_W=(nitrogen * z['nitrogen_kWh_kg'] + source_metal * z['metal_refining_and_fabrication_kWh_kg']) * 1000 / HOURS, depot_W=depot_W, depot_water_kg_year=depot_water, ground_firm_W=ground, Earth=earth, Moon=moon, source=source, source_cargo_kg_year=source_cargo, source_cargo_breakdown_kg_year=dict(resident_and_guest_water=water, nitrogen=nitrogen, depot_water=depot_water, local_offsite_structures=local['depot'] + local['leo'], source_exports=source_packed), depot_water_breakdown_kg_year=dict(lunar_ferry_fuel=moon['burned'], oxygen_makeup=oxygen, Earth_ferry_fuel=earth['space_supply'], external_fuel_sales=fuel), source_water_breakdown_kg_year=dict(resident_and_guest_water=water, depot_water=depot_water, source_ferry_fuel=source['burned']), source_retained_tails_kg_year=feed - source_water - nitrogen - source_virgin, LEO_kg_year=LEO, imports_by_destination_kg_year=imports, local_fabrication_by_destination_kg_year=local, recycled_inventory_kg=bank, factory_floor_new_m2=newfloor, construction_floor_m2=data['settlement']['production_demand']['floor'] * gs + newfloor, operating_material_USD2026=operating_material, capsule_operations_USD2026=capsule_op, Earth_launch_USD2026=LEO * t['LEO_USD2026_kg'], resource_provision_USD2026=raw * s['economics']['local_restoration_USD2026_kg_feed'] + feed * rv['finance']['source_transition_USD2026_per_kg_feed'])
+    LEO = sum(imports.values()) + earth_launched
+    out = dict(lunar_raw_kg_year=raw, lunar_bulk_kg_year=bulk, lunar_metal_kg_year=metal, lunar_recycled_bulk_kg_year=rebulk, lunar_virgin_metal_kg_year=freshmetal, lunar_handling_kg_year=handling, lunar_process_W=lunar_W, source_feed_kg_year=feed, source_water_kg_year=source_water, source_nitrogen_kg_year=nitrogen, source_virgin_metal_kg_year=source_virgin, source_metal_kg_year=source_metal, source_process_W=source_W, source_heat_W=heat, source_feed_process_W=feed * z['ore_kWh_kg'] * 1000 / HOURS, source_product_refining_W=(nitrogen * z['nitrogen_kWh_kg'] + source_metal * z['metal_refining_and_fabrication_kWh_kg']) * 1000 / HOURS, depot_W=depot_W, depot_water_kg_year=depot_water, ground_firm_W=ground, Earth=earth, Moon=moon, source=source, source_cargo_kg_year=source_cargo, source_cargo_breakdown_kg_year=dict(resident_and_guest_water=water, nitrogen=nitrogen, depot_water=depot_water, local_offsite_structures=local['depot'] + local['leo'], source_exports=source_packed), depot_water_breakdown_kg_year=dict(lunar_ferry_fuel=moon['burned'], oxygen_makeup=oxygen, Earth_ferry_fuel=earth_space, external_fuel_sales=fuel), source_water_breakdown_kg_year=dict(resident_and_guest_water=water, depot_water=depot_water, source_ferry_fuel=source['burned']), source_retained_tails_kg_year=feed - source_water - nitrogen - source_virgin, LEO_kg_year=LEO, imports_by_destination_kg_year=imports, local_fabrication_by_destination_kg_year=local, recycled_inventory_kg=bank, factory_floor_new_m2=newfloor, construction_floor_m2=data['settlement']['production_demand']['floor'] * gs + newfloor, operating_material_USD2026=operating_material, capsule_operations_USD2026=capsule_op, Earth_launch_USD2026=LEO * at(t['LEO_USD2026_kg'], row['year']) + earth_launched * t['earth_propellant_USD2026_kg'], Earth_leg_propellant_launched_kg_year=earth_launched, resource_provision_USD2026=raw * s['economics']['local_restoration_USD2026_kg_feed'] + feed * rv['finance']['source_transition_USD2026_per_kg_feed'])
     if measures is not None:
         measures.after_physical(data, row, f, out)
     return out
@@ -374,18 +444,21 @@ def requirements(data, row, f, measures=None):
         out[pre + '_chemistry'] = chemical_W * margin * z['chemistry_hardware_kg_W']
         out[pre + '_solar'] = W * margin / p['end_of_life_factor'] / (p['source_solar_flux_fraction'] if pre == 'source' else 1) / p['space_system_W_kg']
         out[pre + '_radiators'] = heat * margin / radflux * p['radiator_kg_m2']
-    r = routes(data)
+    r = routes(data, row['year'])
     counts = {name: math.ceil(f[name]['trips'] * margin / (a['cycles'] * t['fleet_availability'])) for name, a in r.items()}
     out['lunar_landers'] = counts['Moon'] * r['Moon']['dry']
     out['asteroid_tugs'] = counts['source'] * r['source']['dry']
     for name, a in original['assets'].items():
         if name.startswith('Earth_'):
-            out[name] = counts['Earth'] * a['mass_kg'] / original['engineering']['counts']['Earth_route_ships']
+            out[name] = counts['Earth'] * a['mass_kg'] / original['engineering']['counts']['Earth_route_ships'] * r['Earth']['dry_scale']
     out['depots_and_orbital_workshops'] = (f['source_cargo_kg_year'] + f['Moon']['burned']) * t['depot_inventory_years'] * t['tank_dry_to_contents']
-    for name, driver in [('LEO_route_tanks', 'out'), ('LEO_route_storage_controls', 'out'), ('depot_route_storage_controls', 'space_supply')]:
+    # Propellant held in low Earth orbit and at the depot for the Earth leg, by where each burn is fuelled.
+    leg = r['Earth']['leg']
+    held = dict(LEO=f['Earth']['burned'] if leg == 'earth' else f['Earth']['out'], depot=0.0 if leg == 'earth' else f['Earth']['space_supply'])
+    for name, place in [('LEO_route_tanks', 'LEO'), ('LEO_route_storage_controls', 'LEO'), ('depot_route_storage_controls', 'depot')]:
         peak = original['peak_flows']
-        oldstock = peak['Earth_route_LEO_inventory_kg'] if driver == 'out' else peak['Earth_route_depot_inventory_kg']
-        out[name] = original['assets'][name]['mass_kg'] * f['Earth'][driver] * data['transport']['depots']['inventory_years'] / oldstock
+        oldstock = peak['Earth_route_LEO_inventory_kg'] if place == 'LEO' else peak['Earth_route_depot_inventory_kg']
+        out[name] = original['assets'][name]['mass_kg'] * held[place] * data['transport']['depots']['inventory_years'] / oldstock
     surface = sum((v for n, v in out.items() if n in data['templates'] and data['templates'][n]['owner'] == 'industry' and (data['templates'][n]['destination'] == 'surface')))
     out['industrial_civil_bulk'] = surface * l['infrastructure_bulk_per_hardware_kg']
     out['industrial_civil_metal'] = surface * l['infrastructure_metal_per_hardware_kg'] + area * d['radiator_metal_kg_m2']
@@ -404,7 +477,8 @@ def seed_stock(data, first, bootstrap_years=8, measures=None):
     base = residential_targets(data, first['population'])
     base.update(commercial_targets(data, first))
     seed = dict(base)
-    row = dict(first, new_residential_people=first['population'] / bootstrap_years, population=first['population'] / 2)
+    # The founding deployment's average year stands at the middle of its years, for coefficients that follow a schedule.
+    row = dict(first, new_residential_people=first['population'] / bootstrap_years, population=first['population'] / 2, year=first['year'] - bootstrap_years // 2)
 
     def demands(stock):
         f = blank_flow()
@@ -593,7 +667,7 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
                 drivers[n] = drivers.get(n, 0.0) + ev['mass_kg'] / 2 * unit * I
         tug_import = sum((ev['mass_kg'] / 2 for ev in yearly_events if ev['asset'] == 'asteroid_tugs' and ev['component'] == 'active'))
         physical_row['source_tug_component_import_kg_year'] = tug_import
-        physical_row['source_tug_count'] = stocks[y].get('asteroid_tugs', 0.0) / routes(data)['source']['dry']
+        physical_row['source_tug_count'] = stocks[y].get('asteroid_tugs', 0.0) / routes(data, y)['source']['dry']
         cumulative_lunar += physical_row['lunar_raw_kg_year']
         cumulative_source += physical_row['source_feed_kg_year']
         if y <= end:

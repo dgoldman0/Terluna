@@ -113,3 +113,39 @@ def test_an_unknown_scenario_ramp_or_case_is_refused():
         run.orders(dict(case, ramp='stepwise'))
     with pytest.raises(ValueError):
         run.cases(['first_pass:unlisted'])
+
+
+def test_a_case_changes_coefficients_in_its_own_copy_and_a_misspelt_path_is_refused():
+    shared = run.sources()['engineering']
+    before = json.dumps(shared, sort_keys=True)
+    case = run.cases(['first_pass:diversified:constant_growth:launch_100:earth_leg_split_to_20'])[0]
+    changed = run.engineering(case)
+    assert changed['industrial']['transport']['LEO_USD2026_kg'] == 100
+    assert changed['industrial']['transport']['earth_leg'] == {'by_year': [[0, 'split'], [20, 'space']]}
+    assert json.dumps(shared, sort_keys=True) == before and shared['industrial']['transport']['earth_leg'] == 'space'
+    assert run.engineering(run.cases(['first_pass:diversified'])[0]) is shared
+    with pytest.raises(ValueError):
+        run.engineering(dict(case, engineering={'industrial.transport.earth_legs': 'split'}))
+
+
+@pytest.mark.parametrize('name', sorted(CASES))
+def test_traffic_counts_the_launches_and_the_earth_legs_propellant_by_arrangement(name):
+    case = CASES[name]
+    leg = case.get('engineering', {}).get('industrial.transport.earth_leg', 'space')
+    for horizon in ('100', '200', '220'):
+        at = case['traffic'][horizon]
+        assert at['launches_year'] == pytest.approx(at['launched_kg_year'] / 100000.)
+        assert (at['Earth_leg_propellant_launched_kg_year'] > 0) == (leg == 'split')
+        assert at['Earth_leg_propellant_launched_kg_year'] < at['launched_kg_year']
+
+
+@pytest.mark.parametrize('portfolio', ['diversified', 'services'])
+@pytest.mark.parametrize('price', ['', ':launch_100', ':launch_50'])
+def test_fuelling_the_first_years_from_earth_lowers_the_opening_funding_and_ends_on_the_space_arrangement(portfolio, price):
+    base = 'first_pass:%s:constant_growth%s' % (portfolio, price)
+    space, switched, split = CASES[base], CASES[base + ':earth_leg_split_to_20'], CASES[base + ':earth_leg_split']
+    funding = lambda c: next(x['initial_funding_USD2041'] for x in c['checkpoints'] if x['financing'] == 'U_credit' and x['horizon'] == 200)
+    assert funding(switched) == funding(split) < 0.6 * funding(space)
+    assert switched['traffic']['200']['launched_kg_year'] == pytest.approx(space['traffic']['200']['launched_kg_year'], rel=1e-3)
+    assert split['traffic']['200']['launched_kg_year'] > 1.5 * space['traffic']['200']['launched_kg_year']
+    assert split['material_drawn']['200']['asteroid_feed_kg'] < switched['material_drawn']['200']['asteroid_feed_kg'] <= space['material_drawn']['200']['asteroid_feed_kg']

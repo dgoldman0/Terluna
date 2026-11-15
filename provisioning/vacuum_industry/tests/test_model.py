@@ -20,13 +20,13 @@ def data():
 def test_freight_matches_the_founding_study_controls(data, route, trips, burned):
     # Controls from the founding industrial study's trip solver (commit 146a5582) with its vehicles and tanks,
     # for 100 million kg a year outward and 20 million kg a year back.
-    got = m.ferry(1e8, 2e7, m.routes(data)[route])
+    got = m.ferry(1e8, 2e7, m.routes(data, 8)[route])
     assert got['trips'] == pytest.approx(trips, rel=1e-10)
     assert got['burned'] == pytest.approx(burned, rel=1e-10)
 
 
 def test_no_cargo_means_no_trip(data):
-    assert m.ferry(0, 0, m.routes(data)['source'])['burned'] == 0
+    assert m.ferry(0, 0, m.routes(data, 8)['source'])['burned'] == 0
 
 
 def test_the_lifetime_distribution_keeps_its_mean():
@@ -139,3 +139,83 @@ def test_measures_are_called_at_the_three_points_and_nowhere_else(data):
     assert watched == plain
     assert counted.calls['ledger'] == plain['convergence']['iterations'] + 1
     assert counted.calls['physical'] > counted.calls['requirements'] > counted.calls['ledger']
+
+
+def test_a_scheduled_coefficient_interpolates_numbers_and_steps_names():
+    price = {'by_year': [[8, 200.], [58, 100.], [108, 50.]]}
+    assert m.at(150., 30) == 150.
+    assert m.at(price, 0) == 200. and m.at(price, 8) == 200.
+    assert m.at(price, 33) == pytest.approx(150.) and m.at(price, 58) == 100.
+    assert m.at(price, 500) == 50.
+    leg = {'by_year': [[0, 'split'], [20, 'space']]}
+    assert [m.at(leg, y) for y in (0, 19, 20, 200)] == ['split', 'split', 'space', 'space']
+
+
+def with_leg(data, leg, **transport):
+    changed = deepcopy(data)
+    changed['industrial']['transport'].update(earth_leg=leg, **transport)
+    return changed
+
+
+def test_the_space_arrangement_keeps_the_founding_ferry_and_the_others_close_on_their_tanks(data):
+    v = data['original_architecture']['peak_flows']['Earth_vehicle']
+    space = m.earth_route(data, 8)
+    assert space['leg'] == 'space' and space['dry'] == v['dry_kg'] and space['dry_scale'] == 1.
+    assert space['tank_limit'] == v['burns']['peak_tank_contents_kg']
+    fixed = data['transport']['chemical']['fixed_dry_to_payload'] * space['payload']
+    per_stored = (v['dry_kg'] - fixed) / v['burns']['peak_tank_contents_kg']
+    for leg in ('split', 'earth'):
+        route = m.earth_route(with_leg(data, leg), 8)
+        assert route['dry'] == pytest.approx(fixed + per_stored * route['tank_limit'], rel=1e-10)
+        assert fixed < route['dry'] < space['dry']
+        trip = m.burns(route['payload'], 0., route['dry'], route['dv'], route['isp'], route['margin'], route['mode'], route['retention'])
+        assert trip['tank'] == pytest.approx(route['tank_limit'])
+    with pytest.raises(ValueError):
+        m.earth_route(with_leg(data, 'towed'), 8)
+
+
+def test_a_split_trip_fuels_each_burn_where_it_begins_and_is_limited_by_the_heavier_leg(data):
+    route = m.earth_route(with_leg(data, 'split'), 8)
+    k = m.math.expm1(route['dv'] / (route['isp'] * m.STANDARD_GRAVITY)) * route['margin']
+    trip = m.burns(100., 40., 30., route['dv'], route['isp'], route['margin'], 'split_chemical', route['retention'])
+    assert trip['out'] == pytest.approx(130. * k) and trip['back'] == pytest.approx(70. * k)
+    assert trip['burned'] == pytest.approx(trip['out'] + trip['back']) and trip['tank'] == max(trip['out'], trip['back'])
+    assert trip['space_supply'] == pytest.approx(trip['back'] / route['retention'])
+    outward = m.ferry(1e9, 2e8, route)
+    homeward = m.ferry(2e8, 1e9, route)
+    assert outward['trips'] == pytest.approx(1e9 / route['payload']) == homeward['trips']
+
+
+def test_each_arrangement_draws_the_earth_legs_propellant_from_where_it_says(data):
+    row = dict(year=8, population=250000., goods=5e7, new_residential_people=0.)
+    flow = m.blank_flow()
+    flow['imports']['surface'] = 2e8
+    got = {leg: m.physical(with_leg(data, leg), row, flow) for leg in ('space', 'split', 'earth')}
+    price = data['industrial']['transport']
+    for leg, p in got.items():
+        cargo = sum(p['imports_by_destination_kg_year'].values())
+        launched = p['Earth_leg_propellant_launched_kg_year']
+        assert p['LEO_kg_year'] == pytest.approx(cargo + launched)
+        assert p['Earth_launch_USD2026'] == pytest.approx(p['LEO_kg_year'] * price['LEO_USD2026_kg'] + launched * price['earth_propellant_USD2026_kg'])
+        assert sum(p['depot_water_breakdown_kg_year'].values()) == pytest.approx(p['depot_water_kg_year'])
+    assert got['space']['Earth_leg_propellant_launched_kg_year'] == 0
+    assert got['space']['depot_water_breakdown_kg_year']['Earth_ferry_fuel'] == got['space']['Earth']['space_supply']
+    assert got['split']['Earth_leg_propellant_launched_kg_year'] == got['split']['Earth']['out']
+    assert got['split']['depot_water_breakdown_kg_year']['Earth_ferry_fuel'] == got['split']['Earth']['space_supply']
+    assert got['earth']['Earth_leg_propellant_launched_kg_year'] == got['earth']['Earth']['burned']
+    assert got['earth']['depot_water_breakdown_kg_year']['Earth_ferry_fuel'] == 0
+    # Less propellant from the depot means less water to fetch and less feed to mine.
+    assert got['earth']['source_feed_kg_year'] < got['split']['source_feed_kg_year'] < got['space']['source_feed_kg_year']
+    need = {leg: m.requirements(with_leg(data, leg), row, p) for leg, p in got.items()}
+    assert need['earth']['depot_route_storage_controls'] == 0 < need['split']['depot_route_storage_controls'] < need['space']['depot_route_storage_controls']
+    assert need['earth']['asteroid_tugs'] < need['split']['asteroid_tugs'] < need['space']['asteroid_tugs']
+
+
+def test_the_arrangement_and_the_launch_price_can_change_with_the_year(data):
+    staged = with_leg(data, {'by_year': [[0, 'split'], [20, 'space']]}, LEO_USD2026_kg={'by_year': [[8, 200.], [108, 100.]]})
+    early = dict(year=12, population=12500., new_residential_people=0.)
+    late = dict(early, year=108)
+    a, b = m.physical(staged, early, m.blank_flow()), m.physical(staged, late, m.blank_flow())
+    assert a['Earth_leg_propellant_launched_kg_year'] > 0 == b['Earth_leg_propellant_launched_kg_year']
+    assert m.routes(staged, 12)['Earth']['leg'] == 'split' and m.routes(staged, 20)['Earth']['leg'] == 'space'
+    assert b['Earth_launch_USD2026'] == pytest.approx(b['LEO_kg_year'] * 100.)

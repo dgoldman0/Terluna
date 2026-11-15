@@ -54,7 +54,7 @@ def price_opening_route_fuel(case, engineering):
     ships = math.ceil(case['annual'][0]['asset_stocks_kg']['Earth_hull_tanks'] / hull_per_ship - 1e-10)
     fuel = ships * fraction * v['burns']['ascent_kg']
     purchase = fuel * t['earth_propellant_USD2026_kg'] * I
-    launch = fuel * t['LEO_USD2026_kg'] * I
+    launch = fuel * model.at(t['LEO_USD2026_kg'], case['annual'][0].get('year', 0)) * I
     seed['priced_initial_route_fuel'] = dict(
         Earth_route_ship_count=ships, seed_fleet_fraction=fraction, fuel_to_LEO_kg=fuel,
         external_propellant_purchase_USD2041=purchase, Earth_launch_USD2041=launch, total_USD2041=purchase + launch,

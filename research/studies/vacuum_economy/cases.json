@@ -1,6 +1,6 @@
 {
   "schema": "terluna.research.vacuum-economy-cases/1",
-  "reading_rule": "Each case names a scenario of demand, a population ramp from programme.json and the recovery measures of the industry. In the scenario first_pass the portfolio, the market and its growth are those of the staged studies' order book: nine export portfolios at their strongest market, with real demand growing 0.5% a year, and with material recovery and equipment refurbishment applied. Each portfolio runs on the staged schedule, which reproduces the staged appraisal, and on the programme's two ramps.",
+  "reading_rule": "Each case names a scenario of demand, a population ramp from programme.json and the recovery measures of the industry. In the scenario first_pass the portfolio, the market and its growth are those of the staged studies' order book: nine export portfolios at their strongest market, with real demand growing 0.5% a year, and with material recovery and equipment refurbishment applied. Each portfolio runs on the staged schedule, which reproduces the staged appraisal, and on the programme's two ramps. A case may change engineering coefficients, each named by its path with its value, or with a schedule {\"by_year\": [[year, value], ...]}. The diversified and services portfolios on constant growth carry the arrangements of the Earth leg's propellant (made in space throughout as the staged model has it, the outward burn launched from Earth, or launched from Earth until year 20 and made in space after) at launch prices of 200, 100 and 50 dollars of 2026 a kilogram.",
   "cases": [
     {
       "name": "first_pass:raw_resource_price",
@@ -244,6 +244,272 @@
       "market": "breakthrough",
       "growth": "reference",
       "recovery": "combined"
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_100",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_100:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100,
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_100:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100,
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_50",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_50:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50,
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_50:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50,
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_100",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_100:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100,
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_100:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100,
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_50",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_50:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50,
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_50:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50,
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
     }
   ]
 }

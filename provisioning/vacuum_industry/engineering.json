@@ -531,6 +531,7 @@
       "earth_cycles_year": 8,
       "earth_dry_to_payload": 0.1,
       "earth_dv_oneway_m_s": 3800,
+      "earth_leg": "space",
       "earth_payload_kg": 200000,
       "earth_propellant_USD2026_kg": 3,
       "earth_tug_life_years": 20,

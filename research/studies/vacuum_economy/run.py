@@ -14,6 +14,7 @@ change can be measured against them; on the programme's two ramps it shows what 
 """
 from __future__ import annotations
 import argparse
+from copy import deepcopy
 from functools import lru_cache
 import hashlib
 import importlib.util
@@ -114,6 +115,44 @@ def orders(case):
     return book
 
 
+def engineering(case):
+    """The engineering coefficients for one case: the model's own, with the changes the case states.
+
+    A change names a coefficient by its path, as in `industrial.transport.earth_leg`, and gives its value. The
+    coefficient must exist, so that a misspelt path fails where it is read.
+    """
+    data = sources()['engineering']
+    changes = case.get('engineering')
+    if not changes:
+        return data
+    data = deepcopy(data)
+    for path, value in changes.items():
+        *parents, leaf = path.split('.')
+        node = data
+        for key in parents:
+            node = node[key]
+        if leaf not in node:
+            raise ValueError('The engineering coefficients hold no ' + path)
+        node[leaf] = value
+    return data
+
+
+def traffic(physical, coefficients, horizons):
+    """The flights of the year of each horizon: launches from Earth and the pads they imply, and the trips of each route."""
+    transport = coefficients['industrial']['transport']
+    rows = {row['year']: row['physical'] for row in physical['annual']}
+    out = {}
+    for h in horizons:
+        year = rows[h]
+        launches = year['LEO_kg_year'] / transport['launch_payload_kg']
+        out[str(h)] = dict(launched_kg_year=year['LEO_kg_year'], launches_year=launches,
+                           launch_pads=launches / transport['launches_per_pad_year'],
+                           Earth_leg_propellant_launched_kg_year=year['Earth_leg_propellant_launched_kg_year'],
+                           ferry_trips_year=year['Earth']['trips'], lunar_landings_year=year['Moon']['trips'],
+                           source_tug_trips_year=year['source']['trips'])
+    return out
+
+
 def periods_account(book, physical, path, financed, money, periods):
     """Receipts by sector and costs by category in each period, undiscounted, with the share of costs paid to Earth."""
     account = revised.stratification(book, physical, path, financed, money, periods)['periods']
@@ -151,7 +190,8 @@ def solve(case):
     s = sources()
     money = dict(s['money'], horizons=s['programme']['horizons'])
     book = orders(case)
-    physical, loops = industry.build(s['engineering'], s['recovery'], book, case['recovery'])
+    coefficients = engineering(case)
+    physical, loops = industry.build(coefficients, s['recovery'], book, case['recovery'])
     record = dict(case, convergence=physical['convergence'], first_capacity_shortfall=physical['first_capacity_shortfall'])
     if not revised.valid(physical):
         return dict(record, status='physical_requirements_unresolved')
@@ -170,7 +210,7 @@ def solve(case):
                 checkpoints=[checkpoint(revised.measures(path, financed[mode], money, horizon))
                              for mode in FINANCING for horizon in money['horizons']],
                 periods=periods_account(book, physical, path, financed['U_credit'], money, s['periods']),
-                material_drawn=drawn)
+                material_drawn=drawn, traffic=traffic(physical, coefficients, money['horizons']))
 
 
 def cases(names=None):
@@ -203,7 +243,10 @@ def product(selected):
                              'use the financing in U credit and are undiscounted; costs paid to Earth are imported '
                              'machinery and its replacement, launch and imported materials, and outside services; '
                              'the period of the founding deployment gives none, because that deployment is one amount. '
-                             'Material drawn is cumulative from year zero.',
+                             'Material drawn is cumulative from year zero. Traffic is for the year of each horizon: the mass launched '
+                             'from Earth, cargo and any propellant for the Earth leg together, the launches that carry it at the '
+                             'stated payload and the pads those launches need at the stated launches a pad a year, and the round '
+                             'trips of the ferries, the lunar landers and the tugs to the sources.',
                 cases=records)
 
 
