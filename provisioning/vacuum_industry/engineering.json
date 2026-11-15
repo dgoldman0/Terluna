@@ -253,6 +253,13 @@
       "local_bulk_value_USD2026_kg": 1,
       "local_fabrication_finish_kWh_kg": 10,
       "local_fabrication_value_USD2026_kg": 30,
+      "local_working_parts": {
+        "excluded_assets": [
+          "return_capsule_buses"
+        ],
+        "labour_fraction_of_import_price": 0.5,
+        "share": 0.0
+      },
       "process_consumables_fraction_of_imported_renewal": 0.05,
       "qualification_capital_USD2026": 10000000000,
       "qualification_import_hardware_kg": 5000000,

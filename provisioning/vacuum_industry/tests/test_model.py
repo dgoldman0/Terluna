@@ -219,3 +219,59 @@ def test_the_arrangement_and_the_launch_price_can_change_with_the_year(data):
     assert a['Earth_leg_propellant_launched_kg_year'] > 0 == b['Earth_leg_propellant_launched_kg_year']
     assert m.routes(staged, 12)['Earth']['leg'] == 'split' and m.routes(staged, 20)['Earth']['leg'] == 'space'
     assert b['Earth_launch_USD2026'] == pytest.approx(b['LEO_kg_year'] * 100.)
+
+
+def with_working_parts(data, **stated):
+    changed = deepcopy(data)
+    changed['economy']['production']['local_working_parts'].update(stated)
+    return changed
+
+
+def test_a_locally_made_share_of_working_parts_moves_mass_and_money_from_imports_to_local_work(data):
+    rows = [dict(year=y, population=0.) for y in range(8, 20)]
+    targets = {r['year']: ({'source_computer': 100., 'return_capsule_buses': 40.} if r['year'] == 10 else {}) for r in rows}
+    cats = m.catalogue(data)
+    price = cats['source_computer']['price']
+    bought, _, plain = m.cohort_ledger(data, rows, targets, {})
+    half = with_working_parts(data, share=0.5, labour_fraction_of_import_price=0.2)
+    made, _, events = m.cohort_ledger(half, rows, targets, {})
+    for year in (8, 9):
+        assert made[year]['imports']['source'] == pytest.approx(bought[year]['imports']['source'] / 2)
+        assert made[year]['local']['source'] == pytest.approx(25.) and bought[year]['local']['source'] == 0
+        assert made[year]['external_capital'] == pytest.approx(bought[year]['external_capital'] - 25. * price)
+        assert made[year]['local_working_capital'] == pytest.approx(25. * price * 0.2)
+        assert made[year]['local_working_labour_if_staffed'] == pytest.approx(50. * 0.5 * price * 0.2)
+        # The capsules that return goods to Earth are bought there whatever the share.
+        assert made[year]['imports']['leo'] == bought[year]['imports']['leo'] == pytest.approx(20.)
+    by = {e['asset']: e for e in events}
+    assert by['source_computer']['locally_made_share'] == 0.5 and by['return_capsule_buses']['locally_made_share'] == 0
+    assert all(e['locally_made_share'] == 0 for e in plain)
+
+
+def test_the_staffed_part_scales_the_share_made_and_leaves_the_labour_of_the_full_share_as_it_was(data):
+    rows = [dict(year=y, population=0.) for y in range(8, 20)]
+    targets = {r['year']: ({'source_computer': 100.} if r['year'] == 10 else {}) for r in rows}
+    full, _, _ = m.cohort_ledger(with_working_parts(data, share=0.6, labour_fraction_of_import_price=0.2), rows, targets, {})
+    part, _, events = m.cohort_ledger(with_working_parts(data, share=0.6, staffed=0.25, labour_fraction_of_import_price=0.2), rows, targets, {})
+    assert events[0]['locally_made_share'] == pytest.approx(0.15)
+    assert part[8]['local']['source'] == pytest.approx(full[8]['local']['source'] / 4)
+    assert part[8]['local_working_labour_if_staffed'] == full[8]['local_working_labour_if_staffed'] > 0
+    with pytest.raises(ValueError):
+        m.cohort_ledger(with_working_parts(data, share=1.4), rows, targets, {})
+
+
+def test_local_working_parts_are_paid_as_resident_labour_and_the_accounts_still_close(data):
+    rows = [dict(year=y, population=12500. * 1.033**(y - 8), new_residential_people=500., goods=1e5, compute=1e6) for y in range(8, 30)]
+    bought = m.solve(data, rows, max_iterations=50)
+    made = m.solve(with_working_parts(data, share={'by_year': [[8, 0.], [18, 0.5]]}, labour_fraction_of_import_price=0.1), rows, max_iterations=50)
+    wage = data['industrial']['economics']['loaded_staff_USD2026_year'] * data['normalization']['USD2026_to_USD2041']
+    for before, after in zip(bought['annual'], made['annual']):
+        cash = after['cash']
+        assert abs(cash['accounting_residual_USD2041']) < .02
+        assert before['working_parts_jobs'] == 0 and before['cash']['operating_local_replacement_USD2041'] == 0
+        assert after['core_resident_jobs'] * wage == pytest.approx(cash['resident_payroll_USD2041'])
+        assert cash['operating_local_replacement_USD2041'] >= 0
+    late = [(b, a) for b, a in zip(bought['annual'], made['annual']) if a['year'] >= 22]
+    assert all(a['working_parts_jobs'] > 0 for _, a in late)
+    assert sum(a['cash']['operating_external_replacement_USD2041'] for _, a in late) < sum(b['cash']['operating_external_replacement_USD2041'] for b, _ in late)
+    assert sum(a['physical']['LEO_kg_year'] for _, a in late) < sum(b['physical']['LEO_kg_year'] for b, _ in late)

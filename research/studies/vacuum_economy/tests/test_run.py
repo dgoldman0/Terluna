@@ -149,3 +149,27 @@ def test_fuelling_the_first_years_from_earth_lowers_the_opening_funding_and_ends
     assert switched['traffic']['200']['launched_kg_year'] == pytest.approx(space['traffic']['200']['launched_kg_year'], rel=1e-3)
     assert split['traffic']['200']['launched_kg_year'] > 1.5 * space['traffic']['200']['launched_kg_year']
     assert split['material_drawn']['200']['asteroid_feed_kg'] < switched['material_drawn']['200']['asteroid_feed_kg'] <= space['material_drawn']['200']['asteroid_feed_kg']
+
+
+@pytest.mark.parametrize('name', sorted(CASES))
+def test_the_workforce_record_shows_working_parts_made_only_where_a_case_asks_for_them(name):
+    case = CASES[name]
+    asked = 'economy.production.local_working_parts.share' in case.get('engineering', {})
+    for horizon in ('100', '200', '220'):
+        at = case['workforce'][horizon]
+        assert 0 < at['share_of_workforce_in_use'] <= 1 + 1e-9 and at['jobs'] > at['working_parts_jobs'] >= 0
+        assert (at['working_parts_jobs'] > 0) == asked == (at['working_parts_made_share'] > 0)
+        assert at['working_parts_made_share'] <= 0.78 + 1e-12
+
+
+@pytest.mark.parametrize('portfolio', ['diversified', 'services'])
+def test_making_working_parts_in_place_lowers_what_is_paid_to_earth_and_launched_and_cheaper_labour_makes_more(portfolio):
+    base = CASES['first_pass:%s:constant_growth' % portfolio]
+    made = [CASES['first_pass:%s:constant_growth:local_parts%s' % (portfolio, s)] for s in ('_labour_50', '', '_labour_10')]
+    paid = lambda c: next(p['paid_to_Earth_share'] for p in c['periods'] if p['first_year'] == 151)
+    value = lambda c: next(x['funder_cash_NPV_USD2041']['0.03'] for x in c['checkpoints'] if x['financing'] == 'U_credit' and x['horizon'] == 200)
+    series = [base, *made]
+    assert all(paid(a) > paid(b) for a, b in zip(series, series[1:]))
+    assert all(value(a) < value(b) for a, b in zip(series, series[1:]))
+    assert all(a['traffic']['200']['launches_year'] >= b['traffic']['200']['launches_year'] for a, b in zip(series, series[1:]))
+    assert all(a['workforce']['100']['working_parts_made_share'] < b['workforce']['100']['working_parts_made_share'] for a, b in zip(made, made[1:]))

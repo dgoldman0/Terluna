@@ -69,8 +69,61 @@ def price_opening_route_fuel(case, engineering):
     return case
 
 
+# The part of the workforce that the staffing of locally made working parts may fill, and the passes it may take.
+STAFFING_MARGIN = 0.97
+STAFFING_PASSES = 8
+
+
 def build(data, spec, book, measures='combined', residual_water_allowance=True):
-    """Solve the industry for one book of orders and return (the industry by year, the account of its loops)."""
+    """Solve the industry for one book of orders and return (the industry by year, the account of its loops).
+
+    Where the coefficients give a share of working parts the industry is able to make and leave its staffing open,
+    the staffing is found here: the industry is solved with every working part bought, the residents' free hands in
+    each year are counted, and the share is staffed as far as they reach, year by year, until every year's jobs fit.
+    """
+    stated = data['economy']['production'].get('local_working_parts', {})
+    working = model.local_working_parts(data)
+    if working['share'] == 0.0 or 'staffed' in stated:
+        physical, loops, _ = solve_once(data, spec, book, measures, residual_water_allowance)
+        return physical, loops
+    wage = data['industrial']['economics']['loaded_staff_USD2026_year']
+    years = [row['year'] for row in book['annual']]
+
+    def with_staffing(staffed):
+        changed = deepcopy(data)
+        changed['economy']['production']['local_working_parts']['staffed'] = {'by_year': [[y, staffed[y]] for y in years]}
+        return changed
+
+    def free_hands(physical, e):
+        """For each year, the part of the able share that the residents not otherwise employed can staff."""
+        rows = {r['year']: r for r in physical['annual']}
+        reach = {}
+        for y in years:
+            r = rows[y]
+            room = STAFFING_MARGIN * model.WORKFORCE_SHARE * r['population'] - (r['technical_resident_jobs'] - r['working_parts_jobs'])
+            wanted = e.flows[y]['local_working_labour_if_staffed'] / wage
+            reach[y] = 1. if wanted <= 0 else max(0., min(1., room / wanted))
+        # An order is worked in its own year and the next, so both years' hands must reach.
+        return {y: min(reach[y], reach.get(y + 1, reach[y])) for y in years}
+
+    staffed = {y: 0. for y in years}
+    physical, loops, e = solve_once(with_staffing(staffed), spec, book, measures, residual_water_allowance)
+    staffed = free_hands(physical, e)
+    for passes in range(1, STAFFING_PASSES + 1):
+        physical, loops, e = solve_once(with_staffing(staffed), spec, book, measures, residual_water_allowance)
+        over = [r['year'] for r in physical['annual'] if r['working_parts_jobs'] > 0 and r['capacity_summary']['resident_workforce'] > 1 + 1e-9]
+        if not over:
+            break
+        tighter = free_hands(physical, e)
+        # free_hands measures against the full able share; only ever lower a year's staffing.
+        staffed = {y: min(staffed[y], tighter[y]) for y in years}
+    loops['local_working_parts'] = dict(staffed_by_order_year={str(y): staffed[y] for y in years}, staffing_passes=passes,
+                                        years_over_the_workforce=over)
+    return physical, loops
+
+
+def solve_once(data, spec, book, measures, residual_water_allowance):
+    """One solution of the industry with the coefficients as given: (the industry by year, the account, the measures)."""
     closure, refurbishment = recovery.OPTIONS[measures]
     e = recovery.Recovery(spec, closure, refurbishment, residual_water_allowance)
     configured = e.configure(data)
@@ -95,7 +148,7 @@ def build(data, spec, book, measures='combined', residual_water_allowance=True):
             c['resident_payroll_USD2041'] += extra_payroll
             c['operating_local_payroll_USD2041'] += extra_payroll
             c['operating_total_USD2041'] += extra_payroll
-            row['capacity_summary']['resident_workforce'] = row['technical_resident_jobs'] / max(1., row['population'] * .4)
+            row['capacity_summary']['resident_workforce'] = row['technical_resident_jobs'] / max(1., row['population'] * model.WORKFORCE_SHARE)
             row['maximum_capacity_use'] = max(row['maximum_capacity_use'], row['capacity_summary']['resident_workforce'])
             if row['maximum_capacity_use'] > 1 + 1e-6:
                 row['feasible'] = False
@@ -106,7 +159,7 @@ def build(data, spec, book, measures='combined', residual_water_allowance=True):
             for ev in result['component_orders']:
                 if ev['component'] == 'active' and ev['order_year'] in (y, y - 1):
                     n = ev['asset']
-                    drivers[n] = drivers.get(n, 0.) + ev.get('new_imported_mass_kg', ev['mass_kg']) / 2 * cats[n]['price'] * I
+                    drivers[n] = drivers.get(n, 0.) + ev.get('new_imported_mass_kg', ev['mass_kg'] * (1 - ev['locally_made_share'])) / 2 * cats[n]['price'] * I
             row['top_imported_component_purchases_USD2041'] = dict(sorted(drivers.items(), key=lambda kv: kv[1], reverse=True)[:8])
             row['direct_refurbishment_jobs'] = extra_jobs
             row['direct_refurbishment_payroll_USD2041'] = extra_payroll
@@ -150,4 +203,4 @@ def build(data, spec, book, measures='combined', residual_water_allowance=True):
     for key in ('portfolio', 'market_growth_name'):
         if key in book:
             loops[key] = book[key]
-    return before, loops
+    return before, loops, e

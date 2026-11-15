@@ -656,6 +656,26 @@
      "lunar_landings_year": 185373.7904307959,
      "source_tug_trips_year": 7813.795793715006
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 18537.333396188897,
+     "share_of_workforce_in_use": 0.20852851456631785,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 177328.61633217512,
+     "share_of_workforce_in_use": 0.06853768044662271,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 177904.6723746871,
+     "share_of_workforce_in_use": 0.06876032666006338,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -1312,6 +1332,26 @@
      "launches_year": 39178.82086220151,
      "lunar_landings_year": 185373.7904307959,
      "source_tug_trips_year": 8247.934771351953
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 22537.239395316912,
+     "share_of_workforce_in_use": 0.2535238997480156,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 294399.774140406,
+     "share_of_workforce_in_use": 0.11378579532700032,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 295182.6263480135,
+     "share_of_workforce_in_use": 0.11408836845677331,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -1970,6 +2010,26 @@
      "launches_year": 77120.12288124413,
      "lunar_landings_year": 254852.85433430984,
      "source_tug_trips_year": 11650.221402045492
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 36129.90783329978,
+     "share_of_workforce_in_use": 0.4064293310625205,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 520565.08676057623,
+     "share_of_workforce_in_use": 0.20119890577182156,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 521740.45065844286,
+     "share_of_workforce_in_use": 0.20165318504668817,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -2631,6 +2691,26 @@
      "lunar_landings_year": 305291.90833009477,
      "source_tug_trips_year": 12672.855302139495
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 45656.5665305644,
+     "share_of_workforce_in_use": 0.5135957688916695,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 566034.7252751488,
+     "share_of_workforce_in_use": 0.21877296470824023,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 567418.7213214965,
+     "share_of_workforce_in_use": 0.21930788050878022,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -3287,6 +3367,26 @@
      "launches_year": 36215.346615402545,
      "lunar_landings_year": 185373.7904307959,
      "source_tug_trips_year": 8250.372998128094
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 20345.402287952762,
+     "share_of_workforce_in_use": 0.22886768159616702,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 181560.04562483844,
+     "share_of_workforce_in_use": 0.07017313193037975,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 182186.60800848363,
+     "share_of_workforce_in_use": 0.07041529889315414,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -3947,6 +4047,26 @@
      "lunar_landings_year": 185373.7904307959,
      "source_tug_trips_year": 8005.12259909452
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 37409.79625867323,
+     "share_of_workforce_in_use": 0.4208269375817311,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 283105.4940043348,
+     "share_of_workforce_in_use": 0.10942054521197851,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 283703.42575817934,
+     "share_of_workforce_in_use": 0.10965164640884975,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -4604,6 +4724,26 @@
      "launches_year": 35940.04940817172,
      "lunar_landings_year": 185373.7904307959,
      "source_tug_trips_year": 7813.795793715006
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 18537.333396188897,
+     "share_of_workforce_in_use": 0.20852851456631785,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 177328.61633217512,
+     "share_of_workforce_in_use": 0.06853768044662271,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 177904.6723746871,
+     "share_of_workforce_in_use": 0.06876032666006338,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -5264,6 +5404,26 @@
      "lunar_landings_year": 266269.18334734475,
      "source_tug_trips_year": 12065.98372773305
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 44163.00381893353,
+     "share_of_workforce_in_use": 0.49679451668286695,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 555265.5892882537,
+     "share_of_workforce_in_use": 0.21461068331100971,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 556632.4298874332,
+     "share_of_workforce_in_use": 0.21513896851475006,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -5921,6 +6081,26 @@
      "launches_year": 54835.10011192976,
      "lunar_landings_year": 224455.44513388944,
      "source_tug_trips_year": 9818.596746569023
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 56635.80698266587,
+     "share_of_workforce_in_use": 0.637102459612021,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 418445.0697761289,
+     "share_of_workforce_in_use": 0.16172942117282738,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 419404.51893947506,
+     "share_of_workforce_in_use": 0.16210024919552518,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -6580,6 +6760,26 @@
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 7755.1609245694835
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 18717.9028118408,
+     "share_of_workforce_in_use": 0.18745051107609131,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 156363.89443517392,
+     "share_of_workforce_in_use": 0.060434795307444694,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 176768.22615412244,
+     "share_of_workforce_in_use": 0.06832108910483468,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -7238,6 +7438,26 @@
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 8189.174298664385
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 22717.813634830476,
+     "share_of_workforce_in_use": 0.22750763369101887,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 273257.7021152236,
+     "share_of_workforce_in_use": 0.1056143641930254,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 294007.5882508582,
+     "share_of_workforce_in_use": 0.11363421510419437,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -7895,6 +8115,26 @@
      "lunar_landings_year": 254346.5414369089,
      "source_tug_trips_year": 11593.09075839082
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 36312.27633350334,
+     "share_of_workforce_in_use": 0.36364943367189384,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 503266.7041437094,
+     "share_of_workforce_in_use": 0.19451306428407564,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 520205.4060400722,
+     "share_of_workforce_in_use": 0.20105988882805576,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -8551,6 +8791,26 @@
      "launches_year": 83249.4703197853,
      "lunar_landings_year": 304784.1375330145,
      "source_tug_trips_year": 12618.611126023952
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 45839.881405361404,
+     "share_of_workforce_in_use": 0.45906367200852916,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 555964.8406785802,
+     "share_of_workforce_in_use": 0.21488094464464738,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 565899.3099196297,
+     "share_of_workforce_in_use": 0.21872062654333432,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -9211,6 +9471,26 @@
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 8191.982809572551
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 20524.429543966184,
+     "share_of_workforce_in_use": 0.20554198011584437,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 160147.71878102244,
+     "share_of_workforce_in_use": 0.06189724704956017,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 181018.23677098146,
+     "share_of_workforce_in_use": 0.06996372228823129,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -9868,6 +10148,26 @@
      "launches_year": 38105.327263047984,
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 7946.375106494101
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 37588.905342724574,
+     "share_of_workforce_in_use": 0.37643423988862995,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 261862.62430090932,
+     "share_of_workforce_in_use": 0.10121015567859755,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 282544.6991768543,
+     "share_of_workforce_in_use": 0.10920379747279817,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -10527,6 +10827,26 @@
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 7755.1609245694835
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 18717.9028118408,
+     "share_of_workforce_in_use": 0.18745051107609131,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 156363.89443517392,
+     "share_of_workforce_in_use": 0.060434795307444694,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 176768.22615412244,
+     "share_of_workforce_in_use": 0.06832108910483468,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -11183,6 +11503,26 @@
      "launches_year": 76822.01814720912,
      "lunar_landings_year": 265759.9463218542,
      "source_tug_trips_year": 12010.541474239057
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 44346.81183706969,
+     "share_of_workforce_in_use": 0.44411132096461875,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 541413.5885014033,
+     "share_of_workforce_in_use": 0.20925687170906776,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 555101.1446083375,
+     "share_of_workforce_in_use": 0.21454712528435638,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -11842,6 +12182,26 @@
      "lunar_landings_year": 223954.9282488064,
      "source_tug_trips_year": 9760.681444830389
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 56819.43079486607,
+     "share_of_workforce_in_use": 0.5690184124052944,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 397323.54787434574,
+     "share_of_workforce_in_use": 0.15356593268127422,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 417896.07676953706,
+     "share_of_workforce_in_use": 0.16151723484875016,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -12499,6 +12859,26 @@
      "lunar_landings_year": 185035.65272026166,
      "source_tug_trips_year": 7779.931295648291
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 36253.6387785301,
+     "share_of_workforce_in_use": 0.09829236818902937,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 175753.9036253205,
+     "share_of_workforce_in_use": 0.06792905247371016,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 176922.2800248247,
+     "share_of_workforce_in_use": 0.06838063107375174,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -13155,6 +13535,26 @@
      "launches_year": 38686.04411762821,
      "lunar_landings_year": 185035.65272026166,
      "source_tug_trips_year": 8214.09643949083
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 40253.35262383274,
+     "share_of_workforce_in_use": 0.10913655815668771,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 296464.6527343548,
+     "share_of_workforce_in_use": 0.1145838728858306,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 294191.192192658,
+     "share_of_workforce_in_use": 0.11370517820395852,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -13815,6 +14215,26 @@
      "lunar_landings_year": 254526.23674735244,
      "source_tug_trips_year": 11608.373110506554
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 53830.833727452315,
+     "share_of_workforce_in_use": 0.14594838771866014,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 534437.3043088517,
+     "share_of_workforce_in_use": 0.20656053117146228,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 520744.4455292443,
+     "share_of_workforce_in_use": 0.20126822810809494,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -14472,6 +14892,26 @@
      "lunar_landings_year": 304935.87867218384,
      "source_tug_trips_year": 12633.243599277781
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 63355.3190147076,
+     "share_of_workforce_in_use": 0.17177156702446572,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 579941.4353700958,
+     "share_of_workforce_in_use": 0.22414792151028212,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 566475.4904454477,
+     "share_of_workforce_in_use": 0.2189433208696923,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -15128,6 +15568,26 @@
      "launches_year": 35723.83812665364,
      "lunar_landings_year": 185035.65272026166,
      "source_tug_trips_year": 8216.641138448596
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 38059.95170269975,
+     "share_of_workforce_in_use": 0.103189718661673,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 183335.1052873933,
+     "share_of_workforce_in_use": 0.0708591941940021,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 181197.81989752562,
+     "share_of_workforce_in_use": 0.07003313133903916,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -15787,6 +16247,26 @@
      "lunar_landings_year": 185035.65272026166,
      "source_tug_trips_year": 7971.376531574
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 55125.68573566265,
+     "share_of_workforce_in_use": 0.14945904415562689,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 283162.70009395736,
+     "share_of_workforce_in_use": 0.10944265542053508,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 282717.5680681123,
+     "share_of_workforce_in_use": 0.10927061146522232,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -16443,6 +16923,26 @@
      "launches_year": 35446.42406012566,
      "lunar_landings_year": 185035.65272026166,
      "source_tug_trips_year": 7779.931295648291
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 36253.6387785301,
+     "share_of_workforce_in_use": 0.09829236818902937,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 175753.9036253205,
+     "share_of_workforce_in_use": 0.06792905247371016,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 176922.2800248247,
+     "share_of_workforce_in_use": 0.06838063107375174,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -17101,6 +17601,26 @@
      "launches_year": 76981.35228015858,
      "lunar_landings_year": 265922.30756678537,
      "source_tug_trips_year": 12019.488240289915
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 61863.796958402396,
+     "share_of_workforce_in_use": 0.1677276906010257,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 569058.9563502109,
+     "share_of_workforce_in_use": 0.21994183292199254,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 555614.1037113431,
+     "share_of_workforce_in_use": 0.21474538447010522,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -17761,6 +18281,26 @@
      "lunar_landings_year": 224156.5646707817,
      "source_tug_trips_year": 9790.216859844866
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 74333.97511071702,
+     "share_of_workforce_in_use": 0.20153735450312174,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 429791.32144490955,
+     "share_of_workforce_in_use": 0.1661147583351337,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 418465.7114311679,
+     "share_of_workforce_in_use": 0.1617373991923158,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -18419,6 +18959,26 @@
      "launches_year": 160075.218653121,
      "lunar_landings_year": 265759.9463218542,
      "source_tug_trips_year": 8673.071886680176
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 42322.1802626066,
+     "share_of_workforce_in_use": 0.42383564012638847,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 522615.76300027693,
+     "share_of_workforce_in_use": 0.2019914941071008,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 525785.050405538,
+     "share_of_workforce_in_use": 0.20321642673172802,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -19091,6 +19651,26 @@
      "lunar_landings_year": 265759.9463218542,
      "source_tug_trips_year": 12010.54209954488
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 44346.74667148451,
+     "share_of_workforce_in_use": 0.4441106683636105,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 541413.6639547712,
+     "share_of_workforce_in_use": 0.20925690087186688,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 555101.1402059089,
+     "share_of_workforce_in_use": 0.2145471235828135,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -19751,6 +20331,26 @@
      "lunar_landings_year": 265759.9463218542,
      "source_tug_trips_year": 12010.541474239057
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 44346.81183706969,
+     "share_of_workforce_in_use": 0.44411132096461875,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 541413.5885014033,
+     "share_of_workforce_in_use": 0.20925687170906776,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 555101.1446083375,
+     "share_of_workforce_in_use": 0.21454712528435638,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -20410,6 +21010,26 @@
      "launches_year": 160075.218653121,
      "lunar_landings_year": 265759.9463218542,
      "source_tug_trips_year": 8673.071886680176
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 42322.1802626066,
+     "share_of_workforce_in_use": 0.42383564012638847,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 522615.76300027693,
+     "share_of_workforce_in_use": 0.2019914941071008,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 525785.050405538,
+     "share_of_workforce_in_use": 0.20321642673172802,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -21083,6 +21703,26 @@
      "lunar_landings_year": 265759.9463218542,
      "source_tug_trips_year": 12010.54209954488
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 44346.74667148451,
+     "share_of_workforce_in_use": 0.4441106683636105,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 541413.6639547712,
+     "share_of_workforce_in_use": 0.20925690087186688,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 555101.1402059089,
+     "share_of_workforce_in_use": 0.2145471235828135,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -21743,6 +22383,26 @@
      "lunar_landings_year": 265759.9463218542,
      "source_tug_trips_year": 12010.541474239057
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 44346.81183706969,
+     "share_of_workforce_in_use": 0.44411132096461875,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 541413.5885014033,
+     "share_of_workforce_in_use": 0.20925687170906776,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 555101.1446083375,
+     "share_of_workforce_in_use": 0.21454712528435638,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -22402,6 +23062,26 @@
      "launches_year": 160075.218653121,
      "lunar_landings_year": 265759.9463218542,
      "source_tug_trips_year": 8673.071886680176
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 42322.1802626066,
+     "share_of_workforce_in_use": 0.42383564012638847,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 522615.76300027693,
+     "share_of_workforce_in_use": 0.2019914941071008,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 525785.050405538,
+     "share_of_workforce_in_use": 0.20321642673172802,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -23075,6 +23755,26 @@
      "lunar_landings_year": 265759.9463218542,
      "source_tug_trips_year": 12010.54209954488
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 44346.74667148451,
+     "share_of_workforce_in_use": 0.4441106683636105,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 541413.6639547712,
+     "share_of_workforce_in_use": 0.20925690087186688,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 555101.1402059089,
+     "share_of_workforce_in_use": 0.2145471235828135,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -23734,6 +24434,26 @@
      "launches_year": 94432.06995878369,
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 5679.554436653417
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 17454.83556134282,
+     "share_of_workforce_in_use": 0.17480151914524608,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 147990.3074060801,
+     "share_of_workforce_in_use": 0.057198395882114686,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 158762.2551693121,
+     "share_of_workforce_in_use": 0.0613617640335987,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -24407,6 +25127,26 @@
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 7755.161506355411
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 18718.14765988187,
+     "share_of_workforce_in_use": 0.18745296310775833,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 156363.89495206263,
+     "share_of_workforce_in_use": 0.06043479550722267,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 176768.22846423488,
+     "share_of_workforce_in_use": 0.06832108999769536,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -25068,6 +25808,26 @@
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 7755.1609245694835
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 18717.9028118408,
+     "share_of_workforce_in_use": 0.18745051107609131,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 156363.89443517392,
+     "share_of_workforce_in_use": 0.060434795307444694,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 176768.22615412244,
+     "share_of_workforce_in_use": 0.06832108910483468,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -25728,6 +26488,26 @@
      "launches_year": 94432.06995878369,
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 5679.554436653417
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 17454.83556134282,
+     "share_of_workforce_in_use": 0.17480151914524608,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 147990.3074060801,
+     "share_of_workforce_in_use": 0.057198395882114686,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 158762.2551693121,
+     "share_of_workforce_in_use": 0.0613617640335987,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -26402,6 +27182,26 @@
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 7755.161506355411
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 18718.14765988187,
+     "share_of_workforce_in_use": 0.18745296310775833,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 156363.89495206263,
+     "share_of_workforce_in_use": 0.06043479550722267,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 176768.22846423488,
+     "share_of_workforce_in_use": 0.06832108999769536,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -27063,6 +27863,26 @@
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 7755.1609245694835
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 18717.9028118408,
+     "share_of_workforce_in_use": 0.18745051107609131,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 156363.89443517392,
+     "share_of_workforce_in_use": 0.060434795307444694,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 176768.22615412244,
+     "share_of_workforce_in_use": 0.06832108910483468,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
    }
   },
   {
@@ -27723,6 +28543,26 @@
      "launches_year": 94432.06995878369,
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 5679.554436653417
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 17454.83556134282,
+     "share_of_workforce_in_use": 0.17480151914524608,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 147990.3074060801,
+     "share_of_workforce_in_use": 0.057198395882114686,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 158762.2551693121,
+     "share_of_workforce_in_use": 0.0613617640335987,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
     }
    }
   },
@@ -28397,15 +29237,4186 @@
      "lunar_landings_year": 184853.83397327844,
      "source_tug_trips_year": 7755.161506355411
     }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 18718.14765988187,
+     "share_of_workforce_in_use": 0.18745296310775833,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "200": {
+     "jobs": 156363.89495206263,
+     "share_of_workforce_in_use": 0.06043479550722267,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    },
+    "220": {
+     "jobs": 176768.22846423488,
+     "share_of_workforce_in_use": 0.06832108999769536,
+     "working_parts_jobs": 0.0,
+     "working_parts_made_share": 0.0
+    }
+   }
+  },
+  {
+   "checkpoints": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 181755796749464.72,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 56039778657883.76,
+      "0.01": 27790615306161.707,
+      "0.03": 7102780389077.242,
+      "0.07": -839146928748.584
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 1449762459909.2651,
+     "payouts_USD2041": 60281304362400.5,
+     "population": 249637.92715724694,
+     "real_IRR": 0.059452980494993146,
+     "receipts_USD2041_year": 3778328986063.389,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 68673726919457.3,
+      "0.01": 34584070989906.125,
+      "0.03": 9690748420625.605,
+      "0.07": 108497216452.18848
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 60651403938224.61,
+      "0.01": 30654001341580.652,
+      "0.03": 8528743181317.3125,
+      "0.07": -137159495418.91615
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1055998066211375.2,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 258750000860099.53,
+      "0.01": 72649364619461.67,
+      "0.03": 9951671649288.932,
+      "0.07": -814687731806.4199
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 4550107936663.937,
+     "payouts_USD2041": 262991526564616.28,
+     "population": 6468289.238000949,
+     "real_IRR": 0.06019417646839298,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 491969514576662.5,
+      "0.01": 120497406648086.9,
+      "0.03": 14369670711017.668,
+      "0.07": 142861712960.55566
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 276210604801052.8,
+      "0.01": 78448468183364.56,
+      "0.03": 11560869635000.771,
+      "0.07": -111340311689.05243
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1321754647905662.2,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 334743048207482.3,
+      "0.01": 81998623032297.34,
+      "0.03": 10103593269918.783,
+      "0.07": -814635182089.15
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 3975045908065.5996,
+     "payouts_USD2041": 338984573911999.06,
+     "population": 6468289.238000949,
+     "real_IRR": 0.060197574293424316,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 699983181555332.1,
+      "0.01": 146136432073677.12,
+      "0.03": 14787882311313.348,
+      "0.07": 143007501220.87598
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 352778714177033.94,
+      "0.01": 87878428855747.47,
+      "0.03": 11714450793681.395,
+      "0.07": -111286918845.15488
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 181755796749464.72,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 56039778657883.76,
+      "0.01": 27790615306161.707,
+      "0.03": 7102780389077.242,
+      "0.07": -839146928748.584
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 1449762459909.2651,
+     "payouts_USD2041": 60281304362400.5,
+     "population": 249637.92715724694,
+     "real_IRR": 0.059452980494993146,
+     "receipts_USD2041_year": 3778328986063.389,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 68673726919457.3,
+      "0.01": 34584070989906.125,
+      "0.03": 9690748420625.605,
+      "0.07": 108497216452.18848
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 60651403938224.61,
+      "0.01": 30654001341580.652,
+      "0.03": 8528743181317.3125,
+      "0.07": -137159495418.91615
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1055998066211375.2,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 258750000860099.53,
+      "0.01": 72649364619461.67,
+      "0.03": 9951671649288.932,
+      "0.07": -814687731806.4199
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 4550107936663.937,
+     "payouts_USD2041": 262991526564616.28,
+     "population": 6468289.238000949,
+     "real_IRR": 0.06019417646839298,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 491969514576662.5,
+      "0.01": 120497406648086.9,
+      "0.03": 14369670711017.668,
+      "0.07": 142861712960.55566
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 276210604801052.8,
+      "0.01": 78448468183364.56,
+      "0.03": 11560869635000.771,
+      "0.07": -111340311689.05243
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1321754647905662.2,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 334743048207482.3,
+      "0.01": 81998623032297.34,
+      "0.03": 10103593269918.783,
+      "0.07": -814635182089.15
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 3975045908065.5996,
+     "payouts_USD2041": 338984573911999.06,
+     "population": 6468289.238000949,
+     "real_IRR": 0.060197574293424316,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 699983181555332.1,
+      "0.01": 146136432073677.12,
+      "0.03": 14787882311313.348,
+      "0.07": 143007501220.87598
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 352778714177033.94,
+      "0.01": 87878428855747.47,
+      "0.03": 11714450793681.395,
+      "0.07": -111286918845.15488
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 181755796749464.72,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 56039778657883.76,
+      "0.01": 27790615306161.707,
+      "0.03": 7102780389077.242,
+      "0.07": -839146928748.584
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 1449762459909.2651,
+     "payouts_USD2041": 60281304362400.5,
+     "population": 249637.92715724694,
+     "real_IRR": 0.059452980494993146,
+     "receipts_USD2041_year": 3778328986063.389,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 68673726919457.3,
+      "0.01": 34584070989906.125,
+      "0.03": 9690748420625.605,
+      "0.07": 108497216452.18848
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 60651403938224.61,
+      "0.01": 30654001341580.652,
+      "0.03": 8528743181317.3125,
+      "0.07": -137159495418.91615
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1055998066211375.2,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 258750000860099.53,
+      "0.01": 72649364619461.67,
+      "0.03": 9951671649288.932,
+      "0.07": -814687731806.4199
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 4550107936663.937,
+     "payouts_USD2041": 262991526564616.28,
+     "population": 6468289.238000949,
+     "real_IRR": 0.06019417646839298,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 491969514576662.5,
+      "0.01": 120497406648086.9,
+      "0.03": 14369670711017.668,
+      "0.07": 142861712960.55566
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 276210604801052.8,
+      "0.01": 78448468183364.56,
+      "0.03": 11560869635000.771,
+      "0.07": -111340311689.05243
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1321754647905662.2,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 334743048207482.3,
+      "0.01": 81998623032297.34,
+      "0.03": 10103593269918.783,
+      "0.07": -814635182089.15
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 3975045908065.5996,
+     "payouts_USD2041": 338984573911999.06,
+     "population": 6468289.238000949,
+     "real_IRR": 0.060197574293424316,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 699983181555332.1,
+      "0.01": 146136432073677.12,
+      "0.03": 14787882311313.348,
+      "0.07": 143007501220.87598
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 352778714177033.94,
+      "0.01": 87878428855747.47,
+      "0.03": 11714450793681.395,
+      "0.07": -111286918845.15488
+     }
+    }
+   ],
+   "convergence": {
+    "converged": true,
+    "history": [
+     1.0,
+     0.8,
+     0.5,
+     0.3333333333333333,
+     0.16666666666666666,
+     0.07142857142857142,
+     7.499284811108271e-05,
+     6.563908499777505e-06,
+     9.092796931258974e-09
+    ],
+    "iterations": 9,
+    "relative_requirement_residual": 9.092796931258974e-09
+   },
+   "engineering": {
+    "economy.production.local_working_parts.labour_fraction_of_import_price": 0.25,
+    "economy.production.local_working_parts.share": {
+     "by_year": [
+      [
+       8,
+       0.0
+      ],
+      [
+       38,
+       0.78
+      ]
+     ]
+    }
+   },
+   "first_capacity_shortfall": null,
+   "growth": "reference",
+   "market": "breakthrough",
+   "material_drawn": {
+    "100": {
+     "asteroid_feed_kg": 5980234996803.288,
+     "lunar_raw_kg": 214028426344.3189,
+     "nitrogen_kg": 933757105.6912642,
+     "virgin_metal_kg": 7132159531.263475,
+     "water_kg": 418616449776.2301
+    },
+    "200": {
+     "asteroid_feed_kg": 154287852514605.9,
+     "lunar_raw_kg": 5809779620346.662,
+     "nitrogen_kg": 23365622666.177273,
+     "virgin_metal_kg": 171233969068.42682,
+     "water_kg": 10800149676022.412
+    },
+    "220": {
+     "asteroid_feed_kg": 216027342880588.22,
+     "lunar_raw_kg": 6725631691004.628,
+     "nitrogen_kg": 26653718379.397976,
+     "virgin_metal_kg": 205779440562.57202,
+     "water_kg": 15121914001641.174
+    }
+   },
+   "name": "first_pass:diversified:constant_growth:local_parts",
+   "opening": {
+    "founding_cost_USD2041": 3637524605321.409,
+    "reserve_USD2041": 201977414500.79742,
+    "working_cash_USD2041": 402023684694.5392
+   },
+   "periods": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 3637524605321.409,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 0.0,
+      "capital_external_USD2041": 0.0,
+      "capital_local_USD2041": 0.0,
+      "capital_resource_provision_USD2041": 0.0,
+      "commercial_operating_USD2041": 0.0,
+      "hotel_payroll_USD2041": 0.0,
+      "operating_external_logistics_materials_USD2041": 0.0,
+      "operating_external_replacement_USD2041": 0.0,
+      "operating_external_services_USD2041": 0.0,
+      "operating_local_payroll_USD2041": 0.0,
+      "operating_local_replacement_USD2041": 0.0,
+      "operating_resource_provision_USD2041": 0.0,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 0.0,
+      "seed_deployment_and_allowance_USD2041": 3637524605321.409
+     },
+     "distributions_USD2041": 0.0,
+     "first_year": 0,
+     "last_year": 7,
+     "paid_to_Earth_USD2041": null,
+     "paid_to_Earth_share": null,
+     "receipts_USD2041": 0.0,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 0.0,
+      "entertainment": 0.0,
+      "licenses": 0.0,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 0.0,
+      "propellant": 0.0,
+      "research": 0.0,
+      "source_products": 0.0,
+      "sports": 0.0
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 7126325865355.358,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 50859619841.148476,
+      "capital_external_USD2041": 81378048390.46205,
+      "capital_local_USD2041": 3181320506.671318,
+      "capital_resource_provision_USD2041": 7620327015.60343,
+      "commercial_operating_USD2041": 6608602857803.926,
+      "hotel_payroll_USD2041": 38312500.0,
+      "operating_external_logistics_materials_USD2041": 151454909406.80402,
+      "operating_external_replacement_USD2041": 64231997875.91995,
+      "operating_external_services_USD2041": 3405382889.949754,
+      "operating_local_payroll_USD2041": 6622254987.163504,
+      "operating_local_replacement_USD2041": 4262855060.103851,
+      "operating_resource_provision_USD2041": 21268821600.277794,
+      "residual_service_capital_USD2041": 60753830649.00514,
+      "residual_service_renewal_USD2041": 62645326828.32292,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 4353536528649.035,
+     "first_year": 8,
+     "last_year": 25,
+     "paid_to_Earth_USD2041": 300470338563.1358,
+     "paid_to_Earth_share": 0.04216342954843992,
+     "receipts_USD2041": 12015213788934.143,
+     "receipts_by_sector_USD2041": {
+      "computing": 60739147066.83288,
+      "destination": 4806907553.080814,
+      "entertainment": 2689321352528.3145,
+      "licenses": 2822930005959.321,
+      "materials": 224522349674.02972,
+      "mission_support": 8836425031.673733,
+      "professional": 1475000000000.0,
+      "propellant": 137668622785.8306,
+      "research": 2357643619991.5537,
+      "source_products": 33391524456.703213,
+      "sports": 2200353833886.8027
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 19336636422066.188,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 174985702347.58652,
+      "capital_external_USD2041": 366124097062.7883,
+      "capital_local_USD2041": 19812646353.638706,
+      "capital_resource_provision_USD2041": 24029409339.19844,
+      "commercial_operating_USD2041": 17417493764467.453,
+      "hotel_payroll_USD2041": 117500000.0,
+      "operating_external_logistics_materials_USD2041": 559538558152.9475,
+      "operating_external_replacement_USD2041": 353544127438.1396,
+      "operating_external_services_USD2041": 11049475640.388714,
+      "operating_local_payroll_USD2041": 22861001867.45385,
+      "operating_local_replacement_USD2041": 25247462150.898293,
+      "operating_resource_provision_USD2041": 70413812286.92798,
+      "residual_service_capital_USD2041": 114022406148.10583,
+      "residual_service_renewal_USD2041": 177396458810.6613,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 11341028115640.293,
+     "first_year": 26,
+     "last_year": 50,
+     "paid_to_Earth_USD2041": 1290256258294.2642,
+     "paid_to_Earth_share": 0.0667259925734486,
+     "receipts_USD2041": 31466033050169.68,
+     "receipts_by_sector_USD2041": {
+      "computing": 223844073559.58887,
+      "destination": 14878723390.504068,
+      "entertainment": 5752649336288.605,
+      "licenses": 6101294750609.126,
+      "materials": 965994655887.7145,
+      "mission_support": 31637613302.295044,
+      "professional": 5025000000000.0,
+      "propellant": 492903706639.9061,
+      "research": 8031563303119.389,
+      "source_products": 119553794045.50923,
+      "sports": 4706713093327.04
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 91003905918497.16,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 1240068720804.8755,
+      "capital_external_USD2041": 3077214444813.971,
+      "capital_local_USD2041": 150864000651.07462,
+      "capital_resource_provision_USD2041": 183169910104.02686,
+      "commercial_operating_USD2041": 75395443868197.89,
+      "hotel_payroll_USD2041": 858875000.0,
+      "operating_external_logistics_materials_USD2041": 5231899094271.128,
+      "operating_external_replacement_USD2041": 3320087051448.2676,
+      "operating_external_services_USD2041": 89215349731.66057,
+      "operating_local_payroll_USD2041": 203856163328.65323,
+      "operating_local_replacement_USD2041": 207480713383.3123,
+      "operating_resource_provision_USD2041": 587538424116.5408,
+      "residual_service_capital_USD2041": 314975042548.8847,
+      "residual_service_renewal_USD2041": 1001234260096.8762,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 44586739718111.17,
+     "first_year": 51,
+     "last_year": 100,
+     "paid_to_Earth_USD2041": 11718415940265.027,
+     "paid_to_Earth_share": 0.12876827452615064,
+     "receipts_USD2041": 138274549910360.9,
+     "receipts_by_sector_USD2041": {
+      "computing": 2362516762783.71,
+      "destination": 109305244141.70242,
+      "entertainment": 13898523845767.86,
+      "licenses": 14740858624299.244,
+      "materials": 9440201783279.234,
+      "mission_support": 309179198554.22144,
+      "professional": 30806122960090.152,
+      "propellant": 4816911172382.154,
+      "research": 49251069004027.63,
+      "source_products": 1168341804861.2915,
+      "sports": 11371519510173.703
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 201926792080013.62,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 6671366239320.963,
+      "capital_external_USD2041": 17937450276722.07,
+      "capital_local_USD2041": 814075276089.5569,
+      "capital_resource_provision_USD2041": 972360524501.8347,
+      "commercial_operating_USD2041": 110561181589916.27,
+      "hotel_payroll_USD2041": 4366687500.0,
+      "operating_external_logistics_materials_USD2041": 35283345513072.95,
+      "operating_external_replacement_USD2041": 21174670567588.758,
+      "operating_external_services_USD2041": 512975389572.46686,
+      "operating_local_payroll_USD2041": 1375550895750.9683,
+      "operating_local_replacement_USD2041": 1176500421862.6204,
+      "operating_resource_provision_USD2041": 3519912211636.0127,
+      "residual_service_capital_USD2041": 309520845248.2676,
+      "residual_service_renewal_USD2041": 1613515641230.8865,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 87796410435117.61,
+     "first_year": 101,
+     "last_year": 150,
+     "paid_to_Earth_USD2041": 74908441746956.25,
+     "paid_to_Earth_share": 0.3709683146814601,
+     "receipts_USD2041": 295663034229501.94,
+     "receipts_by_sector_USD2041": {
+      "computing": 18308567951712.168,
+      "destination": 556391428151.1588,
+      "entertainment": 17834944588384.043,
+      "licenses": 18915850321013.375,
+      "materials": 64135367311468.97,
+      "mission_support": 2197020029145.5432,
+      "professional": 44959737035768.64,
+      "propellant": 34228856190280.19,
+      "research": 71631036735713.3,
+      "source_products": 8303035247368.492,
+      "sports": 14592227390496.033
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 456756276519068.7,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 15387217592535.344,
+      "capital_external_USD2041": 40541757126575.09,
+      "capital_local_USD2041": 3022067808735.985,
+      "capital_resource_provision_USD2041": 3523965858729.53,
+      "commercial_operating_USD2041": 148132346353236.84,
+      "hotel_payroll_USD2041": 22104875000.0,
+      "operating_external_logistics_materials_USD2041": 153566779962591.2,
+      "operating_external_replacement_USD2041": 59425810373942.266,
+      "operating_external_services_USD2041": 2179254711108.878,
+      "operating_local_payroll_USD2041": 5325123025560.377,
+      "operating_local_replacement_USD2041": 7258072688233.396,
+      "operating_resource_provision_USD2041": 15351144918724.97,
+      "residual_service_capital_USD2041": 399653900504.19684,
+      "residual_service_renewal_USD2041": 2620977323590.6436,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 114913811767098.16,
+     "first_year": 151,
+     "last_year": 200,
+     "paid_to_Earth_USD2041": 255713602174217.44,
+     "paid_to_Earth_share": 0.5598469365829106,
+     "receipts_USD2041": 578579235232408.6,
+     "receipts_by_sector_USD2041": {
+      "computing": 48911268997759.37,
+      "destination": 2817422180398.4966,
+      "entertainment": 22811393345857.465,
+      "licenses": 24193902033485.188,
+      "materials": 183509098899597.47,
+      "mission_support": 5615384377629.223,
+      "professional": 57360199595556.4,
+      "propellant": 87485858920352.94,
+      "research": 89569809745520.83,
+      "source_products": 37641029853276.99,
+      "sports": 18663867282974.29
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 189188472318305.84,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 168979974568.0282,
+      "capital_external_USD2041": 353722225158.098,
+      "capital_local_USD2041": 129077702179.12549,
+      "capital_resource_provision_USD2041": 11984597166.338345,
+      "commercial_operating_USD2041": 66635383992522.734,
+      "hotel_payroll_USD2041": 17325000000.0,
+      "operating_external_logistics_materials_USD2041": 81475415283217.69,
+      "operating_external_replacement_USD2041": 16732347279602.318,
+      "operating_external_services_USD2041": 1132913913794.8533,
+      "operating_local_payroll_USD2041": 3191495187003.423,
+      "operating_local_replacement_USD2041": 8456244873010.296,
+      "operating_resource_provision_USD2041": 9649632864142.734,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 1233949425940.198,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 75993047347382.78,
+     "first_year": 201,
+     "last_year": 220,
+     "paid_to_Earth_USD2041": 99694398701772.95,
+     "paid_to_Earth_share": 0.526958104159957,
+     "receipts_USD2041": 265756581694286.97,
+     "receipts_by_sector_USD2041": {
+      "computing": 22135387281671.227,
+      "destination": 2208311843869.212,
+      "entertainment": 10093542691896.172,
+      "licenses": 10705272552011.092,
+      "materials": 83994629359039.88,
+      "mission_support": 2537198241160.069,
+      "professional": 25953063802340.707,
+      "propellant": 39528721891841.58,
+      "research": 40118462946852.58,
+      "source_products": 20223637972053.04,
+      "sports": 8258353111551.412
+     }
+    }
+   ],
+   "portfolio": "diversified",
+   "ramp": "constant_growth",
+   "recovery": "combined",
+   "scenario": "first_pass",
+   "status": "conditional_account",
+   "traffic": {
+    "100": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 1998.8621993156082,
+     "launch_pads": 22.589224407556493,
+     "launched_kg_year": 451784488.1511299,
+     "launches_year": 4517.844881511299,
+     "lunar_landings_year": 13420.530829594521,
+     "source_tug_trips_year": 671.7124384917124
+    },
+    "200": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 23433.161959590594,
+     "launch_pads": 225.5546581898028,
+     "launched_kg_year": 4511093163.796056,
+     "launches_year": 45110.93163796056,
+     "lunar_landings_year": 248326.9514686382,
+     "source_tug_trips_year": 9862.486666590816
+    },
+    "220": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 23475.571313697892,
+     "launch_pads": 250.54135129882872,
+     "launched_kg_year": 5010827025.976574,
+     "launches_year": 50108.27025976574,
+     "lunar_landings_year": 250926.33750076967,
+     "source_tug_trips_year": 10239.937751602125
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 89808.54831025047,
+     "share_of_workforce_in_use": 0.8993880590676437,
+     "working_parts_jobs": 45832.83039653017,
+     "working_parts_made_share": 0.2041323601475389
+    },
+    "200": {
+     "jobs": 1710358.8890514777,
+     "share_of_workforce_in_use": 0.6610553525510212,
+     "working_parts_jobs": 1156918.2657550902,
+     "working_parts_made_share": 0.7523343233082707
+    },
+    "220": {
+     "jobs": 1980380.547629083,
+     "share_of_workforce_in_use": 0.7654189828101778,
+     "working_parts_jobs": 1440220.4499382018,
+     "working_parts_made_share": 0.7216035187660949
+    }
+   }
+  },
+  {
+   "checkpoints": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 181755796749464.72,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 54620411824660.914,
+      "0.01": 27114424091702.25,
+      "0.03": 6922332797574.891,
+      "0.07": -863917059965.4471
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 1423650243627.731,
+     "payouts_USD2041": 58861937529177.664,
+     "population": 249637.92715724694,
+     "real_IRR": 0.05906505783371496,
+     "receipts_USD2041_year": 3778328986063.389,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 67348111508624.766,
+      "0.01": 33954613996248.555,
+      "0.03": 9524884865269.254,
+      "0.07": 86960353733.07715
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 59283550779537.69,
+      "0.01": 30003159950802.727,
+      "0.03": 8355923606812.316,
+      "0.07": -160393622906.41367
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1055998066211375.2,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 214328882303340.44,
+      "0.01": 64142522290016.97,
+      "0.03": 9441845031391.338,
+      "0.07": -841096220644.2478
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 3927357905060.2754,
+     "payouts_USD2041": 218570408007857.2,
+     "population": 6468289.238000949,
+     "real_IRR": 0.059783435225737036,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 450810814569480.0,
+      "0.01": 112598548898792.69,
+      "0.03": 13896567323758.617,
+      "0.07": 119785880710.36621
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 233155988640632.56,
+      "0.01": 70217868420513.13,
+      "0.03": 11069850078671.467,
+      "0.07": -136157386174.0866
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1321754647905662.2,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 262047435114366.7,
+      "0.01": 70000984762884.555,
+      "0.03": 9536623148814.215,
+      "0.07": -841063748644.9403
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 2570911076423.537,
+     "payouts_USD2041": 266288960818883.44,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05978571953425138,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 632681947562632.0,
+      "0.01": 135019502856549.53,
+      "0.03": 14262425454176.957,
+      "0.07": 119913516632.44727
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 282513268732184.2,
+      "0.01": 76298425041456.56,
+      "0.03": 11168947431666.275,
+      "0.07": -136122879115.72032
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 181755796749464.72,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 54620411824660.914,
+      "0.01": 27114424091702.25,
+      "0.03": 6922332797574.891,
+      "0.07": -863917059965.4471
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 1423650243627.731,
+     "payouts_USD2041": 58861937529177.664,
+     "population": 249637.92715724694,
+     "real_IRR": 0.05906505783371496,
+     "receipts_USD2041_year": 3778328986063.389,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 67348111508624.766,
+      "0.01": 33954613996248.555,
+      "0.03": 9524884865269.254,
+      "0.07": 86960353733.07715
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 59283550779537.69,
+      "0.01": 30003159950802.727,
+      "0.03": 8355923606812.316,
+      "0.07": -160393622906.41367
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1055998066211375.2,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 214328882303340.44,
+      "0.01": 64142522290016.97,
+      "0.03": 9441845031391.338,
+      "0.07": -841096220644.2478
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 3927357905060.2754,
+     "payouts_USD2041": 218570408007857.2,
+     "population": 6468289.238000949,
+     "real_IRR": 0.059783435225737036,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 450810814569480.0,
+      "0.01": 112598548898792.69,
+      "0.03": 13896567323758.617,
+      "0.07": 119785880710.36621
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 233155988640632.56,
+      "0.01": 70217868420513.13,
+      "0.03": 11069850078671.467,
+      "0.07": -136157386174.0866
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1321754647905662.2,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 262047435114366.7,
+      "0.01": 70000984762884.555,
+      "0.03": 9536623148814.215,
+      "0.07": -841063748644.9403
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 2570911076423.537,
+     "payouts_USD2041": 266288960818883.44,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05978571953425138,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 632681947562632.0,
+      "0.01": 135019502856549.53,
+      "0.03": 14262425454176.957,
+      "0.07": 119913516632.44727
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 282513268732184.2,
+      "0.01": 76298425041456.56,
+      "0.03": 11168947431666.275,
+      "0.07": -136122879115.72032
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 181755796749464.72,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 54620411824660.914,
+      "0.01": 27114424091702.25,
+      "0.03": 6922332797574.891,
+      "0.07": -863917059965.4471
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 1423650243627.731,
+     "payouts_USD2041": 58861937529177.664,
+     "population": 249637.92715724694,
+     "real_IRR": 0.05906505783371496,
+     "receipts_USD2041_year": 3778328986063.389,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 67348111508624.766,
+      "0.01": 33954613996248.555,
+      "0.03": 9524884865269.254,
+      "0.07": 86960353733.07715
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 59283550779537.69,
+      "0.01": 30003159950802.727,
+      "0.03": 8355923606812.316,
+      "0.07": -160393622906.41367
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1055998066211375.2,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 214328882303340.44,
+      "0.01": 64142522290016.97,
+      "0.03": 9441845031391.338,
+      "0.07": -841096220644.2478
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 3927357905060.2754,
+     "payouts_USD2041": 218570408007857.2,
+     "population": 6468289.238000949,
+     "real_IRR": 0.059783435225737036,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 450810814569480.0,
+      "0.01": 112598548898792.69,
+      "0.03": 13896567323758.617,
+      "0.07": 119785880710.36621
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 233155988640632.56,
+      "0.01": 70217868420513.13,
+      "0.03": 11069850078671.467,
+      "0.07": -136157386174.0866
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1321754647905662.2,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 262047435114366.7,
+      "0.01": 70000984762884.555,
+      "0.03": 9536623148814.215,
+      "0.07": -841063748644.9403
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 2570911076423.537,
+     "payouts_USD2041": 266288960818883.44,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05978571953425138,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 632681947562632.0,
+      "0.01": 135019502856549.53,
+      "0.03": 14262425454176.957,
+      "0.07": 119913516632.44727
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 282513268732184.2,
+      "0.01": 76298425041456.56,
+      "0.03": 11168947431666.275,
+      "0.07": -136122879115.72032
+     }
+    }
+   ],
+   "convergence": {
+    "converged": true,
+    "history": [
+     1.0,
+     0.782608695652174,
+     0.3333333333333333,
+     0.25,
+     0.2,
+     0.0625,
+     0.010752688172043012,
+     0.0038461538461538464,
+     0.004048582995951417,
+     0.0014204545454545455,
+     0.0007485029940119761,
+     0.0
+    ],
+    "iterations": 12,
+    "relative_requirement_residual": 0.0
+   },
+   "engineering": {
+    "economy.production.local_working_parts.labour_fraction_of_import_price": 0.5,
+    "economy.production.local_working_parts.share": {
+     "by_year": [
+      [
+       8,
+       0.0
+      ],
+      [
+       38,
+       0.78
+      ]
+     ]
+    }
+   },
+   "first_capacity_shortfall": null,
+   "growth": "reference",
+   "market": "breakthrough",
+   "material_drawn": {
+    "100": {
+     "asteroid_feed_kg": 6180851779674.185,
+     "lunar_raw_kg": 209588172170.45428,
+     "nitrogen_kg": 933757105.6912642,
+     "virgin_metal_kg": 6853651391.785197,
+     "water_kg": 432659624577.19293
+    },
+    "200": {
+     "asteroid_feed_kg": 161311757391385.9,
+     "lunar_raw_kg": 5634051851421.806,
+     "nitrogen_kg": 23365622666.177273,
+     "virgin_metal_kg": 165054118926.74255,
+     "water_kg": 11291823017397.014
+    },
+    "220": {
+     "asteroid_feed_kg": 227609950881834.22,
+     "lunar_raw_kg": 6425295830114.68,
+     "nitrogen_kg": 26653718379.397976,
+     "virgin_metal_kg": 187721227619.08472,
+     "water_kg": 15932696561728.393
+    }
+   },
+   "name": "first_pass:diversified:constant_growth:local_parts_labour_50",
+   "opening": {
+    "founding_cost_USD2041": 3637524605321.409,
+    "reserve_USD2041": 201977414500.79742,
+    "working_cash_USD2041": 402023684694.5392
+   },
+   "periods": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 3637524605321.409,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 0.0,
+      "capital_external_USD2041": 0.0,
+      "capital_local_USD2041": 0.0,
+      "capital_resource_provision_USD2041": 0.0,
+      "commercial_operating_USD2041": 0.0,
+      "hotel_payroll_USD2041": 0.0,
+      "operating_external_logistics_materials_USD2041": 0.0,
+      "operating_external_replacement_USD2041": 0.0,
+      "operating_external_services_USD2041": 0.0,
+      "operating_local_payroll_USD2041": 0.0,
+      "operating_local_replacement_USD2041": 0.0,
+      "operating_resource_provision_USD2041": 0.0,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 0.0,
+      "seed_deployment_and_allowance_USD2041": 3637524605321.409
+     },
+     "distributions_USD2041": 0.0,
+     "first_year": 0,
+     "last_year": 7,
+     "paid_to_Earth_USD2041": null,
+     "paid_to_Earth_share": null,
+     "receipts_USD2041": 0.0,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 0.0,
+      "entertainment": 0.0,
+      "licenses": 0.0,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 0.0,
+      "propellant": 0.0,
+      "research": 0.0,
+      "source_products": 0.0,
+      "sports": 0.0
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 7142590824706.948,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 52675674165.566444,
+      "capital_external_USD2041": 85496685175.97194,
+      "capital_local_USD2041": 4251410362.355621,
+      "capital_resource_provision_USD2041": 7827252666.013826,
+      "commercial_operating_USD2041": 6608602857803.926,
+      "hotel_payroll_USD2041": 38312500.0,
+      "operating_external_logistics_materials_USD2041": 153355035056.78314,
+      "operating_external_replacement_USD2041": 69038005265.53412,
+      "operating_external_services_USD2041": 3446759810.25706,
+      "operating_local_payroll_USD2041": 6659314486.655124,
+      "operating_local_replacement_USD2041": 6326037077.727164,
+      "operating_resource_provision_USD2041": 21474322858.829586,
+      "residual_service_capital_USD2041": 60753830649.00514,
+      "residual_service_renewal_USD2041": 62645326828.32292,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 4335087699952.425,
+     "first_year": 8,
+     "last_year": 25,
+     "paid_to_Earth_USD2041": 311336485308.54626,
+     "paid_to_Earth_share": 0.043588733129105155,
+     "receipts_USD2041": 12015213788934.143,
+     "receipts_by_sector_USD2041": {
+      "computing": 60739147066.83288,
+      "destination": 4806907553.080814,
+      "entertainment": 2689321352528.3145,
+      "licenses": 2822930005959.321,
+      "materials": 224522349674.02972,
+      "mission_support": 8836425031.673733,
+      "professional": 1475000000000.0,
+      "propellant": 137668622785.8306,
+      "research": 2357643619991.5537,
+      "source_products": 33391524456.703213,
+      "sports": 2200353833886.8027
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 19500039032184.496,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 195892694396.90805,
+      "capital_external_USD2041": 425277944658.89624,
+      "capital_local_USD2041": 20393061755.59238,
+      "capital_resource_provision_USD2041": 26002710467.687122,
+      "commercial_operating_USD2041": 17417493764467.453,
+      "hotel_payroll_USD2041": 117500000.0,
+      "operating_external_logistics_materials_USD2041": 577142665785.4342,
+      "operating_external_replacement_USD2041": 413806162850.1382,
+      "operating_external_services_USD2041": 11426008037.9363,
+      "operating_local_payroll_USD2041": 22918275398.591263,
+      "operating_local_replacement_USD2041": 25851780216.049473,
+      "operating_resource_provision_USD2041": 72297599191.04318,
+      "residual_service_capital_USD2041": 114022406148.10583,
+      "residual_service_renewal_USD2041": 177396458810.6613,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 11170517227977.7,
+     "first_year": 26,
+     "last_year": 50,
+     "paid_to_Earth_USD2041": 1427652781332.405,
+     "paid_to_Earth_share": 0.07321281659878154,
+     "receipts_USD2041": 31466033050169.68,
+     "receipts_by_sector_USD2041": {
+      "computing": 223844073559.58887,
+      "destination": 14878723390.504068,
+      "entertainment": 5752649336288.605,
+      "licenses": 6101294750609.126,
+      "materials": 965994655887.7145,
+      "mission_support": 31637613302.295044,
+      "professional": 5025000000000.0,
+      "propellant": 492903706639.9061,
+      "research": 8031563303119.389,
+      "source_products": 119553794045.50923,
+      "sports": 4706713093327.04
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 92192091507714.19,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 1385867393929.4365,
+      "capital_external_USD2041": 3490515083888.6187,
+      "capital_local_USD2041": 154130999075.17245,
+      "capital_resource_provision_USD2041": 196403106927.57315,
+      "commercial_operating_USD2041": 75395443868197.89,
+      "hotel_payroll_USD2041": 858875000.0,
+      "operating_external_logistics_materials_USD2041": 5358099823848.428,
+      "operating_external_replacement_USD2041": 3786806395885.0347,
+      "operating_external_services_USD2041": 91825658193.6274,
+      "operating_local_payroll_USD2041": 204467710453.3261,
+      "operating_local_replacement_USD2041": 210379669364.00504,
+      "operating_resource_provision_USD2041": 601083620305.312,
+      "residual_service_capital_USD2041": 314975042548.8847,
+      "residual_service_renewal_USD2041": 1001234260096.8762,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 43356332601247.54,
+     "first_year": 51,
+     "last_year": 100,
+     "paid_to_Earth_USD2041": 12727246961815.709,
+     "paid_to_Earth_share": 0.13805139631473437,
+     "receipts_USD2041": 138274549910360.9,
+     "receipts_by_sector_USD2041": {
+      "computing": 2362516762783.71,
+      "destination": 109305244141.70242,
+      "entertainment": 13898523845767.86,
+      "licenses": 14740858624299.244,
+      "materials": 9440201783279.234,
+      "mission_support": 309179198554.22144,
+      "professional": 30806122960090.152,
+      "propellant": 4816911172382.154,
+      "research": 49251069004027.63,
+      "source_products": 1168341804861.2915,
+      "sports": 11371519510173.703
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 208220184489973.78,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 7416757497803.408,
+      "capital_external_USD2041": 20053408749786.21,
+      "capital_local_USD2041": 827806112975.262,
+      "capital_resource_provision_USD2041": 1036519924897.1029,
+      "commercial_operating_USD2041": 110561181589916.27,
+      "hotel_payroll_USD2041": 4366687500.0,
+      "operating_external_logistics_materials_USD2041": 35924897666621.35,
+      "operating_external_replacement_USD2041": 23789179664429.38,
+      "operating_external_services_USD2041": 525885806948.6777,
+      "operating_local_payroll_USD2041": 1378748817845.8943,
+      "operating_local_replacement_USD2041": 1189768552481.426,
+      "operating_resource_provision_USD2041": 3588626932289.655,
+      "residual_service_capital_USD2041": 309520845248.2676,
+      "residual_service_renewal_USD2041": 1613515641230.8865,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 81286946668638.48,
+     "first_year": 101,
+     "last_year": 150,
+     "paid_to_Earth_USD2041": 80293371887785.62,
+     "paid_to_Earth_share": 0.385617619562007,
+     "receipts_USD2041": 295663034229501.94,
+     "receipts_by_sector_USD2041": {
+      "computing": 18308567951712.168,
+      "destination": 556391428151.1588,
+      "entertainment": 17834944588384.043,
+      "licenses": 18915850321013.375,
+      "materials": 64135367311468.97,
+      "mission_support": 2197020029145.5432,
+      "professional": 44959737035768.64,
+      "propellant": 34228856190280.19,
+      "research": 71631036735713.3,
+      "source_products": 8303035247368.492,
+      "sports": 14592227390496.033
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 492149647110841.9,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 19224969956208.332,
+      "capital_external_USD2041": 51208170857520.14,
+      "capital_local_USD2041": 3320660831142.329,
+      "capital_resource_provision_USD2041": 4034008461776.0107,
+      "commercial_operating_USD2041": 148132346353236.84,
+      "hotel_payroll_USD2041": 22104875000.0,
+      "operating_external_logistics_materials_USD2041": 158063418637773.75,
+      "operating_external_replacement_USD2041": 74037170037396.36,
+      "operating_external_services_USD2041": 2269853474892.3955,
+      "operating_local_payroll_USD2041": 5343144692488.59,
+      "operating_local_replacement_USD2041": 7709899273249.24,
+      "operating_resource_provision_USD2041": 15763268436063.035,
+      "residual_service_capital_USD2041": 399653900504.19684,
+      "residual_service_renewal_USD2041": 2620977323590.6436,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 78421523810041.05,
+     "first_year": 151,
+     "last_year": 200,
+     "paid_to_Earth_USD2041": 285578613007582.6,
+     "paid_to_Earth_share": 0.5802678406538909,
+     "receipts_USD2041": 578579235232408.6,
+     "receipts_by_sector_USD2041": {
+      "computing": 48911268997759.37,
+      "destination": 2817422180398.4966,
+      "entertainment": 22811393345857.465,
+      "licenses": 24193902033485.188,
+      "materials": 183509098899597.47,
+      "mission_support": 5615384377629.223,
+      "professional": 57360199595556.4,
+      "propellant": 87485858920352.94,
+      "research": 89569809745520.83,
+      "source_products": 37641029853276.99,
+      "sports": 18663867282974.29
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 216399301602735.3,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 379781321937.36334,
+      "capital_external_USD2041": 908773524655.8593,
+      "capital_local_USD2041": 176315966593.7503,
+      "capital_resource_provision_USD2041": 27665864976.018787,
+      "commercial_operating_USD2041": 66635383992522.734,
+      "hotel_payroll_USD2041": 17325000000.0,
+      "operating_external_logistics_materials_USD2041": 88763877176479.69,
+      "operating_external_replacement_USD2041": 34752860304066.4,
+      "operating_external_services_USD2041": 1200620334719.25,
+      "operating_local_payroll_USD2041": 3231976519463.3403,
+      "operating_local_replacement_USD2041": 8732413542474.038,
+      "operating_resource_provision_USD2041": 10338358628906.672,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 1233949425940.198,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 47718552811026.25,
+     "first_year": 201,
+     "last_year": 220,
+     "paid_to_Earth_USD2041": 125626131339921.19,
+     "paid_to_Earth_share": 0.5805292827171179,
+     "receipts_USD2041": 265756581694286.97,
+     "receipts_by_sector_USD2041": {
+      "computing": 22135387281671.227,
+      "destination": 2208311843869.212,
+      "entertainment": 10093542691896.172,
+      "licenses": 10705272552011.092,
+      "materials": 83994629359039.88,
+      "mission_support": 2537198241160.069,
+      "professional": 25953063802340.707,
+      "propellant": 39528721891841.58,
+      "research": 40118462946852.58,
+      "source_products": 20223637972053.04,
+      "sports": 8258353111551.412
+     }
+    }
+   ],
+   "portfolio": "diversified",
+   "ramp": "constant_growth",
+   "recovery": "combined",
+   "scenario": "first_pass",
+   "status": "conditional_account",
+   "traffic": {
+    "100": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 2158.44569122061,
+     "launch_pads": 24.215774516914085,
+     "launched_kg_year": 484315490.3382817,
+     "launches_year": 4843.154903382817,
+     "lunar_landings_year": 13566.333136281019,
+     "source_tug_trips_year": 694.3155503044381
+    },
+    "200": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 23423.984133028243,
+     "launch_pads": 253.6346954846462,
+     "launched_kg_year": 5072693909.692924,
+     "launches_year": 50726.939096929236,
+     "lunar_landings_year": 251754.6137463141,
+     "source_tug_trips_year": 10152.236322073528
+    },
+    "220": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 26838.345137582146,
+     "launch_pads": 316.38144045550877,
+     "launched_kg_year": 6327628809.110175,
+     "launches_year": 63276.28809110175,
+     "lunar_landings_year": 258350.2151615259,
+     "source_tug_trips_year": 11043.881908095542
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 90804.52856610467,
+     "share_of_workforce_in_use": 0.9093623072437514,
+     "working_parts_jobs": 46644.438778278214,
+     "working_parts_made_share": 0.10206618007376946
+    },
+    "200": {
+     "jobs": 1984555.9772059966,
+     "share_of_workforce_in_use": 0.7670327903500384,
+     "working_parts_jobs": 1417893.611456204,
+     "working_parts_made_share": 0.37616716165413533
+    },
+    "220": {
+     "jobs": 2033524.047388459,
+     "share_of_workforce_in_use": 0.7859589964845665,
+     "working_parts_jobs": 1486719.6984942798,
+     "working_parts_made_share": 0.3608017593830474
+    }
+   }
+  },
+  {
+   "checkpoints": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 181755796749464.72,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 60040062322218.08,
+      "0.01": 29683033284780.535,
+      "0.03": 7594909947572.932,
+      "0.07": -778380028627.0487
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 1524246894270.209,
+     "payouts_USD2041": 64281588026734.83,
+     "population": 249637.92715724694,
+     "real_IRR": 0.06040762318088644,
+     "receipts_USD2041_year": 3778328986063.389,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 72410186284330.7,
+      "0.01": 36347591287801.26,
+      "0.03": 10145461339658.617,
+      "0.07": 162673641426.68262
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 64504616531938.9,
+      "0.01": 32474314441369.023,
+      "0.03": 8999631777208.97,
+      "0.07": -80255075872.42604
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1055998066211375.2,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 354176705549241.06,
+      "0.01": 92230564160493.9,
+      "0.03": 11274137312822.527,
+      "0.07": -749306210980.3613
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 4886678082304.897,
+     "payouts_USD2041": 358418231253757.8,
+     "population": 6468289.238000949,
+     "real_IRR": 0.06120301936285977,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 581844153817776.5,
+      "0.01": 138906320696639.84,
+      "0.03": 15604583428996.8,
+      "0.07": 201374536223.7588
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 370304806938269.44,
+      "0.01": 97628652539760.02,
+      "0.03": 12839536035978.691,
+      "0.07": -49973810956.25683
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1321754647905662.2,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 442339744805352.25,
+      "0.01": 103100234410156.22,
+      "0.03": 11451530195859.945,
+      "0.07": -749244317686.1172
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 4446437634281.314,
+     "payouts_USD2041": 446581270509869.0,
+     "population": 6468289.238000949,
+     "real_IRR": 0.06120628200996581,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 797334483369295.5,
+      "0.01": 165486079884644.38,
+      "0.03": 16038757786974.078,
+      "0.07": 201526297663.92188
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 459194377881694.1,
+      "0.01": 108595455102326.88,
+      "0.03": 13018771198390.863,
+      "0.07": -49911085949.79525
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 181755796749464.72,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 60040062322218.08,
+      "0.01": 29683033284780.535,
+      "0.03": 7594909947572.932,
+      "0.07": -778380028627.0487
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 1524246894270.209,
+     "payouts_USD2041": 64281588026734.83,
+     "population": 249637.92715724694,
+     "real_IRR": 0.06040762318088644,
+     "receipts_USD2041_year": 3778328986063.389,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 72410186284330.7,
+      "0.01": 36347591287801.26,
+      "0.03": 10145461339658.617,
+      "0.07": 162673641426.68262
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 64504616531938.9,
+      "0.01": 32474314441369.023,
+      "0.03": 8999631777208.97,
+      "0.07": -80255075872.42604
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1055998066211375.2,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 354176705549241.06,
+      "0.01": 92230564160493.9,
+      "0.03": 11274137312822.527,
+      "0.07": -749306210980.3613
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 4886678082304.897,
+     "payouts_USD2041": 358418231253757.8,
+     "population": 6468289.238000949,
+     "real_IRR": 0.06120301936285977,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 581844153817776.5,
+      "0.01": 138906320696639.84,
+      "0.03": 15604583428996.8,
+      "0.07": 201374536223.7588
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 370304806938269.44,
+      "0.01": 97628652539760.02,
+      "0.03": 12839536035978.691,
+      "0.07": -49973810956.25683
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1321754647905662.2,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 442339744805352.25,
+      "0.01": 103100234410156.22,
+      "0.03": 11451530195859.945,
+      "0.07": -749244317686.1172
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 4446437634281.314,
+     "payouts_USD2041": 446581270509869.0,
+     "population": 6468289.238000949,
+     "real_IRR": 0.06120628200996581,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 797334483369295.5,
+      "0.01": 165486079884644.38,
+      "0.03": 16038757786974.078,
+      "0.07": 201526297663.92188
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 459194377881694.1,
+      "0.01": 108595455102326.88,
+      "0.03": 13018771198390.863,
+      "0.07": -49911085949.79525
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 181755796749464.72,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 60040062322218.08,
+      "0.01": 29683033284780.535,
+      "0.03": 7594909947572.932,
+      "0.07": -778380028627.0487
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 1524246894270.209,
+     "payouts_USD2041": 64281588026734.83,
+     "population": 249637.92715724694,
+     "real_IRR": 0.06040762318088644,
+     "receipts_USD2041_year": 3778328986063.389,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 72410186284330.7,
+      "0.01": 36347591287801.26,
+      "0.03": 10145461339658.617,
+      "0.07": 162673641426.68262
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 64504616531938.9,
+      "0.01": 32474314441369.023,
+      "0.03": 8999631777208.97,
+      "0.07": -80255075872.42604
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1055998066211375.2,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 354176705549241.06,
+      "0.01": 92230564160493.9,
+      "0.03": 11274137312822.527,
+      "0.07": -749306210980.3613
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 4886678082304.897,
+     "payouts_USD2041": 358418231253757.8,
+     "population": 6468289.238000949,
+     "real_IRR": 0.06120301936285977,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 581844153817776.5,
+      "0.01": 138906320696639.84,
+      "0.03": 15604583428996.8,
+      "0.07": 201374536223.7588
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 370304806938269.44,
+      "0.01": 97628652539760.02,
+      "0.03": 12839536035978.691,
+      "0.07": -49973810956.25683
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4241525704516.7456,
+     "cumulative_receipts_USD2041": 1321754647905662.2,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 442339744805352.25,
+      "0.01": 103100234410156.22,
+      "0.03": 11451530195859.945,
+      "0.07": -749244317686.1172
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4241525704516.7456,
+     "operating_cash_USD2041_year": 4446437634281.314,
+     "payouts_USD2041": 446581270509869.0,
+     "population": 6468289.238000949,
+     "real_IRR": 0.06120628200996581,
+     "receipts_USD2041_year": 13287829084714.348,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 797334483369295.5,
+      "0.01": 165486079884644.38,
+      "0.03": 16038757786974.078,
+      "0.07": 201526297663.92188
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 459194377881694.1,
+      "0.01": 108595455102326.88,
+      "0.03": 13018771198390.863,
+      "0.07": -49911085949.79525
+     }
+    }
+   ],
+   "convergence": {
+    "converged": true,
+    "history": [
+     1.0,
+     0.8,
+     0.5,
+     0.25,
+     0.3333333333333333,
+     0.022727272727272728,
+     0.0019329896907216496,
+     3.7334328915437745e-05,
+     1.88462213453816e-06,
+     1.8567112666082514e-07,
+     1.8622912758801753e-10
+    ],
+    "iterations": 11,
+    "relative_requirement_residual": 1.8622912758801753e-10
+   },
+   "engineering": {
+    "economy.production.local_working_parts.labour_fraction_of_import_price": 0.1,
+    "economy.production.local_working_parts.share": {
+     "by_year": [
+      [
+       8,
+       0.0
+      ],
+      [
+       38,
+       0.78
+      ]
+     ]
+    }
+   },
+   "first_capacity_shortfall": null,
+   "growth": "reference",
+   "market": "breakthrough",
+   "material_drawn": {
+    "100": {
+     "asteroid_feed_kg": 5398927765028.444,
+     "lunar_raw_kg": 227224299255.15442,
+     "nitrogen_kg": 933757105.6912642,
+     "virgin_metal_kg": 7901069660.641995,
+     "water_kg": 377924943551.9911
+    },
+    "200": {
+     "asteroid_feed_kg": 139652721463369.3,
+     "lunar_raw_kg": 6173684184713.048,
+     "nitrogen_kg": 23365622666.177273,
+     "virgin_metal_kg": 199384554544.6767,
+     "water_kg": 9775690502435.85
+    },
+    "220": {
+     "asteroid_feed_kg": 200331331813284.22,
+     "lunar_raw_kg": 7123769749620.551,
+     "nitrogen_kg": 26653718379.397976,
+     "virgin_metal_kg": 237882234857.06403,
+     "water_kg": 14023193226929.895
+    }
+   },
+   "name": "first_pass:diversified:constant_growth:local_parts_labour_10",
+   "opening": {
+    "founding_cost_USD2041": 3637524605321.409,
+    "reserve_USD2041": 201977414500.79742,
+    "working_cash_USD2041": 402023684694.5392
+   },
+   "periods": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 3637524605321.409,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 0.0,
+      "capital_external_USD2041": 0.0,
+      "capital_local_USD2041": 0.0,
+      "capital_resource_provision_USD2041": 0.0,
+      "commercial_operating_USD2041": 0.0,
+      "hotel_payroll_USD2041": 0.0,
+      "operating_external_logistics_materials_USD2041": 0.0,
+      "operating_external_replacement_USD2041": 0.0,
+      "operating_external_services_USD2041": 0.0,
+      "operating_local_payroll_USD2041": 0.0,
+      "operating_local_replacement_USD2041": 0.0,
+      "operating_resource_provision_USD2041": 0.0,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 0.0,
+      "seed_deployment_and_allowance_USD2041": 3637524605321.409
+     },
+     "distributions_USD2041": 0.0,
+     "first_year": 0,
+     "last_year": 7,
+     "paid_to_Earth_USD2041": null,
+     "paid_to_Earth_share": null,
+     "receipts_USD2041": 0.0,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 0.0,
+      "entertainment": 0.0,
+      "licenses": 0.0,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 0.0,
+      "propellant": 0.0,
+      "research": 0.0,
+      "source_products": 0.0,
+      "sports": 0.0
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 7108791584048.88,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 49112980773.22911,
+      "capital_external_USD2041": 77458680971.68651,
+      "capital_local_USD2041": 2110290588.5343738,
+      "capital_resource_provision_USD2041": 7450712077.599836,
+      "commercial_operating_USD2041": 6608602857803.926,
+      "hotel_payroll_USD2041": 38312500.0,
+      "operating_external_logistics_materials_USD2041": 149341310520.2641,
+      "operating_external_replacement_USD2041": 58207257990.93468,
+      "operating_external_services_USD2041": 3368639981.6380467,
+      "operating_local_payroll_USD2041": 6529977251.483723,
+      "operating_local_replacement_USD2041": 2127334079.8027966,
+      "operating_resource_provision_USD2041": 21044072032.45255,
+      "residual_service_capital_USD2041": 60753830649.00514,
+      "residual_service_renewal_USD2041": 62645326828.32292,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 4378983536279.2734,
+     "first_year": 8,
+     "last_year": 25,
+     "paid_to_Earth_USD2041": 288375889464.5233,
+     "paid_to_Earth_share": 0.04056609144535872,
+     "receipts_USD2041": 12015213788934.143,
+     "receipts_by_sector_USD2041": {
+      "computing": 60739147066.83288,
+      "destination": 4806907553.080814,
+      "entertainment": 2689321352528.3145,
+      "licenses": 2822930005959.321,
+      "materials": 224522349674.02972,
+      "mission_support": 8836425031.673733,
+      "professional": 1475000000000.0,
+      "propellant": 137668622785.8306,
+      "research": 2357643619991.5537,
+      "source_products": 33391524456.703213,
+      "sports": 2200353833886.8027
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 18884121475756.613,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 117249797976.98761,
+      "capital_external_USD2041": 202929943228.1761,
+      "capital_local_USD2041": 18047073415.111298,
+      "capital_resource_provision_USD2041": 18255974333.40894,
+      "commercial_operating_USD2041": 17417493764467.453,
+      "hotel_payroll_USD2041": 117500000.0,
+      "operating_external_logistics_materials_USD2041": 509095212976.89984,
+      "operating_external_replacement_USD2041": 188412514139.5079,
+      "operating_external_services_USD2041": 9951684261.148632,
+      "operating_local_payroll_USD2041": 22694729115.39368,
+      "operating_local_replacement_USD2041": 23429592440.051685,
+      "operating_resource_provision_USD2041": 65024824443.706856,
+      "residual_service_capital_USD2041": 114022406148.10583,
+      "residual_service_renewal_USD2041": 177396458810.6613,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 11812356354490.682,
+     "first_year": 26,
+     "last_year": 50,
+     "paid_to_Earth_USD2041": 910389354605.7324,
+     "paid_to_Earth_share": 0.048209251130611926,
+     "receipts_USD2041": 31466033050169.68,
+     "receipts_by_sector_USD2041": {
+      "computing": 223844073559.58887,
+      "destination": 14878723390.504068,
+      "entertainment": 5752649336288.605,
+      "licenses": 6101294750609.126,
+      "materials": 965994655887.7145,
+      "mission_support": 31637613302.295044,
+      "professional": 5025000000000.0,
+      "propellant": 492903706639.9061,
+      "research": 8031563303119.389,
+      "source_products": 119553794045.50923,
+      "sports": 4706713093327.04
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 87620742552398.92,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 827858591615.7766,
+      "capital_external_USD2041": 1908888540411.5315,
+      "capital_local_USD2041": 141446678798.94586,
+      "capital_resource_provision_USD2041": 142640247635.65933,
+      "commercial_operating_USD2041": 75395443868197.89,
+      "hotel_payroll_USD2041": 858875000.0,
+      "operating_external_logistics_materials_USD2041": 4864024154270.754,
+      "operating_external_replacement_USD2041": 1991136159188.5195,
+      "operating_external_services_USD2041": 81561746935.56967,
+      "operating_local_payroll_USD2041": 202046575287.97012,
+      "operating_local_replacement_USD2041": 198951948883.89893,
+      "operating_resource_provision_USD2041": 549675863526.6488,
+      "residual_service_capital_USD2041": 314975042548.8847,
+      "residual_service_renewal_USD2041": 1001234260096.8762,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 48090248135964.87,
+     "first_year": 51,
+     "last_year": 100,
+     "paid_to_Earth_USD2041": 8845610600806.375,
+     "paid_to_Earth_share": 0.10095338550134435,
+     "receipts_USD2041": 138274549910360.9,
+     "receipts_by_sector_USD2041": {
+      "computing": 2362516762783.71,
+      "destination": 109305244141.70242,
+      "entertainment": 13898523845767.86,
+      "licenses": 14740858624299.244,
+      "materials": 9440201783279.234,
+      "mission_support": 309179198554.22144,
+      "professional": 30806122960090.152,
+      "propellant": 4816911172382.154,
+      "research": 49251069004027.63,
+      "source_products": 1168341804861.2915,
+      "sports": 11371519510173.703
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 183821525520997.12,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 4535260683777.41,
+      "capital_external_USD2041": 11874487677644.3,
+      "capital_local_USD2041": 773879145042.889,
+      "capital_resource_provision_USD2041": 743755096744.1548,
+      "commercial_operating_USD2041": 110561181589916.27,
+      "hotel_payroll_USD2041": 4366687500.0,
+      "operating_external_logistics_materials_USD2041": 33408868004068.15,
+      "operating_external_replacement_USD2041": 13659610908039.05,
+      "operating_external_services_USD2041": 475018831662.358,
+      "operating_local_payroll_USD2041": 1366115243721.9187,
+      "operating_local_replacement_USD2041": 1137546370255.7244,
+      "operating_resource_provision_USD2041": 3358398796145.757,
+      "residual_service_capital_USD2041": 309520845248.2676,
+      "residual_service_renewal_USD2041": 1613515641230.8865,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 106526863034529.89,
+     "first_year": 101,
+     "last_year": 150,
+     "paid_to_Earth_USD2041": 59417985421413.86,
+     "paid_to_Earth_share": 0.3232373643565851,
+     "receipts_USD2041": 295663034229501.94,
+     "receipts_by_sector_USD2041": {
+      "computing": 18308567951712.168,
+      "destination": 556391428151.1588,
+      "entertainment": 17834944588384.043,
+      "licenses": 18915850321013.375,
+      "materials": 64135367311468.97,
+      "mission_support": 2197020029145.5432,
+      "professional": 44959737035768.64,
+      "propellant": 34228856190280.19,
+      "research": 71631036735713.3,
+      "source_products": 8303035247368.492,
+      "sports": 14592227390496.033
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 384620553534582.94,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 8255573280875.191,
+      "capital_external_USD2041": 20527310278427.855,
+      "capital_local_USD2041": 2660388052139.926,
+      "capital_resource_provision_USD2041": 2444553787347.6914,
+      "commercial_operating_USD2041": 148132346353236.84,
+      "hotel_payroll_USD2041": 22104875000.0,
+      "operating_external_logistics_materials_USD2041": 144141812528990.66,
+      "operating_external_replacement_USD2041": 27658495408187.508,
+      "operating_external_services_USD2041": 2006010275116.8994,
+      "operating_local_payroll_USD2041": 5269417096945.201,
+      "operating_local_replacement_USD2041": 5834382718382.278,
+      "operating_resource_provision_USD2041": 14647527655838.021,
+      "residual_service_capital_USD2041": 399653900504.19684,
+      "residual_service_renewal_USD2041": 2620977323590.6436,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 187609780192493.1,
+     "first_year": 151,
+     "last_year": 200,
+     "paid_to_Earth_USD2041": 194333628490722.9,
+     "paid_to_Earth_share": 0.5052606437821309,
+     "receipts_USD2041": 578579235232408.6,
+     "receipts_by_sector_USD2041": {
+      "computing": 48911268997759.37,
+      "destination": 2817422180398.4966,
+      "entertainment": 22811393345857.465,
+      "licenses": 24193902033485.188,
+      "materials": 183509098899597.47,
+      "mission_support": 5615384377629.223,
+      "professional": 57360199595556.4,
+      "propellant": 87485858920352.94,
+      "research": 89569809745520.83,
+      "source_products": 37641029853276.99,
+      "sports": 18663867282974.29
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 176867010750862.22,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 116372721606.99142,
+      "capital_external_USD2041": 263765381463.67758,
+      "capital_local_USD2041": 68728108842.01222,
+      "capital_resource_provision_USD2041": 10002713541.796513,
+      "commercial_operating_USD2041": 66635383992522.734,
+      "hotel_payroll_USD2041": 17325000000.0,
+      "operating_external_logistics_materials_USD2041": 79367660602869.44,
+      "operating_external_replacement_USD2041": 11521421022915.48,
+      "operating_external_services_USD2041": 1117496374636.0796,
+      "operating_local_payroll_USD2041": 3182602606132.13,
+      "operating_local_replacement_USD2041": 3844369662362.071,
+      "operating_resource_provision_USD2041": 9487933138029.605,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 1233949425940.198,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 88163039256111.17,
+     "first_year": 201,
+     "last_year": 220,
+     "paid_to_Earth_USD2041": 92270343381884.67,
+     "paid_to_Earth_share": 0.5216933502192684,
+     "receipts_USD2041": 265756581694286.97,
+     "receipts_by_sector_USD2041": {
+      "computing": 22135387281671.227,
+      "destination": 2208311843869.212,
+      "entertainment": 10093542691896.172,
+      "licenses": 10705272552011.092,
+      "materials": 83994629359039.88,
+      "mission_support": 2537198241160.069,
+      "professional": 25953063802340.707,
+      "propellant": 39528721891841.58,
+      "research": 40118462946852.58,
+      "source_products": 20223637972053.04,
+      "sports": 8258353111551.412
+     }
+    }
+   ],
+   "portfolio": "diversified",
+   "ramp": "constant_growth",
+   "recovery": "combined",
+   "scenario": "first_pass",
+   "status": "conditional_account",
+   "traffic": {
+    "100": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 1535.994108359877,
+     "launch_pads": 17.875362409388046,
+     "launched_kg_year": 357507248.1877609,
+     "launches_year": 3575.072481877609,
+     "lunar_landings_year": 12982.286199559458,
+     "source_tug_trips_year": 605.9037244368757
+    },
+    "200": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 23455.357359219917,
+     "launch_pads": 221.69527710538372,
+     "launched_kg_year": 4433905542.107675,
+     "launches_year": 44339.055421076744,
+     "lunar_landings_year": 248127.10437295132,
+     "source_tug_trips_year": 9832.57515996398
+    },
+    "220": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 23468.57454071683,
+     "launch_pads": 240.0450903751611,
+     "launched_kg_year": 4800901807.5032215,
+     "launches_year": 48009.01807503222,
+     "lunar_landings_year": 249721.60694222237,
+     "source_tug_trips_year": 10134.668539374381
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 87101.09507191299,
+     "share_of_workforce_in_use": 0.8722742580001476,
+     "working_parts_jobs": 43659.75938111549,
+     "working_parts_made_share": 0.5103309003688471
+    },
+    "200": {
+     "jobs": 910640.0067008543,
+     "share_of_workforce_in_use": 0.3519632367979463,
+     "working_parts_jobs": 366153.42502788117,
+     "working_parts_made_share": 0.78
+    },
+    "220": {
+     "jobs": 1159793.4183478383,
+     "share_of_workforce_in_use": 0.44826126958504603,
+     "working_parts_jobs": 620339.747453959,
+     "working_parts_made_share": 0.78
+    }
+   }
+  },
+  {
+   "checkpoints": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 160310147638832.2,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 47850770952060.695,
+      "0.01": 23859756792271.55,
+      "0.03": 6049083186083.464,
+      "0.07": -940849012103.1749
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 997723020787.7815,
+     "payouts_USD2041": 51943879702444.01,
+     "population": 249637.92715724694,
+     "real_IRR": 0.05739458048119361,
+     "receipts_USD2041_year": 2947358455604.554,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 59206154134499.47,
+      "0.01": 30040648546950.58,
+      "0.03": 8463374301846.543,
+      "0.07": -30388062586.02246
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 51725071999476.95,
+      "0.01": 26369573458703.93,
+      "0.03": 7373560708378.794,
+      "0.07": -262799785087.58682
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.00244140625,
+     "all_contributions_USD2041": 4093108750383.3135,
+     "cumulative_receipts_USD2041": 545719624383439.25,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 105919056845900.81,
+      "0.01": 39429007916902.555,
+      "0.03": 7364269824812.142,
+      "0.07": -926102266480.8629
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 1055606836039.9731,
+     "payouts_USD2041": 110012165596284.12,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05795104162617115,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 312596421400273.2,
+      "0.01": 81593753753390.9,
+      "0.03": 11344757662262.348,
+      "0.07": -7403463628.7890625
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 113518890411596.14,
+      "0.01": 42862255267756.92,
+      "0.03": 8747880463277.879,
+      "0.07": -247617591200.37238
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.00244140625,
+     "all_contributions_USD2041": 4093108750383.3135,
+     "cumulative_receipts_USD2041": 644585104582767.1,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 116460739872712.86,
+      "0.01": 40733263218642.266,
+      "0.03": 7385723012204.702,
+      "0.07": -926094641360.137
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 543661042591.16797,
+     "payouts_USD2041": 120553848623096.19,
+     "population": 6468289.238000949,
+     "real_IRR": 0.057951828373472014,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 444752489034805.0,
+      "0.01": 97898878829916.39,
+      "0.03": 11611244707783.465,
+      "0.07": -7310206651.388672
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 124713165145866.66,
+      "0.01": 44252910908358.02,
+      "0.03": 8770940339616.738,
+      "0.07": -247609268832.57492
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 160310147638832.2,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 47850770952060.695,
+      "0.01": 23859756792271.55,
+      "0.03": 6049083186083.464,
+      "0.07": -940849012103.1749
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 997723020787.7815,
+     "payouts_USD2041": 51943879702444.01,
+     "population": 249637.92715724694,
+     "real_IRR": 0.05739458048119361,
+     "receipts_USD2041_year": 2947358455604.554,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 59206154134499.47,
+      "0.01": 30040648546950.58,
+      "0.03": 8463374301846.543,
+      "0.07": -30388062586.02246
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 51725071999476.95,
+      "0.01": 26369573458703.93,
+      "0.03": 7373560708378.794,
+      "0.07": -262799785087.58682
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.00048828125,
+     "all_contributions_USD2041": 4093108750383.3115,
+     "cumulative_receipts_USD2041": 545719624383439.25,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 105919056845900.81,
+      "0.01": 39429007916902.555,
+      "0.03": 7364269824812.142,
+      "0.07": -926102266480.8629
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 1055606836039.9731,
+     "payouts_USD2041": 110012165596284.12,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05795104162617115,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 312596421400273.2,
+      "0.01": 81593753753390.9,
+      "0.03": 11344757662262.348,
+      "0.07": -7403463628.7890625
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 113518890411596.14,
+      "0.01": 42862255267756.92,
+      "0.03": 8747880463277.879,
+      "0.07": -247617591200.37238
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.00048828125,
+     "all_contributions_USD2041": 4093108750383.3115,
+     "cumulative_receipts_USD2041": 644585104582767.1,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 116460739872712.86,
+      "0.01": 40733263218642.266,
+      "0.03": 7385723012204.702,
+      "0.07": -926094641360.137
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 543661042591.16797,
+     "payouts_USD2041": 120553848623096.17,
+     "population": 6468289.238000949,
+     "real_IRR": 0.057951828373472014,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 444752489034805.0,
+      "0.01": 97898878829916.39,
+      "0.03": 11611244707783.465,
+      "0.07": -7310206651.388672
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 124713165145866.66,
+      "0.01": 44252910908358.02,
+      "0.03": 8770940339616.738,
+      "0.07": -247609268832.57492
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 160310147638832.2,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 47850770952060.695,
+      "0.01": 23859756792271.55,
+      "0.03": 6049083186083.464,
+      "0.07": -940849012103.1749
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 997723020787.7815,
+     "payouts_USD2041": 51943879702444.01,
+     "population": 249637.92715724694,
+     "real_IRR": 0.05739458048119361,
+     "receipts_USD2041_year": 2947358455604.554,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 59206154134499.47,
+      "0.01": 30040648546950.58,
+      "0.03": 8463374301846.543,
+      "0.07": -30388062586.02246
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 51725071999476.95,
+      "0.01": 26369573458703.93,
+      "0.03": 7373560708378.794,
+      "0.07": -262799785087.58682
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.00048828125,
+     "all_contributions_USD2041": 4093108750383.3115,
+     "cumulative_receipts_USD2041": 545719624383439.25,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 105919056845900.81,
+      "0.01": 39429007916902.555,
+      "0.03": 7364269824812.142,
+      "0.07": -926102266480.8629
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 1055606836039.9731,
+     "payouts_USD2041": 110012165596284.12,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05795104162617115,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 312596421400273.2,
+      "0.01": 81593753753390.9,
+      "0.03": 11344757662262.348,
+      "0.07": -7403463628.7890625
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 113518890411596.14,
+      "0.01": 42862255267756.92,
+      "0.03": 8747880463277.879,
+      "0.07": -247617591200.37238
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.00048828125,
+     "all_contributions_USD2041": 4093108750383.3115,
+     "cumulative_receipts_USD2041": 644585104582767.1,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 116460739872712.86,
+      "0.01": 40733263218642.266,
+      "0.03": 7385723012204.702,
+      "0.07": -926094641360.137
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 543661042591.16797,
+     "payouts_USD2041": 120553848623096.17,
+     "population": 6468289.238000949,
+     "real_IRR": 0.057951828373472014,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 444752489034805.0,
+      "0.01": 97898878829916.39,
+      "0.03": 11611244707783.465,
+      "0.07": -7310206651.388672
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 124713165145866.66,
+      "0.01": 44252910908358.02,
+      "0.03": 8770940339616.738,
+      "0.07": -247609268832.57492
+     }
+    }
+   ],
+   "convergence": {
+    "converged": true,
+    "history": [
+     1.0,
+     1.0,
+     0.5,
+     0.3333333333333333,
+     0.25,
+     0.014492753623188406,
+     0.00245398773006135,
+     6.784870999469044e-07,
+     8.432266131941883e-11
+    ],
+    "iterations": 9,
+    "relative_requirement_residual": 8.432266131941883e-11
+   },
+   "engineering": {
+    "economy.production.local_working_parts.labour_fraction_of_import_price": 0.25,
+    "economy.production.local_working_parts.share": {
+     "by_year": [
+      [
+       8,
+       0.0
+      ],
+      [
+       38,
+       0.78
+      ]
+     ]
+    }
+   },
+   "first_capacity_shortfall": null,
+   "growth": "reference",
+   "market": "breakthrough",
+   "material_drawn": {
+    "100": {
+     "asteroid_feed_kg": 3380554967097.4644,
+     "lunar_raw_kg": 178974026828.01767,
+     "nitrogen_kg": 924187789.6527658,
+     "virgin_metal_kg": 3855459916.292842,
+     "water_kg": 236638847696.82248
+    },
+    "200": {
+     "asteroid_feed_kg": 75555004634167.7,
+     "lunar_raw_kg": 4561952421323.35,
+     "nitrogen_kg": 23191280651.124126,
+     "virgin_metal_kg": 105767073928.24805,
+     "water_kg": 5288850324391.738
+    },
+    "220": {
+     "asteroid_feed_kg": 111279234847145.44,
+     "lunar_raw_kg": 4846760229603.46,
+     "nitrogen_kg": 26479457986.614487,
+     "virgin_metal_kg": 112171086779.19698,
+     "water_kg": 7789546439300.18
+    }
+   },
+   "name": "first_pass:services:constant_growth:local_parts",
+   "opening": {
+    "founding_cost_USD2041": 3500719392210.505,
+    "reserve_USD2041": 194909940494.4434,
+    "working_cash_USD2041": 397479417678.3629
+   },
+   "periods": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 3500719392210.505,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 0.0,
+      "capital_external_USD2041": 0.0,
+      "capital_local_USD2041": 0.0,
+      "capital_resource_provision_USD2041": 0.0,
+      "commercial_operating_USD2041": 0.0,
+      "hotel_payroll_USD2041": 0.0,
+      "operating_external_logistics_materials_USD2041": 0.0,
+      "operating_external_replacement_USD2041": 0.0,
+      "operating_external_services_USD2041": 0.0,
+      "operating_local_payroll_USD2041": 0.0,
+      "operating_local_replacement_USD2041": 0.0,
+      "operating_resource_provision_USD2041": 0.0,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 0.0,
+      "seed_deployment_and_allowance_USD2041": 3500719392210.505
+     },
+     "distributions_USD2041": 0.0,
+     "first_year": 0,
+     "last_year": 7,
+     "paid_to_Earth_USD2041": null,
+     "paid_to_Earth_share": null,
+     "receipts_USD2041": 0.0,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 0.0,
+      "entertainment": 0.0,
+      "licenses": 0.0,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 0.0,
+      "propellant": 0.0,
+      "research": 0.0,
+      "source_products": 0.0,
+      "sports": 0.0
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 6942328516114.916,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 40237222579.62265,
+      "capital_external_USD2041": 52989570319.899506,
+      "capital_local_USD2041": 2538841749.9960723,
+      "capital_resource_provision_USD2041": 7074147042.956183,
+      "commercial_operating_USD2041": 6652341105184.084,
+      "hotel_payroll_USD2041": 38312500.0,
+      "operating_external_logistics_materials_USD2041": 28744265061.07137,
+      "operating_external_replacement_USD2041": 17573921619.916397,
+      "operating_external_services_USD2041": 2532665707.6457787,
+      "operating_local_payroll_USD2041": 1610846360.7269745,
+      "operating_local_replacement_USD2041": 1681409697.2085416,
+      "operating_resource_provision_USD2041": 13769442951.89222,
+      "residual_service_capital_USD2041": 59435081014.74057,
+      "residual_service_renewal_USD2041": 61761684325.15555,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 3991835096451.9346,
+     "first_year": 8,
+     "last_year": 25,
+     "paid_to_Earth_USD2041": 101840422708.53305,
+     "paid_to_Earth_share": 0.014669490571086552,
+     "receipts_USD2041": 11445968308643.264,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 4806907553.080814,
+      "entertainment": 2689321352528.3145,
+      "licenses": 2716486214675.065,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 1475000000000.0,
+      "propellant": 0.0,
+      "research": 2360000000000.0,
+      "source_products": 0.0,
+      "sports": 2200353833886.8027
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 18265537494208.023,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 98070681501.82387,
+      "capital_external_USD2041": 147165779258.8012,
+      "capital_local_USD2041": 21595390986.628483,
+      "capital_resource_provision_USD2041": 17832736513.323402,
+      "commercial_operating_USD2041": 17450822885084.986,
+      "hotel_payroll_USD2041": 117500000.0,
+      "operating_external_logistics_materials_USD2041": 86615806551.38794,
+      "operating_external_replacement_USD2041": 83256688619.66989,
+      "operating_external_services_USD2041": 7122975344.955954,
+      "operating_local_payroll_USD2041": 5686999282.552731,
+      "operating_local_replacement_USD2041": 21651849353.60377,
+      "operating_resource_provision_USD2041": 39924727327.21806,
+      "residual_service_capital_USD2041": 111440776902.63855,
+      "residual_service_renewal_USD2041": 174232697480.4318,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 10357266710194.031,
+     "first_year": 26,
+     "last_year": 50,
+     "paid_to_Earth_USD2041": 324161249774.815,
+     "paid_to_Earth_share": 0.017747150877854324,
+     "receipts_USD2041": 29349998058348.176,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 14878723390.504068,
+      "entertainment": 5752649336288.605,
+      "licenses": 5810756905342.024,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 5025000000000.0,
+      "propellant": 0.0,
+      "research": 8040000000000.0,
+      "source_products": 0.0,
+      "sports": 4706713093327.04
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 79876490236821.8,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 525984799448.8323,
+      "capital_external_USD2041": 1014535552448.8779,
+      "capital_local_USD2041": 198532140315.21127,
+      "capital_resource_provision_USD2041": 123026645034.68599,
+      "commercial_operating_USD2041": 74938520789479.52,
+      "hotel_payroll_USD2041": 858875000.0,
+      "operating_external_logistics_materials_USD2041": 593766652340.3872,
+      "operating_external_replacement_USD2041": 623676057163.9271,
+      "operating_external_services_USD2041": 50771265289.5412,
+      "operating_local_payroll_USD2041": 34369334855.33018,
+      "operating_local_replacement_USD2041": 224895157128.7835,
+      "operating_resource_provision_USD2041": 287490608128.3913,
+      "residual_service_capital_USD2041": 289746019946.8602,
+      "residual_service_renewal_USD2041": 970316340241.454,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 37594777895798.04,
+     "first_year": 51,
+     "last_year": 100,
+     "paid_to_Earth_USD2041": 2282749527242.7334,
+     "paid_to_Earth_share": 0.028578490623144857,
+     "receipts_USD2041": 119514181271840.75,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 109305244141.70242,
+      "entertainment": 13898523845767.86,
+      "licenses": 14038912975523.09,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 30806122960090.152,
+      "propellant": 0.0,
+      "research": 49289796736144.24,
+      "source_products": 0.0,
+      "sports": 11371519510173.703
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 122161617952920.8,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 1786360465469.1301,
+      "capital_external_USD2041": 3798405127534.0645,
+      "capital_local_USD2041": 1171752984380.2844,
+      "capital_resource_provision_USD2041": 559600238900.709,
+      "commercial_operating_USD2041": 105658576569031.36,
+      "hotel_payroll_USD2041": 4366687500.0,
+      "operating_external_logistics_materials_USD2041": 2436633373692.2324,
+      "operating_external_replacement_USD2041": 2110073122329.775,
+      "operating_external_services_USD2041": 242250659914.7338,
+      "operating_local_payroll_USD2041": 170234871713.31882,
+      "operating_local_replacement_USD2041": 1297652574921.116,
+      "operating_resource_provision_USD2041": 1398183282416.9294,
+      "residual_service_capital_USD2041": 133728932283.16632,
+      "residual_service_renewal_USD2041": 1393799062833.971,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 44310317030622.83,
+     "first_year": 101,
+     "last_year": 150,
+     "paid_to_Earth_USD2041": 8587362283470.806,
+     "paid_to_Earth_share": 0.07029509290536937,
+     "receipts_USD2041": 167901026541630.7,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 556391428151.1588,
+      "entertainment": 17834944588384.043,
+      "licenses": 18015095543822.26,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 44962449073375.84,
+      "propellant": 0.0,
+      "research": 71939918517401.34,
+      "source_products": 0.0,
+      "sports": 14592227390496.033
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.00048828125,
+     "costs_USD2041": 201454040379567.06,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 7125182744634.876,
+      "capital_external_USD2041": 14907652797969.06,
+      "capital_local_USD2041": 5286565713911.478,
+      "capital_resource_provision_USD2041": 2530558696139.802,
+      "commercial_operating_USD2041": 135648862965540.83,
+      "hotel_payroll_USD2041": 22211187500.0,
+      "operating_external_logistics_materials_USD2041": 11015424787307.934,
+      "operating_external_replacement_USD2041": 7939547108534.834,
+      "operating_external_services_USD2041": 1174041626822.5554,
+      "operating_local_payroll_USD2041": 858613279447.3018,
+      "operating_local_replacement_USD2041": 6051142153244.94,
+      "operating_resource_provision_USD2041": 6961057997569.962,
+      "residual_service_capital_USD2041": 163446472790.5365,
+      "residual_service_renewal_USD2041": 1769732848152.942,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 13757968863217.287,
+     "first_year": 151,
+     "last_year": 200,
+     "paid_to_Earth_USD2041": 35036666320634.383,
+     "paid_to_Earth_share": 0.17391890604239307,
+     "receipts_USD2041": 217508450202976.34,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 2830988656758.143,
+      "entertainment": 22880750469238.113,
+      "licenses": 23111869160846.574,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 57678549190710.69,
+      "propellant": 0.0,
+      "research": 92285678705137.11,
+      "source_products": 0.0,
+      "sports": 18720614020285.727
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 87671205465057.38,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 128239695507.00731,
+      "capital_external_USD2041": 228721170025.791,
+      "capital_local_USD2041": 137677959994.2299,
+      "capital_resource_provision_USD2041": 11496917920.54566,
+      "commercial_operating_USD2041": 61145068026531.36,
+      "hotel_payroll_USD2041": 17612500000.0,
+      "operating_external_logistics_materials_USD2041": 8725128712008.456,
+      "operating_external_replacement_USD2041": 4956443404582.092,
+      "operating_external_services_USD2041": 687802939018.599,
+      "operating_local_payroll_USD2041": 879679870039.003,
+      "operating_local_replacement_USD2041": 4393211199515.947,
+      "operating_resource_provision_USD2041": 5567533386134.664,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 792589683779.6802,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 10541683026812.05,
+     "first_year": 201,
+     "last_year": 220,
+     "paid_to_Earth_USD2041": 14598096225634.938,
+     "paid_to_Earth_share": 0.1665095871352336,
+     "receipts_USD2041": 98865480199327.89,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 2244914545749.0996,
+      "entertainment": 10260842856086.785,
+      "licenses": 10364487733420.994,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 26000000000000.0,
+      "propellant": 0.0,
+      "research": 41600000000000.0,
+      "source_products": 0.0,
+      "sports": 8395235064071.006
+     }
+    }
+   ],
+   "portfolio": "services",
+   "ramp": "constant_growth",
+   "recovery": "combined",
+   "scenario": "first_pass",
+   "status": "conditional_account",
+   "traffic": {
+    "100": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 524.4671641257379,
+     "launch_pads": 5.243219110580383,
+     "launched_kg_year": 104864382.21160766,
+     "launches_year": 1048.6438221160765,
+     "lunar_landings_year": 8593.551011405769,
+     "source_tug_trips_year": 333.8894519883141
+    },
+    "200": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 3808.2115056184502,
+     "launch_pads": 37.99352595389188,
+     "launched_kg_year": 759870519.0778376,
+     "launches_year": 7598.705190778376,
+     "lunar_landings_year": 167426.97125347785,
+     "source_tug_trips_year": 5610.521420035083
+    },
+    "220": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 5609.019535454676,
+     "launch_pads": 55.97222212115171,
+     "launched_kg_year": 1119444442.4230342,
+     "launches_year": 11194.444424230342,
+     "lunar_landings_year": 168980.78313261378,
+     "source_tug_trips_year": 5986.173765439848
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 72992.41322392946,
+     "share_of_workforce_in_use": 0.7309828083329615,
+     "working_parts_jobs": 55162.19482451435,
+     "working_parts_made_share": 0.6522958189550906
+    },
+    "200": {
+     "jobs": 321943.240391071,
+     "share_of_workforce_in_use": 0.12443137147441818,
+     "working_parts_jobs": 171809.99897023797,
+     "working_parts_made_share": 0.78
+    },
+    "220": {
+     "jobs": 906831.6630370219,
+     "share_of_workforce_in_use": 0.35049130831589165,
+     "working_parts_jobs": 745178.4687356848,
+     "working_parts_made_share": 0.78
+    }
+   }
+  },
+  {
+   "checkpoints": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 160310147638832.2,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 45616113653527.77,
+      "0.01": 22819479770437.805,
+      "0.03": 5789572245861.162,
+      "0.07": -969723683867.0176
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 961509822807.0859,
+     "payouts_USD2041": 49709222403911.086,
+     "population": 249637.92715724694,
+     "real_IRR": 0.056846518172036675,
+     "receipts_USD2041_year": 2947358455604.554,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 57205517198208.72,
+      "0.01": 29107345490905.664,
+      "0.03": 8230876409528.703,
+      "0.07": -55429937313.93848
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 49607930553818.664,
+      "0.01": 25380940588735.92,
+      "0.03": 7126232434040.692,
+      "0.07": -290048488672.31824
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0244140625,
+     "all_contributions_USD2041": 4093108750383.3354,
+     "cumulative_receipts_USD2041": 545719624383439.25,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 48025890148873.15,
+      "0.01": 23152346081226.785,
+      "0.03": 5796305441554.178,
+      "0.07": -969720239629.2999
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 984071008284.2549,
+     "payouts_USD2041": 52118998899256.484,
+     "population": 6468289.238000949,
+     "real_IRR": 0.056846926834043354,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 258355569154537.12,
+      "0.01": 70618555121717.56,
+      "0.03": 10647740851829.16,
+      "0.07": -34949445553.02637
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 56003821901466.72,
+      "0.01": 31224866424048.297,
+      "0.03": 8007945425273.093,
+      "0.07": -277521058907.94464
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0244140625,
+     "all_contributions_USD2041": 4093108750383.3354,
+     "cumulative_receipts_USD2041": 644585104582767.1,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 51276828508371.98,
+      "0.01": 23536803988142.785,
+      "0.03": 5802053008373.781,
+      "0.07": -969718581927.5757
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 307872740691.60156,
+     "payouts_USD2041": 55369937258755.31,
+     "population": 6468289.238000949,
+     "real_IRR": 0.0568471632009081,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 387383761860795.75,
+      "0.01": 86522188348784.69,
+      "0.03": 10907178742593.117,
+      "0.07": -34858956483.37891
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 60000053079072.19,
+      "0.01": 31712928452123.633,
+      "0.03": 8015793674006.269,
+      "0.07": -277518351503.9725
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 160310147638832.2,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 45616113653527.77,
+      "0.01": 22819479770437.805,
+      "0.03": 5789572245861.162,
+      "0.07": -969723683867.0176
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 961509822807.0859,
+     "payouts_USD2041": 49709222403911.086,
+     "population": 249637.92715724694,
+     "real_IRR": 0.056846518172036675,
+     "receipts_USD2041_year": 2947358455604.554,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 57205517198208.72,
+      "0.01": 29107345490905.664,
+      "0.03": 8230876409528.703,
+      "0.07": -55429937313.93848
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 49607930553818.664,
+      "0.01": 25380940588735.92,
+      "0.03": 7126232434040.692,
+      "0.07": -290048488672.31824
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 545719624383439.25,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 48025890148873.164,
+      "0.01": 23152346081226.79,
+      "0.03": 5796305441554.178,
+      "0.07": -969720239629.2999
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 984071008284.2549,
+     "payouts_USD2041": 52118998899256.48,
+     "population": 6468289.238000949,
+     "real_IRR": 0.056846926834043354,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 258355569154537.12,
+      "0.01": 70618555121717.56,
+      "0.03": 10647740851829.16,
+      "0.07": -34949445553.02637
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 56003821901466.72,
+      "0.01": 31224866424048.297,
+      "0.03": 8007945425273.093,
+      "0.07": -277521058907.94464
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 644585104582767.1,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 51276828508371.97,
+      "0.01": 23536803988142.785,
+      "0.03": 5802053008373.781,
+      "0.07": -969718581927.5757
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 307872740691.60156,
+     "payouts_USD2041": 55369937258755.28,
+     "population": 6468289.238000949,
+     "real_IRR": 0.0568471632009081,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 387383761860795.75,
+      "0.01": 86522188348784.69,
+      "0.03": 10907178742593.117,
+      "0.07": -34858956483.37891
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 60000053079072.19,
+      "0.01": 31712928452123.633,
+      "0.03": 8015793674006.269,
+      "0.07": -277518351503.9725
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 160310147638832.2,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 45616113653527.77,
+      "0.01": 22819479770437.805,
+      "0.03": 5789572245861.162,
+      "0.07": -969723683867.0176
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 961509822807.0859,
+     "payouts_USD2041": 49709222403911.086,
+     "population": 249637.92715724694,
+     "real_IRR": 0.056846518172036675,
+     "receipts_USD2041_year": 2947358455604.554,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 57205517198208.72,
+      "0.01": 29107345490905.664,
+      "0.03": 8230876409528.703,
+      "0.07": -55429937313.93848
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 49607930553818.664,
+      "0.01": 25380940588735.92,
+      "0.03": 7126232434040.692,
+      "0.07": -290048488672.31824
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 545719624383439.25,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 48025890148873.164,
+      "0.01": 23152346081226.79,
+      "0.03": 5796305441554.178,
+      "0.07": -969720239629.2999
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 984071008284.2549,
+     "payouts_USD2041": 52118998899256.48,
+     "population": 6468289.238000949,
+     "real_IRR": 0.056846926834043354,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 258355569154537.12,
+      "0.01": 70618555121717.56,
+      "0.03": 10647740851829.16,
+      "0.07": -34949445553.02637
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 56003821901466.72,
+      "0.01": 31224866424048.297,
+      "0.03": 8007945425273.093,
+      "0.07": -277521058907.94464
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 644585104582767.1,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 51276828508371.97,
+      "0.01": 23536803988142.785,
+      "0.03": 5802053008373.781,
+      "0.07": -969718581927.5757
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 307872740691.60156,
+     "payouts_USD2041": 55369937258755.28,
+     "population": 6468289.238000949,
+     "real_IRR": 0.0568471632009081,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 387383761860795.75,
+      "0.01": 86522188348784.69,
+      "0.03": 10907178742593.117,
+      "0.07": -34858956483.37891
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 60000053079072.19,
+      "0.01": 31712928452123.633,
+      "0.03": 8015793674006.269,
+      "0.07": -277518351503.9725
+     }
+    }
+   ],
+   "convergence": {
+    "converged": true,
+    "history": [
+     1.0,
+     1.0,
+     0.5,
+     0.25,
+     0.1111111111111111,
+     0.01492537313432846,
+     0.0024125452352231603,
+     0.0012077294685990338,
+     5.354939214723727e-08
+    ],
+    "iterations": 9,
+    "relative_requirement_residual": 5.354939214723727e-08
+   },
+   "engineering": {
+    "economy.production.local_working_parts.labour_fraction_of_import_price": 0.5,
+    "economy.production.local_working_parts.share": {
+     "by_year": [
+      [
+       8,
+       0.0
+      ],
+      [
+       38,
+       0.78
+      ]
+     ]
+    }
+   },
+   "first_capacity_shortfall": null,
+   "growth": "reference",
+   "market": "breakthrough",
+   "material_drawn": {
+    "100": {
+     "asteroid_feed_kg": 3815865541976.5093,
+     "lunar_raw_kg": 166533775897.78946,
+     "nitrogen_kg": 924187789.6527658,
+     "virgin_metal_kg": 3593249598.0233836,
+     "water_kg": 267110587938.35562
+    },
+    "200": {
+     "asteroid_feed_kg": 88278038592172.2,
+     "lunar_raw_kg": 4200308449160.139,
+     "nitrogen_kg": 23191280651.124126,
+     "virgin_metal_kg": 91474953393.99092,
+     "water_kg": 6179462701452.054
+    },
+    "220": {
+     "asteroid_feed_kg": 124856622511815.66,
+     "lunar_raw_kg": 4464020941210.394,
+     "nitrogen_kg": 26479457986.614487,
+     "virgin_metal_kg": 96957443799.81067,
+     "water_kg": 8739963575827.096
+    }
+   },
+   "name": "first_pass:services:constant_growth:local_parts_labour_50",
+   "opening": {
+    "founding_cost_USD2041": 3500719392210.505,
+    "reserve_USD2041": 194909940494.4434,
+    "working_cash_USD2041": 397479417678.3629
+   },
+   "periods": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 3500719392210.505,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 0.0,
+      "capital_external_USD2041": 0.0,
+      "capital_local_USD2041": 0.0,
+      "capital_resource_provision_USD2041": 0.0,
+      "commercial_operating_USD2041": 0.0,
+      "hotel_payroll_USD2041": 0.0,
+      "operating_external_logistics_materials_USD2041": 0.0,
+      "operating_external_replacement_USD2041": 0.0,
+      "operating_external_services_USD2041": 0.0,
+      "operating_local_payroll_USD2041": 0.0,
+      "operating_local_replacement_USD2041": 0.0,
+      "operating_resource_provision_USD2041": 0.0,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 0.0,
+      "seed_deployment_and_allowance_USD2041": 3500719392210.505
+     },
+     "distributions_USD2041": 0.0,
+     "first_year": 0,
+     "last_year": 7,
+     "paid_to_Earth_USD2041": null,
+     "paid_to_Earth_share": null,
+     "receipts_USD2041": 0.0,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 0.0,
+      "entertainment": 0.0,
+      "licenses": 0.0,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 0.0,
+      "propellant": 0.0,
+      "research": 0.0,
+      "source_products": 0.0,
+      "sports": 0.0
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 6948382973165.382,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 41012644088.41898,
+      "capital_external_USD2041": 53863200739.30437,
+      "capital_local_USD2041": 3880701355.7235956,
+      "capital_resource_provision_USD2041": 7125035405.617276,
+      "commercial_operating_USD2041": 6652341105184.084,
+      "hotel_payroll_USD2041": 38312500.0,
+      "operating_external_logistics_materials_USD2041": 29316055770.028927,
+      "operating_external_replacement_USD2041": 18451230194.756535,
+      "operating_external_services_USD2041": 2542488740.8005056,
+      "operating_local_payroll_USD2041": 1633985584.2955842,
+      "operating_local_replacement_USD2041": 3149033286.228614,
+      "operating_resource_provision_USD2041": 13832414976.227749,
+      "residual_service_capital_USD2041": 59435081014.74057,
+      "residual_service_renewal_USD2041": 61761684325.15555,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 3983158805208.0825,
+     "first_year": 8,
+     "last_year": 25,
+     "paid_to_Earth_USD2041": 104172975444.89034,
+     "paid_to_Earth_share": 0.014992405549205595,
+     "receipts_USD2041": 11445968308643.264,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 4806907553.080814,
+      "entertainment": 2689321352528.3145,
+      "licenses": 2716486214675.065,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 1475000000000.0,
+      "propellant": 0.0,
+      "research": 2360000000000.0,
+      "source_products": 0.0,
+      "sports": 2200353833886.8027
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 18481583055254.73,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 129297448281.58275,
+      "capital_external_USD2041": 233502721561.3848,
+      "capital_local_USD2041": 24477782340.498814,
+      "capital_resource_provision_USD2041": 21666060571.719006,
+      "commercial_operating_USD2041": 17450822885084.986,
+      "hotel_payroll_USD2041": 117500000.0,
+      "operating_external_logistics_materials_USD2041": 115306829890.02664,
+      "operating_external_replacement_USD2041": 139853710231.37827,
+      "operating_external_services_USD2041": 7818810247.562509,
+      "operating_local_payroll_USD2041": 5805719848.649044,
+      "operating_local_replacement_USD2041": 24156288682.03107,
+      "operating_resource_provision_USD2041": 43083824131.84128,
+      "residual_service_capital_USD2041": 111440776902.63855,
+      "residual_service_renewal_USD2041": 174232697480.4318,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 10131695686589.21,
+     "first_year": 26,
+     "last_year": 50,
+     "paid_to_Earth_USD2041": 496482071930.35223,
+     "paid_to_Earth_share": 0.026863611761287473,
+     "receipts_USD2041": 29349998058348.176,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 14878723390.504068,
+      "entertainment": 5752649336288.605,
+      "licenses": 5810756905342.024,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 5025000000000.0,
+      "propellant": 0.0,
+      "research": 8040000000000.0,
+      "source_products": 0.0,
+      "sports": 4706713093327.04
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 81771531664382.9,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 788620258854.6025,
+      "capital_external_USD2041": 1744591812251.0518,
+      "capital_local_USD2041": 218862907386.66684,
+      "capital_resource_provision_USD2041": 155180339583.6127,
+      "commercial_operating_USD2041": 74938520789479.52,
+      "hotel_payroll_USD2041": 858875000.0,
+      "operating_external_logistics_materials_USD2041": 847516454617.2717,
+      "operating_external_replacement_USD2041": 1165263676886.1892,
+      "operating_external_services_USD2041": 56723497192.744774,
+      "operating_local_payroll_USD2041": 35606190060.87938,
+      "operating_local_replacement_USD2041": 244255346544.39285,
+      "operating_resource_provision_USD2041": 315469156337.6701,
+      "residual_service_capital_USD2041": 289746019946.8602,
+      "residual_service_renewal_USD2041": 970316340241.454,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 35594367912113.79,
+     "first_year": 51,
+     "last_year": 100,
+     "paid_to_Earth_USD2041": 3814095440947.2573,
+     "paid_to_Earth_share": 0.046643316608053174,
+     "receipts_USD2041": 119514181271840.75,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 109305244141.70242,
+      "entertainment": 13898523845767.86,
+      "licenses": 14038912975523.09,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 30806122960090.152,
+      "propellant": 0.0,
+      "research": 49289796736144.24,
+      "source_products": 0.0,
+      "sports": 11371519510173.703
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 133253624726916.06,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 3332990201024.913,
+      "capital_external_USD2041": 8086722260747.547,
+      "capital_local_USD2041": 1302377952754.7527,
+      "capital_resource_provision_USD2041": 753299377832.5453,
+      "commercial_operating_USD2041": 105658576569031.36,
+      "hotel_payroll_USD2041": 4366687500.0,
+      "operating_external_logistics_materials_USD2041": 3927544480380.9385,
+      "operating_external_replacement_USD2041": 5205338441161.345,
+      "operating_external_services_USD2041": 277831672058.697,
+      "operating_local_payroll_USD2041": 177746888017.15018,
+      "operating_local_replacement_USD2041": 1435736324661.567,
+      "operating_resource_provision_USD2041": 1563565876628.104,
+      "residual_service_capital_USD2041": 133728932283.16632,
+      "residual_service_renewal_USD2041": 1393799062833.971,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 0.009765625,
+     "first_year": 101,
+     "last_year": 150,
+     "paid_to_Earth_USD2041": 17497436854348.527,
+     "paid_to_Earth_share": 0.1313092750025148,
+     "receipts_USD2041": 167901026541630.7,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 556391428151.1588,
+      "entertainment": 17834944588384.043,
+      "licenses": 18015095543822.26,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 44962449073375.84,
+      "propellant": 0.0,
+      "research": 71939918517401.34,
+      "source_products": 0.0,
+      "sports": 14592227390496.033
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 245759960670042.9,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 13122453408973.943,
+      "capital_external_USD2041": 31725503102139.21,
+      "capital_local_USD2041": 5603774450710.095,
+      "capital_resource_provision_USD2041": 3361752551287.7236,
+      "commercial_operating_USD2041": 135648862965540.83,
+      "hotel_payroll_USD2041": 22211187500.0,
+      "operating_external_logistics_materials_USD2041": 17366659880494.04,
+      "operating_external_replacement_USD2041": 20404182395746.734,
+      "operating_external_services_USD2041": 1326561280927.1296,
+      "operating_local_payroll_USD2041": 893933807249.4149,
+      "operating_local_replacement_USD2041": 6682038084323.114,
+      "operating_resource_provision_USD2041": 7668848234207.208,
+      "residual_service_capital_USD2041": 163446472790.5365,
+      "residual_service_renewal_USD2041": 1769732848152.942,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 2409776495345.384,
+     "first_year": 151,
+     "last_year": 200,
+     "paid_to_Earth_USD2041": 70822906659307.11,
+     "paid_to_Earth_share": 0.2881791910538018,
+     "receipts_USD2041": 217508450202976.34,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 2830988656758.143,
+      "entertainment": 22880750469238.113,
+      "licenses": 23111869160846.574,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 57678549190710.69,
+      "propellant": 0.0,
+      "research": 92285678705137.11,
+      "source_products": 0.0,
+      "sports": 18720614020285.727
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 94869249021722.42,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 225206270936.8638,
+      "capital_external_USD2041": 342030847161.9753,
+      "capital_local_USD2041": 301415641229.06415,
+      "capital_resource_provision_USD2041": 14649892359.636986,
+      "commercial_operating_USD2041": 61145068026531.36,
+      "hotel_payroll_USD2041": 17612500000.0,
+      "operating_external_logistics_materials_USD2041": 9868286451911.217,
+      "operating_external_replacement_USD2041": 6717799738948.272,
+      "operating_external_services_USD2041": 700887540456.758,
+      "operating_local_payroll_USD2041": 892577789749.161,
+      "operating_local_replacement_USD2041": 8154624677698.997,
+      "operating_resource_provision_USD2041": 5696499960959.43,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 792589683779.6802,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 3250938359498.799,
+     "first_year": 201,
+     "last_year": 220,
+     "paid_to_Earth_USD2041": 17629004578478.223,
+     "paid_to_Earth_share": 0.18582422397421602,
+     "receipts_USD2041": 98865480199327.89,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 2244914545749.0996,
+      "entertainment": 10260842856086.785,
+      "licenses": 10364487733420.994,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 26000000000000.0,
+      "propellant": 0.0,
+      "research": 41600000000000.0,
+      "source_products": 0.0,
+      "sports": 8395235064071.006
+     }
+    }
+   ],
+   "portfolio": "services",
+   "ramp": "constant_growth",
+   "recovery": "combined",
+   "scenario": "first_pass",
+   "status": "conditional_account",
+   "traffic": {
+    "100": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 891.5633325936253,
+     "launch_pads": 8.917891385480852,
+     "launched_kg_year": 178357827.70961705,
+     "launches_year": 1783.5782770961705,
+     "lunar_landings_year": 9051.474269378894,
+     "source_tug_trips_year": 387.7160640095019
+    },
+    "200": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 3854.0369904608797,
+     "launch_pads": 38.36371941337475,
+     "launched_kg_year": 767274388.267495,
+     "launches_year": 7672.74388267495,
+     "lunar_landings_year": 167429.60781457662,
+     "source_tug_trips_year": 5616.590478042602
+    },
+    "220": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 5627.577876591961,
+     "launch_pads": 56.04065414127186,
+     "launched_kg_year": 1120813082.8254373,
+     "launches_year": 11208.130828254372,
+     "lunar_landings_year": 168980.92486078132,
+     "source_tug_trips_year": 5987.719614908624
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 79369.76657646512,
+     "share_of_workforce_in_use": 0.7948488384786789,
+     "working_parts_jobs": 61106.22607493288,
+     "working_parts_made_share": 0.3261479094775453
+    },
+    "200": {
+     "jobs": 538372.6812679117,
+     "share_of_workforce_in_use": 0.20808155814407345,
+     "working_parts_jobs": 385174.8741159203,
+     "working_parts_made_share": 0.78
+    },
+    "220": {
+     "jobs": 1666466.6796279096,
+     "share_of_workforce_in_use": 0.6440909714725966,
+     "working_parts_jobs": 1504756.0222725333,
+     "working_parts_made_share": 0.78
+    }
+   }
+  },
+  {
+   "checkpoints": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 160310147638832.2,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 49350427340802.55,
+      "0.01": 24585765537108.727,
+      "0.03": 6242721673114.416,
+      "0.07": -918135911667.3533
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 1015859351594.623,
+     "payouts_USD2041": 53443536091185.86,
+     "population": 249637.92715724694,
+     "real_IRR": 0.05781262516137098,
+     "receipts_USD2041_year": 2947358455604.554,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 60407023171224.31,
+      "0.01": 30624330168289.445,
+      "0.03": 8619426143012.453,
+      "0.07": -12514734946.848633
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 53194070415263.555,
+      "0.01": 27078613645395.945,
+      "0.03": 7561187900764.868,
+      "0.07": -241264594531.31247
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0009765625,
+     "all_contributions_USD2041": 4093108750383.312,
+     "cumulative_receipts_USD2041": 545719624383439.25,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 121574307708426.62,
+      "0.01": 43065904687934.58,
+      "0.03": 7709187118458.19,
+      "0.07": -902431423532.5737
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 1087573908768.5635,
+     "payouts_USD2041": 125667416458809.94,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05838159799147469,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 319956674773753.44,
+      "0.01": 83480125776152.03,
+      "0.03": 11575862167857.012,
+      "0.07": 11052420517.858398
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 129140585114022.22,
+      "0.01": 46369247966117.016,
+      "0.03": 9076733137745.453,
+      "0.07": -225156722145.40216
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0009765625,
+     "all_contributions_USD2041": 4093108750383.312,
+     "cumulative_receipts_USD2041": 644585104582767.1,
+     "financing": "equity",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 134963193917839.92,
+      "0.01": 44720571603175.7,
+      "0.03": 7736334419094.16,
+      "0.07": -902421834395.49
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 681359387098.7856,
+     "payouts_USD2041": 139056302668223.23,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05838250695675129,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 452141101645177.9,
+      "0.01": 99788847891932.25,
+      "0.03": 11842411145256.04,
+      "0.07": 11145701195.381836
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 143078471229575.53,
+      "0.01": 48096447362433.06,
+      "0.03": 9105224125629.207,
+      "0.07": -225146553578.4217
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 160310147638832.2,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 49350427340802.55,
+      "0.01": 24585765537108.727,
+      "0.03": 6242721673114.416,
+      "0.07": -918135911667.3533
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 1015859351594.623,
+     "payouts_USD2041": 53443536091185.86,
+     "population": 249637.92715724694,
+     "real_IRR": 0.05781262516137098,
+     "receipts_USD2041_year": 2947358455604.554,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 60407023171224.31,
+      "0.01": 30624330168289.445,
+      "0.03": 8619426143012.453,
+      "0.07": -12514734946.848633
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 53194070415263.555,
+      "0.01": 27078613645395.945,
+      "0.03": 7561187900764.868,
+      "0.07": -241264594531.31247
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 545719624383439.25,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 121574307708426.62,
+      "0.01": 43065904687934.58,
+      "0.03": 7709187118458.19,
+      "0.07": -902431423532.5737
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 1087573908768.5635,
+     "payouts_USD2041": 125667416458809.94,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05838159799147469,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 319956674773753.44,
+      "0.01": 83480125776152.03,
+      "0.03": 11575862167857.012,
+      "0.07": 11052420517.858398
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 129140585114022.22,
+      "0.01": 46369247966117.016,
+      "0.03": 9076733137745.453,
+      "0.07": -225156722145.40216
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 644585104582767.1,
+     "financing": "funded_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 134963193917839.92,
+      "0.01": 44720571603175.7,
+      "0.03": 7736334419094.16,
+      "0.07": -902421834395.49
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 681359387098.7856,
+     "payouts_USD2041": 139056302668223.22,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05838250695675129,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 452141101645177.9,
+      "0.01": 99788847891932.25,
+      "0.03": 11842411145256.04,
+      "0.07": 11145701195.381836
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 143078471229575.53,
+      "0.01": 48096447362433.06,
+      "0.03": 9105224125629.207,
+      "0.07": -225146553578.4217
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 160310147638832.2,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 49350427340802.55,
+      "0.01": 24585765537108.727,
+      "0.03": 6242721673114.416,
+      "0.07": -918135911667.3533
+     },
+     "horizon": 100,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 1015859351594.623,
+     "payouts_USD2041": 53443536091185.86,
+     "population": 249637.92715724694,
+     "real_IRR": 0.05781262516137098,
+     "receipts_USD2041_year": 2947358455604.554,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 60407023171224.31,
+      "0.01": 30624330168289.445,
+      "0.03": 8619426143012.453,
+      "0.07": -12514734946.848633
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 53194070415263.555,
+      "0.01": 27078613645395.945,
+      "0.03": 7561187900764.868,
+      "0.07": -241264594531.31247
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 545719624383439.25,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 121574307708426.62,
+      "0.01": 43065904687934.58,
+      "0.03": 7709187118458.19,
+      "0.07": -902431423532.5737
+     },
+     "horizon": 200,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 1087573908768.5635,
+     "payouts_USD2041": 125667416458809.94,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05838159799147469,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 319956674773753.44,
+      "0.01": 83480125776152.03,
+      "0.03": 11575862167857.012,
+      "0.07": 11052420517.858398
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 129140585114022.22,
+      "0.01": 46369247966117.016,
+      "0.03": 9076733137745.453,
+      "0.07": -225156722145.40216
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "all_contributions_USD2041": 4093108750383.311,
+     "cumulative_receipts_USD2041": 644585104582767.1,
+     "financing": "U_credit",
+     "first_payout_year": 8,
+     "funder_cash_NPV_USD2041": {
+      "0.0": 134963193917839.92,
+      "0.01": 44720571603175.7,
+      "0.03": 7736334419094.16,
+      "0.07": -902421834395.49
+     },
+     "horizon": 220,
+     "initial_funding_USD2041": 4093108750383.311,
+     "operating_cash_USD2041_year": 681359387098.7856,
+     "payouts_USD2041": 139056302668223.22,
+     "population": 6468289.238000949,
+     "real_IRR": 0.05838250695675129,
+     "receipts_USD2041_year": 4943274009966.395,
+     "socioeconomic_NPV_USD2041": {
+      "0.0": 452141101645177.9,
+      "0.01": 99788847891932.25,
+      "0.03": 11842411145256.04,
+      "0.07": 11145701195.381836
+     },
+     "system_cash_NPV_USD2041": {
+      "0.0": 143078471229575.53,
+      "0.01": 48096447362433.06,
+      "0.03": 9105224125629.207,
+      "0.07": -225146553578.4217
+     }
+    }
+   ],
+   "convergence": {
+    "converged": true,
+    "history": [
+     1.0,
+     1.0,
+     0.5,
+     0.3333333333333333,
+     0.25,
+     0.014492753623188406,
+     0.001968503937007874,
+     8.165674168523619e-07,
+     3.808024027021161e-08
+    ],
+    "iterations": 9,
+    "relative_requirement_residual": 3.808024027021161e-08
+   },
+   "engineering": {
+    "economy.production.local_working_parts.labour_fraction_of_import_price": 0.1,
+    "economy.production.local_working_parts.share": {
+     "by_year": [
+      [
+       8,
+       0.0
+      ],
+      [
+       38,
+       0.78
+      ]
+     ]
+    }
+   },
+   "first_capacity_shortfall": null,
+   "growth": "reference",
+   "market": "breakthrough",
+   "material_drawn": {
+    "100": {
+     "asteroid_feed_kg": 3105166240537.385,
+     "lunar_raw_kg": 186960684970.9081,
+     "nitrogen_kg": 924187789.6527658,
+     "virgin_metal_kg": 4096103069.2162294,
+     "water_kg": 217361636837.61688
+    },
+    "200": {
+     "asteroid_feed_kg": 74082340028282.31,
+     "lunar_raw_kg": 4604231373948.615,
+     "nitrogen_kg": 23191280651.124126,
+     "virgin_metal_kg": 107659680509.08894,
+     "water_kg": 5185763801979.762
+    },
+    "220": {
+     "asteroid_feed_kg": 109806086542408.12,
+     "lunar_raw_kg": 4888896371709.963,
+     "nitrogen_kg": 26479457986.614487,
+     "virgin_metal_kg": 114064520298.7332,
+     "water_kg": 7686426057968.567
+    }
+   },
+   "name": "first_pass:services:constant_growth:local_parts_labour_10",
+   "opening": {
+    "founding_cost_USD2041": 3500719392210.505,
+    "reserve_USD2041": 194909940494.4434,
+    "working_cash_USD2041": 397479417678.3629
+   },
+   "periods": [
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 3500719392210.505,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 0.0,
+      "capital_external_USD2041": 0.0,
+      "capital_local_USD2041": 0.0,
+      "capital_resource_provision_USD2041": 0.0,
+      "commercial_operating_USD2041": 0.0,
+      "hotel_payroll_USD2041": 0.0,
+      "operating_external_logistics_materials_USD2041": 0.0,
+      "operating_external_replacement_USD2041": 0.0,
+      "operating_external_services_USD2041": 0.0,
+      "operating_local_payroll_USD2041": 0.0,
+      "operating_local_replacement_USD2041": 0.0,
+      "operating_resource_provision_USD2041": 0.0,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 0.0,
+      "seed_deployment_and_allowance_USD2041": 3500719392210.505
+     },
+     "distributions_USD2041": 0.0,
+     "first_year": 0,
+     "last_year": 7,
+     "paid_to_Earth_USD2041": null,
+     "paid_to_Earth_share": null,
+     "receipts_USD2041": 0.0,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 0.0,
+      "entertainment": 0.0,
+      "licenses": 0.0,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 0.0,
+      "propellant": 0.0,
+      "research": 0.0,
+      "source_products": 0.0,
+      "sports": 0.0
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 6939627953406.468,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 39874554990.53996,
+      "capital_external_USD2041": 52887638093.69674,
+      "capital_local_USD2041": 1604580864.5340126,
+      "capital_resource_provision_USD2041": 7072337091.947118,
+      "commercial_operating_USD2041": 6652341105184.084,
+      "hotel_payroll_USD2041": 38312500.0,
+      "operating_external_logistics_materials_USD2041": 28611742328.50653,
+      "operating_external_replacement_USD2041": 17429029680.61554,
+      "operating_external_services_USD2041": 2530650910.4380155,
+      "operating_local_payroll_USD2041": 1603496091.308961,
+      "operating_local_replacement_USD2041": 682922431.8625853,
+      "operating_resource_provision_USD2041": 13754817899.03817,
+      "residual_service_capital_USD2041": 59435081014.74057,
+      "residual_service_renewal_USD2041": 61761684325.15555,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 3995237813078.923,
+     "first_year": 8,
+     "last_year": 25,
+     "paid_to_Earth_USD2041": 101459061013.25682,
+     "paid_to_Earth_share": 0.01462024501809977,
+     "receipts_USD2041": 11445968308643.264,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 4806907553.080814,
+      "entertainment": 2689321352528.3145,
+      "licenses": 2716486214675.065,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 1475000000000.0,
+      "propellant": 0.0,
+      "research": 2360000000000.0,
+      "source_products": 0.0,
+      "sports": 2200353833886.8027
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 18092381886845.04,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 73267970277.79274,
+      "capital_external_USD2041": 86382212661.51636,
+      "capital_local_USD2041": 11514068372.395802,
+      "capital_resource_provision_USD2041": 14890109248.521221,
+      "commercial_operating_USD2041": 17450822885084.986,
+      "hotel_payroll_USD2041": 117500000.0,
+      "operating_external_logistics_materials_USD2041": 64720524759.480286,
+      "operating_external_replacement_USD2041": 44284190233.83797,
+      "operating_external_services_USD2041": 6590763486.009724,
+      "operating_local_payroll_USD2041": 5572938799.2167015,
+      "operating_local_replacement_USD2041": 11043488329.199636,
+      "operating_resource_provision_USD2041": 37501761209.01335,
+      "residual_service_capital_USD2041": 111440776902.63855,
+      "residual_service_renewal_USD2041": 174232697480.4318,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 10540743947140.834,
+     "first_year": 26,
+     "last_year": 50,
+     "paid_to_Earth_USD2041": 201977691140.84433,
+     "paid_to_Earth_share": 0.0111636871476664,
+     "receipts_USD2041": 29349998058348.176,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 14878723390.504068,
+      "entertainment": 5752649336288.605,
+      "licenses": 5810756905342.024,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 5025000000000.0,
+      "propellant": 0.0,
+      "research": 8040000000000.0,
+      "source_products": 0.0,
+      "sports": 4706713093327.04
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 78583347991106.62,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 350945610269.321,
+      "capital_external_USD2041": 603732855340.3711,
+      "capital_local_USD2041": 109222868339.4001,
+      "capital_resource_provision_USD2041": 103185033049.6566,
+      "commercial_operating_USD2041": 74938520789479.52,
+      "hotel_payroll_USD2041": 858875000.0,
+      "operating_external_logistics_materials_USD2041": 437215791392.41644,
+      "operating_external_replacement_USD2041": 316611200197.28577,
+      "operating_external_services_USD2041": 47090131909.68469,
+      "operating_local_payroll_USD2041": 33466543245.589493,
+      "operating_local_replacement_USD2041": 112253061888.12863,
+      "operating_resource_provision_USD2041": 270182870806.93707,
+      "residual_service_capital_USD2041": 289746019946.8602,
+      "residual_service_renewal_USD2041": 970316340241.454,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 38907554330966.1,
+     "first_year": 51,
+     "last_year": 100,
+     "paid_to_Earth_USD2041": 1404649978839.758,
+     "paid_to_Earth_share": 0.01787465175190454,
+     "receipts_USD2041": 119514181271840.75,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 109305244141.70242,
+      "entertainment": 13898523845767.86,
+      "licenses": 14038912975523.09,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 30806122960090.152,
+      "propellant": 0.0,
+      "research": 49289796736144.24,
+      "source_products": 0.0,
+      "sports": 11371519510173.703
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 118686440077138.11,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 1309234239236.3809,
+      "capital_external_USD2041": 3055167182834.3223,
+      "capital_local_USD2041": 551773139843.6001,
+      "capital_resource_provision_USD2041": 523208142318.2989,
+      "commercial_operating_USD2041": 105658576569031.36,
+      "hotel_payroll_USD2041": 4366687500.0,
+      "operating_external_logistics_materials_USD2041": 2156521107467.6575,
+      "operating_external_replacement_USD2041": 1571752400430.3298,
+      "operating_external_services_USD2041": 235545655233.21967,
+      "operating_local_payroll_USD2041": 168506763353.00885,
+      "operating_local_replacement_USD2041": 557257669243.4807,
+      "operating_resource_provision_USD2041": 1367002525529.313,
+      "residual_service_capital_USD2041": 133728932283.16632,
+      "residual_service_renewal_USD2041": 1393799062833.971,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 47831742347352.08,
+     "first_year": 101,
+     "last_year": 150,
+     "paid_to_Earth_USD2041": 7018986345965.529,
+     "paid_to_Earth_share": 0.05913890703439808,
+     "receipts_USD2041": 167901026541630.7,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 556391428151.1588,
+      "entertainment": 17834944588384.043,
+      "licenses": 18015095543822.26,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 44962449073375.84,
+      "propellant": 0.0,
+      "research": 71939918517401.34,
+      "source_products": 0.0,
+      "sports": 14592227390496.033
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 190776521968710.28,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 5682941143236.057,
+      "capital_external_USD2041": 13664057657591.059,
+      "capital_local_USD2041": 2409470564578.5684,
+      "capital_resource_provision_USD2041": 2467486673369.922,
+      "commercial_operating_USD2041": 135648862965540.83,
+      "hotel_payroll_USD2041": 22211187500.0,
+      "operating_external_logistics_materials_USD2041": 10528499500464.508,
+      "operating_external_replacement_USD2041": 7010052665056.308,
+      "operating_external_services_USD2041": 1162415925903.9675,
+      "operating_local_payroll_USD2041": 855188074739.505,
+      "operating_local_replacement_USD2041": 2485382308519.965,
+      "operating_resource_provision_USD2041": 6906773981266.104,
+      "residual_service_capital_USD2041": 163446472790.5365,
+      "residual_service_renewal_USD2041": 1769732848152.942,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 24392138020272.0,
+     "first_year": 151,
+     "last_year": 200,
+     "paid_to_Earth_USD2041": 32365025749015.84,
+     "paid_to_Earth_share": 0.16964889292993876,
+     "receipts_USD2041": 217508450202976.34,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 2830988656758.143,
+      "entertainment": 22880750469238.113,
+      "licenses": 23111869160846.574,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 57678549190710.69,
+      "propellant": 0.0,
+      "research": 92285678705137.11,
+      "source_products": 0.0,
+      "sports": 18720614020285.727
+     }
+    },
+    {
+     "additional_equity_USD2041": 0.0,
+     "costs_USD2041": 84927594083774.56,
+     "costs_by_category_USD2041": {
+      "capital_allowance_USD2041": 100664918093.23875,
+      "capital_external_USD2041": 228790121325.9497,
+      "capital_local_USD2041": 58823930369.01817,
+      "capital_resource_provision_USD2041": 11518905914.31536,
+      "commercial_operating_USD2041": 61145068026531.36,
+      "hotel_payroll_USD2041": 17612500000.0,
+      "operating_external_logistics_materials_USD2041": 8724781388533.955,
+      "operating_external_replacement_USD2041": 4955958574236.986,
+      "operating_external_services_USD2041": 687781682059.1825,
+      "operating_local_payroll_USD2041": 879462402907.8124,
+      "operating_local_replacement_USD2041": 1757112585411.295,
+      "operating_resource_provision_USD2041": 5567429364611.77,
+      "residual_service_capital_USD2041": 0.0,
+      "residual_service_renewal_USD2041": 792589683779.6802,
+      "seed_deployment_and_allowance_USD2041": 0.0
+     },
+     "distributions_USD2041": 13388886209413.285,
+     "first_year": 201,
+     "last_year": 220,
+     "paid_to_Earth_USD2041": 14597311766156.074,
+     "paid_to_Earth_share": 0.17187949245043896,
+     "receipts_USD2041": 98865480199327.89,
+     "receipts_by_sector_USD2041": {
+      "computing": 0.0,
+      "destination": 2244914545749.0996,
+      "entertainment": 10260842856086.785,
+      "licenses": 10364487733420.994,
+      "materials": 0.0,
+      "mission_support": 0.0,
+      "professional": 26000000000000.0,
+      "propellant": 0.0,
+      "research": 41600000000000.0,
+      "source_products": 0.0,
+      "sports": 8395235064071.006
+     }
+    }
+   ],
+   "portfolio": "services",
+   "ramp": "constant_growth",
+   "recovery": "combined",
+   "scenario": "first_pass",
+   "status": "conditional_account",
+   "traffic": {
+    "100": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 382.1558723651142,
+     "launch_pads": 3.8204787433839926,
+     "launched_kg_year": 76409574.86767985,
+     "launches_year": 764.0957486767985,
+     "lunar_landings_year": 8406.882627059926,
+     "source_tug_trips_year": 312.8694393427254
+    },
+    "200": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 3807.1496529930323,
+     "launch_pads": 37.990079624521464,
+     "launched_kg_year": 759801592.4904293,
+     "launches_year": 7598.015924904293,
+     "lunar_landings_year": 167426.78107260927,
+     "source_tug_trips_year": 5610.388018189227
+    },
+    "220": {
+     "Earth_leg_propellant_launched_kg_year": 0.0,
+     "ferry_trips_year": 5607.90249619822,
+     "launch_pads": 55.964584697355946,
+     "launched_kg_year": 1119291693.947119,
+     "launches_year": 11192.91693947119,
+     "lunar_landings_year": 168980.74213401432,
+     "source_tug_trips_year": 5985.952867589182
+    }
+   },
+   "workforce": {
+    "100": {
+     "jobs": 43791.64376676441,
+     "share_of_workforce_in_use": 0.4385515881485033,
+     "working_parts_jobs": 26139.664206577774,
+     "working_parts_made_share": 0.78
+    },
+    "200": {
+     "jobs": 218734.16935715242,
+     "share_of_workforce_in_use": 0.08454096643981905,
+     "working_parts_jobs": 68679.04901480109,
+     "working_parts_made_share": 0.78
+    },
+    "220": {
+     "jobs": 459498.56266838696,
+     "share_of_workforce_in_use": 0.17759663558675245,
+     "working_parts_jobs": 297832.62410940626,
+     "working_parts_made_share": 0.78
+    }
    }
   }
  ],
  "dependencies": {
-  "provisioning/vacuum_industry/engineering.json": "91e1b78801c65fc6a3ca0c4469f6b5e480baa4303236ed22ad07d125d4999103",
-  "provisioning/vacuum_industry/industry.py": "b42ce5b02752ec1cef19541ac554dc5b1c30abf10517f6371d2056c0e3db0e82",
-  "provisioning/vacuum_industry/model.py": "199c7958a5b79dd0ab26d7b1f55d4d13ad79f1192aac54f1fa9e8d2b0e887020",
+  "provisioning/vacuum_industry/engineering.json": "de75dfbabc39e80e79a48f30b96ca4769caac3e9f8e45fe389b161948852b717",
+  "provisioning/vacuum_industry/industry.py": "46f66484eea17a30b6f7a7090d6bb1f654be4e9c4b1a116321ac58de0c09e6c8",
+  "provisioning/vacuum_industry/model.py": "e8d9f0a95ff9776f2068e386e07882fbbf7073155f93643bb02639481fd7e321",
   "provisioning/vacuum_industry/recovery.json": "7cb1d7c240155bba64a9b55eca60d01caae8e81ce697f7e078baef3aa0bc4ed0",
-  "provisioning/vacuum_industry/recovery.py": "48b6b5b72326567fc27bfd8e16a6fe49ef866836b39d4f762ff186ff2113bcaf",
+  "provisioning/vacuum_industry/recovery.py": "d998921478bb77489fdc7b4130932ddb407fed87d749c5e5932fc86d287bb5ee",
   "research/studies/complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef",
   "research/studies/complex_returns/credit.py": "d2a2ae1efc0c41d9ef78fe1ee524f9dc451ade280d7372c3363e645060830ea8",
   "research/studies/complex_returns/credit_inputs.json": "cc64e28175fe66424e223b369350008b4cd546a280b1cdf02f9ebec2031a1329",
@@ -28423,16 +33434,16 @@
   "research/studies/enclosed_returns/markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb",
   "research/studies/enclosed_returns/revised.py": "2c16da4fa6e0c35210f9e8eab8ceba3b3276c8b9ceac5c736a6dc31c7bc2ddd0",
   "research/studies/enclosed_returns/revised_inputs.json": "7a7eb7cfac5408bf5ec2842097c4a382c5e3102407b139c382bf03a4decd3494",
-  "research/studies/vacuum_economy/cases.json": "66a5e363791d5bf148b88de22ed23e5395106efdbcce29a413f115f22eab1d84",
+  "research/studies/vacuum_economy/cases.json": "1c6e4758f32b0152381fc312fc4ffad9c6f2b0acf100646f631e685156d284e2",
   "research/studies/vacuum_economy/programme.json": "d47c7525a5fae0af4c4865bb79ea15ec2b87b414db1b530423996c23ee056754",
   "research/studies/vacuum_economy/programme.py": "8c4219b5a4e1ecb7ad1acb5e14b20087b81e804f3178a0d20616d3891c538393"
  },
  "evidence": "Conditional accounts. The industry is a numerically closed sizing of equipment, freight and power for the stated orders; the orders are scenarios of demand, and the financing follows stated rules. Sources, plant, markets and prices await qualification.",
  "producer": {
   "path": "research/studies/vacuum_economy/run.py",
-  "sha256": "e7cb6cc5c2eaf567724301d76b4833325df7c092665355fe647feef3c523732b"
+  "sha256": "4fc493c8206dc80ef6296592c1837b17a2e8f2c77a170526951d65f801d26566"
  },
- "reading_rule": "Each case stands alone: one scenario of demand on one population ramp with one set of recovery measures. A checkpoint gives one financing arrangement at one horizon. The periods use the financing in U credit and are undiscounted; costs paid to Earth are imported machinery and its replacement, launch and imported materials, and outside services; the period of the founding deployment gives none, because that deployment is one amount. Material drawn is cumulative from year zero. Traffic is for the year of each horizon: the mass launched from Earth, cargo and any propellant for the Earth leg together, the launches that carry it at the stated payload and the pads those launches need at the stated launches a pad a year, and the round trips of the ferries, the lunar landers and the tugs to the sources.",
+ "reading_rule": "Each case stands alone: one scenario of demand on one population ramp with one set of recovery measures. A checkpoint gives one financing arrangement at one horizon. The periods use the financing in U credit and are undiscounted; costs paid to Earth are imported machinery and its replacement, launch and imported materials, and outside services; the period of the founding deployment gives none, because that deployment is one amount. Material drawn is cumulative from year zero. Traffic is for the year of each horizon: the mass launched from Earth, cargo and any propellant for the Earth leg together, the launches that carry it at the stated payload and the pads those launches need at the stated launches a pad a year, and the round trips of the ferries, the lunar landers and the tugs to the sources. Workforce gives the jobs of the same year, the share of the available workforce they fill, the jobs that make working parts of machinery and the share of those parts made in place for orders of that year.",
  "schema": "terluna.research.vacuum-economy/1",
  "units": "Years of the programme, residents, kilograms, constant USD2041."
 }

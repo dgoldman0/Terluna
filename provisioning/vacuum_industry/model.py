@@ -16,6 +16,8 @@ from functools import lru_cache
 import math
 from shared.constants import JULIAN_DAY, JULIAN_YEAR_DAYS, STANDARD_GRAVITY, STEFAN_BOLTZMANN
 HOURS = JULIAN_DAY * JULIAN_YEAR_DAYS / 3600
+# The share of the residents who can hold the industry's and the settlement's jobs.
+WORKFORCE_SHARE = 0.4
 DESTS = ('surface', 'source', 'depot', 'leo')
 
 def at(value, year):
@@ -179,8 +181,22 @@ def residential_targets(data, population):
     out.update(residential_bulk=(d['bulk'] - d['roads']) * f, residential_roads=d['roads'] * f, residential_metal=d['metal'] * f)
     return out
 
+def local_working_parts(data):
+    """How far the industry makes its own working parts: the share by order year, its labour, and the assets left out.
+
+    `share` is the share the industry is able to make in an order year, and `staffed` the part of that share its
+    residents can staff; their product is the share made. A share of 0 buys every working part from Earth, as the
+    staged model does. The share made is fabricated from local metal like structure, and costs resident labour at
+    the stated fraction of the part's import price. All three may be schedules by year.
+    """
+    stated = data['economy']['production'].get('local_working_parts', {})
+    return dict(share=stated.get('share', 0.0), staffed=stated.get('staffed', 1.0),
+                labour_fraction_of_import_price=stated.get('labour_fraction_of_import_price', 0.0),
+                excluded_assets=tuple(stated.get('excluded_assets', ())))
+
+
 def blank_flow():
-    return dict(imports={k: 0.0 for k in DESTS}, local={k: 0.0 for k in DESTS}, recycled={k: 0.0 for k in DESTS}, bulk=0.0, bulk_recycled=0.0, external_capital=0.0, external_replacement=0.0, local_capital=0.0, local_replacement=0.0, service_capital=0.0, service_replacement=0.0, retired_mass=0.0, new_floor=0.0, capsule_purchases_kg=0.0, new_visitor_beds=0.0, industry_replacement_import_kg=0.0, service_external_capital=0.0, service_external_replacement=0.0, hospitality_external_capital=0.0, hospitality_external_replacement=0.0, capital_imports={k: 0.0 for k in DESTS}, capital_local={k: 0.0 for k in DESTS}, capital_bulk=0.0, hospitality_capital=0.0, hospitality_replacement=0.0)
+    return dict(imports={k: 0.0 for k in DESTS}, local={k: 0.0 for k in DESTS}, recycled={k: 0.0 for k in DESTS}, bulk=0.0, bulk_recycled=0.0, external_capital=0.0, external_replacement=0.0, local_capital=0.0, local_replacement=0.0, service_capital=0.0, service_replacement=0.0, retired_mass=0.0, new_floor=0.0, capsule_purchases_kg=0.0, new_visitor_beds=0.0, industry_replacement_import_kg=0.0, service_external_capital=0.0, service_external_replacement=0.0, hospitality_external_capital=0.0, hospitality_external_replacement=0.0, capital_imports={k: 0.0 for k in DESTS}, capital_local={k: 0.0 for k in DESTS}, capital_bulk=0.0, hospitality_capital=0.0, hospitality_replacement=0.0, local_working_capital=0.0, local_working_replacement=0.0, local_working_labour_if_staffed=0.0)
 
 @lru_cache(maxsize=None)
 def lifetime_scale(life, shape):
@@ -220,6 +236,7 @@ def cohort_ledger(data, rows, targets, seed, measures=None):
     flows = {y: blank_flow() for y in range(start - lead, end + 1)}
     stocks = {y: {} for y in range(start, end + 1)}
     events = []
+    working = local_working_parts(data)
     shape = data.get('lifetime_shape', 3.0)
     for name, a in cats.items():
         for part, share, life in [('structure', a['structural_share'], a['structural_life']), ('active', 1 - a['structural_share'], a['life'])]:
@@ -251,6 +268,11 @@ def cohort_ledger(data, rows, targets, seed, measures=None):
                     order = y - lead
                     replacement = min(added, expired)
                     growth = added - replacement
+                    able = 0.0 if part != 'active' or name in working['excluded_assets'] else at(working['share'], order)
+                    made = able * at(working['staffed'], order)
+                    labour = at(working['labour_fraction_of_import_price'], order)
+                    if not (0 <= made <= 1 and labour >= 0):
+                        raise ValueError('The locally made share of working parts lies between 0 and 1, and its labour is not negative')
                     for workyear in (order, order + 1):
                         f = flows[workyear]
                         amount = added / 2
@@ -258,17 +280,24 @@ def cohort_ledger(data, rows, targets, seed, measures=None):
                         replace_work = replacement / 2
                         unit = a['price'] if part == 'active' or a['civil'] else data['economy']['production']['local_fabrication_value_USD2026_kg']
                         if part == 'active':
-                            f['imports'][a['destination']] += amount
-                            f['external_capital'] += growth_work * unit
-                            f['external_replacement'] += replace_work * unit
-                            f['capital_imports'][a['destination']] += growth_work
+                            # Working parts: the share bought from Earth, and the share the industry makes itself.
+                            bought = 1 - made
+                            f['imports'][a['destination']] += amount * bought
+                            f['external_capital'] += growth_work * bought * unit
+                            f['external_replacement'] += replace_work * bought * unit
+                            f['capital_imports'][a['destination']] += growth_work * bought
                             if a['owner'] == 'industry':
-                                f['industry_replacement_import_kg'] += replace_work
+                                f['industry_replacement_import_kg'] += replace_work * bought
                             if a['owner'] in ('service', 'hospitality'):
-                                f[a['owner'] + '_external_capital'] += growth_work * unit
-                                f[a['owner'] + '_external_replacement'] += replace_work * unit
+                                f[a['owner'] + '_external_capital'] += growth_work * bought * unit
+                                f[a['owner'] + '_external_replacement'] += replace_work * bought * unit
                             if name == 'return_capsule_buses':
                                 f['capsule_purchases_kg'] += amount
+                            f['local'][a['destination']] += amount * made
+                            f['capital_local'][a['destination']] += growth_work * made
+                            f['local_working_capital'] += growth_work * made * unit * labour
+                            f['local_working_replacement'] += replace_work * made * unit * labour
+                            f['local_working_labour_if_staffed'] += amount * able * unit * labour
                         elif a['material'] == 'bulk':
                             f['bulk'] += amount
                             f['capital_bulk'] += growth_work
@@ -286,7 +315,7 @@ def cohort_ledger(data, rows, targets, seed, measures=None):
                             f['hospitality_replacement'] += replace_work * unit
                         if name in ('commercial_civil_bulk', 'service_civil_bulk'):
                             f['new_floor'] += growth_work / data['economy']['exports']['factory_bulk_kg_m2']
-                    events.append(dict(asset=name, component=part, order_year=order, commission_year=y, mass_kg=added, replacement_kg=replacement))
+                    events.append(dict(asset=name, component=part, order_year=order, commission_year=y, mass_kg=added, replacement_kg=replacement, locally_made_share=made, local_labour_fraction=labour))
                 if expired:
                     f = flows[y]
                     f['retired_mass'] += expired
@@ -613,10 +642,11 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
         factory_jobs = row.get('goods_capacity', row.get('goods', 0.0)) / (ex['factory_yield'] * ex['factory_utilization']) / (P0 * rv['manufacturing']['nameplate_finished_kg_per_resident_year']) * rv['manufacturing']['staff']
         compute_jobs = row.get('compute_capacity', row.get('compute', 0.0)) / 1000000.0 * rv['computing']['staff_per_MW']
         base_jobs = (data['settlement']['food_operators'] + data['settlement']['industry_operators']) * row['population'] / P0
-        core_resident_jobs = staffing / 2 + base_jobs + factory_jobs + compute_jobs
+        working_parts_jobs = (f['local_working_capital'] + f['local_working_replacement']) / data['industrial']['economics']['loaded_staff_USD2026_year']
+        core_resident_jobs = staffing / 2 + base_jobs + factory_jobs + compute_jobs + working_parts_jobs
         commercial_jobs = row.get('service_jobs', 0.0) + row.get('premium_jobs', 0.0) + row.get('logistics_jobs', 0.0) + row.get('visitor_beds', 0.0) * rv['visitors']['staff_per_bed']
         total_resident_jobs = core_resident_jobs + commercial_jobs
-        ratios['resident_workforce'] = total_resident_jobs / max(1.0, row['population'] * 0.4)
+        ratios['resident_workforce'] = total_resident_jobs / max(1.0, row['population'] * WORKFORCE_SHARE)
         maximum = max(ratios.values(), default=0.0)
         feasible = converged and maximum <= 1 + 1e-06
         payroll = core_resident_jobs * data['industrial']['economics']['loaded_staff_USD2026_year']
@@ -641,7 +671,7 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
         production_value = (row.get('goods', 0.0) + row.get('source_goods', 0.0)) * data['economy']['production']['structural_metal_value_USD2026_kg']
         construction_fraction = f['local_capital'] / max(1.0, f['local_capital'] + f['local_replacement'] + production_value)
         construction_payroll = staffing / 2 * data['industrial']['economics']['loaded_staff_USD2026_year'] * construction_fraction
-        costs = dict(capital_external_USD2041=(f['external_capital'] + construction_logistics) * I, capital_local_USD2041=construction_payroll * I, local_capital_account_value_USD2041=f['local_capital'] * I, local_replacement_account_value_USD2041=f['local_replacement'] * I, capital_resource_provision_USD2041=cap_resource * I, operating_external_replacement_USD2041=f['external_replacement'] * I, operating_external_logistics_materials_USD2041=sum((op_physical[k] for k in variable)) * I, operating_external_services_USD2041=external_staff * I, operating_local_replacement_USD2041=0.0, operating_local_payroll_USD2041=(payroll - construction_payroll) * I, resident_payroll_USD2041=payroll * I, operating_resource_provision_USD2041=op_physical['resource_provision_USD2026'] * I, resource_provision_USD2041=physical_row['resource_provision_USD2026'] * I, identified_service_capital_USD2041=(f['service_external_capital'] + construction_payroll * max(0.0, f['service_capital'] - f['service_external_capital']) / max(1.0, f['local_capital'])) * I, identified_service_replacement_USD2041=f['service_external_replacement'] * I, identified_hospitality_capital_USD2041=f['hospitality_external_capital'] * I, identified_hospitality_replacement_USD2041=f['hospitality_external_replacement'] * I, Earth_launch_USD2041=physical_row['Earth_launch_USD2026'] * I, operating_material_USD2041=physical_row['operating_material_USD2026'] * I, capsule_operations_USD2041=physical_row['capsule_operations_USD2026'] * I)
+        costs = dict(capital_external_USD2041=(f['external_capital'] + construction_logistics) * I, capital_local_USD2041=(construction_payroll + f['local_working_capital']) * I, local_capital_account_value_USD2041=f['local_capital'] * I, local_replacement_account_value_USD2041=f['local_replacement'] * I, capital_resource_provision_USD2041=cap_resource * I, operating_external_replacement_USD2041=f['external_replacement'] * I, operating_external_logistics_materials_USD2041=sum((op_physical[k] for k in variable)) * I, operating_external_services_USD2041=external_staff * I, operating_local_replacement_USD2041=f['local_working_replacement'] * I, operating_local_payroll_USD2041=(payroll - construction_payroll - f['local_working_capital'] - f['local_working_replacement']) * I, resident_payroll_USD2041=payroll * I, operating_resource_provision_USD2041=op_physical['resource_provision_USD2026'] * I, resource_provision_USD2041=physical_row['resource_provision_USD2026'] * I, identified_service_capital_USD2041=(f['service_external_capital'] + construction_payroll * max(0.0, f['service_capital'] - f['service_external_capital']) / max(1.0, f['local_capital'])) * I, identified_service_replacement_USD2041=f['service_external_replacement'] * I, identified_hospitality_capital_USD2041=f['hospitality_external_capital'] * I, identified_hospitality_replacement_USD2041=f['hospitality_external_replacement'] * I, Earth_launch_USD2041=physical_row['Earth_launch_USD2026'] * I, operating_material_USD2041=physical_row['operating_material_USD2026'] * I, capsule_operations_USD2041=physical_row['capsule_operations_USD2026'] * I)
         service_stock = service_mean_renewal = 0.0
         for n, mass in commercial_targets(data, row).items():
             a = cats[n]
@@ -664,14 +694,14 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
             a = cats[n]
             unit = a['price'] if ev['component'] == 'active' or a['civil'] else data['economy']['production']['local_fabrication_value_USD2026_kg']
             if ev['component'] == 'active':
-                drivers[n] = drivers.get(n, 0.0) + ev['mass_kg'] / 2 * unit * I
-        tug_import = sum((ev['mass_kg'] / 2 for ev in yearly_events if ev['asset'] == 'asteroid_tugs' and ev['component'] == 'active'))
+                drivers[n] = drivers.get(n, 0.0) + ev['mass_kg'] * (1 - ev['locally_made_share']) / 2 * unit * I
+        tug_import = sum((ev['mass_kg'] * (1 - ev['locally_made_share']) / 2 for ev in yearly_events if ev['asset'] == 'asteroid_tugs' and ev['component'] == 'active'))
         physical_row['source_tug_component_import_kg_year'] = tug_import
         physical_row['source_tug_count'] = stocks[y].get('asteroid_tugs', 0.0) / routes(data, y)['source']['dry']
         cumulative_lunar += physical_row['lunar_raw_kg_year']
         cumulative_source += physical_row['source_feed_kg_year']
         if y <= end:
-            result.append(dict(year=y, population=row['population'], request=row, physical=physical_row, cash=costs, industrial_staff_total=staffing, technical_resident_jobs=total_resident_jobs, core_resident_jobs=core_resident_jobs, commercial_resident_jobs=commercial_jobs, top_imported_component_purchases_USD2041=dict(sorted(drivers.items(), key=lambda kv: kv[1], reverse=True)[:8]), required_asset_mass_kg=need, available_asset_mass_kg=stocks[y], capacity_use=ratios, maximum_capacity_use=maximum, feasible=feasible, actual_sales_capacity_fraction=1.0 if feasible else 0.0, shortfalls={k: v - 1 for k, v in ratios.items() if v > 1 + 1e-06}, cumulative_lunar_raw_kg=cumulative_lunar, cumulative_source_feed_kg=cumulative_source))
+            result.append(dict(year=y, population=row['population'], request=row, physical=physical_row, cash=costs, industrial_staff_total=staffing, technical_resident_jobs=total_resident_jobs, core_resident_jobs=core_resident_jobs, working_parts_jobs=working_parts_jobs, commercial_resident_jobs=commercial_jobs, top_imported_component_purchases_USD2041=dict(sorted(drivers.items(), key=lambda kv: kv[1], reverse=True)[:8]), required_asset_mass_kg=need, available_asset_mass_kg=stocks[y], capacity_use=ratios, maximum_capacity_use=maximum, feasible=feasible, actual_sales_capacity_fraction=1.0 if feasible else 0.0, shortfalls={k: v - 1 for k, v in ratios.items() if v > 1 + 1e-06}, cumulative_lunar_raw_kg=cumulative_lunar, cumulative_source_feed_kg=cumulative_source))
     # Procurements before opening belong to the seed once, not year8 operations.
     late = blank_flow()
     for y in range(rows[0]['year'] - 2, rows[0]['year']):
@@ -679,10 +709,10 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
         for dest in DESTS:
             late['imports'][dest] += f['imports'][dest]
             late['local'][dest] += f['local'][dest]
-        for k in ('bulk', 'external_capital', 'external_replacement', 'local_capital', 'local_replacement', 'service_capital', 'service_replacement', 'new_floor', 'new_visitor_beds', 'capsule_purchases_kg'):
+        for k in ('bulk', 'external_capital', 'external_replacement', 'local_capital', 'local_replacement', 'service_capital', 'service_replacement', 'new_floor', 'new_visitor_beds', 'capsule_purchases_kg', 'local_working_capital', 'local_working_replacement'):
             late[k] += f[k]
     late_phys = physical(data, dict(rows[0], population=0.0, new_residential_people=0.0, goods=0.0, source_goods=0.0, propellant_sales=0.0, compute=0.0, service_jobs=0.0, visitor_beds=0.0, visitor_nights_year=0.0, service_power_W=0.0, premium_power_W=0.0), late, measures=measures)
-    seed_record['additional_preproduction_cost_USD2041'] = (late['external_capital'] + late['external_replacement'] + late_phys['Earth_launch_USD2026'] + late_phys['operating_material_USD2026'] + late_phys['resource_provision_USD2026']) * I
+    seed_record['additional_preproduction_cost_USD2041'] = (late['external_capital'] + late['external_replacement'] + late['local_working_capital'] + late['local_working_replacement'] + late_phys['Earth_launch_USD2026'] + late_phys['operating_material_USD2026'] + late_phys['resource_provision_USD2026']) * I
     seed_record['lunar_raw_kg'] += late_phys['lunar_raw_kg_year']
     seed_record['source_feed_kg'] += late_phys['source_feed_kg_year']
     seed_record['cost']['additional_preproduction_cost_USD2041'] = seed_record['additional_preproduction_cost_USD2041']

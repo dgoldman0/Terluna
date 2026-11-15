@@ -23,7 +23,7 @@ import math
 from pathlib import Path
 import time
 
-from provisioning.vacuum_industry import industry
+from provisioning.vacuum_industry import industry, model
 from research.studies.enclosed_returns import finance, markets, revised
 from . import programme as definition
 
@@ -153,6 +153,20 @@ def traffic(physical, coefficients, horizons):
     return out
 
 
+def workforce(physical, loops, coefficients, horizons):
+    """The residents' jobs in the year of each horizon, and the working parts of the machinery they make."""
+    working = model.local_working_parts(coefficients)
+    staffed = loops.get('local_working_parts', {}).get('staffed_by_order_year')
+    rows = {row['year']: row for row in physical['annual']}
+    out = {}
+    for h in horizons:
+        part = staffed[str(h)] if staffed else model.at(working['staffed'], h)
+        out[str(h)] = dict(jobs=rows[h]['technical_resident_jobs'], working_parts_jobs=rows[h]['working_parts_jobs'],
+                           share_of_workforce_in_use=rows[h]['capacity_summary']['resident_workforce'],
+                           working_parts_made_share=model.at(working['share'], h) * part)
+    return out
+
+
 def periods_account(book, physical, path, financed, money, periods):
     """Receipts by sector and costs by category in each period, undiscounted, with the share of costs paid to Earth."""
     account = revised.stratification(book, physical, path, financed, money, periods)['periods']
@@ -210,7 +224,8 @@ def solve(case):
                 checkpoints=[checkpoint(revised.measures(path, financed[mode], money, horizon))
                              for mode in FINANCING for horizon in money['horizons']],
                 periods=periods_account(book, physical, path, financed['U_credit'], money, s['periods']),
-                material_drawn=drawn, traffic=traffic(physical, coefficients, money['horizons']))
+                material_drawn=drawn, traffic=traffic(physical, coefficients, money['horizons']),
+                workforce=workforce(physical, loops, coefficients, money['horizons']))
 
 
 def cases(names=None):
@@ -246,7 +261,9 @@ def product(selected):
                              'Material drawn is cumulative from year zero. Traffic is for the year of each horizon: the mass launched '
                              'from Earth, cargo and any propellant for the Earth leg together, the launches that carry it at the '
                              'stated payload and the pads those launches need at the stated launches a pad a year, and the round '
-                             'trips of the ferries, the lunar landers and the tugs to the sources.',
+                             'trips of the ferries, the lunar landers and the tugs to the sources. Workforce gives the jobs of the same '
+                             'year, the share of the available workforce they fill, the jobs that make working parts of machinery '
+                             'and the share of those parts made in place for orders of that year.',
                 cases=records)
 
 

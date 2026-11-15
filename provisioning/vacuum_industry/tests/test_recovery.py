@@ -195,3 +195,56 @@ def test_the_measures_work_is_priced_and_lowers_the_feed_and_the_imports(solved)
     assert solved['combined'][1]['cumulative_source_feed_kg'] < solved['none'][1]['cumulative_source_feed_kg']
     late = lambda case: sum(r['cash']['operating_external_replacement_USD2041'] for r in case['annual'] if r['year'] > 25)
     assert late(combined) < late(plain)
+
+
+def test_repairing_a_machine_spares_its_bought_and_its_locally_made_parts_in_their_shares(spec):
+    cats = {'asteroid_tugs': dict(destination='source', owner='industry', price=100.)}
+    q = deepcopy(spec)
+    q['refurbishment']['eligible_assets'] = ['asteroid_tugs']
+    rows = [dict(year=y) for y in range(8, 16)]
+
+    def run(share):
+        flows = {y: model.blank_flow() for y in range(6, 16)}
+        event = dict(asset='asteroid_tugs', component='active', mass_kg=100., replacement_kg=100., order_year=10, commission_year=12,
+                     locally_made_share=share, local_labour_fraction=0.2)
+        for y in (10, 11):
+            flows[y]['imports']['source'] = 50. * (1 - share)
+            flows[y]['external_replacement'] = 5000. * (1 - share)
+            flows[y]['industry_replacement_import_kg'] = 50. * (1 - share)
+            flows[y]['local']['source'] = 50. * share
+            flows[y]['local_working_replacement'] = 5000. * share * 0.2
+        audit = recovery.refurbish(cats, q, rows, flows, [event], {9: {('asteroid_tugs', 'active'): 100.}})
+        return flows, event, audit
+    bought, event_bought, audit_bought = run(0.)
+    mixed, event_mixed, audit_mixed = run(0.5)
+    assert event_bought['refurbished_mass_kg'] == event_mixed['refurbished_mass_kg'] == 48
+    assert event_mixed['new_imported_mass_kg'] == pytest.approx(event_bought['new_imported_mass_kg'] / 2)
+    avoided = sum(a['source']['import_purchase_avoided_USD2026'] for a in audit_bought.values())
+    assert sum(a['source']['import_purchase_avoided_USD2026'] for a in audit_mixed.values()) == pytest.approx(avoided / 2)
+    spent = lambda flows, key: sum(flows[y][key] for y in (10, 11))
+    assert spent(mixed, 'external_replacement') == pytest.approx(spent(bought, 'external_replacement') / 2)
+    assert spent(mixed, 'local_working_replacement') == pytest.approx((10000. - avoided) * 0.5 * 0.2)
+    made_before_repair = 100. * 0.5
+    assert sum(mixed[y]['local']['source'] for y in (10, 11)) == pytest.approx(made_before_repair - 48 * 0.8 * 0.5)
+    assert all(abs(a['source']['mass_balance_residual_kg']) < 1e-9 for a in audit_mixed.values())
+
+
+def test_the_staffing_of_local_working_parts_stops_where_the_residents_free_hands_stop(data, spec):
+    book = small_book()
+    able = {'by_year': [[8, 0.], [18, 0.78]]}
+
+    def built(labour, **more):
+        changed = deepcopy(data)
+        changed['economy']['production']['local_working_parts'].update(share=able, labour_fraction_of_import_price=labour, **more)
+        return industry.build(changed, spec, book, 'combined')
+    light, light_loops = built(0.001)
+    heavy, heavy_loops = built(2.0)
+    assert set(light_loops['local_working_parts']['staffed_by_order_year'].values()) == {1.}
+    staffed = heavy_loops['local_working_parts']['staffed_by_order_year']
+    assert min(staffed.values()) < 0.5 and not heavy_loops['local_working_parts']['years_over_the_workforce']
+    for case in (light, heavy):
+        assert all(r['capacity_summary']['resident_workforce'] <= 1 + 1e-9 for r in case['annual'])
+    jobs = lambda case: sum(r['working_parts_jobs'] for r in case['annual'])
+    assert jobs(light) > 0 and jobs(heavy) > 0
+    stated, stated_loops = built(2.0, staffed=0.1)
+    assert 'local_working_parts' not in stated_loops and jobs(stated) > 0

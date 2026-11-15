@@ -156,33 +156,41 @@ def refurbish(cats, spec, rows, flows, events, retired):
                 k = cfg['repair_part_mass_fraction']
                 avoided = use * (1 - k)
                 growth = (ev['mass_kg'] - ev['replacement_kg']) / ev['mass_kg']
+                # The order would have been bought from Earth and made locally in these shares; repair spares both.
+                made = ev.get('locally_made_share', 0.)
+                bought = 1 - made
+                labour = ev.get('local_labour_fraction', 0.)
                 for wy in (y, y + 1):
                     if wy not in flows:
                         continue
                     f = flows[wy]
                     m = avoided / 2
                     money = m * a['price']
-                    f['imports'][dest] -= m
-                    f['capital_imports'][dest] -= m * growth
-                    f['external_capital'] -= money * growth
-                    f['external_replacement'] -= money * (1 - growth)
+                    f['imports'][dest] -= m * bought
+                    f['capital_imports'][dest] -= m * growth * bought
+                    f['external_capital'] -= money * growth * bought
+                    f['external_replacement'] -= money * (1 - growth) * bought
                     if a['owner'] == 'industry':
-                        f['industry_replacement_import_kg'] -= m * (1 - growth)
+                        f['industry_replacement_import_kg'] -= m * (1 - growth) * bought
                     for owner in ('service', 'hospitality'):
                         if a['owner'] == owner:
-                            f[owner + '_external_capital'] -= money * growth
-                            f[owner + '_external_replacement'] -= money * (1 - growth)
+                            f[owner + '_external_capital'] -= money * growth * bought
+                            f[owner + '_external_replacement'] -= money * (1 - growth) * bought
+                    f['local'][dest] -= m * made
+                    f['capital_local'][dest] -= m * growth * made
+                    f['local_working_capital'] -= money * growth * made * labour
+                    f['local_working_replacement'] -= money * (1 - growth) * made * labour
                     f['loop_repaired'][dest] += use / 2
-                    f['loop_import_avoided'][n] = f['loop_import_avoided'].get(n, 0.) + m
+                    f['loop_import_avoided'][n] = f['loop_import_avoided'].get(n, 0.) + m * bought
                     av = audits[wy][dest]
-                    av['repair_parts_imported_kg'] += use * k / 2
-                    av['imported_mass_avoided_kg'] += m
-                    av['import_purchase_avoided_USD2026'] += money
+                    av['repair_parts_imported_kg'] += use * k / 2 * bought
+                    av['imported_mass_avoided_kg'] += m * bought
+                    av['import_purchase_avoided_USD2026'] += money * bought
                 cy = y + 2
                 if cy in audits:
                     audits[cy][dest]['refurbished_commissioned_kg'] += use
                 ev['refurbished_mass_kg'] = use
-                ev['new_imported_mass_kg'] = ev['mass_kg'] - avoided
+                ev['new_imported_mass_kg'] = (ev['mass_kg'] - avoided) * bought
             # Arrivals are scheduled for this asset alone; a destination's totals hold other assets as well.
             kit = sum(ev.get('refurbished_mass_kg', 0.) * cfg['repair_part_mass_fraction'] / 2 for ev in orders if ev['order_year'] in (y, y - 1))
             commissioned = sum(ev.get('refurbished_mass_kg', 0.) for ev in orders if ev['commission_year'] == y)

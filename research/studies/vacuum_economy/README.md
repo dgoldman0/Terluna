@@ -22,7 +22,7 @@ The first two are the programme's cases. The third is kept so that the staged st
 python3 -m research.studies.vacuum_economy.run [--case NAME ...]
 ```
 
-The run takes the cases listed in [cases.json](cases.json) and writes [results/economy.json](results/economy.json), 1.0 MB for 43 cases. A case takes about ten seconds on one thread. Each record holds the funding at the opening; for each of three financing arrangements (equity alone, funded credit, and credit in U) and each horizon (years 100, 200 and 220) the receipts, the operating cash, the payouts, the equity added after the opening, the rate of return and the net present values at 0%, 1%, 3% and 7%; for each of seven periods the receipts by sector and the costs by category, with the share of the costs paid to Earth; the asteroid feed, the lunar regolith, the water, the nitrogen and the fresh metal drawn by each horizon; and the traffic of each horizon's year, as launches from Earth with the pads they imply and the round trips of the ferries, the lunar landers and the tugs. A case may change engineering coefficients, each named by its path, to a value or to a schedule by year. The product names its producer and the digest of every file it was computed from.
+The run takes the cases listed in [cases.json](cases.json) and writes [results/economy.json](results/economy.json), 1.2 MB for 49 cases. A case takes about ten seconds on one thread, and about twenty where the staffing of local manufacture is solved. Each record holds the funding at the opening; for each of three financing arrangements (equity alone, funded credit, and credit in U) and each horizon (years 100, 200 and 220) the receipts, the operating cash, the payouts, the equity added after the opening, the rate of return and the net present values at 0%, 1%, 3% and 7%; for each of seven periods the receipts by sector and the costs by category, with the share of the costs paid to Earth; the asteroid feed, the lunar regolith, the water, the nitrogen and the fresh metal drawn by each horizon; the traffic of each horizon's year, as launches from Earth with the pads they imply and the round trips of the ferries, the lunar landers and the tugs; and the jobs of that year with the share of the machinery's working parts made in place. A case may change engineering coefficients, each named by its path, to a value or to a schedule by year. The product names its producer and the digest of every file it was computed from.
 
 ## The first pass
 
@@ -82,6 +82,25 @@ Fuelling the first years from Earth halves the funding the programme needs befor
 The launch price itself moves the result more than the arrangement does. At 100 dollars a kilogram in place of 200 the services portfolio finances itself, and its funders' net present value rises from −3.7 to 2.4 trillion dollars before any change of arrangement.
 
 The traffic these cases imply is part of the result. In the diversified portfolio with the depot's propellant, year 200 has 61,000 launches from Earth, which is 305 pads at the model's 200 launches a pad a year, with 259,000 lunar landings, 25,700 ferry trips and 10,800 returns of tugs from the sources. In year 100 it has 5,200 launches and 13,700 landings.
+
+## Working parts made in place
+
+The staged model buys the working parts of every new machine from Earth in every year. The [industry model](../../../provisioning/vacuum_industry/README.md) now lets the industry make a share of them, as far as its residents can staff the work. In these cases the industry becomes able to make 78% of working parts over the thirty years from the opening, which leaves 5% of all equipment mass imported, the central value of the published studies. The labour of a locally made part is this study's assumption, since no source gives it, and runs at 50%, 25% and 10% of the part's import price. Both portfolios are on constant growth, at the staged launch price and Earth-leg arrangement; money is in trillions of 2041 dollars with credit in U and a 3% discount rate.
+
+| Portfolio | Working parts | Share made in place, orders of years 100 · 200 | Funders' net present value, year 200 | Equity added by year 200 | Costs paid to Earth, years 151–200 | Launches from Earth in year 200 |
+|---|---|---|---|---|---|---|
+| Diversified | All bought, as staged | 0% · 0% | 9.04 | 0.00 | 62% | 61,017 |
+| Diversified | Labour at 50% of the import price | 10% · 38% | 9.44 | 0.00 | 58% | 50,727 |
+| Diversified | Labour at 25% | 20% · 75% | 9.95 | 0.00 | 56% | 45,111 |
+| Diversified | Labour at 10% | 51% · 78% | 11.27 | 0.00 | 51% | 44,339 |
+| Worldwide services | All bought, as staged | 0% · 0% | −3.70 | 7.35 | 42% | 19,975 |
+| Worldwide services | Labour at 50% of the import price | 33% · 78% | 5.80 | 0.00 | 29% | 7,673 |
+| Worldwide services | Labour at 25% | 65% · 78% | 7.36 | 0.00 | 17% | 7,599 |
+| Worldwide services | Labour at 10% | 78% · 78% | 7.71 | 0.00 | 17% | 7,598 |
+
+The residents are what limits the share. With labour at half the import price, the diversified portfolio's people can staff a tenth of their working parts in year 100, with nine tenths of the workforce employed, and 38% in year 200. At a quarter of the import price they staff a fifth and then three quarters; at a tenth, half and then the whole able share. The services portfolio employs fewer people in its other work and makes more of its machinery: a third of its working parts in year 100 even at the dearest labour.
+
+That portfolio is the one the change transforms. Bought machinery, its replacement and their launch are 42% of what the services portfolio spends in years 151 to 200, and with every part bought it needs 7 trillion dollars of added equity on constant growth and has a net present value of −3.7 trillion. Making its working parts in place, it finances itself at every labour cost tried, with a net present value of 5.8 to 7.7 trillion dollars, and its launches in year 200 fall from 20,000 to about 7,600. The diversified portfolio gains 0.4 to 2.2 trillion dollars, and its payments to Earth stay above half of its costs. About a third of those payments is the cost of selling material to Earth, which local manufacture leaves as it was: operating the capsules that return the goods costs 82 trillion dollars in years 151 to 200, and relaunching them is a third of all the mass launched. The rest is machinery that its residents, busier than the services portfolio's, staff more slowly.
 
 ## Evidence
 
