@@ -147,7 +147,7 @@ class RunnerTests(unittest.TestCase):
     def test_the_twilight_clear_share_follows_the_patches_it_extends(self):
         # It extends the module, namelist and broadcast lines and the subroutines the twilight, longwave and ice patches
         # wrote, keeps PlaSim's lines short, and comes last of the radiation's own patches; the ice weights follow it,
-        # then the 10 m wind and the cold cloud's factors.
+        # then the 10 m wind, the cold cloud's factors and the zero start where the Sun is down.
         at = [edits for _, _, edits in er.TWILIGHT_PATCHES].index(er.TWILIGHT_CLEAR_EDITS)
         written = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:at] for _, new in edits)
         for old, _ in er.TWILIGHT_CLEAR_EDITS:
@@ -156,7 +156,7 @@ class RunnerTests(unittest.TestCase):
             self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
         self.assertIs(er.TWILIGHT_PATCHES[at][2], er.TWILIGHT_CLEAR_EDITS)
         self.assertEqual([name for name, _, _ in er.TWILIGHT_PATCHES[at + 1:]],
-                         ['radmod.f90', 'plasimmod.f90', 'fluxmod.f90', 'outmod.f90', 'radmod.f90'])
+                         ['radmod.f90', 'plasimmod.f90', 'fluxmod.f90', 'outmod.f90', 'radmod.f90', 'radmod.f90'])
         self.assertIn('ntwlclear', ''.join(new for _, new in er.TWILIGHT_CLEAR_EDITS))
 
     def test_the_twilight_clear_share_patch_leaves_the_model_as_it_was_when_off(self):
@@ -306,8 +306,9 @@ class RunnerTests(unittest.TestCase):
     def test_the_cold_cloud_factors_scale_the_ice_optics_by_level_from_a_default_of_one(self):
         # On what the ice, clear-share and weights patches wrote: ZICEWF and ZICERF, read and broadcast, default 1,
         # scaling the water path and the radius in both the sunlight's and the infrared's ice routines.
-        self.assertEqual(er.TWILIGHT_PATCHES[-1][2], er.ICE_FACTOR_EDITS)
-        text = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:-1] for _, new in edits)
+        at = [edits for _, _, edits in er.TWILIGHT_PATCHES].index(er.ICE_FACTOR_EDITS)
+        self.assertEqual(at, len(er.TWILIGHT_PATCHES) - 2)                   # the zero start follows it
+        text = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:at] for _, new in edits)
         for old, new in er.ICE_FACTOR_EDITS:
             self.assertEqual(text.count(old), 1, old)
             text = text.replace(old, new)
@@ -322,6 +323,99 @@ class RunnerTests(unittest.TestCase):
         import inspect
         for f in (er.run, er.configuration):
             self.assertIsNone(inspect.signature(f).parameters['cold_cloud'].default)
+
+    def test_each_sunlight_pass_starts_from_zero_where_the_sun_is_down(self):
+        # Last of the twilight patches, on what the twilight, clear-share and cold-cloud patches wrote: NTWLZERO, read
+        # and broadcast, default 0. A stand-in swr that writes its fluxes only where the Sun is up, with the patch's
+        # block and the twilight's own twilight_term, called as radstep calls it (the clear pass with no cloud, then
+        # the all-sky pass): with NTWLZERO 0 the all-sky ground below the horizon holds the clear twilight T plus
+        # T (1 - cover), the model as it was; with 1 it holds T (1 - cover); a sunlit column is the same in both.
+        import shutil
+        import subprocess
+        self.assertEqual(er.TWILIGHT_PATCHES[-1], ('radmod.f90', er.TWILIGHT_ZERO_MARKER, er.TWILIGHT_ZERO_EDITS))
+        text = ''.join(new for _, _, edits in er.TWILIGHT_PATCHES[:-1] for _, new in edits)
+        for old, new in er.TWILIGHT_ZERO_EDITS:
+            self.assertEqual(text.count(old), 1, old)
+            text = text.replace(old, new)
+            self.assertTrue(all(len(line) <= 132 for line in new.splitlines()))
+        self.assertIn('integer :: ntwlzero = 0', text)
+        self.assertIn(',ntwlclear,zicew,zicewf,zicerf,ntwlzero', text)
+        self.assertIn('call mpbci(ntwlzero)', text)
+        swr_end = er.TWILIGHT_ZERO_EDITS[-1][1]
+        block = swr_end[:swr_end.index('      if (ntwilight == 1) call twilight_term')]
+        self.assertLess(text.index(block), text.index('      if (ntwilight == 1) call twilight_term'))
+        if shutil.which('gfortran') is None:
+            self.skipTest('no gfortran')
+        sw_new = er.TWILIGHT_EDITS[-2][1]
+        first, last = '      subroutine twilight_term\n', '      end subroutine twilight_term\n'
+        term = sw_new[sw_new.index(first):sw_new.index(last) + len(last)]
+        source = '''
+      module radmod
+      implicit none
+      integer, parameter :: NHOR = 3, NLEV = 3, NLEP = 4, NTWLMAX = 2
+      real, parameter :: PI = 3.14159265358979323846
+      real :: gsol0 = 1200.0, gdist2 = 1.0
+      integer :: nclouds = 1, ntwl = 2, ntwlzero = 0
+      real :: twlel(NTWLMAX) = (/-10.0, 10.0/), twlg(NTWLMAX) = (/0.01, 0.03/)
+      real :: twlq(NLEV,NTWLMAX) = reshape((/0.002, 0.004, 0.006, 0.003, 0.005, 0.007/), (/NLEV, NTWLMAX/))
+      real :: gmuz(NHOR), dcc(NHOR,NLEV), dswfl(NHOR,NLEP), dfd(NHOR,NLEP), dfu(NHOR,NLEP)
+      end module radmod
+
+      subroutine swr
+      use radmod
+      implicit none
+      integer :: jlev
+      logical :: losun(NHOR)
+      losun(:) = gmuz(:) > 0.
+      do jlev=1,NLEP
+       where(losun(:))
+        dfd(:,jlev) = 400. * gmuz(:) * (1. - 0.5 * dcc(:,1))
+        dfu(:,jlev) = -0.2 * dfd(:,jlev)
+        dswfl(:,jlev) = dfu(:,jlev) + dfd(:,jlev)
+       endwhere
+      enddo
+''' + block + '''      call twilight_term
+      end subroutine swr
+''' + term + '''
+      program drive
+      use radmod
+      implicit none
+      integer :: j, k
+      real :: zcc(NHOR,NLEV), zclear(NHOR)
+      gmuz(:) = (/0.05, -0.02, -0.1/)
+      zcc(1,:) = (/0.3, 0.0, 0.2/)
+      zcc(2,:) = (/0.5, 0.0, 0.2/)
+      zcc(3,:) = (/0.0, 0.0, 0.0/)
+      do k = 0, 1
+       ntwlzero = k
+       dswfl(:,:) = 0.
+       dfd(:,:) = 0.
+       dfu(:,:) = 0.
+       dcc(:,:) = 0.
+       call swr
+       zclear(:) = dswfl(:,NLEP)
+       dcc(:,:) = zcc(:,:)
+       call swr
+       do j = 1, NHOR
+        print '(2es26.17)', zclear(j), dswfl(j,NLEP)
+       enddo
+      enddo
+      end program drive
+'''
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / 'zero.f90').write_text(source)
+            subprocess.run(['gfortran', '-fdefault-real-8', '-O0', '-o', 'zero', 'zero.f90'], cwd=tmp, check=True)
+            out = np.loadtxt(subprocess.run(['./zero'], cwd=tmp, check=True, capture_output=True,
+                                            text=True).stdout.split('\n')).reshape(2, 3, 2)
+        before, fixed = out
+        cover = 1.0 - np.prod(1.0 - np.array([[0.3, 0.0, 0.2], [0.5, 0.0, 0.2], [0.0, 0.0, 0.0]]), axis=1)
+        self.assertTrue(np.array_equal(before[:, 0], fixed[:, 0]))             # the clear pass is unchanged
+        self.assertTrue(np.array_equal(before[0], fixed[0]))                   # so is a sunlit column
+        for j in (1, 2):
+            clear = before[j, 0]
+            self.assertGreater(clear, 0.0)
+            self.assertTrue(np.isclose(before[j, 1], clear * (2.0 - cover[j]), rtol=1e-12))   # NTWLZERO 0
+            self.assertTrue(np.isclose(fixed[j, 1], clear * (1.0 - cover[j]), rtol=1e-12))    # NTWLZERO 1
 
     def test_the_cold_cloud_factors_come_from_a_product_top_layer_first(self):
         import json

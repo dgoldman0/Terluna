@@ -217,8 +217,24 @@ def decode_relief(rgb, low):
     return rgb[..., 0].astype(np.int64) * 256 + rgb[..., 1] + low + 0.5
 
 
-def turned_note(turn, drained, clim_run):
+# What the page says of each turned run's climate over the years the globe draws: the ground, the rain and the drylands
+# from the run's land readings (climate/gcm/README.md on domain/climate).
+TURNED_CLIMATES = {
+    'A28R_301k_design_l15_snow_s924_turned_refit':
+        'the design run on the turned Moon at the target, {label}: the ground at 301.3 K, rain of 1.98 mm/day over the '
+        'globe and 2.19 over land, 59.5% of the land dry (an aridity below 0.65) and the drylands moved south by the turn',
+    'A28R_301k_design_l15_snow_s938_turned_refit_precession':
+        "the design climate on the turned Moon, {label}, with PlaSim's night-side twilight counted once and the equinox "
+        'regressing with the node: the ground at 301.0 K, rain of 1.95 mm/day over the globe and 2.15 over land, and '
+        '60.7% of the land dry (an aridity below 0.65), 63.2% in the north and 58.4% in the south',
+}
+
+
+def turned_note(turn, drained, run, years):
     """The page's paragraph on the turned Moon: the turn, the run whose clouds and rain it shows, and the lakes."""
+    if run not in TURNED_CLIMATES:
+        raise KeyError(f'no climate readings for {run} in TURNED_CLIMATES; add them before drawing the globe from it')
+    climate = TURNED_CLIMATES[run].format(label=f'{run}, model years {years[0]}–{years[-1]}')
     lakes, rivers = drained['lakes'], drained['rivers']
     return ('<b>The turned Moon.</b> The weight of the seas and lakes turns the Moon about '
             f"{turn['pole_moved_deg']:.1f}° into a new stable orientation, the orientation study's elastic state, so the "
@@ -226,9 +242,7 @@ def turned_note(turn, drained, clim_run):
             'ground. In today\'s coordinates the turned north pole stands at 81.95° N, 167.14° W and the point beneath '
             'Earth at 8.00° N, 6.09° E: near-side places move about 8° south and far-side places north. The water level, '
             "the lakes' levels and every height stay on the dry Moon's geoid until the atlas folds in the water's own "
-            "gravity and the crust's sag. The clouds and the ground cover follow the design run on the turned Moon at the "
-            f'target, {clim_run}: the ground at 301.3 K, rain of 1.98 mm/day over the globe and 2.19 over land, 59.5% of '
-            'the land dry (an aridity below 0.65) and the drylands moved south by the turn. The rivers and rain-fed lakes '
+            f"gravity and the crust's sag. The clouds and the ground cover follow {climate}. The rivers and rain-fed lakes "
             f"are routed on that run's rain and evaporation carried back to the ground: {lakes['area_share']:.1%} of the "
             f"Moon in {lakes['bodies']:,} lakes holding {lakes['volume_km3'] / 1e6:.1f} million km³, with "
             f"{rivers['discharge_to_sea_m3s']:,} m³/s reaching the seas. The run itself was set with the earlier "
@@ -319,7 +333,7 @@ def write_globe(atlas, height, ppd, sites, targets, hashes, turn=None):
     if turn:
         years = params['climatology']['years']
         data['frame'] = dict(
-            note=turned_note(turn, drained, f"{params['climatology']['run']}, model years {years[0]}–{years[-1]}"),
+            note=turned_note(turn, drained, params['climatology']['run'], years),
             lede=' It shows the Moon as its seas turn it, with the clouds and rain of the design run on the turned Moon.')
     template = (HERE / 'globe.template.html').read_text()
     page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))

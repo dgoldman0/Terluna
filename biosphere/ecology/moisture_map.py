@@ -2,24 +2,27 @@
 the warmth, night light and settings beside each class, and the years, the GCM-CM1 gap and windows of years carried as
 its uncertainty.
 
-The water. Each T21 land cell of the turned run at the target (A28R_301k_design_l15_snow_s924_turned_refit, years 10-49)
-takes its aridity, the rain over a Priestley-Taylor demand (alpha 1.26) on the cell's own mean net radiation at the
-ground, its air at 2 m and its pressure, read as the design run's land readings read it: each field's means by tenth of
-the lunar day, placed by each 3-day mean's hour angle (climate/crm/gcm_site.py), then averaged over the ten tenths. The
-classes are UNEP's aridity classes (Middleton & Thomas 1997, as the Millennium Ecosystem Assessment's dryland chapter
-tabulates them, Safriel & Adeel 2005, table 22.1), with the humid class divided where the rain meets the demand (aridity
-1, below which a place has a yearly moisture deficit). The demand is radiation-based where the World Atlas's is
-Thornthwaite's temperature-based one: on the Moon the warmth and the sunlight do not keep Earth's relation, so the
-boundaries are UNEP's and the demand is the project's. The classes are named by their moisture, and beside each stands
-the broad biome the dryland chapter gives the class on Earth, as a reference only. Which organisms each class holds on
-the Moon is a design question, and none enters the map; a biome map comes when the moisture is joined by further axes.
+The water. Each T21 land cell of the design climate on the turned Moon
+(A28R_301k_design_l15_snow_s938_turned_refit_precession, years 10-49, with PlaSim's night-side twilight counted once and
+the equinox regressing) takes its aridity, the rain over a Priestley-Taylor demand (alpha 1.26) on the cell's own mean
+net radiation at the ground, its air at 2 m and its pressure, read as the design run's land readings read it: each
+field's means by tenth of the lunar day, placed by each 3-day mean's hour angle (climate/crm/gcm_site.py), then averaged
+over the ten tenths. The classes are UNEP's aridity classes (Middleton & Thomas 1997, as the Millennium Ecosystem
+Assessment's dryland chapter tabulates them, Safriel & Adeel 2005, table 22.1), with the humid class divided where the
+rain meets the demand (aridity 1, below which a place has a yearly moisture deficit). The demand is radiation-based
+where the World Atlas's is Thornthwaite's temperature-based one: on the Moon the warmth and the sunlight do not keep
+Earth's relation, so the boundaries are UNEP's and the demand is the project's. The classes are named by their moisture,
+and beside each stands the broad biome the dryland chapter gives the class on Earth, as a reference only. Which
+organisms each class holds on the Moon is a design question, and none enters the map; a biome map comes when the
+moisture is joined by further axes.
 
 The frame. The run lives in the turned Moon's frame, geology's orientation product at the elastic state: its cells,
 their latitudes and the Earth above the sub-Earth point at 0 N 0 E are the turned Moon's. Geography's grids stand on
 today's ground, so each pixel of the 28% atlas (4 px/deg) with its tides, and each rain-fed lake pixel (16 px/deg), is
-counted in the cell that holds it on the turned Moon, carried by the orientation's rotation (climate/gcm/turned.py);
-the pixels keep today's areas, which are the ground's. The lakes come from the drainage routed on the same years'
-climatology carried back to today's ground: geography/turned_y10-49 for the forty years, geography/turned for 10-19.
+counted in the cell that holds it on the turned Moon, carried by the orientation's rotation (climate/gcm/turned.py); the
+pixels keep today's areas, which are the ground's. The lakes come from the drainage routed on the same years'
+climatology carried back to today's ground: geography/turned_corrected_y10-49 for the forty years,
+geography/turned_corrected for 10-19.
 
 The warmth. The 2 m air's mean, its coldest and warmest 3-day means and the interval minima PlaSim writes (mint)
 recheck ecology finding 15: no frost, alpine, boreal or seasonal biome on natural ground. A cell whose mean air lies
@@ -82,8 +85,9 @@ DRIVE = Path('/media/projectspace/terluna-research/session-tools')
 DESIGN_YEARS = DRIVE / 'design_run' / 'design_years.json'           # the established land readings, checked against
 CLASS_SENSITIVITY = DRIVE / 'design_run' / 'class_sensitivity.json'
 
-RUN, YEARS = 'A28R_301k_design_l15_snow_s924_turned_refit', (10, 49)        # the turned run at the target
-COMPARE_YEARS = (10, 19)                # the turned design years, mapped whole beside the forty years
+TARGET_RUN = 'A28R_301k_design_l15_snow_s924_turned_refit'                  # the turned run at the target, 6-8 November
+RUN, YEARS = 'A28R_301k_design_l15_snow_s938_turned_refit_precession', (10, 49)   # the design climate, 9 November
+COMPARE_YEARS = (10, 19)                # the design years, mapped whole beside the forty years
 DECADES = ((10, 19), (20, 29), (30, 39), (40, 49))
 DESIGN_RUN = 'A28R_301k_design_l15_snow_s934'          # the design run of 1 November, whose land readings check it
 STORE_RUNS = ()                         # the hollows' store runs belong to the design run of 1 November
@@ -92,12 +96,17 @@ SPAN = 2                        # years in each span of the years' spread
 
 GEOGRAPHY = {'atlas': 'geography/results/atlas.json', 'atlas_grid': 'geography/products/atlas_28pct_4ppd.npz',
              'tides_grid': 'geography/products/tides_28pct_4ppd.npz'}
-DRAINAGE = {(10, 49): 'geography/turned_y10-49', (10, 19): 'geography/turned'}     # each window's lakes
+# each window's lakes, routed on its own years' climate
+DRAINAGE = {(TARGET_RUN, (10, 49)): 'geography/turned_y10-49', (TARGET_RUN, (10, 19)): 'geography/turned',
+            (RUN, (10, 49)): 'geography/turned_corrected_y10-49', (RUN, (10, 19)): 'geography/turned_corrected'}
 ORIENTATION = 'geology/results/moon_orientation.json'
-TURNED_YEARS_LAND = DRIVE / 'turned_design' / 'turned_years_land_A28R_301k_design_l15_snow_s924_turned_refit.json'
+# each run's land readings over years 10-19, which the map's own shares are checked against
+LAND_READINGS = {TARGET_RUN: DRIVE / 'turned_design' / f'turned_years_land_{TARGET_RUN}.json',
+                 RUN: DRIVE / 'precession' / f'turned_years_land_{RUN}.json'}
 LIVING_LIGHT = 'research/studies/living_light/results/living_light.json'
 PLANT = 'biosphere/canopy/results/plant.json'
-SCHEMAS = {LIVING_LIGHT: 'terluna.research.living-light/1', GEOGRAPHY['atlas']: 'terluna.geography.atlas/1'}
+POLAR_LIGHT = 'research/studies/polar_light/results/polar_light.json'
+SCHEMAS = {LIVING_LIGHT: 'terluna.research.living-light/1', POLAR_LIGHT: 'terluna.research.polar-light/1', GEOGRAPHY['atlas']: 'terluna.geography.atlas/1'}
 
 # The gap boxes' readings on the design years (session-tools/agents/gap_boxes/read_rules_*.out): lunar-day rain in
 # mm/day, CM1 then the GCM; the land boxes' aridity (R1b); each box's share of rain from sunset to sunrise (R2a's
@@ -400,14 +409,33 @@ def night_light(lat2, lon2):
 
 
 def dark_hours(lat2):
-    """Hours a cycle with photosynthetic light under 1 umol/m2/s, from the plant model's bands (0, 30 and 60 deg) and
-    none poleward of 65 deg (ecology finding 15)."""
+    """Hours a cycle with photosynthetic light under 1 umol/m2/s under a clear sky: equatorward of 60 deg from the plant
+    model's bands (0, 30 and 60 deg), poleward of it from the polar light study's year means at the design tilt in the
+    turned frame, where the tall air's twilight ends them from 66 N and 67 S. Beside them, poleward of 60 deg, the
+    study's hours under the run's clouds, which go on to 72 deg; equatorward, where the study has no table, none. The
+    study finds where the hours end on a 1 deg grid and tabulates them on a coarser one, so each column falls to zero at
+    the study's own limit instead of running on to the next tabulated latitude."""
     plant = json.loads((ROOT / PLANT).read_text())['results']['near']
     hours = []
     for band in ('0', '30', '60'):
         row = plant[band]
         hours.append(next(v['dark_hours'] for v in row.values() if isinstance(v, dict) and 'dark_hours' in v))
-    return np.interp(np.abs(lat2), [0.0, 30.0, 60.0, 65.0], hours + [0.0]), dict(zip(('0', '30', '60'), hours))
+    alat = np.abs(np.asarray(lat2, float))
+    clear = np.interp(alat, [0.0, 30.0, 60.0], hours)
+    cloudy = np.full(alat.shape, np.nan)
+    study = json.loads((ROOT / POLAR_LIGHT).read_text())
+    table, limits = study['light']['tilt 1.613'], study['thresholds']['tilt 1.613']
+    for sign, hemi in ((1.0, 'north'), (-1.0, 'south')):
+        keys = sorted((k for k in table if float(k) * sign >= 60.0), key=lambda k: abs(float(k)))
+        at = np.array([abs(float(k)) for k in keys])
+        side = (np.sign(lat2) == sign) & (alat >= 60.0)
+        for out, field, limit in ((clear, 'dark_hours_clear', 'no_dark_hours_clear_from'),
+                                  (cloudy, 'dark_hours_cloud', 'no_dark_hours_cloud_from')):
+            edge = limits[hemi][limit]
+            below = at < edge
+            values = np.array([float(np.mean(table[k][field])) for k in keys])[below]
+            out[side] = np.interp(alat[side], np.append(at[below], edge), np.append(values, 0.0), right=0.0)
+    return clear, dict(zip(('0', '30', '60'), hours)), cloudy
 
 
 # ==== The settings ===================================================================================================
@@ -430,7 +458,7 @@ def cell_areas_km2(lat, lon):
     return band[:, None] * np.ones((1, lon.size))
 
 
-def settings(lat, lon, rotation=None, drainage=DRAINAGE[YEARS]):
+def settings(lat, lon, rotation=None, drainage=DRAINAGE[(RUN, YEARS)]):
     """Seas, lakes, closed lakes, the coast's length and the tide along it, for each T21 cell. Geography's pixels
     stand on today's ground; with a rotation (today to the run's frame) each is counted in the cell that holds it in the
     run's frame, and keeps its area. drainage is the folder whose products hold the lakes routed on the run's
@@ -520,7 +548,7 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
     """The map of one window of years in the run's own frame, with the lakes of the drainage folder. With an
     orientation product, geography's pixels, which stand on today's ground, are counted in the cells that hold them on
     the turned Moon; None for a run on today's ground."""
-    drainage = drainage or DRAINAGE.get(tuple(years), DRAINAGE[YEARS])
+    drainage = drainage or DRAINAGE[(run, tuple(years))]                    # a window's own lakes, never another's
     frame = read_frame(ROOT / orientation) if orientation else None
     c = read_run(run, years)
     lat, lon, land = c['lat'], c['lon'], c['land']
@@ -536,7 +564,14 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
     rob = robustness(c['ai'], ai_se, [s['ai'] for s in stores])
     lux, elev = night_light(lat2, lon2)
     regime = night_regime(lux, elev)
-    hours, hour_bands = dark_hours(lat2)
+    hours, hour_bands, hours_cloudy = dark_hours(lat2)
+    edge = json.loads((ROOT / POLAR_LIGHT).read_text())['thresholds']['tilt 1.613']
+    polar_dark = dict(source=POLAR_LIGHT, from_deg=60.0,
+                      none_clear_from_deg={h: edge[h]['no_dark_hours_clear_from'] for h in ('north', 'south')},
+                      none_cloud_from_deg={h: edge[h]['no_dark_hours_cloud_from'] for h in ('north', 'south')},
+                      note='poleward of 60 deg plant_dark_hours is the polar light study\'s clear-sky year mean at the '
+                           'design tilt and plant_dark_hours_cloudy its mean under the run\'s clouds; equatorward the '
+                           'plant model\'s clear-sky bands, and plant_dark_hours_cloudy is null')
     geo = settings(lat, lon, frame['rotation'] if frame else None, drainage)
     night_share = np.tensordot(NIGHT, c['tenth']['pr'], axes=(0, 0)) / np.maximum(c['tenth']['pr'].sum(axis=0), 1e-30)
     tas = c['mean']['tas'] - 273.15
@@ -621,11 +656,12 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
             abs(ref['aridity'][n]['land_share'] - float(wl[L & (unep_run == j)].sum())) for j, (n, _, _) in enumerate(UNEP))
         checks['design_years_land_rain_difference_mm_day'] = abs(ref['land_rain_mm_day'] - float((c['rain'] * wl).sum()))
         checks['design_years_json_sha256'] = sha(DESIGN_YEARS)
-    if TURNED_YEARS_LAND.exists() and run == RUN and tuple(years) == COMPARE_YEARS:
-        ref = json.loads(TURNED_YEARS_LAND.read_text())['turned_years']['unep_share']
+    readings = LAND_READINGS.get(run)
+    if readings and readings.exists() and tuple(years) == COMPARE_YEARS:
+        ref = json.loads(readings.read_text())['turned_years']['unep_share']
         checks['turned_years_aridity_shares_max_difference'] = max(
             abs(ref[n] - float(wl[L & (unep_run == j)].sum())) for j, (n, _, _) in enumerate(UNEP))
-        checks['turned_years_land_json_sha256'] = sha(TURNED_YEARS_LAND)
+        checks['turned_years_land_json_sha256'] = sha(readings)
     if CLASS_SENSITIVITY.exists() and run == DESIGN_RUN and tuple(years) == (10, 19):
         ref = json.loads(CLASS_SENSITIVITY.read_text())['by_rain_scale']
         checks['class_sensitivity_max_difference'] = max(
@@ -693,12 +729,14 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
                  night_rain_flag=col(night_share >= NIGHT_FLAG), beside_sea=col(beside_sea), class_kept_in_resamples=col(keep_prob, 3), night_rh_lowest_level=col(c['night_rh'], 3),
                  soil_water_mm=col(c['mean']['mrso'] * 1e3, 4), darkest_lux=col(lux, 4), earth_elevation_deg=col(elev, 4),
                  night_regime=col(regime), plant_dark_hours=col(hours, 4),
+                 plant_dark_hours_cloudy=[None if not np.isfinite(x) else round(float(x), 4)
+                                          for x in np.asarray(hours_cloudy)[L]],
                  sea_fraction=col(geo['sea_fraction'], 3), sea_level_lake_fraction=col(geo['sea_level_lake_fraction'], 3),
                  rainfed_lake_fraction=col(geo['rainfed_lake_fraction'], 3),
                  closed_lake_fraction=col(geo['closed_lake_fraction'], 3), coast_km=col(geo['coast_km'], 4),
                  tide_m=col(geo['tide_m'], 3), tide_class=col(tclass))
     lakes = [f'{drainage}/results/drainage.json', f'{drainage}/products/drainage_28pct_16ppd.npz']
-    inputs = {path: sha(ROOT / path) for path in [*GEOGRAPHY.values(), *lakes, LIVING_LIGHT, PLANT, *([orientation] if frame else [])]}
+    inputs = {path: sha(ROOT / path) for path in [*GEOGRAPHY.values(), *lakes, LIVING_LIGHT, PLANT, POLAR_LIGHT, *([orientation] if frame else [])]}
     for s in (c, *stores):
         for name, ident in s['files'].items():
             inputs[f'climate/gcm/runs/{name}'] = ident
@@ -714,7 +752,8 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
                       frame=(dict(orientation=orientation, sha256=frame['sha256'], tilt_deg=frame['tilt_deg']) if frame else None),
                       drainage=drainage, inputs=inputs, input_schemas={**SCHEMAS, lakes[0]: 'terluna.geography.drainage/1'}),
         evidence=('A zoning of the design climate by its water balance, not a model of vegetation: each T21 land cell '
-                  '(about 170 km across at the equator) of the turned run at the target takes the moisture class its '
+                  '(about 170 km across at the equator) of the design climate on the turned Moon takes the moisture '
+                  'class its '
                   'aridity gives it, with its warmth, night light and settings beside it. The aridity is the GCM\'s rain '
                   'over a Priestley-Taylor demand without wind or humidity, over the years named; the classes are UNEP\'s, '
                   'the humid class divided at aridity 1, each with the broad biome the Millennium Ecosystem Assessment '
@@ -791,7 +830,7 @@ def build(run=RUN, years=YEARS, store_runs=STORE_RUNS, store_years=STORE_YEARS, 
                  class_and_night_pairs_over_1_percent=int(sum(v >= 0.01 for v in combo_shares)),
                  drylands_share=round(float(wl[dry].sum()), 4), earth_drylands=EARTH_DRYLANDS),
         warmth=frost,
-        light=dict(plant_dark_hours_by_band=hour_bands, source=LIVING_LIGHT),
+        light=dict(plant_dark_hours_by_band=hour_bands, source=LIVING_LIGHT, polar=polar_dark),
         settings=dict(shores=shore, soda_lakes=soda, soil_zones=SOIL_ZONES, storm_water_surfaces=STORM_WATER_SURFACES,
                       night_humidity=dict(lowest_level_night_rh_median_dry=round(float(np.median(c['night_rh'][dry])), 3),
                                           lowest_level_night_rh_median_humid=round(float(np.median(c['night_rh'][L & ~dry])), 3),

@@ -1,10 +1,25 @@
 """The lane rules allow the intended dependencies and reject the rest."""
 import unittest
+from pathlib import Path
+import tempfile
+from types import SimpleNamespace
+from unittest.mock import patch
 
-from shared.check_layers import allowed, lane
+from shared.check_layers import allowed, lane, tracked_sources
 
 
 class LaneRuleTests(unittest.TestCase):
+    def test_source_inventory_handles_new_deleted_and_space_named_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "shared").mkdir()
+            (root / "shared/new file.py").write_text("pass\n")
+            output = "shared/new file.py\0shared/deleted.py\0archive/old.py\0"
+            with patch("shared.check_layers.ROOT", root), patch("shared.check_layers.subprocess.run") as run:
+                run.return_value = SimpleNamespace(stdout=output)
+                self.assertEqual(tracked_sources(), ["shared/new file.py"])
+                self.assertIn("--others", run.call_args.args[0])
+
     def test_lanes(self):
         self.assertEqual(lane("atmosphere/lower_air.py"), "domain")
         self.assertEqual(lane("immersion/engine/core.js"), "immersion-engine")

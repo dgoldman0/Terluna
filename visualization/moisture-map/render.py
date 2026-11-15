@@ -116,13 +116,13 @@ def main(argv=None) -> int:
     gs = fig.add_gridspec(3, 2, height_ratios=[1.0, 1.0, 0.82], hspace=0.30, wspace=0.06,
                           left=0.155, right=0.985, top=0.905, bottom=0.05)
     run = p['producer']
-    fig.text(0.02, 0.968, 'The Open Moon\'s moisture on the turned Moon at the target', fontsize=14,
+    fig.text(0.02, 0.968, "The Open Moon's moisture on the turned Moon's design climate", fontsize=14,
              color=INK, weight='bold')
-    fig.text(0.02, 0.928, f"{run['run']}, years {run['years'][0]}–{run['years'][1]}; T21 cells about 170 km across, "
-             f"drawn as computed on an equal-area map in the turned Moon's frame, the near side at the centre and the limbs dashed.\n"
-             f"Provisional while the GCM-CM1 gap stands. The rain scaled by {p['gap']['scale']:.2f} toward CM1 is a "
-             f"sensitivity of the classes from three boxes, never a corrected climate.", fontsize=8.6, color=INK2,
-             linespacing=1.5)
+    fig.text(0.02, 0.921, f"{run['run']}, years {run['years'][0]}–{run['years'][1]}; T21 cells about 170 km across, "
+             f"drawn as computed on an equal-area map in the turned Moon's frame,\nthe near side at the centre and the limbs "
+             f"dashed. The GCM-CM1 gap is carried as a range, its dry end the rain scaled by {p['gap']['scale']:.2f} "
+             f"toward CM1:\na sensitivity of the classes from three boxes, never a corrected climate.", fontsize=8.6,
+             color=INK2, linespacing=1.5)
     class_handles = [Patch(facecolor=col, edgecolor=INK3, linewidth=0.4, label=n)
                          for col, n in zip(CLASS_COLOURS, names)]
     sea_handle = Patch(facecolor=SEA, edgecolor='none', label='seas and large lakes (GCM water cells)')

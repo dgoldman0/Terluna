@@ -6,6 +6,8 @@ Generate the atlases with calculate_full_cycle.py (numba required).
 import unittest
 from pathlib import Path
 import numpy as np
+import pytest
+pytest.importorskip("numba")  # without numba these tests are skipped when a file is named directly, as conftest.py leaves them uncollected
 ROOT=Path(__file__).resolve().parent
 WORLDS=('earth','moon','moon_no_ozone')
 

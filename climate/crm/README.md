@@ -3134,6 +3134,34 @@ $Y/run_wtg_boxes.sh            # land, sea, dry in turn: build, setup, two lunar
 python3 -m pytest climate/tests/test_cm1_dgw.py
 ```
 
+### The boxes on the turned years (8 November)
+
+The gap is measured again on the turned Moon before the hold on the local climates and the Jura box is decided. `box_near_side_sea_turned`, `box_0e_turned` and `box_se_dry_turned` are the design-years boxes forced by the turned run at the target over its forty settled years (`A28R_301k_design_l15_snow_s924_turned_refit`, years 10–49), each site carried with the ground into the turned frame by geology's orientation product: the Near-side Sea's to 9.24 S, 52.01 W, the land's to 7.85 S, 6.28 W and the dry block's to 49.85 S, 56.39 E. Each box starts at its site's sunrise and departs from its design-years box in nothing else, and the design years' rules read them unchanged (`session-tools/gap_turned/` on the research drive: the rules, the copies of `forcing_audit.py`, `gcm_spread.py` and `read_rules.py`, and their outputs). They run one at a time on four threads. The sea box ran first, on 8 November from 08:37 to 13:51 at 700 model seconds a wall second; the land and dry boxes stand paused at day 3 with their restarts kept.
+
+At the sea site the climate model is as it was: 1.41 mm/day of rain, half of it at night, against 1.42 and half in the design years. The sea box, read on days 3–4 (R5 on days 3–5), beside the design-years sea box:
+
+| | Turned years | Design years |
+|---|---|---|
+| Rain (R1) | 1.06 against 1.41 mm/day (0.75) | 1.17 against 1.42 (0.83) |
+| Rain in a different quarter (R2a) | 0.42; 8.5% at night against 50% | 0.41; 9.5% against 50% |
+| Evaporation (R3) | 2.48 against 3.34 mm/day | 2.96 against 3.61 |
+| Low air (R4) | −0.14 K and −0.11 g/kg: holds | the humidity misses |
+| Column vapour (R5) | −4.7%: holds | −6.3%: misses |
+| Air at 40 and 60 km (R6) | 7.7 and 9.1 K colder | 8.1 and 9.7 K colder |
+| Falling rain evaporated (R7) | 0.71 against 0.54 | 0.70 against 0.54 |
+| Radiation at the ground (R8) and wettest tenth (R2c) | hold | hold |
+| Night wind (M2) | 0.72–0.81 of the target after midnight | 0.72–0.82 in the same quarter |
+| Drift (M3) | the column's vapour falls 10.2 and 6.1 kg/m² over days 4 and 5: misses | holds by day 5 |
+
+The turn leaves the gap's form as it was. CM1 rains a quarter less than the climate model and almost none of it at night, and holds an upper air 8–9 K colder, while the low air and the radiation agree. With the night-wind check missed in the design-years box's quarter and the vapour still drifting, the box reads as observations. Its spin-up days followed the design-years box's step for step: on day 2 it rained 0.82 against 0.88 mm/day, 14% and 13% of it at night (`peek_spinup_*.json` beside the rules). The climate model's side carries the double count of the night-side twilight that every PlaSim run since 14 October holds ([the GCM's account](../gcm/README.md), "Each sunlight pass from zero where the Sun is down"). It is largest in the three days after sunset, while the turned run's late-evening rain falls about four to seven days after it; the corrected run will show whether the count touches that rain.
+
+```sh
+G=/media/projectspace/terluna-research/session-tools/gap_turned
+$G/run_box.sh box_near_side_sea_turned          # two lunar days, the restart trial, days 3, 4 and 5; resumable
+<climate venv>/bin/python $G/read_rules.py box_near_side_sea_turned --site sea     # the rules, rules_<box>.json
+python3 -m pytest climate/tests/test_cm1_run.py
+```
+
 ## A box over the highlands
 
 The author's plan for highlands (2026-09-29) left a three-dimensional box over

@@ -80,9 +80,10 @@ def allowed(source_path: str, target_path: str) -> bool:
 
 
 def tracked_sources() -> list[str]:
-    out = subprocess.run(["git", "ls-files", "*.py", "*.js", "*.mjs", "*.cjs"], cwd=ROOT,
-                         capture_output=True, text=True, check=True).stdout.split()
-    return [p for p in out if not p.startswith(SKIP_PREFIXES)]
+    out = subprocess.run(["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z", "--",
+                          "*.py", "*.js", "*.mjs", "*.cjs"], cwd=ROOT,
+                         capture_output=True, text=True, check=True).stdout.split("\0")
+    return sorted({p for p in out if p and not p.startswith(SKIP_PREFIXES) and (ROOT / p).is_file()})
 
 
 def python_targets(path: str) -> list[tuple[int, str]]:
