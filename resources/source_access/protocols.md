@@ -68,12 +68,12 @@ assert status["extraction_authorized"] is False
 
 ## Source identity and checks
 
-The following files are local project records. Their bytes, authority descriptions and exact line locators are pinned in [protection_inputs.json](protection_inputs.json). No external paper or catalogue is copied into this module. The existing science-screen input also records the identity of its archived JPL catalogue.
+The following files are local project records. Their bytes, authority descriptions and exact line locators are pinned in [protection_inputs.json](protection_inputs.json). The decisions register grows by appended entries, so it is bound by the lines the gates cite and stays valid as entries are added after them. No external paper or catalogue is copied into this module. The existing science-screen input also records the identity of its archived JPL catalogue.
 
 | Source record | SHA-256 |
 |---|---|
 | `research/studies/conservation/README.md` | `850534d9f0615a95e8dd20618c7fda7480b2e96852f64c821e75fc33c2863631` |
-| `research/decisions.md` | `f82f959838eebaeb1b86e560a48467f6c2e23e0782e969268b409992d420afa2` |
+| `research/decisions.md`, the 15 lines the gates cite (52–53, 84–95 and 599), each hashed with its line number | `f415134d424c02f588476e3e0142c9a53846072c93aa9963c808c9b050a5c84a` |
 | `research/studies/world_economy/development.md` | `ec9c2034760f6b6f7b029b9f06eae03f448817c719d2ad7fc226a61c49a82e8f` |
 | `research/studies/protection_architecture/requirements.md` | `b5c6d83181bd771fe21ac1a14b32dd0bd4118b6c272bb63c08fa25ca19acba25` |
 | `research/studies/conservation/sites.json` | `cdfa3fcd37a32edccd0678cf7f698cde5f617de9188d258da62624a62b48ba26` |

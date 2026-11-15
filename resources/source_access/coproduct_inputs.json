@@ -63,8 +63,8 @@
     "export_coproduct_flows.py": "8eb9c5142720bfdf4aedd22105086daa8582ba140444659c940f655369cc8d8e",
     "results/lunar_potential.json.gz": "635a919992ac6de03d613e52b759a078cfa914b027b8f8f31b3102bc09ef0f81",
     "../enclosed_mining/inputs.json": "b0ee1d80e96e1e91b764eae05d7db4d31fd733a834b0f2f339e07d7b5eb7b9d3",
-    "protection.py": "981c71eb90877fddc0dad1a40a75df75b9ff03a3923d73c8cd83a03cf6ba85b8",
-    "protection_inputs.json": "3f20e052e97e7d771eaea00ab1c40b101db1720b8f67431e648406b0dcda21f8"
+    "protection.py": "f44593c4cc430ee3f04fba24bfb99f2a1c1c433bd25104ae3e94922dd50d603f",
+    "protection_inputs.json": "10574983cbb75695623a51ea8eff62afdf9ccf8da067ab8e773d64307246e12d"
   },
   "lunar_patch_area_km2": 100,
   "lunar_patch_depth_m": 5
