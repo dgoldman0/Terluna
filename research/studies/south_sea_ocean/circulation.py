@@ -54,6 +54,10 @@ SST_RELAX_DAYS = 30.0
 YEAR_S = SP.WRITE_S * 1320              # the forcing's cycle, 357.5 days
 MONTH_S = YEAR_S / 12.0                 # the output's interval, 29.8 days: a twelfth of the forcing's year
 MOSCOVIENSE_MOUTH_TODAY = (-23.34, 176.09)     # where the Moscoviense route enters (inflows.json, two_seas)
+OLD_WATER_DEPTHS_M = (0.0, 100.0, 500.0, 1000.0, 2000.0, 4000.0)
+WARMTH_BANDS = ((14, 30), (30, 45), (45, 60), (60, 81))     # degrees south, true latitude on the turned Moon
+EEL_WARM_LIMIT_C = 28.0                 # Japanese eel eggs hatch at 19-28 C (the register's row of 6 November)
+EEL_DEPTH_M = 1050.0                    # 0.9-1.2 km holds the pressure of the eels' 150-200 m on Earth (seawater lakes)
 SALT_CLASSES = ((0.0, 0.5, 'fresh'), (0.5, 5.0, 'nearly fresh'), (5.0, 18.0, 'brackish'), (18.0, 30.0, 'mixed'),
                 (30.0, 34.0, 'diluted sea water'), (34.0, 36.0, 'sea water'), (36.0, 99.0, 'saltier than sea water'))
 
@@ -304,18 +308,61 @@ def deep_means(sea):
     return mitgcm.read_mds(str(stems[-1])[:-5]) if stems else None
 
 
-def old_water(sea, dye):
-    """The share of the water below each depth that has not been at the surface since the start, by the dye."""
-    g = sea.grid
+def cell_volumes(sea):
+    """Each model cell's volume (m3): the model's own open share of each cell (hFacC, written when it starts) where
+    the run folder holds it, else the floor's. The model rounds thin bottom cells to rock or to a fifth of a layer,
+    so its own shares are the ones its output must be weighed with."""
+    if (sea.folder / 'hFacC.meta').exists():
+        share = mitgcm.read_mds(str(sea.folder / 'hFacC'))
+        return share * sea.delr[:, None, None] * sea.grid.area[None]
     top = np.cumsum(sea.delr) - sea.delr
-    thick = np.clip(g.depth[None] - top[:, None, None], 0.0, sea.delr[:, None, None])
-    volume = thick * g.area[None]
+    return np.clip(sea.grid.depth[None] - top[:, None, None], 0.0, sea.delr[:, None, None]) * sea.grid.area[None]
+
+
+def old_water(sea, dye, volume=None):
+    """The share of the water below each depth that has not been at the surface since the start, by the dye."""
+    volume = cell_volumes(sea) if volume is None else volume
+    top = np.cumsum(sea.delr) - sea.delr
     out = {}
-    for depth in (0.0, 100.0, 500.0, 1000.0, 2000.0, 4000.0):
+    for depth in OLD_WATER_DEPTHS_M:
         below = top >= depth
         if volume[below].sum() > 0:
             out[f'below {depth:g} m'] = float((dye[below] * volume[below]).sum() / volume[below].sum())
     return out
+
+
+def by_depth(values, volume):
+    """A field's mean at each level over the sea's cells, None where a level holds no water."""
+    total = volume.sum(axis=(1, 2))
+    mean = (values * volume).sum(axis=(1, 2)) / np.maximum(total, 1e-30)
+    return [float(m) if t > 0 else None for m, t in zip(mean, total)]
+
+
+def warmth(sea, theta, volume, true_lat):
+    """The year's temperature: its mean at each level, the top layer by band of true latitude (mean, coldest and
+    warmest cell), the depth at which each band's water first stands at or under the eels' warm limit, and the
+    water at the depth whose pressure matches the eels' spawning depth on Earth."""
+    top = np.cumsum(sea.delr) - sea.delr
+    mid = top + 0.5 * sea.delr
+    open_ = volume > 0
+    wet = open_[0]
+    bands, cool = {}, (theta <= EEL_WARM_LIMIT_C) & open_
+    first = np.where(cool.any(axis=0), mid[np.argmax(cool, axis=0)], np.nan)
+    for a, b in WARMTH_BANDS:
+        m = wet & (-true_lat >= a) & (-true_lat < b)
+        if not m.any():
+            continue
+        t, w, d = theta[0][m], sea.grid.area[m], first[m]
+        found = np.isfinite(d)
+        bands[f'{a}-{b}S'] = dict(
+            top_layer_c=dict(mean=float((t * w).sum() / w.sum()), coldest=float(t.min()), warmest=float(t.max())),
+            at_or_under_the_limit_from_m=dict(median=float(np.median(d[found])) if found.any() else None,
+                                              share_of_area_with_any=float(w[found].sum() / w.sum())))
+    k = int(np.abs(mid - EEL_DEPTH_M).argmin())
+    t = theta[k][open_[k]]
+    return dict(by_depth_c=by_depth(theta, volume), bands=bands, warm_limit_c=EEL_WARM_LIMIT_C,
+                at_the_eels_depth=dict(level_mid_m=float(mid[k]), coldest=float(t.min()), median=float(np.median(t)),
+                                       warmest=float(t.max())))
 
 
 def salinity_areas(sea, salt):
@@ -376,8 +423,18 @@ def run(args):
 def read(args):
     """What has run so far: each model year's note and each month's top layer, as results/circulation_<step>deg.json."""
     sea, setting = build(args.step, args.deltat)
-    notes = sea.folder / 'progress.jsonl'
-    years = [json.loads(line) for line in notes.read_text().splitlines()] if notes.exists() else []
+    volume = cell_volumes(sea)
+    true_lat, _ = ST.Frame(*setting['frame_centre_turned']).to_true(*np.meshgrid(sea.grid.yc, sea.grid.xc, indexing='ij'))
+    years = []
+    for path in sorted(sea.folder.glob('deep.*.data')):
+        deep = mitgcm.read_mds(str(path)[:-5])
+        years.append(dict(year=int(path.name.split('.')[1]) * sea.deltat / YEAR_S,
+                          old_water_share=old_water(sea, deep['TRAC01'], volume),
+                          old_water_by_depth=by_depth(deep['TRAC01'], volume),
+                          salinity_by_depth_g_kg=[None if v is None else v * R.sc.SEAWATER_G_KG
+                                                  / float(R.practical_from_reference(R.sc.SEAWATER_G_KG))
+                                                  for v in by_depth(deep['SALT'], volume)],
+                          warmth=warmth(sea, deep['THETA'], volume, true_lat)))
     factor = R.sc.SEAWATER_G_KG / float(R.practical_from_reference(R.sc.SEAWATER_G_KG))
     wet, months = sea.grid.wet, []
     for path in sorted(sea.folder.glob('top.*.data')):
@@ -395,8 +452,13 @@ def read(args):
                              'salinity class in g/kg (fresh under 0.5, nearly fresh to 5, brackish to 18, mixed to '
                              '30, diluted sea water to 34, sea water to 36, saltier above). old_water_share is the '
                              'dye: the share of the water below a depth that has not been at the surface since the '
-                             'start, as the last model year\'s mean.'),
-               setting=setting, model_years=len(years), years=years, months=months)
+                             'start, as each model year\'s mean; years also give the dye, the salinity and '
+                             'the temperature at each level (level_mid_m) over the model\'s own open cells, the '
+                             'top layer\'s temperature by band of true latitude, the depth from which the water '
+                             'stands at or under the eels\' warm limit, and the water at the eels\' depth. Water '
+                             'below about 500 m still holds the run\'s starting temperature in its first decades.'),
+               setting=setting, level_mid_m=[float(x) for x in np.cumsum(sea.delr) - 0.5 * sea.delr],
+               model_years=len(years), years=years, months=months)
     path = HERE / 'results' / f'circulation_{args.step:g}deg.json'
     path.write_text(json.dumps(out, indent=1) + '\n')
     print(f'{len(years)} model years, {len(months)} months read into {path}')

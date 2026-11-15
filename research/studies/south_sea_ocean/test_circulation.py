@@ -84,6 +84,43 @@ def test_the_fluxes_keep_their_size_and_point_upward():
     assert all((v[:, ~wet] == 0).all() for v in f.values())
 
 
+def little_sea(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, 'RUNS', tmp_path)
+    depth = np.array([[0.0, 30.0], [12.0, 30.0]])                 # land, two deep columns and one of 12 m
+    grid = mitgcm.Grid(xg=np.array([0.0, 1.0, 2.0]), yg=np.array([-1.0, 0.0, 1.0]), depth=depth)
+    flat = np.zeros((2, 2))
+    return ST.Sea(name='little', grid=grid, deltat=1800.0, delr=np.array([10.0, 20.0]),
+                  coriolis=dict(centre=flat, corner=flat, cosine=flat))
+
+
+def test_the_dye_and_the_warmth_are_weighed_on_the_models_own_cells(tmp_path, monkeypatch):
+    sea = little_sea(tmp_path, monkeypatch)
+    volume = C.cell_volumes(sea)                                  # no run yet: the floor's own shares
+    assert volume[0, 0, 0] == 0 and volume[1, 1, 0] == pytest.approx(2.0 * sea.grid.area[1, 0])
+    # the model rounds the 2 m left in the second layer of the 12 m column to rock; its own shares say so
+    sea.folder.mkdir(parents=True)
+    share = np.array([[[0.0, 1.0], [1.0, 1.0]], [[0.0, 1.0], [0.0, 1.0]]])
+    share.astype('>f4').tofile(sea.folder / 'hFacC.data')
+    (sea.folder / 'hFacC.meta').write_text(" nDims = [   3 ];\n dimList = [\n     2,    1,    2,\n     2,    1,    2,\n"
+                                           "     2,    1,    2\n ];\n dataprec = [ 'float32' ];\n nrecords = [     1 ];\n")
+    volume = C.cell_volumes(sea)
+    assert volume[1, 1, 0] == 0.0
+    dye = np.where(share > 0, 1.0, 0.0)                           # rock reads as zero in the model's output
+    dye[0] *= 0.5
+    old = C.old_water(sea, dye, volume)
+    assert old['below 0 m'] == pytest.approx((0.5 * volume[0].sum() + volume[1].sum()) / volume.sum())
+    assert C.by_depth(dye, volume) == pytest.approx([0.5, 1.0])
+    theta = np.where(share > 0, 27.0, 0.0)
+    theta[0] = np.where(share[0] > 0, [[0.0, 30.0], [29.0, 31.0]], 0.0)
+    true_lat = np.array([[-20.0, -20.0], [-50.0, -50.0]])
+    w = C.warmth(sea, theta, volume, true_lat)
+    assert w['by_depth_c'][1] == pytest.approx(27.0)              # the rock cell's zero is left out
+    assert w['bands']['14-30S']['top_layer_c']['mean'] == pytest.approx(30.0)
+    assert w['bands']['45-60S']['top_layer_c'] == pytest.approx(dict(mean=30.0, coldest=29.0, warmest=31.0), rel=0.01)
+    assert w['bands']['14-30S']['at_or_under_the_limit_from_m']['median'] == pytest.approx(20.0)
+    assert w['bands']['45-60S']['at_or_under_the_limit_from_m']['share_of_area_with_any'] == pytest.approx(0.5, abs=0.01)
+
+
 def test_the_trial_is_recorded_with_its_setting():
     out = json.loads((C.HERE / 'results' / 'circulation_trial_1deg.json').read_text())
     assert out['schema'] == C.SCHEMA
