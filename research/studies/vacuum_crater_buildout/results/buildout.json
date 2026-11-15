@@ -1,0 +1,1056 @@
+{
+  "schema": "terluna.research.vacuum-crater-buildout/1",
+  "evidence": "Reproducible proxy-ranked and estate-separated site scenarios from a published crater census; ideal enclosure and service calculations. Site feasibility, route engineering, lifecycle reliability and supported vacuum occupancy remain unvalidated.",
+  "reading_rule": "Both percentages use all 200\u20131,000 m catalogue records before exclusions, rounded down. Initial sites are nested within the eventual selection. Architectural populations are summed from actual diameters; service loads use full representative floor-space occupancy as a sizing sensitivity. All enclosure material, leakage, power and transport choices are scenarios. Domes are removed after a sustainable breathable environment is established.",
+  "programme": {
+    "denominator_craters": 8886558,
+    "eventual_sites": 222163,
+    "initial_sites": 8886,
+    "initial_fraction_of_eventual": 0.039997659376223765,
+    "initial_population_per_site": [
+      500,
+      1000
+    ],
+    "initial_diameter_bounds_m": [
+      237.88321548703618,
+      336.417669602688
+    ],
+    "initial_enclosure": "One contiguous dome over a complete community, with its eventual lifestyle and layout substantially in place. Subdivision is an option for larger settlements."
+  },
+  "screening": {
+    "input_records": 902291,
+    "high_confidence": 887689,
+    "no_adjacent_water": 736874,
+    "ranking_pool": 724781
+  },
+  "eventual_by_estate_factor": {
+    "1.5": {
+      "selected": 222163,
+      "requested": 222163,
+      "shortfall": 0,
+      "diameter_m": {
+        "min": 200.0,
+        "p10": 231.0,
+        "median": 388.0,
+        "p90": 796.5527464,
+        "max": 999.989092
+      },
+      "depth_m": {
+        "min": 12.7052,
+        "p10": 16.9970294,
+        "median": 28.45755,
+        "p90": 58.135102,
+        "max": 69.999756
+      },
+      "bands": {
+        "200_300": 67766,
+        "300_500": 75046,
+        "500_1000": 79351
+      },
+      "architectural_population": {
+        "spacious": 204215308.53663447,
+        "representative": 510538271.34158623,
+        "fuller": 875208465.157005
+      },
+      "circular_estate_area_km2": 102107.65426831724,
+      "nearest_other_site_km": {
+        "min": 0.32059697324537817,
+        "p10": 1.00833906890065,
+        "median": 2.5962113795814834,
+        "p90": 6.473307091462528,
+        "max": 247.05549937734196
+      },
+      "latitude_today_deg": {
+        "min": -64.987446,
+        "p10": -35.0883372,
+        "median": 4.863403,
+        "p90": 36.2535466,
+        "max": 50.88
+      },
+      "longitude_today_deg": {
+        "min": -179.998758,
+        "p10": -157.0855366,
+        "median": -77.584823,
+        "p90": 148.528231,
+        "max": 179.999102
+      }
+    },
+    "2.0": {
+      "selected": 222163,
+      "requested": 222163,
+      "shortfall": 0,
+      "diameter_m": {
+        "min": 200.0,
+        "p10": 231.0,
+        "median": 385.0,
+        "p90": 794.8766254000002,
+        "max": 999.989092
+      },
+      "depth_m": {
+        "min": 12.7052,
+        "p10": 16.963659999999997,
+        "median": 28.319397,
+        "p90": 58.013659800000006,
+        "max": 69.999756
+      },
+      "bands": {
+        "200_300": 68385,
+        "300_500": 75021,
+        "500_1000": 78757
+      },
+      "architectural_population": {
+        "spacious": 203019632.6354155,
+        "representative": 507549081.58853877,
+        "fuller": 870084139.8660665
+      },
+      "circular_estate_area_km2": 180461.89567592493,
+      "nearest_other_site_km": {
+        "min": 0.40918652664240474,
+        "p10": 1.1608184957779397,
+        "median": 2.696396027785953,
+        "p90": 6.488976053917637,
+        "max": 247.05549937734196
+      },
+      "latitude_today_deg": {
+        "min": -64.987446,
+        "p10": -35.140107799999996,
+        "median": 4.687372,
+        "p90": 36.214949,
+        "max": 50.88
+      },
+      "longitude_today_deg": {
+        "min": -179.998758,
+        "p10": -156.95754780000001,
+        "median": -76.757665,
+        "p90": 148.53168900000003,
+        "max": 179.999102
+      }
+    },
+    "3.0": {
+      "selected": 222163,
+      "requested": 222163,
+      "shortfall": 0,
+      "diameter_m": {
+        "min": 200.0,
+        "p10": 231.0,
+        "median": 382.0,
+        "p90": 789.6732258000002,
+        "max": 999.989092
+      },
+      "depth_m": {
+        "min": 12.720154,
+        "p10": 16.8797968,
+        "median": 27.943481,
+        "p90": 57.641000399999996,
+        "max": 69.999756
+      },
+      "bands": {
+        "200_300": 69929,
+        "300_500": 75288,
+        "500_1000": 76946
+      },
+      "architectural_population": {
+        "spacious": 199508213.51778826,
+        "representative": 498770533.79447067,
+        "fuller": 855035200.7905211
+      },
+      "circular_estate_area_km2": 399016.42703557655,
+      "nearest_other_site_km": {
+        "min": 0.6319874413416207,
+        "p10": 1.446386097073263,
+        "median": 2.9486243472940283,
+        "p90": 6.523852042886496,
+        "max": 247.05549937734196
+      },
+      "latitude_today_deg": {
+        "min": -64.987446,
+        "p10": -35.2388188,
+        "median": 4.305495,
+        "p90": 36.1012296,
+        "max": 50.88
+      },
+      "longitude_today_deg": {
+        "min": -179.998758,
+        "p10": -156.5261894,
+        "median": -74.826177,
+        "p90": 148.70098880000003,
+        "max": 179.999102
+      }
+    }
+  },
+  "initial_clustered": {
+    "selected": 8886,
+    "requested": 8886,
+    "shortfall": 0,
+    "diameter_m": {
+      "min": 238.0,
+      "p10": 245.0,
+      "median": 280.0,
+      "p90": 322.0,
+      "max": 336.0
+    },
+    "depth_m": {
+      "min": 15.07373,
+      "p10": 17.4113765,
+      "median": 20.2818295,
+      "p90": 23.932098,
+      "max": 27.950073
+    },
+    "bands": {
+      "200_300": 6158,
+      "300_500": 2728,
+      "500_1000": 0
+    },
+    "architectural_population": {
+      "spacious": 2507315.6952003795,
+      "representative": 6268289.238000949,
+      "fuller": 10745638.693715913
+    },
+    "circular_estate_area_km2": 2228.7250624003377,
+    "nearest_other_site_km": {
+      "min": 0.49573965243316165,
+      "p10": 0.9234594741245361,
+      "median": 2.315832928767916,
+      "p90": 5.015830176692674,
+      "max": 15.717037063023247
+    },
+    "latitude_today_deg": {
+      "min": -31.87095,
+      "p10": 11.737085,
+      "median": 29.762448,
+      "p90": 40.2969545,
+      "max": 44.177085
+    },
+    "longitude_today_deg": {
+      "min": -178.445667,
+      "p10": -161.9626145,
+      "median": -139.988463,
+      "p90": -124.59721350000001,
+      "max": 177.075392
+    },
+    "regional_groups": 247,
+    "group_size": {
+      "min": 8.0,
+      "p10": 11.0,
+      "median": 35.0,
+      "p90": 64.0,
+      "max": 64.0
+    },
+    "network": {
+      "geographic_minimum_tree_km": 39467.50164379345,
+      "links": 8885,
+      "link_length_km": {
+        "min": 0.49573965243316165,
+        "p10": 1.211688361261592,
+        "median": 3.2922306641134274,
+        "p90": 6.590125717039761,
+        "max": 2469.6491986963456
+      },
+      "future_water_flagged_links": 40,
+      "future_water_flagged_link_length_km": 6243.641698800653,
+      "components": {
+        "25km": {
+          "components": 36,
+          "isolated_sites": 0,
+          "largest_component_sites": 2901
+        },
+        "25km_without_water_flagged_tree_links": {
+          "components": 55,
+          "isolated_sites": 5,
+          "largest_component_sites": 2643
+        },
+        "50km": {
+          "components": 24,
+          "isolated_sites": 0,
+          "largest_component_sites": 5174
+        },
+        "50km_without_water_flagged_tree_links": {
+          "components": 48,
+          "isolated_sites": 5,
+          "largest_component_sites": 3228
+        }
+      },
+      "reading_rule": "Great-circle lengths, without terrain detours, grades, route capacity or redundancy. Water is sampled along links on the inherited coarse mask; unflagged links remain unverified. Removing flagged tree links gives a conservative connectivity diagnostic; alternative dry links were not searched."
+    }
+  },
+  "initial_smallest_span_comparison": {
+    "selected": 8886,
+    "requested": 8886,
+    "shortfall": 0,
+    "diameter_m": {
+      "min": 238.0,
+      "p10": 238.0,
+      "median": 241.0,
+      "p90": 245.0,
+      "max": 245.0
+    },
+    "depth_m": {
+      "min": 15.07373,
+      "p10": 16.2967225,
+      "median": 17.709663499999998,
+      "p90": 19.0759565,
+      "max": 20.415817
+    },
+    "bands": {
+      "200_300": 8886,
+      "300_500": 0,
+      "500_1000": 0
+    },
+    "architectural_population": {
+      "spacious": 1831076.4824494598,
+      "representative": 4577691.206123649,
+      "fuller": 7847470.639069114
+    },
+    "circular_estate_area_km2": 1627.623539955075,
+    "nearest_other_site_km": {
+      "min": 0.49212860432403155,
+      "p10": 3.9918254003955824,
+      "median": 14.006149003496283,
+      "p90": 38.336320962917505,
+      "max": 296.0974896478586
+    },
+    "latitude_today_deg": {
+      "min": -64.775497,
+      "p10": -34.0508985,
+      "median": 10.2030495,
+      "p90": 38.0804,
+      "max": 50.791335
+    },
+    "longitude_today_deg": {
+      "min": -179.968919,
+      "p10": -159.543179,
+      "median": -100.89510899999999,
+      "p90": 151.63205349999998,
+      "max": 179.945214
+    },
+    "network": {
+      "geographic_minimum_tree_km": 223308.10750913568,
+      "links": 8885,
+      "link_length_km": {
+        "min": 0.49212860432403155,
+        "p10": 5.883806878399002,
+        "median": 19.994283388449258,
+        "p90": 50.37052605798906,
+        "max": 521.0499592326601
+      },
+      "future_water_flagged_links": 2125,
+      "future_water_flagged_link_length_km": 92683.31680417071,
+      "components": {
+        "25km": {
+          "components": 3507,
+          "isolated_sites": 2175,
+          "largest_component_sites": 474
+        },
+        "25km_without_water_flagged_tree_links": {
+          "components": 3917,
+          "isolated_sites": 2550,
+          "largest_component_sites": 440
+        },
+        "50km": {
+          "components": 911,
+          "isolated_sites": 428,
+          "largest_component_sites": 3852
+        },
+        "50km_without_water_flagged_tree_links": {
+          "components": 2396,
+          "isolated_sites": 1296,
+          "largest_component_sites": 1343
+        }
+      },
+      "reading_rule": "Great-circle lengths, without terrain detours, grades, route capacity or redundancy. Water is sampled along links on the inherited coarse mask; unflagged links remain unverified. Removing flagged tree links gives a conservative connectivity diagnostic; alternative dry links were not searched."
+    }
+  },
+  "engineering": {
+    "reference_cases": [
+      {
+        "diameter_m": 200,
+        "depth_m": 14.666666666666666,
+        "pressure_difference_Pa": 101325.0,
+        "plan_area_m2": 31415.926535897932,
+        "roof_area_m2": 36442.4747816416,
+        "cap_volume_m3": 661828.8523562498,
+        "bowl_volume_m3": 230383.4612632515,
+        "gross_gas_mass_kg": 1074506.969509247,
+        "uplift_N": 3183218756.249858,
+        "mean_vertical_rim_reaction_N_m": 5066250.0,
+        "membrane_force_N_m": 7346062.5,
+        "equivalent_material_thickness_m": 0.01836515625,
+        "equivalent_pressure_material_kg": 1070834.7896024522,
+        "shielding": [
+          {
+            "thickness_m": 0.0,
+            "mass_kg": 0.0,
+            "weight_N": 0.0,
+            "pressure_to_balance_weight_Pa": 0.0
+          },
+          {
+            "thickness_m": 3.0,
+            "mass_kg": 174923878.95187968,
+            "weight_N": 284114666.1548816,
+            "pressure_to_balance_weight_Pa": 9043.650704690604
+          },
+          {
+            "thickness_m": 7.0,
+            "mass_kg": 408155717.5543859,
+            "weight_N": 662934221.0280571,
+            "pressure_to_balance_weight_Pa": 21101.85164427808
+          }
+        ]
+      },
+      {
+        "diameter_m": 300,
+        "depth_m": 22.0,
+        "pressure_difference_Pa": 101325.0,
+        "plan_area_m2": 70685.83470577035,
+        "roof_area_m2": 81995.5682586936,
+        "cap_volume_m3": 2233672.3767023426,
+        "bowl_volume_m3": 777544.1817634739,
+        "gross_gas_mass_kg": 3626461.0220937086,
+        "uplift_N": 7162242201.5621805,
+        "mean_vertical_rim_reaction_N_m": 7599375.0,
+        "membrane_force_N_m": 11019093.75,
+        "equivalent_material_thickness_m": 0.027547734375,
+        "equivalent_pressure_material_kg": 3614067.4149082764,
+        "shielding": [
+          {
+            "thickness_m": 0.0,
+            "mass_kg": 0.0,
+            "weight_N": 0.0,
+            "pressure_to_balance_weight_Pa": 0.0
+          },
+          {
+            "thickness_m": 3.0,
+            "mass_kg": 393578727.6417293,
+            "weight_N": 639257998.8484837,
+            "pressure_to_balance_weight_Pa": 9043.650704690606
+          },
+          {
+            "thickness_m": 7.0,
+            "mass_kg": 918350364.4973683,
+            "weight_N": 1491601997.3131285,
+            "pressure_to_balance_weight_Pa": 21101.85164427808
+          }
+        ]
+      },
+      {
+        "diameter_m": 500,
+        "depth_m": 36.666666666666664,
+        "pressure_difference_Pa": 101325.0,
+        "plan_area_m2": 196349.54084936206,
+        "roof_area_m2": 227765.46738526,
+        "cap_volume_m3": 10341075.818066403,
+        "bowl_volume_m3": 3599741.5822383044,
+        "gross_gas_mass_kg": 16789171.39858198,
+        "uplift_N": 19895117226.56161,
+        "mean_vertical_rim_reaction_N_m": 12665625.0,
+        "membrane_force_N_m": 18365156.25,
+        "equivalent_material_thickness_m": 0.045912890625,
+        "equivalent_pressure_material_kg": 16731793.587538317,
+        "shielding": [
+          {
+            "thickness_m": 0.0,
+            "mass_kg": 0.0,
+            "weight_N": 0.0,
+            "pressure_to_balance_weight_Pa": 0.0
+          },
+          {
+            "thickness_m": 3.0,
+            "mass_kg": 1093274243.449248,
+            "weight_N": 1775716663.4680102,
+            "pressure_to_balance_weight_Pa": 9043.650704690606
+          },
+          {
+            "thickness_m": 7.0,
+            "mass_kg": 2550973234.714912,
+            "weight_N": 4143338881.425357,
+            "pressure_to_balance_weight_Pa": 21101.85164427808
+          }
+        ]
+      },
+      {
+        "diameter_m": 750,
+        "depth_m": 55.0,
+        "pressure_difference_Pa": 101325.0,
+        "plan_area_m2": 441786.46691106464,
+        "roof_area_m2": 512472.301616835,
+        "cap_volume_m3": 34901130.88597411,
+        "bowl_volume_m3": 12149127.840054277,
+        "gross_gas_mass_kg": 56663453.47021419,
+        "uplift_N": 44764013759.763626,
+        "mean_vertical_rim_reaction_N_m": 18998437.5,
+        "membrane_force_N_m": 27547734.375,
+        "equivalent_material_thickness_m": 0.0688693359375,
+        "equivalent_pressure_material_kg": 56469803.35794181,
+        "shielding": [
+          {
+            "thickness_m": 0.0,
+            "mass_kg": 0.0,
+            "weight_N": 0.0,
+            "pressure_to_balance_weight_Pa": 0.0
+          },
+          {
+            "thickness_m": 3.0,
+            "mass_kg": 2459867047.760808,
+            "weight_N": 3995362492.803023,
+            "pressure_to_balance_weight_Pa": 9043.650704690606
+          },
+          {
+            "thickness_m": 7.0,
+            "mass_kg": 5739689778.108552,
+            "weight_N": 9322512483.207052,
+            "pressure_to_balance_weight_Pa": 21101.85164427808
+          }
+        ]
+      },
+      {
+        "diameter_m": 1000,
+        "depth_m": 73.33333333333333,
+        "pressure_difference_Pa": 101325.0,
+        "plan_area_m2": 785398.1633974483,
+        "roof_area_m2": 911061.86954104,
+        "cap_volume_m3": 82728606.54453123,
+        "bowl_volume_m3": 28797932.657906435,
+        "gross_gas_mass_kg": 134313371.18865585,
+        "uplift_N": 79580468906.24644,
+        "mean_vertical_rim_reaction_N_m": 25331250.0,
+        "membrane_force_N_m": 36730312.5,
+        "equivalent_material_thickness_m": 0.09182578125,
+        "equivalent_pressure_material_kg": 133854348.70030653,
+        "shielding": [
+          {
+            "thickness_m": 0.0,
+            "mass_kg": 0.0,
+            "weight_N": 0.0,
+            "pressure_to_balance_weight_Pa": 0.0
+          },
+          {
+            "thickness_m": 3.0,
+            "mass_kg": 4373096973.796992,
+            "weight_N": 7102866653.872041,
+            "pressure_to_balance_weight_Pa": 9043.650704690606
+          },
+          {
+            "thickness_m": 7.0,
+            "mass_kg": 10203892938.859648,
+            "weight_N": 16573355525.701427,
+            "pressure_to_balance_weight_Pa": 21101.85164427808
+          }
+        ]
+      },
+      {
+        "diameter_m": 200,
+        "depth_m": 14.666666666666666,
+        "pressure_difference_Pa": 121590.0,
+        "plan_area_m2": 31415.926535897932,
+        "roof_area_m2": 36442.4747816416,
+        "cap_volume_m3": 661828.8523562498,
+        "bowl_volume_m3": 230383.4612632515,
+        "gross_gas_mass_kg": 1289408.3634110964,
+        "uplift_N": 3819862507.49983,
+        "mean_vertical_rim_reaction_N_m": 6079500.0,
+        "membrane_force_N_m": 8815275.0,
+        "equivalent_material_thickness_m": 0.0220381875,
+        "equivalent_pressure_material_kg": 1285001.7475229427,
+        "shielding": [
+          {
+            "thickness_m": 0.0,
+            "mass_kg": 0.0,
+            "weight_N": 0.0,
+            "pressure_to_balance_weight_Pa": 0.0
+          },
+          {
+            "thickness_m": 3.0,
+            "mass_kg": 174923878.95187968,
+            "weight_N": 284114666.1548816,
+            "pressure_to_balance_weight_Pa": 9043.650704690604
+          },
+          {
+            "thickness_m": 7.0,
+            "mass_kg": 408155717.5543859,
+            "weight_N": 662934221.0280571,
+            "pressure_to_balance_weight_Pa": 21101.85164427808
+          }
+        ]
+      },
+      {
+        "diameter_m": 300,
+        "depth_m": 22.0,
+        "pressure_difference_Pa": 121590.0,
+        "plan_area_m2": 70685.83470577035,
+        "roof_area_m2": 81995.5682586936,
+        "cap_volume_m3": 2233672.3767023426,
+        "bowl_volume_m3": 777544.1817634739,
+        "gross_gas_mass_kg": 4351753.22651245,
+        "uplift_N": 8594690641.874617,
+        "mean_vertical_rim_reaction_N_m": 9119250.0,
+        "membrane_force_N_m": 13222912.5,
+        "equivalent_material_thickness_m": 0.03305728125,
+        "equivalent_pressure_material_kg": 4336880.897889932,
+        "shielding": [
+          {
+            "thickness_m": 0.0,
+            "mass_kg": 0.0,
+            "weight_N": 0.0,
+            "pressure_to_balance_weight_Pa": 0.0
+          },
+          {
+            "thickness_m": 3.0,
+            "mass_kg": 393578727.6417293,
+            "weight_N": 639257998.8484837,
+            "pressure_to_balance_weight_Pa": 9043.650704690606
+          },
+          {
+            "thickness_m": 7.0,
+            "mass_kg": 918350364.4973683,
+            "weight_N": 1491601997.3131285,
+            "pressure_to_balance_weight_Pa": 21101.85164427808
+          }
+        ]
+      },
+      {
+        "diameter_m": 500,
+        "depth_m": 36.666666666666664,
+        "pressure_difference_Pa": 121590.0,
+        "plan_area_m2": 196349.54084936206,
+        "roof_area_m2": 227765.46738526,
+        "cap_volume_m3": 10341075.818066403,
+        "bowl_volume_m3": 3599741.5822383044,
+        "gross_gas_mass_kg": 20147005.678298384,
+        "uplift_N": 23874140671.87393,
+        "mean_vertical_rim_reaction_N_m": 15198750.0,
+        "membrane_force_N_m": 22038187.5,
+        "equivalent_material_thickness_m": 0.05509546875,
+        "equivalent_pressure_material_kg": 20078152.30504598,
+        "shielding": [
+          {
+            "thickness_m": 0.0,
+            "mass_kg": 0.0,
+            "weight_N": 0.0,
+            "pressure_to_balance_weight_Pa": 0.0
+          },
+          {
+            "thickness_m": 3.0,
+            "mass_kg": 1093274243.449248,
+            "weight_N": 1775716663.4680102,
+            "pressure_to_balance_weight_Pa": 9043.650704690606
+          },
+          {
+            "thickness_m": 7.0,
+            "mass_kg": 2550973234.714912,
+            "weight_N": 4143338881.425357,
+            "pressure_to_balance_weight_Pa": 21101.85164427808
+          }
+        ]
+      },
+      {
+        "diameter_m": 750,
+        "depth_m": 55.0,
+        "pressure_difference_Pa": 121590.0,
+        "plan_area_m2": 441786.46691106464,
+        "roof_area_m2": 512472.301616835,
+        "cap_volume_m3": 34901130.88597411,
+        "bowl_volume_m3": 12149127.840054277,
+        "gross_gas_mass_kg": 67996144.16425702,
+        "uplift_N": 53716816511.71635,
+        "mean_vertical_rim_reaction_N_m": 22798125.0,
+        "membrane_force_N_m": 33057281.25,
+        "equivalent_material_thickness_m": 0.082643203125,
+        "equivalent_pressure_material_kg": 67763764.02953017,
+        "shielding": [
+          {
+            "thickness_m": 0.0,
+            "mass_kg": 0.0,
+            "weight_N": 0.0,
+            "pressure_to_balance_weight_Pa": 0.0
+          },
+          {
+            "thickness_m": 3.0,
+            "mass_kg": 2459867047.760808,
+            "weight_N": 3995362492.803023,
+            "pressure_to_balance_weight_Pa": 9043.650704690606
+          },
+          {
+            "thickness_m": 7.0,
+            "mass_kg": 5739689778.108552,
+            "weight_N": 9322512483.207052,
+            "pressure_to_balance_weight_Pa": 21101.85164427808
+          }
+        ]
+      },
+      {
+        "diameter_m": 1000,
+        "depth_m": 73.33333333333333,
+        "pressure_difference_Pa": 121590.0,
+        "plan_area_m2": 785398.1633974483,
+        "roof_area_m2": 911061.86954104,
+        "cap_volume_m3": 82728606.54453123,
+        "bowl_volume_m3": 28797932.657906435,
+        "gross_gas_mass_kg": 161176045.42638707,
+        "uplift_N": 95496562687.49573,
+        "mean_vertical_rim_reaction_N_m": 30397500.0,
+        "membrane_force_N_m": 44076375.0,
+        "equivalent_material_thickness_m": 0.1101909375,
+        "equivalent_pressure_material_kg": 160625218.44036785,
+        "shielding": [
+          {
+            "thickness_m": 0.0,
+            "mass_kg": 0.0,
+            "weight_N": 0.0,
+            "pressure_to_balance_weight_Pa": 0.0
+          },
+          {
+            "thickness_m": 3.0,
+            "mass_kg": 4373096973.796992,
+            "weight_N": 7102866653.872041,
+            "pressure_to_balance_weight_Pa": 9043.650704690606
+          },
+          {
+            "thickness_m": 7.0,
+            "mass_kg": 10203892938.859648,
+            "weight_N": 16573355525.701427,
+            "pressure_to_balance_weight_Pa": 21101.85164427808
+          }
+        ]
+      }
+    ],
+    "whole_crater_initial_scenario": {
+      "gross_volume_m3": 22687109851.11235,
+      "gross_air_mass_tonnes": 27322485.10911976,
+      "roof_area_km2": 646.3302680960979,
+      "pressure_uplift_N": 56456391736928.55,
+      "equivalent_pressure_material_tonnes": 27258821.716775324,
+      "shielding_tonnes": {
+        "0.0": 0.0,
+        "3.0": 3102385286.86127,
+        "7.0": 7238899002.676297
+      },
+      "annual_air_replacement_tonnes": {
+        "0.001": 27322.485109119763,
+        "0.01": 273224.85109119763,
+        "0.05": 1366124.2554559882
+      },
+      "cumulative_air_replacement_tonnes": {
+        "50": {
+          "0.001": 1366124.2554559882,
+          "0.01": 13661242.55455988,
+          "0.05": 68306212.7727994
+        },
+        "200": {
+          "0.001": 5464497.021823953,
+          "0.01": 54644970.21823952,
+          "0.05": 273224851.0911976
+        },
+        "500": {
+          "0.001": 13661242.55455988,
+          "0.01": 136612425.5455988,
+          "0.05": 683062127.7279941
+        }
+      }
+    },
+    "material_improvement_cases": [
+      {
+        "effective_allowable_Pa": 400000000.0,
+        "thickness_and_pressure_material_factor": 1.0,
+        "initial_equivalent_pressure_material_tonnes": 27258821.716775324
+      },
+      {
+        "effective_allowable_Pa": 600000000.0,
+        "thickness_and_pressure_material_factor": 0.6666666666666666,
+        "initial_equivalent_pressure_material_tonnes": 18172547.81118355
+      },
+      {
+        "effective_allowable_Pa": 800000000.0,
+        "thickness_and_pressure_material_factor": 0.5,
+        "initial_equivalent_pressure_material_tonnes": 13629410.858387662
+      }
+    ],
+    "larger_community_module_comparison_same_total_plan_area": [
+      {
+        "span_m": 25,
+        "cap_volume_relative_to_300m": 0.08333333333333333,
+        "ideal_pressure_material_relative_to_300m": 0.08333333333333333,
+        "shielding_mass_relative_to_300m": 1.0
+      },
+      {
+        "span_m": 50,
+        "cap_volume_relative_to_300m": 0.16666666666666666,
+        "ideal_pressure_material_relative_to_300m": 0.16666666666666666,
+        "shielding_mass_relative_to_300m": 1.0
+      },
+      {
+        "span_m": 100,
+        "cap_volume_relative_to_300m": 0.3333333333333333,
+        "ideal_pressure_material_relative_to_300m": 0.3333333333333333,
+        "shielding_mass_relative_to_300m": 1.0
+      },
+      {
+        "span_m": 300,
+        "cap_volume_relative_to_300m": 1.0,
+        "ideal_pressure_material_relative_to_300m": 1.0,
+        "shielding_mass_relative_to_300m": 1.0
+      }
+    ],
+    "replacement_counts": {
+      "50": {
+        "20": 2,
+        "50": 0,
+        "100": 0
+      },
+      "200": {
+        "20": 9,
+        "50": 3,
+        "100": 1
+      },
+      "500": {
+        "20": 24,
+        "50": 9,
+        "100": 4
+      }
+    },
+    "lunar_cycles_by_duration": {
+      "50": 618.4265197546002,
+      "200": 2473.706079018401,
+      "500": 6184.265197546002
+    },
+    "full_architectural_occupancy_service_sensitivity": [
+      {
+        "electric_kW_per_resident": 2,
+        "electric_MW": 12536.578476001898,
+        "half_cycle_delivered_MWh": 4442550.707731643,
+        "installed_storage_MWh": 7404251.179552737,
+        "ideal_radiator_area_km2": {
+          "300": 30.327719778706754,
+          "330": 20.714240679398095,
+          "350": 16.370147785590984
+        }
+      },
+      {
+        "electric_kW_per_resident": 5,
+        "electric_MW": 31341.446190004743,
+        "half_cycle_delivered_MWh": 11106376.769329105,
+        "installed_storage_MWh": 18510627.94888184,
+        "ideal_radiator_area_km2": {
+          "300": 75.81929944676688,
+          "330": 51.78560169849524,
+          "350": 40.925369463977454
+        }
+      },
+      {
+        "electric_kW_per_resident": 10,
+        "electric_MW": 62682.892380009485,
+        "half_cycle_delivered_MWh": 22212753.53865821,
+        "installed_storage_MWh": 37021255.89776368,
+        "ideal_radiator_area_km2": {
+          "300": 151.63859889353375,
+          "330": 103.57120339699048,
+          "350": 81.85073892795491
+        }
+      }
+    ],
+    "service_sizing_residents": 6268289.238000949,
+    "half_synodic_month_hours": 354.36708,
+    "assumed_water_loop_makeup_tonnes_per_day": 12536.578476001907,
+    "transition_pressure_atm": [
+      {
+        "outside_atm": 0,
+        "inside_atm": 1.0,
+        "differential_atm": 1
+      },
+      {
+        "outside_atm": 0.1,
+        "inside_atm": 1.0,
+        "differential_atm": 0.9
+      },
+      {
+        "outside_atm": 0.5,
+        "inside_atm": 1.0,
+        "differential_atm": 0.5
+      },
+      {
+        "outside_atm": 1.0,
+        "inside_atm": 1.0,
+        "differential_atm": 0.0
+      },
+      {
+        "outside_atm": 1.2,
+        "inside_atm": 1.0,
+        "differential_atm": -0.19999999999999996
+      }
+    ],
+    "travel_cases": [
+      {
+        "distance_km": 25,
+        "speed_km_h": 10,
+        "ideal_trip_hours": 2.503858024691358,
+        "braking_distance_m": 19.29012345679012
+      },
+      {
+        "distance_km": 25,
+        "speed_km_h": 40,
+        "ideal_trip_hours": 0.6404320987654322,
+        "braking_distance_m": 308.6419753086419
+      },
+      {
+        "distance_km": 25,
+        "speed_km_h": 150,
+        "ideal_trip_hours": 0.224537037037037,
+        "braking_distance_m": 4340.2777777777765
+      },
+      {
+        "distance_km": 50,
+        "speed_km_h": 10,
+        "ideal_trip_hours": 5.003858024691358,
+        "braking_distance_m": 19.29012345679012
+      },
+      {
+        "distance_km": 50,
+        "speed_km_h": 40,
+        "ideal_trip_hours": 1.2654320987654322,
+        "braking_distance_m": 308.6419753086419
+      },
+      {
+        "distance_km": 50,
+        "speed_km_h": 150,
+        "ideal_trip_hours": 0.39120370370370366,
+        "braking_distance_m": 4340.2777777777765
+      },
+      {
+        "distance_km": 250,
+        "speed_km_h": 10,
+        "ideal_trip_hours": 25.003858024691358,
+        "braking_distance_m": 19.29012345679012
+      },
+      {
+        "distance_km": 250,
+        "speed_km_h": 40,
+        "ideal_trip_hours": 6.265432098765432,
+        "braking_distance_m": 308.6419753086419
+      },
+      {
+        "distance_km": 250,
+        "speed_km_h": 150,
+        "ideal_trip_hours": 1.724537037037037,
+        "braking_distance_m": 4340.2777777777765
+      },
+      {
+        "distance_km": 1000,
+        "speed_km_h": 10,
+        "ideal_trip_hours": 100.00385802469135,
+        "braking_distance_m": 19.29012345679012
+      },
+      {
+        "distance_km": 1000,
+        "speed_km_h": 40,
+        "ideal_trip_hours": 25.015432098765434,
+        "braking_distance_m": 308.6419753086419
+      },
+      {
+        "distance_km": 1000,
+        "speed_km_h": 150,
+        "ideal_trip_hours": 6.724537037037036,
+        "braking_distance_m": 4340.2777777777765
+      }
+    ]
+  },
+  "food_production_comparison": {
+    "power_made_development_case": {
+      "additional_food_kW_per_resident": [
+        0.695,
+        2.79
+      ],
+      "additional_food_GW": [
+        4.356461020410658,
+        17.488526974022648
+      ],
+      "services_plus_food_GW": [
+        35.6979072104154,
+        48.82997316402739
+      ],
+      "half_synodic_month_delivered_GWh": [
+        12650.163140265853,
+        17303.73500661475
+      ]
+    },
+    "fully_lamp_lit_case": {
+      "additional_food_kW_per_resident": [
+        5.2,
+        53.0
+      ],
+      "additional_food_GW": [
+        32.59510403760493,
+        332.21932961405025
+      ],
+      "services_plus_food_GW": [
+        63.93655022760967,
+        363.56077580405497
+      ],
+      "half_synodic_month_delivered_GWh": [
+        22657.008609431374,
+        128833.97052421761
+      ]
+    },
+    "reading_rule": "Inherited process-energy scenarios, added to the 5 kW/person community-service comparison. Production stays on the Moon. Vacuum farm structures, source/crop heat rejection and reserves are additional. Power-made food remains a development scenario: fats and plant compounds lack measured complete production routes. These comparisons do not select a diet or establish a complete food system."
+  },
+  "selected_sites": {
+    "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/planned_sites.csv.gz",
+    "rows": 222163,
+    "initial_rows": 8886,
+    "sha256": "c13382280b970461351361fe6c67a765fb57649e01eae723d2871700d65bc168"
+  },
+  "initial_groups": {
+    "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/initial_groups.json",
+    "sha256": "cdca5a2f56addb36399b03528fa92b5b29efe1e5a86928d6ee17d1829b46e935"
+  },
+  "unresolved": [
+    "Local rim/floor topography, foundations, gas barriers and radiation transport",
+    "Future shoreline elevations, groundwater and transient water trajectories",
+    "Conservation polygons, community review and wild/dark-land allocation",
+    "Terrain routes, future-water detours, redundancy, service demand and resource locations",
+    "Vacuum and transitional illumination, operational pressure/composition and refuge capacity",
+    "Heat balance, food/agriculture, imports, repair industry and multi-generation health",
+    "Enclosure dismantling engineering and material recovery"
+  ],
+  "producer": {
+    "files": {
+      "research/studies/vacuum_crater_buildout/run.py": "aafb366efc87fa726b41bf7fda12b92fd3cf2f4d7030ed75594cde30bd00a557",
+      "research/studies/vacuum_crater_buildout/scenarios.json": "32798c1d046e29b69904c6b00242ab2151e879f06f741d538f25a3f57188d4c2",
+      "research/studies/vacuum_crater_buildout/inputs.json": "7d126415418c2b8f9ec9b249fb04a7f421ef178bab567cb63a36dc76487215f5"
+    },
+    "inputs": {
+      "census": {
+        "path": "/home/kir/Documents/Projects/terluna-provisioning/research/studies/crater_gardens/results/first_count.json",
+        "sha256": "d6ad91f11a50daf02650e5bd4afb7cd5d888b2c1eddf4bce16e358c6944a7d09"
+      },
+      "plan": {
+        "path": "/home/kir/Documents/Projects/terluna-provisioning/habitation/crater_gardens/buildout.json",
+        "sha256": "2b0fff4428956805305b1f4883023aa58819cf7fe06457cefec55900738504d0"
+      },
+      "design": {
+        "path": "/home/kir/Documents/Projects/terluna-provisioning/habitation/crater_gardens/design.json",
+        "sha256": "b232179b23261d67fe59137f9a3a96f4cc749d402112f378d89877616825c6ff"
+      },
+      "candidates": {
+        "path": "/media/projectspace/terluna-research/crater-settlements/candidates.csv.gz",
+        "sha256": "ede1a1fbbcde20dadaf90a1ff08748fd252fe12f0690598c8583cdb910543ad2"
+      },
+      "context": {
+        "path": "/media/projectspace/terluna-research/crater-settlements/context.npz",
+        "sha256": "49202d847d6c79726620638a2d8ebdf240f22760bb538d94954ae976d38f1835"
+      },
+      "food": {
+        "path": "/home/kir/Documents/Projects/terluna-provisioning/research/studies/food_systems/results/food_systems.json",
+        "sha256": "57fe8726cead4cd498043f9516bbf36a20505cf919b119dfce39784bf01f37d9"
+      }
+    },
+    "constants": {
+      "GAS_CONSTANT": 8.31446261815324,
+      "JULIAN_YEAR_DAYS": 365.25,
+      "MOON_RADIUS": 1737400.0,
+      "MOON_SURFACE_GRAVITY": 1.6242188765608128,
+      "STANDARD_ATMOSPHERE": 101325.0,
+      "STEFAN_BOLTZMANN": 5.670374419e-08,
+      "SYNODIC_MONTH_DAYS": 29.53059
+    }
+  },
+  "seconds": 27.590906874043867
+}

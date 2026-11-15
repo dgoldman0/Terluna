@@ -1,0 +1,46 @@
+{
+  "schema": "terluna.provisioning.reclamation-evidence/1",
+  "review_date": "2026-11-13",
+  "scope": "Mechanism and maturity evidence, not a calibration of lunar industrial recovery, labour, equipment life or cost.",
+  "sources": [
+    {
+      "id": "NASA_WATER_2023",
+      "title": "NASA Achieves Water Recovery Milestone on International Space Station",
+      "date": "2023-06-20",
+      "url": "https://www.nasa.gov/missions/station/iss-research/nasa-achieves-water-recovery-milestone-on-international-space-station/",
+      "read_scope": "Full article body, including collection, urine distillation, brine processing and maintenance discussion.",
+      "observation": "NASA reports demonstrated total water recovery of 98 percent after adding the brine processor; its earlier total was 93 to 94 percent. The system collects cabin moisture and wastewater and treats urine and brine.",
+      "permitted_use": "Supports explicit separation of collection, treatment and residual losses in a domestic life-support stream.",
+      "limit": "The demonstration does not establish 99.5 percent recovery for an entire lunar city or its farms and industry. The prospective higher coefficients remain scenarios. It also requires maintained hardware and replacement consumables."
+    },
+    {
+      "id": "NASA_SCOR",
+      "title": "SpaceCraft Oxygen Recovery (SCOR)",
+      "url": "https://www.nasa.gov/spacecraft-oxygen-recovery-scor/",
+      "read_scope": "Project description and the oxygen-recovery mechanism paragraphs.",
+      "observation": "The described ISS system recovers about half the oxygen from exhaled carbon dioxide. Further recovery requires processes that retain hydrogen otherwise lost in methane; SCOR targets over 75 percent and investigates a 100 percent stretch goal.",
+      "permitted_use": "Establishes that metabolic oxygen closure and recovery of cabin leakage are distinct processes.",
+      "limit": "The enclosed model's air makeup represents leakage and new atmospheric stock. No extra metabolic oxygen credit is applied without a food-carbon, water and oxygen balance. Engine exhaust is not a collected life-support stream."
+    },
+    {
+      "id": "NASA_ISM_2025",
+      "title": "In-Space Manufacturing Portfolio Plan",
+      "identifier": "NASA/TM-20250004020",
+      "url": "https://ntrs.nasa.gov/api/citations/20250004020/downloads/ISM%20Portfolio%20Plan%20Baseline%20for%20Public%20Release%20R1c.pdf",
+      "read_scope": "Sections 1.1.3 and 1.1.4, printed pages 19\u201321: recycling, polymer degradation, Refabricator outcome, metals recycling, qualification.",
+      "observation": "The plan reports that the Refabricator did not complete its planned orbital demonstration. It discusses polymer performance loss and an Earth demonstration processing aluminium-lithium machining chips into wire that was subsequently printed. It requires verification and qualification of produced hardware.",
+      "permitted_use": "Supports separate collection, acceptance, rejected material and qualification stages, plus treatment of in-space repair and recycling as a development pathway.",
+      "limit": "It provides no validated aggregate lunar-fleet collection or requalification fraction. The model's 80 percent collection, 60 percent acceptance and original-life reset are hypotheses, not values measured by this source."
+    },
+    {
+      "id": "NASA_CLEAR_2010",
+      "title": "Approach to In Situ Component Level Electronics Assembly Repair (CLEAR) for Constellation",
+      "identifier": "NASA/TM-2010-216784; NTRS 20100033105",
+      "url": "https://ntrs.nasa.gov/citations/20100033105",
+      "read_scope": "NTRS abstract, document identity and rights fields; full technical memorandum not read for numerical calibration.",
+      "observation": "The abstract identifies the logistics burden of replacing complete orbital units when a much smaller internal component has failed, and describes research on component-level repair.",
+      "permitted_use": "Motivates replacing a limited repair-parts mass within an otherwise reusable unit.",
+      "limit": "The abstract supplies neither fleet-level successful-repair fractions nor a 30-year tug life. Electronics remanufacture is outside the selected mechanical-hardware experiment."
+    }
+  ]
+}

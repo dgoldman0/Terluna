@@ -1,0 +1,32 @@
+{
+  "compression": "gzip; mtime0",
+  "decompressed_sha256": "5d2a2fa311940bb06fb776278b785651cbce4c1318c40a010be19890abdd79d3",
+  "dependencies": {
+    "provisioning/enclosed_industry/bootstrap.py": "f3a5bc9ad762c232f215a84110f5769a770b74759eacd4e2875964df557a17a1",
+    "provisioning/enclosed_industry/inputs/engineering.json": "e15aec1a0da1b41f23326d1ce15a587addc994e69b4cdca53c1516990365eed2",
+    "provisioning/enclosed_industry/inputs/orders.json": "57d708be85f75c876a0a60c1b2b018032d1b9ececac6849872489023e1655737",
+    "provisioning/enclosed_industry/model.py": "a338d56ea03c864ae0ccf65594a3b6b514a9e9e0fab4f09e7437b9cb34677805",
+    "provisioning/enclosed_industry/reclamation_inputs.json": "3197ec5b8d7608a6528f5d162990ba204183056b5dd41548c2ceb86bfd7b7264",
+    "provisioning/enclosed_industry/reclamation_sources.json": "6a1ef631cfcc2ee0df0fa4732b04a271d8a9cf9b6bca07deebe29b441c230d6c",
+    "provisioning/enclosed_industry/results/industry.json.gz": "9f3c3199fdfb1fb8d18d4e160a1a533037d4ee265c080a566c1ea70bdb88b2d7",
+    "provisioning/enclosed_industry/run.py": "f06699d48b9b134c4b171cd726f312807813b4a82b7500d4609e85e93ec3ee83",
+    "research/studies/lava_tube_cities/buildout_inputs.json": "dbe184ee7fba99bb0cb9b6e0251ffe11685e87a0b0afb0dbb7390dda8128da91",
+    "research/studies/lava_tube_cities/results/buildout.json": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de",
+    "research/studies/vacuum_crater_buildout/maintenance.md": "ea839e16a585ff43225b269230bcb59113d358857ffbd10b0e974d2b8e3dc852",
+    "research/studies/vacuum_crater_buildout/maintenance_inputs.json": "57ea8129999509a02d0f27edcd48a188e150b1fa48392c6ab82cd459e6791dcf",
+    "research/studies/vacuum_crater_buildout/scenarios.json": "32798c1d046e29b69904c6b00242ab2151e879f06f741d538f25a3f57188d4c2"
+  },
+  "packager": {
+    "path": "provisioning/enclosed_industry/package.py",
+    "sha256": "af95b8bec1cbbde2c62b569005f3d3f18abd6a3bc675e08351f9fa846d708b58"
+  },
+  "path": "reclamation.json.gz",
+  "producer": {
+    "path": "provisioning/enclosed_industry/reclamation.py",
+    "sha256": "0c798c0b7aa0763451c495dad4326a6b637e38a3744cdb4b35dafa3ea7a2a68c"
+  },
+  "product_schema": "terluna.provisioning.reclamation/1",
+  "reading_rule": "Verify compressed hash, decompress, verify decompressed hash and parse the unchanged engineering-product schema. Compression changes storage only; every annual row is retained.",
+  "schema": "terluna.provisioning.compressed-product/1",
+  "sha256": "f6b43f00ea585af509e0f9e4ec3545ccf1956ed8c04348dd3404cf965bb54f2c"
+}

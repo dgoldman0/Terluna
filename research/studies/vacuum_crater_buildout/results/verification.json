@@ -1,0 +1,27 @@
+{
+  "schema": "terluna.research.vacuum-crater-verification/1",
+  "evidence": "Independent inspection of the exported candidate identities, dimensions, population sums, initial group bounds and spherical circular-estate separation. No physical site validation.",
+  "result": "PASS",
+  "product_sha256": "521503f0cf9079dd7d67c7879122fcb76288f299e2b43ce6defa17584cd60fe0",
+  "export_sha256": "c13382280b970461351361fe6c67a765fb57649e01eae723d2871700d65bc168",
+  "verifier_sha256": "407f3e7bfb7877cb363d0a3e996f8d9c80659113b9bd9b89cc8dc25315562675",
+  "matched_source_rows": 222163,
+  "initial_rows": 8886,
+  "initial_groups": 247,
+  "nearby_pairs_checked": 49911,
+  "minimum_estate_clearance_m": 0.0347559478098276,
+  "architectural_population": {
+    "spacious": {
+      "eventual": 203019632.63541552,
+      "initial": 2507315.6952003795
+    },
+    "representative": {
+      "eventual": 507549081.58853877,
+      "initial": 6268289.238000949
+    },
+    "fuller": {
+      "eventual": 870084139.8660666,
+      "initial": 10745638.693715913
+    }
+  }
+}

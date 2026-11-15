@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08",
+  "updated": "2026-11-13",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -585,17 +585,30 @@
       "four_lava_tube_city_programme": {
         "date": "2026-11-12",
         "status": "conditional_city_and_industrial_studies_available_on_domain_branch_site_qualification_open",
+        "initial_assessment": "Four plausible search regions; two leading entrance targets. Connected city-scale space and four high-confidence locations are not established. The Schröter anomaly uses its published location, which changes the coarse future-water comparison.",
+        "study": "studies/lava_tube_cities/README.md",
         "cities": 4,
         "population_rule": "Each city approximately equals the first 100-town population; 50,000 residents at the smaller reference and 100,000 at the larger comparison.",
-        "first_task": "Initial location evidence remains the site-selection basis. Conditional engineering and costing may proceed with assumed caverns while four-city qualification remains open.",
-        "conditional_followup": "Construction and annual sustaining costs for all 250,000 residents, including shared intensive agriculture, aquaculture, everyday light industry, utilities and vacuum transport; no approved locations or pressure architecture.",
+        "first_task": "Initial location assessment complete; no four high-confidence city sites established. Conditional construction and sustaining calculations now complete under subsequent authorization.",
+        "conditional_followup": "The integrated 250,000-person study covers city construction and renewal, shared agriculture, aquaculture, everyday light industry, utilities, transport and basic civic services.",
         "next_study": "Qualify source inventories and routes, refine water recovery and local fleet manufacture, and reconcile the settlement dollar account and scope of U calibration.",
         "plan": "plan.md#four-lava-tube-cities-and-their-supply-programme-12-november-2026",
         "reference_population": 250000,
+        "engineering_study": "studies/lava_tube_cities/buildout.md",
+        "engineering_product": "studies/lava_tube_cities/results/buildout.json",
+        "reference_initial_funding_U": 578217153151.1289,
+        "reference_annual_sustaining_U": 22190564215.40375,
+        "reference_annual_renewal_U": 9929557439.096794,
+        "equivalent_cave_length_m_per_city": 11200.0,
+        "engineering_evidence": "Conditional dry-cave quantities, development material assumptions and future U price/lifetime scenarios. No selected or qualified sites, complete menu, demonstrated lunar service life or supplier quotation.",
         "future_distribution": {
           "status": "recorded_not_started",
           "eventual_buildout_fraction": 0.025,
           "denominator": "To define from a Moon-wide inventory distinguishing entrances, connected systems and usable segments; no count established."
+        },
+        "programme_authorization": {
+          "scope": "Construction and annual sustaining costs for all 250,000 residents, including shared intensive agriculture, aquaculture, everyday light industry, utilities and vacuum transport; no approved locations or pressure architecture.",
+          "site_qualification_condition": "Initial location evidence remains the site-selection basis. Conditional engineering and costing may proceed with assumed caverns while four-city qualification remains open."
         },
         "industrial_supply_study": {
           "status": "conditional_study_completed_on_domain_provisioning",
@@ -638,7 +651,7 @@
           }
         }
       },
-      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_heat_ledger_with_fleet_infrared_food_land_night_tides_rivers_transit_fusion_fuel; inhabited_volume_and_shared_population_comparisons_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; drifting_days_holds_and_gathering_from_the_design_winds_2026_10_09; ways_of_living_eighteen_settings_costs_per_billion_and_shared_case_mixes_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_lava_tubes_against_the_atlas_and_highland_tall_cities_2026_10_11; food_systems_costs_cycle_fit_mixes_and_feasibility_2026_10_11; distributions_of_25_to_30_billion_with_moon_bands_and_synergies_2026_10_11; cprime_authors_distribution_with_homesteads_and_the_middle_latitudes_moved_2026_10_11; authors_wild_share_half_wild_or_30_wild_with_20_hybrid_applied_to_food_and_distributions_2026_10_11; authors_automation_network_uptime_and_food_blend_2026_10_12; beamed_power_chosen_and_screened_absorption_rain_tiles_grid_reserves_2026_10_12; cprime_placed_with_the_blend_every_corner_fits_2026_10_12",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_heat_ledger_with_fleet_infrared_food_land_night_tides_rivers_transit_fusion_fuel; inhabited_volume_and_shared_population_comparisons_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; drifting_days_holds_and_gathering_from_the_design_winds_2026_10_09; ways_of_living_eighteen_settings_costs_per_billion_and_shared_case_mixes_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_lava_tubes_against_the_atlas_and_highland_tall_cities_2026_10_11; food_systems_costs_cycle_fit_mixes_and_feasibility_2026_10_11; distributions_of_25_to_30_billion_with_moon_bands_and_synergies_2026_10_11; cprime_authors_distribution_with_homesteads_and_the_middle_latitudes_moved_2026_10_11; authors_wild_share_half_wild_or_30_wild_with_20_hybrid_applied_to_food_and_distributions_2026_10_11; authors_automation_network_uptime_and_food_blend_2026_10_12; beamed_power_chosen_and_screened_absorption_rain_tiles_grid_reserves_2026_10_12; cprime_placed_with_the_blend_every_corner_fits_2026_10_12; vacuum_to_open_crater_buildout_single_dome_500_1000_people_nested_catalogue_targets_2026_11_12; enclosed_industry_demand_sized_cohorts_and_consolidated_cash_2026_11_13",
       "material": [
         "../provisioning/README.md",
         "../provisioning/state.md",
@@ -672,7 +685,23 @@
         "studies/distributions/sources.json",
         "studies/distributions/checks.json",
         "../provisioning/network.md",
-        "studies/food_systems/blend.py"
+        "studies/food_systems/blend.py",
+        "studies/vacuum_crater_buildout/README.md",
+        "studies/vacuum_crater_buildout/results/buildout.json",
+        "../habitation/crater_gardens/buildout.json",
+        "studies/vacuum_crater_buildout/first_hundred.md",
+        "studies/vacuum_crater_buildout/results/first_hundred.json",
+        "studies/vacuum_crater_buildout/first_hundred_checks.json",
+        "studies/vacuum_crater_buildout/maintenance.md",
+        "studies/vacuum_crater_buildout/results/maintenance.json",
+        "studies/vacuum_crater_buildout/maintenance_checks.json",
+        "studies/lava_tube_cities/README.md",
+        "studies/lava_tube_cities/buildout.md",
+        "studies/lava_tube_cities/results/buildout.json",
+        "studies/lava_tube_cities/buildout_checks.md",
+        "studies/lava_tube_cities/buildout.py",
+        "studies/lava_tube_cities/buildout_inputs.json",
+        "studies/lava_tube_cities/buildout_sources.json"
       ],
       "unresolved": [
         "the ring fleet's own infrared, 5.7-9.9 W/m2 on the Moon by the corrected first screen, which the design climate leaves out; the author decided on 2026-10-09 that the investigated climate is the planned one, so the glow is answered with added solar protection, by redirecting it away from the Moon, or both: the stack's radiative transfer, where the column absorbs the glow, its warming, its effect on the upper air's CO2 cooling, and the means (less absorbing films, a heat mirror on Moon-facing faces, which the stack's two overlapping layers weaken, strong outer emitters, added dimming)",
@@ -686,9 +715,50 @@
         "Author direction 2026-10-09: much floating habitation roams. Navigation, collision/storm avoidance, rendezvous and occasional repositioning need weather-derived control duties and manoeuvre reserves; the 1/5/10%-duty screen is exploratory. Fixed-position stationkeeping is not assigned to all aerial residents. On the shared tracks towns give way to sky reefs (author, 2026-10-12).",
         "the distribution of people (studies/distributions, 2026-10-11): four distributions of 25-30 billion and the author's chosen C' (C with the 30-48.6 degree lowland people moved to the high-latitude lowland homes and homesteads among the middle-wet fields, at C's costs), Earth at 9 billion within its boundaries in each; the Moon at 4-8 billion with 2-4 aloft leaves 61-94% of its dry land wild outside a kept 30% and 31-92% outside a kept half, uses 11-131 TW of primary energy and takes 9.2-119 TW of heat with fusion (0.080-1.7% more dimming); at 8 billion outside half the high-cost end overfills the middle-wet zone, the 30-45 degree highlands or the 0-30 degree land unless three placements are made together (the dry highland towns poleward of 45 degrees first, the scattered communities gathered on the twilit and Earthlit homes, the middle band's communities on the fog-desert side of their homes); 348,000-696,000 sky towns meet 0.066-5.3 million conflicts a day; under the author's wild share, at least half wild or 30% wild with another 20% of megaparks and great gardens (4.68 million km2), C' fits every corner through the poleward and twilit placements once the homesteads' homes count within their fields, at the kept half's costs; half wild with another 20% hybrid, run for comparison at the author's request, draws 3,250 km3 a year from the seas at the high-cost end; open: the parks' water, automation energy, amenities and night light, the high-latitude towns' water from lakes and seas a median 32.8 km away, the farms' work beyond the homesteads, the dry highland cities' water and land poleward of 45 degrees, an overlay of the scattered homes on the food study's zones, the sky towns' heights, traffic rules and relative drift, dredging rates, the joined undersea and tube cities, the array's habitat designs, the colonies' capacity and health over a lifetime at 0.16 g",
         "Cities on the land (studies/land_cities, 2026-10-11): the lava tubes' groundwater beyond the two-dimensional screen (layered basalt, the crust beneath and the seas filling it from below), the GRAIL candidates' own sizes and the papers read only through secondary sources; a structural model of tube roofs under water pressure and moonquakes; the highland cities' wind over real terrain and their water poleward of 45 degrees; the undersea cities joined to the tubes and the synergies among places the author asked for.",
-        "automation and the network (author directions 2026-10-12; provisioning/network.md): heavy automation everywhere, the parks and their amenities almost purely automated, the whole system engineered for extreme uptime, and consensus decisions with the near-continual input of an educated, involved population; a mesh of aerostats drifting near 30 km with fixed posts, fibre and towers, linked to the array; open: the machines' energy and materials, a constellation model on the design winds, the fixed posts' night power and the ionosphere under the shield"
+        "automation and the network (author directions 2026-10-12; provisioning/network.md): heavy automation everywhere, the parks and their amenities almost purely automated, the whole system engineered for extreme uptime, and consensus decisions with the near-continual input of an educated, involved population; a mesh of aerostats drifting near 30 km with fixed posts, fibre and towers, linked to the array; open: the machines' energy and materials, a constellation model on the design winds, the fixed posts' night power and the ionosphere under the shield",
+        "Vacuum-to-open crater communities: local rim and foundation survey, conservation and wild-land allocation, one complete 238–336 m pressure enclosure with shielding and daylight, qualified material allowables and repair life, food and utility capacity, durable dry transport corridors, regional diversity and removal during atmospheric transition. The ranked sites and analytical service scenarios do not establish buildability or supported occupancy."
       ],
-      "next_session_task": "The power screen's next work (provisioning/power.md): beams assigned through the lunar cycle, the transmitting tiles, the receivers' land with the cities' look, and the ring-wide fault's causes and restart time. C' as the planned distribution (studies/distributions): the high-latitude towns' water and lakes, the middle latitudes' farms and homesteads, the dry highland cities poleward of 45 degrees, the sky towns' heights and traffic rules, and the joined undersea and tube cities, with the planned climate, night power, shield infrared and freight requirements kept in the joint account."
+      "next_session_task": "The power screen's next work (provisioning/power.md): beams assigned through the lunar cycle, the transmitting tiles, the receivers' land with the cities' look, and the ring-wide fault's causes and restart time. C' as the planned distribution (studies/distributions): the high-latitude towns' water and lakes, the middle latitudes' farms and homesteads, the dry highland cities poleward of 45 degrees, the sky towns' heights and traffic rules, and the joined undersea and tube cities, with the planned climate, night power, shield infrared and freight requirements kept in the joint account. For the crater programme, develop a complete 250–330 m single-community dome on measured terrain and route a regional group through future dry corridors, retaining the adopted domeless end state.",
+      "vacuum_crater_buildout": {
+        "programme_sites": {
+          "eventual": 222163,
+          "initial": 8886
+        },
+        "denominator": "All 8,886,558 catalogue craters 200–1,000 m across",
+        "initial_architecture": "One contiguous dome per 500–1,000-person community; remove after sustainable breathable conditions",
+        "result": "Both numerical quotas met under proxy ranking and circular estate separation; grouped initial floor-space population 6.27 million; site engineering and operational capacity open."
+      },
+      "first_hundred_crater_communities": {
+        "evidence": "Conditional quantities, future-price allowances and capacity schedule; no approved sites, qualified enclosure or forecast.",
+        "reference_residents_per_community": 500,
+        "communities": 100,
+        "reference_initial_funding_U": 128954694625.23969,
+        "reference_years_from_regional_mobilisation": 17.833333333333332,
+        "external_condition": "Advanced specialist supply, controlled volatile deliveries and firm power must be orderable; local establishment and qualification included in the assumed lead.",
+        "resource_condition": "Scientific/heritage clearance and site/element-specific future reserves precede extraction; local products/tails and imported stocks tracked separately."
+      },
+      "crater_town_maintenance": {
+        "evidence": "Conditional engineering service budgets using unchanged future U replacement prices and assumed asset lives. No demonstrated lunar failure rate, qualified dome lifetime, observed service labour requirement or household budget.",
+        "reference_residents": 500,
+        "reference_annual_funding_U": 35657481.054037526,
+        "recurring_cash_before_renewal_U": 17722188.45814635,
+        "renewal_fund_U": 17935292.595891178,
+        "scope": "Physical upkeep, stated operating services and major replacement provision, including regional operating share; household/social-service/debt costs separate."
+      },
+      "enclosed_industry": {
+        "date": "2026-11-13",
+        "state": "Demand-sized cohort and physical cash calculation; conditional engineering requirements, not qualified sources or funded completion",
+        "model": "provisioning/enclosed_industry/model.py",
+        "writeup": "provisioning/enclosed_industry/README.md",
+        "product": "provisioning/enclosed_industry/results/industry.json.gz",
+        "seed_population": 12500,
+        "cap_population": 6468289.238000949,
+        "completion_year": 200,
+        "reported_through_year": 220,
+        "reference": "Inherited chemical transport, grades, component partitions, prices and mean lifetimes; no automatic learning",
+        "accounting": "Separate residential stocks and throughput-sized equipment; seed common programme once; explicit orders, retirement, reuse and consolidated cash without duplicate local transfer values",
+        "limits": "Conditional source access, site qualification, bootstrap sequence, service-facility proxies, staffing intensity and passenger migration remain open"
+      }
     },
     {
       "topic": "illumination",
@@ -852,17 +922,30 @@
       "four_lava_tube_city_programme": {
         "date": "2026-11-12",
         "status": "conditional_city_and_industrial_studies_available_on_domain_branch_site_qualification_open",
+        "initial_assessment": "Four plausible search regions; two leading entrance targets. Connected city-scale space and four high-confidence locations are not established. The Schröter anomaly uses its published location, which changes the coarse future-water comparison.",
+        "study": "studies/lava_tube_cities/README.md",
         "cities": 4,
         "population_rule": "Each city approximately equals the first 100-town population; 50,000 residents at the smaller reference and 100,000 at the larger comparison.",
-        "first_task": "Initial location evidence remains the site-selection basis. Conditional engineering and costing may proceed with assumed caverns while four-city qualification remains open.",
-        "conditional_followup": "Construction and annual sustaining costs for all 250,000 residents, including shared intensive agriculture, aquaculture, everyday light industry, utilities and vacuum transport; no approved locations or pressure architecture.",
+        "first_task": "Initial location assessment complete; no four high-confidence city sites established. Conditional construction and sustaining calculations now complete under subsequent authorization.",
+        "conditional_followup": "The integrated 250,000-person study covers city construction and renewal, shared agriculture, aquaculture, everyday light industry, utilities, transport and basic civic services.",
         "next_study": "Qualify source inventories and routes, refine water recovery and local fleet manufacture, and reconcile the settlement dollar account and scope of U calibration.",
         "plan": "plan.md#four-lava-tube-cities-and-their-supply-programme-12-november-2026",
         "reference_population": 250000,
+        "engineering_study": "studies/lava_tube_cities/buildout.md",
+        "engineering_product": "studies/lava_tube_cities/results/buildout.json",
+        "reference_initial_funding_U": 578217153151.1289,
+        "reference_annual_sustaining_U": 22190564215.40375,
+        "reference_annual_renewal_U": 9929557439.096794,
+        "equivalent_cave_length_m_per_city": 11200.0,
+        "engineering_evidence": "Conditional dry-cave quantities, development material assumptions and future U price/lifetime scenarios. No selected or qualified sites, complete menu, demonstrated lunar service life or supplier quotation.",
         "future_distribution": {
           "status": "recorded_not_started",
           "eventual_buildout_fraction": 0.025,
           "denominator": "To define from a Moon-wide inventory distinguishing entrances, connected systems and usable segments; no count established."
+        },
+        "programme_authorization": {
+          "scope": "Construction and annual sustaining costs for all 250,000 residents, including shared intensive agriculture, aquaculture, everyday light industry, utilities and vacuum transport; no approved locations or pressure architecture.",
+          "site_qualification_condition": "Initial location evidence remains the site-selection basis. Conditional engineering and costing may proceed with assumed caverns while four-city qualification remains open."
         },
         "industrial_supply_study": {
           "status": "conditional_study_completed_on_domain_provisioning",
@@ -905,7 +988,7 @@
           }
         }
       },
-      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28; reviewed_against_main_and_the_other_branches_2026-10-08; branch_closed_merge_waits_for_the_joint_integration; inhabited_volume_requirement_screen_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; ways_of_living_settings_light_air_hazards_and_sky_town_drift_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_tubes_and_highland_towers_2026_10_11; low_gravity_design_note_guards_stairs_handholds_ramps_movement_halls_2026_10_17",
+      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28; reviewed_against_main_and_the_other_branches_2026-10-08; branch_closed_merge_waits_for_the_joint_integration; inhabited_volume_requirement_screen_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; ways_of_living_settings_light_air_hazards_and_sky_town_drift_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_tubes_and_highland_towers_2026_10_11; low_gravity_design_note_guards_stairs_handholds_ramps_movement_halls_2026_10_17; crater_garden_design_and_population_adopted_2026_11_12; first_catalogue_count_200_1000m_with_published_depths_and_broad_water_climate_exclusions; vacuum_to_open_crater_buildout_single_dome_500_1000_people_nested_catalogue_targets_2026_11_12",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
@@ -943,7 +1026,25 @@
         "studies/land_cities/results/land_cities.json",
         "../habitation/low_gravity/README.md",
         "../habitation/low_gravity/movement.py",
-        "../habitation/low_gravity/results/low_gravity.json"
+        "../habitation/low_gravity/results/low_gravity.json",
+        "../habitation/crater_gardens/README.md",
+        "../habitation/crater_gardens/design.json",
+        "studies/crater_gardens/README.md",
+        "studies/crater_gardens/results/first_count.json",
+        "studies/crater_gardens/checks.json",
+        "studies/vacuum_crater_buildout/README.md",
+        "studies/vacuum_crater_buildout/results/buildout.json",
+        "../habitation/crater_gardens/buildout.json",
+        "studies/vacuum_crater_buildout/first_hundred.md",
+        "studies/vacuum_crater_buildout/results/first_hundred.json",
+        "studies/vacuum_crater_buildout/first_hundred_checks.json",
+        "studies/vacuum_crater_buildout/maintenance.md",
+        "studies/vacuum_crater_buildout/results/maintenance.json",
+        "studies/vacuum_crater_buildout/maintenance_checks.json",
+        "studies/lava_tube_cities/README.md",
+        "studies/lava_tube_cities/buildout.md",
+        "studies/lava_tube_cities/results/buildout.json",
+        "studies/lava_tube_cities/buildout_checks.md"
       ],
       "unresolved": [
         "supported floor area and mass",
@@ -973,9 +1074,55 @@
         "sky towns (studies/ways_of_living, climate/gcm/zonal_winds.md): a town drifting at 10 km meets the Sun every 15-23 days at the median and near the ground can hold the hour at 40-75 degrees from the late afternoon into the night; passive routes gather onto shared tracks; a streamlined 3 km hull holds a place for 0.089 kW a resident; a moored sphere's tether is 1.1% of its district's mass and a grounded conductor into the storms; open are town and hull designs, steering against the gathering, storm routing, gas-cell tightness (each percent a year lost costs 0.43 TW per billion aloft), rain at their height and rescue",
         "daily life by setting (studies/daily_life, 2026-10-09): clear-sky, mean-geometry light states for every ways-of-living setting, and the days drifting towns live by height and latitude from the design winds; open are cloud and libration by place, light at height, indoor lighting for the long night, children's eyes and growth at 0.16 g, and the artificial-gravity dose that keeps a body ready for Earth",
         "lava-tube cities as lasting places: daylight by heliostats and light guides, fans for air, membranes and pumps against the water table, quakes near young scarps; highland towers: wind-led frames with anchored windward legs from about 400 storeys, heat and daylight capping density (studies/land_cities)",
-        "low-gravity architecture (habitation/low_gravity, 2026-10-17): guards, stairs, handholds, ramps and halls for moving derived from the shared gravity, with the guard bands, the guard's form, the stairs, landings, ramps and halls as design choices for the author's review; open are human-factors tests in low gravity, the take-off speeds people use (the same leg work would carry jumps up to about twice the heights taken), the guard for young children beside long drops (2.8-3.9 m by the energy rule, or play kept back), children's jumps and grips, how far a tumbling body turns in a fall six times as long, and the two lower balustrades in the summit's ring 0 section"
+        "low-gravity architecture (habitation/low_gravity, 2026-10-17): guards, stairs, handholds, ramps and halls for moving derived from the shared gravity, with the guard bands, the guard's form, the stairs, landings, ramps and halls as design choices for the author's review; open are human-factors tests in low gravity, the take-off speeds people use (the same leg work would carry jumps up to about twice the heights taken), the guard for young children beside long drops (2.8-3.9 m by the energy rule, or play kept back), children's jumps and grips, how far a tumbling body turns in a fall six times as long, and the two lower balustrades in the summit's ring 0 section",
+        "Vacuum-to-open crater communities: local rim and foundation survey, conservation and wild-land allocation, one complete 238–336 m pressure enclosure with shielding and daylight, qualified material allowables and repair life, food and utility capacity, durable dry transport corridors, regional diversity and removal during atmospheric transition. The ranked sites and analytical service scenarios do not establish buildability or supported occupancy."
       ],
-      "next_session_task": "The branch merged in the joint integration of 2026-10-08, where its four studies were rerun with the corrected climate products, ring_equator and main's drainage and sunlight, and their READMEs and the metropolis brief brought to the new numbers (research/integration). Next, in an order for the author to choose (studies/infrastructure_review, section 7; research/plan.md): the crown as a lightning conductor (the joint synthesis's screen, atmosphere/electricity/tower.py, puts it past the upward leader's inception about a tenth of the time) and lightning protection for its berths; the chosen form's own programme for the crown's traffic and berths; the frame resized with a design gust that varies with height; the long-haul class and the crown's wind and wake; the sky boats' traffic system with storms and the night."
+      "next_session_task": "The branch merged in the joint integration of 2026-10-08, where its four studies were rerun with the corrected climate products, ring_equator and main's drainage and sunlight, and their READMEs and the metropolis brief brought to the new numbers (research/integration). Next, in an order for the author to choose (studies/infrastructure_review, section 7; research/plan.md): the crown as a lightning conductor (the joint synthesis's screen, atmosphere/electricity/tower.py, puts it past the upward leader's inception about a tenth of the time) and lightning protection for its berths; the chosen form's own programme for the crown's traffic and berths; the frame resized with a design gust that varies with height; the long-haul class and the crown's wind and wake; the sky boats' traffic system with storms and the night. For the crater programme, develop a complete 250–330 m single-community dome on measured terrain and route a regional group through future dry corridors, retaining the adopted domeless end state.",
+      "crater_gardens": {
+        "date": "2026-11-12",
+        "state": "first_catalogue_count_complete",
+        "branch": "domain/provisioning",
+        "catalogue": "LUC-GRAS200, version 1.0.0, 10,699,651 source records",
+        "selected_candidates": {
+          "200_300m_proportional_relief": 249677,
+          "300_500m_proportional_relief": 280486,
+          "500_1000m_depth_40_70m": 372128
+        },
+        "evidence": "Published detections and depth estimates under source-quality, coarse standing-water and regional climate cuts; architectural floor-space population scenarios.",
+        "open": "Local terrain and estate spacing, the lake level and water supply, foundations and access, heritage evaluation, and the vacuum-era pressure envelope. The initial 20,000–100,000-settlement comparison retains its assumed usable fraction.",
+        "smaller_crater_construction_phase_comparison": {
+          "proportional_relief_and_source_quality": 1480315,
+          "also_outside_projected_waters": 995649,
+          "also_passing_future_garden_climate": 530163,
+          "meaning": "The vacuum-era terrain comparison starts before the future water and rainfall cuts; the latter describe later Open Moon conditions. Enclosure engineering remains open."
+        }
+      },
+      "vacuum_crater_buildout": {
+        "programme_sites": {
+          "eventual": 222163,
+          "initial": 8886
+        },
+        "denominator": "All 8,886,558 catalogue craters 200–1,000 m across",
+        "initial_architecture": "One contiguous dome per 500–1,000-person community; remove after sustainable breathable conditions",
+        "result": "Both numerical quotas met under proxy ranking and circular estate separation; grouped initial floor-space population 6.27 million; site engineering and operational capacity open."
+      },
+      "first_hundred_crater_communities": {
+        "evidence": "Conditional quantities, future-price allowances and capacity schedule; no approved sites, qualified enclosure or forecast.",
+        "reference_residents_per_community": 500,
+        "communities": 100,
+        "reference_initial_funding_U": 128954694625.23969,
+        "reference_years_from_regional_mobilisation": 17.833333333333332,
+        "external_condition": "Advanced specialist supply, controlled volatile deliveries and firm power must be orderable; local establishment and qualification included in the assumed lead.",
+        "resource_condition": "Scientific/heritage clearance and site/element-specific future reserves precede extraction; local products/tails and imported stocks tracked separately."
+      },
+      "crater_town_maintenance": {
+        "evidence": "Conditional engineering service budgets using unchanged future U replacement prices and assumed asset lives. No demonstrated lunar failure rate, qualified dome lifetime, observed service labour requirement or household budget.",
+        "reference_residents": 500,
+        "reference_annual_funding_U": 35657481.054037526,
+        "recurring_cash_before_renewal_U": 17722188.45814635,
+        "renewal_fund_U": 17935292.595891178,
+        "scope": "Physical upkeep, stated operating services and major replacement provision, including regional operating share; household/social-service/debt costs separate."
+      }
     },
     {
       "topic": "engineering",
@@ -1501,6 +1648,115 @@
         "Currency use, access to settlement and emergency lending, and the bearing of losses are separate functions; three worlds need not mean three currencies or three issuers.",
         "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs."
       ]
+    },
+    {
+      "topic": "initial_industrial_system",
+      "condition": "conditional_reconciled_production_trade_coproduct_and_growth_accounts_2026_11_12",
+      "material": [
+        "studies/initial_industrial_system/README.md",
+        "studies/initial_industrial_system/run.py",
+        "studies/initial_industrial_system/industrial_inputs.json",
+        "studies/initial_industrial_system/industrial_sources.json",
+        "studies/initial_industrial_system/results/industrial_system.json",
+        "studies/initial_industrial_system/test_run.py",
+        "studies/initial_industrial_system/checks.md",
+        "studies/initial_industrial_system/industrial_checks.json",
+        "studies/initial_industrial_system/plot.py",
+        "studies/initial_industrial_system/results/industrial_system.png",
+        "studies/initial_industrial_system/revenue.md",
+        "studies/initial_industrial_system/revenue.py",
+        "studies/initial_industrial_system/revenue_inputs.json",
+        "studies/initial_industrial_system/revenue_sources.json",
+        "studies/initial_industrial_system/results/revenue.json",
+        "studies/initial_industrial_system/resource_inventory.py",
+        "studies/initial_industrial_system/results/resource_inventory.json",
+        "studies/initial_industrial_system/test_revenue.py",
+        "studies/initial_industrial_system/revenue_checks.md",
+        "studies/initial_industrial_system/revenue_checks.json",
+        "studies/initial_industrial_system/plot_revenue.py",
+        "studies/initial_industrial_system/results/revenue.png",
+        "studies/initial_industrial_system/economy.md",
+        "studies/initial_industrial_system/economy.py",
+        "studies/initial_industrial_system/evolution.py",
+        "studies/initial_industrial_system/economy_inputs.json",
+        "studies/initial_industrial_system/economy_sources.json",
+        "studies/initial_industrial_system/economy_review.md",
+        "studies/initial_industrial_system/economy_checks.md",
+        "studies/initial_industrial_system/test_economy.py",
+        "studies/initial_industrial_system/plot_economy.py",
+        "studies/initial_industrial_system/results/economy.json",
+        "studies/initial_industrial_system/results/economy.png",
+        "studies/initial_industrial_system/results/economy.pdf"
+      ],
+      "findings": [
+        "At the 2041 automation scenario and 3% inflation for fifteen years, reference industrial establishment is 16.2 trillion USD2041 and the industrial/material campaign 51.4 trillion; annual sustaining supply is 1.41 trillion with growth capacity retained.",
+        "Local cargo-fleet fabrication lowers establishment to 10.8 trillion USD2041 and the campaign to 37.4 trillion under additional source-metal and manufacturing assumptions.",
+        "The original 25,550 Earth launches/year is conditional on Earth-supplied transfer propellant; 66.9% of launch mass is that propellant. The transport extension compares depot refuelling, space-supplied fuel and electric freight with their coupled hardware and renewal costs; no minimum cadence is established.",
+        "The matched procurement basket gives about 68 USD2041/U; materially different component ratios prevent blanket conversion of earlier settlement U accounts.",
+        "The illustrative local-tug-structure, space-fuelled reference portfolio earns 56.65 billion USD2041/year, with a 46.36 billion operating external cash deficit and a 683.79 billion deficit after external renewal and a resource provision; debt remains separate. Earth-delivered goods, their extra propulsion, capsules, entry, recovery and renewal are included.",
+        "A proposed 30 USD2041/U normalization follows scoped destination-service and original pressure-procurement price comparisons; it is not an adopted currency peg or a universal conversion of old U accounts.",
+        "The reference source flow is 189 million tonnes of feed per year: a specified usable 100-billion-tonne pool would last 528 years. The JPL snapshot has 43,050 objects but only 1,246 catalogue diameters; its assumed-density volumes establish no permitted reserve or exhaustion date.",
+        "The earlier revenue portfolio is a prescribed external-cash stress test, not a domestic-output or maximum-revenue estimate. The new supply-use account reconciles gross output, value added, imports, exports and investment; prices remain explicit conventions.",
+        "At the local-structure no-growth point, 133.27 million tonnes/year of feed contains 6.39 million tonnes/year of additional recoverable metal potential; existing spare refinement is about 226,000 tonnes/year. Refined stock is domestic investment; carbon, nutrient and trace-metal screens retain qualification and valuation limits.",
+        "Retained plant supports initial starts for about 7,699 additional residents/year with proportionate industry, falling to about 2,806 alongside the larger tested export portfolio. Growth consumes existing capacity; new equipment enters after two years. No demographic rate, new tube count or terraforming date is adopted."
+      ],
+      "unresolved": [
+        "Qualified ordinary-body inventories and actual trajectories; lunar and source metallurgy, reusable pressure/cryogenic hardware, autonomous maintenance and power-beam qualification.",
+        "Water recovery, Earth launch capacity and environmental effects, source conservation and nutrient reservations, plume transport and future atmospheric transition.",
+        "A unified settlement dollar budget that reprices living services and credits matching supplier purchases; full critical-path and occupation schedule.",
+        "Surveyed source composition, actual routes, protected extraction fractions and long-term inventories; constant vacuum-period flows do not establish million-year sustainability.",
+        "Qualify the modular component lives and cost density, product-specific demand, nutrient/trace-metal recovery and discrete fleet retirement. Conditional high-value trade surpluses require both the tested sales volume and price."
+      ],
+      "next_session_task": "Qualify products, modular components, sources and customer demand; fund the commissioning and import requirements; resolve site distribution and monetary policy.",
+      "transport_comparison": {
+        "path": "studies/initial_industrial_system/transport.md",
+        "product": "studies/initial_industrial_system/results/transport.json",
+        "state": "conditional comparisons; no architecture adopted",
+        "next": "Trajectory and propulsion qualification, manufacturing localization, water recovery and fleet retirement; revenue and resource comparisons are now recorded separately, without adopting a route."
+      },
+      "revenue_comparison": {
+        "path": "studies/initial_industrial_system/revenue.md",
+        "product": "studies/initial_industrial_system/results/revenue.json",
+        "state": "conditional post-occupation portfolios in 2041 dollars; no sustainable business, currency peg or reserve established",
+        "net_definition": "operating external cash balance, then external renewal and resource provision; debt separate; internal transactions cancel"
+      },
+      "economy_comparison": {
+        "path": "studies/initial_industrial_system/economy.md",
+        "product": "studies/initial_industrial_system/results/economy.json",
+        "state": "Conditional reconciled domestic/trade accounts, joint co-product recovery and capacity-supported growth; no architecture, market forecast or currency peg adopted",
+        "boundary": "All off-Earth production included; internal transfers cancel externally, while useful inventories and growth enter domestic capital formation",
+        "growth": "Derive construction from capacity; retain the 2.5% eventual crater quota and the separate initial vacuum quota; no uncounted tube expansion",
+        "next": "Qualify products, modular components, sources and customer demand; fund the commissioning and import requirements; resolve site distribution and monetary policy."
+      }
+    },
+    {
+      "topic": "enclosed_engineering_feasibility",
+      "condition": "bounded engineering study with a fifteen-year development allowance; nine portfolios and all 93 physical cases retained; numerical capacity passes remain separate from integrated qualification",
+      "material": [
+        "studies/enclosed_feasibility/README.md",
+        "studies/enclosed_feasibility/feasibility.py",
+        "studies/enclosed_feasibility/feasibility_inputs.json",
+        "studies/enclosed_feasibility/feasibility_sources.json",
+        "studies/enclosed_feasibility/results/feasibility.json",
+        "studies/enclosed_feasibility/checks.md"
+      ],
+      "boundary": "The planned off-Earth economic zone served by U before Open Moon, habitat array or outer-system development; U remains the general economic unit.",
+      "next": "Qualify the dated initial deployment, source-to-depot routes, local and beamed power alternatives at real sites, pressure enclosures, biological services and repaired equipment life; propagate measured coefficients and explicit stresses through the coupled physical and financial producers."
+    },
+    {
+      "topic": "enclosed_surface_power",
+      "condition": "conditional local-versus-beamed comparison; six architectures, three technology bundles, delivery and localization sensitivities; power selection reopened without changing the inherited physical or financial baseline",
+      "material": [
+        "../provisioning/enclosed_power/README.md",
+        "../provisioning/enclosed_power/model.py",
+        "../provisioning/enclosed_power/enclosed_power_inputs.json",
+        "../provisioning/enclosed_power/enclosed_power_sources.json",
+        "../provisioning/enclosed_power/results/power_comparison.json",
+        "../provisioning/enclosed_power/checks.md"
+      ],
+      "boundary": "Lunar surface electrical service in the enclosed off-Earth programme served by U. No atmospheric heating penalty, shield credit or habitat array; remote sources and depots retain separate supplies.",
+      "finding": "Local fission has the lowest cost under middle assumptions; solar thermal storage can compete under development targets; beam utilization, reactor mass and the import burden of long-night storage determine crossovers. Neither technology bundles nor future prices are probability distributions or qualified hardware.",
+      "next": "Qualify actual sites, complete plants and commissioning sequences; allocate existing development expenditure once; recouple chosen generating and storage cohorts, freight, maintenance and load scheduling into the industrial and financial producers."
     }
   ]
 }

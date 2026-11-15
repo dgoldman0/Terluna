@@ -1,0 +1,59 @@
+{
+  "schema": "terluna.research.crater-town-maintenance-checks/1",
+  "date": "2026-11-12",
+  "construction_commit": "6b8dea14",
+  "focused_tests": {
+    "result": "PASS",
+    "passed": 11,
+    "seconds": 0.2,
+    "scope": "Independent annual-energy/loss values, asset partition, growth-industry exclusion, once-only funding, replacement freight/energy, one-time-cost exclusion, endpoint events, lifetime sensitivity, separately contracted operating deliveries and committed reproduction.",
+    "final_product_recheck": "11 passed in 0.20 seconds after the descriptive spacing/comment edits and provenance regeneration; all calculated cases unchanged."
+  },
+  "full_make_check": {
+    "result": "PASS",
+    "python_passed": 5260,
+    "python_skipped": 31,
+    "javascript_passed": 191,
+    "wall_seconds": 923.86,
+    "max_resident_KiB": 2667976,
+    "numerical_threads": 1,
+    "address_space_cap_GiB": 12,
+    "log_sha256": "8f13d04cc77097b3e9135fc3359100e90cdb805e326e70eeb29893deb0351b21",
+    "other_checks": [
+      "layer boundaries",
+      "calendar",
+      "pinned provenance",
+      "ensemble workspace"
+    ],
+    "scope": "Complete repository with the maintenance account. Subsequent comment and descriptive-input spacing edits preserved every calculated case exactly; final focused checks cover the regenerated provenance."
+  },
+  "reviews": {
+    "maintenance_review.md": {
+      "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/reviews/maintenance_review.md",
+      "sha256": "2790d588e3c54e14b79419150c92d4a36b0725073d5ddd8a77effe0ed653cf8d"
+    },
+    "maintenance_accounting_review.md": {
+      "path": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/reviews/maintenance_accounting_review.md",
+      "sha256": "c166898bdec8db2aae0f12d71ec080d6e24b4343740aa8a61312acd6b3ec05fe"
+    }
+  },
+  "source_scope": "The annual economic product supplies explicit 40-year power and 20-year reserve sensitivities. Other rates/lives are assumptions. A bounded review could not retrieve the substantive legacy NRC maintenance chapters; no numerical input or interpretation of their detailed budget boundaries is taken from them.",
+  "editorial_reading": {
+    "result": "completed",
+    "scope": "Full report read for the annual-versus-event accounting, regional allocation, accepted single-dome design, future removal, evidence limits and physical/social-service boundary. Read the construction crosslink and updated research/provisioning synthesis in context. Bounded maintenance and accounting reviews retained separately.",
+    "delivered_report_sha256": "ea839e16a585ff43225b269230bcb59113d358857ffbd10b0e974d2b8e3dc852"
+  },
+  "logs_directory": "/media/projectspace/terluna-research/vacuum-crater-buildout/first-100/checks",
+  "not_performed": [
+    "A qualified component design, measured failure/repair rates or validated service lives.",
+    "Complete food-production, household, social-service or financing budgets.",
+    "A lake/crop/nutrient closure model or approved site-specific resource reservation.",
+    "Empirical demonstration of barrier replacement while preserving the occupied community."
+  ],
+  "product_consistency": {
+    "result": "PASS",
+    "rebuilt": 0,
+    "rebound": 0,
+    "log_sha256": "bd3055d769a5a07133e29fa6344cf2c9a72e1f14d3cdd6452f76d94cde7eebd1"
+  }
+}

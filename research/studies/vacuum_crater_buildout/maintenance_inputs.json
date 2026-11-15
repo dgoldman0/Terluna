@@ -1,0 +1,112 @@
+{
+  "schema": "terluna.research.crater-town-maintenance-inputs/1",
+  "evidence": "Conditional engineering service budgets using unchanged future U replacement prices and assumed asset lives. No demonstrated lunar failure rate, qualified dome lifetime, observed service labour requirement or household budget.",
+  "inputs": {
+    "construction_result": {
+      "path": "research/studies/vacuum_crater_buildout/results/first_hundred.json",
+      "sha256": "7d9c3f01c130f5dc1fb9a74e31a72cac9920f5c6ba6e50cc8f97224924bd9086",
+      "schema": "terluna.research.first-hundred-crater-communities/1"
+    },
+    "construction_inputs": {
+      "path": "research/studies/vacuum_crater_buildout/first_hundred_inputs.json",
+      "sha256": "335b0f584986e45942aa350a5a88cc35a413788852f031a288c81033d8155bd4",
+      "schema": "terluna.research.first-hundred-inputs/1"
+    },
+    "annual_economy": {
+      "path": "research/studies/world_economy/annual_inputs.json",
+      "sha256": "b43f0b0476d4e02b1c7455155e7b69f263980b989f7a200b34b43a499f0d84cd",
+      "schema": "terluna.world-economy.annual-inputs/1"
+    }
+  },
+  "ordinary_durable_capital_fraction": 0.7,
+  "routine_operating_margin_fraction": 0.2,
+  "shield_rehandling_fraction_year": 0.001,
+  "horizons_years": [
+    50,
+    200,
+    500
+  ],
+  "regimes": {
+    "longer_life": {
+      "routine_upkeep_fraction_year": 0.01,
+      "life_years": {
+        "ordinary_durable": 100,
+        "ordinary_equipment": 30,
+        "pressure_reinforcement": 75,
+        "pressure_barriers": 40,
+        "independent_support": 150,
+        "foundations": 250,
+        "roads": 60,
+        "transport_docking": 20,
+        "firm_power": 50,
+        "emergency_storage": 30,
+        "radiators": 40,
+        "garden_lighting": 15
+      },
+      "annual_air_loss_fraction": 0.001,
+      "processed_water_recovery_fraction": 0.995,
+      "additional_water_makeup_kg_person_day": 0,
+      "annual_biosphere_import_fraction": 0.01
+    },
+    "reference": {
+      "routine_upkeep_fraction_year": 0.02,
+      "life_years": {
+        "ordinary_durable": 80,
+        "ordinary_equipment": 20,
+        "pressure_reinforcement": 50,
+        "pressure_barriers": 25,
+        "independent_support": 100,
+        "foundations": 200,
+        "roads": 40,
+        "transport_docking": 15,
+        "firm_power": 40,
+        "emergency_storage": 20,
+        "radiators": 30,
+        "garden_lighting": 10
+      },
+      "annual_air_loss_fraction": 0.01,
+      "processed_water_recovery_fraction": 0.98,
+      "additional_water_makeup_kg_person_day": 5,
+      "annual_biosphere_import_fraction": 0.02
+    },
+    "higher_wear": {
+      "routine_upkeep_fraction_year": 0.04,
+      "life_years": {
+        "ordinary_durable": 50,
+        "ordinary_equipment": 12,
+        "pressure_reinforcement": 30,
+        "pressure_barriers": 15,
+        "independent_support": 60,
+        "foundations": 100,
+        "roads": 25,
+        "transport_docking": 10,
+        "firm_power": 25,
+        "emergency_storage": 12,
+        "radiators": 20,
+        "garden_lighting": 6
+      },
+      "annual_air_loss_fraction": 0.05,
+      "processed_water_recovery_fraction": 0.95,
+      "additional_water_makeup_kg_person_day": 20,
+      "annual_biosphere_import_fraction": 0.05
+    }
+  },
+  "rules": [
+    "One town receives one hundredth of the first 100 common infrastructure, except dedicated power and radiators use occupied-town peak divided by the construction-plus-occupation capacity. Regional industry for subsequent growth is outside this maintenance budget.",
+    "Normal capital is provisionally 70% durable buildings/systems and 30% equipment/other shorter-lived capital; its original allowance also includes services and intangibles. Replace this split with an asset register. The separate world-economy consumption-of-fixed-capital allowance of 15% of gross world product is not added.",
+    "Routine upkeep covers inspections, minor repairs/consumables, service labour and routine plant/garden care. It excludes complete asset replacement, energy/makeup already priced separately, household consumption and staffing of social/commercial services.",
+    "Renewal reserve equals current installed replacement value divided by assumed service life, with zero real reserve return and no scrap-sale credit. Full replacements use these same constant real prices. They do not repeat programme qualification/startup or original contingency.",
+    "Occupied electricity uses the construction variable utility-operation rate, explicitly excluding generation capital recovery; power equipment upkeep and renewal are separate. A full purchased-electricity tariff would replace those owned-system rows.",
+    "The 20% operating margin applies to routine upkeep plus variable services only. It is distinct from the renewal fund. Neither original construction contingency nor the prefunded removal reserve is renewed annually.",
+    "Initial air, lake water and loose shielding have no automatic cost/life amortization. Charge actual loss allowances; shield work rehandles retained stock and buys no new shield inventory.",
+    "Additional landscape/agriculture water makeup is an explicit allowance awaiting water balances. Initial imported biosphere stock has a separate makeup fraction; nutrient closure and complete operating food costs remain unresolved.",
+    "Fixed-horizon spending sums annual upkeep/services and full component replacements strictly before the horizon. It does not also add the annual renewal fund. The horizon is an assumed vacuum interval, not a terraforming date; initial build, financing and final removal are separate.",
+    "Material recovery lowers virgin-feed needs but does not make qualified fabrication, installation or maintenance free. No generic recovery fraction is converted to an equal discount on installed replacement prices.",
+    "Local supports, foundations, roads and radiator replacement add a separately purchased regional conversion-energy/cooling service at 10/50/200 U/MWh. It includes supplier utility capital and operation, which are not also assigned to the town. Ordinary-capital supply and imported pressure components already include normal supplier energy. Extraordinary delivery of renewed ordinary imported equipment is repeated at the equipment life, not ignored or charged annually as the whole original order."
+  ],
+  "replacement_utility_U_MWh": {
+    "lower": 10,
+    "reference": 50,
+    "upper": 200
+  }
+}

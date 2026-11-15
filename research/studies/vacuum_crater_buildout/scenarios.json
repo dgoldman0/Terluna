@@ -1,0 +1,118 @@
+{
+  "schema": "terluna.research.vacuum-crater-scenarios/1",
+  "evidence": "Study assumptions for comparison. Programme fractions and the domeless end state are adopted separately in habitation/crater_gardens/buildout.json. These choices do not establish an optimal site ranking or a qualified enclosure.",
+  "selection": {
+    "require_high_confidence": true,
+    "avoid_adjacent_future_water": true,
+    "target_depth_diameter_ratio": 0.07333333333333333,
+    "geometry_error_bin": 0.005,
+    "estate_diameter_factors": [
+      1.5,
+      2.0,
+      3.0
+    ],
+    "reference_estate_diameter_factor": 2.0,
+    "cluster_radius_km": 25.0,
+    "cluster_max_sites": 64,
+    "cluster_min_sites": 8,
+    "initial_diameter_bin_m": 25.0,
+    "rule": "Rank eventual candidates by binned absolute deviation from the representative depth/diameter ratio, with a SHA-256 identifier tie-break. Accept in that order while keeping circular estates disjoint. For the initial subset, choose sites in the adopted 500\u20131,000-resident representative architectural band in regional groups: seed order favours more neighbours within 25 km, then geometry and identifier; each group retains its seed and up to 63 remaining neighbours ordered by diameter band, geometry and identifier. Compare with the globally smallest-span subset. Both are subsets of the reference eventual selection."
+  },
+  "enclosure": {
+    "reference_pressure_atm": 1.0,
+    "pressure_cases_atm": [
+      1.0,
+      1.2
+    ],
+    "reference_temperature_K": 293.15,
+    "gas_molar_mass_kg_mol": 0.02897,
+    "gas_description": "Dry air molar mass used for inventory; the operating composition, humidity and oxygen partial pressure need their own life-support design.",
+    "cap_height_over_diameter": 0.2,
+    "reference_depth_over_diameter": 0.07333333333333333,
+    "diameters_m": [
+      200,
+      300,
+      500,
+      750,
+      1000
+    ],
+    "material_effective_allowable_Pa": 400000000.0,
+    "material_density_kg_m3": 1600.0,
+    "shield_density_kg_m3": 1600.0,
+    "shield_thickness_cases_m": [
+      0.0,
+      3.0,
+      7.0
+    ],
+    "module_span_m": [
+      25,
+      50,
+      100,
+      300
+    ],
+    "material_status": "Hypothetical effective tensile allowable and density; no selected laminate, joint design, creep life or safety factor. Equivalent membrane thickness is a pressure-only analytical comparison.",
+    "volume_status": "Spherical cap plus paraboloid bowl; gross volume before buildings, water and earthworks displace gas.",
+    "architecture": "Initial communities each occupy one contiguous dome with their eventual lifestyle and layout substantially in place. Module comparisons apply to larger communities only.",
+    "effective_allowable_cases_Pa": [
+      400000000.0,
+      600000000.0,
+      800000000.0
+    ],
+    "improvement_status": "Reference, developed and upper effective-allowable sensitivities at fixed assumed density. Current fiber and directional coupon strengths motivate the comparison; no biaxial shell, joints, ageing life or maintenance reduction is validated by those strengths."
+  },
+  "operation": {
+    "duration_cases_years": [
+      50,
+      200,
+      500
+    ],
+    "annual_air_loss_fractions": [
+      0.001,
+      0.01,
+      0.05
+    ],
+    "replaceable_component_lives_years": [
+      20,
+      50,
+      100
+    ],
+    "electric_load_kW_per_resident_cases": [
+      2,
+      5,
+      10
+    ],
+    "reference_electric_load_kW_per_resident": 5,
+    "storage_discharge_efficiency": 0.9,
+    "storage_usable_fraction": 0.8,
+    "storage_reserve_fraction": 0.2,
+    "radiator_emissivity": 0.9,
+    "radiator_temperature_K_cases": [
+      300,
+      330,
+      350
+    ],
+    "water_loop_throughput_kg_per_person_day": 100,
+    "water_recovery_fraction": 0.98,
+    "status": "Duration, leakage, replacement lives and service loads are sensitivities, not forecasts or measured settlement performance. Night means half a synodic month. Radiators assume shaded unobstructed cold sky. Water throughput is assumed; the recovery fraction is an ISS precedent within its measured processing boundary. Food, industrial process heat, agriculture and lake losses require separate service accounts."
+  },
+  "transport": {
+    "connection_radii_km": [
+      25,
+      50
+    ],
+    "water_sample_spacing_m": 1000,
+    "trip_distances_km": [
+      25,
+      50,
+      250,
+      1000
+    ],
+    "speed_cases_km_h": [
+      10,
+      40,
+      150
+    ],
+    "acceleration_m_s2": 0.2,
+    "status": "10 km/h is an exploration-rover concept comparison; 40 km/h improved roads and 150 km/h regional rail are assumed infrastructure cases. Times include ideal acceleration and braking but exclude stops, docking, terrain, rescue margins and traffic. A spherical minimum spanning tree supplies a direct-distance network comparison; its links are not engineered routes."
+  }
+}

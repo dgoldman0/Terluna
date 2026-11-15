@@ -1,0 +1,271 @@
+{
+  "schema": "terluna.research.vacuum-crater-engineering-sources/1",
+  "accessed": "2026-11-12",
+  "report": "/media/projectspace/terluna-research/session-tools/agents/vacuum_crater_buildout/engineering_report.md",
+  "evidence": "Bounded primary-source review and analytical scalar checks; source statements, calculations and engineering proposals remain distinct.",
+  "sources": [
+    {
+      "id": "yin_1989",
+      "authors": [
+        "Paul K. Yin"
+      ],
+      "title": "A preliminary design of interior structure and foundation of an inflatable lunar habitat",
+      "year": 1989,
+      "url": "https://ntrs.nasa.gov/api/citations/19900015683/downloads/19900015683.pdf",
+      "reading_scope": "Abstract and introductory structural treatment, PDF pages 1\u20133.",
+      "claims_supported": [
+        "Approximately 16 m spherical pressurized habitat concept.",
+        "Compared interior framing that supports regolith after deflation with shielding assumed independently supporting."
+      ],
+      "limits": [
+        "Preliminary structural design; not demonstrated lunar construction.",
+        "Does not establish feasible spans of 200\u20131,000 m or validate materials, connections and foundations for those spans."
+      ]
+    },
+    {
+      "id": "walton_norcross_2024",
+      "authors": [
+        "Marlei Walton",
+        "Jason Norcross"
+      ],
+      "title": "Moon to Mars (M2M): Exploration Atmosphere",
+      "year": 2024,
+      "url": "https://ntrs.nasa.gov/citations/20240003211",
+      "reading_scope": "Complete NTRS abstract; no downloadable presentation available for this record.",
+      "claims_supported": [
+        "8.2 psia and 34% oxygen recommendation serves frequent extravehicular activity and reduced prebreathe time.",
+        "Increased oxygen fraction poses fire-management challenges; final specifications were still being evaluated in this presentation."
+      ],
+      "limits": [
+        "Exploration atmosphere assessment; does not establish a permanent civilian settlement atmosphere.",
+        "Full presentation not available through the inspected record."
+      ]
+    },
+    {
+      "id": "grande_moses_2021",
+      "authors": [
+        "Melanie Grande",
+        "Bob Moses"
+      ],
+      "title": "Overview of Lunar Safe Haven Seedling Study for NASA/APL Excavation & Construction TIM",
+      "date": "2021-08-31",
+      "url": "https://ntrs.nasa.gov/api/citations/20210021007/downloads/LSH_Overview%20for%20Excavation%20%26%20Construction%20TIM_08-31-2021%20v5.pptx.pdf",
+      "reading_scope": "Slides 24 and 27 and their immediate context.",
+      "claims_supported": [
+        "Preliminary 3 m and 7 m regolith-equivalent shielding objectives.",
+        "Mature shielding assessment requires radiation transport with geometry and environment inputs."
+      ],
+      "limits": [
+        "Early concept-screening objectives; not certified dose guarantees.",
+        "Thickness alone does not qualify a permanent civilian settlement; composition, openings, geometry and radiation environment matter."
+      ]
+    },
+    {
+      "id": "gaskill_2023",
+      "authors": [
+        "Melissa L. Gaskill"
+      ],
+      "title": "NASA Achieves Water Recovery Milestone on International Space Station",
+      "date": "2023-06-20",
+      "url": "https://www.nasa.gov/missions/station/nasa-achieves-water-recovery-milestone-on-international-space-station/",
+      "reading_scope": "Full substantive article text.",
+      "claims_supported": [
+        "ISS water recovery system demonstrated 98% recovery with brine processing.",
+        "Wastewater processing, humidity recovery, filtration and quality checks contribute to the assessed system."
+      ],
+      "limits": [
+        "Measured recovery applies to the assessed ISS water-processing boundary.",
+        "Does not establish settlement-wide water closure including lakes, agriculture, exports or construction."
+      ]
+    },
+    {
+      "id": "nasa_fission_surface_power",
+      "authors": [
+        "NASA"
+      ],
+      "title": "Fission Surface Power",
+      "url": "https://www.nasa.gov/exploration-systems-development-mission-directorate/fission-surface-power/",
+      "reading_scope": "Programme milestones and fast facts.",
+      "claims_supported": [
+        "NASA develops lunar fission surface power for continuous electricity independent of sunlight.",
+        "Programme includes development and testing rather than demonstrated town-scale lunar utility service."
+      ],
+      "limits": [
+        "Development programme; not operational lunar settlement infrastructure.",
+        "No town-scale mass, cost or reliability derived from this source."
+      ]
+    },
+    {
+      "id": "birmingham_schunk_evans_2024",
+      "authors": [
+        "William Birmingham",
+        "Greg Schunk",
+        "Brian Evans"
+      ],
+      "title": "Lunar Latitude and Terrain Radiator Sensitivity Study",
+      "year": 2024,
+      "url": "https://ntrs.nasa.gov/api/citations/20240010276/downloads/Lunar_Latitude_and_Terrain_Radiator_Sensitivity_V2.pdf",
+      "reading_scope": "Abstract, introduction, latitude tables and conclusions.",
+      "claims_supported": [
+        "Warm terrain, radiator orientation and underside treatment materially affect heat rejection.",
+        "Some low-temperature double-sided radiator cases absorb net heat."
+      ],
+      "limits": [
+        "Parametric radiative-environment study.",
+        "Does not supply a completed town cooling design or a model for the terraforming atmosphere transition."
+      ]
+    },
+    {
+      "id": "nasa_sev_2011",
+      "authors": [
+        "NASA"
+      ],
+      "title": "Space Exploration Vehicle Concept",
+      "date": "2011-08",
+      "document_identifier": "FS-2011-08-045-JSC",
+      "url": "https://www.nasa.gov/wp-content/uploads/2015/08/464826main_sev_factsheet_508.pdf",
+      "reading_scope": "Complete four-page fact sheet.",
+      "claims_supported": [
+        "Concept speed about 10 km/h.",
+        "Pressure docking, suitports limiting dust entry, modular work equipment and paired-vehicle rescue logic."
+      ],
+      "limits": [
+        "Concept and Earth prototype context; not demonstrated long-duration lunar transport service.",
+        "Does not validate the study\u2019s faster road and rail scenarios."
+      ]
+    },
+    {
+      "id": "schaler_float_2024",
+      "authors": [
+        "Ethan Schaler"
+      ],
+      "publisher": "NASA Jet Propulsion Laboratory / NASA",
+      "page_byline": "Loura Hall",
+      "title": "Flexible Levitation on a Track (FLOAT)",
+      "date": "2024-05-01",
+      "url": "https://www.nasa.gov/directorates/stmd/niac/niac-studies/flexible-levitation-on-a-track-float/",
+      "reading_scope": "Complete project description.",
+      "claims_supported": [
+        "Proposed autonomous lunar cargo tracks with speeds above 0.5 m/s.",
+        "Study investigates temperature, radiation, charging, dust and longevity."
+      ],
+      "limits": [
+        "Early technology study and planned subscale tests.",
+        "Does not demonstrate high-speed passenger rail or a completed lunar transport network."
+      ]
+    }
+  ],
+  "additional_context_reading": "Relevant atmosphere sections of NASA-STD-3001 Volume 2 Revision F were inspected for context; none of its numerical limits were used in the proposed study inputs.",
+  "end_state_clarification": "The intended mature communities are domeless. Pressure enclosures and overhead shielding are designed for staged removal once a sustainable breathable outdoor atmosphere and associated environmental conditions are suitable; no permanent community-wide shielding canopy is the default. Interim structures must be assessed for zero inflation support, wind, rain drainage and potentially reverse pressure. Permanent town buildings and services must continue functioning during dismantling.",
+  "architectural_direction": "The subsequent adopted initial design is a complete 500\u20131,000-person community under one contiguous dome. Subdivision is a comparison for larger communities; the initial whole-crater dome is the primary engineering case.",
+  "materials_improvement_review": {
+    "schema": "terluna.research.vacuum-crater-materials-sources/1",
+    "accessed": "2026-11-12",
+    "report": "materials_addendum.md",
+    "accepted_scope": "One contiguous removable dome for the initial 500\u20131,000-resident garden community; no initial subdivision. Eventual communities are domeless.",
+    "recommended_sensitivities": {
+      "effective_biaxial_allowable_MPa": [
+        400,
+        600,
+        800
+      ],
+      "fixed_density_ideal_reinforcement_mass_ratio": [
+        1,
+        0.6666666666666666,
+        0.5
+      ],
+      "evidence": "Planning sensitivities informed by existing component performance; none is a qualified complete-dome allowable. No quantified lifetime or maintenance improvement is adopted."
+    },
+    "sources": [
+      {
+        "id": "toray_t1100g_2025",
+        "authors": [
+          "Toray Composite Materials America, Inc."
+        ],
+        "title": "TORAYCA T1100G Intermediate Modulus Carbon Fiber Data Sheet",
+        "revision": "2025-11-24",
+        "url": "https://www.toraycma.com/wp-content/uploads/T1100G-Data-Sheet.pdf",
+        "reading_scope": "Both pages of the data sheet.",
+        "claims_supported": [
+          "7,000 MPa fibre tensile strength; fibre density 1.79 g/cm\u00b3.",
+          "3,460 MPa composite tensile strength normalized to 60% fibre volume with #2592 epoxy cured at130\u00b0C; 80 MPa transverse tensile strength.",
+          "Reported properties are lot averages for reference, not specification values."
+        ],
+        "limits": [
+          "Directional fibre and coupon properties cannot be substituted for a complete biaxial pressure-shell allowable.",
+          "No completed 238\u2013336m enclosure, joint, ageing, manufacturing or statistical design allowable is supplied."
+        ]
+      },
+      {
+        "id": "szatkowski_etal_2025",
+        "authors": [
+          "George N. Szatkowski",
+          "Thomas C. Jones",
+          "Daniel J. Gauthier",
+          "Evelyn F. Roe",
+          "Brian L. Gyovai",
+          "Fatih Durmaz",
+          "Kenneth L. Dudley",
+          "Matthew L. Kolmes",
+          "James Phelps",
+          "Roger Smith"
+        ],
+        "title": "SansEC Wireless Strain Sensor for Softgoods Habitats and Inflatable Space Structures",
+        "date": "2025-08",
+        "document_identifier": "NASA/TM-20250007894",
+        "url": "https://ntrs.nasa.gov/api/citations/20250007894/downloads/NASA-TM-20250007894_r5.pdf",
+        "reading_scope": "Abstract and introduction; model limitations; future-research section and conclusions.",
+        "claims_supported": [
+          "Wireless measurements and fitted models inferred strain during repeated loading of a Vectran strap.",
+          "Creep monitoring is relevant to long-duration inflatable structures."
+        ],
+        "limits": [
+          "Single strap under controlled conditions; fixed sensor position and no varied temperature or environmental drift.",
+          "Long constant-load testing, tests to failure and generalization are further work.",
+          "No century lifetime, maintenance reduction or complete-dome reliability follows."
+        ]
+      },
+      {
+        "id": "nasa_isaac",
+        "authors": [
+          "NASA"
+        ],
+        "title": "Integrated System for Autonomous and Adaptive Caretaking (ISAAC)",
+        "url": "https://www.nasa.gov/integrated-system-for-autonomous-and-adaptive-caretaking-isaac/",
+        "reading_scope": "Full substantive project description.",
+        "claims_supported": [
+          "Robotic caretaking demonstrated in simulation, ground testing and16 ISS Astrobee activities.",
+          "Integrated robotic inspection, vehicle telemetry, logistics and responses to problems including leaks."
+        ],
+        "limits": [
+          "Does not establish large exterior lunar structural repair, arbitrary rupture containment, century service life or numerical maintenance reductions."
+        ]
+      },
+      {
+        "id": "ridgeway_2022_mmpact",
+        "authors": [
+          "Beth Ridgeway"
+        ],
+        "publisher": "NASA",
+        "title": "NASA, ICON Advance Lunar Construction Technology for Moon Missions",
+        "date": "2022-11-29",
+        "url": "https://www.nasa.gov/centers-and-facilities/marshall/nasa-icon-advance-lunar-construction-technology-for-moon-missions/",
+        "reading_scope": "Full substantive article text.",
+        "claims_supported": [
+          "Olympus/MMPACT develops local-resource construction for lunar infrastructure.",
+          "Programme account includes a terrestrial analogue building and a tested printed structural sample."
+        ],
+        "limits": [
+          "Programme development and component precedents do not establish a hundreds-of-metres lunar pressure shell.",
+          "No completed-dome allowable or quantitative imported-mass reduction supplied."
+        ]
+      }
+    ]
+  },
+  "project_sources": [
+    {
+      "path": "research/studies/food_systems/results/food_systems.json",
+      "reading_scope": "Power-made food total per-person electricity and the fully lamp-lit four-billion-person case, normalized by its lunar population. Process energy only; the original climate, crop night and outdoor water cases are not transferred to vacuum."
+    }
+  ]
+}

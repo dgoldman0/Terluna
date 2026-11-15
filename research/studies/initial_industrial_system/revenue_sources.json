@@ -1,0 +1,45 @@
+{
+  "schema": "terluna.research.initial-revenue-sources/1",
+  "date": "2026-11-12",
+  "sources": [
+    {
+      "key": "oecd2026",
+      "url": "https://www.oecd.org/en/publications/the-space-economy-at-a-glance-2026_cbf9b240-en/full-report/executive-summary_a0f22eba.html",
+      "archive": {
+        "file": "oecd2026.html",
+        "url": "https://www.oecd.org/en/publications/the-space-economy-at-a-glance-2026_cbf9b240-en/full-report/executive-summary_a0f22eba.html",
+        "status": "failed",
+        "error": "HTTP Error 403: Forbidden"
+      },
+      "coverage": "Official executive-summary paragraphs on global revenues, downstream activities and civilian budgets, retrieved through the web tool. Direct byte archival failed with HTTP 403.",
+      "supports": "2025 space-related revenue estimate USD550\u2013600 billion and dominance of downstream services; context only, not an addressable market or modeled future demand."
+    },
+    {
+      "key": "nasa_return2026",
+      "url": "https://www.nasa.gov/directorates/stmd/nasa-heat-shield-technology-enables-space-industry-growth/",
+      "archive": {
+        "file": "nasa_return2026.html",
+        "url": "https://www.nasa.gov/directorates/stmd/nasa-heat-shield-technology-enables-space-industry-growth/",
+        "sha256": "08823a947de3f46d0ae148ee96b05c68f67494e6dbc4f8ba2c5dae86e6c9377f",
+        "bytes": 306072,
+        "status": "retrieved"
+      },
+      "coverage": "Article body, 29 January 2026, last updated June 2026.",
+      "supports": "Varda W-5 return and NASA-derived C-PICA heat-shield manufacturing. Establishes a flight precedent, not the model capsule size, costs, lifetime, reliability or commercial-market volumes."
+    },
+    {
+      "key": "jpl_sbdb",
+      "url": "https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html",
+      "snapshot": "results/resource_inventory.json",
+      "coverage": "Query/filter definitions and exact downloaded catalogue response; derived volume screen in resource_inventory.py.",
+      "supports": "Catalogue identity, diameters, albedo and orbital elements. No claim of water grade, accessible trajectories or permitted extraction."
+    },
+    {
+      "key": "existing_export_study",
+      "path": "research/studies/world_economy/early_exports_inputs.json",
+      "coverage": "Existing capacity, price and boundary assumptions.",
+      "supports": "100 kg/resident/year factory nameplate, 90% saleable yield, 70% central utilization, 50 U/kg goods and 1000 U/night pioneer destination spending; no established market. The manufacturing quote left transport unpriced, so an Earth-delivered interpretation is not inherited evidence."
+    }
+  ],
+  "price_evidence": "All prospective sales volumes, unit prices, commercial facility allowances and resource-transition provisions are scenario assumptions. Market context and flight precedents do not empirically validate them."
+}

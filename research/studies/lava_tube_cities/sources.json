@@ -1,0 +1,160 @@
+{
+  "schema": "terluna.research.lava-tube-city-sources/1",
+  "scope": "Bounded location investigation, not a systematic literature review or new orbital-data inversion. External copies stay on the research drive; this repository contains source metadata and concise factual annotations.",
+  "sources": [
+    {
+      "key": "lroc_marius",
+      "title": "LROC Pits Atlas: Marius Hills Pit",
+      "url": "https://lroc.im-ldi.com/atlases/pits/1",
+      "access": "Full catalogue page read. Coordinates, inner opening 49–55 m, listed depth 40 m, boulders and uncertain deeper access.",
+      "retrieval_date": "2026-11-12",
+      "archive": {
+        "path": "/media/projectspace/terluna-research/lava-tube-cities/siting/sources/lroc_marius.html",
+        "sha256": "885e6ed71dc89e17969bd1c2b8a30d739a8411785ab43ce6e27e26e7114fcd75",
+        "bytes": 47744,
+        "resolved_url": "https://lroc.im-ldi.com/atlases/pits/1",
+        "retrieved_utc": "2026-11-12T17:01:56Z"
+      }
+    },
+    {
+      "key": "lroc_tranquillitatis",
+      "title": "LROC Pits Atlas: Mare Tranquillitatis Pit",
+      "url": "https://lroc.im-ldi.com/atlases/pits/3",
+      "access": "Full catalogue page read. Coordinates, inner opening 88–100 m, 105 m inner depth below a roughly 20 m funnel, visible overhangs.",
+      "retrieval_date": "2026-11-12",
+      "archive": {
+        "path": "/media/projectspace/terluna-research/lava-tube-cities/siting/sources/lroc_tranquillitatis.html",
+        "sha256": "2c00bf056972d3a9f0eb3ee28c90b441f1da55f4c619bee9ecf30a5516e88ae7",
+        "bytes": 48039,
+        "resolved_url": "https://lroc.im-ldi.com/atlases/pits/3",
+        "retrieved_utc": "2026-11-12T17:01:56Z"
+      }
+    },
+    {
+      "key": "lroc_ingenii",
+      "title": "LROC Pits Atlas: Mare Ingenii Pit",
+      "url": "https://lroc.im-ldi.com/atlases/pits/6",
+      "access": "Full catalogue page read. Coordinates, 71–104 m inner opening and overhangs of at least 10–20 m.",
+      "retrieval_date": "2026-11-12",
+      "archive": {
+        "path": "/media/projectspace/terluna-research/lava-tube-cities/siting/sources/lroc_ingenii.html",
+        "sha256": "b72167984ef1526e9067d431d33ae2d652ee6222896156cb68fe5c6c36bf597c",
+        "bytes": 47983,
+        "resolved_url": "https://lroc.im-ldi.com/atlases/pits/6",
+        "retrieved_utc": "2026-11-12T17:01:57Z"
+      }
+    },
+    {
+      "key": "lroc_mortis",
+      "title": "LROC Pits Atlas: Lacus Mortis Pit",
+      "url": "https://lroc.im-ldi.com/atlases/pits/8",
+      "access": "Full catalogue page read. Coordinates, access slope, north-wall overhang with apparent back wall; depth fields have a funnel reference.",
+      "retrieval_date": "2026-11-12",
+      "archive": {
+        "path": "/media/projectspace/terluna-research/lava-tube-cities/siting/sources/lroc_mortis.html",
+        "sha256": "699987220bd9e83a424d01e904e66476b348eef98f31a4b7e9588525eede6dc7",
+        "bytes": 48077,
+        "resolved_url": "https://lroc.im-ldi.com/atlases/pits/8",
+        "retrieved_utc": "2026-11-12T17:01:57Z"
+      }
+    },
+    {
+      "key": "lroc_schluter",
+      "title": "LROC Pits Atlas: Schlüter Pit",
+      "url": "https://lroc.im-ldi.com/atlases/pits/18",
+      "access": "Full catalogue page read. Highland classification, coordinates and small opening with overhang near a mare patch.",
+      "retrieval_date": "2026-11-12",
+      "archive": {
+        "path": "/media/projectspace/terluna-research/lava-tube-cities/siting/sources/lroc_schluter.html",
+        "sha256": "d59178016fd8c055f856928a8f004dd5d4590814caf81e72a3d51d226081ad92",
+        "bytes": 47838,
+        "resolved_url": "https://lroc.im-ldi.com/atlases/pits/18",
+        "retrieved_utc": "2026-11-12T17:01:58Z"
+      }
+    },
+    {
+      "key": "kaku_2017",
+      "title": "Kaku et al. (2017), Detection of Intact Lava Tubes at Marius Hills on the Moon by SELENE (Kaguya) Lunar Radar Sounder",
+      "url": "https://doi.org/10.1002/2017GL074998",
+      "access": "Main text read through publisher HTML: abstract, methods, results, discussion and conclusion. More than 80 candidate echo locations, interpretation alternatives and the radar/gravity comparison; the conclusion interprets these as an intact tube. No surveyed continuous 30 km usable interior is admitted.",
+      "retrieval_date": "2026-11-12"
+    },
+    {
+      "key": "chappaz_2017",
+      "title": "Chappaz et al. (2017), Evidence of large empty lava tubes on the Moon using GRAIL gravity",
+      "url": "https://doi.org/10.1002/2016GL071588",
+      "access": "Publisher abstract, method sections and results/Table 1 read. The Schröter extension model is an inversion, not measured cavity dimensions. Table 1 places the anomaly approximately at 24 N, 306 E. Supporting-information parameter grids were not reanalysed.",
+      "retrieval_date": "2026-11-12"
+    },
+    {
+      "key": "kaku_2018",
+      "title": "Kaku et al. (2018), Existence of a lunar lava tube at west of Rima Mairan suggested by SELENE LRS, LPSC abstract 1830",
+      "url": "https://www.hou.usra.edu/meetings/lpsc2018/pdf/1830.pdf",
+      "access": "Both pages read. Point P0 at 35.892 N, 313.235 E and nearby radar echoes coincide with a gravity deficit; the paper allows a subsurface layer or wide cave. Conference evidence, no interior survey.",
+      "retrieval_date": "2026-11-12",
+      "archive": {
+        "path": "/media/projectspace/terluna-research/lava-tube-cities/siting/sources/kaku_2018.pdf",
+        "sha256": "dc5234d1f360f5e9d8769f0bb5a8ec557ae8094e766f93449c8e2d6ffed79ab1",
+        "bytes": 699462,
+        "resolved_url": "https://www.hou.usra.edu/meetings/lpsc2018/pdf/1830.pdf",
+        "retrieved_utc": "2026-11-12T17:01:55Z"
+      }
+    },
+    {
+      "key": "nasa_cave_2024",
+      "title": "NASA (18 July 2024), New Evidence Adds to Findings Hinting at Network of Caves on Moon",
+      "url": "https://science.nasa.gov/solar-system/moon/new-evidence-adds-to-findings-hinting-at-network-of-caves-on-moon/",
+      "access": "Article body read. Mission report of the Carrer result: cave evidence extending more than 200 feet from the pit, with total extent unknown. No secondary width/depth values transferred.",
+      "retrieval_date": "2026-11-12"
+    },
+    {
+      "key": "carrer_2024",
+      "title": "Carrer et al. (2024), Radar evidence of an accessible cave conduit on the Moon below the Mare Tranquillitatis pit",
+      "url": "https://doi.org/10.1038/s41550-024-02302-y",
+      "access": "Publisher search record and abstract/caption context only in this investigation. Publisher HTML and PDF retrieval failed through the identity redirect; Trento repository retrieval returned 403. Full source remains unretrieved. The limited cave-extension claim uses the separately identified NASA mission report; no detailed numerical geometry is admitted from unread text.",
+      "retrieval_date": "2026-11-12"
+    },
+    {
+      "key": "le_corre_2025",
+      "title": "Le Corre et al. (2025), New candidate cave entrances on the Moon found using deep learning, Icarus 441, 116675",
+      "url": "https://doi.org/10.1016/j.icarus.2025.116675",
+      "access": "Repository publisher PDF, introduction and sections 4.2–4.3 and conclusion context read. Coordinates and interpretation of South Marius Hills and Belkovich A; the 1.92% maria survey adds entrances, not confirmed large connected cave volumes. Detector confidence is not a city-suitability probability.",
+      "retrieval_date": "2026-11-12",
+      "archive": {
+        "path": "/media/projectspace/terluna-research/lava-tube-cities/siting/sources/le_corre_2025.pdf",
+        "sha256": "8ebc4105f9cfa99156609ae3fec0bd13d7851dd44168f0df7dd13e8e10022013",
+        "bytes": 5400651,
+        "resolved_url": "https://kar.kent.ac.uk/110353/1/New%20candidate%20cave%20entrances%20on%20the%20Moon%20found%20using%20deep%20learning.pdf",
+        "retrieved_utc": "2026-11-12T17:01:53Z"
+      }
+    },
+    {
+      "key": "nasa_gimli_2026",
+      "title": "NASA (30 September 2026, corrected 2 October), NASA Adds New Science Investigations for Moon Base",
+      "url": "https://www.nasa.gov/news-release/nasa-adds-new-science-investigations-for-moon-base/",
+      "access": "Release body read. GIMLI selected to investigate whether Marius Hills Pit opens into a large lava tube. Selection is not a completed survey or delivery forecast.",
+      "retrieval_date": "2026-11-12",
+      "archive": {
+        "path": "/media/projectspace/terluna-research/lava-tube-cities/siting/sources/nasa_gimli_2026.html",
+        "sha256": "76c973aadb6d35d5bd6a2291db1ce56cb6cdea23232c010f9d0fdca7b82f3126",
+        "bytes": 285073,
+        "resolved_url": "https://www.nasa.gov/news-release/nasa-adds-new-science-investigations-for-moon-base/",
+        "retrieved_utc": "2026-11-12T17:01:58Z"
+      }
+    },
+    {
+      "key": "psi_gimli_2026",
+      "title": "Planetary Science Institute (1 October 2026), PSI-led team selected for NASA PRISM program to explore potential lunar cave",
+      "url": "https://www.psi.edu/blog/psi-led-team-selected-for-nasa-prism-program/",
+      "access": "Article body read. Proposed ground-penetrating radar, seismic, gravity and camera investigations would test the existence and size of a void.",
+      "retrieval_date": "2026-11-12"
+    },
+    {
+      "key": "lunarleaper_2026",
+      "title": "Mittelholz et al. (2026), Lava Tube Exploration with LunarLeaper, Advances in Geophysics 67",
+      "url": "https://arxiv.org/abs/2609.11453",
+      "access": "Abstract and introduction read in arXiv v1 HTML. Formation and pit-type context; a mission concept for in-situ investigation. The full 49-page instrument/performance study was not reviewed.",
+      "retrieval_date": "2026-11-12"
+    }
+  ]
+}

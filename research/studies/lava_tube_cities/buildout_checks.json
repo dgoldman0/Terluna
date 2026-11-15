@@ -1,0 +1,59 @@
+{
+  "schema": "terluna.research.lava-tube-buildout-checks/1",
+  "checked_at_utc": "2026-11-12T18:39:00.144208+00:00",
+  "worktree": "/home/kir/Documents/Projects/terluna-provisioning",
+  "base_commit": "58ce8a9173ecdcaef3d7960fcc452fff4ddebe3f",
+  "evidence": "Numerical implementation, source identity, structural checks, editorial reading and image inspection; no empirical or engineering qualification.",
+  "focused_tests": {
+    "command": "env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest -q research/studies/lava_tube_cities/test_buildout.py research/studies/lava_tube_cities/test_siting.py research/studies/vacuum_crater_buildout/test_first_hundred.py research/studies/vacuum_crater_buildout/test_maintenance.py",
+    "passed": 44,
+    "skipped": 0,
+    "seconds": 0.45
+  },
+  "selected_checks": {
+    "command": "python /media/projectspace/terluna-research/lava-tube-cities/buildout/checks/run_selected_checks.py",
+    "selector_commit": "4d8931d3",
+    "passed_tests": 19,
+    "skipped": 0,
+    "test_seconds": 0.22,
+    "layer_files_checked": 1630,
+    "layer_violations": 0,
+    "full_repository_suite": false
+  },
+  "consistency": {
+    "stale": 0,
+    "rebuilt": 0,
+    "rebound": 0
+  },
+  "artifact_audit": {
+    "unrelated_status_fields": "preserved",
+    "relative_report_links_resolved": 21,
+    "historical_pinned_files_unchanged": 111,
+    "inherited_source_keys_resolved": 9
+  },
+  "source_limits": [
+    "Martin and Benaroya full paper unretrieved after publisher and repository failures; only indexed abstract and section preview read. No numerical rock allowable transferred.",
+    "NASA crop review sections and station-water article body read; inherited food register supplies prior reading coverage. No comprehensive new literature review."
+  ],
+  "editorial_reading": "Full report and modified synthesis/records read in context. Corrected crop-area explanation, hypothetical capacity language and phased-operation funding scope.",
+  "visual_inspection": "Final engineering PNG inspected at delivered resolution; caption overlap corrected.",
+  "artifacts_sha256": {
+    "research/studies/lava_tube_cities/buildout.py": "f746e0fa8a9ed1def55ec9856afb5be4f2069e1fe6acba989aa2d51c1226ecd6",
+    "research/studies/lava_tube_cities/buildout_inputs.json": "dbe184ee7fba99bb0cb9b6e0251ffe11685e87a0b0afb0dbb7390dda8128da91",
+    "research/studies/lava_tube_cities/buildout_sources.json": "711c3e8d8a0365f9352eaaca59b1894d0a6184dd9460c1c21efdaed7f0401a11",
+    "research/studies/lava_tube_cities/buildout.md": "2d05f84f253a96e40326095b97cb1eeea8b802f0b916f7a86790ba6287b2c6ba",
+    "research/studies/lava_tube_cities/buildout_checks.md": "385bb8519ea7ca03248a61d6c661d330350e7c14f70f3c7e4b743a656c5ca526",
+    "research/studies/lava_tube_cities/test_buildout.py": "55d22294fc946b2834c97172f5c325b2278768109823985748cbb835d5d1aad4",
+    "research/studies/lava_tube_cities/plot_buildout.py": "a93e909c040fa49efe17599f857757302fb3e46009eba39b36849af64c33b8ac",
+    "research/studies/lava_tube_cities/results/buildout.json": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de",
+    "research/studies/lava_tube_cities/results/buildout_engineering.png": "8c493808bed78bbd84baa4b603ef0e24cbc81dafa3a9a0ad5e1b61da6ed61879"
+  },
+  "external_logs_sha256": {
+    "focused_tests.log": "e6e7679b3d3a88fe0c88bec29a245403a6a1c07315e18474e2def78f6b4df4fc",
+    "provisioning_selected.log": "2a3c4f7290b66ef5eb6c15726a5a6eb3922db2a6355fb9457edc6c562ae12428",
+    "provisioning_consistency.log": "bd3055d769a5a07133e29fa6344cf2c9a72e1f14d3cdd6452f76d94cde7eebd1",
+    "artifact_audit.json": "2a0b7b9ed65fe5e3b92242bd3d36cbe3644f47672120388c0864d3f549fc900d",
+    "run_selected_checks.py": "5e81a8dd6d031ae06737fd9af17ba0ceeae0f83c06766916452c981c2b190bc8",
+    "audit_artifacts.py": "dd911a6d93eaaae0e657017e64ebcf14796b036063687039f922735cbd4391e9"
+  }
+}
