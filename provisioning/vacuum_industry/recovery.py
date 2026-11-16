@@ -165,7 +165,7 @@ def refurbish(cats, spec, rows, flows, events, retired):
                         continue
                     f = flows[wy]
                     m = avoided / 2
-                    money = m * a['price']
+                    money = m * a['price'] * ev.get('price_index', 1.0)
                     f['imports'][dest] -= m * bought
                     f['capital_imports'][dest] -= m * growth * bought
                     f['external_capital'] -= money * growth * bought

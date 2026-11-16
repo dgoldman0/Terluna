@@ -277,6 +277,51 @@ def test_local_working_parts_are_paid_as_resident_labour_and_the_accounts_still_
     assert sum(a['physical']['LEO_kg_year'] for _, a in late) < sum(b['physical']['LEO_kg_year'] for b, _ in late)
 
 
+def with_technology(data, **stated):
+    changed = deepcopy(data)
+    changed['economy']['technology'].update(stated)
+    return changed
+
+
+def test_the_founding_design_keeps_its_technology_unless_a_rate_is_stated(data):
+    tech = m.technology(data)
+    assert tech['learning_per_doubling'] == 0 and tech['labour_productivity_growth'] == 0
+    assert m.labour_index(data, 150) == 1.0 and m.learning_index(data, {'source_computer': 100.}, []) is None
+    with pytest.raises(ValueError):
+        m.technology(with_technology(data, learning_per_doubling=1.0))
+
+
+def test_learning_lowers_the_price_of_working_parts_by_the_stated_share_at_each_doubling(data):
+    learned = with_technology(data, learning_per_doubling=0.1, from_year=8)
+    share = m.catalogue(data)['source_computer']['structural_share']
+    founding = 100. * (1 - share)
+    events = [dict(component='active', order_year=7, mass_kg=0.), dict(component='active', order_year=9, mass_kg=founding),
+              dict(component='active', order_year=12, mass_kg=2 * founding), dict(component='structure', order_year=12, mass_kg=1e9)]
+    index = m.learning_index(learned, {'source_computer': 100.}, events)
+    assert index[7] == 1.0                                                   # before the stated year: the founding price
+    assert index[9] == pytest.approx(0.9) and index[12] == pytest.approx(0.81)   # two and four times the founding parts
+    rate = m.labour_index(with_technology(data, labour_productivity_growth=0.02, from_year=8), 18)
+    assert rate == pytest.approx(1.02 ** 10)
+
+
+def test_learning_prices_the_same_quantities_lower_and_productivity_takes_fewer_hands_for_the_same_payroll(data):
+    rows = [dict(year=y, population=12500. * 1.033**(y - 8), new_residential_people=500., goods=1e5, compute=1e6) for y in range(8, 30)]
+    plain = m.solve(data, rows, max_iterations=50)
+    learned = m.solve(with_technology(data, learning_per_doubling=0.15), rows, max_iterations=50)
+    productive = m.solve(with_technology(data, labour_productivity_growth=0.02), rows, max_iterations=50)
+    assert learned['seed']['cost'] == plain['seed']['cost']
+    for p, l, q in zip(plain['annual'], learned['annual'], productive['annual']):
+        assert l['physical']['LEO_kg_year'] == pytest.approx(p['physical']['LEO_kg_year'], rel=1e-12)
+        assert l['physical']['source_feed_kg_year'] == pytest.approx(p['physical']['source_feed_kg_year'], rel=1e-12)
+        assert l['cash']['capital_external_USD2041'] <= p['cash']['capital_external_USD2041'] * (1 + 1e-12)
+        assert abs(l['cash']['accounting_residual_USD2041']) < .02 and abs(q['cash']['accounting_residual_USD2041']) < .02
+        index = 1.02 ** max(0, p['year'] - 8)
+        assert q['core_resident_jobs'] == pytest.approx(p['core_resident_jobs'] / index, rel=1e-9)
+        assert q['cash']['resident_payroll_USD2041'] == pytest.approx(p['cash']['resident_payroll_USD2041'], rel=1e-9)
+    late = [(p, l) for p, l in zip(plain['annual'], learned['annual']) if p['year'] >= 20]
+    assert sum(l['cash']['operating_external_replacement_USD2041'] for _, l in late) < sum(p['cash']['operating_external_replacement_USD2041'] for p, _ in late)
+
+
 def test_material_handed_over_at_the_depot_rides_the_tugs_and_goes_no_further(data):
     row = dict(year=8, population=12500., new_residential_people=0.)
     plain = m.physical(data, row, m.blank_flow())

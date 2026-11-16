@@ -176,6 +176,8 @@ def book(programme, ramp, inputs, name, coefficients, prices=None, scale=None, f
         date = calendar['year_zero'] + year
         age = year - first
         residents = definition.population(programme, ramp, year)
+        # The work a job does grows with labour productivity, and the wage rises in step.
+        output_per_job = model.labour_index(coefficients, year)
         detail = {}
 
         # Sport and entertainment: receipts grow from the opening portfolio toward the mature following.
@@ -184,15 +186,16 @@ def book(programme, ramp, inputs, name, coefficients, prices=None, scale=None, f
         mature = value(culture['followers_share_of_world']) * world.population(date) * per_follower
         grown = value(lines['culture']['opening_receipts_USD2041_year']) * (1 + value(culture['growth_of_receipts'])) ** age
         cultural = min(mature, grown) * served('culture', year)
-        cultural_jobs = (lines['culture']['resident_jobs']['fixed'] + lines['culture']['resident_jobs']['per_billion_USD2041'] * cultural / 1e9) * (1.0 if cultural else 0.0)
+        cultural_jobs = (lines['culture']['resident_jobs']['fixed'] + lines['culture']['resident_jobs']['per_billion_USD2041'] * cultural / 1e9) * (1.0 if cultural else 0.0) / output_per_job
         cultural_W = (lines['culture']['power_W']['fixed'] + lines['culture']['power_W']['per_billion_USD2041'] * cultural / 1e9) * (1.0 if cultural else 0.0)
         detail['culture'] = dict(receipts_USD2041=cultural, quantity=cultural / per_follower, unit='followers', price_USD2041=per_follower)
 
         # Hosted research and professional work: a share of world output, staffed by residents.
         hosted = value(institutions['share_of_world_output']) * world.output(date) * served('institutions', year)
         kept = 1 - value(institutions['share_others_keep'])
-        hosted_jobs = hosted * kept / value(institutions['retained_USD2041_per_job'])
-        detail['institutions'] = dict(receipts_USD2041=hosted, quantity=hosted_jobs, unit='resident jobs', price_USD2041=value(institutions['retained_USD2041_per_job']) / kept)
+        retained = value(institutions['retained_USD2041_per_job']) * output_per_job
+        hosted_jobs = hosted * kept / retained
+        detail['institutions'] = dict(receipts_USD2041=hosted, quantity=hosted_jobs, unit='resident jobs', price_USD2041=retained / kept)
 
         # Computing at the cost of the same service on Earth.
         watts = value(computing['capacity_W_2049']) * world.output(date) / world.output(world.opening) * served('computing', year)
@@ -235,7 +238,7 @@ def book(programme, ramp, inputs, name, coefficients, prices=None, scale=None, f
         detail['visits'] = dict(receipts_USD2041=visitors * visit_price, quantity=visitors, unit='visitors', price_USD2041=visit_price)
 
         jobs = cultural_jobs + hosted_jobs
-        payroll = jobs * wage
+        payroll = jobs * wage * output_per_job
         outside = (cultural * value(culture['share_others_keep']) + hosted * value(institutions['share_others_keep'])
                    + detail['computing']['receipts_USD2041'] * value(lines['computing']['Earth_service_share_of_receipts'])
                    + detail['visits']['receipts_USD2041'] * value(lines['visits']['Earth_service_share_of_receipts']) + treatment)
@@ -245,8 +248,8 @@ def book(programme, ramp, inputs, name, coefficients, prices=None, scale=None, f
                         computing=detail['computing']['receipts_USD2041'], propellant=detail['propellant']['receipts_USD2041'],
                         materials=detail['materials']['receipts_USD2041'], source_products=metal_receipts,
                         destination=detail['visits']['receipts_USD2041'])
-        own_cost = dict(culture=cultural * value(culture['share_others_keep']) + cultural_jobs * wage,
-                        institutions=hosted * value(institutions['share_others_keep']) + hosted_jobs * wage,
+        own_cost = dict(culture=cultural * value(culture['share_others_keep']) + cultural_jobs * wage * output_per_job,
+                        institutions=hosted * value(institutions['share_others_keep']) + hosted_jobs * wage * output_per_job,
                         computing=detail['computing']['receipts_USD2041'] * value(lines['computing']['Earth_service_share_of_receipts']),
                         propellant=0.0, materials=0.0, metals=treatment,
                         visits=detail['visits']['receipts_USD2041'] * value(lines['visits']['Earth_service_share_of_receipts']))

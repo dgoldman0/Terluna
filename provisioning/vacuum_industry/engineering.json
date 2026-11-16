@@ -37,6 +37,12 @@
     "yearly_water": 846554404.9710002
   },
   "economy": {
+    "technology": {
+      "learning_per_doubling": 0.0,
+      "labour_productivity_growth": 0.0,
+      "from_year": 8,
+      "reading_rule": "How the industry's technology improves after the founding. learning_per_doubling is the fall in the price of machinery's working parts, bought from Earth or made in place, for each doubling of the working parts acquired since the founding deployment, whose parts are the first unit; orders before from_year keep the founding price. labour_productivity_growth is the yearly growth from from_year of the work a job does, for every resident and outside staff role in the industry, the settlement and its services; the wage rises at the same rate, so labour costs what it did per unit of work and takes fewer hands. Both are nought here, which keeps the founding design's technology throughout; the scenarios of the coupled study state their own."
+    },
     "components": {
       "building": {
         "structural_life_years": 80,

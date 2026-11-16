@@ -47,14 +47,22 @@ def test_money_is_the_least_cash_above_the_buffer_with_the_opening_runway_and_th
     assert residents.holding(held, 200) == pytest.approx(5.0)
 
 
+def test_the_survey_pools_nest_the_wider_screen_within_the_broader_population():
+    stock = inputs.pool()
+    assert set(stock) == {'wider', 'broader'}
+    assert all(0 < stock['wider'][k] < stock['broader'][k] for k in inputs.PERCENTILES)
+    assert stock['wider']['p05'] < stock['wider']['p50'] < stock['wider']['p95']
+    assert round(stock['wider']['p50'] / 1e12, 1) == 39.1 and round(stock['broader']['p50'] / 1e12) == 961
+
+
 def test_the_water_drawn_is_the_feed_times_its_grade_and_passes_each_percentile_in_its_year(monkeypatch):
-    monkeypatch.setattr(inputs, 'pool', lambda: dict(p05=50.0, p50=100.0, p95=1e9))
+    monkeypatch.setattr(inputs, 'pool', lambda: dict(wider=dict(p05=50.0, p50=100.0, p95=1e9), broader=dict(p05=150.0, p50=1e9, p95=1e9)))
     loops = dict(annual=[dict(year=y, source_feed_kg=10.0) for y in range(0, LAST + 1)])
     coefficients = dict(industrial=dict(source=dict(water_grade=0.1)))
     out = inputs.water_drawn(None, loops, coefficients, (100, 200))
     assert out['contained_water_drawn_kg'] == {'100': pytest.approx(101.0), '200': pytest.approx(201.0)}
-    assert out['year_drawn_past'] == dict(p05=50, p50=100, p95=None)
-    assert out['share_of_median_drawn_by_last_year'] == pytest.approx((LAST + 1) / 100.0)
+    assert out['year_drawn_past'] == dict(wider=dict(p05=50, p50=100, p95=None), broader=dict(p05=150, p50=None, p95=None))
+    assert out['share_of_median_drawn_by_last_year']['wider'] == pytest.approx((LAST + 1) / 100.0)
 
 
 class Fake:

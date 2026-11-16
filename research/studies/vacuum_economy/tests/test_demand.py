@@ -88,6 +88,21 @@ def test_hosted_work_is_a_share_of_world_output_and_is_staffed_from_what_the_set
     assert row['service_jobs'] > hosted['quantity']                      # the cultural staff beside them
 
 
+def test_productivity_staffs_the_same_receipts_with_fewer_hands_at_the_same_payroll(s):
+    productive = deepcopy(s['engineering'])
+    productive['economy']['technology'].update(labour_productivity_growth=0.02, from_year=8)
+    plain = rows(book(s))
+    faster = rows(demand.book(s['programme'], 'constant_growth', s['scenarios'], 'central', productive))
+    for year in (8, 100, 200):
+        index = 1.02 ** (year - 8)
+        before, after = plain[year], faster[year]
+        assert after['gross_USD2041'] == before['gross_USD2041']
+        assert after['service_jobs'] == pytest.approx(before['service_jobs'] / index, rel=1e-12)
+        assert after['commercial_payroll_USD2041'] == pytest.approx(before['commercial_payroll_USD2041'], rel=1e-12)
+        for line in ('culture', 'institutions'):
+            assert after['lines'][line]['own_cost_USD2041'] == pytest.approx(before['lines'][line]['own_cost_USD2041'], rel=1e-12)
+
+
 @pytest.mark.parametrize('name', SCENARIOS)
 def test_propellant_and_material_answer_the_price_and_never_pass_the_ceiling(s, name):
     elasticity = s['scenarios']['scenarios'][name]['space']['price_elasticity']['value']

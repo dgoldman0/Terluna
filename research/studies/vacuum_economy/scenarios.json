@@ -251,6 +251,14 @@
         }
       },
       "engineering": {
+        "economy.technology.learning_per_doubling": {
+          "basis": "sourced: the fall in the average price of a unit for each doubling of the units made, 5%, 10% and 15% in satellite programmes of 1 to 10, 11 to 50 and more than 50 units (a 1994 study, as cited by NASA cost analysts in the local-content lookup); across more than 100 manufacturing processes the fall runs from 46% to a rise of 8%. This scenario takes the smallest of the satellite rates, for programmes of 1 to 10 units.",
+          "value": 0.05
+        },
+        "economy.technology.labour_productivity_growth": {
+          "basis": "constructed: the scenario's growth of income per person on Earth after 2049, so that the settlement's work grows more productive at the pace of its customers' economies; no source gives productivity growth for an industry beyond Earth.",
+          "value": 0.005
+        },
         "industrial.transport.LEO_USD2026_kg": {
           "basis": "sourced: the highest of the launch prices projected for 2040, 273 dollars a kilogram (P26).",
           "value": 273
@@ -378,6 +386,14 @@
         }
       },
       "engineering": {
+        "economy.technology.learning_per_doubling": {
+          "basis": "sourced: the fall in the average price of a unit for each doubling of the units made, 5%, 10% and 15% in satellite programmes of 1 to 10, 11 to 50 and more than 50 units (a 1994 study, as cited by NASA cost analysts in the local-content lookup); across more than 100 manufacturing processes the fall runs from 46% to a rise of 8%. This scenario takes the middle satellite rate, for programmes of 11 to 50 units.",
+          "value": 0.1
+        },
+        "economy.technology.labour_productivity_growth": {
+          "basis": "constructed: the scenario's growth of income per person on Earth after 2049, so that the settlement's work grows more productive at the pace of its customers' economies; no source gives productivity growth for an industry beyond Earth.",
+          "value": 0.01
+        },
         "industrial.transport.LEO_USD2026_kg": {
           "basis": "sourced: the middle of the launch prices projected for 2040, 100 dollars a kilogram (P25).",
           "value": 100
@@ -505,6 +521,14 @@
         }
       },
       "engineering": {
+        "economy.technology.learning_per_doubling": {
+          "basis": "sourced: the fall in the average price of a unit for each doubling of the units made, 5%, 10% and 15% in satellite programmes of 1 to 10, 11 to 50 and more than 50 units (a 1994 study, as cited by NASA cost analysts in the local-content lookup); across more than 100 manufacturing processes the fall runs from 46% to a rise of 8%. This scenario takes the largest satellite rate, for programmes of more than 50 units.",
+          "value": 0.15
+        },
+        "economy.technology.labour_productivity_growth": {
+          "basis": "constructed: the scenario's growth of income per person on Earth after 2049, so that the settlement's work grows more productive at the pace of its customers' economies; no source gives productivity growth for an industry beyond Earth.",
+          "value": 0.016
+        },
         "industrial.transport.LEO_USD2026_kg": {
           "basis": "sourced: the lowest of the launch prices projected for 2040, 33 dollars a kilogram (P25).",
           "value": 33

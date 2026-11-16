@@ -175,7 +175,7 @@ class Solver:
         d.solves += 1
         base, _, ledger = industry.solve_once(bought, d.recovery, d.orders(scale=d.none()), d.measures, True)
         wage = data['industrial']['economics']['loaded_staff_USD2026_year']
-        parts = {y: ledger.flows[y].get('local_working_labour_if_staffed', 0.0) / wage for y in d.years}
+        parts = {y: ledger.flows[y].get('local_working_labour_if_staffed', 0.0) / (wage * model.labour_index(data, y)) for y in d.years}
         base_jobs = mix.jobs(base)
         mined = dict(mix.feed(base))
         priced = d.orders(choice['prices'], None, mined)
@@ -437,7 +437,8 @@ def product(scenarios, jobs=1):
                              'residents\' own work leaves, in any year; a schedule fails it where that work exceeds the '
                              'workforce, or where the lines and the making of parts could not be fitted to it. A trial also '
                              'gives its receipts and the contained water drawn from the sources to each horizon against the '
-                             'wider near-Earth screen at its 5th, 50th and 95th percentiles. While a schedule is sought '
+                             'source survey\'s wider near-Earth screen and broader near-Earth population, at their 5th, 50th '
+                             'and 95th percentiles. While a schedule is sought '
                              'nothing is paid out to the funders; the coupled run finances the solved schedules under the '
                              'study\'s ordinary rules.' % (RAMP, LIMITED, OPENING_TOLERANCE),
                 periods=[list(p) for p in PERIODS], highest_rate_tried=HIGHEST, resolution=dict(absolute=RESOLUTION, relative=RELATIVE),

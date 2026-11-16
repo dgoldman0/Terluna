@@ -101,7 +101,7 @@ def build(data, spec, book, measures='combined', residual_water_allowance=True):
         for y in years:
             r = rows[y]
             room = STAFFING_MARGIN * model.WORKFORCE_SHARE * r['population'] - (r['technical_resident_jobs'] - r['working_parts_jobs'])
-            wanted = e.flows[y]['local_working_labour_if_staffed'] / wage
+            wanted = e.flows[y]['local_working_labour_if_staffed'] / (wage * model.labour_index(data, y))
             reach[y] = 1. if wanted <= 0 else max(0., min(1., room / wanted))
         # An order is worked in its own year and the next, so both years' hands must reach.
         return {y: min(reach[y], reach.get(y + 1, reach[y])) for y in years}
@@ -140,8 +140,10 @@ def solve_once(data, spec, book, measures, residual_water_allowance):
         for row in before['annual']:
             y = row['year']
             f = e.flows[y]
-            extra_jobs = sum(f['loop_inspected'].values()) / r['inspection_kg_worker_year'] + sum(f['loop_repaired'].values()) / r['remanufacture_kg_worker_year']
-            extra_payroll = extra_jobs * configured['industrial']['economics']['loaded_staff_USD2026_year'] * I
+            # Workshop labour grows more productive with the rest, and its wage rises in step.
+            output_per_job = model.labour_index(configured, y)
+            extra_jobs = (sum(f['loop_inspected'].values()) / r['inspection_kg_worker_year'] + sum(f['loop_repaired'].values()) / r['remanufacture_kg_worker_year']) / output_per_job
+            extra_payroll = extra_jobs * configured['industrial']['economics']['loaded_staff_USD2026_year'] * output_per_job * I
             row['core_resident_jobs'] += extra_jobs
             row['technical_resident_jobs'] += extra_jobs
             c = row['cash']
@@ -159,7 +161,7 @@ def solve_once(data, spec, book, measures, residual_water_allowance):
             for ev in result['component_orders']:
                 if ev['component'] == 'active' and ev['order_year'] in (y, y - 1):
                     n = ev['asset']
-                    drivers[n] = drivers.get(n, 0.) + ev.get('new_imported_mass_kg', ev['mass_kg'] * (1 - ev['locally_made_share'])) / 2 * cats[n]['price'] * I
+                    drivers[n] = drivers.get(n, 0.) + ev.get('new_imported_mass_kg', ev['mass_kg'] * (1 - ev['locally_made_share'])) / 2 * cats[n]['price'] * ev.get('price_index', 1.0) * I
             row['top_imported_component_purchases_USD2041'] = dict(sorted(drivers.items(), key=lambda kv: kv[1], reverse=True)[:8])
             row['direct_refurbishment_jobs'] = extra_jobs
             row['direct_refurbishment_payroll_USD2041'] = extra_payroll

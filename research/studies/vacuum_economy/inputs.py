@@ -33,21 +33,27 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+# The survey's pools: the wider screen, the orbital window of the programme's intended sources (semimajor axis to
+# 1.8 AU, eccentricity to 0.5, inclination to 30 degrees), and the broader near-Earth population without Don Quixote,
+# whose use would need transport that reaches beyond that window.
+POOLS = dict(wider='wider', broader='all_no_don_quixote')
+
+
 @lru_cache(maxsize=None)
 def pool():
-    """The water contained in the wider near-Earth screen of the source survey, at three percentiles, in kilograms.
+    """The water contained in each of the source survey's two pools, at three percentiles, in kilograms.
 
-    The screen is the orbital window of the programme's intended sources (semimajor axis to 1.8 AU, eccentricity to 0.5,
-    inclination to 30 degrees), with catalogued, inferred and undiscovered bodies, before recovery or any limit on
-    access; the survey states it as a conditional range, not a reserve."""
+    Each pool holds catalogued, inferred and undiscovered bodies, before recovery or any limit on access; the survey
+    states them as conditional ranges, not reserves, and the wider screen lies within the broader population."""
     data = json.loads(gzip.decompress(POOL.read_bytes()))
-    stated = data['scenarios']['central']['pools']['wider']['total_quantiles_kg']['water_equivalent_kg']
-    return {key: stated[key] for key in PERCENTILES}
+    stated = data['scenarios']['central']['pools']
+    return {name: {key: stated[key_in_survey]['total_quantiles_kg']['water_equivalent_kg'][key] for key in PERCENTILES}
+            for name, key_in_survey in POOLS.items()}
 
 
 def water_drawn(physical, loops, coefficients, horizons):
-    """The water contained in the feed mined at the sources, to each horizon and in all, against the wider screen's
-    water: the year the draw passes each percentile and the share of the median drawn by the last year."""
+    """The water contained in the feed mined at the sources, to each horizon and in all, against each pool's water:
+    the year the draw passes each percentile and the share of each pool's median drawn by the last year."""
     grade = coefficients['industrial']['source']['water_grade']
     if loops and loops.get('annual'):
         feed = [(r['year'], r['source_feed_kg']) for r in sorted(loops['annual'], key=lambda r: r['year'])]
@@ -55,16 +61,18 @@ def water_drawn(physical, loops, coefficients, horizons):
         first = physical['annual'][0]['year']
         feed = [(first - 1, physical['seed']['source_feed_kg'])] + [(r['year'], r['physical']['source_feed_kg_year']) for r in physical['annual']]
     stock = pool()
-    drawn, total, past = {}, 0.0, {key: None for key in stock}
+    drawn, total = {}, 0.0
+    past = {name: {key: None for key in levels} for name, levels in stock.items()}
     for year, kg in feed:
         total += kg * grade
-        for key, value in stock.items():
-            if past[key] is None and total > value:
-                past[key] = year
+        for name, levels in stock.items():
+            for key, value in levels.items():
+                if past[name][key] is None and total > value:
+                    past[name][key] = year
         if year in horizons:
             drawn[str(year)] = total
     return dict(contained_water_drawn_kg=drawn, pool_contained_water_kg=stock, year_drawn_past=past,
-                share_of_median_drawn_by_last_year=total / stock['p50'])
+                share_of_median_drawn_by_last_year={name: total / levels['p50'] for name, levels in stock.items()})
 
 
 @lru_cache(maxsize=None)

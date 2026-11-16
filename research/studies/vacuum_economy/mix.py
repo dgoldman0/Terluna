@@ -121,7 +121,7 @@ class Decision:
         for y in self.years:
             fraction = model.at(working['labour_fraction_of_import_price'], y)
             short = staffed is not None and model.at(working['share'], y) > 0 and model.at(staffed, y) < 1 - 1e-9
-            out[y] = wage * (1 / fraction - 1) if short and fraction > 0 else 0.0
+            out[y] = wage * model.labour_index(self.coefficients, y) * (1 / fraction - 1) if short and fraction > 0 else 0.0
         return out
 
     def none(self, lines=demand.LINES):

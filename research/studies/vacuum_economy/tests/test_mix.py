@@ -137,10 +137,13 @@ def test_a_job_taken_from_making_working_parts_costs_the_parts_it_would_have_mad
     case = dict(scenario='central', ramp='constant_growth', recovery='combined')
     d = mix.Decision(s['programme'], 'constant_growth', s['scenarios'], 'central', run.engineering(case), s['recovery'], 'combined',
                      s['periods'], hotel=62500.0)
-    wage = 200000 * s['engineering']['normalization']['USD2026_to_USD2041']
+    coefficients = run.engineering(case)
+    wage = {y: 200000 * s['engineering']['normalization']['USD2026_to_USD2041'] * model.labour_index(coefficients, y) for y in (60, 100)}
     short = d.displaced({'by_year': [[8, 0.0], [100, 0.5], [150, 1.0]]})
-    # Central labour is a quarter of the import price: a job-year makes parts worth four wages and costs one.
-    assert short[100] == pytest.approx(3 * wage) and short[60] == pytest.approx(3 * wage)
+    # Central labour is a quarter of the import price: a job-year makes parts worth four wages and costs one, and the
+    # wage rises with the scenario's productivity.
+    assert short[100] == pytest.approx(3 * wage[100]) and short[60] == pytest.approx(3 * wage[60])
+    assert wage[100] / wage[60] == pytest.approx(1.01 ** 40)
     assert short[150] == short[200] == 0                                    # every able part is staffed
     assert short[8] == 0                                                     # nothing is yet able to be made
     assert all(v == 0 for v in d.displaced(None).values())
