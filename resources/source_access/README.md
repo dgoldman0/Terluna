@@ -80,6 +80,19 @@ All 17 wider candidates with spectral classifications also have light-curve reco
 
 NASA's [Near-Earth Object Human Space Flight Accessible Targets Study](https://ssd-api.jpl.nasa.gov/doc/nhats.html), queried for 2020–2045 launches, round trips of at most 450 days, stays of at least eight days and total delta-v at most 12 km/s, contains 7,208 objects. Exact normalized-name joins find 23 of the wider-screen objects, totaling 8.510 Gt at the same assumed density. Three fall within its 8 km/s limit and one within 6 km/s. These are evidence-coverage comparisons for human Earth round trips. An absent object may fall outside the query conditions; a present object still lacks the project's recurring source-to-depot cargo solution. The inherited 2.5 km/s leg and three-year cargo cycle remain unqualified across the candidate pool.
 
+### The velocity change of each source
+
+[reach.py](reach.py) gives every body the population assessment quantifies a velocity change of its own, so that the water within reach follows from the leg a programme's freight can fly. For a catalogued body it computes the approximate minimum of [Shoemaker and Helin (1978)](https://ntrs.nasa.gov/citations/19780021079): a transfer orbit tangent to the Earth's orbit and to the body's at its aphelion, half the plane change at each end, speeds in units of the Earth's 30 km/s and 0.5 km/s added to match computed missions. From low Earth orbit at 200 km the implementation reproduces their Table 1 within 0.1 km/s (433 Eros 9.11 km/s against their 9.2, 1943 Anteros 8.64 against 8.7). The tugs' leg runs from a depot near the Earth's escape energy and burns its departure on a low pass over the Earth, so it is the figure from low Earth orbit without the escape from low orbit; the loaded return is taken as its mirror. These are figures of merit for ideal phasing, with no trajectory, window or trip time. Against NASA's minimum velocity changes for human round trips, which cover 7,207 of the catalogued bodies, the estimate ranks the bodies loosely (rank correlation 0.34) and lies below NASA's figure for 97% of them, as a one-way rendezvous at the best phasing should against a round trip of at most 450 days in fixed launch years.
+
+The water is the assessment's own. Its Monte Carlo of the catalogued bodies runs again unchanged and reproduces all four pools draw by draw, and each body's water is added to the bin of its leg; the undiscovered bodies' water is divided among the bins by the NEOMOD orbital cells. In the central population, contained water before recovery:
+
+| Within a depot leg of | 2 km/s | 2.5 km/s | 3 km/s | 4 km/s | 5 km/s | 7 km/s | 10 km/s | All |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Median | 0.24 Gt | 1.1 Gt | 4.4 Gt | 64 Gt | 219 Gt | 344 Gt | 1,290 Gt | 1,413 Gt |
+| 5th to 95th percentile | 0.10–2.3 | 0.53–4.4 | 2.5–10.5 | 41–111 | 141–370 | 243–579 | 478–3,980 | |
+
+Only about a billion tonnes lie within the inherited 2.5 km/s, most of it in catalogued bodies, with the undiscovered ones holding most of the little within 1 km/s. The large bodies sit farther out: 4954 Eric at 4.5 km/s, 1627 Ivar at 3.1, 4179 Toutatis at 3.3, 1036 Ganymed at 7.1 and 3552 Don Quixote at 8.7. The scientific holds stay excluded, as in the population assessment. The product is `results/reach.json.gz`; it takes under a minute.
+
 ## Extraction and processing cost ranges
 
 The process screen uses the existing provisioning equipment rates and prices, freezes their identity in [the coefficient product](inputs/cost_coefficients.json), and varies utilization, electricity, equipment valuation and water yield explicitly. It does not import the provisioning model's implementation or replace the financial account. Capital is annualized at 3% real over the relevant equipment life, with the existing 2.5% annual supplier-upkeep provision and 25% capacity margin. This prices a standalone equipment service; a self-fabricating programme must reconcile internal transfers before treating it as external expenditure.
@@ -143,6 +156,7 @@ python -m resources.source_access.lunar
 python -m resources.source_access.composition --download
 python -m resources.source_access.lightcurves --fetch
 python -m resources.source_access.run
+python -m resources.source_access.reach
 python -m pytest resources/source_access/tests -q
 ```
 

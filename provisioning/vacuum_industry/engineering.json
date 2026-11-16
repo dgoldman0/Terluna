@@ -1928,6 +1928,37 @@
         "electric.earth_cycle_days": 1000,
         "electric.earth_powered_days": 730.5
       }
+    },
+    "source_propulsion": {
+      "date": "2026-11-16",
+      "evidence": "Laboratory, design and market figures. No electric tug for bulk cargo has been built, and no thruster on water has run above 2 kW.",
+      "low_thrust_dv_factor": 1.6,
+      "low_thrust_rule": "An electric tug flies the impulsive leg times this factor: the ratio of the 12 November comparison's electric leg to the sources, 4 km/s, to the chemical tug's 2.5 km/s. It stands for the losses of thrust spread over a powered year, as a sizing envelope, not a trajectory.",
+      "options": {
+        "electric_water": {
+          "Isp_s": 2039,
+          "basis": "Hall thruster on water vapour in the laboratory: 2,039 s (plus or minus 20) at 12.5% anode efficiency (plus or minus 0.3) and 1,600 W, 2023 (lookup of 15 November 2026, vacuum-economy/research/local_content/values.md, source L14, abstract). The anode efficiency leaves out cathode, magnet and feed-processing power, so as a total efficiency it is generous.",
+          "propellant": "water",
+          "total_efficiency": 0.125
+        },
+        "electric_water_target": {
+          "Isp_s": 2000,
+          "basis": "The 12 November comparison's central development target on water: 2,000 s and 30% from the electrical bus to the exhaust, feed processing counted. Undemonstrated.",
+          "propellant": "water",
+          "total_efficiency": 0.3
+        },
+        "electric_xenon": {
+          "Isp_s": 2600,
+          "basis": "The 13.5 kW Hall thruster system designed for the lunar-orbit station: 2,600 s at 57% system efficiency, requirement table of 2019 (lookup of 15 November 2026, source L11); the 100 kW ground test ran at 54% to 67% (L12).",
+          "price_USD2026_kg": 3000,
+          "price_basis": "About 2,800 to 3,250 dollars a kilogram late in 2025 by a market-research estimate seen in a search summary, after a spike above 30,000 dollars a kilogram in 2022 (SatNews, 14 October 2022, quoting a former NASA administrator). Today's market, carried as an anchor.",
+          "propellant": "xenon",
+          "total_efficiency": 0.57,
+          "world_supply_basis": "Roughly 10 to 14 million litres a year of world capacity by industry estimates seen in search summaries (gasworld; the articles refused retrieval), about 60 to 80 tonnes at 5.9 grams a litre. Xenon is a by-product of air separation, which no study here expands.",
+          "world_supply_kg_year": 70000
+        }
+      },
+      "reading_rule": "Propulsion for the tugs between the near-Earth sources and the depot, which industrial.transport.source_propulsion names (chemical unless stated) and may give as a schedule by year. The electric options take the 12 November comparison's tug (transport.electric: hull, tanks, drives, arrays, radiators, powered days, cycle and handling) with the stated propellant, specific impulse and efficiency. Water is drawn from the sources and needs no electrolysis; xenon is bought on Earth, launched and carried to the depot."
     }
   }
 }

@@ -119,17 +119,149 @@ def earth_route(data, year):
 def routes(data, year):
     s = data['industrial']
     t = s['transport']
-    v = data['original_architecture']['peak_flows']['Earth_vehicle']
     out = {'Earth': earth_route(data, year)}
-    for name, prefix in [('Moon', 'lander'), ('source', 'nea')]:
-        payload = t[prefix + '_payload_kg']
-        dry = payload * t[prefix + '_dry_to_payload']
-        dv = t[prefix + '_dv_oneway_m_s']
-        args = dict(dry=dry, dv=dv, isp=t['Isp_s'], margin=t['propellant_margin'], mode='earth_chemical', retention=1.0)
-        tank = burns(payload, 0, **args)['tank']
-        if name == 'source':
-            tank = payload * data['original_architecture']['peak_flows']['nea_round_trip']['total'] * t['propellant_margin']
-        out[name] = dict(payload=payload, **args, tank_limit=tank, cycles=t['lander_cycles_year'] if name == 'Moon' else 1 / t['nea_cycle_years'])
+    payload = t['lander_payload_kg']
+    args = dict(dry=payload * t['lander_dry_to_payload'], dv=t['lander_dv_oneway_m_s'], isp=t['Isp_s'], margin=t['propellant_margin'], mode='earth_chemical', retention=1.0)
+    out['Moon'] = dict(payload=payload, **args, tank_limit=burns(payload, 0, **args)['tank'], cycles=t['lander_cycles_year'])
+    out['source'] = source_route(data, year)
+    return out
+
+
+class Unreachable(ValueError):
+    """Freight to the sources that the stated tugs cannot fly in a year, with that year."""
+
+    def __init__(self, message, year):
+        super().__init__(message)
+        self.year = year
+
+
+def propulsions(data):
+    """The kinds of tug the coefficients name for the sources, in any year."""
+    stated = data['industrial']['transport'].get('source_propulsion', 'chemical')
+    return {stated} if not isinstance(stated, dict) else {kind for _, kind in stated['by_year']}
+
+
+def source_route(data, year):
+    """The tugs between the sources and the depot in a year, by the propulsion and the leg the coefficients name for it.
+
+    `source_propulsion` names the kind, `chemical` unless stated, and `source_dv_oneway_m_s` the impulsive velocity
+    change of a leg, the founding design's `nea_dv_oneway_m_s` unless stated; either may be a schedule by year. The
+    founding chemical tug flies its design leg with the tanks the founding study gave it. On another leg its tanks follow
+    the propellant at the stated tank mass per kilogram held, and its hull carries the difference; beyond the leg at
+    which that closure fails, no chemical tug of this design reaches. An electric tug is closed against its hull and
+    tanks, drives, arrays and radiators, its power set by the propellant it must expel in its powered time; it flies the
+    impulsive leg times the stated low-thrust factor. On water it loads both legs' propellant at the source; on xenon,
+    bought on Earth, it loads both at the depot.
+    """
+    t = data['industrial']['transport']
+    design = t['nea_dv_oneway_m_s']
+    dv = at(t.get('source_dv_oneway_m_s', design), year)
+    kind = at(t.get('source_propulsion', 'chemical'), year)
+    payload = t['nea_payload_kg']
+    margin = t['propellant_margin']
+    if kind == 'chemical':
+        dry = payload * t['nea_dry_to_payload']
+        tank = payload * data['original_architecture']['peak_flows']['nea_round_trip']['total'] * margin
+        route = dict(payload=payload, dry=dry, dv=dv, isp=t['Isp_s'], margin=margin, mode='earth_chemical', retention=1.0, tank_limit=tank,
+                     cycles=1 / t['nea_cycle_years'], propulsion='chemical', propellant='water')
+        if dv == design:
+            return route
+        try:
+            closed, tank = chemical_tug(payload, dry, tank, design, dv, t['Isp_s'], margin, t['tank_dry_to_contents'])
+        except ValueError as exc:
+            raise Unreachable('%s, in year %d' % (exc, year), year) from None
+        return dict(route, dry=closed, tank_limit=tank)
+    options = data['transport']['source_propulsion']
+    if kind not in options['options']:
+        raise ValueError('Unknown propulsion for the source tugs: ' + str(kind))
+    option = options['options'][kind]
+    e = data['transport']['electric']
+    p = data['industrial']['power']
+    leg = dv * options['low_thrust_dv_factor']
+    mode = {'water': 'earth_chemical', 'xenon': 'space_chemical'}[option['propellant']]
+    try:
+        tug = electric_tug(payload, leg, option['Isp_s'], option['total_efficiency'], margin, mode, e['handling_retention'], e['structural_dry_to_payload'],
+                           e['tank_dry_to_propellant'], e['drive_kg_W'], e['source_powered_days'] * JULIAN_DAY, p['end_of_life_factor'],
+                           p['source_solar_flux_fraction'], p['space_system_W_kg'], p['emissivity'] * STEFAN_BOLTZMANN * p['radiator_K'] ** 4, p['radiator_kg_m2'])
+    except ValueError as exc:
+        raise Unreachable('%s, in year %d' % (exc, year), year) from None
+    return dict(payload=payload, dry=tug['dry'], dv=leg, isp=option['Isp_s'], margin=margin, mode=mode, retention=e['handling_retention'],
+                tank_limit=tug['tank'], cycles=JULIAN_YEAR_DAYS / e['source_cycle_days'], propulsion=kind, propellant=option['propellant'],
+                parts=tug['parts'], bus_W=tug['bus_W'])
+
+
+@lru_cache(maxsize=65536)
+def chemical_tug(payload, dry, tank, design, dv, isp, margin, tank_ratio):
+    """The founding chemical tug with tanks for another leg: (dry mass, tank limit). Its tanks hold the founding tug's
+    share above the full-load need, and change by the stated tank mass per kilogram held."""
+    def need(d, v):
+        return burns(payload, 0.0, d, v, isp, margin, 'earth_chemical')['tank']
+    scale = tank / need(dry, design)
+    current = dry
+    for _ in range(500):
+        held = scale * need(current, dv)
+        closed = dry + tank_ratio * (held - tank)
+        if not math.isfinite(closed) or closed <= 0.0 or closed > 100 * payload:
+            break
+        if abs(closed - current) <= 1e-12 * closed:
+            return closed, held
+        current = closed
+    raise ValueError('No chemical tug of the founding design closes on a leg of %.0f m/s' % dv)
+
+
+@lru_cache(maxsize=65536)
+def electric_tug(payload, leg, isp, efficiency, margin, mode, retention, structure, tank_ratio, drive_kg_W, powered_s, end_of_life, flux_fraction,
+                 array_W_kg, radiator_W_m2, radiator_kg_m2):
+    """An electric tug closed against its parts for a full load each way out: its dry mass, tank limit, parts per
+    vehicle and the electrical power while thrusting, which expels a round trip's propellant in the powered time."""
+    ve = isp * STANDARD_GRAVITY
+    dry = payload * structure
+    for _ in range(500):
+        b = burns(payload, 0.0, dry, leg, isp, margin, mode, retention)
+        W = b['burned'] * ve ** 2 / (2 * efficiency * powered_s)
+        parts = dict(hulls=payload * structure + b['tank'] * tank_ratio, drives=W * drive_kg_W,
+                     arrays=W / end_of_life / flux_fraction / array_W_kg, radiators=W * (1 - efficiency) / radiator_W_m2 * radiator_kg_m2)
+        closed = math.fsum(parts.values())
+        if not math.isfinite(closed) or closed > 100 * payload:
+            break
+        if abs(closed - dry) <= 1e-12 * closed:
+            return dict(dry=closed, tank=b['tank'], parts=parts, bus_W=W)
+        dry = closed
+    raise ValueError('The electric tug at %.0f s and %.0f%% does not close on a leg of %.0f m/s' % (isp, 100 * efficiency, leg))
+
+
+ELECTRIC_PARTS = ('hulls', 'drives', 'arrays', 'radiators')
+# The legs of a solution with the source survey's reach hold when no year's leg moves by more than this between rounds.
+LEG_TOLERANCE_M_S = 0.5
+TUG_ASSETS = ('asteroid_tugs', *('electric_tug_' + part for part in ELECTRIC_PARTS))
+
+
+def source_reach(data):
+    """The water within each velocity change of the depot leg, where the coefficients carry the source survey's curve:
+    (velocity changes, cumulative contained water), from the first bin that holds any water. None otherwise."""
+    reach = data.get('source_reach')
+    if not reach:
+        return None
+    edges = [0.0] + list(reach['upper_edges_m_s'])
+    within = [0.0] + list(reach['within_kg'][:len(edges) - 1])
+    first = next(k for k in range(1, len(within)) if within[k] > 0.0)
+    points = [(edges[first - 1], 0.0)] + [(edges[k], within[k]) for k in range(first, len(within)) if within[k] > within[k - 1]]
+    return tuple(p[0] for p in points), tuple(p[1] for p in points)
+
+
+def leg_for(reach, drawn_kg):
+    """The impulsive leg to the sources mined when the contained water drawn so far is `drawn_kg`, the nearest drawn first."""
+    legs, within = reach
+    if drawn_kg > within[-1]:
+        raise ValueError('The water drawn exceeds all the water of the source survey within %.0f m/s' % legs[-1])
+    return float(np.interp(drawn_kg, within, legs))
+
+
+def with_legs(data, legs):
+    """The coefficients with the source tugs' leg given year by year."""
+    out = dict(data)
+    out['industrial'] = dict(data['industrial'])
+    out['industrial']['transport'] = dict(data['industrial']['transport'], source_dv_oneway_m_s={'by_year': [[y, legs[y]] for y in sorted(legs)]})
     return out
 
 def catalogue(data):
@@ -155,6 +287,17 @@ def catalogue(data):
     add('return_capsule_buses', 'commerce', s['prices']['spacecraft_USD2026_kg'], rr['durable_calendar_life_years'], dest='leo')
     for name, owner, mat, life in [('residential_bulk', 'settlement', 'bulk', s['lunar']['bulk_life_years']), ('residential_roads', 'settlement', 'bulk', s['lunar']['road_life_years']), ('residential_metal', 'settlement', 'metal', s['lunar']['metal_life_years']), ('industrial_civil_bulk', 'industry', 'bulk', s['lunar']['bulk_life_years']), ('industrial_civil_metal', 'industry', 'metal', s['lunar']['metal_life_years']), ('commercial_civil_bulk', 'commerce', 'bulk', s['lunar']['bulk_life_years']), ('commercial_civil_metal', 'commerce', 'metal', s['lunar']['metal_life_years']), ('service_civil_bulk', 'service', 'bulk', s['lunar']['bulk_life_years']), ('service_civil_metal', 'service', 'metal', s['lunar']['metal_life_years']), ('visitor_civil_bulk', 'hospitality', 'bulk', s['lunar']['bulk_life_years']), ('visitor_civil_metal', 'hospitality', 'metal', s['lunar']['metal_life_years'])]:
         add(name, owner, q['production']['local_bulk_value_USD2026_kg'] if mat == 'bulk' else q['production']['structural_metal_value_USD2026_kg'], life, 1.0, life, material=mat, civil=True)
+    # An electric tug's parts, where the coefficients name electric tugs: the hull and tanks as the chemical tug's, the
+    # arrays and radiators as the sources' own, and drives that wear out with the hours they thrust.
+    if propulsions(data) - {'chemical'}:
+        e = data['transport']['electric']
+        t = s['transport']
+        tug, solar, radiator = (data['templates'][n] for n in ('asteroid_tugs', 'source_solar', 'source_radiators'))
+        thrusting = e['source_powered_days'] * 24 * JULIAN_YEAR_DAYS / e['source_cycle_days'] * t['fleet_availability']
+        add('electric_tug_hulls', 'industry', tug['price'], tug['life'], tug['structural_share'], tug['structural_life'], dest='source')
+        add('electric_tug_drives', 'industry', e['drive_USD2026_W'] / e['drive_kg_W'], min(e['hull_life_years'], e['drive_powered_life_hours'] / thrusting), dest='source')
+        add('electric_tug_arrays', 'industry', solar['price'], e['source_array_life_years'], solar['structural_share'], solar['structural_life'], dest='source')
+        add('electric_tug_radiators', 'industry', radiator['price'], e['radiator_life_years'], radiator['structural_share'], radiator['structural_life'], dest='source')
     return out
 
 def commercial_targets(data, row):
@@ -554,31 +697,52 @@ def physical(data, row, f, bank=None, measures=None):
     recycle_back = f['recycled']['depot'] + f['recycled']['leo']
     leo_recycle = f['recycled']['leo']
     r = routes(data, row['year'])
-    earth = ferry(imports['surface'] + imports['depot'] + imports['source'] + leo_recycle + cabins, packed + local['leo'] + cabins, r['Earth'])
+    tugs = r['source']
+    earth_cargo = imports['surface'] + imports['depot'] + imports['source'] + leo_recycle + cabins
     moon = ferry(imports['surface'] + water + air + cabins, packed - source_packed + space_goods + cabins, r['Moon'])
     nitrogen = air * z['air_nitrogen_mass_fraction']
     oxygen = air - nitrogen
-    # The Earth leg's propellant: what the depot supplies from asteroid water, and what is bought on Earth and launched.
     leg = r['Earth']['leg']
-    earth_space = 0.0 if leg == 'earth' else earth['space_supply']
-    earth_launched = earth['burned'] if leg == 'earth' else earth['out'] if leg == 'split' else 0.0
-    depot_water = moon['burned'] + oxygen + earth_space + fuel
-    source_cargo = water + nitrogen + depot_water + local['depot'] + local['leo'] + source_packed + space_source_goods
-    source = ferry(source_cargo, imports['source'] + recycle_back, r['source'])
-    source_water = water + depot_water + source['burned']
+    # Xenon for the tugs is bought on Earth and carried to the depot with the other imports, so the ferries that carry
+    # it, the depot water they burn and the tug trips that bring that water close on one another within the year.
+    xenon = 0.0
+    for _ in range(200):
+        earth = ferry(earth_cargo + xenon if xenon else earth_cargo, packed + local['leo'] + cabins, r['Earth'])
+        # The Earth leg's propellant: what the depot supplies from asteroid water, and what is bought on Earth and launched.
+        earth_space = 0.0 if leg == 'earth' else earth['space_supply']
+        earth_launched = earth['burned'] if leg == 'earth' else earth['out'] if leg == 'split' else 0.0
+        depot_water = moon['burned'] + oxygen + earth_space + fuel
+        source_cargo = water + nitrogen + depot_water + local['depot'] + local['leo'] + source_packed + space_source_goods
+        source = ferry(source_cargo, imports['source'] + recycle_back, tugs)
+        if tugs['propellant'] != 'xenon':
+            break
+        supplied = source['space_supply']
+        if abs(supplied - xenon) <= 1e-12 * supplied:
+            xenon = supplied
+            break
+        xenon = supplied
+    else:
+        raise Unreachable('The tugs\' xenon from Earth does not close in year %d: each kilogram carried to the depot calls for more than one more' % row['year'], row['year'])
+    imports['depot'] += xenon
+    # The tugs' own propellant drawn from the sources' water: a chemical tug's hydrogen and oxygen, an electric tug's water.
+    tug_water = source['burned'] if tugs['propulsion'] == 'chemical' else source['burned'] / tugs['retention'] if tugs['propellant'] == 'water' else 0.0
+    source_water = water + depot_water + tug_water
     source_metal = sum((local[k] for k in ('source', 'depot', 'leo'))) + source_product
     source_virgin = sum((virgin[k] for k in ('source', 'depot', 'leo'))) + source_product - source_alloy
     feed = max(source_water / (z['water_grade'] * z['water_recovery']), nitrogen / (z['nitrogen_grade'] * z['nitrogen_recovery']), source_virgin / (z['metal_grade'] * z['metal_recovery']))
     process_kWh = feed * z['ore_kWh_kg'] + nitrogen * z['nitrogen_kWh_kg'] + source_metal * z['metal_refining_and_fabrication_kWh_kg']
-    chem = source['burned'] / z['water_to_hydrogen_mass_ratio'] * z['electrolysis_liquefaction_kWh_kg_H2']
+    # Electrolysis and liquefaction for the chemical tugs' propellant; an electric tug's efficiency counts its own feed.
+    chem = (source['burned'] if tugs['propulsion'] == 'chemical' else 0.0) / z['water_to_hydrogen_mass_ratio'] * z['electrolysis_liquefaction_kWh_kg_H2']
     source_W = (process_kWh + chem) * 1000 / HOURS + compute
     heat = (process_kWh + chem * (1 - z['hydrogen_HHV_kWh_kg'] / z['electrolysis_liquefaction_kWh_kg_H2'])) * 1000 / HOURS + compute
     depot_W = depot_water / z['water_to_hydrogen_mass_ratio'] * z['electrolysis_liquefaction_kWh_kg_H2'] * 1000 / HOURS
     ground = d['occupied_W'] * ps + lunar_W * s['economics']['capacity_margin'] / l['process_availability']
     operating_material = (resident_consumables + visitor_consumables + research_consumables + industrial_consumables + surface_alloy + source_alloy + earthfeed) * s['prices']['other_special_USD2026_kg']
+    if xenon:
+        operating_material += xenon * data['transport']['source_propulsion']['options'][tugs['propulsion']]['price_USD2026_kg']
     capsule_op = flights * (shield * s['prices']['spacecraft_USD2026_kg'] + deorbit * t['earth_propellant_USD2026_kg']) + packed * rr['Earth_ground_service_USD2026_per_payload_kg']
     LEO = sum(imports.values()) + earth_launched + travellers_launched
-    out = dict(lunar_raw_kg_year=raw, lunar_bulk_kg_year=bulk, lunar_metal_kg_year=metal, lunar_recycled_bulk_kg_year=rebulk, lunar_virgin_metal_kg_year=freshmetal, lunar_handling_kg_year=handling, lunar_process_W=lunar_W, source_feed_kg_year=feed, source_water_kg_year=source_water, source_nitrogen_kg_year=nitrogen, source_virgin_metal_kg_year=source_virgin, source_metal_kg_year=source_metal, source_process_W=source_W, source_heat_W=heat, source_feed_process_W=feed * z['ore_kWh_kg'] * 1000 / HOURS, source_product_refining_W=(nitrogen * z['nitrogen_kWh_kg'] + source_metal * z['metal_refining_and_fabrication_kWh_kg']) * 1000 / HOURS, depot_W=depot_W, depot_water_kg_year=depot_water, ground_firm_W=ground, Earth=earth, Moon=moon, source=source, source_cargo_kg_year=source_cargo, source_cargo_breakdown_kg_year=dict(resident_and_guest_water=water, nitrogen=nitrogen, depot_water=depot_water, local_offsite_structures=local['depot'] + local['leo'], source_exports=source_packed + space_source_goods), depot_water_breakdown_kg_year=dict(lunar_ferry_fuel=moon['burned'], oxygen_makeup=oxygen, Earth_ferry_fuel=earth_space, external_fuel_sales=fuel), source_water_breakdown_kg_year=dict(resident_and_guest_water=water, depot_water=depot_water, source_ferry_fuel=source['burned']), source_retained_tails_kg_year=feed - source_water - nitrogen - source_virgin, LEO_kg_year=LEO, imports_by_destination_kg_year=imports, local_fabrication_by_destination_kg_year=local, recycled_inventory_kg=bank, factory_floor_new_m2=newfloor, construction_floor_m2=data['settlement']['production_demand']['floor'] * gs + newfloor, operating_material_USD2026=operating_material, capsule_operations_USD2026=capsule_op, Earth_launch_USD2026=LEO * at(t['LEO_USD2026_kg'], row['year']) + earth_launched * t['earth_propellant_USD2026_kg'], Earth_leg_propellant_launched_kg_year=earth_launched, resource_provision_USD2026=raw * s['economics']['local_restoration_USD2026_kg_feed'] + feed * rv['finance']['source_transition_USD2026_per_kg_feed'])
+    out = dict(lunar_raw_kg_year=raw, lunar_bulk_kg_year=bulk, lunar_metal_kg_year=metal, lunar_recycled_bulk_kg_year=rebulk, lunar_virgin_metal_kg_year=freshmetal, lunar_handling_kg_year=handling, lunar_process_W=lunar_W, source_feed_kg_year=feed, source_water_kg_year=source_water, source_nitrogen_kg_year=nitrogen, source_virgin_metal_kg_year=source_virgin, source_metal_kg_year=source_metal, source_process_W=source_W, source_heat_W=heat, source_feed_process_W=feed * z['ore_kWh_kg'] * 1000 / HOURS, source_product_refining_W=(nitrogen * z['nitrogen_kWh_kg'] + source_metal * z['metal_refining_and_fabrication_kWh_kg']) * 1000 / HOURS, depot_W=depot_W, depot_water_kg_year=depot_water, ground_firm_W=ground, Earth=earth, Moon=moon, source=source, source_cargo_kg_year=source_cargo, source_cargo_breakdown_kg_year=dict(resident_and_guest_water=water, nitrogen=nitrogen, depot_water=depot_water, local_offsite_structures=local['depot'] + local['leo'], source_exports=source_packed + space_source_goods), depot_water_breakdown_kg_year=dict(lunar_ferry_fuel=moon['burned'], oxygen_makeup=oxygen, Earth_ferry_fuel=earth_space, external_fuel_sales=fuel), source_water_breakdown_kg_year=dict(resident_and_guest_water=water, depot_water=depot_water, source_ferry_fuel=tug_water), source_retained_tails_kg_year=feed - source_water - nitrogen - source_virgin, source_tugs=dict(propulsion=tugs['propulsion'], leg_m_s=tugs['dv'], dry_kg=tugs['dry'], bus_W=tugs.get('bus_W', 0.0), propellant_kg_year=source['burned'], xenon_from_Earth_kg_year=xenon), LEO_kg_year=LEO, imports_by_destination_kg_year=imports, local_fabrication_by_destination_kg_year=local, recycled_inventory_kg=bank, factory_floor_new_m2=newfloor, construction_floor_m2=data['settlement']['production_demand']['floor'] * gs + newfloor, operating_material_USD2026=operating_material, capsule_operations_USD2026=capsule_op, Earth_launch_USD2026=LEO * at(t['LEO_USD2026_kg'], row['year']) + earth_launched * t['earth_propellant_USD2026_kg'], Earth_leg_propellant_launched_kg_year=earth_launched, resource_provision_USD2026=raw * s['economics']['local_restoration_USD2026_kg_feed'] + feed * rv['finance']['source_transition_USD2026_per_kg_feed'])
     if measures is not None:
         measures.after_physical(data, row, f, out)
     return out
@@ -622,7 +786,11 @@ def requirements(data, row, f, measures=None):
     r = routes(data, row['year'])
     counts = {name: math.ceil(f[name]['trips'] * margin / (a['cycles'] * t['fleet_availability'])) for name, a in r.items()}
     out['lunar_landers'] = counts['Moon'] * r['Moon']['dry']
-    out['asteroid_tugs'] = counts['source'] * r['source']['dry']
+    tugs = r['source']
+    out['asteroid_tugs'] = counts['source'] * tugs['dry'] if tugs['propulsion'] == 'chemical' else 0.0
+    if propulsions(data) - {'chemical'}:
+        for part in ELECTRIC_PARTS:
+            out['electric_tug_' + part] = 0.0 if tugs['propulsion'] == 'chemical' else counts['source'] * tugs['parts'][part]
     for name, a in original['assets'].items():
         if name.startswith('Earth_'):
             out[name] = counts['Earth'] * a['mass_kg'] / original['engineering']['counts']['Earth_route_ships'] * r['Earth']['dry_scale']
@@ -744,14 +912,41 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
     end = rows[-1]['year']
     for y in range(end + 1, end + 41):
         rows.append(dict(rows[-1], year=y, new_residential_people=0.0, commissioned_people=0.0))
-    seed, seed_record = seed_stock(data, rows[0], measures=measures)
+    # Where the coefficients carry the source survey's water by velocity change, the tugs mine the nearest water first:
+    # each round dates every year's leg by the contained water drawn before it and half of that year's, and the
+    # solution holds when the legs stop moving as well as the requirements.
+    reach = source_reach(data)
+    grade = data['industrial']['source']['water_grade']
+    if reach:
+        # The founding deployment, an average of its eight years, flies the leg of half the water it draws; that leg is
+        # found by sizing the deployment again until it holds, and stands in the schedule before the opening.
+        middle = rows[0]['year'] - 4
+        founding_leg = leg_for(reach, 0.0)
+        for _ in range(50):
+            data = with_legs(data, {middle: founding_leg, **{r['year']: founding_leg for r in rows}})
+            seed, seed_record = seed_stock(data, rows[0], measures=measures)
+            try:
+                moved = leg_for(reach, 0.5 * seed_record['source_feed_kg'] * grade)
+            except ValueError as exc:
+                raise Unreachable('%s, in the founding deployment' % exc, middle) from None
+            if abs(moved - founding_leg) <= LEG_TOLERANCE_M_S:
+                break
+            founding_leg = moved
+        else:
+            raise ValueError('The founding deployment\'s leg did not settle')
+        seed_record['source_leg_m_s'] = founding_leg
+    else:
+        seed, seed_record = seed_stock(data, rows[0], measures=measures)
     targets = {r['year']: requirements(data, r, physical(data, r, blank_flow(), measures=measures), measures) for r in rows}
     residuals = []
+    moves = []
     for iteration in range(max_iterations):
         flows, stocks, events = cohort_ledger(data, rows, targets, seed, measures)
         bank = None
         maximum = 0.0
         next_targets = {}
+        drawn = seed_record['source_feed_kg'] * grade
+        legs = {}
         for index, row in enumerate(rows):
             workrow = dict(row, new_residential_people=(row.get('new_residential_people', 0.0) + (rows[index - 1].get('new_residential_people', 0.0) if index else 0.0)) / 2)
             y = row['year']
@@ -762,11 +957,23 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
             error = max((max(0.0, v - previous.get(k, 0.0)) / max(1.0, v) for k, v in need.items()), default=0.0)
             maximum = max(maximum, error)
             next_targets[y] = {k: max(v, previous.get(k, 0.0)) for k, v in need.items()}
+            if reach:
+                # The years after the programme, kept so that its last years buy their equipment, hold its last leg.
+                year_draw = f['source_feed_kg_year'] * grade
+                try:
+                    legs[y] = leg_for(reach, drawn + 0.5 * year_draw) if y <= end else legs[end]
+                except ValueError as exc:
+                    raise Unreachable('%s, in year %d' % (exc, y), y) from None
+                drawn += year_draw
         residuals.append(maximum)
         targets = next_targets
-        if maximum < tolerance:
+        if reach:
+            stated = data['industrial']['transport']['source_dv_oneway_m_s']
+            moves.append(max(abs(legs[y] - at(stated, y)) for y in legs))
+            data = with_legs(data, {middle: founding_leg, **legs})
+        if maximum < tolerance and (not reach or moves[-1] <= LEG_TOLERANCE_M_S):
             break
-    converged = residuals[-1] < tolerance
+    converged = residuals[-1] < tolerance and (not reach or moves[-1] <= LEG_TOLERANCE_M_S)
     flows, stocks, events = cohort_ledger(data, rows, targets, seed, measures)
     # The quantities do not depend on prices, so learning prices the same orders once they are known.
     learned = learning_index(data, seed, events)
@@ -856,9 +1063,10 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
             unit = a['price'] if ev['component'] == 'active' or a['civil'] else data['economy']['production']['local_fabrication_value_USD2026_kg']
             if ev['component'] == 'active':
                 drivers[n] = drivers.get(n, 0.0) + ev['mass_kg'] * (1 - ev['locally_made_share']) / 2 * unit * ev.get('price_index', 1.0) * I
-        tug_import = sum((ev['mass_kg'] * (1 - ev['locally_made_share']) / 2 for ev in yearly_events if ev['asset'] == 'asteroid_tugs' and ev['component'] == 'active'))
+        tug_import = sum((ev['mass_kg'] * (1 - ev['locally_made_share']) / 2 for ev in yearly_events if ev['asset'] in TUG_ASSETS and ev['component'] == 'active'))
         physical_row['source_tug_component_import_kg_year'] = tug_import
-        physical_row['source_tug_count'] = stocks[y].get('asteroid_tugs', 0.0) / routes(data, y)['source']['dry']
+        tugs = routes(data, y)['source']
+        physical_row['source_tug_count'] = stocks[y].get('asteroid_tugs', 0.0) / tugs['dry'] if tugs['propulsion'] == 'chemical' else stocks[y].get('electric_tug_hulls', 0.0) / tugs['parts']['hulls']
         cumulative_lunar += physical_row['lunar_raw_kg_year']
         cumulative_source += physical_row['source_feed_kg_year']
         if y <= end:
@@ -879,4 +1087,7 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
     seed_record['cost']['additional_preproduction_cost_USD2041'] = seed_record['additional_preproduction_cost_USD2041']
     seed_record['total_resource_provision_USD2041'] = seed_record['cost']['resource_provision_USD2041'] + late_phys['resource_provision_USD2026'] * I
     seed_record['cost']['total_USD2041'] = sum((v for k, v in seed_record['cost'].items() if k != 'identified_service_hardware_USD2041'))
-    return dict(seed=seed_record, annual=result, component_orders=[r for r in events if r['order_year'] <= end], convergence=dict(converged=converged, iterations=iteration + 1, relative_requirement_residual=residuals[-1], history=residuals), first_capacity_shortfall=next((r['year'] for r in result if not r['feasible']), None))
+    convergence = dict(converged=converged, iterations=iteration + 1, relative_requirement_residual=residuals[-1], history=residuals)
+    if reach:
+        convergence.update(largest_leg_move_m_s=moves[-1], leg_moves_m_s=moves)
+    return dict(seed=seed_record, annual=result, component_orders=[r for r in events if r['order_year'] <= end], convergence=convergence, first_capacity_shortfall=next((r['year'] for r in result if not r['feasible']), None))

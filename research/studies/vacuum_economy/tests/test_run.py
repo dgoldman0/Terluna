@@ -5,11 +5,14 @@ import math
 import pytest
 from provisioning.vacuum_industry import model
 from research.studies.enclosed_returns import markets
-from research.studies.vacuum_economy import programme as definition, run
+from research.studies.vacuum_economy import inputs, programme as definition, run
 
 SAVED = json.loads((run.HERE / 'results/economy.json').read_text())
 CASES = {c['name']: c for c in SAVED['cases']}
-SCENARIO_CASES = sorted(name for name, c in CASES.items() if c['scenario'] != 'first_pass')
+CASES_LISTED = {c['name']: c for c in run.cases()}
+# The cases with an account; a case whose tugs cannot reach the water its orders draw records the year instead.
+ACCOUNTED = sorted(name for name, c in CASES.items() if c['status'] == 'conditional_account')
+SCENARIO_CASES = sorted(name for name in ACCOUNTED if CASES[name]['scenario'] != 'first_pass')
 STAGED = [('receipts_USD2041_year', 'annual_gross'), ('operating_cash_USD2041_year', 'annual_operating_available'),
           ('cumulative_receipts_USD2041', 'cumulative_gross_receipts'), ('payouts_USD2041', 'owner_payouts'),
           ('initial_funding_USD2041', 'initial_full_funding'), ('additional_equity_USD2041', 'additional_equity_required'),
@@ -24,7 +27,29 @@ def test_the_saved_product_names_its_producer_its_inputs_and_every_listed_case()
     assert SAVED['producer']['sha256'] == run.digest(run.__file__)
     assert SAVED['dependencies'] == run.dependencies()
     assert list(CASES) == [c['name'] for c in run.cases()]
-    assert all(c['status'] == 'conditional_account' and c['first_capacity_shortfall'] is None for c in SAVED['cases'])
+    for c in SAVED['cases']:
+        if c['status'] == 'freight_unreachable':
+            assert inputs.freight_of(CASES_LISTED[c['name']]) != 'founding' and 8 <= c['unreachable_year'] <= 260
+        else:
+            assert c['status'] == 'conditional_account' and c['first_capacity_shortfall'] is None
+
+
+def test_the_founding_freight_flies_one_leg_and_the_reach_lengthens_it_as_water_is_drawn():
+    for c in SAVED['cases']:
+        if c['status'] != 'conditional_account':
+            continue
+        # The record keeps its case's own fields, the freight it states among them, and gives its tugs apart.
+        assert {k: c.get(k) for k in ('freight', 'reach')} == {k: CASES_LISTED[c['name']].get(k) for k in ('freight', 'reach')}
+        legs = [c['tugs']['at_horizon'][str(h)]['leg_m_s'] for h in (100, 200, 220)]
+        assert c['tugs']['mode'] == inputs.freight_of(c) == inputs.freight_of(CASES_LISTED[c['name']])
+        if c['tugs']['mode'] == 'founding':
+            assert c['tugs']['reach_percentile'] is None and legs == [2500.0] * 3
+            assert all(v['kind'] == 'chemical' for v in c['tugs']['at_horizon'].values())
+        else:
+            kinds = [c['tugs']['at_horizon'][str(h)]['kind'] for h in (100, 200, 220)]
+            factor = inputs.sources()['engineering']['transport']['source_propulsion']['low_thrust_dv_factor']
+            impulsive = [leg / (1 if kind == 'chemical' else factor) for leg, kind in zip(legs, kinds)]
+            assert all(a <= b + 1e-6 for a, b in zip(impulsive, impulsive[1:]))
 
 
 def test_the_first_pass_cases_reproduce_the_staged_appraisal_exactly():
@@ -52,7 +77,7 @@ def test_a_case_solved_afresh_equals_its_saved_record():
     assert json.loads(json.dumps(run.solve(case))) == CASES['first_pass:services']
 
 
-@pytest.mark.parametrize('name', sorted(CASES))
+@pytest.mark.parametrize('name', ACCOUNTED)
 def test_the_periods_add_up_to_the_checkpoints(name):
     case = CASES[name]
     periods = case['periods']
@@ -73,7 +98,7 @@ def test_the_periods_add_up_to_the_checkpoints(name):
             assert math.isclose(p['paid_to_Earth_share'], p['paid_to_Earth_USD2041'] / p['costs_USD2041'], rel_tol=1e-12)
 
 
-@pytest.mark.parametrize('name', sorted(CASES))
+@pytest.mark.parametrize('name', ACCOUNTED)
 def test_material_drawn_only_grows_and_financing_changes_no_receipt(name):
     case = CASES[name]
     drawn = [case['material_drawn'][str(h)] for h in (100, 200, 220)]
@@ -131,7 +156,7 @@ def test_a_case_changes_coefficients_in_its_own_copy_and_a_misspelt_path_is_refu
         run.engineering(dict(case, engineering={'industrial.transport.earth_legs': 'split'}))
 
 
-@pytest.mark.parametrize('name', sorted(CASES))
+@pytest.mark.parametrize('name', ACCOUNTED)
 def test_traffic_counts_the_launches_and_the_earth_legs_propellant_by_arrangement(name):
     case = CASES[name]
     leg = case.get('engineering', {}).get('industrial.transport.earth_leg', 'space')
@@ -154,7 +179,7 @@ def test_fuelling_the_first_years_from_earth_lowers_the_opening_funding_and_ends
     assert split['material_drawn']['200']['asteroid_feed_kg'] < switched['material_drawn']['200']['asteroid_feed_kg'] <= space['material_drawn']['200']['asteroid_feed_kg']
 
 
-@pytest.mark.parametrize('name', sorted(CASES))
+@pytest.mark.parametrize('name', ACCOUNTED)
 def test_the_workforce_record_shows_working_parts_made_only_where_a_case_asks_for_them(name):
     case = CASES[name]
     able = model.local_working_parts(run.engineering(case))['share']
@@ -216,7 +241,7 @@ def test_a_scenario_case_takes_its_launch_price_and_local_manufacture_from_its_s
         assert node[leaf] == own.get(path, entry['value'])
 
 
-@pytest.mark.parametrize('name', sorted(CASES))
+@pytest.mark.parametrize('name', ACCOUNTED)
 def test_the_resource_account_uses_no_more_than_the_feed_yields(name):
     case = CASES[name]
     for horizon in ('100', '200', '220'):

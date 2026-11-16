@@ -44,8 +44,9 @@ EARTH = ('capital_external_USD2041', 'operating_external_replacement_USD2041',
 
 
 def dependencies():
-    """The files the cases are computed from: the study's inputs, the list of cases and the solved schedules."""
-    return inputs.dependencies((HERE / 'cases.json', RESIDENTS))
+    """The files the cases are computed from: the study's inputs, the list of cases, the solved schedules and the tugs
+    chosen for each scenario."""
+    return inputs.dependencies((HERE / 'cases.json', RESIDENTS, inputs.FREIGHT))
 
 
 @lru_cache(maxsize=None)
@@ -117,6 +118,22 @@ def traffic(physical, coefficients, horizons):
                            ferry_trips_year=year['Earth']['trips'], lunar_landings_year=year['Moon']['trips'],
                            source_tug_trips_year=year['source']['trips'])
     return out
+
+
+def freight(case, physical, coefficients, horizons):
+    """The tugs to the sources: the freight the case flies, and in the year of each horizon the kind of tug, the leg it
+    flies, its dry mass and power, the fleet, its propellant and any xenon bought on Earth."""
+    rows = {row['year']: row['physical'] for row in physical['annual']}
+    mode = inputs.freight_of(case)
+    out = {}
+    for h in horizons:
+        tugs = rows[h]['source_tugs']
+        out[str(h)] = dict(kind=tugs['propulsion'], leg_m_s=tugs['leg_m_s'], tug_dry_kg=tugs['dry_kg'], tug_bus_W=tugs['bus_W'],
+                           tugs=rows[h]['source_tug_count'], propellant_kg_year=tugs['propellant_kg_year'],
+                           xenon_from_Earth_kg_year=tugs['xenon_from_Earth_kg_year'])
+    return dict(mode=mode, stated=inputs.stated_freight(case), periods_no_kind_reaches=inputs.unreached(case),
+                reach_percentile=coefficients['source_reach']['percentile'] if mode != 'founding' else None,
+                propulsion=coefficients['industrial']['transport'].get('source_propulsion', 'chemical'), at_horizon=out)
 
 
 def workforce(physical, loops, coefficients, horizons):
@@ -243,13 +260,17 @@ def solve(case):
     s = sources()
     money = dict(s['money'], horizons=s['programme']['horizons'])
     coefficients = engineering(case)
-    if case['scenario'] == 'first_pass':
-        decided = None
-        book = orders(case)
-        physical, loops = industry.build(coefficients, s['recovery'], book, case['recovery'])
-    else:
-        decided = decide(case)
-        book, physical, loops = decided['book'], decided['physical'], decided['loops']
+    try:
+        if case['scenario'] == 'first_pass':
+            decided = None
+            book = orders(case)
+            physical, loops = industry.build(coefficients, s['recovery'], book, case['recovery'])
+        else:
+            decided = decide(case)
+            book, physical, loops = decided['book'], decided['physical'], decided['loops']
+    except model.Unreachable as exc:
+        # The tugs the case names cannot reach the water its orders draw from some year on.
+        return dict(case, status='freight_unreachable', unreachable_year=exc.year, unreachable=str(exc))
     record = dict(case, convergence=physical['convergence'], first_capacity_shortfall=physical['first_capacity_shortfall'])
     if not revised.valid(physical):
         return dict(record, status='physical_requirements_unresolved')
@@ -274,6 +295,7 @@ def solve(case):
                              for mode in FINANCING for horizon in money['horizons']],
                 periods=periods_account(book, physical, path, financed['U_credit'], money, s['periods']),
                 material_drawn=drawn, traffic=traffic(physical, coefficients, money['horizons']),
+                tugs=freight(case, physical, coefficients, money['horizons']),
                 workforce=workforce(physical, loops, coefficients, money['horizons']))
 
 
@@ -317,7 +339,13 @@ def product(selected, jobs=1):
                              'Material drawn is cumulative from year zero. Traffic is for the year of each horizon: the mass launched '
                              'from Earth, cargo and any propellant for the Earth leg together, the launches that carry it at the '
                              'stated payload and the pads those launches need at the stated launches a pad a year, and the round '
-                             'trips of the ferries, the lunar landers and the tugs to the sources. Workforce gives the jobs of the same '
+                             'trips of the ferries, the lunar landers and the tugs to the sources. Tugs gives the freight to the sources '
+                             '(a record keeps its case\'s own fields, the freight it states among them): '
+                             'the freight the case states and the freight it flies, the periods whose water no kind of tug reaches where '
+                             'the scenario\'s choice found any, the percentile of the source survey\'s water it reads, and in the year '
+                             'of each horizon the kind of tug, the leg it flies as a velocity change each way, its dry mass and power, the '
+                             'tugs in service, their propellant and any xenon bought on Earth; a case whose tugs cannot reach the water its '
+                             'orders draw has the status freight_unreachable and the year. Workforce gives the jobs of the same '
                              'year, the share of the available workforce they fill, the jobs that make working parts of machinery '
                              'and the share of those parts made in place for orders of that year. Resources give, cumulatively to each '
                              'horizon, the feed mined at the sources, what its water, nitrogen and metal yield at the stated grades '

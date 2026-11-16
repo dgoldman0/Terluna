@@ -107,8 +107,13 @@ def build(data, spec, book, measures='combined', residual_water_allowance=True):
         return {y: min(reach[y], reach.get(y + 1, reach[y])) for y in years}
 
     staffed = {y: 0. for y in years}
-    physical, loops, e = solve_once(with_staffing(staffed), spec, book, measures, residual_water_allowance)
-    staffed = free_hands(physical, e)
+    try:
+        physical, loops, e = solve_once(with_staffing(staffed), spec, book, measures, residual_water_allowance)
+        staffed = free_hands(physical, e)
+    except model.Unreachable:
+        # Freight that cannot fly with every working part bought from Earth, whose imports the ferries' depot water and
+        # the tugs that fetch it must carry: the staffing starts from the whole able share and is lowered from there.
+        staffed = {y: 1. for y in years}
     for passes in range(1, STAFFING_PASSES + 1):
         physical, loops, e = solve_once(with_staffing(staffed), spec, book, measures, residual_water_allowance)
         over = [r['year'] for r in physical['annual'] if r['working_parts_jobs'] > 0 and r['capacity_summary']['resident_workforce'] > 1 + 1e-9]

@@ -71,7 +71,7 @@ EQUITY_TOLERANCE_USD2041 = 1e6
 
 def dependencies():
     """Every file a solution reads: the coupled study's inputs and this module."""
-    return inputs.dependencies((HERE / 'residents.py',))
+    return inputs.dependencies((HERE / 'residents.py', inputs.FREIGHT))
 
 
 def schedule(programme, rates, limit=None):
@@ -147,10 +147,22 @@ class Solver:
         if choice is None:
             start = time.monotonic()
             programme = self.s['programme'] if residents is None else self.programme(residents)
-            decided = self.decision(programme, REFERENCE if residents is None else RAMP).decide()
+            ramp = REFERENCE if residents is None else RAMP
+            unreachable = None
+            try:
+                decided = self.decision(programme, ramp).decide()
+            except model.Unreachable as exc:
+                # The chosen tugs cannot reach the water these sales draw: the sales are chosen with the founding freight,
+                # and each trial still flies the chosen tugs, so that reach may bind the schedule.
+                unreachable = dict(year=exc.year, reason=str(exc))
+                self.log(label, 'with the chosen tugs unreachable from year', exc.year, '- choosing the sales with the founding freight')
+                founding = inputs.engineering(dict(self.case, freight='founding'))
+                decided = mix.Decision(programme, ramp, self.s['scenarios'], self.scenario, founding, self.s['recovery'], 'combined',
+                                       self.s['periods'], self.hotel, allowance=self.s['money']['capital_cost_allowance_fraction']).decide()
             if not revised.valid(decided['physical']):
                 raise ValueError('The choice of sales is not physically resolved for ' + self.scenario)
             choice = {key: decided[key] for key in ('prices', 'first', 'first_account', 'first_book', 'late', 'order', 'dropped', 'starts')}
+            choice['chosen_with_founding_freight_as_tugs_unreachable'] = unreachable
             choice['opening_funding_USD2041'] = finance.plan(decided['book'], decided['physical'], self.money)['seed']
             self.log(label, 'made in', round(time.monotonic() - start), 's:', choice['order'], 'dropped', choice['dropped'], 'late', choice['starts'])
             if self.state is not None:
@@ -244,9 +256,16 @@ class Solver:
         residents = schedule(self.s['programme'], rates, limit)
         programme = self.programme(residents, ramp)
         d = self.decision(programme, ramp)
-        book, physical, loops, use, own = self.fill(d, programme, ramp, choice)
-        out = dict(rates=list(rates), residents_at={str(h): definition.population(programme, ramp, h) for h in (100, 200, 220)},
-                   workforce_use=use, own_work_room=own)
+        out = dict(rates=list(rates), residents_at={str(h): definition.population(programme, ramp, h) for h in (100, 200, 220)})
+        try:
+            book, physical, loops, use, own = self.fill(d, programme, ramp, choice)
+        except model.Unreachable as exc:
+            # The tugs cannot reach the water this schedule draws: the schedule is not sustained, its margin just short.
+            out.update(sustained=False, failed=['reach'], binding='reach', margin=-1e-9, unreachable_year=exc.year, unreachable=str(exc))
+            out['seconds'] = round(time.monotonic() - start, 1)
+            self.log('trial %d' % self.trials, ' '.join('%.4f' % r for r in rates), 'not sustained', 'binding reach in year', exc.year, out['seconds'], 's')
+            return out
+        out.update(workforce_use=use, own_work_room=own)
         if own < 0 or not revised.valid(physical) or use > 1 + 1e-6:
             out.update(sustained=False, failed=['hands'], binding='hands', margin=min(own, 1 - use, -1e-9))
         else:
@@ -352,7 +371,8 @@ class Solver:
         for number in range(1, ROUNDS + 1):
             rates, record, refused = self.march(choice, warm, label='round %d' % number)
             rounds.append(dict(choice_made_on=REFERENCE if number == 1 else 'the schedule of round %d' % (number - 1), rates=rates,
-                               periods=record, lines_in_order=choice['order'], lines_dropped=choice['dropped'], lines_starting_late=choice['starts']))
+                               periods=record, lines_in_order=choice['order'], lines_dropped=choice['dropped'], lines_starting_late=choice['starts'],
+                               sales_chosen_with_founding_freight_as_tugs_unreachable=choice.get('chosen_with_founding_freight_as_tugs_unreachable')))
             if refused:
                 last = refused
                 break
@@ -435,7 +455,10 @@ def product(scenarios, jobs=1):
                              'of the sizing; income, the change '
                              'in what the system holds over years 201 to 220. Hands is the least share of the workforce the '
                              'residents\' own work leaves, in any year; a schedule fails it where that work exceeds the '
-                             'workforce, or where the lines and the making of parts could not be fitted to it. A trial also '
+                             'workforce, or where the lines and the making of parts could not be fitted to it. Reach fails where '
+                             'the scenario\'s tugs cannot reach the water the schedule draws, and the trial names the year; where '
+                             'they cannot reach the water of the constant-growth ramp\'s sales, those sales are chosen with the '
+                             'founding freight, as the round records. A trial also '
                              'gives its receipts and the contained water drawn from the sources to each horizon against the '
                              'source survey\'s wider near-Earth screen and broader near-Earth population, at their 5th, 50th '
                              'and 95th percentiles. While a schedule is sought '

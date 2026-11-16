@@ -1,0 +1,1484 @@
+{
+ "candidates": [
+  "chemical",
+  "electric_water",
+  "electric_xenon"
+ ],
+ "dependencies": {
+  "provisioning/vacuum_industry/engineering.json": "f4b00770ce5116ad296943079e18bf6c5713168437a163122deb4eb454a9bc24",
+  "provisioning/vacuum_industry/industry.py": "92f4eb35783fbbf8112666a8dc0b4e431bd7ab3cb72ed2de558bae051dfb866f",
+  "provisioning/vacuum_industry/model.py": "37c9c685bd536f3fa8f1479a24dc0dcef49787096f76d3050bcf3d6e011c7a24",
+  "provisioning/vacuum_industry/recovery.json": "7cb1d7c240155bba64a9b55eca60d01caae8e81ce697f7e078baef3aa0bc4ed0",
+  "provisioning/vacuum_industry/recovery.py": "b469b7f760c40f81e617e96effdd2de8958b8843cb3c4df5e616eaf01ec479c9",
+  "research/studies/complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef",
+  "research/studies/complex_returns/credit.py": "d2a2ae1efc0c41d9ef78fe1ee524f9dc451ade280d7372c3363e645060830ea8",
+  "research/studies/complex_returns/credit_inputs.json": "cc64e28175fe66424e223b369350008b4cd546a280b1cdf02f9ebec2031a1329",
+  "research/studies/complex_returns/inputs/economy.json": "960f413d25d2d9a61dea32cfa9c1695df57268ec708b1ab1a86b59bffcc44961",
+  "research/studies/complex_returns/inputs/strategy_profiles.json": "68de393762a3411e0fc3fb2956c8d16c936c46019db70995cc3ccd5654449a9c",
+  "research/studies/complex_returns/policy.py": "ab23ba83a5d91f495627caae56b3503060f29b070bb96d77ae9914d84239a189",
+  "research/studies/complex_returns/returns_inputs.json": "7ce3e23c1fb215fc45fdac6f2629952f238f98edc806cd38223b1776a8d1c2b0",
+  "research/studies/complex_returns/staged.py": "49635fa8607a5f8b1d5b467765aeff419daac4cf701eeeef2d35dea955e0198a",
+  "research/studies/complex_returns/staged_inputs.json": "31eb2fee9cda8744ba4e9c729c62d54f132a16ecb6c2c60ea52e3d6dc11cf2a5",
+  "research/studies/complex_returns/strategies.py": "f33d10804a4018e9de888272254b56fe3178016731d1c87063ea35f97f80cd19",
+  "research/studies/complex_returns/strategy_inputs.json": "ad8d3af2ec0a5614492536abd3bb10a21681cf08c17b8e52a46ab8af65500284",
+  "research/studies/enclosed_returns/bottlenecks.py": "5cea14e1212eb86cb81cb9f41cd257632d0ad105f1789ecac7fdf7e62acebc46",
+  "research/studies/enclosed_returns/enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
+  "research/studies/enclosed_returns/finance.py": "3afd3842278f044caeec81a8ae05dd542d7045541cd750a8d593ae5edf16c647",
+  "research/studies/enclosed_returns/finance_inputs.json": "6e40693196ce4c89e6c066a6187f3ecffc425a1c36818c1460dbc3c0fe74a287",
+  "research/studies/enclosed_returns/markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb",
+  "research/studies/enclosed_returns/revised.py": "2c16da4fa6e0c35210f9e8eab8ceba3b3276c8b9ceac5c736a6dc31c7bc2ddd0",
+  "research/studies/enclosed_returns/revised_inputs.json": "7a7eb7cfac5408bf5ec2842097c4a382c5e3102407b139c382bf03a4decd3494",
+  "research/studies/vacuum_economy/demand.py": "58d644f2d305e3ffd9ea789611ca8ae57f2747c2d6695adf894385eafaff974e",
+  "research/studies/vacuum_economy/freight.py": "198ff2a1737b7d0d1742dbea81fedbe9106e24771d0ac02b4e5eeab47ddc10f9",
+  "research/studies/vacuum_economy/inputs.py": "47962c1263e45cf27358a0b1f8ce0393b5a34fa6ca2cc433cd43479c78ad59b3",
+  "research/studies/vacuum_economy/mix.py": "af2e8e339a9a5db380fbb5f7bc5aa2897782fbf0a948504c4350b33ab8b8079e",
+  "research/studies/vacuum_economy/programme.json": "c7fcb9452fb7f418b5cdb5bd74173c07f3d8a82335ef3cd22d3bcb2ecefa1c26",
+  "research/studies/vacuum_economy/programme.py": "e5fde0000cf33b640c49bd902a3c75ae1ce22ca52984cc947ac3a91a0a01aa17",
+  "research/studies/vacuum_economy/run.py": "e895ea7a4a7adf415677b28ab82169d6cb993640e8d5ac6be7d8f73a0f32dd06",
+  "research/studies/vacuum_economy/scenarios.json": "be731c9be612a048d15ac65c15c857a44c615bc9dfdf846ae3cd558d5215dcce",
+  "resources/source_access/results/population.json.gz": "0615e385e90876742d91fffbfbd4877080e8e374a9cc9b16323ecf106368a934",
+  "resources/source_access/results/reach.json.gz": "262333233c3a40468090870ff148969c9b5966967966ce3b2c9eaa7ed1af3512"
+ },
+ "development_target": "electric_water_target",
+ "evidence": "A comparison of conditional sizings: the same orders filled with each kind of tug, the tugs mining the nearest water of the source survey first. Costs follow the stated coefficients; no tug of these kinds has been built for bulk cargo, and the velocity changes are figures of merit, not trajectories.",
+ "producer": {
+  "path": "research/studies/vacuum_economy/freight.py",
+  "sha256": "198ff2a1737b7d0d1742dbea81fedbe9106e24771d0ac02b4e5eeab47ddc10f9"
+ },
+ "reading_rule": "For each scenario, the constant-growth orders as decided with chemical tugs, sized with each kind of tug. Each period gives the industry's capital and operating costs over its years, undiscounted, the founding deployment in the first, whether every year was feasible, the largest yearly xenon bought on Earth against the world's output, and the range of the leg flown. A kind that could not fly some year was sized again with the cheapest kind that flies throughout from the period of that year, and stands only before it. The schedule chosen takes the cheapest kind standing in each period.",
+ "scenarios": {
+  "central": {
+   "chosen": {
+    "by_period": [
+     {
+      "first_year": 0,
+      "kind": "chemical",
+      "last_year": 7
+     },
+     {
+      "first_year": 8,
+      "kind": "chemical",
+      "last_year": 25
+     },
+     {
+      "first_year": 26,
+      "kind": "chemical",
+      "last_year": 50
+     },
+     {
+      "first_year": 51,
+      "kind": "chemical",
+      "last_year": 100
+     },
+     {
+      "first_year": 101,
+      "kind": "chemical",
+      "last_year": 150
+     },
+     {
+      "first_year": 151,
+      "kind": "chemical",
+      "last_year": 200
+     },
+     {
+      "first_year": 201,
+      "kind": "chemical",
+      "last_year": 220
+     }
+    ],
+    "periods_no_kind_reaches": [],
+    "schedule": "chemical"
+   },
+   "chosen_with_target": {
+    "by_period": [
+     {
+      "first_year": 0,
+      "kind": "chemical",
+      "last_year": 7
+     },
+     {
+      "first_year": 8,
+      "kind": "chemical",
+      "last_year": 25
+     },
+     {
+      "first_year": 26,
+      "kind": "chemical",
+      "last_year": 50
+     },
+     {
+      "first_year": 51,
+      "kind": "chemical",
+      "last_year": 100
+     },
+     {
+      "first_year": 101,
+      "kind": "chemical",
+      "last_year": 150
+     },
+     {
+      "first_year": 151,
+      "kind": "chemical",
+      "last_year": 200
+     },
+     {
+      "first_year": 201,
+      "kind": "chemical",
+      "last_year": 220
+     }
+    ],
+    "periods_no_kind_reaches": [],
+    "schedule": "chemical"
+   },
+   "comparison": {
+    "chemical": {
+     "failed_year": null,
+     "failure": null,
+     "handover": null,
+     "periods": [
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 0.0,
+        "capital_local_USD2041": 0.0,
+        "capital_resource_provision_USD2041": 0.0,
+        "operating_external_logistics_materials_USD2041": 0.0,
+        "operating_external_replacement_USD2041": 0.0,
+        "operating_external_services_USD2041": 0.0,
+        "operating_local_payroll_USD2041": 0.0,
+        "operating_local_replacement_USD2041": 0.0,
+        "operating_resource_provision_USD2041": 0.0
+       },
+       "feasible": true,
+       "first_year": 0,
+       "industry_cost_USD2041": 812016225996.38,
+       "last_year": 7,
+       "leg_m_s": null,
+       "source_feed_kg": 0.0,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 361458713296.8512,
+        "capital_local_USD2041": 1494131120.000245,
+        "capital_resource_provision_USD2041": 5417247210.761814,
+        "operating_external_logistics_materials_USD2041": 92621399950.5433,
+        "operating_external_replacement_USD2041": 407742795747.7168,
+        "operating_external_services_USD2041": 2406897166.961387,
+        "operating_local_payroll_USD2041": 20144230236.690777,
+        "operating_local_replacement_USD2041": 863953802.4088223,
+        "operating_resource_provision_USD2041": 11859524929.024721
+       },
+       "feasible": true,
+       "first_year": 8,
+       "industry_cost_USD2041": 904008893460.959,
+       "last_year": 25,
+       "leg_m_s": [
+        1093.7471615943248,
+        1312.4900694284831
+       ],
+       "source_feed_kg": 109205317120.31552,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 613004765000.1141,
+        "capital_local_USD2041": 5011880577.020152,
+        "capital_resource_provision_USD2041": 23778558403.4111,
+        "operating_external_logistics_materials_USD2041": 220653054426.8753,
+        "operating_external_replacement_USD2041": 1686540804731.295,
+        "operating_external_services_USD2041": 11889388152.791704,
+        "operating_local_payroll_USD2041": 95104981631.06166,
+        "operating_local_replacement_USD2041": 5702397092.991484,
+        "operating_resource_provision_USD2041": 70686561801.97629
+       },
+       "feasible": true,
+       "first_year": 26,
+       "industry_cost_USD2041": 2732372391817.5366,
+       "last_year": 50,
+       "leg_m_s": [
+        1332.3388880024888,
+        1712.0553656282912
+       ],
+       "source_feed_kg": 601345641488.6785,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 746257998263.3,
+        "capital_local_USD2041": 154701408696.30853,
+        "capital_resource_provision_USD2041": 107925779497.5823,
+        "operating_external_logistics_materials_USD2041": 695272938688.4445,
+        "operating_external_replacement_USD2041": 2893166629284.6855,
+        "operating_external_services_USD2041": 63742578586.75306,
+        "operating_local_payroll_USD2041": 365082674914.0665,
+        "operating_local_replacement_USD2041": 698343845570.1705,
+        "operating_resource_provision_USD2041": 396444388481.39954
+       },
+       "feasible": true,
+       "first_year": 51,
+       "industry_cost_USD2041": 6120938241982.711,
+       "last_year": 100,
+       "leg_m_s": [
+        1723.278577302813,
+        2173.7966643462532
+       ],
+       "source_feed_kg": 3194165917872.586,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 1858607322278.9368,
+        "capital_local_USD2041": 805820493350.7734,
+        "capital_resource_provision_USD2041": 526963124237.6151,
+        "operating_external_logistics_materials_USD2041": 1813412754077.8157,
+        "operating_external_replacement_USD2041": 2206508030504.561,
+        "operating_external_services_USD2041": 282178285429.08325,
+        "operating_local_payroll_USD2041": 715806307732.8499,
+        "operating_local_replacement_USD2041": 1955680122838.4473,
+        "operating_resource_provision_USD2041": 1768288592220.4326
+       },
+       "feasible": true,
+       "first_year": 101,
+       "industry_cost_USD2041": 11933265032670.516,
+       "last_year": 150,
+       "leg_m_s": [
+        2186.336574764774,
+        2695.664100309799
+       ],
+       "source_feed_kg": 14502438029835.113,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 7431982002849.224,
+        "capital_local_USD2041": 2796553742599.4927,
+        "capital_resource_provision_USD2041": 2931682348446.2583,
+        "operating_external_logistics_materials_USD2041": 7638076343511.086,
+        "operating_external_replacement_USD2041": 4963132134276.079,
+        "operating_external_services_USD2041": 1440681730546.0237,
+        "operating_local_payroll_USD2041": 1804219247914.0522,
+        "operating_local_replacement_USD2041": 4398918832127.315,
+        "operating_resource_provision_USD2041": 9261493900458.588
+       },
+       "feasible": true,
+       "first_year": 151,
+       "industry_cost_USD2041": 42666740282728.12,
+       "last_year": 200,
+       "leg_m_s": [
+        2710.6428974610367,
+        3043.175423268211
+       ],
+       "source_feed_kg": 77168608152484.38,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 239873988030.93408,
+        "capital_local_USD2041": 155954005548.99835,
+        "capital_resource_provision_USD2041": 23679568911.6641,
+        "operating_external_logistics_materials_USD2041": 6116220557607.555,
+        "operating_external_replacement_USD2041": 3009639689088.672,
+        "operating_external_services_USD2041": 884860581537.2429,
+        "operating_local_payroll_USD2041": 1475775519986.3137,
+        "operating_local_replacement_USD2041": 2667522384481.994,
+        "operating_resource_provision_USD2041": 7572892007755.066
+       },
+       "feasible": true,
+       "first_year": 201,
+       "industry_cost_USD2041": 22146418302948.44,
+       "last_year": 220,
+       "leg_m_s": [
+        3045.1356547186056,
+        3084.798323757156
+       ],
+       "source_feed_kg": 48673516032564.7,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      }
+     ],
+     "total_industry_cost_USD2041": 87315759371604.66
+    },
+    "electric_water": {
+     "failed_year": 214,
+     "failure": "The electric tug at 2039 s and 12% does not close on a leg of 5655 m/s, in year 214; sized again: The electric tug at 2039 s and 12% does not close on a leg of 5743 m/s, in year 166",
+     "handover": {
+      "from_year": 201,
+      "to": "chemical"
+     },
+     "periods": null,
+     "total_industry_cost_USD2041": null
+    },
+    "electric_water_target": {
+     "failed_year": null,
+     "failure": null,
+     "handover": null,
+     "periods": [
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 0.0,
+        "capital_local_USD2041": 0.0,
+        "capital_resource_provision_USD2041": 0.0,
+        "operating_external_logistics_materials_USD2041": 0.0,
+        "operating_external_replacement_USD2041": 0.0,
+        "operating_external_services_USD2041": 0.0,
+        "operating_local_payroll_USD2041": 0.0,
+        "operating_local_replacement_USD2041": 0.0,
+        "operating_resource_provision_USD2041": 0.0
+       },
+       "feasible": true,
+       "first_year": 0,
+       "industry_cost_USD2041": 932229634973.3242,
+       "last_year": 7,
+       "leg_m_s": null,
+       "source_feed_kg": 0.0,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 489409255842.8232,
+        "capital_local_USD2041": 1754977672.5845273,
+        "capital_resource_provision_USD2041": 4752469464.1560545,
+        "operating_external_logistics_materials_USD2041": 97132263771.62994,
+        "operating_external_replacement_USD2041": 455790378114.9987,
+        "operating_external_services_USD2041": 3121240712.0599904,
+        "operating_local_payroll_USD2041": 20062596302.422546,
+        "operating_local_replacement_USD2041": 710526460.2277185,
+        "operating_resource_provision_USD2041": 9617941175.192219
+       },
+       "feasible": true,
+       "first_year": 8,
+       "industry_cost_USD2041": 1082351649516.0948,
+       "last_year": 25,
+       "leg_m_s": [
+        1697.2583308893632,
+        2038.923900542859
+       ],
+       "source_feed_kg": 90551487350.42932,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 838779992774.7388,
+        "capital_local_USD2041": 6396344622.165038,
+        "capital_resource_provision_USD2041": 20505108155.754375,
+        "operating_external_logistics_materials_USD2041": 246276696523.1648,
+        "operating_external_replacement_USD2041": 2026391103800.3147,
+        "operating_external_services_USD2041": 15897464416.109486,
+        "operating_local_payroll_USD2041": 94743432048.98267,
+        "operating_local_replacement_USD2041": 5002070315.887911,
+        "operating_resource_provision_USD2041": 55377480053.43356
+       },
+       "feasible": true,
+       "first_year": 26,
+       "industry_cost_USD2041": 3309369692710.5513,
+       "last_year": 50,
+       "leg_m_s": [
+        2070.4578685280744,
+        2638.1123890223453
+       ],
+       "source_feed_kg": 482078404375.16327,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 1129367175130.364,
+        "capital_local_USD2041": 215635250663.1849,
+        "capital_resource_provision_USD2041": 83700730829.96806,
+        "operating_external_logistics_materials_USD2041": 825862869268.8564,
+        "operating_external_replacement_USD2041": 4086430215574.9937,
+        "operating_external_services_USD2041": 81993302764.11043,
+        "operating_local_payroll_USD2041": 363273593272.2194,
+        "operating_local_replacement_USD2041": 836291489843.6902,
+        "operating_resource_provision_USD2041": 289774624423.6136
+       },
+       "feasible": true,
+       "first_year": 51,
+       "industry_cost_USD2041": 7912329251771.0,
+       "last_year": 100,
+       "leg_m_s": [
+        2660.387554881857,
+        3302.619346708093
+       ],
+       "source_feed_kg": 2354489553954.6616,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 2662538201996.9062,
+        "capital_local_USD2041": 1368563867404.6426,
+        "capital_resource_provision_USD2041": 356090208381.1338,
+        "operating_external_logistics_materials_USD2041": 1980377627893.2314,
+        "operating_external_replacement_USD2041": 3527864680420.2637,
+        "operating_external_services_USD2041": 342045506080.0662,
+        "operating_local_payroll_USD2041": 702899225806.3541,
+        "operating_local_replacement_USD2041": 3126883513002.3384,
+        "operating_resource_provision_USD2041": 1138546260914.2947
+       },
+       "feasible": true,
+       "first_year": 101,
+       "industry_cost_USD2041": 15205809091899.23,
+       "last_year": 150,
+       "leg_m_s": [
+        3318.087421908029,
+        4060.506559342472
+       ],
+       "source_feed_kg": 9363592599537.725,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 10754820633331.055,
+        "capital_local_USD2041": 5031168715101.287,
+        "capital_resource_provision_USD2041": 1833169987955.1174,
+        "operating_external_logistics_materials_USD2041": 8523018659397.818,
+        "operating_external_replacement_USD2041": 11063668142158.572,
+        "operating_external_services_USD2041": 1756771774285.1252,
+        "operating_local_payroll_USD2041": 1746242081378.102,
+        "operating_local_replacement_USD2041": 9806215638608.521,
+        "operating_resource_provision_USD2041": 5507832621454.1875
+       },
+       "feasible": true,
+       "first_year": 151,
+       "industry_cost_USD2041": 56022908253669.79,
+       "last_year": 200,
+       "leg_m_s": [
+        4077.9279686716545,
+        4818.593594646224
+       ],
+       "source_feed_kg": 46024352049776.81,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 494790186002.5368,
+        "capital_local_USD2041": 331209136045.16223,
+        "capital_resource_provision_USD2041": 19676492879.03905,
+        "operating_external_logistics_materials_USD2041": 7061087134044.76,
+        "operating_external_replacement_USD2041": 7747285166043.834,
+        "operating_external_services_USD2041": 1096850193361.4053,
+        "operating_local_payroll_USD2041": 1447309146206.4548,
+        "operating_local_replacement_USD2041": 6866801139594.655,
+        "operating_resource_provision_USD2041": 4495047047024.143
+       },
+       "feasible": true,
+       "first_year": 201,
+       "industry_cost_USD2041": 29560055641201.99,
+       "last_year": 220,
+       "leg_m_s": [
+        4820.477429215624,
+        4858.140803105206
+       ],
+       "source_feed_kg": 28892306363208.03,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      }
+     ],
+     "total_industry_cost_USD2041": 114025053215741.98
+    },
+    "electric_xenon": {
+     "failed_year": 34,
+     "failure": "The tugs' xenon from Earth does not close in year 34: each kilogram carried to the depot calls for more than one more; sized again: The tugs' xenon from Earth does not close in year 25: each kilogram carried to the depot calls for more than one more",
+     "handover": {
+      "from_year": 26,
+      "to": "chemical"
+     },
+     "periods": null,
+     "total_industry_cost_USD2041": null
+    }
+   }
+  },
+  "high": {
+   "chosen": {
+    "by_period": [
+     {
+      "first_year": 0,
+      "kind": "chemical",
+      "last_year": 7
+     },
+     {
+      "first_year": 8,
+      "kind": "chemical",
+      "last_year": 25
+     },
+     {
+      "first_year": 26,
+      "kind": "chemical",
+      "last_year": 50
+     },
+     {
+      "first_year": 51,
+      "kind": "chemical",
+      "last_year": 100
+     },
+     {
+      "first_year": 101,
+      "kind": "chemical",
+      "last_year": 150
+     },
+     {
+      "first_year": 151,
+      "kind": "chemical",
+      "last_year": 200
+     },
+     {
+      "first_year": 201,
+      "kind": "chemical",
+      "last_year": 220
+     }
+    ],
+    "periods_no_kind_reaches": [
+     {
+      "first_year": 51,
+      "last_year": 100
+     },
+     {
+      "first_year": 151,
+      "last_year": 200
+     },
+     {
+      "first_year": 201,
+      "last_year": 220
+     }
+    ],
+    "schedule": "chemical"
+   },
+   "chosen_with_target": {
+    "by_period": [
+     {
+      "first_year": 0,
+      "kind": "chemical",
+      "last_year": 7
+     },
+     {
+      "first_year": 8,
+      "kind": "chemical",
+      "last_year": 25
+     },
+     {
+      "first_year": 26,
+      "kind": "chemical",
+      "last_year": 50
+     },
+     {
+      "first_year": 51,
+      "kind": "chemical",
+      "last_year": 100
+     },
+     {
+      "first_year": 101,
+      "kind": "chemical",
+      "last_year": 150
+     },
+     {
+      "first_year": 151,
+      "kind": "chemical",
+      "last_year": 200
+     },
+     {
+      "first_year": 201,
+      "kind": "chemical",
+      "last_year": 220
+     }
+    ],
+    "periods_no_kind_reaches": [
+     {
+      "first_year": 51,
+      "last_year": 100
+     },
+     {
+      "first_year": 151,
+      "last_year": 200
+     },
+     {
+      "first_year": 201,
+      "last_year": 220
+     }
+    ],
+    "schedule": "chemical"
+   },
+   "comparison": {
+    "chemical": {
+     "failed_year": 206,
+     "failure": "The water drawn exceeds all the water of the source survey within 20000 m/s, in year 206",
+     "handover": {
+      "orders_to_year": 150,
+      "to": null
+     },
+     "periods": [
+      {
+       "available": true,
+       "by_category_USD2041": {
+        "capital_external_USD2041": 0.0,
+        "capital_local_USD2041": 0.0,
+        "capital_resource_provision_USD2041": 0.0,
+        "operating_external_logistics_materials_USD2041": 0.0,
+        "operating_external_replacement_USD2041": 0.0,
+        "operating_external_services_USD2041": 0.0,
+        "operating_local_payroll_USD2041": 0.0,
+        "operating_local_replacement_USD2041": 0.0,
+        "operating_resource_provision_USD2041": 0.0
+       },
+       "feasible": true,
+       "first_year": 0,
+       "industry_cost_USD2041": 894256193083.0625,
+       "last_year": 7,
+       "leg_m_s": null,
+       "source_feed_kg": 0.0,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "available": true,
+       "by_category_USD2041": {
+        "capital_external_USD2041": 718205559459.2827,
+        "capital_local_USD2041": 4957978349.02245,
+        "capital_resource_provision_USD2041": 11436970141.187037,
+        "operating_external_logistics_materials_USD2041": 66152238953.62511,
+        "operating_external_replacement_USD2041": 472358737991.75757,
+        "operating_external_services_USD2041": 4888762767.806428,
+        "operating_local_payroll_USD2041": 28792389478.63822,
+        "operating_local_replacement_USD2041": 3150742592.798575,
+        "operating_resource_provision_USD2041": 25172277796.184547
+       },
+       "feasible": true,
+       "first_year": 8,
+       "industry_cost_USD2041": 1335115657530.3025,
+       "last_year": 25,
+       "leg_m_s": [
+        1153.578698328542,
+        1500.5002013072224
+       ],
+       "source_feed_kg": 232665352710.95193,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "available": true,
+       "by_category_USD2041": {
+        "capital_external_USD2041": 2370855488558.2163,
+        "capital_local_USD2041": 22326961236.254204,
+        "capital_resource_provision_USD2041": 82874713385.9031,
+        "operating_external_logistics_materials_USD2041": 209492872533.76834,
+        "operating_external_replacement_USD2041": 1325364897305.335,
+        "operating_external_services_USD2041": 55687036752.768364,
+        "operating_local_payroll_USD2041": 73726574809.7523,
+        "operating_local_replacement_USD2041": 4594838156.069119,
+        "operating_resource_provision_USD2041": 404205465816.3621
+       },
+       "feasible": true,
+       "first_year": 26,
+       "industry_cost_USD2041": 4549128848554.429,
+       "last_year": 50,
+       "leg_m_s": [
+        1521.7846851884642,
+        2107.5914774321973
+       ],
+       "source_feed_kg": 3118409705108.8125,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "available": true,
+       "by_category_USD2041": {
+        "capital_external_USD2041": 23946221496636.617,
+        "capital_local_USD2041": 372222865060.4027,
+        "capital_resource_provision_USD2041": 1752439178895.7847,
+        "operating_external_logistics_materials_USD2041": 3985053563792.4336,
+        "operating_external_replacement_USD2041": 16988130244327.65,
+        "operating_external_services_USD2041": 1207679994266.8887,
+        "operating_local_payroll_USD2041": 1507421340734.001,
+        "operating_local_replacement_USD2041": 35546264774.96687,
+        "operating_resource_provision_USD2041": 9361384475943.312
+       },
+       "feasible": false,
+       "first_year": 51,
+       "industry_cost_USD2041": 59156099424432.06,
+       "last_year": 100,
+       "leg_m_s": [
+        2142.6606107511857,
+        3024.5820990408456
+       ],
+       "source_feed_kg": 71253165725029.69,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "available": true,
+       "by_category_USD2041": {
+        "capital_external_USD2041": 66782529483886.32,
+        "capital_local_USD2041": 8707882449086.292,
+        "capital_resource_provision_USD2041": 11179916898678.328,
+        "operating_external_logistics_materials_USD2041": 34408766316933.53,
+        "operating_external_replacement_USD2041": 44797105668349.86,
+        "operating_external_services_USD2041": 19588603883997.613,
+        "operating_local_payroll_USD2041": 7989307664956.569,
+        "operating_local_replacement_USD2041": 4107727699225.6587,
+        "operating_resource_provision_USD2041": 182555530881037.16
+       },
+       "feasible": true,
+       "first_year": 101,
+       "industry_cost_USD2041": 380117370946151.3,
+       "last_year": 150,
+       "leg_m_s": [
+        3029.021658645709,
+        4495.881404228299
+       ],
+       "source_feed_kg": 1243122470153003.5,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 151,
+       "industry_cost_USD2041": null,
+       "last_year": 200,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 201,
+       "industry_cost_USD2041": null,
+       "last_year": 220,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      }
+     ],
+     "total_industry_cost_USD2041": null
+    },
+    "electric_water": {
+     "failed_year": 153,
+     "failure": "The electric tug at 2039 s and 12% does not close on a leg of 5672 m/s, in year 153",
+     "handover": {
+      "orders_to_year": 25,
+      "to": null
+     },
+     "periods": [
+      {
+       "available": true,
+       "by_category_USD2041": {
+        "capital_external_USD2041": 0.0,
+        "capital_local_USD2041": 0.0,
+        "capital_resource_provision_USD2041": 0.0,
+        "operating_external_logistics_materials_USD2041": 0.0,
+        "operating_external_replacement_USD2041": 0.0,
+        "operating_external_services_USD2041": 0.0,
+        "operating_local_payroll_USD2041": 0.0,
+        "operating_local_replacement_USD2041": 0.0,
+        "operating_resource_provision_USD2041": 0.0
+       },
+       "feasible": true,
+       "first_year": 0,
+       "industry_cost_USD2041": 1349330210616.5935,
+       "last_year": 7,
+       "leg_m_s": null,
+       "source_feed_kg": 0.0,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "available": true,
+       "by_category_USD2041": {
+        "capital_external_USD2041": 2263363922136.9736,
+        "capital_local_USD2041": 3539898241.8693347,
+        "capital_resource_provision_USD2041": 11791473387.83361,
+        "operating_external_logistics_materials_USD2041": 70627813852.57864,
+        "operating_external_replacement_USD2041": 556647015972.5435,
+        "operating_external_services_USD2041": 8792510831.77619,
+        "operating_local_payroll_USD2041": 29463389754.825695,
+        "operating_local_replacement_USD2041": 1039102027.3047829,
+        "operating_resource_provision_USD2041": 20219247706.54617
+       },
+       "feasible": true,
+       "first_year": 8,
+       "industry_cost_USD2041": 2965484373912.2515,
+       "last_year": 25,
+       "leg_m_s": [
+        1812.4577992851137,
+        2343.1618335706457
+       ],
+       "source_feed_kg": 203939957940.17084,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 26,
+       "industry_cost_USD2041": null,
+       "last_year": 50,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 51,
+       "industry_cost_USD2041": null,
+       "last_year": 100,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 101,
+       "industry_cost_USD2041": null,
+       "last_year": 150,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 151,
+       "industry_cost_USD2041": null,
+       "last_year": 200,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 201,
+       "industry_cost_USD2041": null,
+       "last_year": 220,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      }
+     ],
+     "total_industry_cost_USD2041": null
+    },
+    "electric_water_target": {
+     "failed_year": 217,
+     "failure": "The electric tug at 2000 s and 30% does not close on a leg of 10737 m/s, in year 217",
+     "handover": {
+      "orders_to_year": 50,
+      "to": null
+     },
+     "periods": [
+      {
+       "available": true,
+       "by_category_USD2041": {
+        "capital_external_USD2041": 0.0,
+        "capital_local_USD2041": 0.0,
+        "capital_resource_provision_USD2041": 0.0,
+        "operating_external_logistics_materials_USD2041": 0.0,
+        "operating_external_replacement_USD2041": 0.0,
+        "operating_external_services_USD2041": 0.0,
+        "operating_local_payroll_USD2041": 0.0,
+        "operating_local_replacement_USD2041": 0.0,
+        "operating_resource_provision_USD2041": 0.0
+       },
+       "feasible": true,
+       "first_year": 0,
+       "industry_cost_USD2041": 1052709595102.8086,
+       "last_year": 7,
+       "leg_m_s": null,
+       "source_feed_kg": 0.0,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "available": true,
+       "by_category_USD2041": {
+        "capital_external_USD2041": 1192637296673.359,
+        "capital_local_USD2041": 5618100538.542742,
+        "capital_resource_provision_USD2041": 11203767231.946575,
+        "operating_external_logistics_materials_USD2041": 70133420516.48187,
+        "operating_external_replacement_USD2041": 571123384824.4045,
+        "operating_external_services_USD2041": 6800699989.982691,
+        "operating_local_payroll_USD2041": 28674408380.486088,
+        "operating_local_replacement_USD2041": 2558998641.2609286,
+        "operating_resource_provision_USD2041": 19868717996.740746
+       },
+       "feasible": true,
+       "first_year": 8,
+       "industry_cost_USD2041": 1908618794793.205,
+       "last_year": 25,
+       "leg_m_s": [
+        1800.5955902508072,
+        2303.983703617872
+       ],
+       "source_feed_kg": 197135975712.80807,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "available": true,
+       "by_category_USD2041": {
+        "capital_external_USD2041": 1596571234490.4304,
+        "capital_local_USD2041": 18813480650.29249,
+        "capital_resource_provision_USD2041": 37836622764.66704,
+        "operating_external_logistics_materials_USD2041": 247852400831.77298,
+        "operating_external_replacement_USD2041": 2532004167879.9707,
+        "operating_external_services_USD2041": 67517029279.656136,
+        "operating_local_payroll_USD2041": 76919964869.53348,
+        "operating_local_replacement_USD2041": 4768361512.35293,
+        "operating_resource_provision_USD2041": 295274991967.2865
+       },
+       "feasible": true,
+       "first_year": 26,
+       "industry_cost_USD2041": 4877558254245.963,
+       "last_year": 50,
+       "leg_m_s": [
+        2395.188467342983,
+        3187.591863788183
+       ],
+       "source_feed_kg": 2132639620471.054,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 51,
+       "industry_cost_USD2041": null,
+       "last_year": 100,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 101,
+       "industry_cost_USD2041": null,
+       "last_year": 150,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 151,
+       "industry_cost_USD2041": null,
+       "last_year": 200,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      },
+      {
+       "available": false,
+       "by_category_USD2041": null,
+       "feasible": false,
+       "first_year": 201,
+       "industry_cost_USD2041": null,
+       "last_year": 220,
+       "leg_m_s": null,
+       "source_feed_kg": null,
+       "within_world_xenon_supply": null,
+       "xenon_from_Earth_largest_kg_year": null
+      }
+     ],
+     "total_industry_cost_USD2041": null
+    },
+    "electric_xenon": {
+     "failed_year": 26,
+     "failure": "The tugs' xenon from Earth does not close in year 26: each kilogram carried to the depot calls for more than one more; sized again: The tugs' xenon from Earth does not close in year 24: each kilogram carried to the depot calls for more than one more",
+     "handover": {
+      "orders_to_year": 25,
+      "to": null
+     },
+     "periods": null,
+     "total_industry_cost_USD2041": null
+    }
+   }
+  },
+  "low": {
+   "chosen": {
+    "by_period": [
+     {
+      "first_year": 0,
+      "kind": "chemical",
+      "last_year": 7
+     },
+     {
+      "first_year": 8,
+      "kind": "chemical",
+      "last_year": 25
+     },
+     {
+      "first_year": 26,
+      "kind": "chemical",
+      "last_year": 50
+     },
+     {
+      "first_year": 51,
+      "kind": "chemical",
+      "last_year": 100
+     },
+     {
+      "first_year": 101,
+      "kind": "chemical",
+      "last_year": 150
+     },
+     {
+      "first_year": 151,
+      "kind": "chemical",
+      "last_year": 200
+     },
+     {
+      "first_year": 201,
+      "kind": "chemical",
+      "last_year": 220
+     }
+    ],
+    "periods_no_kind_reaches": [],
+    "schedule": "chemical"
+   },
+   "chosen_with_target": {
+    "by_period": [
+     {
+      "first_year": 0,
+      "kind": "chemical",
+      "last_year": 7
+     },
+     {
+      "first_year": 8,
+      "kind": "chemical",
+      "last_year": 25
+     },
+     {
+      "first_year": 26,
+      "kind": "chemical",
+      "last_year": 50
+     },
+     {
+      "first_year": 51,
+      "kind": "chemical",
+      "last_year": 100
+     },
+     {
+      "first_year": 101,
+      "kind": "chemical",
+      "last_year": 150
+     },
+     {
+      "first_year": 151,
+      "kind": "chemical",
+      "last_year": 200
+     },
+     {
+      "first_year": 201,
+      "kind": "chemical",
+      "last_year": 220
+     }
+    ],
+    "periods_no_kind_reaches": [],
+    "schedule": "chemical"
+   },
+   "comparison": {
+    "chemical": {
+     "failed_year": null,
+     "failure": null,
+     "handover": null,
+     "periods": [
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 0.0,
+        "capital_local_USD2041": 0.0,
+        "capital_resource_provision_USD2041": 0.0,
+        "operating_external_logistics_materials_USD2041": 0.0,
+        "operating_external_replacement_USD2041": 0.0,
+        "operating_external_services_USD2041": 0.0,
+        "operating_local_payroll_USD2041": 0.0,
+        "operating_local_replacement_USD2041": 0.0,
+        "operating_resource_provision_USD2041": 0.0
+       },
+       "feasible": true,
+       "first_year": 0,
+       "industry_cost_USD2041": 1005169597790.0399,
+       "last_year": 7,
+       "leg_m_s": null,
+       "source_feed_kg": 0.0,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 165963554709.17914,
+        "capital_local_USD2041": 6515537414.304099,
+        "capital_resource_provision_USD2041": 3704925066.696804,
+        "operating_external_logistics_materials_USD2041": 113640556798.48265,
+        "operating_external_replacement_USD2041": 36327617238.45982,
+        "operating_external_services_USD2041": 1876999200.5456548,
+        "operating_local_payroll_USD2041": 1378813496.8859062,
+        "operating_local_replacement_USD2041": 4713699103.842535,
+        "operating_resource_provision_USD2041": 10363050036.8624
+       },
+       "feasible": true,
+       "first_year": 8,
+       "industry_cost_USD2041": 344484753065.25903,
+       "last_year": 25,
+       "leg_m_s": [
+        1097.3731573153668,
+        1283.8423758406198
+       ],
+       "source_feed_kg": 88578579102.43073,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 169839295056.10745,
+        "capital_local_USD2041": 36254362275.52336,
+        "capital_resource_provision_USD2041": 12738473535.086563,
+        "operating_external_logistics_materials_USD2041": 120181271626.05637,
+        "operating_external_replacement_USD2041": 80546179740.9524,
+        "operating_external_services_USD2041": 5948635169.582564,
+        "operating_local_payroll_USD2041": 4416213661.451084,
+        "operating_local_replacement_USD2041": 41235854656.87893,
+        "operating_resource_provision_USD2041": 32769518404.336773
+       },
+       "feasible": true,
+       "first_year": 26,
+       "industry_cost_USD2041": 503929804125.97546,
+       "last_year": 50,
+       "leg_m_s": [
+        1297.4593049648859,
+        1560.0861887265169
+       ],
+       "source_feed_kg": 286436597667.8497,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 1158127502828.6226,
+        "capital_local_USD2041": 318751957190.45074,
+        "capital_resource_provision_USD2041": 101817134909.71297,
+        "operating_external_logistics_materials_USD2041": 770999406309.8751,
+        "operating_external_replacement_USD2041": 464340877687.08704,
+        "operating_external_services_USD2041": 44158481219.72513,
+        "operating_local_payroll_USD2041": 32469813340.38173,
+        "operating_local_replacement_USD2041": 307760814280.9762,
+        "operating_resource_provision_USD2041": 243488537791.69562
+       },
+       "feasible": true,
+       "first_year": 51,
+       "industry_cost_USD2041": 3441914525558.5273,
+       "last_year": 100,
+       "leg_m_s": [
+        1567.4445306384632,
+        2017.167832057792
+       ],
+       "source_feed_kg": 2173649523662.0276,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 5735647785175.168,
+        "capital_local_USD2041": 1491027170020.0051,
+        "capital_resource_provision_USD2041": 617310101831.1713,
+        "operating_external_logistics_materials_USD2041": 3980082352139.479,
+        "operating_external_replacement_USD2041": 2673229595871.9897,
+        "operating_external_services_USD2041": 250950221903.6038,
+        "operating_local_payroll_USD2041": 229387521011.2288,
+        "operating_local_replacement_USD2041": 1771791708891.8994,
+        "operating_resource_provision_USD2041": 1427665015502.4092
+       },
+       "feasible": true,
+       "first_year": 101,
+       "industry_cost_USD2041": 18177091472346.953,
+       "last_year": 150,
+       "leg_m_s": [
+        2028.5362958153266,
+        2623.374905576604
+       ],
+       "source_feed_kg": 12908398227353.426,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 25073974125976.1,
+        "capital_local_USD2041": 5987141280878.059,
+        "capital_resource_provision_USD2041": 3534347644525.644,
+        "operating_external_logistics_materials_USD2041": 19347504189402.71,
+        "operating_external_replacement_USD2041": 10434071901730.92,
+        "operating_external_services_USD2041": 1435815206797.6345,
+        "operating_local_payroll_USD2041": 988399426165.8412,
+        "operating_local_replacement_USD2041": 6915605795333.283,
+        "operating_resource_provision_USD2041": 8737461057702.444
+       },
+       "feasible": true,
+       "first_year": 151,
+       "industry_cost_USD2041": 82454320628512.64,
+       "last_year": 200,
+       "leg_m_s": [
+        2637.3621813128757,
+        3041.172145716509
+       ],
+       "source_feed_kg": 77731701698127.42,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 549085649392.91833,
+        "capital_local_USD2041": 213029214927.0473,
+        "capital_resource_provision_USD2041": 26897639713.08634,
+        "operating_external_logistics_materials_USD2041": 16468521997307.166,
+        "operating_external_replacement_USD2041": 7083021516874.721,
+        "operating_external_services_USD2041": 858225870489.7756,
+        "operating_local_payroll_USD2041": 1012992586818.1716,
+        "operating_local_replacement_USD2041": 4694560772812.315,
+        "operating_resource_provision_USD2041": 7378619456014.222
+       },
+       "feasible": true,
+       "first_year": 201,
+       "industry_cost_USD2041": 38284954704349.42,
+       "last_year": 220,
+       "leg_m_s": [
+        3043.056047413306,
+        3081.7551611395124
+       ],
+       "source_feed_kg": 47470011500476.52,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      }
+     ],
+     "total_industry_cost_USD2041": 144211865485748.8
+    },
+    "electric_water": {
+     "failed_year": 219,
+     "failure": "The electric tug at 2039 s and 12% does not close on a leg of 5654 m/s, in year 219; sized again: The electric tug at 2039 s and 12% does not close on a leg of 5812 m/s, in year 173",
+     "handover": {
+      "from_year": 201,
+      "to": "chemical"
+     },
+     "periods": null,
+     "total_industry_cost_USD2041": null
+    },
+    "electric_water_target": {
+     "failed_year": null,
+     "failure": null,
+     "handover": null,
+     "periods": [
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 0.0,
+        "capital_local_USD2041": 0.0,
+        "capital_resource_provision_USD2041": 0.0,
+        "operating_external_logistics_materials_USD2041": 0.0,
+        "operating_external_replacement_USD2041": 0.0,
+        "operating_external_services_USD2041": 0.0,
+        "operating_local_payroll_USD2041": 0.0,
+        "operating_local_replacement_USD2041": 0.0,
+        "operating_resource_provision_USD2041": 0.0
+       },
+       "feasible": true,
+       "first_year": 0,
+       "industry_cost_USD2041": 1181460904320.9592,
+       "last_year": 7,
+       "leg_m_s": null,
+       "source_feed_kg": 0.0,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 227222431926.48846,
+        "capital_local_USD2041": 9752731631.261255,
+        "capital_resource_provision_USD2041": 3142053316.451094,
+        "operating_external_logistics_materials_USD2041": 123867102630.80637,
+        "operating_external_replacement_USD2041": 74881108586.10095,
+        "operating_external_services_USD2041": 2338338270.1588016,
+        "operating_local_payroll_USD2041": 1301109828.7304077,
+        "operating_local_replacement_USD2041": 8537126560.416103,
+        "operating_resource_provision_USD2041": 8481424138.673909
+       },
+       "feasible": true,
+       "first_year": 8,
+       "industry_cost_USD2041": 459523426889.08734,
+       "last_year": 25,
+       "leg_m_s": [
+        1703.6822120563968,
+        1997.1491320165107
+       ],
+       "source_feed_kg": 72894047212.09381,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 321541260284.61127,
+        "capital_local_USD2041": 43892611221.15447,
+        "capital_resource_provision_USD2041": 12024573471.296936,
+        "operating_external_logistics_materials_USD2041": 166449175634.64594,
+        "operating_external_replacement_USD2041": 246045989897.69324,
+        "operating_external_services_USD2041": 7970808100.970325,
+        "operating_local_payroll_USD2041": 4222418436.058169,
+        "operating_local_replacement_USD2041": 60739639757.5001,
+        "operating_resource_provision_USD2041": 27131562154.868233
+       },
+       "feasible": true,
+       "first_year": 26,
+       "industry_cost_USD2041": 890018038958.7987,
+       "last_year": 50,
+       "leg_m_s": [
+        2015.3545769324614,
+        2452.653613047352
+       ],
+       "source_feed_kg": 245940354148.63904,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 2021494935247.308,
+        "capital_local_USD2041": 437984203658.08435,
+        "capital_resource_provision_USD2041": 86639311463.8931,
+        "operating_external_logistics_materials_USD2041": 1048813353082.6659,
+        "operating_external_replacement_USD2041": 1445833002976.7937,
+        "operating_external_services_USD2041": 58400569467.54129,
+        "operating_local_payroll_USD2041": 31090132970.818405,
+        "operating_local_replacement_USD2041": 589390637673.8848,
+        "operating_resource_provision_USD2041": 186273188483.18912
+       },
+       "feasible": true,
+       "first_year": 51,
+       "industry_cost_USD2041": 5905919335024.179,
+       "last_year": 100,
+       "leg_m_s": [
+        2462.7201734733917,
+        3143.785737034861
+       ],
+       "source_feed_kg": 1710311050263.693,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 8586852253421.176,
+        "capital_local_USD2041": 2637960351046.9824,
+        "capital_resource_provision_USD2041": 441231027976.6575,
+        "operating_external_logistics_materials_USD2041": 4827898241653.15,
+        "operating_external_replacement_USD2041": 6517318365153.693,
+        "operating_external_services_USD2041": 315594707965.1253,
+        "operating_local_payroll_USD2041": 219330110124.03046,
+        "operating_local_replacement_USD2041": 4001408974062.068,
+        "operating_resource_provision_USD2041": 958735909028.2971
+       },
+       "feasible": true,
+       "first_year": 101,
+       "industry_cost_USD2041": 28506329940431.18,
+       "last_year": 150,
+       "leg_m_s": [
+        3154.375594335838,
+        3987.0584856830133
+       ],
+       "source_feed_kg": 8769267187337.611,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 36986181438239.055,
+        "capital_local_USD2041": 11581374005733.84,
+        "capital_resource_provision_USD2041": 2269331888218.8843,
+        "operating_external_logistics_materials_USD2041": 23682917183780.55,
+        "operating_external_replacement_USD2041": 30928265093892.414,
+        "operating_external_services_USD2041": 1799939579380.3564,
+        "operating_local_payroll_USD2041": 937673528164.2963,
+        "operating_local_replacement_USD2041": 20498966399440.316,
+        "operating_resource_provision_USD2041": 5323256380947.648
+       },
+       "feasible": true,
+       "first_year": 151,
+       "industry_cost_USD2041": 134007905497797.36,
+       "last_year": 200,
+       "leg_m_s": [
+        4008.0532776612854,
+        4818.849508067992
+       ],
+       "source_feed_kg": 47697565630747.0,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      },
+      {
+       "by_category_USD2041": {
+        "capital_external_USD2041": 1268708903929.292,
+        "capital_local_USD2041": 551601671474.4484,
+        "capital_resource_provision_USD2041": 25109419380.306675,
+        "operating_external_logistics_materials_USD2041": 21075149964799.6,
+        "operating_external_replacement_USD2041": 23618701105970.906,
+        "operating_external_services_USD2041": 1095350122232.0405,
+        "operating_local_payroll_USD2041": 994349939538.854,
+        "operating_local_replacement_USD2041": 15654255384190.016,
+        "operating_resource_provision_USD2041": 4502446069849.211
+       },
+       "feasible": true,
+       "first_year": 201,
+       "industry_cost_USD2041": 68785672581364.68,
+       "last_year": 220,
+       "leg_m_s": [
+        4820.736665883799,
+        4858.540717490595
+       ],
+       "source_feed_kg": 28997470839385.133,
+       "within_world_xenon_supply": true,
+       "xenon_from_Earth_largest_kg_year": 0.0
+      }
+     ],
+     "total_industry_cost_USD2041": 239736829724786.25
+    },
+    "electric_xenon": {
+     "failed_year": 36,
+     "failure": "The tugs' xenon from Earth does not close in year 36: each kilogram carried to the depot calls for more than one more; sized again: The tugs' xenon from Earth does not close in year 25: each kilogram carried to the depot calls for more than one more",
+     "handover": {
+      "from_year": 26,
+      "to": "chemical"
+     },
+     "periods": null,
+     "total_industry_cost_USD2041": null
+    }
+   }
+  }
+ },
+ "schema": "terluna.research.vacuum-economy-freight/1"
+}

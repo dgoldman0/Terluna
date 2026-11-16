@@ -1,6 +1,6 @@
 {
   "schema": "terluna.research.vacuum-economy-cases/1",
-  "reading_rule": "Each case names a scenario of demand, a population ramp from programme.json and the recovery measures of the industry. In the scenario first_pass the portfolio, the market and its growth are those of the staged studies' order book: nine export portfolios at their strongest market, with real demand growing 0.5% a year, and with material recovery and equipment refurbishment applied. Each portfolio runs on the staged schedule, which reproduces the staged appraisal, and on the programme's two ramps. A case may change engineering coefficients, each named by its path with its value, or with a schedule {\"by_year\": [[year, value], ...]}. The diversified and services portfolios on constant growth carry the arrangements of the Earth leg's propellant (made in space throughout as the staged model has it, the outward burn launched from Earth, or launched from Earth until year 20 and made in space after) at launch prices of 200, 100 and 50 dollars of 2026 a kilogram. The same two portfolios carry the local manufacture of the machinery's working parts: the industry becomes able to make 78% of them over the thirty years from the opening, which leaves 5% of all equipment mass imported, and makes as much of that share as its residents can staff, at labour worth 25%, 50% or 10% of a part's import price. The scenarios low, central and high are the demand of scenarios.json, judged at each year's date; each brings its launch price, its local manufacture and its arrangement of the Earth leg, which a case may change, and a case may name the rule of pricing (the seller's price by default, or cost_plus). On the solved ramps resident_led and resident_led_beyond_plan each scenario takes the schedule of residents that residents.py found for it: the settlement grows as fast as its own production and financing sustain, held at the planned population from the year it reaches it, or not held before completion. Each scenario brings its own improvement of technology, the learning that lowers the price of working parts and the growth of labour productivity; the three cases named frozen_technology hold both at nought, the founding design's technology throughout.",
+  "reading_rule": "Each case names a scenario of demand, a population ramp from programme.json and the recovery measures of the industry. In the scenario first_pass the portfolio, the market and its growth are those of the staged studies' order book: nine export portfolios at their strongest market, with real demand growing 0.5% a year, and with material recovery and equipment refurbishment applied. Each portfolio runs on the staged schedule, which reproduces the staged appraisal, and on the programme's two ramps. A case may change engineering coefficients, each named by its path with its value, or with a schedule {\"by_year\": [[year, value], ...]}. The diversified and services portfolios on constant growth carry the arrangements of the Earth leg's propellant (made in space throughout as the staged model has it, the outward burn launched from Earth, or launched from Earth until year 20 and made in space after) at launch prices of 200, 100 and 50 dollars of 2026 a kilogram. The same two portfolios carry the local manufacture of the machinery's working parts: the industry becomes able to make 78% of them over the thirty years from the opening, which leaves 5% of all equipment mass imported, and makes as much of that share as its residents can staff, at labour worth 25%, 50% or 10% of a part's import price. The scenarios low, central and high are the demand of scenarios.json, judged at each year's date; each brings its launch price, its local manufacture and its arrangement of the Earth leg, which a case may change, and a case may name the rule of pricing (the seller's price by default, or cost_plus). On the solved ramps resident_led and resident_led_beyond_plan each scenario takes the schedule of residents that residents.py found for it: the settlement grows as fast as its own production and financing sustain, held at the planned population from the year it reaches it, or not held before completion. Each scenario brings its own improvement of technology, the learning that lowers the price of working parts and the growth of labour productivity; the three cases named frozen_technology hold both at nought, the founding design's technology throughout. Freight to the sources: each scenario case flies the tugs freight.py chose for its scenario, period by period, mining the nearest water of the source survey first at the median of its water, so that the leg the tugs fly lengthens as the water near the depot is drawn. The cases named founding_freight, the frozen_technology cases and the first pass fly the founding design's chemical tugs on one leg of 2.5 km/s to every source; the cases named chemical_tugs fly chemical tugs throughout with the survey's reach; the cases named target_tugs fly electric tugs on water at the thruster's development target throughout; reach_p05 and reach_p95 read the survey's water at its 5th and 95th percentiles. Where the choice finds a period whose water no kind of tug reaches, a case that would take it flies the founding freight and records those periods; a case that names one kind of tug and cannot reach its water records the year.",
   "cases": [
     {
       "name": "first_pass:raw_resource_price",
@@ -769,7 +769,8 @@
       "engineering": {
         "economy.technology.learning_per_doubling": 0.0,
         "economy.technology.labour_productivity_growth": 0.0
-      }
+      },
+      "freight": "founding"
     },
     {
       "scenario": "central",
@@ -779,7 +780,8 @@
       "engineering": {
         "economy.technology.learning_per_doubling": 0.0,
         "economy.technology.labour_productivity_growth": 0.0
-      }
+      },
+      "freight": "founding"
     },
     {
       "scenario": "high",
@@ -789,7 +791,85 @@
       "engineering": {
         "economy.technology.learning_per_doubling": 0.0,
         "economy.technology.labour_productivity_growth": 0.0
-      }
+      },
+      "freight": "founding"
+    },
+    {
+      "scenario": "low",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "low:constant_growth:founding_freight",
+      "freight": "founding"
+    },
+    {
+      "scenario": "low",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "low:constant_growth:chemical_tugs",
+      "freight": "chemical"
+    },
+    {
+      "scenario": "low",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "low:constant_growth:target_tugs",
+      "freight": "electric_water_target"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:founding_freight",
+      "freight": "founding"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:chemical_tugs",
+      "freight": "chemical"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:target_tugs",
+      "freight": "electric_water_target"
+    },
+    {
+      "scenario": "high",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "high:constant_growth:founding_freight",
+      "freight": "founding"
+    },
+    {
+      "scenario": "high",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "high:constant_growth:chemical_tugs",
+      "freight": "chemical"
+    },
+    {
+      "scenario": "high",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "high:constant_growth:target_tugs",
+      "freight": "electric_water_target"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:reach_p05",
+      "reach": "p05"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:reach_p95",
+      "reach": "p95"
     }
   ]
 }

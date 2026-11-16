@@ -19,14 +19,18 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 INDUSTRY = ROOT / 'provisioning/vacuum_industry'
 RETURNS = ROOT / 'research/studies/enclosed_returns'
-# The source survey's estimate of the near-Earth population, with the water its pools contain.
+# The source survey's estimate of the near-Earth population, with the water its pools contain, and its water by the
+# velocity change of the tugs' leg from the depot.
 POOL = ROOT / 'resources/source_access/results/population.json.gz'
+REACH = ROOT / 'resources/source_access/results/reach.json.gz'
 PERCENTILES = ('p05', 'p50', 'p95')
+# The tugs freight.py chose for each scenario; run.py and residents.py read it, and freight.py does not.
+FREIGHT = HERE / 'results/freight.json'
 # The files the calculation reads or runs, beside those the staged order book and the financing name themselves.
 READ = (HERE / 'programme.json', HERE / 'programme.py', HERE / 'inputs.py', HERE / 'scenarios.json', HERE / 'demand.py', HERE / 'mix.py',
         INDUSTRY / 'model.py', INDUSTRY / 'recovery.py', INDUSTRY / 'industry.py', INDUSTRY / 'engineering.json', INDUSTRY / 'recovery.json',
         RETURNS / 'markets.py', RETURNS / 'enclosed_inputs.json', RETURNS / 'finance.py', RETURNS / 'finance_inputs.json',
-        RETURNS / 'revised.py', RETURNS / 'revised_inputs.json', RETURNS / 'bottlenecks.py', RETURNS.parent / 'complex_returns/policy.py', POOL)
+        RETURNS / 'revised.py', RETURNS / 'revised_inputs.json', RETURNS / 'bottlenecks.py', RETURNS.parent / 'complex_returns/policy.py', POOL, REACH)
 
 
 def digest(path):
@@ -110,8 +114,50 @@ def dependencies(extra=()):
     return {str(p.relative_to(ROOT)): digest(p) for p in sorted(paths)}
 
 
+@lru_cache(maxsize=None)
+def reach():
+    """The contained water of the source survey within each velocity change of the tugs' leg from the depot, at three
+    percentiles, cumulative over the upper edges of its bins and, last, in all."""
+    data = json.loads(gzip.decompress(REACH.read_bytes()))
+    return dict(upper_edges_m_s=data['depot_leg_upper_edges_m_s'], within_kg=data['contained_water_within_kg'])
+
+
+@lru_cache(maxsize=None)
+def chosen_freight():
+    """The tugs freight.py chose for each scenario, refused where any file it read has changed since."""
+    product = json.loads(FREIGHT.read_text())
+    stale = [path for path, value in product['dependencies'].items() if not (ROOT / path).exists() or digest(ROOT / path) != value]
+    if stale:
+        raise ValueError('The choice of tugs is out of date (run freight.py again): ' + ', '.join(stale))
+    return product
+
+
+# Freight to the sources. Under `founding` the tugs are the founding design's, chemical, on one leg of 2.5 km/s to
+# every source, as in the staged studies. Under any other the tugs mine the nearest water of the source survey first,
+# at the case's percentile of its water (`reach`, p50 unless stated), and fly: one named kind throughout (`chemical`,
+# or an option of the engineering coefficients' transport.source_propulsion), `chosen`, the kinds freight.py chose for
+# the scenario period by period, or `chosen_with_target`, its choice with the water thruster at its development target
+# among the options. The first pass keeps the founding freight; a scenario's cases take `chosen` unless they state.
+# Where freight.py found a period whose water no kind of tug reaches, the scenario's orders cannot be filled with the
+# reach, and a case that would take that choice flies the founding freight; its record names those periods.
+def stated_freight(case):
+    return case.get('freight', 'founding' if case['scenario'] == 'first_pass' else 'chosen')
+
+
+def unreached(case):
+    """The periods whose water no kind of tug reaches, for a case that takes freight.py's choice; none otherwise."""
+    stated = stated_freight(case)
+    if stated not in ('chosen', 'chosen_with_target'):
+        return []
+    return chosen_freight()['scenarios'][case['scenario']][stated]['periods_no_kind_reaches']
+
+
+def freight_of(case):
+    return 'founding' if unreached(case) else stated_freight(case)
+
+
 def engineering(case):
-    """The engineering coefficients for one case: the model's own, with the changes the case states.
+    """The engineering coefficients for one case: the model's own, with the changes the case states and its freight.
 
     A change names a coefficient by its path, as in `industrial.transport.earth_leg`, and gives its value. The
     coefficient must exist, so that a misspelt path fails where it is read.
@@ -119,7 +165,8 @@ def engineering(case):
     data = sources()['engineering']
     stated = sources()['scenarios']['scenarios'].get(case['scenario'], {}).get('engineering', {})
     changes = {**{path: entry['value'] for path, entry in stated.items()}, **case.get('engineering', {})}
-    if not changes:
+    freight = freight_of(case)
+    if not changes and freight == 'founding':
         return data
     data = deepcopy(data)
     for path, value in changes.items():
@@ -130,4 +177,15 @@ def engineering(case):
         if leaf not in node:
             raise ValueError('The engineering coefficients hold no ' + path)
         node[leaf] = value
+    if freight != 'founding':
+        curve = reach()
+        percentile = case.get('reach', 'p50')
+        data['source_reach'] = dict(upper_edges_m_s=curve['upper_edges_m_s'], within_kg=curve['within_kg'][percentile], percentile=percentile)
+        if freight in ('chosen', 'chosen_with_target'):
+            kind = chosen_freight()['scenarios'][case['scenario']][freight]['schedule']
+        elif freight == 'chemical' or freight in data['transport']['source_propulsion']['options']:
+            kind = freight
+        else:
+            raise ValueError('Unknown freight: ' + str(freight))
+        data['industrial']['transport']['source_propulsion'] = kind
     return data
