@@ -22,7 +22,7 @@ python3 visualization/atlas/render.py --frame $O --source domain/geology@45c3d81
     --climatology climate/gcm/products/climatology_$C.npz --drainage geography/turned_corrected
 ```
 
-The 7 November globe ran the same chain on `A28R_301k_design_l15_snow_s924_turned_refit` into `geography/turned`.
+The 7 November globe ran the same chain on `A28R_301k_design_l15_snow_s924_turned_refit` into `geography/turned`. The 16 November globe adds the years control: `research.studies.drainage_network.stops` writes the drainage network's water at eight years, and the last command takes `--stops research/studies/drainage_network/results/globe_stops.json`.
 
 | Sheet | Shows |
 |---|---|
@@ -60,6 +60,10 @@ On 7 November the globe was redrawn on the turned Moon and republished to the sa
 
 On 9 November the globe was redrawn on the corrected design climate and republished to the same page (version 9). The clouds and the ground cover come from `A28R_301k_design_l15_snow_s938_turned_refit_precession`, years 10–19, the design climate on the turned Moon, with PlaSim's night-side twilight counted once and the equinox regressing with the node (climate/gcm/README.md, The corrected design climate on the turned Moon). The rivers and lakes come from the drainage routed on its rain and evaporation carried back to today's ground (`geography/turned_corrected/`): 32,636 rain-fed lakes over 9.80% of the Moon holding 2.65 million km³ and 199,973 m³/s reaching the seas, against the target run's 33,262 lakes, 10.28%, 2.84 million km³ and 199,217 m³/s. The page's paragraph on the turned Moon takes each run's ground, rain and drylands from `TURNED_CLIMATES` in render.py, and the build stops for a run the table does not hold. The build's own checks hold: the relief within 0.5 m, and the seas' and lakes' shares on the page as the products give them. The sheets, on today's grid, are unchanged.
 
+On 16 November the globe gained a years control and was republished to the same page (version 10). The control steps the water through the drainage network study's history of the six large seas with the routing's water budget closed, at 0, 250, 500, 750, 1,000, 2,000, 5,000 and 10,000 years ([the globe's years](../../research/studies/drainage_network/README.md#the-globes-years)), and the page opens at year 0, the water as the atlas draws it. With `--stops`, render.py reads the study's `globe_stops.json` and its maps, carries the maps into the turned frame as it carries the surface grid, and embeds two more textures. The first holds, for each pixel, the years in which one of the study's bodies of water covers it and the first and second body to cover it. The second holds the years in which that second body is the pixel's surface, and the overflow rivers on dry ground: their years and the share of the pixel that a river of their discharge covers. The shaders take each body's level in the year shown and colour its water by its depth over the 0.25° heights with the surface colour's own depth ramp, draw an overflow river at the width its discharge gives, and give floor a sea has left the basalt soil colour, a placeholder the legend names. Every other water stays as version 9 draws it. A clicked place reads the year's water and its depth there, and `y<years>` in the link opens the page at the recorded year nearest it. The build checks each year's drawn water share against the study's within 0.002 of the Moon (all eight agree within 0.0001) and that no body at year 0 lies off the atlas's sea.
+
+The same build smooths the climate run's rain and soil moisture before they set the ground cover, with a Gaussian round on the sphere whose width is 0.7 of the run's 5.5° grid spacing, about 3.9° (`CLIMATE_SMOOTHING_CELLS` in appearance.py). Interpolated straight from the run's 32 × 64 grid, the fields carried kinks along the grid's rows and columns and ripples at its spacing, finer than the spectral model resolves; the cover's thresholds turned them into straight east–west streaks along the turned Moon's latitude circles, which are the run's rows. At 0.7 of a cell, ripples two cells long keep a tenth of their contrast and waves 30° long about 70%.
+
 **Appearance mode** estimates how the Open Moon looks from outside its air. One full-screen pass traces each
 pixel's ray through the atmosphere, two cloud decks and the surface:
 
@@ -81,7 +85,8 @@ pixel's ray through the atmosphere, two cloud decks and the surface:
   - light scattered more than once in the air, an isotropic source proportional to the sky atlas's diffuse
     light, scaled so that the air seen straight down matches Eddington's reflectance.
 - **Guesstimate:**
-  - surface cover, from rainfall, soil moisture, nearness to water, floodplains, height, hollows and slope;
+  - surface cover, from rainfall and soil moisture (smoothed over 0.7 of the climate run's grid spacing),
+    nearness to water, floodplains, height, hollows and slope;
   - water colour, from depth, with sediment-laden rivers;
   - river width, from Earth's width–discharge relation widened by 1.6 for the slower flow of lunar gravity;
   - cloud shapes and opacity. The shapes are noise that the page evaluates in 3D, so they stay sharp at any
@@ -141,6 +146,7 @@ opens the topography too). It can add:
   (`gm0p5`);
 - `c<metres>` for the contour interval (`c0` for none);
 - `overlay` for the topography over the appearance, and `o<percent>` for its opacity;
+- `y<years>` for the drainage network's water at the recorded year nearest it (`#far.y1000`);
 - `red`, `noclouds` or `noair`.
 
 The page was also published privately to claude.ai.

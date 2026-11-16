@@ -1,0 +1,569 @@
+{
+ "schema": "terluna.research.south-sea-spray/1",
+ "evidence": "A diagnostic on one model year at T21: an Earth-fitted sea-spray source function carried to lunar gravity by untested scalings (low, central and high cases), driven by 6.5-hour mean winds, and parcels followed on the lowest levels' winds with first-order removal. No measurement of spray at reduced gravity exists. The surf's spray and drops above 20 um of r80, which fall near the shore, are outside the source, and the model resolves no coast.",
+ "reading_rule": "source gives the sea's yearly salt into the air under each law; the fate cases follow the central source, and their shares apply to any multiple of it. Chloride is 55% of the salt. chloride_kg_ha_yr and chloride_in_the_rain_mg_l are area-weighted over the model's land cells (lakes included); land_beside_the_sea are the model's land cells that hold part of the sea or touch a cell that does. salt_in_the_air_ug_m3 spreads the salt in the air over the mixed layer (1.7 km over water, 5 km over land). Multiply by the source cases' ratios to the central one for the low, high and gentle-law sources.",
+ "record": {
+  "run": "A28R_301k_design_l15_snow_s938_turned_refit_precession_eddies",
+  "what": "the design run's year 10 written every 6.5 hours",
+  "writes": 1320,
+  "days": 357.5,
+  "levels": 2,
+  "top_sigma": 0.9656248092651367
+ },
+ "sea": {
+  "name": "south_pole_aitken",
+  "area_km2": 2322833.0,
+  "model_cells": 160,
+  "land_cells_beside_it": 112,
+  "land_beside_it_km2": 1703448.7904328457
+ },
+ "wind": {
+  "mean_m_s": 2.2581306816816737,
+  "percentiles_m_s_50_90_99": [
+   2.2334037456994236,
+   3.5109061354059983,
+   4.6142973803931
+  ],
+  "highest_m_s": 7.210786134502857,
+  "air_density_kg_m3": 1.3949693476245897,
+  "equivalent_earth_wind_m_s": {
+   "2": 2.2366214673045643,
+   "3": 3.516100477502284,
+   "5": 6.109524422535531,
+   "7": 8.707928674302021,
+   "10": 12.667411561452974
+  },
+  "warmth_weight_mean": 2.0561490152948334,
+  "by_speed": {
+   "0-2 m/s": {
+    "share_of_hours": 0.40615589908535127,
+    "share_of_salt": 0.04282466893462593
+   },
+   "2-3 m/s": {
+    "share_of_hours": 0.3735537723194279,
+    "share_of_salt": 0.2756522194742996
+   },
+   "3-4 m/s": {
+    "share_of_hours": 0.1802155760258083,
+    "share_of_salt": 0.4254073342040483
+   },
+   "4-5 m/s": {
+    "share_of_hours": 0.03648941458240094,
+    "share_of_salt": 0.21116613453787095
+   },
+   "5-99 m/s": {
+    "share_of_hours": 0.0035853379870115646,
+    "share_of_salt": 0.044949642849155286
+   }
+  }
+ },
+ "source": {
+  "earth_law": {
+   "what": "Gong's function at the lunar wind itself, with no lunar change",
+   "salt_mt_yr": 1.347291131336977,
+   "salt_g_m2_yr": 0.5800206606919125,
+   "chloride_mt_yr": 0.7414554995576614,
+   "particles_m2_s": 6047.11215907645
+  },
+  "low": {
+   "what": "the central case times 0.34: the film drops' yield for each unit of wave energy at a sixth of the gravity",
+   "salt_mt_yr": 0.8046761937223177,
+   "salt_g_m2_yr": 0.3464201661171155,
+   "chloride_mt_yr": 0.44283791032341646,
+   "particles_m2_s": 3611.6672054011583
+  },
+  "central": {
+   "what": "Gong's function at the Earth wind of equal energy flux into the waves",
+   "salt_mt_yr": 2.366694687418582,
+   "salt_g_m2_yr": 1.0188828415209281,
+   "chloride_mt_yr": 1.3024644421276959,
+   "particles_m2_s": 10622.550604121054
+  },
+  "high": {
+   "what": "the central case times 2.46: air entrained by slower breakers at a sixth of the gravity",
+   "salt_mt_yr": 5.822068931049712,
+   "salt_g_m2_yr": 2.506451790141483,
+   "chloride_mt_yr": 3.204062527634132,
+   "particles_m2_s": 26131.474486137788
+  },
+  "gentle_wind_law": {
+   "what": "Jaegle et al.'s fitted wind law, 25.5 U^2.07 in place of 1.373 U^3.41, at the equal-energy wind",
+   "salt_mt_yr": 7.680369177612707,
+   "salt_g_m2_yr": 3.306466361384011,
+   "chloride_mt_yr": 4.226741966098327,
+   "particles_m2_s": 34472.17365266057
+  }
+ },
+ "sizes": {
+  "r80_edges_um": [
+   0.035,
+   0.5,
+   1.0,
+   2.0,
+   4.0,
+   7.0,
+   10.0,
+   14.0,
+   20.0
+  ],
+  "share_of_salt": [
+   0.004455444609793324,
+   0.008031464626501022,
+   0.04720362119206301,
+   0.2138219750290069,
+   0.18897224862155995,
+   0.10736822170599546,
+   0.14019345090624008,
+   0.2899535733088403
+  ],
+  "share_of_number": [
+   0.8712224245181548,
+   0.0603856662153354,
+   0.03752440031057205,
+   0.025971189805178933,
+   0.003996980063206559,
+   0.000510072276312089,
+   0.00022714214779633276,
+   0.00016212466344378657
+  ],
+  "settling_m_s": [
+   3.146601770963534e-06,
+   1.5103124172290925e-05,
+   6.325793894210855e-05,
+   0.00021813068074805927,
+   0.0006624151987320717,
+   0.0016829534434351352,
+   0.0034221157488449993,
+   0.006970886987703317
+  ]
+ },
+ "fate": {
+  "depth_water_m": 1700.0,
+  "depth_land_m": 5000.0,
+  "cases": {
+   "slow": {
+    "scavenging_ratio": 100.0,
+    "deposition_m_s": 0.0001,
+    "emitted_mt_yr": 2.366694687418582,
+    "deposited_over_emitted": 1.0000000000000002,
+    "still_in_the_air_share": 0.0,
+    "share_by_rain": 0.4740087037992671,
+    "mean_days_in_the_air": 10.077025127267412,
+    "mean_distance_km": 766.6513732048369,
+    "share_falling": {
+     "back_on_the_south_sea": 0.5667947787041138,
+     "on_the_other_seas": {
+      "near_side": 0.003030125422763359,
+      "smythii_marginis": 0.00125309303920086,
+      "humboldtianum": 2.5078547746936563e-06,
+      "orientale": 6.7497178148347e-07,
+      "moscoviense": 1.0007204900033626e-05
+     },
+     "on_land_and_lakes": 0.4289088128024658
+    },
+    "chloride_kg_ha_yr": {
+     "on_the_south_sea": 3.182365449617578,
+     "land_beside_the_sea": 0.8706340041061329,
+     "land_mean": 0.1663609097306963,
+     "land_p10_p50_p90": [
+      3.4578749045229107e-06,
+      0.004773726521531751,
+      0.46346152151317294
+     ],
+     "land_highest": 6.916147328676938,
+     "desert_land_mean": 0.08254464168887443
+    },
+    "chloride_in_the_rain_mg_l": {
+     "land_mean": 0.013868134430331622,
+     "land_p10_p50_p90": [
+      4.4380942147292075e-10,
+      0.0003404051319178345,
+      0.07415968464125736
+     ],
+     "land_highest": 0.6954576565677112,
+     "land_beside_the_sea": 0.06936901315399167
+    },
+    "years_to_a_saline_root_zone_where_no_rain_flushes": {
+     "rule": "coast_water.load: soil water at 4 dS/m, 40 mol of chloride per m3, in 0.3 m of soil water",
+     "land_beside_the_sea": 4886.50796997975,
+     "desert_land_mean": 51540.11105936405
+    },
+    "salt_in_the_air_ug_m3": {
+     "over_the_south_sea": 7.371311158663092,
+     "land_beside_the_sea": 0.9310988633958458,
+     "land_mean": 0.2562078141595815,
+     "land_highest": 4.096920061496218
+    },
+    "by_size": [
+     {
+      "r80_um": [
+       0.035,
+       0.5
+      ],
+      "share_of_salt": 0.004455444609793324,
+      "settling_m_s": 3.146601770963534e-06,
+      "share_by_rain": 0.9252141705190505
+     },
+     {
+      "r80_um": [
+       0.5,
+       1.0
+      ],
+      "share_of_salt": 0.008031464626501022,
+      "settling_m_s": 1.5103124172290925e-05,
+      "share_by_rain": 0.9177040616450649
+     },
+     {
+      "r80_um": [
+       1.0,
+       2.0
+      ],
+      "share_of_salt": 0.04720362119206301,
+      "settling_m_s": 6.325793894210855e-05,
+      "share_by_rain": 0.8886158638281638
+     },
+     {
+      "r80_um": [
+       2.0,
+       4.0
+      ],
+      "share_of_salt": 0.2138219750290069,
+      "settling_m_s": 0.00021813068074805927,
+      "share_by_rain": 0.8061364296614959
+     },
+     {
+      "r80_um": [
+       4.0,
+       7.0
+      ],
+      "share_of_salt": 0.18897224862155995,
+      "settling_m_s": 0.0006624151987320717,
+      "share_by_rain": 0.6357378314759771
+     },
+     {
+      "r80_um": [
+       7.0,
+       10.0
+      ],
+      "share_of_salt": 0.10736822170599546,
+      "settling_m_s": 0.0016829534434351352,
+      "share_by_rain": 0.4268553567884709
+     },
+     {
+      "r80_um": [
+       10.0,
+       14.0
+      ],
+      "share_of_salt": 0.14019345090624008,
+      "settling_m_s": 0.0034221157488449993,
+      "share_by_rain": 0.27188977731175357
+     },
+     {
+      "r80_um": [
+       14.0,
+       20.0
+      ],
+      "share_of_salt": 0.2899535733088403,
+      "settling_m_s": 0.006970886987703317,
+      "share_by_rain": 0.15214749956142282
+     }
+    ],
+    "seconds": 73.6
+   },
+   "central": {
+    "scavenging_ratio": 300.0,
+    "deposition_m_s": 0.0005,
+    "emitted_mt_yr": 2.366694687418582,
+    "deposited_over_emitted": 0.9999999999999998,
+    "still_in_the_air_share": 0.0,
+    "share_by_rain": 0.5188687505239762,
+    "mean_days_in_the_air": 5.782133932860468,
+    "mean_distance_km": 634.8221055335189,
+    "share_falling": {
+     "back_on_the_south_sea": 0.5943452534933342,
+     "on_the_other_seas": {
+      "near_side": 0.0007540863364560401,
+      "smythii_marginis": 0.0005641223316202457,
+      "humboldtianum": 3.882771029173471e-08,
+      "orientale": 3.325303948123232e-07,
+      "moscoviense": 1.2648072877132274e-06
+     },
+     "on_land_and_lakes": 0.4043349016731968
+    },
+    "chloride_kg_ha_yr": {
+     "on_the_south_sea": 3.337102229618906,
+     "land_beside_the_sea": 1.1066415810455945,
+     "land_mean": 0.17097166478781903,
+     "land_p10_p50_p90": [
+      0.0,
+      0.001296418113412309,
+      0.4340934548394237
+     ],
+     "land_highest": 8.116469851245789,
+     "desert_land_mean": 0.08554903139068382
+    },
+    "chloride_in_the_rain_mg_l": {
+     "land_mean": 0.016163472414853542,
+     "land_p10_p50_p90": [
+      0.0,
+      5.761770690314127e-05,
+      0.08453990782801944
+     ],
+     "land_highest": 1.3355282535483795,
+     "land_beside_the_sea": 0.1016747266460006
+    },
+    "years_to_a_saline_root_zone_where_no_rain_flushes": {
+     "rule": "coast_water.load: soil water at 4 dS/m, 40 mol of chloride per m3, in 0.3 m of soil water",
+     "land_beside_the_sea": 3844.388348375929,
+     "desert_land_mean": 49730.07795460901
+    },
+    "salt_in_the_air_ug_m3": {
+     "over_the_south_sea": 5.0077525905668585,
+     "land_beside_the_sea": 0.6307148067928502,
+     "land_mean": 0.12744326188785035,
+     "land_highest": 3.166978268212972
+    },
+    "by_size": [
+     {
+      "r80_um": [
+       0.035,
+       0.5
+      ],
+      "share_of_salt": 0.004455444609793324,
+      "settling_m_s": 3.146601770963534e-06,
+      "share_by_rain": 0.8249963710244388
+     },
+     {
+      "r80_um": [
+       0.5,
+       1.0
+      ],
+      "share_of_salt": 0.008031464626501022,
+      "settling_m_s": 1.5103124172290925e-05,
+      "share_by_rain": 0.821639843149489
+     },
+     {
+      "r80_um": [
+       1.0,
+       2.0
+      ],
+      "share_of_salt": 0.04720362119206301,
+      "settling_m_s": 6.325793894210855e-05,
+      "share_by_rain": 0.8083914590065776
+     },
+     {
+      "r80_um": [
+       2.0,
+       4.0
+      ],
+      "share_of_salt": 0.2138219750290069,
+      "settling_m_s": 0.00021813068074805927,
+      "share_by_rain": 0.7685191303835884
+     },
+     {
+      "r80_um": [
+       4.0,
+       7.0
+      ],
+      "share_of_salt": 0.18897224862155995,
+      "settling_m_s": 0.0006624151987320717,
+      "share_by_rain": 0.6731785626382993
+     },
+     {
+      "r80_um": [
+       7.0,
+       10.0
+      ],
+      "share_of_salt": 0.10736822170599546,
+      "settling_m_s": 0.0016829534434351352,
+      "share_by_rain": 0.5236859100341477
+     },
+     {
+      "r80_um": [
+       10.0,
+       14.0
+      ],
+      "share_of_salt": 0.14019345090624008,
+      "settling_m_s": 0.0034221157488449993,
+      "share_by_rain": 0.379156625979163
+     },
+     {
+      "r80_um": [
+       14.0,
+       20.0
+      ],
+      "share_of_salt": 0.2899535733088403,
+      "settling_m_s": 0.006970886987703317,
+      "share_by_rain": 0.2397425312607146
+     }
+    ],
+    "seconds": 33.3
+   },
+   "fast": {
+    "scavenging_ratio": 1000.0,
+    "deposition_m_s": 0.003,
+    "emitted_mt_yr": 2.366694687418582,
+    "deposited_over_emitted": 1.0,
+    "still_in_the_air_share": 0.0,
+    "share_by_rain": 0.42682075333044245,
+    "mean_days_in_the_air": 2.7211377347671335,
+    "mean_distance_km": 443.8065887709808,
+    "share_falling": {
+     "back_on_the_south_sea": 0.6637280940856641,
+     "on_the_other_seas": {
+      "near_side": 5.557495836730928e-05,
+      "smythii_marginis": 4.197679732926845e-05,
+      "humboldtianum": 0.0,
+      "orientale": 1.4898380668744126e-07,
+      "moscoviense": 4.72518324375206e-08
+     },
+     "on_land_and_lakes": 0.336174157923
+    },
+    "chloride_kg_ha_yr": {
+     "on_the_south_sea": 3.726801748633832,
+     "land_beside_the_sea": 1.1795350816873527,
+     "land_mean": 0.14348491973139046,
+     "land_p10_p50_p90": [
+      0.0,
+      2.6739006668936266e-05,
+      0.30613168206974906
+     ],
+     "land_highest": 6.820290315559079,
+     "desert_land_mean": 0.08373485841598534
+    },
+    "chloride_in_the_rain_mg_l": {
+     "land_mean": 0.013430238607409552,
+     "land_p10_p50_p90": [
+      0.0,
+      3.0007296981583e-07,
+      0.05764710377772182
+     ],
+     "land_highest": 1.525058302759579,
+     "land_beside_the_sea": 0.10576581363189275
+    },
+    "years_to_a_saline_root_zone_where_no_rain_flushes": {
+     "rule": "coast_water.load: soil water at 4 dS/m, 40 mol of chloride per m3, in 0.3 m of soil water",
+     "land_beside_the_sea": 3606.810908848966,
+     "desert_land_mean": 50807.514104398666
+    },
+    "salt_in_the_air_ug_m3": {
+     "over_the_south_sea": 2.882595169206117,
+     "land_beside_the_sea": 0.3413683864170548,
+     "land_mean": 0.044426338579769305,
+     "land_highest": 1.7220314180411664
+    },
+    "by_size": [
+     {
+      "r80_um": [
+       0.035,
+       0.5
+      ],
+      "share_of_salt": 0.004455444609793324,
+      "settling_m_s": 3.146601770963534e-06,
+      "share_by_rain": 0.5601027430999799
+     },
+     {
+      "r80_um": [
+       0.5,
+       1.0
+      ],
+      "share_of_salt": 0.008031464626501022,
+      "settling_m_s": 1.5103124172290925e-05,
+      "share_by_rain": 0.5591351961225908
+     },
+     {
+      "r80_um": [
+       1.0,
+       2.0
+      ],
+      "share_of_salt": 0.04720362119206301,
+      "settling_m_s": 6.325793894210855e-05,
+      "share_by_rain": 0.5552717746562981
+     },
+     {
+      "r80_um": [
+       2.0,
+       4.0
+      ],
+      "share_of_salt": 0.2138219750290069,
+      "settling_m_s": 0.00021813068074805927,
+      "share_by_rain": 0.5431979359312937
+     },
+     {
+      "r80_um": [
+       4.0,
+       7.0
+      ],
+      "share_of_salt": 0.18897224862155995,
+      "settling_m_s": 0.0006624151987320717,
+      "share_by_rain": 0.5112814497492768
+     },
+     {
+      "r80_um": [
+       7.0,
+       10.0
+      ],
+      "share_of_salt": 0.10736822170599546,
+      "settling_m_s": 0.0016829534434351352,
+      "share_by_rain": 0.45034638827030643
+     },
+     {
+      "r80_um": [
+       10.0,
+       14.0
+      ],
+      "share_of_salt": 0.14019345090624008,
+      "settling_m_s": 0.0034221157488449993,
+      "share_by_rain": 0.37386698706538285
+     },
+     {
+      "r80_um": [
+       14.0,
+       20.0
+      ],
+      "share_of_salt": 0.2899535733088403,
+      "settling_m_s": 0.006970886987703317,
+      "share_by_rain": 0.276221734131938
+     }
+    ],
+    "seconds": 14.1
+   }
+  }
+ },
+ "against_the_sea": {
+  "salt_in_the_sea_kg": 1.7380238405155917e+17,
+  "leaving_the_sea_for_good_mt_yr": {
+   "earth_law": 0.5465350423531804,
+   "low": 0.32642071738437545,
+   "central": 0.9600609334834574,
+   "high": 2.3617498963693055,
+   "gentle_wind_law": 3.115578211822092
+  },
+  "years_to_carry_off_a_thousandth": {
+   "earth_law": 318007.7590326679,
+   "low": 532448.9984711934,
+   "central": 181032.65948020568,
+   "high": 73590.51198382344,
+   "gentle_wind_law": 55784.952979855974
+  }
+ },
+ "chloride_share_of_salt": 0.5503305724441918,
+ "inputs": {
+  "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+  "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693",
+  "climate/results/gcm/turned_surface_8d71fd350ca4c6cd.json": "e1957b8f36f1b04ba9b673c6a97b0d4bfb83bc54cf93a837e1ac3e1783bbbe58",
+  "climate/gcm/products/climatology_A28R_301k_design_l15_snow_s938_turned_refit_precession.npz": "5a0b510a899e22589a7b81263df11637bf0cd217437de95338a8d4e42a14edca",
+  "/media/projectspace/terluna-research/gcm-runs/A28R_301k_design_l15_snow_s938_turned_refit_precession_eddies/model/MOST.00000.nc": {
+   "bytes": 2416575546,
+   "sha256": "95462f6a17e8b4299dc3875bbc32630567d87bd993719189e7dd8402cf7e174f"
+  }
+ },
+ "producer": {
+  "files": {
+   "research/studies/south_sea_ocean/spray.py": "93664cf4418ca7873344407a09ae849b4e2120a9c6435264d7906053c130a648",
+   "research/studies/south_sea_ocean/run.py": "82cfd53979b359c3dc1cdd2cc4328b9e03e03dcdffbed202e20517a80872aafd",
+   "research/studies/coast_water/load.py": "391bbed47d563e35467a41be83cb738f5e89f6101ec2cc0ff26ec651a8bd2865",
+   "climate/gcm/turned.py": "0048cd6ac13ab7e9fc6975437f04c2a83e0be3e2c6d8764aae4d68bff4cb629a"
+  }
+ }
+}

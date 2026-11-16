@@ -1,0 +1,223 @@
+{
+ "schema": "terluna.research.south-sea-circulation-tide-trial/1",
+ "evidence": "Two MITgcm runs of the south sea from rest on one-degree cells that differ only in the tide's potential, taken at the cells' places on the turned Moon without the water's self-attraction. Cells of 30 km hold neither the straits nor the shelves' narrow parts, so the currents and the bed's power are low values for the sea.",
+ "reading_rule": "level_range_m compares the range of the daily-mean level the tide adds with the equilibrium tide's over the same days, both less the sea's mean, as 5th, 50th and 95th percentiles over the cells. Tidal flows are the difference of the two runs' daily means: depth-mean and at the floor, by cell as 50th, 95th, 99th percentile and the largest. bed_drag_power is the added power of the bed's quadratic drag. background_mixing_for_comparison is the power the long run's background vertical diffusivity spends raising the sea's potential energy, at its latest model year.",
+ "setting": {
+  "step_deg": 1.0,
+  "frame_centre_turned": [
+   -47.84531975827012,
+   -176.90509832088878
+  ],
+  "nx": 66,
+  "ny": 72,
+  "levels": 32,
+  "top_layer_m": 5.0,
+  "wet_columns": 2651,
+  "wet_cells": 63714,
+  "cell_km": [
+   27.527786175561022,
+   30.322580674372986
+  ],
+  "area_km2": 2340143.753098705,
+  "volume_km3": 4876155.046749961,
+  "greatest_depth_m": 5575.7732482833,
+  "lola_pixels": {
+   "area_km2": 2307272.3771103118,
+   "volume_km3": 4823162.039428597,
+   "greatest_depth_m": 6795.307599751585
+  },
+  "true_latitudes": [
+   -79.95472882251666,
+   -14.321380100809405
+  ],
+  "forcing": {
+   "records": 1320,
+   "interval_h": 6.5,
+   "loss_m3s": 51673.70237140149,
+   "loss_m_yr": 0.6968366912487526,
+   "net_heat_w_m2": -0.6504214271579496,
+   "stress_pa_mean": 0.010055989221927693,
+   "surface_c": [
+    26.628528855919683,
+    32.91680608208469
+   ]
+  },
+  "rivers": {
+   "six_seas_m3s": 31631.59969228398,
+   "moscoviense_route_m3s": 20042.102679117506,
+   "mouths": 372,
+   "cells_taking_rivers": 31,
+   "largest_cell_m3s": 24041.17470060188,
+   "largest_cell_m_day": 2.649444234651487
+  },
+  "water_left_over_m3s": 0.0,
+  "start": {
+   "theta_c": 27.0,
+   "practical_salinity": 34.99996018773191,
+   "rho_kg_m3": 1021.8984012388196
+  },
+  "deltat_s": 1800.0,
+  "tide": {
+   "records": 37,
+   "step_days": 1.0,
+   "self_attraction": false,
+   "height_m": [
+    -2.5335826135338624,
+    1.98368245367174
+   ],
+   "height_less_the_seas_mean_m": [
+    -2.1971127419401353,
+    2.773709016599504
+   ]
+  }
+ },
+ "build": "mitgcm-checkpoint69s-55f1c003b38f",
+ "model_days": 35.0,
+ "steps": 1680,
+ "ranks": 2,
+ "seconds_a_step": {
+  "without": 0.1093425269637789,
+  "with_the_tide": 0.10607088165623801
+ },
+ "machine_load_at_the_end": 14.19,
+ "monitor": {
+  "time_secondsf": 3024000.0,
+  "dynstat_eta_max": 1.1407278090614,
+  "dynstat_eta_min": -1.3443540487216,
+  "dynstat_uvel_max": 0.53341601820718,
+  "dynstat_uvel_min": -0.15269484837602,
+  "dynstat_vvel_max": 0.18197765902828,
+  "dynstat_vvel_min": -0.33231355438197,
+  "dynstat_wvel_max": 0.0012729785036356,
+  "dynstat_theta_max": 28.042871739653,
+  "dynstat_theta_min": 25.35415776355,
+  "dynstat_salt_max": 35.089787773868,
+  "dynstat_salt_min": 4.3945891220589,
+  "dynstat_salt_mean": 34.999953702168,
+  "dynstat_theta_mean": 27.006811712247,
+  "advcfl_uvel_max": 0.035381007051406,
+  "advcfl_vvel_max": 0.019726197452481,
+  "advcfl_wvel_max": 0.030760001774017,
+  "advcfl_W_hf_max": 0.033804209904271,
+  "ke_mean": 0.00014075824254937
+ },
+ "tide": {
+  "days": [
+   6.0,
+   35.0
+  ],
+  "skipped_days": 5,
+  "level_range_m": {
+   "model": [
+    0.749514551030122,
+    1.4653722183659141,
+    3.1954682326198927
+   ],
+   "equilibrium": [
+    0.7485370022643465,
+    1.4647655814274045,
+    3.196423163872897
+   ],
+   "ratio": [
+    0.9982848653881153,
+    1.000035853777804,
+    1.0158539229286463
+   ],
+   "correlation": 0.9999550950232878
+  },
+  "depth_mean_tidal_flow_m_s": {
+   "largest_by_cell": [
+    0.000695911669641772,
+    0.0016764291335721162,
+    0.003380412079755103,
+    0.07708021536479427
+   ],
+   "root_mean_square": 0.0009364373382556492
+  },
+  "floor_tidal_flow_m_s": {
+   "largest_by_cell": [
+    0.0009542621992295608,
+    0.00227543560845685,
+    0.0036322850505032533,
+    0.07181299252411057
+   ]
+  },
+  "fastest_cells": [
+   {
+    "grid_lat": -20.5,
+    "grid_lon": -9.5,
+    "depth_m": 127.02780470903886,
+    "depth_mean_flow_m_s": 0.07708021536479427,
+    "turned_lat": -66.91170397591947,
+    "turned_lon": 159.87717754468267
+   },
+   {
+    "grid_lat": -20.5,
+    "grid_lon": -8.5,
+    "depth_m": 302.3885542719298,
+    "depth_mean_flow_m_s": 0.04043360144593243,
+    "turned_lat": -67.19029279601862,
+    "turned_lon": 162.17089793324465
+   },
+   {
+    "grid_lat": -9.5,
+    "grid_lon": -20.5,
+    "depth_m": 160.17198078880594,
+    "depth_mean_flow_m_s": 0.016276583237834513,
+    "turned_lat": -52.715229155587956,
+    "turned_lon": 148.33182363819753
+   },
+   {
+    "grid_lat": -8.5,
+    "grid_lon": -20.5,
+    "depth_m": 147.90065965479778,
+    "depth_mean_flow_m_s": 0.014537161145800651,
+    "turned_lat": -51.809668854303034,
+    "turned_lon": 149.02498409193655
+   },
+   {
+    "grid_lat": -20.5,
+    "grid_lon": -7.5,
+    "depth_m": 664.8352684556297,
+    "depth_mean_flow_m_s": 0.012530134793825235,
+    "turned_lat": -67.4408769467062,
+    "turned_lon": 164.51132099699626
+   },
+   {
+    "grid_lat": -20.5,
+    "grid_lon": -10.5,
+    "depth_m": 503.53441270044783,
+    "depth_mean_flow_m_s": 0.012038122051691219,
+    "turned_lat": -66.60613463594717,
+    "turned_lon": 157.63315780131694
+   },
+   {
+    "grid_lat": 26.5,
+    "grid_lon": -10.5,
+    "depth_m": 450.6133168272412,
+    "depth_mean_flow_m_s": 0.007615403633627502,
+    "turned_lat": -20.66348379720091,
+    "turned_lon": 173.05687057022163
+   },
+   {
+    "grid_lat": -8.5,
+    "grid_lon": -21.5,
+    "depth_m": 204.84069265676735,
+    "depth_mean_flow_m_s": 0.007342240340466683,
+    "turned_lat": -51.3866785676703,
+    "turned_lon": 147.58573328856676
+   }
+  ],
+  "bed_drag_power": {
+   "whole_sea_mw": 0.10444007585267752,
+   "under_200_m_of_water_mw": 0.113686552864922,
+   "area_under_200_m_km2": 5938.27668022208,
+   "mean_mw_m2": 4.4629769309848175e-05
+  }
+ },
+ "background_mixing_for_comparison": {
+  "model_year": 30.0,
+  "diffusivity_m2_s": 1e-05,
+  "power_mw": 52.12507274147879
+ }
+}

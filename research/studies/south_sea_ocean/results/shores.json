@@ -1,0 +1,274 @@
+{
+ "schema": "terluna.research.south-sea-shores/1",
+ "evidence": "Counts on the coast-water study's 16 pixel/degree shores (LOLA above the GRAIL geoid at the 28% atlas's sea level) with that study's belt rules, the design years' rain at T21 and geography's equilibrium monthly tide. Nothing is modelled beyond those products. Shore lengths carry the staircase factor pi/4; at 100 m the coast-water study found belts 1.0-2.7 times narrower than this resolution gives, and the same caution holds for the ground the high water covers. The plants' draw in the deserts is the coast-water study's at 301 K on the earlier design case; the tide is on the unturned Moon's geoid.",
+ "reading_rule": "Lengths in km, areas in km2, widths in m. by_rain_* split the shore by the design years' rain at the model's land cell nearest each shore pixel: desert under 0.5 mm a day, half_dry 0.5-1, moist 1-2, wet 2 or more. fresh_sea_belts are the belts a fresh sea feeds along the desert shore, one entry for each of the coast-water study's cases of ground and reach; salt_in_that_draw is what the same draw would carry from a sea at seawater's strength. tide.covered_at_high_water_km2 is the ground between the mean shoreline and the typical month's high water.",
+ "sea": {
+  "name": "south_pole_aitken",
+  "area_km2": 2307272.2627165373,
+  "atlas_area_km2": 2322833.0,
+  "sea_level_m": -1654.2,
+  "pixels_per_degree": 16
+ },
+ "climate": {
+  "run": "A28R_301k_design_l15_snow_s938_turned_refit_precession",
+  "years": [
+   10,
+   19
+  ],
+  "frame": "today",
+  "desert_mm_day": 0.5
+ },
+ "shore": {
+  "length_km": 39590.37607377416,
+  "mainland_km": 24238.3905916172,
+  "island_km": 15351.98548215696,
+  "pixels": 38855,
+  "pixels_beside_two_seas": 0,
+  "by_rain_km": {
+   "desert": 20711.59652790903,
+   "half_dry": 7578.351105374097,
+   "moist": 3073.180923774282,
+   "wet": 8227.247516716752
+  },
+  "by_rain_km_mainland": {
+   "desert": 13133.749955729232,
+   "half_dry": 2740.219201667977,
+   "moist": 2494.429394158637,
+   "wet": 5869.992040061355
+  },
+  "by_rain_at_the_cell_over_it_km": {
+   "desert": 19992.237322142853,
+   "half_dry": 9069.259981359046,
+   "moist": 8884.936993978286,
+   "wet": 1643.9417762939756
+  },
+  "share_under_the_models_water_cells": 0.8246320268588514,
+  "by_turned_latitude_km": {
+   "0-15S": {
+    "all": 250.26961138091264,
+    "desert": 0.0
+   },
+   "15-30S": {
+    "all": 10514.929839224005,
+    "desert": 1493.1339116067743
+   },
+   "30-45S": {
+    "all": 7529.983826301707,
+    "desert": 1112.699443356898
+   },
+   "45-60S": {
+    "all": 7076.045834799235,
+    "desert": 3886.616210877054
+   },
+   "60-75S": {
+    "all": 9664.3378012629,
+    "desert": 9664.3378012629
+   },
+   "75-90S": {
+    "all": 4554.809160805402,
+    "desert": 4554.809160805402
+   }
+  },
+  "moon_km": {
+   "seas": 182730.98144332753,
+   "every_water": 1268350.3727647997
+  }
+ },
+ "fresh_sea_belts": {
+  "desert_shore_km": 20711.59652790903,
+  "uptake_mm_day": 1.94344,
+  "uptake_source": "coast_water.json demand.desert_uptake_mm_day (301 K, earlier design case)",
+  "salt_kg_per_m3_of_sea_water": 35.93505727956309,
+  "root_zone": {
+   "draw_m_yr": 0.70984146,
+   "chloride_mol_per_m3_of_sea_water": 557.813461300222,
+   "saline_at_mol_m3": 40.0,
+   "soil_water_m": 0.3,
+   "days_to_a_saline_root_zone": 11.06932448059228,
+   "water_to_flush_below_the_roots_m_yr": 9.898978044425077,
+   "rock_salt_mm_yr": 11.782075530950898,
+   "fresh_water_reaches_below_the_sea_times_its_height_above": 38.157018660752854
+  },
+  "cases": {
+   "slow_15m": {
+    "transmissivity_m2_s": 0.000251846,
+    "reach_m": 15.0,
+    "belt_km2": 4002.840344645963,
+    "beside_the_water_km2": 3876.0219032377377,
+    "further_inland_km2": 126.81844140822537,
+    "on_the_islands_km2": 1538.6059113918807,
+    "belt_per_km_of_shore_m": 193.2656586493516,
+    "strip_width_m_p10_p50_p90": [
+     52.28302021211901,
+     160.1945379943475,
+     431.5246207827623
+    ],
+    "draw_km3_yr": 2.841382034390393,
+    "draw_per_km_of_shore_m3_yr": 137187.97730351737,
+    "salt_in_that_draw_mt_yr": 102.10522615894028,
+    "salt_per_m2_of_belt_kg_yr": 25.508193524508695
+   },
+   "slow_25m": {
+    "transmissivity_m2_s": 0.000251846,
+    "reach_m": 25.0,
+    "belt_km2": 5643.017234751109,
+    "beside_the_water_km2": 5426.5761663753965,
+    "further_inland_km2": 216.44106837571243,
+    "on_the_islands_km2": 2147.977236410021,
+    "belt_per_km_of_shore_m": 272.45689279177975,
+    "strip_width_m_p10_p50_p90": [
+     86.67438418434936,
+     255.39509385564838,
+     594.6181598402957
+    ],
+    "draw_km3_yr": 4.00564759272089,
+    "draw_per_km_of_shore_m3_yr": 193401.19856638045,
+    "salt_in_that_draw_mt_yr": 143.94317568616918,
+    "salt_per_m2_of_belt_kg_yr": 25.508193524508695
+   },
+   "central_15m": {
+    "transmissivity_m2_s": 0.000517172,
+    "reach_m": 15.0,
+    "belt_km2": 4385.872332442586,
+    "beside_the_water_km2": 4252.926199237233,
+    "further_inland_km2": 132.9461332053531,
+    "on_the_islands_km2": 1689.471054322983,
+    "belt_per_km_of_shore_m": 211.7592589510225,
+    "strip_width_m_p10_p50_p90": [
+     52.501349919719125,
+     166.47686078109834,
+     547.5169185616426
+    ],
+    "draw_km3_yr": 3.1132740198346505,
+    "draw_per_km_of_shore_m3_yr": 150315.50154231183,
+    "salt_in_that_draw_mt_yr": 111.87568022973379,
+    "salt_per_m2_of_belt_kg_yr": 25.508193524508695
+   },
+   "central_25m": {
+    "transmissivity_m2_s": 0.000517172,
+    "reach_m": 25.0,
+    "belt_km2": 6126.6593173651745,
+    "beside_the_water_km2": 5888.919650957796,
+    "further_inland_km2": 237.73966640737837,
+    "on_the_islands_km2": 2324.1037612052564,
+    "belt_per_km_of_shore_m": 295.8081627898388,
+    "strip_width_m_p10_p50_p90": [
+     87.27128450701815,
+     270.65603490749226,
+     773.6547710389709
+    ],
+    "draw_km3_yr": 4.348956794761099,
+    "draw_per_km_of_shore_m3_yr": 209976.89815465684,
+    "salt_in_that_draw_mt_yr": 156.28001152608516,
+    "salt_per_m2_of_belt_kg_yr": 25.508193524508695
+   },
+   "sandy_15m": {
+    "transmissivity_m2_s": 0.00517172,
+    "reach_m": 15.0,
+    "belt_km2": 4925.00137716585,
+    "beside_the_water_km2": 4767.599312458774,
+    "further_inland_km2": 157.4020647070754,
+    "on_the_islands_km2": 1881.8556016226762,
+    "belt_per_km_of_shore_m": 237.78955767747664,
+    "strip_width_m_p10_p50_p90": [
+     52.69077830511789,
+     172.6959551992052,
+     863.6609135883697
+    ],
+    "draw_km3_yr": 3.4959701680694173,
+    "draw_per_km_of_shore_m3_yr": 168792.88679453425,
+    "salt_in_that_draw_mt_yr": 125.62788823721833,
+    "salt_per_m2_of_belt_kg_yr": 25.508193524508695
+   },
+   "sandy_25m": {
+    "transmissivity_m2_s": 0.00517172,
+    "reach_m": 25.0,
+    "belt_km2": 6842.895374378552,
+    "beside_the_water_km2": 6526.584504268937,
+    "further_inland_km2": 316.31087010961534,
+    "on_the_islands_km2": 2562.5122124990685,
+    "belt_per_km_of_shore_m": 330.3895653412184,
+    "strip_width_m_p10_p50_p90": [
+     87.79442121832801,
+     287.0051925944083,
+     1355.8718108827286
+    ],
+    "draw_km3_yr": 4.857370843176118,
+    "draw_per_km_of_shore_m3_yr": 234524.21143057584,
+    "salt_in_that_draw_mt_yr": 174.54989947761345,
+    "salt_per_m2_of_belt_kg_yr": 25.508193524508695
+   }
+  },
+  "central_km2": [
+   4385.872332442586,
+   6126.6593173651745
+  ],
+  "coast_water_desert_sea_and_island_coasts": {
+   "central_15m": {
+    "shore_km": 61206.0,
+    "belt_km2": 15678.34
+   },
+   "central_25m": {
+    "shore_km": 61206.0,
+    "belt_km2": 22217.47
+   }
+  }
+ },
+ "tide": {
+  "typical_monthly_range_m_p10_p50_p90": [
+   1.953394889831543,
+   2.746777296066284,
+   3.631592273712158
+  ],
+  "high_water_strip_m_p10_p50_p90": [
+   4.351599156889991,
+   14.909475486364908,
+   87.65265389643959
+  ],
+  "covered_at_high_water_km2": 1911.689476472936,
+  "by_rain_km2": {
+   "desert": 989.8582685286673,
+   "half_dry": 336.1344237636092,
+   "moist": 116.6342268700204,
+   "wet": 469.06255731063885
+  },
+  "on_the_islands_km2": 781.501499824469,
+  "share_of_shore_capped_at_the_pixel": 0.01118259647759231
+ },
+ "small_waters_below_the_common_level": {
+  "within_km": 12.0,
+  "bodies": 170,
+  "area_of_those_bodies_km2": 46422.16243830513,
+  "area_within_reach_km2": 5425.391657741928,
+  "area_within_reach_in_desert_km2": 3247.5881039097435,
+  "largest_km2": [
+   9069.548826953436,
+   5318.988338728805,
+   4876.845355459393,
+   4135.048320723766,
+   3844.961585095337
+  ]
+ },
+ "inputs": {
+  "geography/results/atlas.json": "78cfbf2f469eb339b686e34385c3ed72fc83752da59bb24167e2260a765e537e",
+  "research/studies/coast_water/results/coast_water.json": "2c0838e4a20f5f3e02905a35c15ae395c5ef249aacca9aacbb5a42104b764958",
+  "climate/results/gcm/turned_surface_8d71fd350ca4c6cd.json": "e1957b8f36f1b04ba9b673c6a97b0d4bfb83bc54cf93a837e1ac3e1783bbbe58",
+  "climate/gcm/products/climatology_A28R_301k_design_l15_snow_s938_turned_refit_precession_today.npz": "75cec86b2ec6a13dab883471bd64e0f88d6390ebc336ccf525dcace19955b718",
+  "geography/products/tides_28pct_4ppd.npz": "56529233b8ce20685691174381ab5c32d35e9092819e61fc5cdb42293a536777",
+  "geography/products/drainage_28pct_16ppd.npz": "98842fc2a648f8899bd4f5d712445f78c8882c85a1bc30bf631ac9dd14ab1c03",
+  "geography/inputs/ldem_16.img": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+  "geography/inputs/ldem_4.img": "c04632eba6449af49e3108ed7c25b3b1c450600abd3690df4fc815853a1af476",
+  "geography/inputs/jggrx_0420a_sha.tab": "962355f81ae40dab0ec39753e3820d731d4505633a262fc543afd6f6c7c0e50d"
+ },
+ "producer": {
+  "files": {
+   "research/studies/south_sea_ocean/shores.py": "760e6f1f4ff392a91565c7ec2df7b9960873bb2d1d79135f9c6aa4e913671347",
+   "research/studies/south_sea_ocean/inflows.py": "c51a34dd93933b125371d08ce8511776acd180c1012db31a6f65d1d8b1acfaee",
+   "research/studies/south_sea_ocean/run.py": "82cfd53979b359c3dc1cdd2cc4328b9e03e03dcdffbed202e20517a80872aafd",
+   "research/studies/coast_water/shores.py": "9555d4d39e95509a322c93aa57fab2e438511632a2cbe5d626486631b45f1744",
+   "research/studies/coast_water/belts.py": "b28c92298fd467db92b5deb6a987547726905f47ba5b08cc37ab0eaaa396a2a2",
+   "research/studies/coast_water/load.py": "391bbed47d563e35467a41be83cb738f5e89f6101ec2cc0ff26ec651a8bd2865",
+   "climate/gcm/turned.py": "0048cd6ac13ab7e9fc6975437f04c2a83e0be3e2c6d8764aae4d68bff4cb629a"
+  }
+ }
+}

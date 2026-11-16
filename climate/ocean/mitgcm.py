@@ -163,6 +163,25 @@ def read_mds(stem):
     return data[0] if meta["nrecords"] == 1 else data
 
 
+PICKUP_SURFACE_FIELDS = ("EtaN", "dEtaHdt", "EtaH")
+
+
+def read_pickup(stem, nr):
+    """A pickup's fields as {name: array}. The file lists its records level by level: a whole-depth field takes
+    `nr` of them and comes back as (nr, ny, nx), a field of the surface takes one."""
+    meta = read_meta(f"{stem}.meta")
+    data = np.fromfile(f"{stem}.data", dtype=meta["dtype"]).astype(float)
+    data = data.reshape((meta["nrecords"],) + meta["shape"][-2:])
+    counts = [1 if name in PICKUP_SURFACE_FIELDS else nr for name in meta["fields"]]
+    if sum(counts) != meta["nrecords"]:
+        raise ValueError(f"{stem} holds {meta['nrecords']} records where its fields at {nr} levels make {sum(counts)}")
+    out, k = {}, 0
+    for name, n in zip(meta["fields"], counts):
+        out[name] = data[k] if n == 1 else data[k:k + n]
+        k += n
+    return out
+
+
 # ---------------------------------------------------------------- the experiment
 
 def size_h(nx, ny, npx, npy, olx=3):

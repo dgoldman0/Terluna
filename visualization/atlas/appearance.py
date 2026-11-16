@@ -56,6 +56,12 @@ RIVER_WATER = np.array([0.085, 0.078, 0.058])   # sediment-laden, as rivers cros
 CLOUD_ALBEDO = 0.72                 # of the part of a deck that intercepts light
 LOW_OPACITY, HIGH_OPACITY = 0.9, 0.4  # guesstimates: the low deck holds the model's cloud water, the high deck little
 CLOUD_ROWS = 90                     # 2-degree rows for the cloud maps
+# The climate model's fields are smoothed over this share of its grid spacing before they set the ground cover
+# (a display choice): bilinear interpolation of its 5.5-degree cells leaves kinks along the grid lines, and its
+# grid-scale ripples, finer than the spectral model resolves, crossed the cover's thresholds as straight east-west
+# and north-south edges. At 0.7 of a cell, ripples two cells long keep a tenth of their contrast and waves 30 degrees
+# long about 70%.
+CLIMATE_SMOOTHING_CELLS = 0.7
 CALIBRATION_FLOOR_DEG = 10.0        # below this Sun height the scattering calibration holds its 10-degree value
 
 # Cloud noise, evaluated by the page and replicated here to measure its distribution. The low deck is
@@ -180,11 +186,14 @@ def gradients(a, dy, lat):
 
 
 def climate_field(clim, name, shape):
-    """A climatology field on the texture grid: regridded at 4 pixels per degree, then enlarged."""
+    """A climatology field on the texture grid: regridded at 4 pixels per degree, smoothed over
+    CLIMATE_SMOOTHING_CELLS of the model's grid spacing, then enlarged."""
     import cv2
     lat4 = 90.0 - (np.arange(720) + 0.5) / 4.0
     lon4 = (np.arange(1440) + 0.5) / 4.0 - 180.0
-    f = regrid(clim[name], clim['lat'], clim['lon'], lat4, lon4).astype(np.float32)
+    f = regrid(clim[name], clim['lat'], clim['lon'], lat4, lon4)
+    spacing = float(np.abs(np.diff(clim['lat'])).mean())
+    f = sphere_blur(f, CLIMATE_SMOOTHING_CELLS * spacing * 4.0, lat4).astype(np.float32)
     s = shape[1] // f.shape[1]
     pad = np.concatenate([f[:, -1:], f, f[:, :1]], axis=1)
     return cv2.resize(pad, (pad.shape[1] * s, shape[0]), interpolation=cv2.INTER_LINEAR)[:, s:s + shape[1]]

@@ -1,0 +1,585 @@
+{
+ "schema": "terluna.research.drainage-network-globe-stops/1",
+ "producer": {
+  "module": "research.studies.drainage_network.stops",
+  "code_sha256": "12e9733edf142087931e0c6823e9f748da706833a80bd9fbbb161837dc809d2f"
+ },
+ "evidence": "The drainage network study's history of the six large seas with the routing's budget closed, recorded at chosen years and drawn on LOLA's 16 px/deg heights above the GRAIL geoid; the network's own limits hold (no water's own gravity or crustal sag, the design climate fixed). A computed drawing of a computed history, not validated.",
+ "reading_rule": "stops are years after the water stands as the atlas draws it. Each stop gives each sea's level in the history relative to the common level (levels_m, rounded there to 0.1 m) and its state (filling, or full and overflowing), the events up to that year, and the share of the Moon that is water: the six seas, the hollows their overflows fill and the hollows the atlas holds at the common level, which the study does not follow and which stay as drawn; the rain-fed lakes above the common level are counted apart, as the atlas counts them. bodies lists every water the maps name: ids 1-6 the seas, the rest the hollows an overflow fills, with the level each is filled to. The maps hold, per cell of the 16 px/deg grid with 0 E at the left edge, a bit per stop where one of the bodies covers it (body_bits; the hollows the atlas holds at the common level are water in every year besides), the first and second body that cover the cell at some stop (first, second), a bit per stop where the second is its surface (second_bits), a bit per stop for an overflow river on dry ground (channel_bits) with the surplus it carries (channel_q, m3/s), and each body's level as drawn at each stop (levels, m, nan where it holds no water): after year 0 a sea is drawn half a metre above its level in the history, so that a sea within half a metre below a pass is drawn over it, and at most 1 cm under its rim.",
+ "case": {
+  "rain": 1.0,
+  "open_water_evaporation_factor": 1.146
+ },
+ "maps": "research/runs/drainage_network/globe_stops.npz",
+ "cells_under_more_than_two_bodies": 0,
+ "stops": [
+  {
+   "year": 0,
+   "levels_m": {
+    "near_side": 0.0,
+    "south_pole_aitken": 0.0,
+    "smythii_marginis": 0.0,
+    "humboldtianum": 0.0,
+    "orientale": 0.0,
+    "moscoviense": 0.0
+   },
+   "states": {
+    "near_side": "filling",
+    "south_pole_aitken": "filling",
+    "smythii_marginis": "filling",
+    "humboldtianum": "filling",
+    "orientale": "filling",
+    "moscoviense": "filling"
+   },
+   "events": [],
+   "water_share": 0.27998,
+   "water_km2": 10620129
+  },
+  {
+   "year": 250,
+   "levels_m": {
+    "near_side": -80.9,
+    "south_pole_aitken": -71.7,
+    "smythii_marginis": 423.3,
+    "humboldtianum": -147.5,
+    "orientale": 1012.4,
+    "moscoviense": 3272.8
+   },
+   "states": {
+    "near_side": "filling",
+    "south_pole_aitken": "filling",
+    "smythii_marginis": "filling",
+    "humboldtianum": "filling",
+    "orientale": "filling",
+    "moscoviense": "filling"
+   },
+   "events": [],
+   "water_share": 0.27798,
+   "water_km2": 10544252
+  },
+  {
+   "year": 500,
+   "levels_m": {
+    "near_side": -120.0,
+    "south_pole_aitken": -84.4,
+    "smythii_marginis": 750.6,
+    "humboldtianum": -336.0,
+    "orientale": 1698.1,
+    "moscoviense": 3320.4
+   },
+   "states": {
+    "near_side": "filling",
+    "south_pole_aitken": "filling",
+    "smythii_marginis": "filling",
+    "humboldtianum": "filling",
+    "orientale": "filling",
+    "moscoviense": "filling"
+   },
+   "events": [],
+   "water_share": 0.27488,
+   "water_km2": 10426946
+  },
+  {
+   "year": 750,
+   "levels_m": {
+    "near_side": -120.3,
+    "south_pole_aitken": -151.7,
+    "smythii_marginis": 766.6,
+    "humboldtianum": -459.6,
+    "orientale": 2102.3,
+    "moscoviense": 3375.3
+   },
+   "states": {
+    "near_side": "filling",
+    "south_pole_aitken": "filling",
+    "smythii_marginis": "full",
+    "humboldtianum": "filling",
+    "orientale": "filling",
+    "moscoviense": "filling"
+   },
+   "events": [
+    {
+     "year": 515,
+     "event": "smythii_marginis is full and overflows to near_side",
+     "level_m": 766.6
+    }
+   ],
+   "water_share": 0.28548,
+   "water_km2": 10828759
+  },
+  {
+   "year": 1000,
+   "levels_m": {
+    "near_side": -120.2,
+    "south_pole_aitken": -142.8,
+    "smythii_marginis": 766.6,
+    "humboldtianum": -647.6,
+    "orientale": 2341.6,
+    "moscoviense": 3545.1
+   },
+   "states": {
+    "near_side": "filling",
+    "south_pole_aitken": "filling",
+    "smythii_marginis": "full",
+    "humboldtianum": "filling",
+    "orientale": "full",
+    "moscoviense": "full"
+   },
+   "events": [
+    {
+     "year": 515,
+     "event": "smythii_marginis is full and overflows to near_side",
+     "level_m": 766.6
+    },
+    {
+     "year": 870,
+     "event": "moscoviense is full and overflows to south_pole_aitken",
+     "level_m": 3545.2
+    },
+    {
+     "year": 940,
+     "event": "orientale is full and overflows to near_side",
+     "level_m": 2341.6
+    }
+   ],
+   "water_share": 0.29075,
+   "water_km2": 11028856
+  },
+  {
+   "year": 2000,
+   "levels_m": {
+    "near_side": -120.3,
+    "south_pole_aitken": 75.5,
+    "smythii_marginis": 766.6,
+    "humboldtianum": -1353.0,
+    "orientale": 2341.6,
+    "moscoviense": 3545.1
+   },
+   "states": {
+    "near_side": "filling",
+    "south_pole_aitken": "filling",
+    "smythii_marginis": "full",
+    "humboldtianum": "filling",
+    "orientale": "full",
+    "moscoviense": "full"
+   },
+   "events": [
+    {
+     "year": 515,
+     "event": "smythii_marginis is full and overflows to near_side",
+     "level_m": 766.6
+    },
+    {
+     "year": 870,
+     "event": "moscoviense is full and overflows to south_pole_aitken",
+     "level_m": 3545.2
+    },
+    {
+     "year": 940,
+     "event": "orientale is full and overflows to near_side",
+     "level_m": 2341.6
+    }
+   ],
+   "water_share": 0.29537,
+   "water_km2": 11203905
+  },
+  {
+   "year": 5000,
+   "levels_m": {
+    "near_side": -120.3,
+    "south_pole_aitken": 702.8,
+    "smythii_marginis": 766.6,
+    "humboldtianum": -2409.7,
+    "orientale": 2341.6,
+    "moscoviense": 3545.1
+   },
+   "states": {
+    "near_side": "filling",
+    "south_pole_aitken": "filling",
+    "smythii_marginis": "full",
+    "humboldtianum": "filling",
+    "orientale": "full",
+    "moscoviense": "full"
+   },
+   "events": [
+    {
+     "year": 515,
+     "event": "smythii_marginis is full and overflows to near_side",
+     "level_m": 766.6
+    },
+    {
+     "year": 870,
+     "event": "moscoviense is full and overflows to south_pole_aitken",
+     "level_m": 3545.2
+    },
+    {
+     "year": 940,
+     "event": "orientale is full and overflows to near_side",
+     "level_m": 2341.6
+    }
+   ],
+   "water_share": 0.29884,
+   "water_km2": 11335718
+  },
+  {
+   "year": 10000,
+   "levels_m": {
+    "near_side": -120.2,
+    "south_pole_aitken": 1398.5,
+    "smythii_marginis": 766.6,
+    "humboldtianum": -4353.7,
+    "orientale": 2341.6,
+    "moscoviense": 3545.1
+   },
+   "states": {
+    "near_side": "filling",
+    "south_pole_aitken": "filling",
+    "smythii_marginis": "full",
+    "humboldtianum": "filling",
+    "orientale": "full",
+    "moscoviense": "full"
+   },
+   "events": [
+    {
+     "year": 515,
+     "event": "smythii_marginis is full and overflows to near_side",
+     "level_m": 766.6
+    },
+    {
+     "year": 870,
+     "event": "moscoviense is full and overflows to south_pole_aitken",
+     "level_m": 3545.2
+    },
+    {
+     "year": 940,
+     "event": "orientale is full and overflows to near_side",
+     "level_m": 2341.6
+    }
+   ],
+   "water_share": 0.30616,
+   "water_km2": 11613312
+  }
+ ],
+ "bodies": [
+  {
+   "id": 1,
+   "name": "near_side",
+   "kind": "sea"
+  },
+  {
+   "id": 2,
+   "name": "south_pole_aitken",
+   "kind": "sea"
+  },
+  {
+   "id": 3,
+   "name": "smythii_marginis",
+   "kind": "sea"
+  },
+  {
+   "id": 4,
+   "name": "humboldtianum",
+   "kind": "sea"
+  },
+  {
+   "id": 5,
+   "name": "orientale",
+   "kind": "sea"
+  },
+  {
+   "id": 6,
+   "name": "moscoviense",
+   "kind": "sea"
+  },
+  {
+   "id": 7,
+   "name": "smythii_marginis overflow hollow 1",
+   "kind": "hollow",
+   "fed_by": "smythii_marginis",
+   "level_m": 751.9,
+   "cells": 6769
+  },
+  {
+   "id": 8,
+   "name": "smythii_marginis overflow hollow 2",
+   "kind": "hollow",
+   "fed_by": "smythii_marginis",
+   "level_m": 726.9,
+   "cells": 5
+  },
+  {
+   "id": 9,
+   "name": "smythii_marginis overflow hollow 3",
+   "kind": "hollow",
+   "fed_by": "smythii_marginis",
+   "level_m": 677.8,
+   "cells": 15191
+  },
+  {
+   "id": 10,
+   "name": "smythii_marginis overflow hollow 4",
+   "kind": "hollow",
+   "fed_by": "smythii_marginis",
+   "level_m": 641.6,
+   "cells": 1
+  },
+  {
+   "id": 11,
+   "name": "smythii_marginis overflow hollow 5",
+   "kind": "hollow",
+   "fed_by": "smythii_marginis",
+   "level_m": 635.2,
+   "cells": 6
+  },
+  {
+   "id": 12,
+   "name": "smythii_marginis overflow hollow 6",
+   "kind": "hollow",
+   "fed_by": "smythii_marginis",
+   "level_m": 606.5,
+   "cells": 3
+  },
+  {
+   "id": 13,
+   "name": "smythii_marginis overflow hollow 7",
+   "kind": "hollow",
+   "fed_by": "smythii_marginis",
+   "level_m": 485.1,
+   "cells": 11711
+  },
+  {
+   "id": 14,
+   "name": "smythii_marginis overflow hollow 8",
+   "kind": "hollow",
+   "fed_by": "smythii_marginis",
+   "level_m": 484.7,
+   "cells": 1
+  },
+  {
+   "id": 15,
+   "name": "smythii_marginis overflow hollow 9",
+   "kind": "hollow",
+   "fed_by": "smythii_marginis",
+   "level_m": 172.1,
+   "cells": 3905
+  },
+  {
+   "id": 16,
+   "name": "orientale overflow hollow 1",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 2334.4,
+   "cells": 8
+  },
+  {
+   "id": 17,
+   "name": "orientale overflow hollow 2",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 2296.3,
+   "cells": 11268
+  },
+  {
+   "id": 18,
+   "name": "orientale overflow hollow 3",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 2160.5,
+   "cells": 364
+  },
+  {
+   "id": 19,
+   "name": "orientale overflow hollow 4",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 2092.9,
+   "cells": 3105
+  },
+  {
+   "id": 20,
+   "name": "orientale overflow hollow 5",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 1916.2,
+   "cells": 8
+  },
+  {
+   "id": 21,
+   "name": "orientale overflow hollow 6",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 1903.8,
+   "cells": 4750
+  },
+  {
+   "id": 22,
+   "name": "orientale overflow hollow 7",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 1694.7,
+   "cells": 347
+  },
+  {
+   "id": 23,
+   "name": "orientale overflow hollow 8",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 1511.0,
+   "cells": 5
+  },
+  {
+   "id": 24,
+   "name": "orientale overflow hollow 9",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 1456.5,
+   "cells": 260
+  },
+  {
+   "id": 25,
+   "name": "orientale overflow hollow 10",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 1363.8,
+   "cells": 733
+  },
+  {
+   "id": 26,
+   "name": "orientale overflow hollow 11",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 1088.4,
+   "cells": 12
+  },
+  {
+   "id": 27,
+   "name": "orientale overflow hollow 12",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 1019.3,
+   "cells": 86
+  },
+  {
+   "id": 28,
+   "name": "orientale overflow hollow 13",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 884.1,
+   "cells": 2
+  },
+  {
+   "id": 29,
+   "name": "orientale overflow hollow 14",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 707.0,
+   "cells": 74
+  },
+  {
+   "id": 30,
+   "name": "orientale overflow hollow 15",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 609.3,
+   "cells": 1734
+  },
+  {
+   "id": 31,
+   "name": "orientale overflow hollow 16",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 560.5,
+   "cells": 85
+  },
+  {
+   "id": 32,
+   "name": "orientale overflow hollow 17",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 254.2,
+   "cells": 478
+  },
+  {
+   "id": 33,
+   "name": "orientale overflow hollow 18",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 209.0,
+   "cells": 172
+  },
+  {
+   "id": 34,
+   "name": "orientale overflow hollow 19",
+   "kind": "hollow",
+   "fed_by": "orientale",
+   "level_m": 65.0,
+   "cells": 5
+  },
+  {
+   "id": 35,
+   "name": "moscoviense overflow hollow 1",
+   "kind": "hollow",
+   "fed_by": "moscoviense",
+   "level_m": 3215.8,
+   "cells": 18
+  },
+  {
+   "id": 36,
+   "name": "moscoviense overflow hollow 2",
+   "kind": "hollow",
+   "fed_by": "moscoviense",
+   "level_m": 2820.5,
+   "cells": 5
+  },
+  {
+   "id": 37,
+   "name": "moscoviense overflow hollow 3",
+   "kind": "hollow",
+   "fed_by": "moscoviense",
+   "level_m": 2767.2,
+   "cells": 1316
+  },
+  {
+   "id": 38,
+   "name": "moscoviense overflow hollow 4",
+   "kind": "hollow",
+   "fed_by": "moscoviense",
+   "level_m": 2737.8,
+   "cells": 1
+  },
+  {
+   "id": 39,
+   "name": "moscoviense overflow hollow 5",
+   "kind": "hollow",
+   "fed_by": "moscoviense",
+   "level_m": 1808.5,
+   "cells": 3083
+  },
+  {
+   "id": 40,
+   "name": "moscoviense overflow hollow 6",
+   "kind": "hollow",
+   "fed_by": "moscoviense",
+   "level_m": 748.0,
+   "cells": 3854
+  },
+  {
+   "id": 41,
+   "name": "moscoviense overflow hollow 7",
+   "kind": "hollow",
+   "fed_by": "moscoviense",
+   "level_m": 675.8,
+   "cells": 74
+  },
+  {
+   "id": 42,
+   "name": "moscoviense overflow hollow 8",
+   "kind": "hollow",
+   "fed_by": "moscoviense",
+   "level_m": 114.3,
+   "cells": 502
+  }
+ ],
+ "held_as_the_atlas_draws_km2": 2426516,
+ "seconds": 551
+}

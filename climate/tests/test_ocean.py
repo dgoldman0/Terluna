@@ -10,7 +10,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from climate.ocean import builds, checks, forcing, lunar, mesh, mitgcm
+from climate.ocean import builds, checks, forcing, lunar, mesh, mitgcm, stratified
 from shared.constants import MOON_RADIUS, MOON_SURFACE_GRAVITY, SIDEREAL_MONTH_DAYS
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -123,6 +123,21 @@ def test_mds_reader(tmp_path):
         " nrecords = [     2 ];\n timeStepNumber = [         10 ];\n nFlds = [    2 ];\n fldList = {\n 'ETAN    ' 'UVEL    '\n };\n")
     out = mitgcm.read_mds(tmp_path / "state.0000000010")
     assert np.array_equal(out["ETAN"], values) and np.array_equal(out["UVEL"], 2 * values)
+
+
+def test_pickup_reader_gives_each_field_its_levels(tmp_path):
+    # a pickup of two levels on a 4 by 3 grid: two whole-depth fields, then the surface's level
+    records = np.arange(5 * 12, dtype=">f8").reshape(5, 3, 4)
+    records.tofile(tmp_path / "pickup.0000000020.data")
+    meta = (" nDims = [   2 ];\n dimList = [\n     4,    1,    4,\n     3,    1,    3\n ];\n dataprec = [ 'float64' ];\n"
+            " nrecords = [     5 ];\n timeStepNumber = [         20 ];\n nFlds = [    3 ];\n fldList = {\n"
+            " 'Theta   ' 'Salt    ' 'EtaN    '\n };\n")
+    (tmp_path / "pickup.0000000020.meta").write_text(meta)
+    out = mitgcm.read_pickup(tmp_path / "pickup.0000000020", 2)
+    assert out["Theta"].shape == (2, 3, 4) and np.array_equal(out["Salt"], records[2:4])
+    assert np.array_equal(out["EtaN"], records[4])
+    with pytest.raises(ValueError):
+        mitgcm.read_pickup(tmp_path / "pickup.0000000020", 3)
 
 
 def test_cells_mesh_splits_corner_contacts_and_keeps_area():
@@ -270,3 +285,220 @@ def test_schism_last_shorter_chunk_lines_up_its_files_and_ends_on_a_hotstart():
     assert schism.chunk_steps(19008000.0, 248400.0, 300.0, 10800.0, 864000.0) == (36, 64188)
     with pytest.raises(ValueError):
         schism.chunk_steps(19008000.0, 249000.0, 300.0, 10800.0, 864000.0)                    # ends between two snapshots
+
+
+def test_a_seas_own_frame_keeps_places_and_directions():
+    frame = stratified.Frame(-47.8, -176.9)
+    glat, glon = frame.to_grid(np.array([-47.8, -80.0, -14.0]), np.array([-176.9, 30.0, 170.0]))
+    assert glat[0] == pytest.approx(0.0, abs=1e-9) and glon[0] == pytest.approx(0.0, abs=1e-9)
+    lat, lon = frame.to_true(glat, glon)
+    assert lat == pytest.approx([-47.8, -80.0, -14.0]) and np.mod(lon, 360.0) == pytest.approx([183.1, 30.0, 170.0])
+    # a step to the true north of the centre is a step to the grid's north
+    north, _ = frame.to_grid(np.array([-47.7]), np.array([-176.9]))
+    assert north[0] == pytest.approx(0.1, abs=1e-6)
+    # a wind keeps its speed everywhere and its direction at the centre
+    u, v = frame.vector_to_grid(glat, glon, np.array([1.0, 3.0, 0.0]), np.array([0.0, 4.0, 2.0]))
+    assert np.hypot(u, v) == pytest.approx([1.0, 5.0, 2.0])
+    assert (u[0], v[0]) == pytest.approx((1.0, 0.0), abs=1e-9)
+    # and points where a short true-eastward step lands on the grid
+    step = 0.01
+    for la, lo in ((-70.0, 120.0), (-20.0, -150.0)):
+        g0, g1 = frame.to_grid(np.array([la]), np.array([lo])), frame.to_grid(np.array([la]), np.array([lo + step]))
+        de = (g1[1][0] - g0[1][0]) * math.cos(math.radians(g0[0][0]))
+        dn = g1[0][0] - g0[0][0]
+        ue, vn = frame.vector_to_grid(g0[0], g0[1], np.array([1.0]), np.array([0.0]))
+        assert (ue[0], vn[0]) == pytest.approx((de / math.hypot(de, dn), dn / math.hypot(de, dn)), abs=1e-4)
+
+
+def test_levels_thicken_downwards_to_hold_the_depth():
+    dz = stratified.levels(5576.0)
+    assert dz[0] == 5.0 and dz.max() == 500.0 and np.all(np.diff(dz) >= 0)
+    assert dz.sum() >= 5576.0 > dz[:-1].sum()
+    assert dz[1] / dz[0] == pytest.approx(1.2)
+
+
+def test_a_stratified_sea_carries_the_moon_and_reads_its_fluxes(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, "RUNS", tmp_path)
+    grid = mitgcm.Grid(xg=np.arange(-2.0, 2.01, 1.0), yg=np.arange(-2.0, 2.01, 1.0), depth=np.full((4, 4), 60.0))
+    flat = np.zeros((4, 4))
+    sea = stratified.Sea(name="s", grid=grid, deltat=1800.0, delr=np.array([5.0, 6.0, 50.0]),
+                         coriolis=dict(centre=flat - 3e-6, corner=flat - 3e-6, cosine=flat + 4e-6), theta0=27.0,
+                         salt0=35.0, forcing=dict(ustress=np.zeros((3, 4, 4)), hflux=np.ones((3, 4, 4))),
+                         runoff=flat + 1e-7, forcing_period_s=23400.0, sst_relax_s=0.0, output_s=86400.0)
+    sea.write()
+    data = (sea.folder / "data.template").read_text()
+    assert f"gravity={lunar.GRAVITY:.12g}" in data and "rSphere=1737400" in data
+    assert "selectCoriMap=3" in data and "eosType='JMD95Z'" in data and "selectP_inEOS_Zc=0" in data
+    assert "tRef=3*27," in data and "sRef=3*35," in data
+    assert "useRealFreshWaterFlux=.TRUE." in data and "nonlinFreeSurf=4" in data and "select_rStar=2" in data
+    assert "implicitDiffusion=.TRUE." in data and "implicitViscosity=.TRUE." in data     # the closure needs both
+    exf = (sea.folder / "data.exf").read_text()
+    assert "repeatPeriod=70200," in exf and "ustressperiod=23400," in exf and "ustressStartTime=11700," in exf
+    assert "hfluxfile='hflux.bin'" in exf and "runofffile='runoff.bin'" in exf and "climsst" not in exf
+    assert "useGGL90=.TRUE." in (sea.folder / "data.pkg").read_text()
+    # the old-water dye: 1 everywhere at the start, drawn to 0 in the top layer alone
+    assert "usePTRACERS=.TRUE." in (sea.folder / "data.pkg").read_text()
+    assert "PTRACERS_ref(1:3,1)=3*1.," in (sea.folder / "data.ptracers").read_text()
+    assert "tauRelaxPTR(1)=86400," in (sea.folder / "data.rbcs").read_text()
+    mask = np.fromfile(sea.folder / "rbcs_mask.bin", dtype=">f8").reshape(3, 4, 4)
+    assert mask[0].all() and not mask[1:].any()
+    assert np.fromfile(sea.folder / "fCoriC.bin", dtype=">f8").tolist() == [-3e-6] * 16
+    assert np.fromfile(sea.folder / "hflux.bin", dtype=">f8").size == 3 * 16
+    sea.write_diagnostics()
+    diag = (sea.folder / "data.diagnostics").read_text()
+    assert "fileName(1) = 'surface'" in diag and "levels(1,2) = 1.0" in diag and "'deep'" not in diag
+    sea.deep_output_s = 864000.0
+    sea.write_diagnostics()
+    assert "'TRAC01  '" in (sea.folder / "data.diagnostics").read_text()
+    # a run on mixed cell sizes: viscosity by the cell's size, and a start carried over from another run
+    cold = np.full((3, 4, 4), 26.0)
+    patch = stratified.Sea(name="p", grid=grid, deltat=900.0, delr=np.array([5.0, 6.0, 50.0]), coriolis=sea.coriolis,
+                           visc_h=0.0, visc_grid=0.0012, start=dict(theta=cold, salt=cold + 9.0, dye=cold * 0.0))
+    patch.write()
+    data = (patch.folder / "data.template").read_text()
+    assert "viscAhGrid=0.0012," in data and "viscAh=0," in data
+    assert "hydrogThetaFile='start_theta.bin'" in data and "hydrogSaltFile='start_salt.bin'" in data
+    assert "PTRACERS_initialFile(1)='start_dye.bin'" in (patch.folder / "data.ptracers").read_text()
+    assert np.fromfile(patch.folder / "start_salt.bin", dtype=">f8").tolist() == [35.0] * 48
+    assert "hydrogThetaFile" not in (sea.folder / "data.template").read_text()
+    with pytest.raises(ValueError):
+        stratified.Sea(name="b", grid=grid, deltat=1800.0, delr=np.array([5.0]), coriolis=sea.coriolis,
+                       forcing=dict(ustress=np.zeros((3, 4, 4)), hflux=np.ones((2, 4, 4))),
+                       forcing_period_s=1.0).inputs()
+
+
+def test_a_stratified_sea_takes_the_tide_as_a_potential(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, "RUNS", tmp_path)
+    grid = mitgcm.Grid(xg=np.arange(-2.0, 2.01, 1.0), yg=np.arange(-2.0, 2.01, 1.0), depth=np.full((4, 4), 60.0))
+    flat = np.zeros((4, 4))
+    coriolis = dict(centre=flat, corner=flat, cosine=flat)
+    height = np.arange(3 * 16, dtype=float).reshape(3, 4, 4) * 0.01
+    sea = stratified.Sea(name="t", grid=grid, deltat=1800.0, delr=np.array([5.0, 50.0]), coriolis=coriolis,
+                         tide_m=height, tide_period_s=86400.0)
+    sea.write()
+    assert "momTidalForcing=.TRUE." in (sea.folder / "data.template").read_text()
+    exf = (sea.folder / "data.exf").read_text()
+    assert "tidePotFile='tidepot.bin'" in exf and "tidePotPeriod=86400," in exf and "tidePotStartTime=0," in exf
+    assert "tidePotRepCycle=259200," in exf                       # its own cycle, not the fluxes' year
+    assert f"exf_inscal_tidePot={-lunar.GRAVITY:.12g}" in exf       # the potential is -g times the height
+    assert np.array_equal(np.fromfile(sea.folder / "tidepot.bin", dtype=">f8").reshape(3, 4, 4), height)
+    assert json.loads((sea.folder / "experiment.json").read_text())["tide"] == dict(records=3, period_s=86400.0)
+    still = stratified.Sea(name="u", grid=grid, deltat=1800.0, delr=np.array([5.0, 50.0]), coriolis=coriolis)
+    still.write()
+    assert "momTidalForcing" not in (still.folder / "data.template").read_text()
+    assert "tidePot" not in (still.folder / "data.exf").read_text() and not (still.folder / "tidepot.bin").exists()
+
+
+def test_a_stratified_sea_carries_tracers_with_their_own_sources(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, "RUNS", tmp_path)
+    grid = mitgcm.Grid(xg=np.arange(-2.0, 2.01, 1.0), yg=np.arange(-2.0, 2.01, 1.0), depth=np.full((4, 4), 60.0))
+    grid.depth[0, 0] = 0.0
+    flat = np.zeros((4, 4))
+    coriolis = dict(centre=flat - 3e-6, corner=flat - 3e-6, cosine=flat + 4e-6)
+    delr = np.array([5.0, 6.0, 50.0])
+    source = np.full((3, 4, 4), 2e-8)
+    tracers = (stratified.Tracer("old", start=np.full((3, 4, 4), 0.7)),
+               stratified.Tracer("used", start=0.0, top=0.0, top_s=86400.0, source=source))
+    sea = stratified.Sea(name="o", grid=grid, deltat=1800.0, delr=delr, coriolis=coriolis, dye=False,
+                         tracers=tracers, tracers_from=48)
+    sea.write()
+    ptr = (sea.folder / "data.ptracers").read_text()
+    assert "PTRACERS_numInUse=2," in ptr and "PTRACERS_Iter0=48," in ptr
+    assert "PTRACERS_initialFile(2)='start_tr02.bin'" in ptr and "PTRACERS_names(2)='used'" in ptr
+    rbcs = (sea.folder / "data.rbcs").read_text()
+    assert "relaxMaskFile(3)='rbcs_mask_tr01.bin'" in rbcs and "relaxMaskFile(4)='rbcs_mask_tr02.bin'" in rbcs
+    assert "tauRelaxPTR(2)=86400," in rbcs and "relaxPtracerFile(2)='rbcs_target_tr02.bin'" in rbcs
+    start = np.fromfile(sea.folder / "start_tr01.bin", dtype=">f8").reshape(3, 4, 4)
+    assert start[1, 1, 1] == 0.7 and start[:, 0, 0].tolist() == [0.0] * 3        # land holds none
+    mask = np.fromfile(sea.folder / "rbcs_mask_tr02.bin", dtype=">f8").reshape(3, 4, 4)
+    target = np.fromfile(sea.folder / "rbcs_target_tr02.bin", dtype=">f8").reshape(3, 4, 4)
+    assert mask[0, 1, 1] == 1.0 and target[0, 1, 1] == 0.0                    # the top layer is held at 0
+    # below it, the relaxation package's pull -mask (c - target) / tau adds the source to within c / BEYOND
+    for c in (0.0, 5.0, -3.0):
+        pull = -mask[1:, 1, 1] * (c - target[1:, 1, 1]) / 86400.0
+        assert np.allclose(pull, 2e-8, rtol=1e-5)
+    assert not mask[:, 0, 0].any()
+    assert json.loads((sea.folder / "experiment.json").read_text())["tracers"] == ["old", "used"]
+    sea.deep_output_s = 864000.0
+    sea.extra_lists = ((("UVEL", "VVEL"), "daily", 86400.0, 1),)
+    sea.write_diagnostics()
+    diag = (sea.folder / "data.diagnostics").read_text()
+    assert "'TRAC01  ','TRAC02  '" in diag and "fileName(4) = 'daily'" in diag and "levels(1,4) = 1.0" in diag
+    with pytest.raises(ValueError):
+        stratified.Sea(name="d", grid=grid, deltat=1800.0, delr=delr, coriolis=coriolis, tracers=tracers)
+
+
+def test_a_stratified_sea_takes_internal_wave_power_and_the_floors_heat(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, "RUNS", tmp_path)
+    grid = mitgcm.Grid(xg=np.arange(-2.0, 2.01, 1.0), yg=np.arange(-2.0, 2.01, 1.0), depth=np.full((4, 4), 60.0))
+    grid.depth[0, 0] = 0.0
+    flat = np.zeros((4, 4))
+    coriolis = dict(centre=flat - 3e-6, corner=flat - 3e-6, cosine=flat + 4e-6)
+    sea = stratified.Sea(name="i", grid=grid, deltat=1800.0, delr=np.array([5.0, 55.0]), coriolis=coriolis,
+                         idemix=dict(tidal=flat + 1e-6, wind=flat + 2e-4), geothermal=flat + 0.011, diff_r=1.4e-7)
+    sea.write()
+    ggl90 = (sea.folder / "data.ggl90").read_text()
+    first, second = ggl90.split("&GGL90_PARM02")                                # IDEMIX reads its own group
+    assert "useIDEMIX=.TRUE." in first and "IDEMIX_wind_file='idemix_wind.bin'" in second
+    assert "geothermalFile='geothermal.bin'" in (sea.folder / "data.template").read_text()
+    assert "diffKrT=1.4e-07" in (sea.folder / "data.template").read_text()
+    wind = np.fromfile(sea.folder / "idemix_wind.bin", dtype=">f8").reshape(4, 4)
+    assert wind[0, 0] == 0.0 and wind[1, 1] == 2e-4                            # nothing over land
+    record = json.loads((sea.folder / "experiment.json").read_text())
+    assert record["idemix_mw"]["wind"] == pytest.approx(2e-4 * grid.area[grid.wet].sum() / 1e6)
+    plain = stratified.Sea(name="p", grid=grid, deltat=1800.0, delr=np.array([5.0, 55.0]), coriolis=coriolis)
+    plain.write()
+    assert "IDEMIX" not in (plain.folder / "data.ggl90").read_text()
+    assert "idemix_mw" not in json.loads((plain.folder / "experiment.json").read_text())
+    assert stratified.options_with("#undef ALLOW_GGL90_IDEMIX\n", "ALLOW_GGL90_IDEMIX", "x") == \
+        "#define ALLOW_GGL90_IDEMIX\n"
+    with pytest.raises(RuntimeError):
+        stratified.options_with("#define ALLOW_GGL90_IDEMIX\n", "ALLOW_GGL90_IDEMIX", "x")
+
+
+def test_a_restart_carries_the_parents_state_and_starts_the_waves_at_rest(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, "RUNS", tmp_path)
+    parent = tmp_path / "parent"
+    parent.mkdir()
+    tke = np.arange(2 * 16, dtype=">f8").tobytes()
+    (parent / "pickup.0000000096.data").write_bytes(b"state")
+    (parent / "pickup.0000000096.meta").write_text("meta")
+    (parent / "pickup_ggl90.0000000096.data").write_bytes(tke)
+    (parent / "pickup_ggl90.0000000096.meta").write_text(" nrecords = [          1 ];\n")
+    grid = mitgcm.Grid(xg=np.arange(-2.0, 2.01, 1.0), yg=np.arange(-2.0, 2.01, 1.0), depth=np.full((4, 4), 60.0))
+    flat = np.zeros((4, 4))
+    coriolis = dict(centre=flat - 3e-6, corner=flat - 3e-6, cosine=flat + 4e-6)
+    sea = stratified.Sea(name="r", grid=grid, deltat=1800.0, delr=np.array([5.0, 55.0]), coriolis=coriolis,
+                         dye=False, idemix=dict(tidal=flat, wind=flat))
+    sea.write(fresh=True)
+    sea.restart_from(parent, 96, build="b")
+    assert (sea.folder / "pickup.0000000096.data").read_bytes() == b"state"
+    data = (sea.folder / "pickup_ggl90.0000000096.data").read_bytes()
+    assert data[:len(tke)] == tke and data[len(tke):] == bytes(len(tke))       # the waves' energy starts at 0
+    assert "nrecords = [          2 ]" in (sea.folder / "pickup_ggl90.0000000096.meta").read_text()
+    assert sea.pickups() == [96]
+    assert (sea.folder / "setup.sha256").read_text().split()[0] == sea.setup_digest("b")
+    late = stratified.Sea(name="l", grid=grid, deltat=1800.0, delr=np.array([5.0, 55.0]), coriolis=coriolis,
+                          dye=False, tracers=(stratified.Tracer("new"),), tracers_from=48)
+    late.write(fresh=True)
+    with pytest.raises(ValueError):
+        late.restart_from(parent, 96, build="b")
+
+
+def test_a_stratified_sea_compiles_out_the_bulk_formulas(tmp_path):
+    for sub in ("pkg/exf", "model/inc"):
+        (tmp_path / sub).mkdir(parents=True)
+    (tmp_path / "pkg/exf/EXF_OPTIONS.h").write_text(
+        "#define ALLOW_ATM_TEMP\n#define ALLOW_ATM_WIND\n#define ALLOW_DOWNWARD_RADIATION\n#ifdef ALLOW_ATM_TEMP\n"
+        "# define ALLOW_BULKFORMULAE\n#endif\n#define ALLOW_RUNOFF\n#define ALLOW_CLIMSST_RELAXATION\n"
+        "#undef EXF_ALLOW_TIDES\n")
+    text = stratified.exf_options(tmp_path)
+    assert "#undef ALLOW_ATM_TEMP" in text and "#undef ALLOW_ATM_WIND" in text and "#define ALLOW_RUNOFF" in text
+    assert not re.search(r"^#define\s+ALLOW_ATM_TEMP", text, re.M)
+    assert "#undef EXF_ALLOW_TIDES" in text
+    assert "#define EXF_ALLOW_TIDES" in stratified.exf_options(tmp_path, tides=True)
+    (tmp_path / "model/inc/CPP_OPTIONS.h").write_text(
+        "#undef SHORTWAVE_HEATING\n#undef ALLOW_SOLVE4_PS_AND_DRAG\n#define INCLUDE_IMPLVERTADV_CODE\n"
+        "#undef NONLIN_FRSURF\n")
+    text = stratified.model_options(tmp_path)
+    assert "#define SHORTWAVE_HEATING" in text and "#define NONLIN_FRSURF" in text

@@ -1,0 +1,86 @@
+{
+ "schema": "terluna.research.south-sea-circulation-patch-trial/1",
+ "setting": {
+  "parent": "south_sea_1deg",
+  "started_from_year": 14.0,
+  "box_grid_degrees": [
+   -19.0,
+   -9.0,
+   24.0,
+   34.0
+  ],
+  "fine_deg": 0.1,
+  "frame_centre_turned": [
+   -47.84531975827012,
+   -176.90509832088878
+  ],
+  "nx": 176,
+  "ny": 176,
+  "levels": 32,
+  "wet_columns": 14379,
+  "wet_columns_in_the_box": 3855,
+  "cell_km": [
+   2.8007610658776536,
+   30.323138231885906
+  ],
+  "area_km2": 2316445.4682827177,
+  "box_water_km2": 31531.986290667992,
+  "volume_km3": 4848012.697810979,
+  "rivers": {
+   "six_seas_m3s": 31631.59969228398,
+   "moscoviense_route_m3s": 19564.064221235847,
+   "mouths": 372,
+   "cells_taking_rivers": 92,
+   "largest_cell_m3s": 16093.520736119224,
+   "largest_cell_m_day": 32.372868863846925
+  },
+  "river_spread_km": 6.0,
+  "forcing": {
+   "loss_m3s": 51195.66391351983
+  },
+  "visc_grid": 0.0012,
+  "deltat_s": 900.0,
+  "water_left_over_m3s": 1.4551915228366852e-11
+ },
+ "build": "mitgcm-checkpoint69s-eb655a079f6d",
+ "model_days": 10.0,
+ "steps": 960,
+ "wall_s": 395.3,
+ "seconds_a_step": 0.4117554540435473,
+ "ranks": 4,
+ "hours_a_model_year": 3.925401995215151,
+ "machine_load_at_the_end": 11.03,
+ "monitor": {
+  "time_secondsf": 864000.0,
+  "dynstat_eta_max": 0.37222797186136,
+  "dynstat_eta_min": -0.083520636335132,
+  "dynstat_uvel_max": 0.48903585110636,
+  "dynstat_uvel_min": -0.38826891125972,
+  "dynstat_vvel_max": 0.49459886351959,
+  "dynstat_vvel_min": -0.35739601481456,
+  "dynstat_wvel_max": 0.0062450285320938,
+  "dynstat_theta_max": 33.306231009789,
+  "dynstat_theta_min": 26.976314713113,
+  "dynstat_salt_max": 35.4455100392,
+  "dynstat_salt_min": 0.00062644001184064,
+  "dynstat_salt_mean": 35.000081733671,
+  "dynstat_theta_mean": 27.281380821279,
+  "advcfl_uvel_max": 0.14699061308705,
+  "advcfl_vvel_max": 0.069251102796584,
+  "advcfl_wvel_max": 0.13487326860183,
+  "advcfl_W_hf_max": 0.07811133445581,
+  "ke_mean": 0.00029014941138104
+ },
+ "top_layer_in_the_box": {
+  "salinity_areas_km2": {
+   "fresh": 181.30709955068008,
+   "nearly fresh": 252.60891612975226,
+   "brackish": 2376.083108333319,
+   "mixed": 3464.1602169706684,
+   "diluted sea water": 3996.0533413423072,
+   "sea water": 21261.77360834126,
+   "saltier than sea water": 0.0
+  },
+  "speed_m_s_max": 0.5127937912503007
+ }
+}
