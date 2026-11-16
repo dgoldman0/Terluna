@@ -367,15 +367,40 @@ def test_a_stratified_sea_carries_the_moon_and_reads_its_fluxes(tmp_path, monkey
                        forcing_period_s=1.0).inputs()
 
 
+def test_a_stratified_sea_takes_the_tide_as_a_potential(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, "RUNS", tmp_path)
+    grid = mitgcm.Grid(xg=np.arange(-2.0, 2.01, 1.0), yg=np.arange(-2.0, 2.01, 1.0), depth=np.full((4, 4), 60.0))
+    flat = np.zeros((4, 4))
+    coriolis = dict(centre=flat, corner=flat, cosine=flat)
+    height = np.arange(3 * 16, dtype=float).reshape(3, 4, 4) * 0.01
+    sea = stratified.Sea(name="t", grid=grid, deltat=1800.0, delr=np.array([5.0, 50.0]), coriolis=coriolis,
+                         tide_m=height, tide_period_s=86400.0)
+    sea.write()
+    assert "momTidalForcing=.TRUE." in (sea.folder / "data.template").read_text()
+    exf = (sea.folder / "data.exf").read_text()
+    assert "tidePotFile='tidepot.bin'" in exf and "tidePotPeriod=86400," in exf and "tidePotStartTime=0," in exf
+    assert "tidePotRepCycle=259200," in exf                       # its own cycle, not the fluxes' year
+    assert f"exf_inscal_tidePot={-lunar.GRAVITY:.12g}" in exf       # the potential is -g times the height
+    assert np.array_equal(np.fromfile(sea.folder / "tidepot.bin", dtype=">f8").reshape(3, 4, 4), height)
+    assert json.loads((sea.folder / "experiment.json").read_text())["tide"] == dict(records=3, period_s=86400.0)
+    still = stratified.Sea(name="u", grid=grid, deltat=1800.0, delr=np.array([5.0, 50.0]), coriolis=coriolis)
+    still.write()
+    assert "momTidalForcing" not in (still.folder / "data.template").read_text()
+    assert "tidePot" not in (still.folder / "data.exf").read_text() and not (still.folder / "tidepot.bin").exists()
+
+
 def test_a_stratified_sea_compiles_out_the_bulk_formulas(tmp_path):
     for sub in ("pkg/exf", "model/inc"):
         (tmp_path / sub).mkdir(parents=True)
     (tmp_path / "pkg/exf/EXF_OPTIONS.h").write_text(
         "#define ALLOW_ATM_TEMP\n#define ALLOW_ATM_WIND\n#define ALLOW_DOWNWARD_RADIATION\n#ifdef ALLOW_ATM_TEMP\n"
-        "# define ALLOW_BULKFORMULAE\n#endif\n#define ALLOW_RUNOFF\n#define ALLOW_CLIMSST_RELAXATION\n")
+        "# define ALLOW_BULKFORMULAE\n#endif\n#define ALLOW_RUNOFF\n#define ALLOW_CLIMSST_RELAXATION\n"
+        "#undef EXF_ALLOW_TIDES\n")
     text = stratified.exf_options(tmp_path)
     assert "#undef ALLOW_ATM_TEMP" in text and "#undef ALLOW_ATM_WIND" in text and "#define ALLOW_RUNOFF" in text
     assert not re.search(r"^#define\s+ALLOW_ATM_TEMP", text, re.M)
+    assert "#undef EXF_ALLOW_TIDES" in text
+    assert "#define EXF_ALLOW_TIDES" in stratified.exf_options(tmp_path, tides=True)
     (tmp_path / "model/inc/CPP_OPTIONS.h").write_text(
         "#undef SHORTWAVE_HEATING\n#undef ALLOW_SOLVE4_PS_AND_DRAG\n#define INCLUDE_IMPLVERTADV_CODE\n"
         "#undef NONLIN_FRSURF\n")

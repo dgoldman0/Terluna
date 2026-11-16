@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -179,6 +180,125 @@ def test_the_reach_is_read_by_distance_from_the_mouth(tmp_path, monkeypatch):
     reaches = out['top_layer_reaches_km']
     assert reaches['under 30'] == pytest.approx(2.0 * cell, rel=1e-3) and reaches['under 18'] == pytest.approx(cell, rel=1e-3)
     assert reaches['under 5'] == 0.0 and reaches['under 0.5'] == 0.0
+
+
+def test_the_tide_is_the_equilibrium_height_at_the_turned_places():
+    from climate.ocean import forcing as F
+    frame = ST.Frame(-47.8, -176.9)
+    grid = mitgcm.Grid(xg=np.array([-1.0, 0.0, 1.0]), yg=np.array([-1.0, 0.0, 1.0]), depth=np.ones((2, 2)))
+    h = C.tide_on_grid(grid, frame, 2.0)
+    assert h.shape == (2, 2, 2)
+    lat, lon = frame.to_true(np.array([grid.yc[1]]), np.array([grid.xc[0]]))
+    want = F.ephemeris_series(np.array([86400.0]))[0] @ F.monomials(lat, lon)[0]
+    assert h[1, 1, 0] == pytest.approx(want, abs=1e-9)
+    assert 0.01 < np.abs(h).max() < 5.0                                   # metres of the Moon's monthly tide
+
+
+def test_flows_on_faces_are_carried_to_the_centres():
+    u = np.array([[[1.0, 3.0, 5.0]]])
+    v = np.array([[[2.0], [4.0]]])
+    uc, vc = C.at_centres(u, v)
+    assert uc.tolist() == [[[2.0, 4.0, 5.0]]] and vc.tolist() == [[[3.0], [4.0]]]
+
+
+def write_mds(stem, fields):
+    shape = next(iter(fields.values())).shape
+    dims = ",\n".join(f"{n:6d},{1:6d},{n:6d}" for n in shape[::-1])
+    names = " ".join(f"'{k:<8s}'" for k in fields)
+    Path(f"{stem}.meta").write_text(f" nDims = [ {len(shape)} ];\n dimList = [\n{dims}\n ];\n dataprec = [ 'float32' ];\n"
+                                    f" nrecords = [ {len(fields)} ];\n fldList = {{\n {names}\n }};\n")
+    np.concatenate([np.ravel(v) for v in fields.values()]).astype('>f4').tofile(f"{stem}.data")   # big-endian, as MITgcm writes
+
+
+def test_the_tides_part_is_the_difference_of_two_runs(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, 'RUNS', tmp_path)
+    grid = mitgcm.Grid(xg=np.array([0.0, 1.0, 2.0]), yg=np.array([-1.0, 0.0, 1.0]), depth=np.full((2, 2), 30.0))
+    pattern = np.array([[-1.0, 1.0], [-1.0, 1.0]])                    # a tilt over two cells of equal area
+    tide = np.array([0.0, 1.0, 0.0, -1.0, 0.0])[:, None, None] * pattern
+    seas = {}
+    for on in (False, True):
+        sea = ST.Sea(name='on' if on else 'off', grid=grid, deltat=86400.0, delr=np.array([10.0, 20.0]),
+                     tide_m=tide if on else 0.0 * tide, tide_period_s=86400.0)
+        sea.folder.mkdir(parents=True)
+        for day in range(1, 5):
+            level = 0.5 * (tide[day - 1] + tide[day]) if on else 0.0 * pattern       # the model follows equilibrium
+            flow = np.full((2, 2, 2), 0.1 if on else 0.0)
+            write_mds(sea.folder / f'deep.{day:010d}', dict(UVEL=flow, VVEL=0.0 * flow))
+            write_mds(sea.folder / f'surface.{day:010d}', dict(ETAN=level))
+        seas[on] = sea
+    out = C.tide_part(seas[False], seas[True], skip_days=0)
+    assert out['days'] == [1.0, 4.0]
+    assert out['level_range_m']['ratio'] == pytest.approx([1.0, 1.0, 1.0])
+    assert out['level_range_m']['model'] == pytest.approx([1.0, 1.0, 1.0])
+    assert out['level_range_m']['correlation'] == pytest.approx(1.0)
+    assert out['depth_mean_tidal_flow_m_s']['largest_by_cell'] == pytest.approx([0.1] * 4, rel=1e-6)
+    assert out['floor_tidal_flow_m_s']['largest_by_cell'][-1] == pytest.approx(0.1, rel=1e-6)
+    power = seas[True].rho_const * seas[True].drag * 0.1 ** 3 * grid.area.sum() / 1e6
+    assert out['bed_drag_power']['whole_sea_mw'] == pytest.approx(power, rel=1e-5)
+    assert out['bed_drag_power']['under_200_m_of_water_mw'] == pytest.approx(power, rel=1e-5)
+
+
+def test_the_background_mixing_spends_its_power_on_the_stratification(tmp_path, monkeypatch):
+    sea = little_sea(tmp_path, monkeypatch)
+    theta = np.array([[[0.0, 30.0], [30.0, 30.0]], [[0.0, 27.0], [27.0, 27.0]]])      # 3 K warmer at the top
+    salt = np.full((2, 2, 2), 35.0)
+    wet = sea.grid.wet
+    drho = C.R.seawater_density(35.0, 27.0) - C.R.seawater_density(35.0, 30.0)
+    want = sea.diff_r * lunar.GRAVITY * drho * sea.grid.area[wet].sum() / 1e6
+    assert C.stirring_power_mw(sea, dict(THETA=theta, SALT=salt)) == pytest.approx(want)
+    assert want > 0
+
+
+def test_the_sea_is_the_lake_models_basin_and_keeps_its_demand(tmp_path, monkeypatch):
+    sea = little_sea(tmp_path, monkeypatch)
+    volume = C.cell_volumes(sea)
+    basin = C.hypsometry(sea, volume)
+    assert basin.z.tolist() == [0.0, 10.0, 30.0]
+    assert basin.area[0] == pytest.approx(sea.grid.area[sea.grid.wet].sum()) and basin.area[-1] == 0.0
+    s = C.central_scenarios()['oligotrophic']
+    lake = C.demand_lake_form(basin, s)
+    assert (lake['water'] >= 0).all() and (lake['floor'] >= 0).all() and lake['floor'][-1] > 0   # the floor lies below 10 m
+    ocean = C.demand_ocean_form(basin, s)
+    kept = lambda d, b=None: float(((d['water'] + d['floor']) * (b or basin).volume).sum())
+    assert kept(ocean) == pytest.approx(kept(lake), rel=1e-9)               # the depth changes, the total does not
+    assert ocean['export_g_m2_yr'] == 0.0 and ocean['from_m'] == 30.0       # a sea of 30 m holds no water below 100 m
+    # on a deep basin the flux's water demand falls with depth below 100 m, and the total is kept
+    from biosphere.ecology import lake as L
+    deep = L.Basin(np.linspace(0.0, 1000.0, 101), np.linspace(1.0, 0.9, 101) * 1e12)
+    ocean = C.demand_ocean_form(deep, s)
+    lower = ocean['water'][np.flatnonzero(deep.z[:-1] >= 100.0)]
+    assert (np.diff(lower) < 0).all() and lower[0] > 5.0 * lower[-1]
+    assert ocean['export_g_m2_yr'] > 0 and ocean['from_m'] == 100.0
+    assert kept(ocean, deep) == pytest.approx(kept(C.demand_lake_form(deep, s), deep), rel=1e-9)
+
+
+def test_the_waters_age_is_the_area_under_its_dye():
+    # a level whose dye falls by 1% a year holds water 100 years old on average; one cleared at once, none
+    years = [dict(year=float(y), old_water_by_depth=[0.0, float(np.exp(-0.01 * (y - 0.5) * C.YEAR_S / C.R.YEAR_S))])
+             for y in range(1, 41)]
+    aged = C.water_age(years, 2)
+    assert aged['renewed'].tolist() == [True, False] and aged['age'][0] == 0.0
+    assert aged['rate'][1] == pytest.approx(0.01)
+    assert aged['age'][1] == pytest.approx(100.0, rel=2e-3)
+
+
+def test_oxygen_is_saturation_less_the_demand_over_the_waters_age(tmp_path, monkeypatch):
+    sea = little_sea(tmp_path, monkeypatch)
+    volume = C.cell_volumes(sea)
+    band = dict(top_layer_c=dict(mean=28.0, coldest=27.5, warmest=28.5))
+    years = [dict(year=float(y), old_water_by_depth=[0.0, float(np.exp(-0.01 * (y - 0.5) * C.YEAR_S / C.R.YEAR_S))],
+                  salinity_by_depth_g_kg=[35.0, 35.1], warmth=dict(bands={'60-81S': band})) for y in range(1, 12)]
+    out = C.oxygen_estimate(sea, years, volume, [5.0, 20.0])
+    assert out['renewed_within_the_first_year'] == [True, False]
+    assert out['age_years'][0] == 0.0 and out['age_years'][1] == pytest.approx(100.0, rel=2e-3)
+    sat = out['saturation_mg_l']
+    assert 6.0 < sat < 6.8 and out['at_c'] == 28.0                          # sea water at 28 C under the Moon's air
+    assert out['left_to_the_air'] == [True, False]
+    for forms in out['states'].values():
+        for f in forms.values():
+            d = np.array(f['demand_g_m3_yr']['water']) + np.array(f['demand_g_m3_yr']['floor'])
+            assert f['oxygen_mg_l'][0] is None
+            assert f['oxygen_mg_l'][1] == pytest.approx(max(0.0, sat - d[1] * out['age_years'][1]))
 
 
 def test_the_trial_is_recorded_with_its_setting():

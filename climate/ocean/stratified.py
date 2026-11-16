@@ -140,9 +140,14 @@ def model_options(source: Path) -> str:
     return text
 
 
-def exf_options(source: Path) -> str:
-    """The forcing package's options with its bulk formulas compiled out: stress, heat and fresh water are read."""
+def exf_options(source: Path, tides=False) -> str:
+    """The forcing package's options with its bulk formulas compiled out: stress, heat and fresh water are read. With
+    `tides`, its reader of the tide's geopotential is compiled in."""
     text = (source / "pkg" / "exf" / "EXF_OPTIONS.h").read_text()
+    if tides:
+        text, n = re.subn(r"^#undef\s+EXF_ALLOW_TIDES\b", "#define EXF_ALLOW_TIDES", text, flags=re.M)
+        if n != 1:
+            raise RuntimeError("EXF_OPTIONS.h lacks the EXF_ALLOW_TIDES switch this setup expects")
     for flag in ("ALLOW_ATM_TEMP", "ALLOW_ATM_WIND", "ALLOW_DOWNWARD_RADIATION"):
         text, n = re.subn(rf"^#define\s+{flag}\b", f"#undef {flag}", text, flags=re.M)
         if n != 1:
@@ -174,6 +179,8 @@ class Sea(Experiment):
     deep_output_s: float = 0.0          # interval of the whole-depth means; 0 for none
     visc_grid: float = 0.0              # lateral viscosity as a share of each cell's L^2 / (4 dt); for mixed cell sizes
     start: dict = field(default_factory=dict)     # optional starting fields (levels, ny, nx): theta, salt, dye
+    tide_m: np.ndarray = None           # the tide's equilibrium height on the grid (records, ny, nx), m; None for no tide
+    tide_period_s: float = 86400.0      # interval between the tide's records; the series repeats after its last
     dye: bool = True                    # carry the old-water dye (TRAC01)
     dye_surface_s: float = 86400.0      # time scale drawing the top layer's dye to 0
 
@@ -184,7 +191,8 @@ class Sea(Experiment):
         source = builds.checkout("mitgcm")
         nr = len(self.delr)
         return {"SIZE.h": size_h(self.grid.nx, self.grid.ny, nr, *self.tiles), "packages.conf": PACKAGES_CONF,
-                "CPP_OPTIONS.h": model_options(source), "EXF_OPTIONS.h": exf_options(source),
+                "CPP_OPTIONS.h": model_options(source),
+                "EXF_OPTIONS.h": exf_options(source, tides=self.tide_m is not None),
                 # lists written at different intervals each hold their own levels, the top layer's a whole column
                 "DIAGNOSTICS_SIZE.h": diagnostics_size(source, len(self.top_fields) + len(self.deep_fields) + 2)}
 
@@ -208,6 +216,8 @@ class Sea(Experiment):
             tempStepping=True, saltStepping=True, tempAdvScheme=33, saltAdvScheme=33, staggerTimeStep=True,
             hFacMin=0.2, hFacMinDr=float(self.delr[0]),
             readBinaryPrec=64, writeBinaryPrec=32, useSingleCpuIO=True, globalFiles=True)
+        if self.tide_m is not None:
+            parm01["momTidalForcing"] = True
         text = namelist("PARM01", parm01)
         text += namelist("PARM02", dict(cg2dTargetResidual=self.cg2d_residual, cg2dMaxIters=2000))
         text += "PARM03_PLACEHOLDER"
@@ -241,6 +251,12 @@ class Sea(Experiment):
         if self.runoff is not None:
             fields["runoff.bin"] = self.runoff
             nml2.update(runofffile="runoff.bin", runoffperiod=0.0)
+        nml3 = {}
+        if self.tide_m is not None:     # the height at each record's instant, on the grid; the model takes -g times it
+            fields["tidepot.bin"] = self.tide_m
+            nml2.update(tidePotFile="tidepot.bin", tidePotPeriod=float(self.tide_period_s), tidePotStartTime=0.0,
+                        tidePotRepCycle=float(len(self.tide_m) * self.tide_period_s))
+            nml3["exf_inscal_tidePot"] = -lunar.GRAVITY
         if self.dye:
             mask = np.zeros((nr,) + g.depth.shape)
             mask[0] = g.wet
@@ -259,7 +275,8 @@ class Sea(Experiment):
                                                              "tauRelaxPTR(1)": float(self.dye_surface_s),
                                                              "relaxPtracerFile(1)": "rbcs_zero.bin"}))
         texts["data.exf"] = (namelist("EXF_NML_01", nml1) + namelist("EXF_NML_02", nml2)
-                             + namelist("EXF_NML_03", {}) + namelist("EXF_NML_04", {}))
+                             + namelist("EXF_NML_03", nml3) + namelist("EXF_NML_04", {}))
+        tide = {} if self.tide_m is None else dict(tide=dict(records=len(self.tide_m), period_s=self.tide_period_s))
         texts["experiment.json"] = json.dumps(dict(
             name=self.name, nx=g.nx, ny=g.ny, nr=nr, wet_columns=int(g.wet.sum()), deltat=self.deltat,
             delr=[float(x) for x in self.delr], theta0=self.theta0, salt0=self.salt0, rho_const=self.rho_const,
@@ -269,7 +286,7 @@ class Sea(Experiment):
             forcing_period_s=self.forcing_period_s, sst_relax_s=self.sst_relax_s, rivers=self.runoff is not None,
             closure="ggl90", equation_of_state="JMD95Z", dye=self.dye, dye_surface_s=self.dye_surface_s,
             gravity=lunar.GRAVITY, radius=lunar.RADIUS,
-            rotation_period_s=lunar.ROTATION_PERIOD_S), indent=1) + "\n"
+            rotation_period_s=lunar.ROTATION_PERIOD_S, **tide), indent=1) + "\n"
         return texts, fields
 
     def write_diagnostics(self, active=True):
