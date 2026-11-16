@@ -32,6 +32,21 @@ carried over from a coarser run in place of one temperature and salinity.
 The old water. A dye starts at 1 everywhere and is drawn to 0 in the top layer within a day (pkg/ptracers with
 pkg/rbcs), and is otherwise carried and mixed like salt. What is left of it at a depth is the share of that water
 that has not been at the surface since the run began, so its fall measures how fast the deeps are renewed.
+
+Other tracers (`Tracer`). A run may carry several tracers in place of the dye, each drawn towards its own value in
+the top layer and given its own source below it. The relaxation package carries the source as a pull towards a
+target far beyond the tracer's range (BEYOND), which adds the source to within the tracer's value over BEYOND.
+
+The Moon's own interior mixing (`idemix`). MITgcm's IDEMIX (Olbers and Eden 2013, in pkg/ggl90 and compiled in only
+when asked) follows the energy of the internal waves: what the tide puts in at the floor and the wind at the surface,
+both given as maps in W/m2, propagates and dissipates by the model's own buoyancy frequency and Coriolis parameter,
+and the dissipation feeds the closure's turbulence. Its constants are fitted to Earth's internal waves; it takes a
+fifth of the wind's inertial power into the waves and divides both inputs by 1024 kg/m3. With it the run's background
+diffusivity can fall to a molecular value. The floor's own heat (`geothermal`, W/m2) enters the deepest cell of each
+column.
+
+Restarts (`restart_from`). A run can begin from another run's pickup on the same grid and levels: its velocities,
+temperature, salt, surface and turbulence carry over, and its tracers start from files at that iteration.
 """
 from __future__ import annotations
 
@@ -48,6 +63,39 @@ from climate.ocean.mitgcm import Experiment, Grid, cpp_options, diagnostics_size
 PACKAGES_CONF = ("mom_common\nmom_fluxform\nmom_vecinv\ngeneric_advdiff\ncal\nexf\nggl90\nptracers\nrbcs\ndiagnostics\n"
                  "mdsio\nrw\nmonitor\n")
 FORCING = ("ustress", "vstress", "hflux", "swflux", "sflux", "climsst")   # fields that vary through the forcing's cycle
+BEYOND = 1.0e6                  # a source's target: the source comes out low by the tracer's value over this
+
+
+@dataclass
+class Tracer:
+    """A passive tracer carried and mixed like salt, drawn towards `top` in the top layer with the time scale
+    `top_s`, and given `source` (tracer units a second, on every level below the top; positive adds)."""
+    name: str
+    start: np.ndarray | float = 1.0     # (levels, ny, nx), or one value everywhere
+    top: np.ndarray | float = 0.0       # the top layer's value, (ny, nx) or one value
+    top_s: float = 86400.0
+    source: np.ndarray | None = None    # (levels, ny, nx)
+
+    def relaxation(self, wet3d):
+        """The relaxation package's mask and target, (levels, ny, nx) each: the top layer drawn to `top` at the rate
+        1/top_s, and below it a pull at |source| top_s / BEYOND towards plus or minus BEYOND, which adds `source`."""
+        mask = np.zeros(wet3d.shape)
+        target = np.zeros(wet3d.shape)
+        mask[0] = wet3d[0]
+        target[0] = np.broadcast_to(self.top, wet3d.shape[1:])
+        if self.source is not None:
+            s = np.where(wet3d[1:], self.source[1:], 0.0)
+            mask[1:] = np.abs(s) * self.top_s / BEYOND
+            target[1:] = np.where(s < 0, -BEYOND, BEYOND)
+        return mask, target
+
+
+def options_with(text: str, flag: str, where: str) -> str:
+    """An options file's text with `flag` defined in place of its #undef."""
+    text, n = re.subn(rf"^#undef\s+{flag}\b", f"#define {flag}", text, flags=re.M)
+    if n != 1:
+        raise RuntimeError(f"{where} lacks the {flag} switch this setup expects")
+    return text
 
 
 # ---------------------------------------------------------------- the sea's own frame
@@ -183,18 +231,50 @@ class Sea(Experiment):
     tide_period_s: float = 86400.0      # interval between the tide's records; the series repeats after its last
     dye: bool = True                    # carry the old-water dye (TRAC01)
     dye_surface_s: float = 86400.0      # time scale drawing the top layer's dye to 0
+    tracers: tuple = ()                 # Tracer objects carried in place of the dye (TRAC01, TRAC02, ...)
+    tracers_from: int = 0               # the iteration at which the tracers start from their `start`
+    idemix: dict = None                 # tidal and wind: the power put into internal waves (ny, nx), W/m2
+    geothermal: np.ndarray = None       # the floor's heat into the sea (ny, nx), W/m2
+    extra_lists: tuple = ()             # further outputs: (field names, file stem, interval s, level or None)
 
     def __post_init__(self):
         self.nonlinear = self.nonlinear_surface = True
+        if self.tracers and self.dye:
+            raise ValueError("a sea carries either the dye or its own tracers")
+
+    def tracer_names(self):
+        n = len(self.tracers) if self.tracers else int(self.dye)
+        return tuple(f"TRAC{i:02d}" for i in range(1, n + 1))
 
     def code(self) -> dict:
         source = builds.checkout("mitgcm")
         nr = len(self.delr)
-        return {"SIZE.h": size_h(self.grid.nx, self.grid.ny, nr, *self.tiles), "packages.conf": PACKAGES_CONF,
-                "CPP_OPTIONS.h": model_options(source),
+        options = model_options(source)
+        if self.geothermal is not None:
+            options = options_with(options, "ALLOW_GEOTHERMAL_FLUX", "CPP_OPTIONS.h")
+        extra = sum(len(names) for names, *_ in self.extra_lists)
+        code = {"SIZE.h": size_h(self.grid.nx, self.grid.ny, nr, *self.tiles), "packages.conf": PACKAGES_CONF,
+                "CPP_OPTIONS.h": options,
                 "EXF_OPTIONS.h": exf_options(source, tides=self.tide_m is not None),
                 # lists written at different intervals each hold their own levels, the top layer's a whole column
-                "DIAGNOSTICS_SIZE.h": diagnostics_size(source, len(self.top_fields) + len(self.deep_fields) + 2)}
+                "DIAGNOSTICS_SIZE.h": diagnostics_size(source, len(self.top_fields) + len(self.deep_fields) + 2
+                                                       + (len(self.tracers) + extra if self.tracers or extra else 0))}
+        if self.tracers:
+            text = (source / "pkg" / "rbcs" / "RBCS_SIZE.h").read_text()
+            text, n = re.subn(r"PARAMETER\(\s*maskLEN\s*=\s*3\s*\)", f"PARAMETER( maskLEN = {2 + len(self.tracers)} )", text)
+            if n != 1:
+                raise RuntimeError("RBCS_SIZE.h no longer sets maskLEN as this setup expects")
+            code["RBCS_SIZE.h"] = text
+            text = (source / "pkg" / "ptracers" / "PTRACERS_SIZE.h").read_text()
+            text, n = re.subn(r"PARAMETER\(\s*PTRACERS_num\s*=\s*1\s*\)", f"PARAMETER(PTRACERS_num = {len(self.tracers)} )",
+                              text)
+            if n != 1:
+                raise RuntimeError("PTRACERS_SIZE.h no longer sets PTRACERS_num as this setup expects")
+            code["PTRACERS_SIZE.h"] = text
+        if self.idemix is not None:
+            code["GGL90_OPTIONS.h"] = options_with((source / "pkg" / "ggl90" / "GGL90_OPTIONS.h").read_text(),
+                                                   "ALLOW_GGL90_IDEMIX", "GGL90_OPTIONS.h")
+        return code
 
     def inputs(self) -> tuple[dict, dict]:
         g, nr = self.grid, len(self.delr)
@@ -229,11 +309,22 @@ class Sea(Experiment):
             if key in self.start:
                 fields[f"start_{key}.bin"] = self.start[key]
                 files[name] = f"start_{key}.bin"
+        if self.geothermal is not None:
+            fields["geothermal.bin"] = np.where(g.wet, self.geothermal, 0.0)
+            files["geothermalFile"] = "geothermal.bin"
         text += namelist("PARM05", files)
+        ggl90 = dict(GGL90alpha=30.0, mxlMaxFlag=2, GGL90writeState=False)
+        waves = ""
+        if self.idemix is not None:     # the switch in the first group, the inputs in IDEMIX's own second group
+            fields["idemix_tidal.bin"] = np.where(g.wet, self.idemix["tidal"], 0.0)
+            fields["idemix_wind.bin"] = np.where(g.wet, self.idemix["wind"], 0.0)
+            ggl90.update(useIDEMIX=True)
+            waves = namelist("GGL90_PARM02", dict(IDEMIX_tidal_file="idemix_tidal.bin",
+                                                  IDEMIX_wind_file="idemix_wind.bin"))
         texts = {"data.template": text,
                  "data.pkg": namelist("PACKAGES", dict(useEXF=True, useCAL=False, useDiagnostics=True, useGGL90=True)),
                  "eedata": " &EEPARMS\n nTx=1,\n nTy=1,\n &\n",
-                 "data.ggl90": namelist("GGL90_PARM01", dict(GGL90alpha=30.0, mxlMaxFlag=2, GGL90writeState=False))}
+                 "data.ggl90": namelist("GGL90_PARM01", ggl90) + waves}
         nml1 = dict(useExfCheckRange=False, exf_iprec=64, useExfYearlyFields=False,
                     readStressOnAgrid=True)             # the stress is given at the cells' centres
         nml2 = {}
@@ -274,9 +365,34 @@ class Sea(Experiment):
                                   + namelist("RBCS_PARM02", {"useRBCpTrNum(1)": True,
                                                              "tauRelaxPTR(1)": float(self.dye_surface_s),
                                                              "relaxPtracerFile(1)": "rbcs_zero.bin"}))
+        elif self.tracers:
+            wet3d = (np.cumsum(self.delr)[:, None, None] - self.delr[:, None, None] < g.depth[None]) & g.wet[None]
+            ptr, rb1, rb2 = {"PTRACERS_numInUse": len(self.tracers), "PTRACERS_Iter0": int(self.tracers_from)}, {}, {}
+            for i, tr in enumerate(self.tracers, start=1):
+                start = np.broadcast_to(np.asarray(tr.start, dtype=float), wet3d.shape)
+                fields[f"start_tr{i:02d}.bin"] = np.where(wet3d, start, 0.0)
+                fields[f"rbcs_mask_tr{i:02d}.bin"], fields[f"rbcs_target_tr{i:02d}.bin"] = tr.relaxation(wet3d)
+                ptr.update({f"PTRACERS_advScheme({i})": 33, f"PTRACERS_diffKh({i})": 0.0,
+                            f"PTRACERS_diffKr({i})": self.diff_r, f"PTRACERS_names({i})": tr.name,
+                            f"PTRACERS_initialFile({i})": f"start_tr{i:02d}.bin"})
+                rb1[f"relaxMaskFile({2 + i})"] = f"rbcs_mask_tr{i:02d}.bin"
+                rb2.update({f"useRBCpTrNum({i})": True, f"tauRelaxPTR({i})": float(tr.top_s),
+                            f"relaxPtracerFile({i})": f"rbcs_target_tr{i:02d}.bin"})
+            texts["data.pkg"] = namelist("PACKAGES", dict(useEXF=True, useCAL=False, useDiagnostics=True,
+                                                          useGGL90=True, usePTRACERS=True, useRBCS=True))
+            texts["data.ptracers"] = namelist("PTRACERS_PARM01", ptr)
+            texts["data.rbcs"] = namelist("RBCS_PARM01", rb1) + namelist("RBCS_PARM02", rb2)
         texts["data.exf"] = (namelist("EXF_NML_01", nml1) + namelist("EXF_NML_02", nml2)
                              + namelist("EXF_NML_03", nml3) + namelist("EXF_NML_04", {}))
-        tide = {} if self.tide_m is None else dict(tide=dict(records=len(self.tide_m), period_s=self.tide_period_s))
+        more = {} if self.tide_m is None else dict(tide=dict(records=len(self.tide_m), period_s=self.tide_period_s))
+        if self.tracers:
+            more["tracers"] = [tr.name for tr in self.tracers]
+            more["tracers_from_iteration"] = int(self.tracers_from)
+        if self.idemix is not None:
+            area = g.area * g.wet
+            more["idemix_mw"] = {k: float((np.where(g.wet, v, 0.0) * area).sum() / 1e6) for k, v in self.idemix.items()}
+        if self.geothermal is not None:
+            more["geothermal_w_m2"] = float((np.where(g.wet, self.geothermal, 0.0) * g.area).sum() / g.area[g.wet].sum())
         texts["experiment.json"] = json.dumps(dict(
             name=self.name, nx=g.nx, ny=g.ny, nr=nr, wet_columns=int(g.wet.sum()), deltat=self.deltat,
             delr=[float(x) for x in self.delr], theta0=self.theta0, salt0=self.salt0, rho_const=self.rho_const,
@@ -286,16 +402,17 @@ class Sea(Experiment):
             forcing_period_s=self.forcing_period_s, sst_relax_s=self.sst_relax_s, rivers=self.runoff is not None,
             closure="ggl90", equation_of_state="JMD95Z", dye=self.dye, dye_surface_s=self.dye_surface_s,
             gravity=lunar.GRAVITY, radius=lunar.RADIUS,
-            rotation_period_s=lunar.ROTATION_PERIOD_S, **tide), indent=1) + "\n"
+            rotation_period_s=lunar.ROTATION_PERIOD_S, **more), indent=1) + "\n"
         return texts, fields
 
     def write_diagnostics(self, active=True):
         """Means over each output interval: the surface's level and mixed layer, the top layer's water and flow, and,
         when asked, every level's."""
-        dye = ("TRAC01",) if self.dye else ()
+        dye = self.tracer_names()
         lists = [(self.surface_fields, "surface", self.output_s, None), (self.top_fields, "top", self.output_s, 1)]
         if self.deep_output_s > 0:
             lists.append((self.deep_fields + dye, "deep", self.deep_output_s, None))
+        lists += list(self.extra_lists)
         text = " &DIAGNOSTICS_LIST\n"
         for n, (names, stem, interval, level) in enumerate(lists, start=1):
             text += f"  fields(1:{len(names)},{n}) = " + ",".join(f"'{name:<8s}'" for name in names) + ",\n"
@@ -303,3 +420,30 @@ class Sea(Experiment):
                 text += f"  levels(1,{n}) = {float(level):.1f},\n"
             text += f"  fileName({n}) = '{stem}',\n  frequency({n}) = {interval if active else 1.0e12:.1f},\n"
         (self.folder / "data.diagnostics").write_text(text + " &\n &DIAG_STATIS_PARMS\n &\n")
+
+    def restart_from(self, parent: Path, iteration: int, build: str = None):
+        """Begin this run from another run's pickup at `iteration` (same grid and levels): copy its state and its
+        turbulence into this run's folder, with the internal waves' energy at zero when this run has IDEMIX, and stamp
+        the folder with this run's setup on `build` (its own binary's by default). Call after write(fresh=True); the
+        tracers start from their files."""
+        import shutil
+        if self.tracers and self.tracers_from != iteration:
+            raise ValueError("the tracers must start at the restart's iteration")
+        parent = Path(parent)
+        stem = f"{iteration:010d}"
+        names = [f"pickup.{stem}.data", f"pickup.{stem}.meta"]
+        if self.dye:                            # the dye continues from the parent's own
+            names += [f"pickup_ptracers.{stem}.data", f"pickup_ptracers.{stem}.meta"]
+        for name in names:
+            shutil.copyfile(parent / name, self.folder / name)
+        tke = (parent / f"pickup_ggl90.{stem}.data").read_bytes()
+        meta = (parent / f"pickup_ggl90.{stem}.meta").read_text()
+        if self.idemix is not None:            # the closure then reads a second record, the waves' energy
+            tke += bytes(len(tke))
+            meta, n = re.subn(r"nrecords = \[\s*1 \]", "nrecords = [          2 ]", meta)
+            if n != 1:
+                raise RuntimeError(f"{parent} holds a turbulence pickup of another layout")
+        (self.folder / f"pickup_ggl90.{stem}.data").write_bytes(tke)
+        (self.folder / f"pickup_ggl90.{stem}.meta").write_text(meta)
+        (self.folder / "setup.sha256").write_text(self.setup_digest(build or self.binary().parent.name) + "\n")
+        (self.folder / "restart.json").write_text(json.dumps(dict(parent=str(parent), iteration=iteration), indent=1) + "\n")

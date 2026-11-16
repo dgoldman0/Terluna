@@ -389,6 +389,102 @@ def test_a_stratified_sea_takes_the_tide_as_a_potential(tmp_path, monkeypatch):
     assert "tidePot" not in (still.folder / "data.exf").read_text() and not (still.folder / "tidepot.bin").exists()
 
 
+def test_a_stratified_sea_carries_tracers_with_their_own_sources(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, "RUNS", tmp_path)
+    grid = mitgcm.Grid(xg=np.arange(-2.0, 2.01, 1.0), yg=np.arange(-2.0, 2.01, 1.0), depth=np.full((4, 4), 60.0))
+    grid.depth[0, 0] = 0.0
+    flat = np.zeros((4, 4))
+    coriolis = dict(centre=flat - 3e-6, corner=flat - 3e-6, cosine=flat + 4e-6)
+    delr = np.array([5.0, 6.0, 50.0])
+    source = np.full((3, 4, 4), 2e-8)
+    tracers = (stratified.Tracer("old", start=np.full((3, 4, 4), 0.7)),
+               stratified.Tracer("used", start=0.0, top=0.0, top_s=86400.0, source=source))
+    sea = stratified.Sea(name="o", grid=grid, deltat=1800.0, delr=delr, coriolis=coriolis, dye=False,
+                         tracers=tracers, tracers_from=48)
+    sea.write()
+    ptr = (sea.folder / "data.ptracers").read_text()
+    assert "PTRACERS_numInUse=2," in ptr and "PTRACERS_Iter0=48," in ptr
+    assert "PTRACERS_initialFile(2)='start_tr02.bin'" in ptr and "PTRACERS_names(2)='used'" in ptr
+    rbcs = (sea.folder / "data.rbcs").read_text()
+    assert "relaxMaskFile(3)='rbcs_mask_tr01.bin'" in rbcs and "relaxMaskFile(4)='rbcs_mask_tr02.bin'" in rbcs
+    assert "tauRelaxPTR(2)=86400," in rbcs and "relaxPtracerFile(2)='rbcs_target_tr02.bin'" in rbcs
+    start = np.fromfile(sea.folder / "start_tr01.bin", dtype=">f8").reshape(3, 4, 4)
+    assert start[1, 1, 1] == 0.7 and start[:, 0, 0].tolist() == [0.0] * 3        # land holds none
+    mask = np.fromfile(sea.folder / "rbcs_mask_tr02.bin", dtype=">f8").reshape(3, 4, 4)
+    target = np.fromfile(sea.folder / "rbcs_target_tr02.bin", dtype=">f8").reshape(3, 4, 4)
+    assert mask[0, 1, 1] == 1.0 and target[0, 1, 1] == 0.0                    # the top layer is held at 0
+    # below it, the relaxation package's pull -mask (c - target) / tau adds the source to within c / BEYOND
+    for c in (0.0, 5.0, -3.0):
+        pull = -mask[1:, 1, 1] * (c - target[1:, 1, 1]) / 86400.0
+        assert np.allclose(pull, 2e-8, rtol=1e-5)
+    assert not mask[:, 0, 0].any()
+    assert json.loads((sea.folder / "experiment.json").read_text())["tracers"] == ["old", "used"]
+    sea.deep_output_s = 864000.0
+    sea.extra_lists = ((("UVEL", "VVEL"), "daily", 86400.0, 1),)
+    sea.write_diagnostics()
+    diag = (sea.folder / "data.diagnostics").read_text()
+    assert "'TRAC01  ','TRAC02  '" in diag and "fileName(4) = 'daily'" in diag and "levels(1,4) = 1.0" in diag
+    with pytest.raises(ValueError):
+        stratified.Sea(name="d", grid=grid, deltat=1800.0, delr=delr, coriolis=coriolis, tracers=tracers)
+
+
+def test_a_stratified_sea_takes_internal_wave_power_and_the_floors_heat(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, "RUNS", tmp_path)
+    grid = mitgcm.Grid(xg=np.arange(-2.0, 2.01, 1.0), yg=np.arange(-2.0, 2.01, 1.0), depth=np.full((4, 4), 60.0))
+    grid.depth[0, 0] = 0.0
+    flat = np.zeros((4, 4))
+    coriolis = dict(centre=flat - 3e-6, corner=flat - 3e-6, cosine=flat + 4e-6)
+    sea = stratified.Sea(name="i", grid=grid, deltat=1800.0, delr=np.array([5.0, 55.0]), coriolis=coriolis,
+                         idemix=dict(tidal=flat + 1e-6, wind=flat + 2e-4), geothermal=flat + 0.011, diff_r=1.4e-7)
+    sea.write()
+    ggl90 = (sea.folder / "data.ggl90").read_text()
+    first, second = ggl90.split("&GGL90_PARM02")                                # IDEMIX reads its own group
+    assert "useIDEMIX=.TRUE." in first and "IDEMIX_wind_file='idemix_wind.bin'" in second
+    assert "geothermalFile='geothermal.bin'" in (sea.folder / "data.template").read_text()
+    assert "diffKrT=1.4e-07" in (sea.folder / "data.template").read_text()
+    wind = np.fromfile(sea.folder / "idemix_wind.bin", dtype=">f8").reshape(4, 4)
+    assert wind[0, 0] == 0.0 and wind[1, 1] == 2e-4                            # nothing over land
+    record = json.loads((sea.folder / "experiment.json").read_text())
+    assert record["idemix_mw"]["wind"] == pytest.approx(2e-4 * grid.area[grid.wet].sum() / 1e6)
+    plain = stratified.Sea(name="p", grid=grid, deltat=1800.0, delr=np.array([5.0, 55.0]), coriolis=coriolis)
+    plain.write()
+    assert "IDEMIX" not in (plain.folder / "data.ggl90").read_text()
+    assert "idemix_mw" not in json.loads((plain.folder / "experiment.json").read_text())
+    assert stratified.options_with("#undef ALLOW_GGL90_IDEMIX\n", "ALLOW_GGL90_IDEMIX", "x") == \
+        "#define ALLOW_GGL90_IDEMIX\n"
+    with pytest.raises(RuntimeError):
+        stratified.options_with("#define ALLOW_GGL90_IDEMIX\n", "ALLOW_GGL90_IDEMIX", "x")
+
+
+def test_a_restart_carries_the_parents_state_and_starts_the_waves_at_rest(tmp_path, monkeypatch):
+    monkeypatch.setattr(mitgcm, "RUNS", tmp_path)
+    parent = tmp_path / "parent"
+    parent.mkdir()
+    tke = np.arange(2 * 16, dtype=">f8").tobytes()
+    (parent / "pickup.0000000096.data").write_bytes(b"state")
+    (parent / "pickup.0000000096.meta").write_text("meta")
+    (parent / "pickup_ggl90.0000000096.data").write_bytes(tke)
+    (parent / "pickup_ggl90.0000000096.meta").write_text(" nrecords = [          1 ];\n")
+    grid = mitgcm.Grid(xg=np.arange(-2.0, 2.01, 1.0), yg=np.arange(-2.0, 2.01, 1.0), depth=np.full((4, 4), 60.0))
+    flat = np.zeros((4, 4))
+    coriolis = dict(centre=flat - 3e-6, corner=flat - 3e-6, cosine=flat + 4e-6)
+    sea = stratified.Sea(name="r", grid=grid, deltat=1800.0, delr=np.array([5.0, 55.0]), coriolis=coriolis,
+                         dye=False, idemix=dict(tidal=flat, wind=flat))
+    sea.write(fresh=True)
+    sea.restart_from(parent, 96, build="b")
+    assert (sea.folder / "pickup.0000000096.data").read_bytes() == b"state"
+    data = (sea.folder / "pickup_ggl90.0000000096.data").read_bytes()
+    assert data[:len(tke)] == tke and data[len(tke):] == bytes(len(tke))       # the waves' energy starts at 0
+    assert "nrecords = [          2 ]" in (sea.folder / "pickup_ggl90.0000000096.meta").read_text()
+    assert sea.pickups() == [96]
+    assert (sea.folder / "setup.sha256").read_text().split()[0] == sea.setup_digest("b")
+    late = stratified.Sea(name="l", grid=grid, deltat=1800.0, delr=np.array([5.0, 55.0]), coriolis=coriolis,
+                          dye=False, tracers=(stratified.Tracer("new"),), tracers_from=48)
+    late.write(fresh=True)
+    with pytest.raises(ValueError):
+        late.restart_from(parent, 96, build="b")
+
+
 def test_a_stratified_sea_compiles_out_the_bulk_formulas(tmp_path):
     for sub in ("pkg/exf", "model/inc"):
         (tmp_path / sub).mkdir(parents=True)

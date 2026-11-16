@@ -1,0 +1,121 @@
+{
+ "schema": "terluna.research.south-sea-lunar-mixing-inputs/1",
+ "evidence": "The wind's work from one model year of the south sea's circulation run (MITgcm on one-degree cells, lunar gravity and rotation, the design year's fluxes) continued from its year-50 state with outputs every 0.99 days; the tide's from the 35-day pair of tide runs and LOLA's floor, through a parameterisation fitted on Earth; the floor's heat from published measurements and a model prediction near the sea, not measured under it. Computed inputs, not validated.",
+ "reading_rule": "Powers in GW over the sea's wet cells unless named otherwise. wind: every_step is the model's own wind work at every step (GGL90tau times the reference density); resolved is the work on the flow as the 0.99-day means hold it; monthly_mean_flow on twelfths of the year; inertial_<w> on the flow turning the inertial way within w |f| of the local inertial frequency. IDEMIX takes inertial_0.25, of which its own setting passes a fifth into the internal waves. tide: the power into internal waves by line and in all; lines below the local inertial frequency give none. The maps are in the npz named by maps.",
+ "producer": {
+  "module": "research.studies.south_sea_ocean.lunar_mixing",
+  "code_sha256": "d91eab2be82320e1ec9e7db9365db53b043d6f3b74d2c8202e1e1beee352aeba"
+ },
+ "run": "south_sea_1deg_inertial_from50",
+ "maps": "/home/kir/Documents/Projects/terluna-hydrosphere/research/runs/south_sea_ocean/lunar_mixing_inputs_1deg.npz",
+ "inertial_samples": 360,
+ "idemix_band": 0.25,
+ "wind_gw": {
+  "every_step": 2.3417495848465015,
+  "resolved": 2.226857904263359,
+  "monthly_mean_flow": 0.5513081433216503,
+  "inertial_0.15": 0.3636368251889508,
+  "inertial_0.25": 0.5436215882219665,
+  "inertial_0.4": 0.8765469837941603
+ },
+ "wind_by_band_of_latitude": {
+  "14-30 S": {
+   "inertial_period_days": [
+    27.335717966738308,
+    55.22638297823762
+   ],
+   "inertial_mw": 236.14180889615213,
+   "inertial_mw_m2_mean": 0.5166256750397713,
+   "every_step_mw": 711.8869005108819
+  },
+  "30-45 S": {
+   "inertial_period_days": [
+    19.319964261317462,
+    27.29135959384052
+   ],
+   "inertial_mw": 133.13229679070406,
+   "inertial_mw_m2_mean": 0.19144998027297136,
+   "every_step_mw": 748.9645387914555
+  },
+  "45-60 S": {
+   "inertial_period_days": [
+    15.775900744493251,
+    19.296432606382307
+   ],
+   "inertial_mw": 114.02431554390604,
+   "inertial_mw_m2_mean": 0.16461563687324815,
+   "every_step_mw": 672.2866075099627
+  },
+  "60-81 S": {
+   "inertial_period_days": [
+    13.873508037628417,
+    15.760217195708176
+   ],
+   "inertial_mw": 60.36490373885156,
+   "inertial_mw_m2_mean": 0.1219494580694423,
+   "every_step_mw": 208.61153803420112
+  }
+ },
+ "mixed_layer_m": [
+  20.58836962680022,
+  101.56100755002764,
+  302.4864934364955
+ ],
+ "tide": {
+  "gw": 0.0019439890668816213,
+  "lines": [
+   {
+    "period_days": 27.32,
+    "gw": 0.0015048671725576266,
+    "radiating_share_of_area": 0.19532343953978287,
+    "floor_current_rms_m_s": [
+     3.6140520504815806e-05,
+     0.0005207598708011123,
+     0.0012565074654825865
+    ]
+   },
+   {
+    "period_days": 13.66,
+    "gw": 0.0004391218943239948,
+    "radiating_share_of_area": 1.0,
+    "floor_current_rms_m_s": [
+     8.468284571211882e-06,
+     0.00011626121139678123,
+     0.00026917842551957196
+    ]
+   }
+  ],
+  "floor_current_rms_all_m_s": [
+   5.991479892878032e-05,
+   0.0005925253671144682,
+   0.0013998987307708086
+  ],
+  "fitted_days": [
+   5.5,
+   34.5
+  ],
+  "roughness_rms_m": [
+   55.64548806203035,
+   280.8188255721995,
+   618.8033963555841
+  ],
+  "floor_n_per_s": [
+   0.0,
+   1.843932567896278e-05,
+   0.0009801714054395762
+  ],
+  "kappa_per_m": 0.0006283185307179586
+ },
+ "floor_heat": {
+  "w_m2": 0.011,
+  "range_w_m2": [
+   0.006,
+   0.021
+  ],
+  "gw": 25.741581284085754
+ },
+ "idemix_inputs_gw": {
+  "wind": 0.5436633249696138,
+  "tidal": 0.0019439890668816213
+ }
+}
