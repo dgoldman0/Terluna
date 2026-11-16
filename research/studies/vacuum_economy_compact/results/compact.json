@@ -1,0 +1,2679 @@
+{
+ "schema": "terluna.research.vacuum-economy-compact/1",
+ "producer": {
+  "path": "research/studies/vacuum_economy_compact/compact.py",
+  "sha256": "854ef23bed469dc28572cdf52244327aade5ec7f2a09545c75870a619734b9f2"
+ },
+ "dependencies": {
+  "research/studies/vacuum_economy_compact/compact.py": "854ef23bed469dc28572cdf52244327aade5ec7f2a09545c75870a619734b9f2",
+  "research/studies/vacuum_economy_compact/technology.json": "b883a886db4633ec501b35be84c239c6d8db4822d84107c880bba63dee5630a5",
+  "research/studies/lava_tube_cities/results/buildout.json": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de",
+  "research/studies/vacuum_economy/scenarios.json": "be731c9be612a048d15ac65c15c857a44c615bc9dfdf846ae3cd558d5215dcce",
+  "research/studies/vacuum_economy/demand.py": "58d644f2d305e3ffd9ea789611ca8ae57f2747c2d6695adf894385eafaff974e",
+  "research/studies/vacuum_economy/programme.json": "99032ce5a6bd9661cdd4f48b3dc3fdf51299637439c672f26428f9642f2d3312",
+  "research/studies/vacuum_economy/programme.py": "e5fde0000cf33b640c49bd902a3c75ae1ce22ca52984cc947ac3a91a0a01aa17"
+ },
+ "evidence": "A compact model on stated paths of technology. The settlement's needs per resident are the founding design's, moving with the paths; the paths beyond their sourced starting values, the unit values of local work and of imported equipment, the bound on visits and the transport multiples are the study's own. Results are conditional on all of them and show how far the technology carries the outcome.",
+ "units": "Years of the programme (zero is 2041), residents, kilograms, watts, constant USD2041.",
+ "reading_rule": "Each account is one ramp of residents, one scenario of demand and one technology case. Funding needed is the deepest cumulative shortfall from year zero; the net present value discounts every year's net at 3% to year zero; the payback year is the first after the opening in which the cumulative account is not negative. Checks give the visitors, the mass imported, the launches from Earth at 100 t and the pads at 76 launches a year, the settlement's mean power and the receipts by line in the horizon's year.",
+ "accounts": [
+  {
+   "ramp": "constant_growth",
+   "scenario": "low",
+   "technology": "static",
+   "funding_needed_USD2041": 2231960251873389.0,
+   "NPV_3pct_USD2041": -22647425965848.973,
+   "payback_year": null,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 59852890210.241974,
+     "line_costs": 48116673512.26781,
+     "build": 761746045595.9458,
+     "running": 1235515493797.88,
+     "net": -1985525322695.8516,
+     "cumulative": -59679291488991.38,
+     "checks": {
+      "visitors": 4818.883378177811,
+      "imported_t": 303880.6999598124,
+      "launches": 3051.817984719204,
+      "pads": 40.155499798936894,
+      "mean_GW": 6.300609002525939,
+      "receipts_by_line": {
+       "culture": 16390844094.260656,
+       "institutions": 8893436242.096203,
+       "computing": 0.0,
+       "propellant": 384554876.55484074,
+       "materials": 384554876.55484074,
+       "visits": 33799500120.775433
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 98388016967.89314,
+     "line_costs": 79098428196.68846,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -31993760923710.82,
+     "cumulative": -1592105837262959.5,
+     "checks": {
+      "visitors": 7910.887251716981,
+      "imported_t": 4244854.462710966,
+      "launches": 42469.9040226893,
+      "pads": 558.8145266143329,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 26990286529.21328,
+       "institutions": 14644541246.507027,
+       "computing": 0.0,
+       "propellant": 633234398.7126169,
+       "materials": 633234398.7126169,
+       "visits": 55486720394.7476
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 108658551410.0152,
+     "line_costs": 87356173890.93082,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -31991748134962.938,
+     "cumulative": -2231960251873389.0,
+     "checks": {
+      "visitors": 8733.585202245105,
+      "imported_t": 4244854.462710966,
+      "launches": 42472.12530715572,
+      "pads": 558.8437540415226,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 29821448213.130283,
+       "institutions": 16180688853.194231,
+       "computing": 0.0,
+       "propellant": 699657886.4600676,
+       "materials": 699657886.4600676,
+       "visits": 61257098570.77055
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "low",
+   "technology": "slow",
+   "funding_needed_USD2041": 187160079052081.56,
+   "NPV_3pct_USD2041": -5143921449791.872,
+   "payback_year": null,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 91481820693.2357,
+     "line_costs": 51529021102.418396,
+     "build": 118077946818.4726,
+     "running": 213316243743.60455,
+     "net": -291441390971.2598,
+     "cumulative": -14846683919340.926,
+     "checks": {
+      "visitors": 4818.883378177811,
+      "imported_t": 141228.94991524395,
+      "launches": 1425.3004842735195,
+      "pads": 18.753953740441045,
+      "mean_GW": 4.697839476936797,
+      "receipts_by_line": {
+       "culture": 16390844094.260656,
+       "institutions": 8893436242.096203,
+       "computing": 31871544100.125744,
+       "propellant": 263248067.98883674,
+       "materials": 263248067.98883674,
+       "visits": 33799500120.775433
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 150330810947.37607,
+     "line_costs": 67874405838.924904,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": -2284111719427.8896,
+     "cumulative": -141566848021022.34,
+     "checks": {
+      "visitors": 7910.887251716981,
+      "imported_t": 1375632.6352111043,
+      "launches": 13777.68574769068,
+      "pads": 181.2853387854037,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 26990286529.21328,
+       "institutions": 14644541246.507027,
+       "computing": 52481867464.77945,
+       "propellant": 363697656.0643598,
+       "materials": 363697656.0643598,
+       "visits": 55486720394.7476
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 166049914744.66733,
+     "line_costs": 74982146325.69391,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": -2275500356117.367,
+     "cumulative": -187160079052081.56,
+     "checks": {
+      "visitors": 8733.585202245105,
+      "imported_t": 1375632.6352111043,
+      "launches": 13779.907032157107,
+      "pads": 181.31456621259352,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 29821448213.130283,
+       "institutions": 16180688853.194231,
+       "computing": 57986983244.33487,
+       "propellant": 401847931.61869097,
+       "materials": 401847931.61869097,
+       "visits": 61257098570.77055
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "low",
+   "technology": "central",
+   "funding_needed_USD2041": 3906923374437.5303,
+   "NPV_3pct_USD2041": -409053078447.9677,
+   "payback_year": 60,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 91340677632.27466,
+     "line_costs": 32375942808.964577,
+     "build": 5544821358.369295,
+     "running": 14159264018.122673,
+     "net": 39260649446.818115,
+     "cumulative": 1612308497177.1736,
+     "checks": {
+      "visitors": 4839.501150759995,
+      "imported_t": 36951.62275759569,
+      "launches": 382.58288068300885,
+      "pads": 5.033985272144854,
+      "mean_GW": 2.9258710946092594,
+      "receipts_by_line": {
+       "culture": 16390844094.260656,
+       "institutions": 8893436242.096203,
+       "computing": 31871544100.125744,
+       "propellant": 120370325.44709094,
+       "materials": 120370325.44709094,
+       "visits": 33944112544.897877
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 150283799187.5871,
+     "line_costs": 52203754752.00864,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": -146406584395.79285,
+     "cumulative": -1085066294309.0385,
+     "checks": {
+      "visitors": 7966.60495527507,
+      "imported_t": 730057.7240236355,
+      "launches": 7322.087073615598,
+      "pads": 96.34325096862628,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 26990286529.21328,
+       "institutions": 14644541246.507027,
+       "computing": 52481867464.77945,
+       "propellant": 144790644.79272124,
+       "materials": 144790644.79272124,
+       "visits": 55877522657.50189
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 166042837409.21,
+     "line_costs": 57679145640.28949,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": -136122937062.4508,
+     "cumulative": -3906923374437.5303,
+     "checks": {
+      "visitors": 8801.544074125679,
+      "imported_t": 730057.7240236355,
+      "launches": 7324.341409236495,
+      "pads": 96.37291327942756,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 29821448213.130283,
+       "institutions": 16180688853.194231,
+       "computing": 57986983244.33487,
+       "propellant": 159978543.0494923,
+       "materials": 159978543.0494923,
+       "visits": 61733760012.45163
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "low",
+   "technology": "fast",
+   "funding_needed_USD2041": 571239107877.6531,
+   "NPV_3pct_USD2041": 339416427965.792,
+   "payback_year": 32,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 91240928715.83237,
+     "line_costs": 31491471852.21354,
+     "build": 1922842900.8417904,
+     "running": 8124695228.124393,
+     "net": 49701918734.65265,
+     "cumulative": 3158760551467.8223,
+     "checks": {
+      "visitors": 4841.572635701818,
+      "imported_t": 28021.286619691797,
+      "launches": 293.2851123133129,
+      "pads": 3.8590146357014854,
+      "mean_GW": 2.187750840136335,
+      "receipts_by_line": {
+       "culture": 16390844094.260656,
+       "institutions": 8893436242.096203,
+       "computing": 31871544100.125744,
+       "propellant": 63231201.322382934,
+       "materials": 63231201.322382934,
+       "visits": 33958641876.704994
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 150204271426.3756,
+     "line_costs": 51765954904.82421,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": -96527479757.69363,
+     "cumulative": 3750004834913.324,
+     "checks": {
+      "visitors": 7972.219923258436,
+      "imported_t": 665500.2329048885,
+      "launches": 6676.527322841683,
+      "pads": 87.84904372160109,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 26990286529.21328,
+       "institutions": 14644541246.507027,
+       "computing": 52481867464.77945,
+       "propellant": 85335157.63229913,
+       "materials": 85335157.63229913,
+       "visits": 55916905870.61125
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 165959527657.8718,
+     "line_costs": 57195922647.0189,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": -86202191268.39212,
+     "cumulative": 1926158895226.4753,
+     "checks": {
+      "visitors": 8808.398175725824,
+      "imported_t": 665500.2329048885,
+      "launches": 6678.785004123344,
+      "pads": 87.87875005425452,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 29821448213.130283,
+       "institutions": 16180688853.194231,
+       "computing": 57986983244.33487,
+       "propellant": 94286438.24645957,
+       "materials": 94286438.24645957,
+       "visits": 61781834470.7195
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "central",
+   "technology": "static",
+   "funding_needed_USD2041": 2200452231881825.0,
+   "NPV_3pct_USD2041": -21640568549628.473,
+   "payback_year": null,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 225393243290.0977,
+     "line_costs": 119842892706.82301,
+     "build": 761746045595.9458,
+     "running": 1235515493797.88,
+     "net": -1891711188810.551,
+     "cumulative": -55228154683602.27,
+     "checks": {
+      "visitors": 2573.741040661669,
+      "imported_t": 303880.6999598124,
+      "launches": 3045.7561004079103,
+      "pads": 40.075738163261974,
+      "mean_GW": 6.300609002525939,
+      "receipts_by_line": {
+       "culture": 104064816445.06406,
+       "institutions": 46567372651.898155,
+       "computing": 0.0,
+       "propellant": 6347043376.447766,
+       "materials": 6347043376.447766,
+       "visits": 62066967440.23993
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 715480938163.7731,
+     "line_costs": 355902966547.65906,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -31653472540865.91,
+     "cumulative": -1568416553010664.2,
+     "checks": {
+      "visitors": 11350.133388690992,
+      "imported_t": 4244854.462710966,
+      "launches": 42479.189987259124,
+      "pads": 558.9367103586727,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 281475954676.82214,
+       "institutions": 125956073548.67996,
+       "computing": 0.0,
+       "propellant": 17167570700.554222,
+       "materials": 17167570700.554222,
+       "visits": 273713768537.16254
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 906539424972.6123,
+     "line_costs": 444324268105.15283,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -31550835355614.562,
+     "cumulative": -2200452231881825.0,
+     "checks": {
+      "visitors": 15239.162600367976,
+      "imported_t": 4244854.462710966,
+      "launches": 42489.69036613065,
+      "pads": 559.0748732385612,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 343454156381.5038,
+       "institutions": 153690346415.05292,
+       "computing": 0.0,
+       "propellant": 20947698778.91881,
+       "materials": 20947698778.91881,
+       "visits": 367499524618.218
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "central",
+   "technology": "slow",
+   "funding_needed_USD2041": 111972680164180.75,
+   "NPV_3pct_USD2041": -3536671183992.371,
+   "payback_year": null,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 534191708260.7286,
+     "line_costs": 282263532751.37415,
+     "build": 118077946818.4726,
+     "running": 213316243743.60455,
+     "net": -79466015052.72272,
+     "cumulative": -7402694169120.859,
+     "checks": {
+      "visitors": 10041.697509861879,
+      "imported_t": 141228.94991524395,
+      "launches": 1439.4020824290667,
+      "pads": 18.939501084592983,
+      "mean_GW": 4.697839476936797,
+      "receipts_by_line": {
+       "culture": 104064816445.06406,
+       "institutions": 46567372651.898155,
+       "computing": 289854370507.1111,
+       "propellant": 6347043376.447765,
+       "materials": 6347043376.447765,
+       "visits": 81011061903.75975
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 1606452702277.9597,
+     "line_costs": 657486068534.3135,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": -1417601490792.6946,
+     "cumulative": -85990726104978.75,
+     "checks": {
+      "visitors": 77530.46961413675,
+      "imported_t": 1375632.6352111043,
+      "launches": 13965.658620069213,
+      "pads": 183.75866605354227,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 281475954676.82214,
+       "institutions": 125956073548.67996,
+       "computing": 784002109865.9054,
+       "propellant": 17167570700.554224,
+       "materials": 17167570700.554224,
+       "visits": 380683422785.4438
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 1995532859974.1245,
+     "line_costs": 812864534132.2341,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": -1183899798694.4504,
+     "cumulative": -111972680164180.75,
+     "checks": {
+      "visitors": 101802.4066417784,
+      "imported_t": 1375632.6352111043,
+      "launches": 14031.192850043844,
+      "pads": 184.62095855320848,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 343454156381.5038,
+       "institutions": 153690346415.05292,
+       "computing": 956631565756.5697,
+       "propellant": 20947698778.918816,
+       "materials": 20947698778.918816,
+       "visits": 499861393863.16046
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "central",
+   "technology": "central",
+   "funding_needed_USD2041": 913348440443.3276,
+   "NPV_3pct_USD2041": 3098820368421.0073,
+   "payback_year": 29,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 599877730308.7457,
+     "line_costs": 207261424503.015,
+     "build": 5544821358.369295,
+     "running": 14159264018.122673,
+     "net": 372912220429.2387,
+     "cumulative": 17467076965064.605,
+     "checks": {
+      "visitors": 203748.09339699184,
+      "imported_t": 36951.62275759569,
+      "launches": 919.6360797478349,
+      "pads": 12.100474733524143,
+      "mean_GW": 2.9258710946092594,
+      "receipts_by_line": {
+       "culture": 104064816445.06406,
+       "institutions": 46567372651.898155,
+       "computing": 289854370507.1111,
+       "propellant": 6347043376.447765,
+       "materials": 6347043376.447765,
+       "visits": 146697083951.77686
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 1877991469656.64,
+     "line_costs": 634104677297.5463,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": 999400163527.7224,
+     "cumulative": 82019390022242.73,
+     "checks": {
+      "visitors": 2078938.5648732667,
+      "imported_t": 730057.7240236355,
+      "launches": 12913.711365394174,
+      "pads": 169.91725480781807,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 281475954676.82214,
+       "institutions": 125956073548.67996,
+       "computing": 784002109865.9054,
+       "propellant": 17167570700.554222,
+       "materials": 17167570700.554222,
+       "visits": 652222190164.1239
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 2316461954643.875,
+     "line_costs": 781214852001.3654,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": 1290760473811.1384,
+     "cumulative": 104977754253707.05,
+     "checks": {
+      "visitors": 2616244.9331306093,
+      "imported_t": 730057.7240236355,
+      "launches": 14364.438559689002,
+      "pads": 189.0057705222237,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 343454156381.5038,
+       "institutions": 153690346415.05292,
+       "computing": 956631565756.5697,
+       "propellant": 20947698778.91881,
+       "materials": 20947698778.91881,
+       "visits": 820790488532.9111
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "central",
+   "technology": "fast",
+   "funding_needed_USD2041": 557474771363.493,
+   "NPV_3pct_USD2041": 4818931056664.843,
+   "payback_year": 17,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 676441021780.3541,
+     "line_costs": 231255896617.125,
+     "build": 1922842900.8417904,
+     "running": 8124695228.124393,
+     "net": 435137587034.26294,
+     "cumulative": 22154691008996.63,
+     "checks": {
+      "visitors": 1637145.4158321088,
+      "imported_t": 28021.286619691797,
+      "launches": 4700.505488943612,
+      "pads": 61.84875643346859,
+      "mean_GW": 2.187750840136335,
+      "receipts_by_line": {
+       "culture": 104064816445.06406,
+       "institutions": 46567372651.898155,
+       "computing": 289854370507.1111,
+       "propellant": 6347043376.447766,
+       "materials": 6347043376.447766,
+       "visits": 223260375423.38528
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 2230421263234.919,
+     "line_costs": 753550161671.5208,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": 1281905305284.153,
+     "cumulative": 101869254489616.64,
+     "checks": {
+      "visitors": 11872353.899829132,
+      "imported_t": 665500.2329048885,
+      "launches": 38710.357858587544,
+      "pads": 509.3468139287835,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 281475954676.82214,
+       "institutions": 125956073548.67996,
+       "computing": 784002109865.9054,
+       "propellant": 17167570700.554224,
+       "materials": 17167570700.554224,
+       "visits": 1004651983742.4032
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 2796998778898.7456,
+     "line_costs": 942112692456.1703,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": 1659920290163.33,
+     "cumulative": 131344680650496.39,
+     "checks": {
+      "visitors": 15378278.893531336,
+      "imported_t": 665500.2329048885,
+      "launches": 48176.35534158349,
+      "pads": 633.8994123892564,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 343454156381.5038,
+       "institutions": 153690346415.05292,
+       "computing": 956631565756.5697,
+       "propellant": 20947698778.91881,
+       "materials": 20947698778.91881,
+       "visits": 1301327312787.7817
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "high",
+   "technology": "static",
+   "funding_needed_USD2041": 1344525589424695.5,
+   "NPV_3pct_USD2041": -5907397763808.845,
+   "payback_year": 53,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 3460195303825.8237,
+     "line_costs": 1395516783298.457,
+     "build": 761746045595.9458,
+     "running": 1235515493797.88,
+     "net": 67416981133.541016,
+     "cumulative": 18683127551853.664,
+     "checks": {
+      "visitors": 29158.617281472878,
+      "imported_t": 303880.6999598124,
+      "launches": 3117.535266258101,
+      "pads": 41.02020087181712,
+      "mean_GW": 6.300609002525939,
+      "receipts_by_line": {
+       "culture": 1401160159760.282,
+       "institutions": 319318540758.3691,
+       "computing": 0.0,
+       "propellant": 729223566393.1714,
+       "materials": 729223566393.1714,
+       "visits": 281269470520.8301
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 19608615493016.3,
+     "line_costs": 8436558678270.836,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -20840993697736.56,
+     "cumulative": -969763765954370.4,
+     "checks": {
+      "visitors": 421042.13570699876,
+      "imported_t": 4244854.462710966,
+      "launches": 43585.35839351856,
+      "pads": 573.4915578094548,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 6852650382696.794,
+       "institutions": 1561690364436.5574,
+       "computing": 0.0,
+       "propellant": 3566411817026.414,
+       "materials": 3566411817026.414,
+       "visits": 4061451111830.1216
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 26963114292971.65,
+     "line_costs": 11605542936517.75,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -16655479156028.125,
+     "cumulative": -1344525589424695.5,
+     "checks": {
+      "visitors": 581250.0847928124,
+      "imported_t": 4244854.462710966,
+      "launches": 44017.919856050255,
+      "pads": 579.1831560006613,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 9413101333219.762,
+       "institutions": 2145206428256.3088,
+       "computing": 0.0,
+       "propellant": 4898979804139.74,
+       "materials": 4898979804139.74,
+       "visits": 5606846923216.097
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "high",
+   "technology": "slow",
+   "funding_needed_USD2041": 1831130456896.9734,
+   "NPV_3pct_USD2041": 19226281568685.363,
+   "payback_year": 43,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 6129536054953.205,
+     "line_costs": 2771796616624.3267,
+     "build": 118077946818.4726,
+     "running": 213316243743.60455,
+     "net": 3026345247766.8013,
+     "cumulative": 97578820536175.89,
+     "checks": {
+      "visitors": 212292.50940186222,
+      "imported_t": 141228.94991524395,
+      "launches": 1985.4792745374673,
+      "pads": 26.124727296545622,
+      "mean_GW": 4.697839476936797,
+      "receipts_by_line": {
+       "culture": 1401160159760.282,
+       "institutions": 319318540758.3691,
+       "computing": 2263445117550.44,
+       "propellant": 730273561492.0255,
+       "materials": 730273561492.0255,
+       "visits": 685065113900.0626
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 28516575657792.45,
+     "line_costs": 10750169193371.846,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": 15399838339884.262,
+     "cumulative": 859743853151006.4,
+     "checks": {
+      "visitors": 961486.3957357943,
+      "imported_t": 1375632.6352111043,
+      "launches": 16352.33962059769,
+      "pads": 215.16236342891696,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 6852650382696.794,
+       "institutions": 1561690364436.5574,
+       "computing": 11069825203743.197,
+       "propellant": 3572003344265.4863,
+       "materials": 3572003344265.4863,
+       "visits": 1888403018384.9277
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 38516624699644.15,
+     "line_costs": 14373907094715.842,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": 21776149480391.965,
+     "cumulative": 1231362321334992.2,
+     "checks": {
+      "visitors": 987247.0083096995,
+      "imported_t": 1375632.6352111043,
+      "launches": 16421.893274547234,
+      "pads": 216.0775430861478,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 9413101333219.762,
+       "institutions": 2145206428256.3088,
+       "computing": 15205997762118.049,
+       "propellant": 4906660571371.313,
+       "materials": 4906660571371.313,
+       "visits": 1938998033307.4006
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "high",
+   "technology": "central",
+   "funding_needed_USD2041": 792370529779.0476,
+   "NPV_3pct_USD2041": 39650953215764.8,
+   "payback_year": 17,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 7696054338467.208,
+     "line_costs": 3052714726927.024,
+     "build": 5544821358.369295,
+     "running": 14159264018.122673,
+     "net": 4623635526163.691,
+     "cumulative": 192602668449146.78,
+     "checks": {
+      "visitors": 7816997.511279066,
+      "imported_t": 36951.62275759569,
+      "launches": 21475.409508029436,
+      "pads": 282.5711777372294,
+      "mean_GW": 2.9258710946092594,
+      "receipts_by_line": {
+       "culture": 1401160159760.282,
+       "institutions": 319318540758.3691,
+       "computing": 2263445117550.44,
+       "propellant": 730429460576.046,
+       "materials": 730429460576.046,
+       "visits": 2251271599246.0254
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 27903265591452.1,
+     "line_costs": 9011253193205.443,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": 18647525769415.285,
+     "cumulative": 1182584888994765.2,
+     "checks": {
+      "visitors": 10155630.787563367,
+      "imported_t": 730057.7240236355,
+      "launches": 34720.78036665744,
+      "pads": 456.85237324549263,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 6852650382696.794,
+       "institutions": 1561690364436.5574,
+       "computing": 11069825203743.197,
+       "propellant": 3572327742956.5435,
+       "materials": 3572327742956.5435,
+       "visits": 1274444154662.4678
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 37854397621489.69,
+     "line_costs": 12093401283208.99,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": 25516509709449.324,
+     "cumulative": 1624041355451457.2,
+     "checks": {
+      "visitors": 10167070.488790512,
+      "imported_t": 730057.7240236355,
+      "launches": 34751.66755997074,
+      "pads": 457.25878368382547,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 9413101333219.762,
+       "institutions": 2145206428256.3088,
+       "computing": 15205997762118.049,
+       "propellant": 4907106179651.433,
+       "materials": 4907106179651.433,
+       "visits": 1275879738592.7021
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "constant_growth",
+   "scenario": "high",
+   "technology": "fast",
+   "funding_needed_USD2041": 557474771363.493,
+   "NPV_3pct_USD2041": 56755249092105.77,
+   "payback_year": 10,
+   "at_horizon": {
+    "100": {
+     "residents": 249637.92715724694,
+     "receipts": 10619426853595.697,
+     "line_costs": 4878199231646.845,
+     "build": 1922842900.8417904,
+     "running": 8124695228.124393,
+     "net": 5731180083819.887,
+     "cumulative": 278674380323584.53,
+     "checks": {
+      "visitors": 91840213.61125721,
+      "imported_t": 28021.286619691797,
+      "launches": 248248.78961659138,
+      "pads": 3266.431442323571,
+      "mean_GW": 2.187750840136335,
+      "receipts_by_line": {
+       "culture": 1401160159760.282,
+       "institutions": 319318540758.3691,
+       "computing": 2263445117550.44,
+       "propellant": 812869499156.3597,
+       "materials": 812869499156.3597,
+       "visits": 5009764037213.887
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 32625262273218.414,
+     "line_costs": 14202487463610.508,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": 18227809013328.66,
+     "cumulative": 1326767963476388.5,
+     "checks": {
+      "visitors": 101622591.40746136,
+      "imported_t": 665500.2329048885,
+      "launches": 281035.9991291946,
+      "pads": 3697.842093805192,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 6852650382696.794,
+       "institutions": 1561690364436.5574,
+       "computing": 11069825203743.197,
+       "propellant": 4850664490047.903,
+       "materials": 4850664490047.903,
+       "visits": 3439767342246.0605
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 43533064072043.52,
+     "line_costs": 18739703257961.594,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": 24598395017802.684,
+     "cumulative": 1754860394927043.2,
+     "checks": {
+      "visitors": 101705901.60383394,
+      "imported_t": 665500.2329048885,
+      "launches": 281260.9366594005,
+      "pads": 3700.801798150007,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 9413101333219.762,
+       "institutions": 2145206428256.3088,
+       "computing": 15205997762118.049,
+       "propellant": 6663085642536.854,
+       "materials": 6663085642536.854,
+       "visits": 3442587263375.699
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "low",
+   "technology": "static",
+   "funding_needed_USD2041": 2839878678576620.0,
+   "NPV_3pct_USD2041": -68879801352995.07,
+   "payback_year": null,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 59852890210.241974,
+     "line_costs": 48116673512.26781,
+     "build": 1673061613652.748,
+     "running": 4563619648461.767,
+     "net": -6224945045416.541,
+     "cumulative": -268795170723144.47,
+     "checks": {
+      "visitors": 4818.883378177811,
+      "imported_t": 912733.4702544281,
+      "launches": 9140.345687665362,
+      "pads": 120.2677064166495,
+      "mean_GW": 23.27253942628931,
+      "receipts_by_line": {
+       "culture": 16390844094.260656,
+       "institutions": 8893436242.096203,
+       "computing": 0.0,
+       "propellant": 384554876.55484074,
+       "materials": 384554876.55484074,
+       "visits": 33799500120.775433
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 98388016967.89314,
+     "line_costs": 79098428196.68846,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -31993760923710.82,
+     "cumulative": -2200024263966190.0,
+     "checks": {
+      "visitors": 7910.887251716981,
+      "imported_t": 4244854.462710966,
+      "launches": 42469.9040226893,
+      "pads": 558.8145266143329,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 26990286529.21328,
+       "institutions": 14644541246.507027,
+       "computing": 0.0,
+       "propellant": 633234398.7126169,
+       "materials": 633234398.7126169,
+       "visits": 55486720394.7476
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 108658551410.0152,
+     "line_costs": 87356173890.93082,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -31991748134962.938,
+     "cumulative": -2839878678576620.0,
+     "checks": {
+      "visitors": 8733.585202245105,
+      "imported_t": 4244854.462710966,
+      "launches": 42472.12530715572,
+      "pads": 558.8437540415226,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 29821448213.130283,
+       "institutions": 16180688853.194231,
+       "computing": 0.0,
+       "propellant": 699657886.4600676,
+       "materials": 699657886.4600676,
+       "visits": 61257098570.77055
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "low",
+   "technology": "slow",
+   "funding_needed_USD2041": 303639455654505.44,
+   "NPV_3pct_USD2041": -22720059644338.117,
+   "payback_year": null,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 91481820693.2357,
+     "line_costs": 51529021102.418396,
+     "build": 259340604894.59344,
+     "running": 787925530817.8505,
+     "net": -1007313336121.6266,
+     "cumulative": -80421586225669.14,
+     "checks": {
+      "visitors": 4818.883378177811,
+      "imported_t": 437413.5418477494,
+      "launches": 4387.146403598574,
+      "pads": 57.72561057366544,
+      "mean_GW": 17.352394729074426,
+      "receipts_by_line": {
+       "culture": 16390844094.260656,
+       "institutions": 8893436242.096203,
+       "computing": 31871544100.125744,
+       "propellant": 263248067.98883674,
+       "materials": 263248067.98883674,
+       "visits": 33799500120.775433
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 150330810947.37607,
+     "line_costs": 67874405838.924904,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": -2284111719427.8896,
+     "cumulative": -258046224623446.22,
+     "checks": {
+      "visitors": 7910.887251716981,
+      "imported_t": 1375632.6352111043,
+      "launches": 13777.68574769068,
+      "pads": 181.2853387854037,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 26990286529.21328,
+       "institutions": 14644541246.507027,
+       "computing": 52481867464.77945,
+       "propellant": 363697656.0643598,
+       "materials": 363697656.0643598,
+       "visits": 55486720394.7476
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 166049914744.66733,
+     "line_costs": 74982146325.69391,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": -2275500356117.367,
+     "cumulative": -303639455654505.44,
+     "checks": {
+      "visitors": 8733.585202245105,
+      "imported_t": 1375632.6352111043,
+      "launches": 13779.907032157107,
+      "pads": 181.31456621259352,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 29821448213.130283,
+       "institutions": 16180688853.194231,
+       "computing": 57986983244.33487,
+       "propellant": 401847931.61869097,
+       "materials": 401847931.61869097,
+       "visits": 61257098570.77055
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "low",
+   "technology": "central",
+   "funding_needed_USD2041": 14449936480057.072,
+   "NPV_3pct_USD2041": -2744871101218.8716,
+   "payback_year": null,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 91340677632.27466,
+     "line_costs": 32375942808.964577,
+     "build": 12178373386.88369,
+     "running": 52300028453.89912,
+     "net": -5513667017.472725,
+     "cumulative": -4912322376443.791,
+     "checks": {
+      "visitors": 4839.501150759995,
+      "imported_t": 128979.65518004129,
+      "launches": 1302.863204907465,
+      "pads": 17.14293690667717,
+      "mean_GW": 10.807280753056686,
+      "receipts_by_line": {
+       "culture": 16390844094.260656,
+       "institutions": 8893436242.096203,
+       "computing": 31871544100.125744,
+       "propellant": 120370325.44709094,
+       "materials": 120370325.44709094,
+       "visits": 33944112544.897877
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 150283799187.5871,
+     "line_costs": 52203754752.00864,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": -146406584395.79285,
+     "cumulative": -11628079399928.582,
+     "checks": {
+      "visitors": 7966.60495527507,
+      "imported_t": 730057.7240236355,
+      "launches": 7322.087073615598,
+      "pads": 96.34325096862628,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 26990286529.21328,
+       "institutions": 14644541246.507027,
+       "computing": 52481867464.77945,
+       "propellant": 144790644.79272124,
+       "materials": 144790644.79272124,
+       "visits": 55877522657.50189
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 166042837409.21,
+     "line_costs": 57679145640.28949,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": -136122937062.4508,
+     "cumulative": -14449936480057.072,
+     "checks": {
+      "visitors": 8801.544074125679,
+      "imported_t": 730057.7240236355,
+      "launches": 7324.341409236495,
+      "pads": 96.37291327942756,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 29821448213.130283,
+       "institutions": 16180688853.194231,
+       "computing": 57986983244.33487,
+       "propellant": 159978543.0494923,
+       "materials": 159978543.0494923,
+       "visits": 61733760012.45163
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "low",
+   "technology": "fast",
+   "funding_needed_USD2041": 2800757674686.9277,
+   "NPV_3pct_USD2041": -310333265717.745,
+   "payback_year": 59,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 91240928715.83237,
+     "line_costs": 31491471852.21354,
+     "build": 4223237737.9344006,
+     "running": 30010160914.176033,
+     "net": 25516058211.508392,
+     "cumulative": 1213078051022.331,
+     "checks": {
+      "visitors": 4841.572635701818,
+      "imported_t": 101936.50648600036,
+      "launches": 1032.4373109763985,
+      "pads": 13.58470146021577,
+      "mean_GW": 8.080888317551302,
+      "receipts_by_line": {
+       "culture": 16390844094.260656,
+       "institutions": 8893436242.096203,
+       "computing": 31871544100.125744,
+       "propellant": 63231201.322382934,
+       "materials": 63231201.322382934,
+       "visits": 33958641876.704994
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 150204271426.3756,
+     "line_costs": 51765954904.82421,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": -96527479757.69363,
+     "cumulative": -976911735000.0792,
+     "checks": {
+      "visitors": 7972.219923258436,
+      "imported_t": 665500.2329048885,
+      "launches": 6676.527322841683,
+      "pads": 87.84904372160109,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 26990286529.21328,
+       "institutions": 14644541246.507027,
+       "computing": 52481867464.77945,
+       "propellant": 85335157.63229913,
+       "materials": 85335157.63229913,
+       "visits": 55916905870.61125
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 165959527657.8718,
+     "line_costs": 57195922647.0189,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": -86202191268.39212,
+     "cumulative": -2800757674686.9277,
+     "checks": {
+      "visitors": 8808.398175725824,
+      "imported_t": 665500.2329048885,
+      "launches": 6678.785004123344,
+      "pads": 87.87875005425452,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 29821448213.130283,
+       "institutions": 16180688853.194231,
+       "computing": 57986983244.33487,
+       "propellant": 94286438.24645957,
+       "materials": 94286438.24645957,
+       "visits": 61781834470.7195
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "central",
+   "technology": "static",
+   "funding_needed_USD2041": 2808370658585055.0,
+   "NPV_3pct_USD2041": -67872943936774.54,
+   "payback_year": null,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 225393243290.0977,
+     "line_costs": 119842892706.82301,
+     "build": 1673061613652.748,
+     "running": 4563619648461.767,
+     "net": -6131130911531.24,
+     "cumulative": -264344033917755.34,
+     "checks": {
+      "visitors": 2573.741040661669,
+      "imported_t": 912733.4702544281,
+      "launches": 9134.283803354068,
+      "pads": 120.18794478097459,
+      "mean_GW": 23.27253942628931,
+      "receipts_by_line": {
+       "culture": 104064816445.06406,
+       "institutions": 46567372651.898155,
+       "computing": 0.0,
+       "propellant": 6347043376.447766,
+       "materials": 6347043376.447766,
+       "visits": 62066967440.23993
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 715480938163.7731,
+     "line_costs": 355902966547.65906,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -31653472540865.91,
+     "cumulative": -2176334979713894.8,
+     "checks": {
+      "visitors": 11350.133388690992,
+      "imported_t": 4244854.462710966,
+      "launches": 42479.189987259124,
+      "pads": 558.9367103586727,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 281475954676.82214,
+       "institutions": 125956073548.67996,
+       "computing": 0.0,
+       "propellant": 17167570700.554222,
+       "materials": 17167570700.554222,
+       "visits": 273713768537.16254
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 906539424972.6123,
+     "line_costs": 444324268105.15283,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -31550835355614.562,
+     "cumulative": -2808370658585055.0,
+     "checks": {
+      "visitors": 15239.162600367976,
+      "imported_t": 4244854.462710966,
+      "launches": 42489.69036613065,
+      "pads": 559.0748732385612,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 343454156381.5038,
+       "institutions": 153690346415.05292,
+       "computing": 0.0,
+       "propellant": 20947698778.91881,
+       "materials": 20947698778.91881,
+       "visits": 367499524618.218
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "central",
+   "technology": "slow",
+   "funding_needed_USD2041": 228452056766604.7,
+   "NPV_3pct_USD2041": -21112809378538.613,
+   "payback_year": null,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 534191708260.7286,
+     "line_costs": 282263532751.37415,
+     "build": 259340604894.59344,
+     "running": 787925530817.8505,
+     "net": -795337960203.0895,
+     "cumulative": -72977596475449.12,
+     "checks": {
+      "visitors": 10041.697509861879,
+      "imported_t": 437413.5418477494,
+      "launches": 4401.24800175412,
+      "pads": 57.91115791781737,
+      "mean_GW": 17.352394729074426,
+      "receipts_by_line": {
+       "culture": 104064816445.06406,
+       "institutions": 46567372651.898155,
+       "computing": 289854370507.1111,
+       "propellant": 6347043376.447765,
+       "materials": 6347043376.447765,
+       "visits": 81011061903.75975
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 1606452702277.9597,
+     "line_costs": 657486068534.3135,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": -1417601490792.6946,
+     "cumulative": -202470102707402.7,
+     "checks": {
+      "visitors": 77530.46961413675,
+      "imported_t": 1375632.6352111043,
+      "launches": 13965.658620069213,
+      "pads": 183.75866605354227,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 281475954676.82214,
+       "institutions": 125956073548.67996,
+       "computing": 784002109865.9054,
+       "propellant": 17167570700.554224,
+       "materials": 17167570700.554224,
+       "visits": 380683422785.4438
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 1995532859974.1245,
+     "line_costs": 812864534132.2341,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": -1183899798694.4504,
+     "cumulative": -228452056766604.7,
+     "checks": {
+      "visitors": 101802.4066417784,
+      "imported_t": 1375632.6352111043,
+      "launches": 14031.192850043844,
+      "pads": 184.62095855320848,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 343454156381.5038,
+       "institutions": 153690346415.05292,
+       "computing": 956631565756.5697,
+       "propellant": 20947698778.918816,
+       "materials": 20947698778.918816,
+       "visits": 499861393863.16046
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "central",
+   "technology": "central",
+   "funding_needed_USD2041": 2737096533359.2974,
+   "NPV_3pct_USD2041": 763002345650.1041,
+   "payback_year": 57,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 599877730308.7457,
+     "line_costs": 207261424503.015,
+     "build": 12178373386.88369,
+     "running": 52300028453.89912,
+     "net": 328137903964.94794,
+     "cumulative": 10942446091443.645,
+     "checks": {
+      "visitors": 203748.09339699184,
+      "imported_t": 128979.65518004129,
+      "launches": 1839.9164039722907,
+      "pads": 24.209426368056455,
+      "mean_GW": 10.807280753056686,
+      "receipts_by_line": {
+       "culture": 104064816445.06406,
+       "institutions": 46567372651.898155,
+       "computing": 289854370507.1111,
+       "propellant": 6347043376.447765,
+       "materials": 6347043376.447765,
+       "visits": 146697083951.77686
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 1877991469656.64,
+     "line_costs": 634104677297.5463,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": 999400163527.7224,
+     "cumulative": 71476376916623.19,
+     "checks": {
+      "visitors": 2078938.5648732667,
+      "imported_t": 730057.7240236355,
+      "launches": 12913.711365394174,
+      "pads": 169.91725480781807,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 281475954676.82214,
+       "institutions": 125956073548.67996,
+       "computing": 784002109865.9054,
+       "propellant": 17167570700.554222,
+       "materials": 17167570700.554222,
+       "visits": 652222190164.1239
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 2316461954643.875,
+     "line_costs": 781214852001.3654,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": 1290760473811.1384,
+     "cumulative": 94434741148087.5,
+     "checks": {
+      "visitors": 2616244.9331306093,
+      "imported_t": 730057.7240236355,
+      "launches": 14364.438559689002,
+      "pads": 189.0057705222237,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 343454156381.5038,
+       "institutions": 153690346415.05292,
+       "computing": 956631565756.5697,
+       "propellant": 20947698778.91881,
+       "materials": 20947698778.91881,
+       "visits": 820790488532.9111
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "central",
+   "technology": "fast",
+   "funding_needed_USD2041": 570666558403.0046,
+   "NPV_3pct_USD2041": 4169181362981.3047,
+   "payback_year": 20,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 676441021780.3541,
+     "line_costs": 231255896617.125,
+     "build": 4223237737.9344006,
+     "running": 30010160914.176033,
+     "net": 410951726511.1187,
+     "cumulative": 20209008508551.14,
+     "checks": {
+      "visitors": 1637145.4158321088,
+      "imported_t": 101936.50648600036,
+      "launches": 5439.657687606697,
+      "pads": 71.57444325798286,
+      "mean_GW": 8.080888317551302,
+      "receipts_by_line": {
+       "culture": 104064816445.06406,
+       "institutions": 46567372651.898155,
+       "computing": 289854370507.1111,
+       "propellant": 6347043376.447766,
+       "materials": 6347043376.447766,
+       "visits": 223260375423.38528
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 2230421263234.919,
+     "line_costs": 753550161671.5208,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": 1281905305284.153,
+     "cumulative": 97142337919703.3,
+     "checks": {
+      "visitors": 11872353.899829132,
+      "imported_t": 665500.2329048885,
+      "launches": 38710.357858587544,
+      "pads": 509.3468139287835,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 281475954676.82214,
+       "institutions": 125956073548.67996,
+       "computing": 784002109865.9054,
+       "propellant": 17167570700.554224,
+       "materials": 17167570700.554224,
+       "visits": 1004651983742.4032
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 2796998778898.7456,
+     "line_costs": 942112692456.1703,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": 1659920290163.33,
+     "cumulative": 126617764080583.05,
+     "checks": {
+      "visitors": 15378278.893531336,
+      "imported_t": 665500.2329048885,
+      "launches": 48176.35534158349,
+      "pads": 633.8994123892564,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 343454156381.5038,
+       "institutions": 153690346415.05292,
+       "computing": 956631565756.5697,
+       "propellant": 20947698778.91881,
+       "materials": 20947698778.91881,
+       "visits": 1301327312787.7817
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "high",
+   "technology": "static",
+   "funding_needed_USD2041": 1952444016127926.0,
+   "NPV_3pct_USD2041": -52139773150954.945,
+   "payback_year": null,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 3460195303825.8237,
+     "line_costs": 1395516783298.457,
+     "build": 1673061613652.748,
+     "running": 4563619648461.767,
+     "net": -4172002741587.148,
+     "cumulative": -190432751682299.44,
+     "checks": {
+      "visitors": 29158.617281472878,
+      "imported_t": 912733.4702544281,
+      "launches": 9206.062969204258,
+      "pads": 121.13240748952971,
+      "mean_GW": 23.27253942628931,
+      "receipts_by_line": {
+       "culture": 1401160159760.282,
+       "institutions": 319318540758.3691,
+       "computing": 0.0,
+       "propellant": 729223566393.1714,
+       "materials": 729223566393.1714,
+       "visits": 281269470520.8301
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 19608615493016.3,
+     "line_costs": 8436558678270.836,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -20840993697736.56,
+     "cumulative": -1577682192657601.0,
+     "checks": {
+      "visitors": 421042.13570699876,
+      "imported_t": 4244854.462710966,
+      "launches": 43585.35839351856,
+      "pads": 573.4915578094548,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 6852650382696.794,
+       "institutions": 1561690364436.5574,
+       "computing": 0.0,
+       "propellant": 3566411817026.414,
+       "materials": 3566411817026.414,
+       "visits": 4061451111830.1216
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 26963114292971.65,
+     "line_costs": 11605542936517.75,
+     "build": 0.0,
+     "running": 32013050512482.023,
+     "net": -16655479156028.125,
+     "cumulative": -1952444016127926.0,
+     "checks": {
+      "visitors": 581250.0847928124,
+      "imported_t": 4244854.462710966,
+      "launches": 44017.919856050255,
+      "pads": 579.1831560006613,
+      "mean_GW": 163.2530836479001,
+      "receipts_by_line": {
+       "culture": 9413101333219.762,
+       "institutions": 2145206428256.3088,
+       "computing": 0.0,
+       "propellant": 4898979804139.74,
+       "materials": 4898979804139.74,
+       "visits": 5606846923216.097
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "high",
+   "technology": "slow",
+   "funding_needed_USD2041": 26664136752895.395,
+   "NPV_3pct_USD2041": 1650143374139.0886,
+   "payback_year": 83,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 6129536054953.205,
+     "line_costs": 2771796616624.3267,
+     "build": 259340604894.59344,
+     "running": 787925530817.8505,
+     "net": 2310473302616.4346,
+     "cumulative": 32003918229847.617,
+     "checks": {
+      "visitors": 212292.50940186222,
+      "imported_t": 437413.5418477494,
+      "launches": 4947.325193862522,
+      "pads": 65.09638412977002,
+      "mean_GW": 17.352394729074426,
+      "receipts_by_line": {
+       "culture": 1401160159760.282,
+       "institutions": 319318540758.3691,
+       "computing": 2263445117550.44,
+       "propellant": 730273561492.0255,
+       "materials": 730273561492.0255,
+       "visits": 685065113900.0626
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 28516575657792.45,
+     "line_costs": 10750169193371.846,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": 15399838339884.262,
+     "cumulative": 743264476548582.1,
+     "checks": {
+      "visitors": 961486.3957357943,
+      "imported_t": 1375632.6352111043,
+      "launches": 16352.33962059769,
+      "pads": 215.16236342891696,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 6852650382696.794,
+       "institutions": 1561690364436.5574,
+       "computing": 11069825203743.197,
+       "propellant": 3572003344265.4863,
+       "materials": 3572003344265.4863,
+       "visits": 1888403018384.9277
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 38516624699644.15,
+     "line_costs": 14373907094715.842,
+     "build": 0.0,
+     "running": 2366568124536.341,
+     "net": 21776149480391.965,
+     "cumulative": 1114882944732568.0,
+     "checks": {
+      "visitors": 987247.0083096995,
+      "imported_t": 1375632.6352111043,
+      "launches": 16421.893274547234,
+      "pads": 216.0775430861478,
+      "mean_GW": 110.48897685938634,
+      "receipts_by_line": {
+       "culture": 9413101333219.762,
+       "institutions": 2145206428256.3088,
+       "computing": 15205997762118.049,
+       "propellant": 4906660571371.313,
+       "materials": 4906660571371.313,
+       "visits": 1938998033307.4006
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "high",
+   "technology": "central",
+   "funding_needed_USD2041": 1039732883609.824,
+   "NPV_3pct_USD2041": 37315135192993.88,
+   "payback_year": 21,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 7696054338467.208,
+     "line_costs": 3052714726927.024,
+     "build": 12178373386.88369,
+     "running": 52300028453.89912,
+     "net": 4578861209699.4,
+     "cumulative": 186078037575525.9,
+     "checks": {
+      "visitors": 7816997.511279066,
+      "imported_t": 128979.65518004129,
+      "launches": 22395.68983225389,
+      "pads": 294.6801293717617,
+      "mean_GW": 10.807280753056686,
+      "receipts_by_line": {
+       "culture": 1401160159760.282,
+       "institutions": 319318540758.3691,
+       "computing": 2263445117550.44,
+       "propellant": 730429460576.046,
+       "materials": 730429460576.046,
+       "visits": 2251271599246.0254
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 27903265591452.1,
+     "line_costs": 9011253193205.443,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": 18647525769415.285,
+     "cumulative": 1172041875889145.8,
+     "checks": {
+      "visitors": 10155630.787563367,
+      "imported_t": 730057.7240236355,
+      "launches": 34720.78036665744,
+      "pads": 456.85237324549263,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 6852650382696.794,
+       "institutions": 1561690364436.5574,
+       "computing": 11069825203743.197,
+       "propellant": 3572327742956.5435,
+       "materials": 3572327742956.5435,
+       "visits": 1274444154662.4678
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 37854397621489.69,
+     "line_costs": 12093401283208.99,
+     "build": 0.0,
+     "running": 244486628831.3713,
+     "net": 25516509709449.324,
+     "cumulative": 1613498342345837.8,
+     "checks": {
+      "visitors": 10167070.488790512,
+      "imported_t": 730057.7240236355,
+      "launches": 34751.66755997074,
+      "pads": 457.25878368382547,
+      "mean_GW": 59.06008921988247,
+      "receipts_by_line": {
+       "culture": 9413101333219.762,
+       "institutions": 2145206428256.3088,
+       "computing": 15205997762118.049,
+       "propellant": 4907106179651.433,
+       "materials": 4907106179651.433,
+       "visits": 1275879738592.7021
+      }
+     }
+    }
+   }
+  },
+  {
+   "ramp": "front_loaded",
+   "scenario": "high",
+   "technology": "fast",
+   "funding_needed_USD2041": 557474771363.493,
+   "NPV_3pct_USD2041": 56105499398422.26,
+   "payback_year": 11,
+   "at_horizon": {
+    "100": {
+     "residents": 922086.8172798905,
+     "receipts": 10619426853595.697,
+     "line_costs": 4878199231646.845,
+     "build": 4223237737.9344006,
+     "running": 30010160914.176033,
+     "net": 5706994223296.742,
+     "cumulative": 276728697823139.12,
+     "checks": {
+      "visitors": 91840213.61125721,
+      "imported_t": 101936.50648600036,
+      "launches": 248987.94181525448,
+      "pads": 3276.1571291480855,
+      "mean_GW": 8.080888317551302,
+      "receipts_by_line": {
+       "culture": 1401160159760.282,
+       "institutions": 319318540758.3691,
+       "computing": 2263445117550.44,
+       "propellant": 812869499156.3597,
+       "materials": 812869499156.3597,
+       "visits": 5009764037213.887
+      }
+     }
+    },
+    "200": {
+     "residents": 6468289.238000949,
+     "receipts": 32625262273218.414,
+     "line_costs": 14202487463610.508,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": 18227809013328.66,
+     "cumulative": 1322041046906476.5,
+     "checks": {
+      "visitors": 101622591.40746136,
+      "imported_t": 665500.2329048885,
+      "launches": 281035.9991291946,
+      "pads": 3697.842093805192,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 6852650382696.794,
+       "institutions": 1561690364436.5574,
+       "computing": 11069825203743.197,
+       "propellant": 4850664490047.903,
+       "materials": 4850664490047.903,
+       "visits": 3439767342246.0605
+      }
+     }
+    },
+    "220": {
+     "residents": 6468289.238000949,
+     "receipts": 43533064072043.52,
+     "line_costs": 18739703257961.594,
+     "build": 0.0,
+     "running": 194965796279.24503,
+     "net": 24598395017802.684,
+     "cumulative": 1750133478357131.2,
+     "checks": {
+      "visitors": 101705901.60383394,
+      "imported_t": 665500.2329048885,
+      "launches": 281260.9366594005,
+      "pads": 3700.801798150007,
+      "mean_GW": 43.96027030886839,
+      "receipts_by_line": {
+       "culture": 9413101333219.762,
+       "institutions": 2145206428256.3088,
+       "computing": 15205997762118.049,
+       "propellant": 6663085642536.854,
+       "materials": 6663085642536.854,
+       "visits": 3442587263375.699
+      }
+     }
+    }
+   }
+  }
+ ],
+ "residents": {
+  "static": {
+   "2049": {
+    "needs": {
+     "food_W": 14543.753163091662,
+     "basic_W": 5000.0,
+     "mean_W": 25238.989420694816,
+     "firm_W": 38400.72749894604,
+     "local_built_kg": 317998.0529625542,
+     "imported_built_kg": 16958.765990617267,
+     "water_kg_year": 3386.2176198840007,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 554.4784953808371,
+     "floor_m2": 121.84226914666667,
+     "operators": 0.012
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 1052790.0357485558,
+      "imported": 60768771.13001946,
+      "power": 24700490.703371804,
+      "air_water": 5715564.374750361
+     },
+     "run_USD2041_year": {
+      "renewal": 2000036.5621679297,
+      "power": 1660260.9606167756,
+      "water": 975989.0927002537,
+      "other_imports": 309204.1648671612,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 16958.765990617267,
+     "supply": "beamed",
+     "landed_USD2026_kg": 1800.0
+    },
+    "supply": "beamed"
+   },
+   "2070": {
+    "needs": {
+     "food_W": 14543.753163091662,
+     "basic_W": 5000.0,
+     "mean_W": 25238.989420694816,
+     "firm_W": 38400.72749894604,
+     "local_built_kg": 317998.0529625542,
+     "imported_built_kg": 16958.765990617267,
+     "water_kg_year": 3386.2176198840007,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 554.4784953808371,
+     "floor_m2": 121.84226914666667,
+     "operators": 0.012
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 1052790.0357485558,
+      "imported": 60768771.13001946,
+      "power": 24700490.703371804,
+      "air_water": 5715564.374750361
+     },
+     "run_USD2041_year": {
+      "renewal": 2000036.5621679297,
+      "power": 1660260.9606167756,
+      "water": 975989.0927002537,
+      "other_imports": 309204.1648671612,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 16958.765990617267,
+     "supply": "beamed",
+     "landed_USD2026_kg": 1800.0
+    },
+    "supply": "beamed"
+   },
+   "2100": {
+    "needs": {
+     "food_W": 14543.753163091662,
+     "basic_W": 5000.0,
+     "mean_W": 25238.989420694816,
+     "firm_W": 38400.72749894604,
+     "local_built_kg": 317998.0529625542,
+     "imported_built_kg": 16958.765990617267,
+     "water_kg_year": 3386.2176198840007,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 554.4784953808371,
+     "floor_m2": 121.84226914666667,
+     "operators": 0.012
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 1052790.0357485558,
+      "imported": 60768771.13001946,
+      "power": 24700490.703371804,
+      "air_water": 5715564.374750361
+     },
+     "run_USD2041_year": {
+      "renewal": 2000036.5621679297,
+      "power": 1660260.9606167756,
+      "water": 975989.0927002537,
+      "other_imports": 309204.1648671612,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 16958.765990617267,
+     "supply": "beamed",
+     "landed_USD2026_kg": 1800.0
+    },
+    "supply": "beamed"
+   },
+   "2150": {
+    "needs": {
+     "food_W": 14543.753163091662,
+     "basic_W": 5000.0,
+     "mean_W": 25238.989420694816,
+     "firm_W": 38400.72749894604,
+     "local_built_kg": 317998.0529625542,
+     "imported_built_kg": 16958.765990617267,
+     "water_kg_year": 3386.2176198840007,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 554.4784953808371,
+     "floor_m2": 121.84226914666667,
+     "operators": 0.012
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 1052790.0357485558,
+      "imported": 60768771.13001946,
+      "power": 24700490.703371804,
+      "air_water": 5715564.374750361
+     },
+     "run_USD2041_year": {
+      "renewal": 2000036.5621679297,
+      "power": 1660260.9606167756,
+      "water": 975989.0927002537,
+      "other_imports": 309204.1648671612,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 16958.765990617267,
+     "supply": "beamed",
+     "landed_USD2026_kg": 1800.0
+    },
+    "supply": "beamed"
+   },
+   "2241": {
+    "needs": {
+     "food_W": 14543.753163091662,
+     "basic_W": 5000.0,
+     "mean_W": 25238.989420694816,
+     "firm_W": 38400.72749894604,
+     "local_built_kg": 317998.0529625542,
+     "imported_built_kg": 16958.765990617267,
+     "water_kg_year": 3386.2176198840007,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 554.4784953808371,
+     "floor_m2": 121.84226914666667,
+     "operators": 0.012
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 1052790.0357485558,
+      "imported": 60768771.13001946,
+      "power": 24700490.703371804,
+      "air_water": 5715564.374750361
+     },
+     "run_USD2041_year": {
+      "renewal": 2000036.5621679297,
+      "power": 1660260.9606167756,
+      "water": 975989.0927002537,
+      "other_imports": 309204.1648671612,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 16958.765990617267,
+     "supply": "beamed",
+     "landed_USD2026_kg": 1800.0
+    },
+    "supply": "beamed"
+   }
+  },
+  "slow": {
+   "2049": {
+    "needs": {
+     "food_W": 13980.369487829463,
+     "basic_W": 5000.0,
+     "mean_W": 24591.098194143284,
+     "firm_W": 37414.971135049665,
+     "local_built_kg": 317998.0529625542,
+     "imported_built_kg": 16958.765990617267,
+     "water_kg_year": 3386.2176198840007,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 554.4784953808371,
+     "floor_m2": 121.27239615822614,
+     "operators": 0.009911479535875829
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 989937.9399651741,
+      "imported": 54947304.85792468,
+      "power": 19332668.383158233,
+      "air_water": 5127068.674367257
+     },
+     "run_USD2041_year": {
+      "renewal": 1808914.0750683502,
+      "power": 1299458.9851094065,
+      "water": 875497.6369111668,
+      "other_imports": 279000.0143592128,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 16958.765990617267,
+     "supply": "beamed",
+     "landed_USD2026_kg": 1609.5171405087542
+    },
+    "supply": "beamed"
+   },
+   "2070": {
+    "needs": {
+     "food_W": 12634.127415583871,
+     "basic_W": 5000.0,
+     "mean_W": 23042.919811060852,
+     "firm_W": 35059.44194893415,
+     "local_built_kg": 317998.0529625542,
+     "imported_built_kg": 16958.765990617267,
+     "water_kg_year": 3386.2176198840007,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 554.4784953808371,
+     "floor_m2": 119.81538847079038,
+     "operators": 0.006
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 842232.0285988447,
+      "imported": 42273927.742622234,
+      "power": 10232860.313347172,
+      "air_water": 3861867.8207772714
+     },
+     "run_USD2041_year": {
+      "renewal": 1392702.9867721447,
+      "power": 687808.9467014474,
+      "water": 659452.0896623335,
+      "other_imports": 214064.4218311116,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 16958.765990617267,
+     "supply": "beamed",
+     "landed_USD2026_kg": 1200.0
+    },
+    "supply": "beamed"
+   },
+   "2100": {
+    "needs": {
+     "food_W": 10600.46107958451,
+     "basic_W": 4500.0,
+     "mean_W": 20129.203524661585,
+     "firm_W": 30626.268208961996,
+     "local_built_kg": 302098.1503144265,
+     "imported_built_kg": 16110.827691086402,
+     "water_kg_year": 2539.6632149130005,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 332.68709722850224,
+     "floor_m2": 115.87587306578301,
+     "operators": 0.004
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 650097.8470747332,
+      "imported": 17545001.073430184,
+      "power": 4667404.791452763,
+      "air_water": 2749649.888393417
+     },
+     "run_USD2041_year": {
+      "renewal": 611963.9639658384,
+      "power": 313722.91569846804,
+      "water": 352147.4158796861,
+      "other_imports": 156980.57600948183,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 9666.496614651842,
+     "supply": "beamed",
+     "landed_USD2026_kg": 840.0
+    },
+    "supply": "beamed"
+   },
+   "2150": {
+    "needs": {
+     "food_W": 9470.064006395438,
+     "basic_W": 4250.0,
+     "mean_W": 18541.746890494156,
+     "firm_W": 28210.97777839216,
+     "local_built_kg": 295738.1892551754,
+     "imported_built_kg": 15771.652371274058,
+     "water_kg_year": 2201.0414529246004,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 221.79139815233484,
+     "floor_m2": 113.33726292333215,
+     "operators": 0.0026666666666666666
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 489547.36662307836,
+      "imported": 8079181.700531248,
+      "power": 2120201.6045803055,
+      "air_water": 1921665.42761877
+     },
+     "run_USD2041_year": {
+      "renewal": 290156.32234100095,
+      "power": 142510.8510998613,
+      "water": 213293.18388038516,
+      "other_imports": 114484.82412004634,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 6308.660948509622,
+     "supply": "beamed",
+     "landed_USD2026_kg": 572.0
+    },
+    "supply": "beamed"
+   },
+   "2241": {
+    "needs": {
+     "food_W": 8450.404318940115,
+     "basic_W": 4000.0,
+     "mean_W": 17081.638249920532,
+     "firm_W": 25989.44532751082,
+     "local_built_kg": 286198.2476662988,
+     "imported_built_kg": 15262.88939155554,
+     "water_kg_year": 1693.1088099420003,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 110.89569907616742,
+     "floor_m2": 110.96789345704468,
+     "operators": 0.0017142857142857144
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 379004.41286948015,
+      "imported": 2734594.7008508756,
+      "power": 932783.4423618116,
+      "air_water": 1313035.059064272
+     },
+     "run_USD2041_year": {
+      "renewal": 104081.38949692213,
+      "power": 62697.699112983195,
+      "water": 112106.85524259669,
+      "other_imports": 83247.2751565434,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 3052.5778783111077,
+     "supply": "beamed",
+     "landed_USD2026_kg": 375.0
+    },
+    "supply": "beamed"
+   }
+  },
+  "central": {
+   "2049": {
+    "needs": {
+     "food_W": 12901.845548608235,
+     "basic_W": 4862.068965517241,
+     "mean_W": 23192.174974383703,
+     "firm_W": 35286.53134459244,
+     "local_built_kg": 309225.6928808286,
+     "imported_built_kg": 16490.937963289896,
+     "water_kg_year": 2919.153120589659,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 430.6338387555747,
+     "floor_m2": 119.30811384923683,
+     "operators": 0.007697716892248371
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 845571.0759656935,
+      "imported": 28538507.23362968,
+      "power": 10679462.167354748,
+      "air_water": 3297249.5884099617
+     },
+     "run_USD2041_year": {
+      "renewal": 970126.2498772257,
+      "power": 717827.6063326357,
+      "water": 485377.5409233835,
+      "other_imports": 185085.766491995,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 12807.630916207032,
+     "supply": "beamed",
+     "landed_USD2026_kg": 1017.2457413840001
+    },
+    "supply": "beamed"
+   },
+   "2070": {
+    "needs": {
+     "food_W": 9464.129456649613,
+     "basic_W": 4500.0,
+     "mean_W": 18822.422158286456,
+     "firm_W": 28638.020806721503,
+     "local_built_kg": 286198.2476662988,
+     "imported_built_kg": 15262.88939155554,
+     "water_kg_year": 1693.1088099420003,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 221.79139815233484,
+     "floor_m2": 113.33726292333215,
+     "operators": 0.0024000000000000002
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 473755.5160868501,
+      "imported": 4470467.858782301,
+      "power": 1413137.3911543319,
+      "air_water": 834163.4492878906
+     },
+     "run_USD2041_year": {
+      "renewal": 168327.51660480807,
+      "power": 94985.02967801785,
+      "water": 71220.82568353202,
+      "other_imports": 58669.50820556392,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 6105.155756622215,
+     "supply": "beamed",
+     "landed_USD2026_kg": 220.00000000000003
+    },
+    "supply": "beamed"
+   },
+   "2100": {
+    "needs": {
+     "food_W": 6310.1175186682985,
+     "basic_W": 3500.0,
+     "mean_W": 14045.308429607947,
+     "firm_W": 21369.71701417578,
+     "local_built_kg": 254398.44237004337,
+     "imported_built_kg": 13567.012792493813,
+     "water_kg_year": 846.5544049710002,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 55.44784953808371,
+     "floor_m2": 105.52016161512027,
+     "operators": 0.0008
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 252669.60857965334,
+      "imported": 507287.1329114668,
+      "power": 144419.4314764578,
+      "air_water": 432529.1959270544
+     },
+     "run_USD2041_year": {
+      "renewal": 23890.996403465553,
+      "power": 9707.254277426217,
+      "water": 18464.658510545338,
+      "other_imports": 38055.897214419834,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 1356.7012792493813,
+     "supply": "beamed",
+     "landed_USD2026_kg": 90.0
+    },
+    "supply": "beamed"
+   },
+   "2150": {
+    "needs": {
+     "food_W": 4400.178497161915,
+     "basic_W": 3000.0,
+     "mean_W": 11273.878554875606,
+     "firm_W": 17153.02982325477,
+     "local_built_kg": 238498.53972191567,
+     "imported_built_kg": 12719.07449296295,
+     "water_kg_year": 507.9326429826001,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 22.179139815233484,
+     "floor_m2": 100.5117629862543,
+     "operators": 0.0004
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 142126.65482605502,
+      "imported": 109383.78803403504,
+      "power": 38701.82303979765,
+      "air_water": 302770.4371489381
+     },
+     "run_USD2041_year": {
+      "renewal": 6545.087233456262,
+      "power": 2601.370420908423,
+      "water": 7755.156574429042,
+      "other_imports": 31396.115201896366,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 508.76297971851807,
+     "supply": "beamed",
+     "landed_USD2026_kg": 48.0
+    },
+    "supply": "beamed"
+   },
+   "2241": {
+    "needs": {
+     "food_W": 3036.555816664528,
+     "basic_W": 2500.0,
+     "mean_W": 9130.712472303609,
+     "firm_W": 13892.236161906765,
+     "local_built_kg": 222598.63707378795,
+     "imported_built_kg": 11871.136193432087,
+     "water_kg_year": 338.62176198840007,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 11.089569907616742,
+     "floor_m2": 96.40399744415808,
+     "operators": 0.0002
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 73695.3025023989,
+      "imported": 26817.522911725977,
+      "power": 10523.123667253232,
+      "air_water": 223988.33360508172
+     },
+     "run_USD2041_year": {
+      "renewal": 2173.7874533432714,
+      "power": 707.3192034236807,
+      "water": 3824.8221200415346,
+      "other_imports": 27352.67612286426,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 237.42272386864173,
+     "supply": "beamed",
+     "landed_USD2026_kg": 22.5
+    },
+    "supply": "beamed"
+   }
+  },
+  "fast": {
+   "2049": {
+    "needs": {
+     "food_W": 11657.656933523831,
+     "basic_W": 4724.137931034483,
+     "mean_W": 21602.73737738146,
+     "firm_W": 32868.22691006479,
+     "local_built_kg": 300453.33279910294,
+     "imported_built_kg": 16023.10993596252,
+     "water_kg_year": 2685.620870942479,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 293.7802786247043,
+     "floor_m2": 117.01548973505376,
+     "operators": 0.00568515458434063
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 713595.197034241,
+      "imported": 14013276.158720212,
+      "power": 5157344.541839395,
+      "air_water": 2319568.8249526164
+     },
+     "run_USD2041_year": {
+      "renewal": 493848.291006947,
+      "power": 346654.562700534,
+      "water": 314139.78696617,
+      "other_imports": 134906.95140639986,
+      "operators": 3739.121799841837
+     },
+     "imported_built_kg": 8489.551426495269,
+     "supply": "beamed",
+     "landed_USD2026_kg": 700.7924055793296
+    },
+    "supply": "beamed"
+   },
+   "2070": {
+    "needs": {
+     "food_W": 6571.68561479536,
+     "basic_W": 4000.0,
+     "mean_W": 14921.111740154065,
+     "firm_W": 22702.23804781828,
+     "local_built_kg": 254398.44237004337,
+     "imported_built_kg": 13567.012792493813,
+     "water_kg_year": 846.5544049710002,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 55.44784953808371,
+     "floor_m2": 106.83816125429553,
+     "operators": 0.0008
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 252669.60857965334,
+      "imported": 431194.0629747468,
+      "power": 97206.3263371228,
+      "air_water": 321307.4026886689
+     },
+     "run_USD2041_year": {
+      "renewal": 20781.10245903257,
+      "power": 6533.792007640908,
+      "water": 13716.603464976537,
+      "other_imports": 32347.512632256865,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 1356.7012792493813,
+     "supply": "fusion",
+     "landed_USD2026_kg": 54.0
+    },
+    "supply": "fusion"
+   },
+   "2100": {
+    "needs": {
+     "food_W": 3855.498350891651,
+     "basic_W": 3000.0,
+     "mean_W": 10647.496386664801,
+     "firm_W": 16199.999155079944,
+     "local_built_kg": 222598.63707378795,
+     "imported_built_kg": 11871.136193432087,
+     "water_kg_year": 338.62176198840007,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 11.089569907616742,
+     "floor_m2": 99.28961786629179,
+     "operators": 0.0002
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 73695.3025023989,
+      "imported": 24043.296403616398,
+      "power": 11700.193695915183,
+      "air_water": 200817.1266804181
+     },
+     "run_USD2041_year": {
+      "renewal": 2044.2085389918968,
+      "power": 786.436798291249,
+      "water": 3429.1508662441342,
+      "other_imports": 26163.42933491364,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 237.42272386864173,
+     "supply": "beamed",
+     "landed_USD2026_kg": 15.0
+    },
+    "supply": "beamed"
+   },
+   "2150": {
+    "needs": {
+     "food_W": 2406.4607913515392,
+     "basic_W": 2500.0,
+     "mean_W": 8406.103193193672,
+     "firm_W": 12789.754481420274,
+     "local_built_kg": 206698.73442566025,
+     "imported_built_kg": 11023.197893901224,
+     "water_kg_year": 253.96632149129064,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 5.544784953808371,
+     "floor_m2": 94.5368312886598,
+     "operators": 8e-05
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 34215.676161828065,
+      "imported": 5633.000871704413,
+      "power": 3885.142746783001,
+      "air_water": 178572.76803274103
+     },
+     "run_USD2041_year": {
+      "renewal": 711.041844737856,
+      "power": 261.14261883982414,
+      "water": 2286.9798469488883,
+      "other_imports": 25021.752418481046,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 110.23197893901225,
+     "supply": "beamed",
+     "landed_USD2026_kg": 7.800000000000001
+    },
+    "supply": "beamed"
+   },
+   "2241": {
+    "needs": {
+     "food_W": 1506.6099019417572,
+     "basic_W": 2000.0,
+     "mean_W": 6796.274670372422,
+     "firm_W": 10340.42557230788,
+     "local_built_kg": 190798.83177753253,
+     "imported_built_kg": 10175.25959437036,
+     "water_kg_year": 169.31088099420003,
+     "other_imports_kg_year": 101.77763456657013,
+     "renewal_imports_kg_year": 1.108956990761674,
+     "floor_m2": 91.26929051653781,
+     "operators": 2.4e-05
+    },
+    "costs": {
+     "build_USD2041": {
+      "local": 18950.220643474004,
+      "imported": 627.7678269779402,
+      "power": 2082.934197749371,
+      "air_water": 169304.28526287558
+     },
+     "run_USD2041_year": {
+      "renewal": 271.0865914321878,
+      "power": 140.00589597942,
+      "water": 1445.5189805398352,
+      "other_imports": 24546.053703300797,
+      "operators": 3739.121799841836
+     },
+     "imported_built_kg": 20.35051918874072,
+     "supply": "beamed",
+     "landed_USD2026_kg": 4.8
+    },
+    "supply": "beamed"
+   }
+  }
+ }
+}

@@ -1,0 +1,610 @@
+{
+  "schema": "terluna.research.vacuum-economy-compact.technology/1",
+  "evidence": "Paths of the vacuum period's technology, 2041-2241, in three cases. Starting values marked by a source key are the sourced values of the lookups of 15 November 2026 (engineering E, local content L, transport T, on the research drive under vacuum-economy/research/); every later value and every arrival year is the study's own projection, not yet sourced. The static case holds the 2041 value throughout.",
+  "reading_rule": "Each quantity gives its value at stated years for the cases slow, central and fast; between stated years the model interpolates geometrically where `interpolate` is `geometric` and linearly otherwise, and holds the last value after the last year. A quantity that arrives gives its first year in `arrives`, null where it does not arrive by 2241.",
+  "years": [
+    2041,
+    2070,
+    2100,
+    2150,
+    2241
+  ],
+  "quantities": {
+    "led_umol_J": {
+      "unit": "umol of light per joule",
+      "start_basis": "design 3.5; the food lookup of 16 November carries 3.0, 3.8 and 4.4 for the 2040s (best tested fixture 3.69 in 2022) and gives the physical limit, 5.27 for 10% blue and 90% red",
+      "interpolate": "linear",
+      "slow": [
+        3.5,
+        3.8,
+        4.0,
+        4.1,
+        4.2
+      ],
+      "central": [
+        3.5,
+        4.1,
+        4.4,
+        4.7,
+        4.9
+      ],
+      "fast": [
+        3.5,
+        4.5,
+        4.9,
+        5.1,
+        5.2
+      ]
+    },
+    "crop_kcal_per_mol": {
+      "unit": "kcal of crop food per mol of light",
+      "start_basis": "design 1.25 (50 kcal per m2 a day at 40 mol), between wheat (0.30 g of edible dry mass per mol, about 1.0 kcal) and potato (0.75 g, about 2.7 kcal) in the food lookup; the ceiling is 1.64-1.78 g of total biomass per mol, about 3.4 kcal of edible food per mol at a harvest index of one half; engineered photosynthesis has gained 15-40% in field trials",
+      "interpolate": "geometric",
+      "slow": [
+        1.25,
+        1.3,
+        1.4,
+        1.45,
+        1.5
+      ],
+      "central": [
+        1.25,
+        1.45,
+        1.7,
+        2.0,
+        2.4
+      ],
+      "fast": [
+        1.25,
+        1.7,
+        2.2,
+        2.7,
+        3.2
+      ]
+    },
+    "microbial_diet_share": {
+      "unit": "share of food energy from electro-microbial food",
+      "start_basis": "design 18.7 g of microbial protein a day; the food lookup finds the product able to carry all protein once its nucleic acids are cut to about 2%, 19-31% of calories when sized to protein; shares above that need fats and sugars made from CO2, for which no energy balance was found",
+      "interpolate": "linear",
+      "slow": [
+        0.03,
+        0.05,
+        0.1,
+        0.15,
+        0.2
+      ],
+      "central": [
+        0.03,
+        0.15,
+        0.3,
+        0.4,
+        0.5
+      ],
+      "fast": [
+        0.03,
+        0.25,
+        0.4,
+        0.55,
+        0.7
+      ]
+    },
+    "microbial_efficiency": {
+      "unit": "food energy per unit of electricity, electro-microbial",
+      "start_basis": "food lookup: 14.6-16.5% of the electricity into whole dried biomass in two models (34-38 kWh/kg), carried as 0.15, 0.18 and 0.20; theoretical limit 25-27% for amino acids",
+      "interpolate": "linear",
+      "slow": [
+        0.15,
+        0.15,
+        0.16,
+        0.17,
+        0.18
+      ],
+      "central": [
+        0.15,
+        0.18,
+        0.2,
+        0.22,
+        0.24
+      ],
+      "fast": [
+        0.15,
+        0.2,
+        0.23,
+        0.25,
+        0.26
+      ]
+    },
+    "basic_kW_resident": {
+      "unit": "kW of basic services a resident",
+      "start_basis": "design",
+      "interpolate": "linear",
+      "slow": [
+        5.0,
+        5.0,
+        4.5,
+        4.25,
+        4.0
+      ],
+      "central": [
+        5.0,
+        4.5,
+        3.5,
+        3.0,
+        2.5
+      ],
+      "fast": [
+        5.0,
+        4.0,
+        3.0,
+        2.5,
+        2.0
+      ]
+    },
+    "water_recovery": {
+      "unit": "share of water recovered in life support and farms",
+      "start_basis": "E8",
+      "interpolate": "linear",
+      "slow": [
+        0.98,
+        0.98,
+        0.985,
+        0.987,
+        0.99
+      ],
+      "central": [
+        0.98,
+        0.99,
+        0.995,
+        0.997,
+        0.998
+      ],
+      "fast": [
+        0.98,
+        0.995,
+        0.998,
+        0.9985,
+        0.999
+      ]
+    },
+    "built_mass_multiple": {
+      "unit": "built mass a resident, multiple of the design",
+      "start_basis": "design",
+      "interpolate": "linear",
+      "slow": [
+        1.0,
+        1.0,
+        0.95,
+        0.93,
+        0.9
+      ],
+      "central": [
+        1.0,
+        0.9,
+        0.8,
+        0.75,
+        0.7
+      ],
+      "fast": [
+        1.0,
+        0.8,
+        0.7,
+        0.65,
+        0.6
+      ]
+    },
+    "equipment_life_years": {
+      "unit": "years of active life of ordinary equipment and surface plant",
+      "start_basis": "design 20; E7 surface plant 10",
+      "interpolate": "linear",
+      "slow": [
+        15,
+        15,
+        17,
+        20,
+        25
+      ],
+      "central": [
+        15,
+        20,
+        25,
+        30,
+        40
+      ],
+      "fast": [
+        15,
+        25,
+        35,
+        45,
+        60
+      ]
+    },
+    "array_W_kg": {
+      "unit": "W of array per kg delivered to the surface",
+      "start_basis": "E2",
+      "interpolate": "geometric",
+      "slow": [
+        100,
+        150,
+        200,
+        280,
+        400
+      ],
+      "central": [
+        100,
+        300,
+        1000,
+        1700,
+        3000
+      ],
+      "fast": [
+        100,
+        1000,
+        3000,
+        5500,
+        10000
+      ]
+    },
+    "array_local_share": {
+      "unit": "share of array mass made on the Moon",
+      "start_basis": "study's projection",
+      "interpolate": "linear",
+      "slow": [
+        0.0,
+        0.3,
+        0.6,
+        0.75,
+        0.9
+      ],
+      "central": [
+        0.0,
+        0.7,
+        0.95,
+        0.98,
+        0.99
+      ],
+      "fast": [
+        0.0,
+        0.9,
+        0.99,
+        0.995,
+        0.999
+      ]
+    },
+    "storage_Wh_kg": {
+      "unit": "Wh stored per kg at system level",
+      "start_basis": "E2",
+      "interpolate": "geometric",
+      "slow": [
+        550,
+        600,
+        700,
+        800,
+        900
+      ],
+      "central": [
+        550,
+        800,
+        1200,
+        1600,
+        2000
+      ],
+      "fast": [
+        550,
+        1200,
+        2000,
+        2500,
+        3000
+      ]
+    },
+    "storage_round_trip": {
+      "unit": "electricity out per electricity in",
+      "start_basis": "E2",
+      "interpolate": "linear",
+      "slow": [
+        0.4,
+        0.42,
+        0.45,
+        0.47,
+        0.5
+      ],
+      "central": [
+        0.4,
+        0.48,
+        0.55,
+        0.6,
+        0.65
+      ],
+      "fast": [
+        0.4,
+        0.55,
+        0.65,
+        0.7,
+        0.75
+      ]
+    },
+    "fission_kg_kWe": {
+      "unit": "kg per kW of electricity",
+      "start_basis": "E1",
+      "interpolate": "geometric",
+      "slow": [
+        150,
+        100,
+        75,
+        60,
+        50
+      ],
+      "central": [
+        150,
+        50,
+        25,
+        20,
+        15
+      ],
+      "fast": [
+        150,
+        25,
+        12,
+        10,
+        8
+      ]
+    },
+    "fission_life_years": {
+      "unit": "years",
+      "start_basis": "E1",
+      "interpolate": "linear",
+      "slow": [
+        10,
+        10,
+        15,
+        17,
+        20
+      ],
+      "central": [
+        10,
+        15,
+        25,
+        30,
+        40
+      ],
+      "fast": [
+        10,
+        20,
+        40,
+        50,
+        60
+      ]
+    },
+    "fission_USD2024_kWe": {
+      "unit": "USD of 2024 per kW of electricity, built on Earth",
+      "start_basis": "E1, terrestrial microreactor economics",
+      "interpolate": "geometric",
+      "slow": [
+        25000,
+        22000,
+        20000,
+        17000,
+        15000
+      ],
+      "central": [
+        25000,
+        15000,
+        10000,
+        7000,
+        5000
+      ],
+      "fast": [
+        25000,
+        8000,
+        5000,
+        3000,
+        2000
+      ]
+    },
+    "fusion": {
+      "unit": "arrival on the Moon, kg per kWe and USD of 2024 per kWe once arrived",
+      "start_basis": "study's projection",
+      "arrives": {
+        "slow": null,
+        "central": 2110,
+        "fast": 2070
+      },
+      "kg_kWe": {
+        "slow": 10,
+        "central": 10,
+        "fast": 5
+      },
+      "USD2024_kWe": {
+        "slow": 10000,
+        "central": 8000,
+        "fast": 4000
+      },
+      "life_years": {
+        "slow": 30,
+        "central": 30,
+        "fast": 40
+      }
+    },
+    "beam_efficiency": {
+      "unit": "electricity in orbit to the grid",
+      "start_basis": "E3",
+      "interpolate": "linear",
+      "slow": [
+        0.4,
+        0.42,
+        0.45,
+        0.47,
+        0.5
+      ],
+      "central": [
+        0.4,
+        0.45,
+        0.55,
+        0.6,
+        0.65
+      ],
+      "fast": [
+        0.4,
+        0.55,
+        0.65,
+        0.7,
+        0.75
+      ]
+    },
+    "launch_USD2026_kg": {
+      "unit": "USD of 2026 per kg to low Earth orbit",
+      "start_basis": "E4 (2040 trend); the demand scenarios carry 273, 100 and 33",
+      "interpolate": "geometric",
+      "slow": [
+        600,
+        400,
+        300,
+        220,
+        150
+      ],
+      "central": [
+        600,
+        100,
+        50,
+        30,
+        15
+      ],
+      "fast": [
+        600,
+        30,
+        10,
+        6,
+        4
+      ]
+    },
+    "landed_multiple": {
+      "unit": "cost of a kg landed on the Moon from Earth, multiple of the launch price, with propellant from the sources",
+      "start_basis": "T2: 6 to 15 with propellant from Earth, a factor 2 to 4 less with propellant made in space",
+      "interpolate": "linear",
+      "slow": [
+        3.0,
+        3.0,
+        2.8,
+        2.6,
+        2.5
+      ],
+      "central": [
+        3.0,
+        2.2,
+        1.8,
+        1.6,
+        1.5
+      ],
+      "fast": [
+        3.0,
+        1.8,
+        1.5,
+        1.3,
+        1.2
+      ]
+    },
+    "metal_kWh_kg": {
+      "unit": "kWh per kg of metal from regolith",
+      "start_basis": "E6",
+      "interpolate": "geometric",
+      "slow": [
+        35,
+        30,
+        25,
+        22,
+        20
+      ],
+      "central": [
+        35,
+        20,
+        15,
+        12,
+        10
+      ],
+      "fast": [
+        35,
+        15,
+        10,
+        8,
+        7
+      ]
+    },
+    "equipment_import_share": {
+      "unit": "share of new equipment's mass bought from Earth, once local production runs",
+      "start_basis": "L1",
+      "interpolate": "geometric",
+      "slow": [
+        0.05,
+        0.05,
+        0.03,
+        0.02,
+        0.01
+      ],
+      "central": [
+        0.05,
+        0.02,
+        0.005,
+        0.002,
+        0.001
+      ],
+      "fast": [
+        0.05,
+        0.005,
+        0.001,
+        0.0005,
+        0.0001
+      ]
+    },
+    "output_per_job": {
+      "unit": "multiple of 2041",
+      "start_basis": "study's projection",
+      "interpolate": "geometric",
+      "slow": [
+        1,
+        2,
+        3,
+        4.5,
+        7
+      ],
+      "central": [
+        1,
+        5,
+        15,
+        30,
+        60
+      ],
+      "fast": [
+        1,
+        15,
+        60,
+        150,
+        500
+      ]
+    },
+    "equipment_price_multiple": {
+      "unit": "price of a kg of equipment made on Earth, multiple of 2041",
+      "start_basis": "L4 (5-20% per doubling of output)",
+      "interpolate": "geometric",
+      "slow": [
+        1,
+        0.8,
+        0.65,
+        0.5,
+        0.4
+      ],
+      "central": [
+        1,
+        0.5,
+        0.3,
+        0.18,
+        0.1
+      ],
+      "fast": [
+        1,
+        0.3,
+        0.1,
+        0.05,
+        0.03
+      ]
+    }
+  }
+}
