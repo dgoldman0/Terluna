@@ -197,6 +197,66 @@ def jpeg_data_uri(array, quality=88):
     return 'data:image/jpeg;base64,' + base64.b64encode(buffer.getvalue()).decode('ascii')
 
 
+STOPS_SCHEMA = 'terluna.research.drainage-network-globe-stops/1'
+SEA_NAMES = dict(near_side='the Near-side Sea', south_pole_aitken='the South Pole–Aitken Sea',
+                 smythii_marginis='Smythii–Marginis', humboldtianum='Humboldtianum', orientale='Orientale',
+                 moscoviense='Moscoviense')
+
+
+def stops_textures(path, rotation, ppd):
+    """The drainage network study's stops (globe_stops.json and its maps) on the globe's surface grid, 180 W at the
+    left edge, carried into the turned frame when a rotation is given: a bit per stop where one of the network's
+    bodies covers the pixel, with the first and second body (one texture), the overflow river's bit per stop and share
+    of the pixel with the stops at which the second body is the surface (another), and quarter-resolution copies of
+    the first and of those stops for the page's readout."""
+    record = json.loads(Path(path).read_text())
+    if record.get('schema') != STOPS_SCHEMA:
+        raise SystemExit(f'Expected {STOPS_SCHEMA} in {path}')
+    z = np.load(ROOT / record['maps'])
+    meta = json.loads(str(z['metadata']))
+    if meta['grid']['pixels_per_degree'] != ppd or meta['grid']['left_lon'] != 0.0:
+        raise SystemExit(f"{record['maps']} is not on the {ppd} px/deg grid with 0 E at the left edge")
+
+    def carried(a, channel=False):
+        if rotation is not None:
+            a = (appearance.turn_channels(a, rotation, left_lon=0.0) if channel
+                 else appearance.turn_texture(a, rotation, left_lon=0.0, nearest=True))
+        return np.roll(a, a.shape[1] // 2, axis=1)
+
+    bodies, first, second = (carried(z[k]) for k in ('body_bits', 'first', 'second'))
+    second_bits = carried(z['second_bits'])
+    channel_q = carried(z['channel_q'].astype(np.float32), channel=True)
+    channel_bits = carried(z['channel_bits'], channel=True)
+    km = appearance.MOON_KM * np.radians(1.0 / ppd)
+    share = np.clip(appearance.RIVER_WIDTH * np.sqrt(channel_q) / (km * 1000.0), 0.0, 1.0)
+    stops = np.dstack([bodies, first, second]).astype(np.uint8)
+    channels = np.dstack([channel_bits, np.round(share * 255), second_bits]).astype(np.uint8)
+    readout = (np.ascontiguousarray(stops[2::4, 2::4]), np.ascontiguousarray(second_bits[2::4, 2::4]).astype(np.uint8))
+    return record, stops, channels, readout
+
+
+def stops_data(record, stops, channels, readout, share_of, colours, atlas_water):
+    """The page's years control: each stop's year, levels and seas, the textures, and the faithfulness of the drawn
+    water to the product's share at each stop. The water drawn in a year is the bodies' that year with the atlas's own
+    water that no body covered at year 0, which stays as drawn."""
+    names = [''] + [SEA_NAMES.get(b['name'], b['name']) if b['kind'] == 'sea'
+                    else f"a hollow on {SEA_NAMES.get(b['fed_by'], b['fed_by'])}'s overflow" for b in record['bodies']]
+    z = np.load(ROOT / record['maps'])
+    levels = [[-1.0e5 if not np.isfinite(v) else round(float(v), 1) for v in row] for row in z['levels']]
+    held = atlas_water & ((stops[..., 0] & 1) == 0)
+    drawn = [share_of((((stops[..., 0] >> k) & 1) == 1) | held) for k in range(len(record['stops']))]
+    checks = [dict(year=s['year'], drawn=round(d, 4), product=s['water_share'], difference=round(d - s['water_share'], 4))
+              for s, d in zip(record['stops'], drawn)]
+    texts = [dict(year=s['year'], share=s['water_share'], full=[SEA_NAMES[k] for k, v in s['states'].items() if v == 'full'],
+                  levels={SEA_NAMES[k]: v for k, v in s['levels_m'].items()}) for s in record['stops']]
+    data = dict(years=[s['year'] for s in record['stops']], levels=levels, names=names, stops=texts,
+                textures=dict(stops=png_data_uri(stops), channels=png_data_uri(channels),
+                              readout=png_data_uri(readout[0]), readoutSecond=png_data_uri(readout[1])),
+                colours={k: [round(float(c), 4) for c in v] for k, v in colours.items()},
+                producer=record['producer'], case=record['case'])
+    return data, checks
+
+
 def relief_texture(height, level):
     """The map and topography modes' texture, 180 W at the left edge: the height relative to sea level in whole
     metres above the lowest cell, high byte in red and low byte in green. The page adds back half a metre, so
@@ -249,7 +309,7 @@ def turned_note(turn, drained, run, years):
             "estimate's lakes, routed on September's climate.")
 
 
-def write_globe(atlas, height, ppd, sites, targets, hashes, turn=None):
+def write_globe(atlas, height, ppd, sites, targets, hashes, turn=None, stops=None):
     level = atlas['sea_level_m']
     rotation = turn['rotation'] if turn else None
     if turn:
@@ -335,6 +395,21 @@ def write_globe(atlas, height, ppd, sites, targets, hashes, turn=None):
         data['frame'] = dict(
             note=turned_note(turn, drained, params['climatology']['run'], years),
             lede=' It shows the Moon as its seas turn it, with the clouds and rain of the design run on the turned Moon.')
+    stop_checks = None
+    if stops:
+        record, stop_tex, channel_tex, readout = stops_textures(stops, rotation, SURFACE_PPD)
+        colours = dict(deep=appearance.DEEP_WATER, mid=appearance.MID_WATER, turbid=appearance.TURBID_WATER,
+                       river=appearance.RIVER_WATER, bared=appearance.BASALT_SOIL)
+        data['stops'], checks = stops_data(record, stop_tex, channel_tex, readout,
+                                           lambda m: share(m.astype(np.float32), SURFACE_PPD), colours, masks['sea'])
+        unlike = int(((stop_tex[..., 0] & 1).astype(bool) & ~masks['sea']).sum())     # bodies at year 0 off the sea
+        stop_checks = dict(stops=checks, year_0_body_cells_off_the_surface_sea=unlike, tolerance=0.002,
+                           passed=all(abs(c['difference']) <= 0.002 for c in checks) and unlike <= 0.0005 * masks['sea'].size)
+        data['provenance'] += (f" The years: the drainage network study's <code>{STOPS_SCHEMA}</code> "
+                               f"({digest(Path(stops))[:12]}; its code {record['producer']['code_sha256'][:12]}).")
+        params['legend'].append(['Sea floor laid bare as a sea falls (placeholder)',
+                                 '#' + ''.join(f'{int(round(v * 255)):02x}'
+                                               for v in appearance.srgb_encode(np.asarray(appearance.BASALT_SOIL)))])
     template = (HERE / 'globe.template.html').read_text()
     page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
     (OUT / 'globe.html').write_text(page)
@@ -342,12 +417,14 @@ def write_globe(atlas, height, ppd, sites, targets, hashes, turn=None):
     lakes = drained['lakes']['area_share'] if drained else 0.0
     passed = (all(abs(v - atlas['water_share']) <= 0.002 for v in (texture_water, surface_water))
               and abs(lake_water - lakes) <= 0.002 and 0.0 <= mask_water - atlas['water_share'] - lakes <= 0.004
-              and relief_error <= 0.5 and relief_off_side == 0)
+              and relief_error <= 0.5 and relief_off_side == 0 and (stop_checks is None or stop_checks['passed']))
+    if stops:
+        products[str(Path(stops).relative_to(ROOT))] = digest(Path(stops))
     return dict(relief_max_error_m=round(relief_error, 3), relief_cells_off_side=relief_off_side,
                 map_texture_water_share=round(texture_water, 4), surface_sea_share=round(surface_water, 4),
                 surface_lake_share=round(lake_water, 4), product_water_share=atlas['water_share'],
                 product_lake_share=lakes, water_mask_share_with_rivers=round(mask_water, 4), tolerance=0.002,
-                passed=passed, page_bytes=len(page.encode()), appearance_products=products)
+                years=stop_checks, passed=passed, page_bytes=len(page.encode()), appearance_products=products)
 
 
 def main(argv=None):
@@ -359,6 +436,7 @@ def main(argv=None):
                         help="the clouds and ground cover: a climatology in the globe's frame")
     parser.add_argument('--drainage', type=Path, default=ROOT / 'geography',
                         help="the folder holding the drainage product's results/ and products/")
+    parser.add_argument('--stops', type=Path, help="the drainage network study's globe_stops.json: the years control")
     args = parser.parse_args(argv)
     atlas_path = ROOT / 'geography' / 'results' / 'atlas.json'
     atlas = json.loads(atlas_path.read_text())
@@ -496,7 +574,8 @@ def main(argv=None):
     globe = write_globe(atlas, height, ppd, sites, targets,
                         dict(atlas_json=products[str(atlas_path.relative_to(ROOT))],
                              atlas_grid=products[str(grid_path.relative_to(ROOT))],
-                             register=products[str(reg_path.relative_to(ROOT))]), turn)
+                             register=products[str(reg_path.relative_to(ROOT))]), turn,
+                        args.stops.absolute() if args.stops else None)
     manifest = dict(products=products, renderer=digest(Path(__file__)), template=digest(HERE / 'globe.template.html'),
                     faithfulness=dict(rendered_near_side_disk_water=round(disk_water, 4), product_disk_water=product_disk,
                                       difference=round(disk_water - product_disk, 4), tolerance=0.01,
