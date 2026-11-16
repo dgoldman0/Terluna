@@ -32,6 +32,16 @@
       "kind": "smooth_logarithmic",
       "start_year": 10,
       "description": "The schedule of the staged studies of 12 to 14 November 2026, kept so that their figures can be reproduced: the logarithm of the population follows a smooth step from year 10 to the completion year, reaching 222,240 residents in year 100."
+    },
+    "resident_led": {
+      "kind": "solved",
+      "limit": "planned",
+      "description": "The residents are a result. From the opening population in the first productive year the settlement grows, period by period, at the highest steady rate at which, with no growth after that period, the system needs no equity beyond its opening funding (with credit in U, and its surplus kept for growth), the residents' own work for themselves and their newcomers fits within the workforce, and the receipts of years 201 to 220 pay the running costs and renewals of the population reached. Growth stops at the planned population. residents.py finds the schedule, and its product holds it."
+    },
+    "resident_led_beyond_plan": {
+      "kind": "solved",
+      "limit": null,
+      "description": "The same rule without the stop at the planned population: the settlement grows as its production and financing allow to the completion year and holds its population after it. It reads what the system carries beyond the plan."
     }
   },
   "horizons": [100, 200, 220],

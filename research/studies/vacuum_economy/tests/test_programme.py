@@ -14,8 +14,8 @@ def people(ramp, year):
     return definition.population(P, ramp, year)
 
 
-@pytest.mark.parametrize('ramp', sorted(P['ramps']))
-def test_every_ramp_opens_at_the_opening_population_and_completes_on_the_plan(ramp):
+@pytest.mark.parametrize('ramp', definition.planned(P))
+def test_every_planned_ramp_opens_at_the_opening_population_and_completes_on_the_plan(ramp):
     assert people(ramp, FIRST) == OPENING
     assert math.isclose(people(ramp, DONE), PLANNED, rel_tol=1e-12)
     assert math.isclose(people(ramp, LAST), PLANNED, rel_tol=1e-12)
@@ -71,3 +71,39 @@ def test_an_unknown_kind_of_ramp_is_refused():
     altered['ramps']['constant_growth']['kind'] = 'stepwise'
     with pytest.raises(ValueError):
         definition.population(altered, 'constant_growth', 50)
+
+
+def test_the_solved_ramps_state_a_rule_and_take_their_residents_only_from_a_solution():
+    solved = sorted(name for name, ramp in P['ramps'].items() if ramp['kind'] == 'solved')
+    assert solved == ['resident_led', 'resident_led_beyond_plan'] and not set(solved) & set(definition.planned(P))
+    assert P['ramps']['resident_led']['limit'] == 'planned' and P['ramps']['resident_led_beyond_plan']['limit'] is None
+    with pytest.raises(ValueError):
+        definition.population(P, 'resident_led', 50)                       # no solution given
+    residents = [[y, OPENING * 1.01 ** (y - FIRST)] for y in range(FIRST, LAST + 1)]
+    given = definition.solved(P, 'resident_led_beyond_plan', residents)
+    assert 'residents' not in P['ramps']['resident_led_beyond_plan']        # the definition itself is left alone
+    assert definition.population(given, 'resident_led_beyond_plan', FIRST) == OPENING
+    assert definition.population(given, 'resident_led_beyond_plan', 120) == residents[120 - FIRST][1]
+    assert definition.population(given, 'resident_led_beyond_plan', LAST + 2) == residents[-1][1]   # held after the last year
+
+
+@pytest.mark.parametrize('change', [
+    lambda r: r[:-1],                                                     # a year missing
+    lambda r: [[r[0][0], 2 * OPENING]] + r[1:],                           # not opening on the opening population
+    lambda r: r[:50] + [[r[50][0], r[49][1] / 2]] + r[51:],               # falling
+])
+def test_a_solution_that_misses_a_year_does_not_open_on_the_opening_population_or_falls_is_refused(change):
+    residents = [[y, OPENING * 1.02 ** (y - FIRST)] for y in range(FIRST, LAST + 1)]
+    with pytest.raises(ValueError):
+        definition.solved(P, 'resident_led', change(residents))
+    with pytest.raises(ValueError):
+        definition.solved(P, 'constant_growth', residents)                 # a planned ramp takes no solution
+
+
+def test_a_definition_that_lists_residents_for_a_solved_ramp_is_refused(tmp_path):
+    altered = json.loads(json.dumps(P))
+    altered['ramps']['resident_led']['residents'] = [[FIRST, OPENING]]
+    path = tmp_path / 'programme.json'
+    path.write_text(json.dumps(altered))
+    with pytest.raises(ValueError):
+        definition.load(path)

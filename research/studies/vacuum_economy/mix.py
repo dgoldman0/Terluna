@@ -317,5 +317,6 @@ class Decision:
         final_account = self.account(prices, scale, mined, book, physical, served, self.staffing(loops))
         final = self.summary(final_account)
         return dict(book=book, physical=physical, loops=loops, prices=prices, scale=scale, order=order, dropped=dropped,
-                    starts={line: late[1] for line, late in starts.items()},
-                    first=first_summary, final=final, base_jobs=base_jobs, solves=self.solves)
+                    starts={line: late[1] for line, late in starts.items()}, late=starts,
+                    first=first_summary, first_account=first_account, first_book=first_book, final=final, base_jobs=base_jobs,
+                    solves=self.solves)

@@ -16,12 +16,13 @@ which lines of sale are served, at what price and how far, and the record adds t
 The scenario `first_pass` is the demand of the staged studies of 12 to 14 November 2026, with their prices, audiences
 and buyers' budgets. On the ramp of the same name it reproduces the figures of those studies, so that every later
 change can be measured against them; on the programme's two ramps it shows what the schedule of residents alone changes.
+
+A scenario case on a solved ramp (`resident_led`, `resident_led_beyond_plan`) takes its residents from the schedule
+residents.py found for that scenario and saved in results/residents.json; the record adds how that schedule was found.
 """
 from __future__ import annotations
 import argparse
-from copy import deepcopy
 from functools import lru_cache
-import hashlib
 import importlib.util
 import json
 import math
@@ -32,60 +33,40 @@ import time
 from provisioning.vacuum_industry import industry, model
 from research.studies.enclosed_returns import finance, markets, revised
 from . import demand as scenarios, mix, programme as definition
+from .inputs import HERE, INDUSTRY, RETURNS, ROOT, digest, engineering, sources
+from . import inputs
 
-HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
 SCHEMA = 'terluna.research.vacuum-economy/1'
-INDUSTRY = ROOT / 'provisioning/vacuum_industry'
-RETURNS = ROOT / 'research/studies/enclosed_returns'
+RESIDENTS = HERE / 'results/residents.json'
 FINANCING = ('equity', 'funded_credit', 'U_credit')
 EARTH = ('capital_external_USD2041', 'operating_external_replacement_USD2041',
          'operating_external_logistics_materials_USD2041', 'operating_external_services_USD2041')
-# The files a first-pass case is computed from, beside those the order book and the financing name themselves.
-READ = (HERE / 'programme.json', HERE / 'programme.py', HERE / 'cases.json',
-        HERE / 'scenarios.json', HERE / 'demand.py', HERE / 'mix.py',
-        INDUSTRY / 'model.py', INDUSTRY / 'recovery.py', INDUSTRY / 'industry.py',
-        INDUSTRY / 'engineering.json', INDUSTRY / 'recovery.json',
-        RETURNS / 'markets.py', RETURNS / 'enclosed_inputs.json', RETURNS / 'finance.py', RETURNS / 'finance_inputs.json',
-        RETURNS / 'revised.py', RETURNS / 'revised_inputs.json', RETURNS / 'bottlenecks.py')
-
-
-def digest(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
-
-
-@lru_cache(maxsize=None)
-def sources():
-    """The programme, the engineering coefficients, the recovery measures, the demand inputs and the financing rules."""
-    programme = definition.load()
-    demand = markets.inputs()                                  # checks the digests of the inputs it inherits
-    money = json.loads((RETURNS / 'finance_inputs.json').read_text())
-    for name, pinned in money['inherited_dependencies'].items():
-        if digest(RETURNS / name) != pinned:
-            raise ValueError('Changed financing dependency: ' + name)
-    periods = json.loads((RETURNS / 'revised_inputs.json').read_text())['periods']
-    calendar, people, rules = programme['calendar'], programme['population'], demand[0]
-    stated = dict(first_productive_year=calendar['first_productive_year'], completion_year=calendar['completion_year'],
-                  last_year=calendar['last_year'], seed_population=people['opening'],
-                  founding_population=people['founding_system'], cap_population=people['planned'])
-    for key, value in stated.items():
-        if rules[key] != value:
-            raise ValueError('The demand inputs and the programme definition disagree on ' + key)
-    if money['horizons'] != programme['horizons'] or money['rates'] != programme['discount_rates']:
-        raise ValueError('The financing rules and the programme definition disagree on horizons or discount rates')
-    if periods[0][0] != 0 or periods[-1][1] != calendar['last_year']:
-        raise ValueError('The reporting periods do not span the programme')
-    return dict(programme=programme, demand=demand, money=money, periods=periods, scenarios=scenarios.load(),
-                engineering=json.loads((INDUSTRY / 'engineering.json').read_text()),
-                recovery=json.loads((INDUSTRY / 'recovery.json').read_text()))
 
 
 def dependencies():
-    s = sources()
-    paths = {Path(p).resolve() for p in READ}
-    paths |= {(RETURNS / name).resolve() for name in s['demand'][0]['inherited_inputs']}
-    paths |= {(RETURNS / name).resolve() for name in s['money']['inherited_dependencies']}
-    return {str(p.relative_to(ROOT)): digest(p) for p in sorted(paths)}
+    """The files the cases are computed from: the study's inputs, the list of cases and the solved schedules."""
+    return inputs.dependencies((HERE / 'cases.json', RESIDENTS))
+
+
+@lru_cache(maxsize=None)
+def solved():
+    """The schedules residents.py found, refused where any file it read has changed since."""
+    product = json.loads(RESIDENTS.read_text())
+    stale = [path for path, value in product['dependencies'].items() if not (ROOT / path).exists() or digest(ROOT / path) != value]
+    if stale:
+        raise ValueError('The solved schedules are out of date (run residents.py again): ' + ', '.join(stale))
+    return product
+
+
+def programme_for(case):
+    """The programme a case runs on: the definition, with a solved ramp's residents where the case names one."""
+    programme = sources()['programme']
+    if programme['ramps'][case['ramp']]['kind'] != 'solved':
+        return programme
+    if case['scenario'] == 'first_pass':
+        raise ValueError('A solved ramp belongs to a scenario of demand, not to the first pass')
+    found = solved()['scenarios'][case['scenario']]['schedules'][case['ramp']]
+    return definition.solved(programme, case['ramp'], found)
 
 
 @lru_cache(maxsize=None)
@@ -120,29 +101,6 @@ def orders(case):
         if not math.isclose(row['population'], planned, rel_tol=1e-12):
             raise ValueError('The order book and the programme definition disagree on the residents of year %d' % row['year'])
     return book
-
-
-def engineering(case):
-    """The engineering coefficients for one case: the model's own, with the changes the case states.
-
-    A change names a coefficient by its path, as in `industrial.transport.earth_leg`, and gives its value. The
-    coefficient must exist, so that a misspelt path fails where it is read.
-    """
-    data = sources()['engineering']
-    stated = sources()['scenarios']['scenarios'].get(case['scenario'], {}).get('engineering', {})
-    changes = {**{path: entry['value'] for path, entry in stated.items()}, **case.get('engineering', {})}
-    if not changes:
-        return data
-    data = deepcopy(data)
-    for path, value in changes.items():
-        *parents, leaf = path.split('.')
-        node = data
-        for key in parents:
-            node = node[key]
-        if leaf not in node:
-            raise ValueError('The engineering coefficients hold no ' + path)
-        node[leaf] = value
-    return data
 
 
 def traffic(physical, coefficients, horizons):
@@ -198,7 +156,7 @@ def decide(case):
     """The orders of a scenario case: prices from the system's own costs, and the lines its residents can staff."""
     s = sources()
     hotel = s['money']['hotel_staff_per_bed'] * s['money']['hotel_staff_USD2041_year']
-    decision = mix.Decision(s['programme'], case['ramp'], s['scenarios'], case['scenario'], engineering(case), s['recovery'],
+    decision = mix.Decision(programme_for(case), case['ramp'], s['scenarios'], case['scenario'], engineering(case), s['recovery'],
                             case['recovery'], s['periods'], hotel, log=lambda *a: print('  ', case['name'], *a, flush=True),
                             pricing=case.get('pricing', 'seller'), allowance=s['money']['capital_cost_allowance_fraction'])
     return decision.decide()
@@ -253,6 +211,20 @@ def resources(book, physical, loops, coefficients, horizons):
     return out
 
 
+def residents_record(case):
+    """How the schedule of a solved ramp was found: its residents at each horizon, the rate and the binding condition
+    of each period, the year it reaches the planned population, and whether the opening settlement is sustained."""
+    entry = solved()['scenarios'][case['scenario']]
+    programme = programme_for(case)
+    trial = entry['limited_trial'] if case['ramp'] == 'resident_led' and entry['limited_trial'] else entry['final_trial']
+    return dict(residents_at={str(h): definition.population(programme, case['ramp'], h) for h in programme['horizons']},
+                planned_population_reached_year=entry['planned_population_reached_year'],
+                opening_settlement_sustained=entry['opening_settlement_sustained'],
+                periods=[dict(first_year=p['first_year'], last_year=p['last_year'], growth_rate=p['rate'],
+                              lowest_unsustained_rate=p.get('lowest_unsustained_rate'), binding=p['binding']) for p in entry['periods']],
+                search=dict(trials=entry['trials'], margins_of_the_schedule=trial.get('margins'), sustained=trial['sustained']))
+
+
 def checkpoint(measure):
     """The headline measures of one financing arrangement at one horizon."""
     return dict(horizon=measure['horizon'], financing=measure['mode'], population=measure['population'],
@@ -292,7 +264,10 @@ def solve(case):
                                    virgin_metal_kg=demand['virgin_metal_kg'])
     if decided:
         record = dict(record, sales=lines_record(decided, money['horizons']))
+    if s['programme']['ramps'][case['ramp']]['kind'] == 'solved':
+        record = dict(record, residents=residents_record(case))
     return dict(record, status='conditional_account', resources=resources(book, physical, loops, coefficients, money['horizons']),
+                water_against_pool=inputs.water_drawn(physical, loops, coefficients, money['horizons']),
                 opening=dict(founding_cost_USD2041=path['seed_hardware_and_carry'], working_cash_USD2041=path['initial_working'],
                              reserve_USD2041=equity['initial_reserve']),
                 checkpoints=[checkpoint(revised.measures(path, financed[mode], money, horizon))
@@ -352,7 +327,14 @@ def product(selected, jobs=1):
                              'comparison rate, its receipts, cost, quantity and mean jobs by period against the same orders without '
                              'the line, and its quantity, price, receipts and the share of its demand served in the year of each '
                              'horizon. A line\'s cost counts the financing\'s allowance on capital and, where residents cannot staff '
-                             'all the working parts the industry is able to make, the parts its jobs would have made.',
+                             'all the working parts the industry is able to make, the parts its jobs would have made. Water against '
+                             'the pool gives the water contained in the feed mined to each horizon (the feed times its stated grade, '
+                             'before recovery) beside the water of the wider near-Earth screen of the source survey at its 5th, 50th '
+                             'and 95th percentiles, with the year the draw passes each. A case on a solved ramp adds how its '
+                             'schedule was found: the residents at each horizon, the growth rate of each period with the lowest '
+                             'rate found unsustained and the condition that failed there, the year the planned population is '
+                             'reached, and the margins of the schedule as residents.py measured them while the surplus was kept '
+                             'for growth; its checkpoints and periods finance the same schedule under the ordinary rules.',
                 cases=records)
 
 
