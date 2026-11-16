@@ -137,6 +137,7 @@ def solve_once(data, spec, book, measures, residual_water_allowance):
         I = configured['normalization']['USD2026_to_USD2041']
         r = e.spec['refurbishment']
         cats = model.catalogue(configured)
+        worked = model.worked_by_year(result['component_orders'])
         for row in before['annual']:
             y = row['year']
             f = e.flows[y]
@@ -158,8 +159,8 @@ def solve_once(data, spec, book, measures, residual_water_allowance):
                 row['shortfalls']['resident_workforce'] = row['capacity_summary']['resident_workforce'] - 1
             row['physical']['source_tug_component_import_kg_year'] -= f['loop_import_avoided'].get('asteroid_tugs', 0.)
             drivers = {}
-            for ev in result['component_orders']:
-                if ev['component'] == 'active' and ev['order_year'] in (y, y - 1):
+            for ev in worked.get(y, []):
+                if ev['component'] == 'active':
                     n = ev['asset']
                     drivers[n] = drivers.get(n, 0.) + ev.get('new_imported_mass_kg', ev['mass_kg'] * (1 - ev['locally_made_share'])) / 2 * cats[n]['price'] * ev.get('price_index', 1.0) * I
             row['top_imported_component_purchases_USD2041'] = dict(sorted(drivers.items(), key=lambda kv: kv[1], reverse=True)[:8])

@@ -1,10 +1,10 @@
 {
  "dependencies": {
   "provisioning/vacuum_industry/engineering.json": "daafb3ee7b3c2273f211f0bd5e6d1967fb4a7a7365470e9954adde595149aea7",
-  "provisioning/vacuum_industry/industry.py": "d824764cfe89e4670b50aee2096f45c02c7679c998446eb77f1402bc587ac5e5",
-  "provisioning/vacuum_industry/model.py": "c8ebda657d2bddd7e53e0c69fc06a5d07742eddfb0943d79657e2d47ce9637e9",
+  "provisioning/vacuum_industry/industry.py": "f32027ba39e557111392137d05a272cb5b5c3bd0afb46731ec6247661f74b31f",
+  "provisioning/vacuum_industry/model.py": "7d2b52f1463aa34c297bb3d7e312c5cd8888f635c44944b05e08c8f0643020d4",
   "provisioning/vacuum_industry/recovery.json": "7cb1d7c240155bba64a9b55eca60d01caae8e81ce697f7e078baef3aa0bc4ed0",
-  "provisioning/vacuum_industry/recovery.py": "998da0310ca08fbe99f4b8e99ef1445d86de41de7aa6a270e4790210418c4e74",
+  "provisioning/vacuum_industry/recovery.py": "b469b7f760c40f81e617e96effdd2de8958b8843cb3c4df5e616eaf01ec479c9",
   "research/studies/complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef",
   "research/studies/complex_returns/credit.py": "d2a2ae1efc0c41d9ef78fe1ee524f9dc451ade280d7372c3363e645060830ea8",
   "research/studies/complex_returns/credit_inputs.json": "cc64e28175fe66424e223b369350008b4cd546a280b1cdf02f9ebec2031a1329",
@@ -135,7 +135,7 @@
      "200": 6858415.877956856,
      "220": 6858415.877956856
     },
-    "seconds": 34.6,
+    "seconds": 10.3,
     "sustained": true,
     "water": {
      "contained_water_drawn_kg": {
@@ -213,7 +213,7 @@
      "200": 6468289.238000949,
      "220": 6468289.238000949
     },
-    "seconds": 37.7,
+    "seconds": 11.2,
     "sustained": true,
     "water": {
      "contained_water_drawn_kg": {
@@ -252,7 +252,7 @@
     },
     "workforce_use": 0.9744915114108103
    },
-   "minutes": 55.2,
+   "minutes": 22.2,
    "opening_funding_cap_USD2041": 1565532926471.7812,
    "opening_settlement_sustained": true,
    "periods": [
@@ -2308,7 +2308,7 @@
      "200": 959131281.8193593,
      "220": 959131281.8193593
     },
-    "seconds": 23.7,
+    "seconds": 11.3,
     "sustained": true,
     "water": {
      "contained_water_drawn_kg": {
@@ -2386,7 +2386,7 @@
      "200": 6468289.238000949,
      "220": 6468289.238000949
     },
-    "seconds": 24.9,
+    "seconds": 8.4,
     "sustained": true,
     "water": {
      "contained_water_drawn_kg": {
@@ -2425,7 +2425,7 @@
     },
     "workforce_use": 0.9701629102110105
    },
-   "minutes": 58.0,
+   "minutes": 23.5,
    "opening_funding_cap_USD2041": 1756526917933.4944,
    "opening_settlement_sustained": true,
    "periods": [
@@ -4481,7 +4481,7 @@
      "200": 194328.54566229257,
      "220": 194328.54566229257
     },
-    "seconds": 31.8,
+    "seconds": 16.8,
     "sustained": true,
     "water": {
      "contained_water_drawn_kg": {
@@ -4521,7 +4521,7 @@
     "workforce_use": 0.84252897844153
    },
    "limited_trial": null,
-   "minutes": 66.2,
+   "minutes": 27.7,
    "opening_funding_cap_USD2041": 1775220911443.1667,
    "opening_settlement_sustained": true,
    "periods": [

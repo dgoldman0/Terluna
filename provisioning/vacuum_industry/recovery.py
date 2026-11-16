@@ -12,6 +12,7 @@ and goods with what was collected, accepted and used, and the machines withdrawn
 from __future__ import annotations
 from copy import deepcopy
 import math
+import numpy as np
 from . import model
 
 # The named sets of measures: (closure, refurbishment).
@@ -71,33 +72,39 @@ def configure(data, spec, closure, refurbishment):
 
 
 def retirements(data, rows, seed, events):
-    """The mass of each component that expires in each year, from the seed cohorts and the dated orders."""
+    """The mass of each component that expires in each year, from the seed cohorts and the dated orders.
+
+    A component's cohorts stand in the ledger's order, the founding ones newest first and then the dated orders by
+    year, and each year's retirements add them one after another; every cohort is followed to the last row."""
     cats = model.catalogue(data)
     start = rows[0]['year']
     end = rows[-1]['year']
     shape = data.get('lifetime_shape', 3.)
-    out = {y: {} for y in range(start, end + 1)}
-    births = {}
+    count = end - start + 1
+    keys, lives, founding = [], [], []
     for n, a in cats.items():
         for part, share, life in [('active', 1 - a['structural_share'], a['life']), ('structure', a['structural_share'], a['structural_life'])]:
             if not share:
                 continue
-            phases = max(1, min(8, math.ceil(life)))
+            phases = max(1, min(model.FOUNDING_COHORTS, math.ceil(life)))
             den = sum(model.survival(j + 1, life, shape) for j in range(phases))
-            births[n, part] = [(start - j - 1, seed.get(n, 0.) * share / den) for j in range(phases)]
+            keys.append((n, part))
+            lives.append(life)
+            founding.append([seed.get(n, 0.) * share / den if j < phases else 0. for j in range(model.FOUNDING_COHORTS)])
+    index = {key: i for i, key in enumerate(keys)}
+    mass = np.zeros((len(keys), model.FOUNDING_COHORTS + count))
+    mass[:, :model.FOUNDING_COHORTS] = founding
     for ev in events:
-        births[ev['asset'], ev['component']].append((ev['commission_year'], ev['mass_kg']))
-    for (n, part), cohorts in births.items():
-        life = cats[n]['life' if part == 'active' else 'structural_life']
-        curve = [model.survival(a, life, shape) for a in range(end + 2)]
-        values = [0.] * (end + 1)
-        for birth, mass in cohorts:
-            for y in range(max(start + 1, birth + 1), end + 1):
-                age = y - birth
-                values[y] += mass * (curve[age - 1] - curve[age])
-        for y in range(start, end + 1):
-            out[y][n, part] = values[y]
-    return out
+        i, slot = index[ev['asset'], ev['component']], model.FOUNDING_COHORTS + ev['commission_year'] - start
+        if not model.FOUNDING_COHORTS <= slot < model.FOUNDING_COHORTS + count or mass[i, slot]:
+            raise ValueError('A component has at most one dated cohort a year, within the rows')
+        mass[i, slot] = ev['mass_kg']
+    table = model.survival_table(tuple(lives), shape, count + model.FOUNDING_COHORTS + 2)
+    values = np.zeros((count, len(keys)))
+    for t in range(1, count):
+        now, before = model.cohort_fractions(table, t)
+        values[t] = model.row_sums_in_order(mass[:, :model.FOUNDING_COHORTS + t] * (before - now))
+    return {start + t: dict(zip(keys, row)) for t, row in enumerate(values.tolist())}
 
 
 def empty_repair():
@@ -131,8 +138,12 @@ def refurbish(cats, spec, rows, flows, events, retired):
         a = cats[n]
         dest = a['destination']
         byyear = {}
-        for ev in orders:
+        placed = {}
+        commissioned_in = {}
+        for position, ev in enumerate(orders):
             byyear.setdefault(ev['order_year'], []).append(ev)
+            placed.setdefault(ev['order_year'], []).append(position)
+            commissioned_in.setdefault(ev['commission_year'], []).append(ev)
         bank = 0.
         pending = 0.
         wip = 0.
@@ -192,8 +203,9 @@ def refurbish(cats, spec, rows, flows, events, retired):
                 ev['refurbished_mass_kg'] = use
                 ev['new_imported_mass_kg'] = (ev['mass_kg'] - avoided) * bought
             # Arrivals are scheduled for this asset alone; a destination's totals hold other assets as well.
-            kit = sum(ev.get('refurbished_mass_kg', 0.) * cfg['repair_part_mass_fraction'] / 2 for ev in orders if ev['order_year'] in (y, y - 1))
-            commissioned = sum(ev.get('refurbished_mass_kg', 0.) for ev in orders if ev['commission_year'] == y)
+            worked = [orders[i] for i in sorted(placed.get(y - 1, []) + placed.get(y, []))]
+            kit = sum(ev.get('refurbished_mass_kg', 0.) * cfg['repair_part_mass_fraction'] / 2 for ev in worked)
+            commissioned = sum(ev.get('refurbished_mass_kg', 0.) for ev in commissioned_in.get(y, []))
             retained = used * (1 - cfg['repair_part_mass_fraction'])
             discarded = used - retained
             wip += retained + kit - commissioned
@@ -221,7 +233,7 @@ class Recovery:
             self.spec['landscape_agriculture_allowance_kg_year'] = 0.
         self.closure = closure
         self.refurbishment = refurbishment
-        self.flows = self.retired = self.audit = self.last_physical = None
+        self.flows = self.retired = self.audit = self.cats = self.last_physical = None
 
     @property
     def active(self):
@@ -244,10 +256,12 @@ class Recovery:
         self.flows = flows
         self.retired = retired
         self.audit = audit
+        self.cats = cats
 
     def after_physical(self, data, row, flow, out):
+        # The last year's physical flows as the model returns them; a reader that keeps them copies them.
         if not self.active:
-            self.last_physical = deepcopy(out)
+            self.last_physical = out
             return
         extra = {k: 0. for k in model.DESTS}
         spec = self.spec
@@ -279,7 +293,7 @@ class Recovery:
         out['loop_repair_input_kg_year'] = {k: flow.get('loop_inspected', {}).get(k, 0.) + flow.get('loop_repaired', {}).get(k, 0.) for k in model.DESTS}
         out['loop_structural_retired_kg_year'] = flow.get('loop_structural_retired', {})
         out['loop_repair_consumables_kg_year'] = dict(flow.get('loop_consume_kg', {}))
-        self.last_physical = deepcopy(out)
+        self.last_physical = out
 
     def after_requirements(self, data, row, physical, out):
         if not self.active:
@@ -312,12 +326,12 @@ class Recovery:
             out['depot_radiators'] += kw * z['hydrogen_HHV_kWh_kg'] / z['electrolysis_liquefaction_kWh_kg_H2'] * margin / flux * p['radiator_kg_m2']
 
     def material_account(self, data, row, previous_bank):
-        """One year's retired structure and goods, and the machines sent to repair."""
+        """One year's retired structure and goods, and the machines sent to repair, from the last ledger's records."""
         year = row['year']
         f = self.flows[year]
         phys = row['physical']
         ret = self.retired[year]
-        cats = model.catalogue(data)
+        cats = self.cats
         structural = {}
         endbank = phys['recycled_inventory_kg']
         cfg = self.spec['structural']

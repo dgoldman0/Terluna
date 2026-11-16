@@ -14,6 +14,7 @@ from __future__ import annotations
 from copy import deepcopy
 from functools import lru_cache
 import math
+import numpy as np
 from shared.constants import JULIAN_DAY, JULIAN_YEAR_DAYS, STANDARD_GRAVITY, STEFAN_BOLTZMANN
 HOURS = JULIAN_DAY * JULIAN_YEAR_DAYS / 3600
 # The share of the residents who can hold the industry's and the settlement's jobs.
@@ -267,6 +268,58 @@ def survival(age, life, shape=3.0):
         return float(age < life)
     return math.exp(-(age / lifetime_scale(life, shape)) ** shape)
 
+@lru_cache(maxsize=16)
+def survival_table(lives, shape, ages):
+    """The surviving fraction of each lifetime at each age from 0: one row for each lifetime given, read-only."""
+    table = np.array([[survival(age, life, shape) for age in range(ages)] for life in lives], dtype=float).reshape(len(lives), ages)
+    table.setflags(write=False)
+    return table
+
+# The founding deployment's cohorts: at most one a year, over the eight years before production opens.
+FOUNDING_COHORTS = 8
+
+def founding_cohorts(seed, name, share, life, shape):
+    """One component's founding cohorts, newest first, as eight masses, and whether their ages fit its lifetime."""
+    phases = max(1, min(FOUNDING_COHORTS, math.ceil(life)))
+    denominator = sum((survival(j + 1, life, shape) for j in range(phases)))
+    if denominator <= 0:
+        return [0.0] * FOUNDING_COHORTS, False
+    return [seed.get(name, 0.0) * share / denominator if j < phases else 0.0 for j in range(FOUNDING_COHORTS)], True
+
+def cohort_fractions(table, t):
+    """Every cohort's surviving fraction in the year with index t and in the year before, one row for each lifetime.
+
+    A component's cohorts stand in a fixed order: the founding ones, newest first, then the orders by year. In the
+    year with index t the founding cohorts are t + 1 to t + 8 years old, and the order of the year with index k is
+    t - k years old."""
+    if t == 0:
+        return table[:, 1:FOUNDING_COHORTS + 1], table[:, 0:FOUNDING_COHORTS]
+    now = np.concatenate((table[:, t + 1:t + FOUNDING_COHORTS + 1], table[:, t:0:-1]), axis=1)
+    before = np.concatenate((table[:, t:t + FOUNDING_COHORTS], table[:, t - 1::-1]), axis=1)
+    return now, before
+
+def row_sums_in_order(terms):
+    """The sum of each row, adding its terms one after another from the first."""
+    return np.add.accumulate(terms, axis=1)[:, -1]
+
+def column_sums_in_order(terms):
+    """The sum of each column, adding the rows one after another from the first."""
+    if not len(terms):
+        return np.zeros(terms.shape[1:])
+    return np.add.accumulate(terms, axis=0)[-1]
+
+def work_year_totals(terms):
+    """Each work year's total of one flow, from the terms of the orders by component and year of commissioning.
+
+    An order is worked in the two years before it enters service. A work year adds, component by component, the
+    second year of the order commissioned the year after it and then the first year of the order commissioned two
+    years after it. The result runs from two years before the first year of service to the last."""
+    count = terms.shape[1]
+    spread = np.zeros((terms.shape[0], 2, count + 2))
+    spread[:, 0, 1:count + 1] = terms
+    spread[:, 1, :count] = terms
+    return column_sums_in_order(spread.reshape(-1, count + 2))
+
 def cohort_ledger(data, rows, targets, seed, measures=None, price_index=None):
     """Annual components expire at their recorded age; surplus is not replaced.
 
@@ -274,113 +327,153 @@ def cohort_ledger(data, rows, targets, seed, measures=None, price_index=None):
     hardware has eight deployment cohorts (short-lived units use their life),
     corresponding to the explicitly assumed preproduction deployment window.
     A price index by order year, where given, scales the price of working parts.
+
+    Every component's cohorts are carried together as arrays, year by year. A sum over cohorts adds a component's
+    cohorts one after another in their fixed order, and a flow adds the components' terms in the catalogue's order,
+    so each total is the one an account kept component by component and cohort by cohort gives.
     """
     cats = catalogue(data)
     start = rows[0]['year']
     end = rows[-1]['year']
+    years = [row['year'] for row in rows]
+    if years != list(range(start, start + len(rows))):
+        raise ValueError('Consecutive annual rows required')
     lead = 2
     flows = {y: blank_flow() for y in range(start - lead, end + 1)}
-    stocks = {y: {} for y in range(start, end + 1)}
-    events = []
     working = local_working_parts(data)
     shape = data.get('lifetime_shape', 3.0)
-    for name, a in cats.items():
-        for part, share, life in [('structure', a['structural_share'], a['structural_life']), ('active', 1 - a['structural_share'], a['life'])]:
-            if share <= 0:
-                continue
-            phases = max(1, min(8, math.ceil(life)))
-            denominator = sum((survival(j + 1, life, shape) for j in range(phases)))
-            if denominator <= 0:
-                raise ValueError('Seed deployment ages exceed every component lifetime')
-            cohorts = [(start - j - 1, seed.get(name, 0.0) * share / denominator) for j in range(phases)]
-            curve = [survival(age, life, shape) for age in range(end - start + phases + 2)]
-            for row in rows:
-                y = row['year']
-                expired = alive = 0.0
-                surviving = []
-                for birth, mass in cohorts:
-                    age = y - birth
-                    fraction = curve[age]
-                    if y > start:
-                        expired += mass * (curve[max(0, age - 1)] - fraction)
-                    if fraction > 1e-12:
-                        surviving.append((birth, mass))
-                        alive += mass * fraction
-                cohorts = surviving
-                required = targets[y].get(name, 0.0) * share
-                added = max(0.0, required - alive)
-                if added > 1e-06:
-                    cohorts.append((y, added))
-                    order = y - lead
-                    replacement = min(added, expired)
-                    growth = added - replacement
-                    able = 0.0 if part != 'active' or name in working['excluded_assets'] else at(working['share'], order)
-                    made = able * at(working['staffed'], order)
-                    labour = at(working['labour_fraction_of_import_price'], order)
-                    if not (0 <= made <= 1 and labour >= 0):
-                        raise ValueError('The locally made share of working parts lies between 0 and 1, and its labour is not negative')
-                    learned = price_index.get(order, 1.0) if price_index and part == 'active' else 1.0
-                    for workyear in (order, order + 1):
-                        f = flows[workyear]
-                        amount = added / 2
-                        growth_work = growth / 2
-                        replace_work = replacement / 2
-                        unit = a['price'] * learned if part == 'active' or a['civil'] else data['economy']['production']['local_fabrication_value_USD2026_kg']
-                        if part == 'active':
-                            # Working parts: the share bought from Earth, and the share the industry makes itself.
-                            bought = 1 - made
-                            f['imports'][a['destination']] += amount * bought
-                            f['external_capital'] += growth_work * bought * unit
-                            f['external_replacement'] += replace_work * bought * unit
-                            f['capital_imports'][a['destination']] += growth_work * bought
-                            if a['owner'] == 'industry':
-                                f['industry_replacement_import_kg'] += replace_work * bought
-                            if a['owner'] in ('service', 'hospitality'):
-                                f[a['owner'] + '_external_capital'] += growth_work * bought * unit
-                                f[a['owner'] + '_external_replacement'] += replace_work * bought * unit
-                            if name == 'return_capsule_buses':
-                                f['capsule_purchases_kg'] += amount
-                            f['local'][a['destination']] += amount * made
-                            f['capital_local'][a['destination']] += growth_work * made
-                            f['local_working_capital'] += growth_work * made * unit * labour
-                            f['local_working_replacement'] += replace_work * made * unit * labour
-                            f['local_working_labour_if_staffed'] += amount * able * unit * labour
-                        elif a['material'] == 'bulk':
-                            f['bulk'] += amount
-                            f['capital_bulk'] += growth_work
-                        else:
-                            f['local'][a['destination']] += amount
-                            f['capital_local'][a['destination']] += growth_work
-                        if part == 'structure':
-                            f['local_capital'] += growth_work * unit
-                            f['local_replacement'] += replace_work * unit
-                        if a['owner'] == 'service':
-                            f['service_capital'] += growth_work * unit
-                            f['service_replacement'] += replace_work * unit
-                        if a['owner'] == 'hospitality':
-                            f['hospitality_capital'] += growth_work * unit
-                            f['hospitality_replacement'] += replace_work * unit
-                        if name in ('commercial_civil_bulk', 'service_civil_bulk'):
-                            f['new_floor'] += growth_work / data['economy']['exports']['factory_bulk_kg_m2']
-                    events.append(dict(asset=name, component=part, order_year=order, commission_year=y, mass_kg=added, replacement_kg=replacement, locally_made_share=made, local_labour_fraction=labour, price_index=learned))
-                if expired:
-                    f = flows[y]
-                    f['retired_mass'] += expired
-                    if part == 'structure':
-                        if a['material'] == 'bulk':
-                            f['bulk_recycled'] += expired * data['industrial']['lunar']['recovery']
-                        else:
-                            f['recycled'][a['destination']] += expired * (data['industrial']['lunar']['recovery'] if a['destination'] == 'surface' else data['economy']['production']['source_recovery'])
-                available = alive + added
-                old = stocks[y].get(name, math.inf)
-                stocks[y][name] = min(old, available / share)
+    count = len(rows)
+    # Each component in the catalogue's order, an asset's structure before its working parts.
+    parts = [(name, a, part, share, life) for name, a in cats.items()
+             for part, share, life in [('structure', a['structural_share'], a['structural_life']), ('active', 1 - a['structural_share'], a['life'])]
+             if share > 0]
+    n = len(parts)
+    founding = [founding_cohorts(seed, name, share, life, shape) for name, _, _, share, life in parts]
+    table = survival_table(tuple(life for *_, life in parts), shape, count + FOUNDING_COHORTS + 2)
+    # The mass of each cohort, the founding ones first and then one for each year's order, and whether it is still held.
+    mass = np.zeros((n, FOUNDING_COHORTS + count))
+    mass[:, :FOUNDING_COHORTS] = [cohorts for cohorts, _ in founding]
+    listed = np.ones(mass.shape, dtype=bool)
+    required = np.array([[targets[y].get(name, 0.0) * share for name, _, _, share, _ in parts] for y in years], dtype=float).reshape(count, n)
+    alive, expired, added = np.empty((count, n)), np.zeros((count, n)), np.empty((count, n))
+    for t in range(count):
+        width = FOUNDING_COHORTS + t
+        now, before = cohort_fractions(table, t)
+        held = listed[:, :width]
+        cohorts = mass[:, :width]
+        if t:
+            expired[t] = row_sums_in_order(np.where(held, cohorts * (before - now), 0.0))
+        # A cohort whose surviving fraction falls to 1e-12 leaves the ledger after its last retirement.
+        keep = held & (now > 1e-12)
+        alive[t] = row_sums_in_order(np.where(keep, cohorts * now, 0.0))
+        held[...] = keep
+        added[t] = np.maximum(0.0, required[t] - alive[t])
+        mass[:, width] = np.where(added[t] > 1e-06, added[t], 0.0)
+    alive, expired, added = alive.T, expired.T, added.T      # one row for each component
+    ordered = added > 1e-06
+
+    def column(test):
+        return np.array([bool(test(name, a, part)) for name, a, part, _, _ in parts], dtype=bool).reshape(n, 1)
+    active = column(lambda name, a, part: part == 'active')
+    structure = ~active
+    bulk = structure & column(lambda name, a, part: a['material'] == 'bulk')
+    built = structure & ~bulk
+    makes = column(lambda name, a, part: part == 'active' and name not in working['excluded_assets'])
+    service = column(lambda name, a, part: a['owner'] == 'service')
+    hospitality = column(lambda name, a, part: a['owner'] == 'hospitality')
+    destinations = {dest: column(lambda name, a, part: a['destination'] == dest) for dest in DESTS}
+    # Every order of working parts or built structure, and every retirement of built structure, has a known destination.
+    placed = (ordered.any(axis=1) & active[:, 0]) | ((ordered.any(axis=1) | (expired != 0).any(axis=1)) & built[:, 0])
+    for (name, a, part, _, _), used in zip(parts, placed):
+        if used and a['destination'] not in DESTS:
+            raise KeyError(a['destination'])
+    # The coefficients of each year's orders.
+    orders = [y - lead for y in years]
+    share_at = [at(working['share'], order) for order in orders]
+    staffed_at = [at(working['staffed'], order) for order in orders]
+    labour_at = [at(working['labour_fraction_of_import_price'], order) for order in orders]
+    learned_at = [price_index.get(order, 1.0) for order in orders] if price_index else [1.0] * count
+    able = np.where(makes, np.array(share_at, dtype=float), 0.0)
+    made = able * np.array(staffed_at, dtype=float)
+    labour = np.broadcast_to(np.array(labour_at, dtype=float), (n, count))
+    wrong = (ordered & ~((made >= 0) & (made <= 1) & (labour >= 0))).any(axis=1)
+    for index in range(n):
+        if not founding[index][1]:
+            raise ValueError('Seed deployment ages exceed every component lifetime')
+        if wrong[index]:
+            raise ValueError('The locally made share of working parts lies between 0 and 1, and its labour is not negative')
+    learned = np.where(active, np.array(learned_at, dtype=float), 1.0)
+    price = np.array([a['price'] for _, a, _, _, _ in parts], dtype=float).reshape(n, 1)
+    unit = np.where(active | column(lambda name, a, part: a['civil']), price * learned, data['economy']['production']['local_fabrication_value_USD2026_kg'])
+    replacement = np.minimum(added, expired)
+    growth = added - replacement
+    amount, growth_work, replace_work = added / 2, growth / 2, replacement / 2
+    # Working parts: the share bought from Earth, and the share the industry makes itself.
+    bought = 1 - made
+
+    def kept(mask, values):
+        return np.where(ordered & mask, values, 0.0)
+    terms = dict(
+        external_capital=kept(active, growth_work * bought * unit),
+        external_replacement=kept(active, replace_work * bought * unit),
+        industry_replacement_import_kg=kept(active & column(lambda name, a, part: a['owner'] == 'industry'), replace_work * bought),
+        service_external_capital=kept(active & service, growth_work * bought * unit),
+        service_external_replacement=kept(active & service, replace_work * bought * unit),
+        hospitality_external_capital=kept(active & hospitality, growth_work * bought * unit),
+        hospitality_external_replacement=kept(active & hospitality, replace_work * bought * unit),
+        capsule_purchases_kg=kept(active & column(lambda name, a, part: name == 'return_capsule_buses'), amount),
+        local_working_capital=kept(active, growth_work * made * unit * labour),
+        local_working_replacement=kept(active, replace_work * made * unit * labour),
+        local_working_labour_if_staffed=kept(active, amount * able * unit * labour),
+        bulk=kept(bulk, amount), capital_bulk=kept(bulk, growth_work),
+        local_capital=kept(structure, growth_work * unit), local_replacement=kept(structure, replace_work * unit),
+        service_capital=kept(service, growth_work * unit), service_replacement=kept(service, replace_work * unit),
+        hospitality_capital=kept(hospitality, growth_work * unit), hospitality_replacement=kept(hospitality, replace_work * unit),
+        new_floor=kept(column(lambda name, a, part: name in ('commercial_civil_bulk', 'service_civil_bulk')),
+                       growth_work / data['economy']['exports']['factory_bulk_kg_m2']))
+    for dest, here in destinations.items():
+        terms['imports', dest] = kept(active & here, amount * bought)
+        terms['capital_imports', dest] = kept(active & here, growth_work * bought)
+        terms['local', dest] = kept((active | built) & here, np.where(active, amount * made, amount))
+        terms['capital_local', dest] = kept((active | built) & here, np.where(active, growth_work * made, growth_work))
+    lunar, source = data['industrial']['lunar']['recovery'], data['economy']['production']['source_recovery']
+    retired = dict(retired_mass=expired, bulk_recycled=np.where(bulk, expired * lunar, 0.0))
+    for dest, here in destinations.items():
+        retired['recycled', dest] = np.where(built & here, expired * (lunar if dest == 'surface' else source), 0.0)
+    for totals, span, add in ((terms, range(start - lead, end + 1), work_year_totals), (retired, years, column_sums_in_order)):
+        for key, values in totals.items():
+            for y, value in zip(span, add(values).tolist()):
+                if isinstance(key, tuple):
+                    flows[y][key[0]][key[1]] = value
+                else:
+                    flows[y][key] = value
+    events = []
+    added_rows, expired_rows = added.tolist(), expired.tolist()
+    for index, (name, a, part, share, life) in enumerate(parts):
+        working_part = part == 'active'
+        makeable = working_part and name not in working['excluded_assets']
+        mass_row, expired_row = added_rows[index], expired_rows[index]
+        for t in np.flatnonzero(ordered[index]).tolist():
+            events.append(dict(asset=name, component=part, order_year=orders[t], commission_year=years[t], mass_kg=mass_row[t],
+                               replacement_kg=min(mass_row[t], expired_row[t]), locally_made_share=(share_at[t] if makeable else 0.0) * staffed_at[t],
+                               local_labour_fraction=labour_at[t], price_index=learned_at[t] if working_part else 1.0))
+    # An asset's stock is that of its scarcer component.
+    names, scarce = [], []
+    shares = np.array([share for *_, share, _ in parts], dtype=float).reshape(n, 1)
+    for name, values in zip((name for name, *_ in parts), ((alive + added) / shares).tolist()):
+        if names and names[-1] == name:
+            scarce[-1] = [min(old, value) for old, value in zip(scarce[-1], values)]
+        else:
+            names.append(name)
+            scarce.append([min(math.inf, value) for value in values])
+    stocks = {y: dict(zip(names, values)) for y, values in zip(years, zip(*scarce))} if scarce else {y: {} for y in years}
     previous_beds = rows[0].get('visitor_beds', 0.0)
     for row in rows:
         beds = row.get('visitor_beds', 0.0)
-        added = max(0.0, beds - previous_beds)
+        new_beds = max(0.0, beds - previous_beds)
         previous_beds = beds
         for y in (row['year'] - 2, row['year'] - 1):
-            flows[y]['new_visitor_beds'] += added / 2
+            flows[y]['new_visitor_beds'] += new_beds / 2
     if measures is not None:
         measures.after_ledger(data, rows, seed, flows, events)
     return (flows, stocks, events)
@@ -399,7 +492,7 @@ def physical(data, row, f, bank=None, measures=None):
     p = q['production']
     ps = row['population'] / data['normalization']['population']
     gs = row.get('new_residential_people', 0.0) / data['normalization']['population']
-    bank = deepcopy(bank or {**{k: 0.0 for k in DESTS}, 'bulk': 0.0})
+    bank = dict(bank or {**{k: 0.0 for k in DESTS}, 'bulk': 0.0})
     imports = dict(f['imports'])
     local = dict(f['local'])
     virgin = {}
@@ -548,6 +641,13 @@ def requirements(data, row, f, measures=None):
         measures.after_requirements(data, row, f, out)
     return out
 
+def worked_by_year(events):
+    """The orders worked in each year, those placed in it and in the year before, in the order the ledger lists them."""
+    placed = {}
+    for position, ev in enumerate(events):
+        placed.setdefault(ev['order_year'], []).append(position)
+    return {year: [events[i] for i in sorted(placed.get(year - 1, []) + placed.get(year, []))] for year in set(placed) | {y + 1 for y in placed}}
+
 def seed_stock(data, first, bootstrap_years=8, measures=None):
     """Size one seed against construction throughput, then retain its assets.
 
@@ -678,6 +778,7 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
     cats = catalogue(data)
     original_value = sum((a['mass'] * a['price'] for a in cats.values() if a['owner'] == 'industry' and (not a['civil'])))
     cumulative_lunar = cumulative_source = 0.0
+    worked = worked_by_year(events)
     for index, row in enumerate(rows):
         y = row['year']
         f = flows[y]
@@ -722,7 +823,8 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
         opflow['new_visitor_beds'] = 0.0
         # Capsule purchase masses travel in the sortie stream; subtract only
         # replacement purchases when forming the operating counterfactual.
-        capbus = sum((ev['mass_kg'] - ev['replacement_kg'] for ev in events if ev['asset'] == 'return_capsule_buses' and ev['order_year'] in (y, y - 1))) / 2
+        yearly_events = worked.get(y, [])
+        capbus = sum((ev['mass_kg'] - ev['replacement_kg'] for ev in yearly_events if ev['asset'] == 'return_capsule_buses')) / 2
         opflow['capsule_purchases_kg'] = max(0.0, f['capsule_purchases_kg'] - capbus)
         op_physical = physical(data, dict(workrow, new_residential_people=0.0), opflow, opening_bank, measures)
         variable = ('Earth_launch_USD2026', 'operating_material_USD2026', 'capsule_operations_USD2026')
@@ -747,7 +849,6 @@ def solve(data, annual, *, measures=None, max_iterations=100, tolerance=1e-07):
         costs['capital_total_USD2041'] = costs['capital_external_USD2041'] + costs['capital_local_USD2041'] + costs['capital_resource_provision_USD2041']
         direct_total = (f['external_capital'] + f['external_replacement'] + sum((physical_row[k] for k in variable)) + external_staff + payroll + physical_row['resource_provision_USD2026']) * I
         costs['accounting_residual_USD2041'] = costs['capital_total_USD2041'] + costs['operating_total_USD2041'] - direct_total
-        yearly_events = [ev for ev in events if ev['order_year'] in (y, y - 1)]
         drivers = {}
         for ev in yearly_events:
             n = ev['asset']
