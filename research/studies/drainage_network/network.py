@@ -170,6 +170,13 @@ def route_at(h, lat, cell_km, runoff, lake_net, waters):
     return r, [float(r['discharge'][mask].sum()) for mask, _ in waters]
 
 
+def hollows_on_the_way(surface, ground, below):
+    """The hollows an overflow fills on its way down a path: the runs of cells whose water surface stands more than
+    half a metre over the ground, leaving out the sea below (`below`), where the path ends."""
+    flooded = (surface > ground + 0.5) & ~below
+    return int(np.count_nonzero(np.diff(np.concatenate([[0], flooded.astype(int)])) == 1))
+
+
 def fill_history(table, supply, start, stop, steps=FILL_STEPS):
     """A water fed `supply` (m3/s) filled from level `start` towards `stop`, its loss to the air growing as it
     spreads: the years each step takes, and the level where it stops if its loss meets the supply first."""
@@ -298,7 +305,7 @@ def geometry(log=print):
                 targets=targets, spill_paths=spill_paths, passes=passes, catchments=n_nodes)
 
 
-def network(rain, geo, log=print, evaporation=1.0):
+def network(rain, geo, log=print, evaporation=1.0, record=None):
     """The six seas' balances, rims, fills and chain on one rain, with the open water's evaporation scaled."""
     from geography import drainage as dr
     started = time.time()
@@ -344,8 +351,8 @@ def network(rain, geo, log=print, evaporation=1.0):
             profile = long_profile(river, surface, r['discharge'], lat, cols, cell_km, level0, np.zeros(h_flat.size, bool))
             for key in ('discharge_m3s', 'lakes_passed'):   # the routing at the common level carries no overflow
                 profile.pop(key)
-            profile['hollows_filled_on_the_way'] = int(np.count_nonzero(np.diff(
-                np.concatenate([[0], (filled[leave[0]:] > h_flat[river] + 0.5).astype(int)])) == 1))
+            below = np.logical_or.reduce([joined[j][river] < level0 for j in seas if j != k])
+            profile['hollows_filled_on_the_way'] = hollows_on_the_way(filled[leave[0]:], h_flat[river], below)
             overflows[k] = dict(leaves=place(int(river[0]), cols, rotation), enters=place(int(river[-1]), cols, rotation),
                                 **profile)
     del r
@@ -402,7 +409,7 @@ def network(rain, geo, log=print, evaporation=1.0):
             o['with_the_seas_above']['passes_on_m3s'] = 0
         elif held is None and target:
             received[target] += supply - o['loss_at_the_rim_m3s']
-    history = joined_history(seas, tables, rims, out, level0)
+    history = joined_history(seas, tables, rims, out, level0, record=record)
     # an overflow river runs only from a sea that fills on this rain, with the seas above it
     overflows = {k: v for k, v in overflows.items()
                  if out[k]['with_the_seas_above']['fills'] and 'joins' not in out[k]['with_the_seas_above']}
@@ -413,12 +420,13 @@ def network(rain, geo, log=print, evaporation=1.0):
                 seconds=round(time.time() - started))
 
 
-def joined_history(seas, tables, rims, out, level0, years=HISTORY_YEARS, step=HISTORY_STEP_YEARS):
+def joined_history(seas, tables, rims, out, level0, years=HISTORY_YEARS, step=HISTORY_STEP_YEARS, record=None):
     """The six seas followed together from the atlas's state, all at the common level: each gains its own rivers and
     loses to the air at its level, and once full passes its surplus to the sea its overflow reaches. A sea's own
     rivers are those reaching it at the common level, rising to those reaching it at its rim as it rises. A sea
     that reaches the pass to a sea already standing there joins it, and the history stops following the two.
-    Returns the events in order (a sea full, or joined) and each sea's level every 500 years."""
+    Returns the events in order (a sea full, or joined) and each sea's level every 500 years, or at the years in
+    `record`, with each sea's state there."""
     grid = {k: np.linspace(min(tables[k].c[0], level0), rims[k] - BELOW_RIM_M, 2000) for k in seas}
     curve = {k: np.array([tables[k].at(L)[2] for L in grid[k]]) for k in seas}
     volume = {k: tables[k].at(level0)[2] for k in seas}
@@ -458,9 +466,11 @@ def joined_history(seas, tables, rims, out, level0, years=HISTORY_YEARS, step=HI
                     events.append(dict(year=round(t + step), event=f'{k} is full and overflows to {target}',
                                        level_m=round(rims[k] - level0, 1)))
         t += step
-        if abs(t % 500.0) < 1e-6:
+        if (record is None and abs(t % 500.0) < 1e-6) or (record is not None and any(abs(t - y) < 1e-6 for y in record)):
             levels.append(dict(year=round(t), **{k: (None if state[k] == 'joined' else round(to_level(k, volume[k]) - level0, 1))
                                                  for k in seas}))
+            if record is not None:
+                levels[-1]['states'] = dict(state)
     return dict(events=events, levels_m=levels, years=years, step_years=step)
 
 

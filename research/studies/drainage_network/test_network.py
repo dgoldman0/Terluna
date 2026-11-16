@@ -128,6 +128,16 @@ def test_a_long_profile_measures_the_rivers_fall():
     assert p['lakes_passed'] == 1 and p['discharge_m3s'] == [100, 10]
 
 
+def test_an_overflow_counts_the_hollows_it_fills_but_not_the_sea_below():
+    # from the rim down: a hollow two cells long, dry ground, a one-cell hollow, dry ground, then the sea below
+    surface = np.array([10.0, 8.0, 8.0, 6.0, 5.0, 3.0, 3.0, 0.0])
+    ground = np.array([10.0, 6.0, 7.0, 6.0, 5.0, 1.0, 3.0, -4.0])
+    below = np.zeros(8, bool)
+    below[-1] = True
+    assert N.hollows_on_the_way(surface, ground, below) == 2
+    assert N.hollows_on_the_way(surface, ground, np.zeros(8, bool)) == 3     # the sea's edge would count as a third
+
+
 def test_an_upper_sea_fills_and_its_overflow_raises_the_one_below():
     # the upper sea's rivers exceed its loss; the lower one's do not until the upper overflows into it
     def table(depth, area_m2, loss_m3s):

@@ -2,7 +2,7 @@
  "schema": "terluna.research.drainage-network/1",
  "producer": {
   "files": {
-   "research/studies/drainage_network/network.py": "2510db6f4f7e33c06d67d67f7bb9e71532ce49f08550304eaf3a4da895fb6637",
+   "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
    "research/studies/drainage_network/routing.py": "52ede9125248151b2e8d09bce7ef3e2a9eb742cb391654e0208aa7ef2e96b922",
    "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5",
    "geography/topography.py": "228e08f79efca868b49bcae0687c7f80a239b18234629c4390c147075b3f5c29",
@@ -8990,7 +8990,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 16
+     "hollows_filled_on_the_way": 15
     },
     "smythii_marginis": {
      "leaves": {
@@ -9405,7 +9405,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 9
+     "hollows_filled_on_the_way": 8
     },
     "orientale": {
      "leaves": {
@@ -9716,7 +9716,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 20
+     "hollows_filled_on_the_way": 19
     },
     "moscoviense": {
      "leaves": {
@@ -9863,7 +9863,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 9
+     "hollows_filled_on_the_way": 8
     }
    },
    "passes_m": {
@@ -9883,7 +9883,7 @@
     "moscoviense|smythii_marginis": 3545.2,
     "moscoviense|orientale": 3545.2
    },
-   "seconds": 193
+   "seconds": 338
   },
   {
    "rain": 1.0,
@@ -17979,7 +17979,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 16
+     "hollows_filled_on_the_way": 15
     },
     "smythii_marginis": {
      "leaves": {
@@ -18394,7 +18394,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 9
+     "hollows_filled_on_the_way": 8
     },
     "orientale": {
      "leaves": {
@@ -18705,7 +18705,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 20
+     "hollows_filled_on_the_way": 19
     },
     "moscoviense": {
      "leaves": {
@@ -18852,7 +18852,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 9
+     "hollows_filled_on_the_way": 8
     }
    },
    "passes_m": {
@@ -18872,7 +18872,7 @@
     "moscoviense|smythii_marginis": 3545.2,
     "moscoviense|orientale": 3545.2
    },
-   "seconds": 207
+   "seconds": 329
   },
   {
    "rain": 0.75,
@@ -25608,7 +25608,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 9
+     "hollows_filled_on_the_way": 8
     },
     "orientale": {
      "leaves": {
@@ -25919,7 +25919,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 20
+     "hollows_filled_on_the_way": 19
     },
     "moscoviense": {
      "leaves": {
@@ -26066,7 +26066,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 9
+     "hollows_filled_on_the_way": 8
     }
    },
    "passes_m": {
@@ -26086,7 +26086,7 @@
     "moscoviense|smythii_marginis": 3545.2,
     "moscoviense|orientale": 3545.2
    },
-   "seconds": 314
+   "seconds": 248
   },
   {
    "rain": 2.0,
@@ -34133,7 +34133,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 1
+     "hollows_filled_on_the_way": 0
     },
     "south_pole_aitken": {
      "leaves": {
@@ -35856,7 +35856,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 16
+     "hollows_filled_on_the_way": 15
     },
     "humboldtianum": {
      "leaves": {
@@ -36039,7 +36039,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 5
+     "hollows_filled_on_the_way": 4
     },
     "orientale": {
      "leaves": {
@@ -36350,7 +36350,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 20
+     "hollows_filled_on_the_way": 19
     },
     "moscoviense": {
      "leaves": {
@@ -36497,7 +36497,7 @@
        0
       ]
      ],
-     "hollows_filled_on_the_way": 9
+     "hollows_filled_on_the_way": 8
     }
    },
    "passes_m": {
@@ -36517,8 +36517,8 @@
     "moscoviense|smythii_marginis": 3545.2,
     "moscoviense|orientale": 3545.2
    },
-   "seconds": 348
+   "seconds": 265
   }
  ],
- "seconds": 1286
+ "seconds": 1402
 }
