@@ -41,8 +41,7 @@ import pickle
 import time
 
 from provisioning.vacuum_industry import industry, model
-from research.studies.enclosed_returns import finance, revised
-from . import inputs, mix, programme as definition
+from . import accounts, finance, inputs, mix, programme as definition
 from .inputs import HERE, ROOT, digest
 
 SCHEMA = 'terluna.research.vacuum-economy-residents/1'
@@ -159,7 +158,7 @@ class Solver:
                 founding = inputs.engineering(dict(self.case, freight='founding'))
                 decided = mix.Decision(programme, ramp, self.s['scenarios'], self.scenario, founding, self.s['recovery'], 'combined',
                                        self.s['periods'], self.hotel, allowance=self.s['money']['capital_cost_allowance_fraction']).decide()
-            if not revised.valid(decided['physical']):
+            if not accounts.valid(decided['physical']):
                 raise ValueError('The choice of sales is not physically resolved for ' + self.scenario)
             choice = {key: decided[key] for key in ('prices', 'first', 'first_account', 'first_book', 'late', 'order', 'dropped', 'starts')}
             choice['chosen_with_founding_freight_as_tugs_unreachable'] = unreachable
@@ -266,7 +265,7 @@ class Solver:
             self.log('trial %d' % self.trials, ' '.join('%.4f' % r for r in rates), 'not sustained', 'binding reach in year', exc.year, out['seconds'], 's')
             return out
         out.update(workforce_use=use, own_work_room=own)
-        if own < 0 or not revised.valid(physical) or use > 1 + 1e-6:
+        if own < 0 or not accounts.valid(physical) or use > 1 + 1e-6:
             out.update(sustained=False, failed=['hands'], binding='hands', margin=min(own, 1 - use, -1e-9))
         else:
             path = finance.plan(book, physical, self.money)

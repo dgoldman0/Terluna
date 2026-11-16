@@ -1,5 +1,5 @@
-"""The inputs of the coupled study, read once: the programme, the engineering and recovery coefficients, the scenarios
-of demand, the staged demand of the first pass, the financing rules and the reporting periods.
+"""The inputs of the coupled study, read once: the programme with its financing rules and reporting periods, the
+engineering and recovery coefficients, the scenarios of demand and the first pass's order-book inputs.
 
 run.py and residents.py both read their inputs here, so that the files a result depends on are named in one place and
 a change to how one of them reports its result leaves the other's product standing.
@@ -12,13 +12,11 @@ import hashlib
 import json
 from pathlib import Path
 
-from research.studies.enclosed_returns import markets
-from . import demand as scenarios, programme as definition
+from . import demand as scenarios, first_pass, programme as definition
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 INDUSTRY = ROOT / 'provisioning/vacuum_industry'
-RETURNS = ROOT / 'research/studies/enclosed_returns'
 # The source survey's estimate of the near-Earth population, with the water its pools contain, and its water by the
 # velocity change of the tugs' leg from the depot.
 POOL = ROOT / 'resources/source_access/results/population.json.gz'
@@ -26,11 +24,11 @@ REACH = ROOT / 'resources/source_access/results/reach.json.gz'
 PERCENTILES = ('p05', 'p50', 'p95')
 # The tugs freight.py chose for each scenario; run.py and residents.py read it, and freight.py does not.
 FREIGHT = HERE / 'results/freight.json'
-# The files the calculation reads or runs, beside those the staged order book and the financing name themselves.
+# The files the calculation reads or runs.
 READ = (HERE / 'programme.json', HERE / 'programme.py', HERE / 'inputs.py', HERE / 'scenarios.json', HERE / 'demand.py', HERE / 'mix.py',
+        HERE / 'first_pass.py', HERE / 'first_pass.json', HERE / 'finance.py', HERE / 'accounts.py',
         INDUSTRY / 'model.py', INDUSTRY / 'recovery.py', INDUSTRY / 'industry.py', INDUSTRY / 'engineering.json', INDUSTRY / 'recovery.json',
-        RETURNS / 'markets.py', RETURNS / 'enclosed_inputs.json', RETURNS / 'finance.py', RETURNS / 'finance_inputs.json',
-        RETURNS / 'revised.py', RETURNS / 'revised_inputs.json', RETURNS / 'bottlenecks.py', RETURNS.parent / 'complex_returns/policy.py', POOL, REACH)
+        POOL, REACH)
 
 
 def digest(path):
@@ -81,23 +79,19 @@ def water_drawn(physical, loops, coefficients, horizons):
 
 @lru_cache(maxsize=None)
 def sources():
-    """The programme, the engineering coefficients, the recovery measures, the demand inputs and the financing rules."""
+    """The programme, the engineering coefficients, the recovery measures, the first pass's order-book inputs and the
+    financing rules, which take the programme's horizons and discount rates."""
     programme = definition.load()
-    demand = markets.inputs()                                  # checks the digests of the inputs it inherits
-    money = json.loads((RETURNS / 'finance_inputs.json').read_text())
-    for name, pinned in money['inherited_dependencies'].items():
-        if digest(RETURNS / name) != pinned:
-            raise ValueError('Changed financing dependency: ' + name)
-    periods = json.loads((RETURNS / 'revised_inputs.json').read_text())['periods']
+    demand = first_pass.inputs()
+    money = dict(programme['money']['financing'], horizons=programme['horizons'], rates=programme['discount_rates'])
+    periods = programme['reporting_periods']
     calendar, people, rules = programme['calendar'], programme['population'], demand[0]
     stated = dict(first_productive_year=calendar['first_productive_year'], completion_year=calendar['completion_year'],
                   last_year=calendar['last_year'], seed_population=people['opening'],
                   founding_population=people['founding_system'], cap_population=people['planned'])
     for key, value in stated.items():
         if rules[key] != value:
-            raise ValueError('The demand inputs and the programme definition disagree on ' + key)
-    if money['horizons'] != programme['horizons'] or money['rates'] != programme['discount_rates']:
-        raise ValueError('The financing rules and the programme definition disagree on horizons or discount rates')
+            raise ValueError('The first pass\'s inputs and the programme definition disagree on ' + key)
     if periods[0][0] != 0 or periods[-1][1] != calendar['last_year']:
         raise ValueError('The reporting periods do not span the programme')
     return dict(programme=programme, demand=demand, money=money, periods=periods, scenarios=scenarios.load(),
@@ -106,11 +100,8 @@ def sources():
 
 
 def dependencies(extra=()):
-    """Each file read, with its digest: those listed here, those the staged inputs inherit and any others given."""
-    s = sources()
+    """Each file read, with its digest: those listed here and any others given."""
     paths = {Path(p).resolve() for p in (*READ, *extra)}
-    paths |= {(RETURNS / name).resolve() for name in s['demand'][0]['inherited_inputs']}
-    paths |= {(RETURNS / name).resolve() for name in s['money']['inherited_dependencies']}
     return {str(p.relative_to(ROOT)): digest(p) for p in sorted(paths)}
 
 

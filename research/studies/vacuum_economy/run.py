@@ -4,8 +4,8 @@ usage: python3 -m research.studies.vacuum_economy.run [--case NAME ...] [--jobs 
 
 A case names a scenario of demand, a population ramp and the recovery measures the industry applies. For each case
 the run draws up the customers' orders year by year, sizes the industry that fills them with the cohort model of
-provisioning/vacuum_industry, finances that industry with the financing model of the returns study, and writes one
-compact record: the funding, the receipts and the returns at each horizon, the receipts and costs of each period with
+provisioning/vacuum_industry, finances that industry with the study's financing (finance.py, accounts.py), and writes
+one compact record: the funding, the receipts and the returns at each horizon, the receipts and costs of each period with
 the share of the costs paid to Earth, the material drawn from the Moon and the near-Earth sources, and what the mined
 feed makes available beside what the system uses and sells of it.
 
@@ -23,7 +23,6 @@ residents.py found for that scenario and saved in results/residents.json; the re
 from __future__ import annotations
 import argparse
 from functools import lru_cache
-import importlib.util
 import json
 import math
 import multiprocessing
@@ -31,9 +30,8 @@ from pathlib import Path
 import time
 
 from provisioning.vacuum_industry import industry, model
-from research.studies.enclosed_returns import finance, markets, revised
-from . import demand as scenarios, mix, programme as definition
-from .inputs import HERE, INDUSTRY, RETURNS, ROOT, digest, engineering, sources
+from . import accounts, demand as scenarios, finance, first_pass, mix, programme as definition
+from .inputs import HERE, INDUSTRY, ROOT, digest, engineering, sources
 from . import inputs
 
 SCHEMA = 'terluna.research.vacuum-economy/1'
@@ -71,22 +69,15 @@ def programme_for(case):
 
 
 @lru_cache(maxsize=None)
-def staged_demand(ramp):
-    """The staged studies' order-book module, drawing its residents from one of the programme's ramps.
-
-    That module takes its residents from a function of its own. For any ramp but the staged one, a private copy of
-    the module is loaded and that one function replaced; the staged module and its figures stay as they are.
-    """
+def staged_residents(ramp):
+    """The residents of each year for the first pass's order books on one of the programme's ramps: None on the staged
+    ramp, where the order books keep the staged schedule of their own, and the ramp's schedule otherwise."""
     programme = sources()['programme']
     if ramp not in programme['ramps']:
         raise ValueError('Unknown population ramp: ' + ramp)
     if ramp == 'first_pass':
-        return markets
-    spec = importlib.util.spec_from_file_location('research.studies.enclosed_returns._markets_on_' + ramp, RETURNS / 'markets.py')
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    module.population = lambda year, rules: definition.population(programme, ramp, year)
-    return module
+        return None
+    return lambda year: definition.population(programme, ramp, year)
 
 
 def orders(case):
@@ -94,9 +85,9 @@ def orders(case):
     s = sources()
     if case['scenario'] != 'first_pass':
         raise ValueError('Unknown scenario of demand: ' + case['scenario'])
-    rules, strategies, staged, services, _, _ = s['demand']
-    book = staged_demand(case['ramp']).case(rules, strategies, staged, services, case['portfolio'], case['market'],
-                                            case['growth'], rules['market_growth'][case['growth']])
+    rules, strategies, profiles, services = s['demand']
+    book = first_pass.case(rules, strategies, profiles, services, case['portfolio'], case['market'], case['growth'],
+                           rules['market_growth'][case['growth']], staged_residents(case['ramp']))
     for row in book['annual']:
         planned = definition.population(s['programme'], case['ramp'], row['year'])
         if not math.isclose(row['population'], planned, rel_tol=1e-12):
@@ -152,7 +143,7 @@ def workforce(physical, loops, coefficients, horizons):
 
 def periods_account(book, physical, path, financed, money, periods):
     """Receipts by sector and costs by category in each period, undiscounted, with the share of costs paid to Earth."""
-    account = revised.stratification(book, physical, path, financed, money, periods)['periods']
+    account = accounts.stratification(book, physical, path, financed, money, periods)['periods']
     out = []
     for period in account:
         values = period['values']['0.0']
@@ -205,7 +196,7 @@ def resources(book, physical, loops, coefficients, horizons):
     metals = sources()['scenarios']['lines']['metals']
     out = {}
     for h in horizons:
-        drawn = revised.cumulative_demand(physical, loops, h)
+        drawn = accounts.cumulative_demand(physical, loops, h)
         mined = drawn['feed_kg']
 
         def sold(key):
@@ -272,14 +263,14 @@ def solve(case):
         # The tugs the case names cannot reach the water its orders draw from some year on.
         return dict(case, status='freight_unreachable', unreachable_year=exc.year, unreachable=str(exc))
     record = dict(case, convergence=physical['convergence'], first_capacity_shortfall=physical['first_capacity_shortfall'])
-    if not revised.valid(physical):
+    if not accounts.valid(physical):
         return dict(record, status='physical_requirements_unresolved')
     path = finance.plan(book, physical, money)
     equity = finance.finance(path, money, 'equity')
     financed = {'equity': equity, **{mode: finance.finance(path, money, mode, equity) for mode in FINANCING[1:]}}
     drawn = {}
     for horizon in money['horizons']:
-        demand = revised.cumulative_demand(physical, loops, horizon)
+        demand = accounts.cumulative_demand(physical, loops, horizon)
         drawn[str(horizon)] = dict(asteroid_feed_kg=demand['feed_kg'], lunar_raw_kg=demand['lunar_raw_kg'],
                                    water_kg=demand['water_kg_bounds'][0], nitrogen_kg=demand['nitrogen_kg'],
                                    virgin_metal_kg=demand['virgin_metal_kg'])
@@ -291,7 +282,7 @@ def solve(case):
                 water_against_pool=inputs.water_drawn(physical, loops, coefficients, money['horizons']),
                 opening=dict(founding_cost_USD2041=path['seed_hardware_and_carry'], working_cash_USD2041=path['initial_working'],
                              reserve_USD2041=equity['initial_reserve']),
-                checkpoints=[checkpoint(revised.measures(path, financed[mode], money, horizon))
+                checkpoints=[checkpoint(finance.measures(path, financed[mode], money, horizon))
                              for mode in FINANCING for horizon in money['horizons']],
                 periods=periods_account(book, physical, path, financed['U_credit'], money, s['periods']),
                 material_drawn=drawn, traffic=traffic(physical, coefficients, money['horizons']),

@@ -5,31 +5,17 @@
   "provisioning/vacuum_industry/model.py": "37c9c685bd536f3fa8f1479a24dc0dcef49787096f76d3050bcf3d6e011c7a24",
   "provisioning/vacuum_industry/recovery.json": "7cb1d7c240155bba64a9b55eca60d01caae8e81ce697f7e078baef3aa0bc4ed0",
   "provisioning/vacuum_industry/recovery.py": "b469b7f760c40f81e617e96effdd2de8958b8843cb3c4df5e616eaf01ec479c9",
-  "research/studies/complex_returns/consolidated.py": "da303f307302332f1c715be9ec1edf9759b2433c6beb253f1b5744de099e98ef",
-  "research/studies/complex_returns/credit.py": "d2a2ae1efc0c41d9ef78fe1ee524f9dc451ade280d7372c3363e645060830ea8",
-  "research/studies/complex_returns/credit_inputs.json": "cc64e28175fe66424e223b369350008b4cd546a280b1cdf02f9ebec2031a1329",
-  "research/studies/complex_returns/inputs/economy.json": "960f413d25d2d9a61dea32cfa9c1695df57268ec708b1ab1a86b59bffcc44961",
-  "research/studies/complex_returns/inputs/strategy_profiles.json": "68de393762a3411e0fc3fb2956c8d16c936c46019db70995cc3ccd5654449a9c",
-  "research/studies/complex_returns/policy.py": "ab23ba83a5d91f495627caae56b3503060f29b070bb96d77ae9914d84239a189",
-  "research/studies/complex_returns/returns_inputs.json": "7ce3e23c1fb215fc45fdac6f2629952f238f98edc806cd38223b1776a8d1c2b0",
-  "research/studies/complex_returns/staged.py": "49635fa8607a5f8b1d5b467765aeff419daac4cf701eeeef2d35dea955e0198a",
-  "research/studies/complex_returns/staged_inputs.json": "31eb2fee9cda8744ba4e9c729c62d54f132a16ecb6c2c60ea52e3d6dc11cf2a5",
-  "research/studies/complex_returns/strategies.py": "f33d10804a4018e9de888272254b56fe3178016731d1c87063ea35f97f80cd19",
-  "research/studies/complex_returns/strategy_inputs.json": "ad8d3af2ec0a5614492536abd3bb10a21681cf08c17b8e52a46ab8af65500284",
-  "research/studies/enclosed_returns/bottlenecks.py": "5cea14e1212eb86cb81cb9f41cd257632d0ad105f1789ecac7fdf7e62acebc46",
-  "research/studies/enclosed_returns/enclosed_inputs.json": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
-  "research/studies/enclosed_returns/finance.py": "3afd3842278f044caeec81a8ae05dd542d7045541cd750a8d593ae5edf16c647",
-  "research/studies/enclosed_returns/finance_inputs.json": "6e40693196ce4c89e6c066a6187f3ecffc425a1c36818c1460dbc3c0fe74a287",
-  "research/studies/enclosed_returns/markets.py": "b8a17341a33d5785b358d407f9324fc26baa901238de018f2974bea68fb0f8fb",
-  "research/studies/enclosed_returns/revised.py": "2c16da4fa6e0c35210f9e8eab8ceba3b3276c8b9ceac5c736a6dc31c7bc2ddd0",
-  "research/studies/enclosed_returns/revised_inputs.json": "7a7eb7cfac5408bf5ec2842097c4a382c5e3102407b139c382bf03a4decd3494",
+  "research/studies/vacuum_economy/accounts.py": "a873696e780a9212c95b7cf88db9998b8939991bbe5a9c0cef7d246e8e8dcdba",
   "research/studies/vacuum_economy/demand.py": "58d644f2d305e3ffd9ea789611ca8ae57f2747c2d6695adf894385eafaff974e",
-  "research/studies/vacuum_economy/inputs.py": "47962c1263e45cf27358a0b1f8ce0393b5a34fa6ca2cc433cd43479c78ad59b3",
+  "research/studies/vacuum_economy/finance.py": "8d8e5c202f4f96664ec823a3bd541b758a8bf2abdf755b565e76d8ed89fd9e3a",
+  "research/studies/vacuum_economy/first_pass.json": "cbcdafa920e6aa2776df9604876edaff853ad7a6080761ae2ac5e69bbcef2d12",
+  "research/studies/vacuum_economy/first_pass.py": "563616962177826b416c3af1cdfb9e99be81a37556f6b89cd710c92d9c9b3ecc",
+  "research/studies/vacuum_economy/inputs.py": "5f93f31c78d8f6f4f2c047c8afc4dfebb311ba42b2fb7d14ff3cf082066b97cf",
   "research/studies/vacuum_economy/mix.py": "af2e8e339a9a5db380fbb5f7bc5aa2897782fbf0a948504c4350b33ab8b8079e",
-  "research/studies/vacuum_economy/programme.json": "c7fcb9452fb7f418b5cdb5bd74173c07f3d8a82335ef3cd22d3bcb2ecefa1c26",
+  "research/studies/vacuum_economy/programme.json": "99032ce5a6bd9661cdd4f48b3dc3fdf51299637439c672f26428f9642f2d3312",
   "research/studies/vacuum_economy/programme.py": "e5fde0000cf33b640c49bd902a3c75ae1ce22ca52984cc947ac3a91a0a01aa17",
-  "research/studies/vacuum_economy/residents.py": "4406c19ceaf3589cea76bd44d04060581208fc7f91417c29c323f186b8ebc524",
-  "research/studies/vacuum_economy/results/freight.json": "a021b3869c7c9386ddb5826095600ec1e93abb7aec1b18b8a47f4c66547be941",
+  "research/studies/vacuum_economy/residents.py": "5039df8f8dc240cc45a2deaa5fb3606bc6bed5dceb087220d7f829cd6ab4f4aa",
+  "research/studies/vacuum_economy/results/freight.json": "056a1904d90df67bb59b7653e5871a52bf48875abe2cac55766f5403697d39a4",
   "research/studies/vacuum_economy/scenarios.json": "be731c9be612a048d15ac65c15c857a44c615bc9dfdf846ae3cd558d5215dcce",
   "resources/source_access/results/population.json.gz": "0615e385e90876742d91fffbfbd4877080e8e374a9cc9b16323ecf106368a934",
   "resources/source_access/results/reach.json.gz": "262333233c3a40468090870ff148969c9b5966967966ce3b2c9eaa7ed1af3512"
@@ -88,7 +74,7 @@
  ],
  "producer": {
   "path": "research/studies/vacuum_economy/residents.py",
-  "sha256": "4406c19ceaf3589cea76bd44d04060581208fc7f91417c29c323f186b8ebc524"
+  "sha256": "5039df8f8dc240cc45a2deaa5fb3606bc6bed5dceb087220d7f829cd6ab4f4aa"
  },
  "reading_rule": "For each scenario of demand, the schedule of `resident_led_beyond_plan` grows in each period at the rate given, the highest found sustained to within the stated resolution; the lowest rate found unsustained and the condition that failed there are given beside it. `resident_led` is the same schedule held at the planned population from the year it reaches it. A trial gives, for one schedule, the conditions that fail and the margin of each, as a share of the constant-growth ramp's opening funding: money, the least cash above the buffer the financing rules require, or the equity needed after the opening; opening, what the cap exceeds the trial's opening funding by, the cap being the opening funding of the constant-growth rate in the first period while that period is sought, and the first period's chosen opening funding after, each with 0.001 of it added for the rounding of the sizing; income, the change in what the system holds over years 201 to 220. Hands is the least share of the workforce the residents' own work leaves, in any year; a schedule fails it where that work exceeds the workforce, or where the lines and the making of parts could not be fitted to it. Reach fails where the scenario's tugs cannot reach the water the schedule draws, and the trial names the year; where they cannot reach the water of the constant-growth ramp's sales, those sales are chosen with the founding freight, as the round records. A trial also gives its receipts and the contained water drawn from the sources to each horizon against the source survey's wider near-Earth screen and broader near-Earth population, at their 5th, 50th and 95th percentiles. While a schedule is sought nothing is paid out to the funders; the coupled run finances the solved schedules under the study's ordinary rules.",
  "resolution": {
@@ -177,7 +163,7 @@
     "workforce_use": 0.9715499526182687
    },
    "limited_trial": null,
-   "minutes": 15.1,
+   "minutes": 15.8,
    "opening_funding_cap_USD2041": 1305457853032.6943,
    "opening_settlement_sustained": true,
    "periods": [
@@ -2234,7 +2220,7 @@
      "200": 959131281.8193593,
      "220": 959131281.8193593
     },
-    "seconds": 6.3,
+    "seconds": 5.8,
     "sustained": true,
     "water": {
      "contained_water_drawn_kg": {
@@ -2312,7 +2298,7 @@
      "200": 6468289.238000949,
      "220": 6468289.238000949
     },
-    "seconds": 6.5,
+    "seconds": 6.0,
     "sustained": true,
     "water": {
      "contained_water_drawn_kg": {
@@ -2351,7 +2337,7 @@
     },
     "workforce_use": 0.9701629102110105
    },
-   "minutes": 12.2,
+   "minutes": 13.3,
    "opening_funding_cap_USD2041": 1756526917933.4944,
    "opening_settlement_sustained": true,
    "periods": [
@@ -4408,7 +4394,7 @@
      "200": 210781.44157801723,
      "220": 210781.44157801723
     },
-    "seconds": 10.4,
+    "seconds": 9.2,
     "sustained": true,
     "water": {
      "contained_water_drawn_kg": {
@@ -4448,7 +4434,7 @@
     "workforce_use": 0.8795627166429865
    },
    "limited_trial": null,
-   "minutes": 16.3,
+   "minutes": 17.0,
    "opening_funding_cap_USD2041": 1392934164392.2188,
    "opening_settlement_sustained": true,
    "periods": [

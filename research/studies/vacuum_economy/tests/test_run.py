@@ -1,12 +1,12 @@
 """The coupled run: its saved product, and its reproduction of the staged appraisal."""
-import gzip
 import json
 import math
+from pathlib import Path
 import pytest
 from provisioning.vacuum_industry import model
-from research.studies.enclosed_returns import markets
-from research.studies.vacuum_economy import inputs, programme as definition, run
+from research.studies.vacuum_economy import first_pass, inputs, programme as definition, run
 
+HERE = Path(__file__).resolve().parent
 SAVED = json.loads((run.HERE / 'results/economy.json').read_text())
 CASES = {c['name']: c for c in SAVED['cases']}
 CASES_LISTED = {c['name']: c for c in run.cases()}
@@ -53,8 +53,8 @@ def test_the_founding_freight_flies_one_leg_and_the_reach_lengthens_it_as_water_
 
 
 def test_the_first_pass_cases_reproduce_the_staged_appraisal_exactly():
-    staged = json.loads(gzip.decompress((run.RETURNS / 'results/revised.json.gz').read_bytes()))
-    combined = {c['name']: c for c in staged['primary_cases'] if c['variant'] == 'combined'}
+    # The staged appraisal's measures for the books on the staged schedule, extracted from the staged returns study.
+    combined = {name: {'checkpoints': rows} for name, rows in json.loads((HERE / 'staged_appraisal.json').read_text())['cases'].items()}
     compared = 0
     for case in SAVED['cases']:
         assert case['recovery'] == 'combined'
@@ -121,16 +121,16 @@ def test_every_portfolio_runs_on_the_staged_schedule_and_on_both_programme_ramps
 
 
 @pytest.mark.parametrize('ramp', ['constant_growth', 'front_loaded'])
-def test_the_order_book_takes_its_residents_from_the_named_ramp_and_leaves_the_staged_module_alone(ramp):
+def test_the_order_book_takes_its_residents_from_the_named_ramp_and_the_staged_schedule_on_its_own(ramp):
     programme = run.sources()['programme']
     case = run.cases(['first_pass:services:' + ramp])[0]
     book = run.orders(case)
     for row in book['annual']:
         assert row['population'] == definition.population(programme, ramp, row['year'])
         assert row['new_residential_people'] == definition.population(programme, ramp, row['year'] + 2) - definition.population(programme, ramp, row['year'] + 1)
-    rules = markets.inputs()[0]
-    assert run.staged_demand(ramp) is not markets and run.staged_demand('first_pass') is markets
-    assert markets.population(100, rules) == definition.population(programme, 'first_pass', 100)
+    rules = first_pass.inputs()[0]
+    assert run.staged_residents('first_pass') is None and run.staged_residents(ramp)(100) == definition.population(programme, ramp, 100)
+    assert first_pass.population(100, rules) == definition.population(programme, 'first_pass', 100)
 
 
 def test_an_unknown_scenario_ramp_or_case_is_refused():

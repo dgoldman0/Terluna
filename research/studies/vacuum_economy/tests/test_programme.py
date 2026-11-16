@@ -1,9 +1,8 @@
-"""The programme definition: its ramps, and its agreement with the inputs of the staged studies."""
+"""The programme definition: its ramps, and its agreement with the first pass's order-book inputs."""
 import json
 import math
 import pytest
-from research.studies.enclosed_returns import markets
-from research.studies.vacuum_economy import programme as definition, run
+from research.studies.vacuum_economy import first_pass, programme as definition, run
 
 P = definition.load()
 FIRST, DONE, LAST = (P['calendar'][k] for k in ('first_productive_year', 'completion_year', 'last_year'))
@@ -42,14 +41,15 @@ def test_the_front_loaded_ramp_stands_the_founding_system_up_by_year_33_and_then
 
 
 def test_the_first_pass_ramp_is_the_schedule_of_the_staged_order_book():
-    rules = markets.inputs()[0]
-    assert all(people('first_pass', y) == markets.population(y, rules) for y in range(FIRST, LAST + 1))
+    rules = first_pass.inputs()[0]
+    assert all(people('first_pass', y) == first_pass.population(y, rules) for y in range(FIRST, LAST + 1))
     assert round(people('first_pass', 100)) == 222240
 
 
-def test_the_staged_inputs_agree_with_the_definition():
-    s = run.sources()                       # raises where the demand inputs or the financing rules differ
-    assert s['programme'] == P and s['money']['horizons'] == P['horizons']
+def test_the_first_pass_inputs_and_the_financing_agree_with_the_definition():
+    s = run.sources()                       # raises where the first pass's inputs differ from the definition
+    assert s['programme'] == P and s['money']['horizons'] == P['horizons'] and s['money']['rates'] == P['discount_rates']
+    assert s['periods'] == P['reporting_periods'] and all(s['money'][k] == v for k, v in P['money']['financing'].items())
 
 
 @pytest.mark.parametrize('change', [
