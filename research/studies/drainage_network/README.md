@@ -97,13 +97,13 @@ Each year's water, with each sea's drawn area in km² and its level in the histo
 | Year | Water, share of the Moon | Near-side ocean | South sea | Smythii–Marginis | Humboldtianum | Orientale | Moscoviense |
 |---|---|---|---|---|---|---|---|
 | 0 | 28.0% | 5.19 million | 2.31 million | 268,000 | 277,000 | 84,000 | 65,000 |
-| 250 | 27.8% | 4.81 million, −81 m | 2.26 million, −72 m | 411,000, +423 m | 245,000, −148 m | 108,000, +1,012 m | 361,000, +3,273 m |
+| 250 | 27.8% | 4.81 million, −81 m | 2.26 million, −72 m | 411,000, +423 m | 245,000, −147 m | 108,000, +1,012 m | 361,000, +3,273 m |
 | 500 | 27.5% | 4.65 million, −120 m | 2.15 million, −84 m | 563,000, +751 m | 218,000, −336 m | 173,000, +1,698 m | 367,000, +3,320 m |
 | 750 | 28.5% | 4.65 million, −120 m | 2.08 million, −152 m | full, 568,000 | 177,000, −460 m | 244,000, +2,102 m | 752,000, +3,375 m |
 | 1,000 | 29.1% | 4.65 million, −120 m | 2.08 million, −143 m | full, 568,000 | 149,000, −648 m | full, 289,000 | full, 837,000 |
 | 2,000 | 29.5% | 4.65 million, −120 m | 2.34 million, +76 m | full, 568,000 | 72,000, −1,353 m | full, 289,000 | full, 837,000 |
 | 5,000 | 29.9% | 4.65 million, −120 m | 2.63 million, +703 m | full, 568,000 | 91, −2,410 m | full, 289,000 | full, 837,000 |
-| 10,000 | 30.6% | 4.65 million, −120 m | 2.94 million, +1,398 m | full, 568,000 | 2, −4,354 m | full, 289,000 | full, 837,000 |
+| 10,000 | 30.6% | 4.65 million, −120 m | 2.94 million, +1,399 m | full, 568,000 | 2, −4,354 m | full, 289,000 | full, 837,000 |
 
 Over the first 500 years the six seas' area changes little, from 8.19 to 8.12 million km²: the near-side ocean, the south sea and Humboldtianum give up 765,000 km², and the three smaller seas spread over 686,000 km². But 115,000 km² of that spread floods hollows the atlas already holds as water at the common level, so the water falls from 28.0% of the Moon to 27.5%. It then rises to 30.6% by year 10,000 as the smaller seas fill and spill, their overflows filling 36 hollows on the way down, and the south sea climbs towards its rim on Moscoviense's overflow, while Humboldtianum dries away. The 2.43 million km² of hollows the atlas holds at the common level count as water in every year; the rising seas cover 306,000 km² of them by year 10,000.
 

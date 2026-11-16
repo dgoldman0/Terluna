@@ -2,10 +2,10 @@
  "schema": "terluna.research.drainage-network-globe-stops/1",
  "producer": {
   "module": "research.studies.drainage_network.stops",
-  "code_sha256": "b7d9ed2f7d84f8e219524037f5e56176dc4e81fe3c4f76d23f270433328bc0d1"
+  "code_sha256": "12e9733edf142087931e0c6823e9f748da706833a80bd9fbbb161837dc809d2f"
  },
  "evidence": "The drainage network study's history of the six large seas with the routing's budget closed, recorded at chosen years and drawn on LOLA's 16 px/deg heights above the GRAIL geoid; the network's own limits hold (no water's own gravity or crustal sag, the design climate fixed). A computed drawing of a computed history, not validated.",
- "reading_rule": "stops are years after the water stands as the atlas draws it. Each stop gives each sea's level relative to the common level and its state (filling, or full and overflowing), the events up to that year, and the share of the Moon that is water: the six seas, the hollows their overflows fill and the hollows the atlas holds at the common level, which the study does not follow and which stay as drawn; the rain-fed lakes above the common level are counted apart, as the atlas counts them. bodies lists every water the maps name: ids 1-6 the seas, the rest the hollows an overflow fills, with the level each is filled to. The maps hold, per cell of the 16 px/deg grid with 0 E at the left edge, a bit per stop where one of the bodies covers it (body_bits; the hollows the atlas holds at the common level are water in every year besides), the first and second body that cover the cell at some stop (first, second), a bit per stop where the second is its surface (second_bits), a bit per stop for an overflow river on dry ground (channel_bits) with the surplus it carries (channel_q, m3/s), and each body's level at each stop (levels, m, nan where it holds no water).",
+ "reading_rule": "stops are years after the water stands as the atlas draws it. Each stop gives each sea's level in the history relative to the common level (levels_m, rounded there to 0.1 m) and its state (filling, or full and overflowing), the events up to that year, and the share of the Moon that is water: the six seas, the hollows their overflows fill and the hollows the atlas holds at the common level, which the study does not follow and which stay as drawn; the rain-fed lakes above the common level are counted apart, as the atlas counts them. bodies lists every water the maps name: ids 1-6 the seas, the rest the hollows an overflow fills, with the level each is filled to. The maps hold, per cell of the 16 px/deg grid with 0 E at the left edge, a bit per stop where one of the bodies covers it (body_bits; the hollows the atlas holds at the common level are water in every year besides), the first and second body that cover the cell at some stop (first, second), a bit per stop where the second is its surface (second_bits), a bit per stop for an overflow river on dry ground (channel_bits) with the surplus it carries (channel_q, m3/s), and each body's level as drawn at each stop (levels, m, nan where it holds no water): after year 0 a sea is drawn half a metre above its level in the history, so that a sea within half a metre below a pass is drawn over it, and at most 1 cm under its rim.",
  "case": {
   "rain": 1.0,
   "open_water_evaporation_factor": 1.146
@@ -38,12 +38,12 @@
   {
    "year": 250,
    "levels_m": {
-    "near_side": -80.4000015258789,
-    "south_pole_aitken": -71.19999694824219,
-    "smythii_marginis": 423.79998779296875,
-    "humboldtianum": -147.0,
-    "orientale": 1012.9000244140625,
-    "moscoviense": 3273.300048828125
+    "near_side": -80.9,
+    "south_pole_aitken": -71.7,
+    "smythii_marginis": 423.3,
+    "humboldtianum": -147.5,
+    "orientale": 1012.4,
+    "moscoviense": 3272.8
    },
    "states": {
     "near_side": "filling",
@@ -60,12 +60,12 @@
   {
    "year": 500,
    "levels_m": {
-    "near_side": -119.5,
-    "south_pole_aitken": -83.9000015258789,
-    "smythii_marginis": 751.0999755859375,
-    "humboldtianum": -335.5,
-    "orientale": 1698.5999755859375,
-    "moscoviense": 3320.89990234375
+    "near_side": -120.0,
+    "south_pole_aitken": -84.4,
+    "smythii_marginis": 750.6,
+    "humboldtianum": -336.0,
+    "orientale": 1698.1,
+    "moscoviense": 3320.4
    },
    "states": {
     "near_side": "filling",
@@ -82,12 +82,12 @@
   {
    "year": 750,
    "levels_m": {
-    "near_side": -119.80000305175781,
-    "south_pole_aitken": -151.1999969482422,
-    "smythii_marginis": 766.6156616210938,
-    "humboldtianum": -459.1000061035156,
-    "orientale": 2102.800048828125,
-    "moscoviense": 3375.800048828125
+    "near_side": -120.3,
+    "south_pole_aitken": -151.7,
+    "smythii_marginis": 766.6,
+    "humboldtianum": -459.6,
+    "orientale": 2102.3,
+    "moscoviense": 3375.3
    },
    "states": {
     "near_side": "filling",
@@ -110,12 +110,12 @@
   {
    "year": 1000,
    "levels_m": {
-    "near_side": -119.69999694824219,
-    "south_pole_aitken": -142.3000030517578,
-    "smythii_marginis": 766.6156616210938,
-    "humboldtianum": -647.0999755859375,
-    "orientale": 2341.568603515625,
-    "moscoviense": 3545.14013671875
+    "near_side": -120.2,
+    "south_pole_aitken": -142.8,
+    "smythii_marginis": 766.6,
+    "humboldtianum": -647.6,
+    "orientale": 2341.6,
+    "moscoviense": 3545.1
    },
    "states": {
     "near_side": "filling",
@@ -148,12 +148,12 @@
   {
    "year": 2000,
    "levels_m": {
-    "near_side": -119.80000305175781,
-    "south_pole_aitken": 76.0,
-    "smythii_marginis": 766.6156616210938,
-    "humboldtianum": -1352.5,
-    "orientale": 2341.568603515625,
-    "moscoviense": 3545.14013671875
+    "near_side": -120.3,
+    "south_pole_aitken": 75.5,
+    "smythii_marginis": 766.6,
+    "humboldtianum": -1353.0,
+    "orientale": 2341.6,
+    "moscoviense": 3545.1
    },
    "states": {
     "near_side": "filling",
@@ -186,12 +186,12 @@
   {
    "year": 5000,
    "levels_m": {
-    "near_side": -119.80000305175781,
-    "south_pole_aitken": 703.2999877929688,
-    "smythii_marginis": 766.6156616210938,
-    "humboldtianum": -2409.199951171875,
-    "orientale": 2341.568603515625,
-    "moscoviense": 3545.14013671875
+    "near_side": -120.3,
+    "south_pole_aitken": 702.8,
+    "smythii_marginis": 766.6,
+    "humboldtianum": -2409.7,
+    "orientale": 2341.6,
+    "moscoviense": 3545.1
    },
    "states": {
     "near_side": "filling",
@@ -224,12 +224,12 @@
   {
    "year": 10000,
    "levels_m": {
-    "near_side": -119.69999694824219,
-    "south_pole_aitken": 1399.0,
-    "smythii_marginis": 766.6156616210938,
-    "humboldtianum": -4353.2001953125,
-    "orientale": 2341.568603515625,
-    "moscoviense": 3545.14013671875
+    "near_side": -120.2,
+    "south_pole_aitken": 1398.5,
+    "smythii_marginis": 766.6,
+    "humboldtianum": -4353.7,
+    "orientale": 2341.6,
+    "moscoviense": 3545.1
    },
    "states": {
     "near_side": "filling",
@@ -581,5 +581,5 @@
   }
  ],
  "held_as_the_atlas_draws_km2": 2426516,
- "seconds": 569
+ "seconds": 551
 }

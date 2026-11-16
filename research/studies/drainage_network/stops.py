@@ -108,7 +108,8 @@ def overflow_bodies(geo, sea, h):
 
 def stops(geo, case, log=print):
     """Each stop's water: per cell, its bodies, which is the surface at each stop and whether it is water; per body,
-    its level at each stop (relative to the common level; nan where it holds no water)."""
+    its level as drawn at each stop (relative to the common level; nan where it holds no water); and per stop, each
+    sea's level in the history itself."""
     h = geo['h'].ravel().astype(np.float64)
     level0, seas, joined = geo['level0'], geo['seas'], geo['joined']
     n_stops = len(STOP_YEARS)
@@ -140,13 +141,14 @@ def stops(geo, case, log=print):
     water = np.zeros(h.size, np.uint8)
     channel_bits = np.zeros(h.size, np.uint8)
     channel_q = np.zeros(h.size, np.float32)
-    shares, states_by_stop = [], []
+    shares, states_by_stop, history = [], [], []
     for k, year in enumerate(STOP_YEARS):
         if year == 0:
             rel, states = {s: 0.0 for s in seas}, {s: 'filling' for s in seas}
         else:
             rec = records[year]
             rel, states = {s: rec[s] for s in seas}, rec['states']
+        history.append(dict(rel))
         surface = np.full(h.size, -np.inf)
         for i, s in enumerate(seas, start=1):
             if rel[s] is None:
@@ -170,7 +172,7 @@ def stops(geo, case, log=print):
         states_by_stop.append(states)
         shares.append(wet)
     return dict(ident=ident, water=water, channel_bits=channel_bits, channel_q=channel_q, levels=levels,
-                bodies=bodies, states=states_by_stop, wet=shares, isolated=isolated)
+                bodies=bodies, states=states_by_stop, history=history, wet=shares, isolated=isolated)
 
 
 def two_bodies(ident):
@@ -222,7 +224,8 @@ def build(log=print):
                   'network\'s own limits hold (no water\'s own gravity or crustal sag, the design climate fixed). '
                   'A computed drawing of a computed history, not validated.'),
         reading_rule=('stops are years after the water stands as the atlas draws it. Each stop gives each sea\'s '
-                      'level relative to the common level and its state (filling, or full and overflowing), the '
+                      'level in the history relative to the common level (levels_m, rounded there to 0.1 m) and its '
+                      'state (filling, or full and overflowing), the '
                       'events up to that year, and the share of the Moon that is water: the six seas, the hollows '
                       'their overflows fill and the hollows the atlas holds at the common level, which the study '
                       'does not follow and which stay as drawn; the rain-fed lakes above the common level are '
@@ -234,11 +237,13 @@ def build(log=print):
                       'second), a bit '
                       'per stop where the second is its surface (second_bits), a bit per stop for an overflow '
                       'river on dry ground (channel_bits) with the surplus it carries (channel_q, m3/s), and each '
-                      'body\'s level at each stop (levels, m, nan where it holds no water).'),
+                      'body\'s level as drawn at each stop (levels, m, nan where it holds no water): after year 0 a '
+                      'sea is drawn half a metre above its level in the history, so that a sea within half a metre '
+                      'below a pass is drawn over it, and at most 1 cm under its rim.'),
         case=dict(rain=1.0, open_water_evaporation_factor=factor),
         maps=str(MAPS.relative_to(ROOT)), cells_under_more_than_two_bodies=extra,
         stops=[dict(year=y,
-                    levels_m={s: float(drawn['levels'][k, i]) for i, s in enumerate(seas, start=1)},
+                    levels_m=drawn['history'][k],
                     states={s: drawn['states'][k].get(s, 'filling') for s in seas},
                     events=[e for e in case['history']['events'] if e['year'] <= y],
                     water_share=round(float(area[drawn['wet'][k]].sum() / moon), 5),
