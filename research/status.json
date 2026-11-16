@@ -2186,7 +2186,7 @@
     },
     {
       "topic": "vacuum_economy_compact",
-      "condition": "first_slice; technology_paths_2041_2241_slow_central_fast_and_static; starting_values_sourced_food_paths_sourced_other_paths_projected; unit_values_of_local_work_and_imports_constructed; visits_bounded_by_construction; metals_and_residents_as_a_result_not_yet",
+      "condition": "first_slice; technology_paths_2041_2241_slow_central_fast_and_static; starting_values_sourced_food_paths_sourced_other_paths_projected; unit_values_of_local_work_and_imports_constructed; visits_bounded_by_construction; metals_and_residents_as_a_result_not_yet; kept_as_committed_not_extended",
       "material": [
         "studies/vacuum_economy_compact/README.md",
         "studies/vacuum_economy_compact/compact.py",
@@ -2197,6 +2197,29 @@
       "findings": [
         "Started from the founding design's computation for 250,000 residents, a resident needs about 25 kW of average power (14.5 kW of it food under lamps), 318 t of material made on the Moon and 17 t bought from Earth, and 3.4 t of water a year. On the central technology path food falls to 6.3 kW by 2100 and 3.0 kW by 2241, with lamps toward their physical limit, crops yielding more food per unit of light and a growing share of the diet grown from electricity by hydrogen-oxidising microbes, whose 15-16% conversion is the food lookup's sourced value.",
         "With technology held at 2041 a new resident costs about 92 million USD2041 to build and 5 million a year to run, mostly landing imports at about 1,800 USD2026 a kg, and no scenario of demand pays; on the central path by 2100 about 1.3 million and 93,000. On constant growth to 6.47 million residents the central demand needs about 0.9 trillion of funding and repays it by year 29 with central technology, the low demand needs 3.9 trillion and repays by year 60, and the high demand at year 200 implies 10 million visitors a year and 95 launches a day from 457 pads. The outcome turns on the technology path more than on the demand."
+      ]
+    },
+    {
+      "topic": "vacuum_economy_periods",
+      "condition": "first_complete_version; designed_whole_before_built; technology_paths_2041_2241_with_dated_arrivals_sourced_by_the_lookups_of_15_and_16_november_at_their_starting_values; rates_of_work_plant_masses_and_bounds_constructed; five_design_choices_open_carried_as_switches; residents_as_a_result_by_the_funders_3pct",
+      "material": [
+        "studies/vacuum_economy_periods/README.md",
+        "studies/vacuum_economy_periods/period_technology.json",
+        "studies/vacuum_economy_periods/period_inputs.json",
+        "studies/vacuum_economy_periods/technology.py",
+        "studies/vacuum_economy_periods/designs.py",
+        "studies/vacuum_economy_periods/engineering.py",
+        "studies/vacuum_economy_periods/sales.py",
+        "studies/vacuum_economy_periods/economy.py",
+        "studies/vacuum_economy_periods/run.py",
+        "studies/vacuum_economy_periods/results/periods.json",
+        "studies/vacuum_economy_periods/tests/test_periods.py"
+      ],
+      "findings": [
+        "The technology of the period decides whether the vacuum settlement pays more than the demand does. With 2041 engineering held for two centuries no scenario of demand pays; on the central path the planned settlement of 6.47 million needs 1.54 trillion USD2041 of funding on constant growth, 1.05 of it by the opening, and stays repaid from 2075 with 2.8 trillion of net present value to its funders at 3%.",
+        "Power comes from megawatt fission through the 2040s to 2060s and from beamed stations from about 2070 on the central path; the polar grid is never chosen, since its lines grow with the square of their length to sites 600-2,700 km from the poles and the poles supply under half a gigawatt. The settlement makes 98% of its equipment by 2071 and by 2241 buys from Earth mostly its supplies, about 450,000 t a year.",
+        "Grown as fast as the funders still earn 3%, central demand and technology carry the planned 6.47 million by 2131 at 7.95% a year; fast technology by 2106; slow technology carries 0.86 million by 2241, and low demand with central technology cannot pay for growth. The fastest rate period by period spends the same allowance on its first years and stops at about 112,600 residents.",
+        "Of the five open design choices, counting the whole payroll in dollars instead of the share spent on Earth raises the central funding from 1.54 to 77.4 trillion and leaves it unrepaid; births, fares, towns or cities and the source survey's percentiles each move the net present value by under 0.05 trillion."
       ]
     }
   ]

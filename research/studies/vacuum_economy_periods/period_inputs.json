@@ -1,0 +1,475 @@
+{
+ "schema": "terluna.research.vacuum-economy-periods.inputs/1",
+ "evidence": "The study's inputs other than the technology paths, each with its value and basis: a lookup or design it was read from, or the study's own value with its range where no source has been found. Five entries carry design choices that are still open (choices 1 to 5 of the README); each is set to the option recommended on 16 November until it is settled, and the others can be run as cases.",
+ "reading_rule": "An entry is a value with its basis, or a group of such entries. Money is in constant dollars of 2041 unless the key names another year. Rates of work are at 2041 and change with the roadmap's output per job.",
+ "money": {
+  "USD2026_to_USD2041": {
+   "value": 1.557967416600765,
+   "basis": "the staged studies' normalization at 3% a year (provisioning/vacuum_industry)"
+  },
+  "USD2024_to_USD2026": {
+   "value": 1.0609,
+   "basis": "research/studies/vacuum_economy/scenarios.json"
+  },
+  "pay_counted": {
+   "value": "spent_on_Earth",
+   "options": [
+    "spent_on_Earth",
+    "all"
+   ],
+   "basis": "choice 1, open: the account with Earth counts the share of residents' pay spent on Earth; 'all' counts the whole payroll as the coupled study did"
+  },
+  "share_of_pay_spent_on_Earth": {
+   "value": 0.1,
+   "range": [
+    0.05,
+    0.2
+   ],
+   "basis": "the study's own"
+  },
+  "wage_USD2041_year": {
+   "value": 155796.7416600765,
+   "basis": "the coupled study's worker's year in 2041 (its programme.json, opportunity_USD2041_worker_year), without a source; about 1.5 times a high-income average wage, as Australian mining pays 1.55 times the average (I12); it follows the world's income per person after 2041, as OECD median wages followed productivity within 5-8% over 1995-2013 (I20)"
+  },
+  "equipment_USD2026_kg": {
+   "value": 500.0,
+   "range": [
+    50.0,
+    5000.0
+   ],
+   "basis": "I01 (2023 export values): rock-moving and crushing machinery 6-17 USD/kg; machine tools, bearings, motors and robots 9-52; power electronics and batteries 41-76; spacecraft 4,700-69,000. The staged model's 500 is carried for equipment made in series to work on the Moon, between the industrial and the spacecraft anchors; it follows the roadmap's price multiple."
+  },
+  "supplies_USD2026_kg": {
+   "value": 150.0,
+   "basis": "the staged model's special imports, without a source"
+  },
+  "financing": {
+   "value": "dollars",
+   "options": [
+    "dollars"
+   ],
+   "basis": "choice 5, open: the coupled study's arrangements in U are left for a later layer"
+  },
+  "computing_hardware_USD2026_kg": {
+   "value": 500.0,
+   "range": [
+    190.0,
+    1800.0
+   ],
+   "basis": "I01: computers and chip-making machines 190-260 USD/kg, integrated circuits about 1,800 (2023 export values); 500 for servers built to work on the Moon, the study's own"
+  }
+ },
+ "people": {
+  "births_per_resident_year": {
+   "value": 0.01,
+   "range": [
+    0.0,
+    0.01
+   ],
+   "basis": "choice 2, open: about the world's natural increase today; no human birth in low gravity has been observed"
+  },
+  "fares_paid_by": {
+   "value": "settlement",
+   "options": [
+    "settlement",
+    "migrants"
+   ],
+   "basis": "choice 2, open"
+  },
+  "launched_kg_per_passenger": {
+   "value": 270.0,
+   "basis": "scenarios.json visits: 270 kg a passenger in one published estimate of a seat to orbit (P23)"
+  },
+  "cabin_kg_per_passenger": {
+   "value": 1000.0,
+   "basis": "scenarios.json visits, constructed: cabin, air, water and stores carried for each passenger between low Earth orbit and the Moon"
+  },
+  "founding_crew": {
+   "value": 2000.0,
+   "basis": "the study's own: the people who build the opening settlements in years 0 to 7 and become its first residents"
+  },
+  "share_who_work": {
+   "value": 0.55,
+   "range": [
+    0.49,
+    0.65
+   ],
+   "basis": "I19, I20: the employed share of the whole population of high-income countries 45% (1991) to 49% (2024), 55% in Japan; a settlement of working-age arrivals carries the upper value"
+  },
+  "service_jobs_per_resident": {
+   "value": 0.2,
+   "range": [
+    0.15,
+    0.3
+   ],
+   "basis": "the study's own: about a third of the workforce serving the residents (health, schools, administration, shops, homes) at 2041"
+  },
+  "teleoperation": {
+   "time_factor": 1.74,
+   "Earth_pay_over_lunar_wage": 0.645,
+   "basis": "I18: a laboratory excavator task took 174% of its undelayed time with the 3 s delay of operators on Earth (success fell from 91% to 45%); I03, I05: the factory concepts are run from Earth at first. Work the residents cannot staff in the industry is done from Earth, a job-year costing an Earth wage (the lunar wage over the 1.55 premium of remote mining, I12) times 1.74, paid to Earth."
+  }
+ },
+ "settlements": {
+  "diet_kcal_day": {
+   "value": 2500.0,
+   "basis": "design (lava_tube_cities)"
+  },
+  "landscape_water_kg_day": {
+   "value": 5.0,
+   "basis": "design: the inherited landscape and other makeup allowance, kept whatever the recovery"
+  },
+  "town_floor_m2_resident": {
+   "value": 70.0,
+   "basis": "design (habitation/crater_gardens/design.json, representative layout)"
+  },
+  "regional_hall_shielding_t_per_m2_floor": {
+   "value": 5.86,
+   "basis": "the study's extension of the designs: three metres of regolith at 1,600 kg/m3 over 1.22 m2 of hall envelope a square metre of floor (the city halls' envelope over their floor) for regional halls built outside a cave"
+  },
+  "allocation": {
+   "value": "by_cost",
+   "options": [
+    "by_cost",
+    "towns",
+    "founding_mix"
+   ],
+   "basis": "choice 3, open"
+  },
+  "caves_for_cities": {
+   "value": 4,
+   "cases": [
+    4,
+    20
+   ],
+   "basis": "choice 3: no city-sized cave is confirmed; the founding four are conditional (lava_tube_cities)"
+  },
+  "crater_sites": {
+   "value": 8886,
+   "basis": "habitation/crater_gardens/buildout.json: 0.1% of the 8,886,558 catalogued craters 200-1,000 m across"
+  },
+  "town_residents": {
+   "value": 750,
+   "options": [
+    500,
+    750,
+    1000
+   ],
+   "basis": "design (the first hundred towns' cases): towns after the founding system follow the 750-resident case, 291 m craters, since the plan's 6.47 million on the 8,886 sites of the initial quota is about 730 a site; the founding system's towns keep their 500"
+  },
+  "founding_system": {
+   "cities": 4,
+   "residents_per_city": 50000,
+   "towns": 100,
+   "residents_per_town": 500,
+   "basis": "design (lava_tube_cities)"
+  },
+  "town_sites_within_km_of_a_polar_ridge": {
+   "km": [
+    700,
+    800,
+    900,
+    1000,
+    1100,
+    1200,
+    1300,
+    1400,
+    1500,
+    1600,
+    1700,
+    1800,
+    1900,
+    2000,
+    2100,
+    2200,
+    2300,
+    2400,
+    2500,
+    2600,
+    2700
+   ],
+   "share": [
+    0.0,
+    0.00092,
+    0.00241,
+    0.00549,
+    0.00788,
+    0.01347,
+    0.02415,
+    0.04979,
+    0.10451,
+    0.17303,
+    0.23428,
+    0.29601,
+    0.36118,
+    0.44045,
+    0.52241,
+    0.6025,
+    0.68494,
+    0.77412,
+    0.85659,
+    0.93157,
+    1.0
+   ],
+   "basis": "computed from the crater count's 902,291 candidate sites (research drive, crater-settlements/candidates.csv.gz, sha256 ede1a1fbbcde20dadaf90a1ff08748fd252fe12f0690598c8583cdb910543ad2): distance along the surface from latitude 89 degrees, at 30.32 km a degree"
+  },
+  "city_km_from_a_polar_ridge": {
+   "value": 1600.0,
+   "basis": "the four lava-tube search regions lie between 8 and 36 degrees north (lava_tube_cities README); the nearest, at 36 degrees, is 1,600 km from latitude 89"
+  },
+  "renewal_life_years": {
+   "bulk_kg": 80.0,
+   "metal_kg": 60.0,
+   "pressure_kg": 35.0,
+   "equipment_kg": 20.0,
+   "basis": "design (lava_tube_cities maintenance lives): ordinary durable stock and farm structure 80 years; supports 100 and reinforcement 50, carried as 60 for metal; liners 25 and reinforcement 50, carried as 35 for pressure components; production equipment 20, lengthened by the roadmap's life multiple. Handling, shielding and the first air and water are not renewed."
+  },
+  "local_goods_mineral_share": {
+   "value": 0.8,
+   "basis": "design: of 12,500 t of new material a year for everyday goods, 10,000 t local mineral feed and 2,500 t imported carbon feed (counted with the supplies)"
+  }
+ },
+ "industry": {
+  "basis": "Rates of work and the plant masses of the bulk lines are the study's own; the factory line's output per kilogram follows I03; energies are the designs' where stated.",
+  "lines": {
+   "handling": {
+    "plant_kg_per_kg_year": 0.0005,
+    "kWh_kg": 0.01389,
+    "jobs_per_Mt_year": 100.0,
+    "kWh_basis": "design: the first hundred towns' handling energy over the regolith handled"
+   },
+   "bulk": {
+    "plant_kg_per_kg_year": 0.02,
+    "kWh_kg": 1.111,
+    "jobs_per_Mt_year": 2000.0,
+    "kWh_basis": "design: the first hundred towns' bulk energy over the bulk products"
+   },
+   "metal": {
+    "plant_kg_per_kg_year": 0.5,
+    "kWh_kg": "metal_kWh_kg",
+    "jobs_per_Mt_year": 20000.0,
+    "kWh_basis": "the roadmap (E6)"
+   },
+   "manufactured": {
+    "plant_kg_per_kg_year": 1.5,
+    "kWh_kg": 5.0,
+    "metal_per_kg": 1.1,
+    "jobs_per_Mt_year": 200000.0,
+    "kWh_basis": "the study's own",
+    "plant_basis": "I03: factories of 6-100 t make 0.5-1 kg a year per kilogram of factory"
+   },
+   "water": {
+    "plant_kg_per_kg_year": 0.02,
+    "kWh_kg": "water_extraction_kWh_kg",
+    "jobs_per_Mt_year": 1000.0,
+    "kWh_basis": "the roadmap (E5), at the sources",
+    "plant_basis": "the study's own: mining and heating plant at the sources handling about 700 kg of 7% rock a year per kilogram of plant (bulk excavators move thousands of times their mass a year)"
+   },
+   "propellant": {
+    "plant_kg_per_kg_year": 0.01,
+    "kWh_kg": 5.0,
+    "jobs_per_Mt_year": 500.0,
+    "kWh_basis": "the study's own: electrolysis and liquefaction of water at the depot",
+    "plant_basis": "the study's own: electrolysers and liquefiers at the depot"
+   }
+  },
+  "plant_design_life_years": {
+   "value": 20.0,
+   "basis": "design: production equipment"
+  },
+  "local_manufacture_ramp_years": {
+   "value": 20.0,
+   "range": [
+    12.0,
+    30.0
+   ],
+   "basis": "L1: the imported share of equipment falls to its floor over 12 to 30 years from the start of local production"
+  },
+  "industry_power_firm_factor": {
+   "value": 1.2,
+   "basis": "the study's own margin on the industry's mean load"
+  },
+  "jobs_basis": "the study's own at 2041: 10,000 t a job-year handled, 500 t of bulk products, 50 t of metal, 5 t of manufactured goods (US machinery makers produce about 18 t a worker-year, the study's estimate), 1,000 t of water at the sources, 2,000 t of propellant",
+  "plant_margin": {
+   "value": 1.25,
+   "basis": "the study's own: each line's plant is sized a quarter above the work asked of it from outside, the margin on which the industry builds its own plant and meets years of uneven work"
+  }
+ },
+ "power": {
+  "night_hours": {
+   "value": 354.0,
+   "basis": "E2: the lunar night away from the poles"
+  },
+  "storage_local_share": {
+   "value": 0.5,
+   "basis": "the study's own: tanks and structure made on the Moon, stacks and controls bought"
+  },
+  "beam_constellation_factor": {
+   "value": 5.0,
+   "basis": "design: ten stations with two carrying the load (the compact model's reading of the founding design)"
+  },
+  "beam_receiver_kg_W": {
+   "value": 0.02,
+   "basis": "the study's own"
+  },
+  "beam_station_life_years": {
+   "value": 20.0,
+   "basis": "the study's own"
+  },
+  "array_design_life_years": {
+   "value": 20.0,
+   "basis": "design: power and storage equipment"
+  },
+  "upkeep_share_year": {
+   "value": 0.02,
+   "basis": "the study's own: upkeep of power plant each year, as a share of its capital"
+  }
+ },
+ "transport": {
+  "launch_payload_kg": {
+   "value": 100000.0,
+   "basis": "E4: a fully reusable heavy launcher's payload"
+  },
+  "launches_per_pad_year": {
+   "value": 76.0,
+   "basis": "T5: the largest authorised rate found for a heavy-lift complex"
+  },
+  "moon_to_depot_m_s": {
+   "value": 2500.0,
+   "basis": "T1: lunar surface to low lunar orbit about 1.9 km/s and on to the depot near the Earth-Moon L1 point; the study's rounding"
+  },
+  "moon_vehicle_kg_per_kg": {
+   "value": 0.3,
+   "basis": "the study's own"
+  },
+  "chemical_isp_s": {
+   "value": 450.0,
+   "basis": "hydrogen and oxygen from water (the founding tug)"
+  },
+  "tug_structure_kg_per_kg_payload": {
+   "value": 0.15,
+   "basis": "the study's own"
+  },
+  "tug_tank_kg_per_kg_propellant": {
+   "value": 0.05,
+   "basis": "the study's own"
+  },
+  "tug_round_trip_years": {
+   "value": 3.0,
+   "basis": "the founding tug's three-year round trip"
+  },
+  "electric_isp_s": {
+   "value": 2000.0,
+   "basis": "L5: thrusters on water, development target 2,000 s"
+  },
+  "electric_efficiency": {
+   "value": 0.3,
+   "range": [
+    0.125,
+    0.3
+   ],
+   "basis": "L5: the development target 30%; laboratory 12.5%"
+  },
+  "electric_powered_years": {
+   "value": 1.0,
+   "basis": "the coupled study's electric tug: one powered year in a three-year cycle"
+  },
+  "electric_leg_multiple": {
+   "value": 1.6,
+   "basis": "the coupled study's electric tug: the impulsive leg times 1.6 for slow thrust"
+  },
+  "reach_percentile": {
+   "value": "p50",
+   "options": [
+    "p05",
+    "p50",
+    "p95"
+   ],
+   "basis": "the source survey's contained water by velocity change (resources/source_access/results/reach.json.gz)"
+  },
+  "electric_drive_USD2026_W": {
+   "value": 5.0,
+   "basis": "the coupled study's electric tug: drives at 5 USD2026 a watt"
+  },
+  "electric_drive_life_years": {
+   "value": 10.0,
+   "basis": "the coupled study's electric tug: worn out after about ten years in service"
+  },
+  "depot_propellant_per_kg_landed_from_Earth": {
+   "value": 1.0,
+   "from_year": 20,
+   "basis": "the study's own: the descent from the depot and the lander's return on depot propellant, from year 20 when the coupled study moved the Earth leg's propellant to the depot; before, the Earth leg carries its own"
+  },
+  "asteroid_water_grade": {
+   "value": 0.07,
+   "range": [
+    0.05,
+    0.13
+   ],
+   "basis": "E5: water in carbonaceous asteroids 5%, 7% and 13%; the feed mined is the contained water drawn over the grade"
+  }
+ },
+ "sales": {
+  "visitor_cap_share": {
+   "static": 0.0001,
+   "slow": 0.0001,
+   "central": 0.001,
+   "fast": 0.01,
+   "basis": "the compact model's bound: the share of the world's people who could visit in a year, the study's own"
+  },
+  "computing_hardware_kg_W": {
+   "value": 0.015,
+   "basis": "the study's own: about 15 kg of servers, racks and cooling a kilowatt"
+  },
+  "computing_hardware_life_years": {
+   "value": 5.0,
+   "basis": "the study's own"
+  },
+  "computing_overhead": {
+   "value": 1.3,
+   "basis": "the study's own: cooling and distribution over the servers' power"
+  },
+  "hotel_staff_per_bed": {
+   "value": 0.25,
+   "basis": "the coupled study's programme.json"
+  },
+  "depot_sales_cap_multiple": {
+   "static": 100.0,
+   "slow": 100.0,
+   "central": 1000.0,
+   "fast": 10000.0,
+   "basis": "the study's own bound, like the bound on visits: propellant and material sold at the depot at most this many times the scenario's 2049 quantity grown with activity in space, saturating smoothly, since one elasticity at every price would otherwise sell without limit as costs fall"
+  }
+ },
+ "growth": {
+  "rule": {
+   "value": "steady",
+   "options": [
+    "steady",
+    "fastest",
+    "most_by_2241"
+   ],
+   "basis": "choice 4, open"
+  },
+  "opening_funding_limit": {
+   "value": "constant_growth",
+   "basis": "the coupled study's rule for residents as a result: the opening funding may be no larger than the constant-growth ramp's"
+  }
+ },
+ "founding": {
+  "build_years": {
+   "value": [
+    3,
+    7
+   ],
+   "basis": "the study's own: the opening settlements are built in years 3 to 7 by the seed industry delivered in years 0 to 4"
+  },
+  "seed_years": {
+   "value": [
+    0,
+    4
+   ],
+   "basis": "the study's own"
+  }
+ }
+}
