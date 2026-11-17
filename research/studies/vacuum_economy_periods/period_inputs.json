@@ -437,6 +437,52 @@
     0.13
    ],
    "basis": "E5: water in carbonaceous asteroids 5%, 7% and 13%; the feed mined is the contained water drawn over the grade"
+  },
+  "fleet_turnover": {
+   "basis": "17 November 2026: the fleet turns over as fleets of heavy equipment do, buying the newest kind as the factories can build it, keeping the old until it wears out, reselling used tugs in varied condition and taking the rest apart for parts and metal. Values from the fleet-turnover lookup [research drive: vacuum-economy/research/fleet_turnover/, lookup of 17 November 2026, 44 sources], whose terrestrial analogues are aircraft, ships and heavy machinery; a tug that fetches water from asteroids is assumed to turn over as those do.",
+   "new_kind_shares": {
+    "value": [0.12, 0.32, 0.62, 0.86, 0.96],
+    "basis": "the share of last year's tug building a new kind can take in its first five years: the A320neo's share of its family's deliveries in 2016-2020, 12.5, 32.4, 61.7, 85.8 and 96.6% (WP-A320, derived)"
+   },
+   "early_retirement_share_year": {
+    "value": 0.08,
+    "range": [0.05, 0.14],
+    "basis": "the most of an outclassed kind retired early in a year: the share of a fleet changing owner each year, 4-8% of ship deadweight and at most 14% of aircraft (ALLIED24, holding times and used trades)"
+   },
+   "resale_share": {
+    "value": 0.2,
+    "range": [0.1, 0.3],
+    "basis": "the share of tugs retired early, or whose kind no longer closes the leg, that find buyers elsewhere in space: about a fifth of passenger widebodies were converted to freighters for a second life (AC20); no direct measure of the split between second operators and dismantling"
+   },
+   "used_value_decline_year": {
+    "value": 0.1,
+    "range": [0.085, 0.12],
+    "basis": "the yearly fall in a used tug's value once a better kind is in production: 8.5% a year for the 757-200 and 12% for the 737-400, against 5.5% for types still in demand (CV14)"
+   },
+   "used_value_floor": {
+    "value": 0.14,
+    "range": [0.1, 0.18],
+    "basis": "the floor under a used tug's value from its parts and metal, against the cost of building it new: ships' recycling value 16-18% of the newbuilding price (BW25), scrap sales 12.8-14.3%, an A319 airframe's part-out sales about 16% of its price new (MBA-SP22)"
+   },
+   "condition_factor": {
+    "value": 1.0,
+    "range": [0.8, 1.2],
+    "basis": "what tugs of varied condition fetch on average against the value of one of their age: condition moves single prices widely (an old aircraft from 0.25 to 1.75 times its half-life value by maintenance status) but a mixed batch sells near the mean; the range is the market-cycle factor, falls of 10-20% in crises and premiums when new deliveries are years away (CV14, ALLIED24)"
+   },
+   "spares_share_of_mass": {
+    "value": 0.15,
+    "range": [0.1, 0.18],
+    "basis": "the share of a retired tug's mass reused as spares for tugs of its kind, taken from the value recovered by parting aircraft out: an A319's parts sold for about 16% of its price new over five years (MBA-SP22), engines carrying 60-67% of teardown value (AC17)"
+   },
+   "recycled_share_of_mass": {
+    "value": 0.9,
+    "range": [0.9, 0.95],
+    "basis": "the share of the rest recycled as metal for the factories: teardown companies reuse or recycle 90% or more of an aircraft's weight (AW19)"
+   },
+   "switch_margin": {
+    "value": 0.1,
+    "basis": "the study's own: how much less another kind must cost, on the leg ahead, before the factories change the kind they build; fleets do not change type for a small saving"
+   }
   }
  },
  "sales": {

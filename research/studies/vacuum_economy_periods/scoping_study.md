@@ -15,9 +15,9 @@ abstract: |
 
 ## The answer
 
-On the study's central assumptions the enclosed buildout pays for itself and goes on growing past its plan. With central paths of technology, central demand from Earth and U as its money, the settlements reach the planned 6.47 million residents in 2143, about a century ahead of the programme's own schedule, and carry 20.6 million by 2341 (Figure 1). The funding partners put in 1.78 trillion dollars, 1.21 trillion of it before the settlements open in 2049. They are repaid by 2081 and earn a real return of 3.9% a year, above the 3% the programme requires. U passes all five of the study's tests of a safe and healthy policy in every year, and the settlements never borrow from their funders after repaying them.
+On the study's central assumptions the enclosed buildout pays for itself and goes on growing past its plan. With central paths of technology, central demand from Earth and U as its money, the settlements reach the planned 6.47 million residents in 2142, about a century ahead of the programme's own schedule, and carry 20.1 million by 2341 (Figure 1). The funding partners put in 1.77 trillion dollars, 1.21 trillion of it before the settlements open in 2049. They are repaid by 2081 and earn a real return of 3.9% a year, above the 3% the programme requires. U passes all five of the study's tests of a safe and healthy policy in every year, and the settlements never borrow from their funders after repaying them.
 
-Kept in dollars alone, the same settlements carry 16.1 million residents by 2341 and return 4.5% a year to their funders, who are repaid by 2079. U lets the settlements grow by about a quarter more, at a cost of six-tenths of a point in the funders' return. Two paths do not pay. The programme's own pace of 3.3% a year, carried on past 2241, falls into deficit for good from about 2261. And with technology held at its 2041 state, the settlements cannot grow past their first 12,500 residents under any demand, and the funders never earn their 3%.
+Kept in dollars alone, the same settlements carry 16.2 million residents by 2341 and return 4.5% a year to their funders, who are repaid by 2079. U lets the settlements grow by about a quarter more, at a cost of about half a point in the funders' return. Two paths do not pay. The programme's own pace of 3.3% a year, carried on past 2241, falls into deficit for good from about 2260. And with technology held at its 2041 state, the settlements cannot grow past their first 12,500 residents under any demand, and the funders never earn their 3%.
 
 ![Residents of the enclosed settlements under the base case (U, residents a result), the same settlements in dollars alone, and the programme's ramp of 3.3% a year carried on past the plan; central demand and technology. Logarithmic scale.](figures/residents.pdf){width=100%}
 
@@ -25,15 +25,15 @@ Kept in dollars alone, the same settlements carry 16.1 million residents by 2341
 
 | Measure | U, the base case | Dollars alone |
 |:--|--:|--:|
-| Planned 6.47 million residents reached | 2143 | 2150 |
-| Residents in 2241 | 11.5 million | 10.0 million |
-| Residents in 2341 | 20.6 million | 16.1 million |
-| Funding needed, trillions of 2041 dollars | 1.78 | 1.67 |
-| of it before the opening in 2049 | 1.21 | 1.09 |
+| Planned 6.47 million residents reached | 2142 | 2150 |
+| Residents in 2241 | 11.4 million | 10.0 million |
+| Residents in 2341 | 20.1 million | 16.2 million |
+| Funding needed, trillions of 2041 dollars | 1.77 | 1.65 |
+| of it before the opening in 2049 | 1.21 | 1.08 |
 | Funding repaid | 2081 | 2079 |
 | Funders' real rate of return | 3.9% a year | 4.5% a year |
-| Funders' present value at 3%, to 2341, trillions | 0.78 | 1.30 |
-| Funders' net receipts to 2341, undiscounted, trillions | 29.0 | 53.2 |
+| Funders' present value at 3%, to 2341, trillions | 0.79 | 1.30 |
+| Funders' net receipts to 2341, undiscounted, trillions | 26.7 | 44.0 |
 | U's lowest value, dollars a U | 0.77 | |
 | Years failing a test of the money's safety | none | |
 
@@ -41,14 +41,14 @@ Kept in dollars alone, the same settlements carry 16.1 million residents by 2341
 
 Four things decide whether the settlements pay and how large they grow. In order of their effect on the residents they carry by 2341 (Figure 7), they are:
 
-- **Earth's demand** for what the settlements sell, above all the computing contracted at the opening. With low demand they cannot pay for growth at all. With 1 GW of computing contracted in place of 5 they carry 6.5 million; with 20 GW, 48.6 million.
-- **The pace of technology.** With slow technology they carry 4.4 million. Within it, launch, food and life support, and local industry decide most (Section 9).
-- **The share of their pay that residents spend on Earth.** At a fifth of their pay, the settlements carry 11.5 million; at a twentieth, 26.0 million.
-- **The arrangement of the settlements' money.** The preferred policy of U carries 4.4 million more residents than dollars alone.
+- **Earth's demand** for what the settlements sell, above all the computing contracted at the opening. With low demand they cannot pay for growth at all. With 1 GW of computing contracted in place of 5 they carry 8.1 million; with 20 GW, 48.2 million.
+- **The pace of technology.** With slow technology they carry 5.9 million. Within it, launch and local industry decide most, and power decides much of the funders' return (Section 9).
+- **The share of their pay that residents spend on Earth.** At a fifth of their pay, the settlements carry 11.8 million; at a twentieth, 30.9 million.
+- **The arrangement of the settlements' money.** The preferred policy of U carries 3.9 million more residents than dollars alone, and a floor at half of par 4.8 million more again.
 
 ## What the study does not yet establish
 
-- **Computing contracted at the opening.** Computing sold to Earth is the largest line of sale, two-fifths of receipts in 2241. It rests on 5 GW contracted at the opening, a figure no source supports, and it is the input that moves the result most: between 1 and 20 GW, the settlements carry from 6.5 to 48.6 million residents by 2341.
+- **Computing contracted at the opening.** Computing sold to Earth is the largest line of sale, two-fifths of receipts in 2241. It rests on 5 GW contracted at the opening, a figure no source supports, and it is the input that moves the result most: between 1 and 20 GW, the settlements carry from 8.1 to 48.2 million residents by 2341.
 - **The residents' and holders' behaviour.** The share of their pay residents spend on Earth and the months of spending that holders keep in U are the study's own figures.
 - **The institutions of U.** They are described by what they must do and tested against five tests, but none has been designed. The model sets U's inflation by policy; it does not compute it.
 - **Trade within the zone beyond Earth.** The settlements trade with no one beyond Earth. Earth's purchases do not grow with the settlements' people, and most residents' work goes to one another, unseen by the account. Trade within the zone has been designed as the next layer but not built.
@@ -157,13 +157,13 @@ Growth is solved as two steady rates: the highest to the plan, then the highest 
 
 The study's inputs come from three kinds of source:
 
-- eleven bounded lookups of published evidence, made between 15 and 17 November 2026 and drawing on 427 sources (Appendix C);
+- twelve bounded lookups of published evidence, made between 15 and 17 November 2026 and drawing on 471 sources (Appendix C);
 - the project's own design studies;
 - the study team's construction, where no source was found.
 
 Every input carries its basis, and Appendix B lists the main ones with their standing. Where the evidence ran out, the study states its own value and range and shows in Section 9 how far each moves the result. Examples are the share of residents' pay spent on Earth, the computing contracted at the opening, and the months of spending held in U.
 
-The figures carry a scoping study's accuracy, and less. They are the consequences of stated assumptions about technology two centuries ahead and markets that do not yet exist. Differences of up to about a million residents between nearby cases lie within the noise that lumps of reinvestment leave in the year-by-year tests. One lump can move the result by several million: when the tugs change kind, the settlements buy from Earth for a few years the new tugs their factories cannot yet make, and when that change falls in a different decade the growth past the plan changes with it (Section 9). The model is a runnable, tested calculation, whose checks are listed in Appendix A. It has not been validated against any built settlement, because none exists.
+The figures carry a scoping study's accuracy, and less. They are the consequences of stated assumptions about technology two centuries ahead and markets that do not yet exist. Differences of up to about a million residents between nearby cases lie within the noise that lumps of reinvestment leave in the year-by-year tests, and a single decade of heavy building can do more: in dollars alone with fast technology, one decade barely in deficit stops growth past the plan (Section 7). The model is a runnable, tested calculation, whose checks are listed in Appendix A. It has not been validated against any built settlement, because none exists.
 
 # Technology and engineering
 
@@ -173,7 +173,7 @@ The roadmap starts each quantity from its sourced value, follows the study's pro
 
 | | 2041 | 2091 | 2141 | 2241 |
 |:------------|----:|----:|----:|----:|
-| A kilowatt-hour on the Moon, dollars | 3.68 | 0.027 | 0.0097 | 0.0050 |
+| A kilowatt-hour on the Moon, dollars | 3.68 | 0.027 | 0.0077 | 0.0050 |
 | A kilogram landed from Earth, dollars | 2,800 | 184 | 84 | 47 |
 | A resident's passage from Earth, dollars | 2.6 million | 138,000 | 55,000 | 28,000 |
 
@@ -183,7 +183,7 @@ The roadmap starts each quantity from its sourced value, follows the study's pro
 
 **No polar grid.** A grid from the polar ridges is never chosen. Its lines grow with the square of their length, and the settlements lie 600 to 2,700 km from the ridges.
 
-**The load.** The base case's firm load is 18 GW in 2091, 215 GW in 2141, 261 GW in 2241 and 496 GW in 2341. The constellation is sized at five times its firm load, an allowance of the study's own. That comes to about 1,300 GW of stations in 2241, some 6.5 million tonnes at 202 W/kg (derived).
+**The load.** The base case's firm load is 18 GW in 2091, 173 GW in 2141, 257 GW in 2241 and 484 GW in 2341. The constellation is sized at five times its firm load, an allowance of the study's own. That comes to about 1,300 GW of stations in 2241, some 6.4 million tonnes at 202 W/kg (derived).
 
 ## Making things locally
 
@@ -193,9 +193,17 @@ The settlements' factories grow from a seed bought from Earth when local manufac
 
 The settlements' air, lakes and propellant come from water on near-Earth asteroids, mined nearest first. The project's conservation set-asides leave 90% of each body's water unmined, kept for future use, protection and uncertainty.
 
-- **Chemical tugs** fetch the water until the 2210s, on legs whose velocity change lengthens as the nearer water is drawn: 0.6 km/s at the founding, 2.3 km/s in 2091, 3.5 km/s in 2141 and about 5 km/s by 2211.
-- **Nuclear-electric tugs** take over in the late 2210s, and tugs driven by solar arrays from about 2230. Their legs reach 5.7 km/s by 2241 and 7.2 km/s from about 2300.
-- **No oversized tugs.** No tug is flown that would weigh more than five times the water it delivers in a year.
+- **Chemical tugs** fetch the water until about 2210, on legs whose velocity change lengthens as the nearer water is drawn: 1.0 km/s at the opening, 2.2 km/s in 2091, 3.5 km/s in 2141 and 4.9 km/s by 2210.
+- **Tugs driven by solar arrays** take over from about 2210. They carry a quarter of the fleet's capacity in 2214, three-quarters by 2220 and all of it from 2230, on legs of 6.2 km/s by 2241 and 7.1 km/s by 2300.
+- **No oversized tugs.** No tug is built that would weigh more than five times the water it delivers in a year.
+
+**How the fleet turns over.** The fleet turns over as fleets of heavy equipment do, on values taken from aircraft, ships and heavy machinery:
+
+- **Old tugs fly on.** A tug delivers less as the legs lengthen, and old tugs fly until they wear out or their leg no longer closes.
+- **New kinds phase in.** New tugs are of the kind that costs least on the leg they will fly halfway through their life. A new kind takes a rising share of the factories' tug building over five years, as the A320neo did of its family's deliveries.
+- **Used tugs are sold or taken apart.** Tugs retired early are partly sold used, by age and condition. The rest are taken apart for spares and metal.
+
+When the old chemical tugs' legs stop closing in about 2230, they are retired; a fifth are sold to operators elsewhere in space. The largest purchase of finished tugs and equipment from Earth is 0.68 trillion dollars in 2210, as the solar tugs begin.
 
 # Markets
 
@@ -218,17 +226,17 @@ Computing is the largest line throughout. It is sold at the price of the same se
 
 ## What they buy from Earth
 
-The settlements pay Earth 0.16 trillion dollars a year in 2091, 0.86 trillion in 2141, 1.85 trillion in 2241 and 5.6 trillion in 2341. What dominates those payments changes over the period:
+The settlements pay Earth 0.16 trillion dollars a year in 2091, 0.47 trillion in 2141, 1.88 trillion in 2241 and 5.6 trillion in 2341. What dominates those payments changes over the period:
 
 - **Early on,** mostly the shares that industrial partners and services on Earth keep of the sales they help make.
-- **In the decades of fastest building,** equipment.
-- **Late in the period,** the residents' own purchases from Earth, a tenth of their pay. They draw level with the partners' shares in the 2190s and are the largest single payment from 2215: 41% of the total in 2241 and 51% in 2341.
+- **From about 2210,** the tugs driven by solar arrays and the drives they buy from Earth, about 0.33 trillion dollars a year by 2241.
+- **Late in the period,** the residents' own purchases from Earth, a tenth of their pay. They draw level with the partners' shares in the 2190s and are the largest single payment from 2211: 40% of the total in 2241 and 52% in 2341.
 
 The residents' pay follows Earth's income per person, so their purchases grow faster than the settlements' sales. They are what limits the settlements' growth late in the horizon.
 
 ![What the settlements pay Earth and receive from Earth's customers, by kind, in the base case.](figures/flows.pdf){width=100%}
 
-**Most work is unseen by the account.** The model counts services, operators, industry and the lines of sale. That counted work fills 85% of the workforce in 2091, 63% in 2141 and 11% from 2241. The rest of the residents' work goes to one another, and nothing they make is sold. Earth's purchases do not grow with the settlements' people. That is why trade within the zone beyond Earth, and work sold to Earth at a distance, are first among the next stage's questions (Section 11).
+**Most work is unseen by the account.** The model counts services, operators, industry and the lines of sale. That counted work fills 84% of the workforce in 2091, 34% in 2141 and 10% to 11% from 2241. The rest of the residents' work goes to one another, and nothing they make is sold. Earth's purchases do not grow with the settlements' people. That is why trade within the zone beyond Earth, and work sold to Earth at a distance, are first among the next stage's questions (Section 11).
 
 # Money
 
@@ -259,10 +267,10 @@ The institution that issues U holds a partial reserve against it, as a basket:
 
 Who keeps it at its target changes with repayment. During the build, the funding partners do. After repayment, surpluses rebuild it before the funders are paid, and the funders stand behind it with a credit line. They lend what it lacks of its minimum when U is at its floor, on the terms on which they cover a year's deficit in dollars.
 
-In the base case, U stands below par for 33 of the 300 years (Figure 3):
+In the base case, U stands below par for 41 of the 300 years (Figure 3):
 
-- **2141 to 2147,** at 0.80 of par for six years and 0.85 in the seventh, while the settlements build fastest toward the plan.
-- **From 2316 to the horizon,** at 0.77 from 2317, when growth past the plan has the account in deficit and the reserve has been drawn down to what the run test asks of it. The reserve had grown to 11.3 trillion dollars by 2289.
+- **2137 to 2145,** at 0.77 of par for eight years and 0.93 in the ninth, while the settlements build fastest toward the plan.
+- **From 2310 to the horizon,** at 0.81 of par, when growth past the plan has the account in deficit and the reserve has been drawn down to what the run test asks of it. The reserve had grown to 9.6 trillion dollars by 2276.
 
 The funders never lend to the reserve.
 
@@ -277,7 +285,7 @@ Four groups hold U on Earth, each with its own instrument:
 - **Holders for use.** People on Earth who spend in the zone on its culture and visits keep three months of that spending in U. Where U pays a yield, they stake a third of it for two years and spend the reward in the zone.
 - **The funding partners** take a quarter of their returns in U, spend part of it in the zone and convert the rest.
 
-In the base case Earth holds 0.35 trillion dollars' worth of U in 2241 and 0.85 trillion in 2341, most of it with the holders for use (Figure 4). Investors buy bonds only while U recovers toward par after a fall, expecting its appreciation to go on; they hold up to 0.27 trillion dollars' worth around 2151. They come for nothing else: a new currency pays a premium of about 3.5 points over Earth's safe rate, the median for emerging markets' currencies, and the yield the zone's growth allows never reaches it.
+In the base case Earth holds 0.34 trillion dollars' worth of U in 2241 and 0.85 trillion in 2341, most of it with the holders for use (Figure 4). Investors buy bonds only while U recovers toward par after a fall, expecting its appreciation to go on; they hold up to 0.33 trillion dollars' worth around 2149. They come for nothing else: a new currency pays a premium of about 3.5 points over Earth's safe rate, the median for emerging markets' currencies, and the yield the zone's growth allows never reaches it.
 
 ![Earth's holdings of U by group in the base case, in dollars at each year's rate.](figures/holdings.pdf){width=100%}
 
@@ -301,27 +309,27 @@ Beside U, the study keeps the account in dollars alone. The settlements use doll
 
 ## The base case
 
-With central technology and demand and the preferred policy of U, the settlements grow 6.9% a year from the opening to the plan, reaching it in 2143. They grow 0.59% a year after that, to 20.6 million residents by 2341.
+With central technology and demand and the preferred policy of U, the settlements grow 7.0% a year from the opening to the plan, reaching it in 2142. They grow 0.57% a year after that, to 20.1 million residents by 2341.
 
 The funding partners' position (Figure 5):
 
-- **Deepest point:** 1.78 trillion dollars, 1.21 trillion of it by the opening.
+- **Deepest point:** 1.77 trillion dollars, 1.21 trillion of it by the opening.
 - **Repaid** in 2081.
-- **By 2341:** 29.0 trillion dollars more received than put in, undiscounted; a present value of 0.78 trillion at 3%; a real rate of return of 3.9% a year.
+- **By 2341:** 26.7 trillion dollars more received than put in, undiscounted; a present value of 0.79 trillion at 3%; a real rate of return of 3.9% a year.
 
-From 2281 the funders receive nothing more. The residents' purchases from Earth, growing with Earth's income, put the account into deficit. The reserve carries that deficit at first; then U's fall to 0.77 of par does.
+From 2266 the funders receive nothing more. The residents' purchases from Earth, growing with Earth's income, put the account into deficit. The reserve carries that deficit at first; then U's fall to 0.81 of par does.
 
 ![The funding partners' cumulative position, in the base case and in dollars alone.](figures/funders.pdf){width=100%}
 
 ## U against dollars alone
 
-Kept in dollars alone, the same settlements reach the plan in 2150 and carry 16.1 million residents by 2341. The funders need less (1.67 trillion dollars) and are repaid two years sooner. They earn more, 4.5% a year and 53.2 trillion dollars undiscounted, because the settlements grow less.
+Kept in dollars alone, the same settlements reach the plan in 2150 and carry 16.2 million residents by 2341. The funders need less (1.65 trillion dollars) and are repaid two years sooner. They earn more, 4.5% a year and 44.0 trillion dollars undiscounted, because the settlements grow less.
 
-The study can separate three reasons U lets the settlements grow larger:
+The study can separate the reasons U lets the settlements grow larger:
 
-- **The rate absorbs late shortfalls** by lowering what residents buy from Earth. In dollars the funders would have to cover those shortfalls, which the growth test does not allow for long. Held at par, U carries 18.9 million.
+- **The rate absorbs late shortfalls** by lowering what residents buy from Earth. In dollars the funders would have to cover those shortfalls, which the growth test does not allow for long. Held at par, U carries 18.9 million; with its floor at half of par, 24.9 million.
 - **The holders for use lend the zone their U without interest** as their spending grows: 0.22 trillion dollars' worth in 2241. Holding one month of spending instead of three, they carry 19.6 million.
-- **The funders' U spent in the zone leaves its dollars with the zone** as savings, which hold the reserve through lumps of reinvestment. With none of the funders' returns in U, the result is 17.3 million.
+- **The funders' U spent in the zone** leaves dollars with the zone as savings. It adds little: with none of the funders' returns in U, the result is 19.6 million.
 
 Against these, U's reserve earns Earth's 1% while the funders require 3%.
 
@@ -329,12 +337,12 @@ Against these, U's reserve earns Earth's 1% while the funders require 3%.
 
 On the programme's own ramp, 3.3% a year from 2049 to the plan in 2241, the settlements:
 
-- need 1.64 trillion dollars of funding up to 2241;
+- need 1.63 trillion dollars of funding up to 2241;
 - repay it in 2076;
-- return 5.2% a year to their funders to 2241;
+- return 5.3% a year to their funders to 2241;
 - receive 0.78 trillion dollars more from Earth than they pay Earth in 2241.
 
-Carried on at the same rate past 2241, the ramp fills the eventual crater sites with 167 million residents by 2341. But the settlements' account is in deficit for good from about 2261. By 2341 U stands at its floor, and the funders would have lent some 720 trillion dollars. The programme's pace is affordable to the plan and not much beyond it.
+Carried on at the same rate past 2241, the ramp fills the eventual crater sites with 167 million residents by 2341. But the settlements' account is in deficit for good from about 2260. By 2341 U stands at its floor, and the funders would have lent some 770 trillion dollars. The programme's pace is affordable to the plan and not much beyond it.
 
 ## Across demand and technology
 
@@ -342,19 +350,21 @@ Carried on at the same rate past 2241, the ramp fills the eventual crater sites 
 |:--|:--|--:|:--|--:|:--|
 | Low | slow or central | no growth | | no growth | |
 | Low | fast | 6.7 million | 2337 | 2.9 million | not reached |
-| Central | slow | 4.4 million | not reached | 6.7 million | 2328 |
-| Central | central | 20.6 million | 2143 | 16.1 million | 2150 |
-| Central | fast | 30.1 million | 2115 | 23.5 million | 2118 |
-| High | slow | 66.5 million | 2166 | 53.3 million | 2170 |
-| High | central | 24.6 million | 2113 | 23.9 million | 2109 |
-| High | fast | no growth | | 1.1 million | not reached |
+| Central | slow | 5.9 million | not reached | 7.5 million | 2318 |
+| Central | central | 20.1 million | 2142 | 16.2 million | 2150 |
+| Central | fast | 30.2 million | 2115 | 6.6 million | 2123 |
+| High | slow | 64.0 million | 2162 | 50.5 million | 2164 |
+| High | central | 20.2 million | 2111 | 20.1 million | 2109 |
+| High | fast | no growth | | 1.3 million | not reached |
 
 With technology held at its 2041 state, no growth passes under any demand, in U or in dollars.
 
 U carries more residents than dollars wherever demand and technology let the settlements grow at all (Figure 6), with two exceptions:
 
 - **Slow technology on central demand.** There the funders barely earn 3% in either currency, and U's reserve, held through the build at 1%, costs them that margin.
-- **Fast technology on high demand.** The study's own size checks show the high scenario's demand cannot be met: its depot sales and launches outgrow any supply the study can support. With fast technology, its sales at the depot draw the water open to mining down so fast that the settlements can hardly grow in either money.
+- **Fast technology on high demand.** The study's own size checks show the high scenario's demand cannot be met: its depot sales and launches outgrow any supply the study can support. With fast technology, its sales at the depot draw the water open to mining down so fast that the settlements can hardly grow in either money. With central technology the same draw caps growth past the plan, since any faster growth would exhaust the water open to mining before 2341, so high demand carries about as many residents as central demand.
+
+In dollars alone with fast technology, the decade of fastest building toward the plan, 2115 to 2124, comes out barely in deficit: the tug fleet must grow by two-thirds in six years as the legs lengthen. With no reserve to carry that decade, almost any growth past the plan fails the test, and the settlements stop at about 6.6 million. Under U the reserve carries the same decade, and they reach 30.2 million.
 
 ![Residents carried by 2341 under each demand and technology, with U and in dollars alone.](figures/grid.pdf){width=100%}
 
@@ -362,8 +372,8 @@ U carries more residents than dollars wherever demand and technology let the set
 
 | Partner | Puts in | Gets back, base case |
 |:-------|:----------|:--------------------|
-| Funding partners | 1.78 trillion dollars, 1.21 trillion before 2049 | Repaid by 2081; 3.9% a year real; 29.0 trillion dollars undiscounted to 2341 |
-| Industrial and operating partners | Equipment and services from Earth | Their shares of the sales they help make: 0.59 trillion dollars a year in 2241, 1.58 trillion in 2341; purchases of supplies (0.22 trillion in 2241) and tugs (0.29 trillion) |
+| Funding partners | 1.77 trillion dollars, 1.21 trillion before 2049 | Repaid by 2081; 3.9% a year real; 26.7 trillion dollars undiscounted to 2341 |
+| Industrial and operating partners | Equipment and services from Earth | Their shares of the sales they help make: 0.58 trillion dollars a year in 2241, 1.58 trillion in 2341; purchases of supplies (0.22 trillion in 2241) and of tugs and their drives (0.33 trillion) |
 | Customers | 1.96 trillion dollars a year in 2241 | Computing, visits, entertainment, hosted work, propellant, material and metals |
 | Holders of U | Dollars for their U | A unit worth at least 0.77 dollars; bonds' coupons and stakes' rewards at a yield within the zone's growth |
 | Residents | Their work | Pay that follows Earth's income per person, 1.5 times a high-income average in 2041; a tenth of it spent on Earth, whose buying power falls with U by at most a quarter |
@@ -378,55 +388,52 @@ Figure 7 moves one input at a time from the base case and shows the change in re
 
 ![Change in residents carried by 2341 when one input is moved from the base case, largest first.](figures/sensitivities.pdf){width=100%}
 
-- **Computing contracted at the opening.** 1 GW in place of 5 takes 14.0 million residents away; 20 GW adds 28.1 million. Computing is the largest line of sale and grows with Earth's output from what is contracted at the opening, so the contract sets its size for three centuries.
-- **Earth's demand.** Low demand stops growth altogether; high demand adds 4.0 million.
-- **Technology.** Slow technology takes 16.1 million residents away; fast adds 9.6 million.
-- **Residents' spending on Earth.** A fifth of their pay instead of a tenth takes 9.0 million away; a twentieth adds 5.4 million.
-- **Money.** Dollars alone take 4.4 million away, and the conservative policy of U 3.7 million. The conservative policy pays no yield and keeps a year of payments in reserve.
-- **Water.** Without the conservation set-asides, the settlements could carry 3.8 million more. Their water would cost less, at the price of the protection the set-asides give.
+- **Computing contracted at the opening.** 1 GW in place of 5 takes 12.0 million residents away; 20 GW adds 28.1 million. Computing is the largest line of sale and grows with Earth's output from what is contracted at the opening, so the contract sets its size for three centuries.
+- **Earth's demand.** Low demand stops growth altogether. High demand adds almost nothing, because its sales at the depot draw the water open to mining so fast that faster growth past the plan would exhaust it before 2341.
+- **Technology.** Slow technology takes 14.2 million residents away; fast adds 10.1 million.
+- **Residents' spending on Earth.** A fifth of their pay instead of a tenth takes 8.3 million away; a twentieth adds 10.9 million.
+- **The floor on U's rate.** Held at par, U carries 1.2 million fewer; floored at half of par, 4.8 million more, since a lower floor lets the residents' purchases from Earth absorb more of the late shortfalls.
+- **Water.** Without the conservation set-asides, the settlements could carry 4.3 million more. Their water would cost less, at the price of the protection the set-asides give.
+- **Money.** Dollars alone take 3.9 million away. The conservative policy of U, which pays no yield and keeps a year of payments in reserve, takes 0.5 million.
 
-The remaining inputs each move the result by 3.3 million or less:
+The remaining inputs each move the result by 2.3 million or less:
 
-- the funders' returns paid in U;
-- Earth's purchases falling a tenth when paid in U;
-- the holders' spending of their U in the zone;
-- the floor on U's rate, which moves the result by about 1.6 million either way between par and 50%;
-- the response of visits to their price, which within its published range of 0.5 to 2 moves the result by about 1.5 million, lower at either end;
-- the months of spending held in U;
-- the bonds' term;
-- the investors' premium;
-- the metals in the reserve.
+- Earth's purchases falling a tenth when paid in U, 2.3 million fewer;
+- the response of visits to their price, 0.7 million fewer at 0.5 and 0.5 million more at 2, the ends of its published range;
+- the funders' returns paid in U, the holders' spending of their U in the zone and the months of spending held in U, about half a million each;
+- the metals in the reserve, 0.4 million;
+- the bonds' term and the investors' premium, nothing.
 
-The funders' credit line changes nothing in the base case, which never draws on it. Without it, the conservative policy falls from 16.8 to 12.1 million.
+The funders' credit line changes nothing in the base case, which never draws on it, and the conservative policy carries 19.6 million with or without it.
 
 **Technology group by group.** The technology stack falls into six groups that develop apart from one another. Moving each alone to its slow and its fast path, the rest central, shows which of them the settlements depend on:
 
 | Group moved alone (slow · fast) | Residents by 2341 | Plan reached | Funders' present value at 3%, trillions |
 |:------------------|:------------|:--------|--------:|
-| Launch from Earth and the Moon | none beyond 12,500 · 15.9 million | never · 2135 | −0.24 · 1.58 |
-| Food and life support | 7.7 · 20.2 million | 2144 · 2142 | 0.96 · 0.82 |
-| Local industry, equipment and output per job | 13.8 · 16.6 million | 2175 · 2129 | 0.80 · 0.75 |
-| Power | 19.3 · 19.7 million | 2149 · 2141 | 0.36 · 0.91 |
-| Tugs and water from the sources | 19.8 · 19.6 million | 2142 · 2141 | 0.67 · 0.71 |
-| Computation per watt (not read by the model) | 20.6 · 20.6 million | 2143 · 2143 | 0.78 · 0.78 |
-| The base case, for comparison | 20.6 million | 2143 | 0.78 |
+| Launch from Earth and the Moon | none beyond 12,500 · 18.9 million | never · 2134 | −0.22 · 1.54 |
+| Local industry, equipment and output per job | 12.9 · 22.6 million | 2174 · 2130 | 0.80 · 0.78 |
+| Food and life support | 18.7 · 19.7 million | 2143 · 2142 | 0.64 · 0.85 |
+| Power | 19.2 · 19.8 million | 2148 · 2141 | 0.36 · 0.88 |
+| Tugs and water from the sources | 19.7 · 19.7 million | 2141 · 2142 | 0.68 · 0.84 |
+| Computation per watt (not read by the model) | 20.1 · 20.1 million | 2142 · 2142 | 0.79 · 0.79 |
+| The base case, for comparison | 20.1 million | 2142 | 0.79 |
 
 The slow side shows what the settlements cannot do without:
 
 - **Launch.** Slow launch alone stops all growth, and the funders do not earn their 3%.
-- **Food and life support.** Slow food and life support still reaches the plan on time. But each resident then costs the account more, so growth past the plan nearly stops.
-- **Local industry.** Slow local industry delays the plan by 32 years.
+- **Local industry.** Slow local industry delays the plan by 32 years and carries 12.9 million by 2341.
 - **Power.** Slow power barely changes the residents, but more than halves the funders' present value.
+- **Food and life support.** Slow food and life support costs 1.4 million residents and a fifth of the funders' present value.
 - **Computation per watt** changes nothing, because the model sells computing by the watt of capacity, at the price of the same capacity on Earth, and does not read this path.
 
-The fast side needs care. Launch or local industry made fast alone brings the plan sooner, in 2135 or 2129, yet carries fewer residents by 2341. Reaching the plan sooner draws the nearer water sooner, so the tugs change from chemical to nuclear-electric earlier, around 2201 to 2209 against 2212 in the base case. From the change on, every tug added is of the new kind, nearly twice as heavy per kilogram of water it delivers a year, while the old tugs fly on until they wear out. The settlements' factories cannot raise their output that fast, so for three or four years the shortfall is bought finished from Earth: about 4.0 trillion dollars in the base case (2212–2214) and 5.5 trillion with launch fast (2208–2211). Landing those imports takes propellant from the depot, which asks for more water and more tugs. Arriving earlier, the purchase falls in a decade the account cannot carry at the higher rates of growth past the plan, and that decade limits them. Buying the new kind only as fast as the factories can make it would spread the purchase.
+On the fast side, local industry alone brings the plan to 2130 and carries 22.6 million by 2341. Launch alone brings the plan to 2134 and nearly doubles the funders' present value; its residents by 2341, 18.9 million, fall a little short of the base case, within the variation between neighbouring cases.
 
 ## Risks
 
 - **Demand at the opening.** Computing contracted at the opening (5 GW in 2049) is the study's own figure, and the input that moves the result most. Visits rest on an elasticity of demand constructed between two published values. Together these two lines are nearly three-quarters of the receipts in 2241.
-- **The residents' purchases from Earth.** They are the largest payment from 2215 and the input to which late growth is most sensitive. The share is the study's own figure, tried at 5%, 10% and 20%.
+- **The residents' purchases from Earth.** They are the largest payment from 2211 and the input to which late growth is most sensitive. The share is the study's own figure, tried at 5%, 10% and 20%.
 - **The pace of technology.** The settlements pay only if their engineering improves on roughly the central paths. With technology held at 2041, no growth passes. Launch prices, which the wider space industry sets, are a gate on their own.
-- **Lumps of reinvestment.** A change of power supply or a surge of building can put a single year deep into deficit. The reserve, the floor on U and the funders' credit line carry such years; without the credit line, the conservative policy carries more than a quarter fewer residents.
+- **Lumps of reinvestment.** A change of power supply, a change of tug kind or a surge of building can put a single year deep into deficit. Under U the reserve, the floor and the funders' credit line carry such years; in dollars alone with fast technology, one such decade stops growth past the plan.
 - **The institutions of U.** These have not been designed:
   - the issuer and its decision rights;
   - the reserve's custody;
@@ -435,28 +442,28 @@ The fast side needs care. Launch or local industry made fast alone brings the pl
 
   The model's investors expect U's recent change in value to continue, which brings them in during recoveries. Their real behaviour toward a new currency is unknown.
 
-- **The far horizon.** Growth past the plan pushes the account to its limit by 2341, by construction of the growth test. If growth stopped in 2341, the base case's account would not fall into deficit for good until about 2586.
+- **The far horizon.** Growth past the plan pushes the account to its limit by 2341, by construction of the growth test. If growth stopped in 2341, the base case's account would not fall into deficit for good until about 2646.
 
 # Resource limits
 
-**Water.** With the project's set-asides, the base case's settlements, held at their 2341 size afterwards, draw the water open to mining until about 2672 on the source survey's median. They draw it until about 2528 on its 5th percentile, where growth as a result is itself slower (8.4 million). With the survey's whole pool, the water lasts beyond the study's projection to 3541.
+**Water.** With the project's set-asides, the base case's settlements, held at their 2341 size afterwards, draw the water open to mining until about 2658 on the source survey's median. They draw it until about 2374 on its 5th percentile, where growth as a result is itself slower (17.6 million). With the survey's whole pool, the water lasts beyond the study's projection to 3541.
 
 **Sites.** The eventual set of crater sites holds 167 million residents in towns of 750, and growth as a result never fills it.
 
-**The programme's pace.** Carried on past 2241, it fills the sites in 2341. It then runs out of the water open to mining in 2346, or by 2316 on the low estimate.
+**The programme's pace.** Carried on past 2241, it fills the sites in 2341. It then runs out of the water open to mining in 2343, or by 2312 on the low estimate.
 
 **Regolith and metal** do not bind: the buildout handles a few hundred tonnes of rock per resident.
 
-In every path the account with Earth limits growth before any resource does. Growth as a result stops where the account allows, far short of the sites, and the programme's pace runs into lasting deficit eight to eleven decades before its water runs out.
+On the survey's median, in every path the account with Earth limits growth before any resource does. Growth as a result stops where the account allows, far short of the sites, and the programme's pace runs into lasting deficit eight to eleven decades before its water runs out.
 
 | Path, central demand | Technology | Sites full | Account in deficit for good | Water open to mining runs out (median · 5th percentile · whole pool) |
 |:----------|:-----|:--------|:------|:----------|
-| The programme's ramp carried on | central | 2341 (167 million) | 2261 | 2346 · 2316 · 2901 |
-| | fast | 2341 (167 million) | 2267 | 2351 · 2319 · 2918 |
-| | slow | not filled | 2226 | 2333 · 2302 · 2716 |
-| Growth as a result, held after 2341 | central (20.6 million) | never | 2586 | 2672 · 2528 · lasts |
-| | fast (30.1 million) | never | none | 2563 · 2349 · lasts |
-| | slow (4.4 million) | never | 2667 | lasts · 3017 · lasts |
+| The programme's ramp carried on | central | 2341 (167 million) | 2260 | 2343 · 2312 · 2863 |
+| | fast | 2341 (167 million) | 2270 | 2350 · 2317 · 2899 |
+| | slow | not filled | 2228 | 2333 · 2301 · 2708 |
+| Growth as a result, held after 2341 | central (20.1 million) | never | 2646 | 2658 · 2374 · lasts |
+| | fast (30.2 million) | never | none | 2540 · 2343 · lasts |
+| | slow (5.9 million) | never | 2666 | 3509 · 2816 · lasts |
 
 On the 5th percentile, growth as a result is solved under that reading of the water, so the residents it carries differ.
 
@@ -480,7 +487,7 @@ The study team recommends that the partners proceed to a pre-feasibility study o
 4. The lines of sale are priced from the year's costs and served where they pay.
 5. Firm power and the industry's energy are solved together, and capacity is added from the cheapest option at each kind of site.
 6. Industrial plant is sized to the work asked of it.
-7. Water is fetched by the cheapest tug on the leg of the water being mined.
+7. Water is fetched by the tug fleet on the leg of the water being mined. The fleet turns over as fleets of heavy equipment do: new tugs of the kind that costs least on the leg expected halfway through their life, phased in as the factories can build them, and old tugs flying on until they wear out, or retired early and sold used or taken apart for spares and metal.
 8. What cannot be made is bought from Earth.
 9. The hands the work needs are counted against the workforce. Industry's work beyond the hands available is done from Earth by teleoperation and paid there.
 10. Under U, the ledger then sets the year's rate, the reserve and Earth's holdings, and the funders' flows.
@@ -494,7 +501,7 @@ The study team recommends that the partners proceed to a pre-feasibility study o
 
 Each rate is found by halving and then checked against twenty slower rates. If any of those fails, the search is repeated below it.
 
-**Checks.** The study's 33 tests confirm that:
+**Checks.** The study's 35 tests confirm that:
 
 - the paths of technology hold their stated values;
 - with 2041's engineering, the founding system returns its design's quantities;
@@ -511,7 +518,9 @@ Each rate is found by halving and then checked against twenty slower rates. If a
 - the saved results, and this study's measures drawn from them, are current with the model and its inputs;
 - the funders' rate of return is recovered from flows whose rate is known;
 - a case can move one group of the technology stack to another path while every other quantity keeps its own;
-- the options for computing contracted at the opening and for the visits' response to price leave a case unchanged at the scenario's own values and move their own lines otherwise.
+- the options for computing contracted at the opening and for the visits' response to price leave a case unchanged at the scenario's own values and move their own lines otherwise;
+- the tug fleet always carries the year's water, changes kind gradually, and sells used tugs only in years some are retired early;
+- a tug flies on beyond the limit on building it, delivering less, until its leg no longer closes.
 
 # Appendix B. Main inputs {-}
 
@@ -536,6 +545,10 @@ Each rate is found by halving and then checked against twenty slower rates. If a
 | Funders' returns paid in U | a quarter, 30% of it spent in the zone | The study's own; the spending share has no source |
 | Floor on U's rate | 75% of par (par and 50% as cases) | A setting of the policy |
 | Reserve's metals | a fifth of the reserve | Sourced: gold makes 16% to 27% of the world's official reserves |
+| A new kind of tug's share of tug building in its first five years | 12%, 32%, 62%, 86% and 96% | Sourced: the A320neo's share of its family's deliveries, 2016 to 2020 |
+| Tugs retired early | at most 8% of an outclassed kind a year; a fifth sold used, the rest taken apart | Sourced: 5% to 14% of fleets change owner a year; about a fifth of passenger widebodies get a second life as freighters |
+| Value of a used tug | falling 10% a year of age, to a floor of 14% of the cost new | Sourced: 8.5% to 12% a year for aircraft types displaced by a successor; parts and scrap keep 10% to 18% |
+| A dismantled tug | 15% of its mass reused as spares, 90% of the rest recycled | Sourced: an aircraft's parts sell for about 16% of its price new; 90% or more of its weight is reused or recycled |
 | Dollars held, in dollars alone | 6% of output | Sourced: replacing a currency has cost 4% to 8% of output |
 | Change in Earth's purchases when paid in U | none (a tenth fewer as a case) | Sourced: when partners stop sharing a currency, estimates of the fall in their trade run from nothing to about a half |
 
@@ -554,6 +567,7 @@ Each rate is found by halving and then checked against twenty slower rates. If a
 | Money in U | 16–17 November 2026 | 61 | Outside holdings of a currency, reserve adequacy, runs, inflation targets, interest against growth |
 | Premia, money and trade | 17 November 2026 | 54 | New currencies' premia, money in dollarized economies, trade after a shared currency ends, gold in reserves |
 | Trade within the zone | 17 November 2026 | 52 | The space economy, supplies for crews, cargo costs, knowledge work sold at a distance; for the next stage |
+| Fleet turnover | 17 November 2026 | 44 | Used values of aircraft, ships and machinery by age and condition, parting out and recycling, how fast fleets change type |
 
 Each lookup records every value with the level at which it was read, from the passage itself to a search summary. It also records the sources that could not be opened.
 

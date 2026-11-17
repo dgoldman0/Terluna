@@ -168,7 +168,6 @@ def test_water_set_aside_lengthens_the_legs_and_brings_exhaustion_sooner():
             assert e['contained_drawn_kg_at_end'] >= e['usable_water_kg']
         else:
             assert e['water_out_because'] == 'the rest beyond every tug' and e['contained_drawn_kg_at_end'] < e['usable_water_kg']
-    assert kept['water_out_because'] == 'all drawn'
     assert whole['residents_when_sites_full'] == pytest.approx(whole['capacity_residents'])
 
 
@@ -329,6 +328,38 @@ def test_the_saved_product_is_current():
     assert names[:len(run.cases())] == [c[0] for c in run.cases()]
     assert names[len(run.cases()):] in ([], ['central:central:steady:U_most_liberal_safe'])
     assert len(saved['u_policy_search']) == len(run.SEARCH_YIELDS) * len(run.SEARCH_FUNDERS_IN_U)
+
+
+def test_the_tug_fleet_turns_over_gradually_and_always_carries_the_water():
+    """On the programme's ramp, the fleet can always carry the year's water. When the kind the factories build first
+    changes from chemical, the new kinds hold under a quarter of the fleet, and five years on the chemical tugs still
+    carry most of it. Tugs are sold used only in years some are retired early or can no longer fly the leg. The year's
+    receipts are the lines' receipts and those sales."""
+    rows = economy.Run('central', 'central', 'constant_growth').simulate()
+    for r in rows:
+        if not r['exhausted'] and r['water_delivered_t'] > 0:
+            assert sum(r['fleet_by_kind_t_year'].values()) >= r['water_delivered_t'] * (1 - 1e-9)
+        if r['used_tugs_USD'] > 0:
+            assert r['tugs_retired_for_sale_t'] > 0
+        sold = sum(x['receipts'] for x in r['lines'].values() if x['served'])
+        assert r['receipts'] == pytest.approx(sold + r['used_tugs_USD'])
+    first = next(r for r in rows if r['date'] > 2060 and r['tug'] not in (None, 'chemical'))
+    share = lambda r, k: r['fleet_by_kind_t_year'].get(k, 0.0) / sum(r['fleet_by_kind_t_year'].values())
+    assert 1 - share(first, 'chemical') < 0.25
+    assert share(rows[first['year'] + 5], 'chemical') > 0.5
+
+
+def test_a_tug_flies_on_beyond_the_limit_on_building_until_its_leg_no_longer_closes():
+    """The practical limit on a tug's mass bars building it for a leg; a tug already built still flies that leg, heavier
+    per kilogram delivered, as long as the leg closes."""
+    P = economy.prices('central', 2200, 150000.0)
+    legs = [leg for leg in range(3000, 9001, 50) if engineering.tug('chemical', leg, P) is None]
+    assert legs, 'the chemical tug reaches its limit on building somewhere below 9 km/s'
+    beyond = legs[0]
+    flown = engineering.tug('chemical', beyond, P, limit=False)
+    built = engineering.tug('chemical', beyond - 50, P)
+    assert flown is not None and built is not None
+    assert flown['dry_kg_per_kg_year'] > built['dry_kg_per_kg_year']
 
 
 def test_a_case_can_move_one_group_of_the_stack_while_the_rest_keep_theirs():

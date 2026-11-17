@@ -175,12 +175,17 @@ def reach(percentile):
 def leg_for(drawn_kg, percentile, set_aside=0.0):
     """The leg the tugs fly once the cumulative draw of contained water has reached `drawn_kg`, mining the nearest
     water first, with a share `set_aside` of each body's water left unmined; None once the water open to mining is
-    exhausted."""
+    exhausted. Within each band of the survey the leg lengthens in step with the water drawn from the band, from its
+    lower edge to its upper, since the nearest water is mined first."""
     edges, within = reach(percentile)
+    lower, below = max(0.0, 2 * edges[0] - edges[1]), 0.0
     for edge, w in zip(edges, within):
         usable = w * (1.0 - set_aside)
         if usable >= drawn_kg and usable > 0:
-            return edge
+            if usable <= below:
+                return edge
+            return lower + (edge - lower) * max(0.0, drawn_kg - below) / (usable - below)
+        lower, below = edge, usable
     return None
 
 
@@ -189,10 +194,12 @@ def usable_water_kg(percentile, set_aside=0.0):
     return reach(percentile)[1][-1] * (1.0 - set_aside)
 
 
-def tug(kind, leg_m_s, prices):
+def tug(kind, leg_m_s, prices, limit=True):
     """One kind of tug on a leg: per kilogram of water delivered net to the depot, the water drawn at the source, the
     tug's dry mass per kilogram a year, its power, and whether it closes. Kinds: chemical (hydrogen and oxygen from the
-    water), electric (solar arrays at the year's specific power, water propellant), nuclear_electric (once arrived)."""
+    water), electric (solar arrays at the year's specific power, water propellant), nuclear_electric (once arrived).
+    The practical limit on a tug's mass applies to building new tugs (`limit`); tugs already built fly on beyond it,
+    delivering less, for as long as the leg closes at all."""
     tr = inputs()['transport']
     t = prices.t
     s, k = v(tr['tug_structure_kg_per_kg_payload']), v(tr['tug_tank_kg_per_kg_propellant'])
@@ -231,7 +238,7 @@ def tug(kind, leg_m_s, prices):
     net = 1 - f_out
     # Near the end of a tug's reach its mass per kilogram delivered grows without bound; past the practical limit the
     # leg is out of that tug's reach, since the factories could not build such a fleet as fast as the water is wanted.
-    if dry * trip / net > v(tr['tug_max_dry_kg_per_kg_year']):
+    if limit and dry * trip / net > v(tr['tug_max_dry_kg_per_kg_year']):
         return None
     return dict(kind=kind, drawn_kg=(1 + f_in) / net, dry_kg_per_kg_year=dry * trip / net, power_W_per_kg_year=power_W * trip / net,
                 propellant_kg=(f_in + f_out) / net)

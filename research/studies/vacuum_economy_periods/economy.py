@@ -147,7 +147,7 @@ class Run:
         plant = dict.fromkeys(LINES, 0.0)            # industrial plant by line, kg
         power = {}                                   # firm capacity by option, kW
         power_life = {}
-        fleet = 0.0                                  # the tug fleet's capacity, kg a year delivered
+        fleet = dict(pools={}, built_kg={})          # the tug fleet: a pool for each kind, and last year's building by kind
         drawn_contained = 0.0
         leg = engineering.leg_for(1.0, opt['reach'], set_aside)
         cumulative = 0.0
@@ -256,7 +256,7 @@ class Run:
                 production['propellant'] += out['propellant_kg']
                 extra = out['fleet_local_kg'] + lift['launcher_kg_per_kg_year'] * materials_kg * 0.05
                 production['manufactured'] += extra
-                production['metal'] += metal_per_kg * extra
+                production['metal'] = max(0.0, production['metal'] + metal_per_kg * extra - out['recycled_metal_kg'])
                 # The sources and the depot carry their own power in their plant; the Moon's firm supply serves the rest.
                 industry_kWh = sum(production[k] * self.kwh(lines[k], t) for k in ('handling', 'bulk', 'metal', 'manufactured')) + materials_kg * lift['kWh']
                 firm_kW = (mix('firm_W') + sales_W) / 1000.0 + industry_kWh / engineering.HOURS * v(ind['industry_power_firm_factor'])
@@ -322,7 +322,7 @@ class Run:
                 room = workforce - jobs['services'] - jobs['operators'] - zone_hands
                 lines_scale = 1.0 if full <= 0 else min(1.0, max(0.0, room / full))
 
-            receipts = sum(x['receipts'] for x in served.values())
+            receipts = sum(x['receipts'] for x in served.values()) + out['used_tugs_USD']
             if ledger is None and opt['dollars_held_share'] > 0:
                 # Without U the residents and firms pay one another in dollars, a stock in proportion to the zone's output
                 # that the zone must earn from Earth as it grows.
@@ -361,6 +361,9 @@ class Run:
                                  computing=computing_local_kg, bought_finished=goods_imported),
                 launches_year=launches, pads=launches / pads_rate,
                 tug=out['kind'], leg_m_s=out['leg'], water_delivered_t=out['delivered_kg'] / 1000.0, contained_drawn_t=drawn_contained / 1000.0,
+                fleet_by_kind_t_year={k: c / 1000.0 for k, c in out['fleet_by_kind'].items()}, used_tugs_USD=out['used_tugs_USD'],
+                tugs_retired_for_sale_t=out['retired_early_kg_year'] / 1000.0, fleet_metal_recycled_t=out['recycled_metal_kg'] / 1000.0,
+                fleet_built_t={k: m / 1000.0 for k, m in out['fleet_after']['built_kg'].items()},
                 exhausted=out['exhausted'], wage=wage, kWh_USD=P.kWh, fare=P.fare(), landed_USD_kg=P.landed,
                 visitors=visitors, visitor_share_of_world=visitors / self.world.population(date), trade_multiple=trade)
             if u is not None:
@@ -488,9 +491,24 @@ class Run:
     def freight(self, water_need, production, P, leg, land, y, fleet, earth_cargo_last):
         """Water delivered to the depot for the year: the settlements' makeup and first stocks landed on the Moon, the
         propellant sold or burned lifting lunar material, and from the year the depot fuels it the descent of the cargo
-        from Earth (at the last five years' average); fetched by the tug that costs least on the leg of the water being mined, nearest first. The
-        fleet, in kilograms a year it can deliver, wears out geometrically and is added to where it falls short."""
+        from Earth (at the last five years' average); fetched on the leg of the water being mined, nearest first.
+
+        The fleet turns over as fleets of heavy equipment do (`transport.fleet_turnover`). It is kept as a pool for each
+        kind of tug, with its mass and average age. A pool delivers what its mass can on the present leg, so older tugs
+        deliver less as the legs lengthen, and they fly until the leg no longer closes for their kind; each pool flies
+        its share of the year's water at its own propellant and water drawn, and wears out at one part in the tugs' life
+        a year. The tugs added each year are of the kind that costs least to build and fly on the leg the tugs will fly
+        halfway through their life, changed only for a clear saving, and as many as the factories' line for that kind
+        allows: in its first five years a new kind takes a rising share of last year's tug building, as a new aircraft
+        type took over its family's production lines, and each line otherwise grows at the industry's doubling pace;
+        the rest of the year's additions are of the kinds already being built, as far as their lines allow, and beyond
+        them of the kind that costs least bought finished from Earth. Tugs of a kind whose running cost alone exceeds the whole cost of the
+        cheapest kind are retired early, a share a year and no more than new building replaces; those, and any whose
+        kind no longer closes the leg, are sold to operators elsewhere in space where buyers take them, at a price set
+        by their age and condition. Tugs that wear out or find no buyer are taken apart: a share of their mass becomes
+        spares, which take the place of new building of the same kind, and the rest is recycled as metal."""
         tr = inputs()['transport']
+        ft = tr['fleet_turnover']
         ve = v(tr['chemical_isp_s']) * engineering.G0
         r = math.exp(v(tr['moon_to_depot_m_s']) / ve)
         descent = (1 + v(tr['moon_vehicle_kg_per_kg'])) * (r - 1)
@@ -498,35 +516,145 @@ class Run:
         if y >= v(land['from_year']):
             delivered += earth_cargo_last * v(land)
         t = P.t
-        alive = fleet * (1 - 1 / t.tug_life_years)
-        none = dict(kind=None, leg=leg, delivered_kg=delivered, drawn_kg=0.0, contained_kg=0.0, propellant_kg=0.0,
-                    fleet_local_kg=0.0, fleet_imported_kg=0.0, fleet_after=alive, drives_to_Earth=0.0,
-                    water_kg_cost=float('inf'), exhausted=True)
-        if leg is None:
-            return none
-        best = None
-        for kind in ('chemical', 'electric', 'nuclear_electric'):
-            x = engineering.tug(kind, leg, P)
+        life = t.tug_life_years
+        pools = {k: dict(p) for k, p in fleet['pools'].items() if p['mass'] > 0}
+        retired = []                                 # (kind, mass, age, whether it may be sold)
+        def retire(k, m, sellable):
+            p = pools[k]
+            m = min(m, p['mass'])
+            retired.append((k, m, p['age'], sellable))
+            p['mass'] -= m
+        for k in list(pools):
+            pools[k]['age'] += 1.0
+            retire(k, pools[k]['mass'] / life, False)
+        fleet_kg_cost = P.local_share * P.line_kg['manufactured'] + (1 - P.local_share) * P.imported_kg()
+        def costs(kind, limit, at=None):
+            x = engineering.tug(kind, leg if at is None else at, P, limit=limit)
             if x is None:
-                continue
-            fleet_kg_cost = P.local_share * P.line_kg['manufactured'] + (1 - P.local_share) * P.imported_kg()
+                return None
             drive = 0.0
             if kind == 'electric':
                 drive = x['power_W_per_kg_year'] * engineering.to2041(v(tr['electric_drive_USD2026_W'])) * t.equipment_price_multiple * engineering.crf(v(tr['electric_drive_life_years']))
-            per_kg = (x['dry_kg_per_kg_year'] * fleet_kg_cost * engineering.crf(t.tug_life_years) + drive
-                      + x['drawn_kg'] * P.line_kg['water'] + x['propellant_kg'] * P.line_kg['propellant'])
-            if best is None or per_kg < best[1]:
-                best = (x, per_kg, drive)
-        if best is None:
-            return none
-        x, per_kg, drive = best
-        drawn = delivered * x['drawn_kg']
-        add = max(0.0, delivered - alive)
-        add_kg = add * x['dry_kg_per_kg_year']
-        local = add_kg * P.local_share if y >= OPENING else 0.0
-        return dict(kind=x['kind'], leg=leg, delivered_kg=delivered, drawn_kg=drawn, contained_kg=drawn / t.water_recovered_from_rock,
-                    propellant_kg=delivered * x['propellant_kg'], fleet_local_kg=local, fleet_imported_kg=add_kg - local,
-                    fleet_after=alive + add, drives_to_Earth=delivered * drive, water_kg_cost=per_kg, exhausted=False)
+            return dict(x=x, dry=x['dry_kg_per_kg_year'], capital=x['dry_kg_per_kg_year'] * fleet_kg_cost * engineering.crf(life),
+                        running=drive + x['drawn_kg'] * P.line_kg['water'] + x['propellant_kg'] * P.line_kg['propellant'], drive=drive)
+        # Tugs are ordered for the leg they will fly halfway through their life: the last decade's lengthening of the
+        # leg, carried on.
+        legs = fleet.get('legs', [])
+        ahead = None
+        if leg is not None:
+            trend = max(0.0, (leg - legs[0]) / len(legs)) if legs else 0.0
+            ahead = leg + trend * life / 2
+        build, fly, plan = {}, {}, {}
+        if leg is not None:
+            for kind in ('chemical', 'electric', 'nuclear_electric'):
+                b = costs(kind, True)
+                if b is not None:
+                    build[kind] = b
+                    a = costs(kind, True, ahead)
+                    if a is not None:
+                        plan[kind] = a
+                f = costs(kind, False)
+                if f is not None:
+                    fly[kind] = f
+        for k in [k for k in pools if k not in fly]:
+            retire(k, pools[k]['mass'], True)        # the leg no longer closes for this kind
+        if not build:
+            for k in list(pools):
+                retire(k, pools[k]['mass'], False)
+            pools = {}
+            return dict(kind=None, leg=leg, delivered_kg=delivered, drawn_kg=0.0, contained_kg=0.0, propellant_kg=0.0,
+                        fleet_local_kg=0.0, fleet_imported_kg=0.0, fleet_after=dict(pools=pools, built_kg={}), drives_to_Earth=0.0,
+                        water_kg_cost=float('inf'), exhausted=True, used_tugs_USD=0.0, recycled_metal_kg=0.0, fleet_by_kind={},
+                        retired_early_kg_year=0.0)
+        chosen = plan or build
+        cost = lambda k: chosen[k]['capital'] + chosen[k]['running']
+        best = min(chosen, key=cost)
+        # The kind being built stays the kind ordered until another costs clearly less: fleets do not change type for
+        # a small saving.
+        kept = fleet.get('ordered')
+        if kept in chosen and kept in build and cost(kept) <= (1 + v(ft['switch_margin'])) * cost(best):
+            best = kept
+        whole = build[best]['capital'] + build[best]['running']
+        # Each kind's line in the factories makes this year what it made last year, grown at the industry's doubling
+        # pace; a kind new to the factories starts from a first tranche of last year's tug building.
+        last = fleet['built_kg']
+        last_all = sum(last.values())
+        grow = 2 ** (1 / t.industry_doubling_years)
+        first = fleet.get('first', {})
+        shares = v(ft['new_kind_shares'])
+        def line(k):
+            if last_all <= 0:
+                return float('inf')
+            grown = last.get(k, 0.0) * grow
+            if k != best:
+                return grown
+            # A kind new to the factories takes a rising share of last year's tug building, as a new aircraft type took
+            # over its family's production lines, or grows at the industry's pace where that is faster.
+            return max(grown, shares[min(y - first.get(k, y), len(shares) - 1)] * last_all)
+        cap_best = line(best) / build[best]['dry']
+        capacity = lambda k: pools[k]['mass'] / fly[k]['dry']
+        short = max(0.0, delivered - sum(capacity(k) for k in pools if pools[k]['mass'] > 0))
+        room = max(0.0, cap_best - short)
+        for k in sorted((k for k in pools if k != best and k not in last and pools[k]['mass'] > 0), key=lambda k: -fly[k]['running']):
+            if fly[k]['running'] > whole and room > 0:
+                n = min(capacity(k) * v(ft['early_retirement_share_year']), room)
+                retire(k, n * fly[k]['dry'], True)
+                room -= n
+                short += n
+        # The cheapest kind first, as far as its line allows; then the kinds already being built, as far as theirs allow
+        # and while they can still be built for the leg; what remains, of the cheapest kind, is bought finished where
+        # the factories fall short.
+        add = {best: min(short, cap_best)}
+        rest = short - add[best]
+        for k in sorted((k for k in build if k != best and last.get(k, 0.0) > 0), key=lambda k: build[k]['capital'] + build[k]['running']):
+            if rest <= 0:
+                break
+            n = min(rest, line(k) / build[k]['dry'])
+            add[k] = n
+            rest -= n
+        if rest > 0:
+            # Beyond the lines the tugs are bought finished from Earth, so the kind that costs least bought there.
+            bought = min(build, key=lambda k: build[k]['dry'] * P.imported_kg() * engineering.crf(life) + build[k]['running'])
+            add[bought] = add.get(bought, 0.0) + rest
+        # Retired tugs: sold where buyers take them, at their age's value in varied condition; the rest taken apart.
+        used_USD, spares, recycled, early_kg = 0.0, {}, 0.0, 0.0
+        for k, m, age, sellable in retired:
+            sold = m * v(ft['resale_share']) if sellable else 0.0
+            if sellable:
+                early_kg += m
+                value = max(v(ft['used_value_floor']), (1 - v(ft['used_value_decline_year'])) ** age) * v(ft['condition_factor'])
+                used_USD += sold * fleet_kg_cost * value
+            apart = m - sold
+            spares[k] = spares.get(k, 0.0) + apart * v(ft['spares_share_of_mass'])
+            recycled += apart * (1 - v(ft['spares_share_of_mass'])) * v(ft['recycled_share_of_mass'])
+        built = {}
+        for k, n in add.items():
+            if n <= 0:
+                continue
+            gross = n * build[k]['dry']
+            used = min(gross, spares.get(k, 0.0))
+            spares[k] = spares.get(k, 0.0) - used
+            built[k] = gross - used
+            p = pools.setdefault(k, dict(mass=0.0, age=0.0))
+            p['age'] = p['age'] * p['mass'] / (p['mass'] + gross)
+            p['mass'] += gross
+            fly.setdefault(k, build[k])
+        recycled += sum(spares.values()) * v(ft['recycled_share_of_mass'])
+        pools = {k: p for k, p in pools.items() if p['mass'] > 0}
+        caps = {k: capacity(k) for k in pools}
+        total = sum(caps.values())
+        share = {k: c / total for k, c in caps.items()} if total > 0 else {best: 1.0}
+        drawn = delivered * sum(s * fly[k]['x']['drawn_kg'] for k, s in share.items())
+        propellant = delivered * sum(s * fly[k]['x']['propellant_kg'] for k, s in share.items())
+        drives = delivered * sum(s * fly[k]['drive'] for k, s in share.items())
+        built_kg = sum(built.values())
+        local = built_kg * P.local_share if y >= OPENING else 0.0
+        return dict(kind=best, leg=leg, delivered_kg=delivered, drawn_kg=drawn, contained_kg=drawn / t.water_recovered_from_rock,
+                    propellant_kg=propellant, fleet_local_kg=local, fleet_imported_kg=built_kg - local,
+                    fleet_after=dict(pools=pools, built_kg=built, legs=(legs + [leg])[-10:], ordered=best,
+                                     first=dict(first, **{k: y for k, m in built.items() if m > 0 and k not in first})), drives_to_Earth=drives, water_kg_cost=whole, exhausted=False,
+                    used_tugs_USD=used_USD, recycled_metal_kg=recycled, fleet_by_kind=caps,
+                    retired_early_kg_year=early_kg)
 
 
 def summary(rows, rates=(0.0, 0.01, 0.03, 0.07)):
