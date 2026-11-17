@@ -354,6 +354,10 @@
    "value": 0.15,
    "basis": "the study's own"
   },
+  "tug_max_dry_kg_per_kg_year": {
+   "value": 5.0,
+   "basis": "the study's own practical limit: a tug design that would weigh more than five times the water it delivers in a year is not flown, and a leg that no tug flies within it lies beyond reach. Near the end of a tug's reach its mass per kilogram delivered grows without bound (nuclear-electric tugs need 11 to 26 kg a kilogram a year at 6.5 to 7 km/s, electric ones under 1 kg), and the choice by cost, which prices a tug at the settlement's own manufacturing, would otherwise build fleets far faster than any factory can grow and buy the rest from Earth"
+  },
   "tug_tank_kg_per_kg_propellant": {
    "value": 0.05,
    "basis": "the study's own"
@@ -392,17 +396,18 @@
    "basis": "the source survey's contained water by velocity change (resources/source_access/results/reach.json.gz)"
   },
   "water_set_aside_share": {
-   "value": 0.0,
+   "value": 0.9,
    "options": [
-    0.0,
-    0.9
+    0.9,
+    0.0
    ],
+   "decided": "16 November 2026: the set-asides are on by default in every case; the whole pool is a comparison",
    "parts": {
     "future_use": 0.4,
     "protected": 0.3,
     "uncertainty": 0.2
    },
-   "basis": "the share of each body's contained water left unmined. 0 counts the survey's whole conditional pool; 0.9 is the project's only stated set-aside, the world economy study's synthetic reservation shares (research/studies/world_economy/amenities_inputs.json, mining: 40% for future use, 30% protected, 20% withheld for uncertainty, from the register's rule of 31 October 2026 not to strip what is needed later), applied evenly to the near-Earth bodies. The conservation framework draws water from ordinary icy bodies only, and every near-Earth body in the survey is one; no approved extraction fraction exists"
+   "basis": "the share of each body's contained water left unmined, on by default. 0.9 is the project's only stated set-aside, the world economy study's synthetic reservation shares (research/studies/world_economy/amenities_inputs.json, mining: 40% for future use, 30% protected, 20% withheld for uncertainty, from the register's rule of 31 October 2026 not to strip what is needed later), applied evenly to the near-Earth bodies; 0 counts the survey's whole conditional pool, as a comparison. The conservation framework draws water from ordinary icy bodies only, and every near-Earth body in the survey is one; no approved extraction fraction exists"
   },
   "electric_drive_USD2026_W": {
    "value": 5.0,

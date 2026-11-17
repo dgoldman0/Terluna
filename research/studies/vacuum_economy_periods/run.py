@@ -52,7 +52,7 @@ SENSITIVITIES = {
     'pay_on_Earth_20pct': dict(share_spent_on_Earth=0.2),
     'held_at_plan': dict(past_plan='hold'),
     'towns_of_1000': dict(town_residents=1000),
-    'water_set_aside': dict(water_set_aside=0.9),
+    'whole_pool': dict(water_set_aside=0.0),
 }
 TOLERANCE = 1e-6
 
@@ -184,11 +184,12 @@ def exhaustion(scenario, tcase, path, options=()):
                 break
             lasting = y
     because = None
+    pool = dict(economy.defaults(), **opts)
     if s['exhausted_year'] is not None:
-        drawn_out = engineering.leg_for(end['contained_drawn_t'] * 1000.0, opts.get('reach', 'p50'), opts.get('water_set_aside', 0.0)) is None
+        drawn_out = engineering.leg_for(end['contained_drawn_t'] * 1000.0, pool['reach'], pool['water_set_aside']) is None
         because = 'all drawn' if drawn_out else 'the rest beyond every tug'
     return dict(scenario=scenario, technology=tcase, path=path, options=opts, growth_rates=rates,
-                usable_water_kg=engineering.usable_water_kg(opts.get('reach', 'p50'), opts.get('water_set_aside', 0.0)),
+                usable_water_kg=engineering.usable_water_kg(pool['reach'], pool['water_set_aside']),
                 capacity_residents=run.capacity(), plan_reached_year=s['plan_reached_year'], lasting_deficit_from_year=lasting,
                 sites_full_year=full, residents_when_sites_full=None if full is None else rows[full]['residents'],
                 water_exhausted_year=s['exhausted_year'], water_out_because=because, residents_at_end=end['residents'], last_year=end['year'],
@@ -235,7 +236,7 @@ def cases():
     out.append(('central:central:fastest', 'central', 'central', 'fastest', ()))
     for key, opts in SENSITIVITIES.items():
         out.append(('central:central:constant_growth:%s' % key, 'central', 'central', 'constant_growth', tuple(sorted(opts.items()))))
-    out.append(('central:central:steady:water_set_aside', 'central', 'central', 'steady', (('water_set_aside', 0.9),)))
+    out.append(('central:central:steady:whole_pool', 'central', 'central', 'steady', (('water_set_aside', 0.0),)))
     return out
 
 

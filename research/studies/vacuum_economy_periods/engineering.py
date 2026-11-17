@@ -229,5 +229,9 @@ def tug(kind, leg_m_s, prices):
     if f_out >= 1:
         return None
     net = 1 - f_out
+    # Near the end of a tug's reach its mass per kilogram delivered grows without bound; past the practical limit the
+    # leg is out of that tug's reach, since the factories could not build such a fleet as fast as the water is wanted.
+    if dry * trip / net > v(tr['tug_max_dry_kg_per_kg_year']):
+        return None
     return dict(kind=kind, drawn_kg=(1 + f_in) / net, dry_kg_per_kg_year=dry * trip / net, power_W_per_kg_year=power_W * trip / net,
                 propellant_kg=(f_in + f_out) / net)

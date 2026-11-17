@@ -69,6 +69,20 @@ def test_a_chemical_tug_needs_more_water_the_farther_it_flies_and_stops_closing(
     assert engineering.tug('chemical', 9000, p) is None
 
 
+def test_no_tug_is_flown_past_its_practical_limit():
+    limit = json.loads((HERE / 'period_inputs.json').read_text())['transport']['tug_max_dry_kg_per_kg_year']['value']
+    p = engineering.Prices('fast', 2241, 155797.0)
+    flown = 0
+    for kind in ('chemical', 'electric', 'nuclear_electric'):
+        for leg in range(1000, 20001, 500):
+            x = engineering.tug(kind, leg, p)
+            if x is not None:
+                flown += 1
+                assert x['dry_kg_per_kg_year'] <= limit
+    assert flown > 0
+    assert engineering.tug('nuclear_electric', 7000, p) is None and engineering.tug('electric', 7000, p) is not None
+
+
 @pytest.mark.parametrize('scenario,case,ramp', [('central', 'central', 'constant_growth'), ('low', 'static', 'front_loaded'),
                                                 ('high', 'fast', 'constant_growth')])
 def test_the_account_adds_up_and_the_bounds_hold(scenario, case, ramp):
