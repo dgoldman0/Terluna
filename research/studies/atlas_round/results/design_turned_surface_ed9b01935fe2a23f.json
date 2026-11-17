@@ -1,0 +1,346 @@
+{
+ "schema": "terluna.climate.gcm-turned-surface/1",
+ "producer": {
+  "domain": "research",
+  "study": "atlas_round",
+  "files": {
+   "research/studies/atlas_round/design_turned_surface.py": "96a48029c750ebf9",
+   "research/studies/atlas_round/turned_surface.py": "a5a7f02d858d6e33",
+   "research/studies/atlas_round/design_routing.py": "7efdff778ed46538",
+   "research/studies/atlas_round/design_settled_turn.py": "b181d15f1d3d3b67",
+   "climate/gcm/turned.py": "0048cd6ac13ab7e9",
+   "climate/gcm/boundary.py": "b7dc76a6681c5334",
+   "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/design_settled_turn.json": "ed9b01935fe2a23fed39346513468989ccc56d44afb127c03ab8f8f31d4b27f3",
+  "research/studies/atlas_round/results/design_routing.json": "c0a11066af790bdcbfb71f9252c5c1f40bcea7b4f4b45637c5b3b1d3d5ae5bb8",
+  "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c"
+ },
+ "frame": {
+  "state": "settled",
+  "rotation_today_to_turned": [
+   [
+    0.9946347293745237,
+    0.029026683451669782,
+    0.0992935384094286
+   ],
+   [
+    -0.03529233124371889,
+    0.9974557673585545,
+    0.06193903065548577
+   ],
+   [
+    -0.09724302791178263,
+    -0.06511101144164588,
+    0.9931285665570164
+   ]
+  ],
+  "north_pole": {
+   "lat_deg": 83.27936511824316,
+   "lon_deg": -146.1949233473017
+  },
+  "sub_earth_point": {
+   "lat_deg": 5.69849074072154,
+   "lon_deg": 1.6716031643012565
+  },
+  "pole_move_deg": 6.721,
+  "tilt_to_ecliptic_deg": 1.691
+ },
+ "samples_per_axis": 3,
+ "routing_run": "A28S_301k_design_l15_snow_s930_settled",
+ "surface": "moon_28pct_water_lakes_6cb410b400c6ee1b_turned_ed9b01935fe2a23f_gaussian_T21.nc",
+ "files": {
+  "moon_28pct_water_lakes_6cb410b400c6ee1b_turned_ed9b01935fe2a23f_regular_4x5.nc": "2c2553c8740522b3dfd2b5c3c3dcf1f104c167659ff58ffb4caa6d6256ac53d7",
+  "moon_28pct_water_lakes_6cb410b400c6ee1b_turned_ed9b01935fe2a23f_regular_2x2.5.nc": "f4796144fcee28ffe9e33812cb0a2d15c42a0ccf3589239655cb8eabb25cb761",
+  "moon_28pct_water_lakes_6cb410b400c6ee1b_turned_ed9b01935fe2a23f_gaussian_T21.nc": "a24e12a3a91c203d6d79ece6168515cbf7dd253acee042f9f871fac69cf8ddb2",
+  "moon_28pct_water_lakes_6cb410b400c6ee1b_turned_ed9b01935fe2a23f_gaussian_T42.nc": "2335ddc7854a798ca1f868530cbc890f91394d57bf5b34927024defaa756c7a6"
+ },
+ "shares": {
+  "today": {
+   "seas": 0.2397916092028966,
+   "lakes": 0.13567560813830754,
+   "water": 0.37546721734120414
+  },
+  "turned": {
+   "seas": 0.23980237582736472,
+   "lakes": 0.13566624672782082,
+   "water": 0.37546862255518554
+  }
+ },
+ "t21": {
+  "turned": {
+   "water_share": 0.3754686226805325,
+   "mask_land_share": 0.6243279137238996,
+   "mask_water_cells": 627,
+   "cells": 2048
+  },
+  "today": {
+   "water_share": 0.3754672176234448,
+   "mask_land_share": 0.6244192556087242,
+   "mask_water_cells": 675
+  }
+ },
+ "land_by_band": {
+  "today": [
+   {
+    "band": "-90 to -80",
+    "land": 0.6316
+   },
+   {
+    "band": "-80 to -70",
+    "land": 0.6206
+   },
+   {
+    "band": "-70 to -60",
+    "land": 0.7069
+   },
+   {
+    "band": "-60 to -50",
+    "land": 0.7189
+   },
+   {
+    "band": "-50 to -40",
+    "land": 0.7818
+   },
+   {
+    "band": "-40 to -30",
+    "land": 0.7127
+   },
+   {
+    "band": "-30 to -20",
+    "land": 0.6401
+   },
+   {
+    "band": "-20 to -10",
+    "land": 0.5741
+   },
+   {
+    "band": "-10 to +0",
+    "land": 0.4746
+   },
+   {
+    "band": "+0 to +10",
+    "land": 0.5779
+   },
+   {
+    "band": "+10 to +20",
+    "land": 0.5211
+   },
+   {
+    "band": "+20 to +30",
+    "land": 0.5174
+   },
+   {
+    "band": "+30 to +40",
+    "land": 0.4857
+   },
+   {
+    "band": "+40 to +50",
+    "land": 0.6646
+   },
+   {
+    "band": "+50 to +60",
+    "land": 0.6243
+   },
+   {
+    "band": "+60 to +70",
+    "land": 0.8877
+   },
+   {
+    "band": "+70 to +80",
+    "land": 0.9956
+   },
+   {
+    "band": "+80 to +90",
+    "land": 1.0
+   }
+  ],
+  "turned": [
+   {
+    "band": "-90 to -80",
+    "land": 0.8767
+   },
+   {
+    "band": "-80 to -70",
+    "land": 0.737
+   },
+   {
+    "band": "-70 to -60",
+    "land": 0.7534
+   },
+   {
+    "band": "-60 to -50",
+    "land": 0.7477
+   },
+   {
+    "band": "-50 to -40",
+    "land": 0.7729
+   },
+   {
+    "band": "-40 to -30",
+    "land": 0.668
+   },
+   {
+    "band": "-30 to -20",
+    "land": 0.5629
+   },
+   {
+    "band": "-20 to -10",
+    "land": 0.5505
+   },
+   {
+    "band": "-10 to +0",
+    "land": 0.5109
+   },
+   {
+    "band": "+0 to +10",
+    "land": 0.5465
+   },
+   {
+    "band": "+10 to +20",
+    "land": 0.5113
+   },
+   {
+    "band": "+20 to +30",
+    "land": 0.4868
+   },
+   {
+    "band": "+30 to +40",
+    "land": 0.4681
+   },
+   {
+    "band": "+40 to +50",
+    "land": 0.6343
+   },
+   {
+    "band": "+50 to +60",
+    "land": 0.6989
+   },
+   {
+    "band": "+60 to +70",
+    "land": 0.9738
+   },
+   {
+    "band": "+70 to +80",
+    "land": 0.9938
+   },
+   {
+    "band": "+80 to +90",
+    "land": 1.0
+   }
+  ]
+ },
+ "places": [],
+ "evidence": "A calculation: the design routing's seas and lakes on the redrawn floor, averaged onto the atlas's 4 pixel/degree grid from 16 pixel/degree cells, carried into the settled frame by the atlas round's rotation and averaged onto the GCM grids with the dry ground's height as it stands. Heights and levels stand above the settled state's geoid and are counted from the redrawn common level.",
+ "reading_rule": "as turned.py's records: shares are of the Moon's surface on the atlas's 4 pixel/degree grid, today and turned; t21 gives the T21 files' water share and the binary mask PlaSim runs; land_by_band the land's share of each 10\u00b0 band on the T21 grid, today's latitudes and the turned Moon's; the runner's frame reads surface and frame.tilt_to_ecliptic_deg.",
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "6cb410b400c6ee1ba15d3c79b404dfdae94327a66217e4a8b57e77cafbee05c1",
+  "/media/projectspace/terluna-research/atlas-round/redrawn_surface/redrawn_surface_central_100_million_years_nmax359.npz": "42942b743c00594085b8eaaf54d501811fa827c206fb6e5b712f989d11833d14"
+ },
+ "water": {
+  "common_level_m_above_geoid": -1615.027,
+  "seas_above_common_level_m": {
+   "moscoviense": 3448.77,
+   "orientale": 2341.33,
+   "smythii_marginis": 719.95,
+   "south_pole_aitken": 0.0,
+   "humboldtianum": 0.0,
+   "near_side_main": -66.58,
+   "near_side_south": -166.3
+  },
+  "seas": [
+   "near_side_main",
+   "near_side_south",
+   "south_pole_aitken",
+   "humboldtianum",
+   "moscoviense",
+   "orientale",
+   "smythii_marginis"
+  ],
+  "lake_cells_on_seas": 0,
+  "wet_cells_at_or_below_their_ground": 8269,
+  "climate": {
+   "run": "A28S_301k_design_l15_snow_s930_settled",
+   "years": [
+    35,
+    49
+   ],
+   "climatology": "climate/gcm/products/climatology_A28S_301k_design_l15_snow_s930_settled_y35-49_today.npz",
+   "budget": "closed_budget",
+   "open_water_evaporation_factor": 1.07
+  }
+ },
+ "ground_below_the_water_level": {
+  "cells": 21,
+  "share_of_the_moon": 0.00996,
+  "mean_ground_m": -235.6,
+  "deepest_ground_m": -1151.6
+ },
+ "frame_source": {
+  "product": "research/studies/atlas_round/results/design_settled_turn.json",
+  "state": "settled",
+  "meaning": "the central profile 100 million years after the water arrives, under the design surface's water"
+ },
+ "against_the_final_surface": {
+  "record": "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json",
+  "frame": {
+   "state": "settled",
+   "rotation_today_to_turned": [
+    [
+     0.9941533662116091,
+     0.01449140132833622,
+     0.1070003912967944
+    ],
+    [
+     -0.020722154660781613,
+     0.9981390025958092,
+     0.057350883195100726
+    ],
+    [
+     -0.10597016918142887,
+     -0.05923285224083452,
+     0.9926035424372992
+    ]
+   ],
+   "north_pole": {
+    "lat_deg": 83.02703371090357,
+    "lon_deg": -150.79665204553731
+   },
+   "sub_earth_point": {
+    "lat_deg": 6.142429940129073,
+    "lon_deg": 0.8351199769572257
+   },
+   "pole_move_deg": 6.973,
+   "tilt_to_ecliptic_deg": 1.707
+  },
+  "shares": {
+   "today": {
+    "seas": 0.25079564499288926,
+    "lakes": 0.13226286610933077,
+    "water": 0.38305851110222
+   },
+   "turned": {
+    "seas": 0.25080245825780717,
+    "lakes": 0.132283256549739,
+    "water": 0.38308571480754616
+   }
+  },
+  "t21": {
+   "turned": {
+    "water_share": 0.38308571634596444,
+    "mask_land_share": 0.6168503775318404,
+    "mask_water_cells": 629,
+    "cells": 2048
+   },
+   "today": {
+    "water_share": 0.3830585114385664,
+    "mask_land_share": 0.6168209251610489,
+    "mask_water_cells": 683
+   }
+  },
+  "frame_turn_deg": 1.0053
+ },
+ "seconds": 8
+}

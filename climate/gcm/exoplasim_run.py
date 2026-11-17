@@ -177,6 +177,15 @@ EXPERIMENTS = {
     'A28S': dict(pressure_pa=121590.0, water=28, lakes='24691ded4c4a980c', shield='titania_stack', mldepth=50.0,
                  purpose='design case on the atlas round\'s final surface: the redrawn floor at the settled state, the '
                          'seas at their chosen levels and the governed lakes'),
+    # The atlas round's design surface (research/studies/atlas_round, 17 November): the same floor with every sea at the
+    # level the design climate's closed budget gives it (the near-side sea parted at its neck, its main part 66.6 m and
+    # its southern seas 166.3 m below the common level; the salt sea and Humboldtianum at the common level; the upper
+    # seas full at their rims) and the lakes of that budget's routing, named by the design routing's content
+    # (design_routing_16ppd.npz): 24.0% of the Moon in seas and 13.6% in lakes, at the settled turn under that water. It
+    # runs turned only, on the record design_turned_surface.py writes, from a restart carried onto it.
+    'A28D': dict(pressure_pa=121590.0, water=28, lakes='6cb410b400c6ee1b', shield='titania_stack', mldepth=50.0,
+                 purpose='design case on the atlas round\'s design surface: the redrawn floor at the settled state, '
+                         'every sea at its own level with the near-side sea parted, and the design routing\'s lakes'),
 }
 # PlaSim's model day is 1430 half-hour steps (29.8 Earth days; with the synodic Sun clock the Sun's own day
 # is the real 29.53). A model year is 12 of them, 17,160 steps (whole_lunar_days; ExoPlaSim's own year is
