@@ -1,0 +1,283 @@
+{
+ "final_water_mass_kg": {
+  "all": 1.7217006856837843e+19,
+  "seas": 1.2377196561212666e+19,
+  "lakes": 4.839810295625178e+18
+ },
+ "schema": "terluna.research.atlas-round-settled-turn/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/settled_turn.py": "75f5fd676185b284de3d2e2cb097b7a48435312b4255d2e66f6780cd5157036d",
+   "geology/orientation.py": "3de7c0493969c0063aefcc65598baefcb46e16a6eaa39e491a3292f00e5f41d6",
+   "geology/viscoelastic.py": "eee81d57c8e2ff85e6b3486d83bf879548c721c25dd0c02025334c24b3f8cb74",
+   "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
+   "geography/crustal_loading.py": "b57a36e705b8b4e4294a7549ab1ccccd2086f83e9008230464adb1723491f954"
+  }
+ },
+ "inputs": {
+  "geology/results/interior_response.json": "c98f9268bab63723596eeb6e0a1078293e21197e84b189ece589f327dd13f3eb",
+  "geology/results/moon_orientation.json": "8d71fd350ca4c6cd2e1c6766478543708b537a51c62f42d6a4bafb907a446ba3",
+  "research/studies/atlas_round/results/redrawn_drainage.json": "e77aa22523c10cec5be27688e65b815efae15d95c0fb635f14884bf3318493f5",
+  "research/studies/atlas_round/results/governed_drainage.json": "6ab50a2911d8767a7cda50fb9641dc0b663c3e1ab980f6d557d4ae6b0a07d872"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/crustal-loading/crustal_loading_nmax359.npz": "4b408e82d708c7af5cf667a775719495c39c980ba55f56bebaa2122cc56e969e",
+  "/media/projectspace/terluna-research/atlas-round/redrawn_drainage/governed_routing.npz": "24691ded4c4a980c8c549df7c0d6d6c7a356d49b5e5212abccc252f04e7ca3ad"
+ },
+ "evidence": "A calculation on products: the geology lane's orientation method (geology/orientation.py: degree-2 inertia, principal axes, the bulge re-forming through the tidal k_2) with its viscoelastic response, applied to the round's final water. It reproduces the lane's own settled turn from the lane's load. Not validated against any observation; the creep's flow laws are Earth olivine's.",
+ "reading_rule": "Poles in degrees from today's, toward the longitude given; the sub-Earth point is the turned Moon's point under Earth in today's coordinates. settled is the central profile 100 million years after the water arrives; bounds are the stiff profile at a billion years and the soft at ten million, as the first step bounds the surface. frame_today_to_turned is the settled frame for the turned surface: its rows are the turned Moon's axes (toward Earth, the third, north) in today's frame.",
+ "series_settled": {
+  "listed": {
+   "years": 100000000.0,
+   "pole_deg": 6.146,
+   "pole_toward_lon_deg": -166.7,
+   "sub_earth_lat_deg": 6.08,
+   "sub_earth_lon_deg": 4.98,
+   "face_move_deg": 7.85,
+   "b_minus_a_change": 0.2687,
+   "c_minus_a_change": 0.0189,
+   "tilt_to_ecliptic_deg": 1.579
+  },
+  "reproduced": {
+   "years": 100000000.0,
+   "pole_deg": 6.146,
+   "pole_toward_lon_deg": -166.7,
+   "sub_earth_lat_deg": 6.08,
+   "sub_earth_lon_deg": 4.98,
+   "face_move_deg": 7.85,
+   "tilt_to_ecliptic_deg": 1.579
+  },
+  "stiff_and_soft_listed": {
+   "stiff": {
+    "years": 1000000000.0,
+    "pole_deg": 7.332,
+    "pole_toward_lon_deg": -167.0,
+    "sub_earth_lat_deg": 7.27,
+    "sub_earth_lon_deg": 5.7,
+    "face_move_deg": 9.23,
+    "tilt_to_ecliptic_deg": 1.599
+   },
+   "soft": {
+    "years": 10000000.0,
+    "pole_deg": 1.892,
+    "pole_toward_lon_deg": -166.0,
+    "sub_earth_lat_deg": 1.85,
+    "sub_earth_lon_deg": 1.78,
+    "face_move_deg": 2.57,
+    "tilt_to_ecliptic_deg": 1.542
+   }
+  }
+ },
+ "cases": {
+  "final_water": {
+   "settled": {
+    "years": 100000000.0,
+    "pole_deg": 6.973,
+    "pole_toward_lon_deg": -150.8,
+    "sub_earth_lat_deg": 6.14,
+    "sub_earth_lon_deg": 0.84,
+    "face_move_deg": 6.2,
+    "tilt_to_ecliptic_deg": 1.707
+   },
+   "first_years": {
+    "years": 0.0,
+    "pole_deg": 9.026,
+    "pole_toward_lon_deg": -149.9,
+    "sub_earth_lat_deg": 7.92,
+    "sub_earth_lon_deg": 1.18,
+    "face_move_deg": 8.0,
+    "tilt_to_ecliptic_deg": 1.788
+   },
+   "bounds": {
+    "stiff": {
+     "years": 1000000000.0,
+     "pole_deg": 8.276,
+     "pole_toward_lon_deg": -150.2,
+     "sub_earth_lat_deg": 7.27,
+     "sub_earth_lon_deg": 1.05,
+     "face_move_deg": 7.35,
+     "tilt_to_ecliptic_deg": 1.757
+    },
+    "soft": {
+     "years": 10000000.0,
+     "pole_deg": 2.185,
+     "pole_toward_lon_deg": -152.8,
+     "sub_earth_lat_deg": 1.95,
+     "sub_earth_lon_deg": 0.18,
+     "face_move_deg": 1.96,
+     "tilt_to_ecliptic_deg": 1.578
+    }
+   },
+   "central_through_time": [
+    {
+     "years": 1.0,
+     "pole_deg": 8.933,
+     "pole_toward_lon_deg": -149.9,
+     "sub_earth_lat_deg": 7.84,
+     "sub_earth_lon_deg": 1.17,
+     "face_move_deg": 7.92,
+     "tilt_to_ecliptic_deg": 1.784
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 8.596,
+     "pole_toward_lon_deg": -150.1,
+     "sub_earth_lat_deg": 7.55,
+     "sub_earth_lon_deg": 1.11,
+     "face_move_deg": 7.63,
+     "tilt_to_ecliptic_deg": 1.77
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 8.177,
+     "pole_toward_lon_deg": -150.3,
+     "sub_earth_lat_deg": 7.18,
+     "sub_earth_lon_deg": 1.04,
+     "face_move_deg": 7.26,
+     "tilt_to_ecliptic_deg": 1.753
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 7.463,
+     "pole_toward_lon_deg": -150.6,
+     "sub_earth_lat_deg": 6.57,
+     "sub_earth_lon_deg": 0.92,
+     "face_move_deg": 6.63,
+     "tilt_to_ecliptic_deg": 1.725
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 6.973,
+     "pole_toward_lon_deg": -150.8,
+     "sub_earth_lat_deg": 6.14,
+     "sub_earth_lon_deg": 0.84,
+     "face_move_deg": 6.2,
+     "tilt_to_ecliptic_deg": 1.707
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 6.394,
+     "pole_toward_lon_deg": -151.0,
+     "sub_earth_lat_deg": 5.64,
+     "sub_earth_lon_deg": 0.74,
+     "face_move_deg": 5.69,
+     "tilt_to_ecliptic_deg": 1.688
+    }
+   ]
+  },
+  "final_seas_without_the_lakes": {
+   "settled": {
+    "years": 100000000.0,
+    "pole_deg": 7.199,
+    "pole_toward_lon_deg": -149.2,
+    "sub_earth_lat_deg": 6.26,
+    "sub_earth_lon_deg": 1.07,
+    "face_move_deg": 6.35,
+    "tilt_to_ecliptic_deg": 1.557
+   },
+   "first_years": {
+    "years": 0.0,
+    "pole_deg": 9.553,
+    "pole_toward_lon_deg": -148.0,
+    "sub_earth_lat_deg": 8.25,
+    "sub_earth_lon_deg": 1.49,
+    "face_move_deg": 8.38,
+    "tilt_to_ecliptic_deg": 1.585
+   },
+   "bounds": {
+    "stiff": {
+     "years": 1000000000.0,
+     "pole_deg": 8.679,
+     "pole_toward_lon_deg": -148.4,
+     "sub_earth_lat_deg": 7.51,
+     "sub_earth_lon_deg": 1.33,
+     "face_move_deg": 7.63,
+     "tilt_to_ecliptic_deg": 1.574
+    },
+    "soft": {
+     "years": 10000000.0,
+     "pole_deg": 2.135,
+     "pole_toward_lon_deg": -151.9,
+     "sub_earth_lat_deg": 1.89,
+     "sub_earth_lon_deg": 0.26,
+     "face_move_deg": 1.91,
+     "tilt_to_ecliptic_deg": 1.535
+    }
+   },
+   "central_through_time": [
+    {
+     "years": 1.0,
+     "pole_deg": 9.444,
+     "pole_toward_lon_deg": -148.0,
+     "sub_earth_lat_deg": 8.16,
+     "sub_earth_lon_deg": 1.47,
+     "face_move_deg": 8.29,
+     "tilt_to_ecliptic_deg": 1.584
+    },
+    {
+     "years": 1000.0,
+     "pole_deg": 9.05,
+     "pole_toward_lon_deg": -148.2,
+     "sub_earth_lat_deg": 7.83,
+     "sub_earth_lon_deg": 1.4,
+     "face_move_deg": 7.95,
+     "tilt_to_ecliptic_deg": 1.578
+    },
+    {
+     "years": 100000.0,
+     "pole_deg": 8.566,
+     "pole_toward_lon_deg": -148.5,
+     "sub_earth_lat_deg": 7.42,
+     "sub_earth_lon_deg": 1.31,
+     "face_move_deg": 7.53,
+     "tilt_to_ecliptic_deg": 1.572
+    },
+    {
+     "years": 10000000.0,
+     "pole_deg": 7.75,
+     "pole_toward_lon_deg": -148.9,
+     "sub_earth_lat_deg": 6.73,
+     "sub_earth_lon_deg": 1.16,
+     "face_move_deg": 6.83,
+     "tilt_to_ecliptic_deg": 1.563
+    },
+    {
+     "years": 100000000.0,
+     "pole_deg": 7.199,
+     "pole_toward_lon_deg": -149.2,
+     "sub_earth_lat_deg": 6.26,
+     "sub_earth_lon_deg": 1.07,
+     "face_move_deg": 6.35,
+     "tilt_to_ecliptic_deg": 1.557
+    },
+    {
+     "years": 1000000000.0,
+     "pole_deg": 6.555,
+     "pole_toward_lon_deg": -149.6,
+     "sub_earth_lat_deg": 5.71,
+     "sub_earth_lon_deg": 0.95,
+     "face_move_deg": 5.79,
+     "tilt_to_ecliptic_deg": 1.552
+    }
+   ]
+  }
+ },
+ "frame_today_to_turned": [
+  [
+   0.9941533662116091,
+   0.01449140132833622,
+   0.1070003912967944
+  ],
+  [
+   -0.020722154660781613,
+   0.9981390025958092,
+   0.057350883195100726
+  ],
+  [
+   -0.10597016918142887,
+   -0.05923285224083452,
+   0.9926035424372992
+  ]
+ ],
+ "seconds": 4
+}
