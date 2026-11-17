@@ -197,6 +197,22 @@ def jpeg_data_uri(array, quality=88):
     return 'data:image/jpeg;base64,' + base64.b64encode(buffer.getvalue()).decode('ascii')
 
 
+TEXTURES = 'textures'           # the page's textures as files beside it (the design surface's page), under OUT
+
+
+def texture_file(name, array, kind='png', quality=88):
+    """A texture written as a file beside the page (OUT/textures/<name>.<kind>); returns the path the page reads."""
+    from PIL import Image
+    (OUT / TEXTURES).mkdir(parents=True, exist_ok=True)
+    path = OUT / TEXTURES / f'{name}.{"jpg" if kind == "jpeg" else "png"}'
+    image = Image.fromarray(array)
+    if kind == 'jpeg':
+        image.save(path, format='JPEG', quality=quality, subsampling=0, optimize=True)
+    else:
+        image.save(path, format='PNG', optimize=True)
+    return f'{TEXTURES}/{path.name}'
+
+
 STOPS_SCHEMA = 'terluna.research.drainage-network-globe-stops/1'
 SEA_NAMES = dict(near_side='the Near-side Sea', south_pole_aitken='the South Pole–Aitken Sea',
                  smythii_marginis='Smythii–Marginis', humboldtianum='Humboldtianum', orientale='Orientale',
@@ -563,9 +579,61 @@ def surface_note(turn, summary, climate):
             f"{summary['rivers_into_the_seas_m3s']:,} m³/s reaching the seas.")
 
 
-def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes):
+def routing_product(record):
+    """The routing product the design surface was drawn from: named by the routing record among the surface record's
+    inputs, and read only while its bytes match that record."""
+    name = next(k for k in record['inputs'] if k.endswith('design_routing.json'))
+    product = json.loads((ROOT / name).read_text())['product']
+    if digest(product['path']) != product['sha256']:
+        raise SystemExit(f"{product['path']} no longer matches its record {name}")
+    return Path(product['path'])
+
+
+def cover_text(cover, sources):
+    """The page's paragraph on the ground in true colour, from appearance.build's cover parameters."""
+    m = cover['moisture']
+    at = lambda a: f"{appearance.plant_cover(a):.0%}"
+    return ('<b>The ground: informed and guesstimate.</b> The ground\'s colour follows the design climate\'s dryness: the '
+            f"aridity of the moisture map (rain over the water the air could draw off; run {m['run']}, model years "
+            f"{m['years'][0]}–{m['years'][-1]}; {digest(sources['moisture'])[:12]}) in each of the run's 170 km land cells, "
+            'carried between the cells\' centres and smoothed as the clouds\' fields are, the run\'s water cells taking '
+            'their nearest land cell\'s. Earth\'s land under the same dryness gives the colours, a guesstimate: plants '
+            f"cover {at(0.02)} of the ground at an aridity of 0.02, {at(0.1)} at 0.1, {at(0.2)} at 0.2, {at(0.5)} at 0.5 "
+            f"and {at(1.0)} at 1, as Earth's drylands lose their cover fast below 0.2 (Berdugo et al. 2020); trees take a "
+            'growing share of it above 0.3, and the grass is straw where it is dry and green where it is wet. Bare '
+            'ground is weathered soil. Under the air space weathering ends and oxygen and water rust the rock\'s iron, '
+            'so the soils take the dry colours of Earth\'s soils on like rock under like dryness, at the moderate '
+            'weathering the terrain\'s upkeep keeps: the rock dust it carries back uphill renews the top metre every '
+            '2,400 to 100,000 years. On the feldspathic highland rock, whose 4–6% iron matches Earth\'s continental '
+            'crust, they run from light brown in the deserts (Munsell 7.5YR 6/4, with lime) through brown (7.5YR 5/4) to '
+            'yellowish red where it is humid (5YR 5/6); on basalt from reddish brown (5YR 4/4) through dark reddish brown '
+            '(5YR 3/4) to the dark red of terra roxa (2.5YR 3/6), darker with more titanium. The rock\'s iron and titanium '
+            f"come from Lunar Prospector's gamma rays (Prettyman et al. 2006; {digest(sources['composition'])[:12]}), the "
+            f"maria's outlines from the LROC team's map (Nelson et al. 2014; {digest(sources['mare'])[:12]}): basalt "
+            f"holds {cover['basaltLandShare']:.1%} of the land. Rock shows on steep slopes. The drylands' soils and their "
+            'living crusts are chosen with the biome design, so these are the soils the rock and climate give unaided. '
+            'Within a cell, ground along larger rivers and in hollows is wetter and steep slopes are drier, and noise '
+            'draws patches. The colours read the climate model\'s rain: where it rains at night, about a quarter of the '
+            'land, the cloud-resolving boxes\' dry end would leave the ground drier, and lake districts err dry, the '
+            'moisture map\'s own limits. The waters take the colours the sea appearance study calculates for the '
+            f"designed waters ({digest(sources['water_colours'])[:12]}), the light leaving them under sunlight: deep blue "
+            'offshore, the productive coast\'s green over water shallower than about 150 m and in shallow lakes, and the '
+            'river mouth\'s ochre in rivers and where they carry sediment into a lake or sea, a plume about 0.3 km wide '
+            'per (m³/s)^½ of the runoff gathered since the last lake or sea, since lakes and seas trap their rivers\' '
+            'sediment and send clear water on; the water also mirrors the sky. The relief shades the ground from '
+            'its heights at 16 pixels per degree, and the sky\'s diffuse light reaches each place in the share of the '
+            'sky its surroundings leave open, found from the heights out to 50 km in 16 directions with the Moon\'s '
+            'curvature: under this air the sky gives 43% of the green light on level ground with the Sun 60° up, so '
+            'hollows and crater walls darken where they see less of it. River width follows '
+            'discharge, by Earth\'s relation widened for the slower flow of lunar gravity; most channels are narrower '
+            'than a pixel. Cloud shapes are noise the page draws in 3D, thresholded to the run\'s cover, and the decks\' '
+            'opacity is a guess (the low deck holds the run\'s cloud water, the high deck little).')
+
+
+def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes, moisture=None):
     """The globe page on the design surface: the relief and the water at each body's own level, the appearance from
-    the same water, the sites and targets placed on it, and the figures from the surface's record."""
+    the same water (the ground in true colour from the moisture map when one is given), the sites and targets placed
+    on it, and the figures from the surface's record."""
     grid = surface_grid(surface_path)
     record = json.loads(Path(record_path).read_text())
     summary = record['summary']
@@ -587,9 +655,12 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
     del exact
     surface_tex = surface_texture(lev_map_t, body_map_t)
     fine = turned(grid['height'])
+    routing = routing_product(record) if moisture else None
     looks, params, sources, masks = appearance.build(fine, level0, SURFACE_PPD, climatology=climatology,
-                                                     rotation=rotation, surface_path=surface_path)
+                                                     rotation=rotation, surface_path=surface_path, moisture_path=moisture,
+                                                     routing_path=routing)
     del fine
+    truly = 'cover' in params
     share = lambda mask, ppd_: float((mask * np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_))[:, None]).sum()
                                      / (np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_)).sum() * mask.shape[1]))
     texture_water = share(surface_tex[..., 2] > 0, ppd_map)
@@ -610,10 +681,13 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
         topo=[[h, col] for h, col in TOPO],
         reference='the common level',
         headline='The Open Moon on its design surface',
-        lede=('An estimate of how the Open Moon looks from space as the atlas round designs it: its air, clouds and a '
-              'guessed cover of plants over the floor its water redraws, with every sea and lake at its own level and the '
-              'near-side sea parted at its neck. Drag to turn it, scroll or pinch to zoom, click for the height of a place '
-              'and the water over it, and move the Sun to see the halo, the twilight and the view from Earth.'),
+        lede=('An estimate of how the Open Moon looks from space as the atlas round designs it: its air, clouds and '
+              + ('its ground in true colour, plants and soils as the design climate\'s dryness leaves them, '
+                 if truly else 'a guessed cover of plants ')
+              + 'over the floor its water redraws, with every sea and lake at its own level and the near-side sea parted '
+              'at its neck. Drag to turn it, scroll or pinch to zoom, click for the height of a place and the water over '
+              'it, and move the Sun to see the halo, the twilight and the view from Earth.'),
+        coverText=cover_text(params['cover'], sources) if truly else None,
         figures=[['Water', f"{summary['water_share']:.0%} of the surface"],
                  ['Common level (geoid)', minus(level0) + ' m'],
                  sea_fig('Near-side sea', 'near-side sea'), sea_fig('Southern near-side seas', 'southern near-side seas'),
@@ -640,7 +714,7 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
                   'and a click reads them. Ground below the common level that no sea covers, such as the floor the '
                   'parted sea leaves and the hollows that dry on the design rain, takes the lowland\'s colour, and above '
                   'it the colours run from lowland green to the near-white of the highest ground. Shading comes from '
-                  'the full relief at 8 pixels per degree under light that every place has alike, from high in its own '
+                  f'the full relief at {SURFACE_PPD if truly else SURFACE_PPD // 2} pixels per degree under light that every place has alike, 45° up in its own '
                   'north-west, and contour lines mark the chosen interval, with the common level darker. In the '
                   'topography mode the slider exaggerates the relief down into the sea floors as well as up into the '
                   'highlands. Over the appearance the same colours and contours lie on the rendered globe at the chosen '
@@ -648,9 +722,15 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
                   'register, each placed on the design surface with the water over it there. In both modes, a click on '
                   'the globe reads the 0.25° cell under it.'),
         surface=dict(names=body_names, levels=[None] + [round(seas[b]['level_m'], 1) for b in meta['bodies'][1:]] + [None]),
-        textures=dict(relief=png_data_uri(relief), surface=png_data_uri(surface_tex), normal=jpeg_data_uri(looks['normal']),
-                      albedo=jpeg_data_uri(looks['albedo']), water=png_data_uri(looks['water']),
-                      cloudSun=png_data_uri(looks['cloud_sun']), cloudGeo=png_data_uri(looks['cloud_geo'])),
+        textures=(dict(relief=texture_file('relief', relief), surface=texture_file('surface', surface_tex),
+                       normal=texture_file('normal', looks['normal'], 'jpeg'),
+                       albedo=texture_file('albedo', looks['albedo'], 'jpeg'), water=texture_file('water', looks['water']),
+                       sky=texture_file('sky', looks['sky'], 'jpeg', 92), cloudSun=texture_file('cloud_sun', looks['cloud_sun']),
+                       cloudGeo=texture_file('cloud_geo', looks['cloud_geo']))
+                  if truly else
+                  dict(relief=png_data_uri(relief), surface=png_data_uri(surface_tex), normal=jpeg_data_uri(looks['normal']),
+                       albedo=jpeg_data_uri(looks['albedo']), water=png_data_uri(looks['water']),
+                       cloudSun=png_data_uri(looks['cloud_sun']), cloudGeo=png_data_uri(looks['cloud_geo']))),
         appearance=params,
         labels=dict(
             seas=[[name.replace('\n', ' '), *place(la, lo)] for name, la, lo in SEA_LABELS],
@@ -671,9 +751,12 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
                     f"{meta['frame']['sha256'][:12]}); the conservation register ({hashes['register'][:12]}); the "
                     f"illumination domain's engine atmosphere ({digest(sources['engine'])[:12]}) and Open Moon sky atlas "
                     f"({digest(sources['sky_atlas'])[:12]}); the climate domain's <code>{params['climatology']['schema']}"
-                    f"</code> for run {params['climatology']['run']} ({digest(sources['climatology'])[:12]}). Surface "
-                    f"{looks['albedo'].shape[1]}×{looks['albedo'].shape[0]} ({SURFACE_PPD} pixels per degree), relief "
-                    f"at {SURFACE_PPD // 2}, the map at {ppd_map}."),
+                    f"</code> for run {params['climatology']['run']} ({digest(sources['climatology'])[:12]})"
+                    + (f"; the moisture map <code>{params['cover']['moisture']['schema']}</code> of the same run and years "
+                       f"({digest(sources['moisture'])[:12]}), the LROC mare boundaries ({digest(sources['mare'])[:12]}) and "
+                       f"the sea appearance study's water colours ({digest(sources['water_colours'])[:12]})" if truly else '')
+                    + f". Surface {looks['albedo'].shape[1]}×{looks['albedo'].shape[0]} ({SURFACE_PPD} pixels per "
+                    f"degree), relief at {SURFACE_PPD if truly else SURFACE_PPD // 2}, the map at {ppd_map}."),
         frame=dict(note=surface_note(turn, summary, climate),
                    lede=''))
     template = (HERE / 'globe.template.html').read_text()
@@ -702,6 +785,8 @@ def main(argv=None):
     parser.add_argument('--surface', type=Path, help="the atlas round's design surface (globe_surface_16ppd.npz): "
                                                      'the globe alone, every water body at its own level')
     parser.add_argument('--surface-record', type=Path, help="the design surface's record (results/globe_surface.json)")
+    parser.add_argument('--moisture', type=Path, help="with --surface, the moisture map of the climatology's run and years "
+                                                      '(results/moisture_map_final.json): the ground in true colour')
     args = parser.parse_args(argv)
     if args.surface:
         if not args.surface_record:
@@ -712,7 +797,8 @@ def main(argv=None):
             targets = list(csv.DictReader(handle))
         OUT.mkdir(parents=True, exist_ok=True)
         globe = write_globe_surface(args.surface.absolute(), args.surface_record.absolute(), args.climatology.absolute(),
-                                    sites, targets, dict(register=digest(reg_path)))
+                                    sites, targets, dict(register=digest(reg_path)),
+                                    moisture=args.moisture.absolute() if args.moisture else None)
         products = {str(p.relative_to(ROOT)): digest(p) for p in (reg_path, tgt_path)}
         products[str(args.surface)] = digest(args.surface)
         products[str(args.surface_record)] = digest(args.surface_record)

@@ -53,6 +53,45 @@ DEEP_WATER = np.array([0.008, 0.018, 0.036])
 MID_WATER = np.array([0.012, 0.027, 0.046])
 TURBID_WATER = np.array([0.034, 0.048, 0.042])
 RIVER_WATER = np.array([0.085, 0.078, 0.058])   # sediment-laden, as rivers crossing fresh ground run
+# True colour (the design surface's globe, --moisture). The cover follows the design climate's dryness: the moisture
+# map's aridity, the run's rain over its demand, in each of the run's land cells. The colours are Earth's surfaces
+# under the same dryness, as reflectance in linear sRGB; a guesstimate, labelled so on the page.
+MOISTURE = ROOT / 'research' / 'studies' / 'atlas_round' / 'results' / 'moisture_map_final.json'
+MOISTURE_SCHEMA = 'terluna.biosphere.ecology-moisture-map/1'
+WATER_COLOURS = ROOT / 'research' / 'studies' / 'sea_appearance' / 'results' / 'water_colours.json'
+GREEN_HERB = np.array([0.050, 0.095, 0.035])    # green grass and shrubs
+DRY_HERB = np.array([0.20, 0.17, 0.10])         # grass gone to straw
+BASALT_ROCK = np.array([0.08, 0.075, 0.07])
+# Weathered soil. Under the air space weathering ends, and oxygen and water rust the rock's iron, so the bare ground
+# takes the colours of Earth's soils on like rock under like dryness. The terrain's upkeep (register, 13 October)
+# carries rock dust back uphill at 1-42 mm a century, renewing the top metre every 2,400 to 100,000 years, so the
+# topsoil stays moderately weathered. Each end of the rock's iron has a typical dry soil colour (Munsell notation)
+# at three aridities, with its xyY under Illuminant C from the Munsell renotation (Newhall, Nickerson and Judd 1943;
+# RIT's real.dat). The feldspathic highland's iron, 4-6% FeO, matches Earth's upper continental crust (about 5%), so
+# its soils redden as Earth's do.
+SOIL_FEO = (4.5, 20.0)               # FeO (weight per cent) of the highland and the mare basalt ends
+SOIL_MUNSELL = dict(
+    highland=((0.05, '7.5YR 6/4', 'light brown, a desert soil with lime in it', (0.3860, 0.3652, 30.05)),
+              (0.3, '7.5YR 5/4', 'brown, a grassland soil with some organic matter', (0.3991, 0.3714, 19.77)),
+              (1.0, '5YR 5/6', 'yellowish red, a warm humid soil', (0.4420, 0.3808, 19.77))),
+    basalt=((0.05, '5YR 4/4', 'reddish brown, a desert soil on basalt', (0.4187, 0.3679, 12.00)),
+            (0.3, '5YR 3/4', 'dark reddish brown, a dry grassland soil on basalt', (0.4376, 0.3715, 6.555)),
+            (1.0, '2.5YR 3/6', 'dark red, terra roxa on basalt', (0.4954, 0.3692, 6.555))))
+TITANIUM_DARKENING = 0.97            # per weight per cent of TiO2 above 2% in the basalt: ilmenite, opaque, outlasts weathering
+# Plant cover against aridity: least + (most - least) / (1 + (half / aridity)^steep). Earth's drylands lose their
+# cover fast below an aridity of 0.2 (Berdugo et al. 2020, Science 367, 787) and its humid forests close their
+# canopy; the curve gives 2.5% at 0.02, 17% at 0.1, 46% at 0.2, 72% at 0.33, 86% at 0.5, 92% at 0.65 and 97% at 1.
+COVER = dict(least=0.02, most=1.0, half=0.22, steep=2.2)
+TREES = dict(half=0.6, steep=3.0)    # the trees' share of the cover: 11% at 0.3, 56% at 0.65 (woodland), 82% at 1
+GREEN = dict(half=0.35, steep=2.0)   # the green share of the grass: a quarter at 0.2, half at 0.35, 89% at 1
+# Within the climate's cells (display rules, guesstimates): ground along larger rivers and in hollows wetter, steep
+# slopes drier, all as a factor on the aridity, and patchiness drawn as noise.
+FLOODPLAIN_LN = 0.6                  # times the blurred log10 discharge, at most 2: up to 3.3 times as wet
+HOLLOW_LN = 0.15                     # times the standardized curvature, clipped at 2.5
+SLOPE_LN = 0.4                       # taken off where the ground steepens from 0.2 to 0.6
+PATCH_LN = 0.25                      # the noise's standard deviation in log aridity
+SHELF_M = (150.0, 20.0)              # water shallower than these takes the productive coast's colour, fully at 20 m
+PLUME_KM_PER_ROOT = 0.3              # a plume reaches about 0.3 km per (m3/s)^0.5 of sediment-bearing flow: 9.5 km at 1,000 m3/s
 CLOUD_ALBEDO = 0.72                 # of the part of a deck that intercepts light
 LOW_OPACITY, HIGH_OPACITY = 0.9, 0.4  # guesstimates: the low deck holds the model's cloud water, the high deck little
 CLOUD_ROWS = 90                     # 2-degree rows for the cloud maps
@@ -186,17 +225,8 @@ def gradients(a, dy, lat):
 
 
 def climate_field(clim, name, shape):
-    """A climatology field on the texture grid: regridded at 4 pixels per degree, smoothed over
-    CLIMATE_SMOOTHING_CELLS of the model's grid spacing, then enlarged."""
-    import cv2
-    lat4 = 90.0 - (np.arange(720) + 0.5) / 4.0
-    lon4 = (np.arange(1440) + 0.5) / 4.0 - 180.0
-    f = regrid(clim[name], clim['lat'], clim['lon'], lat4, lon4)
-    spacing = float(np.abs(np.diff(clim['lat'])).mean())
-    f = sphere_blur(f, CLIMATE_SMOOTHING_CELLS * spacing * 4.0, lat4).astype(np.float32)
-    s = shape[1] // f.shape[1]
-    pad = np.concatenate([f[:, -1:], f, f[:, :1]], axis=1)
-    return cv2.resize(pad, (pad.shape[1] * s, shape[0]), interpolation=cv2.INTER_LINEAR)[:, s:s + shape[1]]
+    """A climatology field on the texture grid (grid_field)."""
+    return grid_field(clim[name], clim['lat'], clim['lon'], shape)
 
 
 def turn_texture(a, rotation, left_lon=-180.0, nearest=False, chunk=256):
@@ -257,11 +287,43 @@ def drainage_grids(shape, path=DRAINAGE, rotation=None):
     return dict(discharge=q, lake_level=lake, metadata=meta)
 
 
-def surface_grids(shape, path, rotation=None):
+def land_discharge(routing_path):
+    """The discharge each cell carries off land since the last lake or sea (m3/s, flat on the routing's grid): lakes
+    and seas trap their rivers' sediment, so their outflows run clear and only the runoff gathered below them carries
+    sediment on. From the routing product's receivers and discharge: each dry cell's own runoff is its discharge less
+    what flows into it, gathered downstream as the routing gathers discharge, with every water cell passing none on.
+    The near-side sea's spill, which the routing puts in at the cell past the neck's crest, is sea water and carries
+    none."""
+    with np.load(routing_path, allow_pickle=False) as z:
+        receiver = z['receiver'].astype(np.int64)
+        q = z['discharge_m3s']
+        water = (z['sea'] >= 0) | z['routing_lake'] | z['outlet']
+        water[z['lake_cell']] = True
+        neck = json.loads(str(z['metadata'])).get('neck')
+    n = receiver.size
+    donor = receiver != np.arange(n)
+    inflow = np.bincount(receiver[donor], weights=q[donor], minlength=n)
+    if neck:
+        inflow[neck['spill_cell']] += neck['flow_m3s']
+    carried = np.where(water, 0.0, np.maximum(q - inflow, 0.0))
+    waiting = np.bincount(receiver[donor], minlength=n)
+    front = np.flatnonzero((waiting == 0) & donor)
+    while front.size:
+        to = receiver[front]
+        np.add.at(carried, to, np.where(water[front], 0.0, carried[front]))
+        np.subtract.at(waiting, to, 1)
+        to = np.unique(to)
+        front = to[(waiting[to] == 0) & donor[to]]
+    carried[water] = 0.0
+    return carried
+
+
+def surface_grids(shape, path, rotation=None, routing=None):
     """Every water body's surface and the rivers' discharge on the texture grid (180 W at the left edge) from a
     surface that holds each water cell's level (the atlas round's globe surface), carried into the turned frame when a
     rotation is given: the drainage product's form, with every sea, lake and parted part of a sea as a water body at
-    its own level."""
+    its own level. With the routing product the surface came from, also each channel's discharge off land since the
+    last lake or sea (land_discharge), as `sediment`."""
     z = np.load(path)
     meta = json.loads(str(z['metadata']))
     if meta['grid']['rows'] != shape[0] or meta['grid']['cols'] != shape[1]:
@@ -274,7 +336,13 @@ def surface_grids(shape, path, rotation=None):
     q, level = np.roll(q.reshape(shape), roll, axis=1), np.roll(level.reshape(shape), roll, axis=1)
     if rotation is not None:
         q, level = turn_channels(q, rotation), turn_texture(level, rotation, nearest=True)
-    return dict(discharge=q, lake_level=level, metadata=meta)
+    out = dict(discharge=q, lake_level=level, metadata=meta)
+    if routing is not None:
+        s = np.zeros(shape[0] * shape[1], np.float32)
+        s[z['channel_cell']] = land_discharge(routing)[z['channel_cell']]
+        s = np.roll(s.reshape(shape), roll, axis=1)
+        out['sediment'] = turn_channels(s, rotation) if rotation is not None else s
+    return out
 
 
 def surface_colour(height, level, clim, ppd, drainage=None, sea=None):
@@ -337,6 +405,222 @@ def surface_colour(height, level, clim, ppd, drainage=None, sea=None):
     return colour, water, river, surface_level
 
 
+def plant_cover(aridity):
+    """The share of the ground plants cover at an aridity (rain over demand), by COVER."""
+    c = COVER
+    return c['least'] + (c['most'] - c['least']) / (1.0 + (c['half'] / aridity) ** c['steep'])
+
+
+def share_of(aridity, curve):
+    """A share rising with aridity through half at curve['half']."""
+    return 1.0 / (1.0 + (curve['half'] / aridity) ** curve['steep'])
+
+
+XYZ_TO_SRGB = np.array([[3.2406, -1.5372, -0.4986], [-0.9689, 1.8758, 0.0415], [0.0557, -0.2040, 1.0570]])
+BRADFORD = np.array([[0.8951, 0.2664, -0.1614], [-0.7502, 1.7135, 0.0367], [0.0389, -0.0685, 1.0296]])
+
+
+def munsell_srgb(xyY):
+    """A Munsell renotation colour's reflectance in linear sRGB: its xyY under Illuminant C, Y scaled by 0.975 to the
+    perfect diffuser (the renotation's Y is relative to magnesium oxide), carried to D65 by the Bradford transform."""
+    x, y, Y = xyY
+    Y = Y * 0.975 / 100.0
+    white = lambda wx, wy: np.array([wx / wy, 1.0, (1.0 - wx - wy) / wy])
+    adapt = np.linalg.inv(BRADFORD) @ np.diag((BRADFORD @ white(0.31271, 0.32902)) / (BRADFORD @ white(0.31006, 0.31616))) @ BRADFORD
+    return np.clip(XYZ_TO_SRGB @ (adapt @ np.array([x / y * Y, Y, (1.0 - x - y) / y * Y])), 0.0, None)
+
+
+def soil_colour(aridity, feo, tio2=0.0):
+    """Bare weathered ground (linear sRGB, float32, a trailing axis of 3): each end's soil colour interpolated in log
+    aridity between its three (held beyond them), the two ends mixed by the iron (FeO, weight per cent) between theirs,
+    and the basalt end darkened by its titanium."""
+    ln = np.log(np.asarray(aridity, np.float32))
+    ends = []
+    for end in ('highland', 'basalt'):
+        knots = SOIL_MUNSELL[end]
+        at = np.log([k[0] for k in knots])
+        rgb = np.array([munsell_srgb(k[3]) for k in knots])
+        ends.append(np.stack([np.interp(ln, at, rgb[:, c]) for c in range(3)], axis=-1).astype(np.float32))
+    f = np.clip((np.asarray(feo, np.float32) - SOIL_FEO[0]) / (SOIL_FEO[1] - SOIL_FEO[0]), 0.0, 1.0)[..., None]
+    dark = (TITANIUM_DARKENING ** np.maximum(np.asarray(tio2, np.float32) - 2.0, 0.0))[..., None]
+    return (ends[0] * (1 - f) + ends[1] * dark * f).astype(np.float32)
+
+
+def ground_colour(aridity, soil, mafic=0.0, rocky=0.0):
+    """Reflectance of the ground (linear sRGB, float32, a trailing axis of 3) at an aridity: plants over bare ground in
+    the share Earth's land holds under the same dryness, the trees' share and the grass's green rising with the rain;
+    the bare ground the weathered soil (soil_colour), and rock in its place on steep ground (rocky the share of the
+    bare ground; mafic the basalt's share of the rock)."""
+    a = np.asarray(aridity, np.float32)[..., None]
+    m = np.asarray(mafic, np.float32)[..., None]
+    r = np.asarray(rocky, np.float32)[..., None]
+    bare = np.asarray(soil, np.float32) * (1 - r) + (ROCK * (1 - m) + BASALT_ROCK * m) * r
+    green = share_of(a, GREEN)
+    trees = share_of(a, TREES)
+    canopy = FOREST * trees + (DRY_HERB * (1 - green) + GREEN_HERB * green) * (1 - trees)
+    cover = plant_cover(a)
+    return (bare * (1 - cover) + canopy * cover).astype(np.float32)
+
+
+def grid_field(values, lat_src, lon_src, shape):
+    """A field on the climate model's grid carried to the texture grid: regridded at 4 pixels per degree, smoothed
+    over CLIMATE_SMOOTHING_CELLS of the model's grid spacing, then enlarged."""
+    import cv2
+    lat4 = 90.0 - (np.arange(720) + 0.5) / 4.0
+    lon4 = (np.arange(1440) + 0.5) / 4.0 - 180.0
+    f = regrid(values, lat_src, lon_src, lat4, lon4)
+    spacing = float(np.abs(np.diff(lat_src)).mean())
+    f = sphere_blur(f, CLIMATE_SMOOTHING_CELLS * spacing * 4.0, lat4).astype(np.float32)
+    s = shape[1] // f.shape[1]
+    pad = np.concatenate([f[:, -1:], f, f[:, :1]], axis=1)
+    return cv2.resize(pad, (pad.shape[1] * s, shape[0]), interpolation=cv2.INTER_LINEAR)[:, s:s + shape[1]]
+
+
+def moisture_record(path=MOISTURE):
+    record = json.loads(Path(path).read_text())
+    if record.get('schema') != MOISTURE_SCHEMA:
+        raise SystemExit(f'Expected {MOISTURE_SCHEMA} in {path}')
+    return record
+
+
+def moisture_field(record, shape):
+    """The moisture map's log aridity on the texture grid: each of the run's land cells at its centre, every other cell
+    given its nearest land cell's (as the map assigns the design surface's land there), then regridded and smoothed as
+    the climate's fields are. Both are on the run's grid, in the globe's frame."""
+    from scipy.spatial import cKDTree
+    lat = np.asarray(record['grid']['lat'], float)
+    lon = np.asarray(record['grid']['lon'], float)
+    cells = record['cells']
+    ln = np.full((lat.size, lon.size), np.nan)
+    ln[np.asarray(cells['row']), np.asarray(cells['col'])] = np.log(np.asarray(cells['aridity'], float))
+    la, lo = np.meshgrid(np.radians(lat), np.radians(lon), indexing='ij')
+    points = np.stack([np.cos(la) * np.cos(lo), np.cos(la) * np.sin(lo), np.sin(la)], axis=-1)
+    land = np.isfinite(ln)
+    _, nearest = cKDTree(points[land]).query(points[~land])
+    ln[~land] = ln[land][nearest]
+    return grid_field(ln, lat, lon, shape)
+
+
+def water_albedos(path=WATER_COLOURS):
+    """Each designed water's reflectance (linear sRGB) as the page lights it: pi times its remote-sensing reflectance,
+    weighted in each channel by sunlight (the illumination domain's solar spectrum, the spectrum that sets the page's
+    sunlight), for the open sea, the productive coast and the river mouth at their mean chlorophyll."""
+    from illumination.sky.atmospheres import SW, SF, MOON
+    from illumination.sky.colour_matching import colour_weights
+    d = json.loads(Path(path).read_text())
+    lam = np.asarray(d['display_wavelength_nm'], float)
+    weights = (np.interp(lam, SW, SF) * MOON.visible_filter)[:, None] * colour_weights(lam)
+    case = lambda water: next(c for c in d['cases']
+                              if c['water'] == water and c['phase'] == 'mean' and c['soil'] == 'developed')
+    return {k: (np.pi * np.asarray(case(k)['rrs_display_per_sr']) @ weights / weights.sum(axis=0)).astype(np.float32)
+            for k in ('open_sea', 'productive_coast', 'river_mouth')}
+
+
+def plume_share(discharge, water, lat, km):
+    """The share of each water pixel a river's sediment plume colours: round each mouth (a channel pixel beside the
+    water), out to about PLUME_KM_PER_ROOT km per (m3/s)^0.5 of its discharge, Gaussian, larger mouths in classes a
+    decade wide."""
+    beside = np.roll(water, 1, axis=1) | np.roll(water, -1, axis=1)
+    beside[1:] |= water[:-1]
+    beside[:-1] |= water[1:]
+    mouth = np.where((discharge > 0) & ~water & beside, discharge, 0.0)
+    plume = np.zeros(water.shape, np.float32)
+    for low in (10.0, 100.0, 1000.0, 10000.0):
+        high = low * 10.0 if low < 10000.0 else np.inf
+        these = ((mouth >= low) & (mouth < high)).astype(np.float32)
+        if not these.any():
+            continue
+        sigma = PLUME_KM_PER_ROOT * np.sqrt(low * np.sqrt(10.0)) / km
+        spread = sphere_blur(these, sigma, lat) * (2.0 * np.pi * sigma * sigma)
+        plume = np.maximum(plume, np.clip(spread, 0.0, 1.0).astype(np.float32))
+    return plume * water
+
+
+def true_colour(height, level, ppd, drainage, moisture, rock, waters):
+    """The ground in true colour (linear sRGB, float32), the water mask and the share of each pixel river channels
+    cover, 180 W at the left edge, on a surface holding every water body at its own level (surface_grids). The cover
+    follows the moisture map's aridity, wetter along larger rivers and in hollows and drier on steep slopes, with noise
+    for patchiness (ground_colour), over the soil weathered from the rock (rock: FeO and TiO2 in weight per cent and
+    the basalt's share, on the texture grid; soil_colour); the waters take the designed waters' colours: open sea, the
+    productive coast's over shelves and in shallow lakes, and the river mouth's in rivers and where rivers carry
+    sediment into a lake or sea (drainage['sediment'], the runoff gathered since the last lake or sea)."""
+    height = height.astype(np.float32)
+    rows, _ = height.shape
+    lat = 90.0 - (np.arange(rows) + 0.5) / ppd
+    km = MOON_KM * np.radians(1.0 / ppd)
+    water = np.isfinite(drainage['lake_level'])
+    surface_level = np.where(water, drainage['lake_level'], level).astype(np.float32)
+    discharge = np.where(water, 0.0, drainage['discharge']).astype(np.float32)
+    river = np.clip(RIVER_WIDTH * np.sqrt(discharge) / (km * 1000.0), 0.0, 1.0).astype(np.float32)
+    ln_aridity = moisture_field(moisture, height.shape)
+    ground = np.where(water, surface_level, height)
+    curvature = sphere_laplacian(sphere_blur(ground, 3.0, lat), lat).astype(np.float32)
+    ln_aridity += HOLLOW_LN * np.clip(curvature / (curvature[~water].std() + 1e-6), -2.5, 2.5)
+    del curvature
+    ln_aridity += FLOODPLAIN_LN * np.minimum(sphere_blur(np.log10(1.0 + discharge), 2.5, lat).astype(np.float32), 2.0)
+    gy, gx = gradients(ground, km * 1000.0, lat)
+    slope = np.hypot(gx, gy)
+    del gy, gx, ground
+    ln_aridity -= SLOPE_LN * smoothstep(0.2, 0.6, slope)
+    ln_aridity += PATCH_LN * (sphere_fbm(height.shape, 11, octaves=9, base=24, spread=0.146) - 0.5) / 0.146
+    aridity = np.exp(ln_aridity)
+    del ln_aridity
+    colour = ground_colour(aridity, soil_colour(aridity, rock['feo'], rock['tio2']), rock['mafic'],
+                           0.6 * smoothstep(0.35, 0.7, slope))
+    del aridity, slope
+    shelf = smoothstep(SHELF_M[0], SHELF_M[1], np.where(water, surface_level - height, 0.0))[..., None]
+    sediment = np.where(water, 0.0, drainage['sediment'] if 'sediment' in drainage else discharge)
+    plume = plume_share(sediment, water, lat, km)[..., None]
+    del sediment
+    sea = (waters['open_sea'] * (1 - shelf) + waters['productive_coast'] * shelf) * (1 - plume) + waters['river_mouth'] * plume
+    del shelf, plume
+    colour = colour * (1 - river[..., None]) + waters['river_mouth'] * river[..., None]
+    colour = np.where(water[..., None], sea, colour).astype(np.float32)
+    return colour, water, river, surface_level
+
+
+LEGEND_ARIDITY = ((2.0, 'Wet forest'), (0.8, 'Humid forest'), (0.57, 'Dry woodland'), (0.33, 'Semi-arid grassland'),
+                  (0.1, 'Arid shrubland'), (0.02, 'Desert, highland soil'))
+HIGHLAND_ROCK = (SOIL_FEO[0], 0.3)   # FeO and TiO2 (weight per cent) of the legend's highland and basalt
+MARE_ROCK = (SOIL_FEO[1], 1.5)
+
+
+def true_legend(waters):
+    """The true-colour legend: the ground on highland rock at the moisture map's class middles, basalt desert, and the
+    three waters."""
+    ground = lambda a, rock, mafic: ground_colour(a, soil_colour(a, *rock), mafic)
+    return ([[name, ground(a, HIGHLAND_ROCK, 0.0)] for a, name in LEGEND_ARIDITY]
+            + [['Desert, basalt soil', ground(0.02, MARE_ROCK, 1.0)]]
+            + [['Open sea', waters['open_sea']], ['Shelf seas, shallow lakes', waters['productive_coast']],
+               ['Rivers, sediment plumes', waters['river_mouth']]])
+
+
+def enlarge(f, shape):
+    """A coarse field (rows from 90 N, a whole number of texture pixels per cell) enlarged to the texture grid,
+    bilinear, wrapping in longitude."""
+    import cv2
+    s = shape[1] // f.shape[1]
+    pad = np.concatenate([f[:, -1:], f, f[:, :1]], axis=1).astype(np.float32)
+    return cv2.resize(pad, (pad.shape[1] * s, shape[0]), interpolation=cv2.INTER_LINEAR)[:, s:s + shape[1]]
+
+
+def rock_fields(shape, ppd, rotation=None):
+    """FeO and TiO2 (weight per cent) and the basalt's share on the texture grid (180 W at the left edge), in the
+    globe's frame: the maria where LROC maps them, with Lunar Prospector's oxides there but at least 15% FeO (mare
+    basalt soils hold 14-22%; the instrument's 5-degree footprint dilutes the small maria), and elsewhere the oxides
+    the highlands hold once the maria are left out of the smoothing."""
+    from geography import mare_map, surface_composition as composition
+    mare = mare_map.basalt(ppd)
+    coarse = block_mean(mare.astype(np.float32), ppd) > 0.5
+    whole, highland = composition.grid(1), composition.grid(1, exclude=coarse)
+    feo = np.where(mare, np.maximum(enlarge(whole['feo'], shape), 15.0), enlarge(highland['feo'], shape))
+    tio2 = np.where(mare, enlarge(whole['tio2'], shape), enlarge(highland['tio2'], shape))
+    fields = dict(feo=feo.astype(np.float32), tio2=np.maximum(tio2, 0.0).astype(np.float32), mafic=mare.astype(np.float32))
+    if rotation is not None:
+        fields = {k: turn_texture(v, rotation) for k, v in fields.items()}
+    return fields
+
+
 def relief_normals(height, ppd):
     """Tangent-space normals of the ground, sea floors and lake beds included, relief baked at NORMAL_STRENGTH.
     The globe's appearance mode flattens them under water, and its map mode under the sea."""
@@ -347,6 +631,39 @@ def relief_normals(height, ppd):
     n = np.stack([-gx * NORMAL_STRENGTH, gy * NORMAL_STRENGTH, np.ones_like(surf)], axis=-1)
     n /= np.linalg.norm(n, axis=-1, keepdims=True)
     return np.round((n + 1) / 2 * 255).astype(np.uint8)
+
+
+SKY_AZIMUTHS = 16                    # directions searched for the horizon
+SKY_REACH_KM = 50.0                  # how far along each
+SKY_STEPS = 20                       # distances along each, spaced evenly in their logarithm from half a pixel
+
+
+def sky_view(height, ppd, water=None):
+    """The share of an even sky's diffuse light that reaches level ground (float32, 1 in the open): the mean over
+    SKY_AZIMUTHS directions of cos^2 of the horizon's elevation, the horizon found out to SKY_REACH_KM along each with
+    the Moon's curvature taken off (the ground falls away by d^2 / 2R, 0.7 km at 50 km). Rows from 90 N, columns
+    wrapping in longitude; water, where given, sees the whole sky."""
+    import cv2
+    h = height.astype(np.float32)
+    rows, cols = h.shape
+    km = MOON_KM * np.radians(1.0 / ppd)
+    lat = 90.0 - (np.arange(rows) + 0.5) / ppd
+    per_col = (1.0 / (km * np.maximum(np.cos(np.radians(lat)), 0.02))).astype(np.float32)[:, None]
+    yy, xx = np.mgrid[0:rows, 0:cols].astype(np.float32)
+    seen = np.zeros_like(h)
+    for k in range(SKY_AZIMUTHS):
+        north, east = np.cos(2.0 * np.pi * k / SKY_AZIMUTHS), np.sin(2.0 * np.pi * k / SKY_AZIMUTHS)
+        steepest = np.zeros_like(h)
+        for d in np.geomspace(0.5 * km, SKY_REACH_KM, SKY_STEPS):
+            map_x = np.mod(xx + np.float32(d * east) * per_col, np.float32(cols))
+            map_y = np.clip(yy - np.float32(d * north / km), 0.0, rows - 1.0)
+            ahead = cv2.remap(h, map_x, map_y, cv2.INTER_LINEAR, borderMode=cv2.BORDER_WRAP)
+            np.maximum(steepest, ((ahead - h) / 1000.0 - d * d / (2.0 * MOON_KM)) / d, out=steepest)
+        seen += 1.0 / (1.0 + steepest * steepest)
+    seen /= SKY_AZIMUTHS
+    if water is not None:
+        seen[water] = 1.0
+    return seen
 
 
 def block_mean(a, k):
@@ -481,13 +798,17 @@ def cloud_quantiles(samples=200_000, seed=3):
     return [np.quantile(cloud_field(n, layer), q).round(5).tolist() for layer in (0, 1)]
 
 
-def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, rotation=None, surface_path=None):
+def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, rotation=None, surface_path=None,
+          moisture_path=None, routing_path=None):
     """Appearance data for the globe page: textures (arrays, 180 W at the left edge) and parameters.
 
     height: metres above the geoid at ppd pixels per degree, 0 E at the left edge as LOLA has it, in the globe's frame;
     climatology: in the same frame; rotation: the turned frame's, which carries the drainage product into it.
     surface_path: a surface holding every water body at its own level (surface_grids), in place of the sea below
-    `level` and the drainage product; `level` then stays the heights' reference for the ground's look."""
+    `level` and the drainage product; `level` then stays the heights' reference for the ground's look.
+    moisture_path: with a surface, the moisture map of the climatology's run and years, which sets the ground in true
+    colour (true_colour) in place of the guessed cover types; routing_path, the routing product the surface was drawn
+    from, whose receivers give the rivers' sediment-bearing flow."""
     moon, engine = engine_atmosphere()
     colour_rel = np.array(moon['sun_colour_linear_srgb'])
     sun_rgb_lux = moon['sun_illuminance_lux'] * colour_rel / float(LUMINANCE @ colour_rel)
@@ -495,7 +816,24 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
     clim_meta = json.loads(str(clim.pop('metadata')))
     clim['deck_sigma'] = clim_meta['deck_sigma']
     h = np.roll(height, height.shape[1] // 2, axis=1)
-    if surface_path is not None:
+    truly = surface_path is not None and moisture_path is not None
+    if truly:
+        from geography import fetch_surface_inputs as geography_inputs, mare_map, surface_composition
+        moisture = moisture_record(moisture_path)
+        made = moisture['producer']
+        if made['run'] != clim_meta['run'] or [made['years'][0], made['years'][-1]] != [clim_meta['years'][0], clim_meta['years'][-1]]:
+            raise SystemExit(f"The moisture map is of {made['run']} years {made['years']}, the clouds of {clim_meta['run']} "
+                             f"years {clim_meta['years']}: build it on the same run and years")
+        drainage = surface_grids(h.shape, surface_path, rotation, routing=routing_path)
+        rock = rock_fields(h.shape, ppd, rotation)
+        waters = water_albedos()
+        colour, water, river, _ = true_colour(h, level, ppd, drainage, moisture, rock, waters)
+        weight = np.cos(np.radians(90.0 - (np.arange(h.shape[0]) + 0.5) / ppd))[:, None]
+        land = (~water) * weight
+        basalt_land = float(((rock['mafic'] > 0.5) * land).sum() / land.sum())
+        feo_land = float((rock['feo'] * land).sum() / land.sum())
+        del rock, weight, land
+    elif surface_path is not None:
         drainage = surface_grids(h.shape, surface_path, rotation)
         colour, water, river, _ = surface_colour(h, level, clim, ppd, drainage, sea=np.zeros(h.shape, bool))
     else:
@@ -505,11 +843,14 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
     for c in range(3):
         albedo[..., c] = np.round(srgb_encode(colour[..., c]) * 255)
     del colour
-    half = block_mean(h, 2)
-    normal = relief_normals(half, ppd // 2)
+    if truly:                        # the full relief, and the sky each place sees
+        normal = relief_normals(h, ppd)
+        sky = np.round(sky_view(np.where(water, drainage['lake_level'], h), ppd, water) * 255).astype(np.uint8)
+    else:
+        normal = relief_normals(block_mean(h, 2), ppd // 2)
     wet_share = water.astype(np.float32) if river is None else np.maximum(water.astype(np.float32), river)
     water_mask = np.round(wet_share * 255).astype(np.uint8)
-    del half, wet_share
+    del wet_share
 
     # Cloud: the Sun-relative composites of each deck and its geographic pattern relative to its zonal mean.
     sun = np.dstack([rows_to_uniform(np.clip(clim[k], 0, 1), clim['lat']) for k in ('low_sun', 'high_sun', 'clt_sun')])
@@ -528,6 +869,8 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
     light = np.stack([direct, diffuse, source]).astype(np.float32)          # 3 rows x elevations x RGB
     textures = dict(albedo=albedo, normal=normal, water=water_mask,
                     cloud_sun=np.round(sun * 255).astype(np.uint8), cloud_geo=np.round(geo * 100).astype(np.uint8))
+    if truly:
+        textures['sky'] = sky
     area = lambda f: float((f * np.cos(np.radians(clim['lat']))[:, None]).sum()
                            / (np.cos(np.radians(clim['lat'])).sum() * f.shape[1]))
     params = dict(
@@ -549,9 +892,24 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
                 ['Bare highland soil', HIGHLAND_SOIL], ['Bare basaltic soil', BASALT_SOIL], ['Rock', ROCK],
                 ['River water, sediment-laden', RIVER_WATER], ['Shallow, silty water', TURBID_WATER],
                 ['Deep water', DEEP_WATER]])
+    sources = dict(engine=ENGINE, sky_atlas=SKY_ATLAS, climatology=Path(climatology))
+    if truly:
+        params['legend'] = true_legend(waters)
+        params['legendTitle'] = 'Ground in true colour'
+        params['legendNote'] = ('Each in daylight, from Earth\'s land and soils under the same dryness: aridity (rain '
+                                'over the water the air could draw off) ' + ', '.join(f'{a:g}' for a, _ in LEGEND_ARIDITY)
+                                + ' on highland rock, and basalt desert. From space the air veils them in blue.')
+        params['cover'] = dict(moisture=dict(schema=moisture['schema'], run=made['run'], years=made['years']),
+                               cover=COVER, trees=TREES, green=GREEN, basaltLandShare=round(basalt_land, 4),
+                               landFeO=round(feo_land, 2),
+                               soils={end: [[a, m, name] for a, m, name, _ in knots] for end, knots in SOIL_MUNSELL.items()},
+                               waters={k: [round(float(v), 5) for v in a] for k, a in waters.items()})
+        sources.update(moisture=Path(moisture_path), mare=geography_inputs.path(mare_map.ARCHIVE),
+                       composition=geography_inputs.path(surface_composition.TABLE), water_colours=WATER_COLOURS)
+        if routing_path is not None:
+            sources['routing'] = Path(routing_path)
     params['legend'] = [[name, '#' + ''.join(f'{int(round(v * 255)):02x}' for v in srgb_encode(np.asarray(rgb)))]
                         for name, rgb in params['legend']]
-    sources = dict(engine=ENGINE, sky_atlas=SKY_ATLAS, climatology=Path(climatology))
     if surface_path is not None:
         sources['surface'] = Path(surface_path)
         params['drainage'] = dict(schema=drainage['metadata']['schema'], riverWidthPerRootDischarge=RIVER_WIDTH)

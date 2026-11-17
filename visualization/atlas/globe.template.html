@@ -240,7 +240,7 @@
       pattern over land and sea. Light scattered more than once in the air is an isotropic source proportional
       to the sky atlas's diffuse light at each point's Sun height, scaled per channel so that the air seen straight
       down matches Eddington's multiple-scattering reflectance of the same column.</p>
-    <p><b>Guesstimate.</b> Surface cover follows rainfall, soil moisture, nearness to water, floodplains, height,
+    <p id="cover-text"><b>Guesstimate.</b> Surface cover follows rainfall, soil moisture, nearness to water, floodplains, height,
       hollows and slope: forest, woodland, grassland, bare highland or basaltic soil, and rock on steep ground. The
       climate run's rain and soil moisture are smoothed over 0.7 of its 5.5° grid before they set the cover, so that
       its grid does not show as straight edges. Water
@@ -253,7 +253,7 @@
       white, and the page opens one stop brighter, where the brightest cloud reaches white. A soft shoulder above 80%
       keeps bright cloud from clipping, and about +10 stops shows the twilight and the night side. Red light only
       shows the red channel in grey, as a red filter would: the air is thinnest there, so land and sea show best. The Sun slider sets the Moon's age from new moon:
-      the Sun stands over longitude 180° − 360° × age / 29.53 days. Fully lit gives every place the same Sun, 60° up
+      the Sun stands over longitude 180° − 360° × age / 29.53 days. Fully lit gives every place the same Sun, 45° up, the cartographers' hill-shading light,
       in the north-west of its own sky and overhead near the poles, so that the globe reads evenly from limb to
       limb; it keeps the clouds of the slider's day, and with no one Sun there is no sunglint. From Earth puts the camera at the Moon's mean distance, 384,400 km, with a narrow field of
       view.</p>
@@ -318,6 +318,7 @@
   uniform sampler2D tAlbedo;
   uniform sampler2D tNormal;
   uniform sampler2D tWater;
+  uniform sampler2D tSky;       // the share of an even sky each place sees past the relief (appearance.sky_view); white without it
   uniform sampler2D tCloudSun;
   uniform sampler2D tCloudGeo;
   uniform sampler2D tLight;
@@ -568,6 +569,7 @@
       vec3 albedo = srgbToLinear(textureLod(tAlbedo, uv, lod).rgb);
       vec3 blurred = srgbToLinear(textureLod(tAlbedo, uv, uBlurLod).rgb);
       float water = textureLod(tWater, uv, lodWater).r;
+      float skySeen = mix(textureLod(tSky, uv, lodWater).r, 1.0, water);
       if (uYear > 0.5) {
         // The year shown: water the drainage network moves takes the appearance's colour for its depth, floor a
         // sea has left a bare floor's colour (a placeholder), and an overflow river its sediment-laden colour.
@@ -600,7 +602,8 @@
         shade *= 1.0 - uLowOpacity * cloud(normalize(n + tl * sun), 0);
         shade *= 1.0 - uHighOpacity * cloud(normalize(n + th * sun), 1);
       }
-      vec3 light = toSun * mus * shade + uAtmos * lightTable(1, elevation) * (1.0 - 0.3 * (1.0 - shade));
+      vec3 skyLight = uAtmos * lightTable(1, elevation) * (1.0 - 0.3 * (1.0 - shade)) * skySeen;
+      vec3 light = toSun * mus * shade + skyLight;
       // Sunglint on open water: a GGX lobe for a wind-roughened sea. Fully lit, with no one Sun, has none.
       vec3 hv = normalize(v + sun);
       float nh = max(dot(n, hv), 0.0), nl = max(mu0, 0.0);
@@ -608,6 +611,9 @@
       float spec = a2 / (PI * dd * dd) * (0.02 + 0.98 * pow(clamp(1.0 - dot(v, hv), 0.0, 1.0), 5.0))
                  * nl / (nl * 0.9 + 0.1) * muv / (muv * 0.9 + 0.1) / (4.0 * muv);
       vec3 glint = water * PI * spec * toSun * shade * (1.0 - uEven);
+      // The sky the water mirrors: Fresnel's reflectance at the view's angle (Schlick's form, 2% straight down) of
+      // the diffuse skylight, taken as even over the sky; the water's own colour is the light that leaves it.
+      glint += water * (0.02 + 0.98 * pow(1.0 - muv, 5.0)) * skyLight;
       vec3 toEye = exp(-uTau0 * column(1.0, muv));
       vec3 diffuseUp = max(1.0 - eddington(uTau0, muv) - toEye, 0.0);
       surface = ((albedo * light + glint) * toEye + blurred * light * diffuseUp) * uSunColour;
@@ -712,7 +718,7 @@
     if (w.x < 0.5 && w.z > 0.5) return ramp(0.0);
     return ramp(h);
   }
-  // Light from 60° up in the north-west of the place n's own sky, turning overhead near the poles, where north and
+  // Light from 45° up in the north-west of the place n's own sky, turning overhead near the poles, where north and
   // east turn round, so that no part of the globe is lit more than another.
   vec3 localLight(vec3 n) {
     vec3 east = vec3(n.z, 0.0, -n.x);
@@ -720,7 +726,7 @@
     if (c < 1e-4) return n;
     east /= c;
     vec3 north = cross(n, east);
-    return normalize(0.866 * n + 0.5 * smoothstep(0.0, 0.1, c) * normalize(north - east));
+    return normalize(0.7071 * n + 0.7071 * smoothstep(0.0, 0.1, c) * normalize(north - east));
   }
   // Relief shading under that light, from the relief's normal nr at the place n: 1 on level ground, which keeps
   // the legend's colours, brighter on slopes that face the light and darker on those turned away.
@@ -830,6 +836,7 @@
   document.getElementById('lake-figures').textContent = D.lakeFigures || ('the lakes cover a further ' +
     figure('Rain-fed lakes').split(' · ')[0] + ' of the Moon and hold ' + figure('Water in those lakes'));
   if (D.waterSource) document.getElementById('water-source').textContent = D.waterSource;
+  if (D.coverText) document.getElementById('cover-text').innerHTML = D.coverText;
   if (D.topoText) document.getElementById('topo-text').textContent = D.topoText;
   document.getElementById('cloud-figures').textContent = Math.round(P.clouds.totalCover * 100) + '% cover, a low deck ' +
     'of ' + Math.round(P.clouds.lowCover * 100) + '% below about 34 km, drawn at its cover-weighted height of ' +
@@ -872,9 +879,10 @@
     legend.replaceChildren();
     if (mode === 'appearance') {
       const overlay = document.getElementById('topo-overlay').checked;
-      legendTitle.textContent = overlay ? 'Surface (guesstimate) and topography' : 'Surface (guesstimate)';
+      const title = P.legendTitle || 'Surface (guesstimate)';
+      legendTitle.textContent = overlay ? title + ' and topography' : title;
       for (const [label, colour] of P.legend) legend.append(swatch(colour, label));
-      legendNote.textContent = 'Reflectance of each cover in daylight; from space the air veils them in blue.' +
+      legendNote.textContent = (P.legendNote || 'Reflectance of each cover in daylight; from space the air veils them in blue.') +
         (overlay ? ' ' + topoKey() : '');
     } else {
       legendTitle.textContent = 'Height and depth';
@@ -924,6 +932,7 @@
     t.generateMipmaps = false;
   };
   const blank = () => { const t = new THREE.DataTexture(new Uint8Array(4), 1, 1, THREE.RGBAFormat); t.needsUpdate = true; return t; };
+  const white = () => { const t = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1, THREE.RGBAFormat); t.needsUpdate = true; return t; };
   const BODIES = Y ? Math.max(2, Y.names.length) : 2;
   const topoUniforms = {
     tRelief: { value: load(D.textures.relief, linear) }, uLow: { value: D.relief.low + 0.5 }, uContour: { value: 1000 },
@@ -976,6 +985,7 @@
     tAlbedo: { value: load(D.textures.albedo, repeatU) },
     tNormal: { value: normalMap },
     tWater: { value: load(D.textures.water, repeatU) },
+    tSky: { value: D.textures.sky ? load(D.textures.sky, repeatU) : white() },
     tCloudSun: { value: load(D.textures.cloudSun, linear) },
     tCloudGeo: { value: load(D.textures.cloudGeo, linear) },
     tLight: { value: lightTex },
