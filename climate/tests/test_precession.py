@@ -115,3 +115,24 @@ def test_a_branch_from_a_precessing_run_keeps_counting_from_that_runs_first_step
     record.write_text(json.dumps(dict(configuration=dict(precession=dict(step0=3106537)))))
     with pytest.raises(ValueError):
         prc.branch_step0(restart)
+
+
+def test_a_restart_carried_onto_a_new_surface_keeps_counting_as_its_state_did(tmp_path):
+    import json
+    model = tmp_path / 'parent' / 'model'
+    model.mkdir(parents=True)
+    state = model / 'MOST_REST.00049'
+    lv.write_records(state, [('nstep', struct.pack('<i', 2934936 + 50 * 17160))])
+    (tmp_path / 'parent' / 'progress.json').write_text(
+        json.dumps(dict(configuration=dict(precession=dict(prc.setting(365.25636), step0=2934936)))))
+    carried = tmp_path / 'carried_MOST_REST.00049'
+    lv.write_records(carried, [('nstep', struct.pack('<i', 2934936 + 50 * 17160))])
+    note = carried.with_name(carried.name + '.carry.json')
+    note.write_text(json.dumps(dict(state=str(state))))
+    assert prc.branch_step0(carried) == 2934936                   # the regression continues across the carry
+    note.write_text(json.dumps(dict(inputs={})))                  # an older carry record names no state
+    assert prc.branch_step0(carried) == 2934936 + 50 * 17160
+    note.write_text(json.dumps(dict(state=str(state))))
+    lv.write_records(carried, [('nstep', struct.pack('<i', 7))])  # a restart off its state's clock: refused
+    with pytest.raises(ValueError):
+        prc.branch_step0(carried)

@@ -53,6 +53,29 @@ def field(records, name):
                          sizes()[name][0] == '<f8' else '<i4')
 
 
+def about(axis_lat, axis_lon, degrees):
+    axis = unit(axis_lat, axis_lon)
+    a = np.radians(degrees)
+    cross = np.array([[0.0, -axis[2], axis[1]], [axis[2], 0.0, -axis[0]], [-axis[1], axis[0], 0.0]])
+    return np.cos(a) * np.eye(3) + np.sin(a) * cross + (1.0 - np.cos(a)) * np.outer(axis, axis)
+
+
+def test_a_carry_between_two_turned_frames_follows_the_ground():
+    old, new = about(0.0, -77.0, 8.05), about(0.0, -60.8, 6.97)
+    assert cr.turn() is None
+    np.testing.assert_allclose(cr.turn(new), new)
+    np.testing.assert_allclose(cr.turn(None, old), old.T)
+    np.testing.assert_allclose(cr.turn(old, old), np.eye(3), atol=1e-12)
+    ground = unit(20.0, 50.0)                        # a place on the ground, in today's frame
+    before = (new @ ground) @ cr.turn(new, old)       # where the cell over it in the new frame stood, as source_cells
+    np.testing.assert_allclose(before, old @ ground, atol=1e-12)
+    vec, _, _ = cr.grid_centres()
+    land = vec[:, 2] > 0.2
+    index = cr.source_cells(land, land, cr.turn(new, old))
+    move = np.degrees(np.arccos(np.clip((vec * vec[index]).sum(axis=1), -1, 1)))
+    assert move.max() < 9.0                           # the frames lie a couple of degrees apart; cells are 5.6 wide
+
+
 def test_every_record_of_the_design_run_has_one_rule():
     groups = [set(cr.SHAPE), set(cr.SURFACE), set(cr.KEPT), set(cr.CARRIED)]
     assert sum(len(g) for g in groups) == len(set().union(*groups))

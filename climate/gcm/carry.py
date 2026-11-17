@@ -1,9 +1,10 @@
 """A PlaSim restart's climate carried onto a new surface: the turned Moon's first state, and the step a simulation of the
 build years would take at each change of coastline or orientation (5 November 2026).
 
-    python -m climate.gcm.carry STATE BASE OUT [--frame RECORD]
+    python -m climate.gcm.carry STATE BASE OUT [--frame RECORD] [--from-frame OLD_RECORD]
         # STATE the restart whose climate is carried, BASE a restart PlaSim wrote on the new surface (a fresh start's
-        # first lunar day), OUT the carried restart; RECORD a turned surface's record (turned.py) when the ground turns
+        # first lunar day), OUT the carried restart; RECORD a turned surface's record (turned.py) when the ground turns;
+        # OLD_RECORD the turned surface's record STATE ran on, when STATE's Moon was turned already
 
 A PlaSim restart carries the land-sea mask and the orography with the climate (plasim.f90 reads dls from it, landmod and
 the ocean and ice modules their own masks), so a run on a new surface either starts afresh or starts from a restart
@@ -13,7 +14,8 @@ velocities, and the surface climatologies, uniform on this Moon) comes from BASE
 The climate's state comes from STATE: the atmosphere's spectral fields and its cloud as they stand, and every surface
 field moved with the ground (CARRIED), each cell of the new surface taking the value of STATE's nearest cell of its own
 kind, land or water, to the place the cell's centre stood before the turn (R^T n, R the record's rotation; the identity
-without a frame). The atmosphere keeps its own longitudes, which stay tied to the Sun, and finds the new orography under
+without a frame). From a Moon turned already (OLD_RECORD, rotation R_old) into another frame (RECORD, R_new) the turn
+is R_new R_old^T, so the cell's centre stood at R_old R_new^T n. The atmosphere keeps its own longitudes, which stay tied to the Sun, and finds the new orography under
 its surface pressure, as PlaSim's own fresh start, with its uniform surface pressure, does at its first step. The
 clock, the accumulation counters and the random seed are STATE's, so the Sun stands where STATE's atmosphere has it.
 """
@@ -82,6 +84,15 @@ def source_cells(old_land, new_land, rotation=None, nlat=NLAT, nlon=NLON):
     return index
 
 
+def turn(new=None, old=None):
+    """The rotation carrying the ground from STATE's frame into the new surface's: R_new R_old^T, with today's frame
+    (the identity) for either left out, and None when neither turns."""
+    if new is None and old is None:
+        return None
+    eye = np.eye(3)
+    return (eye if new is None else np.asarray(new, float)) @ (eye if old is None else np.asarray(old, float)).T
+
+
 def carry(state, base, rotation=None):
     """The carried restart's records from STATE's and BASE's (levels.read_records), with what moved."""
     s = {name.strip(): data for name, data in state}
@@ -132,10 +143,12 @@ def main(argv=None) -> int:
     parser.add_argument('base', type=Path, help='a restart PlaSim wrote on the new surface')
     parser.add_argument('out', type=Path, help='the carried restart')
     parser.add_argument('--frame', type=Path, help="a turned surface's record (turned.py) when the ground turns")
+    parser.add_argument('--from-frame', type=Path,
+                        help="the turned surface's record STATE ran on, when STATE's Moon was turned already")
     parser.add_argument('--record', type=Path, help="where to write the carry's record (default: beside OUT)")
     args = parser.parse_args(argv)
-    frame = json.loads(args.frame.read_text()) if args.frame else None
-    rotation = np.asarray(frame['frame']['rotation_today_to_turned'], float) if frame else None
+    rotation = turn(*(np.asarray(json.loads(p.read_text())['frame']['rotation_today_to_turned'], float) if p else None
+                      for p in (args.frame, args.from_frame)))
     records, moved, index = carry(lv.read_records(args.state), lv.read_records(args.base), rotation)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     lv.write_records(args.out, records)
@@ -145,8 +158,9 @@ def main(argv=None) -> int:
             f'gcm/{name}': hashlib.sha256((bd.HERE / name).read_bytes()).hexdigest()[:16]
             for name in ('carry.py', 'levels.py')}),
         inputs={str(args.state): sha(args.state), str(args.base): sha(args.base),
-                **({str(args.frame): sha(args.frame)} if args.frame else {})},
-        out={str(args.out): sha(args.out)}, moved=moved,
+                **({str(args.frame): sha(args.frame)} if args.frame else {}),
+                **({str(args.from_frame): sha(args.from_frame)} if args.from_frame else {})},
+        out={str(args.out): sha(args.out)}, state=str(args.state), moved=moved,
         rules=dict(surface_from_base=list(SURFACE), kept_from_state=list(KEPT), carried_with_the_ground=list(CARRIED)),
         evidence=('A construction: the climate of one PlaSim restart carried onto the surface of another, the surface '
                   'fields moved with the ground cell by cell to the nearest cell of their own kind; an initial state '

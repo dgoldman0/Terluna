@@ -95,8 +95,16 @@ def restart_step(path) -> int:
 def branch_step0(start_from) -> int:
     """The step a branch from the restart start_from counts the regression from. A restart in the model folder of a
     run that precesses hands on that run's first step, read from the run's progress.json, so the equinox keeps
-    regressing where the restart left it; any other restart starts the count at its own step."""
+    regressing where the restart left it; a restart carried onto a new surface (carry.py, its record beside it naming
+    the state it carries) keeps that state's clock and so hands on that state's count; any other restart starts the
+    count at its own step."""
     path = Path(start_from)
+    carried = path.with_name(path.name + '.carry.json')
+    state = json.loads(carried.read_text()).get('state') if carried.is_file() else None
+    if state:
+        if restart_step(state) != restart_step(path):
+            raise ValueError(f'{path} does not stand at the step of {state}, the state its carry record names')
+        return branch_step0(state)
     record = path.parent.parent / 'progress.json'
     if path.parent.name == 'model' and record.is_file():
         held = (json.loads(record.read_text()).get('configuration', {}).get('precession') or {}).get('step0')
