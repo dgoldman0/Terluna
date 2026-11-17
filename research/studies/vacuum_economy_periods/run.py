@@ -264,8 +264,8 @@ def cases():
         for floor in FLOORS:
             out.append(('central:central:steady:U_%s:floor_%g' % (policy, floor), 'central', 'central', 'steady',
                         tuple(sorted((('u_floor', floor), ('u_policy', policy))))))
-        out.append(('central:central:steady:U_%s:credit_line' % policy, 'central', 'central', 'steady',
-                    tuple(sorted((('u_credit_line', True), ('u_policy', policy))))))
+        out.append(('central:central:steady:U_%s:no_backstop' % policy, 'central', 'central', 'steady',
+                    tuple(sorted((('u_credit_line', False), ('u_policy', policy))))))
     for scenario, tcase in (('central', 'slow'), ('central', 'fast'), ('low', 'central'), ('low', 'fast')):
         out.append(('%s:%s:steady:U_liberal' % (scenario, tcase), scenario, tcase, 'steady', (('u_policy', 'liberal'),)))
     for key, value in (('u_trade_effect', -0.1), ('u_spending_share', 0.0), ('u_spending_share', 0.6), ('u_funders_paid_in_U', 0.0),

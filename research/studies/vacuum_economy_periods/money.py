@@ -55,7 +55,7 @@ def holders(overrides=None):
 
 
 def reserve_terms():
-    return {k: v(x) for k, x in inputs()['u']['reserve'].items()}
+    return {k: v(x) for k, x in inputs()['u']['reserve'].items() if k != 'backstop_after_repayment'}
 
 
 def tests():

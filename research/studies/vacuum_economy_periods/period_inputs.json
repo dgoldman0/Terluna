@@ -552,6 +552,14 @@
    "metal_haircut": {
     "value": 0.1,
     "basis": "the share of the metals' value the run test leaves out, as the transition plan's illustrative 10% haircut on reserve value (research/studies/monetary_system/trade_transition.md); the metals earn nothing and hold their value in constant dollars"
+   },
+   "backstop_after_repayment": {
+    "value": "credit_line",
+    "options": [
+     "credit_line",
+     "none"
+    ],
+    "basis": "what stands behind the reserve once the account with Earth is repaid, when U at its floor still leaves the reserve below its minimum: the funders' credit line lends it the rest and their flows carry the loan, judged by the same decade test as the dollar account, in which the funders cover a year's deficit so long as no ten years together are in deficit; with none, the reserve falls short and fails its test. Credit line by default since 17 November 2026, none as the stricter case"
    }
   },
   "holders": {

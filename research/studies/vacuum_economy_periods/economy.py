@@ -55,7 +55,7 @@ def defaults():
                 water_set_aside=v(tr['water_set_aside_share']), past_plan=v(inputs()['growth']['past_plan']),
                 u_policy=v(inputs()['u']['policy']), u_floor=v(inputs()['u']['rate']['floor']), u_real_yield=None,
                 u_reserve_share=None, u_funders_paid_in_U=None, u_metal_share=None, u_trade_effect=None, u_spending_share=None,
-                u_investor_premium=None, u_credit_line=False)
+                u_investor_premium=None, u_credit_line=v(inputs()['u']['reserve']['backstop_after_repayment']) == 'credit_line')
 
 
 class Run:
