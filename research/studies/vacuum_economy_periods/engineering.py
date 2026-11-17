@@ -172,14 +172,21 @@ def reach(percentile):
     return r['depot_leg_upper_edges_m_s'], r['contained_water_within_kg'][percentile]
 
 
-def leg_for(drawn_kg, percentile):
+def leg_for(drawn_kg, percentile, set_aside=0.0):
     """The leg the tugs fly once the cumulative draw of contained water has reached `drawn_kg`, mining the nearest
-    water first; None once the survey's water is exhausted."""
+    water first, with a share `set_aside` of each body's water left unmined; None once the water open to mining is
+    exhausted."""
     edges, within = reach(percentile)
     for edge, w in zip(edges, within):
-        if w >= drawn_kg and w > 0:
+        usable = w * (1.0 - set_aside)
+        if usable >= drawn_kg and usable > 0:
             return edge
     return None
+
+
+def usable_water_kg(percentile, set_aside=0.0):
+    """All the survey's contained water open to mining at a percentile, after the share set aside."""
+    return reach(percentile)[1][-1] * (1.0 - set_aside)
 
 
 def tug(kind, leg_m_s, prices):

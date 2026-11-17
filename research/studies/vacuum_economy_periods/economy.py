@@ -1,4 +1,8 @@
-"""The vacuum economy year by year, from 2041 (year 0) to 2261 (year 220), with the engineering of each year.
+"""The vacuum economy year by year, from 2041 (year 0) to the horizon, 2341 (year 300), with the engineering of each year.
+
+Residents follow a ramp of the programme or a schedule; past the planned 6.47 million they go on growing, the ramps at
+their final rates, until the sites are full: the caves' cities and the eventual set of crater sites in towns. Technology
+is held at its 2241 values after 2241.
 
 Each year the settlement houses its newcomers in towns or cities built from their designs with that year's engineering;
 renews what wears out; supplies firm power from the option that costs least; makes in its own industry what it can and
@@ -23,8 +27,8 @@ from research.studies.vacuum_economy import programme as definition
 from . import designs, engineering, sales, technology as tech
 from .designs import inputs, v
 
-YEARS = range(0, 221)
 OPENING = 8
+DECADE = 10                         # the window of the growth test: once repaid, no ten years together in deficit
 FOUNDING_RESIDENTS = 250000.0
 STREAMS = designs.STREAMS
 RENEWED = ('bulk_kg', 'metal_kg', 'pressure_kg', 'equipment_kg')
@@ -37,19 +41,27 @@ def prices(tcase, date, wage):
     return engineering.Prices(tcase, date, wage)
 
 
+def horizon():
+    """The last year modelled: 300, 2341."""
+    return int(v(inputs()['growth']['horizon_year']))
+
+
 def defaults():
     s, pe, m, tr = inputs()['settlements'], inputs()['people'], inputs()['money'], inputs()['transport']
     return dict(pay_counted=v(m['pay_counted']), share_spent_on_Earth=v(m['share_of_pay_spent_on_Earth']),
                 births=v(pe['births_per_resident_year']), fares_paid_by=v(pe['fares_paid_by']),
                 allocation=v(s['allocation']), caves=v(s['caves_for_cities']), town_residents=v(s['town_residents']),
-                reach=v(tr['reach_percentile']), share_who_work=v(pe['share_who_work']))
+                reach=v(tr['reach_percentile']), share_who_work=v(pe['share_who_work']),
+                water_set_aside=v(tr['water_set_aside_share']), past_plan=v(inputs()['growth']['past_plan']))
 
 
 class Run:
     """One case: a scenario of demand, a technology case and a schedule of residents (a ramp of the programme, or a
-    list of residents by year for growth as a result), with options that override the defaults of period_inputs.json."""
+    list of residents by year for growth as a result), with options that override the defaults of period_inputs.json.
+    The run ends at `last_year` (the horizon by default) or, with `stop_at_exhaustion`, in the first year the water open
+    to mining runs out."""
 
-    def __init__(self, scenario, technology, ramp='constant_growth', schedule=None, **options):
+    def __init__(self, scenario, technology, ramp='constant_growth', schedule=None, last_year=None, stop_at_exhaustion=False, **options):
         self.scenario, self.tcase, self.ramp = scenario, technology, ramp
         self.opt = defaults()
         unknown = set(options) - set(self.opt)
@@ -58,14 +70,35 @@ class Run:
         self.opt.update(options)
         self.programme = definition.load()
         self.schedule = schedule
+        self.last_year = horizon() if last_year is None else int(last_year)
+        self.stop_at_exhaustion = stop_at_exhaustion
         self.world = sales.world(scenario)
 
+    def capacity(self):
+        """Residents the sites can house: the caves' cities, the eventual set of crater sites in towns of the case's size,
+        and the founding system's towns."""
+        s = inputs()['settlements']
+        return (self.opt['caves'] * s['founding_system']['residents_per_city'] + v(s['eventual_crater_sites']) * self.opt['town_residents']
+                + FOUNDING_RESIDENTS * 0.2)
+
+    def initial_town_capacity(self):
+        """Residents the initial quota's towns house, with the founding system's: for reporting who lives beyond it."""
+        return v(inputs()['settlements']['crater_sites']) * self.opt['town_residents'] + FOUNDING_RESIDENTS * 0.2
+
     def residents(self, y):
+        """Residents in a year: the schedule's, or the ramp's; past the plan's completion year a ramp carries on at its
+        final rate (or holds, with past_plan 'hold'). Never more than the sites house."""
         if y < OPENING:
             return 0.0
         if self.schedule is not None:
-            return self.schedule[min(y, len(self.schedule) - 1)]
-        return definition.population(self.programme, self.ramp, y)
+            n = self.schedule[min(y, len(self.schedule) - 1)]
+        else:
+            done = self.programme['calendar']['completion_year']
+            n = definition.population(self.programme, self.ramp, min(y, done))
+            if y > done and self.opt['past_plan'] == 'continue':
+                rate = n / definition.population(self.programme, self.ramp, done - 1) - 1
+                n *= (1 + rate) ** (y - done)
+        return min(n, self.capacity())
 
     def wage(self, date):
         return v(inputs()['money']['wage_USD2041_year']) * self.world.income(date) / self.world.income(2041)
@@ -80,7 +113,10 @@ class Run:
         town_km = sites['km'][next(i for i, s in enumerate(sites['share']) if s >= 0.5)]
         city_km = v(I['settlements']['city_km_from_a_polar_ridge'])
         city_cap = opt['caves'] * found['residents_per_city']
-        town_cap = v(I['settlements']['crater_sites']) * opt['town_residents']
+        town_cap = v(I['settlements']['eventual_crater_sites']) * opt['town_residents']
+        initial_towns = self.initial_town_capacity()
+        capacity = self.capacity()
+        set_aside = opt['water_set_aside']
         lo, hi = v(I['founding']['build_years'])
         plant_life0 = v(ind['plant_design_life_years'])
         ramp_years = v(ind['local_manufacture_ramp_years'])
@@ -97,12 +133,12 @@ class Run:
         power_life = {}
         fleet = 0.0                                  # the tug fleet's capacity, kg a year delivered
         drawn_contained = 0.0
-        leg = engineering.leg_for(1.0, opt['reach'])
+        leg = engineering.leg_for(1.0, opt['reach'], set_aside)
         cumulative = 0.0
         feed_last, depot_cost_last, cargo_history = 0.0, None, []
         made_history, stocks_due, rows = [], {}, []
         lines_scale = 1.0
-        for y in YEARS:
+        for y in range(0, self.last_year + 1):
             date = 2041 + y
             t = tech.Year(self.tcase, date)
             wage = self.wage(date)
@@ -212,8 +248,11 @@ class Run:
             made_history.append(outside_work)
             drawn_contained += out['contained_kg']
             feed_last = out['contained_kg'] / grade
-            leg = engineering.leg_for(max(1.0, drawn_contained), opt['reach'])
-            depot_cost_last = out['water_kg_cost']
+            leg = engineering.leg_for(max(1.0, drawn_contained), opt['reach'], set_aside)
+            # Once the water open to mining is exhausted the depot keeps last year's price for its sales; the case's later
+            # years are no longer physical, and the summary names the year.
+            if math.isfinite(out['water_kg_cost']):
+                depot_cost_last = out['water_kg_cost']
 
             # 5. What is bought from Earth and what is paid for it.
             equipment_imported = (1 - local_cap) * equipment_need + goods_imported
@@ -256,6 +295,7 @@ class Run:
             rows.append(dict(
                 year=y, date=date, residents=N, newcomers=newcomers, arrivals=arrivals, births=births,
                 housed_city=housed['city'], housed_town=housed['town'],
+                housed_beyond_initial_quota=max(0.0, housed['town'] - initial_towns), sites_full=N >= capacity * (1 - 1e-9),
                 receipts=receipts, paid_to_Earth=paid, to_Earth=earth, net=net, cumulative=cumulative,
                 lines={k: dict(receipts=x['receipts'], to_Earth=x['to_Earth'], served=x['served'], jobs=x['jobs'],
                                **{q: x[q] for q in ('kg', 'visitors', 'price', 'watts') if q in x}) for k, x in lines_year.items()},
@@ -271,6 +311,8 @@ class Run:
                 tug=out['kind'], leg_m_s=out['leg'], water_delivered_t=out['delivered_kg'] / 1000.0, contained_drawn_t=drawn_contained / 1000.0,
                 exhausted=out['exhausted'], wage=wage, kWh_USD=P.kWh, fare=P.fare(), landed_USD_kg=P.landed,
                 visitors=visitors, visitor_share_of_world=visitors / self.world.population(date)))
+            if out['exhausted'] and self.stop_at_exhaustion:
+                break
         return rows
 
     @staticmethod
@@ -279,9 +321,9 @@ class Run:
         return getattr(t, k) if isinstance(k, str) else k
 
     def allocate(self, n, housed, city_cap, town_cap, P, date):
-        """Newcomers after the founding system: by cost between towns and cities within the caves and the crater sites
-        available, or by the rule the case states. Newcomers beyond every site and cave are still housed, in towns, and
-        counted as beyond the programme's sites."""
+        """Newcomers after the founding system: by cost between towns and cities within the caves and the eventual set of
+        crater sites, the initial quota's first, or by the rule the case states. The residents never outnumber what the
+        sites house, so none is left beyond them."""
         rule = self.opt['allocation']
         city_room = max(0.0, city_cap - housed['city'])
         town_room = max(0.0, town_cap - housed['town'] + FOUNDING_RESIDENTS * 0.2)
@@ -433,24 +475,35 @@ class Run:
 
 
 def summary(rows, rates=(0.0, 0.01, 0.03, 0.07)):
-    """The measures of one case: the funding needed (the deepest the cumulative account goes) and how much of it is
-    needed by the opening, the net present value at each rate to years 100, 200 and 220, the first year after the opening
-    from which the cumulative account stays repaid, the residents at chosen years, the years short of hands, and the first
-    year the sources' water runs out."""
+    """The measures of one case: the funding needed (the deepest the cumulative account goes, over the whole run and by
+    years 100, 200 and the last) and how much of it is needed by the opening; the net present value at each rate to years 100 and 200 and to the last year; the first year
+    after the opening in which the account is repaid, the years in deficit after it and the ten-year windows after it
+    whose years together are in deficit, and the first year from which it stays repaid; the year the plan's 6.47 million is reached and the year the sites are full; the residents at chosen
+    years; the years short of hands; and the first year the water open to mining runs out."""
     nets = [r['net'] for r in rows]
     cum = [r['cumulative'] for r in rows]
+    last = rows[-1]['year']
     opening = -min(0.0, min(cum[:OPENING + 1]))
-    # The payback year: the first year after the opening from which the cumulative account stays repaid to year 220.
+    # The payback year: the first year after the opening from which the cumulative account stays repaid to the last.
     payback = None
     for r in reversed(rows):
         if r['cumulative'] < 0:
             break
         if r['year'] >= OPENING:
             payback = r['year']
-    npv = {str(rate): {str(h): sum(n / (1 + rate) ** y for y, n in enumerate(nets[:h + 1])) for h in (100, 200, 220)} for rate in rates}
+    repaid = next((r['year'] for r in rows if r['year'] > OPENING and r['cumulative'] >= 0), None)
+    horizons = sorted({h for h in (100, 200, last) if h <= last})
+    npv = {str(rate): {str(h): sum(n / (1 + rate) ** y for y, n in enumerate(nets[:h + 1])) for h in horizons} for rate in rates}
+    planned = definition.load()['population']['planned']
     return dict(funding_needed_USD2041=-min(0.0, min(cum)), opening_funding_USD2041=opening,
                 funding_after_opening_USD2041=max(0.0, -min(cum) - opening),
-                NPV_USD2041=npv, payback_year=payback,
-                residents={str(y): rows[y]['residents'] for y in (50, 100, 150, 200)},
+                funding_needed_by_year_USD2041={str(h): -min(0.0, min(cum[:h + 1])) for h in horizons},
+                NPV_USD2041=npv, last_year=last, payback_year=payback, repaid_year=repaid,
+                deficit_years_after_repayment=0 if repaid is None else sum(1 for r in rows if r['year'] > repaid and r['net'] < 0),
+                deficit_decades_after_repayment=0 if repaid is None else sum(
+                    1 for i in range(repaid + 1, len(rows) - DECADE + 1) if sum(nets[i:i + DECADE]) < 0),
+                plan_reached_year=next((r['year'] for r in rows if r['residents'] >= planned * (1 - 1e-9)), None),
+                sites_full_year=next((r['year'] for r in rows if r['sites_full']), None),
+                residents={str(y): rows[y]['residents'] for y in (50, 100, 150, 200, 250, 300) if y <= last},
                 hands_short_years=sum(1 for r in rows if r['hands_short'] > 0),
                 exhausted_year=next((r['year'] for r in rows if r['exhausted']), None))

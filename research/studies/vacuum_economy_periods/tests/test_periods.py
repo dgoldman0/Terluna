@@ -87,17 +87,74 @@ def test_the_account_adds_up_and_the_bounds_hold(scenario, case, ramp):
     assert s['funding_needed_USD2041'] >= s['opening_funding_USD2041']
 
 
-def test_better_technology_needs_less_funding():
-    funding = [economy.summary(economy.Run('central', c, 'constant_growth').simulate())['funding_needed_USD2041'] for c in ('static', 'slow', 'central', 'fast')]
+def test_better_technology_needs_less_funding_for_the_plan():
+    funding = [economy.summary(economy.Run('central', c, 'constant_growth').simulate())['funding_needed_by_year_USD2041']['200']
+               for c in ('static', 'slow', 'central', 'fast')]
     assert funding[0] > funding[1] > funding[3]
 
 
-def test_residents_as_a_result_take_the_highest_rate_the_funders_allow():
-    rates = run.solve('central', 'central', 'steady')
-    rate = rates[0][2]
-    assert run.sustained('central', 'central', run.schedule(rates), ())[0]
-    faster = [(rates[0][0], rates[0][1], rate + 0.002)]
-    assert not run.sustained('central', 'central', run.schedule(faster), ())[0]
+def test_residents_as_a_result_take_the_highest_rates_the_test_allows_to_the_plan_and_past_it():
+    rates, sched = run.solve('central', 'central', 'steady')
+    assert rates['sustained'] and rates['plan_year'] is not None and rates['past_plan'] > 0
+    assert sched == run.steady_schedule(rates['to_plan'], rates['past_plan'])
+    assert run.sustained('central', 'central', sched, ())[0]
+    assert not run.sustained('central', 'central', run.steady_schedule(rates['to_plan'] + 0.002, 0.0), ())[0]
+    assert not run.sustained('central', 'central', run.steady_schedule(rates['to_plan'], rates['past_plan'] + 0.002), ())[0]
+    rows = economy.Run('central', 'central', schedule=sched).simulate()
+    s = economy.summary(rows)
+    assert s['NPV_USD2041']['0.03'][str(run.HORIZON)] >= 0 and s['deficit_decades_after_repayment'] == 0
+    assert rows[run.HORIZON]['residents'] > run.planned()
+
+
+def test_the_test_binds_year_by_year_where_the_present_value_alone_would_not():
+    """Growth carried on at the programme's pace passes a test on the present value at 3%, since discounting shrinks
+    its late deficits, and fails the test that once repaid the account pays its way decade by decade."""
+    rows = economy.Run('central', 'central', 'constant_growth').simulate()
+    s = economy.summary(rows)
+    assert s['NPV_USD2041']['0.03'][str(run.HORIZON)] > 0
+    assert s['deficit_decades_after_repayment'] > 0
+    assert not run.sustained('central', 'central', [rows[y]['residents'] for y in range(run.HORIZON + 1)], ())[0]
+
+
+def test_a_ramp_carries_on_past_the_plan_at_its_final_rate_until_the_sites_are_full():
+    r = economy.Run('central', 'central', 'constant_growth', last_year=run.HORIZON + 20)
+    rows = r.simulate()
+    n = [x['residents'] for x in rows]
+    assert n[200] == pytest.approx(run.planned())
+    assert n[201] / n[200] == pytest.approx(n[200] / n[199], rel=1e-9)
+    assert max(n) <= r.capacity() * (1 + 1e-12)
+    assert economy.summary(rows)['sites_full_year'] is not None
+    assert all(x['housing_short'] == 0 for x in rows)
+    held = economy.Run('central', 'central', 'constant_growth', past_plan='hold').simulate()
+    assert held[run.HORIZON]['residents'] == pytest.approx(run.planned())
+    assert [x['net'] for x in held[:200]] == pytest.approx([x['net'] for x in rows[:200]])
+
+
+def test_newcomers_past_the_initial_quota_live_on_the_eventual_set_of_sites():
+    r = economy.Run('central', 'central', 'constant_growth')
+    rows = r.simulate()
+    inputs = json.loads((HERE / 'period_inputs.json').read_text())['settlements']
+    assert r.capacity() == pytest.approx(4 * 50000 + inputs['eventual_crater_sites']['value'] * 750 + 50000)
+    assert rows[200]['housed_beyond_initial_quota'] == 0
+    assert rows[run.HORIZON]['housed_beyond_initial_quota'] > 0
+    assert rows[run.HORIZON]['housed_town'] <= inputs['eventual_crater_sites']['value'] * 750 + 50000 + 1
+
+
+def test_water_set_aside_lengthens_the_legs_and_brings_exhaustion_sooner():
+    assert engineering.usable_water_kg('p50', 0.9) == pytest.approx(0.1 * engineering.usable_water_kg('p50'))
+    for drawn in (1e12, 1e13, 1e14):
+        assert engineering.leg_for(drawn, 'p50', 0.9) >= engineering.leg_for(drawn, 'p50')
+    whole = run.exhaustion('central', 'central', 'ramp', (('reach', 'p50'), ('water_set_aside', 0.0)))
+    kept = run.exhaustion('central', 'central', 'ramp', (('reach', 'p50'), ('water_set_aside', 0.9)))
+    assert kept['water_exhausted_year'] < whole['water_exhausted_year']
+    for e in (whole, kept):
+        assert e['last_year'] == e['water_exhausted_year']
+        if e['water_out_because'] == 'all drawn':
+            assert e['contained_drawn_kg_at_end'] >= e['usable_water_kg']
+        else:
+            assert e['water_out_because'] == 'the rest beyond every tug' and e['contained_drawn_kg_at_end'] < e['usable_water_kg']
+    assert kept['water_out_because'] == 'all drawn'
+    assert whole['residents_when_sites_full'] == pytest.approx(whole['capacity_residents'])
 
 
 def test_the_saved_product_is_current():

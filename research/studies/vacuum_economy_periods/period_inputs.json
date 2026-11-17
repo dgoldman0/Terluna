@@ -148,6 +148,10 @@
    "value": 8886,
    "basis": "habitation/crater_gardens/buildout.json: 0.1% of the 8,886,558 catalogued craters 200-1,000 m across"
   },
+  "eventual_crater_sites": {
+   "value": 222163,
+   "basis": "habitation/crater_gardens/buildout.json: 2.5% of the 8,886,558 catalogued craters 200-1,000 m across, rounded down, the eventual set to which the initial quota belongs. Growth past the initial quota builds towns of the case's size on the eventual set's further sites (agreed 16 November 2026); no crater towns are planned beyond it, the conservation framework's sixth principle leaving the rest of the land unassigned"
+  },
   "town_residents": {
    "value": 750,
    "options": [
@@ -387,6 +391,19 @@
    ],
    "basis": "the source survey's contained water by velocity change (resources/source_access/results/reach.json.gz)"
   },
+  "water_set_aside_share": {
+   "value": 0.0,
+   "options": [
+    0.0,
+    0.9
+   ],
+   "parts": {
+    "future_use": 0.4,
+    "protected": 0.3,
+    "uncertainty": 0.2
+   },
+   "basis": "the share of each body's contained water left unmined. 0 counts the survey's whole conditional pool; 0.9 is the project's only stated set-aside, the world economy study's synthetic reservation shares (research/studies/world_economy/amenities_inputs.json, mining: 40% for future use, 30% protected, 20% withheld for uncertainty, from the register's rule of 31 October 2026 not to strip what is needed later), applied evenly to the near-Earth bodies. The conservation framework draws water from ordinary icy bodies only, and every near-Earth body in the survey is one; no approved extraction fraction exists"
+  },
   "electric_drive_USD2026_W": {
    "value": 5.0,
    "basis": "the coupled study's electric tug: drives at 5 USD2026 a watt"
@@ -449,7 +466,27 @@
     "fastest",
     "most_by_2241"
    ],
-   "basis": "choice 4, open"
+   "basis": "choice 4: the steady rule as headline (agreed 16 November 2026), with the fastest rule beside. Steady growth is solved in two stages: the highest single rate from the opening to the plan, then the highest single rate past it"
+  },
+  "test": {
+   "value": "funders_earn_3pct_and_no_deficit_after_repayment",
+   "basis": "agreed 16 November 2026: growth is carried while the funders earn 3% (net present value at 3% to the horizon not negative) and, once the account with Earth is repaid, the settlement pays its own way: no ten years after the repayment are together in deficit with Earth; the settlement's own work staffed, the sources' water not exhausted and every newcomer housed within the eventual set of sites. The ten-year window is the study's reading of the agreed rule of no yearly deficit: a single year's reinvestment, such as a change of power supply that the factories cannot yet make in full and buy in part from Earth, would otherwise stop all growth, while a lasting deficit still fails. A test on the present value alone admits deficits of tens of trillions a year late in the horizon, since two centuries of discounting shrink them"
+  },
+  "past_plan": {
+   "value": "continue",
+   "options": [
+    "continue",
+    "hold"
+   ],
+   "basis": "agreed 16 November 2026: growth continues past the planned 6.47 million wherever resources allow, the plan being a milestone each case reports. The programme's ramps carry on past 2241 at their final rates (constant growth 3.31% a year, front-loaded 1.97%) until the sites are full; 'hold' keeps the version of 12c50265, residents held at the plan"
+  },
+  "horizon_year": {
+   "value": 300,
+   "basis": "agreed 16 November 2026: the projection runs to 2341, with technology held at its 2241 values (period_technology.json holds every path after its last year) and Earth's demand on its scenario's growth"
+  },
+  "exhaustion_horizon_year": {
+   "value": 1500,
+   "basis": "the study's own: the rough projection of when the sites and the sources' water run out continues each path's growth until a resource runs out or to 3541, technology still held at 2241"
   },
   "opening_funding_limit": {
    "value": "constant_growth",
