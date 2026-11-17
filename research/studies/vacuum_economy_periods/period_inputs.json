@@ -57,6 +57,14 @@
     1800.0
    ],
    "basis": "I01: computers and chip-making machines 190-260 USD/kg, integrated circuits about 1,800 (2023 export values); 500 for servers built to work on the Moon, the study's own"
+  },
+  "dollars_held_share_of_output": {
+   "value": 0.06,
+   "range": [
+    0.04,
+    0.08
+   ],
+   "basis": "the dollars a zone without money of its own holds for its residents and firms to pay one another, as a share of its output, which it must earn from Earth as its output grows: replacing a domestic currency costs a stock of 8% of output on 1970s data and 4-5% in the late 1990s, and the seigniorage given up is 0.1-0.3% of output a year at low inflation (JEC00); dollarized banks hold liquidity of 23% of deposits and more (El Salvador, Panama; Swiston11). The middle of 4-8%, with the ends as the range (lookup of 17 November 2026, research drive vacuum-economy/research/u_premia_money_trade/values.md)"
   }
  },
  "people": {
@@ -521,7 +529,11 @@
     "reserve_months_of_payments": 12,
     "funders_paid_in_U": 0.0,
     "reserve_metal_share": 0.2,
-    "basis": "the policy of 12-13 November 2026: inflation in U kept low, with room for mild expansion, and a partial reserve; trade settled in U from 25% to 85% over the ten years after the opening, the earlier price-pressure study's reference transition (research/studies/monetary_system/pressure.md); no yield offered to Earth's investors; the reserve's target half of Earth's holdings and a year of payments to Earth, which leaves six months of payments between the target and the tests' minimum for the reserve to absorb before U moves; a fifth of the reserve in gold and platinum-group metals, within the 16-27% of the world's official reserves gold makes at end-2023 and end-2025 prices (ECB26) and above the 0-7% most small open economies hold (WGC26; Ecuador 37.5%), taken first from the zone's own refining; the metals earn nothing, Jastram's long-run real return on gold (EH13), against 1.3% a year since 1900 (DMS26)"
+    "bond_term_years": 10,
+    "stake_lock_years": 2,
+    "investors_staking_share": 0.0,
+    "funders_staking_share": 0.0,
+    "basis": "the policy of 12-13 November 2026: inflation in U kept low, with room for mild expansion, and a partial reserve; trade settled in U from 25% to 85% over the ten years after the opening, the earlier price-pressure study's reference transition (research/studies/monetary_system/pressure.md); no yield offered to Earth's investors; the reserve's target half of Earth's holdings and a year of payments to Earth, which leaves six months of payments between the target and the tests' minimum for the reserve to absorb before U moves; a fifth of the reserve in gold and platinum-group metals, within the 16-27% of the world's official reserves gold makes at end-2023 and end-2025 prices (ECB26) and above the 0-7% most small open economies hold (WGC26; Ecuador 37.5%), taken first from the zone's own refining; the metals earn nothing, Jastram's long-run real return on gold (EH13), against 1.3% a year since 1900 (DMS26); each instrument is held by its own group (17 November 2026): Earth's investors hold bonds of ten years, a tenth falling due each year; the holders for use stake (u.holders); stakes lock for two years; the funders keep their U liquid, with their staking a case"
    },
    "liberal": {
     "settlement_share_from": 0.25,
@@ -534,7 +546,11 @@
     "reserve_months_of_payments": 6,
     "funders_paid_in_U": 0.25,
     "reserve_metal_share": 0.2,
-    "basis": "a more liberal policy at the edge of the five tests: bonds or staking at a real yield of 2% a year, held within the zone's growth over the twenty years before once that is known, inflation at the decade bound of 3%, the reserve's target a quarter of Earth's holdings and six months of payments, at the tests' minimum, so that U's rate moves as soon as the account leaves the reserve short; a quarter of the funders' returns paid in U, with the policy search trying none to half, and trade settled in U up to 95%; a fifth of the reserve in gold and platinum-group metals, within the 16-27% of the world's official reserves gold makes at end-2023 and end-2025 prices (ECB26) and above the 0-7% most small open economies hold (WGC26; Ecuador 37.5%), taken first from the zone's own refining; the metals earn nothing, Jastram's long-run real return on gold (EH13), against 1.3% a year since 1900 (DMS26)"
+    "bond_term_years": 10,
+    "stake_lock_years": 2,
+    "investors_staking_share": 0.0,
+    "funders_staking_share": 0.0,
+    "basis": "a more liberal policy at the edge of the five tests: bonds or staking at a real yield of 2% a year, held within the zone's growth over the twenty years before once that is known, inflation at the decade bound of 3%, the reserve's target a quarter of Earth's holdings and six months of payments, at the tests' minimum, so that U's rate moves as soon as the account leaves the reserve short; a quarter of the funders' returns paid in U, with the policy search trying none to half, and trade settled in U up to 95%; a fifth of the reserve in gold and platinum-group metals, within the 16-27% of the world's official reserves gold makes at end-2023 and end-2025 prices (ECB26) and above the 0-7% most small open economies hold (WGC26; Ecuador 37.5%), taken first from the zone's own refining; the metals earn nothing, Jastram's long-run real return on gold (EH13), against 1.3% a year since 1900 (DMS26); each instrument is held by its own group (17 November 2026): Earth's investors hold bonds of ten years, a tenth falling due each year; the holders for use stake (u.holders); stakes lock for two years; the funders keep their U liquid, with their staking a case"
    }
   },
   "rate": {
@@ -610,6 +626,22 @@
    "working_balance_days": {
     "value": 7.0,
     "basis": "the earlier price-pressure study's customer holdings: Earth's customers and sellers keep seven days of the trade settled in U as working balances, without interest"
+   },
+   "holders_for_use_months": {
+    "value": 3.0,
+    "range": [
+     1.0,
+     6.0
+    ],
+    "basis": "the study's own: the months of their spending in the zone on its culture and visits that people on Earth keep in U, above the week of trade Earth's customers and sellers hold as working balances; no source measures how much of a currency its foreign consumers hold for later spending, so three months with one and six as the range"
+   },
+   "holders_for_use_staking_share": {
+    "value": 0.3333333333333333,
+    "range": [
+     0.0,
+     0.44
+    ],
+    "basis": "the share of their U the holders for use stake where the policy pays a yield, locked for the staking term: about the 28-34% of ether staked at its 2.6% reward (Block24, Block26), below the median 44% of 66 proof-of-stake tokens at a median 10% reward (CHT25); the reward is spent in the zone"
    }
   },
   "tests": {

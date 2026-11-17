@@ -228,7 +228,8 @@ AT_YEARS = (8, 25, 50, 100, 150, 200, 250, 300)
 # The ledger of U, in cases with a policy of U.
 U_SERIES = ('trade_multiple', 'u_settlement_share', 'u_real_yield', 'u_rate', 'u_output', 'u_balances', 'u_investment', 'u_investment_target',
             'u_funders_U', 'u_holdings', 'u_holdings_USD', 'u_reserve', 'u_reserve_currency', 'u_reserve_metals', 'u_reserve_target',
-            'u_reserve_minimum', 'u_reserve_own', 'u_metals_retained', 'u_earth_pay', 'u_from_balances', 'u_from_investors',
+            'u_reserve_minimum', 'u_reserve_own', 'u_metals_retained', 'u_earth_pay', 'u_bonds', 'u_staked', 'u_funders_staked', 'u_holders_U',
+            'u_holders_staked', 'u_runnable', 'u_falling_due', 'u_run_need', 'u_from_balances', 'u_from_investors', 'u_from_holders',
             'u_funders_converted', 'u_yield_income', 'u_spent_in_zone', 'u_paid_to_funders', 'funders_flow', 'funders_cumulative', 'u_growth_20')
 
 
@@ -256,6 +257,7 @@ def cases():
     for key, opts in SENSITIVITIES.items():
         out.append(('central:central:constant_growth:%s' % key, 'central', 'central', 'constant_growth', tuple(sorted(opts.items()))))
     out.append(('central:central:steady:whole_pool', 'central', 'central', 'steady', (('water_set_aside', 0.0),)))
+    out.append(('central:central:steady:no_dollars_held', 'central', 'central', 'steady', (('dollars_held_share', 0.0),)))
     # U beside the account with Earth: the two policies on the programme's ramp at the default floor on U's rate and with
     # growth as a result at each floor, the liberal one under each technology and on low demand, and its least certain
     # settings moved one at a time.
@@ -269,8 +271,9 @@ def cases():
     for scenario, tcase in (('central', 'slow'), ('central', 'fast'), ('low', 'central'), ('low', 'fast')):
         out.append(('%s:%s:steady:U_liberal' % (scenario, tcase), scenario, tcase, 'steady', (('u_policy', 'liberal'),)))
     for key, value in (('u_trade_effect', -0.1), ('u_spending_share', 0.0), ('u_spending_share', 0.6), ('u_funders_paid_in_U', 0.0),
-                       ('u_metal_share', 0.0), ('u_investor_premium', 0.01)):
-        out.append(('central:central:steady:U_liberal:%s_%g' % (key[2:], value), 'central', 'central', 'steady',
+                       ('u_metal_share', 0.0), ('u_investor_premium', 0.01), ('u_holders_staking', 0.0), ('u_holders_months', 1),
+                       ('u_holders_months', 6), ('u_funders_staking', 1 / 3), ('u_bond_term', 1)):
+        out.append(('central:central:steady:U_liberal:%s_%.3g' % (key[2:], value), 'central', 'central', 'steady',
                     tuple(sorted((('u_policy', 'liberal'), (key, value))))))
     return out
 

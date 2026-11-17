@@ -180,7 +180,7 @@ def test_the_U_ledger_adds_up_and_holds_its_rules():
     rows = economy.Run('central', 'central', 'constant_growth', u_policy='liberal', u_floor=0.5, past_plan='hold').simulate()
     reserve = 0.0
     for r in rows:
-        change = (r['receipts'] - r['paid_to_Earth'] + r['u_from_balances'] + r['u_from_investors'] + r['u_interest']
+        change = (r['receipts'] - r['paid_to_Earth'] + r['u_from_balances'] + r['u_from_investors'] + r['u_from_holders'] + r['u_interest']
                   - r['u_funders_converted'] - r['u_dollars_to_funders'] + r['u_metals_retained'])
         assert r['u_reserve'] - reserve == pytest.approx(change, abs=1e-6 * max(1.0, r['receipts']))
         reserve = r['u_reserve']
@@ -224,6 +224,55 @@ def test_the_rate_absorbs_a_shortfall_down_to_its_floor_and_the_reserve_test_can
     assert all(par[y]['u_rate'] == 1.0 and not par[y]['u_tests']['reserve'] for y in late)
     assert all(lent[y]['u_tests']['reserve'] for y in late) and sum(lent[y]['funders_flow'] for y in late) < 0
 
+
+
+def test_investors_leave_no_faster_than_their_bonds_mature_and_their_stakes_unlock():
+    """Investors drawn in by a high early yield, which then falls back to the zone's growth, sell for dollars only what
+    matures, unlocks or is paid them in a year; what could leave within a year is the working balances, the funders'
+    liquid U and the stakes unlocking, and the run test asks a quarter of it with the bonds falling due and six months of
+    payments."""
+    led = money.Ledger(money.policy('liberal', dict(real_yield=0.08, funders_paid_in_U=0.0, investors_staking_share=1 / 3)), money.holders())
+    before, bonds = None, {}
+    for y in range(0, 70):
+        r = led.step(y, 2e11 if y >= 8 else 0.0, 1e11, 2e10 if y >= 8 else 0.0, 2e11 * 1.06 ** max(0, min(y, 30) - 8) if y >= 8 else 0.0,
+                     1e11 if y >= 8 else 0.0)
+        if before is not None and r['u_from_investors'] < 0:
+            room = (before['u_bonds'] / 10 + before['u_staked'] / 2 + r['u_real_yield'] * (before['u_bonds'] + before['u_staked'])) * r['u_rate_opening']
+            assert -r['u_from_investors'] <= room * (1 + 1e-9)
+        if y >= 8:
+            assert r['u_runnable'] == pytest.approx(r['u_balances'] + r['u_funders_U'] + r['u_holders_U']
+                                                    + (r['u_staked'] + r['u_funders_staked'] + r['u_holders_staked']) / 2)
+            assert r['u_falling_due'] == pytest.approx(r['u_bonds'] / 10)
+        before = r
+        bonds[y] = r['u_bonds']
+    assert bonds[28] > 0 and bonds[38] > 0.2 * bonds[28]
+
+
+
+def test_holders_for_use_keep_months_of_their_spending_in_U_and_stake_where_a_yield_is_paid():
+    """People on Earth who spend in the zone on its culture and visits keep the set months of that spending, settled in U,
+    a third staked while the liberal policy pays its yield, held within the zone's growth, whose reward they spend in the
+    zone; under the conservative policy, with no yield, they stake nothing."""
+    months = money.holders()['holders_for_use_months']
+    for name, staked_share in (('liberal', 1 / 3), ('conservative', 0.0)):
+        led = money.Ledger(money.policy(name, dict(funders_paid_in_U=0.0)), money.holders())
+        for y in range(0, 40):
+            r = led.step(y, 2e11 if y >= 8 else 0.0, 1e11, 1e10 if y >= 8 else 0.0, 3e11 * 1.03 ** y if y >= 8 else 0.0, 1e11 if y >= 8 else 0.0,
+                         consumer_receipts=1e11 * 1.03 ** y if y >= 8 else 0.0)
+        held = r['u_holders_U'] + r['u_holders_staked']
+        assert held * r['u_rate'] == pytest.approx(r['u_settlement_share'] * 1e11 * 1.03 ** 39 * months / 12, rel=1e-6)
+        assert r['u_holders_staked'] == pytest.approx(staked_share * held, rel=1e-6)
+
+def test_the_dollar_account_pays_for_the_dollars_its_residents_hold():
+    """Without U the residents and firms hold dollars in proportion to the zone's output, and what the account pays Earth
+    for them adds up to that stock."""
+    rows = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=150).simulate()
+    share = json.loads((HERE / 'period_inputs.json').read_text())['money']['dollars_held_share_of_output']['value']
+    r = rows[-1]
+    output = r['workforce'] * r['wage'] + r['receipts'] - r['to_Earth']['lines']
+    assert sum(x['to_Earth']['dollars_held'] for x in rows) == pytest.approx(share * output)
+    plain = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=150, dollars_held_share=0.0).simulate()
+    assert all('dollars_held' not in x['to_Earth'] for x in plain)
 
 def test_the_five_tests_catch_an_unsafe_policy():
     """The funders' whole returns paid in U by a zone whose output is small beside its sales pile Earth's holdings above

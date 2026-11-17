@@ -55,7 +55,9 @@ def defaults():
                 water_set_aside=v(tr['water_set_aside_share']), past_plan=v(inputs()['growth']['past_plan']),
                 u_policy=v(inputs()['u']['policy']), u_floor=v(inputs()['u']['rate']['floor']), u_real_yield=None,
                 u_reserve_share=None, u_funders_paid_in_U=None, u_metal_share=None, u_trade_effect=None, u_spending_share=None,
-                u_investor_premium=None, u_credit_line=v(inputs()['u']['reserve']['backstop_after_repayment']) == 'credit_line')
+                u_investor_premium=None, u_credit_line=v(inputs()['u']['reserve']['backstop_after_repayment']) == 'credit_line',
+                u_funders_staking=None, u_holders_months=None, u_holders_staking=None, u_bond_term=None,
+                dollars_held_share=v(m['dollars_held_share_of_output']))
 
 
 class Run:
@@ -124,9 +126,12 @@ class Run:
         # effect of paying in U scales the lines of sale below, goods that holders of U buy in the zone are charged to the
         # lines' costs, and the ledger keeps Earth's holdings, the rate, the reserve and the funders' flows.
         upol = money.policy(opt['u_policy'], dict(real_yield=opt['u_real_yield'], reserve_share_of_holdings=opt['u_reserve_share'],
-                                                  funders_paid_in_U=opt['u_funders_paid_in_U'], reserve_metal_share=opt['u_metal_share']))
+                                                  funders_paid_in_U=opt['u_funders_paid_in_U'], reserve_metal_share=opt['u_metal_share'],
+                                                  funders_staking_share=opt['u_funders_staking'],
+                                                  bond_term_years=opt['u_bond_term']))
         uh = money.holders(dict(trade_effect_of_full_settlement=opt['u_trade_effect'], share_of_income_spent_in_zone=opt['u_spending_share'],
-                                investment_threshold_spread=opt['u_investor_premium']))
+                                investment_threshold_spread=opt['u_investor_premium'], holders_for_use_months=opt['u_holders_months'],
+                                holders_for_use_staking_share=opt['u_holders_staking']))
         ledger = money.Ledger(upol, uh, floor=opt['u_floor'], credit_line=opt['u_credit_line']) if upol is not None else None
         lo, hi = v(I['founding']['build_years'])
         plant_life0 = v(ind['plant_design_life_years'])
@@ -146,6 +151,7 @@ class Run:
         drawn_contained = 0.0
         leg = engineering.leg_for(1.0, opt['reach'], set_aside)
         cumulative = 0.0
+        dollars_held = 0.0                           # the dollars the residents and firms hold, in the dollar account
         feed_last, depot_cost_last, cargo_history = 0.0, None, []
         made_history, stocks_due, rows = [], {}, []
         lines_scale = 1.0
@@ -316,11 +322,18 @@ class Run:
                 lines_scale = 1.0 if full <= 0 else min(1.0, max(0.0, room / full))
 
             receipts = sum(x['receipts'] for x in served.values())
+            if ledger is None and opt['dollars_held_share'] > 0:
+                # Without U the residents and firms pay one another in dollars, a stock in proportion to the zone's output
+                # that the zone must earn from Earth as it grows.
+                held_now = opt['dollars_held_share'] * (pay + receipts - earth['lines']) if y >= OPENING else 0.0
+                earth['dollars_held'] = held_now - dollars_held
+                dollars_held = held_now
             paid = sum(earth.values())
             u = None
             if ledger is not None:
                 # The ledger sets the year's rate; the residents' purchases from Earth follow it.
-                u = ledger.step(y, receipts, paid - earth['pay'], earth_pay_par, pay, receipts - earth['lines'], retained)
+                consumers = sum(served[k]['receipts'] for k in ('culture', 'visits') if k in served)
+                u = ledger.step(y, receipts, paid - earth['pay'], earth_pay_par, pay, receipts - earth['lines'], retained, consumers)
                 earth['pay'] = u['u_earth_pay']
                 paid = sum(earth.values())
             net = receipts - paid
