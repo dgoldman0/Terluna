@@ -160,7 +160,10 @@ opens the topography too). It can add:
 - `c<metres>` for the contour interval (`c0` for none);
 - `overlay` for the topography over the appearance, and `o<percent>` for its opacity;
 - `y<years>` for the drainage network's water at the recorded year nearest it (`#far.y1000`);
-- `red`, `noclouds` or `noair`.
+- `red`, `noclouds` or `noair`;
+- `peel<km>` for the air in view: only the air below that height, at the control's nearest stop below it (`#far.peel30`; `peel0` for none of it).
+
+The Air in view control peels the air away from the top down, as a descent through it would show the ground. Its stops are the whole air (484 km deep, the view from space), 250, 150, 100, 75, 50, 30, 20, 10, 5, 2 and 1 km, and the ground. The page ray-marches only the air below the chosen height: the column between each point and the eye ends where the ray crosses that height, the haze and the halo come from the air below it, and a cloud deck above it leaves the view. Every place keeps the light the whole air gives it: the sunlight through the full column, the sky's diffuse light and the decks' shade on the ground. With the air's 48.4 km scale height, the air below 100 km holds 87% of the column, below 30 km 46% and below 10 km 19%. The camera stays outside the air (the nearest zoom is 608 km up, above its 484 km top); a camera inside it goes with the close views.
 
 The page was also published privately to claude.ai.
 
