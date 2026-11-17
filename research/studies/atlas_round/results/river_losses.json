@@ -1,0 +1,349 @@
+{
+ "budgets": {
+  "routing_budget": {
+   "evaporation_factor": 1.0,
+   "rivers": {
+    "100": {
+     "length_km": 2570.0,
+     "largest_flow_m3s": 71278.0
+    },
+    "1000": {
+     "length_km": 935.0,
+     "largest_flow_m3s": 71278.0
+    },
+    "10000": {
+     "length_km": 295.0,
+     "largest_flow_m3s": 71278.0
+    }
+   },
+   "floodplains": {
+    "2": {
+     "area_km2": 5921.0,
+     "evaporation_if_all_wet_m3s": 82.3
+    },
+    "5": {
+     "area_km2": 9052.0,
+     "evaporation_if_all_wet_m3s": 129.1
+    },
+    "10": {
+     "area_km2": 13556.0,
+     "evaporation_if_all_wet_m3s": 193.3
+    }
+   },
+   "channel": {
+    "3": {
+     "area_km2": 475.0,
+     "evaporation_m3s": 6.7
+    },
+    "15": {
+     "area_km2": 2374.0,
+     "evaporation_m3s": 33.3
+    }
+   },
+   "riparian_belt": {
+    "0.5": {
+     "area_km2": 1285.0,
+     "evaporation_m3s": 17.0
+    },
+    "2": {
+     "area_km2": 5139.0,
+     "evaporation_m3s": 67.9
+    }
+   },
+   "dry_land_share_of_land": 0.8007
+  },
+  "closed_budget": {
+   "evaporation_factor": 1.146,
+   "rivers": {
+    "100": {
+     "length_km": 2993.0,
+     "largest_flow_m3s": 71278.0
+    },
+    "1000": {
+     "length_km": 1013.0,
+     "largest_flow_m3s": 71278.0
+    },
+    "10000": {
+     "length_km": 306.0,
+     "largest_flow_m3s": 71278.0
+    }
+   },
+   "floodplains": {
+    "2": {
+     "area_km2": 6967.0,
+     "evaporation_if_all_wet_m3s": 113.0
+    },
+    "5": {
+     "area_km2": 10592.0,
+     "evaporation_if_all_wet_m3s": 175.9
+    },
+    "10": {
+     "area_km2": 15845.0,
+     "evaporation_if_all_wet_m3s": 263.6
+    }
+   },
+   "channel": {
+    "3": {
+     "area_km2": 523.0,
+     "evaporation_m3s": 9.0
+    },
+    "15": {
+     "area_km2": 2614.0,
+     "evaporation_m3s": 45.1
+    }
+   },
+   "riparian_belt": {
+    "0.5": {
+     "area_km2": 1497.0,
+     "evaporation_m3s": 23.5
+    },
+    "2": {
+     "area_km2": 5987.0,
+     "evaporation_m3s": 94.2
+    }
+   },
+   "dry_land_share_of_land": 0.8289
+  }
+ },
+ "floodplains_at": {
+  "hand_m": 5.0,
+  "count": 777,
+  "area_km2": 9052.0,
+  "kept_wet_km2": 9052.0,
+  "evaporation_m3s": 129.1,
+  "largest": [
+   {
+    "area_km2": 704.0,
+    "today": [
+     0.94,
+     -34.11
+    ],
+    "turned": [
+     -2.19,
+     -35.2
+    ],
+    "river_flow_m3s": 176.0,
+    "net_evaporation_mm_year": 811.0,
+    "kept_wet_km2": 704.0,
+    "evaporation_m3s": 18.1
+   },
+   {
+    "area_km2": 660.0,
+    "today": [
+     3.18,
+     -35.22
+    ],
+    "turned": [
+     0.15,
+     -36.04
+    ],
+    "river_flow_m3s": 137.0,
+    "net_evaporation_mm_year": 597.0,
+    "kept_wet_km2": 660.0,
+    "evaporation_m3s": 12.5
+   },
+   {
+    "area_km2": 274.0,
+    "today": [
+     17.37,
+     -42.55
+    ],
+    "turned": [
+     15.08,
+     -41.64
+    ],
+    "river_flow_m3s": 1469.0,
+    "net_evaporation_mm_year": 704.0,
+    "kept_wet_km2": 274.0,
+    "evaporation_m3s": 6.1
+   },
+   {
+    "area_km2": 202.0,
+    "today": [
+     17.47,
+     -77.41
+    ],
+    "turned": [
+     19.33,
+     -76.18
+    ],
+    "river_flow_m3s": 894.0,
+    "net_evaporation_mm_year": 600.0,
+    "kept_wet_km2": 202.0,
+    "evaporation_m3s": 3.8
+   },
+   {
+    "area_km2": 192.0,
+    "today": [
+     22.48,
+     37.29
+    ],
+    "turned": [
+     15.58,
+     35.95
+    ],
+    "river_flow_m3s": 1171.0,
+    "net_evaporation_mm_year": 238.0,
+    "kept_wet_km2": 192.0,
+    "evaporation_m3s": 1.5
+   },
+   {
+    "area_km2": 158.0,
+    "today": [
+     -17.18,
+     54.64
+    ],
+    "turned": [
+     -23.45,
+     54.76
+    ],
+    "river_flow_m3s": 175.0,
+    "net_evaporation_mm_year": 281.0,
+    "kept_wet_km2": 158.0,
+    "evaporation_m3s": 1.4
+   },
+   {
+    "area_km2": 136.0,
+    "today": [
+     3.64,
+     -25.53
+    ],
+    "turned": [
+     -0.4,
+     -26.38
+    ],
+    "river_flow_m3s": 203.0,
+    "net_evaporation_mm_year": 181.0,
+    "kept_wet_km2": 136.0,
+    "evaporation_m3s": 0.8
+   },
+   {
+    "area_km2": 126.0,
+    "today": [
+     2.02,
+     -32.61
+    ],
+    "turned": [
+     -1.28,
+     -33.59
+    ],
+    "river_flow_m3s": 178.0,
+    "net_evaporation_mm_year": 790.0,
+    "kept_wet_km2": 126.0,
+    "evaporation_m3s": 3.1
+   },
+   {
+    "area_km2": 120.0,
+    "today": [
+     17.84,
+     -26.09
+    ],
+    "turned": [
+     13.78,
+     -25.49
+    ],
+    "river_flow_m3s": 341.0,
+    "net_evaporation_mm_year": 76.0,
+    "kept_wet_km2": 120.0,
+    "evaporation_m3s": 0.3
+   },
+   {
+    "area_km2": 96.0,
+    "today": [
+     -16.91,
+     56.62
+    ],
+    "turned": [
+     -23.07,
+     56.8
+    ],
+    "river_flow_m3s": 233.0,
+    "net_evaporation_mm_year": 311.0,
+    "kept_wet_km2": 96.0,
+    "evaporation_m3s": 0.9
+   },
+   {
+    "area_km2": 87.0,
+    "today": [
+     -13.14,
+     55.25
+    ],
+    "turned": [
+     -19.38,
+     55.14
+    ],
+    "river_flow_m3s": 176.0,
+    "net_evaporation_mm_year": 543.0,
+    "kept_wet_km2": 87.0,
+    "evaporation_m3s": 1.5
+   },
+   {
+    "area_km2": 86.0,
+    "today": [
+     2.28,
+     -31.97
+    ],
+    "turned": [
+     -1.09,
+     -32.92
+    ],
+    "river_flow_m3s": 179.0,
+    "net_evaporation_mm_year": 767.0,
+    "kept_wet_km2": 86.0,
+    "evaporation_m3s": 2.1
+   }
+  ]
+ },
+ "gcm": {
+  "surface": "moon_28pct_water_lakes_24691ded4c4a980c_turned_61afb0be43d71adf_gaussian_T21.nc",
+  "water_cells": 629,
+  "mask_land_fraction_at_most": 0.5282,
+  "largest_added_water_fraction": 0.0412,
+  "cells_with_added_water_over_1_percent": 6,
+  "land_cells_that_would_turn_to_water": 0,
+  "those_cells": []
+ },
+ "schema": "terluna.research.atlas-round-river-losses/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/river_losses.py": "3847ce4fe1ce6c24307bd458594501d98cec6a7bace4657d4a33541eca8afe1c",
+   "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
+   "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
+   "research/studies/atlas_round/turned_surface.py": "a5a7f02d858d6e3354c4f60903ac889c32677706097a0f6a54c13ee0f7499d1d"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/governed_drainage.json": "6ab50a2911d8767a7cda50fb9641dc0b663c3e1ab980f6d557d4ae6b0a07d872",
+  "research/studies/atlas_round/results/redrawn_drainage.json": "e77aa22523c10cec5be27688e65b815efae15d95c0fb635f14884bf3318493f5",
+  "research/studies/atlas_round/results/settled_turn.json": "61afb0be43d71adffd6a208479c2a5653305e54b63292c46f88968aa2a04b6fe"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/redrawn_drainage/governed_routing.npz": "24691ded4c4a980c8c549df7c0d6d6c7a356d49b5e5212abccc252f04e7ca3ad",
+  "/home/kir/Documents/Projects/terluna-geography/climate/gcm/products/moon_28pct_water_lakes_24691ded4c4a980c_turned_61afb0be43d71adf_gaussian_T21.nc": "b95781ab1d7752c3d3bb1a1feac3bae82df1c53b59342992cadcf0d88808910e"
+ },
+ "green": {
+  "path": "/media/projectspace/terluna-research/atlas-round/river_losses/river_green.npz",
+  "sha256": "4d02a9491205d3924a0a6afc70a6d9f05b13f95143b93c96c5542846f4f252da"
+ },
+ "settings": {
+  "q_river_m3s": 100.0,
+  "width_coefficients": [
+   3.0,
+   15.0
+  ],
+  "lunar_widening": 1.434,
+  "riparian_belt_km": [
+   0.5,
+   2.0
+  ],
+  "floodplain_distance_km": 10.0,
+  "floodplain_heights_m": [
+   2.0,
+   5.0,
+   10.0
+  ]
+ },
+ "evidence": "An estimate on products: the governed routing's discharges on the redrawn floor, the routing's own open-water balance from the design climate, Earth's range of channel widths widened for lunar gravity, and floodplains by height above the nearest river at 1.9 km cells. Not validated; the belt and the floodplain heights are ranges chosen for scale.",
+ "reading_rule": "Drylands are the cells where open water loses more to the air than the rain brings it; flows in m3/s, areas in km2. channel gives the water surfaces of the dryland rivers and their loss at each width coefficient; riparian_belt the plants drinking the bed's seepage; floodplains the dry land within reach and height of a river at each height, as if all wet; floodplains_at lists the connected floodplains at 5 m with the area each river can keep wet; gcm carries those, capped, onto the run's T21 grid against the land fraction at which PlaSim's mask turns a cell to water.",
+ "seconds": 60
+}

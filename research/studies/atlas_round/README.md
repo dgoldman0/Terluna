@@ -164,11 +164,28 @@ The same share of the Moon lies under water, but the water moves toward the equa
 
 The run starts from the corrected design run's year-49 climate carried onto the new surface. `climate/gcm/carry.py` now also turns the ground from one turned frame into another, here from the elastic 8.05° into the settled 6.97°, and records the state it carried, so the equinox keeps regressing from that run's count (`climate/gcm/precession.py`). On the T21 grid 199 cells turn from land to water and 237 from water to land, against 535 in all when the turned surface was first carried on 5 November, and each cell's state comes from 4.0° away on average.
 
+## The design climate's runs on the final surface, and its drylands
+
+The run at the corrected design run's sunlight, 0.938, warmed from 301.09 K to 301.67 K over its first nine model years and headed for about 302.0 K, so it was stopped after year 8 and run again from there at 0.930, the correction of 31 October from its years leaning cool. At 0.930 the climate cooled for some 35 years and settled at 300.31 K over years 35–49, its top of the air in balance; the surface turns out more sensitive to sunlight than the correction assumed, about 0.21 K per 0.001 of the sunlight scale, and slow to settle. Which sunlight the design climate takes is open (below). The runs' scripts and rules are on the research drive (`atlas-round/step3/`).
+
+[drylands.py](drylands.py) reads the land as the moisture map reads it, rain over Priestley and Taylor's demand in UNEP's classes, each window's own land by area *(computed)*:
+
+| | Final surface, 0.930, years 35–49 (300.3 K) | Final surface, 0.938, years 1–8 (301.5 K, still warming) | Atlas surface, corrected design, years 10–19 (301.0 K) |
+|---|---|---|---|
+| Hyper-arid; arid; semi-arid | 4.9%; 22.7%; 22.8% | 3.7%; 22.9%; 23.7% | 2.7%; 24.0%; 26.0% |
+| Dry sub-humid; humid | 6.6%; 42.9% | 6.8%; 42.8% | 8.0%; 39.3% |
+| All drylands | 57.1% | 57.2% | 60.7% |
+| The waters' surface (all water cells) | 302.51 K | 303.69 K (years 6–8) | 302.90 K |
+
+The final surface is less dry than the atlas's, 3.6 points less dryland, but has more hyper-arid land, the polar hollows that dry on the design rain. Over the 1.2 K between the two windows on the final surface the drylands hardly change: the cooler climate has 1.1 points less arid and semi-arid land and 1.2 points more hyper-arid. At 300.3 K the waters stand 0.4 K cooler than the design climate's on the atlas surface.
+
+[river_losses.py](river_losses.py) asks what the rivers add, since PlaSim carries river water to the sea without losing any on the way. In the drylands, where open water loses more to the air than the rain brings (80% of the land on the routing's own budget), rivers of at least 100 m³/s cross only 2,570 km (2,990 on the closed budget); the large rivers' courses run mostly through lakes, which the surface already holds. Their channels, widened for lunar gravity, lose 7–45 m³/s, a belt of plants drinking their beds' seepage 17–94 m³/s, and the floodplains within 5 m of their river, 9,050 km² in 777 pieces of at most 704 km², about 130 m³/s; all of it is a third or less of the 32–46 km³ a year the ecology lane found shore greening to transpire. The young surface, barring erosion, has few flat plains beside its rivers. Carried onto the run's T21 grid, the floodplains add at most 4.1% of a cell's area in water, against the 47% a land cell needs to turn to water in PlaSim's mask, and the green land they and the corridors make covers 0.02–0.03% of the land, leaving the arid and semi-arid share at 45.5%.
+
 ## What is open
 
 - **The near-side ocean's parting** is decided on the climate run on the final surface (step 3). With the division, it settles 62 m down on the closed budget, above its neck, and rises to its rim on the routing's own.
 - **The globe on the redrawn floor** is rebuilt once, after the design climate's run on the final surface (register, 16 November), and keeps its version 10 until then. Its builder (`visualization/atlas/render.py`) reads the atlas's water on the dry floor and geography's drainage; drawing the redrawn floor needs it to read the redrawn surface's seas and the governed routing's rivers and lakes. Its years control shows the ungoverned network's history on the dry floor, which the governed design no longer follows; what the rebuilt control shows is settled at the rebuild.
-- **The design climate's run on the final surface** (step 3) stands on the surface above; its years, and the drainage, the moisture map and the globe on its climate, follow.
+- **The design climate's sunlight on the final surface.** 0.930 settles at 300.3 K, and by the two runs 0.933 would give about 300.9 K and 0.934 about 301.1 K; whether the design temperature stays at 301 K or settles near 300 K, which cools the waters a little, is open, with the drylands above as one input. The drainage, the moisture map and the globe on the chosen climate follow.
 - **Satoyama-like landscapes**: the criteria are in [satoyama.md](satoyama.md) and the first map on the redrawn floor's drainage is there too (above). Its candidates take a third of the hybrid fifth, nearly all of it in the equatorial rain belt, where they would fill 95% of that band's fifth; their flooded fields fit the methane room at its low-cost end and four times exceed it at its high-cost end. The salt sea has little shallow water for satoumi at 1.9 km cells.
 - **The warm mantle's Orientale**: a bisection on Orientale's level would find the level at which its rim and its water agree, if that case comes to matter.
 

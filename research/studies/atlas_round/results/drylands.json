@@ -1,0 +1,158 @@
+{
+ "schema": "terluna.research.atlas-round-drylands/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/drylands.py": "30c06df81ee59a913702383c84c3f895e02fb3b54794c635679f9f68d2ba8820",
+   "research/studies/atlas_round/river_losses.py": "3847ce4fe1ce6c24307bd458594501d98cec6a7bace4657d4a33541eca8afe1c",
+   "biosphere/ecology/moisture_map.py": "58f66fc944acdd8124723a701ac467090f287f7029a62fe4874807adb4387d37"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/river_losses.json": "c07955908bb332ee477a1690bdd8621bbfa052f12dcb1280f13bad37a47de2a9",
+  "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/river_losses/river_green.npz": "4d02a9491205d3924a0a6afc70a6d9f05b13f95143b93c96c5542846f4f252da"
+ },
+ "windows": {
+  "final_surface_0.930": {
+   "land_km2": 23404301.0,
+   "classes": {
+    "hyper-arid": 0.0491,
+    "arid": 0.2271,
+    "semi-arid": 0.2284,
+    "dry sub-humid": 0.0662,
+    "humid": 0.4293
+   },
+   "drylands": 0.5708,
+   "arid_and_semi_arid": 0.4555,
+   "land_rain_mm_day": 2.128,
+   "land_demand_mm_day": 2.031,
+   "run": "A28S_301k_design_l15_snow_s930_settled",
+   "years": [
+    35,
+    49
+   ],
+   "ground_k": 300.31,
+   "rivers_green_land": {
+    "narrow": {
+     "km2_by_class": {
+      "hyper-arid": 71.0,
+      "arid": 2064.0,
+      "semi-arid": 2801.0,
+      "dry sub-humid": 1449.0,
+      "humid": 6213.0
+     },
+     "on_hyper_arid_arid_and_semi_arid_km2": 4936.0,
+     "share_of_the_land": 0.00021,
+     "arid_and_semi_arid_left": 0.4553
+    },
+    "wide": {
+     "km2_by_class": {
+      "hyper-arid": 141.0,
+      "arid": 2857.0,
+      "semi-arid": 4459.0,
+      "dry sub-humid": 2109.0,
+      "humid": 17081.0
+     },
+     "on_hyper_arid_arid_and_semi_arid_km2": 7457.0,
+     "share_of_the_land": 0.00032,
+     "arid_and_semi_arid_left": 0.4552
+    },
+    "floodplains": {
+     "km2_by_class": {
+      "hyper-arid": 50.0,
+      "arid": 1812.0,
+      "semi-arid": 2287.0,
+      "dry sub-humid": 1239.0,
+      "humid": 2852.0
+     },
+     "on_hyper_arid_arid_and_semi_arid_km2": 4149.0,
+     "share_of_the_land": 0.00018,
+     "arid_and_semi_arid_left": 0.4553
+    }
+   }
+  },
+  "final_surface_0.938_first_years": {
+   "land_km2": 23404301.0,
+   "classes": {
+    "hyper-arid": 0.0372,
+    "arid": 0.2291,
+    "semi-arid": 0.2374,
+    "dry sub-humid": 0.0684,
+    "humid": 0.4279
+   },
+   "drylands": 0.5721,
+   "arid_and_semi_arid": 0.4665,
+   "land_rain_mm_day": 2.177,
+   "land_demand_mm_day": 2.102,
+   "run": "A28S_301k_design_l15_snow_s938_settled",
+   "years": [
+    1,
+    8
+   ],
+   "ground_k": 301.5,
+   "rivers_green_land": {
+    "narrow": {
+     "km2_by_class": {
+      "hyper-arid": 71.0,
+      "arid": 2413.0,
+      "semi-arid": 980.0,
+      "dry sub-humid": 971.0,
+      "humid": 8163.0
+     },
+     "on_hyper_arid_arid_and_semi_arid_km2": 3464.0,
+     "share_of_the_land": 0.00015,
+     "arid_and_semi_arid_left": 0.4664
+    },
+    "wide": {
+     "km2_by_class": {
+      "hyper-arid": 141.0,
+      "arid": 3284.0,
+      "semi-arid": 1996.0,
+      "dry sub-humid": 1553.0,
+      "humid": 19673.0
+     },
+     "on_hyper_arid_arid_and_semi_arid_km2": 5421.0,
+     "share_of_the_land": 0.00023,
+     "arid_and_semi_arid_left": 0.4663
+    },
+    "floodplains": {
+     "km2_by_class": {
+      "hyper-arid": 50.0,
+      "arid": 2137.0,
+      "semi-arid": 673.0,
+      "dry sub-humid": 793.0,
+      "humid": 4585.0
+     },
+     "on_hyper_arid_arid_and_semi_arid_km2": 2860.0,
+     "share_of_the_land": 0.00012,
+     "arid_and_semi_arid_left": 0.4664
+    }
+   }
+  },
+  "corrected_design_atlas_surface": {
+   "land_km2": 23369999.0,
+   "classes": {
+    "hyper-arid": 0.0269,
+    "arid": 0.2401,
+    "semi-arid": 0.2601,
+    "dry sub-humid": 0.0801,
+    "humid": 0.3929
+   },
+   "drylands": 0.6072,
+   "arid_and_semi_arid": 0.5002,
+   "land_rain_mm_day": 2.15,
+   "land_demand_mm_day": 2.149,
+   "run": "A28R_301k_design_l15_snow_s938_turned_refit_precession",
+   "years": [
+    10,
+    19
+   ],
+   "ground_k": 301.04
+  }
+ },
+ "evidence": "GCM output read as the moisture map reads it (rain over Priestley-Taylor demand, UNEP classes, land by area), and the rivers' green land from river_losses.py carried onto the runs' grid. The 0.938 window is still warming; the reference stands on the atlas's surface in the elastic frame. Not validated against observation.",
+ "reading_rule": "classes are shares of each window's own land; drylands are the four dry classes and arid_and_semi_arid their middle two; rivers_green_land gives the channels, belts and floodplains (narrow and wide readings, and the floodplains alone) falling on land of each class, and the arid and semi-arid share left once that land is taken out.",
+ "seconds": 4
+}
