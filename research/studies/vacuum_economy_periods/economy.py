@@ -53,8 +53,9 @@ def defaults():
                 allocation=v(s['allocation']), caves=v(s['caves_for_cities']), town_residents=v(s['town_residents']),
                 reach=v(tr['reach_percentile']), share_who_work=v(pe['share_who_work']),
                 water_set_aside=v(tr['water_set_aside_share']), past_plan=v(inputs()['growth']['past_plan']),
-                u_policy=v(inputs()['u']['policy']), u_real_yield=None, u_reserve_share=None, u_funders_paid_in_U=None,
-                u_trade_effect=None, u_spending_share=None)
+                u_policy=v(inputs()['u']['policy']), u_floor=v(inputs()['u']['rate']['floor']), u_real_yield=None,
+                u_reserve_share=None, u_funders_paid_in_U=None, u_metal_share=None, u_trade_effect=None, u_spending_share=None,
+                u_investor_premium=None, u_credit_line=False)
 
 
 class Run:
@@ -119,12 +120,14 @@ class Run:
         initial_towns = self.initial_town_capacity()
         capacity = self.capacity()
         set_aside = opt['water_set_aside']
-        # U beside the account with Earth, when the case names a policy: the trade the shared unit brings scales the
-        # lines of sale below, and the ledger keeps Earth's holdings, the reserve and the funders' flows.
+        # U beside the account with Earth, when the case names a policy: the year's local work is priced at U's rate, any
+        # effect of paying in U scales the lines of sale below, goods that holders of U buy in the zone are charged to the
+        # lines' costs, and the ledger keeps Earth's holdings, the rate, the reserve and the funders' flows.
         upol = money.policy(opt['u_policy'], dict(real_yield=opt['u_real_yield'], reserve_share_of_holdings=opt['u_reserve_share'],
-                                                  funders_paid_in_U=opt['u_funders_paid_in_U']))
-        uh = money.holders(dict(trade_effect_of_full_settlement=opt['u_trade_effect'], share_of_income_spent_in_zone=opt['u_spending_share']))
-        ledger = money.Ledger(upol, uh) if upol is not None else None
+                                                  funders_paid_in_U=opt['u_funders_paid_in_U'], reserve_metal_share=opt['u_metal_share']))
+        uh = money.holders(dict(trade_effect_of_full_settlement=opt['u_trade_effect'], share_of_income_spent_in_zone=opt['u_spending_share'],
+                                investment_threshold_spread=opt['u_investor_premium']))
+        ledger = money.Ledger(upol, uh, floor=opt['u_floor'], credit_line=opt['u_credit_line']) if upol is not None else None
         lo, hi = v(I['founding']['build_years'])
         plant_life0 = v(ind['plant_design_life_years'])
         ramp_years = v(ind['local_manufacture_ramp_years'])
@@ -150,7 +153,9 @@ class Run:
             date = 2041 + y
             t = tech.Year(self.tcase, date)
             wage = self.wage(date)
-            P = prices(self.tcase, date, round(wage, 2))
+            # The residents' pay is in U; their work costs Earth's buyers its value at the year's opening rate.
+            rate = ledger.rate if ledger is not None else 1.0
+            P = prices(self.tcase, date, round(wage * rate, 2))
             N, N1 = self.residents(y), self.residents(y + 1)
             # Newcomers housed this year move in next year; the opening's residents are housed in the founding years.
             if y < OPENING:
@@ -203,13 +208,20 @@ class Run:
             # resident's power and supplies.
             depot_cost = depot_cost_last if depot_cost_last is not None else P.line_kg['water'] * 2
             stay_day = (need_city['firm_W'] / 1000.0 * P.supply_here['USD_kW_year'] + need_city['earth_supplies_kg_year'] * (P.supplies + P.landed)) / 365.25
-            lines_year = sales.year(self.scenario, self.tcase, y, P, depot_cost, stay_day, feed_last) if y >= OPENING else {}
+            keep = ledger.metals_wanted() if ledger is not None else 0.0
+            lines_year = sales.year(self.scenario, self.tcase, y, P, depot_cost, stay_day, feed_last, keep) if y >= OPENING else {}
             served = {k: x for k, x in lines_year.items() if x['served']}
             trade = money.trade_multiple(upol, uh, y)
             for x in served.values():
                 for q in ('receipts', 'to_Earth', 'jobs', 'cost', 'kg', 'visitors', 'watts', 'power_W', 'hardware_kg_year', 'launched_kg'):
                     if q in x:
                         x[q] *= lines_scale * trade
+            retained = served['metals']['retained_value'] if 'metals' in served else 0.0
+            # What holders of U bought in the zone last year takes the lines' average Earth inputs, hands and power.
+            zone_goods = dict(to_Earth=0.0, jobs=0.0, power_W=0.0)
+            sold = sum(x['receipts'] for x in served.values())
+            if ledger is not None and ledger.spent_last > 0 and sold > 0:
+                zone_goods = {q: ledger.spent_last / sold * sum(x[q] for x in served.values()) for q in zone_goods}
             lift = P.lift()
             materials_kg = served['materials']['kg'] if 'materials' in served else 0.0
             propellant_sold = served['propellant']['kg'] if 'propellant' in served else 0.0
@@ -217,6 +229,8 @@ class Run:
             computing_local_kg = computing['hardware_kg_year'] if computing and computing['hardware_local'] else 0.0
             computing_imported_kg = computing['hardware_kg_year'] if computing and not computing['hardware_local'] else 0.0
             sales_W = sum(x['power_W'] for x in served.values())
+            if ledger is not None:
+                sales_W += zone_goods['power_W']
             equipment_need = built['pressure_kg'] + built['equipment_kg'] + renewed['pressure_kg'] + renewed['equipment_kg']
 
             # 4. Power and the industry's work. The work asked of the industry from outside it (building and renewal,
@@ -269,6 +283,8 @@ class Run:
                          power=pw['to_Earth'], plant=pl['imported_kg'] * P.imported_kg(),
                          fleet=out['fleet_imported_kg'] * P.imported_kg() + out['drives_to_Earth'],
                          lines=sum(x['to_Earth'] for x in served.values()))
+            if ledger is not None:
+                earth['zone_goods'] = zone_goods['to_Earth']
             # People: arrivals from Earth, whose fares the settlement pays unless migrants pay their own.
             births = opt['births'] * N
             arrivals = self.residents(OPENING) if y == OPENING - 1 else (max(0.0, N1 - N - births) if y >= OPENING else 0.0)
@@ -279,22 +295,34 @@ class Run:
                         operators=mix('operators'),
                         industry=sum(production[k] * lines[k]['jobs_per_Mt_year'] / 1e9 for k in LINES) / t.output_per_job,
                         lines=sum(x['jobs'] for x in served.values()))
+            if ledger is not None:
+                jobs['zone_goods'] = zone_goods['jobs']
+            zone_hands = jobs.get('zone_goods', 0.0)
             workforce = N * opt['share_who_work'] if y >= OPENING else v(I['people']['founding_crew'])
             pay = (workforce if y >= OPENING else 0.0) * wage
-            earth['pay'] = pay * (1.0 if opt['pay_counted'] == 'all' else opt['share_spent_on_Earth'])
-            # Hands go to the settlements' own work first and to the lines of sale next, which were sized on last year's
-            # balance; the industry's work beyond the hands left is done from Earth by teleoperation and paid there.
-            left = workforce - jobs['services'] - jobs['operators'] - jobs['lines']
+            # The residents' purchases from Earth: their share of the pay at par, worth the rate in dollars.
+            earth_pay_par = pay * (1.0 if opt['pay_counted'] == 'all' else opt['share_spent_on_Earth'])
+            earth['pay'] = earth_pay_par * rate
+            # Hands go to the settlements' own work and to the goods U's holders buy first and to the lines of sale next,
+            # which were sized on last year's balance; the industry's work beyond the hands left is done from Earth by
+            # teleoperation and paid there at Earth's wages.
+            left = workforce - jobs['services'] - jobs['operators'] - jobs['lines'] - zone_hands
             tele = I['people']['teleoperation']
             teleoperated = max(0.0, jobs['industry'] - max(0.0, left)) if y >= OPENING else 0.0
             earth['teleoperation'] = teleoperated * wage * tele['Earth_pay_over_lunar_wage'] * tele['time_factor']
             if y >= OPENING:
                 full = jobs['lines'] / lines_scale if lines_scale > 0 else jobs['lines']
-                room = workforce - jobs['services'] - jobs['operators']
+                room = workforce - jobs['services'] - jobs['operators'] - zone_hands
                 lines_scale = 1.0 if full <= 0 else min(1.0, max(0.0, room / full))
 
             receipts = sum(x['receipts'] for x in served.values())
             paid = sum(earth.values())
+            u = None
+            if ledger is not None:
+                # The ledger sets the year's rate; the residents' purchases from Earth follow it.
+                u = ledger.step(y, receipts, paid - earth['pay'], earth_pay_par, pay, receipts - earth['lines'], retained)
+                earth['pay'] = u['u_earth_pay']
+                paid = sum(earth.values())
             net = receipts - paid
             cumulative += net
             imported_kg = equipment_imported + supplies_kg + pw['imported_kg'] + pl['imported_kg'] + out['fleet_imported_kg'] + computing_imported_kg
@@ -321,9 +349,8 @@ class Run:
                 tug=out['kind'], leg_m_s=out['leg'], water_delivered_t=out['delivered_kg'] / 1000.0, contained_drawn_t=drawn_contained / 1000.0,
                 exhausted=out['exhausted'], wage=wage, kWh_USD=P.kWh, fare=P.fare(), landed_USD_kg=P.landed,
                 visitors=visitors, visitor_share_of_world=visitors / self.world.population(date), trade_multiple=trade)
-            if ledger is not None:
-                # The zone's output: its residents' pay and what it keeps of its sales to Earth.
-                row.update(ledger.step(y, receipts, paid, workforce * wage + receipts - earth['lines'] if y >= OPENING else 0.0))
+            if u is not None:
+                row.update(u)
             rows.append(row)
             if out['exhausted'] and self.stop_at_exhaustion:
                 break
@@ -495,7 +522,7 @@ def summary(rows, rates=(0.0, 0.01, 0.03, 0.07)):
     whose years together are in deficit, and the first year from which it stays repaid; the year the plan's 6.47 million is reached and the year the sites are full; the residents at chosen
     years; the years short of hands; and the first year the water open to mining runs out. Under a policy of U the
     funders' measures are taken from their own flows, which carry Earth's purchases of U and the reserve, and the years
-    failing each of the five tests are counted."""
+    failing each of the five tests are counted, with U's lowest rate and the years it stands at its floor."""
     nets = [r.get('funders_flow', r['net']) for r in rows]
     cum, total = [], 0.0
     for n in nets:
@@ -531,4 +558,6 @@ def summary(rows, rates=(0.0, 0.01, 0.03, 0.07)):
                 sites_full_year=next((r['year'] for r in rows if r['sites_full']), None),
                 residents={str(y): rows[y]['residents'] for y in (50, 100, 150, 200, 250, 300) if y <= last},
                 hands_short_years=sum(1 for r in rows if r['hands_short'] > 0),
-                exhausted_year=next((r['year'] for r in rows if r['exhausted']), None))
+                exhausted_year=next((r['year'] for r in rows if r['exhausted']), None),
+                **({} if 'u_rate' not in rows[0] else dict(u_rate_lowest=min(r['u_rate'] for r in rows),
+                                                           u_years_at_floor=sum(1 for r in rows if r['u_at_floor']))))

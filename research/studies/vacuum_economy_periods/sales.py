@@ -38,10 +38,11 @@ def seller(cost, elasticity, ceiling):
     return ceiling
 
 
-def year(scenario, tcase, y, prices, depot_water_kg_cost, stay_cost_day, feed_kg):
+def year(scenario, tcase, y, prices, depot_water_kg_cost, stay_cost_day, feed_kg, metals_keep_USD=0.0):
     """The lines of one programme year. `prices` is the year's engineering.Prices; `depot_water_kg_cost` the cost of a
     kilogram of water at the depot; `stay_cost_day` what a visitor's day on the Moon costs beside the hotel's staff;
-    `feed_kg` the feed mined at the sources in the year, which bounds the metals recovered."""
+    `feed_kg` the feed mined at the sources in the year, which bounds the metals recovered; `metals_keep_USD` the value
+    of metals a reserve of U would keep from the refined output instead of selling it."""
     s = scenarios()
     sc, lines = s['scenarios'][scenario], s['lines']
     w = world(scenario)
@@ -104,17 +105,25 @@ def year(scenario, tcase, y, prices, depot_water_kg_cost, stay_cost_day, feed_kg
         out[line] = dict(receipts=kg * price, to_Earth=0.0, jobs=0.0, power_W=0.0, cost=kg * unit_cost, kg=kg, price=price)
     out['materials']['lift'] = lift['how']
 
-    # Precious metals from the feed already mined; the platinum-group price falls as the supply to Earth grows.
+    # Precious metals from the feed already mined; the platinum-group price falls as the supply to Earth grows. A share
+    # kept for a reserve of U reaches no buyer on Earth, so the rest sells at a higher price.
     me, ml = sc['metals'], lines['metals']
     world_supply = ml['PGM_world_production_kg_year'] * w.output(date) / w.output(2025)
     wanted = demand.value(me['PGM_supply_share_of_world']) * world_supply
     refined = min(wanted, feed_kg * demand.value(me['refined_PGM_per_kg_feed']))
     gold = refined * demand.value(ml['gold_per_PGM'])
-    metal_price = w.dollars(ml['PGM_price_USD2025_kg'], 2025) * (1 + refined / world_supply) ** (-1 / demand.value(ml['price_elasticity']))
-    receipts = refined * metal_price + gold * w.dollars(ml['gold_price_USD2025_kg'], 2025)
+    pgm_price = lambda sold: w.dollars(ml['PGM_price_USD2025_kg'], 2025) * (1 + sold / world_supply) ** (-1 / demand.value(ml['price_elasticity']))
+    gold_price = w.dollars(ml['gold_price_USD2025_kg'], 2025)
+    kept = 0.0
+    if metals_keep_USD > 0 and refined > 0:
+        kept = min(1.0, metals_keep_USD / (refined * pgm_price(refined) + gold * gold_price))
+    metal_price = pgm_price(refined * (1 - kept))
+    receipts = refined * (1 - kept) * metal_price + gold * (1 - kept) * gold_price
+    retained = (refined * metal_price + gold * gold_price) * kept
     treated = refined / demand.value(me['refined_PGM_per_kg_feed']) if refined else 0.0
     treatment = treated * demand.value(me['treatment_USD2041_per_kg_feed'])
-    out['metals'] = dict(receipts=receipts, to_Earth=0.0, jobs=0.0, power_W=0.0, cost=treatment, kg=refined + gold, treated_feed_kg=treated)
+    out['metals'] = dict(receipts=receipts, to_Earth=0.0, jobs=0.0, power_W=0.0, cost=treatment, kg=refined + gold, treated_feed_kg=treated,
+                         retained_value=retained)
 
     # Visits: the passage both ways and a stay; the hotel's staff are residents' hands.
     vi, vl = sc['visits'], lines['visits']
@@ -136,5 +145,6 @@ def year(scenario, tcase, y, prices, depot_water_kg_cost, stay_cost_day, feed_kg
                          cost=visitors * (unit + price * keep), visitors=visitors, price=price, unit_cost=unit,
                          launched_kg=visitors * 2 * v(inputs()['people']['launched_kg_per_passenger']))
     for line in out.values():
-        line['served'] = line['receipts'] > line['cost'] and line['receipts'] > 0
+        worth = line['receipts'] + line.get('retained_value', 0.0)
+        line['served'] = worth > line['cost'] and worth > 0
     return out

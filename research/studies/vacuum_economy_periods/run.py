@@ -11,11 +11,13 @@ A case is a scenario of demand (low, central, high), a technology case (static, 
 residents to the horizon, 2341: one of the programme's ramps (constant_growth, front_loaded), carried on past the planned
 6.47 million in 2241 at its final rate, or residents as a result (steady: the highest single growth rate from the opening
 to the plan, then the highest single rate past it; fastest: the coupled study's rule, the highest steady rate period by
-period). Residents as a result grow from the opening's 12,500 in year 8 as fast as the settlement can while its funders
+period; each rate the highest below which every slower rate checked also passes). Residents as a result grow from the opening's 12,500 in year 8 as fast as the settlement can while its funders
 still earn the programme's 3% (the net present value of the account with Earth at 3% to the horizon is not negative) and,
 once the account is repaid, no later year is in deficit with Earth, with the settlement's own work staffed and its
 sources' water not exhausted. In every schedule the sites bound the residents: the caves' cities and the eventual set of
-crater sites in towns. Every case reports the year it reaches the plan, which is a milestone, not an end.
+crater sites in towns. Every case reports the year it reaches the plan, which is a milestone, not an end. Under a policy
+of U (money.py) the reserve must also hold its minimum in every year once the account is repaid, U's rate falling as far
+as its floor to keep it there, and the five tests of a safe and healthy policy must hold.
 
 The rough time to exhaustion carries each path's growth on, technology held at 2241, until the water open to mining runs
 out or to 3541, and reports when the sites fill and when the water runs out: with the survey's whole conditional pool and
@@ -55,6 +57,8 @@ SENSITIVITIES = {
     'whole_pool': dict(water_set_aside=0.0),
 }
 TOLERANCE = 1e-6
+CHECKS = 20                         # the solver checks this many rates below a solved rate, less one
+FLOORS = tuple(inputs()['u']['rate']['floor']['options'])
 
 
 def planned():
@@ -104,18 +108,26 @@ def sustained(scenario, tcase, sched, options):
 
 
 def highest(test):
-    """The highest rate a year, to a hundredth of a percentage point, for which `test(rate)` holds, searched by bisection
-    between 0 and 30%; None if even no growth fails."""
+    """The highest rate a year, to a hundredth of a percentage point, up to which `test(rate)` holds at every rate checked:
+    bisection between 0 and 30%, then twenty rates below the one found, and the search again below the lowest of them
+    that fails. A single year's test, such as the reserve's under a policy of U, can make passing and failing alternate as
+    the rate moves a lump of reinvestment from one year to another; the rate returned is one below which no checked rate
+    fails. None if even no growth fails."""
     lo, hi = 0.0, 0.3
     if not test(lo):
         return None
-    for _ in range(14):
-        mid = (lo + hi) / 2
-        if test(mid):
-            lo = mid
-        else:
-            hi = mid
-    return lo
+    while True:
+        for _ in range(14):
+            mid = (lo + hi) / 2
+            if test(mid):
+                lo = mid
+            else:
+                hi = mid
+        below = [lo * k / CHECKS for k in range(1, CHECKS)]
+        failing = next((r for r in below if not test(r)), None)
+        if failing is None:
+            return lo
+        hi, lo = failing, max((r for r in below if r < failing), default=0.0)
 
 
 def solve(scenario, tcase, rule='steady', options=()):
@@ -214,8 +226,9 @@ SERIES = ('residents', 'receipts', 'paid_to_Earth', 'net', 'cumulative', 'firm_G
           'fare', 'landed_USD_kg', 'kWh_USD')
 AT_YEARS = (8, 25, 50, 100, 150, 200, 250, 300)
 # The ledger of U, in cases with a policy of U.
-U_SERIES = ('trade_multiple', 'u_settlement_share', 'u_real_yield', 'u_output', 'u_balances', 'u_investment', 'u_investment_target',
-            'u_funders_U', 'u_holdings', 'u_reserve', 'u_reserve_floor', 'u_reserve_own', 'u_from_balances', 'u_from_investors',
+U_SERIES = ('trade_multiple', 'u_settlement_share', 'u_real_yield', 'u_rate', 'u_output', 'u_balances', 'u_investment', 'u_investment_target',
+            'u_funders_U', 'u_holdings', 'u_holdings_USD', 'u_reserve', 'u_reserve_currency', 'u_reserve_metals', 'u_reserve_target',
+            'u_reserve_minimum', 'u_reserve_own', 'u_metals_retained', 'u_earth_pay', 'u_from_balances', 'u_from_investors',
             'u_funders_converted', 'u_yield_income', 'u_spent_in_zone', 'u_paid_to_funders', 'funders_flow', 'funders_cumulative', 'u_growth_20')
 
 
@@ -243,23 +256,30 @@ def cases():
     for key, opts in SENSITIVITIES.items():
         out.append(('central:central:constant_growth:%s' % key, 'central', 'central', 'constant_growth', tuple(sorted(opts.items()))))
     out.append(('central:central:steady:whole_pool', 'central', 'central', 'steady', (('water_set_aside', 0.0),)))
-    # U beside the account with Earth: the two policies on the programme's ramp and with growth as a result, the liberal
-    # one under each technology and on low demand, and its least certain holders' behaviour moved one at a time.
+    # U beside the account with Earth: the two policies on the programme's ramp at the default floor on U's rate and with
+    # growth as a result at each floor, the liberal one under each technology and on low demand, and its least certain
+    # settings moved one at a time.
     for policy in ('conservative', 'liberal'):
-        for ramp in ('constant_growth', 'steady'):
-            out.append(('central:central:%s:U_%s' % (ramp, policy), 'central', 'central', ramp, (('u_policy', policy),)))
+        out.append(('central:central:constant_growth:U_%s' % policy, 'central', 'central', 'constant_growth', (('u_policy', policy),)))
+        for floor in FLOORS:
+            out.append(('central:central:steady:U_%s:floor_%g' % (policy, floor), 'central', 'central', 'steady',
+                        tuple(sorted((('u_floor', floor), ('u_policy', policy))))))
+        out.append(('central:central:steady:U_%s:credit_line' % policy, 'central', 'central', 'steady',
+                    tuple(sorted((('u_credit_line', True), ('u_policy', policy))))))
     for scenario, tcase in (('central', 'slow'), ('central', 'fast'), ('low', 'central'), ('low', 'fast')):
         out.append(('%s:%s:steady:U_liberal' % (scenario, tcase), scenario, tcase, 'steady', (('u_policy', 'liberal'),)))
-    for key, value in (('u_trade_effect', 0.0), ('u_trade_effect', 0.3), ('u_spending_share', 0.0), ('u_spending_share', 0.6)):
+    for key, value in (('u_trade_effect', -0.1), ('u_spending_share', 0.0), ('u_spending_share', 0.6), ('u_funders_paid_in_U', 0.0),
+                       ('u_metal_share', 0.0), ('u_investor_premium', 0.01)):
         out.append(('central:central:steady:U_liberal:%s_%g' % (key[2:], value), 'central', 'central', 'steady',
                     tuple(sorted((('u_policy', 'liberal'), (key, value))))))
     return out
 
 
 # The most liberal policy that stays safe and healthy: the liberal policy's yield offered to Earth's investors and the
-# share of the funders' returns paid in U, searched over a grid, each with growth as a result under the five tests;
-# the one that carries the most residents by 2341, the higher yield and share where they tie.
-SEARCH_YIELDS = (0.0, 0.01, 0.02, 0.03, 0.04)
+# share of the funders' returns paid in U, searched over a grid at the default floor, each with growth as a result under
+# the five tests; the one that carries the most residents by 2341, the higher yield and share where they tie. The yields
+# reach 8%, since investors want about 3.5 points over Earth's safe rate before they hold a new currency's assets.
+SEARCH_YIELDS = (0.0, 0.02, 0.04, 0.06, 0.08)
 SEARCH_FUNDERS_IN_U = (0.0, 0.1, 0.25, 0.5)
 
 
@@ -318,11 +338,15 @@ def product():
                       'solved schedule gives its growth rates. at_year holds chosen years in full and every_fifth_year a series of years 0, '
                       '5, ..., 300. A case\'s years after its water runs out (exhausted_year) are not physical. Each exhaustion projection '
                       'carries one path on to 3541 at most and names the years the plan is reached, the sites are full and the water open '
-                      'to mining runs out. In a case with a policy of U (options u_policy), the funders\' measures come from their own '
-                      'flows, which carry Earth\'s purchases of U net of conversions and the dollar reserve, the ledger\'s series are '
-                      'given beside the others, and u_test_failures counts the years failing each of the five tests; the policy search '
-                      'lists every yield and share of the funders\' returns paid in U tried, and the most liberal policy that stays safe '
-                      'and healthy is the case central:central:steady:U_most_liberal_safe.'),
+                      'to mining runs out. In a case with a policy of U (options u_policy, u_floor and the others named u_), the funders\' '
+                      'measures come from their own flows, which carry Earth\'s purchases of U net of sales, the reserve and any loan to '
+                      'it, and the ledger\'s series are given beside the others: u_rate is U\'s value in dollars (1 at par), at par '
+                      'until the account is repaid and between the floor and par after; u_reserve the reserve, Earth\'s currencies and '
+                      'metals together, against its target and the tests\' minimum; amounts named in U are U of constant purchasing '
+                      'power and those named USD dollars of 2041. u_test_failures counts the years failing each of the five tests, and '
+                      'u_rate_lowest and u_years_at_floor read the rate; the policy search lists every yield and share of the funders\' '
+                      'returns paid in U tried at the default floor, and the most liberal policy that stays safe and healthy is the case '
+                      'central:central:steady:U_most_liberal_safe.'),
         cases=records, exhaustion=projections, u_policy_search=[{k: x for k, x in g.items() if k != 'options'} for g in grid])
 
 

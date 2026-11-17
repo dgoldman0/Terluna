@@ -172,47 +172,102 @@ def test_water_set_aside_lengthens_the_legs_and_brings_exhaustion_sooner():
 
 
 def test_the_U_ledger_adds_up_and_holds_its_rules():
-    """With a policy of U the reserve changes by the year's dollars: the account with Earth, Earth's purchases of U net
-    of conversions, the funders' conversions of their U, the reserve's interest and the dollars paid to the funders;
-    the funders' measures come from their own flows; working balances are a week of the trade settled in U."""
-    rows = economy.Run('central', 'central', 'constant_growth', u_policy='liberal', past_plan='hold').simulate()
+    """With a policy of U the reserve changes by the year's dollars and the metals kept from the zone's refining: the
+    account with Earth at the year's closing rate, Earth's purchases of U net of sales, the funders' conversions, the
+    reserve's interest and the dollars paid to the funders. U stays at par until the account is repaid and between its
+    floor and par after; working balances are a week of the trade settled in U; the funders' measures come from their
+    own flows; the conservative policy pays no yield and nothing in U to the funders."""
+    rows = economy.Run('central', 'central', 'constant_growth', u_policy='liberal', u_floor=0.5, past_plan='hold').simulate()
     reserve = 0.0
     for r in rows:
         change = (r['receipts'] - r['paid_to_Earth'] + r['u_from_balances'] + r['u_from_investors'] + r['u_interest']
-                  - r['u_funders_converted'] - r['u_dollars_to_funders'])
+                  - r['u_funders_converted'] - r['u_dollars_to_funders'] + r['u_metals_retained'])
         assert r['u_reserve'] - reserve == pytest.approx(change, abs=1e-6 * max(1.0, r['receipts']))
         reserve = r['u_reserve']
-        assert r['u_reserve'] >= r['u_reserve_floor'] * (1 - 1e-12)
-        assert r['u_balances'] == pytest.approx(r['u_settlement_share'] * (r['receipts'] + r['paid_to_Earth']) * 7 / 365.25)
+        assert r['u_reserve_currency'] >= 0 and r['u_reserve_metals'] >= 0
+        assert 0.5 - 1e-12 <= r['u_rate'] <= 1.0 + 1e-12
+        if not r['u_repaid']:
+            assert r['u_rate'] == 1.0
+        if r['u_rate'] == r['u_rate_opening']:
+            assert r['u_balances'] * r['u_rate'] == pytest.approx(r['u_settlement_share'] * (r['receipts'] + r['paid_to_Earth']) * 7 / 365.25)
     s = economy.summary(rows)
     assert s['funding_needed_USD2041'] == pytest.approx(-min(0.0, min(r['funders_cumulative'] for r in rows)))
-    assert s['u_test_failure_years'] == 0
     plain = economy.Run('central', 'central', 'constant_growth', u_policy='conservative', past_plan='hold').simulate()
-    assert all(r['u_investment'] == 0 and r['u_funders_U'] == 0 for r in plain)
+    assert all(r['u_yield_income'] == 0 and r['u_funders_U'] == 0 for r in plain)
+
+
+def test_the_dollar_account_is_untouched_by_the_settings_of_U():
+    """Without a policy of U the floor, the trade effect, the spending share and the credit line change nothing."""
+    a = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=120).simulate()
+    b = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=120, u_floor=0.5, u_trade_effect=-0.1,
+                    u_spending_share=0.6, u_credit_line=True).simulate()
+    assert [r['net'] for r in a] == [r['net'] for r in b]
+    assert not any(k.startswith('u_') for k in a[50]) and 'zone_goods' not in a[50]['to_Earth']
+
+
+def test_the_rate_absorbs_a_shortfall_down_to_its_floor_and_the_reserve_test_can_fail():
+    """Once repaid, a lasting shortfall lowers U so that the residents' purchases from Earth close it, and the reserve
+    holds its minimum while U is above its floor; held at par, the same shortfall takes the reserve below its minimum
+    and fails the test; with the funders' credit line the reserve holds and the funders' flows carry the loan."""
+    def ledger_run(floor, credit_line=False):
+        led = money.Ledger(money.policy('liberal', dict(funders_paid_in_U=0.0)), money.holders(), floor=floor, credit_line=credit_line)
+        out = []
+        for y in range(0, 80):
+            receipts = 0.0 if y < 8 else (2e11 if y < 40 else 1.15e11)
+            out.append(led.step(y, receipts, 1e11, 2e10 if y >= 8 else 0.0, 2e11 if y >= 8 else 0.0, receipts))
+        return out
+    floating, par, lent = ledger_run(0.5), ledger_run(1.0), ledger_run(1.0, credit_line=True)
+    late = range(45, 80)
+    assert all(floating[y]['u_repaid'] for y in late)
+    assert all(floating[y]['u_tests']['reserve'] for y in late)
+    assert 0.5 < min(floating[y]['u_rate'] for y in late) < 0.99
+    assert all(par[y]['u_rate'] == 1.0 and not par[y]['u_tests']['reserve'] for y in late)
+    assert all(lent[y]['u_tests']['reserve'] for y in late) and sum(lent[y]['funders_flow'] for y in late) < 0
 
 
 def test_the_five_tests_catch_an_unsafe_policy():
-    """Half the funders' returns paid in U piles Earth's holdings above the zone's yearly output; a reserve of a tenth of
-    Earth's holdings, without the months of payments, fails the run test; a yield above growth fails its test."""
-    heavy = economy.summary(economy.Run('central', 'central', 'constant_growth', u_policy='liberal', u_funders_paid_in_U=0.5, past_plan='hold').simulate())
-    assert heavy['u_test_failures']['holdings_within_output'] > 0
-    assert not run.sustained('central', 'central', run.steady_schedule(0.05, 0.0), (('u_funders_paid_in_U', 0.5), ('u_policy', 'liberal')))[0]
-    thin = money.Ledger(money.policy('liberal', dict(reserve_share_of_holdings=0.1, reserve_months_of_payments=0, funders_paid_in_U=0.0)), money.holders())
-    steep = money.Ledger(money.policy('liberal', dict(real_yield=0.05, yield_follows_growth=False, funders_paid_in_U=0.0)), money.holders())
+    """The funders' whole returns paid in U by a zone whose output is small beside its sales pile Earth's holdings above
+    the zone's yearly output; a yield held above the zone's growth fails its test."""
+    heavy = money.Ledger(money.policy('liberal', dict(funders_paid_in_U=1.0)), money.holders())
+    for y in range(0, 40):
+        a = heavy.step(y, 1e12 if y >= 8 else 0.0, 1e11, 0.0, 1e10 if y >= 8 else 0.0, 1e10 if y >= 8 else 0.0)
+    assert a['u_holdings_USD'] > a['u_output'] and not a['u_tests']['holdings_within_output']
+    steep = money.Ledger(money.policy('liberal', dict(real_yield=0.08, yield_follows_growth=False, funders_paid_in_U=0.0)), money.holders())
     for y in range(0, 60):
-        a = thin.step(y, 1e11, 1e11, 1e12 if y >= 8 else 0.0)
-        b = steep.step(y, 1e11, 1e11, 1e12 if y >= 8 else 0.0)
-    assert a['u_holdings'] > 0 and not a['u_tests']['run']
+        b = steep.step(y, 1e11 if y >= 8 else 0.0, 1e11, 0.0, 1e12 if y >= 8 else 0.0, 1e11 if y >= 8 else 0.0)
     assert b['u_investment'] > 0 and not b['u_tests']['yield_within_growth']
 
 
-def test_growth_as_a_result_under_the_liberal_policy_passes_every_test():
-    rates, sched = run.solve('central', 'central', 'steady', (('u_policy', 'liberal'),))
-    rows = economy.Run('central', 'central', schedule=sched, u_policy='liberal').simulate()
-    s = economy.summary(rows)
-    assert rates['sustained'] and s['u_test_failure_years'] == 0 and s['deficit_decades_after_repayment'] == 0
-    dollar_rates, dollar_sched = run.solve('central', 'central', 'steady')
-    assert sched[run.HORIZON] >= dollar_sched[run.HORIZON]
+def test_metals_kept_for_the_reserve_raise_the_price_of_those_sold():
+    p = engineering.Prices('central', 2070, 155797.0)
+    plain = sales.year('central', 'central', 29, p, 2000.0, 5000.0, 5e10)['metals']
+    kept = sales.year('central', 'central', 29, p, 2000.0, 5000.0, 5e10, metals_keep_USD=0.3 * plain['receipts'])['metals']
+    assert plain['receipts'] > 0 and plain['retained_value'] == 0
+    assert kept['receipts'] < plain['receipts'] < kept['receipts'] + kept['retained_value']
+
+
+def test_goods_bought_with_U_take_the_lines_earth_inputs_and_hands():
+    rows = economy.Run('central', 'central', 'constant_growth', u_policy='liberal', past_plan='hold', last_year=150).simulate()
+    r = next(r for r in rows[60:] if rows[r['year'] - 1]['u_spent_in_zone'] > 0)
+    assert r['to_Earth']['zone_goods'] > 0 and r['jobs']['zone_goods'] > 0
+    assert r['to_Earth']['zone_goods'] / rows[r['year'] - 1]['u_spent_in_zone'] == pytest.approx(r['to_Earth']['lines'] / r['receipts'])
+
+
+def test_the_solver_takes_the_highest_rate_below_which_every_checked_rate_passes():
+    assert run.highest(lambda r: r < 0.123) == pytest.approx(0.123, abs=1e-4)
+    assert run.highest(lambda r: r < 0.05 or 0.06 < r < 0.2) == pytest.approx(0.05, abs=1e-4)
+
+
+def test_growth_as_a_result_under_U_is_no_lower_with_a_lower_floor():
+    found = []
+    for floor in (1.0, 0.5):
+        opts = (('u_floor', floor), ('u_policy', 'liberal'))
+        rates, sched = run.solve('central', 'central', 'steady', opts)
+        assert rates['sustained']
+        for k in (5, 10, 15):
+            assert run.sustained('central', 'central', run.steady_schedule(rates['to_plan'], rates['past_plan'] * k / 20), opts)[0]
+        found.append(sched[run.HORIZON])
+    assert found[1] >= found[0]
 
 
 def test_the_saved_product_is_current():
