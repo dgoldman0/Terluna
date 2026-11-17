@@ -257,14 +257,35 @@ def drainage_grids(shape, path=DRAINAGE, rotation=None):
     return dict(discharge=q, lake_level=lake, metadata=meta)
 
 
-def surface_colour(height, level, clim, ppd, drainage=None):
+def surface_grids(shape, path, rotation=None):
+    """Every water body's surface and the rivers' discharge on the texture grid (180 W at the left edge) from a
+    surface that holds each water cell's level (the atlas round's globe surface), carried into the turned frame when a
+    rotation is given: the drainage product's form, with every sea, lake and parted part of a sea as a water body at
+    its own level."""
+    z = np.load(path)
+    meta = json.loads(str(z['metadata']))
+    if meta['grid']['rows'] != shape[0] or meta['grid']['cols'] != shape[1]:
+        raise SystemExit(f'Expected a {shape[0]}-row grid in {path}')
+    q = np.zeros(shape[0] * shape[1], np.float32)
+    q[z['channel_cell']] = z['channel_discharge_m3s']
+    level = np.full(shape[0] * shape[1], np.nan, np.float32)
+    level[z['water_cell']] = z['water_level_m']
+    roll = shape[1] // 2
+    q, level = np.roll(q.reshape(shape), roll, axis=1), np.roll(level.reshape(shape), roll, axis=1)
+    if rotation is not None:
+        q, level = turn_channels(q, rotation), turn_texture(level, rotation, nearest=True)
+    return dict(discharge=q, lake_level=level, metadata=meta)
+
+
+def surface_colour(height, level, clim, ppd, drainage=None, sea=None):
     """Guesstimated surface reflectance (linear sRGB, float32), the water mask (sea and lakes) and the share
-    of each cell that river channels cover, 180 W at the left edge."""
+    of each cell that river channels cover, 180 W at the left edge. sea, when given, replaces the ground below
+    `level` as the sea (an empty mask where every water body comes as a lake at its own level)."""
     height = height.astype(np.float32)
     rows, cols = height.shape
     lat = 90.0 - (np.arange(rows) + 0.5) / ppd
     km = MOON_KM * np.radians(1.0 / ppd)
-    sea = height < level
+    sea = height < level if sea is None else sea
     if drainage is not None:
         lake = np.isfinite(drainage['lake_level'])
         discharge = np.where(sea | lake, 0.0, drainage['discharge'])
@@ -460,11 +481,13 @@ def cloud_quantiles(samples=200_000, seed=3):
     return [np.quantile(cloud_field(n, layer), q).round(5).tolist() for layer in (0, 1)]
 
 
-def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, rotation=None):
+def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, rotation=None, surface_path=None):
     """Appearance data for the globe page: textures (arrays, 180 W at the left edge) and parameters.
 
     height: metres above the geoid at ppd pixels per degree, 0 E at the left edge as LOLA has it, in the globe's frame;
-    climatology: in the same frame; rotation: the turned frame's, which carries the drainage product into it."""
+    climatology: in the same frame; rotation: the turned frame's, which carries the drainage product into it.
+    surface_path: a surface holding every water body at its own level (surface_grids), in place of the sea below
+    `level` and the drainage product; `level` then stays the heights' reference for the ground's look."""
     moon, engine = engine_atmosphere()
     colour_rel = np.array(moon['sun_colour_linear_srgb'])
     sun_rgb_lux = moon['sun_illuminance_lux'] * colour_rel / float(LUMINANCE @ colour_rel)
@@ -472,8 +495,12 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
     clim_meta = json.loads(str(clim.pop('metadata')))
     clim['deck_sigma'] = clim_meta['deck_sigma']
     h = np.roll(height, height.shape[1] // 2, axis=1)
-    drainage = drainage_grids(h.shape, drainage_path, rotation)
-    colour, water, river, _ = surface_colour(h, level, clim, ppd, drainage)
+    if surface_path is not None:
+        drainage = surface_grids(h.shape, surface_path, rotation)
+        colour, water, river, _ = surface_colour(h, level, clim, ppd, drainage, sea=np.zeros(h.shape, bool))
+    else:
+        drainage = drainage_grids(h.shape, drainage_path, rotation)
+        colour, water, river, _ = surface_colour(h, level, clim, ppd, drainage)
     albedo = np.empty(colour.shape, np.uint8)
     for c in range(3):
         albedo[..., c] = np.round(srgb_encode(colour[..., c]) * 255)
@@ -525,6 +552,10 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
     params['legend'] = [[name, '#' + ''.join(f'{int(round(v * 255)):02x}' for v in srgb_encode(np.asarray(rgb)))]
                         for name, rgb in params['legend']]
     sources = dict(engine=ENGINE, sky_atlas=SKY_ATLAS, climatology=Path(climatology))
+    if surface_path is not None:
+        sources['surface'] = Path(surface_path)
+        params['drainage'] = dict(schema=drainage['metadata']['schema'], riverWidthPerRootDischarge=RIVER_WIDTH)
+        return textures, params, sources, dict(sea=np.isfinite(drainage['lake_level']), water=water)
     if drainage is not None:
         sources['drainage'] = Path(drainage_path)
         params['drainage'] = dict(schema=drainage['metadata']['schema'], riverWidthPerRootDischarge=RIVER_WIDTH)

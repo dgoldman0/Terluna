@@ -287,6 +287,9 @@ TURNED_CLIMATES = {
         "the design climate on the turned Moon, {label}, with PlaSim's night-side twilight counted once and the equinox "
         'regressing with the node: the ground at 301.0 K, rain of 1.95 mm/day over the globe and 2.15 over land, and '
         '60.7% of the land dry (an aridity below 0.65), 63.2% in the north and 58.4% in the south',
+    'A28S_301k_design_l15_snow_s930_settled':
+        'the design climate on the final surface, {label}, at sunlight 0.930: the ground at 300.3 K, rain of 1.93 '
+        'mm/day over the globe and 2.13 over land, and 57.1% of the land dry (an aridity below 0.65)',
 }
 
 
@@ -427,6 +430,265 @@ def write_globe(atlas, height, ppd, sites, targets, hashes, turn=None, stops=Non
                 years=stop_checks, passed=passed, page_bytes=len(page.encode()), appearance_products=products)
 
 
+# ---------------------------------------------------------------- the globe on the atlas round's design surface
+
+SURFACE_PRESSURE_ATM = 1.2               # the air at the surface, as the conservation register reckons a site's water
+WATER_KG_M3, LUNAR_G = 1000.0, 1.62
+NEAREST_WINDOW_DEG = 8.0
+
+
+def surface_grid(path):
+    """The design surface (the atlas round's globe_surface product): heights, each cell's water level (NaN on dry
+    ground) and body, on today's grid from 90 N and 0 E."""
+    z = np.load(path)
+    meta = json.loads(str(z['metadata']))
+    rows, cols = meta['grid']['rows'], meta['grid']['cols']
+    level = np.full(rows * cols, np.nan, np.float32)
+    level[z['water_cell']] = z['water_level_m']
+    body = np.zeros(rows * cols, np.int8)
+    body[z['water_cell']] = np.where(z['water_body'] > 0, z['water_body'], len(meta['bodies']))
+    return dict(meta=meta, height=z['height_m'].astype(np.float32).reshape(rows, cols), level=level.reshape(rows, cols),
+                body=body.reshape(rows, cols), rows=rows, cols=cols, ppd=meta['grid']['pixels_per_degree'])
+
+
+def block(a, k, how):
+    r, c = a.shape[0] // k, a.shape[1] // k
+    b = a[:r * k, :c * k].reshape(r, k, c, k)
+    return getattr(np, how)(b, axis=(1, 3))
+
+
+def surface_map(grid, k):
+    """The map grid's heights and water from the 16 px/deg surface, k cells to a side: each cell's mean ground, and its
+    water where most of it lies under water, as the mean depth of that water and the body most of it is."""
+    h = block(grid['height'].astype(np.float64), k, 'mean')
+    wet16 = np.isfinite(grid['level'])
+    share = block(wet16.astype(np.float64), k, 'mean')
+    lev = block(np.where(wet16, grid['level'] - grid['height'], 0.0).astype(np.float64), k, 'sum') / np.maximum(block(wet16.astype(np.float64), k, 'sum'), 1)
+    bodies = grid['body']
+    counts = np.stack([block((bodies == b).astype(np.float64), k, 'sum') for b in range(int(bodies.max()) + 1)])
+    counts[0] = -1
+    body = np.argmax(counts, axis=0).astype(np.uint8)
+    wet = share >= 0.5
+    return h, np.where(wet, lev, np.nan), np.where(wet, body, 0).astype(np.uint8)
+
+
+def surface_texture(depth, body):
+    """The water for the page, 180 W at the left edge: its depth in whole metres in two bytes (red and green) and the
+    body over the place in blue (0 on dry ground)."""
+    lv = np.roll(depth, depth.shape[1] // 2, axis=1)
+    bd = np.roll(body, body.shape[1] // 2, axis=1)
+    v = np.where(np.isfinite(lv), np.clip(np.round(np.nan_to_num(lv, nan=0.0)), 0, 0xFFFF), 0).astype(np.int64)
+    rgb = np.zeros(lv.shape + (3,), np.uint8)
+    rgb[..., 0], rgb[..., 1], rgb[..., 2] = v >> 8, v & 0xFF, np.where(np.isfinite(lv), bd, 0)
+    return rgb
+
+
+def nearest_km(mask, i, j, want, ppd, window=NEAREST_WINDOW_DEG):
+    """The distance (km) from cell (i, j) to the nearest cell where mask equals `want`, within a window, on the sphere."""
+    from scipy import ndimage
+    rows, cols = mask.shape
+    k = int(window * ppd)
+    r_ = np.arange(max(i - k, 0), min(i + k + 1, rows))
+    c_ = np.arange(j - k, j + k + 1) % cols
+    win = mask[np.ix_(r_, c_)] == want
+    if not win.any():
+        return round(MOON_RADIUS / 1000.0 * np.radians(window))
+    d, (ii, jj) = ndimage.distance_transform_edt(~win, return_indices=True)
+    a, b = i - r_[0], k if c_.size > 2 * k else int(np.flatnonzero(c_ == j)[0])
+    la1, lo1 = 90.0 - (i + 0.5) / ppd, (j + 0.5) / ppd
+    la2, lo2 = 90.0 - (r_[ii[a, b]] + 0.5) / ppd, (c_[jj[a, b]] + 0.5) / ppd
+    dlon = (lo2 - lo1 + 180.0) % 360.0 - 180.0
+    return round(MOON_RADIUS / 1000.0 * np.radians(np.hypot(la2 - la1, dlon * np.cos(np.radians(0.5 * (la1 + la2))))))
+
+
+def surface_places(sites, targets, grid, level0, names):
+    """The heritage sites and sampling targets on the design surface: each one's ground against the common level, the
+    water over it and its depth, the pressure there as the register reckons it, and its nearest land or water."""
+    ppd, wet = grid['ppd'], np.isfinite(grid['level'])
+    cell = lambda la, lo: (min(int((90.0 - la) * ppd), grid['rows'] - 1), int((lo % 360.0) * ppd) % grid['cols'])
+    changed = []
+    out_sites = []
+    for st in sites:
+        i, j = cell(st['lat'], st['lon'])
+        ground = float(grid['height'][i, j] - level0)
+        under = bool(wet[i, j])
+        x = dict(st)
+        x['height'] = round(ground)
+        x['water_name'] = names[int(grid['body'][i, j])] if under else ''
+
+        if under:
+            depth = float(grid['level'][i, j] - grid['height'][i, j])
+            x.update(status='submerged', depth_m=round(depth),
+                     pressure_atm=round(SURFACE_PRESSURE_ATM + WATER_KG_M3 * LUNAR_G * depth / 101325.0, 1),
+                     nearest_land_km=nearest_km(wet, i, j, False, ppd), above_sea_m=0)
+        else:
+            x.update(status='land', depth_m=0, pressure_atm=0.0, above_sea_m=round(ground),
+                     nearest_water_km=nearest_km(wet, i, j, True, ppd))
+        if (st['status'] == 'submerged') != under:
+            x['status_note'] = ('The register\'s treatment was written for the atlas\'s water, which '
+                                + ('left it on land.' if under else 'covered it.'))
+            changed.append(st['id'])
+        out_sites.append(x)
+    out_targets = []
+    for t in targets:
+        i, j = cell(float(t['lat']), float(t['lon']))
+        x = dict(t)
+        x['height_relative_to_sea_m'] = str(round(float(grid['height'][i, j] - level0)))
+        x['under_m'] = round(float(grid['level'][i, j] - grid['height'][i, j])) if wet[i, j] else -1
+        out_targets.append(x)
+    return out_sites, out_targets, changed
+
+
+def surface_note(turn, summary, climate):
+    """The page's paragraph on the design surface: the turn, the seas at their levels, the parting and the lakes."""
+    seas = summary['seas']
+    m = lambda v: f'{abs(v):,.0f} m ' + ('above' if v >= 0 else 'below')
+    return ('<b>The design surface.</b> The globe shows the Moon as the atlas round\'s design gives it. The floor is '
+            "LOLA's as the water's weight redraws it at the settled state, and the Moon is turned "
+            f"{turn['pole_moved_deg']:.2f}° into the orientation that water settles it in, so the globe's poles, "
+            'equator, grid and the point beneath Earth are the turned Moon\'s and every place keeps its ground. Heights '
+            'are measured from the common level, the level 28% of the surface lies below, '
+            f"{abs(summary['common_level_above_the_dry_geoid_m']):,.0f} m below the dry Moon's geoid. Each sea stands "
+            f"at its own level: Moscoviense, Orientale and Smythii–Marginis full at their rims, "
+            f"{seas['Mare Moscoviense']['level_m']:,.0f}, {seas['Mare Orientale']['level_m']:,.0f} and "
+            f"{seas['Smythii–Marginis Sea']['level_m']:,.0f} m above the common level; the South Pole–Aitken Sea and "
+            "Mare Humboldtianum at the common level, which fixed weirs on Moscoviense's overflow hold; and the "
+            "near-side sea parted at its neck in western Procellarum, its main body "
+            f"{m(seas['near-side sea']['level_m'])} the common level and Cognitum, Humorum, Nubium and southern "
+            f"Procellarum {m(seas['southern near-side seas']['level_m'])} it, joined by a river of about "
+            f"{round(summary['neck_spill_m3s'], -3):,.0f} m³/s over the neck. The clouds and the ground cover follow {climate}. The "
+            "rivers and lakes are routed on that run's rain and evaporation carried back to the ground, its open "
+            f"water's evaporation raised to close the water budget: {summary['lake_share']:.1%} of the Moon in "
+            f"{summary['lakes']:,} lakes holding {summary['lake_volume_km3'] / 1e6:.1f} million km³, with "
+            f"{summary['rivers_into_the_seas_m3s']:,} m³/s reaching the seas.")
+
+
+def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes):
+    """The globe page on the design surface: the relief and the water at each body's own level, the appearance from
+    the same water, the sites and targets placed on it, and the figures from the surface's record."""
+    grid = surface_grid(surface_path)
+    record = json.loads(Path(record_path).read_text())
+    summary = record['summary']
+    meta = grid['meta']
+    level0 = float(meta['common_level_m'])
+    rotation = np.asarray(meta['frame']['rotation_today_to_turned'], float)
+    pole = float(np.degrees(np.arccos(np.clip(rotation[2, 2], -1, 1))))
+    turn = dict(rotation=rotation, pole_moved_deg=pole)
+    ppd_map = SURFACE_PPD // 4
+    h_map, lev_map, body_map = surface_map(grid, grid['ppd'] // ppd_map)
+    turned = lambda a: appearance.turn_texture(a.astype(np.float32), rotation, left_lon=0.0, nearest=True)
+    h_map_t = turned(h_map).astype(float)
+    lev_map_t = turned(lev_map).astype(float)
+    body_map_t = turned(body_map.astype(np.float32)).astype(np.uint8)
+    relief, low, decoded = relief_texture(h_map_t, level0)
+    exact = np.roll(h_map_t, h_map_t.shape[1] // 2, axis=1) - level0
+    relief_error = float(np.abs(decoded - exact).max())
+    highest, lowest = round(float(exact.max())), round(float(exact.min()))
+    del exact
+    surface_tex = surface_texture(lev_map_t, body_map_t)
+    fine = turned(grid['height'])
+    looks, params, sources, masks = appearance.build(fine, level0, SURFACE_PPD, climatology=climatology,
+                                                     rotation=rotation, surface_path=surface_path)
+    del fine
+    share = lambda mask, ppd_: float((mask * np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_))[:, None]).sum()
+                                     / (np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_)).sum() * mask.shape[1]))
+    texture_water = share(surface_tex[..., 2] > 0, ppd_map)
+    surface_water = share(masks['sea'], SURFACE_PPD)
+    mask_water = share(looks['water'] / 255.0, SURFACE_PPD)
+    body_names = ['dry ground'] + ['the ' + b if b.startswith(('near-side', 'southern')) else b for b in meta['bodies'][1:]] + ['a lake']
+    places_sites, places_targets, changed = surface_places(sites, targets, grid, level0, body_names)
+    place = lambda la, lo: tuple(round(float(v), 3) for v in to_turned(la, lo, rotation))
+    seas = summary['seas']
+    minus = lambda v: f'{v:,.0f}'.replace('-', '−')
+    sea_fig = lambda name, key: [name, f"{seas[key]['share']:.1%} · mean {seas[key]['mean_depth_m']:,} m · "
+                                       f"{minus(seas[key]['level_m'])} m"]
+    climate = TURNED_CLIMATES[params['climatology']['run']].format(
+        label=f"{params['climatology']['run']}, model years {params['climatology']['years'][0]}–{params['climatology']['years'][-1]}")
+    data = dict(
+        share=summary['water_share'], levelText=minus(level0) + ' m', normalStrength=appearance.NORMAL_STRENGTH,
+        relief=dict(low=low, highest=highest, lowest=lowest),
+        topo=[[h, col] for h, col in TOPO],
+        reference='the common level',
+        headline='The Open Moon on its design surface',
+        lede=('An estimate of how the Open Moon looks from space as the atlas round designs it: its air, clouds and a '
+              'guessed cover of plants over the floor its water redraws, with every sea and lake at its own level and the '
+              'near-side sea parted at its neck. Drag to turn it, scroll or pinch to zoom, click for the height of a place '
+              'and the water over it, and move the Sun to see the halo, the twilight and the view from Earth.'),
+        figures=[['Water', f"{summary['water_share']:.0%} of the surface"],
+                 ['Common level (geoid)', minus(level0) + ' m'],
+                 sea_fig('Near-side sea', 'near-side sea'), sea_fig('Southern near-side seas', 'southern near-side seas'),
+                 sea_fig('South Pole–Aitken Sea', 'South Pole–Aitken Sea'), sea_fig('Mare Humboldtianum', 'Mare Humboldtianum'),
+                 ['Upper seas full', f"{sum(seas[k]['share'] for k in ('Mare Moscoviense', 'Mare Orientale', 'Smythii–Marginis Sea')):.1%}"
+                                     ' · Moscoviense, Orientale, Smythii–Marginis'],
+                 ['Lakes', f"{summary['lake_share']:.1%} · {summary['lakes']:,} lakes"],
+                 ['Water in those lakes', f"{summary['lake_volume_km3'] / 1e6:.1f} million km³"],
+                 ['Rivers into the seas', f"{summary['rivers_into_the_seas_m3s']:,} m³/s"],
+                 ['Over the neck', f"{summary['neck_spill_m3s']:,} m³/s"],
+                 ['Deepest water', f"{summary['deepest_water_m']:,} m"],
+                 ['Turn of the pole', f"{pole:.2f}°"]],
+        lakeFigures=(f"the lakes cover a further {summary['lake_share']:.1%} of the Moon and hold "
+                     f"{summary['lake_volume_km3'] / 1e6:.1f} million km³"),
+        waterSource=('Land, water and water depth come from LOLA topography at 16 pixels per degree (1.9 km) as the '
+                     "water's weight redraws it at the settled state, with every sea and lake at its own level as the atlas "
+                     "round's design surface sets it. Rivers and lakes come from the round's routing of the design "
+                     "climate's runoff over that floor:"),
+        topoText=('The ground\'s height above or below the common level, from the design surface\'s heights at 4 pixels '
+                  'per degree (7.6 km), with the water taken away. A sea takes the colour of the depth band for its '
+                  'depth under its own surface, averaged over each 7.6 km cell most of which it covers, so a sea above '
+                  'the common level and the parted near-side sea\'s lower body read as seas like any other. The lakes '
+                  'off the seas are left out of these colours, so their beds show; the appearance draws them as water, '
+                  'and a click reads them. Ground below the common level that no sea covers, such as the floor the '
+                  'parted sea leaves and the hollows that dry on the design rain, takes the lowland\'s colour, and above '
+                  'it the colours run from lowland green to the near-white of the highest ground. Shading comes from '
+                  'the full relief at 8 pixels per degree under light that every place has alike, from high in its own '
+                  'north-west, and contour lines mark the chosen interval, with the common level darker. In the '
+                  'topography mode the slider exaggerates the relief down into the sea floors as well as up into the '
+                  'highlands. Over the appearance the same colours and contours lie on the rendered globe at the chosen '
+                  'opacity, unlit by the Sun. Heritage sites and sampling targets come from the conservation study\'s '
+                  'register, each placed on the design surface with the water over it there. In both modes, a click on '
+                  'the globe reads the 0.25° cell under it.'),
+        surface=dict(names=body_names, levels=[None] + [round(seas[b]['level_m'], 1) for b in meta['bodies'][1:]] + [None]),
+        textures=dict(relief=png_data_uri(relief), surface=png_data_uri(surface_tex), normal=jpeg_data_uri(looks['normal']),
+                      albedo=jpeg_data_uri(looks['albedo']), water=png_data_uri(looks['water']),
+                      cloudSun=png_data_uri(looks['cloud_sun']), cloudGeo=png_data_uri(looks['cloud_geo'])),
+        appearance=params,
+        labels=dict(
+            seas=[[name.replace('\n', ' '), *place(la, lo)] for name, la, lo in SEA_LABELS],
+            islands=[],
+            sites=[dict(id=s['id'], name=s['name'], year=s['year'], **dict(zip(('lat', 'lon'), place(s['lat'], s['lon']))),
+                        status=s['status'], short=SITE_LABELS.get(s['id'], ('', None))[0], depth=s.get('depth_m', 0),
+                        height=s['height'], pressure=s.get('pressure_atm', 0.0), nearestLand=s.get('nearest_land_km', 0),
+                        nearestWater=s.get('nearest_water_km', 0), aboveSea=max(s.get('above_sea_m', 0), 0),
+                        marks=s['marks'], treatment=s['treatment_type'].capitalize(), evaluation=s['evaluation_status'],
+                        statusNote=s.get('status_note', ''), waterName=s.get('water_name', '')) for s in places_sites],
+            targets=[dict(id=t['name'], name=next((t['name'].replace(k, v) for k, v in DISPLAY.items() if k in t['name']), t['name']),
+                          **dict(zip(('lat', 'lon'), place(float(t['lat']), float(t['lon'])))),
+                          aboveSea=int(t['height_relative_to_sea_m']), under=t['under_m'],
+                          zone=t['zone'], record=t['record'][0].upper() + t['record'][1:] + '.', sample=t['sample'])
+                     for t in places_targets]),
+        provenance=("The atlas round's design surface <code>" + meta['schema'] + '</code> (globe_surface_16ppd.npz '
+                    f"{digest(surface_path)[:12]}; its record {digest(record_path)[:12]}, the settled frame "
+                    f"{meta['frame']['sha256'][:12]}); the conservation register ({hashes['register'][:12]}); the "
+                    f"illumination domain's engine atmosphere ({digest(sources['engine'])[:12]}) and Open Moon sky atlas "
+                    f"({digest(sources['sky_atlas'])[:12]}); the climate domain's <code>{params['climatology']['schema']}"
+                    f"</code> for run {params['climatology']['run']} ({digest(sources['climatology'])[:12]}). Surface "
+                    f"{looks['albedo'].shape[1]}×{looks['albedo'].shape[0]} ({SURFACE_PPD} pixels per degree), relief "
+                    f"at {SURFACE_PPD // 2}, the map at {ppd_map}."),
+        frame=dict(note=surface_note(turn, summary, climate),
+                   lede=''))
+    template = (HERE / 'globe.template.html').read_text()
+    page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
+    (OUT / 'globe.html').write_text(page)
+    products = {str(Path(v)): digest(v) for v in sources.values()}
+    passed = (abs(surface_water - summary['water_share']) <= 0.002 and abs(texture_water - summary['water_share']) <= 0.005
+              and mask_water >= surface_water - 1e-4 and relief_error <= 0.5)
+    return dict(relief_max_error_m=round(relief_error, 3), map_texture_water_share=round(texture_water, 4),
+                surface_water_share=round(surface_water, 4), product_water_share=summary['water_share'],
+                water_mask_share_with_rivers=round(mask_water, 4), tolerances=dict(surface=0.002, map=0.005),
+                sites_whose_water_changed=changed, passed=passed, page_bytes=len(page.encode()),
+                appearance_products=products)
+
+
 def main(argv=None):
     import argparse
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
@@ -437,7 +699,28 @@ def main(argv=None):
     parser.add_argument('--drainage', type=Path, default=ROOT / 'geography',
                         help="the folder holding the drainage product's results/ and products/")
     parser.add_argument('--stops', type=Path, help="the drainage network study's globe_stops.json: the years control")
+    parser.add_argument('--surface', type=Path, help="the atlas round's design surface (globe_surface_16ppd.npz): "
+                                                     'the globe alone, every water body at its own level')
+    parser.add_argument('--surface-record', type=Path, help="the design surface's record (results/globe_surface.json)")
     args = parser.parse_args(argv)
+    if args.surface:
+        if not args.surface_record:
+            raise SystemExit('--surface needs --surface-record')
+        reg_path, tgt_path = STUDY / 'heritage_register.json', STUDY / 'science_targets.csv'
+        sites = json.loads(reg_path.read_text())['sites']
+        with open(tgt_path) as handle:
+            targets = list(csv.DictReader(handle))
+        OUT.mkdir(parents=True, exist_ok=True)
+        globe = write_globe_surface(args.surface.absolute(), args.surface_record.absolute(), args.climatology.absolute(),
+                                    sites, targets, dict(register=digest(reg_path)))
+        products = {str(p.relative_to(ROOT)): digest(p) for p in (reg_path, tgt_path)}
+        products[str(args.surface)] = digest(args.surface)
+        products[str(args.surface_record)] = digest(args.surface_record)
+        manifest = dict(products=products, renderer=digest(Path(__file__)), template=digest(HERE / 'globe.template.html'),
+                        mode='design surface', globe=globe)
+        (OUT / 'manifest.json').write_text(json.dumps(manifest, indent=1) + '\n')
+        print(json.dumps(dict(globe={k: v for k, v in globe.items() if k != 'appearance_products'})))
+        return 0 if globe['passed'] else 1
     atlas_path = ROOT / 'geography' / 'results' / 'atlas.json'
     atlas = json.loads(atlas_path.read_text())
     if atlas.get('schema') != ga.SCHEMA:

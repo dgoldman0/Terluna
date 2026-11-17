@@ -227,9 +227,9 @@
   <section class="notes" aria-label="What the globe shows">
     <p id="frame-note" hidden></p>
     <h2>What the appearance shows</h2>
-    <p><b>Computed.</b> Land, sea and water depth come from LOLA topography above the GRAIL geoid at 16 pixels per
+    <p><b>Computed.</b> <span id="water-source">Land, sea and water depth come from LOLA topography above the GRAIL geoid at 16 pixels per
       degree (1.9 km), filled to the geography atlas's common sea level. Rivers and the rain-fed lakes above sea level
-      come from the geography domain's drainage estimate, which routes the climate run's runoff over the terrain:
+      come from the geography domain's drainage estimate, which routes the climate run's runoff over the terrain:</span>
       <span id="lake-figures"></span>.
       The air comes from the illumination domain's Open Moon atmosphere, <span id="air-figures"></span>. The page ray-marches that air through its whole height, so the
       halo around the limb and the sunlit air beyond the terminator come from the same calculation as the haze over
@@ -262,7 +262,7 @@
       disk is weakest. Earthshine on the night side. Clouds with depth, and their shadows in the air. Finer terrain
       for close views: at 16 pixels per degree the surface softens below about 1,500 km altitude.</p>
     <h2>What the topography shows</h2>
-    <p>The ground's height above sea level and the sea floor's depth below it, from the atlas's LOLA heights above
+    <p id="topo-text">The ground's height above sea level and the sea floor's depth below it, from the atlas's LOLA heights above
       the GRAIL geoid at 4 pixels per degree (7.6 km), with the water taken away. Below sea level each of the atlas
       sheets' depth bands keeps its colour at the band's middle depth; above it the colours run from lowland green
       to the near-white of the highest ground. Shading comes from the full relief at 8 pixels per degree under
@@ -692,9 +692,20 @@
     float depth = (wet > 0.5 && id > 0.5) ? max(levelOf(id) - h, 0.0) : -1.0;
     return vec4(wet, depth, bitOf(s.r, 0.0), bitOf(r.r, uYear) * r.g / 255.0 * (1.0 - wet));
   }
+  // The design surface: each place's water depth in whole metres in two bytes (red, green) and the body over it in
+  // blue, 0 on dry ground, 1-7 the seas and 8 a lake. A sea takes the colour of its depth under its own surface; the
+  // lakes are left out, as the atlas's topography leaves them, so their beds show, and ground below the reference that
+  // no sea covers takes the lowland's.
+  uniform sampler2D tSurface;
+  uniform float uSurface;
   // The topography's colour in the year shown: water the network moves takes the sea's colour for its depth, and
   // floor a sea has left takes the coast's.
   vec3 rampAt(vec2 at, float h) {
+    if (uSurface > 0.5) {
+      vec3 s = floor(texture2D(tSurface, at).rgb * 255.0 + 0.5);
+      if (s.b > 0.5 && s.b < 7.5) return ramp(-max(s.r * 256.0 + s.g, 1.0));   // the seas; the lakes' beds show
+      return ramp(max(h, 0.0));
+    }
     if (uYear < 0.5) return ramp(h);
     vec4 w = yearWater(at, h);
     if (w.x > 0.5 && w.y >= 0.0) return ramp(-max(w.y, 1.0));
@@ -787,10 +798,10 @@
 
   // Header, figures and provenance from the products.
   const pct = Math.round(D.share * 100) + '%';
-  document.getElementById('headline').textContent = (D.frame ? 'The turned Open Moon at ' : 'The Open Moon at ') + pct +
-    ' water';
+  document.getElementById('headline').textContent = D.headline || ((D.frame ? 'The turned Open Moon at ' : 'The Open Moon at ') +
+    pct + ' water');
   document.getElementById('figs-title').textContent = 'At ' + pct;
-  document.getElementById('lede').textContent =
+  document.getElementById('lede').textContent = D.lede ||
     'An estimate of how the Open Moon looks from space: its air, clouds and a guessed cover of plants, over the ' +
     'geography atlas with sea level ' + D.levelText + ' above the lunar geoid.' + (D.frame ? D.frame.lede : '') +
     ' Drag to turn it, scroll or pinch to zoom, click for the height or depth of a place, and move the Sun to see the ' +
@@ -816,8 +827,10 @@
     'reaching ' + fmt(P.topKm - P.radiusKm) + ' km';
   document.getElementById('clim-run').textContent = P.climatology.run + ' (model years ' + P.climatology.years.join('–') + ')';
   const figure = (label) => (D.figures.find(([k]) => k.startsWith(label)) || [null, ''])[1];
-  document.getElementById('lake-figures').textContent = 'the lakes cover a further ' +
-    figure('Rain-fed lakes').split(' · ')[0] + ' of the Moon and hold ' + figure('Water in those lakes');
+  document.getElementById('lake-figures').textContent = D.lakeFigures || ('the lakes cover a further ' +
+    figure('Rain-fed lakes').split(' · ')[0] + ' of the Moon and hold ' + figure('Water in those lakes'));
+  if (D.waterSource) document.getElementById('water-source').textContent = D.waterSource;
+  if (D.topoText) document.getElementById('topo-text').textContent = D.topoText;
   document.getElementById('cloud-figures').textContent = Math.round(P.clouds.totalCover * 100) + '% cover, a low deck ' +
     'of ' + Math.round(P.clouds.lowCover * 100) + '% below about 34 km, drawn at its cover-weighted height of ' +
     Math.round(P.clouds.lowKm) + ' km, and a high deck of ' + Math.round(P.clouds.highCover * 100) + '% drawn at ' +
@@ -850,9 +863,10 @@
     }
     legend.append(bar, ticks);
     const every = +document.getElementById('contours').value;
-    return 'Heights relative to sea level: the highest ground stands ' + fmt(D.relief.highest) + ' m above it and ' +
-      'the deepest sea floor lies ' + fmt(-D.relief.lowest) + ' m below' +
-      (every ? '; contours every ' + (every >= 1000 ? every / 1000 + ' km' : every + ' m') + ', sea level darker.' : '.');
+    const ref = D.reference || 'sea level';
+    return 'Heights relative to ' + ref + ': the highest ground stands ' + fmt(D.relief.highest) + ' m above it and ' +
+      'the deepest ' + (D.reference ? 'ground' : 'sea floor') + ' lies ' + fmt(-D.relief.lowest) + ' m below' +
+      (every ? '; contours every ' + (every >= 1000 ? every / 1000 + ' km' : every + ' m') + ', ' + ref + ' darker.' : '.');
   };
   const drawLegend = (mode) => {
     legend.replaceChildren();
@@ -916,6 +930,8 @@
     uGrid: { value: new THREE.Vector2() },
     uStopHeight: { value: D.topo.map(([h]) => h) }, uStopColour: { value: D.topo.map(([, c]) => rgb(c)) },
     tYears: { value: Y ? load(Y.textures.stops, exact) : blank() },
+    tSurface: { value: D.textures.surface ? load(D.textures.surface, exact) : blank() },
+    uSurface: { value: D.textures.surface ? 1 : 0 },
     tYearRivers: { value: Y ? load(Y.textures.channels, exact) : blank() },
     uYear: { value: 0 }, uLevels: { value: new Array(BODIES).fill(0) }
   };
@@ -1006,6 +1022,30 @@
     invalidate();
   };
   reliefImage.src = D.textures.relief;
+  let surfacePixels = null, surfaceW = 0, surfaceH = 0;
+  if (D.textures.surface) {
+    const surfaceImage = new Image();
+    surfaceImage.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = surfaceW = surfaceImage.width;
+      c.height = surfaceH = surfaceImage.height;
+      const ctx = c.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(surfaceImage, 0, 0);
+      try { surfacePixels = ctx.getImageData(0, 0, surfaceW, surfaceH).data; } catch (err) { surfacePixels = null; }
+    };
+    surfaceImage.src = D.textures.surface;
+  }
+  // The water over a place on the design surface: its body, depth and the body's level relative to the reference (a
+  // lake's own level is not carried), or null on dry ground.
+  const surfaceAt = (lat, lon) => {
+    if (!surfacePixels) return null;
+    const i = Math.min(surfaceH - 1, Math.max(0, Math.floor((90 - lat) / 180 * surfaceH)));
+    const j = ((Math.floor((lon + 180) / 360 * surfaceW) % surfaceW) + surfaceW) % surfaceW;
+    const k = (i * surfaceW + j) * 4;
+    if (!surfacePixels[k + 2]) return null;
+    const b = surfacePixels[k + 2];
+    return { body: D.surface.names[b] || 'water', depth: surfacePixels[k] * 256 + surfacePixels[k + 1], level: D.surface.levels[b] };
+  };
   const heightAt = (lat, lon) => {
     if (!reliefPixels) return null;
     const i = Math.min(reliefH - 1, Math.max(0, Math.floor((90 - lat) / 180 * reliefH)));
@@ -1083,7 +1123,8 @@
   for (const [name, lat, lon] of D.labels.seas) addLabel('sea', name, lat, lon, 0);
   for (const [name, lat, lon, h] of D.labels.islands) addLabel('island', name, lat, lon, h);
   for (const s of D.labels.sites) {
-    const item = addLabel('site', s.short || '', s.lat, s.lon, s.status === 'submerged' ? -s.depth : s.aboveSea, s);
+    const item = addLabel('site', s.short || '', s.lat, s.lon,
+      s.height !== undefined ? s.height : (s.status === 'submerged' ? -s.depth : s.aboveSea), s);
     item.mesh = new THREE.Mesh(s.status === 'submerged' ? siteGeo : landGeo, siteMat);
     item.mesh.renderOrder = 2;
     globe.add(item.mesh);
@@ -1435,18 +1476,19 @@
     const x = it.extra;
     if (it.kind === 'site') {
       const where = x.status === 'submerged'
-        ? fmt(x.depth) + ' m under the sea · ' + x.pressure.toFixed(1) + ' atm · land ' + fmt(x.nearestLand) + ' km'
+        ? fmt(x.depth) + ' m under ' + (x.waterName || 'the sea') + ' · ' + x.pressure.toFixed(1) + ' atm · land ' + fmt(x.nearestLand) + ' km'
         : fmt(x.aboveSea) + ' m above the sea · water ' + fmt(x.nearestWater) + ' km';
       card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p><p class="treat"></p>';
       card.querySelector('h3').textContent = x.name + ' (' + x.year + ')';
       card.querySelector('.meta').textContent = where;
       card.querySelector('.marks').textContent = x.marks;
-      card.querySelector('.treat').textContent = x.treatment + ' — ' + x.evaluation + '.';
+      card.querySelector('.treat').textContent = x.treatment + ' — ' + x.evaluation + '.' + (x.statusNote ? ' ' + x.statusNote : '');
     } else {
       card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p>';
       card.querySelector('h3').textContent = x.name;
       card.querySelector('.meta').textContent = (x.aboveSea >= 0 ? fmt(x.aboveSea) + ' m above' : fmt(-x.aboveSea) + ' m below') +
-        ' sea level · ' + x.zone;
+        ' ' + (D.reference || 'sea level') + (x.under !== undefined ? (x.under >= 0 ? ' · under ' + fmt(x.under) + ' m of water' : ' · dry ground') : '') +
+        ' · ' + x.zone;
       card.querySelector('.marks').textContent = x.record + ' Sample ' + x.sample + '.';
     }
   };
@@ -1461,6 +1503,14 @@
     const h = heightAt(lat, lon);
     let text = h === null ? 'The relief is still loading.'
       : h < 0 ? 'Sea floor ' + fmt(-h) + ' m below sea level.' : 'Ground ' + fmt(h) + ' m above sea level.';
+    if (D.surface && h !== null) {
+      const w = surfaceAt(lat, lon);
+      const ground = (h < 0 ? fmt(-h) + ' m below' : fmt(h) + ' m above') + ' the common level';
+      text = w ? 'Under ' + w.body + ', ' + fmt(w.depth) + ' m deep on average over the cell' +
+        (w.level !== null && w.level !== undefined ? '; its surface stands ' + (w.level < 0 ? fmt(-w.level) + ' m below' :
+          fmt(w.level) + ' m above') + ' the common level' : '') + '; the cell\'s mean ground lies ' + ground + '.'
+        : 'Dry ground ' + ground + '.';
+    }
     const then = h === null ? null : yearAt(lat, lon, h);
     if (then) text += ' In year ' + fmt(Y.years[yearIndex]) + ', ' + then + '.';
     card.querySelector('p').textContent = text;

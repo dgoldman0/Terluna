@@ -24,6 +24,14 @@ python3 visualization/atlas/render.py --frame $O --source domain/geology@45c3d81
 
 The 7 November globe ran the same chain on `A28R_301k_design_l15_snow_s924_turned_refit` into `geography/turned`. The 16 November globe adds the years control: `research.studies.drainage_network.stops` writes the drainage network's water at eight years, and the last command takes `--stops research/studies/drainage_network/results/globe_stops.json`.
 
+The globe on the atlas round's design surface (17 November 2026), from the round's surface product on the research drive:
+
+```sh
+C=climate/gcm/products/climatology_A28S_301k_design_l15_snow_s930_settled_y35-49.npz
+python3 visualization/atlas/render.py --surface /media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz \
+    --surface-record research/studies/atlas_round/results/globe_surface.json --climatology $C
+```
+
 | Sheet | Shows |
 |---|---|
 | `atlas_<pct>pct_near_far.png` | The near side as seen from Earth and the far side, in orthographic projection |
@@ -150,6 +158,8 @@ opens the topography too). It can add:
 - `red`, `noclouds` or `noair`.
 
 The page was also published privately to claude.ai.
+
+On 17 November the globe was redrawn on the atlas round's design surface and republished to the same page (version 11), without a years control. With `--surface`, render.py draws the globe alone from the round's surface product ([globe_surface.py](../../research/studies/atlas_round/globe_surface.py)): the floor as the water's weight redraws it at the settled state, turned 6.97° into the settled frame the product names, every sea and lake at its own level, and the rivers routed on the design climate on the final surface with the near-side sea parted at its neck. The heights are measured from the common level. The appearance takes every water body as a lake at its own level (appearance.surface_grids) in place of the sea below one level. The topography gets one more texture, each 0.25° cell's mean water depth and the body over it, in which a sea takes the depth band's colour for its depth under its own surface, the lakes are left out so their beds show, and ground below the common level that no sea covers takes the lowland's colour; a click reads the water over a place, its depth and the sea's level. The heritage sites and targets are placed on the surface with the water over them there, and the five whose water differs from the register's say so on their card. The figures, the page's notes and the provenance come from the surface's record, and the climate sentence from `TURNED_CLIMATES`. The build checks the surface's water share against the product's within 0.002 of the Moon (0.3755 against 0.3755) and the map texture's within 0.005 (0.3736), and the relief within 0.5 m. The sheets are not drawn in this mode. A copy of the build and headless views are on the research drive in `atlas-round/globe_surface/globe_v11_2026-11-17/`.
 
 ## Faithfulness
 
