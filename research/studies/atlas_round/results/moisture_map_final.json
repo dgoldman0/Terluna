@@ -32,8 +32,8 @@
   "drainage": "/media/projectspace/terluna-research/atlas-round/moisture_final/design_lakes",
   "inputs": {
    "/media/projectspace/terluna-research/atlas-round/tides_final/tides_design_4ppd.npz": "2a29037911cfc6612783f0613fad41b1f105821a7cdf2e252051bf1add922f73",
-   "/media/projectspace/terluna-research/atlas-round/moisture_final/design_lakes/results/drainage.json": "790fb01145d2300338b9e04b96e48e3839c933d5af75623f3cfaf0f59c2ee551",
-   "/media/projectspace/terluna-research/atlas-round/moisture_final/design_lakes/products/drainage_28pct_16ppd.npz": "5f6e7ad635ab778270ec423b2b464c0094effc9ae4f9587f0c00a5b7dcf6d371",
+   "/media/projectspace/terluna-research/atlas-round/moisture_final/design_lakes/results/drainage.json": "9be2161d13bcbe513d8f8b7efc3dafc8eccffc6306c41750ff057612d87f30b2",
+   "/media/projectspace/terluna-research/atlas-round/moisture_final/design_lakes/products/drainage_28pct_16ppd.npz": "f200fd5513a29d142abbffe5e310cafb8fb36ea7ca3db11e38329f6a39ed957a",
    "research/studies/living_light/results/living_light.json": "20d884bd2017652e967a681de872fb4824939458761dd23f594cbb9a96b2f432",
    "biosphere/canopy/results/plant.json": "87cf08572ea40213f86dfd1e6b92908db8041159f5bdfc3a091c455627929926",
    "research/studies/polar_light/results/polar_light.json": "2e8d583398319363f30ea771bd1da46da7a705d43e2aeeacd2972e74c3fb2380",
@@ -108,22 +108,22 @@
   "wrapper": {
    "files": {
     "research/studies/atlas_round/moisture_final.py": "3f3d84d3d591dd396a6dcc71f5da9e787583e8b562e41525d0cc83657b6fc1a5",
-    "research/studies/atlas_round/globe_surface.py": "27f08dd9ad569e1033da1128769418c6f75278df44986b49a1a0e62157613360",
+    "research/studies/atlas_round/globe_surface.py": "59b90ee4c57079650f15becbf1b8d6b6c5d43841878ef953804c79479bdad37c",
     "research/studies/atlas_round/tides_final.py": "aa13ae7b48dede0576ee27a49a0bab7a3949d572e1422a671bddf9652c251e82",
     "biosphere/ecology/moisture_map.py": "58f66fc944acdd8124723a701ac467090f287f7029a62fe4874807adb4387d37"
    }
   },
   "design_surface": {
    "path": "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz",
-   "sha256": "428769908668dec64819dded6dc1779263214904e50c8c6983b577f8de4a8bad",
+   "sha256": "d454c35e02d2b354dd221742bfe43ba617ba2e5485589f523f39705440d22038",
    "record": "research/studies/atlas_round/results/globe_surface.json",
-   "record_sha256": "01d418c445c17f6bcb90b31458c7ae84fbb3918fada2e61ff0bea5aa7c81f989"
+   "record_sha256": "a0ddb98e64c0a9c85abaaecc9c92be806769e493fb5bffbc368719f667881880"
   },
   "tides": {
    "path": "/media/projectspace/terluna-research/atlas-round/tides_final/tides_design_4ppd.npz",
    "sha256": "2a29037911cfc6612783f0613fad41b1f105821a7cdf2e252051bf1add922f73",
    "record": "research/studies/atlas_round/results/tides_final.json",
-   "record_sha256": "f2c2a144e7f0b9259c4364e8060fa9bdadf2aa65a0cf6d35a77f480016df2f6c"
+   "record_sha256": "693a28b6d9a935dda62e0b079be60aa5de615d4166f68a1df76684d86a47c380"
   }
  },
  "evidence": "The moisture map of the design climate on the atlas round's final surface (the run at sunlight 0.930, years 35-49, 300.3 K at the ground), classed by biosphere/ecology/moisture_map.py unchanged; the cells are the run's, in the settled turned frame of its surface record, and the settings (seas, lakes, closed lakes, coasts, tides) come from the round's design surface, every sea at its own level and the near-side sea parted. A zoning of the design climate by its water balance, not a model of vegetation: each T21 land cell (about 170 km across at the equator) of the design climate on the turned Moon takes the moisture class its aridity gives it, with its warmth, night light and settings beside it. The aridity is the GCM's rain over a Priestley-Taylor demand without wind or humidity, over the years named; the classes are UNEP's, the humid class divided at aridity 1, each with the broad biome the Millennium Ecosystem Assessment gives the class on Earth beside it as a reference. Which organisms each class holds is a design question. The cells are the turned Moon's; geography's pixels are counted in the cell that holds them on the turned Moon through the final surface's settled frame. The gap's scale of 0.83 is a sensitivity of the classes from three CM1 boxes forced by the design years of 1 November, never a bias-corrected climate. The lakes come from the drainage routed on the same years' climate; the night light from the living-light grid in the mean geometry under a clear sky. Provisional while the GCM-CM1 gap stands.",
@@ -481,25 +481,25 @@
   "resolution": "T21: 64 by 32 cells, 5.625 deg of longitude (170.6 km at the equator) by about 5.5 deg of latitude (about 168 km)",
   "design_surface": {
    "run_land_km2": 23404301,
-   "design_land_km2": 23617541,
+   "design_land_km2": 23617576,
    "design_land_in_run_land_km2": 19365697,
    "design_lake_in_run_land_km2": 3538245,
    "design_sea_in_run_land_km2": 500360,
-   "design_land_in_run_water_km2": 4251844,
+   "design_land_in_run_water_km2": 4251879,
    "design_land_unclassed_share": 0.18,
    "run_land_cells_mostly_water": 61,
    "run_water_cells_mostly_land": 122,
    "note": "The run's land cells are PlaSim's binary mask at its surface's own water share (climate/gcm/boundary.py). The design surface's seas are its 4 px/deg sea pixels and its lakes its 16 px/deg lake cells, each counted in the T21 cell that holds it on the turned Moon; its land is the rest of each cell. Its land in the run's water cells has no class.",
    "assigned": {
     "cells": 515,
-    "km2": 4251844,
+    "km2": 4251879,
     "by_class_km2": {
      "hyper_arid": 131422,
      "arid": 336520,
      "semi_arid": 545894,
      "dry_subhumid": 192434,
      "humid": 219996,
-     "wet": 2825576
+     "wet": 2825611
     },
     "nearest_land_km": {
      "median": 168,
@@ -905,7 +905,7 @@
    "wet | twilit": 0.0033
   },
   "over_the_design_land": {
-   "land_km2": 23617541,
+   "land_km2": 23617576,
    "by_class": {
     "hyper_arid": 0.0511,
     "arid": 0.2303,
@@ -80703,5 +80703,5 @@
   "The tide along the coasts is the monthly range of the design surface's seas from geography's tide model with each sea's mean held (tides_final.py), an equilibrium tide checked against a shallow-water solution on three seas; all 43,721 km of coast on the run's land cells have a tide class.",
   "The gap's scale and the night-rain timing are the design run's of 1 November, as in the moisture map on the corrected climate."
  ],
- "seconds": 4
+ "seconds": 6
 }

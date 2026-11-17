@@ -92,6 +92,15 @@ SLOPE_LN = 0.4                       # taken off where the ground steepens from 
 PATCH_LN = 0.25                      # the noise's standard deviation in log aridity
 SHELF_M = (150.0, 20.0)              # water shallower than these takes the productive coast's colour, fully at 20 m
 PLUME_KM_PER_ROOT = 0.3              # a plume reaches about 0.3 km per (m3/s)^0.5 of sediment-bearing flow: 9.5 km at 1,000 m3/s
+# Falls (the falls study, research/studies/atlas_round/falls.py), display guesstimates: a river's water turns to foam as
+# its step steepens from FOAM_SLOPE[0] to FOAM_SLOPE[1], and spray whitens the ground and water round the falls of
+# MIST_GW or more, out to about MIST_KM per cube root of their GW (5 km round 42 GW), at most MIST_MAX of each pixel.
+WHITE_WATER = np.array([0.55, 0.58, 0.60])
+MIST_WHITE = np.array([0.62, 0.64, 0.66])
+FOAM_SLOPE = (0.03, 0.2)
+MIST_GW = 2.0
+MIST_KM = 1.5
+MIST_MAX = 0.5
 CLOUD_ALBEDO = 0.72                 # of the part of a deck that intercepts light
 LOW_OPACITY, HIGH_OPACITY = 0.9, 0.4  # guesstimates: the low deck holds the model's cloud water, the high deck little
 CLOUD_ROWS = 90                     # 2-degree rows for the cloud maps
@@ -536,7 +545,40 @@ def plume_share(discharge, water, lat, km):
     return plume * water
 
 
-def true_colour(height, level, ppd, drainage, moisture, rock, waters):
+def falls_grids(shape, record, product, rotation=None):
+    """Foam and mist on the texture grid (180 W at the left edge), in the globe's frame, from the falls study: each
+    steep step's foam share by its steepness, carried as channels are, and the mist round each listed reach of MIST_GW
+    or more, Gaussian, its width growing with the cube root of the reach's power, peaking at MIST_MAX."""
+    from scipy.ndimage import maximum_filter
+    rows, cols = shape
+    with np.load(product, allow_pickle=False) as z:
+        cell, slope, reach = z['steep_cell'], z['steep_slope'], z['steep_reach']
+    foam = np.zeros(rows * cols, np.float32)
+    foam[cell] = smoothstep(FOAM_SLOPE[0], FOAM_SLOPE[1], slope)
+    roll = cols // 2
+    foam = np.roll(foam.reshape(shape), roll, axis=1)
+    foam = turn_channels(foam, rotation) if rotation is not None else foam
+    ppd = cols / 360.0
+    lat = 90.0 - (np.arange(rows) + 0.5) / ppd
+    km = MOON_KM * np.radians(1.0 / ppd)
+    mist = np.zeros(shape, np.float32)
+    powers = [x['power_gw'] for x in record['reaches']]
+    for lo, hi in ((MIST_GW, 6.0), (6.0, 18.0), (18.0, np.inf)):
+        these = [i for i, pw in enumerate(powers) if lo <= pw < hi]
+        if not these:
+            continue
+        src = np.zeros(rows * cols, np.float32)
+        src[cell[np.isin(reach, these)]] = 1.0
+        src = np.roll(src.reshape(shape), roll, axis=1)
+        if rotation is not None:
+            src = turn_channels(src, rotation)
+        sigma = MIST_KM * np.cbrt(np.sqrt(lo * (hi if np.isfinite(hi) else 2.0 * lo))) / km
+        spread = sphere_blur(src, sigma, lat) * (2.0 * np.pi * sigma * sigma)
+        mist = np.maximum(mist, MIST_MAX * np.clip(spread, 0.0, 1.0).astype(np.float32))
+    return dict(foam=foam, mist=mist)
+
+
+def true_colour(height, level, ppd, drainage, moisture, rock, waters, falls=None):
     """The ground in true colour (linear sRGB, float32), the water mask and the share of each pixel river channels
     cover, 180 W at the left edge, on a surface holding every water body at its own level (surface_grids). The cover
     follows the moisture map's aridity, wetter along larger rivers and in hollows and drier on steep slopes, with noise
@@ -574,9 +616,14 @@ def true_colour(height, level, ppd, drainage, moisture, rock, waters):
     del sediment
     sea = (waters['open_sea'] * (1 - shelf) + waters['productive_coast'] * shelf) * (1 - plume) + waters['river_mouth'] * plume
     del shelf, plume
-    colour = colour * (1 - river[..., None]) + waters['river_mouth'] * river[..., None]
+    river_colour = waters['river_mouth']
+    if falls is not None:                            # white water where the rivers drop steeply
+        river_colour = river_colour * (1 - falls['foam'][..., None]) + WHITE_WATER * falls['foam'][..., None]
+    colour = colour * (1 - river[..., None]) + river_colour * river[..., None]
     colour = np.where(water[..., None], sea, colour).astype(np.float32)
-    return colour, water, river, surface_level
+    if falls is not None:                            # and spray round the largest falls
+        colour = colour * (1 - falls['mist'][..., None]) + MIST_WHITE * falls['mist'][..., None]
+    return colour.astype(np.float32), water, river, surface_level
 
 
 LEGEND_ARIDITY = ((2.0, 'Wet forest'), (0.8, 'Humid forest'), (0.57, 'Dry woodland'), (0.33, 'Semi-arid grassland'),
@@ -799,7 +846,7 @@ def cloud_quantiles(samples=200_000, seed=3):
 
 
 def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, rotation=None, surface_path=None,
-          moisture_path=None, routing_path=None):
+          moisture_path=None, routing_path=None, falls_paths=None):
     """Appearance data for the globe page: textures (arrays, 180 W at the left edge) and parameters.
 
     height: metres above the geoid at ppd pixels per degree, 0 E at the left edge as LOLA has it, in the globe's frame;
@@ -827,7 +874,12 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
         drainage = surface_grids(h.shape, surface_path, rotation, routing=routing_path)
         rock = rock_fields(h.shape, ppd, rotation)
         waters = water_albedos()
-        colour, water, river, _ = true_colour(h, level, ppd, drainage, moisture, rock, waters)
+        falls = None
+        if falls_paths is not None:
+            falls_record = json.loads(Path(falls_paths[0]).read_text())
+            falls = falls_grids(h.shape, falls_record, falls_paths[1], rotation)
+        colour, water, river, _ = true_colour(h, level, ppd, drainage, moisture, rock, waters, falls)
+        del falls
         weight = np.cos(np.radians(90.0 - (np.arange(h.shape[0]) + 0.5) / ppd))[:, None]
         land = (~water) * weight
         basalt_land = float(((rock['mafic'] > 0.5) * land).sum() / land.sum())
@@ -908,6 +960,9 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
                        composition=geography_inputs.path(surface_composition.TABLE), water_colours=WATER_COLOURS)
         if routing_path is not None:
             sources['routing'] = Path(routing_path)
+        if falls_paths is not None:
+            sources.update(falls=Path(falls_paths[0]), falls_grid=Path(falls_paths[1]))
+            params['cover']['falls'] = dict(foamSlope=list(FOAM_SLOPE), mistGW=MIST_GW, mistKm=MIST_KM, mistMax=MIST_MAX)
     params['legend'] = [[name, '#' + ''.join(f'{int(round(v * 255)):02x}' for v in srgb_encode(np.asarray(rgb)))]
                         for name, rgb in params['legend']]
     if surface_path is not None:

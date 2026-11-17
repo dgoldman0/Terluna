@@ -43,3 +43,25 @@ def test_the_surface_is_drawn_from_the_design_routing_as_it_stands(record):
     assert record['ignored_inputs'][str(DR.PRODUCT)] == routing['product']['sha256']
     assert record['summary']['neck_spill_m3s'] == routing['summary']['neck_spill_m3s']
     assert record['summary']['sea_share'] == pytest.approx(routing['summary']['sea_share'], abs=2e-5)
+
+
+def test_the_works_cuts_are_cut_into_the_ground_and_carry_their_flow(record):
+    import numpy as np
+    from research.studies.atlas_round import design_cuts as DC
+    if not (DC.OUT.exists() and DC.PRODUCT.exists() and GS.PRODUCT.exists()):
+        pytest.skip('run design_cuts and globe_surface first')
+    assert record['inputs'][str(DC.OUT.relative_to(GS.ROOT))] == GS.sha256(DC.OUT)
+    with np.load(DC.PRODUCT, allow_pickle=False) as z:
+        cut, level, flow = z['cut_cell'], z['cut_level_m'], z['cut_flow_m3s']
+    with np.load(GS.PRODUCT, allow_pickle=False) as z:
+        h = z['height_m'].ravel()
+        channel = dict(zip(z['channel_cell'].tolist(), z['channel_discharge_m3s'].tolist()))
+        water = dict(zip(z['water_cell'].tolist(), z['water_level_m'].tolist()))
+    assert cut.size > 0
+    assert np.all(h[cut] <= level + 1e-3)                                   # the ground taken down to the water
+    for c, lev, f in zip(cut.tolist(), level.tolist(), flow.tolist()):       # the flow runs through, or a lake it drained
+        assert channel.get(c, 0.0) >= f - 1e-3 or water.get(c, np.inf) == pytest.approx(lev, abs=0.01)
+    assert record['summary']['cuts']['deepest_m'] == pytest.approx(json.loads(DC.OUT.read_text())['summary']['deepest_m'],
+                                                                   abs=0.2)
+    pieces = record['summary']['cuts']['pieces']
+    assert sum(x['cells'] for x in pieces) == cut.size and pieces[0]['deepest_m'] == record['summary']['cuts']['deepest_m']

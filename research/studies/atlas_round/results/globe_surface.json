@@ -2,19 +2,22 @@
  "schema": "terluna.research.atlas-round-globe-surface/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/globe_surface.py": "27f08dd9ad569e1033da1128769418c6f75278df44986b49a1a0e62157613360",
+   "research/studies/atlas_round/globe_surface.py": "59b90ee4c57079650f15becbf1b8d6b6c5d43841878ef953804c79479bdad37c",
    "research/studies/atlas_round/design_routing.py": "7efdff778ed46538149ca80abdf825d819ff80563565814a6ac4d0c09632cb6c",
+   "research/studies/atlas_round/design_cuts.py": "4d04e2dbfddb1b57b53593290378de453316191ad502f96cb4349c6739ea717a",
    "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
    "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541"
   }
  },
  "inputs": {
   "research/studies/atlas_round/results/design_routing.json": "c0a11066af790bdcbfb71f9252c5c1f40bcea7b4f4b45637c5b3b1d3d5ae5bb8",
+  "research/studies/atlas_round/results/design_cuts.json": "d60937eebdf5a0a0b3bd7f44f936ef7aa251fbf1a43235665a526f80e66c1d69",
   "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
   "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56"
  },
  "ignored_inputs": {
-  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "6cb410b400c6ee1ba15d3c79b404dfdae94327a66217e4a8b57e77cafbee05c1"
+  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "6cb410b400c6ee1ba15d3c79b404dfdae94327a66217e4a8b57e77cafbee05c1",
+  "/media/projectspace/terluna-research/atlas-round/design_cuts/design_cuts_16ppd.npz": "f2c9a4afbc8c63326db7fe26f4994d72db1164820748733891b700c447dfbcb8"
  },
  "evidence": "The redrawn floor at the settled state, the seas at the levels the design climate's closed budget gives them with the works of 16 November and the fixed weirs, and the routing of that budget's rain over it with the near-side sea parted. Not validated against any observation.",
  "reading_rule": "Levels and heights in m above the redrawn common level; areas in km2, volumes in km3, flows in m3/s; shares of the Moon's surface. seas are the seven bodies at their own levels; lakes are the routing's lakes off the seas; neck_river is the main part's spill run down the routing from the ground past the crest. product names the grid the globe reads, on the research drive.",
@@ -22,10 +25,10 @@
   "common_level_above_the_dry_geoid_m": -1615.03,
   "water_share": 0.37547,
   "sea_share": 0.23979,
-  "lake_share": 0.13568,
+  "lake_share": 0.13567,
   "lakes": 29799,
   "closed_lake_share": 0.00577,
-  "lake_volume_km3": 4617089,
+  "lake_volume_km3": 4617086,
   "rivers_into_the_seas_m3s": 268824,
   "seas": {
    "near-side sea": {
@@ -124,13 +127,74 @@
    },
    "reaches": "southern near-side seas"
   },
+  "cuts": {
+   "trench_cells": 17,
+   "deepest_m": 437.9,
+   "ground_taken_km3": 7.6,
+   "lakes_drained": 2,
+   "lake_drained_km2": 35,
+   "pieces": [
+    {
+     "level_m": 3448.8,
+     "deepest_m": 437.9,
+     "cells": 13,
+     "km": 22,
+     "flow_m3s": 14176,
+     "at": {
+      "today": [
+       34.97,
+       139.72
+      ],
+      "turned": [
+       37.14,
+       133.87
+      ]
+     }
+    },
+    {
+     "level_m": 3027.9,
+     "deepest_m": 89.2,
+     "cells": 3,
+     "km": 5,
+     "flow_m3s": 8835,
+     "at": {
+      "today": [
+       34.22,
+       132.97
+      ],
+      "turned": [
+       35.6,
+       127.18
+      ]
+     }
+    },
+    {
+     "level_m": 2626.8,
+     "deepest_m": 56.1,
+     "cells": 1,
+     "km": 2,
+     "flow_m3s": 8835,
+     "at": {
+      "today": [
+       31.22,
+       131.53
+      ],
+      "turned": [
+       32.46,
+       126.25
+      ]
+     }
+    }
+   ],
+   "flow_m3s": 14176
+  },
   "deepest_water_m": 7464,
   "highest_ground_m": 11649,
   "lowest_ground_m": -7335
  },
  "product": {
   "path": "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz",
-  "sha256": "428769908668dec64819dded6dc1779263214904e50c8c6983b577f8de4a8bad"
+  "sha256": "d454c35e02d2b354dd221742bfe43ba617ba2e5485589f523f39705440d22038"
  },
- "seconds": 15
+ "seconds": 22
 }

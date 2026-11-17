@@ -3,8 +3,8 @@
  "producer": {
   "files": {
    "research/studies/atlas_round/tides_final.py": "aa13ae7b48dede0576ee27a49a0bab7a3949d572e1422a671bddf9652c251e82",
-   "research/studies/atlas_round/moisture_final.py": "d2c78d6c298b5852084227ca3b6bbab696f176bd3330fd7fbfb1a32796d44a18",
-   "research/studies/atlas_round/globe_surface.py": "27f08dd9ad569e1033da1128769418c6f75278df44986b49a1a0e62157613360",
+   "research/studies/atlas_round/moisture_final.py": "3f3d84d3d591dd396a6dcc71f5da9e787583e8b562e41525d0cc83657b6fc1a5",
+   "research/studies/atlas_round/globe_surface.py": "59b90ee4c57079650f15becbf1b8d6b6c5d43841878ef953804c79479bdad37c",
    "geography/tides.py": "e7bf2af062ffe6f468a0add1abcae01b73314f24a09ee6f5e1cd2dbd138343af",
    "geography/lunar_ephemeris.py": "a3821628690cf9b920d8afc19d255de5e5112997249eb3cf9d30917fc971f258",
    "geography/tide_dynamics.py": "485d001e2188e0ab175bd9bb4464e6021f35265dedb1db96fe3b61ca298503d3",
@@ -14,14 +14,14 @@
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/globe_surface.json": "01d418c445c17f6bcb90b31458c7ae84fbb3918fada2e61ff0bea5aa7c81f989",
+  "research/studies/atlas_round/results/globe_surface.json": "a0ddb98e64c0a9c85abaaecc9c92be806769e493fb5bffbc368719f667881880",
   "geography/tides_ephemeris_check.csv": "08dccc1caa71c8f48d047e96ecd3d61f0c1b23cd46936c7ec331523870891346",
   "shared/scenarios/waves.json": "e6a86ec35b01d1864188bfaebb2a1d21a3047b841e118478df1831d4d0112323",
   "geography/results/tides.json": "5006911ecaadbcf8c9a8360b223bd83d083e0ca6738eb15a050ab5aad04d5b20",
   "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56"
  },
  "ignored_inputs": {
-  "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz": "428769908668dec64819dded6dc1779263214904e50c8c6983b577f8de4a8bad",
+  "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz": "d454c35e02d2b354dd221742bfe43ba617ba2e5485589f523f39705440d22038",
   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693"
  },
  "product": {
@@ -1793,5 +1793,5 @@
   }
  },
  "neck_study_south_monthly_range_m": 0.02,
- "seconds": 616
+ "seconds": 207
 }

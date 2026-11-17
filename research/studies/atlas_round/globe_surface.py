@@ -13,7 +13,12 @@ one on which the near-side sea parts. The surface holds:
   southern Procellarum about 100 m lower;
 - the lakes and rivers of the design routing, the governed routing routed again with the near-side sea at its two
   levels, so that rivers run on over the floor the parted sea leaves dry, and with the main part's spill put in past the
-  neck's crest, so that the river over the neck runs down to the southern seas.
+  neck's crest, so that the river over the neck runs down to the southern seas;
+- the works' cuts (register, 16 November; design_cuts.py): the trenches from Moscoviense towards Humboldtianum and
+  Smythii-Marginis,
+  whose ground is taken down to the water they carry, with the branches' flow drawn through them as a river. The
+  routing puts that flow in past each trench; the trench's own channel, a few metres to tens of metres of water, is not
+  cut below the water's level.
 
 The routing is design_routing.py's product, which this module reads after design_routing.load() has checked it against
 its record; the routing is computed there once for each climate and nothing is routed here. The surface is written to
@@ -32,6 +37,7 @@ import numpy as np
 from scipy import ndimage
 
 from geography import drainage as dr
+from research.studies.atlas_round import design_cuts as DC
 from research.studies.atlas_round import design_routing as DR
 from research.studies.atlas_round import final_drainage as FD
 from research.studies.atlas_round import redrawn_drainage as RD
@@ -45,6 +51,7 @@ PRODUCT = BULK / 'globe_surface_16ppd.npz'
 SCHEMA = 'terluna.research.atlas-round-globe-surface/1'
 PRODUCT_SCHEMA = 'terluna.research.atlas-round-globe-surface-grid/1'
 CODE = ('research/studies/atlas_round/globe_surface.py', 'research/studies/atlas_round/design_routing.py',
+        'research/studies/atlas_round/design_cuts.py',
         'research/studies/atlas_round/redrawn_drainage.py', 'research/studies/drainage_network/network.py')
 BUDGET = DR.BUDGET
 CHANNEL_M3S = 1.0                    # discharge kept, as geography's drainage product keeps it
@@ -90,7 +97,40 @@ def build(log=print):
         spills[body == meta['seas'].index(k) + 1] = True
     wet = ~np.isnan(level)
     water_cell = np.flatnonzero(wet).astype(np.int32)
-    keep = np.flatnonzero((q >= CHANNEL_M3S) & ~r['outlet'] & ~r['lake'] & ~wet).astype(np.int32)
+
+    # the works' cuts: each trench's ground taken down to the water it carries; a lake standing higher that the trench
+    # crosses drains to that water, its floor below staying wet and the rest drying; the branches' flow runs through
+    cuts = DC.load(log)
+    cut, cut_level = cuts['cut_cell'], cuts['cut_level_m']
+    cut_depth = np.maximum(h_flat[cut] - cut_level, 0.0)
+    h_flat[cut] = np.minimum(h_flat[cut], cut_level)
+    crossed = wet[cut] & (body[cut] == 0) & (np.nan_to_num(level[cut], nan=-np.inf) > cut_level)
+    drained_lakes, drained_km2 = 0, 0.0
+    if crossed.any():
+        lakes_lab, _ = ndimage.label((wet & (body == 0)).reshape(rows, cols), structure=np.ones((3, 3), bool))
+        lakes_lab = lakes_lab.ravel()
+        for lab_ in np.unique(lakes_lab[cut[crossed]]):
+            cells = np.flatnonzero(lakes_lab == lab_)
+            new = float(cut_level[crossed & (lakes_lab[cut] == lab_)].min())
+            drained_lakes += 1
+            drained_km2 += float(area[cells[h_flat[cells] >= new]].sum()) / 1e6
+            level[cells] = np.where(h_flat[cells] < new, np.float32(new), np.float32(np.nan))
+        wet = ~np.isnan(level)
+        water_cell = np.flatnonzero(wet).astype(np.int32)
+    in_cut = np.zeros(h_flat.size, bool)
+    in_cut[cut] = True
+    cut_pieces = []                                  # each piece of trench at one water level: its deepest point
+    for lev in np.unique(cut_level):
+        piece = cut_level == lev
+        k = int(np.argmax(np.where(piece, cut_depth, -1.0)))
+        cut_pieces.append(dict(level_m=round(float(lev - level0), 1), deepest_m=round(float(cut_depth[k]), 1),
+                               cells=int(piece.sum()), km=round(float(np.sqrt(area[cut[piece]]).sum()) / 1e3),
+                               flow_m3s=round(float(cuts['cut_flow_m3s'][piece].max())),
+                               at=NW.place(int(cut[k]), cols, rotation)))
+    cut_pieces.sort(key=lambda x: -x['deepest_m'])
+    q = q.copy()
+    q[cut] = np.maximum(q[cut], cuts['cut_flow_m3s'])
+    keep = np.flatnonzero((q >= CHANNEL_M3S) & ~r['outlet'] & (~r['lake'] | in_cut) & ~wet).astype(np.int32)
 
     # the neck's river, from the spill down the routing
     spill = meta['neck']['spill_cell']
@@ -122,8 +162,13 @@ def build(log=print):
         lake_share=round(lake_area / total, 5), lakes=int(n_lakes),
         closed_lake_share=round(float(area[(body == 0) & wet & ~spills].sum()) / total, 5),
         lake_volume_km3=round(float((depth[(body == 0) & wet] * area[(body == 0) & wet]).sum()) / 1e9),
-        rivers_into_the_seas_m3s=round(float(q[into].sum())), seas=seas,
+        rivers_into_the_seas_m3s=round(float(routing['discharge_m3s'][into].sum())), seas=seas,   # the cuts' flow leaves a sea
         neck_spill_m3s=round(meta['neck']['flow_m3s']), neck_river=neck_river,
+        cuts=dict(trench_cells=int(cut.size), deepest_m=round(float(cut_depth.max()), 1) if cut.size else 0.0,
+                  ground_taken_km3=round(float((cut_depth * area[cut]).sum()) / 1e9, 1),
+                  lakes_drained=drained_lakes, lake_drained_km2=round(drained_km2),
+                  pieces=cut_pieces,
+                  flow_m3s=round(float(cuts['cut_flow_m3s'].max())) if cut.size else 0),
         deepest_water_m=round(float(depth.max())), highest_ground_m=round(float(h_flat.max() - level0)),
         lowest_ground_m=round(float(h_flat.min() - level0)))
     log(f'summary {json.dumps(summary)[:1500]}, {time.time() - started:.0f} s')
@@ -144,7 +189,8 @@ def build(log=print):
                       'settled state; water_cell lists every cell under water, water_level_m its surface above '
                       'the same geoid, water_body its body (an index into bodies, 0 a lake off the seas) and '
                       'water_spills whether its water overflows (a lake that spills, an upper sea at its rim); '
-                      'channel_discharge_m3s is the mean discharge through channel_cell, on dry ground.'),
+                      'channel_discharge_m3s is the mean discharge through channel_cell, on dry ground. The heights '
+                      'carry the works\' cuts, taken down to the water their trenches carry.'),
         evidence=('The redrawn floor at the settled state, the seas at the levels the design climate\'s closed '
                   'budget gives them with the works of 16 November and the fixed weirs, and the routing of that '
                   'budget\'s rain over it with the near-side sea parted. Not validated against any observation.'))
@@ -155,8 +201,8 @@ def build(log=print):
     rel = lambda p: str(Path(p).relative_to(ROOT)) if str(p).startswith(str(ROOT)) else str(p)   # noqa: E731
     return dict(
         schema=SCHEMA, producer=dict(files={f: sha256(ROOT / f) for f in CODE}),
-        inputs={rel(p): sha256(p) for p in (DR.OUT, ROOT / RD.SURFACE, frame_path)},
-        ignored_inputs={str(DR.PRODUCT): sha256(DR.PRODUCT)},
+        inputs={rel(p): sha256(p) for p in (DR.OUT, DC.OUT, ROOT / RD.SURFACE, frame_path)},
+        ignored_inputs={str(DR.PRODUCT): sha256(DR.PRODUCT), str(DC.PRODUCT): sha256(DC.PRODUCT)},
         evidence=product_meta['evidence'],
         reading_rule=('Levels and heights in m above the redrawn common level; areas in km2, volumes in km3, flows in '
                       'm3/s; shares of the Moon\'s surface. seas are the seven bodies at their own levels; lakes are '

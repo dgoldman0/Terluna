@@ -71,6 +71,12 @@
   .sw.tri { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent;
             border-bottom: 10px solid var(--accent); border-radius: 0; margin-inline: 2px; }
   .sw.sq { background: #2b2f36; width: 9px; height: 9px; margin-inline: 3px; border: 1px solid #fff; }
+  .sw.fall { background: #bfe9ff; width: 9px; height: 9px; margin-inline: 3px; transform: rotate(45deg); border: 1px solid #36505e; }
+  .lab.fall { transform: translate(8px, -50%); text-align: left; font-size: 11px; font-weight: 600; color: #e6f6ff;
+    text-shadow: 0 0 3px #000, 0 0 5px #000; white-space: nowrap; }
+  .lab.work { transform: translate(8px, -50%); text-align: left; font-size: 11px; font-weight: 600; color: #ffe0b8;
+    text-shadow: 0 0 3px #000, 0 0 5px #000; white-space: nowrap; }
+  .sw.work { background: #ffb347; width: 11px; height: 5px; margin-inline: 2px; border: 1px solid #5a3a10; }
   .figs { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; font-size: 13.5px; margin: 0; }
   .figs dt { color: var(--muted); }
   .figs dd { margin: 0; font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; text-align: right; }
@@ -193,6 +199,8 @@
           <label><input type="checkbox" id="show-islands"> Islands</label>
           <label><input type="checkbox" id="show-sites"> Heritage sites</label>
           <label><input type="checkbox" id="show-targets"> Sampling targets</label>
+          <label><input type="checkbox" id="show-falls" checked> Falls and cascades</label>
+          <label><input type="checkbox" id="show-works" checked> Works</label>
           <label><input type="checkbox" id="show-grid"> Grid</label>
         </div>
         <div class="scale">
@@ -889,6 +897,8 @@
       const note = topoKey();
       legend.append(swatch(null, 'Heritage, submerged', 'sw ring'), swatch(null, 'Heritage, on land', 'sw tri'),
                     swatch(null, 'Sampling target', 'sw sq'));
+      if ((D.labels.falls || []).length) legend.append(swatch(null, 'Falls, cascades', 'sw fall'));
+      if ((D.labels.works || []).length) legend.append(swatch(null, 'Works: a cut', 'sw work'));
       legendNote.textContent = note;
     }
   };
@@ -1118,6 +1128,10 @@
   const landGeo = new THREE.ConeGeometry(0.009, 0.02, 3);
   const targetGeo = new THREE.BoxGeometry(0.009, 0.009, 0.009);
   const targetMat = new THREE.MeshBasicMaterial({ color: 0x2b2f36 });
+  const fallGeo = new THREE.OctahedronGeometry(0.0065);
+  const fallMat = new THREE.MeshBasicMaterial({ color: 0xbfe9ff });
+  const workGeo = new THREE.BoxGeometry(0.012, 0.004, 0.004);
+  const workMat = new THREE.MeshBasicMaterial({ color: 0xffb347 });
   const items = [];
   const UP = new THREE.Vector3(0, 1, 0);
   const addLabel = (kind, text, lat, lon, height, extra) => {
@@ -1145,6 +1159,18 @@
     item.mesh.renderOrder = 2;
     globe.add(item.mesh);
   }
+  for (const f of (D.labels.falls || [])) {
+    const item = addLabel('fall', f.short, f.lat, f.lon, f.height, f);
+    item.mesh = new THREE.Mesh(fallGeo, fallMat);
+    item.mesh.renderOrder = 2;
+    globe.add(item.mesh);
+  }
+  for (const w of (D.labels.works || [])) {
+    const item = addLabel('work', w.short, w.lat, w.lon, w.height, w);
+    item.mesh = new THREE.Mesh(workGeo, workMat);
+    item.mesh.renderOrder = 2;
+    globe.add(item.mesh);
+  }
   const placeMarkers = () => {
     for (const it of items) {
       if (!it.mesh) continue;
@@ -1157,10 +1183,12 @@
   // Per-mode settings: what is shown and how much relief.
   const reliefInput = document.getElementById('relief');
   const reliefValue = document.getElementById('relief-value');
-  const SHOW_IDS = { sea: 'show-seas', island: 'show-islands', site: 'show-sites', target: 'show-targets', grid: 'show-grid' };
+  const SHOW_IDS = { sea: 'show-seas', island: 'show-islands', site: 'show-sites', target: 'show-targets', fall: 'show-falls',
+                     work: 'show-works', grid: 'show-grid' };
   const settings = {
-    appearance: { show: { sea: false, island: false, site: false, target: false, grid: false }, relief: 1, max: 10 },
-    topo: { show: { sea: true, island: true, site: true, target: false, grid: false }, relief: 12, max: 40 }
+    appearance: { show: { sea: false, island: false, site: false, target: false, fall: true, work: true, grid: false },
+                  relief: 1, max: 10 },
+    topo: { show: { sea: true, island: true, site: true, target: false, fall: true, work: true, grid: false }, relief: 12, max: 40 }
   };
   let show = settings.appearance.show;
   const setRelief = (v) => {
@@ -1493,6 +1521,11 @@
       card.querySelector('.meta').textContent = where;
       card.querySelector('.marks').textContent = x.marks;
       card.querySelector('.treat').textContent = x.treatment + ' — ' + x.evaluation + '.' + (x.statusNote ? ' ' + x.statusNote : '');
+    } else if (it.kind === 'fall' || it.kind === 'work') {
+      card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p>';
+      card.querySelector('h3').textContent = x.title;
+      card.querySelector('.meta').textContent = x.meta;
+      card.querySelector('.marks').textContent = x.note;
     } else {
       card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p>';
       card.querySelector('h3').textContent = x.name;
@@ -1574,7 +1607,7 @@
     const px = e.clientX - box.left, py = e.clientY - box.top;
     let best = null, bestD = 16;
     for (const it of items) {
-      if (!it.extra || (it.kind === 'site' && !show.site) || (it.kind === 'target' && !show.target)) continue;
+      if (!it.extra || !show[it.kind]) continue;
       const s = screenOf(it);
       if (s.facing < 0.05) continue;
       const d = Math.hypot(s.x - px, s.y - py);
@@ -1660,7 +1693,7 @@
       renderer.render(scene, camera);
       for (const it of items) {
         const visible = show[it.kind] && !(it.kind === 'site' && !it.extra.short);
-        if (it.mesh) it.mesh.visible = it.kind === 'site' ? show.site : show.target;
+        if (it.mesh) it.mesh.visible = !!show[it.kind];
         if (!visible) { it.el.hidden = true; continue; }
         const s = screenOf(it);
         const on = s.facing > 0.12;

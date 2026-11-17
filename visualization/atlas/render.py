@@ -589,6 +589,49 @@ def routing_product(record):
     return Path(product['path'])
 
 
+def work_marks(summary, grid, level0, rotation):
+    """The page's marks for the works' cuts: each piece of trench at its deepest point, with its card's lines."""
+    pieces = summary.get('cuts', {}).get('pieces', [])
+    out = []
+    for i, x in enumerate(pieces):
+        lat, lon = x['at']['turned']
+        first = i == 0
+        out.append(dict(lat=lat, lon=lon, height=round(x['level_m']), short=f"cut {x['deepest_m']:,.0f} m",
+                        title=("Moscoviense's northern cut" if first else 'A cut on the northern branch'),
+                        meta=(f"{x['deepest_m']:,.0f} m deep at its deepest · about {x['km']} km of trench · water "
+                              f"{x['level_m']:,.0f} m above the common level · {x['flow_m3s']:,} m³/s"),
+                        note=('The works of 16 November: ' + ('the cut through Moscoviense\'s northern ridge carries its '
+                              'surplus north, Humboldtianum\'s share and Smythii–Marginis\'s. ' if first else
+                              'a further cut on the way north. ') + 'Drawn one 1.9 km cell wide, about as wide as a '
+                              'channel for its flow needs; the works have not designed its width.')))
+    return out
+
+
+FALL_MARKS = 12                 # the largest falls the page marks
+
+
+def fall_marks(record, grid, level0):
+    """The page's marks for the largest falls of the falls study: place in the globe's frame, the ground's height there
+    above the common level, a short label and the card's lines."""
+    heights = grid['height'].ravel()
+    great = record['summary'].get('moscoviense_river')
+    out = []
+    for x in record['reaches'][:FALL_MARKS]:
+        lat, lon = x['at']['turned']
+        near = ('beside ' if x['beside']['beside'] else 'near ') + x['beside']['name']
+        river = (f"On the river that carries Mare Moscoviense's overflow over its natural pass to the "
+                 f"{great['into']}: {great['length_km']:,} km, falling {great['falls_m']:,} m in all. "
+                 if great and x['on_moscoviense_river'] else '')
+        out.append(dict(lat=lat, lon=lon, height=round(float(heights[x['start']] - level0)), short=f"{x['drop_m']:,} m",
+                        title=f"{x['drop_m']:,} m drop {near}",
+                        meta=(f"{x['flow_m3s']:,} m³/s · {x['drop_m']:,} m in {x['length_km']} km · steepest "
+                              f"{x['steepest_deg']}° over a 1.9 km step · {x['power_gw']:.0f} GW of falling water"),
+                        note=(river + f"It ends in {x['into']}. LOLA's 59 m heights show the six largest drops as long "
+                              'cascades down crater walls, their steepest 60 m 16–28° and no step steeper than 45°: white '
+                              'water rather than a free fall, though cliffs of a few tens of metres would not show.')))
+    return out
+
+
 def cover_text(cover, sources):
     """The page's paragraph on the ground in true colour, from appearance.build's cover parameters."""
     m = cover['moisture']
@@ -620,7 +663,12 @@ def cover_text(cover, sources):
             'offshore, the productive coast\'s green over water shallower than about 150 m and in shallow lakes, and the '
             'river mouth\'s ochre in rivers and where they carry sediment into a lake or sea, a plume about 0.3 km wide '
             'per (m³/s)^½ of the runoff gathered since the last lake or sea, since lakes and seas trap their rivers\' '
-            'sediment and send clear water on; the water also mirrors the sky. The relief shades the ground from '
+            'sediment and send clear water on; the water also mirrors the sky. '
+            + ('Rivers turn to white water where they drop steeply, wholly where a 1.9 km step falls 200 m a km, and '
+               'spray whitens the ground and water up to about 5 km round the falls of 2 GW or more, display '
+               'guesstimates over the falls study\'s steep reaches; the largest twelve falls are marked. '
+               if cover.get('falls') else '')
+            + 'The relief shades the ground from '
             'its heights at 16 pixels per degree, and the sky\'s diffuse light reaches each place in the share of the '
             'sky its surroundings leave open, found from the heights out to 50 km in 16 directions with the Moon\'s '
             'curvature: under this air the sky gives 43% of the green light on level ground with the Sun 60° up, so '
@@ -630,7 +678,7 @@ def cover_text(cover, sources):
             'opacity is a guess (the low deck holds the run\'s cloud water, the high deck little).')
 
 
-def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes, moisture=None):
+def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes, moisture=None, falls=None):
     """The globe page on the design surface: the relief and the water at each body's own level, the appearance from
     the same water (the ground in true colour from the moisture map when one is given), the sites and targets placed
     on it, and the figures from the surface's record."""
@@ -656,9 +704,13 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
     surface_tex = surface_texture(lev_map_t, body_map_t)
     fine = turned(grid['height'])
     routing = routing_product(record) if moisture else None
-    looks, params, sources, masks = appearance.build(fine, level0, SURFACE_PPD, climatology=climatology,
-                                                     rotation=rotation, surface_path=surface_path, moisture_path=moisture,
-                                                     routing_path=routing)
+    falls_record = json.loads(Path(falls).read_text()) if falls else None
+    if falls_record and digest(falls_record['product']['path']) != falls_record['product']['sha256']:
+        raise SystemExit(f"{falls_record['product']['path']} no longer matches its record {falls}")
+    looks, params, sources, masks = appearance.build(
+        fine, level0, SURFACE_PPD, climatology=climatology, rotation=rotation, surface_path=surface_path,
+        moisture_path=moisture, routing_path=routing,
+        falls_paths=(Path(falls), Path(falls_record['product']['path'])) if falls_record and moisture else None)
     del fine
     truly = 'cover' in params
     share = lambda mask, ppd_: float((mask * np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_))[:, None]).sum()
@@ -704,8 +756,12 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
                      f"{summary['lake_volume_km3'] / 1e6:.1f} million km³"),
         waterSource=('Land, water and water depth come from LOLA topography at 16 pixels per degree (1.9 km) as the '
                      "water's weight redraws it at the settled state, with every sea and lake at its own level as the atlas "
-                     "round's design surface sets it. Rivers and lakes come from the round's routing of the design "
-                     "climate's runoff over that floor:"),
+                     "round's design surface sets it"
+                     + (f". The works' cuts from Moscoviense towards Humboldtianum and Smythii–Marginis are cut into the "
+                        f"ground down to the water they carry, {summary['cuts']['deepest_m']:,.0f} m at the deepest, and "
+                        f"its {summary['cuts']['flow_m3s']:,} m³/s runs through them as a river"
+                        if summary.get('cuts', {}).get('trench_cells') else '')
+                     + ". Rivers and lakes come from the round's routing of the design climate's runoff over that floor:"),
         topoText=('The ground\'s height above or below the common level, from the design surface\'s heights at 4 pixels '
                   'per degree (7.6 km), with the water taken away. A sea takes the colour of the depth band for its '
                   'depth under its own surface, averaged over each 7.6 km cell most of which it covers, so a sea above '
@@ -735,6 +791,8 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
         labels=dict(
             seas=[[name.replace('\n', ' '), *place(la, lo)] for name, la, lo in SEA_LABELS],
             islands=[],
+            falls=fall_marks(falls_record, grid, level0) if falls_record else [],
+            works=work_marks(summary, grid, level0, rotation),
             sites=[dict(id=s['id'], name=s['name'], year=s['year'], **dict(zip(('lat', 'lon'), place(s['lat'], s['lon']))),
                         status=s['status'], short=SITE_LABELS.get(s['id'], ('', None))[0], depth=s.get('depth_m', 0),
                         height=s['height'], pressure=s.get('pressure_atm', 0.0), nearestLand=s.get('nearest_land_km', 0),
@@ -785,6 +843,8 @@ def main(argv=None):
     parser.add_argument('--surface', type=Path, help="the atlas round's design surface (globe_surface_16ppd.npz): "
                                                      'the globe alone, every water body at its own level')
     parser.add_argument('--surface-record', type=Path, help="the design surface's record (results/globe_surface.json)")
+    parser.add_argument('--falls', type=Path, help="with --moisture, the falls study's record (results/falls.json): "
+                                                    'the largest falls marked, white water on steep reaches')
     parser.add_argument('--moisture', type=Path, help="with --surface, the moisture map of the climatology's run and years "
                                                       '(results/moisture_map_final.json): the ground in true colour')
     args = parser.parse_args(argv)
@@ -798,7 +858,8 @@ def main(argv=None):
         OUT.mkdir(parents=True, exist_ok=True)
         globe = write_globe_surface(args.surface.absolute(), args.surface_record.absolute(), args.climatology.absolute(),
                                     sites, targets, dict(register=digest(reg_path)),
-                                    moisture=args.moisture.absolute() if args.moisture else None)
+                                    moisture=args.moisture.absolute() if args.moisture else None,
+                                    falls=args.falls.absolute() if args.falls else None)
         products = {str(p.relative_to(ROOT)): digest(p) for p in (reg_path, tgt_path)}
         products[str(args.surface)] = digest(args.surface)
         products[str(args.surface_record)] = digest(args.surface_record)
