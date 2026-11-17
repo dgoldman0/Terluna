@@ -17,14 +17,17 @@ product and those that read it stay as they are:
   (globe_surface.py: every sea at its own level, the near-side sea parted, the governed lakes with their spills),
   where the moisture map reads the atlas's one sea level, its tides and geography's lakes. A 4 px/deg pixel is sea
   where most of it lies under one of the seven seas; the coast is the land-sea pixel edges in each land cell; the tide
-  along it is geography's monthly range at that sea pixel where the atlas's seas reach it, the two-basin tide of the
-  parted south part (near_side_neck.py) on the southern seas, and none beyond the atlas's water; the lakes are the
-  surface's lakes off the seas at 16 px/deg, and the closed ones those that do not spill. No lake stands at the common
-  level by rule, so the atlas's sea-level hollows are none.
+  along it is the monthly range at that sea pixel from geography's tide model run on the design surface's own seas
+  (tides_final.py, every sea at its own level, the forcing at the seas' turned places); the lakes are the surface's
+  lakes off the seas at 16 px/deg, and the closed ones those that do not spill. No lake stands at the common level by
+  rule, so the atlas's sea-level hollows are none.
 
 The classes cover the run's T21 land cells, PlaSim's binary mask at its surface's own water share. Lakes smaller than
 a cell sit on land cells, and to keep the water's share the mask makes water of some cells that are mostly land, so the
-record's land.design_surface gives how the design surface's land and water fall on the run's land and water cells.
+record's land.design_surface gives how the design surface's land and water fall on the run's land and water cells. The
+design surface's land in the run's water cells takes the class of the nearest land cell (register, 17 November),
+marked as assigned and counted apart (land.design_surface.assigned), and shares.over_the_design_land gives the classes'
+shares over all the design surface's land, its land in the run's land cells taking its cell's class.
 
 The window is the run's settled years alone: its earlier years cool toward the settled state, so no decade beside them
 is mapped. The polar light's thresholds stay at the elastic frame's tilt (1.613 degrees) where the settled frame's is
@@ -46,7 +49,7 @@ from climate.gcm.turned import to_turned
 from research.studies.atlas_round import drylands as DL
 from research.studies.atlas_round import final_drainage as FD
 from research.studies.atlas_round import globe_surface as GS
-from research.studies.atlas_round import near_side_neck as N
+from research.studies.atlas_round import tides_final as TF
 from shared.constants import MOON_RADIUS
 
 HERE = Path(__file__).resolve().parent
@@ -55,10 +58,9 @@ OUT = HERE / 'results' / 'moisture_map_final.json'
 BULK = Path('/media/projectspace/terluna-research/atlas-round/moisture_final')
 LAKES = BULK / 'design_lakes'                  # the design surface's lakes in geography's drainage product's form
 CODE = ('research/studies/atlas_round/moisture_final.py', 'research/studies/atlas_round/globe_surface.py',
-        'biosphere/ecology/moisture_map.py')
+        'research/studies/atlas_round/tides_final.py', 'biosphere/ecology/moisture_map.py')
 RUN, YEARS = FD.RUN, (35, 49)
 SEAS = range(1, 8)
-SOUTHERN = 2
 LAKE = 8
 
 
@@ -135,8 +137,6 @@ def surface_settings(lat, lon, rotation=None, drainage=None):
                atlas_land_fraction=total(area4 * landpx) / cell_area4)
     tide = np.full(sea.shape, np.nan)
     tide[t['rows'], t['cols']] = t['monthly_range_median_m']
-    south = json.loads(N.OUT.read_text())['budgets']['closed_budget']['tide']['natural_neck']['south_monthly_range_m']
-    tide[sea_body == SOUTHERN] = south
     tide[~sea] = np.nan
     coast = np.zeros(sea.shape)
     tide_len = np.zeros(sea.shape)
@@ -210,6 +210,45 @@ def coverage(lat, lon, geo, rows, cols):
               'water cells has no class.'))
 
 
+def assigned(lat, lon, geo, cells, classes):
+    """The design surface's land in the run's water cells, each such cell's land given the class of the nearest of the
+    run's land cells (the great circle between the cells' centres on the turned Moon), and the classes' shares over all
+    the design surface's land, its land in the run's land cells taking its cell's class; areas in km2."""
+    area = bm.cell_areas_km2(lat, lon)
+    dry = area - np.minimum((geo['sea_fraction'] + geo['rainfed_lake_fraction']) * area, area)
+    rows, cols = np.asarray(cells['row']), np.asarray(cells['col'])
+    land = np.zeros(area.shape, bool)
+    land[rows, cols] = True
+    target = np.argwhere(~land & (dry > 0.0))
+    unit = lambda la, lo: np.stack((np.cos(la) * np.cos(lo), np.cos(la) * np.sin(lo), np.sin(la)), axis=-1)  # noqa: E731
+    la, lo = np.radians(np.asarray(lat, float)), np.radians(np.asarray(lon, float))
+    source, sink = unit(la[rows], lo[cols]), unit(la[target[:, 0]], lo[target[:, 1]])
+    nearest = np.argmax(sink @ source.T, axis=1)
+    km = np.arccos(np.clip(np.sum(sink * source[nearest], axis=1), -1.0, 1.0)) * MOON_RADIUS / 1e3
+    index = np.asarray(cells['moisture'])
+    own, given = dry[rows, cols], dry[target[:, 0], target[:, 1]]
+    keys = [c['key'] for c in classes]
+    by_class = {k: round(float(given[index[nearest] == i].sum())) for i, k in enumerate(keys)}
+    in_land = {k: float(own[index == i].sum()) for i, k in enumerate(keys)}
+    total = float(own.sum() + given.sum())
+    dry_keys = keys[:4]
+    return dict(
+        assigned=dict(cells=int(target.shape[0]), km2=round(float(given.sum())), by_class_km2=by_class,
+                      nearest_land_km=dict(median=round(float(np.median(km))), p90=round(float(np.percentile(km, 90))),
+                                           maximum=round(float(km.max()))),
+                      rule='the class of the nearest of the run\'s land cells, centre to centre on the turned Moon; '
+                           'assigned, not computed for the cell'),
+        over_the_design_land=dict(
+            land_km2=round(total),
+            by_class={k: round((in_land[k] + by_class[k]) / total, 4) for k in keys},
+            by_class_in_run_land_cells_only={k: round(in_land[k] / float(own.sum()), 4) for k in keys},
+            drylands_share=round(sum(in_land[k] + by_class[k] for k in dry_keys) / total, 4),
+            assigned_share=round(float(given.sum()) / total, 4),
+            note=('Shares of the design surface\'s land: its land in each of the run\'s land cells takes the cell\'s '
+                  'class, its land in the run\'s water cells the class of the nearest land cell (assigned). The shares '
+                  'under shares.by_class are of the run\'s land cells, each counted whole.')))
+
+
 def write_lakes(surface):
     """The design surface's lakes and channels in geography's drainage product's form, which the moisture map names as
     its lakes' source."""
@@ -250,10 +289,14 @@ def build(log=print):
         return out
 
     bm.settings = settings                          # the design surface's seas, lakes, coasts and tides
+    bm.GEOGRAPHY['tides_grid'] = str(TF.PRODUCT)     # the tide of the design surface's own seas
     product = bm.build(RUN, YEARS, (), bm.STORE_YEARS, drainage=str(lakes), orientation=str(frame_path.relative_to(ROOT)))
     cells = product['cells']
     cover = coverage(seen['lat'], seen['lon'], seen['geo'], np.array(cells['row']), np.array(cells['col']))
+    given = assigned(seen['lat'], seen['lon'], seen['geo'], cells, product['classes'])
+    cover['assigned'] = given['assigned']
     product['land']['design_surface'] = cover
+    product['shares']['over_the_design_land'] = given['over_the_design_land']
     coast_km = np.array(cells['coast_km'], float)
     untided = float(coast_km[np.array([v is None for v in cells['tide_m']])].sum())
     unread = [bm.GEOGRAPHY['atlas'], bm.GEOGRAPHY['atlas_grid']]     # the design surface's settings replace the atlas's
@@ -265,7 +308,8 @@ def build(log=print):
         wrapper=dict(files={f: sha256(ROOT / f) for f in CODE}),
         design_surface=dict(path=str(GS.PRODUCT), sha256=sha256(GS.PRODUCT), record=str(GS.OUT.relative_to(ROOT)),
                             record_sha256=sha256(GS.OUT)),
-        neck=dict(path=str(N.OUT.relative_to(ROOT)), sha256=sha256(N.OUT)))
+        tides=dict(path=str(TF.PRODUCT), sha256=sha256(TF.PRODUCT), record=str(TF.OUT.relative_to(ROOT)),
+                   record_sha256=sha256(TF.OUT)))
     product['evidence'] = (
         'The moisture map of the design climate on the atlas round\'s final surface (the run at sunlight 0.930, years '
         '35-49, 300.3 K at the ground), classed by biosphere/ecology/moisture_map.py unchanged; the cells are the run\'s, '
@@ -274,20 +318,25 @@ def build(log=print):
         + product['evidence'].replace('geology\'s orientation product', 'the final surface\'s settled frame'))
     product['window'] = dict(years=list(YEARS), note='the run\'s settled years; its earlier years cool toward them, so no '
                                                      'decade beside them is mapped')
+    a = given['assigned']
     product['limits'] = [f'The classes cover the run\'s land cells, {cover["run_land_km2"] / 1e6:.1f} million km2: they hold '
                          f'{cover["design_land_in_run_land_km2"] / 1e6:.1f} million km2 of the design surface\'s land, '
                          f'{cover["design_lake_in_run_land_km2"] / 1e6:.1f} million of its lakes and '
                          f'{cover["design_sea_in_run_land_km2"] / 1e6:.1f} million of its seas. Another '
                          f'{cover["design_land_in_run_water_km2"] / 1e6:.1f} million km2 of its land, '
                          f'{100 * cover["design_land_unclassed_share"]:.0f}% of it, lies in cells the run\'s mask makes '
-                         'water and has no class.',
+                         'water; it takes the class of the nearest land cell, '
+                         f'{a["nearest_land_km"]["median"]} km away at the median and {a["nearest_land_km"]["maximum"]} km '
+                         'at most, assigned and counted apart. In lake districts that class errs dry, since the run '
+                         'holds no land cell whose air the district\'s own lakes moisten.',
                          'The polar light\'s thresholds are the elastic frame\'s, at a tilt of 1.613 degrees; the settled '
                          'frame\'s is 1.707.',
-                         'The tide along the coasts is geography\'s monthly range where the atlas\'s seas reach a coastal '
-                         'sea pixel and the two-basin tide on the parted southern seas. Geography\'s tides do not reach '
-                         'the upper seas or the South Pole–Aitken Sea\'s shores beyond the atlas\'s water, so '
-                         f'{untided:,.0f} of the {coast_km.sum():,.0f} km of coast on the run\'s land cells lie in cells '
-                         'without a tide class.',
+                         'The tide along the coasts is the monthly range of the design surface\'s seas from geography\'s '
+                         'tide model with each sea\'s mean held (tides_final.py), an equilibrium tide checked against '
+                         'a shallow-water solution on three seas; '
+                         + (f'all {coast_km.sum():,.0f} km of coast on the run\'s land cells have a tide class.' if untided == 0
+                            else f'{untided:,.0f} of the {coast_km.sum():,.0f} km of coast on the run\'s land cells lie in '
+                                 'cells without a tide class.'),
                          'The gap\'s scale and the night-rain timing are the design run\'s of 1 November, as in the '
                          'moisture map on the corrected climate.']
     product['seconds'] = round(time.time() - started)
@@ -309,6 +358,7 @@ def main(argv=None) -> int:
     print('  mix', json.dumps({k: v for k, v in product['mix'].items() if k != 'earth_drylands'})[:1500])
     print('  soda', json.dumps({k: v for k, v in product['settings']['soda_lakes'].items() if k != 'note'}))
     print('  design surface', json.dumps({k: v for k, v in product['land']['design_surface'].items() if k != 'note'}))
+    print('  over the design land', json.dumps({k: v for k, v in s['over_the_design_land'].items() if k != 'note'}))
     print(f'wrote {args.out}')
     return 0
 

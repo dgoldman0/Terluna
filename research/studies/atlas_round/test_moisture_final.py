@@ -1,7 +1,8 @@
 """Checks of the moisture map on the final surface: a map pixel is sea where most of it lies under one sea, and the
 record holds together once computed (the run, its years and its settled frame; the classes' shares adding up; no lake
-at the common level by rule; the design surface's land and water accounted for on the run's cells; the design surface
-matching its hash)."""
+at the common level by rule; the design surface's land and water accounted for on the run's cells; the land in the
+run's water cells given the nearest land cell's class and the shares over the design land adding up; the coasts' tide
+from the design surface's own seas; the design surface and the tides matching their hashes)."""
 import json
 import math
 
@@ -37,7 +38,7 @@ def test_the_record_holds_together(record):
     assert p['frame']['tilt_deg'] == pytest.approx(frame['frame']['tilt_to_ecliptic_deg'])
     geography = MF.bm.GEOGRAPHY                                           # the settings come from the design surface,
     assert geography['atlas'] not in p['inputs'] and geography['atlas_grid'] not in p['inputs']
-    assert geography['tides_grid'] in p['inputs']                         # with geography's tides
+    assert str(MF.TF.PRODUCT) in p['inputs'] and geography['tides_grid'] not in p['inputs']   # the design seas' tide
     shares = record['shares']['by_class']
     assert sum(r['share'] for r in shares.values()) == pytest.approx(1.0, abs=5e-4)
     assert record['checks']['gap_never_wetter'] and record['checks']['robust_within_gap_and_years']
@@ -57,3 +58,19 @@ def test_the_record_holds_together(record):
     assert surface['record_sha256'] == MF.sha256(MF.GS.OUT)
     if MF.GS.PRODUCT.exists():
         assert MF.sha256(MF.GS.PRODUCT) == surface['sha256']
+    assert p['tides']['record_sha256'] == MF.sha256(MF.TF.OUT)
+
+
+def test_the_land_in_the_runs_water_cells_takes_the_nearest_land_class(record):
+    cover = record['land']['design_surface']
+    given = cover['assigned']
+    assert given['km2'] == pytest.approx(cover['design_land_in_run_water_km2'], abs=2)
+    assert sum(given['by_class_km2'].values()) == pytest.approx(given['km2'], abs=len(given['by_class_km2']))
+    assert 0 < given['nearest_land_km']['median'] <= given['nearest_land_km']['p90'] <= given['nearest_land_km']['maximum']
+    over = record['shares']['over_the_design_land']
+    assert over['land_km2'] == pytest.approx(cover['design_land_km2'], abs=2)
+    assert sum(over['by_class'].values()) == pytest.approx(1.0, abs=5e-4)
+    assert sum(over['by_class_in_run_land_cells_only'].values()) == pytest.approx(1.0, abs=5e-4)
+    assert over['assigned_share'] == pytest.approx(cover['design_land_unclassed_share'], abs=1e-3)
+    keys = [c['key'] for c in record['classes']]
+    assert over['drylands_share'] == pytest.approx(sum(over['by_class'][k] for k in keys[:4]), abs=5e-4)

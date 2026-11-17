@@ -1,0 +1,1797 @@
+{
+ "schema": "terluna.research.atlas-round-tides/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/tides_final.py": "aa13ae7b48dede0576ee27a49a0bab7a3949d572e1422a671bddf9652c251e82",
+   "research/studies/atlas_round/moisture_final.py": "d2c78d6c298b5852084227ca3b6bbab696f176bd3330fd7fbfb1a32796d44a18",
+   "research/studies/atlas_round/globe_surface.py": "27f08dd9ad569e1033da1128769418c6f75278df44986b49a1a0e62157613360",
+   "geography/tides.py": "e7bf2af062ffe6f468a0add1abcae01b73314f24a09ee6f5e1cd2dbd138343af",
+   "geography/lunar_ephemeris.py": "a3821628690cf9b920d8afc19d255de5e5112997249eb3cf9d30917fc971f258",
+   "geography/tide_dynamics.py": "485d001e2188e0ab175bd9bb4464e6021f35265dedb1db96fe3b61ca298503d3",
+   "research/studies/atlas_round/final_drainage.py": "9c4fdb233a58891ea22fd82cc570cada09897d2d27d343315a56656b51e5c285",
+   "research/studies/atlas_round/near_side_neck.py": "5b3f82467b662bc2157cc70066050c57b8067785036d57565112ad380dd00009",
+   "shared/constants.json": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/globe_surface.json": "01d418c445c17f6bcb90b31458c7ae84fbb3918fada2e61ff0bea5aa7c81f989",
+  "geography/tides_ephemeris_check.csv": "08dccc1caa71c8f48d047e96ecd3d61f0c1b23cd46936c7ec331523870891346",
+  "shared/scenarios/waves.json": "e6a86ec35b01d1864188bfaebb2a1d21a3047b841e118478df1831d4d0112323",
+  "geography/results/tides.json": "5006911ecaadbcf8c9a8360b223bd83d083e0ca6738eb15a050ab5aad04d5b20",
+  "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz": "428769908668dec64819dded6dc1779263214904e50c8c6983b577f8de4a8bad",
+  "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693"
+ },
+ "product": {
+  "path": "/media/projectspace/terluna-research/atlas-round/tides_final/tides_design_4ppd.npz",
+  "sha256": "2a29037911cfc6612783f0613fad41b1f105821a7cdf2e252051bf1add922f73"
+ },
+ "evidence": "Equilibrium tide of the atlas round's design surface's seas from Earth and the Sun, 2026-2045, every three hours, by geography/tides.py's model as it stands: degree-2 and degree-3 potential, lunar Love numbers k2 and h2 at degree 2, each sea's volume held, and the water's self-attraction to spherical-harmonic degree 60 with the solid Moon rigid under the load. A linear shallow-water solution on the near-side sea's main part, the salt sea and Smythii-Marginis checks the equilibrium for the eight leading lines. Each sea stands at its own level, so the seas' tides are independent of one another apart from their attraction.",
+ "reading_rule": "As geography/results/tides.json: heights are metres of water level relative to the 2026-2045 mean; the monthly range is the highest minus the lowest level within an anomalistic month (27.55 days), its median taken over the months; the extreme range spans the whole record. Seas are keyed by their index into globe_surface.BODIES (1 the near-side sea's main part, 2 its southern seas, 3 the salt sea, 4 Humboldtianum, 5 Moscoviense, 6 Orientale, 7 Smythii-Marginis), each with the atlas's seas it replaces; statistics weight nodes by area. Stations stand at the sea pixel nearest each named feature, offset_km from it.",
+ "settings": {
+  "grid_deg": 0.25,
+  "harmonic_degree": 60,
+  "love_numbers": {
+   "k2": 0.02405,
+   "h2": 0.0371
+  },
+  "degree3": "Rigid solid Moon (Love factor 1)",
+  "water_density_kg_m3": 1025.0,
+  "self_attraction_factor_degree2": 0.18391820191790823,
+  "self_attraction_iterations": [
+   10,
+   10,
+   9,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   9,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10
+  ],
+  "span_days": 6939.625,
+  "step_days": 0.125,
+  "start_jd_tt": 2461041.5,
+  "pixels": "moisture_final.map_grid: a sea where most of a pixel lies under one sea",
+  "frame": {
+   "record": "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json",
+   "sha256": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56",
+   "pole_move_deg": 6.973,
+   "sub_earth_point": {
+    "lat_deg": 6.142429940129073,
+    "lon_deg": 0.8351199769572257
+   },
+   "meaning": "the frame of the climate the moisture map reads; the forcing is taken at each node's turned place"
+  }
+ },
+ "ephemeris_check": {
+  "samples": 1638,
+  "span_jd_tt": [
+   2461041.5,
+   2467981.5
+  ],
+  "sub_earth_longitude_error_max_deg": 0.04329783085836425,
+  "sub_earth_latitude_error_max_deg": 0.04247870773746065,
+  "sub_solar_longitude_error_max_deg": 0.04664051152894899,
+  "sub_solar_latitude_error_max_deg": 0.042083615129410834,
+  "earth_distance_error_max_km": 10.811464499915019,
+  "earth_distance_error_rms_km": 2.8995661615810544,
+  "reading_rule": "Differences from JPL Horizons (DE441): the omitted physical librations stay under 0.05 degrees."
+ },
+ "constituents": {
+  "lines": [
+   {
+    "frequency_cpd": 0.03629164708391317,
+    "period_days": 27.554549885482196,
+    "argument": "M'",
+    "multiples": {
+     "D": 0,
+     "M": 0,
+     "Mp": 1,
+     "F": 0,
+     "node": 0
+    },
+    "forcing_max_m": 2.241442837904664,
+    "sea_response_max_m": 2.1539735762959404
+   },
+   {
+    "frequency_cpd": 0.0367481951116385,
+    "period_days": 27.212220816888244,
+    "argument": "F",
+    "multiples": {
+     "D": 0,
+     "M": 0,
+     "Mp": 0,
+     "F": 1,
+     "node": 0
+    },
+    "forcing_max_m": 2.245676532759256,
+    "sea_response_max_m": 2.8784080878859264
+   },
+   {
+    "frequency_cpd": 0.031434736884937926,
+    "period_days": 31.811941154791526,
+    "argument": "2D -M'",
+    "multiples": {
+     "D": 2,
+     "M": 0,
+     "Mp": -1,
+     "F": 0,
+     "node": 0
+    },
+    "forcing_max_m": 0.4386221749633631,
+    "sea_response_max_m": 0.4273727547465569
+   },
+   {
+    "frequency_cpd": 0.0677263839688511,
+    "period_days": 14.765294430305369,
+    "argument": "2D",
+    "multiples": {
+     "D": 2,
+     "M": 0,
+     "Mp": 0,
+     "F": 0,
+     "node": 0
+    },
+    "forcing_max_m": 0.44254176929414396,
+    "sea_response_max_m": 0.34057372941677366
+   },
+   {
+    "frequency_cpd": 0.07303984219555168,
+    "period_days": 13.691157728992227,
+    "argument": "M' +F",
+    "multiples": {
+     "D": 0,
+     "M": 0,
+     "Mp": 1,
+     "F": 1,
+     "node": 0
+    },
+    "forcing_max_m": 0.30623673322978745,
+    "sea_response_max_m": 0.39410072372869315
+   },
+   {
+    "frequency_cpd": 0.07258329416782634,
+    "period_days": 13.777274942741098,
+    "argument": "2M'",
+    "multiples": {
+     "D": 0,
+     "M": 0,
+     "Mp": 2,
+     "F": 0,
+     "node": 0
+    },
+    "forcing_max_m": 0.2857007082304401,
+    "sea_response_max_m": 0.2714661635445005
+   },
+   {
+    "frequency_cpd": 0.073496390223277,
+    "period_days": 13.606110408444122,
+    "argument": "2F",
+    "multiples": {
+     "D": 0,
+     "M": 0,
+     "Mp": 0,
+     "F": 2,
+     "node": 0
+    },
+    "forcing_max_m": 0.13022277270966687,
+    "sea_response_max_m": 0.13157430517981863
+   },
+   {
+    "frequency_cpd": 0.10401803105276428,
+    "period_days": 9.613717832177953,
+    "argument": "2D +M'",
+    "multiples": {
+     "D": 2,
+     "M": 0,
+     "Mp": 1,
+     "F": 0,
+     "node": 0
+    },
+    "forcing_max_m": 0.08498601359975062,
+    "sea_response_max_m": 0.07824170957613409
+   },
+   {
+    "frequency_cpd": 0.0027377785604140795,
+    "period_days": 365.25963584460004,
+    "argument": "M",
+    "multiples": {
+     "D": 0,
+     "M": 1,
+     "Mp": 0,
+     "F": 0,
+     "node": 0
+    },
+    "forcing_max_m": 0.06173213849641593,
+    "sea_response_max_m": 0.06349400540703977
+   },
+   {
+    "frequency_cpd": 0.06818293199657643,
+    "period_days": 14.666427076650377,
+    "argument": "2D -M' +F",
+    "multiples": {
+     "D": 2,
+     "M": 0,
+     "Mp": -1,
+     "F": 1,
+     "node": 0
+    },
+    "forcing_max_m": 0.058121484654152934,
+    "sea_response_max_m": 0.07476006124654451
+   },
+   {
+    "frequency_cpd": 0.1044745790804896,
+    "period_days": 9.571706426589929,
+    "argument": "2D +F",
+    "multiples": {
+     "D": 2,
+     "M": 0,
+     "Mp": 0,
+     "F": 1,
+     "node": 0
+    },
+    "forcing_max_m": 0.049434379808734705,
+    "sea_response_max_m": 0.06341862692911841
+   },
+   {
+    "frequency_cpd": 0.10933148927946484,
+    "period_days": 9.146495731379602,
+    "argument": "2M' +F",
+    "multiples": {
+     "D": 0,
+     "M": 0,
+     "Mp": 2,
+     "F": 1,
+     "node": 0
+    },
+    "forcing_max_m": 0.03651772165198679,
+    "sea_response_max_m": 0.04633043424262723
+   }
+  ],
+  "residual_rms_fraction": 0.046308463311434525
+ },
+ "seas": {
+  "1": {
+   "names": [
+    "near-side sea"
+   ],
+   "area_km2": 3862534.3841419276,
+   "nodes": 86027,
+   "monthly_range_median_m": {
+    "area_median": 3.505881245702609,
+    "area_p95": 5.8705582765763165,
+    "maximum": 6.610714233482922
+   },
+   "extreme_range_m": {
+    "area_median": 4.990375276633147,
+    "maximum": 9.899533212593605
+   },
+   "self_attraction_gain": 1.0863408349579435,
+   "atlas_seas": {
+    "433": {
+     "names": [
+      "Oceanus Procellarum",
+      "Mare Frigoris",
+      "Mare Imbrium",
+      "Mare Fecunditatis"
+     ],
+     "area_km2": 5288444,
+     "monthly_range_median_m": {
+      "area_median": 3.681748724533019,
+      "area_p95": 5.996030488187303,
+      "maximum": 6.309445732037857
+     }
+    }
+   }
+  },
+  "3": {
+   "names": [
+    "South Pole–Aitken Sea"
+   ],
+   "area_km2": 2421065.091829407,
+   "nodes": 94527,
+   "monthly_range_median_m": {
+    "area_median": 2.1955390981014853,
+    "area_p95": 3.431549463527922,
+    "maximum": 4.0364049883421576
+   },
+   "extreme_range_m": {
+    "area_median": 3.2034546732523443,
+    "maximum": 6.456647048148972
+   },
+   "self_attraction_gain": 1.0904008291366634,
+   "atlas_seas": {
+    "1417": {
+     "names": [
+      "Mare Ingenii",
+      "Lacus Tenebrarum"
+     ],
+     "area_km2": 2322833,
+     "monthly_range_median_m": {
+      "area_median": 2.0778697999540543,
+      "area_p95": 3.471741790063975,
+      "maximum": 4.336959680641401
+     }
+    }
+   }
+  },
+  "5": {
+   "names": [
+    "Mare Moscoviense"
+   ],
+   "area_km2": 855494.2195511195,
+   "nodes": 15807,
+   "monthly_range_median_m": {
+    "area_median": 1.8258505497966633,
+    "area_p95": 2.880625282275884,
+    "maximum": 4.242525029985774
+   },
+   "extreme_range_m": {
+    "area_median": 2.8049050522608696,
+    "maximum": 6.863336809245768
+   },
+   "self_attraction_gain": 1.0572968847410231,
+   "atlas_seas": {}
+  },
+  "2": {
+   "names": [
+    "southern near-side seas"
+   ],
+   "area_km2": 837142.8608503308,
+   "nodes": 15239,
+   "monthly_range_median_m": {
+    "area_median": 1.682324856492443,
+    "area_p95": 3.0899601805360684,
+    "maximum": 3.648798289065867
+   },
+   "extreme_range_m": {
+    "area_median": 2.5636755639818554,
+    "maximum": 5.509054238686364
+   },
+   "self_attraction_gain": 1.0528288074885386,
+   "atlas_seas": {
+    "433": {
+     "names": [
+      "Oceanus Procellarum",
+      "Mare Frigoris",
+      "Mare Imbrium",
+      "Mare Fecunditatis"
+     ],
+     "area_km2": 5288444,
+     "monthly_range_median_m": {
+      "area_median": 3.681748724533019,
+      "area_p95": 5.996030488187303,
+      "maximum": 6.309445732037857
+     }
+    }
+   }
+  },
+  "7": {
+   "names": [
+    "Smythii–Marginis Sea"
+   ],
+   "area_km2": 606981.3434423287,
+   "nodes": 10825,
+   "monthly_range_median_m": {
+    "area_median": 0.8988330145698749,
+    "area_p95": 1.9805303446810818,
+    "maximum": 2.436654043024653
+   },
+   "extreme_range_m": {
+    "area_median": 1.2663282450447928,
+    "maximum": 3.38522277056638
+   },
+   "self_attraction_gain": 1.0515071364531203,
+   "atlas_seas": {
+    "874": {
+     "names": [
+      "Mare Smythii",
+      "Mare Marginis"
+     ],
+     "area_km2": 285480,
+     "monthly_range_median_m": {
+      "area_median": 0.5512737565224793,
+      "area_p95": 1.4150009695765993,
+      "maximum": 1.9519157126521152
+     }
+    }
+   }
+  },
+  "6": {
+   "names": [
+    "Mare Orientale"
+   ],
+   "area_km2": 303530.29580247286,
+   "nodes": 5620,
+   "monthly_range_median_m": {
+    "area_median": 0.6812284706556622,
+    "area_p95": 1.4755771387165884,
+    "maximum": 1.7956768163433439
+   },
+   "extreme_range_m": {
+    "area_median": 0.9865658481915914,
+    "maximum": 2.804076958710374
+   },
+   "self_attraction_gain": 1.0348847354472588,
+   "atlas_seas": {}
+  },
+  "4": {
+   "names": [
+    "Mare Humboldtianum"
+   ],
+   "area_km2": 282443.6818249648,
+   "nodes": 9207,
+   "monthly_range_median_m": {
+    "area_median": 0.8329327744339587,
+    "area_p95": 1.8415228095789409,
+    "maximum": 2.3215193167306305
+   },
+   "extreme_range_m": {
+    "area_median": 1.2825674245059542,
+    "maximum": 3.5087493459812977
+   },
+   "self_attraction_gain": 1.040487270520939,
+   "atlas_seas": {
+    "213": {
+     "names": [
+      "Mare Humboldtianum"
+     ],
+     "area_km2": 284341,
+     "monthly_range_median_m": {
+      "area_median": 0.8456882534597071,
+      "area_p95": 1.9232870701176272,
+      "maximum": 2.6046848987770543
+     }
+    }
+   }
+  }
+ },
+ "stations": [
+  {
+   "name": "Oceanus Procellarum",
+   "body": 1,
+   "lon_lat": [
+    303.375,
+    20.625
+   ],
+   "offset_km": 2.047060242098866,
+   "depth_m": 404.8214569091797,
+   "monthly_range_median_m": 4.425647300055249,
+   "monthly_range_p95_m": 5.647116855880641,
+   "extreme_range_m": 6.074279544411235,
+   "standard_deviation_m": 1.5565368011861684,
+   "degree3_share_of_extreme_range_m": 0.023375177961308502,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 2.0971121327315747,
+     "phase_deg": 115.3137137987641
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 0.34565338097218135,
+     "phase_deg": -3.3042156803120877
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.41170854303815035,
+     "phase_deg": 34.2408566331871
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.27417713275805394,
+     "phase_deg": 62.312547576558295
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.06698954745165213,
+     "phase_deg": -42.73040926105371
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.25986890077693503,
+     "phase_deg": 131.57049524731144
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.06432008824022127,
+     "phase_deg": 75.6645701294151
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.07483753736346342,
+     "phase_deg": 59.532345760337854
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.05938827120592391,
+     "phase_deg": -90.974285973984
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.012701624543094156,
+     "phase_deg": -121.16556250101318
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.010900613576975653,
+     "phase_deg": -114.10603732258714
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.008330045089882611,
+     "phase_deg": -43.37953493128694
+    }
+   ]
+  },
+  {
+   "name": "Mare Imbrium",
+   "body": 1,
+   "lon_lat": [
+    345.125,
+    34.625
+   ],
+   "offset_km": 3.128440188699592,
+   "depth_m": 1164.384048461914,
+   "monthly_range_median_m": 2.971070031763254,
+   "monthly_range_p95_m": 4.549777326444493,
+   "extreme_range_m": 4.874045174272451,
+   "standard_deviation_m": 1.052132665556121,
+   "degree3_share_of_extreme_range_m": 0.040793310190155196,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 1.214459461455952,
+     "phase_deg": 53.81626175220103
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 0.8306922616911329,
+     "phase_deg": 175.76080374363437
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.23041499212644337,
+     "phase_deg": -21.972843848684626
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.20975084797971358,
+     "phase_deg": -37.763286267347794
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.11346456080819434,
+     "phase_deg": -176.68155111353494
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.16239338320542557,
+     "phase_deg": 52.581365401570075
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.04720085834114344,
+     "phase_deg": 134.23035316558253
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.04735429467131357,
+     "phase_deg": -20.132590085864454
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.02597073236020825,
+     "phase_deg": -96.4285749088235
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.021490386780493777,
+     "phase_deg": 104.79064652114273
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.018443196022572415,
+     "phase_deg": 111.56768157596038
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.012655994854972492,
+     "phase_deg": -171.3916169304386
+    }
+   ]
+  },
+  {
+   "name": "Mare Frigoris",
+   "body": 1,
+   "lon_lat": [
+    359.875,
+    57.625
+   ],
+   "offset_km": 2.1667618939564988,
+   "depth_m": 841.0788116455078,
+   "monthly_range_median_m": 2.475184796153014,
+   "monthly_range_p95_m": 3.0310525040227088,
+   "extreme_range_m": 3.1300124807523764,
+   "standard_deviation_m": 0.8615473302720349,
+   "degree3_share_of_extreme_range_m": 0.014728479092218194,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 0.31161529215797956,
+     "phase_deg": -174.74539693328728
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 1.1471900232626535,
+     "phase_deg": 175.95044099009914
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.06246438496366787,
+     "phase_deg": 106.66227033349443
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.03536126578106349,
+     "phase_deg": 113.22256533903064
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.15956280489228852,
+     "phase_deg": 170.9712936683974
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.005353765546555996,
+     "phase_deg": -176.8202852849471
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.062174404150891614,
+     "phase_deg": -8.15695123951901
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.0028923078020131584,
+     "phase_deg": 114.19786506147207
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.0007082938144100826,
+     "phase_deg": 121.8725127900884
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.030300114543530047,
+     "phase_deg": 92.40869850190299
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.02561706406133279,
+     "phase_deg": 99.21224268050301
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.018564754944784004,
+     "phase_deg": 171.10852583809833
+    }
+   ]
+  },
+  {
+   "name": "Mare Serenitatis",
+   "body": 1,
+   "lon_lat": [
+    18.375,
+    27.375
+   ],
+   "offset_km": 2.673545500576819,
+   "depth_m": 1414.8689880371094,
+   "monthly_range_median_m": 3.284692768150996,
+   "monthly_range_p95_m": 4.259712867767559,
+   "extreme_range_m": 4.665996236754667,
+   "standard_deviation_m": 1.1479932348411495,
+   "degree3_share_of_extreme_range_m": 0.04057588787057309,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 1.5372758272027807,
+     "phase_deg": -38.66057098983877
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 0.2946843255048343,
+     "phase_deg": 176.8659971546231
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.29226867988963307,
+     "phase_deg": -120.11852001493887
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.25994501285914234,
+     "phase_deg": -92.77403046307104
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.06636510274302225,
+     "phase_deg": 129.9589110482459
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.195814692712043,
+     "phase_deg": -26.753467588255337
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.0746234227668657,
+     "phase_deg": -160.26837701934156
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.057475385304074596,
+     "phase_deg": -98.0339405878696
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.03320494175988741,
+     "phase_deg": 90.53570168657699
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.012536419367073599,
+     "phase_deg": 51.3424275057556
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.01073226072493342,
+     "phase_deg": 59.436695152938135
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.009150913603232875,
+     "phase_deg": 129.43451597651648
+    }
+   ]
+  },
+  {
+   "name": "Mare Tranquillitatis",
+   "body": 1,
+   "lon_lat": [
+    28.125,
+    6.875
+   ],
+   "offset_km": 92.89274973473266,
+   "depth_m": 30.2015380859375,
+   "monthly_range_median_m": 4.948342770693995,
+   "monthly_range_p95_m": 7.130809648837572,
+   "extreme_range_m": 7.615698628095185,
+   "standard_deviation_m": 1.7176121456111095,
+   "degree3_share_of_extreme_range_m": 0.04486376620805821,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 2.003736017804234,
+     "phase_deg": -52.440333693397285
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 1.2264237750527922,
+     "phase_deg": -4.342916222313325
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.38978782562782494,
+     "phase_deg": -133.28356100036214
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.27941754120785095,
+     "phase_deg": -107.66396299354024
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.16880593079355097,
+     "phase_deg": 10.48117284109648
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.23550495643319588,
+     "phase_deg": -44.04578864561975
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.09756912708697268,
+     "phase_deg": -153.8296526319639
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.06880882482751621,
+     "phase_deg": -115.01806531118183
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.05075243168153293,
+     "phase_deg": 88.85707506808548
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.03205517414067084,
+     "phase_deg": -68.17142217463389
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.02697208861803513,
+     "phase_deg": -61.376017924335436
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.019398987170085154,
+     "phase_deg": 16.048647154255875
+    }
+   ]
+  },
+  {
+   "name": "Mare Fecunditatis",
+   "body": 1,
+   "lon_lat": [
+    53.625,
+    -7.875
+   ],
+   "offset_km": 1.7961268779156074,
+   "depth_m": 508.3095397949219,
+   "monthly_range_median_m": 5.458478399745547,
+   "monthly_range_p95_m": 8.348406468807152,
+   "extreme_range_m": 9.098322112781158,
+   "standard_deviation_m": 1.9602703699850377,
+   "degree3_share_of_extreme_range_m": 0.028159948797469525,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 1.9775107798325557,
+     "phase_deg": -97.41665361507403
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 1.9049597450946825,
+     "phase_deg": -4.151986151248532
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.3897957869619816,
+     "phase_deg": -174.24603700497053
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.2469072281210073,
+     "phase_deg": 172.5236219118472
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.26101275510916006,
+     "phase_deg": -3.211958945640854
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.24298374257030092,
+     "phase_deg": -101.21825470604108
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.06247697263372821,
+     "phase_deg": -107.10980782526696
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.06988069956252699,
+     "phase_deg": -173.1452827166744
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.055445529012129735,
+     "phase_deg": 85.46543726341326
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.04948743068260621,
+     "phase_deg": -81.76645657679765
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.042076968341270546,
+     "phase_deg": -74.80044714148043
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.02979905313809673,
+     "phase_deg": -2.139102497835305
+    }
+   ]
+  },
+  {
+   "name": "Mare Nubium",
+   "body": 2,
+   "lon_lat": [
+    342.625,
+    -20.625
+   ],
+   "offset_km": 2.715805110992527,
+   "depth_m": 596.8731994628906,
+   "monthly_range_median_m": 2.0899405292672606,
+   "monthly_range_p95_m": 3.0050922121338357,
+   "extreme_range_m": 3.258192998213846,
+   "standard_deviation_m": 0.7093036573602649,
+   "degree3_share_of_extreme_range_m": 0.02026684448389382,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 0.7133141530708738,
+     "phase_deg": -37.086470701038024
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 0.6470538410480644,
+     "phase_deg": -4.22975558643542
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.1325964711121397,
+     "phase_deg": -119.71118683658136
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.13539153474341,
+     "phase_deg": -88.80729166114826
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.08829653333156794,
+     "phase_deg": 2.6687712511827897
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.10547923357965351,
+     "phase_deg": -19.25136587897545
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.01959970220556645,
+     "phase_deg": -134.20829960436
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.030538980884071986,
+     "phase_deg": -91.14869154851178
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.014531081059626211,
+     "phase_deg": 92.46816260472234
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.016753385310744207,
+     "phase_deg": -76.00469318732397
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.01413168876073722,
+     "phase_deg": -69.18849027948464
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.010784826012603676,
+     "phase_deg": 6.607041652726413
+    }
+   ]
+  },
+  {
+   "name": "Mare Humorum",
+   "body": 2,
+   "lon_lat": [
+    321.375,
+    -24.375
+   ],
+   "offset_km": 3.467508344107198,
+   "depth_m": 755.6078033447266,
+   "monthly_range_median_m": 1.1163838237667207,
+   "monthly_range_p95_m": 1.6903997290289072,
+   "extreme_range_m": 1.8298861560382407,
+   "standard_deviation_m": 0.3950331970708989,
+   "degree3_share_of_extreme_range_m": 0.006052612275723179,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 0.4460001089466155,
+     "phase_deg": 177.1137216155425
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 0.3187917227940339,
+     "phase_deg": -4.818616143542539
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.08164371167415635,
+     "phase_deg": 97.33783169818058
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.091478528853004,
+     "phase_deg": 109.56448550794245
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.056252950275491986,
+     "phase_deg": 41.97040957969211
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.05811760805610917,
+     "phase_deg": -175.03753228172903
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.03093123265617949,
+     "phase_deg": -3.9126527454456244
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.017394365424594063,
+     "phase_deg": 113.15628008373027
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.0017325506136670402,
+     "phase_deg": -76.10873605323775
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.010668975399559204,
+     "phase_deg": -36.68951187144725
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.009004308909707928,
+     "phase_deg": -31.244297695057565
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.008049780647842435,
+     "phase_deg": 61.24038565699507
+    }
+   ]
+  },
+  {
+   "name": "Mare Smythii",
+   "body": 7,
+   "lon_lat": [
+    87.125,
+    -1.625
+   ],
+   "offset_km": 3.419670812007681,
+   "depth_m": 3069.5332641601562,
+   "monthly_range_median_m": 0.17739573440206147,
+   "monthly_range_p95_m": 0.25112682193913316,
+   "extreme_range_m": 0.3233880038558817,
+   "standard_deviation_m": 0.06386458841364866,
+   "degree3_share_of_extreme_range_m": -0.003663966410309305,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 0.053787202298708495,
+     "phase_deg": 166.03139813500238
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 0.02661912950525324,
+     "phase_deg": 5.061073292320861
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.009228203854548969,
+     "phase_deg": 85.06210870577932
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.013928234885113681,
+     "phase_deg": 105.84624614161125
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.04451216617801364,
+     "phase_deg": -82.94625542055351
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.010843989985948505,
+     "phase_deg": -178.53054776057337
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.0012723877241654412,
+     "phase_deg": 144.7125063841898
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.003083267344279058,
+     "phase_deg": 108.90077721912357
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.0013646252055754234,
+     "phase_deg": -78.68274513274469
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.008420355902812048,
+     "phase_deg": -161.63216365979872
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.006952074742442867,
+     "phase_deg": -154.7700581230108
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.007598229378204484,
+     "phase_deg": -78.16910418930556
+    }
+   ]
+  },
+  {
+   "name": "Mare Marginis",
+   "body": 7,
+   "lon_lat": [
+    86.625,
+    12.625
+   ],
+   "offset_km": 3.996400205013562,
+   "depth_m": 1137.4087600708008,
+   "monthly_range_median_m": 0.32077627415332943,
+   "monthly_range_p95_m": 0.442711828910556,
+   "extreme_range_m": 0.4818477660940965,
+   "standard_deviation_m": 0.11121277671456448,
+   "degree3_share_of_extreme_range_m": -0.0022704303064776665,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 0.13568702385761644,
+     "phase_deg": -98.47699527227618
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 0.06146108268946508,
+     "phase_deg": 177.47333446894706
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.02667460485170224,
+     "phase_deg": -175.12339175374916
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.01687445477716978,
+     "phase_deg": 172.33583746618712
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.02004071252775839,
+     "phase_deg": 117.12450177206561
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.01649385805562934,
+     "phase_deg": -100.59857467119906
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.004206220850550522,
+     "phase_deg": -95.92300593718545
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.0047541778342193005,
+     "phase_deg": -172.7522535825712
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.004157035288440912,
+     "phase_deg": 86.50261573513774
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.0037962380616768086,
+     "phase_deg": 38.52464928174773
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.0031577283110878172,
+     "phase_deg": 45.55797947124897
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.003222130064535941,
+     "phase_deg": 118.19342938247313
+    }
+   ]
+  },
+  {
+   "name": "Mare Ingenii",
+   "body": 3,
+   "lon_lat": [
+    164.875,
+    -33.125
+   ],
+   "offset_km": 3.8618967756113287,
+   "depth_m": 1953.9881591796875,
+   "monthly_range_median_m": 3.2718048734312424,
+   "monthly_range_p95_m": 3.995185230117443,
+   "extreme_range_m": 4.228444646697865,
+   "standard_deviation_m": 1.1254497726595052,
+   "degree3_share_of_extreme_range_m": -0.027459079374479778,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 1.532166077505622,
+     "phase_deg": 50.10379033462698
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 0.08195898077596213,
+     "phase_deg": 172.5175941109973
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.29266636043915123,
+     "phase_deg": -26.438063336695244
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.24997597642393243,
+     "phase_deg": -38.10517346529768
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.04526870397792852,
+     "phase_deg": -101.53792931172767
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.18112944728098673,
+     "phase_deg": 55.31563579658183
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.09528253097461475,
+     "phase_deg": 150.77937805485934
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.05350679818583482,
+     "phase_deg": -18.23062380463531
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.03163634449613986,
+     "phase_deg": -95.16934137488406
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.008583900111230745,
+     "phase_deg": -179.71625464391036
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.007246568093028409,
+     "phase_deg": -175.18456427048005
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.0072921602240770865,
+     "phase_deg": -89.31724166062098
+    }
+   ]
+  },
+  {
+   "name": "Eastern Smythii headland (wave shore studies)",
+   "body": 7,
+   "lon_lat": [
+    93.375,
+    2.375
+   ],
+   "offset_km": 1.3038837757583377,
+   "depth_m": 1005.0857467651367,
+   "monthly_range_median_m": 0.9737501304233216,
+   "monthly_range_p95_m": 1.1685952881863613,
+   "extreme_range_m": 1.2999896809336888,
+   "standard_deviation_m": 0.3403526545120785,
+   "degree3_share_of_extreme_range_m": 0.00213549723094153,
+   "lines": [
+    {
+     "argument": "M'",
+     "period_days": 27.554549885482196,
+     "amplitude_m": 0.4646709346822515,
+     "phase_deg": 103.45940060273061
+    },
+    {
+     "argument": "F",
+     "period_days": 27.212220816888244,
+     "amplitude_m": 0.004744335826956136,
+     "phase_deg": 144.24052177610528
+    },
+    {
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526,
+     "amplitude_m": 0.09211427420491428,
+     "phase_deg": 23.580016078309846
+    },
+    {
+     "argument": "2D",
+     "period_days": 14.765294430305369,
+     "amplitude_m": 0.05270303415032176,
+     "phase_deg": 41.73333263176294
+    },
+    {
+     "argument": "M' +F",
+     "period_days": 13.691157728992227,
+     "amplitude_m": 0.023766842083082166,
+     "phase_deg": -88.89211532702893
+    },
+    {
+     "argument": "2M'",
+     "period_days": 13.777274942741098,
+     "amplitude_m": 0.05451904743261982,
+     "phase_deg": 116.09463317746908
+    },
+    {
+     "argument": "2F",
+     "period_days": 13.606110408444122,
+     "amplitude_m": 0.014960771166357328,
+     "phase_deg": 88.89998713676489
+    },
+    {
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953,
+     "amplitude_m": 0.01568394607008987,
+     "phase_deg": 43.77954497137137
+    },
+    {
+     "argument": "M",
+     "period_days": 365.25963584460004,
+     "amplitude_m": 0.01396930515220991,
+     "phase_deg": -91.70688798868343
+    },
+    {
+     "argument": "2D -M' +F",
+     "period_days": 14.666427076650377,
+     "amplitude_m": 0.004498793316213807,
+     "phase_deg": -167.45194811481204
+    },
+    {
+     "argument": "2D +F",
+     "period_days": 9.571706426589929,
+     "amplitude_m": 0.003760678095000765,
+     "phase_deg": -160.7429360014243
+    },
+    {
+     "argument": "2M' +F",
+     "period_days": 9.146495731379602,
+     "amplitude_m": 0.003740140068282611,
+     "phase_deg": -82.26871892111
+    }
+   ]
+  }
+ ],
+ "dynamics": {
+  "1": {
+   "main_body_cells": 85822,
+   "body_cells": 86027,
+   "main_body_area_share": 0.9974024181228076,
+   "lines": [
+    {
+     "frequency_cpd": 0.03629164708391317,
+     "equilibrium_max_m": 2.0703148170649746,
+     "departure_max_relative": 0.42272231514277403,
+     "rms_amplitude_ratio": 1.1342672302088905,
+     "peak_amplitude_ratio": 1.0708040889210195,
+     "peak_phase_lag_deg": -1.5010178796784557,
+     "argument": "M'",
+     "period_days": 27.554549885482196
+    },
+    {
+     "frequency_cpd": 0.0367481951116385,
+     "equilibrium_max_m": 2.7799988192654648,
+     "departure_max_relative": 0.19587490855783973,
+     "rms_amplitude_ratio": 1.130399887163813,
+     "peak_amplitude_ratio": 1.002943359919903,
+     "peak_phase_lag_deg": 0.12741984739758885,
+     "argument": "F",
+     "period_days": 27.212220816888244
+    },
+    {
+     "frequency_cpd": 0.031434736884937926,
+     "equilibrium_max_m": 0.4109125477505355,
+     "departure_max_relative": 0.28518954115738027,
+     "rms_amplitude_ratio": 1.0918509465275967,
+     "peak_amplitude_ratio": 1.0495275744937855,
+     "peak_phase_lag_deg": -0.9421441135983468,
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526
+    },
+    {
+     "frequency_cpd": 0.0677263839688511,
+     "equilibrium_max_m": 0.3236424551185453,
+     "departure_max_relative": 12.582405661984573,
+     "rms_amplitude_ratio": 6.609603258070078,
+     "peak_amplitude_ratio": 1.1226818482361614,
+     "peak_phase_lag_deg": 124.08118288732395,
+     "argument": "2D",
+     "period_days": 14.765294430305369
+    },
+    {
+     "frequency_cpd": 0.07303984219555168,
+     "equilibrium_max_m": 0.38065040802739486,
+     "departure_max_relative": 2.8474909836779894,
+     "rms_amplitude_ratio": 2.5282346045910016,
+     "peak_amplitude_ratio": 1.1664561719474484,
+     "peak_phase_lag_deg": 3.298591595591412,
+     "argument": "M' +F",
+     "period_days": 13.691157728992227
+    },
+    {
+     "frequency_cpd": 0.07258329416782634,
+     "equilibrium_max_m": 0.2596622958225485,
+     "departure_max_relative": 6.342937408668741,
+     "rms_amplitude_ratio": 2.880096617331504,
+     "peak_amplitude_ratio": 0.8001862282650712,
+     "peak_phase_lag_deg": 61.10303667818433,
+     "argument": "2M'",
+     "period_days": 13.777274942741098
+    },
+    {
+     "frequency_cpd": 0.073496390223277,
+     "equilibrium_max_m": 0.11607870038958962,
+     "departure_max_relative": 3.312789731983849,
+     "rms_amplitude_ratio": 1.9857484340382312,
+     "peak_amplitude_ratio": 1.1026077897014745,
+     "peak_phase_lag_deg": -25.596507937608404,
+     "argument": "2F",
+     "period_days": 13.606110408444122
+    },
+    {
+     "frequency_cpd": 0.10401803105276428,
+     "equilibrium_max_m": 0.0747583157577565,
+     "departure_max_relative": 1.7674481543641931,
+     "rms_amplitude_ratio": 1.0111096545880607,
+     "peak_amplitude_ratio": 1.0242641610906253,
+     "peak_phase_lag_deg": 13.297713632718233,
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953
+    }
+   ]
+  },
+  "3": {
+   "main_body_cells": 94480,
+   "body_cells": 94527,
+   "main_body_area_share": 0.9990231257914541,
+   "lines": [
+    {
+     "frequency_cpd": 0.03629164708391317,
+     "equilibrium_max_m": 1.6927522501444237,
+     "departure_max_relative": 0.0014506387395688803,
+     "rms_amplitude_ratio": 1.0010378860433107,
+     "peak_amplitude_ratio": 1.0008572142453047,
+     "peak_phase_lag_deg": -0.007565134783529375,
+     "argument": "M'",
+     "period_days": 27.554549885482196
+    },
+    {
+     "frequency_cpd": 0.0367481951116385,
+     "equilibrium_max_m": 1.4604628168123677,
+     "departure_max_relative": 0.000834844979933876,
+     "rms_amplitude_ratio": 1.0001287853347676,
+     "peak_amplitude_ratio": 1.0003240185291427,
+     "peak_phase_lag_deg": -0.003983782125826021,
+     "argument": "F",
+     "period_days": 27.212220816888244
+    },
+    {
+     "frequency_cpd": 0.031434736884937926,
+     "equilibrium_max_m": 0.3261587377018911,
+     "departure_max_relative": 0.0035038758477524226,
+     "rms_amplitude_ratio": 1.000814033547101,
+     "peak_amplitude_ratio": 1.0006569422294527,
+     "peak_phase_lag_deg": -0.010815675030867685,
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526
+    },
+    {
+     "frequency_cpd": 0.0677263839688511,
+     "equilibrium_max_m": 0.3277675492019798,
+     "departure_max_relative": 0.005808285129976273,
+     "rms_amplitude_ratio": 1.0033654393810132,
+     "peak_amplitude_ratio": 1.0040876315409213,
+     "peak_phase_lag_deg": -0.01064482980267315,
+     "argument": "2D",
+     "period_days": 14.765294430305369
+    },
+    {
+     "frequency_cpd": 0.07303984219555168,
+     "equilibrium_max_m": 0.2018714810308742,
+     "departure_max_relative": 0.005321444683239933,
+     "rms_amplitude_ratio": 1.003129100588297,
+     "peak_amplitude_ratio": 1.002996071389713,
+     "peak_phase_lag_deg": 0.02244339176008047,
+     "argument": "M' +F",
+     "period_days": 13.691157728992227
+    },
+    {
+     "frequency_cpd": 0.07258329416782634,
+     "equilibrium_max_m": 0.2033320562844894,
+     "departure_max_relative": 0.006955214500264577,
+     "rms_amplitude_ratio": 1.0038754618517094,
+     "peak_amplitude_ratio": 1.0049460426791372,
+     "peak_phase_lag_deg": -0.026070410566044318,
+     "argument": "2M'",
+     "period_days": 13.777274942741098
+    },
+    {
+     "frequency_cpd": 0.073496390223277,
+     "equilibrium_max_m": 0.1265199638139106,
+     "departure_max_relative": 0.007487472089579286,
+     "rms_amplitude_ratio": 1.0025504794816305,
+     "peak_amplitude_ratio": 1.004049972305038,
+     "peak_phase_lag_deg": 0.012787778238909118,
+     "argument": "2F",
+     "period_days": 13.606110408444122
+    },
+    {
+     "frequency_cpd": 0.10401803105276428,
+     "equilibrium_max_m": 0.061104661482978745,
+     "departure_max_relative": 0.015274809744989033,
+     "rms_amplitude_ratio": 1.0075704446219034,
+     "peak_amplitude_ratio": 1.0098827218495003,
+     "peak_phase_lag_deg": -0.045778353584101455,
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953
+    }
+   ]
+  },
+  "7": {
+   "main_body_cells": 10822,
+   "body_cells": 10825,
+   "main_body_area_share": 0.9997375294145419,
+   "lines": [
+    {
+     "frequency_cpd": 0.03629164708391317,
+     "equilibrium_max_m": 1.1153376603182192,
+     "departure_max_relative": 0.004585913518791985,
+     "rms_amplitude_ratio": 1.0022097533706125,
+     "peak_amplitude_ratio": 1.0035004132680114,
+     "peak_phase_lag_deg": -0.03453683532481244,
+     "argument": "M'",
+     "period_days": 27.554549885482196
+    },
+    {
+     "frequency_cpd": 0.0367481951116385,
+     "equilibrium_max_m": 0.35593329334534934,
+     "departure_max_relative": 0.003627722300259944,
+     "rms_amplitude_ratio": 1.0022585032539426,
+     "peak_amplitude_ratio": 1.0035900783085498,
+     "peak_phase_lag_deg": -0.019593808942864676,
+     "argument": "F",
+     "period_days": 27.212220816888244
+    },
+    {
+     "frequency_cpd": 0.031434736884937926,
+     "equilibrium_max_m": 0.22048900934752919,
+     "departure_max_relative": 0.003422415406432448,
+     "rms_amplitude_ratio": 1.0016433584686266,
+     "peak_amplitude_ratio": 1.0026289025867525,
+     "peak_phase_lag_deg": -0.0264346738505414,
+     "argument": "2D -M'",
+     "period_days": 31.811941154791526
+    },
+    {
+     "frequency_cpd": 0.0677263839688511,
+     "equilibrium_max_m": 0.1337617563966995,
+     "departure_max_relative": 0.015151456103397033,
+     "rms_amplitude_ratio": 1.0078138977616078,
+     "peak_amplitude_ratio": 1.0116115294890373,
+     "peak_phase_lag_deg": -0.1427626062445115,
+     "argument": "2D",
+     "period_days": 14.765294430305369
+    },
+    {
+     "frequency_cpd": 0.07303984219555168,
+     "equilibrium_max_m": 0.08286487346232277,
+     "departure_max_relative": 0.019188263647647315,
+     "rms_amplitude_ratio": 1.007370333526671,
+     "peak_amplitude_ratio": 1.0191502335008704,
+     "peak_phase_lag_deg": 0.06665219592792555,
+     "argument": "M' +F",
+     "period_days": 13.691157728992227
+    },
+    {
+     "frequency_cpd": 0.07258329416782634,
+     "equilibrium_max_m": 0.13082064694796128,
+     "departure_max_relative": 0.018893203255716164,
+     "rms_amplitude_ratio": 1.0091588626734718,
+     "peak_amplitude_ratio": 1.0140652969488841,
+     "peak_phase_lag_deg": -0.13194883876072977,
+     "argument": "2M'",
+     "period_days": 13.777274942741098
+    },
+    {
+     "frequency_cpd": 0.073496390223277,
+     "equilibrium_max_m": 0.03836021842742141,
+     "departure_max_relative": 0.019699380912260003,
+     "rms_amplitude_ratio": 1.0096280726960054,
+     "peak_amplitude_ratio": 1.0145243260405512,
+     "peak_phase_lag_deg": 0.047103221701916484,
+     "argument": "2F",
+     "period_days": 13.606110408444122
+    },
+    {
+     "frequency_cpd": 0.10401803105276428,
+     "equilibrium_max_m": 0.03776837068103765,
+     "departure_max_relative": 0.03978404374439261,
+     "rms_amplitude_ratio": 1.019336348896934,
+     "peak_amplitude_ratio": 1.0294204649974517,
+     "peak_phase_lag_deg": -0.256134733529031,
+     "argument": "2D +M'",
+     "period_days": 9.613717832177953
+    }
+   ]
+  }
+ },
+ "neck_study_south_monthly_range_m": 0.02,
+ "seconds": 616
+}
