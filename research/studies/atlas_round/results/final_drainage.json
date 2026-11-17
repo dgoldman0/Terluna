@@ -1,0 +1,4547 @@
+{
+ "schema": "terluna.research.atlas-round-final-drainage/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/final_drainage.py": "9c4fdb233a58891ea22fd82cc570cada09897d2d27d343315a56656b51e5c285",
+   "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
+   "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
+   "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
+   "research/studies/drainage_network/routing.py": "52ede9125248151b2e8d09bce7ef3e2a9eb742cb391654e0208aa7ef2e96b922",
+   "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5",
+   "climate/gcm/turned_climatology.py": "454374ea179ba6bd0c91b91e485572fc81e75fc4c0d1a64254814b8cdb4095f6",
+   "climate/gcm/turned.py": "0048cd6ac13ab7e9fc6975437f04c2a83e0be3e2c6d8764aae4d68bff4cb629a"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
+  "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56",
+  "research/studies/atlas_round/results/governed_drainage.json": "6ab50a2911d8767a7cda50fb9641dc0b663c3e1ab980f6d557d4ae6b0a07d872"
+ },
+ "ignored_inputs": {
+  "climate/gcm/products/climatology_A28S_301k_design_l15_snow_s930_settled_y35-49_today.npz": "f282dea1a39d6b821a79c988b4f36fe491fecf768246663028b9cd64294984eb",
+  "climate/gcm/products/climatology_A28S_301k_design_l15_snow_s930_settled_y35-49.npz": "66589aedd78e72f829a04d7a117c8cf1ee7677ab9dbcad4f347352ff4ea9de51",
+  "/media/projectspace/terluna-research/atlas-round/redrawn_surface/redrawn_surface_central_100_million_years_nmax359.npz": "42942b743c00594085b8eaaf54d501811fa827c206fb6e5b712f989d11833d14"
+ },
+ "climatology": {
+  "run": "A28S_301k_design_l15_snow_s930_settled",
+  "years": [
+   35,
+   49
+  ],
+  "frame": "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json"
+ },
+ "evidence": "A calculation on products: the drainage network study's routing of the climate run on the final surface (sunlight 0.930, years 35-49, 300.3 K at the ground), carried from its settled turned frame onto today's ground, over the redrawn floor with the works chosen on 16 November, each weir set by routing again until the sea it serves receives its need. The cuts' routes are found between 1.9 km cells. Not validated against any observation.",
+ "reading_rule": "As governed_drainage.json: levels in m above the redrawn common level, flows in m3/s, areas in km2; cases on the routing's own budget and on the one its open-water evaporation factor closes. design_state_without_the_works is the same climate with the upper seas spilling over their natural passes and no weirs or cuts. against_the_present_climate pairs each number as [present design climate at 8 degrees, this run]. routing names each budget's governed routing on the research drive.",
+ "budget": {
+  "land_rain_less_evaporation_m3s": 57132,
+  "routing_runoff_m3s": 106702,
+  "lakes_rain_less_evaporation_m3s": 79902,
+  "seas_loss_m3s": 151523,
+  "delivered_to_the_seas_m3s": 182426,
+  "lakes_km2": 5951195,
+  "closed_lakes_km2": 199821,
+  "surplus_m3s": 30903,
+  "open_water_evaporation_m3s": 443959,
+  "open_water_evaporation_factor_closing_it": 1.07
+ },
+ "rims_against_the_first_step": {
+  "moscoviense": {
+   "here_m": 3448.781,
+   "first_step_m": 3448.78,
+   "agree": true
+  },
+  "orientale": {
+   "here_m": 2341.339,
+   "first_step_m": 2341.34,
+   "agree": true
+  },
+  "smythii_marginis": {
+   "here_m": 719.961,
+   "first_step_m": 719.96,
+   "agree": true
+  }
+ },
+ "branches": {
+  "humboldtianum": {
+   "cuts": [
+    {
+     "depth_m": 437.9,
+     "at": {
+      "today": [
+       34.97,
+       139.72
+      ],
+      "turned": [
+       37.14,
+       133.87
+      ]
+     },
+     "pass_above_the_common_level_m": 3886.7
+    },
+    {
+     "depth_m": 171.2,
+     "at": {
+      "today": [
+       35.09,
+       139.47
+      ],
+      "turned": [
+       37.23,
+       133.6
+      ]
+     },
+     "pass_above_the_common_level_m": 3620.0
+    },
+    {
+     "depth_m": 15.9,
+     "at": {
+      "today": [
+       35.09,
+       138.97
+      ],
+      "turned": [
+       37.18,
+       133.09
+      ]
+     },
+     "pass_above_the_common_level_m": 3464.6
+    },
+    {
+     "depth_m": 55.5,
+     "at": {
+      "today": [
+       35.22,
+       138.72
+      ],
+      "turned": [
+       37.27,
+       132.81
+      ]
+     },
+     "pass_above_the_common_level_m": 3504.3
+    }
+   ],
+   "opens_onto": null,
+   "cuts_least_in_sum": true
+  },
+  "smythii_marginis": {
+   "cuts": [
+    {
+     "depth_m": 437.9,
+     "at": {
+      "today": [
+       34.97,
+       139.72
+      ],
+      "turned": [
+       37.14,
+       133.87
+      ]
+     },
+     "pass_above_the_common_level_m": 3886.7
+    },
+    {
+     "depth_m": 171.2,
+     "at": {
+      "today": [
+       35.09,
+       139.47
+      ],
+      "turned": [
+       37.23,
+       133.6
+      ]
+     },
+     "pass_above_the_common_level_m": 3620.0
+    },
+    {
+     "depth_m": 15.9,
+     "at": {
+      "today": [
+       35.09,
+       138.97
+      ],
+      "turned": [
+       37.18,
+       133.09
+      ]
+     },
+     "pass_above_the_common_level_m": 3464.6
+    },
+    {
+     "depth_m": 55.5,
+     "at": {
+      "today": [
+       35.22,
+       138.72
+      ],
+      "turned": [
+       37.27,
+       132.81
+      ]
+     },
+     "pass_above_the_common_level_m": 3504.3
+    },
+    {
+     "depth_m": 89.2,
+     "at": {
+      "today": [
+       34.22,
+       132.97
+      ],
+      "turned": [
+       35.6,
+       127.18
+      ]
+     },
+     "pass_above_the_common_level_m": 3117.1
+    },
+    {
+     "depth_m": 56.1,
+     "at": {
+      "today": [
+       31.16,
+       131.53
+      ],
+      "turned": [
+       32.39,
+       126.26
+      ]
+     },
+     "pass_above_the_common_level_m": 2682.9
+    }
+   ],
+   "opens_onto": null,
+   "cuts_least_in_sum": true
+  }
+ },
+ "cases": {
+  "routing_budget": {
+   "moscoviense_surplus_m3s": 46683,
+   "released_m3s": {
+    "south_pole_aitken": 22475,
+    "humboldtianum": 4410,
+    "smythii_marginis": 19799
+   },
+   "arrived_m3s": {
+    "south_pole_aitken": 22475,
+    "humboldtianum": 4410,
+    "smythii_marginis": 19799
+   },
+   "full_seas_pass_on_m3s": {
+    "orientale": 15883,
+    "smythii_marginis": 48223
+   },
+   "seas": {
+    "moscoviense": {
+     "level_m": 3448.77,
+     "area_km2": 844220,
+     "loss_m3s": 2709,
+     "own_rivers_m3s": 49392,
+     "supply_m3s": 49392,
+     "balance_m3s": 46683
+    },
+    "orientale": {
+     "level_m": 2341.33,
+     "area_km2": 297889,
+     "loss_m3s": 3314,
+     "own_rivers_m3s": 19197,
+     "supply_m3s": 19197,
+     "balance_m3s": 15883
+    },
+    "smythii_marginis": {
+     "level_m": 719.95,
+     "area_km2": 599348,
+     "loss_m3s": -158,
+     "own_rivers_m3s": 28266,
+     "supply_m3s": 48064,
+     "balance_m3s": 48223
+    },
+    "near_side": {
+     "level_m": 0.0,
+     "area_km2": 5082098,
+     "loss_m3s": 90407,
+     "own_rivers_m3s": 50325,
+     "supply_m3s": 114406,
+     "balance_m3s": 23999,
+     "would_settle": {
+      "reaches_its_rim": true,
+      "level_m": 720.0,
+      "area_km2": 8457382,
+      "area_at_the_common_level_km2": 5082098
+     }
+    },
+    "south_pole_aitken": {
+     "level_m": 0.0,
+     "area_km2": 2410253,
+     "loss_m3s": 52035,
+     "own_rivers_m3s": 29560,
+     "supply_m3s": 52035,
+     "balance_m3s": 0
+    },
+    "humboldtianum": {
+     "level_m": 0.0,
+     "area_km2": 279470,
+     "loss_m3s": 6395,
+     "own_rivers_m3s": 1985,
+     "supply_m3s": 6395,
+     "balance_m3s": 0
+    }
+   },
+   "rivers": {
+    "moscoviense_over_its_natural_pass": {
+     "leaves": {
+      "today": [
+       -10.72,
+       175.09
+      ],
+      "turned": [
+       -4.92,
+       174.62
+      ]
+     },
+     "length_km": 542,
+     "surface_from_m": 3449,
+     "surface_to_m": -24,
+     "steep_km": 44,
+     "steep_reaches": 8,
+     "largest_fall_between_cells_m": 666,
+     "lakes_passed": 7,
+     "discharge_m3s": [
+      22475,
+      27335
+     ],
+     "profile": [
+      [
+       0,
+       3449
+      ],
+      [
+       28,
+       2742
+      ],
+      [
+       57,
+       2675
+      ],
+      [
+       78,
+       2675
+      ],
+      [
+       105,
+       2675
+      ],
+      [
+       133,
+       2675
+      ],
+      [
+       162,
+       2675
+      ],
+      [
+       176,
+       2603
+      ],
+      [
+       210,
+       1702
+      ],
+      [
+       226,
+       1702
+      ],
+      [
+       260,
+       1702
+      ],
+      [
+       294,
+       1702
+      ],
+      [
+       302,
+       1702
+      ],
+      [
+       327,
+       1702
+      ],
+      [
+       352,
+       1625
+      ],
+      [
+       376,
+       608
+      ],
+      [
+       401,
+       608
+      ],
+      [
+       428,
+       608
+      ],
+      [
+       451,
+       608
+      ],
+      [
+       477,
+       608
+      ],
+      [
+       500,
+       529
+      ],
+      [
+       526,
+       413
+      ],
+      [
+       542,
+       -24
+      ]
+     ]
+    },
+    "orientale_over_its_natural_pass": {
+     "leaves": {
+      "today": [
+       -7.16,
+       -87.97
+      ],
+      "turned": [
+       -3.94,
+       -89.58
+      ]
+     },
+     "length_km": 1806,
+     "surface_from_m": 2341,
+     "surface_to_m": -15,
+     "steep_km": 32,
+     "steep_reaches": 10,
+     "largest_fall_between_cells_m": 306,
+     "lakes_passed": 18,
+     "discharge_m3s": [
+      15883,
+      16959
+     ],
+     "profile": [
+      [
+       0,
+       2341
+      ],
+      [
+       25,
+       2305
+      ],
+      [
+       54,
+       2305
+      ],
+      [
+       80,
+       2305
+      ],
+      [
+       100,
+       2305
+      ],
+      [
+       126,
+       2305
+      ],
+      [
+       151,
+       2305
+      ],
+      [
+       175,
+       2305
+      ],
+      [
+       202,
+       2305
+      ],
+      [
+       226,
+       2305
+      ],
+      [
+       255,
+       2289
+      ],
+      [
+       289,
+       2179
+      ],
+      [
+       304,
+       2179
+      ],
+      [
+       327,
+       2126
+      ],
+      [
+       360,
+       2126
+      ],
+      [
+       388,
+       2126
+      ],
+      [
+       404,
+       2126
+      ],
+      [
+       427,
+       2126
+      ],
+      [
+       451,
+       2126
+      ],
+      [
+       479,
+       2126
+      ],
+      [
+       512,
+       2126
+      ],
+      [
+       527,
+       2126
+      ],
+      [
+       551,
+       2126
+      ],
+      [
+       585,
+       2126
+      ],
+      [
+       600,
+       1951
+      ],
+      [
+       627,
+       1951
+      ],
+      [
+       651,
+       1951
+      ],
+      [
+       678,
+       1951
+      ],
+      [
+       706,
+       1951
+      ],
+      [
+       726,
+       1951
+      ],
+      [
+       750,
+       1951
+      ],
+      [
+       776,
+       1951
+      ],
+      [
+       800,
+       1951
+      ],
+      [
+       836,
+       1871
+      ],
+      [
+       857,
+       1743
+      ],
+      [
+       880,
+       1743
+      ],
+      [
+       900,
+       1558
+      ],
+      [
+       927,
+       1504
+      ],
+      [
+       951,
+       1504
+      ],
+      [
+       975,
+       1414
+      ],
+      [
+       1003,
+       1414
+      ],
+      [
+       1026,
+       1414
+      ],
+      [
+       1051,
+       1414
+      ],
+      [
+       1076,
+       1414
+      ],
+      [
+       1104,
+       1140
+      ],
+      [
+       1125,
+       1072
+      ],
+      [
+       1152,
+       937
+      ],
+      [
+       1177,
+       761
+      ],
+      [
+       1205,
+       666
+      ],
+      [
+       1225,
+       666
+      ],
+      [
+       1252,
+       666
+      ],
+      [
+       1277,
+       666
+      ],
+      [
+       1302,
+       666
+      ],
+      [
+       1327,
+       666
+      ],
+      [
+       1351,
+       666
+      ],
+      [
+       1380,
+       666
+      ],
+      [
+       1401,
+       666
+      ],
+      [
+       1429,
+       666
+      ],
+      [
+       1451,
+       666
+      ],
+      [
+       1475,
+       617
+      ],
+      [
+       1502,
+       617
+      ],
+      [
+       1532,
+       312
+      ],
+      [
+       1552,
+       312
+      ],
+      [
+       1591,
+       312
+      ],
+      [
+       1608,
+       308
+      ],
+      [
+       1626,
+       266
+      ],
+      [
+       1651,
+       266
+      ],
+      [
+       1675,
+       264
+      ],
+      [
+       1701,
+       71
+      ],
+      [
+       1736,
+       56
+      ],
+      [
+       1751,
+       56
+      ],
+      [
+       1784,
+       56
+      ],
+      [
+       1801,
+       27
+      ],
+      [
+       1806,
+       -15
+      ]
+     ]
+    },
+    "smythii_marginis_over_its_natural_pass": {
+     "leaves": {
+      "today": [
+       24.78,
+       82.66
+      ],
+      "turned": [
+       20.51,
+       79.34
+      ]
+     },
+     "length_km": 2419,
+     "surface_from_m": 719,
+     "surface_to_m": -3,
+     "steep_km": 11,
+     "steep_reaches": 4,
+     "largest_fall_between_cells_m": 116,
+     "lakes_passed": 9,
+     "discharge_m3s": [
+      48223,
+      50205
+     ],
+     "profile": [
+      [
+       0,
+       719
+      ],
+      [
+       29,
+       677
+      ],
+      [
+       50,
+       677
+      ],
+      [
+       76,
+       677
+      ],
+      [
+       103,
+       677
+      ],
+      [
+       126,
+       677
+      ],
+      [
+       159,
+       677
+      ],
+      [
+       175,
+       677
+      ],
+      [
+       205,
+       677
+      ],
+      [
+       229,
+       677
+      ],
+      [
+       252,
+       677
+      ],
+      [
+       276,
+       677
+      ],
+      [
+       300,
+       677
+      ],
+      [
+       325,
+       677
+      ],
+      [
+       352,
+       677
+      ],
+      [
+       376,
+       677
+      ],
+      [
+       404,
+       677
+      ],
+      [
+       426,
+       677
+      ],
+      [
+       451,
+       677
+      ],
+      [
+       485,
+       677
+      ],
+      [
+       505,
+       677
+      ],
+      [
+       527,
+       677
+      ],
+      [
+       551,
+       677
+      ],
+      [
+       577,
+       677
+      ],
+      [
+       602,
+       677
+      ],
+      [
+       626,
+       677
+      ],
+      [
+       651,
+       677
+      ],
+      [
+       676,
+       677
+      ],
+      [
+       706,
+       677
+      ],
+      [
+       726,
+       677
+      ],
+      [
+       750,
+       677
+      ],
+      [
+       779,
+       677
+      ],
+      [
+       804,
+       646
+      ],
+      [
+       826,
+       606
+      ],
+      [
+       854,
+       502
+      ],
+      [
+       878,
+       502
+      ],
+      [
+       905,
+       502
+      ],
+      [
+       926,
+       502
+      ],
+      [
+       954,
+       502
+      ],
+      [
+       983,
+       502
+      ],
+      [
+       1001,
+       502
+      ],
+      [
+       1026,
+       502
+      ],
+      [
+       1057,
+       502
+      ],
+      [
+       1075,
+       502
+      ],
+      [
+       1105,
+       502
+      ],
+      [
+       1129,
+       502
+      ],
+      [
+       1154,
+       502
+      ],
+      [
+       1177,
+       502
+      ],
+      [
+       1202,
+       502
+      ],
+      [
+       1235,
+       502
+      ],
+      [
+       1250,
+       502
+      ],
+      [
+       1276,
+       502
+      ],
+      [
+       1321,
+       502
+      ],
+      [
+       1325,
+       502
+      ],
+      [
+       1352,
+       502
+      ],
+      [
+       1383,
+       502
+      ],
+      [
+       1401,
+       502
+      ],
+      [
+       1438,
+       502
+      ],
+      [
+       1452,
+       502
+      ],
+      [
+       1476,
+       502
+      ],
+      [
+       1502,
+       502
+      ],
+      [
+       1526,
+       192
+      ],
+      [
+       1552,
+       192
+      ],
+      [
+       1577,
+       192
+      ],
+      [
+       1604,
+       192
+      ],
+      [
+       1635,
+       192
+      ],
+      [
+       1651,
+       192
+      ],
+      [
+       1678,
+       192
+      ],
+      [
+       1700,
+       192
+      ],
+      [
+       1727,
+       192
+      ],
+      [
+       1751,
+       192
+      ],
+      [
+       1777,
+       192
+      ],
+      [
+       1801,
+       192
+      ],
+      [
+       1825,
+       192
+      ],
+      [
+       1851,
+       192
+      ],
+      [
+       1875,
+       192
+      ],
+      [
+       1927,
+       192
+      ],
+      [
+       1951,
+       192
+      ],
+      [
+       1984,
+       192
+      ],
+      [
+       2001,
+       11
+      ],
+      [
+       2027,
+       6
+      ],
+      [
+       2051,
+       6
+      ],
+      [
+       2075,
+       6
+      ],
+      [
+       2101,
+       6
+      ],
+      [
+       2132,
+       6
+      ],
+      [
+       2157,
+       6
+      ],
+      [
+       2175,
+       6
+      ],
+      [
+       2201,
+       6
+      ],
+      [
+       2243,
+       6
+      ],
+      [
+       2256,
+       6
+      ],
+      [
+       2276,
+       6
+      ],
+      [
+       2302,
+       6
+      ],
+      [
+       2327,
+       6
+      ],
+      [
+       2351,
+       6
+      ],
+      [
+       2375,
+       6
+      ],
+      [
+       2414,
+       6
+      ],
+      [
+       2419,
+       -3
+      ]
+     ]
+    },
+    "moscoviense_to_humboldtianum": {
+     "cuts": [
+      {
+       "depth_m": 437.9,
+       "at": {
+        "today": [
+         34.97,
+         139.72
+        ],
+        "turned": [
+         37.14,
+         133.87
+        ]
+       },
+       "pass_above_the_common_level_m": 3886.7
+      },
+      {
+       "depth_m": 171.2,
+       "at": {
+        "today": [
+         35.09,
+         139.47
+        ],
+        "turned": [
+         37.23,
+         133.6
+        ]
+       },
+       "pass_above_the_common_level_m": 3620.0
+      },
+      {
+       "depth_m": 15.9,
+       "at": {
+        "today": [
+         35.09,
+         138.97
+        ],
+        "turned": [
+         37.18,
+         133.09
+        ]
+       },
+       "pass_above_the_common_level_m": 3464.6
+      },
+      {
+       "depth_m": 55.5,
+       "at": {
+        "today": [
+         35.22,
+         138.72
+        ],
+        "turned": [
+         37.27,
+         132.81
+        ]
+       },
+       "pass_above_the_common_level_m": 3504.3
+      }
+     ],
+     "segments": [
+      {
+       "starts": {
+        "today": [
+         35.22,
+         138.72
+        ],
+        "turned": [
+         37.27,
+         132.81
+        ]
+       },
+       "reaches": "humboldtianum",
+       "ends_at": {
+        "today": [
+         57.16,
+         111.72
+        ],
+        "turned": [
+         55.63,
+         100.44
+        ]
+       },
+       "length_km": 1948,
+       "surface_from_m": 3504,
+       "surface_to_m": -81,
+       "steep_km": 60,
+       "steep_reaches": 21,
+       "largest_fall_between_cells_m": 248,
+       "lakes_passed": 21,
+       "discharge_m3s": [
+        24211,
+        5486
+       ],
+       "profile": [
+        [
+         0,
+         3504
+        ],
+        [
+         26,
+         3381
+        ],
+        [
+         50,
+         3169
+        ],
+        [
+         85,
+         3028
+        ],
+        [
+         109,
+         3028
+        ],
+        [
+         127,
+         3028
+        ],
+        [
+         155,
+         3028
+        ],
+        [
+         179,
+         2755
+        ],
+        [
+         200,
+         2470
+        ],
+        [
+         226,
+         2470
+        ],
+        [
+         250,
+         2470
+        ],
+        [
+         276,
+         2470
+        ],
+        [
+         300,
+         2470
+        ],
+        [
+         328,
+         2470
+        ],
+        [
+         351,
+         1604
+        ],
+        [
+         377,
+         1604
+        ],
+        [
+         408,
+         1604
+        ],
+        [
+         428,
+         1604
+        ],
+        [
+         450,
+         1604
+        ],
+        [
+         476,
+         1603
+        ],
+        [
+         512,
+         1514
+        ],
+        [
+         531,
+         1514
+        ],
+        [
+         552,
+         1514
+        ],
+        [
+         588,
+         1514
+        ],
+        [
+         600,
+         1484
+        ],
+        [
+         626,
+         1484
+        ],
+        [
+         651,
+         1484
+        ],
+        [
+         676,
+         1342
+        ],
+        [
+         702,
+         1342
+        ],
+        [
+         726,
+         1342
+        ],
+        [
+         750,
+         1342
+        ],
+        [
+         787,
+         1342
+        ],
+        [
+         802,
+         1342
+        ],
+        [
+         826,
+         1342
+        ],
+        [
+         853,
+         1342
+        ],
+        [
+         878,
+         1342
+        ],
+        [
+         901,
+         1342
+        ],
+        [
+         926,
+         1342
+        ],
+        [
+         952,
+         1342
+        ],
+        [
+         977,
+         1294
+        ],
+        [
+         1002,
+         1294
+        ],
+        [
+         1025,
+         1294
+        ],
+        [
+         1051,
+         1294
+        ],
+        [
+         1084,
+         1294
+        ],
+        [
+         1101,
+         1294
+        ],
+        [
+         1128,
+         1294
+        ],
+        [
+         1150,
+         1294
+        ],
+        [
+         1187,
+         1294
+        ],
+        [
+         1210,
+         1294
+        ],
+        [
+         1226,
+         1294
+        ],
+        [
+         1251,
+         1294
+        ],
+        [
+         1283,
+         1294
+        ],
+        [
+         1301,
+         1294
+        ],
+        [
+         1328,
+         1047
+        ],
+        [
+         1352,
+         985
+        ],
+        [
+         1379,
+         985
+        ],
+        [
+         1402,
+         726
+        ],
+        [
+         1426,
+         726
+        ],
+        [
+         1450,
+         726
+        ],
+        [
+         1475,
+         672
+        ],
+        [
+         1509,
+         561
+        ],
+        [
+         1527,
+         504
+        ],
+        [
+         1554,
+         504
+        ],
+        [
+         1578,
+         504
+        ],
+        [
+         1603,
+         504
+        ],
+        [
+         1625,
+         504
+        ],
+        [
+         1657,
+         504
+        ],
+        [
+         1676,
+         504
+        ],
+        [
+         1711,
+         504
+        ],
+        [
+         1737,
+         504
+        ],
+        [
+         1750,
+         504
+        ],
+        [
+         1776,
+         166
+        ],
+        [
+         1800,
+         166
+        ],
+        [
+         1826,
+         166
+        ],
+        [
+         1852,
+         166
+        ],
+        [
+         1877,
+         166
+        ],
+        [
+         1908,
+         166
+        ],
+        [
+         1925,
+         166
+        ],
+        [
+         1948,
+         -81
+        ]
+       ]
+      }
+     ],
+     "opens_onto": null
+    },
+    "moscoviense_to_smythii_marginis": {
+     "cuts": [
+      {
+       "depth_m": 437.9,
+       "at": {
+        "today": [
+         34.97,
+         139.72
+        ],
+        "turned": [
+         37.14,
+         133.87
+        ]
+       },
+       "pass_above_the_common_level_m": 3886.7
+      },
+      {
+       "depth_m": 171.2,
+       "at": {
+        "today": [
+         35.09,
+         139.47
+        ],
+        "turned": [
+         37.23,
+         133.6
+        ]
+       },
+       "pass_above_the_common_level_m": 3620.0
+      },
+      {
+       "depth_m": 15.9,
+       "at": {
+        "today": [
+         35.09,
+         138.97
+        ],
+        "turned": [
+         37.18,
+         133.09
+        ]
+       },
+       "pass_above_the_common_level_m": 3464.6
+      },
+      {
+       "depth_m": 55.5,
+       "at": {
+        "today": [
+         35.22,
+         138.72
+        ],
+        "turned": [
+         37.27,
+         132.81
+        ]
+       },
+       "pass_above_the_common_level_m": 3504.3
+      },
+      {
+       "depth_m": 89.2,
+       "at": {
+        "today": [
+         34.22,
+         132.97
+        ],
+        "turned": [
+         35.6,
+         127.18
+        ]
+       },
+       "pass_above_the_common_level_m": 3117.1
+      },
+      {
+       "depth_m": 56.1,
+       "at": {
+        "today": [
+         31.16,
+         131.53
+        ],
+        "turned": [
+         32.39,
+         126.26
+        ]
+       },
+       "pass_above_the_common_level_m": 2682.9
+      }
+     ],
+     "segments": [
+      {
+       "starts": {
+        "today": [
+         35.22,
+         138.72
+        ],
+        "turned": [
+         37.27,
+         132.81
+        ]
+       },
+       "reaches": "the lake its next cut leaves from",
+       "ends_at": {
+        "today": [
+         36.09,
+         137.47
+        ],
+        "turned": [
+         37.99,
+         131.38
+        ]
+       },
+       "length_km": 53,
+       "surface_from_m": 3504,
+       "surface_to_m": 3028,
+       "steep_km": 10,
+       "steep_reaches": 5,
+       "largest_fall_between_cells_m": 141,
+       "lakes_passed": 5,
+       "discharge_m3s": [
+        24211,
+        24219
+       ],
+       "profile": [
+        [
+         0,
+         3504
+        ],
+        [
+         26,
+         3381
+        ],
+        [
+         50,
+         3169
+        ],
+        [
+         53,
+         3028
+        ]
+       ]
+      },
+      {
+       "starts": {
+        "today": [
+         34.22,
+         132.97
+        ],
+        "turned": [
+         35.6,
+         127.18
+        ]
+       },
+       "reaches": "the lake its next cut leaves from",
+       "ends_at": {
+        "today": [
+         33.34,
+         132.03
+        ],
+        "turned": [
+         34.62,
+         126.39
+        ]
+       },
+       "length_km": 40,
+       "surface_from_m": 3117,
+       "surface_to_m": 2627,
+       "steep_km": 10,
+       "steep_reaches": 2,
+       "largest_fall_between_cells_m": 187,
+       "lakes_passed": 2,
+       "discharge_m3s": [
+        19799,
+        19828
+       ],
+       "profile": [
+        [
+         0,
+         3117
+        ],
+        [
+         31,
+         2855
+        ],
+        [
+         40,
+         2627
+        ]
+       ]
+      },
+      {
+       "starts": {
+        "today": [
+         31.16,
+         131.53
+        ],
+        "turned": [
+         32.39,
+         126.26
+        ]
+       },
+       "reaches": "smythii_marginis",
+       "ends_at": {
+        "today": [
+         25.84,
+         103.03
+        ],
+        "turned": [
+         23.72,
+         98.95
+        ]
+       },
+       "length_km": 2402,
+       "surface_from_m": 2619,
+       "surface_to_m": 668,
+       "steep_km": 32,
+       "steep_reaches": 13,
+       "largest_fall_between_cells_m": 137,
+       "lakes_passed": 16,
+       "discharge_m3s": [
+        19799,
+        23318
+       ],
+       "profile": [
+        [
+         0,
+         2619
+        ],
+        [
+         26,
+         2269
+        ],
+        [
+         50,
+         2269
+        ],
+        [
+         77,
+         2269
+        ],
+        [
+         102,
+         2269
+        ],
+        [
+         129,
+         2269
+        ],
+        [
+         156,
+         2269
+        ],
+        [
+         180,
+         2269
+        ],
+        [
+         203,
+         2269
+        ],
+        [
+         231,
+         2269
+        ],
+        [
+         250,
+         2269
+        ],
+        [
+         277,
+         2269
+        ],
+        [
+         302,
+         2269
+        ],
+        [
+         326,
+         2269
+        ],
+        [
+         353,
+         2269
+        ],
+        [
+         388,
+         2269
+        ],
+        [
+         400,
+         2269
+        ],
+        [
+         431,
+         2269
+        ],
+        [
+         451,
+         2269
+        ],
+        [
+         490,
+         2269
+        ],
+        [
+         512,
+         2269
+        ],
+        [
+         529,
+         2269
+        ],
+        [
+         551,
+         2269
+        ],
+        [
+         578,
+         2269
+        ],
+        [
+         604,
+         2168
+        ],
+        [
+         629,
+         2168
+        ],
+        [
+         652,
+         2043
+        ],
+        [
+         686,
+         2043
+        ],
+        [
+         701,
+         2043
+        ],
+        [
+         738,
+         1636
+        ],
+        [
+         752,
+         1636
+        ],
+        [
+         776,
+         1636
+        ],
+        [
+         802,
+         1636
+        ],
+        [
+         843,
+         1636
+        ],
+        [
+         850,
+         1636
+        ],
+        [
+         877,
+         1636
+        ],
+        [
+         901,
+         1636
+        ],
+        [
+         926,
+         1636
+        ],
+        [
+         951,
+         1636
+        ],
+        [
+         979,
+         1636
+        ],
+        [
+         1006,
+         1636
+        ],
+        [
+         1026,
+         1636
+        ],
+        [
+         1059,
+         1636
+        ],
+        [
+         1076,
+         1636
+        ],
+        [
+         1102,
+         1636
+        ],
+        [
+         1126,
+         1636
+        ],
+        [
+         1151,
+         1636
+        ],
+        [
+         1188,
+         1636
+        ],
+        [
+         1200,
+         1636
+        ],
+        [
+         1233,
+         1636
+        ],
+        [
+         1251,
+         1636
+        ],
+        [
+         1276,
+         1616
+        ],
+        [
+         1307,
+         1616
+        ],
+        [
+         1327,
+         1616
+        ],
+        [
+         1350,
+         1616
+        ],
+        [
+         1376,
+         1616
+        ],
+        [
+         1403,
+         1569
+        ],
+        [
+         1437,
+         1569
+        ],
+        [
+         1451,
+         1569
+        ],
+        [
+         1482,
+         1569
+        ],
+        [
+         1501,
+         1540
+        ],
+        [
+         1539,
+         1540
+        ],
+        [
+         1554,
+         1540
+        ],
+        [
+         1576,
+         1540
+        ],
+        [
+         1607,
+         1540
+        ],
+        [
+         1631,
+         1540
+        ],
+        [
+         1652,
+         1540
+        ],
+        [
+         1676,
+         1540
+        ],
+        [
+         1701,
+         1540
+        ],
+        [
+         1726,
+         1540
+        ],
+        [
+         1750,
+         1540
+        ],
+        [
+         1783,
+         1540
+        ],
+        [
+         1802,
+         1540
+        ],
+        [
+         1830,
+         1540
+        ],
+        [
+         1852,
+         1540
+        ],
+        [
+         1875,
+         1540
+        ],
+        [
+         1902,
+         1540
+        ],
+        [
+         1952,
+         1540
+        ],
+        [
+         1976,
+         1540
+        ],
+        [
+         2003,
+         1540
+        ],
+        [
+         2027,
+         1540
+        ],
+        [
+         2058,
+         1540
+        ],
+        [
+         2078,
+         1540
+        ],
+        [
+         2105,
+         1540
+        ],
+        [
+         2127,
+         1540
+        ],
+        [
+         2152,
+         1540
+        ],
+        [
+         2177,
+         1540
+        ],
+        [
+         2202,
+         1540
+        ],
+        [
+         2231,
+         1513
+        ],
+        [
+         2251,
+         1308
+        ],
+        [
+         2276,
+         1260
+        ],
+        [
+         2303,
+         1260
+        ],
+        [
+         2326,
+         1260
+        ],
+        [
+         2352,
+         1150
+        ],
+        [
+         2376,
+         1092
+        ],
+        [
+         2400,
+         801
+        ],
+        [
+         2402,
+         668
+        ]
+       ]
+      }
+     ],
+     "opens_onto": null
+    }
+   },
+   "weirs_set_in_routings": 2,
+   "weir_history": [
+    {
+     "shares_m3s": {
+      "south_pole_aitken": 22474.8,
+      "humboldtianum": 4409.8,
+      "smythii_marginis": 19798.5
+     },
+     "lacking_m3s": {
+      "south_pole_aitken": 0.0,
+      "humboldtianum": 0.0
+     }
+    },
+    {
+     "shares_m3s": {
+      "south_pole_aitken": 22474.8,
+      "humboldtianum": 4409.8,
+      "smythii_marginis": 19798.5
+     },
+     "lacking_m3s": {
+      "south_pole_aitken": 0.0,
+      "humboldtianum": 0.0
+     }
+    }
+   ],
+   "evaporation": 1.0,
+   "design_state_without_the_works": {
+    "moscoviense": {
+     "level_m": 3448.77,
+     "area_km2": 844220,
+     "loss_m3s": 2709,
+     "own_rivers_m3s": 49392,
+     "supply_m3s": 49392,
+     "balance_m3s": 46683
+    },
+    "orientale": {
+     "level_m": 2341.33,
+     "area_km2": 297889,
+     "loss_m3s": 3314,
+     "own_rivers_m3s": 19197,
+     "supply_m3s": 19197,
+     "balance_m3s": 15883
+    },
+    "smythii_marginis": {
+     "level_m": 719.95,
+     "area_km2": 599348,
+     "loss_m3s": -158,
+     "own_rivers_m3s": 28266,
+     "supply_m3s": 28266,
+     "balance_m3s": 28424
+    },
+    "near_side": {
+     "level_m": 0.0,
+     "area_km2": 5082098,
+     "loss_m3s": 90407,
+     "own_rivers_m3s": 50325,
+     "supply_m3s": 94608,
+     "balance_m3s": 4201
+    },
+    "south_pole_aitken": {
+     "level_m": 0.0,
+     "area_km2": 2410253,
+     "loss_m3s": 52035,
+     "own_rivers_m3s": 29560,
+     "supply_m3s": 76244,
+     "balance_m3s": 24208
+    },
+    "humboldtianum": {
+     "level_m": 0.0,
+     "area_km2": 279470,
+     "loss_m3s": 6395,
+     "own_rivers_m3s": 1985,
+     "supply_m3s": 1985,
+     "balance_m3s": -4410
+    }
+   },
+   "lakes_the_works_fill": {
+    "km2": 0,
+    "bodies": 0,
+    "km2_by_turned_latitude": {}
+   }
+  },
+  "closed_budget": {
+   "moscoviense_surplus_m3s": 42500,
+   "released_m3s": {
+    "south_pole_aitken": 28324,
+    "humboldtianum": 5340,
+    "smythii_marginis": 8835
+   },
+   "arrived_m3s": {
+    "south_pole_aitken": 28324,
+    "humboldtianum": 5340,
+    "smythii_marginis": 8835
+   },
+   "full_seas_pass_on_m3s": {
+    "orientale": 14233,
+    "smythii_marginis": 34428
+   },
+   "seas": {
+    "moscoviense": {
+     "level_m": 3448.77,
+     "area_km2": 844220,
+     "loss_m3s": 4712,
+     "own_rivers_m3s": 47212,
+     "supply_m3s": 47212,
+     "balance_m3s": 42500
+    },
+    "orientale": {
+     "level_m": 2341.33,
+     "area_km2": 297889,
+     "loss_m3s": 3990,
+     "own_rivers_m3s": 18223,
+     "supply_m3s": 18223,
+     "balance_m3s": 14233
+    },
+    "smythii_marginis": {
+     "level_m": 719.95,
+     "area_km2": 599348,
+     "loss_m3s": 1251,
+     "own_rivers_m3s": 26843,
+     "supply_m3s": 35679,
+     "balance_m3s": 34428
+    },
+    "near_side": {
+     "level_m": 0.0,
+     "area_km2": 5082098,
+     "loss_m3s": 101809,
+     "own_rivers_m3s": 46036,
+     "supply_m3s": 94650,
+     "balance_m3s": -7159,
+     "would_settle": {
+      "reaches_its_rim": false,
+      "level_m": -68.7,
+      "area_km2": 3830839,
+      "area_at_the_common_level_km2": 5082098
+     }
+    },
+    "south_pole_aitken": {
+     "level_m": 0.0,
+     "area_km2": 2410253,
+     "loss_m3s": 56496,
+     "own_rivers_m3s": 28172,
+     "supply_m3s": 56496,
+     "balance_m3s": 0
+    },
+    "humboldtianum": {
+     "level_m": 0.0,
+     "area_km2": 279470,
+     "loss_m3s": 6880,
+     "own_rivers_m3s": 1540,
+     "supply_m3s": 6880,
+     "balance_m3s": 0
+    }
+   },
+   "rivers": {
+    "moscoviense_over_its_natural_pass": {
+     "leaves": {
+      "today": [
+       -10.72,
+       175.09
+      ],
+      "turned": [
+       -4.92,
+       174.62
+      ]
+     },
+     "length_km": 542,
+     "surface_from_m": 3449,
+     "surface_to_m": -24,
+     "steep_km": 44,
+     "steep_reaches": 8,
+     "largest_fall_between_cells_m": 666,
+     "lakes_passed": 7,
+     "discharge_m3s": [
+      28324,
+      32905
+     ],
+     "profile": [
+      [
+       0,
+       3449
+      ],
+      [
+       28,
+       2742
+      ],
+      [
+       57,
+       2675
+      ],
+      [
+       78,
+       2675
+      ],
+      [
+       105,
+       2675
+      ],
+      [
+       133,
+       2675
+      ],
+      [
+       162,
+       2675
+      ],
+      [
+       176,
+       2603
+      ],
+      [
+       210,
+       1702
+      ],
+      [
+       226,
+       1702
+      ],
+      [
+       260,
+       1702
+      ],
+      [
+       294,
+       1702
+      ],
+      [
+       302,
+       1702
+      ],
+      [
+       327,
+       1702
+      ],
+      [
+       352,
+       1625
+      ],
+      [
+       376,
+       608
+      ],
+      [
+       401,
+       608
+      ],
+      [
+       428,
+       608
+      ],
+      [
+       451,
+       608
+      ],
+      [
+       477,
+       608
+      ],
+      [
+       500,
+       529
+      ],
+      [
+       526,
+       413
+      ],
+      [
+       542,
+       -24
+      ]
+     ]
+    },
+    "orientale_over_its_natural_pass": {
+     "leaves": {
+      "today": [
+       -7.16,
+       -87.97
+      ],
+      "turned": [
+       -3.94,
+       -89.58
+      ]
+     },
+     "length_km": 1806,
+     "surface_from_m": 2341,
+     "surface_to_m": -15,
+     "steep_km": 32,
+     "steep_reaches": 10,
+     "largest_fall_between_cells_m": 306,
+     "lakes_passed": 18,
+     "discharge_m3s": [
+      14233,
+      15137
+     ],
+     "profile": [
+      [
+       0,
+       2341
+      ],
+      [
+       25,
+       2305
+      ],
+      [
+       54,
+       2305
+      ],
+      [
+       80,
+       2305
+      ],
+      [
+       100,
+       2305
+      ],
+      [
+       126,
+       2305
+      ],
+      [
+       151,
+       2305
+      ],
+      [
+       175,
+       2305
+      ],
+      [
+       202,
+       2305
+      ],
+      [
+       226,
+       2305
+      ],
+      [
+       255,
+       2289
+      ],
+      [
+       289,
+       2179
+      ],
+      [
+       304,
+       2179
+      ],
+      [
+       327,
+       2126
+      ],
+      [
+       360,
+       2126
+      ],
+      [
+       388,
+       2126
+      ],
+      [
+       404,
+       2126
+      ],
+      [
+       427,
+       2126
+      ],
+      [
+       451,
+       2126
+      ],
+      [
+       479,
+       2126
+      ],
+      [
+       512,
+       2126
+      ],
+      [
+       527,
+       2126
+      ],
+      [
+       551,
+       2126
+      ],
+      [
+       585,
+       2126
+      ],
+      [
+       600,
+       1951
+      ],
+      [
+       627,
+       1951
+      ],
+      [
+       651,
+       1951
+      ],
+      [
+       678,
+       1951
+      ],
+      [
+       706,
+       1951
+      ],
+      [
+       726,
+       1951
+      ],
+      [
+       750,
+       1951
+      ],
+      [
+       776,
+       1951
+      ],
+      [
+       800,
+       1951
+      ],
+      [
+       836,
+       1871
+      ],
+      [
+       857,
+       1743
+      ],
+      [
+       880,
+       1743
+      ],
+      [
+       900,
+       1558
+      ],
+      [
+       927,
+       1504
+      ],
+      [
+       951,
+       1504
+      ],
+      [
+       975,
+       1414
+      ],
+      [
+       1003,
+       1414
+      ],
+      [
+       1026,
+       1414
+      ],
+      [
+       1051,
+       1414
+      ],
+      [
+       1076,
+       1414
+      ],
+      [
+       1104,
+       1140
+      ],
+      [
+       1125,
+       1072
+      ],
+      [
+       1152,
+       937
+      ],
+      [
+       1177,
+       761
+      ],
+      [
+       1205,
+       666
+      ],
+      [
+       1225,
+       666
+      ],
+      [
+       1252,
+       666
+      ],
+      [
+       1277,
+       666
+      ],
+      [
+       1302,
+       666
+      ],
+      [
+       1327,
+       666
+      ],
+      [
+       1351,
+       666
+      ],
+      [
+       1380,
+       666
+      ],
+      [
+       1401,
+       666
+      ],
+      [
+       1429,
+       666
+      ],
+      [
+       1451,
+       666
+      ],
+      [
+       1475,
+       617
+      ],
+      [
+       1502,
+       617
+      ],
+      [
+       1532,
+       312
+      ],
+      [
+       1552,
+       312
+      ],
+      [
+       1591,
+       312
+      ],
+      [
+       1608,
+       308
+      ],
+      [
+       1626,
+       266
+      ],
+      [
+       1651,
+       266
+      ],
+      [
+       1675,
+       264
+      ],
+      [
+       1701,
+       71
+      ],
+      [
+       1736,
+       56
+      ],
+      [
+       1751,
+       56
+      ],
+      [
+       1784,
+       56
+      ],
+      [
+       1801,
+       27
+      ],
+      [
+       1806,
+       -15
+      ]
+     ]
+    },
+    "smythii_marginis_over_its_natural_pass": {
+     "leaves": {
+      "today": [
+       24.78,
+       82.66
+      ],
+      "turned": [
+       20.51,
+       79.34
+      ]
+     },
+     "length_km": 2419,
+     "surface_from_m": 719,
+     "surface_to_m": -3,
+     "steep_km": 11,
+     "steep_reaches": 4,
+     "largest_fall_between_cells_m": 116,
+     "lakes_passed": 9,
+     "discharge_m3s": [
+      34428,
+      35984
+     ],
+     "profile": [
+      [
+       0,
+       719
+      ],
+      [
+       29,
+       677
+      ],
+      [
+       50,
+       677
+      ],
+      [
+       76,
+       677
+      ],
+      [
+       103,
+       677
+      ],
+      [
+       126,
+       677
+      ],
+      [
+       159,
+       677
+      ],
+      [
+       175,
+       677
+      ],
+      [
+       205,
+       677
+      ],
+      [
+       229,
+       677
+      ],
+      [
+       252,
+       677
+      ],
+      [
+       276,
+       677
+      ],
+      [
+       300,
+       677
+      ],
+      [
+       325,
+       677
+      ],
+      [
+       352,
+       677
+      ],
+      [
+       376,
+       677
+      ],
+      [
+       404,
+       677
+      ],
+      [
+       426,
+       677
+      ],
+      [
+       451,
+       677
+      ],
+      [
+       485,
+       677
+      ],
+      [
+       505,
+       677
+      ],
+      [
+       527,
+       677
+      ],
+      [
+       551,
+       677
+      ],
+      [
+       577,
+       677
+      ],
+      [
+       602,
+       677
+      ],
+      [
+       626,
+       677
+      ],
+      [
+       651,
+       677
+      ],
+      [
+       676,
+       677
+      ],
+      [
+       706,
+       677
+      ],
+      [
+       726,
+       677
+      ],
+      [
+       750,
+       677
+      ],
+      [
+       779,
+       677
+      ],
+      [
+       804,
+       646
+      ],
+      [
+       826,
+       606
+      ],
+      [
+       854,
+       502
+      ],
+      [
+       878,
+       502
+      ],
+      [
+       905,
+       502
+      ],
+      [
+       926,
+       502
+      ],
+      [
+       954,
+       502
+      ],
+      [
+       983,
+       502
+      ],
+      [
+       1001,
+       502
+      ],
+      [
+       1026,
+       502
+      ],
+      [
+       1057,
+       502
+      ],
+      [
+       1075,
+       502
+      ],
+      [
+       1105,
+       502
+      ],
+      [
+       1129,
+       502
+      ],
+      [
+       1154,
+       502
+      ],
+      [
+       1177,
+       502
+      ],
+      [
+       1202,
+       502
+      ],
+      [
+       1235,
+       502
+      ],
+      [
+       1250,
+       502
+      ],
+      [
+       1276,
+       502
+      ],
+      [
+       1321,
+       502
+      ],
+      [
+       1325,
+       502
+      ],
+      [
+       1352,
+       502
+      ],
+      [
+       1383,
+       502
+      ],
+      [
+       1401,
+       502
+      ],
+      [
+       1438,
+       502
+      ],
+      [
+       1452,
+       502
+      ],
+      [
+       1476,
+       502
+      ],
+      [
+       1502,
+       502
+      ],
+      [
+       1526,
+       192
+      ],
+      [
+       1552,
+       192
+      ],
+      [
+       1577,
+       192
+      ],
+      [
+       1604,
+       192
+      ],
+      [
+       1635,
+       192
+      ],
+      [
+       1651,
+       192
+      ],
+      [
+       1678,
+       192
+      ],
+      [
+       1700,
+       192
+      ],
+      [
+       1727,
+       192
+      ],
+      [
+       1751,
+       192
+      ],
+      [
+       1777,
+       192
+      ],
+      [
+       1801,
+       192
+      ],
+      [
+       1825,
+       192
+      ],
+      [
+       1851,
+       192
+      ],
+      [
+       1875,
+       192
+      ],
+      [
+       1927,
+       192
+      ],
+      [
+       1951,
+       192
+      ],
+      [
+       1984,
+       192
+      ],
+      [
+       2001,
+       11
+      ],
+      [
+       2027,
+       6
+      ],
+      [
+       2051,
+       6
+      ],
+      [
+       2075,
+       6
+      ],
+      [
+       2101,
+       6
+      ],
+      [
+       2132,
+       6
+      ],
+      [
+       2157,
+       6
+      ],
+      [
+       2175,
+       6
+      ],
+      [
+       2201,
+       6
+      ],
+      [
+       2243,
+       6
+      ],
+      [
+       2256,
+       6
+      ],
+      [
+       2276,
+       6
+      ],
+      [
+       2302,
+       6
+      ],
+      [
+       2327,
+       6
+      ],
+      [
+       2351,
+       6
+      ],
+      [
+       2375,
+       6
+      ],
+      [
+       2414,
+       6
+      ],
+      [
+       2419,
+       -3
+      ]
+     ]
+    },
+    "moscoviense_to_humboldtianum": {
+     "cuts": [
+      {
+       "depth_m": 437.9,
+       "at": {
+        "today": [
+         34.97,
+         139.72
+        ],
+        "turned": [
+         37.14,
+         133.87
+        ]
+       },
+       "pass_above_the_common_level_m": 3886.7
+      },
+      {
+       "depth_m": 171.2,
+       "at": {
+        "today": [
+         35.09,
+         139.47
+        ],
+        "turned": [
+         37.23,
+         133.6
+        ]
+       },
+       "pass_above_the_common_level_m": 3620.0
+      },
+      {
+       "depth_m": 15.9,
+       "at": {
+        "today": [
+         35.09,
+         138.97
+        ],
+        "turned": [
+         37.18,
+         133.09
+        ]
+       },
+       "pass_above_the_common_level_m": 3464.6
+      },
+      {
+       "depth_m": 55.5,
+       "at": {
+        "today": [
+         35.22,
+         138.72
+        ],
+        "turned": [
+         37.27,
+         132.81
+        ]
+       },
+       "pass_above_the_common_level_m": 3504.3
+      }
+     ],
+     "segments": [
+      {
+       "starts": {
+        "today": [
+         35.22,
+         138.72
+        ],
+        "turned": [
+         37.27,
+         132.81
+        ]
+       },
+       "reaches": "humboldtianum",
+       "ends_at": {
+        "today": [
+         57.16,
+         111.72
+        ],
+        "turned": [
+         55.63,
+         100.44
+        ]
+       },
+       "length_km": 1948,
+       "surface_from_m": 3504,
+       "surface_to_m": -81,
+       "steep_km": 60,
+       "steep_reaches": 21,
+       "largest_fall_between_cells_m": 248,
+       "lakes_passed": 21,
+       "discharge_m3s": [
+        14178,
+        6284
+       ],
+       "profile": [
+        [
+         0,
+         3504
+        ],
+        [
+         26,
+         3381
+        ],
+        [
+         50,
+         3169
+        ],
+        [
+         85,
+         3028
+        ],
+        [
+         109,
+         3028
+        ],
+        [
+         127,
+         3028
+        ],
+        [
+         155,
+         3028
+        ],
+        [
+         179,
+         2755
+        ],
+        [
+         200,
+         2470
+        ],
+        [
+         226,
+         2470
+        ],
+        [
+         250,
+         2470
+        ],
+        [
+         276,
+         2470
+        ],
+        [
+         300,
+         2470
+        ],
+        [
+         328,
+         2470
+        ],
+        [
+         351,
+         1604
+        ],
+        [
+         377,
+         1604
+        ],
+        [
+         408,
+         1604
+        ],
+        [
+         428,
+         1604
+        ],
+        [
+         450,
+         1604
+        ],
+        [
+         476,
+         1603
+        ],
+        [
+         512,
+         1514
+        ],
+        [
+         531,
+         1514
+        ],
+        [
+         552,
+         1514
+        ],
+        [
+         588,
+         1514
+        ],
+        [
+         600,
+         1484
+        ],
+        [
+         626,
+         1484
+        ],
+        [
+         651,
+         1484
+        ],
+        [
+         676,
+         1342
+        ],
+        [
+         702,
+         1342
+        ],
+        [
+         726,
+         1342
+        ],
+        [
+         750,
+         1342
+        ],
+        [
+         787,
+         1342
+        ],
+        [
+         802,
+         1342
+        ],
+        [
+         826,
+         1342
+        ],
+        [
+         853,
+         1342
+        ],
+        [
+         878,
+         1342
+        ],
+        [
+         901,
+         1342
+        ],
+        [
+         926,
+         1342
+        ],
+        [
+         952,
+         1342
+        ],
+        [
+         977,
+         1294
+        ],
+        [
+         1002,
+         1294
+        ],
+        [
+         1025,
+         1294
+        ],
+        [
+         1051,
+         1294
+        ],
+        [
+         1084,
+         1294
+        ],
+        [
+         1101,
+         1294
+        ],
+        [
+         1128,
+         1294
+        ],
+        [
+         1150,
+         1294
+        ],
+        [
+         1187,
+         1294
+        ],
+        [
+         1210,
+         1294
+        ],
+        [
+         1226,
+         1294
+        ],
+        [
+         1251,
+         1294
+        ],
+        [
+         1283,
+         1294
+        ],
+        [
+         1301,
+         1294
+        ],
+        [
+         1328,
+         1047
+        ],
+        [
+         1352,
+         985
+        ],
+        [
+         1379,
+         985
+        ],
+        [
+         1402,
+         726
+        ],
+        [
+         1426,
+         726
+        ],
+        [
+         1450,
+         726
+        ],
+        [
+         1475,
+         672
+        ],
+        [
+         1509,
+         561
+        ],
+        [
+         1527,
+         504
+        ],
+        [
+         1554,
+         504
+        ],
+        [
+         1578,
+         504
+        ],
+        [
+         1603,
+         504
+        ],
+        [
+         1625,
+         504
+        ],
+        [
+         1657,
+         504
+        ],
+        [
+         1676,
+         504
+        ],
+        [
+         1711,
+         504
+        ],
+        [
+         1737,
+         504
+        ],
+        [
+         1750,
+         504
+        ],
+        [
+         1776,
+         166
+        ],
+        [
+         1800,
+         166
+        ],
+        [
+         1826,
+         166
+        ],
+        [
+         1852,
+         166
+        ],
+        [
+         1877,
+         166
+        ],
+        [
+         1908,
+         166
+        ],
+        [
+         1925,
+         166
+        ],
+        [
+         1948,
+         -81
+        ]
+       ]
+      }
+     ],
+     "opens_onto": null
+    },
+    "moscoviense_to_smythii_marginis": {
+     "cuts": [
+      {
+       "depth_m": 437.9,
+       "at": {
+        "today": [
+         34.97,
+         139.72
+        ],
+        "turned": [
+         37.14,
+         133.87
+        ]
+       },
+       "pass_above_the_common_level_m": 3886.7
+      },
+      {
+       "depth_m": 171.2,
+       "at": {
+        "today": [
+         35.09,
+         139.47
+        ],
+        "turned": [
+         37.23,
+         133.6
+        ]
+       },
+       "pass_above_the_common_level_m": 3620.0
+      },
+      {
+       "depth_m": 15.9,
+       "at": {
+        "today": [
+         35.09,
+         138.97
+        ],
+        "turned": [
+         37.18,
+         133.09
+        ]
+       },
+       "pass_above_the_common_level_m": 3464.6
+      },
+      {
+       "depth_m": 55.5,
+       "at": {
+        "today": [
+         35.22,
+         138.72
+        ],
+        "turned": [
+         37.27,
+         132.81
+        ]
+       },
+       "pass_above_the_common_level_m": 3504.3
+      },
+      {
+       "depth_m": 89.2,
+       "at": {
+        "today": [
+         34.22,
+         132.97
+        ],
+        "turned": [
+         35.6,
+         127.18
+        ]
+       },
+       "pass_above_the_common_level_m": 3117.1
+      },
+      {
+       "depth_m": 56.1,
+       "at": {
+        "today": [
+         31.16,
+         131.53
+        ],
+        "turned": [
+         32.39,
+         126.26
+        ]
+       },
+       "pass_above_the_common_level_m": 2682.9
+      }
+     ],
+     "segments": [
+      {
+       "starts": {
+        "today": [
+         35.22,
+         138.72
+        ],
+        "turned": [
+         37.27,
+         132.81
+        ]
+       },
+       "reaches": "the lake its next cut leaves from",
+       "ends_at": {
+        "today": [
+         36.09,
+         137.47
+        ],
+        "turned": [
+         37.99,
+         131.38
+        ]
+       },
+       "length_km": 53,
+       "surface_from_m": 3504,
+       "surface_to_m": 3028,
+       "steep_km": 10,
+       "steep_reaches": 5,
+       "largest_fall_between_cells_m": 141,
+       "lakes_passed": 5,
+       "discharge_m3s": [
+        14178,
+        14186
+       ],
+       "profile": [
+        [
+         0,
+         3504
+        ],
+        [
+         26,
+         3381
+        ],
+        [
+         50,
+         3169
+        ],
+        [
+         53,
+         3028
+        ]
+       ]
+      },
+      {
+       "starts": {
+        "today": [
+         34.22,
+         132.97
+        ],
+        "turned": [
+         35.6,
+         127.18
+        ]
+       },
+       "reaches": "the lake its next cut leaves from",
+       "ends_at": {
+        "today": [
+         33.34,
+         132.03
+        ],
+        "turned": [
+         34.62,
+         126.39
+        ]
+       },
+       "length_km": 40,
+       "surface_from_m": 3117,
+       "surface_to_m": 2627,
+       "steep_km": 10,
+       "steep_reaches": 2,
+       "largest_fall_between_cells_m": 187,
+       "lakes_passed": 2,
+       "discharge_m3s": [
+        8836,
+        8865
+       ],
+       "profile": [
+        [
+         0,
+         3117
+        ],
+        [
+         31,
+         2855
+        ],
+        [
+         40,
+         2627
+        ]
+       ]
+      },
+      {
+       "starts": {
+        "today": [
+         31.16,
+         131.53
+        ],
+        "turned": [
+         32.39,
+         126.26
+        ]
+       },
+       "reaches": "smythii_marginis",
+       "ends_at": {
+        "today": [
+         25.84,
+         103.03
+        ],
+        "turned": [
+         23.72,
+         98.95
+        ]
+       },
+       "length_km": 2402,
+       "surface_from_m": 2619,
+       "surface_to_m": 668,
+       "steep_km": 32,
+       "steep_reaches": 13,
+       "largest_fall_between_cells_m": 137,
+       "lakes_passed": 16,
+       "discharge_m3s": [
+        8836,
+        12020
+       ],
+       "profile": [
+        [
+         0,
+         2619
+        ],
+        [
+         26,
+         2269
+        ],
+        [
+         50,
+         2269
+        ],
+        [
+         77,
+         2269
+        ],
+        [
+         102,
+         2269
+        ],
+        [
+         129,
+         2269
+        ],
+        [
+         156,
+         2269
+        ],
+        [
+         180,
+         2269
+        ],
+        [
+         203,
+         2269
+        ],
+        [
+         231,
+         2269
+        ],
+        [
+         250,
+         2269
+        ],
+        [
+         277,
+         2269
+        ],
+        [
+         302,
+         2269
+        ],
+        [
+         326,
+         2269
+        ],
+        [
+         353,
+         2269
+        ],
+        [
+         388,
+         2269
+        ],
+        [
+         400,
+         2269
+        ],
+        [
+         431,
+         2269
+        ],
+        [
+         451,
+         2269
+        ],
+        [
+         490,
+         2269
+        ],
+        [
+         512,
+         2269
+        ],
+        [
+         529,
+         2269
+        ],
+        [
+         551,
+         2269
+        ],
+        [
+         578,
+         2269
+        ],
+        [
+         604,
+         2168
+        ],
+        [
+         629,
+         2168
+        ],
+        [
+         652,
+         2043
+        ],
+        [
+         686,
+         2043
+        ],
+        [
+         701,
+         2043
+        ],
+        [
+         738,
+         1636
+        ],
+        [
+         752,
+         1636
+        ],
+        [
+         776,
+         1636
+        ],
+        [
+         802,
+         1636
+        ],
+        [
+         843,
+         1636
+        ],
+        [
+         850,
+         1636
+        ],
+        [
+         877,
+         1636
+        ],
+        [
+         901,
+         1636
+        ],
+        [
+         926,
+         1636
+        ],
+        [
+         951,
+         1636
+        ],
+        [
+         979,
+         1636
+        ],
+        [
+         1006,
+         1636
+        ],
+        [
+         1026,
+         1636
+        ],
+        [
+         1059,
+         1636
+        ],
+        [
+         1076,
+         1636
+        ],
+        [
+         1102,
+         1636
+        ],
+        [
+         1126,
+         1636
+        ],
+        [
+         1151,
+         1636
+        ],
+        [
+         1188,
+         1636
+        ],
+        [
+         1200,
+         1636
+        ],
+        [
+         1233,
+         1636
+        ],
+        [
+         1251,
+         1636
+        ],
+        [
+         1276,
+         1616
+        ],
+        [
+         1307,
+         1616
+        ],
+        [
+         1327,
+         1616
+        ],
+        [
+         1350,
+         1616
+        ],
+        [
+         1376,
+         1616
+        ],
+        [
+         1403,
+         1569
+        ],
+        [
+         1437,
+         1569
+        ],
+        [
+         1451,
+         1569
+        ],
+        [
+         1482,
+         1569
+        ],
+        [
+         1501,
+         1540
+        ],
+        [
+         1539,
+         1540
+        ],
+        [
+         1554,
+         1540
+        ],
+        [
+         1576,
+         1540
+        ],
+        [
+         1607,
+         1540
+        ],
+        [
+         1631,
+         1540
+        ],
+        [
+         1652,
+         1540
+        ],
+        [
+         1676,
+         1540
+        ],
+        [
+         1701,
+         1540
+        ],
+        [
+         1726,
+         1540
+        ],
+        [
+         1750,
+         1540
+        ],
+        [
+         1783,
+         1540
+        ],
+        [
+         1802,
+         1540
+        ],
+        [
+         1830,
+         1540
+        ],
+        [
+         1852,
+         1540
+        ],
+        [
+         1875,
+         1540
+        ],
+        [
+         1902,
+         1540
+        ],
+        [
+         1952,
+         1540
+        ],
+        [
+         1976,
+         1540
+        ],
+        [
+         2003,
+         1540
+        ],
+        [
+         2027,
+         1540
+        ],
+        [
+         2058,
+         1540
+        ],
+        [
+         2078,
+         1540
+        ],
+        [
+         2105,
+         1540
+        ],
+        [
+         2127,
+         1540
+        ],
+        [
+         2152,
+         1540
+        ],
+        [
+         2177,
+         1540
+        ],
+        [
+         2202,
+         1540
+        ],
+        [
+         2231,
+         1513
+        ],
+        [
+         2251,
+         1308
+        ],
+        [
+         2276,
+         1260
+        ],
+        [
+         2303,
+         1260
+        ],
+        [
+         2326,
+         1260
+        ],
+        [
+         2352,
+         1150
+        ],
+        [
+         2376,
+         1092
+        ],
+        [
+         2400,
+         801
+        ],
+        [
+         2402,
+         668
+        ]
+       ]
+      }
+     ],
+     "opens_onto": null
+    }
+   },
+   "weirs_set_in_routings": 2,
+   "weir_history": [
+    {
+     "shares_m3s": {
+      "south_pole_aitken": 28323.9,
+      "humboldtianum": 5340.3,
+      "smythii_marginis": 8835.5
+     },
+     "lacking_m3s": {
+      "south_pole_aitken": 0.0,
+      "humboldtianum": 0.0
+     }
+    },
+    {
+     "shares_m3s": {
+      "south_pole_aitken": 28323.9,
+      "humboldtianum": 5340.3,
+      "smythii_marginis": 8835.5
+     },
+     "lacking_m3s": {
+      "south_pole_aitken": 0.0,
+      "humboldtianum": 0.0
+     }
+    }
+   ],
+   "evaporation": 1.07,
+   "design_state_without_the_works": {
+    "moscoviense": {
+     "level_m": 3448.77,
+     "area_km2": 844220,
+     "loss_m3s": 4712,
+     "own_rivers_m3s": 47212,
+     "supply_m3s": 47212,
+     "balance_m3s": 42500
+    },
+    "orientale": {
+     "level_m": 2341.33,
+     "area_km2": 297889,
+     "loss_m3s": 3990,
+     "own_rivers_m3s": 18223,
+     "supply_m3s": 18223,
+     "balance_m3s": 14233
+    },
+    "smythii_marginis": {
+     "level_m": 719.95,
+     "area_km2": 599348,
+     "loss_m3s": 1251,
+     "own_rivers_m3s": 26843,
+     "supply_m3s": 26843,
+     "balance_m3s": 25592
+    },
+    "near_side": {
+     "level_m": 0.0,
+     "area_km2": 5082098,
+     "loss_m3s": 101809,
+     "own_rivers_m3s": 46036,
+     "supply_m3s": 85814,
+     "balance_m3s": -15994
+    },
+    "south_pole_aitken": {
+     "level_m": 0.0,
+     "area_km2": 2410253,
+     "loss_m3s": 56496,
+     "own_rivers_m3s": 28172,
+     "supply_m3s": 70672,
+     "balance_m3s": 14176
+    },
+    "humboldtianum": {
+     "level_m": 0.0,
+     "area_km2": 279470,
+     "loss_m3s": 6880,
+     "own_rivers_m3s": 1540,
+     "supply_m3s": 1540,
+     "balance_m3s": -5340
+    }
+   },
+   "lakes_the_works_fill": {
+    "km2": 0,
+    "bodies": 0,
+    "km2_by_turned_latitude": {}
+   }
+  }
+ },
+ "against_the_present_climate": {
+  "routing_budget": {
+   "moscoviense_surplus_m3s": [
+    55764,
+    46683
+   ],
+   "released_m3s": {
+    "south_pole_aitken": [
+     15601,
+     22475
+    ],
+    "humboldtianum": [
+     6319,
+     4410
+    ],
+    "smythii_marginis": [
+     33844,
+     19799
+    ]
+   },
+   "full_seas_pass_on_m3s": {
+    "orientale": [
+     14840,
+     15883
+    ],
+    "smythii_marginis": [
+     67165,
+     48223
+    ]
+   },
+   "seas": {
+    "moscoviense": {
+     "loss_m3s": [
+      -1344,
+      2709
+     ],
+     "own_rivers_m3s": [
+      54421,
+      49392
+     ],
+     "balance_m3s": [
+      55764,
+      46683
+     ]
+    },
+    "orientale": {
+     "loss_m3s": [
+      731,
+      3314
+     ],
+     "own_rivers_m3s": [
+      15571,
+      19197
+     ],
+     "balance_m3s": [
+      14840,
+      15883
+     ]
+    },
+    "smythii_marginis": {
+     "loss_m3s": [
+      -3500,
+      -158
+     ],
+     "own_rivers_m3s": [
+      30266,
+      28266
+     ],
+     "balance_m3s": [
+      67165,
+      48223
+     ]
+    },
+    "near_side": {
+     "loss_m3s": [
+      82856,
+      90407
+     ],
+     "own_rivers_m3s": [
+      59446,
+      50325
+     ],
+     "balance_m3s": [
+      58493,
+      23999
+     ]
+    },
+    "south_pole_aitken": {
+     "loss_m3s": [
+      47261,
+      52035
+     ],
+     "own_rivers_m3s": [
+      31659,
+      29560
+     ],
+     "balance_m3s": [
+      0,
+      0
+     ]
+    },
+    "humboldtianum": {
+     "loss_m3s": [
+      6512,
+      6395
+     ],
+     "own_rivers_m3s": [
+      243,
+      1985
+     ],
+     "balance_m3s": [
+      0,
+      0
+     ]
+    }
+   },
+   "near_side_would_settle_m": [
+    720.0,
+    720.0
+   ]
+  },
+  "closed_budget": {
+   "moscoviense_surplus_m3s": [
+    47824,
+    42500
+   ],
+   "released_m3s": {
+    "south_pole_aitken": [
+     28378,
+     28324
+    ],
+    "humboldtianum": [
+     7746,
+     5340
+    ],
+    "smythii_marginis": [
+     11700,
+     8835
+    ]
+   },
+   "full_seas_pass_on_m3s": {
+    "orientale": [
+     11761,
+     14233
+    ],
+    "smythii_marginis": [
+     39099,
+     34428
+    ]
+   },
+   "seas": {
+    "moscoviense": {
+     "loss_m3s": [
+      2759,
+      4712
+     ],
+     "own_rivers_m3s": [
+      50583,
+      47212
+     ],
+     "balance_m3s": [
+      47824,
+      42500
+     ]
+    },
+    "orientale": {
+     "loss_m3s": [
+      2124,
+      3990
+     ],
+     "own_rivers_m3s": [
+      13886,
+      18223
+     ],
+     "balance_m3s": [
+      11761,
+      14233
+     ]
+    },
+    "smythii_marginis": {
+     "loss_m3s": [
+      -614,
+      1251
+     ],
+     "own_rivers_m3s": [
+      27375,
+      26843
+     ],
+     "balance_m3s": [
+      39099,
+      34428
+     ]
+    },
+    "near_side": {
+     "loss_m3s": [
+      106736,
+      101809
+     ],
+     "own_rivers_m3s": [
+      51278,
+      46036
+     ],
+     "balance_m3s": [
+      -4821,
+      -7159
+     ]
+    },
+    "south_pole_aitken": {
+     "loss_m3s": [
+      56435,
+      56496
+     ],
+     "own_rivers_m3s": [
+      28057,
+      28172
+     ],
+     "balance_m3s": [
+      0,
+      0
+     ]
+    },
+    "humboldtianum": {
+     "loss_m3s": [
+      7556,
+      6880
+     ],
+     "own_rivers_m3s": [
+      0,
+      1540
+     ],
+     "balance_m3s": [
+      0,
+      0
+     ]
+    }
+   },
+   "near_side_would_settle_m": [
+    -61.9,
+    -68.7
+   ]
+  }
+ },
+ "routing": {
+  "routing_budget": {
+   "path": "/media/projectspace/terluna-research/atlas-round/final_drainage/final_routing_routing_budget.npz",
+   "sha256": "5c5943ff725d74a7e290e5aa457a80f0f364a620a26accbf806e5772efb42903"
+  },
+  "closed_budget": {
+   "path": "/media/projectspace/terluna-research/atlas-round/final_drainage/final_routing_closed_budget.npz",
+   "sha256": "7ea24e8b7f31d32c5b0697c8b09cabf619bf6472219bdb73f69e3584f645c254"
+  }
+ },
+ "seconds": 486
+}
