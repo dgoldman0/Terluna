@@ -498,6 +498,100 @@
    "basis": "the coupled study's rule for residents as a result: the opening funding may be no larger than the constant-growth ramp's"
   }
  },
+ "u": {
+  "basis": "U, the money of the zone beyond Earth, beside the account with Earth, as designed on 16 November 2026: one U for the accounts (Terluna's later work splits it into several zones); the share of trade settled in U; Earth's customers' and sellers' working balances; Earth's investors holding U assets (bonds or staking) at a real yield; the share of their income spent in the zone; the trade the shared unit brings; the funders' returns paid partly in U; a dollar reserve; and the inflation U allows. Amounts are in constant dollars of 2041 of purchasing power. The holders' behaviour is checked against the lookup of 16 November 2026 (research drive, vacuum-economy/research/u_monetary_policy/values.md, with its source keys); the share of income spent in the zone and Earth's safe real rate remain the study's own",
+  "policy": {
+   "value": "dollar",
+   "options": [
+    "dollar",
+    "conservative",
+    "liberal"
+   ],
+   "basis": "the account with Earth in dollars alone, as before, until the default is set; the U policies run as cases"
+  },
+  "policies": {
+   "conservative": {
+    "settlement_share_from": 0.25,
+    "settlement_share_to": 0.85,
+    "settlement_years": 10,
+    "real_yield": 0.0,
+    "yield_follows_growth": false,
+    "inflation": 0.02,
+    "reserve_share_of_holdings": 0.5,
+    "reserve_months_of_payments": 12,
+    "funders_paid_in_U": 0.0,
+    "basis": "the policy of 12-13 November 2026: inflation in U kept low, with room for mild expansion, and a partial reserve; trade settled in U from 25% to 85% over the ten years after the opening, the earlier price-pressure study's reference transition (research/studies/monetary_system/pressure.md); no yield offered to Earth's investors; the reserve at half of Earth's holdings and a year of payments to Earth"
+   },
+   "liberal": {
+    "settlement_share_from": 0.25,
+    "settlement_share_to": 0.95,
+    "settlement_years": 10,
+    "real_yield": 0.02,
+    "yield_follows_growth": true,
+    "inflation": 0.03,
+    "reserve_share_of_holdings": 0.25,
+    "reserve_months_of_payments": 6,
+    "funders_paid_in_U": 0.25,
+    "basis": "a more liberal policy at the edge of the five tests: bonds or staking at a real yield of 2% a year, held within the zone's growth over the twenty years before once that is known, inflation at the decade bound of 3%, the reserve at the run test's quarter of Earth's holdings and six months of payments, a quarter of the funders' returns paid in U (half fails the test that Earth's holdings stay within the zone's yearly output), and trade settled in U up to 95%"
+   }
+  },
+  "holders": {
+   "earth_safe_real_rate": {
+    "value": 0.01,
+    "basis": "provisional: the real return Earth's investors have without the zone, about the long-run real yield on reserve-currency government debt; the reserve earns it"
+   },
+   "investment_threshold_spread": {
+    "value": 0.005,
+    "basis": "provisional: the yield above Earth's safe rate below which Earth's investors hold no U assets"
+   },
+   "investment_spread_scale": {
+    "value": 0.015,
+    "basis": "the further spread over which their holdings rise toward the ceiling, by 1 - exp(-excess / scale); with the adjustment below, a point of spread draws about 3-5% of output in the first year, against net portfolio inflows of 0.34-0.58% of output a quarter per point of policy-rate differential in 12 emerging markets after 2008 (AZ14); one study finds yield differentials insignificant for local-currency bond inflows beside the dollar's moves (GPS24)"
+   },
+   "investment_ceiling_share_of_output": {
+    "value": 0.3,
+    "range": [
+     0.1,
+     0.3
+    ],
+    "basis": "the most Earth's investors would hold, as a share of the zone's yearly output: foreign holdings of reserve-currency government debt are about 30% of output (US 31% of debt held by the public, CRS26; Japan 12.8% of its bonds and bills, MOF26; UK 33.4% of gilts, DMO25), and non-residents held a mean 22% of 14 emerging markets' local-currency government debt in 2012-2024, 1 to 58% (GFSR25ch3), some 7 to 9% of output (lookup of 16 November 2026, research drive vacuum-economy/research/u_monetary_policy/values.md)"
+   },
+   "adjustment_per_year": {
+    "value": 0.25,
+    "basis": "provisional: the share of the gap between what Earth's investors hold and want that they close in a year, buying U with dollars or converting it back"
+   },
+   "share_of_income_spent_in_zone": {
+    "value": 0.3,
+    "range": [
+     0.0,
+     0.6
+    ],
+    "basis": "the study's own: the share of the yield Earth's holders earn, and of the funders' U, that they spend on the zone's goods and services, paid in U and so costing the zone its own work, not dollars; no source records portfolio holders' spending in the issuer, and the nearest measure, the income direct investors keep in the host, is about a third (40% in developing hosts, WIR13)"
+   },
+   "trade_effect_of_full_settlement": {
+    "value": 0.1,
+    "range": [
+     0.0,
+     0.3
+    ],
+    "basis": "the rise in Earth's purchases from the zone when all its trade is settled in U, scaled by the share settled; currency unions raise trade 30-90% in a meta-analysis of 34 studies (RS05) and the euro 30% or less in recent estimates, not significantly after correction for publication bias (GR16blog, Hav10); settlement in the seller's unit without a shared currency is taken as weaker, 10%, with 0 and 30% as cases"
+   },
+   "working_balance_days": {
+    "value": 7.0,
+    "basis": "the earlier price-pressure study's customer holdings: Earth's customers and sellers keep seven days of the trade settled in U as working balances, without interest"
+   }
+  },
+  "tests": {
+   "inflation_decade_mean_max": 0.03,
+   "inflation_year_max": 0.05,
+   "reserve_share_of_holdings_min": 0.2,
+   "reserve_months_of_payments_min": 6,
+   "run_share_of_holdings": 0.25,
+   "yield_over_growth_years": 20,
+   "holdings_over_output_max": 1.0,
+   "basis": "the five tests of a safe and healthy policy agreed on 16 November 2026, to be rechecked against the lookup: inflation in U at most 3% a year over any decade and never above 5% in a year; reserves of at least 20% of the U held on Earth and six months of dollar payments to Earth; a run withdrawing a quarter of Earth's holdings within a year met from the reserve; the real yield paid no higher than the zone's growth over the twenty years before; Earth's holdings no larger than the zone's yearly output. The zone's output is its residents' pay, the workforce at the wage, with what the zone keeps of its sales to Earth"
+  }
+ },
  "founding": {
   "build_years": {
    "value": [

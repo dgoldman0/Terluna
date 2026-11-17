@@ -2201,7 +2201,7 @@
     },
     {
       "topic": "vacuum_economy_periods",
-      "condition": "second_version; designed_whole_before_built; technology_paths_2041_2241_with_dated_arrivals_sourced_by_the_lookups_of_15_and_16_november_at_their_starting_values_and_held_after_2241; rates_of_work_plant_masses_bounds_and_water_set_asides_constructed; three_design_choices_open_carried_as_switches; growth_shape_settled_16_november; residents_grow_past_the_plan_where_resources_allow_to_2341; residents_as_a_result_by_the_funders_3pct_and_the_decade_test; eventual_crater_sites_house_growth_past_the_initial_quota; rough_time_to_exhaustion_of_sites_and_water_under_set_asides; money_in_U_after_the_report",
+      "condition": "second_version; designed_whole_before_built; technology_paths_2041_2241_with_dated_arrivals_sourced_by_the_lookups_of_15_and_16_november_at_their_starting_values_and_held_after_2241; rates_of_work_plant_masses_bounds_and_water_set_asides_constructed; three_design_choices_open_carried_as_switches; growth_shape_settled_16_november; residents_grow_past_the_plan_where_resources_allow_to_2341; residents_as_a_result_by_the_funders_3pct_and_the_decade_test; eventual_crater_sites_house_growth_past_the_initial_quota; rough_time_to_exhaustion_of_sites_and_water_under_set_asides; money_in_U_conservative_and_liberal_policies_under_five_tests_with_provisional_holders",
       "material": [
         "studies/vacuum_economy_periods/README.md",
         "studies/vacuum_economy_periods/period_technology.json",

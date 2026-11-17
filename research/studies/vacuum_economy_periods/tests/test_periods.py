@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from research.studies.vacuum_economy_periods import designs, economy, engineering, run, sales, technology as tech
+from research.studies.vacuum_economy_periods import designs, economy, engineering, money, run, sales, technology as tech
 
 HERE = Path(__file__).resolve().parents[1]
 
@@ -171,9 +171,56 @@ def test_water_set_aside_lengthens_the_legs_and_brings_exhaustion_sooner():
     assert whole['residents_when_sites_full'] == pytest.approx(whole['capacity_residents'])
 
 
+def test_the_U_ledger_adds_up_and_holds_its_rules():
+    """With a policy of U the reserve changes by the year's dollars: the account with Earth, Earth's purchases of U net
+    of conversions, the funders' conversions of their U, the reserve's interest and the dollars paid to the funders;
+    the funders' measures come from their own flows; working balances are a week of the trade settled in U."""
+    rows = economy.Run('central', 'central', 'constant_growth', u_policy='liberal', past_plan='hold').simulate()
+    reserve = 0.0
+    for r in rows:
+        change = (r['receipts'] - r['paid_to_Earth'] + r['u_from_balances'] + r['u_from_investors'] + r['u_interest']
+                  - r['u_funders_converted'] - r['u_dollars_to_funders'])
+        assert r['u_reserve'] - reserve == pytest.approx(change, abs=1e-6 * max(1.0, r['receipts']))
+        reserve = r['u_reserve']
+        assert r['u_reserve'] >= r['u_reserve_floor'] * (1 - 1e-12)
+        assert r['u_balances'] == pytest.approx(r['u_settlement_share'] * (r['receipts'] + r['paid_to_Earth']) * 7 / 365.25)
+    s = economy.summary(rows)
+    assert s['funding_needed_USD2041'] == pytest.approx(-min(0.0, min(r['funders_cumulative'] for r in rows)))
+    assert s['u_test_failure_years'] == 0
+    plain = economy.Run('central', 'central', 'constant_growth', u_policy='conservative', past_plan='hold').simulate()
+    assert all(r['u_investment'] == 0 and r['u_funders_U'] == 0 for r in plain)
+
+
+def test_the_five_tests_catch_an_unsafe_policy():
+    """Half the funders' returns paid in U piles Earth's holdings above the zone's yearly output; a reserve of a tenth of
+    Earth's holdings, without the months of payments, fails the run test; a yield above growth fails its test."""
+    heavy = economy.summary(economy.Run('central', 'central', 'constant_growth', u_policy='liberal', u_funders_paid_in_U=0.5, past_plan='hold').simulate())
+    assert heavy['u_test_failures']['holdings_within_output'] > 0
+    assert not run.sustained('central', 'central', run.steady_schedule(0.05, 0.0), (('u_funders_paid_in_U', 0.5), ('u_policy', 'liberal')))[0]
+    thin = money.Ledger(money.policy('liberal', dict(reserve_share_of_holdings=0.1, reserve_months_of_payments=0, funders_paid_in_U=0.0)), money.holders())
+    steep = money.Ledger(money.policy('liberal', dict(real_yield=0.05, yield_follows_growth=False, funders_paid_in_U=0.0)), money.holders())
+    for y in range(0, 60):
+        a = thin.step(y, 1e11, 1e11, 1e12 if y >= 8 else 0.0)
+        b = steep.step(y, 1e11, 1e11, 1e12 if y >= 8 else 0.0)
+    assert a['u_holdings'] > 0 and not a['u_tests']['run']
+    assert b['u_investment'] > 0 and not b['u_tests']['yield_within_growth']
+
+
+def test_growth_as_a_result_under_the_liberal_policy_passes_every_test():
+    rates, sched = run.solve('central', 'central', 'steady', (('u_policy', 'liberal'),))
+    rows = economy.Run('central', 'central', schedule=sched, u_policy='liberal').simulate()
+    s = economy.summary(rows)
+    assert rates['sustained'] and s['u_test_failure_years'] == 0 and s['deficit_decades_after_repayment'] == 0
+    dollar_rates, dollar_sched = run.solve('central', 'central', 'steady')
+    assert sched[run.HORIZON] >= dollar_sched[run.HORIZON]
+
+
 def test_the_saved_product_is_current():
     saved = json.loads((HERE / 'results/periods.json').read_text())
     assert saved['schema'] == run.SCHEMA
     assert saved['producer']['sha256'] == run.digest(HERE / 'run.py')
     assert saved['dependencies'] == run.dependencies()
-    assert [c['name'] for c in saved['cases']] == [c[0] for c in run.cases()]
+    names = [c['name'] for c in saved['cases']]
+    assert names[:len(run.cases())] == [c[0] for c in run.cases()]
+    assert names[len(run.cases()):] in ([], ['central:central:steady:U_most_liberal_safe'])
+    assert len(saved['u_policy_search']) == len(run.SEARCH_YIELDS) * len(run.SEARCH_FUNDERS_IN_U)

@@ -94,11 +94,12 @@ def sustained(scenario, tcase, sched, options):
     negative); the account with Earth is repaid and no ten years after that are together in deficit, so a year's
     reinvestment, such as a change of power supply that the factories cannot yet make in full, is covered within the
     decade and a lasting deficit is not; the settlements' own work is staffed; the sources' water is not exhausted.
-    Returns the test and the rows."""
+    Under a policy of U the funders' flows carry Earth's purchases of U and the reserve, and every one of the five tests
+    of a safe and healthy policy holds in every year. Returns the test and the rows."""
     rows = economy.Run(scenario, tcase, schedule=sched, **dict(options)).simulate()
     s = economy.summary(rows)
     ok = (s['NPV_USD2041']['0.03'][str(s['last_year'])] >= 0 and s['repaid_year'] is not None and s['deficit_decades_after_repayment'] == 0
-          and s['hands_short_years'] == 0 and s['exhausted_year'] is None)
+          and s['hands_short_years'] == 0 and s['exhausted_year'] is None and s['u_test_failure_years'] == 0)
     return ok, rows
 
 
@@ -212,17 +213,22 @@ SERIES = ('residents', 'receipts', 'paid_to_Earth', 'net', 'cumulative', 'firm_G
           'workforce', 'teleoperated_jobs', 'lines_served_share', 'housed_town', 'housed_city', 'housed_beyond_initial_quota', 'housing_short',
           'fare', 'landed_USD_kg', 'kWh_USD')
 AT_YEARS = (8, 25, 50, 100, 150, 200, 250, 300)
+# The ledger of U, in cases with a policy of U.
+U_SERIES = ('trade_multiple', 'u_settlement_share', 'u_real_yield', 'u_output', 'u_balances', 'u_investment', 'u_investment_target',
+            'u_funders_U', 'u_holdings', 'u_reserve', 'u_reserve_floor', 'u_reserve_own', 'u_from_balances', 'u_from_investors',
+            'u_funders_converted', 'u_yield_income', 'u_spent_in_zone', 'u_paid_to_funders', 'funders_flow', 'funders_cumulative', 'u_growth_20')
 
 
 def record(name, scenario, tcase, ramp, options, rows, rates):
     s = economy.summary(rows)
+    keys = SERIES + (U_SERIES if 'funders_flow' in rows[0] else ())
     at = {}
     for h in AT_YEARS:
         r = rows[h]
-        at[str(h)] = dict({k: r[k] for k in SERIES}, to_Earth=r['to_Earth'], jobs=r['jobs'], power_by_option_kW=r['power_by_option_kW'],
+        at[str(h)] = dict({k: r[k] for k in keys}, to_Earth=r['to_Earth'], jobs=r['jobs'], power_by_option_kW=r['power_by_option_kW'],
                           lines={k: dict(receipts=x['receipts'], served=x['served']) for k, x in r['lines'].items()},
-                          production_kg=r['production_kg'])
-    series = {k: [rows[y][k] for y in range(0, HORIZON + 1, 5)] for k in SERIES}
+                          production_kg=r['production_kg'], **({'u_tests': r['u_tests']} if 'u_tests' in r else {}))
+    series = {k: [rows[y][k] for y in range(0, HORIZON + 1, 5)] for k in keys}
     return dict(name=name, scenario=scenario, technology=tcase, ramp=ramp, options=dict(options), growth_rates=rates,
                 summary=s, at_year=at, every_fifth_year=series)
 
@@ -237,7 +243,41 @@ def cases():
     for key, opts in SENSITIVITIES.items():
         out.append(('central:central:constant_growth:%s' % key, 'central', 'central', 'constant_growth', tuple(sorted(opts.items()))))
     out.append(('central:central:steady:whole_pool', 'central', 'central', 'steady', (('water_set_aside', 0.0),)))
+    # U beside the account with Earth: the two policies on the programme's ramp and with growth as a result, the liberal
+    # one under each technology and on low demand, and its least certain holders' behaviour moved one at a time.
+    for policy in ('conservative', 'liberal'):
+        for ramp in ('constant_growth', 'steady'):
+            out.append(('central:central:%s:U_%s' % (ramp, policy), 'central', 'central', ramp, (('u_policy', policy),)))
+    for scenario, tcase in (('central', 'slow'), ('central', 'fast'), ('low', 'central'), ('low', 'fast')):
+        out.append(('%s:%s:steady:U_liberal' % (scenario, tcase), scenario, tcase, 'steady', (('u_policy', 'liberal'),)))
+    for key, value in (('u_trade_effect', 0.0), ('u_trade_effect', 0.3), ('u_spending_share', 0.0), ('u_spending_share', 0.6)):
+        out.append(('central:central:steady:U_liberal:%s_%g' % (key[2:], value), 'central', 'central', 'steady',
+                    tuple(sorted((('u_policy', 'liberal'), (key, value))))))
     return out
+
+
+# The most liberal policy that stays safe and healthy: the liberal policy's yield offered to Earth's investors and the
+# share of the funders' returns paid in U, searched over a grid, each with growth as a result under the five tests;
+# the one that carries the most residents by 2341, the higher yield and share where they tie.
+SEARCH_YIELDS = (0.0, 0.01, 0.02, 0.03, 0.04)
+SEARCH_FUNDERS_IN_U = (0.0, 0.1, 0.25, 0.5)
+
+
+def policy_search(scenario='central', tcase='central'):
+    grid = []
+    for real_yield in SEARCH_YIELDS:
+        for in_U in SEARCH_FUNDERS_IN_U:
+            opts = tuple(sorted((('u_policy', 'liberal'), ('u_real_yield', real_yield), ('u_funders_paid_in_U', in_U))))
+            rates, sched = solve(scenario, tcase, 'steady', opts)
+            rows = economy.Run(scenario, tcase, schedule=sched, **dict(opts)).simulate()
+            s = economy.summary(rows)
+            grid.append(dict(real_yield=real_yield, funders_paid_in_U=in_U, sustained=rates['sustained'], growth_rates=rates,
+                             residents_2241=rows[200]['residents'], residents_2341=rows[HORIZON]['residents'],
+                             plan_reached_year=s['plan_reached_year'], funding_needed_USD2041=s['funding_needed_USD2041'],
+                             NPV3_USD2041=s['NPV_USD2041']['0.03'][str(HORIZON)], u_test_failures=s['u_test_failures'], options=opts))
+    carried = [g for g in grid if g['sustained']]
+    best = max(carried, key=lambda g: (round(g['residents_2341']), g['real_yield'], g['funders_paid_in_U'])) if carried else None
+    return grid, best
 
 
 def digest(path):
@@ -247,7 +287,7 @@ def digest(path):
 def dependencies():
     from research.studies.vacuum_economy import demand
     from . import designs
-    files = [HERE / f for f in ('run.py', 'economy.py', 'designs.py', 'engineering.py', 'sales.py', 'technology.py', 'period_technology.json', 'period_inputs.json')]
+    files = [HERE / f for f in ('run.py', 'economy.py', 'designs.py', 'engineering.py', 'money.py', 'sales.py', 'technology.py', 'period_technology.json', 'period_inputs.json')]
     files += [designs.TOWNS, designs.CITIES, engineering.REACH, ROOT / 'research/studies/vacuum_economy/scenarios.json', Path(demand.__file__),
               ROOT / 'research/studies/vacuum_economy/programme.json', Path(definition.__file__)]
     return {str(Path(p).resolve().relative_to(ROOT)): digest(p) for p in files}
@@ -255,6 +295,10 @@ def dependencies():
 
 def product():
     records = [record(name, sc, tc, ramp, opts, *case_rows(sc, tc, ramp, opts)) for name, sc, tc, ramp, opts in cases()]
+    grid, best = policy_search()
+    if best is not None:
+        records.append(record('central:central:steady:U_most_liberal_safe', 'central', 'central', 'steady', best['options'],
+                              *case_rows('central', 'central', 'steady', best['options'])))
     projections = [dict(name=name, **exhaustion(sc, tc, path, opts)) for name, sc, tc, path, opts in exhaustion_cases()]
     return dict(
         schema=SCHEMA, producer=dict(path=str((HERE / 'run.py').relative_to(ROOT)), sha256=digest(HERE / 'run.py')),
@@ -274,8 +318,12 @@ def product():
                       'solved schedule gives its growth rates. at_year holds chosen years in full and every_fifth_year a series of years 0, '
                       '5, ..., 300. A case\'s years after its water runs out (exhausted_year) are not physical. Each exhaustion projection '
                       'carries one path on to 3541 at most and names the years the plan is reached, the sites are full and the water open '
-                      'to mining runs out.'),
-        cases=records, exhaustion=projections)
+                      'to mining runs out. In a case with a policy of U (options u_policy), the funders\' measures come from their own '
+                      'flows, which carry Earth\'s purchases of U net of conversions and the dollar reserve, the ledger\'s series are '
+                      'given beside the others, and u_test_failures counts the years failing each of the five tests; the policy search '
+                      'lists every yield and share of the funders\' returns paid in U tried, and the most liberal policy that stays safe '
+                      'and healthy is the case central:central:steady:U_most_liberal_safe.'),
+        cases=records, exhaustion=projections, u_policy_search=[{k: x for k, x in g.items() if k != 'options'} for g in grid])
 
 
 def main():

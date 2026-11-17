@@ -24,7 +24,7 @@ from functools import lru_cache
 import math
 
 from research.studies.vacuum_economy import programme as definition
-from . import designs, engineering, sales, technology as tech
+from . import designs, engineering, money, sales, technology as tech
 from .designs import inputs, v
 
 OPENING = 8
@@ -52,7 +52,9 @@ def defaults():
                 births=v(pe['births_per_resident_year']), fares_paid_by=v(pe['fares_paid_by']),
                 allocation=v(s['allocation']), caves=v(s['caves_for_cities']), town_residents=v(s['town_residents']),
                 reach=v(tr['reach_percentile']), share_who_work=v(pe['share_who_work']),
-                water_set_aside=v(tr['water_set_aside_share']), past_plan=v(inputs()['growth']['past_plan']))
+                water_set_aside=v(tr['water_set_aside_share']), past_plan=v(inputs()['growth']['past_plan']),
+                u_policy=v(inputs()['u']['policy']), u_real_yield=None, u_reserve_share=None, u_funders_paid_in_U=None,
+                u_trade_effect=None, u_spending_share=None)
 
 
 class Run:
@@ -117,6 +119,12 @@ class Run:
         initial_towns = self.initial_town_capacity()
         capacity = self.capacity()
         set_aside = opt['water_set_aside']
+        # U beside the account with Earth, when the case names a policy: the trade the shared unit brings scales the
+        # lines of sale below, and the ledger keeps Earth's holdings, the reserve and the funders' flows.
+        upol = money.policy(opt['u_policy'], dict(real_yield=opt['u_real_yield'], reserve_share_of_holdings=opt['u_reserve_share'],
+                                                  funders_paid_in_U=opt['u_funders_paid_in_U']))
+        uh = money.holders(dict(trade_effect_of_full_settlement=opt['u_trade_effect'], share_of_income_spent_in_zone=opt['u_spending_share']))
+        ledger = money.Ledger(upol, uh) if upol is not None else None
         lo, hi = v(I['founding']['build_years'])
         plant_life0 = v(ind['plant_design_life_years'])
         ramp_years = v(ind['local_manufacture_ramp_years'])
@@ -197,10 +205,11 @@ class Run:
             stay_day = (need_city['firm_W'] / 1000.0 * P.supply_here['USD_kW_year'] + need_city['earth_supplies_kg_year'] * (P.supplies + P.landed)) / 365.25
             lines_year = sales.year(self.scenario, self.tcase, y, P, depot_cost, stay_day, feed_last) if y >= OPENING else {}
             served = {k: x for k, x in lines_year.items() if x['served']}
+            trade = money.trade_multiple(upol, uh, y)
             for x in served.values():
                 for q in ('receipts', 'to_Earth', 'jobs', 'cost', 'kg', 'visitors', 'watts', 'power_W', 'hardware_kg_year', 'launched_kg'):
                     if q in x:
-                        x[q] *= lines_scale
+                        x[q] *= lines_scale * trade
             lift = P.lift()
             materials_kg = served['materials']['kg'] if 'materials' in served else 0.0
             propellant_sold = served['propellant']['kg'] if 'propellant' in served else 0.0
@@ -292,7 +301,7 @@ class Run:
             visitors = served['visits']['visitors'] if 'visits' in served else 0.0
             launches = (imported_kg + (arrivals + 2 * visitors) * v(I['people']['launched_kg_per_passenger'])) / payload
             cargo_history.append(imported_kg)
-            rows.append(dict(
+            row = dict(
                 year=y, date=date, residents=N, newcomers=newcomers, arrivals=arrivals, births=births,
                 housed_city=housed['city'], housed_town=housed['town'],
                 housed_beyond_initial_quota=max(0.0, housed['town'] - initial_towns), sites_full=N >= capacity * (1 - 1e-9),
@@ -300,7 +309,8 @@ class Run:
                 lines={k: dict(receipts=x['receipts'], to_Earth=x['to_Earth'], served=x['served'], jobs=x['jobs'],
                                **{q: x[q] for q in ('kg', 'visitors', 'price', 'watts') if q in x}) for k, x in lines_year.items()},
                 production_kg=production, industry_GWh=industry_kWh / 1e6, firm_GW=firm_kW / 1e6,
-                power_chosen=pw['chosen'], power_added_kW={o: kw for o, kw, _ in pw['added']}, power_by_option_kW=dict(power),
+                power_chosen=pw['chosen'], power_added_kW={o: sum(kw for k, kw, _ in pw['added'] if k == o) for o, _, _ in pw['added']},
+                power_by_option_kW=dict(power),
                 jobs=jobs, workforce=workforce, teleoperated_jobs=teleoperated,
                 hands_short=max(0.0, jobs['services'] + jobs['operators'] - workforce) if y >= OPENING else 0.0,
                 lines_served_share=min(1.0, lines_scale), housing_short=housing_short,
@@ -310,7 +320,11 @@ class Run:
                 launches_year=launches, pads=launches / pads_rate,
                 tug=out['kind'], leg_m_s=out['leg'], water_delivered_t=out['delivered_kg'] / 1000.0, contained_drawn_t=drawn_contained / 1000.0,
                 exhausted=out['exhausted'], wage=wage, kWh_USD=P.kWh, fare=P.fare(), landed_USD_kg=P.landed,
-                visitors=visitors, visitor_share_of_world=visitors / self.world.population(date)))
+                visitors=visitors, visitor_share_of_world=visitors / self.world.population(date), trade_multiple=trade)
+            if ledger is not None:
+                # The zone's output: its residents' pay and what it keeps of its sales to Earth.
+                row.update(ledger.step(y, receipts, paid, workforce * wage + receipts - earth['lines'] if y >= OPENING else 0.0))
+            rows.append(row)
             if out['exhausted'] and self.stop_at_exhaustion:
                 break
         return rows
@@ -479,19 +493,29 @@ def summary(rows, rates=(0.0, 0.01, 0.03, 0.07)):
     years 100, 200 and the last) and how much of it is needed by the opening; the net present value at each rate to years 100 and 200 and to the last year; the first year
     after the opening in which the account is repaid, the years in deficit after it and the ten-year windows after it
     whose years together are in deficit, and the first year from which it stays repaid; the year the plan's 6.47 million is reached and the year the sites are full; the residents at chosen
-    years; the years short of hands; and the first year the water open to mining runs out."""
-    nets = [r['net'] for r in rows]
-    cum = [r['cumulative'] for r in rows]
+    years; the years short of hands; and the first year the water open to mining runs out. Under a policy of U the
+    funders' measures are taken from their own flows, which carry Earth's purchases of U and the reserve, and the years
+    failing each of the five tests are counted."""
+    nets = [r.get('funders_flow', r['net']) for r in rows]
+    cum, total = [], 0.0
+    for n in nets:
+        total += n
+        cum.append(total)
     last = rows[-1]['year']
     opening = -min(0.0, min(cum[:OPENING + 1]))
     # The payback year: the first year after the opening from which the cumulative account stays repaid to the last.
     payback = None
-    for r in reversed(rows):
-        if r['cumulative'] < 0:
+    for r, c in zip(reversed(rows), reversed(cum)):
+        if c < 0:
             break
         if r['year'] >= OPENING:
             payback = r['year']
-    repaid = next((r['year'] for r in rows if r['year'] > OPENING and r['cumulative'] >= 0), None)
+    repaid = next((r['year'] for r, c in zip(rows, cum) if r['year'] > OPENING and c >= 0), None)
+    failing = {}
+    for r in rows:
+        for name, ok in r.get('u_tests', {}).items():
+            failing.setdefault(name, 0)
+            failing[name] += 0 if ok else 1
     horizons = sorted({h for h in (100, 200, last) if h <= last})
     npv = {str(rate): {str(h): sum(n / (1 + rate) ** y for y, n in enumerate(nets[:h + 1])) for h in horizons} for rate in rates}
     planned = definition.load()['population']['planned']
@@ -499,7 +523,8 @@ def summary(rows, rates=(0.0, 0.01, 0.03, 0.07)):
                 funding_after_opening_USD2041=max(0.0, -min(cum) - opening),
                 funding_needed_by_year_USD2041={str(h): -min(0.0, min(cum[:h + 1])) for h in horizons},
                 NPV_USD2041=npv, last_year=last, payback_year=payback, repaid_year=repaid,
-                deficit_years_after_repayment=0 if repaid is None else sum(1 for r in rows if r['year'] > repaid and r['net'] < 0),
+                deficit_years_after_repayment=0 if repaid is None else sum(1 for r, n in zip(rows, nets) if r['year'] > repaid and n < 0),
+                u_test_failure_years=sum(1 for r in rows if not all(r.get('u_tests', {}).values())), u_test_failures=failing,
                 deficit_decades_after_repayment=0 if repaid is None else sum(
                     1 for i in range(repaid + 1, len(rows) - DECADE + 1) if sum(nets[i:i + DECADE]) < 0),
                 plan_reached_year=next((r['year'] for r in rows if r['residents'] >= planned * (1 - 1e-9)), None),
