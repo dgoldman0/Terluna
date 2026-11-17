@@ -176,7 +176,7 @@ def figures(p, out):
                 v = (g['residents_2341'] or 0) / 1e6
                 ax.bar(x + dx, v, width=0.32, color=color, edgecolor=SURFACE, linewidth=0.6, label=('U' if money == ':U' else 'Dollars alone') if k == 0 else None)
                 if v < 0.1:
-                    ax.annotate('none', (x + dx, 0), xytext=(0, 2), textcoords='offset points', ha='center', va='bottom', fontsize=6.5, color=MUTED, rotation=90)
+                    ax.annotate('12,500', (x + dx, 0), xytext=(0, 2), textcoords='offset points', ha='center', va='bottom', fontsize=6.5, color=MUTED, rotation=90)
                 grid_values['%s:%s%s' % (scenario, tcase, money)] = v
         ax.set_xticks(range(3), ('slow', 'central', 'fast'))
         ax.set_title('%s demand' % scenario.capitalize(), loc='left', color=INK)
