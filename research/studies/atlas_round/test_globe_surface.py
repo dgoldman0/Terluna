@@ -1,24 +1,14 @@
-"""Checks of the design surface the globe draws: the spill is put in on the ground beside the main part's water, and the
-record holds together once computed (each sea at the level its source gives it, the shares adding up, the neck's river
-reaching the southern seas, the grid on the research drive matching its hash)."""
+"""Checks of the design surface the globe draws, once computed: it is drawn from the design routing as that routing
+stands, and the record holds together (each sea at the level its source gives it, the shares adding up, the neck's river
+reaching the southern seas, the grid on the research drive matching its hash). The spill's placement is checked with
+the routing (test_design_routing.py)."""
 import json
 
-import numpy as np
 import pytest
 
+from research.studies.atlas_round import design_routing as DR
 from research.studies.atlas_round import globe_surface as GS
-
-
-def test_the_spill_leaves_from_the_lowest_ground_beside_the_main_water():
-    rows, cols = 64, 128
-    h = np.full((rows, cols), 50.0, np.float32)
-    main = np.zeros((rows, cols), bool)
-    main[10:20, 40:60] = True                     # the main part's water
-    h[main] = -10.0
-    h[20, 50] = 5.0                               # the lowest ground beside it, south of its middle
-    h[25, 50] = 4.0                               # lower ground further off is not beside the water
-    centre = (90.0 - 20.5 / 16.0, 50.5 / 16.0)    # the throat's centre, at cell (20, 50)
-    assert GS.spill_cell(h.ravel(), main.ravel(), cols, centre) == 20 * cols + 50
+from research.studies.atlas_round import near_side_neck as N
 
 
 @pytest.fixture(scope='module')
@@ -31,7 +21,7 @@ def record():
 def test_the_record_holds_together(record):
     s = record['summary']
     seas = s['seas']
-    neck = json.loads(GS.N.OUT.read_text())['budgets']['closed_budget']['natural_neck']['steady']
+    neck = json.loads(N.OUT.read_text())['budgets']['closed_budget']['natural_neck']['steady']
     assert seas['near-side sea']['level_m'] == pytest.approx(neck['main_level_m'], abs=0.02)
     assert seas['southern near-side seas']['level_m'] == pytest.approx(neck['south_level_m'], abs=0.02)
     for k in ('South Pole–Aitken Sea', 'Mare Humboldtianum'):
@@ -45,3 +35,11 @@ def test_the_record_holds_together(record):
     product = record['product']
     if GS.PRODUCT.exists():
         assert GS.sha256(GS.PRODUCT) == product['sha256']
+
+
+def test_the_surface_is_drawn_from_the_design_routing_as_it_stands(record):
+    assert record['inputs'][str(DR.OUT.relative_to(GS.ROOT))] == GS.sha256(DR.OUT)
+    routing = json.loads(DR.OUT.read_text())
+    assert record['ignored_inputs'][str(DR.PRODUCT)] == routing['product']['sha256']
+    assert record['summary']['neck_spill_m3s'] == routing['summary']['neck_spill_m3s']
+    assert record['summary']['sea_share'] == pytest.approx(routing['summary']['sea_share'], abs=2e-5)

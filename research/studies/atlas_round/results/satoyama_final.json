@@ -1,0 +1,726 @@
+{
+ "schema": "terluna.research.atlas-round-satoyama-candidates/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/satoyama_final.py": "581ca71a834ea8c70035ebeaa7e36883f70cb95d47ca01f9737e78846370333c",
+   "research/studies/atlas_round/satoyama_candidates.py": "6ca937b28ad654f1fcf9b268c4ba9b650da1da4beb12d45d091a949c870d9876",
+   "research/studies/atlas_round/design_routing.py": "7efdff778ed46538149ca80abdf825d819ff80563565814a6ac4d0c09632cb6c",
+   "research/studies/atlas_round/final_drainage.py": "9c4fdb233a58891ea22fd82cc570cada09897d2d27d343315a56656b51e5c285",
+   "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
+   "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/design_routing.json": "c0a11066af790bdcbfb71f9252c5c1f40bcea7b4f4b45637c5b3b1d3d5ae5bb8",
+  "research/studies/atlas_round/results/final_drainage.json": "494e54b73071acc50cde9cfd7a7028c1d5031d597913cf696d84b2b9ba6bc7d8",
+  "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "6cb410b400c6ee1ba15d3c79b404dfdae94327a66217e4a8b57e77cafbee05c1",
+  "climate/gcm/products/climatology_A28S_301k_design_l15_snow_s930_settled_y35-49_today.npz": "f282dea1a39d6b821a79c988b4f36fe491fecf768246663028b9cd64294984eb"
+ },
+ "routing": {
+  "record": "research/studies/atlas_round/results/design_routing.json",
+  "path": "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz",
+  "seas": [
+   "near_side_main",
+   "near_side_south",
+   "south_pole_aitken",
+   "humboldtianum",
+   "moscoviense",
+   "orientale",
+   "smythii_marginis"
+  ],
+  "levels_above_the_common_level_m": {
+   "moscoviense": 3448.77,
+   "orientale": 2341.33,
+   "smythii_marginis": 719.95,
+   "south_pole_aitken": 0.0,
+   "humboldtianum": 0.0,
+   "near_side_main": -66.58,
+   "near_side_south": -166.3
+  },
+  "climate": {
+   "run": "A28S_301k_design_l15_snow_s930_settled",
+   "years": [
+    35,
+    49
+   ],
+   "climatology": "climate/gcm/products/climatology_A28S_301k_design_l15_snow_s930_settled_y35-49_today.npz",
+   "budget": "closed_budget",
+   "open_water_evaporation_factor": 1.07
+  }
+ },
+ "evidence": "A screen on products: side valleys of the design surface's drainage (every sea at its own level, the near-side sea parted, the governed lakes and rivers on the closed budget of the run at sunlight 0.930) at 1.9 km cells, tested against criteria set from Earth's satoyama, tank cascades and terraces (satoyama.md), with that run's rain and surface temperature over years 35-49 at T21, carried to today's ground, and the IPCC 2019 Refinement's methane factors for rice. Slopes at 1.9 km are gentler than the ground within a cell, so the valley floors and the woodland are first estimates. Not validated against any observation.",
+ "reading_rule": "As satoyama_candidates.json: areas in km2, rain in mm a year, temperatures the climate model's surface temperature in C, methane in Tg a year; places on today's Moon and the turned Moon in the final surface's settled frame. first_map gives the first map's totals beside these.",
+ "criteria": {
+  "valley_km2": [
+   10.0,
+   100.0
+  ],
+  "gentle_slope": 0.05,
+  "steep_deg": 15.0,
+  "valley_floor_share_min": 0.03,
+  "woodland_share_min": 0.3,
+  "rain_mm": [
+   800.0,
+   3000.0
+  ],
+  "season_days": 113.0,
+  "need_mm": [
+   1240.0,
+   1880.0
+  ],
+  "irrigated_share_max": 0.28
+ },
+ "valleys": {
+  "count": 558676,
+  "km2": 19407374,
+  "share_of_the_land": 0.819
+ },
+ "land_km2": 23689964,
+ "failing": {
+  "order_down_the_slope": 324951,
+  "rain": 374047
+ },
+ "candidates": {
+  "count": 61362,
+  "km2": 1979356,
+  "share_of_the_land": 0.084,
+  "share_of_a_fifth_of_the_land": 0.418,
+  "valley_floor_km2": 587281,
+  "woodland_km2": 992835,
+  "flooded_possible_km2": 227729,
+  "flooded_at_sri_lankas_share_km2": 118761,
+  "water_limited": 35512,
+  "rain_mm_p10_p50_p90": [
+   872,
+   1288,
+   2000
+  ],
+  "temperature_c_p10_p50_p90": [
+   22.9,
+   26.3,
+   28.7
+  ]
+ },
+ "methane": {
+  "paddy_t_km2_yr": {
+   "drained_more_than_once_cropped_once": 7.4,
+   "with_upland_crops_before": 4.36,
+   "continuously_flooded_cropped_twice": 26.9
+  },
+  "ponds_t_km2_yr": 18.3,
+  "channels_t_km2_yr": 41.6,
+  "room_tg_yr": [
+   0.35,
+   2.5
+  ],
+  "room_holds_paddy_km2": {
+   "0.35_tg": 47324,
+   "2.5_tg": 338027
+  },
+  "at_the_possible_area_tg_yr": [
+   0.99,
+   1.68
+  ],
+  "at_sri_lankas_share_tg_yr": [
+   0.52,
+   0.88
+  ],
+  "share_of_the_possible_area_the_room_holds": [
+   0.208,
+   1.0
+  ]
+ },
+ "bands": [
+  {
+   "turned_latitude": "0-15",
+   "land_km2": 5173293,
+   "valleys_km2": 3844128,
+   "candidates": 35269,
+   "candidates_km2": 1050613,
+   "share_of_the_hybrid_fifth": 1.015,
+   "flooded_possible_km2": 150591,
+   "rain_mm_median": 1252
+  },
+  {
+   "turned_latitude": "15-30",
+   "land_km2": 4790196,
+   "valleys_km2": 3663730,
+   "candidates": 20069,
+   "candidates_km2": 710449,
+   "share_of_the_hybrid_fifth": 0.742,
+   "flooded_possible_km2": 60790,
+   "rain_mm_median": 855
+  },
+  {
+   "turned_latitude": "30-45",
+   "land_km2": 4952256,
+   "valleys_km2": 4055288,
+   "candidates": 5982,
+   "candidates_km2": 216828,
+   "share_of_the_hybrid_fifth": 0.219,
+   "flooded_possible_km2": 16253,
+   "rain_mm_median": 424
+  },
+  {
+   "turned_latitude": "45-60",
+   "land_km2": 4313220,
+   "valleys_km2": 3832051,
+   "candidates": 42,
+   "candidates_km2": 1466,
+   "share_of_the_hybrid_fifth": 0.002,
+   "flooded_possible_km2": 94,
+   "rain_mm_median": 177
+  },
+  {
+   "turned_latitude": "60-75",
+   "land_km2": 3269369,
+   "valleys_km2": 2959410,
+   "candidates": 0,
+   "candidates_km2": 0,
+   "share_of_the_hybrid_fifth": 0.0,
+   "flooded_possible_km2": 0,
+   "rain_mm_median": 35
+  },
+  {
+   "turned_latitude": "75-90",
+   "land_km2": 1191630,
+   "valleys_km2": 1052767,
+   "candidates": 0,
+   "candidates_km2": 0,
+   "share_of_the_hybrid_fifth": 0.0,
+   "flooded_possible_km2": 0,
+   "rain_mm_median": 23
+  }
+ ],
+ "satoumi": {
+  "sea_km2": 2410253,
+  "shallower_than_2_m_km2": 496,
+  "shallower_than_5_m_km2": 1304,
+  "shallower_than_10_m_km2": 2609,
+  "shallower_than_20_m_km2": 5394,
+  "shore_km": 37827,
+  "shallower_than_10_m_km2_by_turned_latitude": {
+   "15-30": 736,
+   "30-45": 442,
+   "45-60": 441,
+   "60-75": 582,
+   "75-90": 409
+  }
+ },
+ "leading": [
+  {
+   "today": [
+    6.37,
+    19.99
+   ],
+   "turned": [
+    -0.51,
+    19.04
+   ],
+   "km2": 99.9,
+   "relief_m": 448,
+   "valley_floor_km2": 42.8,
+   "woodland_share": 0.57,
+   "flooded_possible_km2": 28.0,
+   "rain_mm": 1638,
+   "temperature_c": 27.8,
+   "outflow_m3s": 1.4
+  },
+  {
+   "today": [
+    -16.39,
+    -110.3
+   ],
+   "turned": [
+    -11.04,
+    -112.41
+   ],
+   "km2": 99.9,
+   "relief_m": 707,
+   "valley_floor_km2": 44.8,
+   "woodland_share": 0.52,
+   "flooded_possible_km2": 28.0,
+   "rain_mm": 1681,
+   "temperature_c": 21.9,
+   "outflow_m3s": 2.21
+  },
+  {
+   "today": [
+    6.66,
+    19.59
+   ],
+   "turned": [
+    -0.22,
+    18.64
+   ],
+   "km2": 99.9,
+   "relief_m": 625,
+   "valley_floor_km2": 35.7,
+   "woodland_share": 0.64,
+   "flooded_possible_km2": 28.0,
+   "rain_mm": 1729,
+   "temperature_c": 27.4,
+   "outflow_m3s": 1.62
+  },
+  {
+   "today": [
+    26.22,
+    44.05
+   ],
+   "turned": [
+    19.46,
+    42.3
+   ],
+   "km2": 99.9,
+   "relief_m": 304,
+   "valley_floor_km2": 64.4,
+   "woodland_share": 0.32,
+   "flooded_possible_km2": 28.0,
+   "rain_mm": 1707,
+   "temperature_c": 25.9,
+   "outflow_m3s": 1.53
+  },
+  {
+   "today": [
+    6.67,
+    19.31
+   ],
+   "turned": [
+    -0.2,
+    18.37
+   ],
+   "km2": 99.9,
+   "relief_m": 539,
+   "valley_floor_km2": 42.8,
+   "woodland_share": 0.57,
+   "flooded_possible_km2": 28.0,
+   "rain_mm": 1790,
+   "temperature_c": 27.1,
+   "outflow_m3s": 1.77
+  },
+  {
+   "today": [
+    -26.22,
+    -112.56
+   ],
+   "turned": [
+    -20.67,
+    -115.4
+   ],
+   "km2": 99.9,
+   "relief_m": 256,
+   "valley_floor_km2": 64.4,
+   "woodland_share": 0.36,
+   "flooded_possible_km2": 28.0,
+   "rain_mm": 2111,
+   "temperature_c": 21.1,
+   "outflow_m3s": 3.07
+  },
+  {
+   "today": [
+    6.8,
+    42.61
+   ],
+   "turned": [
+    0.01,
+    41.5
+   ],
+   "km2": 99.9,
+   "relief_m": 283,
+   "valley_floor_km2": 49.9,
+   "woodland_share": 0.5,
+   "flooded_possible_km2": 28.0,
+   "rain_mm": 1674,
+   "temperature_c": 26.6,
+   "outflow_m3s": 1.25
+  },
+  {
+   "today": [
+    6.85,
+    -13.77
+   ],
+   "turned": [
+    1.74,
+    -14.43
+   ],
+   "km2": 99.9,
+   "relief_m": 140,
+   "valley_floor_km2": 46.3,
+   "woodland_share": 0.54,
+   "flooded_possible_km2": 28.0,
+   "rain_mm": 1797,
+   "temperature_c": 26.0,
+   "outflow_m3s": 1.72
+  },
+  {
+   "today": [
+    6.94,
+    42.93
+   ],
+   "turned": [
+    0.17,
+    41.82
+   ],
+   "km2": 99.8,
+   "relief_m": 314,
+   "valley_floor_km2": 53.5,
+   "woodland_share": 0.43,
+   "flooded_possible_km2": 28.0,
+   "rain_mm": 1686,
+   "temperature_c": 26.7,
+   "outflow_m3s": 1.28
+  },
+  {
+   "today": [
+    7.0,
+    9.09
+   ],
+   "turned": [
+    0.45,
+    8.24
+   ],
+   "km2": 99.8,
+   "relief_m": 190,
+   "valley_floor_km2": 46.3,
+   "woodland_share": 0.54,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 1682,
+   "temperature_c": 25.4,
+   "outflow_m3s": 1.57
+  },
+  {
+   "today": [
+    16.66,
+    -35.34
+   ],
+   "turned": [
+    13.57,
+    -34.66
+   ],
+   "km2": 99.8,
+   "relief_m": 76,
+   "valley_floor_km2": 34.4,
+   "woodland_share": 0.65,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 1908,
+   "temperature_c": 26.1,
+   "outflow_m3s": 2.8
+  },
+  {
+   "today": [
+    7.2,
+    19.37
+   ],
+   "turned": [
+    0.32,
+    18.44
+   ],
+   "km2": 99.8,
+   "relief_m": 465,
+   "valley_floor_km2": 42.8,
+   "woodland_share": 0.57,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 1778,
+   "temperature_c": 27.2,
+   "outflow_m3s": 1.72
+  },
+  {
+   "today": [
+    7.23,
+    17.33
+   ],
+   "turned": [
+    0.4,
+    16.42
+   ],
+   "km2": 99.8,
+   "relief_m": 618,
+   "valley_floor_km2": 64.1,
+   "woodland_share": 0.36,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 2245,
+   "temperature_c": 25.3,
+   "outflow_m3s": 2.92
+  },
+  {
+   "today": [
+    16.73,
+    -32.04
+   ],
+   "turned": [
+    13.29,
+    -31.43
+   ],
+   "km2": 99.8,
+   "relief_m": 890,
+   "valley_floor_km2": 41.3,
+   "woodland_share": 0.31,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 2049,
+   "temperature_c": 26.1,
+   "outflow_m3s": 3.17
+  },
+  {
+   "today": [
+    7.36,
+    36.07
+   ],
+   "turned": [
+    0.44,
+    35.0
+   ],
+   "km2": 99.7,
+   "relief_m": 82,
+   "valley_floor_km2": 49.9,
+   "woodland_share": 0.5,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 1682,
+   "temperature_c": 25.8,
+   "outflow_m3s": 1.23
+  },
+  {
+   "today": [
+    7.39,
+    43.87
+   ],
+   "turned": [
+    0.64,
+    42.73
+   ],
+   "km2": 99.7,
+   "relief_m": 793,
+   "valley_floor_km2": 49.9,
+   "woodland_share": 0.36,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 1721,
+   "temperature_c": 26.8,
+   "outflow_m3s": 1.38
+  },
+  {
+   "today": [
+    -26.41,
+    -111.42
+   ],
+   "turned": [
+    -20.94,
+    -114.33
+   ],
+   "km2": 99.7,
+   "relief_m": 825,
+   "valley_floor_km2": 45.0,
+   "woodland_share": 0.45,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 2044,
+   "temperature_c": 21.3,
+   "outflow_m3s": 2.91
+  },
+  {
+   "today": [
+    7.54,
+    -153.31
+   ],
+   "turned": [
+    14.5,
+    -154.39
+   ],
+   "km2": 99.7,
+   "relief_m": 588,
+   "valley_floor_km2": 35.6,
+   "woodland_share": 0.57,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 2072,
+   "temperature_c": 24.3,
+   "outflow_m3s": 3.85
+  },
+  {
+   "today": [
+    -7.87,
+    73.27
+   ],
+   "turned": [
+    -12.85,
+    73.16
+   ],
+   "km2": 99.6,
+   "relief_m": 768,
+   "valley_floor_km2": 42.7,
+   "woodland_share": 0.36,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 1928,
+   "temperature_c": 26.3,
+   "outflow_m3s": 1.66
+  },
+  {
+   "today": [
+    16.98,
+    -34.01
+   ],
+   "turned": [
+    13.74,
+    -33.32
+   ],
+   "km2": 99.6,
+   "relief_m": 170,
+   "valley_floor_km2": 55.0,
+   "woodland_share": 0.45,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 2008,
+   "temperature_c": 26.1,
+   "outflow_m3s": 3.19
+  },
+  {
+   "today": [
+    8.06,
+    42.32
+   ],
+   "turned": [
+    1.26,
+    41.18
+   ],
+   "km2": 99.6,
+   "relief_m": 727,
+   "valley_floor_km2": 32.0,
+   "woodland_share": 0.5,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 1755,
+   "temperature_c": 26.1,
+   "outflow_m3s": 1.41
+  },
+  {
+   "today": [
+    -8.1,
+    72.51
+   ],
+   "turned": [
+    -13.14,
+    72.4
+   ],
+   "km2": 99.6,
+   "relief_m": 688,
+   "valley_floor_km2": 39.1,
+   "woodland_share": 0.36,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 1807,
+   "temperature_c": 26.4,
+   "outflow_m3s": 1.57
+  },
+  {
+   "today": [
+    8.17,
+    39.51
+   ],
+   "turned": [
+    1.3,
+    38.39
+   ],
+   "km2": 99.6,
+   "relief_m": 128,
+   "valley_floor_km2": 46.2,
+   "woodland_share": 0.54,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 1752,
+   "temperature_c": 25.3,
+   "outflow_m3s": 1.33
+  },
+  {
+   "today": [
+    8.25,
+    73.94
+   ],
+   "turned": [
+    3.27,
+    72.44
+   ],
+   "km2": 99.5,
+   "relief_m": 990,
+   "valley_floor_km2": 28.4,
+   "woodland_share": 0.36,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 2025,
+   "temperature_c": 26.8,
+   "outflow_m3s": 2.17
+  },
+  {
+   "today": [
+    8.31,
+    15.54
+   ],
+   "turned": [
+    1.53,
+    14.67
+   ],
+   "km2": 99.5,
+   "relief_m": 967,
+   "valley_floor_km2": 67.5,
+   "woodland_share": 0.32,
+   "flooded_possible_km2": 27.9,
+   "rain_mm": 2269,
+   "temperature_c": 24.9,
+   "outflow_m3s": 2.9
+  }
+ ],
+ "first_map": {
+  "record": "research/studies/atlas_round/results/satoyama_candidates.json",
+  "sha256": "4ccf5c67ba71a99fca136f0fcda3b2b634ba7bd5e07a8bb39960746ba632f8e4",
+  "valleys": {
+   "count": 549265,
+   "km2": 19273404,
+   "share_of_the_land": 0.823
+  },
+  "land_km2": 23419765,
+  "candidates": 50573,
+  "candidates_km2": 1569456,
+  "share_of_a_fifth_of_the_land": 0.335,
+  "flooded_possible_km2": 204352,
+  "methane_at_the_possible_area_tg_yr": [
+   0.89,
+   1.51
+  ],
+  "satoumi": {
+   "sea_km2": 2410253,
+   "shallower_than_2_m_km2": 496,
+   "shallower_than_5_m_km2": 1304,
+   "shallower_than_10_m_km2": 2609,
+   "shallower_than_20_m_km2": 5394,
+   "shore_km": 37827,
+   "shallower_than_10_m_km2_by_turned_latitude": {
+    "0-15": 70,
+    "15-30": 701,
+    "30-45": 414,
+    "45-60": 445,
+    "60-75": 636,
+    "75-90": 344
+   }
+  },
+  "bands": {
+   "0-15": {
+    "candidates_km2": 952993,
+    "share_of_the_hybrid_fifth": 0.946
+   },
+   "15-30": {
+    "candidates_km2": 501690,
+    "share_of_the_hybrid_fifth": 0.579
+   },
+   "30-45": {
+    "candidates_km2": 108127,
+    "share_of_the_hybrid_fifth": 0.104
+   },
+   "45-60": {
+    "candidates_km2": 6647,
+    "share_of_the_hybrid_fifth": 0.008
+   },
+   "60-75": {
+    "candidates_km2": 0,
+    "share_of_the_hybrid_fifth": 0.0
+   },
+   "75-90": {
+    "candidates_km2": 0,
+    "share_of_the_hybrid_fifth": 0.0
+   }
+  }
+ },
+ "seconds": 23
+}
