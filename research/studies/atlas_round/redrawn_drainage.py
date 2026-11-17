@@ -371,37 +371,38 @@ def single_cuts(geo, state, rotation, upper=UPPER, count=WAYS_A_SEA, deepest=WAY
     return out
 
 
-def least_cut_routes(geo, state, levels, in_sea, source, rotation, grid=CUT_GRID_M, precision=CUT_PRECISION_M):
-    """From one full sea's water, the gravity route to each other sea whose deepest cut is the shallowest. A channel
-    carries the water at its level; where it enters a catchment whose hollow spills lower, the water falls into that
-    hollow and runs on at the hollow's level, and where it crosses a pass above its level the pass is cut down to it.
-    The shallowest deepest cut to each sea is found by bisection on the cut allowed, each trial a search that keeps the
-    water as high as it can (which only ever helps later passes). Returns, for each sea, the deepest cut, the cuts
-    deeper than CUT_COUNTED_M with their places, the seas passed on the way and the route's length through its
-    passes; None where no cut within the grid reaches it."""
-    label, sinks, (u, v, w, cu, cv) = geo['graph']
-    names, h, lat, level0 = state['names'], geo['h'], geo['lat'], geo['level0']
-    cols = h.shape[1]
-    n = sinks.size
-    src = np.concatenate([u, v]).astype(np.int64)
-    dst = np.concatenate([v, u]).astype(np.int64)
-    wt = np.concatenate([w, w]).astype(float)
-    c_from = np.concatenate([cu, cv]).astype(np.int64)
-    c_to = np.concatenate([cv, cu]).astype(np.int64)
-    order = np.argsort(src, kind='stable')
-    src, dst, wt, c_from, c_to = (x[order] for x in (src, dst, wt, c_from, c_to))
-    start = np.searchsorted(src, np.arange(n + 1)).tolist()
-    dst_l, wt_l, lev_l = dst.tolist(), wt.tolist(), levels.tolist()
-    i_s = names.index(source)
-    starts = np.flatnonzero(in_sea == i_s).tolist()
-    level_s = float(levels[starts[0]])
-    targets = {k: np.flatnonzero(in_sea == i).tolist() for i, k in enumerate(names) if k != source}
+class CutSearch:
+    """Gravity routes from one full sea's water over the catchments' passes. A channel carries the water at its level;
+    where it enters a catchment whose hollow spills lower, the water falls into that hollow and runs on at the hollow's
+    level, and where it crosses a pass above its level the pass is cut down to it. `levels` holds each catchment's water
+    level in the design state and `in_sea` the sea over its pit."""
 
-    def spread(allowed):
-        best, prev = [-math.inf] * n, [-1] * n
-        for x in starts:
-            best[x] = level_s
-        heap = [(-level_s, x) for x in starts]
+    def __init__(self, geo, levels, in_sea, names, source):
+        label, sinks, (u, v, w, cu, cv) = geo['graph']
+        self.n = n = sinks.size
+        src = np.concatenate([u, v]).astype(np.int64)
+        dst = np.concatenate([v, u]).astype(np.int64)
+        wt = np.concatenate([w, w]).astype(float)
+        c_from = np.concatenate([cu, cv]).astype(np.int64)
+        c_to = np.concatenate([cv, cu]).astype(np.int64)
+        order = np.argsort(src, kind='stable')
+        self.src, self.dst, self.wt, self.c_from, self.c_to = (x[order] for x in (src, dst, wt, c_from, c_to))
+        self.start = np.searchsorted(self.src, np.arange(n + 1)).tolist()
+        self.dst_l, self.wt_l, self.lev_l = self.dst.tolist(), self.wt.tolist(), np.asarray(levels).tolist()
+        self.names, self.in_sea, self.source = names, in_sea, source
+        self.i_s = names.index(source)
+        self.starts = np.flatnonzero(in_sea == self.i_s).tolist()
+        self.level_s = float(levels[self.starts[0]])
+        self.targets = {k: np.flatnonzero(in_sea == i).tolist() for i, k in enumerate(names) if k != source}
+
+    def spread(self, allowed):
+        """The highest water each catchment can be reached at with no cut deeper than `allowed`, and the edge it came
+        by: a search that keeps the water as high as it can, which only ever helps later passes."""
+        start, dst_l, wt_l, lev_l = self.start, self.dst_l, self.wt_l, self.lev_l
+        best, prev = [-math.inf] * self.n, [-1] * self.n
+        for x in self.starts:
+            best[x] = self.level_s
+        heap = [(-self.level_s, x) for x in self.starts]
         heapq.heapify(heap)
         while heap:
             neg, x = heapq.heappop(heap)
@@ -419,24 +420,43 @@ def least_cut_routes(geo, state, levels, in_sea, source, rotation, grid=CUT_GRID
                     heapq.heappush(heap, (-ly, y))
         return best, prev
 
-    reached = lambda best, k: any(best[x] > -math.inf for x in targets[k])
-    bracket, below = {}, -1e-3
-    for allowed in grid:
-        best, _ = spread(allowed)
-        for k in targets:
-            if k not in bracket and reached(best, k):
-                bracket[k] = (below, allowed)
-        below = allowed
-        if len(bracket) == len(targets):
-            break
-    def cleanest(allowed, k, cap=LABELS_CAP):
-        """Among routes whose cuts all lie within `allowed`, one whose cuts add up to the least: a search on the cuts'
-        sum whose labels carry the water's level, a catchment keeping each label no other there beats on both."""
-        store = [(x, 0.0, level_s, -1, -1) for x in starts]          # node, cuts so far, water level, label before, edge
-        labels = {x: [(0.0, level_s, i)] for i, x in enumerate(starts)}
-        heap = [(0.0, -level_s, i) for i in range(len(starts))]
+    def reached(self, best, k):
+        return any(best[x] > -math.inf for x in self.targets[k])
+
+    def shallowest(self, grid=CUT_GRID_M, precision=CUT_PRECISION_M, only=None):
+        """For each sea (or each of `only`), the deepest cut allowed that first reaches it, by a grid of trials and
+        bisection to within `precision`; seas the grid does not reach are left out."""
+        wanted = list(self.targets) if only is None else list(only)
+        bracket, below = {}, -1e-3
+        for allowed in grid:
+            best, _ = self.spread(allowed)
+            for k in wanted:
+                if k not in bracket and self.reached(best, k):
+                    bracket[k] = (below, allowed)
+            below = allowed
+            if len(bracket) == len(wanted):
+                break
+        out = {}
+        for k, (lo, hi) in bracket.items():
+            while hi - lo > precision:
+                mid = 0.5 * (lo + hi)
+                if self.reached(self.spread(mid)[0], k):
+                    hi = mid
+                else:
+                    lo = mid
+            out[k] = hi
+        return out
+
+    def cleanest(self, allowed, k, cap=LABELS_CAP):
+        """Among routes whose cuts all lie within `allowed`, one whose cuts add up to the least, as (edge, water level
+        before the edge) pairs: a search on the cuts' sum whose labels carry the water's level, a catchment keeping
+        each label no other there beats on both. None if the search grows beyond `cap` labels."""
+        start, dst_l, wt_l, lev_l = self.start, self.dst_l, self.wt_l, self.lev_l
+        store = [(x, 0.0, self.level_s, -1, -1) for x in self.starts]     # node, cuts so far, water level, label before, edge
+        labels = {x: [(0.0, self.level_s, i)] for i, x in enumerate(self.starts)}
+        heap = [(0.0, -self.level_s, i) for i in range(len(self.starts))]
         heapq.heapify(heap)
-        dead, goal = set(), set(targets[k])
+        dead, goal = set(), set(self.targets[k])
         while heap:
             total, _, i = heapq.heappop(heap)
             if i in dead:
@@ -473,23 +493,32 @@ def least_cut_routes(geo, state, levels, in_sea, source, rotation, grid=CUT_GRID
                     return None
         return None
 
-    out = {k: None for k in targets}
-    for k, (lo, hi) in bracket.items():
-        while hi - lo > precision:
-            mid = 0.5 * (lo + hi)
-            if reached(spread(mid)[0], k):
-                hi = mid
-            else:
-                lo = mid
-        chain = cleanest(hi, k)
-        tidy = chain is not None
-        if not tidy:                                         # the search grew too large: the highest-water route
-            best, prev = spread(hi)
-            x, edges_back = max(targets[k], key=lambda x: best[x]), []
-            while prev[x] >= 0 and in_sea[x] != i_s:
-                edges_back.append(prev[x])
-                x = int(src[prev[x]])
-            chain = [(e, best[int(src[e])]) for e in edges_back[::-1]]
+    def route(self, k, allowed):
+        """The route to sea k within `allowed`: the least-sum one, or where that search grows too large the
+        highest-water one; returns the chain and whether its cuts add up to the least."""
+        chain = self.cleanest(allowed, k)
+        if chain is not None:
+            return chain, True
+        best, prev = self.spread(allowed)
+        x, edges_back = max(self.targets[k], key=lambda x: best[x]), []
+        while prev[x] >= 0 and self.in_sea[x] != self.i_s:
+            edges_back.append(prev[x])
+            x = int(self.src[prev[x]])
+        return [(e, best[int(self.src[e])]) for e in edges_back[::-1]], False
+
+
+def least_cut_routes(geo, state, levels, in_sea, source, rotation, grid=CUT_GRID_M, precision=CUT_PRECISION_M):
+    """From one full sea's water, the gravity route to each other sea whose deepest cut is the shallowest (CutSearch),
+    and among those the one whose cuts add up to the least. Returns, for each sea, the deepest cut, the cuts deeper
+    than CUT_COUNTED_M with their places, the seas passed on the way and the route's length through its passes; None
+    where no cut within the grid reaches it."""
+    names, h, lat, level0 = state['names'], geo['h'], geo['lat'], geo['level0']
+    cols = h.shape[1]
+    search = CutSearch(geo, levels, in_sea, names, source)
+    wt_l, src, dst, c_from, c_to = search.wt_l, search.src, search.dst, search.c_from, search.c_to
+    out = {k: None for k in search.targets}
+    for k, allowed in search.shallowest(grid, precision).items():
+        chain, tidy = search.route(k, allowed)
         depth = [max(0.0, wt_l[e] - lev) for e, lev in chain]
         cuts = [dict(depth_m=round(d, 1), pass_above_the_common_level_m=round(wt_l[e] - level0, 1),
                      water_above_the_common_level_m=round(lev - level0, 1),

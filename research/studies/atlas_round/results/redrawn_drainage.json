@@ -2,7 +2,7 @@
  "schema": "terluna.research.atlas-round-redrawn-drainage/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/redrawn_drainage.py": "b877c0120015190c250b46839c6b44612c22bc782bb15ce348dbd3ff6ed26f41",
+   "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
    "research/studies/atlas_round/redrawn_surface.py": "c028e0fb131fa677436c5ef62974f2e39491f124d883b0dc4486bf5a2fd9f99f",
    "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
    "research/studies/drainage_network/routing.py": "52ede9125248151b2e8d09bce7ef3e2a9eb742cb391654e0208aa7ef2e96b922",
@@ -46439,5 +46439,5 @@
   "path": "/media/projectspace/terluna-research/atlas-round/redrawn_drainage/design_routing.npz",
   "sha256": "f2c6732c066e281c883714271dc94d4df02d22205564aa7f0b6c3bdb337a2b6f"
  },
- "seconds": 254
+ "seconds": 353
 }

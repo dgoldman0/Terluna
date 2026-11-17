@@ -3,12 +3,12 @@
  "producer": {
   "files": {
    "research/studies/atlas_round/satoyama_candidates.py": "6ca937b28ad654f1fcf9b268c4ba9b650da1da4beb12d45d091a949c870d9876",
-   "research/studies/atlas_round/redrawn_drainage.py": "b877c0120015190c250b46839c6b44612c22bc782bb15ce348dbd3ff6ed26f41",
+   "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
    "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5"
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/redrawn_drainage.json": "40e7e7c30dd1d6ef3c90acb45305000e37ea667ee69a8307fb40a49c81053c2f",
+  "research/studies/atlas_round/results/redrawn_drainage.json": "e77aa22523c10cec5be27688e65b815efae15d95c0fb635f14884bf3318493f5",
   "climate/results/gcm/turned_surface_8d71fd350ca4c6cd.json": "e1957b8f36f1b04ba9b673c6a97b0d4bfb83bc54cf93a837e1ac3e1783bbbe58"
  },
  "ignored_inputs": {
@@ -627,5 +627,5 @@
    "outflow_m3s": 3.08
   }
  ],
- "seconds": 18
+ "seconds": 24
 }
