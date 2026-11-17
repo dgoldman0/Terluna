@@ -331,6 +331,40 @@ def test_the_saved_product_is_current():
     assert len(saved['u_policy_search']) == len(run.SEARCH_YIELDS) * len(run.SEARCH_FUNDERS_IN_U)
 
 
+def test_a_case_can_move_one_group_of_the_stack_while_the_rest_keep_theirs():
+    """Every quantity and arrival belongs to exactly one group; a moved group follows its own case and every other
+    quantity and arrival the base case; an unknown group or case is refused."""
+    t = tech.roadmap()
+    grouped = [name for names in tech.GROUPS.values() for name in names]
+    assert sorted(grouped) == sorted(set(t['quantities']) | set(t['arrivals']))
+    for group, names in tech.GROUPS.items():
+        case = 'central|%s=slow' % group
+        for name in t['quantities']:
+            expected = 'slow' if name in names else 'central'
+            assert tech.value(name, case, 2120) == tech.value(name, expected, 2120)
+        for name in t['arrivals']:
+            assert tech.arrival(name, case) == tech.arrival(name, 'slow' if name in names else 'central')
+    assert tech.base('central|power=fast') == 'central' and tech.case_for('fusion', 'central|power=fast') == 'fast'
+    with pytest.raises(ValueError):
+        tech.moves('central|warp=fast')
+    with pytest.raises(ValueError):
+        tech.moves('central|power=quick')
+
+
+def test_computing_and_visits_options_replace_only_the_scenarios_values():
+    """The scenario's own computing at the opening and price response of visits leave a case as it was; a larger
+    contract sells more computing and a stronger price response changes what visits earn."""
+    base = economy.Run('central', 'central', 'constant_growth').simulate()
+    s = sales.scenarios()['scenarios']['central']
+    same = economy.Run('central', 'central', 'constant_growth', computing_W_2049=s['computing']['capacity_W_2049']['value'],
+                       visits_price_elasticity=s['visits']['price_elasticity']['value']).simulate()
+    assert [r['net'] for r in same] == [r['net'] for r in base]
+    more = economy.Run('central', 'central', 'constant_growth', computing_W_2049=2 * s['computing']['capacity_W_2049']['value']).simulate()
+    assert more[20]['lines']['computing']['receipts'] == pytest.approx(2 * base[20]['lines']['computing']['receipts'])
+    other = economy.Run('central', 'central', 'constant_growth', visits_price_elasticity=2.0).simulate()
+    assert other[20]['lines']['visits']['receipts'] != pytest.approx(base[20]['lines']['visits']['receipts'])
+
+
 def test_the_funders_rate_of_return_is_recovered_from_known_flows():
     """A loan repaid with a tenth more a year later returns 10%; flows that lose money give a rate below zero; flows whose
     present value never changes sign give none."""
@@ -350,3 +384,4 @@ def test_the_scoping_product_is_current():
     product = 'research/studies/vacuum_economy_periods/results/periods.json'
     assert saved['dependencies'] == dict(run.dependencies(), **{product: scoping.digest(HERE / 'results/periods.json')})
     assert [s['input'] for s in saved['sensitivities']] and len(saved['sensitivities']) == len(scoping.SENSITIVITIES)
+    assert sorted(g['group'] for g in saved['technology_groups']) == sorted(tech.GROUPS)

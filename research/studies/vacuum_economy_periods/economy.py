@@ -57,7 +57,7 @@ def defaults():
                 u_reserve_share=None, u_funders_paid_in_U=None, u_metal_share=None, u_trade_effect=None, u_spending_share=None,
                 u_investor_premium=None, u_credit_line=v(inputs()['u']['reserve']['backstop_after_repayment']) == 'credit_line',
                 u_funders_staking=None, u_holders_months=None, u_holders_staking=None, u_bond_term=None,
-                dollars_held_share=v(m['dollars_held_share_of_output']))
+                dollars_held_share=v(m['dollars_held_share_of_output']), computing_W_2049=None, visits_price_elasticity=None)
 
 
 class Run:
@@ -215,7 +215,8 @@ class Run:
             depot_cost = depot_cost_last if depot_cost_last is not None else P.line_kg['water'] * 2
             stay_day = (need_city['firm_W'] / 1000.0 * P.supply_here['USD_kW_year'] + need_city['earth_supplies_kg_year'] * (P.supplies + P.landed)) / 365.25
             keep = ledger.metals_wanted() if ledger is not None else 0.0
-            lines_year = sales.year(self.scenario, self.tcase, y, P, depot_cost, stay_day, feed_last, keep) if y >= OPENING else {}
+            lines_year = (sales.year(self.scenario, self.tcase, y, P, depot_cost, stay_day, feed_last, keep, opt['computing_W_2049'],
+                                     opt['visits_price_elasticity']) if y >= OPENING else {})
             served = {k: x for k, x in lines_year.items() if x['served']}
             trade = money.trade_multiple(upol, uh, y)
             for x in served.values():

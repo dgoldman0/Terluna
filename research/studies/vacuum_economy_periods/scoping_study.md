@@ -1,25 +1,25 @@
 ---
 title: "The enclosed lunar buildout, 2041–2341"
 subtitle: "A scoping study of its economy and money"
-author: "Prepared by the study team for the venture's prospective partners"
+author: "Prepared by the study team for the buildout's prospective partners"
 date: "November 2026"
 abstract: |
   A scoping study is the first of the studies an undertaking of this size passes through before its partners commit to build. It compares the ways the undertaking could be carried out, picks a preferred case, states how far its figures can be trusted, and recommends whether to proceed to the next stage.
 
   This one examines the economy and the money of the enclosed lunar buildout: the settlements, industry, power and supply of water that would be built on the airless Moon from 2041. Its figures come from a model that steps year by year from 2041 to 2341 on stated paths of technology and stated inputs. They hold on those inputs and show what the inputs imply. Values taken from published sources are kept apart throughout from values the study team constructed, and every amount is in constant dollars of 2041.
 
-  The venture's name is a working title. Nothing in this study is an offer of any security or contract.
+  Nothing in this study is an offer of any security or contract.
 ---
 
 # Summary
 
 ## The answer
 
-On the study's central assumptions the enclosed buildout pays for itself and goes on growing past its plan. With central paths of technology, central demand from Earth and U as its money, the settlements reach the planned 6.47 million residents in 2143, about a century ahead of the programme's own schedule, and carry 20.6 million by 2341 (Figure 1). The funding partners put in 1.78 trillion dollars, 1.21 trillion of it before the settlements open in 2049. They are repaid by 2081 and earn a real return of 3.9% a year, above the 3% the programme requires. The venture's money passes all five of the study's tests of a safe and healthy policy in every year, and the venture never borrows from its funders after repaying them.
+On the study's central assumptions the enclosed buildout pays for itself and goes on growing past its plan. With central paths of technology, central demand from Earth and U as its money, the settlements reach the planned 6.47 million residents in 2143, about a century ahead of the programme's own schedule, and carry 20.6 million by 2341 (Figure 1). The funding partners put in 1.78 trillion dollars, 1.21 trillion of it before the settlements open in 2049. They are repaid by 2081 and earn a real return of 3.9% a year, above the 3% the programme requires. U passes all five of the study's tests of a safe and healthy policy in every year, and the settlements never borrow from their funders after repaying them.
 
-Kept in dollars alone, the same venture carries 16.1 million residents by 2341 and returns 4.5% a year to its funders, who are repaid by 2079. U lets the settlements grow by about a quarter more, at a cost of six-tenths of a point in the funders' return. Two paths do not pay. The programme's own pace of 3.3% a year, carried on past 2241, falls into deficit for good from about 2261. And with technology held at its 2041 state, the settlements cannot grow past their first 12,500 residents under any demand, and the funders never earn their 3%.
+Kept in dollars alone, the same settlements carry 16.1 million residents by 2341 and return 4.5% a year to their funders, who are repaid by 2079. U lets the settlements grow by about a quarter more, at a cost of six-tenths of a point in the funders' return. Two paths do not pay. The programme's own pace of 3.3% a year, carried on past 2241, falls into deficit for good from about 2261. And with technology held at its 2041 state, the settlements cannot grow past their first 12,500 residents under any demand, and the funders never earn their 3%.
 
-![Residents of the enclosed settlements under the base case (U, residents a result), the same venture in dollars alone, and the programme's ramp of 3.3% a year carried on past the plan; central demand and technology. Logarithmic scale.](figures/residents.pdf){width=100%}
+![Residents of the enclosed settlements under the base case (U, residents a result), the same settlements in dollars alone, and the programme's ramp of 3.3% a year carried on past the plan; central demand and technology. Logarithmic scale.](figures/residents.pdf){width=100%}
 
 ## The figures partners will ask for
 
@@ -39,16 +39,16 @@ Kept in dollars alone, the same venture carries 16.1 million residents by 2341 a
 
 ## What decides the outcome
 
-Four things decide whether the venture pays and how large it grows. In order of their effect on the residents it carries by 2341 (Figure 7), they are:
+Four things decide whether the settlements pay and how large they grow. In order of their effect on the residents they carry by 2341 (Figure 7), they are:
 
-- **Earth's demand** for what the settlements sell. With low demand they cannot pay for growth at all.
-- **The pace of technology.** With slow technology they carry 4.4 million.
+- **Earth's demand** for what the settlements sell, above all the computing contracted at the opening. With low demand they cannot pay for growth at all. With 1 GW of computing contracted in place of 5 they carry 6.5 million; with 20 GW, 48.6 million.
+- **The pace of technology.** With slow technology they carry 4.4 million. Within it, launch, food and life support, and local industry decide most (Section 9).
 - **The share of their pay that residents spend on Earth.** At a fifth of their pay, the settlements carry 11.5 million; at a twentieth, 26.0 million.
-- **The arrangement of the venture's money.** The preferred policy of U carries 4.4 million more residents than dollars alone.
+- **The arrangement of the settlements' money.** The preferred policy of U carries 4.4 million more residents than dollars alone.
 
 ## What the study does not yet establish
 
-- **Computing contracted at the opening.** Computing sold to Earth is the largest line of sale, two-fifths of receipts in 2241. It rests on 5 GW contracted at the opening, a figure no source supports.
+- **Computing contracted at the opening.** Computing sold to Earth is the largest line of sale, two-fifths of receipts in 2241. It rests on 5 GW contracted at the opening, a figure no source supports, and it is the input that moves the result most: between 1 and 20 GW, the settlements carry from 6.5 to 48.6 million residents by 2341.
 - **The residents' and holders' behaviour.** The share of their pay residents spend on Earth and the months of spending that holders keep in U are the study's own figures.
 - **The institutions of U.** They are described by what they must do and tested against five tests, but none has been designed. The model sets U's inflation by policy; it does not compute it.
 - **Trade within the zone beyond Earth.** The settlements trade with no one beyond Earth. Earth's purchases do not grow with the settlements' people, and most residents' work goes to one another, unseen by the account. Trade within the zone has been designed as the next layer but not built.
@@ -65,11 +65,11 @@ The study team recommends that the partners proceed to a pre-feasibility study. 
 
 It should also take up engineered designs for the first settlements, the power supply and the tugs (Section 11).
 
-# The venture
+# The buildout
 
 ## What it builds
 
-The venture builds enclosed settlements on the Moon and the economy that keeps them:
+The buildout creates enclosed settlements on the Moon and the economy that keeps them:
 
 - towns in craters and cities in lava tubes;
 - the industry that makes most of their structures and machines from lunar material;
@@ -91,39 +91,39 @@ They buy from Earth what they cannot yet make: the electronics of their machines
 
 ## Phases
 
-The study follows the venture through three phases:
+The study follows the buildout through three phases:
 
 1. **The founding build,** from 2041 to 2048, paid for wholly by the funding partners.
 2. **Growth to the plan.** The programme sets 6.47 million residents as its planned size, reached on its own schedule in 2241.
-3. **Growth past the plan,** wherever the venture's money and resources allow, to the end of the study's horizon in 2341.
+3. **Growth past the plan,** wherever the settlements' money and resources allow, to the end of the study's horizon in 2341.
 
-The study treats the plan as a milestone on the way, and the number of residents the venture can carry by 2341 is one of its results. A later and much larger undertaking, opening the Moon itself to life in the open, lies beyond this study. The enclosed buildout prepares for it.
+The study treats the plan as a milestone on the way, and the number of residents the settlements can carry by 2341 is one of its results.
 
 ## Who takes part
 
-A venture of this size is a joint undertaking, and the study speaks of its participants by what they do:
+An undertaking of this size needs many partners, and the study treats the buildout as a joint venture among them. It names the participants by what they do:
 
-- **funding partners** provide the founding capital and cover the venture's shortfalls with Earth until it is repaid. Afterwards they receive what it earns above its needs.
+- **funding partners** provide the founding capital and cover the settlements' shortfalls with Earth until their funding is repaid. Afterwards they receive what the settlements earn above their needs.
 - **industrial and operating partners** supply equipment and services from Earth and keep a share of the sales they help make.
-- **research partners** host work in the settlements, one of the venture's lines of sale.
+- **research partners** host work in the settlements, one of the settlements' lines of sale.
 - **customers,** on Earth and in space, buy computing, visits, entertainment, propellant, material and metals.
-- **holders of U,** the venture's money, on Earth: customers and sellers with working balances, investors in its bonds, and people who keep U to spend in the zone.
+- **holders of U,** the settlements' money, on Earth: customers and sellers with working balances, investors in its bonds, and people who keep U to spend in the zone.
 - **the residents** do the work that runs the settlements, and their pay buys both the zone's goods and Earth's.
 
 # How the study was made
 
 ## The model
 
-The study's model builds the venture year by year from 2041 to 2341. Each year it:
+The study's model builds the settlements year by year from 2041 to 2341. Each year it:
 
 - houses the newcomers in towns or cities built from their design studies with that year's engineering, and renews what wears out;
 - supplies firm power from the option that costs least at each kind of site;
-- makes in the venture's own factories what they can make, and buys the rest from Earth;
+- makes in the settlements' own factories what they can make, and buys the rest from Earth;
 - fetches water from the near-Earth sources, nearest first, with the tug that costs least;
 - sells what pays at the prices its costs and Earth's demand allow;
 - counts the work it needs against the residents who work.
 
-Capital wears out at a share of each stock a year, as economic accounts commonly treat it, and is replaced with the engineering of the year of replacement. The venture's money is counted as its account with Earth, and under a policy of U as the ledger of U beside it (Section 6).
+Capital wears out at a share of each stock a year, as economic accounts commonly treat it, and is replaced with the engineering of the year of replacement. The settlements' money is counted as their account with Earth, and under a policy of U as the ledger of U beside it (Section 6).
 
 ## Cases
 
@@ -144,11 +144,11 @@ Each case combines a path of technology, a scenario of Earth's demand and a sche
 
 ## Growth as a result
 
-The study's main measure asks how fast the venture can grow while it still pays. The settlements grow as fast as they can on four conditions:
+The study's main measure asks how fast the settlements can grow while they still pay. They grow as fast as they can on four conditions:
 
 - the funding partners still earn the programme's 3% a year in real terms, so the present value of their flows at 3% to 2341 is not negative;
-- once they are repaid, no ten years together leave the venture short with Earth;
-- the venture's own work is staffed and its sources' water lasts;
+- once the funders are repaid, no ten years together leave the settlements short with Earth;
+- the settlements' own work is staffed and their sources' water lasts;
 - under U, five tests of a safe and healthy policy (Section 6.5) hold in every year.
 
 Growth is solved as two steady rates: the highest to the plan, then the highest past it. Each is the highest rate below which every slower rate the study checks also passes, since a single year's lump of reinvestment can otherwise make passing and failing alternate.
@@ -163,7 +163,7 @@ The study's inputs come from three kinds of source:
 
 Every input carries its basis, and Appendix B lists the main ones with their standing. Where the evidence ran out, the study states its own value and range and shows in Section 9 how far each moves the result. Examples are the share of residents' pay spent on Earth, the computing contracted at the opening, and the months of spending held in U.
 
-The figures carry a scoping study's accuracy, and less. They are the consequences of stated assumptions about technology two centuries ahead and markets that do not yet exist. Differences of up to about a million residents between nearby cases lie within the noise that lumps of reinvestment leave in the year-by-year tests. The model is a runnable, tested calculation, whose checks are listed in Appendix A. It has not been validated against any built settlement, because none exists.
+The figures carry a scoping study's accuracy, and less. They are the consequences of stated assumptions about technology two centuries ahead and markets that do not yet exist. Differences of up to about a million residents between nearby cases lie within the noise that lumps of reinvestment leave in the year-by-year tests. One lump can move the result by several million: the tug fleet changes from chemical to electric propulsion all at once in the model, and when that change falls in a different decade the growth past the plan changes with it (Section 9). The model is a runnable, tested calculation, whose checks are listed in Appendix A. It has not been validated against any built settlement, because none exists.
 
 # Technology and engineering
 
@@ -224,7 +224,7 @@ The settlements pay Earth 0.16 trillion dollars a year in 2091, 0.86 trillion in
 - **In the decades of fastest building,** equipment.
 - **Late in the period,** the residents' own purchases from Earth, a tenth of their pay. They draw level with the partners' shares in the 2190s and are the largest single payment from 2215: 41% of the total in 2241 and 51% in 2341.
 
-The residents' pay follows Earth's income per person, so their purchases grow faster than the venture's sales. They are what limits its growth late in the horizon.
+The residents' pay follows Earth's income per person, so their purchases grow faster than the settlements' sales. They are what limits the settlements' growth late in the horizon.
 
 ![What the settlements pay Earth and receive from Earth's customers, by kind, in the base case.](figures/flows.pdf){width=100%}
 
@@ -234,9 +234,9 @@ The residents' pay follows Earth's income per person, so their purchases grow fa
 
 ## The account with Earth
 
-The venture's money is counted first as its account with Earth: what Earth's customers pay it against what it pays Earth. Until the account is repaid, the funding partners cover its shortfalls. Afterwards they receive what it earns above its needs, a quarter of it in U under the preferred policy.
+The settlements' money is counted first as their account with Earth: what Earth's customers pay them against what they pay Earth. Until the account is repaid, the funding partners cover its shortfalls. Afterwards they receive what the settlements earn above their needs, a quarter of it in U under the preferred policy.
 
-## U, the venture's money
+## U, the settlements' money
 
 U is the money of the zone beyond Earth, which this study treats as a single economy. Under the preferred policy, the share of trade with Earth settled in U rises from a quarter at the opening to 95% ten years later.
 
@@ -327,14 +327,14 @@ Against these, U's reserve earns Earth's 1% while the funders require 3%.
 
 ## The programme's pace carried on
 
-On the programme's own ramp, 3.3% a year from 2049 to the plan in 2241, the venture:
+On the programme's own ramp, 3.3% a year from 2049 to the plan in 2241, the settlements:
 
-- needs 1.64 trillion dollars of funding up to 2241;
-- is repaid in 2076;
-- returns 5.2% a year to its funders to 2241;
-- receives 0.78 trillion dollars more from Earth than it pays Earth in 2241.
+- need 1.64 trillion dollars of funding up to 2241;
+- repay it in 2076;
+- return 5.2% a year to their funders to 2241;
+- receive 0.78 trillion dollars more from Earth than they pay Earth in 2241.
 
-Carried on at the same rate past 2241, it fills the eventual crater sites with 167 million residents by 2341. But its account is in deficit for good from about 2261. By 2341 U stands at its floor, and the funders would have lent some 720 trillion dollars. The programme's pace is affordable to the plan and not much beyond it.
+Carried on at the same rate past 2241, the ramp fills the eventual crater sites with 167 million residents by 2341. But the settlements' account is in deficit for good from about 2261. By 2341 U stands at its floor, and the funders would have lent some 720 trillion dollars. The programme's pace is affordable to the plan and not much beyond it.
 
 ## Across demand and technology
 
@@ -351,7 +351,7 @@ Carried on at the same rate past 2241, it fills the eventual crater sites with 1
 
 With technology held at its 2041 state, no growth passes under any demand, in U or in dollars.
 
-U carries more residents than dollars wherever demand and technology let the venture grow at all (Figure 6), with two exceptions:
+U carries more residents than dollars wherever demand and technology let the settlements grow at all (Figure 6), with two exceptions:
 
 - **Slow technology on central demand.** There the funders barely earn 3% in either currency, and U's reserve, held through the build at 1%, costs them that margin.
 - **Fast technology on high demand.** The study's own size checks show the high scenario's demand cannot be met: its depot sales and launches outgrow any supply the study can support. With fast technology, its sales at the depot draw the water open to mining down so fast that the settlements can hardly grow in either money.
@@ -378,6 +378,7 @@ Figure 7 moves one input at a time from the base case and shows the change in re
 
 ![Change in residents carried by 2341 when one input is moved from the base case, largest first.](figures/sensitivities.pdf){width=100%}
 
+- **Computing contracted at the opening.** 1 GW in place of 5 takes 14.0 million residents away; 20 GW adds 28.1 million. Computing is the largest line of sale and grows with Earth's output from what is contracted at the opening, so the contract sets its size for three centuries.
 - **Earth's demand.** Low demand stops growth altogether; high demand adds 4.0 million.
 - **Technology.** Slow technology takes 16.1 million residents away; fast adds 9.6 million.
 - **Residents' spending on Earth.** A fifth of their pay instead of a tenth takes 9.0 million away; a twentieth adds 5.4 million.
@@ -390,6 +391,7 @@ The remaining inputs each move the result by 3.3 million or less:
 - Earth's purchases falling a tenth when paid in U;
 - the holders' spending of their U in the zone;
 - the floor on U's rate, which moves the result by about 1.6 million either way between par and 50%;
+- the response of visits to their price, which within its published range of 0.5 to 2 moves the result by about 1.5 million, lower at either end;
 - the months of spending held in U;
 - the bonds' term;
 - the investors' premium;
@@ -397,11 +399,33 @@ The remaining inputs each move the result by 3.3 million or less:
 
 The funders' credit line changes nothing in the base case, which never draws on it. Without it, the conservative policy falls from 16.8 to 12.1 million.
 
+**Technology group by group.** The technology stack falls into six groups that develop apart from one another. Moving each alone to its slow and its fast path, the rest central, shows which of them the settlements depend on:
+
+| Group moved alone (slow · fast) | Residents by 2341 | Plan reached | Funders' present value at 3%, trillions |
+|:------------------|:------------|:--------|--------:|
+| Launch from Earth and the Moon | none beyond 12,500 · 15.9 million | never · 2135 | −0.24 · 1.58 |
+| Food and life support | 7.7 · 20.2 million | 2144 · 2142 | 0.96 · 0.82 |
+| Local industry, equipment and output per job | 13.8 · 16.6 million | 2175 · 2129 | 0.80 · 0.75 |
+| Power | 19.3 · 19.7 million | 2149 · 2141 | 0.36 · 0.91 |
+| Tugs and water from the sources | 19.8 · 19.6 million | 2142 · 2141 | 0.67 · 0.71 |
+| Computation per watt (not read by the model) | 20.6 · 20.6 million | 2143 · 2143 | 0.78 · 0.78 |
+| The base case, for comparison | 20.6 million | 2143 | 0.78 |
+
+The slow side shows what the settlements cannot do without:
+
+- **Launch.** Slow launch alone stops all growth, and the funders do not earn their 3%.
+- **Food and life support.** Slow food and life support still reaches the plan on time. But each resident then costs the account more, so growth past the plan nearly stops.
+- **Local industry.** Slow local industry delays the plan by 32 years.
+- **Power.** Slow power barely changes the residents, but more than halves the funders' present value.
+- **Computation per watt** changes nothing, because the model sells computing by the watt of capacity, at the price of the same capacity on Earth, and does not read this path.
+
+The fast side needs care. Launch or local industry made fast alone brings the plan sooner, in 2135 or 2129, yet carries fewer residents by 2341. Reaching the plan sooner draws the nearer water sooner. The tug fleet then changes from chemical to electric propulsion around 2200–2208, against 2215 in the base case. The model makes that change all at once: equipment worth about 1.2 trillion dollars with launch fast, and 3.1 trillion with industry fast, is bought in one or two years. It falls in a decade the account cannot carry, and that decade limits growth past the plan. A fleet replaced as its tugs wear out would spread the purchase over many years.
+
 ## Risks
 
-- **Demand at the opening.** Computing contracted at the opening (5 GW in 2049) is the study's own figure. Visits rest on an elasticity of demand constructed between two published values. Together these two lines are nearly three-quarters of the receipts in 2241.
+- **Demand at the opening.** Computing contracted at the opening (5 GW in 2049) is the study's own figure, and the input that moves the result most. Visits rest on an elasticity of demand constructed between two published values. Together these two lines are nearly three-quarters of the receipts in 2241.
 - **The residents' purchases from Earth.** They are the largest payment from 2215 and the input to which late growth is most sensitive. The share is the study's own figure, tried at 5%, 10% and 20%.
-- **The pace of technology.** The venture pays only if its engineering improves on roughly the central paths. With technology held at 2041, no growth passes.
+- **The pace of technology.** The settlements pay only if their engineering improves on roughly the central paths. With technology held at 2041, no growth passes. Launch prices, which the wider space industry sets, are a gate on their own.
 - **Lumps of reinvestment.** A change of power supply or a surge of building can put a single year deep into deficit. The reserve, the floor on U and the funders' credit line carry such years; without the credit line, the conservative policy carries more than a quarter fewer residents.
 - **The institutions of U.** These have not been designed:
   - the issuer and its decision rights;
@@ -438,9 +462,9 @@ On the 5th percentile, growth as a result is solved under that reading of the wa
 
 # Recommendation and next stage
 
-The study team recommends that the partners proceed to a pre-feasibility study of the enclosed buildout. On its central assumptions the venture repays its funding, returns more than the programme requires, and grows well past its plan. But the inputs that decide those results rest unevenly on evidence. The next stage should narrow the uncertainties in the order they matter:
+The study team recommends that the partners proceed to a pre-feasibility study of the enclosed buildout. On the study's central assumptions the settlements repay their funding, return more than the programme requires, and grow well past the plan. But the inputs that decide those results rest unevenly on evidence. The next stage should narrow the uncertainties in the order they matter:
 
-1. **Markets at the opening.** Gather evidence for the computing and visits the venture would sell in its first decades, with prospective customers' terms, and for Earth's demand projections behind them.
+1. **Markets at the opening.** Gather evidence for the computing and visits the settlements would sell in their first decades, with prospective customers' terms, and for Earth's demand projections behind them.
 2. **The residents' economy.** Establish what share of their income residents of a settlement of this kind spend on goods and services from Earth. Build the next layer of the model, trade within the zone beyond Earth, with operators in space and other settlements as partners, and with knowledge work sold to Earth at a distance. The design is complete, and a bounded lookup has gathered its first evidence.
 3. **The institutions of U.** Design the issuer, the reserve and its custody, the clearing of payments and the rules that bind them, together with a price level that responds to issuance. Test the holders' behaviour against evidence: the months of spending held, and the spending of income in the zone.
 4. **Engineering.** Engineer designs to a pre-feasibility standard for the founding settlements, firm power (fission, then beamed stations), the seed and growth of local manufacture, and the tugs and sources.
@@ -470,7 +494,7 @@ The study team recommends that the partners proceed to a pre-feasibility study o
 
 Each rate is found by halving and then checked against twenty slower rates. If any of those fails, the search is repeated below it.
 
-**Checks.** The study's 31 tests confirm that:
+**Checks.** The study's 33 tests confirm that:
 
 - the paths of technology hold their stated values;
 - with 2041's engineering, the founding system returns its design's quantities;
@@ -485,7 +509,9 @@ Each rate is found by halving and then checked against twenty slower rates. If a
 - the five tests catch unsafe policies;
 - the solver's rates have every slower checked rate passing;
 - the saved results, and this study's measures drawn from them, are current with the model and its inputs;
-- the funders' rate of return is recovered from flows whose rate is known.
+- the funders' rate of return is recovered from flows whose rate is known;
+- a case can move one group of the technology stack to another path while every other quantity keeps its own;
+- the options for computing contracted at the opening and for the visits' response to price leave a case unchanged at the scenario's own values and move their own lines otherwise.
 
 # Appendix B. Main inputs {-}
 
@@ -533,15 +559,15 @@ Each lookup records every value with the level at which it was read, from the pa
 
 # Appendix D. Terms {-}
 
-**Account with Earth.** What Earth's customers pay the venture, against what the venture pays Earth, each year.
+**Account with Earth.** What Earth's customers pay the settlements, against what the settlements pay Earth, each year.
 
 **Credit line.** The funding partners' undertaking, once repaid, to lend the reserve what it lacks of its minimum when U is at its floor.
 
 **Floor.** The lowest rate U may fall to, 75% of par in the preferred policy.
 
-**Funding partners.** The participants who provide the founding capital and cover the venture's shortfalls with Earth until it is repaid.
+**Funding partners.** The participants who provide the founding capital and cover the settlements' shortfalls with Earth until their funding is repaid.
 
-**Growth as a result.** The fastest steady growth at which the venture still pays its funders 3% a year and its tests hold.
+**Growth as a result.** The fastest steady growth at which the settlements still pay their funders 3% a year and the tests hold.
 
 **Holders for use.** People on Earth who keep U to spend in the zone.
 

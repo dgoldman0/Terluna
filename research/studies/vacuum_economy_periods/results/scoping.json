@@ -2,16 +2,16 @@
  "schema": "terluna.research.vacuum-economy-periods.scoping/1",
  "producer": {
   "path": "research/studies/vacuum_economy_periods/scoping.py",
-  "sha256": "43d05682bdb90163b7c76f435378e8d24f14e0bf50275e2e55679a44937a39d4"
+  "sha256": "28af30f6695020e73a06be4fad6998b823498d33850a729fb29c37526400e128"
  },
  "dependencies": {
   "research/studies/vacuum_economy_periods/run.py": "46458516cbaa06590e0a25a7029acb256621b378133864b03c54660f5ce69074",
-  "research/studies/vacuum_economy_periods/economy.py": "75b8ebf125ef51aebf6f4da0d8438ac5a75e46a937a043aa3151ff3caa5548dc",
+  "research/studies/vacuum_economy_periods/economy.py": "9dd0f9bac563cadc09050499a27b337e23ba3acf1bf53702c712b73efb5896be",
   "research/studies/vacuum_economy_periods/designs.py": "e44a89e1daee35146794f0fea3608abfd51b675d9a5f95be5ed16e9445896250",
   "research/studies/vacuum_economy_periods/engineering.py": "92adf5c5fbd544793937a4b11ff0d54bc9c630da7c95a7126c884c27960bc637",
   "research/studies/vacuum_economy_periods/money.py": "f13d820e7aa9b3414bb2e755b9710184c846f9242814b9be8df417be2ab5fb97",
-  "research/studies/vacuum_economy_periods/sales.py": "a0fe3d49346d3a6aa7ea8a83a6e75bf2aab5508dd60667209f29be0b132f9f7c",
-  "research/studies/vacuum_economy_periods/technology.py": "ccbde2150404f781ea6513c1051a01969f3d6c9986d6c14e2dce5f56d4ce3066",
+  "research/studies/vacuum_economy_periods/sales.py": "244e0069cec490f0af0e1b77f8e134dc5ea224bd0b0e5ea25465f4351c132065",
+  "research/studies/vacuum_economy_periods/technology.py": "38166ad467de3cfc1f9f0ae8b8fd5150280e6b9016aaedec34d406efb370255d",
   "research/studies/vacuum_economy_periods/period_technology.json": "a2f750f0ed4269f7ef990ec1d5fa090e241f44352eaa10f9a7758c930dcff38e",
   "research/studies/vacuum_economy_periods/period_inputs.json": "cf0b7990d28bbbfca4281c449b50be5c92ed0783589643a79835f1d8dadc750b",
   "research/studies/vacuum_crater_buildout/results/first_hundred.json": "7d9c3f01c130f5dc1fb9a74e31a72cac9920f5c6ba6e50cc8f97224924bd9086",
@@ -21,11 +21,11 @@
   "research/studies/vacuum_economy/demand.py": "58d644f2d305e3ffd9ea789611ca8ae57f2747c2d6695adf894385eafaff974e",
   "research/studies/vacuum_economy/programme.json": "99032ce5a6bd9661cdd4f48b3dc3fdf51299637439c672f26428f9642f2d3312",
   "research/studies/vacuum_economy/programme.py": "e5fde0000cf33b640c49bd902a3c75ae1ce22ca52984cc947ac3a91a0a01aa17",
-  "research/studies/vacuum_economy_periods/results/periods.json": "946b12850b7a5f216d19bcdb7d3dd1d317acf6828db3657d1d7760ec1570024e"
+  "research/studies/vacuum_economy_periods/results/periods.json": "e544470037fb95bdcccdfc9b350c6ac45e3c12b7cc039483948d552f7cfb1b2d"
  },
  "evidence": "Measures read from the period model and its saved product on the model's stated inputs; the internal rate of return is that of the funders' yearly flows, in constant dollars of 2041, so a real rate.",
  "units": "Residents; constant dollars of 2041; years of the calendar; gigawatts; rates as fractions a year.",
- "reading_rule": "paths holds the base case (central demand and technology, residents a result, the default policy of U), the same in dollars alone, and the programme's ramp under each, year by year from 2041 (index 0) to 2341. sensitivities moves one input at a time from the base case and gives the residents by 2341 and the change from the base case, largest first. grid gives residents as a result for each demand and technology, under the default policy of U (:U) and in dollars alone (:dollar).",
+ "reading_rule": "paths holds the base case (central demand and technology, residents a result, the default policy of U), the same in dollars alone, and the programme's ramp under each, year by year from 2041 (index 0) to 2341. sensitivities moves one input at a time from the base case and gives the residents by 2341 and the change from the base case, largest first. technology_groups moves each group of the technology stack alone to its slow and its fast path, the rest central, with the same measure, largest first, and beside it the year the plan is reached, the funding needed and the funders' present value and rate of return; a group moved fast alone brings the plan sooner and can bring the tug fleet's change of type into a decade the account cannot carry, so its residents by 2341 are read with the other measures. grid gives residents as a result for each demand and technology, under the default policy of U (:U) and in dollars alone (:dollar).",
  "paths": {
   "base": {
    "scenario": "central",
@@ -35334,6 +35334,27 @@
  },
  "sensitivities": [
   {
+   "input": "Computing contracted at the opening",
+   "ends": [
+    {
+     "setting": "1 GW",
+     "residents_2341": 6533278.881264846,
+     "change": -14033605.59526068,
+     "source": {
+      "computing_W_2049": 1000000000.0
+     }
+    },
+    {
+     "setting": "20 GW",
+     "residents_2341": 48612592.91526231,
+     "change": 28045708.438736785,
+     "source": {
+      "computing_W_2049": 20000000000.0
+     }
+    }
+   ]
+  },
+  {
    "input": "Earth's demand",
    "ends": [
     {
@@ -35478,6 +35499,27 @@
    ]
   },
   {
+   "input": "Visits' response to their price",
+   "ends": [
+    {
+     "setting": "0.5",
+     "residents_2341": 18995359.128177676,
+     "change": -1571525.3483478501,
+     "source": {
+      "visits_price_elasticity": 0.5
+     }
+    },
+    {
+     "setting": "2",
+     "residents_2341": 19235348.484388255,
+     "change": -1331535.992137272,
+     "source": {
+      "visits_price_elasticity": 2.0
+     }
+    }
+   ]
+  },
+  {
    "input": "Months of spending the holders for use keep in U",
    "ends": [
     {
@@ -35535,6 +35577,305 @@
      "residents_2341": 20566884.476525526,
      "change": 0.0,
      "source": "central:central:steady:U_liberal:no_backstop"
+    }
+   ]
+  }
+ ],
+ "technology_groups": [
+  {
+   "group": "launch",
+   "label": "Launch from Earth and the Moon",
+   "members": [
+    "launch_USD2026_kg",
+    "landed_multiple",
+    "mass_driver"
+   ],
+   "ends": [
+    {
+     "setting": "slow",
+     "residents_2341": 12500.0,
+     "change": -20554384.476525526,
+     "technology": "central|launch=slow",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.0,
+      "past_plan": 0.0,
+      "sustained": false
+     },
+     "plan_reached": null,
+     "repaid": 2108,
+     "funding_needed_USD2041": 5741118888828.009,
+     "NPV3_to_2341_USD2041": -242246019225.06546,
+     "funders_IRR_to_2341": 0.028902704494184195
+    },
+    {
+     "setting": "fast",
+     "residents_2341": 15941660.13277827,
+     "change": -4625224.343747256,
+     "technology": "central|launch=fast",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.0759521484375,
+      "past_plan": 0.004388358816504479,
+      "plan_year": 94,
+      "sustained": true
+     },
+     "plan_reached": 2135,
+     "repaid": 2073,
+     "funding_needed_USD2041": 1555620766953.293,
+     "NPV3_to_2341_USD2041": 1575435519950.7302,
+     "funders_IRR_to_2341": 0.0511630000373845
+    }
+   ]
+  },
+  {
+   "group": "food_and_life_support",
+   "label": "Food and life support",
+   "members": [
+    "led_umol_J",
+    "crop_kcal_per_mol",
+    "microbial_diet_share",
+    "microbial_efficiency",
+    "basic_kW_resident",
+    "water_recovery"
+   ],
+   "ends": [
+    {
+     "setting": "slow",
+     "residents_2341": 7722872.000575966,
+     "change": -12844012.47594956,
+     "technology": "central|food_and_life_support=slow",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.068316650390625,
+      "past_plan": 0.0009002763591706752,
+      "plan_year": 103,
+      "sustained": true
+     },
+     "plan_reached": 2144,
+     "repaid": 2082,
+     "funding_needed_USD2041": 1809907368434.1123,
+     "NPV3_to_2341_USD2041": 961625920715.7385,
+     "funders_IRR_to_2341": 0.03950711776513882
+    },
+    {
+     "setting": "fast",
+     "residents_2341": 20242571.449598018,
+     "change": -324313.0269275084,
+     "technology": "central|food_and_life_support=fast",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.069818115234375,
+      "past_plan": 0.005749511718749999,
+      "plan_year": 101,
+      "sustained": true
+     },
+     "plan_reached": 2142,
+     "repaid": 2081,
+     "funding_needed_USD2041": 1760506647096.0176,
+     "NPV3_to_2341_USD2041": 818513699677.3641,
+     "funders_IRR_to_2341": 0.03965457441705589
+    }
+   ]
+  },
+  {
+   "group": "industry",
+   "label": "Local industry, equipment and output per job",
+   "members": [
+    "metal_kWh_kg",
+    "equipment_import_share",
+    "output_per_job",
+    "equipment_price_multiple",
+    "equipment_life_multiple",
+    "industry_doubling_years",
+    "services_output_multiple",
+    "built_mass_multiple",
+    "chips_on_moon"
+   ],
+   "ends": [
+    {
+     "setting": "slow",
+     "residents_2341": 13805477.021254707,
+     "change": -6761407.455270819,
+     "technology": "central|industry=slow",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.051123046874999994,
+      "past_plan": 0.00457763671875,
+      "plan_year": 134,
+      "sustained": true
+     },
+     "plan_reached": 2175,
+     "repaid": 2084,
+     "funding_needed_USD2041": 1764273032817.0518,
+     "NPV3_to_2341_USD2041": 802399453349.6205,
+     "funders_IRR_to_2341": 0.03868520265080522
+    },
+    {
+     "setting": "fast",
+     "residents_2341": 16617005.383123828,
+     "change": -3949879.0934016984,
+     "technology": "central|industry=fast",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.08179321289062501,
+      "past_plan": 0.004460460506379604,
+      "plan_year": 88,
+      "sustained": true
+     },
+     "plan_reached": 2129,
+     "repaid": 2080,
+     "funding_needed_USD2041": 1925473300788.0647,
+     "NPV3_to_2341_USD2041": 748758594246.6351,
+     "funders_IRR_to_2341": 0.03872300485891633
+    }
+   ]
+  },
+  {
+   "group": "power",
+   "label": "Power",
+   "members": [
+    "array_W_kg",
+    "array_local_share",
+    "storage_Wh_kg",
+    "storage_round_trip",
+    "fission_kg_kWe",
+    "fission_life_years",
+    "fission_USD2024_kWe",
+    "beam_station_W_kg",
+    "fusion",
+    "polar_grid",
+    "equatorial_belt"
+   ],
+   "ends": [
+    {
+     "setting": "slow",
+     "residents_2341": 19310816.46682083,
+     "change": -1256068.0097046979,
+     "technology": "central|power=slow",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.06505737304687499,
+      "past_plan": 0.005712890625,
+      "plan_year": 108,
+      "sustained": true
+     },
+     "plan_reached": 2149,
+     "repaid": 2085,
+     "funding_needed_USD2041": 2087625746879.6152,
+     "NPV3_to_2341_USD2041": 357059457090.8888,
+     "funders_IRR_to_2341": 0.034239050317475095
+    },
+    {
+     "setting": "fast",
+     "residents_2341": 19702542.255933028,
+     "change": -864342.2205924988,
+     "technology": "central|power=fast",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.070330810546875,
+      "past_plan": 0.005584716796875,
+      "plan_year": 100,
+      "sustained": true
+     },
+     "plan_reached": 2141,
+     "repaid": 2079,
+     "funding_needed_USD2041": 1773357755586.8655,
+     "NPV3_to_2341_USD2041": 905813276840.889,
+     "funders_IRR_to_2341": 0.04062764063746649
+    }
+   ]
+  },
+  {
+   "group": "tugs_and_sources",
+   "label": "Tugs and water from the sources",
+   "members": [
+    "tug_life_years",
+    "water_extraction_kWh_kg",
+    "water_recovered_from_rock",
+    "nuclear_electric"
+   ],
+   "ends": [
+    {
+     "setting": "slow",
+     "residents_2341": 19807266.904226996,
+     "change": -759617.5722985305,
+     "technology": "central|tugs_and_sources=slow",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.07001953125,
+      "past_plan": 0.0056396484375,
+      "plan_year": 101,
+      "sustained": true
+     },
+     "plan_reached": 2142,
+     "repaid": 2082,
+     "funding_needed_USD2041": 1789862106982.3857,
+     "NPV3_to_2341_USD2041": 671705528551.9845,
+     "funders_IRR_to_2341": 0.03822049567040675
+    },
+    {
+     "setting": "fast",
+     "residents_2341": 19559556.70653696,
+     "change": -1007327.7699885666,
+     "technology": "central|tugs_and_sources=fast",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.070513916015625,
+      "past_plan": 0.005548095703125,
+      "plan_year": 100,
+      "sustained": true
+     },
+     "plan_reached": 2141,
+     "repaid": 2081,
+     "funding_needed_USD2041": 1783512478182.414,
+     "NPV3_to_2341_USD2041": 707311593087.7925,
+     "funders_IRR_to_2341": 0.03815035524930377
+    }
+   ]
+  },
+  {
+   "group": "computing",
+   "label": "Computation per watt",
+   "members": [
+    "computation_per_W_multiple"
+   ],
+   "ends": [
+    {
+     "setting": "slow",
+     "residents_2341": 20566884.476525526,
+     "change": 0.0,
+     "technology": "central|computing=slow",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.069158935546875,
+      "past_plan": 0.005859375,
+      "plan_year": 102,
+      "sustained": true
+     },
+     "plan_reached": 2143,
+     "repaid": 2081,
+     "funding_needed_USD2041": 1782279257566.787,
+     "NPV3_to_2341_USD2041": 779518811537.6637,
+     "funders_IRR_to_2341": 0.03913211839884989
+    },
+    {
+     "setting": "fast",
+     "residents_2341": 20566884.476525526,
+     "change": 0.0,
+     "technology": "central|computing=fast",
+     "growth_rates": {
+      "rule": "steady",
+      "to_plan": 0.069158935546875,
+      "past_plan": 0.005859375,
+      "plan_year": 102,
+      "sustained": true
+     },
+     "plan_reached": 2143,
+     "repaid": 2081,
+     "funding_needed_USD2041": 1782279257566.787,
+     "NPV3_to_2341_USD2041": 779518811537.6637,
+     "funders_IRR_to_2341": 0.03913211839884989
     }
    ]
   }

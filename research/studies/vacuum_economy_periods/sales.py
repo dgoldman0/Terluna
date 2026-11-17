@@ -38,11 +38,14 @@ def seller(cost, elasticity, ceiling):
     return ceiling
 
 
-def year(scenario, tcase, y, prices, depot_water_kg_cost, stay_cost_day, feed_kg, metals_keep_USD=0.0):
+def year(scenario, tcase, y, prices, depot_water_kg_cost, stay_cost_day, feed_kg, metals_keep_USD=0.0, computing_W_2049=None,
+         visits_price_elasticity=None):
     """The lines of one programme year. `prices` is the year's engineering.Prices; `depot_water_kg_cost` the cost of a
     kilogram of water at the depot; `stay_cost_day` what a visitor's day on the Moon costs beside the hotel's staff;
     `feed_kg` the feed mined at the sources in the year, which bounds the metals recovered; `metals_keep_USD` the value
-    of metals a reserve of U would keep from the refined output instead of selling it."""
+    of metals a reserve of U would keep from the refined output instead of selling it. `computing_W_2049` and
+    `visits_price_elasticity` replace the scenario's computing contracted at the opening and the visits' price response
+    where they are given, for cases that bracket those two unsourced inputs."""
     s = scenarios()
     sc, lines = s['scenarios'][scenario], s['lines']
     w = world(scenario)
@@ -74,7 +77,8 @@ def year(scenario, tcase, y, prices, depot_water_kg_cost, stay_cost_day, feed_kg
     # Computing at the price of the same service on Earth. Its hardware is bought from Earth until chips are made on
     # the Moon, then made locally; its power is the year's firm supply.
     co, cl = sc['computing'], inputs()['sales']
-    watts = demand.value(co['capacity_W_2049']) * w.output(date) / w.output(w.opening)
+    opening_W = demand.value(co['capacity_W_2049']) if computing_W_2049 is None else computing_W_2049
+    watts = opening_W * w.output(date) / w.output(w.opening)
     price = w.dollars(demand.value(co['price_USD2024_W_year']), 2024)
     hw_kg = watts * v(cl['computing_hardware_kg_W'])
     life = v(cl['computing_hardware_life_years'])
@@ -96,7 +100,7 @@ def year(scenario, tcase, y, prices, depot_water_kg_cost, stay_cost_day, feed_kg
     prop_cost = depot_water_kg_cost + p.line_kg['propellant']
     lift = p.lift()
     mat_cost = p.line_kg['metal'] + lift['propellant_kg'] * prop_cost + lift['kWh'] * p.kWh + lift['launcher_kg_per_kg_year'] * p.line_kg['manufactured'] * 0.1
-    bound = inputs()['sales']['depot_sales_cap_multiple'][tcase]
+    bound = inputs()['sales']['depot_sales_cap_multiple'][tech.base(tcase)]
     for line, mass, unit_cost in (('propellant', 1.0, prop_cost), ('materials', demand.value(lines['space']['material_per_propellant']), mat_cost)):
         price = seller(unit_cost, e, ceiling)
         base = demand.value(sp['propellant_kg_year_2049']) * mass * activity
@@ -133,12 +137,12 @@ def year(scenario, tcase, y, prices, depot_water_kg_cost, stay_cost_day, feed_kg
     passage = 2 * p.fare()
     stay = nights * (stay_cost_day + staff_per_bed * wage / (365.25 * occupancy))
     unit = passage + stay
-    ev = demand.value(vi['price_elasticity'])
+    ev = demand.value(vi['price_elasticity']) if visits_price_elasticity is None else visits_price_elasticity
     anchor_visit = w.dollars(vl['anchor']['price_USD2022'], 2022)
     keep = demand.value(vl['Earth_service_share_of_receipts'])
     price = unit / (1 - keep) * ev / (ev - 1) if ev > 1 else anchor_visit
     wanted = vl['anchor']['visitors_year'] * w.wealthy_buyers(date, demand.value(vi['income_elasticity'])) * (price / anchor_visit) ** -ev
-    cap = inputs()['sales']['visitor_cap_share'][tcase] * w.population(date)
+    cap = inputs()['sales']['visitor_cap_share'][tech.base(tcase)] * w.population(date)
     visitors = wanted / (1 + wanted / cap)
     beds = visitors * nights / (365.25 * occupancy)
     out['visits'] = dict(receipts=visitors * price, to_Earth=visitors * (passage + price * keep), jobs=beds * staff_per_bed, power_W=0.0,

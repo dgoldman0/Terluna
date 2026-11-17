@@ -1,14 +1,15 @@
-"""The figures of the vacuum economy's scoping study, and the study built as a PDF.
+"""The figures of the vacuum economy's scoping study and of the proposal for the fund before the build, and both built
+as PDFs.
 
 Reads the period model's scoping product (research/studies/vacuum_economy_periods/results/scoping.json) and draws its
-figures; then builds the study's text (research/studies/vacuum_economy_periods/scoping_study.md) with them into a PDF
-through pandoc and xelatex. Calculates nothing: every plotted value is read from the product and listed in the manifest
-with the source and renderer hashes.
+figures; then builds the study's text (scoping_study.md) and the fund proposal's (rd_fund.md), both in
+research/studies/vacuum_economy_periods/, with them into PDFs through pandoc and xelatex. Calculates nothing: every
+plotted value is read from the product and listed in the manifest with the source, renderer, header and text hashes.
 
 usage (repository root):
   python visualization/vacuum-economy-periods/report.py [--out DIR] [--figures-only]
 
-Writes DIR/figures/*.pdf, DIR/manifest.json and DIR/scoping_study.pdf; DIR defaults to the ignored
+Writes DIR/figures/*.pdf, DIR/manifest.json, DIR/scoping_study.pdf and DIR/rd_fund.pdf; DIR defaults to the ignored
 research/runs/vacuum_economy_periods/report/.
 """
 from __future__ import annotations
@@ -27,7 +28,7 @@ from matplotlib.ticker import FuncFormatter
 ROOT = Path(__file__).resolve().parents[2]
 STUDY = ROOT / 'research/studies/vacuum_economy_periods'
 SOURCE = STUDY / 'results/scoping.json'
-TEXT = STUDY / 'scoping_study.md'
+TEXTS = (STUDY / 'scoping_study.md', STUDY / 'rd_fund.md')
 HEADER = Path(__file__).resolve().parent / 'header.tex'
 OUT = ROOT / 'research/runs/vacuum_economy_periods/report'
 
@@ -136,31 +137,34 @@ def figures(p, out):
     save(fig, out, 'flows', drawn, dict(paid={k: [x / 1e12 for x in base['payments'][k][::10]] for k, _ in pay_labels},
                                         received={k: [r[i] for i in range(0, len(YEARS), 10)] for (k, _, _), r in zip(rec_groups, rs)}))
 
-    # 5. Sensitivities.
-    rows = p['sensitivities']
-    fig, ax = plt.subplots(figsize=(W, 0.32 * len(rows) + 0.7))
+    # 5. Sensitivities, as the change in residents by 2341.
     base_n = p['paths']['base']['measures']['residents_2341']
-    labels, values = [], {}
-    for i, row in enumerate(reversed(rows)):
-        ends = row['ends']
-        same_side = len(ends) == 2 and (ends[0]['change'] >= 0) == (ends[1]['change'] >= 0)
-        for j, e in enumerate(ends):
-            change = e['change'] / 1e6
-            color = S[0] if change >= 0 else S[7]
-            y, h = (i + (0.16 if j == 0 else -0.16), 0.28) if same_side else (i, 0.55)
-            ax.barh(y, change, height=h, color=color, edgecolor=SURFACE, linewidth=0.6)
-            ax.annotate(e['setting'], (change, y), xytext=(3 if change >= 0 else -3, 0), textcoords='offset points',
-                        ha='left' if change >= 0 else 'right', va='center', fontsize=7, color=INK2)
-            values['%s: %s' % (row['input'], e['setting'])] = change
-        labels.append(row['input'])
-    ax.set_yticks(range(len(rows)), labels, color=INK2)
-    ax.axvline(0, color=AXIS, lw=0.8)
-    ax.grid(axis='y', visible=False)
-    ax.set_xlabel('Change in residents by 2341 from the base case\'s %.1f million, millions' % (base_n / 1e6))
-    lo = min(min(values.values()), 0)
-    hi = max(max(values.values()), 0)
-    ax.set_xlim(lo - 3.5, hi + 3.5)
-    save(fig, out, 'sensitivities', drawn, values)
+
+    def tornado(rows, name_key, name):
+        fig, ax = plt.subplots(figsize=(W, 0.32 * len(rows) + 0.7))
+        labels, values = [], {}
+        for i, row in enumerate(reversed(rows)):
+            ends = row['ends']
+            same_side = len(ends) == 2 and (ends[0]['change'] >= 0) == (ends[1]['change'] >= 0)
+            for j, e in enumerate(ends):
+                change = e['change'] / 1e6
+                color = S[0] if change >= 0 else S[7]
+                y, h = (i + (0.16 if j == 0 else -0.16), 0.28) if same_side else (i, 0.55)
+                ax.barh(y, change, height=h, color=color, edgecolor=SURFACE, linewidth=0.6)
+                ax.annotate(e['setting'], (change, y), xytext=(3 if change >= 0 else -3, 0), textcoords='offset points',
+                            ha='left' if change >= 0 else 'right', va='center', fontsize=7, color=INK2)
+                values['%s: %s' % (row[name_key], e['setting'])] = change
+            labels.append(row[name_key])
+        ax.set_yticks(range(len(rows)), labels, color=INK2)
+        ax.axvline(0, color=AXIS, lw=0.8)
+        ax.grid(axis='y', visible=False)
+        ax.set_xlabel('Change in residents by 2341 from the base case\'s %.1f million, millions' % (base_n / 1e6))
+        lo = min(min(values.values()), 0)
+        hi = max(max(values.values()), 0)
+        ax.set_xlim(lo - 3.5, hi + 3.5)
+        save(fig, out, name, drawn, values)
+
+    tornado(p['sensitivities'], 'input', 'sensitivities')
 
     # 6. Residents by 2341 across demand and technology.
     fig, axes = plt.subplots(1, 3, figsize=(W, 2.4), sharey=True)
@@ -194,13 +198,35 @@ def figures(p, out):
     return drawn
 
 
-def build(out):
-    shutil.copy(TEXT, out / 'scoping_study.md')
-    cmd = ['pandoc', str(out / 'scoping_study.md'), '-o', str(out / 'scoping_study.pdf'), '--pdf-engine=xelatex', '-H', str(HEADER),
-           '--resource-path', str(out), '--number-sections', '--toc', '--toc-depth=2', '-V', 'papersize=a4', '-V', 'geometry:margin=24mm',
-           '-V', 'fontsize=10.5pt', '-V', 'linkcolor=[HTML]{184F95}', '-V', 'urlcolor=[HTML]{184F95}', '-V', 'toccolor=[HTML]{0B0B0B}']
+def front(text):
+    """The simple `key: "value"` lines of a document's front matter, which set its running head (runninghead), the
+    heading of its title-page note (abouttitle) and whether it has a page of contents (contents: false)."""
+    lines = text.read_text().split('\n')
+    end = lines.index('---', 1)
+    out = {}
+    for line in lines[1:end]:
+        if ':' in line and not line.startswith(' '):
+            key, value = line.split(':', 1)
+            out[key.strip()] = value.strip().strip('"')
+    return out
+
+
+def build(out, text):
+    """One document as a PDF: the scoping study, or the shorter proposal for the fund that precedes the build. Its own
+    running head and note heading are set in a small header file after the shared one, since pandoc's command-line
+    header replaces any header-includes a document carries."""
+    name = text.stem
+    shutil.copy(text, out / text.name)
+    meta = front(text)
+    own = out / ('%s_header.tex' % name)
+    own.write_text(''.join('\\def\\%s{%s}\n' % (key, meta[key]) for key in ('runninghead', 'abouttitle') if key in meta))
+    contents = ['--toc', '--toc-depth=2'] if meta.get('contents', 'true') != 'false' else []
+    cmd = ['pandoc', str(out / text.name), '-o', str(out / ('%s.pdf' % name)), '--pdf-engine=xelatex', '-H', str(HEADER), '-H', str(own),
+           '--resource-path', str(out), '--number-sections'] + contents + [
+           '-V', 'papersize=a4', '-V', 'geometry:margin=24mm', '-V', 'fontsize=10.5pt', '-V', 'linkcolor=[HTML]{184F95}',
+           '-V', 'urlcolor=[HTML]{184F95}', '-V', 'toccolor=[HTML]{0B0B0B}']
     subprocess.run(cmd, check=True, cwd=out)
-    return out / 'scoping_study.pdf'
+    return out / ('%s.pdf' % name)
 
 
 def main():
@@ -215,11 +241,13 @@ def main():
         raise ValueError('unexpected product %s' % p['schema'])
     style()
     drawn = figures(p, out)
+    texts = [t for t in TEXTS if t.exists()]
     manifest = dict(source=str(SOURCE.relative_to(ROOT)), source_sha256=digest(SOURCE), renderer_sha256=digest(__file__),
-                    text_sha256=digest(TEXT) if TEXT.exists() else None, figures=drawn)
+                    header_sha256=digest(HEADER), texts={str(t.relative_to(ROOT)): digest(t) for t in texts}, figures=drawn)
     (out / 'manifest.json').write_text(json.dumps(manifest, indent=1) + '\n')
     if not args.figures_only:
-        print(build(out))
+        for t in texts:
+            print(build(out, t))
     else:
         print(out / 'figures')
 

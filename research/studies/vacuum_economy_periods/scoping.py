@@ -8,14 +8,15 @@ usage (repository root):
 The base case is central demand and central technology with the residents a result, under the default policy of U
 (the liberal policy with U's rate floored at 75% of par and the funders' credit line behind the reserve). The
 sensitivities read the saved product (results/periods.json) where it holds the case and run the model where it does
-not; each moves one input, all else as in the base case.
+not; each moves one input, all else as in the base case. The technology groups move one group of the stack at a time
+to its slow and its fast path (technology.GROUPS), the rest central.
 """
 from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
 
-from . import economy, run
+from . import economy, run, technology
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -50,7 +51,14 @@ SENSITIVITIES = (
     ('Metals in the reserve', 'none', 'central:central:steady:U_liberal:metal_share_0', None, None),
     ("The funders' backstop", 'none', 'central:central:steady:U_liberal:no_backstop', None, None),
     ("Water set aside on the sources", 'none', 'central:central:steady:whole_pool', None, None),
+    ('Computing contracted at the opening', '1 GW', (('computing_W_2049', 1e9),), '20 GW', (('computing_W_2049', 2e10),)),
+    ("Visits' response to their price", '0.5', (('visits_price_elasticity', 0.5),), '2', (('visits_price_elasticity', 2.0),)),
 )
+
+# Each group of the technology stack moved alone to its slow and its fast path, the rest of the stack central.
+GROUP_LABELS = {'launch': 'Launch from Earth and the Moon', 'tugs_and_sources': 'Tugs and water from the sources', 'power': 'Power',
+                'industry': 'Local industry, equipment and output per job', 'food_and_life_support': 'Food and life support',
+                'computing': 'Computation per watt'}
 
 
 def irr(flows):
@@ -146,6 +154,19 @@ def product():
             ends.append(dict(setting=name, residents_2341=residents, change=residents - base, source=source))
         swings.append(dict(input=label, ends=ends))
     swings.sort(key=lambda s: -max(abs(e['change']) for e in s['ends']))
+    groups = []
+    for group in technology.GROUPS:
+        ends = []
+        for path in ('slow', 'fast'):
+            tcase = 'central|%s=%s' % (group, path)
+            rates, sched = run.solve('central', tcase, 'steady', ())
+            m = measures(economy.Run('central', tcase, schedule=sched).simulate())
+            ends.append(dict(setting=path, residents_2341=sched[run.HORIZON], change=sched[run.HORIZON] - base, technology=tcase,
+                             growth_rates=rates, plan_reached=m['plan_reached'], repaid=m['repaid'],
+                             funding_needed_USD2041=m['funding_needed_USD2041'], NPV3_to_2341_USD2041=m['NPV3_to_2341_USD2041'],
+                             funders_IRR_to_2341=m['funders_IRR_to_2341']))
+        groups.append(dict(group=group, label=GROUP_LABELS[group], members=list(technology.GROUPS[group]), ends=ends))
+    groups.sort(key=lambda s: -max(abs(e['change']) for e in s['ends']))
     grid = {}
     for policy in ('', ':dollar'):
         for scenario in run.SCENARIOS:
@@ -165,9 +186,14 @@ def product():
         reading_rule=('paths holds the base case (central demand and technology, residents a result, the default policy of U), the '
                       'same in dollars alone, and the programme\'s ramp under each, year by year from 2041 (index 0) to 2341. '
                       'sensitivities moves one input at a time from the base case and gives the residents by 2341 and the change '
-                      'from the base case, largest first. grid gives residents as a result for each demand and technology, under '
-                      'the default policy of U (:U) and in dollars alone (:dollar).'),
-        paths=paths, sensitivities=swings, grid=grid)
+                      'from the base case, largest first. technology_groups moves each group of the technology stack alone to '
+                      'its slow and its fast path, the rest central, with the same measure, largest first, and beside it the year '
+                      'the plan is reached, the funding needed and the funders\' present value and rate of return; a group moved '
+                      'fast alone brings the plan sooner and can bring the tug fleet\'s change of type into a decade the account '
+                      'cannot carry, so its residents by 2341 are read with the other measures. grid gives residents '
+                      'as a result for each demand and technology, under the default policy of U (:U) and in dollars alone '
+                      '(:dollar).'),
+        paths=paths, sensitivities=swings, technology_groups=groups, grid=grid)
 
 
 def main():
