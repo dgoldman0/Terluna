@@ -86,7 +86,7 @@ def test_no_tug_is_flown_past_its_practical_limit():
 @pytest.mark.parametrize('scenario,case,ramp', [('central', 'central', 'constant_growth'), ('low', 'static', 'front_loaded'),
                                                 ('high', 'fast', 'constant_growth')])
 def test_the_account_adds_up_and_the_bounds_hold(scenario, case, ramp):
-    rows = economy.Run(scenario, case, ramp).simulate()
+    rows = economy.Run(scenario, case, ramp, u_policy='dollar').simulate()
     total = 0.0
     bound = json.loads((HERE / 'period_inputs.json').read_text())['sales']['visitor_cap_share'][case]
     for r in rows:
@@ -108,13 +108,14 @@ def test_better_technology_needs_less_funding_for_the_plan():
 
 
 def test_residents_as_a_result_take_the_highest_rates_the_test_allows_to_the_plan_and_past_it():
-    rates, sched = run.solve('central', 'central', 'steady')
+    dollar = (('u_policy', 'dollar'),)
+    rates, sched = run.solve('central', 'central', 'steady', dollar)
     assert rates['sustained'] and rates['plan_year'] is not None and rates['past_plan'] > 0
     assert sched == run.steady_schedule(rates['to_plan'], rates['past_plan'])
-    assert run.sustained('central', 'central', sched, ())[0]
-    assert not run.sustained('central', 'central', run.steady_schedule(rates['to_plan'] + 0.002, 0.0), ())[0]
-    assert not run.sustained('central', 'central', run.steady_schedule(rates['to_plan'], rates['past_plan'] + 0.002), ())[0]
-    rows = economy.Run('central', 'central', schedule=sched).simulate()
+    assert run.sustained('central', 'central', sched, dollar)[0]
+    assert not run.sustained('central', 'central', run.steady_schedule(rates['to_plan'] + 0.002, 0.0), dollar)[0]
+    assert not run.sustained('central', 'central', run.steady_schedule(rates['to_plan'], rates['past_plan'] + 0.002), dollar)[0]
+    rows = economy.Run('central', 'central', schedule=sched, u_policy='dollar').simulate()
     s = economy.summary(rows)
     assert s['NPV_USD2041']['0.03'][str(run.HORIZON)] >= 0 and s['deficit_decades_after_repayment'] == 0
     assert rows[run.HORIZON]['residents'] > run.planned()
@@ -123,11 +124,11 @@ def test_residents_as_a_result_take_the_highest_rates_the_test_allows_to_the_pla
 def test_the_test_binds_year_by_year_where_the_present_value_alone_would_not():
     """Growth carried on at the programme's pace passes a test on the present value at 3%, since discounting shrinks
     its late deficits, and fails the test that once repaid the account pays its way decade by decade."""
-    rows = economy.Run('central', 'central', 'constant_growth').simulate()
+    rows = economy.Run('central', 'central', 'constant_growth', u_policy='dollar').simulate()
     s = economy.summary(rows)
     assert s['NPV_USD2041']['0.03'][str(run.HORIZON)] > 0
     assert s['deficit_decades_after_repayment'] > 0
-    assert not run.sustained('central', 'central', [rows[y]['residents'] for y in range(run.HORIZON + 1)], ())[0]
+    assert not run.sustained('central', 'central', [rows[y]['residents'] for y in range(run.HORIZON + 1)], (('u_policy', 'dollar'),))[0]
 
 
 def test_a_ramp_carries_on_past_the_plan_at_its_final_rate_until_the_sites_are_full():
@@ -198,8 +199,8 @@ def test_the_U_ledger_adds_up_and_holds_its_rules():
 
 def test_the_dollar_account_is_untouched_by_the_settings_of_U():
     """Without a policy of U the floor, the trade effect, the spending share and the credit line change nothing."""
-    a = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=120).simulate()
-    b = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=120, u_floor=0.5, u_trade_effect=-0.1,
+    a = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=120, u_policy='dollar').simulate()
+    b = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=120, u_policy='dollar', u_floor=0.5, u_trade_effect=-0.1,
                     u_spending_share=0.6, u_credit_line=True).simulate()
     assert [r['net'] for r in a] == [r['net'] for r in b]
     assert not any(k.startswith('u_') for k in a[50]) and 'zone_goods' not in a[50]['to_Earth']
@@ -266,12 +267,12 @@ def test_holders_for_use_keep_months_of_their_spending_in_U_and_stake_where_a_yi
 def test_the_dollar_account_pays_for_the_dollars_its_residents_hold():
     """Without U the residents and firms hold dollars in proportion to the zone's output, and what the account pays Earth
     for them adds up to that stock."""
-    rows = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=150).simulate()
+    rows = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=150, u_policy='dollar').simulate()
     share = json.loads((HERE / 'period_inputs.json').read_text())['money']['dollars_held_share_of_output']['value']
     r = rows[-1]
     output = r['workforce'] * r['wage'] + r['receipts'] - r['to_Earth']['lines']
     assert sum(x['to_Earth']['dollars_held'] for x in rows) == pytest.approx(share * output)
-    plain = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=150, dollars_held_share=0.0).simulate()
+    plain = economy.Run('central', 'central', 'constant_growth', past_plan='hold', last_year=150, u_policy='dollar', dollars_held_share=0.0).simulate()
     assert all('dollars_held' not in x['to_Earth'] for x in plain)
 
 def test_the_five_tests_catch_an_unsafe_policy():
@@ -328,3 +329,24 @@ def test_the_saved_product_is_current():
     assert names[:len(run.cases())] == [c[0] for c in run.cases()]
     assert names[len(run.cases()):] in ([], ['central:central:steady:U_most_liberal_safe'])
     assert len(saved['u_policy_search']) == len(run.SEARCH_YIELDS) * len(run.SEARCH_FUNDERS_IN_U)
+
+
+def test_the_funders_rate_of_return_is_recovered_from_known_flows():
+    """A loan repaid with a tenth more a year later returns 10%; flows that lose money give a rate below zero; flows whose
+    present value never changes sign give none."""
+    from research.studies.vacuum_economy_periods import scoping
+    assert scoping.irr([-100.0, 110.0]) == pytest.approx(0.10, abs=1e-9)
+    assert scoping.irr([-100.0, 0.0, 121.0]) == pytest.approx(0.10, abs=1e-9)
+    assert scoping.irr([-100.0, 95.0]) == pytest.approx(-0.05, abs=1e-9)
+    assert scoping.irr([100.0, 10.0]) is None
+
+
+def test_the_scoping_product_is_current():
+    """The scoping study's measures were drawn from the present model and its saved product."""
+    from research.studies.vacuum_economy_periods import scoping
+    saved = json.loads((HERE / 'results/scoping.json').read_text())
+    assert saved['schema'] == scoping.SCHEMA
+    assert saved['producer']['sha256'] == scoping.digest(HERE / 'scoping.py')
+    product = 'research/studies/vacuum_economy_periods/results/periods.json'
+    assert saved['dependencies'] == dict(run.dependencies(), **{product: scoping.digest(HERE / 'results/periods.json')})
+    assert [s['input'] for s in saved['sensitivities']] and len(saved['sensitivities']) == len(scoping.SENSITIVITIES)

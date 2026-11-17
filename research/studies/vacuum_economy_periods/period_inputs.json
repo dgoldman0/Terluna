@@ -509,13 +509,13 @@
  "u": {
   "basis": "U, the money of the zone beyond Earth, beside the account with Earth, as designed on 16 November 2026 and given an exchange rate on 17 November 2026: one U for the accounts (Terluna's later work splits it into several zones); the share of trade settled in U; Earth's customers' and sellers' working balances; Earth's investors holding U assets at a real yield; the share of their income spent in the zone, whose goods the economy charges to the lines' costs; any effect of paying in U on Earth's purchases; the funders' returns paid partly in U; U's rate in dollars, at par until the account with Earth is repaid and floating after it down to a floor; a partial reserve kept at its target by the funders during the build and rebuilt from surpluses after, held as a basket of Earth's currencies and metals; and the inflation U allows. Amounts in dollars are constant dollars of 2041 of purchasing power; amounts in U are U of constant purchasing power in the zone, each worth the year's rate in dollars. The holders' behaviour is checked against the lookup of 16 November 2026 (research drive, vacuum-economy/research/u_monetary_policy/values.md, with its source keys); the share of income spent in the zone and Earth's safe real rate remain the study's own",
   "policy": {
-   "value": "dollar",
+   "value": "liberal",
    "options": [
     "dollar",
     "conservative",
     "liberal"
    ],
-   "basis": "the account with Earth in dollars alone, as before, until the default is set; the U policies run as cases"
+   "basis": "the default since 17 November 2026: the liberal policy of U with its rate's floor at 75% of par and the funders' credit line behind the reserve once the account is repaid; the account with Earth in dollars alone and the conservative policy run as cases"
   },
   "policies": {
    "conservative": {

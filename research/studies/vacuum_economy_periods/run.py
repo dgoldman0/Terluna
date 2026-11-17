@@ -257,10 +257,15 @@ def cases():
     for key, opts in SENSITIVITIES.items():
         out.append(('central:central:constant_growth:%s' % key, 'central', 'central', 'constant_growth', tuple(sorted(opts.items()))))
     out.append(('central:central:steady:whole_pool', 'central', 'central', 'steady', (('water_set_aside', 0.0),)))
-    out.append(('central:central:steady:no_dollars_held', 'central', 'central', 'steady', (('dollars_held_share', 0.0),)))
-    # U beside the account with Earth: the two policies on the programme's ramp at the default floor on U's rate and with
-    # growth as a result at each floor, the liberal one under each technology and on low demand, and its least certain
-    # settings moved one at a time.
+    # The account with Earth in dollars alone, beside the default policy of U: every scenario and technology on the
+    # programme's ramp and with growth as a result, and the dollar account as the earlier versions kept it.
+    for scenario in SCENARIOS:
+        for tcase in technology.CASES:
+            for ramp in ('constant_growth', 'steady'):
+                out.append(('%s:%s:%s:dollar' % (scenario, tcase, ramp), scenario, tcase, ramp, (('u_policy', 'dollar'),)))
+    out.append(('central:central:steady:dollar:no_dollars_held', 'central', 'central', 'steady', (('dollars_held_share', 0.0), ('u_policy', 'dollar'))))
+    # The two policies of U on the programme's ramp at the default floor on U's rate and with growth as a result at each
+    # floor and without the funders' backstop, and the liberal policy's least certain settings moved one at a time.
     for policy in ('conservative', 'liberal'):
         out.append(('central:central:constant_growth:U_%s' % policy, 'central', 'central', 'constant_growth', (('u_policy', policy),)))
         for floor in FLOORS:
@@ -268,8 +273,6 @@ def cases():
                         tuple(sorted((('u_floor', floor), ('u_policy', policy))))))
         out.append(('central:central:steady:U_%s:no_backstop' % policy, 'central', 'central', 'steady',
                     tuple(sorted((('u_credit_line', False), ('u_policy', policy))))))
-    for scenario, tcase in (('central', 'slow'), ('central', 'fast'), ('low', 'central'), ('low', 'fast')):
-        out.append(('%s:%s:steady:U_liberal' % (scenario, tcase), scenario, tcase, 'steady', (('u_policy', 'liberal'),)))
     for key, value in (('u_trade_effect', -0.1), ('u_spending_share', 0.0), ('u_spending_share', 0.6), ('u_funders_paid_in_U', 0.0),
                        ('u_metal_share', 0.0), ('u_investor_premium', 0.01), ('u_holders_staking', 0.0), ('u_holders_months', 1),
                        ('u_holders_months', 6), ('u_funders_staking', 1 / 3), ('u_bond_term', 1)):
