@@ -2,7 +2,7 @@
  "schema": "terluna.research.atlas-round-globe-surface/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/globe_surface.py": "437f6c8252f91a0614e1893582dd9167b8bec788e820b20176fbbd369c55b0ed",
+   "research/studies/atlas_round/globe_surface.py": "5eb7298e85f4c6493c8ca8d899c6e8bdc432fa2446b0be81903ac23eb062bdcd",
    "research/studies/atlas_round/final_drainage.py": "9c4fdb233a58891ea22fd82cc570cada09897d2d27d343315a56656b51e5c285",
    "research/studies/atlas_round/near_side_neck.py": "5b3f82467b662bc2157cc70066050c57b8067785036d57565112ad380dd00009",
    "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
@@ -27,6 +27,7 @@
   "sea_share": 0.23979,
   "lake_share": 0.13568,
   "lakes": 29799,
+  "closed_lake_share": 0.00577,
   "lake_volume_km3": 4617089,
   "rivers_into_the_seas_m3s": 268824,
   "seas": {
@@ -132,7 +133,7 @@
  },
  "product": {
   "path": "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz",
-  "sha256": "0b23170569a50ea3af26da86988eab769c9774db0c838380da97b9b9bef777b2"
+  "sha256": "428769908668dec64819dded6dc1779263214904e50c8c6983b577f8de4a8bad"
  },
- "seconds": 320
+ "seconds": 353
 }

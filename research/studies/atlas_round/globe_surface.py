@@ -140,6 +140,10 @@ def build(log=print):
         body[cells] = b
     lake = r['lake'] & ~r['outlet'] & np.isnan(level)
     level[lake] = r['lake_level'][lake]
+    spills = np.zeros(h_flat.size, bool)
+    spills[lake] = ~r['closed'][r['label'][lake]]
+    for b in (5, 6, 7):                               # the upper seas spill over their rims; the lower seas are terminal
+        spills[body == b] = True
     wet = ~np.isnan(level)
     water_cell = np.flatnonzero(wet).astype(np.int32)
     q = r['discharge']
@@ -172,6 +176,7 @@ def build(log=print):
         common_level_above_the_dry_geoid_m=round(level0, 2),
         water_share=round(float(area[wet].sum()) / total, 5), sea_share=round(float(area[body > 0].sum()) / total, 5),
         lake_share=round(lake_area / total, 5), lakes=int(n_lakes),
+        closed_lake_share=round(float(area[(body == 0) & wet & ~spills].sum()) / total, 5),
         lake_volume_km3=round(float((depth[(body == 0) & wet] * area[(body == 0) & wet]).sum()) / 1e9),
         rivers_into_the_seas_m3s=round(float(q[into].sum())), seas=seas,
         neck_spill_m3s=round(steady['neck_flow_m3s']), neck_river=neck_river,
@@ -190,13 +195,15 @@ def build(log=print):
                 reading_rule=('Cells index rows from 90 N and columns from 0 E, 16 per degree, on today\'s Moon: cell = '
                               'row * 5760 + column. height_m is the ground above the dry Moon\'s geoid as redrawn at the '
                               'settled state; water_cell lists every cell under water, water_level_m its surface above '
-                              'the same geoid and water_body its body (an index into bodies, 0 a lake off the seas); '
+                              'the same geoid, water_body its body (an index into bodies, 0 a lake off the seas) and '
+                              'water_spills whether its water overflows (a lake that spills, an upper sea at its rim); '
                               'channel_discharge_m3s is the mean discharge through channel_cell, on dry ground.'),
                 evidence=('The redrawn floor at the settled state, the seas at the levels the design climate\'s closed '
                           'budget gives them with the works of 16 November and the fixed weirs, and the routing of that '
                           'budget\'s rain over it with the near-side sea parted. Not validated against any observation.'))
     np.savez_compressed(PRODUCT, metadata=json.dumps(meta), height_m=h.astype(np.float32), water_cell=water_cell,
                         water_level_m=level[water_cell].astype(np.float32), water_body=body[water_cell],
+                        water_spills=spills[water_cell],
                         channel_cell=keep, channel_discharge_m3s=q[keep].astype(np.float32))
     rel = lambda p: str(Path(p).relative_to(ROOT)) if str(p).startswith(str(ROOT)) else str(p)
     return dict(
