@@ -2,7 +2,7 @@
  "schema": "terluna.research.vacuum-economy-periods.scoping/1",
  "producer": {
   "path": "research/studies/vacuum_economy_periods/scoping.py",
-  "sha256": "28af30f6695020e73a06be4fad6998b823498d33850a729fb29c37526400e128"
+  "sha256": "5a14472cfc262afddb0e2896eb805b9d97bc6742a7dcb30e7e24318097b37d2b"
  },
  "dependencies": {
   "research/studies/vacuum_economy_periods/run.py": "46458516cbaa06590e0a25a7029acb256621b378133864b03c54660f5ce69074",
@@ -25,7 +25,7 @@
  },
  "evidence": "Measures read from the period model and its saved product on the model's stated inputs; the internal rate of return is that of the funders' yearly flows, in constant dollars of 2041, so a real rate.",
  "units": "Residents; constant dollars of 2041; years of the calendar; gigawatts; rates as fractions a year.",
- "reading_rule": "paths holds the base case (central demand and technology, residents a result, the default policy of U), the same in dollars alone, and the programme's ramp under each, year by year from 2041 (index 0) to 2341. sensitivities moves one input at a time from the base case and gives the residents by 2341 and the change from the base case, largest first. technology_groups moves each group of the technology stack alone to its slow and its fast path, the rest central, with the same measure, largest first, and beside it the year the plan is reached, the funding needed and the funders' present value and rate of return; a group moved fast alone brings the plan sooner and can bring the tug fleet's change of type into a decade the account cannot carry, so its residents by 2341 are read with the other measures. grid gives residents as a result for each demand and technology, under the default policy of U (:U) and in dollars alone (:dollar).",
+ "reading_rule": "paths holds the base case (central demand and technology, residents a result, the default policy of U), the same in dollars alone, and the programme's ramp under each, year by year from 2041 (index 0) to 2341. sensitivities moves one input at a time from the base case and gives the residents by 2341 and the change from the base case, largest first. technology_groups moves each group of the technology stack alone to its slow and its fast path, the rest central, with the same measure, largest first, and beside it the year the plan is reached, the funding needed and the funders' present value and rate of return. grid gives residents as a result for each demand and technology, under the default policy of U (:U) and in dollars alone (:dollar). returns_by_path gives the funders' measures for three growth paths on central demand and technology: the programme's ramp held at the plan, the base case's growth to the plan held there, and the base case growing past it.",
  "paths": {
   "base": {
    "scenario": "central",
@@ -35330,6 +35330,38 @@
      -872260253524269.0
     ]
    }
+  }
+ },
+ "returns_by_path": {
+  "programme_pace_held": {
+   "label": "the programme's ramp of 3.3% a year to the plan, then held at it",
+   "plan_reached": 2241,
+   "repaid": 2076,
+   "residents_2241": 6468289.238000949,
+   "residents_2341": 6468289.238000949,
+   "funding_needed_USD2041": 1634557428454.4775,
+   "funders_IRR_to_2241": 0.05251268796275699,
+   "funders_IRR_to_2341": 0.05252897825802927
+  },
+  "fastest_to_plan_held": {
+   "label": "the base case's growth to the plan, then held at it",
+   "plan_reached": 2142,
+   "repaid": 2081,
+   "residents_2241": 6468289.238000949,
+   "residents_2341": 6468289.238000949,
+   "funding_needed_USD2041": 1772780832220.7537,
+   "funders_IRR_to_2241": 0.03988939888961418,
+   "funders_IRR_to_2341": 0.04004932363219227
+  },
+  "base": {
+   "label": "the base case, growing past the plan",
+   "plan_reached": 2142,
+   "repaid": 2081,
+   "residents_2241": 11368864.334828304,
+   "residents_2341": 20096422.522651877,
+   "funding_needed_USD2041": 1772780832220.7537,
+   "funders_IRR_to_2241": 0.039271984539984595,
+   "funders_IRR_to_2341": 0.039279675055443275
   }
  },
  "sensitivities": [

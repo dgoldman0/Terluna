@@ -137,6 +137,18 @@ def product():
         rows, rates = run.case_rows(scenario, tcase, ramp, opts)
         paths[name] = dict(scenario=scenario, technology=tcase, ramp=ramp, options=dict(opts), growth_rates=rates,
                            measures=measures(rows), series=series(rows))
+    # What the funders earn depends on how fast the settlements grow, since growth is paid for from the account with
+    # Earth: the programme's ramp held at the plan, the base case's growth to the plan held there, and the base case.
+    to_plan = paths['base']['growth_rates']['to_plan']
+    returns = {}
+    for name, label, kw in (('programme_pace_held', "the programme's ramp of 3.3% a year to the plan, then held at it",
+                             dict(ramp='constant_growth', past_plan='hold')),
+                            ('fastest_to_plan_held', "the base case's growth to the plan, then held at it",
+                             dict(schedule=run.steady_schedule(to_plan, 0.0))),
+                            ('base', 'the base case, growing past the plan', None)):
+        m = paths['base']['measures'] if kw is None else measures(economy.Run('central', 'central', **kw).simulate())
+        returns[name] = dict(label=label, **{k: m[k] for k in ('plan_reached', 'repaid', 'residents_2241', 'residents_2341',
+                                                                'funding_needed_USD2041', 'funders_IRR_to_2241', 'funders_IRR_to_2341')})
     base = paths['base']['measures']['residents_2341']
     swings = []
     for label, low_name, low, high_name, high in SENSITIVITIES:
@@ -188,12 +200,12 @@ def product():
                       'sensitivities moves one input at a time from the base case and gives the residents by 2341 and the change '
                       'from the base case, largest first. technology_groups moves each group of the technology stack alone to '
                       'its slow and its fast path, the rest central, with the same measure, largest first, and beside it the year '
-                      'the plan is reached, the funding needed and the funders\' present value and rate of return; a group moved '
-                      'fast alone brings the plan sooner and can bring the tug fleet\'s change of type into a decade the account '
-                      'cannot carry, so its residents by 2341 are read with the other measures. grid gives residents '
-                      'as a result for each demand and technology, under the default policy of U (:U) and in dollars alone '
-                      '(:dollar).'),
-        paths=paths, sensitivities=swings, technology_groups=groups, grid=grid)
+                      'the plan is reached, the funding needed and the funders\' present value and rate of return. grid gives '
+                      'residents as a result for each demand and technology, under the default policy of U (:U) and in dollars '
+                      'alone (:dollar). returns_by_path gives the funders\' measures for three growth paths on central demand '
+                      'and technology: the programme\'s ramp held at the plan, the base case\'s growth to the plan held there, '
+                      'and the base case growing past it.'),
+        paths=paths, returns_by_path=returns, sensitivities=swings, technology_groups=groups, grid=grid)
 
 
 def main():

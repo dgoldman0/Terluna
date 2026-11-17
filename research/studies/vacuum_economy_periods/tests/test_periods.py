@@ -416,3 +416,20 @@ def test_the_scoping_product_is_current():
     assert saved['dependencies'] == dict(run.dependencies(), **{product: scoping.digest(HERE / 'results/periods.json')})
     assert [s['input'] for s in saved['sensitivities']] and len(saved['sensitivities']) == len(scoping.SENSITIVITIES)
     assert sorted(g['group'] for g in saved['technology_groups']) == sorted(tech.GROUPS)
+
+
+def test_the_returns_by_growth_path_come_from_their_paths():
+    """The funders' return for each growth path is that of the path's own flows: the base case's growth to the plan held
+    there returns what a fresh run of that schedule returns, the two held paths end at the plan, and the base case's entry
+    is the base case's own measure."""
+    from research.studies.vacuum_economy_periods import scoping
+    saved = json.loads((HERE / 'results/scoping.json').read_text())
+    paths = saved['returns_by_path']
+    base = saved['paths']['base']
+    rows = economy.Run('central', 'central', schedule=run.steady_schedule(base['growth_rates']['to_plan'], 0.0)).simulate()
+    held = scoping.irr([r.get('funders_flow', r['net']) for r in rows])
+    assert paths['fastest_to_plan_held']['funders_IRR_to_2341'] == pytest.approx(held, abs=1e-9)
+    for name in ('programme_pace_held', 'fastest_to_plan_held'):
+        assert paths[name]['residents_2341'] == pytest.approx(run.planned())
+    assert paths['base']['funders_IRR_to_2341'] == base['measures']['funders_IRR_to_2341']
+    assert paths['base']['residents_2341'] > run.planned()

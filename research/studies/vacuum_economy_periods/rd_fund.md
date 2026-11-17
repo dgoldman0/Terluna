@@ -9,7 +9,7 @@ contents: false
 abstract: |
   The study team proposes a fund of 100 million dollars, spent from 2027 to 2041, for the research and development that precedes a decision to build enclosed settlements on the Moon from 2041. An economic model of the buildout ranks what must be known by then. Launch prices, the computing that buyers contract at the opening, the growth of local industry, the residents' spending and firm power decide most of its result; the fund works on those within its reach and follows launch, which the wider space industry sets. The work runs in three phases with decision points in 2031, 2036 and 2040, and it is chosen to earn on Earth whatever is decided about the Moon, through companies, licences, products, services, data, media and a visitor and education centre.
 
-  Amounts are in dollars of 2026 except where marked as dollars of 2041, the model's unit; at the model's 3% a year, one dollar of 2026 is 1.56 dollars of 2041. Published figures carry the key of their source in Appendix B, and the study team's own estimates are marked as such.
+  Amounts are in dollars of 2026 except where marked as dollars of 2041, the model's unit, in which one dollar of 2026 counts as 1.56. Published figures carry the key of their source in Appendix B, and the study team's own estimates are marked as such.
 ---
 
 \newpage
@@ -38,9 +38,9 @@ The fund is small beside what it prepares. The build would need about 0.78 trill
 
 # What must be known by 2041
 
-The economic model of the buildout shows how far each uncertain input moves its central result, the number of residents the settlements can carry by 2341 while still paying their funding partners 3% a year above inflation: 20.1 million in the central case (Appendix A). Five unknowns decide most, and the fund's work is built around them.
+The economic model of the buildout shows how far each uncertain input moves its central result, the number of residents the settlements can carry by 2341 while repaying their funding partners and paying their own way with Earth: 20.1 million in the central case (Appendix A). Five unknowns decide most, and the fund's work is built around them.
 
-Launch prices decide most. If launch from Earth cheapens only on its slow path, the settlements stay at their first 12,500 residents and the funders earn less than 3%. The wider space industry sets those prices; the fund follows them, and its decision points use them as a gate.
+Launch prices decide most. If launch from Earth cheapens only on its slow path, the settlements stay at their first 12,500 residents and the funders earn 2.9% a year. The wider space industry sets those prices; the fund follows them, and its decision points use them as a gate.
 
 Computing bought at the opening rests on the least evidence. Computing sold to Earth from lunar facilities is the settlements' largest line of sale, and the model assumes 5 GW of it under contract when they open in 2049, a figure of the study team's own: at 1 GW the settlements carry 8.1 million residents by 2341, and at 20 GW 48.2 million. The evidence so far is investors' expectation. A firm planning lunar data storage raised a seed round of 5 million dollars in 2023 [Reg23], and investors have put 450 million dollars since 2024 into one firm building computing in orbit, which has flown a single processor [HPC26; WM26], while priced contracts for computing in orbit or on the Moon have yet to appear in the team's search. The fund's work turns that expectation into buyers' terms.
 
@@ -48,9 +48,9 @@ Local industry comes next. If making equipment from lunar rock, the growth of th
 
 How the residents spend is the study team's own figure: the model assumes they spend a tenth of their pay on goods and services from Earth. At a fifth the settlements carry 11.8 million by 2341, and at a twentieth 30.9 million.
 
-Firm power matters most to the funders. On its slow path it barely changes the residents the settlements carry, but it delays the plan to 2148 and more than halves the funders' present value at 3%, from 0.79 to 0.36 trillion dollars of 2041.
+Firm power matters most to the funders. On its slow path it barely changes the residents the settlements carry, but it delays the plan to 2148 and lowers the funders' return from 3.9% to 3.4% a year.
 
-Food and life support decide less of the economic result: on their slow paths the settlements carry 18.7 million, and the funders' present value falls by a fifth. They remain what the residents live by, and the part of the work that meets the largest markets on Earth. People have lived inside closed systems for a year or two at most, two years in Biosphere 2 from 1991 and 370 days in Lunar Palace 1 in 2017–2018, as reported [SN96; LP1-C], and food from electricity has reached its first factory, of 160 tonnes a year [SF].
+Food and life support decide less of the economic result: on their slow paths the settlements carry 18.7 million, and the funders' return falls from 3.9% to 3.8% a year. They remain what the residents live by, and the part of the work that meets the largest markets on Earth. People have lived inside closed systems for a year or two at most, two years in Biosphere 2 from 1991 and 370 days in Lunar Palace 1 in 2017–2018, as reported [SN96; LP1-C], and food from electricity has reached its first factory, of 160 tonnes a year [SF].
 
 The settlements' own money matters less to the result, yet it must be settled before money can flow. In the model it carries a quarter more residents than the dollar (20.1 million against 16.2), and its issuer, reserve and clearing await design. Visitors' response to price moves the result by under a million across its published range, within the model's variation between neighbouring cases, and the tugs and the asteroids' water by under half a million.
 
@@ -126,7 +126,7 @@ The evidence may come back against the build, with demand for computing or visit
 
 # Appendix A. The unknowns in the economic model {-}
 
-The economic model steps year by year from 2041 to 2341 and finds the fastest steady growth at which the settlements still pay their funding partners 3% a year above inflation, keep every ten years in balance or surplus once repaid, staff their own work and keep within the water open to mining. In its central case they carry 20.1 million residents by 2341. Each row moves one input, everything else central.
+The economic model steps year by year from 2041 to 2341 and finds the fastest steady growth the settlements' own accounts can carry, under tests the scoping study sets out: the funders repaid with a return, every ten years in balance or surplus once they are repaid, the settlements' own work staffed and the water open to mining lasting. In its central case they carry 20.1 million residents by 2341. Each row moves one input, everything else central.
 
 | Input moved | Setting | Residents by 2341 |
 |:------------------|:--------|------------:|
@@ -139,18 +139,18 @@ The economic model steps year by year from 2041 to 2341 and finds the fastest st
 
 High demand adds about 0.1 million, because its sales at the depot draw the asteroids' water so fast that faster growth past the plan would exhaust it before 2341.
 
-The second table moves each group of the technology stack alone to its slow and its fast path, with the rest central. The central case reaches the planned 6.47 million residents in 2142, and its funders' present value at 3% is 0.79 trillion dollars of 2041.
+The second table moves each group of the technology stack alone to its slow and its fast path, with the rest central. The central case reaches the planned 6.47 million residents in 2142, and its funders earn 3.9% a year.
 
-| Group moved alone (slow · fast) | Residents by 2341 | Plan reached | Funders' present value, trillions of 2041 dollars |
+| Group moved alone (slow · fast) | Residents by 2341 | Plan reached | Funders' real return, a year |
 |:------------------|:------------|:--------|--------:|
-| Launch from Earth and the Moon | 12,500 throughout · 18.9 million | — · 2134 | −0.22 · 1.54 |
-| Local industry, equipment and output per job | 12.9 · 22.6 million | 2174 · 2130 | 0.80 · 0.78 |
-| Food and life support | 18.7 · 19.7 million | 2143 · 2142 | 0.64 · 0.85 |
-| Power | 19.2 · 19.8 million | 2148 · 2141 | 0.36 · 0.88 |
-| Tugs and the asteroids' water | 19.7 · 19.7 million | 2141 · 2142 | 0.68 · 0.84 |
-| Computation per watt (unread by the model, which sells computing by the watt) | 20.1 · 20.1 million | 2142 · 2142 | 0.79 · 0.79 |
+| Launch from Earth and the Moon | 12,500 throughout · 18.9 million | — · 2134 | 2.9% · 5.1% |
+| Local industry, equipment and output per job | 12.9 · 22.6 million | 2174 · 2130 | 3.9% · 4.0% |
+| Food and life support | 18.7 · 19.7 million | 2143 · 2142 | 3.8% · 4.0% |
+| Power | 19.2 · 19.8 million | 2148 · 2141 | 3.4% · 4.1% |
+| Tugs and the asteroids' water | 19.7 · 19.7 million | 2141 · 2142 | 3.8% · 4.0% |
+| Computation per watt (unread by the model, which sells computing by the watt) | 20.1 · 20.1 million | 2142 · 2142 | 3.9% · 3.9% |
 
-On the fast side, local industry alone brings the plan to 2130 and carries 22.6 million by 2341, and launch alone brings it to 2134 and nearly doubles the funders' present value, though its residents by 2341 fall a little short of the central case, within the model's variation between neighbouring cases. The slow side of each row is the robust reading.
+On the fast side, local industry alone brings the plan to 2130 and carries 22.6 million by 2341, and launch alone brings it to 2134 and raises the funders' return to 5.1% a year, though its residents by 2341 fall a little short of the central case, within the model's variation between neighbouring cases. The slow side of each row is the robust reading.
 
 # Appendix B. Sources {-}
 

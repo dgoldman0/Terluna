@@ -5,7 +5,7 @@ author: "Prepared by the study team for the buildout's prospective partners"
 date: "November 2026"
 abouttitle: "Abstract"
 abstract: |
-  From 2041 the enclosed lunar buildout would put towns in craters and cities in lava tubes on the Moon, with the industry, firm power and supply of asteroid water that keep them. A model that builds and runs the settlements year by year to 2341, each year with that year's engineering, finds that on central paths of technology and demand they repay their funders by 2081 and return 3.9% a year in real terms, above the 3% the programme requires. They reach the planned 6.47 million residents in 2142, a century ahead of the programme's schedule, and carry 20.1 million by 2341. Their own money, U, floats against the dollar above a floor of three-quarters of par on a partial reserve of currencies and metals; it lets them grow about a quarter larger than dollars alone and passes five tests of a safe policy in every year.
+  From 2041 the enclosed lunar buildout would put towns in craters and cities in lava tubes on the Moon, with the industry, firm power and supply of asteroid water that keep them. A model that builds and runs the settlements year by year to 2341, each year with that year's engineering, finds that on central paths of technology and demand they repay their founding capital by 2081, reach the planned 6.47 million residents in 2142, a century ahead of the programme's schedule, and carry 20.1 million by 2341. What the funders earn depends on how fast the settlements grow, because growth is paid for from their account with Earth: 5.3% a year in real terms at the programme's own pace, holding at the plan, and 3.9% when the settlements grow as fast as their account allows. Their own money, U, floats against the dollar above a floor of three-quarters of par on a partial reserve of currencies and metals; it lets them grow about a quarter larger than dollars alone and passes five tests of a safe policy in every year.
 
   Three inputs decide most of this result: the computing that buyers contract at the opening, the pace of technology, above all of launch and local industry, and the share of their pay that residents spend on Earth. The first and the last rest on the study team's own estimates, and the team recommends a pre-feasibility study centred on them. Amounts are in constant dollars of 2041.
 ---
@@ -14,9 +14,9 @@ abstract: |
 
 ## The central result
 
-On central assumptions the enclosed buildout pays for itself and goes on growing past its plan. With central paths of technology, central demand from Earth and U as their money, the settlements reach the planned 6.47 million residents in 2142, about a century ahead of the programme's own schedule, and carry 20.1 million by 2341 (Figure 1). The funding partners put in 1.77 trillion dollars, 1.21 trillion of it before the settlements open in 2049; they are repaid by 2081 and earn a real return of 3.9% a year, above the 3% the programme requires. U passes all five of the study's tests of a safe and healthy policy in every year, and once the funders are repaid the settlements carry every later shortfall themselves, through U's rate and its reserve.
+On central assumptions the enclosed buildout pays for itself and goes on growing past its plan. With central paths of technology, central demand from Earth and U as their money, the settlements reach the planned 6.47 million residents in 2142, about a century ahead of the programme's own schedule, and carry 20.1 million by 2341 (Figure 1). The funding partners put in 1.77 trillion dollars, 1.21 trillion of it before the settlements open in 2049; they are repaid by 2081 and earn a real return of 3.9% a year. That growth costs them return: at the programme's own pace, holding at the plan, they would be repaid by 2076 and earn 5.3% a year (Section 7). U passes all five of the study's tests of a safe and healthy policy in every year, and once the funders are repaid the settlements carry every later shortfall themselves, through U's rate and its reserve.
 
-Kept in dollars alone, the same settlements carry 16.2 million residents by 2341 and return 4.5% a year to funders repaid by 2079, so U buys about a quarter more growth for about half a point of the funders' return. Two paths fail to pay. The programme's own pace of 3.3% a year, carried on past 2241, leaves the account with Earth in deficit for good from about 2260. With technology held at its 2041 state, the settlements stay at their first 12,500 residents under every demand, and their funders earn less than 3%.
+Kept in dollars alone, the same settlements carry 16.2 million residents by 2341 and return 4.5% a year to funders repaid by 2079, so U buys about a quarter more growth for about half a point of the funders' return. Two paths fail to pay. The programme's own pace of 3.3% a year, carried on past 2241, leaves the account with Earth in deficit for good from about 2260. With technology held at its 2041 state, the settlements stay at their first 12,500 residents under every demand, and their funders earn 1.3% a year on central demand.
 
 ![Residents of the enclosed settlements under the base case (U, residents a result), the same settlements in dollars alone, and the programme's ramp of 3.3% a year carried on past the plan; central demand and technology. Logarithmic scale.](figures/residents.pdf){width=100%}
 
@@ -31,7 +31,6 @@ Kept in dollars alone, the same settlements carry 16.2 million residents by 2341
 | of it before the opening in 2049 | 1.21 | 1.08 |
 | Funding repaid | 2081 | 2079 |
 | Funders' real rate of return | 3.9% a year | 4.5% a year |
-| Funders' present value at 3%, to 2341, trillions | 0.79 | 1.30 |
 | Funders' net receipts to 2341, undiscounted, trillions | 26.7 | 44.0 |
 | U's lowest value, dollars a U | 0.77 | |
 | Tests of the money's safety | passed in every year | |
@@ -76,7 +75,7 @@ Each case combines a path of technology, a scenario of Earth's demand and a sche
 
 ## Growth as a result
 
-The study's main measure is the fastest growth the settlements can sustain while they still pay. Their funding partners must still earn the programme's 3% a year in real terms, so that the present value of their flows at 3% to 2341 stays at zero or above. Once the funders are repaid, every ten years taken together must leave the account with Earth in balance or surplus. The settlements' own work must be staffed and their sources' water must last, and under U the five tests of a safe and healthy policy (Section 6.5) must hold in every year. Growth is solved as two steady rates, the highest to the plan and then the highest past it. Each is the highest rate below which every slower rate the study checks also passes, since a single year's lump of reinvestment can make passing and failing alternate as the growth rate moves it from one year to another.
+The study's main measure is the fastest growth the settlements can sustain while they still pay. Their funding partners' return must stay at or above the discount rate the study uses for this test (Appendix A). Once the funders are repaid, every ten years taken together must leave the account with Earth in balance or surplus. The settlements' own work must be staffed and their sources' water must last, and under U the five tests of a safe and healthy policy (Section 6.5) must hold in every year. Growth is solved as two steady rates, the highest to the plan and then the highest past it. Each is the highest rate below which every slower rate the study checks also passes, since a single year's lump of reinvestment can make passing and failing alternate as the growth rate moves it from one year to another.
 
 ## Evidence
 
@@ -181,7 +180,7 @@ Beside U the study keeps the account in dollars alone, in which dollars serve fo
 
 ## The base case
 
-With central technology and demand and the preferred policy of U, the settlements grow 7.0% a year from the opening to the plan, which they reach in 2142, and 0.57% a year after it, to 20.1 million residents by 2341. The funding partners' position (Figure 5) is deepest at 1.77 trillion dollars, 1.21 trillion of it by the opening. They are repaid in 2081, and by 2341 they have received 26.7 trillion dollars more than they put in, undiscounted, a present value of 0.79 trillion at 3% and a real return of 3.9% a year. Their last receipts come in 2265. From then on the residents' purchases from Earth, growing with Earth's income, hold the account in deficit, which the reserve carries at first and U's fall to 0.81 of par carries after.
+With central technology and demand and the preferred policy of U, the settlements grow 7.0% a year from the opening to the plan, which they reach in 2142, and 0.57% a year after it, to 20.1 million residents by 2341. The funding partners' position (Figure 5) is deepest at 1.77 trillion dollars, 1.21 trillion of it by the opening. They are repaid in 2081, and by 2341 they have received 26.7 trillion dollars more than they put in, undiscounted, a real return of 3.9% a year. Their last receipts come in 2265. From then on the residents' purchases from Earth, growing with Earth's income, hold the account in deficit, which the reserve carries at first and U's fall to 0.81 of par carries after.
 
 ![The funding partners' cumulative position, in the base case and in dollars alone.](figures/funders.pdf){width=100%}
 
@@ -189,7 +188,19 @@ With central technology and demand and the preferred policy of U, the settlement
 
 Kept in dollars alone, the same settlements reach the plan in 2150 and carry 16.2 million residents by 2341. The funders need less, 1.65 trillion dollars, and are repaid two years sooner; they earn more, 4.5% a year and 44.0 trillion dollars undiscounted, because the settlements grow less.
 
-Three mechanisms let U carry more residents. The rate absorbs late shortfalls by lowering what residents buy from Earth, shortfalls that in dollars the funders would cover and the growth test tolerates only briefly: held at par, U carries 18.9 million, and with its floor at half of par, 24.9 million. The holders for use lend the zone their U free of interest as their spending grows, 0.22 trillion dollars' worth in 2241; holding one month of spending in place of three, they leave 19.6 million. The funders' U spent in the zone leaves dollars with the zone as savings and adds a little, since with all the funders' returns paid in dollars the result is 19.6 million. Against these, U's reserve earns Earth's 1% while the funders require 3%.
+Three mechanisms let U carry more residents. The rate absorbs late shortfalls by lowering what residents buy from Earth, shortfalls that in dollars the funders would cover and the growth test tolerates only briefly: held at par, U carries 18.9 million, and with its floor at half of par, 24.9 million. The holders for use lend the zone their U free of interest as their spending grows, 0.22 trillion dollars' worth in 2241; holding one month of spending in place of three, they leave 19.6 million. The funders' U spent in the zone leaves dollars with the zone as savings and adds a little, since with all the funders' returns paid in dollars the result is 19.6 million. Against these, the reserve U holds earns only Earth's safe rate of 1%, well under what the funders' capital earns in the settlements.
+
+## Growth and the funders' return
+
+Growth after the opening is paid for from the account with Earth, so the funders' return falls as the settlements grow faster:
+
+| Growth path, central demand and technology | Plan reached | Residents by 2341 | Funders repaid | Funders' real return |
+|:--|:--|--:|:--|--:|
+| The programme's ramp of 3.3% a year, held at the plan | 2241 | 6.5 million | 2076 | 5.3% a year |
+| The base case's growth to the plan, held there | 2142 | 6.5 million | 2081 | 4.0% a year |
+| The base case, growing on past the plan | 2142 | 20.1 million | 2081 | 3.9% a year |
+
+The base case's speed to the plan costs the funders 1.3 points of return against the programme's pace and brings the plan a century sooner. Its growth past the plan costs them a further 0.1 point and carries three times the plan's residents by 2341.
 
 ## The programme's pace carried on
 
@@ -210,7 +221,7 @@ On the programme's own ramp, 3.3% a year from 2049 to the plan in 2241, the sett
 
 With technology held at its 2041 state, the settlements stay at 12,500 residents under every demand, in U and in dollars.
 
-U carries more residents than dollars wherever demand and technology let the settlements grow (Figure 6), with two exceptions. On slow technology and central demand the funders barely earn 3% in either currency, and U's reserve, held through the build at 1%, costs them that margin. On high demand the scenario's depot sales and launches outgrow any supply the study's own size checks can support. With fast technology its sales at the depot draw the water open to mining down so fast that the settlements can hardly grow in either money; with central technology the same draw caps growth past the plan, since faster growth would exhaust that water before 2341, so high demand carries about as many residents as central demand.
+U carries more residents than dollars wherever demand and technology let the settlements grow (Figure 6), with two exceptions. On slow technology and central demand the funders' return only just clears the growth test in either currency (Appendix A), and U's reserve, held through the build at 1%, costs them that margin. On high demand the scenario's depot sales and launches outgrow any supply the study's own size checks can support. With fast technology its sales at the depot draw the water open to mining down so fast that the settlements can hardly grow in either money; with central technology the same draw caps growth past the plan, since faster growth would exhaust that water before 2341, so high demand carries about as many residents as central demand.
 
 The widest gap comes with fast technology. In dollars alone the decade of fastest building toward the plan, 2115 to 2124, comes out barely in deficit, since the tug fleet must grow by two-thirds in six years as the legs lengthen. The decade test meets that deficit directly, almost every rate of growth past the plan then fails it, and the settlements stop at about 6.6 million. Under U the reserve carries the same decade, and they reach 30.2 million.
 
@@ -226,7 +237,7 @@ The widest gap comes with fast technology. In dollars alone the decade of fastes
 | Holders of U | Dollars for their U | A unit worth at least 0.77 dollars; bonds' coupons and stakes' rewards at a yield within the zone's growth |
 | Residents | Their work | Pay that follows Earth's income per person, 1.5 times a high-income average in 2041; a tenth of it spent on Earth, whose buying power falls with U by at most a quarter |
 
-The base case returns 3.9% against the programme's required 3%. The opening decades decide most of that return: 1.21 trillion dollars is spent before the first sale, and repayment takes 32 years after the opening.
+The base case returns 3.9% a year; at the programme's own pace, holding at the plan, the return is 5.3% (Section 7). The opening decades decide most of either figure: 1.21 trillion dollars is spent before the first sale, and repayment takes 32 years after the opening.
 
 # Sensitivities and risks
 
@@ -242,17 +253,17 @@ The money and the water move the result less. Held at par, U carries 1.2 million
 
 The technology stack falls into six groups that develop apart from one another. Moving each alone to its slow and its fast path, with the rest central, shows which of them the settlements depend on:
 
-| Group moved alone (slow · fast) | Residents by 2341 | Plan reached | Funders' present value at 3%, trillions |
+| Group moved alone (slow · fast) | Residents by 2341 | Plan reached | Funders' real return, a year |
 |:------------------|:------------|:--------|--------:|
-| Launch from Earth and the Moon | 12,500 throughout · 18.9 million | — · 2134 | −0.22 · 1.54 |
-| Local industry, equipment and output per job | 12.9 · 22.6 million | 2174 · 2130 | 0.80 · 0.78 |
-| Food and life support | 18.7 · 19.7 million | 2143 · 2142 | 0.64 · 0.85 |
-| Power | 19.2 · 19.8 million | 2148 · 2141 | 0.36 · 0.88 |
-| Tugs and water from the sources | 19.7 · 19.7 million | 2141 · 2142 | 0.68 · 0.84 |
-| Computation per watt (unread by the model) | 20.1 · 20.1 million | 2142 · 2142 | 0.79 · 0.79 |
-| The base case, for comparison | 20.1 million | 2142 | 0.79 |
+| Launch from Earth and the Moon | 12,500 throughout · 18.9 million | — · 2134 | 2.9% · 5.1% |
+| Local industry, equipment and output per job | 12.9 · 22.6 million | 2174 · 2130 | 3.9% · 4.0% |
+| Food and life support | 18.7 · 19.7 million | 2143 · 2142 | 3.8% · 4.0% |
+| Power | 19.2 · 19.8 million | 2148 · 2141 | 3.4% · 4.1% |
+| Tugs and water from the sources | 19.7 · 19.7 million | 2141 · 2142 | 3.8% · 4.0% |
+| Computation per watt (unread by the model) | 20.1 · 20.1 million | 2142 · 2142 | 3.9% · 3.9% |
+| The base case, for comparison | 20.1 million | 2142 | 3.9% |
 
-On the slow side, launch alone stops all growth, and the funders earn less than their 3%. Slow local industry delays the plan by 32 years and carries 12.9 million by 2341. Slow power barely changes the residents but more than halves the funders' present value, and slow food and life support costs 1.4 million residents and a fifth of that value. Computation per watt leaves the result unchanged, because the model sells computing by the watt of capacity, at the price of the same capacity on Earth, and leaves that path unread. On the fast side, local industry alone brings the plan to 2130 and carries 22.6 million by 2341. Launch alone brings the plan to 2134 and nearly doubles the funders' present value, while its residents by 2341, 18.9 million, fall a little short of the base case, within the variation between neighbouring cases.
+On the slow side, launch alone stops all growth, and the funders earn 2.9% a year. Slow local industry delays the plan by 32 years and carries 12.9 million by 2341. Slow power barely changes the residents but lowers the funders' return from 3.9% to 3.4% a year, and slow food and life support costs 1.4 million residents and lowers the return to 3.8%. Computation per watt leaves the result unchanged, because the model sells computing by the watt of capacity, at the price of the same capacity on Earth, and leaves that path unread. On the fast side, local industry alone brings the plan to 2130 and carries 22.6 million by 2341. Launch alone brings the plan to 2134 and raises the funders' return to 5.1% a year, while its residents by 2341, 18.9 million, fall a little short of the base case, within the variation between neighbouring cases.
 
 ## Risks
 
@@ -281,7 +292,7 @@ On the 5th percentile, growth as a result is solved under that reading of the wa
 
 # Recommendation and next stage
 
-The study team recommends that the partners proceed to a pre-feasibility study of the enclosed buildout. On central assumptions the settlements repay their funding, return more than the programme requires and grow well past the plan, but the inputs that decide those results rest unevenly on evidence. The next stage would narrow the uncertainties in the order they matter:
+The study team recommends that the partners proceed to a pre-feasibility study of the enclosed buildout. On central assumptions the settlements repay their funding with a real return of 3.9% to 5.3% a year, depending on how fast they grow, and grow well past the plan, but the inputs that decide those results rest unevenly on evidence. The next stage would narrow the uncertainties in the order they matter:
 
 1. **Markets at the opening.** Gather evidence for the computing and visits the settlements would sell in their first decades, with prospective customers' terms, and for Earth's demand projections behind them.
 2. **The residents' economy.** Establish what share of their income residents of a settlement of this kind spend on goods and services from Earth, and build the model's next layer, trade within the zone beyond Earth, with operators in space and other settlements as partners and with knowledge work sold to Earth at a distance. Its design is complete, and a bounded lookup has gathered its first evidence.
@@ -306,7 +317,7 @@ The study team recommends that the partners proceed to a pre-feasibility study o
 
 **Growth as a result.** The schedule of residents is solved as two steady rates, to the plan and past it. A rate passes when four conditions hold:
 
-- the funders' present value at 3% to 2341 is zero or more;
+- the funders' flows, discounted at 3% a year in real terms, the study's own discount rate for this test, have a present value of zero or more to 2341;
 - the account is repaid, and every ten-year window after repayment leaves it in balance or surplus;
 - every year has the hands its own work needs, and the water open to mining lasts;
 - under U, all five tests hold in every year.
@@ -340,7 +351,6 @@ Each rate is found by halving and then checked against twenty slower rates; wher
 |:--------|:--------|:------------|
 | Residents at the opening, 2049 | 12,500 | The programme's |
 | Planned residents, 2241 | 6.47 million | The programme's |
-| Funders' required real return | 3% a year | The programme's |
 | Pay of a working resident, 2041 | 155,800 dollars a year, following Earth's income per person | The coupled study's; about 1.5 times a high-income average wage, as mining pays |
 | Share of pay spent on Earth | 10% (5% to 20%) | The study's own |
 | Share of residents who work | 55% (49% to 65%) | Sourced: 45% to 49% of the populations of high-income economies are employed, 55% in one; settlements of working-age arrivals take the upper value |
@@ -393,15 +403,13 @@ Each lookup records every value with the level at which it was read, from the pa
 
 **Funding partners.** The participants who provide the founding capital and cover the settlements' shortfalls with Earth until their funding is repaid.
 
-**Growth as a result.** The fastest steady growth at which the settlements still pay their funders 3% a year and the tests hold.
+**Growth as a result.** The fastest steady growth that passes the study's tests of growth (Appendix A).
 
 **Holders for use.** People on Earth who keep U to spend in the zone.
 
 **Par.** One dollar of 2041 for one U.
 
 **The plan.** The programme's planned 6.47 million residents, reached on its own schedule in 2241.
-
-**Present value at 3%.** The funders' yearly flows discounted at 3% a year to 2041.
 
 **Rate.** U's value in dollars.
 
