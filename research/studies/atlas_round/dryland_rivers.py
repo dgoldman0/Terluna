@@ -19,10 +19,13 @@ Each route carries Q_ROUTE (less where its source has less to give). Its green c
 channel's water surface, widened for lunar gravity, and a belt of plants drinking the bed's seepage, at the narrow and
 the wide ends of their ranges, over the new river's dryland; its loss is that corridor at the open water's net loss on
 the closed budget (the climate's rain less the open water's evaporation, where that is negative). The ranking is green
-land per metre of cut, the cut being the deepest the channel needs. Since the weirs hold the salt sea and Humboldtianum
-at their need from Moscoviense's water and the full seas pass their surplus on, the near-side sea takes what is left, so
-it gives up each route's loss, or the route's whole flow where the route ends in a closed lake its source's water did
-not reach.
+land per metre of cut, the cut being the deepest the channel needs. Moscoviense's weirs are fixed crests (register,
+17 November), each taking a fixed share of its overflow, and Orientale and Smythii-Marginis pass on all they receive, so
+a route's loss falls on the sea its water was heading for: the near-side sea for routes ending in it, in Orientale or in
+Smythii-Marginis; the salt sea or Humboldtianum for routes ending in them; and the three by Moscoviense's shares for routes
+ending in Moscoviense. A route into a closed lake takes its whole flow from the sea its source's water reached. Each
+sea's fall is its level's response to that much less supply: the parted near-side sea's south part's from
+near_side_neck.py, the salt sea's and Humboldtianum's from their own levels' tables at their need.
 """
 from __future__ import annotations
 
@@ -62,6 +65,8 @@ DRY_MIN_KM = 30.0                    # the least arid and semi-arid land on a ne
 LISTED = 30
 SAME_GAP_KM = 25.0                   # passes nearer than this to a better route's are the same gap
 NEAR_SIDE = 'near_side'
+PASS_ON = ('near_side', 'orientale', 'smythii_marginis')   # seas that pass on all they receive to the near side
+HELD = ('south_pole_aitken', 'humboldtianum')
 
 
 def sha256(path) -> str:
@@ -247,6 +252,22 @@ def classify(route, rec, surface, sea, names, discharge, cols, fd_case):
     return 'reaches another river, a sea or a closed lake'
 
 
+def held_seas_falls(graph, h_flat, sea, names, area, loss_field, level0, case, step=1000.0):
+    """How far the salt sea and Humboldtianum fall for each m3/s less supply at their need (network.Table on the level
+    at which each cell joins the water over the sea's deepest cell, as redrawn_drainage.lake_at reads it)."""
+    label, sinks, edges = graph
+    out = {}
+    for k in HELD:
+        cells = np.flatnonzero(sea == names.index(k))
+        seed = int(cells[np.argmin(h_flat[cells])])
+        joined = NW.joining_level(h_flat, label, sinks.size, edges, seed)
+        table = NW.Table(joined, area, loss_field, h_flat, level0 + 1.0)
+        need = case['seas'][k]['loss_m3s']
+        lev = table.level_for(need - step, level0 + 1e-6)
+        out[k] = round((level0 - (level0 if lev is None else lev)) / step, 4)
+    return out
+
+
 def gap_km(a, b, cols):
     la1, lo1 = 90.0 - (a // cols + 0.5) / dr.PPD, (a % cols + 0.5) / dr.PPD
     la2, lo2 = 90.0 - (b // cols + 0.5) / dr.PPD, (b % cols + 0.5) / dr.PPD
@@ -271,9 +292,22 @@ def where_it_ends(cell, r, sea, names, term):
     return dict(reaches=f'a river of {r["discharge"][cell]:,.0f} m3/s', ends_in=goes)
 
 
-def evaluate(route, r, sea, names, term, dry_km, length_km, rate_m2s, cols, rotation, near_part_fall_m_per_m3s,
-             level0=0.0):
-    """A route's new river, green corridor, loss and what the near-side sea gives up."""
+def bearers(sea_name, flow, shares):
+    """Which seas give up a flow lost on its way to `sea_name` (m3/s each): the near-side sea for itself and the seas
+    that pass all they receive on to it, a held sea for itself, the three by Moscoviense's fixed shares for Moscoviense."""
+    if sea_name in PASS_ON:
+        return {NEAR_SIDE: flow}
+    if sea_name in HELD:
+        return {sea_name: flow}
+    if sea_name == 'moscoviense':
+        return {NEAR_SIDE: flow * shares['smythii_marginis'], 'south_pole_aitken': flow * shares['south_pole_aitken'],
+                'humboldtianum': flow * shares['humboldtianum']}
+    return {}
+
+
+def evaluate(route, r, sea, names, term, dry_km, length_km, rate_m2s, cols, rotation, falls, shares, level0=0.0):
+    """A route's new river, green corridor and loss, and which seas give up what and fall how far. `falls` holds each
+    bearing sea's fall per m3/s of supply (the near-side sea's for its parted south part), `shares` Moscoviense's."""
     c = route['free_cell']
     q = min(Q_ROUTE, 0.5 * route['source_outflow_m3s']) if not route['full_sea'] else Q_ROUTE
     out = dict(cut_m=round(route['cut_m'], 1), source=('full sea ' + names[route['source_sea']]) if route['full_sea']
@@ -282,7 +316,7 @@ def evaluate(route, r, sea, names, term, dry_km, length_km, rate_m2s, cols, rota
                flow_m3s=round(q), new_river_km=round(float(length_km[c])), dryland_km=round(float(dry_km[c])),
                **where_it_ends(route['end_cell'], r, sea, names, term), ends_at=place(route['end_cell'], cols, rotation))
     if route['full_sea']:
-        own = NEAR_SIDE                                   # the upper seas' last water reaches the near-side sea
+        own = names[route['source_sea']]                  # an upper sea's water: Moscoviense's shares or on to the near side
     else:
         t = int(route['source_terminal'])
         own = names[sea[t]] if sea[t] >= 0 else 'a closed lake'
@@ -298,17 +332,13 @@ def evaluate(route, r, sea, names, term, dry_km, length_km, rate_m2s, cols, rota
     out['loss_m3s'] = loss
     out['green_km2_per_m_of_cut'] = round(green['narrow'] / max(route['cut_m'], 1.0), 1)
     ends = out['ends_in']
-    # the weirs hold the salt sea and Humboldtianum at their need from Moscoviense's water and the full seas pass their
-    # surplus on, so what a route loses anywhere comes out of the near-side sea's supply in the end; a route into a
-    # closed lake takes its whole flow out of the seas' water, unless its source's water ended in a closed lake already
-    if ends == 'a closed lake' and own != 'a closed lake':
-        near = {k: round(q) for k in loss}
-    elif ends == 'a closed lake':
-        near = {k: 0 for k in loss}
-    else:
-        near = dict(loss)
-    out['near_side_gives_up_m3s'] = near
-    out['near_side_south_part_falls_m'] = {k: round(v * near_part_fall_m_per_m3s, 1) for k, v in near.items()}
+    cost, lowers = {}, {}
+    for reading in ('narrow', 'wide'):
+        given = bearers(own, q, shares) if ends == 'a closed lake' else bearers(ends, loss[reading], shares)
+        cost[reading] = {k: round(v, 1) for k, v in given.items()}
+        lowers[reading] = {k: round(v * falls[k], 2) for k, v in given.items()}
+    out['seas_give_up_m3s'] = cost
+    out['seas_fall_m'] = lowers
     return out
 
 
@@ -355,6 +385,8 @@ def build(log=print):
     step = step_km(r['receiver'], rows, cols, lat, cell_km)
     _, lake_net, _, _ = FD.load(fd['cases'][BUDGET]['evaporation'])
     rate = np.maximum(-lake_net.ravel().astype(np.float64), 0.0) * dr.MM_DAY      # m/s the open water loses beyond rain
+    area = np.repeat((cell_km * 1e3) ** 2 * np.cos(np.radians(lat)), cols)
+    loss_field = -lake_net.ravel().astype(np.float64) * dr.MM_DAY * area
     del lake_net
     dry_km, length_km, end = stretches(r, h_flat, dry, wet, step, outlet)
     stop = (r['discharge'] >= Q_JOINS) | outlet
@@ -362,18 +394,22 @@ def build(log=print):
     log(f'stretches, {time.time() - started:.0f} s')
     graph = RD.catchment_graph(h, lat, cell_km)
     found = routes(graph, h_flat, surface, r, sea, names, term, dry_km, length_km, end, rate_m2s, log)
+    case = fd['cases'][BUDGET]
+    held_falls = held_seas_falls(graph, h_flat, sea, names, area, loss_field, level0, case)
+    log(f'the held seas fall {held_falls} m for each m3/s less, {time.time() - started:.0f} s')
     del graph
     rows_ = neck['budgets'][BUDGET]['natural_neck']['with_extra_loss']
     fall = (rows_[-1]['south_level_m'] - rows_[0]['south_level_m']) / (rows_[-1]['extra_loss_m3s'] - rows_[0]['extra_loss_m3s'])
     fall = -fall
-    case = fd['cases'][BUDGET]
+    falls = {NEAR_SIDE: fall, **{k: held_falls[k] for k in HELD}}
+    shares = {k: v / case['moscoviense_surplus_m3s'] for k, v in case['released_m3s'].items()}
     kinds = [classify(x, r['receiver'], surface, sea, names, r['discharge'], cols, case) for x in found]
     loops = sum(k.startswith('loops') for k in kinds)
     pairs = []
     for x, kind in zip(found, kinds):
         if kind.startswith('loops'):
             continue
-        e = evaluate(x, r, sea, names, term, dry_km, length_km, rate_m2s, cols, rotation, fall, level0)
+        e = evaluate(x, r, sea, names, term, dry_km, length_km, rate_m2s, cols, rotation, falls, shares, level0)
         e['kind'] = kind
         pairs.append((e, x['pass_cell']))
     pairs.sort(key=lambda p: -p[0]['green_km2_per_m_of_cut'])
@@ -385,7 +421,6 @@ def build(log=print):
         evaluated.append(e)
         kept_passes.append(cell)
     log(f'{loops} loops dropped, {merged} routes in a gap already listed, {len(evaluated)} routes')
-    area = np.repeat((cell_km * 1e3) ** 2 * np.cos(np.radians(lat)), cols)
     land = ~wet
     by_source = {}
     for x in evaluated:
@@ -397,14 +432,18 @@ def build(log=print):
         routes_by_kind={k: sum(1 for x in evaluated if x['kind'] == k) for k in sorted({x['kind'] for x in evaluated})},
         all_routes_green_km2={k: sum(x['green_km2'][k] for x in evaluated) for k in ('narrow', 'wide')},
         all_routes_loss_m3s={k: sum(x['loss_m3s'][k] for x in evaluated) for k in ('narrow', 'wide')},
-        all_routes_near_side_gives_up_m3s={k: sum(x['near_side_gives_up_m3s'][k] for x in evaluated) for k in ('narrow', 'wide')},
+        all_routes_seas_give_up_m3s={k: {s_: round(sum(x['seas_give_up_m3s'][k].get(s_, 0.0) for x in evaluated), 1)
+                                         for s_ in (NEAR_SIDE,) + HELD} for k in ('narrow', 'wide')},
+        all_routes_seas_fall_m={k: {s_: round(sum(x['seas_fall_m'][k].get(s_, 0.0) for x in evaluated), 2)
+                                    for s_ in (NEAR_SIDE,) + HELD} for k in ('narrow', 'wide')},
         routes_by_source={k: len(v) for k, v in by_source.items()},
         listed_green_km2={k: sum(x['green_km2'][k] for x in top) for k in ('narrow', 'wide')},
         listed_loss_m3s={k: sum(x['loss_m3s'][k] for x in top) for k in ('narrow', 'wide')},
-        listed_near_side_gives_up_m3s={k: sum(x['near_side_gives_up_m3s'][k] for x in top) for k in ('narrow', 'wide')},
+
         arid_and_semi_arid_land_km2=round(float(area[land & dry].sum()) / 1e6),
         land_km2=round(float(area[land].sum()) / 1e6),
-        south_part_falls_m_per_1000_m3s=round(fall * 1000.0, 1))
+        falls_m_per_1000_m3s={k: round(v * 1000.0, 1) for k, v in falls.items()},
+        moscoviense_fixed_shares={k: round(v, 4) for k, v in shares.items()})
     rel = lambda p: str(Path(p).relative_to(ROOT)) if str(p).startswith(str(ROOT)) else str(p)
     return dict(
         schema=SCHEMA, producer=dict(files={f: sha256(ROOT / f) for f in CODE}),
@@ -422,10 +461,11 @@ def build(log=print):
                       'river of at least q_joins or its outlet, and dryland_km is the arid and semi-arid land on that '
                       'stretch. green_km2 is the channel and the belt over that land at the narrow and wide readings, '
                       'cut short where the river would lose all it carries; loss_m3s what that corridor loses to the air '
-                      'beyond its rain. near_side_gives_up is the route\'s loss, which the weirs and the full seas pass '
-                      'on to the near-side sea in the end, or its whole flow where it ends in a closed lake its source\'s '
-                      'water did not reach; south_part_falls is what that '
-                      'lowers the parted near-side sea\'s south part. kind says whether the new river rejoins the river '
+                      'beyond its rain. seas_give_up is that loss on the sea the route\'s water was heading for, with '
+                      'Moscoviense\'s weirs fixed (the near-side sea for routes into it, Orientale or Smythii-Marginis; '
+                      'a held sea for routes into it; Moscoviense\'s shares for routes into Moscoviense), or the whole '
+                      'flow where it ends in a closed lake; seas_fall is how far that lowers each (the near-side sea\'s '
+                      'parted south part). kind says whether the new river rejoins the river '
                       'its source\'s water already runs down (a side channel through dry land) or reaches another river, '
                       'a sea or a closed lake; routes running back into their own source are dropped, and of passes '
                       'within 25 km of each other only the best is listed. Places are on today\'s Moon and the settled '

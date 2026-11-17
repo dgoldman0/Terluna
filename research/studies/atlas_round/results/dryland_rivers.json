@@ -2,7 +2,7 @@
  "schema": "terluna.research.atlas-round-dryland-rivers/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/dryland_rivers.py": "e0cb3569ee7d8ab1510dc4156bd5024fe786a24c7819e854330611cf236fa036",
+   "research/studies/atlas_round/dryland_rivers.py": "99a834970d8ad64feecce822e933b2cb92d3c624a8466405fcf5d53877d07c52",
    "research/studies/atlas_round/final_drainage.py": "9c4fdb233a58891ea22fd82cc570cada09897d2d27d343315a56656b51e5c285",
    "research/studies/atlas_round/river_losses.py": "3847ce4fe1ce6c24307bd458594501d98cec6a7bace4657d4a33541eca8afe1c",
    "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
@@ -43,7 +43,7 @@
   ]
  },
  "evidence": "A calculation on products: the closed budget's governed routing of the run at sunlight 0.930 on the final surface (final_drainage.py), the moisture map's aridity of that run carried onto today's ground, the redrawn floor's catchment graph between 1.9 km cells, and river_losses.py's corridor. A route's cut is the deepest its channel needs; tunnels, costs and the wider floodplains are left out. Not validated against any observation.",
- "reading_rule": "Each route leaves a source over one pass; its new river runs from where the cut ends to the first river of at least q_joins or its outlet, and dryland_km is the arid and semi-arid land on that stretch. green_km2 is the channel and the belt over that land at the narrow and wide readings, cut short where the river would lose all it carries; loss_m3s what that corridor loses to the air beyond its rain. near_side_gives_up is the route's loss, which the weirs and the full seas pass on to the near-side sea in the end, or its whole flow where it ends in a closed lake its source's water did not reach; south_part_falls is what that lowers the parted near-side sea's south part. kind says whether the new river rejoins the river its source's water already runs down (a side channel through dry land) or reaches another river, a sea or a closed lake; routes running back into their own source are dropped, and of passes within 25 km of each other only the best is listed. Places are on today's Moon and the settled turned one.",
+ "reading_rule": "Each route leaves a source over one pass; its new river runs from where the cut ends to the first river of at least q_joins or its outlet, and dryland_km is the arid and semi-arid land on that stretch. green_km2 is the channel and the belt over that land at the narrow and wide readings, cut short where the river would lose all it carries; loss_m3s what that corridor loses to the air beyond its rain. seas_give_up is that loss on the sea the route's water was heading for, with Moscoviense's weirs fixed (the near-side sea for routes into it, Orientale or Smythii-Marginis; a held sea for routes into it; Moscoviense's shares for routes into Moscoviense), or the whole flow where it ends in a closed lake; seas_fall is how far that lowers each (the near-side sea's parted south part). kind says whether the new river rejoins the river its source's water already runs down (a side channel through dry land) or reaches another river, a sea or a closed lake; routes running back into their own source are dropped, and of passes within 25 km of each other only the best is listed. Places are on today's Moon and the settled turned one.",
  "summary": {
   "routes": 29,
   "loops_dropped": 38,
@@ -60,9 +60,29 @@
    "narrow": 48,
    "wide": 207
   },
-  "all_routes_near_side_gives_up_m3s": {
-   "narrow": 48,
-   "wide": 207
+  "all_routes_seas_give_up_m3s": {
+   "narrow": {
+    "near_side": 37.0,
+    "south_pole_aitken": 1.0,
+    "humboldtianum": 10.0
+   },
+   "wide": {
+    "near_side": 157.2,
+    "south_pole_aitken": 7.7,
+    "humboldtianum": 42.1
+   }
+  },
+  "all_routes_seas_fall_m": {
+   "narrow": {
+    "near_side": 1.1,
+    "south_pole_aitken": 0.11,
+    "humboldtianum": 2.19
+   },
+   "wide": {
+    "near_side": 4.64,
+    "south_pole_aitken": 0.88,
+    "humboldtianum": 9.23
+   }
   },
   "routes_by_source": {
    "lakes of the large rivers": 28,
@@ -76,13 +96,18 @@
    "narrow": 48,
    "wide": 207
   },
-  "listed_near_side_gives_up_m3s": {
-   "narrow": 48,
-   "wide": 207
-  },
   "arid_and_semi_arid_land_km2": 11043041,
   "land_km2": 23312954,
-  "south_part_falls_m_per_1000_m3s": 29.3
+  "falls_m_per_1000_m3s": {
+   "near_side": 29.3,
+   "south_pole_aitken": 114.0,
+   "humboldtianum": 219.2
+  },
+  "moscoviense_fixed_shares": {
+   "south_pole_aitken": 0.6664,
+   "humboldtianum": 0.1256,
+   "smythii_marginis": 0.2079
+  }
  },
  "drylands_by_turned_latitude_km2": {
   "0-15": 885262,
@@ -141,13 +166,21 @@
     "wide": 5
    },
    "green_km2_per_m_of_cut": 10.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 5
+   "seas_give_up_m3s": {
+    "narrow": {
+     "south_pole_aitken": 1
+    },
+    "wide": {
+     "south_pole_aitken": 5
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "south_pole_aitken": 0.11
+    },
+    "wide": {
+     "south_pole_aitken": 0.57
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -199,13 +232,21 @@
     "wide": 26
    },
    "green_km2_per_m_of_cut": 2.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 6,
-    "wide": 26
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 6
+    },
+    "wide": {
+     "near_side": 26
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.2,
-    "wide": 0.8
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.18
+    },
+    "wide": {
+     "near_side": 0.76
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -257,13 +298,21 @@
     "wide": 9
    },
    "green_km2_per_m_of_cut": 2.0,
-   "near_side_gives_up_m3s": {
-    "narrow": 2,
-    "wide": 9
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 2
+    },
+    "wide": {
+     "near_side": 9
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.1,
-    "wide": 0.3
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.06
+    },
+    "wide": {
+     "near_side": 0.26
+    }
    },
    "kind": "reaches another river, a sea or a closed lake"
   },
@@ -305,7 +354,7 @@
      -86.33
     ]
    },
-   "source_water_ends_in": "near_side",
+   "source_water_ends_in": "orientale",
    "green_km2": {
     "narrow": 166,
     "wide": 690
@@ -315,13 +364,21 @@
     "wide": 15
    },
    "green_km2_per_m_of_cut": 1.8,
-   "near_side_gives_up_m3s": {
-    "narrow": 4,
-    "wide": 15
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 4
+    },
+    "wide": {
+     "near_side": 15
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.1,
-    "wide": 0.4
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.12
+    },
+    "wide": {
+     "near_side": 0.44
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -373,13 +430,21 @@
     "wide": 28
    },
    "green_km2_per_m_of_cut": 1.5,
-   "near_side_gives_up_m3s": {
-    "narrow": 7,
-    "wide": 28
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 7
+    },
+    "wide": {
+     "near_side": 28
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.2,
-    "wide": 0.8
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.2
+    },
+    "wide": {
+     "near_side": 0.82
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -431,13 +496,21 @@
     "wide": 6
    },
    "green_km2_per_m_of_cut": 1.5,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 6
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 6
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.2
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.18
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -489,13 +562,21 @@
     "wide": 33
    },
    "green_km2_per_m_of_cut": 1.4,
-   "near_side_gives_up_m3s": {
-    "narrow": 8,
-    "wide": 33
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 8
+    },
+    "wide": {
+     "humboldtianum": 33
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.2,
-    "wide": 1.0
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 1.75
+    },
+    "wide": {
+     "humboldtianum": 7.23
+    }
    },
    "kind": "reaches another river, a sea or a closed lake"
   },
@@ -547,13 +628,21 @@
     "wide": 10
    },
    "green_km2_per_m_of_cut": 1.0,
-   "near_side_gives_up_m3s": {
-    "narrow": 2,
-    "wide": 10
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 2
+    },
+    "wide": {
+     "near_side": 10
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.1,
-    "wide": 0.3
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.06
+    },
+    "wide": {
+     "near_side": 0.29
+    }
    },
    "kind": "reaches another river, a sea or a closed lake"
   },
@@ -605,13 +694,21 @@
     "wide": 6
    },
    "green_km2_per_m_of_cut": 0.9,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 6
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 6
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.2
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.18
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -663,13 +760,21 @@
     "wide": 4
    },
    "green_km2_per_m_of_cut": 0.7,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 4
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 4
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.12
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -721,13 +826,21 @@
     "wide": 7
    },
    "green_km2_per_m_of_cut": 0.6,
-   "near_side_gives_up_m3s": {
-    "narrow": 2,
-    "wide": 7
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 2
+    },
+    "wide": {
+     "near_side": 7
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.1,
-    "wide": 0.2
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.06
+    },
+    "wide": {
+     "near_side": 0.2
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -779,13 +892,21 @@
     "wide": 6
    },
    "green_km2_per_m_of_cut": 0.4,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 6
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 6
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.2
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.18
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -837,13 +958,21 @@
     "wide": 6
    },
    "green_km2_per_m_of_cut": 0.3,
-   "near_side_gives_up_m3s": {
-    "narrow": 2,
-    "wide": 6
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 2
+    },
+    "wide": {
+     "near_side": 6
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.1,
-    "wide": 0.2
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.06
+    },
+    "wide": {
+     "near_side": 0.18
+    }
    },
    "kind": "reaches another river, a sea or a closed lake"
   },
@@ -895,13 +1024,21 @@
     "wide": 9
    },
    "green_km2_per_m_of_cut": 0.3,
-   "near_side_gives_up_m3s": {
-    "narrow": 2,
-    "wide": 9
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 2
+    },
+    "wide": {
+     "humboldtianum": 9
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.1,
-    "wide": 0.3
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.44
+    },
+    "wide": {
+     "humboldtianum": 1.97
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -953,13 +1090,21 @@
     "wide": 2
    },
    "green_km2_per_m_of_cut": 0.3,
-   "near_side_gives_up_m3s": {
-    "narrow": 0,
-    "wide": 2
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 0
+    },
+    "wide": {
+     "near_side": 2
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.0
+    },
+    "wide": {
+     "near_side": 0.06
+    }
    },
    "kind": "reaches another river, a sea or a closed lake"
   },
@@ -1011,13 +1156,21 @@
     "wide": 4
    },
    "green_km2_per_m_of_cut": 0.3,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 4
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 4
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.12
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -1069,13 +1222,21 @@
     "wide": 3
    },
    "green_km2_per_m_of_cut": 0.3,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 3
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 3
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.09
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -1127,13 +1288,21 @@
     "wide": 2
    },
    "green_km2_per_m_of_cut": 0.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 0,
-    "wide": 2
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 0
+    },
+    "wide": {
+     "near_side": 2
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.0
+    },
+    "wide": {
+     "near_side": 0.06
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -1185,13 +1354,29 @@
     "wide": 1
    },
    "green_km2_per_m_of_cut": 0.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 0,
-    "wide": 1
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 0.0,
+     "south_pole_aitken": 0.0,
+     "humboldtianum": 0.0
+    },
+    "wide": {
+     "near_side": 0.2,
+     "south_pole_aitken": 0.7,
+     "humboldtianum": 0.1
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.0
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.0,
+     "south_pole_aitken": 0.0,
+     "humboldtianum": 0.0
+    },
+    "wide": {
+     "near_side": 0.01,
+     "south_pole_aitken": 0.08,
+     "humboldtianum": 0.03
+    }
    },
    "kind": "reaches another river, a sea or a closed lake"
   },
@@ -1243,13 +1428,21 @@
     "wide": 5
    },
    "green_km2_per_m_of_cut": 0.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 5
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 5
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.15
+    }
    },
    "kind": "reaches another river, a sea or a closed lake"
   },
@@ -1301,13 +1494,21 @@
     "wide": 3
    },
    "green_km2_per_m_of_cut": 0.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 3
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 3
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.09
+    }
    },
    "kind": "reaches another river, a sea or a closed lake"
   },
@@ -1359,13 +1560,21 @@
     "wide": 4
    },
    "green_km2_per_m_of_cut": 0.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 4
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 4
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.12
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -1417,13 +1626,21 @@
     "wide": 2
    },
    "green_km2_per_m_of_cut": 0.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 2
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 2
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.06
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -1475,13 +1692,21 @@
     "wide": 2
    },
    "green_km2_per_m_of_cut": 0.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 0,
-    "wide": 2
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 0
+    },
+    "wide": {
+     "near_side": 2
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.0
+    },
+    "wide": {
+     "near_side": 0.06
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -1533,13 +1758,21 @@
     "wide": 2
    },
    "green_km2_per_m_of_cut": 0.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 2
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 2
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.06
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -1591,13 +1824,21 @@
     "wide": 3
    },
    "green_km2_per_m_of_cut": 0.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 1,
-    "wide": 3
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 3
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.09
+    }
    },
    "kind": "reaches another river, a sea or a closed lake"
   },
@@ -1649,13 +1890,21 @@
     "wide": 1
    },
    "green_km2_per_m_of_cut": 0.2,
-   "near_side_gives_up_m3s": {
-    "narrow": 0,
-    "wide": 1
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 0
+    },
+    "wide": {
+     "near_side": 1
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.0
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.0
+    },
+    "wide": {
+     "near_side": 0.03
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -1707,13 +1956,21 @@
     "wide": 2
    },
    "green_km2_per_m_of_cut": 0.1,
-   "near_side_gives_up_m3s": {
-    "narrow": 0,
-    "wide": 2
+   "seas_give_up_m3s": {
+    "narrow": {
+     "south_pole_aitken": 0
+    },
+    "wide": {
+     "south_pole_aitken": 2
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.1
+   "seas_fall_m": {
+    "narrow": {
+     "south_pole_aitken": 0.0
+    },
+    "wide": {
+     "south_pole_aitken": 0.23
+    }
    },
    "kind": "rejoins its source's own river"
   },
@@ -1765,13 +2022,21 @@
     "wide": 1
    },
    "green_km2_per_m_of_cut": 0.1,
-   "near_side_gives_up_m3s": {
-    "narrow": 0,
-    "wide": 1
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 0
+    },
+    "wide": {
+     "near_side": 1
+    }
    },
-   "near_side_south_part_falls_m": {
-    "narrow": 0.0,
-    "wide": 0.0
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.0
+    },
+    "wide": {
+     "near_side": 0.03
+    }
    },
    "kind": "reaches another river, a sea or a closed lake"
   }
@@ -1826,13 +2091,21 @@
      "wide": 5
     },
     "green_km2_per_m_of_cut": 10.2,
-    "near_side_gives_up_m3s": {
-     "narrow": 1,
-     "wide": 5
+    "seas_give_up_m3s": {
+     "narrow": {
+      "south_pole_aitken": 1
+     },
+     "wide": {
+      "south_pole_aitken": 5
+     }
     },
-    "near_side_south_part_falls_m": {
-     "narrow": 0.0,
-     "wide": 0.1
+    "seas_fall_m": {
+     "narrow": {
+      "south_pole_aitken": 0.11
+     },
+     "wide": {
+      "south_pole_aitken": 0.57
+     }
     },
     "kind": "rejoins its source's own river"
    },
@@ -1884,13 +2157,21 @@
      "wide": 26
     },
     "green_km2_per_m_of_cut": 2.2,
-    "near_side_gives_up_m3s": {
-     "narrow": 6,
-     "wide": 26
+    "seas_give_up_m3s": {
+     "narrow": {
+      "near_side": 6
+     },
+     "wide": {
+      "near_side": 26
+     }
     },
-    "near_side_south_part_falls_m": {
-     "narrow": 0.2,
-     "wide": 0.8
+    "seas_fall_m": {
+     "narrow": {
+      "near_side": 0.18
+     },
+     "wide": {
+      "near_side": 0.76
+     }
     },
     "kind": "rejoins its source's own river"
    },
@@ -1942,13 +2223,21 @@
      "wide": 9
     },
     "green_km2_per_m_of_cut": 2.0,
-    "near_side_gives_up_m3s": {
-     "narrow": 2,
-     "wide": 9
+    "seas_give_up_m3s": {
+     "narrow": {
+      "near_side": 2
+     },
+     "wide": {
+      "near_side": 9
+     }
     },
-    "near_side_south_part_falls_m": {
-     "narrow": 0.1,
-     "wide": 0.3
+    "seas_fall_m": {
+     "narrow": {
+      "near_side": 0.06
+     },
+     "wide": {
+      "near_side": 0.26
+     }
     },
     "kind": "reaches another river, a sea or a closed lake"
    },
@@ -2000,13 +2289,21 @@
      "wide": 28
     },
     "green_km2_per_m_of_cut": 1.5,
-    "near_side_gives_up_m3s": {
-     "narrow": 7,
-     "wide": 28
+    "seas_give_up_m3s": {
+     "narrow": {
+      "near_side": 7
+     },
+     "wide": {
+      "near_side": 28
+     }
     },
-    "near_side_south_part_falls_m": {
-     "narrow": 0.2,
-     "wide": 0.8
+    "seas_fall_m": {
+     "narrow": {
+      "near_side": 0.2
+     },
+     "wide": {
+      "near_side": 0.82
+     }
     },
     "kind": "rejoins its source's own river"
    },
@@ -2058,13 +2355,21 @@
      "wide": 6
     },
     "green_km2_per_m_of_cut": 1.5,
-    "near_side_gives_up_m3s": {
-     "narrow": 1,
-     "wide": 6
+    "seas_give_up_m3s": {
+     "narrow": {
+      "near_side": 1
+     },
+     "wide": {
+      "near_side": 6
+     }
     },
-    "near_side_south_part_falls_m": {
-     "narrow": 0.0,
-     "wide": 0.2
+    "seas_fall_m": {
+     "narrow": {
+      "near_side": 0.03
+     },
+     "wide": {
+      "near_side": 0.18
+     }
     },
     "kind": "rejoins its source's own river"
    }
@@ -2108,7 +2413,7 @@
       -86.33
      ]
     },
-    "source_water_ends_in": "near_side",
+    "source_water_ends_in": "orientale",
     "green_km2": {
      "narrow": 166,
      "wide": 690
@@ -2118,17 +2423,25 @@
      "wide": 15
     },
     "green_km2_per_m_of_cut": 1.8,
-    "near_side_gives_up_m3s": {
-     "narrow": 4,
-     "wide": 15
+    "seas_give_up_m3s": {
+     "narrow": {
+      "near_side": 4
+     },
+     "wide": {
+      "near_side": 15
+     }
     },
-    "near_side_south_part_falls_m": {
-     "narrow": 0.1,
-     "wide": 0.4
+    "seas_fall_m": {
+     "narrow": {
+      "near_side": 0.12
+     },
+     "wide": {
+      "near_side": 0.44
+     }
     },
     "kind": "rejoins its source's own river"
    }
   ]
  },
- "seconds": 62
+ "seconds": 78
 }

@@ -1,6 +1,6 @@
 """Checks of the dryland rivers: a stretch's sum runs down the routing to the first stop and leaves the stop out, the
-water surface takes each sea's and lake's level, a route costs the near-side sea its loss, or its whole flow where it
-ends in a closed lake, and the record holds together once computed."""
+water surface takes each sea's and lake's level, each route's loss falls on the sea its water heads for, Moscoviense's
+by its fixed shares, a closed lake taking the whole flow, and the record holds together once computed."""
 import json
 
 import numpy as np
@@ -38,28 +38,35 @@ def test_the_water_surface_takes_seas_and_lakes():
     assert np.isnan(surface[1]) and np.isnan(surface[4])
 
 
-def test_what_the_near_side_gives_up():
-    names = ['near_side', 'south_pole_aitken', 'orientale']
-    # cells: 0 near-side sea, 1 salt sea, 2 a river into the near side, 3 a river into the salt sea, 4 a closed lake
-    receiver = np.array([0, 1, 0, 1, 4])
-    r = dict(receiver=receiver, discharge=np.array([0.0, 0.0, 2000.0, 2000.0, 0.0]))
-    sea = np.array([0, 1, -1, -1, -1], np.int8)
-    term = np.array([0, 1, 0, 1, 4])
-    rate = np.full(5, 1e-2)
+def test_each_loss_falls_on_the_sea_its_water_heads_for():
+    names = ['near_side', 'south_pole_aitken', 'orientale', 'moscoviense']
+    # cells: 0 near-side sea, 1 salt sea, 2 a river into the near side, 3 a river into the salt sea, 4 a closed lake,
+    # 5 Moscoviense, 6 a river into Moscoviense
+    receiver = np.array([0, 1, 0, 1, 4, 5, 5])
+    r = dict(receiver=receiver, discharge=np.array([0.0, 0.0, 2000.0, 2000.0, 0.0, 0.0, 2000.0]))
+    sea = np.array([0, 1, -1, -1, -1, 3, -1], np.int8)
+    term = np.array([0, 1, 0, 1, 4, 5, 5])
+    rate = np.full(7, 1e-2)
+    falls = {'near_side': 0.03, 'south_pole_aitken': 0.11, 'humboldtianum': 0.22}
+    shares = {'south_pole_aitken': 0.6, 'humboldtianum': 0.15, 'smythii_marginis': 0.25}
     route = dict(free_cell=2, end_cell=0, cut_m=50.0, full_sea=True, source_sea=2, source_outflow_m3s=1e4,
                  source_level=700.0, pass_cell=2, shore_cell=2, source_terminal=0)
-    dry = np.full(5, 100.0)
-    length = np.full(5, 120.0)
-    back = DR.evaluate(route, r, sea, names, term, dry, length, rate, 5, np.eye(3), 0.03)
-    assert back['ends_in'] == 'near_side' and back['source_water_ends_in'] == 'near_side'
-    assert back['near_side_gives_up_m3s'] == back['loss_m3s'] and back['loss_m3s']['wide'] > 0
-    salt = DR.evaluate(dict(route, free_cell=3, end_cell=1), r, sea, names, term, dry, length, rate, 5, np.eye(3), 0.03)
-    assert salt['ends_in'] == 'south_pole_aitken'
-    assert salt['near_side_gives_up_m3s'] == salt['loss_m3s']                   # the weir tops the salt sea up
-    closed = DR.evaluate(dict(route, free_cell=4, end_cell=4), r, sea, names, term, dry, length, rate, 5, np.eye(3), 0.03)
+    dry, length = np.full(7, 100.0), np.full(7, 120.0)
+    run = lambda **kw: DR.evaluate(dict(route, **kw), r, sea, names, term, dry, length, rate, 7, np.eye(3), falls, shares)
+    near = run()
+    assert near['ends_in'] == 'near_side' and near['loss_m3s']['wide'] > 0
+    assert near['seas_give_up_m3s']['wide'] == {'near_side': near['loss_m3s']['wide']}
+    salt = run(free_cell=3, end_cell=1)
+    assert salt['seas_give_up_m3s']['wide'] == {'south_pole_aitken': salt['loss_m3s']['wide']}
+    assert salt['seas_fall_m']['wide']['south_pole_aitken'] == pytest.approx(0.11 * salt['loss_m3s']['wide'], abs=0.01)
+    mosc = run(free_cell=6, end_cell=5)                       # Moscoviense's fixed weirs share the loss out
+    given = mosc['seas_give_up_m3s']['wide']
+    assert given['south_pole_aitken'] == pytest.approx(0.6 * mosc['loss_m3s']['wide'], abs=0.1)
+    assert given['near_side'] == pytest.approx(0.25 * mosc['loss_m3s']['wide'], abs=0.1)
+    closed = run(free_cell=4, end_cell=4)                     # a closed lake takes the whole flow from Orientale's water
     assert closed['ends_in'] == 'a closed lake'
-    assert closed['near_side_gives_up_m3s'] == {'narrow': DR.Q_ROUTE, 'wide': DR.Q_ROUTE}
-    assert closed['near_side_south_part_falls_m']['narrow'] == pytest.approx(0.03 * DR.Q_ROUTE, abs=0.05)
+    assert closed['seas_give_up_m3s']['narrow'] == {'near_side': DR.Q_ROUTE}
+    assert closed['seas_fall_m']['narrow']['near_side'] == pytest.approx(0.03 * DR.Q_ROUTE, abs=0.01)
 
 
 @pytest.fixture(scope='module')
@@ -78,6 +85,8 @@ def test_the_record_holds_together(record):
         assert x['dryland_km'] >= DR.DRY_MIN_KM and x['dryland_km'] <= x['new_river_km'] + 1
         assert x['green_km2']['narrow'] <= x['green_km2']['wide']
         assert x['loss_m3s']['wide'] <= x['flow_m3s'] + 1
+        if x['ends_in'] != 'a closed lake':
+            assert sum(x['seas_give_up_m3s']['wide'].values()) == pytest.approx(x['loss_m3s']['wide'], abs=0.5)
     s = record['summary']
     assert s['arid_and_semi_arid_land_km2'] <= s['land_km2']
     assert sum(record['drylands_by_turned_latitude_km2'].values()) == pytest.approx(s['arid_and_semi_arid_land_km2'], rel=0.01)
