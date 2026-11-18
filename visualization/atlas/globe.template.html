@@ -41,6 +41,11 @@
   .lab { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; font-family: var(--display);
          font-size: 12.5px; line-height: 1.1; text-align: center; }
   .lab.sea { color: #eef5ff; font-style: italic; letter-spacing: .02em; text-shadow: 0 0 3px #0d2c55, 0 0 6px #0d2c55; }
+  .lab.region { color: #fff1d6; font-size: 13.5px; font-weight: 600; letter-spacing: .06em;
+                text-shadow: 0 0 3px #1c1408, 0 0 7px #1c1408, 0 0 11px #1c1408; }
+  .lab.region.seaRegion { color: #e2efff; font-style: italic; text-shadow: 0 0 3px #0d2c55, 0 0 8px #0d2c55; }
+  .lab.district { color: #fbf7ee; font-size: 11.5px; text-shadow: 0 0 3px #000, 0 0 6px #000; }
+  .lab.coast { color: #d9ecff; font-size: 11px; font-style: italic; text-shadow: 0 0 3px #08213f, 0 0 6px #08213f; }
   .lab.island { color: #1f1d1a; font-size: 11.5px; text-shadow: 0 0 3px #fbfaf7, 0 0 5px #fbfaf7; }
   .appearance .lab.island { color: #f4f1ea; text-shadow: 0 0 3px #000, 0 0 5px #000; }
   .lab.site { transform: translate(9px, -50%); text-align: left; font-size: 11.5px; color: #fff3ec;
@@ -208,6 +213,7 @@
           <label><input type="checkbox" id="show-targets"> Sampling targets</label>
           <label><input type="checkbox" id="show-falls" checked> Falls and cascades</label>
           <label><input type="checkbox" id="show-works" checked> Works</label>
+          <label><input type="checkbox" id="show-districts" checked> Regions and districts</label>
           <label><input type="checkbox" id="show-grid"> Grid</label>
         </div>
         <div class="scale">
@@ -300,6 +306,26 @@
       globe reads the height of the 0.25° atlas cell under it.</p>
     <h2 id="years-title" hidden>What the years show</h2>
     <p id="years-note" hidden></p>
+    <section id="districts-note" hidden>
+      <h2>Regions and districts: a first draft</h2>
+      <p><b>Computed, then judged.</b> A district is a region that reads as a whole and meaningful place and stands apart
+        from the others. The draft applies that as rules: each district gathers round one centre (a named crater's floor,
+        a large lake, or the ground between them); its edges follow the ground's own ridges and rim crests and the edges of
+        its moisture zone and rock; neighbours alike in zone, rock and the waters they drain to, with only a weak edge
+        between them, merge; and districts run from about 5,000 to 150,000 km². <span id="districts-figures"></span>
+        Regions gather districts round the great basins and are never crossed by a district. The coastal seas, the water
+        within 60 km of the shore, are districts of their own, each linked to the land that faces it and the land whose
+        rivers reach it, so that the coast and its land can be planned together; selecting either shows them both. The
+        draft's significance is computed, from landform, water, climate and rock: written judgment of each place, and the
+        kept landforms, settlement and heritage treatments, come later.</p>
+      <p><b>Names.</b> Working names in the Moon's own tongues, each region in one of them, chosen loosely as Earth's
+        peoples sit in like landscapes: <span id="districts-tongues"></span>. Terlunan and Proto-Olivolingvo come from the
+        author's own languages; the others are lunar descendants of their Earth roots, built for the atlas from everyday
+        landscape words. A name joins a head chosen by the place's centre (a lake, a crater, a river, a plain, a coast) to
+        a word for what sets it apart (its zone, rock, height, lakes, falls or the Earthlight of the near side). Some
+        match places on Earth, as names from real roots will. They are labels for the people who come to live there to keep
+        or replace. <span id="districts-coined"></span></p>
+    </section>
     <p id="provenance"></p>
   </section>
 </div>
@@ -701,7 +727,7 @@
     float dither = float(hashu(uint(gl_FragCoord.x) + hashu(uint(gl_FragCoord.y)))) * (1.0 / 4294967295.0) - 0.5;
     vec3 display = linearToSrgb(c);
     if (hit && uOverlay > 0.0) display = mix(display, linearToSrgb(topo), uOverlay * rim);
-    if (hit) display = gridOver(worksOver(display, ns, pix), uv, gx, gy);
+    if (hit) display = gridOver(worksOver(districtsOver(display, uv, gx, gy), ns, pix), uv, gx, gy);
     gl_FragColor = vec4(display + dither / 255.0, 1.0);
   }
 </script>
@@ -727,6 +753,39 @@
     vec3 dark = vec3(0.03, 0.04, 0.06);
     colour = mix(colour, mix(dark, vec3(1.0), bright), 0.3 * edge);
     return mix(colour, mix(vec3(1.0), dark, bright), max(0.8 * major, 0.4 * minor));
+  }
+</script>
+<script id="district-lines" type="x-shader/x-fragment">
+  // The atlas round's draft regions and districts: each cell's district (red and green) and region (blue) in a texture
+  // read cell by cell. Edges are drawn where a neighbour a pixel or so away differs: regions' edges always, districts'
+  // when zoomed in (uDistrictMode 2). A selected district and the districts linked to it are tinted.
+  uniform sampler2D tDistricts;
+  uniform float uDistrictMode;   // 0 off, 1 regions, 2 regions and districts
+  uniform float uSel[8];         // the selected district and its links, by their place in the page's list (0 unused)
+  uniform vec2 uLandUnits;       // how many districts and regions are on land; those after them, and 0, are water
+  vec2 unitsAt(vec2 at) {
+    vec3 t = floor(texture2D(tDistricts, at).rgb * 255.0 + 0.5);
+    return vec2(t.r * 256.0 + t.g, t.b);
+  }
+  vec3 districtsOver(vec3 colour, vec2 uv, vec2 gx, vec2 gy) {
+    if (uDistrictMode < 0.5) return colour;
+    vec2 c0 = unitsAt(uv);
+    // The shore already shows itself: edges are drawn between two units on land or two at sea, never along a coast.
+    vec2 land0 = vec2(step(0.5, c0.x) * step(c0.x, uLandUnits.x + 0.5), step(0.5, c0.y) * step(c0.y, uLandUnits.y + 0.5));
+    float dEdge = 0.0, rEdge = 0.0;
+    for (int k = 0; k < 4; k++) {
+      vec2 off = (k == 0 ? gx : k == 1 ? -gx : k == 2 ? gy : -gy) * 1.3;
+      vec2 c1 = unitsAt(uv + off);
+      vec2 land1 = vec2(step(0.5, c1.x) * step(c1.x, uLandUnits.x + 0.5), step(0.5, c1.y) * step(c1.y, uLandUnits.y + 0.5));
+      vec2 same = 1.0 - abs(land0 - land1);
+      dEdge = max(dEdge, step(0.5, abs(c1.x - c0.x)) * same.x);
+      rEdge = max(rEdge, step(0.5, abs(c1.y - c0.y)) * same.y);
+    }
+    float sel = 0.0;
+    for (int k = 0; k < 8; k++) sel = max(sel, step(0.5, uSel[k]) * (1.0 - step(0.5, abs(uSel[k] - c0.x))));
+    colour = mix(colour, vec3(1.0, 0.80, 0.42), 0.28 * sel * step(0.5, c0.x));
+    if (uDistrictMode > 1.5) colour = mix(colour, vec3(0.96, 0.94, 0.88), 0.6 * dEdge);
+    return mix(colour, vec3(1.0, 0.91, 0.72), 0.9 * rEdge);
   }
 </script>
 <script id="works-lines" type="x-shader/x-fragment">
@@ -892,7 +951,8 @@
     vec3 nr = normalize(n + uNormalScale * (nm.x * east + nm.y * north) / max(nm.z, 0.2));
     vec3 colour = srgbToLinear(rampAt(vUv, h)) * hillshade(nr, n) * contourShade(h, fwidth(h));
     float pix = max(length(dFdx(n)), length(dFdy(n)));
-    gl_FragColor = vec4(gridOver(worksOver(linearToSrgb(colour), n, pix), vUv, dFdx(vUv), dFdy(vUv)), 1.0);
+    vec3 shown = districtsOver(linearToSrgb(colour), vUv, dFdx(vUv), dFdy(vUv));
+    gl_FragColor = vec4(gridOver(worksOver(shown, n, pix), vUv, dFdx(vUv), dFdy(vUv)), 1.0);
   }
 </script>
 <script>
@@ -950,6 +1010,18 @@
     Math.round(P.clouds.lowKm) + ' km, and a high deck of ' + Math.round(P.clouds.highCover * 100) + '% drawn at ' +
     Math.round(P.clouds.highKm) + ' km. The run has no sea ice or snow anywhere';
   document.getElementById('provenance').innerHTML = '<b>Provenance.</b> ' + D.provenance;
+  if (D.districts) {
+    const S = D.districts.summary;
+    document.getElementById('districts-note').hidden = false;
+    document.getElementById('districts-figures').textContent = 'The draft holds ' + S.land_districts + ' districts on land in ' +
+      S.land_regions + ' regions, their median ' + S.land_district_km2.median.toLocaleString('en-US') + ' km², and ' +
+      S.coastal_sea_districts + ' coastal seas in the ' + S.sea_regions + ' seas.';
+    document.getElementById('districts-tongues').textContent = Object.values(D.districts.tongues).join('; ');
+    const coined = Object.entries(D.districts.coined || {});
+    document.getElementById('districts-coined').textContent = coined.length
+      ? 'Terlunan words coined here for the atlas, proposals beside the language\'s v0.6 dictionary: ' +
+        coined.map(([w, m]) => w + ', ' + m).join('; ') + '.' : '';
+  }
 
   const legend = document.getElementById('legend');
   const legendNote = document.getElementById('legend-note');
@@ -1033,7 +1105,7 @@
   const segments = window.innerWidth < 700 ? [320, 160] : [512, 256];
   const rgb = (hex) => new THREE.Vector3(...[1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255));
   const shared = document.getElementById('topo-lines').textContent + document.getElementById('grid-lines').textContent
-    + document.getElementById('works-lines').textContent;
+    + document.getElementById('works-lines').textContent + document.getElementById('district-lines').textContent;
   // The works' courses as segments between unit vectors, for both shaders' canal lines.
   const unitAt = (lat, lon) => {
     const theta = (90 - lat) * Math.PI / 180, phi = (lon + 180) / 360 * 2 * Math.PI;
@@ -1065,7 +1137,11 @@
     uYear: { value: 0 }, uLevels: { value: new Array(BODIES).fill(0) },
     uWorkA: { value: Array.from({ length: WORK_SEGMENTS }, (_, i) => workSegments[i] ? workSegments[i][0] : new THREE.Vector3()) },
     uWorkB: { value: Array.from({ length: WORK_SEGMENTS }, (_, i) => workSegments[i] ? workSegments[i][1] : new THREE.Vector3()) },
-    uWorks: { value: 0 }
+    uWorks: { value: 0 },
+    tDistricts: { value: D.textures.districts ? load(D.textures.districts, exact) : blank() },
+    uDistrictMode: { value: 0 }, uSel: { value: new Array(8).fill(0) },
+    uLandUnits: { value: new THREE.Vector2(D.districts ? D.districts.districts.filter((d) => d.kind === 'district').length : 0,
+                                           D.districts ? D.districts.regions.filter((r) => !r.sea).length : 0) }
   };
   const reliefUniforms = { ...topoUniforms, tNormal: { value: normalMap }, uScale: { value: 0 }, uNormalScale: { value: 1 } };
   const reliefMesh = new THREE.Mesh(new THREE.SphereGeometry(1, segments[0], segments[1]), new THREE.ShaderMaterial({
@@ -1276,6 +1352,20 @@
     return item;
   };
   for (const [name, lat, lon] of D.labels.seas) addLabel('sea', name, lat, lon, 0);
+  // The atlas round's draft regions and districts, with their names in the Moon's tongues.
+  const DIST = D.districts || null;
+  const UNIT_KINDS = new Set(['region', 'district', 'coast']);
+  if (DIST) {
+    for (const r of [...DIST.regions].sort((a, b) => b.area - a.area)) {
+      const item = addLabel('region', r.name, r.lat, r.lon, 0, r);
+      if (r.sea) item.el.classList.add('seaRegion');
+    }
+    for (const d of [...DIST.districts].sort((a, b) => b.area - a.area)) addLabel(d.kind, d.name, d.lat, d.lon, 0, d);
+  }
+  const unitByIndex = new Map(DIST ? DIST.districts.map((d) => [d.index, d]) : []);
+  const setDistrictMode = () => {
+    topoUniforms.uDistrictMode.value = !DIST || !show.district ? 0 : distance < ZOOM_DISTRICTS ? 2 : 1;
+  };
   for (const [name, lat, lon, h] of D.labels.islands) addLabel('island', name, lat, lon, h);
   for (const s of D.labels.sites) {
     const item = addLabel('site', s.short || '', s.lat, s.lon,
@@ -1315,12 +1405,18 @@
   const reliefInput = document.getElementById('relief');
   const reliefValue = document.getElementById('relief-value');
   const SHOW_IDS = { sea: 'show-seas', island: 'show-islands', site: 'show-sites', target: 'show-targets', fall: 'show-falls',
-                     work: 'show-works', grid: 'show-grid' };
+                     work: 'show-works', grid: 'show-grid', region: 'show-districts', district: 'show-districts',
+                     coast: 'show-districts' };
   const settings = {
-    appearance: { show: { sea: false, island: false, site: false, target: false, fall: true, work: true, grid: false },
-                  relief: 1, max: 10 },
-    topo: { show: { sea: true, island: true, site: true, target: false, fall: true, work: true, grid: false }, relief: 12, max: 40 }
+    appearance: { show: { sea: false, island: false, site: false, target: false, fall: true, work: true, grid: false,
+                          region: true, district: true, coast: true }, relief: 1, max: 10 },
+    topo: { show: { sea: false, island: true, site: true, target: false, fall: true, work: true, grid: false,
+                    region: true, district: true, coast: true }, relief: 12, max: 40 }
   };
+  // Regions show when zoomed out, districts and coastal seas when zoomed in past ZOOM_DISTRICTS Moon radii.
+  const ZOOM_DISTRICTS = 2.6;
+  const zoomShows = (kind) => kind === 'region' ? distance >= ZOOM_DISTRICTS
+    : (kind === 'district' || kind === 'coast') ? distance < ZOOM_DISTRICTS : true;
   let show = settings.appearance.show;
   const setRelief = (v) => {
     settings[mode].relief = v;
@@ -1347,6 +1443,7 @@
     const spacing = show.grid ? [+gridMajor.value, +gridMinor.value] : [0, 0];
     topoUniforms.uGrid.value.set(...spacing);
     topoUniforms.uWorks.value = show.work && workSegments.length ? 1 : 0;
+    setDistrictMode();
     invalidate();
   };
   for (const select of [gridMajor, gridMinor]) select.addEventListener('change', () => {
@@ -1704,6 +1801,21 @@
       card.querySelector('h3').textContent = x.title;
       card.querySelector('.meta').textContent = x.meta;
       card.querySelector('.marks').textContent = x.note;
+    } else if (it.kind === 'region' || it.kind === 'district' || it.kind === 'coast') {
+      // A draft unit: its name, code, tongue and size, its short description, and for a coast or a shore its links.
+      card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p><p class="treat"></p>';
+      card.querySelector('h3').textContent = x.name;
+      const kind = it.kind === 'region' ? (x.sea ? 'sea region' : 'region') : it.kind === 'coast' ? 'coastal sea' : 'district';
+      card.querySelector('.meta').textContent = x.code + ' · ' + kind + (x.region ? ' of ' + x.region : '') + ' · ' +
+        fmt(x.area) + ' km² · ' + x.tongue + (x.meaning ? ' · ' + x.meaning : '');
+      card.querySelector('.marks').textContent = x.description;
+      const linked = (x.links || []).map((k) => unitByIndex.get(k)).filter(Boolean);
+      card.querySelector('.treat').textContent = linked.length
+        ? (it.kind === 'coast' ? 'Linked shore and catchment: ' : 'Its coastal seas: ') + linked.map((u) => u.name).join(', ') + '.'
+        : '';
+      const sel = [x.index || 0, ...(x.links || [])].slice(0, 8);
+      topoUniforms.uSel.value = [...sel, ...new Array(8 - sel.length).fill(0)];
+      invalidate();
     } else {
       card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p>';
       card.querySelector('h3').textContent = x.name;
@@ -1848,6 +1960,7 @@
     if (dirty) {
       dirty = false;
       followZoom();
+      setDistrictMode();
       camera.position.set(0, 0, distance);
       camera.fov = fov;
       camera.near = Math.max(0.01, distance - 2);
@@ -1870,12 +1983,21 @@
         pinGroup.visible = screenOf(pin).facing > 0.02;
       }
       renderer.render(scene, camera);
+      const placed = [];
       for (const it of items) {
-        const visible = show[it.kind] && !(it.kind === 'site' && !it.extra.short);
+        const visible = show[it.kind] && zoomShows(it.kind) && !(it.kind === 'site' && !it.extra.short);
         if (it.mesh) it.mesh.visible = !!show[it.kind];
         if (!visible) { it.el.hidden = true; continue; }
         const s = screenOf(it);
-        const on = s.facing > 0.12;
+        let on = s.facing > 0.12;
+        if (on && UNIT_KINDS.has(it.kind)) {
+          // Region and district names: the larger unit first (items are in that order); a name that would overlap one
+          // already placed waits until the zoom gives it room.
+          const w = it.el.textContent.length * (it.kind === 'region' ? 8.2 : 6.6) + 8, h = 15;
+          const box = [s.x - w / 2, s.y - h / 2, s.x + w / 2, s.y + h / 2];
+          if (placed.some((b) => box[0] < b[2] && box[2] > b[0] && box[1] < b[3] && box[3] > b[1])) on = false;
+          else placed.push(box);
+        }
         it.el.hidden = !on;
         if (on) {
           it.el.style.left = s.x.toFixed(1) + 'px';

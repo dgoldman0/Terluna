@@ -618,6 +618,46 @@ def work_lines(path, rotation):
             for s in range(int(stretch.max()) + 1)] if cells.size else []
 
 
+def districts_layer(record_path, rotation):
+    """The atlas round's draft regions and districts for the page: a texture in the globe's frame (180 W at the left)
+    holding at each 8 px/deg cell the district's place in the page's list (red and green, 0 on open water) and the
+    region's (blue), and the lists with each unit's name, code, tongue, label point, area and short description; for a
+    coastal sea, the land districts it faces and that feed it, and for a land district its coastal seas."""
+    record = json.loads(Path(record_path).read_text())
+    product = Path(record['product']['path'])
+    if digest(product) != record['product']['sha256']:
+        raise SystemExit(f'{product} no longer matches its record {record_path}')
+    with np.load(product, allow_pickle=False) as z:
+        district, region = z['district'].astype(np.int64), z['region'].astype(np.int64)
+    regions = record['regions']
+    page_region = np.zeros(int(region.max()) + 1, np.int64)
+    for k, r in enumerate(regions):
+        page_region[int(r['code'][1:]) if r['kind'] == 'land' else 100 + int(r['code'][1:])] = k + 1
+    units = record['districts'] + record['coastal_seas']
+    if district.max() > 65535 or len(regions) > 255:
+        raise SystemExit('too many districts or regions for the page\'s texture')
+    tex = np.zeros(district.shape + (3,), np.uint8)
+    tex[..., 0], tex[..., 1], tex[..., 2] = district >> 8, district & 0xFF, page_region[region]
+    tex = np.roll(tex, tex.shape[1] // 2, axis=1)
+    turned = appearance.turn_texture(tex, rotation, left_lon=-180.0, nearest=True)
+    index = {u['code']: k + 1 for k, u in enumerate(units)}
+    tongue = {k: t['label'] for k, t in record['tongues'].items()}
+    tongue_where = {t['label']: t.get('where', '') for t in record['tongues'].values()}
+    region_name = {r['code']: r['name'] for r in regions}
+    unit = lambda u, kind: dict(
+        index=index.get(u['code'], 0), code=u['code'], name=u['name'], kind=kind, tongue=tongue[u['tongue']],
+        lat=u['at']['turned'][0], lon=u['at']['turned'][1], area=u['area_km2'], description=u['description'],
+        region=region_name.get(u.get('region'), ''),
+        links=[index[c] for c in (u.get('faces', []) + u.get('fed_by', []) + u.get('coasts', [])) if c in index][:7])
+    data = dict(regions=[unit(r, 'region') | dict(index=0, sea=r['kind'] == 'sea', meaning=r.get('name_meaning', ''))
+                         for r in regions],
+                districts=[unit(d, 'district') for d in record['districts']]
+                + [unit(c, 'coast') for c in record['coastal_seas']],
+                summary=record['summary'], tongues={l: f'{l} for {w}' if w else l for l, w in tongue_where.items()},
+                coined=record.get('terlunan_coined', {}))
+    return turned, data, Path(record_path), product
+
+
 def work_marks(summary, grid, level0, rotation):
     """The page's marks for the works' cuts: each piece of trench at its deepest point, with its card's lines."""
     pieces = summary.get('cuts', {}).get('pieces', [])
@@ -730,7 +770,7 @@ def cover_text(cover, sources, sea=None):
 
 
 def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes, moisture=None, falls=None,
-                        wind=None):
+                        wind=None, districts=None):
     """The globe page on the design surface: the relief and the water at each body's own level, the appearance from
     the same water (the ground in true colour from the moisture map when one is given), the sites and targets placed
     on it, and the figures from the surface's record."""
@@ -874,6 +914,13 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
                     f"degree), relief at {SURFACE_PPD if truly else SURFACE_PPD // 2}, the map at {ppd_map}."),
         frame=dict(note=surface_note(turn, summary, climate),
                    lede=''))
+    if districts and truly:
+        texture, layer, rec_path, product = districts_layer(districts, rotation)
+        data['textures']['districts'] = texture_file('districts', texture)
+        data['districts'] = layer
+        data['provenance'] += (f" Regions and districts: the atlas round's first draft (districts.json "
+                               f"{digest(rec_path)[:12]}, its grid {digest(product)[:12]}).")
+        sources.update(districts=rec_path, districts_grid=product)
     template = (HERE / 'globe.template.html').read_text()
     page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
     (OUT / 'globe.html').write_text(page)
@@ -904,6 +951,9 @@ def main(argv=None):
                                                     'the largest falls marked, white water on steep reaches')
     parser.add_argument('--moisture', type=Path, help="with --surface, the moisture map of the climatology's run and years "
                                                       '(results/moisture_map_final.json): the ground in true colour')
+    parser.add_argument('--districts', type=Path, help="with --moisture, the atlas round's draft regions and districts "
+                                                       '(research/studies/atlas_round/results/districts.json): regions when '
+                                                       'zoomed out, districts and their names when zoomed in')
     parser.add_argument('--wind', type=Path, help="with --moisture, the climate domain's surface wind of the climatology's "
                                                   'run and years (products/surface_wind_<run>_y<years>.npz): the sea\'s '
                                                   'slopes, and so its glint and its reflected sky, from the winds')
@@ -920,7 +970,8 @@ def main(argv=None):
                                     sites, targets, dict(register=digest(reg_path)),
                                     moisture=args.moisture.absolute() if args.moisture else None,
                                     falls=args.falls.absolute() if args.falls else None,
-                                    wind=args.wind.absolute() if args.wind else None)
+                                    wind=args.wind.absolute() if args.wind else None,
+                                    districts=args.districts.absolute() if args.districts else None)
         products = {str(p.relative_to(ROOT)): digest(p) for p in (reg_path, tgt_path)}
         products[str(args.surface)] = digest(args.surface)
         products[str(args.surface_record)] = digest(args.surface_record)
