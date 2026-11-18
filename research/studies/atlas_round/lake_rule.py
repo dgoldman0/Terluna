@@ -243,15 +243,11 @@ def accumulate(receiver, donor, start):
     return acc
 
 
-def route_hollows(h, outlet, lat_deg, cell_km, runoff_mm_day, lake_net_mm_day, outlet_level, sources=(), floor_runoff=True):
-    """route_levels with every hollow filled as one water (see the module's text). sources: (cell, m3/s) pairs put in
-    (or, negative, taken out) at cells. Returns a dict of flat arrays: receiver (each cell's steepest-descent
-    neighbour, itself at a lowest point and on a sea), discharge (m3/s through each cell: dry ground's runoff and the
-    overflows, gathered downhill; on a sea's cells, what arrives there), own_flow (what starts at each cell), lake,
-    lake_level (NaN off the lakes), lake_spills (whether the cell's lake overflows), body (the hollow whose water a lake cell is part of), label, area, net (the open
-    water's balance, m3/s), outlet; the hollows' tables under 'tree', 'full', 'held', 'need', 'out', 'over', 'left'
-    (what a lake not full keeps beyond its last whole cell) and 'cover' (the hollow whose water first covers each cell); and
-    the budget's pieces."""
+def hollow_structure(h, outlet, lat_deg, cell_km, outlet_level):
+    """What the ground and the seas alone decide of a route_hollows routing, so that several climates and put-ins can
+    be routed on one floor: each cell's steepest-descent neighbour and the cell its water ends at down the ground
+    (terminal: a lowest point or a sea's cell), the catchments, the hollows' tree, the hollow whose water first covers
+    each cell, and the cells any hollow's water can cover, ordered by hollow and height."""
     rows, cols = h.shape
     n = rows * cols
     idx2 = np.arange(n, dtype=np.int32).reshape(rows, cols)
@@ -264,7 +260,8 @@ def route_hollows(h, outlet, lat_deg, cell_km, runoff_mm_day, lake_net_mm_day, o
     n_out = max(1, levels.size)
     node_of[flat_out] = groups
     node_of[sinks] = np.arange(n_out, sinks.size + n_out, dtype=np.int32)
-    label = node_of[dr.terminal(receiver)]
+    terminal = dr.terminal(receiver)
+    label = node_of[terminal]
     n_nodes = sinks.size + n_out
     h_pass = np.where(outlet, -np.inf, h).astype(np.float32)
     edges = dr.passes(label.reshape(rows, cols), h_pass, idx2)
@@ -280,25 +277,68 @@ def route_hollows(h, outlet, lat_deg, cell_km, runoff_mm_day, lake_net_mm_day, o
     hollow = ground[label[ground] >= n_out]              # ground that drains straight to a sea lies in no hollow
     cover = np.full(n, -1, np.int64)
     cover[hollow] = first_covered_by(tree, label[hollow], hf[hollow])
-    run = np.where(flat_out, 0.0, np.maximum(runoff_mm_day.ravel(), 0.0) * MM_DAY * area)
+    under = np.flatnonzero(cover >= 0)
+    under = under[np.lexsort((hf[under], cover[under]))]  # the cells a hollow's water can cover, by hollow and height
+    return dict(receiver=receiver, terminal=terminal, label=label, outlet=flat_out, sink=sink, sinks=sinks, n_out=n_out,
+                n_nodes=n_nodes, tree=tree, hf=hf, area=area, ground=ground, cover=cover, under=under,
+                owner=cover[under])
+
+
+def hollow_terms(s, runoff_mm_day, lake_net_mm_day, floor_runoff=True):
+    """A climate's terms on a structure (m3/s): the runoff each cell yields while dry (run), the open water's balance
+    over it (net), what keeps each coverable cell under water (want: its loss, and the runoff it no longer yields),
+    each hollow's need to stand full beyond the hollows it is made of, and the runoff each catchment gathers."""
+    flat_out, cover, under, label, ground = s['outlet'], s['cover'], s['under'], s['label'], s['ground']
+    run = np.where(flat_out, 0.0, np.maximum(runoff_mm_day.ravel(), 0.0) * MM_DAY * s['area'])
     if not floor_runoff:
         run[cover >= 0] = 0.0
-    net = lake_net_mm_day.ravel() * MM_DAY * area
-    n_all = tree['parent'].size
-    under = np.flatnonzero(cover >= 0)
-    order = np.lexsort((hf[under], cover[under]))
-    under = under[order]                                 # the cells a hollow's water can cover, by hollow and height
-    owner = cover[under]
-    want = run[under] - net[under]                       # what keeps a cell under water: its loss, and its lost runoff
-    need = np.bincount(owner, weights=want, minlength=n_all)
-    supply = np.bincount(label[ground], weights=run[ground], minlength=n_nodes)
-    put = np.zeros(n)
+    net = lake_net_mm_day.ravel() * MM_DAY * s['area']
+    want = run[under] - net[under]
+    need = np.bincount(s['owner'], weights=want, minlength=s['tree']['parent'].size)
+    gathered = np.bincount(label[ground], weights=run[ground], minlength=s['n_nodes'])
+    gathered[:s['n_out']] = 0.0
+    return dict(run=run, net=net, want=want, need=need, gathered=gathered)
+
+
+def hollow_state(s, terms, sources=()):
+    """The hollows settled on a climate's terms and the flows put in (or, negative, taken out) at cells: full, held,
+    out and over as settle gives them, with the flow put in at each cell."""
+    put = np.zeros(s['outlet'].size)
+    supply = terms['gathered'].copy()
     for cell, q in sources:
         put[int(cell)] += q
-        if not flat_out[int(cell)]:
-            supply[label[int(cell)]] += q
-    supply[:n_out] = 0.0
-    full, held, out, over = settle(tree, supply, need)
+        if not s['outlet'][int(cell)]:
+            supply[s['label'][int(cell)]] += q
+    supply[:s['n_out']] = 0.0
+    full, held, out, over = settle(s['tree'], supply, terms['need'])
+    return dict(full=full, held=held, out=out, over=over, put=put)
+
+
+def reaches(s, terms, state, water, count=None):
+    """What reaches each water of a settled state without gathering the rivers: the runoff and put-ins of dry ground
+    that drains straight to a sea, and each overflow that lands on such ground or on a sea, given to the water its
+    way down ends in. water: the index of the water over each cell, -1 off the seas. Returns the flow by index, for
+    `count` waters where given."""
+    label, terminal, tree, n_out = s['label'], s['terminal'], s['tree'], s['n_out']
+    count = int(water.max()) + 1 if count is None else count
+    straight = s['ground'][label[s['ground']] < n_out]
+    got = np.bincount(water[terminal[straight]], weights=(terms['run'] + state['put'])[straight], minlength=count)
+    roots = np.flatnonzero(state['full'] & (tree['parent'] < 0) & (np.arange(tree['parent'].size) >= n_out))
+    onto = tree['land'][roots]
+    to_sea = label[onto] < n_out
+    got += np.bincount(water[terminal[onto[to_sea]]], weights=state['out'][roots[to_sea]], minlength=count)
+    return got
+
+
+def hollow_routing(s, terms, state):
+    """The routing of a settled state: the lakes, their levels and the rivers (route_hollows' returns)."""
+    receiver, label, flat_out, sink, tree = s['receiver'], s['label'], s['outlet'], s['sink'], s['tree']
+    hf, under, owner, n_out, n_nodes = s['hf'], s['under'], s['owner'], s['n_out'], s['n_nodes']
+    run, net, want, need = terms['run'], terms['net'], terms['want'], terms['need']
+    full, held, out, over, put = (state[k] for k in ('full', 'held', 'out', 'over', 'put'))
+    n = flat_out.size
+    n_all = tree['parent'].size
+    land = tree['land']
 
     # the lakes: all a full hollow's water can cover, and in a hollow not full the lowest cells its supply keeps
     kids = tree['kids']
@@ -351,9 +391,25 @@ def route_hollows(h, outlet, lat_deg, cell_km, runoff_mm_day, lake_net_mm_day, o
         lakes_rain_less_evaporation=float(net[lake].sum()), reaches_the_seas=float(discharge[flat_out].sum()),
         kept_by_lakes_not_full=float(left.sum()))
     return dict(receiver=receiver, label=label, discharge=discharge, lake=lake, lake_level=lake_level,
-                lake_spills=spills, area=area, outlet=flat_out, sinks=sinks, outlet_nodes=n_out, tree=tree, full=full,
-                held=held, need=need, out=out, over=over, cover=cover, body=body, made=made, left=left, own_flow=flow, net=net,
+                lake_spills=spills, area=s['area'], outlet=flat_out, sinks=s['sinks'], outlet_nodes=n_out, tree=tree, full=full,
+                held=held, need=need, out=out, over=over, cover=s['cover'], body=body, made=made, left=left, own_flow=flow, net=net,
                 budget=budget)
+
+
+def route_hollows(h, outlet, lat_deg, cell_km, runoff_mm_day, lake_net_mm_day, outlet_level, sources=(), floor_runoff=True):
+    """route_levels with every hollow filled as one water (see the module's text). sources: (cell, m3/s) pairs put in
+    (or, negative, taken out) at cells. Returns a dict of flat arrays: receiver (each cell's steepest-descent
+    neighbour, itself at a lowest point and on a sea), discharge (m3/s through each cell: dry ground's runoff and the
+    overflows, gathered downhill; on a sea's cells, what arrives there), own_flow (what starts at each cell), lake,
+    lake_level (NaN off the lakes), lake_spills (whether the cell's lake overflows), body (the hollow whose water a
+    lake cell is part of), label, area, net (the open water's balance, m3/s), outlet; the hollows' tables under
+    'tree', 'full', 'held', 'need', 'out', 'over', 'left' (what a lake not full keeps beyond its last whole cell) and
+    'cover' (the hollow whose water first covers each cell); and the budget's pieces. The routing is made in four
+    steps that can be called apart, so that one floor is not worked out again for each climate or put-in:
+    hollow_structure, hollow_terms, hollow_state and hollow_routing."""
+    s = hollow_structure(h, outlet, lat_deg, cell_km, outlet_level)
+    terms = hollow_terms(s, runoff_mm_day, lake_net_mm_day, floor_runoff)
+    return hollow_routing(s, terms, hollow_state(s, terms, sources))
 
 
 # ---------------------------------------------------------------- the design surface

@@ -176,3 +176,18 @@ def test_the_record_is_the_modules():
         assert case['lakes']['shore_cells_not_held'] == 0
         assert abs(case['budget_gap_m3s']) < 1.0
     assert record['cases']['present']['lakes']['shore_cells_not_held'] > 50_000
+
+
+@pytest.mark.parametrize('seed', [1, 4])
+def test_what_reaches_each_sea_is_what_the_rivers_gather(seed):
+    h, outlet, lat, runoff, net, level, sources = random_case(seed)
+    water = np.where(outlet.ravel(), (np.arange(h.size) % h.shape[1] > h.shape[1] // 2).astype(np.int8), -1).astype(np.int8)
+    s = LR.hollow_structure(h, outlet, lat, 1.0, level)
+    terms = LR.hollow_terms(s, runoff, net)
+    state = LR.hollow_state(s, terms, sources)
+    r = LR.hollow_routing(s, terms, state)
+    gathered = [r['discharge'][water == i].sum() for i in (0, 1)]
+    assert min(gathered) > 0.0                                      # both waters receive rivers
+    assert LR.reaches(s, terms, state, water) == pytest.approx(gathered)
+    whole = LR.route_hollows(h, outlet, lat, 1.0, runoff, net, level, sources=sources)
+    assert np.array_equal(whole['discharge'], r['discharge']) and np.array_equal(whole['lake'], r['lake'])

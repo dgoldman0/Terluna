@@ -2,7 +2,7 @@
  "schema": "terluna.research.atlas-round-lake-rule/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/lake_rule.py": "01fa17df7c999945489f2b0db359603762a093566ce1b777864c0d92f16ef4f3",
+   "research/studies/atlas_round/lake_rule.py": "961acd4025f9e7810c2e308aa5bf5467dad3830018edcd6ee46cb901a631eae0",
    "research/studies/drainage_network/routing.py": "52ede9125248151b2e8d09bce7ef3e2a9eb742cb391654e0208aa7ef2e96b922",
    "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5"
   }
@@ -2117,5 +2117,5 @@
   "path": "/media/projectspace/terluna-research/atlas-round/lake_rule/lake_rule_16ppd.npz",
   "sha256": "ec95a56a76cfd859802480729c39c9023ca24f5ea91f2193467ff006019c16cc"
  },
- "seconds": 167
+ "seconds": 118
 }
