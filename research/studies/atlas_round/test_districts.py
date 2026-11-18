@@ -74,5 +74,38 @@ def test_every_unit_has_a_unique_name_and_every_coast_its_land(draft):
     names = [u['name'] for u in units]
     assert len(set(names)) == len(names)
     for u in record['districts'] + record['coastal_seas']:
-        assert N.compose(u['tongue'], u['name_head'], u['name_mod']) in u['name'], u['name']   # built from its tongue
+        if u['name_source'] == 'generated':
+            assert N.compose(u['tongue'], u['name_head'], u['name_mod']) in u['name'], u['name']   # built from its tongue
     assert all(c['faces'] for c in record['coastal_seas'])
+
+
+def test_names_keep_to_their_sources(draft):
+    record, _, _ = draft
+    table = N.load_table()
+    units = record['regions'] + record['districts'] + record['coastal_seas']
+    assert {u['name_source'] for u in units} <= {'generated', 'calque', 'pinned'}
+    for u in units:
+        if u['anchor'] in table:                                            # a pin wins over the rules
+            assert u['name'] == table[u['anchor']]['name'] and u['name_source'] == 'pinned'
+        elif u['name_source'] == 'calque':                                  # the old name's meaning, on its own head
+            gloss, key = N.CALQUES[u['feature']['name']]
+            assert u['name_meaning'].endswith(f"after {u['feature']['name']}, the {gloss}")
+    carried = [u['feature']['name'] for u in record['districts'] + record['coastal_seas'] if u.get('feature')]
+    assert len(carried) == len(set(carried))                                # each feature names one unit
+
+
+def test_a_calque_takes_its_tongues_word_on_the_units_head():
+    u = dict(tongue='pwani', name_head='coast', feature=dict(name='Mare Orientale'))
+    name, meaning = N.calque(u, set())
+    assert name == 'Pwani Mashariki' and meaning == 'east coast, after Mare Orientale, the Eastern Sea'
+    assert N.calque(dict(u, feature=dict(name='Mare Moscoviense')), set()) is None   # named after a place: no meaning
+    assert N.calque(u, {'Pwani Mashariki'}) is None                                  # a name already taken
+
+
+def test_anchors_survive_a_redraw():
+    district = dict(kind='land', feature=None, centre_name='Plato', centre='crater', at=dict(today=[51.6, -9.4]))
+    assert N.anchor_of(district) == 'crater:Plato'
+    assert N.anchor_of(dict(district, feature=dict(name='Montes Jura'))) == 'feature:Montes Jura'
+    assert N.anchor_of(dict(kind='sea', body='near-side sea')) == 'sea:near-side sea'
+    units = dict(districts=[dict(region='L01', area_km2=5, anchor='crater:A'), dict(region='L01', area_km2=9, anchor='crater:B')])
+    assert N.anchor_of(dict(kind='land', code='L01', districts=2, at=dict(today=[0, 0])), units) == 'region:crater:B'

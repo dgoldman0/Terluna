@@ -71,6 +71,11 @@ STRAIT_MASS_KM2 = 20_000.0           # land masses this large or larger make a c
 REGION_MIN_KM2, REGION_MAX_KM2 = 250_000.0, 1_200_000.0
 SMOOTH_DEG = 0.7 * 5.625             # the moisture map is smoothed over 0.7 of the climate run's T21 spacing
 SALT_SEAS = ('South Pole–Aitken Sea',)
+# The gazetteer's named maria, oceans, bays, lakes and marshes each lend their name's meaning to one unit (rule 13,
+# districts.md); a feature whose centre lies on open water or in a unit already taken goes to the nearest free unit
+# within FEATURE_REACH of its diameter, FEATURE_REACH_KM at most. Features the names table pins by name join them.
+FEATURE_TYPES = ('Mare, maria', 'Oceanus, oceani', 'Sinus, sinūs', 'Lacus, lacūs', 'Palus, paludes')
+FEATURE_REACH, FEATURE_REACH_KM = 0.25, 150.0
 
 
 def sha256(path) -> str:
@@ -250,7 +255,7 @@ def place_centres(on_land, kind, lat, lon, min_km, seed_km, lake_km2=None, log=p
         keep = on_land[rr, cc]
         if not keep.any():
             continue
-        info.append(('crater', float(f['diameter_km']), float(f['lat']), lo))
+        info.append(('crater', float(f['diameter_km']), float(f['lat']), lo, f['name']))
         markers[rr[keep], cc[keep]] = len(info) - 1
     if lake_km2:
         lakes, n = ndimage.label(kind == 1, structure=np.ones((3, 3)))
@@ -263,7 +268,7 @@ def place_centres(on_land, kind, lat, lon, min_km, seed_km, lake_km2=None, log=p
             rr, cc = np.nonzero(m)
             v = unit(lat[rr], lon[cc]).mean(axis=0)
             la, lo = to_latlon(v)
-            info.append(('lake', float(sizes[i - 1]), float(la), float(lo)))
+            info.append(('lake', float(sizes[i - 1]), float(la), float(lo), None))
             markers[m & (markers == 0)] = len(info) - 1
     taken = np.argwhere(markers > 0)
     tree = cKDTree(unit(lat[taken[:, 0]], lon[taken[:, 1]])) if taken.size else None
@@ -275,7 +280,7 @@ def place_centres(on_land, kind, lat, lon, min_km, seed_km, lake_km2=None, log=p
         d, _ = tree.query(unit(lat[r], lon[c]))
         ok &= d * MOON_KM > 0.6 * seed_km
     for rr, cc in zip(r[ok], c[ok]):
-        info.append(('ground', 0.0, float(lat[rr]), float(lon[cc])))
+        info.append(('ground', 0.0, float(lat[rr]), float(lon[cc]), None))
         markers[rr, cc] = len(info) - 1
     comps, n = ndimage.label(on_land, structure=np.ones((3, 3)))
     comps = join_wrapped(comps)
@@ -284,7 +289,7 @@ def place_centres(on_land, kind, lat, lon, min_km, seed_km, lake_km2=None, log=p
         rr, cc = np.nonzero(comps == i)
         v = unit(lat[rr], lon[cc]).mean(axis=0)
         k = int(np.argmax(unit(lat[rr], lon[cc]) @ v))
-        info.append(('island', 0.0, float(lat[rr[k]]), float(lon[cc[k]])))
+        info.append(('island', 0.0, float(lat[rr[k]]), float(lon[cc[k]]), None))
         markers[rr[k], cc[k]] = len(info) - 1
     kinds = [x[0] for x in info[1:]]
     log(f'centres: {kinds.count("crater")} craters of {min_km:.0f} km or more, {kinds.count("lake")} lakes, '
@@ -687,6 +692,35 @@ def shape_of(mask, kind, islands, la, lo, lat, lon, reach_km=120.0, rays=16):
     return bool(hits >= rays * 10 / 16), bool((masses > 0).sum() >= 2)
 
 
+def feature_units(labels, coast, lat, lon, pinned=()):
+    """The one unit that carries each named mare, ocean, bay, lake and marsh of the IAU gazetteer, and each feature the
+    names table pins by name: larger features first, each the unit holding its centre or the nearest free unit within
+    FEATURE_REACH of its diameter (FEATURE_REACH_KM at most). Returns {('land' | 'coast', id): feature} with the
+    feature's name, type, diameter and the distance from its centre to the unit's nearest cell."""
+    feats = [f for f in nm.features() if f.get('type') in FEATURE_TYPES or f.get('name') in pinned]
+    feats.sort(key=lambda f: (-f.get('diameter_km', 0.0), f['name']))
+    out = {}
+    for f in feats:
+        lo0 = f['lon'] % 360.0
+        reach = min(FEATURE_REACH * f.get('diameter_km', 0.0), FEATURE_REACH_KM)
+        rr, cc = disc_cells(f['lat'], lo0, max(reach, 1.0), lat, lon)
+        if not rr.size:
+            continue
+        d = np.degrees(np.arccos(np.clip(unit(lat[rr], lon[cc]) @ unit(np.array(f['lat']), np.array(lo0)), -1.0, 1.0)))
+        km = np.radians(d) * MOON_KM
+        best = None
+        for k in np.argsort(km):
+            r, c = int(rr[k]), int(cc[k])
+            key = ('land', int(labels[r, c])) if labels[r, c] else ('coast', int(coast[r, c])) if coast[r, c] else None
+            if key and key not in out:
+                best = (key, float(km[k]))
+                break
+        if best:
+            out[best[0]] = dict(name=f['name'], type=f['type'].split(',')[0], km=round(float(f.get('diameter_km', 0.0))),
+                                distance_km=round(best[1]))
+    return out
+
+
 def anchors(labels, lat, lon):
     """Each label's label point: its cell farthest from its own edge (a pole of inaccessibility on the grid)."""
     from scipy import ndimage
@@ -734,7 +768,7 @@ def build(log=print):
     for i in range(1, int(labels.max()) + 1):
         ids, cnt = np.unique(base[labels == i], return_counts=True)
         top = ids[np.argmax(cnt)]
-        centre_kind[i] = info[top] if 0 < top < len(info) else ('ground', 0.0, 0.0, 0.0)
+        centre_kind[i] = info[top] if 0 < top < len(info) else ('ground', 0.0, 0.0, 0.0, None)
     lakes, nl = ndimage.label(kind == 1, structure=np.ones((3, 3)))
     lake_counts = {}
     if nl:
@@ -817,6 +851,9 @@ def build(log=print):
         for k, (cd, la, lo) in enumerate(code_order(mine)):
             coast_codes[cd] = f'{sea_codes[b]}.{k + 1}'
 
+    from research.studies.atlas_round import district_names as DN
+    carried = feature_units(labels, coast, lat, lon, pinned=DN.pinned_features())
+
     def place(la, lo):
         t = to_turned(la, lo, rotation)
         return dict(today=[round(la, 3), round(((lo + 180.0) % 360.0) - 180.0, 3)],
@@ -866,12 +903,16 @@ def build(log=print):
                               area_km2=round(float(s['area'][i])), at=place(la, lo), zone=zone,
                               zone_share=round(zone_share, 2), basalt_share=round(float(s['basalt'][i]), 2),
                               centre=ck[0], centre_km=round(ck[1]) if ck[0] == 'crater' else None,
+                              centre_name=ck[4] if ck[0] == 'crater' else None,
+                              centre_at=[round(ck[2], 2), round(((ck[3] + 180.0) % 360.0) - 180.0, 2)],
                               mean_height_m=round(float(s['h'][i]) - float(meta['common_level_m'])),
                               relief_m=round(relief), lakes=int(lake_counts.get(i, 0)),
                               lake_share=round(float(lake_area[i] / s['area'][i]), 3),
                               largest_flow_m3s=round(float(qmax[i])), drains_to=to_code, drains_share=to_share,
                               falls_gw=[round(g, 1) for g in falls_here[:3]], cut=i in cut_at,
-                              heritage=sites_at.get(i, []), coasts=coasts, description=description))
+                              heritage=sites_at.get(i, []), coasts=coasts, description=description,
+                              feature=carried.get(('land', i))))
+        districts[-1]['anchor'] = DN.anchor_of(districts[-1])
     sea_names = {b: bodies[b] for b in sea_codes}
     # bays and straits are judged against land masses of STRAIT_MASS_KM2 or more, so that islets make neither
     mass_area = np.bincount(islands.ravel(), np.broadcast_to(area[:, None], labels.shape).ravel())
@@ -908,7 +949,8 @@ def build(log=print):
                        + (f"; rivers reach it from {', '.join(feeding[:4])}" if feeding else '') + '.')
         coastal.append(dict(code=coast_codes[cd], region=sea_codes[b], kind='coastal sea', area_km2=round(a),
                             at=place(la, lo), mean_depth_m=round(dmean), salt=salt, enclosed=enclosed, strait=strait,
-                            faces=facing, fed_by=feeding, description=description))
+                            faces=facing, fed_by=feeding, description=description, feature=carried.get(('coast', cd))))
+        coastal[-1]['anchor'] = DN.anchor_of(coastal[-1])
     regions_out = []
     for r, code in sorted(region_codes.items(), key=lambda x: x[1]):
         mine = [d for d in districts if d['region'] == code]
@@ -942,15 +984,16 @@ def build(log=print):
                                             f"coastal sea districts; its open water lies beyond them."))
 
     # names in the Moon's tongues (district_names), each region in its own; descriptions then read names for codes
-    import re
-    from research.studies.atlas_round import district_names as DN
     body_of_code = {code: bodies[b] for b, code in sea_codes.items()}
-    near_side = lambda x: abs(x['at']['turned'][1]) < 90.0
-    DN.name_all(dict(regions=regions_out, districts=districts, coastal_seas=coastal), body_of_code, near_side)
-    names = {x['code']: x['name'] for x in regions_out + districts + coastal}
+    for r in regions_out:
+        if r['kind'] == 'sea':
+            r['body'] = body_of_code[r['code']]
+    units = dict(regions=regions_out, districts=districts, coastal_seas=coastal)
+    for x in regions_out:
+        x['anchor'] = DN.anchor_of(x, units)
     for x in regions_out + districts + coastal:
-        x['description'] = re.sub(r'\b([LS]\d+(?:\.\d+)?)\b', lambda m: names.get(m.group(1), m.group(1)),
-                                  x['description'])
+        x['description_codes'] = x['description']
+    DN.apply(units)
 
     # the product: district and region at each cell, on today's grid
     district_grid = np.zeros(labels.shape, np.int16)

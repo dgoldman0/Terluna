@@ -1,0 +1,9 @@
+{
+ "schema": "terluna.research.atlas-round-place-names/1",
+ "reading_rule": "Names pinned to anchors, which district_names.apply sets over the generated names and the calques. An anchor is what a unit is tied to that a redraw keeps: sea:<body> for one of the seven seas, feature:<IAU name> for the unit that carries a named feature, crater:<IAU name> for a district centred on that crater, region:<its largest district's anchor> for a region, and the centre's kind and place otherwise. A pin gives the name, its tongue where it differs from the unit's, and its meaning. Edit a pin and run python -m research.studies.atlas_round.district_names to rename the record without drawing it again.",
+ "names": {
+  "feature:Sinus Iridum": {"name": "Anuanuafanga", "tongue": "terlunan", "meaning": "Rainbow Bay: the Terlunan name for the Bay of Rainbows (Sinus Iridum), in the author's v0.6 reference"},
+  "feature:Montes Jura": {"name": "Jura", "meaning": "the Jura mountains round the Bay of Rainbows, a proper name Terlunan keeps in its established form (v0.6), as in the author's song"},
+  "feature:Mare Ingenii": {"name": "Ingenii", "meaning": "the Sea of Cleverness (Mare Ingenii) in the salt sea, a proper name Terlunan keeps in its established form (v0.6)"}
+ }
+}

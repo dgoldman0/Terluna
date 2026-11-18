@@ -313,9 +313,21 @@ SEA_NAMES = {
 }
 
 
-def name_all(record, body_names, near_side_of):
-    """Tongues for the regions and names for every region, district and coastal sea in the draft record, in place."""
-    used = set()
+def name_all(record, body_names, near_side_of, reserved=()):
+    """Tongues for the regions and names for every region, district and coastal sea in the draft record, in place,
+    none of them taking a reserved name."""
+    import collections
+    used = set(reserved)
+    seen = collections.defaultdict(collections.Counter)      # heads and modifiers already taken, by scope
+
+    def fresh(keys, scope):
+        """The keys in their order of fit, those not yet taken in the scope first, so that neighbours differ."""
+        return sorted(keys, key=lambda k: seen[scope][k])
+
+    def take(scope, head, mod):
+        seen[(scope, 'head')][head] += 1
+        seen[(scope, 'mod')][mod] += 1
+
     regions = {r['code']: r for r in record['regions']}
     for r in record['regions']:
         if r['kind'] == 'sea':
@@ -342,7 +354,9 @@ def name_all(record, body_names, near_side_of):
         mods = (['cold', 'night'] if abs(r['at']['turned'][0]) > 62 else []) + \
             (['black'] if r['basalt_share'] > 0.3 else []) + zm[k:] + zm[:k] + \
             (['earth'] if near_side_of(r) else []) + [m for m in FALLBACK]
-        r['name'], _, _ = unique_name(r['tongue'], heads, mods, used)
+        scope = ('regions', r['tongue'])                    # a tongue's regions differ in head and modifier
+        r['name'], head, mod = unique_name(r['tongue'], fresh(heads, (scope, 'head')), fresh(mods, (scope, 'mod')), used)
+        take(scope, head, mod)
     for r in record['regions']:
         if r['kind'] == 'sea':
             r['tongue'] = 'terlunan'
@@ -353,13 +367,256 @@ def name_all(record, body_names, near_side_of):
         d['tongue'] = tongue
         head = district_head(d)
         heads = [head] + [h for h in ('land', 'plain', 'hills', 'field') if h != head]
-        d['name'], d['name_head'], d['name_mod'] = unique_name(tongue, heads, district_mods(d, near_side_of(d)), used)
+        scope = ('districts', d['region'])                  # a region's districts keep their landform, vary the rest
+        d['name'], d['name_head'], d['name_mod'] = unique_name(
+            tongue, heads, fresh(district_mods(d, near_side_of(d)), (scope, 'mod')), used)
+        take(scope, d['name_head'], d['name_mod'])
     land_by_code = {d['code']: d for d in record['districts']}
     for c in record['coastal_seas']:
         facing = [land_by_code[x] for x in c['faces'] if x in land_by_code]
         tongue = facing[0]['tongue'] if facing else 'terlunan'
         c['tongue'] = tongue
         head = coastal_head(c)
-        c['name'], c['name_head'], c['name_mod'] = unique_name(tongue, [head, 'coast', 'bay', 'sea'], coastal_mods(c),
-                                                               used)
+        scope = ('coasts', c['region'])
+        c['name'], c['name_head'], c['name_mod'] = unique_name(tongue, [head, 'coast', 'bay', 'sea'],
+                                                               fresh(coastal_mods(c), (scope, 'mod')), used)
+        take(scope, c['name_head'], c['name_mod'])
     return record
+
+
+# ---------------------------------------------------------------- names kept by anchor, and the old names' meanings
+#
+# Names live apart from the draw. Each unit has an anchor that survives a redraw: the sea's body, the named feature it
+# carries (districts.feature_units), the crater at a district's centre, or a centre's place; a region takes the anchor
+# of its largest district. place_names.json pins a name to an anchor, so a hand-set name stays through any redraw whose
+# anchor still exists, and `python -m research.studies.atlas_round.district_names` renames the record in seconds
+# without drawing it again. A unit that carries a named mare, ocean, bay, lake or marsh keeps that old name's meaning
+# (a calque): its own head in its tongue, with the meaning as the modifier. Everything else takes the generated name.
+
+from pathlib import Path as _Path
+
+PLACE_NAMES = _Path(__file__).resolve().parent / 'place_names.json'
+RECORD = _Path(__file__).resolve().parent / 'results' / 'districts.json'
+
+# The IAU names' meanings: (gloss, modifier key). Names after people, probes and Earth's places carry none.
+CALQUES = {
+    'Oceanus Procellarum': ('Ocean of Storms', 'storm'), 'Mare Imbrium': ('Sea of Showers', 'rain'),
+    'Mare Frigoris': ('Sea of Cold', 'cold'), 'Mare Tranquillitatis': ('Sea of Tranquillity', 'calm'),
+    'Mare Serenitatis': ('Sea of Serenity', 'clear'), 'Mare Fecunditatis': ('Sea of Fertility', 'plenty'),
+    'Mare Nubium': ('Sea of Clouds', 'cloud'), 'Mare Humorum': ('Sea of Moisture', 'wet'),
+    'Mare Nectaris': ('Sea of Nectar', 'nectar'), 'Mare Crisium': ('Sea of Crises', 'trial'),
+    'Mare Vaporum': ('Sea of Vapours', 'mist'), 'Mare Insularum': ('Sea of Islands', 'islands'),
+    'Mare Cognitum': ('Sea That Has Become Known', 'known'), 'Mare Australe': ('Southern Sea', 'south'),
+    'Mare Orientale': ('Eastern Sea', 'east'), 'Mare Marginis': ('Sea of the Edge', 'edge'),
+    'Mare Undarum': ('Sea of Waves', 'wave'), 'Mare Spumans': ('Foaming Sea', 'foam'),
+    'Mare Anguis': ('Serpent Sea', 'serpent'), 'Sinus Roris': ('Bay of Dew', 'dew'),
+    'Sinus Medii': ('Central Bay', 'middle'), 'Sinus Aestuum': ('Bay of Billows', 'wave'),
+    'Sinus Amoris': ('Bay of Love', 'love'), 'Sinus Asperitatis': ('Bay of Roughness', 'rough'),
+    'Sinus Concordiae': ('Bay of Harmony', 'harmony'), 'Sinus Fidei': ('Bay of Faith', 'faith'),
+    'Sinus Successus': ('Bay of Success', 'success'), 'Lacus Somniorum': ('Lake of Dreams', 'dream'),
+    'Lacus Mortis': ('Lake of Death', 'death'), 'Lacus Temporis': ('Lake of Time', 'time'),
+    'Lacus Doloris': ('Lake of Sorrow', 'sorrow'), 'Lacus Veris': ('Lake of Spring', 'springtime'),
+    'Lacus Autumni': ('Lake of Autumn', 'autumn'), 'Lacus Aestatis': ('Lake of Summer', 'summer'),
+    'Lacus Hiemalis': ('Wintry Lake', 'winter'), 'Lacus Spei': ('Lake of Hope', 'hope'),
+    'Lacus Lenitatis': ('Lake of Tenderness', 'gentle'), 'Lacus Bonitatis': ('Lake of Goodness', 'good'),
+    'Lacus Perseverantiae': ('Lake of Perseverance', 'endure'), 'Lacus Solitudinis': ('Lake of Solitude', 'alone'),
+    'Lacus Oblivionis': ('Lake of Forgetfulness', 'forget'), 'Lacus Timoris': ('Lake of Fear', 'fear'),
+    'Lacus Felicitatis': ('Lake of Happiness', 'joy'), 'Lacus Gaudii': ('Lake of Joy', 'joy'),
+    'Lacus Luxuriae': ('Lake of Luxury', 'plenty'), 'Lacus Excellentiae': ('Lake of Excellence', 'excellent'),
+    'Lacus Tenebrarum': ('Lake of Darkness', 'dark'), 'Palus Somni': ('Marsh of Sleep', 'sleep'),
+    'Palus Putredinis': ('Marsh of Decay', 'decay'), 'Palus Epidemiarum': ('Marsh of Epidemics', 'plague'),
+}
+
+# The meanings' words in each tongue, beside the tongues' own modifiers (which already hold rain, cold, cloud, wet and
+# mist). Terlunan takes the v0.6 dictionary's words where it has them (here, mung, maarama, sung, salalu, mong,
+# monamona, damku, taime, oto, maru, wareware, pooiri, taha, motu); the rest are COINED in its manner from its donors.
+CALQUE_WORDS = {
+    'terlunan': dict(storm='vero', calm='marino', clear='maarama', plenty='momona', nectar='monamona',
+                     trial='tamata', islands='motu', known="'ite", south='tonga', east='hikina', edge='taha',
+                     wave="'are", foam='huka', serpent='nakahi', dew='tomairangi', middle='sung', love='here',
+                     rough='taratara', harmony='aumaru', faith='whakapono', success='angitu', dream='mung',
+                     death='mate', time='taime', sorrow='oto', springtime='koanga', autumn='ngahuru',
+                     summer='raumati', winter='hotoke', hope='mong', gentle='maru', good='damku',
+                     endure='manawanui', alone='mokemoke', forget='wareware', fear='mataku', joy='koa',
+                     excellent='hiranga', dark='pooiri', sleep='salalu', decay='pirau', plague='mate'),
+    'olivolingvo': dict(storm='ŝtorma', calm='trankvila', clear='serena', plenty='fekunda', nectar='nektara',
+                        trial='kriza', islands='insula', known='konata', south='suda', east='orienta', edge='randa',
+                        wave='onda', foam='ŝauma', serpent='serpenta', dew='rosa', middle='meza', love='ama',
+                        rough='malglata', harmony='konkorda', faith='fida', success='sukcesa', dream='sonĝa',
+                        death='morta', time='tempa', sorrow='dolora', springtime='printempa', autumn='aŭtuna',
+                        summer='somera', winter='vintra', hope='espera', gentle='milda', good='bona',
+                        endure='persista', alone='sola', forget='forgesa', fear='timema', joy='ĝoja',
+                        excellent='bonega', dark='malluma', sleep='dorma', decay='putra', plague='pesta'),
+    'sahran': dict(storm='Asifa', calm='Hadi', clear='Safi', plenty='Khisb', nectar='Shahd', trial='Mihna',
+                   islands='Juzur', known='Maruf', south='Janub', east='Sharq', edge='Hafa', wave='Mawj',
+                   foam='Zabad', serpent='Hayya', dew='Nada', middle='Wasat', love='Hubb', rough='Khashin',
+                   harmony='Wiam', faith='Iman', success='Najah', dream='Ahlam', death='Mawt', time='Zaman',
+                   sorrow='Huzn', springtime='Rabi', autumn='Kharif', summer='Sayf', winter='Shita', hope='Amal',
+                   gentle='Latif', good='Khayr', endure='Sabr', alone='Uzla', forget='Nisyan', fear='Khawf',
+                   joy='Farah', excellent='Fadl', dark='Zalam', sleep='Nawm', decay='Afan', plague='Waba'),
+    'tagalhebrew': dict(storm='Sufa', calm='Shaket', clear='Tsalul', plenty='Shefa', nectar='Tsuf', trial='Mashber',
+                        islands='Iyim', known='Yadua', south='Darom', east='Kedem', edge='Katzeh', wave='Gal',
+                        foam='Ketsef', serpent='Nachash', dew='Tal', middle='Tikhon', love='Ahava', rough='Gas',
+                        harmony='Harmonia', faith='Emuna', success='Hatslaha', dream='Halom', death='Mavet',
+                        time='Zman', sorrow='Tsaar', springtime='Aviv', autumn='Stav', summer='Kayits',
+                        winter='Horef', hope='Tikva', gentle='Adin', good='Tov', endure='Hatmada', alone='Bdidut',
+                        forget='Shikhecha', fear='Pahad', joy='Simha', excellent='Metsuyan', dark='Hoshekh',
+                        sleep='Shena', decay='Rikavon', plague='Dever'),
+    'pwani': dict(storm='Dhoruba', calm='Shwari', clear='Angavu', plenty='Wingi', nectar='Asali', trial='Shida',
+                  islands='Visiwa', known='Julikana', south='Kusini', east='Mashariki', edge='Ukingo', wave='Mawimbi',
+                  foam='Povu', serpent='Nyoka', dew='Umande', middle='Kati', love='Upendo', rough='Kparuparu',
+                  harmony='Maelewano', faith='Imani', success='Fanaka', dream='Ndoto', death='Mauti', time='Wakati',
+                  sorrow='Huzuni', springtime='Masika', autumn='Vuli', summer='Kiangazi', winter='Kipupwe',
+                  hope='Tumaini', gentle='Pole', good='Wema', endure='Subira', alone='Upweke', forget='Sahau',
+                  fear='Hofu', joy='Furaha', excellent='Bora', dark='Giza', sleep='Usingizi', decay='Uozo',
+                  plague='Tauni'),
+    'dala': dict(storm='boran', calm='tynysh', clear='ashyk', plenty='mol', nectar='bal', trial='synak',
+                 islands='araldar', known='belgili', south='ontustik', east='shygys', edge='shet', wave='tolkyn',
+                 foam='kobik', serpent='jylan', dew='shyk', middle='orta', love='mahabbat', rough='kedir',
+                 harmony='yntymak', faith='senim', success='jenis', dream='tus', death='olim', time='uakyt',
+                 sorrow='kaygy', springtime='koktem', autumn='kuz', summer='jaz', winter='kys', hope='umit',
+                 gentle='jumsak', good='jaksy', endure='tozim', alone='jalgyz', forget='umyt', fear='korky',
+                 joy='kuanysh', excellent='asyl', dark='karangy', sleep='uiky', decay='shirik', plague='oba'),
+    'runa': dict(storm='wayrapara', calm='thak', clear='chuya', plenty='achka', nectar='mishki', trial='sasa',
+                 islands='watakuna', known='riqsisqa', south='urin', east='inti', edge='kuchu', foam='pusuqu',
+                 serpent='machaqway', dew='sulla', middle='chawpi', love='munay', harmony='huklla', faith='iñiy',
+                 success='atipay', dream='musquy', death='wanuy', time='mita', sorrow='llaki', springtime='pawqar',
+                 autumn='aymuray', summer='ruphay', winter='chiraw', hope='suyay', gentle='llampu', good='alli',
+                 endure='kallpa', alone='sapan', forget='qunqay', fear='manchay', joy='kusi', excellent='sumaq',
+                 dark='tutayaq', sleep='puñuy', decay='ismu', plague='unquy'),
+    'satoyama': dict(storm='arashi', calm='nagi', clear='hare', plenty='yutaka', nectar='mitsu', trial='kiki',
+                     islands='shima', known='shiru', south='minami', east='higashi', edge='fuchi', wave='nami',
+                     foam='awa', serpent='hebi', dew='tsuyu', middle='naka', love='ai', rough='ara', harmony='wa',
+                     faith='shin', success='sachi', dream='yume', time='toki', sorrow='kanashi', springtime='haru',
+                     autumn='aki', summer='natsu', winter='fuyu', hope='nozomi', gentle='yasa', good='yoi',
+                     endure='shinobu', alone='hitori', forget='wasure', fear='osore', joy='yoro', excellent='masa',
+                     dark='yami', sleep='nemuri', decay='kuchi', plague='eki'),
+}
+
+
+def load_table(path=PLACE_NAMES):
+    """The names table: {anchor: {name, tongue, meaning, note}}; empty where there is none yet."""
+    import json
+    if not _Path(path).exists():
+        return {}
+    return json.loads(_Path(path).read_text()).get('names', {})
+
+
+def pinned_features(path=PLACE_NAMES):
+    """The gazetteer features the names table pins by name beyond the maria, oceans, bays, lakes and marshes."""
+    return sorted(a.split(':', 1)[1] for a in load_table(path) if a.startswith('feature:'))
+
+
+def anchor_of(u, units=None):
+    """A unit's anchor: what it is tied to that a redraw keeps."""
+    if u.get('kind') == 'sea':
+        return f"sea:{u['body']}"
+    if u.get('kind') == 'land' and 'districts' in u and not isinstance(u['districts'], list):
+        mine = [d for d in (units or {}).get('districts', []) if d['region'] == u['code']]
+        if not mine:
+            return f"region:{u['at']['today'][0]:.1f},{u['at']['today'][1]:.1f}"
+        return 'region:' + max(mine, key=lambda d: d['area_km2'])['anchor']
+    if u.get('feature'):
+        return f"feature:{u['feature']['name']}"
+    if u.get('centre_name'):
+        return f"crater:{u['centre_name']}"
+    if u.get('kind') == 'land':
+        la, lo = u.get('centre_at') or u['at']['today']
+        return f"{u.get('centre', 'ground')}:{la:.1f},{lo:.1f}"
+    la, lo = u['at']['today']
+    return f"coast:{la:.1f},{lo:.1f}"
+
+
+def calque(u, used):
+    """The name that keeps the meaning of the old name the unit carries, in its tongue on its own head, if the tongue
+    has the word; with the old name and its gloss."""
+    f = u.get('feature')
+    if not f or f['name'] not in CALQUES:
+        return None
+    gloss, key = CALQUES[f['name']]
+    t = TONGUES[u['tongue']]
+    word = CALQUE_WORDS.get(u['tongue'], {}).get(key) or t['mods'].get(key)
+    if not word:
+        return None
+    head = u.get('name_head') or 'land'
+    mods = dict(t['mods'])
+    mods[key] = word
+    saved, t['mods'] = t['mods'], mods
+    try:
+        name = compose(u['tongue'], head, key)
+    finally:
+        t['mods'] = saved
+    if name in used:
+        return None
+    return name, f"{key} {head}, after {f['name']}, the {gloss}"
+
+
+def apply(units, table=None, log=print):
+    """Names for every region, district and coastal sea, in place: the generated names first, then each unit that
+    carries an old name with a meaning takes its calque, then the names table's pins by anchor; descriptions then read
+    names for codes. Records each name's source and meaning."""
+    import re
+    table = load_table() if table is None else table
+    body = {r['code']: r.get('body') for r in units['regions'] if r['kind'] == 'sea'}
+    near_side = lambda x: abs(x['at']['turned'][1]) < 90.0                        # noqa: E731
+    name_all(units, body, near_side)                       # the tongues and heads the calques take
+    pins = {table[x['anchor']]['name'] for x in units['districts'] + units['coastal_seas']
+            if x.get('anchor') in table}
+    calques, missing, taken = {}, [], set(pins)
+    for x in units['districts'] + units['coastal_seas']:
+        if x.get('anchor') in table or not x.get('feature') or x['feature']['name'] not in CALQUES:
+            continue
+        got = calque(x, taken)
+        if got:
+            calques[x['code']] = got
+            taken.add(got[0])
+        else:
+            missing.append((x['code'], x['tongue'], CALQUES[x['feature']['name']][1]))
+    name_all(units, body, near_side, reserved=taken)       # the generated names keep clear of the calques and pins
+    every = units['regions'] + units['districts'] + units['coastal_seas']
+    for x in every:
+        x['name_source'] = 'generated'
+        x.setdefault('name_meaning', '')
+        if x['code'] in calques:
+            x['name'], x['name_meaning'] = calques[x['code']]
+            x['name_source'] = 'calque'
+    for x in every:
+        pin = table.get(x.get('anchor'))
+        if pin:
+            x['name'] = pin['name']
+            x['name_meaning'] = pin.get('meaning', '')
+            x['name_source'] = 'pinned'
+            if pin.get('tongue'):
+                x['tongue'] = pin['tongue']
+    names = {x['code']: x['name'] for x in every}
+    for x in every:
+        x['description'] = re.sub(r'\b([LS]\d+(?:\.\d+)?)\b', lambda m: names.get(m.group(1), m.group(1)),
+                                  x.get('description_codes', x['description']))
+    if missing:
+        log('calques left out, the word missing in the tongue or the name taken: '
+            + ', '.join(f'{c} ({t}: {k})' for c, t, k in missing))
+    return units
+
+
+def main(argv=None) -> int:
+    """Rename the draft in place from the names table and the rules, without drawing it again."""
+    import argparse
+    import json
+    p = argparse.ArgumentParser(description=main.__doc__)
+    p.add_argument('--record', type=_Path, default=RECORD)
+    args = p.parse_args(argv)
+    record = json.loads(args.record.read_text())
+    units = dict(regions=record['regions'], districts=record['districts'], coastal_seas=record['coastal_seas'])
+    if any('anchor' not in x for x in units['districts'] + units['coastal_seas']):
+        raise SystemExit(f'{args.record} predates the anchors; draw it again with research.studies.atlas_round.districts')
+    apply(units)
+    record['names'] = dict(table=str(PLACE_NAMES.relative_to(PLACE_NAMES.parents[3])),
+                           sources={s: sum(1 for x in units['regions'] + units['districts'] + units['coastal_seas']
+                                           if x['name_source'] == s) for s in ('pinned', 'calque', 'generated')})
+    args.record.write_text(json.dumps(record, indent=1, ensure_ascii=False) + '\n')
+    print(f"renamed {args.record}: {record['names']['sources']}")
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
