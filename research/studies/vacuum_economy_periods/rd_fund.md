@@ -126,7 +126,7 @@ The evidence may come back against the build, with demand for computing or visit
 
 # Appendix A. The unknowns in the economic model {-}
 
-The economic model steps year by year from 2041 to 2341 and finds the fastest steady growth the settlements' own accounts can carry, under tests the scoping study sets out: the funders repaid with a return, every ten years in balance or surplus once they are repaid, the settlements' own work staffed and the water open to mining lasting. In its central case they carry 20.1 million residents by 2341. Each row moves one input, everything else central.
+The economic model steps year by year from 2041 to 2341 and finds the fastest steady growth the settlements' own accounts can carry, under tests the scoping study sets out: the funders repaid with a return and, once repaid, receiving at least as much as they put in over every ten years, the settlements' own work staffed and the water open to mining lasting. In its central case they carry 20.1 million residents by 2341. Each row moves one input, everything else central.
 
 | Input moved | Setting | Residents by 2341 |
 |:------------------|:--------|------------:|

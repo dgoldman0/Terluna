@@ -75,7 +75,7 @@ Each case combines a path of technology, a scenario of Earth's demand and a sche
 
 ## Growth as a result
 
-The study's main measure is the fastest growth the settlements can sustain while they still pay. Their funding partners' return must stay at or above the discount rate the study uses for this test (Appendix A). Once the funders are repaid, every ten years taken together must leave the account with Earth in balance or surplus. The settlements' own work must be staffed and their sources' water must last, and under U the five tests of a safe and healthy policy (Section 6.5) must hold in every year. Growth is solved as two steady rates, the highest to the plan and then the highest past it. Each is the highest rate below which every slower rate the study checks also passes, since a single year's lump of reinvestment can make passing and failing alternate as the growth rate moves it from one year to another.
+The study's main measure is the fastest growth the settlements can sustain while they still pay. Their funding partners' return must stay at or above the discount rate the study uses for this test (Appendix A). Once the funders are repaid, every ten years taken together must return them at least as much as they put in; within that window the reserve, U's rate and the funders' cover can carry single years of shortfall with Earth. The settlements' own work must be staffed and their sources' water must last, and under U the five tests of a safe and healthy policy (Section 6.5) must hold in every year. Growth is solved as two steady rates, the highest to the plan and then the highest past it. Each is the highest rate below which every slower rate the study checks also passes, since a single year's lump of reinvestment can make passing and failing alternate as the growth rate moves it from one year to another.
 
 ## Evidence
 
@@ -318,7 +318,7 @@ The study team recommends that the partners proceed to a pre-feasibility study o
 **Growth as a result.** The schedule of residents is solved as two steady rates, to the plan and past it. A rate passes when four conditions hold:
 
 - the funders' flows, discounted at 3% a year in real terms, the study's own discount rate for this test, have a present value of zero or more to 2341;
-- the account is repaid, and every ten-year window after repayment leaves it in balance or surplus;
+- the funders are repaid, and over every ten-year window after repayment they receive at least as much as they put in;
 - every year has the hands its own work needs, and the water open to mining lasts;
 - under U, all five tests hold in every year.
 
