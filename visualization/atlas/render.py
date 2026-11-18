@@ -639,11 +639,53 @@ def work_lines(path, rotation):
             for s in range(int(stretch.max()) + 1)] if cells.size else []
 
 
-def districts_layer(record_path, rotation):
+WATER_REACH_KM = 100.0          # the sea within this of land is drawn as its nearest region's, for borders across it
+
+
+def water_regions(land_region, sea, reach_km=WATER_REACH_KM):
+    """For drawing only: each sea cell within reach_km of a shore takes the region of the nearest shore cell, and 0
+    farther out, so that a land border runs on across straits, inlets and island chains and stops at the open sea.
+    land_region holds each land cell's page region; the grid runs from 90 N and from 0 E, as the districts' grid."""
+    from scipy.spatial import cKDTree
+    rows, cols = sea.shape
+    ppd = cols / 360.0
+    lat = np.radians(90.0 - (np.arange(rows) + 0.5) / ppd)
+    lon = np.radians((np.arange(cols) + 0.5) / ppd)
+    unit = lambda r, c: np.stack((np.cos(lat[r]) * np.cos(lon[c]), np.cos(lat[r]) * np.sin(lon[c]), np.sin(lat[r])), -1)  # noqa: E731
+    beside = np.roll(sea, 1, axis=1) | np.roll(sea, -1, axis=1)
+    beside[1:] |= sea[:-1]
+    beside[:-1] |= sea[1:]
+    sr, sc = np.nonzero(~sea & beside & (land_region > 0))
+    out = np.zeros(sea.shape, np.int64)
+    if not sr.size:
+        return out
+    wr, wc = np.nonzero(sea)
+    chord = 2.0 * np.sin(reach_km / (MOON_RADIUS / 1000.0) / 2.0)
+    dist, k = cKDTree(unit(sr, sc)).query(unit(wr, wc), distance_upper_bound=chord)
+    near = np.isfinite(dist)
+    out[wr[near], wc[near]] = land_region[sr[k[near]], sc[k[near]]]
+    return out
+
+
+def water_cells(surface_path, shape):
+    """Each cell of a coarser grid that is mostly water, a sea's or a lake's, on the design surface's 16 px/deg grid."""
+    with np.load(surface_path, allow_pickle=False) as z:
+        meta = json.loads(str(z['metadata']))
+        rows, cols = meta['grid']['rows'], meta['grid']['cols']
+        fine = np.zeros(rows * cols, bool)
+        fine[z['water_cell']] = True
+    k = rows // shape[0]
+    return fine.reshape(shape[0], k, shape[1], k).mean(axis=(1, 3)) >= 0.5
+
+
+def districts_layer(record_path, rotation, surface_path=None):
     """The atlas round's draft regions and districts for the page: a texture in the globe's frame (180 W at the left)
-    holding at each 8 px/deg cell the district's place in the page's list (red and green, 0 on open water) and the
-    region's (blue), and the lists with each unit's name, code, tongue, label point, area and short description; for a
-    coastal sea, the land districts it faces and that feed it, and for a land district its coastal seas."""
+    holding at each 8 px/deg cell the district's place in the page's list (red's low seven bits and green, 0 on open
+    water), whether the cell is water (red's top bit, a lake or a sea), and the region
+    the page draws there (blue): a land cell's own, and a sea cell within WATER_REACH_KM of a shore its nearest
+    region's, 0 farther out; and the lists with each unit's name, code, tongue, label point, area and short
+    description; for a coastal sea, the land districts it faces and that feed it, and for a land district its coastal
+    seas."""
     record = json.loads(Path(record_path).read_text())
     product = Path(record['product']['path'])
     if digest(product) != record['product']['sha256']:
@@ -657,8 +699,14 @@ def districts_layer(record_path, rotation):
     units = record['districts'] + record['coastal_seas']
     if district.max() > 65535 or len(regions) > 255:
         raise SystemExit('too many districts or regions for the page\'s texture')
+    if district.max() > 32767:
+        raise SystemExit('too many districts for the page\'s texture with its water flag')
+    sea = region >= 100
+    shown = np.where(sea, 0, page_region[region])
+    shown[sea] = water_regions(shown, sea)[sea]
+    wet = sea | (water_cells(surface_path, district.shape) if surface_path else np.zeros(sea.shape, bool))
     tex = np.zeros(district.shape + (3,), np.uint8)
-    tex[..., 0], tex[..., 1], tex[..., 2] = district >> 8, district & 0xFF, page_region[region]
+    tex[..., 0], tex[..., 1], tex[..., 2] = (district >> 8) | (wet.astype(np.int64) << 7), district & 0xFF, shown
     tex = np.roll(tex, tex.shape[1] // 2, axis=1)
     turned = appearance.turn_texture(tex, rotation, left_lon=-180.0, nearest=True)
     return turned, districts_data(record), Path(record_path), product
@@ -976,7 +1024,7 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
         frame=dict(note=surface_note(turn, summary, climate),
                    lede=''))
     if districts and truly:
-        texture, layer, rec_path, product = districts_layer(districts, rotation)
+        texture, layer, rec_path, product = districts_layer(districts, rotation, surface_path)
         data['textures']['districts'] = texture_file('districts', texture)
         data['districts'] = dict(layer, product_sha256=digest(product))
         data['provenance'] += (f" Regions and districts: the atlas round's first draft (districts.json "

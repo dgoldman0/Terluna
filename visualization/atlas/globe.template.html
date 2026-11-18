@@ -756,34 +756,50 @@
   }
 </script>
 <script id="district-lines" type="x-shader/x-fragment">
-  // The atlas round's draft regions and districts: each cell's district (red and green) and region (blue) in a texture
-  // read cell by cell. Edges are drawn where a neighbour a pixel or so away differs: regions' edges always, districts'
-  // when zoomed in (uDistrictMode 2). A selected district and the districts linked to it are tinted.
+  // The atlas round's draft regions and districts: each cell's district (red's low seven bits and green), whether it is
+  // water (red's top bit, a lake or a sea) and the region drawn there (blue) in a texture read cell by cell. The sea
+  // within 100 km of a shore carries its nearest region, and 0 beyond, so a region's border runs on across straits,
+  // inlets and island chains and stops where the open sea begins (render.water_regions). Edges are drawn where a
+  // neighbour a pixel or so away differs: regions' edges always, districts' when zoomed in (uDistrictMode 2), solid on
+  // land and dashed over water, as atlases draw a border at sea. A selected district and those linked to it are tinted.
   uniform sampler2D tDistricts;
   uniform float uDistrictMode;   // 0 off, 1 regions, 2 regions and districts
   uniform float uSel[8];         // the selected district and its links, by their place in the page's list (0 unused)
-  uniform vec2 uLandUnits;       // how many districts and regions are on land; those after them, and 0, are water
-  vec2 unitsAt(vec2 at) {
+  uniform vec2 uLandUnits;       // how many districts and regions are on land; the districts after them are coastal seas
+  vec3 unitsAt(vec2 at) {
     vec3 t = floor(texture2D(tDistricts, at).rgb * 255.0 + 0.5);
-    return vec2(t.r * 256.0 + t.g, t.b);
+    float wet = step(127.5, t.r);
+    return vec3((t.r - 128.0 * wet) * 256.0 + t.g, t.b, wet);
   }
   vec3 districtsOver(vec3 colour, vec2 uv, vec2 gx, vec2 gy) {
     if (uDistrictMode < 0.5) return colour;
-    vec2 c0 = unitsAt(uv);
-    // The shore already shows itself: edges are drawn between two units on land or two at sea, never along a coast.
-    vec2 land0 = vec2(step(0.5, c0.x) * step(c0.x, uLandUnits.x + 0.5), step(0.5, c0.y) * step(c0.y, uLandUnits.y + 0.5));
+    vec3 c0 = unitsAt(uv);
+    float land0 = step(0.5, c0.x) * step(c0.x, uLandUnits.x + 0.5);
     // A pixel is on an edge where a neighbour that far away, in screen pixels, lies in another unit, so a line is twice
-    // that wide: regions' about 1.3 pixels, districts' about 1.
-    float dEdge = 0.0, rEdge = 0.0;
+    // that wide: regions' about 1.3 pixels, districts' about 1. The shore already shows itself: a district's edge runs
+    // between two land districts or two coastal seas, never along a coast or along the open sea's edge, and a region's
+    // between two regions, never where one of them gives way to the open sea.
+    float dEdge = 0.0, rEdge = 0.0, dWet = 0.0, rWet = 0.0;
     for (int k = 0; k < 8; k++) {
       int j = k - 4 * (k / 4);
       vec2 off = (j == 0 ? gx : j == 1 ? -gx : j == 2 ? gy : -gy) * (k < 4 ? 0.65 : 0.5);
-      vec2 c1 = unitsAt(uv + off);
-      vec2 land1 = vec2(step(0.5, c1.x) * step(c1.x, uLandUnits.x + 0.5), step(0.5, c1.y) * step(c1.y, uLandUnits.y + 0.5));
-      vec2 same = 1.0 - abs(land0 - land1);
-      if (k < 4) rEdge = max(rEdge, step(0.5, abs(c1.y - c0.y)) * same.y);
-      else dEdge = max(dEdge, step(0.5, abs(c1.x - c0.x)) * same.x);
+      vec3 c1 = unitsAt(uv + off);
+      if (k < 4) {
+        float e = step(0.5, abs(c1.y - c0.y)) * step(0.5, c0.y) * step(0.5, c1.y);
+        rEdge = max(rEdge, e);
+        rWet = max(rWet, e * max(c0.z, c1.z));
+      } else {
+        float land1 = step(0.5, c1.x) * step(c1.x, uLandUnits.x + 0.5);
+        float e = step(0.5, abs(c1.x - c0.x)) * step(0.5, c0.x) * step(0.5, c1.x) * (1.0 - abs(land0 - land1));
+        dEdge = max(dEdge, e);
+        dWet = max(dWet, e * max(c0.z, c1.z));
+      }
     }
+    // Over water an edge is dashed: three pixels on and three off, on a checkerboard in screen pixels, so that a line
+    // in any direction breaks into dashes.
+    float dash = mod(floor(gl_FragCoord.x / 3.0) + floor(gl_FragCoord.y / 3.0), 2.0);
+    rEdge *= mix(1.0, dash, rWet);
+    dEdge *= mix(1.0, dash, dWet);
     float sel = 0.0;
     for (int k = 0; k < 8; k++) sel = max(sel, step(0.5, uSel[k]) * (1.0 - step(0.5, abs(uSel[k] - c0.x))));
     colour = mix(colour, vec3(1.0, 0.80, 0.42), 0.28 * sel * step(0.5, c0.x));
