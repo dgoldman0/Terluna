@@ -20,9 +20,10 @@ terms that follow the ground evaluated on the finer heights, and a grain for eac
 - closed canopy mottled at about 1.6 km, grassland patchy at about 8 km, and on flat, bare, dry ground fields of dune
   crests a few kilometres apart and several times as long, with the drainage lines paling to dry washes where little
   grows;
-- water in the open water's colour, taking the productive coast's green only in its shallows (from
-  LOOK['littoral_m'], 20 m, fully at 3 m): the page's rule for the 1.9 km view (appearance.SHELF_M, from 150 m) paints
-  a whole shallow lake or bay the green of the forest beside it, where a close view has to show water as water.
+- water in the open water's colour, taking the productive coast's green only in its shallows (LOOK['littoral_m'],
+  from 20 m, fully at 3 m). The trial set this rule for its windows, where the page's former one (from 150 m) painted
+  a whole shallow lake or bay the green of the forest beside it; the page has since taken it for all its water
+  (appearance.SHELF_M), and the windows read it from there.
 
 All of it is a guesstimate, labelled so on the page: it makes the moisture map's dryness look like land, and says
 nothing of which plants grow. The dunes' crests run along the parallels as an illustration: the design climate's wind
@@ -56,7 +57,7 @@ LOOK = dict(
     patch_ln=0.22,              # patchiness, in log aridity
     canopy=0.20, grass=0.07,    # brightness mottling of closed canopy and of grassland
     dune=0.09, dune_km=(3.5, 20.0),   # dune crests on flat, bare, dry ground: brightness; spacing and length (km)
-    littoral_m=(20.0, 3.0),     # water shallower than these takes the productive coast's colour, fully at 3 m
+    littoral_m=appearance.SHELF_M,    # water shallower than these takes the productive coast's colour: the page's rule
     wash=0.35,                  # how far a drainage line pales toward the bare soil where little grows
     river_m3s=30.0)             # rivers drawn from this flow up
 SALT = 3                        # the water code of the salt sea, whose shores keep no fresh belt

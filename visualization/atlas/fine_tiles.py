@@ -108,8 +108,7 @@ def sample16(field, lat_t, lon_t):
 
 
 def tile(tr, tc):
-    """One tile's three layers (uint8 arrays), or None for open water deeper than the shelves."""
-    from climate.gcm.turned import to_turned
+    """One tile's three layers (uint8 arrays), or None for open water deeper than the shallows."""
     g = _G
     r0, c0 = (90 - LAT_TOP + TILE_DEG * tr) * PPD, TILE_DEG * tc * PPD
     code = g['water'][r0:r0 + TILE, c0:c0 + TILE]
@@ -134,6 +133,17 @@ def tile(tr, tc):
     normal = normals(h, lat, PPD)[inner]
     seen = sky(surf, lat, PPD, wet)[inner]
     h, lev, wet = h[inner], lev[inner], wet[inner]
+    aux = np.stack([wet.astype(np.uint8) * 255, np.round(np.clip(seen, 0, 1) * 255).astype(np.uint8),
+                    np.full(wet.shape, 255, np.uint8)], axis=-1)
+    return dict(colour=colour_layer(r0, c0, h, lev, wet), normal=normal, aux=aux)
+
+
+def colour_layer(r0, c0, h, lev, wet):
+    """A tile's colour (uint8, sRGB) from its fine heights, water levels and water: on land the page's 1.9 km land
+    colour read at each fine pixel's place in the settled frame; on the water the designed waters' colours by the
+    depth under the water's level (appearance.SHELF_M) and the 1.9 km plumes."""
+    from climate.gcm.turned import to_turned
+    g = _G
     la = np.repeat((90.0 - (np.arange(r0, r0 + TILE) + 0.5) / PPD)[:, None], TILE, axis=1)
     lo = np.repeat(((np.arange(c0, c0 + TILE) + 0.5) / PPD)[None, :], TILE, axis=0)
     lat_t, lon_t = to_turned(la, lo, g['rotation'])
@@ -143,14 +153,26 @@ def tile(tr, tc):
     w = g['waters']
     sea = (w['open_sea'] * (1 - shelf) + w['productive_coast'] * shelf) * (1 - plume) + w['river_mouth'] * plume
     colour = np.where(wet[..., None], sea, land)
-    colour = np.round(appearance.srgb_encode(colour) * 255).astype(np.uint8)
-    aux = np.stack([wet.astype(np.uint8) * 255, np.round(np.clip(seen, 0, 1) * 255).astype(np.uint8),
-                    np.full(wet.shape, 255, np.uint8)], axis=-1)
-    return dict(colour=colour, normal=normal, aux=aux)
+    return np.round(appearance.srgb_encode(colour) * 255).astype(np.uint8)
+
+
+def water_tile(tr, tc):
+    """One tile's colour and water alone, as tile() makes them, without the shading and the sky search."""
+    g = _G
+    r0, c0 = (90 - LAT_TOP + TILE_DEG * tr) * PPD, TILE_DEG * tc * PPD
+    part = (slice(r0, r0 + TILE), slice(c0, c0 + TILE))
+    h = g['height'][part].astype(np.float32) * 0.5
+    lev = g['level'][part].astype(np.float32) * 0.5
+    wet = g['water'][part] > 0
+    return dict(colour=colour_layer(r0, c0, h, lev, wet), wet=wet)
 
 
 def _tile(args):
     return args, tile(*args)
+
+
+def _water_tile(args):
+    return args, water_tile(*args)
 
 
 # -------------------------------------------------------------------------------------------- build
@@ -243,6 +265,65 @@ def build(surface, surface_record, moisture, falls, out=OUT, log=print, workers=
     return manifest
 
 
+def refresh_water(surface, surface_record, moisture, falls, out=OUT, base=None, log=print, workers=WORKERS):
+    """The packs' colour and water made again by the present rules on the present fine surface, each tile keeping its
+    shading and its sky: for a change to the waters' colours, the plumes or the fine water, none of which the slow
+    sky search depends on beyond the few cells where a shore has moved (water sees the whole sky; ground the water
+    has left keeps the water's). In `out` the tiles of fine_look.py's trial windows are left as they stand; in `base`
+    (the folder holding the packs as they stood before the trial, for the packs kept there) every tile is made again,
+    so that the trial can be cut again on them."""
+    from PIL import Image
+    started = time.time()
+    out = Path(out)
+    manifest = json.loads((out / 'manifest.json').read_text())
+    fine_record = json.loads(FS.OUT.read_text())
+    if sha256(FS.PRODUCT) != fine_record['product']['sha256']:
+        raise SystemExit(f'{FS.PRODUCT} no longer matches its record {FS.OUT}')
+    parts, waters, rotation, routing = colour_parts(surface, surface_record, moisture, falls, log)
+    with np.load(FS.PRODUCT, allow_pickle=False) as z:
+        _G.update(height=z['height'], water=z['water'], level=z['level'])
+    _G.update(land=parts['land'], plume=parts['plume'].astype(np.float32), waters=waters, rotation=rotation)
+    log(f'fine surface read, {time.time() - started:.0f} s')
+    trial = {tuple(t) for w in manifest.get('look', {}).get('windows', []) for t in w['tiles']}
+    folders = [(out, trial)] + ([(Path(base), set())] if base else [])
+    done = 0
+    with Pool(workers) as pool:
+        for n, pack in enumerate(manifest['packs']):
+            pr, pc = pack['r'], pack['c']
+            keys = [(pr * PACK_ROWS + i, pc * PACK_COLS + j) for i in range(PACK_ROWS) for j in range(PACK_COLS)]
+            tiles = dict(pool.imap_unordered(_water_tile, [k for k, ok in zip(keys, pack['valid']) if ok]))
+            for folder, kept in folders:
+                paths = {name: folder / pack['files'][name] for name in ('colour', 'aux')}
+                if not all(p.exists() for p in paths.values()):
+                    continue
+                colour = np.array(Image.open(paths['colour']).convert('RGB'))
+                aux = np.array(Image.open(paths['aux']).convert('RGB'))
+                for (tr, tc), t in tiles.items():
+                    if (tr, tc) in kept:
+                        continue
+                    here = (slice((tr - pr * PACK_ROWS) * TILE, (tr - pr * PACK_ROWS + 1) * TILE),
+                            slice((tc - pc * PACK_COLS) * TILE, (tc - pc * PACK_COLS + 1) * TILE))
+                    colour[here] = t['colour']
+                    aux[here + (0,)] = t['wet'] * np.uint8(255)
+                    aux[here + (1,)] = np.where(t['wet'], 255, aux[here + (1,)])
+                    done += folder is out
+                Image.fromarray(colour).save(paths['colour'], 'WEBP', quality=QUALITY['colour'], method=4)
+                Image.fromarray(aux).save(paths['aux'], 'WEBP', lossless=True, quality=60, method=4)
+            log(f"{n + 1} of {len(manifest['packs'])} packs, {time.time() - started:.0f} s")
+    manifest['bytes'] = sum((out / f).stat().st_size for p in manifest['packs'] for f in p['files'].values())
+    manifest['water'] = dict(
+        note=('The colour and the water of every tile outside the trial windows were made again after the first cut, '
+              'by the rules and on the fine surface named here; the shading and the sky are the first cut\'s.'),
+        tiles=done, shelf_m=list(appearance.SHELF_M),
+        sources={str(FS.OUT.relative_to(ROOT)): sha256(FS.OUT), str(FS.PRODUCT): fine_record['product']['sha256'],
+                 str(surface): sha256(surface), str(moisture): sha256(moisture), str(routing): sha256(routing),
+                 'visualization/atlas/appearance.py': sha256(HERE / 'appearance.py')},
+        seconds=round(time.time() - started))
+    (out / 'manifest.json').write_text(json.dumps(manifest, indent=1) + '\n')
+    log(f"{done} tiles' colour and water made again in {len(manifest['packs'])} packs, {manifest['water']['seconds']} s")
+    return manifest
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument('--surface', type=Path, required=True)
@@ -250,9 +331,15 @@ def main(argv=None) -> int:
     ap.add_argument('--moisture', type=Path, required=True)
     ap.add_argument('--falls', type=Path)
     ap.add_argument('--workers', type=int, default=WORKERS)
+    ap.add_argument('--water-only', action='store_true',
+                    help='make the colour and the water of the packs in place again, keeping the shading and the sky')
+    ap.add_argument('--base', type=Path, help='with --water-only: the folder of the packs as they stood before the trial look')
     a = ap.parse_args(argv)
-    build(a.surface.absolute(), a.surface_record.absolute(), a.moisture.absolute(),
-          a.falls.absolute() if a.falls else None, workers=a.workers)
+    args = (a.surface.absolute(), a.surface_record.absolute(), a.moisture.absolute(), a.falls.absolute() if a.falls else None)
+    if a.water_only:
+        refresh_water(*args, base=a.base, workers=a.workers)
+    else:
+        build(*args, workers=a.workers)
     return 0
 
 

@@ -1,5 +1,6 @@
 """Tests of the trial close-up look's own pieces (fine_look.py): the grain is bounded and has no seam, the dune crests
-run along the parallels, the drainage count gathers downhill, and a window is the four tiles round its point."""
+run along the parallels, the drainage count gathers downhill, and a window is the four tiles round its point; and of
+fine_tiles.py's water-only tile: land keeps the land's colour, deep water the open water's, the shallows the coast's."""
 
 import sys
 from pathlib import Path
@@ -51,3 +52,34 @@ def test_a_window_is_the_four_tiles_round_its_point():
     top = fine_tiles.LAT_TOP - fine_tiles.TILE_DEG * rows[0]
     assert top >= 14.0 >= top - 2 * fine_tiles.TILE_DEG
     assert cols == [fine_tiles.TILE_COLS - 1, 0]            # the window crosses the first meridian
+
+
+def test_a_water_only_tile_colours_land_deep_water_and_shallows():
+    import appearance
+    T = fine_tiles.TILE
+    r0 = (90 - fine_tiles.LAT_TOP) * fine_tiles.PPD                  # the first tile's corner
+    rows, cols = r0 + T, T
+    height = np.zeros((rows, cols), np.int16)                        # half metres
+    level = np.zeros((rows, cols), np.int16)
+    water = np.zeros((rows, cols), np.uint8)
+    water[r0:, :200] = 1                                             # deep water: 100 m
+    height[r0:, :200] = -200
+    water[r0:, 200:300] = 1                                          # shallows: 1 m
+    height[r0:, 200:300] = -2
+    height[r0:, 300:] = 100                                          # land
+    land = np.full((2880, 5760, 3), 0.25, np.float32)
+    waters = dict(open_sea=np.array([0.01, 0.02, 0.05]), productive_coast=np.array([0.02, 0.06, 0.04]),
+                  river_mouth=np.array([0.2, 0.15, 0.1]))
+    saved = dict(fine_tiles._G)
+    try:
+        fine_tiles._G.update(height=height, level=level, water=water, land=land, plume=np.zeros((2880, 5760), np.float32),
+                             waters=waters, rotation=np.eye(3))
+        t = fine_tiles.water_tile(0, 0)
+    finally:
+        fine_tiles._G.clear()
+        fine_tiles._G.update(saved)
+    shade = lambda c: np.round(appearance.srgb_encode(np.asarray(c, float)) * 255).astype(np.uint8)  # noqa: E731
+    assert t['wet'][:, :300].all() and not t['wet'][:, 300:].any()
+    assert (t['colour'][10, 100] == shade(waters['open_sea'])).all()
+    assert (t['colour'][10, 250] == shade(waters['productive_coast'])).all()
+    assert (t['colour'][10, 400] == shade([0.25, 0.25, 0.25])).all()

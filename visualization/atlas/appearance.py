@@ -90,18 +90,20 @@ FLOODPLAIN_LN = 0.6                  # times the blurred log10 discharge, at mos
 HOLLOW_LN = 0.15                     # times the standardized curvature, clipped at 2.5
 SLOPE_LN = 0.4                       # taken off where the ground steepens from 0.2 to 0.6
 PATCH_LN = 0.25                      # the noise's standard deviation in log aridity
-SHELF_M = (150.0, 20.0)              # water shallower than these takes the productive coast's colour, fully at 20 m
+SHELF_M = (20.0, 3.0)                # water shallower than these takes the productive coast's colour, fully at 3 m: the
+#                                      shallows alone (from 150 m, a whole shallow lake or bay took the green of the forest beside it)
 PLUME_KM_PER_ROOT = 0.3              # a plume reaches about 0.3 km per (m3/s)^0.5 of sediment-bearing flow: 9.5 km at 1,000 m3/s
 PLUME_MAX = 0.7                      # the most of a water pixel a plume colours, at its mouth
 OWN_RUNOFF_M3S = 5.0                # a 1.9 km cell's own runoff stays under 1 m3/s even at 20 mm of rain a day; more is sea or lake water joining
 # Falls (the falls study, research/studies/atlas_round/falls.py), display guesstimates: a river's water turns to foam as
 # its step steepens from FOAM_SLOPE[0] to FOAM_SLOPE[1], and spray whitens the ground and water round the falls of
-# MIST_GW or more, out to about MIST_KM per cube root of their GW (5 km round 42 GW), at most MIST_MAX of each pixel.
+# MIST_GW or more, out to about MIST_KM per cube root of their GW (1 km round 42 GW, about the river's own width there:
+# drawn five times as wide, the spray made soft white discs 10 to 20 km across), at most MIST_MAX of each pixel.
 WHITE_WATER = np.array([0.55, 0.58, 0.60])
 MIST_WHITE = np.array([0.62, 0.64, 0.66])
 FOAM_SLOPE = (0.03, 0.2)
 MIST_GW = 2.0
-MIST_KM = 1.5
+MIST_KM = 0.3
 MIST_MAX = 0.5
 CLOUD_ALBEDO = 0.72                 # of the part of a deck that intercepts light
 LOW_OPACITY, HIGH_OPACITY = 0.9, 0.4  # guesstimates: the low deck holds the model's cloud water, the high deck little
