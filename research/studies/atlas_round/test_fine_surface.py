@@ -67,6 +67,25 @@ def test_fine_water_follows_the_heights_at_the_level():
     assert np.isnan(level[0, 0]) and level[4, 0] == 0.0
 
 
+def test_each_body_floods_at_its_own_level():
+    # a high lake (level 100) and a low lake (level 0) two cells apart, a rim cell between them sloping from one to
+    # the other: the high lake wets the rim's upper side to its level, and the low lake's side stays dry above 0
+    water16 = np.zeros((3, 5), bool)
+    water16[1, 0] = water16[1, 2] = True
+    level16 = np.full((3, 5), np.nan, np.float32)
+    level16[1, 0], level16[1, 2] = 100.0, 0.0
+    body16 = np.zeros((3, 5), np.int16)
+    h = np.full((12, 20), 500.0, np.float32)
+    h[4:8, 0:4] = 50.0                      # the high lake's floor
+    h[4:8, 8:12] = -50.0                    # the low lake's floor
+    h[4:8, 4:8] = np.array([90.0, 150.0, 60.0, 30.0], np.float32)[None, :]   # the rim: a crest, then a slope down
+    code, level = FS.fine_water(h, water16, level16, body16)
+    assert code[5, 4] == FS.LAKE and level[5, 4] == 100.0        # below the high lake's level and joined to it
+    assert code[5, 5] == 0                                       # the crest stands dry
+    assert code[5, 6] == 0 and code[5, 7] == 0                   # 60 m and 30 m: under the high level, but only the low lake is near, and they stand above it
+    assert level[5, 9] == 0.0
+
+
 @pytest.mark.skipif(not FS.OUT.exists(), reason='the fine surface has not been built')
 def test_fine_surface_record_checks():
     r = json.loads(FS.OUT.read_text())

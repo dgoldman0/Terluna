@@ -15,8 +15,9 @@ and the page's checks were computed on, and inside each cell the ground keeps th
 
 The water: a fine cell under one of the design surface's water cells is water where its height lies below that cell's
 water level, so islets and points the fine heights raise above the water show as land; and a fine cell under a land
-cell beside the water is water where it lies below the level of the nearest water cell and joins water across fine
-cells, so coves and inlets narrower than 1.9 km show as water. Each sea and lake keeps the level the design gives it:
+cell beside a body of water is water where it lies below that body's level there and joins the body's own water across
+fine cells, so coves and inlets narrower than 1.9 km show as water. Each body floods from its own water at its own
+level: the lakes of a chain each keep their shores, and a lake behind a narrow rim leaves the lower ground beyond dry. Each sea and lake keeps the level the design gives it:
 a notch narrower than 1.9 km that would lower a lake's spill is not looked for, and a crater pond smaller than a 1.9 km
 cell that the routing never filled stays dry.
 
@@ -152,32 +153,38 @@ def fine_heights(design16, merged):
 # ------------------------------------------------------------------------------------------- water
 
 def fine_water(height, water16, level16, body16):
-    """The water on the fine heights: under a water cell, the fine cells below its level; under a land cell beside the
-    water, the fine cells below the nearest water cell's level that join water across fine cells. Returns the water
-    code (uint8) and the level (float32, NaN on dry ground)."""
+    """The water on the fine heights, one body of water at a time (a body is the water cells that touch): under its
+    cells, the fine cells below their level; under the land cells beside it, the fine cells below the level of the
+    highest of its cells next to them, where they join the body's own water across fine cells. Each body floods from
+    its own water at its own level, so two lakes of a chain standing side by side each keep a shore, and a lake held
+    behind a narrow rim does not wet the lower ground beyond it. Where two bodies reach the same fine cell the higher
+    level stands. Returns the water code (uint8) and the level (float32, NaN on dry ground)."""
     from scipy import ndimage
+    ring = np.ones((3, 3), bool)
     code16 = np.where(water16, np.where(body16 == 0, LAKE, body16), 0).astype(np.uint8)
-    # each land cell beside the water takes its nearest water cell's level and code
-    _, (ii, jj) = ndimage.distance_transform_edt(~water16, return_indices=True)
-    near_level, near_code = level16[ii, jj], code16[ii, jj]
-    beside = ~water16 & ndimage.binary_dilation(water16, structure=np.ones((3, 3), bool))
-    beside[:, 0] |= ~water16[:, 0] & water16[:, -1]                 # across the date line
-    beside[:, -1] |= ~water16[:, -1] & water16[:, 0]
-    lev16 = np.where(water16, level16, np.where(beside, near_level, np.nan)).astype(np.float32)
-    cod16 = np.where(water16, code16, np.where(beside, near_code, 0)).astype(np.uint8)
-    level = expand(lev16)
-    under = expand(water16)
-    wet = height < level                                            # NaN levels compare false
-    candidate = wet & ~under
-    core = wet & under
-    labels, n = ndimage.label(wet, structure=np.ones((3, 3), bool))
-    keep = np.bincount(labels[core].ravel(), minlength=n + 1) > 0
-    keep[0] = False
-    joined = keep[labels]
-    del labels
-    water = (core | (candidate & joined))
-    code = np.where(water, expand(cod16), 0).astype(np.uint8)
-    level = np.where(water, level, np.nan).astype(np.float32)
+    bodies, _ = ndimage.label(water16, structure=ring)
+    rows16, cols16 = water16.shape
+    code = np.zeros(height.shape, np.uint8)
+    level = np.full(height.shape, np.nan, np.float32)
+    for k, box in enumerate(ndimage.find_objects(bodies), start=1):
+        r0, r1 = max(box[0].start - 1, 0), min(box[0].stop + 1, rows16)
+        c0, c1 = max(box[1].start - 1, 0), min(box[1].stop + 1, cols16)
+        sub = (slice(r0, r1), slice(c0, c1))
+        mine = bodies[sub] == k
+        own = np.where(mine, level16[sub], -np.inf).astype(np.float32)
+        reach = np.where(mine, own, ndimage.maximum_filter(own, size=3, mode='constant', cval=-np.inf))
+        fine = (slice(r0 * K, r1 * K), slice(c0 * K, c1 * K))
+        lev = expand(reach)
+        wet = height[fine] < lev
+        core = wet & expand(mine)
+        labels, n = ndimage.label(wet, structure=ring)
+        keep = np.bincount(labels[core].ravel(), minlength=n + 1) > 0
+        keep[0] = False
+        water = keep[labels]
+        held = level[fine]
+        take = water & ~(held >= lev)                               # NaN compares false: dry ground is taken
+        level[fine] = np.where(take, lev, held)
+        code[fine] = np.where(take, code16[sub][mine].max(), code[fine])
     return code, level
 
 
