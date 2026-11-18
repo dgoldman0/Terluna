@@ -19,7 +19,8 @@ settings is made again on the corrected rule by the procedure that made it, in t
   on with what the lake does spare;
 - the near-side sea (near_side_neck.balance, design_routing.route): each part stands where its loss to the air meets
   its rivers, the main part sending the southern seas what the neck passes while it stands over the crest and nothing
-  once it stands under it. The design routed once with the parts at the levels the common-level routing gave; here
+  once it stands under it; where the southern part's own rivers and the neck's flow lift it over the crest too, the
+  two are one sea across the neck. The design routed once with the parts at the levels the common-level routing gave; here
   the routing and the levels are set against each other until each part's level holds on the rivers that reach it.
   A part's level can come to rest at the sill of a basin beside it, with more reaching it than it loses below the
   sill. The part is then routed with its water just over the sill and the basin under it: where the basin was a lake
@@ -194,33 +195,39 @@ def budget(lake, spills, delivered, sea, runoff, lake_net, precip, evap, area):
     return out
 
 
-def closing_factor(d, st, design_factor, log=print):
+def corrected_closing(d, st, log=print):
     """The budget with every sea at the common level on the corrected rule at factor 1, the factor it gives, and what
-    the budget still leaves over at that factor; and, for the present rule, what its budget leaves over at the
-    design's factor."""
+    the budget still leaves over at that factor. Returns the factor and the two budgets."""
     started = time.time()
     h = d['h']
     sea = st['common'] >= 0
     s = LR.hollow_structure(h, sea.reshape(h.shape), d['lat'], d['cell_km'], np.where(sea, d['level0'], 0.0).reshape(h.shape))
-    area = s['area']
     out = {}
     factor = 1.0
     for key in ('at_factor_1', 'at_its_factor'):
         runoff, lake_net, precip, evap = FD.load(factor)
         terms = LR.hollow_terms(s, runoff, lake_net)
         r = LR.hollow_routing(s, terms, LR.hollow_state(s, terms))
-        out[key] = budget(r['lake'], r['lake_spills'], r['discharge'][sea].sum(), sea, runoff, lake_net, precip, evap, area)
+        out[key] = budget(r['lake'], r['lake_spills'], r['discharge'][sea].sum(), sea, runoff, lake_net, precip, evap, s['area'])
         out[key]['factor'] = factor
         log(f'corrected rule, every sea at the common level, factor {factor}: {out[key]}, {time.time() - started:.0f} s')
         if key == 'at_factor_1':
             factor = out[key]['open_water_evaporation_factor_closing_it']
         del r, terms
-    del s
+    return factor, out
+
+
+def closing_factor(d, st, design_factor, log=print):
+    """corrected_closing, and for the present rule what its budget leaves over at the design's factor."""
+    started = time.time()
+    h = d['h']
+    sea = st['common'] >= 0
+    factor, out = corrected_closing(d, st, log)
     runoff, lake_net, precip, evap = FD.load(design_factor)
     outlet = sea.reshape(h.shape)
     r = route_levels(h, outlet, d['lat'], d['cell_km'], runoff, lake_net, np.where(outlet, d['level0'], 0.0))
     lake = r['lake'] & ~sea
-    present = budget(lake, lake & ~r['closed'][r['label']], r['discharge'][sea].sum(), sea, runoff, lake_net, precip, evap, area)
+    present = budget(lake, lake & ~r['closed'][r['label']], r['discharge'][sea].sum(), sea, runoff, lake_net, precip, evap, r['area'])
     present['factor'] = design_factor
     log(f'present rule, every sea at the common level, factor {design_factor}: {present}, {time.time() - started:.0f} s')
     return factor, dict(corrected=out, present_at_the_design_factor=present)
@@ -326,6 +333,32 @@ def set_weirs(s, terms, water, names, works, start=None, rounds=ROUNDS, within=S
                 flows=dict(held_branch=flows[0], rest_branch=flows[1]), sources=sources, history=history, root=root)
 
 
+def govern(d, st, runoff, lake_net, start=None, log=print):
+    """The weirs set on a climate with the near-side sea at the common level, the upper seas full at their rims and
+    the works where the design structure has them. Returns set_weirs' result without its state, what the gathered
+    rivers bring each water, the works' cells, and the put-ins the settled weirs make: `fixed` at cells and the
+    branches with their shares."""
+    names = list(WATERS)
+    water, levels = design_state_waters(d, st)
+    s = structure_of(d, water, levels)
+    terms = LR.hollow_terms(s, runoff, lake_net)
+    ops = list(zip(d['ops'], d['op_kind']))
+    works = dict(source_pass=next(c for (c, _, _), k in ops if k == 'salt_sea_weir'),
+                 full_pass={name: next(c for (c, _, _), k in ops if k == name) for name in FULL_SEAS},
+                 held_branch=[(c, float(np.sign(q))) for (c, q, _), k in ops if k == 'humboldtianum_branch'],
+                 rest_branch=[(c, float(np.sign(q))) for (c, q, _), k in ops if k == 'smythii_marginis_branch'])
+    gov = set_weirs(s, terms, water, names, works, start=start, log=log)
+    r = LR.hollow_routing(s, terms, gov['state'])
+    supply = np.array([float(r['discharge'][water == i].sum()) for i in range(len(names))])
+    if np.abs(supply - gov['supply']).max() > 1e-3:
+        raise SystemExit('the rivers gathered do not bring the seas what the hollows\' overflows give them')
+    least = float(r['left'].min())
+    fixed = [(works['source_pass'], gov['share'][SALT_SEA])] + [(works['full_pass'][k], gov['over'][k]) for k in FULL_SEAS]
+    branches = [(works['held_branch'], gov['share'][HELD]), (works['rest_branch'], gov['share'][REST])]
+    return dict(gov={k: v for k, v in gov.items() if k not in ('state', 'root')}, supply=supply, works=works,
+                fixed=fixed, branches=branches, least_kept_by_a_lake_not_full=least)
+
+
 # ---------------------------------------------------------------- the near-side sea's parts
 
 def neck_from_record(st, record):
@@ -376,6 +409,112 @@ def part_levels(tab, rivers, neck):
     if None in alone.values():
         raise RuntimeError('a part\'s own rivers would raise it over the crest while the main part cannot stand there')
     return dict(main=alone['main'], south=alone['south'], neck_flow=0.0, choked=False, main_over_the_crest=False)
+
+
+def settle_parts(d, st, tab, neck, centre, runoff, lake_net, net, area, fixed, branches, rivers, start=None,
+                 on_round=None, log=print):
+    """The near-side sea's parts, the routing and the levels set against each other (see the module's text). tab:
+    part_tables on the climate's loss; centre: the neck's throat, where the main part's spill is put in past the
+    crest; fixed and branches: govern's put-ins; rivers: what the parts receive with the sea at the common level, from
+    which the first levels are set; start: the levels, history and sills a run reached, to take up; on_round is given
+    that state after each routing. Returns the settled levels, the waters and their levels, the routing's structure,
+    terms and state, the branches' flows, what reaches each water, each part's balance, what a part spills over a
+    sill, the history and the sills met."""
+    started = time.time()
+    names = list(WATERS)
+    level0, hf, cols = d['level0'], d['h'].ravel(), d['h'].shape[1]
+    z = part_levels(tab, rivers, neck)
+    history, sills, tried, spills = [], [], set(), {}
+    taken_up = False                                 # a settled state kept by an earlier run is routed once more
+    if start:
+        z, history, sills = start['z'], start['history'], start['sills']
+        tried = {(k, level) for k, level in start['tried']}
+        taken_up = bool(start.get('settled'))
+    kept = lambda settled=False: dict(z={k: (v if isinstance(v, bool) else float(v)) for k, v in z.items()},   # noqa: E731
+                                      history=history, sills=sills, tried=sorted(tried), settled=settled)
+    index = dict(main=MAIN, south=SOUTH)
+    for _ in range(PART_ROUNDS):
+        water, levels = parted_waters(d, st, z['main'], z['south'])
+        s = structure_of(d, water, levels)
+        terms = LR.hollow_terms(s, runoff, lake_net)
+        # While the southern part stands under the crest, the neck's flow is a river on the ground past it, put in
+        # where it leaves the main part. Once both parts stand over the crest they are one sea across the neck and
+        # the flow between them passes through its water.
+        over_the_neck, spilt = [], 0.0
+        if z['neck_flow'] > 0.0 and z['south'] <= neck.crest:
+            spilt = z['neck_flow']
+            over_the_neck = [(DRt.spill_cell(hf, water == MAIN, cols, centre), spilt)]
+        root = roots_of(s['tree'])
+        state, flows, sources = branch_state(s, terms, fixed + over_the_neck, branches, root)
+        got = LR.reaches(s, terms, state, water, len(names))
+        rivers = dict(main=float(got[MAIN]), south=float(got[SOUTH]) - spilt)
+        loss = {k: tab[k].at(z[k])[1] for k in ('main', 'south')}
+        short = dict(main=rivers['main'] - z['neck_flow'] - loss['main'], south=rivers['south'] + z['neck_flow'] - loss['south'])
+        this = dict(main_level_m=round(z['main'] - level0, 2), south_level_m=round(z['south'] - level0, 2),
+                    neck_flow_m3s=round(z['neck_flow'], 1), main_rivers_m3s=round(rivers['main'], 1),
+                    south_rivers_m3s=round(rivers['south'], 1), main_balance_m3s=round(short['main'], 1),
+                    south_balance_m3s=round(short['south'], 1))
+        log(f'near-side sea: {this}, {time.time() - started:.0f} s')
+        if not taken_up:
+            if this in history and not any((k, z[k]) in tried for k in ('main', 'south')):   # a sill is come back to once
+                raise RuntimeError(f'the near-side sea\'s parts come round to a state they left: {history[history.index(this):]}')
+            history.append(this)
+        taken_up = False
+        if on_round:
+            on_round(kept())
+        if max(abs(v) for v in short.values()) < PART_SETTLED_M3S:
+            break
+        z_next = part_levels(tab, rivers, neck)
+        still = max(abs(z_next[k] - z[k]) for k in ('main', 'south')) < PART_STILL_M and \
+            abs(z_next['neck_flow'] - z['neck_flow']) < PART_STILL_M3S
+        back = any(z_next[k] != z[k] and (k, z_next[k]) in tried for k in ('main', 'south'))
+        if not still or back:                        # back: a part tried over a sill returns to it
+            z = z_next
+            del s, terms, state
+            continue
+        # The levels hold with a part left over: it stands at the sill of a basin beside it, with more reaching it
+        # than it loses below the sill.
+        at_sill = [k for k in ('main', 'south') if short[k] >= PART_SETTLED_M3S and basin_at_the_sill(st, hf, k, z[k]).size]
+        if not at_sill or any(abs(short[k]) >= PART_SETTLED_M3S for k in ('main', 'south') if k not in at_sill):
+            raise RuntimeError(f'the near-side sea\'s parts hold out of balance: {this}')
+        fresh = [k for k in at_sill if (k, z[k]) not in tried]
+        for k in at_sill:
+            basin = basin_at_the_sill(st, hf, k, z[k])
+            lowest = int(basin[np.argmin(hf[basin])])
+            note = dict(part=k, sill_above_common_m=round(z[k] - level0, 2), left_over_at_it_m3s=round(short[k], 1),
+                        basin_below_the_sill_km2=round(float(area[basin].sum()) / 1e6),
+                        basin_loses_m3s=round(-float(net[basin].sum())), lowest_at=LR.place(lowest, cols, d['rotation']))
+            if k in fresh:
+                # First the part is tried just over the sill, the basin under its water: where the basin is a lake
+                # on its rivers' way, the lake's loss was taken from the rivers and is now the part's own, and the
+                # part rises on from there.
+                tried.add((k, z[k]))
+                sills.append(dict(note, then='the part\'s water tried over the sill'))
+                z = dict(z, **{k: float(np.nextafter(np.float32(z[k]), np.float32(np.inf)))})
+            elif not fresh:
+                # Over the sill the part lost more than reached it and came back: it stands at the sill and spills
+                # what is left over into the basin, which keeps the lake that spill and its own rivers hold.
+                spills[names[index[k]]] = short[k]
+                sills.append(dict(note, then='the part stands at the sill and spills what is left over into the basin'))
+                over_the_neck = over_the_neck + [(lowest, short[k])]
+        log(f'at a sill: {sills[-len(at_sill):]}')
+        if fresh:
+            del s, terms, state
+            continue
+        state, flows, sources = branch_state(s, terms, fixed + over_the_neck, branches, root)
+        again = LR.reaches(s, terms, state, water, len(names))
+        if np.abs(again - got).max() >= PART_SETTLED_M3S:
+            raise RuntimeError('a basin a part spills into over its sill fills and returns the water')
+        got = again
+        for k in at_sill:
+            short[k] -= spills[names[index[k]]]
+        break
+    else:
+        raise RuntimeError(f'the near-side sea\'s parts did not settle: {history[-3:]}')
+    if on_round:
+        on_round(kept(True))
+    return dict(z=z, water=water, levels=levels, s=s, terms=terms, state=state, flows=flows, sources=sources, got=got,
+                rivers=rivers, short=short, spills=spills, history=history, sills=sills)
 
 
 # ---------------------------------------------------------------- the record's pieces
@@ -485,27 +624,14 @@ def build(log=print, refresh=False):
     # the weirs, on the corrected rule's factor with the near-side sea at the common level
     runoff, lake_net, _, _ = FD.load(factor)
     net = lake_net.ravel() * MM_DAY * area
-    water_g, levels_g = design_state_waters(d, st)
-    s = structure_of(d, water_g, levels_g)
-    terms = LR.hollow_terms(s, runoff, lake_net)
-    ops = list(zip(d['ops'], d['op_kind']))
-    works = dict(source_pass=next(c for (c, _, _), k in ops if k == 'salt_sea_weir'),
-                 full_pass={name: next(c for (c, _, _), k in ops if k == name) for name in FULL_SEAS},
-                 held_branch=[(c, float(np.sign(q))) for (c, q, _), k in ops if k == 'humboldtianum_branch'],
-                 rest_branch=[(c, float(np.sign(q))) for (c, q, _), k in ops if k == 'smythii_marginis_branch'])
-    gov = set_weirs(s, terms, water_g, names, works, start=kept.get('weirs'), log=log)
+    g = govern(d, st, runoff, lake_net, start=kept.get('weirs'), log=log)
+    gov, governed_supply, fixed, branches = g['gov'], g['supply'], g['fixed'], g['branches']
     if 'weirs' not in kept:                          # a later run begins from these and keeps how they were reached
         kept['weirs'] = dict(share=gov['share'], over=gov['over'], history=gov['history'])
         keep(kept)
     weir_history = kept['weirs']['history']
-    r = LR.hollow_routing(s, terms, gov['state'])
-    governed_supply = np.array([float(r['discharge'][water_g == i].sum()) for i in range(len(names))])
-    if np.abs(governed_supply - gov['supply']).max() > 1e-3:
-        raise SystemExit('the rivers gathered do not bring the seas what the hollows\' overflows give them')
-    left = float(r['left'].min())
-    del r
     log(f'governed: supplies {dict((k, round(float(v))) for k, v in zip(names, governed_supply))}, least kept by a lake '
-        f'not full {left:.3g}, {time.time() - started:.0f} s')
+        f'not full {g["least_kept_by_a_lake_not_full"]:.3g}, {time.time() - started:.0f} s')
     own_g, loss_g = gov['own'], gov['loss']
     governed = dict(
         moscoviense_surplus_m3s=round(gov['surplus']),
@@ -522,97 +648,21 @@ def build(log=print, refresh=False):
                       receives_m3s=round(float(governed_supply[i]))) for i, k in enumerate(names[:MAIN])},
         weirs_set_in_settlings=len(weir_history), weir_history=weir_history)
     rivers = dict(main=float(governed_supply[MAIN]), south=float(governed_supply[SOUTH]))
-    fixed = [(works['source_pass'], gov['share'][SALT_SEA])] + [(works['full_pass'][k], gov['over'][k]) for k in FULL_SEAS]
-    branches = [(works['held_branch'], gov['share'][HELD]), (works['rest_branch'], gov['share'][REST])]
-    del s, terms, gov
+    del g, gov
 
     # the near-side sea's parts, the routing and the levels set against each other
     tab = part_tables(d, st, -net, area)
-    z = part_levels(tab, rivers, neck)
-    history, sills, tried, spills = [], [], set(), {}
-    taken_up = False                                 # a settled state kept by an earlier run is routed once more
-    if 'parts' in kept:
-        z, history, sills = kept['parts']['z'], kept['parts']['history'], kept['parts']['sills']
-        tried = {(k, level) for k, level in kept['parts']['tried']}
-        taken_up = bool(kept['parts'].get('settled'))
-    index = dict(main=MAIN, south=SOUTH)
-    for _ in range(PART_ROUNDS):
-        water, levels = parted_waters(d, st, z['main'], z['south'])
-        s = structure_of(d, water, levels)
-        terms = LR.hollow_terms(s, runoff, lake_net)
-        over_the_neck = []
-        if z['neck_flow'] > 0.0:
-            spill = DRt.spill_cell(hf, water == MAIN, cols, neck_record['throat']['centre_today'])
-            over_the_neck = [(spill, z['neck_flow'])]
-        root = roots_of(s['tree'])
-        state, flows, sources = branch_state(s, terms, fixed + over_the_neck, branches, root)
-        got = LR.reaches(s, terms, state, water, len(names))
-        rivers = dict(main=float(got[MAIN]), south=float(got[SOUTH]) - z['neck_flow'])
-        loss = {k: tab[k].at(z[k])[1] for k in ('main', 'south')}
-        short = dict(main=rivers['main'] - z['neck_flow'] - loss['main'], south=rivers['south'] + z['neck_flow'] - loss['south'])
-        this = dict(main_level_m=round(z['main'] - level0, 2), south_level_m=round(z['south'] - level0, 2),
-                    neck_flow_m3s=round(z['neck_flow'], 1), main_rivers_m3s=round(rivers['main'], 1),
-                    south_rivers_m3s=round(rivers['south'], 1), main_balance_m3s=round(short['main'], 1),
-                    south_balance_m3s=round(short['south'], 1))
-        log(f'near-side sea: {this}, {time.time() - started:.0f} s')
-        if not taken_up:
-            history.append(this)
-        taken_up = False
-        kept['parts'] = dict(z={k: (v if isinstance(v, bool) else float(v)) for k, v in z.items()}, history=history,
-                             sills=sills, tried=sorted(tried))
+
+    def on_round(state_now):
+        kept['parts'] = state_now
         keep(kept)
-        if max(abs(v) for v in short.values()) < PART_SETTLED_M3S:
-            break
-        z_next = part_levels(tab, rivers, neck)
-        still = max(abs(z_next[k] - z[k]) for k in ('main', 'south')) < PART_STILL_M and \
-            abs(z_next['neck_flow'] - z['neck_flow']) < PART_STILL_M3S
-        back = any(z_next[k] != z[k] and (k, z_next[k]) in tried for k in ('main', 'south'))
-        if not still or back:                        # back: a part tried over a sill returns to it
-            z = z_next
-            del s, terms, state
-            continue
-        # The levels hold with a part left over: it stands at the sill of a basin beside it, with more reaching it
-        # than it loses below the sill.
-        at_sill = [k for k in ('main', 'south') if short[k] >= PART_SETTLED_M3S and basin_at_the_sill(st, hf, k, z[k]).size]
-        if not at_sill or any(abs(short[k]) >= PART_SETTLED_M3S for k in ('main', 'south') if k not in at_sill):
-            raise RuntimeError(f'the near-side sea\'s parts hold out of balance: {this}')
-        fresh = [k for k in at_sill if (k, z[k]) not in tried]
-        for k in at_sill:
-            basin = basin_at_the_sill(st, hf, k, z[k])
-            lowest = int(basin[np.argmin(hf[basin])])
-            note = dict(part=k, sill_above_common_m=round(z[k] - level0, 2), left_over_at_it_m3s=round(short[k], 1),
-                        basin_below_the_sill_km2=round(float(area[basin].sum()) / 1e6),
-                        basin_loses_m3s=round(-float(net[basin].sum())), lowest_at=LR.place(lowest, cols, d['rotation']))
-            if k in fresh:
-                # First the part is tried just over the sill, the basin under its water: where the basin is a lake
-                # on its rivers' way, the lake's loss was taken from the rivers and is now the part's own, and the
-                # part rises on from there.
-                tried.add((k, z[k]))
-                sills.append(dict(note, then='the part\'s water tried over the sill'))
-                z = dict(z, **{k: float(np.nextafter(np.float32(z[k]), np.float32(np.inf)))})
-            elif not fresh:
-                # Over the sill the part lost more than reached it and came back: it stands at the sill and spills
-                # what is left over into the basin, which keeps the lake that spill and its own rivers hold.
-                spills[names[index[k]]] = short[k]
-                sills.append(dict(note, then='the part stands at the sill and spills what is left over into the basin'))
-                over_the_neck = over_the_neck + [(lowest, short[k])]
-        log(f'at a sill: {sills[-len(at_sill):]}')
-        if fresh:
-            del s, terms, state
-            continue
-        state, flows, sources = branch_state(s, terms, fixed + over_the_neck, branches, root)
-        again = LR.reaches(s, terms, state, water, len(names))
-        if np.abs(again - got).max() >= PART_SETTLED_M3S:
-            raise RuntimeError('a basin a part spills into over its sill fills and returns the water')
-        got = again
-        for k in at_sill:
-            short[k] -= spills[names[index[k]]]
-        break
-    else:
-        raise RuntimeError(f'the near-side sea\'s parts did not settle: {history[-3:]}')
-    kept['parts'] = dict(z={k: (v if isinstance(v, bool) else float(v)) for k, v in z.items()}, history=history,
-                         sills=sills, tried=sorted(tried), settled=True)
-    keep(kept)
+
+    parts = settle_parts(d, st, tab, neck, neck_record['throat']['centre_today'], runoff, lake_net, net, area, fixed,
+                         branches, rivers, start=kept.get('parts'), on_round=on_round, log=log)
+    z, water, levels, s, terms, state = (parts[k] for k in ('z', 'water', 'levels', 's', 'terms', 'state'))
+    flows, got, rivers, short, spills = (parts[k] for k in ('flows', 'got', 'rivers', 'short', 'spills'))
+    history, sills = parts['history'], parts['sills']
+    del parts
 
     # the rebalanced state's routing
     r = LR.hollow_routing(s, terms, state)

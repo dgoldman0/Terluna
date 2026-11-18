@@ -2,7 +2,7 @@
  "schema": "terluna.research.atlas-round-lake-rule-balance/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/lake_rule_balance.py": "8f6ed60b5f36a86673b20fbed7b6d040fb541bf4f076b363d07dc6450a785390",
+   "research/studies/atlas_round/lake_rule_balance.py": "dbdd7f68a80a66f740de44a2a80b3718aa3829147d567090952a4f04d3727c1b",
    "research/studies/atlas_round/lake_rule.py": "961acd4025f9e7810c2e308aa5bf5467dad3830018edcd6ee46cb901a631eae0",
    "research/studies/atlas_round/near_side_neck.py": "8f50c8557c21a03103b7470af1996a67024330a76d32a3890b1c61f02e681476",
    "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
@@ -1365,5 +1365,5 @@
   "path": "/media/projectspace/terluna-research/atlas-round/lake_rule/lake_rule_balance_16ppd.npz",
   "sha256": "2440571ca80569d60ee174a34f508787cc7018e1a2fca954e746a62ce02d143d"
  },
- "seconds": 117
+ "seconds": 142
 }
