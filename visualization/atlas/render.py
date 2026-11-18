@@ -811,7 +811,7 @@ def border_lines(units, wet, rotation, land_units, ppd):
     return out, counts
 
 
-def districts_layer(record_path, rotation, surface_path=None):
+def districts_layer(record_path, rotation, surface_path=None, profiles=None):
     """The atlas round's draft regions and districts for the page: a texture in the globe's frame (180 W at the left)
     holding at each 8 px/deg cell the district's place in the page's list (red's low seven bits and green, 0 on open
     water), whether the cell is water (red's top bit, a lake or a sea), and the region
@@ -843,12 +843,95 @@ def districts_layer(record_path, rotation, surface_path=None):
     borders, counts = border_lines((district, shown), wet, rotation, land_units, district.shape[1] / 360.0)
     tex = np.roll(tex, tex.shape[1] // 2, axis=1)
     turned = appearance.turn_texture(tex, rotation, left_lon=-180.0, nearest=True)
-    return turned, dict(districts_data(record), borders=borders, border_counts=counts), Path(record_path), product
+    cards = region_cards(profiles, record) if profiles else None
+    return turned, dict(districts_data(record, cards), borders=borders, border_counts=counts), Path(record_path), product
 
 
-def districts_data(record):
+NIGHTS = {'Earthlit': 'lit by Earth', 'dim': 'dim, below 1 lux at their darkest', 'dark': 'dark, with no Earth in the sky',
+          'twilit': 'twilit, the Sun just below the horizon'}
+# The page's sentence on what a click and a pin do, and its older wording, which a re-wrapped page replaces.
+LEDE_ACTIONS = ('Drag to turn it, scroll or pinch to zoom, click a place for its card, use the Pin tool for the height '
+                'of a point and the water over it, and move the Sun to see the halo, the twilight and the view from '
+                'Earth.')
+LEDE_ACTIONS_BEFORE = ('Drag to turn it, scroll or pinch to zoom, click for the height of a place and the water over it, '
+                       'and move the Sun to see the halo, the twilight and the view from Earth.')
+TOPO_CLICK = ('In both modes, a click opens the card of the region, district or sea under it, and a pin, placed with '
+              'the Pin tool, reads the 0.25° cell under it.')
+TOPO_CLICK_BEFORE = 'In both modes, a click on the globe reads the 0.25° cell under it.'
+
+
+def sea_names(record):
+    """The seas' names by the design surface's body names, from the sea regions' anchors (sea:<body>)."""
+    return {r['anchor'].split(':', 1)[1]: r['name'] for r in record['regions']
+            if r['kind'] == 'sea' and str(r.get('anchor', '')).startswith('sea:')}
+
+
+def surface_body_names(bodies, record=None):
+    """The page's names for the design surface's bodies of water, indexed as its surface texture holds them: dry
+    ground, each sea under its atlas name when a districts record gives one, and the lakes."""
+    named = sea_names(record) if record else {}
+    return (['dry ground'] + [named.get(b) or ('the ' + b if b.startswith(('near-side', 'southern')) else b)
+                              for b in bodies[1:]] + ['a lake'])
+
+
+def region_cards(profiles_path, record):
+    """Each land region's card from its fact sheet (research/studies/atlas_round/region_profiles.py), by anchor: what
+    its name means, its written text when there is one, its main figures as label and value with the places under
+    their current names, a note on how its climate is read, and the anchors of its seas and neighbours."""
+    product = json.loads(Path(profiles_path).read_text())
+    if product.get('districts_product') != record['product']['sha256']:
+        raise SystemExit(f'{profiles_path} was computed for another districts draw; run region_profiles again')
+    names = {x['anchor']: x['name'] for x in record['regions'] + record['districts'] + record['coastal_seas']
+             if x.get('anchor')}
+    cards = {}
+    for p in product['regions']:
+        f, x, d = p['figures'], p['facts'], p['detail']
+        plural = lambda n, word: f"{n} {word}{'' if n == '1' else 's'}"
+        land = f"{f['area']} in {plural(f['districts'], 'district')}"
+        if p['island_group']:
+            land = f"{f['area']} on {plural(f['land_pieces'], 'island')}"
+        rows = [['Land', land]]
+        if x['waters']:
+            seas = [names.get(a, a) for a in d['seas']]
+            rows.append(['Coastal waters', f"{f['waters']}" + (' on ' + ' and '.join(seas) if seas else '')
+                         + (', salt' if x['salt'] else '')])
+        if x['lakes']:
+            rows.append(['Lakes', f"{f['lakes']}, {f['lake_share']} of the land"])
+        if x['river'] >= 1:
+            rows.append(['Largest river', f['river']])
+        if x['falls']:
+            rows.append(['Steep reaches', f"{f['falls']}, the strongest {f['falls_gw']}"])
+        above = d['heights_above']
+        if d.get('heights_above_anchor'):
+            above = 'the level of ' + names.get(d['heights_above_anchor'], d['heights_above_anchor'])
+        elif product.get('common_level_seas'):
+            above = 'the level ' + ' and '.join(names.get(a, a) for a in product['common_level_seas']) + ' share'
+        rows.append(['Highest point', f"{f['highest']} above {above}"])
+        rows.append(['Rain', f"{f['rain']} a year"])
+        rows.append(['Air', f"{f['air']} on average; {f['air_cool']} on the coolest days, {f['air_warm']} on the warmest"])
+        rows.append(['Earth in the sky', {'near': f"{f['earth']} up on average", 'far': 'never rises',
+                                          'limb': f"low over {f['earth_share']} of the land, at most {f['earth_high']} up"}
+                     [x['side']]])
+        rows.append(['Nights', NIGHTS.get(x['night'], x['night'])])
+        if x.get('tide') is not None:
+            rows.append(['Tides', f"{f['tide']} on its coasts"])
+        sites = [s['name'] + (f" (under {s['water']})" if s['where'] == 'water' else '') for s in d['heritage']]
+        if sites:
+            rows.append(['Heritage', '; '.join(sites)])
+        weak = x['climate_in_water_share'] >= 0.5 or x['climate_reach_km'] >= 150
+        note = ('Figures from the atlas round\'s fact sheet. Climate: the estimated design climate, read on the climate '
+                'model\'s cells of about 170 km' + (', which hold most of this land as water, so its climate is the '
+                                                     'nearest shore\'s.' if weak else '.'))
+        cards[p['anchor']] = dict(gloss=p['gloss'], text=p.get('text'), stale=bool(p.get('text_stale')), rows=rows,
+                                  note=note, islandGroup=p['island_group'],
+                                  seas=list(d['seas']), neighbours=[n['anchor'] for n in d['neighbours']])
+    return cards
+
+
+def districts_data(record, cards=None):
     """The page's lists of regions, districts and coastal seas from a districts record: each unit's name, its meaning,
-    code, tongue, label point, area, short description and links, indexed as the districts texture holds them."""
+    code, anchor, tongue, label point, area, short description and links, indexed as the districts texture holds them,
+    and for a land region its card from its fact sheet when cards are given (region_cards)."""
     regions = record['regions']
     units = record['districts'] + record['coastal_seas']
     index = {u['code']: k + 1 for k, u in enumerate(units)}
@@ -856,12 +939,13 @@ def districts_data(record):
     tongue_where = {t['label']: t.get('where', '') for t in record['tongues'].values()}
     region_name = {r['code']: r['name'] for r in regions}
     unit = lambda u, kind: dict(
-        index=index.get(u['code'], 0), code=u['code'], name=u['name'], kind=kind, tongue=tongue[u['tongue']],
-        lat=u['at']['turned'][0], lon=u['at']['turned'][1], area=u['area_km2'], description=u['description'],
-        region=region_name.get(u.get('region'), ''), meaning=u.get('name_meaning', ''),
+        index=index.get(u['code'], 0), code=u['code'], anchor=u.get('anchor', ''), name=u['name'], kind=kind,
+        tongue=tongue[u['tongue']], lat=u['at']['turned'][0], lon=u['at']['turned'][1], area=u['area_km2'],
+        description=u['description'], region=region_name.get(u.get('region'), ''), meaning=u.get('name_meaning', ''),
         links=[index[c] for c in (u.get('faces', []) + u.get('fed_by', []) + u.get('coasts', [])) if c in index][:7])
+    card = lambda r: dict(card=cards[r['anchor']]) if cards and r.get('anchor') in cards else {}
     data = dict(regions=[unit(r, 'region') | dict(index=0, sea=r['kind'] == 'sea', meaning=r.get('name_meaning', ''))
-                         for r in regions],
+                         | card(r) for r in regions],
                 districts=[unit(d, 'district') for d in record['districts']]
                 + [unit(c, 'coast') for c in record['coastal_seas']],
                 summary=record['summary'], tongues={l: f'{l} for {w}' if w else l for l, w in tongue_where.items()},
@@ -872,10 +956,11 @@ def districts_data(record):
 DATA_OPEN, DATA_CLOSE = '<script id="atlas-data" type="application/json">', '</script>'
 
 
-def rename_page(page_path, record_path):
-    """The built page's regions, districts and coastal seas renamed from a districts record, its textures kept: the
+def rename_page(page_path, record_path, profiles=None):
+    """The built page's regions, districts, coastal seas and seas renamed from a districts record, the regions' cards
+    taken from their fact sheets when given, and its data wrapped in the current template, its textures kept: the
     record must hold the units the page drew, in the same order, so that the districts texture's indices still hold.
-    A rename then needs no rebuild, only the page republished."""
+    A rename, a new text or a change to the viewer then needs no rebuild, only the page republished."""
     page = Path(page_path).read_text()
     start = page.index(DATA_OPEN) + len(DATA_OPEN)
     end = page.index(DATA_CLOSE, start)
@@ -883,21 +968,43 @@ def rename_page(page_path, record_path):
     if 'districts' not in data:
         raise SystemExit(f'{page_path} draws no districts to rename')
     record = json.loads(Path(record_path).read_text())
-    new = districts_data(record)
+    new = districts_data(record, region_cards(profiles, record) if profiles else None)
     for key in ('regions', 'districts'):
         if [u['code'] for u in new[key]] != [u['code'] for u in data['districts'][key]]:
             raise SystemExit(f'{record_path} holds other {key} than the page drew; build the page again')
     if record['product']['sha256'] != (data['districts'].get('product_sha256') or record['product']['sha256']):
         raise SystemExit(f'{record_path} names another grid than the page drew; build the page again')
     data['districts'] = dict(data['districts'], **new, product_sha256=record['product']['sha256'])   # the borders kept
+    surface = data.get('surface')
+    if surface:
+        if 'bodies' not in surface:
+            # a page built before the bodies were carried: its names are the surface's own, 'the ' before two of them
+            bodies = [''] + [n[4:] if n.startswith('the ') else n for n in surface['names'][1:-1]] + ['lake']
+            if not all(f'sea:{b}' in {r.get('anchor') for r in record['regions']} for b in bodies[1:-1]):
+                raise SystemExit(f'{page_path} names its waters otherwise than {record_path}; build the page again')
+            surface['bodies'] = bodies
+        before = surface['names']
+        surface['names'] = surface_body_names(['lake'] + surface['bodies'][1:-1], record)
+        renamed = dict(zip(before, surface['names']))
+        for s in data.get('labels', {}).get('sites', []):
+            if s.get('waterName') in renamed:
+                s['waterName'] = renamed[s['waterName']]
+        for key in ('lede',):
+            if isinstance(data.get(key), str):
+                data[key] = data[key].replace(LEDE_ACTIONS_BEFORE, LEDE_ACTIONS)
+        if isinstance(data.get('topoText'), str):
+            data['topoText'] = data['topoText'].replace(TOPO_CLICK_BEFORE, TOPO_CLICK)
     marker = "Regions and districts: the atlas round's first draft (districts.json "
     at = data['provenance'].find(marker)
     if at >= 0:
         at += len(marker)
         data['provenance'] = data['provenance'][:at] + digest(record_path)[:12] + data['provenance'][at + 12:]
-    page = page[:start] + json.dumps(data, ensure_ascii=False) + page[end:]
+    page = (HERE / 'globe.template.html').read_text().replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
     Path(page_path).write_text(page)
-    return dict(renamed=len(new['regions']) + len(new['districts']), page_bytes=len(page.encode()))
+    cards = sum(1 for r in new['regions'] if r.get('card'))
+    texts = sum(1 for r in new['regions'] if r.get('card', {}).get('text'))
+    return dict(renamed=len(new['regions']) + len(new['districts']), region_cards=cards, region_texts=texts,
+                page_bytes=len(page.encode()))
 
 
 def work_marks(summary, grid, level0, rotation):
@@ -1012,7 +1119,7 @@ def cover_text(cover, sources, sea=None):
 
 
 def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes, moisture=None, falls=None,
-                        wind=None, districts=None):
+                        wind=None, districts=None, profiles=None):
     """The globe page on the design surface: the relief and the water at each body's own level, the appearance from
     the same water (the ground in true colour from the moisture map when one is given), the sites and targets placed
     on it, and the figures from the surface's record."""
@@ -1053,7 +1160,7 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
     texture_water = share(surface_tex[..., 2] > 0, ppd_map)
     surface_water = share(masks['sea'], SURFACE_PPD)
     mask_water = share(looks['water'] / 255.0, SURFACE_PPD)
-    body_names = ['dry ground'] + ['the ' + b if b.startswith(('near-side', 'southern')) else b for b in meta['bodies'][1:]] + ['a lake']
+    body_names = surface_body_names(meta['bodies'], json.loads(Path(districts).read_text()) if districts else None)
     places_sites, places_targets, changed = surface_places(sites, targets, grid, level0, body_names)
     place = lambda la, lo: tuple(round(float(v), 3) for v in to_turned(la, lo, rotation))
     seas = summary['seas']
@@ -1073,8 +1180,7 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
               + ('its ground in true colour, plants and soils as the design climate\'s dryness leaves them, '
                  if truly else 'a guessed cover of plants ')
               + 'over the floor its water redraws, with every sea and lake at its own level and the near-side sea parted '
-              'at its neck. Drag to turn it, scroll or pinch to zoom, click for the height of a place and the water over '
-              'it, and move the Sun to see the halo, the twilight and the view from Earth.'),
+              'at its neck. ' + LEDE_ACTIONS),
         coverText=cover_text(params['cover'], sources, params.get('sea')) if truly else None,
         figures=[['Water', f"{summary['water_share']:.0%} of the surface"],
                  ['Common level (geoid)', minus(level0) + ' m'],
@@ -1111,9 +1217,9 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
                   'topography mode the slider exaggerates the relief down into the sea floors as well as up into the '
                   'highlands. Over the appearance the same colours and contours lie on the rendered globe at the chosen '
                   'opacity, unlit by the Sun. Heritage sites and sampling targets come from the conservation study\'s '
-                  'register, each placed on the design surface with the water over it there. In both modes, a click on '
-                  'the globe reads the 0.25° cell under it.'),
-        surface=dict(names=body_names, levels=[None] + [round(seas[b]['level_m'], 1) for b in meta['bodies'][1:]] + [None]),
+                  'register, each placed on the design surface with the water over it there. ' + TOPO_CLICK),
+        surface=dict(names=body_names, bodies=[''] + list(meta['bodies'][1:]) + ['lake'],
+                     levels=[None] + [round(seas[b]['level_m'], 1) for b in meta['bodies'][1:]] + [None]),
         textures=(dict(relief=texture_file('relief', relief), surface=texture_file('surface', surface_tex),
                        normal=texture_file('normal', looks['normal'], 'jpeg'),
                        albedo=texture_file('albedo', looks['albedo'], 'jpeg'), water=texture_file('water', looks['water']),
@@ -1158,7 +1264,9 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
         frame=dict(note=surface_note(turn, summary, climate),
                    lede=''))
     if districts and truly:
-        texture, layer, rec_path, product = districts_layer(districts, rotation, surface_path)
+        texture, layer, rec_path, product = districts_layer(districts, rotation, surface_path, profiles)
+        if profiles:
+            sources.update(region_profiles=Path(profiles))
         data['textures']['districts'] = texture_file('districts', texture)
         data['districts'] = dict(layer, product_sha256=digest(product))
         data['provenance'] += (f" Regions and districts: the atlas round's first draft (districts.json "
@@ -1200,14 +1308,19 @@ def main(argv=None):
     parser.add_argument('--wind', type=Path, help="with --moisture, the climate domain's surface wind of the climatology's "
                                                   'run and years (products/surface_wind_<run>_y<years>.npz): the sea\'s '
                                                   'slopes, and so its glint and its reflected sky, from the winds')
+    parser.add_argument('--profiles', type=Path, help="with --districts, the regions' fact sheets and texts "
+                                                      '(research/studies/atlas_round/results/region_profiles.json): '
+                                                      "each region's card")
     parser.add_argument('--names-only', action='store_true',
-                        help="with --districts: rename the built page's regions, districts and coastal seas from the "
-                             'record, its textures kept (out/globe.html)')
+                        help="with --districts: rename the built page's regions, districts, coastal seas and seas from "
+                             "the record, take the regions' cards from --profiles, and wrap the page's data in the "
+                             'current template, its textures kept (out/globe.html)')
     args = parser.parse_args(argv)
     if args.names_only:
         if not args.districts:
             raise SystemExit('--names-only needs --districts')
-        print(json.dumps(rename_page(OUT / 'globe.html', args.districts.absolute())))
+        print(json.dumps(rename_page(OUT / 'globe.html', args.districts.absolute(),
+                                     args.profiles.absolute() if args.profiles else None)))
         return 0
     if args.surface:
         if not args.surface_record:
@@ -1222,7 +1335,8 @@ def main(argv=None):
                                     moisture=args.moisture.absolute() if args.moisture else None,
                                     falls=args.falls.absolute() if args.falls else None,
                                     wind=args.wind.absolute() if args.wind else None,
-                                    districts=args.districts.absolute() if args.districts else None)
+                                    districts=args.districts.absolute() if args.districts else None,
+                                    profiles=args.profiles.absolute() if args.profiles else None)
         products = {str(p.relative_to(ROOT)): digest(p) for p in (reg_path, tgt_path)}
         products[str(args.surface)] = digest(args.surface)
         products[str(args.surface_record)] = digest(args.surface_record)

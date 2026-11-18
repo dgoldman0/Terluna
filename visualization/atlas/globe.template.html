@@ -13,30 +13,84 @@
     --space: #000000;
     --accent: #eb6834;
     --focus: #2a78d6;
+    --glass: rgba(255, 255, 255, 0.94);
     --display: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
     --body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --ground: #0e1116; --panel: #151a21; --ink: #e6e9ee; --muted: #98a2b3; --rule: #262c36; color-scheme: dark;
+      --ground: #0e1116; --panel: #151a21; --ink: #e6e9ee; --muted: #98a2b3; --rule: #262c36;
+      --glass: rgba(21, 26, 33, 0.94); color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --ground: #0e1116; --panel: #151a21; --ink: #e6e9ee; --muted: #98a2b3; --rule: #262c36; color-scheme: dark;
+    --ground: #0e1116; --panel: #151a21; --ink: #e6e9ee; --muted: #98a2b3; --rule: #262c36;
+    --glass: rgba(21, 26, 33, 0.94); color-scheme: dark;
   }
-  body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5;
-         padding-inline: 16px; padding-block: 20px 36px; }
-  .wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 16px; }
-  header h1 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 4vw, 38px); letter-spacing: .01em;
-              margin: 0; text-wrap: balance; }
-  header p { margin: 4px 0 0; color: var(--muted); max-width: 72ch; }
-  .stage { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 16px; align-items: start; }
-  @media (max-width: 860px) { .stage { grid-template-columns: minmax(0, 1fr); } }
-  .viewport { position: relative; background: var(--space); border-radius: 10px; overflow: hidden; width: 100%;
-              max-width: 100%; aspect-ratio: 1 / 1; max-height: 84vh; margin-inline: auto; touch-action: none; cursor: grab; }
+  /* The globe fills the window; the controls, the search, the card and the notes float over it. */
+  [hidden] { display: none !important; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--space); color: var(--ink); font-family: var(--body); font-size: 15px;
+         line-height: 1.5; overflow: hidden; }
+  .viewport { position: fixed; inset: 0; background: var(--space); overflow: hidden; touch-action: none; cursor: grab; }
   .viewport.dragging { cursor: grabbing; }
+  .viewport.pinning { cursor: crosshair; }
   .viewport canvas { display: block; width: 100%; height: 100%; }
+  .float { position: fixed; z-index: 5; background: var(--glass); color: var(--ink); border: 1px solid var(--rule);
+           border-radius: 10px; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35); backdrop-filter: blur(8px); }
+  .top { top: max(16px, env(safe-area-inset-top, 0px)); left: max(16px, env(safe-area-inset-left, 0px));
+         width: min(360px, calc(100vw - 32px)); padding: 10px 12px; display: grid; gap: 6px; }
+  .top h1 { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: .01em; margin: 0;
+            line-height: 1.2; text-wrap: balance; }
+  .top .readout:empty { display: none; }
+  .tools { top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px));
+           padding: 6px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .drawer { left: max(16px, env(safe-area-inset-left, 0px)); top: calc(max(16px, env(safe-area-inset-top, 0px)) + var(--top-h, 110px));
+            bottom: calc(max(16px, env(safe-area-inset-bottom, 0px)) + 30px); width: 300px; overflow-y: auto;
+            padding: 2px 14px 10px; overscroll-behavior: contain; }
+  .cardpanel { right: max(16px, env(safe-area-inset-right, 0px)); top: calc(max(16px, env(safe-area-inset-top, 0px)) + 58px);
+               width: min(370px, calc(100vw - 32px)); max-height: calc(100dvh - 58px - 96px); overflow-y: auto;
+               padding: 14px 16px; overscroll-behavior: contain; }
+  .views { right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px));
+           padding: 6px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: calc(100vw - 32px); }
+  .views .zoom { min-width: 34px; font-weight: 600; }
+  .about { left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(780px, calc(100vw - 32px));
+           max-height: calc(100dvh - 64px); overflow-y: auto; padding: 18px 22px; z-index: 8; overscroll-behavior: contain; }
+  .about h2.title { font-family: var(--display); font-size: 22px; font-weight: 600; margin: 0 32px 6px 0; }
+  .about .lede { margin: 0 0 12px; }
+  .close { position: absolute; top: 6px; right: 6px; border: 0; font-size: 22px; line-height: 1; padding: 4px 9px;
+           color: var(--muted); background: transparent; }
+  .close:hover { color: var(--ink); }
+  .banner { position: absolute; z-index: 4; left: 50%; transform: translateX(-50%); pointer-events: none;
+            top: calc(max(16px, env(safe-area-inset-top, 0px)) + 64px); background: var(--accent); color: #fff;
+            padding: 6px 14px; border-radius: 18px; font-size: 13.5px; white-space: nowrap; }
+  .tip { position: absolute; z-index: 4; pointer-events: none; max-width: 300px; background: var(--glass); color: var(--ink);
+         border: 1px solid var(--rule); border-radius: 8px; padding: 7px 10px; font-size: 13px; line-height: 1.4;
+         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
+  .tip b { display: block; font-family: var(--display); font-size: 15.5px; font-weight: 600; }
+  .tip .m { display: block; color: var(--muted); font-size: 12px; margin-bottom: 3px; }
+  .tip .m:empty, .tip .t:empty { display: none; }
+  .sec { border-top: 1px solid var(--rule); padding: 9px 0; }
+  .sec:first-child { border-top: 0; }
+  .sec > summary { font-family: var(--display); font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+                   color: var(--muted); font-weight: 600; cursor: pointer; list-style: none; display: flex;
+                   justify-content: space-between; align-items: center; }
+  .sec > summary::-webkit-details-marker { display: none; }
+  .sec > summary::after { content: '+'; font-size: 16px; letter-spacing: 0; }
+  .sec[open] > summary::after { content: '−'; }
+  .sec[open] > summary { margin-bottom: 8px; }
+  @media (max-width: 700px) {
+    .top { right: max(16px, env(safe-area-inset-right, 0px)); width: auto; }
+    .tools { top: calc(max(16px, env(safe-area-inset-top, 0px)) + var(--top-h, 110px)); }
+    .drawer, .cardpanel { left: 0; right: 0; bottom: 0; top: auto; width: auto; max-height: 58dvh; border-radius: 14px 14px 0 0;
+                          padding-left: max(16px, env(safe-area-inset-left, 0px));
+                          padding-right: max(16px, env(safe-area-inset-right, 0px));
+                          padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 6; }
+    .views { left: max(16px, env(safe-area-inset-left, 0px)); justify-content: center; }
+    .hint { display: none; }
+    .banner { top: calc(max(16px, env(safe-area-inset-top, 0px)) + var(--top-h, 110px) + 46px); }
+  }
   .labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
   .lab { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; font-family: var(--display);
          font-size: 12.5px; line-height: 1.1; text-align: center; }
@@ -52,12 +106,8 @@
               text-shadow: 0 0 3px #000, 0 0 5px #000; }
   .lab.target { transform: translate(8px, -50%); text-align: left; font-size: 11px; font-style: italic; color: #e7ebf2;
                 text-shadow: 0 0 3px #000, 0 0 5px #000; }
-  .hint { position: absolute; left: 12px; bottom: 10px; right: 12px; font-size: 12px; color: #aeb6c4; font-family: var(--body); }
-  .panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 14px;
-           display: grid; gap: 16px; }
-  .group h2 { font-family: var(--display); font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
-              color: var(--muted); margin: 0 0 6px; font-weight: 600; }
-  .views { display: flex; flex-wrap: wrap; gap: 6px; }
+  .hint { position: absolute; left: max(16px, env(safe-area-inset-left, 0px)); bottom: max(14px, env(safe-area-inset-bottom, 0px));
+          max-width: 46vw; font-size: 12px; color: #aeb6c4; font-family: var(--body); text-shadow: 0 0 3px #000; }
   button { font: inherit; font-size: 13.5px; border: 1px solid var(--rule); background: transparent; color: var(--ink);
            border-radius: 6px; padding: 5px 10px; cursor: pointer; }
   button:hover { border-color: var(--muted); }
@@ -85,10 +135,20 @@
   .figs { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; font-size: 13.5px; margin: 0; }
   .figs dt { color: var(--muted); }
   .figs dd { margin: 0; font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; text-align: right; }
-  .card { border-top: 1px solid var(--rule); padding-top: 12px; font-size: 14px; display: grid; gap: 4px; }
-  .card h3 { font-family: var(--display); font-size: 19px; margin: 0; font-weight: 600; line-height: 1.15; }
-  .card .meta { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .card { font-size: 14px; display: grid; gap: 7px; }
+  .card h3 { font-family: var(--display); font-size: 22px; margin: 0 30px 0 0; font-weight: 600; line-height: 1.15;
+             text-wrap: balance; }
+  .card .meta { font-size: 13px; color: var(--muted); }
   .card p { margin: 0; }
+  .card .lead { font-size: 15px; line-height: 1.5; }
+  .card dl.facts { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 12px; margin: 2px 0 0;
+                   font-size: 13.5px; border-top: 1px solid var(--rule); padding-top: 8px; }
+  .card dl.facts dt { color: var(--muted); }
+  .card dl.facts dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .card .links { display: flex; flex-wrap: wrap; gap: 5px; align-items: baseline; }
+  .card .links span { color: var(--muted); font-size: 12.5px; width: 100%; }
+  .card .links button { font-size: 12.5px; padding: 2px 8px; }
+  .card .note { font-size: 12px; color: var(--muted); }
   .readout { font-family: var(--mono); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
   input[type=range] { width: 100%; accent-color: var(--accent); }
   select, input[type=text] { font: inherit; font-size: 13.5px; border: 1px solid var(--rule); background: var(--panel);
@@ -106,7 +166,7 @@
   .ticks span:last-child { transform: translateX(-100%); }
   .lab.pin { transform: translate(13px, -50%); text-align: left; font-size: 12px; color: #ffffff;
              text-shadow: 0 0 3px #000, 0 0 5px #000; }
-  .notes { color: var(--muted); font-size: 14px; max-width: 92ch; display: grid; gap: 8px; }
+  .notes { color: var(--muted); font-size: 14px; display: grid; gap: 8px; }
   .notes h2 { font-family: var(--display); font-size: 15px; letter-spacing: .06em; text-transform: uppercase; margin: 6px 0 0;
               color: var(--ink); font-weight: 600; }
   .notes p { margin: 0; }
@@ -114,57 +174,65 @@
   .notes code { font-family: var(--mono); font-size: 12px; word-break: break-all; }
 </style>
 
-<div class="wrap">
-  <header>
-    <h1 id="headline">The Open Moon at 28% water</h1>
-    <p id="lede">Land and sea from the Terluna geography atlas. Drag to turn the Moon; scroll or pinch to zoom.</p>
-  </header>
+<div class="viewport" id="viewport">
+  <canvas id="globe" aria-label="Interactive 3D globe of the Open Moon"></canvas>
+  <div class="labels" id="labels"></div>
+  <div class="tip" id="tip" hidden><b></b><span class="m"></span><span class="t"></span></div>
+  <div class="banner" id="pin-banner" hidden>Click the globe to place a pin · Esc to stop</div>
+  <div class="hint" id="hint">Loading the globe…</div>
+</div>
 
-  <div class="stage">
-    <div class="viewport" id="viewport">
-      <canvas id="globe" aria-label="Interactive 3D globe of the Open Moon"></canvas>
-      <div class="labels" id="labels"></div>
-      <div class="hint" id="hint">Loading the globe…</div>
-    </div>
+<header class="float top" id="top">
+  <h1 id="headline">The Open Moon at 28% water</h1>
+  <form class="goto" id="goto" autocomplete="off" role="search">
+    <input type="text" id="goto-input" list="places" placeholder="A place, or 45 N, 30 W"
+           aria-label="A place, or a latitude and longitude" aria-describedby="goto-value">
+    <button type="submit">Go</button>
+  </form>
+  <datalist id="places"></datalist>
+  <div class="readout" id="goto-value"></div>
+</header>
 
-    <aside class="panel" aria-label="Globe controls">
-      <div class="group">
-        <h2>Mode</h2>
+<div class="float tools" role="toolbar" aria-label="Tools">
+  <button type="button" id="layers-toggle" aria-pressed="true" aria-expanded="true" aria-controls="drawer">Layers</button>
+  <button type="button" id="pin-mode" aria-pressed="false"
+          title="Place a pin to read the height and the water there; Esc stops">Pin</button>
+  <button type="button" id="clear-pin" hidden>Clear pin</button>
+  <button type="button" id="about-open" aria-expanded="false" aria-controls="about">About</button>
+</div>
+
+<nav class="float views" aria-label="Views">
+  <button type="button" data-view="near" aria-pressed="true">Near side</button>
+  <button type="button" data-view="far" aria-pressed="false">Far side</button>
+  <button type="button" data-view="south" aria-pressed="false">South pole</button>
+  <button type="button" data-view="north" aria-pressed="false">North pole</button>
+  <button type="button" data-view="earth" aria-pressed="false">From Earth</button>
+  <button type="button" id="turn" aria-pressed="false">Turn slowly</button>
+  <button type="button" class="zoom" id="zoom-in" aria-label="Zoom in">+</button>
+  <button type="button" class="zoom" id="zoom-out" aria-label="Zoom out">−</button>
+</nav>
+
+<section class="float cardpanel" id="cardpanel" aria-label="The place selected" hidden>
+  <button type="button" class="close" id="card-close" aria-label="Close the card">×</button>
+  <div class="card" id="card" aria-live="polite"></div>
+</section>
+
+    <aside class="float drawer" id="drawer" aria-label="Layers and display">
+      <details class="sec" data-key="mode" open>
+        <summary>Mode</summary>
         <div class="segmented" role="group" aria-label="Mode">
           <button type="button" data-mode="appearance" aria-pressed="true">Appearance</button>
           <button type="button" data-mode="topo" aria-pressed="false">Topography</button>
         </div>
-      </div>
-      <div class="group">
-        <h2>View</h2>
-        <div class="views">
-          <button type="button" data-view="near" aria-pressed="true">Near side</button>
-          <button type="button" data-view="far" aria-pressed="false">Far side</button>
-          <button type="button" data-view="south" aria-pressed="false">South pole</button>
-          <button type="button" data-view="north" aria-pressed="false">North pole</button>
-          <button type="button" data-view="earth" aria-pressed="false">From Earth</button>
-          <button type="button" id="turn" aria-pressed="false">Turn slowly</button>
-        </div>
-      </div>
-      <div class="group">
-        <h2>Go to</h2>
-        <form class="goto" id="goto" autocomplete="off">
-          <input type="text" id="goto-input" list="places" placeholder="45 N, 30 W or a place"
-                 aria-label="Latitude and longitude, or a place" aria-describedby="goto-value">
-          <button type="submit">Go</button>
-          <button type="button" id="clear-pin" hidden>Clear</button>
-        </form>
-        <datalist id="places"></datalist>
-        <div class="readout" id="goto-value">Or click the globe for the height or depth there.</div>
-      </div>
-      <div class="group" id="years-group" hidden>
-        <h2>Years</h2>
+      </details>
+      <details class="sec" data-key="years" id="years-group" hidden open>
+        <summary>Years</summary>
         <input type="range" id="years" min="0" max="7" step="1" value="0"
                aria-label="Years after the water stands as the atlas draws it" aria-describedby="years-value">
         <div class="readout" id="years-value"></div>
-      </div>
-      <div class="group" data-only="appearance">
-        <h2>Light</h2>
+      </details>
+      <details class="sec" data-key="light" data-only="appearance" open>
+        <summary>Light</summary>
         <div class="segmented" role="group" aria-label="Light">
           <button type="button" data-light="sun" aria-pressed="true">Sunlight</button>
           <button type="button" data-light="even" aria-pressed="false">Fully lit</button>
@@ -172,9 +240,9 @@
         <input type="range" id="phase" min="0" max="29.5" step="0.1" value="10" style="margin-top:10px"
                aria-label="Day since new moon" aria-describedby="phase-value">
         <div class="readout" id="phase-value"></div>
-      </div>
-      <div class="group" data-only="appearance">
-        <h2>Display</h2>
+      </details>
+      <details class="sec" data-key="display" data-only="appearance">
+        <summary>Display</summary>
         <input type="range" id="exposure" min="-3" max="14" step="0.5" value="1" aria-describedby="exposure-value">
         <div class="readout" id="exposure-value"></div>
         <div class="toggles" style="margin-top:8px">
@@ -182,16 +250,16 @@
           <label><input type="checkbox" id="show-air" checked> Atmosphere</label>
           <label><input type="checkbox" id="red-only"> Red light only</label>
         </div>
-      </div>
-      <div class="group" data-only="appearance">
-        <h2>Air in view</h2>
+      </details>
+      <details class="sec" data-key="air" data-only="appearance">
+        <summary>Air in view</summary>
         <div class="toggles"><label><input type="checkbox" id="peel-zoom" checked> With the zoom</label></div>
         <input type="range" id="peel" min="0" max="12" step="1" value="12" style="margin-top:6px"
                aria-label="Height below which the view looks through the air" aria-describedby="peel-value">
         <div class="readout" id="peel-value"></div>
-      </div>
-      <div class="group">
-        <h2>Topography</h2>
+      </details>
+      <details class="sec" data-key="topography">
+        <summary>Topography</summary>
         <div data-only="appearance">
           <div class="toggles"><label><input type="checkbox" id="topo-overlay"> Over the appearance</label></div>
           <input type="range" id="topo-opacity" min="10" max="100" step="5" value="70" style="margin-top:6px"
@@ -203,9 +271,9 @@
             <option value="0">none</option><option value="250">every 250 m</option><option value="500">every 500 m</option>
             <option value="1000" selected>every 1 km</option><option value="2000">every 2 km</option></select></label>
         </div>
-      </div>
-      <div class="group">
-        <h2>Show</h2>
+      </details>
+      <details class="sec" data-key="show" open>
+        <summary>Show</summary>
         <div class="toggles">
           <label><input type="checkbox" id="show-seas"> Sea names</label>
           <label><input type="checkbox" id="show-islands"> Islands</label>
@@ -226,26 +294,28 @@
             <option value="5">5°</option><option value="2">2°</option><option value="1">1°</option>
             <option value="0.5">0.5°</option><option value="0.25">0.25°</option></select></label>
         </div>
-      </div>
-      <div class="group">
-        <h2>Relief</h2>
+      </details>
+      <details class="sec" data-key="relief">
+        <summary>Relief</summary>
         <input type="range" id="relief" min="0" max="10" step="1" value="1" aria-describedby="relief-value">
         <div class="readout" id="relief-value"></div>
-      </div>
-      <div class="group">
-        <h2 id="legend-title">Surface</h2>
+      </details>
+      <details class="sec" data-key="legend" open>
+        <summary id="legend-title">Surface</summary>
         <div class="legend" id="legend"></div>
         <p class="legend-note" id="legend-note"></p>
-      </div>
-      <div class="group">
-        <h2 id="figs-title">At 28%</h2>
+      </details>
+      <details class="sec" data-key="figures">
+        <summary id="figs-title">At 28%</summary>
         <dl class="figs" id="figs"></dl>
-      </div>
-      <div class="card" id="card" aria-live="polite"></div>
+      </details>
     </aside>
-  </div>
 
-  <section class="notes" aria-label="What the globe shows">
+<section class="float about" id="about" aria-label="About this globe" tabindex="-1" hidden>
+  <button type="button" class="close" id="about-close" aria-label="Close">×</button>
+  <h2 class="title">About this globe</h2>
+  <p class="lede" id="lede">Land and sea from the Terluna geography atlas.</p>
+  <div class="notes">
     <p id="frame-note" hidden></p>
     <h2>What the appearance shows</h2>
     <p><b>Computed.</b> <span id="water-source">Land, sea and water depth come from LOLA topography above the GRAIL geoid at 16 pixels per
@@ -302,8 +372,8 @@
       chosen opacity, unlit by the Sun so that they read on the night side and through the air. Every depression
       below sea level takes the sea's colours, as the atlas fills it, and the rain-fed lakes above sea level are
       left out, so their beds show. Groundwater in the porous crust and crustal loading will move the shoreline.
-      Heritage sites and sampling targets come from the conservation study's register. In both modes, a click on the
-      globe reads the height of the 0.25° atlas cell under it.</p>
+      Heritage sites and sampling targets come from the conservation study's register. In both modes, a pin placed
+      with the Pin tool reads the height of the 0.25° atlas cell under it.</p>
     <h2 id="years-title" hidden>What the years show</h2>
     <p id="years-note" hidden></p>
     <section id="districts-note" hidden>
@@ -327,8 +397,8 @@
         or replace. <span id="districts-coined"></span></p>
     </section>
     <p id="provenance"></p>
-  </section>
-</div>
+  </div>
+</section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script id="atlas-data" type="application/json">__ATLAS_DATA__</script>
@@ -762,6 +832,7 @@
   uniform sampler2D tDistricts;
   uniform float uDistrictMode;   // 0 off, 1 regions, 2 regions and districts
   uniform float uSel[8];         // the selected district and its links, by their place in the page's list (0 unused)
+  uniform float uSelRegion;      // the selected region, by its number in the texture's blue (0 none)
   uniform vec2 uLandUnits;       // how many districts and regions are on land; the districts after them are coastal seas
   vec3 unitsAt(vec2 at) {
     vec3 t = floor(texture2D(tDistricts, at).rgb * 255.0 + 0.5);
@@ -775,7 +846,8 @@
     vec3 c0 = unitsAt(uv);
     float sel = 0.0;
     for (int k = 0; k < 8; k++) sel = max(sel, step(0.5, uSel[k]) * (1.0 - step(0.5, abs(uSel[k] - c0.x))));
-    return mix(colour, vec3(1.0, 0.80, 0.42), 0.28 * sel * step(0.5, c0.x));
+    float region = step(0.5, uSelRegion) * (1.0 - step(0.5, abs(uSelRegion - c0.y)));
+    return mix(colour, vec3(1.0, 0.80, 0.42), max(0.28 * sel * step(0.5, c0.x), 0.2 * region));
   }
 </script>
 <script id="works-lines" type="x-shader/x-fragment">
@@ -1033,8 +1105,8 @@
   document.getElementById('lede').textContent = D.lede ||
     'An estimate of how the Open Moon looks from space: its air, clouds and a guessed cover of plants, over the ' +
     'geography atlas with sea level ' + D.levelText + ' above the lunar geoid.' + (D.frame ? D.frame.lede : '') +
-    ' Drag to turn it, scroll or pinch to zoom, click for the height or depth of a place, and move the Sun to see the ' +
-    'halo, the twilight and the view from Earth.';
+    ' Drag to turn it, scroll or pinch to zoom, click a place for its card, use the Pin tool for the height or depth of a ' +
+    'point, and move the Sun to see the halo, the twilight and the view from Earth.';
   if (D.frame) {
     const note = document.getElementById('frame-note');
     note.innerHTML = D.frame.note;
@@ -1195,7 +1267,7 @@
     uWorkB: { value: Array.from({ length: WORK_SEGMENTS }, (_, i) => workSegments[i] ? workSegments[i][1] : new THREE.Vector3()) },
     uWorks: { value: 0 },
     tDistricts: { value: D.textures.districts ? load(D.textures.districts, exact) : blank() },
-    uDistrictMode: { value: 0 }, uSel: { value: new Array(8).fill(0) },
+    uDistrictMode: { value: 0 }, uSel: { value: new Array(8).fill(0) }, uSelRegion: { value: 0 },
     uLandUnits: { value: new THREE.Vector2(D.districts ? D.districts.districts.filter((d) => d.kind === 'district').length : 0,
                                            D.districts ? D.districts.regions.filter((r) => !r.sea).length : 0) }
   };
@@ -1327,7 +1399,8 @@
     const k = (i * surfaceW + j) * 4;
     if (!surfacePixels[k + 2]) return null;
     const b = surfacePixels[k + 2];
-    return { body: D.surface.names[b] || 'water', depth: surfacePixels[k] * 256 + surfacePixels[k + 1], level: D.surface.levels[b] };
+    return { body: D.surface.names[b] || 'water', depth: surfacePixels[k] * 256 + surfacePixels[k + 1], level: D.surface.levels[b],
+             index: b };
   };
   const heightAt = (lat, lon) => {
     if (!reliefPixels) return null;
@@ -1407,11 +1480,14 @@
     items.push(item);
     return item;
   };
-  for (const [name, lat, lon] of D.labels.seas) addLabel('sea', name, lat, lon, 0);
+  // The atlas's older sea labels, under today's names; where the regions are drawn the seas carry their own names.
+  if (!D.districts) for (const [name, lat, lon] of D.labels.seas) addLabel('sea', name, lat, lon, 0);
+  else document.getElementById('show-seas').closest('label').hidden = true;
   // The atlas round's draft regions and districts, with their names in the Moon's tongues.
   const DIST = D.districts || null;
   const UNIT_KINDS = new Set(['region', 'district', 'coast']);
   if (DIST) {
+    DIST.regions.forEach((r, k) => { r.page = k + 1; });          // the region's number in the districts texture's blue
     for (const r of [...DIST.regions].sort((a, b) => b.area - a.area)) {
       const item = addLabel('region', r.name, r.lat, r.lon, 0, r);
       if (r.sea) item.el.classList.add('seaRegion');
@@ -1419,6 +1495,43 @@
     for (const d of [...DIST.districts].sort((a, b) => b.area - a.area)) addLabel(d.kind, d.name, d.lat, d.lon, 0, d);
   }
   const unitByIndex = new Map(DIST ? DIST.districts.map((d) => [d.index, d]) : []);
+  // What lies under a place, for a click and for the hover: the districts texture read on the CPU gives the district
+  // (its place in the page's list), the region drawn there (0 in international waters) and whether it is water; open
+  // water beyond the regions is its sea's.
+  const regionItems = new Map(), unitItems = new Map(), itemByAnchor = new Map();
+  for (const it of items) {
+    if (!UNIT_KINDS.has(it.kind)) continue;
+    if (it.kind === 'region') regionItems.set(it.extra.page, it); else unitItems.set(it.extra.index, it);
+    if (it.extra.anchor) itemByAnchor.set(it.extra.anchor, it);
+  }
+  let unitPixels = null, unitW = 0, unitH = 0;
+  if (DIST && D.textures.districts) {
+    const unitImage = new Image();
+    unitImage.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = unitW = unitImage.width;
+      c.height = unitH = unitImage.height;
+      const ctx = c.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(unitImage, 0, 0);
+      try { unitPixels = ctx.getImageData(0, 0, unitW, unitH).data; } catch (err) { unitPixels = null; }
+    };
+    unitImage.src = D.textures.districts;
+  }
+  const seaItemOfBody = (b) => {
+    const body = D.surface && D.surface.bodies ? D.surface.bodies[b] : null;
+    return body ? itemByAnchor.get('sea:' + body) || null : null;
+  };
+  const unitItemAt = (at) => {
+    if (!DIST || !show.district || !at || !unitPixels) return null;
+    const i = Math.min(unitH - 1, Math.max(0, Math.floor((90 - at.lat) / 180 * unitH)));
+    const j = ((Math.floor((at.lon + 180) / 360 * unitW) % unitW) + unitW) % unitW;
+    const k = (i * unitW + j) * 4;
+    const district = (unitPixels[k] & 127) * 256 + unitPixels[k + 1], region = unitPixels[k + 2];
+    if (distance < ZOOM_DISTRICTS && district) return unitItems.get(district) || null;
+    if (region) return regionItems.get(region) || null;
+    const w = surfaceAt(at.lat, at.lon);
+    return w ? seaItemOfBody(w.index) : null;
+  };
   // The borders, traced once in the build (render.border_lines): thin lines of a fixed width in pixels, solid on land
   // and along shores, dashed where water lies on both sides. Regions' edges show at every zoom, districts' when
   // zoomed in.
@@ -1709,7 +1822,14 @@
     earth: near
   };
   const EARTH = { distance: EARTH_KM / MOON_KM, fov: 0.9 };
-  const homeCamera = () => mode === 'appearance' ? { distance: 5.8, fov: 28 } : { distance: 4.3, fov: 28 };
+  // The opening distance fills the same share of a wide view's height with the Moon, and of a tall view's width.
+  const fitHome = (base) => {
+    const aspect = viewport.clientWidth / Math.max(1, viewport.clientHeight);
+    if (aspect >= 1) return base;
+    const halfY = 14 * Math.PI / 180, halfX = Math.atan(Math.tan(halfY) * aspect);
+    return Math.min(12, 1 / Math.sin(Math.asin(1 / base) / halfY * halfX));
+  };
+  const homeCamera = () => ({ distance: fitHome(mode === 'appearance' ? 5.8 : 4.3), fov: 28 });
   let distance = 5.8, fov = 28, current = 'near';
   globe.quaternion.copy(VIEWS.near);
   let tween = null, turning = false;
@@ -1776,6 +1896,80 @@
     invalidate();
   });
 
+  // The hover: a mouse over a region, district, sea or marker shows its name, what the name means and the first
+  // sentence of its text beside the pointer.
+  const tip = document.getElementById('tip');
+  const hideTip = () => { tip.hidden = true; };
+
+  // Pin mode: the Pin tool turns it on, and Esc or the tool turns it off. While it is on, a click places the pin and
+  // reads the height and the water there; otherwise a click opens the card of what lies under it.
+  const pinModeBtn = document.getElementById('pin-mode'), pinBanner = document.getElementById('pin-banner');
+  let pinMode = false;
+  const setPinMode = (on) => {
+    pinMode = on;
+    pinModeBtn.setAttribute('aria-pressed', String(on));
+    pinBanner.hidden = !on;
+    viewport.classList.toggle('pinning', on);
+    hideTip();
+  };
+  pinModeBtn.addEventListener('click', () => setPinMode(!pinMode));
+
+  // The floating panels: the card on the right, the layers drawer on the left (sheets from the bottom on a phone, one
+  // at a time) and the notes. Each viewer's drawer and open sections are remembered in their own browser.
+  const small = () => window.matchMedia('(max-width: 700px)').matches;
+  const remember = (key, value) => { try { localStorage.setItem('openMoonGlobe.' + key, JSON.stringify(value)); } catch (err) { /* none kept */ } };
+  const recall = (key, fallback) => {
+    try { const v = localStorage.getItem('openMoonGlobe.' + key); return v === null ? fallback : JSON.parse(v); } catch (err) { return fallback; }
+  };
+  const cardPanel = document.getElementById('cardpanel');
+  const drawer = document.getElementById('drawer'), layersBtn = document.getElementById('layers-toggle');
+  const setDrawer = (open, keep) => {
+    drawer.hidden = !open;
+    layersBtn.setAttribute('aria-expanded', String(open));
+    layersBtn.setAttribute('aria-pressed', String(open));
+    if (keep) remember('drawer', open);
+    if (open && small()) cardPanel.hidden = true;
+  };
+  const openCard = () => {
+    cardPanel.hidden = false;
+    cardPanel.scrollTop = 0;
+    if (small()) setDrawer(false, false);
+  };
+  const closeCard = () => {
+    cardPanel.hidden = true;
+    topoUniforms.uSel.value = new Array(8).fill(0);
+    topoUniforms.uSelRegion.value = 0;
+    invalidate();
+  };
+  document.getElementById('card-close').addEventListener('click', closeCard);
+  layersBtn.addEventListener('click', () => setDrawer(drawer.hidden, true));
+  setDrawer(small() ? false : recall('drawer', true), false);
+  for (const sec of drawer.querySelectorAll('details[data-key]')) {
+    const open = recall('section.' + sec.dataset.key, null);
+    if (open !== null) sec.open = open;
+    sec.addEventListener('toggle', () => remember('section.' + sec.dataset.key, sec.open));
+  }
+  const about = document.getElementById('about'), aboutBtn = document.getElementById('about-open');
+  const setAbout = (open) => {
+    about.hidden = !open;
+    aboutBtn.setAttribute('aria-expanded', String(open));
+    if (open) about.focus();
+  };
+  aboutBtn.addEventListener('click', () => setAbout(about.hidden));
+  document.getElementById('about-close').addEventListener('click', () => setAbout(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!about.hidden) setAbout(false);
+    else if (pinMode) setPinMode(false);
+    else if (!cardPanel.hidden) closeCard();
+    else if (!drawer.hidden && small()) setDrawer(false, false);
+  });
+  // The drawer starts below the search box, whatever height the title gives it.
+  const topBox = document.getElementById('top');
+  const fitPanels = () => document.documentElement.style.setProperty('--top-h', topBox.offsetHeight + 12 + 'px');
+  new ResizeObserver(fitPanels).observe(topBox);
+  fitPanels();
+
   // Going to a place: degrees as 45 N, 30 W (or 45, -30 with east positive), or a name the globe labels.
   const facing = (lat, lon) => new THREE.Quaternion().setFromAxisAngle(X_AXIS, lat * Math.PI / 180)
     .multiply(new THREE.Quaternion().setFromAxisAngle(Y_AXIS, -Math.PI / 2 - lon * Math.PI / 180));
@@ -1806,7 +2000,7 @@
   };
   const plain = (text) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const places = [];
-  for (const [name, lat, lon] of [...D.labels.seas, ...D.labels.islands]) places.push({ name, lat, lon, key: plain(name) });
+  for (const [name, lat, lon] of [...(D.districts ? [] : D.labels.seas), ...D.labels.islands]) places.push({ name, lat, lon, key: plain(name) });
   for (const it of items) {
     if (!it.extra) continue;
     for (const name of new Set([it.extra.name, it.extra.short].filter(Boolean)))
@@ -1836,8 +2030,12 @@
     }
     const { lat, lon } = c || place;
     flyTo(lat, lon);
-    setPin(lat, lon, place ? place.name : fmtPoint(lat, lon));
-    if (place && place.item) showCard(place.item); else showPoint(lat, lon, place && place.name);
+    // A named place opens its card; a latitude and longitude takes a pin and reads the place there.
+    if (place && place.item) showCard(place.item);
+    else {
+      setPin(lat, lon, place ? place.name : fmtPoint(lat, lon));
+      showPoint(lat, lon, place && place.name);
+    }
     gotoValue.textContent = (place ? place.name + ' · ' : '') + fmtPoint(lat, lon);
   });
 
@@ -1875,6 +2073,8 @@
     viewport.classList.add('dragging');
     moved = 0;
     tween = null;
+    hoverAt = null;               // a press ends the hover until the pointer moves again
+    hideTip();
   });
   viewport.addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return;
@@ -1909,12 +2109,63 @@
     else distance = Math.min(12, Math.max(1.35, distance * factor));
     invalidate();
   };
-  viewport.addEventListener('wheel', (e) => { e.preventDefault(); zoom(Math.exp(e.deltaY * 0.0012)); }, { passive: false });
+  viewport.addEventListener('wheel', (e) => { e.preventDefault(); hideTip(); zoom(Math.exp(e.deltaY * 0.0012)); }, { passive: false });
+  document.getElementById('zoom-in').addEventListener('click', () => { tween = null; zoom(1 / 1.35); });
+  document.getElementById('zoom-out').addEventListener('click', () => { tween = null; zoom(1.35); });
+
+  // The hover, worked out at most once a frame.
+  let hoverAt = null, hoverQueued = false;
+  const firstSentence = (t) => { const m = (t || '').match(/^.*?[.!?](?=\s|$)/); return m ? m[0] : (t || ''); };
+  const kindOf = (it) => {
+    const x = it.extra;
+    if (it.kind === 'region') return x.sea ? 'sea' : x.card && x.card.islandGroup ? 'island group' : 'region';
+    return it.kind === 'coast' ? 'coastal sea' : 'district';
+  };
+  const MARKER_KINDS = { site: 'heritage site', target: 'sampling target', fall: 'falls', work: 'the works' };
+  const updateHover = () => {
+    hoverQueued = false;
+    if (!hoverAt || pointers.size || pinMode) { hideTip(); return; }
+    const [px, py] = hoverAt;
+    const marker = markerAt(px, py);
+    let title = '', sub = '', text = '';
+    if (marker) {
+      const x = marker.extra;
+      title = x.title || (x.name ? x.name + (x.year ? ' (' + x.year + ')' : '') : x.short || '');
+      sub = MARKER_KINDS[marker.kind] || '';
+    } else {
+      const it = unitItemAt(pointAt(px, py));
+      if (!it) { hideTip(); return; }
+      const x = it.extra, c = x.card || {};
+      title = x.name;
+      sub = [kindOf(it), x.tongue, c.gloss || x.meaning].filter(Boolean).join(' · ');
+      text = firstSentence(c.text || (it.kind === 'region' ? '' : x.description));
+    }
+    tip.querySelector('b').textContent = title;
+    tip.querySelector('.m').textContent = sub;
+    tip.querySelector('.t').textContent = text;
+    tip.hidden = false;
+    const w = viewport.clientWidth, h = viewport.clientHeight;
+    const left = px + 16 + tip.offsetWidth > w - 8 ? px - 12 - tip.offsetWidth : px + 16;
+    const top = py + 18 + tip.offsetHeight > h - 8 ? py - 12 - tip.offsetHeight : py + 18;
+    tip.style.left = Math.max(8, left) + 'px';
+    tip.style.top = Math.max(8, top) + 'px';
+  };
+  viewport.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse' || pointers.size) return;           // a mouse with no button down
+    const box = viewport.getBoundingClientRect();
+    hoverAt = [e.clientX - box.left, e.clientY - box.top];
+    if (!hoverQueued) { hoverQueued = true; requestAnimationFrame(updateHover); }
+  });
+  viewport.addEventListener('pointerleave', () => { hoverAt = null; hideTip(); });
 
   // The record card.
   const card = document.getElementById('card');
   const showCard = (it) => {
     const x = it.extra;
+    topoUniforms.uSel.value = new Array(8).fill(0);
+    topoUniforms.uSelRegion.value = 0;
+    openCard();
+    invalidate();
     if (it.kind === 'site') {
       const where = x.status === 'submerged'
         ? fmt(x.depth) + ' m under ' + (x.waterName || 'the sea') + ' · ' + x.pressure.toFixed(1) + ' atm · land ' + fmt(x.nearestLand) + ' km'
@@ -1929,21 +2180,50 @@
       card.querySelector('h3').textContent = x.title;
       card.querySelector('.meta').textContent = x.meta;
       card.querySelector('.marks').textContent = x.note;
-    } else if (it.kind === 'region' || it.kind === 'district' || it.kind === 'coast') {
-      // A draft unit: its name, code, tongue and size, its short description, and for a coast or a shore its links.
-      card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p><p class="treat"></p>';
+    } else if (UNIT_KINDS.has(it.kind)) {
+      // A draft unit: its name, kind, tongue and what its name means; for a land region the text written from its fact
+      // sheet and its main figures, otherwise its short computed description; and links that fly to the places tied
+      // to it (a region's seas and neighbours, a coast's shore and catchment, a district's coastal seas).
+      const c = x.card || null;
+      card.innerHTML = '<h3></h3><div class="meta"></div><p class="lead"></p><dl class="facts"></dl>' +
+        '<div class="links"></div><p class="note"></p>';
       card.querySelector('h3').textContent = x.name;
-      const kind = it.kind === 'region' ? (x.sea ? 'sea region' : 'region') : it.kind === 'coast' ? 'coastal sea' : 'district';
-      card.querySelector('.meta').textContent = x.code + ' · ' + kind + (x.region ? ' of ' + x.region : '') + ' · ' +
-        fmt(x.area) + ' km² · ' + x.tongue + (x.meaning ? ' · ' + x.meaning : '');
-      card.querySelector('.marks').textContent = x.description;
-      const linked = (x.links || []).map((k) => unitByIndex.get(k)).filter(Boolean);
-      card.querySelector('.treat').textContent = linked.length
-        ? (it.kind === 'coast' ? 'Linked shore and catchment: ' : 'Its coastal seas: ') + linked.map((u) => u.name).join(', ') + '.'
-        : '';
-      const sel = [x.index || 0, ...(x.links || [])].slice(0, 8);
-      topoUniforms.uSel.value = [...sel, ...new Array(8 - sel.length).fill(0)];
-      invalidate();
+      card.querySelector('.meta').textContent = [kindOf(it) + (x.region ? ' of ' + x.region : ''), x.tongue,
+                                                 (c && c.gloss) || x.meaning, x.code].filter(Boolean).join(' · ');
+      card.querySelector('.lead').textContent = (c && c.text) || x.description || '';
+      const dl = card.querySelector('.facts');
+      const rows = c ? c.rows : x.sea ? [] : [['Area', fmt(x.area) + ' km²']];
+      for (const [k, v] of rows) {
+        const dt = document.createElement('dt'), dd = document.createElement('dd');
+        dt.textContent = k;
+        dd.textContent = v;
+        dl.append(dt, dd);
+      }
+      dl.hidden = !rows.length;
+      const links = card.querySelector('.links');
+      const linked = c ? [...(c.seas || []), ...(c.neighbours || [])].map((a) => itemByAnchor.get(a)).filter(Boolean)
+        : (x.links || []).map((k) => unitItems.get(k)).filter(Boolean);
+      if (linked.length) {
+        const label = document.createElement('span');
+        label.textContent = c ? 'Its seas and neighbours' : it.kind === 'coast' ? 'Its shore and catchment' : 'Its coastal seas';
+        links.append(label);
+        for (const target of linked) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = target.extra.name;
+          b.addEventListener('click', () => { flyTo(target.lat, target.lon); showCard(target); });
+          links.append(b);
+        }
+      }
+      links.hidden = !linked.length;
+      const note = card.querySelector('.note');
+      note.textContent = c ? c.note : '';
+      note.hidden = !note.textContent;
+      if (it.kind === 'region') topoUniforms.uSelRegion.value = x.sea ? 0 : x.page || 0;
+      else {
+        const sel = [x.index || 0, ...(x.links || [])].slice(0, 8);
+        topoUniforms.uSel.value = [...sel, ...new Array(8 - sel.length).fill(0)];
+      }
     } else {
       card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p>';
       card.querySelector('h3').textContent = x.name;
@@ -1953,11 +2233,13 @@
       card.querySelector('.marks').textContent = x.record + ' Sample ' + x.sample + '.';
     }
   };
-  const first = items.find((it) => it.extra && it.extra.id === 'apollo-11');
-  if (first) showCard(first);
   let shownPoint = null;
   const showPoint = (lat, lon, name) => {
     shownPoint = [lat, lon, name];
+    topoUniforms.uSel.value = new Array(8).fill(0);
+    topoUniforms.uSelRegion.value = 0;
+    openCard();
+    invalidate();
     card.innerHTML = '<h3></h3><div class="meta"></div><p></p>';
     card.querySelector('h3').textContent = name || fmtPoint(lat, lon);
     card.querySelector('.meta').textContent = (name ? fmtPoint(lat, lon) + ' · ' : '') + '0.25° atlas cell';
@@ -1984,7 +2266,8 @@
     if (Y) {
       topoUniforms.uLevels.value = Y.levels[yearIndex];
       yearsValue.textContent = yearText(yearIndex);
-      if (shownPoint && card.querySelector('.meta') && card.querySelector('.meta').textContent.endsWith('atlas cell')) {
+      if (shownPoint && !cardPanel.hidden && card.querySelector('.meta') &&
+          card.querySelector('.meta').textContent.endsWith('atlas cell')) {
         showPoint(...shownPoint);
       }
     }
@@ -2020,20 +2303,33 @@
     projected.copy(worldPos).project(camera);
     return { x: (projected.x + 1) / 2 * viewport.clientWidth, y: (1 - projected.y) / 2 * viewport.clientHeight, facing };
   };
-  const pick = (e) => {
-    const box = viewport.getBoundingClientRect();
-    const px = e.clientX - box.left, py = e.clientY - box.top;
+  // The marker nearest a pixel, within 16 pixels: a heritage site, a sampling target, a fall or a piece of the works.
+  const markerAt = (px, py) => {
     let best = null, bestD = 16;
     for (const it of items) {
-      if (!it.extra || !show[it.kind]) continue;
+      if (!it.extra || !it.mesh || !show[it.kind]) continue;
       const s = screenOf(it);
       if (s.facing < 0.05) continue;
       const d = Math.hypot(s.x - px, s.y - py);
       if (d < bestD) { best = it; bestD = d; }
     }
-    if (best) { showCard(best); return; }
+    return best;
+  };
+  // A click: in pin mode the pin and the place's height and water; otherwise the card of the marker under the pointer,
+  // or of the region (zoomed out), district or coastal sea (zoomed in) or sea there, or the place's own reading.
+  const pick = (e) => {
+    const box = viewport.getBoundingClientRect();
+    const px = e.clientX - box.left, py = e.clientY - box.top;
     const at = pointAt(px, py);
-    if (at) { setPin(at.lat, at.lon, fmtPoint(at.lat, at.lon)); showPoint(at.lat, at.lon); }
+    if (pinMode) {
+      if (at) { setPin(at.lat, at.lon, fmtPoint(at.lat, at.lon)); showPoint(at.lat, at.lon); }
+      return;
+    }
+    const marker = markerAt(px, py);
+    if (marker) { showCard(marker); return; }
+    const unit = unitItemAt(at);
+    if (unit) showCard(unit);
+    else if (at) showPoint(at.lat, at.lon);
   };
   // The place under a pixel: the ray meets the sphere, then, in the raised modes, the sphere at that place's
   // raised height, a few times over.
