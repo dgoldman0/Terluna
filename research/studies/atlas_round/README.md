@@ -497,7 +497,7 @@ On the page the defect shows close up. Where the ground beside a lake is lower t
 | Uamoana | 81,350 | 68,845 | −15.4% |
 | Bultengiz | 13,519 | 12,829 | −5.1% |
 
-Against these stand the seas' design losses to the air beyond the rain on them: 53,683 m³/s for H'Jamo Melaĥa and 6,512 m³/s for Juldyztengiz, which the weirs hold at the common level, and 94,559 m³/s for the near-side sea as a whole before it was parted. With the weirs' shares unchanged, H'Jamo Melaĥa would be 2,139 m³/s short and Juldyztengiz 2,712 m³/s short, and Uamoana and Bultengiz together receive 81,674 m³/s where they received 94,869, both figures counting the 7,630 m³/s that spills from the one into the other. What the weirs, the seas' levels and the evaporation factor become once they are set again on the corrected rule is not computed here.
+Against these stand the seas' design losses to the air beyond the rain on them: 53,683 m³/s for H'Jamo Melaĥa and 6,512 m³/s for Juldyztengiz, which the weirs hold at the common level, and 94,559 m³/s for the near-side sea as a whole before it was parted. With the weirs' shares unchanged, H'Jamo Melaĥa would be 2,139 m³/s short and Juldyztengiz 2,712 m³/s short, and Uamoana and Bultengiz together receive 81,674 m³/s where they received 94,869, both figures counting the 7,630 m³/s that spills from the one into the other. What the weirs, the seas' levels and the evaporation factor become once they are set again on the corrected rule is the next section's.
 
 **The named waterways.** Each waterway's flow where it ends on the design routing:
 
@@ -533,9 +533,82 @@ Two waterways no longer reach their sea. H'Naharo Longa's water enters a lake of
 
 **What the measure leaves out.** The rule gives the steady state and says nothing of how long a hollow takes to reach it: the largest lake without an outlet, 41,897 km² at 31° S, 82° E and 4,731 m deep, holds on an inflow of under 100 m³/s because open water there loses 0.2 mm a day more than the rain brings, and such a lake is filled by delivery or stays far below this level through the scenario's centuries. Where the open water's balance is that near zero, a lake's extent follows the climate model's 170 km cells closely. The design climate itself was run on a surface holding the design's lakes; a surface with 4% more of the Moon under lakes would change the climate that feeds them, which is not run. Two full hollows joined at their sill count as one lake, and no channel is drawn across the sill. The corrected lakes and discharge are kept on the research drive (atlas-round/lake_rule/lake_rule_16ppd.npz) with a map of the lakes under both rules (lakes_design_and_corrected.png); results/lake_rule.json records the figures.
 
+## The design's settings made again on the corrected rule
+
+[lake_rule_balance.py](lake_rule_balance.py) makes again, on the corrected rule, the three settings the measure above held at their design values: the factor on the open water's evaporation, the weirs' shares and the near-side sea's levels, each by the procedure that set it on the present rule, in the design's order (18 November; the first stage of adopting the rule, asked for so that the seas' new state is seen before the surface, the maps or the page change). Nothing in the design is changed by it.
+
+The seas hold. Six of the seven waters keep their design levels, Uamoana to within 3 cm, and Bultengiz stands 45.4 m higher and 78,376 km² larger. What changes is the land: lakes off the seas cover 18.0% of the Moon where the design has 13.4%, and the land that is neither sea nor lake falls from 62.8% to 58.1%. Two named rivers end in lakes short of their seas, as in the measure.
+
+**The factor.** With every sea at the common level and the open water's evaporation as the climate gives it, the rivers bring the seas 12,417 m³/s more than the seas lose on the corrected rule, where the present rule leaves 32,815 m³/s: the corrected lakes cover 7,534,007 km² in that state, the present rule's 5,800,458 km², and lose more of the rain to the air before it reaches a sea. The factor that takes the surplus away, found in one step from 1 as the design's was (final_drainage.budget), is 1.026 where the design's is 1.077, so the routing asks 2.6% more evaporation of the open water than the climate gives it where it asked 7.7%. One step closes the two rules' budgets alike: routed again at its factor, the corrected rule's budget is left 1,775 m³/s over and the present rule's 1,687 m³/s over. At the smaller factor every sea loses less to the air, which is why the seas hold on less river water: the land and its lakes send them 144,452 m³/s where the design routing sends 157,536.
+
+**The weirs.** Hanaqucha's surplus is 44,279 m³/s (42,209 in the design). The weir at its pass releases 24,315 m³/s to H'Jamo Melaĥa (26,599), which needs less. The northern cut releases 7,850 m³/s (5,604) so that 6,164 m³/s reach Juldyztengiz: the lakes on the branch's way take 1,686 m³/s where they took 367, and the sea's own rivers bring it 0 m³/s where they brought 1,275, so Juldyztengiz stands on the cut alone. The remaining 12,113 m³/s (10,007) go down the branch to Dagat na Katzeh, where 11,342 m³/s arrive. A cut takes no more than its lake can spare while standing full. The first lake the branch leaves through a cut stands full at 3,027.9 m above the common level and overflows 7,795 m³/s besides; the second, at 2,626.8 m, can spare 12,103 of the 12,113 m³/s and stands just full. Bahari Mashariki passes on 15,680 m³/s (14,894) and Dagat na Katzeh 30,889 (27,985). The weirs settle in 3 rounds, each held sea within a cubic metre a second of its need.
+
+**The near-side sea.** Uamoana stands 67.05 m below the common level, over the neck's crest at 68.72 m below it, and sends 7,365 m³/s over the neck (7,630 in the design). At the design levels the rivers would bring the two parts 889 m³/s more than they lose at the new factor, and Bultengiz rises until its loss meets its supply, from 225.36 to 179.96 m below the common level. On the way its water takes in the lake of 6,861 km² that the neck's river runs through below the neck, whose sill lies 186.60 m below the common level. The routing and the levels are set against each other for 4 rounds, until Uamoana is within 0.1 and Bultengiz within 5.0 m³/s of balance; the design routed once. Bultengiz's level is the least certain figure here, in the design as well: it follows the neck's flow, which is the small difference between Uamoana's rivers (74,864 m³/s) and its loss (67,500 m³/s).
+
+| Sea | Level above the common level, m: design | Rebalanced | Area, km²: design | Rebalanced | Loses, m³/s: design | Rebalanced | Receives, m³/s: design | Rebalanced |
+|---|---|---|---|---|---|---|---|---|
+| Hanaqucha | 3,448.77 | 3,448.77 | 844,220 | 844,220 | 5,195 | 3,765 | 47,404 | 48,044 |
+| Bahari Mashariki | 2,341.33 | 2,341.33 | 297,889 | 297,889 | 2,783 | 2,307 | 17,677 | 17,987 |
+| Dagat na Katzeh | 719.95 | 719.95 | 599,348 | 599,348 | 2,124 | 1,125 | 30,110 | 32,014 |
+| H'Jamo Melaĥa | 0.0 | 0.0 | 2,410,253 | 2,410,253 | 53,683 | 50,512 | 53,683 | 50,512 |
+| Juldyztengiz | 0.0 | 0.0 | 279,470 | 279,470 | 6,512 | 6,164 | 6,512 | 6,164 |
+| Uamoana | −67.02 | −67.05 | 3,835,314 | 3,835,261 | 73,607 | 67,500 | 81,350 | 74,864 |
+| Bultengiz | −225.36 | −179.96 | 731,500 | 809,876 | 13,362 | 13,073 | 13,519 | 13,078 |
+
+The full seas pass on what they receive beyond their loss, and what Uamoana receives beyond its loss is the neck's flow. The seas cover 23.93% of the Moon (23.72% in the design).
+
+**The lakes.** The lakes off the seas grow from 5,097,103 km² to 6,826,149 km², more than in the measure (6,631,511 km²) because open water loses less at the smaller factor: 1,866,916 km² of ground is newly under a lake and 117,736 km² no longer is. They hold 6.34 million km³ where the design's hold 4.76. No lake stands above dry ground beside it. By today's latitude they grow from 493,150 to 861,219 km² at 30–60° N, from 1,838,624 to 2,191,962 km² at 0–30° N, from 2,447,905 to 2,938,461 km² at 0–30° S, from 301,488 to 833,734 km² at 30–60° S, and the 15,932 km² north of 60° N dry up. The lakes that pass nothing on cover 557,868 km² (223,225 in the design), 6,094 of the 31,613 lakes. The eight largest are the measure's, the first of them grown:
+
+| Area, km² | Of it newly under water, km² | Level above the common level, m | Depth, m | Deepest at | Overflows |
+|---|---|---|---|---|---|
+| 291,323 | 257,494 | 906 | 4,217 | 35° S, 88° E | yes |
+| 200,472 | 37,105 | 5,027 | 4,711 | 13° N, 123° W | yes |
+| 140,361 | 0 | 7,666 | 6,704 | 7° N, 158° W | yes |
+| 93,188 | 80,442 | 1,477 | 4,421 | 36° S, 130° E | yes |
+| 79,787 | 41,867 | 4,960 | 5,064 | 32° N, 176° W | yes |
+| 76,888 | 0 | 3,782 | 6,071 | 10° N, 137° E | yes |
+| 65,269 | 38,913 | 2,093 | 4,304 | 31° S, 150° E | yes |
+| 64,997 | 32,683 | 3,264 | 4,643 | 2° S, 124° E | yes |
+
+The largest lake that passes nothing on covers 45,846 km² at 41° S, 79° E, 45,436 km² of it newly under water.
+
+**The named waterways.** Each waterway's flow where it ends. Bultengiz has risen up the lower courses of its three rivers, so their rebalanced flows are read where the sea now meets them, above the streams that joined on the drowned reach, and their change is against the design's flow at that same place:
+
+| Waterway | Ends in | Design, m³/s | Rebalanced, m³/s | Change |
+|---|---|---|---|---|
+| Hatunmayu | H'Jamo Melaĥa | 30,657 | 27,904 | −9.0% |
+| Ninamuawa | Uamoana | 29,073 | 31,772 | +9.3% |
+| Paramayu | Hanaqucha | 26,018 | 26,411 | +1.5% |
+| Fukagawa | Dagat na Katzeh | 17,965 | 18,422 | +2.5% |
+| Mto Kijani | Uamoana | 17,652 | 16,967 | −3.9% |
+| Ilog na Gavoah | Bahari Mashariki | 15,372 | 15,622 | +1.6% |
+| Pukutaymayu | H'Jamo Melaĥa | 12,926 | 13,119 | +1.5% |
+| Niigawa | Dagat na Katzeh | 9,991 | 11,345 | +13.6% |
+| H'Naharo Longa | Uamoana | 9,565 | 992 | −89.6% |
+| Pooiriawa | Uamoana | 8,436 | 8,656 | +2.6% |
+| Rereawa | Hanaqucha | 8,248 | 8,114 | −1.6% |
+| Jarykgol | Bultengiz | 7,541 | 7,362 | −3.5% |
+| Mto Jiwe | H'Jamo Melaĥa | 5,578 | 5,455 | −2.2% |
+| Asif Dahab | Juldyztengiz | 5,237 | 6,164 | +17.7% |
+| Tiareawa | Uamoana | 3,676 | 3,633 | −1.2% |
+| Wayramayu | Hanaqucha | 3,357 | 3,426 | +2.1% |
+| Puyumayu | Hanaqucha | 2,571 | 2,655 | +3.3% |
+| Quyllurmayu | Hanaqucha | 1,777 | 1,909 | +7.4% |
+| Mto Jani | Bultengiz | 1,575 | 1,552 | +4.3% |
+| Mto Pacha | Bultengiz | 1,453 | 869 | +3.2% |
+| H'Naharo Atika | Juldyztengiz | 1,275 | 0 | −100.0% |
+
+H'Naharo Longa still ends in the lake at 35° S, 88° E, now 291,323 km², and reaches Uamoana with 992 m³/s of its lower course's own water. H'Naharo Atika's water is held by a lake of 39,678 km² at 51° N, 174° W and one of 39,084 km² at 55° N, 177° E that passes nothing on, and none of it reaches Juldyztengiz. At the places where Bultengiz now meets them, Jarykgol, Mto Jani and Mto Pacha carry 7,628, 1,488 and 842 m³/s in the design. Hatunmayu carries 9.0% less because the weir that feeds it releases less, and Asif Dahab, Niigawa and Ninamuawa carry more because the cuts and Dagat na Katzeh's overflow do. The other waterways stay within 8% of their design flows.
+
+**The water held.** The lakes hold 1,579,954 km³ more than the design's and Bultengiz 37,028 km³ more; Uamoana's volume moves by 110 km³ and the other seas' not at all. The state found here holds 1.62 million km³ more water than the design state.
+
+**The search for a part's level.** near_side_neck.py finds the level at which a part's loss first reaches its supply by running through the part's cells in the order they join its water. The cells of a basin beyond a sill all join at the sill's level, some losing to the air and some gaining rain, and a search cell by cell can stop part of the way through such a basin, at a loss the part has at no level. Bultengiz met this at a basin of 12,933 km² whose sill lies 181.79 m below the common level. Here the search takes the cells that join at one level together (lake_rule_balance.part_tables). On the design's own rivers and factor the neck read from its record gives the design's levels back (67.01 and 225.34 m below the common level against 67.02 and 225.36, and the same 7,630 m³/s over the neck), so the design state did not rest inside such a basin; near_side_neck.py itself is unchanged and carries the flaw until it is next run.
+
+**What it leaves out.** The climate is the design climate, run on a surface with the design's seas and lakes. The factor closes the routing's books on that climate's rain: with a third more lake the air would take up more water and return more rain, and how much of each is not known until a climate is run on such a surface. Were the open water to lose as much to the air as at the design's factor, the seas would be short of river water as the measure above found. The state is a steady state: the corrected rule's largest hollows would take far longer than the scenario's centuries to fill on their own inflow and are filled by delivery or stand lower. Where the open water's balance is near zero a lake's extent follows the climate model's 170 km cells. The settings follow the design's procedures as they stand, so one step closes the budget and the near-side sea is the only water whose level floats. The rebalanced routing is kept on the research drive (atlas-round/lake_rule/lake_rule_balance_16ppd.npz) with a map of the seas and lakes in the design and rebalanced (seas_and_lakes_design_and_rebalanced.png); results/lake_rule_balance.json records the figures.
+
 ## What is open
 
-- **The lake rule in hollows of several catchments** (above, Lakes the ground does not hold, and A corrected lake rule, measured): the corrected rule is measured on the design's own inputs and adopted nowhere. Adopting it means routing the design again with the seas' levels, the weirs' shares and the evaporation factor set on it, then the surface, the maps and the page that follow from the routing, and in time the climate on a surface with more lake. Whether to adopt it is the author's decision.
+- **The lake rule in hollows of several catchments** (above, Lakes the ground does not hold, A corrected lake rule, measured, and The design's settings made again on the corrected rule): the corrected rule is measured on the design's own inputs, and the factor, the weirs and the near-side sea's levels are set again on it in the study; the design itself is unchanged and stands on the present rule. Adopting the rule means carrying that state through the chain: the routing modules themselves (final_drainage.py, governed_drainage.py, near_side_neck.py with its level search, design_routing.py), the surface, the sustained rivers, whose replay is built on the present rule, the waterways and the two rivers that end in lakes, the regions' figures, the maps and the page, and in time a climate run on a surface with a third more lake. Whether to adopt it is the author's decision.
 
 - **Which dryland rivers to build**: the 29 routes and their costs are listed above, beside the satoyama map on the design surface.
 - **The globe's history**: the globe on the redrawn floor was rebuilt on 17 November (version 11, above) without a years control; a history of the seas filling under the works, if wanted, comes later.
@@ -594,6 +667,7 @@ ulimit -v 9000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.
 ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.atlas_round.sustained_rivers        # about 10 minutes, and 12 more the first time to keep the design structure; --resume takes the years already routed
 ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python3 -m research.studies.atlas_round.lake_support           # under a minute
 ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python3 -m research.studies.atlas_round.lake_rule              # about 3 minutes, on the design structure sustained_rivers keeps
+ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python3 -m research.studies.atlas_round.lake_rule_balance      # about 6 minutes after lake_rule; --restart sets everything again
 ```
 
 The estimate's products and record are written first, then every map on the design surface reads the design routing, so after a new climate the routing runs once and the rest follow it in this order (`atlas-round/estimate_300K/run_estimate_chain.sh` on the research drive runs them all with the globe page, about 25 minutes on 18 November); the cuts' trenches run on the same climate before the globe surface, which reads them, and the falls after it. The run on the design surface has its scripts on the research drive in `atlas-round/design_run/`: `prep_design_surface.sh` (the base restart on the design surface and the carry of the run at 0.930's last state, turned into the design water's frame) and `run_design_surface.sh` (the 60 years under the design watch).
@@ -610,6 +684,8 @@ The drainage reads the first step's settled grids (checked against the hash its 
 
 [test_lake_support.py](test_lake_support.py), on a hollow of two floors under one rim: a lake on one floor beside the other floor left dry is counted along that side alone, the dry floor is the ground below and joined, and a pit beyond the rim is not; a lake with rim all round counts nothing; where two lakes reach the same ground the higher level stands; and the record's counts are consistent.
 
-[test_lake_rule.py](test_lake_rule.py): a hollow of three lowest points behind two sills fills step by step as worked by hand, from no lake through one piece standing at its sill, two pieces joined at it, one lake over it and the whole hollow full with the rest over its outer pass; water is followed lake by lake to where it ends; dry ground below a pass yields runoff unless asked not to; on six random grounds of broad basins pocked with smaller hollows, with and without that runoff, no lake stands above dry ground beside it, each lake stands at one level, the budget closes, each lake's balance from the cells agrees with what the hollows' tree gave it and no lake loses more than it is given; where every hollow has one lowest point the rule gives route_levels' lakes, levels and flows; and the record is the module's, with no unheld shore in the corrected cases.
+[test_lake_rule.py](test_lake_rule.py): a hollow of three lowest points behind two sills fills step by step as worked by hand, from no lake through one piece standing at its sill, two pieces joined at it, one lake over it and the whole hollow full with the rest over its outer pass; water is followed lake by lake to where it ends; dry ground below a pass yields runoff unless asked not to; on six random grounds of broad basins pocked with smaller hollows, with and without that runoff, no lake stands above dry ground beside it, each lake stands at one level, the budget closes, each lake's balance from the cells agrees with what the hollows' tree gave it and no lake loses more than it is given; where every hollow has one lowest point the rule gives route_levels' lakes, levels and flows; what reaches each sea, counted from the hollows' overflows without gathering the rivers, is what the gathered rivers bring it; and the record is the module's, with no unheld shore in the corrected cases.
+
+[test_lake_rule_balance.py](test_lake_rule_balance.py): on a row of seas worked by hand, the weirs give the salt sea and the held sea their need after the lakes on the way have taken theirs, the rest of the source's surplus goes down the other branch and the full sea passes on what it has to spare, with and without a cut on that branch; a cut takes no more than its lake can spare while standing full; a held sea the source cannot meet takes all the source has left and is recorded short; under the crest each part of a parted sea stands where its own loss meets its own rivers, and over it the main part sends the other what the neck passes; a basin whose cells join a part's water at one level comes under it whole in the search for the part's level, where the search cell by cell stops inside it; and the record is the modules', with the held seas at the common level in balance, each part of the near-side sea within 20 m³/s of balance, no unheld shore, a closed budget and every cut's lake standing full.
 
 [test_sustained_rivers.py](test_sustained_rivers.py): on small grids, the replay of the routing reproduces route_levels' discharge exactly and the catchments' cascade gives each water what the replay gives it; a loss taken from a river above a spilling lake lowers the lake's outflow and the sea's supply by as much, and a loss beyond a river's flow runs it dry there; the head over an outlet balances its step; the storage holds still on a steady year, keeps its water through a wet one and carries a lake's outflow into a dry one, and a lake of two hollows stores as one body over both; Moscoviense's put-ins follow its fixed shares; a river runs through a small lake, ends at a large or closed one, and at a confluence its stem follows the larger branch; a year under the threshold makes a river intermittent; and a lake across the 0/360 seam is one body. On the product: the replay reproduces the design routing exactly and the years' procedure within 0.01 m³/s, the main part's offset is the routing's balance less the design's spill, the years' mean stays near the design's, the storage holds still on the design climate, the classes add up, the losses only take away, and the product and the reaches' table match their record.

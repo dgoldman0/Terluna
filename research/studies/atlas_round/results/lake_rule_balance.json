@@ -1,0 +1,1369 @@
+{
+ "schema": "terluna.research.atlas-round-lake-rule-balance/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/lake_rule_balance.py": "8f6ed60b5f36a86673b20fbed7b6d040fb541bf4f076b363d07dc6450a785390",
+   "research/studies/atlas_round/lake_rule.py": "961acd4025f9e7810c2e308aa5bf5467dad3830018edcd6ee46cb901a631eae0",
+   "research/studies/atlas_round/near_side_neck.py": "8f50c8557c21a03103b7470af1996a67024330a76d32a3890b1c61f02e681476",
+   "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
+   "research/studies/atlas_round/final_drainage.py": "270bdb22585b06318b95596db37d6ffe60b7c44476e9d8575099ee8c20043173",
+   "research/studies/drainage_network/routing.py": "52ede9125248151b2e8d09bce7ef3e2a9eb742cb391654e0208aa7ef2e96b922",
+   "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/design_routing.json": "cb6572d5bf7914de6e57fbb5064582e21d5c5910aa7ed7af506af2d4dd0a88fe",
+  "research/studies/atlas_round/results/final_drainage.json": "8c3895d869f4e315f9348e4bda07d4940a86826af411b249c80ec7d41e88f713",
+  "research/studies/atlas_round/results/near_side_neck.json": "077f00e08b94a4f0290e5c8337f6e75bdc7c3d891751933dfb4ccdc22400eaf6",
+  "research/studies/atlas_round/results/lake_rule.json": "28d050c60ee73258585043890480515a0be33e488473f3cb2e6d387cad6c95cb",
+  "research/studies/atlas_round/results/waterways.json": "d0939a63d4f82072154c7d6e9700e06d2e33893f43a10bce18571ec7b4003bf1"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/sustained_rivers/work/design_structure.npz": "73e9934cc2c7430d7750335145f5b61b48db53bdea1ef39dbdfce2f50eb7b5af",
+  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "6dd552e69faca7334280149775f96253cdb1852a784756f7462d6c962b20abf6",
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_today.npz": "69e2839b46dac2bb2e87fe0a40c618b43244cada07f9de0f58239802c927b9f5"
+ },
+ "evidence": "A calculation on the design routing's own floor, works and climate with a lake rule that fills each hollow as one water: the factor on the open water's evaporation, the weirs' shares and the near-side sea's levels are set again by the procedures that set them on the present rule, the search for a part's level taking the cells that join at one level together. It is a steady state: a lake stands wherever its supply would keep it, however long it would take to fill. The climate is the design climate, run on a surface with the design's seas and lakes; no climate has been run on the state found here. Nothing is validated against an observation.",
+ "reading_rule": "Levels in m above the redrawn common level, flows in m3/s, areas in km2, volumes in km3. factor: closing gives final_drainage.budget's figures with every sea at the common level, on the corrected rule at factor 1 and at the factor that step gives, and on the present rule at the design's factor; surplus_m3s at a rule's own factor is what its budget still leaves over. seas: each water of the design routing (the near-side sea as its two parts) in the design and rebalanced; loses is the open water's loss beyond the rain on it at the state's own factor, receives what rivers, overflows and works bring it. governed is the state the weirs are set on, the near-side sea at the common level: released is what each weir or branch lets go and arrived what reaches its sea beyond its own rivers; branch_flows_m3s is each branch's flow at each of its put-ins and take-outs in order. near_side.history is each routing of the parted sea with the balance each part was left with; control is the neck read from its record on the design's rivers beside the design's steady state. near_side.sills_met lists each sill of a basin beside a part at which the part's level came to rest with water left over: the sill, what was left over, the basin's ground below the sill, what the basin loses to the air, its lowest point, and what was done (the part tried with the basin under its water, or left at the sill spilling into the basin). near_side.to_spare_at_the_design_levels_m3s is what the rivers that reach both parts bring beyond what the parts would lose at their design levels on the new factor. lakes are off the seas; shore_cells_not_held and ground_below_and_joined_km2 are lake_support.py's measures; lakes.closer lists the largest lakes as bodies (a hollow's one water) and the largest that pass nothing on, each with its place on today's Moon and in the settled frame. changed sets the rebalanced lakes and seas against the design's cell by cell. land_and_lakes_send_the_seas_m3s is what reaches the seas less what the works and overflows carry from sea to sea. waterways gives each named waterway's flow where it ends, at its design mouth cell, and at its design head cell; where its sea has risen up its design course, the rebalanced flow is read at the last cell of that course not under the sea, the design's flow at that cell is given beside it, and change sets the one against the other. For a waterway that loses more than a twentieth of its flow, the largest lakes its design course crosses are listed.",
+ "factor": {
+  "design": 1.077,
+  "rebalanced": 1.026,
+  "closing": {
+   "corrected": {
+    "at_factor_1": {
+     "land_rain_less_evaporation_m3s": 57239,
+     "routing_runoff_m3s": 96862,
+     "lakes_rain_less_evaporation_m3s": 55314,
+     "seas_loss_m3s": 139311,
+     "delivered_to_the_seas_m3s": 151728,
+     "lakes_km2": 7534007,
+     "lakes_passing_nothing_on_km2": 439908,
+     "surplus_m3s": 12417,
+     "open_water_evaporation_m3s": 483322,
+     "open_water_evaporation_factor_closing_it": 1.026,
+     "factor": 1.0
+    },
+    "at_its_factor": {
+     "land_rain_less_evaporation_m3s": 57164,
+     "routing_runoff_m3s": 96988,
+     "lakes_rain_less_evaporation_m3s": 50877,
+     "seas_loss_m3s": 145616,
+     "delivered_to_the_seas_m3s": 147391,
+     "lakes_km2": 7410985,
+     "lakes_passing_nothing_on_km2": 594104,
+     "surplus_m3s": 1775,
+     "open_water_evaporation_m3s": 491979,
+     "open_water_evaporation_factor_closing_it": 1.004,
+     "factor": 1.026
+    }
+   },
+   "present_at_the_design_factor": {
+    "land_rain_less_evaporation_m3s": 54250,
+    "routing_runoff_m3s": 99126,
+    "lakes_rain_less_evaporation_m3s": 65405,
+    "seas_loss_m3s": 157982,
+    "delivered_to_the_seas_m3s": 159669,
+    "lakes_km2": 5483258,
+    "lakes_passing_nothing_on_km2": 234229,
+    "surplus_m3s": 1687,
+    "open_water_evaporation_m3s": 450281,
+    "open_water_evaporation_factor_closing_it": 1.004,
+    "factor": 1.077
+   }
+  }
+ },
+ "seas": {
+  "design": {
+   "moscoviense": {
+    "level_above_common_m": 3448.77,
+    "area_km2": 844220,
+    "loses_m3s": 5195,
+    "receives_m3s": 47404,
+    "balance_m3s": 42209
+   },
+   "orientale": {
+    "level_above_common_m": 2341.33,
+    "area_km2": 297889,
+    "loses_m3s": 2783,
+    "receives_m3s": 17677,
+    "balance_m3s": 14894
+   },
+   "smythii_marginis": {
+    "level_above_common_m": 719.95,
+    "area_km2": 599348,
+    "loses_m3s": 2124,
+    "receives_m3s": 30110,
+    "balance_m3s": 27986
+   },
+   "south_pole_aitken": {
+    "level_above_common_m": 0.0,
+    "area_km2": 2410253,
+    "loses_m3s": 53683,
+    "receives_m3s": 53683,
+    "balance_m3s": 0
+   },
+   "humboldtianum": {
+    "level_above_common_m": 0.0,
+    "area_km2": 279470,
+    "loses_m3s": 6512,
+    "receives_m3s": 6512,
+    "balance_m3s": 0
+   },
+   "near_side_main": {
+    "level_above_common_m": -67.02,
+    "area_km2": 3835314,
+    "loses_m3s": 73607,
+    "receives_m3s": 81350,
+    "balance_m3s": 7743
+   },
+   "near_side_south": {
+    "level_above_common_m": -225.36,
+    "area_km2": 731500,
+    "loses_m3s": 13362,
+    "receives_m3s": 13519,
+    "balance_m3s": 157
+   }
+  },
+  "rebalanced": {
+   "moscoviense": {
+    "level_above_common_m": 3448.77,
+    "area_km2": 844220,
+    "loses_m3s": 3765,
+    "receives_m3s": 48044,
+    "balance_m3s": 44279
+   },
+   "orientale": {
+    "level_above_common_m": 2341.33,
+    "area_km2": 297889,
+    "loses_m3s": 2307,
+    "receives_m3s": 17987,
+    "balance_m3s": 15680
+   },
+   "smythii_marginis": {
+    "level_above_common_m": 719.95,
+    "area_km2": 599348,
+    "loses_m3s": 1125,
+    "receives_m3s": 32014,
+    "balance_m3s": 30889
+   },
+   "south_pole_aitken": {
+    "level_above_common_m": 0.0,
+    "area_km2": 2410253,
+    "loses_m3s": 50512,
+    "receives_m3s": 50512,
+    "balance_m3s": 0
+   },
+   "humboldtianum": {
+    "level_above_common_m": 0.0,
+    "area_km2": 279470,
+    "loses_m3s": 6164,
+    "receives_m3s": 6164,
+    "balance_m3s": 0
+   },
+   "near_side_main": {
+    "level_above_common_m": -67.05,
+    "area_km2": 3835261,
+    "loses_m3s": 67500,
+    "receives_m3s": 74864,
+    "balance_m3s": 0,
+    "sends_over_the_neck_m3s": 7365
+   },
+   "near_side_south": {
+    "level_above_common_m": -179.96,
+    "area_km2": 809876,
+    "loses_m3s": 13073,
+    "receives_m3s": 13078,
+    "balance_m3s": 5
+   }
+  }
+ },
+ "seas_share_of_moon": {
+  "design": 0.23721,
+  "rebalanced": 0.23928
+ },
+ "land_share_of_moon": {
+  "design": 0.62841,
+  "rebalanced": 0.58077
+ },
+ "governed": {
+  "moscoviense_surplus_m3s": 44279,
+  "released_m3s": {
+   "south_pole_aitken": 24315,
+   "humboldtianum": 7850,
+   "smythii_marginis": 12113
+  },
+  "arrived_m3s": {
+   "south_pole_aitken": 24315,
+   "humboldtianum": 6164,
+   "smythii_marginis": 11342
+  },
+  "full_seas_pass_on_m3s": {
+   "orientale": 15680,
+   "smythii_marginis": 30889
+  },
+  "held_seas_left_short_m3s": {},
+  "branch_flows_m3s": {
+   "held_branch": [
+    7850.3
+   ],
+   "rest_branch": [
+    12113.1,
+    12113.1,
+    12113.1,
+    12103.3,
+    12103.3
+   ]
+  },
+  "near_side_at_the_common_level": {
+   "loses_m3s": 86445,
+   "own_rivers_m3s": 34609,
+   "receives_m3s": 80436,
+   "main_rivers_m3s": 74897,
+   "south_rivers_m3s": 5539
+  },
+  "seas": {
+   "moscoviense": {
+    "loses_m3s": 3765,
+    "own_rivers_m3s": 48044,
+    "receives_m3s": 48044
+   },
+   "orientale": {
+    "loses_m3s": 2307,
+    "own_rivers_m3s": 17987,
+    "receives_m3s": 17987
+   },
+   "smythii_marginis": {
+    "loses_m3s": 1125,
+    "own_rivers_m3s": 20672,
+    "receives_m3s": 32014
+   },
+   "south_pole_aitken": {
+    "loses_m3s": 50512,
+    "own_rivers_m3s": 26197,
+    "receives_m3s": 50512
+   },
+   "humboldtianum": {
+    "loses_m3s": 6164,
+    "own_rivers_m3s": 0,
+    "receives_m3s": 6164
+   }
+  },
+  "weirs_set_in_settlings": 3,
+  "weir_history": [
+   {
+    "shares_m3s": {
+     "south_pole_aitken": 24315.4,
+     "humboldtianum": 6164.3,
+     "smythii_marginis": 13799.1
+    },
+    "lacking_m3s": {
+     "south_pole_aitken": 0.0,
+     "humboldtianum": 1686.0
+    },
+    "unmet_m3s": {}
+   },
+   {
+    "shares_m3s": {
+     "south_pole_aitken": 24315.4,
+     "humboldtianum": 7850.3,
+     "smythii_marginis": 12113.1
+    },
+    "lacking_m3s": {
+     "south_pole_aitken": 0.0,
+     "humboldtianum": 0.0
+    },
+    "unmet_m3s": {}
+   },
+   {
+    "shares_m3s": {
+     "south_pole_aitken": 24315.4,
+     "humboldtianum": 7850.3,
+     "smythii_marginis": 12113.1
+    },
+    "lacking_m3s": {
+     "south_pole_aitken": 0.0,
+     "humboldtianum": -0.0
+    },
+    "unmet_m3s": {}
+   }
+  ]
+ },
+ "near_side": {
+  "main_over_the_crest": true,
+  "neck_flow_m3s": 7365,
+  "crest_above_common_m": -68.72,
+  "history": [
+   {
+    "main_level_m": -67.04,
+    "south_level_m": -186.6,
+    "neck_flow_m3s": 7397.4,
+    "main_rivers_m3s": 74864.3,
+    "south_rivers_m3s": 5582.5,
+    "main_balance_m3s": -32.9,
+    "south_balance_m3s": 145.3
+   },
+   {
+    "main_level_m": -67.05,
+    "south_level_m": -186.6,
+    "neck_flow_m3s": 7364.6,
+    "main_rivers_m3s": 74864.4,
+    "south_rivers_m3s": 5582.5,
+    "main_balance_m3s": 0.1,
+    "south_balance_m3s": 112.6
+   },
+   {
+    "main_level_m": -67.05,
+    "south_level_m": -186.6,
+    "neck_flow_m3s": 7364.6,
+    "main_rivers_m3s": 74864.4,
+    "south_rivers_m3s": 5708.2,
+    "main_balance_m3s": 0.1,
+    "south_balance_m3s": 112.5
+   },
+   {
+    "main_level_m": -67.05,
+    "south_level_m": -179.96,
+    "neck_flow_m3s": 7364.6,
+    "main_rivers_m3s": 74864.4,
+    "south_rivers_m3s": 5713.2,
+    "main_balance_m3s": 0.1,
+    "south_balance_m3s": 5.0
+   }
+  ],
+  "control": {
+   "main_level_m": -67.01,
+   "south_level_m": -225.34,
+   "neck_flow_m3s": 7630,
+   "design": {
+    "main_level_m": -67.02,
+    "south_level_m": -225.36,
+    "neck_flow_m3s": 7630
+   }
+  },
+  "sills_met": [
+   {
+    "part": "south",
+    "sill_above_common_m": -186.6,
+    "left_over_at_it_m3s": 112.6,
+    "basin_below_the_sill_km2": 6861,
+    "basin_loses_m3s": 126,
+    "lowest_at": {
+     "today": [
+      5.34,
+      302.41
+     ],
+     "settled": [
+      5.47,
+      -58.81
+     ]
+    },
+    "then": "the part's water tried over the sill"
+   }
+  ],
+  "left_out_of_balance_m3s": {
+   "main": 0.1,
+   "south": 5.0
+  },
+  "to_spare_at_the_design_levels_m3s": 889
+ },
+ "works": {
+  "design": {
+   "moscoviense_surplus_m3s": 42209,
+   "released_m3s": {
+    "south_pole_aitken": 26599,
+    "humboldtianum": 5604,
+    "smythii_marginis": 10007
+   },
+   "arrived_m3s": {
+    "south_pole_aitken": 26599,
+    "humboldtianum": 5237,
+    "smythii_marginis": 9988
+   },
+   "full_seas_pass_on_m3s": {
+    "orientale": 14894,
+    "smythii_marginis": 27985
+   }
+  },
+  "rebalanced": {
+   "moscoviense_surplus_m3s": 44279,
+   "released_m3s": {
+    "south_pole_aitken": 24315,
+    "humboldtianum": 7850,
+    "smythii_marginis": 12113
+   },
+   "arrived_m3s": {
+    "south_pole_aitken": 24315,
+    "humboldtianum": 6164,
+    "smythii_marginis": 11342
+   },
+   "full_seas_pass_on_m3s": {
+    "orientale": 15680,
+    "smythii_marginis": 30889
+   }
+  },
+  "branch_flows_m3s": {
+   "humboldtianum_branch": [
+    7850.3
+   ],
+   "smythii_marginis_branch": [
+    12113.1,
+    12113.1,
+    12113.1,
+    12103.3,
+    12103.3
+   ]
+  },
+  "take_outs": [
+   {
+    "kind": "smythii_marginis_branch",
+    "at": {
+     "today": [
+      36.09,
+      137.47
+     ],
+     "settled": [
+      37.4,
+      130.69
+     ]
+    },
+    "takes_m3s": 12113.1,
+    "outer_pass_above_common_m": 3027.9,
+    "stands_full": true,
+    "overflows_besides_m3s": 7795.4,
+    "short_of_standing_full_m3s": 0.0
+   },
+   {
+    "kind": "smythii_marginis_branch",
+    "at": {
+     "today": [
+      33.34,
+      132.03
+     ],
+     "settled": [
+      34.05,
+      125.72
+     ]
+    },
+    "takes_m3s": 12103.3,
+    "outer_pass_above_common_m": 2626.8,
+    "stands_full": true,
+    "overflows_besides_m3s": 0.0,
+    "short_of_standing_full_m3s": 0.0
+   }
+  ]
+ },
+ "lakes": {
+  "design": {
+   "area_km2": 5097103,
+   "share_of_moon": 0.13437,
+   "area_overflowing_km2": 4873879,
+   "area_not_overflowing_km2": 223225,
+   "volume_km3": 4759712,
+   "km2_by_latitude": {
+    "90 to 60": 15932,
+    "60 to 30": 493150,
+    "30 to 0": 1838624,
+    "0 to -30": 2447905,
+    "-30 to -60": 301488,
+    "-60 to -90": 4
+   }
+  },
+  "rebalanced": {
+   "area_km2": 6826149,
+   "share_of_moon": 0.17996,
+   "area_overflowing_km2": 6268281,
+   "area_not_overflowing_km2": 557868,
+   "volume_km3": 6339666,
+   "km2_by_latitude": {
+    "90 to 60": 0,
+    "60 to 30": 861219,
+    "30 to 0": 2191962,
+    "0 to -30": 2938461,
+    "-30 to -60": 833734,
+    "-60 to -90": 772
+   },
+   "shore_cells_not_held": 0,
+   "ground_below_and_joined_km2": 0
+  },
+  "closer": {
+   "lakes_as_bodies": 31613,
+   "bodies_passing_nothing_on": 6094,
+   "largest": [
+    {
+     "passes_water_on": true,
+     "area_km2": 291323,
+     "newly_under_water_km2": 257494,
+     "level_above_common_m": 906,
+     "depth_m": 4217,
+     "deepest_at": {
+      "today": [
+       -31.41,
+       86.47
+      ],
+      "settled": [
+       -35.32,
+       88.23
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 200472,
+     "newly_under_water_km2": 37105,
+     "level_above_common_m": 5027,
+     "depth_m": 4711,
+     "deepest_at": {
+      "today": [
+       7.22,
+       237.97
+      ],
+      "settled": [
+       13.34,
+       -123.38
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 140361,
+     "newly_under_water_km2": 0,
+     "level_above_common_m": 7666,
+     "depth_m": 6704,
+     "deepest_at": {
+      "today": [
+       0.53,
+       203.59
+      ],
+      "settled": [
+       7.14,
+       -158.34
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 93188,
+     "newly_under_water_km2": 80442,
+     "level_above_common_m": 1477,
+     "depth_m": 4421,
+     "deepest_at": {
+      "today": [
+       -36.72,
+       127.16
+      ],
+      "settled": [
+       -36.04,
+       130.24
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 79787,
+     "newly_under_water_km2": 41867,
+     "level_above_common_m": 4960,
+     "depth_m": 5064,
+     "deepest_at": {
+      "today": [
+       25.91,
+       187.78
+      ],
+      "settled": [
+       31.9,
+       -175.75
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 76888,
+     "newly_under_water_km2": 0,
+     "level_above_common_m": 3782,
+     "depth_m": 6071,
+     "deepest_at": {
+      "today": [
+       7.72,
+       140.09
+      ],
+      "settled": [
+       9.55,
+       137.26
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 65269,
+     "newly_under_water_km2": 38913,
+     "level_above_common_m": 2093,
+     "depth_m": 4304,
+     "deepest_at": {
+      "today": [
+       -34.28,
+       147.84
+      ],
+      "settled": [
+       -31.33,
+       149.89
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 64997,
+     "newly_under_water_km2": 32683,
+     "level_above_common_m": 3264,
+     "depth_m": 4643,
+     "deepest_at": {
+      "today": [
+       -2.09,
+       125.28
+      ],
+      "settled": [
+       -1.91,
+       123.67
+      ]
+     }
+    }
+   ],
+   "largest_passing_nothing_on": [
+    {
+     "area_km2": 45846,
+     "newly_under_water_km2": 45436,
+     "level_above_common_m": 667,
+     "depth_m": 3137,
+     "deepest_at": {
+      "today": [
+       -36.28,
+       76.84
+      ],
+      "settled": [
+       -41.04,
+       78.8
+      ]
+     }
+    },
+    {
+     "area_km2": 39084,
+     "newly_under_water_km2": 35171,
+     "level_above_common_m": 3191,
+     "depth_m": 4791,
+     "deepest_at": {
+      "today": [
+       48.91,
+       183.03
+      ],
+      "settled": [
+       54.54,
+       176.52
+      ]
+     }
+    },
+    {
+     "area_km2": 31971,
+     "newly_under_water_km2": 16749,
+     "level_above_common_m": 5234,
+     "depth_m": 5403,
+     "deepest_at": {
+      "today": [
+       22.72,
+       222.16
+      ],
+      "settled": [
+       29.36,
+       -139.2
+      ]
+     }
+    },
+    {
+     "area_km2": 23350,
+     "newly_under_water_km2": 17713,
+     "level_above_common_m": 1379,
+     "depth_m": 2313,
+     "deepest_at": {
+      "today": [
+       -16.28,
+       5.72
+      ],
+      "settled": [
+       -22.18,
+       2.74
+      ]
+     }
+    },
+    {
+     "area_km2": 16842,
+     "newly_under_water_km2": 11423,
+     "level_above_common_m": 1893,
+     "depth_m": 2822,
+     "deepest_at": {
+      "today": [
+       -8.97,
+       162.09
+      ],
+      "settled": [
+       -4.77,
+       160.88
+      ]
+     }
+    },
+    {
+     "area_km2": 14041,
+     "newly_under_water_km2": 7735,
+     "level_above_common_m": 5678,
+     "depth_m": 3178,
+     "deepest_at": {
+      "today": [
+       -14.78,
+       236.78
+      ],
+      "settled": [
+       -8.58,
+       -125.61
+      ]
+     }
+    },
+    {
+     "area_km2": 10521,
+     "newly_under_water_km2": 7957,
+     "level_above_common_m": 1257,
+     "depth_m": 1067,
+     "deepest_at": {
+      "today": [
+       -14.53,
+       1.84
+      ],
+      "settled": [
+       -20.2,
+       -1.14
+      ]
+     }
+    },
+    {
+     "area_km2": 9039,
+     "newly_under_water_km2": 6883,
+     "level_above_common_m": -1018,
+     "depth_m": 554,
+     "deepest_at": {
+      "today": [
+       24.53,
+       94.59
+      ],
+      "settled": [
+       21.12,
+       90.3
+      ]
+     }
+    }
+   ]
+  }
+ },
+ "changed": {
+  "newly_lake_km2": 1866916,
+  "no_longer_lake_km2": 117736,
+  "sea_floor_left_dry_km2": 53,
+  "sea_floor_under_lakes_km2": 0,
+  "ground_newly_under_a_sea_km2": 78376
+ },
+ "water_held": {
+  "near_side_main_km3": {
+   "design": 2776908,
+   "rebalanced": 2776798
+  },
+  "near_side_south_km3": {
+   "design": 223789,
+   "rebalanced": 260817
+  },
+  "lakes_km3": {
+   "design": 4759712,
+   "rebalanced": 6339666
+  },
+  "change_km3": 1616872
+ },
+ "land_and_lakes_send_the_seas_m3s": {
+  "design": 157536,
+  "rebalanced": 144452
+ },
+ "budget_m3s": {
+  "runoff_of_dry_ground": 96160.2,
+  "put_in": 98212.3,
+  "lakes_rain_less_evaporation": 48762.9,
+  "reaches_the_seas": 242663.8,
+  "kept_by_lakes_not_full": 471.6
+ },
+ "budget_gap_m3s": 0.0,
+ "waterways": [
+  {
+   "name": "Hatunmayu",
+   "anchor": "river:-22.9,173.3",
+   "ends_in": "H'Jamo Melaĥa",
+   "fed_by": "the overflow of Hanaqucha over its natural pass",
+   "mouth": {
+    "design_m3s": 30657,
+    "rebalanced_m3s": 27904,
+    "change": -0.0898,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 30657
+   },
+   "head": {
+    "design_m3s": 26599,
+    "rebalanced_m3s": 24315,
+    "under_a_lake": false,
+    "recorded_m3s": 26599
+   },
+   "largest_lakes_on_its_course": [
+    {
+     "passes_water_on": true,
+     "area_km2": 12843,
+     "newly_under_water_km2": 8266,
+     "level_above_common_m": 608,
+     "depth_m": 2807,
+     "deepest_at": {
+      "today": [
+       -20.16,
+       171.97
+      ],
+      "settled": [
+       -15.09,
+       171.53
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 10616,
+     "newly_under_water_km2": 1114,
+     "level_above_common_m": 1702,
+     "depth_m": 3319,
+     "deepest_at": {
+      "today": [
+       -15.16,
+       173.28
+      ],
+      "settled": [
+       -10.01,
+       172.4
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 4603,
+     "newly_under_water_km2": 0,
+     "level_above_common_m": 2675,
+     "depth_m": 2302,
+     "deepest_at": {
+      "today": [
+       -13.84,
+       175.22
+      ],
+      "settled": [
+       -8.56,
+       174.19
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "Ninamuawa",
+   "anchor": "river:47.5,49.7",
+   "ends_in": "Uamoana",
+   "fed_by": "the overflow of Dagat na Katzeh",
+   "mouth": {
+    "design_m3s": 29073,
+    "rebalanced_m3s": 31772,
+    "change": 0.0928,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 29073
+   },
+   "head": {
+    "design_m3s": 27986,
+    "rebalanced_m3s": 30890,
+    "under_a_lake": false,
+    "recorded_m3s": 27986
+   }
+  },
+  {
+   "name": "Paramayu",
+   "anchor": "river:2.3,177.7",
+   "ends_in": "Hanaqucha",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 26018,
+    "rebalanced_m3s": 26411,
+    "change": 0.0151,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 26018
+   },
+   "head": {
+    "design_m3s": 107,
+    "rebalanced_m3s": 0,
+    "under_a_lake": true,
+    "recorded_m3s": 107
+   }
+  },
+  {
+   "name": "Fukagawa",
+   "anchor": "river:21.3,105.0",
+   "ends_in": "Dagat na Katzeh",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 17965,
+    "rebalanced_m3s": 18422,
+    "change": 0.0254,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 17965
+   },
+   "head": {
+    "design_m3s": 136,
+    "rebalanced_m3s": 45,
+    "under_a_lake": true,
+    "recorded_m3s": 136
+   }
+  },
+  {
+   "name": "Mto Kijani",
+   "anchor": "river:15.0,287.7",
+   "ends_in": "Uamoana",
+   "fed_by": "the overflow of Bahari Mashariki",
+   "mouth": {
+    "design_m3s": 17652,
+    "rebalanced_m3s": 16967,
+    "change": -0.0388,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 17652
+   },
+   "head": {
+    "design_m3s": 14894,
+    "rebalanced_m3s": 15680,
+    "under_a_lake": false,
+    "recorded_m3s": 14894
+   }
+  },
+  {
+   "name": "Ilog na Gavoah",
+   "anchor": "river:-13.4,253.1",
+   "ends_in": "Bahari Mashariki",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 15372,
+    "rebalanced_m3s": 15622,
+    "change": 0.0163,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 15372
+   },
+   "head": {
+    "design_m3s": 100,
+    "rebalanced_m3s": 67,
+    "under_a_lake": true,
+    "recorded_m3s": 100
+   }
+  },
+  {
+   "name": "Pukutaymayu",
+   "anchor": "river:-23.0,192.3",
+   "ends_in": "H'Jamo Melaĥa",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 12926,
+    "rebalanced_m3s": 13119,
+    "change": 0.0149,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 12926
+   },
+   "head": {
+    "design_m3s": 111,
+    "rebalanced_m3s": 28,
+    "under_a_lake": true,
+    "recorded_m3s": 111
+   }
+  },
+  {
+   "name": "Niigawa",
+   "anchor": "river:25.8,103.0",
+   "ends_in": "Dagat na Katzeh",
+   "fed_by": "a branch the works cut from Hanaqucha",
+   "mouth": {
+    "design_m3s": 9991,
+    "rebalanced_m3s": 11345,
+    "change": 0.1355,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 9991
+   },
+   "head": {
+    "design_m3s": 10007,
+    "rebalanced_m3s": 12103,
+    "under_a_lake": false,
+    "recorded_m3s": 10007
+   }
+  },
+  {
+   "name": "H'Naharo Longa",
+   "anchor": "river:-5.3,63.0",
+   "ends_in": "Uamoana",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 9565,
+    "rebalanced_m3s": 992,
+    "change": -0.8963,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 9565
+   },
+   "head": {
+    "design_m3s": 112,
+    "rebalanced_m3s": 113,
+    "under_a_lake": true,
+    "recorded_m3s": 112
+   },
+   "largest_lakes_on_its_course": [
+    {
+     "passes_water_on": true,
+     "area_km2": 291323,
+     "newly_under_water_km2": 257494,
+     "level_above_common_m": 906,
+     "depth_m": 4217,
+     "deepest_at": {
+      "today": [
+       -31.41,
+       86.47
+      ],
+      "settled": [
+       -35.32,
+       88.23
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 93188,
+     "newly_under_water_km2": 80442,
+     "level_above_common_m": 1477,
+     "depth_m": 4421,
+     "deepest_at": {
+      "today": [
+       -36.72,
+       127.16
+      ],
+      "settled": [
+       -36.04,
+       130.24
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 47411,
+     "newly_under_water_km2": 12108,
+     "level_above_common_m": 597,
+     "depth_m": 2251,
+     "deepest_at": {
+      "today": [
+       -15.84,
+       66.59
+      ],
+      "settled": [
+       -21.46,
+       66.0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "name": "Pooiriawa",
+   "anchor": "river:12.4,346.0",
+   "ends_in": "Uamoana",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 8436,
+    "rebalanced_m3s": 8656,
+    "change": 0.026,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 8436
+   },
+   "head": {
+    "design_m3s": 119,
+    "rebalanced_m3s": 0,
+    "under_a_lake": true,
+    "recorded_m3s": 119
+   }
+  },
+  {
+   "name": "Rereawa",
+   "anchor": "river:19.9,184.6",
+   "ends_in": "Hanaqucha",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 8248,
+    "rebalanced_m3s": 8114,
+    "change": -0.0162,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 8248
+   },
+   "head": {
+    "design_m3s": 129,
+    "rebalanced_m3s": 129,
+    "under_a_lake": true,
+    "recorded_m3s": 129
+   }
+  },
+  {
+   "name": "Jarykgol",
+   "anchor": "river:3.6,302.2",
+   "ends_in": "Bultengiz",
+   "fed_by": "the spill of Uamoana over its neck",
+   "mouth": {
+    "design_m3s": 7541,
+    "rebalanced_m3s": 7362,
+    "change": -0.0348,
+    "its_sea_has_risen_to_meet_it": true,
+    "recorded_m3s": 7541,
+    "design_where_the_sea_now_meets_it_m3s": 7628
+   },
+   "head": {
+    "design_m3s": 7630,
+    "rebalanced_m3s": 7365,
+    "under_a_lake": false,
+    "recorded_m3s": 7630
+   }
+  },
+  {
+   "name": "Mto Jiwe",
+   "anchor": "river:-45.1,230.0",
+   "ends_in": "H'Jamo Melaĥa",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 5578,
+    "rebalanced_m3s": 5455,
+    "change": -0.0221,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 5578
+   },
+   "head": {
+    "design_m3s": 118,
+    "rebalanced_m3s": 0,
+    "under_a_lake": true,
+    "recorded_m3s": 118
+   }
+  },
+  {
+   "name": "Asif Dahab",
+   "anchor": "river:57.1,111.8",
+   "ends_in": "Juldyztengiz",
+   "fed_by": "a branch the works cut from Hanaqucha",
+   "mouth": {
+    "design_m3s": 5237,
+    "rebalanced_m3s": 6164,
+    "change": 0.177,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 5237
+   },
+   "head": {
+    "design_m3s": 15610,
+    "rebalanced_m3s": 19963,
+    "under_a_lake": true,
+    "recorded_m3s": 15610
+   }
+  },
+  {
+   "name": "Tiareawa",
+   "anchor": "river:16.8,13.5",
+   "ends_in": "Uamoana",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 3676,
+    "rebalanced_m3s": 3633,
+    "change": -0.0118,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 3676
+   },
+   "head": {
+    "design_m3s": 100,
+    "rebalanced_m3s": 0,
+    "under_a_lake": true,
+    "recorded_m3s": 100
+   }
+  },
+  {
+   "name": "Wayramayu",
+   "anchor": "river:18.1,184.8",
+   "ends_in": "Hanaqucha",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 3357,
+    "rebalanced_m3s": 3426,
+    "change": 0.0205,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 3357
+   },
+   "head": {
+    "design_m3s": 125,
+    "rebalanced_m3s": 0,
+    "under_a_lake": true,
+    "recorded_m3s": 125
+   }
+  },
+  {
+   "name": "Puyumayu",
+   "anchor": "river:3.3,156.4",
+   "ends_in": "Hanaqucha",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 2571,
+    "rebalanced_m3s": 2655,
+    "change": 0.0327,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 2571
+   },
+   "head": {
+    "design_m3s": 118,
+    "rebalanced_m3s": 120,
+    "under_a_lake": true,
+    "recorded_m3s": 118
+   }
+  },
+  {
+   "name": "Quyllurmayu",
+   "anchor": "river:8.8,146.9",
+   "ends_in": "Hanaqucha",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 1777,
+    "rebalanced_m3s": 1909,
+    "change": 0.0744,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 1777
+   },
+   "head": {
+    "design_m3s": 133,
+    "rebalanced_m3s": 57,
+    "under_a_lake": true,
+    "recorded_m3s": 133
+   }
+  },
+  {
+   "name": "Mto Jani",
+   "anchor": "river:1.4,302.5",
+   "ends_in": "Bultengiz",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 1575,
+    "rebalanced_m3s": 1552,
+    "change": 0.0428,
+    "its_sea_has_risen_to_meet_it": true,
+    "recorded_m3s": 1575,
+    "design_where_the_sea_now_meets_it_m3s": 1488
+   },
+   "head": {
+    "design_m3s": 146,
+    "rebalanced_m3s": 1,
+    "under_a_lake": true,
+    "recorded_m3s": 146
+   }
+  },
+  {
+   "name": "Mto Pacha",
+   "anchor": "river:-14.1,311.5",
+   "ends_in": "Bultengiz",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 1453,
+    "rebalanced_m3s": 869,
+    "change": 0.0319,
+    "its_sea_has_risen_to_meet_it": true,
+    "recorded_m3s": 1453,
+    "design_where_the_sea_now_meets_it_m3s": 842
+   },
+   "head": {
+    "design_m3s": 106,
+    "rebalanced_m3s": 108,
+    "under_a_lake": true,
+    "recorded_m3s": 106
+   }
+  },
+  {
+   "name": "H'Naharo Atika",
+   "anchor": "river:64.0,107.1",
+   "ends_in": "Juldyztengiz",
+   "fed_by": "headwaters",
+   "mouth": {
+    "design_m3s": 1275,
+    "rebalanced_m3s": 0,
+    "change": -1.0,
+    "its_sea_has_risen_to_meet_it": false,
+    "recorded_m3s": 1275
+   },
+   "head": {
+    "design_m3s": 102,
+    "rebalanced_m3s": 1,
+    "under_a_lake": true,
+    "recorded_m3s": 102
+   },
+   "largest_lakes_on_its_course": [
+    {
+     "passes_water_on": true,
+     "area_km2": 39678,
+     "newly_under_water_km2": 33595,
+     "level_above_common_m": 4165,
+     "depth_m": 2943,
+     "deepest_at": {
+      "today": [
+       45.16,
+       190.84
+      ],
+      "settled": [
+       51.27,
+       -174.13
+      ]
+     }
+    },
+    {
+     "passes_water_on": false,
+     "area_km2": 39084,
+     "newly_under_water_km2": 35171,
+     "level_above_common_m": 3191,
+     "depth_m": 4791,
+     "deepest_at": {
+      "today": [
+       48.91,
+       183.03
+      ],
+      "settled": [
+       54.54,
+       176.52
+      ]
+     }
+    },
+    {
+     "passes_water_on": true,
+     "area_km2": 29694,
+     "newly_under_water_km2": 0,
+     "level_above_common_m": 7269,
+     "depth_m": 5019,
+     "deepest_at": {
+      "today": [
+       19.47,
+       212.84
+      ],
+      "settled": [
+       26.19,
+       -149.05
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "parameters": {
+  "settle_m3s": 1.0,
+  "part_settled_m3s": 20.0,
+  "lakes_listed": 8,
+  "course_lakes_listed": 3
+ },
+ "product": {
+  "path": "/media/projectspace/terluna-research/atlas-round/lake_rule/lake_rule_balance_16ppd.npz",
+  "sha256": "2440571ca80569d60ee174a34f508787cc7018e1a2fca954e746a62ce02d143d"
+ },
+ "seconds": 117
+}
