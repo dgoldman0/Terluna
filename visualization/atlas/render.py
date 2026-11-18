@@ -306,7 +306,28 @@ TURNED_CLIMATES = {
     'A28S_301k_design_l15_snow_s930_settled':
         'the design climate on the final surface, {label}, at sunlight 0.930: the ground at 300.3 K, rain of 1.93 '
         'mm/day over the globe and 2.13 over land, and 57.1% of the land dry (an aridity below 0.65)',
+    # an estimate (climate.gcm.pattern_scaling): its figures are read from the climatology and moisture map drawn
+    'A28D_301k_design_l15_snow_s936_settled':
+        'the design climate on the design surface, an estimate: {label}, at sunlight 0.936, carried by pattern scaling '
+        'from its 301.0 K to the 300.3 K at which the run at 0.930 on the final surface settled, which leaves the ground '
+        'at {ground:.1f} K, rain of {rain:.2f} mm/day over the globe and {rain_land:.2f} over land, and {dry:.1%} of the '
+        'land dry (an aridity below 0.65)',
 }
+
+
+def climate_figures(climatology, moisture=None):
+    """The figures a climate sentence reads when they are not written into it: the ground's mean temperature and the
+    rain over the globe and over the land (cos-latitude weighted) from the climatology, and the dry share of the run's
+    land cells (the four classes below an aridity of 0.65) from its moisture map."""
+    with np.load(climatology) as z:
+        w = np.cos(np.radians(z['lat']))[:, None] * np.ones((1, z['lon'].size))
+        land = z['lsm'] > 0.5
+        out = dict(ground=float((z['ts_k'] * w).sum() / w.sum()), rain=float((z['pr_mm_day'] * w).sum() / w.sum()),
+                   rain_land=float((z['pr_mm_day'] * w * land).sum() / (w * land).sum()), dry=float('nan'))
+    if moisture:
+        m = json.loads(Path(moisture).read_text())
+        out['dry'] = sum(m['shares']['by_class'][c['key']]['share'] for c in m['classes'][:4])
+    return out
 
 
 def turned_note(turn, drained, run, years):
@@ -819,7 +840,8 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
     sea_fig = lambda name, key: [name, f"{seas[key]['share']:.1%} · mean {seas[key]['mean_depth_m']:,} m · "
                                        f"{minus(seas[key]['level_m'])} m"]
     climate = TURNED_CLIMATES[params['climatology']['run']].format(
-        label=f"{params['climatology']['run']}, model years {params['climatology']['years'][0]}–{params['climatology']['years'][-1]}")
+        label=f"{params['climatology']['run']}, model years {params['climatology']['years'][0]}–{params['climatology']['years'][-1]}",
+        **climate_figures(climatology, moisture))
     data = dict(
         share=summary['water_share'], levelText=minus(level0) + ' m', normalStrength=appearance.NORMAL_STRENGTH,
         relief=dict(low=low, highest=highest, lowest=lowest),
