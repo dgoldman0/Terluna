@@ -2,29 +2,31 @@
  "schema": "terluna.research.atlas-round-dryland-rivers/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/dryland_rivers.py": "99a834970d8ad64feecce822e933b2cb92d3c624a8466405fcf5d53877d07c52",
-   "research/studies/atlas_round/final_drainage.py": "9c4fdb233a58891ea22fd82cc570cada09897d2d27d343315a56656b51e5c285",
+   "research/studies/atlas_round/dryland_rivers.py": "4805470fdced58e742d54bb9214c12c7866c439a3742874af7c22a1d642ffeb0",
+   "research/studies/atlas_round/final_drainage.py": "270bdb22585b06318b95596db37d6ffe60b7c44476e9d8575099ee8c20043173",
    "research/studies/atlas_round/river_losses.py": "3847ce4fe1ce6c24307bd458594501d98cec6a7bace4657d4a33541eca8afe1c",
    "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
-   "biosphere/ecology/moisture_map.py": "58f66fc944acdd8124723a701ac467090f287f7029a62fe4874807adb4387d37"
+   "biosphere/ecology/moisture_map.py": "58f66fc944acdd8124723a701ac467090f287f7029a62fe4874807adb4387d37",
+   "research/studies/atlas_round/moisture_final.py": "d9e84e6fda4474f0094e1ccd68c4f8c594e758e04d0b513a86a889fd90d2f4b4",
+   "climate/gcm/pattern_scaling.py": "e5e51450c1fa3ff42dfdb2abe847e09d26172b609789de1d0a348672d96674ed"
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/final_drainage.json": "494e54b73071acc50cde9cfd7a7028c1d5031d597913cf696d84b2b9ba6bc7d8",
-  "research/studies/atlas_round/results/near_side_neck.json": "cf9a1f2ec86f7a9e29f77112e410535a6bca8559469ebca58474476ddd0551ed",
+  "research/studies/atlas_round/results/final_drainage.json": "8c3895d869f4e315f9348e4bda07d4940a86826af411b249c80ec7d41e88f713",
+  "research/studies/atlas_round/results/near_side_neck.json": "077f00e08b94a4f0290e5c8337f6e75bdc7c3d891751933dfb4ccdc22400eaf6",
   "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
-  "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56"
+  "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a"
  },
  "ignored_inputs": {
-  "/media/projectspace/terluna-research/atlas-round/final_drainage/final_routing_closed_budget.npz": "7ea24e8b7f31d32c5b0697c8b09cabf619bf6472219bdb73f69e3584f645c254"
+  "/media/projectspace/terluna-research/atlas-round/final_drainage/final_routing_closed_budget.npz": "45693943cbc25fde11a18749f637b67d3bf3c927073d9e80dd0ac809fa92f28d"
  },
  "aridity": {
-  "run": "A28S_301k_design_l15_snow_s930_settled",
+  "run": "A28D_301k_design_l15_snow_s936_settled",
   "years": [
-   35,
-   49
+   45,
+   59
   ],
-  "window": "final_surface_0.930"
+  "estimate": "scaled300.31K"
  },
  "budget": "closed_budget",
  "settings": {
@@ -42,85 +44,85 @@
    2.0
   ]
  },
- "evidence": "A calculation on products: the closed budget's governed routing of the run at sunlight 0.930 on the final surface (final_drainage.py), the moisture map's aridity of that run carried onto today's ground, the redrawn floor's catchment graph between 1.9 km cells, and river_losses.py's corridor. A route's cut is the deepest its channel needs; tunnels, costs and the wider floodplains are left out. Not validated against any observation.",
+ "evidence": "A calculation on products: the closed budget's governed routing of the design climate: the climate run on the design surface (sunlight 0.936, years 45-59, 301.00 K at the ground) carried by pattern scaling to the 300.31 K of the run at 0.930 on the final surface, an estimate (final_drainage.py), the moisture map's aridity of that climate carried onto today's ground, the redrawn floor's catchment graph between 1.9 km cells, and river_losses.py's corridor. A route's cut is the deepest its channel needs; tunnels, costs and the wider floodplains are left out. Not validated against any observation.",
  "reading_rule": "Each route leaves a source over one pass; its new river runs from where the cut ends to the first river of at least q_joins or its outlet, and dryland_km is the arid and semi-arid land on that stretch. green_km2 is the channel and the belt over that land at the narrow and wide readings, cut short where the river would lose all it carries; loss_m3s what that corridor loses to the air beyond its rain. seas_give_up is that loss on the sea the route's water was heading for, with Moscoviense's weirs fixed (the near-side sea for routes into it, Orientale or Smythii-Marginis; a held sea for routes into it; Moscoviense's shares for routes into Moscoviense), or the whole flow where it ends in a closed lake; seas_fall is how far that lowers each (the near-side sea's parted south part). kind says whether the new river rejoins the river its source's water already runs down (a side channel through dry land) or reaches another river, a sea or a closed lake; routes running back into their own source are dropped, and of passes within 25 km of each other only the best is listed. Places are on today's Moon and the settled turned one.",
  "summary": {
-  "routes": 29,
-  "loops_dropped": 38,
-  "merged_into_a_gap_listed": 10,
+  "routes": 25,
+  "loops_dropped": 57,
+  "merged_into_a_gap_listed": 4,
   "routes_by_kind": {
-   "reaches another river, a sea or a closed lake": 10,
-   "rejoins its source's own river": 19
+   "reaches another river, a sea or a closed lake": 5,
+   "rejoins its source's own river": 20
   },
   "all_routes_green_km2": {
-   "narrow": 2212,
-   "wide": 9205
+   "narrow": 1297,
+   "wide": 5408
   },
   "all_routes_loss_m3s": {
-   "narrow": 48,
-   "wide": 207
+   "narrow": 29,
+   "wide": 116
   },
   "all_routes_seas_give_up_m3s": {
    "narrow": {
-    "near_side": 37.0,
-    "south_pole_aitken": 1.0,
-    "humboldtianum": 10.0
+    "near_side": 9.0,
+    "south_pole_aitken": 2.0,
+    "humboldtianum": 18.0
    },
    "wide": {
-    "near_side": 157.2,
-    "south_pole_aitken": 7.7,
-    "humboldtianum": 42.1
+    "near_side": 37.0,
+    "south_pole_aitken": 10.0,
+    "humboldtianum": 69.0
    }
   },
   "all_routes_seas_fall_m": {
    "narrow": {
-    "near_side": 1.1,
-    "south_pole_aitken": 0.11,
-    "humboldtianum": 2.19
+    "near_side": 0.27,
+    "south_pole_aitken": 0.24,
+    "humboldtianum": 4.1
    },
    "wide": {
-    "near_side": 4.64,
-    "south_pole_aitken": 0.88,
-    "humboldtianum": 9.23
+    "near_side": 1.11,
+    "south_pole_aitken": 1.24,
+    "humboldtianum": 15.57
    }
   },
   "routes_by_source": {
-   "lakes of the large rivers": 28,
+   "lakes of the large rivers": 24,
    "full sea orientale": 1
   },
   "listed_green_km2": {
-   "narrow": 2212,
-   "wide": 9205
+   "narrow": 1297,
+   "wide": 5408
   },
   "listed_loss_m3s": {
-   "narrow": 48,
-   "wide": 207
+   "narrow": 29,
+   "wide": 116
   },
-  "arid_and_semi_arid_land_km2": 11043041,
-  "land_km2": 23312954,
+  "arid_and_semi_arid_land_km2": 11021454,
+  "land_km2": 23387463,
   "falls_m_per_1000_m3s": {
-   "near_side": 29.3,
-   "south_pole_aitken": 114.0,
-   "humboldtianum": 219.2
+   "near_side": 30.0,
+   "south_pole_aitken": 123.2,
+   "humboldtianum": 225.9
   },
   "moscoviense_fixed_shares": {
-   "south_pole_aitken": 0.6664,
-   "humboldtianum": 0.1256,
-   "smythii_marginis": 0.2079
+   "south_pole_aitken": 0.6302,
+   "humboldtianum": 0.1328,
+   "smythii_marginis": 0.2371
   }
  },
  "drylands_by_turned_latitude_km2": {
-  "0-15": 885262,
-  "15-30": 1048002,
-  "30-45": 2339675,
-  "45-60": 2987746,
-  "60-75": 2720318,
-  "75-90": 1062039
+  "0-15": 807966,
+  "15-30": 827564,
+  "30-45": 2222535,
+  "45-60": 3211005,
+  "60-75": 2972124,
+  "75-90": 980260
  },
  "routes": [
   {
    "cut_m": 4.3,
-   "source": "lake +1492 m against the common level, passing 9,987 m3/s",
+   "source": "lake +1492 m against the common level, passing 5,342 m3/s",
    "pass_at": {
     "today": [
      -43.66,
@@ -128,7 +130,7 @@
     ],
     "turned": [
      -37.51,
-     -124.94
+     -125.28
     ]
    },
    "shore_at": {
@@ -138,13 +140,13 @@
     ],
     "turned": [
      -37.45,
-     -124.93
+     -125.28
     ]
    },
    "flow_m3s": 500,
    "new_river_km": 73,
-   "dryland_km": 73,
-   "reaches": "a river of 9,986 m3/s",
+   "dryland_km": 31,
+   "reaches": "a river of 5,342 m3/s",
    "ends_in": "south_pole_aitken",
    "ends_at": {
     "today": [
@@ -152,169 +154,169 @@
      -121.72
     ],
     "turned": [
-     -37.35,
-     -125.5
+     -37.36,
+     -125.84
     ]
    },
    "source_water_ends_in": "south_pole_aitken",
    "green_km2": {
-    "narrow": 44,
-    "wide": 181
+    "narrow": 18,
+    "wide": 77
+   },
+   "loss_m3s": {
+    "narrow": 0,
+    "wide": 2
+   },
+   "green_km2_per_m_of_cut": 4.2,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "south_pole_aitken": 0
+    },
+    "wide": {
+     "south_pole_aitken": 2
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "south_pole_aitken": 0.0
+    },
+    "wide": {
+     "south_pole_aitken": 0.25
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 20.3,
+   "source": "lake +312 m against the common level, passing 15,859 m3/s",
+   "pass_at": {
+    "today": [
+     9.97,
+     -77.53
+    ],
+    "turned": [
+     12.35,
+     -78.14
+    ]
+   },
+   "shore_at": {
+    "today": [
+     9.97,
+     -77.59
+    ],
+    "turned": [
+     12.36,
+     -78.2
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 108,
+   "dryland_km": 108,
+   "reaches": "near_side",
+   "ends_in": "near_side",
+   "ends_at": {
+    "today": [
+     10.78,
+     -75.22
+    ],
+    "turned": [
+     12.9,
+     -75.73
+    ]
+   },
+   "source_water_ends_in": "near_side",
+   "green_km2": {
+    "narrow": 64,
+    "wide": 268
    },
    "loss_m3s": {
     "narrow": 1,
-    "wide": 5
+    "wide": 6
    },
-   "green_km2_per_m_of_cut": 10.2,
+   "green_km2_per_m_of_cut": 3.2,
    "seas_give_up_m3s": {
     "narrow": {
-     "south_pole_aitken": 1
+     "near_side": 1
     },
     "wide": {
-     "south_pole_aitken": 5
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "south_pole_aitken": 0.11
-    },
-    "wide": {
-     "south_pole_aitken": 0.57
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 124.1,
-   "source": "lake +3264 m against the common level, passing 5,770 m3/s",
-   "pass_at": {
-    "today": [
-     4.47,
-     117.72
-    ],
-    "turned": [
-     4.26,
-     116.17
-    ]
-   },
-   "shore_at": {
-    "today": [
-     4.41,
-     117.66
-    ],
-    "turned": [
-     4.19,
-     116.12
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 719,
-   "dryland_km": 456,
-   "reaches": "a river of 13,861 m3/s",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     11.22,
-     110.16
-    ],
-    "turned": [
-     10.04,
-     107.85
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 272,
-    "wide": 1131
-   },
-   "loss_m3s": {
-    "narrow": 6,
-    "wide": 26
-   },
-   "green_km2_per_m_of_cut": 2.2,
-   "seas_give_up_m3s": {
-    "narrow": {
      "near_side": 6
-    },
-    "wide": {
-     "near_side": 26
     }
    },
    "seas_fall_m": {
     "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
      "near_side": 0.18
-    },
-    "wide": {
-     "near_side": 0.76
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 57.1,
-   "source": "lake +1553 m against the common level, passing 1,338 m3/s",
-   "pass_at": {
-    "today": [
-     10.03,
-     106.34
-    ],
-    "turned": [
-     8.41,
-     104.23
-    ]
-   },
-   "shore_at": {
-    "today": [
-     10.09,
-     106.41
-    ],
-    "turned": [
-     8.48,
-     104.28
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 308,
-   "dryland_km": 193,
-   "reaches": "smythii_marginis",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     8.34,
-     100.78
-    ],
-    "turned": [
-     6.09,
-     98.93
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 115,
-    "wide": 479
-   },
-   "loss_m3s": {
-    "narrow": 2,
-    "wide": 9
-   },
-   "green_km2_per_m_of_cut": 2.0,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 2
-    },
-    "wide": {
-     "near_side": 9
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.06
-    },
-    "wide": {
-     "near_side": 0.26
     }
    },
    "kind": "reaches another river, a sea or a closed lake"
+  },
+  {
+   "cut_m": 19.2,
+   "source": "lake +726 m against the common level, passing 5,337 m3/s",
+   "pass_at": {
+    "today": [
+     51.91,
+     120.47
+    ],
+    "turned": [
+     51.02,
+     110.24
+    ]
+   },
+   "shore_at": {
+    "today": [
+     51.97,
+     120.53
+    ],
+    "turned": [
+     51.09,
+     110.28
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 90,
+   "dryland_km": 83,
+   "reaches": "a river of 5,316 m3/s",
+   "ends_in": "humboldtianum",
+   "ends_at": {
+    "today": [
+     52.41,
+     117.91
+    ],
+    "turned": [
+     51.22,
+     107.63
+    ]
+   },
+   "source_water_ends_in": "humboldtianum",
+   "green_km2": {
+    "narrow": 49,
+    "wide": 206
+   },
+   "loss_m3s": {
+    "narrow": 1,
+    "wide": 6
+   },
+   "green_km2_per_m_of_cut": 2.6,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 1
+    },
+    "wide": {
+     "humboldtianum": 6
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.23
+    },
+    "wide": {
+     "humboldtianum": 1.36
+    }
+   },
+   "kind": "rejoins its source's own river"
   },
   {
    "cut_m": 93.8,
@@ -325,8 +327,8 @@
      -84.22
     ],
     "turned": [
-     -14.1,
-     -87.0
+     -13.72,
+     -87.69
     ]
    },
    "shore_at": {
@@ -335,14 +337,14 @@
      -84.28
     ],
     "turned": [
-     -14.03,
-     -87.05
+     -13.66,
+     -87.74
     ]
    },
    "flow_m3s": 500,
    "new_river_km": 369,
    "dryland_km": 278,
-   "reaches": "a river of 14,252 m3/s",
+   "reaches": "a river of 14,903 m3/s",
    "ends_in": "near_side",
    "ends_at": {
     "today": [
@@ -350,8 +352,8 @@
      -84.53
     ],
     "turned": [
-     -5.62,
-     -86.33
+     -5.24,
+     -87.09
     ]
    },
    "source_water_ends_in": "orientale",
@@ -360,406 +362,76 @@
     "wide": 690
    },
    "loss_m3s": {
-    "narrow": 4,
-    "wide": 15
+    "narrow": 3,
+    "wide": 14
    },
    "green_km2_per_m_of_cut": 1.8,
    "seas_give_up_m3s": {
     "narrow": {
-     "near_side": 4
+     "near_side": 3
     },
     "wide": {
-     "near_side": 15
+     "near_side": 14
     }
    },
    "seas_fall_m": {
     "narrow": {
-     "near_side": 0.12
+     "near_side": 0.09
     },
     "wide": {
-     "near_side": 0.44
+     "near_side": 0.42
     }
    },
    "kind": "rejoins its source's own river"
   },
   {
-   "cut_m": 215.0,
-   "source": "lake +2672 m against the common level, passing 1,471 m3/s",
+   "cut_m": 53.2,
+   "source": "lake +1270 m against the common level, passing 2,340 m3/s",
    "pass_at": {
     "today": [
-     15.47,
-     124.53
+     -34.97,
+     112.72
     ],
     "turned": [
-     16.0,
-     121.56
+     -35.99,
+     115.61
     ]
    },
    "shore_at": {
     "today": [
-     15.41,
-     124.53
+     -35.03,
+     112.66
     ],
     "turned": [
-     15.94,
-     121.57
+     -36.06,
+     115.56
     ]
    },
    "flow_m3s": 500,
-   "new_river_km": 635,
-   "dryland_km": 556,
-   "reaches": "a river of 3,657 m3/s",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     17.84,
-     112.84
-    ],
-    "turned": [
-     16.94,
-     109.66
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 331,
-    "wide": 1379
-   },
-   "loss_m3s": {
-    "narrow": 7,
-    "wide": 28
-   },
-   "green_km2_per_m_of_cut": 1.5,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 7
-    },
-    "wide": {
-     "near_side": 28
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.2
-    },
-    "wide": {
-     "near_side": 0.82
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 48.0,
-   "source": "lake +1504 m against the common level, passing 13,890 m3/s",
-   "pass_at": {
-    "today": [
-     8.09,
-     110.41
-    ],
-    "turned": [
-     6.97,
-     108.48
-    ]
-   },
-   "shore_at": {
-    "today": [
-     8.03,
-     110.41
-    ],
-    "turned": [
-     6.91,
-     108.49
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 122,
-   "dryland_km": 117,
-   "reaches": "a river of 13,861 m3/s",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     11.22,
-     110.16
-    ],
-    "turned": [
-     10.04,
-     107.85
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 70,
-    "wide": 290
-   },
-   "loss_m3s": {
-    "narrow": 1,
-    "wide": 6
-   },
-   "green_km2_per_m_of_cut": 1.5,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 1
-    },
-    "wide": {
-     "near_side": 6
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.03
-    },
-    "wide": {
-     "near_side": 0.18
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 201.0,
-   "source": "lake +1616 m against the common level, passing 10,777 m3/s",
-   "pass_at": {
-    "today": [
-     36.97,
-     115.34
-    ],
-    "turned": [
-     36.19,
-     109.18
-    ]
-   },
-   "shore_at": {
-    "today": [
-     36.91,
-     115.28
-    ],
-    "turned": [
-     36.12,
-     109.13
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 970,
-   "dryland_km": 483,
-   "reaches": "a river of 6,330 m3/s",
-   "ends_in": "humboldtianum",
-   "ends_at": {
-    "today": [
-     54.97,
-     113.84
-    ],
-    "turned": [
-     53.73,
-     103.24
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 288,
-    "wide": 1198
-   },
-   "loss_m3s": {
-    "narrow": 8,
-    "wide": 33
-   },
-   "green_km2_per_m_of_cut": 1.4,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "humboldtianum": 8
-    },
-    "wide": {
-     "humboldtianum": 33
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "humboldtianum": 1.75
-    },
-    "wide": {
-     "humboldtianum": 7.23
-    }
-   },
-   "kind": "reaches another river, a sea or a closed lake"
-  },
-  {
-   "cut_m": 79.5,
-   "source": "lake +1220 m against the common level, passing 1,369 m3/s",
-   "pass_at": {
-    "today": [
-     -20.03,
-     -3.66
-    ],
-    "turned": [
-     -25.84,
-     -6.31
-    ]
-   },
-   "shore_at": {
-    "today": [
-     -19.97,
-     -3.66
-    ],
-    "turned": [
-     -25.77,
-     -6.3
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 133,
-   "dryland_km": 133,
-   "reaches": "near_side",
+   "new_river_km": 381,
+   "dryland_km": 98,
+   "reaches": "a river of 2,360 m3/s",
    "ends_in": "near_side",
    "ends_at": {
     "today": [
-     -19.47,
-     -6.72
+     -27.28,
+     113.28
     ],
     "turned": [
-     -25.06,
-     -9.44
+     -28.31,
+     114.94
     ]
    },
    "source_water_ends_in": "near_side",
    "green_km2": {
-    "narrow": 79,
-    "wide": 330
-   },
-   "loss_m3s": {
-    "narrow": 2,
-    "wide": 10
-   },
-   "green_km2_per_m_of_cut": 1.0,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 2
-    },
-    "wide": {
-     "near_side": 10
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.06
-    },
-    "wide": {
-     "near_side": 0.29
-    }
-   },
-   "kind": "reaches another river, a sea or a closed lake"
-  },
-  {
-   "cut_m": 54.1,
-   "source": "lake +488 m against the common level, passing 1,367 m3/s",
-   "pass_at": {
-    "today": [
-     -18.66,
-     -4.16
-    ],
-    "turned": [
-     -24.43,
-     -6.72
-    ]
-   },
-   "shore_at": {
-    "today": [
-     -18.66,
-     -4.09
-    ],
-    "turned": [
-     -24.44,
-     -6.65
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 81,
-   "dryland_km": 81,
-   "reaches": "a river of 1,365 m3/s",
-   "ends_in": "near_side",
-   "ends_at": {
-    "today": [
-     -17.41,
-     -4.91
-    ],
-    "turned": [
-     -23.13,
-     -7.39
-    ]
-   },
-   "source_water_ends_in": "near_side",
-   "green_km2": {
-    "narrow": 48,
-    "wide": 201
-   },
-   "loss_m3s": {
-    "narrow": 1,
-    "wide": 6
-   },
-   "green_km2_per_m_of_cut": 0.9,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 1
-    },
-    "wide": {
-     "near_side": 6
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.03
-    },
-    "wide": {
-     "near_side": 0.18
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 87.1,
-   "source": "lake +3370 m against the common level, passing 1,532 m3/s",
-   "pass_at": {
-    "today": [
-     10.28,
-     127.78
-    ],
-    "turned": [
-     11.24,
-     125.45
-    ]
-   },
-   "shore_at": {
-    "today": [
-     10.22,
-     127.72
-    ],
-    "turned": [
-     11.17,
-     125.4
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 144,
-   "dryland_km": 95,
-   "reaches": "a river of 1,520 m3/s",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     12.09,
-     126.97
-    ],
-    "turned": [
-     12.94,
-     124.42
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 57,
-    "wide": 236
+    "narrow": 58,
+    "wide": 243
    },
    "loss_m3s": {
     "narrow": 1,
     "wide": 4
    },
-   "green_km2_per_m_of_cut": 0.7,
+   "green_km2_per_m_of_cut": 1.1,
    "seas_give_up_m3s": {
     "narrow": {
      "near_side": 1
@@ -776,254 +448,56 @@
      "near_side": 0.12
     }
    },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 155.0,
-   "source": "lake +1741 m against the common level, passing 13,898 m3/s",
-   "pass_at": {
-    "today": [
-     7.97,
-     111.53
-    ],
-    "turned": [
-     6.98,
-     109.61
-    ]
-   },
-   "shore_at": {
-    "today": [
-     7.91,
-     111.53
-    ],
-    "turned": [
-     6.92,
-     109.62
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 151,
-   "dryland_km": 146,
-   "reaches": "a river of 13,861 m3/s",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     11.22,
-     110.16
-    ],
-    "turned": [
-     10.04,
-     107.85
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 87,
-    "wide": 362
-   },
-   "loss_m3s": {
-    "narrow": 2,
-    "wide": 7
-   },
-   "green_km2_per_m_of_cut": 0.6,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 2
-    },
-    "wide": {
-     "near_side": 7
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.06
-    },
-    "wide": {
-     "near_side": 0.2
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 222.8,
-   "source": "lake +1413 m against the common level, passing 15,118 m3/s",
-   "pass_at": {
-    "today": [
-     13.09,
-     108.91
-    ],
-    "turned": [
-     11.76,
-     106.38
-    ]
-   },
-   "shore_at": {
-    "today": [
-     13.03,
-     108.97
-    ],
-    "turned": [
-     11.7,
-     106.45
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 172,
-   "dryland_km": 132,
-   "reaches": "a river of 15,092 m3/s",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     16.16,
-     110.22
-    ],
-    "turned": [
-     14.95,
-     107.29
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 79,
-    "wide": 327
-   },
-   "loss_m3s": {
-    "narrow": 1,
-    "wide": 6
-   },
-   "green_km2_per_m_of_cut": 0.4,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 1
-    },
-    "wide": {
-     "near_side": 6
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.03
-    },
-    "wide": {
-     "near_side": 0.18
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 240.3,
-   "source": "lake +1090 m against the common level, passing 4,642 m3/s",
-   "pass_at": {
-    "today": [
-     -42.59,
-     108.72
-    ],
-    "turned": [
-     -43.48,
-     114.18
-    ]
-   },
-   "shore_at": {
-    "today": [
-     -42.53,
-     108.78
-    ],
-    "turned": [
-     -43.41,
-     114.22
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 120,
-   "dryland_km": 106,
-   "reaches": "a river of 4,652 m3/s",
-   "ends_in": "near_side",
-   "ends_at": {
-    "today": [
-     -43.28,
-     110.16
-    ],
-    "turned": [
-     -43.98,
-     115.77
-    ]
-   },
-   "source_water_ends_in": "near_side",
-   "green_km2": {
-    "narrow": 63,
-    "wide": 263
-   },
-   "loss_m3s": {
-    "narrow": 2,
-    "wide": 6
-   },
-   "green_km2_per_m_of_cut": 0.3,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 2
-    },
-    "wide": {
-     "near_side": 6
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.06
-    },
-    "wide": {
-     "near_side": 0.18
-    }
-   },
    "kind": "reaches another river, a sea or a closed lake"
   },
   {
-   "cut_m": 249.8,
-   "source": "lake +1484 m against the common level, passing 6,596 m3/s",
+   "cut_m": 84.1,
+   "source": "lake +985 m against the common level, passing 5,353 m3/s",
    "pass_at": {
     "today": [
-     43.84,
-     131.91
+     51.16,
+     121.59
     ],
     "turned": [
-     44.98,
-     124.14
+     50.41,
+     111.54
     ]
    },
    "shore_at": {
     "today": [
-     43.78,
-     131.91
+     51.16,
+     121.66
     ],
     "turned": [
-     44.92,
-     124.16
+     50.42,
+     111.6
     ]
    },
    "flow_m3s": 500,
-   "new_river_km": 177,
-   "dryland_km": 142,
-   "reaches": "a river of 6,545 m3/s",
+   "new_river_km": 133,
+   "dryland_km": 126,
+   "reaches": "a river of 5,316 m3/s",
    "ends_in": "humboldtianum",
    "ends_at": {
     "today": [
-     48.91,
-     130.66
+     52.41,
+     117.91
     ],
     "turned": [
-     49.81,
-     121.57
+     51.22,
+     107.63
     ]
    },
    "source_water_ends_in": "humboldtianum",
    "green_km2": {
-    "narrow": 85,
-    "wide": 352
+    "narrow": 75,
+    "wide": 313
    },
    "loss_m3s": {
     "narrow": 2,
     "wide": 9
    },
-   "green_km2_per_m_of_cut": 0.3,
+   "green_km2_per_m_of_cut": 0.9,
    "seas_give_up_m3s": {
     "narrow": {
      "humboldtianum": 2
@@ -1034,400 +508,62 @@
    },
    "seas_fall_m": {
     "narrow": {
-     "humboldtianum": 0.44
+     "humboldtianum": 0.45
     },
     "wide": {
-     "humboldtianum": 1.97
+     "humboldtianum": 2.03
     }
    },
    "kind": "rejoins its source's own river"
   },
   {
-   "cut_m": 91.1,
-   "source": "lake +1553 m against the common level, passing 1,315 m3/s",
+   "cut_m": 70.5,
+   "source": "lake +1540 m against the common level, passing 10,004 m3/s",
    "pass_at": {
     "today": [
-     12.97,
-     106.78
+     28.91,
+     105.78
     ],
     "turned": [
-     11.38,
-     104.3
+     26.64,
+     100.6
     ]
    },
    "shore_at": {
     "today": [
-     12.91,
-     106.78
+     28.97,
+     105.78
     ],
     "turned": [
-     11.32,
-     104.31
+     26.7,
+     100.59
     ]
    },
    "flow_m3s": 500,
-   "new_river_km": 283,
-   "dryland_km": 41,
+   "new_river_km": 126,
+   "dryland_km": 102,
    "reaches": "smythii_marginis",
    "ends_in": "smythii_marginis",
    "ends_at": {
     "today": [
-     17.22,
-     104.53
+     26.34,
+     105.16
     ],
     "turned": [
-     15.33,
-     101.56
+     24.03,
+     100.34
     ]
    },
    "source_water_ends_in": "smythii_marginis",
    "green_km2": {
-    "narrow": 24,
-    "wide": 102
-   },
-   "loss_m3s": {
-    "narrow": 0,
-    "wide": 2
-   },
-   "green_km2_per_m_of_cut": 0.3,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 0
-    },
-    "wide": {
-     "near_side": 2
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.0
-    },
-    "wide": {
-     "near_side": 0.06
-    }
-   },
-   "kind": "reaches another river, a sea or a closed lake"
-  },
-  {
-   "cut_m": 158.2,
-   "source": "lake +2772 m against the common level, passing 1,522 m3/s",
-   "pass_at": {
-    "today": [
-     11.53,
-     127.22
-    ],
-    "turned": [
-     12.42,
-     124.74
-    ]
-   },
-   "shore_at": {
-    "today": [
-     11.47,
-     127.16
-    ],
-    "turned": [
-     12.35,
-     124.68
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 80,
-   "dryland_km": 80,
-   "reaches": "a river of 1,520 m3/s",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     12.09,
-     126.97
-    ],
-    "turned": [
-     12.94,
-     124.42
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 48,
-    "wide": 198
-   },
-   "loss_m3s": {
-    "narrow": 1,
-    "wide": 4
-   },
-   "green_km2_per_m_of_cut": 0.3,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 1
-    },
-    "wide": {
-     "near_side": 4
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.03
-    },
-    "wide": {
-     "near_side": 0.12
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 144.8,
-   "source": "lake +3364 m against the common level, passing 1,524 m3/s",
-   "pass_at": {
-    "today": [
-     10.66,
-     125.72
-    ],
-    "turned": [
-     11.37,
-     123.35
-    ]
-   },
-   "shore_at": {
-    "today": [
-     10.59,
-     125.72
-    ],
-    "turned": [
-     11.3,
-     123.36
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 68,
-   "dryland_km": 62,
-   "reaches": "a river of 1,508 m3/s",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     12.47,
-     125.59
-    ],
-    "turned": [
-     13.15,
-     123.0
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 37,
-    "wide": 154
-   },
-   "loss_m3s": {
-    "narrow": 1,
-    "wide": 3
-   },
-   "green_km2_per_m_of_cut": 0.3,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 1
-    },
-    "wide": {
-     "near_side": 3
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.03
-    },
-    "wide": {
-     "near_side": 0.09
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 138.5,
-   "source": "lake +2672 m against the common level, passing 1,404 m3/s",
-   "pass_at": {
-    "today": [
-     18.47,
-     126.22
-    ],
-    "turned": [
-     19.18,
-     122.84
-    ]
-   },
-   "shore_at": {
-    "today": [
-     18.53,
-     126.28
-    ],
-    "turned": [
-     19.25,
-     122.89
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 63,
-   "dryland_km": 39,
-   "reaches": "a river of 3,476 m3/s",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     19.09,
-     124.72
-    ],
-    "turned": [
-     19.62,
-     121.26
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 23,
-    "wide": 97
-   },
-   "loss_m3s": {
-    "narrow": 0,
-    "wide": 2
-   },
-   "green_km2_per_m_of_cut": 0.2,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 0
-    },
-    "wide": {
-     "near_side": 2
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.0
-    },
-    "wide": {
-     "near_side": 0.06
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 135.7,
-   "source": "lake +4448 m against the common level, passing 11,647 m3/s",
-   "pass_at": {
-    "today": [
-     -9.53,
-     -178.47
-    ],
-    "turned": [
-     -3.34,
-     -179.12
-    ]
-   },
-   "shore_at": {
-    "today": [
-     -9.53,
-     -178.41
-    ],
-    "turned": [
-     -3.34,
-     -179.06
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 144,
-   "dryland_km": 41,
-   "reaches": "moscoviense",
-   "ends_in": "moscoviense",
-   "ends_at": {
-    "today": [
-     -8.84,
-     178.28
-    ],
-    "turned": [
-     -2.85,
-     177.63
-    ]
-   },
-   "source_water_ends_in": "moscoviense",
-   "green_km2": {
-    "narrow": 24,
-    "wide": 102
-   },
-   "loss_m3s": {
-    "narrow": 0,
-    "wide": 1
-   },
-   "green_km2_per_m_of_cut": 0.2,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 0.0,
-     "south_pole_aitken": 0.0,
-     "humboldtianum": 0.0
-    },
-    "wide": {
-     "near_side": 0.2,
-     "south_pole_aitken": 0.7,
-     "humboldtianum": 0.1
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.0,
-     "south_pole_aitken": 0.0,
-     "humboldtianum": 0.0
-    },
-    "wide": {
-     "near_side": 0.01,
-     "south_pole_aitken": 0.08,
-     "humboldtianum": 0.03
-    }
-   },
-   "kind": "reaches another river, a sea or a closed lake"
-  },
-  {
-   "cut_m": 229.8,
-   "source": "lake +374 m against the common level, passing 1,348 m3/s",
-   "pass_at": {
-    "today": [
-     19.97,
-     -78.78
-    ],
-    "turned": [
-     21.98,
-     -77.23
-    ]
-   },
-   "shore_at": {
-    "today": [
-     19.97,
-     -78.84
-    ],
-    "turned": [
-     21.98,
-     -77.29
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 604,
-   "dryland_km": 78,
-   "reaches": "near_side",
-   "ends_in": "near_side",
-   "ends_at": {
-    "today": [
-     31.28,
-     -75.91
-    ],
-    "turned": [
-     32.85,
-     -72.66
-    ]
-   },
-   "source_water_ends_in": "near_side",
-   "green_km2": {
-    "narrow": 47,
-    "wide": 194
+    "narrow": 61,
+    "wide": 253
    },
    "loss_m3s": {
     "narrow": 1,
     "wide": 5
    },
-   "green_km2_per_m_of_cut": 0.2,
+   "green_km2_per_m_of_cut": 0.9,
    "seas_give_up_m3s": {
     "narrow": {
      "near_side": 1
@@ -1447,44 +583,638 @@
    "kind": "reaches another river, a sea or a closed lake"
   },
   {
-   "cut_m": 121.0,
-   "source": "lake +20 m against the common level, passing 1,327 m3/s",
+   "cut_m": 150.4,
+   "source": "lake +4165 m against the common level, passing 1,663 m3/s",
    "pass_at": {
     "today": [
-     17.34,
-     -76.41
+     47.78,
+     -173.78
     ],
     "turned": [
-     19.09,
-     -75.19
+     53.63,
+     -179.69
     ]
    },
    "shore_at": {
     "today": [
-     17.34,
-     -76.47
+     47.72,
+     -173.72
     ],
     "turned": [
-     19.1,
-     -75.26
+     53.57,
+     -179.61
     ]
    },
    "flow_m3s": 500,
-   "new_river_km": 49,
-   "dryland_km": 49,
-   "reaches": "near_side",
+   "new_river_km": 208,
+   "dryland_km": 183,
+   "reaches": "a river of 1,614 m3/s",
+   "ends_in": "humboldtianum",
+   "ends_at": {
+    "today": [
+     49.97,
+     -177.22
+    ],
+    "turned": [
+     55.58,
+     176.05
+    ]
+   },
+   "source_water_ends_in": "humboldtianum",
+   "green_km2": {
+    "narrow": 109,
+    "wide": 454
+   },
+   "loss_m3s": {
+    "narrow": 3,
+    "wide": 11
+   },
+   "green_km2_per_m_of_cut": 0.7,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 3
+    },
+    "wide": {
+     "humboldtianum": 11
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.68
+    },
+    "wide": {
+     "humboldtianum": 2.48
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 119.0,
+   "source": "lake +4643 m against the common level, passing 3,600 m3/s",
+   "pass_at": {
+    "today": [
+     -23.78,
+     -134.72
+    ],
+    "turned": [
+     -17.19,
+     -137.06
+    ]
+   },
+   "shore_at": {
+    "today": [
+     -23.84,
+     -134.78
+    ],
+    "turned": [
+     -17.25,
+     -137.12
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 189,
+   "dryland_km": 111,
+   "reaches": "a river of 3,678 m3/s",
+   "ends_in": "south_pole_aitken",
+   "ends_at": {
+    "today": [
+     -26.34,
+     -132.72
+    ],
+    "turned": [
+     -19.8,
+     -135.22
+    ]
+   },
+   "source_water_ends_in": "south_pole_aitken",
+   "green_km2": {
+    "narrow": 66,
+    "wide": 275
+   },
+   "loss_m3s": {
+    "narrow": 1,
+    "wide": 5
+   },
+   "green_km2_per_m_of_cut": 0.6,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "south_pole_aitken": 1
+    },
+    "wide": {
+     "south_pole_aitken": 5
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "south_pole_aitken": 0.12
+    },
+    "wide": {
+     "south_pole_aitken": 0.62
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 195.3,
+   "source": "lake +1294 m against the common level, passing 5,408 m3/s",
+   "pass_at": {
+    "today": [
+     53.78,
+     125.47
+    ],
+    "turned": [
+     53.44,
+     114.49
+    ]
+   },
+   "shore_at": {
+    "today": [
+     53.72,
+     125.53
+    ],
+    "turned": [
+     53.39,
+     114.57
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 449,
+   "dryland_km": 172,
+   "reaches": "a river of 5,267 m3/s",
+   "ends_in": "humboldtianum",
+   "ends_at": {
+    "today": [
+     56.34,
+     115.28
+    ],
+    "turned": [
+     54.79,
+     103.87
+    ]
+   },
+   "source_water_ends_in": "humboldtianum",
+   "green_km2": {
+    "narrow": 103,
+    "wide": 427
+   },
+   "loss_m3s": {
+    "narrow": 3,
+    "wide": 12
+   },
+   "green_km2_per_m_of_cut": 0.5,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 3
+    },
+    "wide": {
+     "humboldtianum": 12
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.68
+    },
+    "wide": {
+     "humboldtianum": 2.71
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 35.9,
+   "source": "lake +2168 m against the common level, passing 10,202 m3/s",
+   "pass_at": {
+    "today": [
+     26.53,
+     121.59
+    ],
+    "turned": [
+     26.08,
+     116.43
+    ]
+   },
+   "shore_at": {
+    "today": [
+     26.47,
+     121.66
+    ],
+    "turned": [
+     26.02,
+     116.5
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 205,
+   "dryland_km": 30,
+   "reaches": "a river of 10,154 m3/s",
+   "ends_in": "smythii_marginis",
+   "ends_at": {
+    "today": [
+     31.03,
+     120.53
+    ],
+    "turned": [
+     30.41,
+     114.7
+    ]
+   },
+   "source_water_ends_in": "smythii_marginis",
+   "green_km2": {
+    "narrow": 18,
+    "wide": 74
+   },
+   "loss_m3s": {
+    "narrow": 0,
+    "wide": 1
+   },
+   "green_km2_per_m_of_cut": 0.5,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 0
+    },
+    "wide": {
+     "near_side": 1
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.0
+    },
+    "wide": {
+     "near_side": 0.03
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 190.6,
+   "source": "lake +1405 m against the common level, passing 1,385 m3/s",
+   "pass_at": {
+    "today": [
+     69.16,
+     142.41
+    ],
+    "turned": [
+     70.29,
+     122.52
+    ]
+   },
+   "shore_at": {
+    "today": [
+     69.09,
+     142.47
+    ],
+    "turned": [
+     70.24,
+     122.65
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 129,
+   "dryland_km": 119,
+   "reaches": "a river of 1,381 m3/s",
+   "ends_in": "humboldtianum",
+   "ends_at": {
+    "today": [
+     68.78,
+     140.03
+    ],
+    "turned": [
+     69.66,
+     120.53
+    ]
+   },
+   "source_water_ends_in": "humboldtianum",
+   "green_km2": {
+    "narrow": 71,
+    "wide": 295
+   },
+   "loss_m3s": {
+    "narrow": 1,
+    "wide": 4
+   },
+   "green_km2_per_m_of_cut": 0.4,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 1
+    },
+    "wide": {
+     "humboldtianum": 4
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.23
+    },
+    "wide": {
+     "humboldtianum": 0.9
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 249.8,
+   "source": "lake +1484 m against the common level, passing 5,536 m3/s",
+   "pass_at": {
+    "today": [
+     43.84,
+     131.91
+    ],
+    "turned": [
+     44.41,
+     123.55
+    ]
+   },
+   "shore_at": {
+    "today": [
+     43.78,
+     131.91
+    ],
+    "turned": [
+     44.35,
+     123.56
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 177,
+   "dryland_km": 167,
+   "reaches": "a river of 5,483 m3/s",
+   "ends_in": "humboldtianum",
+   "ends_at": {
+    "today": [
+     48.91,
+     130.66
+    ],
+    "turned": [
+     49.26,
+     121.05
+    ]
+   },
+   "source_water_ends_in": "humboldtianum",
+   "green_km2": {
+    "narrow": 100,
+    "wide": 414
+   },
+   "loss_m3s": {
+    "narrow": 2,
+    "wide": 10
+   },
+   "green_km2_per_m_of_cut": 0.4,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 2
+    },
+    "wide": {
+     "humboldtianum": 10
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.45
+    },
+    "wide": {
+     "humboldtianum": 2.26
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 66.4,
+   "source": "lake +192 m against the common level, passing 29,178 m3/s",
+   "pass_at": {
+    "today": [
+     43.53,
+     57.97
+    ],
+    "turned": [
+     37.34,
+     53.88
+    ]
+   },
+   "shore_at": {
+    "today": [
+     43.47,
+     57.97
+    ],
+    "turned": [
+     37.28,
+     53.88
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 57,
+   "dryland_km": 48,
+   "reaches": "a river of 29,161 m3/s",
    "ends_in": "near_side",
    "ends_at": {
     "today": [
-     15.84,
-     -75.53
+     43.91,
+     58.84
     ],
     "turned": [
-     17.5,
-     -74.51
+     37.76,
+     54.64
     ]
    },
    "source_water_ends_in": "near_side",
+   "green_km2": {
+    "narrow": 29,
+    "wide": 119
+   },
+   "loss_m3s": {
+    "narrow": 1,
+    "wide": 3
+   },
+   "green_km2_per_m_of_cut": 0.4,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "near_side": 1
+    },
+    "wide": {
+     "near_side": 3
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "near_side": 0.03
+    },
+    "wide": {
+     "near_side": 0.09
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 54.3,
+   "source": "lake +2927 m against the common level, passing 1,476 m3/s",
+   "pass_at": {
+    "today": [
+     64.09,
+     175.09
+    ],
+    "turned": [
+     68.94,
+     162.45
+    ]
+   },
+   "shore_at": {
+    "today": [
+     64.09,
+     175.16
+    ],
+    "turned": [
+     68.95,
+     162.52
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 87,
+   "dryland_km": 32,
+   "reaches": "a river of 1,472 m3/s",
+   "ends_in": "humboldtianum",
+   "ends_at": {
+    "today": [
+     65.16,
+     173.91
+    ],
+    "turned": [
+     69.87,
+     160.4
+    ]
+   },
+   "source_water_ends_in": "humboldtianum",
+   "green_km2": {
+    "narrow": 19,
+    "wide": 79
+   },
+   "loss_m3s": {
+    "narrow": 0,
+    "wide": 1
+   },
+   "green_km2_per_m_of_cut": 0.3,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 0
+    },
+    "wide": {
+     "humboldtianum": 1
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.0
+    },
+    "wide": {
+     "humboldtianum": 0.23
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 127.8,
+   "source": "lake +2979 m against the common level, passing 1,499 m3/s",
+   "pass_at": {
+    "today": [
+     61.91,
+     178.53
+    ],
+    "turned": [
+     67.09,
+     167.65
+    ]
+   },
+   "shore_at": {
+    "today": [
+     61.97,
+     178.53
+    ],
+    "turned": [
+     67.15,
+     167.62
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 47,
+   "dryland_km": 41,
+   "reaches": "a river of 1,521 m3/s",
+   "ends_in": "humboldtianum",
+   "ends_at": {
+    "today": [
+     60.59,
+     177.34
+    ],
+    "turned": [
+     65.7,
+     166.8
+    ]
+   },
+   "source_water_ends_in": "humboldtianum",
+   "green_km2": {
+    "narrow": 24,
+    "wide": 102
+   },
+   "loss_m3s": {
+    "narrow": 1,
+    "wide": 2
+   },
+   "green_km2_per_m_of_cut": 0.2,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 1
+    },
+    "wide": {
+     "humboldtianum": 2
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.23
+    },
+    "wide": {
+     "humboldtianum": 0.45
+    }
+   },
+   "kind": "reaches another river, a sea or a closed lake"
+  },
+  {
+   "cut_m": 116.7,
+   "source": "lake +1150 m against the common level, passing 1,008 m3/s",
+   "pass_at": {
+    "today": [
+     -38.34,
+     -140.22
+    ],
+    "turned": [
+     -31.66,
+     -142.54
+    ]
+   },
+   "shore_at": {
+    "today": [
+     -38.28,
+     -140.22
+    ],
+    "turned": [
+     -31.59,
+     -142.54
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 111,
+   "dryland_km": 49,
+   "reaches": "south_pole_aitken",
+   "ends_in": "south_pole_aitken",
+   "ends_at": {
+    "today": [
+     -38.91,
+     -141.97
+    ],
+    "turned": [
+     -32.2,
+     -144.16
+    ]
+   },
+   "source_water_ends_in": "south_pole_aitken",
    "green_km2": {
     "narrow": 29,
     "wide": 122
@@ -1496,64 +1226,64 @@
    "green_km2_per_m_of_cut": 0.2,
    "seas_give_up_m3s": {
     "narrow": {
-     "near_side": 1
+     "south_pole_aitken": 1
     },
     "wide": {
-     "near_side": 3
+     "south_pole_aitken": 3
     }
    },
    "seas_fall_m": {
     "narrow": {
-     "near_side": 0.03
+     "south_pole_aitken": 0.12
     },
     "wide": {
-     "near_side": 0.09
+     "south_pole_aitken": 0.37
     }
    },
-   "kind": "reaches another river, a sea or a closed lake"
+   "kind": "rejoins its source's own river"
   },
   {
-   "cut_m": 171.0,
-   "source": "lake +2712 m against the common level, passing 1,479 m3/s",
+   "cut_m": 266.9,
+   "source": "lake +1689 m against the common level, passing 1,423 m3/s",
    "pass_at": {
     "today": [
-     13.28,
-     124.84
+     70.84,
+     155.91
     ],
     "turned": [
-     13.87,
-     122.15
+     73.44,
+     134.65
     ]
    },
    "shore_at": {
     "today": [
-     13.22,
-     124.91
+     70.78,
+     155.97
     ],
     "turned": [
-     13.81,
-     122.22
+     73.39,
+     134.8
     ]
    },
    "flow_m3s": 500,
-   "new_river_km": 67,
-   "dryland_km": 61,
-   "reaches": "a river of 1,471 m3/s",
-   "ends_in": "smythii_marginis",
+   "new_river_km": 107,
+   "dryland_km": 101,
+   "reaches": "a river of 1,405 m3/s",
+   "ends_in": "humboldtianum",
    "ends_at": {
     "today": [
-     14.91,
-     124.84
+     70.28,
+     149.41
     ],
     "turned": [
-     15.48,
-     121.94
+     72.17,
+     128.45
     ]
    },
-   "source_water_ends_in": "smythii_marginis",
+   "source_water_ends_in": "humboldtianum",
    "green_km2": {
-    "narrow": 36,
-    "wide": 151
+    "narrow": 60,
+    "wide": 251
    },
    "loss_m3s": {
     "narrow": 1,
@@ -1562,64 +1292,64 @@
    "green_km2_per_m_of_cut": 0.2,
    "seas_give_up_m3s": {
     "narrow": {
-     "near_side": 1
+     "humboldtianum": 1
     },
     "wide": {
-     "near_side": 4
+     "humboldtianum": 4
     }
    },
    "seas_fall_m": {
     "narrow": {
-     "near_side": 0.03
+     "humboldtianum": 0.23
     },
     "wide": {
-     "near_side": 0.12
+     "humboldtianum": 0.9
     }
    },
    "kind": "rejoins its source's own river"
   },
   {
-   "cut_m": 130.0,
-   "source": "lake +2764 m against the common level, passing 1,508 m3/s",
+   "cut_m": 202.7,
+   "source": "lake +1257 m against the common level, passing 1,377 m3/s",
    "pass_at": {
     "today": [
-     12.97,
-     126.34
+     69.34,
+     137.34
     ],
     "turned": [
-     13.74,
-     123.68
+     69.88,
+     117.37
     ]
    },
    "shore_at": {
     "today": [
-     12.91,
-     126.28
+     69.28,
+     137.34
     ],
     "turned": [
-     13.67,
-     123.63
+     69.82,
+     117.43
     ]
    },
    "flow_m3s": 500,
-   "new_river_km": 45,
-   "dryland_km": 35,
-   "reaches": "a river of 1,479 m3/s",
-   "ends_in": "smythii_marginis",
+   "new_river_km": 66,
+   "dryland_km": 62,
+   "reaches": "a river of 1,363 m3/s",
+   "ends_in": "humboldtianum",
    "ends_at": {
     "today": [
-     13.41,
-     125.16
+     70.59,
+     133.97
     ],
     "turned": [
-     14.03,
-     122.45
+     70.66,
+     112.9
     ]
    },
-   "source_water_ends_in": "smythii_marginis",
+   "source_water_ends_in": "humboldtianum",
    "green_km2": {
-    "narrow": 21,
-    "wide": 87
+    "narrow": 37,
+    "wide": 154
    },
    "loss_m3s": {
     "narrow": 1,
@@ -1628,424 +1358,424 @@
    "green_km2_per_m_of_cut": 0.2,
    "seas_give_up_m3s": {
     "narrow": {
-     "near_side": 1
+     "humboldtianum": 1
     },
     "wide": {
-     "near_side": 2
+     "humboldtianum": 2
     }
    },
    "seas_fall_m": {
     "narrow": {
-     "near_side": 0.03
+     "humboldtianum": 0.23
     },
     "wide": {
-     "near_side": 0.06
+     "humboldtianum": 0.45
     }
    },
    "kind": "rejoins its source's own river"
   },
   {
-   "cut_m": 101.5,
-   "source": "lake +1434 m against the common level, passing 13,861 m3/s",
+   "cut_m": 277.6,
+   "source": "lake +3101 m against the common level, passing 1,562 m3/s",
    "pass_at": {
     "today": [
-     11.66,
-     110.03
+     54.78,
+     179.97
     ],
     "turned": [
-     10.46,
-     107.67
+     60.16,
+     171.77
     ]
    },
    "shore_at": {
     "today": [
-     11.59,
-     110.09
+     54.84,
+     -179.97
     ],
     "turned": [
-     10.41,
-     107.74
+     60.22,
+     171.82
     ]
    },
    "flow_m3s": 500,
-   "new_river_km": 32,
-   "dryland_km": 32,
-   "reaches": "a river of 13,842 m3/s",
-   "ends_in": "smythii_marginis",
+   "new_river_km": 42,
+   "dryland_km": 34,
+   "reaches": "a river of 1,570 m3/s",
+   "ends_in": "humboldtianum",
    "ends_at": {
     "today": [
-     11.97,
-     109.16
+     54.22,
+     -179.78
     ],
     "turned": [
-     10.67,
-     106.77
+     59.62,
+     172.2
     ]
    },
-   "source_water_ends_in": "smythii_marginis",
+   "source_water_ends_in": "humboldtianum",
+   "green_km2": {
+    "narrow": 20,
+    "wide": 84
+   },
+   "loss_m3s": {
+    "narrow": 1,
+    "wide": 2
+   },
+   "green_km2_per_m_of_cut": 0.1,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 1
+    },
+    "wide": {
+     "humboldtianum": 2
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.23
+    },
+    "wide": {
+     "humboldtianum": 0.45
+    }
+   },
+   "kind": "reaches another river, a sea or a closed lake"
+  },
+  {
+   "cut_m": 285.8,
+   "source": "lake +1047 m against the common level, passing 5,368 m3/s",
+   "pass_at": {
+    "today": [
+     50.47,
+     123.16
+    ],
+    "turned": [
+     49.92,
+     113.25
+    ]
+   },
+   "shore_at": {
+    "today": [
+     50.47,
+     123.22
+    ],
+    "turned": [
+     49.93,
+     113.31
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 34,
+   "dryland_km": 31,
+   "reaches": "a river of 5,355 m3/s",
+   "ends_in": "humboldtianum",
+   "ends_at": {
+    "today": [
+     51.28,
+     122.22
+    ],
+    "turned": [
+     50.61,
+     112.11
+    ]
+   },
+   "source_water_ends_in": "humboldtianum",
+   "green_km2": {
+    "narrow": 18,
+    "wide": 77
+   },
+   "loss_m3s": {
+    "narrow": 1,
+    "wide": 2
+   },
+   "green_km2_per_m_of_cut": 0.1,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 1
+    },
+    "wide": {
+     "humboldtianum": 2
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.23
+    },
+    "wide": {
+     "humboldtianum": 0.45
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 188.5,
+   "source": "lake +726 m against the common level, passing 5,350 m3/s",
+   "pass_at": {
+    "today": [
+     52.59,
+     121.72
+    ],
+    "turned": [
+     51.84,
+     111.24
+    ]
+   },
+   "shore_at": {
+    "today": [
+     52.53,
+     121.72
+    ],
+    "turned": [
+     51.78,
+     111.25
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 44,
+   "dryland_km": 32,
+   "reaches": "a river of 5,335 m3/s",
+   "ends_in": "humboldtianum",
+   "ends_at": {
+    "today": [
+     52.72,
+     120.59
+    ],
+    "turned": [
+     51.83,
+     110.11
+    ]
+   },
+   "source_water_ends_in": "humboldtianum",
    "green_km2": {
     "narrow": 19,
     "wide": 79
    },
    "loss_m3s": {
-    "narrow": 0,
-    "wide": 2
-   },
-   "green_km2_per_m_of_cut": 0.2,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 0
-    },
-    "wide": {
-     "near_side": 2
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.0
-    },
-    "wide": {
-     "near_side": 0.06
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 127.1,
-   "source": "lake +2852 m against the common level, passing 1,524 m3/s",
-   "pass_at": {
-    "today": [
-     11.34,
-     126.34
-    ],
-    "turned": [
-     12.12,
-     123.89
-    ]
-   },
-   "shore_at": {
-    "today": [
-     11.28,
-     126.41
-    ],
-    "turned": [
-     12.07,
-     123.96
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 48,
-   "dryland_km": 46,
-   "reaches": "a river of 1,508 m3/s",
-   "ends_in": "smythii_marginis",
-   "ends_at": {
-    "today": [
-     12.47,
-     125.59
-    ],
-    "turned": [
-     13.15,
-     123.0
-    ]
-   },
-   "source_water_ends_in": "smythii_marginis",
-   "green_km2": {
-    "narrow": 27,
-    "wide": 114
-   },
-   "loss_m3s": {
     "narrow": 1,
     "wide": 2
    },
-   "green_km2_per_m_of_cut": 0.2,
+   "green_km2_per_m_of_cut": 0.1,
    "seas_give_up_m3s": {
     "narrow": {
-     "near_side": 1
+     "humboldtianum": 1
     },
     "wide": {
-     "near_side": 2
+     "humboldtianum": 2
     }
    },
    "seas_fall_m": {
     "narrow": {
-     "near_side": 0.03
+     "humboldtianum": 0.23
     },
     "wide": {
-     "near_side": 0.06
+     "humboldtianum": 0.45
     }
    },
    "kind": "rejoins its source's own river"
   },
   {
-   "cut_m": 190.0,
-   "source": "lake +1434 m against the common level, passing 13,872 m3/s",
+   "cut_m": 156.9,
+   "source": "lake +1514 m against the common level, passing 5,548 m3/s",
    "pass_at": {
     "today": [
-     10.47,
-     108.91
+     43.28,
+     133.47
     ],
     "turned": [
-     9.15,
-     106.71
+     44.04,
+     125.24
     ]
    },
    "shore_at": {
     "today": [
-     10.41,
-     108.97
+     43.22,
+     133.47
     ],
     "turned": [
-     9.1,
-     106.78
+     43.98,
+     125.25
     ]
    },
    "flow_m3s": 500,
-   "new_river_km": 64,
-   "dryland_km": 60,
-   "reaches": "a river of 1,291 m3/s",
-   "ends_in": "smythii_marginis",
+   "new_river_km": 54,
+   "dryland_km": 30,
+   "reaches": "a river of 5,531 m3/s",
+   "ends_in": "humboldtianum",
    "ends_at": {
     "today": [
-     11.84,
-     108.66
+     44.59,
+     132.47
     ],
     "turned": [
-     10.48,
-     106.29
+     45.22,
+     123.94
     ]
    },
-   "source_water_ends_in": "smythii_marginis",
+   "source_water_ends_in": "humboldtianum",
+   "green_km2": {
+    "narrow": 18,
+    "wide": 74
+   },
+   "loss_m3s": {
+    "narrow": 0,
+    "wide": 2
+   },
+   "green_km2_per_m_of_cut": 0.1,
+   "seas_give_up_m3s": {
+    "narrow": {
+     "humboldtianum": 0
+    },
+    "wide": {
+     "humboldtianum": 2
+    }
+   },
+   "seas_fall_m": {
+    "narrow": {
+     "humboldtianum": 0.0
+    },
+    "wide": {
+     "humboldtianum": 0.45
+    }
+   },
+   "kind": "rejoins its source's own river"
+  },
+  {
+   "cut_m": 242.4,
+   "source": "lake +204 m against the common level, passing 9,509 m3/s",
+   "pass_at": {
+    "today": [
+     -8.22,
+     64.66
+    ],
+    "turned": [
+     -13.97,
+     63.49
+    ]
+   },
+   "shore_at": {
+    "today": [
+     -8.28,
+     64.72
+    ],
+    "turned": [
+     -14.03,
+     63.56
+    ]
+   },
+   "flow_m3s": 500,
+   "new_river_km": 148,
+   "dryland_km": 61,
+   "reaches": "a river of 9,569 m3/s",
+   "ends_in": "near_side",
+   "ends_at": {
+    "today": [
+     -5.03,
+     64.09
+    ],
+    "turned": [
+     -10.82,
+     62.72
+    ]
+   },
+   "source_water_ends_in": "near_side",
    "green_km2": {
     "narrow": 36,
-    "wide": 149
+    "wide": 151
    },
    "loss_m3s": {
     "narrow": 1,
-    "wide": 3
-   },
-   "green_km2_per_m_of_cut": 0.2,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 1
-    },
-    "wide": {
-     "near_side": 3
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.03
-    },
-    "wide": {
-     "near_side": 0.09
-    }
-   },
-   "kind": "reaches another river, a sea or a closed lake"
-  },
-  {
-   "cut_m": 117.5,
-   "source": "lake +2469 m against the common level, passing 4,984 m3/s",
-   "pass_at": {
-    "today": [
-     -27.41,
-     126.91
-    ],
-    "turned": [
-     -26.26,
-     129.38
-    ]
-   },
-   "shore_at": {
-    "today": [
-     -27.47,
-     126.97
-    ],
-    "turned": [
-     -26.31,
-     129.45
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 36,
-   "dryland_km": 32,
-   "reaches": "a river of 4,977 m3/s",
-   "ends_in": "near_side",
-   "ends_at": {
-    "today": [
-     -26.78,
-     126.09
-    ],
-    "turned": [
-     -25.74,
-     128.49
-    ]
-   },
-   "source_water_ends_in": "near_side",
-   "green_km2": {
-    "narrow": 19,
-    "wide": 79
-   },
-   "loss_m3s": {
-    "narrow": 0,
-    "wide": 1
-   },
-   "green_km2_per_m_of_cut": 0.2,
-   "seas_give_up_m3s": {
-    "narrow": {
-     "near_side": 0
-    },
-    "wide": {
-     "near_side": 1
-    }
-   },
-   "seas_fall_m": {
-    "narrow": {
-     "near_side": 0.0
-    },
-    "wide": {
-     "near_side": 0.03
-    }
-   },
-   "kind": "rejoins its source's own river"
-  },
-  {
-   "cut_m": 234.1,
-   "source": "lake +4333 m against the common level, passing 10,035 m3/s",
-   "pass_at": {
-    "today": [
-     -39.72,
-     -121.91
-    ],
-    "turned": [
-     -33.54,
-     -125.33
-    ]
-   },
-   "shore_at": {
-    "today": [
-     -39.66,
-     -121.84
-    ],
-    "turned": [
-     -33.48,
-     -125.27
-    ]
-   },
-   "flow_m3s": 500,
-   "new_river_km": 36,
-   "dryland_km": 32,
-   "reaches": "a river of 10,028 m3/s",
-   "ends_in": "south_pole_aitken",
-   "ends_at": {
-    "today": [
-     -40.47,
-     -122.59
-    ],
-    "turned": [
-     -34.25,
-     -126.03
-    ]
-   },
-   "source_water_ends_in": "south_pole_aitken",
-   "green_km2": {
-    "narrow": 19,
-    "wide": 79
-   },
-   "loss_m3s": {
-    "narrow": 0,
     "wide": 2
    },
    "green_km2_per_m_of_cut": 0.1,
    "seas_give_up_m3s": {
     "narrow": {
-     "south_pole_aitken": 0
+     "near_side": 1
     },
     "wide": {
-     "south_pole_aitken": 2
+     "near_side": 2
     }
    },
    "seas_fall_m": {
     "narrow": {
-     "south_pole_aitken": 0.0
+     "near_side": 0.03
     },
     "wide": {
-     "south_pole_aitken": 0.23
+     "near_side": 0.06
     }
    },
    "kind": "rejoins its source's own river"
   },
   {
-   "cut_m": 254.1,
-   "source": "lake +2831 m against the common level, passing 5,128 m3/s",
+   "cut_m": 289.4,
+   "source": "lake +364 m against the common level, passing 9,520 m3/s",
    "pass_at": {
     "today": [
-     -20.66,
-     136.41
+     -9.53,
+     65.97
     ],
     "turned": [
-     -18.45,
-     137.75
+     -15.2,
+     64.91
     ]
    },
    "shore_at": {
     "today": [
-     -20.72,
-     136.47
+     -9.59,
+     65.91
     ],
     "turned": [
-     -18.51,
-     137.82
+     -15.26,
+     64.85
     ]
    },
    "flow_m3s": 500,
-   "new_river_km": 39,
-   "dryland_km": 32,
-   "reaches": "a river of 5,142 m3/s",
+   "new_river_km": 57,
+   "dryland_km": 51,
+   "reaches": "a river of 9,510 m3/s",
    "ends_in": "near_side",
    "ends_at": {
     "today": [
-     -19.53,
-     136.03
+     -8.59,
+     65.34
     ],
     "turned": [
-     -17.38,
-     137.24
+     -14.3,
+     64.21
     ]
    },
    "source_water_ends_in": "near_side",
    "green_km2": {
-    "narrow": 19,
-    "wide": 79
+    "narrow": 30,
+    "wide": 127
    },
    "loss_m3s": {
-    "narrow": 0,
-    "wide": 1
+    "narrow": 1,
+    "wide": 2
    },
    "green_km2_per_m_of_cut": 0.1,
    "seas_give_up_m3s": {
     "narrow": {
-     "near_side": 0
+     "near_side": 1
     },
     "wide": {
-     "near_side": 1
+     "near_side": 2
     }
    },
    "seas_fall_m": {
     "narrow": {
-     "near_side": 0.0
+     "near_side": 0.03
     },
     "wide": {
-     "near_side": 0.03
+     "near_side": 0.06
     }
    },
-   "kind": "reaches another river, a sea or a closed lake"
+   "kind": "rejoins its source's own river"
   }
  ],
  "best_each_source": {
   "lakes of the large rivers": [
    {
     "cut_m": 4.3,
-    "source": "lake +1492 m against the common level, passing 9,987 m3/s",
+    "source": "lake +1492 m against the common level, passing 5,342 m3/s",
     "pass_at": {
      "today": [
       -43.66,
@@ -2053,7 +1783,7 @@
      ],
      "turned": [
       -37.51,
-      -124.94
+      -125.28
      ]
     },
     "shore_at": {
@@ -2063,13 +1793,13 @@
      ],
      "turned": [
       -37.45,
-      -124.93
+      -125.28
      ]
     },
     "flow_m3s": 500,
     "new_river_km": 73,
-    "dryland_km": 73,
-    "reaches": "a river of 9,986 m3/s",
+    "dryland_km": 31,
+    "reaches": "a river of 5,342 m3/s",
     "ends_in": "south_pole_aitken",
     "ends_at": {
      "today": [
@@ -2077,284 +1807,86 @@
       -121.72
      ],
      "turned": [
-      -37.35,
-      -125.5
+      -37.36,
+      -125.84
      ]
     },
     "source_water_ends_in": "south_pole_aitken",
     "green_km2": {
-     "narrow": 44,
-     "wide": 181
+     "narrow": 18,
+     "wide": 77
     },
     "loss_m3s": {
-     "narrow": 1,
-     "wide": 5
+     "narrow": 0,
+     "wide": 2
     },
-    "green_km2_per_m_of_cut": 10.2,
+    "green_km2_per_m_of_cut": 4.2,
     "seas_give_up_m3s": {
      "narrow": {
-      "south_pole_aitken": 1
+      "south_pole_aitken": 0
      },
      "wide": {
-      "south_pole_aitken": 5
+      "south_pole_aitken": 2
      }
     },
     "seas_fall_m": {
      "narrow": {
-      "south_pole_aitken": 0.11
+      "south_pole_aitken": 0.0
      },
      "wide": {
-      "south_pole_aitken": 0.57
+      "south_pole_aitken": 0.25
      }
     },
     "kind": "rejoins its source's own river"
    },
    {
-    "cut_m": 124.1,
-    "source": "lake +3264 m against the common level, passing 5,770 m3/s",
+    "cut_m": 20.3,
+    "source": "lake +312 m against the common level, passing 15,859 m3/s",
     "pass_at": {
      "today": [
-      4.47,
-      117.72
+      9.97,
+      -77.53
      ],
      "turned": [
-      4.26,
-      116.17
+      12.35,
+      -78.14
      ]
     },
     "shore_at": {
      "today": [
-      4.41,
-      117.66
+      9.97,
+      -77.59
      ],
      "turned": [
-      4.19,
-      116.12
+      12.36,
+      -78.2
      ]
     },
     "flow_m3s": 500,
-    "new_river_km": 719,
-    "dryland_km": 456,
-    "reaches": "a river of 13,861 m3/s",
-    "ends_in": "smythii_marginis",
+    "new_river_km": 108,
+    "dryland_km": 108,
+    "reaches": "near_side",
+    "ends_in": "near_side",
     "ends_at": {
      "today": [
-      11.22,
-      110.16
+      10.78,
+      -75.22
      ],
      "turned": [
-      10.04,
-      107.85
+      12.9,
+      -75.73
      ]
     },
-    "source_water_ends_in": "smythii_marginis",
+    "source_water_ends_in": "near_side",
     "green_km2": {
-     "narrow": 272,
-     "wide": 1131
-    },
-    "loss_m3s": {
-     "narrow": 6,
-     "wide": 26
-    },
-    "green_km2_per_m_of_cut": 2.2,
-    "seas_give_up_m3s": {
-     "narrow": {
-      "near_side": 6
-     },
-     "wide": {
-      "near_side": 26
-     }
-    },
-    "seas_fall_m": {
-     "narrow": {
-      "near_side": 0.18
-     },
-     "wide": {
-      "near_side": 0.76
-     }
-    },
-    "kind": "rejoins its source's own river"
-   },
-   {
-    "cut_m": 57.1,
-    "source": "lake +1553 m against the common level, passing 1,338 m3/s",
-    "pass_at": {
-     "today": [
-      10.03,
-      106.34
-     ],
-     "turned": [
-      8.41,
-      104.23
-     ]
-    },
-    "shore_at": {
-     "today": [
-      10.09,
-      106.41
-     ],
-     "turned": [
-      8.48,
-      104.28
-     ]
-    },
-    "flow_m3s": 500,
-    "new_river_km": 308,
-    "dryland_km": 193,
-    "reaches": "smythii_marginis",
-    "ends_in": "smythii_marginis",
-    "ends_at": {
-     "today": [
-      8.34,
-      100.78
-     ],
-     "turned": [
-      6.09,
-      98.93
-     ]
-    },
-    "source_water_ends_in": "smythii_marginis",
-    "green_km2": {
-     "narrow": 115,
-     "wide": 479
-    },
-    "loss_m3s": {
-     "narrow": 2,
-     "wide": 9
-    },
-    "green_km2_per_m_of_cut": 2.0,
-    "seas_give_up_m3s": {
-     "narrow": {
-      "near_side": 2
-     },
-     "wide": {
-      "near_side": 9
-     }
-    },
-    "seas_fall_m": {
-     "narrow": {
-      "near_side": 0.06
-     },
-     "wide": {
-      "near_side": 0.26
-     }
-    },
-    "kind": "reaches another river, a sea or a closed lake"
-   },
-   {
-    "cut_m": 215.0,
-    "source": "lake +2672 m against the common level, passing 1,471 m3/s",
-    "pass_at": {
-     "today": [
-      15.47,
-      124.53
-     ],
-     "turned": [
-      16.0,
-      121.56
-     ]
-    },
-    "shore_at": {
-     "today": [
-      15.41,
-      124.53
-     ],
-     "turned": [
-      15.94,
-      121.57
-     ]
-    },
-    "flow_m3s": 500,
-    "new_river_km": 635,
-    "dryland_km": 556,
-    "reaches": "a river of 3,657 m3/s",
-    "ends_in": "smythii_marginis",
-    "ends_at": {
-     "today": [
-      17.84,
-      112.84
-     ],
-     "turned": [
-      16.94,
-      109.66
-     ]
-    },
-    "source_water_ends_in": "smythii_marginis",
-    "green_km2": {
-     "narrow": 331,
-     "wide": 1379
-    },
-    "loss_m3s": {
-     "narrow": 7,
-     "wide": 28
-    },
-    "green_km2_per_m_of_cut": 1.5,
-    "seas_give_up_m3s": {
-     "narrow": {
-      "near_side": 7
-     },
-     "wide": {
-      "near_side": 28
-     }
-    },
-    "seas_fall_m": {
-     "narrow": {
-      "near_side": 0.2
-     },
-     "wide": {
-      "near_side": 0.82
-     }
-    },
-    "kind": "rejoins its source's own river"
-   },
-   {
-    "cut_m": 48.0,
-    "source": "lake +1504 m against the common level, passing 13,890 m3/s",
-    "pass_at": {
-     "today": [
-      8.09,
-      110.41
-     ],
-     "turned": [
-      6.97,
-      108.48
-     ]
-    },
-    "shore_at": {
-     "today": [
-      8.03,
-      110.41
-     ],
-     "turned": [
-      6.91,
-      108.49
-     ]
-    },
-    "flow_m3s": 500,
-    "new_river_km": 122,
-    "dryland_km": 117,
-    "reaches": "a river of 13,861 m3/s",
-    "ends_in": "smythii_marginis",
-    "ends_at": {
-     "today": [
-      11.22,
-      110.16
-     ],
-     "turned": [
-      10.04,
-      107.85
-     ]
-    },
-    "source_water_ends_in": "smythii_marginis",
-    "green_km2": {
-     "narrow": 70,
-     "wide": 290
+     "narrow": 64,
+     "wide": 268
     },
     "loss_m3s": {
      "narrow": 1,
      "wide": 6
     },
-    "green_km2_per_m_of_cut": 1.5,
+    "green_km2_per_m_of_cut": 3.2,
     "seas_give_up_m3s": {
      "narrow": {
       "near_side": 1
@@ -2371,6 +1903,204 @@
       "near_side": 0.18
      }
     },
+    "kind": "reaches another river, a sea or a closed lake"
+   },
+   {
+    "cut_m": 19.2,
+    "source": "lake +726 m against the common level, passing 5,337 m3/s",
+    "pass_at": {
+     "today": [
+      51.91,
+      120.47
+     ],
+     "turned": [
+      51.02,
+      110.24
+     ]
+    },
+    "shore_at": {
+     "today": [
+      51.97,
+      120.53
+     ],
+     "turned": [
+      51.09,
+      110.28
+     ]
+    },
+    "flow_m3s": 500,
+    "new_river_km": 90,
+    "dryland_km": 83,
+    "reaches": "a river of 5,316 m3/s",
+    "ends_in": "humboldtianum",
+    "ends_at": {
+     "today": [
+      52.41,
+      117.91
+     ],
+     "turned": [
+      51.22,
+      107.63
+     ]
+    },
+    "source_water_ends_in": "humboldtianum",
+    "green_km2": {
+     "narrow": 49,
+     "wide": 206
+    },
+    "loss_m3s": {
+     "narrow": 1,
+     "wide": 6
+    },
+    "green_km2_per_m_of_cut": 2.6,
+    "seas_give_up_m3s": {
+     "narrow": {
+      "humboldtianum": 1
+     },
+     "wide": {
+      "humboldtianum": 6
+     }
+    },
+    "seas_fall_m": {
+     "narrow": {
+      "humboldtianum": 0.23
+     },
+     "wide": {
+      "humboldtianum": 1.36
+     }
+    },
+    "kind": "rejoins its source's own river"
+   },
+   {
+    "cut_m": 53.2,
+    "source": "lake +1270 m against the common level, passing 2,340 m3/s",
+    "pass_at": {
+     "today": [
+      -34.97,
+      112.72
+     ],
+     "turned": [
+      -35.99,
+      115.61
+     ]
+    },
+    "shore_at": {
+     "today": [
+      -35.03,
+      112.66
+     ],
+     "turned": [
+      -36.06,
+      115.56
+     ]
+    },
+    "flow_m3s": 500,
+    "new_river_km": 381,
+    "dryland_km": 98,
+    "reaches": "a river of 2,360 m3/s",
+    "ends_in": "near_side",
+    "ends_at": {
+     "today": [
+      -27.28,
+      113.28
+     ],
+     "turned": [
+      -28.31,
+      114.94
+     ]
+    },
+    "source_water_ends_in": "near_side",
+    "green_km2": {
+     "narrow": 58,
+     "wide": 243
+    },
+    "loss_m3s": {
+     "narrow": 1,
+     "wide": 4
+    },
+    "green_km2_per_m_of_cut": 1.1,
+    "seas_give_up_m3s": {
+     "narrow": {
+      "near_side": 1
+     },
+     "wide": {
+      "near_side": 4
+     }
+    },
+    "seas_fall_m": {
+     "narrow": {
+      "near_side": 0.03
+     },
+     "wide": {
+      "near_side": 0.12
+     }
+    },
+    "kind": "reaches another river, a sea or a closed lake"
+   },
+   {
+    "cut_m": 84.1,
+    "source": "lake +985 m against the common level, passing 5,353 m3/s",
+    "pass_at": {
+     "today": [
+      51.16,
+      121.59
+     ],
+     "turned": [
+      50.41,
+      111.54
+     ]
+    },
+    "shore_at": {
+     "today": [
+      51.16,
+      121.66
+     ],
+     "turned": [
+      50.42,
+      111.6
+     ]
+    },
+    "flow_m3s": 500,
+    "new_river_km": 133,
+    "dryland_km": 126,
+    "reaches": "a river of 5,316 m3/s",
+    "ends_in": "humboldtianum",
+    "ends_at": {
+     "today": [
+      52.41,
+      117.91
+     ],
+     "turned": [
+      51.22,
+      107.63
+     ]
+    },
+    "source_water_ends_in": "humboldtianum",
+    "green_km2": {
+     "narrow": 75,
+     "wide": 313
+    },
+    "loss_m3s": {
+     "narrow": 2,
+     "wide": 9
+    },
+    "green_km2_per_m_of_cut": 0.9,
+    "seas_give_up_m3s": {
+     "narrow": {
+      "humboldtianum": 2
+     },
+     "wide": {
+      "humboldtianum": 9
+     }
+    },
+    "seas_fall_m": {
+     "narrow": {
+      "humboldtianum": 0.45
+     },
+     "wide": {
+      "humboldtianum": 2.03
+     }
+    },
     "kind": "rejoins its source's own river"
    }
   ],
@@ -2384,8 +2114,8 @@
       -84.22
      ],
      "turned": [
-      -14.1,
-      -87.0
+      -13.72,
+      -87.69
      ]
     },
     "shore_at": {
@@ -2394,14 +2124,14 @@
       -84.28
      ],
      "turned": [
-      -14.03,
-      -87.05
+      -13.66,
+      -87.74
      ]
     },
     "flow_m3s": 500,
     "new_river_km": 369,
     "dryland_km": 278,
-    "reaches": "a river of 14,252 m3/s",
+    "reaches": "a river of 14,903 m3/s",
     "ends_in": "near_side",
     "ends_at": {
      "today": [
@@ -2409,8 +2139,8 @@
       -84.53
      ],
      "turned": [
-      -5.62,
-      -86.33
+      -5.24,
+      -87.09
      ]
     },
     "source_water_ends_in": "orientale",
@@ -2419,29 +2149,29 @@
      "wide": 690
     },
     "loss_m3s": {
-     "narrow": 4,
-     "wide": 15
+     "narrow": 3,
+     "wide": 14
     },
     "green_km2_per_m_of_cut": 1.8,
     "seas_give_up_m3s": {
      "narrow": {
-      "near_side": 4
+      "near_side": 3
      },
      "wide": {
-      "near_side": 15
+      "near_side": 14
      }
     },
     "seas_fall_m": {
      "narrow": {
-      "near_side": 0.12
+      "near_side": 0.09
      },
      "wide": {
-      "near_side": 0.44
+      "near_side": 0.42
      }
     },
     "kind": "rejoins its source's own river"
    }
   ]
  },
- "seconds": 78
+ "seconds": 52
 }

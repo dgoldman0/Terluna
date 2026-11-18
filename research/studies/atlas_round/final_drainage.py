@@ -1,13 +1,16 @@
-"""The atlas round's drainage on the climate run on the final surface: the 0.930 run's settled years carried onto
-today's ground and routed over the redrawn floor with the works chosen on 16 November.
+"""The atlas round's drainage on the design climate: the design climate's settled years carried onto today's ground
+and routed over the redrawn floor with the works chosen on 16 November.
 
     ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.atlas_round.final_drainage   # about 20 minutes
 
-The run on the final surface (A28S at sunlight 0.930, the third step's restart) settled at 300.3 K at the ground; its
-years 35-49 are averaged by climate.gcm.climatology into climatology_<run>_y35-49.npz. The run keeps its fields in the
-settled turned frame of the surface it ran on (turned_surface.py's record), so the climatology is carried onto today's
-latitude and longitude as climate.gcm.turned_climatology carries one, with that record's rotation, and written beside
-it as ..._y35-49_today.npz.
+The design climate (register, 18 November) is the climate run on the design surface (A28D at sunlight 0.936, years 45-59,
+301.00 K at the ground), carried by pattern scaling to the 300.31 K at which the run at sunlight 0.930 on the final
+surface settled (A28S, years 35-49): climate.gcm.pattern_scaling moves its climatology and surface wind by the land's and
+the water's mean responses per kelvin, measured on two pairs of runs, into climatology_<run>_y45-59_scaled300.31K.npz,
+an estimate. Until 18 November this module read the run at 0.930 on the final surface itself. The run keeps its fields
+in the settled turned frame of the surface it ran on, the record its climatology names (design_turned_surface.py's for
+the design surface), so the climatology is carried onto today's latitude and longitude as climate.gcm.turned_climatology
+carries one, with that record's rotation, and written beside it as ..._today.npz.
 
 The routing is governed_drainage.py's, unchanged, on this climate: the network study's loader and budget closure as
 network.py has them (the open water's evaporation raised until the routing's budget closes, with every sea at the
@@ -44,10 +47,16 @@ CODE = ('research/studies/atlas_round/final_drainage.py', 'research/studies/atla
         'research/studies/atlas_round/redrawn_drainage.py', 'research/studies/drainage_network/network.py',
         'research/studies/drainage_network/routing.py', 'geography/drainage.py', 'climate/gcm/turned_climatology.py',
         'climate/gcm/turned.py')
-RUN = 'A28S_301k_design_l15_snow_s930_settled'
-YEARS = [35, 49]
-TURNED_CLIMATOLOGY = f'climate/gcm/products/climatology_{RUN}_y{YEARS[0]}-{YEARS[1]}.npz'
-CLIMATOLOGY = f'climate/gcm/products/climatology_{RUN}_y{YEARS[0]}-{YEARS[1]}_today.npz'
+RUN = 'A28D_301k_design_l15_snow_s936_settled'
+YEARS = [45, 59]
+LABEL = 'scaled300.31K'                     # climate.gcm.pattern_scaling's estimate at the run at 0.930's 300.31 K
+WINDOW = f'{RUN}_y{YEARS[0]}-{YEARS[1]}_{LABEL}'
+TURNED_CLIMATOLOGY = f'climate/gcm/products/climatology_{WINDOW}.npz'
+CLIMATOLOGY = f'climate/gcm/products/climatology_{WINDOW}_today.npz'
+SURFACE_WIND = f'climate/gcm/products/surface_wind_{WINDOW}.npz'
+ESTIMATE = f'climate/results/gcm/pattern_scaling_{WINDOW}.json'
+CLIMATE = ('the design climate: the climate run on the design surface (sunlight 0.936, years 45-59, 301.00 K at the '
+           'ground) carried by pattern scaling to the 300.31 K of the run at 0.930 on the final surface, an estimate')
 BUDGETS = ('routing_budget', 'closed_budget')
 
 
@@ -56,8 +65,12 @@ def sha256(path) -> str:
 
 
 def frame_record():
-    """The settled turned frame the run stands in: the final surface's record, which the run names."""
-    path = TS.record_path(RD.sha256(TS.ST.OUT))
+    """The settled turned frame the run stands in: the record its climatology names, unchanged since the run read it."""
+    with np.load(ROOT / TURNED_CLIMATOLOGY) as z:
+        frame = json.loads(str(z['metadata']))['configuration']['frame']
+    path = ROOT / frame['record']
+    if sha256(path)[:len(frame['sha256'])] != frame['sha256']:
+        raise SystemExit(f'{frame["record"]} has changed since {RUN} ran in it')
     return path, json.loads(path.read_text())
 
 
@@ -81,10 +94,9 @@ def carry(force=False):
             return out
     z = np.load(src)
     meta = json.loads(str(z['metadata']))
-    if meta.get('schema') != TC.SCHEMA or meta.get('run') != RUN or list(meta.get('years')) != YEARS:
-        raise SystemExit(f'{src} is not the climatology of {RUN} years {YEARS}')
-    if meta['configuration']['frame']['record'] != str(path.relative_to(ROOT)):
-        raise SystemExit(f'{RUN} ran in {meta["configuration"]["frame"]["record"]}, not {path.relative_to(ROOT)}')
+    if meta.get('schema') != TC.SCHEMA or meta.get('run') != RUN or list(meta.get('years')) != YEARS or \
+            meta.get('estimate', {}).get('label') != LABEL:
+        raise SystemExit(f'{src} is not the climatology of {RUN} years {YEARS} estimated as {LABEL}')
     clim = {k: z[k] for k in z.files if k != 'metadata'}
     rotation = np.asarray(record['frame']['rotation_today_to_turned'], float)
     fields = TC.to_today(clim, rotation)
@@ -104,8 +116,9 @@ def load(evaporation=1.0, rain=1.0):
     study's loader takes them from a climatology (network.load), with the open water's evaporation scaled."""
     z = np.load(ROOT / CLIMATOLOGY)
     meta = json.loads(str(z['metadata']))
-    if meta.get('run') != RUN or list(meta.get('years')) != YEARS or meta.get('frame') != 'today':
-        raise SystemExit(f'{CLIMATOLOGY} is not {RUN} years {YEARS} on today\'s ground')
+    if meta.get('run') != RUN or list(meta.get('years')) != YEARS or meta.get('frame') != 'today' or \
+            meta.get('estimate', {}).get('label') != LABEL:
+        raise SystemExit(f'{CLIMATOLOGY} is not {RUN} years {YEARS} estimated as {LABEL} on today\'s ground')
     clim = {k: z[k] for k in z.files if k != 'metadata'}
     rows, cols = 180 * dr.PPD, 360 * dr.PPD
     lat = 90.0 - (np.arange(rows) + 0.5) / dr.PPD
@@ -230,15 +243,14 @@ def build(log=print):
     rel = lambda p: str(Path(p).relative_to(ROOT)) if str(p).startswith(str(ROOT)) else str(p)
     return dict(
         schema=SCHEMA, producer=dict(files={f: sha256(ROOT / f) for f in CODE}),
-        inputs={rel(p): sha256(p) for p in (ROOT / RD.SURFACE, frame_path, GD.OUT)},
+        inputs={rel(p): sha256(p) for p in (ROOT / RD.SURFACE, frame_path, GD.OUT, ROOT / ESTIMATE)},
         ignored_inputs={rel(clim_path): sha256(clim_path), TURNED_CLIMATOLOGY: sha256(ROOT / TURNED_CLIMATOLOGY),
                         str(surf['grids']): surf['case']['grids']['sha256']},
-        climatology=dict(run=RUN, years=YEARS, frame=rel(frame_path)),
-        evidence=('A calculation on products: the drainage network study\'s routing of the climate run on the final '
-                  'surface (sunlight 0.930, years 35-49, 300.3 K at the ground), carried from its settled turned frame '
-                  'onto today\'s ground, over the redrawn floor with the works chosen on 16 November, each weir set by '
-                  'routing again until the sea it serves receives its need. The cuts\' routes are found between 1.9 km '
-                  'cells. Not validated against any observation.'),
+        climatology=dict(run=RUN, years=YEARS, estimate=LABEL, frame=rel(frame_path)),
+        evidence=(f'A calculation on products: the drainage network study\'s routing of {CLIMATE}, carried from its '
+                  'settled turned frame onto today\'s ground, over the redrawn floor with the works chosen on 16 '
+                  'November, each weir set by routing again until the sea it serves receives its need. The cuts\' '
+                  'routes are found between 1.9 km cells. Not validated against any observation.'),
         reading_rule=('As governed_drainage.json: levels in m above the redrawn common level, flows in m3/s, areas in '
                       'km2; cases on the routing\'s own budget and on the one its open-water evaporation factor closes. '
                       'design_state_without_the_works is the same climate with the upper seas spilling over their '

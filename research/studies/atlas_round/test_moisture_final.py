@@ -1,5 +1,5 @@
-"""Checks of the moisture map on the final surface: a map pixel is sea where most of it lies under one sea, and the
-record holds together once computed (the run, its years and its settled frame; the classes' shares adding up; no lake
+"""Checks of the moisture map on the design climate: a map pixel is sea where most of it lies under one sea, a year's
+sums move by the estimate's step as pattern scaling's kinds say, and the record holds together once computed (the run, its years and its settled frame; the classes' shares adding up; no lake
 at the common level by rule; the design surface's land and water accounted for on the run's cells; the land in the
 run's water cells given the nearest land cell's class and the shares over the design land adding up; the coasts' tide
 from the design surface's own seas; the design surface and the tides matching their hashes)."""
@@ -10,6 +10,25 @@ import numpy as np
 import pytest
 
 from research.studies.atlas_round import moisture_final as MF
+
+
+def test_a_years_sums_move_by_the_step_over_land_and_water():
+    land = np.array([[True, False]])
+    cnt = np.full((10, 1, 2), 36.0)                      # records in each tenth
+    acc = {k: np.full((10, 1, 2), 36.0 * v) for k, v in
+           dict(pr=2e-5, evap=-1e-5, mrso=0.1, rss=200.0, rls=-60.0, tas=300.0, ps=1215.0, ts=301.0).items()}
+    year = dict(land=land, acc=acc, cnt=cnt, rh_sum=np.full((1, 2), 0.8 * 180), rh_n=np.full((1, 2), 180.0),
+                **{k: np.full((1, 2), 290.0) for k in MF.EXTREMES})
+    applied = {k: {'land': {'per_K': 0.02 if kind == 'ratio' else 1.1},
+                   'water': {'per_K': 0.01 if kind == 'ratio' else 0.9}} for k, kind in MF.YEAR_KINDS.items()}
+    out = MF.adjusted(year, applied, -0.5)
+    mean = lambda a: a[0] / cnt[0]                       # noqa: E731  the first tenth's mean
+    assert np.allclose(mean(out['acc']['pr']), [2e-5 * 0.99, 2e-5 * 0.995])
+    assert np.allclose(mean(out['acc']['evap']), [-1e-5 * 0.99, -1e-5 * 0.995])
+    assert np.allclose(mean(out['acc']['tas']), [300.0 - 0.55, 300.0 - 0.45])
+    assert np.allclose(out['tas_min'], [[290.0 - 0.55, 290.0 - 0.45]])
+    assert np.allclose(out['rh_sum'] / out['rh_n'], [[0.8 - 0.55, 0.8 - 0.45]])
+    assert out['cnt'] is year['cnt'] and np.allclose(year['acc']['tas'][0] / cnt[0], 300.0)   # the year itself unchanged
 
 
 def test_a_map_pixel_is_sea_where_most_of_it_lies_under_one_sea():

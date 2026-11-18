@@ -64,10 +64,13 @@ def test_the_record_turns_the_design_water_into_its_settled_frame(record):
     today, now = r['shares']['today'], r['shares']['turned']
     assert now['water'] == pytest.approx(today['water'], abs=1e-3)
     assert now['seas'] == pytest.approx(today['seas'], abs=1e-3)
-    assert today['seas'] == pytest.approx(json.loads(DR.OUT.read_text())['summary']['sea_share'], abs=2e-3)
+    routing = json.loads(DR.OUT.read_text())
+    if r['inputs'][DR.rel(DR.OUT)] == hashlib.sha256(DR.OUT.read_bytes()).hexdigest():
+        assert today['seas'] == pytest.approx(routing['summary']['sea_share'], abs=2e-3)   # the routing it was made from
+    # else the design routing has moved on to a later climate, and the record keeps the surface the run stood on
     assert today['seas'] < final['shares']['today']['seas']                    # the parted sea leaves its floor dry
     assert r['water']['lake_cells_on_seas'] == 0
-    lake_cells = json.loads(DR.OUT.read_text())['summary']['lake_cells']        # lakes' rims at their own level, depth 0
+    lake_cells = routing['summary']['lake_cells']                              # lakes' rims at their own level, depth 0
     assert r['water']['wet_cells_at_or_below_their_ground'] < 0.01 * lake_cells
     assert r['t21']['turned']['water_share'] == pytest.approx(now['water'], abs=1e-3)
     for name, sha in r['files'].items():

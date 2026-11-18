@@ -1,4 +1,4 @@
-"""The near-side sea's neck across western Procellarum on the climate run on the final surface: what the neck carries,
+"""The near-side sea's neck across western Procellarum on the design climate (final_drainage.py): what the neck carries,
 when the sea would part there, and three ways to treat it (let it part, a ship lane, a strait), each with the monthly
 tide through the neck.
 
@@ -7,7 +7,7 @@ tide through the neck.
 The near-side sea's narrowest join (redrawn_surface.py: the level at which the near-side maria's seeds join, four-
 connected) is a short sill in western Procellarum. Below it the sea parts into the south part (Cognitum, Humorum,
 Nubium and southern Procellarum, the maria last to join) and the main part (Imbrium's). On final_drainage.py's routing
-of the 0.930 run (each budget's governed routing on the research drive) this module finds:
+of the design climate (each budget's governed routing on the research drive) this module finds:
 
 - the parts: each cell of the near-side sea is given to the part whose water it joins below the crest (the network
   study's joining levels on the catchment graph, as the drainage's own tables), or, where it joins only above the
@@ -683,8 +683,8 @@ def build(log=print):
         schema=SCHEMA, producer=dict(files={f: sha256(ROOT / f) for f in CODE}),
         inputs={rel_(p): sha256(p) for p in (FD.OUT, ROOT / RD.SURFACE, frame_path)},
         ignored_inputs={rel_(FD.routing_path(k)): sha256(FD.routing_path(k)) for k in FD.BUDGETS},
-        evidence=('A calculation on products: the redrawn floor\'s heights between 1.9 km cells, the drainage of the '
-                  'climate run on the final surface (final_drainage.py) and geography\'s equilibrium tide forcing; '
+        evidence=('A calculation on products: the redrawn floor\'s heights between 1.9 km cells, the drainage of '
+                  f'{FD.CLIMATE} (final_drainage.py) and geography\'s equilibrium tide forcing; '
                   'the neck\'s hydraulics are first estimates with the ocean models\' central bed drag and the throat\'s '
                   'section taken over the whole sill. Not validated against any observation or ocean model run.'),
         reading_rule=('Levels in m above the redrawn common level; flows in m3/s. main and south are the near-side sea\'s '

@@ -3,14 +3,14 @@ the rivers, on the design climate's closed budget with the near-side sea parted 
 
     ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.atlas_round.globe_surface   # about a minute
 
-The design climate on the final surface is the run at sunlight 0.930 (register, 17 November), its closed budget the
-one on which the near-side sea parts. The surface holds:
+The design climate is final_drainage.py's (register, 18 November: the run on the design surface carried by pattern
+scaling to 300.31 K), its closed budget the one on which the near-side sea parts. The surface holds:
 
 - the heights: LOLA with the settled case's U - N, as redrawn_drainage.load_surface gives them;
 - the seas at their own levels: Moscoviense, Orientale and Smythii-Marginis full at their rims; the salt sea and
   Humboldtianum at the common level, where the fixed weirs, sized on this budget, hold them; and the near-side sea
-  parted (near_side_neck.py's steady state), its main part 2.1 m over the neck's crest and Cognitum, Humorum, Nubium and
-  southern Procellarum about 100 m lower;
+  parted (near_side_neck.py's steady state), its main part over the neck's crest and Cognitum, Humorum, Nubium and
+  southern Procellarum lower;
 - the lakes and rivers of the design routing, the governed routing routed again with the near-side sea at its two
   levels, so that rivers run on over the floor the parted sea leaves dry, and with the main part's spill put in past the
   neck's crest, so that the river over the neck runs down to the southern seas;

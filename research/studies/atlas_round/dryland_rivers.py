@@ -1,13 +1,14 @@
-"""Dryland rivers on the final surface: where gravity could carry water through the arid and semi-arid land of the
-climate run on the final surface to an outlet, from the full seas' surplus and from the lakes of the large rivers, with
+"""Dryland rivers on the design surface: where gravity could carry water through the arid and semi-arid land of the
+design climate to an outlet, from the full seas' surplus and from the lakes of the large rivers, with
 each route's cut, its length through dryland, the green corridor it could keep, that corridor's loss, and what the
 near-side sea gives up.
 
     ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.atlas_round.dryland_rivers   # a few minutes
 
-The land's aridity is the moisture map's reading of the run at sunlight 0.930, years 35-49 (rain over Priestley and
-Taylor's demand on the run's T21 grid, drylands.py's window), carried onto each 1.9 km cell of today's ground at its
-place in the run's settled frame. A source is a full sea at its rim (Moscoviense, Orientale, Smythii-Marginis) or a
+The land's aridity is the moisture map's reading of the design climate (final_drainage.py's: the run on the design
+surface at sunlight 0.936, years 45-59, carried by pattern scaling to 300.31 K; rain over Priestley and Taylor's demand
+on the run's T21 grid, its year sums moved as moisture_final.py moves them), carried onto each 1.9 km cell of today's
+ground at its place in the run's settled frame. A source is a full sea at its rim (Moscoviense, Orientale, Smythii-Marginis) or a
 lake through which at least Q_SOURCE flows in the closed budget's governed routing (final_drainage.py). A route leaves
 a source over one pass of the catchment graph into a neighbouring catchment: a channel at the source's level, cut down
 through the pass and the ground beyond it until that ground falls below the source's level, after which the water runs
@@ -42,8 +43,8 @@ from biosphere.ecology import moisture_map as bm
 from climate.gcm import turned_climatology as TC
 from climate.gcm.turned import to_turned
 from geography import drainage as dr
-from research.studies.atlas_round import drylands as DL
 from research.studies.atlas_round import final_drainage as FD
+from research.studies.atlas_round import moisture_final as MF
 from research.studies.atlas_round import redrawn_drainage as RD
 from research.studies.atlas_round import river_losses as RL
 from research.studies.drainage_network import network as NW
@@ -54,7 +55,8 @@ OUT = HERE / 'results' / 'dryland_rivers.json'
 SCHEMA = 'terluna.research.atlas-round-dryland-rivers/1'
 CODE = ('research/studies/atlas_round/dryland_rivers.py', 'research/studies/atlas_round/final_drainage.py',
         'research/studies/atlas_round/river_losses.py', 'research/studies/atlas_round/redrawn_drainage.py',
-        'biosphere/ecology/moisture_map.py')
+        'biosphere/ecology/moisture_map.py', 'research/studies/atlas_round/moisture_final.py',
+        'climate/gcm/pattern_scaling.py')
 BUDGET = 'closed_budget'
 FULL_SEAS = ('moscoviense', 'orientale', 'smythii_marginis')
 Q_SOURCE = 1000.0                    # m3/s through a lake for it to be a source
@@ -76,13 +78,12 @@ def sha256(path) -> str:
 # ---------------------------------------------------------------- the land's aridity on today's ground
 
 def aridity_on_ground(rows, cols, rotation, log=print):
-    """The UNEP class of each 1.9 km cell (0 hyper-arid to 4 humid): the run's aridity index on its T21 grid, bilinear
-    at the cell's place in the run's frame. Returns the classes (uint8, rows x cols) and the T21 reading."""
-    bm.RUNS = DL.RUNS
-    bm.CACHE = DL.CACHE
-    label, run, years, _ = DL.WINDOWS[0]
-    c = bm.read_run(run, years, humidity=False)
-    lat_src, lon_src, ai = np.asarray(c['lat'], float), np.asarray(c['lon'], float), np.asarray(c['ai'], float)
+    """The UNEP class of each 1.9 km cell (0 hyper-arid to 4 humid): the design climate's aridity index on the run's T21
+    grid (moisture_final.estimated_aridity), bilinear at the cell's place in the run's frame. Returns the classes
+    (uint8, rows x cols) and the T21 reading."""
+    lat_src, lon_src, _, ai = MF.estimated_aridity()
+    run, years = FD.RUN, FD.YEARS
+    lat_src, lon_src, ai = np.asarray(lat_src, float), np.asarray(lon_src, float), np.asarray(ai, float)
     if lat_src[0] < lat_src[-1]:
         lat_src, ai = lat_src[::-1], ai[::-1]
     out = np.empty((rows, cols), np.uint8)
@@ -92,8 +93,8 @@ def aridity_on_ground(rows, cols, rotation, log=print):
         g_lat, g_lon = np.meshgrid(la, lon, indexing='ij')
         t_lat, t_lon = to_turned(g_lat, g_lon, rotation)
         out[i:i + la.size] = bm.unep_class(TC.sample(ai, lat_src, lon_src, t_lat, t_lon))
-    log(f'aridity on today\'s ground from {run} years {years}')
-    return out, dict(run=run, years=list(years), window=label)
+    log(f'aridity on today\'s ground from {run} years {years}, {FD.LABEL}')
+    return out, dict(run=run, years=list(years), estimate=FD.LABEL)
 
 
 # ---------------------------------------------------------------- the routing's stretches
@@ -452,8 +453,8 @@ def build(log=print):
         aridity=reading, budget=BUDGET,
         settings=dict(q_source_m3s=Q_SOURCE, q_route_m3s=Q_ROUTE, q_joins_m3s=Q_JOINS, cut_max_m=CUT_MAX_M,
                       dryland_least_km=DRY_MIN_KM, width_m_per_sqrt_m3s=list(RL.WIDTH), riparian_km=list(RL.RIPARIAN_KM)),
-        evidence=('A calculation on products: the closed budget\'s governed routing of the run at sunlight 0.930 on the '
-                  'final surface (final_drainage.py), the moisture map\'s aridity of that run carried onto today\'s '
+        evidence=('A calculation on products: the closed budget\'s governed routing of '
+                  f'{FD.CLIMATE} (final_drainage.py), the moisture map\'s aridity of that climate carried onto today\'s '
                   'ground, the redrawn floor\'s catchment graph between 1.9 km cells, and river_losses.py\'s corridor. '
                   'A route\'s cut is the deepest its channel needs; tunnels, costs and the wider floodplains are left '
                   'out. Not validated against any observation.'),

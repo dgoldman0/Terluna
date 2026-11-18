@@ -1,5 +1,6 @@
-"""The satoyama map on the final surface: satoyama_candidates.py's screen on the design surface's drainage and the
-design climate, the run at sunlight 0.930 over years 35-49.
+"""The satoyama map on the design surface: satoyama_candidates.py's screen on the design surface's drainage and the
+design climate, the run on the design surface at sunlight 0.936 over years 45-59 carried by pattern scaling to 300.31 K
+(final_drainage.py, an estimate).
 
     ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.atlas_round.satoyama_final   # about a minute
 
@@ -8,10 +9,10 @@ sea and Humboldtianum held at the common level, and on the present design climat
 screen, through satoyama_candidates.py's own functions and criteria, on:
 
 - the design routing (design_routing.py), which the globe surface draws: every sea at its own level, the near-side sea
-  parted at its neck, and the governed lakes and rivers on the closed budget of the run at 0.930, so that the floor the
+  parted at its neck, and the governed lakes and rivers on the design climate's closed budget, so that the floor the
   parted sea leaves dry carries side valleys of its own;
-- that run's rain and surface temperature, years 35-49, carried to today's ground (final_drainage.py);
-- the final surface's settled frame for the turned latitudes.
+- the design climate's rain and surface temperature carried to today's ground (final_drainage.py);
+- the run's settled frame for the turned latitudes (the design surface's).
 
 The screen reads each cell's receiver and drained area from the design routing's product, its discharge in the form
 satoyama_candidates.py reads (float32, as the governed routing stores it). The record is results/satoyama_final.json,
@@ -106,15 +107,15 @@ def build(log=print):
                                                       for k, v in routing['meta']['levels_m'].items()},
                      climate=routing['meta']['climate']),
         evidence=('A screen on products: side valleys of the design surface\'s drainage (every sea at its own level, the '
-                  'near-side sea parted, the governed lakes and rivers on the closed budget of the run at sunlight '
-                  '0.930) at 1.9 km cells, tested against criteria set from Earth\'s satoyama, tank cascades and terraces '
-                  '(satoyama.md), with that run\'s rain and surface temperature over years 35-49 at T21, carried to '
+                  'near-side sea parted, the governed lakes and rivers on the design climate\'s closed budget) at 1.9 '
+                  'km cells, tested against criteria set from Earth\'s satoyama, tank cascades and terraces '
+                  f'(satoyama.md), with the rain and surface temperature at T21 of {FD.CLIMATE}, carried to '
                   'today\'s ground, and the IPCC 2019 Refinement\'s methane factors for rice. Slopes at 1.9 km are '
                   'gentler than the ground within a cell, so the valley floors and the woodland are first estimates. '
                   'Not validated against any observation.'),
         reading_rule=('As satoyama_candidates.json: areas in km2, rain in mm a year, temperatures the climate model\'s '
                       'surface temperature in C, methane in Tg a year; places on today\'s Moon and the turned Moon in '
-                      'the final surface\'s settled frame. first_map gives the first map\'s totals beside these.'),
+                      'the run\'s settled frame. first_map gives the first map\'s totals beside these.'),
         criteria=dict(valley_km2=list(SC.AREA_KM2), gentle_slope=SC.GENTLE, steep_deg=SC.STEEP_DEG,
                       valley_floor_share_min=SC.VALLEY_SHARE_MIN, woodland_share_min=SC.WOODLAND_SHARE_MIN,
                       rain_mm=list(SC.RAIN_MM), season_days=SC.SEASON_DAYS, need_mm=list(SC.NEED_MM),

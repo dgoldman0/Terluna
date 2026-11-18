@@ -2,8 +2,8 @@
  "schema": "terluna.research.atlas-round-near-side-neck/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/near_side_neck.py": "5b3f82467b662bc2157cc70066050c57b8067785036d57565112ad380dd00009",
-   "research/studies/atlas_round/final_drainage.py": "9c4fdb233a58891ea22fd82cc570cada09897d2d27d343315a56656b51e5c285",
+   "research/studies/atlas_round/near_side_neck.py": "8f50c8557c21a03103b7470af1996a67024330a76d32a3890b1c61f02e681476",
+   "research/studies/atlas_round/final_drainage.py": "270bdb22585b06318b95596db37d6ffe60b7c44476e9d8575099ee8c20043173",
    "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
    "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
    "geography/crustal_loading.py": "b57a36e705b8b4e4294a7549ab1ccccd2086f83e9008230464adb1723491f954",
@@ -11,15 +11,15 @@
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/final_drainage.json": "494e54b73071acc50cde9cfd7a7028c1d5031d597913cf696d84b2b9ba6bc7d8",
+  "research/studies/atlas_round/results/final_drainage.json": "8c3895d869f4e315f9348e4bda07d4940a86826af411b249c80ec7d41e88f713",
   "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
-  "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56"
+  "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a"
  },
  "ignored_inputs": {
-  "/media/projectspace/terluna-research/atlas-round/final_drainage/final_routing_routing_budget.npz": "5c5943ff725d74a7e290e5aa457a80f0f364a620a26accbf806e5772efb42903",
-  "/media/projectspace/terluna-research/atlas-round/final_drainage/final_routing_closed_budget.npz": "7ea24e8b7f31d32c5b0697c8b09cabf619bf6472219bdb73f69e3584f645c254"
+  "/media/projectspace/terluna-research/atlas-round/final_drainage/final_routing_routing_budget.npz": "c45b38c076fa4a112537f4d053bcd4e83107a1f9a53b102f6635b4f9a032ef7f",
+  "/media/projectspace/terluna-research/atlas-round/final_drainage/final_routing_closed_budget.npz": "45693943cbc25fde11a18749f637b67d3bf3c927073d9e80dd0ac809fa92f28d"
  },
- "evidence": "A calculation on products: the redrawn floor's heights between 1.9 km cells, the drainage of the climate run on the final surface (final_drainage.py) and geography's equilibrium tide forcing; the neck's hydraulics are first estimates with the ocean models' central bed drag and the throat's section taken over the whole sill. Not validated against any observation or ocean model run.",
+ "evidence": "A calculation on products: the redrawn floor's heights between 1.9 km cells, the drainage of the design climate: the climate run on the design surface (sunlight 0.936, years 45-59, 301.00 K at the ground) carried by pattern scaling to the 300.31 K of the run at 0.930 on the final surface, an estimate (final_drainage.py) and geography's equilibrium tide forcing; the neck's hydraulics are first estimates with the ocean models' central bed drag and the throat's section taken over the whole sill. Not validated against any observation or ocean model run.",
  "reading_rule": "Levels in m above the redrawn common level; flows in m3/s. main and south are the near-side sea's parts beyond the neck. natural_neck.steady is the two parts at steady state with the neck as it is; extra_loss_before is how much more the near-side sea could lose from the main part's rivers before the south part stands half a metre or a metre further under the main part, or the neck chokes (critical flow: the parts are separate, the main part spilling to the south one). Lanes are 300 m wide at their bed, straits as wide as the south part's need at the shared level and drop requires; volumes include side slopes of 1 in 3. tide is the two-basin model over two years after a 60-day spin-up.",
  "crest": {
   "four_connected_m": -68.72,
@@ -31,8 +31,8 @@
    -58.28
   ],
   "centre_turned": [
-   8.1,
-   -58.28
+   8.66,
+   -59.12
   ],
   "by_level": [
    {
@@ -241,10 +241,10 @@
  "budgets": {
   "routing_budget": {
    "supply_m3s": {
-    "main": 107229,
-    "south": 7177,
+    "main": 101844,
+    "south": 6251,
     "mouths": 63496,
-    "near_side_record": 114406
+    "near_side_record": 108095
    },
    "near_side_would_settle": {
     "reaches_its_rim": true,
@@ -253,18 +253,18 @@
     "area_at_the_common_level_km2": 5082098
    },
    "loss_at_the_crest_m3s": {
-    "main": 68486,
-    "south": 17639
+    "main": 64338,
+    "south": 14109
    },
-   "south_needs_at_the_crest_m3s": 10462,
+   "south_needs_at_the_crest_m3s": 7858,
    "note": "the near-side sea rises to its rim on this budget; the neck lies far under its water"
   },
   "closed_budget": {
    "supply_m3s": {
-    "main": 88166,
-    "south": 6484,
+    "main": 81237,
+    "south": 5733,
     "mouths": 63496,
-    "near_side_record": 94650
+    "near_side_record": 86970
    },
    "near_side_would_settle": {
     "reaches_its_rim": false,
@@ -273,183 +273,183 @@
     "area_at_the_common_level_km2": 5082098
    },
    "loss_at_the_crest_m3s": {
-    "main": 77052,
-    "south": 19824
+    "main": 73547,
+    "south": 16452
    },
-   "south_needs_at_the_crest_m3s": 13340,
+   "south_needs_at_the_crest_m3s": 10719,
    "natural_neck": {
     "steady": {
-     "main_level_m": -66.58,
-     "south_level_m": -166.3,
-     "head_m": 99.72,
-     "neck_flow_m3s": 11032,
+     "main_level_m": -67.02,
+     "south_level_m": -225.36,
+     "head_m": 158.34,
+     "neck_flow_m3s": 7630,
      "choked": true,
-     "south_area_km2": 828536,
-     "main_area_km2": 3836132
+     "south_area_km2": 731500,
+     "main_area_km2": 3835314
     },
     "extra_loss_before_m3s": {
-     "south_half_a_metre_behind": 10,
-     "south_a_metre_behind": 21,
+     "south_half_a_metre_behind": 9,
+     "south_a_metre_behind": 19,
      "neck_chokes": 0
     },
     "with_extra_loss": [
      {
       "extra_loss_m3s": 0.0,
-      "main_level_m": -66.58,
-      "south_level_m": -166.3,
-      "head_m": 99.72,
-      "neck_flow_m3s": 11032,
+      "main_level_m": -67.02,
+      "south_level_m": -225.36,
+      "head_m": 158.34,
+      "neck_flow_m3s": 7630,
       "choked": true,
-      "south_area_km2": 828536,
-      "main_area_km2": 3836132
+      "south_area_km2": 731500,
+      "main_area_km2": 3835314
      },
      {
       "extra_loss_m3s": 100.0,
-      "main_level_m": -66.59,
-      "south_level_m": -170.5,
-      "head_m": 103.91,
-      "neck_flow_m3s": 10932,
+      "main_level_m": -67.03,
+      "south_level_m": -230.36,
+      "head_m": 163.34,
+      "neck_flow_m3s": 7530,
       "choked": false,
-      "south_area_km2": 823255,
-      "main_area_km2": 3836119
+      "south_area_km2": 725054,
+      "main_area_km2": 3835307
      },
      {
       "extra_loss_m3s": 200.0,
-      "main_level_m": -66.61,
-      "south_level_m": -173.05,
-      "head_m": 106.45,
-      "neck_flow_m3s": 10833,
+      "main_level_m": -67.04,
+      "south_level_m": -234.9,
+      "head_m": 167.85,
+      "neck_flow_m3s": 7430,
       "choked": true,
-      "south_area_km2": 817466,
-      "main_area_km2": 3836089
+      "south_area_km2": 718149,
+      "main_area_km2": 3835281
      },
      {
       "extra_loss_m3s": 300.0,
-      "main_level_m": -66.62,
-      "south_level_m": -177.76,
-      "head_m": 111.14,
-      "neck_flow_m3s": 10733,
+      "main_level_m": -67.06,
+      "south_level_m": -238.85,
+      "head_m": 171.79,
+      "neck_flow_m3s": 7331,
       "choked": true,
-      "south_area_km2": 812226,
-      "main_area_km2": 3836058
+      "south_area_km2": 712160,
+      "main_area_km2": 3835234
      },
      {
       "extra_loss_m3s": 400.0,
-      "main_level_m": -66.63,
-      "south_level_m": -181.79,
-      "head_m": 115.17,
-      "neck_flow_m3s": 10633,
-      "choked": false,
-      "south_area_km2": 794953,
-      "main_area_km2": 3836044
+      "main_level_m": -67.07,
+      "south_level_m": -243.12,
+      "head_m": 176.05,
+      "neck_flow_m3s": 7231,
+      "choked": true,
+      "south_area_km2": 705945,
+      "main_area_km2": 3835194
      },
      {
       "extra_loss_m3s": 500.0,
-      "main_level_m": -66.64,
-      "south_level_m": -181.79,
-      "head_m": 115.15,
-      "neck_flow_m3s": 10534,
-      "choked": false,
-      "south_area_km2": 794953,
-      "main_area_km2": 3836017
+      "main_level_m": -67.08,
+      "south_level_m": -246.79,
+      "head_m": 179.71,
+      "neck_flow_m3s": 7132,
+      "choked": true,
+      "south_area_km2": 699667,
+      "main_area_km2": 3835153
      },
      {
       "extra_loss_m3s": 750.0,
-      "main_level_m": -66.67,
-      "south_level_m": -186.6,
-      "head_m": 119.92,
-      "neck_flow_m3s": 10285,
+      "main_level_m": -67.12,
+      "south_level_m": -251.05,
+      "head_m": 183.93,
+      "neck_flow_m3s": 6883,
       "choked": true,
-      "south_area_km2": 783051,
-      "main_area_km2": 3835963
+      "south_area_km2": 661318,
+      "main_area_km2": 3835080
      },
      {
       "extra_loss_m3s": 1000.0,
-      "main_level_m": -66.7,
-      "south_level_m": -196.37,
-      "head_m": 129.67,
-      "neck_flow_m3s": 10036,
-      "choked": true,
-      "south_area_km2": 773040,
-      "main_area_km2": 3835902
+      "main_level_m": -67.15,
+      "south_level_m": -255.76,
+      "head_m": 188.61,
+      "neck_flow_m3s": 6635,
+      "choked": false,
+      "south_area_km2": 654663,
+      "main_area_km2": 3835001
      },
      {
       "extra_loss_m3s": 1500.0,
-      "main_level_m": -66.77,
-      "south_level_m": -218.85,
-      "head_m": 152.08,
-      "neck_flow_m3s": 9538,
-      "choked": true,
-      "south_area_km2": 739601,
-      "main_area_km2": 3835773
+      "main_level_m": -67.22,
+      "south_level_m": -277.66,
+      "head_m": 210.44,
+      "neck_flow_m3s": 6138,
+      "choked": false,
+      "south_area_km2": 624143,
+      "main_area_km2": 3834801
      },
      {
       "extra_loss_m3s": 2000.0,
-      "main_level_m": -66.83,
-      "south_level_m": -237.24,
-      "head_m": 170.41,
-      "neck_flow_m3s": 9039,
-      "choked": true,
-      "south_area_km2": 714337,
-      "main_area_km2": 3835687
+      "main_level_m": -67.3,
+      "south_level_m": -294.38,
+      "head_m": 227.09,
+      "neck_flow_m3s": 5640,
+      "choked": false,
+      "south_area_km2": 596642,
+      "main_area_km2": 3834493
      },
      {
       "extra_loss_m3s": 3000.0,
-      "main_level_m": -66.96,
-      "south_level_m": -252.37,
-      "head_m": 185.41,
-      "neck_flow_m3s": 8044,
+      "main_level_m": -67.45,
+      "south_level_m": -328.16,
+      "head_m": 260.7,
+      "neck_flow_m3s": 4647,
       "choked": true,
-      "south_area_km2": 659509,
-      "main_area_km2": 3835439
+      "south_area_km2": 536577,
+      "main_area_km2": 3834126
      },
      {
       "extra_loss_m3s": 4000.0,
-      "main_level_m": -67.1,
-      "south_level_m": -283.33,
-      "head_m": 216.23,
-      "neck_flow_m3s": 7050,
+      "main_level_m": -67.62,
+      "south_level_m": -345.37,
+      "head_m": 277.75,
+      "neck_flow_m3s": 3653,
       "choked": true,
-      "south_area_km2": 612230,
-      "main_area_km2": 3835124
+      "south_area_km2": 478974,
+      "main_area_km2": 3833775
      }
     ],
     "added_water_to_stay_one_sea": {
      "within_0.5_m": {
-      "added_m3s": 2618,
-      "main_level_m": -63.72,
-      "south_level_m": -64.22,
+      "added_m3s": 3372,
+      "main_level_m": -64.13,
+      "south_level_m": -64.63,
       "head_m": 0.5,
-      "neck_flow_m3s": 13535,
+      "neck_flow_m3s": 10895,
       "choked": false,
-      "south_area_km2": 975715,
-      "main_area_km2": 3842743
+      "south_area_km2": 975196,
+      "main_area_km2": 3841660
      },
      "within_1_m": {
-      "added_m3s": 2582,
-      "main_level_m": -64.11,
-      "south_level_m": -65.11,
+      "added_m3s": 3338,
+      "main_level_m": -64.66,
+      "south_level_m": -65.66,
       "head_m": 1.0,
-      "neck_flow_m3s": 13516,
+      "neck_flow_m3s": 10877,
       "choked": false,
-      "south_area_km2": 974711,
-      "main_area_km2": 3841722
+      "south_area_km2": 974132,
+      "main_area_km2": 3840573
      }
     }
    },
    "ship_lanes": [
     {
      "depth_under_the_level_m": 10.0,
-     "bed_m": -76.58,
+     "bed_m": -77.02,
      "width_m": 300.0,
-     "volume_million_m3": 9.9,
+     "volume_million_m3": 10.7,
      "route": {
       "route_km": 7.6,
       "dug_km": 7.6,
-      "deepest_cut_m": 8.2,
-      "mean_cut_where_dug_m": 4.1,
-      "m3_per_m_of_bed_width": 31137.46686505663,
-      "side_slopes_m3": 513448.2647797786,
+      "deepest_cut_m": 8.6,
+      "mean_cut_where_dug_m": 4.4,
+      "m3_per_m_of_bed_width": 33600.63758012865,
+      "side_slopes_m3": 585210.2118376425,
       "through_land_km": 0.0,
       "starts": [
        8.28,
@@ -463,22 +463,51 @@
      },
      "extra_loss_before_m3s": {
       "south_half_a_metre_behind": 9,
-      "south_a_metre_behind": 19,
+      "south_a_metre_behind": 18,
       "neck_chokes": 0
      }
     },
     {
      "depth_under_the_level_m": 15.0,
-     "bed_m": -81.58,
+     "bed_m": -82.02,
      "width_m": 300.0,
-     "volume_million_m3": 19.8,
+     "volume_million_m3": 21.0,
      "route": {
       "route_km": 9.5,
       "dug_km": 9.5,
-      "deepest_cut_m": 13.2,
-      "mean_cut_where_dug_m": 6.4,
-      "m3_per_m_of_bed_width": 60517.83956452934,
-      "side_slopes_m3": 1685746.5132026675,
+      "deepest_cut_m": 13.6,
+      "mean_cut_where_dug_m": 6.7,
+      "m3_per_m_of_bed_width": 63802.06718462537,
+      "side_slopes_m3": 1838216.0889015815,
+      "through_land_km": 0.0,
+      "starts": [
+       8.28,
+       -58.22
+      ],
+      "ends": [
+       8.59,
+       -58.22
+      ],
+      "touches_the_window_edge": false
+     },
+     "extra_loss_before_m3s": {
+      "south_half_a_metre_behind": 10,
+      "south_a_metre_behind": 20,
+      "neck_chokes": 0
+     }
+    },
+    {
+     "depth_under_the_level_m": 20.0,
+     "bed_m": -87.02,
+     "width_m": 300.0,
+     "volume_million_m3": 34.7,
+     "route": {
+      "route_km": 9.5,
+      "dug_km": 9.5,
+      "deepest_cut_m": 18.6,
+      "mean_cut_where_dug_m": 10.7,
+      "m3_per_m_of_bed_width": 101706.25521481222,
+      "side_slopes_m3": 4138507.992079234,
       "through_land_km": 0.0,
       "starts": [
        8.28,
@@ -495,215 +524,186 @@
       "south_a_metre_behind": 21,
       "neck_chokes": 0
      }
-    },
-    {
-     "depth_under_the_level_m": 20.0,
-     "bed_m": -86.58,
-     "width_m": 300.0,
-     "volume_million_m3": 33.4,
-     "route": {
-      "route_km": 9.5,
-      "dug_km": 9.5,
-      "deepest_cut_m": 18.2,
-      "mean_cut_where_dug_m": 10.4,
-      "m3_per_m_of_bed_width": 98422.0275947162,
-      "side_slopes_m3": 3899827.4413527995,
-      "through_land_km": 0.0,
-      "starts": [
-       8.28,
-       -58.22
-      ],
-      "ends": [
-       8.59,
-       -58.22
-      ],
-      "touches_the_window_edge": false
-     },
-     "extra_loss_before_m3s": {
-      "south_half_a_metre_behind": 25,
-      "south_a_metre_behind": 35,
-      "neck_chokes": 0
-     }
     }
    ],
-   "one_level_m": -94.29,
+   "one_level_m": -111.0,
    "straits": [
     {
-     "shared_level_m": -94.29,
-     "under_the_crest_m": 25.6,
-     "bed_m": -112.29,
+     "shared_level_m": -111.0,
+     "under_the_crest_m": 42.3,
+     "bed_m": -129.0,
      "water_m": 18.0,
      "drop_m": 0.5,
-     "south_need_m3s": 12746,
-     "bed_width_m": 2012,
-     "volume_km3": 1.555,
+     "south_need_m3s": 9994,
+     "bed_width_m": 1902,
+     "volume_km3": 4.037,
+     "mean_speed_m_s": 0.28,
+     "extra_loss_it_holds_m3s": 137,
+     "route": {
+      "route_km": 66.9,
+      "dug_km": 66.9,
+      "deepest_cut_m": 60.6,
+      "mean_cut_where_dug_m": 29.9,
+      "m3_per_m_of_bed_width": 1998267.3802547704,
+      "side_slopes_m3": 236600918.58896834,
+      "through_land_km": 48.3,
+      "starts": [
+       7.72,
+       -58.03
+      ],
+      "ends": [
+       9.53,
+       -58.78
+      ],
+      "touches_the_window_edge": false
+     }
+    },
+    {
+     "shared_level_m": -111.0,
+     "under_the_crest_m": 42.3,
+     "bed_m": -129.0,
+     "water_m": 18.0,
+     "drop_m": 1.0,
+     "south_need_m3s": 9994,
+     "bed_width_m": 1337,
+     "volume_km3": 2.908,
+     "mean_speed_m_s": 0.4,
+     "extra_loss_it_holds_m3s": 137,
+     "route": {
+      "route_km": 66.9,
+      "dug_km": 66.9,
+      "deepest_cut_m": 60.6,
+      "mean_cut_where_dug_m": 29.9,
+      "m3_per_m_of_bed_width": 1998267.3802547704,
+      "side_slopes_m3": 236600918.58896834,
+      "through_land_km": 48.3,
+      "starts": [
+       7.72,
+       -58.03
+      ],
+      "ends": [
+       9.53,
+       -58.78
+      ],
+      "touches_the_window_edge": false
+     }
+    },
+    {
+     "shared_level_m": -121.0,
+     "under_the_crest_m": 52.3,
+     "bed_m": -139.0,
+     "water_m": 18.0,
+     "drop_m": 0.5,
+     "south_need_m3s": 9781,
+     "bed_width_m": 1895,
+     "volume_km3": 5.464,
+     "mean_speed_m_s": 0.28,
+     "extra_loss_it_holds_m3s": 754,
+     "route": {
+      "route_km": 69.5,
+      "dug_km": 69.5,
+      "deepest_cut_m": 112.2,
+      "mean_cut_where_dug_m": 38.3,
+      "m3_per_m_of_bed_width": 2663009.0285029793,
+      "side_slopes_m3": 416991591.4932097,
+      "through_land_km": 52.8,
+      "starts": [
+       7.78,
+       -57.97
+      ],
+      "ends": [
+       9.72,
+       -58.84
+      ],
+      "touches_the_window_edge": false
+     }
+    },
+    {
+     "shared_level_m": -121.0,
+     "under_the_crest_m": 52.3,
+     "bed_m": -139.0,
+     "water_m": 18.0,
+     "drop_m": 1.0,
+     "south_need_m3s": 9781,
+     "bed_width_m": 1332,
+     "volume_km3": 3.964,
+     "mean_speed_m_s": 0.39,
+     "extra_loss_it_holds_m3s": 754,
+     "route": {
+      "route_km": 69.5,
+      "dug_km": 69.5,
+      "deepest_cut_m": 112.2,
+      "mean_cut_where_dug_m": 38.3,
+      "m3_per_m_of_bed_width": 2663009.0285029793,
+      "side_slopes_m3": 416991591.4932097,
+      "through_land_km": 52.8,
+      "starts": [
+       7.78,
+       -57.97
+      ],
+      "ends": [
+       9.72,
+       -58.84
+      ],
+      "touches_the_window_edge": false
+     }
+    },
+    {
+     "shared_level_m": -131.0,
+     "under_the_crest_m": 62.3,
+     "bed_m": -149.0,
+     "water_m": 18.0,
+     "drop_m": 0.5,
+     "south_need_m3s": 9621,
+     "bed_width_m": 2134,
+     "volume_km3": 8.174,
+     "mean_speed_m_s": 0.24,
+     "extra_loss_it_holds_m3s": 1405,
+     "route": {
+      "route_km": 91.9,
+      "dug_km": 91.9,
+      "deepest_cut_m": 122.2,
+      "mean_cut_where_dug_m": 38.6,
+      "m3_per_m_of_bed_width": 3546808.8245580895,
+      "side_slopes_m3": 603802167.7935516,
+      "through_land_km": 61.2,
+      "starts": [
+       7.72,
+       -57.97
+      ],
+      "ends": [
+       10.16,
+       -59.34
+      ],
+      "touches_the_window_edge": false
+     }
+    },
+    {
+     "shared_level_m": -131.0,
+     "under_the_crest_m": 62.3,
+     "bed_m": -149.0,
+     "water_m": 18.0,
+     "drop_m": 1.0,
+     "south_need_m3s": 9621,
+     "bed_width_m": 1501,
+     "volume_km3": 5.929,
      "mean_speed_m_s": 0.34,
-     "extra_loss_it_holds_m3s": 0,
+     "extra_loss_it_holds_m3s": 1405,
      "route": {
-      "route_km": 44.9,
-      "dug_km": 44.9,
-      "deepest_cut_m": 43.9,
-      "mean_cut_where_dug_m": 16.6,
-      "m3_per_m_of_bed_width": 744701.055252466,
-      "side_slopes_m3": 55822723.63112795,
-      "through_land_km": 18.6,
-      "starts": [
-       7.34,
-       -58.78
-      ],
-      "ends": [
-       8.59,
-       -58.22
-      ],
-      "touches_the_window_edge": false
-     }
-    },
-    {
-     "shared_level_m": -94.29,
-     "under_the_crest_m": 25.6,
-     "bed_m": -112.29,
-     "water_m": 18.0,
-     "drop_m": 1.0,
-     "south_need_m3s": 12746,
-     "bed_width_m": 1415,
-     "volume_km3": 1.11,
-     "mean_speed_m_s": 0.48,
-     "extra_loss_it_holds_m3s": 0,
-     "route": {
-      "route_km": 44.9,
-      "dug_km": 44.9,
-      "deepest_cut_m": 43.9,
-      "mean_cut_where_dug_m": 16.6,
-      "m3_per_m_of_bed_width": 744701.055252466,
-      "side_slopes_m3": 55822723.63112795,
-      "through_land_km": 18.6,
-      "starts": [
-       7.34,
-       -58.78
-      ],
-      "ends": [
-       8.59,
-       -58.22
-      ],
-      "touches_the_window_edge": false
-     }
-    },
-    {
-     "shared_level_m": -104.29,
-     "under_the_crest_m": 35.6,
-     "bed_m": -122.29,
-     "water_m": 18.0,
-     "drop_m": 0.5,
-     "south_need_m3s": 12525,
-     "bed_width_m": 2290,
-     "volume_km3": 3.803,
-     "mean_speed_m_s": 0.3,
-     "extra_loss_it_holds_m3s": 605,
-     "route": {
-      "route_km": 61.2,
-      "dug_km": 61.2,
-      "deepest_cut_m": 53.9,
-      "mean_cut_where_dug_m": 26.0,
-      "m3_per_m_of_bed_width": 1588486.6606412272,
-      "side_slopes_m3": 164623586.17641318,
-      "through_land_km": 40.3,
+      "route_km": 91.9,
+      "dug_km": 91.9,
+      "deepest_cut_m": 122.2,
+      "mean_cut_where_dug_m": 38.6,
+      "m3_per_m_of_bed_width": 3546808.8245580895,
+      "side_slopes_m3": 603802167.7935516,
+      "through_land_km": 61.2,
       "starts": [
        7.72,
-       -58.03
+       -57.97
       ],
       "ends": [
-       9.34,
-       -58.78
-      ],
-      "touches_the_window_edge": false
-     }
-    },
-    {
-     "shared_level_m": -104.29,
-     "under_the_crest_m": 35.6,
-     "bed_m": -122.29,
-     "water_m": 18.0,
-     "drop_m": 1.0,
-     "south_need_m3s": 12525,
-     "bed_width_m": 1612,
-     "volume_km3": 2.724,
-     "mean_speed_m_s": 0.42,
-     "extra_loss_it_holds_m3s": 605,
-     "route": {
-      "route_km": 61.2,
-      "dug_km": 61.2,
-      "deepest_cut_m": 53.9,
-      "mean_cut_where_dug_m": 26.0,
-      "m3_per_m_of_bed_width": 1588486.6606412272,
-      "side_slopes_m3": 164623586.17641318,
-      "through_land_km": 40.3,
-      "starts": [
-       7.72,
-       -58.03
-      ],
-      "ends": [
-       9.34,
-       -58.78
-      ],
-      "touches_the_window_edge": false
-     }
-    },
-    {
-     "shared_level_m": -114.29,
-     "under_the_crest_m": 45.6,
-     "bed_m": -132.29,
-     "water_m": 18.0,
-     "drop_m": 0.5,
-     "south_need_m3s": 12330,
-     "bed_width_m": 2325,
-     "volume_km3": 5.425,
-     "mean_speed_m_s": 0.29,
-     "extra_loss_it_holds_m3s": 1411,
-     "route": {
-      "route_km": 65.3,
-      "dug_km": 65.3,
-      "deepest_cut_m": 63.6,
-      "mean_cut_where_dug_m": 33.8,
-      "m3_per_m_of_bed_width": 2208345.3909378955,
-      "side_slopes_m3": 290064948.17794716,
-      "through_land_km": 50.2,
-      "starts": [
-       7.72,
-       -58.03
-      ],
-      "ends": [
-       9.53,
-       -58.78
-      ],
-      "touches_the_window_edge": false
-     }
-    },
-    {
-     "shared_level_m": -114.29,
-     "under_the_crest_m": 45.6,
-     "bed_m": -132.29,
-     "water_m": 18.0,
-     "drop_m": 1.0,
-     "south_need_m3s": 12330,
-     "bed_width_m": 1636,
-     "volume_km3": 3.904,
-     "mean_speed_m_s": 0.41,
-     "extra_loss_it_holds_m3s": 1411,
-     "route": {
-      "route_km": 65.3,
-      "dug_km": 65.3,
-      "deepest_cut_m": 63.6,
-      "mean_cut_where_dug_m": 33.8,
-      "m3_per_m_of_bed_width": 2208345.3909378955,
-      "side_slopes_m3": 290064948.17794716,
-      "through_land_km": 50.2,
-      "starts": [
-       7.72,
-       -58.03
-      ],
-      "ends": [
-       9.53,
-       -58.78
+       10.16,
+       -59.34
       ],
       "touches_the_window_edge": false
      }
@@ -711,64 +711,39 @@
    ],
    "tide": {
     "natural_neck": {
-     "exchange_open_neck_largest_m3s": 10942305,
-     "exchange_largest_m3s": 33352,
-     "exchange_rms_m3s": 12668,
+     "exchange_open_neck_largest_m3s": 9950829,
+     "exchange_largest_m3s": 28601,
+     "exchange_rms_m3s": 10550,
      "neck_flow_m3s": {
       "least": 0,
-      "greatest": 44384,
-      "steady": 11032
+      "greatest": 36230,
+      "steady": 7630
      },
-     "throat_mean_speed_largest_m_s": 2.41,
-     "throat_mean_speed_median_m_s": 1.28,
-     "throat_section_steady_m2": 7223,
+     "throat_mean_speed_largest_m_s": 2.29,
+     "throat_mean_speed_median_m_s": 1.11,
+     "throat_section_steady_m2": 5590,
      "south_monthly_range_m": 0.02,
-     "south_open_neck_monthly_range_m": 6.01,
-     "parts_equilibrium_difference_monthly_range_m": 7.31
+     "south_open_neck_monthly_range_m": 6.22,
+     "parts_equilibrium_difference_monthly_range_m": 7.41
     },
     "with_the_20_m_lane": {
-     "exchange_open_neck_largest_m3s": 11088021,
-     "exchange_largest_m3s": 4832,
-     "exchange_rms_m3s": 2489,
+     "exchange_open_neck_largest_m3s": 10241441,
+     "exchange_largest_m3s": 4057,
+     "exchange_rms_m3s": 2117,
      "neck_flow_m3s": {
-      "least": 6456,
-      "greatest": 15132,
-      "steady": 11288
+      "least": 3915,
+      "greatest": 11354,
+      "steady": 7973
      },
-     "throat_mean_speed_largest_m_s": 4.2,
-     "throat_mean_speed_median_m_s": 3.74,
-     "throat_section_steady_m2": 2947,
+     "throat_mean_speed_largest_m_s": 3.84,
+     "throat_mean_speed_median_m_s": 3.33,
+     "throat_section_steady_m2": 2325,
      "south_monthly_range_m": 0.0,
-     "south_open_neck_monthly_range_m": 5.97,
-     "parts_equilibrium_difference_monthly_range_m": 7.29
-    },
-    "with_the_strait_at_the_one_level": {
-     "steady": {
-      "main_level_m": -94.05,
-      "south_level_m": -94.55,
-      "head_m": 0.5,
-      "neck_flow_m3s": 12737,
-      "choked": false,
-      "south_area_km2": 931147,
-      "main_area_km2": 3748508
-     },
-     "exchange_open_neck_largest_m3s": 11930163,
-     "exchange_largest_m3s": 56362,
-     "exchange_rms_m3s": 36200,
-     "neck_flow_m3s": {
-      "least": -43625,
-      "greatest": 38623,
-      "steady": 12737
-     },
-     "throat_mean_speed_largest_m_s": 1.11,
-     "throat_mean_speed_median_m_s": 0.78,
-     "throat_section_steady_m2": 37178,
-     "south_monthly_range_m": 0.05,
-     "south_open_neck_monthly_range_m": 5.8,
-     "parts_equilibrium_difference_monthly_range_m": 7.24
+     "south_open_neck_monthly_range_m": 6.16,
+     "parts_equilibrium_difference_monthly_range_m": 7.39
     }
    }
   }
  },
- "seconds": 34
+ "seconds": 26
 }

@@ -1,17 +1,23 @@
-"""The moisture map on the design climate on the final surface: the run at sunlight 0.930, years 35-49, classed as
-biosphere/ecology/moisture_map.py classes the design climate, with its settings taken from the atlas round's design
-surface.
+"""The moisture map on the design climate, classed as biosphere/ecology/moisture_map.py classes the design climate,
+with its settings taken from the atlas round's design surface.
 
     ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 <climate venv python> -m research.studies.atlas_round.moisture_final
 
-It takes about 10 seconds with the year sums drylands.py cached for the same run and years; without them it reads the
-run's fifteen year files, about 3.4 GB.
+The design climate is final_drainage.py's: the climate run on the design surface at sunlight 0.936, years 45-59,
+carried by pattern scaling to the 300.31 K of the run at 0.930 on the final surface (climate.gcm.pattern_scaling, an
+estimate). It takes about a minute with the year sums of the run and of the pairs' windows cached in drylands.py's
+cache; without them it reads their year files, about 3.4 GB for each fifteen years.
 
-The moisture map's own code runs unchanged; this module hands it two things the final surface differs in, so that its
-product and those that read it stay as they are:
+The moisture map's own code runs unchanged; this module hands it three things the design climate differs in, so that
+its product and those that read it stay as they are:
 
-- the frame: the run on the final surface lives in the settled turned frame its surface record names
-  (turned_surface_<frame>.json, rotation_today_to_turned and the tilt), where the moisture map reads geology's
+- the estimate: each year's sums of the run (the means by tenth of the lunar day, the extremes and the night humidity)
+  are moved by the step of the climatology's estimate, final_drainage.ESTIMATE's delta_K, with responses per kelvin
+  measured as pattern_scaling measures them, on the moisture map's own fields (rain, evaporation, soil water, the net
+  sunlight and longwave at the ground, the air and ground temperatures, the pressure, the extremes and the night
+  humidity) from the means of the same two pairs of windows; a field the pairs disagree on in sign is left unchanged;
+- the frame: the run lives in the settled turned frame its surface record names (for the run on the design surface,
+  design_turned_surface_<frame>.json: rotation_today_to_turned and the tilt), where the moisture map reads geology's
   orientation product for the elastic frame;
 - the settings: each T21 cell's seas, lakes, closed lakes, coast and tide come from the design surface the globe draws
   (globe_surface.py: every sea at its own level, the near-side sea parted, the governed lakes with their spills),
@@ -29,9 +35,10 @@ design surface's land in the run's water cells takes the class of the nearest la
 marked as assigned and counted apart (land.design_surface.assigned), and shares.over_the_design_land gives the classes'
 shares over all the design surface's land, its land in the run's land cells taking its cell's class.
 
-The window is the run's settled years alone: its earlier years cool toward the settled state, so no decade beside them
+The window is the run's settled years alone: its earlier years warm toward the settled state, so no decade beside them
 is mapped. The polar light's thresholds stay at the elastic frame's tilt (1.613 degrees) where the settled frame's is
-1.707. The product is results/moisture_map_final.json, in the moisture map's schema, with its provenance put right.
+the record's (1.691 degrees for the design surface). The product is results/moisture_map_final.json, in the moisture
+map's schema, with its provenance put right and the estimate's responses under estimate.
 """
 from __future__ import annotations
 
@@ -45,6 +52,7 @@ from pathlib import Path
 import numpy as np
 
 from biosphere.ecology import moisture_map as bm
+from climate.gcm import pattern_scaling as PS
 from climate.gcm.turned import to_turned
 from research.studies.atlas_round import drylands as DL
 from research.studies.atlas_round import final_drainage as FD
@@ -58,10 +66,70 @@ OUT = HERE / 'results' / 'moisture_map_final.json'
 BULK = Path('/media/projectspace/terluna-research/atlas-round/moisture_final')
 LAKES = BULK / 'design_lakes'                  # the design surface's lakes in geography's drainage product's form
 CODE = ('research/studies/atlas_round/moisture_final.py', 'research/studies/atlas_round/globe_surface.py',
-        'research/studies/atlas_round/tides_final.py', 'biosphere/ecology/moisture_map.py')
-RUN, YEARS = FD.RUN, (35, 49)
+        'research/studies/atlas_round/tides_final.py', 'biosphere/ecology/moisture_map.py', 'climate/gcm/pattern_scaling.py')
+RUN, YEARS = FD.RUN, tuple(FD.YEARS)
 SEAS = range(1, 8)
 LAKE = 8
+# How the moisture map's fields move with the global temperature (pattern_scaling's kinds): the means by tenth, the
+# year's extremes and the night humidity at the lowest level
+EXTREMES = ('tas_min', 'tas_max', 'mint', 'maxt')
+YEAR_KINDS = {'pr': 'ratio', 'evap': 'ratio', 'mrso': 'ratio', 'rss': 'ratio', 'rls': 'ratio', 'ps': 'ratio',
+              'tas': 'add', 'ts': 'add', **{k: 'add' for k in EXTREMES}, 'night_rh': 'add'}
+
+
+def window_means(run, years):
+    """A window's means of the moisture map's fields from its year sums (moisture_map.cached_year, combine), the
+    extremes as the mean of each year's, in pattern_scaling's form."""
+    data = [bm.cached_year(run, y, True) for y in range(years[0], years[1] + 1)]
+    _, mean = bm.combine(data)
+    out = dict(lat=data[0]['lat'], lon=data[0]['lon'], lsm=data[0]['land'].astype(float), ts_k=mean['ts'],
+               **{k: mean[k] for k in bm.KEYS})
+    for k in EXTREMES:
+        out[k] = np.mean([y[k] for y in data], axis=0)
+    out['night_rh'] = sum(y['rh_sum'] for y in data) / np.maximum(sum(y['rh_n'] for y in data), 1)
+    return out
+
+
+def estimate_responses():
+    """The step of the climatology's estimate and the moisture map's own responses per kelvin from its pairs."""
+    record = json.loads((ROOT / FD.ESTIMATE).read_text())
+    if record['estimate']['base']['run'] != RUN or record['estimate']['base']['years'] != list(YEARS):
+        raise SystemExit(f'{FD.ESTIMATE} does not estimate {RUN} years {YEARS}')
+    pairs = [PS.pair_response(window_means(p['warm']['run'], p['warm']['years']),
+                              window_means(p['cool']['run'], p['cool']['years']), YEAR_KINDS)
+             for p in record['estimate']['pairs']]
+    return record, pairs, PS.combine(pairs)
+
+
+def estimated_aridity():
+    """The design climate's aridity index on the run's T21 grid, rain over Priestley and Taylor's demand from the run's
+    year sums moved by the estimate's step and composited as the moisture map composites them, with moisture_map's
+    RUNS and CACHE set as this module sets them; returns lat, lon, the land mask and the index."""
+    bm.RUNS = DL.RUNS
+    bm.CACHE = str(DL.CACHE)
+    record, _, applied = estimate_responses()
+    delta = record['estimate']['delta_K']
+    data = [adjusted(bm.cached_year(RUN, y, True), applied, delta) for y in range(YEARS[0], YEARS[1] + 1)]
+    _, mean = bm.combine(data)
+    return data[0]['lat'], data[0]['lon'], data[0]['land'], bm.aridity(mean)[2]
+
+
+def adjusted(year, applied, delta):
+    """One year's sums moved by delta kelvin: each land cell by the land's response, each water cell by the water's."""
+    land = np.asarray(year['land'], bool)
+    k = {name: np.where(land, r['land']['per_K'], r['water']['per_K']) for name, r in applied.items()}
+    out = dict(year)
+    out['acc'] = {}
+    for name in bm.KEYS:
+        if YEAR_KINDS[name] == 'ratio':
+            out['acc'][name] = year['acc'][name] * np.maximum(0.0, 1.0 + k[name] * delta)
+        else:
+            out['acc'][name] = year['acc'][name] + k[name] * delta * year['cnt']
+    for name in EXTREMES:
+        out[name] = year[name] + k[name] * delta
+    if 'rh_sum' in year:
+        out['rh_sum'] = year['rh_sum'] + k['night_rh'] * delta * year['rh_n']
+    return out
 
 
 def sha256(path) -> str:
@@ -74,7 +142,7 @@ def frame_record():
 
 
 def settled_frame(_path=None):
-    """The moisture map's frame (climate.gcm.turned.read_frame's form) from the final surface's record."""
+    """The moisture map's frame (climate.gcm.turned.read_frame's form) from the run's surface record."""
     path, record = frame_record()
     return dict(rotation=np.asarray(record['frame']['rotation_today_to_turned'], float),
                 tilt_deg=float(record['frame']['tilt_to_ecliptic_deg']), frame=record['frame'], sha256=sha256(path))
@@ -290,7 +358,20 @@ def build(log=print):
 
     bm.settings = settings                          # the design surface's seas, lakes, coasts and tides
     bm.GEOGRAPHY['tides_grid'] = str(TF.PRODUCT)     # the tide of the design surface's own seas
-    product = bm.build(RUN, YEARS, (), bm.STORE_YEARS, drainage=str(lakes), orientation=str(frame_path.relative_to(ROOT)))
+    record, pairs, applied = estimate_responses()    # measured on the runs' own sums, before the run's are moved
+    delta = record['estimate']['delta_K']
+    read = bm.cached_year
+
+    def cached_year(run, year, humidity):
+        out = read(run, year, humidity)
+        return adjusted(out, applied, delta) if run == RUN else out
+
+    bm.cached_year = cached_year                     # the run's years moved by the estimate's step
+    try:
+        product = bm.build(RUN, YEARS, (), bm.STORE_YEARS, drainage=str(lakes),
+                           orientation=str(frame_path.relative_to(ROOT)))
+    finally:
+        bm.cached_year = read
     cells = product['cells']
     cover = coverage(seen['lat'], seen['lon'], seen['geo'], np.array(cells['row']), np.array(cells['col']))
     given = assigned(seen['lat'], seen['lon'], seen['geo'], cells, product['classes'])
@@ -310,12 +391,22 @@ def build(log=print):
                             record_sha256=sha256(GS.OUT)),
         tides=dict(path=str(TF.PRODUCT), sha256=sha256(TF.PRODUCT), record=str(TF.OUT.relative_to(ROOT)),
                    record_sha256=sha256(TF.OUT)))
+    product['producer']['inputs'][FD.ESTIMATE] = sha256(ROOT / FD.ESTIMATE)
+    product['estimate'] = dict(
+        method=('each year\'s sums of the run moved by delta_K, each land cell by the land\'s response per kelvin and '
+                'each water cell by the water\'s (moisture_final.adjusted); the responses measured on the moisture '
+                'map\'s own means of the climatology estimate\'s pairs as climate.gcm.pattern_scaling measures them, '
+                'zero where the pairs disagree in sign'),
+        label=FD.LABEL, record=FD.ESTIMATE, delta_K=delta, base=record['estimate']['base'],
+        target=record['estimate']['target'],
+        pairs=[dict(p, delta_K=m['delta_K']) for p, m in zip(record['estimate']['pairs'], pairs)],
+        applied=PS.rounded(applied))
     product['evidence'] = (
-        'The moisture map of the design climate on the atlas round\'s final surface (the run at sunlight 0.930, years '
-        '35-49, 300.3 K at the ground), classed by biosphere/ecology/moisture_map.py unchanged; the cells are the run\'s, '
-        'in the settled turned frame of its surface record, and the settings (seas, lakes, closed lakes, coasts, tides) '
-        'come from the round\'s design surface, every sea at its own level and the near-side sea parted. '
-        + product['evidence'].replace('geology\'s orientation product', 'the final surface\'s settled frame'))
+        f'The moisture map of {FD.CLIMATE}, classed by biosphere/ecology/moisture_map.py unchanged on the run\'s year '
+        'sums moved by the estimate\'s step (estimate); the cells are the run\'s, in the settled turned frame of its '
+        'surface record, and the settings (seas, lakes, closed lakes, coasts, tides) come from the round\'s design '
+        'surface, every sea at its own level and the near-side sea parted. '
+        + product['evidence'].replace('geology\'s orientation product', 'the design surface\'s settled frame'))
     product['window'] = dict(years=list(YEARS), note='the run\'s settled years; its earlier years cool toward them, so no '
                                                      'decade beside them is mapped')
     a = given['assigned']
@@ -330,7 +421,11 @@ def build(log=print):
                          'at most, assigned and counted apart. In lake districts that class errs dry, since the run '
                          'holds no land cell whose air the district\'s own lakes moisten.',
                          'The polar light\'s thresholds are the elastic frame\'s, at a tilt of 1.613 degrees; the settled '
-                         'frame\'s is 1.707.',
+                         f'frame\'s is {float(frame_record()[1]["frame"]["tilt_to_ecliptic_deg"]):.3f}.',
+                         f'The climate is an estimate: the run\'s years moved by {delta:+.3f} K of global surface '
+                         'temperature with uniform responses over land and over water from two pairs of runs, so the '
+                         'cells keep the run\'s own pattern; a run at the target would differ from it by about the '
+                         'noise of fifteen years\' means.',
                          'The tide along the coasts is the monthly range of the design surface\'s seas from geography\'s '
                          'tide model with each sea\'s mean held (tides_final.py), an equilibrium tide checked against '
                          'a shallow-water solution on three seas; '
@@ -340,7 +435,7 @@ def build(log=print):
                          'The gap\'s scale and the night-rain timing are the design run\'s of 1 November, as in the '
                          'moisture map on the corrected climate.']
     product['seconds'] = round(time.time() - started)
-    log(f'moisture map on the final surface in {product["seconds"]} s')
+    log(f'moisture map on the design climate in {product["seconds"]} s')
     return product
 
 

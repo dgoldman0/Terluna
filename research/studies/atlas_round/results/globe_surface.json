@@ -2,7 +2,7 @@
  "schema": "terluna.research.atlas-round-globe-surface/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/globe_surface.py": "59b90ee4c57079650f15becbf1b8d6b6c5d43841878ef953804c79479bdad37c",
+   "research/studies/atlas_round/globe_surface.py": "7b53d8e9c95a67a5feed90321ab831316b85feb831bad7fc3fc6dd50b91c4655",
    "research/studies/atlas_round/design_routing.py": "7efdff778ed46538149ca80abdf825d819ff80563565814a6ac4d0c09632cb6c",
    "research/studies/atlas_round/design_cuts.py": "3c6b1e5064088cdb99ddeef309867941913fbff9599b8e52b68df6354352a7f7",
    "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
@@ -10,42 +10,42 @@
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/design_routing.json": "c0a11066af790bdcbfb71f9252c5c1f40bcea7b4f4b45637c5b3b1d3d5ae5bb8",
-  "research/studies/atlas_round/results/design_cuts.json": "0e884f904376cd2ccfb9a4df456d03b28351e61f5b618da05bd4cf86dd739b8e",
+  "research/studies/atlas_round/results/design_routing.json": "cb6572d5bf7914de6e57fbb5064582e21d5c5910aa7ed7af506af2d4dd0a88fe",
+  "research/studies/atlas_round/results/design_cuts.json": "e0529dde0da86593e0de7a7f11042eb6fb03a9f9c7e34d4d29154c06b0a09c15",
   "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
-  "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56"
+  "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a"
  },
  "ignored_inputs": {
-  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "6cb410b400c6ee1ba15d3c79b404dfdae94327a66217e4a8b57e77cafbee05c1",
-  "/media/projectspace/terluna-research/atlas-round/design_cuts/design_cuts_16ppd.npz": "8f3542780ddb79a8177ef8d39eeba9b5feb6d6cb285330ba090037c16bf1d790"
+  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "6dd552e69faca7334280149775f96253cdb1852a784756f7462d6c962b20abf6",
+  "/media/projectspace/terluna-research/atlas-round/design_cuts/design_cuts_16ppd.npz": "03f7cf8adb495fc9b97de5e202132292cba5383ff752367fd023055bb1c0805c"
  },
  "evidence": "The redrawn floor at the settled state, the seas at the levels the design climate's closed budget gives them with the works of 16 November and the fixed weirs, and the routing of that budget's rain over it with the near-side sea parted. Not validated against any observation.",
  "reading_rule": "Levels and heights in m above the redrawn common level; areas in km2, volumes in km3, flows in m3/s; shares of the Moon's surface. seas are the seven bodies at their own levels; lakes are the routing's lakes off the seas; neck_river is the main part's spill run down the routing from the ground past the crest. product names the grid the globe reads, on the research drive.",
  "summary": {
   "common_level_above_the_dry_geoid_m": -1615.03,
-  "water_share": 0.37547,
-  "sea_share": 0.23979,
-  "lake_share": 0.13567,
-  "lakes": 29799,
-  "closed_lake_share": 0.00577,
-  "lake_volume_km3": 4617086,
-  "rivers_into_the_seas_m3s": 268824,
+  "water_share": 0.37159,
+  "sea_share": 0.23721,
+  "lake_share": 0.13437,
+  "lakes": 29740,
+  "closed_lake_share": 0.00588,
+  "lake_volume_km3": 4759712,
+  "rivers_into_the_seas_m3s": 249180,
   "seas": {
    "near-side sea": {
-    "level_m": -66.58,
-    "area_km2": 3836148,
-    "share": 0.10113,
+    "level_m": -67.02,
+    "area_km2": 3835314,
+    "share": 0.10111,
     "mean_depth_m": 724,
-    "greatest_depth_m": 3921,
-    "volume_km3": 2778595
+    "greatest_depth_m": 3920,
+    "volume_km3": 2776908
    },
    "southern near-side seas": {
-    "level_m": -166.3,
-    "area_km2": 828540,
-    "share": 0.02184,
-    "mean_depth_m": 328,
-    "greatest_depth_m": 3032,
-    "volume_km3": 272111
+    "level_m": -225.36,
+    "area_km2": 731500,
+    "share": 0.01928,
+    "mean_depth_m": 306,
+    "greatest_depth_m": 2973,
+    "volume_km3": 223789
    },
    "South Pole\u2013Aitken Sea": {
     "level_m": 0.0,
@@ -88,18 +88,18 @@
     "volume_km3": 845786
    }
   },
-  "neck_spill_m3s": 11032,
+  "neck_spill_m3s": 7630,
   "neck_river": {
-   "length_km": 49,
+   "length_km": 300,
    "surface_from_m": -71,
-   "surface_to_m": -166,
+   "surface_to_m": -225,
    "steep_km": 0,
    "steep_reaches": 0,
-   "largest_fall_between_cells_m": 17,
-   "lakes_passed": 3,
+   "largest_fall_between_cells_m": 25,
+   "lakes_passed": 8,
    "discharge_m3s": [
-    11032,
-    11031
+    7630,
+    7541
    ],
    "profile": [
     [
@@ -111,8 +111,48 @@
      -105
     ],
     [
-     49,
-     -166
+     51,
+     -174
+    ],
+    [
+     75,
+     -187
+    ],
+    [
+     102,
+     -187
+    ],
+    [
+     126,
+     -187
+    ],
+    [
+     161,
+     -187
+    ],
+    [
+     176,
+     -187
+    ],
+    [
+     206,
+     -187
+    ],
+    [
+     227,
+     -187
+    ],
+    [
+     265,
+     -187
+    ],
+    [
+     276,
+     -198
+    ],
+    [
+     300,
+     -225
     ]
    ],
    "starts": {
@@ -121,8 +161,8 @@
      -58.28
     ],
     "turned": [
-     8.04,
-     -58.29
+     8.59,
+     -59.13
     ]
    },
    "reaches": "southern near-side seas"
@@ -131,23 +171,23 @@
    "trench_cells": 17,
    "deepest_m": 437.9,
    "ground_taken_km3": 7.6,
-   "lakes_drained": 2,
-   "lake_drained_km2": 35,
+   "lakes_drained": 0,
+   "lake_drained_km2": 0,
    "pieces": [
     {
      "level_m": 3448.8,
      "deepest_m": 437.9,
      "cells": 13,
      "km": 22,
-     "flow_m3s": 14176,
+     "flow_m3s": 15610,
      "at": {
       "today": [
        34.97,
        139.72
       ],
       "turned": [
-       37.14,
-       133.87
+       36.55,
+       133.16
       ]
      }
     },
@@ -156,15 +196,15 @@
      "deepest_m": 89.2,
      "cells": 3,
      "km": 5,
-     "flow_m3s": 8835,
+     "flow_m3s": 10007,
      "at": {
       "today": [
        34.22,
        132.97
       ],
       "turned": [
-       35.6,
-       127.18
+       35.02,
+       126.51
       ]
      }
     },
@@ -173,20 +213,20 @@
      "deepest_m": 56.1,
      "cells": 1,
      "km": 2,
-     "flow_m3s": 8835,
+     "flow_m3s": 10007,
      "at": {
       "today": [
        31.22,
        131.53
       ],
       "turned": [
-       32.46,
-       126.25
+       31.88,
+       125.57
       ]
      }
     }
    ],
-   "flow_m3s": 14176
+   "flow_m3s": 15610
   },
   "deepest_water_m": 7464,
   "highest_ground_m": 11649,
@@ -194,7 +234,7 @@
  },
  "product": {
   "path": "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz",
-  "sha256": "d454c35e02d2b354dd221742bfe43ba617ba2e5485589f523f39705440d22038"
+  "sha256": "9173be2542f4eee082261a32baa3d32b2f3c35a6512bff8a353c2c092b030526"
  },
- "seconds": 23
+ "seconds": 8
 }

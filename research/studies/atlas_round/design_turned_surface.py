@@ -32,7 +32,6 @@ import numpy as np
 
 from research.studies.atlas_round import design_routing as DR
 from research.studies.atlas_round import design_settled_turn as DS
-from research.studies.atlas_round import final_drainage as FD
 from research.studies.atlas_round import redrawn_drainage as RD
 from research.studies.atlas_round import turned_surface as TS
 
@@ -91,7 +90,8 @@ def build(log=print):
     started = time.time()
     prod, sea, details = lakes_surface(log)
     frame = design_frame()
-    run_path, run_record = FD.frame_record()          # the final surface's record, which the run at 0.930 ran on
+    run_path = TS.record_path(RD.sha256(TS.ST.OUT))    # the final surface's record, which the run at 0.930 ran on
+    run_record = json.loads(run_path.read_text())
     turn = np.asarray(frame['rotation']) @ np.asarray(run_record['frame']['rotation_today_to_turned']).T
     code = {f: RD.sha256(ROOT / f)[:16] for f in CODE}
     inputs = {str(p.relative_to(ROOT)): RD.sha256(p) for p in (DS.OUT, DR.OUT, ROOT / RD.SURFACE)}

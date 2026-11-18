@@ -3,8 +3,8 @@
  "producer": {
   "files": {
    "research/studies/atlas_round/design_routing.py": "7efdff778ed46538149ca80abdf825d819ff80563565814a6ac4d0c09632cb6c",
-   "research/studies/atlas_round/final_drainage.py": "9c4fdb233a58891ea22fd82cc570cada09897d2d27d343315a56656b51e5c285",
-   "research/studies/atlas_round/near_side_neck.py": "5b3f82467b662bc2157cc70066050c57b8067785036d57565112ad380dd00009",
+   "research/studies/atlas_round/final_drainage.py": "270bdb22585b06318b95596db37d6ffe60b7c44476e9d8575099ee8c20043173",
+   "research/studies/atlas_round/near_side_neck.py": "8f50c8557c21a03103b7470af1996a67024330a76d32a3890b1c61f02e681476",
    "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
    "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
    "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
@@ -12,13 +12,13 @@
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/final_drainage.json": "494e54b73071acc50cde9cfd7a7028c1d5031d597913cf696d84b2b9ba6bc7d8",
-  "research/studies/atlas_round/results/near_side_neck.json": "cf9a1f2ec86f7a9e29f77112e410535a6bca8559469ebca58474476ddd0551ed",
+  "research/studies/atlas_round/results/final_drainage.json": "8c3895d869f4e315f9348e4bda07d4940a86826af411b249c80ec7d41e88f713",
+  "research/studies/atlas_round/results/near_side_neck.json": "077f00e08b94a4f0290e5c8337f6e75bdc7c3d891751933dfb4ccdc22400eaf6",
   "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
-  "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56"
+  "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a"
  },
  "ignored_inputs": {
-  "climate/gcm/products/climatology_A28S_301k_design_l15_snow_s930_settled_y35-49_today.npz": "f282dea1a39d6b821a79c988b4f36fe491fecf768246663028b9cd64294984eb"
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_today.npz": "69e2839b46dac2bb2e87fe0a40c618b43244cada07f9de0f58239802c927b9f5"
  },
  "evidence": "The redrawn floor at the settled state, the seas at the levels the design climate's closed budget gives them with the works of 16 November and the fixed weirs, and the routing of that budget's rain over it with the near-side sea parted. Not validated against any observation.",
  "reading_rule": "Levels in m above the redrawn common level; areas in km2, flows in m3/s; shares of the Moon's surface. product names the routing on the research drive, which design_routing.load() reads.",
@@ -45,33 +45,33 @@
     "area_km2": 279470
    },
    "near_side_main": {
-    "level_above_common_m": -66.58,
-    "area_km2": 3836148
+    "level_above_common_m": -67.02,
+    "area_km2": 3835314
    },
    "near_side_south": {
-    "level_above_common_m": -166.3,
-    "area_km2": 828540
+    "level_above_common_m": -225.36,
+    "area_km2": 731500
    }
   },
-  "sea_share": 0.23979,
-  "lake_cells": 1549558,
-  "lake_share": 0.13568,
-  "closed_lake_share": 0.00577,
-  "rivers_into_the_seas_m3s": 268824,
+  "sea_share": 0.23721,
+  "lake_cells": 1529349,
+  "lake_share": 0.13437,
+  "closed_lake_share": 0.00588,
+  "rivers_into_the_seas_m3s": 249180,
   "supplies_m3s": {
-   "moscoviense": 47212,
-   "orientale": 18223,
-   "smythii_marginis": 35679,
-   "south_pole_aitken": 56496,
-   "humboldtianum": 6880,
-   "near_side_main": 88101,
-   "near_side_south": 17394
+   "moscoviense": 47404,
+   "orientale": 17677,
+   "smythii_marginis": 30110,
+   "south_pole_aitken": 53683,
+   "humboldtianum": 6512,
+   "near_side_main": 81350,
+   "near_side_south": 13519
   },
-  "neck_spill_m3s": 11032
+  "neck_spill_m3s": 7630
  },
  "product": {
   "path": "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz",
-  "sha256": "6cb410b400c6ee1ba15d3c79b404dfdae94327a66217e4a8b57e77cafbee05c1"
+  "sha256": "6dd552e69faca7334280149775f96253cdb1852a784756f7462d6c962b20abf6"
  },
- "seconds": 468
+ "seconds": 273
 }

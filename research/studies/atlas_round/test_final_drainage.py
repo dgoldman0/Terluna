@@ -1,6 +1,6 @@
-"""Checks of the drainage on the climate run on the final surface: the climatology carried onto today's ground is
-turned_climatology's carrying with the final surface's rotation, the loader reads it as the network study's loader
-reads a climatology, and the record holds together once computed."""
+"""Checks of the drainage on the design climate: the climatology carried onto today's ground is turned_climatology's
+carrying with the rotation of the frame the run stood in, the climatology is the estimate the module names, the loader
+reads it as the network study's loader reads a climatology, and the record holds together once computed."""
 import json
 
 import numpy as np
@@ -18,7 +18,7 @@ def carried():
     return path
 
 
-def test_the_climatology_is_carried_with_the_final_surfaces_rotation(carried):
+def test_the_climatology_is_carried_with_the_runs_own_rotation(carried):
     z = np.load(carried)
     meta = json.loads(str(z['metadata']))
     src = np.load(FD.ROOT / FD.TURNED_CLIMATOLOGY)
@@ -29,6 +29,9 @@ def test_the_climatology_is_carried_with_the_final_surfaces_rotation(carried):
         np.testing.assert_allclose(z[k], expected[k], rtol=0, atol=1e-6)
     assert meta['frame'] == 'today' and meta['run'] == FD.RUN and list(meta['years']) == FD.YEARS
     assert meta['carried']['climatology']['sha256'] == FD.sha256(FD.ROOT / FD.TURNED_CLIMATOLOGY)
+    assert meta['estimate']['label'] == FD.LABEL and meta['estimate']['record'] == FD.ESTIMATE
+    frame_path, _ = FD.frame_record()
+    assert meta['configuration']['frame']['record'] == str(frame_path.relative_to(FD.ROOT))
 
 
 def test_the_loader_keeps_the_network_studys_balance(carried):
