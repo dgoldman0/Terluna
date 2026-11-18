@@ -92,6 +92,8 @@ SLOPE_LN = 0.4                       # taken off where the ground steepens from 
 PATCH_LN = 0.25                      # the noise's standard deviation in log aridity
 SHELF_M = (150.0, 20.0)              # water shallower than these takes the productive coast's colour, fully at 20 m
 PLUME_KM_PER_ROOT = 0.3              # a plume reaches about 0.3 km per (m3/s)^0.5 of sediment-bearing flow: 9.5 km at 1,000 m3/s
+PLUME_MAX = 0.7                      # the most of a water pixel a plume colours, at its mouth
+OWN_RUNOFF_M3S = 5.0                # a 1.9 km cell's own runoff stays under 1 m3/s even at 20 mm of rain a day; more is sea or lake water joining
 # Falls (the falls study, research/studies/atlas_round/falls.py), display guesstimates: a river's water turns to foam as
 # its step steepens from FOAM_SLOPE[0] to FOAM_SLOPE[1], and spray whitens the ground and water round the falls of
 # MIST_GW or more, out to about MIST_KM per cube root of their GW (5 km round 42 GW), at most MIST_MAX of each pixel.
@@ -301,8 +303,12 @@ def land_discharge(routing_path):
     and seas trap their rivers' sediment, so their outflows run clear and only the runoff gathered below them carries
     sediment on. From the routing product's receivers and discharge: each dry cell's own runoff is its discharge less
     what flows into it, gathered downstream as the routing gathers discharge, with every water cell passing none on.
-    The near-side sea's spill, which the routing puts in at the cell past the neck's crest, is sea water and carries
-    none."""
+    Water that joins the flow at a dry cell from a sea or a lake carries none either: the near-side sea's spill past the
+    neck's crest, a full sea's overflow past its rim, the works' branches (seven cells on the design routing, 7,630 to
+    27,985 m3/s each), and the rain a lake gains over its evaporation, which the routing adds at the cell below its
+    outlet (387 cells, 4,624 m3/s in all). Such a cell is known by adding far more than its own rain could
+    (OWN_RUNOFF_M3S); counted as runoff, those flows lit a sediment plume tens of kilometres wide in every lake below a
+    sea."""
     with np.load(routing_path, allow_pickle=False) as z:
         receiver = z['receiver'].astype(np.int64)
         q = z['discharge_m3s']
@@ -314,7 +320,9 @@ def land_discharge(routing_path):
     inflow = np.bincount(receiver[donor], weights=q[donor], minlength=n)
     if neck:
         inflow[neck['spill_cell']] += neck['flow_m3s']
-    carried = np.where(water, 0.0, np.maximum(q - inflow, 0.0))
+    own = np.maximum(q - inflow, 0.0)
+    own[own > OWN_RUNOFF_M3S] = 0.0                      # sea or lake water joining here, not this cell's runoff
+    carried = np.where(water, 0.0, own)
     waiting = np.bincount(receiver[donor], minlength=n)
     front = np.flatnonzero((waiting == 0) & donor)
     while front.size:
@@ -526,9 +534,11 @@ def water_albedos(path=WATER_COLOURS):
 
 
 def plume_share(discharge, water, lat, km):
-    """The share of each water pixel a river's sediment plume colours: round each mouth (a channel pixel beside the
-    water), out to about PLUME_KM_PER_ROOT km per (m3/s)^0.5 of its discharge, Gaussian, larger mouths in classes a
-    decade wide."""
+    """The share of each water pixel a river's sediment plume colours: from each mouth (a channel pixel beside the
+    water) out to about PLUME_KM_PER_ROOT km per (m3/s)^0.5 of its discharge, larger mouths in classes a decade wide.
+    A plume is strongest at its mouth and thins fast: a core a third as wide carries most of it and a faint tail the
+    rest, and it never covers more than PLUME_MAX of a pixel. A broad even glow, brightest in open water, read as
+    glare on the water, not as mud in it."""
     beside = np.roll(water, 1, axis=1) | np.roll(water, -1, axis=1)
     beside[1:] |= water[:-1]
     beside[:-1] |= water[1:]
@@ -540,8 +550,10 @@ def plume_share(discharge, water, lat, km):
         if not these.any():
             continue
         sigma = PLUME_KM_PER_ROOT * np.sqrt(low * np.sqrt(10.0)) / km
-        spread = sphere_blur(these, sigma, lat) * (2.0 * np.pi * sigma * sigma)
-        plume = np.maximum(plume, np.clip(spread, 0.0, 1.0).astype(np.float32))
+        core = max(sigma / 3.0, 0.6)
+        spread = (0.65 * np.clip(sphere_blur(these, core, lat) * (2.0 * np.pi * core * core), 0.0, 1.0)
+                  + 0.35 * np.clip(sphere_blur(these, sigma, lat) * (2.0 * np.pi * sigma * sigma), 0.0, 1.0))
+        plume = np.maximum(plume, (PLUME_MAX * spread).astype(np.float32))
     return plume * water
 
 

@@ -57,6 +57,25 @@ class SedimentTests(unittest.TestCase):
             carried = A.land_discharge(path)
         self.assertTrue(np.allclose(carried, [1, 2, 0, 1, 2, 0]), carried)
 
+    def test_water_put_in_at_a_cell_carries_no_sediment(self):
+        # 0 -> 1 -> 2 -> 3 (the sea); 1 m3/s of runoff on each dry cell, and a sea's overflow of 500 m3/s put in at 1
+        # with no record of it: far more than the cell's own rain could give, so it is counted as clear water.
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / 'routing.npz'
+            routing(path, [1, 2, 3, 3], [1, 502, 503, 503], [-1, -1, -1, 0], [])
+            carried = A.land_discharge(path)
+        self.assertTrue(np.allclose(carried, [1, 1, 2, 0]), carried)
+
+    def test_a_plume_is_strongest_at_its_mouth_and_capped(self):
+        water = np.zeros((40, 80), bool)
+        water[:, 40:] = True
+        lat = 1.0 - (np.arange(40) + 0.5) * 0.05
+        flow = np.zeros(water.shape, np.float32)
+        flow[20, 39] = 30000.0
+        plume = A.plume_share(flow, water, lat, 2.0)
+        self.assertLessEqual(float(plume.max()), A.PLUME_MAX + 1e-6)
+        self.assertEqual(float(plume[20, 40]), float(plume[20].max()))
+
     def test_no_mouth_no_plume_and_one_mouth_one_round_plume(self):
         water = np.zeros((40, 80), bool)
         water[:, 40:] = True
