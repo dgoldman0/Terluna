@@ -81,5 +81,28 @@ class SkyTests(unittest.TestCase):
         self.assertTrue(np.allclose(seen[:100], 1.0, atol=1e-5))
 
 
+class SeaTests(unittest.TestCase):
+    def test_open_water_keeps_its_stress_and_land_carries_a_water_wind_back_to_itself(self):
+        from illumination.water_surface import short_waves as S
+        gravity, closures = A._sea_closures()
+        ustar = np.array([0.094, 0.06])
+        u10 = np.array([2.0, float(S.neutral_wind(0.06, gravity, *closures))])    # the land cell's air acts as water's
+        wind = dict(ustar_day_ms=np.stack([ustar] * 3), ustar_all_ms=ustar, wind10_day_ms=np.stack([u10] * 3),
+                    wind10_all_ms=u10, lsm=np.array([0.0, 1.0]))
+        out = A.water_friction_velocity(wind)
+        self.assertAlmostEqual(out[0], 0.094)                     # open water: the stress's own
+        self.assertAlmostEqual(out[1], 0.06, delta=1e-4)          # the blend over water gives the same air back
+
+    def test_the_sea_steepens_with_the_wind_and_rough_water_mirrors_less_sky_at_grazing(self):
+        table = A.sea_slope_table()
+        self.assertTrue(np.all(np.diff(table) >= 0))
+        self.assertTrue(0.015 < np.interp(np.log(0.094), np.log(A.SEA_USTAR), table) < 0.035)
+        sky, index = A.sky_reflectance_table()
+        self.assertTrue(np.allclose(sky[:, -1], 0.0212, atol=5e-4))          # straight down, level water's Fresnel
+        self.assertTrue(np.all(np.diff(sky[:, 0]) < 0))                      # at grazing, less as the slopes grow
+        # and more toward grazing, apart from the quadrature's wiggles of a few thousandths there
+        self.assertTrue(np.all(sky[:, 0] > sky[:, 10]) and np.all(sky[:, 10] > sky[:, 20]) and np.all(sky[:, 20] > sky[:, -1]))
+
+
 if __name__ == '__main__':
     unittest.main()

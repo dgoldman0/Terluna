@@ -845,8 +845,73 @@ def cloud_quantiles(samples=200_000, seed=3):
     return [np.quantile(cloud_field(n, layer), q).round(5).tolist() for layer in (0, 1)]
 
 
+# The sea's slopes from the design climate's winds. A water surface reflects the Sun and the sky through its waves'
+# slopes; the illumination domain's model of a wind-roughened sea gives them at lunar gravity (water_surface).
+SURFACE_WIND_SCHEMA = 'terluna.climate.gcm-surface-wind/1'
+SEA_SPLIT_RAD_M = 6.0                # the sea appearance study's wave runs resolve to 0.497 Hz, 6.0 rad/m (1 m waves) here
+SEA_USTAR = np.geomspace(0.01, 0.6, 160)        # friction velocities (m/s) at which the open sea's slopes are tabulated
+SEA_SLOPE_SCALE = 0.08               # the sea-slope texture's full scale, in mean square slope
+SEA_SLOPE_FIXED = 0.04               # the mean square slope drawn without the winds, as the page did before them
+SKY_MU = 0.005 + 0.995 * (np.arange(32) / 31.0) ** 2   # view cosines of the reflected-sky table, crowded toward grazing
+SKY_RMS = 0.05 + 0.03 * np.arange(8)                    # its rows' rms slopes, 0.05 to 0.26 (mean square 0.0025-0.068)
+
+
+def _sea_closures():
+    from shared.constants import (EXOPLASIM_CHARNOCK, EXOPLASIM_SEA_ROUGHNESS_FLOOR, EXOPLASIM_VON_KARMAN,
+                                  MOON_SURFACE_GRAVITY)
+    return MOON_SURFACE_GRAVITY, (EXOPLASIM_CHARNOCK, EXOPLASIM_SEA_ROUGHNESS_FLOOR, EXOPLASIM_VON_KARMAN)
+
+
+def sea_slope_table():
+    """The open sea's mean square slope at SEA_USTAR, at lunar gravity: the long waves of a fully developed sea up to
+    1 m and the short waves above (illumination.water_surface.open_sea.open_sea_slopes)."""
+    from illumination.water_surface import open_sea as S
+    gravity, closures = _sea_closures()
+    return np.array([S.open_sea_slopes(u, gravity, SEA_SPLIT_RAD_M, *closures)['total'] for u in SEA_USTAR])
+
+
+BLENDING_HEIGHT_M = 100.0            # the height at which a lake's wind and the rough land's round it are one
+
+
+def water_friction_velocity(wind):
+    """Each climate cell's daytime friction velocity over open water. Over the run's open water it is the median of
+    its stress's. Over its land cells, which at 170 km hold the lakes and the seas' edges, the land's roughness has
+    slowed the 10 m wind, so the wind at the blending height, carried up from the land's median 10 m wind with its own
+    median friction velocity by the log law, comes down over the water through the neutral surface layer with
+    Charnock's roughness. On the open water the same carry gives about a tenth less than the stress, which also holds
+    the unstable daytime air. The all-hours medians stand where no interval is daylit."""
+    from illumination.water_surface import open_sea as S
+    gravity, closures = _sea_closures()
+    ustar = np.where(np.isfinite(wind['ustar_day_ms'][1]), wind['ustar_day_ms'][1], wind['ustar_all_ms'])
+    u10 = np.where(np.isfinite(wind['wind10_day_ms'][1]), wind['wind10_day_ms'][1], wind['wind10_all_ms'])
+    blend = u10 + ustar / closures[2] * np.log(BLENDING_HEIGHT_M / 10.0)
+    over_water = np.vectorize(lambda u: S.neutral_friction_velocity(u, gravity, *closures, height=BLENDING_HEIGHT_M))(blend)
+    return np.where(wind['lsm'] < 0.5, ustar, over_water)
+
+
+def sea_slopes(wind, rows, cols):
+    """The sea's mean square slope on the page's grid (rows and cols in degrees, 180 W at the left), from each climate
+    cell's daytime friction velocity over water through the open sea's table, in the logarithm of the friction
+    velocity; and each climate cell's value."""
+    u = np.clip(water_friction_velocity(wind), SEA_USTAR[0], SEA_USTAR[-1])
+    cells = np.interp(np.log(u), np.log(SEA_USTAR), sea_slope_table())
+    return np.clip(regrid(cells, wind['lat'], wind['lon'], rows, cols), 0.0, SEA_SLOPE_SCALE), cells
+
+
+def sky_reflectance_table():
+    """The share of an even sky's radiance that rough water reflects toward the viewer, rows SKY_RMS by columns SKY_MU
+    (the view's cosine from the vertical): Fresnel facets with Gaussian slopes and Smith's shadowing
+    (illumination.water_surface.reflection.sky_reflection), seawater's index at 550 nm. Returns it and the index."""
+    from illumination.water_surface import reflection as R
+    n = float(R.refractive_index(550.0))
+    even = lambda d: np.ones((len(d), 1))
+    table = np.array([[float(R.sky_reflection(np.array([np.sqrt(1 - mu * mu), 0.0, mu]), np.eye(2) * s * s / 2, n,
+                                              even)[0][0]) for mu in SKY_MU] for s in SKY_RMS])
+    return table, n
+
+
 def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, rotation=None, surface_path=None,
-          moisture_path=None, routing_path=None, falls_paths=None):
+          moisture_path=None, routing_path=None, falls_paths=None, wind_path=None):
     """Appearance data for the globe page: textures (arrays, 180 W at the left edge) and parameters.
 
     height: metres above the geoid at ppd pixels per degree, 0 E at the left edge as LOLA has it, in the globe's frame;
@@ -855,7 +920,8 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
     `level` and the drainage product; `level` then stays the heights' reference for the ground's look.
     moisture_path: with a surface, the moisture map of the climatology's run and years, which sets the ground in true
     colour (true_colour) in place of the guessed cover types; routing_path, the routing product the surface was drawn
-    from, whose receivers give the rivers' sediment-bearing flow."""
+    from, whose receivers give the rivers' sediment-bearing flow; wind_path, the climate domain's surface wind of the
+    climatology's run and years, which sets the sea's slopes (sea_slopes) and so its glint and its reflected sky."""
     moon, engine = engine_atmosphere()
     colour_rel = np.array(moon['sun_colour_linear_srgb'])
     sun_rgb_lux = moon['sun_illuminance_lux'] * colour_rel / float(LUMINANCE @ colour_rel)
@@ -923,6 +989,29 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
                     cloud_sun=np.round(sun * 255).astype(np.uint8), cloud_geo=np.round(geo * 100).astype(np.uint8))
     if truly:
         textures['sky'] = sky
+    sea = None
+    if wind_path is not None:
+        wind = dict(np.load(wind_path))
+        wind_meta = json.loads(str(wind.pop('metadata')))
+        if (wind_meta['schema'] != SURFACE_WIND_SCHEMA or wind_meta['run'] != clim_meta['run']
+                or list(wind_meta['years']) != [clim_meta['years'][0], clim_meta['years'][-1]]):
+            raise SystemExit(f"The surface wind is {wind_meta['schema']} of {wind_meta['run']} years {wind_meta['years']}, "
+                             f"the clouds of {clim_meta['run']} years {clim_meta['years']}: make it on the same run and years")
+        slope_map, cells = sea_slopes(wind, rows, cols)
+        textures['sea_slope'] = np.round(slope_map / SEA_SLOPE_SCALE * 255).astype(np.uint8)
+        sky_table, index = sky_reflectance_table()
+        open_water = (wind['lsm'] < 0.5) & (wind['sic'] < 0.5)
+        w = np.repeat(np.cos(np.radians(wind['lat']))[:, None], wind['lon'].size, axis=1)[open_water]
+        ustar = water_friction_velocity(wind)[open_water]
+        order = np.argsort(cells[open_water])
+        cumulative = np.cumsum(w[order]) / w.sum()
+        quantile = lambda q: float(cells[open_water][order][np.searchsorted(cumulative, q)])
+        sea = dict(schema=wind_meta['schema'], run=wind_meta['run'], years=wind_meta['years'], slopeScale=SEA_SLOPE_SCALE,
+                   splitRadM=SEA_SPLIT_RAD_M, openWaterMedianMss=round(quantile(0.5), 4),
+                   openWaterMss=[round(quantile(0.1), 4), round(quantile(0.9), 4)],
+                   openWaterMedianUstar=round(float(np.median(ustar)), 3), refractiveIndex=round(index, 4),
+                   skyMu=[float(SKY_MU[0]), SKY_MU.size], skyRms=[float(SKY_RMS[0]), float(SKY_RMS[1] - SKY_RMS[0]), SKY_RMS.size],
+                   skyTable=[[float(f'{v:.4g}') for v in row] for row in sky_table])
     area = lambda f: float((f * np.cos(np.radians(clim['lat']))[:, None]).sum()
                            / (np.cos(np.radians(clim['lat'])).sum() * f.shape[1]))
     params = dict(
@@ -945,6 +1034,9 @@ def build(height, level, ppd, climatology=CLIMATOLOGY, drainage_path=DRAINAGE, r
                 ['River water, sediment-laden', RIVER_WATER], ['Shallow, silty water', TURBID_WATER],
                 ['Deep water', DEEP_WATER]])
     sources = dict(engine=ENGINE, sky_atlas=SKY_ATLAS, climatology=Path(climatology))
+    if sea is not None:
+        params['sea'] = sea
+        sources['wind'] = Path(wind_path)
     if truly:
         params['legend'] = true_legend(waters)
         params['legendTitle'] = 'Ground in true colour'

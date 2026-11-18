@@ -589,6 +589,35 @@ def routing_product(record):
     return Path(product['path'])
 
 
+def cuts_product(record):
+    """The works' trenches the design surface was cut with: named by the cuts record among the surface record's inputs,
+    and read only while its bytes match that record; None for a surface without cuts."""
+    name = next((k for k in record['inputs'] if k.endswith('design_cuts.json')), None)
+    if name is None:
+        return None
+    product = json.loads((ROOT / name).read_text())['product']
+    if digest(product['path']) != product['sha256']:
+        raise SystemExit(f"{product['path']} no longer matches its record {name}")
+    return Path(product['path'])
+
+
+def work_lines(path, rotation):
+    """Each stretch of the works' cuts as the page's canal line: its cells' centres in the order the water takes them,
+    as latitude and longitude in the globe's frame. Empty for a cuts product without courses."""
+    if path is None:
+        return []
+    with np.load(path, allow_pickle=False) as z:
+        if 'course_cell' not in z.files:
+            return []
+        cells, stretch = z['course_cell'].astype(np.int64), z['course_stretch']
+        cols = json.loads(str(z['metadata']))['grid']['cols']
+    ppd = cols / 360.0
+    lat = 90.0 - (cells // cols + 0.5) / ppd
+    lon = ((cells % cols + 0.5) / ppd + 180.0) % 360.0 - 180.0
+    return [[[round(float(v), 4) for v in to_turned(la, lo, rotation)] for la, lo in zip(lat[stretch == s], lon[stretch == s])]
+            for s in range(int(stretch.max()) + 1)] if cells.size else []
+
+
 def work_marks(summary, grid, level0, rotation):
     """The page's marks for the works' cuts: each piece of trench at its deepest point, with its card's lines."""
     pieces = summary.get('cuts', {}).get('pieces', [])
@@ -603,7 +632,9 @@ def work_marks(summary, grid, level0, rotation):
                         note=('The works of 16 November: ' + ('the cut through Moscoviense\'s northern ridge carries its '
                               'surplus north, Humboldtianum\'s share and Smythii–Marginis\'s. ' if first else
                               'a further cut on the way north. ') + 'Drawn one 1.9 km cell wide, about as wide as a '
-                              'channel for its flow needs; the works have not designed its width.')))
+                              'channel for its flow needs; the works have not designed its width. The amber line follows '
+                              'the course of each cut, from the water it leaves to the water it falls into, a few pixels '
+                              'wide at any zoom, as atlases draw canals: far wider than the trench at most zooms.')))
     return out
 
 
@@ -632,8 +663,28 @@ def fall_marks(record, grid, level0):
     return out
 
 
-def cover_text(cover, sources):
-    """The page's paragraph on the ground in true colour, from appearance.build's cover parameters."""
+def sea_text(sea, sources):
+    """The page's sentences on the water's slopes, from appearance.build's sea parameters."""
+    tilt = lambda mss: f"{np.degrees(np.arctan(np.sqrt(mss))):.0f}°"
+    return ('The water mirrors the Sun and the sky through the slopes of its waves, which follow the design climate\'s '
+            f"daytime wind: the surface wind of the same run and years ({digest(sources['wind'])[:12]}) gives each "
+            'climate cell\'s friction velocity over water, on the open seas the median of its stress\'s, '
+            f"{sea['openWaterMedianUstar']:.3f} m/s, and over the run's land cells, which hold the lakes and the seas' "
+            'edges, the wind 100 m up, where land and water share it, brought down over the water; the illumination '
+            "domain's model of a wind-roughened sea at lunar "
+            'gravity turns it into slopes: the short waves of Elfouhaily et al. (1997) above 1 m and a fully developed '
+            f"sea's longer waves below, a mean square slope of {sea['openWaterMedianMss']:.3f} over the open seas "
+            f"({sea['openWaterMss'][0]:.3f}–{sea['openWaterMss'][1]:.3f} across them), an rms tilt of "
+            f"{tilt(sea['openWaterMedianMss'])}. Facets with Gaussian slopes, as Cox and Munk measured Earth's, with "
+            'Fresnel\'s law and Smith\'s shadowing, give the Sun\'s glitter and the sky the water reflects, which toward '
+            'the limb falls to about half what level water would mirror. The longer waves of a fully developed sea are an '
+            'upper estimate in winds this light, and the run\'s 3-day means leave out gusts and calm hours, which would '
+            'break the glitter into patches. ')
+
+
+def cover_text(cover, sources, sea=None):
+    """The page's paragraph on the ground in true colour, from appearance.build's cover parameters (and its sea
+    parameters, when the winds set the water's slopes)."""
     m = cover['moisture']
     at = lambda a: f"{appearance.plant_cover(a):.0%}"
     return ('<b>The ground: informed and guesstimate.</b> The ground\'s colour follows the design climate\'s dryness: the '
@@ -663,7 +714,7 @@ def cover_text(cover, sources):
             'offshore, the productive coast\'s green over water shallower than about 150 m and in shallow lakes, and the '
             'river mouth\'s ochre in rivers and where they carry sediment into a lake or sea, a plume about 0.3 km wide '
             'per (m³/s)^½ of the runoff gathered since the last lake or sea, since lakes and seas trap their rivers\' '
-            'sediment and send clear water on; the water also mirrors the sky. '
+            'sediment and send clear water on' + ('. ' + sea_text(sea, sources) if sea else '; the water also mirrors the sky. ')
             + ('Rivers turn to white water where they drop steeply, wholly where a 1.9 km step falls 200 m a km, and '
                'spray whitens the ground and water up to about 5 km round the falls of 2 GW or more, display '
                'guesstimates over the falls study\'s steep reaches; the largest twelve falls are marked. '
@@ -678,7 +729,8 @@ def cover_text(cover, sources):
             'opacity is a guess (the low deck holds the run\'s cloud water, the high deck little).')
 
 
-def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes, moisture=None, falls=None):
+def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes, moisture=None, falls=None,
+                        wind=None):
     """The globe page on the design surface: the relief and the water at each body's own level, the appearance from
     the same water (the ground in true colour from the moisture map when one is given), the sites and targets placed
     on it, and the figures from the surface's record."""
@@ -710,7 +762,8 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
     looks, params, sources, masks = appearance.build(
         fine, level0, SURFACE_PPD, climatology=climatology, rotation=rotation, surface_path=surface_path,
         moisture_path=moisture, routing_path=routing,
-        falls_paths=(Path(falls), Path(falls_record['product']['path'])) if falls_record and moisture else None)
+        falls_paths=(Path(falls), Path(falls_record['product']['path'])) if falls_record and moisture else None,
+        wind_path=wind)
     del fine
     truly = 'cover' in params
     share = lambda mask, ppd_: float((mask * np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_))[:, None]).sum()
@@ -739,7 +792,7 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
               + 'over the floor its water redraws, with every sea and lake at its own level and the near-side sea parted '
               'at its neck. Drag to turn it, scroll or pinch to zoom, click for the height of a place and the water over '
               'it, and move the Sun to see the halo, the twilight and the view from Earth.'),
-        coverText=cover_text(params['cover'], sources) if truly else None,
+        coverText=cover_text(params['cover'], sources, params.get('sea')) if truly else None,
         figures=[['Water', f"{summary['water_share']:.0%} of the surface"],
                  ['Common level (geoid)', minus(level0) + ' m'],
                  sea_fig('Near-side sea', 'near-side sea'), sea_fig('Southern near-side seas', 'southern near-side seas'),
@@ -782,7 +835,8 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
                        normal=texture_file('normal', looks['normal'], 'jpeg'),
                        albedo=texture_file('albedo', looks['albedo'], 'jpeg'), water=texture_file('water', looks['water']),
                        sky=texture_file('sky', looks['sky'], 'jpeg', 92), cloudSun=texture_file('cloud_sun', looks['cloud_sun']),
-                       cloudGeo=texture_file('cloud_geo', looks['cloud_geo']))
+                       cloudGeo=texture_file('cloud_geo', looks['cloud_geo']),
+                       **({'seaSlope': texture_file('sea_slope', looks['sea_slope'])} if 'sea_slope' in looks else {}))
                   if truly else
                   dict(relief=png_data_uri(relief), surface=png_data_uri(surface_tex), normal=jpeg_data_uri(looks['normal']),
                        albedo=jpeg_data_uri(looks['albedo']), water=png_data_uri(looks['water']),
@@ -793,6 +847,7 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
             islands=[],
             falls=fall_marks(falls_record, grid, level0) if falls_record else [],
             works=work_marks(summary, grid, level0, rotation),
+            workLines=work_lines(cuts_product(record), rotation),
             sites=[dict(id=s['id'], name=s['name'], year=s['year'], **dict(zip(('lat', 'lon'), place(s['lat'], s['lon']))),
                         status=s['status'], short=SITE_LABELS.get(s['id'], ('', None))[0], depth=s.get('depth_m', 0),
                         height=s['height'], pressure=s.get('pressure_atm', 0.0), nearestLand=s.get('nearest_land_km', 0),
@@ -813,6 +868,8 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
                     + (f"; the moisture map <code>{params['cover']['moisture']['schema']}</code> of the same run and years "
                        f"({digest(sources['moisture'])[:12]}), the LROC mare boundaries ({digest(sources['mare'])[:12]}) and "
                        f"the sea appearance study's water colours ({digest(sources['water_colours'])[:12]})" if truly else '')
+                    + (f"; the climate domain's <code>{params['sea']['schema']}</code> of the same run and years "
+                       f"({digest(sources['wind'])[:12]}), which sets the sea's slopes" if 'wind' in sources else '')
                     + f". Surface {looks['albedo'].shape[1]}×{looks['albedo'].shape[0]} ({SURFACE_PPD} pixels per "
                     f"degree), relief at {SURFACE_PPD if truly else SURFACE_PPD // 2}, the map at {ppd_map}."),
         frame=dict(note=surface_note(turn, summary, climate),
@@ -847,6 +904,9 @@ def main(argv=None):
                                                     'the largest falls marked, white water on steep reaches')
     parser.add_argument('--moisture', type=Path, help="with --surface, the moisture map of the climatology's run and years "
                                                       '(results/moisture_map_final.json): the ground in true colour')
+    parser.add_argument('--wind', type=Path, help="with --moisture, the climate domain's surface wind of the climatology's "
+                                                  'run and years (products/surface_wind_<run>_y<years>.npz): the sea\'s '
+                                                  'slopes, and so its glint and its reflected sky, from the winds')
     args = parser.parse_args(argv)
     if args.surface:
         if not args.surface_record:
@@ -859,7 +919,8 @@ def main(argv=None):
         globe = write_globe_surface(args.surface.absolute(), args.surface_record.absolute(), args.climatology.absolute(),
                                     sites, targets, dict(register=digest(reg_path)),
                                     moisture=args.moisture.absolute() if args.moisture else None,
-                                    falls=args.falls.absolute() if args.falls else None)
+                                    falls=args.falls.absolute() if args.falls else None,
+                                    wind=args.wind.absolute() if args.wind else None)
         products = {str(p.relative_to(ROOT)): digest(p) for p in (reg_path, tgt_path)}
         products[str(args.surface)] = digest(args.surface)
         products[str(args.surface_record)] = digest(args.surface_record)
