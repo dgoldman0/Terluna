@@ -1,6 +1,6 @@
 {
  "schema": "terluna.research.atlas-round-place-names/1",
- "reading_rule": "Names pinned to anchors, which district_names.apply sets over the generated names and the calques. An anchor is what a unit is tied to that a redraw keeps: sea:<body> for one of the seven seas, feature:<IAU name> for the unit that carries a named feature, crater:<IAU name> for a district centred on that crater, region:<its largest district's anchor> for a region, and the centre's kind and place otherwise. A pin gives the name, its tongue where it differs from the unit's, and its meaning. Edit a pin and run python -m research.studies.atlas_round.district_names to rename the record without drawing it again.",
+ "reading_rule": "Names pinned to anchors, which district_names.apply sets over the generated names and the calques. An anchor is what a unit is tied to that a redraw keeps: sea:<body> for one of the seven seas, feature:<IAU name> for the unit that carries a named feature, crater:<IAU name> for a district centred on that crater, region:<its largest district's anchor> for a region, and the centre's kind and place otherwise. A pin gives the name, its tongue where it differs from the unit's, and its meaning. Edit a pin and run python -m research.studies.atlas_round.district_names to rename the record without drawing it again. river:<its mouth's latitude and longitude on today's Moon> names a waterway (waterways.py), which takes the tongue of the region holding most of its course.",
  "names": {
   "sea:near-side sea": {
    "name": "Uamoana",
@@ -49,6 +49,111 @@
   "feature:Mare Ingenii": {
    "name": "Ingenii",
    "meaning": "the Sea of Cleverness (Mare Ingenii) in the salt sea, a proper name Terlunan keeps in its established form (v0.6)"
+  },
+  "river:-22.9,173.3": {
+   "name": "Hatunmayu",
+   "tongue": "runa",
+   "meaning": "Great River (hatun great + mayu river), the Moon's largest"
+  },
+  "river:47.5,49.7": {
+   "name": "Ninamuawa",
+   "tongue": "terlunan",
+   "meaning": "Blue River (ninamu blue + awa river), a sea's overflow crossing dry steppe"
+  },
+  "river:2.3,177.7": {
+   "name": "Paramayu",
+   "tongue": "runa",
+   "meaning": "Rain River (para rain + mayu river), the rain mountains' river"
+  },
+  "river:21.3,105.0": {
+   "name": "Fukagawa",
+   "tongue": "satoyama",
+   "meaning": "Deep River (fuka deep + kawa river), broad and calm through its long lakes"
+  },
+  "river:15.0,287.7": {
+   "name": "Mto Kijani",
+   "tongue": "pwani",
+   "meaning": "Green River (mto river + kijani green), a sea's overflow through green country"
+  },
+  "river:-13.4,253.1": {
+   "name": "Ilog na Gavoah",
+   "tongue": "tagalhebrew",
+   "meaning": "High River (ilog river + na + gavoah high), from the highest country"
+  },
+  "river:-23.0,192.3": {
+   "name": "Pukutaymayu",
+   "tongue": "runa",
+   "meaning": "Mist River (pukutay mist + mayu river), down from the Moon's highest ground"
+  },
+  "river:25.8,103.0": {
+   "name": "Niigawa",
+   "tongue": "satoyama",
+   "meaning": "New River (nii new + kawa river), cut by the works"
+  },
+  "river:-5.3,63.0": {
+   "name": "H'Naharo Longa",
+   "tongue": "olivolingvo",
+   "meaning": "the Long River (h' the + naharo river + longa long), the longest waterway"
+  },
+  "river:12.4,346.0": {
+   "name": "Pooiriawa",
+   "tongue": "terlunan",
+   "meaning": "Black River (pooiri black + awa river), across the black basalt plain"
+  },
+  "river:19.9,184.6": {
+   "name": "Rereawa",
+   "tongue": "terlunan",
+   "meaning": "Falls River (rere falls + awa river), for its one great fall"
+  },
+  "river:3.6,302.2": {
+   "name": "Jarykgol",
+   "tongue": "dala",
+   "meaning": "Light River (jaryk light + gol river), a sea's spill over its neck, under a high Earth"
+  },
+  "river:-45.1,230.0": {
+   "name": "Mto Jiwe",
+   "tongue": "pwani",
+   "meaning": "Stone River (mto river + jiwe stone)"
+  },
+  "river:57.1,111.8": {
+   "name": "Asif Dahab",
+   "tongue": "sahran",
+   "meaning": "Gold River (asif river + dahab gold), water the works brought to the sand land"
+  },
+  "river:16.8,13.5": {
+   "name": "Tiareawa",
+   "tongue": "terlunan",
+   "meaning": "Flower River (tiare flower + awa river)"
+  },
+  "river:18.1,184.8": {
+   "name": "Wayramayu",
+   "tongue": "runa",
+   "meaning": "Wind River (wayra wind + mayu river)"
+  },
+  "river:3.3,156.4": {
+   "name": "Puyumayu",
+   "tongue": "runa",
+   "meaning": "Cloud River (puyu cloud + mayu river), the cloud lakes' river"
+  },
+  "river:8.8,146.9": {
+   "name": "Quyllurmayu",
+   "tongue": "runa",
+   "meaning": "Star River (quyllur star + mayu river), under the far side's dark nights"
+  },
+  "river:1.4,302.5": {
+   "name": "Mto Jani",
+   "tongue": "pwani",
+   "meaning": "Leaf River (mto river + jani leaf)"
+  },
+  "river:-14.1,311.5": {
+   "name": "Mto Pacha",
+   "tongue": "pwani",
+   "meaning": "Twin River (mto river + pacha twin), beside the Leaf River"
+  },
+  "river:64.0,107.1": {
+   "name": "H'Naharo Atika",
+   "tongue": "olivolingvo",
+   "meaning": "the Old River (h' the + naharo river + atika old), a river the land made itself"
   }
  }
 }
