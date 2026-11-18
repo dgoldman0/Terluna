@@ -248,7 +248,11 @@ The register's definition of a district by significance and wholeness (16 Novemb
 python -m research.studies.atlas_round.districts         # about a minute; results/districts.json and the 8 px/deg grid on the drive
 python -m research.studies.atlas_round.district_names    # seconds: rename the record from place_names.json and the rules
 python visualization/atlas/render.py --names-only --districts research/studies/atlas_round/results/districts.json   # the built page renamed
+python -m research.studies.atlas_round.region_profiles   # about 20 s: the regions' fact sheets, and their texts filled in
+python -m research.studies.atlas_round.region_profiles --texts-only   # seconds, after a rename or new texts
 ```
+
+Each land region has a fact sheet (18 November), computed by [region_profiles.py](region_profiles.py) without drawing anything again. It holds where the region lies and how high Earth stands in its sky, its land, heights, lakes, largest river and steep reaches, its coastal waters and the seas they lie on, the heritage sites on its ground and under its waters, its climate on the moisture map and its neighbours, each figure in one display form. The record is [results/region_profiles.json](results/region_profiles.json) *(computed facts; the climate is read on the climate run's cells of about 170 km, and an island group or lake country the run holds as water takes a shore's climate, as climate_reach_km records)*. Each region's short text for the globe is written by hand from its sheet and kept in region_texts.json, keyed by the region's anchor. A text writes its figures as `{key}` and other places as `[name]`, so the figures and names stay current through a redraw or a rename. It records the facts its wording rests on, and a text whose facts move past their tolerance is listed as stale until it is rewritten.
 
 ## The falls
 
