@@ -560,8 +560,7 @@ def apply(units, table=None, log=print):
     body = {r['code']: r.get('body') for r in units['regions'] if r['kind'] == 'sea'}
     near_side = lambda x: abs(x['at']['turned'][1]) < 90.0                        # noqa: E731
     name_all(units, body, near_side)                       # the tongues and heads the calques take
-    pins = {table[x['anchor']]['name'] for x in units['districts'] + units['coastal_seas']
-            if x.get('anchor') in table}
+    pins = {v['name'] for v in table.values()}             # every pinned name, the seas' and regions' included
     calques, missing, taken = {}, [], set(pins)
     for x in units['districts'] + units['coastal_seas']:
         if x.get('anchor') in table or not x.get('feature') or x['feature']['name'] not in CALQUES:
