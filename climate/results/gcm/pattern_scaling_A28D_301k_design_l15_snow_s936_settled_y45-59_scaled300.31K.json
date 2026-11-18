@@ -1,0 +1,1054 @@
+{
+ "schema": "terluna.climate.gcm-pattern-scaling/1",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/pattern_scaling.py": "e5e51450c1fa3ff4"
+  }
+ },
+ "evidence": "An estimate by pattern scaling, not a run: the base window's fields moved by a uniform pattern of change per kelvin of global surface temperature over land and over open water, measured on pairs of runs of the same physics at two sunlights. A pair's window still warming or cooling gives a transient response, which the land follows within a year or two of the global temperature. Not validated against a run at the target.",
+ "reading_rule": "Temperatures in K, rain and evaporation in mm/day, soil water in m, vapour in kg/m2, covers as fractions, winds in m/s. Each pair gives each field's mean over the land both runs hold and the water both hold (or over all of it for the composites and profiles), warm and cool, and per_K: a fraction per kelvin for the ratio fields, an amount per kelvin for the others. applied is what the estimate moved each field by per kelvin, zero where the pairs disagree in sign (resolved false); the surface temperature's values are scaled by temperature_factor so the global mean moves by delta_K exactly. summary gives [base, estimate] means over the base window's land and water.",
+ "estimate": {
+  "method": "uniform pattern scaling over land and open water (climate.gcm.pattern_scaling)",
+  "label": "scaled300.31K",
+  "base": {
+   "run": "A28D_301k_design_l15_snow_s936_settled",
+   "years": [
+    45,
+    59
+   ],
+   "global_surface_temperature_K": 300.99959407217335
+  },
+  "target": {
+   "run": "A28S_301k_design_l15_snow_s930_settled",
+   "years": [
+    35,
+    49
+   ],
+   "global_surface_temperature_K": 300.3068333167535
+  },
+  "delta_K": -0.6927607554198403,
+  "pairs": [
+   {
+    "warm": {
+     "run": "A28D_301k_design_l15_snow_s936_settled",
+     "years": [
+      45,
+      59
+     ],
+     "sunlight_scale": 0.936,
+     "global_surface_temperature_K": 300.99959407217335
+    },
+    "cool": {
+     "run": "A28D_301k_design_l15_snow_s930_settled",
+     "years": [
+      4,
+      8
+     ],
+     "sunlight_scale": 0.93,
+     "global_surface_temperature_K": 299.85309678901086
+    }
+   },
+   {
+    "warm": {
+     "run": "A28S_301k_design_l15_snow_s938_settled",
+     "years": [
+      3,
+      8
+     ],
+     "sunlight_scale": 0.938,
+     "global_surface_temperature_K": 301.5633156587336
+    },
+    "cool": {
+     "run": "A28S_301k_design_l15_snow_s930_settled",
+     "years": [
+      35,
+      49
+     ],
+     "sunlight_scale": 0.93,
+     "global_surface_temperature_K": 300.3068333167535
+    }
+   }
+  ]
+ },
+ "temperature_factor": 0.9993411533422357,
+ "pairs": [
+  {
+   "warm": {
+    "run": "A28D_301k_design_l15_snow_s936_settled",
+    "years": [
+     45,
+     59
+    ],
+    "sunlight_scale": 0.936,
+    "global_surface_temperature_K": 300.99959407217335
+   },
+   "cool": {
+    "run": "A28D_301k_design_l15_snow_s930_settled",
+    "years": [
+     4,
+     8
+    ],
+    "sunlight_scale": 0.93,
+    "global_surface_temperature_K": 299.85309678901086
+   },
+   "products": {
+    "climatology_A28D_301k_design_l15_snow_s936_settled_y45-59.npz": "907c8df6707296875fd79459b175a4a92f0441b0ea0bf34543e8891c4c70201b",
+    "climatology_A28D_301k_design_l15_snow_s930_settled_y4-8.npz": "55ff06e73bde7c676085c67b058c1de35159b9c2702ba8232dc9651626d568d3",
+    "surface_wind_A28D_301k_design_l15_snow_s936_settled_y45-59.npz": "2f4e83db0e9c3ab0a75c734fa62470040d247b7a02c57520b990ffc20ecaaa80",
+    "surface_wind_A28D_301k_design_l15_snow_s930_settled_y4-8.npz": "61c31c5804872b04ff8a96c03f425e3652de2ace5124fc5204903df78972d093"
+   },
+   "delta_K": 1.1464972831624891,
+   "land_share": 0.6244151476194758,
+   "water_share": 0.37558485238052425,
+   "climatology": {
+    "ts_k": {
+     "land": {
+      "warm": 299.838582,
+      "cool": 298.602407,
+      "per_K": 1.078219
+     },
+     "water": {
+      "warm": 302.929793,
+      "cool": 301.932387,
+      "per_K": 0.869959
+     }
+    },
+    "tas_land_sun": {
+     "all": {
+      "warm": 299.898576,
+      "cool": 298.655802,
+      "per_K": 1.083974
+     }
+    },
+    "tas_land_sun_near": {
+     "all": {
+      "warm": 301.031482,
+      "cool": 299.809061,
+      "per_K": 1.066222
+     }
+    },
+    "tas_land_sun_far": {
+     "all": {
+      "warm": 298.953048,
+      "cool": 297.697588,
+      "per_K": 1.09504
+     }
+    },
+    "pr_mm_day": {
+     "land": {
+      "warm": 2.090095,
+      "cool": 2.048189,
+      "per_K": 0.017846
+     },
+     "water": {
+      "warm": 1.691021,
+      "cool": 1.595635,
+      "per_K": 0.052141
+     }
+    },
+    "evap_mm_day": {
+     "land": {
+      "warm": 1.454586,
+      "cool": 1.406789,
+      "per_K": 0.029634
+     },
+     "water": {
+      "warm": 2.750345,
+      "cool": 2.649829,
+      "per_K": 0.033086
+     }
+    },
+    "mrso_m": {
+     "land": {
+      "warm": 0.141516,
+      "cool": 0.147413,
+      "per_K": -0.034892
+     },
+     "water": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": null
+     }
+    },
+    "prw_kg_m2": {
+     "land": {
+      "warm": 287.666306,
+      "cool": 262.644109,
+      "per_K": 0.083097
+     },
+     "water": {
+      "warm": 305.708512,
+      "cool": 279.991392,
+      "per_K": 0.080113
+     }
+    },
+    "snd_m": {
+     "land": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": null
+     },
+     "water": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": null
+     }
+    },
+    "clt_mean": {
+     "land": {
+      "warm": 0.375952,
+      "cool": 0.373505,
+      "per_K": 0.002134
+     },
+     "water": {
+      "warm": 0.397857,
+      "cool": 0.39824,
+      "per_K": -0.000335
+     }
+    },
+    "low_mean": {
+     "land": {
+      "warm": 0.064173,
+      "cool": 0.062698,
+      "per_K": 0.001286
+     },
+     "water": {
+      "warm": 0.08613,
+      "cool": 0.088804,
+      "per_K": -0.002332
+     }
+    },
+    "high_mean": {
+     "land": {
+      "warm": 0.238524,
+      "cool": 0.241243,
+      "per_K": -0.002371
+     },
+     "water": {
+      "warm": 0.236576,
+      "cool": 0.239516,
+      "per_K": -0.002564
+     }
+    },
+    "sic": {
+     "land": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": 0.0
+     },
+     "water": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": 0.0
+     }
+    },
+    "clt_sun": {
+     "all": {
+      "warm": 0.384034,
+      "cool": 0.382672,
+      "per_K": 0.001188
+     }
+    },
+    "low_sun": {
+     "all": {
+      "warm": 0.072315,
+      "cool": 0.072362,
+      "per_K": -4.1e-05
+     }
+    },
+    "high_sun": {
+     "all": {
+      "warm": 0.237698,
+      "cool": 0.240552,
+      "per_K": -0.00249
+     }
+    },
+    "cl_layer_mean": {
+     "all": {
+      "warm": 0.035364,
+      "cool": 0.035081,
+      "per_K": 0.000247
+     }
+    },
+    "ua_layer_mean": {
+     "all": {
+      "warm": 3.242033,
+      "cool": 2.924132,
+      "per_K": 0.27728
+     }
+    }
+   },
+   "surface_wind": {
+    "ustar_day_ms": {
+     "land": {
+      "warm": 0.244951,
+      "cool": 0.242309,
+      "per_K": 0.009507
+     },
+     "water": {
+      "warm": 0.095569,
+      "cool": 0.093841,
+      "per_K": 0.016062
+     }
+    },
+    "wind10_day_ms": {
+     "land": {
+      "warm": 1.043369,
+      "cool": 1.036631,
+      "per_K": 0.005669
+     },
+     "water": {
+      "warm": 2.334325,
+      "cool": 2.326883,
+      "per_K": 0.00279
+     }
+    },
+    "ustar_all_ms": {
+     "land": {
+      "warm": 0.147693,
+      "cool": 0.147812,
+      "per_K": -0.000697
+     },
+     "water": {
+      "warm": 0.078304,
+      "cool": 0.079705,
+      "per_K": -0.015329
+     }
+    },
+    "wind10_all_ms": {
+     "land": {
+      "warm": 0.600095,
+      "cool": 0.609958,
+      "per_K": -0.014104
+     },
+     "water": {
+      "warm": 2.045387,
+      "cool": 2.11389,
+      "per_K": -0.028265
+     }
+    },
+    "sic": {
+     "land": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": 0.0
+     },
+     "water": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": 0.0
+     }
+    }
+   }
+  },
+  {
+   "warm": {
+    "run": "A28S_301k_design_l15_snow_s938_settled",
+    "years": [
+     3,
+     8
+    ],
+    "sunlight_scale": 0.938,
+    "global_surface_temperature_K": 301.5633156587336
+   },
+   "cool": {
+    "run": "A28S_301k_design_l15_snow_s930_settled",
+    "years": [
+     35,
+     49
+    ],
+    "sunlight_scale": 0.93,
+    "global_surface_temperature_K": 300.3068333167535
+   },
+   "products": {
+    "climatology_A28S_301k_design_l15_snow_s938_settled_y3-8.npz": "42b517ced4bbab22cb7f8b3186f3ec396395a595b6a1aa918c9000c4fe8227be",
+    "climatology_A28S_301k_design_l15_snow_s930_settled_y35-49.npz": "66589aedd78e72f829a04d7a117c8cf1ee7677ab9dbcad4f347352ff4ea9de51",
+    "surface_wind_A28S_301k_design_l15_snow_s938_settled_y3-8.npz": "95358b4f1b089696f6665d42192b664673c1597cf3a2ce344b161af16fdf3470",
+    "surface_wind_A28S_301k_design_l15_snow_s930_settled_y35-49.npz": "dff6c4941cb846ca1ccb663367815a1039f3b14c600444a7d7c62b9fa527a902"
+   },
+   "delta_K": 1.2564823419800746,
+   "land_share": 0.6169433753322473,
+   "water_share": 0.3830566246677527,
+   "climatology": {
+    "ts_k": {
+     "land": {
+      "warm": 300.282802,
+      "cool": 298.941383,
+      "per_K": 1.067599
+     },
+     "water": {
+      "warm": 303.625685,
+      "cool": 302.506001,
+      "per_K": 0.891126
+     }
+    },
+    "tas_land_sun": {
+     "all": {
+      "warm": 300.321669,
+      "cool": 298.963572,
+      "per_K": 1.080872
+     }
+    },
+    "tas_land_sun_near": {
+     "all": {
+      "warm": 301.462016,
+      "cool": 300.156476,
+      "per_K": 1.039044
+     }
+    },
+    "tas_land_sun_far": {
+     "all": {
+      "warm": 299.351372,
+      "cool": 297.94264,
+      "per_K": 1.121171
+     }
+    },
+    "pr_mm_day": {
+     "land": {
+      "warm": 2.179925,
+      "cool": 2.129144,
+      "per_K": 0.018982
+     },
+     "water": {
+      "warm": 1.69198,
+      "cool": 1.598744,
+      "per_K": 0.046414
+     }
+    },
+    "evap_mm_day": {
+     "land": {
+      "warm": 1.466885,
+      "cool": 1.416784,
+      "per_K": 0.028144
+     },
+     "water": {
+      "warm": 2.85192,
+      "cool": 2.744129,
+      "per_K": 0.031262
+     }
+    },
+    "mrso_m": {
+     "land": {
+      "warm": 0.147351,
+      "cool": 0.149614,
+      "per_K": -0.012039
+     },
+     "water": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": null
+     }
+    },
+    "prw_kg_m2": {
+     "land": {
+      "warm": 297.662648,
+      "cool": 270.499416,
+      "per_K": 0.079921
+     },
+     "water": {
+      "warm": 321.057279,
+      "cool": 292.299599,
+      "per_K": 0.078301
+     }
+    },
+    "snd_m": {
+     "land": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": null
+     },
+     "water": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": null
+     }
+    },
+    "clt_mean": {
+     "land": {
+      "warm": 0.378164,
+      "cool": 0.379252,
+      "per_K": -0.000866
+     },
+     "water": {
+      "warm": 0.388205,
+      "cool": 0.398666,
+      "per_K": -0.008325
+     }
+    },
+    "low_mean": {
+     "land": {
+      "warm": 0.062988,
+      "cool": 0.064184,
+      "per_K": -0.000952
+     },
+     "water": {
+      "warm": 0.072712,
+      "cool": 0.082677,
+      "per_K": -0.007931
+     }
+    },
+    "high_mean": {
+     "land": {
+      "warm": 0.239555,
+      "cool": 0.242327,
+      "per_K": -0.002206
+     },
+     "water": {
+      "warm": 0.236038,
+      "cool": 0.240277,
+      "per_K": -0.003374
+     }
+    },
+    "sic": {
+     "land": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": 0.0
+     },
+     "water": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": 0.0
+     }
+    },
+    "clt_sun": {
+     "all": {
+      "warm": 0.381995,
+      "cool": 0.386537,
+      "per_K": -0.003615
+     }
+    },
+    "low_sun": {
+     "all": {
+      "warm": 0.066658,
+      "cool": 0.071165,
+      "per_K": -0.003587
+     }
+    },
+    "high_sun": {
+     "all": {
+      "warm": 0.238194,
+      "cool": 0.24143,
+      "per_K": -0.002575
+     }
+    },
+    "cl_layer_mean": {
+     "all": {
+      "warm": 0.034683,
+      "cool": 0.035329,
+      "per_K": -0.000514
+     }
+    },
+    "ua_layer_mean": {
+     "all": {
+      "warm": 3.284336,
+      "cool": 3.118985,
+      "per_K": 0.131598
+     }
+    }
+   },
+   "surface_wind": {
+    "ustar_day_ms": {
+     "land": {
+      "warm": 0.24397,
+      "cool": 0.242223,
+      "per_K": 0.005739
+     },
+     "water": {
+      "warm": 0.094277,
+      "cool": 0.093968,
+      "per_K": 0.002614
+     }
+    },
+    "wind10_day_ms": {
+     "land": {
+      "warm": 1.037143,
+      "cool": 1.03681,
+      "per_K": 0.000256
+     },
+     "water": {
+      "warm": 2.287447,
+      "cool": 2.326248,
+      "per_K": -0.013275
+     }
+    },
+    "ustar_all_ms": {
+     "land": {
+      "warm": 0.147845,
+      "cool": 0.147273,
+      "per_K": 0.003093
+     },
+     "water": {
+      "warm": 0.077853,
+      "cool": 0.079768,
+      "per_K": -0.019104
+     }
+    },
+    "wind10_all_ms": {
+     "land": {
+      "warm": 0.600214,
+      "cool": 0.606032,
+      "per_K": -0.00764
+     },
+     "water": {
+      "warm": 2.012623,
+      "cool": 2.105651,
+      "per_K": -0.035162
+     }
+    },
+    "sic": {
+     "land": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": 0.0
+     },
+     "water": {
+      "warm": 0.0,
+      "cool": 0.0,
+      "per_K": 0.0
+     }
+    }
+   }
+  }
+ ],
+ "applied": {
+  "climatology": {
+   "cl_layer_mean": {
+    "all": {
+     "per_K": 0.0,
+     "pairs": [
+      0.000247,
+      -0.000514
+     ],
+     "resolved": false
+    }
+   },
+   "clt_mean": {
+    "land": {
+     "per_K": 0.0,
+     "pairs": [
+      0.002134,
+      -0.000866
+     ],
+     "resolved": false
+    },
+    "water": {
+     "per_K": -0.00433,
+     "pairs": [
+      -0.000335,
+      -0.008325
+     ],
+     "resolved": true
+    }
+   },
+   "clt_sun": {
+    "all": {
+     "per_K": 0.0,
+     "pairs": [
+      0.001188,
+      -0.003615
+     ],
+     "resolved": false
+    }
+   },
+   "evap_mm_day": {
+    "land": {
+     "per_K": 0.028889,
+     "pairs": [
+      0.029634,
+      0.028144
+     ],
+     "resolved": true
+    },
+    "water": {
+     "per_K": 0.032174,
+     "pairs": [
+      0.033086,
+      0.031262
+     ],
+     "resolved": true
+    }
+   },
+   "high_mean": {
+    "land": {
+     "per_K": -0.002289,
+     "pairs": [
+      -0.002371,
+      -0.002206
+     ],
+     "resolved": true
+    },
+    "water": {
+     "per_K": -0.002969,
+     "pairs": [
+      -0.002564,
+      -0.003374
+     ],
+     "resolved": true
+    }
+   },
+   "high_sun": {
+    "all": {
+     "per_K": -0.002532,
+     "pairs": [
+      -0.00249,
+      -0.002575
+     ],
+     "resolved": true
+    }
+   },
+   "low_mean": {
+    "land": {
+     "per_K": 0.0,
+     "pairs": [
+      0.001286,
+      -0.000952
+     ],
+     "resolved": false
+    },
+    "water": {
+     "per_K": -0.005132,
+     "pairs": [
+      -0.002332,
+      -0.007931
+     ],
+     "resolved": true
+    }
+   },
+   "low_sun": {
+    "all": {
+     "per_K": -0.001814,
+     "pairs": [
+      -4.1e-05,
+      -0.003587
+     ],
+     "resolved": true
+    }
+   },
+   "mrso_m": {
+    "land": {
+     "per_K": -0.023465,
+     "pairs": [
+      -0.034892,
+      -0.012039
+     ],
+     "resolved": true
+    },
+    "water": {
+     "per_K": 0.0,
+     "pairs": [
+      null,
+      null
+     ],
+     "resolved": false
+    }
+   },
+   "pr_mm_day": {
+    "land": {
+     "per_K": 0.018414,
+     "pairs": [
+      0.017846,
+      0.018982
+     ],
+     "resolved": true
+    },
+    "water": {
+     "per_K": 0.049277,
+     "pairs": [
+      0.052141,
+      0.046414
+     ],
+     "resolved": true
+    }
+   },
+   "prw_kg_m2": {
+    "land": {
+     "per_K": 0.081509,
+     "pairs": [
+      0.083097,
+      0.079921
+     ],
+     "resolved": true
+    },
+    "water": {
+     "per_K": 0.079207,
+     "pairs": [
+      0.080113,
+      0.078301
+     ],
+     "resolved": true
+    }
+   },
+   "sic": {
+    "land": {
+     "per_K": 0.0,
+     "pairs": [
+      0.0,
+      0.0
+     ],
+     "resolved": false
+    },
+    "water": {
+     "per_K": 0.0,
+     "pairs": [
+      0.0,
+      0.0
+     ],
+     "resolved": false
+    }
+   },
+   "snd_m": {
+    "land": {
+     "per_K": 0.0,
+     "pairs": [
+      null,
+      null
+     ],
+     "resolved": false
+    },
+    "water": {
+     "per_K": 0.0,
+     "pairs": [
+      null,
+      null
+     ],
+     "resolved": false
+    }
+   },
+   "tas_land_sun": {
+    "all": {
+     "per_K": 1.082423,
+     "pairs": [
+      1.083974,
+      1.080872
+     ],
+     "resolved": true
+    }
+   },
+   "tas_land_sun_far": {
+    "all": {
+     "per_K": 1.108105,
+     "pairs": [
+      1.09504,
+      1.121171
+     ],
+     "resolved": true
+    }
+   },
+   "tas_land_sun_near": {
+    "all": {
+     "per_K": 1.052633,
+     "pairs": [
+      1.066222,
+      1.039044
+     ],
+     "resolved": true
+    }
+   },
+   "ts_k": {
+    "land": {
+     "per_K": 1.072202,
+     "pairs": [
+      1.078219,
+      1.067599
+     ],
+     "resolved": true,
+     "measured_per_K": 1.072909
+    },
+    "water": {
+     "per_K": 0.879963,
+     "pairs": [
+      0.869959,
+      0.891126
+     ],
+     "resolved": true,
+     "measured_per_K": 0.880543
+    }
+   },
+   "ua_layer_mean": {
+    "all": {
+     "per_K": 0.204439,
+     "pairs": [
+      0.27728,
+      0.131598
+     ],
+     "resolved": true
+    }
+   }
+  },
+  "surface_wind": {
+   "sic": {
+    "land": {
+     "per_K": 0.0,
+     "pairs": [
+      0.0,
+      0.0
+     ],
+     "resolved": false
+    },
+    "water": {
+     "per_K": 0.0,
+     "pairs": [
+      0.0,
+      0.0
+     ],
+     "resolved": false
+    }
+   },
+   "ustar_all_ms": {
+    "land": {
+     "per_K": 0.0,
+     "pairs": [
+      -0.000697,
+      0.003093
+     ],
+     "resolved": false
+    },
+    "water": {
+     "per_K": -0.017217,
+     "pairs": [
+      -0.015329,
+      -0.019104
+     ],
+     "resolved": true
+    }
+   },
+   "ustar_day_ms": {
+    "land": {
+     "per_K": 0.007623,
+     "pairs": [
+      0.009507,
+      0.005739
+     ],
+     "resolved": true
+    },
+    "water": {
+     "per_K": 0.009338,
+     "pairs": [
+      0.016062,
+      0.002614
+     ],
+     "resolved": true
+    }
+   },
+   "wind10_all_ms": {
+    "land": {
+     "per_K": -0.010872,
+     "pairs": [
+      -0.014104,
+      -0.00764
+     ],
+     "resolved": true
+    },
+    "water": {
+     "per_K": -0.031713,
+     "pairs": [
+      -0.028265,
+      -0.035162
+     ],
+     "resolved": true
+    }
+   },
+   "wind10_day_ms": {
+    "land": {
+     "per_K": 0.002963,
+     "pairs": [
+      0.005669,
+      0.000256
+     ],
+     "resolved": true
+    },
+    "water": {
+     "per_K": 0.0,
+     "pairs": [
+      0.00279,
+      -0.013275
+     ],
+     "resolved": false
+    }
+   }
+  }
+ },
+ "summary": {
+  "ts_k": {
+   "land": [
+    299.838582,
+    299.095803
+   ],
+   "water": [
+    302.929793,
+    302.320189
+   ]
+  },
+  "pr_mm_day": {
+   "land": [
+    2.090095,
+    2.063433
+   ],
+   "water": [
+    1.691021,
+    1.633294
+   ]
+  },
+  "evap_mm_day": {
+   "land": [
+    1.454586,
+    1.425475
+   ],
+   "water": [
+    2.750345,
+    2.689043
+   ]
+  },
+  "mrso_m": {
+   "land": [
+    0.141516,
+    0.143817
+   ],
+   "water": [
+    0.0,
+    0.0
+   ]
+  },
+  "prw_kg_m2": {
+   "land": [
+    287.666306,
+    271.422924
+   ],
+   "water": [
+    305.708512,
+    288.933759
+   ]
+  },
+  "clt_mean": {
+   "land": [
+    0.375952,
+    0.375952
+   ],
+   "water": [
+    0.397857,
+    0.400856
+   ]
+  },
+  "rain_less_evaporation_mm_day": {
+   "land": [
+    0.635509,
+    0.637958
+   ]
+  },
+  "global_surface_temperature_K": [
+   300.999594,
+   300.306833
+  ]
+ },
+ "products": {
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.npz": "c2c00e1977e682c090cc9e90e4ac84b6de02bcf3068ffd3ea73102caf4494114",
+  "climate/gcm/products/surface_wind_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.npz": "12f084597f132d470b0764729ebcdd4e4e132aea7194077758352d600f375c93"
+ },
+ "inputs": {
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59.npz": "907c8df6707296875fd79459b175a4a92f0441b0ea0bf34543e8891c4c70201b",
+  "climate/gcm/products/surface_wind_A28D_301k_design_l15_snow_s936_settled_y45-59.npz": "2f4e83db0e9c3ab0a75c734fa62470040d247b7a02c57520b990ffc20ecaaa80",
+  "climate/gcm/products/climatology_A28S_301k_design_l15_snow_s930_settled_y35-49.npz": "66589aedd78e72f829a04d7a117c8cf1ee7677ab9dbcad4f347352ff4ea9de51"
+ }
+}
