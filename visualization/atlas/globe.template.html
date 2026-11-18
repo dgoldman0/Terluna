@@ -757,11 +757,8 @@
 </script>
 <script id="district-lines" type="x-shader/x-fragment">
   // The atlas round's draft regions and districts: each cell's district (red's low seven bits and green), whether it is
-  // water (red's top bit, a lake or a sea) and the region drawn there (blue) in a texture read cell by cell. The sea
-  // within 100 km of a shore carries its nearest region, and 0 beyond, so a region's border runs on across straits,
-  // inlets and island chains and stops where the open sea begins (render.water_regions). Edges are drawn where a
-  // neighbour a pixel or so away differs: regions' edges always, districts' when zoomed in (uDistrictMode 2), solid on
-  // land and dashed over water, as atlases draw a border at sea. A selected district and those linked to it are tinted.
+  // water (red's top bit, a lake or a sea) and the region drawn there (blue) in a texture read cell by cell, for the
+  // tint of a selected district and those linked to it. The borders are traced lines (border-vertex below).
   uniform sampler2D tDistricts;
   uniform float uDistrictMode;   // 0 off, 1 regions, 2 regions and districts
   uniform float uSel[8];         // the selected district and its links, by their place in the page's list (0 unused)
@@ -772,39 +769,13 @@
     return vec3((t.r - 128.0 * wet) * 256.0 + t.g, t.b, wet);
   }
   vec3 districtsOver(vec3 colour, vec2 uv, vec2 gx, vec2 gy) {
+    // The borders themselves are traced lines drawn over the globe (border-vertex); here only the selected district
+    // and those linked to it are tinted.
     if (uDistrictMode < 0.5) return colour;
     vec3 c0 = unitsAt(uv);
-    float land0 = step(0.5, c0.x) * step(c0.x, uLandUnits.x + 0.5);
-    // A pixel is on an edge where a neighbour that far away, in screen pixels, lies in another unit, so a line is twice
-    // that wide: regions' about 1.3 pixels, districts' about 1. The shore already shows itself: a district's edge runs
-    // between two land districts or two coastal seas, never along a coast or along the open sea's edge, and a region's
-    // between two regions, never where one of them gives way to the open sea.
-    float dEdge = 0.0, rEdge = 0.0, dWet = 0.0, rWet = 0.0;
-    for (int k = 0; k < 8; k++) {
-      int j = k - 4 * (k / 4);
-      vec2 off = (j == 0 ? gx : j == 1 ? -gx : j == 2 ? gy : -gy) * (k < 4 ? 0.65 : 0.5);
-      vec3 c1 = unitsAt(uv + off);
-      if (k < 4) {
-        float e = step(0.5, abs(c1.y - c0.y)) * step(0.5, c0.y) * step(0.5, c1.y);
-        rEdge = max(rEdge, e);
-        rWet = max(rWet, e * max(c0.z, c1.z));
-      } else {
-        float land1 = step(0.5, c1.x) * step(c1.x, uLandUnits.x + 0.5);
-        float e = step(0.5, abs(c1.x - c0.x)) * step(0.5, c0.x) * step(0.5, c1.x) * (1.0 - abs(land0 - land1));
-        dEdge = max(dEdge, e);
-        dWet = max(dWet, e * max(c0.z, c1.z));
-      }
-    }
-    // Over water an edge is dashed: three pixels on and three off, on a checkerboard in screen pixels, so that a line
-    // in any direction breaks into dashes.
-    float dash = mod(floor(gl_FragCoord.x / 3.0) + floor(gl_FragCoord.y / 3.0), 2.0);
-    rEdge *= mix(1.0, dash, rWet);
-    dEdge *= mix(1.0, dash, dWet);
     float sel = 0.0;
     for (int k = 0; k < 8; k++) sel = max(sel, step(0.5, uSel[k]) * (1.0 - step(0.5, abs(uSel[k] - c0.x))));
-    colour = mix(colour, vec3(1.0, 0.80, 0.42), 0.28 * sel * step(0.5, c0.x));
-    if (uDistrictMode > 1.5) colour = mix(colour, vec3(0.96, 0.94, 0.88), 0.5 * dEdge);
-    return mix(colour, vec3(1.0, 0.91, 0.72), 0.75 * rEdge);
+    return mix(colour, vec3(1.0, 0.80, 0.42), 0.28 * sel * step(0.5, c0.x));
   }
 </script>
 <script id="works-lines" type="x-shader/x-fragment">
@@ -927,6 +898,72 @@
     float line = (1.0 - smoothstep(0.3 + 0.5 * coast, 1.2 + 0.5 * coast, d))
                * mix(smoothstep(3.0, 8.0, uContour / fw), 1.0, coast);
     return 1.0 - (0.3 + 0.35 * coast) * line;
+  }
+</script>
+<script id="border-vertex" type="x-shader/x-vertex">
+  // The traced borders (render.border_lines) as thin lines of a fixed width in pixels: each segment a quad between its
+  // two ends on the globe, raised with the relief in the topography mode, its sides set out across the segment on the
+  // screen. A segment with either end beyond the limb is dropped whole; the depth test hides what the ground hides.
+  uniform sampler2D tRelief;
+  uniform float uLow;
+  uniform float uScale;
+  uniform float uTopo;
+  uniform vec2 uViewport;
+  uniform float uHalfWidth;
+  uniform float uDepthBias;
+  attribute vec3 aB;
+  attribute float aSide;
+  attribute float aEnd;
+  attribute float aAlong;
+  varying float vAlong;
+  varying float vAcross;
+  float relief(vec2 at) { return dot(texture2D(tRelief, at).rg, vec2(65280.0, 255.0)) + uLow; }
+  vec3 raised(vec3 p) {
+    vec2 at = vec2(fract(atan(p.z, -p.x) / 6.283185307 + 1.0), asin(clamp(p.y, -1.0, 1.0)) / 3.141592654 + 0.5);
+    return p * (1.0 + uTopo * uScale * relief(at) + 0.0003);
+  }
+  void main() {
+    vec3 pa = raised(position), pb = raised(aB);
+    vec4 va = modelViewMatrix * vec4(pa, 1.0), vb = modelViewMatrix * vec4(pb, 1.0);
+    float facing = min(dot(normalize(normalMatrix * normalize(pa)), -normalize(va.xyz)),
+                       dot(normalize(normalMatrix * normalize(pb)), -normalize(vb.xyz)));
+    if (facing < 0.0) {
+      gl_Position = vec4(0.0, 0.0, 2.0, 1.0);          // every corner of the quad the same point beyond the far plane
+      return;
+    }
+    vec4 ca = projectionMatrix * modelViewMatrix * vec4(pa, 1.0);
+    vec4 cb = projectionMatrix * modelViewMatrix * vec4(pb, 1.0);
+    vec2 dir = (cb.xy / cb.w - ca.xy / ca.w) * uViewport;
+    float len = length(dir);
+    dir = len > 1e-6 ? dir / len : vec2(1.0, 0.0);
+    vec4 c = aEnd > 0.5 ? cb : ca;
+    float w = uHalfWidth + 1.0;                       // a pixel beyond the line's half width, for its soft edge
+    c.xy += vec2(-dir.y, dir.x) * aSide * w * 2.0 / uViewport * c.w;
+    c.z -= uDepthBias * c.w;
+    gl_Position = c;
+    vAcross = aSide * w;
+    vAlong = aAlong;
+  }
+</script>
+<script id="border-fragment" type="x-shader/x-fragment">
+  // A soft-edged line about two half widths wide; dashed where it crosses water, the dashes measured along the line so
+  // that they stay even, uDashKm the length of a dash and its gap together.
+  precision highp float;
+  uniform vec3 uColour;
+  uniform float uOpacity;
+  uniform float uHalfWidth;
+  uniform float uDash;
+  uniform float uDashKm;
+  varying float vAlong;
+  varying float vAcross;
+  void main() {
+    float cover = clamp(uHalfWidth + 0.5 - abs(vAcross), 0.0, 1.0);
+    if (uDash > 0.5) {
+      float t = fract(vAlong / uDashKm);
+      cover *= smoothstep(0.0, 0.06, t) * (1.0 - smoothstep(0.5, 0.56, t));
+    }
+    if (cover <= 0.004) discard;
+    gl_FragColor = vec4(uColour, uOpacity * cover);
   }
 </script>
 <script id="relief-vertex" type="x-shader/x-vertex">
@@ -1382,8 +1419,80 @@
     for (const d of [...DIST.districts].sort((a, b) => b.area - a.area)) addLabel(d.kind, d.name, d.lat, d.lon, 0, d);
   }
   const unitByIndex = new Map(DIST ? DIST.districts.map((d) => [d.index, d]) : []);
+  // The borders, traced once in the build (render.border_lines): thin lines of a fixed width in pixels, solid on land
+  // and along shores, dashed where water lies on both sides. Regions' edges show at every zoom, districts' when
+  // zoomed in.
+  const borderUniforms = { uTopo: { value: 0 }, uViewport: { value: new THREE.Vector2(1, 1) },
+                           uDashKm: { value: 10 }, uDepthBias: { value: 0.0002 } };
+  const borderMeshes = { region: [], district: [] };
+  const decodeLines = (b64) => {
+    const bin = atob(b64), view = new DataView(new ArrayBuffer(bin.length)), lines = [];
+    for (let i = 0; i < bin.length; i++) view.setUint8(i, bin.charCodeAt(i));
+    let line = [];
+    for (let i = 0; i + 3 < bin.length; i += 4) {
+      const lat = view.getInt16(i, true), lon = view.getInt16(i + 2, true);
+      if (lat === -32768) { if (line.length > 1) lines.push(line); line = []; } else line.push([lat / 100, lon / 100]);
+    }
+    if (line.length > 1) lines.push(line);
+    return lines;
+  };
+  const borderMesh = (lines, halfWidth, colour, opacity, dashed) => {
+    let n = 0;
+    for (const l of lines) n += l.length - 1;
+    const a = new Float32Array(n * 12), b = new Float32Array(n * 12), side = new Float32Array(n * 4);
+    const end = new Float32Array(n * 4), along = new Float32Array(n * 4), index = new Uint32Array(n * 6);
+    let k = 0;
+    for (const l of lines) {
+      let km = 0, prev = unitAt(...l[0]);
+      for (let i = 1; i < l.length; i++) {
+        const next = unitAt(...l[i]), step = prev.angleTo(next) * MOON_KM;
+        for (let v = 0; v < 4; v++) {
+          a.set([prev.x, prev.y, prev.z], (4 * k + v) * 3);
+          b.set([next.x, next.y, next.z], (4 * k + v) * 3);
+          side[4 * k + v] = v % 2 ? 1 : -1;
+          end[4 * k + v] = v < 2 ? 0 : 1;
+          along[4 * k + v] = v < 2 ? km : km + step;
+        }
+        index.set([4 * k, 4 * k + 1, 4 * k + 2, 4 * k + 1, 4 * k + 3, 4 * k + 2], 6 * k);
+        km += step;
+        prev = next;
+        k++;
+      }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(a, 3));
+    g.setAttribute('aB', new THREE.BufferAttribute(b, 3));
+    g.setAttribute('aSide', new THREE.BufferAttribute(side, 1));
+    g.setAttribute('aEnd', new THREE.BufferAttribute(end, 1));
+    g.setAttribute('aAlong', new THREE.BufferAttribute(along, 1));
+    g.setIndex(new THREE.BufferAttribute(index, 1));
+    const mesh = new THREE.Mesh(g, new THREE.ShaderMaterial({
+      uniforms: { tRelief: topoUniforms.tRelief, uLow: topoUniforms.uLow, uScale: reliefUniforms.uScale, ...borderUniforms,
+                  uHalfWidth: { value: halfWidth }, uColour: { value: new THREE.Vector3(...colour) },
+                  uOpacity: { value: opacity }, uDash: { value: dashed ? 1 : 0 } },
+      vertexShader: document.getElementById('border-vertex').textContent,
+      fragmentShader: document.getElementById('border-fragment').textContent,
+      transparent: true, depthTest: true, depthWrite: false, side: THREE.DoubleSide }));
+    mesh.frustumCulled = false;
+    mesh.renderOrder = 3;
+    mesh.visible = false;
+    globe.add(mesh);
+    return mesh;
+  };
+  if (DIST && DIST.borders) {
+    const looks = { region: [0.7, [1.0, 0.91, 0.72], 0.75], district: [0.5, [0.96, 0.94, 0.88], 0.5] };
+    for (const kind of ['region', 'district']) {
+      for (const style of ['solid', 'dashed']) {
+        const [half, colour, opacity] = looks[kind];
+        borderMeshes[kind].push(borderMesh(decodeLines(DIST.borders[kind][style]), half, colour, opacity, style === 'dashed'));
+      }
+    }
+  }
   const setDistrictMode = () => {
-    topoUniforms.uDistrictMode.value = !DIST || !show.district ? 0 : distance < ZOOM_DISTRICTS ? 2 : 1;
+    const m = !DIST || !show.district ? 0 : distance < ZOOM_DISTRICTS ? 2 : 1;
+    topoUniforms.uDistrictMode.value = m;
+    for (const mesh of borderMeshes.region) mesh.visible = m >= 1;
+    for (const mesh of borderMeshes.district) mesh.visible = m >= 2;
   };
   for (const [name, lat, lon, h] of D.labels.islands) addLabel('island', name, lat, lon, h);
   for (const s of D.labels.sites) {
@@ -1963,6 +2072,7 @@
     return 'Drag to turn · scroll or pinch to zoom · ' + fmt((distance - 1) * MOON_KM) + ' km above the surface' + where;
   };
   let last = performance.now(), loaded = false;
+  const drawSize = new THREE.Vector2();
   const frame = (now) => {
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
@@ -1994,6 +2104,12 @@
       uniforms.uCamBasis.value.set(right.x, up.x, back.x, right.y, up.y, back.y, right.z, up.z, back.z);
       const tanY = Math.tan(fov * Math.PI / 360);
       uniforms.uTanHalf.value.set(tanY * camera.aspect, tanY);
+      renderer.getDrawingBufferSize(drawSize);
+      borderUniforms.uViewport.value.copy(drawSize);
+      borderUniforms.uTopo.value = mode === 'topo' ? 1 : 0;
+      borderUniforms.uDepthBias.value = mode === 'topo' ? 0.002 : 0.0002;
+      // a dash and its gap four pixels each, at the ground nearest the camera
+      borderUniforms.uDashKm.value = 8 * 2 * (distance - 1) * tanY * MOON_KM / Math.max(drawSize.y, 1);
       // Markers keep the size they have at the topography's home distance, at any zoom.
       const markerScale = (distance - 1) * tanY / (3.3 * Math.tan(14 * Math.PI / 180));
       for (const it of items) if (it.mesh) it.mesh.scale.setScalar(markerScale);

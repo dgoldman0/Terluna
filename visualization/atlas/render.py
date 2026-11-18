@@ -639,34 +639,6 @@ def work_lines(path, rotation):
             for s in range(int(stretch.max()) + 1)] if cells.size else []
 
 
-WATER_REACH_KM = 100.0          # the sea within this of land is drawn as its nearest region's, for borders across it
-
-
-def water_regions(land_region, sea, reach_km=WATER_REACH_KM):
-    """For drawing only: each sea cell within reach_km of a shore takes the region of the nearest shore cell, and 0
-    farther out, so that a land border runs on across straits, inlets and island chains and stops at the open sea.
-    land_region holds each land cell's page region; the grid runs from 90 N and from 0 E, as the districts' grid."""
-    from scipy.spatial import cKDTree
-    rows, cols = sea.shape
-    ppd = cols / 360.0
-    lat = np.radians(90.0 - (np.arange(rows) + 0.5) / ppd)
-    lon = np.radians((np.arange(cols) + 0.5) / ppd)
-    unit = lambda r, c: np.stack((np.cos(lat[r]) * np.cos(lon[c]), np.cos(lat[r]) * np.sin(lon[c]), np.sin(lat[r])), -1)  # noqa: E731
-    beside = np.roll(sea, 1, axis=1) | np.roll(sea, -1, axis=1)
-    beside[1:] |= sea[:-1]
-    beside[:-1] |= sea[1:]
-    sr, sc = np.nonzero(~sea & beside & (land_region > 0))
-    out = np.zeros(sea.shape, np.int64)
-    if not sr.size:
-        return out
-    wr, wc = np.nonzero(sea)
-    chord = 2.0 * np.sin(reach_km / (MOON_RADIUS / 1000.0) / 2.0)
-    dist, k = cKDTree(unit(sr, sc)).query(unit(wr, wc), distance_upper_bound=chord)
-    near = np.isfinite(dist)
-    out[wr[near], wc[near]] = land_region[sr[k[near]], sc[k[near]]]
-    return out
-
-
 def water_cells(surface_path, shape):
     """Each cell of a coarser grid that is mostly water, a sea's or a lake's, on the design surface's 16 px/deg grid."""
     with np.load(surface_path, allow_pickle=False) as z:
@@ -678,12 +650,172 @@ def water_cells(surface_path, shape):
     return fine.reshape(shape[0], k, shape[1], k).mean(axis=(1, 3)) >= 0.5
 
 
+BORDER_SIMPLIFY = 0.08           # grid cells: the traced borders' simplification, about 300 m at 8 px/deg
+BORDER_END = -32768              # the encoded borders' marker between lines
+
+
+def segment_keys(seg, rows, cols):
+    return np.minimum(seg[:, 0], seg[:, 1]) * (rows + 1) * cols + np.maximum(seg[:, 0], seg[:, 1])
+
+
+def chains_of(segments):
+    """Chains of grid corners from undirected segments: each runs between corners where the segments do not meet in
+    twos (its ends, and where three or more borders meet), or round a closed loop; returns (corners, closed) pairs."""
+    from collections import defaultdict
+    adj = defaultdict(list)
+    for k, (a, b) in enumerate(segments):
+        adj[a].append(k)
+        adj[b].append(k)
+    used = np.zeros(len(segments), bool)
+
+    def walk(start, k):
+        chain, node = [start], start
+        while True:
+            used[k] = True
+            a, b = segments[k]
+            node = b if a == node else a
+            chain.append(node)
+            if len(adj[node]) != 2:
+                return chain
+            nxt = [j for j in adj[node] if not used[j]]
+            if not nxt:
+                return chain
+            k = nxt[0]
+
+    out = []
+    for node, ks in adj.items():
+        if len(ks) != 2:
+            for k in ks:
+                if not used[k]:
+                    out.append((walk(node, k), False))
+    for k in range(len(segments)):
+        if not used[k]:
+            ch = walk(segments[k][0], k)
+            out.append((ch, ch[0] == ch[-1]))
+    return out
+
+
+BORDER_SAMPLE, BORDER_WINDOW, BORDER_PASSES = 0.5, 9, 3   # grid cells between samples; the moving average's span
+
+
+def smooth_chain(xy, closed):
+    """A chain's staircase of cell edges made a smooth line: through the midpoints of its steps, resampled every
+    BORDER_SAMPLE cells, then a moving average over BORDER_WINDOW samples, BORDER_PASSES times, about a dozen km at 8
+    px/deg. An open chain keeps its ends, where other borders or a shore meet it; a closed one is smoothed round."""
+    if closed:
+        pts = 0.5 * (xy[:-1] + np.roll(xy[:-1], -1, axis=0))
+        pts = np.vstack([pts, pts[:1]])
+    elif len(xy) > 2:
+        pts = np.vstack([xy[:1], 0.5 * (xy[:-1] + xy[1:]), xy[-1:]])
+    else:
+        return xy
+    step = np.hypot(*np.diff(pts, axis=0).T)
+    along = np.concatenate([[0.0], np.cumsum(step)])
+    if along[-1] <= BORDER_SAMPLE:
+        return pts[[0, -1]]
+    t = np.linspace(0.0, along[-1], int(np.ceil(along[-1] / BORDER_SAMPLE)) + 1)
+    out = np.stack([np.interp(t, along, pts[:, 0]), np.interp(t, along, pts[:, 1])], axis=1)
+    half = BORDER_WINDOW // 2
+    kernel = np.ones(BORDER_WINDOW) / BORDER_WINDOW
+    for _ in range(BORDER_PASSES):
+        if closed:
+            body = out[:-1]
+            padded = np.vstack([body[-half:], body, body[:half]])
+        else:
+            padded = np.vstack([np.repeat(out[:1], half, axis=0), out, np.repeat(out[-1:], half, axis=0)])
+        smooth = np.stack([np.convolve(padded[:, k], kernel, mode='valid') for k in (0, 1)], axis=1)
+        if closed:
+            out = np.vstack([smooth, smooth[:1]])
+        else:
+            smooth[0], smooth[-1] = out[0], out[-1]
+            out = smooth
+    return out
+
+
+def simplify(xy, tol):
+    """Douglas and Peucker's simplification of a line to within tol, its ends kept."""
+    if len(xy) <= 2:
+        return xy
+    keep = np.zeros(len(xy), bool)
+    keep[[0, -1]] = True
+    stack = [(0, len(xy) - 1)]
+    while stack:
+        i, j = stack.pop()
+        if j <= i + 1:
+            continue
+        a, b = xy[i], xy[j]
+        ab = b - a
+        n = np.hypot(*ab)
+        seg = xy[i + 1:j] - a
+        d = np.abs(ab[0] * seg[:, 1] - ab[1] * seg[:, 0]) / n if n > 0 else np.hypot(seg[:, 0], seg[:, 1])
+        k = int(np.argmax(d))
+        if d[k] > tol:
+            m = i + 1 + k
+            keep[m] = True
+            stack += [(i, m), (m, j)]
+    return xy[keep]
+
+
+def border_lines(units, wet, rotation, land_units, ppd):
+    """The page's borders as lines: each region's and district's edge traced once along the grid's cell edges, made
+    smooth and simplified, in the globe's frame, each piece solid or dashed. A region holds its land and its waters,
+    the coastal seas, so its outline closes at sea along their outer limit, where international waters begin. A piece
+    is dashed where it has water on both sides (at sea, or across a lake) and solid where it has land on either side.
+    District edges are kept between two land districts or two coastal seas, and not where a region's edge already
+    runs; the shore draws itself. Returns {kind: {style: base64 of int16 latitude and longitude in hundredths of a degree, each line
+    ended by BORDER_END}} with the count of lines and points."""
+    district, region = units
+    rows, cols = district.shape
+
+    def wet_pairs(kind):
+        return (wet & np.roll(wet, -1, axis=1)) if kind == 'h' else (wet[:-1] & wet[1:])
+
+    def segs(a, ok, skip=None):
+        right = np.roll(a, -1, axis=1)
+        mh = (a != right) & ok(a, right)
+        rr, cc = np.nonzero(mh)
+        h = np.stack([rr * cols + (cc + 1) % cols, (rr + 1) * cols + (cc + 1) % cols, wet_pairs('h')[rr, cc]], axis=1)
+        mv = (a[:-1] != a[1:]) & ok(a[:-1], a[1:])
+        rr, cc = np.nonzero(mv)
+        v = np.stack([(rr + 1) * cols + cc, (rr + 1) * cols + (cc + 1) % cols, wet_pairs('v')[rr, cc]], axis=1)
+        seg = np.concatenate([h, v]).astype(np.int64)
+        if skip is not None and seg.size:
+            seg = seg[~np.isin(segment_keys(seg, rows, cols), skip)]
+        return seg
+
+    both = lambda a, b: (a > 0) & (b > 0)                                              # noqa: E731
+    either = lambda a, b: (a > 0) | (b > 0)                                            # noqa: E731
+    same_kind = lambda a, b: both(a, b) & ((a <= land_units) == (b <= land_units))     # noqa: E731
+    region_seg = segs(region, either)
+    district_seg = segs(district, same_kind, skip=segment_keys(region_seg, rows, cols) if region_seg.size else None)
+    out, counts = {}, {}
+    for kind, seg in (('region', region_seg), ('district', district_seg)):
+        out[kind] = {}
+        for style, flag in (('solid', 0), ('dashed', 1)):
+            pick = seg[seg[:, 2] == flag][:, :2]
+            values, n_lines, n_points = [], 0, 0
+            for chain, closed in chains_of([tuple(x) for x in pick.tolist()]):
+                i, j = np.divmod(np.asarray(chain, np.int64), cols)
+                x = j.astype(float)
+                x = x[0] + np.concatenate([[0.0], np.cumsum((np.diff(x) + cols / 2) % cols - cols / 2)])
+                xy = simplify(smooth_chain(np.stack([x, i.astype(float)], axis=1), closed), BORDER_SIMPLIFY)
+                lat, lon = to_turned(90.0 - xy[:, 1] / ppd, xy[:, 0] / ppd, rotation)
+                lon = (np.asarray(lon) + 180.0) % 360.0 - 180.0
+                values.append(np.stack([np.round(np.asarray(lat) * 100), np.round(lon * 100)], axis=1).ravel())
+                values.append(np.array([BORDER_END, BORDER_END]))
+                n_lines += 1
+                n_points += len(xy)
+            data = np.concatenate(values).astype('<i2') if values else np.zeros(0, '<i2')
+            out[kind][style] = base64.b64encode(data.tobytes()).decode('ascii')
+            counts[f'{kind}_{style}'] = dict(lines=n_lines, points=n_points)
+    return out, counts
+
+
 def districts_layer(record_path, rotation, surface_path=None):
     """The atlas round's draft regions and districts for the page: a texture in the globe's frame (180 W at the left)
     holding at each 8 px/deg cell the district's place in the page's list (red's low seven bits and green, 0 on open
     water), whether the cell is water (red's top bit, a lake or a sea), and the region
-    the page draws there (blue): a land cell's own, and a sea cell within WATER_REACH_KM of a shore its nearest
-    region's, 0 farther out; and the lists with each unit's name, code, tongue, label point, area and short
+    the page draws there (blue): a land cell's and a coastal sea's own region, 0 in international waters; and the lists with each unit's name, code, tongue, label point, area and short
     description; for a coastal sea, the land districts it faces and that feed it, and for a land district its coastal
     seas."""
     record = json.loads(Path(record_path).read_text())
@@ -701,15 +833,17 @@ def districts_layer(record_path, rotation, surface_path=None):
         raise SystemExit('too many districts or regions for the page\'s texture')
     if district.max() > 32767:
         raise SystemExit('too many districts for the page\'s texture with its water flag')
-    sea = region >= 100
-    shown = np.where(sea, 0, page_region[region])
-    shown[sea] = water_regions(shown, sea)[sea]
-    wet = sea | (water_cells(surface_path, district.shape) if surface_path else np.zeros(sea.shape, bool))
+    sea = region >= 100                                       # international waters: no region
+    shown = np.where(sea, 0, page_region[np.where(sea, 0, region)])
+    wet = (district > len(record['districts'])) | sea | (water_cells(surface_path, district.shape) if surface_path
+                                                        else np.zeros(sea.shape, bool))
     tex = np.zeros(district.shape + (3,), np.uint8)
     tex[..., 0], tex[..., 1], tex[..., 2] = (district >> 8) | (wet.astype(np.int64) << 7), district & 0xFF, shown
+    land_units = len(record['districts'])
+    borders, counts = border_lines((district, shown), wet, rotation, land_units, district.shape[1] / 360.0)
     tex = np.roll(tex, tex.shape[1] // 2, axis=1)
     turned = appearance.turn_texture(tex, rotation, left_lon=-180.0, nearest=True)
-    return turned, districts_data(record), Path(record_path), product
+    return turned, dict(districts_data(record), borders=borders, border_counts=counts), Path(record_path), product
 
 
 def districts_data(record):
@@ -755,7 +889,7 @@ def rename_page(page_path, record_path):
             raise SystemExit(f'{record_path} holds other {key} than the page drew; build the page again')
     if record['product']['sha256'] != (data['districts'].get('product_sha256') or record['product']['sha256']):
         raise SystemExit(f'{record_path} names another grid than the page drew; build the page again')
-    data['districts'] = dict(new, product_sha256=record['product']['sha256'])
+    data['districts'] = dict(data['districts'], **new, product_sha256=record['product']['sha256'])   # the borders kept
     marker = "Regions and districts: the atlas round's first draft (districts.json "
     at = data['provenance'].find(marker)
     if at >= 0:
