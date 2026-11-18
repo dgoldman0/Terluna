@@ -99,6 +99,8 @@
                 text-shadow: 0 0 3px #1c1408, 0 0 7px #1c1408, 0 0 11px #1c1408; }
   .lab.region.seaRegion { color: #e2efff; font-style: italic; text-shadow: 0 0 3px #0d2c55, 0 0 8px #0d2c55; }
   .lab.district { color: #fbf7ee; font-size: 11.5px; text-shadow: 0 0 3px #000, 0 0 6px #000; }
+  .lab.river { color: #cfe6ff; font-size: 11.5px; font-style: italic; font-weight: 600; letter-spacing: .04em;
+               text-shadow: 0 0 3px #06223f, 0 0 6px #06223f, 0 0 9px #06223f; }
   .lab.coast { color: #d9ecff; font-size: 11px; font-style: italic; text-shadow: 0 0 3px #08213f, 0 0 6px #08213f; }
   .lab.island { color: #1f1d1a; font-size: 11.5px; text-shadow: 0 0 3px #fbfaf7, 0 0 5px #fbfaf7; }
   .appearance .lab.island { color: #f4f1ea; text-shadow: 0 0 3px #000, 0 0 5px #000; }
@@ -281,6 +283,7 @@
           <label><input type="checkbox" id="show-targets"> Sampling targets</label>
           <label><input type="checkbox" id="show-falls" checked> Falls and cascades</label>
           <label><input type="checkbox" id="show-works" checked> Works</label>
+          <label><input type="checkbox" id="show-rivers" checked> Named rivers</label>
           <label><input type="checkbox" id="show-districts" checked> Regions and districts</label>
           <label><input type="checkbox" id="show-grid"> Grid</label>
         </div>
@@ -1188,6 +1191,13 @@
     Math.round(P.clouds.lowKm) + ' km, and a high deck of ' + Math.round(P.clouds.highCover * 100) + '% drawn at ' +
     Math.round(P.clouds.highKm) + ' km. The run has no sea ice or snow anywhere';
   document.getElementById('provenance').innerHTML = '<b>Provenance.</b> ' + D.provenance;
+  if (D.fine && D.fine.look) {
+    // The trial windows of the close-up look (fine_look.py): named, and called the guess they are.
+    const trial = document.createElement('p'), head = document.createElement('b');
+    head.textContent = 'A trial of the close-up look.';
+    trial.append(head, ' Zoomed close over ' + D.fine.look.windows.join(', ') + ': ' + D.fine.look.note);
+    document.getElementById('provenance').after(trial);
+  }
   if (D.districts) {
     const S = D.districts.summary;
     document.getElementById('districts-note').hidden = false;
@@ -1706,6 +1716,14 @@
     item.mesh.renderOrder = 2;
     globe.add(item.mesh);
   }
+  // The named rivers (render.river_marks, from the waterways record), largest first: each one's name half way along
+  // its course, and the courses as thin lines that show from afar and fade as the view comes close enough for the
+  // water itself to be seen.
+  const RIVERS = D.rivers || [];
+  for (const r of RIVERS) addLabel('river', r.name, r.lat, r.lon, 0, r);
+  const riverLines = RIVERS.length ? borderMesh(RIVERS.map((r) => r.course), 0.75, [0.66, 0.86, 1.0], 0.7, false) : null;
+  const RIVER_LINES_FADE = [1.45, 1.95];             // Moon radii from the centre: gone nearer, whole farther
+  if (!RIVERS.length) document.getElementById('show-rivers').closest('label').hidden = true;
   const placeMarkers = () => {
     for (const it of items) {
       if (!it.mesh) continue;
@@ -1719,13 +1737,13 @@
   const reliefInput = document.getElementById('relief');
   const reliefValue = document.getElementById('relief-value');
   const SHOW_IDS = { sea: 'show-seas', island: 'show-islands', site: 'show-sites', target: 'show-targets', fall: 'show-falls',
-                     work: 'show-works', grid: 'show-grid', region: 'show-districts', district: 'show-districts',
-                     coast: 'show-districts' };
+                     work: 'show-works', river: 'show-rivers', grid: 'show-grid', region: 'show-districts',
+                     district: 'show-districts', coast: 'show-districts' };
   const settings = {
-    appearance: { show: { sea: false, island: false, site: false, target: false, fall: true, work: true, grid: false,
-                          region: true, district: true, coast: true }, relief: 1, max: 10 },
-    topo: { show: { sea: false, island: true, site: true, target: false, fall: true, work: true, grid: false,
-                    region: true, district: true, coast: true }, relief: 12, max: 40 }
+    appearance: { show: { sea: false, island: false, site: false, target: false, fall: true, work: true, river: true,
+                          grid: false, region: true, district: true, coast: true }, relief: 1, max: 10 },
+    topo: { show: { sea: false, island: true, site: true, target: false, fall: true, work: true, river: true,
+                    grid: false, region: true, district: true, coast: true }, relief: 12, max: 40 }
   };
   // Regions show when zoomed out, districts and coastal seas when zoomed in past ZOOM_DISTRICTS Moon radii.
   const ZOOM_DISTRICTS = 2.6;
@@ -2199,9 +2217,14 @@
     hoverQueued = false;
     if (!hoverAt || pointers.size || pinMode) { hideTip(); return; }
     const [px, py] = hoverAt;
-    const marker = markerAt(px, py);
+    const marker = markerAt(px, py) || riverAt(px, py);
     let title = '', sub = '', text = '';
-    if (marker) {
+    if (marker && marker.kind === 'river') {
+      const x = marker.extra;
+      title = x.name;
+      sub = ['river', x.tongue, x.meaning].filter(Boolean).join(' · ');
+      text = firstSentence(x.text);
+    } else if (marker) {
       const x = marker.extra;
       title = x.title || (x.name ? x.name + (x.year ? ' (' + x.year + ')' : '') : x.short || '');
       sub = MARKER_KINDS[marker.kind] || '';
@@ -2253,6 +2276,37 @@
       card.querySelector('h3').textContent = x.title;
       card.querySelector('.meta').textContent = x.meta;
       card.querySelector('.marks').textContent = x.note;
+    } else if (it.kind === 'river') {
+      // A named river: what its name means, the lines written from the waterways record, its figures, and links that
+      // fly to the sea it ends in and the regions it crosses.
+      card.innerHTML = '<h3></h3><div class="meta"></div><p class="lead"></p><dl class="facts"></dl>' +
+        '<div class="links"></div><p class="note"></p>';
+      card.querySelector('h3').textContent = x.name;
+      card.querySelector('.meta').textContent = ['river', x.tongue, x.meaning].filter(Boolean).join(' · ');
+      card.querySelector('.lead').textContent = x.text;
+      const dl = card.querySelector('.facts');
+      for (const [k, v] of x.rows) {
+        const dt = document.createElement('dt'), dd = document.createElement('dd');
+        dt.textContent = k;
+        dd.textContent = v;
+        dl.append(dt, dd);
+      }
+      const links = card.querySelector('.links');
+      const linked = (x.links || []).map((a) => itemByAnchor.get(a)).filter(Boolean);
+      if (linked.length) {
+        const label = document.createElement('span');
+        label.textContent = 'Its sea and regions';
+        links.append(label);
+        for (const target of linked) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = target.extra.name;
+          b.addEventListener('click', () => { flyTo(target.lat, target.lon); showCard(target); });
+          links.append(b);
+        }
+      }
+      links.hidden = !linked.length;
+      card.querySelector('.note').textContent = x.note;
     } else if (UNIT_KINDS.has(it.kind)) {
       // A draft unit: its name, kind, tongue and what its name means; for a land region the text written from its fact
       // sheet and its main figures, otherwise its short computed description; and links that fly to the places tied
@@ -2388,8 +2442,38 @@
     }
     return best;
   };
+  // The named river under a pixel: its name, or its drawn course within 7 pixels while the lines show.
+  const coursePoint = { lat: 0, lon: 0, height: 0 };
+  const riverAt = (px, py) => {
+    if (!show.river) return null;
+    let best = null, bestD = 7;
+    for (const it of items) {
+      if (it.kind !== 'river') continue;
+      if (!it.el.hidden) {
+        const s = screenOf(it);
+        if (Math.abs(px - s.x) < it.el.textContent.length * 3.3 + 6 && Math.abs(py - s.y) < 9) return it;
+      }
+      if (!riverLines || !riverLines.visible) continue;
+      let prev = null;
+      for (const [lat, lon] of it.extra.course) {
+        coursePoint.lat = lat;
+        coursePoint.lon = lon;
+        const s = screenOf(coursePoint);
+        const cur = s.facing > 0.05 ? s : null;
+        if (prev && cur) {
+          const dx = cur.x - prev.x, dy = cur.y - prev.y;
+          const t = Math.min(1, Math.max(0, ((px - prev.x) * dx + (py - prev.y) * dy) / (dx * dx + dy * dy || 1)));
+          const d = Math.hypot(px - prev.x - t * dx, py - prev.y - t * dy);
+          if (d < bestD) { best = it; bestD = d; }
+        }
+        prev = cur;
+      }
+    }
+    return best;
+  };
   // A click: in pin mode the pin and the place's height and water; otherwise the card of the marker under the pointer,
-  // or of the region (zoomed out), district or coastal sea (zoomed in) or sea there, or the place's own reading.
+  // or of the named river there, or of the region (zoomed out), district or coastal sea (zoomed in) or sea there, or
+  // the place's own reading.
   const pick = (e) => {
     const box = viewport.getBoundingClientRect();
     const px = e.clientX - box.left, py = e.clientY - box.top;
@@ -2398,7 +2482,7 @@
       if (at) { setPin(at.lat, at.lon, fmtPoint(at.lat, at.lon)); showPoint(at.lat, at.lon); }
       return;
     }
-    const marker = markerAt(px, py);
+    const marker = markerAt(px, py) || riverAt(px, py);
     if (marker) { showCard(marker); return; }
     const unit = unitItemAt(at);
     if (unit) showCard(unit);
@@ -2564,6 +2648,12 @@
       borderUniforms.uDepthBias.value = mode === 'topo' ? 0.002 : 0.0002;
       // a dash and its gap four pixels each, at the ground nearest the camera
       borderUniforms.uDashKm.value = 8 * 2 * (distance - 1) * tanY * MOON_KM / Math.max(drawSize.y, 1);
+      if (riverLines) {
+        const o = show.river ? 0.7 * Math.min(1, Math.max(0, (distance - RIVER_LINES_FADE[0]) /
+                                                             (RIVER_LINES_FADE[1] - RIVER_LINES_FADE[0]))) : 0;
+        riverLines.visible = o > 0.01;
+        riverLines.material.uniforms.uOpacity.value = o;
+      }
       // Markers keep the size they have at the topography's home distance, at any zoom.
       const markerScale = (distance - 1) * tanY / (3.3 * Math.tan(14 * Math.PI / 180));
       for (const it of items) if (it.mesh) it.mesh.scale.setScalar(markerScale);
@@ -2579,9 +2669,9 @@
         if (!visible) { it.el.hidden = true; continue; }
         const s = screenOf(it);
         let on = s.facing > 0.12;
-        if (on && UNIT_KINDS.has(it.kind)) {
+        if (on && (UNIT_KINDS.has(it.kind) || it.kind === 'river')) {
           // Region and district names: the larger unit first (items are in that order); a name that would overlap one
-          // already placed waits until the zoom gives it room.
+          // already placed waits until the zoom gives it room. The rivers' names follow, the largest river first.
           const w = it.el.textContent.length * (it.kind === 'region' ? 8.2 : 6.6) + 8, h = 15;
           const box = [s.x - w / 2, s.y - h / 2, s.x + w / 2, s.y + h / 2];
           if (placed.some((b) => box[0] < b[2] && box[2] > b[0] && box[1] < b[3] && box[3] > b[1])) on = false;

@@ -973,19 +973,72 @@ def fine_data(fine_dir):
         for p in m['packs']:
             for name in p['files'].values():
                 shutil.copy2(fine_dir / name, dest / name)
-    return dict(ppd=m['ppd'], tile_deg=m['tile_deg'], lat_top=m['lat_top'], pack_tiles=m['pack_tiles'],
-                rotation=m['rotation_today_to_turned'], credit=m['credit'], bytes=m['bytes'],
-                packs=[dict(lat_top=p['lat_top'], lon_left=p['lon_left'], files=p['files']) for p in m['packs']])
+    out = dict(ppd=m['ppd'], tile_deg=m['tile_deg'], lat_top=m['lat_top'], pack_tiles=m['pack_tiles'],
+               rotation=m['rotation_today_to_turned'], credit=m['credit'], bytes=m['bytes'],
+               packs=[dict(lat_top=p['lat_top'], lon_left=p['lon_left'], files=p['files']) for p in m['packs']])
+    if m.get('look'):                                    # fine_look.py's trial windows, named on the page as a guess
+        out['look'] = dict(note=m['look']['note'], windows=[w['name'] for w in m['look']['windows']])
+    return out
+
+
+def river_marks(waterways_path):
+    """The page's named rivers (waterways.py: the whole watercourses of 1,000 m3/s or more where they end): each with
+    its name, the place its name stands (half way along its course), its course in the settled frame from the mouth
+    upstream, and its card's lines, figures and links. After a rename waterways.py is run again (seconds) and the page
+    re-wrapped."""
+    record = json.loads(Path(waterways_path).read_text())
+    nb = '\u00a0'
+    out = []
+    for x in record['waterways']:
+        if not x.get('name'):
+            continue
+        course = np.asarray(x['course'], float)
+        la, lo = np.radians(course[:, 0]), np.radians(course[:, 1])
+        unit = np.stack([np.cos(la) * np.cos(lo), np.cos(la) * np.sin(lo), np.sin(la)], axis=1)
+        step = np.arccos(np.clip((unit[1:] * unit[:-1]).sum(axis=1), -1.0, 1.0))
+        along = np.r_[0.0, np.cumsum(step)]
+        k = int(np.clip(np.searchsorted(along, along[-1] / 2.0), 1, len(along) - 1))
+        t = (along[-1] / 2.0 - along[k - 1]) / max(along[k] - along[k - 1], 1e-12)
+        arc = max(step[k - 1], 1e-12)                       # along the great circle between the two points
+        mid = (np.sin((1.0 - t) * arc) * unit[k - 1] + np.sin(t * arc) * unit[k]) / np.sin(arc)
+        mid /= np.linalg.norm(mid)
+        lat, lon = float(np.degrees(np.arcsin(mid[2]))), float(np.degrees(np.arctan2(mid[1], mid[0])))
+        lakes = (f", {x['lake_km']:,}{nb}km of it through {x['lakes_crossed']} lake{'s' if x['lakes_crossed'] != 1 else ''}"
+                 if x['lakes_crossed'] else '')
+        fed = x['fed_by']
+        source = ('It gathers from the rain on its own basin.' if fed == 'headwaters'
+                  else f'Its water is {fed}.')
+        width = appearance.RIVER_WIDTH * x['flow_mouth_m3s'] ** 0.5
+        wide = f'{width / 1000.0:.1f}{nb}km' if width >= 1000.0 else f'{round(width, -1):,.0f}{nb}m'
+        text = (f"{x['name']} runs {x['length_km']:,}{nb}km to {x['ends_in']}{lakes}. {source} Where it ends it carries "
+                f"{x['flow_mouth_m3s']:,}{nb}m³/s on the design climate's mean, and {x['lowest_year_m3s']:,}{nb}m³/s in "
+                f"the lowest of the fifteen years routed one by one.")
+        rows = [['Flow where it ends', f"{x['flow_mouth_m3s']:,}{nb}m³/s"],
+                ['Lowest year', f"{x['lowest_year_m3s']:,}{nb}m³/s"],
+                ['Length', f"{x['length_km']:,}{nb}km"],
+                ['Through lakes', f"{x['lake_km']:,}{nb}km, {x['lakes_crossed']} lake{'s' if x['lakes_crossed'] != 1 else ''}"],
+                ['Width where it ends', 'about ' + wide],
+                ['Water from', 'its own basin' if fed == 'headwaters' else fed],
+                ['Course', 'cut by the works' if x['works'] else 'natural']]
+        out.append(dict(name=x['name'], anchor=x['anchor'], tongue=x.get('tongue'), meaning=x.get('meaning'),
+                        lat=round(lat, 3), lon=round(lon, 3), flow=x['flow_mouth_m3s'], text=text, rows=rows,
+                        links=[x['ends_in_anchor']] + [r['anchor'] for r in x['regions']],
+                        note=('A calculation on the design routing, on the design climate (an estimate). The line follows the '
+                              'routing\'s 1.9 km cells, straight across each lake; the width is the page\'s rule for a '
+                              'river\'s flow.'),
+                        course=[[round(float(a), 3), round(float(b), 3)] for a, b in course]))
+    return sorted(out, key=lambda r: -r['flow'])
 
 
 FINE_NOTE = ' Close views (within about 3 Moon radii of the centre): the finer ground at 474 m, loaded for the ground in view. '
 
 
-def rename_page(page_path, record_path, profiles=None, fine=None):
+def rename_page(page_path, record_path, profiles=None, fine=None, waterways=None):
     """The built page's regions, districts, coastal seas and seas renamed from a districts record, the regions' cards
     taken from their fact sheets when given, and its data wrapped in the current template, its textures kept: the
     record must hold the units the page drew, in the same order, so that the districts texture's indices still hold.
-    A rename, a new text or a change to the viewer then needs no rebuild, only the page republished."""
+    The named rivers come from the waterways record when given. A rename, a new text or a change to the viewer then
+    needs no rebuild, only the page republished."""
     page = Path(page_path).read_text()
     start = page.index(DATA_OPEN) + len(DATA_OPEN)
     end = page.index(DATA_CLOSE, start)
@@ -1024,6 +1077,8 @@ def rename_page(page_path, record_path, profiles=None, fine=None):
         data['fine'] = fine_data(fine)
         if FINE_NOTE.strip() not in data['provenance']:
             data['provenance'] += FINE_NOTE + data['fine']['credit']
+    if waterways:
+        data['rivers'] = river_marks(waterways)
     marker = "Regions and districts: the atlas round's first draft (districts.json "
     at = data['provenance'].find(marker)
     if at >= 0:
@@ -1034,7 +1089,7 @@ def rename_page(page_path, record_path, profiles=None, fine=None):
     cards = sum(1 for r in new['regions'] if r.get('card'))
     texts = sum(1 for r in new['regions'] if r.get('card', {}).get('text'))
     return dict(renamed=len(new['regions']) + len(new['districts']), region_cards=cards, region_texts=texts,
-                page_bytes=len(page.encode()))
+                rivers=len(data.get('rivers', [])), page_bytes=len(page.encode()))
 
 
 def work_marks(summary, grid, level0, rotation):
@@ -1149,7 +1204,7 @@ def cover_text(cover, sources, sea=None):
 
 
 def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes, moisture=None, falls=None,
-                        wind=None, districts=None, profiles=None, fine=None):
+                        wind=None, districts=None, profiles=None, fine=None, waterways=None):
     """The globe page on the design surface: the relief and the water at each body's own level, the appearance from
     the same water (the ground in true colour from the moisture map when one is given), the sites and targets placed
     on it, and the figures from the surface's record."""
@@ -1173,17 +1228,17 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
     highest, lowest = round(float(exact.max())), round(float(exact.min()))
     del exact
     surface_tex = surface_texture(lev_map_t, body_map_t)
-    fine = turned(grid['height'])
+    heights16 = turned(grid['height'])                  # its own name: `fine` is the close views' folder
     routing = routing_product(record) if moisture else None
     falls_record = json.loads(Path(falls).read_text()) if falls else None
     if falls_record and digest(falls_record['product']['path']) != falls_record['product']['sha256']:
         raise SystemExit(f"{falls_record['product']['path']} no longer matches its record {falls}")
     looks, params, sources, masks = appearance.build(
-        fine, level0, SURFACE_PPD, climatology=climatology, rotation=rotation, surface_path=surface_path,
+        heights16, level0, SURFACE_PPD, climatology=climatology, rotation=rotation, surface_path=surface_path,
         moisture_path=moisture, routing_path=routing,
         falls_paths=(Path(falls), Path(falls_record['product']['path'])) if falls_record and moisture else None,
         wind_path=wind)
-    del fine
+    del heights16
     truly = 'cover' in params
     share = lambda mask, ppd_: float((mask * np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_))[:, None]).sum()
                                      / (np.cos(np.radians(90 - (np.arange(mask.shape[0]) + 0.5) / ppd_)).sum() * mask.shape[1]))
@@ -1306,6 +1361,9 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
         data['fine'] = fine_data(fine)
         data['provenance'] += FINE_NOTE + data['fine']['credit']
         sources.update(fine_manifest=Path(fine) / 'manifest.json')
+    if waterways and truly:
+        data['rivers'] = river_marks(waterways)
+        sources.update(waterways=Path(waterways))
     template = (HERE / 'globe.template.html').read_text()
     page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
     (OUT / 'globe.html').write_text(page)
@@ -1347,6 +1405,8 @@ def main(argv=None):
     parser.add_argument('--profiles', type=Path, help="with --districts, the regions' fact sheets and texts "
                                                       '(research/studies/atlas_round/results/region_profiles.json): '
                                                       "each region's card")
+    parser.add_argument('--waterways', type=Path, help="the named rivers (research/studies/atlas_round/results/"
+                                                       'waterways.json): each one\'s name, line and card')
     parser.add_argument('--names-only', action='store_true',
                         help="with --districts: rename the built page's regions, districts, coastal seas and seas from "
                              "the record, take the regions' cards from --profiles, and wrap the page's data in the "
@@ -1357,7 +1417,8 @@ def main(argv=None):
             raise SystemExit('--names-only needs --districts')
         print(json.dumps(rename_page(OUT / 'globe.html', args.districts.absolute(),
                                      args.profiles.absolute() if args.profiles else None,
-                                     args.fine.absolute() if args.fine else None)))
+                                     args.fine.absolute() if args.fine else None,
+                                     args.waterways.absolute() if args.waterways else None)))
         return 0
     if args.surface:
         if not args.surface_record:
@@ -1374,7 +1435,8 @@ def main(argv=None):
                                     wind=args.wind.absolute() if args.wind else None,
                                     districts=args.districts.absolute() if args.districts else None,
                                     profiles=args.profiles.absolute() if args.profiles else None,
-                                    fine=args.fine.absolute() if args.fine else None)
+                                    fine=args.fine.absolute() if args.fine else None,
+                                    waterways=args.waterways.absolute() if args.waterways else None)
         products = {str(p.relative_to(ROOT)): digest(p) for p in (reg_path, tgt_path)}
         products[str(args.surface)] = digest(args.surface)
         products[str(args.surface_record)] = digest(args.surface_record)
