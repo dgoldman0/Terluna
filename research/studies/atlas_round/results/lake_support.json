@@ -1,0 +1,75 @@
+{
+ "schema": "terluna.research.atlas-round-lake-support/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/lake_support.py": "cfcf5a58832a40e3f58e238217cea6a0262a2c344a5f70bfa5c02082978409ec"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/globe_surface.json": "a4bb886d2a27c0952114cf8763b613688013166bd921de392a4be0b50ba61476",
+  "research/studies/atlas_round/results/design_routing.json": "cb6572d5bf7914de6e57fbb5064582e21d5c5910aa7ed7af506af2d4dd0a88fe"
+ },
+ "ignored_inputs": {
+  "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz": "9173be2542f4eee082261a32baa3d32b2f3c35a6512bff8a353c2c092b030526"
+ },
+ "evidence": "A calculation on products: the design surface's water cells and levels compared with its own heights, cell by cell, and the routing's lakes with the catchments of the surface it ran on. It measures a defect of the lake rule and proposes no remedy; what a corrected rule does to the lakes' area and the rivers' flows is not computed here.",
+ "reading_rule": "lakes and seas: a shore cell is a water cell with dry ground among its eight neighbours; it is not held where one of them lies more than drop_m below the water's surface. bodies are touching water cells. ground_below_and_joined is the dry ground lower than an adjoining water surface and joined to it across such ground. ground_below_by_latitude gives the lakes' in km2 by 30-degree band. catchment_pairs counts each lake cell and lower dry neighbour on the routing's surface: in one catchment (cells draining to one lowest point) or two, and whether the lake overflows.",
+ "parameters": {
+  "drop_m": 1.0
+ },
+ "lakes": {
+  "cells": 1529349,
+  "area_km2": 5097103,
+  "share_of_moon": 0.13437,
+  "shore_cells": 519081,
+  "shore_cells_not_held": 72438,
+  "shore_share_not_held": 0.1396,
+  "bodies": 29740,
+  "bodies_with_such_a_shore": 2466,
+  "area_in_those_bodies_km2": 2064881,
+  "area_share_in_those_bodies": 0.4051,
+  "ground_below_and_joined_km2": 3499632,
+  "ground_below_share_of_moon": 0.09226,
+  "ground_below_over_water_area": 0.6866,
+  "ground_below_depth_m": {
+   "median": 760,
+   "p90": 2366,
+   "largest": 6558
+  }
+ },
+ "seas": {
+  "cells": 3737003,
+  "area_km2": 8997993,
+  "share_of_moon": 0.23721,
+  "shore_cells": 180521,
+  "shore_cells_not_held": 3,
+  "shore_share_not_held": 0.0,
+  "bodies": 14,
+  "bodies_with_such_a_shore": 1,
+  "area_in_those_bodies_km2": 2043898,
+  "area_share_in_those_bodies": 0.2272,
+  "ground_below_and_joined_km2": 113160,
+  "ground_below_share_of_moon": 0.00298,
+  "ground_below_over_water_area": 0.0126,
+  "ground_below_depth_m": {
+   "median": 85,
+   "p90": 150,
+   "largest": 952
+  }
+ },
+ "ground_below_by_latitude_km2": {
+  "90 to 60": 57901,
+  "60 to 30": 661504,
+  "30 to 0": 601124,
+  "0 to -30": 740787,
+  "-30 to -60": 1433791,
+  "-60 to -90": 4525
+ },
+ "catchment_pairs": {
+  "pairs": 166060,
+  "in_one_catchment": 196,
+  "in_two_catchments": 165864,
+  "the_lake_overflows": 141140
+ },
+ "seconds": 40
+}
