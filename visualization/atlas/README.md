@@ -125,7 +125,7 @@ the water taken away, on a scale of 18 stops interpolated in sRGB:
 - below sea level each of the sheets' six depth bands keeps its colour at the band's middle depth, so that the
   globe and the sheets read alike;
 - contours mark a chosen interval (1 km at first) and draw sea level darker;
-- light that every place has alike, from 60° up in its own north-west, shades the full relief, so that level
+- light that every place has alike, 45° up from the screen's upper left as the globe turns (since 18 November; before, from each place's own north-west, which drew a pinwheel round the poles), shades the full relief, so that level
   ground keeps the legend's colours anywhere on the globe;
 - as a mode, it raises the relief by the slider's exaggeration, down into the sea floors as well as up into the
   highlands, and carries the labels and markers the map mode carried (`#map` links open it);
@@ -143,9 +143,9 @@ full relief, which the appearance lays flat under water.
   the relief;
 - Go to takes degrees (45 N, 30 W, or 45, −30 with east positive) or a name the globe labels, turns the globe to
   the place and leaves a pin;
-- a click on the globe pins that place and reads the height of its 0.25° atlas cell;
-- in the appearance mode, Fully lit gives every place the same Sun, 60° up in the north-west of its own sky and
-  overhead near the poles, so that the globe reads evenly from limb to limb, with no sunglint; it keeps the clouds
+- a click on the globe opens the card of what lies there, and a pin, placed with the Pin tool, reads the height of its 0.25° atlas cell (since 18 November; before, every click pinned);
+- in the appearance mode, Fully lit gives every place the same light, 45° up from the screen's upper left as the
+  globe turns, so that the globe reads evenly from limb to limb, with no sunglint and no pinwheel round the poles; it keeps the clouds
   of the slider's day. The dense air veils the ground in blue there as in sunlight (its vertical optical depth is
   2.0 in blue); turning off the air, or red light only, shows the ground beneath.
 
@@ -189,6 +189,17 @@ With `--wind` the water mirrors the Sun and the sky through slopes that follow t
 ### Regions and districts
 
 With `--districts` the page shows the atlas round's first draft of regions and districts (research/studies/atlas_round/districts.md). A texture in the globe's frame, `districts.png` at 8 pixels per degree, holds each cell's district (red and green, 0 on open water) and region (blue), read cell by cell. Both modes draw the regions' borders, and zoomed in past 2.6 Moon radii from the centre, the districts' borders as well, as traced lines (since 18 November). The build traces every border once along the grid's cell edges (render.border_lines), smooths its staircase (through the steps' midpoints, resampled every half cell and averaged over about a dozen kilometres, its ends kept where borders meet) and simplifies it to within about 300 m. The page draws the lines as geometry on the globe, about 1.4 pixels wide for regions and 1 for districts at any zoom, with soft edges, raised with the relief in the topography mode and hidden behind the limb and the ground. A region holds its land and its waters, the coastal seas, so its outline is closed: solid where it has land on either side, dashed at sea and across lakes, with even dashes measured along the line, and closed at sea by the coastal seas' outer limit, where international waters begin. No line runs along a coast. The districts texture keeps a water flag in its red channel's top bit, which the build reads to tell land from water along a border. Labels follow the same switch: the regions' names when zoomed out, the districts' and the coastal seas' names when zoomed in. A Regions and districts box shows or hides them. A label's card gives the name, code, region, tongue, area and short description. Selecting a coastal sea tints it with the land districts it faces and whose rivers reach it, and selecting a district tints it with its coastal seas: the hybrid the author chose so that a coast and its land are planned together. The old sea labels, Latin working names, are now off by default in the topography mode too. A page section explains the draft and lists its tongues and the Terlunan words coined for it. Since 18 November a card also gives a name's meaning, and for a calque the old name it keeps. `render.py --names-only --districts <record>` rewrites the built page's names, meanings and descriptions from the record, its textures kept, provided the record holds the units the page drew in the same order; a rename then republishes the page alone.
+
+### The close views at 474 m
+
+[fine_tiles.py](fine_tiles.py) cuts the design surface at 64 pixels per degree into tiles for the close views. The surface is research/studies/atlas_round/fine_surface.py's product: the design heights at 474 m with each 1.9 km cell's mean kept, and the seas and lakes at their levels on them. Each tile is 8° a side, 512 × 512 pixels, from 80° N to 80° S, and holds three layers:
+- **colour:** on land, the page's 1.9 km true colour of the land, read at each fine pixel's place in the settled frame; on water, the designed waters' colours by the depth the finer heights give;
+- **shading:** the relief's normals from the finer heights;
+- **water and sky:** the finer water, the sky each place sees past the finer relief, and a flag where the tile holds data.
+
+A pack of 4 × 5 tiles, 32° by 40°, is three WebP images. Packs of open water deeper than the shelves are left out. The page fetches a pack only when the camera comes within 3 Moon radii of the centre in the appearance mode, and only for the ground in view. It draws the packs into one window of today's frame, 32° of latitude by 2,048 pixels (16° by 1,024 at phone width), and the shader turns its lookup, and the shading's north and east, by the settled frame's rotation. The window moves when the view has moved a quarter of the way across it, and its textures change only once the new window is drawn whole. Each pack's files are kept compressed once fetched.
+
+What is finer close up is the relief, its shading and sky, the shores and the water's depth. The ground's colour stays the 1.9 km cover's, and the rivers stay the 1.9 km routing's until their courses are traced on the finer heights. Poleward of 80°, and in the topography mode, the page keeps its 1.9 km ground. `render.py --fine visualization/atlas/out/fine` adds the packs to the page, with `--names-only` too.
 
 ### The page's layout, cards and pin
 

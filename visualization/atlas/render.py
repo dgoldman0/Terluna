@@ -858,6 +858,10 @@ LEDE_ACTIONS_BEFORE = ('Drag to turn it, scroll or pinch to zoom, click for the 
 TOPO_CLICK = ('In both modes, a click opens the card of the region, district or sea under it, and a pin, placed with '
               'the Pin tool, reads the 0.25° cell under it.')
 TOPO_CLICK_BEFORE = 'In both modes, a click on the globe reads the 0.25° cell under it.'
+# The topography's light, and its older wording: a light fixed to each place's own north-west turned round the poles
+# and drew a pinwheel there, so the light now comes from the screen's upper left as the globe turns.
+LIGHT_PHRASE = "45° up from the screen's upper left as the globe turns"
+LIGHT_PHRASE_BEFORE = '45° up in its own north-west'
 
 
 def sea_names(record):
@@ -956,7 +960,28 @@ def districts_data(record, cards=None):
 DATA_OPEN, DATA_CLOSE = '<script id="atlas-data" type="application/json">', '</script>'
 
 
-def rename_page(page_path, record_path, profiles=None):
+def fine_data(fine_dir):
+    """The page's description of the close views' finer ground (fine_tiles.py): its grid, the settled frame's rotation
+    and each pack's place and files, which the page fetches from fine/ beside it; the files are copied there when the
+    tiles were built elsewhere."""
+    fine_dir = Path(fine_dir)
+    m = json.loads((fine_dir / 'manifest.json').read_text())
+    dest = OUT / 'fine'
+    if fine_dir.resolve() != dest.resolve():
+        import shutil
+        dest.mkdir(parents=True, exist_ok=True)
+        for p in m['packs']:
+            for name in p['files'].values():
+                shutil.copy2(fine_dir / name, dest / name)
+    return dict(ppd=m['ppd'], tile_deg=m['tile_deg'], lat_top=m['lat_top'], pack_tiles=m['pack_tiles'],
+                rotation=m['rotation_today_to_turned'], credit=m['credit'], bytes=m['bytes'],
+                packs=[dict(lat_top=p['lat_top'], lon_left=p['lon_left'], files=p['files']) for p in m['packs']])
+
+
+FINE_NOTE = ' Close views (within about 3 Moon radii of the centre): the finer ground at 474 m, loaded for the ground in view. '
+
+
+def rename_page(page_path, record_path, profiles=None, fine=None):
     """The built page's regions, districts, coastal seas and seas renamed from a districts record, the regions' cards
     taken from their fact sheets when given, and its data wrapped in the current template, its textures kept: the
     record must hold the units the page drew, in the same order, so that the districts texture's indices still hold.
@@ -993,7 +1018,12 @@ def rename_page(page_path, record_path, profiles=None):
             if isinstance(data.get(key), str):
                 data[key] = data[key].replace(LEDE_ACTIONS_BEFORE, LEDE_ACTIONS)
         if isinstance(data.get('topoText'), str):
-            data['topoText'] = data['topoText'].replace(TOPO_CLICK_BEFORE, TOPO_CLICK)
+            data['topoText'] = data['topoText'].replace(TOPO_CLICK_BEFORE, TOPO_CLICK).replace(LIGHT_PHRASE_BEFORE,
+                                                                                               LIGHT_PHRASE)
+    if fine:
+        data['fine'] = fine_data(fine)
+        if FINE_NOTE.strip() not in data['provenance']:
+            data['provenance'] += FINE_NOTE + data['fine']['credit']
     marker = "Regions and districts: the atlas round's first draft (districts.json "
     at = data['provenance'].find(marker)
     if at >= 0:
@@ -1119,7 +1149,7 @@ def cover_text(cover, sources, sea=None):
 
 
 def write_globe_surface(surface_path, record_path, climatology, sites, targets, hashes, moisture=None, falls=None,
-                        wind=None, districts=None, profiles=None):
+                        wind=None, districts=None, profiles=None, fine=None):
     """The globe page on the design surface: the relief and the water at each body's own level, the appearance from
     the same water (the ground in true colour from the moisture map when one is given), the sites and targets placed
     on it, and the figures from the surface's record."""
@@ -1212,8 +1242,8 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
                   'and a click reads them. Ground below the common level that no sea covers, such as the floor the '
                   'parted sea leaves and the hollows that dry on the design rain, takes the lowland\'s colour, and above '
                   'it the colours run from lowland green to the near-white of the highest ground. Shading comes from '
-                  f'the full relief at {SURFACE_PPD if truly else SURFACE_PPD // 2} pixels per degree under light that every place has alike, 45° up in its own '
-                  'north-west, and contour lines mark the chosen interval, with the common level darker. In the '
+                  f'the full relief at {SURFACE_PPD if truly else SURFACE_PPD // 2} pixels per degree under light that every place has alike, '
+                  + LIGHT_PHRASE + ', and contour lines mark the chosen interval, with the common level darker. In the '
                   'topography mode the slider exaggerates the relief down into the sea floors as well as up into the '
                   'highlands. Over the appearance the same colours and contours lie on the rendered globe at the chosen '
                   'opacity, unlit by the Sun. Heritage sites and sampling targets come from the conservation study\'s '
@@ -1272,6 +1302,10 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
         data['provenance'] += (f" Regions and districts: the atlas round's first draft (districts.json "
                                f"{digest(rec_path)[:12]}, its grid {digest(product)[:12]}).")
         sources.update(districts=rec_path, districts_grid=product)
+    if fine and truly:
+        data['fine'] = fine_data(fine)
+        data['provenance'] += FINE_NOTE + data['fine']['credit']
+        sources.update(fine_manifest=Path(fine) / 'manifest.json')
     template = (HERE / 'globe.template.html').read_text()
     page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
     (OUT / 'globe.html').write_text(page)
@@ -1308,6 +1342,8 @@ def main(argv=None):
     parser.add_argument('--wind', type=Path, help="with --moisture, the climate domain's surface wind of the climatology's "
                                                   'run and years (products/surface_wind_<run>_y<years>.npz): the sea\'s '
                                                   'slopes, and so its glint and its reflected sky, from the winds')
+    parser.add_argument('--fine', type=Path, help="the close views' finer ground: the folder fine_tiles.py wrote "
+                                                  '(visualization/atlas/out/fine), whose packs the page loads close up')
     parser.add_argument('--profiles', type=Path, help="with --districts, the regions' fact sheets and texts "
                                                       '(research/studies/atlas_round/results/region_profiles.json): '
                                                       "each region's card")
@@ -1320,7 +1356,8 @@ def main(argv=None):
         if not args.districts:
             raise SystemExit('--names-only needs --districts')
         print(json.dumps(rename_page(OUT / 'globe.html', args.districts.absolute(),
-                                     args.profiles.absolute() if args.profiles else None)))
+                                     args.profiles.absolute() if args.profiles else None,
+                                     args.fine.absolute() if args.fine else None)))
         return 0
     if args.surface:
         if not args.surface_record:
@@ -1336,7 +1373,8 @@ def main(argv=None):
                                     falls=args.falls.absolute() if args.falls else None,
                                     wind=args.wind.absolute() if args.wind else None,
                                     districts=args.districts.absolute() if args.districts else None,
-                                    profiles=args.profiles.absolute() if args.profiles else None)
+                                    profiles=args.profiles.absolute() if args.profiles else None,
+                                    fine=args.fine.absolute() if args.fine else None)
         products = {str(p.relative_to(ROOT)): digest(p) for p in (reg_path, tgt_path)}
         products[str(args.surface)] = digest(args.surface)
         products[str(args.surface_record)] = digest(args.surface_record)

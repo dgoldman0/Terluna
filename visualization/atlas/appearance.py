@@ -578,14 +578,16 @@ def falls_grids(shape, record, product, rotation=None):
     return dict(foam=foam, mist=mist)
 
 
-def true_colour(height, level, ppd, drainage, moisture, rock, waters, falls=None):
+def true_colour(height, level, ppd, drainage, moisture, rock, waters, falls=None, parts=None):
     """The ground in true colour (linear sRGB, float32), the water mask and the share of each pixel river channels
     cover, 180 W at the left edge, on a surface holding every water body at its own level (surface_grids). The cover
     follows the moisture map's aridity, wetter along larger rivers and in hollows and drier on steep slopes, with noise
     for patchiness (ground_colour), over the soil weathered from the rock (rock: FeO and TiO2 in weight per cent and
     the basalt's share, on the texture grid; soil_colour); the waters take the designed waters' colours: open sea, the
     productive coast's over shelves and in shallow lakes, and the river mouth's in rivers and where rivers carry
-    sediment into a lake or sea (drainage['sediment'], the runoff gathered since the last lake or sea)."""
+    sediment into a lake or sea (drainage['sediment'], the runoff gathered since the last lake or sea). A dict given as
+    parts receives the land's colour before the water is laid over it (rivers and white water included) and the
+    plumes' share, for the close views' finer tiles (fine_tiles.py)."""
     height = height.astype(np.float32)
     rows, _ = height.shape
     lat = 90.0 - (np.arange(rows) + 0.5) / ppd
@@ -614,12 +616,16 @@ def true_colour(height, level, ppd, drainage, moisture, rock, waters, falls=None
     sediment = np.where(water, 0.0, drainage['sediment'] if 'sediment' in drainage else discharge)
     plume = plume_share(sediment, water, lat, km)[..., None]
     del sediment
+    if parts is not None:
+        parts['plume'] = plume[..., 0].astype(np.float32)
     sea = (waters['open_sea'] * (1 - shelf) + waters['productive_coast'] * shelf) * (1 - plume) + waters['river_mouth'] * plume
     del shelf, plume
     river_colour = waters['river_mouth']
     if falls is not None:                            # white water where the rivers drop steeply
         river_colour = river_colour * (1 - falls['foam'][..., None]) + WHITE_WATER * falls['foam'][..., None]
     colour = colour * (1 - river[..., None]) + river_colour * river[..., None]
+    if parts is not None:
+        parts['land'] = colour.astype(np.float32)
     colour = np.where(water[..., None], sea, colour).astype(np.float32)
     if falls is not None:                            # and spray round the largest falls
         colour = colour * (1 - falls['mist'][..., None]) + MIST_WHITE * falls['mist'][..., None]

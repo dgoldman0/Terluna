@@ -353,9 +353,10 @@
       camera's height, while the camera itself stays above the air; moving the slider takes the peel off the zoom. A
       camera that truly descended would keep most of the haze until the last few tens of kilometres, where the ground
       this page holds is a blur. The Sun slider sets the Moon's age from new moon:
-      the Sun stands over longitude 180° − 360° × age / 29.53 days. Fully lit gives every place the same Sun, 45° up, the cartographers' hill-shading light,
-      in the north-west of its own sky and overhead near the poles, so that the globe reads evenly from limb to
-      limb; it keeps the clouds of the slider's day, and with no one Sun there is no sunglint. From Earth puts the camera at the Moon's mean distance, 384,400 km, with a narrow field of
+      the Sun stands over longitude 180° − 360° × age / 29.53 days. Fully lit gives every place the same light, 45° up from the screen's upper left as the
+      globe turns, the light hill-shaded maps give their relief, so that the globe reads evenly from limb to limb and
+      the poles show their craters as they are, with no pinwheel that a direction fixed to each place would draw round
+      them; it keeps the clouds of the slider's day, and with no one Sun there is no sunglint. From Earth puts the camera at the Moon's mean distance, 384,400 km, with a narrow field of
       view.</p>
     <p><b>Next refinements.</b> Refraction: a ray grazing the surface bends about 0.28°, which carries sunlight
       further past the terminator. Multiple scattering along the limb and in twilight, where the calibration for the
@@ -366,7 +367,7 @@
       the GRAIL geoid at 4 pixels per degree (7.6 km), with the water taken away. Below sea level each of the atlas
       sheets' depth bands keeps its colour at the band's middle depth; above it the colours run from lowland green
       to the near-white of the highest ground. Shading comes from the full relief at 8 pixels per degree under
-      light that every place has alike, from high in its own north-west, so that level ground keeps the legend's
+      light that every place has alike, 45° up from the screen's upper left, so that level ground keeps the legend's
       colours anywhere on the globe, and contour lines mark the chosen interval, with sea level darker. In the topography mode the slider exaggerates the relief down into the sea floors as well as
       up into the highlands. Over the appearance the same colours and contours lie on the rendered globe at the
       chosen opacity, unlit by the Sun so that they read on the night side and through the air. Every depression
@@ -442,6 +443,13 @@
   uniform vec4 uHighNoise;      // frequency, octaves, warp, east-west stretch
   uniform vec2 uFractal;        // gain, lacunarity
   uniform float uQuant[66];     // quantiles of each deck's noise over the sphere, low then high
+  uniform sampler2D tFineColour;  // the close views' finer ground (fine_tiles.py) in a window of today's frame: colour,
+  uniform sampler2D tFineNormal;  // the relief's shading,
+  uniform sampler2D tFineAux;     // and the water (red), the sky seen (green) and where the window holds data (blue)
+  uniform vec4 uFineWin;          // the window: top latitude, left longitude (east), latitude span, longitude span (deg)
+  uniform float uFine;            // 1 while a window is loaded
+  uniform mat3 uToToday;          // unit vectors (x = cos lat cos lon, y = cos lat sin lon, z = sin lat), settled to today
+  uniform mat3 uFromToday;        // and back
   uniform sampler2D tAlbedo;
   uniform sampler2D tNormal;
   uniform sampler2D tWater;
@@ -545,8 +553,29 @@
     return vec2(fract(atan(n.z, -n.x) / (2.0 * PI) + 1.0), 0.5 + asin(clamp(n.y, -1.0, 1.0)) / PI);
   }
 
-  // The direction of the Sun from the point n: the one Sun, or when fully lit the place's own, high in its
-  // north-west.
+  // Where the place n (the page's frame) falls in the finer ground's window: its window coordinates, today's east and
+  // north turned into the page's frame (the window's shading is in today's), and a weight that fades to 0 over the
+  // window's last degree and is 0 outside it. The page's vectors are (cos lat cos lon, sin lat, -cos lat sin lon).
+  float fineAt(vec3 n, out vec2 fuv, out vec3 eastT, out vec3 northT) {
+    fuv = vec2(0.0);
+    eastT = vec3(0.0);
+    northT = vec3(0.0);
+    if (uFine < 0.5) return 0.0;
+    vec3 u = uToToday * vec3(n.x, -n.z, n.y);
+    float lat = degrees(asin(clamp(u.z, -1.0, 1.0)));
+    float lon = degrees(atan(u.y, u.x));
+    fuv = vec2(mod(lon - uFineWin.y + 720.0, 360.0) / uFineWin.w, (uFineWin.x - lat) / uFineWin.z);
+    if (fuv.x <= 0.0 || fuv.x >= 1.0 || fuv.y <= 0.0 || fuv.y >= 1.0) return 0.0;
+    float cl = cos(radians(lon)), sl = sin(radians(lon)), ca = cos(radians(lat)), sa = sin(radians(lat));
+    vec3 e = uFromToday * vec3(-sl, cl, 0.0), nn = uFromToday * vec3(-sa * cl, -sa * sl, ca);
+    eastT = vec3(e.x, e.z, -e.y);
+    northT = vec3(nn.x, nn.z, -nn.y);
+    vec2 edge = min(fuv, 1.0 - fuv) * vec2(uFineWin.w * ca, uFineWin.z);
+    return smoothstep(0.0, 1.0, min(edge.x, edge.y));
+  }
+
+  // The direction of the Sun from the point n: the one Sun, or when fully lit the light every place has alike, from the
+  // screen's upper left.
   vec3 sunAt(vec3 n) { return uEven > 0.5 ? localLight(n) : uSun; }
 
   // Value noise on an integer hash; appearance.py replicates it to measure its distribution.
@@ -672,7 +701,8 @@
     // crosses many columns but few rows, the rows stay sharp and nothing smears along the meridians.
     vec2 texels = vec2(textureSize(tAlbedo, 0));
     vec2 ground = vec2(sqrt(max(1.0 - ns.y * ns.y, 1e-6)), 1.0) * texels;
-    float lod = max(0.0, 0.5 * log2(max(dot(gx * ground, gx * ground), dot(gy * ground, gy * ground))));
+    float lodRaw = 0.5 * log2(max(dot(gx * ground, gx * ground), dot(gy * ground, gy * ground)));
+    float lod = max(0.0, lodRaw);
     float lodWater = max(0.0, lod + log2(float(textureSize(tWater, 0).x) / texels.x));
     float lodNormal = max(0.0, lod + log2(float(textureSize(tNormal, 0).x) / texels.x));
     // The overlay's height relative to sea level and its change per pixel, and the disk's edge in pixels.
@@ -752,8 +782,27 @@
       vec3 east = vec3(n.z, 0.0, -n.x);
       east = dot(east, east) > 1e-10 ? normalize(east) : vec3(1.0, 0.0, 0.0);
       vec3 north = cross(n, east);
+      vec3 tilt = (nm.x * east + nm.y * north) / max(nm.z, 0.2);
+      // Close up, the finer ground where its window is loaded: its colour, water, sky and shading, faded in at the
+      // window's edge, and the 1.9 km ground wherever the window holds no data.
+      vec2 fuv;
+      vec3 fe, fn;
+      float fw = uYear > 0.5 ? 0.0 : fineAt(n, fuv, fe, fn);
+      if (fw > 0.0) {
+        // the finer texture's own level, from the unclamped footprint: close up a pixel spans less than a 1.9 km texel
+        float lf = max(0.0, lodRaw + log2(float(textureSize(tFineAux, 0).y) / uFineWin.z / 16.0));
+        vec4 aux = textureLod(tFineAux, fuv, lf);
+        fw *= clamp(aux.b * 1.02, 0.0, 1.0);
+        if (fw > 0.0) {
+          vec3 fnm = textureLod(tFineNormal, fuv, lf).xyz * 2.0 - 1.0;
+          albedo = mix(albedo, srgbToLinear(textureLod(tFineColour, fuv, lf).rgb), fw);
+          water = mix(water, aux.r, fw);
+          skySeen = mix(skySeen, mix(aux.g, 1.0, aux.r), fw);
+          tilt = mix(tilt, (fnm.x * fe + fnm.y * fn) / max(fnm.z, 0.2), fw);
+        }
+      }
       // The normal map holds the full relief, sea floors and lake beds included; water lies flat over it.
-      vec3 nr = normalize(n + uRelief * (1.0 - water) * (nm.x * east + nm.y * north) / max(nm.z, 0.2));
+      vec3 nr = normalize(n + uRelief * (1.0 - water) * tilt);
       if (uOverlay > 0.0) {
         // The topography over the appearance: the legend's colours and contours, shaded by the full relief, sea
         // floors included, under light that every place has alike.
@@ -945,15 +994,16 @@
     if (w.x < 0.5 && w.z > 0.5) return ramp(0.0);
     return ramp(h);
   }
-  // Light from 45° up in the north-west of the place n's own sky, turning overhead near the poles, where north and
-  // east turn round, so that no part of the globe is lit more than another.
+  // The light every place has alike, in the fully lit appearance and the topography: 45° up, from the screen's upper
+  // left as the globe turns (uLightDir, that direction in the globe's frame), the light hill-shaded maps give their
+  // relief. It holds no fixed direction on the sphere, so no pole draws a pinwheel; it turns overhead only where the
+  // place itself faces the screen's upper left, on the limb.
+  uniform vec3 uLightDir;
   vec3 localLight(vec3 n) {
-    vec3 east = vec3(n.z, 0.0, -n.x);
-    float c = length(east);
+    vec3 t = uLightDir - dot(uLightDir, n) * n;
+    float c = length(t);
     if (c < 1e-4) return n;
-    east /= c;
-    vec3 north = cross(n, east);
-    return normalize(0.7071 * n + 0.7071 * smoothstep(0.0, 0.1, c) * normalize(north - east));
+    return normalize(0.7071 * n + 0.7071 * smoothstep(0.0, 0.1, c) * t / c);
   }
   // Relief shading under that light, from the relief's normal nr at the place n: 1 on level ground, which keeps
   // the legend's colours, brighter on slopes that face the light and darker on those turned away.
@@ -1268,6 +1318,7 @@
     uWorks: { value: 0 },
     tDistricts: { value: D.textures.districts ? load(D.textures.districts, exact) : blank() },
     uDistrictMode: { value: 0 }, uSel: { value: new Array(8).fill(0) }, uSelRegion: { value: 0 },
+    uLightDir: { value: new THREE.Vector3(-0.7071, 0.7071, 0) },
     uLandUnits: { value: new THREE.Vector2(D.districts ? D.districts.districts.filter((d) => d.kind === 'district').length : 0,
                                            D.districts ? D.districts.regions.filter((r) => !r.sea).length : 0) }
   };
@@ -1305,8 +1356,30 @@
     return t;
   })();
   const N = P.clouds.noise;
+  // The close views' finer ground (fine_tiles.py): a window of today's frame, FINE_PX pixels a side, drawn from packs
+  // of 474 m tiles into three canvases that the shader reads.
+  const F = D.fine || null;
+  const FINE_PX = window.matchMedia('(max-width: 700px)').matches ? 1024 : 2048;
+  const fineCanvas = {}, fineTex = {};
+  for (const name of ['colour', 'normal', 'aux']) {
+    const c = document.createElement('canvas');
+    c.width = c.height = F ? FINE_PX : 1;
+    fineCanvas[name] = c;
+    const t = new THREE.CanvasTexture(c);
+    t.flipY = false;
+    t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
+    t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+    fineTex[name] = t;
+  }
+  const rotationMatrix = (rows, transpose) => new THREE.Matrix3().set(...(transpose
+    ? [rows[0][0], rows[1][0], rows[2][0], rows[0][1], rows[1][1], rows[2][1], rows[0][2], rows[1][2], rows[2][2]]
+    : rows.flat()));
   const uniforms = {
     ...topoUniforms, uOverlay: { value: 0 }, uEven: { value: 0 },
+    tFineColour: { value: fineTex.colour }, tFineNormal: { value: fineTex.normal }, tFineAux: { value: fineTex.aux },
+    uFineWin: { value: new THREE.Vector4(0, 0, 1, 1) }, uFine: { value: 0 },
+    uToToday: { value: F ? rotationMatrix(F.rotation, true) : new THREE.Matrix3() },
+    uFromToday: { value: F ? rotationMatrix(F.rotation, false) : new THREE.Matrix3() },
     uCamPos: { value: new THREE.Vector3() }, uCamBasis: { value: new THREE.Matrix3() }, uTanHalf: { value: new THREE.Vector2() },
     uSun: { value: new THREE.Vector3(1, 0, 0) }, uSubsolar: { value: 0 },
     uTau0: { value: new THREE.Vector3(...P.tau0) }, uAtmos: { value: 1 },
@@ -1721,8 +1794,8 @@
   const phaseValue = document.getElementById('phase-value');
   const phaseName = (e) => e < 7 || e >= 353 ? 'new moon' : e < 83 ? 'waxing crescent' : e < 97 ? 'first quarter'
     : e < 173 ? 'waxing gibbous' : e < 187 ? 'full moon' : e < 263 ? 'waning gibbous' : e < 277 ? 'last quarter' : 'waning crescent';
-  // Sunlight follows the slider's day; fully lit gives every place its own Sun, high in its north-west, and keeps
-  // the clouds of that day.
+  // Sunlight follows the slider's day; fully lit lights every place alike from the screen's upper left and keeps the
+  // clouds of that day.
   let light = 'sun', day = 10;
   const setPhase = (d) => {
     day = d;
@@ -1737,7 +1810,7 @@
     phaseValue.textContent = light === 'sun'
       ? 'Day ' + day.toFixed(1) + ' · ' + phaseName(elongation) + ' · ' + Math.round(lit * 100) +
         '% lit from Earth · Sun over ' + fmtLon(sub)
-      : 'Day ' + day.toFixed(1) + ' · the clouds of that day, with every place lit alike from high in its north-west';
+      : 'Day ' + day.toFixed(1) + ' · the clouds of that day, with every place lit alike from the screen\'s upper left';
     invalidate();
   };
   phaseInput.addEventListener('input', (e) => setPhase(+e.target.value));
@@ -2351,6 +2424,88 @@
     return found;
   };
 
+  // The finer ground, loaded close up: once the camera comes within FINE_DISTANCE Moon radii of the centre in the
+  // appearance, a window of today's frame is centred on the view and drawn from the packs it overlaps; each pack's files
+  // are fetched once and kept compressed, and the window moves when the view has moved a quarter of the way across it.
+  // The textures change only when the new window is drawn whole, so the view never shows half a window.
+  const FINE_DISTANCE = 3.0;
+  const finePacks = new Map();
+  let fineWin = null, fineBusy = false, fineAgain = false;
+  const todayOf = (p) => {                       // a direction in the page's frame to today's latitude and longitude
+    const R = F.rotation, u = [p.x, -p.z, p.y];
+    const t = [0, 1, 2].map((i) => R[0][i] * u[0] + R[1][i] * u[1] + R[2][i] * u[2]);
+    return { lat: Math.asin(Math.max(-1, Math.min(1, t[2]))) * 180 / Math.PI,
+             lon: ((Math.atan2(t[1], t[0]) * 180 / Math.PI) + 360) % 360 };
+  };
+  const fineWindowFor = (lat, lon) => {
+    const latSpan = FINE_PX / F.ppd;
+    const top = Math.max(-F.lat_top + latSpan, Math.min(F.lat_top, Math.round((lat + latSpan / 2) / 4) * 4));
+    const mid = top - latSpan / 2;
+    const lonSpan = Math.min(4 * latSpan, latSpan / Math.max(Math.cos(mid * Math.PI / 180), 0.25));
+    const left = ((Math.round((lon - lonSpan / 2) / 4) * 4) % 360 + 360) % 360;
+    return { top, left, latSpan, lonSpan };
+  };
+  const fineParts = (win, p) => {                // where a pack meets the window, in degrees, across the date line too
+    const bottom = p.lat_top - F.pack_tiles[0] * F.tile_deg;
+    const lat1 = Math.min(win.top, p.lat_top), lat0 = Math.max(win.top - win.latSpan, bottom);
+    const out = [];
+    if (lat1 <= lat0) return out;
+    for (const shift of [-360, 0, 360]) {
+      const pl = p.lon_left + shift, pr = pl + F.pack_tiles[1] * F.tile_deg;
+      const l0 = Math.max(win.left, pl), l1 = Math.min(win.left + win.lonSpan, pr);
+      if (l1 > l0) out.push({ lat0, lat1, l0, l1, pl });
+    }
+    return out;
+  };
+  const packFiles = (p) => {
+    if (!finePacks.has(p)) {
+      finePacks.set(p, Promise.all(['colour', 'normal', 'aux'].map((name) => fetch('fine/' + p.files[name])
+        .then((r) => { if (!r.ok) throw new Error('fine/' + p.files[name] + ': ' + r.status); return r.blob(); }))));
+    }
+    return finePacks.get(p);
+  };
+  const drawFine = async (win) => {
+    const wanted = F.packs.filter((p) => fineParts(win, p).length);
+    const files = await Promise.all(wanted.map(packFiles));
+    const ctx = {};
+    for (const name of ['colour', 'normal', 'aux']) {
+      ctx[name] = fineCanvas[name].getContext('2d');
+      ctx[name].clearRect(0, 0, FINE_PX, FINE_PX);
+      ctx[name].imageSmoothingEnabled = true;
+      ctx[name].imageSmoothingQuality = 'high';
+    }
+    const s = F.ppd, wx = FINE_PX / win.lonSpan, wy = FINE_PX / win.latSpan;
+    for (let k = 0; k < wanted.length; k++) {
+      const p = wanted[k];
+      const images = await Promise.all(files[k].map((b) => createImageBitmap(b, { colorSpaceConversion: 'none', premultiplyAlpha: 'none' })));
+      for (const o of fineParts(win, p)) {
+        const src = [(o.l0 - o.pl) * s, (p.lat_top - o.lat1) * s, (o.l1 - o.l0) * s, (o.lat1 - o.lat0) * s];
+        const dst = [(o.l0 - win.left) * wx, (win.top - o.lat1) * wy, (o.l1 - o.l0) * wx, (o.lat1 - o.lat0) * wy];
+        ['colour', 'normal', 'aux'].forEach((name, i) => ctx[name].drawImage(images[i], ...src, ...dst));
+      }
+      images.forEach((im) => im.close());
+    }
+    for (const name of ['colour', 'normal', 'aux']) fineTex[name].needsUpdate = true;
+    uniforms.uFineWin.value.set(win.top, win.left, win.latSpan, win.lonSpan);
+    uniforms.uFine.value = 1;
+  };
+  const fineTick = () => {
+    if (!F) return;
+    const on = mode === 'appearance' && distance < FINE_DISTANCE && current !== 'earth';
+    if (!on) { uniforms.uFine.value = 0; return; }
+    const c = todayOf(back);
+    if (fineWin) {
+      const dlon = ((c.lon - (fineWin.left + fineWin.lonSpan / 2)) % 360 + 540) % 360 - 180;
+      const near = Math.abs(c.lat - (fineWin.top - fineWin.latSpan / 2)) < fineWin.latSpan / 4 && Math.abs(dlon) < fineWin.lonSpan / 4;
+      if (near || Math.abs(c.lat) > F.lat_top + 4) { if (!fineBusy) uniforms.uFine.value = 1; return; }
+    }
+    if (fineBusy) { fineAgain = true; return; }
+    fineBusy = true;
+    fineWin = fineWindowFor(c.lat, c.lon);
+    drawFine(fineWin).catch((err) => { console.warn('The finer ground did not load:', err); fineWin = null; })
+      .finally(() => { fineBusy = false; if (fineAgain) { fineAgain = false; fineWin = null; } invalidate(); });
+  };
+
   // Rendering happens only when something changes.
   const resize = () => {
     const w = viewport.clientWidth, h = viewport.clientHeight;
@@ -2365,7 +2520,8 @@
     const centre = latLonOf(back), where = ' · centre ' + fmtPoint(centre.lat, centre.lon, 1);
     if (mode !== 'appearance') return 'Drag to turn · scroll or pinch to zoom' + where;
     if (distance > 50) return 'From Earth, ' + fmt(EARTH_KM) + ' km · field of view ' + fov.toFixed(2) + '°';
-    return 'Drag to turn · scroll or pinch to zoom · ' + fmt((distance - 1) * MOON_KM) + ' km above the surface' + where;
+    return 'Drag to turn · scroll or pinch to zoom · ' + fmt((distance - 1) * MOON_KM) + ' km above the surface' + where +
+      (fineBusy ? ' · loading the finer ground…' : '');
   };
   let last = performance.now(), loaded = false;
   const drawSize = new THREE.Vector2();
@@ -2398,6 +2554,8 @@
       up.set(0, 1, 0).applyQuaternion(qInv);
       back.set(0, 0, 1).applyQuaternion(qInv);
       uniforms.uCamBasis.value.set(right.x, up.x, back.x, right.y, up.y, back.y, right.z, up.z, back.z);
+      topoUniforms.uLightDir.value.copy(up).sub(right).normalize();     // the screen's upper left, in the globe's frame
+      fineTick();
       const tanY = Math.tan(fov * Math.PI / 360);
       uniforms.uTanHalf.value.set(tanY * camera.aspect, tanY);
       renderer.getDrawingBufferSize(drawSize);
