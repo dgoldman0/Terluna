@@ -501,8 +501,96 @@ def apply_rules(labels, h, moisture, basalt, to8, area, cost, lat, lon, islands,
     return labels
 
 
-def absorb_islets(labels, on_land, area, lat, lon):
-    """Islands under ISLET_KM2 join the nearest district across the water."""
+def island_territories(on_land, area, lat, lon, log=print):
+    """Each landmass's territory (rule 15, districts.md). A landmass of REGION_MIN_KM2 or more is a mainland, its own
+    territory. An island within COAST_KM of a mainland's shore, or of an island already in a territory, lies in that
+    territory's waters and joins it, nearest first, so that a chain of islands joins with its first link. The islands
+    left lie in international waters; those whose waters touch (within twice COAST_KM of each other) form a group, each
+    group of ISLET_KM2 or more a territory of its own. A smaller group is rocks: its islets join the nearest district
+    and claim no waters (territory -1). Returns the territory of every land cell (0 at sea), the landmasses (the
+    component grid), the order in which islands joined and the shore cell each joined through, the groups'
+    territories and the rocks' cells."""
+    from scipy import ndimage
+    from scipy.spatial import cKDTree
+    comps, _ = ndimage.label(on_land, structure=np.ones((3, 3)))
+    comps = join_wrapped(comps)
+    n = int(comps.max()) + 1
+    size = np.bincount(comps.ravel(), np.broadcast_to(area[:, None], comps.shape).ravel(), n)
+    ids = np.unique(comps[comps > 0])
+    terr = np.zeros(n, np.int64)
+    for c in ids:
+        if size[c] >= REGION_MIN_KM2:
+            terr[c] = c
+    shore = on_land & neighbours_differ(on_land)
+    sr, sc = np.nonzero(shore)
+    scomp = comps[sr, sc]
+    v = unit(lat[sr], lon[sc])
+    chord = lambda km: 2.0 * np.sin(km / MOON_KM / 2.0)                          # noqa: E731
+    joined, through = [], {}
+    pending = [c for c in ids if not terr[c]]
+    while pending:
+        have = np.flatnonzero(terr[scomp] > 0)
+        if not have.size:
+            break
+        tree = cKDTree(v[have])
+        moved = []
+        for c in pending:
+            mine = np.flatnonzero(scomp == c)
+            d, k = tree.query(v[mine], distance_upper_bound=chord(COAST_KM))
+            ok = np.isfinite(d)
+            if ok.any():
+                j = have[k[ok][np.argmin(d[ok])]]
+                moved.append((float(d[ok].min()), c, j))
+        if not moved:
+            break
+        for _, c, j in sorted(moved):
+            terr[c] = terr[scomp[j]]
+            joined.append(int(c))
+            through[int(c)] = (int(sr[j]), int(sc[j]))
+        pending = [c for c in pending if not terr[c]]
+    groups = []
+    if pending:
+        parent = {c: c for c in pending}
+
+        def root(c):
+            while parent[c] != c:
+                parent[c] = parent[parent[c]]
+                c = parent[c]
+            return c
+
+        pts, owner = [], []
+        for c in pending:                                   # at most a few hundred shore points per island
+            mine = np.flatnonzero(scomp == c)
+            mine = mine[::max(1, mine.size // 300)]
+            pts.append(v[mine])
+            owner.append(np.full(mine.size, c))
+        pts, owner = np.concatenate(pts), np.concatenate(owner)
+        for a, b in cKDTree(pts).query_pairs(chord(2.0 * COAST_KM), output_type='ndarray'):
+            ra, rb = root(int(owner[a])), root(int(owner[b]))
+            if ra != rb:
+                parent[rb] = ra
+        roots = sorted({root(c) for c in pending})
+        for g, r in enumerate(roots):
+            members = [c for c in pending if root(c) == r]
+            if sum(size[c] for c in members) < ISLET_KM2:
+                for c in members:
+                    terr[c] = -1                        # rocks
+                continue
+            tid = n + g
+            groups.append(tid)
+            for c in members:
+                terr[c] = tid
+    territory = terr[comps]
+    territory[~on_land] = 0
+    rocks = territory == -1
+    log(f'territories: {sum(1 for c in ids if size[c] >= REGION_MIN_KM2)} mainlands, {len(joined)} islands in their '
+        f'waters, {len(groups)} island groups in international waters, {int(np.unique(comps[rocks]).size)} rocks')
+    return territory, comps, joined, through, groups, rocks
+
+
+def absorb_islets(labels, on_land, area, lat, lon, territory=None):
+    """Islands under ISLET_KM2 join the nearest district across the water within their own territory (rule 15); in an
+    island group of islets alone, the islets together make one district."""
     from scipy import ndimage
     from scipy.spatial import cKDTree
     comps, n = ndimage.label(on_land, structure=np.ones((3, 3)))
@@ -514,24 +602,36 @@ def absorb_islets(labels, on_land, area, lat, lon):
     if not tiny.size:
         return labels
     is_tiny = np.isin(comps, tiny)
-    big = on_land & ~is_tiny
-    br, bc = np.nonzero(big)
-    tree = cKDTree(unit(lat[br], lon[bc]))
-    tr, tc = np.nonzero(is_tiny)
-    _, i = tree.query(unit(lat[tr], lon[tc]))
     out = labels.copy()
-    out[tr, tc] = labels[br[i], bc[i]]
+    if territory is None:
+        territory = np.where(on_land, 1, 0)
+    nxt = int(labels.max()) + 1
+    for t in np.unique(territory[is_tiny]):
+        mine = is_tiny & (territory == t)
+        big = on_land & ~is_tiny & ((territory == t) if t != -1 else True)     # rocks join the nearest district
+        tr, tc = np.nonzero(mine)
+        if big.any():
+            br, bc = np.nonzero(big)
+            _, i = cKDTree(unit(lat[br], lon[bc])).query(unit(lat[tr], lon[tc]))
+            out[tr, tc] = labels[br[i], bc[i]]
+        else:
+            out[tr, tc] = nxt
+            nxt += 1
     return out
 
 
 # ------------------------------------------------------------------------------------------- coastal seas
 
-def coastal_seas(labels, kind, sea_body, h, area, lat, lon, log=print):
-    """Coastal sea districts: the sea within COAST_KM of land, each cell with the land district its nearest shore
-    belongs to, the pieces joined (within one sea) into districts of MIN_KM2 to COAST_MAX_KM2."""
+def coastal_seas(labels, kind, sea_body, h, area, lat, lon, log=print, region_of=None, rocks=None):
+    """Coastal sea districts, the territorial waters (rule 12): the sea within COAST_KM of land, each cell with the
+    land district its nearest shore belongs to, the pieces joined (within one sea and one region) into districts of
+    MIN_KM2 to COAST_MAX_KM2. Rocks claim no waters. Returns the pieces, the facing districts, each piece's sea and its
+    region."""
     from scipy.spatial import cKDTree
     land = kind < 2
     shore = land & neighbours_differ(land)
+    if rocks is not None:
+        shore &= ~rocks
     sr, sc = np.nonzero(shore)
     tree = cKDTree(unit(lat[sr], lon[sc]))
     wr, wc = np.nonzero(kind == 2)
@@ -547,6 +647,7 @@ def coastal_seas(labels, kind, sea_body, h, area, lat, lon, log=print):
     pieces = np.zeros(labels.shape, np.int32)
     pieces[faces > 0] = inv + 1
     body_of = np.concatenate([[0], uk // 100_000])
+    reg_of = np.concatenate([[0], region_of[uk % 100_000]]) if region_of is not None else np.zeros(body_of.shape, np.int64)
     for _ in range(30):
         w = np.broadcast_to(area[:, None], labels.shape)
         a_ = np.bincount(pieces.ravel(), w.ravel())
@@ -557,7 +658,7 @@ def coastal_seas(labels, kind, sea_body, h, area, lat, lon, log=print):
         order = sorted(zip(pairs, length), key=lambda x: min(a_[x[0][0]], a_[x[0][1]]))
         joined = 0
         for (a, b), L in order:
-            if used[a] or used[b] or body_of[a] != body_of[b]:
+            if used[a] or used[b] or body_of[a] != body_of[b] or reg_of[a] != reg_of[b]:
                 continue
             if min(a_[a], a_[b]) < MIN_KM2 or a_[a] + a_[b] <= COAST_MAX_KM2 * 0.5:
                 lut[b] = a
@@ -565,22 +666,27 @@ def coastal_seas(labels, kind, sea_body, h, area, lat, lon, log=print):
                 joined += 1
         if not joined:
             break
-        keep_body = body_of.copy()
+        keep_body, keep_reg = body_of.copy(), reg_of.copy()
         pieces = lut[pieces]
         keep = np.unique(pieces[pieces > 0])
         remap = np.zeros(n, np.int32)
         remap[keep] = np.arange(1, keep.size + 1)
         body_of = np.concatenate([[0], keep_body[keep]])
+        reg_of = np.concatenate([[0], keep_reg[keep]])
         pieces = remap[pieces]
     log(f'coastal seas: {int(pieces.max())} districts within {COAST_KM:.0f} km of the shore')
-    return pieces, faces, body_of
+    return pieces, faces, body_of, reg_of
 
 
 # ------------------------------------------------------------------------------------------------ regions
 
-def regions(labels, on_land, kind, cost, area, lat, lon, log=print):
+def regions(labels, on_land, kind, cost, area, lat, lon, log=print, territory=None, comps=None, joined=(), through=None,
+            groups=()):
     """Land regions by the same watershed from the great basins and wide fill-in points, each district given to the
-    region holding most of it; regions under REGION_MIN_KM2 join the neighbour they share the most edge with."""
+    region holding most of it; regions under REGION_MIN_KM2 join the neighbour they share the most edge with. With the
+    territories (island_territories, rule 15), an island in a territory's waters takes the region of the land it joined
+    through, and each island group in international waters makes a region of its own, exempt from the minimum.
+    Returns each district's region, the centres' details and the island groups' regions."""
     # without island markers, an island falls to a region across the water as the flood crosses the sea last
     markers, info = place_centres(on_land, kind, lat, lon, REGION_FEATURE_KM, REGION_SEED_KM, log=log, islands=False)
     reg = watershed(cost, markers)
@@ -592,6 +698,34 @@ def regions(labels, on_land, kind, cost, area, lat, lon, log=print):
     table[:, 0] = 0
     of = table.argmax(axis=1)
     of[0] = 0
+    exempt = set()
+    if territory is not None:
+        def majority(values):
+            key = labels[on_land].astype(np.int64) * (int(values.max()) + 1) + values[on_land]
+            uk, cnt = np.unique(key, return_counts=True)
+            best = {}
+            for k_, c_ in zip(uk, cnt):
+                d_, v_ = divmod(int(k_), int(values.max()) + 1)
+                if c_ > best.get(d_, (0, 0))[0]:
+                    best[d_] = (c_, v_)
+            out = np.zeros(n, np.int64)
+            for d_, (_, v_) in best.items():
+                out[d_] = v_
+            return out
+        t_of, c_of = majority(territory), majority(comps)
+        nxt = int(of.max()) + 1
+        for g in groups:                                    # an island group: a region of its own
+            ds = np.flatnonzero(t_of == g)
+            ds = ds[ds > 0]
+            if ds.size:
+                of[ds] = nxt
+                exempt.add(nxt)
+                nxt += 1
+        for c in joined:                                    # an island in a territory's waters, nearest first
+            ds = np.flatnonzero(c_of == c)
+            ds = ds[ds > 0]
+            if ds.size:
+                of[ds] = of[labels[through[c]]]
     darea = np.bincount(labels.ravel(), w, n)
     dvec = np.zeros((n, 3))
     rr, cc = np.nonzero(labels > 0)
@@ -605,18 +739,19 @@ def regions(labels, on_land, kind, cost, area, lat, lon, log=print):
         for _ in range(400):
             rmap = of[labels]
             ra = np.bincount(rmap.ravel(), w, int(of.max()) + 1)
-            small = sorted((r for r in np.unique(of[1:]) if ra[r] < REGION_MIN_KM2), key=lambda r: ra[r])
+            small = sorted((r for r in np.unique(of[1:]) if ra[r] < REGION_MIN_KM2 and r not in exempt),
+                           key=lambda r: ra[r])
             if not small:
                 return of
             r = small[0]
             pairs, length, _ = adjacency(rmap, np.zeros(rmap.shape, np.float32))
             cand = [((ra[r] + ra[b if a == r else a] <= REGION_MAX_KM2), L, b if a == r else a)
-                    for (a, b), L in zip(pairs, length) if r in (a, b)]
+                    for (a, b), L in zip(pairs, length) if r in (a, b) and (b if a == r else a) not in exempt]
             if cand:
                 of[of == r] = max(cand)[2]
                 continue
             mine = np.argwhere(rmap == r)
-            other = np.argwhere((rmap > 0) & (rmap != r))
+            other = np.argwhere((rmap > 0) & (rmap != r) & ~np.isin(rmap, list(exempt)))
             tree = cKDTree(unit(lat[other[:, 0]], lon[other[:, 1]]))
             _, k = tree.query(unit(lat[mine[:, 0]], lon[mine[:, 1]]))
             of[of == r] = np.bincount(rmap[other[k, 0], other[k, 1]]).argmax()
@@ -630,7 +765,7 @@ def regions(labels, on_land, kind, cost, area, lat, lon, log=print):
             mine = np.flatnonzero(of == r)
             mine = mine[mine > 0]
             total = darea[mine].sum()
-            if total <= REGION_MAX_KM2:
+            if total <= REGION_MAX_KM2 or r in exempt:
                 continue
             k = int(np.ceil(total / (0.7 * REGION_MAX_KM2)))
             v = dvec[mine]
@@ -658,8 +793,9 @@ def regions(labels, on_land, kind, cost, area, lat, lon, log=print):
     remap = np.zeros(int(of.max()) + 1, np.int32)
     remap[uniq] = np.arange(1, uniq.size + 1)
     of = remap[of]
-    log(f'regions on land: {uniq.size}')
-    return of, info
+    island_regions = {int(remap[r]) for r in exempt if r < remap.size and remap[r]}
+    log(f'regions on land: {uniq.size}, {len(island_regions)} of them island groups')
+    return of, info, island_regions
 
 
 # ---------------------------------------------------------------------------------------------- the draft
@@ -755,12 +891,16 @@ def build(log=print):
     islands = join_wrapped(islands)
     labels = relabel(labels, np.arange(int(labels.max()) + 1))
     log(f'watershed: {int(labels.max())} first districts, {time.time() - started:.0f} s')
+    territory, comps, joined, through, groups, rocks = island_territories(on_land, area, lat, lon, log)
     labels = apply_rules(labels, h, moisture, basalt, to8, area, cost, lat, lon, islands, log)
-    labels = absorb_islets(labels, on_land, area, lat, lon)
+    labels = absorb_islets(labels, on_land, area, lat, lon, territory)
     labels = relabel(labels, np.arange(int(labels.max()) + 1))
     log(f'land districts after the rules: {int(labels.max())}')
-    region_of, region_info = regions(labels, on_land, kind, cost, area, lat, lon, log)
-    coast, faces, coast_body = coastal_seas(labels, kind, sea_body, h, area, lat, lon, log)
+    region_of, region_info, island_regions = regions(labels, on_land, kind, cost, area, lat, lon, log,
+                                                     territory=territory, comps=comps, joined=joined, through=through,
+                                                     groups=groups)
+    coast, faces, coast_body, coast_region = coastal_seas(labels, kind, sea_body, h, area, lat, lon, log,
+                                                          region_of=region_of, rocks=rocks)
 
     # facts per land district
     s = stats(labels, h, moisture, basalt, to8, area)
@@ -947,7 +1087,8 @@ def build(log=print):
         description = (f"{'Salt' if salt else 'Fresh'} {form}, {shallow}, {dmean:,.0f} m deep on average; faces "
                        f"{', '.join(facing[:4]) or 'no district'}"
                        + (f"; rivers reach it from {', '.join(feeding[:4])}" if feeding else '') + '.')
-        coastal.append(dict(code=coast_codes[cd], region=sea_codes[b], kind='coastal sea', area_km2=round(a),
+        coastal.append(dict(code=coast_codes[cd], region=region_codes[int(coast_region[cd])], sea=sea_codes[b],
+                            kind='coastal sea', area_km2=round(a),
                             at=place(la, lo), mean_depth_m=round(dmean), salt=salt, enclosed=enclosed, strait=strait,
                             faces=facing, fed_by=feeding, description=description, feature=carried.get(('coast', cd))))
         coastal[-1]['anchor'] = DN.anchor_of(coastal[-1])
@@ -966,22 +1107,27 @@ def build(log=print):
         shorewise = sum(d['area_km2'] for d in mine if d['code'] in shores) / max(a, 1)
         lakewise = sum(d['area_km2'] * d['lake_share'] for d in mine) / max(a, 1)
         la, lo = region_anchor[r]
+        waters = sum(c['area_km2'] for c in coastal if c['region'] == code)
         regions_out.append(dict(code=code, kind='land', area_km2=a, districts=len(mine), at=place(la, lo),
+                                island_group=r in island_regions, waters_km2=waters,
                                 zones={k: round(v / max(a, 1), 3) for k, v in zones.items()},
                                 relief_m=round(relief_mean), basalt_share=round(basaltic, 3),
                                 coast_share=round(coastwise, 3), shore_share=round(shorewise, 3),
                                 lake_share=round(lakewise, 3),
-                                description=f"{len(mine)} districts over {a:,} km², mostly {top}"
-                                            + (', much of it mare basalt' if basaltic > 0.3 else '') + '.'))
+                                description=(f"An island group in international waters: " if r in island_regions else '')
+                                            + f"{len(mine)} districts over {a:,} km², mostly {top}"
+                                            + (', much of it mare basalt' if basaltic > 0.3 else '')
+                                            + (f"; its waters {waters:,} km²" if waters else '') + '.'))
     sea_anchor = anchors(np.where(kind == 2, sea_body, 0).astype(np.int32), lat, lon)
     for b, code in sea_codes.items():
-        mine = [c for c in coastal if c['region'] == code]
+        mine = [c for c in coastal if c['sea'] == code]
         a = float(w[(kind == 2) & (sea_body == b)].sum())
         la, lo = sea_anchor.get(b, (0.0, 0.0))
         salt = sea_names[b] in SALT_SEAS
         regions_out.append(dict(code=code, kind='sea', area_km2=round(a), districts=len(mine), at=place(la, lo),
-                                description=f"{'A salt' if salt else 'A fresh'} sea of {a:,.0f} km² with {len(mine)} "
-                                            f"coastal sea districts; its open water lies beyond them."))
+                                description=f"{'A salt' if salt else 'A fresh'} sea of {a:,.0f} km²: {len(mine)} coastal "
+                                            f"seas, the waters of the regions round it, and beyond them international "
+                                            f"waters, which belong to no region."))
 
     # names in the Moon's tongues (district_names), each region in its own; descriptions then read names for codes
     body_of_code = {code: bodies[b] for b, code in sea_codes.items()}
@@ -989,11 +1135,11 @@ def build(log=print):
         if r['kind'] == 'sea':
             r['body'] = body_of_code[r['code']]
     units = dict(regions=regions_out, districts=districts, coastal_seas=coastal)
-    for x in regions_out:
-        x['anchor'] = DN.anchor_of(x, units)
+    DN.anchor_all(units)                                     # every anchor unique
     for x in regions_out + districts + coastal:
         x['description_codes'] = x['description']
-    DN.apply(units)
+    previous = DN.previous_names(json.loads(OUT.read_text())) if OUT.exists() else None
+    DN.apply(units, previous=previous)                       # a redraw keeps the names whose anchors survive
 
     # the product: district and region at each cell, on today's grid
     district_grid = np.zeros(labels.shape, np.int16)
@@ -1008,19 +1154,22 @@ def build(log=print):
     for r, code in region_codes.items():
         region_grid[(labels > 0) & (region_of[labels] == r)] = int(code[1:])
     for b, code in sea_codes.items():
-        region_grid[(kind == 2) & (sea_body == b)] = 100 + b
+        region_grid[(kind == 2) & (sea_body == b) & (coast == 0)] = 100 + b      # international waters
+    for cd, code in coast_codes.items():
+        region_grid[coast == cd] = int(region_codes[int(coast_region[cd])][1:])   # a region's waters
     tracked = {rel(p): sha256(p) for p in (GS.OUT, DR.OUT, DC.OUT, MF.OUT, FALLS, HERITAGE)}
     ignored = {str(p): sha256(p) for p in (GS.PRODUCT, DR.PRODUCT, DC.PRODUCT)}
     pmeta = dict(schema=PRODUCT_SCHEMA, grid=dict(pixels_per_degree=PPD, rows=labels.shape[0], cols=labels.shape[1]),
                  reading_rule=('Rows from 90 N and columns from 0 E, 8 per degree, on today\'s Moon. district holds 1 + '
                                'the index of each cell\'s district in the record\'s list (land districts, then coastal seas), '
-                               '0 on open water; region holds the land region\'s number (L01 is 1) or 100 + the sea\'s '
-                               'body for the seas.'),
+                               '0 on open water; region holds the region\'s number (L01 is 1) on its land and in its '
+                               'waters, the coastal seas, and 100 + the sea\'s body in international waters.'),
                  codes=[d['code'] for d in districts + coastal])
     BULK.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(PRODUCT, metadata=json.dumps(pmeta), district=district_grid, region=region_grid)
     sizes = np.array([d['area_km2'] for d in districts])
-    summary = dict(land_regions=len(region_codes), sea_regions=len(sea_codes), land_districts=len(districts),
+    summary = dict(land_regions=len(region_codes), island_group_regions=len(island_regions), sea_regions=len(sea_codes),
+                   land_districts=len(districts),
                    coastal_sea_districts=len(coastal),
                    land_district_km2=dict(median=int(np.median(sizes)), p10=int(np.percentile(sizes, 10)),
                                           p90=int(np.percentile(sizes, 90)), smallest=int(sizes.min()),

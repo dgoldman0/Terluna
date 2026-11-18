@@ -193,7 +193,8 @@ def tongue_for(region):
     - the dry lands, by what dominates: deserts Sahran; semi-arid broken uplands of a Levantine kind Proto-Olivolingvo;
       semi-arid plains, the steppe, Dala;
     - the lush lands: high mountains with their cloud forests Runa; shores and islands Terlunan, the seafaring tongue;
-      humid woodland and savanna Pwani; hill country Satogo; lowland rainforest Tagalog-Hebrew."""
+      humid woodland and savanna Pwani; hill country Satogo; lowland rainforest Tagalog-Hebrew;
+    - an island group out in international waters, outside the polar lands: Terlunan, the islands' tongue."""
     z = region['zones']
     lat = abs(region['at']['turned'][0])
     desert = z.get('hyper-arid', 0) + z.get('arid', 0)
@@ -201,6 +202,8 @@ def tongue_for(region):
     relief = region['relief_m']
     if lat > 62:
         return 'olivolingvo'
+    if region.get('island_group'):                          # an island group in international waters: the islands' tongue
+        return 'terlunan'
     if desert + semi >= 0.6:
         if desert >= semi:
             return 'sahran'
@@ -551,12 +554,14 @@ def calque(u, used):
     return name, f"{key} {head}, after {f['name']}, the {gloss}"
 
 
-def apply(units, table=None, log=print):
-    """Names for every region, district and coastal sea, in place: the generated names first, then each unit that
-    carries an old name with a meaning takes its calque, then the names table's pins by anchor; descriptions then read
-    names for codes. Records each name's source and meaning."""
+def apply(units, table=None, log=print, previous=None):
+    """Names for every region, district and coastal sea, in place: the generated names first; then a unit whose
+    anchor held a generated name in the previous record keeps it, so a redraw does not reshuffle names; then each unit
+    that carries an old name with a meaning takes its calque; then the names table's pins by anchor. Descriptions then
+    read names for codes. Records each name's source and meaning. previous is {anchor: (name, meaning, source)}."""
     import re
     table = load_table() if table is None else table
+    previous = previous or {}
     body = {r['code']: r.get('body') for r in units['regions'] if r['kind'] == 'sea'}
     near_side = lambda x: abs(x['at']['turned'][1]) < 90.0                        # noqa: E731
     name_all(units, body, near_side)                       # the tongues and heads the calques take
@@ -571,11 +576,23 @@ def apply(units, table=None, log=print):
             taken.add(got[0])
         else:
             missing.append((x['code'], x['tongue'], CALQUES[x['feature']['name']][1]))
-    name_all(units, body, near_side, reserved=taken)       # the generated names keep clear of the calques and pins
     every = units['regions'] + units['districts'] + units['coastal_seas']
+    kept = {}                                               # the previous record's generated names, by anchor
+    for x in every:
+        old = previous.get(x.get('anchor'))
+        if old and old[2] == 'generated' and old[3] == x.get('tongue') and x['code'] not in calques \
+                and x.get('anchor') not in table and old[0] not in taken and old[0] not in kept.values():
+            kept[x['code']] = old[0]
+    name_all(units, body, near_side, reserved=taken | set(kept.values()))   # new names keep clear of all those
     for x in every:
         x['name_source'] = 'generated'
         x.setdefault('name_meaning', '')
+        if x['code'] in kept:
+            old = previous[x['anchor']]
+            x['name'] = kept[x['code']]
+            x['name_meaning'] = old[1] or x['name_meaning']
+            if old[4]:
+                x['name_head'], x['name_mod'] = old[4], old[5]
         if x['code'] in calques:
             x['name'], x['name_meaning'] = calques[x['code']]
             x['name_source'] = 'calque'
@@ -597,18 +614,69 @@ def apply(units, table=None, log=print):
     return units
 
 
+def disambiguate(units):
+    """Anchors made unique, in place: where several units share one (a large crater's floor split into districts, a
+    fill-in point's ground split by the size rules), each takes its own label point, to a degree, else to a tenth,
+    else its order among them by code."""
+    from collections import defaultdict
+    groups = defaultdict(list)
+    for u in units:
+        groups[u['anchor']].append(u)
+    for base, us in groups.items():
+        if len(us) < 2:
+            continue
+        us.sort(key=lambda u: u['code'])
+        for digits in (0, 1):
+            keys = [f"{base}@{u['at']['today'][0]:.{digits}f},{u['at']['today'][1]:.{digits}f}" for u in us]
+            if len(set(keys)) == len(keys):
+                break
+        else:
+            keys = [f'{base}#{k}' for k in range(len(us))]
+        for u, k in zip(us, keys):
+            u['anchor'] = k
+
+
+def anchor_all(units):
+    """Every unit's anchor, unique: the districts' and coastal seas' first, then the regions' from their largest
+    districts."""
+    for x in units['districts'] + units['coastal_seas']:
+        x['anchor'] = anchor_of(x)
+    disambiguate(units['districts'] + units['coastal_seas'])
+    for x in units['regions']:
+        x['anchor'] = anchor_of(x, units)
+    disambiguate(units['regions'])
+
+
+def previous_names(record):
+    """{anchor: (name, meaning, source, tongue, head, modifier)} for every unit of a districts record, its anchors
+    found again by today's rules, so that an older record's units match today's like with like."""
+    import copy
+    units = copy.deepcopy(dict(regions=record.get('regions', []), districts=record.get('districts', []),
+                               coastal_seas=record.get('coastal_seas', [])))
+    if any('anchor' not in x for x in units['districts'] + units['coastal_seas']):
+        return {}
+    anchor_all(units)
+    return {x['anchor']: (x['name'], x.get('name_meaning', ''), x.get('name_source', 'generated'), x.get('tongue'),
+                          x.get('name_head'), x.get('name_mod'))
+            for x in units['regions'] + units['districts'] + units['coastal_seas']}
+
+
 def main(argv=None) -> int:
     """Rename the draft in place from the names table and the rules, without drawing it again."""
     import argparse
     import json
     p = argparse.ArgumentParser(description=main.__doc__)
     p.add_argument('--record', type=_Path, default=RECORD)
+    p.add_argument('--previous', type=_Path, help='a record whose generated names to keep by anchor (default: the record '
+                                                 'itself, so a rename moves only what the table changes)')
+    p.add_argument('--fresh', action='store_true', help='generate every name afresh')
     args = p.parse_args(argv)
     record = json.loads(args.record.read_text())
+    prev = None if args.fresh else previous_names(json.loads(args.previous.read_text()) if args.previous else record)
     units = dict(regions=record['regions'], districts=record['districts'], coastal_seas=record['coastal_seas'])
     if any('anchor' not in x for x in units['districts'] + units['coastal_seas']):
         raise SystemExit(f'{args.record} predates the anchors; draw it again with research.studies.atlas_round.districts')
-    apply(units)
+    apply(units, previous=prev)
     record['names'] = dict(table=str(PLACE_NAMES.relative_to(PLACE_NAMES.parents[3])),
                            sources={s: sum(1 for x in units['regions'] + units['districts'] + units['coastal_seas']
                                            if x['name_source'] == s) for s in ('pinned', 'calque', 'generated')})

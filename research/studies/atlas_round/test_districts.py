@@ -109,3 +109,36 @@ def test_anchors_survive_a_redraw():
     assert N.anchor_of(dict(kind='sea', body='near-side sea')) == 'sea:near-side sea'
     units = dict(districts=[dict(region='L01', area_km2=5, anchor='crater:A'), dict(region='L01', area_km2=9, anchor='crater:B')])
     assert N.anchor_of(dict(kind='land', code='L01', districts=2, at=dict(today=[0, 0])), units) == 'region:crater:B'
+
+
+def test_islands_take_the_territory_whose_waters_they_lie_in(monkeypatch):
+    # an equatorial strip at 8 px/deg, cells of about 14 km2: a mainland, an island 30 km off it, a second island 38 km
+    # beyond the first (more than 60 km from the mainland), two islands far out whose waters touch, and a lone rock
+    monkeypatch.setattr(D, 'REGION_MIN_KM2', 5000.0)
+    rows, cols = 64, 240
+    lat = 4.0 - (np.arange(rows) + 0.5) / 8.0
+    lon = (np.arange(cols) + 0.5) / 8.0
+    area = (D.MOON_KM * np.radians(1 / 8.0)) ** 2 * np.cos(np.radians(lat))
+    land = np.zeros((rows, cols), bool)
+    land[10:50, 10:40] = True                       # the mainland, about 17,000 km2
+    land[28:31, 48:51] = True                       # 8 cells (30 km) off its shore
+    land[28:31, 61:64] = True                       # 10 cells beyond the first island
+    land[10:26, 140:156] = True                     # two islands of about 3,700 km2, out of reach,
+    land[30:46, 166:182] = True                     # 10 cells apart
+    land[40, 220] = True                            # a rock alone
+    territory, comps, joined, through, groups, rocks = D.island_territories(land, area, lat, lon, log=lambda *a: None)
+    main = territory[30, 20]
+    assert territory[29, 49] == main and territory[29, 62] == main            # the chain joins with its first link
+    assert joined.index(comps[29, 49]) < joined.index(comps[29, 62])
+    assert len(groups) == 1 and territory[18, 148] == territory[38, 174] == groups[0]
+    assert rocks[40, 220] and territory[40, 220] == -1 and not rocks[30, 20]
+
+
+def test_a_rename_keeps_every_name(draft):
+    import copy
+    record, _, _ = draft
+    units = copy.deepcopy(dict(regions=record['regions'], districts=record['districts'],
+                               coastal_seas=record['coastal_seas']))
+    N.apply(units, previous=N.previous_names(record), log=lambda *a: None)
+    for key in ('regions', 'districts', 'coastal_seas'):
+        assert [u['name'] for u in units[key]] == [u['name'] for u in record[key]], key
