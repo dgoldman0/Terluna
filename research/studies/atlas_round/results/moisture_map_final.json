@@ -117,13 +117,13 @@
    "path": "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz",
    "sha256": "d454c35e02d2b354dd221742bfe43ba617ba2e5485589f523f39705440d22038",
    "record": "research/studies/atlas_round/results/globe_surface.json",
-   "record_sha256": "a0ddb98e64c0a9c85abaaecc9c92be806769e493fb5bffbc368719f667881880"
+   "record_sha256": "f535f75686460277b31d131294744945b20cbf3c3f1fee935f76dc5651d1ff3e"
   },
   "tides": {
    "path": "/media/projectspace/terluna-research/atlas-round/tides_final/tides_design_4ppd.npz",
    "sha256": "2a29037911cfc6612783f0613fad41b1f105821a7cdf2e252051bf1add922f73",
    "record": "research/studies/atlas_round/results/tides_final.json",
-   "record_sha256": "693a28b6d9a935dda62e0b079be60aa5de615d4166f68a1df76684d86a47c380"
+   "record_sha256": "8a20c1015cc923eb9e8f78d4e2f666e58cf4525dc5a9c51490375d9654c9a8d4"
   }
  },
  "evidence": "The moisture map of the design climate on the atlas round's final surface (the run at sunlight 0.930, years 35-49, 300.3 K at the ground), classed by biosphere/ecology/moisture_map.py unchanged; the cells are the run's, in the settled turned frame of its surface record, and the settings (seas, lakes, closed lakes, coasts, tides) come from the round's design surface, every sea at its own level and the near-side sea parted. A zoning of the design climate by its water balance, not a model of vegetation: each T21 land cell (about 170 km across at the equator) of the design climate on the turned Moon takes the moisture class its aridity gives it, with its warmth, night light and settings beside it. The aridity is the GCM's rain over a Priestley-Taylor demand without wind or humidity, over the years named; the classes are UNEP's, the humid class divided at aridity 1, each with the broad biome the Millennium Ecosystem Assessment gives the class on Earth beside it as a reference. Which organisms each class holds is a design question. The cells are the turned Moon's; geography's pixels are counted in the cell that holds them on the turned Moon through the final surface's settled frame. The gap's scale of 0.83 is a sensitivity of the classes from three CM1 boxes forced by the design years of 1 November, never a bias-corrected climate. The lakes come from the drainage routed on the same years' climate; the night light from the living-light grid in the mean geometry under a clear sky. Provisional while the GCM-CM1 gap stands.",
@@ -80703,5 +80703,5 @@
   "The tide along the coasts is the monthly range of the design surface's seas from geography's tide model with each sea's mean held (tides_final.py), an equilibrium tide checked against a shallow-water solution on three seas; all 43,721 km of coast on the run's land cells have a tide class.",
   "The gap's scale and the night-rain timing are the design run's of 1 November, as in the moisture map on the corrected climate."
  ],
- "seconds": 6
+ "seconds": 8
 }

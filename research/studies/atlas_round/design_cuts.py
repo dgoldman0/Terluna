@@ -111,7 +111,8 @@ def trenches(geo, state, gov, log=print):
     cut, to the hollow it falls into, and the ground on that way above the water is taken down to it. Before the first
     pass and after the last the way runs down the steepest slope to the water; between two passes it is the way through
     the ground that stands least above the water (low_way). Returns the trench's cells, the water's level in each and the
-    flow through it, the two branches' shares added where they share it."""
+    flow through it, the two branches' shares added where they share it, and each stretch's course in the order the water
+    takes it, from the edge of the water it leaves to the edge of the water it falls into."""
     started = time.time()
     levels, in_sea = RD.node_levels(geo, state)
     search = RD.CutSearch(geo, levels, in_sea, state['names'], GD.SOURCE)
@@ -119,7 +120,7 @@ def trenches(geo, state, gov, log=print):
     h = geo['h']
     h_flat = h.ravel()
     receiver = state['r']['receiver']
-    level_at, flow_at = {}, {}
+    level_at, flow_at, courses = {}, {}, []
     for target in (GD.HELD_BRANCH, GD.REST_BRANCH):
         chain, _ = search.route(target, allowed[target])
         segments, current = [], None
@@ -137,15 +138,26 @@ def trenches(geo, state, gov, log=print):
         mine = {}
         for seg in segments:
             lev = seg[0][1]
-            way = downhill(int(search.c_from[seg[0][0]]), h_flat, receiver, lev)
-            for (e1, _), (e2, _) in zip(seg[:-1], seg[1:]):
-                way += low_way(int(search.c_to[e1]), int(search.c_from[e2]), h, lev, geo['cell_km'], geo['lat'])
+            before = downhill(int(search.c_from[seg[0][0]]), h_flat, receiver, lev)
+            between = [low_way(int(search.c_to[e1]), int(search.c_from[e2]), h, lev, geo['cell_km'], geo['lat'])
+                       for (e1, _), (e2, _) in zip(seg[:-1], seg[1:])]
+            after = downhill(int(search.c_to[seg[-1][0]]), h_flat, receiver, lev)
+            way = before + [c for w in between for c in w]
             for e, _ in seg:
                 way += [int(search.c_from[e]), int(search.c_to[e])]
-            way += downhill(int(search.c_to[seg[-1][0]]), h_flat, receiver, lev)
+            way += after
             for c in way:
                 if h_flat[c] > lev:
                     mine[c] = min(mine.get(c, np.inf), lev)
+            # The course: up from the water it leaves, over each pass and along the low way to the next (low_way gives
+            # its cells from the far end back), and down to the water it falls into.
+            course = before[::-1]
+            for i, (e, _) in enumerate(seg):
+                course += [int(search.c_from[e]), int(search.c_to[e])] + (between[i][::-1] if i < len(between) else [])
+            course += after
+            course = [c for k, c in enumerate(course) if k == 0 or c != course[k - 1]]
+            if all(c != course for _, c in courses):
+                courses.append((float(lev), course))
         for c, lev in mine.items():
             level_at[c] = min(level_at.get(c, np.inf), lev)
             flow_at[c] = flow_at.get(c, 0.0) + float(gov['share'][target])
@@ -153,8 +165,12 @@ def trenches(geo, state, gov, log=print):
     level = np.array([level_at[c] for c in cells], np.float32)
     flow = np.array([flow_at[c] for c in cells], np.float32)
     deepest = float((h_flat[cells] - level).max()) if cells.size else 0.0
-    log(f'the cuts\' trenches: {cells.size} cells, deepest {deepest:.1f} m, {time.time() - started:.0f} s')
-    return dict(cell=cells, level=level, flow=flow, deepest_m=deepest)
+    log(f'the cuts\' trenches: {cells.size} cells, deepest {deepest:.1f} m, {len(courses)} stretches, '
+        f'{time.time() - started:.0f} s')
+    return dict(cell=cells, level=level, flow=flow, deepest_m=deepest,
+                course_cell=np.array([c for _, course in courses for c in course], np.int32),
+                course_stretch=np.array([i for i, (_, course) in enumerate(courses) for _ in course], np.int16),
+                course_level=np.array([lev for lev, _ in courses], np.float32))
 
 
 def inputs():
@@ -192,18 +208,23 @@ def build(log=print):
                               'row * 5760 + column. cut_cell lists the trenches\' cells, cut_level_m the water\'s level in '
                               'each above the dry Moon\'s geoid (the ground there stands above it until cut) and '
                               'cut_flow_m3s the branches\' flow through it, both branches\' shares added where they share '
-                              'the trench.'),
+                              'the trench. course_cell lists each stretch\'s cells in the order the water takes them, from '
+                              'the edge of the water it leaves over its passes to the edge of the water it falls into, '
+                              'course_stretch the stretch of each and course_level_m each stretch\'s water level; between '
+                              'passes the course may cross ground already below its water, which is not cut.'),
                 evidence=('The routes governed_drainage.py finds for the works of 16 November on the design climate\'s '
                           'closed budget, with their ground between 1.9 km cells: a design, not validated.'))
     BULK.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(PRODUCT, metadata=json.dumps(meta), cut_cell=trench['cell'], cut_level_m=trench['level'],
-                        cut_flow_m3s=trench['flow'])
+                        cut_flow_m3s=trench['flow'], course_cell=trench['course_cell'],
+                        course_stretch=trench['course_stretch'], course_level_m=trench['course_level'])
     summary = dict(trench_cells=int(trench['cell'].size), deepest_m=round(trench['deepest_m'], 1),
                    deepest_at=NW.place(deepest, cols, rotation) if deepest is not None else None,
                    recorded_cuts={k: v['cuts'][:3] for k, v in info.items()},
                    ground_taken_km3=round(float((np.maximum(depth, 0.0) * area[trench['cell']]).sum()) / 1e9, 1),
                    trench_km=round(float(np.sqrt(area[trench['cell']]).sum()) / 1e3),
-                   flow_m3s=round(float(trench['flow'].max())) if trench['flow'].size else 0, shares_m3s=shares)
+                   flow_m3s=round(float(trench['flow'].max())) if trench['flow'].size else 0, shares_m3s=shares,
+                   stretches=int(trench['course_level'].size), course_cells=int(trench['course_cell'].size))
     log(f'cuts: {json.dumps(summary)[:800]}, {time.time() - started:.0f} s')
     return dict(schema=SCHEMA, producer=dict(files={f: sha256(ROOT / f) for f in CODE}), inputs=tracked,
                 ignored_inputs=ignored, evidence=meta['evidence'],

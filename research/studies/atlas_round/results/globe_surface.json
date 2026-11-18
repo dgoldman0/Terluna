@@ -4,20 +4,20 @@
   "files": {
    "research/studies/atlas_round/globe_surface.py": "59b90ee4c57079650f15becbf1b8d6b6c5d43841878ef953804c79479bdad37c",
    "research/studies/atlas_round/design_routing.py": "7efdff778ed46538149ca80abdf825d819ff80563565814a6ac4d0c09632cb6c",
-   "research/studies/atlas_round/design_cuts.py": "4d04e2dbfddb1b57b53593290378de453316191ad502f96cb4349c6739ea717a",
+   "research/studies/atlas_round/design_cuts.py": "3c6b1e5064088cdb99ddeef309867941913fbff9599b8e52b68df6354352a7f7",
    "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
    "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541"
   }
  },
  "inputs": {
   "research/studies/atlas_round/results/design_routing.json": "c0a11066af790bdcbfb71f9252c5c1f40bcea7b4f4b45637c5b3b1d3d5ae5bb8",
-  "research/studies/atlas_round/results/design_cuts.json": "d60937eebdf5a0a0b3bd7f44f936ef7aa251fbf1a43235665a526f80e66c1d69",
+  "research/studies/atlas_round/results/design_cuts.json": "0e884f904376cd2ccfb9a4df456d03b28351e61f5b618da05bd4cf86dd739b8e",
   "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
   "research/studies/atlas_round/results/turned_surface_61afb0be43d71adf.json": "73b008fe5aeea1da3a22e129c3e73dbca01d2490173c5a45c2e9233ed7beed56"
  },
  "ignored_inputs": {
   "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "6cb410b400c6ee1ba15d3c79b404dfdae94327a66217e4a8b57e77cafbee05c1",
-  "/media/projectspace/terluna-research/atlas-round/design_cuts/design_cuts_16ppd.npz": "f2c9a4afbc8c63326db7fe26f4994d72db1164820748733891b700c447dfbcb8"
+  "/media/projectspace/terluna-research/atlas-round/design_cuts/design_cuts_16ppd.npz": "8f3542780ddb79a8177ef8d39eeba9b5feb6d6cb285330ba090037c16bf1d790"
  },
  "evidence": "The redrawn floor at the settled state, the seas at the levels the design climate's closed budget gives them with the works of 16 November and the fixed weirs, and the routing of that budget's rain over it with the near-side sea parted. Not validated against any observation.",
  "reading_rule": "Levels and heights in m above the redrawn common level; areas in km2, volumes in km3, flows in m3/s; shares of the Moon's surface. seas are the seven bodies at their own levels; lakes are the routing's lakes off the seas; neck_river is the main part's spill run down the routing from the ground past the crest. product names the grid the globe reads, on the research drive.",
@@ -196,5 +196,5 @@
   "path": "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz",
   "sha256": "d454c35e02d2b354dd221742bfe43ba617ba2e5485589f523f39705440d22038"
  },
- "seconds": 22
+ "seconds": 23
 }

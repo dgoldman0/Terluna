@@ -2,7 +2,7 @@
  "schema": "terluna.research.atlas-round-design-cuts/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/design_cuts.py": "4d04e2dbfddb1b57b53593290378de453316191ad502f96cb4349c6739ea717a",
+   "research/studies/atlas_round/design_cuts.py": "3c6b1e5064088cdb99ddeef309867941913fbff9599b8e52b68df6354352a7f7",
    "research/studies/atlas_round/design_routing.py": "7efdff778ed46538149ca80abdf825d819ff80563565814a6ac4d0c09632cb6c",
    "research/studies/atlas_round/final_drainage.py": "9c4fdb233a58891ea22fd82cc570cada09897d2d27d343315a56656b51e5c285",
    "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
@@ -133,11 +133,13 @@
    "south_pole_aitken": 28323.9,
    "humboldtianum": 5340.3,
    "smythii_marginis": 8835.5
-  }
+  },
+  "stretches": 3,
+  "course_cells": 26
  },
  "product": {
   "path": "/media/projectspace/terluna-research/atlas-round/design_cuts/design_cuts_16ppd.npz",
-  "sha256": "f2c9a4afbc8c63326db7fe26f4994d72db1164820748733891b700c447dfbcb8"
+  "sha256": "8f3542780ddb79a8177ef8d39eeba9b5feb6d6cb285330ba090037c16bf1d790"
  },
- "seconds": 444
+ "seconds": 555
 }

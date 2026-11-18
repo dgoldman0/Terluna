@@ -9,7 +9,7 @@
  },
  "inputs": {
   "research/studies/atlas_round/results/design_routing.json": "c0a11066af790bdcbfb71f9252c5c1f40bcea7b4f4b45637c5b3b1d3d5ae5bb8",
-  "research/studies/atlas_round/results/globe_surface.json": "a0ddb98e64c0a9c85abaaecc9c92be806769e493fb5bffbc368719f667881880"
+  "research/studies/atlas_round/results/globe_surface.json": "f535f75686460277b31d131294744945b20cbf3c3f1fee935f76dc5651d1ff3e"
  },
  "ignored_inputs": {
   "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "6cb410b400c6ee1ba15d3c79b404dfdae94327a66217e4a8b57e77cafbee05c1",
@@ -1140,5 +1140,5 @@
   "path": "/media/projectspace/terluna-research/atlas-round/falls/falls_16ppd.npz",
   "sha256": "6d265742223293816a9adcec98a77689f34dd13f8d0c90aa0c1c2e2710209fe3"
  },
- "seconds": 17
+ "seconds": 11
 }

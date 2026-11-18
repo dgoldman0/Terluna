@@ -54,3 +54,17 @@ def test_the_trenches_are_the_governed_routes(record):
     if governed is not None:
         assert governed['branches'][GD.HELD_BRANCH]['cuts'][0]['depth_m'] == pytest.approx(max(recorded), abs=1.0)
     assert record['product']['sha256'] == DC.sha256(DC.PRODUCT)
+
+
+def test_each_stretch_runs_unbroken_over_the_cut_ground(record):
+    """Every cut cell lies on a stretch's course, and each course steps from cell to neighbouring cell."""
+    with np.load(DC.PRODUCT, allow_pickle=False) as z:
+        cols = json.loads(str(z['metadata']))['grid']['cols']
+        cut, course, stretch, level = z['cut_cell'], z['course_cell'], z['course_stretch'], z['course_level_m']
+    assert set(cut.tolist()) <= set(course.tolist())
+    assert level.size == stretch.max() + 1 == record['summary']['stretches']
+    for s in range(level.size):
+        cells = course[stretch == s].astype(np.int64)
+        rows, columns = cells // cols, cells % cols
+        steps = np.abs((np.diff(columns) + cols // 2) % cols - cols // 2)
+        assert cells.size >= 1 and np.all(np.abs(np.diff(rows)) <= 1) and np.all(steps <= 1)
