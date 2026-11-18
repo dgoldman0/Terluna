@@ -240,6 +240,14 @@ On the design climate's closed budget the trench takes 17 cells of 1.9 km, about
 
 The product also keeps each stretch's course in the order the water takes it (`course_cell`, `course_stretch`, `course_level_m`): up from the edge of the water it leaves, over each pass and along the low way to the next, and down to the edge of the water it falls into, where between passes it may cross ground already below its water, which is not cut. The three stretches' courses run 21, 3 and 2 cells. One cell wide, the trench does not show in the globe's topography, which averages 7.6 km cells, so the globe draws each course as atlases draw canals, an amber line a few pixels wide at any zoom (visualization/atlas/README.md, Falls and cuts) *(computed; the line is a map symbol)*.
 
+## Regions and districts
+
+The register's definition of a district by significance and wholeness (16 November) is formalized as rules in [districts.md](districts.md), with the author's choices of 17 November. Those choices are districts of about 5,000–150,000 km² for the first draft, names in the Moon's own tongues with no Latin, English or mainland European names, short descriptions, regions when zoomed out and districts when zoomed in, and coastal seas as districts of their own, linked to their land. [districts.py](districts.py) draws the first draft on the design surface: centres at named craters, large lakes and fill-in points; edges grown over the ground's ridges and the edges of moisture zones and rock; and the size and standing-apart rules. [district_names.py](district_names.py) names every unit in eight tongues, Terlunan and Proto-Olivolingvo from the author's own languages and six built for the atlas, each region in the tongue its landscape suggests. On the design climate the draft holds 540 districts on land in 42 regions (median 38,400 km²) and 148 coastal seas in the 7 seas *(computed units and facts; their significance awaits written judgment)*. It is redrawn on each new design climate.
+
+```sh
+python -m research.studies.atlas_round.districts     # about 2 minutes; results/districts.json and the 8 px/deg grid on the drive
+```
+
 ## The falls
 
 [falls.py](falls.py) finds where the design surface's large rivers drop steeply, for the globe's marks and white water. Each step of the design routing drops from its cell's water surface, the ground on dry cells and the level on a lake or sea, to its receiver's, on the surface the globe draws, cuts included. Steps on rivers of 100 m³/s or more that fall 30 m a km or more join along the flow into reaches, each ranked by the power of its falling water at lunar gravity. The record, [results/falls.json](results/falls.json), lists the 40 largest with their drop, length, flow, steepest step, the water they end in and the named feature beside them (the IAU gazetteer), and the product on the research drive holds every steep step for the white water *(computed between 1.9 km cells)*.
