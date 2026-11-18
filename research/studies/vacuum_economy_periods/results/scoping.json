@@ -2,7 +2,7 @@
  "schema": "terluna.research.vacuum-economy-periods.scoping/1",
  "producer": {
   "path": "research/studies/vacuum_economy_periods/scoping.py",
-  "sha256": "5a14472cfc262afddb0e2896eb805b9d97bc6742a7dcb30e7e24318097b37d2b"
+  "sha256": "bce6849e179758396cb042742d29c0ce608c08a20cd09cf8c076cbce3c068a70"
  },
  "dependencies": {
   "research/studies/vacuum_economy_periods/run.py": "46458516cbaa06590e0a25a7029acb256621b378133864b03c54660f5ce69074",
@@ -25,7 +25,8 @@
  },
  "evidence": "Measures read from the period model and its saved product on the model's stated inputs; the internal rate of return is that of the funders' yearly flows, in constant dollars of 2041, so a real rate.",
  "units": "Residents; constant dollars of 2041; years of the calendar; gigawatts; rates as fractions a year.",
- "reading_rule": "paths holds the base case (central demand and technology, residents a result, the default policy of U), the same in dollars alone, and the programme's ramp under each, year by year from 2041 (index 0) to 2341. sensitivities moves one input at a time from the base case and gives the residents by 2341 and the change from the base case, largest first. technology_groups moves each group of the technology stack alone to its slow and its fast path, the rest central, with the same measure, largest first, and beside it the year the plan is reached, the funding needed and the funders' present value and rate of return. grid gives residents as a result for each demand and technology, under the default policy of U (:U) and in dollars alone (:dollar). returns_by_path gives the funders' measures for three growth paths on central demand and technology: the programme's ramp held at the plan, the base case's growth to the plan held there, and the base case growing past it.",
+ "reading_rule": "paths holds the base case (central demand and technology, residents a result, the default policy of U), the same in dollars alone, and the programme's ramp under each, year by year from 2041 (index 0) to 2341. sensitivities moves one input at a time from the base case and gives the residents by 2341 and the change from the base case, largest first. technology_groups moves each group of the technology stack alone to its slow and its fast path, the rest central, with the same measure, largest first, and beside it the year the plan is reached, the funding needed and the funders' present value and rate of return. grid gives residents as a result for each demand and technology, under the default policy of U (:U) and in dollars alone (:dollar). returns_by_path gives the funders' measures for three growth paths on central demand and technology: the programme's ramp held at the plan, the base case's growth to the plan held there, and the base case growing past it. Each sensitivity end and grid cell also gives the year the funders are repaid and the rate of return of their flows. trade_effect gives the base case with Earth's purchases a tenth, a quarter and a half fewer when paid in U. base_periods sums the base case's flows by period, and founding_capital gives what the funding to the end of the opening year (2049) pays Earth for, by kind, with the receipts of the opening year and the reserve U holds by then. USD2041_in_USD2026 converts the model's unit, dollars of 2026 carried forward at 3% a year to 2041, back to dollars of 2026.",
+ "USD2041_in_USD2026": 0.6418619473967174,
  "paths": {
   "base": {
    "scenario": "central",
@@ -35364,6 +35365,103 @@
    "funders_IRR_to_2341": 0.039279675055443275
   }
  },
+ "base_periods": [
+  {
+   "first": 2041,
+   "last": 2048,
+   "funders_flow": -887302012227.3364,
+   "net": -887302012227.3364,
+   "receipts": 0.0,
+   "paid_to_Earth": 887302012227.3364
+  },
+  {
+   "first": 2049,
+   "last": 2060,
+   "funders_flow": -748549025169.3572,
+   "net": -691688144470.3386,
+   "receipts": 1475939199754.5676,
+   "paid_to_Earth": 2167627344224.9062
+  },
+  {
+   "first": 2061,
+   "last": 2085,
+   "funders_flow": 2323814399410.6055,
+   "net": 2243119117958.347,
+   "receipts": 5680185972418.492,
+   "paid_to_Earth": 3437066854460.1455
+  },
+  {
+   "first": 2086,
+   "last": 2140,
+   "funders_flow": 7096133644383.424,
+   "net": 6082018048755.093,
+   "receipts": 25002893648063.223,
+   "paid_to_Earth": 18920875599308.13
+  },
+  {
+   "first": 2141,
+   "last": 2240,
+   "funders_flow": 17435454733197.28,
+   "net": 17707808758225.23,
+   "receipts": 117305955901458.58,
+   "paid_to_Earth": 99598147143233.34
+  },
+  {
+   "first": 2241,
+   "last": 2341,
+   "funders_flow": 1511316182157.7168,
+   "net": -8032871304648.565,
+   "receipts": 344728418539474.6,
+   "paid_to_Earth": 352761289844123.2
+  }
+ ],
+ "founding_capital": {
+  "years": [
+   2041,
+   2049
+  ],
+  "paid_to_Earth_by_kind": {
+   "equipment": 648385931958.1436,
+   "fares": 20530829013.15786,
+   "fleet": 81276418498.64366,
+   "lines": 18025480718.052254,
+   "pay": 121613205.73381121,
+   "plant": 222025711196.91095,
+   "power": 131701673808.80325,
+   "supplies": 1564343959.8239605,
+   "teleoperation": 0.0,
+   "zone_goods": 0.0
+  },
+  "receipts": 36112932151.529366,
+  "reserve_at_end": 121143880468.37225,
+  "funding": 1206255181093.7559
+ },
+ "trade_effect": [
+  {
+   "purchases_fewer": 0.1,
+   "residents_2341": 17813180.120462254,
+   "change": -2283242.4021896236,
+   "repaid": 2082,
+   "funding_needed_USD2041": 1740987283509.608,
+   "funders_IRR_to_2341": 0.03770723738881865
+  },
+  {
+   "purchases_fewer": 0.25,
+   "residents_2341": 15077416.575435936,
+   "change": -5019005.947215941,
+   "repaid": 2084,
+   "funding_needed_USD2041": 1697221177808.6707,
+   "funders_IRR_to_2341": 0.03423511388553602
+  },
+  {
+   "purchases_fewer": 0.5,
+   "residents_2341": 6597455.824350559,
+   "change": -13498966.698301319,
+   "repaid": 2089,
+   "funding_needed_USD2041": 1606270624016.4604,
+   "funders_IRR_to_2341": 0.030035635240722613
+  }
+ ],
  "sensitivities": [
   {
    "input": "Computing contracted at the opening",
@@ -35374,7 +35472,10 @@
      "change": -12037940.91241435,
      "source": {
       "computing_W_2049": 1000000000.0
-     }
+     },
+     "repaid": 2090,
+     "funding_needed_USD2041": 1406671638493.6802,
+     "funders_IRR_to_2341": 0.030017649304594385
     },
     {
      "setting": "20 GW",
@@ -35382,7 +35483,10 @@
      "change": 28072524.51202373,
      "source": {
       "computing_W_2049": 20000000000.0
-     }
+     },
+     "repaid": 2075,
+     "funding_needed_USD2041": 3275852123165.3164,
+     "funders_IRR_to_2341": 0.053389028781472336
     }
    ]
   },
@@ -35393,13 +35497,19 @@
      "setting": "low",
      "residents_2341": 12500.0,
      "change": -20083922.522651877,
-     "source": "low:central:steady"
+     "source": "low:central:steady",
+     "repaid": 2092,
+     "funding_needed_USD2041": 1172756395403.4968,
+     "funders_IRR_to_2341": 0.026660059431651395
     },
     {
      "setting": "high",
      "residents_2341": 20194004.06313712,
      "change": 97581.54048524424,
-     "source": "high:central:steady"
+     "source": "high:central:steady",
+     "repaid": 2076,
+     "funding_needed_USD2041": 3920019825770.099,
+     "funders_IRR_to_2341": 0.06779022885290165
     }
    ]
   },
@@ -35410,13 +35520,19 @@
      "setting": "slow",
      "residents_2341": 5906854.765592881,
      "change": -14189567.757058997,
-     "source": "central:slow:steady"
+     "source": "central:slow:steady",
+     "repaid": 2108,
+     "funding_needed_USD2041": 2356377548822.829,
+     "funders_IRR_to_2341": 0.030008123146943233
     },
     {
      "setting": "fast",
      "residents_2341": 30244580.849667635,
      "change": 10148158.327015758,
-     "source": "central:fast:steady"
+     "source": "central:fast:steady",
+     "repaid": 2072,
+     "funding_needed_USD2041": 1610241624368.357,
+     "funders_IRR_to_2341": 0.05002983029565511
     }
    ]
   },
@@ -35429,7 +35545,10 @@
      "change": -8317469.391361376,
      "source": {
       "share_spent_on_Earth": 0.2
-     }
+     },
+     "repaid": 2080,
+     "funding_needed_USD2041": 1755993285332.8452,
+     "funders_IRR_to_2341": 0.04016888985332134
     },
     {
      "setting": "5%",
@@ -35437,24 +35556,33 @@
      "change": 10852530.814596038,
      "source": {
       "share_spent_on_Earth": 0.05
-     }
+     },
+     "repaid": 2081,
+     "funding_needed_USD2041": 1778376009571.7534,
+     "funders_IRR_to_2341": 0.03930583152917999
     }
    ]
   },
   {
-   "input": "Floor on U's rate",
+   "input": "Floor on U's value",
    "ends": [
     {
      "setting": "par",
      "residents_2341": 18895798.08532088,
      "change": -1200624.4373309985,
-     "source": "central:central:steady:U_liberal:floor_1"
+     "source": "central:central:steady:U_liberal:floor_1",
+     "repaid": 2081,
+     "funding_needed_USD2041": 1772207998960.1616,
+     "funders_IRR_to_2341": 0.039485130757867526
     },
     {
      "setting": "50%",
      "residents_2341": 24870573.68086246,
      "change": 4774151.158210583,
-     "source": "central:central:steady:U_liberal:floor_0.5"
+     "source": "central:central:steady:U_liberal:floor_0.5",
+     "repaid": 2081,
+     "funding_needed_USD2041": 1774091071321.394,
+     "funders_IRR_to_2341": 0.03865659676883115
     }
    ]
   },
@@ -35465,7 +35593,10 @@
      "setting": "none",
      "residents_2341": 24387853.1959364,
      "change": 4291430.673284523,
-     "source": "central:central:steady:whole_pool"
+     "source": "central:central:steady:whole_pool",
+     "repaid": 2081,
+     "funding_needed_USD2041": 1763672393733.7148,
+     "funders_IRR_to_2341": 0.03805491784899295
     }
    ]
   },
@@ -35476,7 +35607,10 @@
      "setting": "dollars alone",
      "residents_2341": 16191683.263338631,
      "change": -3904739.2593132462,
-     "source": "central:central:steady:dollar"
+     "source": "central:central:steady:dollar",
+     "repaid": 2079,
+     "funding_needed_USD2041": 1653726383801.254,
+     "funders_IRR_to_2341": 0.04481957919712409
     }
    ]
   },
@@ -35487,7 +35621,10 @@
      "setting": "10% fewer",
      "residents_2341": 17813180.120462254,
      "change": -2283242.4021896236,
-     "source": "central:central:steady:U_liberal:trade_effect_-0.1"
+     "source": "central:central:steady:U_liberal:trade_effect_-0.1",
+     "repaid": 2082,
+     "funding_needed_USD2041": 1740987283509.608,
+     "funders_IRR_to_2341": 0.03770723738881865
     }
    ]
   },
@@ -35500,7 +35637,10 @@
      "change": -682238.588602595,
      "source": {
       "visits_price_elasticity": 0.5
-     }
+     },
+     "repaid": 2081,
+     "funding_needed_USD2041": 1777074505886.894,
+     "funders_IRR_to_2341": 0.03822915674639271
     },
     {
      "setting": "2",
@@ -35508,7 +35648,10 @@
      "change": 549964.9977713302,
      "source": {
       "visits_price_elasticity": 2.0
-     }
+     },
+     "repaid": 2080,
+     "funding_needed_USD2041": 1915879349016.6177,
+     "funders_IRR_to_2341": 0.046798651102419764
     }
    ]
   },
@@ -35519,13 +35662,19 @@
      "setting": "one",
      "residents_2341": 19593120.2282909,
      "change": -503302.29436097667,
-     "source": "central:central:steady:U_liberal:holders_months_1"
+     "source": "central:central:steady:U_liberal:holders_months_1",
+     "repaid": 2081,
+     "funding_needed_USD2041": 1774117615803.6006,
+     "funders_IRR_to_2341": 0.039227673969703836
     },
     {
      "setting": "six",
      "residents_2341": 20169365.2758223,
      "change": 72942.75317042321,
-     "source": "central:central:steady:U_liberal:holders_months_6"
+     "source": "central:central:steady:U_liberal:holders_months_6",
+     "repaid": 2081,
+     "funding_needed_USD2041": 1770898458454.2998,
+     "funders_IRR_to_2341": 0.03933227803371453
     }
    ]
   },
@@ -35536,7 +35685,10 @@
      "setting": "conservative",
      "residents_2341": 19601197.888813175,
      "change": -495224.633838702,
-     "source": "central:central:steady:U_conservative:floor_0.75"
+     "source": "central:central:steady:U_conservative:floor_0.75",
+     "repaid": 2079,
+     "funding_needed_USD2041": 1856622363820.0054,
+     "funders_IRR_to_2341": 0.04186332303231388
     }
    ]
   },
@@ -35547,7 +35699,10 @@
      "setting": "none",
      "residents_2341": 19626943.82984216,
      "change": -469478.69280971587,
-     "source": "central:central:steady:U_liberal:funders_paid_in_U_0"
+     "source": "central:central:steady:U_liberal:funders_paid_in_U_0",
+     "repaid": 2079,
+     "funding_needed_USD2041": 1751504196366.2803,
+     "funders_IRR_to_2341": 0.043630677778856986
     }
    ]
   },
@@ -35558,13 +35713,19 @@
      "setting": "none",
      "residents_2341": 19626943.82984216,
      "change": -469478.69280971587,
-     "source": "central:central:steady:U_liberal:spending_share_0"
+     "source": "central:central:steady:U_liberal:spending_share_0",
+     "repaid": 2079,
+     "funding_needed_USD2041": 1752793928342.5298,
+     "funders_IRR_to_2341": 0.04316571298081506
     },
     {
      "setting": "60%",
      "residents_2341": 20108680.353506856,
      "change": 12257.830854978412,
-     "source": "central:central:steady:U_liberal:spending_share_0.6"
+     "source": "central:central:steady:U_liberal:spending_share_0.6",
+     "repaid": 2083,
+     "funding_needed_USD2041": 1812379054927.3347,
+     "funders_IRR_to_2341": 0.034953081716228795
     }
    ]
   },
@@ -35575,7 +35736,10 @@
      "setting": "none",
      "residents_2341": 19664245.256899036,
      "change": -432177.2657528408,
-     "source": "central:central:steady:U_liberal:metal_share_0"
+     "source": "central:central:steady:U_liberal:metal_share_0",
+     "repaid": 2081,
+     "funding_needed_USD2041": 1768249928907.8738,
+     "funders_IRR_to_2341": 0.03859703991923358
     }
    ]
   },
@@ -35586,7 +35750,10 @@
      "setting": "one-year",
      "residents_2341": 20096422.522651877,
      "change": 0.0,
-     "source": "central:central:steady:U_liberal:bond_term_1"
+     "source": "central:central:steady:U_liberal:bond_term_1",
+     "repaid": 2081,
+     "funding_needed_USD2041": 1772780832220.7537,
+     "funders_IRR_to_2341": 0.03925420738911456
     }
    ]
   },
@@ -35597,18 +35764,24 @@
      "setting": "1 point",
      "residents_2341": 20096422.522651877,
      "change": 0.0,
-     "source": "central:central:steady:U_liberal:investor_premium_0.01"
+     "source": "central:central:steady:U_liberal:investor_premium_0.01",
+     "repaid": 2081,
+     "funding_needed_USD2041": 1772780832220.7537,
+     "funders_IRR_to_2341": 0.039282550394953986
     }
    ]
   },
   {
-   "input": "The funders' backstop",
+   "input": "The funders' credit line",
    "ends": [
     {
      "setting": "none",
      "residents_2341": 20096422.522651877,
      "change": 0.0,
-     "source": "central:central:steady:U_liberal:no_backstop"
+     "source": "central:central:steady:U_liberal:no_backstop",
+     "repaid": 2081,
+     "funding_needed_USD2041": 1772780832220.7537,
+     "funders_IRR_to_2341": 0.039279675055443275
     }
    ]
   }
@@ -35918,168 +36091,216 @@
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 3540324897201.9194,
-   "NPV3_to_2341_USD2041": -1814406763645.942
+   "NPV3_to_2341_USD2041": -1814406763645.942,
+   "repaid": null,
+   "funders_IRR_to_2341": -0.02268911598829343
   },
   "low:slow:U": {
    "residents_2241": 12500.0,
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 1681725751032.3738,
-   "NPV3_to_2341_USD2041": -1141773025410.2808
+   "NPV3_to_2341_USD2041": -1141773025410.2808,
+   "repaid": 2152,
+   "funders_IRR_to_2341": 0.014119285132197512
   },
   "low:central:U": {
    "residents_2241": 12500.0,
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 1172756395403.4968,
-   "NPV3_to_2341_USD2041": -171207990455.33066
+   "NPV3_to_2341_USD2041": -171207990455.33066,
+   "repaid": 2092,
+   "funders_IRR_to_2341": 0.026660059431651395
   },
   "low:fast:U": {
    "residents_2241": 811429.9092123442,
    "residents_2341": 6680728.645061145,
    "plan_reached": 2337,
    "funding_needed_USD2041": 983360596404.7994,
-   "NPV3_to_2341_USD2041": 116074569019.29964
+   "NPV3_to_2341_USD2041": 116074569019.29964,
+   "repaid": 2081,
+   "funders_IRR_to_2341": 0.03297147323152749
   },
   "central:static:U": {
    "residents_2241": 12500.0,
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 1764833128157.059,
-   "NPV3_to_2341_USD2041": -1156283506989.1426
+   "NPV3_to_2341_USD2041": -1156283506989.1426,
+   "repaid": 2144,
+   "funders_IRR_to_2341": 0.013057240504463885
   },
   "central:slow:U": {
    "residents_2241": 716885.8901070855,
    "residents_2341": 5906854.765592881,
    "plan_reached": null,
    "funding_needed_USD2041": 2356377548822.829,
-   "NPV3_to_2341_USD2041": 1224485672.266593
+   "NPV3_to_2341_USD2041": 1224485672.266593,
+   "repaid": 2108,
+   "funders_IRR_to_2341": 0.030008123146943233
   },
   "central:central:U": {
    "residents_2241": 11368864.334828304,
    "residents_2341": 20096422.522651877,
    "plan_reached": 2142,
    "funding_needed_USD2041": 1772780832220.7537,
-   "NPV3_to_2341_USD2041": 785523192313.3423
+   "NPV3_to_2341_USD2041": 785523192313.3423,
+   "repaid": 2081,
+   "funders_IRR_to_2341": 0.039279675055443275
   },
   "central:fast:U": {
    "residents_2241": 15284462.253936414,
    "residents_2341": 30244580.849667635,
    "plan_reached": 2115,
    "funding_needed_USD2041": 1610241624368.357,
-   "NPV3_to_2341_USD2041": 1293247506419.5693
+   "NPV3_to_2341_USD2041": 1293247506419.5693,
+   "repaid": 2072,
+   "funders_IRR_to_2341": 0.05002983029565511
   },
   "high:static:U": {
    "residents_2241": 12500.0,
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 1750256729548.9263,
-   "NPV3_to_2341_USD2041": -296768168789.01215
+   "NPV3_to_2341_USD2041": -296768168789.01215,
+   "repaid": 2095,
+   "funders_IRR_to_2341": 0.026233997481484805
   },
   "high:slow:U": {
    "residents_2241": 17792255.105160844,
    "residents_2341": 64045134.58319319,
    "plan_reached": 2162,
    "funding_needed_USD2041": 7787390232141.739,
-   "NPV3_to_2341_USD2041": 8095555750711.821
+   "NPV3_to_2341_USD2041": 8095555750711.821,
+   "repaid": 2097,
+   "funders_IRR_to_2341": 0.04672066366299543
   },
   "high:central:U": {
    "residents_2241": 12309816.142919414,
    "residents_2341": 20194004.06313712,
    "plan_reached": 2111,
    "funding_needed_USD2041": 3920019825770.099,
-   "NPV3_to_2341_USD2041": 26984801809823.477
+   "NPV3_to_2341_USD2041": 26984801809823.477,
+   "repaid": 2076,
+   "funders_IRR_to_2341": 0.06779022885290165
   },
   "high:fast:U": {
    "residents_2241": 12500.0,
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 3590517485813.0405,
-   "NPV3_to_2341_USD2041": 2226014408478.0234
+   "NPV3_to_2341_USD2041": 2226014408478.0234,
+   "repaid": 2059,
+   "funders_IRR_to_2341": 0.08003773160854688
   },
   "low:static:dollar": {
    "residents_2241": 12500.0,
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 3603301895127.0425,
-   "NPV3_to_2341_USD2041": -1798495431996.5034
+   "NPV3_to_2341_USD2041": -1798495431996.5034,
+   "repaid": null,
+   "funders_IRR_to_2341": -0.02865088712500302
   },
   "low:slow:dollar": {
    "residents_2241": 12500.0,
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 1675064873566.4487,
-   "NPV3_to_2341_USD2041": -1114367743442.1619
+   "NPV3_to_2341_USD2041": -1114367743442.1619,
+   "repaid": 2149,
+   "funders_IRR_to_2341": 0.014556124876180854
   },
   "low:central:dollar": {
    "residents_2241": 12500.0,
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 1149973798099.175,
-   "NPV3_to_2341_USD2041": -131920869542.8551
+   "NPV3_to_2341_USD2041": -131920869542.8551,
+   "repaid": 2091,
+   "funders_IRR_to_2341": 0.027426970181945953
   },
   "low:fast:dollar": {
    "residents_2241": 448629.71491532784,
    "residents_2341": 2895825.728755999,
    "plan_reached": null,
    "funding_needed_USD2041": 916700485008.0251,
-   "NPV3_to_2341_USD2041": 173058036366.843
+   "NPV3_to_2341_USD2041": 173058036366.843,
+   "repaid": 2080,
+   "funders_IRR_to_2341": 0.034375034307016716
   },
   "central:static:dollar": {
    "residents_2241": 12500.0,
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 1750152974264.0815,
-   "NPV3_to_2341_USD2041": -1118699076280.5747
+   "NPV3_to_2341_USD2041": -1118699076280.5747,
+   "repaid": 2140,
+   "funders_IRR_to_2341": 0.013676491683678127
   },
   "central:slow:dollar": {
    "residents_2241": 1083058.2081935282,
    "residents_2341": 7479510.475267137,
    "plan_reached": 2318,
    "funding_needed_USD2041": 2336341534070.159,
-   "NPV3_to_2341_USD2041": 1782310.9926203378
+   "NPV3_to_2341_USD2041": 1782310.9926203378,
+   "repaid": 2108,
+   "funders_IRR_to_2341": 0.030000012001619836
   },
   "central:central:dollar": {
    "residents_2241": 10015022.094734872,
    "residents_2341": 16191683.263338631,
    "plan_reached": 2150,
    "funding_needed_USD2041": 1653726383801.254,
-   "NPV3_to_2341_USD2041": 1296868672334.7756
+   "NPV3_to_2341_USD2041": 1296868672334.7756,
+   "repaid": 2079,
+   "funders_IRR_to_2341": 0.04481957919712409
   },
   "central:fast:dollar": {
    "residents_2241": 6524432.1373340655,
    "residents_2341": 6572392.169694178,
    "plan_reached": 2123,
    "funding_needed_USD2041": 1278621245884.299,
-   "NPV3_to_2341_USD2041": 2257175058863.045
+   "NPV3_to_2341_USD2041": 2257175058863.045,
+   "repaid": 2070,
+   "funders_IRR_to_2341": 0.059554049588439795
   },
   "high:static:dollar": {
    "residents_2241": 12500.0,
    "residents_2341": 12500.0,
    "plan_reached": null,
    "funding_needed_USD2041": 1625437782674.8425,
-   "NPV3_to_2341_USD2041": -203243336642.53888
+   "NPV3_to_2341_USD2041": -203243336642.53888,
+   "repaid": 2094,
+   "funders_IRR_to_2341": 0.027435111991147232
   },
   "high:slow:dollar": {
    "residents_2241": 15819161.720609145,
    "residents_2341": 50534887.41779203,
    "plan_reached": 2164,
    "funding_needed_USD2041": 7010907560537.942,
-   "NPV3_to_2341_USD2041": 9457789284432.87
+   "NPV3_to_2341_USD2041": 9457789284432.87,
+   "repaid": 2095,
+   "funders_IRR_to_2341": 0.04908984040422093
   },
   "high:central:dollar": {
    "residents_2241": 12342905.050024843,
    "residents_2341": 20137906.717256404,
    "plan_reached": 2109,
    "funding_needed_USD2041": 3411685815486.505,
-   "NPV3_to_2341_USD2041": 27272783882009.703
+   "NPV3_to_2341_USD2041": 27272783882009.703,
+   "repaid": 2076,
+   "funders_IRR_to_2341": 0.06826545464181455
   },
   "high:fast:dollar": {
    "residents_2241": 269961.0834307548,
    "residents_2341": 1337508.506321007,
    "plan_reached": null,
    "funding_needed_USD2041": 2458526525360.649,
-   "NPV3_to_2341_USD2041": 5152044978692.873
+   "NPV3_to_2341_USD2041": 5152044978692.873,
+   "repaid": 2059,
+   "funders_IRR_to_2341": 0.09750215329967704
   }
  }
 }

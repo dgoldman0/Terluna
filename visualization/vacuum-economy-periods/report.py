@@ -70,12 +70,16 @@ def end_label(ax, x, y, text, color, dy=0.0):
 
 def figures(p, out):
     drawn = {}
+    K = p['USD2041_in_USD2026'] / 1e12    # trillions of dollars of 2026, from the model's unit
     base, dollar, ramp = p['paths']['base']['series'], p['paths']['dollar']['series'], p['paths']['ramp']['series']
 
     # 1. Residents.
     fig, ax = plt.subplots(figsize=(W, 2.9))
-    for s, label, color, dash in ((ramp, "The programme's ramp, carried on", S[2], (4, 2)), (dollar, 'Growth as a result, dollars alone', S[1], ()),
-                                  (base, 'Growth as a result, U (base case)', S[0], ())):
+    # The plan's pace held at the plan is the programme's ramp to 2241 and 6.47 million after it (returns_by_path).
+    planned = 6.47e6
+    held = dict(residents=[min(x, planned) for x in ramp['residents']])
+    for s, label, color, dash in ((held, "The plan's pace, holding at the plan", S[2], (4, 2)), (dollar, 'The base case in dollars alone', S[1], ()),
+                                  (base, 'The base case: growing as fast as the account allows, with U', S[0], ())):
         n = [x if x > 0 else None for x in s['residents']]
         ax.plot(YEARS, n, color=color, dashes=dash, label=label)
     ax.set_yscale('log')
@@ -84,21 +88,23 @@ def figures(p, out):
     ax.set_xlim(2041, 2341)
     ax.axhline(6.47e6, color=AXIS, lw=0.6)
     ax.annotate('The plan, 6.47 million', (2045, 6.47e6), xytext=(0, 3), textcoords='offset points', color=MUTED, fontsize=7.5)
-    for s, color, dy in ((base, S[0], 5), (dollar, S[1], -5), (ramp, S[2], 0)):
+    for s, color, dy in ((base, S[0], 5), (dollar, S[1], -5), (held, S[2], 0)):
         end_label(ax, 2341, s['residents'][-1], millions(s['residents'][-1], None), color, dy)
     ax.legend(loc='upper left')
     ax.set_ylabel('Residents')
-    save(fig, out, 'residents', drawn, dict(base=base['residents'][::10], dollar=dollar['residents'][::10], ramp=ramp['residents'][::10]))
+    save(fig, out, 'residents', drawn, dict(base=base['residents'][::10], dollar=dollar['residents'][::10], held=held['residents'][::10]))
 
     # 2. The funders' position.
     fig, ax = plt.subplots(figsize=(W, 2.6))
+    # The years that decide the funders' return: the build, the deepest point and repayment, to 2100.
+    early = [y for y in YEARS if y <= 2100]
     for s, label, color in ((dollar, 'Dollars alone', S[1]), (base, 'U (base case)', S[0])):
-        ax.plot(YEARS, [x / 1e12 for x in s['funders_cumulative']], color=color, label=label)
+        ax.plot(early, [x * K for x in s['funders_cumulative'][:len(early)]], color=color, label=label)
     ax.axhline(0, color=AXIS, lw=0.8)
-    ax.set_xlim(2041, 2341)
-    ax.set_ylabel("Funders' cumulative position,\ntrillions of 2041 dollars")
+    ax.set_xlim(2041, 2100)
+    ax.set_ylabel("Funders' cumulative position,\ntrillions of 2026 dollars")
     ax.legend(loc='upper left')
-    save(fig, out, 'funders', drawn, dict(base=[x / 1e12 for x in base['funders_cumulative'][::10]], dollar=[x / 1e12 for x in dollar['funders_cumulative'][::10]]))
+    save(fig, out, 'funders', drawn, dict(base=[x * K for x in base['funders_cumulative'][:len(early):5]], dollar=[x * K for x in dollar['funders_cumulative'][:len(early):5]]))
 
     # 3. U's rate and the reserve.
     fig, (a1, a2) = plt.subplots(2, 1, figsize=(W, 3.6), sharex=True, gridspec_kw=dict(height_ratios=(1, 1.3)))
@@ -106,14 +112,14 @@ def figures(p, out):
     a1.axhline(0.75, color=S[7], lw=0.8, dashes=(3, 2))
     a1.annotate('Floor, 75% of par', (2045, 0.75), xytext=(0, 3), textcoords='offset points', color=INK2, fontsize=7.5)
     a1.set_ylim(0.6, 1.05)
-    a1.set_ylabel("U's rate,\ndollars a U")
-    a2.plot(YEARS, [x / 1e12 for x in base['u_reserve']], color=S[0], label='Reserve')
-    a2.plot(YEARS, [x / 1e12 for x in base['u_run_need']], color=S[1], label='What the run test asks')
-    a2.set_ylabel('Trillions of\n2041 dollars')
+    a1.set_ylabel("U's value,\ndollars a U")
+    a2.plot(YEARS, [x * K for x in base['u_reserve']], color=S[0], label='Reserve')
+    a2.plot(YEARS, [x * K for x in base['u_run_need']], color=S[1], label='What the run test asks')
+    a2.set_ylabel('Trillions of\n2026 dollars')
     a2.set_xlim(2041, 2341)
     a2.legend(loc='upper left')
-    save(fig, out, 'rate_reserve', drawn, dict(rate=base['u_rate'][::10], reserve=[x / 1e12 for x in base['u_reserve'][::10]],
-                                               run_need=[x / 1e12 for x in base['u_run_need'][::10]]))
+    save(fig, out, 'rate_reserve', drawn, dict(rate=base['u_rate'][::10], reserve=[x * K for x in base['u_reserve'][::10]],
+                                               run_need=[x * K for x in base['u_run_need'][::10]]))
 
     # 4. Payments to Earth and receipts from Earth, by kind.
     pay_labels = [('residents_purchases', "Residents' purchases from Earth"), ('partners_and_services', "Partners' and services' shares of sales"),
@@ -123,18 +129,20 @@ def figures(p, out):
                   ('institutions', ('institutions',), 'Hosted research and professional work'),
                   ('depot', ('propellant', 'materials', 'metals'), 'Propellant, material and metals')]
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(W, 3.7), sharey=True)
-    ys = [[x / 1e12 for x in base['payments'][k]] for k, _ in pay_labels]
+    ys = [[x * K for x in base['payments'][k]] for k, _ in pay_labels]
     a1.stackplot(YEARS, *ys, colors=S[:5], labels=[l for _, l in pay_labels], edgecolor=SURFACE, linewidth=0.4)
     a1.set_title('Paid to Earth', loc='left', color=INK)
-    rs = [[sum(base['receipts_by_line'][k][i] for k in keys) / 1e12 for i in range(len(YEARS))] for _, keys, _ in rec_groups]
+    rs = [[sum(base['receipts_by_line'][k][i] for k in keys) * K for i in range(len(YEARS))] for _, keys, _ in rec_groups]
     a2.stackplot(YEARS, *rs, colors=S[:5], labels=[l for _, _, l in rec_groups], edgecolor=SURFACE, linewidth=0.4)
+    # The whole of what is paid to Earth, drawn over the receipts, so that the gap between the two reads directly.
+    a2.plot(YEARS, [sum(y[i] for y in ys) for i in range(len(YEARS))], color=INK, lw=1.0, label='Paid to Earth, in total')
     a2.set_title("Received from Earth's customers", loc='left', color=INK)
-    a1.set_ylabel('Trillions of 2041 dollars a year')
+    a1.set_ylabel('Trillions of 2026 dollars a year')
     for a in (a1, a2):
         a.set_xlim(2041, 2341)
         handles, labels = a.get_legend_handles_labels()     # listed from the top band down, as the stack reads
         a.legend(handles[::-1], labels[::-1], loc='upper left', bbox_to_anchor=(0, -0.11), fontsize=7, handlelength=1.2, borderaxespad=0)
-    save(fig, out, 'flows', drawn, dict(paid={k: [x / 1e12 for x in base['payments'][k][::10]] for k, _ in pay_labels},
+    save(fig, out, 'flows', drawn, dict(paid={k: [x * K for x in base['payments'][k][::10]] for k, _ in pay_labels},
                                         received={k: [r[i] for i in range(0, len(YEARS), 10)] for (k, _, _), r in zip(rec_groups, rs)}))
 
     # 5. Sensitivities, as the change in residents by 2341.
@@ -189,12 +197,12 @@ def figures(p, out):
     hold = [('working_balances', 'Working balances'), ('holders_for_use', 'Holders for use'), ('funders', 'The funders'),
             ('bonds', "Investors' bonds")]
     fig, ax = plt.subplots(figsize=(W, 2.5))
-    ax.stackplot(YEARS, *[[x / 1e12 for x in base['holdings_USD'][k]] for k, _ in hold], colors=S[:5], labels=[l for _, l in hold],
+    ax.stackplot(YEARS, *[[x * K for x in base['holdings_USD'][k]] for k, _ in hold], colors=S[:5], labels=[l for _, l in hold],
                  edgecolor=SURFACE, linewidth=0.4)
     ax.set_xlim(2041, 2341)
-    ax.set_ylabel('Trillions of 2041 dollars')
+    ax.set_ylabel('Trillions of 2026 dollars')
     ax.legend(loc='upper left')
-    save(fig, out, 'holdings', drawn, {k: [x / 1e12 for x in base['holdings_USD'][k][::10]] for k, _ in hold})
+    save(fig, out, 'holdings', drawn, {k: [x * K for x in base['holdings_USD'][k][::10]] for k, _ in hold})
     return drawn
 
 

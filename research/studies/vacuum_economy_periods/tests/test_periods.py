@@ -433,3 +433,23 @@ def test_the_returns_by_growth_path_come_from_their_paths():
         assert paths[name]['residents_2341'] == pytest.approx(run.planned())
     assert paths['base']['funders_IRR_to_2341'] == base['measures']['funders_IRR_to_2341']
     assert paths['base']['residents_2341'] > run.planned()
+
+
+def test_the_funders_outcome_in_every_case_comes_from_the_case_and_the_account_adds_up_by_period():
+    """Each grid cell's repayment year and rate of return are those of its own solved schedule; the base case's flows by
+    period add up to its whole run; the funding to the end of the opening year is what it pays Earth less its receipts,
+    with the reserve U holds by then; and the trade effects grow worse with a larger fall in Earth's purchases."""
+    from research.studies.vacuum_economy_periods import scoping
+    saved = json.loads((HERE / 'results/scoping.json').read_text())
+    cases = {c['name']: c for c in json.loads((HERE / 'results/periods.json').read_text())['cases']}
+    cell, case = saved['grid']['low:central:U'], cases['low:central:steady']
+    fresh = scoping.outcome('low', 'central', scoping.saved_schedule(case), case['options'])
+    assert cell['repaid'] == fresh['repaid']
+    assert cell['funders_IRR_to_2341'] == pytest.approx(fresh['funders_IRR_to_2341'], abs=1e-9)
+    base = saved['paths']['base']['series']
+    assert sum(p['funders_flow'] for p in saved['base_periods']) == pytest.approx(base['funders_cumulative'][-1], rel=1e-9)
+    f = saved['founding_capital']
+    assert f['funding'] == pytest.approx(sum(f['paid_to_Earth_by_kind'].values()) - f['receipts'] + f['reserve_at_end'], rel=0.01)
+    residents = [t['residents_2341'] for t in saved['trade_effect']]
+    assert residents == sorted(residents, reverse=True)
+    assert saved['USD2041_in_USD2026'] == pytest.approx(1 / 1.557967416600765)

@@ -17,6 +17,7 @@ import json
 from pathlib import Path
 
 from . import economy, run, technology
+from .designs import inputs, v
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -37,7 +38,7 @@ SENSITIVITIES = (
     ('Technology', 'slow', 'central:slow:steady', 'fast', 'central:fast:steady'),
     ("Earth's demand", 'low', 'low:central:steady', 'high', 'high:central:steady'),
     ("Share of residents' pay spent on Earth", '20%', (('share_spent_on_Earth', 0.2),), '5%', (('share_spent_on_Earth', 0.05),)),
-    ("Floor on U's rate", 'par', 'central:central:steady:U_liberal:floor_1', '50%', 'central:central:steady:U_liberal:floor_0.5'),
+    ("Floor on U's value", 'par', 'central:central:steady:U_liberal:floor_1', '50%', 'central:central:steady:U_liberal:floor_0.5'),
     ('Money', 'dollars alone', 'central:central:steady:dollar', None, None),
     ('Policy of U', 'conservative', 'central:central:steady:U_conservative:floor_0.75', None, None),
     ("Earth's purchases when paid in U", '10% fewer', 'central:central:steady:U_liberal:trade_effect_-0.1', None, None),
@@ -49,7 +50,7 @@ SENSITIVITIES = (
     ('Bonds', 'one-year', 'central:central:steady:U_liberal:bond_term_1', None, None),
     ("Investors' premium for a new currency", '1 point', 'central:central:steady:U_liberal:investor_premium_0.01', None, None),
     ('Metals in the reserve', 'none', 'central:central:steady:U_liberal:metal_share_0', None, None),
-    ("The funders' backstop", 'none', 'central:central:steady:U_liberal:no_backstop', None, None),
+    ("The funders' credit line", 'none', 'central:central:steady:U_liberal:no_backstop', None, None),
     ("Water set aside on the sources", 'none', 'central:central:steady:whole_pool', None, None),
     ('Computing contracted at the opening', '1 GW', (('computing_W_2049', 1e9),), '20 GW', (('computing_W_2049', 2e10),)),
     ("Visits' response to their price", '0.5', (('visits_price_elasticity', 0.5),), '2', (('visits_price_elasticity', 2.0),)),
@@ -59,6 +60,27 @@ SENSITIVITIES = (
 GROUP_LABELS = {'launch': 'Launch from Earth and the Moon', 'tugs_and_sources': 'Tugs and water from the sources', 'power': 'Power',
                 'industry': 'Local industry, equipment and output per job', 'food_and_life_support': 'Food and life support',
                 'computing': 'Computation per watt'}
+
+# Earth's purchases from the zone when paid in U, a tenth (the product's case), a quarter and a half fewer at full
+# settlement: the evidence on partners leaving a shared currency runs from no fall to about a half.
+TRADE_EFFECTS = ((0.1, 'central:central:steady:U_liberal:trade_effect_-0.1'), (0.25, (('u_trade_effect', -0.25),)),
+                 (0.5, (('u_trade_effect', -0.5),)))
+
+# The base case's account in periods: the build, the opening decade, the years to repayment and after.
+PERIODS = ((0, 8), (8, 20), (20, 45), (45, 100), (100, 200), (200, run.HORIZON + 1))
+
+
+def outcome(scenario, tcase, sched, options):
+    """The funders' measures of one schedule of residents: the year they are repaid, the funding needed and the rate of
+    return of their flows."""
+    m = measures(economy.Run(scenario, tcase, schedule=sched, **dict(options)).simulate())
+    return dict(repaid=m['repaid'], funding_needed_USD2041=m['funding_needed_USD2041'], funders_IRR_to_2341=m['funders_IRR_to_2341'])
+
+
+def saved_schedule(case):
+    """A saved case's schedule of residents, rebuilt from its solved growth rates."""
+    g = case['growth_rates']
+    return run.steady_schedule(g['to_plan'], g['past_plan'])
 
 
 def irr(flows):
@@ -129,7 +151,7 @@ def product():
     if saved['producer']['sha256'] != digest(HERE / 'run.py') or saved['dependencies'] != run.dependencies():
         raise RuntimeError('results/periods.json is stale; run `python3 -m research.studies.vacuum_economy_periods.run --write` first')
     cases = {c['name']: c for c in saved['cases']}
-    paths = {}
+    paths, base_rows = {}, None
     for name, scenario, tcase, ramp, opts in (('base', 'central', 'central', 'steady', ()),
                                               ('dollar', 'central', 'central', 'steady', (('u_policy', 'dollar'),)),
                                               ('ramp', 'central', 'central', 'constant_growth', ()),
@@ -137,6 +159,19 @@ def product():
         rows, rates = run.case_rows(scenario, tcase, ramp, opts)
         paths[name] = dict(scenario=scenario, technology=tcase, ramp=ramp, options=dict(opts), growth_rates=rates,
                            measures=measures(rows), series=series(rows))
+        if name == 'base':
+            base_rows = rows
+    # The base case's account by period, and what the funding to the end of the opening year buys, by kind of payment
+    # to Earth, with the reserve U holds by then.
+    flows = [r.get('funders_flow', r['net']) for r in base_rows]
+    periods = [dict(first=2041 + a, last=2040 + b, funders_flow=sum(flows[a:b]), net=sum(r['net'] for r in base_rows[a:b]),
+                    receipts=sum(r['receipts'] for r in base_rows[a:b]), paid_to_Earth=sum(r['paid_to_Earth'] for r in base_rows[a:b]))
+               for a, b in PERIODS]
+    build = base_rows[:economy.OPENING + 1]
+    kinds = sorted({k for r in build for k in r['to_Earth']})
+    founding = dict(years=[2041, 2041 + economy.OPENING], paid_to_Earth_by_kind={k: sum(r['to_Earth'].get(k, 0.0) for r in build) for k in kinds},
+                    receipts=sum(r['receipts'] for r in build), reserve_at_end=build[-1].get('u_reserve', 0.0),
+                    funding=-sum(flows[:economy.OPENING + 1]))
     # What the funders earn depends on how fast the settlements grow, since growth is paid for from the account with
     # Earth: the programme's ramp held at the plan, the base case's growth to the plan held there, and the base case.
     to_plan = paths['base']['growth_rates']['to_plan']
@@ -157,13 +192,16 @@ def product():
             if case is None:
                 continue
             if isinstance(case, str):
-                residents = cases[case]['summary']['residents'][str(run.HORIZON)]
+                c = cases[case]
+                residents = c['summary']['residents'][str(run.HORIZON)]
                 source = case
+                fund = outcome(c['scenario'], c['technology'], saved_schedule(c), c['options'])
             else:
                 rates, sched = run.solve('central', 'central', 'steady', tuple(sorted(case)))
                 residents = sched[run.HORIZON]
                 source = dict(case)
-            ends.append(dict(setting=name, residents_2341=residents, change=residents - base, source=source))
+                fund = outcome('central', 'central', sched, case)
+            ends.append(dict(setting=name, residents_2341=residents, change=residents - base, source=source, **fund))
         swings.append(dict(input=label, ends=ends))
     swings.sort(key=lambda s: -max(abs(e['change']) for e in s['ends']))
     groups = []
@@ -185,10 +223,23 @@ def product():
             for tcase in ('static', 'slow', 'central', 'fast'):
                 c = cases['%s:%s:steady%s' % (scenario, tcase, policy)]
                 s = c['summary']
+                fund = outcome(scenario, tcase, saved_schedule(c), c['options'])
                 grid['%s:%s%s' % (scenario, tcase, policy or ':U')] = dict(
                     residents_2241=s['residents'].get('200'), residents_2341=s['residents'].get(str(run.HORIZON)),
                     plan_reached=None if s['plan_reached_year'] is None else 2041 + s['plan_reached_year'],
-                    funding_needed_USD2041=s['funding_needed_USD2041'], NPV3_to_2341_USD2041=s['NPV_USD2041']['0.03'][str(run.HORIZON)])
+                    funding_needed_USD2041=s['funding_needed_USD2041'], NPV3_to_2341_USD2041=s['NPV_USD2041']['0.03'][str(run.HORIZON)],
+                    repaid=fund['repaid'], funders_IRR_to_2341=fund['funders_IRR_to_2341'])
+    trade = []
+    for fewer, case in TRADE_EFFECTS:
+        if isinstance(case, str):
+            c = cases[case]
+            sched, residents = saved_schedule(c), c['summary']['residents'][str(run.HORIZON)]
+            fund = outcome('central', 'central', sched, c['options'])
+        else:
+            rates, sched = run.solve('central', 'central', 'steady', case)
+            residents = sched[run.HORIZON]
+            fund = outcome('central', 'central', sched, case)
+        trade.append(dict(purchases_fewer=fewer, residents_2341=residents, change=residents - base, **fund))
     return dict(
         schema=SCHEMA, producer=dict(path=str((HERE / 'scoping.py').relative_to(ROOT)), sha256=digest(HERE / 'scoping.py')),
         dependencies=dict(run.dependencies(), **{str(PRODUCT.relative_to(ROOT)): digest(PRODUCT)}),
@@ -204,8 +255,16 @@ def product():
                       'residents as a result for each demand and technology, under the default policy of U (:U) and in dollars '
                       'alone (:dollar). returns_by_path gives the funders\' measures for three growth paths on central demand '
                       'and technology: the programme\'s ramp held at the plan, the base case\'s growth to the plan held there, '
-                      'and the base case growing past it.'),
-        paths=paths, returns_by_path=returns, sensitivities=swings, technology_groups=groups, grid=grid)
+                      'and the base case growing past it. Each sensitivity end and grid cell also gives the year the funders '
+                      'are repaid and the rate of return of their flows. trade_effect gives the base case with Earth\'s '
+                      'purchases a tenth, a quarter and a half fewer when paid in U. base_periods sums the base case\'s '
+                      'flows by period, and founding_capital gives what the funding to the end of the opening year (2049) '
+                      'pays Earth for, by kind, with the receipts of the opening year and the reserve U holds by then. '
+                      'USD2041_in_USD2026 converts the model\'s unit, dollars of 2026 carried forward at 3% a year to 2041, '
+                      'back to dollars of 2026.'),
+        USD2041_in_USD2026=1.0 / v(inputs()['money']['USD2026_to_USD2041']),
+        paths=paths, returns_by_path=returns, base_periods=periods, founding_capital=founding, trade_effect=trade,
+        sensitivities=swings, technology_groups=groups, grid=grid)
 
 
 def main():
