@@ -661,6 +661,14 @@ def districts_layer(record_path, rotation):
     tex[..., 0], tex[..., 1], tex[..., 2] = district >> 8, district & 0xFF, page_region[region]
     tex = np.roll(tex, tex.shape[1] // 2, axis=1)
     turned = appearance.turn_texture(tex, rotation, left_lon=-180.0, nearest=True)
+    return turned, districts_data(record), Path(record_path), product
+
+
+def districts_data(record):
+    """The page's lists of regions, districts and coastal seas from a districts record: each unit's name, its meaning,
+    code, tongue, label point, area, short description and links, indexed as the districts texture holds them."""
+    regions = record['regions']
+    units = record['districts'] + record['coastal_seas']
     index = {u['code']: k + 1 for k, u in enumerate(units)}
     tongue = {k: t['label'] for k, t in record['tongues'].items()}
     tongue_where = {t['label']: t.get('where', '') for t in record['tongues'].values()}
@@ -668,7 +676,7 @@ def districts_layer(record_path, rotation):
     unit = lambda u, kind: dict(
         index=index.get(u['code'], 0), code=u['code'], name=u['name'], kind=kind, tongue=tongue[u['tongue']],
         lat=u['at']['turned'][0], lon=u['at']['turned'][1], area=u['area_km2'], description=u['description'],
-        region=region_name.get(u.get('region'), ''),
+        region=region_name.get(u.get('region'), ''), meaning=u.get('name_meaning', ''),
         links=[index[c] for c in (u.get('faces', []) + u.get('fed_by', []) + u.get('coasts', [])) if c in index][:7])
     data = dict(regions=[unit(r, 'region') | dict(index=0, sea=r['kind'] == 'sea', meaning=r.get('name_meaning', ''))
                          for r in regions],
@@ -676,7 +684,38 @@ def districts_layer(record_path, rotation):
                 + [unit(c, 'coast') for c in record['coastal_seas']],
                 summary=record['summary'], tongues={l: f'{l} for {w}' if w else l for l, w in tongue_where.items()},
                 coined=record.get('terlunan_coined', {}))
-    return turned, data, Path(record_path), product
+    return data
+
+
+DATA_OPEN, DATA_CLOSE = '<script id="atlas-data" type="application/json">', '</script>'
+
+
+def rename_page(page_path, record_path):
+    """The built page's regions, districts and coastal seas renamed from a districts record, its textures kept: the
+    record must hold the units the page drew, in the same order, so that the districts texture's indices still hold.
+    A rename then needs no rebuild, only the page republished."""
+    page = Path(page_path).read_text()
+    start = page.index(DATA_OPEN) + len(DATA_OPEN)
+    end = page.index(DATA_CLOSE, start)
+    data = json.loads(page[start:end])
+    if 'districts' not in data:
+        raise SystemExit(f'{page_path} draws no districts to rename')
+    record = json.loads(Path(record_path).read_text())
+    new = districts_data(record)
+    for key in ('regions', 'districts'):
+        if [u['code'] for u in new[key]] != [u['code'] for u in data['districts'][key]]:
+            raise SystemExit(f'{record_path} holds other {key} than the page drew; build the page again')
+    if record['product']['sha256'] != (data['districts'].get('product_sha256') or record['product']['sha256']):
+        raise SystemExit(f'{record_path} names another grid than the page drew; build the page again')
+    data['districts'] = dict(new, product_sha256=record['product']['sha256'])
+    marker = "Regions and districts: the atlas round's first draft (districts.json "
+    at = data['provenance'].find(marker)
+    if at >= 0:
+        at += len(marker)
+        data['provenance'] = data['provenance'][:at] + digest(record_path)[:12] + data['provenance'][at + 12:]
+    page = page[:start] + json.dumps(data, ensure_ascii=False) + page[end:]
+    Path(page_path).write_text(page)
+    return dict(renamed=len(new['regions']) + len(new['districts']), page_bytes=len(page.encode()))
 
 
 def work_marks(summary, grid, level0, rotation):
@@ -939,7 +978,7 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
     if districts and truly:
         texture, layer, rec_path, product = districts_layer(districts, rotation)
         data['textures']['districts'] = texture_file('districts', texture)
-        data['districts'] = layer
+        data['districts'] = dict(layer, product_sha256=digest(product))
         data['provenance'] += (f" Regions and districts: the atlas round's first draft (districts.json "
                                f"{digest(rec_path)[:12]}, its grid {digest(product)[:12]}).")
         sources.update(districts=rec_path, districts_grid=product)
@@ -979,7 +1018,15 @@ def main(argv=None):
     parser.add_argument('--wind', type=Path, help="with --moisture, the climate domain's surface wind of the climatology's "
                                                   'run and years (products/surface_wind_<run>_y<years>.npz): the sea\'s '
                                                   'slopes, and so its glint and its reflected sky, from the winds')
+    parser.add_argument('--names-only', action='store_true',
+                        help="with --districts: rename the built page's regions, districts and coastal seas from the "
+                             'record, its textures kept (out/globe.html)')
     args = parser.parse_args(argv)
+    if args.names_only:
+        if not args.districts:
+            raise SystemExit('--names-only needs --districts')
+        print(json.dumps(rename_page(OUT / 'globe.html', args.districts.absolute())))
+        return 0
     if args.surface:
         if not args.surface_record:
             raise SystemExit('--surface needs --surface-record')
