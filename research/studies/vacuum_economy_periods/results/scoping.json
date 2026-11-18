@@ -2,7 +2,7 @@
  "schema": "terluna.research.vacuum-economy-periods.scoping/1",
  "producer": {
   "path": "research/studies/vacuum_economy_periods/scoping.py",
-  "sha256": "bce6849e179758396cb042742d29c0ce608c08a20cd09cf8c076cbce3c068a70"
+  "sha256": "209ef1ac3b4132ff963e3241aee39de2d5f2b35c66eadfd2cc8a37d24b0aad5d"
  },
  "dependencies": {
   "research/studies/vacuum_economy_periods/run.py": "46458516cbaa06590e0a25a7029acb256621b378133864b03c54660f5ce69074",
@@ -35590,7 +35590,7 @@
    "input": "Water set aside on the sources",
    "ends": [
     {
-     "setting": "none",
+     "setting": "0%",
      "residents_2341": 24387853.1959364,
      "change": 4291430.673284523,
      "source": "central:central:steady:whole_pool",
@@ -35696,7 +35696,7 @@
    "input": "Funders' returns paid in U",
    "ends": [
     {
-     "setting": "none",
+     "setting": "all in dollars",
      "residents_2341": 19626943.82984216,
      "change": -469478.69280971587,
      "source": "central:central:steady:U_liberal:funders_paid_in_U_0",
@@ -35710,7 +35710,7 @@
    "input": "Holders' spending of their U in the zone",
    "ends": [
     {
-     "setting": "none",
+     "setting": "0%",
      "residents_2341": 19626943.82984216,
      "change": -469478.69280971587,
      "source": "central:central:steady:U_liberal:spending_share_0",
@@ -35733,7 +35733,7 @@
    "input": "Metals in the reserve",
    "ends": [
     {
-     "setting": "none",
+     "setting": "0%",
      "residents_2341": 19664245.256899036,
      "change": -432177.2657528408,
      "source": "central:central:steady:U_liberal:metal_share_0",
@@ -35775,7 +35775,7 @@
    "input": "The funders' credit line",
    "ends": [
     {
-     "setting": "none",
+     "setting": "removed",
      "residents_2341": 20096422.522651877,
      "change": 0.0,
      "source": "central:central:steady:U_liberal:no_backstop",
