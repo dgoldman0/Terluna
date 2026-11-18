@@ -2,7 +2,7 @@
  "schema": "terluna.research.atlas-round-region-profiles/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/region_profiles.py": "0ef13727fcbb66e681bb530a060b58a0a1241bc772d902207a1a796a128990fd"
+   "research/studies/atlas_round/region_profiles.py": "8e48a68c8598d7effe31ed872ebe58b97538b400971c689a852ef6fb215db46e"
   }
  },
  "inputs": {
@@ -27,6 +27,10 @@
   "relative_tolerance": 0.2,
   "side_share": 0.95
  },
+ "common_level_seas": [
+  "sea:South Pole–Aitken Sea",
+  "sea:Mare Humboldtianum"
+ ],
  "districts_product": "12dfcde94c4257a746a4e58dd237e5f738d4665c00a7083183087f8cc99a0d0e",
  "regions": [
   {
@@ -102,9 +106,9 @@
     "zone_humid": 0.032
    },
    "figures": {
-    "area": "897,000 km²",
-    "waters": "144,000 km²",
-    "lake_area": "0 km²",
+    "area": "897,000 km²",
+    "waters": "144,000 km²",
+    "lake_area": "0 km²",
     "districts": "15",
     "land_pieces": "49",
     "falls": "0",
@@ -120,27 +124,27 @@
     "earth_share": "92%",
     "ice_share": "0%",
     "drains_main_share": "91%",
-    "river": "0 m³/s",
-    "relief": "1,700 m",
-    "highest": "4,700 m",
-    "mean_height": "1,000 m",
-    "coast_depth": "470 m",
+    "river": "0 m³/s",
+    "relief": "1,700 m",
+    "highest": "4,700 m",
+    "mean_height": "1,000 m",
+    "coast_depth": "470 m",
     "earth": "16°",
     "earth_low": "−7°",
     "earth_high": "37°",
-    "air": "27 °C",
-    "air_cool": "25 °C",
-    "air_warm": "31 °C",
-    "air_low": "26 °C",
-    "air_high": "28 °C",
-    "swing": "4.0 °C",
-    "rain": "40 mm",
-    "rain_low": "25 mm",
-    "rain_high": "60 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "2.6 m",
-    "largest_crater": "171 km",
+    "air": "27 °C",
+    "air_cool": "25 °C",
+    "air_warm": "31 °C",
+    "air_low": "26 °C",
+    "air_high": "28 °C",
+    "swing": "4.0 °C",
+    "rain": "40 mm",
+    "rain_low": "25 mm",
+    "rain_high": "60 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "2.6 m",
+    "largest_crater": "171 km",
     "centre": "83° N, 32° E"
    },
    "detail": {
@@ -169,7 +173,8 @@
       180.34
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 0,
      "unit": "H'Kratero Ŝemeŝa"
@@ -460,8 +465,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:Mare Humboldtianum": "Juldyztengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Crater after crater makes up this polar plain on the shore of Uamoana: 14 of its 15 districts are old crater floors. Only 40 mm of rain falls in a year, too little for any river to form. Earth stands 16° above the horizon on average, high enough to light most of its nights.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L02",
@@ -535,9 +541,9 @@
     "zone_hyper_arid": 0.08
    },
    "figures": {
-    "area": "1,150,000 km²",
-    "waters": "90,800 km²",
-    "lake_area": "0 km²",
+    "area": "1,150,000 km²",
+    "waters": "90,800 km²",
+    "lake_area": "0 km²",
     "districts": "16",
     "land_pieces": "19",
     "falls": "0",
@@ -553,27 +559,27 @@
     "earth_share": "47%",
     "ice_share": "0%",
     "drains_main_share": "99%",
-    "river": "0 m³/s",
-    "relief": "2,800 m",
-    "highest": "8,000 m",
-    "mean_height": "1,800 m",
-    "coast_depth": "360 m",
+    "river": "0 m³/s",
+    "relief": "2,800 m",
+    "highest": "8,000 m",
+    "mean_height": "1,800 m",
+    "coast_depth": "360 m",
     "earth": "−1°",
     "earth_low": "−30°",
     "earth_high": "28°",
-    "air": "26 °C",
-    "air_cool": "24 °C",
-    "air_warm": "30 °C",
-    "air_low": "25 °C",
-    "air_high": "28 °C",
-    "swing": "4.1 °C",
-    "rain": "30 mm",
-    "rain_low": "15 mm",
-    "rain_high": "65 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "3.0 m",
-    "largest_crater": "330 km",
+    "air": "26 °C",
+    "air_cool": "24 °C",
+    "air_warm": "30 °C",
+    "air_low": "25 °C",
+    "air_high": "28 °C",
+    "swing": "4.1 °C",
+    "rain": "30 mm",
+    "rain_low": "15 mm",
+    "rain_high": "65 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "3.0 m",
+    "largest_crater": "330 km",
     "centre": "66° N, 69° W"
    },
    "detail": {
@@ -600,7 +606,8 @@
       218.09
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 0,
      "unit": "H'Kratero Ŝtona"
@@ -887,8 +894,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:Mare Humboldtianum": "Juldyztengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "The largest region is also the driest, with 30 mm of rain a year. Earth is in the sky over only 47% of the land, and most nights are polar twilight, lit by the Sun just below the horizon, its light scattered down by the tall air. The arid heights climb to 8,000 m above Uamoana.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L03",
@@ -962,9 +970,9 @@
     "zone_semi_arid": 0.018
    },
    "figures": {
-    "area": "377,000 km²",
-    "waters": "132,000 km²",
-    "lake_area": "6,000 km²",
+    "area": "377,000 km²",
+    "waters": "132,000 km²",
+    "lake_area": "6,000 km²",
     "districts": "6",
     "land_pieces": "52",
     "falls": "0",
@@ -980,27 +988,27 @@
     "earth_share": "62%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "1,400 m³/s",
-    "relief": "2,600 m",
-    "highest": "4,500 m",
-    "mean_height": "900 m",
-    "coast_depth": "1,140 m",
+    "river": "1,400 m³/s",
+    "relief": "2,600 m",
+    "highest": "4,500 m",
+    "mean_height": "900 m",
+    "coast_depth": "1,140 m",
     "earth": "3°",
     "earth_low": "−19°",
     "earth_high": "27°",
-    "air": "28 °C",
-    "air_cool": "25 °C",
-    "air_warm": "31 °C",
-    "air_low": "27 °C",
-    "air_high": "29 °C",
-    "swing": "4.6 °C",
-    "rain": "45 mm",
-    "rain_low": "25 mm",
-    "rain_high": "90 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "1.2 m",
-    "largest_crater": "135 km",
+    "air": "28 °C",
+    "air_cool": "25 °C",
+    "air_warm": "31 °C",
+    "air_low": "27 °C",
+    "air_high": "29 °C",
+    "swing": "4.6 °C",
+    "rain": "45 mm",
+    "rain_low": "25 mm",
+    "rain_high": "90 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "1.2 m",
+    "largest_crater": "135 km",
     "centre": "68° N, 84° E"
    },
    "detail": {
@@ -1026,7 +1034,8 @@
       82.97
      ]
     },
-    "heights_above": "the Juldyztengiz level",
+    "heights_above": "the level of Juldyztengiz",
+    "heights_above_anchor": "sea:Mare Humboldtianum",
     "largest_river": {
      "flow_m3s": 1361,
      "unit": "H'Lago Ŝtona"
@@ -1204,8 +1213,9 @@
     "coast:61.4,70.4": "H'Bordo Majima",
     "sea:Mare Humboldtianum": "Juldyztengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Every district of these arid hills drains to Juldyztengiz, and their largest river, 1,400 m³/s, runs through H'Lago Ŝtona. Earth is in the sky over most of the land and never rises over the rest; twilight fills the polar nights. The tides on its coasts are small, 1.2 m.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L04",
@@ -1280,9 +1290,9 @@
     "zone_semi_arid": 0.31
    },
    "figures": {
-    "area": "886,000 km²",
-    "waters": "0 km²",
-    "lake_area": "20,900 km²",
+    "area": "886,000 km²",
+    "waters": "0 km²",
+    "lake_area": "20,900 km²",
     "districts": "12",
     "land_pieces": "1",
     "falls": "0",
@@ -1298,25 +1308,25 @@
     "earth_share": "under 1%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "1,800 m³/s",
-    "relief": "3,200 m",
-    "highest": "7,100 m",
-    "mean_height": "2,600 m",
+    "river": "1,800 m³/s",
+    "relief": "3,200 m",
+    "highest": "7,100 m",
+    "mean_height": "2,600 m",
     "earth": "−24°",
     "earth_low": "−42°",
     "earth_high": "1°",
-    "air": "26 °C",
-    "air_cool": "23 °C",
-    "air_warm": "29 °C",
-    "air_low": "25 °C",
-    "air_high": "27 °C",
-    "swing": "4.5 °C",
-    "rain": "150 mm",
-    "rain_low": "15 mm",
-    "rain_high": "310 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "largest_crater": "234 km",
+    "air": "26 °C",
+    "air_cool": "23 °C",
+    "air_warm": "29 °C",
+    "air_low": "25 °C",
+    "air_high": "27 °C",
+    "swing": "4.5 °C",
+    "rain": "150 mm",
+    "rain_low": "15 mm",
+    "rain_high": "310 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "largest_crater": "234 km",
     "centre": "66° N, 153° E"
    },
    "detail": {
@@ -1342,6 +1352,7 @@
      ]
     },
     "heights_above": "the common level",
+    "heights_above_anchor": null,
     "largest_river": {
      "flow_m3s": 1779,
      "unit": "H'Lago Ŝemeŝa"
@@ -1563,8 +1574,9 @@
     "crater:Rowland": "H'Emeko Ŝaĥara",
     "sea:Mare Humboldtianum": "Juldyztengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "No coast touches this ridge country, yet all 12 of its districts send their water to Juldyztengiz across neighbouring lands. The ground rises to 7,100 m above the level of Juldyztengiz, and its largest river, 1,800 m³/s, runs through H'Lago Ŝemeŝa. Earth stays below the horizon over nearly all of it, and its nights are twilit.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L05",
@@ -1637,9 +1649,9 @@
     "zone_semi_arid": 1.0
    },
    "figures": {
-    "area": "318,000 km²",
-    "waters": "15,100 km²",
-    "lake_area": "100 km²",
+    "area": "318,000 km²",
+    "waters": "15,100 km²",
+    "lake_area": "100 km²",
     "districts": "4",
     "land_pieces": "8",
     "falls": "0",
@@ -1655,27 +1667,27 @@
     "earth_share": "29%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "0 m³/s",
-    "relief": "2,900 m",
-    "highest": "5,700 m",
-    "mean_height": "2,100 m",
-    "coast_depth": "180 m",
+    "river": "0 m³/s",
+    "relief": "2,900 m",
+    "highest": "5,700 m",
+    "mean_height": "2,100 m",
+    "coast_depth": "180 m",
     "earth": "−7°",
     "earth_low": "−29°",
     "earth_high": "16°",
-    "air": "26 °C",
-    "air_cool": "23 °C",
-    "air_warm": "30 °C",
-    "air_low": "25 °C",
-    "air_high": "27 °C",
-    "swing": "5.2 °C",
-    "rain": "200 mm",
-    "rain_low": "120 mm",
-    "rain_high": "270 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "3.4 m",
-    "largest_crater": "192 km",
+    "air": "26 °C",
+    "air_cool": "23 °C",
+    "air_warm": "30 °C",
+    "air_low": "25 °C",
+    "air_high": "27 °C",
+    "swing": "5.2 °C",
+    "rain": "200 mm",
+    "rain_low": "120 mm",
+    "rain_high": "270 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "3.4 m",
+    "largest_crater": "192 km",
     "centre": "52° N, 93° W"
    },
    "detail": {
@@ -1700,7 +1712,8 @@
       223.03
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 0,
      "unit": "Kunoy"
@@ -1814,8 +1827,9 @@
     "coast:45.7,-73.9": "Ulugjaga",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "This high ground is semi-arid from end to end and stands 2,100 m above Uamoana on average. It gets 200 mm of rain a year and keeps only three small lakes and no lasting river. Earth shows above the horizon over under a third of it, and elsewhere the nights are twilit.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L06",
@@ -1889,9 +1903,9 @@
     "zone_semi_arid": 0.623
    },
    "figures": {
-    "area": "439,000 km²",
-    "waters": "123,000 km²",
-    "lake_area": "20,600 km²",
+    "area": "439,000 km²",
+    "waters": "123,000 km²",
+    "lake_area": "20,600 km²",
     "districts": "5",
     "land_pieces": "59",
     "falls": "2",
@@ -1907,27 +1921,27 @@
     "earth_share": "89%",
     "ice_share": "0%",
     "drains_main_share": "98%",
-    "river": "29,000 m³/s",
-    "relief": "2,300 m",
-    "highest": "4,300 m",
-    "mean_height": "620 m",
-    "coast_depth": "630 m",
+    "river": "29,000 m³/s",
+    "relief": "2,300 m",
+    "highest": "4,300 m",
+    "mean_height": "620 m",
+    "coast_depth": "630 m",
     "earth": "20°",
     "earth_low": "−6°",
     "earth_high": "43°",
-    "air": "28 °C",
-    "air_cool": "25 °C",
-    "air_warm": "32 °C",
-    "air_low": "27 °C",
-    "air_high": "29 °C",
-    "swing": "4.2 °C",
-    "rain": "390 mm",
-    "rain_low": "70 mm",
-    "rain_high": "810 mm",
-    "falls_gw": "5.4 GW",
-    "falls_total_gw": "9.8 GW",
-    "tide": "1.7 m",
-    "largest_crater": "337 km",
+    "air": "28 °C",
+    "air_cool": "25 °C",
+    "air_warm": "32 °C",
+    "air_low": "27 °C",
+    "air_high": "29 °C",
+    "swing": "4.2 °C",
+    "rain": "390 mm",
+    "rain_low": "70 mm",
+    "rain_high": "810 mm",
+    "falls_gw": "5.4 GW",
+    "falls_total_gw": "9.8 GW",
+    "tide": "1.7 m",
+    "largest_crater": "337 km",
     "centre": "40° N, 55° E"
    },
    "detail": {
@@ -1955,7 +1969,8 @@
       97.09
      ]
     },
-    "heights_above": "the Juldyztengiz level",
+    "heights_above": "the level of Juldyztengiz",
+    "heights_above_anchor": "sea:Mare Humboldtianum",
     "largest_river": {
      "flow_m3s": 29217,
      "unit": "Umitkollar"
@@ -2134,8 +2149,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:Mare Humboldtianum": "Juldyztengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "One of the Moon's greatest rivers crosses this semi-arid land: 29,000 m³/s through the lakes of Umitkollar, dropping through two steep reaches with 9.8 GW of falling water on its way to Uamoana. The coast faces Juldyztengiz and, through the strait of Eskibogaz, Uamoana as well. The Hakuto-R Mission 1 crash site lies in the crater of Juldyzoy.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L07",
@@ -2209,9 +2225,9 @@
     "zone_semi_arid": 0.274
    },
    "figures": {
-    "area": "513,000 km²",
-    "waters": "43,800 km²",
-    "lake_area": "17,400 km²",
+    "area": "513,000 km²",
+    "waters": "43,800 km²",
+    "lake_area": "17,400 km²",
     "districts": "6",
     "land_pieces": "20",
     "falls": "0",
@@ -2227,27 +2243,27 @@
     "earth_share": "4%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "5,600 m³/s",
-    "relief": "2,900 m",
-    "highest": "5,500 m",
-    "mean_height": "1,200 m",
-    "coast_depth": "980 m",
+    "river": "5,600 m³/s",
+    "relief": "2,900 m",
+    "highest": "5,500 m",
+    "mean_height": "1,200 m",
+    "coast_depth": "980 m",
     "earth": "−14°",
     "earth_low": "−34°",
     "earth_high": "6°",
-    "air": "28 °C",
-    "air_cool": "24 °C",
-    "air_warm": "32 °C",
-    "air_low": "27 °C",
-    "air_high": "29 °C",
-    "swing": "5.3 °C",
-    "rain": "190 mm",
-    "rain_low": "30 mm",
-    "rain_high": "450 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "1.7 m",
-    "largest_crater": "0 km",
+    "air": "28 °C",
+    "air_cool": "24 °C",
+    "air_warm": "32 °C",
+    "air_low": "27 °C",
+    "air_high": "29 °C",
+    "swing": "5.3 °C",
+    "rain": "190 mm",
+    "rain_low": "30 mm",
+    "rain_high": "450 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "1.7 m",
+    "largest_crater": "0 km",
     "centre": "51° N, 113° E"
    },
    "detail": {
@@ -2273,7 +2289,8 @@
       147.97
      ]
     },
-    "heights_above": "the Juldyztengiz level",
+    "heights_above": "the level of Juldyztengiz",
+    "heights_above_anchor": "sea:Mare Humboldtianum",
     "largest_river": {
      "flow_m3s": 5585,
      "unit": "Wadi Shams"
@@ -2419,8 +2436,9 @@
     "coast:55.8,106.6": "Halij Nur",
     "sea:Mare Humboldtianum": "Juldyztengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Rugged and arid, this far-side highland still holds some 130 lakes, and every one of its rivers, the largest carrying 5,600 m³/s through Wadi Shams, runs to Juldyztengiz. Its ground climbs to 5,500 m above that sea. Earth stays below the horizon over almost all of it, and the nights are twilit.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L08",
@@ -2495,9 +2513,9 @@
     "zone_humid": 0.262
    },
    "figures": {
-    "area": "698,000 km²",
-    "waters": "333,000 km²",
-    "lake_area": "218,000 km²",
+    "area": "698,000 km²",
+    "waters": "333,000 km²",
+    "lake_area": "218,000 km²",
     "districts": "15",
     "land_pieces": "92",
     "falls": "1",
@@ -2513,27 +2531,27 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "82%",
-    "river": "8,300 m³/s",
-    "relief": "2,700 m",
-    "highest": "4,700 m",
-    "mean_height": "850 m",
-    "coast_depth": "1,470 m",
+    "river": "8,300 m³/s",
+    "relief": "2,700 m",
+    "highest": "4,700 m",
+    "mean_height": "850 m",
+    "coast_depth": "1,470 m",
     "earth": "−49°",
     "earth_low": "−83°",
     "earth_high": "−33°",
-    "air": "24 °C",
-    "air_cool": "22 °C",
-    "air_warm": "27 °C",
-    "air_low": "23 °C",
-    "air_high": "25 °C",
-    "swing": "3.0 °C",
-    "rain": "1,430 mm",
-    "rain_low": "570 mm",
-    "rain_high": "2,500 mm",
-    "falls_gw": "20 GW",
-    "falls_total_gw": "20 GW",
-    "tide": "2.0 m",
-    "largest_crater": "0 km",
+    "air": "24 °C",
+    "air_cool": "22 °C",
+    "air_warm": "27 °C",
+    "air_low": "23 °C",
+    "air_high": "25 °C",
+    "swing": "3.0 °C",
+    "rain": "1,430 mm",
+    "rain_low": "570 mm",
+    "rain_high": "2,500 mm",
+    "falls_gw": "20 GW",
+    "falls_total_gw": "20 GW",
+    "tide": "2.0 m",
+    "largest_crater": "0 km",
     "centre": "40° N, 177° W"
    },
    "detail": {
@@ -2561,7 +2579,8 @@
       193.41
      ]
     },
-    "heights_above": "the Hanaqucha level",
+    "heights_above": "the level of Hanaqucha",
+    "heights_above_anchor": "sea:Mare Moscoviense",
     "largest_river": {
      "flow_m3s": 8259,
      "unit": "Siyensiyenloko"
@@ -2904,8 +2923,9 @@
     "sea:Mare Moscoviense": "Hanaqucha",
     "sea:Mare Humboldtianum": "Juldyztengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "A third of this wet far-side country lies under some 640 lakes, and most of its water runs to Hanaqucha. In Siyensiyenloko its largest river, 8,300 m³/s, drops through a single steep reach with 20 GW of falling water. Earth never rises here, and the nights stay dim, never quite dark.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L09",
@@ -2979,9 +2999,9 @@
     "zone_humid": 0.65
    },
    "figures": {
-    "area": "713,000 km²",
-    "waters": "0 km²",
-    "lake_area": "17,200 km²",
+    "area": "713,000 km²",
+    "waters": "0 km²",
+    "lake_area": "17,200 km²",
     "districts": "11",
     "land_pieces": "1",
     "falls": "0",
@@ -2997,25 +3017,25 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "88%",
-    "river": "50 m³/s",
-    "relief": "3,100 m",
-    "highest": "7,200 m",
-    "mean_height": "3,500 m",
+    "river": "50 m³/s",
+    "relief": "3,100 m",
+    "highest": "7,200 m",
+    "mean_height": "3,500 m",
     "earth": "−22°",
     "earth_low": "−39°",
     "earth_high": "−4°",
-    "air": "24 °C",
-    "air_cool": "21 °C",
-    "air_warm": "29 °C",
-    "air_low": "23 °C",
-    "air_high": "25 °C",
-    "swing": "5.1 °C",
-    "rain": "490 mm",
-    "rain_low": "340 mm",
-    "rain_high": "660 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "largest_crater": "218 km",
+    "air": "24 °C",
+    "air_cool": "21 °C",
+    "air_warm": "29 °C",
+    "air_low": "23 °C",
+    "air_high": "25 °C",
+    "swing": "5.1 °C",
+    "rain": "490 mm",
+    "rain_low": "340 mm",
+    "rain_high": "660 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "largest_crater": "218 km",
     "centre": "40° N, 116° W"
    },
    "detail": {
@@ -3041,6 +3061,7 @@
      ]
     },
     "heights_above": "the common level",
+    "heights_above_anchor": null,
     "largest_river": {
      "flow_m3s": 50,
      "unit": "Kingo Kubwa"
@@ -3238,8 +3259,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:Mare Humboldtianum": "Juldyztengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Landlocked and humid, this highland is scattered with 470 small lakes, none of them feeding a large river: the biggest carries 50 m³/s. Most of its water reaches Uamoana by way of neighbouring lands. Almost all its rain falls by day, and its far-side nights are dim.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L10",
@@ -3312,9 +3334,9 @@
     "zone_semi_arid": 1.0
    },
    "figures": {
-    "area": "65,200 km²",
-    "waters": "238,000 km²",
-    "lake_area": "0 km²",
+    "area": "65,200 km²",
+    "waters": "238,000 km²",
+    "lake_area": "0 km²",
     "districts": "2",
     "land_pieces": "79",
     "falls": "0",
@@ -3330,27 +3352,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "0 m³/s",
-    "relief": "1,500 m",
-    "highest": "2,800 m",
-    "mean_height": "660 m",
-    "coast_depth": "730 m",
+    "river": "0 m³/s",
+    "relief": "1,500 m",
+    "highest": "2,800 m",
+    "mean_height": "660 m",
+    "coast_depth": "730 m",
     "earth": "37°",
     "earth_low": "26°",
     "earth_high": "49°",
-    "air": "29 °C",
-    "air_cool": "26 °C",
-    "air_warm": "32 °C",
-    "air_low": "29 °C",
-    "air_high": "29 °C",
-    "swing": "3.4 °C",
-    "rain": "440 mm",
-    "rain_low": "390 mm",
-    "rain_high": "490 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "3.0 m",
-    "largest_crater": "0 km",
+    "air": "29 °C",
+    "air_cool": "26 °C",
+    "air_warm": "32 °C",
+    "air_low": "29 °C",
+    "air_high": "29 °C",
+    "swing": "3.4 °C",
+    "rain": "440 mm",
+    "rain_low": "390 mm",
+    "rain_high": "490 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "3.0 m",
+    "largest_crater": "0 km",
     "centre": "42° N, 36° W"
    },
    "detail": {
@@ -3375,7 +3397,8 @@
       320.72
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 0,
      "unit": "Kimatie"
@@ -3450,8 +3473,9 @@
     "feature:Sinus Roris": "Tomairangitahatai",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Across 238,000 km² of Uamoana lie 79 islands and islets, the highest rising to 2,800 m. Earth stands about 37° up over all of them, so every night there is lit by Earth, and tides of 3.0 m wash their shores. The land is broadly semi-arid.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L11",
@@ -3527,9 +3551,9 @@
     "zone_wet": 0.451
    },
    "figures": {
-    "area": "1,060,000 km²",
-    "waters": "272,000 km²",
-    "lake_area": "279,000 km²",
+    "area": "1,060,000 km²",
+    "waters": "272,000 km²",
+    "lake_area": "279,000 km²",
     "districts": "28",
     "land_pieces": "63",
     "falls": "1",
@@ -3545,27 +3569,27 @@
     "earth_share": "95%",
     "ice_share": "0%",
     "drains_main_share": "96%",
-    "river": "29,000 m³/s",
-    "relief": "1,800 m",
-    "highest": "4,700 m",
-    "mean_height": "990 m",
-    "coast_depth": "800 m",
+    "river": "29,000 m³/s",
+    "relief": "1,800 m",
+    "highest": "4,700 m",
+    "mean_height": "990 m",
+    "coast_depth": "800 m",
     "earth": "29°",
     "earth_low": "−7°",
     "earth_high": "66°",
-    "air": "27 °C",
-    "air_cool": "25 °C",
-    "air_warm": "30 °C",
-    "air_low": "27 °C",
-    "air_high": "28 °C",
-    "swing": "2.8 °C",
-    "rain": "1,250 mm",
-    "rain_low": "770 mm",
-    "rain_high": "1,740 mm",
-    "falls_gw": "8.4 GW",
-    "falls_total_gw": "8.4 GW",
-    "tide": "2.8 m",
-    "largest_crater": "173 km",
+    "air": "27 °C",
+    "air_cool": "25 °C",
+    "air_warm": "30 °C",
+    "air_low": "27 °C",
+    "air_high": "28 °C",
+    "swing": "2.8 °C",
+    "rain": "1,250 mm",
+    "rain_low": "770 mm",
+    "rain_high": "1,740 mm",
+    "falls_gw": "8.4 GW",
+    "falls_total_gw": "8.4 GW",
+    "tide": "2.8 m",
+    "largest_crater": "173 km",
     "centre": "29° N, 72° E"
    },
    "detail": {
@@ -3595,7 +3619,8 @@
       79.91
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 29216,
      "unit": "Maakusiyenloko"
@@ -4176,8 +4201,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:Smythii–Marginis Sea": "Dagat na Katzeh"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Two heritage sites lie under Atatahatai, off this wet lake country: Apollo 17 at Taurus-Littrow, and Lunokhod 2 with Luna 21. Onshore some 730 lakes cover 28% of the land, and in Maakusiyenloko a river of 29,000 m³/s drops through a steep reach with 8.4 GW of falling water before reaching Uamoana.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L12",
@@ -4252,9 +4278,9 @@
     "zone_humid": 0.177
    },
    "figures": {
-    "area": "760,000 km²",
-    "waters": "87,200 km²",
-    "lake_area": "243,000 km²",
+    "area": "760,000 km²",
+    "waters": "87,200 km²",
+    "lake_area": "243,000 km²",
     "districts": "15",
     "land_pieces": "20",
     "falls": "2",
@@ -4270,27 +4296,27 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "60%",
-    "river": "16,000 m³/s",
-    "relief": "3,100 m",
-    "highest": "5,000 m",
-    "mean_height": "−300 m",
-    "coast_depth": "1,460 m",
+    "river": "16,000 m³/s",
+    "relief": "3,100 m",
+    "highest": "5,000 m",
+    "mean_height": "−300 m",
+    "coast_depth": "1,460 m",
     "earth": "−32°",
     "earth_low": "−55°",
     "earth_high": "−9°",
-    "air": "25 °C",
-    "air_cool": "23 °C",
-    "air_warm": "28 °C",
-    "air_low": "24 °C",
-    "air_high": "26 °C",
-    "swing": "1.9 °C",
-    "rain": "1,890 mm",
-    "rain_low": "810 mm",
-    "rain_high": "3,030 mm",
-    "falls_gw": "7.8 GW",
-    "falls_total_gw": "12 GW",
-    "tide": "2.1 m",
-    "largest_crater": "113 km",
+    "air": "25 °C",
+    "air_cool": "23 °C",
+    "air_warm": "28 °C",
+    "air_low": "24 °C",
+    "air_high": "26 °C",
+    "swing": "1.9 °C",
+    "rain": "1,890 mm",
+    "rain_low": "810 mm",
+    "rain_high": "3,030 mm",
+    "falls_gw": "7.8 GW",
+    "falls_total_gw": "12 GW",
+    "tide": "2.1 m",
+    "largest_crater": "113 km",
     "centre": "31° N, 123° E"
    },
    "detail": {
@@ -4319,7 +4345,8 @@
       135.47
      ]
     },
-    "heights_above": "the Hanaqucha level",
+    "heights_above": "the level of Hanaqucha",
+    "heights_above_anchor": "sea:Mare Moscoviense",
     "largest_river": {
      "flow_m3s": 15620,
      "unit": "Midoriikeno"
@@ -4635,8 +4662,9 @@
     "sea:Smythii–Marginis Sea": "Dagat na Katzeh",
     "sea:Mare Humboldtianum": "Juldyztengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Steep reaches with 12 GW of falling water break the rivers of this wet far-side land, where 660 lakes cover 34% of the ground. Its coast lies on Hanaqucha, but most of the water leaves by other ways: to Dagat na Katzeh, and to Juldyztengiz by its largest river, 16,000 m³/s through Midoriikeno. No Earth shows in its sky.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L13",
@@ -4710,9 +4738,9 @@
     "zone_humid": 0.236
    },
    "figures": {
-    "area": "647,000 km²",
-    "waters": "0 km²",
-    "lake_area": "233,000 km²",
+    "area": "647,000 km²",
+    "waters": "0 km²",
+    "lake_area": "233,000 km²",
     "districts": "14",
     "land_pieces": "1",
     "falls": "0",
@@ -4728,25 +4756,25 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "54%",
-    "river": "8,800 m³/s",
-    "relief": "3,300 m",
-    "highest": "9,800 m",
-    "mean_height": "5,700 m",
+    "river": "8,800 m³/s",
+    "relief": "3,300 m",
+    "highest": "9,800 m",
+    "mean_height": "5,700 m",
     "earth": "−45°",
     "earth_low": "−64°",
     "earth_high": "−30°",
-    "air": "23 °C",
-    "air_cool": "21 °C",
-    "air_warm": "26 °C",
-    "air_low": "22 °C",
-    "air_high": "23 °C",
-    "swing": "2.9 °C",
-    "rain": "1,380 mm",
-    "rain_low": "680 mm",
-    "rain_high": "2,530 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "largest_crater": "128 km",
+    "air": "23 °C",
+    "air_cool": "21 °C",
+    "air_warm": "26 °C",
+    "air_low": "22 °C",
+    "air_high": "23 °C",
+    "swing": "2.9 °C",
+    "rain": "1,380 mm",
+    "rain_low": "680 mm",
+    "rain_high": "2,530 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "largest_crater": "128 km",
     "centre": "31° N, 148° W"
    },
    "detail": {
@@ -4774,6 +4802,7 @@
      ]
     },
     "heights_above": "the common level",
+    "heights_above_anchor": null,
     "largest_river": {
      "flow_m3s": 8761,
      "unit": "Futaikeno"
@@ -5006,8 +5035,9 @@
     "sea:Mare Orientale": "Bahari Mashariki",
     "sea:Mare Moscoviense": "Hanaqucha"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Water leaves this landlocked lake country four ways, to Juldyztengiz, Uamoana, Bahari Mashariki and Hanaqucha, from ground that averages 5,700 m above the level of Juldyztengiz and climbs to 9,800 m. It is wet, and 760 lakes cover 39% of it. Earth never shows in its sky, and its nights are dim.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L14",
@@ -5081,9 +5111,9 @@
     "zone_dry_sub_humid": 0.153
    },
    "figures": {
-    "area": "795,000 km²",
-    "waters": "81,600 km²",
-    "lake_area": "37,400 km²",
+    "area": "795,000 km²",
+    "waters": "81,600 km²",
+    "lake_area": "37,400 km²",
     "districts": "10",
     "land_pieces": "26",
     "falls": "2",
@@ -5099,27 +5129,27 @@
     "earth_share": "62%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "18,000 m³/s",
-    "relief": "2,100 m",
-    "highest": "5,800 m",
-    "mean_height": "1,300 m",
-    "coast_depth": "190 m",
+    "river": "18,000 m³/s",
+    "relief": "2,100 m",
+    "highest": "5,800 m",
+    "mean_height": "1,300 m",
+    "coast_depth": "190 m",
     "earth": "2°",
     "earth_low": "−20°",
     "earth_high": "21°",
-    "air": "26 °C",
-    "air_cool": "23 °C",
-    "air_warm": "32 °C",
-    "air_low": "25 °C",
-    "air_high": "27 °C",
-    "swing": "5.7 °C",
-    "rain": "550 mm",
-    "rain_low": "420 mm",
-    "rain_high": "680 mm",
-    "falls_gw": "7.9 GW",
-    "falls_total_gw": "12 GW",
-    "tide": "3.8 m",
-    "largest_crater": "378 km",
+    "air": "26 °C",
+    "air_cool": "23 °C",
+    "air_warm": "32 °C",
+    "air_low": "25 °C",
+    "air_high": "27 °C",
+    "swing": "5.7 °C",
+    "rain": "550 mm",
+    "rain_low": "420 mm",
+    "rain_high": "680 mm",
+    "falls_gw": "7.9 GW",
+    "falls_total_gw": "12 GW",
+    "tide": "3.8 m",
+    "largest_crater": "378 km",
     "centre": "25° N, 84° W"
    },
    "detail": {
@@ -5145,7 +5175,8 @@
       261.22
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 17685,
      "unit": "Maziwa Dunia"
@@ -5378,8 +5409,9 @@
     "coast:16.4,-70.4": "Pwani Mpya",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "No region has a cloudier sky: cloud covers 77% of it on average, over land humid almost throughout. Every district drains to Uamoana; the largest river, 18,000 m³/s, runs through the lakes of Maziwa Dunia, and two steep reaches in Maziwa Dhahabu carry 12 GW of falling water. Earth stands low on the horizon over most of the land.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L15",
@@ -5452,9 +5484,9 @@
     "zone_arid": 1.0
    },
    "figures": {
-    "area": "259,000 km²",
-    "waters": "113,000 km²",
-    "lake_area": "7,100 km²",
+    "area": "259,000 km²",
+    "waters": "113,000 km²",
+    "lake_area": "7,100 km²",
     "districts": "3",
     "land_pieces": "22",
     "falls": "0",
@@ -5470,27 +5502,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "930 m³/s",
-    "relief": "480 m",
-    "highest": "3,000 m",
-    "mean_height": "250 m",
-    "coast_depth": "210 m",
+    "river": "930 m³/s",
+    "relief": "480 m",
+    "highest": "3,000 m",
+    "mean_height": "250 m",
+    "coast_depth": "210 m",
     "earth": "44°",
     "earth_low": "32°",
     "earth_high": "61°",
-    "air": "29 °C",
-    "air_cool": "25 °C",
-    "air_warm": "33 °C",
-    "air_low": "28 °C",
-    "air_high": "29 °C",
-    "swing": "5.7 °C",
-    "rain": "230 mm",
-    "rain_low": "75 mm",
-    "rain_high": "440 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "4.1 m",
-    "largest_crater": "0 km",
+    "air": "29 °C",
+    "air_cool": "25 °C",
+    "air_warm": "33 °C",
+    "air_low": "28 °C",
+    "air_high": "29 °C",
+    "swing": "5.7 °C",
+    "rain": "230 mm",
+    "rain_low": "75 mm",
+    "rain_high": "440 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "4.1 m",
+    "largest_crater": "0 km",
     "centre": "20° N, 41° W"
    },
    "detail": {
@@ -5515,7 +5547,8 @@
       310.84
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 934,
      "unit": "Erg Aswad"
@@ -5620,8 +5653,9 @@
     "feature:Oceanus Procellarum": "Halij Asifa",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Low and level, this arid plain lies on old lava basalt over 82% of its ground and stands on average barely 250 m above Uamoana. Tides of 4.1 m, among the greatest on the Moon, run in over its shores. Earth, 44° above the horizon, keeps its nights lit.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L16",
@@ -5695,9 +5729,9 @@
     "zone_humid": 0.018
    },
    "figures": {
-    "area": "950,000 km²",
-    "waters": "100,000 km²",
-    "lake_area": "464,000 km²",
+    "area": "950,000 km²",
+    "waters": "100,000 km²",
+    "lake_area": "464,000 km²",
     "districts": "16",
     "land_pieces": "46",
     "falls": "10",
@@ -5713,27 +5747,27 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "96%",
-    "river": "26,000 m³/s",
-    "relief": "3,700 m",
-    "highest": "8,200 m",
-    "mean_height": "2,600 m",
-    "coast_depth": "990 m",
+    "river": "26,000 m³/s",
+    "relief": "3,700 m",
+    "highest": "8,200 m",
+    "mean_height": "2,600 m",
+    "coast_depth": "990 m",
     "earth": "−73°",
     "earth_low": "−90°",
     "earth_high": "−56°",
-    "air": "23 °C",
-    "air_cool": "21 °C",
-    "air_warm": "24 °C",
-    "air_low": "21 °C",
-    "air_high": "24 °C",
-    "swing": "0.8 °C",
-    "rain": "3,880 mm",
-    "rain_low": "2,410 mm",
-    "rain_high": "5,050 mm",
-    "falls_gw": "20 GW",
-    "falls_total_gw": "100 GW",
-    "tide": "2.8 m",
-    "largest_crater": "423 km",
+    "air": "23 °C",
+    "air_cool": "21 °C",
+    "air_warm": "24 °C",
+    "air_low": "21 °C",
+    "air_high": "24 °C",
+    "swing": "0.8 °C",
+    "rain": "3,880 mm",
+    "rain_low": "2,410 mm",
+    "rain_high": "5,050 mm",
+    "falls_gw": "20 GW",
+    "falls_total_gw": "100 GW",
+    "tide": "2.8 m",
+    "largest_crater": "423 km",
     "centre": "7° N, 170° W"
    },
    "detail": {
@@ -5761,7 +5795,8 @@
       201.34
      ]
     },
-    "heights_above": "the Hanaqucha level",
+    "heights_above": "the level of Hanaqucha",
+    "heights_above_anchor": "sea:Mare Moscoviense",
     "largest_river": {
      "flow_m3s": 26019,
      "unit": "Pukutayquchakuna"
@@ -6091,8 +6126,9 @@
     "sea:Mare Orientale": "Bahari Mashariki",
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa"
    },
-   "text": null,
-   "text_stale": []
+   "text": "These mountains have more steep reaches than any other region, 10 of them with 100 GW of falling water, on rivers that run mostly to Hanaqucha; the largest carries 26,000 m³/s. Lakes cover half the ground, and the land is wet. Earth lies far below the horizon, and the nights are as dark as a moonless night on Earth.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L17",
@@ -6166,9 +6202,9 @@
     "zone_humid": 0.009
    },
    "figures": {
-    "area": "929,000 km²",
-    "waters": "0 km²",
-    "lake_area": "400,000 km²",
+    "area": "929,000 km²",
+    "waters": "0 km²",
+    "lake_area": "400,000 km²",
     "districts": "19",
     "land_pieces": "1",
     "falls": "5",
@@ -6184,25 +6220,25 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "70%",
-    "river": "15,000 m³/s",
-    "relief": "2,800 m",
-    "highest": "10,300 m",
-    "mean_height": "6,400 m",
+    "river": "15,000 m³/s",
+    "relief": "2,800 m",
+    "highest": "10,300 m",
+    "mean_height": "6,400 m",
     "earth": "−42°",
     "earth_low": "−62°",
     "earth_high": "−21°",
-    "air": "22 °C",
-    "air_cool": "21 °C",
-    "air_warm": "25 °C",
-    "air_low": "22 °C",
-    "air_high": "23 °C",
-    "swing": "1.8 °C",
-    "rain": "2,060 mm",
-    "rain_low": "1,000 mm",
-    "rain_high": "3,140 mm",
-    "falls_gw": "9.6 GW",
-    "falls_total_gw": "36 GW",
-    "largest_crater": "536 km",
+    "air": "22 °C",
+    "air_cool": "21 °C",
+    "air_warm": "25 °C",
+    "air_low": "22 °C",
+    "air_high": "23 °C",
+    "swing": "1.8 °C",
+    "rain": "2,060 mm",
+    "rain_low": "1,000 mm",
+    "rain_high": "3,140 mm",
+    "falls_gw": "9.6 GW",
+    "falls_total_gw": "36 GW",
+    "largest_crater": "536 km",
     "centre": "12° N, 132° W"
    },
    "detail": {
@@ -6228,6 +6264,7 @@
      ]
     },
     "heights_above": "the common level",
+    "heights_above_anchor": null,
     "largest_river": {
      "flow_m3s": 15232,
      "unit": "Lawalawang Kahol"
@@ -6548,8 +6585,9 @@
     "sea:Mare Orientale": "Bahari Mashariki",
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa"
    },
-   "text": null,
-   "text_stale": []
+   "text": "No country on the Moon stands higher: its ground averages 6,400 m above the level of H'Jamo Melaĥa and climbs to 10,300 m. Lakes cover 45% of it, and its rivers fall through 5 steep reaches, with 36 GW of falling water, on their way to Bahari Mashariki and the salt water of H'Jamo Melaĥa. Its nights are fully dark.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L18",
@@ -6624,9 +6662,9 @@
     "zone_dry_sub_humid": 0.15
    },
    "figures": {
-    "area": "813,000 km²",
-    "waters": "74,500 km²",
-    "lake_area": "205,000 km²",
+    "area": "813,000 km²",
+    "waters": "74,500 km²",
+    "lake_area": "205,000 km²",
     "districts": "20",
     "land_pieces": "25",
     "falls": "4",
@@ -6642,27 +6680,27 @@
     "earth_share": "15%",
     "ice_share": "0%",
     "drains_main_share": "88%",
-    "river": "16,000 m³/s",
-    "relief": "2,500 m",
-    "highest": "6,400 m",
-    "mean_height": "1,400 m",
-    "coast_depth": "1,100 m",
+    "river": "16,000 m³/s",
+    "relief": "2,500 m",
+    "highest": "6,400 m",
+    "mean_height": "1,400 m",
+    "coast_depth": "1,100 m",
     "earth": "−13°",
     "earth_low": "−31°",
     "earth_high": "12°",
-    "air": "24 °C",
-    "air_cool": "22 °C",
-    "air_warm": "29 °C",
-    "air_low": "23 °C",
-    "air_high": "25 °C",
-    "swing": "3.9 °C",
-    "rain": "950 mm",
-    "rain_low": "540 mm",
-    "rain_high": "1,490 mm",
-    "falls_gw": "11 GW",
-    "falls_total_gw": "32 GW",
-    "tide": "0.9 m",
-    "largest_crater": "0 km",
+    "air": "24 °C",
+    "air_cool": "22 °C",
+    "air_warm": "29 °C",
+    "air_low": "23 °C",
+    "air_high": "25 °C",
+    "swing": "3.9 °C",
+    "rain": "950 mm",
+    "rain_low": "540 mm",
+    "rain_high": "1,490 mm",
+    "falls_gw": "11 GW",
+    "falls_total_gw": "32 GW",
+    "tide": "0.9 m",
+    "largest_crater": "0 km",
     "centre": "6° N, 100° W"
    },
    "detail": {
@@ -6690,7 +6728,8 @@
       255.09
      ]
     },
-    "heights_above": "the Bahari Mashariki level",
+    "heights_above": "the level of Bahari Mashariki",
+    "heights_above_anchor": "sea:Mare Orientale",
     "largest_river": {
      "flow_m3s": 15628,
      "unit": "Maziwa Kavu"
@@ -7060,8 +7099,9 @@
     "sea:Mare Orientale": "Bahari Mashariki",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Spread over 20 districts, some 760 lakes cover 27% of this wet and humid land. Its own shore is on Bahari Mashariki, but nearly nine-tenths of the land drains the other way, to Uamoana. Earth shows over a small part of it, and most nights are dark.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L19",
@@ -7137,9 +7177,9 @@
     "zone_arid": 0.107
    },
    "figures": {
-    "area": "453,000 km²",
-    "waters": "197,000 km²",
-    "lake_area": "27,900 km²",
+    "area": "453,000 km²",
+    "waters": "197,000 km²",
+    "lake_area": "27,900 km²",
     "districts": "7",
     "land_pieces": "53",
     "falls": "0",
@@ -7155,27 +7195,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "69%",
-    "river": "7,600 m³/s",
-    "relief": "500 m",
-    "highest": "1,800 m",
-    "mean_height": "360 m",
-    "coast_depth": "130 m",
+    "river": "7,600 m³/s",
+    "relief": "500 m",
+    "highest": "1,800 m",
+    "mean_height": "360 m",
+    "coast_depth": "130 m",
     "earth": "45°",
     "earth_low": "18°",
     "earth_high": "65°",
-    "air": "28 °C",
-    "air_cool": "25 °C",
-    "air_warm": "33 °C",
-    "air_low": "27 °C",
-    "air_high": "29 °C",
-    "swing": "5.5 °C",
-    "rain": "590 mm",
-    "rain_low": "290 mm",
-    "rain_high": "1,130 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "2.5 m",
-    "largest_crater": "95 km",
+    "air": "28 °C",
+    "air_cool": "25 °C",
+    "air_warm": "33 °C",
+    "air_low": "27 °C",
+    "air_high": "29 °C",
+    "swing": "5.5 °C",
+    "rain": "590 mm",
+    "rain_low": "290 mm",
+    "rain_high": "1,130 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "2.5 m",
+    "largest_crater": "95 km",
     "centre": "3° N, 42° W"
    },
    "detail": {
@@ -7205,7 +7245,8 @@
       320.41
      ]
     },
-    "heights_above": "the Bultengiz level",
+    "heights_above": "the level of Bultengiz",
+    "heights_above_anchor": "sea:southern near-side seas",
     "largest_river": {
      "flow_m3s": 7630,
      "unit": "Myngol"
@@ -7431,8 +7472,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Old lava basalt covers 89% of this semi-arid plain, the highest share anywhere, and nowhere does the land rise more than 1,800 m above Bultengiz. A river of 7,600 m³/s crosses Myngol to Bultengiz, and offshore, under Kokjaga, lies the Surveyor 1 landing site.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L20",
@@ -7507,9 +7549,9 @@
     "zone_semi_arid": 0.245
    },
    "figures": {
-    "area": "489,000 km²",
-    "waters": "92,700 km²",
-    "lake_area": "120,000 km²",
+    "area": "489,000 km²",
+    "waters": "92,700 km²",
+    "lake_area": "120,000 km²",
     "districts": "12",
     "land_pieces": "19",
     "falls": "0",
@@ -7525,27 +7567,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "56%",
-    "river": "8,400 m³/s",
-    "relief": "630 m",
-    "highest": "3,800 m",
-    "mean_height": "680 m",
-    "coast_depth": "190 m",
+    "river": "8,400 m³/s",
+    "relief": "630 m",
+    "highest": "3,800 m",
+    "mean_height": "680 m",
+    "coast_depth": "190 m",
     "earth": "68°",
     "earth_low": "53°",
     "earth_high": "89°",
-    "air": "27 °C",
-    "air_cool": "25 °C",
-    "air_warm": "31 °C",
-    "air_low": "26 °C",
-    "air_high": "28 °C",
-    "swing": "3.6 °C",
-    "rain": "1,410 mm",
-    "rain_low": "590 mm",
-    "rain_high": "2,040 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "2.7 m",
-    "largest_crater": "97 km",
+    "air": "27 °C",
+    "air_cool": "25 °C",
+    "air_warm": "31 °C",
+    "air_low": "26 °C",
+    "air_high": "28 °C",
+    "swing": "3.6 °C",
+    "rain": "1,410 mm",
+    "rain_low": "590 mm",
+    "rain_high": "2,040 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "2.7 m",
+    "largest_crater": "97 km",
     "centre": "1° N, 23° W"
    },
    "detail": {
@@ -7574,7 +7616,8 @@
       332.59
      ]
     },
-    "heights_above": "the Bultengiz level",
+    "heights_above": "the level of Bultengiz",
+    "heights_above_anchor": "sea:southern near-side seas",
     "largest_river": {
      "flow_m3s": 8436,
      "unit": "Sungsiyenloko"
@@ -7819,8 +7862,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Some 790 lakes, more than in any other region, lie on this wet basalt plain, and its water divides almost evenly between Uamoana and Bultengiz. Earth stands high, 68° above the horizon. Apollo 12 and Surveyor 3 lie in the crater of Mata'isiyenloko, on dry ground.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L21",
@@ -7895,9 +7939,9 @@
     "zone_humid": 0.297
    },
    "figures": {
-    "area": "677,000 km²",
-    "waters": "149,000 km²",
-    "lake_area": "170,000 km²",
+    "area": "677,000 km²",
+    "waters": "149,000 km²",
+    "lake_area": "170,000 km²",
     "districts": "11",
     "land_pieces": "34",
     "falls": "0",
@@ -7913,27 +7957,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "98%",
-    "river": "7,100 m³/s",
-    "relief": "1,400 m",
-    "highest": "5,300 m",
-    "mean_height": "1,200 m",
-    "coast_depth": "610 m",
+    "river": "7,100 m³/s",
+    "relief": "1,400 m",
+    "highest": "5,300 m",
+    "mean_height": "1,200 m",
+    "coast_depth": "610 m",
     "earth": "79°",
     "earth_low": "63°",
     "earth_high": "90°",
-    "air": "27 °C",
-    "air_cool": "25 °C",
-    "air_warm": "30 °C",
-    "air_low": "26 °C",
-    "air_high": "28 °C",
-    "swing": "2.6 °C",
-    "rain": "1,580 mm",
-    "rain_low": "940 mm",
-    "rain_high": "2,110 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "3.9 m",
-    "largest_crater": "0 km",
+    "air": "27 °C",
+    "air_cool": "25 °C",
+    "air_warm": "30 °C",
+    "air_low": "26 °C",
+    "air_high": "28 °C",
+    "swing": "2.6 °C",
+    "rain": "1,580 mm",
+    "rain_low": "940 mm",
+    "rain_high": "2,110 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "3.9 m",
+    "largest_crater": "0 km",
     "centre": "8° N, 0°"
    },
    "detail": {
@@ -7961,7 +8005,8 @@
       1.91
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 7095,
      "unit": "'Arefenua"
@@ -8235,8 +8280,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Nowhere does Earth stand higher: 79° up, almost overhead, lighting every night over this wet lake country. Offshore, under the waters of Galtahatai and Pooiritahatai, lie two landing sites: Apollo 11 at Tranquility Base and Apollo 15 at Hadley-Apennine. Onshore some 650 lakes cover 27% of the land, and nearly all of it drains to Uamoana.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L22",
@@ -8310,9 +8356,9 @@
     "zone_humid": 0.18
    },
    "figures": {
-    "area": "306,000 km²",
-    "waters": "145,000 km²",
-    "lake_area": "68,500 km²",
+    "area": "306,000 km²",
+    "waters": "145,000 km²",
+    "lake_area": "68,500 km²",
     "districts": "5",
     "land_pieces": "41",
     "falls": "0",
@@ -8328,27 +8374,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "750 m³/s",
-    "relief": "1,100 m",
-    "highest": "4,700 m",
-    "mean_height": "740 m",
-    "coast_depth": "660 m",
+    "river": "750 m³/s",
+    "relief": "1,100 m",
+    "highest": "4,700 m",
+    "mean_height": "740 m",
+    "coast_depth": "660 m",
     "earth": "50°",
     "earth_low": "38°",
     "earth_high": "62°",
-    "air": "27 °C",
-    "air_cool": "25 °C",
-    "air_warm": "30 °C",
-    "air_low": "26 °C",
-    "air_high": "28 °C",
-    "swing": "2.6 °C",
-    "rain": "1,630 mm",
-    "rain_low": "1,200 mm",
-    "rain_high": "1,990 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "5.3 m",
-    "largest_crater": "0 km",
+    "air": "27 °C",
+    "air_cool": "25 °C",
+    "air_warm": "30 °C",
+    "air_low": "26 °C",
+    "air_high": "28 °C",
+    "swing": "2.6 °C",
+    "rain": "1,630 mm",
+    "rain_low": "1,200 mm",
+    "rain_high": "1,990 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "5.3 m",
+    "largest_crater": "0 km",
     "centre": "8° N, 40° E"
    },
    "detail": {
@@ -8374,7 +8420,8 @@
       46.97
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 753,
      "unit": "Salalufenua"
@@ -8517,8 +8564,9 @@
     "coast:15.2,50.7": "Roatahatai",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Tides of 5.3 m rise and fall along this coast, among the greatest on the Moon. Behind it 330 lakes cover a quarter of the wet land, and all of it drains to Uamoana by rivers no larger than 750 m³/s. Its nights are lit by Earth.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L23",
@@ -8592,9 +8640,9 @@
     "zone_humid": 0.1
    },
    "figures": {
-    "area": "632,000 km²",
-    "waters": "172,000 km²",
-    "lake_area": "225,000 km²",
+    "area": "632,000 km²",
+    "waters": "172,000 km²",
+    "lake_area": "225,000 km²",
     "districts": "15",
     "land_pieces": "66",
     "falls": "0",
@@ -8610,27 +8658,27 @@
     "earth_share": "1%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "18,000 m³/s",
-    "relief": "2,700 m",
-    "highest": "4,800 m",
-    "mean_height": "820 m",
-    "coast_depth": "850 m",
+    "river": "18,000 m³/s",
+    "relief": "2,700 m",
+    "highest": "4,800 m",
+    "mean_height": "820 m",
+    "coast_depth": "850 m",
     "earth": "−14°",
     "earth_low": "−31°",
     "earth_high": "20°",
-    "air": "26 °C",
-    "air_cool": "24 °C",
-    "air_warm": "29 °C",
-    "air_low": "25 °C",
-    "air_high": "27 °C",
-    "swing": "2.9 °C",
-    "rain": "1,650 mm",
-    "rain_low": "1,050 mm",
-    "rain_high": "2,470 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "1.8 m",
-    "largest_crater": "91 km",
+    "air": "26 °C",
+    "air_cool": "24 °C",
+    "air_warm": "29 °C",
+    "air_low": "25 °C",
+    "air_high": "27 °C",
+    "swing": "2.9 °C",
+    "rain": "1,650 mm",
+    "rain_low": "1,050 mm",
+    "rain_high": "2,470 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "1.8 m",
+    "largest_crater": "91 km",
     "centre": "12° N, 109° E"
    },
    "detail": {
@@ -8656,7 +8704,8 @@
       101.28
      ]
     },
-    "heights_above": "the Dagat na Katzeh level",
+    "heights_above": "the level of Dagat na Katzeh",
+    "heights_above_anchor": "sea:Smythii–Marginis Sea",
     "largest_river": {
      "flow_m3s": 17981,
      "unit": "Lawalawang Ale"
@@ -8991,8 +9040,9 @@
     "coast:20.1,103.8": "Baybay na Teom",
     "sea:Smythii–Marginis Sea": "Dagat na Katzeh"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Dagat na Katzeh receives every river of this wet far-side country, the largest carrying 18,000 m³/s through Lawalawang Ale. Lakes cover 38% of the land, and no steep reach breaks the rivers' fall to the sea. Earth shows over almost none of it, and the nights are mostly dark.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L24",
@@ -9068,9 +9118,9 @@
     "zone_dry_sub_humid": 0.138
    },
    "figures": {
-    "area": "733,000 km²",
-    "waters": "254,000 km²",
-    "lake_area": "167,000 km²",
+    "area": "733,000 km²",
+    "waters": "254,000 km²",
+    "lake_area": "167,000 km²",
     "districts": "21",
     "land_pieces": "92",
     "falls": "0",
@@ -9086,27 +9136,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "76%",
-    "river": "1,600 m³/s",
-    "relief": "1,700 m",
-    "highest": "5,300 m",
-    "mean_height": "1,200 m",
-    "coast_depth": "230 m",
+    "river": "1,600 m³/s",
+    "relief": "1,700 m",
+    "highest": "5,300 m",
+    "mean_height": "1,200 m",
+    "coast_depth": "230 m",
     "earth": "25°",
     "earth_low": "9°",
     "earth_high": "69°",
-    "air": "27 °C",
-    "air_cool": "24 °C",
-    "air_warm": "32 °C",
-    "air_low": "26 °C",
-    "air_high": "28 °C",
-    "swing": "5.2 °C",
-    "rain": "920 mm",
-    "rain_low": "340 mm",
-    "rain_high": "1,430 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "2.0 m",
-    "largest_crater": "235 km",
+    "air": "27 °C",
+    "air_cool": "24 °C",
+    "air_warm": "32 °C",
+    "air_low": "26 °C",
+    "air_high": "28 °C",
+    "swing": "5.2 °C",
+    "rain": "920 mm",
+    "rain_low": "340 mm",
+    "rain_high": "1,430 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "2.0 m",
+    "largest_crater": "235 km",
     "centre": "6° S, 67° W"
    },
    "detail": {
@@ -9136,7 +9186,8 @@
       285.91
      ]
     },
-    "heights_above": "the Bultengiz level",
+    "heights_above": "the level of Bultengiz",
+    "heights_above_anchor": "sea:southern near-side seas",
     "largest_river": {
      "flow_m3s": 1581,
      "unit": "Nchi Kale"
@@ -9571,8 +9622,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "The Luna 9 landing site lies on dry ground in Mbuga Nyota, in a cloudy land of 21 districts, mostly wet and humid, whose 620 lakes drain mainly to Bultengiz. Earth stands 25° up, yet at their darkest its nights fall below 1 lux.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L25",
@@ -9647,9 +9699,9 @@
     "zone_humid": 0.385
    },
    "figures": {
-    "area": "445,000 km²",
-    "waters": "104,000 km²",
-    "lake_area": "96,300 km²",
+    "area": "445,000 km²",
+    "waters": "104,000 km²",
+    "lake_area": "96,300 km²",
     "districts": "12",
     "land_pieces": "17",
     "falls": "0",
@@ -9665,27 +9717,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "85%",
-    "river": "1,300 m³/s",
-    "relief": "2,200 m",
-    "highest": "6,000 m",
-    "mean_height": "1,900 m",
-    "coast_depth": "720 m",
+    "river": "1,300 m³/s",
+    "relief": "2,200 m",
+    "highest": "6,000 m",
+    "mean_height": "1,900 m",
+    "coast_depth": "720 m",
     "earth": "56°",
     "earth_low": "34°",
     "earth_high": "76°",
-    "air": "26 °C",
-    "air_cool": "24 °C",
-    "air_warm": "30 °C",
-    "air_low": "26 °C",
-    "air_high": "27 °C",
-    "swing": "3.0 °C",
-    "rain": "1,340 mm",
-    "rain_low": "700 mm",
-    "rain_high": "2,230 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "6.1 m",
-    "largest_crater": "0 km",
+    "air": "26 °C",
+    "air_cool": "24 °C",
+    "air_warm": "30 °C",
+    "air_low": "26 °C",
+    "air_high": "27 °C",
+    "swing": "3.0 °C",
+    "rain": "1,340 mm",
+    "rain_low": "700 mm",
+    "rain_high": "2,230 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "6.1 m",
+    "largest_crater": "0 km",
     "centre": "17° S, 13° E"
    },
    "detail": {
@@ -9713,7 +9765,8 @@
       19.22
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 1335,
      "unit": "Abnufenua"
@@ -9978,8 +10031,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Two heritage sites lie under lake water here: Apollo 16's Descartes site beneath a lake in Abnufenua, and SLIM beneath another in 'Uo'uofenua. Its coast on Uamoana has the greatest tides on the Moon, 6.1 m from low water to high. In this wet land 500 lakes cover 23% of the ground, and Earth stands 56° above the horizon.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L26",
@@ -10054,9 +10108,9 @@
     "zone_dry_sub_humid": 0.148
    },
    "figures": {
-    "area": "872,000 km²",
-    "waters": "331,000 km²",
-    "lake_area": "239,000 km²",
+    "area": "872,000 km²",
+    "waters": "331,000 km²",
+    "lake_area": "239,000 km²",
     "districts": "23",
     "land_pieces": "73",
     "falls": "0",
@@ -10072,27 +10126,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "89%",
-    "river": "9,600 m³/s",
-    "relief": "1,800 m",
-    "highest": "5,400 m",
-    "mean_height": "1,000 m",
-    "coast_depth": "1,000 m",
+    "river": "9,600 m³/s",
+    "relief": "1,800 m",
+    "highest": "5,400 m",
+    "mean_height": "1,000 m",
+    "coast_depth": "1,000 m",
     "earth": "23°",
     "earth_low": "2°",
     "earth_high": "46°",
-    "air": "27 °C",
-    "air_cool": "24 °C",
-    "air_warm": "32 °C",
-    "air_low": "27 °C",
-    "air_high": "28 °C",
-    "swing": "3.9 °C",
-    "rain": "1,300 mm",
-    "rain_low": "770 mm",
-    "rain_high": "2,060 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "3.8 m",
-    "largest_crater": "184 km",
+    "air": "27 °C",
+    "air_cool": "24 °C",
+    "air_warm": "32 °C",
+    "air_low": "27 °C",
+    "air_high": "28 °C",
+    "swing": "3.9 °C",
+    "rain": "1,300 mm",
+    "rain_low": "770 mm",
+    "rain_high": "2,060 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "3.8 m",
+    "largest_crater": "184 km",
     "centre": "20° S, 67° E"
    },
    "detail": {
@@ -10121,7 +10175,8 @@
       44.72
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 9583,
      "unit": "Teiteimania"
@@ -10584,8 +10639,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:Smythii–Marginis Sea": "Dagat na Katzeh"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Facing Uamoana and Dagat na Katzeh almost equally, this wet country holds some 690 lakes over 29% of its land, and its largest river, 9,600 m³/s, runs out through Teiteimania to Uamoana. Earth hangs low, about 23° up, and the nights are mostly dim.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L27",
@@ -10659,9 +10715,9 @@
     "zone_humid": 0.013
    },
    "figures": {
-    "area": "727,000 km²",
-    "waters": "0 km²",
-    "lake_area": "354,000 km²",
+    "area": "727,000 km²",
+    "waters": "0 km²",
+    "lake_area": "354,000 km²",
     "districts": "21",
     "land_pieces": "2",
     "falls": "0",
@@ -10677,25 +10733,25 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "63%",
-    "river": "4,300 m³/s",
-    "relief": "3,200 m",
-    "highest": "6,400 m",
-    "mean_height": "3,400 m",
+    "river": "4,300 m³/s",
+    "relief": "3,200 m",
+    "highest": "6,400 m",
+    "mean_height": "3,400 m",
     "earth": "−26°",
     "earth_low": "−41°",
     "earth_high": "−9°",
-    "air": "25 °C",
-    "air_cool": "23 °C",
-    "air_warm": "28 °C",
-    "air_low": "24 °C",
-    "air_high": "25 °C",
-    "swing": "2.3 °C",
-    "rain": "1,860 mm",
-    "rain_low": "1,190 mm",
-    "rain_high": "2,400 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "largest_crater": "184 km",
+    "air": "25 °C",
+    "air_cool": "23 °C",
+    "air_warm": "28 °C",
+    "air_low": "24 °C",
+    "air_high": "25 °C",
+    "swing": "2.3 °C",
+    "rain": "1,860 mm",
+    "rain_low": "1,190 mm",
+    "rain_high": "2,400 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "largest_crater": "184 km",
     "centre": "14° S, 118° E"
    },
    "detail": {
@@ -10721,6 +10777,7 @@
      ]
     },
     "heights_above": "the common level",
+    "heights_above_anchor": null,
     "largest_river": {
      "flow_m3s": 4349,
      "unit": "Yoguni"
@@ -11042,8 +11099,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:Smythii–Marginis Sea": "Dagat na Katzeh"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Half of this landlocked far-side upland is lake water: 400 lakes cover 51% of it. Its water parts two ways, nearly two-thirds toward Uamoana and the rest toward Dagat na Katzeh, and its sky never holds Earth.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L28",
@@ -11117,9 +11175,9 @@
     "zone_humid": 0.048
    },
    "figures": {
-    "area": "1,030,000 km²",
-    "waters": "161,000 km²",
-    "lake_area": "508,000 km²",
+    "area": "1,030,000 km²",
+    "waters": "161,000 km²",
+    "lake_area": "508,000 km²",
     "districts": "22",
     "land_pieces": "47",
     "falls": "0",
@@ -11135,27 +11193,27 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "41%",
-    "river": "3,100 m³/s",
-    "relief": "3,700 m",
-    "highest": "5,200 m",
-    "mean_height": "710 m",
-    "coast_depth": "1,360 m",
+    "river": "3,100 m³/s",
+    "relief": "3,700 m",
+    "highest": "5,200 m",
+    "mean_height": "710 m",
+    "coast_depth": "1,360 m",
     "earth": "−52°",
     "earth_low": "−75°",
     "earth_high": "−31°",
-    "air": "24 °C",
-    "air_cool": "23 °C",
-    "air_warm": "27 °C",
-    "air_low": "24 °C",
-    "air_high": "25 °C",
-    "swing": "1.6 °C",
-    "rain": "2,570 mm",
-    "rain_low": "1,250 mm",
-    "rain_high": "3,750 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "2.2 m",
-    "largest_crater": "0 km",
+    "air": "24 °C",
+    "air_cool": "23 °C",
+    "air_warm": "27 °C",
+    "air_low": "24 °C",
+    "air_high": "25 °C",
+    "swing": "1.6 °C",
+    "rain": "2,570 mm",
+    "rain_low": "1,250 mm",
+    "rain_high": "3,750 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "2.2 m",
+    "largest_crater": "0 km",
     "centre": "8° S, 144° E"
    },
    "detail": {
@@ -11184,7 +11242,8 @@
       142.03
      ]
     },
-    "heights_above": "the Hanaqucha level",
+    "heights_above": "the level of Hanaqucha",
+    "heights_above_anchor": "sea:Mare Moscoviense",
     "largest_river": {
      "flow_m3s": 3074,
      "unit": "Quyllurquchakuna"
@@ -11580,8 +11639,9 @@
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa",
     "sea:Smythii–Marginis Sea": "Dagat na Katzeh"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Lakes cover 52% of this land, the largest share of any region, some 620 of them across 22 districts. Their water is shared among four seas, Hanaqucha, Uamoana, Dagat na Katzeh and the salt H'Jamo Melaĥa, and no single river grows large; the biggest carries 3,100 m³/s. Earth is below the horizon everywhere in it.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L29",
@@ -11656,9 +11716,9 @@
     "zone_dry_sub_humid": 0.032
    },
    "figures": {
-    "area": "590,000 km²",
-    "waters": "216,000 km²",
-    "lake_area": "240,000 km²",
+    "area": "590,000 km²",
+    "waters": "216,000 km²",
+    "lake_area": "240,000 km²",
     "districts": "12",
     "land_pieces": "74",
     "falls": "4",
@@ -11674,27 +11734,27 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "13,000 m³/s",
-    "relief": "5,000 m",
-    "highest": "10,300 m",
-    "mean_height": "4,500 m",
-    "coast_depth": "1,600 m",
+    "river": "13,000 m³/s",
+    "relief": "5,000 m",
+    "highest": "10,300 m",
+    "mean_height": "4,500 m",
+    "coast_depth": "1,600 m",
     "earth": "−55°",
     "earth_low": "−74°",
     "earth_high": "−8°",
-    "air": "24 °C",
-    "air_cool": "22 °C",
-    "air_warm": "26 °C",
-    "air_low": "22 °C",
-    "air_high": "26 °C",
-    "swing": "1.7 °C",
-    "rain": "2,080 mm",
-    "rain_low": "1,240 mm",
-    "rain_high": "3,030 mm",
-    "falls_gw": "18 GW",
-    "falls_total_gw": "42 GW",
-    "tide": "3.2 m",
-    "largest_crater": "0 km",
+    "air": "24 °C",
+    "air_cool": "22 °C",
+    "air_warm": "26 °C",
+    "air_low": "22 °C",
+    "air_high": "26 °C",
+    "swing": "1.7 °C",
+    "rain": "2,080 mm",
+    "rain_low": "1,240 mm",
+    "rain_high": "3,030 mm",
+    "falls_gw": "18 GW",
+    "falls_total_gw": "42 GW",
+    "tide": "3.2 m",
+    "largest_crater": "0 km",
     "centre": "12° S, 153° W"
    },
    "detail": {
@@ -11721,7 +11781,8 @@
       202.03
      ]
     },
-    "heights_above": "the H'Jamo Melaĥa level",
+    "heights_above": "the level of H'Jamo Melaĥa",
+    "heights_above_anchor": "sea:South Pole–Aitken Sea",
     "largest_river": {
      "flow_m3s": 12929,
      "unit": "Tikaquchakuna"
@@ -12032,8 +12093,9 @@
     "coast:-26.8,-165.9": "Kanchaychimpa",
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa"
    },
-   "text": null,
-   "text_stale": []
+   "text": "From heights of 10,300 m, among the highest on the Moon, this wet land falls all the way to the salt shore of H'Jamo Melaĥa, and every river runs the same way. On the way down they pass 4 steep reaches with 42 GW of falling water, the strongest 18 GW in Hatunllaqta. Lakes cover 43% of the ground.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L30",
@@ -12106,9 +12168,9 @@
     "zone_arid": 1.0
    },
    "figures": {
-    "area": "4,300 km²",
-    "waters": "21,400 km²",
-    "lake_area": "0 km²",
+    "area": "4,300 km²",
+    "waters": "21,400 km²",
+    "lake_area": "0 km²",
     "districts": "1",
     "land_pieces": "1",
     "falls": "0",
@@ -12124,27 +12186,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "0 m³/s",
-    "relief": "3,200 m",
-    "highest": "690 m",
-    "mean_height": "−990 m",
-    "coast_depth": "590 m",
+    "river": "0 m³/s",
+    "relief": "3,200 m",
+    "highest": "690 m",
+    "mean_height": "−990 m",
+    "coast_depth": "590 m",
     "earth": "55°",
     "earth_low": "53°",
     "earth_high": "56°",
-    "air": "28 °C",
-    "air_cool": "25 °C",
-    "air_warm": "33 °C",
-    "air_low": "28 °C",
-    "air_high": "28 °C",
-    "swing": "5.4 °C",
-    "rain": "180 mm",
-    "rain_low": "180 mm",
-    "rain_high": "180 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "1.3 m",
-    "largest_crater": "61 km",
+    "air": "28 °C",
+    "air_cool": "25 °C",
+    "air_warm": "33 °C",
+    "air_low": "28 °C",
+    "air_high": "28 °C",
+    "swing": "5.4 °C",
+    "rain": "180 mm",
+    "rain_low": "180 mm",
+    "rain_high": "180 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "1.3 m",
+    "largest_crater": "61 km",
     "centre": "24° S, 27° W"
    },
    "detail": {
@@ -12169,7 +12231,8 @@
       336.66
      ]
     },
-    "heights_above": "the Bultengiz level",
+    "heights_above": "the level of Bultengiz",
+    "heights_above_anchor": "sea:southern near-side seas",
     "largest_river": {
      "flow_m3s": 0,
      "unit": "'Ute'utepoka"
@@ -12226,8 +12289,9 @@
     "coast:-22.3,-20.6": "Gibilmoana",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "A single crater rises out of Bultengiz, 4,300 km² of land amid 21,400 km² of its own coastal water, its rim reaching 690 m. Small tides of 1.3 m wash its shore, and Earth stands 55° above it.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L31",
@@ -12303,9 +12367,9 @@
     "zone_dry_sub_humid": 0.005
    },
    "figures": {
-    "area": "883,000 km²",
-    "waters": "651,000 km²",
-    "lake_area": "57,700 km²",
+    "area": "883,000 km²",
+    "waters": "651,000 km²",
+    "lake_area": "57,700 km²",
     "districts": "20",
     "land_pieces": "277",
     "falls": "0",
@@ -12321,27 +12385,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "72%",
-    "river": "400 m³/s",
-    "relief": "2,000 m",
-    "highest": "6,000 m",
-    "mean_height": "1,200 m",
-    "coast_depth": "550 m",
+    "river": "400 m³/s",
+    "relief": "2,000 m",
+    "highest": "6,000 m",
+    "mean_height": "1,200 m",
+    "coast_depth": "550 m",
     "earth": "56°",
     "earth_low": "11°",
     "earth_high": "78°",
-    "air": "27 °C",
-    "air_cool": "25 °C",
-    "air_warm": "32 °C",
-    "air_low": "26 °C",
-    "air_high": "29 °C",
-    "swing": "4.7 °C",
-    "rain": "520 mm",
-    "rain_low": "230 mm",
-    "rain_high": "1,070 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "3.1 m",
-    "largest_crater": "227 km",
+    "air": "27 °C",
+    "air_cool": "25 °C",
+    "air_warm": "32 °C",
+    "air_low": "26 °C",
+    "air_high": "29 °C",
+    "swing": "4.7 °C",
+    "rain": "520 mm",
+    "rain_low": "230 mm",
+    "rain_high": "1,070 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "3.1 m",
+    "largest_crater": "227 km",
     "centre": "23° S, 3° W"
    },
    "detail": {
@@ -12371,7 +12435,8 @@
       25.03
      ]
     },
-    "heights_above": "the Uamoana level",
+    "heights_above": "the level of Uamoana",
+    "heights_above_anchor": "sea:near-side sea",
     "largest_river": {
      "flow_m3s": 400,
      "unit": "Myngoy"
@@ -12908,8 +12973,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Four heritage sites lie here, more than in any other region: Apollo 14 at Fra Mauro, ashore in Juldyzkollar, and under the sea the Luna 2 impact, Luna 24 and the Resilience crash site. Its semi-arid land lies in 277 separate pieces, scattered through 651,000 km² of coastal water, more of both than any other region holds.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L32",
@@ -12984,9 +13050,9 @@
     "zone_wet": 0.156
    },
    "figures": {
-    "area": "565,000 km²",
-    "waters": "49,100 km²",
-    "lake_area": "180,000 km²",
+    "area": "565,000 km²",
+    "waters": "49,100 km²",
+    "lake_area": "180,000 km²",
     "districts": "13",
     "land_pieces": "7",
     "falls": "0",
@@ -13002,27 +13068,27 @@
     "earth_share": "43%",
     "ice_share": "0%",
     "drains_main_share": "90%",
-    "river": "8,200 m³/s",
-    "relief": "3,000 m",
-    "highest": "5,500 m",
-    "mean_height": "710 m",
-    "coast_depth": "1,780 m",
+    "river": "8,200 m³/s",
+    "relief": "3,000 m",
+    "highest": "5,500 m",
+    "mean_height": "710 m",
+    "coast_depth": "1,780 m",
     "earth": "−1°",
     "earth_low": "−34°",
     "earth_high": "21°",
-    "air": "26 °C",
-    "air_cool": "23 °C",
-    "air_warm": "31 °C",
-    "air_low": "25 °C",
-    "air_high": "27 °C",
-    "swing": "4.3 °C",
-    "rain": "1,130 mm",
-    "rain_low": "620 mm",
-    "rain_high": "2,120 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "1.1 m",
-    "largest_crater": "91 km",
+    "air": "26 °C",
+    "air_cool": "23 °C",
+    "air_warm": "31 °C",
+    "air_low": "25 °C",
+    "air_high": "27 °C",
+    "swing": "4.3 °C",
+    "rain": "1,130 mm",
+    "rain_low": "620 mm",
+    "rain_high": "2,120 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "1.1 m",
+    "largest_crater": "91 km",
     "centre": "22° S, 94° E"
    },
    "detail": {
@@ -13050,7 +13116,8 @@
       102.59
      ]
     },
-    "heights_above": "the Dagat na Katzeh level",
+    "heights_above": "the level of Dagat na Katzeh",
+    "heights_above_anchor": "sea:Smythii–Marginis Sea",
     "largest_river": {
      "flow_m3s": 8218,
      "unit": "Nchi Dunia"
@@ -13299,8 +13366,9 @@
     "sea:Smythii–Marginis Sea": "Dagat na Katzeh",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Deep water lies off these humid hills, 1,780 m on average in Dagat na Katzeh, yet nine-tenths of the land drains away from that shore, to Uamoana. Lakes cover 34% of it, and its largest river carries 8,200 m³/s through Nchi Dunia. Earth sits on the horizon line, up over 43% of the land and below the horizon over the rest.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L33",
@@ -13376,9 +13444,9 @@
     "zone_semi_arid": 0.282
    },
    "figures": {
-    "area": "514,000 km²",
-    "waters": "185,000 km²",
-    "lake_area": "136,000 km²",
+    "area": "514,000 km²",
+    "waters": "185,000 km²",
+    "lake_area": "136,000 km²",
     "districts": "17",
     "land_pieces": "22",
     "falls": "6",
@@ -13394,27 +13462,27 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "93%",
-    "river": "31,000 m³/s",
-    "relief": "3,600 m",
-    "highest": "8,600 m",
-    "mean_height": "2,300 m",
-    "coast_depth": "1,460 m",
+    "river": "31,000 m³/s",
+    "relief": "3,600 m",
+    "highest": "8,600 m",
+    "mean_height": "2,300 m",
+    "coast_depth": "1,460 m",
     "earth": "−69°",
     "earth_low": "−84°",
     "earth_high": "−49°",
-    "air": "26 °C",
-    "air_cool": "23 °C",
-    "air_warm": "29 °C",
-    "air_low": "24 °C",
-    "air_high": "27 °C",
-    "swing": "3.0 °C",
-    "rain": "1,150 mm",
-    "rain_low": "270 mm",
-    "rain_high": "2,260 mm",
-    "falls_gw": "40 GW",
-    "falls_total_gw": "130 GW",
-    "tide": "3.5 m",
-    "largest_crater": "173 km",
+    "air": "26 °C",
+    "air_cool": "23 °C",
+    "air_warm": "29 °C",
+    "air_low": "24 °C",
+    "air_high": "27 °C",
+    "swing": "3.0 °C",
+    "rain": "1,150 mm",
+    "rain_low": "270 mm",
+    "rain_high": "2,260 mm",
+    "falls_gw": "40 GW",
+    "falls_total_gw": "130 GW",
+    "tide": "3.5 m",
+    "largest_crater": "173 km",
     "centre": "11° S, 169° E"
    },
    "detail": {
@@ -13444,7 +13512,8 @@
       190.09
      ]
     },
-    "heights_above": "the H'Jamo Melaĥa level",
+    "heights_above": "the level of H'Jamo Melaĥa",
+    "heights_above_anchor": "sea:South Pole–Aitken Sea",
     "largest_river": {
      "flow_m3s": 30699,
      "unit": "Intiqucha"
@@ -13809,8 +13878,9 @@
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa",
     "sea:Mare Moscoviense": "Hanaqucha"
    },
-   "text": null,
-   "text_stale": []
+   "text": "The Moon's largest river runs here, 31,000 m³/s through Intiqucha to H'Jamo Melaĥa. Its 6 steep reaches carry 130 GW of falling water, more than any other region's, and the land ranges from wet to arid. Four-fifths of the water along its coast is salt; the rest belongs to fresh Hanaqucha.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L34",
@@ -13885,9 +13955,9 @@
     "zone_dry_sub_humid": 0.12
    },
    "figures": {
-    "area": "713,000 km²",
-    "waters": "96,000 km²",
-    "lake_area": "169,000 km²",
+    "area": "713,000 km²",
+    "waters": "96,000 km²",
+    "lake_area": "169,000 km²",
     "districts": "13",
     "land_pieces": "52",
     "falls": "0",
@@ -13903,27 +13973,27 @@
     "earth_share": "under 1%",
     "ice_share": "0%",
     "drains_main_share": "48%",
-    "river": "5,300 m³/s",
-    "relief": "2,700 m",
-    "highest": "8,200 m",
-    "mean_height": "2,000 m",
-    "coast_depth": "870 m",
+    "river": "5,300 m³/s",
+    "relief": "2,700 m",
+    "highest": "8,200 m",
+    "mean_height": "2,000 m",
+    "coast_depth": "870 m",
     "earth": "−22°",
     "earth_low": "−49°",
     "earth_high": "3°",
-    "air": "24 °C",
-    "air_cool": "21 °C",
-    "air_warm": "28 °C",
-    "air_low": "23 °C",
-    "air_high": "24 °C",
-    "swing": "3.8 °C",
-    "rain": "1,090 mm",
-    "rain_low": "700 mm",
-    "rain_high": "1,590 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "1.3 m",
-    "largest_crater": "0 km",
+    "air": "24 °C",
+    "air_cool": "21 °C",
+    "air_warm": "28 °C",
+    "air_low": "23 °C",
+    "air_high": "24 °C",
+    "swing": "3.8 °C",
+    "rain": "1,090 mm",
+    "rain_low": "700 mm",
+    "rain_high": "1,590 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "1.3 m",
+    "largest_crater": "0 km",
     "centre": "25° S, 122° W"
    },
    "detail": {
@@ -13952,7 +14022,8 @@
       247.66
      ]
     },
-    "heights_above": "the Bahari Mashariki level",
+    "heights_above": "the level of Bahari Mashariki",
+    "heights_above_anchor": "sea:Mare Orientale",
     "largest_river": {
      "flow_m3s": 5327,
      "unit": "Nchi Jiwe"
@@ -14218,8 +14289,9 @@
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Its coast lies on Bahari Mashariki, yet the largest share of this humid land drains to the salt water of H'Jamo Melaĥa, and so does its largest river, 5,300 m³/s through Nchi Jiwe; some water reaches Bultengiz too. Some 630 lakes cover a quarter of the land. Earth barely shows in its sky, and its nights are dim.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L35",
@@ -14294,9 +14366,9 @@
     "zone_dry_sub_humid": 0.276
    },
    "figures": {
-    "area": "599,000 km²",
-    "waters": "65,700 km²",
-    "lake_area": "29,500 km²",
+    "area": "599,000 km²",
+    "waters": "65,700 km²",
+    "lake_area": "29,500 km²",
     "districts": "11",
     "land_pieces": "24",
     "falls": "0",
@@ -14312,27 +14384,27 @@
     "earth_share": "95%",
     "ice_share": "0%",
     "drains_main_share": "63%",
-    "river": "15,000 m³/s",
-    "relief": "2,500 m",
-    "highest": "4,300 m",
-    "mean_height": "−130 m",
-    "coast_depth": "1,120 m",
+    "river": "15,000 m³/s",
+    "relief": "2,500 m",
+    "highest": "4,300 m",
+    "mean_height": "−130 m",
+    "coast_depth": "1,120 m",
     "earth": "9°",
     "earth_low": "−4°",
     "earth_high": "23°",
-    "air": "26 °C",
-    "air_cool": "23 °C",
-    "air_warm": "31 °C",
-    "air_low": "25 °C",
-    "air_high": "26 °C",
-    "swing": "5.3 °C",
-    "rain": "610 mm",
-    "rain_low": "390 mm",
-    "rain_high": "880 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "1.4 m",
-    "largest_crater": "162 km",
+    "air": "26 °C",
+    "air_cool": "23 °C",
+    "air_warm": "31 °C",
+    "air_low": "25 °C",
+    "air_high": "26 °C",
+    "swing": "5.3 °C",
+    "rain": "610 mm",
+    "rain_low": "390 mm",
+    "rain_high": "880 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "1.4 m",
+    "largest_crater": "162 km",
     "centre": "30° S, 81° W"
    },
    "detail": {
@@ -14361,7 +14433,8 @@
       275.47
      ]
     },
-    "heights_above": "the Bahari Mashariki level",
+    "heights_above": "the level of Bahari Mashariki",
+    "heights_above_anchor": "sea:Mare Orientale",
     "largest_river": {
      "flow_m3s": 14905,
      "unit": "Tambarare Jani"
@@ -14595,8 +14668,9 @@
     "sea:southern near-side seas": "Bultengiz",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Earth stays low here, about 9° above the horizon, up over nearly all the land, and the nights it lights are dim. Humid ground and semi-arid ground lie side by side, holding 400 lakes, and a river of 15,000 m³/s crosses Tambarare Jani toward Uamoana.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L36",
@@ -14671,9 +14745,9 @@
     "zone_humid": 0.024
    },
    "figures": {
-    "area": "833,000 km²",
-    "waters": "67,300 km²",
-    "lake_area": "800 km²",
+    "area": "833,000 km²",
+    "waters": "67,300 km²",
+    "lake_area": "800 km²",
     "districts": "12",
     "land_pieces": "29",
     "falls": "0",
@@ -14689,27 +14763,27 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "98%",
-    "river": "37 m³/s",
-    "relief": "2,200 m",
-    "highest": "4,300 m",
-    "mean_height": "1,400 m",
-    "coast_depth": "330 m",
+    "river": "37 m³/s",
+    "relief": "2,200 m",
+    "highest": "4,300 m",
+    "mean_height": "1,400 m",
+    "coast_depth": "330 m",
     "earth": "32°",
     "earth_low": "15°",
     "earth_high": "52°",
-    "air": "27 °C",
-    "air_cool": "24 °C",
-    "air_warm": "33 °C",
-    "air_low": "27 °C",
-    "air_high": "27 °C",
-    "swing": "6.3 °C",
-    "rain": "290 mm",
-    "rain_low": "110 mm",
-    "rain_high": "450 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "1.3 m",
-    "largest_crater": "156 km",
+    "air": "27 °C",
+    "air_cool": "24 °C",
+    "air_warm": "33 °C",
+    "air_low": "27 °C",
+    "air_high": "27 °C",
+    "swing": "6.3 °C",
+    "rain": "290 mm",
+    "rain_low": "110 mm",
+    "rain_high": "450 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "1.3 m",
+    "largest_crater": "156 km",
     "centre": "44° S, 45° W"
    },
    "detail": {
@@ -14737,7 +14811,8 @@
       306.66
      ]
     },
-    "heights_above": "the Bultengiz level",
+    "heights_above": "the level of Bultengiz",
+    "heights_above_anchor": "sea:southern near-side seas",
     "largest_river": {
      "flow_m3s": 37,
      "unit": "Asyloy"
@@ -14979,8 +15054,9 @@
     "sea:southern near-side seas": "Bultengiz",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Its 12 districts are all crater floors, semi-arid, with few lakes and almost no running water: the largest stream carries 37 m³/s. Earth stands 32° above the horizon and lights its nights. The ground rises to 4,300 m above Bultengiz, and all but one of its districts drain there.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L37",
@@ -15054,9 +15130,9 @@
     "zone_humid": 0.019
    },
    "figures": {
-    "area": "802,000 km²",
-    "waters": "0 km²",
-    "lake_area": "9,000 km²",
+    "area": "802,000 km²",
+    "waters": "0 km²",
+    "lake_area": "9,000 km²",
     "districts": "8",
     "land_pieces": "1",
     "falls": "0",
@@ -15072,25 +15148,25 @@
     "earth_share": "75%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "95 m³/s",
-    "relief": "2,200 m",
-    "highest": "4,600 m",
-    "mean_height": "770 m",
+    "river": "95 m³/s",
+    "relief": "2,200 m",
+    "highest": "4,600 m",
+    "mean_height": "770 m",
     "earth": "11°",
     "earth_low": "−16°",
     "earth_high": "37°",
-    "air": "27 °C",
-    "air_cool": "24 °C",
-    "air_warm": "33 °C",
-    "air_low": "27 °C",
-    "air_high": "28 °C",
-    "swing": "6.5 °C",
-    "rain": "260 mm",
-    "rain_low": "150 mm",
-    "rain_high": "400 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "largest_crater": "116 km",
+    "air": "27 °C",
+    "air_cool": "24 °C",
+    "air_warm": "33 °C",
+    "air_low": "27 °C",
+    "air_high": "28 °C",
+    "swing": "6.5 °C",
+    "rain": "260 mm",
+    "rain_low": "150 mm",
+    "rain_high": "400 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "largest_crater": "116 km",
     "centre": "46° S, 60° E"
    },
    "detail": {
@@ -15115,6 +15191,7 @@
      ]
     },
     "heights_above": "the common level",
+    "heights_above_anchor": null,
     "largest_river": {
      "flow_m3s": 95,
      "unit": "Jelkollar"
@@ -15278,8 +15355,9 @@
     "crater:Barnard": "Jasylkollar",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Day and night differ more here than in any other region, though only by 6.5 °C. This landlocked, semi-arid upland sends all its little water to Uamoana through the lands around it. Earth stands low, 11° up on average, and lights most of its nights.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L38",
@@ -15354,9 +15432,9 @@
     "zone_arid": 0.018
    },
    "figures": {
-    "area": "736,000 km²",
-    "waters": "25,000 km²",
-    "lake_area": "89,300 km²",
+    "area": "736,000 km²",
+    "waters": "25,000 km²",
+    "lake_area": "89,300 km²",
     "districts": "11",
     "land_pieces": "8",
     "falls": "0",
@@ -15372,27 +15450,27 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "86%",
-    "river": "8,200 m³/s",
-    "relief": "3,200 m",
-    "highest": "7,600 m",
-    "mean_height": "1,100 m",
-    "coast_depth": "900 m",
+    "river": "8,200 m³/s",
+    "relief": "3,200 m",
+    "highest": "7,600 m",
+    "mean_height": "1,100 m",
+    "coast_depth": "900 m",
     "earth": "−27°",
     "earth_low": "−53°",
     "earth_high": "−3°",
-    "air": "27 °C",
-    "air_cool": "24 °C",
-    "air_warm": "32 °C",
-    "air_low": "26 °C",
-    "air_high": "28 °C",
-    "swing": "5.3 °C",
-    "rain": "450 mm",
-    "rain_low": "180 mm",
-    "rain_high": "820 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "2.8 m",
-    "largest_crater": "260 km",
+    "air": "27 °C",
+    "air_cool": "24 °C",
+    "air_warm": "32 °C",
+    "air_low": "26 °C",
+    "air_high": "28 °C",
+    "swing": "5.3 °C",
+    "rain": "450 mm",
+    "rain_low": "180 mm",
+    "rain_high": "820 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "2.8 m",
+    "largest_crater": "260 km",
     "centre": "41° S, 120° E"
    },
    "detail": {
@@ -15420,7 +15498,8 @@
       128.22
      ]
     },
-    "heights_above": "the H'Jamo Melaĥa level",
+    "heights_above": "the level of H'Jamo Melaĥa",
+    "heights_above_anchor": "sea:South Pole–Aitken Sea",
     "largest_river": {
      "flow_m3s": 8205,
      "unit": "H'Lagim Sola"
@@ -15649,8 +15728,9 @@
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Lakes string these semi-arid far-side hills, covering 13% of the land. Their short coast lies on the salt water of H'Jamo Melaĥa, but most of their rivers, the largest 8,200 m³/s through H'Lagim Sola, turn the other way and reach Uamoana across other lands. Their nights are dim and Earthless.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L39",
@@ -15723,9 +15803,9 @@
     "zone_arid": 1.0
    },
    "figures": {
-    "area": "3,300 km²",
-    "waters": "111,000 km²",
-    "lake_area": "0 km²",
+    "area": "3,300 km²",
+    "waters": "111,000 km²",
+    "lake_area": "0 km²",
     "districts": "1",
     "land_pieces": "20",
     "falls": "0",
@@ -15741,27 +15821,27 @@
     "earth_share": "0%",
     "ice_share": "0%",
     "drains_main_share": "100%",
-    "river": "0 m³/s",
-    "relief": "580 m",
-    "highest": "1,100 m",
-    "mean_height": "340 m",
-    "coast_depth": "2,270 m",
+    "river": "0 m³/s",
+    "relief": "580 m",
+    "highest": "1,100 m",
+    "mean_height": "340 m",
+    "coast_depth": "2,270 m",
     "earth": "−55°",
     "earth_low": "−61°",
     "earth_high": "−48°",
-    "air": "28 °C",
-    "air_cool": "25 °C",
-    "air_warm": "31 °C",
-    "air_low": "28 °C",
-    "air_high": "28 °C",
-    "swing": "3.7 °C",
-    "rain": "160 mm",
-    "rain_low": "140 mm",
-    "rain_high": "170 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "3.1 m",
-    "largest_crater": "0 km",
+    "air": "28 °C",
+    "air_cool": "25 °C",
+    "air_warm": "31 °C",
+    "air_low": "28 °C",
+    "air_high": "28 °C",
+    "swing": "3.7 °C",
+    "rain": "160 mm",
+    "rain_low": "140 mm",
+    "rain_high": "170 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "3.1 m",
+    "largest_crater": "0 km",
     "centre": "36° S, 175° E"
    },
    "detail": {
@@ -15786,7 +15866,8 @@
       174.66
      ]
     },
-    "heights_above": "the H'Jamo Melaĥa level",
+    "heights_above": "the level of H'Jamo Melaĥa",
+    "heights_above_anchor": "sea:South Pole–Aitken Sea",
     "largest_river": {
      "flow_m3s": 0,
      "unit": "'Ute'utemotu"
@@ -15843,8 +15924,9 @@
     "feature:Mare Ingenii": "Ingenii",
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa"
    },
-   "text": null,
-   "text_stale": []
+   "text": "The smallest region is a scatter of 20 islets, 3,300 km² in all, in the salt water of H'Jamo Melaĥa. The sea around them is deeper than off any other region's coast, 2,270 m on average, and Earth never rises over them.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L40",
@@ -15918,9 +16000,9 @@
     "zone_semi_arid": 0.953
    },
    "figures": {
-    "area": "903,000 km²",
-    "waters": "86,900 km²",
-    "lake_area": "33,500 km²",
+    "area": "903,000 km²",
+    "waters": "86,900 km²",
+    "lake_area": "33,500 km²",
     "districts": "14",
     "land_pieces": "15",
     "falls": "3",
@@ -15936,27 +16018,27 @@
     "earth_share": "42%",
     "ice_share": "0%",
     "drains_main_share": "76%",
-    "river": "5,600 m³/s",
-    "relief": "3,200 m",
-    "highest": "8,200 m",
-    "mean_height": "2,200 m",
-    "coast_depth": "1,530 m",
+    "river": "5,600 m³/s",
+    "relief": "3,200 m",
+    "highest": "8,200 m",
+    "mean_height": "2,200 m",
+    "coast_depth": "1,530 m",
     "earth": "−5°",
     "earth_low": "−48°",
     "earth_high": "24°",
-    "air": "26 °C",
-    "air_cool": "23 °C",
-    "air_warm": "30 °C",
-    "air_low": "25 °C",
-    "air_high": "27 °C",
-    "swing": "5.4 °C",
-    "rain": "320 mm",
-    "rain_low": "160 mm",
-    "rain_high": "510 mm",
-    "falls_gw": "6.7 GW",
-    "falls_total_gw": "17 GW",
-    "tide": "2.4 m",
-    "largest_crater": "78 km",
+    "air": "26 °C",
+    "air_cool": "23 °C",
+    "air_warm": "30 °C",
+    "air_low": "25 °C",
+    "air_high": "27 °C",
+    "swing": "5.4 °C",
+    "rain": "320 mm",
+    "rain_low": "160 mm",
+    "rain_high": "510 mm",
+    "falls_gw": "6.7 GW",
+    "falls_total_gw": "17 GW",
+    "tide": "2.4 m",
+    "largest_crater": "78 km",
     "centre": "50° S, 98° W"
    },
    "detail": {
@@ -15983,7 +16065,8 @@
       236.78
      ]
     },
-    "heights_above": "the H'Jamo Melaĥa level",
+    "heights_above": "the level of H'Jamo Melaĥa",
+    "heights_above_anchor": "sea:South Pole–Aitken Sea",
     "largest_river": {
      "flow_m3s": 5612,
      "unit": "H'Lago Profunda"
@@ -16270,8 +16353,9 @@
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Across this semi-arid upland the nights come in three kinds, lit by Earth, twilit and dim, and Earth is in the sky over 42% of it. In H'Lagim Atika a river falls through 3 steep reaches with 17 GW of falling water on its way to H'Jamo Melaĥa, and the heights reach 8,200 m above that salt sea.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L41",
@@ -16346,9 +16430,9 @@
     "zone_semi_arid": 0.29
    },
    "figures": {
-    "area": "900,000 km²",
-    "waters": "0 km²",
-    "lake_area": "100 km²",
+    "area": "900,000 km²",
+    "waters": "0 km²",
+    "lake_area": "100 km²",
     "districts": "11",
     "land_pieces": "4",
     "falls": "0",
@@ -16364,25 +16448,25 @@
     "earth_share": "100%",
     "ice_share": "0%",
     "drains_main_share": "90%",
-    "river": "0 m³/s",
-    "relief": "2,600 m",
-    "highest": "7,200 m",
-    "mean_height": "1,100 m",
+    "river": "0 m³/s",
+    "relief": "2,600 m",
+    "highest": "7,200 m",
+    "mean_height": "1,100 m",
     "earth": "36°",
     "earth_low": "18°",
     "earth_high": "60°",
-    "air": "27 °C",
-    "air_cool": "24 °C",
-    "air_warm": "32 °C",
-    "air_low": "27 °C",
-    "air_high": "28 °C",
-    "swing": "6.2 °C",
-    "rain": "200 mm",
-    "rain_low": "50 mm",
-    "rain_high": "470 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "largest_crater": "201 km",
+    "air": "27 °C",
+    "air_cool": "24 °C",
+    "air_warm": "32 °C",
+    "air_low": "27 °C",
+    "air_high": "28 °C",
+    "swing": "6.2 °C",
+    "rain": "200 mm",
+    "rain_low": "50 mm",
+    "rain_high": "470 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "largest_crater": "201 km",
     "centre": "56° S, 6° E"
    },
    "detail": {
@@ -16409,6 +16493,7 @@
      ]
     },
     "heights_above": "the common level",
+    "heights_above_anchor": null,
     "largest_river": {
      "flow_m3s": 0,
      "unit": "Hufra Zahr"
@@ -16600,8 +16685,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "No coast reaches this dry country: most of it is arid, and it holds only 6 small lakes and no lasting river. Earth is up over all of it, 36° above the horizon on average, and lights each night.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L42",
@@ -16674,9 +16760,9 @@
     "zone_arid": 1.0
    },
    "figures": {
-    "area": "358,000 km²",
-    "waters": "175,000 km²",
-    "lake_area": "0 km²",
+    "area": "358,000 km²",
+    "waters": "175,000 km²",
+    "lake_area": "0 km²",
     "districts": "6",
     "land_pieces": "52",
     "falls": "0",
@@ -16692,27 +16778,27 @@
     "earth_share": "40%",
     "ice_share": "0%",
     "drains_main_share": "55%",
-    "river": "0 m³/s",
-    "relief": "3,900 m",
-    "highest": "8,000 m",
-    "mean_height": "1,800 m",
-    "coast_depth": "1,570 m",
+    "river": "0 m³/s",
+    "relief": "3,900 m",
+    "highest": "8,000 m",
+    "mean_height": "1,800 m",
+    "coast_depth": "1,570 m",
     "earth": "−3°",
     "earth_low": "−20°",
     "earth_high": "14°",
-    "air": "26 °C",
-    "air_cool": "24 °C",
-    "air_warm": "29 °C",
-    "air_low": "26 °C",
-    "air_high": "28 °C",
-    "swing": "3.7 °C",
-    "rain": "45 mm",
-    "rain_low": "15 mm",
-    "rain_high": "90 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "3.3 m",
-    "largest_crater": "301 km",
+    "air": "26 °C",
+    "air_cool": "24 °C",
+    "air_warm": "29 °C",
+    "air_low": "26 °C",
+    "air_high": "28 °C",
+    "swing": "3.7 °C",
+    "rain": "45 mm",
+    "rain_low": "15 mm",
+    "rain_high": "90 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "3.3 m",
+    "largest_crater": "301 km",
     "centre": "68° S, 91° W"
    },
    "detail": {
@@ -16739,7 +16825,8 @@
       259.34
      ]
     },
-    "heights_above": "the H'Jamo Melaĥa level",
+    "heights_above": "the level of H'Jamo Melaĥa",
+    "heights_above_anchor": "sea:South Pole–Aitken Sea",
     "largest_river": {
      "flow_m3s": 0,
      "unit": "H'Erco Sabla"
@@ -16891,8 +16978,9 @@
     "sea:near-side sea": "Uamoana",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Arid mountains rise here to 8,000 m above the salt water of H'Jamo Melaĥa, with 45 mm of rain a year and neither lakes nor lasting rivers. No region has clearer skies, with cloud over only 24% of them, and most nights are polar twilight.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L43",
@@ -16966,9 +17054,9 @@
     "zone_semi_arid": 0.221
    },
    "figures": {
-    "area": "595,000 km²",
-    "waters": "23,800 km²",
-    "lake_area": "0 km²",
+    "area": "595,000 km²",
+    "waters": "23,800 km²",
+    "lake_area": "0 km²",
     "districts": "11",
     "land_pieces": "8",
     "falls": "0",
@@ -16984,27 +17072,27 @@
     "earth_share": "81%",
     "ice_share": "0%",
     "drains_main_share": "98%",
-    "river": "0 m³/s",
-    "relief": "2,900 m",
-    "highest": "6,900 m",
-    "mean_height": "1,400 m",
-    "coast_depth": "1,290 m",
+    "river": "0 m³/s",
+    "relief": "2,900 m",
+    "highest": "6,900 m",
+    "mean_height": "1,400 m",
+    "coast_depth": "1,290 m",
     "earth": "7°",
     "earth_low": "−12°",
     "earth_high": "26°",
-    "air": "27 °C",
-    "air_cool": "24 °C",
-    "air_warm": "31 °C",
-    "air_low": "25 °C",
-    "air_high": "28 °C",
-    "swing": "4.8 °C",
-    "rain": "50 mm",
-    "rain_low": "30 mm",
-    "rain_high": "90 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "3.4 m",
-    "largest_crater": "128 km",
+    "air": "27 °C",
+    "air_cool": "24 °C",
+    "air_warm": "31 °C",
+    "air_low": "25 °C",
+    "air_high": "28 °C",
+    "swing": "4.8 °C",
+    "rain": "50 mm",
+    "rain_low": "30 mm",
+    "rain_high": "90 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "3.4 m",
+    "largest_crater": "128 km",
     "centre": "69° S, 56° E"
    },
    "detail": {
@@ -17031,7 +17119,8 @@
       96.91
      ]
     },
-    "heights_above": "the H'Jamo Melaĥa level",
+    "heights_above": "the level of H'Jamo Melaĥa",
+    "heights_above_anchor": "sea:South Pole–Aitken Sea",
     "largest_river": {
      "flow_m3s": 0,
      "unit": "H'Montetim Sabla"
@@ -17248,8 +17337,9 @@
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Chandrayaan-3's landing at Shiv Shakti point and the Luna 25 crash site both lie on land here, in H'Montetim Tera and H'Midbaro Kokava, two districts of an arid polar country. With 50 mm of rain a year it has no lakes and no lasting river. Earth is up over 81% of the land, and most nights are lit by Earth.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L44",
@@ -17323,9 +17413,9 @@
     "zone_semi_arid": 0.035
    },
    "figures": {
-    "area": "518,000 km²",
-    "waters": "274,000 km²",
-    "lake_area": "7,600 km²",
+    "area": "518,000 km²",
+    "waters": "274,000 km²",
+    "lake_area": "7,600 km²",
     "districts": "8",
     "land_pieces": "68",
     "falls": "0",
@@ -17341,27 +17431,27 @@
     "earth_share": "under 1%",
     "ice_share": "0%",
     "drains_main_share": "73%",
-    "river": "3,300 m³/s",
-    "relief": "3,000 m",
-    "highest": "6,900 m",
-    "mean_height": "1,300 m",
-    "coast_depth": "1,490 m",
+    "river": "3,300 m³/s",
+    "relief": "3,000 m",
+    "highest": "6,900 m",
+    "mean_height": "1,300 m",
+    "coast_depth": "1,490 m",
     "earth": "−16°",
     "earth_low": "−40°",
     "earth_high": "0°",
-    "air": "27 °C",
-    "air_cool": "24 °C",
-    "air_warm": "31 °C",
-    "air_low": "27 °C",
-    "air_high": "28 °C",
-    "swing": "4.8 °C",
-    "rain": "55 mm",
-    "rain_low": "25 mm",
-    "rain_high": "120 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "2.6 m",
-    "largest_crater": "66 km",
+    "air": "27 °C",
+    "air_cool": "24 °C",
+    "air_warm": "31 °C",
+    "air_low": "27 °C",
+    "air_high": "28 °C",
+    "swing": "4.8 °C",
+    "rain": "55 mm",
+    "rain_low": "25 mm",
+    "rain_high": "120 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "2.6 m",
+    "largest_crater": "66 km",
     "centre": "64° S, 118° E"
    },
    "detail": {
@@ -17388,7 +17478,8 @@
       119.09
      ]
     },
-    "heights_above": "the H'Jamo Melaĥa level",
+    "heights_above": "the level of H'Jamo Melaĥa",
+    "heights_above_anchor": "sea:South Pole–Aitken Sea",
     "largest_river": {
      "flow_m3s": 3253,
      "unit": "H'Lago Longa"
@@ -17610,8 +17701,9 @@
     "sea:South Pole–Aitken Sea": "H'Jamo Melaĥa",
     "sea:near-side sea": "Uamoana"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Through these arid hills, which get only 55 mm of rain a year, a river of 3,300 m³/s passes through H'Lago Longa on its long way to Uamoana. Along the salt water of H'Jamo Melaĥa the land lies in 68 separate pieces. The nights are twilit, and Earth stays below the horizon over almost all of it.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   },
   {
    "code": "L45",
@@ -17687,9 +17779,9 @@
     "zone_dry_sub_humid": 0.032
    },
    "figures": {
-    "area": "684,000 km²",
-    "waters": "32,800 km²",
-    "lake_area": "0 km²",
+    "area": "684,000 km²",
+    "waters": "32,800 km²",
+    "lake_area": "0 km²",
     "districts": "13",
     "land_pieces": "14",
     "falls": "0",
@@ -17705,27 +17797,27 @@
     "earth_share": "82%",
     "ice_share": "0%",
     "drains_main_share": "36%",
-    "river": "0 m³/s",
-    "relief": "3,400 m",
-    "highest": "8,700 m",
-    "mean_height": "1,700 m",
-    "coast_depth": "940 m",
+    "river": "0 m³/s",
+    "relief": "3,400 m",
+    "highest": "8,700 m",
+    "mean_height": "1,700 m",
+    "coast_depth": "940 m",
     "earth": "9°",
     "earth_low": "−11°",
     "earth_high": "29°",
-    "air": "26 °C",
-    "air_cool": "24 °C",
-    "air_warm": "29 °C",
-    "air_low": "25 °C",
-    "air_high": "27 °C",
-    "swing": "3.7 °C",
-    "rain": "55 mm",
-    "rain_low": "20 mm",
-    "rain_high": "100 mm",
-    "falls_gw": "0.0 GW",
-    "falls_total_gw": "0.0 GW",
-    "tide": "3.5 m",
-    "largest_crater": "231 km",
+    "air": "26 °C",
+    "air_cool": "24 °C",
+    "air_warm": "29 °C",
+    "air_low": "25 °C",
+    "air_high": "27 °C",
+    "swing": "3.7 °C",
+    "rain": "55 mm",
+    "rain_low": "20 mm",
+    "rain_high": "100 mm",
+    "falls_gw": "0.0 GW",
+    "falls_total_gw": "0.0 GW",
+    "tide": "3.5 m",
+    "largest_crater": "231 km",
     "centre": "83° S, 148° W"
    },
    "detail": {
@@ -17755,7 +17847,8 @@
       39.41
      ]
     },
-    "heights_above": "the H'Jamo Melaĥa level",
+    "heights_above": "the level of H'Jamo Melaĥa",
+    "heights_above_anchor": "sea:South Pole–Aitken Sea",
     "largest_river": {
      "flow_m3s": 0,
      "unit": "H'Emeko Profunda"
@@ -18023,16 +18116,17 @@
     "sea:near-side sea": "Uamoana",
     "sea:southern near-side seas": "Bultengiz"
    },
-   "text": null,
-   "text_stale": []
+   "text": "Three heritage sites lie in the craters of this polar land. Two share the crater of H'Erco Kokava: the Lunar Prospector impact, which carried Shoemaker's ashes, and the LCROSS impact in Cabeus. IM-1 Odysseus stands in H'Kratero Geŝema. The ground climbs to 8,700 m above H'Jamo Melaĥa and sheds its water almost evenly three ways, to Uamoana, H'Jamo Melaĥa and Bultengiz.",
+   "text_stale": [],
+   "text_written": "2026-11-18"
   }
  ],
- "seconds": 19,
+ "seconds": 27,
  "texts": {
-  "written": 0,
-  "missing": 45,
+  "written": 45,
+  "missing": 0,
   "stale": 0,
   "table": "research/studies/atlas_round/region_texts.json",
-  "table_sha256": null
+  "table_sha256": "3111b3d77e17069061c7c0f414b1d2552a65e8cdef2c6007f6f88cf43eb66722"
  }
 }

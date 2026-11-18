@@ -1,0 +1,857 @@
+{
+ "about": "Each land region's short text for the globe, written by hand from its fact sheet (region_profiles.py), keyed by the region's anchor. {key} shows a figure from the current fact sheet and [name] another place under its current name; rests_on holds the facts the wording rests on, and a text whose facts have moved past their tolerance is listed as stale until it is rewritten. Drafted at a lower setting from the fact sheets and reviewed and edited by the lead writer, 18 November 2026.",
+ "texts": {
+  "region:crater:W  Bond": {
+   "name": "H'Ebeno Ŝtona",
+   "text": "Crater after crater makes up this polar plain on the shore of [Uamoana]: {crater_floors} of its {districts} districts are old crater floors. Only {rain} of rain falls in a year, too little for any river to form. Earth stands {earth} above the horizon on average, high enough to light most of its nights.",
+   "places": {
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "band": "polar",
+    "side": "limb",
+    "main_zone": "arid",
+    "river": 0,
+    "night": "Earthlit",
+    "main_sea": "sea:near-side sea",
+    "crater_floors": 14,
+    "earth": 16.0875,
+    "rain": 41.8416,
+    "districts": 15
+   },
+   "written": "2026-11-18"
+  },
+  "region:crater:Poncelet@70,-157": {
+   "name": "H'Valo Lajla",
+   "text": "The largest region is also the driest, with {rain} of rain a year. Earth is in the sky over only {earth_share} of the land, and most nights are polar twilight, lit by the Sun just below the horizon, its light scattered down by the tall air. The arid heights climb to {highest} above [Uamoana].",
+   "places": {
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "rain": 31.6716,
+    "area": 1147430,
+    "earth_share": 0.4713,
+    "night": "twilit",
+    "band": "polar",
+    "side": "limb",
+    "main_zone": "arid",
+    "main_sea": "sea:near-side sea"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:70.8,116.6": {
+   "name": "H'Montetim Luma",
+   "text": "Every district of these arid hills drains to [Juldyztengiz], and their largest river, {river}, runs through [H'Lago Ŝtona]. Earth is in the sky over most of the land and never rises over the rest; twilight fills the polar nights. The tides on its coasts are small, {tide}.",
+   "places": {
+    "Juldyztengiz": "sea:Mare Humboldtianum",
+    "H'Lago Ŝtona": "lake:70.8,116.6"
+   },
+   "rests_on": {
+    "drains_main": "sea:Mare Humboldtianum",
+    "districts_draining_elsewhere": 0,
+    "main_zone": "arid",
+    "side": "limb",
+    "band": "polar",
+    "tide_class": "microtidal",
+    "earth_share": 0.6211
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:67.2,172.4": {
+   "name": "H'Kresto Aduma",
+   "text": "No coast touches this ridge country, yet all {districts} of its districts send their water to [Juldyztengiz] across neighbouring lands. The ground rises to {highest} above the level of [Juldyztengiz], and its largest river, {river}, runs through [H'Lago Ŝemeŝa]. Earth stays below the horizon over nearly all of it, and its nights are twilit.",
+   "places": {
+    "Juldyztengiz": "sea:Mare Humboldtianum",
+    "H'Lago Ŝemeŝa": "lake:50.1,-177.4"
+   },
+   "rests_on": {
+    "waters": 0,
+    "drains_main": "sea:Mare Humboldtianum",
+    "districts_draining_elsewhere": 0,
+    "earth_share": 0.002,
+    "night": "twilit",
+    "side": "far",
+    "band": "polar",
+    "districts": 12
+   },
+   "written": "2026-11-18"
+  },
+  "region:crater:Gerard Q Outer@47,-91": {
+   "name": "Altynjer",
+   "text": "This high ground is semi-arid from end to end and stands {mean_height} above [Uamoana] on average. It gets {rain} of rain a year and keeps only three small lakes and no lasting river. Earth shows above the horizon over under a third of it, and elsewhere the nights are twilit.",
+   "places": {
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "main_zone": "semi-arid",
+    "zone_semi_arid": 1.0,
+    "mean_height": 2095.4483,
+    "lakes": 3,
+    "river": 0,
+    "earth_share": 0.2917,
+    "night": "twilit",
+    "side": "limb",
+    "lake_share": 0.0,
+    "main_sea": "sea:near-side sea"
+   },
+   "written": "2026-11-18"
+  },
+  "region:feature:Lacus Temporis": {
+   "name": "Jeljaylau",
+   "text": "One of the Moon's greatest rivers crosses this semi-arid land: {river} through the lakes of [Umitkollar], dropping through two steep reaches with {falls_total_gw} of falling water on its way to [Uamoana]. The coast faces [Juldyztengiz] and, through the strait of [Eskibogaz], [Uamoana] as well. The Hakuto-R Mission 1 crash site lies in the crater of [Juldyzoy].",
+   "places": {
+    "Umitkollar": "feature:Lacus Spei",
+    "Uamoana": "sea:near-side sea",
+    "Juldyztengiz": "sea:Mare Humboldtianum",
+    "Eskibogaz": "coast:51.8,40.2",
+    "Juldyzoy": "crater:Atlas"
+   },
+   "rests_on": {
+    "river": 29217,
+    "main_zone": "semi-arid",
+    "falls": 2,
+    "drains_main": "sea:near-side sea",
+    "main_sea": "sea:Mare Humboldtianum",
+    "heritage_sites": 1
+   },
+   "written": "2026-11-18"
+  },
+  "region:ground:50.1,107.8": {
+   "name": "Tamazirt Raml",
+   "text": "Rugged and arid, this far-side highland still holds some {lakes} lakes, and every one of its rivers, the largest carrying {river} through [Wadi Shams], runs to [Juldyztengiz]. Its ground climbs to {highest} above that sea. Earth stays below the horizon over almost all of it, and the nights are twilit.",
+   "places": {
+    "Wadi Shams": "lake:41.5,134.9@46,142",
+    "Juldyztengiz": "sea:Mare Humboldtianum"
+   },
+   "rests_on": {
+    "main_zone": "arid",
+    "side": "far",
+    "lakes": 130,
+    "drains_main": "sea:Mare Humboldtianum",
+    "districts_draining_elsewhere": 0,
+    "earth_share": 0.0439,
+    "night": "twilit",
+    "band": "high",
+    "main_sea": "sea:Mare Humboldtianum"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:37.6,172.2": {
+   "name": "Dungusiyenloko",
+   "text": "A third of this wet far-side country lies under some {lakes} lakes, and most of its water runs to [Hanaqucha]. In [Siyensiyenloko] its largest river, {river}, drops through a single steep reach with {falls_gw} of falling water. Earth never rises here, and the nights stay dim, never quite dark.",
+   "places": {
+    "Hanaqucha": "sea:Mare Moscoviense",
+    "Siyensiyenloko": "lake:26.7,-171.0"
+   },
+   "rests_on": {
+    "lake_share": 0.334,
+    "main_zone": "wet",
+    "side": "far",
+    "drains_main": "sea:Mare Moscoviense",
+    "drains_main_share": 0.8197,
+    "falls": 1,
+    "night": "dim",
+    "earth_share": 0.0
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:25.2,-125.6": {
+   "name": "Nchi Jani",
+   "text": "Landlocked and humid, this highland is scattered with {lakes} small lakes, none of them feeding a large river: the biggest carries {river}. Most of its water reaches [Uamoana] by way of neighbouring lands. Almost all its rain falls by day, and its far-side nights are dim.",
+   "places": {
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "waters": 0,
+    "main_zone": "humid",
+    "mean_height": 3471.3771,
+    "lakes": 472,
+    "lake_share": 0.026,
+    "river": 50,
+    "drains_main": "sea:near-side sea",
+    "drains_main_share": 0.8757,
+    "night_rain": 0.0282,
+    "night": "dim",
+    "side": "far"
+   },
+   "written": "2026-11-18"
+  },
+  "region:feature:Montes Jura": {
+   "name": "Raamania",
+   "text": "Across {waters} of [Uamoana] lie {land_pieces} islands and islets, the highest rising to {highest}. Earth stands about {earth} up over all of them, so every night there is lit by Earth, and tides of {tide} wash their shores. The land is broadly semi-arid.",
+   "places": {
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "island_group": true,
+    "land_pieces": 79,
+    "earth_share": 1.0,
+    "night": "Earthlit",
+    "side": "near",
+    "main_zone": "semi-arid",
+    "tide_class": "mesotidal"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:28.9,80.4@32,92": {
+   "name": "Uafenua",
+   "text": "Two heritage sites lie under [Atatahatai], off this wet lake country: Apollo 17 at Taurus-Littrow, and Lunokhod 2 with Luna 21. Onshore some {lakes} lakes cover {lake_share} of the land, and in [Maakusiyenloko] a river of {river} drops through a steep reach with {falls_gw} of falling water before reaching [Uamoana].",
+   "places": {
+    "Atatahatai": "coast:22.1,29.7",
+    "Maakusiyenloko": "lake:37.9,70.2",
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "heritage_sites": 2,
+    "main_zone": "wet",
+    "river": 29216,
+    "falls": 1,
+    "drains_main": "sea:near-side sea"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:16.3,134.8": {
+   "name": "Kiriguni",
+   "text": "Steep reaches with {falls_total_gw} of falling water break the rivers of this wet far-side land, where {lakes} lakes cover {lake_share} of the ground. Its coast lies on [Hanaqucha], but most of the water leaves by other ways: to [Dagat na Katzeh], and to [Juldyztengiz] by its largest river, {river} through [Midoriikeno]. No Earth shows in its sky.",
+   "places": {
+    "Hanaqucha": "sea:Mare Moscoviense",
+    "Dagat na Katzeh": "sea:Smythii–Marginis Sea",
+    "Juldyztengiz": "sea:Mare Humboldtianum",
+    "Midoriikeno": "lake:35.7,136.5"
+   },
+   "rests_on": {
+    "falls": 2,
+    "main_zone": "wet",
+    "side": "far",
+    "main_sea": "sea:Mare Moscoviense",
+    "drains_main": "sea:Smythii–Marginis Sea",
+    "drains_main_share": 0.6041,
+    "districts_draining_elsewhere": 9,
+    "earth_share": 0.0
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:31.7,-156.5": {
+   "name": "Kumoikeno",
+   "text": "Water leaves this landlocked lake country four ways, to [Juldyztengiz], [Uamoana], [Bahari Mashariki] and [Hanaqucha], from ground that averages {mean_height} above the level of [Juldyztengiz] and climbs to {highest}. It is wet, and {lakes} lakes cover {lake_share} of it. Earth never shows in its sky, and its nights are dim.",
+   "places": {
+    "Juldyztengiz": "sea:Mare Humboldtianum",
+    "Uamoana": "sea:near-side sea",
+    "Bahari Mashariki": "sea:Mare Orientale",
+    "Hanaqucha": "sea:Mare Moscoviense"
+   },
+   "rests_on": {
+    "waters": 0,
+    "mean_height": 5664.1396,
+    "drains_main": "sea:Mare Humboldtianum",
+    "districts_draining_elsewhere": 7,
+    "main_zone": "wet",
+    "side": "far",
+    "night": "dim",
+    "earth_share": 0.0
+   },
+   "written": "2026-11-18"
+  },
+  "region:ground:30.4,-115.8@22,-100": {
+   "name": "Msitu Kijani",
+   "text": "No region has a cloudier sky: cloud covers {cloud} of it on average, over land humid almost throughout. Every district drains to [Uamoana]; the largest river, {river}, runs through the lakes of [Maziwa Dunia], and two steep reaches in [Maziwa Dhahabu] carry {falls_total_gw} of falling water. Earth stands low on the horizon over most of the land.",
+   "places": {
+    "Uamoana": "sea:near-side sea",
+    "Maziwa Dunia": "lake:14.9,-75.5",
+    "Maziwa Dhahabu": "lake:9.2,-81.8"
+   },
+   "rests_on": {
+    "cloud": 0.7665,
+    "main_zone": "humid",
+    "zone_humid": 0.847,
+    "drains_main": "sea:near-side sea",
+    "districts_draining_elsewhere": 0,
+    "falls": 2,
+    "earth": 2.1962,
+    "earth_share": 0.6169,
+    "side": "limb"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:17.7,-41.0@23,-38": {
+   "name": "Hamada Aswad",
+   "text": "Low and level, this arid plain lies on old lava basalt over {basalt_share} of its ground and stands on average barely {mean_height} above [Uamoana]. Tides of {tide}, among the greatest on the Moon, run in over its shores. Earth, {earth} above the horizon, keeps its nights lit.",
+   "places": {
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "basalt_share": 0.824,
+    "main_zone": "arid",
+    "mean_height": 253.3084,
+    "tide": 4.1089,
+    "tide_class": "macrotidal",
+    "night": "Earthlit",
+    "side": "near",
+    "relief": 482,
+    "main_sea": "sea:near-side sea",
+    "earth": 44.1242
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-9.1,-177.1": {
+   "name": "Paraurqu",
+   "text": "These mountains have more steep reaches than any other region, {falls} of them with {falls_total_gw} of falling water, on rivers that run mostly to [Hanaqucha]; the largest carries {river}. Lakes cover half the ground, and the land is wet. Earth lies far below the horizon, and the nights are as dark as a moonless night on Earth.",
+   "places": {
+    "Hanaqucha": "sea:Mare Moscoviense"
+   },
+   "rests_on": {
+    "falls": 10,
+    "lake_share": 0.509,
+    "main_zone": "wet",
+    "drains_main": "sea:Mare Moscoviense",
+    "side": "far",
+    "night": "dark",
+    "drains_main_share": 0.9594,
+    "earth_share": 0.0
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:0.8,-128.7@2,-120": {
+   "name": "Gubat na Geshem",
+   "text": "No country on the Moon stands higher: its ground averages {mean_height} above the level of [H'Jamo Melaĥa] and climbs to {highest}. Lakes cover {lake_share} of it, and its rivers fall through {falls} steep reaches, with {falls_total_gw} of falling water, on their way to [Bahari Mashariki] and the salt water of [H'Jamo Melaĥa]. Its nights are fully dark.",
+   "places": {
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea",
+    "Bahari Mashariki": "sea:Mare Orientale"
+   },
+   "rests_on": {
+    "mean_height": 6418.5307,
+    "highest": 10308.2559,
+    "waters": 0,
+    "lake_share": 0.453,
+    "falls": 5,
+    "drains_main": "sea:Mare Orientale",
+    "side": "far",
+    "night": "dark"
+   },
+   "written": "2026-11-18"
+  },
+  "region:ground:30.4,-115.8@14,-115": {
+   "name": "Maziwa Mvua",
+   "text": "Spread over {districts} districts, some {lakes} lakes cover {lake_share} of this wet and humid land. Its own shore is on [Bahari Mashariki], but nearly nine-tenths of the land drains the other way, to [Uamoana]. Earth shows over a small part of it, and most nights are dark.",
+   "places": {
+    "Bahari Mashariki": "sea:Mare Orientale",
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "main_zone": "wet",
+    "main_sea": "sea:Mare Orientale",
+    "drains_main": "sea:near-side sea",
+    "drains_main_share": 0.8781,
+    "earth_share": 0.1469,
+    "night": "dark",
+    "side": "limb"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:5.0,-34.4": {
+   "name": "Karadala",
+   "text": "Old lava basalt covers {basalt_share} of this semi-arid plain, the highest share anywhere, and nowhere does the land rise more than {highest} above [Bultengiz]. A river of {river} crosses [Myngol] to [Bultengiz], and offshore, under [Kokjaga], lies the Surveyor 1 landing site.",
+   "places": {
+    "Bultengiz": "sea:southern near-side seas",
+    "Myngol": "lake:6.1,-57.2",
+    "Kokjaga": "coast:-3.3,-37.9"
+   },
+   "rests_on": {
+    "basalt_share": 0.89,
+    "main_zone": "semi-arid",
+    "highest": 1833.1881,
+    "drains_main": "sea:southern near-side seas",
+    "heritage_sites": 1,
+    "main_sea": "sea:southern near-side seas"
+   },
+   "written": "2026-11-18"
+  },
+  "region:feature:Sinus Medii": {
+   "name": "Pooirimania",
+   "text": "Some {lakes} lakes, more than in any other region, lie on this wet basalt plain, and its water divides almost evenly between [Uamoana] and [Bultengiz]. Earth stands high, {earth} above the horizon. Apollo 12 and Surveyor 3 lie in the crater of [Mata'isiyenloko], on dry ground.",
+   "places": {
+    "Uamoana": "sea:near-side sea",
+    "Bultengiz": "sea:southern near-side seas",
+    "Mata'isiyenloko": "crater:Fra Mauro"
+   },
+   "rests_on": {
+    "lakes": 786,
+    "main_zone": "wet",
+    "basalt_share": 0.655,
+    "drains_main": "sea:near-side sea",
+    "drains_main_share": 0.5569,
+    "earth": 67.9874,
+    "night": "Earthlit",
+    "heritage_sites": 1
+   },
+   "written": "2026-11-18"
+  },
+  "region:feature:Lacus Lenitatis": {
+   "name": "Kohulim",
+   "text": "Nowhere does Earth stand higher: {earth} up, almost overhead, lighting every night over this wet lake country. Offshore, under the waters of [Galtahatai] and [Pooiritahatai], lie two landing sites: Apollo 11 at Tranquility Base and Apollo 15 at Hadley-Apennine. Onshore some {lakes} lakes cover {lake_share} of the land, and nearly all of it drains to [Uamoana].",
+   "places": {
+    "Galtahatai": "coast:7.7,21.3",
+    "Pooiritahatai": "coast:29.4,6.7",
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "earth": 78.5133,
+    "night": "Earthlit",
+    "side": "near",
+    "main_zone": "wet",
+    "heritage_sites": 2,
+    "drains_main": "sea:near-side sea",
+    "drains_main_share": 0.9766
+   },
+   "written": "2026-11-18"
+  },
+  "region:feature:Palus Somni": {
+   "name": "Honuaawa",
+   "text": "Tides of {tide} rise and fall along this coast, among the greatest on the Moon. Behind it {lakes} lakes cover a quarter of the wet land, and all of it drains to [Uamoana] by rivers no larger than {river}. Its nights are lit by Earth.",
+   "places": {
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "tide": 5.333,
+    "tide_class": "macrotidal",
+    "lake_share": 0.242,
+    "main_zone": "wet",
+    "drains_main": "sea:near-side sea",
+    "districts_draining_elsewhere": 0,
+    "river": 753,
+    "night": "Earthlit"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:15.5,119.9": {
+   "name": "Lawalawang Anan",
+   "text": "[Dagat na Katzeh] receives every river of this wet far-side country, the largest carrying {river} through [Lawalawang Ale]. Lakes cover {lake_share} of the land, and no steep reach breaks the rivers' fall to the sea. Earth shows over almost none of it, and the nights are mostly dark.",
+   "places": {
+    "Dagat na Katzeh": "sea:Smythii–Marginis Sea",
+    "Lawalawang Ale": "lake:20.1,108.0"
+   },
+   "rests_on": {
+    "drains_main": "sea:Smythii–Marginis Sea",
+    "districts_draining_elsewhere": 0,
+    "main_zone": "wet",
+    "side": "far",
+    "falls": 0,
+    "earth_share": 0.0143,
+    "night": "dark"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-15.5,-48.9": {
+   "name": "Tambarare Wingu",
+   "text": "The Luna 9 landing site lies on dry ground in [Mbuga Nyota], in a cloudy land of {districts} districts, mostly wet and humid, whose {lakes} lakes drain mainly to [Bultengiz]. Earth stands {earth} up, yet at their darkest its nights fall below 1 lux.",
+   "places": {
+    "Mbuga Nyota": "ground:8.6,-67.3",
+    "Bultengiz": "sea:southern near-side seas"
+   },
+   "rests_on": {
+    "cloud": 0.5839,
+    "zone_wet": 0.349,
+    "zone_humid": 0.333,
+    "drains_main": "sea:southern near-side seas",
+    "drains_main_share": 0.7646,
+    "night": "dim",
+    "side": "near",
+    "heritage_sites": 1,
+    "earth": 25.0666
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-16.5,43.7": {
+   "name": "Atafenua",
+   "text": "Two heritage sites lie under lake water here: Apollo 16's Descartes site beneath a lake in [Abnufenua], and SLIM beneath another in ['Uo'uofenua]. Its coast on [Uamoana] has the greatest tides on the Moon, {tide} from low water to high. In this wet land {lakes} lakes cover {lake_share} of the ground, and Earth stands {earth} above the horizon.",
+   "places": {
+    "Abnufenua": "lake:-7.5,11.4",
+    "'Uo'uofenua": "lake:-15.8,21.9",
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "heritage_sites": 2,
+    "tide": 6.1375,
+    "tide_class": "macrotidal",
+    "main_sea": "sea:near-side sea",
+    "main_zone": "wet",
+    "night": "Earthlit",
+    "side": "near"
+   },
+   "written": "2026-11-18"
+  },
+  "region:feature:Mare Undarum": {
+   "name": "Musulim",
+   "text": "Facing [Uamoana] and [Dagat na Katzeh] almost equally, this wet country holds some {lakes} lakes over {lake_share} of its land, and its largest river, {river}, runs out through [Teiteimania] to [Uamoana]. Earth hangs low, about {earth} up, and the nights are mostly dim.",
+   "places": {
+    "Uamoana": "sea:near-side sea",
+    "Dagat na Katzeh": "sea:Smythii–Marginis Sea",
+    "Teiteimania": "lake:-6.9,67.8"
+   },
+   "rests_on": {
+    "main_sea": "sea:near-side sea",
+    "main_zone": "wet",
+    "drains_main": "sea:near-side sea",
+    "earth": 23.3431,
+    "night": "dim",
+    "side": "near"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-23.3,106.1": {
+   "name": "Asadani",
+   "text": "Half of this landlocked far-side upland is lake water: {lakes} lakes cover {lake_share} of it. Its water parts two ways, nearly two-thirds toward [Uamoana] and the rest toward [Dagat na Katzeh], and its sky never holds Earth.",
+   "places": {
+    "Uamoana": "sea:near-side sea",
+    "Dagat na Katzeh": "sea:Smythii–Marginis Sea"
+   },
+   "rests_on": {
+    "lake_share": 0.508,
+    "waters": 0,
+    "drains_main": "sea:near-side sea",
+    "drains_main_share": 0.6318,
+    "main_zone": "wet",
+    "side": "far",
+    "mean_height": 3399.4656,
+    "earth_share": 0.0
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-22.7,135.5": {
+   "name": "Puyuquchakuna",
+   "text": "Lakes cover {lake_share} of this land, the largest share of any region, some {lakes} of them across {districts} districts. Their water is shared among four seas, [Hanaqucha], [Uamoana], [Dagat na Katzeh] and the salt [H'Jamo Melaĥa], and no single river grows large; the biggest carries {river}. Earth is below the horizon everywhere in it.",
+   "places": {
+    "Hanaqucha": "sea:Mare Moscoviense",
+    "Uamoana": "sea:near-side sea",
+    "Dagat na Katzeh": "sea:Smythii–Marginis Sea",
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea"
+   },
+   "rests_on": {
+    "lake_share": 0.517,
+    "drains_main": "sea:Mare Moscoviense",
+    "districts_draining_elsewhere": 16,
+    "river": 3074,
+    "side": "far",
+    "earth_share": 0.0
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-19.2,-163.1": {
+   "name": "Pukutayllaqta",
+   "text": "From heights of {highest}, among the highest on the Moon, this wet land falls all the way to the salt shore of [H'Jamo Melaĥa], and every river runs the same way. On the way down they pass {falls} steep reaches with {falls_total_gw} of falling water, the strongest {falls_gw} in [Hatunllaqta]. Lakes cover {lake_share} of the ground.",
+   "places": {
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea",
+    "Hatunllaqta": "lake:-23.3,-151.4"
+   },
+   "rests_on": {
+    "highest": 10252.3584,
+    "main_zone": "wet",
+    "salt": true,
+    "drains_main": "sea:South Pole–Aitken Sea",
+    "districts_draining_elsewhere": 0,
+    "falls": 4
+   },
+   "written": "2026-11-18"
+  },
+  "region:crater:Bullialdus": {
+   "name": "'Ute'utepuke",
+   "text": "A single crater rises out of [Bultengiz], {area} of land amid {waters} of its own coastal water, its rim reaching {highest}. Small tides of {tide} wash its shore, and Earth stands {earth} above it.",
+   "places": {
+    "Bultengiz": "sea:southern near-side seas"
+   },
+   "rests_on": {
+    "island_group": true,
+    "land_pieces": 1,
+    "crater_floors": 1,
+    "main_sea": "sea:southern near-side seas",
+    "night": "Earthlit",
+    "side": "near",
+    "tide_class": "microtidal"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-17.4,12.7": {
+   "name": "Kungol",
+   "text": "Four heritage sites lie here, more than in any other region: Apollo 14 at Fra Mauro, ashore in [Juldyzkollar], and under the sea the Luna 2 impact, Luna 24 and the Resilience crash site. Its semi-arid land lies in {land_pieces} separate pieces, scattered through {waters} of coastal water, more of both than any other region holds.",
+   "places": {
+    "Juldyzkollar": "lake:-2.1,-9.9"
+   },
+   "rests_on": {
+    "heritage_sites": 4,
+    "land_pieces": 277,
+    "waters": 650710,
+    "main_zone": "semi-arid"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-12.6,90.0": {
+   "name": "Vilima Alfajiri",
+   "text": "Deep water lies off these humid hills, {coast_depth} on average in [Dagat na Katzeh], yet nine-tenths of the land drains away from that shore, to [Uamoana]. Lakes cover {lake_share} of it, and its largest river carries {river} through [Nchi Dunia]. Earth sits on the horizon line, up over {earth_share} of the land and below the horizon over the rest.",
+   "places": {
+    "Dagat na Katzeh": "sea:Smythii–Marginis Sea",
+    "Uamoana": "sea:near-side sea",
+    "Nchi Dunia": "lake:-26.5,66.8"
+   },
+   "rests_on": {
+    "coast_depth": 1782.1233,
+    "main_zone": "humid",
+    "main_sea": "sea:Smythii–Marginis Sea",
+    "drains_main": "sea:near-side sea",
+    "drains_main_share": 0.9002,
+    "earth_share": 0.4337,
+    "side": "limb"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-19.2,161.9": {
+   "name": "Paqarinwayqu",
+   "text": "The Moon's largest river runs here, {river} through [Intiqucha] to [H'Jamo Melaĥa]. Its {falls} steep reaches carry {falls_total_gw} of falling water, more than any other region's, and the land ranges from wet to arid. Four-fifths of the water along its coast is salt; the rest belongs to fresh [Hanaqucha].",
+   "places": {
+    "Intiqucha": "crater:Vertregt",
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea",
+    "Hanaqucha": "sea:Mare Moscoviense"
+   },
+   "rests_on": {
+    "river": 30699,
+    "falls_total_gw": 129.9,
+    "salt": true,
+    "salt_share": 0.7979,
+    "drains_main": "sea:South Pole–Aitken Sea",
+    "zone_wet": 0.293,
+    "zone_arid": 0.135,
+    "falls": 6
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-33.3,-124.3@-36,-123": {
+   "name": "Mto Usiku",
+   "text": "Its coast lies on [Bahari Mashariki], yet the largest share of this humid land drains to the salt water of [H'Jamo Melaĥa], and so does its largest river, {river} through [Nchi Jiwe]; some water reaches [Bultengiz] too. Some {lakes} lakes cover a quarter of the land. Earth barely shows in its sky, and its nights are dim.",
+   "places": {
+    "Bahari Mashariki": "sea:Mare Orientale",
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea",
+    "Nchi Jiwe": "lake:-33.3,-124.3@-36,-123",
+    "Bultengiz": "sea:southern near-side seas"
+   },
+   "rests_on": {
+    "lake_share": 0.253,
+    "main_zone": "humid",
+    "drains_main": "sea:South Pole–Aitken Sea",
+    "main_sea": "sea:Mare Orientale",
+    "side": "far",
+    "night": "dim",
+    "drains_main_share": 0.4839,
+    "earth_share": 0.0097
+   },
+   "written": "2026-11-18"
+  },
+  "region:crater:Lamarck": {
+   "name": "Msitu Dunia",
+   "text": "Earth stays low here, about {earth} above the horizon, up over nearly all the land, and the nights it lights are dim. Humid ground and semi-arid ground lie side by side, holding {lakes} lakes, and a river of {river} crosses [Tambarare Jani] toward [Uamoana].",
+   "places": {
+    "Tambarare Jani": "lake:-7.9,-82.9",
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "earth": 8.863,
+    "earth_share": 0.9489,
+    "night": "dim",
+    "side": "limb",
+    "zone_humid": 0.43,
+    "zone_semi_arid": 0.294,
+    "lake_share": 0.053
+   },
+   "written": "2026-11-18"
+  },
+  "region:feature:Lacus Timoris": {
+   "name": "Jerdala",
+   "text": "Its {districts} districts are all crater floors, semi-arid, with few lakes and almost no running water: the largest stream carries {river}. Earth stands {earth} above the horizon and lights its nights. The ground rises to {highest} above [Bultengiz], and all but one of its districts drain there.",
+   "places": {
+    "Bultengiz": "sea:southern near-side seas"
+   },
+   "rests_on": {
+    "crater_floors": 12,
+    "districts": 12,
+    "main_zone": "semi-arid",
+    "lakes": 23,
+    "river": 37,
+    "night": "Earthlit",
+    "side": "near",
+    "districts_draining_elsewhere": 1,
+    "drains_main": "sea:southern near-side seas",
+    "main_sea": "sea:southern near-side seas",
+    "earth": 32.2599
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-29.5,64.1@-47,65": {
+   "name": "Tanjaylau",
+   "text": "Day and night differ more here than in any other region, though only by {swing}. This landlocked, semi-arid upland sends all its little water to [Uamoana] through the lands around it. Earth stands low, {earth} up on average, and lights most of its nights.",
+   "places": {
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "swing": 6.5301,
+    "waters": 0,
+    "zone_semi_arid": 0.981,
+    "drains_main": "sea:near-side sea",
+    "districts_draining_elsewhere": 0,
+    "river": 95,
+    "earth": 10.6643,
+    "night": "Earthlit",
+    "side": "limb"
+   },
+   "written": "2026-11-18"
+  },
+  "region:lake:-40.0,132.2@-46,132": {
+   "name": "H'Montetim Ŝemeŝa",
+   "text": "Lakes string these semi-arid far-side hills, covering {lake_share} of the land. Their short coast lies on the salt water of [H'Jamo Melaĥa], but most of their rivers, the largest {river} through [H'Lagim Sola], turn the other way and reach [Uamoana] across other lands. Their nights are dim and Earthless.",
+   "places": {
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea",
+    "H'Lagim Sola": "feature:Lacus Solitudinis",
+    "Uamoana": "sea:near-side sea"
+   },
+   "rests_on": {
+    "side": "far",
+    "main_zone": "semi-arid",
+    "zone_semi_arid": 0.95,
+    "salt": true,
+    "main_sea": "sea:South Pole–Aitken Sea",
+    "drains_main": "sea:near-side sea",
+    "drains_main_share": 0.8638,
+    "night": "dim",
+    "earth_share": 0.0
+   },
+   "written": "2026-11-18"
+  },
+  "region:island:-41.4,172.9": {
+   "name": "Abnupuehu",
+   "text": "The smallest region is a scatter of {land_pieces} islets, {area} in all, in the salt water of [H'Jamo Melaĥa]. The sea around them is deeper than off any other region's coast, {coast_depth} on average, and Earth never rises over them.",
+   "places": {
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea"
+   },
+   "rests_on": {
+    "area": 3337,
+    "island_group": true,
+    "land_pieces": 20,
+    "coast_depth": 2273.0,
+    "salt": true,
+    "side": "far",
+    "earth_share": 0.0
+   },
+   "written": "2026-11-18"
+  },
+  "region:ground:-54.9,-88.9": {
+   "name": "H'Erco Zahava",
+   "text": "Across this semi-arid upland the nights come in three kinds, lit by Earth, twilit and dim, and Earth is in the sky over {earth_share} of it. In [H'Lagim Atika] a river falls through {falls} steep reaches with {falls_total_gw} of falling water on its way to [H'Jamo Melaĥa], and the heights reach {highest} above that salt sea.",
+   "places": {
+    "H'Lagim Atika": "lake:-40.5,-128.7",
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea"
+   },
+   "rests_on": {
+    "main_zone": "semi-arid",
+    "night": "dim",
+    "earth_share": 0.4176,
+    "side": "limb",
+    "falls": 3,
+    "salt": true,
+    "main_sea": "sea:South Pole–Aitken Sea"
+   },
+   "written": "2026-11-18"
+  },
+  "region:ground:-41.9,26.7@-38,31": {
+   "name": "Erg Ahmar",
+   "text": "No coast reaches this dry country: most of it is arid, and it holds only {lakes} small lakes and no lasting river. Earth is up over all of it, {earth} above the horizon on average, and lights each night.",
+   "places": {},
+   "rests_on": {
+    "waters": 0,
+    "main_zone": "arid",
+    "zone_arid": 0.502,
+    "lakes": 6,
+    "river": 0,
+    "earth_share": 1.0,
+    "night": "Earthlit",
+    "side": "near"
+   },
+   "written": "2026-11-18"
+  },
+  "region:crater:Wilson": {
+   "name": "H'Harim Sabla",
+   "text": "Arid mountains rise here to {highest} above the salt water of [H'Jamo Melaĥa], with {rain} of rain a year and neither lakes nor lasting rivers. No region has clearer skies, with cloud over only {cloud} of them, and most nights are polar twilight.",
+   "places": {
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea"
+   },
+   "rests_on": {
+    "main_zone": "arid",
+    "zone_arid": 1.0,
+    "salt": true,
+    "lakes": 0,
+    "river": 0,
+    "cloud": 0.2418,
+    "night": "twilit",
+    "band": "polar",
+    "main_sea": "sea:South Pole–Aitken Sea",
+    "rain": 43.8802
+   },
+   "written": "2026-11-18"
+  },
+  "region:crater:Hedervari": {
+   "name": "H'Midbaro Tera",
+   "text": "Chandrayaan-3's landing at Shiv Shakti point and the Luna 25 crash site both lie on land here, in [H'Montetim Tera] and [H'Midbaro Kokava], two districts of an arid polar country. With {rain} of rain a year it has no lakes and no lasting river. Earth is up over {earth_share} of the land, and most nights are lit by Earth.",
+   "places": {
+    "H'Montetim Tera": "ground:-51.1,56.2@-67,37",
+    "H'Midbaro Kokava": "ground:-51.1,56.2@-56,57"
+   },
+   "rests_on": {
+    "heritage_sites": 2,
+    "main_zone": "arid",
+    "band": "polar",
+    "lakes": 0,
+    "river": 0,
+    "earth_share": 0.8079,
+    "night": "Earthlit",
+    "side": "limb"
+   },
+   "written": "2026-11-18"
+  },
+  "region:crater:Chamberlin": {
+   "name": "H'Montetim Ŝaĥara",
+   "text": "Through these arid hills, which get only {rain} of rain a year, a river of {river} passes through [H'Lago Longa] on its long way to [Uamoana]. Along the salt water of [H'Jamo Melaĥa] the land lies in {land_pieces} separate pieces. The nights are twilit, and Earth stays below the horizon over almost all of it.",
+   "places": {
+    "H'Lago Longa": "lake:-49.8,119.4@-52,129",
+    "Uamoana": "sea:near-side sea",
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea"
+   },
+   "rests_on": {
+    "main_zone": "arid",
+    "river": 3253,
+    "drains_main": "sea:near-side sea",
+    "salt": true,
+    "land_pieces": 68,
+    "earth_share": 0.0011,
+    "night": "twilit",
+    "side": "far"
+   },
+   "written": "2026-11-18"
+  },
+  "region:crater:Cabeus": {
+   "name": "H'Valo Luma",
+   "text": "Three heritage sites lie in the craters of this polar land. Two share the crater of [H'Erco Kokava]: the Lunar Prospector impact, which carried Shoemaker's ashes, and the LCROSS impact in Cabeus. IM-1 Odysseus stands in [H'Kratero Geŝema]. The ground climbs to {highest} above [H'Jamo Melaĥa] and sheds its water almost evenly three ways, to [Uamoana], [H'Jamo Melaĥa] and [Bultengiz].",
+   "places": {
+    "H'Erco Kokava": "crater:Cabeus",
+    "H'Kratero Geŝema": "crater:Demonax",
+    "H'Jamo Melaĥa": "sea:South Pole–Aitken Sea",
+    "Uamoana": "sea:near-side sea",
+    "Bultengiz": "sea:southern near-side seas"
+   },
+   "rests_on": {
+    "heritage_sites": 3,
+    "band": "polar",
+    "drains_main": "sea:near-side sea",
+    "drains_main_share": 0.3575,
+    "districts_draining_elsewhere": 8,
+    "main_sea": "sea:South Pole–Aitken Sea"
+   },
+   "written": "2026-11-18"
+  }
+ }
+}

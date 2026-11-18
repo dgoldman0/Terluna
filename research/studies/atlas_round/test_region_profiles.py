@@ -10,22 +10,23 @@ from research.studies.atlas_round import region_profiles as RP
 
 
 def test_display_forms():
-    assert RP.display('area', 677288) == '677,000 km²'
-    assert RP.display('area', 4259) == '4,300 km²'
-    assert RP.display('lakes', 651) == '650'
-    assert RP.display('lakes', 17) == '17'
-    assert RP.display('lake_share', 0.27) == '27%'
-    assert RP.display('lake_share', 0.004) == 'under 1%'
-    assert RP.display('earth_share', 0.998) == '99%'
-    assert RP.display('river', 7095) == '7,100 m³/s'
-    assert RP.display('river', 688) == '690 m³/s'
-    assert RP.display('rain', 1639.77) == '1,640 mm'
-    assert RP.display('air', 26.65) == '27 °C'
-    assert RP.display('swing', 2.63) == '2.6 °C'
-    assert RP.display('earth', -1.2) == '−1°'
-    assert RP.display('highest', 5312) == '5,300 m'
-    assert RP.display('centre', [8.385, -0.072]) == '8° N, 0°'
-    assert RP.display('centre', [-56.2, 186.0]) == '56° S, 174° W'
+    nb = lambda x: x.replace(' ', '\u00a0', 1) if any(x.endswith(k) for k in ('km²', 'm³/s', ' m', '°C', 'mm', 'GW', ' km')) else x
+    assert RP.display('area', 677288) == nb('677,000 km²')
+    assert RP.display('area', 4259) == nb('4,300 km²')
+    assert RP.display('lakes', 651) == nb('650')
+    assert RP.display('lakes', 17) == nb('17')
+    assert RP.display('lake_share', 0.27) == nb('27%')
+    assert RP.display('lake_share', 0.004) == nb('under 1%')
+    assert RP.display('earth_share', 0.998) == nb('99%')
+    assert RP.display('river', 7095) == nb('7,100 m³/s')
+    assert RP.display('river', 688) == nb('690 m³/s')
+    assert RP.display('rain', 1639.77) == nb('1,640 mm')
+    assert RP.display('air', 26.65) == nb('27 °C')
+    assert RP.display('swing', 2.63) == nb('2.6 °C')
+    assert RP.display('earth', -1.2) == nb('−1°')
+    assert RP.display('highest', 5312) == nb('5,300 m')
+    assert RP.display('centre', [8.385, -0.072]) == nb('8° N, 0°')
+    assert RP.display('centre', [-56.2, 186.0]) == nb('56° S, 174° W')
 
 
 def test_gloss_recovers_each_tongues_words():

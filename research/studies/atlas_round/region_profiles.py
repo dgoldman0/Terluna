@@ -66,6 +66,7 @@ FIGURES = {
     'centre': 'latlon',
 }
 FIGURE_RE = re.compile(r'\{([a-z_]+)\}')
+NB = '\u00a0'                          # a figure's number and unit stay on one line
 PLACE_RE = re.compile(r'\[([^\[\]]+)\]')
 
 
@@ -106,7 +107,7 @@ def display(key, value):
         return part(la, 'N', 'S') + ', ' + part(lo, 'E', 'W')
     v = float(value)
     if kind == 'km2':
-        return _int(_step(v, 100) if v < 10_000 else _sig(v, 3)) + ' km²'
+        return _int(_step(v, 100) if v < 10_000 else _sig(v, 3)) + NB + 'km²'
     if kind == 'int':
         return _int(v)
     if kind == 'count':
@@ -120,25 +121,25 @@ def display(key, value):
             q = 99
         return f'{q}%'
     if kind == 'flow':
-        return _int(_sig(v, 2) if v >= 1000 else _step(v, 10) if v >= 100 else _step(v, 1)) + ' m³/s'
+        return _int(_sig(v, 2) if v >= 1000 else _step(v, 10) if v >= 100 else _step(v, 1)) + NB + 'm³/s'
     if kind == 'height':
-        return _int(_step(v, 100) if abs(v) >= 1000 else _step(v, 10)) + ' m'
+        return _int(_step(v, 100) if abs(v) >= 1000 else _step(v, 10)) + NB + 'm'
     if kind == 'depth':
-        return _int(_step(v, 10)) + ' m'
+        return _int(_step(v, 10)) + NB + 'm'
     if kind == 'deg':
         return _int(v) + '°'
     if kind == 'temp':
-        return _int(v) + ' °C'
+        return _int(v) + NB + '°C'
     if kind == 'diff':
-        return f'{v:.1f} °C'
+        return f'{v:.1f}' + NB + '°C'
     if kind == 'mm':
-        return _int(_step(v, 10) if v >= 100 else _step(v, 5)) + ' mm'
+        return _int(_step(v, 10) if v >= 100 else _step(v, 5)) + NB + 'mm'
     if kind == 'gw':
-        return (_int(v) if v >= 10 else f'{v:.1f}') + ' GW'
+        return (_int(v) if v >= 10 else f'{v:.1f}') + NB + 'GW'
     if kind == 'tide':
-        return f'{v:.1f} m'
+        return f'{v:.1f}' + NB + 'm'
     if kind == 'km':
-        return _int(v) + ' km'
+        return _int(v) + NB + 'km'
     raise KeyError(kind)
 
 
@@ -469,7 +470,8 @@ def build(log=print):
             drains={(seas[k]['anchor'] if k in seas else k): round(v, 3) for k, v in drains.items()},
             seas={seas[k]['anchor']: round(v / cs_area, 3) for k, v in sea_area.items()} if cs_area else {},
             highest_at=dict(today=[round(float(90.0 - (top_r + 0.5) / 16), 2), round(float((top_c + 0.5) / 16), 2)]),
-            heights_above=('the ' + seas[main_sea]['name'] + ' level') if main_sea else 'the common level',
+            heights_above=('the level of ' + seas[main_sea]['name']) if main_sea else 'the common level',
+            heights_above_anchor=seas[main_sea]['anchor'] if main_sea else None,
             largest_river=dict(flow_m3s=river_d['largest_flow_m3s'], unit=river_d['name']),
             falls=[dict(power_gw=x['power_gw'], drop_m=x['drop_m'], flow_m3s=x['flow_m3s'], into=x['into'])
                    for x in here_falls[:3]],
@@ -519,6 +521,8 @@ def build(log=print):
                       'past their tolerance since it was written.'),
         parameters=dict(smooth_deg=SMOOTH_DEG, neighbour_min_km=NEIGHBOUR_MIN_KM, snow_m=SNOW_M,
                         share_tolerance=SHARE_TOLERANCE, relative_tolerance=RELATIVE_TOLERANCE, side_share=SIDE_SHARE),
+        common_level_seas=[s['anchor'] for code, s in seas.items()
+                           if abs(body_level[sea_body[code]] - meta['common_level_m']) < 1.0],
         districts_product=record['product']['sha256'], regions=profiles, seconds=round(time.time() - started))
 
 
