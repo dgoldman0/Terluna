@@ -4,29 +4,30 @@ rivers' losses in the drylands on the design climate; and the major rivers class
 
     ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.atlas_round.sustained_rivers   # about 10 minutes
 
-The first run also builds the design routing's structure, about 12 minutes, and keeps it on the research drive; --resume
-takes the years already routed from the drive's checkpoint.
+--resume takes the years already routed from the research drive's checkpoint, where it was kept on this design routing.
 
 The design routing (design_routing.py) draws every river at the long-term mean flow of the design climate's closed
 budget. This module asks which rivers keep flowing through the climate's dry years, in four parts:
 
 - the years without storage. Each settled year of the design climate (the run on the design surface at sunlight 0.936,
   years 45-59) is read from the run's year sums (moisture_map.cached_year in drylands.py's cache), moved by the
-  estimate's step as moisture_final.adjusted moves them, carried onto today's ground with the settled frame's rotation
-  as final_drainage.carry carries the mean, and loaded as final_drainage.load loads it, with the closed budget's factor
-  on the open water's evaporation. It is routed on the design routing's structure held fixed: the floor, the seas at
-  their design levels, the lakes as the design fills them and the works where the design puts them. Each water passes
-  on that year's own surplus: a lake standing full or an upper sea passes on what the year brings it beyond its loss,
-  a hollow the design leaves below its pass passes nothing, Moscoviense's fixed crests divide its overflow in the
-  design's fixed shares, and the near-side sea's main part sends over its neck the design's spill moved by the year's
-  departure in its balance. Each year is also routed as a steady state of its own, every hollow filling and spilling
-  as the routing has it, to show what the hollows held below their passes would add;
+  estimate's two steps as moisture_final.adjusted moves them (to the design temperature, then onto the design's own
+  surface), carried onto today's ground with the settled frame's rotation as final_drainage.carry carries the mean,
+  and loaded as final_drainage.load loads it, with the closed budget's factor on the open water's evaporation. It is
+  routed on the design routing's structure held fixed: the floor, the seas at their design levels, the lakes as the
+  corrected rule fills them in the design (lake_rule.py: each hollow as one water, the courses joined through the
+  lakes by hollow_courses.py) and the works where the design puts them. Each water passes on that year's own
+  surplus: a lake standing full or an upper sea passes on what the year brings it beyond its loss, a lake the design
+  leaves below its pass passes nothing, and Moscoviense's fixed crests divide its overflow in the design's fixed
+  shares. Where the near-side sea stands parted, its main part sends over its neck the design's spill moved by the
+  year's departure in its balance; where the design holds it as one sea across the neck, as it does since
+  18 November, the flow between its parts passes through its water and both are held at their levels;
 - the years with storage. Every lake and the three upper seas carry their volume from one year to the next, starting
-  from the design state, in STEPS steps a year. A lake is a body of the routing's catchments standing at one level,
-  whose outlet holds its volume. Above its spill level a water passes on what critical flow passes over an outlet as
+  from the design state, in STEPS steps a year. A lake is a body of hollows standing as one water, whose volume is
+  held at the lowest point it leaves by. Above its pass a water passes on what critical flow passes over an outlet as
   wide as Earth's alluvial channels at the water's design flow (river_losses.WIDTH, widened for lunar gravity, at both
-  ends of the range); below it, it passes nothing and evaporates from the area its level covers. The main part's spill
-  is critical flow over the neck's throat as near_side_neck.json measures it;
+  ends of the range); below it, it passes nothing and evaporates from the area its level covers, so a lake the design
+  leaves below its pass can rise in wet years and pass water on;
 - the losses. river_losses.py's estimate (the channels, the plants along them and the floodplains, in the drylands) is
   run again on the design routing and the design climate, and each loss is taken from the river where it falls and
   carried down to the seas;
@@ -34,6 +35,12 @@ budget. This module asks which rivers keep flowing through the climate's dry yea
   carries that much in every year with the wide outlets' storage, and intermittent otherwise, with its mean, lowest-year
   and second-lowest-year flows in each way of routing the years, the years it carries that much and its flow after the
   losses.
+
+The design routing's product keeps the joined receivers and the flows; the years need the hollows as well, so the
+routing is made again in memory from the same records (design_state) and must give the product back exactly. Until
+18 November the network was the earlier lake rule's, each catchment balanced alone, and each year was also routed as a
+steady state of its own with every hollow filling and spilling; on the corrected rule such a state moves the lakes'
+shores, so its rivers would not lie on the design's cells, and the storage's years carry what it showed.
 
 The product, atlas-round/sustained_rivers/sustained_rivers_16ppd.npz on the research drive, holds each river cell's
 flows by year and its sustained discharge and intermittent flag; results/sustained_rivers.json records it.
@@ -59,10 +66,8 @@ from research.studies.atlas_round import final_drainage as FD
 from research.studies.atlas_round import governed_drainage as GD
 from research.studies.atlas_round import moisture_final as MF
 from research.studies.atlas_round import near_side_neck as N
-from research.studies.atlas_round import redrawn_drainage as RD
 from research.studies.atlas_round import river_losses as RL
 from research.studies.drainage_network import network as NW
-from research.studies.drainage_network.routing import flood_from
 from shared.constants import JULIAN_DAY, JULIAN_YEAR_DAYS, MOON_RADIUS, MOON_SURFACE_GRAVITY
 
 HERE = Path(__file__).resolve().parent
@@ -78,12 +83,19 @@ SCHEMA = 'terluna.research.atlas-round-sustained-rivers/1'
 PRODUCT_SCHEMA = 'terluna.research.atlas-round-sustained-rivers-grid/1'
 CODE = ('research/studies/atlas_round/sustained_rivers.py', 'research/studies/atlas_round/design_routing.py',
         'research/studies/atlas_round/final_drainage.py', 'research/studies/atlas_round/governed_drainage.py',
-        'research/studies/atlas_round/redrawn_drainage.py', 'research/studies/atlas_round/near_side_neck.py',
-        'research/studies/atlas_round/moisture_final.py', 'research/studies/atlas_round/river_losses.py',
-        'research/studies/drainage_network/network.py', 'research/studies/drainage_network/routing.py',
+        'research/studies/atlas_round/design_works.py', 'research/studies/atlas_round/near_side_neck.py',
+        'research/studies/atlas_round/lake_rule.py', 'research/studies/atlas_round/lake_rule_balance.py',
+        'research/studies/atlas_round/hollow_courses.py', 'research/studies/atlas_round/moisture_final.py',
+        'research/studies/atlas_round/river_losses.py', 'research/studies/drainage_network/network.py',
         'geography/drainage.py', 'climate/gcm/turned_climatology.py', 'climate/gcm/pattern_scaling.py',
         'biosphere/ecology/moisture_map.py')
-STRUCTURE_CODE = CODE[1:7] + CODE[8:11]          # what the design structure is built by
+# The structure of the design on the earlier lake rule (work/design_structure.npz) was kept under these files'
+# hashes; lake_rule.py, lake_rule_balance.py and design_works.py read it and its key. This module no longer builds it.
+STRUCTURE_CODE = ('research/studies/atlas_round/design_routing.py', 'research/studies/atlas_round/final_drainage.py',
+                  'research/studies/atlas_round/governed_drainage.py', 'research/studies/atlas_round/redrawn_drainage.py',
+                  'research/studies/atlas_round/near_side_neck.py', 'research/studies/atlas_round/moisture_final.py',
+                  'research/studies/drainage_network/network.py', 'research/studies/drainage_network/routing.py',
+                  'geography/drainage.py')
 RUN, YEARS = FD.RUN, tuple(FD.YEARS)
 BUDGET = DRt.BUDGET
 WATERS = ('moscoviense', 'orientale', 'smythii_marginis', 'south_pole_aitken', 'humboldtianum', 'near_side_main',
@@ -115,146 +127,159 @@ def rel(path) -> str:
     return str(Path(path).relative_to(ROOT)) if str(path).startswith(str(ROOT)) else str(path)
 
 
-# ---------------------------------------------------------------- the design structure
+# ---------------------------------------------------------------- the design routing made again
 
-def design_structure(log=print, refresh=False):
-    """The design routing's fixed structure, built as design_routing.route builds it: the redrawn floor's heights, the
-    water over each cell (an index into WATERS, -1 elsewhere) with each water's level, and the governed routing's
-    put-ins and take-outs with the cell, the kind (OPS) and the sign of each, whether design_routing places it in a
-    lake, and its flow in the design. Kept on the research drive under the design routing record's hash and its
-    code's, since building it takes the governed routing's five minutes."""
-    key = dict(record=sha256(DRt.OUT), code={f: sha256(ROOT / f) for f in STRUCTURE_CODE})
-    if STRUCTURE.exists() and not refresh:
-        with np.load(STRUCTURE, allow_pickle=False) as z:
-            meta = json.loads(str(z['metadata']))
-            if meta['key'] == key:
-                log(f'the design structure from {STRUCTURE}')
-                return dict(meta=meta, **{k: z[k] for k in z.files if k != 'metadata'})
-    behind = DRt.stale()
-    if behind:
-        raise SystemExit(f'the design routing is stale ({", ".join(behind)})')
+def design_state(log=print):
+    """The design routing made again in memory, as design_routing.route makes it, so that the years can be routed on
+    its hollows: the product keeps the joined receivers and the flows, and the years need the hollows' tree and which
+    hollows stand full as well. The weirs are settled again from final_drainage.py's shares (lake_rule_balance.govern,
+    the routing's own reckoning), the near-side sea's parts are taken at the levels the product records, and the
+    hollows are settled once on them; the result must be the product's receivers and flows. Returns `s`, the structure
+    the years' procedures read (the floor, the water over each cell as an index into WATERS with each water's level,
+    and the works' cells with the kind, the sign and the design flow of each and the part of its branch's share each
+    cut carries), the routing's pieces (the hollows' structure, their state, the routing and the joined courses), the
+    product and the design climate's runoff and open-water balance."""
+    from research.studies.atlas_round import design_works as DW
+    from research.studies.atlas_round import hollow_courses as HC
+    from research.studies.atlas_round import lake_rule as LR
+    from research.studies.atlas_round import lake_rule_balance as LB
     started = time.time()
-    fd = json.loads(FD.OUT.read_text())
-    neck = json.loads(N.OUT.read_text())
-    case = fd['cases'][BUDGET]
+    if tuple(LB.WATERS) != WATERS:
+        raise SystemExit('lake_rule_balance\'s waters are not in WATERS\' order')
+    routing = DRt.load(log)
+    made = json.loads(DRt.OUT.read_text())['summary']
+    if made['near_side']['spills_over_a_sill_m3s']:
+        raise SystemExit('a part of the near-side sea spills over a sill into a basin, which this module does not carry')
+    case = json.loads(FD.OUT.read_text())['cases'][BUDGET]
     frame_path, record = FD.frame_record()
-    rotation = np.asarray(record['frame']['rotation_today_to_turned'], float)
-    surf = RD.load_surface(log)
+    d, st = DW.load(log)
     runoff, lake_net, _, _ = FD.load(case['evaporation'])
-    geo = RD.geometry(surf, runoff, lake_net, log)
-    level0, h = geo['level0'], geo['h']
-    cols = h.shape[1]
-    h_flat = h.ravel()
-    state = RD.design_state(geo, runoff, lake_net, log=log)
-    branches, _ = GD.branches_for(geo, state, rotation, log)
-    gov = GD.govern(geo, state, runoff, lake_net, branches, log=log)
-    if any(onto is not None for _, onto in branches.values()):
-        raise SystemExit('a branch opens straight onto a sea, which this module does not carry')
-    steady = neck['budgets'][BUDGET]['natural_neck']['steady']
-    z_main, z_south = level0 + steady['main_level_m'], level0 + steady['south_level_m']
-    st = N.setting(log)
-    main_water = st['part']['main'] & (st['joined']['main'] < z_main)
-    south_water = st['part']['south'] & (st['joined']['south'] < z_south)
-    del st
-    names, masks, levels = state['names'], state['masks'], state['levels']
-    water = np.full(h_flat.size, -1, np.int8)
-    level_of = []
-    for k in names:
-        if k == 'near_side':
-            continue
-        water[masks[k]] = WATERS.index(k)
-        level_of.append(levels[k])
-    water[main_water] = WATERS.index('near_side_main')
-    water[south_water] = WATERS.index('near_side_south')
-    level_of += [z_main, z_south]
-    if [k for k in names if k != 'near_side'] + ['near_side_main', 'near_side_south'] != list(WATERS):
-        raise SystemExit('design_routing.route\'s waters are not in WATERS\' order')
-    r0 = state['r']
-    lake_full0 = ~r0['outlet'] & (h_flat < r0['level'][r0['label']])
-    spill = DRt.spill_cell(h_flat, main_water, cols, neck['throat']['centre_today'])
-    entry, share, over = state['entry'], gov['share'], gov['over']
-    ops = [(entry['moscoviense'], 'salt_sea_weir', 1.0, share[GD.SALT_SEA])]
-    ops += [(entry[k], k, 1.0, over[k]) for k in GD.FULL_SEAS]
-    for target, kind in ((GD.HELD_BRANCH, 'humboldtianum_branch'), (GD.REST_BRANCH, 'smythii_marginis_branch')):
-        ops += [(c, kind, float(sign), sign * share[target]) for c, sign in branches[target][0]]
-    ops.append((spill, 'neck', 1.0, float(steady['neck_flow_m3s'])))
-    if DRt.governed_ops(state, gov, branches) + [(spill, steady['neck_flow_m3s'])] != [(c, q) for c, _, _, q in ops]:
-        raise SystemExit('the put-ins and take-outs are not design_routing.route\'s')
-    surplus = float(gov['surplus'])
-    meta = dict(key=key, level0=float(level0), cell_km=float(geo['cell_km']), levels=[float(v) for v in level_of],
-                rotation=rotation.tolist(), frame=dict(record=rel(frame_path), sha256=sha256(frame_path)),
-                evaporation=float(case['evaporation']), surplus=surplus,
+    begun = dict(share=case['weir_history'][-1]['shares_m3s'], over=case['full_seas_pass_on_m3s'])
+    g = LB.govern(d, st, runoff, lake_net, start=begun, log=log)
+    gov = g['gov']
+    meta_r = routing['meta']
+    neck = meta_r['neck']
+    joined = bool(neck['joined'])
+    water, levels = LB.parted_waters(d, st, meta_r['levels_m']['near_side_main'], meta_r['levels_m']['near_side_south'])
+    hollows = LB.structure_of(d, water, levels)
+    terms = LR.hollow_terms(hollows, runoff, lake_net)
+    over_the_neck = [] if neck['spill_cell'] is None else [(int(neck['spill_cell']), float(neck['flow_m3s']))]
+    state, flows, sources = LB.branch_state(hollows, terms, g['fixed'] + over_the_neck, g['branches'],
+                                            LB.roots_of(hollows['tree']))
+    r = LR.hollow_routing(hollows, terms, state)
+    courses = HC.connect(hollows, terms, state, r, d['h'].shape)
+    if not np.array_equal(courses['receiver'], routing['receiver']):
+        raise SystemExit('the routing made again does not join its courses as the design routing\'s product does')
+    apart = float(np.abs(courses['discharge'] - routing['discharge_m3s']).max())
+    if apart > 1e-6:
+        raise SystemExit(f'the routing made again differs from the design routing\'s product by {apart:.3g} m3/s')
+    # the works in the product's order, each with its design flow and the part of its branch's share it carries
+    share, over, surplus = gov['share'], gov['over'], float(gov['surplus'])
+    unit = dict(salt_sea_weir=share[GD.SALT_SEA], humboldtianum_branch=share[GD.HELD_BRANCH],
+                smythii_marginis_branch=share[GD.REST_BRANCH], **{k: over[k] for k in GD.FULL_SEAS})
+    along = dict(humboldtianum_branch=iter(flows[0]), smythii_marginis_branch=iter(flows[1]))
+    ops = []
+    for (cell, sign, _), kind in zip(d['ops'], d['op_kind']):
+        q = float(next(along[kind])) if kind in along else float(unit[kind])
+        ops.append((int(cell), kind, float(sign), q, q / unit[kind] if unit[kind] > 0.0 else 0.0))
+    ops += [(cell, 'neck', 1.0, q, 1.0) for cell, q in over_the_neck]
+    if sorted((c, sign * q) for c, _, sign, q, _ in ops) != sorted((int(c), float(q)) for c, q in sources):
+        raise SystemExit('the works\' flows are not the ones the hollows were settled on')
+    meta = dict(level0=float(d['level0']), cell_km=float(d['cell_km']), levels=[float(v) for v in levels],
+                rotation=np.asarray(d['rotation'], float).tolist(),
+                frame=dict(record=rel(frame_path), sha256=sha256(frame_path)), evaporation=float(case['evaporation']),
+                surplus=surplus,
                 fractions={k: float(share[k]) / surplus for k in (GD.SALT_SEA, GD.HELD_BRANCH, GD.REST_BRANCH)},
-                over={k: float(v) for k, v in over.items()}, neck_flow=float(steady['neck_flow_m3s']),
-                loss={k: float(v) for k, v in state['loss'].items()}, own={k: float(v) for k, v in state['own'].items()},
-                seconds=round(time.time() - started))
-    arrays = dict(h=h, lat=geo['lat'], water=water,
-                  op_cell=np.array([c for c, _, _, _ in ops], np.int64),
-                  op_kind=np.array([OPS.index(k) for _, k, _, _ in ops], np.int8),
-                  op_sign=np.array([s for _, _, s, _ in ops], float),
-                  op_lake=np.array([bool(lake_full0[c]) for c, _, _, _ in ops]),
-                  op_design=np.array([q for _, _, _, q in ops], float))
-    WORK.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(STRUCTURE, metadata=json.dumps(meta), **arrays)
-    log(f'the design structure built in {meta["seconds"]} s and kept in {STRUCTURE}')
-    return dict(meta=meta, **arrays)
+                over={k: float(v) for k, v in over.items()}, neck_flow=float(neck['flow_m3s']), joined=joined,
+                made_again_largest_difference_m3s=apart)
+    s = dict(meta=meta, h=d['h'], lat=d['lat'], water=water,
+             op_cell=np.array([c for c, _, _, _, _ in ops], np.int64),
+             op_kind=np.array([OPS.index(k) for _, k, _, _, _ in ops], np.int8),
+             op_sign=np.array([x for _, _, x, _, _ in ops], float),
+             op_design=np.array([x * q for _, _, x, q, _ in ops], float),
+             op_part=np.array([p for _, _, _, _, p in ops], float))
+    log(f'the design routing made again ({apart:.3g} m3/s from its product at most), {time.time() - started:.0f} s')
+    return dict(s=s, hollows=hollows, state=state, r=r, courses=courses, routing=routing, runoff=runoff,
+                lake_net=lake_net)
 
 
 # ---------------------------------------------------------------- the routing on the fixed structure
 
-class Network:
-    """The design routing's network held fixed, and its routing on any year's water. The graph is routing.route_levels'
-    on the design's floor and waters: each cell's steepest-descent neighbour, the catchments of the pits with the seas'
-    outlets as roots of the flood, each catchment's spill level and the pass it spills through. replay() accumulates a
-    year's runoff over it exactly as route_levels' loop does, the generations of that loop kept; cascade() does the same
-    for the catchments alone, which is all the seas' balances need."""
+def bodies_of(tree, full):
+    """The hollow whose water each hollow is part of (lake_rule.hollow_routing's and hollow_courses.connect's): two
+    hollows that both stand full to the sill between them are one water with the larger hollow they make, and so on up
+    while that one stands full beside a full one."""
+    n_all = tree['parent'].size
+    top = np.where(full & (tree['parent'] >= 0) & full[np.maximum(tree['sibling'], 0)], tree['parent'], np.arange(n_all))
+    while True:
+        nxt = top[top]
+        if np.array_equal(nxt, top):
+            return top
+        top = nxt
 
-    def __init__(self, h, water, levels, lat, cell_km, log=print):
+
+class Network:
+    """The design routing's network held fixed, and its routing on any year's water. The graph is the corrected rule's
+    (lake_rule.py) with the courses joined through the lakes (hollow_courses.py): each cell's steepest-descent
+    neighbour, each lowest point sending its water on to the cell the design routing sends it to, and the lakes as the
+    design fills them. A lake is a body, the hollows standing full to the sills between them as one water; it leaves
+    by one lowest point, where its whole balance is taken, and its other lowest points pass on what reaches them
+    (`through`). The bodies the design leaves below their passes pass nothing (`closed`). replay() gathers a year's
+    water over the cells as hollow_courses.connect does; cascade() does the same over the catchments alone, which is
+    all the seas' balances need."""
+
+    def __init__(self, hollows, state, routing, courses, water, n_waters, shape, log=print):
         started = time.time()
-        rows, cols = h.shape
+        rows, cols = shape
         n = rows * cols
+        tree, n_out, n_nodes = hollows['tree'], hollows['n_out'], hollows['n_nodes']
+        outlet, sink, sinks, label = hollows['outlet'], hollows['sink'], hollows['sinks'], hollows['label']
         self.rows, self.cols, self.n = rows, cols, n
-        self.water = water
-        self.n_waters = len(levels)
-        outlet = water >= 0
-        outlet_level = np.zeros(n)
-        outlet_level[outlet] = np.asarray(levels, float)[water[outlet]]
-        idx2 = np.arange(n, dtype=np.int32).reshape(rows, cols)
-        receiver = dr.d8_receivers(h.astype(np.float32), outlet.reshape(rows, cols), lat, cell_km)
-        sink = (receiver == idx2.ravel()) & ~outlet
-        sinks = np.flatnonzero(sink).astype(np.int32)
-        node_of = np.full(n, -1, np.int32)
-        lv, groups = np.unique(outlet_level[outlet], return_inverse=True)
-        n_out = max(1, lv.size)
-        node_of[outlet] = groups
-        node_of[sinks] = np.arange(n_out, sinks.size + n_out, dtype=np.int32)
-        term = dr.terminal(receiver)
-        label = node_of[term]
-        n_nodes = sinks.size + n_out
-        h_pass = np.where(outlet.reshape(rows, cols), -np.inf, h).astype(np.float32)
-        edges = dr.passes(label.reshape(rows, cols), h_pass, idx2)
-        level, spill_from, spill_to = flood_from(n_nodes, edges, list(enumerate(lv.tolist())))
-        if np.isnan(level).any():
-            raise RuntimeError(f'{int(np.isnan(level).sum())} catchments have no path to an outlet')
-        del edges
-        hp = h_pass.ravel()
-        pass_height = np.full(n_nodes, -np.inf)
-        pass_height[n_out:] = np.maximum(hp[spill_from[n_out:]], hp[spill_to[n_out:]])
-        del h_pass, hp
-        self.area = (((cell_km * 1000.0) ** 2 * np.maximum(np.cos(np.radians(lat)), 1e-6))[:, None]
-                     * np.ones((1, cols))).ravel()
-        hf = h.ravel()
-        self.h = hf
-        self.outlet, self.sink, self.sinks, self.node_of, self.label = outlet, sink, sinks, node_of, label
-        self.level, self.spill_to, self.n_out, self.n_nodes = level, spill_to, n_out, n_nodes
-        self.lake_full = ~outlet & (hf < level[label])
-        final = receiver.copy()
-        final[sinks] = spill_to[n_out:]
+        self.water, self.n_waters = water, n_waters
+        self.outlet, self.sink, self.sinks, self.label = outlet, sink, sinks, label
+        self.n_out, self.n_nodes = n_out, n_nodes
+        self.node_of = np.where(outlet | sink, label, -1).astype(np.int32)
+        self.area, self.h, self.d8 = hollows['area'], hollows['hf'], hollows['receiver']
+        final = np.asarray(courses['receiver'], np.int64)
         self.receiver = final
-        self.d8 = receiver
-        # each catchment's parent, root (the outlet its water reaches) and depth below the root
+        # the bodies: the hollow each lowest point's lake is part of, and the lowest point each body leaves by, the
+        # one whose water goes on to a cell outside the body
+        full = np.asarray(state['full'], bool)
+        top = bodies_of(tree, full)
+        leaves = np.arange(n_out, n_nodes)
+        hollow = top[leaves]
+        to = label[final[sinks]].astype(np.int64)
+        leaves_body = (to < n_out) | (top[to] != hollow)
+        exit_of = np.full(tree['parent'].size, -1, np.int64)
+        exit_of[hollow[leaves_body]] = leaves[leaves_body]
+        if np.unique(hollow[leaves_body]).size != int(leaves_body.sum()) or (exit_of[hollow] < 0).any():
+            raise RuntimeError('a lake does not leave by one lowest point')
+        self.through = np.zeros(n_nodes, bool)
+        self.through[n_out:] = ~leaves_body
+        self.inner = self.through
+        self.closed = np.zeros(n_nodes, bool)
+        self.closed[n_out:] = leaves_body & ~full[hollow]
+        self.leaving = np.zeros(n_nodes, bool)
+        self.leaving[n_out:] = leaves_body & full[hollow]
+        self.body = np.arange(n_nodes, dtype=np.int64)
+        self.body[n_out:] = exit_of[hollow]
+        self.level = np.full(n_nodes, np.nan)                # the pass a body overflows at
+        self.level[n_out:] = tree['spill'][hollow]
+        self.design_out = np.zeros(n_nodes)                  # what the design's state sends on from each lake
+        self.design_out[n_out:] = np.where(self.leaving[n_out:], np.where(tree['parent'][hollow] < 0, state['out'][hollow],
+                                                                          state['over'][hollow]), 0.0)
+        # the lakes as the design fills them, and every cell a body's water covers when it stands full to its pass
+        lake = np.asarray(routing['lake'], bool) & ~outlet
+        self.lake_full = lake
+        self.lake_cells = np.flatnonzero(lake)
+        self.lake_node = exit_of[routing['body'][self.lake_cells]]
+        if (self.lake_node < 0).any():
+            raise RuntimeError('a lake cell lies in no lake')
+        node = exit_of[top[hollows['owner']]]
+        self.cover_cells, self.cover_node = hollows['under'][node >= 0], node[node >= 0]
+        # each catchment's parent (where its water goes next), root (the outlet it reaches) and depth below the root
         parent = np.arange(n_nodes, dtype=np.int64)
-        parent[n_out:] = label[spill_to[n_out:]]
+        parent[n_out:] = to
         self.parent = parent
         root, depth = parent.copy(), (parent != np.arange(n_nodes)).astype(np.int64)
         while True:                                  # pointer jumping: depth counts the hops to the current pointer
@@ -264,25 +289,14 @@ class Network:
             depth = depth + depth[root]
             root = nxt
         self.root, self.depth = root, depth
-        # the lakes as bodies: a catchment whose pass lies under its parent's spill level is part of its parent's water
-        # when that stands full, and the body's outlet is the catchment that spills over a pass of its own
-        inner = np.zeros(n_nodes, bool)
-        inner[n_out:] = (parent[n_out:] >= n_out) & (pass_height[n_out:] < level[parent[n_out:]])
-        body = np.where(inner, parent, np.arange(n_nodes))
-        while True:
-            nxt = body[body]
-            if np.array_equal(nxt, body):
-                break
-            body = nxt
-        self.inner, self.body = inner, body
-        # the water each cell's own path ends in (seas), and the water a catchment's spill reaches when its parent is a sea
-        self.term_sea = np.where(outlet[term], water[term], -1).astype(np.int8)
+        # the water each cell's own path ends in (seas), and the water a catchment's lake reaches when it goes on to one
+        terminal = hollows['terminal']
+        self.term_sea = np.where(outlet[terminal], water[terminal], -1).astype(np.int8)
         self.direct = np.flatnonzero((self.term_sea >= 0) & ~outlet)
         self.spill_sea = np.full(n_nodes, -1, np.int8)
-        to_sea = np.arange(n_out, n_nodes)[parent[n_out:] < n_out]
-        self.spill_sea[to_sea] = self.term_sea[spill_to[to_sea]]
-        self.outlet_levels = lv
-        # route_levels' generations over the cells
+        self.into_seas = leaves[to < n_out]
+        self.spill_sea[self.into_seas] = self.term_sea[final[sinks[self.into_seas - n_out]]]
+        # hollow_courses.connect's generations over the cells
         donor = ~outlet
         indeg = np.bincount(final[donor], minlength=n).astype(np.int32)
         front = np.flatnonzero((indeg == 0) & donor)
@@ -295,13 +309,16 @@ class Network:
             cand = np.unique(r)
             front = cand[(indeg[cand] == 0) & donor[cand]]
         self.order = np.concatenate(pieces)
+        if self.order.size != int(donor.sum()):
+            raise RuntimeError('the joined receivers do not all lead to a sea')
         self.bounds = np.asarray(bounds, np.int64)
         self.order_to = final[self.order]
         self.order_sink = sink[self.order]
         self.has_sink = np.add.reduceat(self.order_sink.astype(np.int64), self.bounds[:-1]) > 0
         del pieces, indeg
-        log(f'network: {n_nodes - n_out:,} catchments, {self.bounds.size - 1} generations of cells, '
-            f'{int(depth.max())} of catchments, {time.time() - started:.0f} s')
+        log(f'network: {n_nodes - n_out:,} catchments in {int(leaves_body.sum()):,} lakes, {int(self.closed.sum()):,} of '
+            f'them below their passes, {self.bounds.size - 1} generations of cells, {int(depth.max())} of catchments, '
+            f'{time.time() - started:.0f} s')
 
     def generations(self, nodes):
         """The catchments among `nodes` grouped by depth, deepest first: each group's parents lie in later groups."""
@@ -313,89 +330,79 @@ class Network:
         cut = np.flatnonzero(np.diff(d)) + 1
         return np.split(nodes, cut)
 
-    def sources(self, runoff_mm, lake_net_mm, ops=()):
-        """The runoff on each cell and each catchment's lake balance (m3/s) from runoff and open-water balance fields
-        (mm/day), with flows put in or taken out at cells as governed_drainage.route_with puts them: into a hollow's
-        balance where `in_lake`, on the ground otherwise. ops: (cell, flow, in_lake)."""
-        r64 = np.asarray(runoff_mm, np.float64).ravel().copy()
-        l64 = np.asarray(lake_net_mm, np.float64).ravel().copy()
-        for cell, q, in_lake in ops:
-            if q == 0.0:
-                continue
-            if in_lake:
-                l64[cell] += q / (MM_DAY * self.area[cell])
-            elif q > 0.0:
-                r64[cell] += q / (MM_DAY * self.area[cell])
-            else:
-                raise ValueError(f'a take-out at cell {cell} lies under no hollow\'s water')
-        runoff = np.where(self.outlet | self.lake_full, 0.0, np.maximum(r64, 0.0) * MM_DAY * self.area)
-        lake = np.bincount(self.label[self.lake_full], weights=(l64 * MM_DAY * self.area)[self.lake_full],
-                           minlength=self.n_nodes)
-        return runoff, lake
+    def sources(self, runoff_mm, lake_net_mm):
+        """A year's water on the fixed lakes, from runoff and open-water balance fields (mm/day), taken as
+        lake_rule.hollow_terms takes them: the runoff that starts on each dry cell (run, m3/s), each lake's rain less
+        evaporation at the lowest point it leaves by (lake), what each catchment's dry ground gathers (local) and what
+        the dry ground draining straight to each water yields (direct)."""
+        run = np.maximum(np.asarray(runoff_mm).ravel(), 0.0) * MM_DAY * self.area
+        run[self.outlet | self.lake_full] = 0.0
+        net = np.asarray(lake_net_mm).ravel()[self.lake_cells] * MM_DAY * self.area[self.lake_cells]
+        lake = np.bincount(self.lake_node, weights=net, minlength=self.n_nodes)
+        local = np.bincount(self.label, weights=run, minlength=self.n_nodes)
+        direct = np.bincount(self.term_sea[self.direct], weights=run[self.direct], minlength=self.n_waters)
+        return dict(run=run, lake=lake, local=local, direct=direct)
 
-    def with_ops(self, base, runoff_mm, ops):
-        """sources() with put-ins and take-outs, from the same fields' sources without them (`base`): each put-in cell's
-        runoff taken again as route_with and route_levels take it, and each take-out from its hollow's balance."""
-        runoff, lake = base[0].copy(), base[1].copy()
-        cells = {}
-        for cell, q, in_lake in ops:
-            if q == 0.0:
-                continue
-            if in_lake:
-                if self.lake_full[cell]:
-                    lake[self.label[cell]] += q
-            elif q > 0.0:
-                cells.setdefault(cell, []).append(q)
-            else:
-                raise ValueError(f'a take-out at cell {cell} lies under no hollow\'s water')
-        flat = np.asarray(runoff_mm).ravel()
-        for cell, qs in cells.items():
-            if self.outlet[cell] or self.lake_full[cell]:
-                continue
-            v = float(flat[cell])
-            for q in qs:
-                v += q / (MM_DAY * self.area[cell])
-            runoff[cell] = max(v, 0.0) * MM_DAY * self.area[cell]
-        return runoff, lake
+    def lands(self, cells):
+        """Where a flow put in at each cell goes: the catchment whose lowest point it runs down to, or the water it
+        reaches straight; -1 for the other."""
+        cells = np.asarray(cells, np.int64)
+        k = self.label[cells].astype(np.int64)
+        return np.where(k >= self.n_out, k, -1), np.where(k < self.n_out, self.term_sea[cells], -1)
 
-    def cascade(self, runoff, lake, passed_on=None, groups=None, shut=None):
-        """The catchments' inflows and what each passes on (m3/s), and what each water receives: route_levels' balance
-        on the catchments alone, each passing on its inflow and lake balance where positive, or `passed_on` where
-        given; the catchments marked `shut` pass nothing."""
-        inflow = np.bincount(self.label, weights=runoff, minlength=self.n_nodes)
+    def passed(self, nodes, inflow, lake, passed_on):
+        """What the catchments `nodes` pass on with `inflow` reaching their lowest points: a lake's other lowest
+        points all that reaches them, the one it leaves by its inflow and balance where positive (or `passed_on`
+        where given), and nothing from a lake the design leaves below its pass."""
+        if passed_on is None:
+            q = np.maximum(inflow + lake[nodes], 0.0)
+            q[self.closed[nodes]] = 0.0
+        else:
+            q = passed_on[nodes]
+        return np.where(self.through[nodes], inflow, q)
+
+    def cascade(self, src, ops=(), passed_on=None, groups=None):
+        """The catchments' inflows and what each passes on (m3/s), and what each water receives, with the flows `ops`
+        ((cell, m3/s) pairs, negative for a take-out) put in where they land: the routing's balance on the catchments
+        alone."""
+        inflow, sea = src['local'].copy(), src['direct'].copy()
+        if len(ops):
+            node, water = self.lands([c for c, _ in ops])
+            q = np.array([q for _, q in ops], float)
+            np.add.at(inflow, node[node >= 0], q[node >= 0])
+            np.add.at(sea, water[water >= 0], q[water >= 0])
         out = np.zeros(self.n_nodes)
         for nodes in (groups if groups is not None else self.all_groups()):
-            q = np.maximum(inflow[nodes] + lake[nodes], 0.0) if passed_on is None else passed_on[nodes]
-            if shut is not None:
-                q = np.where(shut[nodes], 0.0, q)
+            q = self.passed(nodes, inflow[nodes], src['lake'], passed_on)
             out[nodes] = q
             np.add.at(inflow, self.parent[nodes], q)
-        return inflow, out, self.supply(runoff, out)
+        into = self.into_seas
+        return inflow, out, sea + np.bincount(self.spill_sea[into], weights=out[into], minlength=self.n_waters)
 
     def all_groups(self):
         if not hasattr(self, '_groups'):
             self._groups = self.generations(np.arange(self.n_out, self.n_nodes))
         return self._groups
 
-    def supply(self, runoff, out):
-        """What each water receives: the runoff of the land draining straight into it and what the catchments spilling
-        into it pass on."""
-        direct = np.bincount(self.term_sea[self.direct], weights=runoff[self.direct], minlength=self.n_waters)
-        into = np.flatnonzero(self.spill_sea >= 0)
-        return direct + np.bincount(self.spill_sea[into], weights=out[into], minlength=self.n_waters)
-
     def supply_of(self, q):
-        """What each water receives in a replay's discharge: the flow into its cells (route_at's count)."""
+        """What each water receives in a replay's discharge: the flow into its cells."""
         if not hasattr(self, '_water_cells'):
             self._water_cells = [np.flatnonzero(self.water == i) for i in range(self.n_waters)]
         return np.array([float(q[c].sum()) for c in self._water_cells])
 
-    def replay(self, runoff, lake, passed_on=None, loss=None, shut=None):
-        """Each cell's discharge (m3/s): route_levels' accumulation over the kept generations, each pit passing on its
-        inflow and lake balance where positive, or `passed_on` where given, the pits of catchments marked `shut` passing
-        nothing; `loss` (m3/s per cell) is taken from what a cell passes on, never more than it carries. Returns the
-        discharge and what each catchment passed on."""
-        acc = runoff.copy()
+    def replay(self, src, ops=(), passed_on=None, loss=None):
+        """Each cell's discharge (m3/s): hollow_courses.connect's gathering over the kept generations with the flows
+        `ops` put in at their cells, each lowest point passing on what passed() gives it; `loss` (m3/s per cell) is
+        taken from what a cell passes on, never more than it carries. Under a lake the discharge is what has come in
+        on the way to its exit, and at the lowest point a spilling lake leaves by, what the lake passes on. Returns
+        the discharge and what each catchment passed on."""
+        acc = src['run'].copy()
+        put = {}
+        for cell, q in ops:
+            put[cell] = put.get(cell, 0.0) + q
+        for cell, q in put.items():
+            acc[cell] += q
+        lake = src['lake']
         out_node = np.zeros(self.n_nodes)
         order, to, at_sink, b = self.order, self.order_to, self.order_sink, self.bounds
         for g in range(b.size - 1):
@@ -403,15 +410,16 @@ class Network:
             cells = order[i0:i1]
             out = acc[cells]
             if loss is not None:
-                out = np.maximum(out - loss[cells], 0.0)
+                out = out - np.minimum(loss[cells], np.maximum(out, 0.0))
             if self.has_sink[g]:
                 s = at_sink[i0:i1]
-                k = self.node_of[cells[s]]
-                inflow = acc[cells[s]]
-                out[s] = np.maximum(inflow + lake[k], 0.0) if passed_on is None else passed_on[k]
-                if shut is not None:
-                    out[s] = np.where(shut[k], 0.0, out[s])
-                out_node[k] = out[s]
+                pits = cells[s]
+                k = self.node_of[pits]
+                q = self.passed(k, acc[pits], lake, passed_on)
+                out[s] = q
+                out_node[k] = q
+                leaving = self.leaving[k]
+                acc[pits[leaving]] = q[leaving]
             np.add.at(acc, to[i0:i1], out)
         return acc, out_node
 
@@ -419,21 +427,22 @@ class Network:
 # ---------------------------------------------------------------- the years' climate
 
 def year_sums():
-    """The settled years' sums (moisture_map.read_year's, from drylands.py's cache) and the estimate's step with the
-    moisture map's responses per kelvin (moisture_final.estimate_responses)."""
+    """The settled years' sums (moisture_map.read_year's, from drylands.py's cache), the estimate's step to the design
+    temperature with the moisture map's responses per kelvin (moisture_final.estimate_responses), and its step onto
+    the design's own surface as each cell's ratio of rain and of evaporation (final_drainage.surface_ratios)."""
     bm.RUNS = DL.RUNS
     bm.CACHE = str(DL.CACHE)
     record, _, applied = MF.estimate_responses()
     years = {y: bm.cached_year(RUN, y, True) for y in range(YEARS[0], YEARS[1] + 1)}
-    return years, applied, float(record['estimate']['delta_K'])
+    return years, applied, float(record['estimate']['delta_K']), FD.surface_ratios()
 
 
-def year_climate(year, applied, delta, rotation):
+def year_climate(year, applied, delta, rotation, ratios=None):
     """One year's rain, evaporation and land on today's latitude and longitude: the year's sums moved by the estimate's
-    step (moisture_final.adjusted), each field the mean over the year's records as climate.gcm.climatology takes it
-    (evaporation turned positive upward), carried from the settled frame as climate.gcm.turned_climatology.to_today
-    carries a climatology."""
-    y = MF.adjusted(year, applied, delta)
+    two steps (moisture_final.adjusted), each field the mean over the year's records as climate.gcm.climatology takes
+    it (evaporation turned positive upward), carried from the settled frame as
+    climate.gcm.turned_climatology.to_today carries a climatology."""
+    y = MF.adjusted(year, applied, delta, ratios)
     count = y['cnt'].sum(axis=0)
     pr = y['acc']['pr'].sum(axis=0) / count * bm.MM
     ev = y['acc']['evap'].sum(axis=0) / count * bm.MM
@@ -468,19 +477,20 @@ def loaded(clim, evaporation, rows, cols):
 
 # ---------------------------------------------------------------- a year without storage
 
-def op_flows(s, mosc, orientale, smythii, neck):
+def op_flows(s, mosc, orientale, smythii, neck=0.0):
     """Each put-in's and take-out's flow from the outflows that feed it: Moscoviense's overflow divided by its fixed
-    crests in the design's shares (register, 17 November), Orientale's and Smythii-Marginis's whole, and the neck's
-    spill."""
+    crests in the design's shares (register, 17 November), each cut along a branch carrying the part of the branch's
+    share it carries in the design (a cut whose lake could not spare the whole share carries less), Orientale's and
+    Smythii-Marginis's whole, and the neck's spill where the near-side sea stands parted."""
     f = s['meta']['fractions']
     unit = dict(salt_sea_weir=mosc * f[GD.SALT_SEA], humboldtianum_branch=mosc * f[GD.HELD_BRANCH],
                 smythii_marginis_branch=mosc * f[GD.REST_BRANCH], orientale=orientale, smythii_marginis=smythii,
                 neck=neck)
-    return s['op_sign'] * np.array([unit[k] for k in OPS])[s['op_kind']]
+    return s['op_sign'] * s['op_part'] * np.array([unit[k] for k in OPS])[s['op_kind']]
 
 
 def ops_list(s, flows):
-    return list(zip(s['op_cell'].tolist(), np.asarray(flows, float).tolist(), s['op_lake'].tolist()))
+    return list(zip(s['op_cell'].tolist(), np.asarray(flows, float).tolist()))
 
 
 def water_losses(net, lake_net_mm):
@@ -490,24 +500,26 @@ def water_losses(net, lake_net_mm):
     return net.supply_of(field)
 
 
-def without_storage(net, s, runoff_mm, lake_net_mm, reference=None, river_loss=None, shut=None):
-    """One year routed on the fixed structure with no water carried in or out: each upper sea passes on what its rivers
-    bring it beyond its loss that year, Moscoviense's by the fixed shares, and the main part of the near-side sea sends
-    over its neck the design's spill moved by its balance's departure from the reference year (`reference`, the design
-    climate's own routing; the design's spill itself when None). The catchments marked `shut`, the hollows the design
-    leaves below their passes, pass nothing: held as the design fills them, a wet year cannot raise them to their passes.
-    `river_loss` (m3/s a cell) is taken from the rivers where it falls, so a lake or sea below receives less. Returns
-    the discharge, what each catchment passes on, each water's supply and loss, the outflows and the main part's
-    supply."""
+def without_storage(net, s, runoff_mm, lake_net_mm, reference=None, river_loss=None):
+    """One year routed on the fixed structure with no water carried in or out: each lake the design holds full and
+    each upper sea passes on what its rivers bring it beyond its loss that year, Moscoviense's by the fixed shares, and
+    the lakes the design leaves below their passes pass nothing: a wet year cannot raise them to their passes within
+    the year. Where the near-side sea stands parted, its main part sends over the neck the design's spill moved by its
+    balance's departure from the reference year (`reference`, the design climate's own routing; the design's spill
+    itself when None); where it is one sea across the neck, the flow between its parts passes through its water and
+    is no river. `river_loss` (m3/s a cell) is taken from the rivers where it falls, so a lake or sea below receives
+    less. Returns the discharge, what each catchment passes on, each water's supply and loss, the outflows, the main
+    part's supply and the year's sources."""
+    m = s['meta']
     iM, iO, iS, iN = (WATERS.index(k) for k in ('moscoviense', 'orientale', 'smythii_marginis', 'near_side_main'))
     loss = water_losses(net, lake_net_mm)
-    base = net.sources(runoff_mm, lake_net_mm)
+    src = net.sources(runoff_mm, lake_net_mm)
 
     def routed(mosc, orientale, smythii, neck, whole=False):
-        runoff, lake = net.with_ops(base, runoff_mm, ops_list(s, op_flows(s, mosc, orientale, smythii, neck)))
+        ops = ops_list(s, op_flows(s, mosc, orientale, smythii, neck))
         if river_loss is None and not whole:
-            return None, None, net.cascade(runoff, lake, shut=shut)[2]
-        q, out = net.replay(runoff, lake, loss=river_loss, shut=shut)
+            return None, None, net.cascade(src, ops)[2]
+        q, out = net.replay(src, ops, loss=river_loss)
         return q, out, net.supply_of(q)
 
     _, _, own = routed(0.0, 0.0, 0.0, 0.0)
@@ -515,12 +527,15 @@ def without_storage(net, s, runoff_mm, lake_net_mm, reference=None, river_loss=N
     _, _, sup = routed(mosc, orientale, 0.0, 0.0)
     smythii = max(sup[iS] - loss[iS], 0.0)
     _, _, sup = routed(mosc, orientale, smythii, 0.0)
-    neck = s['meta']['neck_flow']
-    if reference is not None:
-        neck = max(neck + (sup[iN] - reference['main_supply']) - (loss[iN] - reference['loss'][iN]), 0.0)
+    outflow = dict(moscoviense=mosc, orientale=orientale, smythii_marginis=smythii)
+    neck = 0.0
+    if not m['joined']:
+        neck = m['neck_flow']
+        if reference is not None:
+            neck = max(neck + (sup[iN] - reference['main_supply']) - (loss[iN] - reference['loss'][iN]), 0.0)
+        outflow['neck'] = neck
     q, out, supply = routed(mosc, orientale, smythii, neck, whole=True)
-    return dict(q=q, out=out, supply=supply, loss=loss, main_supply=float(sup[iN]),
-                outflow=dict(moscoviense=mosc, orientale=orientale, smythii_marginis=smythii, neck=neck))
+    return dict(q=q, out=out, supply=supply, loss=loss, main_supply=float(sup[iN]), outflow=outflow, sources=src)
 
 
 # ---------------------------------------------------------------- the years with storage
@@ -562,20 +577,22 @@ def row_interp(x, xs, ys):
 
 
 class Storage:
-    """The lakes' and the upper seas' storage from step to step on the fixed network. Each lake is a body of catchments
-    standing at one level (Network.body); its outlet catchment holds the body's volume against the spill level, and the
-    catchments inside it pass their water on as the routing has them. Above the spill level the body passes on critical
+    """The lakes' and the upper seas' storage from step to step on the fixed network. Each lake is a body, the hollows
+    standing as one water (Network.body); the lowest point it leaves by holds the body's volume against the pass it
+    overflows at, and its other lowest points pass on what reaches them. Above the pass the body passes on critical
     flow over an outlet of width `width` (m per (m3/s)^0.5, river_losses.channel_width_m at the design's outflow, at
-    least Q_FLOOR) at its head over the water the design holds at that level (the catchments that spill, joined to the
-    outlet through catchments that spill); below it, it passes nothing and gains or loses the rain and evaporation of the
-    outlet catchment's cells its level covers, tabled at DEPTHS_M. Moscoviense, Orientale and Smythii-Marginis hold their volume over their
-    rims the same way, Moscoviense's outflow divided by its fixed shares; the main part of the near-side sea spills over
-    the neck by neck_rating, its balance less the fixed offset (main_part_balance) by which the design routing brings it
-    more than the neck study's steady state, so that the design climate keeps the design's spill. The salt sea,
-    Humboldtianum and the southern seas pass nothing on. Each step routes the
-    catchments upstream first, in stages that follow the seas' order (Moscoviense and Orientale; the salt sea,
-    Humboldtianum and Smythii-Marginis; the main part; the southern seas), so each put-in is known before the
-    catchments it feeds."""
+    least Q_FLOOR) at its head over its water's area at the pass; below it, it passes nothing and gains or loses the
+    rain and evaporation of the cells its level covers, tabled at DEPTHS_M over all the cells its water covers when
+    full, the ground it covers or uncovers ceasing or starting to yield runoff as the corrected rule has it. A lake
+    the design leaves below its pass starts where its loss meets what reaches it, rises in wet years and passes water
+    on once it reaches its pass. Moscoviense, Orientale and Smythii-Marginis hold their volume over
+    their rims the same way, Moscoviense's outflow divided by its fixed shares. Where the near-side sea stands parted,
+    its main part spills over the neck by neck_rating, its balance less the fixed offset left between the design
+    routing's balance and its spill, so that the design climate keeps the design's spill; where it is one sea across
+    the neck, both parts are held at their levels. The salt sea, Humboldtianum and the southern seas pass nothing on.
+    Each step routes the catchments upstream first, in stages that follow the seas' order (Moscoviense and Orientale;
+    the salt sea, Humboldtianum and Smythii-Marginis; the main part; the southern part), so each put-in is known
+    before the catchments it feeds."""
 
     def __init__(self, net, s, design, width, log=print):
         started = time.time()
@@ -583,9 +600,8 @@ class Storage:
         m = s['meta']
         n_out = net.n_out
         h = net.h.astype(np.float64)
-        # the lakes' tables: area, volume against the spill level, and the cells' order for the balance below it
-        cells = np.flatnonzero(net.lake_full)
-        lab = net.label[cells].astype(np.int64)
+        # the lakes' tables: area, volume against the pass, and the cells' order for the balance below it
+        cells, lab = net.cover_cells, net.cover_node
         hc = h[cells]
         order = np.lexsort((hc, lab))
         cells, lab, hc = cells[order], lab[order], hc[order]
@@ -596,7 +612,7 @@ class Storage:
         nodes = np.arange(net.n_nodes)
         start = np.searchsorted(lab, nodes, side='left')
         end = np.searchsorted(lab, nodes, side='right')
-        lake_nodes = nodes[(nodes >= n_out) & (end > start) & ~net.inner]       # each body's outlet catchment
+        lake_nodes = nodes[(nodes >= n_out) & (end > start)]       # the lowest point each body leaves by
         depth = np.asarray(DEPTHS_M)
         z = net.level[lake_nodes][:, None] - depth[None, :]
         pos = np.searchsorted(key, lake_nodes[:, None] * span + (z - lo))
@@ -610,15 +626,9 @@ class Storage:
         self.lake_nodes = lake_nodes
         self.slot = np.full(net.n_nodes, -1, np.int64)
         self.slot[lake_nodes] = np.arange(lake_nodes.size)
-        # the head stands over the body's water the design holds at the spill level: each catchment that spills, joined
-        # to the outlet through catchments that spill too (a closed one inside holds a smaller lake of its own, lower)
-        node_area = np.bincount(net.label[net.lake_full], weights=net.area[net.lake_full], minlength=net.n_nodes)
-        spills = design['out'] > 0.0
-        joined = np.zeros(net.n_nodes, bool)
-        for group in reversed(net.all_groups()):                 # the outlets first, then the catchments inside
-            joined[group] = spills[group] & np.where(net.inner[group], joined[net.parent[group]], True)
-        self.area_head = np.maximum(np.bincount(net.body[joined], weights=node_area[joined], minlength=net.n_nodes),
-                                    node_area)[lake_nodes]
+        self.filled = np.flatnonzero(net.lake_full[cells])       # the cells the design's lakes cover, among the tabled
+        self.filled_slot = self.slot[lab[self.filled]]
+        self.area_head = area_j[:, 0]                          # the head stands over the body's water at its pass
         self.vol_full = vol_j[:, 0]
         self.vtab = vol_j - vol_j[:, :1]                       # volume against the spill level, falling to -vol_full
         # the outlets: critical flow c_out * h^1.5 over a channel as wide as the design's outflow makes it
@@ -631,11 +641,13 @@ class Storage:
                       'smythii_marginis': design['outflow']['smythii_marginis']}
         self.sea_k = {k: float(RL.channel_width_m(np.array([max(q, Q_FLOOR)]), width)[0]) * math.sqrt(G)
                       * (2.0 / 3.0) ** 1.5 for k, q in self.sea_q.items()}
-        self.crest, self.neck_head, self.neck_q = neck_rating(m['level0'])
-        # the design routing brings the main part more than the neck study's steady state took (its rivers run on over
-        # the floor the parted sea leaves dry); held as a fixed offset, so the design climate keeps the design's spill
-        iN = WATERS.index('near_side_main')
-        self.main_offset = float(design['main_supply'] - design['loss'][iN] - design['outflow']['neck'])
+        self.parted = not m['joined']
+        if self.parted:
+            # what the design routing leaves between the main part's balance and its spill is held as a fixed offset,
+            # so the design climate keeps the design's spill
+            self.crest, self.neck_head, self.neck_q = neck_rating(m['level0'])
+            iN = WATERS.index('near_side_main')
+            self.main_offset = float(design['main_supply'] - design['loss'][iN] - design['outflow']['neck'])
         # the stages: each catchment by the water its own water reaches
         stage_of_water = dict(moscoviense=0, orientale=0, smythii_marginis=1, south_pole_aitken=1, humboldtianum=1,
                               near_side_main=2, near_side_south=3)
@@ -650,13 +662,8 @@ class Storage:
         self.stage = stage
         self.groups = [net.generations(np.flatnonzero(stage == i)) for i in range(4)]
         self.to_sea = [np.flatnonzero((stage == i) & (net.spill_sea >= 0)) for i in range(4)]
-        # where each put-in lands: a catchment's balance, a water straight, or nowhere (route_levels drops it)
-        oc, ol = s['op_cell'], s['op_lake']
-        lands_lake = ol & net.lake_full[oc]
-        lands_ground = ~ol & ~net.outlet[oc] & ~net.lake_full[oc]
-        target = np.where(lands_lake | lands_ground, net.label[oc], -1)
-        self.op_node = np.where(target >= n_out, target, -1)
-        self.op_sea = np.where((target >= 0) & (target < n_out), net.term_sea[oc], -1)
+        # where each put-in lands: a catchment's lowest point, or a water straight
+        self.op_node, self.op_sea = net.lands(s['op_cell'])
         kinds_after = {0: ('salt_sea_weir', 'humboldtianum_branch', 'smythii_marginis_branch', 'orientale'),
                        1: ('smythii_marginis',), 2: ('neck',)}
         for st_, kinds in kinds_after.items():
@@ -669,23 +676,25 @@ class Storage:
         log(f'storage at width {width:g}: {lake_nodes.size:,} lakes, {sum(len(g) for g in self.groups)} groups, '
             f'{time.time() - started:.0f} s')
 
-    def initial(self, design, lake_design, inflow_design):
+    def initial(self, design, runoff_design, lake_design, inflow_design):
         """The design state: each spilling lake at the head its design outflow needs, each closed lake where its loss
-        meets its inflow, the upper seas at the heads their design overflows need and the main part where the neck
-        passes the design's spill."""
+        meets its inflow, the upper seas at the heads their design overflows need and, where the near-side sea stands
+        parted, the main part where the neck passes the design's spill."""
         q = design['out'][self.lake_nodes]
         head = np.where(q > 0.0, (q / self.k_out) ** (2.0 / 3.0), 0.0)
         vol = self.area_head * head
         closed = q <= 0.0
         if closed.any():
-            ntab = self.table(lake_design)[closed]
+            ntab = self.table(runoff_design, lake_design)[closed]
             need = -inflow_design[self.lake_nodes][closed]
             vol[closed] = self._level_for(ntab, self.vtab[closed], need)
         self.vol = vol
         self.sea_vol = {k: self.sea_area[self.iw[k]] * (self.sea_q[k] / self.sea_k[k]) ** (2.0 / 3.0)
                         for k in self.sea_q}
-        e = float(np.interp(design['outflow']['neck'], self.neck_q, self.neck_head))
-        self.main_vol = self.sea_area[self.iw['near_side_main']] * e
+        self.main_vol = 0.0
+        if self.parted:
+            e = float(np.interp(design['outflow']['neck'], self.neck_q, self.neck_head))
+            self.main_vol = self.sea_area[self.iw['near_side_main']] * e
 
     @staticmethod
     def _level_for(ntab, vtab, need):
@@ -702,11 +711,19 @@ class Storage:
         out = np.where(j == 0, 0.0, out)
         return np.where(ok.any(axis=1), out, vtab[:, -1])
 
-    def table(self, lake_net_mm):
-        """Each lake's balance (m3/s, rain less evaporation) over the cells below each tabled level, for a year."""
-        w = np.asarray(lake_net_mm, np.float64).ravel()[self.cells] * MM_DAY * self.net.area[self.cells]
-        cum = np.concatenate([[0.0], np.cumsum(w)])
-        return cum[self.pos] - cum[self.s0]
+    def table(self, runoff_mm, lake_net_mm):
+        """Each lake's balance (m3/s) with its water at each tabled level, for a year, beside the inflow the network
+        gathers from the ground the design leaves dry: the rain less evaporation of the cells below the level, less
+        the runoff those cells yield while dry (lake_rule.hollow_terms' `want`), with the runoff of all the cells the
+        design's lake covers. At the design's level that is the lake's rain less evaporation; a lake that rises takes
+        the runoff of the ground it covers, and one that falls gets the runoff of the bed it uncovers."""
+        cells = self.cells
+        area = self.net.area[cells]
+        dry = np.maximum(np.asarray(runoff_mm).ravel()[cells], 0.0) * MM_DAY * area
+        net = np.asarray(lake_net_mm).ravel()[cells] * MM_DAY * area
+        cum = np.concatenate([[0.0], np.cumsum(net - dry)])
+        back = np.bincount(self.filled_slot, weights=dry[self.filled], minlength=self.lake_nodes.size)
+        return cum[self.pos] - cum[self.s0] + back[:, None]
 
     def sea_step(self, name, vol, inflow, loss, dt):
         """An upper sea's volume over its rim and its outflow over a step."""
@@ -738,23 +755,23 @@ class Storage:
         supplies, and their losses."""
         net, s = self.net, self.s
         dt = YEAR_S / steps
-        runoff, lake = net.sources(runoff_mm, lake_net_mm)
-        local = np.bincount(net.label, weights=runoff, minlength=net.n_nodes)
-        direct = np.bincount(net.term_sea[net.direct], weights=runoff[net.direct], minlength=net.n_waters)
+        src = net.sources(runoff_mm, lake_net_mm)
+        local, direct, lake = src['local'], src['direct'], src['lake']
         loss = water_losses(net, lake_net_mm)
-        ntab = self.table(lake_net_mm)
+        ntab = self.table(runoff_mm, lake_net_mm)
         slot = self.slot
         total = np.zeros(net.n_nodes)
-        totals = dict(moscoviense=0.0, orientale=0.0, smythii_marginis=0.0, neck=0.0)
+        kinds_out = ('moscoviense', 'orientale', 'smythii_marginis') + (('neck',) if self.parted else ())
+        totals = {k: 0.0 for k in kinds_out}
         supply_total = np.zeros(net.n_waters)
         for _ in range(steps):
             inflow = local.copy()
             sea_in = direct.copy()
             out = np.zeros(net.n_nodes)
-            flows = dict(moscoviense=0.0, orientale=0.0, smythii_marginis=0.0, neck=0.0)
+            flows = {k: 0.0 for k in kinds_out}
 
             def put(kinds):
-                q = op_flows(s, flows['moscoviense'], flows['orientale'], flows['smythii_marginis'], flows['neck'])
+                q = op_flows(s, flows['moscoviense'], flows['orientale'], flows['smythii_marginis'], flows.get('neck', 0.0))
                 sel = np.isin(s['op_kind'], [OPS.index(k) for k in kinds])
                 node, sea = self.op_node[sel], self.op_sea[sel]
                 np.add.at(inflow, node[node >= 0], q[sel][node >= 0])
@@ -769,12 +786,12 @@ class Storage:
                     put(('neck',))
                 for nodes in self.groups[st_]:
                     i = slot[nodes]
-                    q = np.maximum(inflow[nodes] + lake[nodes], 0.0)
+                    q = np.where(net.through[nodes], inflow[nodes], np.maximum(inflow[nodes] + lake[nodes], 0.0))
                     has = i >= 0
                     if has.any():
                         j = i[has]
                         v = self.vol[j]
-                        bal = np.where(v >= 0.0, lake[nodes[has]], 0.0)
+                        bal = ntab[j, 0].copy()                  # at its pass or over it: the whole water's balance
                         below = v < 0.0
                         if below.any():
                             bal[below] = row_interp(v[below], self.vtab[j[below]], ntab[j[below]])
@@ -801,7 +818,7 @@ class Storage:
                     k = 'smythii_marginis'
                     self.sea_vol[k], flows[k] = self.sea_step(k, self.sea_vol[k], sea_in[self.iw[k]],
                                                               loss[self.iw[k]], dt)
-                elif st_ == 2:
+                elif st_ == 2 and self.parted:
                     iN = self.iw['near_side_main']
                     self.main_vol, flows['neck'] = self.main_step(self.main_vol, sea_in[iN] - self.main_offset,
                                                                   loss[iN], dt)
@@ -810,14 +827,11 @@ class Storage:
                 totals[k] += flows[k]
             supply_total += sea_in
         return dict(out=total / steps, outflow={k: v / steps for k, v in totals.items()},
-                    supply=supply_total / steps, loss=loss, sources=(runoff, lake))
+                    supply=supply_total / steps, loss=loss, sources=src)
 
     def field(self, runoff_mm, lake_net_mm, result):
-        """A year's discharge in each cell from its mean outflows (a replay with each pit passing on its mean)."""
-        o = result['outflow']
-        ops = ops_list(self.s, op_flows(self.s, o['moscoviense'], o['orientale'], o['smythii_marginis'], o['neck']))
-        runoff, lake = self.net.with_ops(result['sources'], runoff_mm, ops)
-        q, _ = self.net.replay(runoff, lake, passed_on=result['out'])
+        """A year's discharge in each cell from its mean outflows (a replay with each lake passing on its mean)."""
+        q, _ = self.net.replay(result['sources'], ops_of(self.s, result['outflow']), passed_on=result['out'])
         return q
 
 
@@ -1034,7 +1048,7 @@ def year_files():
 
 def ops_of(s, outflow):
     return ops_list(s, op_flows(s, outflow['moscoviense'], outflow['orientale'], outflow['smythii_marginis'],
-                                outflow['neck']))
+                                outflow.get('neck', 0.0)))
 
 
 def year_summary(supply, loss, outflow, q, into):
@@ -1046,32 +1060,32 @@ def year_summary(supply, loss, outflow, q, into):
                 rivers_into_the_seas_m3s=round(float(q[into].sum()), 1))
 
 
-def checkpoint(path, done, flows, summaries, stores):
-    """The years finished so far, with the storage's state, kept on the research drive."""
+def checkpoint(path, done, flows, summaries, stores, key):
+    """The years finished so far, with the storage's state, kept on the research drive under the design routing
+    record's hash."""
     WORK.mkdir(parents=True, exist_ok=True)
     state = {f'vol_{k}': st.vol for k, st in stores.items()}
-    meta = dict(done=done, summaries=summaries,
+    meta = dict(done=done, summaries=summaries, design_routing=key,
                 seas={k: dict(sea_vol=st.sea_vol, main_vol=st.main_vol) for k, st in stores.items()})
     np.savez(path, metadata=json.dumps(meta), **{f'flow_{k}': v for k, v in flows.items()}, **state)
 
 
-def run_years(net, s, reference, design_in, closed, track, into, land, log=print, resume=False):
-    """The settled years in order: each routed without storage ('none', the hollows the design leaves closed held
-    shut), as a steady state of its own ('steady', those hollows filling and spilling in a wet year as a steady routing
-    has them), and with the storage at both outlet widths ('narrow', 'wide'), the storage starting from the design state.
-    Returns each scenario's flows at the tracked cells (years by cells), each year's summaries, the storage's check on
-    the design climate, the years' mean climate on the climate model's grid and each year's runoff from the land
-    (m3/s, the design's dry ground)."""
+def run_years(net, s, reference, design_in, track, into, land, log=print, resume=False):
+    """The settled years in order: each routed without storage ('none', the lakes the design leaves below their passes
+    passing nothing) and with the storage at both outlet widths ('narrow', 'wide'), the storage starting from the
+    design state. Returns each scenario's flows at the tracked cells (years by cells), each year's summaries, the
+    storage's check on the design climate, the years' mean climate on the climate model's grid, the estimate's steps
+    and each year's runoff from the land (m3/s, the design's dry ground)."""
     m = s['meta']
     rotation = np.asarray(m['rotation'], float)
     rows, cols = net.rows, net.cols
     years = list(range(YEARS[0], YEARS[1] + 1))
-    sums, applied, delta = year_sums()
+    sums, applied, delta, ratios = year_sums()
     runoff_d, lake_d = design_in
     stores, steady = {}, {}
     for label, width in zip(('narrow', 'wide'), RL.WIDTH):
         st = Storage(net, s, reference, width, log)
-        st.initial(reference, lake_d, reference['inflow'])
+        st.initial(reference, runoff_d, lake_d, reference['inflow'])
         t0 = time.time()
         check = st.year(runoff_d, lake_d)
         lakes = st.lake_nodes
@@ -1080,16 +1094,19 @@ def run_years(net, s, reference, design_in, closed, track, into, land, log=print
             buffering=buffering(st, reference), seconds_a_year=round(time.time() - t0, 1),
             largest_change_of_a_lake_outflow_m3s=round(float(moved.max()), 3),
             outflows_m3s={k: [round(reference['outflow'][k], 1), round(v, 1)] for k, v in check['outflow'].items()})
-        st.initial(reference, lake_d, reference['inflow'])
+        st.initial(reference, runoff_d, lake_d, reference['inflow'])
         stores[label] = st
         log(f'storage at width {width:g} on the design climate: {steady[label]}')
     path = WORK / 'years.npz'
-    flows = {k: np.zeros((len(years), track.size), np.float32) for k in ('none', 'steady', 'narrow', 'wide')}
+    key = sha256(DRt.OUT)
+    flows = {k: np.zeros((len(years), track.size), np.float32) for k in ('none', 'narrow', 'wide')}
     summaries = {k: [] for k in flows}
     done = 0
     if resume and path.exists():
         with np.load(path, allow_pickle=False) as z:
             meta = json.loads(str(z['metadata']))
+            if meta.get('design_routing') != key or z['flow_none'].shape != flows['none'].shape:
+                raise SystemExit(f'{path} holds the years of another design routing; run without --resume')
             done = meta['done']
             summaries = meta['summaries']
             for k in flows:
@@ -1102,7 +1119,7 @@ def run_years(net, s, reference, design_in, closed, track, into, land, log=print
     clim_sum, land_runoff = None, []
     for i, y in enumerate(years):
         t0 = time.time()
-        clim = year_climate(sums[y], applied, delta, rotation)
+        clim = year_climate(sums[y], applied, delta, rotation, ratios)
         fields = ('pr_mm_day', 'evap_mm_day', 'lsm')
         clim_sum = ({k: clim[k].astype(np.float64) for k in fields} if clim_sum is None
                     else {k: clim_sum[k] + clim[k] for k in fields})
@@ -1110,37 +1127,40 @@ def run_years(net, s, reference, design_in, closed, track, into, land, log=print
         land_runoff.append(float((np.maximum(runoff_y.ravel().astype(np.float64), 0.0) * MM_DAY * net.area)[land].sum()))
         if i < done:
             continue
-        for k, shut in (('none', closed), ('steady', None)):
-            r = without_storage(net, s, runoff_y, lake_y, reference, shut=shut)
-            flows[k][i] = r['q'][track]
-            summaries[k].append(dict(year=y, **year_summary(r['supply'], r['loss'], r['outflow'], r['q'], into)))
-            del r
+        r = without_storage(net, s, runoff_y, lake_y, reference)
+        flows['none'][i] = r['q'][track]
+        summaries['none'].append(dict(year=y, **year_summary(r['supply'], r['loss'], r['outflow'], r['q'], into)))
+        del r
         for k, st in stores.items():
             res = st.year(runoff_y, lake_y)
             q = st.field(runoff_y, lake_y, res)
             flows[k][i] = q[track]
             summaries[k].append(dict(year=y, **year_summary(res['supply'], res['loss'], res['outflow'], q, into)))
-            del q
-        checkpoint(path, i + 1, flows, summaries, stores)
-        log(f'year {y}: {time.time() - t0:.0f} s; without storage Moscoviense {summaries["none"][-1]["outflow_m3s"]}')
+            del q, res
+        checkpoint(path, i + 1, flows, summaries, stores, key)
+        log(f'year {y}: {time.time() - t0:.0f} s; without storage {summaries["none"][-1]["outflow_m3s"]}')
     mean = {k: (v / len(years)).astype(np.float32) for k, v in clim_sum.items()}
     mean.update(lat=clim['lat'], lon=clim['lon'])
     return flows, summaries, steady, mean, (applied, delta), land_runoff
 
 
-def main_part_balance(reference):
-    """The main part of the near-side sea on the design climate: what the design routing brings it and loses at its
-    level, against the neck study's steady state, whose rivers were counted with the near-side sea whole."""
-    iN = WATERS.index('near_side_main')
-    neck = json.loads(N.OUT.read_text())['budgets'][BUDGET]
-    balance = reference['main_supply'] - reference['loss'][iN]
-    return dict(routing_brings_m3s=round(reference['main_supply']), neck_study_brings_m3s=neck['supply_m3s']['main'],
-                loss_at_its_level_m3s=round(float(reference['loss'][iN])), routing_balance_m3s=round(balance),
-                design_spill_m3s=round(reference['outflow']['neck']),
-                offset_held_m3s=round(balance - reference['outflow']['neck'], 1),
-                note=('the design routing routes the rivers again over the floor the parted sea leaves dry, and brings the '
-                      'main part more than the neck study counted with the sea whole; both years\' procedures keep the '
-                      'design\'s spill on the design climate and move it by each year\'s departure'))
+def near_side_balance(s, reference):
+    """The near-side sea's parts on the design climate as the years' procedure routes it: what the rivers bring each
+    part and what it loses at its level, against the flow the design sends from the main part to the southern one
+    (through the sea's water where it stands as one sea across the neck, over the crest onto the ground past it
+    where it stands parted, the spill then counted among the southern part's rivers)."""
+    m = s['meta']
+    iN, iS = WATERS.index('near_side_main'), WATERS.index('near_side_south')
+    supply, loss, neck = reference['supply'], reference['loss'], m['neck_flow']
+    through_water = neck if m['joined'] else 0.0
+    return dict(joined_across_the_neck=m['joined'], neck_flow_m3s=round(neck, 1),
+                main=dict(rivers_m3s=round(float(supply[iN]), 1), loses_m3s=round(float(loss[iN]), 1),
+                          left_m3s=round(float(supply[iN] - loss[iN] - neck), 1)),
+                south=dict(rivers_m3s=round(float(supply[iS]), 1), loses_m3s=round(float(loss[iS]), 1),
+                           left_m3s=round(float(supply[iS] + through_water - loss[iS]), 1)),
+                note=('left: what a part receives, with the neck\'s flow taken from the main part and given to the '
+                      'southern one, beyond what it loses; the design routing settles each part within 0.2% of what '
+                      'it receives'))
 
 
 def threshold_scale(net, land, runoff_mm, frame):
@@ -1168,14 +1188,17 @@ def ratio_spread(a, b):
 
 def buffering(st, reference):
     """How long each water's storage holds its outflow: the e-folding time A / (dQ/dh) at the design state, in years,
-    for the upper seas, the main part and the lakes passing on THRESHOLD_M3S or more."""
+    for the upper seas, the main part where the near-side sea stands parted, and the lakes passing on THRESHOLD_M3S
+    or more."""
     out = {}
     for k, q in st.sea_q.items():
         head = (q / st.sea_k[k]) ** (2.0 / 3.0)
         out[k] = dict(head_m=round(head, 2), years=round(st.sea_area[st.iw[k]] * head / (1.5 * q) / YEAR_S, 2))
-    e = float(np.interp(reference['outflow']['neck'], st.neck_q, st.neck_head))
-    slope = float(np.interp(e + 0.05, st.neck_head, st.neck_q) - np.interp(e - 0.05, st.neck_head, st.neck_q)) / 0.1
-    out['near_side_main'] = dict(head_m=round(e, 2), years=round(st.sea_area[st.iw['near_side_main']] / slope / YEAR_S, 2))
+    if st.parted:
+        e = float(np.interp(reference['outflow']['neck'], st.neck_q, st.neck_head))
+        slope = float(np.interp(e + 0.05, st.neck_head, st.neck_q) - np.interp(e - 0.05, st.neck_head, st.neck_q)) / 0.1
+        out['near_side_main'] = dict(head_m=round(e, 2),
+                                     years=round(st.sea_area[st.iw['near_side_main']] / slope / YEAR_S, 2))
     q = reference['out'][st.lake_nodes]
     big = q >= THRESHOLD_M3S
     head = (q[big] / st.k_out[big]) ** (2.0 / 3.0)
@@ -1193,45 +1216,44 @@ def buffering(st, reference):
 
 def build(log=print, resume=False):
     started = time.time()
-    s = design_structure(log)
+    ds = design_state(log)
+    s, routing = ds['s'], ds['routing']
     m = s['meta']
     rotation = np.asarray(m['rotation'], float)
-    net = Network(s['h'], s['water'], m['levels'], s['lat'], m['cell_km'], log)
+    net = Network(ds['hollows'], ds['state'], ds['r'], ds['courses'], s['water'], len(WATERS), s['h'].shape, log)
+    runoff_d, lake_d = ds['runoff'], ds['lake_net']
+    del ds
     rows, cols = net.rows, net.cols
-    routing = DRt.load(log)
     q_design = np.asarray(routing['discharge_m3s'], float)
-    if not (np.array_equal(routing['receiver'], net.receiver) and np.array_equal(routing['outlet'], net.outlet)):
-        raise SystemExit('the network is not the design routing\'s')
     wet = routing['routing_lake'] & ~net.outlet
     into = np.flatnonzero((net.water[net.receiver] >= 0) & (net.water < 0) & ~wet)
-    runoff_d, lake_d, _, _ = FD.load(m['evaporation'])
-    runoff, lake = net.sources(runoff_d, lake_d, ops_list(s, s['op_design']))
-    q_exact, _ = net.replay(runoff, lake)
+    # the network with the design's own lake outflows must give the design routing's flows back, and the years'
+    # procedure on the design climate the same within the rounding of each lake's balance
+    q_exact, _ = net.replay(net.sources(runoff_d, lake_d), ops_list(s, s['op_design']), passed_on=net.design_out)
     reference = without_storage(net, s, runoff_d, lake_d)
-    runoff, lake = net.sources(runoff_d, lake_d, ops_of(s, reference['outflow']))
-    reference['inflow'] = net.cascade(runoff, lake)[0]
-    del runoff, lake
-    closed = (reference['out'] <= 0.0) & (np.arange(net.n_nodes) >= net.n_out)
+    reference['inflow'] = net.cascade(reference['sources'], ops_of(s, reference['outflow']))[0]
     land = ~wet & ~net.outlet
     major_d = land & (q_design >= THRESHOLD_M3S)
+    designed = dict(moscoviense=m['surplus'], **m['over'], neck=m['neck_flow'])
     design_check = dict(
+        routing_made_again_largest_difference_m3s=m['made_again_largest_difference_m3s'],
         replay_largest_difference_m3s=float(np.abs(q_exact - q_design).max()),
         years_procedure_largest_difference_m3s=round(float(np.abs(reference['q'] - q_design).max()), 3),
-        years_procedure_outflows_m3s={k: [round(v, 1) for v in (dict(moscoviense=m['surplus'], **m['over'],
-                                                                     neck=m['neck_flow'])[k], reference['outflow'][k])]
-                                      for k in reference['outflow']},
+        years_procedure_outflows_m3s={k: [round(designed[k], 1), round(v, 1)] for k, v in reference['outflow'].items()},
         rivers_into_the_seas_m3s=round(float(q_design[into].sum())),
-        main_part=main_part_balance(reference))
+        lakes=dict(count=int((~net.through[net.n_out:]).sum()), below_their_passes=int(net.closed.sum()),
+                   lowest_points_inside_larger_lakes=int(net.through.sum())),
+        near_side=near_side_balance(s, reference))
     del q_exact
     log(f'design check: {design_check}, {time.time() - started:.0f} s')
     track = np.flatnonzero(land & (q_design >= TRACK_M3S))
     flows, summaries, steady, clim_mean, (applied, delta), land_runoff = run_years(
-        net, s, reference, (runoff_d, lake_d), closed, track, into, land, log, resume)
+        net, s, reference, (runoff_d, lake_d), track, into, land, log, resume)
     log(f'the years routed, {time.time() - started:.0f} s')
 
     # the years' mean against the design: the climate's part (the years' mean climate routed) and the routing's
     runoff_m, lake_m, _, _ = loaded(clim_mean, m['evaporation'], rows, cols)
-    mean_routed = without_storage(net, s, runoff_m, lake_m, reference, shut=closed)
+    mean_routed = without_storage(net, s, runoff_m, lake_m, reference)
     del lake_m
     at = np.flatnonzero(major_d[track])
     mean_of = lambda k, f: float(np.mean([f(y) for y in summaries[k]]))                     # noqa: E731
@@ -1241,7 +1263,6 @@ def build(log=print, resume=False):
         years_mean_over_design=ratio_spread(flows['none'].mean(axis=0)[at], q_at),
         mean_climate_routed_over_design=ratio_spread(mean_routed['q'][track][at], q_at),
         years_mean_over_mean_climate_routed=ratio_spread(flows['none'].mean(axis=0)[at], mean_routed['q'][track][at]),
-        steady_years_mean_over_design=ratio_spread(flows['steady'].mean(axis=0)[at], q_at),
         storage_years_mean_over_design={k: ratio_spread(flows[k].mean(axis=0)[at], q_at) for k in ('narrow', 'wide')},
         rivers_into_the_seas_m3s=dict(design=round(float(q_design[into].sum())),
                                       mean_climate_routed=round(float(mean_routed['q'][into].sum())),
@@ -1269,14 +1290,14 @@ def build(log=print, resume=False):
     del lake_routing_budget
     after = {}
     for end, field in loss_fields.items():
-        r = without_storage(net, s, runoff_d, lake_d, reference, river_loss=field, shut=closed)
+        r = without_storage(net, s, runoff_d, lake_d, reference, river_loss=field)
         after[end] = dict(q=r['q'], supply=r['supply'], outflow=r['outflow'],
                           taken_m3s=round(float(field.sum()), 1), into=round(float(r['q'][into].sum()), 1))
         del r
     loss_record['routed'] = dict(
         rule=('each loss taken from the river cell it falls on (a floodplain\'s from the nearest river cell), never more '
-              'than the cell carries, and the year routed again: a lake or sea below receives less, Moscoviense passes '
-              'on less by its fixed shares and the neck less by the main part\'s balance'),
+              'than the cell carries, and the year routed again: a lake or sea below receives less and Moscoviense '
+              'passes on less by its fixed shares'),
         ends=dict(low='the narrow channel and belt (width coefficient 3, belt 0.5 km)',
                   high='the wide channel and belt (15, 2 km) and the floodplains kept wet at 5 m'),
         taken_m3s={k: v['taken_m3s'] for k, v in after.items()},
@@ -1347,7 +1368,7 @@ def build(log=print, resume=False):
                        design_m3s=round(float(q_design[e]), 1),
                        sustained=bool(stats['wide']['sustained'][je]),
                        stops=bool(stats['wide']['stops'][je]))
-            for k in ('none', 'steady', 'narrow', 'wide'):
+            for k in ('none', 'narrow', 'wide'):
                 row[k] = dict(mean_m3s=round(float(stats[k]['mean'][je]), 1), lowest_m3s=round(float(stats[k]['lowest'][je]), 1),
                               second_lowest_m3s=round(float(stats[k]['second'][je]), 1),
                               years_at_the_threshold=int(stats[k]['years'][je]), sustained=bool(stats[k]['sustained'][je]))
@@ -1356,7 +1377,9 @@ def build(log=print, resume=False):
             cell_reach[j[piece]] = len(reach_rows)
             reach_rows.append(row)
     log(f'{len(stem_list)} rivers in {len(reach_rows)} reaches, {time.time() - started:.0f} s')
+    from research.studies.atlas_round import design_works as DW
     return dict(s=s, net=net, routing=routing, track=track, flows=flows, summaries=summaries, steady=steady,
+                works=DW.OUT, works_product=DW.PRODUCT,
                 stats=stats, stats_large=stats_large, stems=stem_list, reaches=reach_rows, cell_reach=cell_reach,
                 q_design=q_design, q_after=q_after, taken_high=taken_high, design_check=design_check,
                 against_design=against_design, loss_record=loss_record, frame_path=frame_path,
@@ -1384,10 +1407,11 @@ def write(b, log=print):
     length = RL.flow_length_km(net.receiver.astype(np.int64), net.rows, net.cols, np.asarray(s['lat'], float),
                                m['cell_km'])[track]
     evidence = ('A calculation on products: the design climate\'s fifteen settled years (an estimate carried by pattern '
-                'scaling to 300.31 K), each routed on the design routing\'s structure held fixed, without storage and '
-                'with the lakes and the upper seas carrying their volume from year to year over outlets sized by Earth\'s '
-                'channel widths; the rivers\' losses in the drylands by river_losses.py\'s estimate. Fifteen years is a '
-                'short record, and no figure is validated against an observation.')
+                'scaling to 300.31 K and then onto the design\'s own surface), each routed on the design routing\'s '
+                'structure held fixed, the lakes as the corrected rule fills them, without storage and with the lakes '
+                'and the upper seas carrying their volume from year to year over outlets sized by Earth\'s channel '
+                'widths; the rivers\' losses in the drylands by river_losses.py\'s estimate. Fifteen years is a short '
+                'record, and no figure is validated against an observation.')
     reading_rule = ('Cells index rows from 90 N and columns from 0 E, 16 per degree, on today\'s Moon: cell = row * 5760 + '
                     'column. cell lists the river cells on dry ground carrying at least track_m3s on the design routing; '
                     'flow_m3s is each settled year\'s mean discharge (years by cells) with the lakes\' and upper seas\' '
@@ -1417,7 +1441,7 @@ def write(b, log=print):
     reaches = b['reaches']
     ends = [r for r in reaches if r['ends']['kind'] != 'changes']
     by_class = {}
-    for k in ('none', 'steady', 'narrow', 'wide'):
+    for k in ('none', 'narrow', 'wide'):
         sus = stats[k]['sustained']
         by_class[k] = dict(
             rivers_sustained_to_their_end=sum(r[k]['sustained'] for r in ends),
@@ -1446,18 +1470,21 @@ def write(b, log=print):
     scale = b['against_design'].pop('threshold_scale')
     record = dict(
         schema=SCHEMA, producer=dict(files={f: sha256(ROOT / f) for f in CODE}),
-        inputs={rel(p): sha256(p) for p in (DRt.OUT, FD.OUT, N.OUT, RL.OUT, ROOT / FD.ESTIMATE, b['frame_path'])},
-        ignored_inputs={**{str(DRt.PRODUCT): sha256(DRt.PRODUCT), FD.CLIMATOLOGY: sha256(ROOT / FD.CLIMATOLOGY),
-                           str(STRUCTURE): sha256(STRUCTURE), rel(b['t21']): sha256(b['t21'])},
+        inputs={rel(p): sha256(p) for p in (DRt.OUT, FD.OUT, N.OUT, b['works'], RL.OUT, ROOT / FD.ESTIMATE,
+                                            ROOT / FD.SURFACE_ESTIMATE, b['frame_path'])},
+        ignored_inputs={**{str(DRt.PRODUCT): sha256(DRt.PRODUCT), str(b['works_product']): sha256(b['works_product']),
+                           **{f: sha256(ROOT / f) for f in (FD.CLIMATOLOGY, FD.BASE_TURNED_CLIMATOLOGY,
+                                                            FD.TURNED_CLIMATOLOGY)},
+                           rel(b['t21']): sha256(b['t21'])},
                         **{str(f): sha256(f) for f in year_files()}},
         evidence=evidence,
         reading_rule=('Flows in m3/s, lengths in km, areas in km2; a year is a settled year of the design climate (model '
-                      'years 45-59). Each year is routed four ways: none, with no water carried between years and the '
-                      'hollows the design leaves below their passes held there, the lower bound on a dry year\'s flow '
-                      'for the waters the design holds full; steady, each year a steady state of its own, those hollows '
-                      'filling and spilling in a wet year, shown to measure what holding them takes away; narrow and wide, '
-                      'with the lakes\' and the upper seas\' storage carried from year to year over outlets of width 3 '
-                      'and 15 m per (m3/s)^0.5 widened for lunar gravity, wide holding the least. A reach is part of a '
+                      'years 45-59). Each year is routed three ways: none, with no water carried between years and the '
+                      'lakes the design leaves below their passes passing nothing, the lower bound on a dry year\'s flow '
+                      'for the waters the design holds full; narrow and wide, with the lakes\' and the upper seas\' '
+                      'storage carried from year to year over outlets of width 3 and 15 m per (m3/s)^0.5 widened for '
+                      'lunar gravity, wide holding the least, a lake below its pass rising in wet years and passing '
+                      'water on once it reaches it. A reach is part of a '
                       'major river (threshold_m3s or more on the design routing) between confluences, lakes of '
                       'lake_break_km2 or more and changes of class, its flows read at its downstream end; it is '
                       'sustained when it carries the threshold in every year with the wide outlets\' storage and '
@@ -1466,9 +1493,11 @@ def write(b, log=print):
                       'the low and high ends, and lowest_year_high the wide storage\'s lowest year less the high end\'s '
                       'loss of the mean year. product holds the cells, reaches the full table.'),
         limits=[
-            'The climate is an estimate: the run at sunlight 0.936 carried by pattern scaling from 301.00 K to 300.31 K, '
-            'each year keeping its own departures from the run\'s mean; a run at the design temperature would differ by '
-            'about the noise of fifteen years\' means.',
+            'The climate is an estimate in two steps: the run at sunlight 0.936 carried by pattern scaling from 301.00 K '
+            'to 300.31 K, each year keeping its own departures from the run\'s mean, and then each cell\'s rain and '
+            'evaporation moved by the ratio the step onto the design\'s own surface gives the mean '
+            '(climate.gcm.surface_change, from existing runs); a run on that surface at the design temperature would '
+            'differ by more than the noise of fifteen years\' means where the lakes grew.',
             'Fifteen years is a short record: the lowest year is about the driest year in fifteen and the second lowest '
             'the driest in seven or eight; longer records hold drier years, so a river sustained here can fall under the '
             'threshold in a rarer drought. The years follow one another in the model\'s order.',
@@ -1485,9 +1514,13 @@ def write(b, log=print):
             f'{scale["climate_land_cell_km2_median"]:,} km2, the routing\'s 1.9 km cells taking it bilinearly.',
             'The losses are river_losses.py\'s estimate at the ends of its ranges, taken from the mean year\'s flow; the '
             'lowest year after losses deducts the mean year\'s loss.',
-            'The routing is the design routing\'s steady fill and spill on 1.9 km cells, with its own approximations '
-            '(each catchment balanced alone, as route_levels balances it). Nothing is validated against an '
-            'observation.'],
+            'The structure is held fixed: the lakes keep the design\'s shores in the years without storage, a lake that '
+            'reaches its pass with storage sends its water on by the course the design gives it and not into the larger '
+            'hollow it would fill with its neighbour, and each cut carries the design\'s part of its branch\'s share '
+            'whether or not its lake can spare it that year. Where the near-side sea is one sea across its neck, both '
+            'parts are held at their design levels.',
+            'The routing is the design routing\'s on 1.9 km cells, each hollow filled as one water (lake_rule.py). '
+            'Nothing is validated against an observation.'],
         settings=dict(threshold_m3s=THRESHOLD_M3S, large_m3s=LARGE_M3S, track_m3s=TRACK_M3S, dry_m3s=DRY_M3S,
                       lake_break_km2=LAKE_BREAK_KM2, steps_a_year=STEPS, outlet_width_coefficients=list(RL.WIDTH),
                       lunar_widening=round(RL.LUNAR_WIDENING, 3), outlet_sized_at_least_m3s=Q_FLOOR,

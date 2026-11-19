@@ -1,24 +1,27 @@
-"""Checks of the sustained rivers: on small grids, the replay of the routing reproduces route_levels exactly, the
-catchments' cascade gives each water what the replay gives it, a river's loss is taken where it falls and reaches the
-lakes below, and the storage holds still on a steady year, keeps its water and carries a lake's outflow through a dry
-year; Moscoviense's put-ins follow its fixed shares; a river's stems follow the larger branch, pass small lakes and end
-at large ones; and, once computed, the product and its record."""
+"""Checks of the sustained rivers: on small grids, the network on the corrected rule's lakes gives the joined courses'
+flows back exactly, the catchments' cascade gives each water what the replay gives it, a flow put in is carried down
+and a river's loss is taken where it falls, a lake the design leaves below its pass passes nothing, and the storage
+holds still on a steady year, keeps its water, carries a lake's outflow through a dry year and raises a lake below its
+pass in wet years; Moscoviense's put-ins follow its fixed shares and each cut its part of them; a river's stems follow
+the larger branch, pass small lakes and end at large ones; and, once computed, the product and its record."""
 import json
 
 import numpy as np
 import pytest
 
+from research.studies.atlas_round import hollow_courses as HC
+from research.studies.atlas_round import lake_rule as LR
 from research.studies.atlas_round import sustained_rivers as SR
-from research.studies.drainage_network.routing import route_levels
 
 CELL_KM = 1.9
 YEAR_S = SR.YEAR_S
+QUIET = lambda *a: None                                                         # noqa: E731
 
 
-def basin(rows=24, cols=48):
+def basin(rows=24, cols=48, lake_loss=3.0):
     """A slope rising to the east, a bowl on it that fills to a lake and spills west, a sea along the west edge and the
     six other waters as small blocks on high ground, each at its own level; with runoff (mm/day) on the land and the
-    open water losing 3 mm/day beyond its rain."""
+    open water losing `lake_loss` mm/day beyond its rain."""
     lat = np.linspace(2.0, -2.0, rows)
     c = np.arange(cols)[None, :] * np.ones((rows, 1))
     r = np.arange(rows)[:, None] * np.ones((1, cols))
@@ -34,68 +37,104 @@ def basin(rows=24, cols=48):
         cell[rs, cs] = True
         water[cell.ravel()] = k
         levels[k] = float(h[cell].max()) + 1.0 + k
-    runoff = np.full((rows, cols), 1.0)
-    lake_net = np.full((rows, cols), -3.0)
+    runoff = np.full((rows, cols), 1.0, np.float32)
+    lake_net = np.full((rows, cols), -lake_loss, np.float32)
     return h.astype(np.float32), water, levels, lat, runoff, lake_net
 
 
-def structure(net, neck=0.0):
-    """A design structure with no put-ins or take-outs, for the small grid."""
+def network(h, water, levels, lat, runoff, lake_net, sources=()):
+    """The corrected rule's routing of a small floor with its courses joined, and the network on it."""
+    outlet = (water >= 0).reshape(h.shape)
+    level = np.where(water >= 0, np.asarray(levels)[np.maximum(water, 0)], 0.0).reshape(h.shape)
+    hollows = LR.hollow_structure(h, outlet, lat, CELL_KM, level)
+    terms = LR.hollow_terms(hollows, runoff, lake_net)
+    state = LR.hollow_state(hollows, terms, sources)
+    r = LR.hollow_routing(hollows, terms, state)
+    c = HC.connect(hollows, terms, state, r, h.shape)
+    return SR.Network(hollows, state, r, c, water, len(SR.WATERS), h.shape, log=QUIET), r, c
+
+
+def structure(ops=()):
+    """A design structure for the small grid, the near-side sea one sea across its neck: `ops` as (cell, kind, sign,
+    part of the branch's share)."""
     meta = dict(fractions={'south_pole_aitken': 0.5, 'humboldtianum': 0.2, 'smythii_marginis': 0.3},
-                neck_flow=neck, level0=0.0)
-    empty = np.zeros(0)
-    return dict(meta=meta, op_cell=empty.astype(np.int64), op_kind=empty.astype(np.int8), op_sign=empty,
-                op_lake=empty.astype(bool), op_design=empty)
+                neck_flow=0.0, joined=True, level0=0.0)
+    return dict(meta=meta, op_cell=np.array([c for c, _, _, _ in ops], np.int64),
+                op_kind=np.array([SR.OPS.index(k) for _, k, _, _ in ops], np.int8),
+                op_sign=np.array([x for _, _, x, _ in ops], float), op_part=np.array([p for _, _, _, p in ops], float))
 
 
 @pytest.fixture(scope='module')
 def small():
     h, water, levels, lat, runoff, lake_net = basin()
-    net = SR.Network(h, water, levels, lat, CELL_KM, log=lambda *a: None)
-    return net, h, water, levels, lat, runoff, lake_net
+    net, r, c = network(h, water, levels, lat, runoff, lake_net)
+    return net, r, c, runoff, lake_net
 
 
-def test_the_replay_is_route_levels(small):
-    net, h, water, levels, lat, runoff, lake_net = small
-    outlet = (water >= 0).reshape(h.shape)
-    level = np.where(water >= 0, np.asarray(levels)[np.maximum(water, 0)], 0.0).reshape(h.shape)
-    ref = route_levels(h, outlet, lat, CELL_KM, runoff, lake_net, level)
-    q, out = net.replay(*net.sources(runoff, lake_net))
-    assert np.array_equal(q, ref['discharge'])
-    assert np.array_equal(net.receiver, ref['receiver'])
-    assert np.array_equal(out[net.n_out:], ref['passed_on'][net.n_out:])
-    lake = ref['lake'] & ~ref['outlet']
-    assert lake.sum() > 20                                       # the bowl holds a lake
-    assert ref['passed_on'][net.n_out:].max() > 0.0              # and spills
+def test_the_replay_is_the_joined_courses(small):
+    net, r, c, runoff, lake_net = small
+    src = net.sources(runoff, lake_net)
+    q, out = net.replay(src, passed_on=net.design_out)          # the design's own lake outflows: the routing itself
+    assert np.array_equal(q, c['discharge'])
+    assert np.array_equal(net.receiver, c['receiver'])
+    q_y, out_y = net.replay(src)                                # the years' procedure: each lake's balance taken again
+    np.testing.assert_allclose(q_y, c['discharge'], rtol=1e-9, atol=1e-9)
+    np.testing.assert_allclose(out_y, net.design_out, rtol=1e-9, atol=1e-9)
+    assert (r['lake'] & ~r['outlet']).sum() > 20                # the bowl holds a lake
+    assert net.design_out.max() > 0.0 and not net.closed.any()  # and spills
 
 
 def test_the_cascade_gives_each_water_what_the_replay_does(small):
-    net, h, water, levels, lat, runoff, lake_net = small
-    runoff_c, lake = net.sources(runoff, lake_net)
-    q, out = net.replay(runoff_c, lake)
-    _, out_c, supply = net.cascade(runoff_c, lake)
+    net, r, c, runoff, lake_net = small
+    src = net.sources(runoff, lake_net)
+    q, out = net.replay(src)
+    _, out_c, supply = net.cascade(src)
     np.testing.assert_allclose(out_c, out, rtol=1e-12, atol=1e-9)
     np.testing.assert_allclose(supply, net.supply_of(q), rtol=1e-12, atol=1e-9)
     assert supply[3] > 0.0
-    q2, _ = net.replay(runoff_c, lake, passed_on=out)           # each pit passing on what it passes on anyway
+    q2, _ = net.replay(src, passed_on=out)                      # each lake passing on what it passes on anyway
     np.testing.assert_allclose(q2, q, rtol=1e-12, atol=1e-9)
 
 
-def test_a_loss_is_taken_where_it_falls_and_never_more_than_the_river_carries(small):
-    net, h, water, levels, lat, runoff, lake_net = small
-    runoff_c, lake = net.sources(runoff, lake_net)
-    q, out = net.replay(runoff_c, lake)
-    k = int(np.argmax(out))                                     # the bowl's lake
+def upstream_of_the_lake(net, k):
+    """A cell on dry ground whose water runs into the lake that leaves by catchment k."""
     above = int(np.flatnonzero(net.receiver == net.sinks[k - net.n_out])[0])
-    while net.lake_full[above]:                                 # a cell on the ground upstream of the lake
+    while net.lake_full[above]:
         above = int(np.flatnonzero(net.receiver == above)[0])
+    return above
+
+
+def test_a_flow_put_in_is_carried_down_and_one_taken_out_of_a_lake_leaves_it(small):
+    net, r, c, runoff, lake_net = small
+    src = net.sources(runoff, lake_net)
+    q, out = net.replay(src)
+    _, _, supply = net.cascade(src)
+    k = int(np.argmax(out))                                     # the bowl's lake
+    above = upstream_of_the_lake(net, k)
+    lake_cell = int(net.lake_cells[0])
+    ops = [(above, 0.4 * out[k]), (lake_cell, -0.1 * out[k])]
+    q_o, out_o = net.replay(src, ops)
+    _, out_c, supply_o = net.cascade(src, ops)
+    assert out_o[k] == pytest.approx(1.3 * out[k], rel=1e-9)
+    np.testing.assert_allclose(out_c, out_o, rtol=1e-12, atol=1e-9)
+    np.testing.assert_allclose(supply_o, net.supply_of(q_o), rtol=1e-12, atol=1e-9)
+    assert supply_o[3] - supply[3] == pytest.approx(0.3 * out[k], rel=1e-9)
+    assert q_o[above] == pytest.approx(q[above] + 0.4 * out[k], rel=1e-9)
+
+
+def test_a_loss_is_taken_where_it_falls_and_never_more_than_the_river_carries(small):
+    net, r, c, runoff, lake_net = small
+    src = net.sources(runoff, lake_net)
+    q, out = net.replay(src)
+    k = int(np.argmax(out))                                     # the bowl's lake
+    above = upstream_of_the_lake(net, k)
     loss = np.zeros(net.n)
     loss[above] = 0.25 * q[above]
-    q_l, out_l = net.replay(runoff_c, lake, loss=loss)
+    q_l, out_l = net.replay(src, loss=loss)
     assert out_l[k] == pytest.approx(out[k] - loss[above], rel=1e-9)
     assert net.supply_of(q_l)[3] == pytest.approx(net.supply_of(q)[3] - loss[above], rel=1e-9)
     loss[above] = 10.0 * q[above]                               # more than it carries: it runs dry there
-    q_l, _ = net.replay(runoff_c, lake, loss=loss)
+    q_l, _ = net.replay(src, loss=loss)
     assert q_l[net.receiver[above]] == pytest.approx(q[net.receiver[above]] - q[above], rel=1e-9, abs=1e-9)
 
 
@@ -116,29 +155,29 @@ def test_a_row_table_interpolates_as_numpy_does():
     assert SR.row_interp(np.array([-9.0]), xs[:1], ys[:1])[0] == 0.0       # below the table: empty
 
 
-def test_moscovienses_put_ins_follow_its_fixed_shares():
-    kinds = np.array([SR.OPS.index(k) for k in ('salt_sea_weir', 'humboldtianum_branch', 'smythii_marginis_branch',
-                                                'smythii_marginis_branch', 'orientale', 'neck')], np.int8)
-    s = dict(meta=dict(fractions={'south_pole_aitken': 0.6, 'humboldtianum': 0.15, 'smythii_marginis': 0.25}),
-             op_kind=kinds, op_sign=np.array([1.0, 1.0, 1.0, -1.0, 1.0, 1.0]))
+def test_moscovienses_put_ins_follow_its_fixed_shares_and_each_cut_its_part():
+    s = structure([(0, 'salt_sea_weir', 1.0, 1.0), (1, 'humboldtianum_branch', 1.0, 1.0),
+                   (2, 'smythii_marginis_branch', 1.0, 1.0), (3, 'smythii_marginis_branch', -1.0, 0.9),
+                   (4, 'smythii_marginis_branch', 1.0, 0.9), (5, 'orientale', 1.0, 1.0), (6, 'neck', 1.0, 1.0)])
+    s['meta']['fractions'] = {'south_pole_aitken': 0.6, 'humboldtianum': 0.15, 'smythii_marginis': 0.25}
     q = SR.op_flows(s, 1000.0, 300.0, 400.0, 50.0)
-    np.testing.assert_allclose(q, [600.0, 150.0, 250.0, -250.0, 300.0, 50.0])
+    np.testing.assert_allclose(q, [600.0, 150.0, 250.0, -225.0, 225.0, 300.0, 50.0])
+    assert SR.ops_list(s, q)[3] == (3, -225.0)
 
 
 @pytest.fixture(scope='module')
 def stored(small):
-    net, h, water, levels, lat, runoff, lake_net = small
-    s = structure(net)
+    net, r, c, runoff, lake_net = small
+    s = structure()
     design = SR.without_storage(net, s, runoff, lake_net)
-    runoff_c, lake = net.sources(runoff, lake_net)
-    design['inflow'] = net.cascade(runoff_c, lake)[0]
+    design['inflow'] = net.cascade(design['sources'])[0]
     return net, s, design, runoff, lake_net
 
 
 def test_the_storage_holds_still_on_the_design_year(stored):
     net, s, design, runoff, lake_net = stored
-    st = SR.Storage(net, s, design, SR.RL.WIDTH[0], log=lambda *a: None)
-    st.initial(design, lake_net, design['inflow'])
+    st = SR.Storage(net, s, design, SR.RL.WIDTH[0], log=QUIET)
+    st.initial(design, runoff, lake_net, design['inflow'])
     res = st.year(runoff, lake_net)
     lakes = st.lake_nodes
     np.testing.assert_allclose(res['out'][lakes], design['out'][lakes], rtol=1e-6, atol=1e-6)
@@ -148,21 +187,53 @@ def test_the_storage_holds_still_on_the_design_year(stored):
 
 def test_the_storage_keeps_its_water_and_carries_a_lake_through_a_dry_year(stored):
     net, s, design, runoff, lake_net = stored
-    st = SR.Storage(net, s, design, SR.RL.WIDTH[0], log=lambda *a: None)
-    st.initial(design, lake_net, design['inflow'])
+    st = SR.Storage(net, s, design, SR.RL.WIDTH[0], log=QUIET)
+    st.initial(design, runoff, lake_net, design['inflow'])
     k = int(np.argmax(np.where(np.arange(net.n_nodes) >= net.n_out, design['out'], 0.0)))
     i = st.slot[k]
     wet = 1.5 * runoff
-    runoff_c, lake = net.sources(wet, lake_net)
-    inflow = net.cascade(runoff_c, lake)[0][k]
+    src = net.sources(wet, lake_net)
+    inflow = net.cascade(src)[0][k]
     v0 = st.vol[i]
     res = st.year(wet, lake_net)
-    assert st.vol[i] > 0.0                                       # above its spill level all year
-    assert st.vol[i] - v0 == pytest.approx(YEAR_S * (inflow + lake[k] - res['out'][k]), rel=1e-6)
+    assert st.vol[i] > 0.0                                       # above its pass all year
+    assert st.vol[i] - v0 == pytest.approx(YEAR_S * (inflow + src['lake'][k] - res['out'][k]), rel=1e-6)
     dry = 0.3 * runoff
     res = st.year(dry, lake_net)
     plain = SR.without_storage(net, s, dry, lake_net)
     assert res['out'][k] > plain['out'][k] + 0.5                 # the lake's head carries water into the dry year
+
+
+def test_a_lake_below_its_pass_passes_nothing_and_rises_in_wet_years():
+    h, water, levels, lat, runoff, lake_net = basin(lake_loss=60.0)
+    net, r, c = network(h, water, levels, lat, runoff, lake_net)
+    k = int(np.flatnonzero(net.closed)[0])                       # the bowl's lake, which its rivers cannot fill
+    assert net.closed.sum() == 1 and 0 < net.lake_cells.size < net.cover_cells.size
+    s = structure()
+    design = SR.without_storage(net, s, runoff, lake_net)
+    assert design['out'][k] == 0.0
+    np.testing.assert_allclose(design['q'], c['discharge'], rtol=1e-9, atol=1e-9)
+    wet = SR.without_storage(net, s, 20.0 * runoff, lake_net)    # without storage a wet year cannot raise it to its pass
+    assert wet['out'][k] == 0.0
+    design['inflow'] = net.cascade(design['sources'])[0]
+    st = SR.Storage(net, s, design, SR.RL.WIDTH[0], log=QUIET)
+    st.initial(design, runoff, lake_net, design['inflow'])
+    i = st.slot[k]
+    v0 = st.vol[i]
+    assert -st.vol_full[i] < v0 < 0.0                            # it stands below its pass, not empty
+    # full to its pass it would cover ground that now yields runoff, and lose more than reaches it
+    cover = net.cover_cells[net.cover_node == k]
+    dry = cover[~net.lake_full[cover]]
+    full = (lake_net.ravel()[cover] * SR.MM_DAY * net.area[cover]).sum() - (runoff.ravel()[dry] * SR.MM_DAY * net.area[dry]).sum()
+    table = st.table(runoff, lake_net)
+    assert table[i, 0] == pytest.approx(full, rel=1e-9) and design['inflow'][k] + table[i, 0] < 0.0
+    res = st.year(runoff, lake_net)
+    assert res['out'][k] == 0.0 and st.vol[i] == pytest.approx(v0, rel=1e-6)
+    res = st.year(3.0 * runoff, lake_net)
+    assert st.vol[i] > v0 and res['out'][k] == 0.0               # a wet year raises it, still under its pass
+    for _ in range(200):
+        res = st.year(40.0 * runoff, lake_net)
+    assert st.vol[i] > 0.0 and res['out'][k] > 0.0               # and wet years enough bring it over
 
 
 def twin_hollows(rows=24, cols=48):
@@ -186,26 +257,27 @@ def twin_hollows(rows=24, cols=48):
         cell[rs, cs] = True
         water[cell.ravel()] = k
         levels[k] = float(h[cell].max()) + 1.0 + k
-    return h.astype(np.float32), water, levels, lat, np.full((rows, cols), 2.0), np.full((rows, cols), -1.0)
+    return (h.astype(np.float32), water, levels, lat, np.full((rows, cols), 2.0, np.float32),
+            np.full((rows, cols), -1.0, np.float32))
 
 
 def test_a_lake_of_two_hollows_stores_as_one_body():
     h, water, levels, lat, runoff, lake_net = twin_hollows()
-    net = SR.Network(h, water, levels, lat, CELL_KM, log=lambda *a: None)
-    inner = np.flatnonzero(net.inner)
-    assert inner.size >= 1                                       # the eastern hollow lies under the western's level
+    net, r, c = network(h, water, levels, lat, runoff, lake_net)
+    inner = np.flatnonzero(net.through)
+    assert inner.size >= 1                                       # the two hollows stand as one water
     k = int(net.body[inner[0]])
-    assert not net.inner[k] and net.level[inner[0]] == net.level[k]
-    s = structure(net)
+    assert not net.through[k] and net.level[inner[0]] == net.level[k]
+    s = structure()
     design = SR.without_storage(net, s, runoff, lake_net)
-    runoff_c, lake = net.sources(runoff, lake_net)
-    design['inflow'] = net.cascade(runoff_c, lake)[0]
-    st = SR.Storage(net, s, design, SR.RL.WIDTH[0], log=lambda *a: None)
-    node_area = np.bincount(net.label[net.lake_full], weights=net.area[net.lake_full], minlength=net.n_nodes)
-    assert st.slot[inner].max() < 0                              # the inner catchments hold no volume of their own
-    assert st.area_head[st.slot[k]] == pytest.approx(node_area[net.body == k].sum())
-    assert st.area_head[st.slot[k]] > node_area[k]
-    st.initial(design, lake_net, design['inflow'])
+    np.testing.assert_allclose(design['q'], c['discharge'], rtol=1e-9, atol=1e-9)
+    design['inflow'] = net.cascade(design['sources'])[0]
+    st = SR.Storage(net, s, design, SR.RL.WIDTH[0], log=QUIET)
+    own = net.area[net.lake_cells[net.label[net.lake_cells] == k]].sum()
+    whole = net.area[net.lake_cells[net.lake_node == k]].sum()
+    assert st.slot[inner].max() < 0                              # the lowest points inside hold no volume of their own
+    assert st.area_head[st.slot[k]] == pytest.approx(whole) and whole > own > 0.0
+    st.initial(design, runoff, lake_net, design['inflow'])
     res = st.year(runoff, lake_net)
     np.testing.assert_allclose(res['out'], design['out'], rtol=1e-6, atol=1e-6)
 
@@ -279,10 +351,15 @@ def record():
 
 def test_the_years_procedure_reproduces_the_design_routing(record):
     check = record['design_check']
+    assert check['routing_made_again_largest_difference_m3s'] == 0.0
     assert check['replay_largest_difference_m3s'] == 0.0
-    assert check['years_procedure_largest_difference_m3s'] < 0.01
-    main = check['main_part']
-    assert main['routing_balance_m3s'] - main['design_spill_m3s'] == pytest.approx(main['offset_held_m3s'], abs=1.0)
+    settled = SR.GD.SETTLE_LIMIT_M                              # the design's weirs are set within this of each balance
+    assert check['years_procedure_largest_difference_m3s'] < settled
+    for designed, routed in check['years_procedure_outflows_m3s'].values():
+        assert routed == pytest.approx(designed, abs=settled)
+    near = check['near_side']                                   # each part settled within 0.2% of what it receives
+    assert abs(near['main']['left_m3s']) < 0.003 * near['main']['rivers_m3s']
+    assert abs(near['south']['left_m3s']) < 0.003 * (near['south']['rivers_m3s'] + near['neck_flow_m3s'])
     spread = record['against_the_design']['years_mean_over_design']
     assert 0.9 < spread['median'] < 1.1
     for width in ('narrow', 'wide'):
