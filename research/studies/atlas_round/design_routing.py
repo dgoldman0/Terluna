@@ -1,5 +1,5 @@
 """The design surface's routing on the redrawn floor: each cell's downstream neighbour, discharge and drained area, every
-sea at its own level and the lakes, on the design climate's closed budget with the near-side sea parted at its neck.
+sea at its own level and the lakes, on the design climate's closed budget, the lakes filled by the corrected rule.
 
     ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 python -m research.studies.atlas_round.design_routing   # about 6 minutes
 
@@ -7,14 +7,19 @@ The design surface is routed once for each climate and kept, so that the maps bu
 surface (globe_surface.py), the satoyama map (satoyama_final.py) and the climate model's surface for the run on the
 design surface (design_turned_surface.py) read it, and later maps can. The routing:
 
-- the governed routing on the closed budget of the design climate (final_drainage.py's carried climatology, its works
-  and shares; governed_drainage.govern): the salt sea and Humboldtianum held at the common level by the fixed weirs,
-  and Moscoviense, Orientale and Smythii-Marginis full at their rims;
-- the near-side sea parted (near_side_neck.py's steady state), its main part and its southern seas each at its own
-  level;
-- routed again with both parts at their levels, so that rivers run on over the floor the parted sea leaves dry, and
-  with the main part's spill put in past the neck's crest, so that the river over the neck runs down to the southern
-  seas.
+- the weirs settled on the closed budget of the design climate (final_drainage.py's carried climatology and factor;
+  lake_rule_balance.govern): the salt sea and Humboldtianum held at the common level, and Moscoviense, Orientale and
+  Smythii-Marginis full at their rims;
+- the near-side sea's parts, the routing and the levels set against each other (lake_rule_balance.settle_parts) until
+  each part stands where its loss to the air meets the rivers that reach it: the main part over the neck's crest
+  sending the southern part what the neck passes, on the ground past the crest while the southern part stands under
+  it, or through the water once both stand over it;
+- the lakes filled by the corrected rule, each hollow as one water (lake_rule.py), so that no lake stands above dry
+  ground beside it, and the receivers joined through the lakes (hollow_courses.py), so that a river's course leads
+  through its lakes to its sea.
+
+Until 18 November the routing balanced each catchment by itself (research/studies/drainage_network/routing.py) and was
+routed once with the parts at the levels near_side_neck.py gave.
 
 The product, atlas-round/design_routing/design_routing_16ppd.npz on the research drive, indexes cells from 90 N and
 0 E, 16 per degree, and holds for every cell its receiver, discharge and drained area, the sea over it and the
@@ -37,7 +42,6 @@ from geography import drainage as dr
 from research.studies.atlas_round import final_drainage as FD
 from research.studies.atlas_round import governed_drainage as GD
 from research.studies.atlas_round import near_side_neck as N
-from research.studies.atlas_round import redrawn_drainage as RD
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -47,8 +51,9 @@ PRODUCT = BULK / 'design_routing_16ppd.npz'
 SCHEMA = 'terluna.research.atlas-round-design-routing/1'
 PRODUCT_SCHEMA = 'terluna.research.atlas-round-design-routing-grid/1'
 CODE = ('research/studies/atlas_round/design_routing.py', 'research/studies/atlas_round/final_drainage.py',
-        'research/studies/atlas_round/near_side_neck.py', 'research/studies/atlas_round/governed_drainage.py',
-        'research/studies/atlas_round/redrawn_drainage.py', 'research/studies/drainage_network/network.py',
+        'research/studies/atlas_round/near_side_neck.py', 'research/studies/atlas_round/lake_rule_balance.py',
+        'research/studies/atlas_round/lake_rule.py', 'research/studies/atlas_round/hollow_courses.py',
+        'research/studies/atlas_round/design_works.py', 'research/studies/drainage_network/network.py',
         'geography/drainage.py')
 BUDGET = 'closed_budget'
 SEAS = ('near_side_main', 'near_side_south', 'south_pole_aitken', 'humboldtianum', 'moscoviense', 'orientale',
@@ -82,81 +87,89 @@ def spill_cell(h_flat, main_water, cols, centre):
     return int(cells[np.argmin(h_flat[cells])])
 
 
-def governed_ops(state, gov, branches, salt_sea=GD.SALT_SEA, source=GD.SOURCE):
-    """The governed routing's put-ins and take-outs (governed_drainage.govern's last round): the weir's share to the salt
-    sea at Moscoviense's pass, the full seas' surplus at theirs, and each branch's share along its cuts."""
-    entry, share, over = state['entry'], gov['share'], gov['over']
-    ops = [(entry[source], share[salt_sea])] + [(entry[k], over[k]) for k in GD.FULL_SEAS]
-    for target in (GD.HELD_BRANCH, GD.REST_BRANCH):
-        unit_ops, _ = branches[target]
-        ops += [(c, sign * share[target]) for c, sign in unit_ops]
-    return ops
-
-
 def inputs():
     """The records the routing follows from, with their hashes, and the climatology it reads (ignored by Git)."""
+    from research.studies.atlas_round import design_works as DW
     frame_path, _ = FD.frame_record()
-    return ({rel(p): sha256(p) for p in (FD.OUT, N.OUT, ROOT / RD.SURFACE, frame_path)},
-            {rel(ROOT / FD.CLIMATOLOGY): sha256(ROOT / FD.CLIMATOLOGY)})
+    return ({rel(p): sha256(p) for p in (FD.OUT, N.OUT, DW.OUT, frame_path)},
+            {rel(ROOT / FD.CLIMATOLOGY): sha256(ROOT / FD.CLIMATOLOGY), str(DW.PRODUCT): sha256(DW.PRODUCT)})
 
 
 def route(log=print):
-    """The design surface's routing: the governed routing on the closed budget, routed again with the near-side sea at
-    its two levels and the main part's spill put in past the neck's crest. Returns the routing, the sea over each cell
-    (an index into SEAS, -1 elsewhere) with the seas' levels, the neck's spill and the frame and climate it used."""
+    """The design surface's routing: the weirs settled on the closed budget, then the near-side sea's parts, the
+    routing and the levels set against each other, with the lakes filled by the corrected rule and the receivers
+    joined through them. Returns the routing, the sea over each cell (an index into SEAS, -1 elsewhere) with the
+    seas' levels, the neck's flow and where it is put in, the weirs' flows and the frame and climate it used."""
+    from research.studies.atlas_round import design_works as DW
+    from research.studies.atlas_round import hollow_courses as HC
+    from research.studies.atlas_round import lake_rule as LR
+    from research.studies.atlas_round import lake_rule_balance as LB
     started = time.time()
     fd = json.loads(FD.OUT.read_text())
-    neck = json.loads(N.OUT.read_text())
+    neck_record = json.loads(N.OUT.read_text())
     case = fd['cases'][BUDGET]
     frame_path, record = FD.frame_record()
     rotation = np.asarray(record['frame']['rotation_today_to_turned'], float)
-    surf = RD.load_surface(log)
-    runoff, lake_net, _, _ = FD.load(case['evaporation'])
-    geo = RD.geometry(surf, runoff, lake_net, log)
-    level0, h = geo['level0'], geo['h']
+    d, st = DW.load(log)
+    level0, h = d['level0'], d['h']
     rows, cols = h.shape
     h_flat = h.ravel()
-    area = np.repeat((geo['cell_km'] * 1e3) ** 2 * np.cos(np.radians(geo['lat'])), cols)
-    state = RD.design_state(geo, runoff, lake_net, log=log)
-    branches, _ = GD.branches_for(geo, state, rotation, log)
-    gov = GD.govern(geo, state, runoff, lake_net, branches, log=log)
+    names = list(LB.WATERS)
+    runoff, lake_net, _, _ = FD.load(case['evaporation'])
+    # the weirs, begun from the shares final_drainage.py settled on the same climate
+    begun = dict(share=case['weir_history'][-1]['shares_m3s'], over=case['full_seas_pass_on_m3s'])
+    g = LB.govern(d, st, runoff, lake_net, start=begun, log=log)
+    gov = g['gov']
     log(f'governed shares {dict((k, round(v)) for k, v in gov["share"].items())}, {time.time() - started:.0f} s')
-
-    # the near-side sea parted: each part's water at its steady level (near_side_neck.py)
-    steady = neck['budgets'][BUDGET]['natural_neck']['steady']
-    z_main, z_south = level0 + steady['main_level_m'], level0 + steady['south_level_m']
-    st = N.setting(log)
-    main_water = st['part']['main'] & (st['joined']['main'] < z_main)
-    south_water = st['part']['south'] & (st['joined']['south'] < z_south)
-    del st
-    names, masks, levels = state['names'], state['masks'], state['levels']
-    waters, sea_masks = [], []
-    for k in names:
-        if k == 'near_side':
-            continue
-        waters.append((masks[k], levels[k]))
-        sea_masks.append((SEAS.index(k), masks[k], levels[k]))
-    waters += [(main_water, z_main), (south_water, z_south)]
-    sea_masks += [(0, main_water, z_main), (1, south_water, z_south)]
-    names_r = [k for k in names if k != 'near_side'] + ['near_side_main', 'near_side_south']
-
-    # the governed routing again over the parted sea, with the spill over the neck put in
-    r0 = state['r']
-    lake_full = ~r0['outlet'] & (h_flat < r0['level'][r0['label']])
-    spill = spill_cell(h_flat, main_water, cols, neck['throat']['centre_today'])
-    ops = governed_ops(state, gov, branches) + [(spill, steady['neck_flow_m3s'])]
-    r, supply = GD.route_with(geo, runoff, lake_net, waters, names_r, ops, area, lake_full)
-    log(f'routed over the parted sea: supplies {dict((k, round(v)) for k, v in supply.items())}, '
-        f'{time.time() - started:.0f} s')
-
-    # each sea over the cells below its level, in the order the globe surface drew them
+    area = (((d['cell_km'] * 1000.0) ** 2 * np.maximum(np.cos(np.radians(d['lat'])), 1e-6))[:, None] * np.ones((1, cols))).ravel()
+    net = lake_net.ravel() * dr.MM_DAY * area
+    # the near-side sea's parts, the routing and the levels set against each other
+    neck = LB.neck_from_record(st, neck_record)
+    tab = LB.part_tables(d, st, -net, area)
+    rivers = dict(main=float(g['supply'][LB.MAIN]), south=float(g['supply'][LB.SOUTH]))
+    parts = LB.settle_parts(d, st, tab, neck, neck_record['throat']['centre_today'], runoff, lake_net, net, area,
+                            g['fixed'], g['branches'], rivers, log=log)
+    r = LR.hollow_routing(parts['s'], parts['terms'], parts['state'])
+    c = HC.connect(parts['s'], parts['terms'], parts['state'], r, h.shape)
+    water, levels, z = parts['water'], parts['levels'], parts['z']
+    gathered = np.array([float(c['discharge'][water == i].sum()) for i in range(len(names))])
+    if np.abs(gathered - parts['got']).max() > 1e-3:
+        raise SystemExit('the rivers gathered along the joined courses do not bring the seas what the hollows give them')
+    b = r['budget']
+    gap = b['runoff_of_dry_ground'] + b['put_in'] + b['lakes_rain_less_evaporation'] - b['reaches_the_seas'] - b['kept_by_lakes_not_full']
+    if abs(gap) > 1.0 or float(r['left'].min()) < -1e-6:
+        raise SystemExit(f'the routing\'s budget does not close ({gap:.3g} m3/s) or a cut takes more than its lake holds')
+    log(f'routed with the near-side sea at {z["main"] - level0:.2f} and {z["south"] - level0:.2f} m: supplies '
+        f'{dict((k, round(float(v))) for k, v in zip(names, parts["got"]))}, {time.time() - started:.0f} s')
+    joined = bool(z['south'] > neck.crest)               # both parts over the crest: one sea across the neck
+    spill = None
+    if z['neck_flow'] > 0.0 and not joined:
+        spill = spill_cell(h_flat, water == LB.MAIN, cols, neck_record['throat']['centre_today'])
     sea = np.full(h_flat.size, -1, np.int8)
     sea_levels = {}
-    for i, mask, lev in sea_masks:
-        sea[mask & (h_flat < lev)] = i
-        sea_levels[SEAS[i]] = float(lev)
-    return dict(r=r, sea=sea, sea_levels=sea_levels, level0=level0, rows=rows, cols=cols, area=area, h=h_flat,
-                spill=spill, neck_flow=float(steady['neck_flow_m3s']), supply=supply, evaporation=case['evaporation'],
+    for i, k in enumerate(names):
+        sea[water == i] = SEAS.index(k)
+        sea_levels[k] = float(levels[i])
+    loss = {k: -float(net[water == i].sum()) for i, k in enumerate(names)}
+    own = {k: round(float(v)) for k, v in zip(names, gov['own'])}
+    weirs = dict(moscoviense_surplus_m3s=round(gov['surplus']), released_m3s={k: round(v) for k, v in gov['share'].items()},
+                 arrived_m3s={k: round(float(g['supply'][names.index(k)] - gov['own'][names.index(k)]))
+                              for k in (GD.SALT_SEA, GD.HELD_BRANCH, GD.REST_BRANCH)},
+                 full_seas_pass_on_m3s={k: round(v) for k, v in gov['over'].items()},
+                 held_seas_left_short_m3s={k: round(v) for k, v in gov['unmet'].items()},
+                 branch_flows_m3s={k: [round(q, 1) for q in v] for k, v in zip(('humboldtianum_branch', 'smythii_marginis_branch'), parts['flows'])},
+                 own_rivers_at_the_common_level_m3s=own)
+    return dict(r=dict(receiver=c['receiver'], discharge=c['discharge'], drained_m2=c['drained_m2'], lake=r['lake'],
+                       lake_level=r['lake_level'], lake_spills=r['lake_spills'], outlet=r['outlet'], crossing=c['crossing'],
+                       keeps=~c['passes']),
+                sea=sea, sea_levels=sea_levels, level0=level0, rows=rows, cols=cols, area=area, h=h_flat, spill=spill,
+                neck_flow=float(z['neck_flow']), joined=joined, supply=dict(zip(names, (float(v) for v in parts['got']))),
+                loss=loss, weirs=weirs, budget={k: round(v, 1) for k, v in b.items()},
+                parts=dict(history=parts['history'], sills=parts['sills'],
+                           left_out_of_balance_m3s={k: round(v, 1) for k, v in parts['short'].items()},
+                           spills_over_a_sill_m3s={k: round(v, 1) for k, v in parts['spills'].items()},
+                           crest_above_common_m=round(neck.crest - level0, 2)),
+                evaporation=case['evaporation'],
                 frame=dict(record=rel(frame_path), sha256=sha256(frame_path), rotation_today_to_turned=rotation.tolist(),
                            state=record['frame']['state']))
 
@@ -167,11 +180,12 @@ def write(d, log=print):
     r, sea, area, h = d['r'], d['sea'], d['area'], d['h']
     lake = r['lake'] & ~r['outlet'] & (sea < 0)
     cells = np.flatnonzero(lake).astype(np.int32)
-    spills = ~r['closed'][r['label'][cells]]
+    spills = r['lake_spills'][cells]
     tracked, ignored = inputs()
     meta = dict(schema=PRODUCT_SCHEMA, grid=dict(pixels_per_degree=dr.PPD, rows=d['rows'], cols=d['cols']),
                 common_level_m=d['level0'], seas=list(SEAS), levels_m=d['sea_levels'], upper_seas=list(UPPER_SEAS),
-                neck=dict(spill_cell=d['spill'], flow_m3s=d['neck_flow']), frame=d['frame'],
+                neck=dict(spill_cell=d['spill'], flow_m3s=d['neck_flow'], joined=d['joined']), frame=d['frame'],
+                lake_rule='each hollow filled as one water (lake_rule.py); receivers joined through the lakes (hollow_courses.py)',
                 climate=dict(run=FD.RUN, years=FD.YEARS, climatology=FD.CLIMATOLOGY, budget=BUDGET,
                              open_water_evaporation_factor=d['evaporation']),
                 inputs=tracked, ignored_inputs=ignored,
@@ -181,31 +195,41 @@ def write(d, log=print):
                               'sea over the cell, -1 off the seas, each sea at levels_m above the dry Moon\'s geoid (the '
                               'common level common_level_m); outlet marks the routing\'s ends (the seas\' cells) and '
                               'routing_lake the cells its hollows\' water covers; lake_cell lists the cells under lakes '
-                              'off the seas, with lake_level_m and lake_spills (whether the lake overflows). The upper '
-                              'seas spill over their rims; the near-side sea is parted, neck.spill_cell the ground past '
-                              'its crest where the main part\'s spill of neck.flow_m3s is put in.'),
+                              'off the seas, with lake_level_m and lake_spills (whether the lake overflows). A lowest '
+                              'point\'s receiver is the cell its lake\'s water goes on to, so the receivers lead from any '
+                              'cell to a sea; under a lake the discharge is what has come in on the way to its exit, '
+                              'and crossing marks the dry cells of a sill that a lake\'s water is carried across; keeps '
+                              'marks the lowest points whose lakes pass nothing on, where a course\'s water ends. The '
+                              'upper seas spill over their rims. neck.flow_m3s is what the near-side sea\'s main part '
+                              'sends its southern part: where neck.joined is false the southern part stands under the '
+                              'neck\'s crest and the flow is put in on the ground past it at neck.spill_cell; where it '
+                              'is true both parts stand over the crest, one sea across the neck, and the cell is null.'),
                 evidence=('The redrawn floor at the settled state, the seas at the levels the design climate\'s closed '
                           'budget gives them with the works of 16 November and the fixed weirs, and the routing of that '
-                          'budget\'s rain over it with the near-side sea parted. Not validated against any observation.'))
+                          'budget\'s rain over it, the lakes filled by the corrected rule. Not validated against any '
+                          'observation.'))
     BULK.mkdir(parents=True, exist_ok=True)
     np.savez_compressed(PRODUCT, metadata=json.dumps(meta), receiver=r['receiver'].astype(np.int32),
                         discharge_m3s=np.asarray(r['discharge'], np.float64),
                         drained_km2=(r['drained_m2'] / 1e6).astype(np.float32), sea=sea,
                         outlet=np.asarray(r['outlet'], bool), routing_lake=np.asarray(r['lake'], bool),
+                        crossing=np.asarray(r['crossing'], bool), keeps=np.asarray(r['keeps'], bool),
                         lake_cell=cells, lake_level_m=r['lake_level'][cells].astype(np.float32), lake_spills=spills)
     total = float(area.sum())
     q = r['discharge']
     into = np.flatnonzero((sea[r['receiver']] >= 0) & (sea < 0) & ~lake)
     summary = dict(
         seas={k: dict(level_above_common_m=round(v - d['level0'], 2),
-                      area_km2=round(float(area[sea == SEAS.index(k)].sum()) / 1e6))
+                      area_km2=round(float(area[sea == SEAS.index(k)].sum()) / 1e6),
+                      loses_m3s=round(d['loss'][k]), receives_m3s=round(d['supply'][k]))
               for k, v in d['sea_levels'].items()},
         sea_share=round(float(area[sea >= 0].sum()) / total, 5),
         lake_cells=int(cells.size), lake_share=round(float(area[cells].sum()) / total, 5),
         closed_lake_share=round(float(area[cells[~spills]].sum()) / total, 5),
         rivers_into_the_seas_m3s=round(float(q[into].sum())),
         supplies_m3s={k: round(float(v)) for k, v in d['supply'].items()},
-        neck_spill_m3s=round(d['neck_flow']))
+        neck_spill_m3s=round(d['neck_flow']), near_side_sea_joined_across_its_neck=d['joined'],
+        open_water_evaporation_factor=d['evaporation'], weirs=d['weirs'], near_side=d['parts'], budget_m3s=d['budget'])
     log(f'wrote {PRODUCT}, {time.time() - started:.0f} s')
     return dict(
         schema=SCHEMA, producer=dict(files={f: sha256(ROOT / f) for f in CODE}),

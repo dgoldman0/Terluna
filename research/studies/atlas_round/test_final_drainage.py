@@ -29,7 +29,8 @@ def test_the_climatology_is_carried_with_the_runs_own_rotation(carried):
         np.testing.assert_allclose(z[k], expected[k], rtol=0, atol=1e-6)
     assert meta['frame'] == 'today' and meta['run'] == FD.RUN and list(meta['years']) == FD.YEARS
     assert meta['carried']['climatology']['sha256'] == FD.sha256(FD.ROOT / FD.TURNED_CLIMATOLOGY)
-    assert meta['estimate']['label'] == FD.LABEL and meta['estimate']['record'] == FD.ESTIMATE
+    assert meta['estimate']['label'] == FD.LABEL and meta['estimate']['record'] == FD.SURFACE_ESTIMATE
+    assert meta['estimate']['base']['estimate']['record'] == FD.ESTIMATE       # the step to the design temperature beneath it
     frame_path, _ = FD.frame_record()
     assert meta['configuration']['frame']['record'] == str(frame_path.relative_to(FD.ROOT))
 
@@ -61,7 +62,7 @@ def test_the_record_holds_together(record):
         for held in ('south_pole_aitken', 'humboldtianum'):
             assert abs(seas[held]['balance_m3s']) <= 2                             # the weirs meet each held sea's need
         assert sum(case['released_m3s'].values()) == pytest.approx(case['moscoviense_surplus_m3s'], abs=3)
-        settle = seas['near_side']['would_settle']
-        assert settle['reaches_its_rim'] == (seas['near_side']['balance_m3s'] > 0)
+        settle = seas['near_side']['would_settle']                             # above the common level with water to spare
+        assert (settle['level_m'] > 0 or settle['reaches_its_rim']) == (seas['near_side']['balance_m3s'] > 0)
     closed = record['cases']['closed_budget']['evaporation']
     assert closed == record['budget']['open_water_evaporation_factor_closing_it']

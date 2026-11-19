@@ -128,10 +128,22 @@ def tables(st, loss):
     both = np.full(st['flat'].size, np.inf)
     for k in ('main', 'south'):
         joined = np.where(st['part'][k], st['joined'][k], np.inf).astype(np.float64)
-        out[k] = NW.Table(joined, st['area'], loss, st['flat'], st['level0'] + 1000.0)
+        out[k] = by_level(NW.Table(joined, st['area'], loss, st['flat'], st['level0'] + 1000.0))
         both = np.where(st['part'][k], joined, both)
-    out['joined'] = NW.Table(both, st['area'], loss, st['flat'], st['level0'] + 1000.0)
+    out['joined'] = by_level(NW.Table(both, st['area'], loss, st['flat'], st['level0'] + 1000.0))
     return out
+
+
+def by_level(table):
+    """Set a table's running greatest loss, which level_for searches, level by level. The cells of a basin beyond a
+    sill all join a part's water at the sill's level and come under it together, some losing to the air and some
+    gaining rain, so a running greatest loss taken cell by cell can pass the supply part of the way through a basin,
+    at a loss the part has at no level. Taken level by level, the level found is a sill itself, where the basin
+    beyond it would bring the loss over the supply, or a level past the basin."""
+    if table.c.size:
+        last = np.flatnonzero(np.r_[table.c[1:] != table.c[:-1], True])      # the last cell of each level
+        table.runmax = np.maximum.accumulate(table.loss[last])[np.searchsorted(last, np.arange(table.c.size))]
+    return table
 
 
 def supplies(st, routing_path):
@@ -367,7 +379,8 @@ class Neck:
 
 def level_for(table, supply, below):
     """network.Table.level_for by a search on the running greatest loss (the first level whose loss reaches the
-    supply), kept on the table: the same level, found without scanning the cells each time."""
+    supply), kept on the table: found without scanning the cells each time, and level by level where tables()
+    or by_level() has set it so (until 18 November it ran cell by cell on every table)."""
     if not hasattr(table, 'runmax'):
         table.runmax = np.maximum.accumulate(table.loss)
     n = int(np.searchsorted(table.c, below))

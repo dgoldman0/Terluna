@@ -81,6 +81,13 @@ def sha256(path) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def relative(path) -> str:
+    """A path from the repository's root where it lies under it."""
+    root = HERE.parent.parent
+    path = Path(path).resolve()
+    return str(path.relative_to(root)) if str(path).startswith(str(root)) else str(path)
+
+
 def weights(lat, lon):
     """Each cell's area weight on a regular-in-longitude grid: the cosine of its latitude."""
     return np.cos(np.radians(np.asarray(lat, float)))[:, None] * np.ones((1, np.asarray(lon).size))
@@ -367,7 +374,7 @@ def build(base, mask_path, pairs, tag, log=print):
     estimate = dict(method='the land-water contrast of settled runs on different masks, applied to a new mask '
                            '(climate.gcm.surface_change)', label=label,
                     base=dict(run=run, years=[first, last], label=base_label, estimate=clim_meta.get('estimate')),
-                    mask=dict(record=str(mask_path), sha256=sha256(mask_path)),
+                    mask=dict(record=relative(mask_path), sha256=sha256(mask_path)),
                     water_rain=dict(a_mm_day=fit['a_mm_day'], b=fit['b']), land_curve_exponent=exponent['n'],
                     land_rain_factor=summary['land_rain_factor'],
                     record=str(record_path(run, first, last, label).relative_to(HERE.parent.parent)))

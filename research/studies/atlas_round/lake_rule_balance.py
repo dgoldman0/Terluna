@@ -84,6 +84,7 @@ SETTLE_M3S = GD.SETTLE_LIMIT_M       # each weir is set until its sea's need is 
 ROUNDS = 30                          # routings allowed for the weirs to settle
 PART_ROUNDS = 20                     # routings allowed for the near-side sea's parts to settle
 PART_SETTLED_M3S = 20.0              # a part has settled when its rivers and its loss at its level agree within this
+PART_SETTLED_SHARE = 0.002           # or within this share of what it receives, where its shore moves by steps
 PART_STILL_M = 0.005                 # or when another routing moves neither part's level by this much
 PART_STILL_M3S = 0.5                 # nor the neck's flow by this much
 CONTROL_LEVEL_M = 0.05               # the neck read from its record gives the design's levels back within this
@@ -333,11 +334,12 @@ def set_weirs(s, terms, water, names, works, start=None, rounds=ROUNDS, within=S
                 flows=dict(held_branch=flows[0], rest_branch=flows[1]), sources=sources, history=history, root=root)
 
 
-def govern(d, st, runoff, lake_net, start=None, log=print):
+def govern(d, st, runoff, lake_net, start=None, log=print, routing=False):
     """The weirs set on a climate with the near-side sea at the common level, the upper seas full at their rims and
     the works where the design structure has them. Returns set_weirs' result without its state, what the gathered
     rivers bring each water, the works' cells, and the put-ins the settled weirs make: `fixed` at cells and the
-    branches with their shares."""
+    branches with their shares; with routing, also the waters and their levels and the routing's structure, terms,
+    state and result."""
     names = list(WATERS)
     water, levels = design_state_waters(d, st)
     s = structure_of(d, water, levels)
@@ -355,8 +357,11 @@ def govern(d, st, runoff, lake_net, start=None, log=print):
     least = float(r['left'].min())
     fixed = [(works['source_pass'], gov['share'][SALT_SEA])] + [(works['full_pass'][k], gov['over'][k]) for k in FULL_SEAS]
     branches = [(works['held_branch'], gov['share'][HELD]), (works['rest_branch'], gov['share'][REST])]
-    return dict(gov={k: v for k, v in gov.items() if k not in ('state', 'root')}, supply=supply, works=works,
-                fixed=fixed, branches=branches, least_kept_by_a_lake_not_full=least)
+    out = dict(gov={k: v for k, v in gov.items() if k not in ('state', 'root')}, supply=supply, works=works,
+               fixed=fixed, branches=branches, least_kept_by_a_lake_not_full=least)
+    if routing:
+        out.update(water=water, levels=levels, s=s, terms=terms, state=gov['state'], r=r)
+    return out
 
 
 # ---------------------------------------------------------------- the near-side sea's parts
@@ -383,10 +388,16 @@ def part_tables(d, st, loss, area):
                 joined=dict(main=st['joined_main'], south=st['joined_south']))
     tab = N.tables(like, loss)
     for t in tab.values():
-        if t.c.size:
-            last = np.flatnonzero(np.r_[t.c[1:] != t.c[:-1], True])          # the last cell of each level
-            t.runmax = np.maximum.accumulate(t.loss[last])[np.searchsorted(last, np.arange(t.c.size))]
+        by_level(t)
     return tab
+
+
+def by_level(table):
+    """Set a network.Table's running greatest loss, which near_side_neck.level_for searches, level by level."""
+    if table.c.size:
+        last = np.flatnonzero(np.r_[table.c[1:] != table.c[:-1], True])      # the last cell of each level
+        table.runmax = np.maximum.accumulate(table.loss[last])[np.searchsorted(last, np.arange(table.c.size))]
+    return table
 
 
 def basin_at_the_sill(st, hf, which, level):
@@ -462,7 +473,11 @@ def settle_parts(d, st, tab, neck, centre, runoff, lake_net, net, area, fixed, b
         taken_up = False
         if on_round:
             on_round(kept())
-        if max(abs(v) for v in short.values()) < PART_SETTLED_M3S:
+        # a part's shore climbs by the levels its cells join at, metres apart over a plain, so a large part is held
+        # settled within a share of what it receives
+        within = dict(main=max(PART_SETTLED_M3S, PART_SETTLED_SHARE * rivers['main']),
+                      south=max(PART_SETTLED_M3S, PART_SETTLED_SHARE * (rivers['south'] + z['neck_flow'])))
+        if all(abs(short[k]) < within[k] for k in short):
             break
         z_next = part_levels(tab, rivers, neck)
         still = max(abs(z_next[k] - z[k]) for k in ('main', 'south')) < PART_STILL_M and \
@@ -474,8 +489,8 @@ def settle_parts(d, st, tab, neck, centre, runoff, lake_net, net, area, fixed, b
             continue
         # The levels hold with a part left over: it stands at the sill of a basin beside it, with more reaching it
         # than it loses below the sill.
-        at_sill = [k for k in ('main', 'south') if short[k] >= PART_SETTLED_M3S and basin_at_the_sill(st, hf, k, z[k]).size]
-        if not at_sill or any(abs(short[k]) >= PART_SETTLED_M3S for k in ('main', 'south') if k not in at_sill):
+        at_sill = [k for k in ('main', 'south') if short[k] >= within[k] and basin_at_the_sill(st, hf, k, z[k]).size]
+        if not at_sill or any(abs(short[k]) >= within[k] for k in ('main', 'south') if k not in at_sill):
             raise RuntimeError(f'the near-side sea\'s parts hold out of balance: {this}')
         fresh = [k for k in at_sill if (k, z[k]) not in tried]
         for k in at_sill:
@@ -503,7 +518,7 @@ def settle_parts(d, st, tab, neck, centre, runoff, lake_net, net, area, fixed, b
             continue
         state, flows, sources = branch_state(s, terms, fixed + over_the_neck, branches, root)
         again = LR.reaches(s, terms, state, water, len(names))
-        if np.abs(again - got).max() >= PART_SETTLED_M3S:
+        if np.abs(again - got).max() >= min(within.values()):
             raise RuntimeError('a basin a part spills into over its sill fills and returns the water')
         got = again
         for k in at_sill:

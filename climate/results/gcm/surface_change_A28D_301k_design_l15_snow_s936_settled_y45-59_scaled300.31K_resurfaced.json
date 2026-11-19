@@ -1,0 +1,292 @@
+{
+ "schema": "terluna.climate.gcm-surface-change/1",
+ "producer": {
+  "domain": "climate",
+  "files": {
+   "gcm/surface_change.py": "314e224a6f3ca4b5"
+  }
+ },
+ "evidence": "An estimate of the base window's rain and evaporation on a changed surface, not a run. The contrast between land and water is measured where settled windows of the same physics hold different masks, and applied in proportion to the change of each cell's water fraction; where the displaced rain falls is assumed (on the land, by one factor); the land's evaporation follows its rain along a curve fitted on the base window's own land. Not validated against a run on the new surface.",
+ "reading_rule": "Rain and evaporation in mm/day. pairs gives each pair of windows, the cells that are land in one and water in the other and the line rain as water = a + b x rain as land fitted over them, with their mean rain and evaporation as land and as water; water_rain is the line over all the pairs' cells, which the estimate applies. land_curve is the exponent of Turc's and Pike's form fitted, with one ceiling, on the base window's land within fit_latitude degrees of the equator; each land cell then keeps its own ceiling. summary gives the surface's water share on the run's surface and the new one, the mean change of a cell's water fraction, the cells with a tenth more or less water, the factor on the land's rain, [base, estimate] means over the cells named (held_as_land and held_as_water by the run's mask), and what the surface's rain less evaporation is left differing from the base window's.",
+ "estimate": {
+  "method": "the land-water contrast of settled runs on different masks, applied to a new mask (climate.gcm.surface_change)",
+  "label": "scaled300.31K_resurfaced",
+  "base": {
+   "run": "A28D_301k_design_l15_snow_s936_settled",
+   "years": [
+    45,
+    59
+   ],
+   "label": "scaled300.31K",
+   "estimate": {
+    "method": "uniform pattern scaling over land and open water (climate.gcm.pattern_scaling)",
+    "label": "scaled300.31K",
+    "base": {
+     "run": "A28D_301k_design_l15_snow_s936_settled",
+     "years": [
+      45,
+      59
+     ],
+     "global_surface_temperature_K": 300.99959407217335
+    },
+    "target": {
+     "run": "A28S_301k_design_l15_snow_s930_settled",
+     "years": [
+      35,
+      49
+     ],
+     "global_surface_temperature_K": 300.3068333167535
+    },
+    "delta_K": -0.6927607554198403,
+    "pairs": [
+     {
+      "warm": {
+       "run": "A28D_301k_design_l15_snow_s936_settled",
+       "years": [
+        45,
+        59
+       ],
+       "sunlight_scale": 0.936,
+       "global_surface_temperature_K": 300.99959407217335
+      },
+      "cool": {
+       "run": "A28D_301k_design_l15_snow_s930_settled",
+       "years": [
+        4,
+        8
+       ],
+       "sunlight_scale": 0.93,
+       "global_surface_temperature_K": 299.85309678901086
+      }
+     },
+     {
+      "warm": {
+       "run": "A28S_301k_design_l15_snow_s938_settled",
+       "years": [
+        3,
+        8
+       ],
+       "sunlight_scale": 0.938,
+       "global_surface_temperature_K": 301.5633156587336
+      },
+      "cool": {
+       "run": "A28S_301k_design_l15_snow_s930_settled",
+       "years": [
+        35,
+        49
+       ],
+       "sunlight_scale": 0.93,
+       "global_surface_temperature_K": 300.3068333167535
+      }
+     }
+    ],
+    "record": "climate/results/gcm/pattern_scaling_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.json",
+    "responses": {
+     "cl_layer_mean": {
+      "all": 0.0
+     },
+     "clt_mean": {
+      "land": 0.0,
+      "water": -0.00433
+     },
+     "clt_sun": {
+      "all": 0.0
+     },
+     "evap_mm_day": {
+      "land": 0.028889,
+      "water": 0.032174
+     },
+     "high_mean": {
+      "land": -0.002289,
+      "water": -0.002969
+     },
+     "high_sun": {
+      "all": -0.002532
+     },
+     "low_mean": {
+      "land": 0.0,
+      "water": -0.005132
+     },
+     "low_sun": {
+      "all": -0.001814
+     },
+     "mrso_m": {
+      "land": -0.023465,
+      "water": 0.0
+     },
+     "pr_mm_day": {
+      "land": 0.018414,
+      "water": 0.049277
+     },
+     "prw_kg_m2": {
+      "land": 0.081509,
+      "water": 0.079207
+     },
+     "sic": {
+      "land": 0.0,
+      "water": 0.0
+     },
+     "snd_m": {
+      "land": 0.0,
+      "water": 0.0
+     },
+     "tas_land_sun": {
+      "all": 1.082423
+     },
+     "tas_land_sun_far": {
+      "all": 1.108105
+     },
+     "tas_land_sun_near": {
+      "all": 1.052633
+     },
+     "ts_k": {
+      "land": 1.072202,
+      "water": 0.879963
+     },
+     "ua_layer_mean": {
+      "all": 0.204439
+     }
+    }
+   }
+  },
+  "mask": {
+   "record": "research/studies/atlas_round/results/design_surface.json",
+   "sha256": "4847926d33b0c9adc3f7785fc9b968f34bf182694451eecc552f44d6e3966d22"
+  },
+  "water_rain": {
+   "a_mm_day": 1.171661514215553,
+   "b": 0.1109723925492975
+  },
+  "land_curve_exponent": 3.650000000000002,
+  "land_rain_factor": 1.1000014207475286
+ },
+ "pairs": [
+  {
+   "windows": [
+    {
+     "run": "A28S_301k_design_l15_snow_s930_settled",
+     "years": [
+      35,
+      49
+     ],
+     "label": null,
+     "global_surface_temperature_K": 300.306833
+    },
+    {
+     "run": "A28D_301k_design_l15_snow_s936_settled",
+     "years": [
+      45,
+      59
+     ],
+     "label": "scaled300.31K",
+     "global_surface_temperature_K": 300.306847
+    }
+   ],
+   "products": {
+    "climatology_A28S_301k_design_l15_snow_s930_settled_y35-49.npz": "66589aedd78e72f829a04d7a117c8cf1ee7677ab9dbcad4f347352ff4ea9de51",
+    "climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.npz": "c2c00e1977e682c090cc9e90e4ac84b6de02bcf3068ffd3ea73102caf4494114"
+   },
+   "a_mm_day": 1.171662,
+   "b": 0.110972,
+   "spread_mm_day": 1.013511,
+   "cells": 222,
+   "rain_as_land_mm_day": 4.888358,
+   "rain_as_water_mm_day": 1.714134,
+   "ratio_of_means": 0.350656,
+   "evaporation_as_land_mm_day": 2.844232,
+   "evaporation_as_water_mm_day": 2.743533
+  }
+ ],
+ "water_rain": {
+  "a_mm_day": 1.171662,
+  "b": 0.110972,
+  "spread_mm_day": 1.013511,
+  "cells": 222,
+  "rain_as_land_mm_day": 4.888358,
+  "rain_as_water_mm_day": 1.714134,
+  "ratio_of_means": 0.350656,
+  "evaporation_as_land_mm_day": 2.844232,
+  "evaporation_as_water_mm_day": 2.743533
+ },
+ "land_curve": {
+  "n": 3.65,
+  "ceiling_mm_day": 3.6,
+  "spread_mm_day": 0.239964,
+  "cells": 580,
+  "fit_latitude": 45.0
+ },
+ "summary": {
+  "water_share": [
+   0.375379,
+   0.414867
+  ],
+  "mean_change_of_water_fraction": 0.065804,
+  "cells": {
+   "more_water_by_a_tenth": 252,
+   "less_water_by_a_tenth": 68
+  },
+  "land_rain_factor": 1.100001,
+  "more_water": {
+   "rain_mm_day": [
+    2.968125,
+    2.682258
+   ],
+   "evaporation_mm_day": [
+    2.206437,
+    2.410977
+   ]
+  },
+  "less_water": {
+   "rain_mm_day": [
+    1.364498,
+    1.753655
+   ],
+   "evaporation_mm_day": [
+    2.256372,
+    2.213947
+   ]
+  },
+  "held_as_land": {
+   "rain_mm_day": [
+    2.063433,
+    2.080739
+   ],
+   "evaporation_mm_day": [
+    1.425475,
+    1.515632
+   ]
+  },
+  "held_as_water": {
+   "rain_mm_day": [
+    1.633294,
+    1.75441
+   ],
+   "evaporation_mm_day": [
+    2.689043,
+    2.689043
+   ]
+  },
+  "surface": {
+   "rain_mm_day": [
+    1.901879,
+    1.958175
+   ],
+   "evaporation_mm_day": [
+    1.900052,
+    1.956347
+   ]
+  },
+  "rain_less_evaporation_left_mm_day": -0.0
+ },
+ "products": {
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced.npz": "e1e3a37218c44859fa2d1608a275538dc66b0514377ec912cefec934f004e854",
+  "climate/gcm/products/surface_wind_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced.npz": "343f0f170e159d10746fa4aec24daa39733023385e937c600fc7e67053b7d0b7"
+ },
+ "inputs": {
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.npz": "c2c00e1977e682c090cc9e90e4ac84b6de02bcf3068ffd3ea73102caf4494114",
+  "climate/gcm/products/surface_wind_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.npz": "12f084597f132d470b0764729ebcdd4e4e132aea7194077758352d600f375c93"
+ },
+ "ignored_inputs": {
+  "climate/gcm/products/moon_28pct_water_lakes_6cb410b400c6ee1b_turned_ed9b01935fe2a23f_gaussian_T21.nc": "a24e12a3a91c203d6d79ece6168515cbf7dd253acee042f9f871fac69cf8ddb2"
+ }
+}

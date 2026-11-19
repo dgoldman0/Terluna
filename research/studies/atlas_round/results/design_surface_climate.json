@@ -1,0 +1,595 @@
+{
+ "schema": "terluna.research.atlas-round-design-surface-climate/1",
+ "producer": {
+  "files": {
+   "research/studies/atlas_round/design_surface_climate.py": "8fb32c4c9b253d719ace8008b74b7b5b73405ca8195504ee976d06934add0fb2",
+   "research/studies/atlas_round/lake_rule_balance.py": "0755ab26642dc9734849ab1efe2c78256be7085dff1b05eacaecc815eb28bfff",
+   "research/studies/atlas_round/lake_rule.py": "961acd4025f9e7810c2e308aa5bf5467dad3830018edcd6ee46cb901a631eae0",
+   "research/studies/atlas_round/design_mask.py": "d709703217fd00667817ba41b75bfbe28bdf1656dc296d0f393261b0f0702720",
+   "research/studies/atlas_round/design_works.py": "dc28a4d235bb00bcdb35b4309b2c8f8b090e9e4b60548302416af6835366c550",
+   "research/studies/atlas_round/final_drainage.py": "912ca69f8eb749b797b474a89d0d9a7b3958dc6246c61032958e77362d83d78d",
+   "research/studies/atlas_round/near_side_neck.py": "69664c1047b7c54f2e997f683c60da98daa872bed200c18fdaaecddbd95a4f04",
+   "climate/gcm/surface_change.py": "314e224a6f3ca4b54350c72ef2ee5826833c5dfc0d6f18ceaf5dae264829fa27"
+  }
+ },
+ "inputs": {
+  "research/studies/atlas_round/results/design_works.json": "35fe34c7f0ad4bde9aef21c7ab1a6a6c1d5df21c48afb41edb6f527112428ce1",
+  "research/studies/atlas_round/results/near_side_neck.json": "077f00e08b94a4f0290e5c8337f6e75bdc7c3d891751933dfb4ccdc22400eaf6",
+  "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a"
+ },
+ "ignored_inputs": {
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.npz": "c2c00e1977e682c090cc9e90e4ac84b6de02bcf3068ffd3ea73102caf4494114",
+  "/media/projectspace/terluna-research/atlas-round/design_works/design_works_16ppd.npz": "6409f3231c9fd4d36ef2351a819744b43c3c25a749556be575753dbe648a096e",
+  "climate/gcm/products/moon_28pct_water_lakes_6cb410b400c6ee1b_turned_ed9b01935fe2a23f_gaussian_T21.nc": "a24e12a3a91c203d6d79ece6168515cbf7dd253acee042f9f871fac69cf8ddb2"
+ },
+ "evidence": "An estimate, not a run: the design climate's settled window carried onto the surface its own routing makes, by climate.gcm.surface_change, with that surface and the routing set against each other until they agree. The routing fills the lakes by the corrected rule and makes the design's settings as final_drainage.py and design_routing.py make them. The climate's response to the surface is measured on two settled runs and its placement of the displaced rain is assumed; nothing is validated against a run on the settled surface.",
+ "reading_rule": "rounds: each round's surface as its water share, estimated on and routed; the mean difference of the cells' water fractions between the two and the cells differing by apart or more; the factor on the land's rain and the surface's mean rain in the estimate; and the routing's figures (the factor that closes its budget, the weirs' releases, the near-side sea, each sea's level above the common level, area and supply, the seas' and the lakes' shares of the Moon). The surface moves step of the way to the routing's each round and is settled within settled_mean and settled_cells. climate names the estimate's products and record.",
+ "parameters": {
+  "step": 0.5,
+  "settled_mean": 0.004,
+  "settled_cells": 12,
+  "apart": 0.1
+ },
+ "label": "scaled300.31K_resurfaced",
+ "base": {
+  "run": "A28D_301k_design_l15_snow_s936_settled",
+  "years": [
+   45,
+   59
+  ],
+  "label": "scaled300.31K"
+ },
+ "pairs": [
+  [
+   {
+    "run": "A28S_301k_design_l15_snow_s930_settled",
+    "years": [
+     35,
+     49
+    ],
+    "label": null
+   },
+   {
+    "run": "A28D_301k_design_l15_snow_s936_settled",
+    "years": [
+     45,
+     59
+    ],
+    "label": "scaled300.31K"
+   }
+  ]
+ ],
+ "rounds": [
+  {
+   "round": 0,
+   "water_share_of_the_surface": {
+    "estimated_on": 0.37538,
+    "routed": 0.41914
+   },
+   "mean_difference_of_water_fraction": 0.08014,
+   "cells_apart": 361,
+   "largest_difference": 0.978,
+   "land_rain_factor": 1.0,
+   "surface_rain_mm_day": 1.90188,
+   "open_water_evaporation_factor": 1.026,
+   "surplus_at_factor_1_m3s": 12417,
+   "left_over_at_the_factor_m3s": 1775,
+   "released_m3s": {
+    "south_pole_aitken": 24315,
+    "humboldtianum": 7850,
+    "smythii_marginis": 12113
+   },
+   "neck_flow_m3s": 7365,
+   "near_side_sea_joined": false,
+   "seas": {
+    "moscoviense": {
+     "level_above_common_m": 3448.77,
+     "area_km2": 844220,
+     "receives_m3s": 48044
+    },
+    "orientale": {
+     "level_above_common_m": 2341.33,
+     "area_km2": 297889,
+     "receives_m3s": 17987
+    },
+    "smythii_marginis": {
+     "level_above_common_m": 719.95,
+     "area_km2": 599348,
+     "receives_m3s": 32014
+    },
+    "south_pole_aitken": {
+     "level_above_common_m": 0.0,
+     "area_km2": 2410253,
+     "receives_m3s": 50512
+    },
+    "humboldtianum": {
+     "level_above_common_m": 0.0,
+     "area_km2": 279470,
+     "receives_m3s": 6164
+    },
+    "near_side_main": {
+     "level_above_common_m": -67.05,
+     "area_km2": 3835264,
+     "receives_m3s": 74864
+    },
+    "near_side_south": {
+     "level_above_common_m": -179.96,
+     "area_km2": 809876,
+     "receives_m3s": 13078
+    }
+   },
+   "seas_share": 0.23928,
+   "lakes_share": 0.17996,
+   "lakes_not_overflowing_km2": 557861,
+   "settled": false
+  },
+  {
+   "round": 1,
+   "water_share_of_the_surface": {
+    "estimated_on": 0.39726,
+    "routed": 0.41611
+   },
+   "mean_difference_of_water_fraction": 0.03551,
+   "cells_apart": 186,
+   "largest_difference": 0.483,
+   "land_rain_factor": 1.05113,
+   "surface_rain_mm_day": 1.9365,
+   "open_water_evaporation_factor": 1.038,
+   "surplus_at_factor_1_m3s": 18185,
+   "left_over_at_the_factor_m3s": 2433,
+   "released_m3s": {
+    "south_pole_aitken": 25655,
+    "humboldtianum": 7822,
+    "smythii_marginis": 13420
+   },
+   "neck_flow_m3s": 8256,
+   "near_side_sea_joined": false,
+   "seas": {
+    "moscoviense": {
+     "level_above_common_m": 3448.77,
+     "area_km2": 844220,
+     "receives_m3s": 50570
+    },
+    "orientale": {
+     "level_above_common_m": 2341.33,
+     "area_km2": 297889,
+     "receives_m3s": 18346
+    },
+    "smythii_marginis": {
+     "level_above_common_m": 719.95,
+     "area_km2": 599348,
+     "receives_m3s": 31796
+    },
+    "south_pole_aitken": {
+     "level_above_common_m": 0.0,
+     "area_km2": 2410253,
+     "receives_m3s": 51257
+    },
+    "humboldtianum": {
+     "level_above_common_m": 0.0,
+     "area_km2": 279470,
+     "receives_m3s": 6224
+    },
+    "near_side_main": {
+     "level_above_common_m": -66.93,
+     "area_km2": 3835479,
+     "receives_m3s": 76459
+    },
+    "near_side_south": {
+     "level_above_common_m": -120.79,
+     "area_km2": 890486,
+     "receives_m3s": 14265
+    }
+   },
+   "seas_share": 0.24141,
+   "lakes_share": 0.17481,
+   "lakes_not_overflowing_km2": 573886,
+   "settled": false
+  },
+  {
+   "round": 2,
+   "water_share_of_the_surface": {
+    "estimated_on": 0.40669,
+    "routed": 0.41714
+   },
+   "mean_difference_of_water_fraction": 0.01883,
+   "cells_apart": 91,
+   "largest_difference": 0.467,
+   "land_rain_factor": 1.07672,
+   "surface_rain_mm_day": 1.94971,
+   "open_water_evaporation_factor": 1.041,
+   "surplus_at_factor_1_m3s": 19875,
+   "left_over_at_the_factor_m3s": 3027,
+   "released_m3s": {
+    "south_pole_aitken": 26252,
+    "humboldtianum": 7780,
+    "smythii_marginis": 14083
+   },
+   "neck_flow_m3s": 8977,
+   "near_side_sea_joined": false,
+   "seas": {
+    "moscoviense": {
+     "level_above_common_m": 3448.77,
+     "area_km2": 844220,
+     "receives_m3s": 51728
+    },
+    "orientale": {
+     "level_above_common_m": 2341.33,
+     "area_km2": 297889,
+     "receives_m3s": 18489
+    },
+    "smythii_marginis": {
+     "level_above_common_m": 719.95,
+     "area_km2": 599348,
+     "receives_m3s": 31431
+    },
+    "south_pole_aitken": {
+     "level_above_common_m": 0.0,
+     "area_km2": 2410253,
+     "receives_m3s": 51451
+    },
+    "humboldtianum": {
+     "level_above_common_m": 0.0,
+     "area_km2": 279470,
+     "receives_m3s": 6234
+    },
+    "near_side_main": {
+     "level_above_common_m": -66.31,
+     "area_km2": 3836692,
+     "receives_m3s": 77188
+    },
+    "near_side_south": {
+     "level_above_common_m": -73.88,
+     "area_km2": 953509,
+     "receives_m3s": 14957
+    }
+   },
+   "seas_share": 0.2431,
+   "lakes_share": 0.17415,
+   "lakes_not_overflowing_km2": 676414,
+   "settled": false
+  },
+  {
+   "round": 3,
+   "water_share_of_the_surface": {
+    "estimated_on": 0.41191,
+    "routed": 0.41525
+   },
+   "mean_difference_of_water_fraction": 0.01076,
+   "cells_apart": 15,
+   "largest_difference": 0.463,
+   "land_rain_factor": 1.08994,
+   "surface_rain_mm_day": 1.9554,
+   "open_water_evaporation_factor": 1.043,
+   "surplus_at_factor_1_m3s": 20906,
+   "left_over_at_the_factor_m3s": 3160,
+   "released_m3s": {
+    "south_pole_aitken": 26512,
+    "humboldtianum": 7764,
+    "smythii_marginis": 14551
+   },
+   "neck_flow_m3s": 9245,
+   "near_side_sea_joined": true,
+   "seas": {
+    "moscoviense": {
+     "level_above_common_m": 3448.77,
+     "area_km2": 844220,
+     "receives_m3s": 52395
+    },
+    "orientale": {
+     "level_above_common_m": 2341.33,
+     "area_km2": 297889,
+     "receives_m3s": 18541
+    },
+    "smythii_marginis": {
+     "level_above_common_m": 719.95,
+     "area_km2": 599348,
+     "receives_m3s": 31345
+    },
+    "south_pole_aitken": {
+     "level_above_common_m": 0.0,
+     "area_km2": 2410253,
+     "receives_m3s": 51572
+    },
+    "humboldtianum": {
+     "level_above_common_m": 0.0,
+     "area_km2": 279470,
+     "receives_m3s": 6242
+    },
+    "near_side_main": {
+     "level_above_common_m": -65.34,
+     "area_km2": 3838928,
+     "receives_m3s": 77569
+    },
+    "near_side_south": {
+     "level_above_common_m": -68.07,
+     "area_km2": 971449,
+     "receives_m3s": 6075
+    }
+   },
+   "seas_share": 0.24363,
+   "lakes_share": 0.17172,
+   "lakes_not_overflowing_km2": 681049,
+   "settled": false
+  },
+  {
+   "round": 4,
+   "water_share_of_the_surface": {
+    "estimated_on": 0.41358,
+    "routed": 0.4166
+   },
+   "mean_difference_of_water_fraction": 0.00657,
+   "cells_apart": 8,
+   "largest_difference": 0.522,
+   "land_rain_factor": 1.0956,
+   "surface_rain_mm_day": 1.95734,
+   "open_water_evaporation_factor": 1.043,
+   "surplus_at_factor_1_m3s": 20775,
+   "left_over_at_the_factor_m3s": 3100,
+   "released_m3s": {
+    "south_pole_aitken": 26707,
+    "humboldtianum": 7748,
+    "smythii_marginis": 14577
+   },
+   "neck_flow_m3s": 9287,
+   "near_side_sea_joined": true,
+   "seas": {
+    "moscoviense": {
+     "level_above_common_m": 3448.77,
+     "area_km2": 844220,
+     "receives_m3s": 52593
+    },
+    "orientale": {
+     "level_above_common_m": 2341.33,
+     "area_km2": 297889,
+     "receives_m3s": 18550
+    },
+    "smythii_marginis": {
+     "level_above_common_m": 719.95,
+     "area_km2": 599348,
+     "receives_m3s": 31059
+    },
+    "south_pole_aitken": {
+     "level_above_common_m": 0.0,
+     "area_km2": 2410253,
+     "receives_m3s": 51568
+    },
+    "humboldtianum": {
+     "level_above_common_m": 0.0,
+     "area_km2": 279470,
+     "receives_m3s": 6239
+    },
+    "near_side_main": {
+     "level_above_common_m": -65.33,
+     "area_km2": 3838946,
+     "receives_m3s": 77545
+    },
+    "near_side_south": {
+     "level_above_common_m": -68.07,
+     "area_km2": 971449,
+     "receives_m3s": 6042
+    }
+   },
+   "seas_share": 0.24363,
+   "lakes_share": 0.17308,
+   "lakes_not_overflowing_km2": 734646,
+   "settled": false
+  },
+  {
+   "round": 5,
+   "water_share_of_the_surface": {
+    "estimated_on": 0.41509,
+    "routed": 0.41464
+   },
+   "mean_difference_of_water_fraction": 0.00468,
+   "cells_apart": 10,
+   "largest_difference": 0.492,
+   "land_rain_factor": 1.09903,
+   "surface_rain_mm_day": 1.95823,
+   "open_water_evaporation_factor": 1.044,
+   "surplus_at_factor_1_m3s": 21234,
+   "left_over_at_the_factor_m3s": 3072,
+   "released_m3s": {
+    "south_pole_aitken": 26728,
+    "humboldtianum": 7749,
+    "smythii_marginis": 14823
+   },
+   "neck_flow_m3s": 9328,
+   "near_side_sea_joined": true,
+   "seas": {
+    "moscoviense": {
+     "level_above_common_m": 3448.77,
+     "area_km2": 844220,
+     "receives_m3s": 52832
+    },
+    "orientale": {
+     "level_above_common_m": 2341.33,
+     "area_km2": 297889,
+     "receives_m3s": 18553
+    },
+    "smythii_marginis": {
+     "level_above_common_m": 719.95,
+     "area_km2": 599348,
+     "receives_m3s": 31141
+    },
+    "south_pole_aitken": {
+     "level_above_common_m": 0.0,
+     "area_km2": 2410253,
+     "receives_m3s": 51627
+    },
+    "humboldtianum": {
+     "level_above_common_m": 0.0,
+     "area_km2": 279470,
+     "receives_m3s": 6245
+    },
+    "near_side_main": {
+     "level_above_common_m": -65.32,
+     "area_km2": 3838958,
+     "receives_m3s": 77667
+    },
+    "near_side_south": {
+     "level_above_common_m": -68.07,
+     "area_km2": 971449,
+     "receives_m3s": 6028
+    }
+   },
+   "seas_share": 0.24363,
+   "lakes_share": 0.17111,
+   "lakes_not_overflowing_km2": 471201,
+   "settled": false
+  },
+  {
+   "round": 6,
+   "water_share_of_the_surface": {
+    "estimated_on": 0.41487,
+    "routed": 0.41647
+   },
+   "mean_difference_of_water_fraction": 0.00368,
+   "cells_apart": 9,
+   "largest_difference": 0.509,
+   "land_rain_factor": 1.1,
+   "surface_rain_mm_day": 1.95817,
+   "open_water_evaporation_factor": 1.043,
+   "surplus_at_factor_1_m3s": 20778,
+   "left_over_at_the_factor_m3s": 3124,
+   "released_m3s": {
+    "south_pole_aitken": 26816,
+    "humboldtianum": 7736,
+    "smythii_marginis": 14653
+   },
+   "neck_flow_m3s": 9364,
+   "near_side_sea_joined": true,
+   "seas": {
+    "moscoviense": {
+     "level_above_common_m": 3448.77,
+     "area_km2": 844220,
+     "receives_m3s": 52759
+    },
+    "orientale": {
+     "level_above_common_m": 2341.33,
+     "area_km2": 297889,
+     "receives_m3s": 18559
+    },
+    "smythii_marginis": {
+     "level_above_common_m": 719.95,
+     "area_km2": 599348,
+     "receives_m3s": 30899
+    },
+    "south_pole_aitken": {
+     "level_above_common_m": 0.0,
+     "area_km2": 2410253,
+     "receives_m3s": 51565
+    },
+    "humboldtianum": {
+     "level_above_common_m": 0.0,
+     "area_km2": 279470,
+     "receives_m3s": 6238
+    },
+    "near_side_main": {
+     "level_above_common_m": -65.2,
+     "area_km2": 3839224,
+     "receives_m3s": 77579
+    },
+    "near_side_south": {
+     "level_above_common_m": -66.59,
+     "area_km2": 973059,
+     "receives_m3s": 6020
+    }
+   },
+   "seas_share": 0.24368,
+   "lakes_share": 0.1729,
+   "lakes_not_overflowing_km2": 537054,
+   "settled": true
+  }
+ ],
+ "settled": {
+  "rounds": 7,
+  "water_share_of_the_surface": {
+   "estimated_on": 0.41487,
+   "routed": 0.41647
+  },
+  "mean_difference_of_water_fraction": 0.00368,
+  "cells_apart": 9,
+  "land_rain_factor": 1.1,
+  "surface_rain_mm_day": 1.95817,
+  "open_water_evaporation_factor": 1.043,
+  "seas_share": 0.24368,
+  "lakes_share": 0.1729
+ },
+ "surface": {
+  "record": "research/studies/atlas_round/results/design_surface.json",
+  "sha256": "4847926d33b0c9adc3f7785fc9b968f34bf182694451eecc552f44d6e3966d22"
+ },
+ "climate": {
+  "record": "climate/results/gcm/surface_change_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced.json",
+  "products": {
+   "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced.npz": "e1e3a37218c44859fa2d1608a275538dc66b0514377ec912cefec934f004e854",
+   "climate/gcm/products/surface_wind_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced.npz": "343f0f170e159d10746fa4aec24daa39733023385e937c600fc7e67053b7d0b7"
+  },
+  "on_todays_ground": "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced_today.npz",
+  "summary": {
+   "water_share": [
+    0.375379,
+    0.414867
+   ],
+   "mean_change_of_water_fraction": 0.065804,
+   "cells": {
+    "more_water_by_a_tenth": 252,
+    "less_water_by_a_tenth": 68
+   },
+   "land_rain_factor": 1.100001,
+   "more_water": {
+    "rain_mm_day": [
+     2.968125,
+     2.682258
+    ],
+    "evaporation_mm_day": [
+     2.206437,
+     2.410977
+    ]
+   },
+   "less_water": {
+    "rain_mm_day": [
+     1.364498,
+     1.753655
+    ],
+    "evaporation_mm_day": [
+     2.256372,
+     2.213947
+    ]
+   },
+   "held_as_land": {
+    "rain_mm_day": [
+     2.063433,
+     2.080739
+    ],
+    "evaporation_mm_day": [
+     1.425475,
+     1.515632
+    ]
+   },
+   "held_as_water": {
+    "rain_mm_day": [
+     1.633294,
+     1.75441
+    ],
+    "evaporation_mm_day": [
+     2.689043,
+     2.689043
+    ]
+   },
+   "surface": {
+    "rain_mm_day": [
+     1.901879,
+     1.958175
+    ],
+    "evaporation_mm_day": [
+     1.900052,
+     1.956347
+    ]
+   },
+   "rain_less_evaporation_left_mm_day": -0.0
+  }
+ },
+ "seconds": 908
+}

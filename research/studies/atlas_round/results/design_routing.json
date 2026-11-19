@@ -2,76 +2,170 @@
  "schema": "terluna.research.atlas-round-design-routing/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/design_routing.py": "7efdff778ed46538149ca80abdf825d819ff80563565814a6ac4d0c09632cb6c",
-   "research/studies/atlas_round/final_drainage.py": "270bdb22585b06318b95596db37d6ffe60b7c44476e9d8575099ee8c20043173",
-   "research/studies/atlas_round/near_side_neck.py": "8f50c8557c21a03103b7470af1996a67024330a76d32a3890b1c61f02e681476",
-   "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
-   "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
+   "research/studies/atlas_round/design_routing.py": "554fde6092910090a411cd3807ec323bc8ed76b6bfb5224847d33b70b9462685",
+   "research/studies/atlas_round/final_drainage.py": "912ca69f8eb749b797b474a89d0d9a7b3958dc6246c61032958e77362d83d78d",
+   "research/studies/atlas_round/near_side_neck.py": "69664c1047b7c54f2e997f683c60da98daa872bed200c18fdaaecddbd95a4f04",
+   "research/studies/atlas_round/lake_rule_balance.py": "0755ab26642dc9734849ab1efe2c78256be7085dff1b05eacaecc815eb28bfff",
+   "research/studies/atlas_round/lake_rule.py": "961acd4025f9e7810c2e308aa5bf5467dad3830018edcd6ee46cb901a631eae0",
+   "research/studies/atlas_round/hollow_courses.py": "dc21d4190da6a7017dd2cba8af7f7ae635450bac6513a488be04456bc37759c3",
+   "research/studies/atlas_round/design_works.py": "dc28a4d235bb00bcdb35b4309b2c8f8b090e9e4b60548302416af6835366c550",
    "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
    "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5"
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/final_drainage.json": "8c3895d869f4e315f9348e4bda07d4940a86826af411b249c80ec7d41e88f713",
-  "research/studies/atlas_round/results/near_side_neck.json": "077f00e08b94a4f0290e5c8337f6e75bdc7c3d891751933dfb4ccdc22400eaf6",
-  "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
+  "research/studies/atlas_round/results/final_drainage.json": "27ec3ba3b464d08682d7bf31ae65f6134f4bb1ce40e4581c4669f62fca3f043f",
+  "research/studies/atlas_round/results/near_side_neck.json": "7bbaa72ca2935c4feaaf14169d410b7fb8356eca4a2f67f0ac113cc095c2e160",
+  "research/studies/atlas_round/results/design_works.json": "35fe34c7f0ad4bde9aef21c7ab1a6a6c1d5df21c48afb41edb6f527112428ce1",
   "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a"
  },
  "ignored_inputs": {
-  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_today.npz": "69e2839b46dac2bb2e87fe0a40c618b43244cada07f9de0f58239802c927b9f5"
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced_today.npz": "30aab71a469bd9a977ef1517c77bd1939dff8f1e863b7a0a6f714e12127210d5",
+  "/media/projectspace/terluna-research/atlas-round/design_works/design_works_16ppd.npz": "6409f3231c9fd4d36ef2351a819744b43c3c25a749556be575753dbe648a096e"
  },
- "evidence": "The redrawn floor at the settled state, the seas at the levels the design climate's closed budget gives them with the works of 16 November and the fixed weirs, and the routing of that budget's rain over it with the near-side sea parted. Not validated against any observation.",
+ "evidence": "The redrawn floor at the settled state, the seas at the levels the design climate's closed budget gives them with the works of 16 November and the fixed weirs, and the routing of that budget's rain over it, the lakes filled by the corrected rule. Not validated against any observation.",
  "reading_rule": "Levels in m above the redrawn common level; areas in km2, flows in m3/s; shares of the Moon's surface. product names the routing on the research drive, which design_routing.load() reads.",
  "summary": {
   "seas": {
    "moscoviense": {
     "level_above_common_m": 3448.77,
-    "area_km2": 844220
+    "area_km2": 844220,
+    "loses_m3s": 3554,
+    "receives_m3s": 52759
    },
    "orientale": {
     "level_above_common_m": 2341.33,
-    "area_km2": 297889
+    "area_km2": 297889,
+    "loses_m3s": 2192,
+    "receives_m3s": 18559
    },
    "smythii_marginis": {
     "level_above_common_m": 719.95,
-    "area_km2": 599348
+    "area_km2": 599348,
+    "loses_m3s": 805,
+    "receives_m3s": 30899
    },
    "south_pole_aitken": {
     "level_above_common_m": 0.0,
-    "area_km2": 2410253
+    "area_km2": 2410253,
+    "loses_m3s": 51565,
+    "receives_m3s": 51565
    },
    "humboldtianum": {
     "level_above_common_m": 0.0,
-    "area_km2": 279470
+    "area_km2": 279470,
+    "loses_m3s": 6238,
+    "receives_m3s": 6238
    },
    "near_side_main": {
-    "level_above_common_m": -67.02,
-    "area_km2": 3835314
+    "level_above_common_m": -65.21,
+    "area_km2": 3839222,
+    "loses_m3s": 68214,
+    "receives_m3s": 77578
    },
    "near_side_south": {
-    "level_above_common_m": -225.36,
-    "area_km2": 731500
+    "level_above_common_m": -66.61,
+    "area_km2": 973034,
+    "loses_m3s": 15370,
+    "receives_m3s": 6020
    }
   },
-  "sea_share": 0.23721,
-  "lake_cells": 1529349,
-  "lake_share": 0.13437,
-  "closed_lake_share": 0.00588,
-  "rivers_into_the_seas_m3s": 249180,
+  "sea_share": 0.24368,
+  "lake_cells": 1997019,
+  "lake_share": 0.1729,
+  "closed_lake_share": 0.01416,
+  "rivers_into_the_seas_m3s": 242171,
   "supplies_m3s": {
-   "moscoviense": 47404,
-   "orientale": 17677,
-   "smythii_marginis": 30110,
-   "south_pole_aitken": 53683,
-   "humboldtianum": 6512,
-   "near_side_main": 81350,
-   "near_side_south": 13519
+   "moscoviense": 52759,
+   "orientale": 18559,
+   "smythii_marginis": 30899,
+   "south_pole_aitken": 51565,
+   "humboldtianum": 6238,
+   "near_side_main": 77578,
+   "near_side_south": 6020
   },
-  "neck_spill_m3s": 7630
+  "neck_spill_m3s": 9364,
+  "near_side_sea_joined_across_its_neck": true,
+  "open_water_evaporation_factor": 1.043,
+  "weirs": {
+   "moscoviense_surplus_m3s": 49205,
+   "released_m3s": {
+    "south_pole_aitken": 26816,
+    "humboldtianum": 7736,
+    "smythii_marginis": 14653
+   },
+   "arrived_m3s": {
+    "south_pole_aitken": 26816,
+    "humboldtianum": 6237,
+    "smythii_marginis": 14310
+   },
+   "full_seas_pass_on_m3s": {
+    "orientale": 16367,
+    "smythii_marginis": 30094
+   },
+   "held_seas_left_short_m3s": {},
+   "branch_flows_m3s": {
+    "humboldtianum_branch": [
+     7735.9
+    ],
+    "smythii_marginis_branch": [
+     14653.1,
+     14653.1,
+     14653.1,
+     14628.4,
+     14628.4
+    ]
+   },
+   "own_rivers_at_the_common_level_m3s": {
+    "moscoviense": 52759,
+    "orientale": 18559,
+    "smythii_marginis": 16589,
+    "south_pole_aitken": 24749,
+    "humboldtianum": 0,
+    "near_side_main": 31832,
+    "near_side_south": 5925
+   }
+  },
+  "near_side": {
+   "history": [
+    {
+     "main_level_m": -65.32,
+     "south_level_m": -68.07,
+     "neck_flow_m3s": 9374.7,
+     "main_rivers_m3s": 77578.6,
+     "south_rivers_m3s": 6005.7,
+     "main_balance_m3s": -6.3,
+     "south_balance_m3s": 134.1
+    },
+    {
+     "main_level_m": -65.21,
+     "south_level_m": -66.61,
+     "neck_flow_m3s": 9364.2,
+     "main_rivers_m3s": 77578.3,
+     "south_rivers_m3s": 6020.1,
+     "main_balance_m3s": -0.2,
+     "south_balance_m3s": 14.4
+    }
+   ],
+   "sills": [],
+   "left_out_of_balance_m3s": {
+    "main": -0.2,
+    "south": 14.4
+   },
+   "spills_over_a_sill_m3s": {},
+   "crest_above_common_m": -68.72
+  },
+  "budget_m3s": {
+   "runoff_of_dry_ground": 98322.9,
+   "put_in": 95665.6,
+   "lakes_rain_less_evaporation": 50074.7,
+   "reaches_the_seas": 243617.5,
+   "kept_by_lakes_not_full": 445.7
+  }
  },
  "product": {
   "path": "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz",
-  "sha256": "6dd552e69faca7334280149775f96253cdb1852a784756f7462d6c962b20abf6"
+  "sha256": "cbc7dcd90630c46ab5d4faab87b6c00534be4b2dd4623ae4fe45153197a64252"
  },
- "seconds": 273
+ "seconds": 126
 }

@@ -2,26 +2,27 @@
  "schema": "terluna.research.atlas-round-final-drainage/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/final_drainage.py": "270bdb22585b06318b95596db37d6ffe60b7c44476e9d8575099ee8c20043173",
-   "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
-   "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
+   "research/studies/atlas_round/final_drainage.py": "912ca69f8eb749b797b474a89d0d9a7b3958dc6246c61032958e77362d83d78d",
+   "research/studies/atlas_round/lake_rule_balance.py": "0755ab26642dc9734849ab1efe2c78256be7085dff1b05eacaecc815eb28bfff",
+   "research/studies/atlas_round/lake_rule.py": "961acd4025f9e7810c2e308aa5bf5467dad3830018edcd6ee46cb901a631eae0",
+   "research/studies/atlas_round/hollow_courses.py": "dc21d4190da6a7017dd2cba8af7f7ae635450bac6513a488be04456bc37759c3",
+   "research/studies/atlas_round/design_works.py": "dc28a4d235bb00bcdb35b4309b2c8f8b090e9e4b60548302416af6835366c550",
    "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
-   "research/studies/drainage_network/routing.py": "52ede9125248151b2e8d09bce7ef3e2a9eb742cb391654e0208aa7ef2e96b922",
    "geography/drainage.py": "2c7380850863ba140edc23c030ba5ff8be12a1715b6c170c871b7dfda2dc85f5",
    "climate/gcm/turned_climatology.py": "454374ea179ba6bd0c91b91e485572fc81e75fc4c0d1a64254814b8cdb4095f6",
    "climate/gcm/turned.py": "0048cd6ac13ab7e9fc6975437f04c2a83e0be3e2c6d8764aae4d68bff4cb629a"
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
+  "research/studies/atlas_round/results/design_works.json": "35fe34c7f0ad4bde9aef21c7ab1a6a6c1d5df21c48afb41edb6f527112428ce1",
   "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a",
   "research/studies/atlas_round/results/governed_drainage.json": "6ab50a2911d8767a7cda50fb9641dc0b663c3e1ab980f6d557d4ae6b0a07d872",
   "climate/results/gcm/pattern_scaling_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.json": "0d150b24d2d9943fa8225bcb358cfc542d6e92ebf7ac8ffa7c85301a36e56381"
  },
  "ignored_inputs": {
-  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_today.npz": "69e2839b46dac2bb2e87fe0a40c618b43244cada07f9de0f58239802c927b9f5",
-  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K.npz": "c2c00e1977e682c090cc9e90e4ac84b6de02bcf3068ffd3ea73102caf4494114",
-  "/media/projectspace/terluna-research/atlas-round/redrawn_surface/redrawn_surface_central_100_million_years_nmax359.npz": "42942b743c00594085b8eaaf54d501811fa827c206fb6e5b712f989d11833d14"
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced_today.npz": "30aab71a469bd9a977ef1517c77bd1939dff8f1e863b7a0a6f714e12127210d5",
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced.npz": "e1e3a37218c44859fa2d1608a275538dc66b0514377ec912cefec934f004e854",
+  "/media/projectspace/terluna-research/atlas-round/design_works/design_works_16ppd.npz": "6409f3231c9fd4d36ef2351a819744b43c3c25a749556be575753dbe648a096e"
  },
  "climatology": {
   "run": "A28D_301k_design_l15_snow_s936_settled",
@@ -29,4394 +30,406 @@
    45,
    59
   ],
-  "estimate": "scaled300.31K",
+  "estimate": "scaled300.31K_resurfaced",
   "frame": "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json"
  },
- "evidence": "A calculation on products: the drainage network study's routing of the design climate: the climate run on the design surface (sunlight 0.936, years 45-59, 301.00 K at the ground) carried by pattern scaling to the 300.31 K of the run at 0.930 on the final surface, an estimate, carried from its settled turned frame onto today's ground, over the redrawn floor with the works chosen on 16 November, each weir set by routing again until the sea it serves receives its need. The cuts' routes are found between 1.9 km cells. Not validated against any observation.",
- "reading_rule": "As governed_drainage.json: levels in m above the redrawn common level, flows in m3/s, areas in km2; cases on the routing's own budget and on the one its open-water evaporation factor closes. design_state_without_the_works is the same climate with the upper seas spilling over their natural passes and no weirs or cuts. against_the_present_climate pairs each number as [present design climate at 8 degrees, this run]. routing names each budget's governed routing on the research drive.",
+ "evidence": "A calculation on products: the routing of the design climate: the climate run on the design surface (sunlight 0.936, years 45-59, 301.00 K at the ground) carried by pattern scaling to the 300.31 K of the run at 0.930 on the final surface and by the contrast between land and water onto the surface its own routing makes, an estimate, carried from its settled turned frame onto today's ground, over the redrawn floor with the works chosen on 16 November, the lakes filled by the corrected rule (each hollow as one water) and each weir set by settling again until the sea it serves receives its need. Not validated against any observation.",
+ "reading_rule": "Levels in m above the redrawn common level, flows in m3/s, areas in km2; cases on the routing's own budget and on the one its open-water evaporation factor closes. budget gives the routing with every sea at the common level at factor 1 and at the factor that one step gives, where surplus_m3s is what the budget still leaves over. In each case the near-side sea stands at the common level, released is what each weir or branch lets go and arrived what reaches its sea beyond its own rivers; would_settle gives the level the near-side sea's balance would bring it to, up to its rim. against_the_present_climate pairs each number as [the earlier design climate at 8 degrees on the earlier lake rule, this routing]. routing names each budget's governed routing on the research drive.",
  "budget": {
-  "land_rain_less_evaporation_m3s": 53851,
-  "routing_runoff_m3s": 98336,
-  "lakes_rain_less_evaporation_m3s": 77804,
-  "seas_loss_m3s": 139311,
-  "delivered_to_the_seas_m3s": 172126,
-  "lakes_km2": 5800458,
-  "closed_lakes_km2": 219565,
-  "surplus_m3s": 32815,
-  "open_water_evaporation_m3s": 428282,
-  "open_water_evaporation_factor_closing_it": 1.077
+  "land_rain_less_evaporation_m3s": 62273,
+  "routing_runoff_m3s": 99249,
+  "lakes_rain_less_evaporation_m3s": 59156,
+  "seas_loss_m3s": 137208,
+  "delivered_to_the_seas_m3s": 157986,
+  "lakes_km2": 7452378,
+  "lakes_passing_nothing_on_km2": 672833,
+  "surplus_m3s": 20778,
+  "open_water_evaporation_m3s": 482346,
+  "open_water_evaporation_factor_closing_it": 1.043,
+  "factor": 1.0
  },
- "rims_against_the_first_step": {
-  "moscoviense": {
-   "here_m": 3448.781,
-   "first_step_m": 3448.78,
-   "agree": true
-  },
-  "orientale": {
-   "here_m": 2341.339,
-   "first_step_m": 2341.34,
-   "agree": true
-  },
-  "smythii_marginis": {
-   "here_m": 719.961,
-   "first_step_m": 719.96,
-   "agree": true
-  }
- },
- "branches": {
-  "humboldtianum": {
-   "cuts": [
-    {
-     "depth_m": 437.9,
-     "at": {
-      "today": [
-       34.97,
-       139.72
-      ],
-      "turned": [
-       36.55,
-       133.16
-      ]
-     },
-     "pass_above_the_common_level_m": 3886.7
-    },
-    {
-     "depth_m": 171.2,
-     "at": {
-      "today": [
-       35.09,
-       139.47
-      ],
-      "turned": [
-       36.64,
-       132.88
-      ]
-     },
-     "pass_above_the_common_level_m": 3620.0
-    },
-    {
-     "depth_m": 15.9,
-     "at": {
-      "today": [
-       35.09,
-       138.97
-      ],
-      "turned": [
-       36.58,
-       132.38
-      ]
-     },
-     "pass_above_the_common_level_m": 3464.6
-    },
-    {
-     "depth_m": 55.5,
-     "at": {
-      "today": [
-       35.22,
-       138.72
-      ],
-      "turned": [
-       36.68,
-       132.11
-      ]
-     },
-     "pass_above_the_common_level_m": 3504.3
-    }
-   ],
-   "opens_onto": null,
-   "cuts_least_in_sum": true
-  },
-  "smythii_marginis": {
-   "cuts": [
-    {
-     "depth_m": 437.9,
-     "at": {
-      "today": [
-       34.97,
-       139.72
-      ],
-      "turned": [
-       36.55,
-       133.16
-      ]
-     },
-     "pass_above_the_common_level_m": 3886.7
-    },
-    {
-     "depth_m": 171.2,
-     "at": {
-      "today": [
-       35.09,
-       139.47
-      ],
-      "turned": [
-       36.64,
-       132.88
-      ]
-     },
-     "pass_above_the_common_level_m": 3620.0
-    },
-    {
-     "depth_m": 15.9,
-     "at": {
-      "today": [
-       35.09,
-       138.97
-      ],
-      "turned": [
-       36.58,
-       132.38
-      ]
-     },
-     "pass_above_the_common_level_m": 3464.6
-    },
-    {
-     "depth_m": 55.5,
-     "at": {
-      "today": [
-       35.22,
-       138.72
-      ],
-      "turned": [
-       36.68,
-       132.11
-      ]
-     },
-     "pass_above_the_common_level_m": 3504.3
-    },
-    {
-     "depth_m": 89.2,
-     "at": {
-      "today": [
-       34.22,
-       132.97
-      ],
-      "turned": [
-       35.02,
-       126.51
-      ]
-     },
-     "pass_above_the_common_level_m": 3117.1
-    },
-    {
-     "depth_m": 56.1,
-     "at": {
-      "today": [
-       31.16,
-       131.53
-      ],
-      "turned": [
-       31.82,
-       125.58
-      ]
-     },
-     "pass_above_the_common_level_m": 2682.9
-    }
-   ],
-   "opens_onto": null,
-   "cuts_least_in_sum": true
-  }
+ "budget_at_its_factor": {
+  "land_rain_less_evaporation_m3s": 61792,
+  "routing_runoff_m3s": 99476,
+  "lakes_rain_less_evaporation_m3s": 51752,
+  "seas_loss_m3s": 147657,
+  "delivered_to_the_seas_m3s": 150781,
+  "lakes_km2": 7195371,
+  "lakes_passing_nothing_on_km2": 584957,
+  "surplus_m3s": 3124,
+  "open_water_evaporation_m3s": 494660,
+  "open_water_evaporation_factor_closing_it": 1.006,
+  "factor": 1.043
  },
  "cases": {
   "routing_budget": {
-   "moscoviense_surplus_m3s": 46506,
-   "released_m3s": {
-    "south_pole_aitken": 20117,
-    "humboldtianum": 4657,
-    "smythii_marginis": 21732
-   },
-   "arrived_m3s": {
-    "south_pole_aitken": 20117,
-    "humboldtianum": 4356,
-    "smythii_marginis": 21731
-   },
-   "full_seas_pass_on_m3s": {
-    "orientale": 16605,
-    "smythii_marginis": 42743
-   },
-   "seas": {
-    "moscoviense": {
-     "level_m": 3448.77,
-     "area_km2": 844220,
-     "loss_m3s": 3036,
-     "own_rivers_m3s": 49543,
-     "supply_m3s": 49543,
-     "balance_m3s": 46506
-    },
-    "orientale": {
-     "level_m": 2341.33,
-     "area_km2": 297889,
-     "loss_m3s": 2065,
-     "own_rivers_m3s": 18669,
-     "supply_m3s": 18669,
-     "balance_m3s": 16605
-    },
-    "smythii_marginis": {
-     "level_m": 719.95,
-     "area_km2": 599348,
-     "loss_m3s": 615,
-     "own_rivers_m3s": 21627,
-     "supply_m3s": 43358,
-     "balance_m3s": 42743
-    },
-    "near_side": {
-     "level_m": 0.0,
-     "area_km2": 5082098,
-     "loss_m3s": 82309,
-     "own_rivers_m3s": 48776,
-     "supply_m3s": 108095,
-     "balance_m3s": 25786,
-     "would_settle": {
-      "reaches_its_rim": true,
-      "level_m": 720.0,
-      "area_km2": 8457382,
-      "area_at_the_common_level_km2": 5082098
-     }
-    },
-    "south_pole_aitken": {
-     "level_m": 0.0,
-     "area_km2": 2410253,
-     "loss_m3s": 48896,
-     "own_rivers_m3s": 28779,
-     "supply_m3s": 48896,
-     "balance_m3s": 0
-    },
-    "humboldtianum": {
-     "level_m": 0.0,
-     "area_km2": 279470,
-     "loss_m3s": 5987,
-     "own_rivers_m3s": 1631,
-     "supply_m3s": 5987,
-     "balance_m3s": 0
-    }
-   },
-   "rivers": {
-    "moscoviense_over_its_natural_pass": {
-     "leaves": {
-      "today": [
-       -10.72,
-       175.09
-      ],
-      "turned": [
-       -5.45,
-       173.84
-      ]
-     },
-     "length_km": 542,
-     "surface_from_m": 3449,
-     "surface_to_m": -24,
-     "steep_km": 44,
-     "steep_reaches": 8,
-     "largest_fall_between_cells_m": 666,
-     "lakes_passed": 7,
-     "discharge_m3s": [
-      20117,
-      24540
-     ],
-     "profile": [
-      [
-       0,
-       3449
-      ],
-      [
-       28,
-       2742
-      ],
-      [
-       57,
-       2675
-      ],
-      [
-       78,
-       2675
-      ],
-      [
-       105,
-       2675
-      ],
-      [
-       133,
-       2675
-      ],
-      [
-       162,
-       2675
-      ],
-      [
-       176,
-       2603
-      ],
-      [
-       210,
-       1702
-      ],
-      [
-       226,
-       1702
-      ],
-      [
-       260,
-       1702
-      ],
-      [
-       294,
-       1702
-      ],
-      [
-       302,
-       1702
-      ],
-      [
-       327,
-       1702
-      ],
-      [
-       352,
-       1625
-      ],
-      [
-       376,
-       608
-      ],
-      [
-       401,
-       608
-      ],
-      [
-       428,
-       608
-      ],
-      [
-       451,
-       608
-      ],
-      [
-       477,
-       608
-      ],
-      [
-       500,
-       529
-      ],
-      [
-       526,
-       413
-      ],
-      [
-       542,
-       -24
-      ]
-     ]
-    },
-    "orientale_over_its_natural_pass": {
-     "leaves": {
-      "today": [
-       -7.16,
-       -87.97
-      ],
-      "turned": [
-       -3.59,
-       -90.35
-      ]
-     },
-     "length_km": 1806,
-     "surface_from_m": 2341,
-     "surface_to_m": -15,
-     "steep_km": 32,
-     "steep_reaches": 10,
-     "largest_fall_between_cells_m": 306,
-     "lakes_passed": 18,
-     "discharge_m3s": [
-      16605,
-      17717
-     ],
-     "profile": [
-      [
-       0,
-       2341
-      ],
-      [
-       25,
-       2305
-      ],
-      [
-       54,
-       2305
-      ],
-      [
-       80,
-       2305
-      ],
-      [
-       100,
-       2305
-      ],
-      [
-       126,
-       2305
-      ],
-      [
-       151,
-       2305
-      ],
-      [
-       175,
-       2305
-      ],
-      [
-       202,
-       2305
-      ],
-      [
-       226,
-       2305
-      ],
-      [
-       255,
-       2289
-      ],
-      [
-       289,
-       2179
-      ],
-      [
-       304,
-       2179
-      ],
-      [
-       327,
-       2126
-      ],
-      [
-       360,
-       2126
-      ],
-      [
-       388,
-       2126
-      ],
-      [
-       404,
-       2126
-      ],
-      [
-       427,
-       2126
-      ],
-      [
-       451,
-       2126
-      ],
-      [
-       479,
-       2126
-      ],
-      [
-       512,
-       2126
-      ],
-      [
-       527,
-       2126
-      ],
-      [
-       551,
-       2126
-      ],
-      [
-       585,
-       2126
-      ],
-      [
-       600,
-       1951
-      ],
-      [
-       627,
-       1951
-      ],
-      [
-       651,
-       1951
-      ],
-      [
-       678,
-       1951
-      ],
-      [
-       706,
-       1951
-      ],
-      [
-       726,
-       1951
-      ],
-      [
-       750,
-       1951
-      ],
-      [
-       776,
-       1951
-      ],
-      [
-       800,
-       1951
-      ],
-      [
-       836,
-       1871
-      ],
-      [
-       857,
-       1743
-      ],
-      [
-       880,
-       1743
-      ],
-      [
-       900,
-       1558
-      ],
-      [
-       927,
-       1504
-      ],
-      [
-       951,
-       1504
-      ],
-      [
-       975,
-       1414
-      ],
-      [
-       1003,
-       1414
-      ],
-      [
-       1026,
-       1414
-      ],
-      [
-       1051,
-       1414
-      ],
-      [
-       1076,
-       1414
-      ],
-      [
-       1104,
-       1140
-      ],
-      [
-       1125,
-       1072
-      ],
-      [
-       1152,
-       937
-      ],
-      [
-       1177,
-       761
-      ],
-      [
-       1205,
-       666
-      ],
-      [
-       1225,
-       666
-      ],
-      [
-       1252,
-       666
-      ],
-      [
-       1277,
-       666
-      ],
-      [
-       1302,
-       666
-      ],
-      [
-       1327,
-       666
-      ],
-      [
-       1351,
-       666
-      ],
-      [
-       1380,
-       666
-      ],
-      [
-       1401,
-       666
-      ],
-      [
-       1429,
-       666
-      ],
-      [
-       1451,
-       666
-      ],
-      [
-       1475,
-       617
-      ],
-      [
-       1502,
-       617
-      ],
-      [
-       1532,
-       312
-      ],
-      [
-       1552,
-       312
-      ],
-      [
-       1591,
-       312
-      ],
-      [
-       1608,
-       308
-      ],
-      [
-       1626,
-       266
-      ],
-      [
-       1651,
-       266
-      ],
-      [
-       1675,
-       264
-      ],
-      [
-       1701,
-       71
-      ],
-      [
-       1736,
-       56
-      ],
-      [
-       1751,
-       56
-      ],
-      [
-       1784,
-       56
-      ],
-      [
-       1801,
-       27
-      ],
-      [
-       1806,
-       -15
-      ]
-     ]
-    },
-    "smythii_marginis_over_its_natural_pass": {
-     "leaves": {
-      "today": [
-       24.78,
-       82.66
-      ],
-      "turned": [
-       20.26,
-       78.74
-      ]
-     },
-     "length_km": 2419,
-     "surface_from_m": 719,
-     "surface_to_m": -3,
-     "steep_km": 11,
-     "steep_reaches": 4,
-     "largest_fall_between_cells_m": 116,
-     "lakes_passed": 9,
-     "discharge_m3s": [
-      42744,
-      44206
-     ],
-     "profile": [
-      [
-       0,
-       719
-      ],
-      [
-       29,
-       677
-      ],
-      [
-       50,
-       677
-      ],
-      [
-       76,
-       677
-      ],
-      [
-       103,
-       677
-      ],
-      [
-       126,
-       677
-      ],
-      [
-       159,
-       677
-      ],
-      [
-       175,
-       677
-      ],
-      [
-       205,
-       677
-      ],
-      [
-       229,
-       677
-      ],
-      [
-       252,
-       677
-      ],
-      [
-       276,
-       677
-      ],
-      [
-       300,
-       677
-      ],
-      [
-       325,
-       677
-      ],
-      [
-       352,
-       677
-      ],
-      [
-       376,
-       677
-      ],
-      [
-       404,
-       677
-      ],
-      [
-       426,
-       677
-      ],
-      [
-       451,
-       677
-      ],
-      [
-       485,
-       677
-      ],
-      [
-       505,
-       677
-      ],
-      [
-       527,
-       677
-      ],
-      [
-       551,
-       677
-      ],
-      [
-       577,
-       677
-      ],
-      [
-       602,
-       677
-      ],
-      [
-       626,
-       677
-      ],
-      [
-       651,
-       677
-      ],
-      [
-       676,
-       677
-      ],
-      [
-       706,
-       677
-      ],
-      [
-       726,
-       677
-      ],
-      [
-       750,
-       677
-      ],
-      [
-       779,
-       677
-      ],
-      [
-       804,
-       646
-      ],
-      [
-       826,
-       606
-      ],
-      [
-       854,
-       502
-      ],
-      [
-       878,
-       502
-      ],
-      [
-       905,
-       502
-      ],
-      [
-       926,
-       502
-      ],
-      [
-       954,
-       502
-      ],
-      [
-       983,
-       502
-      ],
-      [
-       1001,
-       502
-      ],
-      [
-       1026,
-       502
-      ],
-      [
-       1057,
-       502
-      ],
-      [
-       1075,
-       502
-      ],
-      [
-       1105,
-       502
-      ],
-      [
-       1129,
-       502
-      ],
-      [
-       1154,
-       502
-      ],
-      [
-       1177,
-       502
-      ],
-      [
-       1202,
-       502
-      ],
-      [
-       1235,
-       502
-      ],
-      [
-       1250,
-       502
-      ],
-      [
-       1276,
-       502
-      ],
-      [
-       1321,
-       502
-      ],
-      [
-       1325,
-       502
-      ],
-      [
-       1352,
-       502
-      ],
-      [
-       1383,
-       502
-      ],
-      [
-       1401,
-       502
-      ],
-      [
-       1438,
-       502
-      ],
-      [
-       1452,
-       502
-      ],
-      [
-       1476,
-       502
-      ],
-      [
-       1502,
-       502
-      ],
-      [
-       1526,
-       192
-      ],
-      [
-       1552,
-       192
-      ],
-      [
-       1577,
-       192
-      ],
-      [
-       1604,
-       192
-      ],
-      [
-       1635,
-       192
-      ],
-      [
-       1651,
-       192
-      ],
-      [
-       1678,
-       192
-      ],
-      [
-       1700,
-       192
-      ],
-      [
-       1727,
-       192
-      ],
-      [
-       1751,
-       192
-      ],
-      [
-       1777,
-       192
-      ],
-      [
-       1801,
-       192
-      ],
-      [
-       1825,
-       192
-      ],
-      [
-       1851,
-       192
-      ],
-      [
-       1875,
-       192
-      ],
-      [
-       1927,
-       192
-      ],
-      [
-       1951,
-       192
-      ],
-      [
-       1984,
-       192
-      ],
-      [
-       2001,
-       11
-      ],
-      [
-       2027,
-       6
-      ],
-      [
-       2051,
-       6
-      ],
-      [
-       2075,
-       6
-      ],
-      [
-       2101,
-       6
-      ],
-      [
-       2132,
-       6
-      ],
-      [
-       2157,
-       6
-      ],
-      [
-       2175,
-       6
-      ],
-      [
-       2201,
-       6
-      ],
-      [
-       2243,
-       6
-      ],
-      [
-       2256,
-       6
-      ],
-      [
-       2276,
-       6
-      ],
-      [
-       2302,
-       6
-      ],
-      [
-       2327,
-       6
-      ],
-      [
-       2351,
-       6
-      ],
-      [
-       2375,
-       6
-      ],
-      [
-       2414,
-       6
-      ],
-      [
-       2419,
-       -3
-      ]
-     ]
-    },
-    "moscoviense_to_humboldtianum": {
-     "cuts": [
-      {
-       "depth_m": 437.9,
-       "at": {
-        "today": [
-         34.97,
-         139.72
-        ],
-        "turned": [
-         36.55,
-         133.16
-        ]
-       },
-       "pass_above_the_common_level_m": 3886.7
-      },
-      {
-       "depth_m": 171.2,
-       "at": {
-        "today": [
-         35.09,
-         139.47
-        ],
-        "turned": [
-         36.64,
-         132.88
-        ]
-       },
-       "pass_above_the_common_level_m": 3620.0
-      },
-      {
-       "depth_m": 15.9,
-       "at": {
-        "today": [
-         35.09,
-         138.97
-        ],
-        "turned": [
-         36.58,
-         132.38
-        ]
-       },
-       "pass_above_the_common_level_m": 3464.6
-      },
-      {
-       "depth_m": 55.5,
-       "at": {
-        "today": [
-         35.22,
-         138.72
-        ],
-        "turned": [
-         36.68,
-         132.11
-        ]
-       },
-       "pass_above_the_common_level_m": 3504.3
-      }
-     ],
-     "segments": [
-      {
-       "starts": {
-        "today": [
-         35.22,
-         138.72
-        ],
-        "turned": [
-         36.68,
-         132.11
-        ]
-       },
-       "reaches": "humboldtianum",
-       "ends_at": {
-        "today": [
-         57.16,
-         111.72
-        ],
-        "turned": [
-         55.19,
-         100.25
-        ]
-       },
-       "length_km": 1948,
-       "surface_from_m": 3504,
-       "surface_to_m": -81,
-       "steep_km": 60,
-       "steep_reaches": 21,
-       "largest_fall_between_cells_m": 248,
-       "lakes_passed": 21,
-       "discharge_m3s": [
-        26389,
-        4356
-       ],
-       "profile": [
-        [
-         0,
-         3504
-        ],
-        [
-         26,
-         3381
-        ],
-        [
-         50,
-         3169
-        ],
-        [
-         85,
-         3028
-        ],
-        [
-         109,
-         3028
-        ],
-        [
-         127,
-         3028
-        ],
-        [
-         155,
-         3028
-        ],
-        [
-         179,
-         2755
-        ],
-        [
-         200,
-         2470
-        ],
-        [
-         226,
-         2470
-        ],
-        [
-         250,
-         2470
-        ],
-        [
-         276,
-         2470
-        ],
-        [
-         300,
-         2470
-        ],
-        [
-         328,
-         2470
-        ],
-        [
-         351,
-         1604
-        ],
-        [
-         377,
-         1604
-        ],
-        [
-         408,
-         1604
-        ],
-        [
-         428,
-         1604
-        ],
-        [
-         450,
-         1604
-        ],
-        [
-         476,
-         1603
-        ],
-        [
-         512,
-         1514
-        ],
-        [
-         531,
-         1514
-        ],
-        [
-         552,
-         1514
-        ],
-        [
-         588,
-         1514
-        ],
-        [
-         600,
-         1484
-        ],
-        [
-         626,
-         1484
-        ],
-        [
-         651,
-         1484
-        ],
-        [
-         676,
-         1342
-        ],
-        [
-         702,
-         1342
-        ],
-        [
-         726,
-         1342
-        ],
-        [
-         750,
-         1342
-        ],
-        [
-         787,
-         1342
-        ],
-        [
-         802,
-         1342
-        ],
-        [
-         826,
-         1342
-        ],
-        [
-         853,
-         1342
-        ],
-        [
-         878,
-         1342
-        ],
-        [
-         901,
-         1342
-        ],
-        [
-         926,
-         1342
-        ],
-        [
-         952,
-         1342
-        ],
-        [
-         977,
-         1294
-        ],
-        [
-         1002,
-         1294
-        ],
-        [
-         1025,
-         1294
-        ],
-        [
-         1051,
-         1294
-        ],
-        [
-         1084,
-         1294
-        ],
-        [
-         1101,
-         1294
-        ],
-        [
-         1128,
-         1294
-        ],
-        [
-         1150,
-         1294
-        ],
-        [
-         1187,
-         1294
-        ],
-        [
-         1210,
-         1294
-        ],
-        [
-         1226,
-         1294
-        ],
-        [
-         1251,
-         1294
-        ],
-        [
-         1283,
-         1294
-        ],
-        [
-         1301,
-         1294
-        ],
-        [
-         1328,
-         1047
-        ],
-        [
-         1352,
-         985
-        ],
-        [
-         1379,
-         985
-        ],
-        [
-         1402,
-         726
-        ],
-        [
-         1426,
-         726
-        ],
-        [
-         1450,
-         726
-        ],
-        [
-         1475,
-         672
-        ],
-        [
-         1509,
-         561
-        ],
-        [
-         1527,
-         504
-        ],
-        [
-         1554,
-         504
-        ],
-        [
-         1578,
-         504
-        ],
-        [
-         1603,
-         504
-        ],
-        [
-         1625,
-         504
-        ],
-        [
-         1657,
-         504
-        ],
-        [
-         1676,
-         504
-        ],
-        [
-         1711,
-         504
-        ],
-        [
-         1737,
-         504
-        ],
-        [
-         1750,
-         504
-        ],
-        [
-         1776,
-         166
-        ],
-        [
-         1800,
-         166
-        ],
-        [
-         1826,
-         166
-        ],
-        [
-         1852,
-         166
-        ],
-        [
-         1877,
-         166
-        ],
-        [
-         1908,
-         166
-        ],
-        [
-         1925,
-         166
-        ],
-        [
-         1948,
-         -81
-        ]
-       ]
-      }
-     ],
-     "opens_onto": null
-    },
-    "moscoviense_to_smythii_marginis": {
-     "cuts": [
-      {
-       "depth_m": 437.9,
-       "at": {
-        "today": [
-         34.97,
-         139.72
-        ],
-        "turned": [
-         36.55,
-         133.16
-        ]
-       },
-       "pass_above_the_common_level_m": 3886.7
-      },
-      {
-       "depth_m": 171.2,
-       "at": {
-        "today": [
-         35.09,
-         139.47
-        ],
-        "turned": [
-         36.64,
-         132.88
-        ]
-       },
-       "pass_above_the_common_level_m": 3620.0
-      },
-      {
-       "depth_m": 15.9,
-       "at": {
-        "today": [
-         35.09,
-         138.97
-        ],
-        "turned": [
-         36.58,
-         132.38
-        ]
-       },
-       "pass_above_the_common_level_m": 3464.6
-      },
-      {
-       "depth_m": 55.5,
-       "at": {
-        "today": [
-         35.22,
-         138.72
-        ],
-        "turned": [
-         36.68,
-         132.11
-        ]
-       },
-       "pass_above_the_common_level_m": 3504.3
-      },
-      {
-       "depth_m": 89.2,
-       "at": {
-        "today": [
-         34.22,
-         132.97
-        ],
-        "turned": [
-         35.02,
-         126.51
-        ]
-       },
-       "pass_above_the_common_level_m": 3117.1
-      },
-      {
-       "depth_m": 56.1,
-       "at": {
-        "today": [
-         31.16,
-         131.53
-        ],
-        "turned": [
-         31.82,
-         125.58
-        ]
-       },
-       "pass_above_the_common_level_m": 2682.9
-      }
-     ],
-     "segments": [
-      {
-       "starts": {
-        "today": [
-         35.22,
-         138.72
-        ],
-        "turned": [
-         36.68,
-         132.11
-        ]
-       },
-       "reaches": "the lake its next cut leaves from",
-       "ends_at": {
-        "today": [
-         36.09,
-         137.47
-        ],
-        "turned": [
-         37.4,
-         130.69
-        ]
-       },
-       "length_km": 53,
-       "surface_from_m": 3504,
-       "surface_to_m": 3028,
-       "steep_km": 10,
-       "steep_reaches": 5,
-       "largest_fall_between_cells_m": 141,
-       "lakes_passed": 5,
-       "discharge_m3s": [
-        26389,
-        26388
-       ],
-       "profile": [
-        [
-         0,
-         3504
-        ],
-        [
-         26,
-         3381
-        ],
-        [
-         50,
-         3169
-        ],
-        [
-         53,
-         3028
-        ]
-       ]
-      },
-      {
-       "starts": {
-        "today": [
-         34.22,
-         132.97
-        ],
-        "turned": [
-         35.02,
-         126.51
-        ]
-       },
-       "reaches": "the lake its next cut leaves from",
-       "ends_at": {
-        "today": [
-         33.34,
-         132.03
-        ],
-        "turned": [
-         34.05,
-         125.72
-        ]
-       },
-       "length_km": 40,
-       "surface_from_m": 3117,
-       "surface_to_m": 2627,
-       "steep_km": 10,
-       "steep_reaches": 2,
-       "largest_fall_between_cells_m": 187,
-       "lakes_passed": 2,
-       "discharge_m3s": [
-        21732,
-        21732
-       ],
-       "profile": [
-        [
-         0,
-         3117
-        ],
-        [
-         31,
-         2855
-        ],
-        [
-         40,
-         2627
-        ]
-       ]
-      },
-      {
-       "starts": {
-        "today": [
-         31.16,
-         131.53
-        ],
-        "turned": [
-         31.82,
-         125.58
-        ]
-       },
-       "reaches": "smythii_marginis",
-       "ends_at": {
-        "today": [
-         25.84,
-         103.03
-        ],
-        "turned": [
-         23.3,
-         98.33
-        ]
-       },
-       "length_km": 2402,
-       "surface_from_m": 2619,
-       "surface_to_m": 668,
-       "steep_km": 32,
-       "steep_reaches": 13,
-       "largest_fall_between_cells_m": 137,
-       "lakes_passed": 16,
-       "discharge_m3s": [
-        21732,
-        21826
-       ],
-       "profile": [
-        [
-         0,
-         2619
-        ],
-        [
-         26,
-         2269
-        ],
-        [
-         50,
-         2269
-        ],
-        [
-         77,
-         2269
-        ],
-        [
-         102,
-         2269
-        ],
-        [
-         129,
-         2269
-        ],
-        [
-         156,
-         2269
-        ],
-        [
-         180,
-         2269
-        ],
-        [
-         203,
-         2269
-        ],
-        [
-         231,
-         2269
-        ],
-        [
-         250,
-         2269
-        ],
-        [
-         277,
-         2269
-        ],
-        [
-         302,
-         2269
-        ],
-        [
-         326,
-         2269
-        ],
-        [
-         353,
-         2269
-        ],
-        [
-         388,
-         2269
-        ],
-        [
-         400,
-         2269
-        ],
-        [
-         431,
-         2269
-        ],
-        [
-         451,
-         2269
-        ],
-        [
-         490,
-         2269
-        ],
-        [
-         512,
-         2269
-        ],
-        [
-         529,
-         2269
-        ],
-        [
-         551,
-         2269
-        ],
-        [
-         578,
-         2269
-        ],
-        [
-         604,
-         2168
-        ],
-        [
-         629,
-         2168
-        ],
-        [
-         652,
-         2043
-        ],
-        [
-         686,
-         2043
-        ],
-        [
-         701,
-         2043
-        ],
-        [
-         738,
-         1636
-        ],
-        [
-         752,
-         1636
-        ],
-        [
-         776,
-         1636
-        ],
-        [
-         802,
-         1636
-        ],
-        [
-         843,
-         1636
-        ],
-        [
-         850,
-         1636
-        ],
-        [
-         877,
-         1636
-        ],
-        [
-         901,
-         1636
-        ],
-        [
-         926,
-         1636
-        ],
-        [
-         951,
-         1636
-        ],
-        [
-         979,
-         1636
-        ],
-        [
-         1006,
-         1636
-        ],
-        [
-         1026,
-         1636
-        ],
-        [
-         1059,
-         1636
-        ],
-        [
-         1076,
-         1636
-        ],
-        [
-         1102,
-         1636
-        ],
-        [
-         1126,
-         1636
-        ],
-        [
-         1151,
-         1636
-        ],
-        [
-         1188,
-         1636
-        ],
-        [
-         1200,
-         1636
-        ],
-        [
-         1233,
-         1636
-        ],
-        [
-         1251,
-         1636
-        ],
-        [
-         1276,
-         1616
-        ],
-        [
-         1307,
-         1616
-        ],
-        [
-         1327,
-         1616
-        ],
-        [
-         1350,
-         1616
-        ],
-        [
-         1376,
-         1616
-        ],
-        [
-         1403,
-         1569
-        ],
-        [
-         1437,
-         1569
-        ],
-        [
-         1451,
-         1569
-        ],
-        [
-         1482,
-         1569
-        ],
-        [
-         1501,
-         1540
-        ],
-        [
-         1539,
-         1540
-        ],
-        [
-         1554,
-         1540
-        ],
-        [
-         1576,
-         1540
-        ],
-        [
-         1607,
-         1540
-        ],
-        [
-         1631,
-         1540
-        ],
-        [
-         1652,
-         1540
-        ],
-        [
-         1676,
-         1540
-        ],
-        [
-         1701,
-         1540
-        ],
-        [
-         1726,
-         1540
-        ],
-        [
-         1750,
-         1540
-        ],
-        [
-         1783,
-         1540
-        ],
-        [
-         1802,
-         1540
-        ],
-        [
-         1830,
-         1540
-        ],
-        [
-         1852,
-         1540
-        ],
-        [
-         1875,
-         1540
-        ],
-        [
-         1902,
-         1540
-        ],
-        [
-         1952,
-         1540
-        ],
-        [
-         1976,
-         1540
-        ],
-        [
-         2003,
-         1540
-        ],
-        [
-         2027,
-         1540
-        ],
-        [
-         2058,
-         1540
-        ],
-        [
-         2078,
-         1540
-        ],
-        [
-         2105,
-         1540
-        ],
-        [
-         2127,
-         1540
-        ],
-        [
-         2152,
-         1540
-        ],
-        [
-         2177,
-         1540
-        ],
-        [
-         2202,
-         1540
-        ],
-        [
-         2231,
-         1513
-        ],
-        [
-         2251,
-         1308
-        ],
-        [
-         2276,
-         1260
-        ],
-        [
-         2303,
-         1260
-        ],
-        [
-         2326,
-         1260
-        ],
-        [
-         2352,
-         1150
-        ],
-        [
-         2376,
-         1092
-        ],
-        [
-         2400,
-         801
-        ],
-        [
-         2402,
-         668
-        ]
-       ]
-      }
-     ],
-     "opens_onto": null
-    }
-   },
-   "weirs_set_in_routings": 3,
-   "weir_history": [
-    {
-     "shares_m3s": {
-      "south_pole_aitken": 20117.1,
-      "humboldtianum": 4356.2,
-      "smythii_marginis": 22033.1
-     },
-     "lacking_m3s": {
-      "south_pole_aitken": 0.0,
-      "humboldtianum": 300.9
-     }
-    },
-    {
-     "shares_m3s": {
-      "south_pole_aitken": 20117.1,
-      "humboldtianum": 4657.1,
-      "smythii_marginis": 21732.2
-     },
-     "lacking_m3s": {
-      "south_pole_aitken": 0.0,
-      "humboldtianum": 0.0
-     }
-    },
-    {
-     "shares_m3s": {
-      "south_pole_aitken": 20117.1,
-      "humboldtianum": 4657.1,
-      "smythii_marginis": 21732.2
-     },
-     "lacking_m3s": {
-      "south_pole_aitken": 0.0,
-      "humboldtianum": 0.0
-     }
-    }
-   ],
    "evaporation": 1.0,
-   "design_state_without_the_works": {
-    "moscoviense": {
-     "level_m": 3448.77,
-     "area_km2": 844220,
-     "loss_m3s": 3036,
-     "own_rivers_m3s": 49543,
-     "supply_m3s": 49543,
-     "balance_m3s": 46506
-    },
-    "orientale": {
-     "level_m": 2341.33,
-     "area_km2": 297889,
-     "loss_m3s": 2065,
-     "own_rivers_m3s": 18669,
-     "supply_m3s": 18669,
-     "balance_m3s": 16605
-    },
-    "smythii_marginis": {
-     "level_m": 719.95,
-     "area_km2": 599348,
-     "loss_m3s": 615,
-     "own_rivers_m3s": 21627,
-     "supply_m3s": 21627,
-     "balance_m3s": 21012
-    },
-    "near_side": {
-     "level_m": 0.0,
-     "area_km2": 5082098,
-     "loss_m3s": 82309,
-     "own_rivers_m3s": 48776,
-     "supply_m3s": 86364,
-     "balance_m3s": 4055
-    },
-    "south_pole_aitken": {
-     "level_m": 0.0,
-     "area_km2": 2410253,
-     "loss_m3s": 48896,
-     "own_rivers_m3s": 28779,
-     "supply_m3s": 75285,
-     "balance_m3s": 26389
-    },
-    "humboldtianum": {
-     "level_m": 0.0,
-     "area_km2": 279470,
-     "loss_m3s": 5987,
-     "own_rivers_m3s": 1631,
-     "supply_m3s": 1631,
-     "balance_m3s": -4356
-    }
-   },
-   "lakes_the_works_fill": {
-    "km2": 12998,
-    "bodies": 19,
-    "km2_by_turned_latitude": {
-     "30-45": 2046,
-     "45-60": 10952
-    }
-   }
-  },
-  "closed_budget": {
-   "moscoviense_surplus_m3s": 42209,
+   "moscoviense_surplus_m3s": 51724,
    "released_m3s": {
-    "south_pole_aitken": 26599,
-    "humboldtianum": 5604,
-    "smythii_marginis": 10007
+    "south_pole_aitken": 23084,
+    "humboldtianum": 7343,
+    "smythii_marginis": 21296
    },
    "arrived_m3s": {
-    "south_pole_aitken": 26599,
-    "humboldtianum": 5237,
-    "smythii_marginis": 9988
+    "south_pole_aitken": 23084,
+    "humboldtianum": 5944,
+    "smythii_marginis": 21139
    },
    "full_seas_pass_on_m3s": {
-    "orientale": 14894,
-    "smythii_marginis": 27985
+    "orientale": 17412,
+    "smythii_marginis": 38690
+   },
+   "held_seas_left_short_m3s": {},
+   "branch_flows_m3s": {
+    "held_branch": [
+     7343.2
+    ],
+    "rest_branch": [
+     21296.4,
+     21296.4,
+     21296.4,
+     21296.4,
+     21296.4
+    ]
    },
    "seas": {
     "moscoviense": {
      "level_m": 3448.77,
      "area_km2": 844220,
-     "loss_m3s": 5195,
-     "own_rivers_m3s": 47404,
-     "supply_m3s": 47404,
-     "balance_m3s": 42209
+     "loss_m3s": 2347,
+     "own_rivers_m3s": 54071,
+     "supply_m3s": 54071,
+     "balance_m3s": 51724
     },
     "orientale": {
      "level_m": 2341.33,
      "area_km2": 297889,
-     "loss_m3s": 2783,
-     "own_rivers_m3s": 17677,
-     "supply_m3s": 17677,
-     "balance_m3s": 14894
+     "loss_m3s": 1788,
+     "own_rivers_m3s": 19200,
+     "supply_m3s": 19200,
+     "balance_m3s": 17412
     },
     "smythii_marginis": {
      "level_m": 719.95,
      "area_km2": 599348,
-     "loss_m3s": 2124,
-     "own_rivers_m3s": 20122,
-     "supply_m3s": 30110,
-     "balance_m3s": 27985
+     "loss_m3s": -39,
+     "own_rivers_m3s": 17512,
+     "supply_m3s": 38651,
+     "balance_m3s": 38690
     },
     "near_side": {
      "level_m": 0.0,
      "area_km2": 5082098,
-     "loss_m3s": 94559,
-     "own_rivers_m3s": 44133,
-     "supply_m3s": 86970,
-     "balance_m3s": -7589,
+     "loss_m3s": 80546,
+     "own_rivers_m3s": 39905,
+     "supply_m3s": 95371,
+     "balance_m3s": 14825,
      "would_settle": {
       "reaches_its_rim": false,
-      "level_m": -68.7,
-      "area_km2": 3830839,
-      "area_at_the_common_level_km2": 5082098
+      "level_m": 245.4,
+      "area_km2": 6234135,
+      "area_at_the_common_level_km2": 5082098,
+      "rim_above_common_m": 720.0
+     },
+     "parts_rivers_m3s": {
+      "main": 89187,
+      "south": 6184
      }
     },
     "south_pole_aitken": {
      "level_m": 0.0,
      "area_km2": 2410253,
-     "loss_m3s": 53683,
-     "own_rivers_m3s": 27084,
-     "supply_m3s": 53683,
+     "loss_m3s": 48884,
+     "own_rivers_m3s": 25800,
+     "supply_m3s": 48884,
      "balance_m3s": 0
     },
     "humboldtianum": {
      "level_m": 0.0,
      "area_km2": 279470,
-     "loss_m3s": 6512,
-     "own_rivers_m3s": 1275,
-     "supply_m3s": 6512,
+     "loss_m3s": 5944,
+     "own_rivers_m3s": 0,
+     "supply_m3s": 5944,
      "balance_m3s": 0
     }
    },
-   "rivers": {
-    "moscoviense_over_its_natural_pass": {
-     "leaves": {
-      "today": [
-       -10.72,
-       175.09
-      ],
-      "turned": [
-       -5.45,
-       173.84
-      ]
-     },
-     "length_km": 542,
-     "surface_from_m": 3449,
-     "surface_to_m": -24,
-     "steep_km": 44,
-     "steep_reaches": 8,
-     "largest_fall_between_cells_m": 666,
-     "lakes_passed": 7,
-     "discharge_m3s": [
-      26599,
-      30657
-     ],
-     "profile": [
-      [
-       0,
-       3449
-      ],
-      [
-       28,
-       2742
-      ],
-      [
-       57,
-       2675
-      ],
-      [
-       78,
-       2675
-      ],
-      [
-       105,
-       2675
-      ],
-      [
-       133,
-       2675
-      ],
-      [
-       162,
-       2675
-      ],
-      [
-       176,
-       2603
-      ],
-      [
-       210,
-       1702
-      ],
-      [
-       226,
-       1702
-      ],
-      [
-       260,
-       1702
-      ],
-      [
-       294,
-       1702
-      ],
-      [
-       302,
-       1702
-      ],
-      [
-       327,
-       1702
-      ],
-      [
-       352,
-       1625
-      ],
-      [
-       376,
-       608
-      ],
-      [
-       401,
-       608
-      ],
-      [
-       428,
-       608
-      ],
-      [
-       451,
-       608
-      ],
-      [
-       477,
-       608
-      ],
-      [
-       500,
-       529
-      ],
-      [
-       526,
-       413
-      ],
-      [
-       542,
-       -24
-      ]
-     ]
-    },
-    "orientale_over_its_natural_pass": {
-     "leaves": {
-      "today": [
-       -7.16,
-       -87.97
-      ],
-      "turned": [
-       -3.59,
-       -90.35
-      ]
-     },
-     "length_km": 1806,
-     "surface_from_m": 2341,
-     "surface_to_m": -15,
-     "steep_km": 32,
-     "steep_reaches": 10,
-     "largest_fall_between_cells_m": 306,
-     "lakes_passed": 18,
-     "discharge_m3s": [
-      14894,
-      15829
-     ],
-     "profile": [
-      [
-       0,
-       2341
-      ],
-      [
-       25,
-       2305
-      ],
-      [
-       54,
-       2305
-      ],
-      [
-       80,
-       2305
-      ],
-      [
-       100,
-       2305
-      ],
-      [
-       126,
-       2305
-      ],
-      [
-       151,
-       2305
-      ],
-      [
-       175,
-       2305
-      ],
-      [
-       202,
-       2305
-      ],
-      [
-       226,
-       2305
-      ],
-      [
-       255,
-       2289
-      ],
-      [
-       289,
-       2179
-      ],
-      [
-       304,
-       2179
-      ],
-      [
-       327,
-       2126
-      ],
-      [
-       360,
-       2126
-      ],
-      [
-       388,
-       2126
-      ],
-      [
-       404,
-       2126
-      ],
-      [
-       427,
-       2126
-      ],
-      [
-       451,
-       2126
-      ],
-      [
-       479,
-       2126
-      ],
-      [
-       512,
-       2126
-      ],
-      [
-       527,
-       2126
-      ],
-      [
-       551,
-       2126
-      ],
-      [
-       585,
-       2126
-      ],
-      [
-       600,
-       1951
-      ],
-      [
-       627,
-       1951
-      ],
-      [
-       651,
-       1951
-      ],
-      [
-       678,
-       1951
-      ],
-      [
-       706,
-       1951
-      ],
-      [
-       726,
-       1951
-      ],
-      [
-       750,
-       1951
-      ],
-      [
-       776,
-       1951
-      ],
-      [
-       800,
-       1951
-      ],
-      [
-       836,
-       1871
-      ],
-      [
-       857,
-       1743
-      ],
-      [
-       880,
-       1743
-      ],
-      [
-       900,
-       1558
-      ],
-      [
-       927,
-       1504
-      ],
-      [
-       951,
-       1504
-      ],
-      [
-       975,
-       1414
-      ],
-      [
-       1003,
-       1414
-      ],
-      [
-       1026,
-       1414
-      ],
-      [
-       1051,
-       1414
-      ],
-      [
-       1076,
-       1414
-      ],
-      [
-       1104,
-       1140
-      ],
-      [
-       1125,
-       1072
-      ],
-      [
-       1152,
-       937
-      ],
-      [
-       1177,
-       761
-      ],
-      [
-       1205,
-       666
-      ],
-      [
-       1225,
-       666
-      ],
-      [
-       1252,
-       666
-      ],
-      [
-       1277,
-       666
-      ],
-      [
-       1302,
-       666
-      ],
-      [
-       1327,
-       666
-      ],
-      [
-       1351,
-       666
-      ],
-      [
-       1380,
-       666
-      ],
-      [
-       1401,
-       666
-      ],
-      [
-       1429,
-       666
-      ],
-      [
-       1451,
-       666
-      ],
-      [
-       1475,
-       617
-      ],
-      [
-       1502,
-       617
-      ],
-      [
-       1532,
-       312
-      ],
-      [
-       1552,
-       312
-      ],
-      [
-       1591,
-       312
-      ],
-      [
-       1608,
-       308
-      ],
-      [
-       1626,
-       266
-      ],
-      [
-       1651,
-       266
-      ],
-      [
-       1675,
-       264
-      ],
-      [
-       1701,
-       71
-      ],
-      [
-       1736,
-       56
-      ],
-      [
-       1751,
-       56
-      ],
-      [
-       1784,
-       56
-      ],
-      [
-       1801,
-       27
-      ],
-      [
-       1806,
-       -15
-      ]
-     ]
-    },
-    "smythii_marginis_over_its_natural_pass": {
-     "leaves": {
-      "today": [
-       24.78,
-       82.66
-      ],
-      "turned": [
-       20.26,
-       78.74
-      ]
-     },
-     "length_km": 2419,
-     "surface_from_m": 719,
-     "surface_to_m": -3,
-     "steep_km": 11,
-     "steep_reaches": 4,
-     "largest_fall_between_cells_m": 116,
-     "lakes_passed": 9,
-     "discharge_m3s": [
-      27986,
-      29075
-     ],
-     "profile": [
-      [
-       0,
-       719
-      ],
-      [
-       29,
-       677
-      ],
-      [
-       50,
-       677
-      ],
-      [
-       76,
-       677
-      ],
-      [
-       103,
-       677
-      ],
-      [
-       126,
-       677
-      ],
-      [
-       159,
-       677
-      ],
-      [
-       175,
-       677
-      ],
-      [
-       205,
-       677
-      ],
-      [
-       229,
-       677
-      ],
-      [
-       252,
-       677
-      ],
-      [
-       276,
-       677
-      ],
-      [
-       300,
-       677
-      ],
-      [
-       325,
-       677
-      ],
-      [
-       352,
-       677
-      ],
-      [
-       376,
-       677
-      ],
-      [
-       404,
-       677
-      ],
-      [
-       426,
-       677
-      ],
-      [
-       451,
-       677
-      ],
-      [
-       485,
-       677
-      ],
-      [
-       505,
-       677
-      ],
-      [
-       527,
-       677
-      ],
-      [
-       551,
-       677
-      ],
-      [
-       577,
-       677
-      ],
-      [
-       602,
-       677
-      ],
-      [
-       626,
-       677
-      ],
-      [
-       651,
-       677
-      ],
-      [
-       676,
-       677
-      ],
-      [
-       706,
-       677
-      ],
-      [
-       726,
-       677
-      ],
-      [
-       750,
-       677
-      ],
-      [
-       779,
-       677
-      ],
-      [
-       804,
-       646
-      ],
-      [
-       826,
-       606
-      ],
-      [
-       854,
-       502
-      ],
-      [
-       878,
-       502
-      ],
-      [
-       905,
-       502
-      ],
-      [
-       926,
-       502
-      ],
-      [
-       954,
-       502
-      ],
-      [
-       983,
-       502
-      ],
-      [
-       1001,
-       502
-      ],
-      [
-       1026,
-       502
-      ],
-      [
-       1057,
-       502
-      ],
-      [
-       1075,
-       502
-      ],
-      [
-       1105,
-       502
-      ],
-      [
-       1129,
-       502
-      ],
-      [
-       1154,
-       502
-      ],
-      [
-       1177,
-       502
-      ],
-      [
-       1202,
-       502
-      ],
-      [
-       1235,
-       502
-      ],
-      [
-       1250,
-       502
-      ],
-      [
-       1276,
-       502
-      ],
-      [
-       1321,
-       502
-      ],
-      [
-       1325,
-       502
-      ],
-      [
-       1352,
-       502
-      ],
-      [
-       1383,
-       502
-      ],
-      [
-       1401,
-       502
-      ],
-      [
-       1438,
-       502
-      ],
-      [
-       1452,
-       502
-      ],
-      [
-       1476,
-       502
-      ],
-      [
-       1502,
-       502
-      ],
-      [
-       1526,
-       192
-      ],
-      [
-       1552,
-       192
-      ],
-      [
-       1577,
-       192
-      ],
-      [
-       1604,
-       192
-      ],
-      [
-       1635,
-       192
-      ],
-      [
-       1651,
-       192
-      ],
-      [
-       1678,
-       192
-      ],
-      [
-       1700,
-       192
-      ],
-      [
-       1727,
-       192
-      ],
-      [
-       1751,
-       192
-      ],
-      [
-       1777,
-       192
-      ],
-      [
-       1801,
-       192
-      ],
-      [
-       1825,
-       192
-      ],
-      [
-       1851,
-       192
-      ],
-      [
-       1875,
-       192
-      ],
-      [
-       1927,
-       192
-      ],
-      [
-       1951,
-       192
-      ],
-      [
-       1984,
-       192
-      ],
-      [
-       2001,
-       11
-      ],
-      [
-       2027,
-       6
-      ],
-      [
-       2051,
-       6
-      ],
-      [
-       2075,
-       6
-      ],
-      [
-       2101,
-       6
-      ],
-      [
-       2132,
-       6
-      ],
-      [
-       2157,
-       6
-      ],
-      [
-       2175,
-       6
-      ],
-      [
-       2201,
-       6
-      ],
-      [
-       2243,
-       6
-      ],
-      [
-       2256,
-       6
-      ],
-      [
-       2276,
-       6
-      ],
-      [
-       2302,
-       6
-      ],
-      [
-       2327,
-       6
-      ],
-      [
-       2351,
-       6
-      ],
-      [
-       2375,
-       6
-      ],
-      [
-       2414,
-       6
-      ],
-      [
-       2419,
-       -3
-      ]
-     ]
-    },
-    "moscoviense_to_humboldtianum": {
-     "cuts": [
-      {
-       "depth_m": 437.9,
-       "at": {
-        "today": [
-         34.97,
-         139.72
-        ],
-        "turned": [
-         36.55,
-         133.16
-        ]
-       },
-       "pass_above_the_common_level_m": 3886.7
-      },
-      {
-       "depth_m": 171.2,
-       "at": {
-        "today": [
-         35.09,
-         139.47
-        ],
-        "turned": [
-         36.64,
-         132.88
-        ]
-       },
-       "pass_above_the_common_level_m": 3620.0
-      },
-      {
-       "depth_m": 15.9,
-       "at": {
-        "today": [
-         35.09,
-         138.97
-        ],
-        "turned": [
-         36.58,
-         132.38
-        ]
-       },
-       "pass_above_the_common_level_m": 3464.6
-      },
-      {
-       "depth_m": 55.5,
-       "at": {
-        "today": [
-         35.22,
-         138.72
-        ],
-        "turned": [
-         36.68,
-         132.11
-        ]
-       },
-       "pass_above_the_common_level_m": 3504.3
-      }
-     ],
-     "segments": [
-      {
-       "starts": {
-        "today": [
-         35.22,
-         138.72
-        ],
-        "turned": [
-         36.68,
-         132.11
-        ]
-       },
-       "reaches": "humboldtianum",
-       "ends_at": {
-        "today": [
-         57.16,
-         111.72
-        ],
-        "turned": [
-         55.19,
-         100.25
-        ]
-       },
-       "length_km": 1948,
-       "surface_from_m": 3504,
-       "surface_to_m": -81,
-       "steep_km": 60,
-       "steep_reaches": 21,
-       "largest_fall_between_cells_m": 248,
-       "lakes_passed": 21,
-       "discharge_m3s": [
-        15610,
-        5237
-       ],
-       "profile": [
-        [
-         0,
-         3504
-        ],
-        [
-         26,
-         3381
-        ],
-        [
-         50,
-         3169
-        ],
-        [
-         85,
-         3028
-        ],
-        [
-         109,
-         3028
-        ],
-        [
-         127,
-         3028
-        ],
-        [
-         155,
-         3028
-        ],
-        [
-         179,
-         2755
-        ],
-        [
-         200,
-         2470
-        ],
-        [
-         226,
-         2470
-        ],
-        [
-         250,
-         2470
-        ],
-        [
-         276,
-         2470
-        ],
-        [
-         300,
-         2470
-        ],
-        [
-         328,
-         2470
-        ],
-        [
-         351,
-         1604
-        ],
-        [
-         377,
-         1604
-        ],
-        [
-         408,
-         1604
-        ],
-        [
-         428,
-         1604
-        ],
-        [
-         450,
-         1604
-        ],
-        [
-         476,
-         1603
-        ],
-        [
-         512,
-         1514
-        ],
-        [
-         531,
-         1514
-        ],
-        [
-         552,
-         1514
-        ],
-        [
-         588,
-         1514
-        ],
-        [
-         600,
-         1484
-        ],
-        [
-         626,
-         1484
-        ],
-        [
-         651,
-         1484
-        ],
-        [
-         676,
-         1342
-        ],
-        [
-         702,
-         1342
-        ],
-        [
-         726,
-         1342
-        ],
-        [
-         750,
-         1342
-        ],
-        [
-         787,
-         1342
-        ],
-        [
-         802,
-         1342
-        ],
-        [
-         826,
-         1342
-        ],
-        [
-         853,
-         1342
-        ],
-        [
-         878,
-         1342
-        ],
-        [
-         901,
-         1342
-        ],
-        [
-         926,
-         1342
-        ],
-        [
-         952,
-         1342
-        ],
-        [
-         977,
-         1294
-        ],
-        [
-         1002,
-         1294
-        ],
-        [
-         1025,
-         1294
-        ],
-        [
-         1051,
-         1294
-        ],
-        [
-         1084,
-         1294
-        ],
-        [
-         1101,
-         1294
-        ],
-        [
-         1128,
-         1294
-        ],
-        [
-         1150,
-         1294
-        ],
-        [
-         1187,
-         1294
-        ],
-        [
-         1210,
-         1294
-        ],
-        [
-         1226,
-         1294
-        ],
-        [
-         1251,
-         1294
-        ],
-        [
-         1283,
-         1294
-        ],
-        [
-         1301,
-         1294
-        ],
-        [
-         1328,
-         1047
-        ],
-        [
-         1352,
-         985
-        ],
-        [
-         1379,
-         985
-        ],
-        [
-         1402,
-         726
-        ],
-        [
-         1426,
-         726
-        ],
-        [
-         1450,
-         726
-        ],
-        [
-         1475,
-         672
-        ],
-        [
-         1509,
-         561
-        ],
-        [
-         1527,
-         504
-        ],
-        [
-         1554,
-         504
-        ],
-        [
-         1578,
-         504
-        ],
-        [
-         1603,
-         504
-        ],
-        [
-         1625,
-         504
-        ],
-        [
-         1657,
-         504
-        ],
-        [
-         1676,
-         504
-        ],
-        [
-         1711,
-         504
-        ],
-        [
-         1737,
-         504
-        ],
-        [
-         1750,
-         504
-        ],
-        [
-         1776,
-         166
-        ],
-        [
-         1800,
-         166
-        ],
-        [
-         1826,
-         166
-        ],
-        [
-         1852,
-         166
-        ],
-        [
-         1877,
-         166
-        ],
-        [
-         1908,
-         166
-        ],
-        [
-         1925,
-         166
-        ],
-        [
-         1948,
-         -81
-        ]
-       ]
-      }
-     ],
-     "opens_onto": null
-    },
-    "moscoviense_to_smythii_marginis": {
-     "cuts": [
-      {
-       "depth_m": 437.9,
-       "at": {
-        "today": [
-         34.97,
-         139.72
-        ],
-        "turned": [
-         36.55,
-         133.16
-        ]
-       },
-       "pass_above_the_common_level_m": 3886.7
-      },
-      {
-       "depth_m": 171.2,
-       "at": {
-        "today": [
-         35.09,
-         139.47
-        ],
-        "turned": [
-         36.64,
-         132.88
-        ]
-       },
-       "pass_above_the_common_level_m": 3620.0
-      },
-      {
-       "depth_m": 15.9,
-       "at": {
-        "today": [
-         35.09,
-         138.97
-        ],
-        "turned": [
-         36.58,
-         132.38
-        ]
-       },
-       "pass_above_the_common_level_m": 3464.6
-      },
-      {
-       "depth_m": 55.5,
-       "at": {
-        "today": [
-         35.22,
-         138.72
-        ],
-        "turned": [
-         36.68,
-         132.11
-        ]
-       },
-       "pass_above_the_common_level_m": 3504.3
-      },
-      {
-       "depth_m": 89.2,
-       "at": {
-        "today": [
-         34.22,
-         132.97
-        ],
-        "turned": [
-         35.02,
-         126.51
-        ]
-       },
-       "pass_above_the_common_level_m": 3117.1
-      },
-      {
-       "depth_m": 56.1,
-       "at": {
-        "today": [
-         31.16,
-         131.53
-        ],
-        "turned": [
-         31.82,
-         125.58
-        ]
-       },
-       "pass_above_the_common_level_m": 2682.9
-      }
-     ],
-     "segments": [
-      {
-       "starts": {
-        "today": [
-         35.22,
-         138.72
-        ],
-        "turned": [
-         36.68,
-         132.11
-        ]
-       },
-       "reaches": "the lake its next cut leaves from",
-       "ends_at": {
-        "today": [
-         36.09,
-         137.47
-        ],
-        "turned": [
-         37.4,
-         130.69
-        ]
-       },
-       "length_km": 53,
-       "surface_from_m": 3504,
-       "surface_to_m": 3028,
-       "steep_km": 10,
-       "steep_reaches": 5,
-       "largest_fall_between_cells_m": 141,
-       "lakes_passed": 5,
-       "discharge_m3s": [
-        15610,
-        15608
-       ],
-       "profile": [
-        [
-         0,
-         3504
-        ],
-        [
-         26,
-         3381
-        ],
-        [
-         50,
-         3169
-        ],
-        [
-         53,
-         3028
-        ]
-       ]
-      },
-      {
-       "starts": {
-        "today": [
-         34.22,
-         132.97
-        ],
-        "turned": [
-         35.02,
-         126.51
-        ]
-       },
-       "reaches": "the lake its next cut leaves from",
-       "ends_at": {
-        "today": [
-         33.34,
-         132.03
-        ],
-        "turned": [
-         34.05,
-         125.72
-        ]
-       },
-       "length_km": 40,
-       "surface_from_m": 3117,
-       "surface_to_m": 2627,
-       "steep_km": 10,
-       "steep_reaches": 2,
-       "largest_fall_between_cells_m": 187,
-       "lakes_passed": 2,
-       "discharge_m3s": [
-        10007,
-        10006
-       ],
-       "profile": [
-        [
-         0,
-         3117
-        ],
-        [
-         31,
-         2855
-        ],
-        [
-         40,
-         2627
-        ]
-       ]
-      },
-      {
-       "starts": {
-        "today": [
-         31.16,
-         131.53
-        ],
-        "turned": [
-         31.82,
-         125.58
-        ]
-       },
-       "reaches": "smythii_marginis",
-       "ends_at": {
-        "today": [
-         25.84,
-         103.03
-        ],
-        "turned": [
-         23.3,
-         98.33
-        ]
-       },
-       "length_km": 2402,
-       "surface_from_m": 2619,
-       "surface_to_m": 668,
-       "steep_km": 32,
-       "steep_reaches": 13,
-       "largest_fall_between_cells_m": 137,
-       "lakes_passed": 16,
-       "discharge_m3s": [
-        10007,
-        9991
-       ],
-       "profile": [
-        [
-         0,
-         2619
-        ],
-        [
-         26,
-         2269
-        ],
-        [
-         50,
-         2269
-        ],
-        [
-         77,
-         2269
-        ],
-        [
-         102,
-         2269
-        ],
-        [
-         129,
-         2269
-        ],
-        [
-         156,
-         2269
-        ],
-        [
-         180,
-         2269
-        ],
-        [
-         203,
-         2269
-        ],
-        [
-         231,
-         2269
-        ],
-        [
-         250,
-         2269
-        ],
-        [
-         277,
-         2269
-        ],
-        [
-         302,
-         2269
-        ],
-        [
-         326,
-         2269
-        ],
-        [
-         353,
-         2269
-        ],
-        [
-         388,
-         2269
-        ],
-        [
-         400,
-         2269
-        ],
-        [
-         431,
-         2269
-        ],
-        [
-         451,
-         2269
-        ],
-        [
-         490,
-         2269
-        ],
-        [
-         512,
-         2269
-        ],
-        [
-         529,
-         2269
-        ],
-        [
-         551,
-         2269
-        ],
-        [
-         578,
-         2269
-        ],
-        [
-         604,
-         2168
-        ],
-        [
-         629,
-         2168
-        ],
-        [
-         652,
-         2043
-        ],
-        [
-         686,
-         2043
-        ],
-        [
-         701,
-         2043
-        ],
-        [
-         738,
-         1636
-        ],
-        [
-         752,
-         1636
-        ],
-        [
-         776,
-         1636
-        ],
-        [
-         802,
-         1636
-        ],
-        [
-         843,
-         1636
-        ],
-        [
-         850,
-         1636
-        ],
-        [
-         877,
-         1636
-        ],
-        [
-         901,
-         1636
-        ],
-        [
-         926,
-         1636
-        ],
-        [
-         951,
-         1636
-        ],
-        [
-         979,
-         1636
-        ],
-        [
-         1006,
-         1636
-        ],
-        [
-         1026,
-         1636
-        ],
-        [
-         1059,
-         1636
-        ],
-        [
-         1076,
-         1636
-        ],
-        [
-         1102,
-         1636
-        ],
-        [
-         1126,
-         1636
-        ],
-        [
-         1151,
-         1636
-        ],
-        [
-         1188,
-         1636
-        ],
-        [
-         1200,
-         1636
-        ],
-        [
-         1233,
-         1636
-        ],
-        [
-         1251,
-         1636
-        ],
-        [
-         1276,
-         1616
-        ],
-        [
-         1307,
-         1616
-        ],
-        [
-         1327,
-         1616
-        ],
-        [
-         1350,
-         1616
-        ],
-        [
-         1376,
-         1616
-        ],
-        [
-         1403,
-         1569
-        ],
-        [
-         1437,
-         1569
-        ],
-        [
-         1451,
-         1569
-        ],
-        [
-         1482,
-         1569
-        ],
-        [
-         1501,
-         1540
-        ],
-        [
-         1539,
-         1540
-        ],
-        [
-         1554,
-         1540
-        ],
-        [
-         1576,
-         1540
-        ],
-        [
-         1607,
-         1540
-        ],
-        [
-         1631,
-         1540
-        ],
-        [
-         1652,
-         1540
-        ],
-        [
-         1676,
-         1540
-        ],
-        [
-         1701,
-         1540
-        ],
-        [
-         1726,
-         1540
-        ],
-        [
-         1750,
-         1540
-        ],
-        [
-         1783,
-         1540
-        ],
-        [
-         1802,
-         1540
-        ],
-        [
-         1830,
-         1540
-        ],
-        [
-         1852,
-         1540
-        ],
-        [
-         1875,
-         1540
-        ],
-        [
-         1902,
-         1540
-        ],
-        [
-         1952,
-         1540
-        ],
-        [
-         1976,
-         1540
-        ],
-        [
-         2003,
-         1540
-        ],
-        [
-         2027,
-         1540
-        ],
-        [
-         2058,
-         1540
-        ],
-        [
-         2078,
-         1540
-        ],
-        [
-         2105,
-         1540
-        ],
-        [
-         2127,
-         1540
-        ],
-        [
-         2152,
-         1540
-        ],
-        [
-         2177,
-         1540
-        ],
-        [
-         2202,
-         1540
-        ],
-        [
-         2231,
-         1513
-        ],
-        [
-         2251,
-         1308
-        ],
-        [
-         2276,
-         1260
-        ],
-        [
-         2303,
-         1260
-        ],
-        [
-         2326,
-         1260
-        ],
-        [
-         2352,
-         1150
-        ],
-        [
-         2376,
-         1092
-        ],
-        [
-         2400,
-         801
-        ],
-        [
-         2402,
-         668
-        ]
-       ]
-      }
-     ],
-     "opens_onto": null
-    }
+   "lakes": {
+    "km2": 6751689,
+    "share_of_moon": 0.17799,
+    "passing_nothing_on_km2": 662985
    },
    "weirs_set_in_routings": 3,
    "weir_history": [
     {
      "shares_m3s": {
-      "south_pole_aitken": 26599.0,
-      "humboldtianum": 5237.1,
-      "smythii_marginis": 10373.0
+      "south_pole_aitken": 23084.4,
+      "humboldtianum": 5944.3,
+      "smythii_marginis": 22695.3
      },
      "lacking_m3s": {
       "south_pole_aitken": 0.0,
-      "humboldtianum": 366.5
-     }
+      "humboldtianum": 1398.9
+     },
+     "unmet_m3s": {}
     },
     {
      "shares_m3s": {
-      "south_pole_aitken": 26599.0,
-      "humboldtianum": 5603.6,
-      "smythii_marginis": 10006.5
+      "south_pole_aitken": 23084.4,
+      "humboldtianum": 7343.2,
+      "smythii_marginis": 21296.4
      },
      "lacking_m3s": {
       "south_pole_aitken": 0.0,
       "humboldtianum": 0.0
-     }
+     },
+     "unmet_m3s": {}
     },
     {
      "shares_m3s": {
-      "south_pole_aitken": 26599.0,
-      "humboldtianum": 5603.6,
-      "smythii_marginis": 10006.5
+      "south_pole_aitken": 23084.4,
+      "humboldtianum": 7343.2,
+      "smythii_marginis": 21296.4
      },
      "lacking_m3s": {
-      "south_pole_aitken": -0.0,
-      "humboldtianum": 0.0
-     }
+      "south_pole_aitken": 0.0,
+      "humboldtianum": -0.0
+     },
+     "unmet_m3s": {}
     }
-   ],
-   "evaporation": 1.077,
-   "design_state_without_the_works": {
+   ]
+  },
+  "closed_budget": {
+   "evaporation": 1.043,
+   "moscoviense_surplus_m3s": 49205,
+   "released_m3s": {
+    "south_pole_aitken": 26816,
+    "humboldtianum": 7736,
+    "smythii_marginis": 14653
+   },
+   "arrived_m3s": {
+    "south_pole_aitken": 26816,
+    "humboldtianum": 6237,
+    "smythii_marginis": 14310
+   },
+   "full_seas_pass_on_m3s": {
+    "orientale": 16367,
+    "smythii_marginis": 30094
+   },
+   "held_seas_left_short_m3s": {},
+   "branch_flows_m3s": {
+    "held_branch": [
+     7735.9
+    ],
+    "rest_branch": [
+     14653.1,
+     14653.1,
+     14653.1,
+     14628.4,
+     14628.4
+    ]
+   },
+   "seas": {
     "moscoviense": {
      "level_m": 3448.77,
      "area_km2": 844220,
-     "loss_m3s": 5195,
-     "own_rivers_m3s": 47404,
-     "supply_m3s": 47404,
-     "balance_m3s": 42209
+     "loss_m3s": 3554,
+     "own_rivers_m3s": 52759,
+     "supply_m3s": 52759,
+     "balance_m3s": 49205
     },
     "orientale": {
      "level_m": 2341.33,
      "area_km2": 297889,
-     "loss_m3s": 2783,
-     "own_rivers_m3s": 17677,
-     "supply_m3s": 17677,
-     "balance_m3s": 14894
+     "loss_m3s": 2192,
+     "own_rivers_m3s": 18559,
+     "supply_m3s": 18559,
+     "balance_m3s": 16367
     },
     "smythii_marginis": {
      "level_m": 719.95,
      "area_km2": 599348,
-     "loss_m3s": 2124,
-     "own_rivers_m3s": 20122,
-     "supply_m3s": 20122,
-     "balance_m3s": 17997
+     "loss_m3s": 805,
+     "own_rivers_m3s": 16589,
+     "supply_m3s": 30899,
+     "balance_m3s": 30094
     },
     "near_side": {
      "level_m": 0.0,
      "area_km2": 5082098,
-     "loss_m3s": 94559,
-     "own_rivers_m3s": 44133,
-     "supply_m3s": 76982,
-     "balance_m3s": -17577
+     "loss_m3s": 87400,
+     "own_rivers_m3s": 37758,
+     "supply_m3s": 83510,
+     "balance_m3s": -3889,
+     "would_settle": {
+      "reaches_its_rim": false,
+      "level_m": -67.1,
+      "area_km2": 4807481,
+      "area_at_the_common_level_km2": 5082098,
+      "rim_above_common_m": 720.0
+     },
+     "parts_rivers_m3s": {
+      "main": 77585,
+      "south": 5925
+     }
     },
     "south_pole_aitken": {
      "level_m": 0.0,
      "area_km2": 2410253,
-     "loss_m3s": 53683,
-     "own_rivers_m3s": 27084,
-     "supply_m3s": 69293,
-     "balance_m3s": 15610
+     "loss_m3s": 51565,
+     "own_rivers_m3s": 24749,
+     "supply_m3s": 51565,
+     "balance_m3s": 0
     },
     "humboldtianum": {
      "level_m": 0.0,
      "area_km2": 279470,
-     "loss_m3s": 6512,
-     "own_rivers_m3s": 1275,
-     "supply_m3s": 1275,
-     "balance_m3s": -5237
+     "loss_m3s": 6238,
+     "own_rivers_m3s": 0,
+     "supply_m3s": 6238,
+     "balance_m3s": 0
     }
    },
-   "lakes_the_works_fill": {
-    "km2": 16710,
-    "bodies": 34,
-    "km2_by_turned_latitude": {
-     "15-30": 1393,
-     "30-45": 4365,
-     "45-60": 10952
+   "lakes": {
+    "km2": 6521574,
+    "share_of_moon": 0.17193,
+    "passing_nothing_on_km2": 535591
+   },
+   "weirs_set_in_routings": 3,
+   "weir_history": [
+    {
+     "shares_m3s": {
+      "south_pole_aitken": 26815.6,
+      "humboldtianum": 6237.4,
+      "smythii_marginis": 16151.6
+     },
+     "lacking_m3s": {
+      "south_pole_aitken": 0.0,
+      "humboldtianum": 1498.4
+     },
+     "unmet_m3s": {}
+    },
+    {
+     "shares_m3s": {
+      "south_pole_aitken": 26815.6,
+      "humboldtianum": 7735.9,
+      "smythii_marginis": 14653.1
+     },
+     "lacking_m3s": {
+      "south_pole_aitken": 0.0,
+      "humboldtianum": 0.0
+     },
+     "unmet_m3s": {}
+    },
+    {
+     "shares_m3s": {
+      "south_pole_aitken": 26815.6,
+      "humboldtianum": 7735.9,
+      "smythii_marginis": 14653.1
+     },
+     "lacking_m3s": {
+      "south_pole_aitken": 0.0,
+      "humboldtianum": 0.0
+     },
+     "unmet_m3s": {}
     }
-   }
+   ]
   }
  },
  "against_the_present_climate": {
   "routing_budget": {
    "moscoviense_surplus_m3s": [
     55764,
-    46506
+    51724
    ],
    "released_m3s": {
     "south_pole_aitken": [
      15601,
-     20117
+     23084
     ],
     "humboldtianum": [
      6319,
-     4657
+     7343
     ],
     "smythii_marginis": [
      33844,
-     21732
+     21296
     ]
    },
    "full_seas_pass_on_m3s": {
     "orientale": [
      14840,
-     16605
+     17412
     ],
     "smythii_marginis": [
      67165,
-     42743
+     38690
     ]
    },
    "seas": {
     "moscoviense": {
      "loss_m3s": [
       -1344,
-      3036
+      2347
      ],
      "own_rivers_m3s": [
       54421,
-      49543
+      54071
      ],
      "balance_m3s": [
       55764,
-      46506
+      51724
      ]
     },
     "orientale": {
      "loss_m3s": [
       731,
-      2065
+      1788
      ],
      "own_rivers_m3s": [
       15571,
-      18669
+      19200
      ],
      "balance_m3s": [
       14840,
-      16605
+      17412
      ]
     },
     "smythii_marginis": {
      "loss_m3s": [
       -3500,
-      615
+      -39
      ],
      "own_rivers_m3s": [
       30266,
-      21627
+      17512
      ],
      "balance_m3s": [
       67165,
-      42743
+      38690
      ]
     },
     "near_side": {
      "loss_m3s": [
       82856,
-      82309
+      80546
      ],
      "own_rivers_m3s": [
       59446,
-      48776
+      39905
      ],
      "balance_m3s": [
       58493,
-      25786
+      14825
      ]
     },
     "south_pole_aitken": {
      "loss_m3s": [
       47261,
-      48896
+      48884
      ],
      "own_rivers_m3s": [
       31659,
-      28779
+      25800
      ],
      "balance_m3s": [
       0,
@@ -4426,11 +439,11 @@
     "humboldtianum": {
      "loss_m3s": [
       6512,
-      5987
+      5944
      ],
      "own_rivers_m3s": [
       243,
-      1631
+      0
      ],
      "balance_m3s": [
       0,
@@ -4440,103 +453,103 @@
    },
    "near_side_would_settle_m": [
     720.0,
-    720.0
+    245.4
    ]
   },
   "closed_budget": {
    "moscoviense_surplus_m3s": [
     47824,
-    42209
+    49205
    ],
    "released_m3s": {
     "south_pole_aitken": [
      28378,
-     26599
+     26816
     ],
     "humboldtianum": [
      7746,
-     5604
+     7736
     ],
     "smythii_marginis": [
      11700,
-     10007
+     14653
     ]
    },
    "full_seas_pass_on_m3s": {
     "orientale": [
      11761,
-     14894
+     16367
     ],
     "smythii_marginis": [
      39099,
-     27985
+     30094
     ]
    },
    "seas": {
     "moscoviense": {
      "loss_m3s": [
       2759,
-      5195
+      3554
      ],
      "own_rivers_m3s": [
       50583,
-      47404
+      52759
      ],
      "balance_m3s": [
       47824,
-      42209
+      49205
      ]
     },
     "orientale": {
      "loss_m3s": [
       2124,
-      2783
+      2192
      ],
      "own_rivers_m3s": [
       13886,
-      17677
+      18559
      ],
      "balance_m3s": [
       11761,
-      14894
+      16367
      ]
     },
     "smythii_marginis": {
      "loss_m3s": [
       -614,
-      2124
+      805
      ],
      "own_rivers_m3s": [
       27375,
-      20122
+      16589
      ],
      "balance_m3s": [
       39099,
-      27985
+      30094
      ]
     },
     "near_side": {
      "loss_m3s": [
       106736,
-      94559
+      87400
      ],
      "own_rivers_m3s": [
       51278,
-      44133
+      37758
      ],
      "balance_m3s": [
       -4821,
-      -7589
+      -3889
      ]
     },
     "south_pole_aitken": {
      "loss_m3s": [
       56435,
-      53683
+      51565
      ],
      "own_rivers_m3s": [
       28057,
-      27084
+      24749
      ],
      "balance_m3s": [
       0,
@@ -4546,11 +559,11 @@
     "humboldtianum": {
      "loss_m3s": [
       7556,
-      6512
+      6238
      ],
      "own_rivers_m3s": [
       0,
-      1275
+      0
      ],
      "balance_m3s": [
       0,
@@ -4560,19 +573,19 @@
    },
    "near_side_would_settle_m": [
     -61.9,
-    -68.7
+    -67.1
    ]
   }
  },
  "routing": {
   "routing_budget": {
    "path": "/media/projectspace/terluna-research/atlas-round/final_drainage/final_routing_routing_budget.npz",
-   "sha256": "c45b38c076fa4a112537f4d053bcd4e83107a1f9a53b102f6635b4f9a032ef7f"
+   "sha256": "7b30bcbd143131126f5b53a2988f5d3fa3e916bbe442e43b4680afca46710f64"
   },
   "closed_budget": {
    "path": "/media/projectspace/terluna-research/atlas-round/final_drainage/final_routing_closed_budget.npz",
-   "sha256": "45693943cbc25fde11a18749f637b67d3bf3c927073d9e80dd0ac809fa92f28d"
+   "sha256": "3205ab3293047c7abbd1338913b52eb4fb355e08ae3a55dfc3b77a3e218ee21b"
   }
  },
- "seconds": 390
+ "seconds": 142
 }
