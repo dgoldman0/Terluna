@@ -2,20 +2,22 @@
  "schema": "terluna.research.atlas-round-waterways/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/waterways.py": "ebadc3ecaebb8180b1e14efd764086694cac0b728845af3b7f58b452546bcafb"
+   "research/studies/atlas_round/waterways.py": "c4d925b1b3ed09ae45bd171736ae573ae743a1f3acd5cabc009abbaabaabee37"
   }
  },
  "inputs": {
   "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85",
   "research/studies/atlas_round/results/districts.json": "00b41e59954564a3f17aa5de30e8645925ed76401711b742b5298fdcb6258613",
   "research/studies/atlas_round/results/falls.json": "a7ecd8bfdfd45d9c7a33a324df24320dde3dc196d12600cb87c19c3afe3aa4eb",
-  "research/studies/atlas_round/place_names.json": "ca418ceb618df42e49d06ce16a307988e7a0a2a0774baa620bf9bb92280e4983"
+  "research/studies/atlas_round/place_names.json": "ca418ceb618df42e49d06ce16a307988e7a0a2a0774baa620bf9bb92280e4983",
+  "research/studies/atlas_round/results/sustained_rivers.json": "34f45d11871d7ef89349d7d2b4c69c1e680f994ec83403214299faf56e94932d"
  },
- "year_by_year": "not routed on this design routing: lowest_year_m3s and falters_km are null",
+ "year_by_year": "research/studies/atlas_round/results/sustained_rivers.json",
  "ignored_inputs": {
   "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "cbc7dcd90630c46ab5d4faab87b6c00534be4b2dd4623ae4fe45153197a64252",
   "/media/projectspace/terluna-research/atlas-round/districts/districts_8ppd.npz": "12dfcde94c4257a746a4e58dd237e5f738d4665c00a7083183087f8cc99a0d0e",
-  "/media/projectspace/terluna-research/atlas-round/design_works/design_works_16ppd.npz": "6409f3231c9fd4d36ef2351a819744b43c3c25a749556be575753dbe648a096e"
+  "/media/projectspace/terluna-research/atlas-round/design_works/design_works_16ppd.npz": "6409f3231c9fd4d36ef2351a819744b43c3c25a749556be575753dbe648a096e",
+  "/media/projectspace/terluna-research/atlas-round/sustained_rivers/sustained_rivers_16ppd.npz": "e0087153e66b07e5184fdd9253f20e1e9c0982802c2b299f2743d3c0ee58dd34"
  },
  "evidence": "A reading of products: the design routing's receivers and flows followed upstream from each mouth along the donor carrying the most water, with the sustained-rivers study's lowest-year flows, the falls and the districts draft read along each course. Flows are the design climate's means on its closed budget; the climate is an estimate.",
  "reading_rule": "One entry per waterway carrying mouth_m3s or more where it ends, largest first; a tributary is listed apart from the waterway it joins, from the join upstream. Lengths in km along the 1.9 km cells' centres; lake_km is the length through lakes and channel_km the rest. flow_* in m3/s; lowest_year_m3s is the sustained discharge at the channel nearest the mouth; falters_km the length of channel that carries under the sustained-rivers threshold in some year; both are null where the year-by-year rivers have not been routed on this design routing (year_by_year). fed_by is headwaters, a full sea's overflow, the near-side sea's spill over its neck, or a branch the works cut (works marks those); regions gives each region's share of the course's cells. course lists latitude and longitude in the settled frame from the mouth upstream.",
@@ -59,8 +61,8 @@
    "flow_mouth_m3s": 30359,
    "flow_greatest_m3s": 30780,
    "flow_head_m3s": 30095,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 29823,
+   "falters_km": 0,
    "steep_reaches": 2,
    "steep_gw": 14.6,
    "regions": [
@@ -196,8 +198,8 @@
    "flow_mouth_m3s": 29956,
    "flow_greatest_m3s": 30280,
    "flow_head_m3s": 26816,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 29074,
+   "falters_km": 0,
    "steep_reaches": 5,
    "steep_gw": 126.2,
    "regions": [
@@ -335,8 +337,8 @@
    "flow_mouth_m3s": 29320,
    "flow_greatest_m3s": 29320,
    "flow_head_m3s": 134,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 27648,
+   "falters_km": 0,
    "steep_reaches": 7,
    "steep_gw": 91.0,
    "regions": [
@@ -546,8 +548,8 @@
    "flow_mouth_m3s": 17620,
    "flow_greatest_m3s": 17848,
    "flow_head_m3s": 16367,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 16493,
+   "falters_km": 0,
    "steep_reaches": 3,
    "steep_gw": 20.4,
    "regions": [
@@ -793,8 +795,8 @@
    "flow_mouth_m3s": 15688,
    "flow_greatest_m3s": 15688,
    "flow_head_m3s": 114,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 15149,
+   "falters_km": 0,
    "steep_reaches": 7,
    "steep_gw": 52.4,
    "regions": [
@@ -1178,8 +1180,8 @@
    "flow_mouth_m3s": 14320,
    "flow_greatest_m3s": 15095,
    "flow_head_m3s": 14628,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 13168,
+   "falters_km": 0,
    "steep_reaches": 2,
    "steep_gw": 11.6,
    "regions": [
@@ -1399,8 +1401,8 @@
    "flow_mouth_m3s": 14213,
    "flow_greatest_m3s": 14239,
    "flow_head_m3s": 116,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 13687,
+   "falters_km": 0,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -1730,8 +1732,8 @@
    "flow_mouth_m3s": 13812,
    "flow_greatest_m3s": 13814,
    "flow_head_m3s": 123,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 11686,
+   "falters_km": 0,
    "steep_reaches": 7,
    "steep_gw": 67.3,
    "regions": [
@@ -2085,8 +2087,8 @@
    "flow_mouth_m3s": 9670,
    "flow_greatest_m3s": 9670,
    "flow_head_m3s": 142,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 7911,
+   "falters_km": 0,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -2538,8 +2540,8 @@
    "flow_mouth_m3s": 8837,
    "flow_greatest_m3s": 9392,
    "flow_head_m3s": 138,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 8008,
+   "falters_km": 0,
    "steep_reaches": 1,
    "steep_gw": 21.1,
    "regions": [
@@ -2671,8 +2673,8 @@
    "flow_mouth_m3s": 6237,
    "flow_greatest_m3s": 22389,
    "flow_head_m3s": 22389,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 6014,
+   "falters_km": 0,
    "steep_reaches": 2,
    "steep_gw": 15.8,
    "regions": [
@@ -2920,8 +2922,8 @@
    "flow_mouth_m3s": 4905,
    "flow_greatest_m3s": 5027,
    "flow_head_m3s": 125,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 4090,
+   "falters_km": 0,
    "steep_reaches": 3,
    "steep_gw": 15.9,
    "regions": [
@@ -3285,8 +3287,8 @@
    "flow_mouth_m3s": 4289,
    "flow_greatest_m3s": 4531,
    "flow_head_m3s": 100,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 3499,
+   "falters_km": 25,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -3650,8 +3652,8 @@
    "flow_mouth_m3s": 3895,
    "flow_greatest_m3s": 3895,
    "flow_head_m3s": 319,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 3497,
+   "falters_km": 0,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -3797,8 +3799,8 @@
    "flow_mouth_m3s": 3149,
    "flow_greatest_m3s": 3149,
    "flow_head_m3s": 103,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 2856,
+   "falters_km": 4,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -3980,8 +3982,8 @@
    "flow_mouth_m3s": 2585,
    "flow_greatest_m3s": 2585,
    "flow_head_m3s": 172,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 1124,
+   "falters_km": 8,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -4155,8 +4157,8 @@
    "flow_mouth_m3s": 2345,
    "flow_greatest_m3s": 2745,
    "flow_head_m3s": 109,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 1987,
+   "falters_km": 6,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -4366,8 +4368,8 @@
    "flow_mouth_m3s": 2159,
    "flow_greatest_m3s": 2159,
    "flow_head_m3s": 103,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 1794,
+   "falters_km": 0,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -4449,8 +4451,8 @@
    "flow_mouth_m3s": 1282,
    "flow_greatest_m3s": 1282,
    "flow_head_m3s": 139,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 808,
+   "falters_km": 0,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -4574,8 +4576,8 @@
    "flow_mouth_m3s": 1204,
    "flow_greatest_m3s": 1217,
    "flow_head_m3s": 103,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 833,
+   "falters_km": 0,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -4767,8 +4769,8 @@
    "flow_mouth_m3s": 1175,
    "flow_greatest_m3s": 1175,
    "flow_head_m3s": 103,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 670,
+   "falters_km": 2,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -5166,8 +5168,8 @@
    "flow_mouth_m3s": 1075,
    "flow_greatest_m3s": 1417,
    "flow_head_m3s": 101,
-   "lowest_year_m3s": null,
-   "falters_km": null,
+   "lowest_year_m3s": 656,
+   "falters_km": 0,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -5413,5 +5415,5 @@
    "meaning": "the Old River (h' the + naharo river + atika old), a river the land made itself"
   }
  ],
- "seconds": 5
+ "seconds": 2
 }
