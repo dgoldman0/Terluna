@@ -29,6 +29,7 @@ from climate.gcm.turned import to_turned
 from research.studies.atlas_round import design_routing as DRt
 from research.studies.atlas_round import district_names as DN
 from research.studies.atlas_round import districts as D
+from research.studies.atlas_round import design_works as DW
 from research.studies.atlas_round import sustained_rivers as SR
 
 HERE = Path(__file__).resolve().parent
@@ -131,6 +132,14 @@ def thin(lat, lon, km, every=THIN_KM):
     return [[round(float(lat[i]), 3), round(float(lon[i]), 3)] for i in keep]
 
 
+def sustained_is_current():
+    """Whether the year-by-year rivers (sustained_rivers.py) were routed on the design routing as it stands: their
+    record names the routing record they read."""
+    if not SR.OUT.exists() or not SR.PRODUCT.exists():
+        return False
+    return json.loads(SR.OUT.read_text()).get('inputs', {}).get(rel(DRt.OUT)) == sha256(DRt.OUT)
+
+
 def build(log=print):
     started = time.time()
     routing = json.loads(DRt.OUT.read_text())
@@ -142,6 +151,8 @@ def build(log=print):
         receiver, q = z['receiver'].astype(np.int64), z['discharge_m3s'].astype(np.float64)
         sea, wet = z['sea'], z['routing_lake'].copy()
         lake_cell = z['lake_cell']
+        keeps = z['keeps'] if 'keeps' in z.files else np.zeros(sea.size, bool)
+    routing_meta = meta
     rows, cols = meta['grid']['rows'], meta['grid']['cols']
     in_lake = np.zeros(rows * cols, bool)
     in_lake[lake_cell] = True
@@ -155,17 +166,24 @@ def build(log=print):
     idx = np.arange(n)
     ok = (receiver >= 0) & (receiver != idx)
     into_sea = ok & (sea < 0) & (sea[np.where(ok, receiver, 0)] >= 0) & (q >= MOUTH_M3S)
-    ends_here = ~ok & (sea < 0) & (q >= MOUTH_M3S)
-    mouths = np.flatnonzero(into_sea | ends_here)
+    ends_here = (~ok | keeps) & (sea < 0) & (q >= MOUTH_M3S)             # a lake that passes nothing on ends a waterway
+    # and so does a lake that takes a river in and passes on less than a waterway carries: the river ends at the last
+    # cell before the lake's exit, where it has gathered
+    inflow = np.bincount(receiver[ok], weights=q[ok], minlength=n)
+    exits = np.flatnonzero(in_lake & ~keeps & (sea < 0) & (inflow >= MOUTH_M3S) & (q < MOUTH_M3S))
+    lake_ends = {int(donor[c]) for c in exits.tolist() if donor[c] >= 0}
+    mouths = np.union1d(np.flatnonzero(into_sea | ends_here), np.array(sorted(lake_ends), dtype=np.int64)).astype(np.int64)
     mouths = mouths[np.argsort(-q[mouths])]
     log(f'{mouths.size} mouths of {MOUTH_M3S:.0f} m3/s or more, {time.time() - started:.0f} s')
 
     # the sustained rivers' cells, the falls, the cuts, the regions
-    with np.load(SR.PRODUCT, allow_pickle=False) as s:
-        low = np.full(n, np.nan, np.float32)
-        low[s['cell']] = s['sustained_m3s']
-        falters = np.zeros(n, bool)
-        falters[s['cell']] = s['intermittent'] & s['major']
+    low = np.full(n, np.nan, np.float32)
+    falters = np.zeros(n, bool)
+    yearly = sustained_is_current()                      # the year-by-year rivers, where they stand on this routing
+    if yearly:
+        with np.load(SR.PRODUCT, allow_pickle=False) as s:
+            low[s['cell']] = s['sustained_m3s']
+            falters[s['cell']] = s['intermittent'] & s['major']
     falls = json.loads(D.FALLS.read_text())['reaches'] if D.FALLS.exists() else []
     fall_at = {}
     for x in falls:
@@ -180,19 +198,26 @@ def build(log=print):
 
     # where the design puts water in, and what each is (the sustained-rivers study keeps the design's structure)
     put_ins = {}
-    if SR.STRUCTURE.exists():
-        with np.load(SR.STRUCTURE, allow_pickle=False) as st:
-            for c, k, sign in zip(st['op_cell'].tolist(), st['op_kind'].tolist(), st['op_sign'].tolist()):
-                if sign > 0:
-                    put_ins[int(c)] = SR.OPS[int(k)]
-    inflow = np.bincount(receiver[ok], weights=q[ok], minlength=n)
+    with np.load(DW.PRODUCT, allow_pickle=False) as st:
+        kinds = json.loads(str(st['metadata']))['ops']
+        for c, k, sign in zip(st['op_cell'].tolist(), st['op_kind'].tolist(), st['op_sign'].tolist()):
+            if sign > 0:
+                put_ins[int(c)] = kinds[int(k)]
+    spill = routing_meta['neck']['spill_cell']
+    if spill is not None:
+        put_ins[int(spill)] = 'neck'
     added = q - inflow                                   # what a cell adds beyond its donors: its own runoff, or water put in
+    added[in_lake] = 0.0                                 # under a lake the difference is the lake's own balance, shown at
+    for c in put_ins:                                    # its exit; the works' put-ins are known by their cells
+        added[c] = max(added[c], PUT_IN_M3S if q[c] >= PUT_IN_M3S else 0.0)
     taken = np.zeros(n, bool)
     waterways = []
     for mouth in mouths:
         if taken[mouth]:
             continue
         cells, put_in = follow(mouth, donor, q, added)
+        if int(mouth) in lake_ends and put_in and 'branch' in put_ins.get(cells[-1], ''):
+            continue                                     # a branch of the works between two cuts: its water goes on
         fresh = [c for c in cells if not taken[c]]
         if len(fresh) < len(cells):                      # joins a waterway already followed: its own part alone
             cells, put_in = fresh, False
@@ -235,14 +260,15 @@ def build(log=print):
             head=dict(today=[round(float(la[-1]), 2), round(float(lo[-1]), 2)],
                       turned=[round(float(lat_t[-1]), 2), round(float(lon_t[-1]), 2)]),
             ends_in=names.get(anchor, ends_in) if ends_in else
-            ('a waterway it joins' if end >= 0 and taken[end] else 'a lake that passes nothing on'),
+            ('a waterway it joins' if end >= 0 and taken[end] else
+             'a lake that passes little on' if int(mouth) in lake_ends else 'a lake that passes nothing on'),
             ends_in_anchor=anchor, fed_by=feeds, works=feeds.startswith('a branch the works'),
             length_km=round(float(km[-1])), lake_km=round(float(seg[across].sum())),
             channel_km=round(float(seg[~across].sum())), lakes_crossed=lakes_crossed,
             flow_mouth_m3s=round(float(q[mouth])), flow_greatest_m3s=round(float(q[whole].max())),
             flow_head_m3s=round(float(q[head])),
-            lowest_year_m3s=round(float(lows[channel][0])) if channel.any() else None,
-            falters_km=round(float(1.9 * falters[whole].sum())),
+            lowest_year_m3s=round(float(lows[channel][0])) if yearly and channel.any() else None,
+            falters_km=round(float(1.9 * falters[whole].sum())) if yearly else None,
             steep_reaches=len(reach_falls), steep_gw=round(float(sum(reach_falls)), 1),
             regions=[dict(name=region_by_number[k]['name'], anchor=region_by_number[k]['anchor'],
                           tongue=region_by_number[k]['tongue'], share=round(v / max(sum(regions.values()), 1), 2))
@@ -266,9 +292,10 @@ def build(log=print):
     log(f'{len(waterways)} waterways, {time.time() - started:.0f} s')
     return dict(
         schema=SCHEMA, producer=dict(files={f: sha256(ROOT / f) for f in CODE}),
-        inputs={rel(p): sha256(p) for p in (DRt.OUT, SR.OUT, D.OUT, D.FALLS, NAMES)},
-        ignored_inputs={str(path): routing['product']['sha256'], str(SR.PRODUCT): sha256(SR.PRODUCT),
-                        str(D.PRODUCT): sha256(D.PRODUCT), str(SR.STRUCTURE): sha256(SR.STRUCTURE)},
+        inputs={rel(p): sha256(p) for p in (DRt.OUT, D.OUT, D.FALLS, NAMES) + ((SR.OUT,) if yearly else ())},
+        year_by_year=(rel(SR.OUT) if yearly else 'not routed on this design routing: lowest_year_m3s and falters_km are null'),
+        ignored_inputs={str(path): routing['product']['sha256'], str(D.PRODUCT): sha256(D.PRODUCT),
+                        str(DW.PRODUCT): sha256(DW.PRODUCT), **({str(SR.PRODUCT): sha256(SR.PRODUCT)} if yearly else {})},
         evidence=('A reading of products: the design routing\'s receivers and flows followed upstream from each mouth '
                   'along the donor carrying the most water, with the sustained-rivers study\'s lowest-year flows, the '
                   'falls and the districts draft read along each course. Flows are the design climate\'s means on its '
@@ -277,7 +304,8 @@ def build(log=print):
                       'listed apart from the waterway it joins, from the join upstream. Lengths in km along the 1.9 km '
                       'cells\' centres; lake_km is the length through lakes and channel_km the rest. flow_* in m3/s; '
                       'lowest_year_m3s is the sustained discharge at the channel nearest the mouth; falters_km the '
-                      'length of channel that carries under the sustained-rivers threshold in some year. fed_by is '
+                      'length of channel that carries under the sustained-rivers threshold in some year; both are null '
+                      'where the year-by-year rivers have not been routed on this design routing (year_by_year). fed_by is '
                       'headwaters, a full sea\'s overflow, the near-side sea\'s spill over its neck, or a branch the works cut '
                       '(works marks those); regions gives each '
                       'region\'s share of the course\'s cells. course lists latitude and longitude in the settled frame from '

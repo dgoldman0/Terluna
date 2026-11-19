@@ -109,13 +109,16 @@ def estimated_aridity():
     bm.CACHE = str(DL.CACHE)
     record, _, applied = estimate_responses()
     delta = record['estimate']['delta_K']
-    data = [adjusted(bm.cached_year(RUN, y, True), applied, delta) for y in range(YEARS[0], YEARS[1] + 1)]
+    ratios = FD.surface_ratios()
+    data = [adjusted(bm.cached_year(RUN, y, True), applied, delta, ratios) for y in range(YEARS[0], YEARS[1] + 1)]
     _, mean = bm.combine(data)
     return data[0]['lat'], data[0]['lon'], data[0]['land'], bm.aridity(mean)[2]
 
 
-def adjusted(year, applied, delta):
-    """One year's sums moved by delta kelvin: each land cell by the land's response, each water cell by the water's."""
+def adjusted(year, applied, delta, ratios=None):
+    """One year's sums moved by delta kelvin: each land cell by the land's response, each water cell by the water's;
+    then, with ratios (final_drainage.surface_ratios), its rain and evaporation moved cell by cell by the step onto
+    the design's own surface."""
     land = np.asarray(year['land'], bool)
     k = {name: np.where(land, r['land']['per_K'], r['water']['per_K']) for name, r in applied.items()}
     out = dict(year)
@@ -129,6 +132,9 @@ def adjusted(year, applied, delta):
         out[name] = year[name] + k[name] * delta
     if 'rh_sum' in year:
         out['rh_sum'] = year['rh_sum'] + k['night_rh'] * delta * year['rh_n']
+    if ratios is not None:
+        for name in ('pr', 'evap'):
+            out['acc'][name] = out['acc'][name] * ratios[name]
     return out
 
 
@@ -360,11 +366,12 @@ def build(log=print):
     bm.GEOGRAPHY['tides_grid'] = str(TF.PRODUCT)     # the tide of the design surface's own seas
     record, pairs, applied = estimate_responses()    # measured on the runs' own sums, before the run's are moved
     delta = record['estimate']['delta_K']
+    ratios = FD.surface_ratios()
     read = bm.cached_year
 
     def cached_year(run, year, humidity):
         out = read(run, year, humidity)
-        return adjusted(out, applied, delta) if run == RUN else out
+        return adjusted(out, applied, delta, ratios) if run == RUN else out
 
     bm.cached_year = cached_year                     # the run's years moved by the estimate's step
     try:
@@ -392,6 +399,7 @@ def build(log=print):
         tides=dict(path=str(TF.PRODUCT), sha256=sha256(TF.PRODUCT), record=str(TF.OUT.relative_to(ROOT)),
                    record_sha256=sha256(TF.OUT)))
     product['producer']['inputs'][FD.ESTIMATE] = sha256(ROOT / FD.ESTIMATE)
+    product['producer']['inputs'][FD.SURFACE_ESTIMATE] = sha256(ROOT / FD.SURFACE_ESTIMATE)
     product['estimate'] = dict(
         method=('each year\'s sums of the run moved by delta_K, each land cell by the land\'s response per kelvin and '
                 'each water cell by the water\'s (moisture_final.adjusted); the responses measured on the moisture '
@@ -400,7 +408,11 @@ def build(log=print):
         label=FD.LABEL, record=FD.ESTIMATE, delta_K=delta, base=record['estimate']['base'],
         target=record['estimate']['target'],
         pairs=[dict(p, delta_K=m['delta_K']) for p, m in zip(record['estimate']['pairs'], pairs)],
-        applied=PS.rounded(applied))
+        applied=PS.rounded(applied),
+        surface=dict(record=FD.SURFACE_ESTIMATE,
+                     method=('each year\'s rain and evaporation then moved cell by cell by the ratio of the design '
+                             'climate\'s to the run\'s at the design temperature: the step onto the surface the '
+                             'design\'s own routing makes (climate.gcm.surface_change; final_drainage.surface_ratios)')))
     product['evidence'] = (
         f'The moisture map of {FD.CLIMATE}, classed by biosphere/ecology/moisture_map.py unchanged on the run\'s year '
         'sums moved by the estimate\'s step (estimate); the cells are the run\'s, in the settled turned frame of its '

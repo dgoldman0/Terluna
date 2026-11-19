@@ -2,24 +2,23 @@
  "schema": "terluna.research.atlas-round-waterways/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/waterways.py": "1d2fa1bacb2086a34a4670049d2ecc2f68f118940e103af37a7daf62ef79f4dd"
+   "research/studies/atlas_round/waterways.py": "ebadc3ecaebb8180b1e14efd764086694cac0b728845af3b7f58b452546bcafb"
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/design_routing.json": "cb6572d5bf7914de6e57fbb5064582e21d5c5910aa7ed7af506af2d4dd0a88fe",
-  "research/studies/atlas_round/results/sustained_rivers.json": "b94ba4f4bb17ba3c2af3e71c97031bcbcdae794dfb3404bc7639d2619d7ef5a9",
+  "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85",
   "research/studies/atlas_round/results/districts.json": "00b41e59954564a3f17aa5de30e8645925ed76401711b742b5298fdcb6258613",
-  "research/studies/atlas_round/results/falls.json": "64e96a790198303eb1100b601bf811fd6e1bd27c492f72ad9bec792828c8dbc9",
-  "research/studies/atlas_round/place_names.json": "a75b768d79b644fdf2573765affc2966b042d7ed885207aeca30cbe16f383f7f"
+  "research/studies/atlas_round/results/falls.json": "a7ecd8bfdfd45d9c7a33a324df24320dde3dc196d12600cb87c19c3afe3aa4eb",
+  "research/studies/atlas_round/place_names.json": "ca418ceb618df42e49d06ce16a307988e7a0a2a0774baa620bf9bb92280e4983"
  },
+ "year_by_year": "not routed on this design routing: lowest_year_m3s and falters_km are null",
  "ignored_inputs": {
-  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "6dd552e69faca7334280149775f96253cdb1852a784756f7462d6c962b20abf6",
-  "/media/projectspace/terluna-research/atlas-round/sustained_rivers/sustained_rivers_16ppd.npz": "7277a72b08fc59760a96f9c3d78d6c016ecae8205d31b5595b5df3c9978691aa",
+  "/media/projectspace/terluna-research/atlas-round/design_routing/design_routing_16ppd.npz": "cbc7dcd90630c46ab5d4faab87b6c00534be4b2dd4623ae4fe45153197a64252",
   "/media/projectspace/terluna-research/atlas-round/districts/districts_8ppd.npz": "12dfcde94c4257a746a4e58dd237e5f738d4665c00a7083183087f8cc99a0d0e",
-  "/media/projectspace/terluna-research/atlas-round/sustained_rivers/work/design_structure.npz": "73e9934cc2c7430d7750335145f5b61b48db53bdea1ef39dbdfce2f50eb7b5af"
+  "/media/projectspace/terluna-research/atlas-round/design_works/design_works_16ppd.npz": "6409f3231c9fd4d36ef2351a819744b43c3c25a749556be575753dbe648a096e"
  },
  "evidence": "A reading of products: the design routing's receivers and flows followed upstream from each mouth along the donor carrying the most water, with the sustained-rivers study's lowest-year flows, the falls and the districts draft read along each course. Flows are the design climate's means on its closed budget; the climate is an estimate.",
- "reading_rule": "One entry per waterway carrying mouth_m3s or more where it ends, largest first; a tributary is listed apart from the waterway it joins, from the join upstream. Lengths in km along the 1.9 km cells' centres; lake_km is the length through lakes and channel_km the rest. flow_* in m3/s; lowest_year_m3s is the sustained discharge at the channel nearest the mouth; falters_km the length of channel that carries under the sustained-rivers threshold in some year. fed_by is headwaters, a full sea's overflow, the near-side sea's spill over its neck, or a branch the works cut (works marks those); regions gives each region's share of the course's cells. course lists latitude and longitude in the settled frame from the mouth upstream.",
+ "reading_rule": "One entry per waterway carrying mouth_m3s or more where it ends, largest first; a tributary is listed apart from the waterway it joins, from the join upstream. Lengths in km along the 1.9 km cells' centres; lake_km is the length through lakes and channel_km the rest. flow_* in m3/s; lowest_year_m3s is the sustained discharge at the channel nearest the mouth; falters_km the length of channel that carries under the sustained-rivers threshold in some year; both are null where the year-by-year rivers have not been routed on this design routing (year_by_year). fed_by is headwaters, a full sea's overflow, the near-side sea's spill over its neck, or a branch the works cut (works marks those); regions gives each region's share of the course's cells. course lists latitude and longitude in the settled frame from the mouth upstream.",
  "parameters": {
   "mouth_m3s": 1000.0,
   "head_m3s": 100.0,
@@ -27,6 +26,143 @@
   "thin_km": 4.0
  },
  "waterways": [
+  {
+   "anchor": "river:47.5,49.7",
+   "mouth": {
+    "today": [
+     47.47,
+     49.72
+    ],
+    "turned": [
+     40.98,
+     46.17
+    ]
+   },
+   "head": {
+    "today": [
+     24.78,
+     82.66
+    ],
+    "turned": [
+     20.26,
+     78.74
+    ]
+   },
+   "ends_in": "Uamoana",
+   "ends_in_anchor": "sea:near-side sea",
+   "fed_by": "the overflow of Dagat na Katzeh",
+   "works": false,
+   "length_km": 1098,
+   "lake_km": 1013,
+   "channel_km": 85,
+   "lakes_crossed": 10,
+   "flow_mouth_m3s": 30359,
+   "flow_greatest_m3s": 30780,
+   "flow_head_m3s": 30095,
+   "lowest_year_m3s": null,
+   "falters_km": null,
+   "steep_reaches": 2,
+   "steep_gw": 14.6,
+   "regions": [
+    {
+     "name": "Uafenua",
+     "anchor": "region:lake:28.9,80.4@32,92",
+     "tongue": "terlunan",
+     "share": 0.6
+    },
+    {
+     "name": "Jeljaylau",
+     "anchor": "region:feature:Lacus Temporis",
+     "tongue": "dala",
+     "share": 0.4
+    }
+   ],
+   "course": [
+    [
+     40.978,
+     46.168
+    ],
+    [
+     40.924,
+     46.451
+    ],
+    [
+     40.937,
+     46.842
+    ],
+    [
+     41.066,
+     46.947
+    ],
+    [
+     37.633,
+     54.652
+    ],
+    [
+     37.508,
+     54.662
+    ],
+    [
+     37.313,
+     54.506
+    ],
+    [
+     36.356,
+     60.962
+    ],
+    [
+     36.239,
+     61.089
+    ],
+    [
+     36.117,
+     61.158
+    ],
+    [
+     36.084,
+     61.623
+    ],
+    [
+     27.77,
+     70.89
+    ],
+    [
+     27.597,
+     71.086
+    ],
+    [
+     27.477,
+     71.157
+    ],
+    [
+     27.362,
+     71.288
+    ],
+    [
+     27.318,
+     71.531
+    ],
+    [
+     27.217,
+     71.839
+    ],
+    [
+     20.773,
+     78.809
+    ],
+    [
+     20.395,
+     78.787
+    ],
+    [
+     20.265,
+     78.739
+    ]
+   ],
+   "name": "Ninamuawa",
+   "tongue": "Terlunan",
+   "meaning": "Blue River (ninamu blue + awa river), a sea's overflow crossing dry steppe"
+  },
   {
    "anchor": "river:-22.9,173.3",
    "mouth": {
@@ -57,13 +193,13 @@
    "lake_km": 312,
    "channel_km": 130,
    "lakes_crossed": 7,
-   "flow_mouth_m3s": 30657,
-   "flow_greatest_m3s": 30699,
-   "flow_head_m3s": 26599,
-   "lowest_year_m3s": 30072,
-   "falters_km": 0,
-   "steep_reaches": 6,
-   "steep_gw": 129.9,
+   "flow_mouth_m3s": 29956,
+   "flow_greatest_m3s": 30280,
+   "flow_head_m3s": 26816,
+   "lowest_year_m3s": null,
+   "falters_km": null,
+   "steep_reaches": 5,
+   "steep_gw": 126.2,
    "regions": [
     {
      "name": "Paqarinwayqu",
@@ -167,143 +303,6 @@
    "meaning": "Great River (hatun great + mayu river), the Moon's largest"
   },
   {
-   "anchor": "river:47.5,49.7",
-   "mouth": {
-    "today": [
-     47.47,
-     49.72
-    ],
-    "turned": [
-     40.98,
-     46.17
-    ]
-   },
-   "head": {
-    "today": [
-     24.78,
-     82.66
-    ],
-    "turned": [
-     20.26,
-     78.74
-    ]
-   },
-   "ends_in": "Uamoana",
-   "ends_in_anchor": "sea:near-side sea",
-   "fed_by": "the overflow of Dagat na Katzeh",
-   "works": false,
-   "length_km": 1098,
-   "lake_km": 1013,
-   "channel_km": 85,
-   "lakes_crossed": 10,
-   "flow_mouth_m3s": 29073,
-   "flow_greatest_m3s": 29217,
-   "flow_head_m3s": 27986,
-   "lowest_year_m3s": 28674,
-   "falters_km": 0,
-   "steep_reaches": 3,
-   "steep_gw": 18.2,
-   "regions": [
-    {
-     "name": "Uafenua",
-     "anchor": "region:lake:28.9,80.4@32,92",
-     "tongue": "terlunan",
-     "share": 0.59
-    },
-    {
-     "name": "Jeljaylau",
-     "anchor": "region:feature:Lacus Temporis",
-     "tongue": "dala",
-     "share": 0.41
-    }
-   ],
-   "course": [
-    [
-     40.978,
-     46.168
-    ],
-    [
-     40.924,
-     46.451
-    ],
-    [
-     40.937,
-     46.842
-    ],
-    [
-     41.066,
-     46.947
-    ],
-    [
-     37.633,
-     54.652
-    ],
-    [
-     37.508,
-     54.662
-    ],
-    [
-     37.313,
-     54.506
-    ],
-    [
-     36.356,
-     60.962
-    ],
-    [
-     36.239,
-     61.089
-    ],
-    [
-     36.117,
-     61.158
-    ],
-    [
-     36.084,
-     61.623
-    ],
-    [
-     27.77,
-     70.89
-    ],
-    [
-     27.597,
-     71.086
-    ],
-    [
-     27.477,
-     71.157
-    ],
-    [
-     27.362,
-     71.288
-    ],
-    [
-     27.318,
-     71.531
-    ],
-    [
-     27.217,
-     71.839
-    ],
-    [
-     20.773,
-     78.809
-    ],
-    [
-     20.395,
-     78.787
-    ],
-    [
-     20.265,
-     78.739
-    ]
-   ],
-   "name": "Ninamuawa",
-   "tongue": "Terlunan",
-   "meaning": "Blue River (ninamu blue + awa river), a sea's overflow crossing dry steppe"
-  },
-  {
    "anchor": "river:2.3,177.7",
    "mouth": {
     "today": [
@@ -317,29 +316,29 @@
    },
    "head": {
     "today": [
-     -5.47,
-     208.34
+     5.22,
+     205.78
     ],
     "turned": [
-     1.22,
-     -153.48
+     11.87,
+     -156.21
     ]
    },
    "ends_in": "Hanaqucha",
    "ends_in_anchor": "sea:Mare Moscoviense",
    "fed_by": "headwaters",
    "works": false,
-   "length_km": 1483,
-   "lake_km": 1273,
-   "channel_km": 209,
-   "lakes_crossed": 16,
-   "flow_mouth_m3s": 26018,
-   "flow_greatest_m3s": 26019,
-   "flow_head_m3s": 107,
-   "lowest_year_m3s": 24596,
-   "falters_km": 0,
+   "length_km": 1660,
+   "lake_km": 1432,
+   "channel_km": 228,
+   "lakes_crossed": 18,
+   "flow_mouth_m3s": 29320,
+   "flow_greatest_m3s": 29320,
+   "flow_head_m3s": 134,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 7,
-   "steep_gw": 83.2,
+   "steep_gw": 91.0,
    "regions": [
     {
      "name": "Paraurqu",
@@ -490,302 +489,29 @@
      -164.158
     ],
     [
-     1.222,
-     -153.482
+     10.051,
+     -156.75
+    ],
+    [
+     10.426,
+     -156.757
+    ],
+    [
+     10.49,
+     -156.631
+    ],
+    [
+     10.43,
+     -156.503
+    ],
+    [
+     11.873,
+     -156.21
     ]
    ],
    "name": "Paramayu",
    "tongue": "Runa (Quechua-rooted)",
    "meaning": "Rain River (para rain + mayu river), the rain mountains' river"
-  },
-  {
-   "anchor": "river:21.3,105.0",
-   "mouth": {
-    "today": [
-     21.28,
-     105.03
-    ],
-    "turned": [
-     18.99,
-     100.86
-    ]
-   },
-   "head": {
-    "today": [
-     10.47,
-     137.09
-    ],
-    "turned": [
-     11.94,
-     133.94
-    ]
-   },
-   "ends_in": "Dagat na Katzeh",
-   "ends_in_anchor": "sea:Smythii–Marginis Sea",
-   "fed_by": "headwaters",
-   "works": false,
-   "length_km": 1378,
-   "lake_km": 1056,
-   "channel_km": 322,
-   "lakes_crossed": 25,
-   "flow_mouth_m3s": 17965,
-   "flow_greatest_m3s": 17981,
-   "flow_head_m3s": 136,
-   "lowest_year_m3s": 16984,
-   "falters_km": 0,
-   "steep_reaches": 0,
-   "steep_gw": 0.0,
-   "regions": [
-    {
-     "name": "Kiriguni",
-     "anchor": "region:lake:16.3,134.8",
-     "tongue": "satoyama",
-     "share": 0.66
-    },
-    {
-     "name": "Lawalawang Anan",
-     "anchor": "region:lake:15.5,119.9",
-     "tongue": "tagalhebrew",
-     "share": 0.34
-    }
-   ],
-   "course": [
-    [
-     18.987,
-     100.863
-    ],
-    [
-     18.939,
-     100.993
-    ],
-    [
-     18.89,
-     101.123
-    ],
-    [
-     18.787,
-     101.322
-    ],
-    [
-     17.514,
-     105.648
-    ],
-    [
-     17.404,
-     105.786
-    ],
-    [
-     17.294,
-     105.924
-    ],
-    [
-     17.177,
-     106.001
-    ],
-    [
-     17.045,
-     105.956
-    ],
-    [
-     16.859,
-     105.979
-    ],
-    [
-     16.666,
-     105.941
-    ],
-    [
-     16.321,
-     105.672
-    ],
-    [
-     19.539,
-     109.567
-    ],
-    [
-     20.069,
-     109.248
-    ],
-    [
-     21.102,
-     110.547
-    ],
-    [
-     20.992,
-     110.686
-    ],
-    [
-     21.014,
-     110.871
-    ],
-    [
-     21.291,
-     111.084
-    ],
-    [
-     21.422,
-     111.129
-    ],
-    [
-     21.56,
-     111.235
-    ],
-    [
-     21.735,
-     111.649
-    ],
-    [
-     22.286,
-     114.203
-    ],
-    [
-     22.053,
-     114.36
-    ],
-    [
-     22.005,
-     114.492
-    ],
-    [
-     21.965,
-     114.685
-    ],
-    [
-     22.111,
-     114.854
-    ],
-    [
-     22.187,
-     114.968
-    ],
-    [
-     22.085,
-     115.171
-    ],
-    [
-     21.264,
-     117.291
-    ],
-    [
-     20.72,
-     117.49
-    ],
-    [
-     19.739,
-     118.25
-    ],
-    [
-     19.509,
-     117.904
-    ],
-    [
-     19.258,
-     121.651
-    ],
-    [
-     19.397,
-     121.758
-    ],
-    [
-     19.736,
-     121.965
-    ],
-    [
-     19.557,
-     122.052
-    ],
-    [
-     19.276,
-     122.342
-    ],
-    [
-     19.685,
-     123.675
-    ],
-    [
-     19.948,
-     123.767
-    ],
-    [
-     20.696,
-     124.235
-    ],
-    [
-     20.579,
-     124.314
-    ],
-    [
-     20.266,
-     124.861
-    ],
-    [
-     20.069,
-     126.404
-    ],
-    [
-     20.2,
-     126.45
-    ],
-    [
-     20.331,
-     126.496
-    ],
-    [
-     20.601,
-     126.65
-    ],
-    [
-     14.008,
-     133.314
-    ],
-    [
-     14.092,
-     133.494
-    ],
-    [
-     13.922,
-     134.211
-    ],
-    [
-     13.872,
-     133.774
-    ],
-    [
-     13.734,
-     133.664
-    ],
-    [
-     13.548,
-     133.687
-    ],
-    [
-     13.416,
-     133.64
-    ],
-    [
-     12.81,
-     133.839
-    ],
-    [
-     12.562,
-     133.869
-    ],
-    [
-     12.43,
-     133.822
-    ],
-    [
-     12.003,
-     133.936
-    ],
-    [
-     11.941,
-     133.944
-    ]
-   ],
-   "name": "Fukagawa",
-   "tongue": "Satogo (Japanese-rooted)",
-   "meaning": "Deep River (fuka deep + kawa river), broad and calm through its long lakes"
   },
   {
    "anchor": "river:15.0,287.7",
@@ -817,31 +543,31 @@
    "lake_km": 1033,
    "channel_km": 255,
    "lakes_crossed": 19,
-   "flow_mouth_m3s": 17652,
-   "flow_greatest_m3s": 17685,
-   "flow_head_m3s": 14894,
-   "lowest_year_m3s": 16756,
-   "falters_km": 0,
+   "flow_mouth_m3s": 17620,
+   "flow_greatest_m3s": 17848,
+   "flow_head_m3s": 16367,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 3,
-   "steep_gw": 19.3,
+   "steep_gw": 20.4,
    "regions": [
     {
      "name": "Msitu Kijani",
      "anchor": "region:ground:30.4,-115.8@22,-100",
      "tongue": "pwani",
-     "share": 0.47
+     "share": 0.38
     },
     {
      "name": "Msitu Dunia",
      "anchor": "region:crater:Lamarck",
      "tongue": "pwani",
-     "share": 0.28
+     "share": 0.34
     },
     {
      "name": "Maziwa Mvua",
      "anchor": "region:ground:30.4,-115.8@14,-115",
      "tongue": "pwani",
-     "share": 0.25
+     "share": 0.28
     }
    ],
    "course": [
@@ -1048,53 +774,53 @@
    },
    "head": {
     "today": [
-     0.72,
-     208.34
+     0.53,
+     208.59
     ],
     "turned": [
-     7.41,
-     -153.55
+     7.22,
+     -153.3
     ]
    },
    "ends_in": "Bahari Mashariki",
    "ends_in_anchor": "sea:Mare Orientale",
    "fed_by": "headwaters",
    "works": false,
-   "length_km": 2095,
-   "lake_km": 1607,
+   "length_km": 2100,
+   "lake_km": 1612,
    "channel_km": 488,
    "lakes_crossed": 31,
-   "flow_mouth_m3s": 15372,
-   "flow_greatest_m3s": 15372,
-   "flow_head_m3s": 100,
-   "lowest_year_m3s": 14709,
-   "falters_km": 0,
+   "flow_mouth_m3s": 15688,
+   "flow_greatest_m3s": 15688,
+   "flow_head_m3s": 114,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 7,
-   "steep_gw": 51.2,
+   "steep_gw": 52.4,
    "regions": [
     {
      "name": "Gubat na Geshem",
      "anchor": "region:lake:0.8,-128.7@2,-120",
      "tongue": "tagalhebrew",
-     "share": 0.67
+     "share": 0.76
     },
     {
      "name": "Maziwa Mvua",
      "anchor": "region:ground:30.4,-115.8@14,-115",
      "tongue": "pwani",
-     "share": 0.14
+     "share": 0.12
     },
     {
      "name": "Paraurqu",
      "anchor": "region:lake:-9.1,-177.1",
      "tongue": "runa",
-     "share": 0.14
+     "share": 0.11
     },
     {
      "name": "Kumoikeno",
      "anchor": "region:lake:31.7,-156.5",
      "tongue": "satoyama",
-     "share": 0.05
+     "share": 0.0
     }
    ],
    "course": [
@@ -1411,368 +1137,13 @@
      -153.434
     ],
     [
-     7.409,
-     -153.551
+     7.224,
+     -153.297
     ]
    ],
    "name": "Ilog na Gavoah",
    "tongue": "Tagalog-Hebrew",
    "meaning": "High River (ilog river + na + gavoah high), from the highest country"
-  },
-  {
-   "anchor": "river:-23.0,192.3",
-   "mouth": {
-    "today": [
-     -23.03,
-     192.28
-    ],
-    "turned": [
-     -16.76,
-     -168.69
-    ]
-   },
-   "head": {
-    "today": [
-     1.59,
-     211.03
-    ],
-    "turned": [
-     8.31,
-     -150.85
-    ]
-   },
-   "ends_in": "H'Jamo Melaĥa",
-   "ends_in_anchor": "sea:South Pole–Aitken Sea",
-   "fed_by": "headwaters",
-   "works": false,
-   "length_km": 1707,
-   "lake_km": 1292,
-   "channel_km": 415,
-   "lakes_crossed": 29,
-   "flow_mouth_m3s": 12926,
-   "flow_greatest_m3s": 12929,
-   "flow_head_m3s": 111,
-   "lowest_year_m3s": 10922,
-   "falters_km": 0,
-   "steep_reaches": 7,
-   "steep_gw": 62.7,
-   "regions": [
-    {
-     "name": "Pukutayllaqta",
-     "anchor": "region:lake:-19.2,-163.1",
-     "tongue": "runa",
-     "share": 0.56
-    },
-    {
-     "name": "Gubat na Geshem",
-     "anchor": "region:lake:0.8,-128.7@2,-120",
-     "tongue": "tagalhebrew",
-     "share": 0.36
-    },
-    {
-     "name": "Paraurqu",
-     "anchor": "region:lake:-9.1,-177.1",
-     "tongue": "runa",
-     "share": 0.08
-    }
-   ],
-   "course": [
-    [
-     -16.759,
-     -168.692
-    ],
-    [
-     -16.32,
-     -168.652
-    ],
-    [
-     -16.005,
-     -168.607
-    ],
-    [
-     -15.685,
-     -168.441
-    ],
-    [
-     -14.182,
-     -168.388
-    ],
-    [
-     -13.271,
-     -169.035
-    ],
-    [
-     -12.821,
-     -168.752
-    ],
-    [
-     -12.693,
-     -168.697
-    ],
-    [
-     -12.508,
-     -168.766
-    ],
-    [
-     -12.516,
-     -168.948
-    ],
-    [
-     -11.257,
-     -168.761
-    ],
-    [
-     -10.947,
-     -168.836
-    ],
-    [
-     -11.023,
-     -166.034
-    ],
-    [
-     -11.081,
-     -165.91
-    ],
-    [
-     -11.068,
-     -165.546
-    ],
-    [
-     -13.676,
-     -161.036
-    ],
-    [
-     -13.735,
-     -160.914
-    ],
-    [
-     -13.858,
-     -160.85
-    ],
-    [
-     -13.982,
-     -160.786
-    ],
-    [
-     -14.104,
-     -160.662
-    ],
-    [
-     -14.533,
-     -160.349
-    ],
-    [
-     -12.823,
-     -156.465
-    ],
-    [
-     -12.882,
-     -156.283
-    ],
-    [
-     -12.756,
-     -156.225
-    ],
-    [
-     -12.754,
-     -156.104
-    ],
-    [
-     -12.815,
-     -155.982
-    ],
-    [
-     -12.875,
-     -155.86
-    ],
-    [
-     -12.872,
-     -155.679
-    ],
-    [
-     -13.302,
-     -155.189
-    ],
-    [
-     -15.2,
-     -151.672
-    ],
-    [
-     -15.074,
-     -151.613
-    ],
-    [
-     -14.887,
-     -151.615
-    ],
-    [
-     -14.762,
-     -151.676
-    ],
-    [
-     -14.637,
-     -151.617
-    ],
-    [
-     -14.635,
-     -151.436
-    ],
-    [
-     -14.572,
-     -151.316
-    ],
-    [
-     -14.131,
-     -150.838
-    ],
-    [
-     -9.436,
-     -148.798
-    ],
-    [
-     -9.311,
-     -148.737
-    ],
-    [
-     -9.124,
-     -148.737
-    ],
-    [
-     -8.936,
-     -148.798
-    ],
-    [
-     -8.811,
-     -148.677
-    ],
-    [
-     -8.561,
-     -148.433
-    ],
-    [
-     -8.123,
-     -148.495
-    ],
-    [
-     -7.936,
-     -148.434
-    ],
-    [
-     -6.998,
-     -147.884
-    ],
-    [
-     -6.748,
-     -147.762
-    ],
-    [
-     -5.936,
-     -147.516
-    ],
-    [
-     -5.749,
-     -147.393
-    ],
-    [
-     -5.624,
-     -147.27
-    ],
-    [
-     -5.562,
-     -147.086
-    ],
-    [
-     -5.438,
-     -146.41
-    ],
-    [
-     -5.188,
-     -146.41
-    ],
-    [
-     -5.064,
-     -146.348
-    ],
-    [
-     -4.814,
-     -146.347
-    ],
-    [
-     -0.561,
-     -147.696
-    ],
-    [
-     -0.436,
-     -147.634
-    ],
-    [
-     -0.311,
-     -147.696
-    ],
-    [
-     -0.186,
-     -147.634
-    ],
-    [
-     0.127,
-     -147.509
-    ],
-    [
-     0.439,
-     -147.384
-    ],
-    [
-     0.751,
-     -147.073
-    ],
-    [
-     4.06,
-     -146.003
-    ],
-    [
-     4.185,
-     -145.877
-    ],
-    [
-     4.31,
-     -145.939
-    ],
-    [
-     4.689,
-     -148.005
-    ],
-    [
-     4.627,
-     -148.131
-    ],
-    [
-     4.563,
-     -149.259
-    ],
-    [
-     4.312,
-     -149.508
-    ],
-    [
-     5.496,
-     -150.391
-    ],
-    [
-     5.871,
-     -150.518
-    ],
-    [
-     8.057,
-     -150.656
-    ],
-    [
-     8.306,
-     -150.846
-    ]
-   ],
-   "name": "Pukutaymayu",
-   "tongue": "Runa (Quechua-rooted)",
-   "meaning": "Mist River (pukutay mist + mayu river), down from the Moon's highest ground"
   },
   {
    "anchor": "river:25.8,103.0",
@@ -1804,13 +1175,13 @@
    "lake_km": 1090,
    "channel_km": 193,
    "lakes_crossed": 16,
-   "flow_mouth_m3s": 9991,
-   "flow_greatest_m3s": 10271,
-   "flow_head_m3s": 10007,
-   "lowest_year_m3s": 9531,
-   "falters_km": 0,
-   "steep_reaches": 1,
-   "steep_gw": 4.5,
+   "flow_mouth_m3s": 14320,
+   "flow_greatest_m3s": 15095,
+   "flow_head_m3s": 14628,
+   "lowest_year_m3s": null,
+   "falters_km": null,
+   "steep_reaches": 2,
+   "steep_gw": 11.6,
    "regions": [
     {
      "name": "Kiriguni",
@@ -1996,379 +1367,726 @@
    "meaning": "New River (nii new + kawa river), cut by the works"
   },
   {
-   "anchor": "river:-5.3,63.0",
+   "anchor": "river:21.3,105.0",
    "mouth": {
     "today": [
-     -5.34,
-     63.03
+     21.28,
+     105.03
     ],
     "turned": [
-     -11.2,
-     61.66
+     18.99,
+     100.86
     ]
    },
    "head": {
     "today": [
-     -8.59,
-     138.91
+     -6.97,
+     140.09
     ],
     "turned": [
-     -6.79,
-     137.93
+     -5.04,
+     138.92
     ]
    },
-   "ends_in": "Uamoana",
-   "ends_in_anchor": "sea:near-side sea",
+   "ends_in": "Dagat na Katzeh",
+   "ends_in_anchor": "sea:Smythii–Marginis Sea",
    "fed_by": "headwaters",
    "works": false,
-   "length_km": 4157,
-   "lake_km": 3789,
-   "channel_km": 368,
-   "lakes_crossed": 28,
-   "flow_mouth_m3s": 9565,
-   "flow_greatest_m3s": 9583,
-   "flow_head_m3s": 112,
-   "lowest_year_m3s": 9460,
-   "falters_km": 2,
+   "length_km": 1898,
+   "lake_km": 1532,
+   "channel_km": 366,
+   "lakes_crossed": 24,
+   "flow_mouth_m3s": 14213,
+   "flow_greatest_m3s": 14239,
+   "flow_head_m3s": 116,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
     {
-     "name": "H'Montetim Ŝemeŝa",
-     "anchor": "region:lake:-40.0,132.2@-46,132",
-     "tongue": "olivolingvo",
+     "name": "Lawalawang Anan",
+     "anchor": "region:lake:15.5,119.9",
+     "tongue": "tagalhebrew",
      "share": 0.39
     },
     {
-     "name": "Vilima Alfajiri",
-     "anchor": "region:lake:-12.6,90.0",
-     "tongue": "pwani",
-     "share": 0.18
+     "name": "Asadani",
+     "anchor": "region:lake:-23.3,106.1",
+     "tongue": "satoyama",
+     "share": 0.37
     },
     {
      "name": "Puyuquchakuna",
      "anchor": "region:lake:-22.7,135.5",
      "tongue": "runa",
-     "share": 0.17
-    },
-    {
-     "name": "Musulim",
-     "anchor": "region:feature:Mare Undarum",
-     "tongue": "terlunan",
-     "share": 0.16
-    },
-    {
-     "name": "H'Montetim Ŝaĥara",
-     "anchor": "region:crater:Chamberlin",
-     "tongue": "olivolingvo",
-     "share": 0.1
+     "share": 0.23
     }
    ],
    "course": [
     [
-     -11.197,
-     61.663
+     18.987,
+     100.863
     ],
     [
-     -10.94,
-     61.775
+     18.939,
+     100.993
     ],
     [
-     -10.867,
-     61.961
+     18.89,
+     101.123
     ],
     [
-     -10.676,
-     62.013
+     18.787,
+     101.322
     ],
     [
-     -12.797,
-     64.244
+     17.514,
+     105.648
     ],
     [
-     -12.913,
-     64.379
+     17.404,
+     105.786
     ],
     [
-     -13.171,
-     64.268
+     17.294,
+     105.924
     ],
     [
-     -13.303,
-     64.15
+     17.177,
+     106.001
     ],
     [
-     -14.754,
-     63.988
+     17.045,
+     105.956
     ],
     [
-     -14.89,
-     63.805
+     16.859,
+     105.979
     ],
     [
-     -17.356,
-     65.445
+     16.666,
+     105.941
     ],
     [
-     -17.489,
-     65.326
+     16.321,
+     105.672
     ],
     [
-     -17.56,
-     65.202
+     15.461,
+     106.963
     ],
     [
-     -17.692,
-     65.083
+     15.33,
+     106.917
     ],
     [
-     -17.809,
-     65.219
+     15.199,
+     106.871
     ],
     [
-     -28.909,
-     74.19
+     11.306,
+     105.842
     ],
     [
-     -28.961,
-     74.326
+     10.919,
+     105.763
     ],
     [
-     -29.014,
-     74.462
+     9.803,
+     106.457
     ],
     [
-     -29.056,
-     74.729
+     9.542,
+     106.926
     ],
     [
-     -29.171,
-     74.871
+     6.042,
+     106.582
     ],
     [
-     -29.156,
-     75.066
+     5.856,
+     106.603
     ],
     [
-     -29.265,
-     75.274
+     5.629,
+     106.817
     ],
     [
-     -43.412,
-     112.622
+     6.212,
+     108.067
     ],
     [
-     -43.521,
-     112.776
+     6.047,
+     108.274
     ],
     [
-     -43.63,
-     112.929
+     6.068,
+     108.459
     ],
     [
-     -43.724,
-     113.208
+     6.001,
+     108.969
     ],
     [
-     -43.833,
-     113.362
+     5.053,
+     110.021
     ],
     [
-     -44.022,
-     113.921
+     5.041,
+     110.461
     ],
     [
-     -49.329,
-     137.235
+     4.836,
+     110.862
     ],
     [
-     -49.192,
-     137.321
+     4.704,
+     110.815
     ],
     [
-     -48.857,
-     137.476
+     4.518,
+     110.836
     ],
     [
-     -33.865,
-     130.984
+     4.47,
+     110.968
     ],
     [
-     -33.817,
-     130.851
+     4.127,
+     111.259
     ],
     [
-     -33.704,
-     130.206
+     4.034,
+     112.086
     ],
     [
-     -30.952,
-     122.515
+     3.946,
+     112.411
     ],
     [
-     -30.835,
-     122.434
+     2.353,
+     112.785
     ],
     [
-     -30.318,
-     122.541
+     2.167,
+     112.807
     ],
     [
-     -28.499,
-     124.592
+     1.926,
+     112.898
     ],
     [
-     -28.608,
-     124.735
+     1.79,
+     113.354
     ],
     [
-     -28.656,
-     124.868
+     1.812,
+     113.54
     ],
     [
-     -28.703,
-     125.002
+     2.056,
+     114.014
     ],
     [
-     -26.71,
-     128.535
+     -5.314,
+     116.641
     ],
     [
-     -26.826,
-     128.615
+     -5.354,
+     116.835
     ],
     [
-     -27.348,
-     129.006
+     -5.635,
+     117.12
     ],
     [
-     -26.444,
-     132.939
+     -6.453,
+     117.658
     ],
     [
-     -25.789,
-     133.156
+     -6.57,
+     117.735
     ],
     [
-     -24.179,
-     133.988
+     -6.617,
+     117.867
     ],
     [
-     -23.674,
-     134.541
+     -6.99,
+     117.911
     ],
     [
-     -19.203,
-     137.808
+     -7.201,
+     118.251
     ],
     [
-     -18.811,
-     137.384
+     -7.249,
+     118.383
     ],
     [
-     -14.247,
-     139.871
+     -7.172,
+     118.5
     ],
     [
-     -14.171,
-     139.987
+     -7.198,
+     118.818
     ],
     [
-     -14.474,
-     140.646
+     -7.293,
+     119.081
     ],
     [
-     -13.681,
-     140.988
+     -7.698,
+     119.382
     ],
     [
-     -13.508,
-     140.842
+     -7.234,
+     119.578
     ],
     [
-     -10.956,
-     142.289
+     -7.059,
+     119.998
     ],
     [
-     -10.638,
-     142.315
+     -8.044,
+     122.32
     ],
     [
-     -10.231,
-     142.018
+     -8.022,
+     122.506
     ],
     [
-     -9.948,
-     141.736
+     -7.938,
+     122.685
     ],
     [
-     -9.879,
-     140.666
+     -7.453,
+     126.275
     ],
     [
-     -9.769,
-     140.529
+     -7.314,
+     126.384
     ],
     [
-     -9.355,
-     140.293
+     -7.135,
+     126.3
     ],
     [
-     -7.727,
-     139.668
+     -6.949,
+     126.277
     ],
     [
-     -7.679,
-     139.537
+     -6.412,
+     126.025
     ],
     [
-     -7.019,
-     138.147
+     -3.478,
+     133.911
     ],
     [
-     -6.791,
-     137.933
+     -3.58,
+     134.112
+    ],
+    [
+     -5.044,
+     138.923
     ]
    ],
-   "name": "H'Naharo Longa",
-   "tongue": "Proto-Olivolingvo",
-   "meaning": "the Long River (h' the + naharo river + longa long), the longest waterway"
+   "name": "Fukagawa",
+   "tongue": "Satogo (Japanese-rooted)",
+   "meaning": "Deep River (fuka deep + kawa river), broad and calm through its long lakes"
   },
   {
-   "anchor": "river:12.4,346.0",
+   "anchor": "river:-23.0,192.3",
    "mouth": {
     "today": [
-     12.41,
+     -23.03,
+     192.28
+    ],
+    "turned": [
+     -16.76,
+     -168.69
+    ]
+   },
+   "head": {
+    "today": [
+     1.59,
+     211.03
+    ],
+    "turned": [
+     8.31,
+     -150.85
+    ]
+   },
+   "ends_in": "H'Jamo Melaĥa",
+   "ends_in_anchor": "sea:South Pole–Aitken Sea",
+   "fed_by": "headwaters",
+   "works": false,
+   "length_km": 1705,
+   "lake_km": 1294,
+   "channel_km": 411,
+   "lakes_crossed": 29,
+   "flow_mouth_m3s": 13812,
+   "flow_greatest_m3s": 13814,
+   "flow_head_m3s": 123,
+   "lowest_year_m3s": null,
+   "falters_km": null,
+   "steep_reaches": 7,
+   "steep_gw": 67.3,
+   "regions": [
+    {
+     "name": "Pukutayllaqta",
+     "anchor": "region:lake:-19.2,-163.1",
+     "tongue": "runa",
+     "share": 0.57
+    },
+    {
+     "name": "Gubat na Geshem",
+     "anchor": "region:lake:0.8,-128.7@2,-120",
+     "tongue": "tagalhebrew",
+     "share": 0.34
+    },
+    {
+     "name": "Paraurqu",
+     "anchor": "region:lake:-9.1,-177.1",
+     "tongue": "runa",
+     "share": 0.09
+    }
+   ],
+   "course": [
+    [
+     -16.759,
+     -168.692
+    ],
+    [
+     -16.32,
+     -168.652
+    ],
+    [
+     -16.005,
+     -168.607
+    ],
+    [
+     -15.685,
+     -168.441
+    ],
+    [
+     -14.182,
+     -168.388
+    ],
+    [
+     -13.271,
+     -169.035
+    ],
+    [
+     -12.821,
+     -168.752
+    ],
+    [
+     -12.693,
+     -168.697
+    ],
+    [
+     -12.508,
+     -168.766
+    ],
+    [
+     -12.516,
+     -168.948
+    ],
+    [
+     -11.257,
+     -168.761
+    ],
+    [
+     -10.947,
+     -168.836
+    ],
+    [
+     -11.023,
+     -166.034
+    ],
+    [
+     -11.081,
+     -165.91
+    ],
+    [
+     -11.068,
+     -165.546
+    ],
+    [
+     -13.676,
+     -161.036
+    ],
+    [
+     -13.735,
+     -160.914
+    ],
+    [
+     -13.858,
+     -160.85
+    ],
+    [
+     -13.982,
+     -160.786
+    ],
+    [
+     -14.104,
+     -160.662
+    ],
+    [
+     -14.533,
+     -160.349
+    ],
+    [
+     -12.823,
+     -156.465
+    ],
+    [
+     -12.882,
+     -156.283
+    ],
+    [
+     -12.756,
+     -156.225
+    ],
+    [
+     -12.754,
+     -156.104
+    ],
+    [
+     -12.815,
+     -155.982
+    ],
+    [
+     -12.875,
+     -155.86
+    ],
+    [
+     -12.872,
+     -155.679
+    ],
+    [
+     -13.302,
+     -155.189
+    ],
+    [
+     -15.2,
+     -151.672
+    ],
+    [
+     -15.074,
+     -151.613
+    ],
+    [
+     -14.887,
+     -151.615
+    ],
+    [
+     -14.762,
+     -151.676
+    ],
+    [
+     -14.637,
+     -151.617
+    ],
+    [
+     -14.635,
+     -151.436
+    ],
+    [
+     -14.572,
+     -151.316
+    ],
+    [
+     -14.131,
+     -150.838
+    ],
+    [
+     -9.436,
+     -148.798
+    ],
+    [
+     -9.311,
+     -148.737
+    ],
+    [
+     -9.124,
+     -148.737
+    ],
+    [
+     -8.936,
+     -148.798
+    ],
+    [
+     -8.811,
+     -148.677
+    ],
+    [
+     -8.623,
+     -148.555
+    ],
+    [
+     -8.123,
+     -148.495
+    ],
+    [
+     -7.936,
+     -148.434
+    ],
+    [
+     -6.998,
+     -147.884
+    ],
+    [
+     -6.748,
+     -147.762
+    ],
+    [
+     -5.936,
+     -147.516
+    ],
+    [
+     -5.749,
+     -147.393
+    ],
+    [
+     -5.624,
+     -147.27
+    ],
+    [
+     -5.562,
+     -147.086
+    ],
+    [
+     -5.438,
+     -146.41
+    ],
+    [
+     -5.188,
+     -146.41
+    ],
+    [
+     -5.064,
+     -146.348
+    ],
+    [
+     -4.814,
+     -146.347
+    ],
+    [
+     -0.561,
+     -147.696
+    ],
+    [
+     -0.436,
+     -147.634
+    ],
+    [
+     -0.311,
+     -147.696
+    ],
+    [
+     -0.186,
+     -147.634
+    ],
+    [
+     0.127,
+     -147.509
+    ],
+    [
+     0.439,
+     -147.384
+    ],
+    [
+     0.751,
+     -147.073
+    ],
+    [
+     4.06,
+     -146.003
+    ],
+    [
+     4.185,
+     -145.877
+    ],
+    [
+     4.31,
+     -145.939
+    ],
+    [
+     4.689,
+     -148.005
+    ],
+    [
+     4.627,
+     -148.131
+    ],
+    [
+     4.563,
+     -149.259
+    ],
+    [
+     4.312,
+     -149.508
+    ],
+    [
+     5.496,
+     -150.391
+    ],
+    [
+     5.871,
+     -150.518
+    ],
+    [
+     8.057,
+     -150.656
+    ],
+    [
+     8.306,
+     -150.846
+    ]
+   ],
+   "name": "Pukutaymayu",
+   "tongue": "Runa (Quechua-rooted)",
+   "meaning": "Mist River (pukutay mist + mayu river), down from the Moon's highest ground"
+  },
+  {
+   "anchor": "river:12.3,346.0",
+   "mouth": {
+    "today": [
+     12.34,
      345.97
     ],
     "turned": [
-     7.85,
+     7.79,
      -15.0
     ]
    },
    "head": {
     "today": [
-     -1.53,
-     6.53
+     -2.03,
+     6.97
     ],
     "turned": [
-     -7.5,
-     4.44
+     -8.02,
+     4.85
     ]
    },
    "ends_in": "Uamoana",
    "ends_in_anchor": "sea:near-side sea",
    "fed_by": "headwaters",
    "works": false,
-   "length_km": 1436,
-   "lake_km": 815,
-   "channel_km": 621,
+   "length_km": 1414,
+   "lake_km": 795,
+   "channel_km": 619,
    "lakes_crossed": 36,
-   "flow_mouth_m3s": 8436,
-   "flow_greatest_m3s": 8436,
-   "flow_head_m3s": 119,
-   "lowest_year_m3s": 6872,
-   "falters_km": 0,
+   "flow_mouth_m3s": 9670,
+   "flow_greatest_m3s": 9670,
+   "flow_head_m3s": 142,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -2376,19 +2094,19 @@
      "name": "Pooirimania",
      "anchor": "region:feature:Sinus Medii",
      "tongue": "terlunan",
-     "share": 0.71
+     "share": 0.62
     },
     {
      "name": "Kohulim",
      "anchor": "region:feature:Lacus Lenitatis",
      "tongue": "terlunan",
-     "share": 0.29
+     "share": 0.38
     }
    ],
    "course": [
     [
-     7.854,
-     -14.996
+     7.791,
+     -15.001
     ],
     [
      7.605,
@@ -2779,8 +2497,8 @@
      5.09
     ],
     [
-     -7.5,
-     4.437
+     -8.022,
+     4.851
     ]
    ],
    "name": "Pooiriawa",
@@ -2817,25 +2535,25 @@
    "lake_km": 739,
    "channel_km": 143,
    "lakes_crossed": 7,
-   "flow_mouth_m3s": 8248,
-   "flow_greatest_m3s": 8259,
-   "flow_head_m3s": 129,
-   "lowest_year_m3s": 7354,
-   "falters_km": 0,
+   "flow_mouth_m3s": 8837,
+   "flow_greatest_m3s": 9392,
+   "flow_head_m3s": 138,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 1,
-   "steep_gw": 19.6,
+   "steep_gw": 21.1,
    "regions": [
     {
      "name": "Dungusiyenloko",
      "anchor": "region:lake:37.6,172.2",
      "tongue": "terlunan",
-     "share": 0.65
+     "share": 0.52
     },
     {
      "name": "Paraurqu",
      "anchor": "region:lake:-9.1,-177.1",
      "tongue": "runa",
-     "share": 0.35
+     "share": 0.48
     }
    ],
    "course": [
@@ -2921,147 +2639,253 @@
    "meaning": "Falls River (rere falls + awa river), for its one great fall"
   },
   {
-   "anchor": "river:3.6,302.2",
+   "anchor": "river:57.1,111.8",
    "mouth": {
     "today": [
-     3.59,
-     302.16
+     57.09,
+     111.78
     ],
     "turned": [
-     3.76,
-     -59.26
+     55.14,
+     100.33
     ]
    },
    "head": {
     "today": [
-     8.41,
-     301.72
+     35.22,
+     138.72
     ],
     "turned": [
-     8.59,
-     -59.13
+     36.68,
+     132.11
     ]
    },
-   "ends_in": "Bultengiz",
-   "ends_in_anchor": "sea:southern near-side seas",
-   "fed_by": "the spill of Uamoana over its neck",
-   "works": false,
-   "length_km": 204,
-   "lake_km": 78,
-   "channel_km": 126,
-   "lakes_crossed": 8,
-   "flow_mouth_m3s": 7541,
-   "flow_greatest_m3s": 7630,
-   "flow_head_m3s": 7630,
-   "lowest_year_m3s": 7340,
-   "falters_km": 0,
-   "steep_reaches": 0,
-   "steep_gw": 0.0,
+   "ends_in": "Juldyztengiz",
+   "ends_in_anchor": "sea:Mare Humboldtianum",
+   "fed_by": "a branch the works cut from Hanaqucha",
+   "works": true,
+   "length_km": 1101,
+   "lake_km": 863,
+   "channel_km": 238,
+   "lakes_crossed": 21,
+   "flow_mouth_m3s": 6237,
+   "flow_greatest_m3s": 22389,
+   "flow_head_m3s": 22389,
+   "lowest_year_m3s": null,
+   "falters_km": null,
+   "steep_reaches": 2,
+   "steep_gw": 15.8,
    "regions": [
     {
-     "name": "Karadala",
-     "anchor": "region:lake:5.0,-34.4",
-     "tongue": "dala",
-     "share": 1.0
+     "name": "Tamazirt Raml",
+     "anchor": "region:ground:50.1,107.8",
+     "tongue": "sahran",
+     "share": 0.82
+    },
+    {
+     "name": "Kiriguni",
+     "anchor": "region:lake:16.3,134.8",
+     "tongue": "satoyama",
+     "share": 0.18
     }
    ],
    "course": [
     [
-     3.762,
-     -59.261
+     55.14,
+     100.33
     ],
     [
-     3.871,
-     -59.122
+     54.97,
+     100.512
     ],
     [
-     4.058,
-     -59.1
+     54.265,
+     103.747
     ],
     [
-     4.244,
-     -59.078
+     54.183,
+     103.592
     ],
     [
-     4.383,
-     -59.187
+     54.033,
+     103.398
     ],
     [
-     4.569,
-     -59.165
+     51.472,
+     108.668
     ],
     [
-     4.755,
-     -59.143
+     51.952,
+     108.955
     ],
     [
-     5.204,
-     -58.146
+     52.023,
+     109.555
     ],
     [
-     6.635,
-     -59.612
+     52.106,
+     109.716
     ],
     [
-     6.712,
-     -59.729
+     51.452,
+     110.107
     ],
     [
-     6.789,
-     -59.845
+     51.228,
+     110.362
     ],
     [
-     7.099,
-     -59.808
+     50.812,
+     111.675
     ],
     [
-     7.285,
-     -59.786
+     50.566,
+     111.748
     ],
     [
-     7.479,
-     -59.826
+     50.158,
+     113.122
     ],
     [
-     7.658,
-     -59.742
+     50.132,
+     113.443
     ],
     [
-     7.837,
-     -59.657
+     50.161,
+     113.686
     ],
     [
-     7.946,
-     -59.518
+     50.544,
+     113.7
     ],
     [
-     8.056,
-     -59.379
+     49.902,
+     119.526
     ],
     [
-     8.165,
-     -59.24
+     50.098,
+     120.108
     ],
     [
-     8.282,
-     -59.163
+     44.287,
+     124.091
     ],
     [
-     8.399,
-     -59.086
+     43.949,
+     123.912
     ],
     [
-     8.53,
-     -59.133
+     42.959,
+     124.644
     ],
     [
-     8.592,
-     -59.125
+     42.781,
+     124.747
+    ],
+    [
+     42.378,
+     125.09
+    ],
+    [
+     43.265,
+     126.179
+    ],
+    [
+     43.16,
+     126.908
+    ],
+    [
+     41.148,
+     129.198
+    ],
+    [
+     41.107,
+     129.399
+    ],
+    [
+     40.998,
+     129.55
+    ],
+    [
+     40.842,
+     129.839
+    ],
+    [
+     40.721,
+     131.539
+    ],
+    [
+     40.59,
+     131.501
+    ],
+    [
+     40.267,
+     131.436
+    ],
+    [
+     40.15,
+     131.523
+    ],
+    [
+     39.918,
+     131.697
+    ],
+    [
+     39.663,
+     131.682
+    ],
+    [
+     39.47,
+     131.655
+    ],
+    [
+     39.377,
+     130.835
+    ],
+    [
+     37.402,
+     130.69
+    ],
+    [
+     37.292,
+     130.838
+    ],
+    [
+     37.314,
+     131.027
+    ],
+    [
+     37.205,
+     131.175
+    ],
+    [
+     37.095,
+     131.323
+    ],
+    [
+     36.917,
+     131.42
+    ],
+    [
+     37.015,
+     131.724
+    ],
+    [
+     36.975,
+     131.924
+    ],
+    [
+     36.742,
+     132.094
+    ],
+    [
+     36.68,
+     132.105
     ]
    ],
-   "name": "Jarykgol",
-   "tongue": "Dala (Turkic- and Mongolic-rooted)",
-   "meaning": "Light River (jaryk light + gol river), a sea's spill over its neck, under a high Earth"
+   "name": "Asif Dahab",
+   "tongue": "Sahran (Arabic- and Amazigh-rooted)",
+   "meaning": "Gold River (asif river + dahab gold), water the works brought to the sand land"
   },
   {
    "anchor": "river:-45.1,230.0",
@@ -3077,53 +2901,53 @@
    },
    "head": {
     "today": [
-     -10.41,
-     230.03
+     -10.16,
+     229.53
     ],
     "turned": [
-     -3.95,
-     -132.05
+     -3.68,
+     -132.54
     ]
    },
    "ends_in": "H'Jamo Melaĥa",
    "ends_in_anchor": "sea:South Pole–Aitken Sea",
    "fed_by": "headwaters",
    "works": false,
-   "length_km": 1620,
-   "lake_km": 1227,
+   "length_km": 1621,
+   "lake_km": 1228,
    "channel_km": 393,
    "lakes_crossed": 36,
-   "flow_mouth_m3s": 5578,
-   "flow_greatest_m3s": 5612,
-   "flow_head_m3s": 118,
-   "lowest_year_m3s": 4872,
-   "falters_km": 0,
+   "flow_mouth_m3s": 4905,
+   "flow_greatest_m3s": 5027,
+   "flow_head_m3s": 125,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 3,
-   "steep_gw": 16.9,
+   "steep_gw": 15.9,
    "regions": [
     {
      "name": "Mto Usiku",
      "anchor": "region:lake:-33.3,-124.3@-36,-123",
      "tongue": "pwani",
-     "share": 0.47
-    },
-    {
-     "name": "H'Erco Zahava",
-     "anchor": "region:ground:-54.9,-88.9",
-     "tongue": "olivolingvo",
-     "share": 0.24
+     "share": 0.51
     },
     {
      "name": "Pukutayllaqta",
      "anchor": "region:lake:-19.2,-163.1",
      "tongue": "runa",
+     "share": 0.24
+    },
+    {
+     "name": "H'Erco Zahava",
+     "anchor": "region:ground:-54.9,-88.9",
+     "tongue": "olivolingvo",
      "share": 0.21
     },
     {
      "name": "Gubat na Geshem",
      "anchor": "region:lake:0.8,-128.7@2,-120",
      "tongue": "tagalhebrew",
-     "share": 0.07
+     "share": 0.04
     }
    ],
    "course": [
@@ -3420,262 +3244,13 @@
      -133.152
     ],
     [
-     -3.949,
-     -132.053
+     -3.683,
+     -132.538
     ]
    ],
    "name": "Mto Jiwe",
    "tongue": "Pwani (Swahili-rooted)",
    "meaning": "Stone River (mto river + jiwe stone)"
-  },
-  {
-   "anchor": "river:57.1,111.8",
-   "mouth": {
-    "today": [
-     57.09,
-     111.78
-    ],
-    "turned": [
-     55.14,
-     100.33
-    ]
-   },
-   "head": {
-    "today": [
-     35.22,
-     138.72
-    ],
-    "turned": [
-     36.68,
-     132.11
-    ]
-   },
-   "ends_in": "Juldyztengiz",
-   "ends_in_anchor": "sea:Mare Humboldtianum",
-   "fed_by": "a branch the works cut from Hanaqucha",
-   "works": true,
-   "length_km": 1101,
-   "lake_km": 863,
-   "channel_km": 238,
-   "lakes_crossed": 21,
-   "flow_mouth_m3s": 5237,
-   "flow_greatest_m3s": 15620,
-   "flow_head_m3s": 15610,
-   "lowest_year_m3s": 5155,
-   "falters_km": 0,
-   "steep_reaches": 1,
-   "steep_gw": 7.8,
-   "regions": [
-    {
-     "name": "Tamazirt Raml",
-     "anchor": "region:ground:50.1,107.8",
-     "tongue": "sahran",
-     "share": 0.84
-    },
-    {
-     "name": "Kiriguni",
-     "anchor": "region:lake:16.3,134.8",
-     "tongue": "satoyama",
-     "share": 0.16
-    }
-   ],
-   "course": [
-    [
-     55.14,
-     100.33
-    ],
-    [
-     54.97,
-     100.512
-    ],
-    [
-     54.265,
-     103.747
-    ],
-    [
-     54.183,
-     103.592
-    ],
-    [
-     54.033,
-     103.398
-    ],
-    [
-     51.472,
-     108.668
-    ],
-    [
-     51.952,
-     108.955
-    ],
-    [
-     52.023,
-     109.555
-    ],
-    [
-     52.106,
-     109.716
-    ],
-    [
-     51.452,
-     110.107
-    ],
-    [
-     51.228,
-     110.362
-    ],
-    [
-     50.812,
-     111.675
-    ],
-    [
-     50.566,
-     111.748
-    ],
-    [
-     50.158,
-     113.122
-    ],
-    [
-     50.132,
-     113.443
-    ],
-    [
-     50.161,
-     113.686
-    ],
-    [
-     50.544,
-     113.7
-    ],
-    [
-     49.902,
-     119.526
-    ],
-    [
-     50.098,
-     120.108
-    ],
-    [
-     44.287,
-     124.091
-    ],
-    [
-     43.949,
-     123.912
-    ],
-    [
-     42.959,
-     124.644
-    ],
-    [
-     42.781,
-     124.747
-    ],
-    [
-     42.378,
-     125.09
-    ],
-    [
-     43.265,
-     126.179
-    ],
-    [
-     43.16,
-     126.908
-    ],
-    [
-     41.148,
-     129.198
-    ],
-    [
-     41.107,
-     129.399
-    ],
-    [
-     40.998,
-     129.55
-    ],
-    [
-     40.842,
-     129.839
-    ],
-    [
-     40.721,
-     131.539
-    ],
-    [
-     40.59,
-     131.501
-    ],
-    [
-     40.267,
-     131.436
-    ],
-    [
-     40.15,
-     131.523
-    ],
-    [
-     39.918,
-     131.697
-    ],
-    [
-     39.663,
-     131.682
-    ],
-    [
-     39.47,
-     131.655
-    ],
-    [
-     39.377,
-     130.835
-    ],
-    [
-     37.402,
-     130.69
-    ],
-    [
-     37.292,
-     130.838
-    ],
-    [
-     37.314,
-     131.027
-    ],
-    [
-     37.205,
-     131.175
-    ],
-    [
-     37.095,
-     131.323
-    ],
-    [
-     36.917,
-     131.42
-    ],
-    [
-     37.015,
-     131.724
-    ],
-    [
-     36.975,
-     131.924
-    ],
-    [
-     36.742,
-     132.094
-    ],
-    [
-     36.68,
-     132.105
-    ]
-   ],
-   "name": "Asif Dahab",
-   "tongue": "Sahran (Arabic- and Amazigh-rooted)",
-   "meaning": "Gold River (asif river + dahab gold), water the works brought to the sand land"
   },
   {
    "anchor": "river:16.8,13.5",
@@ -3691,27 +3266,27 @@
    },
    "head": {
     "today": [
-     -11.72,
-     16.28
+     -13.28,
+     17.34
     ],
     "turned": [
-     -18.12,
-     13.88
+     -19.72,
+     14.92
     ]
    },
    "ends_in": "Uamoana",
    "ends_in_anchor": "sea:near-side sea",
    "fed_by": "headwaters",
    "works": false,
-   "length_km": 1257,
-   "lake_km": 907,
-   "channel_km": 349,
-   "lakes_crossed": 27,
-   "flow_mouth_m3s": 3676,
-   "flow_greatest_m3s": 3722,
+   "length_km": 1316,
+   "lake_km": 926,
+   "channel_km": 391,
+   "lakes_crossed": 31,
+   "flow_mouth_m3s": 4289,
+   "flow_greatest_m3s": 4531,
    "flow_head_m3s": 100,
-   "lowest_year_m3s": 3002,
-   "falters_km": 4,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -3719,13 +3294,13 @@
      "name": "Kohulim",
      "anchor": "region:feature:Lacus Lenitatis",
      "tongue": "terlunan",
-     "share": 0.73
+     "share": 0.69
     },
     {
      "name": "Atafenua",
      "anchor": "region:lake:-16.5,43.7",
      "tongue": "terlunan",
-     "share": 0.27
+     "share": 0.31
     }
    ],
    "course": [
@@ -3986,20 +3561,56 @@
      14.125
     ],
     [
-     -18.072,
-     14.337
+     -18.259,
+     14.33
     ],
     [
-     -18.13,
-     14.206
+     -18.442,
+     14.194
     ],
     [
-     -18.183,
-     13.946
+     -18.632,
+     14.251
     ],
     [
-     -18.119,
-     13.884
+     -18.765,
+     14.504
+    ],
+    [
+     -18.895,
+     14.628
+    ],
+    [
+     -18.837,
+     14.759
+    ],
+    [
+     -18.903,
+     14.886
+    ],
+    [
+     -19.03,
+     14.946
+    ],
+    [
+     -19.153,
+     14.877
+    ],
+    [
+     -19.345,
+     14.999
+    ],
+    [
+     -19.474,
+     15.123
+    ],
+    [
+     -19.53,
+     14.927
+    ],
+    [
+     -19.717,
+     14.92
     ]
    ],
    "name": "Tiareawa",
@@ -4020,27 +3631,27 @@
    },
    "head": {
     "today": [
-     8.03,
-     195.53
+     8.09,
+     194.72
     ],
     "turned": [
-     14.41,
-     -166.74
+     14.44,
+     -167.57
     ]
    },
    "ends_in": "Hanaqucha",
    "ends_in_anchor": "sea:Mare Moscoviense",
    "fed_by": "headwaters",
    "works": false,
-   "length_km": 509,
-   "lake_km": 346,
+   "length_km": 485,
+   "lake_km": 322,
    "channel_km": 163,
    "lakes_crossed": 8,
-   "flow_mouth_m3s": 3357,
-   "flow_greatest_m3s": 3357,
-   "flow_head_m3s": 125,
-   "lowest_year_m3s": 3025,
-   "falters_km": 0,
+   "flow_mouth_m3s": 3895,
+   "flow_greatest_m3s": 3895,
+   "flow_head_m3s": 319,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -4147,10 +3758,6 @@
     [
      14.437,
      -167.574
-    ],
-    [
-     14.406,
-     -166.741
     ]
    ],
    "name": "Wayramayu",
@@ -4171,27 +3778,27 @@
    },
    "head": {
     "today": [
-     -0.84,
-     138.03
+     -0.47,
+     137.97
     ],
     "turned": [
-     0.81,
-     136.18
+     1.18,
+     136.08
     ]
    },
    "ends_in": "Hanaqucha",
    "ends_in_anchor": "sea:Mare Moscoviense",
    "fed_by": "headwaters",
    "works": false,
-   "length_km": 678,
+   "length_km": 688,
    "lake_km": 521,
-   "channel_km": 156,
-   "lakes_crossed": 14,
-   "flow_mouth_m3s": 2571,
-   "flow_greatest_m3s": 2571,
-   "flow_head_m3s": 118,
-   "lowest_year_m3s": 2399,
-   "falters_km": 4,
+   "channel_km": 167,
+   "lakes_crossed": 15,
+   "flow_mouth_m3s": 3149,
+   "flow_greatest_m3s": 3149,
+   "flow_head_m3s": 103,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -4324,13 +3931,407 @@
      136.363
     ],
     [
-     0.81,
-     136.184
+     0.872,
+     136.177
+    ],
+    [
+     0.989,
+     136.101
+    ],
+    [
+     1.175,
+     136.079
     ]
    ],
    "name": "Puyumayu",
    "tongue": "Runa (Quechua-rooted)",
    "meaning": "Cloud River (puyu cloud + mayu river), the cloud lakes' river"
+  },
+  {
+   "anchor": "river:-35.8,100.8",
+   "mouth": {
+    "today": [
+     -35.78,
+     100.84
+    ],
+    "turned": [
+     -38.15,
+     103.74
+    ]
+   },
+   "head": {
+    "today": [
+     -13.28,
+     116.78
+    ],
+    "turned": [
+     -14.01,
+     116.56
+    ]
+   },
+   "ends_in": "a lake that passes little on",
+   "ends_in_anchor": null,
+   "fed_by": "headwaters",
+   "works": false,
+   "length_km": 1139,
+   "lake_km": 999,
+   "channel_km": 139,
+   "lakes_crossed": 13,
+   "flow_mouth_m3s": 2585,
+   "flow_greatest_m3s": 2585,
+   "flow_head_m3s": 172,
+   "lowest_year_m3s": null,
+   "falters_km": null,
+   "steep_reaches": 0,
+   "steep_gw": 0.0,
+   "regions": [
+    {
+     "name": "Asadani",
+     "anchor": "region:lake:-23.3,106.1",
+     "tongue": "satoyama",
+     "share": 0.46
+    },
+    {
+     "name": "H'Montetim Ŝemeŝa",
+     "anchor": "region:lake:-40.0,132.2@-46,132",
+     "tongue": "olivolingvo",
+     "share": 0.32
+    },
+    {
+     "name": "Vilima Alfajiri",
+     "anchor": "region:lake:-12.6,90.0",
+     "tongue": "pwani",
+     "share": 0.22
+    }
+   ],
+   "course": [
+    [
+     -38.149,
+     103.736
+    ],
+    [
+     -30.224,
+     103.568
+    ],
+    [
+     -30.011,
+     103.215
+    ],
+    [
+     -27.983,
+     99.835
+    ],
+    [
+     -27.872,
+     99.691
+    ],
+    [
+     -27.755,
+     99.611
+    ],
+    [
+     -25.364,
+     100.192
+    ],
+    [
+     -25.253,
+     100.049
+    ],
+    [
+     -25.136,
+     99.97
+    ],
+    [
+     -24.949,
+     99.945
+    ],
+    [
+     -24.819,
+     99.992
+    ],
+    [
+     -24.619,
+     100.095
+    ],
+    [
+     -24.501,
+     100.016
+    ],
+    [
+     -24.384,
+     99.936
+    ],
+    [
+     -24.24,
+     100.11
+    ],
+    [
+     -20.606,
+     101.124
+    ],
+    [
+     -20.158,
+     101.196
+    ],
+    [
+     -18.565,
+     101.959
+    ],
+    [
+     -18.545,
+     102.147
+    ],
+    [
+     -18.469,
+     102.266
+    ],
+    [
+     -15.259,
+     107.914
+    ],
+    [
+     -15.23,
+     108.164
+    ],
+    [
+     -14.107,
+     114.104
+    ],
+    [
+     -14.202,
+     114.368
+    ],
+    [
+     -14.07,
+     114.415
+    ],
+    [
+     -13.662,
+     114.681
+    ],
+    [
+     -13.703,
+     115.949
+    ],
+    [
+     -14.009,
+     116.556
+    ]
+   ],
+   "name": null,
+   "tongue": null,
+   "meaning": ""
+  },
+  {
+   "anchor": "river:-50.2,131.6",
+   "mouth": {
+    "today": [
+     -50.16,
+     131.59
+    ],
+    "turned": [
+     -48.8,
+     137.46
+    ]
+   },
+   "head": {
+    "today": [
+     -8.16,
+     138.78
+    ],
+    "turned": [
+     -6.37,
+     137.76
+    ]
+   },
+   "ends_in": "a lake that passes little on",
+   "ends_in_anchor": null,
+   "fed_by": "headwaters",
+   "works": false,
+   "length_km": 1868,
+   "lake_km": 1640,
+   "channel_km": 228,
+   "lakes_crossed": 16,
+   "flow_mouth_m3s": 2345,
+   "flow_greatest_m3s": 2745,
+   "flow_head_m3s": 109,
+   "lowest_year_m3s": null,
+   "falters_km": null,
+   "steep_reaches": 0,
+   "steep_gw": 0.0,
+   "regions": [
+    {
+     "name": "H'Montetim Ŝemeŝa",
+     "anchor": "region:lake:-40.0,132.2@-46,132",
+     "tongue": "olivolingvo",
+     "share": 0.47
+    },
+    {
+     "name": "Puyuquchakuna",
+     "anchor": "region:lake:-22.7,135.5",
+     "tongue": "runa",
+     "share": 0.42
+    },
+    {
+     "name": "Vilima Alfajiri",
+     "anchor": "region:lake:-12.6,90.0",
+     "tongue": "pwani",
+     "share": 0.12
+    }
+   ],
+   "course": [
+    [
+     -48.795,
+     137.459
+    ],
+    [
+     -33.865,
+     130.984
+    ],
+    [
+     -33.817,
+     130.851
+    ],
+    [
+     -33.704,
+     130.206
+    ],
+    [
+     -30.952,
+     122.515
+    ],
+    [
+     -30.835,
+     122.434
+    ],
+    [
+     -30.318,
+     122.541
+    ],
+    [
+     -28.499,
+     124.592
+    ],
+    [
+     -28.608,
+     124.735
+    ],
+    [
+     -28.656,
+     124.868
+    ],
+    [
+     -28.703,
+     125.002
+    ],
+    [
+     -26.71,
+     128.535
+    ],
+    [
+     -26.826,
+     128.615
+    ],
+    [
+     -27.348,
+     129.006
+    ],
+    [
+     -26.444,
+     132.939
+    ],
+    [
+     -25.789,
+     133.156
+    ],
+    [
+     -24.179,
+     133.988
+    ],
+    [
+     -23.674,
+     134.541
+    ],
+    [
+     -19.203,
+     137.808
+    ],
+    [
+     -18.811,
+     137.384
+    ],
+    [
+     -14.247,
+     139.871
+    ],
+    [
+     -14.171,
+     139.987
+    ],
+    [
+     -14.474,
+     140.646
+    ],
+    [
+     -13.681,
+     140.988
+    ],
+    [
+     -13.508,
+     140.842
+    ],
+    [
+     -10.956,
+     142.289
+    ],
+    [
+     -10.638,
+     142.315
+    ],
+    [
+     -10.231,
+     142.018
+    ],
+    [
+     -9.948,
+     141.736
+    ],
+    [
+     -9.879,
+     140.666
+    ],
+    [
+     -9.769,
+     140.529
+    ],
+    [
+     -7.727,
+     139.668
+    ],
+    [
+     -7.679,
+     139.537
+    ],
+    [
+     -7.019,
+     138.147
+    ],
+    [
+     -6.791,
+     137.933
+    ],
+    [
+     -6.674,
+     137.856
+    ],
+    [
+     -6.371,
+     137.759
+    ]
+   ],
+   "name": "H'Naharo Longa",
+   "tongue": "Proto-Olivolingvo",
+   "meaning": "the Long River (h' the + naharo river + longa long), the longest waterway"
   },
   {
    "anchor": "river:8.8,146.9",
@@ -4346,27 +4347,27 @@
    },
    "head": {
     "today": [
-     3.59,
-     137.84
+     3.97,
+     137.91
     ],
     "turned": [
-     5.2,
-     135.49
+     5.58,
+     135.51
     ]
    },
    "ends_in": "Hanaqucha",
    "ends_in_anchor": "sea:Mare Moscoviense",
    "fed_by": "headwaters",
    "works": false,
-   "length_km": 324,
-   "lake_km": 293,
+   "length_km": 316,
+   "lake_km": 286,
    "channel_km": 31,
    "lakes_crossed": 3,
-   "flow_mouth_m3s": 1777,
-   "flow_greatest_m3s": 1777,
-   "flow_head_m3s": 133,
-   "lowest_year_m3s": 1448,
-   "falters_km": 0,
+   "flow_mouth_m3s": 2159,
+   "flow_greatest_m3s": 2159,
+   "flow_head_m3s": 103,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
@@ -4407,8 +4408,8 @@
      143.147
     ],
     [
-     5.197,
-     135.492
+     5.577,
+     135.511
     ]
    ],
    "name": "Quyllurmayu",
@@ -4416,594 +4417,783 @@
    "meaning": "Star River (quyllur star + mayu river), under the far side's dark nights"
   },
   {
-   "anchor": "river:1.4,302.5",
+   "anchor": "river:-34.8,113.9",
    "mouth": {
     "today": [
-     1.41,
-     302.47
+     -34.78,
+     113.91
     ],
     "turned": [
-     1.55,
-     -59.21
+     -35.67,
+     116.77
     ]
    },
    "head": {
     "today": [
-     -8.72,
-     290.22
+     -13.78,
+     123.28
     ],
     "turned": [
-     -7.09,
-     -72.54
+     -13.75,
+     123.08
     ]
    },
-   "ends_in": "Bultengiz",
-   "ends_in_anchor": "sea:southern near-side seas",
+   "ends_in": "a lake that passes little on",
+   "ends_in_anchor": null,
    "fed_by": "headwaters",
    "works": false,
-   "length_km": 604,
-   "lake_km": 386,
-   "channel_km": 218,
-   "lakes_crossed": 12,
-   "flow_mouth_m3s": 1575,
-   "flow_greatest_m3s": 1581,
-   "flow_head_m3s": 146,
-   "lowest_year_m3s": 1143,
-   "falters_km": 0,
+   "length_km": 758,
+   "lake_km": 668,
+   "channel_km": 90,
+   "lakes_crossed": 8,
+   "flow_mouth_m3s": 1282,
+   "flow_greatest_m3s": 1282,
+   "flow_head_m3s": 139,
+   "lowest_year_m3s": null,
+   "falters_km": null,
    "steep_reaches": 0,
    "steep_gw": 0.0,
    "regions": [
     {
-     "name": "Tambarare Wingu",
-     "anchor": "region:lake:-15.5,-48.9",
-     "tongue": "pwani",
-     "share": 1.0
-    }
-   ],
-   "course": [
-    [
-     1.553,
-     -59.207
-    ],
-    [
-     1.367,
-     -59.229
-    ],
-    [
-     1.126,
-     -59.32
-    ],
-    [
-     0.94,
-     -59.342
-    ],
-    [
-     1.089,
-     -60.08
-    ],
-    [
-     1.071,
-     -62.599
-    ],
-    [
-     1.024,
-     -62.731
-    ],
-    [
-     0.633,
-     -63.154
-    ],
-    [
-     0.815,
-     -63.636
-    ],
-    [
-     0.954,
-     -63.746
-    ],
-    [
-     0.859,
-     -64.009
-    ],
-    [
-     0.683,
-     -64.659
-    ],
-    [
-     0.698,
-     -64.783
-    ],
-    [
-     0.774,
-     -64.9
-    ],
-    [
-     0.665,
-     -65.038
-    ],
-    [
-     0.57,
-     -65.301
-    ],
-    [
-     0.646,
-     -65.418
-    ],
-    [
-     0.668,
-     -65.604
-    ],
-    [
-     0.752,
-     -65.783
-    ],
-    [
-     0.828,
-     -65.9
-    ],
-    [
-     1.084,
-     -65.933
-    ],
-    [
-     1.036,
-     -66.065
-    ],
-    [
-     1.175,
-     -66.175
-    ],
-    [
-     1.306,
-     -66.222
-    ],
-    [
-     1.383,
-     -66.339
-    ],
-    [
-     1.405,
-     -66.525
-    ],
-    [
-     1.295,
-     -66.664
-    ],
-    [
-     1.109,
-     -66.686
-    ],
-    [
-     0.93,
-     -66.77
-    ],
-    [
-     0.904,
-     -67.087
-    ],
-    [
-     0.718,
-     -67.109
-    ],
-    [
-     0.443,
-     -67.455
-    ],
-    [
-     0.121,
-     -67.933
-    ],
-    [
-     -0.172,
-     -68.659
-    ],
-    [
-     -0.698,
-     -68.468
-    ],
-    [
-     -7.087,
-     -72.537
-    ]
-   ],
-   "name": "Mto Jani",
-   "tongue": "Pwani (Swahili-rooted)",
-   "meaning": "Leaf River (mto river + jani leaf)"
-  },
-  {
-   "anchor": "river:-14.1,311.5",
-   "mouth": {
-    "today": [
-     -14.09,
-     311.53
-    ],
-    "turned": [
-     -14.9,
-     -52.05
-    ]
-   },
-   "head": {
-    "today": [
-     -22.16,
-     304.91
-    ],
-    "turned": [
-     -22.12,
-     -59.68
-    ]
-   },
-   "ends_in": "Bultengiz",
-   "ends_in_anchor": "sea:southern near-side seas",
-   "fed_by": "headwaters",
-   "works": false,
-   "length_km": 397,
-   "lake_km": 277,
-   "channel_km": 121,
-   "lakes_crossed": 10,
-   "flow_mouth_m3s": 1453,
-   "flow_greatest_m3s": 1453,
-   "flow_head_m3s": 106,
-   "lowest_year_m3s": 674,
-   "falters_km": 0,
-   "steep_reaches": 0,
-   "steep_gw": 0.0,
-   "regions": [
-    {
-     "name": "Tambarare Wingu",
-     "anchor": "region:lake:-15.5,-48.9",
-     "tongue": "pwani",
-     "share": 1.0
-    }
-   ],
-   "course": [
-    [
-     -14.898,
-     -52.045
-    ],
-    [
-     -15.38,
-     -52.232
-    ],
-    [
-     -16.971,
-     -53.698
-    ],
-    [
-     -17.048,
-     -53.581
-    ],
-    [
-     -17.179,
-     -53.535
-    ],
-    [
-     -17.358,
-     -53.621
-    ],
-    [
-     -17.635,
-     -53.404
-    ],
-    [
-     -18.022,
-     -53.327
-    ],
-    [
-     -18.099,
-     -53.211
-    ],
-    [
-     -18.058,
-     -53.016
-    ],
-    [
-     -17.949,
-     -52.875
-    ],
-    [
-     -18.025,
-     -52.759
-    ],
-    [
-     -18.164,
-     -52.65
-    ],
-    [
-     -18.398,
-     -52.807
-    ],
-    [
-     -18.631,
-     -52.964
-    ],
-    [
-     -18.788,
-     -53.237
-    ],
-    [
-     -19.0,
-     -53.581
-    ],
-    [
-     -19.04,
-     -53.776
-    ],
-    [
-     -19.226,
-     -53.8
-    ],
-    [
-     -19.412,
-     -53.825
-    ],
-    [
-     -20.357,
-     -55.972
-    ],
-    [
-     -20.495,
-     -55.864
-    ],
-    [
-     -20.751,
-     -55.836
-    ],
-    [
-     -20.915,
-     -56.047
-    ],
-    [
-     -20.94,
-     -56.366
-    ],
-    [
-     -22.125,
-     -59.681
-    ]
-   ],
-   "name": "Mto Pacha",
-   "tongue": "Pwani (Swahili-rooted)",
-   "meaning": "Twin River (mto river + pacha twin), beside the Leaf River"
-  },
-  {
-   "anchor": "river:64.0,107.1",
-   "mouth": {
-    "today": [
-     63.97,
-     107.09
-    ],
-    "turned": [
-     61.36,
-     93.22
-    ]
-   },
-   "head": {
-    "today": [
-     15.97,
-     212.84
-    ],
-    "turned": [
-     22.69,
-     -149.05
-    ]
-   },
-   "ends_in": "Juldyztengiz",
-   "ends_in_anchor": "sea:Mare Humboldtianum",
-   "fed_by": "headwaters",
-   "works": false,
-   "length_km": 3091,
-   "lake_km": 2546,
-   "channel_km": 546,
-   "lakes_crossed": 42,
-   "flow_mouth_m3s": 1275,
-   "flow_greatest_m3s": 1857,
-   "flow_head_m3s": 102,
-   "lowest_year_m3s": 910,
-   "falters_km": 0,
-   "steep_reaches": 0,
-   "steep_gw": 0.0,
-   "regions": [
-    {
-     "name": "H'Kresto Aduma",
-     "anchor": "region:lake:67.2,172.4",
+     "name": "H'Montetim Ŝemeŝa",
+     "anchor": "region:lake:-40.0,132.2@-46,132",
      "tongue": "olivolingvo",
-     "share": 0.49
+     "share": 0.55
     },
+    {
+     "name": "Asadani",
+     "anchor": "region:lake:-23.3,106.1",
+     "tongue": "satoyama",
+     "share": 0.45
+    }
+   ],
+   "course": [
+    [
+     -35.665,
+     116.768
+    ],
+    [
+     -28.169,
+     115.044
+    ],
+    [
+     -28.038,
+     115.088
+    ],
+    [
+     -27.921,
+     115.007
+    ],
+    [
+     -27.459,
+     115.193
+    ],
+    [
+     -27.211,
+     115.157
+    ],
+    [
+     -26.704,
+     115.718
+    ],
+    [
+     -25.775,
+     117.741
+    ],
+    [
+     -25.622,
+     117.972
+    ],
+    [
+     -16.217,
+     122.952
+    ],
+    [
+     -16.031,
+     122.928
+    ],
+    [
+     -15.983,
+     122.796
+    ],
+    [
+     -15.79,
+     122.834
+    ],
+    [
+     -15.706,
+     123.012
+    ],
+    [
+     -15.629,
+     123.129
+    ],
+    [
+     -15.042,
+     123.306
+    ],
+    [
+     -13.746,
+     123.08
+    ]
+   ],
+   "name": null,
+   "tongue": null,
+   "meaning": ""
+  },
+  {
+   "anchor": "river:24.3,35.6",
+   "mouth": {
+    "today": [
+     24.28,
+     35.59
+    ],
+    "turned": [
+     17.56,
+     33.67
+    ]
+   },
+   "head": {
+    "today": [
+     14.66,
+     42.41
+    ],
+    "turned": [
+     8.01,
+     40.36
+    ]
+   },
+   "ends_in": "Uamoana",
+   "ends_in_anchor": "sea:near-side sea",
+   "fed_by": "headwaters",
+   "works": false,
+   "length_km": 495,
+   "lake_km": 318,
+   "channel_km": 177,
+   "lakes_crossed": 10,
+   "flow_mouth_m3s": 1204,
+   "flow_greatest_m3s": 1217,
+   "flow_head_m3s": 103,
+   "lowest_year_m3s": null,
+   "falters_km": null,
+   "steep_reaches": 0,
+   "steep_gw": 0.0,
+   "regions": [
+    {
+     "name": "Honuaawa",
+     "anchor": "region:feature:Palus Somni",
+     "tongue": "terlunan",
+     "share": 0.52
+    },
+    {
+     "name": "Uafenua",
+     "anchor": "region:lake:28.9,80.4@32,92",
+     "tongue": "terlunan",
+     "share": 0.48
+    }
+   ],
+   "course": [
+    [
+     17.564,
+     33.666
+    ],
+    [
+     17.439,
+     33.726
+    ],
+    [
+     16.065,
+     33.972
+    ],
+    [
+     15.94,
+     34.032
+    ],
+    [
+     15.878,
+     34.093
+    ],
+    [
+     15.941,
+     34.212
+    ],
+    [
+     15.879,
+     34.393
+    ],
+    [
+     15.944,
+     34.692
+    ],
+    [
+     15.945,
+     34.872
+    ],
+    [
+     15.883,
+     34.992
+    ],
+    [
+     15.884,
+     35.172
+    ],
+    [
+     15.885,
+     35.352
+    ],
+    [
+     15.761,
+     35.473
+    ],
+    [
+     15.637,
+     35.594
+    ],
+    [
+     15.513,
+     35.656
+    ],
+    [
+     15.959,
+     36.612
+    ],
+    [
+     14.589,
+     37.108
+    ],
+    [
+     14.653,
+     37.227
+    ],
+    [
+     14.716,
+     37.347
+    ],
+    [
+     14.968,
+     37.464
+    ],
+    [
+     14.347,
+     37.833
+    ],
+    [
+     14.159,
+     37.775
+    ],
+    [
+     14.033,
+     37.656
+    ],
+    [
+     13.907,
+     37.598
+    ],
+    [
+     13.657,
+     37.601
+    ],
+    [
+     13.469,
+     37.603
+    ],
+    [
+     13.282,
+     37.606
+    ],
+    [
+     13.094,
+     37.608
+    ],
+    [
+     12.781,
+     37.552
+    ],
+    [
+     11.203,
+     40.664
+    ],
+    [
+     10.888,
+     40.549
+    ],
+    [
+     10.455,
+     40.8
+    ],
+    [
+     10.398,
+     41.105
+    ],
+    [
+     8.009,
+     40.358
+    ]
+   ],
+   "name": null,
+   "tongue": null,
+   "meaning": ""
+  },
+  {
+   "anchor": "river:17.2,315.4",
+   "mouth": {
+    "today": [
+     17.16,
+     315.41
+    ],
+    "turned": [
+     15.69,
+     -44.51
+    ]
+   },
+   "head": {
+    "today": [
+     8.59,
+     332.53
+    ],
+    "turned": [
+     5.32,
+     -28.6
+    ]
+   },
+   "ends_in": "a lake that passes little on",
+   "ends_in_anchor": null,
+   "fed_by": "headwaters",
+   "works": false,
+   "length_km": 816,
+   "lake_km": 414,
+   "channel_km": 403,
+   "lakes_crossed": 31,
+   "flow_mouth_m3s": 1175,
+   "flow_greatest_m3s": 1175,
+   "flow_head_m3s": 103,
+   "lowest_year_m3s": null,
+   "falters_km": null,
+   "steep_reaches": 0,
+   "steep_gw": 0.0,
+   "regions": [
+    {
+     "name": "Karadala",
+     "anchor": "region:lake:5.0,-34.4",
+     "tongue": "dala",
+     "share": 0.53
+    },
+    {
+     "name": "Hamada Aswad",
+     "anchor": "region:lake:17.7,-41.0@23,-38",
+     "tongue": "sahran",
+     "share": 0.24
+    },
+    {
+     "name": "Pooirimania",
+     "anchor": "region:feature:Sinus Medii",
+     "tongue": "terlunan",
+     "share": 0.23
+    }
+   ],
+   "course": [
+    [
+     15.692,
+     -44.507
+    ],
+    [
+     15.307,
+     -42.806
+    ],
+    [
+     15.487,
+     -42.722
+    ],
+    [
+     15.666,
+     -42.637
+    ],
+    [
+     15.714,
+     -42.507
+    ],
+    [
+     15.824,
+     -42.368
+    ],
+    [
+     15.865,
+     -42.176
+    ],
+    [
+     15.829,
+     -41.869
+    ],
+    [
+     15.732,
+     -41.569
+    ],
+    [
+     15.772,
+     -40.255
+    ],
+    [
+     15.944,
+     -40.109
+    ],
+    [
+     15.357,
+     -39.371
+    ],
+    [
+     15.219,
+     -39.264
+    ],
+    [
+     15.088,
+     -39.217
+    ],
+    [
+     15.005,
+     -39.04
+    ],
+    [
+     14.605,
+     -38.84
+    ],
+    [
+     14.019,
+     -38.1
+    ],
+    [
+     13.881,
+     -37.992
+    ],
+    [
+     13.929,
+     -37.862
+    ],
+    [
+     13.915,
+     -37.739
+    ],
+    [
+     13.95,
+     -37.486
+    ],
+    [
+     13.674,
+     -37.269
+    ],
+    [
+     13.599,
+     -37.154
+    ],
+    [
+     13.468,
+     -37.107
+    ],
+    [
+     13.275,
+     -37.067
+    ],
+    [
+     13.081,
+     -37.028
+    ],
+    [
+     12.895,
+     -37.049
+    ],
+    [
+     12.46,
+     -37.1
+    ],
+    [
+     11.019,
+     -36.581
+    ],
+    [
+     10.826,
+     -36.541
+    ],
+    [
+     10.695,
+     -36.494
+    ],
+    [
+     10.509,
+     -36.515
+    ],
+    [
+     10.378,
+     -36.468
+    ],
+    [
+     10.26,
+     -36.544
+    ],
+    [
+     10.067,
+     -36.503
+    ],
+    [
+     9.936,
+     -36.456
+    ],
+    [
+     9.736,
+     -36.354
+    ],
+    [
+     9.55,
+     -36.375
+    ],
+    [
+     9.508,
+     -36.567
+    ],
+    [
+     9.322,
+     -36.588
+    ],
+    [
+     9.025,
+     -36.747
+    ],
+    [
+     9.073,
+     -36.616
+    ],
+    [
+     8.887,
+     -36.637
+    ],
+    [
+     8.57,
+     -36.611
+    ],
+    [
+     8.583,
+     -36.734
+    ],
+    [
+     8.473,
+     -36.871
+    ],
+    [
+     8.286,
+     -36.892
+    ],
+    [
+     8.093,
+     -36.852
+    ],
+    [
+     7.955,
+     -36.742
+    ],
+    [
+     7.838,
+     -36.818
+    ],
+    [
+     7.72,
+     -36.894
+    ],
+    [
+     7.534,
+     -36.915
+    ],
+    [
+     7.403,
+     -36.867
+    ],
+    [
+     7.452,
+     -36.737
+    ],
+    [
+     7.48,
+     -36.421
+    ],
+    [
+     7.349,
+     -36.373
+    ],
+    [
+     7.1,
+     -36.401
+    ],
+    [
+     6.869,
+     -34.865
+    ],
+    [
+     6.986,
+     -34.789
+    ],
+    [
+     7.173,
+     -34.769
+    ],
+    [
+     7.29,
+     -34.693
+    ],
+    [
+     7.27,
+     -34.508
+    ],
+    [
+     7.312,
+     -34.316
+    ],
+    [
+     7.627,
+     -33.158
+    ],
+    [
+     7.607,
+     -32.973
+    ],
+    [
+     7.512,
+     -32.672
+    ],
+    [
+     6.749,
+     -32.006
+    ],
+    [
+     6.612,
+     -31.896
+    ],
+    [
+     6.537,
+     -31.779
+    ],
+    [
+     6.462,
+     -31.662
+    ],
+    [
+     6.511,
+     -31.532
+    ],
+    [
+     6.553,
+     -31.341
+    ],
+    [
+     6.533,
+     -31.156
+    ],
+    [
+     6.458,
+     -31.039
+    ],
+    [
+     6.377,
+     -30.86
+    ],
+    [
+     6.184,
+     -30.819
+    ],
+    [
+     6.233,
+     -30.689
+    ],
+    [
+     6.102,
+     -30.64
+    ],
+    [
+     5.916,
+     -30.66
+    ],
+    [
+     5.785,
+     -30.611
+    ],
+    [
+     5.776,
+     -29.926
+    ],
+    [
+     5.956,
+     -29.844
+    ],
+    [
+     5.585,
+     -28.698
+    ],
+    [
+     5.324,
+     -28.6
+    ]
+   ],
+   "name": null,
+   "tongue": null,
+   "meaning": ""
+  },
+  {
+   "anchor": "river:47.4,186.0",
+   "mouth": {
+    "today": [
+     47.41,
+     185.97
+    ],
+    "turned": [
+     53.24,
+     -179.92
+    ]
+   },
+   "head": {
+    "today": [
+     16.78,
+     211.34
+    ],
+    "turned": [
+     23.5,
+     -150.61
+    ]
+   },
+   "ends_in": "a lake that passes little on",
+   "ends_in_anchor": null,
+   "fed_by": "headwaters",
+   "works": false,
+   "length_km": 1462,
+   "lake_km": 1178,
+   "channel_km": 284,
+   "lakes_crossed": 21,
+   "flow_mouth_m3s": 1075,
+   "flow_greatest_m3s": 1417,
+   "flow_head_m3s": 101,
+   "lowest_year_m3s": null,
+   "falters_km": null,
+   "steep_reaches": 0,
+   "steep_gw": 0.0,
+   "regions": [
     {
      "name": "Kumoikeno",
      "anchor": "region:lake:31.7,-156.5",
      "tongue": "satoyama",
-     "share": 0.25
+     "share": 0.74
     },
     {
-     "name": "H'Montetim Luma",
-     "anchor": "region:lake:70.8,116.6",
+     "name": "H'Kresto Aduma",
+     "anchor": "region:lake:67.2,172.4",
      "tongue": "olivolingvo",
-     "share": 0.2
+     "share": 0.24
     },
     {
-     "name": "Tamazirt Raml",
-     "anchor": "region:ground:50.1,107.8",
-     "tongue": "sahran",
-     "share": 0.05
+     "name": "Dungusiyenloko",
+     "anchor": "region:lake:37.6,172.2",
+     "tongue": "terlunan",
+     "share": 0.02
     }
    ],
    "course": [
     [
-     61.356,
-     93.218
-    ],
-    [
-     61.436,
-     93.354
-    ],
-    [
-     61.966,
-     93.493
-    ],
-    [
-     70.101,
-     110.523
-    ],
-    [
-     70.196,
-     110.751
-    ],
-    [
-     70.201,
-     111.338
-    ],
-    [
-     70.318,
-     111.742
-    ],
-    [
-     70.42,
-     112.029
-    ],
-    [
-     70.447,
-     112.797
-    ],
-    [
-     69.668,
-     113.485
-    ],
-    [
-     69.13,
-     113.95
-    ],
-    [
-     69.283,
-     119.591
-    ],
-    [
-     69.614,
-     120.16
-    ],
-    [
-     69.672,
-     121.204
-    ],
-    [
-     69.694,
-     121.39
-    ],
-    [
-     69.93,
-     121.709
-    ],
-    [
-     71.621,
-     130.694
-    ],
-    [
-     70.919,
-     131.518
-    ],
-    [
-     71.391,
-     134.043
-    ],
-    [
-     71.647,
-     134.588
-    ],
-    [
-     72.861,
-     149.664
-    ],
-    [
-     72.508,
-     150.097
-    ],
-    [
-     71.857,
-     153.076
-    ],
-    [
-     71.489,
-     153.314
-    ],
-    [
-     71.884,
-     154.162
-    ],
-    [
-     72.125,
-     153.95
-    ],
-    [
-     70.377,
-     159.433
-    ],
-    [
-     70.194,
-     159.558
-    ],
-    [
-     69.875,
-     160.397
-    ],
-    [
-     69.521,
-     161.636
-    ],
-    [
-     69.399,
-     162.569
-    ],
-    [
-     69.138,
-     162.49
-    ],
-    [
-     68.91,
-     162.856
-    ],
-    [
-     68.993,
-     163.119
-    ],
-    [
-     68.898,
-     163.562
-    ],
-    [
-     68.619,
-     164.105
-    ],
-    [
-     68.408,
-     163.833
-    ],
-    [
-     67.087,
-     165.807
-    ],
-    [
-     66.903,
-     165.893
-    ],
-    [
-     66.75,
-     166.421
-    ],
-    [
-     60.31,
-     172.164
-    ],
-    [
-     59.619,
-     172.198
-    ],
-    [
-     52.972,
-     179.767
-    ],
-    [
-     53.236,
-     -179.99
+     53.24,
+     -179.919
     ],
     [
      53.479,
@@ -5134,8 +5324,8 @@
      -157.465
     ],
     [
-     43.354,
-     -157.656
+     43.735,
+     -157.323
     ],
     [
      42.909,
@@ -5214,8 +5404,8 @@
      -150.122
     ],
     [
-     22.688,
-     -149.046
+     23.495,
+     -150.614
     ]
    ],
    "name": "H'Naharo Atika",
@@ -5223,5 +5413,5 @@
    "meaning": "the Old River (h' the + naharo river + atika old), a river the land made itself"
   }
  ],
- "seconds": 4
+ "seconds": 5
 }

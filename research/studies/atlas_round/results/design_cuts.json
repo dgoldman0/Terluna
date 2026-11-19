@@ -2,9 +2,9 @@
  "schema": "terluna.research.atlas-round-design-cuts/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/design_cuts.py": "3c6b1e5064088cdb99ddeef309867941913fbff9599b8e52b68df6354352a7f7",
-   "research/studies/atlas_round/design_routing.py": "7efdff778ed46538149ca80abdf825d819ff80563565814a6ac4d0c09632cb6c",
-   "research/studies/atlas_round/final_drainage.py": "270bdb22585b06318b95596db37d6ffe60b7c44476e9d8575099ee8c20043173",
+   "research/studies/atlas_round/design_cuts.py": "5f63e54e93f29cf2b2ceccacaf187e9c114be2473979ef2a5243752801dc5dbe",
+   "research/studies/atlas_round/design_routing.py": "554fde6092910090a411cd3807ec323bc8ed76b6bfb5224847d33b70b9462685",
+   "research/studies/atlas_round/final_drainage.py": "912ca69f8eb749b797b474a89d0d9a7b3958dc6246c61032958e77362d83d78d",
    "research/studies/atlas_round/governed_drainage.py": "d5faee9680b41a9f8113daae1fde99ff779e6e776f1166c5033ba957f4076e6a",
    "research/studies/atlas_round/redrawn_drainage.py": "f0e701438bdf156d7f1ce38373f7b70f484bb618cb901ddbea7ce6547007ec66",
    "research/studies/drainage_network/network.py": "acdb02dc6b71fe824b1a0681365466d828688cfce17e716d8f33b14250dd6541",
@@ -12,14 +12,15 @@
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/final_drainage.json": "8c3895d869f4e315f9348e4bda07d4940a86826af411b249c80ec7d41e88f713",
-  "research/studies/atlas_round/results/near_side_neck.json": "077f00e08b94a4f0290e5c8337f6e75bdc7c3d891751933dfb4ccdc22400eaf6",
-  "research/studies/atlas_round/results/redrawn_surface.json": "7ab560cd01a978392aacef8bc2e9cf8b204fae84e8a105b7f2a0b22f01d98b2c",
+  "research/studies/atlas_round/results/final_drainage.json": "27ec3ba3b464d08682d7bf31ae65f6134f4bb1ce40e4581c4669f62fca3f043f",
+  "research/studies/atlas_round/results/near_side_neck.json": "7bbaa72ca2935c4feaaf14169d410b7fb8356eca4a2f67f0ac113cc095c2e160",
+  "research/studies/atlas_round/results/design_works.json": "35fe34c7f0ad4bde9aef21c7ab1a6a6c1d5df21c48afb41edb6f527112428ce1",
   "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a",
-  "research/studies/atlas_round/results/design_routing.json": "cb6572d5bf7914de6e57fbb5064582e21d5c5910aa7ed7af506af2d4dd0a88fe"
+  "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85"
  },
  "ignored_inputs": {
-  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_today.npz": "69e2839b46dac2bb2e87fe0a40c618b43244cada07f9de0f58239802c927b9f5"
+  "climate/gcm/products/climatology_A28D_301k_design_l15_snow_s936_settled_y45-59_scaled300.31K_resurfaced_today.npz": "30aab71a469bd9a977ef1517c77bd1939dff8f1e863b7a0a6f714e12127210d5",
+  "/media/projectspace/terluna-research/atlas-round/design_works/design_works_16ppd.npz": "6409f3231c9fd4d36ef2351a819744b43c3c25a749556be575753dbe648a096e"
  },
  "evidence": "The routes governed_drainage.py finds for the works of 16 November on the design climate's closed budget, with their ground between 1.9 km cells: a design, not validated.",
  "reading_rule": "Depths and flows in m and m3/s; ground taken in km3; the trench's length summed over its cells. product names the trenches on the research drive, which design_cuts.load() reads.",
@@ -128,18 +129,18 @@
   },
   "ground_taken_km3": 7.6,
   "trench_km": 29,
-  "flow_m3s": 15610,
+  "flow_m3s": 22389,
   "shares_m3s": {
-   "south_pole_aitken": 26599.0,
-   "humboldtianum": 5603.6,
-   "smythii_marginis": 10006.5
+   "south_pole_aitken": 26816.0,
+   "humboldtianum": 7736.0,
+   "smythii_marginis": 14653.0
   },
   "stretches": 3,
   "course_cells": 26
  },
  "product": {
   "path": "/media/projectspace/terluna-research/atlas-round/design_cuts/design_cuts_16ppd.npz",
-  "sha256": "03f7cf8adb495fc9b97de5e202132292cba5383ff752367fd023055bb1c0805c"
+  "sha256": "b7f1b96bec9e0c68537bf5d986a8b101cba25bd3697b5577d44507ad11d60e17"
  },
- "seconds": 221
+ "seconds": 299
 }

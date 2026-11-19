@@ -132,13 +132,16 @@ def build(log=print):
     q[cut] = np.maximum(q[cut], cuts['cut_flow_m3s'])
     keep = np.flatnonzero((q >= CHANNEL_M3S) & ~r['outlet'] & (~r['lake'] | in_cut) & ~wet).astype(np.int32)
 
-    # the neck's river, from the spill down the routing
+    # the neck's river, from the spill down the routing; none where both parts of the near-side sea stand over the
+    # neck's crest and the flow between them passes through the sea's water
     spill = meta['neck']['spill_cell']
-    path = RD.walk(r, spill)
-    surface = np.where(wet, level, h_flat)
-    neck_river = NW.long_profile(path, surface, q, lat, cols, cell_km, level0, r['lake'])
-    neck_river.update(starts=NW.place(spill, cols, rotation), reaches=('southern near-side seas' if body[path[-1]] == 2
-                                                                      else f'body {int(body[path[-1]])}'))
+    neck_river = None
+    if spill is not None:
+        path = RD.walk(r, spill)
+        surface = np.where(wet, level, h_flat)
+        neck_river = NW.long_profile(path, surface, q, lat, cols, cell_km, level0, r['lake'])
+        neck_river.update(starts=NW.place(spill, cols, rotation), reaches=('southern near-side seas' if body[path[-1]] == 2
+                                                                          else f'body {int(body[path[-1]])}'))
 
     # the summary: shares, each sea's area, depth and volume, the lakes, the rivers into the seas
     total = float(area.sum())

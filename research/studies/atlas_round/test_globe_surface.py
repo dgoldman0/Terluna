@@ -21,17 +21,21 @@ def record():
 def test_the_record_holds_together(record):
     s = record['summary']
     seas = s['seas']
-    neck = json.loads(N.OUT.read_text())['budgets']['closed_budget']['natural_neck']['steady']
-    assert seas['near-side sea']['level_m'] == pytest.approx(neck['main_level_m'], abs=0.02)
-    assert seas['southern near-side seas']['level_m'] == pytest.approx(neck['south_level_m'], abs=0.02)
+    routing = json.loads(DR.OUT.read_text())['summary']
+    assert seas['near-side sea']['level_m'] == pytest.approx(routing['seas']['near_side_main']['level_above_common_m'], abs=0.02)
+    assert seas['southern near-side seas']['level_m'] == pytest.approx(
+        routing['seas']['near_side_south']['level_above_common_m'], abs=0.02)
     for k in ('South Pole–Aitken Sea', 'Mare Humboldtianum'):
         assert abs(seas[k]['level_m']) < 0.02                                # held at the common level
     for k in ('Mare Moscoviense', 'Mare Orientale', 'Smythii–Marginis Sea'):
         assert seas[k]['level_m'] > 700.0                                     # full at their rims
     assert s['water_share'] == pytest.approx(s['sea_share'] + s['lake_share'], abs=2e-4)
     assert sum(v['share'] for v in seas.values()) == pytest.approx(s['sea_share'], abs=2e-4)
-    assert s['neck_river']['reaches'] == 'southern near-side seas'
-    assert s['neck_spill_m3s'] == round(neck['neck_flow_m3s'])
+    if routing['near_side_sea_joined_across_its_neck']:                      # one sea across the neck: no river over it
+        assert s['neck_river'] is None
+    else:
+        assert s['neck_river']['reaches'] == 'southern near-side seas'
+    assert s['neck_spill_m3s'] == routing['neck_spill_m3s']
     product = record['product']
     if GS.PRODUCT.exists():
         assert GS.sha256(GS.PRODUCT) == product['sha256']

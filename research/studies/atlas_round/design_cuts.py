@@ -193,7 +193,10 @@ def build(log=print):
     geo = RD.geometry(surf, runoff, lake_net, log)
     state = RD.design_state(geo, runoff, lake_net, log=log)
     branches, info = GD.branches_for(geo, state, rotation, log)
-    gov = GD.govern(geo, state, runoff, lake_net, branches, log=log)
+    # the shares the branches carry are the design routing's, settled on the corrected lake rule; the cuts' courses
+    # stand on the floor and the levels the hollows fill to before they spill
+    released = json.loads(DR.OUT.read_text())['summary']['weirs']['released_m3s']
+    gov = dict(share={k: float(released[k]) for k in (GD.SALT_SEA, GD.HELD_BRANCH, GD.REST_BRANCH)})
     trench = trenches(geo, state, gov, log)
     cols = geo['h'].shape[1]
     h_flat = geo['h'].ravel()

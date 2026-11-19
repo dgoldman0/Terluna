@@ -90,16 +90,6 @@
    "tongue": "satoyama",
    "meaning": "New River (nii new + kawa river), cut by the works"
   },
-  "river:-5.3,63.0": {
-   "name": "H'Naharo Longa",
-   "tongue": "olivolingvo",
-   "meaning": "the Long River (h' the + naharo river + longa long), the longest waterway"
-  },
-  "river:12.4,346.0": {
-   "name": "Pooiriawa",
-   "tongue": "terlunan",
-   "meaning": "Black River (pooiri black + awa river), across the black basalt plain"
-  },
   "river:19.9,184.6": {
    "name": "Rereawa",
    "tongue": "terlunan",
@@ -150,7 +140,17 @@
    "tongue": "pwani",
    "meaning": "Twin River (mto river + pacha twin), beside the Leaf River"
   },
-  "river:64.0,107.1": {
+  "river:-50.2,131.6": {
+   "name": "H'Naharo Longa",
+   "tongue": "olivolingvo",
+   "meaning": "the Long River (h' the + naharo river + longa long), the longest waterway"
+  },
+  "river:12.3,346.0": {
+   "name": "Pooiriawa",
+   "tongue": "terlunan",
+   "meaning": "Black River (pooiri black + awa river), across the black basalt plain"
+  },
+  "river:47.4,186.0": {
    "name": "H'Naharo Atika",
    "tongue": "olivolingvo",
    "meaning": "the Old River (h' the + naharo river + atika old), a river the land made itself"

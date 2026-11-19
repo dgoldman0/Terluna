@@ -306,12 +306,14 @@ TURNED_CLIMATES = {
     'A28S_301k_design_l15_snow_s930_settled':
         'the design climate on the final surface, {label}, at sunlight 0.930: the ground at 300.3 K, rain of 1.93 '
         'mm/day over the globe and 2.13 over land, and 57.1% of the land dry (an aridity below 0.65)',
-    # an estimate (climate.gcm.pattern_scaling): its figures are read from the climatology and moisture map drawn
+    # an estimate (climate.gcm.pattern_scaling, then climate.gcm.surface_change): its figures are read from the
+    # climatology and moisture map drawn
     'A28D_301k_design_l15_snow_s936_settled':
         'the design climate on the design surface, an estimate: {label}, at sunlight 0.936, carried by pattern scaling '
-        'from its 301.0 K to the 300.3 K at which the run at 0.930 on the final surface settled, which leaves the ground '
-        'at {ground:.1f} K, rain of {rain:.2f} mm/day over the globe and {rain_land:.2f} over land, and {dry:.1%} of the '
-        'land dry (an aridity below 0.65)',
+        'from its 301.0 K to the 300.3 K at which the run at 0.930 on the final surface settled, and from the surface '
+        'the run stood on to the one its own rain fills, where a cell that turns to lake rains less and the land '
+        'rains more. That leaves the ground at {ground:.1f} K, rain of {rain:.2f} mm/day over the globe and '
+        '{rain_land:.2f} over land, and {dry:.1%} of the land dry (an aridity below 0.65)',
 }
 
 
@@ -590,10 +592,14 @@ def surface_note(turn, summary, climate):
             f"{seas['Mare Moscoviense']['level_m']:,.0f}, {seas['Mare Orientale']['level_m']:,.0f} and "
             f"{seas['Smythii–Marginis Sea']['level_m']:,.0f} m above the common level; the South Pole–Aitken Sea and "
             "Mare Humboldtianum at the common level, which fixed weirs on Moscoviense's overflow hold; and the "
-            "near-side sea parted at its neck in western Procellarum, its main body "
-            f"{m(seas['near-side sea']['level_m'])} the common level and Cognitum, Humorum, Nubium and southern "
-            f"Procellarum {m(seas['southern near-side seas']['level_m'])} it, joined by a river of about "
-            f"{round(summary['neck_spill_m3s'], -3):,.0f} m³/s over the neck. The clouds and the ground cover follow {climate}. The "
+            + ("near-side sea parted at its neck in western Procellarum, its main body "
+               f"{m(seas['near-side sea']['level_m'])} the common level and Cognitum, Humorum, Nubium and southern "
+               f"Procellarum {m(seas['southern near-side seas']['level_m'])} it, joined by a river of about "
+               f"{round(summary['neck_spill_m3s'], -3):,.0f} m³/s over the neck. " if summary.get('neck_river') else
+               "near-side sea one water across its neck in western Procellarum, "
+               f"{m(seas['near-side sea']['level_m'])} the common level, its main body sending Cognitum, Humorum, "
+               f"Nubium and southern Procellarum about {round(summary['neck_spill_m3s'], -3):,.0f} m³/s through the neck. ")
+            + f"The clouds and the ground cover follow {climate}. The "
             "rivers and lakes are routed on that run's rain and evaporation carried back to the ground, its open "
             f"water's evaporation raised to close the water budget: {summary['lake_share']:.1%} of the Moon in "
             f"{summary['lakes']:,} lakes holding {summary['lake_volume_km3'] / 1e6:.1f} million km³, with "
@@ -1010,11 +1016,12 @@ def river_marks(waterways_path):
                   else f'Its water is {fed}.')
         width = appearance.RIVER_WIDTH * x['flow_mouth_m3s'] ** 0.5
         wide = f'{width / 1000.0:.1f}{nb}km' if width >= 1000.0 else f'{round(width, -1):,.0f}{nb}m'
+        low = x.get('lowest_year_m3s')                   # None until the year-by-year rivers stand on this routing
         text = (f"{x['name']} runs {x['length_km']:,}{nb}km to {x['ends_in']}{lakes}. {source} Where it ends it carries "
-                f"{x['flow_mouth_m3s']:,}{nb}m³/s on the design climate's mean, and {x['lowest_year_m3s']:,}{nb}m³/s in "
-                f"the lowest of the fifteen years routed one by one.")
+                f"{x['flow_mouth_m3s']:,}{nb}m³/s on the design climate's mean"
+                + (f", and {low:,}{nb}m³/s in the lowest of the fifteen years routed one by one." if low is not None else '.'))
         rows = [['Flow where it ends', f"{x['flow_mouth_m3s']:,}{nb}m³/s"],
-                ['Lowest year', f"{x['lowest_year_m3s']:,}{nb}m³/s"],
+                *([['Lowest year', f"{low:,}{nb}m³/s"]] if low is not None else []),
                 ['Length', f"{x['length_km']:,}{nb}km"],
                 ['Through lakes', f"{x['lake_km']:,}{nb}km, {x['lakes_crossed']} lake{'s' if x['lakes_crossed'] != 1 else ''}"],
                 ['Width where it ends', 'about ' + wide],
@@ -1276,7 +1283,7 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
                  ['Lakes', f"{summary['lake_share']:.1%} · {summary['lakes']:,} lakes"],
                  ['Water in those lakes', f"{summary['lake_volume_km3'] / 1e6:.1f} million km³"],
                  ['Rivers into the seas', f"{summary['rivers_into_the_seas_m3s']:,} m³/s"],
-                 ['Over the neck', f"{summary['neck_spill_m3s']:,} m³/s"],
+                 ['Over the neck' if summary.get('neck_river') else 'Through the neck', f"{summary['neck_spill_m3s']:,} m³/s"],
                  ['Deepest water', f"{summary['deepest_water_m']:,} m"],
                  ['Turn of the pole', f"{pole:.2f}°"]],
         lakeFigures=(f"the lakes cover a further {summary['lake_share']:.1%} of the Moon and hold "

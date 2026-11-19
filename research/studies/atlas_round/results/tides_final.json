@@ -3,30 +3,30 @@
  "producer": {
   "files": {
    "research/studies/atlas_round/tides_final.py": "aa13ae7b48dede0576ee27a49a0bab7a3949d572e1422a671bddf9652c251e82",
-   "research/studies/atlas_round/moisture_final.py": "d9e84e6fda4474f0094e1ccd68c4f8c594e758e04d0b513a86a889fd90d2f4b4",
-   "research/studies/atlas_round/globe_surface.py": "7b53d8e9c95a67a5feed90321ab831316b85feb831bad7fc3fc6dd50b91c4655",
+   "research/studies/atlas_round/moisture_final.py": "abbb2fc8b67037af1da80b1ac57a2f3398b886249b1feda1d80bb89458550e51",
+   "research/studies/atlas_round/globe_surface.py": "0ee46cbc0f77523755209241c20405317919f43184473fa6872919a7feef9bfa",
    "geography/tides.py": "e7bf2af062ffe6f468a0add1abcae01b73314f24a09ee6f5e1cd2dbd138343af",
    "geography/lunar_ephemeris.py": "a3821628690cf9b920d8afc19d255de5e5112997249eb3cf9d30917fc971f258",
    "geography/tide_dynamics.py": "485d001e2188e0ab175bd9bb4464e6021f35265dedb1db96fe3b61ca298503d3",
-   "research/studies/atlas_round/final_drainage.py": "270bdb22585b06318b95596db37d6ffe60b7c44476e9d8575099ee8c20043173",
-   "research/studies/atlas_round/near_side_neck.py": "8f50c8557c21a03103b7470af1996a67024330a76d32a3890b1c61f02e681476",
+   "research/studies/atlas_round/final_drainage.py": "912ca69f8eb749b797b474a89d0d9a7b3958dc6246c61032958e77362d83d78d",
+   "research/studies/atlas_round/near_side_neck.py": "69664c1047b7c54f2e997f683c60da98daa872bed200c18fdaaecddbd95a4f04",
    "shared/constants.json": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72"
   }
  },
  "inputs": {
-  "research/studies/atlas_round/results/globe_surface.json": "a4bb886d2a27c0952114cf8763b613688013166bd921de392a4be0b50ba61476",
+  "research/studies/atlas_round/results/globe_surface.json": "038e28557ae5d90ac26721b38b215b1058399383fc25326c7e2eea20800e1009",
   "geography/tides_ephemeris_check.csv": "08dccc1caa71c8f48d047e96ecd3d61f0c1b23cd46936c7ec331523870891346",
   "shared/scenarios/waves.json": "e6a86ec35b01d1864188bfaebb2a1d21a3047b841e118478df1831d4d0112323",
   "geography/results/tides.json": "5006911ecaadbcf8c9a8360b223bd83d083e0ca6738eb15a050ab5aad04d5b20",
   "research/studies/atlas_round/results/design_turned_surface_ed9b01935fe2a23f.json": "267509dbee35b78184b5930bdcc18df974cf2b8be377fbaa279b021e4d7b0f1a"
  },
  "ignored_inputs": {
-  "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz": "9173be2542f4eee082261a32baa3d32b2f3c35a6512bff8a353c2c092b030526",
+  "/media/projectspace/terluna-research/atlas-round/globe_surface/globe_surface_16ppd.npz": "0028db20a7b57d38b0bf5f279f0e998b368022b38541a047cd48e35a6575fd93",
   "geography/products/atlas_28pct_4ppd.npz": "dc283827f349fdc134816e1a55deef3d608047fba9fbb7521a6005c171d81693"
  },
  "product": {
   "path": "/media/projectspace/terluna-research/atlas-round/tides_final/tides_design_4ppd.npz",
-  "sha256": "51501224580190584679b7b70068d04f05294d147e121c242cc1441c52a26ff6"
+  "sha256": "1d2fb880f99acf53a5e63be973f8e3413b8228b589dce66d9ab149da2b546a93"
  },
  "evidence": "Equilibrium tide of the atlas round's design surface's seas from Earth and the Sun, 2026-2045, every three hours, by geography/tides.py's model as it stands: degree-2 and degree-3 potential, lunar Love numbers k2 and h2 at degree 2, each sea's volume held, and the water's self-attraction to spherical-harmonic degree 60 with the solid Moon rigid under the load. A linear shallow-water solution on the near-side sea's main part, the salt sea and Smythii-Marginis checks the equilibrium for the eight leading lines. Each sea stands at its own level, so the seas' tides are independent of one another apart from their attraction.",
  "reading_rule": "As geography/results/tides.json: heights are metres of water level relative to the 2026-2045 mean; the monthly range is the highest minus the lowest level within an anomalistic month (27.55 days), its median taken over the months; the extreme range spans the whole record. Seas are keyed by their index into globe_surface.BODIES (1 the near-side sea's main part, 2 its southern seas, 3 the salt sea, 4 Humboldtianum, 5 Moscoviense, 6 Orientale, 7 Smythii-Marginis), each with the atlas's seas it replaces; statistics weight nodes by area. Stations stand at the sea pixel nearest each named feature, offset_km from it.",
@@ -104,7 +104,7 @@
      "node": 0
     },
     "forcing_max_m": 2.241443147284859,
-    "sea_response_max_m": 2.1593185025118866
+    "sea_response_max_m": 2.159690849020642
    },
    {
     "frequency_cpd": 0.0367481951116385,
@@ -118,7 +118,7 @@
      "node": 0
     },
     "forcing_max_m": 2.2456672358334133,
-    "sea_response_max_m": 2.892003889408075
+    "sea_response_max_m": 2.891912823598222
    },
    {
     "frequency_cpd": 0.031434736884937926,
@@ -132,7 +132,7 @@
      "node": 0
     },
     "forcing_max_m": 0.4386229537590081,
-    "sea_response_max_m": 0.4289774221026989
+    "sea_response_max_m": 0.4290518778019801
    },
    {
     "frequency_cpd": 0.0677263839688511,
@@ -146,7 +146,7 @@
      "node": 0
     },
     "forcing_max_m": 0.4425404368879539,
-    "sea_response_max_m": 0.3405866089157486
+    "sea_response_max_m": 0.34066156807003456
    },
    {
     "frequency_cpd": 0.07303984219555168,
@@ -160,7 +160,7 @@
      "node": 0
     },
     "forcing_max_m": 0.3062347141758508,
-    "sea_response_max_m": 0.3957010595000549
+    "sea_response_max_m": 0.3956878728286547
    },
    {
     "frequency_cpd": 0.07258329416782634,
@@ -174,7 +174,7 @@
      "node": 0
     },
     "forcing_max_m": 0.2857000118998556,
-    "sea_response_max_m": 0.2696764661279379
+    "sea_response_max_m": 0.27045229576618374
    },
    {
     "frequency_cpd": 0.073496390223277,
@@ -188,7 +188,7 @@
      "node": 0
     },
     "forcing_max_m": 0.13022207342486564,
-    "sea_response_max_m": 0.13177967496630702
+    "sea_response_max_m": 0.1317879680135958
    },
    {
     "frequency_cpd": 0.10401803105276428,
@@ -202,7 +202,7 @@
      "node": 0
     },
     "forcing_max_m": 0.08498575620931947,
-    "sea_response_max_m": 0.07774515898911838
+    "sea_response_max_m": 0.07792323300567174
    },
    {
     "frequency_cpd": 0.0027377785604140795,
@@ -216,7 +216,7 @@
      "node": 0
     },
     "forcing_max_m": 0.06173210679860952,
-    "sea_response_max_m": 0.06342196254794201
+    "sea_response_max_m": 0.06343389938503574
    },
    {
     "frequency_cpd": 0.06818293199657643,
@@ -230,7 +230,7 @@
      "node": 0
     },
     "forcing_max_m": 0.05812143445512809,
-    "sea_response_max_m": 0.07506811663482686
+    "sea_response_max_m": 0.07506561301214824
    },
    {
     "frequency_cpd": 0.1044745790804896,
@@ -244,7 +244,7 @@
      "node": 0
     },
     "forcing_max_m": 0.04943432003880635,
-    "sea_response_max_m": 0.06366777718839634
+    "sea_response_max_m": 0.06366556711775277
    },
    {
     "frequency_cpd": 0.10933148927946484,
@@ -258,7 +258,7 @@
      "node": 0
     },
     "forcing_max_m": 0.036517658090161546,
-    "sea_response_max_m": 0.046491024593659926
+    "sea_response_max_m": 0.04648975655322364
    }
   ],
   "residual_rms_fraction": 0.046308463311434525
@@ -268,18 +268,18 @@
    "names": [
     "near-side sea"
    ],
-   "area_km2": 3861781.1559433946,
-   "nodes": 86011,
+   "area_km2": 3865926.6472090245,
+   "nodes": 86101,
    "monthly_range_median_m": {
-    "area_median": 3.4901327880549458,
-    "area_p95": 5.8815965165454145,
-    "maximum": 6.63837572146336
+    "area_median": 3.490599552072221,
+    "area_p95": 5.8816051837086745,
+    "maximum": 6.639035297641364
    },
    "extreme_range_m": {
-    "area_median": 4.977225707189294,
-    "maximum": 9.911492172976619
+    "area_median": 4.978500913777438,
+    "maximum": 9.912131408301557
    },
-   "self_attraction_gain": 1.0862776935373855,
+   "self_attraction_gain": 1.0863341222568874,
    "atlas_seas": {
     "433": {
      "names": [
@@ -304,15 +304,15 @@
    "area_km2": 2421065.091829407,
    "nodes": 94527,
    "monthly_range_median_m": {
-    "area_median": 2.1898105201438005,
-    "area_p95": 3.4314830335471935,
-    "maximum": 4.047537883621326
+    "area_median": 2.190069151952701,
+    "area_p95": 3.432183172517435,
+    "maximum": 4.04781776062142
    },
    "extreme_range_m": {
-    "area_median": 3.209985320407792,
-    "maximum": 6.46754597081063
+    "area_median": 3.2104195250602476,
+    "maximum": 6.468031631601751
    },
-   "self_attraction_gain": 1.0902671944532307,
+   "self_attraction_gain": 1.090473998854682,
    "atlas_seas": {
     "1417": {
      "names": [
@@ -328,40 +328,22 @@
     }
    }
   },
-  "5": {
-   "names": [
-    "Mare Moscoviense"
-   ],
-   "area_km2": 855494.2195511195,
-   "nodes": 15807,
-   "monthly_range_median_m": {
-    "area_median": 1.8250338645367714,
-    "area_p95": 2.875915736777473,
-    "maximum": 4.235140421610471
-   },
-   "extreme_range_m": {
-    "area_median": 2.801280350198119,
-    "maximum": 6.8525450488957125
-   },
-   "self_attraction_gain": 1.0571904674297337,
-   "atlas_seas": {}
-  },
   "2": {
    "names": [
     "southern near-side seas"
    ],
-   "area_km2": 740134.5416028656,
-   "nodes": 13516,
+   "area_km2": 981972.728778013,
+   "nodes": 17821,
    "monthly_range_median_m": {
-    "area_median": 1.5924972414123415,
-    "area_p95": 2.9194667115323423,
-    "maximum": 3.5075420166098152
+    "area_median": 1.7697124016192411,
+    "area_p95": 3.2016135728769766,
+    "maximum": 3.545679404756421
    },
    "extreme_range_m": {
-    "area_median": 2.396781353587919,
-    "maximum": 5.3165224182583
+    "area_median": 2.6687523358637435,
+    "maximum": 5.345339984477888
    },
-   "self_attraction_gain": 1.0488509509393018,
+   "self_attraction_gain": 1.058600064824902,
    "atlas_seas": {
     "433": {
      "names": [
@@ -379,6 +361,24 @@
     }
    }
   },
+  "5": {
+   "names": [
+    "Mare Moscoviense"
+   ],
+   "area_km2": 855494.2195511195,
+   "nodes": 15807,
+   "monthly_range_median_m": {
+    "area_median": 1.825711750903901,
+    "area_p95": 2.8761639444355174,
+    "maximum": 4.235294147286389
+   },
+   "extreme_range_m": {
+    "area_median": 2.8016927337036717,
+    "maximum": 6.852994812480044
+   },
+   "self_attraction_gain": 1.0574074480299194,
+   "atlas_seas": {}
+  },
   "7": {
    "names": [
     "Smythii–Marginis Sea"
@@ -386,15 +386,15 @@
    "area_km2": 606981.3434423287,
    "nodes": 10825,
    "monthly_range_median_m": {
-    "area_median": 0.9009932801731699,
-    "area_p95": 1.9891691833587082,
-    "maximum": 2.432517314896292
+    "area_median": 0.9010068033579304,
+    "area_p95": 1.9892352477765998,
+    "maximum": 2.432561288740797
    },
    "extreme_range_m": {
-    "area_median": 1.2642902613911866,
-    "maximum": 3.388310223833975
+    "area_median": 1.2642963210481373,
+    "maximum": 3.3889672442138847
    },
-   "self_attraction_gain": 1.0516676799995228,
+   "self_attraction_gain": 1.0516151527663349,
    "atlas_seas": {
     "874": {
      "names": [
@@ -417,15 +417,15 @@
    "area_km2": 303530.29580247286,
    "nodes": 5620,
    "monthly_range_median_m": {
-    "area_median": 0.676714088339981,
-    "area_p95": 1.4651925709040476,
-    "maximum": 1.788370841418835
+    "area_median": 0.6768132388122856,
+    "area_p95": 1.4656246264974768,
+    "maximum": 1.7893471989422443
    },
    "extreme_range_m": {
-    "area_median": 0.9841729501210426,
-    "maximum": 2.77670742672156
+    "area_median": 0.9843861555214009,
+    "maximum": 2.7768867999020874
    },
-   "self_attraction_gain": 1.0348494413824043,
+   "self_attraction_gain": 1.0350103235173418,
    "atlas_seas": {}
   },
   "4": {
@@ -435,15 +435,15 @@
    "area_km2": 282443.6818249648,
    "nodes": 9207,
    "monthly_range_median_m": {
-    "area_median": 0.831847552714762,
-    "area_p95": 1.8473289921822549,
-    "maximum": 2.3298654917555153
+    "area_median": 0.8319126562467807,
+    "area_p95": 1.8473193730778161,
+    "maximum": 2.330495969677409
    },
    "extreme_range_m": {
-    "area_median": 1.2817970681016007,
-    "maximum": 3.5271966226139155
+    "area_median": 1.281825677238875,
+    "maximum": 3.5274574455789725
    },
-   "self_attraction_gain": 1.0404432267542814,
+   "self_attraction_gain": 1.040485521856293,
    "atlas_seas": {
     "213": {
      "names": [
@@ -468,84 +468,84 @@
     20.625
    ],
    "offset_km": 2.047060242098866,
-   "depth_m": 404.3815155029297,
-   "monthly_range_median_m": 4.365584586643832,
-   "monthly_range_p95_m": 5.588616054592534,
-   "extreme_range_m": 6.024489355110299,
-   "standard_deviation_m": 1.5375545470084249,
-   "degree3_share_of_extreme_range_m": 0.022625743222008055,
+   "depth_m": 406.1953582763672,
+   "monthly_range_median_m": 4.366093149066414,
+   "monthly_range_p95_m": 5.58786979107796,
+   "extreme_range_m": 6.022826339624247,
+   "standard_deviation_m": 1.5383075597973335,
+   "degree3_share_of_extreme_range_m": 0.022573454707149665,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 2.069844822774803,
-     "phase_deg": 116.6138694556291
+     "amplitude_m": 2.071409562002514,
+     "phase_deg": 116.66664723833419
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 0.34932113704661344,
-     "phase_deg": -3.293202465672598
+     "amplitude_m": 0.3458882935733892,
+     "phase_deg": -3.282243601346894
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.40568596454580746,
-     "phase_deg": 35.429143710117614
+     "amplitude_m": 0.4059620391995646,
+     "phase_deg": 35.47676021191945
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.27563773997950686,
-     "phase_deg": 64.20282776919042
+     "amplitude_m": 0.27606087802341883,
+     "phase_deg": 64.27998741827746
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.06838234292438056,
-     "phase_deg": -43.290193611258324
+     "amplitude_m": 0.068138747471564,
+     "phase_deg": -43.63922171529519
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.2583078423857616,
-     "phase_deg": 133.12507610069468
+     "amplitude_m": 0.2585857345526687,
+     "phase_deg": 133.19062365693824
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.06318901317303507,
-     "phase_deg": 74.06068557635342
+     "amplitude_m": 0.06322288149553597,
+     "phase_deg": 74.01072086170515
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.07440798039642178,
-     "phase_deg": 61.10834293187727
+     "amplitude_m": 0.07448867387341557,
+     "phase_deg": 61.17442946191798
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.058206794378738894,
-     "phase_deg": -90.85913445250107
+     "amplitude_m": 0.05823277167109774,
+     "phase_deg": -90.85368682176407
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.012961973590617177,
-     "phase_deg": -121.73137163152882
+     "amplitude_m": 0.012915341231091908,
+     "phase_deg": -122.07999321509185
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.01112018385856958,
-     "phase_deg": -114.60249791483452
+     "amplitude_m": 0.011080052308847198,
+     "phase_deg": -114.94208248651863
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.008565222608306857,
-     "phase_deg": -44.281632060605176
+     "amplitude_m": 0.008546270965655878,
+     "phase_deg": -44.659141154853785
     }
    ]
   },
@@ -557,84 +557,84 @@
     34.625
    ],
    "offset_km": 3.128440188699592,
-   "depth_m": 1163.944107055664,
-   "monthly_range_median_m": 2.9737474198970553,
-   "monthly_range_p95_m": 4.5712369850023675,
-   "extreme_range_m": 4.895972565808969,
-   "standard_deviation_m": 1.057504639091697,
-   "degree3_share_of_extreme_range_m": 0.04144746341205341,
+   "depth_m": 1165.7579498291016,
+   "monthly_range_median_m": 2.974986133600212,
+   "monthly_range_p95_m": 4.572038426110215,
+   "extreme_range_m": 4.896824662642911,
+   "standard_deviation_m": 1.0576494252123418,
+   "degree3_share_of_extreme_range_m": 0.04146079834395433,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 1.2131160160388585,
-     "phase_deg": 55.60723665598514
+     "amplitude_m": 1.2133401600218805,
+     "phase_deg": 55.562775828763
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 0.8470518949029753,
-     "phase_deg": 175.75558715971601
+     "amplitude_m": 0.8470699943473808,
+     "phase_deg": 175.75573838247095
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.23088647165009393,
-     "phase_deg": -20.207516412033595
+     "amplitude_m": 0.23090908680851568,
+     "phase_deg": -20.25057957217385
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.20546521227127099,
-     "phase_deg": -36.288542450051345
+     "amplitude_m": 0.2056182488132776,
+     "phase_deg": -36.327910808125644
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.11570690816722135,
-     "phase_deg": -176.30429617538795
+     "amplitude_m": 0.11570898136313806,
+     "phase_deg": -176.3145345979035
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.16102465499780166,
-     "phase_deg": 54.29237608167595
+     "amplitude_m": 0.16109828031756068,
+     "phase_deg": 54.24530036335647
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.04639830328865115,
-     "phase_deg": 132.22744559660154
+     "amplitude_m": 0.046408654589319566,
+     "phase_deg": 132.26106240328775
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.046920549573814946,
-     "phase_deg": -18.419722932313075
+     "amplitude_m": 0.04694251791409152,
+     "phase_deg": -18.46634357091454
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.026695050872134134,
-     "phase_deg": -96.21099749236005
+     "amplitude_m": 0.026681498836692418,
+     "phase_deg": -96.2172021486737
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.021916932727053286,
-     "phase_deg": 105.16416745308213
+     "amplitude_m": 0.021917305913249984,
+     "phase_deg": 105.15401062793826
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.018798794201154077,
-     "phase_deg": 111.93208204189857
+     "amplitude_m": 0.01879928720265537,
+     "phase_deg": 111.92208993443289
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.012922790738687247,
-     "phase_deg": -170.9002436961523
+     "amplitude_m": 0.012922436207043288,
+     "phase_deg": -170.9134392863815
     }
    ]
   },
@@ -646,84 +646,84 @@
     57.625
    ],
    "offset_km": 2.1667618939564988,
-   "depth_m": 840.6388702392578,
-   "monthly_range_median_m": 2.4550245061267235,
-   "monthly_range_p95_m": 3.044655928940023,
-   "extreme_range_m": 3.142103335342667,
-   "standard_deviation_m": 0.8578273301846201,
-   "degree3_share_of_extreme_range_m": 0.014675115099920255,
+   "depth_m": 842.4527130126953,
+   "monthly_range_median_m": 2.455117988085794,
+   "monthly_range_p95_m": 3.042762167752752,
+   "extreme_range_m": 3.1401726335131332,
+   "standard_deviation_m": 0.8575675564632314,
+   "degree3_share_of_extreme_range_m": 0.014667678027126207,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 0.3260113379583796,
-     "phase_deg": -176.1895533161411
+     "amplitude_m": 0.32529993153658143,
+     "phase_deg": -176.0988106779275
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 1.1370803449516669,
-     "phase_deg": 175.9519711583218
+     "amplitude_m": 1.1369327751845242,
+     "phase_deg": 175.95217017939802
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.06508628323272408,
-     "phase_deg": 105.20908244071005
+     "amplitude_m": 0.06496289585469295,
+     "phase_deg": 105.30039060009545
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.038340566587622804,
-     "phase_deg": 111.923719970656
+     "amplitude_m": 0.03816834471608008,
+     "phase_deg": 112.00176617787953
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.1582215383231583,
-     "phase_deg": 170.84869836830453
+     "amplitude_m": 0.15820869001868726,
+     "phase_deg": 170.8352223384843
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.007406167974341503,
-     "phase_deg": 178.1956424340138
+     "amplitude_m": 0.007270627811782737,
+     "phase_deg": 178.42349396497144
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.06311840070395833,
-     "phase_deg": -7.909756646399994
+     "amplitude_m": 0.063108962543274,
+     "phase_deg": -7.9257579585986715
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.0034908771041784596,
-     "phase_deg": 110.6644286016384
+     "amplitude_m": 0.0034525121433856445,
+     "phase_deg": 110.85326576795671
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.0005046645158468248,
-     "phase_deg": 136.5030543806479
+     "amplitude_m": 0.0005172571260955857,
+     "phase_deg": 135.23074335178293
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.030045786360801862,
-     "phase_deg": 92.2863056104965
+     "amplitude_m": 0.030043323255718336,
+     "phase_deg": 92.27291874514935
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.025397568958088333,
-     "phase_deg": 99.0931697093944
+     "amplitude_m": 0.025395588543979705,
+     "phase_deg": 99.0799774304297
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.018419845978132267,
-     "phase_deg": 170.89102316302007
+     "amplitude_m": 0.018418636592243798,
+     "phase_deg": 170.87260658894473
     }
    ]
   },
@@ -735,84 +735,84 @@
     27.375
    ],
    "offset_km": 2.673545500576819,
-   "depth_m": 1414.4290466308594,
-   "monthly_range_median_m": 3.2471028810179465,
-   "monthly_range_p95_m": 4.275559041241723,
-   "extreme_range_m": 4.687139146609684,
-   "standard_deviation_m": 1.1418149515271558,
-   "degree3_share_of_extreme_range_m": 0.04070636991078036,
+   "depth_m": 1416.2428894042969,
+   "monthly_range_median_m": 3.248984654136129,
+   "monthly_range_p95_m": 4.277535613963272,
+   "extreme_range_m": 4.689264031864794,
+   "standard_deviation_m": 1.142384609392365,
+   "degree3_share_of_extreme_range_m": 0.040715220081630754,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 1.5238879722250545,
-     "phase_deg": -37.15794385361021
+     "amplitude_m": 1.5246727803594309,
+     "phase_deg": -37.15841130125913
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 0.3211921879986889,
-     "phase_deg": 176.78056468505548
+     "amplitude_m": 0.32119929674761855,
+     "phase_deg": 176.78102061345075
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.28900194758984366,
-     "phase_deg": -118.62237830488384
+     "amplitude_m": 0.2891484798617361,
+     "phase_deg": -118.62336654072647
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.2617438685405944,
-     "phase_deg": -91.55252642335812
+     "amplitude_m": 0.2618914700755152,
+     "phase_deg": -91.55136520147725
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.06888327272707993,
-     "phase_deg": 132.18338623222593
+     "amplitude_m": 0.06890319691851997,
+     "phase_deg": 132.17071842202154
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.19515083883408624,
-     "phase_deg": -25.250961184373505
+     "amplitude_m": 0.19526592711857532,
+     "phase_deg": -25.24790522068121
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.07491012899361023,
-     "phase_deg": -161.44026226933008
+     "amplitude_m": 0.0749289136362387,
+     "phase_deg": -161.43230966795082
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.05732133248537337,
-     "phase_deg": -96.54575092429829
+     "amplitude_m": 0.05735467472831435,
+     "phase_deg": -96.54309245320707
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.03210599491729682,
-     "phase_deg": 90.7146532936583
+     "amplitude_m": 0.03212280308366067,
+     "phase_deg": 90.7154438025242
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.01301250038601779,
-     "phase_deg": 53.57422421117226
+     "amplitude_m": 0.01301625335562948,
+     "phase_deg": 53.56156013049654
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.011146830087925788,
-     "phase_deg": 61.63131557341509
+     "amplitude_m": 0.01115000446719943,
+     "phase_deg": 61.61896610040938
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.009430959112509608,
-     "phase_deg": 131.34570077052064
+     "amplitude_m": 0.009433968269762966,
+     "phase_deg": 131.33186034274414
     }
    ]
   },
@@ -824,84 +824,84 @@
     6.875
    ],
    "offset_km": 92.89274973473266,
-   "depth_m": 29.7615966796875,
-   "monthly_range_median_m": 4.938559361198931,
-   "monthly_range_p95_m": 7.102773211513891,
-   "extreme_range_m": 7.587405686765685,
-   "standard_deviation_m": 1.7107093663965829,
-   "degree3_share_of_extreme_range_m": 0.044584975990529685,
+   "depth_m": 28.43601074218759,
+   "monthly_range_median_m": 4.939959167412356,
+   "monthly_range_p95_m": 7.104589211797593,
+   "extreme_range_m": 7.589403488219121,
+   "standard_deviation_m": 1.7112003707035857,
+   "degree3_share_of_extreme_range_m": 0.04460699848951677,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 2.0017464849504267,
-     "phase_deg": -50.72052934085759
+     "amplitude_m": 2.0025416832000738,
+     "phase_deg": -50.7181033302835
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 1.206868124077044,
-     "phase_deg": -4.351029131657549
+     "amplitude_m": 1.2068242303772823,
+     "phase_deg": -4.351124643369852
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.388490549059738,
-     "phase_deg": -131.6454137395943
+     "amplitude_m": 0.3886420874431371,
+     "phase_deg": -131.6435041620059
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.2851685672461835,
-     "phase_deg": -105.65732370862106
+     "amplitude_m": 0.2853021850873247,
+     "phase_deg": -105.65253809361593
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.1663648874984681,
-     "phase_deg": 11.094017414983778
+     "amplitude_m": 0.1663614472944448,
+     "phase_deg": 11.100052126011873
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.23624386592455532,
-     "phase_deg": -42.0885267134007
+     "amplitude_m": 0.2363497420910606,
+     "phase_deg": -42.082015853858906
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.09934037745789713,
-     "phase_deg": -155.27312747898026
+     "amplitude_m": 0.09936450889723852,
+     "phase_deg": -155.26836834818505
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.06910365710595377,
-     "phase_deg": -113.05507686829964
+     "amplitude_m": 0.06913446869635949,
+     "phase_deg": -113.04896944534653
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.049809715432098466,
-     "phase_deg": 88.99721086240746
+     "amplitude_m": 0.04982844416999928,
+     "phase_deg": 88.99789692476469
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.031594384048846076,
-     "phase_deg": -67.56468910296222
+     "amplitude_m": 0.031593728573569055,
+     "phase_deg": -67.5586986888039
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.026568051618022035,
-     "phase_deg": -60.77570918134975
+     "amplitude_m": 0.026567395896739645,
+     "phase_deg": -60.76961843168249
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.01914305911982826,
-     "phase_deg": 16.89945726706787
+     "amplitude_m": 0.01914296871231639,
+     "phase_deg": 16.906435167317536
     }
    ]
   },
@@ -913,84 +913,84 @@
     -7.875
    ],
    "offset_km": 1.7961268779156074,
-   "depth_m": 507.8695983886719,
-   "monthly_range_median_m": 5.51633677761418,
-   "monthly_range_p95_m": 8.361724142688091,
-   "extreme_range_m": 9.141909375645373,
-   "standard_deviation_m": 1.9734232091106267,
-   "degree3_share_of_extreme_range_m": 0.02902097205364207,
+   "depth_m": 509.6834411621094,
+   "monthly_range_median_m": 5.515811310721093,
+   "monthly_range_p95_m": 8.361431168405238,
+   "extreme_range_m": 9.141554710760436,
+   "standard_deviation_m": 1.9733220298665974,
+   "degree3_share_of_extreme_range_m": 0.029021426544449724,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 1.9859848978605812,
-     "phase_deg": -95.478019994132
+     "amplitude_m": 1.9863368098604823,
+     "phase_deg": -95.48383421960537
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 1.9209217499457143,
-     "phase_deg": -4.157156385523188
+     "amplitude_m": 1.9203365437732314,
+     "phase_deg": -4.1571489379508595
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.3921404421285833,
-     "phase_deg": -172.47831994461157
+     "amplitude_m": 0.39220813667941595,
+     "phase_deg": -172.4835515810306
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.242091125438594,
-     "phase_deg": 175.62564875134342
+     "amplitude_m": 0.2421505571615524,
+     "phase_deg": 175.61639564309885
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.2630300331028373,
-     "phase_deg": -2.8334634482794145
+     "amplitude_m": 0.2629503805747918,
+     "phase_deg": -2.834753894225706
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.2418356468877852,
-     "phase_deg": -98.97898293302183
+     "amplitude_m": 0.24188452012859762,
+     "phase_deg": -98.98545739530093
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.06382718819937394,
-     "phase_deg": -110.05109433694862
+     "amplitude_m": 0.06383480416016607,
+     "phase_deg": -110.04108039585702
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.06953615546377508,
-     "phase_deg": -170.84799074249142
+     "amplitude_m": 0.0695502539334949,
+     "phase_deg": -170.85465903926573
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.0561606482221572,
-     "phase_deg": 85.61254153700817
+     "amplitude_m": 0.05616960897077941,
+     "phase_deg": 85.61209810870511
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.04987299105780198,
-     "phase_deg": -81.39058117865942
+     "amplitude_m": 0.04985785954798591,
+     "phase_deg": -81.39184203841936
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.04239195129276405,
-     "phase_deg": -74.43503296337066
+     "amplitude_m": 0.04237914917198188,
+     "phase_deg": -74.43614099444412
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.030028289686910615,
-     "phase_deg": -1.6192501319509307
+     "amplitude_m": 0.0300188274138633,
+     "phase_deg": -1.6223888298620537
     }
    ]
   },
@@ -1002,84 +1002,84 @@
     -20.625
    ],
    "offset_km": 2.715805110992527,
-   "depth_m": 537.8131408691406,
-   "monthly_range_median_m": 1.8955237656424169,
-   "monthly_range_p95_m": 2.725491408790634,
-   "extreme_range_m": 2.957438046200476,
-   "standard_deviation_m": 0.6435349608740518,
-   "degree3_share_of_extreme_range_m": 0.01870064113576131,
+   "depth_m": 696.5668029785156,
+   "monthly_range_median_m": 2.245373091787255,
+   "monthly_range_p95_m": 3.214821261809791,
+   "extreme_range_m": 3.505430514409009,
+   "standard_deviation_m": 0.7619291308340281,
+   "degree3_share_of_extreme_range_m": 0.021000380421833942,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 0.6562917742862314,
-     "phase_deg": -35.79882539458661
+     "amplitude_m": 0.7477438291162276,
+     "phase_deg": -32.96575664142591
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 0.5753247194403943,
-     "phase_deg": -4.220694135681653
+     "amplitude_m": 0.7126466528660754,
+     "phase_deg": -4.252576084692553
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.12174301825510161,
-     "phase_deg": -118.37092959688894
+     "amplitude_m": 0.13768692802659885,
+     "phase_deg": -115.52906641472235
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.12578140124716408,
-     "phase_deg": -87.98620990197055
+     "amplitude_m": 0.14801613002714742,
+     "phase_deg": -85.96052993693814
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.07851500374430731,
-     "phase_deg": 1.959950883674805
+     "amplitude_m": 0.09730437256457793,
+     "phase_deg": 4.573972286172568
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.09722189156109746,
-     "phase_deg": -18.32068899374562
+     "amplitude_m": 0.11317840286692284,
+     "phase_deg": -15.689097539569117
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.018420952977911385,
-     "phase_deg": -137.5837373848428
+     "amplitude_m": 0.02027342010028504,
+     "phase_deg": -139.11247174710977
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.028170435051692023,
-     "phase_deg": -90.19889800582027
+     "amplitude_m": 0.03279059029098181,
+     "phase_deg": -87.59460426247288
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.013041815746198131,
-     "phase_deg": 92.6107700370591
+     "amplitude_m": 0.014123063661901736,
+     "phase_deg": 93.28761591177337
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.014897934748399472,
-     "phase_deg": -76.71428287651636
+     "amplitude_m": 0.018465365036755808,
+     "phase_deg": -74.10747282657368
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.01256128252810323,
-     "phase_deg": -69.87916039590515
+     "amplitude_m": 0.015571655399315388,
+     "phase_deg": -67.35631706925024
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.009611894632294508,
-     "phase_deg": 5.544258945115963
+     "amplitude_m": 0.011870467372994315,
+     "phase_deg": 9.503774813537216
     }
    ]
   },
@@ -1091,84 +1091,84 @@
     -24.375
    ],
    "offset_km": 3.467508344107198,
-   "depth_m": 696.5477447509766,
-   "monthly_range_median_m": 1.1498078156188873,
-   "monthly_range_p95_m": 1.660412585995548,
-   "extreme_range_m": 1.807367497183256,
-   "standard_deviation_m": 0.40085879936969954,
-   "degree3_share_of_extreme_range_m": 0.005353875099310734,
+   "depth_m": 855.3014068603516,
+   "monthly_range_median_m": 1.1264399995562424,
+   "monthly_range_p95_m": 1.714210667131577,
+   "extreme_range_m": 1.8533080410778724,
+   "standard_deviation_m": 0.3977320448291474,
+   "degree3_share_of_extreme_range_m": 0.006500680977806539,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 0.49244432628819396,
-     "phase_deg": 176.02646299721596
+     "amplitude_m": 0.40305248879401395,
+     "phase_deg": 178.0506459387146
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 0.24892286193912125,
-     "phase_deg": -4.94511837687379
+     "amplitude_m": 0.3820331685346339,
+     "phase_deg": -4.752432768312896
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.08969797866429136,
-     "phase_deg": 96.1270090647854
+     "amplitude_m": 0.07410001643151262,
+     "phase_deg": 98.36040306026423
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.10271853001108613,
-     "phase_deg": 109.09040564954486
+     "amplitude_m": 0.08151570640125574,
+     "phase_deg": 109.99108376517027
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.04788574729240492,
-     "phase_deg": 47.441635578320316
+     "amplitude_m": 0.06451111969509536,
+     "phase_deg": 38.7123431997392
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.06649848277000088,
-     "phase_deg": -175.66507477816663
+     "amplitude_m": 0.05095976829703707,
+     "phase_deg": -174.44257341457683
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.031307976901865514,
-     "phase_deg": -2.9679006111221664
+     "amplitude_m": 0.029858268738479726,
+     "phase_deg": -4.593377902065577
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.019808025278552254,
-     "phase_deg": 112.51532430022903
+     "amplitude_m": 0.01531651894223557,
+     "phase_deg": 113.76094452251282
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.0022763880452157576,
-     "phase_deg": -76.58289546795308
+     "amplitude_m": 0.0012817227823419413,
+     "phase_deg": -75.44953925729469
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.009081839548398416,
-     "phase_deg": -31.20477001180679
+     "amplitude_m": 0.01223633895498638,
+     "phase_deg": -39.95888337284034
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.0076510467023523715,
-     "phase_deg": -25.93163322073959
+     "amplitude_m": 0.010331931213481778,
+     "phase_deg": -34.38952098998801
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.007130108261189628,
-     "phase_deg": 67.12022184281629
+     "amplitude_m": 0.009008547523307951,
+     "phase_deg": 57.498150549797515
     }
    ]
   },
@@ -1181,83 +1181,83 @@
    ],
    "offset_km": 3.419670812007681,
    "depth_m": 3069.5332641601562,
-   "monthly_range_median_m": 0.18492791134114062,
-   "monthly_range_p95_m": 0.26984224304862087,
-   "extreme_range_m": 0.34908437972784473,
-   "standard_deviation_m": 0.06529785275780194,
-   "degree3_share_of_extreme_range_m": -0.0035889872417620983,
+   "monthly_range_median_m": 0.18486144978455998,
+   "monthly_range_p95_m": 0.2698289397734524,
+   "extreme_range_m": 0.3488761363916785,
+   "standard_deviation_m": 0.06531442615117844,
+   "degree3_share_of_extreme_range_m": -0.0035897685773927934,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 0.05105154534030244,
-     "phase_deg": 176.27219362948748
+     "amplitude_m": 0.05120179816459069,
+     "phase_deg": 176.20584646128827
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 0.03771866105807306,
-     "phase_deg": 2.3252589055143584
+     "amplitude_m": 0.03752838210598075,
+     "phase_deg": 2.359520763169897
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.008692216443216738,
-     "phase_deg": 96.98194349545489
+     "amplitude_m": 0.008718796369450752,
+     "phase_deg": 96.90244805698772
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.013583017113165965,
-     "phase_deg": 110.13748672183299
+     "amplitude_m": 0.013616599110456842,
+     "phase_deg": 110.10928106779016
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.04474458825051528,
-     "phase_deg": -81.00598907447126
+     "amplitude_m": 0.044747902880423594,
+     "phase_deg": -81.04014629514617
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.010417569881211123,
-     "phase_deg": -172.7651862454793
+     "amplitude_m": 0.010441990219589905,
+     "phase_deg": -172.8050931738258
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.0009059598342123017,
-     "phase_deg": 154.81063467099858
+     "amplitude_m": 0.0009037135933916419,
+     "phase_deg": 154.58555583693095
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.0029644454575688366,
-     "phase_deg": 114.73205506916108
+     "amplitude_m": 0.002971544862062782,
+     "phase_deg": 114.6927039766662
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.0010900934861148082,
-     "phase_deg": -75.37289812223617
+     "amplitude_m": 0.0010926931026567107,
+     "phase_deg": -75.39484203967297
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.008464041620167067,
-     "phase_deg": -159.6878223341762
+     "amplitude_m": 0.008464667905057186,
+     "phase_deg": -159.72210201571636
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.006989243297573772,
-     "phase_deg": -152.77015423711399
+     "amplitude_m": 0.006989736042845698,
+     "phase_deg": -152.80515548345483
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.0076308428661292895,
-     "phase_deg": -76.81461162314362
+     "amplitude_m": 0.007631593609085081,
+     "phase_deg": -76.8388438780794
     }
    ]
   },
@@ -1270,83 +1270,83 @@
    ],
    "offset_km": 3.996400205013562,
    "depth_m": 1137.4087600708008,
-   "monthly_range_median_m": 0.3224617367344421,
-   "monthly_range_p95_m": 0.44709462475357475,
-   "extreme_range_m": 0.48724428144149856,
-   "standard_deviation_m": 0.11175786867678016,
-   "degree3_share_of_extreme_range_m": -0.0021696537467301713,
+   "monthly_range_median_m": 0.3224532417723282,
+   "monthly_range_p95_m": 0.4470738758235499,
+   "extreme_range_m": 0.48722081172751874,
+   "standard_deviation_m": 0.11175823697142873,
+   "degree3_share_of_extreme_range_m": -0.0021700074862558982,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 0.1347742594210835,
-     "phase_deg": -97.71464364542365
+     "amplitude_m": 0.13478553790712522,
+     "phase_deg": -97.71132724757858
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 0.06529619998061999,
-     "phase_deg": 177.37233402250777
+     "amplitude_m": 0.0652739226686631,
+     "phase_deg": 177.3729731001838
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.02651297400354698,
-     "phase_deg": -174.39145862726085
+     "amplitude_m": 0.026515295011253017,
+     "phase_deg": -174.3886218728613
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.016632645843344177,
-     "phase_deg": 173.38055571511228
+     "amplitude_m": 0.016633191035801704,
+     "phase_deg": 173.3867803464016
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.02024225061574741,
-     "phase_deg": 118.50026706061414
+     "amplitude_m": 0.02024193085003503,
+     "phase_deg": 118.49113620303075
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.01635775556140888,
-     "phase_deg": -99.93043301937826
+     "amplitude_m": 0.016358736311772724,
+     "phase_deg": -99.92527851352888
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.004188781456514251,
-     "phase_deg": -98.21962355166306
+     "amplitude_m": 0.004189194957278801,
+     "phase_deg": -98.21880423334882
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.004713663671217254,
-     "phase_deg": -172.0437496298453
+     "amplitude_m": 0.004713947192459706,
+     "phase_deg": -172.03862504282444
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.004144901335512286,
-     "phase_deg": 86.5264141099142
+     "amplitude_m": 0.004145295089035538,
+     "phase_deg": 86.52676800391443
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.003834441136592009,
-     "phase_deg": 39.901525167649254
+     "amplitude_m": 0.003834379488060324,
+     "phase_deg": 39.892379781547135
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.0031911603238289764,
-     "phase_deg": 46.96484262521913
+     "amplitude_m": 0.0031911009582346623,
+     "phase_deg": 46.955575280832335
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.003238509957318425,
-     "phase_deg": 119.24468505698728
+     "amplitude_m": 0.0032385578412218266,
+     "phase_deg": 119.23760678352276
     }
    ]
   },
@@ -1359,83 +1359,83 @@
    ],
    "offset_km": 3.8618967756113287,
    "depth_m": 1953.9881591796875,
-   "monthly_range_median_m": 3.2559556261795333,
-   "monthly_range_p95_m": 4.004963834802653,
-   "extreme_range_m": 4.227101775229814,
-   "standard_deviation_m": 1.1208508280767808,
-   "degree3_share_of_extreme_range_m": -0.03886030091608195,
+   "monthly_range_median_m": 3.256010447681791,
+   "monthly_range_p95_m": 4.0050509653709305,
+   "extreme_range_m": 4.2271967880875145,
+   "standard_deviation_m": 1.1208721054205493,
+   "degree3_share_of_extreme_range_m": -0.0388597625333853,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 1.525858967730023,
-     "phase_deg": 51.10847279286836
+     "amplitude_m": 1.5258882480371727,
+     "phase_deg": 51.10974037621836
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 0.10363054865613876,
-     "phase_deg": 173.14385069916202
+     "amplitude_m": 0.10364079612012814,
+     "phase_deg": 173.14410646282246
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.29192530630022023,
-     "phase_deg": -25.44948244656711
+     "amplitude_m": 0.29193149572779925,
+     "phase_deg": -25.44823370998654
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.24628663152824384,
-     "phase_deg": -37.2330431593218
+     "amplitude_m": 0.24628800416746774,
+     "phase_deg": -37.23192871734091
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.04707202152464718,
-     "phase_deg": -104.71793467946115
+     "amplitude_m": 0.047072360666237066,
+     "phase_deg": -104.71959245202576
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.1798717361232604,
-     "phase_deg": 56.42223329960876
+     "amplitude_m": 0.17987454907722358,
+     "phase_deg": 56.42363781621557
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.09425645040260658,
-     "phase_deg": 150.228878656847
+     "amplitude_m": 0.09425743238616086,
+     "phase_deg": 150.22817446148554
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.05310098568838558,
-     "phase_deg": -17.14282736128808
+     "amplitude_m": 0.05310177068841149,
+     "phase_deg": -17.14144464616945
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.03208880429333648,
-     "phase_deg": -95.05303119504244
+     "amplitude_m": 0.03209011106338549,
+     "phase_deg": -95.0529094924105
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.008921753096522787,
-     "phase_deg": 177.0764255041774
+     "amplitude_m": 0.008921815332537001,
+     "phase_deg": 177.07477171285586
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.0075427620247196445,
-     "phase_deg": -178.29218134017538
+     "amplitude_m": 0.007542827376304769,
+     "phase_deg": -178.29381941815035
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.0075081742495638,
-     "phase_deg": -91.78378882143556
+     "amplitude_m": 0.007508162011006046,
+     "phase_deg": -91.78513136266608
     }
    ]
   },
@@ -1448,170 +1448,170 @@
    ],
    "offset_km": 1.3038837757583377,
    "depth_m": 1005.0857467651367,
-   "monthly_range_median_m": 0.9662503851970945,
-   "monthly_range_p95_m": 1.1540337944994077,
-   "extreme_range_m": 1.286997766380893,
-   "standard_deviation_m": 0.3358287834007806,
-   "degree3_share_of_extreme_range_m": 0.0024957248137373877,
+   "monthly_range_median_m": 0.9662318513326219,
+   "monthly_range_p95_m": 1.154263819213973,
+   "extreme_range_m": 1.28719813152232,
+   "standard_deviation_m": 0.33587307089083723,
+   "degree3_share_of_extreme_range_m": 0.0024965143145248003,
    "lines": [
     {
      "argument": "M'",
      "period_days": 27.554549885482196,
-     "amplitude_m": 0.4583350076388362,
-     "phase_deg": 104.76021178638624
+     "amplitude_m": 0.45839561426103176,
+     "phase_deg": 104.76542137404944
     },
     {
      "argument": "F",
      "period_days": 27.212220816888244,
-     "amplitude_m": 0.0028127916748240975,
-     "phase_deg": 112.44923062938975
+     "amplitude_m": 0.0028566351448205724,
+     "phase_deg": 114.1359826380014
     },
     {
      "argument": "2D -M'",
      "period_days": 31.811941154791526,
-     "amplitude_m": 0.09079134752630291,
-     "phase_deg": 24.759125431045092
+     "amplitude_m": 0.09080302464684056,
+     "phase_deg": 24.763706197820785
     },
     {
      "argument": "2D",
      "period_days": 14.765294430305369,
-     "amplitude_m": 0.05256765281165628,
-     "phase_deg": 44.151072377923064
+     "amplitude_m": 0.05257725976462874,
+     "phase_deg": 44.16134483583964
     },
     {
      "argument": "M' +F",
      "period_days": 13.691157728992227,
-     "amplitude_m": 0.02411466861613206,
-     "phase_deg": -87.97157991518743
+     "amplitude_m": 0.024118199246738654,
+     "phase_deg": -88.00205199516456
     },
     {
      "argument": "2M'",
      "period_days": 13.777274942741098,
-     "amplitude_m": 0.05398492749342289,
-     "phase_deg": 117.70026597086178
+     "amplitude_m": 0.05399312312610237,
+     "phase_deg": 117.70756490704136
     },
     {
      "argument": "2F",
      "period_days": 13.606110408444122,
-     "amplitude_m": 0.01465576328767978,
-     "phase_deg": 86.88151867676862
+     "amplitude_m": 0.014657407315803226,
+     "phase_deg": 86.87709457003189
     },
     {
      "argument": "2D +M'",
      "period_days": 9.613717832177953,
-     "amplitude_m": 0.015532349588386778,
-     "phase_deg": 45.42459140641952
+     "amplitude_m": 0.015534707862224953,
+     "phase_deg": 45.43197396627041
     },
     {
      "argument": "M",
      "period_days": 365.25963584460004,
-     "amplitude_m": 0.013752787370502543,
-     "phase_deg": -91.61344354610377
+     "amplitude_m": 0.013754430157526018,
+     "phase_deg": -91.61297415268848
     },
     {
      "argument": "2D -M' +F",
      "period_days": 14.666427076650377,
-     "amplitude_m": 0.00456435951985174,
-     "phase_deg": -166.537673394484
+     "amplitude_m": 0.004565023961569576,
+     "phase_deg": -166.5682480023528
     },
     {
      "argument": "2D +F",
      "period_days": 9.571706426589929,
-     "amplitude_m": 0.0038142456199591664,
-     "phase_deg": -159.78280745364145
+     "amplitude_m": 0.003814794245123021,
+     "phase_deg": -159.81371999187974
     },
     {
      "argument": "2M' +F",
      "period_days": 9.146495731379602,
-     "amplitude_m": 0.0038022901357039093,
-     "phase_deg": -81.64747419588765
+     "amplitude_m": 0.0038028434770437155,
+     "phase_deg": -81.67058333230531
     }
    ]
   }
  ],
  "dynamics": {
   "1": {
-   "main_body_cells": 85806,
-   "body_cells": 86011,
-   "main_body_area_share": 0.9974019114726795,
+   "main_body_cells": 85891,
+   "body_cells": 86101,
+   "main_body_area_share": 0.9973528051058996,
    "lines": [
     {
      "frequency_cpd": 0.03629164708391317,
-     "equilibrium_max_m": 2.0524107869967123,
-     "departure_max_relative": 0.4319946007011891,
-     "rms_amplitude_ratio": 1.137067857195978,
-     "peak_amplitude_ratio": 1.0721919150975767,
-     "peak_phase_lag_deg": -1.5047968852502138,
+     "equilibrium_max_m": 2.0520320434923356,
+     "departure_max_relative": 0.42000586722076727,
+     "rms_amplitude_ratio": 1.13325605027796,
+     "peak_amplitude_ratio": 1.0705181537704844,
+     "peak_phase_lag_deg": -1.4349915208543165,
      "argument": "M'",
      "period_days": 27.554549885482196
     },
     {
      "frequency_cpd": 0.0367481951116385,
-     "equilibrium_max_m": 2.7934156188676256,
-     "departure_max_relative": 0.19645744206263904,
-     "rms_amplitude_ratio": 1.1310651940291796,
-     "peak_amplitude_ratio": 1.0027088251471412,
-     "peak_phase_lag_deg": 0.13098118694611,
+     "equilibrium_max_m": 2.7930864559395134,
+     "departure_max_relative": 0.19093655053688668,
+     "rms_amplitude_ratio": 1.127477223563865,
+     "peak_amplitude_ratio": 1.0032041304845447,
+     "peak_phase_lag_deg": 0.11781972568487427,
      "argument": "F",
      "period_days": 27.212220816888244
     },
     {
      "frequency_cpd": 0.031434736884937926,
-     "equilibrium_max_m": 0.4070866440111332,
-     "departure_max_relative": 0.2918597456542373,
-     "rms_amplitude_ratio": 1.093990693325387,
-     "peak_amplitude_ratio": 1.0505090824478076,
-     "peak_phase_lag_deg": -0.9440200247808139,
+     "equilibrium_max_m": 0.40701265304598333,
+     "departure_max_relative": 0.28449355204935467,
+     "rms_amplitude_ratio": 1.0917046472646126,
+     "peak_amplitude_ratio": 1.0494219543917156,
+     "peak_phase_lag_deg": -0.9001036638554233,
      "argument": "2D -M'",
      "period_days": 31.811941154791526
     },
     {
      "frequency_cpd": 0.0677263839688511,
-     "equilibrium_max_m": 0.32450342897762924,
-     "departure_max_relative": 11.827198809308072,
-     "rms_amplitude_ratio": 6.190752854350292,
-     "peak_amplitude_ratio": 1.0723988697365794,
-     "peak_phase_lag_deg": 116.01013743293412,
+     "equilibrium_max_m": 0.32443796995358964,
+     "departure_max_relative": 13.381877270577993,
+     "rms_amplitude_ratio": 7.129650176637415,
+     "peak_amplitude_ratio": 1.0691787595284805,
+     "peak_phase_lag_deg": 149.48039740223487,
      "argument": "2D",
      "period_days": 14.765294430305369
     },
     {
      "frequency_cpd": 0.07303984219555168,
-     "equilibrium_max_m": 0.3822318405698888,
-     "departure_max_relative": 2.753701903349143,
-     "rms_amplitude_ratio": 2.446175785085901,
-     "peak_amplitude_ratio": 1.163851775039951,
-     "peak_phase_lag_deg": 3.186422283128427,
+     "equilibrium_max_m": 0.3821864511174372,
+     "departure_max_relative": 3.0514974325291324,
+     "rms_amplitude_ratio": 2.7260632316818265,
+     "peak_amplitude_ratio": 1.1699968524947133,
+     "peak_phase_lag_deg": 3.518590579127827,
      "argument": "M' +F",
      "period_days": 13.691157728992227
     },
     {
      "frequency_cpd": 0.07258329416782634,
-     "equilibrium_max_m": 0.25839568638736515,
-     "departure_max_relative": 6.151660119972293,
-     "rms_amplitude_ratio": 2.780148486477247,
-     "peak_amplitude_ratio": 0.7940633380607113,
-     "peak_phase_lag_deg": 58.911101494373895,
+     "equilibrium_max_m": 0.25833875479985996,
+     "departure_max_relative": 6.867209205960454,
+     "rms_amplitude_ratio": 3.1300684211244785,
+     "peak_amplitude_ratio": 0.7990822894301962,
+     "peak_phase_lag_deg": 67.26778020961615,
      "argument": "2M'",
      "period_days": 13.777274942741098
     },
     {
      "frequency_cpd": 0.073496390223277,
-     "equilibrium_max_m": 0.11674615969560226,
-     "departure_max_relative": 3.2731512567517616,
-     "rms_amplitude_ratio": 1.953637537523719,
-     "peak_amplitude_ratio": 1.0789039983294193,
-     "peak_phase_lag_deg": -25.737969424685485,
+     "equilibrium_max_m": 0.11674311859627534,
+     "departure_max_relative": 3.6056179552831216,
+     "rms_amplitude_ratio": 2.141664205334484,
+     "peak_amplitude_ratio": 1.1082958583525306,
+     "peak_phase_lag_deg": -27.89631871073363,
      "argument": "2F",
      "period_days": 13.606110408444122
     },
     {
      "frequency_cpd": 0.10401803105276428,
-     "equilibrium_max_m": 0.07440605316158852,
-     "departure_max_relative": 1.7622252117042658,
-     "rms_amplitude_ratio": 1.0107014014352589,
-     "peak_amplitude_ratio": 1.0233637926799697,
-     "peak_phase_lag_deg": 13.205831183351183,
+     "equilibrium_max_m": 0.0743896452897612,
+     "departure_max_relative": 1.7890582506357615,
+     "rms_amplitude_ratio": 1.0146465232442035,
+     "peak_amplitude_ratio": 1.0205147312333491,
+     "peak_phase_lag_deg": 13.46703192003292,
      "argument": "2D +M'",
      "period_days": 9.613717832177953
     }
@@ -1793,5 +1793,5 @@
   }
  },
  "neck_study_south_monthly_range_m": 0.02,
- "seconds": 160
+ "seconds": 440
 }
