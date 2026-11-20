@@ -390,7 +390,7 @@
         between them, merge; and districts run from about 5,000 to 150,000 km². <span id="districts-figures"></span>
         Regions gather districts round the great basins and are never crossed by a district. The coastal seas, the water
         within 60 km of the shore, are districts of their own, each linked to the land that faces it and the land whose
-        rivers reach it, so that the coast and its land can be planned together; selecting either shows them both. The
+        rivers reach it, so that the coast and its land can be planned together; each one's card names the others. The
         draft's significance is computed, from landform, water, climate and rock: written judgment of each place, and the
         kept landforms, settlement and heritage treatments, come later.</p>
       <p><b>Names.</b> Working names in the Moon's own tongues, each region in one of them, chosen loosely as Earth's
@@ -771,6 +771,7 @@
 
     vec3 surface = vec3(0.0), topo = vec3(0.0);
     vec3 closeTone = vec3(1.0);
+    float drawnWater = 0.0;                            // the share of water drawn there, for a selected place's tint
     if (hit) {
       vec3 n = ns, v = -dir;
       vec3 albedo = srgbToLinear(textureLod(tAlbedo, uv, lod).rgb);
@@ -809,6 +810,7 @@
           tilt = mix(tilt, (fnm.x * fe + fnm.y * fn) / max(fnm.z, 0.2), fw);
         }
       }
+      drawnWater = water;
       // The normal map holds the full relief, sea floors and lake beds included; water lies flat over it.
       vec3 nr = normalize(n + uRelief * (1.0 + (uCloseRelief - 1.0) * uClose) * (1.0 - water) * tilt);
       if (uOverlay > 0.0) {
@@ -878,7 +880,9 @@
     float dither = float(hashu(uint(gl_FragCoord.x) + hashu(uint(gl_FragCoord.y)))) * (1.0 / 4294967295.0) - 0.5;
     vec3 display = linearToSrgb(c);
     if (hit && uOverlay > 0.0) display = mix(display, linearToSrgb(topo), uOverlay * rim);
-    if (hit) display = gridOver(worksOver(districtsOver(display, uv, gx, gy), ns, pix), uv, gx, gy);
+    // the selected place's tint is worked out for every pixel, since it takes screen derivatives, and laid on the globe
+    vec3 tinted = districtsOver(display, uv, drawnWater, clamp(uOverlay * rim, 0.0, 1.0));
+    if (hit) display = gridOver(worksOver(tinted, ns, pix), uv, gx, gy);
     gl_FragColor = vec4(display + dither / 255.0, 1.0);
   }
 </script>
@@ -907,28 +911,30 @@
   }
 </script>
 <script id="district-lines" type="x-shader/x-fragment">
-  // The atlas round's draft regions and districts: each cell's district (red's low seven bits and green), whether it is
-  // water (red's top bit, a lake or a sea) and the region drawn there (blue) in a texture read cell by cell, for the
-  // tint of a selected district and those linked to it. The borders are traced lines (border-vertex below).
-  uniform sampler2D tDistricts;
+  // The atlas round's draft regions and districts. The borders are traced lines (border-vertex below); here the place
+  // a click selected is tinted, and that place alone: a district with its lakes, a coastal sea, or a region with its
+  // lakes and coastal waters. The page makes the tint's reach from the districts texture's cells when a place is
+  // selected (makeSelection): where the land's tint may show (red), where the water's tint may show (green) and the
+  // place's own cells (blue), each blurred over a few cells, so that its half level runs smoothly and close to the
+  // traced borders, which were smoothed from the same cells. Across a shore the two reaches overlap and the water the
+  // picture draws decides between the tints, so each ends at the shore as drawn: warm on land, and a pale blue on
+  // water, where the warm tint would read as grey.
+  uniform sampler2D tSel;
+  uniform vec4 uSelWin;          // the window the reach covers in the districts texture, as shares of the texture: its
+                                 // left edge, its top edge from the north, its width and its height (width 0: no place)
+  uniform float uSelStrength;    // the tint's share of the colour
   uniform float uDistrictMode;   // 0 off, 1 regions, 2 regions and districts
-  uniform float uSel[8];         // the selected district and its links, by their place in the page's list (0 unused)
-  uniform float uSelRegion;      // the selected region, by its number in the texture's blue (0 none)
-  uniform vec2 uLandUnits;       // how many districts and regions are on land; the districts after them are coastal seas
-  vec3 unitsAt(vec2 at) {
-    vec3 t = floor(texture2D(tDistricts, at).rgb * 255.0 + 0.5);
-    float wet = step(127.5, t.r);
-    return vec3((t.r - 128.0 * wet) * 256.0 + t.g, t.b, wet);
-  }
-  vec3 districtsOver(vec3 colour, vec2 uv, vec2 gx, vec2 gy) {
-    // The borders themselves are traced lines drawn over the globe (border-vertex); here only the selected district
-    // and those linked to it are tinted.
-    if (uDistrictMode < 0.5) return colour;
-    vec3 c0 = unitsAt(uv);
-    float sel = 0.0;
-    for (int k = 0; k < 8; k++) sel = max(sel, step(0.5, uSel[k]) * (1.0 - step(0.5, abs(uSel[k] - c0.x))));
-    float region = step(0.5, uSelRegion) * (1.0 - step(0.5, abs(uSelRegion - c0.y)));
-    return mix(colour, vec3(1.0, 0.80, 0.42), max(0.28 * sel * step(0.5, c0.x), 0.2 * region));
+  // water: the share of water the picture draws at the place; plain: the share of the picture that draws no water (the
+  // topography), where the place's own cells take the warm tint.
+  vec3 districtsOver(vec3 colour, vec2 uv, float water, float plain) {
+    if (uDistrictMode < 0.5 || uSelWin.z <= 0.0) return colour;
+    vec2 at = vec2(fract(uv.x - uSelWin.x) / uSelWin.z, (1.0 - uv.y - uSelWin.y) / uSelWin.w);
+    float inside = step(at.x, 1.0) * step(0.0, at.y) * step(at.y, 1.0);
+    vec3 m = texture2D(tSel, clamp(at, 0.0, 1.0)).rgb;
+    vec3 w = clamp(0.7 * fwidth(m), 0.008, 0.3);                     // each reach is cut at one half over about a pixel
+    vec3 a = smoothstep(0.5 - w, 0.5 + w, m) * inside * uSelStrength;
+    float land = mix(a.r * (1.0 - water), a.b, plain), wet = a.g * water * (1.0 - plain);
+    return colour * (1.0 - land - wet) + land * vec3(1.0, 0.80, 0.42) + wet * vec3(0.55, 0.78, 1.0);
   }
 </script>
 <script id="works-lines" type="x-shader/x-fragment">
@@ -1173,7 +1179,7 @@
     vec3 nr = normalize(n + uNormalScale * (nm.x * east + nm.y * north) / max(nm.z, 0.2));
     vec3 colour = srgbToLinear(rampAt(vUv, h)) * hillshade(nr, n) * contourShade(h, fwidth(h));
     float pix = max(length(dFdx(n)), length(dFdy(n)));
-    vec3 shown = districtsOver(linearToSrgb(colour), vUv, dFdx(vUv), dFdy(vUv));
+    vec3 shown = districtsOver(linearToSrgb(colour), vUv, 0.0, 1.0);
     gl_FragColor = vec4(gridOver(worksOver(shown, n, pix), vUv, dFdx(vUv), dFdy(vUv)), 1.0);
   }
 </script>
@@ -1369,11 +1375,9 @@
     uWorkA: { value: Array.from({ length: WORK_SEGMENTS }, (_, i) => workSegments[i] ? workSegments[i][0] : new THREE.Vector3()) },
     uWorkB: { value: Array.from({ length: WORK_SEGMENTS }, (_, i) => workSegments[i] ? workSegments[i][1] : new THREE.Vector3()) },
     uWorks: { value: 0 },
-    tDistricts: { value: D.textures.districts ? load(D.textures.districts, exact) : blank() },
-    uDistrictMode: { value: 0 }, uSel: { value: new Array(8).fill(0) }, uSelRegion: { value: 0 },
-    uLightDir: { value: new THREE.Vector3(-0.7071, 0.7071, 0) },
-    uLandUnits: { value: new THREE.Vector2(D.districts ? D.districts.districts.filter((d) => d.kind === 'district').length : 0,
-                                           D.districts ? D.districts.regions.filter((r) => !r.sea).length : 0) }
+    uDistrictMode: { value: 0 },
+    tSel: { value: blank() }, uSelWin: { value: new THREE.Vector4() }, uSelStrength: { value: 0 },
+    uLightDir: { value: new THREE.Vector3(-0.7071, 0.7071, 0) }
   };
   const reliefUniforms = { ...topoUniforms, tNormal: { value: normalMap }, uScale: { value: 0 }, uNormalScale: { value: 1 } };
   const reliefMesh = new THREE.Mesh(new THREE.SphereGeometry(1, segments[0], segments[1]), new THREE.ShaderMaterial({
@@ -1641,6 +1645,7 @@
       const ctx = c.getContext('2d', { willReadFrequently: true });
       ctx.drawImage(unitImage, 0, 0);
       try { unitPixels = ctx.getImageData(0, 0, unitW, unitH).data; } catch (err) { unitPixels = null; }
+      makeSelection();                                 // a place selected before the cells arrived takes its tint now
     };
     unitImage.src = D.textures.districts;
   }
@@ -1659,6 +1664,118 @@
     const w = surfaceAt(at.lat, at.lon);
     return w ? seaItemOfBody(w.index) : null;
   };
+  // The tint of the place a click selects, and of that place alone (district-lines): its reach, made here from the
+  // districts texture's cells in a window round the place. The cells step along a shore that the picture draws far
+  // finer, so both tints reach across it and the shader ends each at the water drawn. The warm tint may show on the
+  // place's own cells and, for a place with land, on the sea's cells within SEL_REACH cells of that land. The water's
+  // tint may show on the place's own cells, except its dry cells within SEL_RIM cells of a sea outside it, and for a
+  // place with coastal waters also on other dry land within SEL_REACH cells of them. So a district's lakes take the
+  // water's tint and the sea beside it takes none, a coastal sea is tinted from its shore to its limits, and a region
+  // holds its land, its lakes and its coastal waters. Where the place ends at a border, on land or across water, its
+  // reach ends with its cells. Each reach and the own cells are then blurred by SEL_PASSES passes of a three-cell
+  // mean, wider along a row towards the poles as the cells narrow, which puts the half level within a cell of the
+  // traced borders nearly everywhere. The far water the page draws lies within one cell of the texture's shore.
+  const SEL_REACH = 2, SEL_RIM = 1, SEL_PASSES = 3;
+  const MINE_DRY = 1, MINE_LAKE = 2, MINE_SEA = 3, OTHER_SEA = 4, OTHER_DRY = 5;   // a cell's kind; 0: another's lake
+  // How many of the page's districts are on land; the coastal seas follow them in its list.
+  const landUnits = DIST ? DIST.districts.filter((d) => d.kind === 'district').length : 0;
+  let selWanted = null, selTexture = null;
+  const makeSelection = () => {
+    topoUniforms.uSelWin.value.set(0, 0, 0, 0);
+    invalidate();
+    if (!selWanted || !unitPixels) return;
+    const W = unitW, H = unitH, px = unitPixels, kind = selWanted.kind, id = selWanted.id, hi = id >> 8, lo = id & 255;
+    const own = kind === 'region' ? (k) => px[k + 2] === id : (k) => (px[k] & 127) === hi && px[k + 1] === lo;
+    // The rows that hold the place, and its columns as an arc that may cross the date line: all but the longest run
+    // of columns without it.
+    const used = new Uint8Array(W);
+    let top = -1, bottom = -1;
+    for (let i = 0, k = 0; i < H; i++) {
+      for (let j = 0; j < W; j++, k += 4) if (own(k)) { used[j] = 1; if (top < 0) top = i; bottom = i; }
+    }
+    if (top < 0) return;
+    let gap = 0, gapEnd = 0;
+    for (let j = 0, run = 0; j < 2 * W; j++) {
+      if (used[j % W]) run = 0;
+      else if (++run > gap) { gap = run; gapEnd = j; }
+    }
+    // A row's cells are cos(latitude) as wide as they are tall, so along a row the reach and the blur take as many
+    // times more cells, to the whole number and no more than eight times.
+    const stretchAt = (i) => Math.min(8, Math.round(1 / Math.max(0.05, Math.cos(((i + 0.5) / H - 0.5) * Math.PI))));
+    const pad = SEL_REACH + SEL_PASSES + 1;
+    const i0 = Math.max(0, top - pad), rows = Math.min(H - 1, bottom + pad) - i0 + 1;
+    const padX = pad * Math.max(stretchAt(i0), stretchAt(i0 + rows - 1));
+    const wrap = W - gap + 2 * padX >= W;              // the window is the whole way round
+    const w = wrap ? W : W - gap + 2 * padX, j0 = wrap ? 0 : (gapEnd + 1 - padX + 2 * W) % W;
+    const n = rows * w, cls = new Uint8Array(n), stretch = new Uint8Array(rows);
+    for (let r = 0; r < rows; r++) {
+      stretch[r] = stretchAt(i0 + r);
+      for (let c = 0; c < w; c++) {
+        const k = ((i0 + r) * W + (j0 + c) % W) * 4, unit = (px[k] & 127) * 256 + px[k + 1];
+        const sea = unit === 0 || unit > landUnits, wet = px[k] > 127;
+        cls[r * w + c] = own(k) ? (sea ? MINE_SEA : wet ? MINE_LAKE : MINE_DRY) : sea ? OTHER_SEA : wet ? 0 : OTHER_DRY;
+      }
+    }
+    // A field's mean over `reach` cells each way, the row's stretch times as many along the row.
+    const sums = new Float64Array(w + 1), across = new Float32Array(n);
+    const mean = (src, reach) => {
+      const out = new Float32Array(n);
+      for (let r = 0; r < rows; r++) {
+        const base = r * w, hx = reach * stretch[r], share = 1 / ((2 * hx + 1) * (2 * reach + 1));
+        for (let c = 0; c < w; c++) sums[c + 1] = sums[c] + src[base + c];
+        for (let c = 0; c < w; c++) {
+          const a = c - hx, b = c + hx + 1;
+          let s = sums[b < w ? b : w] - sums[a > 0 ? a : 0];
+          if (wrap) s += (a < 0 ? sums[w] - sums[w + a] : 0) + (b > w ? sums[b - w] : 0);
+          across[base + c] = s * share;
+        }
+      }
+      for (let r = 0; r < rows; r++) {
+        const base = r * w, to = Math.min(rows - 1, r + reach);
+        for (let q = Math.max(0, r - reach); q <= to; q++) {
+          const other = q * w;
+          for (let c = 0; c < w; c++) out[base + c] += across[other + c];
+        }
+      }
+      return out;
+    };
+    // Above zero within `reach` cells of a cell of the kinds given.
+    const near = (kinds, reach) => {
+      const f = new Float32Array(n);
+      for (let q = 0; q < n; q++) if (kinds.includes(cls[q])) f[q] = 1;
+      return mean(f, reach);
+    };
+    const nearLand = kind === 'coast' ? null : near([MINE_DRY, MINE_LAKE], SEL_REACH);
+    const nearSea = near([OTHER_SEA], SEL_RIM);
+    const nearWaters = kind === 'district' ? null : near([MINE_SEA], SEL_REACH);
+    let land = new Float32Array(n), water = new Float32Array(n), self = new Float32Array(n);
+    for (let q = 0; q < n; q++) {
+      const v = cls[q], mine = v === MINE_DRY || v === MINE_LAKE || v === MINE_SEA;
+      if (mine) self[q] = 1;
+      if (nearLand && (mine || (v === OTHER_SEA && nearLand[q] > 0))) land[q] = 1;
+      if (mine ? !(v === MINE_DRY && nearSea[q] > 0) : v === OTHER_DRY && nearWaters && nearWaters[q] > 0) water[q] = 1;
+    }
+    for (let p = 0; p < SEL_PASSES; p++) { land = mean(land, 1); water = mean(water, 1); self = mean(self, 1); }
+    const data = new Uint8Array(n * 4);
+    for (let q = 0; q < n; q++) {
+      data[4 * q] = Math.min(255, Math.round(255 * land[q]));
+      data[4 * q + 1] = Math.min(255, Math.round(255 * water[q]));
+      data[4 * q + 2] = Math.min(255, Math.round(255 * self[q]));
+      data[4 * q + 3] = 255;
+    }
+    if (selTexture) selTexture.dispose();
+    selTexture = new THREE.DataTexture(data, w, rows, THREE.RGBAFormat);
+    selTexture.minFilter = selTexture.magFilter = THREE.LinearFilter;
+    if (wrap) selTexture.wrapS = THREE.RepeatWrapping;
+    selTexture.needsUpdate = true;
+    topoUniforms.tSel.value = selTexture;
+    topoUniforms.uSelWin.value.set(j0 / W, i0 / H, w / W, rows / H);
+    topoUniforms.uSelStrength.value = kind === 'region' ? 0.2 : 0.28;
+  };
+  // kind: 'district', 'coast' or 'region'; id: the unit's place in the page's list, or the region's number in the
+  // districts texture's blue.
+  const selectPlace = (kind, id) => { selWanted = { kind, id }; makeSelection(); };
+  const clearSelection = () => { selWanted = null; makeSelection(); };
   // The borders, traced once in the build (render.border_lines): thin lines of a fixed width in pixels, solid on land
   // and along shores, dashed where water lies on both sides. Regions' edges show at every zoom, districts' when
   // zoomed in.
@@ -2094,8 +2211,7 @@
   };
   const closeCard = () => {
     cardPanel.hidden = true;
-    topoUniforms.uSel.value = new Array(8).fill(0);
-    topoUniforms.uSelRegion.value = 0;
+    clearSelection();
     invalidate();
   };
   document.getElementById('card-close').addEventListener('click', closeCard);
@@ -2324,8 +2440,7 @@
   const card = document.getElementById('card');
   const showCard = (it) => {
     const x = it.extra;
-    topoUniforms.uSel.value = new Array(8).fill(0);
-    topoUniforms.uSelRegion.value = 0;
+    clearSelection();
     openCard();
     invalidate();
     if (it.kind === 'site') {
@@ -2412,11 +2527,9 @@
       const note = card.querySelector('.note');
       note.textContent = c ? c.note : '';
       note.hidden = !note.textContent;
-      if (it.kind === 'region') topoUniforms.uSelRegion.value = x.sea ? 0 : x.page || 0;
-      else {
-        const sel = [x.index || 0, ...(x.links || [])].slice(0, 8);
-        topoUniforms.uSel.value = [...sel, ...new Array(8 - sel.length).fill(0)];
-      }
+      // The place itself is tinted, and none of those its links name; a sea beyond the regions' waters takes no tint.
+      if (it.kind === 'region') { if (!x.sea && x.page) selectPlace('region', x.page); }
+      else if (x.index) selectPlace(it.kind, x.index);
     } else {
       card.innerHTML = '<h3></h3><div class="meta"></div><p class="marks"></p>';
       card.querySelector('h3').textContent = x.name;
@@ -2429,8 +2542,7 @@
   let shownPoint = null;
   const showPoint = (lat, lon, name) => {
     shownPoint = [lat, lon, name];
-    topoUniforms.uSel.value = new Array(8).fill(0);
-    topoUniforms.uSelRegion.value = 0;
+    clearSelection();
     openCard();
     invalidate();
     card.innerHTML = '<h3></h3><div class="meta"></div><p></p>';

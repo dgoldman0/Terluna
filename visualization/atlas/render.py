@@ -941,7 +941,9 @@ def region_cards(profiles_path, record):
 def districts_data(record, cards=None):
     """The page's lists of regions, districts and coastal seas from a districts record: each unit's name, its meaning,
     code, anchor, tongue, label point, area, short description and links, indexed as the districts texture holds them,
-    and for a land region its card from its fact sheet when cards are given (region_cards)."""
+    and for a land region its card from its fact sheet when cards are given (region_cards). A unit's links are all the
+    units its card names, each once: a coastal sea's shore districts and then the others whose rivers feed it, a land
+    district's coastal seas."""
     regions = record['regions']
     units = record['districts'] + record['coastal_seas']
     index = {u['code']: k + 1 for k, u in enumerate(units)}
@@ -952,7 +954,8 @@ def districts_data(record, cards=None):
         index=index.get(u['code'], 0), code=u['code'], anchor=u.get('anchor', ''), name=u['name'], kind=kind,
         tongue=tongue[u['tongue']], lat=u['at']['turned'][0], lon=u['at']['turned'][1], area=u['area_km2'],
         description=u['description'], region=region_name.get(u.get('region'), ''), meaning=u.get('name_meaning', ''),
-        links=[index[c] for c in (u.get('faces', []) + u.get('fed_by', []) + u.get('coasts', [])) if c in index][:7])
+        links=list(dict.fromkeys(index[c] for c in (u.get('faces', []) + u.get('fed_by', []) + u.get('coasts', []))
+                                 if c in index)))
     card = lambda r: dict(card=cards[r['anchor']]) if cards and r.get('anchor') in cards else {}
     data = dict(regions=[unit(r, 'region') | dict(index=0, sea=r['kind'] == 'sea', meaning=r.get('name_meaning', ''))
                          | card(r) for r in regions],
