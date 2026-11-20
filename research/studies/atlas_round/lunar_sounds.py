@@ -26,6 +26,7 @@ import json
 import re
 import sys
 import time
+import unicodedata
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -298,6 +299,26 @@ def esperanto(word):
     return re.sub(r'([ao])y(?![aeiou])', r'\1i', w)
 
 
+_FRENCH = {'ʃ': 's', 'ʒ': 's', 'z': 's', 'ɲ': 'nY', 'ŋ': 'ng', 'ʁ': 'r', 'ʀ': 'r', 'ɾ': 'r', 'ɥ': 'w', 'j': 'Y', 'ɡ': 'g',
+           'ɑ': 'a', 'ɛ': 'e', 'ə': 'e', 'ø': 'e', 'œ': 'e', 'ɔ': 'o', 'y': 'i'}
+
+
+def french(word):
+    """Louisiana French and the Creoles of Louisiana and Haiti beside it, each word as it is said, in the phonetic
+    alphabet's letters, since French spelling carries letters that are not sounded. Kept: f and v, and the h that
+    Louisiana still sounds. Changed: the hushing sounds and z to s; gn to n followed by y; the rounded front vowels
+    unrounded, as the Creoles unround them (lune, lin; bleu, ble); a nasal vowel to its vowel with n; a final stop or
+    fricative loses the l or r after it, as it does in Louisiana speech (sable, sab)."""
+    w = unicodedata.normalize('NFD', word.lower())
+    w = re.sub('[aɑ]\u0303', 'an', w)
+    w = re.sub('[oɔ]\u0303', 'on', w)
+    w = re.sub('[eɛœ]\u0303', 'en', w)
+    w = ''.join(ch for ch in w if not unicodedata.combining(ch))
+    w = w.replace('dʒ', 'dY').replace('tʃ', 's')
+    w = ''.join(_FRENCH.get(ch, ch) for ch in w).replace('Y', 'y')
+    return re.sub(r'([pbtdkgfvs])[lr]$', r'\1', w)
+
+
 def terlunan(word):
     """Terlunan's words are the framework's own; a coined word still in its Māori spelling takes f for wh, as the
     reference's fanga does."""
@@ -314,9 +335,10 @@ def plain(word):
 
 
 READERS = dict(kk=kazakh, mn=mongolian, qu=quechua, ar=arabic, sw=swahili, tl=tagalog, he=hebrew, ja=japanese, eo=esperanto,
-               te=terlunan, la=plain)
+               fr=french, te=terlunan, la=plain)
 PARENT_OF = dict(kk='Kazakh or Kyrgyz', mn='Mongolian', qu='Quechua', ar='Arabic or Tamazight', sw='Swahili', tl='Tagalog', he='Hebrew',
-                 ja='Japanese', eo='Esperanto with Hebrew loans', te='Terlunan', la='another language')
+                 ja='Japanese', eo='Esperanto with Hebrew loans', fr='Louisiana French and the Creoles beside it', te='Terlunan',
+                 la='another language')
 
 
 def read(spec):
@@ -490,7 +512,7 @@ def build(log=print):
         evidence=("A rule sheet and its results, nothing in it validated: the framework is the sound section of the author's Terlunan "
                   "reference (v0.6, section 2, outside the repository); each parent language's rules are choices made on 20 November 2026; "
                   "the parent words are written from general knowledge of Kazakh, Kyrgyz, Mongolian, Quechua, Arabic, Tamazight, Swahili, "
-                  "Tagalog, Hebrew, Japanese and Esperanto, and no dictionary or speaker has checked them."),
+                  "Tagalog, Hebrew, Japanese, Esperanto and Louisiana French, and no dictionary or speaker has checked them."),
         reading_rule=("tongues gives every word of district_names.py's lexicons: its key, its role (head, modifier, or the word for an old "
                       "name's meaning), its parent form (a code for the parent's rule sheet, a colon and the word as the parent language "
                       "spells it), the form names are fused from (read), the word standing alone (passed), its syllables with the stressed "

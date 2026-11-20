@@ -77,6 +77,14 @@ def test_each_parent_keeps_what_the_framework_holds():
     # language's other parent says how they open
     assert L.esperanto('ĥadaŝa') == 'hadasa' and L.esperanto('jamo') == 'yamo' and L.esperanto('lajla') == 'laila'
     assert L.passed('eo:kratero') == 'karatero' and L.passed('eo:profunda') == 'porofunda' and L.esperanto('ĝemela') == 'gemela'
+    # Louisiana French and the Creoles beside it, each word as it is said: the hushing sounds and z are s, gn is n and
+    # y, the rounded front vowels are unrounded as the Creoles unround them, a nasal vowel is its vowel with n, and a
+    # final stop loses the l or r after it
+    assert L.french('ʃɛnjɛr') == 'senyer' and L.french('ruʒ') == 'rus' and L.french('lyn') == 'lin'
+    assert L.french('sabl') == 'sab' and L.french('wawarɔ̃') == 'wawaron' and L.french('ho') == 'ho'
+    assert L.passed('fr:blø') == 'bele' and L.passed('fr:laɲap') == 'lanyap' and L.passed('fr:bwa') == 'buwa'
+    assert L.passed('fr:grɑ̃+fr:lak') == 'garanlak' and L.passed('fr:grɑ̃+fr:pre') == 'garanpere'
+    assert L.passed('fr:dlo+fr:dus') == 'dolodus' and L.passed('fr:kɔpɛrnik') == 'kopernik'
     assert L.terlunan('whakapono') == 'fakapono' and L.terlunan("feti'a") == "feti'a"
     assert L.passed('la:kaguya') == 'kaguya' and L.passed('la:zāhiya') == 'sahiya'
 

@@ -33,6 +33,9 @@ A sound the framework has is kept. A sound it lacks goes to its nearest neighbou
 | Satogo | Japanese | Its five vowels and long vowels | The spelling that follows its own sound system: *shi*, *chi*, *tsu*, *fu* are *si*, *ti*, *tu*, *hu*; *z*, *j* to *s* | shima, *sima*; tsuchi, *tuti*; mizu, *misu*; fuka, *huka*; ō, *oo* |
 | Proto-Olivolingvo | Esperanto with Hebrew loans | *f*, *v*; the article *h'* as the author writes it | *j*, its *y* sound, written *y*; *ĥ*, *ŝ* to *h*, *s*; *ĝ* to *g*; *c*, *z* to *s*; opening clusters opened by the framework's own repair for now | jamo, *yamo*; ĥadaŝa, *hadasa*; kratero, *karatero*; profunda, *porofunda*; erco, *erso* |
 | Terlunan | itself | Everything: its words are the framework's own | One coined word still in its Māori spelling | whakapono, *fakapono* |
+| No lexicon yet: tried on one region's names | Louisiana French, with the Creoles of Louisiana and Haiti | *f*, *v*; the *h* that Louisiana still sounds; a consonant closing a syllable before the next one's opening consonant | The hushing sounds and *z* to *s*; *gn* to *n* and *y*; the rounded front vowels unrounded; a nasal vowel to its vowel with *n*; a final stop loses the *l* or *r* after it | bleu, *bele*; lune, *lin*; lagniappe, *lanyap*; grand lac, *garanlak*; ouaouaron, *wawaron*; sable, *sab* |
+
+The Louisiana French sheet takes each word as it is said, written in the phonetic alphabet's letters, because French spelling carries letters that are not sounded. It was made for the second naming trial (register, 20 November), the first on the map of parent cultures, and no lexicon uses it yet.
 
 ## The choices, and what else was possible
 
@@ -53,6 +56,8 @@ Each rule is a choice that can be turned. These change most how the names look.
 **Swahili's syllabic nasal gets its vowel back by its class**: *mu-* in the tree-and-river class (*muto*, *musitu*) and *i-* before the nasal elsewhere (*imvua*, *insi*, *inyota*), as its sister languages have it.
 
 **Japanese takes the spelling of its own sound system**: *si*, *ti*, *tu*, *hu*. Sequential voicing shows where the framework can show it (*Kurogawa*) and not on *s* (*Kurosima*).
+
+**Louisiana French unrounds its front vowels as the Creoles do, and writes a nasal vowel with *n*.** The Creoles of Louisiana and Haiti say *lalin* for *la lune* and *ble* for *bleu*, so the pass gives *lin* and *bele*; keeping *u* for the French *u* is the other choice. A nasal vowel keeps its nasal as *n* (*garan*, *wawaron*); dropping it is the other choice. A final stop loses the *l* or *r* after it, as Louisiana speech does (*sab* for *sable*), which spares the framework a closing cluster.
 
 **Proto-Olivolingvo takes the letter and sibilant changes, and the rest waits for the local languages** (the author's decisions, 20 November). It is the proposed common language of Earth, as Terlunan is the Moon's, and it has no second parent of its own: on the Moon a word of it is shaped by the local language that takes it up, so how its clusters open and how its article *h'* is said depend on that language's other parent. Until the local languages are set out its clusters take the framework's own repair (*karatero*, *kilifo*, *porofunda*, *sotona*), and its article is written as the author writes it with no saying given. A first reading that took Hebrew for that other parent everywhere was withdrawn the same day. One homograph follows from the sibilants: its word for dawn, *ŝaĥara*, passes to *sahara*. Hebrew's own words, in the Tagalog-Hebrew tongue, open a cluster with Hebrew's *e* (*seman*, *setav*, *bedidut*).
 
@@ -97,6 +102,7 @@ In the draft record 424 generated names, 16 calques and the six seas changed. Ea
 ## What is left
 
 - **The scheme of tongues is to be set out again** (register, 20 November). A region's names are to fit the distribution of the related parent cultures of Earth; most names have a specific parent language; within the broader regions local languages take those parent cultures and shape the Moon's dialects and languages; Terlunan is the Moon's common language and Proto-Olivolingvo the proposed common language of Earth; and the local languages are more diverse than the eight tongues here, of which one, Proto-Olivolingvo, now stands as a region's tongue where it should be a contributing layer.
+- **Rule sheets for the other languages of the map of parent cultures** are made as their regions are named; Louisiana French is the first. The map and both naming trials are working products on the research drive.
 - **The redraw of 20 November and the naming trial's two regions** are on the research drive; the redraw's names are the generator's and its record keeps their earlier spellings.
 - **The lexicons themselves are the first draft's.** The pass changes how a word sounds, not which word a tongue has; the reworked way of making names chooses the words.
 - **Older records keep the spellings of their date**: the register's earlier rows and the lake rule's two records.
@@ -104,7 +110,7 @@ In the draft record 424 generated names, 16 calques and the six seas changed. Ea
 ## Limits
 
 - The framework is read from the Terlunan reference, which sets it for Terlunan. Taking it as the sounds every lunar tongue shares is this study's reading of the register's row.
-- The parent words and the rules for eleven languages are written from general knowledge. A check against dictionaries, and of the Kazakh rounding harmony and the Quechua lowering against descriptions of those languages, has not been made.
+- The parent words and the rules for twelve languages are written from general knowledge. A check against dictionaries, and of the Kazakh rounding harmony and the Quechua lowering against descriptions of those languages, has not been made.
 - A passed word can look like a word of another language: Dala's *sol* (desert, thirst), the author's tongue's *sahara* (dawn), the Hebrew *kesef* from the word for foam. The tests check only that two words of one tongue do not fall together.
 - Stress moves with the pass: the framework stresses the syllable before the last, where Kazakh stresses the last and Arabic follows the weight of its syllables.
 
