@@ -1,6 +1,8 @@
 """The atlas's regions and districts, a first draft on the design surface (17 November 2026).
 
     ulimit -v 14000000; OPENBLAS_NUM_THREADS=1 nice -n 10 <python with scipy> -m research.studies.atlas_round.districts
+    # a redraw kept apart from the page's record and grid:
+    ... -m research.studies.atlas_round.districts --out <folder>
 
 The register defines a district by significance and wholeness: a region that reads as a whole and meaningful place and
 stands apart from the others (16 November). districts.md beside this file turns that into rules; this module draws a first
@@ -19,6 +21,10 @@ draft by them on the design surface, today's grid at 8 pixels per degree (3.8 km
 - Regions (rule 10): the same watershed from the basins of REGION_FEATURE_KM or more and fill-in points about
   REGION_SEED_KM apart, with each district given to the region holding most of it, so that districts never cross a
   region's edge; each sea is a region of its own.
+- One piece and reach (rules 16 and 17, 20 November): the flood and the neighbours' count move side to side and corner
+  to corner, and every district is made one piece; an island in territorial waters takes the region of its land's own
+  nearest shore within ISLAND_REACH_KM; a land of LAND_ALONE_KM2 or more stands alone; a region's districts reach one
+  another over land or through the islands that joined it; and the summit seeds a region of its own.
 - Coastal seas (the author's choice of 17 November): the sea within COAST_KM of land is cut into coastal sea districts,
   each the water nearest to a stretch of shore, joined up to COAST_MAX_KM2, and linked to the land districts that face it
   and to those whose rivers reach it (the hybrid the author chose for satoumi); the open water beyond is its sea's
@@ -69,6 +75,10 @@ WEAK_EDGE_M = 200.0
 COAST_KM, COAST_MAX_KM2 = 60.0, 40_000.0
 STRAIT_MASS_KM2 = 20_000.0           # land masses this large or larger make a coastal sea a bay or a strait
 REGION_MIN_KM2, REGION_MAX_KM2 = 250_000.0, 1_200_000.0
+LAND_ALONE_KM2 = 50_000.0            # a land this large or larger is no island of another: it keeps its own waters and shares no region with
+#                                      another land (rule 16)
+ISLAND_REACH_KM = 250.0              # an island joins a land's waters only within this reach of that land's own shore, however many islands
+#                                      lie between (rule 16)
 SMOOTH_DEG = 0.7 * 5.625             # the moisture map is smoothed over 0.7 of the climate run's T21 spacing
 SALT_SEAS = ('South Pole–Aitken Sea',)
 # The gazetteer's named maria, oceans, bays, lakes and marshes each lend their name's meaning to one unit (rule 13,
@@ -332,12 +342,14 @@ def cost_surface(h, kind, moisture, basalt):
 
 
 def watershed(cost, markers, pad=None):
-    """scipy's watershed by image foresting, with the grid wrapped in longitude."""
+    """scipy's watershed by image foresting, with the grid wrapped in longitude. The flood moves side to side and corner
+    to corner, as the landmasses are joined, so that a land cell touching its land at a corner is reached over land;
+    moving side to side alone, such cells were reached across the sea by whichever district crossed it first."""
     from scipy import ndimage
     pad = pad or cost.shape[1] // 10
     cp = np.concatenate([cost[:, -pad:], cost, cost[:, :pad]], axis=1)
     mp = np.concatenate([markers[:, -pad:], markers, markers[:, :pad]], axis=1).astype(np.int32)
-    out = ndimage.watershed_ift(cp, mp, structure=np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]]))
+    out = ndimage.watershed_ift(cp, mp, structure=np.ones((3, 3), int))
     return out[:, pad:pad + cost.shape[1]]
 
 
@@ -357,11 +369,13 @@ def stats(labels, h, moisture, basalt, to8, area):
 
 
 def adjacency(labels, h):
-    """Pairs of neighbouring labels (both above zero) with their shared edge's length in cell sides and the mean height
-    of the higher cell along it."""
+    """Pairs of neighbouring labels (both above zero) with their shared edge's length, counted in the cells that touch
+    side to side or corner to corner, and the mean height of the higher cell along it."""
     pairs = []
     for a, b, ha, hb in ((labels[:, :], np.roll(labels, -1, axis=1), h, np.roll(h, -1, axis=1)),
-                         (labels[:-1], labels[1:], h[:-1], h[1:])):
+                         (labels[:-1], labels[1:], h[:-1], h[1:]),
+                         (labels[:-1], np.roll(labels, -1, axis=1)[1:], h[:-1], np.roll(h, -1, axis=1)[1:]),
+                         (labels[:-1], np.roll(labels, 1, axis=1)[1:], h[:-1], np.roll(h, 1, axis=1)[1:])):
         m = (a != b) & (a > 0) & (b > 0)
         lo, hi = np.minimum(a[m], b[m]), np.maximum(a[m], b[m])
         pairs.append(np.stack([lo, hi, np.maximum(ha[m], hb[m])], axis=1))
@@ -371,6 +385,53 @@ def adjacency(labels, h):
     hsum = np.bincount(inv, p[:, 2])
     n1 = int(labels.max()) + 1
     return np.stack([uk // n1, uk % n1], axis=1), cnt, hsum / cnt
+
+
+def whole_districts(labels, area, lat, lon, log=print):
+    """Every district in one piece (rule 4). The cells of each district that touch, side to side or corner to corner,
+    make its pieces; the largest stays, and every other piece takes, cell by cell, the district of the nearest cell that
+    stayed, the step repeated until no piece lies apart. Returns the grid and the cells moved."""
+    from scipy.sparse import coo_matrix
+    from scipy.sparse.csgraph import connected_components
+    from scipy.spatial import cKDTree
+    rows, cols = labels.shape
+    index = np.arange(rows * cols, dtype=np.int64).reshape(rows, cols)
+    wide = np.broadcast_to(area[:, None], labels.shape).ravel()
+    out, total = labels, 0
+    for _ in range(6):
+        src, dst = [], []
+        for dr, dc in ((0, 1), (1, 0), (1, 1), (1, -1)):    # each cell with its eastern, southern and two lower corner neighbours
+            a_, ia = (out[:rows - dr], index[:rows - dr]) if dr else (out, index)
+            b_, ib = np.roll(out, -dc, axis=1)[dr:], np.roll(index, -dc, axis=1)[dr:]
+            same = (a_ == b_) & (a_ > 0)
+            src.append(ia[same])
+            dst.append(ib[same])
+        src, dst = np.concatenate(src), np.concatenate(dst)
+        graph = coo_matrix((np.ones(src.size, np.int8), (src, dst)), shape=(rows * cols, rows * cols)).tocsr()
+        count, piece = connected_components(graph, directed=False)
+        flat = out.ravel()
+        land = flat > 0
+        size = np.bincount(piece[land], wide[land], count)
+        of_piece = np.zeros(count, np.int64)
+        of_piece[piece[land]] = flat[land]
+        order = np.lexsort((-size, of_piece))                # by district, largest piece first
+        first = np.ones(count, bool)
+        first[1:] = of_piece[order][1:] != of_piece[order][:-1]
+        main = np.zeros(count, bool)
+        main[order[first]] = True
+        stray = land & ~main[piece]
+        if not stray.any():
+            break
+        keep = np.flatnonzero(land & ~stray)
+        r_, c_ = np.divmod(keep, cols)
+        sr, sc = np.divmod(np.flatnonzero(stray), cols)
+        _, k = cKDTree(unit(lat[r_], lon[c_])).query(unit(lat[sr], lon[sc]))
+        out = out.copy()
+        out[sr, sc] = flat[keep[k]]
+        total += int(stray.sum())
+    if total:
+        log(f'  {total} cells in pieces apart from their districts joined the districts beside them')
+    return out, total
 
 
 def relabel(labels, lut):
@@ -432,9 +493,9 @@ CLIMB_M = 100.0                      # in a split, each 100 m climbed between ce
 
 
 def geodesic_parts(cells_r, cells_c, h, lat, seeds):
-    """Each of a district's cells given to the seed it is nearest by a path over its cells (4-neighbours, longitude
-    wrapping), a step costing its length on the ground times 1 + the height climbed or descended over CLIMB_M, so that
-    parts meet on the steep lines between their centres."""
+    """Each of a district's cells given to the seed it is nearest by a path over its cells (side to side and corner to
+    corner, longitude wrapping), a step costing its length on the ground times 1 + the height climbed or descended over
+    CLIMB_M, so that parts meet on the steep lines between their centres."""
     from scipy.sparse import coo_matrix
     from scipy.sparse.csgraph import dijkstra
     cols = h.shape[1]
@@ -442,7 +503,9 @@ def geodesic_parts(cells_r, cells_c, h, lat, seeds):
     a, b, w = [], [], []
     step_ns = MOON_KM * np.radians(1.0 / PPD)
     for k, (r, c) in enumerate(zip(cells_r.tolist(), cells_c.tolist())):
-        for rr, cc, step in ((r, (c + 1) % cols, step_ns * np.cos(np.radians(lat[r]))), (r + 1, c, step_ns)):
+        east = step_ns * np.cos(np.radians(lat[r]))
+        for rr, cc, step in ((r, (c + 1) % cols, east), (r + 1, c, step_ns), (r + 1, (c + 1) % cols, float(np.hypot(east, step_ns))),
+                             (r + 1, (c - 1) % cols, float(np.hypot(east, step_ns)))):
             j = index.get((rr, cc))
             if j is not None:
                 a.append(k)
@@ -502,14 +565,16 @@ def apply_rules(labels, h, moisture, basalt, to8, area, cost, lat, lon, islands,
 
 
 def island_territories(on_land, area, lat, lon, log=print):
-    """Each landmass's territory (rule 15, districts.md). A landmass of REGION_MIN_KM2 or more is a mainland, its own
-    territory. An island within COAST_KM of a mainland's shore, or of an island already in a territory, lies in that
-    territory's waters and joins it, nearest first, so that a chain of islands joins with its first link. The islands
-    left lie in international waters; those whose waters touch (within twice COAST_KM of each other) form a group, each
+    """Each landmass's territory (rules 15 and 16, districts.md). A landmass of LAND_ALONE_KM2 or more is a mainland, its
+    own territory. An island within COAST_KM of a mainland's shore, or of an island already in a territory, lies in
+    territorial waters, nearest first, so that a chain of islands is followed from its first link. Such an island
+    belongs to the mainland whose own shore is nearest to it, as long as that shore lies within ISLAND_REACH_KM: a
+    chain ends there, and an island never takes its place from the island before it. The islands left lie in
+    international waters; those whose waters touch (within twice COAST_KM of each other) form a group, each
     group of ISLET_KM2 or more a territory of its own. A smaller group is rocks: its islets join the nearest district
     and claim no waters (territory -1). Returns the territory of every land cell (0 at sea), the landmasses (the
-    component grid), the order in which islands joined and the shore cell each joined through, the groups'
-    territories and the rocks' cells."""
+    component grid), the order in which islands joined and, for each, the cell of its mainland's own shore nearest
+    to it, the groups' territories and the rocks' cells."""
     from scipy import ndimage
     from scipy.spatial import cKDTree
     comps, _ = ndimage.label(on_land, structure=np.ones((3, 3)))
@@ -519,7 +584,7 @@ def island_territories(on_land, area, lat, lon, log=print):
     ids = np.unique(comps[comps > 0])
     terr = np.zeros(n, np.int64)
     for c in ids:
-        if size[c] >= REGION_MIN_KM2:
+        if size[c] >= LAND_ALONE_KM2:
             terr[c] = c
     shore = on_land & neighbours_differ(on_land)
     sr, sc = np.nonzero(shore)
@@ -527,27 +592,48 @@ def island_territories(on_land, area, lat, lon, log=print):
     v = unit(lat[sr], lon[sc])
     chord = lambda km: 2.0 * np.sin(km / MOON_KM / 2.0)                          # noqa: E731
     joined, through = [], {}
+    mainlands = [int(c) for c in ids if terr[c]]
+    own = {c: np.flatnonzero(scomp == c) for c in mainlands}
+    own_tree = {c: cKDTree(v[own[c]]) for c in mainlands}
+
+    def nearest_mainland(points):
+        """The mainland whose own shore lies nearest an island's shore, the shore point, and the distance (a chord)."""
+        best = None
+        for c in mainlands:
+            d, k = own_tree[c].query(points)
+            i = int(np.argmin(d))
+            if best is None or d[i] < best[2]:
+                best = (c, int(own[c][k[i]]), float(d[i]))
+        return best
+
+    in_waters = np.zeros(n, bool)                           # islands found in territorial waters, joined or beyond the reach
+    in_waters[mainlands] = True
     pending = [c for c in ids if not terr[c]]
     while pending:
-        have = np.flatnonzero(terr[scomp] > 0)
+        have = np.flatnonzero(in_waters[scomp])
         if not have.size:
             break
         tree = cKDTree(v[have])
         moved = []
         for c in pending:
+            if in_waters[c]:
+                continue
             mine = np.flatnonzero(scomp == c)
             d, k = tree.query(v[mine], distance_upper_bound=chord(COAST_KM))
             ok = np.isfinite(d)
             if ok.any():
-                j = have[k[ok][np.argmin(d[ok])]]
-                moved.append((float(d[ok].min()), c, j))
+                moved.append((float(d[ok].min()), c, mine))
         if not moved:
             break
-        for _, c, j in sorted(moved):
-            terr[c] = terr[scomp[j]]
-            joined.append(int(c))
-            through[int(c)] = (int(sr[j]), int(sc[j]))
-        pending = [c for c in pending if not terr[c]]
+        for _, c, mine in sorted(moved):
+            in_waters[c] = True
+            land, j, d = nearest_mainland(v[mine])
+            if d <= chord(ISLAND_REACH_KM):
+                terr[c] = land
+                joined.append(int(c))
+                through[int(c)] = (int(sr[j]), int(sc[j]))
+        pending = [c for c in pending if not terr[c] and not in_waters[c]]
+    pending = [c for c in ids if not terr[c]]               # those beyond the reach and those out at sea
     groups = []
     if pending:
         parent = {c: c for c in pending}
@@ -583,14 +669,15 @@ def island_territories(on_land, area, lat, lon, log=print):
     territory = terr[comps]
     territory[~on_land] = 0
     rocks = territory == -1
-    log(f'territories: {sum(1 for c in ids if size[c] >= REGION_MIN_KM2)} mainlands, {len(joined)} islands in their '
+    log(f'territories: {sum(1 for c in ids if size[c] >= LAND_ALONE_KM2)} mainlands, {len(joined)} islands in their '
         f'waters, {len(groups)} island groups in international waters, {int(np.unique(comps[rocks]).size)} rocks')
     return territory, comps, joined, through, groups, rocks
 
 
 def absorb_islets(labels, on_land, area, lat, lon, territory=None):
-    """Islands under ISLET_KM2 join the nearest district across the water within their own territory (rule 15); in an
-    island group of islets alone, the islets together make one district."""
+    """Islands under ISLET_KM2 join the nearest district across the water within their own territory (rule 15), each
+    islet whole, to the district most of its cells lie nearest; in an island group of islets alone, the islets
+    together make one district."""
     from scipy import ndimage
     from scipy.spatial import cKDTree
     comps, n = ndimage.label(on_land, structure=np.ones((3, 3)))
@@ -613,7 +700,15 @@ def absorb_islets(labels, on_land, area, lat, lon, territory=None):
         if big.any():
             br, bc = np.nonzero(big)
             _, i = cKDTree(unit(lat[br], lon[bc])).query(unit(lat[tr], lon[tc]))
-            out[tr, tc] = labels[br[i], bc[i]]
+            near = labels[br[i], bc[i]].astype(np.int64)
+            islet = comps[tr, tc].astype(np.int64)
+            pair, count = np.unique(islet * (int(labels.max()) + 1) + near, return_counts=True)
+            most = {}
+            for key, cnt in zip(pair, count):               # each islet to the district most of its cells lie nearest
+                c_, d_ = divmod(int(key), int(labels.max()) + 1)
+                if cnt > most.get(c_, (0, 0))[0]:
+                    most[c_] = (int(cnt), d_)
+            out[tr, tc] = np.array([most[int(c_)][1] for c_ in islet], labels.dtype)
         else:
             out[tr, tc] = nxt
             nxt += 1
@@ -680,34 +775,88 @@ def coastal_seas(labels, kind, sea_body, h, area, lat, lon, log=print, region_of
 
 # ------------------------------------------------------------------------------------------------ regions
 
+def region_edges(labels, links=()):
+    """The districts' neighbourhood: for each pair of districts that share an edge on land, the edge's length in cell
+    sides; and for each pair an island's joining makes (the island's district and the district it joined through), half
+    a side, so that the pair counts as joined and weighs least."""
+    pairs, length, _ = adjacency(labels, np.zeros(labels.shape, np.float32))
+    edges = {(int(a), int(b)): float(n) for (a, b), n in zip(pairs, length)}
+    for a, b in links:
+        if a and b and a != b:
+            edges.setdefault((min(int(a), int(b)), max(int(a), int(b))), 0.5)
+    return edges
+
+
+def pieces(members, edges):
+    """A set of districts as its joined pieces: lists of districts that reach one another through the neighbourhood."""
+    parent = {int(m): int(m) for m in members}
+
+    def root(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    for a, b in edges:
+        if a in parent and b in parent:
+            ra, rb = root(a), root(b)
+            if ra != rb:
+                parent[rb] = ra
+    out = {}
+    for m in parent:
+        out.setdefault(root(m), []).append(m)
+    return list(out.values())
+
+
+def borders(part, of, edges):
+    """The regions a set of districts borders, each with the length of the edge shared."""
+    inside, out = set(int(d) for d in part), {}
+    for (a, b), n in edges.items():
+        if (a in inside) != (b in inside):
+            r = int(of[b if a in inside else a])
+            if r:
+                out[r] = out.get(r, 0.0) + n
+    return out
+
+
 def regions(labels, on_land, kind, cost, area, lat, lon, log=print, territory=None, comps=None, joined=(), through=None,
-            groups=()):
+            groups=(), h=None, summit=None):
     """Land regions by the same watershed from the great basins and wide fill-in points, each district given to the
-    region holding most of it; regions under REGION_MIN_KM2 join the neighbour they share the most edge with. With the
-    territories (island_territories, rule 15), an island in a territory's waters takes the region of the land it joined
-    through, and each island group in international waters makes a region of its own, exempt from the minimum.
-    Returns each district's region, the centres' details and the island groups' regions."""
+    region holding most of it. A region is one piece (rule 16): its districts reach one another over land, or through
+    the islands that joined its land. With the territories (island_territories), each island group in international
+    waters makes a region of its own, exempt from the minimum; an island in a land's waters takes the region of the
+    district it joined through; and no region holds districts of two lands of LAND_ALONE_KM2 or more. Regions under
+    REGION_MIN_KM2 join the neighbour they share the most edge with, and one with no neighbour stands alone; regions
+    over REGION_MAX_KM2 split into joined parts round centres seeded far apart; a part left apart from its region joins
+    the region it borders most, or stands as a region where it has a region's least area. With the summit (the highest
+    ground's cell) and the heights, the summit seeds a region (rule 17): the joined districts round it, highest first,
+    until they hold a region's least area. Returns each district's region, the centres' details, the island groups'
+    regions, and the regions that stand alone and the summit's."""
     # without island markers, an island falls to a region across the water as the flood crosses the sea last
     markers, info = place_centres(on_land, kind, lat, lon, REGION_FEATURE_KM, REGION_SEED_KM, log=log, islands=False)
     reg = watershed(cost, markers)
     reg[~on_land] = 0
     n = int(labels.max()) + 1
-    w = np.broadcast_to(area[:, None], labels.shape).ravel()
+    wide = np.broadcast_to(area[:, None], labels.shape)
+    w = wide.ravel()
     m = int(reg.max()) + 1
     table = np.bincount(labels.ravel().astype(np.int64) * m + reg.ravel(), w, n * m).reshape(n, m)
     table[:, 0] = 0
     of = table.argmax(axis=1)
     of[0] = 0
-    exempt = set()
+    darea = np.bincount(labels.ravel(), w, n)
+    exempt, group_regions, links = set(), set(), []
     if territory is not None:
         def majority(values):
-            key = labels[on_land].astype(np.int64) * (int(values.max()) + 1) + values[on_land]
+            """Each district's commonest value among its cells; the rocks' territory, -1, counts as a value of its own."""
+            span = int(values.max()) + 2
+            key = labels[on_land].astype(np.int64) * span + (values[on_land].astype(np.int64) + 1)
             uk, cnt = np.unique(key, return_counts=True)
             best = {}
             for k_, c_ in zip(uk, cnt):
-                d_, v_ = divmod(int(k_), int(values.max()) + 1)
+                d_, v_ = divmod(int(k_), span)
                 if c_ > best.get(d_, (0, 0))[0]:
-                    best[d_] = (c_, v_)
+                    best[d_] = (c_, v_ - 1)
             out = np.zeros(n, np.int64)
             for d_, (_, v_) in best.items():
                 out[d_] = v_
@@ -720,46 +869,76 @@ def regions(labels, on_land, kind, cost, area, lat, lon, log=print, territory=No
             if ds.size:
                 of[ds] = nxt
                 exempt.add(nxt)
+                group_regions.add(nxt)
                 nxt += 1
-        for c in joined:                                    # an island in a territory's waters, nearest first
+        mass = np.bincount(comps.ravel(), w, int(comps.max()) + 1)
+        for r in np.unique(of[1:]):                         # two lands that each stand alone share no region
+            if r in exempt:
+                continue
+            lands = {}
+            for d in np.flatnonzero(of == r):
+                if d and mass[c_of[d]] >= LAND_ALONE_KM2:
+                    lands.setdefault(int(c_of[d]), []).append(int(d))
+            if len(lands) > 1:
+                keep = max(lands, key=lambda c: darea[lands[c]].sum())
+                for c, ds in lands.items():
+                    if c != keep:
+                        of[ds] = nxt
+                        nxt += 1
+        for c in joined:                                    # an island in a land's waters: the region of that land's nearest shore
             ds = np.flatnonzero(c_of == c)
             ds = ds[ds > 0]
             if ds.size:
-                of[ds] = of[labels[through[c]]]
-    darea = np.bincount(labels.ravel(), w, n)
+                to = int(labels[through[c]])
+                of[ds] = of[to]
+                links += [(int(d), to) for d in ds]
+        for c in np.flatnonzero(mass >= LAND_ALONE_KM2):    # a land that stands alone and is too small to hold two regions is one
+            ds = np.flatnonzero(t_of == c)
+            ds = ds[ds > 0]
+            if ds.size and darea[ds].sum() < 2.0 * REGION_MIN_KM2 and (t_of[1:] != c).any():
+                of[ds] = nxt
+                exempt.add(nxt)
+                nxt += 1
+        home = t_of
+    else:
+        home = np.zeros(n, np.int64)
+    edges = region_edges(labels, links)
     dvec = np.zeros((n, 3))
     rr, cc = np.nonzero(labels > 0)
-    np.add.at(dvec, labels[rr, cc], unit(lat[rr], lon[cc]) * np.broadcast_to(area[:, None], labels.shape)[rr, cc][:, None])
+    np.add.at(dvec, labels[rr, cc], unit(lat[rr], lon[cc]) * wide[rr, cc][:, None])
     dvec /= np.maximum(np.linalg.norm(dvec, axis=1, keepdims=True), 1e-12)
-    from scipy.spatial import cKDTree
+
+    def areas(of):
+        return np.bincount(of[1:], darea[1:], int(of.max()) + 1)
+
+    def land_of(r, of):
+        """The land (or island group) a region lies on: its largest district's."""
+        ds = np.flatnonzero(of == r)
+        return int(home[ds[np.argmax(darea[ds])]])
 
     def merge_small(of):
         """Regions under REGION_MIN_KM2 join the neighbour they share the most edge with among those the join keeps
-        within REGION_MAX_KM2 (else the longest edge); an island region joins the nearest region across the water."""
+        within REGION_MAX_KM2 (else the longest edge); one with no neighbour stands alone."""
         for _ in range(400):
-            rmap = of[labels]
-            ra = np.bincount(rmap.ravel(), w, int(of.max()) + 1)
-            small = sorted((r for r in np.unique(of[1:]) if ra[r] < REGION_MIN_KM2 and r not in exempt),
-                           key=lambda r: ra[r])
+            ra = areas(of)
+            small = sorted((r for r in np.unique(of[1:]) if ra[r] < REGION_MIN_KM2 and r not in exempt), key=lambda r: ra[r])
             if not small:
                 return of
             r = small[0]
-            pairs, length, _ = adjacency(rmap, np.zeros(rmap.shape, np.float32))
-            cand = [((ra[r] + ra[b if a == r else a] <= REGION_MAX_KM2), L, b if a == r else a)
-                    for (a, b), L in zip(pairs, length) if r in (a, b) and (b if a == r else a) not in exempt]
-            if cand:
-                of[of == r] = max(cand)[2]
+            mine = np.flatnonzero(of == r)
+            near = {b: n_ for b, n_ in borders(mine, of, edges).items() if b not in exempt and land_of(b, of) == home[mine[0]]}
+            if not near:
+                exempt.add(int(r))                          # a land apart, with no neighbour to join
                 continue
-            mine = np.argwhere(rmap == r)
-            other = np.argwhere((rmap > 0) & (rmap != r) & ~np.isin(rmap, list(exempt)))
-            tree = cKDTree(unit(lat[other[:, 0]], lon[other[:, 1]]))
-            _, k = tree.query(unit(lat[mine[:, 0]], lon[mine[:, 1]]))
-            of[of == r] = np.bincount(rmap[other[k, 0], other[k, 1]]).argmax()
+            of[of == r] = max(near, key=lambda b: (ra[r] + ra[b] <= REGION_MAX_KM2, near[b]))
         return of
 
     def split_big(of):
-        """Regions over REGION_MAX_KM2 split by grouping their districts, kept whole, round centres seeded far apart and
-        settled by area-weighted k-means."""
+        """Regions over REGION_MAX_KM2 split, their districts kept whole, into parts joined through the neighbourhood:
+        centres seeded far apart, each district given to the centre nearest it by the way through its region's districts,
+        and the centres moved to their parts' middles until they rest."""
+        from scipy.sparse import csr_matrix
+        from scipy.sparse.csgraph import dijkstra
         nxt, count = int(of.max()) + 1, 0
         for r in np.unique(of[1:]):
             mine = np.flatnonzero(of == r)
@@ -769,33 +948,103 @@ def regions(labels, on_land, kind, cost, area, lat, lon, log=print, territory=No
                 continue
             k = int(np.ceil(total / (0.7 * REGION_MAX_KM2)))
             v = dvec[mine]
+            local = {int(d): i for i, d in enumerate(mine)}
+            ia, ib, way = [], [], []
+            for a_, b_ in edges:
+                if a_ in local and b_ in local:
+                    ia += [local[a_], local[b_]]
+                    ib += [local[b_], local[a_]]
+                    way += [float(np.arccos(np.clip(dvec[a_] @ dvec[b_], -1.0, 1.0))) + 1e-6] * 2
+            graph = csr_matrix((way, (ia, ib)), shape=(mine.size, mine.size))
             seeds = [int(np.argmin(v @ (v * darea[mine, None]).sum(axis=0)))]
             while len(seeds) < k:
                 seeds.append(int(np.argmin(np.max(v @ v[seeds].T, axis=1))))
-            centres = v[seeds]
             for _ in range(30):
-                g = np.argmax(v @ centres.T, axis=1)
-                centres = np.stack([(v[g == j] * darea[mine][g == j, None]).sum(axis=0) if (g == j).any()
-                                    else centres[j] for j in range(k)])
-                centres /= np.linalg.norm(centres, axis=1, keepdims=True)
+                _, _, source = dijkstra(graph, directed=False, indices=seeds, min_only=True, return_predecessors=True)
+                g = np.array([seeds.index(int(s_)) if s_ >= 0 else int(np.argmax(v[i] @ v[seeds].T)) for i, s_ in enumerate(source)])
+                moved = []
+                for j in range(k):
+                    part = np.flatnonzero(g == j)
+                    if not part.size:
+                        moved.append(seeds[j])
+                        continue
+                    middle = (v[part] * darea[mine][part, None]).sum(axis=0)
+                    moved.append(int(part[np.argmax(v[part] @ middle)]))
+                if moved == seeds or len(set(moved)) < k:
+                    break
+                seeds = moved
             for j in range(1, k):
                 of[mine[g == j]] = nxt
                 nxt += 1
             count += 1
         return of, count
 
-    for _ in range(8):
+    def one_piece(of):
+        """A part of a region that its largest piece does not reach joins the region it borders most; where it has a
+        region's least area, or borders none, it is a region of its own. Island groups are islands by nature."""
+        nxt, count = int(of.max()) + 1, 0
+        for r in np.unique(of[1:]):
+            if r in group_regions:
+                continue
+            mine = np.flatnonzero(of == r)
+            parts = sorted(pieces(mine[mine > 0], edges), key=lambda part: -darea[part].sum())
+            for part in parts[1:]:
+                near = {b: n_ for b, n_ in borders(part, of, edges).items()
+                        if b != r and b not in exempt and land_of(b, of) == home[part[0]]}
+                size = darea[part].sum()
+                if near and size < REGION_MIN_KM2:
+                    of[part] = max(near, key=near.get)
+                else:
+                    of[part] = nxt
+                    if size < REGION_MIN_KM2:
+                        exempt.add(nxt)
+                    nxt += 1
+                count += 1
+        return of, count
+
+    for _ in range(12):
         of = merge_small(of)
-        of, count = split_big(of)
-        if not count:
+        of, split = split_big(of)
+        of, parted = one_piece(of)
+        if not split and not parted:
             break
+    summit_region = 0
+    if summit is not None and h is not None and labels[summit] > 0:
+        # the summit's country: the joined districts round the summit's own, highest first, up to a region's least area
+        height = np.bincount(labels.ravel(), (h * wide).ravel(), n) / np.maximum(darea, 1e-9)
+        beside = {}
+        for (a_, b_), n_ in edges.items():
+            if n_ >= 1.0:
+                beside.setdefault(a_, set()).add(b_)
+                beside.setdefault(b_, set()).add(a_)
+        inside = {int(labels[summit])}
+        total = float(darea[int(labels[summit])])
+        while total < REGION_MIN_KM2:
+            fringe = {x for d in inside for x in beside.get(d, ())
+                      if x not in inside and int(of[x]) not in exempt and home[x] == home[int(labels[summit])]}
+            if not fringe:
+                break
+            top = max(fringe, key=lambda x: height[x])
+            inside.add(top)
+            total += float(darea[top])
+        summit_region = int(of.max()) + 1
+        of[sorted(inside)] = summit_region
+        for _ in range(12):                                 # what the summit's region left under the least area or apart
+            of = merge_small(of)
+            of, parted = one_piece(of)
+            if not parted:
+                break
+        summit_region = int(of[int(labels[summit])])
     uniq = np.unique(of[1:])
     remap = np.zeros(int(of.max()) + 1, np.int32)
     remap[uniq] = np.arange(1, uniq.size + 1)
     of = remap[of]
-    island_regions = {int(remap[r]) for r in exempt if r < remap.size and remap[r]}
-    log(f'regions on land: {uniq.size}, {len(island_regions)} of them island groups')
-    return of, info, island_regions
+    kept = lambda rs: {int(remap[r]) for r in rs if r < remap.size and remap[r]}   # noqa: E731
+    island_regions = kept(group_regions)
+    alone = kept(exempt - group_regions)
+    log(f'regions on land: {uniq.size}, {len(island_regions)} of them island groups, {len(alone)} lands that stand alone'
+        + (f', the summit in region {int(remap[summit_region])}' if summit_region else ''))
+    return of, info, island_regions, dict(alone=alone, summit=int(remap[summit_region]) if summit_region else 0)
 
 
 # ---------------------------------------------------------------------------------------------- the draft
@@ -872,8 +1121,12 @@ def code_order(items):
     return sorted(items, key=lambda x: (int((90.0 - x[1]) // 15), ((x[2] + 180.0) % 360.0), x[0]))
 
 
-def build(log=print):
+def build(log=print, product=None, previous=None):
+    """The draw and its record. `product` is where the grid is written (the page's own by default) and `previous` the
+    record whose names a redraw keeps where their anchors survive (the page's own by default)."""
     started = time.time()
+    product = Path(product) if product is not None else PRODUCT
+    previous = Path(previous) if previous is not None else OUT
     lat, lon, area = grid()
     h, kind, sea_body, meta, b16 = surface_classes(log)
     rotation = np.asarray(meta['frame']['rotation_today_to_turned'], float)
@@ -885,6 +1138,7 @@ def build(log=print):
     markers, info = place_centres(on_land, kind, lat, lon, FEATURE_KM, SEED_KM, LAKE_SEED_KM2, log)
     labels = watershed(cost, markers)
     labels[~on_land] = 0
+    labels, _ = whole_districts(labels, area, lat, lon, log)
     base = labels.copy()
     from scipy import ndimage
     islands, _ = ndimage.label(on_land, structure=np.ones((3, 3)))
@@ -892,13 +1146,18 @@ def build(log=print):
     labels = relabel(labels, np.arange(int(labels.max()) + 1))
     log(f'watershed: {int(labels.max())} first districts, {time.time() - started:.0f} s')
     territory, comps, joined, through, groups, rocks = island_territories(on_land, area, lat, lon, log)
-    labels = apply_rules(labels, h, moisture, basalt, to8, area, cost, lat, lon, islands, log)
+    for _ in range(4):                                       # the rules, then every district in one piece, until nothing moves
+        labels = apply_rules(labels, h, moisture, basalt, to8, area, cost, lat, lon, islands, log)
+        labels, moved = whole_districts(labels, area, lat, lon, log)
+        if not moved:
+            break
     labels = absorb_islets(labels, on_land, area, lat, lon, territory)
     labels = relabel(labels, np.arange(int(labels.max()) + 1))
     log(f'land districts after the rules: {int(labels.max())}')
-    region_of, region_info, island_regions = regions(labels, on_land, kind, cost, area, lat, lon, log,
-                                                     territory=territory, comps=comps, joined=joined, through=through,
-                                                     groups=groups)
+    summit = np.unravel_index(int(np.argmax(np.where(kind == 0, h, -np.inf))), h.shape)   # the highest dry ground
+    region_of, region_info, island_regions, marked = regions(labels, on_land, kind, cost, area, lat, lon, log,
+                                                             territory=territory, comps=comps, joined=joined,
+                                                             through=through, groups=groups, h=h, summit=summit)
     coast, faces, coast_body, coast_region = coastal_seas(labels, kind, sea_body, h, area, lat, lon, log,
                                                           region_of=region_of, rocks=rocks)
 
@@ -1109,7 +1368,8 @@ def build(log=print):
         la, lo = region_anchor[r]
         waters = sum(c['area_km2'] for c in coastal if c['region'] == code)
         regions_out.append(dict(code=code, kind='land', area_km2=a, districts=len(mine), at=place(la, lo),
-                                island_group=r in island_regions, waters_km2=waters,
+                                island_group=r in island_regions, stands_alone=r in marked['alone'],
+                                holds_summit=r == marked['summit'], waters_km2=waters,
                                 zones={k: round(v / max(a, 1), 3) for k, v in zones.items()},
                                 relief_m=round(relief_mean), basalt_share=round(basaltic, 3),
                                 coast_share=round(coastwise, 3), shore_share=round(shorewise, 3),
@@ -1138,8 +1398,8 @@ def build(log=print):
     DN.anchor_all(units)                                     # every anchor unique
     for x in regions_out + districts + coastal:
         x['description_codes'] = x['description']
-    previous = DN.previous_names(json.loads(OUT.read_text())) if OUT.exists() else None
-    DN.apply(units, previous=previous)                       # a redraw keeps the names whose anchors survive
+    earlier = DN.previous_names(json.loads(previous.read_text())) if previous.exists() else None
+    DN.apply(units, previous=earlier)                        # a redraw keeps the names whose anchors survive
 
     # the product: district and region at each cell, on today's grid
     district_grid = np.zeros(labels.shape, np.int16)
@@ -1165,8 +1425,8 @@ def build(log=print):
                                '0 on open water; region holds the region\'s number (L01 is 1) on its land and in its '
                                'waters, the coastal seas, and 100 + the sea\'s body in international waters.'),
                  codes=[d['code'] for d in districts + coastal])
-    BULK.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(PRODUCT, metadata=json.dumps(pmeta), district=district_grid, region=region_grid)
+    product.parent.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(product, metadata=json.dumps(pmeta), district=district_grid, region=region_grid)
     sizes = np.array([d['area_km2'] for d in districts])
     summary = dict(land_regions=len(region_codes), island_group_regions=len(island_regions), sea_regions=len(sea_codes),
                    land_districts=len(districts),
@@ -1190,20 +1450,26 @@ def build(log=print):
                                 region_feature_km=REGION_FEATURE_KM, seed_km=SEED_KM, region_seed_km=REGION_SEED_KM,
                                 lake_seed_km2=LAKE_SEED_KM2, moisture_edge_m=MOISTURE_EDGE_M, rock_edge_m=ROCK_EDGE_M,
                                 weak_edge_m=WEAK_EDGE_M, coast_km=COAST_KM, coast_max_km2=COAST_MAX_KM2,
-                                region_min_km2=REGION_MIN_KM2, region_max_km2=REGION_MAX_KM2, smooth_deg=SMOOTH_DEG),
+                                region_min_km2=REGION_MIN_KM2, region_max_km2=REGION_MAX_KM2, smooth_deg=SMOOTH_DEG,
+                                land_alone_km2=LAND_ALONE_KM2, island_reach_km=ISLAND_REACH_KM,
+                                summit_today=[round(float(lat[summit[0]]), 2), round(float(lon[summit[1]]), 2)]),
                 tongues={k: dict(label=t['label'], roots=t['roots'], order=t['order'], where=DN.WHERE[k])
                          for k, t in DN.TONGUES.items()},
                 terlunan_coined=DN.TONGUES['terlunan']['coined'],
                 summary=summary, regions=regions_out, districts=districts, coastal_seas=coastal,
-                product=dict(path=str(PRODUCT), sha256=sha256(PRODUCT)), seconds=round(time.time() - started))
+                product=dict(path=str(product), sha256=sha256(product)), seconds=round(time.time() - started))
 
 
 def main(argv=None) -> int:
-    argparse.ArgumentParser(description=__doc__.splitlines()[0]).parse_args(argv)
-    record = build()
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(record, indent=1, ensure_ascii=False) + '\n')
-    print(f"wrote {OUT}: {json.dumps(record['summary'])}")
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument('--out', type=Path, help='a folder for a redraw kept apart: its record and its grid are written there, '
+                                                 'and the page\'s own record and grid are left as they are')
+    args = parser.parse_args(argv)
+    out = args.out / OUT.name if args.out else OUT
+    record = build(product=args.out / PRODUCT.name if args.out else None)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(record, indent=1, ensure_ascii=False) + '\n')
+    print(f"wrote {out}: {json.dumps(record['summary'])}")
     return 0
 
 

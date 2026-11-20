@@ -114,7 +114,7 @@ def test_anchors_survive_a_redraw():
 def test_islands_take_the_territory_whose_waters_they_lie_in(monkeypatch):
     # an equatorial strip at 8 px/deg, cells of about 14 km2: a mainland, an island 30 km off it, a second island 38 km
     # beyond the first (more than 60 km from the mainland), two islands far out whose waters touch, and a lone rock
-    monkeypatch.setattr(D, 'REGION_MIN_KM2', 5000.0)
+    monkeypatch.setattr(D, 'LAND_ALONE_KM2', 5000.0)
     rows, cols = 64, 240
     lat = 4.0 - (np.arange(rows) + 0.5) / 8.0
     lon = (np.arange(cols) + 0.5) / 8.0
@@ -132,6 +132,65 @@ def test_islands_take_the_territory_whose_waters_they_lie_in(monkeypatch):
     assert joined.index(comps[29, 49]) < joined.index(comps[29, 62])
     assert len(groups) == 1 and territory[18, 148] == territory[38, 174] == groups[0]
     assert rocks[40, 220] and territory[40, 220] == -1 and not rocks[30, 20]
+    # an island takes its place from the mainland's own nearest shore, never from the island before it
+    assert comps[through[int(comps[29, 62])]] == comps[30, 20] and through[int(comps[29, 62])][1] == 39
+    # a chain ends at the reach: with a reach of 70 km the second island, 83 km from the mainland, is left out at sea
+    monkeypatch.setattr(D, 'ISLAND_REACH_KM', 70.0)
+    territory, comps, joined, through, groups, rocks = D.island_territories(land, area, lat, lon, log=lambda *a: None)
+    assert territory[29, 49] == territory[30, 20] and territory[29, 62] == -1 and rocks[29, 62]
+    assert int(comps[29, 62]) not in joined
+
+
+def small_grid(rows=8, cols=12):
+    lat = 2.0 - (np.arange(rows) + 0.5) / 8.0
+    lon = (np.arange(cols) + 0.5) / 8.0
+    area = (D.MOON_KM * np.radians(1 / 8.0)) ** 2 * np.cos(np.radians(lat))
+    return lat, lon, area
+
+
+def test_every_district_is_made_one_piece():
+    lat, lon, area = small_grid()
+    labels = np.zeros((8, 12), np.int32)
+    labels[1:7, 1:5] = 1
+    labels[1:7, 6:11] = 2                               # two districts with a strip of sea between them
+    labels[3, 8] = 1                                    # a cell of the first lost inside the second
+    labels[7, 5] = 1                                    # and one that touches the first at a corner: the same piece
+    whole, moved = D.whole_districts(labels, area, lat, lon, log=lambda *a: None)
+    assert moved == 1 and whole[3, 8] == 2 and whole[7, 5] == 1
+    assert (whole[1:7, 1:5] == 1).all() and (whole == 0).sum() == (labels == 0).sum()
+    assert D.whole_districts(whole, area, lat, lon, log=lambda *a: None)[1] == 0
+    # two pieces of one size: one stays and the other moves, so that no district is left in two
+    twin = np.zeros((8, 12), np.int32)
+    twin[1:7, 1:9] = 3
+    twin[2, 2], twin[5, 6] = 4, 4
+    whole, moved = D.whole_districts(twin, area, lat, lon, log=lambda *a: None)
+    assert moved == 1 and (whole == 4).sum() == 1
+
+
+def test_an_islet_joins_one_district_whole(monkeypatch):
+    monkeypatch.setattr(D, 'ISLET_KM2', 100.0)          # the lands here are about 1,400 km2 and the islet about 40
+    lat, lon, area = small_grid(16, 40)
+    land = np.zeros((16, 40), bool)
+    land[2:14, 2:10] = True                             # two lands of two districts, an islet of three cells between them
+    land[2:14, 20:28] = True
+    land[7, 14:17] = True
+    labels = np.zeros((16, 40), np.int32)
+    labels[2:14, 2:10], labels[2:14, 20:28], labels[7, 14:17] = 1, 2, 3
+    out = D.absorb_islets(labels, land, area, lat, lon)
+    assert len(set(out[7, 14:17].tolist())) == 1 and out[7, 15] in (1, 2)        # none of it left to the other
+    assert (out[2:14, 2:10] == 1).all() and (out[2:14, 20:28] == 2).all()
+
+
+def test_regions_pieces_and_borders_are_read_from_the_districts_neighbourhood():
+    labels = np.zeros((6, 16), np.int32)
+    labels[1:5, 1:4], labels[1:5, 4:7], labels[1:5, 7:10] = 1, 2, 3                # three districts in a row
+    labels[2:4, 12:14] = 4                                                         # and an island's district
+    edges = D.region_edges(labels, links=[(4, 3)])                                # which joined the land at the third
+    assert set(edges) == {(1, 2), (2, 3), (3, 4)} and edges[(3, 4)] == 0.5 and edges[(1, 2)] > 4
+    assert sorted(sorted(p) for p in D.pieces([1, 2, 4], edges)) == [[1, 2], [4]]
+    assert sorted(sorted(p) for p in D.pieces([1, 2, 3, 4], edges)) == [[1, 2, 3, 4]]
+    of = np.array([0, 5, 5, 6, 5])                                                 # the island left in the first two's region
+    assert D.borders([4], of, edges) == {6: 0.5} and D.borders([1, 2], of, edges) == {6: edges[(2, 3)]}
 
 
 def test_a_rename_keeps_every_name(draft):
