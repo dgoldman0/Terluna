@@ -12,10 +12,10 @@ nearest neighbour inside it, and where there is a choice the reader takes the on
 rule is a choice that can be turned; lunar_sounds.md gives each with its reason. The rules are a first set and the
 parent words are written from general knowledge of the languages: no dictionary or speaker has checked them.
 
-The lexicons are district_names.py's (TONGUES and CALQUE_WORDS). A word passes from the draft's spelling, or from the
-fuller parent form in PARENTS where the draft's spelling had lost a sound the framework can keep or was not a word of
-the parent. This module changes no name: district_names.py and place_names.json stand as they are until the passed
-forms are adopted.
+This module is the framework and the rule sheets, and it imports nothing of the names. district_names.py holds every
+tongue's words as their parent languages spell them and passes them through here when it loads, so that every name
+is made from the passed words; the record built here lists each word with its parent form, checks every word and
+every joined name against the framework, and checks that the names table and the draft record stand as passed.
 
     python -m research.studies.atlas_round.lunar_sounds      -> results/lunar_sounds.json and a printed summary
 """
@@ -27,8 +27,6 @@ import re
 import sys
 import time
 from pathlib import Path
-
-from research.studies.atlas_round import district_names as DN
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
@@ -57,24 +55,25 @@ def _v(s):
     return s in VOWELS
 
 
-def repair(w):
+def repair(w, vowel=None):
     """The framework's repairs on one word: a doubled consonant becomes one; a cluster that opens the word gets a
     vowel inside it (i before y and u before w, as the reference's liyong and kuwo, else a copy of the next vowel); a
     cluster that closes it is opened with a copy of the vowel before it; a run of three consonants is opened after
-    its second, before a glide with the glide's own vowel."""
+    its second, before a glide with the glide's own vowel. A parent language with a vowel of its own for opening a
+    cluster gives it as vowel (Hebrew's e), and it takes the place of the copies."""
     s = segments(w)
     s = [x for i, x in enumerate(s) if not (i and x == s[i - 1] and not _v(x))]
     if len(s) > 1 and not _v(s[0]) and not _v(s[1]):
         nxt = next((x for x in s[2:] if _v(x)), 'a')
-        s.insert(1, {'y': 'i', 'w': 'u'}.get(s[1], nxt))
+        s.insert(1, {'y': 'i', 'w': 'u'}.get(s[1], vowel or nxt))
     if len(s) > 2 and not _v(s[-1]) and not _v(s[-2]):
         prev = next((x for x in reversed(s[:-2]) if _v(x)), 'a')
-        s.insert(len(s) - 1, prev)
+        s.insert(len(s) - 1, vowel or prev)
     i = 0
     while i + 2 < len(s):
         if not _v(s[i]) and not _v(s[i + 1]) and not _v(s[i + 2]):
             nxt = next((x for x in s[i + 3:] if _v(x)), 'a')
-            s.insert(i + 2, {'y': 'i', 'w': 'u'}.get(s[i + 2], nxt))
+            s.insert(i + 2, {'y': 'i', 'w': 'u'}.get(s[i + 2], vowel or nxt))
         i += 1
     return ''.join(s)
 
@@ -129,7 +128,8 @@ def syllables(w):
     return syl, faults
 
 
-ARTICLE = "h'"                       # the author's Esperanto-based tongue's article, left as the author writes it
+ARTICLE = "h'"                       # the author's Esperanto-based tongue's article, written as the author writes it
+ARTICLE_SAID = 'ha'                  # and said as its other parent, Hebrew, says its article
 PARTICLES = ('na',)                  # the Tagalog linker between a head that ends on a consonant and its modifier
 
 
@@ -142,14 +142,14 @@ def _bare(word):
 
 def said(w):
     """A word's syllables with the stressed one in capitals: the one before the last, or the rightmost long vowel's.
-    The article h' and the linker na are shown as written."""
+    The article h' is shown as it is said, ha, and the linker na as written; neither takes a stress."""
     out = []
     for word in w.split():
         if word.lower() in PARTICLES:
             out.append(word.lower())
             continue
         bare = _bare(word)
-        lead = ARTICLE if bare != word.lower() else ''
+        lead = ARTICLE_SAID + ' ' if bare != word.lower() else ''
         syl, _ = syllables(bare)
         k = max(0, len(syl) - 2)
         longs = [i for i, x in enumerate(syl) if re.search(r'([aeiou])\1', x)]
@@ -269,7 +269,8 @@ def tagalog(word):
 
 
 def hebrew(word):
-    """Hebrew in Latin letters. Kept: f and v. Changed: sh, ts and z to s; kh and the deep h to h; q to k."""
+    """Hebrew in Latin letters. Kept: f and v. Changed: sh, ts and z to s; kh and the deep h to h; q to k. A cluster
+    opens with e, the vowel Hebrew itself puts there (zman, seman)."""
     w = word.lower()
     for a, b in (('ʿ', "'"), ('ʾ', "'"), ('tz', 's'), ('ts', 's'), ('sh', 's'), ('kh', 'h'), ('ch', 'h'), ('ḥ', 'h'), ('z', 's'), ('q', 'k')):
         w = w.replace(a, b)
@@ -289,7 +290,8 @@ def japanese(word):
 
 def esperanto(word):
     """The author's Esperanto-based tongue in its own spelling. Kept: f and v. Changed: j, its y sound, is written y;
-    the hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s."""
+    the hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s. Its clusters open as its other parent, Hebrew, opens
+    them, with e (kratero, keratero)."""
     w = word.lower()
     for a, b in (('ŭ', 'u'), ('ĥ', 'h'), ('ŝ', 's'), ('ĝ', 'g'), ('ĉ', 's'), ('ĵ', 's'), ('sh', 's'), ('x', 'h'), ('c', 's'), ('z', 's'), ('j', 'y')):
         w = w.replace(a, b)
@@ -315,8 +317,6 @@ READERS = dict(kk=kazakh, mn=mongolian, qu=quechua, ar=arabic, sw=swahili, tl=ta
                te=terlunan, la=plain)
 PARENT_OF = dict(kk='Kazakh or Kyrgyz', mn='Mongolian', qu='Quechua', ar='Arabic or Tamazight', sw='Swahili', tl='Tagalog', he='Hebrew',
                  ja='Japanese', eo='Esperanto with Hebrew loans', te='Terlunan', la='another language')
-# The reader each tongue's draft spellings pass through where no fuller parent form is given.
-DRAFT_READER = dict(terlunan='te', olivolingvo='eo', sahran='ar', pwani='sw', dala='kk', runa='qu', satoyama='ja')
 
 
 def read(spec):
@@ -328,133 +328,80 @@ def read(spec):
     return out
 
 
+# A parent language's own vowel for opening a cluster, where it has one: Hebrew opens a cluster with e, and the
+# author's Esperanto-based tongue follows its other parent in this.
+REPAIR_VOWEL = dict(he='e', eo='e')
+
+
+def repair_vowel(spec):
+    return REPAIR_VOWEL.get(spec.split(':', 1)[0])
+
+
 def passed(spec):
-    """A parent spec passed through whole: read, fused and repaired."""
-    return repair(fuse(read(spec)))
+    """A parent spec passed through whole: read, fused and repaired in its parent's way."""
+    return repair(fuse(read(spec)), repair_vowel(spec))
 
 
-# ------------------------------------------------------------------------------------------------ the parent forms
+RENDAKU = (('k', 'g'), ('t', 'd'), ('h', 'b'))      # the sequential voicing the framework can show; s has no voiced partner in it
+
+
+def voiced(head):
+    """A Japanese-rooted head with its first consonant voiced, where the framework has the voiced partner."""
+    for a, b in RENDAKU:
+        if head.startswith(a):
+            return b + head[len(a):]
+    return head
+
+
+# ------------------------------------------------------------------------------------------------ the record
 #
-# A fuller parent form for a lexicon word: where the draft's spelling had lost a sound the framework can keep (Kazakh
-# ng and its vowels, the Arabic throat stops, the Swahili syllabic nasal's class, Tagalog's glottal stop, Quechua ñ),
-# or where the draft's word was not the parent's. Words not listed pass from the draft's spelling.
+# What follows reads the names (district_names.py and place_names.json) to report on them; it is loaded only when
+# asked, since the names load this module.
 
-PARENTS = {
-    'dala': dict(
-        bowl='kk:ой', basin='la:owa', lake='kk:көл', lakes='kk:көлдөр', river='mn:гол', valley='kk:сай', plain='kk:дала', hills='kk:төбе',
-        mountains='kk:тау', ridge='kk:қыр', cliff='kk:жар', island='kk:арал', bay='kk:қолтық', coast='kk:жаға', strait='kk:боғаз',
-        sea='kk:теңіз', forest='kk:орман', desert='mn:говь', field='kk:жайлау', land='kk:жер', falls='kk:сарқырама', spring='kk:бұлақ',
-        black='kk:қара', white='kk:ақ', red='kk:қызыл', green='kk:жасыл', gold='kk:алтын', blue='kk:көк', great='la:ulug', small='kk:кіші',
-        high='kk:биік', deep='kk:терең', long='kk:ұзын', old='kk:ескі', new='kk:жаңа', dry='kk:құрғақ', wet='kk:ылғал', warm='kk:жылы',
-        cold='kk:суық', light='kk:жарық', dawn='kk:таң', night='kk:түн', star='kk:жұлдыз', cloud='kk:бұлт', mist='kk:тұман',
-        rain='kk:жаңбыр', wind='kk:жел', sun='kk:күн', earth='kk:жер', stone='kk:тас', sand='kk:құм', salt='kk:тұз', water='kk:су',
-        leaf='kk:жапырақ', flower='kk:гүл', thousand='kk:мың', twin='kk:егіз',
-        storm='kk:боран', calm='kk:тыныш', clear='kk:ашық', plenty='kk:мол', nectar='kk:бал', trial='kk:сынақ', islands='kk:аралдар',
-        known='kk:белгілі', south='kk:оңтүстік', east='kk:шығыс', edge='kk:шет', wave='kk:толқын', foam='kk:көбік', serpent='kk:жылан',
-        dew='kk:шық', middle='kk:орта', love='kk:махаббат', rough='kk:кедір', harmony='kk:ынтымақ', faith='kk:сенім', success='kk:жеңіс',
-        dream='kk:арман', death='kk:өлім', time='kk:уақыт', sorrow='kk:қайғы', springtime='kk:көктем', autumn='kk:күз', summer='kk:жаз',
-        winter='kk:қыс', hope='kk:үміт', gentle='kk:жұмсақ', good='kk:жақсы', endure='kk:төзім', alone='kk:жалғыз', forget='kk:унут',
-        fear='kk:қорқы', joy='kk:қуаныш', excellent='kk:асыл', dark='kk:қараңғы', sleep='kk:ұйқы', decay='kk:шірік', plague='kk:оба'),
-    'runa': dict(old='qu:ñawpa', death='qu:wañuy', faith='qu:iñiy', sleep='qu:puñuy'),
-    'sahran': dict(desert='ar:ʿirq', deep='ar:ʿamiq', warm='ar:dafiʾ', twin='ar:tawʾam', storm='ar:ʿasifa', calm='ar:hadiʾ',
-                   known='ar:maʿruf', harmony='ar:wiʾam', springtime='ar:rabiʿ', winter='ar:shitaʾ', alone='ar:ʿuzla', decay='ar:ʿafan',
-                   plague='ar:wabaʾ', dark='ar:ʿatma'),
-    'pwani': dict(river='sw:m°to', strait='sw:m°lango', forest='sw:m°situ', sand='sw:m°changa', rough='sw:paruparu'),
-    'tagalhebrew': dict(bay="tl:lo'ok", sorrow="he:tsa'ar"),
-    'satoyama': dict(great='ja:ō'),
-    'olivolingvo': {},
-    'terlunan': {},
-}
-# What a parent form puts right beyond the sounds: the draft's word was another language's, a slip, or would fall
-# together with another word of the same tongue once passed.
-PARENT_NOTES = {
-    ('dala', 'lakes'): "the draft's kollar is the Uzbek plural; көлдөр is the Kyrgyz",
-    ('dala', 'dream'): "the draft's tus (түс) would fall together with salt (тұз); арман is Kazakh for a dream or longing",
-    ('dala', 'forget'): "the draft's umyt (ұмыт) would fall together with hope (үміт); унут is the Kyrgyz",
-    ('sahran', 'dark'): "the draft's Zalam would read as the Arabic for peace once z is s; ʿatma is darkness",
-    ('pwani', 'rough'): "the draft's Kparuparu was a slip for paruparu",
-    ('tagalhebrew', 'sorrow'): "the throat stop between the two vowels of tsaʿar keeps them apart",
-}
-# The Tagalog-Hebrew tongue reads its heads as Tagalog and its modifiers as Hebrew.
-
-
-def parent_spec(tongue, key, word, role):
-    """The parent form a lexicon word passes from: PARENTS' where it gives one, else the draft's own spelling read by
-    the tongue's rule sheet."""
-    spec = PARENTS.get(tongue, {}).get(key)
-    if spec:
-        return spec
-    if tongue == 'tagalhebrew':
-        return ('tl:' if role == 'head' else 'he:') + word
-    return f'{DRAFT_READER[tongue]}:{word}'
+def _dn():
+    from research.studies.atlas_round import district_names as DN
+    return DN
 
 
 def lexicon(tongue):
-    """A tongue's words passed through: {key: dict(role, draft, parent, read, passed, said, faults)}. read is the form
-    names are fused from; passed is the word standing alone."""
+    """A tongue's words as they stand: {(role, key): dict(parent, read, passed, said, faults)}, with a note where the
+    parent form puts right more than sounds. parent is the word as its parent language spells it, with the code of
+    the parent's rule sheet; read is the form names are fused from; passed is the word standing alone."""
+    DN = _dn()
     t = DN.TONGUES[tongue]
     out = {}
     for role, table in (('head', t['heads']), ('modifier', t['mods']), ('meaning', DN.CALQUE_WORDS.get(tongue, {}))):
         for key, word in table.items():
-            if key in out and role == 'meaning':
-                continue                                    # the tongue's own modifier already holds the meaning's word
-            spec = parent_spec(tongue, key, word, role)
-            got = read(spec)
-            alone = repair(fuse(got))
-            entry = dict(role=role, draft=word, parent=spec, read=fuse(got), passed=alone, said=said(alone), faults=faults(alone))
-            note = PARENT_NOTES.get((tongue, key))
+            spec = t['parents'][(role, key)]
+            alone = word.lower()
+            entry = dict(role=role, parent=spec, read=t['fuse'][(role, key)], passed=alone, said=said(alone), faults=faults(alone))
+            if passed(spec) != alone:
+                entry['faults'] = entry['faults'] + ['not its parent form passed through']
+            note = DN.PARENT_NOTES.get((tongue, key))
             if note:
                 entry['note'] = note
             out[(role, key)] = entry
     return out
 
 
-_LEX = {}
+def collisions(tongue):
+    """Pairs of a tongue's words with different parent words and one passed form, among its heads and among its
+    modifiers and the words for old names' meanings."""
+    lex = lexicon(tongue)
+    out = []
+    for roles in (('head',), ('modifier', 'meaning')):
+        seen = {}
+        for (role, key), e in lex.items():
+            if role not in roles:
+                continue
+            other = seen.setdefault(e['passed'], (key, e['parent']))
+            if other[0] != key and other[1].lower() != e['parent'].lower():
+                out.append((other[0], key, e['passed']))
+    return out
 
 
-def _lex(tongue):
-    if tongue not in _LEX:
-        _LEX[tongue] = lexicon(tongue)
-    return _LEX[tongue]
-
-
-def word(tongue, key, role=None):
-    """A tongue's word for a key as names are fused from it: its head, its modifier, or its word for an old name's
-    meaning."""
-    lex = _lex(tongue)
-    for r in ((role,) if role else ('modifier', 'meaning', 'head')):
-        if (r, key) in lex:
-            return lex[(r, key)]['read']
-    raise KeyError((tongue, key))
-
-
-RENDAKU = (('k', 'g'), ('t', 'd'), ('h', 'b'))      # the voicing the framework can show; s has no voiced partner in it
-
-
-def compose(tongue, head, mod):
-    """A name from a head and a modifier key, as district_names.compose joins them, from the passed words."""
-    join = DN.TONGUES[tongue]['join']
-    h, m = word(tongue, head, 'head'), word(tongue, mod)
-    cap = DN._cap
-    if join == 'fused':
-        return cap(repair(fuse([m, h])))
-    if join == 'rendaku':
-        if head not in ('lake', 'lakes', 'basin', 'desert'):
-            for a, b in RENDAKU:
-                if h.startswith(a):
-                    h = b + h[len(a):]
-                    break
-        return cap(repair(fuse([m, h])))
-    h, m = repair(h), repair(m)
-    if join == 'olivo':
-        return f"H'{cap(h)} {cap(m)}"
-    if join == 'tagalog':
-        return f'{cap(h)}ng {cap(m)}' if h[-1] in VOWELS else f'{cap(h)} na {cap(m)}'
-    return f'{cap(h)} {cap(m)}'
-
-
-# The names table's pins as a head and a modifier (or a meaning's word) of their tongue; district_names.compose makes
-# each pin's present spelling from the same keys (a test holds this), and compose above its passed form.
+# The names table's pins as a head and a modifier (or a meaning's word) of their tongue: district_names.compose makes
+# each pin from these keys, which a test holds, so that a pin and the lexicons cannot part.
 PINS = {
     'sea:near-side sea': ('terlunan', 'sea', 'rain'), 'sea:southern near-side seas': ('dala', 'sea', 'cloud'),
     'sea:South Pole–Aitken Sea': ('olivolingvo', 'sea', 'salt'), 'sea:Mare Humboldtianum': ('dala', 'sea', 'star'),
@@ -471,73 +418,46 @@ PINS = {
     'river:-14.1,311.5': ('pwani', 'river', 'twin'), 'river:-50.2,131.6': ('olivolingvo', 'river', 'long'),
     'river:12.3,346.0': ('terlunan', 'river', 'black'), 'river:47.4,186.0': ('olivolingvo', 'river', 'old'),
 }
-# Pins that are not a head and a modifier: fused from named parts, or the author's own, which stand.
+# Pins that are not a head and a modifier: fused from named parts, or the author's own, which stand as written.
 PINS_BY_PARTS = {'river:19.9,184.6': 'te:rere+te:awa'}
 PINS_STAND = ('feature:Sinus Iridum', 'feature:Montes Jura', 'feature:Mare Ingenii')
 
 
-def draft_compose(tongue, head, mod):
-    """district_names.compose with the word for an old name's meaning allowed as the modifier, as its calque does."""
-    t = DN.TONGUES[tongue]
-    if mod in t['mods']:
-        return DN.compose(tongue, head, mod)
-    saved = t['mods']
-    t['mods'] = dict(saved, **{mod: DN.CALQUE_WORDS[tongue][mod]})
-    try:
-        return DN.compose(tongue, head, mod)
-    finally:
-        t['mods'] = saved
-
-
 def pins(table=None):
-    """Every pinned name with its passed form: [dict(anchor, name, tongue, passed, said, changed, how)]."""
+    """Every pinned name against the lexicons: [dict(anchor, name, tongue, from_the_words, said, stands, how, faults)].
+    stands is whether the pin is the name its tongue's words make today."""
+    DN = _dn()
     table = DN.load_table() if table is None else table
     out = []
     for anchor, pin in table.items():
         name = pin['name']
         if anchor in PINS_STAND:
-            new, how = name, "the author's own name, which stands"
+            made, how = name, "the author's own name, which stands as written"
         elif anchor in PINS_BY_PARTS:
-            new, how = DN._cap(passed(PINS_BY_PARTS[anchor])), PINS_BY_PARTS[anchor]
+            made, how = DN._cap(passed(PINS_BY_PARTS[anchor])), PINS_BY_PARTS[anchor]
         elif anchor in PINS:
             tongue, head, mod = PINS[anchor]
-            new, how = compose(tongue, head, mod), f'{tongue}: {mod} + {head}'
+            made, how = DN.compose(tongue, head, mod), f'{tongue}: {mod} + {head}'
         else:
-            new, how = None, 'no rule: named by hand since this table was made'
-        out.append(dict(anchor=anchor, name=name, tongue=pin.get('tongue'), passed=new, said=said(new) if new else None,
-                        changed=bool(new) and new != name, how=how,
-                        faults=faults(new) if new and anchor not in PINS_STAND else []))
-    return out
-
-
-def collisions(tongue):
-    """Pairs of a tongue's words that the draft kept apart and the pass makes one, among its heads and among its
-    modifiers and meanings' words."""
-    lex = _lex(tongue)
-    out = []
-    for roles in (('head',), ('modifier', 'meaning')):
-        seen = {}
-        for (role, key), e in lex.items():
-            if role not in roles:
-                continue
-            other = seen.setdefault(e['passed'], (key, e['draft']))
-            if other[0] != key and other[1].lower() != e['draft'].lower():
-                out.append((other[0], key, e['passed']))
+            made, how = None, 'named by hand, with no head and modifier to check it against'
+        out.append(dict(anchor=anchor, name=name, tongue=pin.get('tongue'), from_the_words=made, said=said(name),
+                        stands=made is None or made == name, how=how,
+                        faults=faults(name) if anchor not in PINS_STAND else []))
     return out
 
 
 def record_names(record):
-    """How many of a districts record's generated names the pass changes: (generated names found again from their
-    head and modifier, of those changed)."""
-    found = changed = 0
+    """A districts record's generated names against the lexicons: (names with a head and a modifier, those the
+    words make today)."""
+    DN = _dn()
+    found = made = 0
     for u in record.get('regions', []) + record.get('districts', []) + record.get('coastal_seas', []):
         if u.get('name_source') != 'generated' or not u.get('name_head') or not u.get('name_mod'):
             continue
-        if DN.compose(u['tongue'], u['name_head'], u['name_mod']) != u['name']:
-            continue                                        # a name with a second word added to tell it from another
         found += 1
-        changed += compose(u['tongue'], u['name_head'], u['name_mod']) != u['name']
-    return found, changed
+        made += DN.compose(u['tongue'], u['name_head'], u['name_mod']) == u['name'].split(' ')[0] \
+            or DN.compose(u['tongue'], u['name_head'], u['name_mod']) in u['name']
+    return found, made
 
 
 def _sha(path):
@@ -545,40 +465,42 @@ def _sha(path):
 
 
 def build(log=print):
+    DN = _dn()
     t0 = time.time()
     tongues = {}
     for tongue, t in DN.TONGUES.items():
         lex = lexicon(tongue)
         words = [dict(key=key, **e) for (role, key), e in lex.items()]
-        tongues[tongue] = dict(label=t['label'], words=words, changed=sum(e['passed'] != e['draft'].lower() for e in lex.values()),
-                               faults=sum(bool(e['faults']) for e in lex.values()), fallen_together=collisions(tongue),
-                               from_fuller_parent_forms=sum(1 for (role, key) in lex if key in PARENTS.get(tongue, {})))
-        log(f"{t['label']:36s} {len(words):3d} words, {tongues[tongue]['changed']:3d} change, {tongues[tongue]['faults']} against the "
-            f"framework, {len(tongues[tongue]['fallen_together'])} fallen together")
+        tongues[tongue] = dict(label=t['label'], words=words, faults=sum(bool(e['faults']) for e in lex.values()),
+                               fallen_together=collisions(tongue),
+                               joined_names_at_fault=sum(bool(faults(DN.compose(tongue, h, m))) for h in DN.HEADS for m in DN.MODIFIERS))
+        log(f"{t['label']:36s} {len(words):3d} words, {tongues[tongue]['faults']} against the framework, "
+            f"{len(tongues[tongue]['fallen_together'])} fallen together, {tongues[tongue]['joined_names_at_fault']} joined names at fault")
     pinned = pins()
     record = json.loads(DN.RECORD.read_text()) if DN.RECORD.exists() else {}
-    found, changed = record_names(record)
-    log(f"pins: {len(pinned)}, {sum(p['changed'] for p in pinned)} change; the draft record's generated names: {changed} of {found} change")
+    found, made = record_names(record)
+    log(f"pins: {len(pinned)}, {sum(not p['stands'] for p in pinned)} apart from their words; the draft record's generated names: "
+        f"{made} of {found} are the names the words make")
     return dict(
         schema=SCHEMA, producer='research.studies.atlas_round.lunar_sounds',
         inputs={str(p.relative_to(ROOT)): _sha(p) for p in (HERE / 'district_names.py', DN.PLACE_NAMES, DN.RECORD) if p.exists()},
         evidence=("A rule sheet and its results, nothing in it validated: the framework is the sound section of the author's Terlunan "
                   "reference (v0.6, section 2, outside the repository); each parent language's rules are choices made on 20 November 2026; "
                   "the parent words are written from general knowledge of Kazakh, Kyrgyz, Mongolian, Quechua, Arabic, Tamazight, Swahili, "
-                  "Tagalog, Hebrew, Japanese and Esperanto, and no dictionary or speaker has checked them. No name is changed by this record: "
-                  "district_names.py and place_names.json stand as they are."),
-        reading_rule=("tongues gives, for every word of district_names.py's lexicons, its key, its role (head, modifier, or the word for an "
-                      "old name's meaning), the draft's spelling, the parent form it passes from (a code for the parent's rule sheet, a colon "
-                      "and the word in the parent's letters or the draft's), the form names are fused from (read), the word standing alone "
-                      "(passed), its syllables with the stressed one in capitals (said) and any fault against the framework; changed counts "
-                      "the words whose spelling moves, fallen_together lists pairs the draft kept apart and the pass makes one. pins gives "
-                      "every name in place_names.json with its passed form. record gives how many of the draft record's generated names "
-                      "the pass would change."),
+                  "Tagalog, Hebrew, Japanese and Esperanto, and no dictionary or speaker has checked them."),
+        reading_rule=("tongues gives every word of district_names.py's lexicons: its key, its role (head, modifier, or the word for an old "
+                      "name's meaning), its parent form (a code for the parent's rule sheet, a colon and the word as the parent language "
+                      "spells it), the form names are fused from (read), the word standing alone (passed), its syllables with the stressed "
+                      "one in capitals (said) and any fault against the framework; fallen_together lists pairs of different parent words "
+                      "with one passed form; joined_names_at_fault counts the tongue's head-and-modifier names that break the framework. "
+                      "pins gives every name in place_names.json with the name its tongue's words make from its head and modifier, and "
+                      "whether the two agree (stands). record counts the draft record's generated names and those the words make today."),
         framework=dict(vowels=list(VOWELS), consonants=list(CONSONANTS), diphthongs=list(DIPHTHONGS), admitted_in_established_words=['f', 'v'],
-                       syllable='(C)V(C)', stress='the syllable before the last, or the rightmost long vowel'),
+                       syllable='(C)V(C)', stress='the syllable before the last, or the rightmost long vowel',
+                       article="h', said ha"),
         rule_sheets={code: (fn.__doc__ or '').strip().replace('\n    ', ' ') for code, fn in READERS.items()},
         tongues=tongues, pins=pinned,
-        record=dict(generated_names_found=found, changed=changed),
+        record=dict(generated_names=found, made_by_the_words=made),
         seconds=round(time.time() - t0, 2))
 
 

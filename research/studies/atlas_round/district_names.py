@@ -14,10 +14,18 @@ A name is a head chosen by a place's centre (crater, lake, river, plain, coast..
 apart (its moisture zone, rock, height, lakes, falls, the near side's Earthlight...), joined as each tongue joins them.
 The choice is deterministic: the same draft gives the same names. Names are working labels, for the people who come to
 live there to keep or replace.
+
+Every word is written below as its parent language spells it, and passes when this module loads through the Moon's
+shared sounds (lunar_sounds.py; register, 20 November 2026): a name keeps its parent language's sounds to a degree and
+comes out in the Moon's own phonetic framework. After loading, the tables hold the words as the Moon's tongues say
+them (tengis, kosa, bahar), each tongue's `parents` holds the parent forms and its `fuse` the forms names are joined
+from, and every name is made from the passed words.
 """
 from __future__ import annotations
 
 import hashlib
+
+from research.studies.atlas_round import lunar_sounds as LS
 
 HEADS = ('bowl', 'basin', 'lake', 'lakes', 'river', 'valley', 'plain', 'hills', 'mountains', 'ridge', 'cliff', 'island',
          'bay', 'coast', 'strait', 'sea', 'forest', 'desert', 'field', 'land', 'falls', 'spring')
@@ -90,7 +98,7 @@ TONGUES = {
         join='tagalog'),
     'pwani': dict(
         label='Pwani (Swahili-rooted)', roots='Swahili landscape words, without the noun-class agreement',
-        order='head + modifier (Ziwa Nyota)',
+        order='head + modifier (Siwa Inyota)',
         heads=dict(bowl='Shimo', basin='Bonde', lake='Ziwa', lakes='Maziwa', river='Mto', valley='Bonde',
                    plain='Tambarare', hills='Vilima', mountains='Milima', ridge='Kingo', cliff='Genge', island='Kisiwa',
                    bay='Guba', coast='Pwani', strait='Mlango', sea='Bahari', forest='Msitu', desert='Jangwa',
@@ -116,7 +124,7 @@ TONGUES = {
         join='fused'),
     'runa': dict(
         label='Runa (Quechua-rooted)', roots='Quechua landscape words, spelled without ejective marks',
-        order='modifier + head, fused (Yanaqucha, black lake)',
+        order='modifier + head, fused (Yanakosa, black lake)',
         heads=dict(bowl='hutku', basin='kancha', lake='qucha', lakes='quchakuna', river='mayu', valley='wayqu',
                    plain='pampa', hills='pata', mountains='urqu', ridge='qasa', cliff='qaqa', island='wata',
                    bay='qucha', coast='chimpa', strait='chaka', sea='mamaqucha', forest='sacha', desert='purun',
@@ -148,7 +156,7 @@ WHERE = {'terlunan': 'shores and islands, and the seas', 'olivolingvo': 'the pol
          'dala': 'the steppe plains', 'runa': 'the high mountains and their cloud forests',
          'satoyama': 'the humid hill country'}
 
-RENDAKU = (('sh', 'j'), ('ch', 'j'), ('ts', 'z'), ('k', 'g'), ('t', 'd'), ('s', 'z'), ('h', 'b'))
+RENDAKU = LS.RENDAKU                 # the sequential voicing the Moon's sounds can show: k, t and h to g, d and b
 
 
 def _cap(word):
@@ -158,24 +166,19 @@ def _cap(word):
 
 
 def compose(tongue, head, mod):
-    """A name from a head and a modifier key in a tongue."""
+    """A name from a head and a modifier key in a tongue; the modifier may be the tongue's word for an old name's
+    meaning. A fused name is joined from the words' fusing forms and repaired as one word, as the Moon's sounds have
+    it (lunar_sounds.py): identical consonants meeting at the join become one, and a cluster the join makes is opened."""
     t = TONGUES[tongue]
+    role = 'modifier' if mod in t['mods'] else 'meaning'
     h = t['heads'][head]
-    m = t['mods'][mod]
+    m = t['mods'][mod] if role == 'modifier' else CALQUE_WORDS[tongue][mod]
     join = t['join']
-    if join == 'fused':
-        if m[-1:] == h[:1] and m[-1:] not in 'aeiou':
-            h = h[1:]                                   # identical consonants coalesce at the boundary
-        if m[-1:] == h[:1] and m[-1:] in 'aeiou' and m[-2:-1] == m[-1:]:
-            h = h[1:]                                   # equal vowels cap at two letters
-        return _cap(m + h)
-    if join == 'rendaku':
-        if head not in ('lake', 'lakes', 'basin', 'desert'):
-            for a, b in RENDAKU:
-                if h.startswith(a):
-                    h = b + h[len(a):]
-                    break
-        return _cap(m + h)
+    if join in ('fused', 'rendaku'):
+        hf, mf = t['fuse'][('head', head)], t['fuse'][(role, mod)]
+        if join == 'rendaku' and head not in ('lake', 'lakes', 'basin', 'desert'):
+            hf = LS.voiced(hf)
+        return _cap(LS.repair(LS.fuse([mf, hf])))
     if join == 'olivo':
         return f"H'{_cap(h)} {_cap(m)}"
     if join == 'tagalog':
@@ -497,6 +500,84 @@ CALQUE_WORDS = {
 }
 
 
+# ---------------------------------------------------------------- the words passed through the Moon's shared sounds
+#
+# The tables above write each word as its parent language spells it in Latin letters. PARENTS gives a fuller parent
+# form where that spelling had lost a sound the Moon's framework can keep (Kazakh ng and its vowels, the Arabic throat
+# stops, the class of a Swahili syllabic nasal, Tagalog's glottal stop, Quechua ñ) or where the first draft's word was
+# not the parent's: a code for the parent language's rule sheet (lunar_sounds.READERS), a colon and the word in the
+# parent's own letters. Dala's words are all given so, since the Latin spelling could not tell its vowels apart.
+
+PARENTS = {
+    'dala': dict(
+        bowl='kk:ой', basin='la:owa', lake='kk:көл', lakes='kk:көлдөр', river='mn:гол', valley='kk:сай', plain='kk:дала', hills='kk:төбе',
+        mountains='kk:тау', ridge='kk:қыр', cliff='kk:жар', island='kk:арал', bay='kk:қолтық', coast='kk:жаға', strait='kk:боғаз',
+        sea='kk:теңіз', forest='kk:орман', desert='mn:говь', field='kk:жайлау', land='kk:жер', falls='kk:сарқырама', spring='kk:бұлақ',
+        black='kk:қара', white='kk:ақ', red='kk:қызыл', green='kk:жасыл', gold='kk:алтын', blue='kk:көк', great='la:ulug', small='kk:кіші',
+        high='kk:биік', deep='kk:терең', long='kk:ұзын', old='kk:ескі', new='kk:жаңа', dry='kk:құрғақ', wet='kk:ылғал', warm='kk:жылы',
+        cold='kk:суық', light='kk:жарық', dawn='kk:таң', night='kk:түн', star='kk:жұлдыз', cloud='kk:бұлт', mist='kk:тұман',
+        rain='kk:жаңбыр', wind='kk:жел', sun='kk:күн', earth='kk:жер', stone='kk:тас', sand='kk:құм', salt='kk:тұз', water='kk:су',
+        leaf='kk:жапырақ', flower='kk:гүл', thousand='kk:мың', twin='kk:егіз',
+        storm='kk:боран', calm='kk:тыныш', clear='kk:ашық', plenty='kk:мол', nectar='kk:бал', trial='kk:сынақ', islands='kk:аралдар',
+        known='kk:белгілі', south='kk:оңтүстік', east='kk:шығыс', edge='kk:шет', wave='kk:толқын', foam='kk:көбік', serpent='kk:жылан',
+        dew='kk:шық', middle='kk:орта', love='kk:махаббат', rough='kk:кедір', harmony='kk:ынтымақ', faith='kk:сенім', success='kk:жеңіс',
+        dream='kk:арман', death='kk:өлім', time='kk:уақыт', sorrow='kk:қайғы', springtime='kk:көктем', autumn='kk:күз', summer='kk:жаз',
+        winter='kk:қыс', hope='kk:үміт', gentle='kk:жұмсақ', good='kk:жақсы', endure='kk:төзім', alone='kk:жалғыз', forget='kk:унут',
+        fear='kk:қорқы', joy='kk:қуаныш', excellent='kk:асыл', dark='kk:қараңғы', sleep='kk:ұйқы', decay='kk:шірік', plague='kk:оба'),
+    'runa': dict(old='qu:ñawpa', death='qu:wañuy', faith='qu:iñiy', sleep='qu:puñuy'),
+    'sahran': dict(desert='ar:ʿirq', deep='ar:ʿamiq', warm='ar:dafiʾ', twin='ar:tawʾam', storm='ar:ʿasifa', calm='ar:hadiʾ',
+                   known='ar:maʿruf', harmony='ar:wiʾam', springtime='ar:rabiʿ', winter='ar:shitaʾ', alone='ar:ʿuzla', decay='ar:ʿafan',
+                   plague='ar:wabaʾ', dark='ar:ʿatma'),
+    'pwani': dict(river='sw:m°to', strait='sw:m°lango', forest='sw:m°situ', sand='sw:m°changa', rough='sw:paruparu'),
+    'tagalhebrew': dict(bay="tl:lo'ok", sorrow="he:tsa'ar"),
+    'satoyama': dict(great='ja:ō'),
+    'olivolingvo': {},
+    'terlunan': {},
+}
+# What a parent form puts right beyond the sounds: the draft's word was another language's, a slip, or would fall
+# together with another word of the same tongue once passed.
+PARENT_NOTES = {
+    ('dala', 'lakes'): "the draft's kollar is the Uzbek plural; көлдөр is the Kyrgyz",
+    ('dala', 'dream'): "the draft's tus (түс) would fall together with salt (тұз); арман is Kazakh for a dream or longing",
+    ('dala', 'forget'): "the draft's umyt (ұмыт) would fall together with hope (үміт); унут is the Kyrgyz",
+    ('sahran', 'dark'): "the draft's Zalam would read as the Arabic for peace once z is s; ʿatma is darkness",
+    ('pwani', 'rough'): "the draft's Kparuparu was a slip for paruparu",
+    ('tagalhebrew', 'sorrow'): "the throat stop between the two vowels of tsaʿar keeps them apart",
+}
+# The rule sheet a tongue's own table passes through where PARENTS gives no fuller form; the Tagalog-Hebrew tongue
+# reads its heads as Tagalog and its modifiers as Hebrew.
+_READER = dict(terlunan='te', olivolingvo='eo', sahran='ar', pwani='sw', dala='kk', runa='qu', satoyama='ja')
+
+
+def parent_spec(tongue, key, word, role):
+    """The parent form a word passes from: PARENTS' where it gives one, else the table's own spelling read by the
+    tongue's rule sheet."""
+    spec = PARENTS.get(tongue, {}).get(key)
+    if spec:
+        return spec
+    if tongue == 'tagalhebrew':
+        return ('tl:' if role == 'head' else 'he:') + word
+    return f'{_READER[tongue]}:{word}'
+
+
+def _pass_through():
+    """Every word passed from its parent form into the Moon's shared sounds, in place: the tables then hold the words
+    as the Moon's tongues say them (capitalised where the table's were), each tongue's `parents` the parent forms and
+    its `fuse` the forms names are joined from."""
+    for tongue, t in TONGUES.items():
+        t['parents'], t['fuse'] = {}, {}
+        for role, table in (('head', t['heads']), ('modifier', t['mods']), ('meaning', CALQUE_WORDS.setdefault(tongue, {}))):
+            for key, word in list(table.items()):
+                spec = parent_spec(tongue, key, word, role)
+                alone = LS.passed(spec)
+                t['parents'][(role, key)] = spec
+                t['fuse'][(role, key)] = LS.fuse(LS.read(spec))
+                table[key] = _cap(alone) if word[:1].isupper() else alone
+
+
+_pass_through()
+
+
 def load_table(path=PLACE_NAMES):
     """The names table: {anchor: {name, tongue, meaning, note}}; empty where there is none yet."""
     import json
@@ -538,17 +619,10 @@ def calque(u, used):
         return None
     gloss, key = CALQUES[f['name']]
     t = TONGUES[u['tongue']]
-    word = CALQUE_WORDS.get(u['tongue'], {}).get(key) or t['mods'].get(key)
-    if not word:
+    if key not in CALQUE_WORDS.get(u['tongue'], {}) and key not in t['mods']:
         return None
     head = u.get('name_head') or 'land'
-    mods = dict(t['mods'])
-    mods[key] = word
-    saved, t['mods'] = t['mods'], mods
-    try:
-        name = compose(u['tongue'], head, key)
-    finally:
-        t['mods'] = saved
+    name = compose(u['tongue'], head, key)
     if name in used:
         return None
     return name, f"{key} {head}, after {f['name']}, the {gloss}"

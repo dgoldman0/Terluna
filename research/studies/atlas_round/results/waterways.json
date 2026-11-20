@@ -7,9 +7,9 @@
  },
  "inputs": {
   "research/studies/atlas_round/results/design_routing.json": "20da2992db6eea01ae25314c183e880ef39bca38b89597bc3e7d358aca803f85",
-  "research/studies/atlas_round/results/districts.json": "00b41e59954564a3f17aa5de30e8645925ed76401711b742b5298fdcb6258613",
+  "research/studies/atlas_round/results/districts.json": "be7ceb72e1df7d186a9ee22920aebb65be258d7b6f845e76aeadddeac637b340",
   "research/studies/atlas_round/results/falls.json": "a7ecd8bfdfd45d9c7a33a324df24320dde3dc196d12600cb87c19c3afe3aa4eb",
-  "research/studies/atlas_round/place_names.json": "ca418ceb618df42e49d06ce16a307988e7a0a2a0774baa620bf9bb92280e4983",
+  "research/studies/atlas_round/place_names.json": "6310b57648748aec6264c94cb8ed61d5d52ccc3d83e0246d9624075da607304d",
   "research/studies/atlas_round/results/sustained_rivers.json": "34f45d11871d7ef89349d7d2b4c69c1e680f994ec83403214299faf56e94932d"
  },
  "year_by_year": "research/studies/atlas_round/results/sustained_rivers.json",
@@ -52,7 +52,7 @@
    },
    "ends_in": "Uamoana",
    "ends_in_anchor": "sea:near-side sea",
-   "fed_by": "the overflow of Dagat na Katzeh",
+   "fed_by": "the overflow of Dagat na Kaseh",
    "works": false,
    "length_km": 1098,
    "lake_km": 1013,
@@ -73,7 +73,7 @@
      "share": 0.6
     },
     {
-     "name": "Jeljaylau",
+     "name": "Yelyailau",
      "anchor": "region:feature:Lacus Temporis",
      "tongue": "dala",
      "share": 0.4
@@ -187,9 +187,9 @@
      173.84
     ]
    },
-   "ends_in": "H'Jamo Melaĥa",
+   "ends_in": "H'Yamo Melaha",
    "ends_in_anchor": "sea:South Pole–Aitken Sea",
-   "fed_by": "the overflow of Hanaqucha over its natural pass",
+   "fed_by": "the overflow of Hanakosa over its natural pass",
    "works": false,
    "length_km": 442,
    "lake_km": 312,
@@ -204,7 +204,7 @@
    "steep_gw": 126.2,
    "regions": [
     {
-     "name": "Paqarinwayqu",
+     "name": "Pakarinwaiko",
      "anchor": "region:lake:-19.2,161.9",
      "tongue": "runa",
      "share": 1.0
@@ -326,7 +326,7 @@
      -156.21
     ]
    },
-   "ends_in": "Hanaqucha",
+   "ends_in": "Hanakosa",
    "ends_in_anchor": "sea:Mare Moscoviense",
    "fed_by": "headwaters",
    "works": false,
@@ -343,7 +343,7 @@
    "steep_gw": 91.0,
    "regions": [
     {
-     "name": "Paraurqu",
+     "name": "Paraorko",
      "anchor": "region:lake:-9.1,-177.1",
      "tongue": "runa",
      "share": 1.0
@@ -539,7 +539,7 @@
    },
    "ends_in": "Uamoana",
    "ends_in_anchor": "sea:near-side sea",
-   "fed_by": "the overflow of Bahari Mashariki",
+   "fed_by": "the overflow of Bahari Masariki",
    "works": false,
    "length_km": 1288,
    "lake_km": 1033,
@@ -554,19 +554,19 @@
    "steep_gw": 20.4,
    "regions": [
     {
-     "name": "Msitu Kijani",
+     "name": "Musitu Kiyani",
      "anchor": "region:ground:30.4,-115.8@22,-100",
      "tongue": "pwani",
      "share": 0.38
     },
     {
-     "name": "Msitu Dunia",
+     "name": "Musitu Dunia",
      "anchor": "region:crater:Lamarck",
      "tongue": "pwani",
      "share": 0.34
     },
     {
-     "name": "Maziwa Mvua",
+     "name": "Masiwa Imvua",
      "anchor": "region:ground:30.4,-115.8@14,-115",
      "tongue": "pwani",
      "share": 0.28
@@ -758,9 +758,9 @@
      -90.354
     ]
    ],
-   "name": "Mto Kijani",
+   "name": "Muto Kiyani",
    "tongue": "Pwani (Swahili-rooted)",
-   "meaning": "Green River (mto river + kijani green), a sea's overflow through green country"
+   "meaning": "Green River (muto river + kiyani green), a sea's overflow through green country"
   },
   {
    "anchor": "river:-13.4,253.1",
@@ -784,7 +784,7 @@
      -153.3
     ]
    },
-   "ends_in": "Bahari Mashariki",
+   "ends_in": "Bahari Masariki",
    "ends_in_anchor": "sea:Mare Orientale",
    "fed_by": "headwaters",
    "works": false,
@@ -801,19 +801,19 @@
    "steep_gw": 52.4,
    "regions": [
     {
-     "name": "Gubat na Geshem",
+     "name": "Gubat na Gesem",
      "anchor": "region:lake:0.8,-128.7@2,-120",
      "tongue": "tagalhebrew",
      "share": 0.76
     },
     {
-     "name": "Maziwa Mvua",
+     "name": "Masiwa Imvua",
      "anchor": "region:ground:30.4,-115.8@14,-115",
      "tongue": "pwani",
      "share": 0.12
     },
     {
-     "name": "Paraurqu",
+     "name": "Paraorko",
      "anchor": "region:lake:-9.1,-177.1",
      "tongue": "runa",
      "share": 0.11
@@ -1169,9 +1169,9 @@
      125.58
     ]
    },
-   "ends_in": "Dagat na Katzeh",
+   "ends_in": "Dagat na Kaseh",
    "ends_in_anchor": "sea:Smythii–Marginis Sea",
-   "fed_by": "a branch the works cut from Hanaqucha",
+   "fed_by": "a branch the works cut from Hanakosa",
    "works": true,
    "length_km": 1282,
    "lake_km": 1090,
@@ -1390,7 +1390,7 @@
      138.92
     ]
    },
-   "ends_in": "Dagat na Katzeh",
+   "ends_in": "Dagat na Kaseh",
    "ends_in_anchor": "sea:Smythii–Marginis Sea",
    "fed_by": "headwaters",
    "works": false,
@@ -1419,7 +1419,7 @@
      "share": 0.37
     },
     {
-     "name": "Puyuquchakuna",
+     "name": "Puyukosakuna",
      "anchor": "region:lake:-22.7,135.5",
      "tongue": "runa",
      "share": 0.23
@@ -1695,9 +1695,9 @@
      138.923
     ]
    ],
-   "name": "Fukagawa",
+   "name": "Hukagawa",
    "tongue": "Satogo (Japanese-rooted)",
-   "meaning": "Deep River (fuka deep + kawa river), broad and calm through its long lakes"
+   "meaning": "Deep River (huka deep + kawa river), broad and calm through its long lakes"
   },
   {
    "anchor": "river:-23.0,192.3",
@@ -1721,7 +1721,7 @@
      -150.85
     ]
    },
-   "ends_in": "H'Jamo Melaĥa",
+   "ends_in": "H'Yamo Melaha",
    "ends_in_anchor": "sea:South Pole–Aitken Sea",
    "fed_by": "headwaters",
    "works": false,
@@ -1738,19 +1738,19 @@
    "steep_gw": 67.3,
    "regions": [
     {
-     "name": "Pukutayllaqta",
+     "name": "Pukutailakta",
      "anchor": "region:lake:-19.2,-163.1",
      "tongue": "runa",
      "share": 0.57
     },
     {
-     "name": "Gubat na Geshem",
+     "name": "Gubat na Gesem",
      "anchor": "region:lake:0.8,-128.7@2,-120",
      "tongue": "tagalhebrew",
      "share": 0.34
     },
     {
-     "name": "Paraurqu",
+     "name": "Paraorko",
      "anchor": "region:lake:-9.1,-177.1",
      "tongue": "runa",
      "share": 0.09
@@ -2050,9 +2050,9 @@
      -150.846
     ]
    ],
-   "name": "Pukutaymayu",
+   "name": "Pukutaimayu",
    "tongue": "Runa (Quechua-rooted)",
-   "meaning": "Mist River (pukutay mist + mayu river), down from the Moon's highest ground"
+   "meaning": "Mist River (pukutai mist + mayu river), down from the Moon's highest ground"
   },
   {
    "anchor": "river:12.3,346.0",
@@ -2529,7 +2529,7 @@
      -158.07
     ]
    },
-   "ends_in": "Hanaqucha",
+   "ends_in": "Hanakosa",
    "ends_in_anchor": "sea:Mare Moscoviense",
    "fed_by": "headwaters",
    "works": false,
@@ -2552,7 +2552,7 @@
      "share": 0.52
     },
     {
-     "name": "Paraurqu",
+     "name": "Paraorko",
      "anchor": "region:lake:-9.1,-177.1",
      "tongue": "runa",
      "share": 0.48
@@ -2662,9 +2662,9 @@
      132.11
     ]
    },
-   "ends_in": "Juldyztengiz",
+   "ends_in": "Yuldustengis",
    "ends_in_anchor": "sea:Mare Humboldtianum",
-   "fed_by": "a branch the works cut from Hanaqucha",
+   "fed_by": "a branch the works cut from Hanakosa",
    "works": true,
    "length_km": 1101,
    "lake_km": 863,
@@ -2679,7 +2679,7 @@
    "steep_gw": 15.8,
    "regions": [
     {
-     "name": "Tamazirt Raml",
+     "name": "Tamasirit Ramal",
      "anchor": "region:ground:50.1,107.8",
      "tongue": "sahran",
      "share": 0.82
@@ -2911,7 +2911,7 @@
      -132.54
     ]
    },
-   "ends_in": "H'Jamo Melaĥa",
+   "ends_in": "H'Yamo Melaha",
    "ends_in_anchor": "sea:South Pole–Aitken Sea",
    "fed_by": "headwaters",
    "works": false,
@@ -2928,25 +2928,25 @@
    "steep_gw": 15.9,
    "regions": [
     {
-     "name": "Mto Usiku",
+     "name": "Muto Usiku",
      "anchor": "region:lake:-33.3,-124.3@-36,-123",
      "tongue": "pwani",
      "share": 0.51
     },
     {
-     "name": "Pukutayllaqta",
+     "name": "Pukutailakta",
      "anchor": "region:lake:-19.2,-163.1",
      "tongue": "runa",
      "share": 0.24
     },
     {
-     "name": "H'Erco Zahava",
+     "name": "H'Erso Sahava",
      "anchor": "region:ground:-54.9,-88.9",
      "tongue": "olivolingvo",
      "share": 0.21
     },
     {
-     "name": "Gubat na Geshem",
+     "name": "Gubat na Gesem",
      "anchor": "region:lake:0.8,-128.7@2,-120",
      "tongue": "tagalhebrew",
      "share": 0.04
@@ -3250,9 +3250,9 @@
      -132.538
     ]
    ],
-   "name": "Mto Jiwe",
+   "name": "Muto Yiwe",
    "tongue": "Pwani (Swahili-rooted)",
-   "meaning": "Stone River (mto river + jiwe stone)"
+   "meaning": "Stone River (muto river + yiwe stone)"
   },
   {
    "anchor": "river:16.8,13.5",
@@ -3641,7 +3641,7 @@
      -167.57
     ]
    },
-   "ends_in": "Hanaqucha",
+   "ends_in": "Hanakosa",
    "ends_in_anchor": "sea:Mare Moscoviense",
    "fed_by": "headwaters",
    "works": false,
@@ -3658,7 +3658,7 @@
    "steep_gw": 0.0,
    "regions": [
     {
-     "name": "Paraurqu",
+     "name": "Paraorko",
      "anchor": "region:lake:-9.1,-177.1",
      "tongue": "runa",
      "share": 1.0
@@ -3762,9 +3762,9 @@
      -167.574
     ]
    ],
-   "name": "Wayramayu",
+   "name": "Wairamayu",
    "tongue": "Runa (Quechua-rooted)",
-   "meaning": "Wind River (wayra wind + mayu river)"
+   "meaning": "Wind River (waira wind + mayu river)"
   },
   {
    "anchor": "river:3.3,156.4",
@@ -3788,7 +3788,7 @@
      136.08
     ]
    },
-   "ends_in": "Hanaqucha",
+   "ends_in": "Hanakosa",
    "ends_in_anchor": "sea:Mare Moscoviense",
    "fed_by": "headwaters",
    "works": false,
@@ -3805,7 +3805,7 @@
    "steep_gw": 0.0,
    "regions": [
     {
-     "name": "Puyuquchakuna",
+     "name": "Puyukosakuna",
      "anchor": "region:lake:-22.7,135.5",
      "tongue": "runa",
      "share": 1.0
@@ -3994,13 +3994,13 @@
      "share": 0.46
     },
     {
-     "name": "H'Montetim Ŝemeŝa",
+     "name": "H'Montetim Semesa",
      "anchor": "region:lake:-40.0,132.2@-46,132",
      "tongue": "olivolingvo",
      "share": 0.32
     },
     {
-     "name": "Vilima Alfajiri",
+     "name": "Vilima Alfayiri",
      "anchor": "region:lake:-12.6,90.0",
      "tongue": "pwani",
      "share": 0.22
@@ -4163,19 +4163,19 @@
    "steep_gw": 0.0,
    "regions": [
     {
-     "name": "H'Montetim Ŝemeŝa",
+     "name": "H'Montetim Semesa",
      "anchor": "region:lake:-40.0,132.2@-46,132",
      "tongue": "olivolingvo",
      "share": 0.47
     },
     {
-     "name": "Puyuquchakuna",
+     "name": "Puyukosakuna",
      "anchor": "region:lake:-22.7,135.5",
      "tongue": "runa",
      "share": 0.42
     },
     {
-     "name": "Vilima Alfajiri",
+     "name": "Vilima Alfayiri",
      "anchor": "region:lake:-12.6,90.0",
      "tongue": "pwani",
      "share": 0.12
@@ -4357,7 +4357,7 @@
      135.51
     ]
    },
-   "ends_in": "Hanaqucha",
+   "ends_in": "Hanakosa",
    "ends_in_anchor": "sea:Mare Moscoviense",
    "fed_by": "headwaters",
    "works": false,
@@ -4374,7 +4374,7 @@
    "steep_gw": 0.0,
    "regions": [
     {
-     "name": "Puyuquchakuna",
+     "name": "Puyukosakuna",
      "anchor": "region:lake:-22.7,135.5",
      "tongue": "runa",
      "share": 1.0
@@ -4414,9 +4414,9 @@
      135.511
     ]
    ],
-   "name": "Quyllurmayu",
+   "name": "Koilurmayu",
    "tongue": "Runa (Quechua-rooted)",
-   "meaning": "Star River (quyllur star + mayu river), under the far side's dark nights"
+   "meaning": "Star River (koilur star + mayu river), under the far side's dark nights"
   },
   {
    "anchor": "river:-34.8,113.9",
@@ -4457,7 +4457,7 @@
    "steep_gw": 0.0,
    "regions": [
     {
-     "name": "H'Montetim Ŝemeŝa",
+     "name": "H'Montetim Semesa",
      "anchor": "region:lake:-40.0,132.2@-46,132",
      "tongue": "olivolingvo",
      "share": 0.55
@@ -5180,7 +5180,7 @@
      "share": 0.74
     },
     {
-     "name": "H'Kresto Aduma",
+     "name": "H'Keresto Aduma",
      "anchor": "region:lake:67.2,172.4",
      "tongue": "olivolingvo",
      "share": 0.24
@@ -5415,5 +5415,5 @@
    "meaning": "the Old River (h' the + naharo river + atika old), a river the land made itself"
   }
  ],
- "seconds": 2
+ "seconds": 5
 }

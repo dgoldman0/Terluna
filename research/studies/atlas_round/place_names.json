@@ -8,34 +8,34 @@
    "meaning": "Rain Sea (ua rain + moana sea), after Mare Imbrium, the Sea of Showers, its largest basin"
   },
   "sea:southern near-side seas": {
-   "name": "Bultengiz",
+   "name": "Bultengis",
    "tongue": "dala",
-   "meaning": "Cloud Sea (bult cloud + tengiz sea), after Mare Nubium, the Sea of Clouds"
+   "meaning": "Cloud Sea (bulut cloud + tengis sea), after Mare Nubium, the Sea of Clouds"
   },
   "sea:South Pole–Aitken Sea": {
-   "name": "H'Jamo Melaĥa",
+   "name": "H'Yamo Melaha",
    "tongue": "olivolingvo",
-   "meaning": "the Salt Sea (h' the + jamo sea + melaĥa salt); in its Hebrew roots also the Dead Sea's name"
+   "meaning": "the Salt Sea (h' the + yamo sea + melaha salt); in its Hebrew roots also the Dead Sea's name"
   },
   "sea:Mare Humboldtianum": {
-   "name": "Juldyztengiz",
+   "name": "Yuldustengis",
    "tongue": "dala",
-   "meaning": "Star Sea (juldyz star + tengiz sea), towards the northern limb"
+   "meaning": "Star Sea (yuldus star + tengis sea), towards the northern limb"
   },
   "sea:Mare Moscoviense": {
-   "name": "Hanaqucha",
+   "name": "Hanakosa",
    "tongue": "runa",
-   "meaning": "Upper Lake (hanaq upper + qucha lake), 3.4 km above the common level"
+   "meaning": "Upper Lake (hanak upper + kosa lake), 3.4 km above the common level"
   },
   "sea:Mare Orientale": {
-   "name": "Bahari Mashariki",
+   "name": "Bahari Masariki",
    "tongue": "pwani",
-   "meaning": "East Sea (bahari sea + mashariki east), after Mare Orientale, the Eastern Sea"
+   "meaning": "East Sea (bahari sea + masariki east), after Mare Orientale, the Eastern Sea"
   },
   "sea:Smythii–Marginis Sea": {
-   "name": "Dagat na Katzeh",
+   "name": "Dagat na Kaseh",
    "tongue": "tagalhebrew",
-   "meaning": "Sea of the Edge (dagat sea + na + katzeh edge), after Mare Marginis"
+   "meaning": "Sea of the Edge (dagat sea + na + kaseh edge), after Mare Marginis"
   },
   "feature:Sinus Iridum": {
    "name": "Anuanuafanga",
@@ -66,14 +66,14 @@
    "meaning": "Rain River (para rain + mayu river), the rain mountains' river"
   },
   "river:21.3,105.0": {
-   "name": "Fukagawa",
+   "name": "Hukagawa",
    "tongue": "satoyama",
-   "meaning": "Deep River (fuka deep + kawa river), broad and calm through its long lakes"
+   "meaning": "Deep River (huka deep + kawa river), broad and calm through its long lakes"
   },
   "river:15.0,287.7": {
-   "name": "Mto Kijani",
+   "name": "Muto Kiyani",
    "tongue": "pwani",
-   "meaning": "Green River (mto river + kijani green), a sea's overflow through green country"
+   "meaning": "Green River (muto river + kiyani green), a sea's overflow through green country"
   },
   "river:-13.4,253.1": {
    "name": "Ilog na Gavoah",
@@ -81,9 +81,9 @@
    "meaning": "High River (ilog river + na + gavoah high), from the highest country"
   },
   "river:-23.0,192.3": {
-   "name": "Pukutaymayu",
+   "name": "Pukutaimayu",
    "tongue": "runa",
-   "meaning": "Mist River (pukutay mist + mayu river), down from the Moon's highest ground"
+   "meaning": "Mist River (pukutai mist + mayu river), down from the Moon's highest ground"
   },
   "river:25.8,103.0": {
    "name": "Niigawa",
@@ -96,14 +96,14 @@
    "meaning": "Falls River (rere falls + awa river), for its one great fall"
   },
   "river:3.6,302.2": {
-   "name": "Jarykgol",
+   "name": "Yarikgol",
    "tongue": "dala",
-   "meaning": "Light River (jaryk light + gol river), a sea's spill over its neck, under a high Earth"
+   "meaning": "Light River (yarik light + gol river), a sea's spill over its neck, under a high Earth"
   },
   "river:-45.1,230.0": {
-   "name": "Mto Jiwe",
+   "name": "Muto Yiwe",
    "tongue": "pwani",
-   "meaning": "Stone River (mto river + jiwe stone)"
+   "meaning": "Stone River (muto river + yiwe stone)"
   },
   "river:57.1,111.8": {
    "name": "Asif Dahab",
@@ -116,9 +116,9 @@
    "meaning": "Flower River (tiare flower + awa river)"
   },
   "river:18.1,184.8": {
-   "name": "Wayramayu",
+   "name": "Wairamayu",
    "tongue": "runa",
-   "meaning": "Wind River (wayra wind + mayu river)"
+   "meaning": "Wind River (waira wind + mayu river)"
   },
   "river:3.3,156.4": {
    "name": "Puyumayu",
@@ -126,19 +126,19 @@
    "meaning": "Cloud River (puyu cloud + mayu river), the cloud lakes' river"
   },
   "river:8.8,146.9": {
-   "name": "Quyllurmayu",
+   "name": "Koilurmayu",
    "tongue": "runa",
-   "meaning": "Star River (quyllur star + mayu river), under the far side's dark nights"
+   "meaning": "Star River (koilur star + mayu river), under the far side's dark nights"
   },
   "river:1.4,302.5": {
-   "name": "Mto Jani",
+   "name": "Muto Yani",
    "tongue": "pwani",
-   "meaning": "Leaf River (mto river + jani leaf)"
+   "meaning": "Leaf River (muto river + yani leaf)"
   },
   "river:-14.1,311.5": {
-   "name": "Mto Pacha",
+   "name": "Muto Pasa",
    "tongue": "pwani",
-   "meaning": "Twin River (mto river + pacha twin), beside the Leaf River"
+   "meaning": "Twin River (muto river + pasa twin), beside the Leaf River"
   },
   "river:-50.2,131.6": {
    "name": "H'Naharo Longa",

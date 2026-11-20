@@ -2,12 +2,12 @@
  "schema": "terluna.research.atlas-round-lunar-sounds/1",
  "producer": "research.studies.atlas_round.lunar_sounds",
  "inputs": {
-  "research/studies/atlas_round/district_names.py": "d7a5a2e425ad6a519a763730cfa4b7a12cb4a219c3803adaf3eb13cb5451cf5c",
-  "research/studies/atlas_round/place_names.json": "ca418ceb618df42e49d06ce16a307988e7a0a2a0774baa620bf9bb92280e4983",
-  "research/studies/atlas_round/results/districts.json": "00b41e59954564a3f17aa5de30e8645925ed76401711b742b5298fdcb6258613"
+  "research/studies/atlas_round/district_names.py": "2d31e0809faf8987e024352cbf73cb15529971bc6330c57f3213c0048ec709fd",
+  "research/studies/atlas_round/place_names.json": "6310b57648748aec6264c94cb8ed61d5d52ccc3d83e0246d9624075da607304d",
+  "research/studies/atlas_round/results/districts.json": "a1af875ae561768b859db55318f3e6f1d4de33a817bfa49ebf0a58330f6a7537"
  },
- "evidence": "A rule sheet and its results, nothing in it validated: the framework is the sound section of the author's Terlunan reference (v0.6, section 2, outside the repository); each parent language's rules are choices made on 20 November 2026; the parent words are written from general knowledge of Kazakh, Kyrgyz, Mongolian, Quechua, Arabic, Tamazight, Swahili, Tagalog, Hebrew, Japanese and Esperanto, and no dictionary or speaker has checked them. No name is changed by this record: district_names.py and place_names.json stand as they are.",
- "reading_rule": "tongues gives, for every word of district_names.py's lexicons, its key, its role (head, modifier, or the word for an old name's meaning), the draft's spelling, the parent form it passes from (a code for the parent's rule sheet, a colon and the word in the parent's letters or the draft's), the form names are fused from (read), the word standing alone (passed), its syllables with the stressed one in capitals (said) and any fault against the framework; changed counts the words whose spelling moves, fallen_together lists pairs the draft kept apart and the pass makes one. pins gives every name in place_names.json with its passed form. record gives how many of the draft record's generated names the pass would change.",
+ "evidence": "A rule sheet and its results, nothing in it validated: the framework is the sound section of the author's Terlunan reference (v0.6, section 2, outside the repository); each parent language's rules are choices made on 20 November 2026; the parent words are written from general knowledge of Kazakh, Kyrgyz, Mongolian, Quechua, Arabic, Tamazight, Swahili, Tagalog, Hebrew, Japanese and Esperanto, and no dictionary or speaker has checked them.",
+ "reading_rule": "tongues gives every word of district_names.py's lexicons: its key, its role (head, modifier, or the word for an old name's meaning), its parent form (a code for the parent's rule sheet, a colon and the word as the parent language spells it), the form names are fused from (read), the word standing alone (passed), its syllables with the stressed one in capitals (said) and any fault against the framework; fallen_together lists pairs of different parent words with one passed form; joined_names_at_fault counts the tongue's head-and-modifier names that break the framework. pins gives every name in place_names.json with the name its tongue's words make from its head and modifier, and whether the two agree (stands). record counts the draft record's generated names and those the words make today.",
  "framework": {
   "vowels": [
    "a",
@@ -47,7 +47,8 @@
    "v"
   ],
   "syllable": "(C)V(C)",
-  "stress": "the syllable before the last, or the rightmost long vowel"
+  "stress": "the syllable before the last, or the rightmost long vowel",
+  "article": "h', said ha"
  },
  "rule_sheets": {
   "kk": "Kazakh and Kyrgyz in their own letters. Kept: ng, final consonants, the rounding harmony. Changed: the uvular\nstop and fricative to k and g; sh and z to s; the j of жылан to y, the sound it answers to across the Turkic\nlanguages; front rounded ö and ü to o and u.",
@@ -56,9 +57,9 @@
   "ar": "Arabic and Tamazight in Latin letters, with ʿ and ʾ where the parent has them. Kept: the two throat stops as\nthe framework's glottal stop; f. Changed: the emphatics to their plain partners and q to k, as the reference does\nwith its Akkadian words; kh and the deep h to h; gh to g; sh, z and th to s, s and t; j to g, as Cairo says it;\nlong vowels to short.",
   "sw": "Swahili in its standard spelling; m° marks the syllabic m of the tree-and-river class. Kept: its five vowels,\nwhich are the framework's; f and v; ng as the framework's ng. Changed: sh, ch and z to s; j to y; a syllabic nasal\ngets back the vowel it lost, mu- in the tree-and-river class (mto, muto) and i- before the nasal elsewhere, as\nits sister languages have it (mvua, imvua); a consonant and a glide that open a word get a vowel between.",
   "tl": "Tagalog in its standard spelling, with its glottal stop written where it stands between vowels. Tagalog's\nsounds are the framework's own.",
-  "he": "Hebrew in Latin letters. Kept: f and v. Changed: sh, ts and z to s; kh and the deep h to h; q to k.",
+  "he": "Hebrew in Latin letters. Kept: f and v. Changed: sh, ts and z to s; kh and the deep h to h; q to k. A cluster\nopens with e, the vowel Hebrew itself puts there (zman, seman).",
   "ja": "Japanese in the Hepburn spelling. Kept: its five vowels and long vowels. Changed to the spelling that follows\nits own sound system: shi, chi, tsu, fu are si, ti, tu, hu; z and j are s; a consonant and y before a vowel get\nan i between (kyo, kiyo).",
-  "eo": "The author's Esperanto-based tongue in its own spelling. Kept: f and v. Changed: j, its y sound, is written y;\nthe hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s.",
+  "eo": "The author's Esperanto-based tongue in its own spelling. Kept: f and v. Changed: j, its y sound, is written y;\nthe hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s. Its clusters open as its other parent, Hebrew, opens\nthem, with e (kratero, keratero).",
   "te": "Terlunan's words are the framework's own; a coined word still in its Māori spelling takes f for wh, as the\nreference's fanga does.",
   "la": "A name from elsewhere in Latin letters with its sounds marked (zh, sh, ch, ts, z, j, q, long vowels)."
  },
@@ -69,7 +70,6 @@
     {
      "key": "bowl",
      "role": "head",
-     "draft": "poka",
      "parent": "te:poka",
      "read": "poka",
      "passed": "poka",
@@ -79,7 +79,6 @@
     {
      "key": "basin",
      "role": "head",
-     "draft": "galpoka",
      "parent": "te:galpoka",
      "read": "galpoka",
      "passed": "galpoka",
@@ -89,7 +88,6 @@
     {
      "key": "lake",
      "role": "head",
-     "draft": "loko",
      "parent": "te:loko",
      "read": "loko",
      "passed": "loko",
@@ -99,7 +97,6 @@
     {
      "key": "lakes",
      "role": "head",
-     "draft": "siyenloko",
      "parent": "te:siyenloko",
      "read": "siyenloko",
      "passed": "siyenloko",
@@ -109,7 +106,6 @@
     {
      "key": "river",
      "role": "head",
-     "draft": "awa",
      "parent": "te:awa",
      "read": "awa",
      "passed": "awa",
@@ -119,7 +115,6 @@
     {
      "key": "valley",
      "role": "head",
-     "draft": "awaawa",
      "parent": "te:awaawa",
      "read": "awaawa",
      "passed": "awaawa",
@@ -129,7 +124,6 @@
     {
      "key": "plain",
      "role": "head",
-     "draft": "mania",
      "parent": "te:mania",
      "read": "mania",
      "passed": "mania",
@@ -139,7 +133,6 @@
     {
      "key": "hills",
      "role": "head",
-     "draft": "puke",
      "parent": "te:puke",
      "read": "puke",
      "passed": "puke",
@@ -149,7 +142,6 @@
     {
      "key": "mountains",
      "role": "head",
-     "draft": "kur",
      "parent": "te:kur",
      "read": "kur",
      "passed": "kur",
@@ -159,7 +151,6 @@
     {
      "key": "ridge",
      "role": "head",
-     "draft": "hiwi",
      "parent": "te:hiwi",
      "read": "hiwi",
      "passed": "hiwi",
@@ -169,7 +160,6 @@
     {
      "key": "cliff",
      "role": "head",
-     "draft": "pari",
      "parent": "te:pari",
      "read": "pari",
      "passed": "pari",
@@ -179,7 +169,6 @@
     {
      "key": "island",
      "role": "head",
-     "draft": "motu",
      "parent": "te:motu",
      "read": "motu",
      "passed": "motu",
@@ -189,7 +178,6 @@
     {
      "key": "bay",
      "role": "head",
-     "draft": "fanga",
      "parent": "te:fanga",
      "read": "fanga",
      "passed": "fanga",
@@ -199,7 +187,6 @@
     {
      "key": "coast",
      "role": "head",
-     "draft": "tahatai",
      "parent": "te:tahatai",
      "read": "tahatai",
      "passed": "tahatai",
@@ -209,7 +196,6 @@
     {
      "key": "strait",
      "role": "head",
-     "draft": "koawa",
      "parent": "te:koawa",
      "read": "koawa",
      "passed": "koawa",
@@ -219,7 +205,6 @@
     {
      "key": "sea",
      "role": "head",
-     "draft": "moana",
      "parent": "te:moana",
      "read": "moana",
      "passed": "moana",
@@ -229,7 +214,6 @@
     {
      "key": "forest",
      "role": "head",
-     "draft": "lim",
      "parent": "te:lim",
      "read": "lim",
      "passed": "lim",
@@ -239,7 +223,6 @@
     {
      "key": "desert",
      "role": "head",
-     "draft": "puehu",
      "parent": "te:puehu",
      "read": "puehu",
      "passed": "puehu",
@@ -249,7 +232,6 @@
     {
      "key": "field",
      "role": "head",
-     "draft": "matie",
      "parent": "te:matie",
      "read": "matie",
      "passed": "matie",
@@ -259,7 +241,6 @@
     {
      "key": "land",
      "role": "head",
-     "draft": "fenua",
      "parent": "te:fenua",
      "read": "fenua",
      "passed": "fenua",
@@ -269,7 +250,6 @@
     {
      "key": "falls",
      "role": "head",
-     "draft": "rere",
      "parent": "te:rere",
      "read": "rere",
      "passed": "rere",
@@ -279,7 +259,6 @@
     {
      "key": "spring",
      "role": "head",
-     "draft": "puna",
      "parent": "te:puna",
      "read": "puna",
      "passed": "puna",
@@ -289,7 +268,6 @@
     {
      "key": "black",
      "role": "modifier",
-     "draft": "pooiri",
      "parent": "te:pooiri",
      "read": "pooiri",
      "passed": "pooiri",
@@ -299,7 +277,6 @@
     {
      "key": "white",
      "role": "modifier",
-     "draft": "'uo'uo",
      "parent": "te:'uo'uo",
      "read": "'uo'uo",
      "passed": "'uo'uo",
@@ -309,7 +286,6 @@
     {
      "key": "red",
      "role": "modifier",
-     "draft": "'ute'ute",
      "parent": "te:'ute'ute",
      "read": "'ute'ute",
      "passed": "'ute'ute",
@@ -319,7 +295,6 @@
     {
      "key": "green",
      "role": "modifier",
-     "draft": "liyukset",
      "parent": "te:liyukset",
      "read": "liyukset",
      "passed": "liyukset",
@@ -329,7 +304,6 @@
     {
      "key": "gold",
      "role": "modifier",
-     "draft": "kim",
      "parent": "te:kim",
      "read": "kim",
      "passed": "kim",
@@ -339,7 +313,6 @@
     {
      "key": "blue",
      "role": "modifier",
-     "draft": "ninamu",
      "parent": "te:ninamu",
      "read": "ninamu",
      "passed": "ninamu",
@@ -349,7 +322,6 @@
     {
      "key": "great",
      "role": "modifier",
-     "draft": "gal",
      "parent": "te:gal",
      "read": "gal",
      "passed": "gal",
@@ -359,7 +331,6 @@
     {
      "key": "small",
      "role": "modifier",
-     "draft": "iti",
      "parent": "te:iti",
      "read": "iti",
      "passed": "iti",
@@ -369,7 +340,6 @@
     {
      "key": "high",
      "role": "modifier",
-     "draft": "teitei",
      "parent": "te:teitei",
      "read": "teitei",
      "passed": "teitei",
@@ -379,7 +349,6 @@
     {
      "key": "deep",
      "role": "modifier",
-     "draft": "hohonu",
      "parent": "te:hohonu",
      "read": "hohonu",
      "passed": "hohonu",
@@ -389,7 +358,6 @@
     {
      "key": "long",
      "role": "modifier",
-     "draft": "roa",
      "parent": "te:roa",
      "read": "roa",
      "passed": "roa",
@@ -399,7 +367,6 @@
     {
      "key": "old",
      "role": "modifier",
-     "draft": "ul",
      "parent": "te:ul",
      "read": "ul",
      "passed": "ul",
@@ -409,7 +376,6 @@
     {
      "key": "new",
      "role": "modifier",
-     "draft": "gibil",
      "parent": "te:gibil",
      "read": "gibil",
      "passed": "gibil",
@@ -419,7 +385,6 @@
     {
      "key": "dry",
      "role": "modifier",
-     "draft": "maroke",
      "parent": "te:maroke",
      "read": "maroke",
      "passed": "maroke",
@@ -429,7 +394,6 @@
     {
      "key": "wet",
      "role": "modifier",
-     "draft": "maaku",
      "parent": "te:maaku",
      "read": "maaku",
      "passed": "maaku",
@@ -439,7 +403,6 @@
     {
      "key": "warm",
      "role": "modifier",
-     "draft": "mehana",
      "parent": "te:mehana",
      "read": "mehana",
      "passed": "mehana",
@@ -449,7 +412,6 @@
     {
      "key": "cold",
      "role": "modifier",
-     "draft": "maatao",
      "parent": "te:maatao",
      "read": "maatao",
      "passed": "maatao",
@@ -459,7 +421,6 @@
     {
      "key": "light",
      "role": "modifier",
-     "draft": "nuru",
      "parent": "te:nuru",
      "read": "nuru",
      "passed": "nuru",
@@ -469,7 +430,6 @@
     {
      "key": "dawn",
      "role": "modifier",
-     "draft": "ata",
      "parent": "te:ata",
      "read": "ata",
      "passed": "ata",
@@ -479,7 +439,6 @@
     {
      "key": "night",
      "role": "modifier",
-     "draft": "musu",
      "parent": "te:musu",
      "read": "musu",
      "passed": "musu",
@@ -489,7 +448,6 @@
     {
      "key": "star",
      "role": "modifier",
-     "draft": "feti'a",
      "parent": "te:feti'a",
      "read": "feti'a",
      "passed": "feti'a",
@@ -499,7 +457,6 @@
     {
      "key": "cloud",
      "role": "modifier",
-     "draft": "dungu",
      "parent": "te:dungu",
      "read": "dungu",
      "passed": "dungu",
@@ -509,7 +466,6 @@
     {
      "key": "mist",
      "role": "modifier",
-     "draft": "kohu",
      "parent": "te:kohu",
      "read": "kohu",
      "passed": "kohu",
@@ -519,7 +475,6 @@
     {
      "key": "rain",
      "role": "modifier",
-     "draft": "ua",
      "parent": "te:ua",
      "read": "ua",
      "passed": "ua",
@@ -529,7 +484,6 @@
     {
      "key": "wind",
      "role": "modifier",
-     "draft": "mata'i",
      "parent": "te:mata'i",
      "read": "mata'i",
      "passed": "mata'i",
@@ -539,7 +493,6 @@
     {
      "key": "sun",
      "role": "modifier",
-     "draft": "raa",
      "parent": "te:raa",
      "read": "raa",
      "passed": "raa",
@@ -549,7 +502,6 @@
     {
      "key": "earth",
      "role": "modifier",
-     "draft": "honua",
      "parent": "te:honua",
      "read": "honua",
      "passed": "honua",
@@ -559,7 +511,6 @@
     {
      "key": "stone",
      "role": "modifier",
-     "draft": "abnu",
      "parent": "te:abnu",
      "read": "abnu",
      "passed": "abnu",
@@ -569,7 +520,6 @@
     {
      "key": "sand",
      "role": "modifier",
-     "draft": "one",
      "parent": "te:one",
      "read": "one",
      "passed": "one",
@@ -579,7 +529,6 @@
     {
      "key": "salt",
      "role": "modifier",
-     "draft": "miti",
      "parent": "te:miti",
      "read": "miti",
      "passed": "miti",
@@ -589,7 +538,6 @@
     {
      "key": "water",
      "role": "modifier",
-     "draft": "tama",
      "parent": "te:tama",
      "read": "tama",
      "passed": "tama",
@@ -599,7 +547,6 @@
     {
      "key": "leaf",
      "role": "modifier",
-     "draft": "rau",
      "parent": "te:rau",
      "read": "rau",
      "passed": "rau",
@@ -609,7 +556,6 @@
     {
      "key": "flower",
      "role": "modifier",
-     "draft": "tiare",
      "parent": "te:tiare",
      "read": "tiare",
      "passed": "tiare",
@@ -619,7 +565,6 @@
     {
      "key": "thousand",
      "role": "modifier",
-     "draft": "siyen",
      "parent": "te:siyen",
      "read": "siyen",
      "passed": "siyen",
@@ -629,7 +574,6 @@
     {
      "key": "twin",
      "role": "modifier",
-     "draft": "liyong",
      "parent": "te:liyong",
      "read": "liyong",
      "passed": "liyong",
@@ -639,7 +583,6 @@
     {
      "key": "storm",
      "role": "meaning",
-     "draft": "vero",
      "parent": "te:vero",
      "read": "vero",
      "passed": "vero",
@@ -649,7 +592,6 @@
     {
      "key": "calm",
      "role": "meaning",
-     "draft": "marino",
      "parent": "te:marino",
      "read": "marino",
      "passed": "marino",
@@ -659,7 +601,6 @@
     {
      "key": "clear",
      "role": "meaning",
-     "draft": "maarama",
      "parent": "te:maarama",
      "read": "maarama",
      "passed": "maarama",
@@ -669,7 +610,6 @@
     {
      "key": "plenty",
      "role": "meaning",
-     "draft": "momona",
      "parent": "te:momona",
      "read": "momona",
      "passed": "momona",
@@ -679,7 +619,6 @@
     {
      "key": "nectar",
      "role": "meaning",
-     "draft": "monamona",
      "parent": "te:monamona",
      "read": "monamona",
      "passed": "monamona",
@@ -689,7 +628,6 @@
     {
      "key": "trial",
      "role": "meaning",
-     "draft": "tamata",
      "parent": "te:tamata",
      "read": "tamata",
      "passed": "tamata",
@@ -699,7 +637,6 @@
     {
      "key": "islands",
      "role": "meaning",
-     "draft": "motu",
      "parent": "te:motu",
      "read": "motu",
      "passed": "motu",
@@ -709,7 +646,6 @@
     {
      "key": "known",
      "role": "meaning",
-     "draft": "'ite",
      "parent": "te:'ite",
      "read": "'ite",
      "passed": "'ite",
@@ -719,7 +655,6 @@
     {
      "key": "south",
      "role": "meaning",
-     "draft": "tonga",
      "parent": "te:tonga",
      "read": "tonga",
      "passed": "tonga",
@@ -729,7 +664,6 @@
     {
      "key": "east",
      "role": "meaning",
-     "draft": "hikina",
      "parent": "te:hikina",
      "read": "hikina",
      "passed": "hikina",
@@ -739,7 +673,6 @@
     {
      "key": "edge",
      "role": "meaning",
-     "draft": "taha",
      "parent": "te:taha",
      "read": "taha",
      "passed": "taha",
@@ -749,7 +682,6 @@
     {
      "key": "wave",
      "role": "meaning",
-     "draft": "'are",
      "parent": "te:'are",
      "read": "'are",
      "passed": "'are",
@@ -759,7 +691,6 @@
     {
      "key": "foam",
      "role": "meaning",
-     "draft": "huka",
      "parent": "te:huka",
      "read": "huka",
      "passed": "huka",
@@ -769,7 +700,6 @@
     {
      "key": "serpent",
      "role": "meaning",
-     "draft": "nakahi",
      "parent": "te:nakahi",
      "read": "nakahi",
      "passed": "nakahi",
@@ -779,7 +709,6 @@
     {
      "key": "dew",
      "role": "meaning",
-     "draft": "tomairangi",
      "parent": "te:tomairangi",
      "read": "tomairangi",
      "passed": "tomairangi",
@@ -789,7 +718,6 @@
     {
      "key": "middle",
      "role": "meaning",
-     "draft": "sung",
      "parent": "te:sung",
      "read": "sung",
      "passed": "sung",
@@ -799,7 +727,6 @@
     {
      "key": "love",
      "role": "meaning",
-     "draft": "here",
      "parent": "te:here",
      "read": "here",
      "passed": "here",
@@ -809,7 +736,6 @@
     {
      "key": "rough",
      "role": "meaning",
-     "draft": "taratara",
      "parent": "te:taratara",
      "read": "taratara",
      "passed": "taratara",
@@ -819,7 +745,6 @@
     {
      "key": "harmony",
      "role": "meaning",
-     "draft": "aumaru",
      "parent": "te:aumaru",
      "read": "aumaru",
      "passed": "aumaru",
@@ -829,7 +754,6 @@
     {
      "key": "faith",
      "role": "meaning",
-     "draft": "whakapono",
      "parent": "te:whakapono",
      "read": "fakapono",
      "passed": "fakapono",
@@ -839,7 +763,6 @@
     {
      "key": "success",
      "role": "meaning",
-     "draft": "angitu",
      "parent": "te:angitu",
      "read": "angitu",
      "passed": "angitu",
@@ -849,7 +772,6 @@
     {
      "key": "dream",
      "role": "meaning",
-     "draft": "mung",
      "parent": "te:mung",
      "read": "mung",
      "passed": "mung",
@@ -859,7 +781,6 @@
     {
      "key": "death",
      "role": "meaning",
-     "draft": "mate",
      "parent": "te:mate",
      "read": "mate",
      "passed": "mate",
@@ -869,7 +790,6 @@
     {
      "key": "time",
      "role": "meaning",
-     "draft": "taime",
      "parent": "te:taime",
      "read": "taime",
      "passed": "taime",
@@ -879,7 +799,6 @@
     {
      "key": "sorrow",
      "role": "meaning",
-     "draft": "oto",
      "parent": "te:oto",
      "read": "oto",
      "passed": "oto",
@@ -889,7 +808,6 @@
     {
      "key": "springtime",
      "role": "meaning",
-     "draft": "koanga",
      "parent": "te:koanga",
      "read": "koanga",
      "passed": "koanga",
@@ -899,7 +817,6 @@
     {
      "key": "autumn",
      "role": "meaning",
-     "draft": "ngahuru",
      "parent": "te:ngahuru",
      "read": "ngahuru",
      "passed": "ngahuru",
@@ -909,7 +826,6 @@
     {
      "key": "summer",
      "role": "meaning",
-     "draft": "raumati",
      "parent": "te:raumati",
      "read": "raumati",
      "passed": "raumati",
@@ -919,7 +835,6 @@
     {
      "key": "winter",
      "role": "meaning",
-     "draft": "hotoke",
      "parent": "te:hotoke",
      "read": "hotoke",
      "passed": "hotoke",
@@ -929,7 +844,6 @@
     {
      "key": "hope",
      "role": "meaning",
-     "draft": "mong",
      "parent": "te:mong",
      "read": "mong",
      "passed": "mong",
@@ -939,7 +853,6 @@
     {
      "key": "gentle",
      "role": "meaning",
-     "draft": "maru",
      "parent": "te:maru",
      "read": "maru",
      "passed": "maru",
@@ -949,7 +862,6 @@
     {
      "key": "good",
      "role": "meaning",
-     "draft": "damku",
      "parent": "te:damku",
      "read": "damku",
      "passed": "damku",
@@ -959,7 +871,6 @@
     {
      "key": "endure",
      "role": "meaning",
-     "draft": "manawanui",
      "parent": "te:manawanui",
      "read": "manawanui",
      "passed": "manawanui",
@@ -969,7 +880,6 @@
     {
      "key": "alone",
      "role": "meaning",
-     "draft": "mokemoke",
      "parent": "te:mokemoke",
      "read": "mokemoke",
      "passed": "mokemoke",
@@ -979,7 +889,6 @@
     {
      "key": "forget",
      "role": "meaning",
-     "draft": "wareware",
      "parent": "te:wareware",
      "read": "wareware",
      "passed": "wareware",
@@ -989,7 +898,6 @@
     {
      "key": "fear",
      "role": "meaning",
-     "draft": "mataku",
      "parent": "te:mataku",
      "read": "mataku",
      "passed": "mataku",
@@ -999,7 +907,6 @@
     {
      "key": "joy",
      "role": "meaning",
-     "draft": "koa",
      "parent": "te:koa",
      "read": "koa",
      "passed": "koa",
@@ -1009,7 +916,6 @@
     {
      "key": "excellent",
      "role": "meaning",
-     "draft": "hiranga",
      "parent": "te:hiranga",
      "read": "hiranga",
      "passed": "hiranga",
@@ -1019,7 +925,6 @@
     {
      "key": "dark",
      "role": "meaning",
-     "draft": "pooiri",
      "parent": "te:pooiri",
      "read": "pooiri",
      "passed": "pooiri",
@@ -1029,7 +934,6 @@
     {
      "key": "sleep",
      "role": "meaning",
-     "draft": "salalu",
      "parent": "te:salalu",
      "read": "salalu",
      "passed": "salalu",
@@ -1039,7 +943,6 @@
     {
      "key": "decay",
      "role": "meaning",
-     "draft": "pirau",
      "parent": "te:pirau",
      "read": "pirau",
      "passed": "pirau",
@@ -1049,7 +952,6 @@
     {
      "key": "plague",
      "role": "meaning",
-     "draft": "mate",
      "parent": "te:mate",
      "read": "mate",
      "passed": "mate",
@@ -1057,10 +959,9 @@
      "faults": []
     }
    ],
-   "changed": 1,
    "faults": 0,
    "fallen_together": [],
-   "from_fuller_parent_forms": 0
+   "joined_names_at_fault": 0
   },
   "olivolingvo": {
    "label": "Proto-Olivolingvo",
@@ -1068,17 +969,15 @@
     {
      "key": "bowl",
      "role": "head",
-     "draft": "kratero",
      "parent": "eo:kratero",
      "read": "kratero",
-     "passed": "karatero",
-     "said": "ka.ra.TE.ro",
+     "passed": "keratero",
+     "said": "ke.ra.TE.ro",
      "faults": []
     },
     {
      "key": "basin",
      "role": "head",
-     "draft": "emeko",
      "parent": "eo:emeko",
      "read": "emeko",
      "passed": "emeko",
@@ -1088,7 +987,6 @@
     {
      "key": "lake",
      "role": "head",
-     "draft": "lago",
      "parent": "eo:lago",
      "read": "lago",
      "passed": "lago",
@@ -1098,7 +996,6 @@
     {
      "key": "lakes",
      "role": "head",
-     "draft": "lagim",
      "parent": "eo:lagim",
      "read": "lagim",
      "passed": "lagim",
@@ -1108,7 +1005,6 @@
     {
      "key": "river",
      "role": "head",
-     "draft": "naharo",
      "parent": "eo:naharo",
      "read": "naharo",
      "passed": "naharo",
@@ -1118,7 +1014,6 @@
     {
      "key": "valley",
      "role": "head",
-     "draft": "valo",
      "parent": "eo:valo",
      "read": "valo",
      "passed": "valo",
@@ -1128,7 +1023,6 @@
     {
      "key": "plain",
      "role": "head",
-     "draft": "ebeno",
      "parent": "eo:ebeno",
      "read": "ebeno",
      "passed": "ebeno",
@@ -1138,7 +1032,6 @@
     {
      "key": "hills",
      "role": "head",
-     "draft": "montetim",
      "parent": "eo:montetim",
      "read": "montetim",
      "passed": "montetim",
@@ -1148,7 +1041,6 @@
     {
      "key": "mountains",
      "role": "head",
-     "draft": "harim",
      "parent": "eo:harim",
      "read": "harim",
      "passed": "harim",
@@ -1158,7 +1050,6 @@
     {
      "key": "ridge",
      "role": "head",
-     "draft": "kresto",
      "parent": "eo:kresto",
      "read": "kresto",
      "passed": "keresto",
@@ -1168,17 +1059,15 @@
     {
      "key": "cliff",
      "role": "head",
-     "draft": "klifo",
      "parent": "eo:klifo",
      "read": "klifo",
-     "passed": "kilifo",
-     "said": "ki.LI.fo",
+     "passed": "kelifo",
+     "said": "ke.LI.fo",
      "faults": []
     },
     {
      "key": "island",
      "role": "head",
-     "draft": "insulo",
      "parent": "eo:insulo",
      "read": "insulo",
      "passed": "insulo",
@@ -1188,7 +1077,6 @@
     {
      "key": "bay",
      "role": "head",
-     "draft": "golfo",
      "parent": "eo:golfo",
      "read": "golfo",
      "passed": "golfo",
@@ -1198,7 +1086,6 @@
     {
      "key": "coast",
      "role": "head",
-     "draft": "bordo",
      "parent": "eo:bordo",
      "read": "bordo",
      "passed": "bordo",
@@ -1208,7 +1095,6 @@
     {
      "key": "strait",
      "role": "head",
-     "draft": "markolo",
      "parent": "eo:markolo",
      "read": "markolo",
      "passed": "markolo",
@@ -1218,7 +1104,6 @@
     {
      "key": "sea",
      "role": "head",
-     "draft": "jamo",
      "parent": "eo:jamo",
      "read": "yamo",
      "passed": "yamo",
@@ -1228,7 +1113,6 @@
     {
      "key": "forest",
      "role": "head",
-     "draft": "jaaro",
      "parent": "eo:jaaro",
      "read": "yaaro",
      "passed": "yaaro",
@@ -1238,7 +1122,6 @@
     {
      "key": "desert",
      "role": "head",
-     "draft": "midbaro",
      "parent": "eo:midbaro",
      "read": "midbaro",
      "passed": "midbaro",
@@ -1248,7 +1131,6 @@
     {
      "key": "field",
      "role": "head",
-     "draft": "kampo",
      "parent": "eo:kampo",
      "read": "kampo",
      "passed": "kampo",
@@ -1258,7 +1140,6 @@
     {
      "key": "land",
      "role": "head",
-     "draft": "erco",
      "parent": "eo:erco",
      "read": "erso",
      "passed": "erso",
@@ -1268,7 +1149,6 @@
     {
      "key": "falls",
      "role": "head",
-     "draft": "akvofalo",
      "parent": "eo:akvofalo",
      "read": "akvofalo",
      "passed": "akvofalo",
@@ -1278,7 +1158,6 @@
     {
      "key": "spring",
      "role": "head",
-     "draft": "eino",
      "parent": "eo:eino",
      "read": "eino",
      "passed": "eino",
@@ -1288,7 +1167,6 @@
     {
      "key": "black",
      "role": "modifier",
-     "draft": "shaxora",
      "parent": "eo:shaxora",
      "read": "sahora",
      "passed": "sahora",
@@ -1298,7 +1176,6 @@
     {
      "key": "white",
      "role": "modifier",
-     "draft": "lavana",
      "parent": "eo:lavana",
      "read": "lavana",
      "passed": "lavana",
@@ -1308,7 +1185,6 @@
     {
      "key": "red",
      "role": "modifier",
-     "draft": "aduma",
      "parent": "eo:aduma",
      "read": "aduma",
      "passed": "aduma",
@@ -1318,7 +1194,6 @@
     {
      "key": "green",
      "role": "modifier",
-     "draft": "jaroka",
      "parent": "eo:jaroka",
      "read": "yaroka",
      "passed": "yaroka",
@@ -1328,7 +1203,6 @@
     {
      "key": "gold",
      "role": "modifier",
-     "draft": "zahava",
      "parent": "eo:zahava",
      "read": "sahava",
      "passed": "sahava",
@@ -1338,7 +1212,6 @@
     {
      "key": "blue",
      "role": "modifier",
-     "draft": "kaĥola",
      "parent": "eo:kaĥola",
      "read": "kahola",
      "passed": "kahola",
@@ -1348,7 +1221,6 @@
     {
      "key": "great",
      "role": "modifier",
-     "draft": "gadola",
      "parent": "eo:gadola",
      "read": "gadola",
      "passed": "gadola",
@@ -1358,7 +1230,6 @@
     {
      "key": "small",
      "role": "modifier",
-     "draft": "ketana",
      "parent": "eo:ketana",
      "read": "ketana",
      "passed": "ketana",
@@ -1368,7 +1239,6 @@
     {
      "key": "high",
      "role": "modifier",
-     "draft": "alta",
      "parent": "eo:alta",
      "read": "alta",
      "passed": "alta",
@@ -1378,17 +1248,15 @@
     {
      "key": "deep",
      "role": "modifier",
-     "draft": "profunda",
      "parent": "eo:profunda",
      "read": "profunda",
-     "passed": "porofunda",
-     "said": "po.ro.FUN.da",
+     "passed": "perofunda",
+     "said": "pe.ro.FUN.da",
      "faults": []
     },
     {
      "key": "long",
      "role": "modifier",
-     "draft": "longa",
      "parent": "eo:longa",
      "read": "longa",
      "passed": "longa",
@@ -1398,7 +1266,6 @@
     {
      "key": "old",
      "role": "modifier",
-     "draft": "atika",
      "parent": "eo:atika",
      "read": "atika",
      "passed": "atika",
@@ -1408,7 +1275,6 @@
     {
      "key": "new",
      "role": "modifier",
-     "draft": "ĥadaŝa",
      "parent": "eo:ĥadaŝa",
      "read": "hadasa",
      "passed": "hadasa",
@@ -1418,7 +1284,6 @@
     {
      "key": "dry",
      "role": "modifier",
-     "draft": "seka",
      "parent": "eo:seka",
      "read": "seka",
      "passed": "seka",
@@ -1428,7 +1293,6 @@
     {
      "key": "wet",
      "role": "modifier",
-     "draft": "malseka",
      "parent": "eo:malseka",
      "read": "malseka",
      "passed": "malseka",
@@ -1438,7 +1302,6 @@
     {
      "key": "warm",
      "role": "modifier",
-     "draft": "varma",
      "parent": "eo:varma",
      "read": "varma",
      "passed": "varma",
@@ -1448,7 +1311,6 @@
     {
      "key": "cold",
      "role": "modifier",
-     "draft": "keraha",
      "parent": "eo:keraha",
      "read": "keraha",
      "passed": "keraha",
@@ -1458,7 +1320,6 @@
     {
      "key": "light",
      "role": "modifier",
-     "draft": "luma",
      "parent": "eo:luma",
      "read": "luma",
      "passed": "luma",
@@ -1468,7 +1329,6 @@
     {
      "key": "dawn",
      "role": "modifier",
-     "draft": "ŝaĥara",
      "parent": "eo:ŝaĥara",
      "read": "sahara",
      "passed": "sahara",
@@ -1478,7 +1338,6 @@
     {
      "key": "night",
      "role": "modifier",
-     "draft": "lajla",
      "parent": "eo:lajla",
      "read": "laila",
      "passed": "laila",
@@ -1488,7 +1347,6 @@
     {
      "key": "star",
      "role": "modifier",
-     "draft": "kokava",
      "parent": "eo:kokava",
      "read": "kokava",
      "passed": "kokava",
@@ -1498,7 +1356,6 @@
     {
      "key": "cloud",
      "role": "modifier",
-     "draft": "anana",
      "parent": "eo:anana",
      "read": "anana",
      "passed": "anana",
@@ -1508,7 +1365,6 @@
     {
      "key": "mist",
      "role": "modifier",
-     "draft": "nebula",
      "parent": "eo:nebula",
      "read": "nebula",
      "passed": "nebula",
@@ -1518,7 +1374,6 @@
     {
      "key": "rain",
      "role": "modifier",
-     "draft": "geŝema",
      "parent": "eo:geŝema",
      "read": "gesema",
      "passed": "gesema",
@@ -1528,7 +1383,6 @@
     {
      "key": "wind",
      "role": "modifier",
-     "draft": "ruaĥa",
      "parent": "eo:ruaĥa",
      "read": "ruaha",
      "passed": "ruaha",
@@ -1538,7 +1392,6 @@
     {
      "key": "sun",
      "role": "modifier",
-     "draft": "ŝemeŝa",
      "parent": "eo:ŝemeŝa",
      "read": "semesa",
      "passed": "semesa",
@@ -1548,7 +1401,6 @@
     {
      "key": "earth",
      "role": "modifier",
-     "draft": "tera",
      "parent": "eo:tera",
      "read": "tera",
      "passed": "tera",
@@ -1558,17 +1410,15 @@
     {
      "key": "stone",
      "role": "modifier",
-     "draft": "ŝtona",
      "parent": "eo:ŝtona",
      "read": "stona",
-     "passed": "sotona",
-     "said": "so.TO.na",
+     "passed": "setona",
+     "said": "se.TO.na",
      "faults": []
     },
     {
      "key": "sand",
      "role": "modifier",
-     "draft": "sabla",
      "parent": "eo:sabla",
      "read": "sabla",
      "passed": "sabla",
@@ -1578,7 +1428,6 @@
     {
      "key": "salt",
      "role": "modifier",
-     "draft": "melaĥa",
      "parent": "eo:melaĥa",
      "read": "melaha",
      "passed": "melaha",
@@ -1588,7 +1437,6 @@
     {
      "key": "water",
      "role": "modifier",
-     "draft": "majima",
      "parent": "eo:majima",
      "read": "mayima",
      "passed": "mayima",
@@ -1598,7 +1446,6 @@
     {
      "key": "leaf",
      "role": "modifier",
-     "draft": "folia",
      "parent": "eo:folia",
      "read": "folia",
      "passed": "folia",
@@ -1608,17 +1455,15 @@
     {
      "key": "flower",
      "role": "modifier",
-     "draft": "flora",
      "parent": "eo:flora",
      "read": "flora",
-     "passed": "folora",
-     "said": "fo.LO.ra",
+     "passed": "felora",
+     "said": "fe.LO.ra",
      "faults": []
     },
     {
      "key": "thousand",
      "role": "modifier",
-     "draft": "mila",
      "parent": "eo:mila",
      "read": "mila",
      "passed": "mila",
@@ -1628,7 +1473,6 @@
     {
      "key": "twin",
      "role": "modifier",
-     "draft": "ĝemela",
      "parent": "eo:ĝemela",
      "read": "gemela",
      "passed": "gemela",
@@ -1638,27 +1482,24 @@
     {
      "key": "storm",
      "role": "meaning",
-     "draft": "ŝtorma",
      "parent": "eo:ŝtorma",
      "read": "storma",
-     "passed": "sotorma",
-     "said": "so.TOR.ma",
+     "passed": "setorma",
+     "said": "se.TOR.ma",
      "faults": []
     },
     {
      "key": "calm",
      "role": "meaning",
-     "draft": "trankvila",
      "parent": "eo:trankvila",
      "read": "trankvila",
-     "passed": "tarankivila",
-     "said": "ta.ran.ki.VI.la",
+     "passed": "terankevila",
+     "said": "te.ran.ke.VI.la",
      "faults": []
     },
     {
      "key": "clear",
      "role": "meaning",
-     "draft": "serena",
      "parent": "eo:serena",
      "read": "serena",
      "passed": "serena",
@@ -1668,7 +1509,6 @@
     {
      "key": "plenty",
      "role": "meaning",
-     "draft": "fekunda",
      "parent": "eo:fekunda",
      "read": "fekunda",
      "passed": "fekunda",
@@ -1678,7 +1518,6 @@
     {
      "key": "nectar",
      "role": "meaning",
-     "draft": "nektara",
      "parent": "eo:nektara",
      "read": "nektara",
      "passed": "nektara",
@@ -1688,17 +1527,15 @@
     {
      "key": "trial",
      "role": "meaning",
-     "draft": "kriza",
      "parent": "eo:kriza",
      "read": "krisa",
-     "passed": "kirisa",
-     "said": "ki.RI.sa",
+     "passed": "kerisa",
+     "said": "ke.RI.sa",
      "faults": []
     },
     {
      "key": "islands",
      "role": "meaning",
-     "draft": "insula",
      "parent": "eo:insula",
      "read": "insula",
      "passed": "insula",
@@ -1708,7 +1545,6 @@
     {
      "key": "known",
      "role": "meaning",
-     "draft": "konata",
      "parent": "eo:konata",
      "read": "konata",
      "passed": "konata",
@@ -1718,7 +1554,6 @@
     {
      "key": "south",
      "role": "meaning",
-     "draft": "suda",
      "parent": "eo:suda",
      "read": "suda",
      "passed": "suda",
@@ -1728,7 +1563,6 @@
     {
      "key": "east",
      "role": "meaning",
-     "draft": "orienta",
      "parent": "eo:orienta",
      "read": "orienta",
      "passed": "orienta",
@@ -1738,7 +1572,6 @@
     {
      "key": "edge",
      "role": "meaning",
-     "draft": "randa",
      "parent": "eo:randa",
      "read": "randa",
      "passed": "randa",
@@ -1748,7 +1581,6 @@
     {
      "key": "wave",
      "role": "meaning",
-     "draft": "onda",
      "parent": "eo:onda",
      "read": "onda",
      "passed": "onda",
@@ -1758,7 +1590,6 @@
     {
      "key": "foam",
      "role": "meaning",
-     "draft": "ŝauma",
      "parent": "eo:ŝauma",
      "read": "sauma",
      "passed": "sauma",
@@ -1768,7 +1599,6 @@
     {
      "key": "serpent",
      "role": "meaning",
-     "draft": "serpenta",
      "parent": "eo:serpenta",
      "read": "serpenta",
      "passed": "serpenta",
@@ -1778,7 +1608,6 @@
     {
      "key": "dew",
      "role": "meaning",
-     "draft": "rosa",
      "parent": "eo:rosa",
      "read": "rosa",
      "passed": "rosa",
@@ -1788,7 +1617,6 @@
     {
      "key": "middle",
      "role": "meaning",
-     "draft": "meza",
      "parent": "eo:meza",
      "read": "mesa",
      "passed": "mesa",
@@ -1798,7 +1626,6 @@
     {
      "key": "love",
      "role": "meaning",
-     "draft": "ama",
      "parent": "eo:ama",
      "read": "ama",
      "passed": "ama",
@@ -1808,17 +1635,15 @@
     {
      "key": "rough",
      "role": "meaning",
-     "draft": "malglata",
      "parent": "eo:malglata",
      "read": "malglata",
-     "passed": "malgalata",
-     "said": "mal.ga.LA.ta",
+     "passed": "malgelata",
+     "said": "mal.ge.LA.ta",
      "faults": []
     },
     {
      "key": "harmony",
      "role": "meaning",
-     "draft": "konkorda",
      "parent": "eo:konkorda",
      "read": "konkorda",
      "passed": "konkorda",
@@ -1828,7 +1653,6 @@
     {
      "key": "faith",
      "role": "meaning",
-     "draft": "fida",
      "parent": "eo:fida",
      "read": "fida",
      "passed": "fida",
@@ -1838,7 +1662,6 @@
     {
      "key": "success",
      "role": "meaning",
-     "draft": "sukcesa",
      "parent": "eo:sukcesa",
      "read": "suksesa",
      "passed": "suksesa",
@@ -1848,7 +1671,6 @@
     {
      "key": "dream",
      "role": "meaning",
-     "draft": "sonĝa",
      "parent": "eo:sonĝa",
      "read": "songa",
      "passed": "songa",
@@ -1858,7 +1680,6 @@
     {
      "key": "death",
      "role": "meaning",
-     "draft": "morta",
      "parent": "eo:morta",
      "read": "morta",
      "passed": "morta",
@@ -1868,7 +1689,6 @@
     {
      "key": "time",
      "role": "meaning",
-     "draft": "tempa",
      "parent": "eo:tempa",
      "read": "tempa",
      "passed": "tempa",
@@ -1878,7 +1698,6 @@
     {
      "key": "sorrow",
      "role": "meaning",
-     "draft": "dolora",
      "parent": "eo:dolora",
      "read": "dolora",
      "passed": "dolora",
@@ -1888,17 +1707,15 @@
     {
      "key": "springtime",
      "role": "meaning",
-     "draft": "printempa",
      "parent": "eo:printempa",
      "read": "printempa",
-     "passed": "pirintempa",
-     "said": "pi.rin.TEM.pa",
+     "passed": "perintempa",
+     "said": "pe.rin.TEM.pa",
      "faults": []
     },
     {
      "key": "autumn",
      "role": "meaning",
-     "draft": "aŭtuna",
      "parent": "eo:aŭtuna",
      "read": "autuna",
      "passed": "autuna",
@@ -1908,7 +1725,6 @@
     {
      "key": "summer",
      "role": "meaning",
-     "draft": "somera",
      "parent": "eo:somera",
      "read": "somera",
      "passed": "somera",
@@ -1918,17 +1734,15 @@
     {
      "key": "winter",
      "role": "meaning",
-     "draft": "vintra",
      "parent": "eo:vintra",
      "read": "vintra",
-     "passed": "vintara",
-     "said": "vin.TA.ra",
+     "passed": "vintera",
+     "said": "vin.TE.ra",
      "faults": []
     },
     {
      "key": "hope",
      "role": "meaning",
-     "draft": "espera",
      "parent": "eo:espera",
      "read": "espera",
      "passed": "espera",
@@ -1938,7 +1752,6 @@
     {
      "key": "gentle",
      "role": "meaning",
-     "draft": "milda",
      "parent": "eo:milda",
      "read": "milda",
      "passed": "milda",
@@ -1948,7 +1761,6 @@
     {
      "key": "good",
      "role": "meaning",
-     "draft": "bona",
      "parent": "eo:bona",
      "read": "bona",
      "passed": "bona",
@@ -1958,7 +1770,6 @@
     {
      "key": "endure",
      "role": "meaning",
-     "draft": "persista",
      "parent": "eo:persista",
      "read": "persista",
      "passed": "persista",
@@ -1968,7 +1779,6 @@
     {
      "key": "alone",
      "role": "meaning",
-     "draft": "sola",
      "parent": "eo:sola",
      "read": "sola",
      "passed": "sola",
@@ -1978,7 +1788,6 @@
     {
      "key": "forget",
      "role": "meaning",
-     "draft": "forgesa",
      "parent": "eo:forgesa",
      "read": "forgesa",
      "passed": "forgesa",
@@ -1988,7 +1797,6 @@
     {
      "key": "fear",
      "role": "meaning",
-     "draft": "timema",
      "parent": "eo:timema",
      "read": "timema",
      "passed": "timema",
@@ -1998,7 +1806,6 @@
     {
      "key": "joy",
      "role": "meaning",
-     "draft": "ĝoja",
      "parent": "eo:ĝoja",
      "read": "goya",
      "passed": "goya",
@@ -2008,7 +1815,6 @@
     {
      "key": "excellent",
      "role": "meaning",
-     "draft": "bonega",
      "parent": "eo:bonega",
      "read": "bonega",
      "passed": "bonega",
@@ -2018,7 +1824,6 @@
     {
      "key": "dark",
      "role": "meaning",
-     "draft": "malluma",
      "parent": "eo:malluma",
      "read": "malluma",
      "passed": "maluma",
@@ -2028,7 +1833,6 @@
     {
      "key": "sleep",
      "role": "meaning",
-     "draft": "dorma",
      "parent": "eo:dorma",
      "read": "dorma",
      "passed": "dorma",
@@ -2038,7 +1842,6 @@
     {
      "key": "decay",
      "role": "meaning",
-     "draft": "putra",
      "parent": "eo:putra",
      "read": "putra",
      "passed": "putra",
@@ -2048,7 +1851,6 @@
     {
      "key": "plague",
      "role": "meaning",
-     "draft": "pesta",
      "parent": "eo:pesta",
      "read": "pesta",
      "passed": "pesta",
@@ -2056,10 +1858,9 @@
      "faults": []
     }
    ],
-   "changed": 35,
    "faults": 0,
    "fallen_together": [],
-   "from_fuller_parent_forms": 0
+   "joined_names_at_fault": 0
   },
   "sahran": {
    "label": "Sahran (Arabic- and Amazigh-rooted)",
@@ -2067,7 +1868,6 @@
     {
      "key": "bowl",
      "role": "head",
-     "draft": "Hufra",
      "parent": "ar:Hufra",
      "read": "hufra",
      "passed": "hufra",
@@ -2077,7 +1877,6 @@
     {
      "key": "basin",
      "role": "head",
-     "draft": "Hawd",
      "parent": "ar:Hawd",
      "read": "haud",
      "passed": "haud",
@@ -2087,7 +1886,6 @@
     {
      "key": "lake",
      "role": "head",
-     "draft": "Tamda",
      "parent": "ar:Tamda",
      "read": "tamda",
      "passed": "tamda",
@@ -2097,7 +1895,6 @@
     {
      "key": "lakes",
      "role": "head",
-     "draft": "Tamdawin",
      "parent": "ar:Tamdawin",
      "read": "tamdawin",
      "passed": "tamdawin",
@@ -2107,7 +1904,6 @@
     {
      "key": "river",
      "role": "head",
-     "draft": "Asif",
      "parent": "ar:Asif",
      "read": "asif",
      "passed": "asif",
@@ -2117,7 +1913,6 @@
     {
      "key": "valley",
      "role": "head",
-     "draft": "Wadi",
      "parent": "ar:Wadi",
      "read": "wadi",
      "passed": "wadi",
@@ -2127,7 +1922,6 @@
     {
      "key": "plain",
      "role": "head",
-     "draft": "Hamada",
      "parent": "ar:Hamada",
      "read": "hamada",
      "passed": "hamada",
@@ -2137,7 +1931,6 @@
     {
      "key": "hills",
      "role": "head",
-     "draft": "Tilal",
      "parent": "ar:Tilal",
      "read": "tilal",
      "passed": "tilal",
@@ -2147,7 +1940,6 @@
     {
      "key": "mountains",
      "role": "head",
-     "draft": "Adrar",
      "parent": "ar:Adrar",
      "read": "adrar",
      "passed": "adrar",
@@ -2157,7 +1949,6 @@
     {
      "key": "ridge",
      "role": "head",
-     "draft": "Ighil",
      "parent": "ar:Ighil",
      "read": "igil",
      "passed": "igil",
@@ -2167,7 +1958,6 @@
     {
      "key": "cliff",
      "role": "head",
-     "draft": "Jurf",
      "parent": "ar:Jurf",
      "read": "gurf",
      "passed": "guruf",
@@ -2177,7 +1967,6 @@
     {
      "key": "island",
      "role": "head",
-     "draft": "Jazira",
      "parent": "ar:Jazira",
      "read": "gasira",
      "passed": "gasira",
@@ -2187,7 +1976,6 @@
     {
      "key": "bay",
      "role": "head",
-     "draft": "Halij",
      "parent": "ar:Halij",
      "read": "halig",
      "passed": "halig",
@@ -2197,7 +1985,6 @@
     {
      "key": "coast",
      "role": "head",
-     "draft": "Sahil",
      "parent": "ar:Sahil",
      "read": "sahil",
      "passed": "sahil",
@@ -2207,7 +1994,6 @@
     {
      "key": "strait",
      "role": "head",
-     "draft": "Madik",
      "parent": "ar:Madik",
      "read": "madik",
      "passed": "madik",
@@ -2217,7 +2003,6 @@
     {
      "key": "sea",
      "role": "head",
-     "draft": "Bahr",
      "parent": "ar:Bahr",
      "read": "bahr",
      "passed": "bahar",
@@ -2227,7 +2012,6 @@
     {
      "key": "forest",
      "role": "head",
-     "draft": "Gaba",
      "parent": "ar:Gaba",
      "read": "gaba",
      "passed": "gaba",
@@ -2237,7 +2021,6 @@
     {
      "key": "desert",
      "role": "head",
-     "draft": "Erg",
      "parent": "ar:ʿirq",
      "read": "'irk",
      "passed": "'irik",
@@ -2247,7 +2030,6 @@
     {
      "key": "field",
      "role": "head",
-     "draft": "Marj",
      "parent": "ar:Marj",
      "read": "marg",
      "passed": "marag",
@@ -2257,7 +2039,6 @@
     {
      "key": "land",
      "role": "head",
-     "draft": "Tamazirt",
      "parent": "ar:Tamazirt",
      "read": "tamasirt",
      "passed": "tamasirit",
@@ -2267,7 +2048,6 @@
     {
      "key": "falls",
      "role": "head",
-     "draft": "Shallal",
      "parent": "ar:Shallal",
      "read": "salal",
      "passed": "salal",
@@ -2277,7 +2057,6 @@
     {
      "key": "spring",
      "role": "head",
-     "draft": "Tala",
      "parent": "ar:Tala",
      "read": "tala",
      "passed": "tala",
@@ -2287,7 +2066,6 @@
     {
      "key": "black",
      "role": "modifier",
-     "draft": "Aswad",
      "parent": "ar:Aswad",
      "read": "aswad",
      "passed": "aswad",
@@ -2297,7 +2075,6 @@
     {
      "key": "white",
      "role": "modifier",
-     "draft": "Abyad",
      "parent": "ar:Abyad",
      "read": "abyad",
      "passed": "abyad",
@@ -2307,7 +2084,6 @@
     {
      "key": "red",
      "role": "modifier",
-     "draft": "Ahmar",
      "parent": "ar:Ahmar",
      "read": "ahmar",
      "passed": "ahmar",
@@ -2317,7 +2093,6 @@
     {
      "key": "green",
      "role": "modifier",
-     "draft": "Ahdar",
      "parent": "ar:Ahdar",
      "read": "ahdar",
      "passed": "ahdar",
@@ -2327,7 +2102,6 @@
     {
      "key": "gold",
      "role": "modifier",
-     "draft": "Dahab",
      "parent": "ar:Dahab",
      "read": "dahab",
      "passed": "dahab",
@@ -2337,7 +2111,6 @@
     {
      "key": "blue",
      "role": "modifier",
-     "draft": "Azrak",
      "parent": "ar:Azrak",
      "read": "asrak",
      "passed": "asrak",
@@ -2347,7 +2120,6 @@
     {
      "key": "great",
      "role": "modifier",
-     "draft": "Kabir",
      "parent": "ar:Kabir",
      "read": "kabir",
      "passed": "kabir",
@@ -2357,7 +2129,6 @@
     {
      "key": "small",
      "role": "modifier",
-     "draft": "Sagir",
      "parent": "ar:Sagir",
      "read": "sagir",
      "passed": "sagir",
@@ -2367,7 +2138,6 @@
     {
      "key": "high",
      "role": "modifier",
-     "draft": "Afella",
      "parent": "ar:Afella",
      "read": "afela",
      "passed": "afela",
@@ -2377,7 +2147,6 @@
     {
      "key": "deep",
      "role": "modifier",
-     "draft": "Amik",
      "parent": "ar:ʿamiq",
      "read": "'amik",
      "passed": "'amik",
@@ -2387,7 +2156,6 @@
     {
      "key": "long",
      "role": "modifier",
-     "draft": "Tawil",
      "parent": "ar:Tawil",
      "read": "tawil",
      "passed": "tawil",
@@ -2397,7 +2165,6 @@
     {
      "key": "old",
      "role": "modifier",
-     "draft": "Kadim",
      "parent": "ar:Kadim",
      "read": "kadim",
      "passed": "kadim",
@@ -2407,7 +2174,6 @@
     {
      "key": "new",
      "role": "modifier",
-     "draft": "Jadid",
      "parent": "ar:Jadid",
      "read": "gadid",
      "passed": "gadid",
@@ -2417,7 +2183,6 @@
     {
      "key": "dry",
      "role": "modifier",
-     "draft": "Yabis",
      "parent": "ar:Yabis",
      "read": "yabis",
      "passed": "yabis",
@@ -2427,7 +2192,6 @@
     {
      "key": "wet",
      "role": "modifier",
-     "draft": "Ratib",
      "parent": "ar:Ratib",
      "read": "ratib",
      "passed": "ratib",
@@ -2437,7 +2201,6 @@
     {
      "key": "warm",
      "role": "modifier",
-     "draft": "Dafi",
      "parent": "ar:dafiʾ",
      "read": "dafi'",
      "passed": "dafi'",
@@ -2447,7 +2210,6 @@
     {
      "key": "cold",
      "role": "modifier",
-     "draft": "Barid",
      "parent": "ar:Barid",
      "read": "barid",
      "passed": "barid",
@@ -2457,7 +2219,6 @@
     {
      "key": "light",
      "role": "modifier",
-     "draft": "Nur",
      "parent": "ar:Nur",
      "read": "nur",
      "passed": "nur",
@@ -2467,7 +2228,6 @@
     {
      "key": "dawn",
      "role": "modifier",
-     "draft": "Fajr",
      "parent": "ar:Fajr",
      "read": "fagr",
      "passed": "fagar",
@@ -2477,7 +2237,6 @@
     {
      "key": "night",
      "role": "modifier",
-     "draft": "Layl",
      "parent": "ar:Layl",
      "read": "lail",
      "passed": "lail",
@@ -2487,7 +2246,6 @@
     {
      "key": "star",
      "role": "modifier",
-     "draft": "Najm",
      "parent": "ar:Najm",
      "read": "nagm",
      "passed": "nagam",
@@ -2497,7 +2255,6 @@
     {
      "key": "cloud",
      "role": "modifier",
-     "draft": "Sahab",
      "parent": "ar:Sahab",
      "read": "sahab",
      "passed": "sahab",
@@ -2507,7 +2264,6 @@
     {
      "key": "mist",
      "role": "modifier",
-     "draft": "Dabab",
      "parent": "ar:Dabab",
      "read": "dabab",
      "passed": "dabab",
@@ -2517,7 +2273,6 @@
     {
      "key": "rain",
      "role": "modifier",
-     "draft": "Matar",
      "parent": "ar:Matar",
      "read": "matar",
      "passed": "matar",
@@ -2527,7 +2282,6 @@
     {
      "key": "wind",
      "role": "modifier",
-     "draft": "Rih",
      "parent": "ar:Rih",
      "read": "rih",
      "passed": "rih",
@@ -2537,7 +2291,6 @@
     {
      "key": "sun",
      "role": "modifier",
-     "draft": "Shams",
      "parent": "ar:Shams",
      "read": "sams",
      "passed": "samas",
@@ -2547,7 +2300,6 @@
     {
      "key": "earth",
      "role": "modifier",
-     "draft": "Ard",
      "parent": "ar:Ard",
      "read": "ard",
      "passed": "arad",
@@ -2557,7 +2309,6 @@
     {
      "key": "stone",
      "role": "modifier",
-     "draft": "Hajar",
      "parent": "ar:Hajar",
      "read": "hagar",
      "passed": "hagar",
@@ -2567,7 +2318,6 @@
     {
      "key": "sand",
      "role": "modifier",
-     "draft": "Raml",
      "parent": "ar:Raml",
      "read": "raml",
      "passed": "ramal",
@@ -2577,7 +2327,6 @@
     {
      "key": "salt",
      "role": "modifier",
-     "draft": "Milh",
      "parent": "ar:Milh",
      "read": "milh",
      "passed": "milih",
@@ -2587,7 +2336,6 @@
     {
      "key": "water",
      "role": "modifier",
-     "draft": "Aman",
      "parent": "ar:Aman",
      "read": "aman",
      "passed": "aman",
@@ -2597,7 +2345,6 @@
     {
      "key": "leaf",
      "role": "modifier",
-     "draft": "Waraka",
      "parent": "ar:Waraka",
      "read": "waraka",
      "passed": "waraka",
@@ -2607,7 +2354,6 @@
     {
      "key": "flower",
      "role": "modifier",
-     "draft": "Zahr",
      "parent": "ar:Zahr",
      "read": "sahr",
      "passed": "sahar",
@@ -2617,7 +2363,6 @@
     {
      "key": "thousand",
      "role": "modifier",
-     "draft": "Alf",
      "parent": "ar:Alf",
      "read": "alf",
      "passed": "alaf",
@@ -2627,7 +2372,6 @@
     {
      "key": "twin",
      "role": "modifier",
-     "draft": "Tawam",
      "parent": "ar:tawʾam",
      "read": "tau'am",
      "passed": "tau'am",
@@ -2637,7 +2381,6 @@
     {
      "key": "storm",
      "role": "meaning",
-     "draft": "Asifa",
      "parent": "ar:ʿasifa",
      "read": "'asifa",
      "passed": "'asifa",
@@ -2647,7 +2390,6 @@
     {
      "key": "calm",
      "role": "meaning",
-     "draft": "Hadi",
      "parent": "ar:hadiʾ",
      "read": "hadi'",
      "passed": "hadi'",
@@ -2657,7 +2399,6 @@
     {
      "key": "clear",
      "role": "meaning",
-     "draft": "Safi",
      "parent": "ar:Safi",
      "read": "safi",
      "passed": "safi",
@@ -2667,7 +2408,6 @@
     {
      "key": "plenty",
      "role": "meaning",
-     "draft": "Khisb",
      "parent": "ar:Khisb",
      "read": "hisb",
      "passed": "hisib",
@@ -2677,7 +2417,6 @@
     {
      "key": "nectar",
      "role": "meaning",
-     "draft": "Shahd",
      "parent": "ar:Shahd",
      "read": "sahd",
      "passed": "sahad",
@@ -2687,7 +2426,6 @@
     {
      "key": "trial",
      "role": "meaning",
-     "draft": "Mihna",
      "parent": "ar:Mihna",
      "read": "mihna",
      "passed": "mihna",
@@ -2697,7 +2435,6 @@
     {
      "key": "islands",
      "role": "meaning",
-     "draft": "Juzur",
      "parent": "ar:Juzur",
      "read": "gusur",
      "passed": "gusur",
@@ -2707,7 +2444,6 @@
     {
      "key": "known",
      "role": "meaning",
-     "draft": "Maruf",
      "parent": "ar:maʿruf",
      "read": "ma'ruf",
      "passed": "ma'ruf",
@@ -2717,7 +2453,6 @@
     {
      "key": "south",
      "role": "meaning",
-     "draft": "Janub",
      "parent": "ar:Janub",
      "read": "ganub",
      "passed": "ganub",
@@ -2727,7 +2462,6 @@
     {
      "key": "east",
      "role": "meaning",
-     "draft": "Sharq",
      "parent": "ar:Sharq",
      "read": "sark",
      "passed": "sarak",
@@ -2737,7 +2471,6 @@
     {
      "key": "edge",
      "role": "meaning",
-     "draft": "Hafa",
      "parent": "ar:Hafa",
      "read": "hafa",
      "passed": "hafa",
@@ -2747,7 +2480,6 @@
     {
      "key": "wave",
      "role": "meaning",
-     "draft": "Mawj",
      "parent": "ar:Mawj",
      "read": "maug",
      "passed": "maug",
@@ -2757,7 +2489,6 @@
     {
      "key": "foam",
      "role": "meaning",
-     "draft": "Zabad",
      "parent": "ar:Zabad",
      "read": "sabad",
      "passed": "sabad",
@@ -2767,7 +2498,6 @@
     {
      "key": "serpent",
      "role": "meaning",
-     "draft": "Hayya",
      "parent": "ar:Hayya",
      "read": "haya",
      "passed": "haya",
@@ -2777,7 +2507,6 @@
     {
      "key": "dew",
      "role": "meaning",
-     "draft": "Nada",
      "parent": "ar:Nada",
      "read": "nada",
      "passed": "nada",
@@ -2787,7 +2516,6 @@
     {
      "key": "middle",
      "role": "meaning",
-     "draft": "Wasat",
      "parent": "ar:Wasat",
      "read": "wasat",
      "passed": "wasat",
@@ -2797,7 +2525,6 @@
     {
      "key": "love",
      "role": "meaning",
-     "draft": "Hubb",
      "parent": "ar:Hubb",
      "read": "hub",
      "passed": "hub",
@@ -2807,7 +2534,6 @@
     {
      "key": "rough",
      "role": "meaning",
-     "draft": "Khashin",
      "parent": "ar:Khashin",
      "read": "hasin",
      "passed": "hasin",
@@ -2817,7 +2543,6 @@
     {
      "key": "harmony",
      "role": "meaning",
-     "draft": "Wiam",
      "parent": "ar:wiʾam",
      "read": "wi'am",
      "passed": "wi'am",
@@ -2827,7 +2552,6 @@
     {
      "key": "faith",
      "role": "meaning",
-     "draft": "Iman",
      "parent": "ar:Iman",
      "read": "iman",
      "passed": "iman",
@@ -2837,7 +2561,6 @@
     {
      "key": "success",
      "role": "meaning",
-     "draft": "Najah",
      "parent": "ar:Najah",
      "read": "nagah",
      "passed": "nagah",
@@ -2847,7 +2570,6 @@
     {
      "key": "dream",
      "role": "meaning",
-     "draft": "Ahlam",
      "parent": "ar:Ahlam",
      "read": "ahlam",
      "passed": "ahlam",
@@ -2857,7 +2579,6 @@
     {
      "key": "death",
      "role": "meaning",
-     "draft": "Mawt",
      "parent": "ar:Mawt",
      "read": "maut",
      "passed": "maut",
@@ -2867,7 +2588,6 @@
     {
      "key": "time",
      "role": "meaning",
-     "draft": "Zaman",
      "parent": "ar:Zaman",
      "read": "saman",
      "passed": "saman",
@@ -2877,7 +2597,6 @@
     {
      "key": "sorrow",
      "role": "meaning",
-     "draft": "Huzn",
      "parent": "ar:Huzn",
      "read": "husn",
      "passed": "husun",
@@ -2887,7 +2606,6 @@
     {
      "key": "springtime",
      "role": "meaning",
-     "draft": "Rabi",
      "parent": "ar:rabiʿ",
      "read": "rabi'",
      "passed": "rabi'",
@@ -2897,7 +2615,6 @@
     {
      "key": "autumn",
      "role": "meaning",
-     "draft": "Kharif",
      "parent": "ar:Kharif",
      "read": "harif",
      "passed": "harif",
@@ -2907,7 +2624,6 @@
     {
      "key": "summer",
      "role": "meaning",
-     "draft": "Sayf",
      "parent": "ar:Sayf",
      "read": "saif",
      "passed": "saif",
@@ -2917,7 +2633,6 @@
     {
      "key": "winter",
      "role": "meaning",
-     "draft": "Shita",
      "parent": "ar:shitaʾ",
      "read": "sita'",
      "passed": "sita'",
@@ -2927,7 +2642,6 @@
     {
      "key": "hope",
      "role": "meaning",
-     "draft": "Amal",
      "parent": "ar:Amal",
      "read": "amal",
      "passed": "amal",
@@ -2937,7 +2651,6 @@
     {
      "key": "gentle",
      "role": "meaning",
-     "draft": "Latif",
      "parent": "ar:Latif",
      "read": "latif",
      "passed": "latif",
@@ -2947,7 +2660,6 @@
     {
      "key": "good",
      "role": "meaning",
-     "draft": "Khayr",
      "parent": "ar:Khayr",
      "read": "hair",
      "passed": "hair",
@@ -2957,7 +2669,6 @@
     {
      "key": "endure",
      "role": "meaning",
-     "draft": "Sabr",
      "parent": "ar:Sabr",
      "read": "sabr",
      "passed": "sabar",
@@ -2967,7 +2678,6 @@
     {
      "key": "alone",
      "role": "meaning",
-     "draft": "Uzla",
      "parent": "ar:ʿuzla",
      "read": "'usla",
      "passed": "'usla",
@@ -2977,7 +2687,6 @@
     {
      "key": "forget",
      "role": "meaning",
-     "draft": "Nisyan",
      "parent": "ar:Nisyan",
      "read": "nisyan",
      "passed": "nisyan",
@@ -2987,7 +2696,6 @@
     {
      "key": "fear",
      "role": "meaning",
-     "draft": "Khawf",
      "parent": "ar:Khawf",
      "read": "hauf",
      "passed": "hauf",
@@ -2997,7 +2705,6 @@
     {
      "key": "joy",
      "role": "meaning",
-     "draft": "Farah",
      "parent": "ar:Farah",
      "read": "farah",
      "passed": "farah",
@@ -3007,7 +2714,6 @@
     {
      "key": "excellent",
      "role": "meaning",
-     "draft": "Fadl",
      "parent": "ar:Fadl",
      "read": "fadl",
      "passed": "fadal",
@@ -3017,7 +2723,6 @@
     {
      "key": "dark",
      "role": "meaning",
-     "draft": "Zalam",
      "parent": "ar:ʿatma",
      "read": "'atma",
      "passed": "'atma",
@@ -3028,7 +2733,6 @@
     {
      "key": "sleep",
      "role": "meaning",
-     "draft": "Nawm",
      "parent": "ar:Nawm",
      "read": "naum",
      "passed": "naum",
@@ -3038,7 +2742,6 @@
     {
      "key": "decay",
      "role": "meaning",
-     "draft": "Afan",
      "parent": "ar:ʿafan",
      "read": "'afan",
      "passed": "'afan",
@@ -3048,7 +2751,6 @@
     {
      "key": "plague",
      "role": "meaning",
-     "draft": "Waba",
      "parent": "ar:wabaʾ",
      "read": "waba'",
      "passed": "waba'",
@@ -3056,10 +2758,9 @@
      "faults": []
     }
    ],
-   "changed": 57,
    "faults": 0,
    "fallen_together": [],
-   "from_fuller_parent_forms": 14
+   "joined_names_at_fault": 0
   },
   "tagalhebrew": {
    "label": "Tagalog-Hebrew",
@@ -3067,7 +2768,6 @@
     {
      "key": "bowl",
      "role": "head",
-     "draft": "Uka",
      "parent": "tl:Uka",
      "read": "uka",
      "passed": "uka",
@@ -3077,7 +2777,6 @@
     {
      "key": "basin",
      "role": "head",
-     "draft": "Lambak",
      "parent": "tl:Lambak",
      "read": "lambak",
      "passed": "lambak",
@@ -3087,7 +2786,6 @@
     {
      "key": "lake",
      "role": "head",
-     "draft": "Lawa",
      "parent": "tl:Lawa",
      "read": "lawa",
      "passed": "lawa",
@@ -3097,7 +2795,6 @@
     {
      "key": "lakes",
      "role": "head",
-     "draft": "Lawalawa",
      "parent": "tl:Lawalawa",
      "read": "lawalawa",
      "passed": "lawalawa",
@@ -3107,7 +2804,6 @@
     {
      "key": "river",
      "role": "head",
-     "draft": "Ilog",
      "parent": "tl:Ilog",
      "read": "ilog",
      "passed": "ilog",
@@ -3117,7 +2813,6 @@
     {
      "key": "valley",
      "role": "head",
-     "draft": "Lambak",
      "parent": "tl:Lambak",
      "read": "lambak",
      "passed": "lambak",
@@ -3127,7 +2822,6 @@
     {
      "key": "plain",
      "role": "head",
-     "draft": "Kapatagan",
      "parent": "tl:Kapatagan",
      "read": "kapatagan",
      "passed": "kapatagan",
@@ -3137,7 +2831,6 @@
     {
      "key": "hills",
      "role": "head",
-     "draft": "Burol",
      "parent": "tl:Burol",
      "read": "burol",
      "passed": "burol",
@@ -3147,7 +2840,6 @@
     {
      "key": "mountains",
      "role": "head",
-     "draft": "Bundok",
      "parent": "tl:Bundok",
      "read": "bundok",
      "passed": "bundok",
@@ -3157,7 +2849,6 @@
     {
      "key": "ridge",
      "role": "head",
-     "draft": "Gulod",
      "parent": "tl:Gulod",
      "read": "gulod",
      "passed": "gulod",
@@ -3167,7 +2858,6 @@
     {
      "key": "cliff",
      "role": "head",
-     "draft": "Bangin",
      "parent": "tl:Bangin",
      "read": "bangin",
      "passed": "bangin",
@@ -3177,7 +2867,6 @@
     {
      "key": "island",
      "role": "head",
-     "draft": "Pulo",
      "parent": "tl:Pulo",
      "read": "pulo",
      "passed": "pulo",
@@ -3187,7 +2876,6 @@
     {
      "key": "bay",
      "role": "head",
-     "draft": "Look",
      "parent": "tl:lo'ok",
      "read": "lo'ok",
      "passed": "lo'ok",
@@ -3197,7 +2885,6 @@
     {
      "key": "coast",
      "role": "head",
-     "draft": "Baybay",
      "parent": "tl:Baybay",
      "read": "baybay",
      "passed": "baybay",
@@ -3207,7 +2894,6 @@
     {
      "key": "strait",
      "role": "head",
-     "draft": "Kipot",
      "parent": "tl:Kipot",
      "read": "kipot",
      "passed": "kipot",
@@ -3217,7 +2903,6 @@
     {
      "key": "sea",
      "role": "head",
-     "draft": "Dagat",
      "parent": "tl:Dagat",
      "read": "dagat",
      "passed": "dagat",
@@ -3227,7 +2912,6 @@
     {
      "key": "forest",
      "role": "head",
-     "draft": "Gubat",
      "parent": "tl:Gubat",
      "read": "gubat",
      "passed": "gubat",
@@ -3237,7 +2921,6 @@
     {
      "key": "desert",
      "role": "head",
-     "draft": "Ilang",
      "parent": "tl:Ilang",
      "read": "ilang",
      "passed": "ilang",
@@ -3247,7 +2930,6 @@
     {
      "key": "field",
      "role": "head",
-     "draft": "Parang",
      "parent": "tl:Parang",
      "read": "parang",
      "passed": "parang",
@@ -3257,7 +2939,6 @@
     {
      "key": "land",
      "role": "head",
-     "draft": "Lupa",
      "parent": "tl:Lupa",
      "read": "lupa",
      "passed": "lupa",
@@ -3267,7 +2948,6 @@
     {
      "key": "falls",
      "role": "head",
-     "draft": "Talon",
      "parent": "tl:Talon",
      "read": "talon",
      "passed": "talon",
@@ -3277,7 +2957,6 @@
     {
      "key": "spring",
      "role": "head",
-     "draft": "Bukal",
      "parent": "tl:Bukal",
      "read": "bukal",
      "passed": "bukal",
@@ -3287,7 +2966,6 @@
     {
      "key": "black",
      "role": "modifier",
-     "draft": "Shahor",
      "parent": "he:Shahor",
      "read": "sahor",
      "passed": "sahor",
@@ -3297,7 +2975,6 @@
     {
      "key": "white",
      "role": "modifier",
-     "draft": "Lavan",
      "parent": "he:Lavan",
      "read": "lavan",
      "passed": "lavan",
@@ -3307,7 +2984,6 @@
     {
      "key": "red",
      "role": "modifier",
-     "draft": "Adom",
      "parent": "he:Adom",
      "read": "adom",
      "passed": "adom",
@@ -3317,7 +2993,6 @@
     {
      "key": "green",
      "role": "modifier",
-     "draft": "Yarok",
      "parent": "he:Yarok",
      "read": "yarok",
      "passed": "yarok",
@@ -3327,7 +3002,6 @@
     {
      "key": "gold",
      "role": "modifier",
-     "draft": "Zahav",
      "parent": "he:Zahav",
      "read": "sahav",
      "passed": "sahav",
@@ -3337,7 +3011,6 @@
     {
      "key": "blue",
      "role": "modifier",
-     "draft": "Kahol",
      "parent": "he:Kahol",
      "read": "kahol",
      "passed": "kahol",
@@ -3347,7 +3020,6 @@
     {
      "key": "great",
      "role": "modifier",
-     "draft": "Gadol",
      "parent": "he:Gadol",
      "read": "gadol",
      "passed": "gadol",
@@ -3357,7 +3029,6 @@
     {
      "key": "small",
      "role": "modifier",
-     "draft": "Katan",
      "parent": "he:Katan",
      "read": "katan",
      "passed": "katan",
@@ -3367,7 +3038,6 @@
     {
      "key": "high",
      "role": "modifier",
-     "draft": "Gavoah",
      "parent": "he:Gavoah",
      "read": "gavoah",
      "passed": "gavoah",
@@ -3377,7 +3047,6 @@
     {
      "key": "deep",
      "role": "modifier",
-     "draft": "Amok",
      "parent": "he:Amok",
      "read": "amok",
      "passed": "amok",
@@ -3387,7 +3056,6 @@
     {
      "key": "long",
      "role": "modifier",
-     "draft": "Aroh",
      "parent": "he:Aroh",
      "read": "aroh",
      "passed": "aroh",
@@ -3397,7 +3065,6 @@
     {
      "key": "old",
      "role": "modifier",
-     "draft": "Atik",
      "parent": "he:Atik",
      "read": "atik",
      "passed": "atik",
@@ -3407,7 +3074,6 @@
     {
      "key": "new",
      "role": "modifier",
-     "draft": "Hadash",
      "parent": "he:Hadash",
      "read": "hadas",
      "passed": "hadas",
@@ -3417,7 +3083,6 @@
     {
      "key": "dry",
      "role": "modifier",
-     "draft": "Yavesh",
      "parent": "he:Yavesh",
      "read": "yaves",
      "passed": "yaves",
@@ -3427,7 +3092,6 @@
     {
      "key": "wet",
      "role": "modifier",
-     "draft": "Ratuv",
      "parent": "he:Ratuv",
      "read": "ratuv",
      "passed": "ratuv",
@@ -3437,7 +3101,6 @@
     {
      "key": "warm",
      "role": "modifier",
-     "draft": "Ham",
      "parent": "he:Ham",
      "read": "ham",
      "passed": "ham",
@@ -3447,7 +3110,6 @@
     {
      "key": "cold",
      "role": "modifier",
-     "draft": "Kar",
      "parent": "he:Kar",
      "read": "kar",
      "passed": "kar",
@@ -3457,7 +3119,6 @@
     {
      "key": "light",
      "role": "modifier",
-     "draft": "Or",
      "parent": "he:Or",
      "read": "or",
      "passed": "or",
@@ -3467,7 +3128,6 @@
     {
      "key": "dawn",
      "role": "modifier",
-     "draft": "Shahar",
      "parent": "he:Shahar",
      "read": "sahar",
      "passed": "sahar",
@@ -3477,7 +3137,6 @@
     {
      "key": "night",
      "role": "modifier",
-     "draft": "Laila",
      "parent": "he:Laila",
      "read": "laila",
      "passed": "laila",
@@ -3487,7 +3146,6 @@
     {
      "key": "star",
      "role": "modifier",
-     "draft": "Kohav",
      "parent": "he:Kohav",
      "read": "kohav",
      "passed": "kohav",
@@ -3497,7 +3155,6 @@
     {
      "key": "cloud",
      "role": "modifier",
-     "draft": "Anan",
      "parent": "he:Anan",
      "read": "anan",
      "passed": "anan",
@@ -3507,7 +3164,6 @@
     {
      "key": "mist",
      "role": "modifier",
-     "draft": "Arafel",
      "parent": "he:Arafel",
      "read": "arafel",
      "passed": "arafel",
@@ -3517,7 +3173,6 @@
     {
      "key": "rain",
      "role": "modifier",
-     "draft": "Geshem",
      "parent": "he:Geshem",
      "read": "gesem",
      "passed": "gesem",
@@ -3527,7 +3182,6 @@
     {
      "key": "wind",
      "role": "modifier",
-     "draft": "Ruah",
      "parent": "he:Ruah",
      "read": "ruah",
      "passed": "ruah",
@@ -3537,7 +3191,6 @@
     {
      "key": "sun",
      "role": "modifier",
-     "draft": "Shemesh",
      "parent": "he:Shemesh",
      "read": "semes",
      "passed": "semes",
@@ -3547,7 +3200,6 @@
     {
      "key": "earth",
      "role": "modifier",
-     "draft": "Erets",
      "parent": "he:Erets",
      "read": "eres",
      "passed": "eres",
@@ -3557,7 +3209,6 @@
     {
      "key": "stone",
      "role": "modifier",
-     "draft": "Even",
      "parent": "he:Even",
      "read": "even",
      "passed": "even",
@@ -3567,7 +3218,6 @@
     {
      "key": "sand",
      "role": "modifier",
-     "draft": "Hol",
      "parent": "he:Hol",
      "read": "hol",
      "passed": "hol",
@@ -3577,7 +3227,6 @@
     {
      "key": "salt",
      "role": "modifier",
-     "draft": "Melah",
      "parent": "he:Melah",
      "read": "melah",
      "passed": "melah",
@@ -3587,7 +3236,6 @@
     {
      "key": "water",
      "role": "modifier",
-     "draft": "Mayim",
      "parent": "he:Mayim",
      "read": "mayim",
      "passed": "mayim",
@@ -3597,7 +3245,6 @@
     {
      "key": "leaf",
      "role": "modifier",
-     "draft": "Ale",
      "parent": "he:Ale",
      "read": "ale",
      "passed": "ale",
@@ -3607,7 +3254,6 @@
     {
      "key": "flower",
      "role": "modifier",
-     "draft": "Perah",
      "parent": "he:Perah",
      "read": "perah",
      "passed": "perah",
@@ -3617,7 +3263,6 @@
     {
      "key": "thousand",
      "role": "modifier",
-     "draft": "Elef",
      "parent": "he:Elef",
      "read": "elef",
      "passed": "elef",
@@ -3627,7 +3272,6 @@
     {
      "key": "twin",
      "role": "modifier",
-     "draft": "Teom",
      "parent": "he:Teom",
      "read": "teom",
      "passed": "teom",
@@ -3637,7 +3281,6 @@
     {
      "key": "storm",
      "role": "meaning",
-     "draft": "Sufa",
      "parent": "he:Sufa",
      "read": "sufa",
      "passed": "sufa",
@@ -3647,7 +3290,6 @@
     {
      "key": "calm",
      "role": "meaning",
-     "draft": "Shaket",
      "parent": "he:Shaket",
      "read": "saket",
      "passed": "saket",
@@ -3657,7 +3299,6 @@
     {
      "key": "clear",
      "role": "meaning",
-     "draft": "Tsalul",
      "parent": "he:Tsalul",
      "read": "salul",
      "passed": "salul",
@@ -3667,7 +3308,6 @@
     {
      "key": "plenty",
      "role": "meaning",
-     "draft": "Shefa",
      "parent": "he:Shefa",
      "read": "sefa",
      "passed": "sefa",
@@ -3677,7 +3317,6 @@
     {
      "key": "nectar",
      "role": "meaning",
-     "draft": "Tsuf",
      "parent": "he:Tsuf",
      "read": "suf",
      "passed": "suf",
@@ -3687,7 +3326,6 @@
     {
      "key": "trial",
      "role": "meaning",
-     "draft": "Mashber",
      "parent": "he:Mashber",
      "read": "masber",
      "passed": "masber",
@@ -3697,7 +3335,6 @@
     {
      "key": "islands",
      "role": "meaning",
-     "draft": "Iyim",
      "parent": "he:Iyim",
      "read": "iyim",
      "passed": "iyim",
@@ -3707,7 +3344,6 @@
     {
      "key": "known",
      "role": "meaning",
-     "draft": "Yadua",
      "parent": "he:Yadua",
      "read": "yadua",
      "passed": "yadua",
@@ -3717,7 +3353,6 @@
     {
      "key": "south",
      "role": "meaning",
-     "draft": "Darom",
      "parent": "he:Darom",
      "read": "darom",
      "passed": "darom",
@@ -3727,7 +3362,6 @@
     {
      "key": "east",
      "role": "meaning",
-     "draft": "Kedem",
      "parent": "he:Kedem",
      "read": "kedem",
      "passed": "kedem",
@@ -3737,7 +3371,6 @@
     {
      "key": "edge",
      "role": "meaning",
-     "draft": "Katzeh",
      "parent": "he:Katzeh",
      "read": "kaseh",
      "passed": "kaseh",
@@ -3747,7 +3380,6 @@
     {
      "key": "wave",
      "role": "meaning",
-     "draft": "Gal",
      "parent": "he:Gal",
      "read": "gal",
      "passed": "gal",
@@ -3757,7 +3389,6 @@
     {
      "key": "foam",
      "role": "meaning",
-     "draft": "Ketsef",
      "parent": "he:Ketsef",
      "read": "kesef",
      "passed": "kesef",
@@ -3767,7 +3398,6 @@
     {
      "key": "serpent",
      "role": "meaning",
-     "draft": "Nachash",
      "parent": "he:Nachash",
      "read": "nahas",
      "passed": "nahas",
@@ -3777,7 +3407,6 @@
     {
      "key": "dew",
      "role": "meaning",
-     "draft": "Tal",
      "parent": "he:Tal",
      "read": "tal",
      "passed": "tal",
@@ -3787,7 +3416,6 @@
     {
      "key": "middle",
      "role": "meaning",
-     "draft": "Tikhon",
      "parent": "he:Tikhon",
      "read": "tihon",
      "passed": "tihon",
@@ -3797,7 +3425,6 @@
     {
      "key": "love",
      "role": "meaning",
-     "draft": "Ahava",
      "parent": "he:Ahava",
      "read": "ahava",
      "passed": "ahava",
@@ -3807,7 +3434,6 @@
     {
      "key": "rough",
      "role": "meaning",
-     "draft": "Gas",
      "parent": "he:Gas",
      "read": "gas",
      "passed": "gas",
@@ -3817,7 +3443,6 @@
     {
      "key": "harmony",
      "role": "meaning",
-     "draft": "Harmonia",
      "parent": "he:Harmonia",
      "read": "harmonia",
      "passed": "harmonia",
@@ -3827,7 +3452,6 @@
     {
      "key": "faith",
      "role": "meaning",
-     "draft": "Emuna",
      "parent": "he:Emuna",
      "read": "emuna",
      "passed": "emuna",
@@ -3837,7 +3461,6 @@
     {
      "key": "success",
      "role": "meaning",
-     "draft": "Hatslaha",
      "parent": "he:Hatslaha",
      "read": "haslaha",
      "passed": "haslaha",
@@ -3847,7 +3470,6 @@
     {
      "key": "dream",
      "role": "meaning",
-     "draft": "Halom",
      "parent": "he:Halom",
      "read": "halom",
      "passed": "halom",
@@ -3857,7 +3479,6 @@
     {
      "key": "death",
      "role": "meaning",
-     "draft": "Mavet",
      "parent": "he:Mavet",
      "read": "mavet",
      "passed": "mavet",
@@ -3867,17 +3488,15 @@
     {
      "key": "time",
      "role": "meaning",
-     "draft": "Zman",
      "parent": "he:Zman",
      "read": "sman",
-     "passed": "saman",
-     "said": "SA.man",
+     "passed": "seman",
+     "said": "SE.man",
      "faults": []
     },
     {
      "key": "sorrow",
      "role": "meaning",
-     "draft": "Tsaar",
      "parent": "he:tsa'ar",
      "read": "sa'ar",
      "passed": "sa'ar",
@@ -3888,7 +3507,6 @@
     {
      "key": "springtime",
      "role": "meaning",
-     "draft": "Aviv",
      "parent": "he:Aviv",
      "read": "aviv",
      "passed": "aviv",
@@ -3898,17 +3516,15 @@
     {
      "key": "autumn",
      "role": "meaning",
-     "draft": "Stav",
      "parent": "he:Stav",
      "read": "stav",
-     "passed": "satav",
-     "said": "SA.tav",
+     "passed": "setav",
+     "said": "SE.tav",
      "faults": []
     },
     {
      "key": "summer",
      "role": "meaning",
-     "draft": "Kayits",
      "parent": "he:Kayits",
      "read": "kayis",
      "passed": "kayis",
@@ -3918,7 +3534,6 @@
     {
      "key": "winter",
      "role": "meaning",
-     "draft": "Horef",
      "parent": "he:Horef",
      "read": "horef",
      "passed": "horef",
@@ -3928,7 +3543,6 @@
     {
      "key": "hope",
      "role": "meaning",
-     "draft": "Tikva",
      "parent": "he:Tikva",
      "read": "tikva",
      "passed": "tikva",
@@ -3938,7 +3552,6 @@
     {
      "key": "gentle",
      "role": "meaning",
-     "draft": "Adin",
      "parent": "he:Adin",
      "read": "adin",
      "passed": "adin",
@@ -3948,7 +3561,6 @@
     {
      "key": "good",
      "role": "meaning",
-     "draft": "Tov",
      "parent": "he:Tov",
      "read": "tov",
      "passed": "tov",
@@ -3958,7 +3570,6 @@
     {
      "key": "endure",
      "role": "meaning",
-     "draft": "Hatmada",
      "parent": "he:Hatmada",
      "read": "hatmada",
      "passed": "hatmada",
@@ -3968,17 +3579,15 @@
     {
      "key": "alone",
      "role": "meaning",
-     "draft": "Bdidut",
      "parent": "he:Bdidut",
      "read": "bdidut",
-     "passed": "bididut",
-     "said": "bi.DI.dut",
+     "passed": "bedidut",
+     "said": "be.DI.dut",
      "faults": []
     },
     {
      "key": "forget",
      "role": "meaning",
-     "draft": "Shikhecha",
      "parent": "he:Shikhecha",
      "read": "siheha",
      "passed": "siheha",
@@ -3988,7 +3597,6 @@
     {
      "key": "fear",
      "role": "meaning",
-     "draft": "Pahad",
      "parent": "he:Pahad",
      "read": "pahad",
      "passed": "pahad",
@@ -3998,7 +3606,6 @@
     {
      "key": "joy",
      "role": "meaning",
-     "draft": "Simha",
      "parent": "he:Simha",
      "read": "simha",
      "passed": "simha",
@@ -4008,7 +3615,6 @@
     {
      "key": "excellent",
      "role": "meaning",
-     "draft": "Metsuyan",
      "parent": "he:Metsuyan",
      "read": "mesuyan",
      "passed": "mesuyan",
@@ -4018,7 +3624,6 @@
     {
      "key": "dark",
      "role": "meaning",
-     "draft": "Hoshekh",
      "parent": "he:Hoshekh",
      "read": "hoseh",
      "passed": "hoseh",
@@ -4028,7 +3633,6 @@
     {
      "key": "sleep",
      "role": "meaning",
-     "draft": "Shena",
      "parent": "he:Shena",
      "read": "sena",
      "passed": "sena",
@@ -4038,7 +3642,6 @@
     {
      "key": "decay",
      "role": "meaning",
-     "draft": "Rikavon",
      "parent": "he:Rikavon",
      "read": "rikavon",
      "passed": "rikavon",
@@ -4048,7 +3651,6 @@
     {
      "key": "plague",
      "role": "meaning",
-     "draft": "Dever",
      "parent": "he:Dever",
      "read": "dever",
      "passed": "dever",
@@ -4056,10 +3658,9 @@
      "faults": []
     }
    ],
-   "changed": 28,
    "faults": 0,
    "fallen_together": [],
-   "from_fuller_parent_forms": 2
+   "joined_names_at_fault": 0
   },
   "pwani": {
    "label": "Pwani (Swahili-rooted)",
@@ -4067,7 +3668,6 @@
     {
      "key": "bowl",
      "role": "head",
-     "draft": "Shimo",
      "parent": "sw:Shimo",
      "read": "simo",
      "passed": "simo",
@@ -4077,7 +3677,6 @@
     {
      "key": "basin",
      "role": "head",
-     "draft": "Bonde",
      "parent": "sw:Bonde",
      "read": "bonde",
      "passed": "bonde",
@@ -4087,7 +3686,6 @@
     {
      "key": "lake",
      "role": "head",
-     "draft": "Ziwa",
      "parent": "sw:Ziwa",
      "read": "siwa",
      "passed": "siwa",
@@ -4097,7 +3695,6 @@
     {
      "key": "lakes",
      "role": "head",
-     "draft": "Maziwa",
      "parent": "sw:Maziwa",
      "read": "masiwa",
      "passed": "masiwa",
@@ -4107,7 +3704,6 @@
     {
      "key": "river",
      "role": "head",
-     "draft": "Mto",
      "parent": "sw:m°to",
      "read": "muto",
      "passed": "muto",
@@ -4117,7 +3713,6 @@
     {
      "key": "valley",
      "role": "head",
-     "draft": "Bonde",
      "parent": "sw:Bonde",
      "read": "bonde",
      "passed": "bonde",
@@ -4127,7 +3722,6 @@
     {
      "key": "plain",
      "role": "head",
-     "draft": "Tambarare",
      "parent": "sw:Tambarare",
      "read": "tambarare",
      "passed": "tambarare",
@@ -4137,7 +3731,6 @@
     {
      "key": "hills",
      "role": "head",
-     "draft": "Vilima",
      "parent": "sw:Vilima",
      "read": "vilima",
      "passed": "vilima",
@@ -4147,7 +3740,6 @@
     {
      "key": "mountains",
      "role": "head",
-     "draft": "Milima",
      "parent": "sw:Milima",
      "read": "milima",
      "passed": "milima",
@@ -4157,7 +3749,6 @@
     {
      "key": "ridge",
      "role": "head",
-     "draft": "Kingo",
      "parent": "sw:Kingo",
      "read": "kingo",
      "passed": "kingo",
@@ -4167,7 +3758,6 @@
     {
      "key": "cliff",
      "role": "head",
-     "draft": "Genge",
      "parent": "sw:Genge",
      "read": "genge",
      "passed": "genge",
@@ -4177,7 +3767,6 @@
     {
      "key": "island",
      "role": "head",
-     "draft": "Kisiwa",
      "parent": "sw:Kisiwa",
      "read": "kisiwa",
      "passed": "kisiwa",
@@ -4187,7 +3776,6 @@
     {
      "key": "bay",
      "role": "head",
-     "draft": "Guba",
      "parent": "sw:Guba",
      "read": "guba",
      "passed": "guba",
@@ -4197,7 +3785,6 @@
     {
      "key": "coast",
      "role": "head",
-     "draft": "Pwani",
      "parent": "sw:Pwani",
      "read": "pwani",
      "passed": "puwani",
@@ -4207,7 +3794,6 @@
     {
      "key": "strait",
      "role": "head",
-     "draft": "Mlango",
      "parent": "sw:m°lango",
      "read": "mulango",
      "passed": "mulango",
@@ -4217,7 +3803,6 @@
     {
      "key": "sea",
      "role": "head",
-     "draft": "Bahari",
      "parent": "sw:Bahari",
      "read": "bahari",
      "passed": "bahari",
@@ -4227,7 +3812,6 @@
     {
      "key": "forest",
      "role": "head",
-     "draft": "Msitu",
      "parent": "sw:m°situ",
      "read": "musitu",
      "passed": "musitu",
@@ -4237,7 +3821,6 @@
     {
      "key": "desert",
      "role": "head",
-     "draft": "Jangwa",
      "parent": "sw:Jangwa",
      "read": "yangwa",
      "passed": "yangwa",
@@ -4247,7 +3830,6 @@
     {
      "key": "field",
      "role": "head",
-     "draft": "Mbuga",
      "parent": "sw:Mbuga",
      "read": "imbuga",
      "passed": "imbuga",
@@ -4257,7 +3839,6 @@
     {
      "key": "land",
      "role": "head",
-     "draft": "Nchi",
      "parent": "sw:Nchi",
      "read": "insi",
      "passed": "insi",
@@ -4267,7 +3848,6 @@
     {
      "key": "falls",
      "role": "head",
-     "draft": "Maporomoko",
      "parent": "sw:Maporomoko",
      "read": "maporomoko",
      "passed": "maporomoko",
@@ -4277,7 +3857,6 @@
     {
      "key": "spring",
      "role": "head",
-     "draft": "Chemchemi",
      "parent": "sw:Chemchemi",
      "read": "semsemi",
      "passed": "semsemi",
@@ -4287,7 +3866,6 @@
     {
      "key": "black",
      "role": "modifier",
-     "draft": "Eusi",
      "parent": "sw:Eusi",
      "read": "eusi",
      "passed": "eusi",
@@ -4297,7 +3875,6 @@
     {
      "key": "white",
      "role": "modifier",
-     "draft": "Eupe",
      "parent": "sw:Eupe",
      "read": "eupe",
      "passed": "eupe",
@@ -4307,7 +3884,6 @@
     {
      "key": "red",
      "role": "modifier",
-     "draft": "Ekundu",
      "parent": "sw:Ekundu",
      "read": "ekundu",
      "passed": "ekundu",
@@ -4317,7 +3893,6 @@
     {
      "key": "green",
      "role": "modifier",
-     "draft": "Kijani",
      "parent": "sw:Kijani",
      "read": "kiyani",
      "passed": "kiyani",
@@ -4327,7 +3902,6 @@
     {
      "key": "gold",
      "role": "modifier",
-     "draft": "Dhahabu",
      "parent": "sw:Dhahabu",
      "read": "dahabu",
      "passed": "dahabu",
@@ -4337,7 +3911,6 @@
     {
      "key": "blue",
      "role": "modifier",
-     "draft": "Samawati",
      "parent": "sw:Samawati",
      "read": "samawati",
      "passed": "samawati",
@@ -4347,7 +3920,6 @@
     {
      "key": "great",
      "role": "modifier",
-     "draft": "Kubwa",
      "parent": "sw:Kubwa",
      "read": "kubwa",
      "passed": "kubwa",
@@ -4357,7 +3929,6 @@
     {
      "key": "small",
      "role": "modifier",
-     "draft": "Dogo",
      "parent": "sw:Dogo",
      "read": "dogo",
      "passed": "dogo",
@@ -4367,7 +3938,6 @@
     {
      "key": "high",
      "role": "modifier",
-     "draft": "Juu",
      "parent": "sw:Juu",
      "read": "yuu",
      "passed": "yuu",
@@ -4377,7 +3947,6 @@
     {
      "key": "deep",
      "role": "modifier",
-     "draft": "Kina",
      "parent": "sw:Kina",
      "read": "kina",
      "passed": "kina",
@@ -4387,7 +3956,6 @@
     {
      "key": "long",
      "role": "modifier",
-     "draft": "Refu",
      "parent": "sw:Refu",
      "read": "refu",
      "passed": "refu",
@@ -4397,7 +3965,6 @@
     {
      "key": "old",
      "role": "modifier",
-     "draft": "Kale",
      "parent": "sw:Kale",
      "read": "kale",
      "passed": "kale",
@@ -4407,7 +3974,6 @@
     {
      "key": "new",
      "role": "modifier",
-     "draft": "Mpya",
      "parent": "sw:Mpya",
      "read": "impya",
      "passed": "impiya",
@@ -4417,7 +3983,6 @@
     {
      "key": "dry",
      "role": "modifier",
-     "draft": "Kavu",
      "parent": "sw:Kavu",
      "read": "kavu",
      "passed": "kavu",
@@ -4427,7 +3992,6 @@
     {
      "key": "wet",
      "role": "modifier",
-     "draft": "Rutuba",
      "parent": "sw:Rutuba",
      "read": "rutuba",
      "passed": "rutuba",
@@ -4437,7 +4001,6 @@
     {
      "key": "warm",
      "role": "modifier",
-     "draft": "Joto",
      "parent": "sw:Joto",
      "read": "yoto",
      "passed": "yoto",
@@ -4447,7 +4010,6 @@
     {
      "key": "cold",
      "role": "modifier",
-     "draft": "Baridi",
      "parent": "sw:Baridi",
      "read": "baridi",
      "passed": "baridi",
@@ -4457,7 +4019,6 @@
     {
      "key": "light",
      "role": "modifier",
-     "draft": "Nuru",
      "parent": "sw:Nuru",
      "read": "nuru",
      "passed": "nuru",
@@ -4467,7 +4028,6 @@
     {
      "key": "dawn",
      "role": "modifier",
-     "draft": "Alfajiri",
      "parent": "sw:Alfajiri",
      "read": "alfayiri",
      "passed": "alfayiri",
@@ -4477,7 +4037,6 @@
     {
      "key": "night",
      "role": "modifier",
-     "draft": "Usiku",
      "parent": "sw:Usiku",
      "read": "usiku",
      "passed": "usiku",
@@ -4487,7 +4046,6 @@
     {
      "key": "star",
      "role": "modifier",
-     "draft": "Nyota",
      "parent": "sw:Nyota",
      "read": "inyota",
      "passed": "inyota",
@@ -4497,7 +4055,6 @@
     {
      "key": "cloud",
      "role": "modifier",
-     "draft": "Wingu",
      "parent": "sw:Wingu",
      "read": "wingu",
      "passed": "wingu",
@@ -4507,7 +4064,6 @@
     {
      "key": "mist",
      "role": "modifier",
-     "draft": "Ukungu",
      "parent": "sw:Ukungu",
      "read": "ukungu",
      "passed": "ukungu",
@@ -4517,7 +4073,6 @@
     {
      "key": "rain",
      "role": "modifier",
-     "draft": "Mvua",
      "parent": "sw:Mvua",
      "read": "imvua",
      "passed": "imvua",
@@ -4527,7 +4082,6 @@
     {
      "key": "wind",
      "role": "modifier",
-     "draft": "Upepo",
      "parent": "sw:Upepo",
      "read": "upepo",
      "passed": "upepo",
@@ -4537,7 +4091,6 @@
     {
      "key": "sun",
      "role": "modifier",
-     "draft": "Jua",
      "parent": "sw:Jua",
      "read": "yua",
      "passed": "yua",
@@ -4547,7 +4100,6 @@
     {
      "key": "earth",
      "role": "modifier",
-     "draft": "Dunia",
      "parent": "sw:Dunia",
      "read": "dunia",
      "passed": "dunia",
@@ -4557,7 +4109,6 @@
     {
      "key": "stone",
      "role": "modifier",
-     "draft": "Jiwe",
      "parent": "sw:Jiwe",
      "read": "yiwe",
      "passed": "yiwe",
@@ -4567,7 +4118,6 @@
     {
      "key": "sand",
      "role": "modifier",
-     "draft": "Mchanga",
      "parent": "sw:m°changa",
      "read": "musanga",
      "passed": "musanga",
@@ -4577,7 +4127,6 @@
     {
      "key": "salt",
      "role": "modifier",
-     "draft": "Chumvi",
      "parent": "sw:Chumvi",
      "read": "sumvi",
      "passed": "sumvi",
@@ -4587,7 +4136,6 @@
     {
      "key": "water",
      "role": "modifier",
-     "draft": "Maji",
      "parent": "sw:Maji",
      "read": "mayi",
      "passed": "mayi",
@@ -4597,7 +4145,6 @@
     {
      "key": "leaf",
      "role": "modifier",
-     "draft": "Jani",
      "parent": "sw:Jani",
      "read": "yani",
      "passed": "yani",
@@ -4607,7 +4154,6 @@
     {
      "key": "flower",
      "role": "modifier",
-     "draft": "Ua",
      "parent": "sw:Ua",
      "read": "ua",
      "passed": "ua",
@@ -4617,7 +4163,6 @@
     {
      "key": "thousand",
      "role": "modifier",
-     "draft": "Elfu",
      "parent": "sw:Elfu",
      "read": "elfu",
      "passed": "elfu",
@@ -4627,7 +4172,6 @@
     {
      "key": "twin",
      "role": "modifier",
-     "draft": "Pacha",
      "parent": "sw:Pacha",
      "read": "pasa",
      "passed": "pasa",
@@ -4637,7 +4181,6 @@
     {
      "key": "storm",
      "role": "meaning",
-     "draft": "Dhoruba",
      "parent": "sw:Dhoruba",
      "read": "doruba",
      "passed": "doruba",
@@ -4647,7 +4190,6 @@
     {
      "key": "calm",
      "role": "meaning",
-     "draft": "Shwari",
      "parent": "sw:Shwari",
      "read": "swari",
      "passed": "suwari",
@@ -4657,7 +4199,6 @@
     {
      "key": "clear",
      "role": "meaning",
-     "draft": "Angavu",
      "parent": "sw:Angavu",
      "read": "angavu",
      "passed": "angavu",
@@ -4667,7 +4208,6 @@
     {
      "key": "plenty",
      "role": "meaning",
-     "draft": "Wingi",
      "parent": "sw:Wingi",
      "read": "wingi",
      "passed": "wingi",
@@ -4677,7 +4217,6 @@
     {
      "key": "nectar",
      "role": "meaning",
-     "draft": "Asali",
      "parent": "sw:Asali",
      "read": "asali",
      "passed": "asali",
@@ -4687,7 +4226,6 @@
     {
      "key": "trial",
      "role": "meaning",
-     "draft": "Shida",
      "parent": "sw:Shida",
      "read": "sida",
      "passed": "sida",
@@ -4697,7 +4235,6 @@
     {
      "key": "islands",
      "role": "meaning",
-     "draft": "Visiwa",
      "parent": "sw:Visiwa",
      "read": "visiwa",
      "passed": "visiwa",
@@ -4707,7 +4244,6 @@
     {
      "key": "known",
      "role": "meaning",
-     "draft": "Julikana",
      "parent": "sw:Julikana",
      "read": "yulikana",
      "passed": "yulikana",
@@ -4717,7 +4253,6 @@
     {
      "key": "south",
      "role": "meaning",
-     "draft": "Kusini",
      "parent": "sw:Kusini",
      "read": "kusini",
      "passed": "kusini",
@@ -4727,7 +4262,6 @@
     {
      "key": "east",
      "role": "meaning",
-     "draft": "Mashariki",
      "parent": "sw:Mashariki",
      "read": "masariki",
      "passed": "masariki",
@@ -4737,7 +4271,6 @@
     {
      "key": "edge",
      "role": "meaning",
-     "draft": "Ukingo",
      "parent": "sw:Ukingo",
      "read": "ukingo",
      "passed": "ukingo",
@@ -4747,7 +4280,6 @@
     {
      "key": "wave",
      "role": "meaning",
-     "draft": "Mawimbi",
      "parent": "sw:Mawimbi",
      "read": "mawimbi",
      "passed": "mawimbi",
@@ -4757,7 +4289,6 @@
     {
      "key": "foam",
      "role": "meaning",
-     "draft": "Povu",
      "parent": "sw:Povu",
      "read": "povu",
      "passed": "povu",
@@ -4767,7 +4298,6 @@
     {
      "key": "serpent",
      "role": "meaning",
-     "draft": "Nyoka",
      "parent": "sw:Nyoka",
      "read": "inyoka",
      "passed": "inyoka",
@@ -4777,7 +4307,6 @@
     {
      "key": "dew",
      "role": "meaning",
-     "draft": "Umande",
      "parent": "sw:Umande",
      "read": "umande",
      "passed": "umande",
@@ -4787,7 +4316,6 @@
     {
      "key": "middle",
      "role": "meaning",
-     "draft": "Kati",
      "parent": "sw:Kati",
      "read": "kati",
      "passed": "kati",
@@ -4797,7 +4325,6 @@
     {
      "key": "love",
      "role": "meaning",
-     "draft": "Upendo",
      "parent": "sw:Upendo",
      "read": "upendo",
      "passed": "upendo",
@@ -4807,7 +4334,6 @@
     {
      "key": "rough",
      "role": "meaning",
-     "draft": "Kparuparu",
      "parent": "sw:paruparu",
      "read": "paruparu",
      "passed": "paruparu",
@@ -4818,7 +4344,6 @@
     {
      "key": "harmony",
      "role": "meaning",
-     "draft": "Maelewano",
      "parent": "sw:Maelewano",
      "read": "maelewano",
      "passed": "maelewano",
@@ -4828,7 +4353,6 @@
     {
      "key": "faith",
      "role": "meaning",
-     "draft": "Imani",
      "parent": "sw:Imani",
      "read": "imani",
      "passed": "imani",
@@ -4838,7 +4362,6 @@
     {
      "key": "success",
      "role": "meaning",
-     "draft": "Fanaka",
      "parent": "sw:Fanaka",
      "read": "fanaka",
      "passed": "fanaka",
@@ -4848,7 +4371,6 @@
     {
      "key": "dream",
      "role": "meaning",
-     "draft": "Ndoto",
      "parent": "sw:Ndoto",
      "read": "indoto",
      "passed": "indoto",
@@ -4858,7 +4380,6 @@
     {
      "key": "death",
      "role": "meaning",
-     "draft": "Mauti",
      "parent": "sw:Mauti",
      "read": "mauti",
      "passed": "mauti",
@@ -4868,7 +4389,6 @@
     {
      "key": "time",
      "role": "meaning",
-     "draft": "Wakati",
      "parent": "sw:Wakati",
      "read": "wakati",
      "passed": "wakati",
@@ -4878,7 +4398,6 @@
     {
      "key": "sorrow",
      "role": "meaning",
-     "draft": "Huzuni",
      "parent": "sw:Huzuni",
      "read": "husuni",
      "passed": "husuni",
@@ -4888,7 +4407,6 @@
     {
      "key": "springtime",
      "role": "meaning",
-     "draft": "Masika",
      "parent": "sw:Masika",
      "read": "masika",
      "passed": "masika",
@@ -4898,7 +4416,6 @@
     {
      "key": "autumn",
      "role": "meaning",
-     "draft": "Vuli",
      "parent": "sw:Vuli",
      "read": "vuli",
      "passed": "vuli",
@@ -4908,7 +4425,6 @@
     {
      "key": "summer",
      "role": "meaning",
-     "draft": "Kiangazi",
      "parent": "sw:Kiangazi",
      "read": "kiangasi",
      "passed": "kiangasi",
@@ -4918,7 +4434,6 @@
     {
      "key": "winter",
      "role": "meaning",
-     "draft": "Kipupwe",
      "parent": "sw:Kipupwe",
      "read": "kipupwe",
      "passed": "kipupwe",
@@ -4928,7 +4443,6 @@
     {
      "key": "hope",
      "role": "meaning",
-     "draft": "Tumaini",
      "parent": "sw:Tumaini",
      "read": "tumaini",
      "passed": "tumaini",
@@ -4938,7 +4452,6 @@
     {
      "key": "gentle",
      "role": "meaning",
-     "draft": "Pole",
      "parent": "sw:Pole",
      "read": "pole",
      "passed": "pole",
@@ -4948,7 +4461,6 @@
     {
      "key": "good",
      "role": "meaning",
-     "draft": "Wema",
      "parent": "sw:Wema",
      "read": "wema",
      "passed": "wema",
@@ -4958,7 +4470,6 @@
     {
      "key": "endure",
      "role": "meaning",
-     "draft": "Subira",
      "parent": "sw:Subira",
      "read": "subira",
      "passed": "subira",
@@ -4968,7 +4479,6 @@
     {
      "key": "alone",
      "role": "meaning",
-     "draft": "Upweke",
      "parent": "sw:Upweke",
      "read": "upweke",
      "passed": "upweke",
@@ -4978,7 +4488,6 @@
     {
      "key": "forget",
      "role": "meaning",
-     "draft": "Sahau",
      "parent": "sw:Sahau",
      "read": "sahau",
      "passed": "sahau",
@@ -4988,7 +4497,6 @@
     {
      "key": "fear",
      "role": "meaning",
-     "draft": "Hofu",
      "parent": "sw:Hofu",
      "read": "hofu",
      "passed": "hofu",
@@ -4998,7 +4506,6 @@
     {
      "key": "joy",
      "role": "meaning",
-     "draft": "Furaha",
      "parent": "sw:Furaha",
      "read": "furaha",
      "passed": "furaha",
@@ -5008,7 +4515,6 @@
     {
      "key": "excellent",
      "role": "meaning",
-     "draft": "Bora",
      "parent": "sw:Bora",
      "read": "bora",
      "passed": "bora",
@@ -5018,7 +4524,6 @@
     {
      "key": "dark",
      "role": "meaning",
-     "draft": "Giza",
      "parent": "sw:Giza",
      "read": "gisa",
      "passed": "gisa",
@@ -5028,7 +4533,6 @@
     {
      "key": "sleep",
      "role": "meaning",
-     "draft": "Usingizi",
      "parent": "sw:Usingizi",
      "read": "usingisi",
      "passed": "usingisi",
@@ -5038,7 +4542,6 @@
     {
      "key": "decay",
      "role": "meaning",
-     "draft": "Uozo",
      "parent": "sw:Uozo",
      "read": "uoso",
      "passed": "uoso",
@@ -5048,7 +4551,6 @@
     {
      "key": "plague",
      "role": "meaning",
-     "draft": "Tauni",
      "parent": "sw:Tauni",
      "read": "tauni",
      "passed": "tauni",
@@ -5056,10 +4558,9 @@
      "faults": []
     }
    ],
-   "changed": 39,
    "faults": 0,
    "fallen_together": [],
-   "from_fuller_parent_forms": 5
+   "joined_names_at_fault": 0
   },
   "dala": {
    "label": "Dala (Turkic- and Mongolic-rooted)",
@@ -5067,7 +4568,6 @@
     {
      "key": "bowl",
      "role": "head",
-     "draft": "oy",
      "parent": "kk:ой",
      "read": "oi",
      "passed": "oi",
@@ -5077,7 +4577,6 @@
     {
      "key": "basin",
      "role": "head",
-     "draft": "ova",
      "parent": "la:owa",
      "read": "owa",
      "passed": "owa",
@@ -5087,7 +4586,6 @@
     {
      "key": "lake",
      "role": "head",
-     "draft": "kol",
      "parent": "kk:көл",
      "read": "kol",
      "passed": "kol",
@@ -5097,7 +4595,6 @@
     {
      "key": "lakes",
      "role": "head",
-     "draft": "kollar",
      "parent": "kk:көлдөр",
      "read": "koldor",
      "passed": "koldor",
@@ -5108,7 +4605,6 @@
     {
      "key": "river",
      "role": "head",
-     "draft": "gol",
      "parent": "mn:гол",
      "read": "gol",
      "passed": "gol",
@@ -5118,7 +4614,6 @@
     {
      "key": "valley",
      "role": "head",
-     "draft": "say",
      "parent": "kk:сай",
      "read": "sai",
      "passed": "sai",
@@ -5128,7 +4623,6 @@
     {
      "key": "plain",
      "role": "head",
-     "draft": "dala",
      "parent": "kk:дала",
      "read": "dala",
      "passed": "dala",
@@ -5138,7 +4632,6 @@
     {
      "key": "hills",
      "role": "head",
-     "draft": "tobe",
      "parent": "kk:төбе",
      "read": "tobe",
      "passed": "tobe",
@@ -5148,7 +4641,6 @@
     {
      "key": "mountains",
      "role": "head",
-     "draft": "tau",
      "parent": "kk:тау",
      "read": "tau",
      "passed": "tau",
@@ -5158,7 +4650,6 @@
     {
      "key": "ridge",
      "role": "head",
-     "draft": "kyr",
      "parent": "kk:қыр",
      "read": "kir",
      "passed": "kir",
@@ -5168,7 +4659,6 @@
     {
      "key": "cliff",
      "role": "head",
-     "draft": "jar",
      "parent": "kk:жар",
      "read": "yar",
      "passed": "yar",
@@ -5178,7 +4668,6 @@
     {
      "key": "island",
      "role": "head",
-     "draft": "aral",
      "parent": "kk:арал",
      "read": "aral",
      "passed": "aral",
@@ -5188,7 +4677,6 @@
     {
      "key": "bay",
      "role": "head",
-     "draft": "koltyk",
      "parent": "kk:қолтық",
      "read": "koltuk",
      "passed": "koltuk",
@@ -5198,7 +4686,6 @@
     {
      "key": "coast",
      "role": "head",
-     "draft": "jaga",
      "parent": "kk:жаға",
      "read": "yaga",
      "passed": "yaga",
@@ -5208,7 +4695,6 @@
     {
      "key": "strait",
      "role": "head",
-     "draft": "bogaz",
      "parent": "kk:боғаз",
      "read": "bogas",
      "passed": "bogas",
@@ -5218,7 +4704,6 @@
     {
      "key": "sea",
      "role": "head",
-     "draft": "tengiz",
      "parent": "kk:теңіз",
      "read": "tengis",
      "passed": "tengis",
@@ -5228,7 +4713,6 @@
     {
      "key": "forest",
      "role": "head",
-     "draft": "orman",
      "parent": "kk:орман",
      "read": "orman",
      "passed": "orman",
@@ -5238,7 +4722,6 @@
     {
      "key": "desert",
      "role": "head",
-     "draft": "gobi",
      "parent": "mn:говь",
      "read": "gobi",
      "passed": "gobi",
@@ -5248,7 +4731,6 @@
     {
      "key": "field",
      "role": "head",
-     "draft": "jaylau",
      "parent": "kk:жайлау",
      "read": "yailau",
      "passed": "yailau",
@@ -5258,7 +4740,6 @@
     {
      "key": "land",
      "role": "head",
-     "draft": "jer",
      "parent": "kk:жер",
      "read": "yer",
      "passed": "yer",
@@ -5268,7 +4749,6 @@
     {
      "key": "falls",
      "role": "head",
-     "draft": "sarkyrama",
      "parent": "kk:сарқырама",
      "read": "sarkirama",
      "passed": "sarkirama",
@@ -5278,7 +4758,6 @@
     {
      "key": "spring",
      "role": "head",
-     "draft": "bulak",
      "parent": "kk:бұлақ",
      "read": "bulak",
      "passed": "bulak",
@@ -5288,7 +4767,6 @@
     {
      "key": "black",
      "role": "modifier",
-     "draft": "kara",
      "parent": "kk:қара",
      "read": "kara",
      "passed": "kara",
@@ -5298,7 +4776,6 @@
     {
      "key": "white",
      "role": "modifier",
-     "draft": "ak",
      "parent": "kk:ақ",
      "read": "ak",
      "passed": "ak",
@@ -5308,7 +4785,6 @@
     {
      "key": "red",
      "role": "modifier",
-     "draft": "kyzyl",
      "parent": "kk:қызыл",
      "read": "kisil",
      "passed": "kisil",
@@ -5318,7 +4794,6 @@
     {
      "key": "green",
      "role": "modifier",
-     "draft": "jasyl",
      "parent": "kk:жасыл",
      "read": "yasil",
      "passed": "yasil",
@@ -5328,7 +4803,6 @@
     {
      "key": "gold",
      "role": "modifier",
-     "draft": "altyn",
      "parent": "kk:алтын",
      "read": "altin",
      "passed": "altin",
@@ -5338,7 +4812,6 @@
     {
      "key": "blue",
      "role": "modifier",
-     "draft": "kok",
      "parent": "kk:көк",
      "read": "kok",
      "passed": "kok",
@@ -5348,7 +4821,6 @@
     {
      "key": "great",
      "role": "modifier",
-     "draft": "ulug",
      "parent": "la:ulug",
      "read": "ulug",
      "passed": "ulug",
@@ -5358,7 +4830,6 @@
     {
      "key": "small",
      "role": "modifier",
-     "draft": "kishi",
      "parent": "kk:кіші",
      "read": "kisi",
      "passed": "kisi",
@@ -5368,7 +4839,6 @@
     {
      "key": "high",
      "role": "modifier",
-     "draft": "biik",
      "parent": "kk:биік",
      "read": "biik",
      "passed": "biik",
@@ -5378,7 +4848,6 @@
     {
      "key": "deep",
      "role": "modifier",
-     "draft": "teren",
      "parent": "kk:терең",
      "read": "tereng",
      "passed": "tereng",
@@ -5388,7 +4857,6 @@
     {
      "key": "long",
      "role": "modifier",
-     "draft": "uzun",
      "parent": "kk:ұзын",
      "read": "usun",
      "passed": "usun",
@@ -5398,7 +4866,6 @@
     {
      "key": "old",
      "role": "modifier",
-     "draft": "eski",
      "parent": "kk:ескі",
      "read": "eski",
      "passed": "eski",
@@ -5408,7 +4875,6 @@
     {
      "key": "new",
      "role": "modifier",
-     "draft": "jana",
      "parent": "kk:жаңа",
      "read": "yanga",
      "passed": "yanga",
@@ -5418,7 +4884,6 @@
     {
      "key": "dry",
      "role": "modifier",
-     "draft": "kurgak",
      "parent": "kk:құрғақ",
      "read": "kurgak",
      "passed": "kurgak",
@@ -5428,7 +4893,6 @@
     {
      "key": "wet",
      "role": "modifier",
-     "draft": "ylgal",
      "parent": "kk:ылғал",
      "read": "ilgal",
      "passed": "ilgal",
@@ -5438,7 +4902,6 @@
     {
      "key": "warm",
      "role": "modifier",
-     "draft": "jyly",
      "parent": "kk:жылы",
      "read": "yili",
      "passed": "yili",
@@ -5448,7 +4911,6 @@
     {
      "key": "cold",
      "role": "modifier",
-     "draft": "suyk",
      "parent": "kk:суық",
      "read": "suuk",
      "passed": "suuk",
@@ -5458,7 +4920,6 @@
     {
      "key": "light",
      "role": "modifier",
-     "draft": "jaryk",
      "parent": "kk:жарық",
      "read": "yarik",
      "passed": "yarik",
@@ -5468,7 +4929,6 @@
     {
      "key": "dawn",
      "role": "modifier",
-     "draft": "tan",
      "parent": "kk:таң",
      "read": "tang",
      "passed": "tang",
@@ -5478,7 +4938,6 @@
     {
      "key": "night",
      "role": "modifier",
-     "draft": "tun",
      "parent": "kk:түн",
      "read": "tun",
      "passed": "tun",
@@ -5488,7 +4947,6 @@
     {
      "key": "star",
      "role": "modifier",
-     "draft": "juldyz",
      "parent": "kk:жұлдыз",
      "read": "yuldus",
      "passed": "yuldus",
@@ -5498,7 +4956,6 @@
     {
      "key": "cloud",
      "role": "modifier",
-     "draft": "bult",
      "parent": "kk:бұлт",
      "read": "bult",
      "passed": "bulut",
@@ -5508,7 +4965,6 @@
     {
      "key": "mist",
      "role": "modifier",
-     "draft": "tuman",
      "parent": "kk:тұман",
      "read": "tuman",
      "passed": "tuman",
@@ -5518,7 +4974,6 @@
     {
      "key": "rain",
      "role": "modifier",
-     "draft": "jangbyr",
      "parent": "kk:жаңбыр",
      "read": "yangbir",
      "passed": "yangbir",
@@ -5528,7 +4983,6 @@
     {
      "key": "wind",
      "role": "modifier",
-     "draft": "jel",
      "parent": "kk:жел",
      "read": "yel",
      "passed": "yel",
@@ -5538,7 +4992,6 @@
     {
      "key": "sun",
      "role": "modifier",
-     "draft": "kun",
      "parent": "kk:күн",
      "read": "kun",
      "passed": "kun",
@@ -5548,7 +5001,6 @@
     {
      "key": "earth",
      "role": "modifier",
-     "draft": "jer",
      "parent": "kk:жер",
      "read": "yer",
      "passed": "yer",
@@ -5558,7 +5010,6 @@
     {
      "key": "stone",
      "role": "modifier",
-     "draft": "tas",
      "parent": "kk:тас",
      "read": "tas",
      "passed": "tas",
@@ -5568,7 +5019,6 @@
     {
      "key": "sand",
      "role": "modifier",
-     "draft": "kum",
      "parent": "kk:құм",
      "read": "kum",
      "passed": "kum",
@@ -5578,7 +5028,6 @@
     {
      "key": "salt",
      "role": "modifier",
-     "draft": "tuz",
      "parent": "kk:тұз",
      "read": "tus",
      "passed": "tus",
@@ -5588,7 +5037,6 @@
     {
      "key": "water",
      "role": "modifier",
-     "draft": "su",
      "parent": "kk:су",
      "read": "su",
      "passed": "su",
@@ -5598,7 +5046,6 @@
     {
      "key": "leaf",
      "role": "modifier",
-     "draft": "japyrak",
      "parent": "kk:жапырақ",
      "read": "yapirak",
      "passed": "yapirak",
@@ -5608,7 +5055,6 @@
     {
      "key": "flower",
      "role": "modifier",
-     "draft": "gul",
      "parent": "kk:гүл",
      "read": "gul",
      "passed": "gul",
@@ -5618,7 +5064,6 @@
     {
      "key": "thousand",
      "role": "modifier",
-     "draft": "myng",
      "parent": "kk:мың",
      "read": "ming",
      "passed": "ming",
@@ -5628,7 +5073,6 @@
     {
      "key": "twin",
      "role": "modifier",
-     "draft": "egiz",
      "parent": "kk:егіз",
      "read": "egis",
      "passed": "egis",
@@ -5638,7 +5082,6 @@
     {
      "key": "storm",
      "role": "meaning",
-     "draft": "boran",
      "parent": "kk:боран",
      "read": "boran",
      "passed": "boran",
@@ -5648,7 +5091,6 @@
     {
      "key": "calm",
      "role": "meaning",
-     "draft": "tynysh",
      "parent": "kk:тыныш",
      "read": "tinis",
      "passed": "tinis",
@@ -5658,7 +5100,6 @@
     {
      "key": "clear",
      "role": "meaning",
-     "draft": "ashyk",
      "parent": "kk:ашық",
      "read": "asik",
      "passed": "asik",
@@ -5668,7 +5109,6 @@
     {
      "key": "plenty",
      "role": "meaning",
-     "draft": "mol",
      "parent": "kk:мол",
      "read": "mol",
      "passed": "mol",
@@ -5678,7 +5118,6 @@
     {
      "key": "nectar",
      "role": "meaning",
-     "draft": "bal",
      "parent": "kk:бал",
      "read": "bal",
      "passed": "bal",
@@ -5688,7 +5127,6 @@
     {
      "key": "trial",
      "role": "meaning",
-     "draft": "synak",
      "parent": "kk:сынақ",
      "read": "sinak",
      "passed": "sinak",
@@ -5698,7 +5136,6 @@
     {
      "key": "islands",
      "role": "meaning",
-     "draft": "araldar",
      "parent": "kk:аралдар",
      "read": "araldar",
      "passed": "araldar",
@@ -5708,7 +5145,6 @@
     {
      "key": "known",
      "role": "meaning",
-     "draft": "belgili",
      "parent": "kk:белгілі",
      "read": "belgili",
      "passed": "belgili",
@@ -5718,7 +5154,6 @@
     {
      "key": "south",
      "role": "meaning",
-     "draft": "ontustik",
      "parent": "kk:оңтүстік",
      "read": "ongtustuk",
      "passed": "ongtustuk",
@@ -5728,7 +5163,6 @@
     {
      "key": "east",
      "role": "meaning",
-     "draft": "shygys",
      "parent": "kk:шығыс",
      "read": "sigis",
      "passed": "sigis",
@@ -5738,7 +5172,6 @@
     {
      "key": "edge",
      "role": "meaning",
-     "draft": "shet",
      "parent": "kk:шет",
      "read": "set",
      "passed": "set",
@@ -5748,7 +5181,6 @@
     {
      "key": "wave",
      "role": "meaning",
-     "draft": "tolkyn",
      "parent": "kk:толқын",
      "read": "tolkun",
      "passed": "tolkun",
@@ -5758,7 +5190,6 @@
     {
      "key": "foam",
      "role": "meaning",
-     "draft": "kobik",
      "parent": "kk:көбік",
      "read": "kobuk",
      "passed": "kobuk",
@@ -5768,7 +5199,6 @@
     {
      "key": "serpent",
      "role": "meaning",
-     "draft": "jylan",
      "parent": "kk:жылан",
      "read": "yilan",
      "passed": "yilan",
@@ -5778,7 +5208,6 @@
     {
      "key": "dew",
      "role": "meaning",
-     "draft": "shyk",
      "parent": "kk:шық",
      "read": "sik",
      "passed": "sik",
@@ -5788,7 +5217,6 @@
     {
      "key": "middle",
      "role": "meaning",
-     "draft": "orta",
      "parent": "kk:орта",
      "read": "orta",
      "passed": "orta",
@@ -5798,7 +5226,6 @@
     {
      "key": "love",
      "role": "meaning",
-     "draft": "mahabbat",
      "parent": "kk:махаббат",
      "read": "mahabbat",
      "passed": "mahabat",
@@ -5808,7 +5235,6 @@
     {
      "key": "rough",
      "role": "meaning",
-     "draft": "kedir",
      "parent": "kk:кедір",
      "read": "kedir",
      "passed": "kedir",
@@ -5818,7 +5244,6 @@
     {
      "key": "harmony",
      "role": "meaning",
-     "draft": "yntymak",
      "parent": "kk:ынтымақ",
      "read": "intimak",
      "passed": "intimak",
@@ -5828,7 +5253,6 @@
     {
      "key": "faith",
      "role": "meaning",
-     "draft": "senim",
      "parent": "kk:сенім",
      "read": "senim",
      "passed": "senim",
@@ -5838,7 +5262,6 @@
     {
      "key": "success",
      "role": "meaning",
-     "draft": "jenis",
      "parent": "kk:жеңіс",
      "read": "yengis",
      "passed": "yengis",
@@ -5848,7 +5271,6 @@
     {
      "key": "dream",
      "role": "meaning",
-     "draft": "tus",
      "parent": "kk:арман",
      "read": "arman",
      "passed": "arman",
@@ -5859,7 +5281,6 @@
     {
      "key": "death",
      "role": "meaning",
-     "draft": "olim",
      "parent": "kk:өлім",
      "read": "olum",
      "passed": "olum",
@@ -5869,7 +5290,6 @@
     {
      "key": "time",
      "role": "meaning",
-     "draft": "uakyt",
      "parent": "kk:уақыт",
      "read": "wakit",
      "passed": "wakit",
@@ -5879,7 +5299,6 @@
     {
      "key": "sorrow",
      "role": "meaning",
-     "draft": "kaygy",
      "parent": "kk:қайғы",
      "read": "kaigi",
      "passed": "kaigi",
@@ -5889,7 +5308,6 @@
     {
      "key": "springtime",
      "role": "meaning",
-     "draft": "koktem",
      "parent": "kk:көктем",
      "read": "koktem",
      "passed": "koktem",
@@ -5899,7 +5317,6 @@
     {
      "key": "autumn",
      "role": "meaning",
-     "draft": "kuz",
      "parent": "kk:күз",
      "read": "kus",
      "passed": "kus",
@@ -5909,7 +5326,6 @@
     {
      "key": "summer",
      "role": "meaning",
-     "draft": "jaz",
      "parent": "kk:жаз",
      "read": "yas",
      "passed": "yas",
@@ -5919,7 +5335,6 @@
     {
      "key": "winter",
      "role": "meaning",
-     "draft": "kys",
      "parent": "kk:қыс",
      "read": "kis",
      "passed": "kis",
@@ -5929,7 +5344,6 @@
     {
      "key": "hope",
      "role": "meaning",
-     "draft": "umit",
      "parent": "kk:үміт",
      "read": "umut",
      "passed": "umut",
@@ -5939,7 +5353,6 @@
     {
      "key": "gentle",
      "role": "meaning",
-     "draft": "jumsak",
      "parent": "kk:жұмсақ",
      "read": "yumsak",
      "passed": "yumsak",
@@ -5949,7 +5362,6 @@
     {
      "key": "good",
      "role": "meaning",
-     "draft": "jaksy",
      "parent": "kk:жақсы",
      "read": "yaksi",
      "passed": "yaksi",
@@ -5959,7 +5371,6 @@
     {
      "key": "endure",
      "role": "meaning",
-     "draft": "tozim",
      "parent": "kk:төзім",
      "read": "tosum",
      "passed": "tosum",
@@ -5969,7 +5380,6 @@
     {
      "key": "alone",
      "role": "meaning",
-     "draft": "jalgyz",
      "parent": "kk:жалғыз",
      "read": "yalgis",
      "passed": "yalgis",
@@ -5979,7 +5389,6 @@
     {
      "key": "forget",
      "role": "meaning",
-     "draft": "umyt",
      "parent": "kk:унут",
      "read": "unut",
      "passed": "unut",
@@ -5990,7 +5399,6 @@
     {
      "key": "fear",
      "role": "meaning",
-     "draft": "korky",
      "parent": "kk:қорқы",
      "read": "korku",
      "passed": "korku",
@@ -6000,7 +5408,6 @@
     {
      "key": "joy",
      "role": "meaning",
-     "draft": "kuanysh",
      "parent": "kk:қуаныш",
      "read": "kuanis",
      "passed": "kuanis",
@@ -6010,7 +5417,6 @@
     {
      "key": "excellent",
      "role": "meaning",
-     "draft": "asyl",
      "parent": "kk:асыл",
      "read": "asil",
      "passed": "asil",
@@ -6020,7 +5426,6 @@
     {
      "key": "dark",
      "role": "meaning",
-     "draft": "karangy",
      "parent": "kk:қараңғы",
      "read": "karanggi",
      "passed": "karanggi",
@@ -6030,7 +5435,6 @@
     {
      "key": "sleep",
      "role": "meaning",
-     "draft": "uiky",
      "parent": "kk:ұйқы",
      "read": "uyku",
      "passed": "uyku",
@@ -6040,7 +5444,6 @@
     {
      "key": "decay",
      "role": "meaning",
-     "draft": "shirik",
      "parent": "kk:шірік",
      "read": "sirik",
      "passed": "sirik",
@@ -6050,7 +5453,6 @@
     {
      "key": "plague",
      "role": "meaning",
-     "draft": "oba",
      "parent": "kk:оба",
      "read": "oba",
      "passed": "oba",
@@ -6058,10 +5460,9 @@
      "faults": []
     }
    ],
-   "changed": 66,
    "faults": 0,
    "fallen_together": [],
-   "from_fuller_parent_forms": 99
+   "joined_names_at_fault": 0
   },
   "runa": {
    "label": "Runa (Quechua-rooted)",
@@ -6069,7 +5470,6 @@
     {
      "key": "bowl",
      "role": "head",
-     "draft": "hutku",
      "parent": "qu:hutku",
      "read": "hutku",
      "passed": "hutku",
@@ -6079,7 +5479,6 @@
     {
      "key": "basin",
      "role": "head",
-     "draft": "kancha",
      "parent": "qu:kancha",
      "read": "kansa",
      "passed": "kansa",
@@ -6089,7 +5488,6 @@
     {
      "key": "lake",
      "role": "head",
-     "draft": "qucha",
      "parent": "qu:qucha",
      "read": "kosa",
      "passed": "kosa",
@@ -6099,7 +5497,6 @@
     {
      "key": "lakes",
      "role": "head",
-     "draft": "quchakuna",
      "parent": "qu:quchakuna",
      "read": "kosakuna",
      "passed": "kosakuna",
@@ -6109,7 +5506,6 @@
     {
      "key": "river",
      "role": "head",
-     "draft": "mayu",
      "parent": "qu:mayu",
      "read": "mayu",
      "passed": "mayu",
@@ -6119,7 +5515,6 @@
     {
      "key": "valley",
      "role": "head",
-     "draft": "wayqu",
      "parent": "qu:wayqu",
      "read": "waiko",
      "passed": "waiko",
@@ -6129,7 +5524,6 @@
     {
      "key": "plain",
      "role": "head",
-     "draft": "pampa",
      "parent": "qu:pampa",
      "read": "pampa",
      "passed": "pampa",
@@ -6139,7 +5533,6 @@
     {
      "key": "hills",
      "role": "head",
-     "draft": "pata",
      "parent": "qu:pata",
      "read": "pata",
      "passed": "pata",
@@ -6149,7 +5542,6 @@
     {
      "key": "mountains",
      "role": "head",
-     "draft": "urqu",
      "parent": "qu:urqu",
      "read": "orko",
      "passed": "orko",
@@ -6159,7 +5551,6 @@
     {
      "key": "ridge",
      "role": "head",
-     "draft": "qasa",
      "parent": "qu:qasa",
      "read": "kasa",
      "passed": "kasa",
@@ -6169,7 +5560,6 @@
     {
      "key": "cliff",
      "role": "head",
-     "draft": "qaqa",
      "parent": "qu:qaqa",
      "read": "kaka",
      "passed": "kaka",
@@ -6179,7 +5569,6 @@
     {
      "key": "island",
      "role": "head",
-     "draft": "wata",
      "parent": "qu:wata",
      "read": "wata",
      "passed": "wata",
@@ -6189,7 +5578,6 @@
     {
      "key": "bay",
      "role": "head",
-     "draft": "qucha",
      "parent": "qu:qucha",
      "read": "kosa",
      "passed": "kosa",
@@ -6199,7 +5587,6 @@
     {
      "key": "coast",
      "role": "head",
-     "draft": "chimpa",
      "parent": "qu:chimpa",
      "read": "simpa",
      "passed": "simpa",
@@ -6209,7 +5596,6 @@
     {
      "key": "strait",
      "role": "head",
-     "draft": "chaka",
      "parent": "qu:chaka",
      "read": "saka",
      "passed": "saka",
@@ -6219,7 +5605,6 @@
     {
      "key": "sea",
      "role": "head",
-     "draft": "mamaqucha",
      "parent": "qu:mamaqucha",
      "read": "mamakosa",
      "passed": "mamakosa",
@@ -6229,7 +5614,6 @@
     {
      "key": "forest",
      "role": "head",
-     "draft": "sacha",
      "parent": "qu:sacha",
      "read": "sasa",
      "passed": "sasa",
@@ -6239,7 +5623,6 @@
     {
      "key": "desert",
      "role": "head",
-     "draft": "purun",
      "parent": "qu:purun",
      "read": "purun",
      "passed": "purun",
@@ -6249,7 +5632,6 @@
     {
      "key": "field",
      "role": "head",
-     "draft": "chakra",
      "parent": "qu:chakra",
      "read": "sakra",
      "passed": "sakra",
@@ -6259,7 +5641,6 @@
     {
      "key": "land",
      "role": "head",
-     "draft": "llaqta",
      "parent": "qu:llaqta",
      "read": "lakta",
      "passed": "lakta",
@@ -6269,7 +5650,6 @@
     {
      "key": "falls",
      "role": "head",
-     "draft": "paqcha",
      "parent": "qu:paqcha",
      "read": "paksa",
      "passed": "paksa",
@@ -6279,7 +5659,6 @@
     {
      "key": "spring",
      "role": "head",
-     "draft": "pukyu",
      "parent": "qu:pukyu",
      "read": "pukyu",
      "passed": "pukyu",
@@ -6289,7 +5668,6 @@
     {
      "key": "black",
      "role": "modifier",
-     "draft": "yana",
      "parent": "qu:yana",
      "read": "yana",
      "passed": "yana",
@@ -6299,7 +5677,6 @@
     {
      "key": "white",
      "role": "modifier",
-     "draft": "yuraq",
      "parent": "qu:yuraq",
      "read": "yurak",
      "passed": "yurak",
@@ -6309,7 +5686,6 @@
     {
      "key": "red",
      "role": "modifier",
-     "draft": "puka",
      "parent": "qu:puka",
      "read": "puka",
      "passed": "puka",
@@ -6319,7 +5695,6 @@
     {
      "key": "green",
      "role": "modifier",
-     "draft": "qumir",
      "parent": "qu:qumir",
      "read": "komir",
      "passed": "komir",
@@ -6329,7 +5704,6 @@
     {
      "key": "gold",
      "role": "modifier",
-     "draft": "quri",
      "parent": "qu:quri",
      "read": "kori",
      "passed": "kori",
@@ -6339,7 +5713,6 @@
     {
      "key": "blue",
      "role": "modifier",
-     "draft": "anqas",
      "parent": "qu:anqas",
      "read": "ankas",
      "passed": "ankas",
@@ -6349,7 +5722,6 @@
     {
      "key": "great",
      "role": "modifier",
-     "draft": "hatun",
      "parent": "qu:hatun",
      "read": "hatun",
      "passed": "hatun",
@@ -6359,7 +5731,6 @@
     {
      "key": "small",
      "role": "modifier",
-     "draft": "huchuy",
      "parent": "qu:huchuy",
      "read": "husuy",
      "passed": "husuy",
@@ -6369,7 +5740,6 @@
     {
      "key": "high",
      "role": "modifier",
-     "draft": "hanaq",
      "parent": "qu:hanaq",
      "read": "hanak",
      "passed": "hanak",
@@ -6379,7 +5749,6 @@
     {
      "key": "deep",
      "role": "modifier",
-     "draft": "ukhu",
      "parent": "qu:ukhu",
      "read": "uku",
      "passed": "uku",
@@ -6389,7 +5758,6 @@
     {
      "key": "long",
      "role": "modifier",
-     "draft": "suni",
      "parent": "qu:suni",
      "read": "suni",
      "passed": "suni",
@@ -6399,7 +5767,6 @@
     {
      "key": "old",
      "role": "modifier",
-     "draft": "nawpa",
      "parent": "qu:ñawpa",
      "read": "naupa",
      "passed": "naupa",
@@ -6409,7 +5776,6 @@
     {
      "key": "new",
      "role": "modifier",
-     "draft": "musuq",
      "parent": "qu:musuq",
      "read": "musok",
      "passed": "musok",
@@ -6419,7 +5785,6 @@
     {
      "key": "dry",
      "role": "modifier",
-     "draft": "chaki",
      "parent": "qu:chaki",
      "read": "saki",
      "passed": "saki",
@@ -6429,7 +5794,6 @@
     {
      "key": "wet",
      "role": "modifier",
-     "draft": "huqu",
      "parent": "qu:huqu",
      "read": "hoko",
      "passed": "hoko",
@@ -6439,7 +5803,6 @@
     {
      "key": "warm",
      "role": "modifier",
-     "draft": "quni",
      "parent": "qu:quni",
      "read": "koni",
      "passed": "koni",
@@ -6449,7 +5812,6 @@
     {
      "key": "cold",
      "role": "modifier",
-     "draft": "chiri",
      "parent": "qu:chiri",
      "read": "siri",
      "passed": "siri",
@@ -6459,7 +5821,6 @@
     {
      "key": "light",
      "role": "modifier",
-     "draft": "kanchay",
      "parent": "qu:kanchay",
      "read": "kansai",
      "passed": "kansai",
@@ -6469,7 +5830,6 @@
     {
      "key": "dawn",
      "role": "modifier",
-     "draft": "paqarin",
      "parent": "qu:paqarin",
      "read": "pakarin",
      "passed": "pakarin",
@@ -6479,7 +5839,6 @@
     {
      "key": "night",
      "role": "modifier",
-     "draft": "tuta",
      "parent": "qu:tuta",
      "read": "tuta",
      "passed": "tuta",
@@ -6489,7 +5848,6 @@
     {
      "key": "star",
      "role": "modifier",
-     "draft": "quyllur",
      "parent": "qu:quyllur",
      "read": "koilur",
      "passed": "koilur",
@@ -6499,7 +5857,6 @@
     {
      "key": "cloud",
      "role": "modifier",
-     "draft": "puyu",
      "parent": "qu:puyu",
      "read": "puyu",
      "passed": "puyu",
@@ -6509,7 +5866,6 @@
     {
      "key": "mist",
      "role": "modifier",
-     "draft": "pukutay",
      "parent": "qu:pukutay",
      "read": "pukutai",
      "passed": "pukutai",
@@ -6519,7 +5875,6 @@
     {
      "key": "rain",
      "role": "modifier",
-     "draft": "para",
      "parent": "qu:para",
      "read": "para",
      "passed": "para",
@@ -6529,7 +5884,6 @@
     {
      "key": "wind",
      "role": "modifier",
-     "draft": "wayra",
      "parent": "qu:wayra",
      "read": "waira",
      "passed": "waira",
@@ -6539,7 +5893,6 @@
     {
      "key": "sun",
      "role": "modifier",
-     "draft": "inti",
      "parent": "qu:inti",
      "read": "inti",
      "passed": "inti",
@@ -6549,7 +5902,6 @@
     {
      "key": "earth",
      "role": "modifier",
-     "draft": "allpa",
      "parent": "qu:allpa",
      "read": "alpa",
      "passed": "alpa",
@@ -6559,7 +5911,6 @@
     {
      "key": "stone",
      "role": "modifier",
-     "draft": "rumi",
      "parent": "qu:rumi",
      "read": "rumi",
      "passed": "rumi",
@@ -6569,7 +5920,6 @@
     {
      "key": "sand",
      "role": "modifier",
-     "draft": "tiyu",
      "parent": "qu:tiyu",
      "read": "tiyu",
      "passed": "tiyu",
@@ -6579,7 +5929,6 @@
     {
      "key": "salt",
      "role": "modifier",
-     "draft": "kachi",
      "parent": "qu:kachi",
      "read": "kasi",
      "passed": "kasi",
@@ -6589,7 +5938,6 @@
     {
      "key": "water",
      "role": "modifier",
-     "draft": "yaku",
      "parent": "qu:yaku",
      "read": "yaku",
      "passed": "yaku",
@@ -6599,7 +5947,6 @@
     {
      "key": "leaf",
      "role": "modifier",
-     "draft": "rapi",
      "parent": "qu:rapi",
      "read": "rapi",
      "passed": "rapi",
@@ -6609,7 +5956,6 @@
     {
      "key": "flower",
      "role": "modifier",
-     "draft": "tika",
      "parent": "qu:tika",
      "read": "tika",
      "passed": "tika",
@@ -6619,7 +5965,6 @@
     {
      "key": "thousand",
      "role": "modifier",
-     "draft": "waranqa",
      "parent": "qu:waranqa",
      "read": "waranka",
      "passed": "waranka",
@@ -6629,7 +5974,6 @@
     {
      "key": "twin",
      "role": "modifier",
-     "draft": "iskay",
      "parent": "qu:iskay",
      "read": "iskai",
      "passed": "iskai",
@@ -6639,7 +5983,6 @@
     {
      "key": "storm",
      "role": "meaning",
-     "draft": "wayrapara",
      "parent": "qu:wayrapara",
      "read": "wairapara",
      "passed": "wairapara",
@@ -6649,7 +5992,6 @@
     {
      "key": "calm",
      "role": "meaning",
-     "draft": "thak",
      "parent": "qu:thak",
      "read": "tak",
      "passed": "tak",
@@ -6659,7 +6001,6 @@
     {
      "key": "clear",
      "role": "meaning",
-     "draft": "chuya",
      "parent": "qu:chuya",
      "read": "suya",
      "passed": "suya",
@@ -6669,7 +6010,6 @@
     {
      "key": "plenty",
      "role": "meaning",
-     "draft": "achka",
      "parent": "qu:achka",
      "read": "aska",
      "passed": "aska",
@@ -6679,7 +6019,6 @@
     {
      "key": "nectar",
      "role": "meaning",
-     "draft": "mishki",
      "parent": "qu:mishki",
      "read": "miski",
      "passed": "miski",
@@ -6689,7 +6028,6 @@
     {
      "key": "trial",
      "role": "meaning",
-     "draft": "sasa",
      "parent": "qu:sasa",
      "read": "sasa",
      "passed": "sasa",
@@ -6699,7 +6037,6 @@
     {
      "key": "islands",
      "role": "meaning",
-     "draft": "watakuna",
      "parent": "qu:watakuna",
      "read": "watakuna",
      "passed": "watakuna",
@@ -6709,7 +6046,6 @@
     {
      "key": "known",
      "role": "meaning",
-     "draft": "riqsisqa",
      "parent": "qu:riqsisqa",
      "read": "rekseska",
      "passed": "rekseska",
@@ -6719,7 +6055,6 @@
     {
      "key": "south",
      "role": "meaning",
-     "draft": "urin",
      "parent": "qu:urin",
      "read": "urin",
      "passed": "urin",
@@ -6729,7 +6064,6 @@
     {
      "key": "east",
      "role": "meaning",
-     "draft": "inti",
      "parent": "qu:inti",
      "read": "inti",
      "passed": "inti",
@@ -6739,7 +6073,6 @@
     {
      "key": "edge",
      "role": "meaning",
-     "draft": "kuchu",
      "parent": "qu:kuchu",
      "read": "kusu",
      "passed": "kusu",
@@ -6749,7 +6082,6 @@
     {
      "key": "foam",
      "role": "meaning",
-     "draft": "pusuqu",
      "parent": "qu:pusuqu",
      "read": "pusoko",
      "passed": "pusoko",
@@ -6759,7 +6091,6 @@
     {
      "key": "serpent",
      "role": "meaning",
-     "draft": "machaqway",
      "parent": "qu:machaqway",
      "read": "masakwai",
      "passed": "masakwai",
@@ -6769,7 +6100,6 @@
     {
      "key": "dew",
      "role": "meaning",
-     "draft": "sulla",
      "parent": "qu:sulla",
      "read": "sula",
      "passed": "sula",
@@ -6779,7 +6109,6 @@
     {
      "key": "middle",
      "role": "meaning",
-     "draft": "chawpi",
      "parent": "qu:chawpi",
      "read": "saupi",
      "passed": "saupi",
@@ -6789,7 +6118,6 @@
     {
      "key": "love",
      "role": "meaning",
-     "draft": "munay",
      "parent": "qu:munay",
      "read": "munai",
      "passed": "munai",
@@ -6799,7 +6127,6 @@
     {
      "key": "harmony",
      "role": "meaning",
-     "draft": "huklla",
      "parent": "qu:huklla",
      "read": "hukla",
      "passed": "hukla",
@@ -6809,7 +6136,6 @@
     {
      "key": "faith",
      "role": "meaning",
-     "draft": "iñiy",
      "parent": "qu:iñiy",
      "read": "iniy",
      "passed": "iniy",
@@ -6819,7 +6145,6 @@
     {
      "key": "success",
      "role": "meaning",
-     "draft": "atipay",
      "parent": "qu:atipay",
      "read": "atipai",
      "passed": "atipai",
@@ -6829,7 +6154,6 @@
     {
      "key": "dream",
      "role": "meaning",
-     "draft": "musquy",
      "parent": "qu:musquy",
      "read": "moskoi",
      "passed": "moskoi",
@@ -6839,7 +6163,6 @@
     {
      "key": "death",
      "role": "meaning",
-     "draft": "wanuy",
      "parent": "qu:wañuy",
      "read": "wanuy",
      "passed": "wanuy",
@@ -6849,7 +6172,6 @@
     {
      "key": "time",
      "role": "meaning",
-     "draft": "mita",
      "parent": "qu:mita",
      "read": "mita",
      "passed": "mita",
@@ -6859,7 +6181,6 @@
     {
      "key": "sorrow",
      "role": "meaning",
-     "draft": "llaki",
      "parent": "qu:llaki",
      "read": "laki",
      "passed": "laki",
@@ -6869,7 +6190,6 @@
     {
      "key": "springtime",
      "role": "meaning",
-     "draft": "pawqar",
      "parent": "qu:pawqar",
      "read": "paukar",
      "passed": "paukar",
@@ -6879,7 +6199,6 @@
     {
      "key": "autumn",
      "role": "meaning",
-     "draft": "aymuray",
      "parent": "qu:aymuray",
      "read": "aimurai",
      "passed": "aimurai",
@@ -6889,7 +6208,6 @@
     {
      "key": "summer",
      "role": "meaning",
-     "draft": "ruphay",
      "parent": "qu:ruphay",
      "read": "rupai",
      "passed": "rupai",
@@ -6899,7 +6217,6 @@
     {
      "key": "winter",
      "role": "meaning",
-     "draft": "chiraw",
      "parent": "qu:chiraw",
      "read": "sirau",
      "passed": "sirau",
@@ -6909,7 +6226,6 @@
     {
      "key": "hope",
      "role": "meaning",
-     "draft": "suyay",
      "parent": "qu:suyay",
      "read": "suyai",
      "passed": "suyai",
@@ -6919,7 +6235,6 @@
     {
      "key": "gentle",
      "role": "meaning",
-     "draft": "llampu",
      "parent": "qu:llampu",
      "read": "lampu",
      "passed": "lampu",
@@ -6929,7 +6244,6 @@
     {
      "key": "good",
      "role": "meaning",
-     "draft": "alli",
      "parent": "qu:alli",
      "read": "ali",
      "passed": "ali",
@@ -6939,7 +6253,6 @@
     {
      "key": "endure",
      "role": "meaning",
-     "draft": "kallpa",
      "parent": "qu:kallpa",
      "read": "kalpa",
      "passed": "kalpa",
@@ -6949,7 +6262,6 @@
     {
      "key": "alone",
      "role": "meaning",
-     "draft": "sapan",
      "parent": "qu:sapan",
      "read": "sapan",
      "passed": "sapan",
@@ -6959,7 +6271,6 @@
     {
      "key": "forget",
      "role": "meaning",
-     "draft": "qunqay",
      "parent": "qu:qunqay",
      "read": "konkai",
      "passed": "konkai",
@@ -6969,7 +6280,6 @@
     {
      "key": "fear",
      "role": "meaning",
-     "draft": "manchay",
      "parent": "qu:manchay",
      "read": "mansai",
      "passed": "mansai",
@@ -6979,7 +6289,6 @@
     {
      "key": "joy",
      "role": "meaning",
-     "draft": "kusi",
      "parent": "qu:kusi",
      "read": "kusi",
      "passed": "kusi",
@@ -6989,7 +6298,6 @@
     {
      "key": "excellent",
      "role": "meaning",
-     "draft": "sumaq",
      "parent": "qu:sumaq",
      "read": "sumak",
      "passed": "sumak",
@@ -6999,7 +6307,6 @@
     {
      "key": "dark",
      "role": "meaning",
-     "draft": "tutayaq",
      "parent": "qu:tutayaq",
      "read": "tutayak",
      "passed": "tutayak",
@@ -7009,7 +6316,6 @@
     {
      "key": "sleep",
      "role": "meaning",
-     "draft": "puñuy",
      "parent": "qu:puñuy",
      "read": "punuy",
      "passed": "punuy",
@@ -7019,7 +6325,6 @@
     {
      "key": "decay",
      "role": "meaning",
-     "draft": "ismu",
      "parent": "qu:ismu",
      "read": "ismu",
      "passed": "ismu",
@@ -7029,7 +6334,6 @@
     {
      "key": "plague",
      "role": "meaning",
-     "draft": "unquy",
      "parent": "qu:unquy",
      "read": "onkoi",
      "passed": "onkoi",
@@ -7037,10 +6341,9 @@
      "faults": []
     }
    ],
-   "changed": 68,
    "faults": 0,
    "fallen_together": [],
-   "from_fuller_parent_forms": 4
+   "joined_names_at_fault": 0
   },
   "satoyama": {
    "label": "Satogo (Japanese-rooted)",
@@ -7048,7 +6351,6 @@
     {
      "key": "bowl",
      "role": "head",
-     "draft": "kubo",
      "parent": "ja:kubo",
      "read": "kubo",
      "passed": "kubo",
@@ -7058,7 +6360,6 @@
     {
      "key": "basin",
      "role": "head",
-     "draft": "bonchi",
      "parent": "ja:bonchi",
      "read": "bonti",
      "passed": "bonti",
@@ -7068,7 +6369,6 @@
     {
      "key": "lake",
      "role": "head",
-     "draft": "ko",
      "parent": "ja:ko",
      "read": "ko",
      "passed": "ko",
@@ -7078,7 +6378,6 @@
     {
      "key": "lakes",
      "role": "head",
-     "draft": "ikeno",
      "parent": "ja:ikeno",
      "read": "ikeno",
      "passed": "ikeno",
@@ -7088,7 +6387,6 @@
     {
      "key": "river",
      "role": "head",
-     "draft": "kawa",
      "parent": "ja:kawa",
      "read": "kawa",
      "passed": "kawa",
@@ -7098,7 +6396,6 @@
     {
      "key": "valley",
      "role": "head",
-     "draft": "tani",
      "parent": "ja:tani",
      "read": "tani",
      "passed": "tani",
@@ -7108,7 +6405,6 @@
     {
      "key": "plain",
      "role": "head",
-     "draft": "hara",
      "parent": "ja:hara",
      "read": "hara",
      "passed": "hara",
@@ -7118,7 +6414,6 @@
     {
      "key": "hills",
      "role": "head",
-     "draft": "oka",
      "parent": "ja:oka",
      "read": "oka",
      "passed": "oka",
@@ -7128,7 +6423,6 @@
     {
      "key": "mountains",
      "role": "head",
-     "draft": "yama",
      "parent": "ja:yama",
      "read": "yama",
      "passed": "yama",
@@ -7138,7 +6432,6 @@
     {
      "key": "ridge",
      "role": "head",
-     "draft": "one",
      "parent": "ja:one",
      "read": "one",
      "passed": "one",
@@ -7148,7 +6441,6 @@
     {
      "key": "cliff",
      "role": "head",
-     "draft": "gake",
      "parent": "ja:gake",
      "read": "gake",
      "passed": "gake",
@@ -7158,7 +6450,6 @@
     {
      "key": "island",
      "role": "head",
-     "draft": "shima",
      "parent": "ja:shima",
      "read": "sima",
      "passed": "sima",
@@ -7168,7 +6459,6 @@
     {
      "key": "bay",
      "role": "head",
-     "draft": "ura",
      "parent": "ja:ura",
      "read": "ura",
      "passed": "ura",
@@ -7178,7 +6468,6 @@
     {
      "key": "coast",
      "role": "head",
-     "draft": "hama",
      "parent": "ja:hama",
      "read": "hama",
      "passed": "hama",
@@ -7188,7 +6477,6 @@
     {
      "key": "strait",
      "role": "head",
-     "draft": "seto",
      "parent": "ja:seto",
      "read": "seto",
      "passed": "seto",
@@ -7198,7 +6486,6 @@
     {
      "key": "sea",
      "role": "head",
-     "draft": "umi",
      "parent": "ja:umi",
      "read": "umi",
      "passed": "umi",
@@ -7208,7 +6495,6 @@
     {
      "key": "forest",
      "role": "head",
-     "draft": "mori",
      "parent": "ja:mori",
      "read": "mori",
      "passed": "mori",
@@ -7218,7 +6504,6 @@
     {
      "key": "desert",
      "role": "head",
-     "draft": "suna",
      "parent": "ja:suna",
      "read": "suna",
      "passed": "suna",
@@ -7228,7 +6513,6 @@
     {
      "key": "field",
      "role": "head",
-     "draft": "no",
      "parent": "ja:no",
      "read": "no",
      "passed": "no",
@@ -7238,7 +6522,6 @@
     {
      "key": "land",
      "role": "head",
-     "draft": "kuni",
      "parent": "ja:kuni",
      "read": "kuni",
      "passed": "kuni",
@@ -7248,7 +6531,6 @@
     {
      "key": "falls",
      "role": "head",
-     "draft": "taki",
      "parent": "ja:taki",
      "read": "taki",
      "passed": "taki",
@@ -7258,7 +6540,6 @@
     {
      "key": "spring",
      "role": "head",
-     "draft": "izumi",
      "parent": "ja:izumi",
      "read": "isumi",
      "passed": "isumi",
@@ -7268,7 +6549,6 @@
     {
      "key": "black",
      "role": "modifier",
-     "draft": "kuro",
      "parent": "ja:kuro",
      "read": "kuro",
      "passed": "kuro",
@@ -7278,7 +6558,6 @@
     {
      "key": "white",
      "role": "modifier",
-     "draft": "shira",
      "parent": "ja:shira",
      "read": "sira",
      "passed": "sira",
@@ -7288,7 +6567,6 @@
     {
      "key": "red",
      "role": "modifier",
-     "draft": "aka",
      "parent": "ja:aka",
      "read": "aka",
      "passed": "aka",
@@ -7298,7 +6576,6 @@
     {
      "key": "green",
      "role": "modifier",
-     "draft": "midori",
      "parent": "ja:midori",
      "read": "midori",
      "passed": "midori",
@@ -7308,7 +6585,6 @@
     {
      "key": "gold",
      "role": "modifier",
-     "draft": "kogane",
      "parent": "ja:kogane",
      "read": "kogane",
      "passed": "kogane",
@@ -7318,7 +6594,6 @@
     {
      "key": "blue",
      "role": "modifier",
-     "draft": "ao",
      "parent": "ja:ao",
      "read": "ao",
      "passed": "ao",
@@ -7328,7 +6603,6 @@
     {
      "key": "great",
      "role": "modifier",
-     "draft": "o",
      "parent": "ja:ō",
      "read": "oo",
      "passed": "oo",
@@ -7338,7 +6612,6 @@
     {
      "key": "small",
      "role": "modifier",
-     "draft": "ko",
      "parent": "ja:ko",
      "read": "ko",
      "passed": "ko",
@@ -7348,7 +6621,6 @@
     {
      "key": "high",
      "role": "modifier",
-     "draft": "taka",
      "parent": "ja:taka",
      "read": "taka",
      "passed": "taka",
@@ -7358,7 +6630,6 @@
     {
      "key": "deep",
      "role": "modifier",
-     "draft": "fuka",
      "parent": "ja:fuka",
      "read": "huka",
      "passed": "huka",
@@ -7368,7 +6639,6 @@
     {
      "key": "long",
      "role": "modifier",
-     "draft": "naga",
      "parent": "ja:naga",
      "read": "naga",
      "passed": "naga",
@@ -7378,7 +6648,6 @@
     {
      "key": "old",
      "role": "modifier",
-     "draft": "furu",
      "parent": "ja:furu",
      "read": "huru",
      "passed": "huru",
@@ -7388,7 +6657,6 @@
     {
      "key": "new",
      "role": "modifier",
-     "draft": "nii",
      "parent": "ja:nii",
      "read": "nii",
      "passed": "nii",
@@ -7398,7 +6666,6 @@
     {
      "key": "dry",
      "role": "modifier",
-     "draft": "kara",
      "parent": "ja:kara",
      "read": "kara",
      "passed": "kara",
@@ -7408,7 +6675,6 @@
     {
      "key": "wet",
      "role": "modifier",
-     "draft": "nure",
      "parent": "ja:nure",
      "read": "nure",
      "passed": "nure",
@@ -7418,7 +6684,6 @@
     {
      "key": "warm",
      "role": "modifier",
-     "draft": "nuku",
      "parent": "ja:nuku",
      "read": "nuku",
      "passed": "nuku",
@@ -7428,7 +6693,6 @@
     {
      "key": "cold",
      "role": "modifier",
-     "draft": "samu",
      "parent": "ja:samu",
      "read": "samu",
      "passed": "samu",
@@ -7438,7 +6702,6 @@
     {
      "key": "light",
      "role": "modifier",
-     "draft": "hikari",
      "parent": "ja:hikari",
      "read": "hikari",
      "passed": "hikari",
@@ -7448,7 +6711,6 @@
     {
      "key": "dawn",
      "role": "modifier",
-     "draft": "asa",
      "parent": "ja:asa",
      "read": "asa",
      "passed": "asa",
@@ -7458,7 +6720,6 @@
     {
      "key": "night",
      "role": "modifier",
-     "draft": "yo",
      "parent": "ja:yo",
      "read": "yo",
      "passed": "yo",
@@ -7468,7 +6729,6 @@
     {
      "key": "star",
      "role": "modifier",
-     "draft": "hoshi",
      "parent": "ja:hoshi",
      "read": "hosi",
      "passed": "hosi",
@@ -7478,7 +6738,6 @@
     {
      "key": "cloud",
      "role": "modifier",
-     "draft": "kumo",
      "parent": "ja:kumo",
      "read": "kumo",
      "passed": "kumo",
@@ -7488,7 +6747,6 @@
     {
      "key": "mist",
      "role": "modifier",
-     "draft": "kiri",
      "parent": "ja:kiri",
      "read": "kiri",
      "passed": "kiri",
@@ -7498,7 +6756,6 @@
     {
      "key": "rain",
      "role": "modifier",
-     "draft": "ame",
      "parent": "ja:ame",
      "read": "ame",
      "passed": "ame",
@@ -7508,7 +6765,6 @@
     {
      "key": "wind",
      "role": "modifier",
-     "draft": "kaze",
      "parent": "ja:kaze",
      "read": "kase",
      "passed": "kase",
@@ -7518,7 +6774,6 @@
     {
      "key": "sun",
      "role": "modifier",
-     "draft": "hi",
      "parent": "ja:hi",
      "read": "hi",
      "passed": "hi",
@@ -7528,7 +6783,6 @@
     {
      "key": "earth",
      "role": "modifier",
-     "draft": "tsuchi",
      "parent": "ja:tsuchi",
      "read": "tuti",
      "passed": "tuti",
@@ -7538,7 +6792,6 @@
     {
      "key": "stone",
      "role": "modifier",
-     "draft": "ishi",
      "parent": "ja:ishi",
      "read": "isi",
      "passed": "isi",
@@ -7548,7 +6801,6 @@
     {
      "key": "sand",
      "role": "modifier",
-     "draft": "suna",
      "parent": "ja:suna",
      "read": "suna",
      "passed": "suna",
@@ -7558,7 +6810,6 @@
     {
      "key": "salt",
      "role": "modifier",
-     "draft": "shio",
      "parent": "ja:shio",
      "read": "sio",
      "passed": "sio",
@@ -7568,7 +6819,6 @@
     {
      "key": "water",
      "role": "modifier",
-     "draft": "mizu",
      "parent": "ja:mizu",
      "read": "misu",
      "passed": "misu",
@@ -7578,7 +6828,6 @@
     {
      "key": "leaf",
      "role": "modifier",
-     "draft": "ha",
      "parent": "ja:ha",
      "read": "ha",
      "passed": "ha",
@@ -7588,7 +6837,6 @@
     {
      "key": "flower",
      "role": "modifier",
-     "draft": "hana",
      "parent": "ja:hana",
      "read": "hana",
      "passed": "hana",
@@ -7598,7 +6846,6 @@
     {
      "key": "thousand",
      "role": "modifier",
-     "draft": "chi",
      "parent": "ja:chi",
      "read": "ti",
      "passed": "ti",
@@ -7608,7 +6855,6 @@
     {
      "key": "twin",
      "role": "modifier",
-     "draft": "futa",
      "parent": "ja:futa",
      "read": "huta",
      "passed": "huta",
@@ -7618,7 +6864,6 @@
     {
      "key": "storm",
      "role": "meaning",
-     "draft": "arashi",
      "parent": "ja:arashi",
      "read": "arasi",
      "passed": "arasi",
@@ -7628,7 +6873,6 @@
     {
      "key": "calm",
      "role": "meaning",
-     "draft": "nagi",
      "parent": "ja:nagi",
      "read": "nagi",
      "passed": "nagi",
@@ -7638,7 +6882,6 @@
     {
      "key": "clear",
      "role": "meaning",
-     "draft": "hare",
      "parent": "ja:hare",
      "read": "hare",
      "passed": "hare",
@@ -7648,7 +6891,6 @@
     {
      "key": "plenty",
      "role": "meaning",
-     "draft": "yutaka",
      "parent": "ja:yutaka",
      "read": "yutaka",
      "passed": "yutaka",
@@ -7658,7 +6900,6 @@
     {
      "key": "nectar",
      "role": "meaning",
-     "draft": "mitsu",
      "parent": "ja:mitsu",
      "read": "mitu",
      "passed": "mitu",
@@ -7668,7 +6909,6 @@
     {
      "key": "trial",
      "role": "meaning",
-     "draft": "kiki",
      "parent": "ja:kiki",
      "read": "kiki",
      "passed": "kiki",
@@ -7678,7 +6918,6 @@
     {
      "key": "islands",
      "role": "meaning",
-     "draft": "shima",
      "parent": "ja:shima",
      "read": "sima",
      "passed": "sima",
@@ -7688,7 +6927,6 @@
     {
      "key": "known",
      "role": "meaning",
-     "draft": "shiru",
      "parent": "ja:shiru",
      "read": "siru",
      "passed": "siru",
@@ -7698,7 +6936,6 @@
     {
      "key": "south",
      "role": "meaning",
-     "draft": "minami",
      "parent": "ja:minami",
      "read": "minami",
      "passed": "minami",
@@ -7708,7 +6945,6 @@
     {
      "key": "east",
      "role": "meaning",
-     "draft": "higashi",
      "parent": "ja:higashi",
      "read": "higasi",
      "passed": "higasi",
@@ -7718,7 +6954,6 @@
     {
      "key": "edge",
      "role": "meaning",
-     "draft": "fuchi",
      "parent": "ja:fuchi",
      "read": "huti",
      "passed": "huti",
@@ -7728,7 +6963,6 @@
     {
      "key": "wave",
      "role": "meaning",
-     "draft": "nami",
      "parent": "ja:nami",
      "read": "nami",
      "passed": "nami",
@@ -7738,7 +6972,6 @@
     {
      "key": "foam",
      "role": "meaning",
-     "draft": "awa",
      "parent": "ja:awa",
      "read": "awa",
      "passed": "awa",
@@ -7748,7 +6981,6 @@
     {
      "key": "serpent",
      "role": "meaning",
-     "draft": "hebi",
      "parent": "ja:hebi",
      "read": "hebi",
      "passed": "hebi",
@@ -7758,7 +6990,6 @@
     {
      "key": "dew",
      "role": "meaning",
-     "draft": "tsuyu",
      "parent": "ja:tsuyu",
      "read": "tuyu",
      "passed": "tuyu",
@@ -7768,7 +6999,6 @@
     {
      "key": "middle",
      "role": "meaning",
-     "draft": "naka",
      "parent": "ja:naka",
      "read": "naka",
      "passed": "naka",
@@ -7778,7 +7008,6 @@
     {
      "key": "love",
      "role": "meaning",
-     "draft": "ai",
      "parent": "ja:ai",
      "read": "ai",
      "passed": "ai",
@@ -7788,7 +7017,6 @@
     {
      "key": "rough",
      "role": "meaning",
-     "draft": "ara",
      "parent": "ja:ara",
      "read": "ara",
      "passed": "ara",
@@ -7798,7 +7026,6 @@
     {
      "key": "harmony",
      "role": "meaning",
-     "draft": "wa",
      "parent": "ja:wa",
      "read": "wa",
      "passed": "wa",
@@ -7808,7 +7035,6 @@
     {
      "key": "faith",
      "role": "meaning",
-     "draft": "shin",
      "parent": "ja:shin",
      "read": "sin",
      "passed": "sin",
@@ -7818,7 +7044,6 @@
     {
      "key": "success",
      "role": "meaning",
-     "draft": "sachi",
      "parent": "ja:sachi",
      "read": "sati",
      "passed": "sati",
@@ -7828,7 +7053,6 @@
     {
      "key": "dream",
      "role": "meaning",
-     "draft": "yume",
      "parent": "ja:yume",
      "read": "yume",
      "passed": "yume",
@@ -7838,7 +7062,6 @@
     {
      "key": "time",
      "role": "meaning",
-     "draft": "toki",
      "parent": "ja:toki",
      "read": "toki",
      "passed": "toki",
@@ -7848,7 +7071,6 @@
     {
      "key": "sorrow",
      "role": "meaning",
-     "draft": "kanashi",
      "parent": "ja:kanashi",
      "read": "kanasi",
      "passed": "kanasi",
@@ -7858,7 +7080,6 @@
     {
      "key": "springtime",
      "role": "meaning",
-     "draft": "haru",
      "parent": "ja:haru",
      "read": "haru",
      "passed": "haru",
@@ -7868,7 +7089,6 @@
     {
      "key": "autumn",
      "role": "meaning",
-     "draft": "aki",
      "parent": "ja:aki",
      "read": "aki",
      "passed": "aki",
@@ -7878,7 +7098,6 @@
     {
      "key": "summer",
      "role": "meaning",
-     "draft": "natsu",
      "parent": "ja:natsu",
      "read": "natu",
      "passed": "natu",
@@ -7888,7 +7107,6 @@
     {
      "key": "winter",
      "role": "meaning",
-     "draft": "fuyu",
      "parent": "ja:fuyu",
      "read": "huyu",
      "passed": "huyu",
@@ -7898,7 +7116,6 @@
     {
      "key": "hope",
      "role": "meaning",
-     "draft": "nozomi",
      "parent": "ja:nozomi",
      "read": "nosomi",
      "passed": "nosomi",
@@ -7908,7 +7125,6 @@
     {
      "key": "gentle",
      "role": "meaning",
-     "draft": "yasa",
      "parent": "ja:yasa",
      "read": "yasa",
      "passed": "yasa",
@@ -7918,7 +7134,6 @@
     {
      "key": "good",
      "role": "meaning",
-     "draft": "yoi",
      "parent": "ja:yoi",
      "read": "yoi",
      "passed": "yoi",
@@ -7928,7 +7143,6 @@
     {
      "key": "endure",
      "role": "meaning",
-     "draft": "shinobu",
      "parent": "ja:shinobu",
      "read": "sinobu",
      "passed": "sinobu",
@@ -7938,7 +7152,6 @@
     {
      "key": "alone",
      "role": "meaning",
-     "draft": "hitori",
      "parent": "ja:hitori",
      "read": "hitori",
      "passed": "hitori",
@@ -7948,7 +7161,6 @@
     {
      "key": "forget",
      "role": "meaning",
-     "draft": "wasure",
      "parent": "ja:wasure",
      "read": "wasure",
      "passed": "wasure",
@@ -7958,7 +7170,6 @@
     {
      "key": "fear",
      "role": "meaning",
-     "draft": "osore",
      "parent": "ja:osore",
      "read": "osore",
      "passed": "osore",
@@ -7968,7 +7179,6 @@
     {
      "key": "joy",
      "role": "meaning",
-     "draft": "yoro",
      "parent": "ja:yoro",
      "read": "yoro",
      "passed": "yoro",
@@ -7978,7 +7188,6 @@
     {
      "key": "excellent",
      "role": "meaning",
-     "draft": "masa",
      "parent": "ja:masa",
      "read": "masa",
      "passed": "masa",
@@ -7988,7 +7197,6 @@
     {
      "key": "dark",
      "role": "meaning",
-     "draft": "yami",
      "parent": "ja:yami",
      "read": "yami",
      "passed": "yami",
@@ -7998,7 +7206,6 @@
     {
      "key": "sleep",
      "role": "meaning",
-     "draft": "nemuri",
      "parent": "ja:nemuri",
      "read": "nemuri",
      "passed": "nemuri",
@@ -8008,7 +7215,6 @@
     {
      "key": "decay",
      "role": "meaning",
-     "draft": "kuchi",
      "parent": "ja:kuchi",
      "read": "kuti",
      "passed": "kuti",
@@ -8018,7 +7224,6 @@
     {
      "key": "plague",
      "role": "meaning",
-     "draft": "eki",
      "parent": "ja:eki",
      "read": "eki",
      "passed": "eki",
@@ -8026,10 +7231,9 @@
      "faults": []
     }
    ],
-   "changed": 30,
    "faults": 0,
    "fallen_together": [],
-   "from_fuller_parent_forms": 1
+   "joined_names_at_fault": 0
   }
  },
  "pins": [
@@ -8037,69 +7241,69 @@
    "anchor": "sea:near-side sea",
    "name": "Uamoana",
    "tongue": "terlunan",
-   "passed": "Uamoana",
+   "from_the_words": "Uamoana",
    "said": "u.a.mo.A.na",
-   "changed": false,
+   "stands": true,
    "how": "terlunan: rain + sea",
    "faults": []
   },
   {
    "anchor": "sea:southern near-side seas",
-   "name": "Bultengiz",
+   "name": "Bultengis",
    "tongue": "dala",
-   "passed": "Bultengis",
+   "from_the_words": "Bultengis",
    "said": "bul.TE.ngis",
-   "changed": true,
+   "stands": true,
    "how": "dala: cloud + sea",
    "faults": []
   },
   {
    "anchor": "sea:South Pole–Aitken Sea",
-   "name": "H'Jamo Melaĥa",
+   "name": "H'Yamo Melaha",
    "tongue": "olivolingvo",
-   "passed": "H'Yamo Melaha",
-   "said": "h'YA.mo me.LA.ha",
-   "changed": true,
+   "from_the_words": "H'Yamo Melaha",
+   "said": "ha YA.mo me.LA.ha",
+   "stands": true,
    "how": "olivolingvo: salt + sea",
    "faults": []
   },
   {
    "anchor": "sea:Mare Humboldtianum",
-   "name": "Juldyztengiz",
+   "name": "Yuldustengis",
    "tongue": "dala",
-   "passed": "Yuldustengis",
+   "from_the_words": "Yuldustengis",
    "said": "yul.dus.TE.ngis",
-   "changed": true,
+   "stands": true,
    "how": "dala: star + sea",
    "faults": []
   },
   {
    "anchor": "sea:Mare Moscoviense",
-   "name": "Hanaqucha",
+   "name": "Hanakosa",
    "tongue": "runa",
-   "passed": "Hanakosa",
+   "from_the_words": "Hanakosa",
    "said": "ha.na.KO.sa",
-   "changed": true,
+   "stands": true,
    "how": "runa: high + lake",
    "faults": []
   },
   {
    "anchor": "sea:Mare Orientale",
-   "name": "Bahari Mashariki",
+   "name": "Bahari Masariki",
    "tongue": "pwani",
-   "passed": "Bahari Masariki",
+   "from_the_words": "Bahari Masariki",
    "said": "ba.HA.ri ma.sa.RI.ki",
-   "changed": true,
+   "stands": true,
    "how": "pwani: east + sea",
    "faults": []
   },
   {
    "anchor": "sea:Smythii–Marginis Sea",
-   "name": "Dagat na Katzeh",
+   "name": "Dagat na Kaseh",
    "tongue": "tagalhebrew",
-   "passed": "Dagat na Kaseh",
+   "from_the_words": "Dagat na Kaseh",
    "said": "DA.gat na KA.seh",
-   "changed": true,
+   "stands": true,
    "how": "tagalhebrew: edge + sea",
    "faults": []
   },
@@ -8107,39 +7311,39 @@
    "anchor": "feature:Sinus Iridum",
    "name": "Anuanuafanga",
    "tongue": "terlunan",
-   "passed": "Anuanuafanga",
+   "from_the_words": "Anuanuafanga",
    "said": "a.nu.a.nu.a.FA.nga",
-   "changed": false,
-   "how": "the author's own name, which stands",
+   "stands": true,
+   "how": "the author's own name, which stands as written",
    "faults": []
   },
   {
    "anchor": "feature:Montes Jura",
    "name": "Jura",
    "tongue": null,
-   "passed": "Jura",
+   "from_the_words": "Jura",
    "said": "JU.ra",
-   "changed": false,
-   "how": "the author's own name, which stands",
+   "stands": true,
+   "how": "the author's own name, which stands as written",
    "faults": []
   },
   {
    "anchor": "feature:Mare Ingenii",
    "name": "Ingenii",
    "tongue": null,
-   "passed": "Ingenii",
+   "from_the_words": "Ingenii",
    "said": "i.nge.NII",
-   "changed": false,
-   "how": "the author's own name, which stands",
+   "stands": true,
+   "how": "the author's own name, which stands as written",
    "faults": []
   },
   {
    "anchor": "river:-22.9,173.3",
    "name": "Hatunmayu",
    "tongue": "runa",
-   "passed": "Hatunmayu",
+   "from_the_words": "Hatunmayu",
    "said": "ha.tun.MA.yu",
-   "changed": false,
+   "stands": true,
    "how": "runa: great + river",
    "faults": []
   },
@@ -8147,9 +7351,9 @@
    "anchor": "river:47.5,49.7",
    "name": "Ninamuawa",
    "tongue": "terlunan",
-   "passed": "Ninamuawa",
+   "from_the_words": "Ninamuawa",
    "said": "ni.na.mu.A.wa",
-   "changed": false,
+   "stands": true,
    "how": "terlunan: blue + river",
    "faults": []
   },
@@ -8157,29 +7361,29 @@
    "anchor": "river:2.3,177.7",
    "name": "Paramayu",
    "tongue": "runa",
-   "passed": "Paramayu",
+   "from_the_words": "Paramayu",
    "said": "pa.ra.MA.yu",
-   "changed": false,
+   "stands": true,
    "how": "runa: rain + river",
    "faults": []
   },
   {
    "anchor": "river:21.3,105.0",
-   "name": "Fukagawa",
+   "name": "Hukagawa",
    "tongue": "satoyama",
-   "passed": "Hukagawa",
+   "from_the_words": "Hukagawa",
    "said": "hu.ka.GA.wa",
-   "changed": true,
+   "stands": true,
    "how": "satoyama: deep + river",
    "faults": []
   },
   {
    "anchor": "river:15.0,287.7",
-   "name": "Mto Kijani",
+   "name": "Muto Kiyani",
    "tongue": "pwani",
-   "passed": "Muto Kiyani",
+   "from_the_words": "Muto Kiyani",
    "said": "MU.to ki.YA.ni",
-   "changed": true,
+   "stands": true,
    "how": "pwani: green + river",
    "faults": []
   },
@@ -8187,19 +7391,19 @@
    "anchor": "river:-13.4,253.1",
    "name": "Ilog na Gavoah",
    "tongue": "tagalhebrew",
-   "passed": "Ilog na Gavoah",
+   "from_the_words": "Ilog na Gavoah",
    "said": "I.log na ga.VO.ah",
-   "changed": false,
+   "stands": true,
    "how": "tagalhebrew: high + river",
    "faults": []
   },
   {
    "anchor": "river:-23.0,192.3",
-   "name": "Pukutaymayu",
+   "name": "Pukutaimayu",
    "tongue": "runa",
-   "passed": "Pukutaimayu",
+   "from_the_words": "Pukutaimayu",
    "said": "pu.ku.tai.MA.yu",
-   "changed": true,
+   "stands": true,
    "how": "runa: mist + river",
    "faults": []
   },
@@ -8207,9 +7411,9 @@
    "anchor": "river:25.8,103.0",
    "name": "Niigawa",
    "tongue": "satoyama",
-   "passed": "Niigawa",
+   "from_the_words": "Niigawa",
    "said": "NII.ga.wa",
-   "changed": false,
+   "stands": true,
    "how": "satoyama: new + river",
    "faults": []
   },
@@ -8217,29 +7421,29 @@
    "anchor": "river:19.9,184.6",
    "name": "Rereawa",
    "tongue": "terlunan",
-   "passed": "Rereawa",
+   "from_the_words": "Rereawa",
    "said": "re.re.A.wa",
-   "changed": false,
+   "stands": true,
    "how": "te:rere+te:awa",
    "faults": []
   },
   {
    "anchor": "river:3.6,302.2",
-   "name": "Jarykgol",
+   "name": "Yarikgol",
    "tongue": "dala",
-   "passed": "Yarikgol",
+   "from_the_words": "Yarikgol",
    "said": "ya.RIK.gol",
-   "changed": true,
+   "stands": true,
    "how": "dala: light + river",
    "faults": []
   },
   {
    "anchor": "river:-45.1,230.0",
-   "name": "Mto Jiwe",
+   "name": "Muto Yiwe",
    "tongue": "pwani",
-   "passed": "Muto Yiwe",
+   "from_the_words": "Muto Yiwe",
    "said": "MU.to YI.we",
-   "changed": true,
+   "stands": true,
    "how": "pwani: stone + river",
    "faults": []
   },
@@ -8247,9 +7451,9 @@
    "anchor": "river:57.1,111.8",
    "name": "Asif Dahab",
    "tongue": "sahran",
-   "passed": "Asif Dahab",
+   "from_the_words": "Asif Dahab",
    "said": "A.sif DA.hab",
-   "changed": false,
+   "stands": true,
    "how": "sahran: gold + river",
    "faults": []
   },
@@ -8257,19 +7461,19 @@
    "anchor": "river:16.8,13.5",
    "name": "Tiareawa",
    "tongue": "terlunan",
-   "passed": "Tiareawa",
+   "from_the_words": "Tiareawa",
    "said": "ti.a.re.A.wa",
-   "changed": false,
+   "stands": true,
    "how": "terlunan: flower + river",
    "faults": []
   },
   {
    "anchor": "river:18.1,184.8",
-   "name": "Wayramayu",
+   "name": "Wairamayu",
    "tongue": "runa",
-   "passed": "Wairamayu",
+   "from_the_words": "Wairamayu",
    "said": "wai.ra.MA.yu",
-   "changed": true,
+   "stands": true,
    "how": "runa: wind + river",
    "faults": []
   },
@@ -8277,39 +7481,39 @@
    "anchor": "river:3.3,156.4",
    "name": "Puyumayu",
    "tongue": "runa",
-   "passed": "Puyumayu",
+   "from_the_words": "Puyumayu",
    "said": "pu.yu.MA.yu",
-   "changed": false,
+   "stands": true,
    "how": "runa: cloud + river",
    "faults": []
   },
   {
    "anchor": "river:8.8,146.9",
-   "name": "Quyllurmayu",
+   "name": "Koilurmayu",
    "tongue": "runa",
-   "passed": "Koilurmayu",
+   "from_the_words": "Koilurmayu",
    "said": "koi.lur.MA.yu",
-   "changed": true,
+   "stands": true,
    "how": "runa: star + river",
    "faults": []
   },
   {
    "anchor": "river:1.4,302.5",
-   "name": "Mto Jani",
+   "name": "Muto Yani",
    "tongue": "pwani",
-   "passed": "Muto Yani",
+   "from_the_words": "Muto Yani",
    "said": "MU.to YA.ni",
-   "changed": true,
+   "stands": true,
    "how": "pwani: leaf + river",
    "faults": []
   },
   {
    "anchor": "river:-14.1,311.5",
-   "name": "Mto Pacha",
+   "name": "Muto Pasa",
    "tongue": "pwani",
-   "passed": "Muto Pasa",
+   "from_the_words": "Muto Pasa",
    "said": "MU.to PA.sa",
-   "changed": true,
+   "stands": true,
    "how": "pwani: twin + river",
    "faults": []
   },
@@ -8317,9 +7521,9 @@
    "anchor": "river:-50.2,131.6",
    "name": "H'Naharo Longa",
    "tongue": "olivolingvo",
-   "passed": "H'Naharo Longa",
-   "said": "h'na.HA.ro LO.nga",
-   "changed": false,
+   "from_the_words": "H'Naharo Longa",
+   "said": "ha na.HA.ro LO.nga",
+   "stands": true,
    "how": "olivolingvo: long + river",
    "faults": []
   },
@@ -8327,9 +7531,9 @@
    "anchor": "river:12.3,346.0",
    "name": "Pooiriawa",
    "tongue": "terlunan",
-   "passed": "Pooiriawa",
+   "from_the_words": "Pooiriawa",
    "said": "POO.i.ri.a.wa",
-   "changed": false,
+   "stands": true,
    "how": "terlunan: black + river",
    "faults": []
   },
@@ -8337,16 +7541,16 @@
    "anchor": "river:47.4,186.0",
    "name": "H'Naharo Atika",
    "tongue": "olivolingvo",
-   "passed": "H'Naharo Atika",
-   "said": "h'na.HA.ro a.TI.ka",
-   "changed": false,
+   "from_the_words": "H'Naharo Atika",
+   "said": "ha na.HA.ro a.TI.ka",
+   "stands": true,
    "how": "olivolingvo: old + river",
    "faults": []
   }
  ],
  "record": {
-  "generated_names_found": 658,
-  "changed": 401
+  "generated_names": 658,
+  "made_by_the_words": 658
  },
- "seconds": 0.04
+ "seconds": 0.08
 }

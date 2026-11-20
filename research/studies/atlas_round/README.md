@@ -242,7 +242,7 @@ The product also keeps each stretch's course in the order the water takes it (`c
 
 ## Regions and districts
 
-The register's definition of a district by significance and wholeness (16 November) is formalized as rules in [districts.md](districts.md), with the author's choices of 17 November. Those choices are districts of about 5,000–150,000 km² for the first draft, names in the Moon's own tongues with no Latin, English or mainland European names, short descriptions, regions when zoomed out and districts when zoomed in, and coastal seas as districts of their own, linked to their land. [districts.py](districts.py) draws the first draft on the design surface: centres at named craters, large lakes and fill-in points; edges grown over the ground's ridges and the edges of moisture zones and rock; and the size and standing-apart rules. [district_names.py](district_names.py) names every unit in eight tongues, Terlunan and Proto-Olivolingvo from the author's own languages and six built for the atlas, each region in the tongue its landscape suggests. On the design climate's estimate the draft holds 548 districts on land in 45 regions (median 35,800 km²) and 155 coastal seas *(computed units and facts; their significance awaits written judgment)*. Since 18 November the coastal seas are the regions' territorial waters: a region is its land and the coastal seas facing it, closed at sea by their outer limit 60 km out, and the sea beyond is international waters, belonging to no region. Islands belong to the waters they lie in, and the three island groups out in international waters are regions of their own (districts.md, rules 12 and 15). It is redrawn on each new design climate. Names are kept apart from the draw (18 November): each unit has an anchor a redraw keeps, a unit carrying a named mare, bay or lake keeps that old name's meaning in its own tongue (42 do), and [place_names.json](place_names.json) pins names to anchors, so a rename takes seconds and survives the next redraw: the seven seas in tongues their shores speak (Uamoana, Bultengiz, H'Jamo Melaĥa, Juldyztengiz, Hanaqucha, Bahari Mashariki, Dagat na Katzeh; the author's choice) and the names the author's Terlunan already holds (Anuanuafanga, Jura, Ingenii).
+The register's definition of a district by significance and wholeness (16 November) is formalized as rules in [districts.md](districts.md), with the author's choices of 17 November. Those choices are districts of about 5,000–150,000 km² for the first draft, names in the Moon's own tongues with no Latin, English or mainland European names, short descriptions, regions when zoomed out and districts when zoomed in, and coastal seas as districts of their own, linked to their land. [districts.py](districts.py) draws the first draft on the design surface: centres at named craters, large lakes and fill-in points; edges grown over the ground's ridges and the edges of moisture zones and rock; and the size and standing-apart rules. [district_names.py](district_names.py) names every unit in eight tongues, Terlunan and Proto-Olivolingvo from the author's own languages and six built for the atlas, each region in the tongue its landscape suggests. On the design climate's estimate the draft holds 548 districts on land in 45 regions (median 35,800 km²) and 155 coastal seas *(computed units and facts; their significance awaits written judgment)*. Since 18 November the coastal seas are the regions' territorial waters: a region is its land and the coastal seas facing it, closed at sea by their outer limit 60 km out, and the sea beyond is international waters, belonging to no region. Islands belong to the waters they lie in, and the three island groups out in international waters are regions of their own (districts.md, rules 12 and 15). It is redrawn on each new design climate. Names are kept apart from the draw (18 November): each unit has an anchor a redraw keeps, a unit carrying a named mare, bay or lake keeps that old name's meaning in its own tongue (42 do), and [place_names.json](place_names.json) pins names to anchors, so a rename takes seconds and survives the next redraw: the seven seas in tongues their shores speak (Uamoana, Bultengis, H'Yamo Melaha, Yuldustengis, Hanakosa, Bahari Masariki, Dagat na Kaseh; the author's choice) and the names the author's Terlunan already holds (Anuanuafanga, Jura, Ingenii).
 
 ```sh
 python -m research.studies.atlas_round.districts         # about a minute; results/districts.json and the 8 px/deg grid on the drive
@@ -258,7 +258,9 @@ Each land region has a fact sheet (18 November), computed by [region_profiles.py
 
 ## The names' sounds
 
-A place name keeps its parent language's sounds to a degree and comes out in the Moon's own phonetic framework (register, 20 November). [lunar_sounds.md](lunar_sounds.md) sets that passage out and [lunar_sounds.py](lunar_sounds.py) makes it: the sound section of the Terlunan reference taken as the sounds all the Moon's tongues share, a rule sheet for each parent language (Kazakh, Kyrgyz and Mongolian; Quechua; Arabic and Tamazight; Swahili; Tagalog and Hebrew; Japanese; Esperanto with Hebrew loans), and every word of district_names.py's lexicons passed through. Of 789 words 324 change, every passed word stands in the framework and no two words of a tongue fall together; 15 of the 31 pinned names would change, six of the seven seas among them (Bultengiz to Bultengis, Hanaqucha to Hanakosa), and 401 of the 658 generated names in the draft record. The record is [results/lunar_sounds.json](results/lunar_sounds.json) *(a rule sheet and its results: the rules are choices and the parent words are from general knowledge, unchecked against dictionaries)*. No name is changed by it: district_names.py and place_names.json stand until the passed forms are adopted.
+A place name keeps its parent language's sounds to a degree and comes out in the Moon's own phonetic framework (register, 20 November). [lunar_sounds.md](lunar_sounds.md) sets that passage out and [lunar_sounds.py](lunar_sounds.py) makes it: the sound section of the Terlunan reference taken as the sounds all the Moon's tongues share, and a rule sheet for each parent language (Kazakh, Kyrgyz and Mongolian; Quechua; Arabic and Tamazight; Swahili; Tagalog and Hebrew; Japanese; Esperanto with Hebrew loans). district_names.py writes each of its 789 words as its parent language spells it and passes them through when it loads; 324 change, every passed word and every joined name stands in the framework, and no two words of a tongue fall together.
+
+The passed forms were adopted on 20 November. Six of the seven seas and nine rivers are respelled in the names table (Bultengiz to Bultengis, Juldyztengiz to Yuldustengis, Hanaqucha to Hanakosa, Bahari Mashariki to Bahari Masariki, Dagat na Katzeh to Dagat na Kaseh, H'Jamo Melaĥa to H'Yamo Melaha), and 446 of the draft record's 755 names; the regions' fact sheets and texts and the waterways carry the new spellings with their figures unchanged. The author's own tongue takes the letter and sibilant changes; its clusters open with *e*, as its other parent, Hebrew, opens them, and its article *h'* is written as before and said *ha*. The record is [results/lunar_sounds.json](results/lunar_sounds.json) *(a rule sheet and its results: the rules are choices and the parent words are from general knowledge, unchecked against dictionaries)*. The register's earlier rows and the lake rule's records keep the spellings of their date.
 
 ## The falls
 
@@ -418,24 +420,24 @@ The upper seas do most of the carrying. The lakes on the rivers stand a few metr
 
 Storage carries the major rivers' sustained length from 6,301 to 7,434–8,271 km. The rivers that still stop in their driest year with storage, 8 with wide outlets and 3 with narrow ones, all carry under 190 m³/s on the design routing. After a drought storage can also cost a little: a lake that fell below its pass refills before it spills again, so on 31–50 km of the major rivers the lowest year with storage carries less than without, by up to 82 m³/s. The intermittent rivers are medium ones: with wide outlets none carries more than 742 m³/s on the design routing, and without storage rivers of up to 1,316 m³/s dip as well. Most lie within 30° of the turned equator, where most of the major rivers run: without storage 253 of the 797 rivers ending within 30° fall under 100 m³/s at their end in a year, and 173 with wide outlets; poleward of 30°, 48 of the 98 do without storage and 18 with wide outlets. No major river ends poleward of 60° on this design. On the earlier rule's design 16 did, the chain of lakes into Humboldtianum from the high far side; on the corrected rule Humboldtianum's own rivers bring it nothing, and the northern cut brings it 6,237 m³/s. Against the earlier rule's design the classes moved little (607, 708 and 757 of 885 rivers were sustained), while more rivers stop in a dry year without storage, 89 for 47. A lake held full passes nothing in a year whose inflow falls short of its loss, and the corrected rule's lakes are larger (17.3% of the Moon for 13.4%), which would account for it; the change was not traced river by river.
 
-The twelve largest rivers into the seas all keep their flow, the driest year taking 6–24% of it without storage and 2–18% with wide outlets. They are given by the names pinned to them, and the seas by theirs: Hanaqucha is Moscoviense's sea, Bahari Mashariki Orientale's, Dagat na Katzeh Smythii–Marginis's, H'Jamo Melaĥa the salt sea, Juldyztengiz Humboldtianum's and Uamoana the near-side sea's main part.
+The twelve largest rivers into the seas all keep their flow, the driest year taking 6–24% of it without storage and 2–18% with wide outlets. They are given by the names pinned to them, and the seas by theirs: Hanakosa is Moscoviense's sea, Bahari Masariki Orientale's, Dagat na Kaseh Smythii–Marginis's, H'Yamo Melaha the salt sea, Yuldustengis Humboldtianum's and Uamoana the near-side sea's main part.
 
 | River | Into | Design | Lowest year without storage | Lowest year, wide / narrow outlets | Second lowest, wide | After the losses, low / high end |
 |---|---|---|---|---|---|---|
 | Ninamuawa | Uamoana | 30,359 | 27,987 | 29,823 / 30,037 | 29,868 | 30,358 / 30,350 |
-| Hatunmayu | H'Jamo Melaĥa | 29,956 | 28,143 | 29,074 / 29,489 | 29,245 | 29,955 / 29,947 |
-| Paramayu | Hanaqucha | 29,320 | 26,911 | 27,648 / 27,995 | 27,721 | 29,320 / 29,320 |
-| Mto Kijani | Uamoana | 17,620 | 15,898 | 16,493 / 16,881 | 16,948 | 17,616 / 17,583 |
-| Ilog na Gavoah | Bahari Mashariki | 15,688 | 14,217 | 15,148 / 15,299 | 15,305 | 15,687 / 15,678 |
-| Niigawa | Dagat na Katzeh | 14,320 | 12,766 | 13,168 / 13,574 | 13,357 | 14,320 / 14,318 |
-| Fukagawa | Dagat na Katzeh | 14,213 | 11,731 | 13,687 / 13,778 | 13,851 | 14,213 / 14,210 |
-| Pukutaymayu | H'Jamo Melaĥa | 13,812 | 11,249 | 11,686 / 12,084 | 12,018 | 13,812 / 13,812 |
+| Hatunmayu | H'Yamo Melaha | 29,956 | 28,143 | 29,074 / 29,489 | 29,245 | 29,955 / 29,947 |
+| Paramayu | Hanakosa | 29,320 | 26,911 | 27,648 / 27,995 | 27,721 | 29,320 / 29,320 |
+| Muto Kiyani | Uamoana | 17,620 | 15,898 | 16,493 / 16,881 | 16,948 | 17,616 / 17,583 |
+| Ilog na Gavoah | Bahari Masariki | 15,688 | 14,217 | 15,148 / 15,299 | 15,305 | 15,687 / 15,678 |
+| Niigawa | Dagat na Kaseh | 14,320 | 12,766 | 13,168 / 13,574 | 13,357 | 14,320 / 14,318 |
+| Hukagawa | Dagat na Kaseh | 14,213 | 11,731 | 13,687 / 13,778 | 13,851 | 14,213 / 14,210 |
+| Pukutaimayu | H'Yamo Melaha | 13,812 | 11,249 | 11,686 / 12,084 | 12,018 | 13,812 / 13,812 |
 | Pooiriawa | Uamoana | 9,670 | 7,547 | 7,911 / 8,740 | 8,803 | 9,670 / 9,670 |
-| Rereawa | Hanaqucha | 8,837 | 7,057 | 8,008 / 8,536 | 8,112 | 8,837 / 8,836 |
-| Asif Dahab | Juldyztengiz | 6,237 | 5,419 | 6,014 / 6,102 | 6,046 | 6,236 / 6,228 |
-| Mto Jiwe | H'Jamo Melaĥa | 4,905 | 3,714 | 4,090 / 4,345 | 4,171 | 4,905 / 4,900 |
+| Rereawa | Hanakosa | 8,837 | 7,057 | 8,008 / 8,536 | 8,112 | 8,837 / 8,836 |
+| Asif Dahab | Yuldustengis | 6,237 | 5,419 | 6,014 / 6,102 | 6,046 | 6,236 / 6,228 |
+| Muto Yiwe | H'Yamo Melaha | 4,905 | 3,714 | 4,090 / 4,345 | 4,171 | 4,905 / 4,900 |
 
-The rivers storage holds best are those below lakes that fall under their passes in a dry year. A river of 1,190–1,280 m³/s at 38–44° N, 154–160° W today, by Woltjer and Kulik, stops in its driest year without storage; with wide outlets it keeps 600–650 m³/s and with narrow ones 950–1,150. Another of 1,210–1,320 m³/s in the west, at 16–22° N, 77–85° W, falls to 13–95 m³/s without storage and keeps 600–700 with wide outlets and 1,080–1,190 with narrow ones. The rivers into Bultengiz by Mare Cognitum and Rimae Parry, 330–740 m³/s on the design routing, fall to 0–72 m³/s in their driest year without storage and 72–88 with wide outlets, and keep 147–186 with narrow ones.
+The rivers storage holds best are those below lakes that fall under their passes in a dry year. A river of 1,190–1,280 m³/s at 38–44° N, 154–160° W today, by Woltjer and Kulik, stops in its driest year without storage; with wide outlets it keeps 600–650 m³/s and with narrow ones 950–1,150. Another of 1,210–1,320 m³/s in the west, at 16–22° N, 77–85° W, falls to 13–95 m³/s without storage and keeps 600–700 with wide outlets and 1,080–1,190 with narrow ones. The rivers into Bultengis by Mare Cognitum and Rimae Parry, 330–740 m³/s on the design routing, fall to 0–72 m³/s in their driest year without storage and 72–88 with wide outlets, and keep 147–186 with narrow ones.
 
 **The years' mean against the design** *(computed)*. At more than half of the major rivers' cells (56%) the fifteen years' mean lies within 0.1% of the design's (median 1.0002) and at three in four within 1%, while 5% of the cells carry 15% more or above, and the rivers bring the seas 245,449 m³/s in the years' mean without storage, 1.4% more than the design's 242,171. Routed, the years' mean climate gives the seas 242,128 m³/s, so the gain comes from routing the years one at a time. A cell's runoff is its rain less evaporation where that is positive, so where the difference straddles nothing a wetter year adds runoff and a drier one cannot take any away: the land's runoff comes to 102,660–109,240 m³/s in the fifteen years, every one of them above the design climate's 98,323, and averages 105,063. A full lake likewise passes on its wet years' surplus and holds back at most its whole outflow in a dry one, and the lakes on the way take part of the gain before it reaches the seas. With storage the years' mean brings the seas 244,184 m³/s over narrow outlets and 244,552 over wide ones.
 
@@ -457,7 +459,7 @@ Carried onto the design surface's T21 grid, the floodplains add at most 2.5% of 
 
 On this Moon a large river is mostly lakes: the design routing fills every hollow on a river's way until it spills, so a watercourse is a chain of long lakes joined by short channels. The sustained-rivers study classes the channels reach by reach. [waterways.py](waterways.py) follows each watercourse whole, so that it can be named, drawn and described as one thing (18 November, after the author asked that the major rivers be named and read clearly). From each mouth of 1,000 m³/s or more it goes upstream along the donor carrying the most water, through lakes and channels alike, until the flow falls under 100 m³/s or it reaches a place the design puts water in: the rim a full sea overflows, a branch of the works, or the near-side sea's neck. A lake is crossed straight from where the water enters to where it leaves, since the routing wanders over a lake's level surface. The record is [results/waterways.json](results/waterways.json) *(a reading of products)*.
 
-There are 21 such waterways. The largest is Hanaqucha's overflow to the salt sea, 30,657 m³/s over 442 km and 7 lakes with six steep reaches. The longest runs 4,157 km to Uamoana through 28 lakes. The two branches the works cut from Hanaqucha carry 9,991 m³/s to Dagat na Katzeh and 5,237 m³/s to Juldyztengiz, 1,282 and 1,101 km. The natural river that reaches Juldyztengiz from the far side's northern highlands is 3,091 km long through 42 lakes and carries 1,275 m³/s at its mouth, less than upstream, since its lakes lose water to the dry air. On the map a waterway's breadth is its lakes', so that river looks broader than the works' branch beside it, which carries four times the water.
+There are 21 such waterways. The largest is Hanaqucha's overflow to the salt sea, 30,657 m³/s over 442 km and 7 lakes with six steep reaches. The longest runs 4,157 km to Uamoana through 28 lakes. The two branches the works cut from Hanakosa carry 9,991 m³/s to Dagat na Kaseh and 5,237 m³/s to Yuldustengis, 1,282 and 1,101 km. The natural river that reaches Yuldustengis from the far side's northern highlands is 3,091 km long through 42 lakes and carries 1,275 m³/s at its mouth, less than upstream, since its lakes lose water to the dry air. On the map a waterway's breadth is its lakes', so that river looks broader than the works' branch beside it, which carries four times the water.
 
 Each waterway takes its name in the tongue of the region holding most of its course, pinned in [place_names.json](place_names.json) to its mouth's place on today's Moon (`river:<latitude,longitude>`), one meaning to a river: Hatunmayu, the Great River, is the largest; H'Naharo Longa, the Long River, the longest; Niigawa, the New River, and Asif Dahab, the Gold River, are the works' branches; H'Naharo Atika, the Old River, is the natural river beside the second of them.
 
@@ -492,45 +494,45 @@ On the page the defect shows close up. Where the ground beside a lake is lower t
 
 | Sea | Receives on the design routing, m³/s | On the corrected rule, m³/s | Change |
 |---|---|---|---|
-| Hanaqucha | 47,404 | 46,493 | −1.9% |
-| Bahari Mashariki | 17,677 | 17,233 | −2.5% |
-| Dagat na Katzeh | 30,110 | 28,689 | −4.7% |
-| H'Jamo Melaĥa | 53,683 | 51,544 | −4.0% |
-| Juldyztengiz | 6,512 | 3,800 | −41.6% |
+| Hanakosa | 47,404 | 46,493 | −1.9% |
+| Bahari Masariki | 17,677 | 17,233 | −2.5% |
+| Dagat na Kaseh | 30,110 | 28,689 | −4.7% |
+| H'Yamo Melaha | 53,683 | 51,544 | −4.0% |
+| Yuldustengis | 6,512 | 3,800 | −41.6% |
 | Uamoana | 81,350 | 68,845 | −15.4% |
-| Bultengiz | 13,519 | 12,829 | −5.1% |
+| Bultengis | 13,519 | 12,829 | −5.1% |
 
-Against these stand the seas' design losses to the air beyond the rain on them: 53,683 m³/s for H'Jamo Melaĥa and 6,512 m³/s for Juldyztengiz, which the weirs hold at the common level, and 94,559 m³/s for the near-side sea as a whole before it was parted. With the weirs' shares unchanged, H'Jamo Melaĥa would be 2,139 m³/s short and Juldyztengiz 2,712 m³/s short, and Uamoana and Bultengiz together receive 81,674 m³/s where they received 94,869, both figures counting the 7,630 m³/s that spills from the one into the other. What the weirs, the seas' levels and the evaporation factor become once they are set again on the corrected rule is the next section's.
+Against these stand the seas' design losses to the air beyond the rain on them: 53,683 m³/s for H'Yamo Melaha and 6,512 m³/s for Yuldustengis, which the weirs hold at the common level, and 94,559 m³/s for the near-side sea as a whole before it was parted. With the weirs' shares unchanged, H'Yamo Melaha would be 2,139 m³/s short and Yuldustengis 2,712 m³/s short, and Uamoana and Bultengis together receive 81,674 m³/s where they received 94,869, both figures counting the 7,630 m³/s that spills from the one into the other. What the weirs, the seas' levels and the evaporation factor become once they are set again on the corrected rule is the next section's.
 
 **The named waterways.** Each waterway's flow where it ends on the design routing:
 
 | Waterway | Ends in | Design, m³/s | Corrected, m³/s | Change |
 |---|---|---|---|---|
-| Hatunmayu | H'Jamo Melaĥa | 30,657 | 29,893 | −2.5% |
+| Hatunmayu | H'Yamo Melaha | 30,657 | 29,893 | −2.5% |
 | Ninamuawa | Uamoana | 29,073 | 28,559 | −1.8% |
-| Paramayu | Hanaqucha | 26,018 | 25,874 | −0.6% |
-| Fukagawa | Dagat na Katzeh | 17,965 | 17,517 | −2.5% |
-| Mto Kijani | Uamoana | 17,652 | 15,634 | −11.4% |
-| Ilog na Gavoah | Bahari Mashariki | 15,372 | 14,957 | −2.7% |
-| Pukutaymayu | H'Jamo Melaĥa | 12,926 | 12,794 | −1.0% |
-| Niigawa | Dagat na Katzeh | 9,991 | 9,058 | −9.3% |
+| Paramayu | Hanakosa | 26,018 | 25,874 | −0.6% |
+| Hukagawa | Dagat na Kaseh | 17,965 | 17,517 | −2.5% |
+| Muto Kiyani | Uamoana | 17,652 | 15,634 | −11.4% |
+| Ilog na Gavoah | Bahari Masariki | 15,372 | 14,957 | −2.7% |
+| Pukutaimayu | H'Yamo Melaha | 12,926 | 12,794 | −1.0% |
+| Niigawa | Dagat na Kaseh | 9,991 | 9,058 | −9.3% |
 | H'Naharo Longa | Uamoana | 9,565 | 669 | −93.0% |
 | Pooiriawa | Uamoana | 8,436 | 8,403 | −0.4% |
-| Rereawa | Hanaqucha | 8,248 | 7,782 | −5.6% |
-| Jarykgol | Bultengiz | 7,541 | 7,490 | −0.7% |
-| Mto Jiwe | H'Jamo Melaĥa | 5,578 | 5,195 | −6.9% |
-| Asif Dahab | Juldyztengiz | 5,237 | 3,800 | −27.4% |
+| Rereawa | Hanakosa | 8,248 | 7,782 | −5.6% |
+| Yarikgol | Bultengis | 7,541 | 7,490 | −0.7% |
+| Muto Yiwe | H'Yamo Melaha | 5,578 | 5,195 | −6.9% |
+| Asif Dahab | Yuldustengis | 5,237 | 3,800 | −27.4% |
 | Tiareawa | Uamoana | 3,676 | 3,452 | −6.1% |
-| Wayramayu | Hanaqucha | 3,357 | 3,357 | 0.0% |
-| Puyumayu | Hanaqucha | 2,571 | 2,511 | −2.3% |
-| Quyllurmayu | Hanaqucha | 1,777 | 1,777 | 0.0% |
-| Mto Jani | Bultengiz | 1,575 | 1,539 | −2.3% |
-| Mto Pacha | Bultengiz | 1,453 | 1,397 | −3.9% |
-| H'Naharo Atika | Juldyztengiz | 1,275 | 0 | −100.0% |
+| Wairamayu | Hanakosa | 3,357 | 3,357 | 0.0% |
+| Puyumayu | Hanakosa | 2,571 | 2,511 | −2.3% |
+| Koilurmayu | Hanakosa | 1,777 | 1,777 | 0.0% |
+| Muto Yani | Bultengis | 1,575 | 1,539 | −2.3% |
+| Muto Pasa | Bultengis | 1,453 | 1,397 | −3.9% |
+| H'Naharo Atika | Yuldustengis | 1,275 | 0 | −100.0% |
 
-Two waterways no longer reach their sea. H'Naharo Longa's water enters a lake of 270,886 km² at 35° S, 88° E, 237,332 km² of it newly under water, where the design routing strings full pieces of one hollow along the river's course. The lake stands 897 m above the common level and passes on 268 m³/s, which ends in a lake of 9,899 km² without an outlet; the river's lower course keeps 669 m³/s of its own. H'Naharo Atika's water enters a lake of 39,678 km² at 51° N, 174° W that passes on 520 m³/s, then one of 22,213 km² that passes on 7 m³/s, and what is left ends in a lake of 259 km² without an outlet. Asif Dahab, the works' branch to Juldyztengiz, crosses 9 lakes below 44° N, 124° E, three of them of 20,922, 13,595 and 17,984 km² and mostly new, and arrives with 3,800 of the 5,237 m³/s the design brings. The other eighteen keep between 89% and 100% of their flow.
+Two waterways no longer reach their sea. H'Naharo Longa's water enters a lake of 270,886 km² at 35° S, 88° E, 237,332 km² of it newly under water, where the design routing strings full pieces of one hollow along the river's course. The lake stands 897 m above the common level and passes on 268 m³/s, which ends in a lake of 9,899 km² without an outlet; the river's lower course keeps 669 m³/s of its own. H'Naharo Atika's water enters a lake of 39,678 km² at 51° N, 174° W that passes on 520 m³/s, then one of 22,213 km² that passes on 7 m³/s, and what is left ends in a lake of 259 km² without an outlet. Asif Dahab, the works' branch to Yuldustengis, crosses 9 lakes below 44° N, 124° E, three of them of 20,922, 13,595 and 17,984 km² and mostly new, and arrives with 3,800 of the 5,237 m³/s the design brings. The other eighteen keep between 89% and 100% of their flow.
 
-**The works.** The branch to Dagat na Katzeh leaves two lakes through cuts. The first still stands full at 3,027.9 m above the common level and overflows 5,532 m³/s besides. The second's hollow, whose outer pass lies at 2,626.8 m, no longer stands full on its own water: it is 45 m³/s short, which the branch's 10,006 m³/s would give up to keep the cut's intake under water. The routing here takes the branch's flow out all the same, so the flows below it are that much too high.
+**The works.** The branch to Dagat na Kaseh leaves two lakes through cuts. The first still stands full at 3,027.9 m above the common level and overflows 5,532 m³/s besides. The second's hollow, whose outer pass lies at 2,626.8 m, no longer stands full on its own water: it is 45 m³/s short, which the branch's 10,006 m³/s would give up to keep the cut's intake under water. The routing here takes the branch's flow out all the same, so the flows below it are that much too high.
 
 **Runoff on dry floors.** The present rule yields no runoff from ground below a hollow's outer pass, wet or dry. The corrected rule lets dry ground yield its runoff wherever it lies. With the present rule's way kept (`floor_runoff=False`) the lakes cover 6,436,003 km² and every sea receives the same flow to the cubic metre, since a hollow that overflows has drowned that ground either way: the 195,508 km² between the two lies in hollows that pass nothing on.
 
@@ -540,23 +542,23 @@ Two waterways no longer reach their sea. H'Naharo Longa's water enters a lake of
 
 [lake_rule_balance.py](lake_rule_balance.py) makes again, on the corrected rule, the three settings the measure above held at their design values: the factor on the open water's evaporation, the weirs' shares and the near-side sea's levels, each by the procedure that set it on the present rule, in the design's order (18 November; the first stage of adopting the rule, asked for so that the seas' new state is seen before the surface, the maps or the page change). Nothing in the design is changed by it.
 
-The seas hold. Six of the seven waters keep their design levels, Uamoana to within 3 cm, and Bultengiz stands 45.4 m higher and 78,376 km² larger. What changes is the land: lakes off the seas cover 18.0% of the Moon where the design has 13.4%, and the land that is neither sea nor lake falls from 62.8% to 58.1%. Two named rivers end in lakes short of their seas, as in the measure.
+The seas hold. Six of the seven waters keep their design levels, Uamoana to within 3 cm, and Bultengis stands 45.4 m higher and 78,376 km² larger. What changes is the land: lakes off the seas cover 18.0% of the Moon where the design has 13.4%, and the land that is neither sea nor lake falls from 62.8% to 58.1%. Two named rivers end in lakes short of their seas, as in the measure.
 
 **The factor.** With every sea at the common level and the open water's evaporation as the climate gives it, the rivers bring the seas 12,417 m³/s more than the seas lose on the corrected rule, where the present rule leaves 32,815 m³/s: the corrected lakes cover 7,534,007 km² in that state, the present rule's 5,800,458 km², and lose more of the rain to the air before it reaches a sea. The factor that takes the surplus away, found in one step from 1 as the design's was (final_drainage.budget), is 1.026 where the design's is 1.077, so the routing asks 2.6% more evaporation of the open water than the climate gives it where it asked 7.7%. One step closes the two rules' budgets alike: routed again at its factor, the corrected rule's budget is left 1,775 m³/s over and the present rule's 1,687 m³/s over. At the smaller factor every sea loses less to the air, which is why the seas hold on less river water: the land and its lakes send them 144,452 m³/s where the design routing sends 157,536.
 
-**The weirs.** Hanaqucha's surplus is 44,279 m³/s (42,209 in the design). The weir at its pass releases 24,315 m³/s to H'Jamo Melaĥa (26,599), which needs less. The northern cut releases 7,850 m³/s (5,604) so that 6,164 m³/s reach Juldyztengiz: the lakes on the branch's way take 1,686 m³/s where they took 367, and the sea's own rivers bring it 0 m³/s where they brought 1,275, so Juldyztengiz stands on the cut alone. The remaining 12,113 m³/s (10,007) go down the branch to Dagat na Katzeh, where 11,342 m³/s arrive. A cut takes no more than its lake can spare while standing full. The first lake the branch leaves through a cut stands full at 3,027.9 m above the common level and overflows 7,795 m³/s besides; the second, at 2,626.8 m, can spare 12,103 of the 12,113 m³/s and stands just full. Bahari Mashariki passes on 15,680 m³/s (14,894) and Dagat na Katzeh 30,889 (27,985). The weirs settle in 3 rounds, each held sea within a cubic metre a second of its need.
+**The weirs.** Hanaqucha's surplus is 44,279 m³/s (42,209 in the design). The weir at its pass releases 24,315 m³/s to H'Yamo Melaha (26,599), which needs less. The northern cut releases 7,850 m³/s (5,604) so that 6,164 m³/s reach Yuldustengis: the lakes on the branch's way take 1,686 m³/s where they took 367, and the sea's own rivers bring it 0 m³/s where they brought 1,275, so Yuldustengis stands on the cut alone. The remaining 12,113 m³/s (10,007) go down the branch to Dagat na Kaseh, where 11,342 m³/s arrive. A cut takes no more than its lake can spare while standing full. The first lake the branch leaves through a cut stands full at 3,027.9 m above the common level and overflows 7,795 m³/s besides; the second, at 2,626.8 m, can spare 12,103 of the 12,113 m³/s and stands just full. Bahari Masariki passes on 15,680 m³/s (14,894) and Dagat na Kaseh 30,889 (27,985). The weirs settle in 3 rounds, each held sea within a cubic metre a second of its need.
 
-**The near-side sea.** Uamoana stands 67.05 m below the common level, over the neck's crest at 68.72 m below it, and sends 7,365 m³/s over the neck (7,630 in the design). At the design levels the rivers would bring the two parts 889 m³/s more than they lose at the new factor, and Bultengiz rises until its loss meets its supply, from 225.36 to 179.96 m below the common level. On the way its water takes in the lake of 6,861 km² that the neck's river runs through below the neck, whose sill lies 186.60 m below the common level. The routing and the levels are set against each other for 4 rounds, until Uamoana is within 0.1 and Bultengiz within 5.0 m³/s of balance; the design routed once. Bultengiz's level is the least certain figure here, in the design as well: it follows the neck's flow, which is the small difference between Uamoana's rivers (74,864 m³/s) and its loss (67,500 m³/s).
+**The near-side sea.** Uamoana stands 67.05 m below the common level, over the neck's crest at 68.72 m below it, and sends 7,365 m³/s over the neck (7,630 in the design). At the design levels the rivers would bring the two parts 889 m³/s more than they lose at the new factor, and Bultengis rises until its loss meets its supply, from 225.36 to 179.96 m below the common level. On the way its water takes in the lake of 6,861 km² that the neck's river runs through below the neck, whose sill lies 186.60 m below the common level. The routing and the levels are set against each other for 4 rounds, until Uamoana is within 0.1 and Bultengis within 5.0 m³/s of balance; the design routed once. Bultengiz's level is the least certain figure here, in the design as well: it follows the neck's flow, which is the small difference between Uamoana's rivers (74,864 m³/s) and its loss (67,500 m³/s).
 
 | Sea | Level above the common level, m: design | Rebalanced | Area, km²: design | Rebalanced | Loses, m³/s: design | Rebalanced | Receives, m³/s: design | Rebalanced |
 |---|---|---|---|---|---|---|---|---|
-| Hanaqucha | 3,448.77 | 3,448.77 | 844,220 | 844,220 | 5,195 | 3,765 | 47,404 | 48,044 |
-| Bahari Mashariki | 2,341.33 | 2,341.33 | 297,889 | 297,889 | 2,783 | 2,307 | 17,677 | 17,987 |
-| Dagat na Katzeh | 719.95 | 719.95 | 599,348 | 599,348 | 2,124 | 1,125 | 30,110 | 32,014 |
-| H'Jamo Melaĥa | 0.0 | 0.0 | 2,410,253 | 2,410,253 | 53,683 | 50,512 | 53,683 | 50,512 |
-| Juldyztengiz | 0.0 | 0.0 | 279,470 | 279,470 | 6,512 | 6,164 | 6,512 | 6,164 |
+| Hanakosa | 3,448.77 | 3,448.77 | 844,220 | 844,220 | 5,195 | 3,765 | 47,404 | 48,044 |
+| Bahari Masariki | 2,341.33 | 2,341.33 | 297,889 | 297,889 | 2,783 | 2,307 | 17,677 | 17,987 |
+| Dagat na Kaseh | 719.95 | 719.95 | 599,348 | 599,348 | 2,124 | 1,125 | 30,110 | 32,014 |
+| H'Yamo Melaha | 0.0 | 0.0 | 2,410,253 | 2,410,253 | 53,683 | 50,512 | 53,683 | 50,512 |
+| Yuldustengis | 0.0 | 0.0 | 279,470 | 279,470 | 6,512 | 6,164 | 6,512 | 6,164 |
 | Uamoana | −67.02 | −67.05 | 3,835,314 | 3,835,261 | 73,607 | 67,500 | 81,350 | 74,864 |
-| Bultengiz | −225.36 | −179.96 | 731,500 | 809,876 | 13,362 | 13,073 | 13,519 | 13,078 |
+| Bultengis | −225.36 | −179.96 | 731,500 | 809,876 | 13,362 | 13,073 | 13,519 | 13,078 |
 
 The full seas pass on what they receive beyond their loss, and what Uamoana receives beyond its loss is the neck's flow. The seas cover 23.93% of the Moon (23.72% in the design).
 
@@ -575,37 +577,37 @@ The full seas pass on what they receive beyond their loss, and what Uamoana rece
 
 The largest lake that passes nothing on covers 45,846 km² at 41° S, 79° E, 45,436 km² of it newly under water.
 
-**The named waterways.** Each waterway's flow where it ends. Bultengiz has risen up the lower courses of its three rivers, so their rebalanced flows are read where the sea now meets them, above the streams that joined on the drowned reach, and their change is against the design's flow at that same place:
+**The named waterways.** Each waterway's flow where it ends. Bultengis has risen up the lower courses of its three rivers, so their rebalanced flows are read where the sea now meets them, above the streams that joined on the drowned reach, and their change is against the design's flow at that same place:
 
 | Waterway | Ends in | Design, m³/s | Rebalanced, m³/s | Change |
 |---|---|---|---|---|
-| Hatunmayu | H'Jamo Melaĥa | 30,657 | 27,904 | −9.0% |
+| Hatunmayu | H'Yamo Melaha | 30,657 | 27,904 | −9.0% |
 | Ninamuawa | Uamoana | 29,073 | 31,772 | +9.3% |
-| Paramayu | Hanaqucha | 26,018 | 26,411 | +1.5% |
-| Fukagawa | Dagat na Katzeh | 17,965 | 18,422 | +2.5% |
-| Mto Kijani | Uamoana | 17,652 | 16,967 | −3.9% |
-| Ilog na Gavoah | Bahari Mashariki | 15,372 | 15,622 | +1.6% |
-| Pukutaymayu | H'Jamo Melaĥa | 12,926 | 13,119 | +1.5% |
-| Niigawa | Dagat na Katzeh | 9,991 | 11,345 | +13.6% |
+| Paramayu | Hanakosa | 26,018 | 26,411 | +1.5% |
+| Hukagawa | Dagat na Kaseh | 17,965 | 18,422 | +2.5% |
+| Muto Kiyani | Uamoana | 17,652 | 16,967 | −3.9% |
+| Ilog na Gavoah | Bahari Masariki | 15,372 | 15,622 | +1.6% |
+| Pukutaimayu | H'Yamo Melaha | 12,926 | 13,119 | +1.5% |
+| Niigawa | Dagat na Kaseh | 9,991 | 11,345 | +13.6% |
 | H'Naharo Longa | Uamoana | 9,565 | 992 | −89.6% |
 | Pooiriawa | Uamoana | 8,436 | 8,656 | +2.6% |
-| Rereawa | Hanaqucha | 8,248 | 8,114 | −1.6% |
-| Jarykgol | Bultengiz | 7,541 | 7,362 | −3.5% |
-| Mto Jiwe | H'Jamo Melaĥa | 5,578 | 5,455 | −2.2% |
-| Asif Dahab | Juldyztengiz | 5,237 | 6,164 | +17.7% |
+| Rereawa | Hanakosa | 8,248 | 8,114 | −1.6% |
+| Yarikgol | Bultengis | 7,541 | 7,362 | −3.5% |
+| Muto Yiwe | H'Yamo Melaha | 5,578 | 5,455 | −2.2% |
+| Asif Dahab | Yuldustengis | 5,237 | 6,164 | +17.7% |
 | Tiareawa | Uamoana | 3,676 | 3,633 | −1.2% |
-| Wayramayu | Hanaqucha | 3,357 | 3,426 | +2.1% |
-| Puyumayu | Hanaqucha | 2,571 | 2,655 | +3.3% |
-| Quyllurmayu | Hanaqucha | 1,777 | 1,909 | +7.4% |
-| Mto Jani | Bultengiz | 1,575 | 1,552 | +4.3% |
-| Mto Pacha | Bultengiz | 1,453 | 869 | +3.2% |
-| H'Naharo Atika | Juldyztengiz | 1,275 | 0 | −100.0% |
+| Wairamayu | Hanakosa | 3,357 | 3,426 | +2.1% |
+| Puyumayu | Hanakosa | 2,571 | 2,655 | +3.3% |
+| Koilurmayu | Hanakosa | 1,777 | 1,909 | +7.4% |
+| Muto Yani | Bultengis | 1,575 | 1,552 | +4.3% |
+| Muto Pasa | Bultengis | 1,453 | 869 | +3.2% |
+| H'Naharo Atika | Yuldustengis | 1,275 | 0 | −100.0% |
 
-H'Naharo Longa still ends in the lake at 35° S, 88° E, now 291,323 km², and reaches Uamoana with 992 m³/s of its lower course's own water. H'Naharo Atika's water is held by a lake of 39,678 km² at 51° N, 174° W and one of 39,084 km² at 55° N, 177° E that passes nothing on, and none of it reaches Juldyztengiz. At the places where Bultengiz now meets them, Jarykgol, Mto Jani and Mto Pacha carry 7,628, 1,488 and 842 m³/s in the design. Hatunmayu carries 9.0% less because the weir that feeds it releases less, and Asif Dahab, Niigawa and Ninamuawa carry more because the cuts and Dagat na Katzeh's overflow do. The other waterways stay within 8% of their design flows.
+H'Naharo Longa still ends in the lake at 35° S, 88° E, now 291,323 km², and reaches Uamoana with 992 m³/s of its lower course's own water. H'Naharo Atika's water is held by a lake of 39,678 km² at 51° N, 174° W and one of 39,084 km² at 55° N, 177° E that passes nothing on, and none of it reaches Yuldustengis. At the places where Bultengis now meets them, Yarikgol, Muto Yani and Muto Pasa carry 7,628, 1,488 and 842 m³/s in the design. Hatunmayu carries 9.0% less because the weir that feeds it releases less, and Asif Dahab, Niigawa and Ninamuawa carry more because the cuts and Dagat na Katzeh's overflow do. The other waterways stay within 8% of their design flows.
 
-**The water held.** The lakes hold 1,579,954 km³ more than the design's and Bultengiz 37,028 km³ more; Uamoana's volume moves by 110 km³ and the other seas' not at all. The state found here holds 1.62 million km³ more water than the design state.
+**The water held.** The lakes hold 1,579,954 km³ more than the design's and Bultengis 37,028 km³ more; Uamoana's volume moves by 110 km³ and the other seas' not at all. The state found here holds 1.62 million km³ more water than the design state.
 
-**The search for a part's level.** near_side_neck.py finds the level at which a part's loss first reaches its supply by running through the part's cells in the order they join its water. The cells of a basin beyond a sill all join at the sill's level, some losing to the air and some gaining rain, and a search cell by cell can stop part of the way through such a basin, at a loss the part has at no level. Bultengiz met this at a basin of 12,933 km² whose sill lies 181.79 m below the common level. Here the search takes the cells that join at one level together (lake_rule_balance.part_tables). On the design's own rivers and factor the neck read from its record gives the design's levels back (67.01 and 225.34 m below the common level against 67.02 and 225.36, and the same 7,630 m³/s over the neck), so the design state did not rest inside such a basin; near_side_neck.py itself is unchanged and carries the flaw until it is next run.
+**The search for a part's level.** near_side_neck.py finds the level at which a part's loss first reaches its supply by running through the part's cells in the order they join its water. The cells of a basin beyond a sill all join at the sill's level, some losing to the air and some gaining rain, and a search cell by cell can stop part of the way through such a basin, at a loss the part has at no level. Bultengis met this at a basin of 12,933 km² whose sill lies 181.79 m below the common level. Here the search takes the cells that join at one level together (lake_rule_balance.part_tables). On the design's own rivers and factor the neck read from its record gives the design's levels back (67.01 and 225.34 m below the common level against 67.02 and 225.36, and the same 7,630 m³/s over the neck), so the design state did not rest inside such a basin; near_side_neck.py itself is unchanged and carries the flaw until it is next run.
 
 **What it leaves out.** The climate is the design climate, run on a surface with the design's seas and lakes. The factor closes the routing's books on that climate's rain: with a third more lake the air would take up more water and return more rain, and how much of each is not known until a climate is run on such a surface. Were the open water to lose as much to the air as at the design's factor, the seas would be short of river water as the measure above found. The state is a steady state: the corrected rule's largest hollows would take far longer than the scenario's centuries to fill on their own inflow and are filled by delivery or stand lower. Where the open water's balance is near zero a lake's extent follows the climate model's 170 km cells. The settings follow the design's procedures as they stand, so one step closes the budget and the near-side sea is the only water whose level floats. The rebalanced routing is kept on the research drive (atlas-round/lake_rule/lake_rule_balance_16ppd.npz) with a map of the seas and lakes in the design and rebalanced (seas_and_lakes_design_and_rebalanced.png); results/lake_rule_balance.json records the figures.
 
@@ -617,25 +619,25 @@ The design now fills its lakes by the corrected rule and routes the climate esti
 
 **The routing.** [design_works.py](design_works.py) keeps the floor's fixed waters and the works' cells as a product of their own. final_drainage.py closes the budget and sets the weirs with lake_rule_balance.py's steps, near_side_neck.py finds a part's level level by level, and design_routing.py settles the near-side sea's parts against the routing and writes the product every map reads, its receivers joined through the lakes ([hollow_courses.py](hollow_courses.py)) so that a river's course leads through its lakes to its sea. lake_support.py finds no lake standing above dry ground beside it.
 
-**The seas.** The factor on the open water's evaporation that closes the budget is 1.043 (1.077 in the earlier design; one step leaves 3,124 m³/s over). Hanaqucha's surplus is 49,205 m³/s (42,209): the weir releases 26,816 m³/s to H'Jamo Melaĥa (26,599), the northern cut 7,736 (5,604), of which 6,237 reach Juldyztengiz and are all it receives, and the branch to Dagat na Katzeh carries 14,653 (10,007). The near-side sea is one water across its neck: with 77,578 m³/s of rivers Uamoana stands 65.21 m below the common level and sends 9,364 m³/s through the neck, which with Bultengiz's own 6,020 m³/s lifts Bultengiz over the crest (68.72 m below the common level) to 66.61 m below it, where the earlier design had it 225.36 m below, fed by a river over the neck. The two stand within 1.4 m of each other and about 2 to 3.5 m of water lie over the crest, so whether the sea stays joined rests on the estimate's rain.
+**The seas.** The factor on the open water's evaporation that closes the budget is 1.043 (1.077 in the earlier design; one step leaves 3,124 m³/s over). Hanaqucha's surplus is 49,205 m³/s (42,209): the weir releases 26,816 m³/s to H'Yamo Melaha (26,599), the northern cut 7,736 (5,604), of which 6,237 reach Yuldustengis and are all it receives, and the branch to Dagat na Kaseh carries 14,653 (10,007). The near-side sea is one water across its neck: with 77,578 m³/s of rivers Uamoana stands 65.21 m below the common level and sends 9,364 m³/s through the neck, which with Bultengiz's own 6,020 m³/s lifts Bultengis over the crest (68.72 m below the common level) to 66.61 m below it, where the earlier design had it 225.36 m below, fed by a river over the neck. The two stand within 1.4 m of each other and about 2 to 3.5 m of water lie over the crest, so whether the sea stays joined rests on the estimate's rain.
 
 | Sea | Level above the common level, m: earlier design | Now | Area, km²: earlier | Now | Receives, m³/s: earlier | Now |
 |---|---|---|---|---|---|---|
-| Hanaqucha | 3,448.77 | 3,448.77 | 844,220 | 844,220 | 47,404 | 52,759 |
-| Bahari Mashariki | 2,341.33 | 2,341.33 | 297,889 | 297,889 | 17,677 | 18,559 |
-| Dagat na Katzeh | 719.95 | 719.95 | 599,348 | 599,348 | 30,110 | 30,899 |
-| H'Jamo Melaĥa | 0.0 | 0.0 | 2,410,253 | 2,410,253 | 53,683 | 51,565 |
-| Juldyztengiz | 0.0 | 0.0 | 279,470 | 279,470 | 6,512 | 6,238 |
+| Hanakosa | 3,448.77 | 3,448.77 | 844,220 | 844,220 | 47,404 | 52,759 |
+| Bahari Masariki | 2,341.33 | 2,341.33 | 297,889 | 297,889 | 17,677 | 18,559 |
+| Dagat na Kaseh | 719.95 | 719.95 | 599,348 | 599,348 | 30,110 | 30,899 |
+| H'Yamo Melaha | 0.0 | 0.0 | 2,410,253 | 2,410,253 | 53,683 | 51,565 |
+| Yuldustengis | 0.0 | 0.0 | 279,470 | 279,470 | 6,512 | 6,238 |
 | Uamoana | −67.02 | −65.21 | 3,835,314 | 3,839,222 | 81,350 | 77,578 |
-| Bultengiz | −225.36 | −66.61 | 731,500 | 973,034 | 13,519 | 6,020 |
+| Bultengis | −225.36 | −66.61 | 731,500 | 973,034 | 13,519 | 6,020 |
 
 Bultengiz's supply in the earlier design counts the 7,630 m³/s that reached it over the neck; now the neck's 9,364 m³/s pass through the sea's water and its 6,020 m³/s are its own rivers.
 
-**The lakes and the water held.** Lakes off the seas cover 17.3% of the Moon in 31,575 lakes (13.4% in 29,740 in the earlier design), 1.4% of it in lakes that pass nothing on (0.6%), and hold 5.95 million km³ (4.76). The seas cover 24.4% (23.7%) and water in all 41.7% (37.2%). Seas and lakes together hold 1,344,378 km³ more than the earlier design's, 1,192,037 of it in the lakes and 145,369 in Bultengiz. The rivers bring the seas 242,171 m³/s (249,180).
+**The lakes and the water held.** Lakes off the seas cover 17.3% of the Moon in 31,575 lakes (13.4% in 29,740 in the earlier design), 1.4% of it in lakes that pass nothing on (0.6%), and hold 5.95 million km³ (4.76). The seas cover 24.4% (23.7%) and water in all 41.7% (37.2%). Seas and lakes together hold 1,344,378 km³ more than the earlier design's, 1,192,037 of it in the lakes and 145,369 in Bultengis. The rivers bring the seas 242,171 m³/s (249,180).
 
-**The waterways.** waterways.py now follows a river through its lakes by the joined receivers and ends one at a lake that takes it in and passes on less than a waterway carries. It finds 22 waterways of 1,000 m³/s or more, 18 of them carrying the names pinned to their mouths. H'Naharo Longa and H'Naharo Atika no longer reach Uamoana and Juldyztengiz: their names are moved to the reaches that keep most of their courses, 1,868 km ending with 2,345 m³/s and 1,462 km ending with 1,075 m³/s, each in a lake that passes little on. Jarykgol, the river over the neck, is gone with the neck under water, and Mto Jani and Mto Pacha end in Bultengiz's risen water with less than 1,000 m³/s; their pins stay in place_names.json without a waterway. 4 waterways are new and wait for names: 2,585 m³/s over 1,139 km to a lake that passes little on at 38° S, 104° E; 1,282 m³/s over 758 km to a lake that passes little on at 36° S, 117° E; 1,204 m³/s over 495 km to Uamoana at 18° N, 34° E; 1,175 m³/s over 816 km to a lake that passes little on at 16° N, 45° W. Each waterway's lowest-year flow and faltering reaches come from the year-by-year rivers on this routing (The sustained rivers, above): the four without names carry 1,124, 808, 833 and 670 m³/s in their lowest year, in the order given.
+**The waterways.** waterways.py now follows a river through its lakes by the joined receivers and ends one at a lake that takes it in and passes on less than a waterway carries. It finds 22 waterways of 1,000 m³/s or more, 18 of them carrying the names pinned to their mouths. H'Naharo Longa and H'Naharo Atika no longer reach Uamoana and Yuldustengis: their names are moved to the reaches that keep most of their courses, 1,868 km ending with 2,345 m³/s and 1,462 km ending with 1,075 m³/s, each in a lake that passes little on. Yarikgol, the river over the neck, is gone with the neck under water, and Muto Yani and Muto Pasa end in Bultengiz's risen water with less than 1,000 m³/s; their pins stay in place_names.json without a waterway. 4 waterways are new and wait for names: 2,585 m³/s over 1,139 km to a lake that passes little on at 38° S, 104° E; 1,282 m³/s over 758 km to a lake that passes little on at 36° S, 117° E; 1,204 m³/s over 495 km to Uamoana at 18° N, 34° E; 1,175 m³/s over 816 km to a lake that passes little on at 16° N, 45° W. Each waterway's lowest-year flow and faltering reaches come from the year-by-year rivers on this routing (The sustained rivers, above): the four without names carry 1,124, 808, 833 and 670 m³/s in their lowest year, in the order given.
 
-**What still stands on the earlier design.** The regions and districts are the draft of 18 November, with their names and texts: drawn again on the new lakes, 38 of the 45 land regions would change their anchors and with them their names, which is the author's to decide, so the draft is kept and its borders round Bultengiz follow the earlier shore. The redraw is kept on the research drive (atlas-round/corrected_rule/districts_redrawn/). The regions' fact sheets and texts (region_profiles.py) keep the earlier climate's figures with them. The dryland rivers' routes (dryland_rivers.py) were costed on the earlier routing. The settled turn under the new water's weight is not found again: the design keeps the frame its climate's run stands in.
+**What still stands on the earlier design.** The regions and districts are the draft of 18 November, with their names and texts: drawn again on the new lakes, 38 of the 45 land regions would change their anchors and with them their names, which is the author's to decide, so the draft is kept and its borders round Bultengis follow the earlier shore. The redraw is kept on the research drive (atlas-round/corrected_rule/districts_redrawn/). The regions' fact sheets and texts (region_profiles.py) keep the earlier climate's figures with them. The dryland rivers' routes (dryland_rivers.py) were costed on the earlier routing. The settled turn under the new water's weight is not found again: the design keeps the frame its climate's run stands in.
 
 **What the estimate rests on.** The contrast between land and water is measured on two settled runs; that the displaced rain falls on the land, evenly, is assumed, and rain displaced from a large lake would fall mostly on the land round it. A cell moved in proportion to its water fraction interpolates between the two states the model holds a cell in. The climate's temperatures, clouds and winds are the run's. The state is a steady one: the largest hollows would take far longer than the scenario's centuries to fill from their own rivers. Nothing is validated against a run on the settled surface.
 
@@ -663,7 +665,7 @@ The study also measures the sand study's rule for the rivers' sand, which counts
 
 ## What is open
 
-- **The regions and districts** are drawn again on the design's present water with the rules of 20 November (districts.md, rules 16 and 17): a region is one piece, an island keeps to a reach of 250 km from its land's own shore, a land of 50,000 km² or more stands alone, and the summit seeds a region. The redraw holds 46 regions on land, 566 districts and 147 coastal seas, and is kept apart on the research drive (`atlas-round/regions_redraw_2026-11-20/`); the draft of 18 November stands on the page until the redraw carries names, its borders round Bultengiz following the earlier shore and its fact sheets and texts carrying the earlier climate's figures. The names and descriptions are to be made again (register, 19 and 20 November): the way of naming is reworked, and tried first on one or two regions named in full. In the wet regions nearly every district is still centred on a lake.
+- **The regions and districts** are drawn again on the design's present water with the rules of 20 November (districts.md, rules 16 and 17): a region is one piece, an island keeps to a reach of 250 km from its land's own shore, a land of 50,000 km² or more stands alone, and the summit seeds a region. The redraw holds 46 regions on land, 566 districts and 147 coastal seas, and is kept apart on the research drive (`atlas-round/regions_redraw_2026-11-20/`); the draft of 18 November stands on the page until the redraw carries names, its borders round Bultengis following the earlier shore and its fact sheets and texts carrying the earlier climate's figures. The names and descriptions are to be made again (register, 19 and 20 November): the way of naming is reworked, and tried first on one or two regions named in full. In the wet regions nearly every district is still centred on a lake.
 
 - **The land's use** (above): the wild share the atlas is drawn on, where the managed biomes belong, where gardens go and whether warm wet coasts carry resort shores, and whether the kinds are assigned by district or by cell, among the paper's eleven decisions.
 
@@ -673,9 +675,9 @@ The study also measures the sand study's rule for the rivers' sand, which counts
 
 - **The globe's ground**: the close look made from the ground, with its kinds of ground, the open sand and the two made seas, is a trial that waits for a verdict (visualization/atlas/README.md, The close look made from the ground). Its soil colours rest on iron and titanium mapped at about 60 km; a public iron map at 1 km (Clementine, 70° S to 70° N) and a geologic map's units would give its soils boundaries that follow the ground.
 
-- **The names' sounds** (above): whether the passed forms are adopted into the lexicons and the names table, which renames six seas and nine rivers and the draft's generated names and needs the page built and published again; each rule's choice, the sibilants falling together in *s* above all; the article *h'* and the repaired clusters of the author's own tongue; and a check of the parent words against dictionaries.
+- **The names' sounds** (above): each rule's choice, the sibilants falling together in *s* above all; a check of the parent words against dictionaries; and the regions' fact sheets, which were last made in full on the design before the corrected lake rule (a full re-make moves rain, heights, lake areas and falls in every region and leaves two of the hand-written texts to rewrite).
 
-- **The rivers' names**: four waterways new to the routing wait for names, three pinned names (Jarykgol, Mto Jani, Mto Pacha) have no waterway of 1,000 m³/s left, and H'Naharo Longa and H'Naharo Atika now name reaches that end in lakes. Names are pinned in place_names.json by the author.
+- **The rivers' names**: four waterways new to the routing wait for names, three pinned names (Yarikgol, Muto Yani, Muto Pasa) have no waterway of 1,000 m³/s left, and H'Naharo Longa and H'Naharo Atika now name reaches that end in lakes. Names are pinned in place_names.json by the author.
 
 - **The dryland rivers and the settled turn**: dryland_rivers.py's 29 routes were costed on the earlier routing and climate, and the frame is the one the design climate's run stands in, not the settled turn under the new water's weight (1.34 million km³ more, mostly in far-side and southern lakes). Both wait until the design's lakes are accepted.
 

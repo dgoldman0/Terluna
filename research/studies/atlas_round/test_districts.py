@@ -24,6 +24,11 @@ def test_each_tongue_joins_as_its_grammar_does():
     assert N.compose('satoyama', 'river', 'black') == 'Kurogawa'               # sequential voicing
     assert N.compose('sahran', 'valley', 'light') == 'Wadi Nur'
     assert N.compose('dala', 'lake', 'black') == 'Karakol'
+    assert N.compose('dala', 'sea', 'cloud') == 'Bultengis'                      # the words in the Moon's sounds
+    assert N.compose('dala', 'lake', 'cloud') == 'Bulutkol'                      # a cluster the join makes is opened
+    assert N.compose('runa', 'lake', 'high') == 'Hanakosa'                       # the same consonant meeting itself
+    assert N.compose('satoyama', 'island', 'black') == 'Kurosima'                # s has no voiced partner there
+    assert N.compose('pwani', 'sea', 'east') == 'Bahari Masariki'                # a word for an old name's meaning
 
 
 def test_landscapes_take_their_tongues():
@@ -97,9 +102,9 @@ def test_names_keep_to_their_sources(draft):
 def test_a_calque_takes_its_tongues_word_on_the_units_head():
     u = dict(tongue='pwani', name_head='coast', feature=dict(name='Mare Orientale'))
     name, meaning = N.calque(u, set())
-    assert name == 'Pwani Mashariki' and meaning == 'east coast, after Mare Orientale, the Eastern Sea'
+    assert name == 'Puwani Masariki' and meaning == 'east coast, after Mare Orientale, the Eastern Sea'
     assert N.calque(dict(u, feature=dict(name='Mare Moscoviense')), set()) is None   # named after a place: no meaning
-    assert N.calque(u, {'Pwani Mashariki'}) is None                                  # a name already taken
+    assert N.calque(u, {'Puwani Masariki'}) is None                                  # a name already taken
 
 
 def test_anchors_survive_a_redraw():
