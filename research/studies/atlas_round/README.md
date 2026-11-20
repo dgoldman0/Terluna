@@ -251,9 +251,14 @@ python visualization/atlas/render.py --names-only --districts research/studies/a
 python -m research.studies.atlas_round.region_profiles   # about 20 s: the regions' fact sheets, and their texts filled in
 python -m research.studies.atlas_round.region_profiles --texts-only   # seconds, after a rename or new texts
 python -m research.studies.atlas_round.waterways         # under a minute: the major waterways, traced whole and named
+python -m research.studies.atlas_round.lunar_sounds      # under a second: every lexicon word and pinned name passed through the Moon's sounds
 ```
 
 Each land region has a fact sheet (18 November), computed by [region_profiles.py](region_profiles.py) without drawing anything again. It holds where the region lies and how high Earth stands in its sky, its land, heights, lakes, largest river and steep reaches, its coastal waters and the seas they lie on, the heritage sites on its ground and under its waters, its climate on the moisture map and its neighbours, each figure in one display form. The record is [results/region_profiles.json](results/region_profiles.json) *(computed facts; the climate is read on the climate run's cells of about 170 km, and an island group or lake country the run holds as water takes a shore's climate, as climate_reach_km records)*. Each region's short text for the globe is written by hand from its sheet and kept in region_texts.json, keyed by the region's anchor. A text writes its figures as `{key}` and other places as `[name]`, so the figures and names stay current through a redraw or a rename. It records the facts its wording rests on, and a text whose facts move past their tolerance is listed as stale until it is rewritten.
+
+## The names' sounds
+
+A place name keeps its parent language's sounds to a degree and comes out in the Moon's own phonetic framework (register, 20 November). [lunar_sounds.md](lunar_sounds.md) sets that passage out and [lunar_sounds.py](lunar_sounds.py) makes it: the sound section of the Terlunan reference taken as the sounds all the Moon's tongues share, a rule sheet for each parent language (Kazakh, Kyrgyz and Mongolian; Quechua; Arabic and Tamazight; Swahili; Tagalog and Hebrew; Japanese; Esperanto with Hebrew loans), and every word of district_names.py's lexicons passed through. Of 789 words 324 change, every passed word stands in the framework and no two words of a tongue fall together; 15 of the 31 pinned names would change, six of the seven seas among them (Bultengiz to Bultengis, Hanaqucha to Hanakosa), and 401 of the 658 generated names in the draft record. The record is [results/lunar_sounds.json](results/lunar_sounds.json) *(a rule sheet and its results: the rules are choices and the parent words are from general knowledge, unchecked against dictionaries)*. No name is changed by it: district_names.py and place_names.json stand until the passed forms are adopted.
 
 ## The falls
 
@@ -667,6 +672,8 @@ The study also measures the sand study's rule for the rivers' sand, which counts
 - **Made sand seas** (above): the two seas' sizes and the span of their building, which set the haulage (0.6 GW for five thousand years as drawn, 0.22 GW for ten thousand); a third sea; their names; whether they enter the design surface and the districts' texts; and how dunes stand at lunar gravity, where the study carries Earth's rules of form, height and spacing.
 
 - **The globe's ground**: the close look made from the ground, with its kinds of ground, the open sand and the two made seas, is a trial that waits for a verdict (visualization/atlas/README.md, The close look made from the ground). Its soil colours rest on iron and titanium mapped at about 60 km; a public iron map at 1 km (Clementine, 70° S to 70° N) and a geologic map's units would give its soils boundaries that follow the ground.
+
+- **The names' sounds** (above): whether the passed forms are adopted into the lexicons and the names table, which renames six seas and nine rivers and the draft's generated names and needs the page built and published again; each rule's choice, the sibilants falling together in *s* above all; the article *h'* and the repaired clusters of the author's own tongue; and a check of the parent words against dictionaries.
 
 - **The rivers' names**: four waterways new to the routing wait for names, three pinned names (Jarykgol, Mto Jani, Mto Pacha) have no waterway of 1,000 m³/s left, and H'Naharo Longa and H'Naharo Atika now name reaches that end in lakes. Names are pinned in place_names.json by the author.
 
