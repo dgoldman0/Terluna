@@ -295,7 +295,20 @@ def build(log=print):
     area16 = np.repeat((MOON_KM * np.radians(1 / 16)) ** 2 * np.cos(np.radians(lat16)), cols16)
     dry16 = (district16 >= 1) & (district16 <= nland) & ~is_water16
     lake16 = (district16 >= 1) & (district16 <= nland) & is_water16 & (body16 == 0)
-    log(f'surface read, {time.time() - started:.0f} s')
+    # the lakes and the rivers' flow on the surface and routing as they stand, counted on the districts' own grid as
+    # the draw counts them, so that a record drawn on earlier lakes does not set them
+    _, kind8, _, _, b16 = D.surface_classes(log=lambda *a: None)
+    _, q8, _, _ = D.routing_fields(b16, log=lambda *a: None)
+    lakes8, _ = ndimage.label(kind8 == 1, structure=np.ones((3, 3)))
+    dmax = int(district.max())
+    pair = np.unique(lakes8.ravel().astype(np.int64) * (dmax + 1) + district.ravel())
+    lake_count = np.bincount((pair % (dmax + 1))[pair // (dmax + 1) > 0], minlength=dmax + 1)   # a lake once in each district it touches
+    cell_km2 = np.broadcast_to(area[:, None], district.shape)
+    lake_km2 = np.bincount(district.ravel(), (cell_km2 * (kind8 == 1)).ravel(), dmax + 1)
+    all_km2 = np.bincount(district.ravel(), cell_km2.ravel(), dmax + 1)
+    flow_max = ndimage.maximum(q8, district, np.arange(dmax + 1))
+    label_of = {d['code']: k + 1 for k, d in enumerate(record['districts'])}
+    log(f'surface and routing read, {time.time() - started:.0f} s')
 
     # the climate on the moisture map, read at every land and coastal-water cell in the run's turned frame
     m = json.loads(MF.OUT.read_text())
@@ -381,7 +394,9 @@ def build(log=print):
         tot = sum(drains.values())
         drains = {k: v / tot for k, v in sorted(drains.items(), key=lambda kv: -kv[1])}
         drains_main = next(iter(drains))
-        river_d = max(ds, key=lambda d: d['largest_flow_m3s'])
+        ids = np.array([label_of[d['code']] for d in ds])
+        river_d = ds[int(np.argmax(flow_max[ids]))]
+        river_flow = int(round(float(flow_max[ids].max())))
         here_falls = []
         for x in falls:
             rf, cf = divmod(int(x['start']), cols16)
@@ -435,12 +450,13 @@ def build(log=print):
         facts = dict(
             area=r['area_km2'], waters=r['waters_km2'], lake_area=lake_area, districts=r['districts'],
             land_pieces=pieces, falls=len(here_falls), crater_floors=len(craters), heritage_sites=len(sites),
-            lakes=sum(d['lakes'] for d in ds), lake_share=r['lake_share'], basalt_share=r['basalt_share'],
+            lakes=int(lake_count[ids].sum()), lake_share=float(lake_km2[ids].sum() / all_km2[ids].sum()),
+            basalt_share=r['basalt_share'],
             salt_share=salt_area / cs_area if cs_area else 0.0, cloud=mean('cloud'),
             snow_share=float(np.average(field['snow_m'][L] >= SNOW_M, weights=wl)),
             night_rain=mean('night_rain_share'), earth_share=earth_share,
             ice_share=float(np.average(field['sic'][W], weights=w8[W])) if W.any() else 0.0,
-            drains_main_share=drains[drains_main], river=river_d['largest_flow_m3s'], relief=r['relief_m'],
+            drains_main_share=drains[drains_main], river=river_flow, relief=r['relief_m'],
             highest=float(h.max() - base), mean_height=float(np.average(h, weights=area16[d16]) - base),
             coast_depth=(sum(c['mean_depth_m'] * c['area_km2'] for c in cs) / cs_area) if cs_area else None,
             earth=float(np.average(e, weights=wl)), earth_low=float(e.min()), earth_high=float(e.max()),
@@ -472,7 +488,7 @@ def build(log=print):
             highest_at=dict(today=[round(float(90.0 - (top_r + 0.5) / 16), 2), round(float((top_c + 0.5) / 16), 2)]),
             heights_above=('the level of ' + seas[main_sea]['name']) if main_sea else 'the common level',
             heights_above_anchor=seas[main_sea]['anchor'] if main_sea else None,
-            largest_river=dict(flow_m3s=river_d['largest_flow_m3s'], unit=river_d['name']),
+            largest_river=dict(flow_m3s=river_flow, unit=river_d['name']),
             falls=[dict(power_gw=x['power_gw'], drop_m=x['drop_m'], flow_m3s=x['flow_m3s'], into=x['into'])
                    for x in here_falls[:3]],
             heritage=sites,
@@ -480,7 +496,8 @@ def build(log=print):
                         for q, km in nb],
             open_waters=[seas[sea_by_body[b]]['name'] for b in beyond if b in sea_by_body],
             districts=[dict(name=d['name'], anchor=d['anchor'], area_km2=d['area_km2'], zone=d['zone'],
-                            lakes=d['lakes'], largest_flow_m3s=d['largest_flow_m3s'],
+                            lakes=int(lake_count[label_of[d['code']]]),
+                            largest_flow_m3s=int(round(float(flow_max[label_of[d['code']]]))),
                             feature=(d['feature'] or {}).get('name'), meaning=d.get('name_meaning') or None,
                             crater_km=d.get('centre_km') if d.get('centre') == 'crater' else None,
                             description=d['description']) for d in sorted(ds, key=lambda d: -d['area_km2'])],

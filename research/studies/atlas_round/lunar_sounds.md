@@ -17,7 +17,7 @@ The framework is the sound section of the author's Terlunan reference (v0.6, sec
 - where two parts of a name are fused and the same consonant meets itself, one remains;
 - stress on the syllable before the last, unless a long vowel takes it.
 
-What the framework cannot hold is repaired as the reference repairs its own loans. A cluster that opens a word gets a vowel inside it, *i* before *y* and *u* before *w* (the reference's *liyong* and *kuwo*) and otherwise a copy of the next vowel. A cluster that closes a word is opened with a copy of the vowel before it. A doubled consonant becomes one. Where a parent language has its own vowel for opening a cluster, that vowel is used: Hebrew opens a cluster with *e*.
+What the framework cannot hold is repaired as the reference repairs its own loans. A cluster that opens a word gets a vowel inside it, *i* before *y* and *u* before *w* (the reference's *liyong* and *kuwo*) and otherwise a copy of the next vowel. A cluster that closes a word is opened with a copy of the vowel before it. A doubled consonant becomes one. Where a parent language has its own vowel for opening a cluster, that vowel is used: Hebrew words open a cluster with *e*.
 
 ## What each parent keeps, and what changes
 
@@ -31,7 +31,7 @@ A sound the framework has is kept. A sound it lacks goes to its nearest neighbou
 | Pwani | Swahili | Its five vowels, the framework's own; *f*, *v*; *ng* | *sh*, *ch*, *z* to *s*; *j* to *y*; a syllabic nasal gets back the vowel it lost; a consonant and a glide that open a word get a vowel between | mto, *muto*; nchi, *insi*; mvua, *imvua*; kijani, *kiyani*; pwani, *puwani*; ziwa, *siwa* |
 | Tagalog-Hebrew | Tagalog heads, Hebrew modifiers | Tagalog whole, its sounds being the framework's, with its glottal stop written between vowels; Hebrew's *f*, *v* | Hebrew *sh*, *ts*, *z* to *s*; *kh* to *h*; a Hebrew cluster opened with *e* | look, *lo'ok*; shemesh, *semes*; erets, *eres*; katzeh, *kaseh*; zman, *seman* |
 | Satogo | Japanese | Its five vowels and long vowels | The spelling that follows its own sound system: *shi*, *chi*, *tsu*, *fu* are *si*, *ti*, *tu*, *hu*; *z*, *j* to *s* | shima, *sima*; tsuchi, *tuti*; mizu, *misu*; fuka, *huka*; ō, *oo* |
-| Proto-Olivolingvo | Esperanto with Hebrew loans | *f*, *v*; the article *h'* as the author writes it | *j*, its *y* sound, written *y*; *ĥ*, *ŝ* to *h*, *s*; *ĝ* to *g*; *c*, *z* to *s*; opening clusters opened with *e* | jamo, *yamo*; ĥadaŝa, *hadasa*; kratero, *keratero*; profunda, *perofunda*; erco, *erso* |
+| Proto-Olivolingvo | Esperanto with Hebrew loans | *f*, *v*; the article *h'* as the author writes it | *j*, its *y* sound, written *y*; *ĥ*, *ŝ* to *h*, *s*; *ĝ* to *g*; *c*, *z* to *s*; opening clusters opened by the framework's own repair for now | jamo, *yamo*; ĥadaŝa, *hadasa*; kratero, *karatero*; profunda, *porofunda*; erco, *erso* |
 | Terlunan | itself | Everything: its words are the framework's own | One coined word still in its Māori spelling | whakapono, *fakapono* |
 
 ## The choices, and what else was possible
@@ -54,7 +54,7 @@ Each rule is a choice that can be turned. These change most how the names look.
 
 **Japanese takes the spelling of its own sound system**: *si*, *ti*, *tu*, *hu*. Sequential voicing shows where the framework can show it (*Kurogawa*) and not on *s* (*Kurosima*).
 
-**The author's own tongue takes the letter and sibilant changes, and follows its other parent for the rest** (the author's decision, 20 November). Its opening clusters open as Hebrew opens a cluster, with *e*: *keratero*, *kelifo*, *perofunda*, *setona*, *vintera*. Its article *h'* is written as the author writes it and said *ha*, as Hebrew says its article. Taking Hebrew as that other parent, and *e* as its vowel, is this study's reading of the decision. One homograph follows from the sibilants: its word for dawn, *ŝaĥara*, passes to *sahara*. Hebrew words in the Tagalog-Hebrew tongue open the same way (*seman*, *setav*, *bedidut*).
+**Proto-Olivolingvo takes the letter and sibilant changes, and the rest waits for the local languages** (the author's decisions, 20 November). It is the proposed common language of Earth, as Terlunan is the Moon's, and it has no second parent of its own: on the Moon a word of it is shaped by the local language that takes it up, so how its clusters open and how its article *h'* is said depend on that language's other parent. Until the local languages are set out its clusters take the framework's own repair (*karatero*, *kilifo*, *porofunda*, *sotona*), and its article is written as the author writes it with no saying given. A first reading that took Hebrew for that other parent everywhere was withdrawn the same day. One homograph follows from the sibilants: its word for dawn, *ŝaĥara*, passes to *sahara*. Hebrew's own words, in the Tagalog-Hebrew tongue, open a cluster with Hebrew's *e* (*seman*, *setav*, *bedidut*).
 
 Six parent forms put right more than sounds, and each is noted in the record: the first draft's Dala plural for lakes was Uzbek (*koldor*, the Kyrgyz, replaces it); its words for dream and forget would have fallen together with salt and hope (*arman* and *unut* replace them); the Sahran word for darkness is *'atma*; the Pwani word for rough had a slip; and a throat stop keeps the two vowels of the Hebrew word for sorrow apart.
 
@@ -78,7 +78,7 @@ The names pinned in the names table, each found again from its head and modifier
 | Was | Is | Said |
 |---|---|---|
 | Bultengiz | Bultengis | bul.TE.ngis |
-| H'Jamo Melaĥa | H'Yamo Melaha | ha YA.mo me.LA.ha |
+| H'Jamo Melaĥa | H'Yamo Melaha | h'YA.mo me.LA.ha |
 | Juldyztengiz | Yuldustengis | yul.dus.TE.ngis |
 | Hanaqucha | Hanakosa | ha.na.KO.sa |
 | Bahari Mashariki | Bahari Masariki | ba.HA.ri ma.sa.RI.ki |
@@ -96,7 +96,7 @@ In the draft record 424 generated names, 16 calques and the six seas changed. Ea
 
 ## What is left
 
-- **The regions' fact sheets were last made in full on the design before the corrected lake rule.** The renaming left their figures alone. A full re-make moves rain, heights and lake areas in nearly every region and the falls in eleven, and leaves two of the hand-written texts to rewrite (the steep reaches of Yelyailau and Kiriguni).
+- **The scheme of tongues is to be set out again** (register, 20 November). A region's names are to fit the distribution of the related parent cultures of Earth; most names have a specific parent language; within the broader regions local languages take those parent cultures and shape the Moon's dialects and languages; Terlunan is the Moon's common language and Proto-Olivolingvo the proposed common language of Earth; and the local languages are more diverse than the eight tongues here, of which one, Proto-Olivolingvo, now stands as a region's tongue where it should be a contributing layer.
 - **The redraw of 20 November and the naming trial's two regions** are on the research drive; the redraw's names are the generator's and its record keeps their earlier spellings.
 - **The lexicons themselves are the first draft's.** The pass changes how a word sounds, not which word a tongue has; the reworked way of making names chooses the words.
 - **Older records keep the spellings of their date**: the register's earlier rows and the lake rule's two records.

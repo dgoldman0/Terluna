@@ -19,7 +19,7 @@ def test_the_framework_tells_a_word_that_fits_from_one_that_does_not():
     assert L.faults('shol') == ['two consonants open a syllable']               # sh is two sounds here, not one
     assert L.said('karabogas') == 'ka.ra.BO.gas' and L.said('aral') == 'A.ral'  # the syllable before the last
     assert L.said('haukaainga') == 'hau.KAA.i.nga'                              # a long vowel takes the stress
-    assert L.said("H'Naharo Keraha") == 'ha na.HA.ro ke.RA.ha'                  # the article said as Hebrew says its own
+    assert L.said("H'Naharo Keraha") == "h'na.HA.ro ke.RA.ha"                   # the article as written: its saying is local
     assert L.faults("H'Naharo Keraha") == []                                    # and kept apart from its noun
     assert L.said('Dagat na Kaseh') == 'DA.gat na KA.seh'                       # the linker as written
 
@@ -73,9 +73,10 @@ def test_each_parent_keeps_what_the_framework_holds():
     # Japanese in the spelling of its own sound system
     assert L.japanese('tsuchi') == 'tuti' and L.japanese('shima') == 'sima' and L.japanese('fuka') == 'huka'
     assert L.japanese('mizu') == 'misu' and L.japanese('ō') == 'oo' and L.japanese('kyo') == 'kiyo'
-    # the author's Esperanto-based tongue: its letters and sibilants, and its clusters opened as Hebrew opens them
+    # Proto-Olivolingvo: its letters and sibilants; its clusters take the framework's own repair until a local
+    # language's other parent says how they open
     assert L.esperanto('ĥadaŝa') == 'hadasa' and L.esperanto('jamo') == 'yamo' and L.esperanto('lajla') == 'laila'
-    assert L.passed('eo:kratero') == 'keratero' and L.passed('eo:profunda') == 'perofunda' and L.esperanto('ĝemela') == 'gemela'
+    assert L.passed('eo:kratero') == 'karatero' and L.passed('eo:profunda') == 'porofunda' and L.esperanto('ĝemela') == 'gemela'
     assert L.terlunan('whakapono') == 'fakapono' and L.terlunan("feti'a") == "feti'a"
     assert L.passed('la:kaguya') == 'kaguya' and L.passed('la:zāhiya') == 'sahiya'
 
@@ -101,7 +102,7 @@ def test_the_tables_hold_the_words_as_the_moons_tongues_say_them():
     assert N.TONGUES['pwani']['heads']['river'] == 'Muto' and N.TONGUES['pwani']['mods']['rain'] == 'Imvua'
     assert N.TONGUES['tagalhebrew']['heads']['bay'] == "Lo'ok" and N.TONGUES['tagalhebrew']['mods']['sun'] == 'Semes'
     assert N.TONGUES['satoyama']['heads']['island'] == 'sima' and N.TONGUES['satoyama']['mods']['great'] == 'oo'
-    assert N.TONGUES['olivolingvo']['heads']['sea'] == 'yamo' and N.TONGUES['olivolingvo']['heads']['bowl'] == 'keratero'
+    assert N.TONGUES['olivolingvo']['heads']['sea'] == 'yamo' and N.TONGUES['olivolingvo']['heads']['bowl'] == 'karatero'
     assert N.CALQUE_WORDS['terlunan']['faith'] == 'fakapono' and N.CALQUE_WORDS['tagalhebrew']['edge'] == 'Kaseh'
     moved = [(t, key) for t in N.TONGUES for (role, key), e in L.lexicon(t).items()
              if e['passed'] != e['parent'].split(':', 1)[1].lower()]

@@ -4,7 +4,7 @@
  "inputs": {
   "research/studies/atlas_round/district_names.py": "2d31e0809faf8987e024352cbf73cb15529971bc6330c57f3213c0048ec709fd",
   "research/studies/atlas_round/place_names.json": "6310b57648748aec6264c94cb8ed61d5d52ccc3d83e0246d9624075da607304d",
-  "research/studies/atlas_round/results/districts.json": "a1af875ae561768b859db55318f3e6f1d4de33a817bfa49ebf0a58330f6a7537"
+  "research/studies/atlas_round/results/districts.json": "7586a27c98d68c0b827cc2d7f948ec62d641d7e01d8e41b69db9a55e86957f92"
  },
  "evidence": "A rule sheet and its results, nothing in it validated: the framework is the sound section of the author's Terlunan reference (v0.6, section 2, outside the repository); each parent language's rules are choices made on 20 November 2026; the parent words are written from general knowledge of Kazakh, Kyrgyz, Mongolian, Quechua, Arabic, Tamazight, Swahili, Tagalog, Hebrew, Japanese and Esperanto, and no dictionary or speaker has checked them.",
  "reading_rule": "tongues gives every word of district_names.py's lexicons: its key, its role (head, modifier, or the word for an old name's meaning), its parent form (a code for the parent's rule sheet, a colon and the word as the parent language spells it), the form names are fused from (read), the word standing alone (passed), its syllables with the stressed one in capitals (said) and any fault against the framework; fallen_together lists pairs of different parent words with one passed form; joined_names_at_fault counts the tongue's head-and-modifier names that break the framework. pins gives every name in place_names.json with the name its tongue's words make from its head and modifier, and whether the two agree (stands). record counts the draft record's generated names and those the words make today.",
@@ -48,7 +48,7 @@
   ],
   "syllable": "(C)V(C)",
   "stress": "the syllable before the last, or the rightmost long vowel",
-  "article": "h', said ha"
+  "article": "h', written as the author writes it; its saying depends on the local language"
  },
  "rule_sheets": {
   "kk": "Kazakh and Kyrgyz in their own letters. Kept: ng, final consonants, the rounding harmony. Changed: the uvular\nstop and fricative to k and g; sh and z to s; the j of жылан to y, the sound it answers to across the Turkic\nlanguages; front rounded ö and ü to o and u.",
@@ -59,7 +59,7 @@
   "tl": "Tagalog in its standard spelling, with its glottal stop written where it stands between vowels. Tagalog's\nsounds are the framework's own.",
   "he": "Hebrew in Latin letters. Kept: f and v. Changed: sh, ts and z to s; kh and the deep h to h; q to k. A cluster\nopens with e, the vowel Hebrew itself puts there (zman, seman).",
   "ja": "Japanese in the Hepburn spelling. Kept: its five vowels and long vowels. Changed to the spelling that follows\nits own sound system: shi, chi, tsu, fu are si, ti, tu, hu; z and j are s; a consonant and y before a vowel get\nan i between (kyo, kiyo).",
-  "eo": "The author's Esperanto-based tongue in its own spelling. Kept: f and v. Changed: j, its y sound, is written y;\nthe hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s. Its clusters open as its other parent, Hebrew, opens\nthem, with e (kratero, keratero).",
+  "eo": "Proto-Olivolingvo, the author's Esperanto-based tongue, in its own spelling. Kept: f and v. Changed: j, its y sound, is written y;\nthe hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s. How its clusters open depends on the local language\nthat takes the word up; here they take the framework's own repair (kratero, karatero).",
   "te": "Terlunan's words are the framework's own; a coined word still in its Māori spelling takes f for wh, as the\nreference's fanga does.",
   "la": "A name from elsewhere in Latin letters with its sounds marked (zh, sh, ch, ts, z, j, q, long vowels)."
  },
@@ -971,8 +971,8 @@
      "role": "head",
      "parent": "eo:kratero",
      "read": "kratero",
-     "passed": "keratero",
-     "said": "ke.ra.TE.ro",
+     "passed": "karatero",
+     "said": "ka.ra.TE.ro",
      "faults": []
     },
     {
@@ -1061,8 +1061,8 @@
      "role": "head",
      "parent": "eo:klifo",
      "read": "klifo",
-     "passed": "kelifo",
-     "said": "ke.LI.fo",
+     "passed": "kilifo",
+     "said": "ki.LI.fo",
      "faults": []
     },
     {
@@ -1250,8 +1250,8 @@
      "role": "modifier",
      "parent": "eo:profunda",
      "read": "profunda",
-     "passed": "perofunda",
-     "said": "pe.ro.FUN.da",
+     "passed": "porofunda",
+     "said": "po.ro.FUN.da",
      "faults": []
     },
     {
@@ -1412,8 +1412,8 @@
      "role": "modifier",
      "parent": "eo:ŝtona",
      "read": "stona",
-     "passed": "setona",
-     "said": "se.TO.na",
+     "passed": "sotona",
+     "said": "so.TO.na",
      "faults": []
     },
     {
@@ -1457,8 +1457,8 @@
      "role": "modifier",
      "parent": "eo:flora",
      "read": "flora",
-     "passed": "felora",
-     "said": "fe.LO.ra",
+     "passed": "folora",
+     "said": "fo.LO.ra",
      "faults": []
     },
     {
@@ -1484,8 +1484,8 @@
      "role": "meaning",
      "parent": "eo:ŝtorma",
      "read": "storma",
-     "passed": "setorma",
-     "said": "se.TOR.ma",
+     "passed": "sotorma",
+     "said": "so.TOR.ma",
      "faults": []
     },
     {
@@ -1493,8 +1493,8 @@
      "role": "meaning",
      "parent": "eo:trankvila",
      "read": "trankvila",
-     "passed": "terankevila",
-     "said": "te.ran.ke.VI.la",
+     "passed": "tarankivila",
+     "said": "ta.ran.ki.VI.la",
      "faults": []
     },
     {
@@ -1529,8 +1529,8 @@
      "role": "meaning",
      "parent": "eo:kriza",
      "read": "krisa",
-     "passed": "kerisa",
-     "said": "ke.RI.sa",
+     "passed": "kirisa",
+     "said": "ki.RI.sa",
      "faults": []
     },
     {
@@ -1637,8 +1637,8 @@
      "role": "meaning",
      "parent": "eo:malglata",
      "read": "malglata",
-     "passed": "malgelata",
-     "said": "mal.ge.LA.ta",
+     "passed": "malgalata",
+     "said": "mal.ga.LA.ta",
      "faults": []
     },
     {
@@ -1709,8 +1709,8 @@
      "role": "meaning",
      "parent": "eo:printempa",
      "read": "printempa",
-     "passed": "perintempa",
-     "said": "pe.rin.TEM.pa",
+     "passed": "pirintempa",
+     "said": "pi.rin.TEM.pa",
      "faults": []
     },
     {
@@ -1736,8 +1736,8 @@
      "role": "meaning",
      "parent": "eo:vintra",
      "read": "vintra",
-     "passed": "vintera",
-     "said": "vin.TE.ra",
+     "passed": "vintara",
+     "said": "vin.TA.ra",
      "faults": []
     },
     {
@@ -7262,7 +7262,7 @@
    "name": "H'Yamo Melaha",
    "tongue": "olivolingvo",
    "from_the_words": "H'Yamo Melaha",
-   "said": "ha YA.mo me.LA.ha",
+   "said": "h'YA.mo me.LA.ha",
    "stands": true,
    "how": "olivolingvo: salt + sea",
    "faults": []
@@ -7522,7 +7522,7 @@
    "name": "H'Naharo Longa",
    "tongue": "olivolingvo",
    "from_the_words": "H'Naharo Longa",
-   "said": "ha na.HA.ro LO.nga",
+   "said": "h'na.HA.ro LO.nga",
    "stands": true,
    "how": "olivolingvo: long + river",
    "faults": []
@@ -7542,7 +7542,7 @@
    "name": "H'Naharo Atika",
    "tongue": "olivolingvo",
    "from_the_words": "H'Naharo Atika",
-   "said": "ha na.HA.ro a.TI.ka",
+   "said": "h'na.HA.ro a.TI.ka",
    "stands": true,
    "how": "olivolingvo: old + river",
    "faults": []

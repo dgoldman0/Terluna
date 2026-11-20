@@ -128,8 +128,8 @@ def syllables(w):
     return syl, faults
 
 
-ARTICLE = "h'"                       # the author's Esperanto-based tongue's article, written as the author writes it
-ARTICLE_SAID = 'ha'                  # and said as its other parent, Hebrew, says its article
+ARTICLE = "h'"                       # Proto-Olivolingvo's article, written as the author writes it; how it is said
+#                                      depends on the local language that carries the name, so no saying is given here
 PARTICLES = ('na',)                  # the Tagalog linker between a head that ends on a consonant and its modifier
 
 
@@ -142,14 +142,14 @@ def _bare(word):
 
 def said(w):
     """A word's syllables with the stressed one in capitals: the one before the last, or the rightmost long vowel's.
-    The article h' is shown as it is said, ha, and the linker na as written; neither takes a stress."""
+    The article h' and the linker na are shown as written; neither takes a stress."""
     out = []
     for word in w.split():
         if word.lower() in PARTICLES:
             out.append(word.lower())
             continue
         bare = _bare(word)
-        lead = ARTICLE_SAID + ' ' if bare != word.lower() else ''
+        lead = ARTICLE if bare != word.lower() else ''
         syl, _ = syllables(bare)
         k = max(0, len(syl) - 2)
         longs = [i for i, x in enumerate(syl) if re.search(r'([aeiou])\1', x)]
@@ -289,9 +289,9 @@ def japanese(word):
 
 
 def esperanto(word):
-    """The author's Esperanto-based tongue in its own spelling. Kept: f and v. Changed: j, its y sound, is written y;
-    the hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s. Its clusters open as its other parent, Hebrew, opens
-    them, with e (kratero, keratero)."""
+    """Proto-Olivolingvo, the author's Esperanto-based tongue, in its own spelling. Kept: f and v. Changed: j, its y sound, is written y;
+    the hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s. How its clusters open depends on the local language
+    that takes the word up; here they take the framework's own repair (kratero, karatero)."""
     w = word.lower()
     for a, b in (('ŭ', 'u'), ('ĥ', 'h'), ('ŝ', 's'), ('ĝ', 'g'), ('ĉ', 's'), ('ĵ', 's'), ('sh', 's'), ('x', 'h'), ('c', 's'), ('z', 's'), ('j', 'y')):
         w = w.replace(a, b)
@@ -328,9 +328,12 @@ def read(spec):
     return out
 
 
-# A parent language's own vowel for opening a cluster, where it has one: Hebrew opens a cluster with e, and the
-# author's Esperanto-based tongue follows its other parent in this.
-REPAIR_VOWEL = dict(he='e', eo='e')
+# A parent language's own vowel for opening a cluster, where it has one: Hebrew opens a cluster with e.
+# Proto-Olivolingvo is Earth's proposed common language and has no second parent of its own: on the Moon a word of it
+# is shaped by the local language that takes it up, so how its clusters open and how its article is said depend on
+# that language's other parent (the author, 20 November 2026). Until the local languages are set out its words take
+# the framework's own repair.
+REPAIR_VOWEL = dict(he='e')
 
 
 def repair_vowel(spec):
@@ -497,7 +500,7 @@ def build(log=print):
                       "whether the two agree (stands). record counts the draft record's generated names and those the words make today."),
         framework=dict(vowels=list(VOWELS), consonants=list(CONSONANTS), diphthongs=list(DIPHTHONGS), admitted_in_established_words=['f', 'v'],
                        syllable='(C)V(C)', stress='the syllable before the last, or the rightmost long vowel',
-                       article="h', said ha"),
+                       article="h', written as the author writes it; its saying depends on the local language"),
         rule_sheets={code: (fn.__doc__ or '').strip().replace('\n    ', ' ') for code, fn in READERS.items()},
         tongues=tongues, pins=pinned,
         record=dict(generated_names=found, made_by_the_words=made),
