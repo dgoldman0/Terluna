@@ -247,6 +247,7 @@
         <summary>Display</summary>
         <input type="range" id="exposure" min="-3" max="14" step="0.5" value="1" aria-describedby="exposure-value">
         <div class="readout" id="exposure-value"></div>
+        <label><input type="checkbox" id="close-light" checked> Close up: the ground as a mosaic shows it (even light, held exposure, no haze)</label>
         <div class="toggles" style="margin-top:8px">
           <label><input type="checkbox" id="show-clouds" checked> Clouds</label>
           <label><input type="checkbox" id="show-air" checked> Atmosphere</label>
@@ -462,6 +463,9 @@
   uniform sampler2D tLight;
   uniform float uOverlay;       // opacity of the topography over the appearance; 0 leaves it off
   uniform float uEven;          // 1 lights every place alike (fully lit), 0 by the one Sun
+  uniform float uClose;         // 0 far out, 1 close up: the close view's light, tone and relief come in
+  uniform float uCloseGain;     // the close view's gain on the ground's reflectance
+  uniform float uCloseRelief;   // how many times as steep the close view draws the relief (1: as the relief slider sets it)
   uniform vec3 uMidWater;       // the appearance's linear reflectances for water and bare floor (appearance.py)
   uniform vec3 uDeepWater;
   uniform vec3 uTurbidWater;
@@ -766,6 +770,7 @@
     haze *= uTau0 / uH * uSunColour;
 
     vec3 surface = vec3(0.0), topo = vec3(0.0);
+    vec3 closeTone = vec3(1.0);
     if (hit) {
       vec3 n = ns, v = -dir;
       vec3 albedo = srgbToLinear(textureLod(tAlbedo, uv, lod).rgb);
@@ -805,7 +810,7 @@
         }
       }
       // The normal map holds the full relief, sea floors and lake beds included; water lies flat over it.
-      vec3 nr = normalize(n + uRelief * (1.0 - water) * tilt);
+      vec3 nr = normalize(n + uRelief * (1.0 + (uCloseRelief - 1.0) * uClose) * (1.0 - water) * tilt);
       if (uOverlay > 0.0) {
         // The topography over the appearance: the legend's colours and contours, shaded by the full relief, sea
         // floors included, under light that every place has alike.
@@ -823,8 +828,27 @@
         shade *= 1.0 - uLowOpacity * cloud(normalize(n + tl * sun), 0);
         shade *= 1.0 - uHighOpacity * cloud(normalize(n + th * sun), 1);
       }
+      shade = mix(shade, 1.0, uClose);                 // close up the ground shows as a cloud-free mosaic shows it
       vec3 skyLight = uAtmos * lightTable(1, elevation) * (1.0 - 0.3 * (1.0 - shade)) * skySeen;
       vec3 light = toSun * mus * shade + skyLight;
+      // Close up (uClose): where the Sun stands low or under the horizon the light every place has alike comes in
+      // (45 degrees up from the screen's upper left), so that a region in the Moon's night still shows its ground;
+      // and the picture holds the ground's light over what level white ground would send back in that light, colour by
+      // colour, times one gain (uCloseGain), whatever the Sun's height and the colour the air gives its light (orange
+      // at 45 degrees under this air). A display rule: satellite mosaics are corrected to the ground's reflectance.
+      float even = 0.0;
+      if (uClose > 0.0) {
+        vec3 sunE = localLight(n);
+        float muE = max(dot(n, sunE), 1e-3);
+        vec3 directE = exp(-uTau0 * column(1.0, muE));
+        vec3 skyE = uAtmos * lightTable(1, degrees(asin(clamp(muE, -1.0, 1.0))));
+        even = uClose * (1.0 - uEven) * (1.0 - smoothstep(6.0, 24.0, elevation));
+        light = mix(light, directE * max(dot(nr, sunE), 0.0) + skyE * skySeen, even);
+        skyLight = mix(skyLight, skyE * skySeen, even);
+        vec3 white = mix(toSun * max(mu0, 0.0) + uAtmos * lightTable(1, elevation), directE * muE + skyE, even) * uSunColour;
+        // 2.0: the page's opening exposure of one stop, which the gain replaces; the slider still scales the picture
+        closeTone = mix(vec3(1.0), uCloseGain / max(2.0 * white, vec3(1e-4)), uClose);
+      }
       // The water's slopes: the mean square slope the design climate's daytime wind raises there
       // (appearance.sea_slopes), or one fixed slope for every water without the winds.
       float mss = uSeaSlope.x > 0.0 ? max(textureLod(tSeaSlope, uv, 0.0).r * uSeaSlope.x, 0.002) : uSeaSlope.y;
@@ -835,15 +859,20 @@
       float tan2 = (1.0 - nh * nh) / (nh * nh);
       float spec = nl > 0.0 ? fresnelWater(dot(v, hv)) * exp(-tan2 / mss) / (PI * mss)
                    / (4.0 * muv * nh * nh * nh * nh) / (1.0 + smithLambda(muv, mss) + smithLambda(nl, mss)) : 0.0;
-      vec3 glint = water * PI * spec * toSun * shade * (1.0 - uEven);
+      // close up the Sun's glint leaves the water with the sky's mirror image: a mosaic is put together from views
+      // that avoid it, and over a lake district it reads as a spotlight
+      vec3 glint = water * PI * spec * toSun * shade * (1.0 - uEven) * (1.0 - even) * (1.0 - uClose);
       // The sky the water mirrors: rough water's reflectance of an even sky at the view's angle
       // (appearance.sky_reflectance_table), of the diffuse skylight; the water's own colour is the light that leaves it.
-      glint += water * skyReflectance(muv, mss) * skyLight;
+      glint += water * skyReflectance(muv, mss) * skyLight * (1.0 - uClose);   // close up the water shows its own colour
       vec3 toEye = exp(-uTau0 * eyeColumn(1.0, muv));
       vec3 diffuseUp = max(1.0 - eddington(uTau0 * columnInView(1.0), muv) - toEye, 0.0);
-      surface = ((albedo * light + glint) * toEye + blurred * light * diffuseUp) * uSunColour;
+      // close up the air between the ground and the eye leaves the picture, as a mosaic's correction takes it out
+      surface = ((albedo * light + glint) * mix(toEye, vec3(1.0), uClose) + blurred * light * diffuseUp * (1.0 - uClose)) * uSunColour;
     }
-    vec3 c = (haze + clouds + cloudT * surface) * uExposure;
+    // close up the haze and the cloud decks between the eye and the ground leave the picture, and the close view's
+    // tone is the ground's light's alone
+    vec3 c = ((haze + clouds) * (1.0 - uClose) + mix(cloudT, 1.0, uClose) * surface * closeTone) * uExposure;
     if (uRedOnly > 0.5) c = vec3(c.r);
     c = mix(c, 0.8 + 0.2 * (1.0 - exp(-(c - 0.8) / 0.2)), step(0.8, c));
     float dither = float(hashu(uint(gl_FragCoord.x) + hashu(uint(gl_FragCoord.y)))) * (1.0 / 4294967295.0) - 0.5;
@@ -1036,12 +1065,16 @@
   uniform vec2 uViewport;
   uniform float uHalfWidth;
   uniform float uDepthBias;
+  uniform float uRiver;         // 1 for the rivers' channels: the half width follows each point's flow
+  uniform float uKmPerPx;       // the kilometres a pixel spans on the ground nearest the camera
   attribute vec3 aB;
   attribute float aSide;
   attribute float aEnd;
   attribute float aAlong;
+  attribute float aFlow;        // m3/s at this end of the segment (the rivers' channels)
   varying float vAlong;
   varying float vAcross;
+  varying float vHalf;
   float relief(vec2 at) { return dot(texture2D(tRelief, at).rg, vec2(65280.0, 255.0)) + uLow; }
   vec3 raised(vec3 p) {
     vec2 at = vec2(fract(atan(p.z, -p.x) / 6.283185307 + 1.0), asin(clamp(p.y, -1.0, 1.0)) / 3.141592654 + 0.5);
@@ -1062,12 +1095,19 @@
     float len = length(dir);
     dir = len > 1e-6 ? dir / len : vec2(1.0, 0.0);
     vec4 c = aEnd > 0.5 ? cb : ca;
-    float w = uHalfWidth + 1.0;                       // a pixel beyond the line's half width, for its soft edge
+    // A river's channel: half its computed width (11.52 m per root of a m3/s) at the view's scale, and at least a
+    // floor that grows with the root of the flow from 0.3 pixels at 100 m3/s to 1.25 at 30,000. Wherever the floor is
+    // the larger the line is wider than the water: a display exaggeration (river_courses.display_half_width_px).
+    float halfWidth = uRiver > 0.5
+      ? max(0.00576 * sqrt(aFlow) / uKmPerPx, mix(0.3, 1.25, clamp((sqrt(aFlow) - 10.0) / 163.2, 0.0, 1.0)))
+      : uHalfWidth;
+    float w = halfWidth + 1.0;                        // a pixel beyond the line's half width, for its soft edge
     c.xy += vec2(-dir.y, dir.x) * aSide * w * 2.0 / uViewport * c.w;
     c.z -= uDepthBias * c.w;
     gl_Position = c;
     vAcross = aSide * w;
     vAlong = aAlong;
+    vHalf = halfWidth;
   }
 </script>
 <script id="border-fragment" type="x-shader/x-fragment">
@@ -1081,8 +1121,9 @@
   uniform float uDashKm;
   varying float vAlong;
   varying float vAcross;
+  varying float vHalf;
   void main() {
-    float cover = clamp(uHalfWidth + 0.5 - abs(vAcross), 0.0, 1.0);
+    float cover = clamp(vHalf + 0.5 - abs(vAcross), 0.0, 1.0);
     if (uDash > 0.5) {
       float t = fract(vAlong / uDashKm);
       cover *= smoothstep(0.0, 0.06, t) * (1.0 - smoothstep(0.5, 0.56, t));
@@ -1192,10 +1233,12 @@
     Math.round(P.clouds.highKm) + ' km. The run has no sea ice or snow anywhere';
   document.getElementById('provenance').innerHTML = '<b>Provenance.</b> ' + D.provenance;
   if (D.fine && D.fine.look) {
-    // The trial windows of the close-up look (fine_look.py): named, and called the guess they are.
+    // The trial of the close-up look: its windows named where it covers only some (fine_look.py), or the whole of
+    // the tiles (look_tiles.py), and called the guess it is.
     const trial = document.createElement('p'), head = document.createElement('b');
     head.textContent = 'A trial of the close-up look.';
-    trial.append(head, ' Zoomed close over ' + D.fine.look.windows.join(', ') + ': ' + D.fine.look.note);
+    trial.append(head, (D.fine.look.windows.length ? ' Zoomed close over ' + D.fine.look.windows.join(', ') + ': '
+                                                    : ' Zoomed close, between 80° N and 80° S of today\'s Moon: ') + D.fine.look.note);
     document.getElementById('provenance').after(trial);
   }
   if (D.districts) {
@@ -1386,6 +1429,7 @@
     : rows.flat()));
   const uniforms = {
     ...topoUniforms, uOverlay: { value: 0 }, uEven: { value: 0 },
+    uClose: { value: 0 }, uCloseGain: { value: 1.6 }, uCloseRelief: { value: 1.0 },
     tFineColour: { value: fineTex.colour }, tFineNormal: { value: fineTex.normal }, tFineAux: { value: fineTex.aux },
     uFineWin: { value: new THREE.Vector4(0, 0, 1, 1) }, uFine: { value: 0 },
     uToToday: { value: F ? rotationMatrix(F.rotation, true) : new THREE.Matrix3() },
@@ -1619,7 +1663,7 @@
   // and along shores, dashed where water lies on both sides. Regions' edges show at every zoom, districts' when
   // zoomed in.
   const borderUniforms = { uTopo: { value: 0 }, uViewport: { value: new THREE.Vector2(1, 1) },
-                           uDashKm: { value: 10 }, uDepthBias: { value: 0.0002 } };
+                           uDashKm: { value: 10 }, uDepthBias: { value: 0.0002 }, uKmPerPx: { value: 1 } };
   const borderMeshes = { region: [], district: [] };
   const decodeLines = (b64) => {
     const bin = atob(b64), view = new DataView(new ArrayBuffer(bin.length)), lines = [];
@@ -1632,13 +1676,15 @@
     if (line.length > 1) lines.push(line);
     return lines;
   };
-  const borderMesh = (lines, halfWidth, colour, opacity, dashed) => {
+  const borderMesh = (lines, halfWidth, colour, opacity, dashed, flows) => {
     let n = 0;
     for (const l of lines) n += l.length - 1;
     const a = new Float32Array(n * 12), b = new Float32Array(n * 12), side = new Float32Array(n * 4);
     const end = new Float32Array(n * 4), along = new Float32Array(n * 4), index = new Uint32Array(n * 6);
-    let k = 0;
+    const flow = new Float32Array(n * 4);          // each point's flow (m3/s), where the lines are rivers' channels
+    let k = 0, li = -1;
     for (const l of lines) {
+      li++;
       let km = 0, prev = unitAt(...l[0]);
       for (let i = 1; i < l.length; i++) {
         const next = unitAt(...l[i]), step = prev.angleTo(next) * MOON_KM;
@@ -1648,6 +1694,7 @@
           side[4 * k + v] = v % 2 ? 1 : -1;
           end[4 * k + v] = v < 2 ? 0 : 1;
           along[4 * k + v] = v < 2 ? km : km + step;
+          flow[4 * k + v] = flows ? flows[li][v < 2 ? i - 1 : i] : 0;
         }
         index.set([4 * k, 4 * k + 1, 4 * k + 2, 4 * k + 1, 4 * k + 3, 4 * k + 2], 6 * k);
         km += step;
@@ -1661,11 +1708,12 @@
     g.setAttribute('aSide', new THREE.BufferAttribute(side, 1));
     g.setAttribute('aEnd', new THREE.BufferAttribute(end, 1));
     g.setAttribute('aAlong', new THREE.BufferAttribute(along, 1));
+    g.setAttribute('aFlow', new THREE.BufferAttribute(flow, 1));
     g.setIndex(new THREE.BufferAttribute(index, 1));
     const mesh = new THREE.Mesh(g, new THREE.ShaderMaterial({
       uniforms: { tRelief: topoUniforms.tRelief, uLow: topoUniforms.uLow, uScale: reliefUniforms.uScale, ...borderUniforms,
                   uHalfWidth: { value: halfWidth }, uColour: { value: new THREE.Vector3(...colour) },
-                  uOpacity: { value: opacity }, uDash: { value: dashed ? 1 : 0 } },
+                  uOpacity: { value: opacity }, uDash: { value: dashed ? 1 : 0 }, uRiver: { value: flows ? 1 : 0 } },
       vertexShader: document.getElementById('border-vertex').textContent,
       fragmentShader: document.getElementById('border-fragment').textContent,
       transparent: true, depthTest: true, depthWrite: false, side: THREE.DoubleSide }));
@@ -1721,7 +1769,21 @@
   // water itself to be seen.
   const RIVERS = D.rivers || [];
   for (const r of RIVERS) addLabel('river', r.name, r.lat, r.lon, 0, r);
-  const riverLines = RIVERS.length ? borderMesh(RIVERS.map((r) => r.course), 0.75, [0.66, 0.86, 1.0], 0.7, false) : null;
+  // Where the build gave the rivers their pieces (render.river_marks, from river_courses.py): the channel reaches as
+  // lines that taper with the flow, in a dark blue near the open water's own, with no mark on any lake, so that a
+  // river reads as lakes joined by short rivers, as it would from above. With "lakelines" in the link the channels
+  // take a map's blue and each lake crossing a faint line through the lake's deep water. Without pieces, the old line.
+  const RIVER_WATER = [0.07, 0.13, 0.20], RIVER_MAP_BLUE = [0.36, 0.60, 0.88];
+  let riverLakeLinesShown = false;
+  const riverPiecesHeld = RIVERS.some((r) => r.pieces && r.pieces.length);
+  const riverPieces = (kind) => RIVERS.flatMap((r) => (r.pieces || []).filter((p) => p[0] === kind).map((p) => p[1]));
+  const riverLines = !RIVERS.length ? null : riverPiecesHeld
+    ? borderMesh(riverPieces('c').map((p) => p.map((q) => [q[0], q[1]])), 0.75, RIVER_WATER, 1.0, false,
+                 riverPieces('c').map((p) => p.map((q) => q[2])))
+    : borderMesh(RIVERS.map((r) => r.course), 0.75, [0.66, 0.86, 1.0], 0.7, false);
+  const riverLakeLines = riverPiecesHeld
+    ? borderMesh(riverPieces('l').map((p) => p.map((q) => [q[0], q[1]])), 0.4, [0.62, 0.80, 0.96], 0.4, false) : null;
+  if (riverLakeLines) riverLakeLines.visible = false;
   const RIVER_LINES_FADE = [1.45, 1.95];             // Moon radii from the centre: gone nearer, whole farther
   if (!RIVERS.length) document.getElementById('show-rivers').closest('label').hidden = true;
   const placeMarkers = () => {
@@ -1849,6 +1911,10 @@
     invalidate();
   };
   exposureInput.addEventListener('input', (e) => setExposure(+e.target.value));
+  // Close up, the ground's own light and tone (uClose in the shader), unless this box is cleared.
+  const closeLightBox = document.getElementById('close-light');
+  closeLightBox.addEventListener('change', () => invalidate());
+  const CLOSE_LIGHT = [3.0, 2.2];                    // Moon radii from the centre: none of it farther, all of it nearer
   document.getElementById('show-clouds').addEventListener('change', (e) => { uniforms.uClouds.value = e.target.checked ? 1 : 0; invalidate(); });
   document.getElementById('red-only').addEventListener('change', (e) => { uniforms.uRedOnly.value = e.target.checked ? 1 : 0; invalidate(); });
   document.getElementById('show-air').addEventListener('change', (e) => {
@@ -2639,6 +2705,9 @@
       back.set(0, 0, 1).applyQuaternion(qInv);
       uniforms.uCamBasis.value.set(right.x, up.x, back.x, right.y, up.y, back.y, right.z, up.z, back.z);
       topoUniforms.uLightDir.value.copy(up).sub(right).normalize();     // the screen's upper left, in the globe's frame
+      const closeT = closeLightBox.checked && mode === 'appearance'
+        ? Math.min(1, Math.max(0, (CLOSE_LIGHT[0] - distance) / (CLOSE_LIGHT[0] - CLOSE_LIGHT[1]))) : 0;
+      uniforms.uClose.value = closeT * closeT * (3 - 2 * closeT);
       fineTick();
       const tanY = Math.tan(fov * Math.PI / 360);
       uniforms.uTanHalf.value.set(tanY * camera.aspect, tanY);
@@ -2648,11 +2717,16 @@
       borderUniforms.uDepthBias.value = mode === 'topo' ? 0.002 : 0.0002;
       // a dash and its gap four pixels each, at the ground nearest the camera
       borderUniforms.uDashKm.value = 8 * 2 * (distance - 1) * tanY * MOON_KM / Math.max(drawSize.y, 1);
+      borderUniforms.uKmPerPx.value = 2 * (distance - 1) * tanY * MOON_KM / Math.max(drawSize.y, 1);
       if (riverLines) {
-        const o = show.river ? 0.7 * Math.min(1, Math.max(0, (distance - RIVER_LINES_FADE[0]) /
-                                                             (RIVER_LINES_FADE[1] - RIVER_LINES_FADE[0]))) : 0;
-        riverLines.visible = o > 0.01;
-        riverLines.material.uniforms.uOpacity.value = o;
+        const fade = show.river ? Math.min(1, Math.max(0, (distance - RIVER_LINES_FADE[0]) /
+                                                          (RIVER_LINES_FADE[1] - RIVER_LINES_FADE[0]))) : 0;
+        riverLines.visible = fade > 0.01;
+        riverLines.material.uniforms.uOpacity.value = (riverPiecesHeld ? (riverLakeLinesShown ? 0.95 : 1.0) : 0.7) * fade;
+        if (riverLakeLines) {
+          riverLakeLines.visible = riverLakeLinesShown && fade > 0.01;
+          riverLakeLines.material.uniforms.uOpacity.value = 0.4 * fade;
+        }
       }
       // Markers keep the size they have at the topography's home distance, at any zoom.
       const markerScale = (distance - 1) * tanY / (3.3 * Math.tan(14 * Math.PI / 180));
@@ -2723,6 +2797,10 @@
     else if (/^lat\d+[ns]$/.test(t)) aimLat = +t.slice(3, -1) * (t.endsWith('s') ? -1 : 1);
     else if (/^lon\d+[ew]$/.test(t)) aimLon = +t.slice(3, -1) * (t.endsWith('w') ? -1 : 1);
     else if (/^y\d+$/.test(t)) startYear = +t.slice(1);
+    else if (t === 'lakelines') {
+      riverLakeLinesShown = true;
+      if (riverLines && riverPiecesHeld) riverLines.material.uniforms.uColour.value.set(...RIVER_MAP_BLUE);
+    }
     else if (t === 'noclouds') document.getElementById('show-clouds').click();
     else if (t === 'noair') document.getElementById('show-air').click();
     else if (/^peel\d+$/.test(t)) {

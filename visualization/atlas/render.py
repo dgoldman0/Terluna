@@ -966,14 +966,14 @@ def districts_data(record, cards=None):
 DATA_OPEN, DATA_CLOSE = '<script id="atlas-data" type="application/json">', '</script>'
 
 
-def fine_data(fine_dir):
+def fine_data(fine_dir, copy=True):
     """The page's description of the close views' finer ground (fine_tiles.py): its grid, the settled frame's rotation
     and each pack's place and files, which the page fetches from fine/ beside it; the files are copied there when the
-    tiles were built elsewhere."""
+    tiles were built elsewhere, unless the page described is a copy that stands elsewhere with its own fine/."""
     fine_dir = Path(fine_dir)
     m = json.loads((fine_dir / 'manifest.json').read_text())
     dest = OUT / 'fine'
-    if fine_dir.resolve() != dest.resolve():
+    if copy and fine_dir.resolve() != dest.resolve():
         import shutil
         dest.mkdir(parents=True, exist_ok=True)
         for p in m['packs']:
@@ -987,7 +987,7 @@ def fine_data(fine_dir):
     return out
 
 
-def river_marks(waterways_path):
+def river_marks(waterways_path, surface_path=None):
     """The page's named rivers (waterways.py: the whole watercourses of 1,000 m3/s or more where they end): each with
     its name, the place its name stands (half way along its course), its course in the settled frame from the mouth
     upstream, and its card's lines, figures and links. After a rename waterways.py is run again (seconds) and the page
@@ -1034,18 +1034,32 @@ def river_marks(waterways_path):
                               'routing\'s 1.9 km cells, straight across each lake; the width is the page\'s rule for a '
                               'river\'s flow.'),
                         course=[[round(float(a), 3), round(float(b), 3)] for a, b in course]))
+    if surface_path is not None:                         # the smooth lines that taper with the flow (river_courses.py)
+        import river_courses
+        from research.studies.atlas_round import design_routing
+        routing = river_courses.routing_arrays(json.loads(design_routing.OUT.read_text())['product']['path'])
+        with np.load(surface_path, allow_pickle=False) as z:
+            height = z['height_m']
+        lines = {r['name']: r['pieces'] for r in river_courses.river_lines(
+            record['waterways'], routing, height, routing['meta']['frame']['rotation_today_to_turned'])}
+        for r in out:
+            r['pieces'] = [[p['kind'][0], p['points']] for p in lines.get(r['name'], [])]
+            r['note'] = ('A calculation on the design routing, on the design climate (an estimate). The line follows the '
+                         'routed course, smoothed, from shore to shore between the lakes, at the width the page\'s rule '
+                         'gives the flow and no narrower than 0.6 to 2.5 pixels, which far out is wider than the water.')
     return sorted(out, key=lambda r: -r['flow'])
 
 
 FINE_NOTE = ' Close views (within about 3 Moon radii of the centre): the finer ground at 474 m, loaded for the ground in view. '
 
 
-def rename_page(page_path, record_path, profiles=None, fine=None, waterways=None):
+def rename_page(page_path, record_path, profiles=None, fine=None, waterways=None, surface_path=None):
     """The built page's regions, districts, coastal seas and seas renamed from a districts record, the regions' cards
     taken from their fact sheets when given, and its data wrapped in the current template, its textures kept: the
     record must hold the units the page drew, in the same order, so that the districts texture's indices still hold.
-    The named rivers come from the waterways record when given. A rename, a new text or a change to the viewer then
-    needs no rebuild, only the page republished."""
+    The named rivers come from the waterways record when given, and with the design surface their smooth lines are
+    made again (river_marks); without it the lines the page was built with are kept. A rename, a new text or a
+    change to the viewer then needs no rebuild, only the page republished."""
     page = Path(page_path).read_text()
     start = page.index(DATA_OPEN) + len(DATA_OPEN)
     end = page.index(DATA_CLOSE, start)
@@ -1081,11 +1095,15 @@ def rename_page(page_path, record_path, profiles=None, fine=None, waterways=None
             data['topoText'] = data['topoText'].replace(TOPO_CLICK_BEFORE, TOPO_CLICK).replace(LIGHT_PHRASE_BEFORE,
                                                                                                LIGHT_PHRASE)
     if fine:
-        data['fine'] = fine_data(fine)
+        data['fine'] = fine_data(fine, copy=Path(page_path).resolve().parent == OUT.resolve())
         if FINE_NOTE.strip() not in data['provenance']:
             data['provenance'] += FINE_NOTE + data['fine']['credit']
     if waterways:
-        data['rivers'] = river_marks(waterways)
+        held = {r['name']: r for r in data.get('rivers', []) if r.get('pieces')}   # the lines the page was built with
+        data['rivers'] = river_marks(waterways, surface_path)
+        for r in data['rivers']:
+            if surface_path is None and r['name'] in held:
+                r['pieces'], r['note'] = held[r['name']]['pieces'], held[r['name']]['note']
     marker = "Regions and districts: the atlas round's first draft (districts.json "
     at = data['provenance'].find(marker)
     if at >= 0:
@@ -1369,7 +1387,7 @@ def write_globe_surface(surface_path, record_path, climatology, sites, targets, 
         data['provenance'] += FINE_NOTE + data['fine']['credit']
         sources.update(fine_manifest=Path(fine) / 'manifest.json')
     if waterways and truly:
-        data['rivers'] = river_marks(waterways)
+        data['rivers'] = river_marks(waterways, surface_path)
         sources.update(waterways=Path(waterways))
     template = (HERE / 'globe.template.html').read_text()
     page = template.replace('__ATLAS_DATA__', json.dumps(data, ensure_ascii=False))
@@ -1418,14 +1436,17 @@ def main(argv=None):
                         help="with --districts: rename the built page's regions, districts, coastal seas and seas from "
                              "the record, take the regions' cards from --profiles, and wrap the page's data in the "
                              'current template, its textures kept (out/globe.html)')
+    parser.add_argument('--page', type=Path, help='with --names-only: the built page to wrap again, in place of '
+                                                  'out/globe.html (a trial copy, for instance)')
     args = parser.parse_args(argv)
     if args.names_only:
         if not args.districts:
             raise SystemExit('--names-only needs --districts')
-        print(json.dumps(rename_page(OUT / 'globe.html', args.districts.absolute(),
+        print(json.dumps(rename_page(args.page.absolute() if args.page else OUT / 'globe.html', args.districts.absolute(),
                                      args.profiles.absolute() if args.profiles else None,
                                      args.fine.absolute() if args.fine else None,
-                                     args.waterways.absolute() if args.waterways else None)))
+                                     args.waterways.absolute() if args.waterways else None,
+                                     args.surface.absolute() if args.surface else None)))
         return 0
     if args.surface:
         if not args.surface_record:
