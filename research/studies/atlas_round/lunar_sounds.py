@@ -319,6 +319,65 @@ def french(word):
     return re.sub(r'([pbtdkgfvs])[lr]$', r'\1', w)
 
 
+def somali(word):
+    """Somali in its own spelling. Kept: long vowels, written double; the glottal stop. Changed: c, the deep throat
+    sound, to the glottal stop; x and kh to h; q to k; sh to s; dh to d; j to y. Somali has no p or v, so a borrowed
+    name comes with b and f."""
+    w = word.lower()
+    for a, b in (('kh', 'h'), ('sh', 's'), ('dh', 'd'), ('c', "'"), ('x', 'h'), ('q', 'k'), ('j', 'y')):
+        w = w.replace(a, b)
+    return w
+
+
+def uyghur(word):
+    """Uyghur in Latin letters. Kept: ng, final consonants. Changed: q and gh to k and g; x to h; ch, sh, zh and z to
+    s; j to y; ö, ü and é to o, u and e; v to w."""
+    w = word.lower()
+    for a, b in (('ö', 'o'), ('ü', 'u'), ('é', 'e'), ('gh', 'g'), ('ch', 's'), ('sh', 's'), ('zh', 's'), ('q', 'k'), ('x', 'h'),
+                 ('j', 'y'), ('z', 's'), ('v', 'w')):
+        w = w.replace(a, b)
+    return w
+
+
+def setswana(word):
+    """Setswana in its own spelling. Kept: ng, and its open syllables. Changed: kg to k and g, its throat sound, to h
+    (Kgalagadi comes out as kalahadi, near the form English made of it); the breathed stops ph, th, kh to p, t, k;
+    tl and tlh to t; ts, tsh and š to s; j to y."""
+    w = word.lower()
+    for a, b in (('tlh', 't'), ('tl', 't'), ('tsh', 's'), ('ts', 's'), ('tš', 's'), ('š', 's'), ('kg', 'k'), ('kh', 'k'), ('ph', 'p'),
+                 ('th', 't'), ('ng', 'ŋ'), ('g', 'h'), ('ŋ', 'ng'), ('j', 'y')):
+        w = w.replace(a, b)
+    return w
+
+
+_ENGLISH = {'θ': 't', 'ð': 'd', 'ʃ': 's', 'ʒ': 's', 'z': 's', 'ŋ': 'ng', 'ɹ': 'r', 'j': 'y', 'ɡ': 'g', 'ɪ': 'i', 'ɛ': 'e', 'æ': 'a',
+            'ɑ': 'a', 'ɒ': 'a', 'ɔ': 'o', 'ʊ': 'u', 'ʌ': 'a', 'ə': 'e', 'ɜ': 'e'}
+
+
+def english(word):
+    """English of the American West, each word as it is said, in the phonetic alphabet's letters. Kept: f, v, h, the
+    r that the West sounds, and the glides ai, au, oi and ou. Changed: th to t or d; the hushing sounds, z, ch and j
+    to s; the vowel of 'say' to e; the short vowels to the nearest of the five."""
+    w = word.lower().replace('ː', '').replace('ˈ', '').replace('ˌ', '')
+    for a, b in (('tʃ', 's'), ('dʒ', 's'), ('eɪ', 'e'), ('oʊ', 'ou'), ('aɪ', 'ai'), ('aʊ', 'au'), ('ɔɪ', 'oi'), ('ɝ', 'er'), ('ɚ', 'er')):
+        w = w.replace(a, b)
+    return ''.join(_ENGLISH.get(ch, ch) for ch in w)
+
+
+def spanish(word):
+    """Spanish of New Mexico in its own spelling. Kept: its five vowels, the framework's own. Changed: ll to y; j and
+    the soft g to h; z and the soft c to s, ch to s; v to b, as Spanish says it; ñ to n followed by y; the silent h
+    dropped; rr to r."""
+    w = word.lower().replace('ñ', 'ny')
+    w = ''.join(ch for ch in unicodedata.normalize('NFD', w) if not unicodedata.combining(ch))
+    w = re.sub(r'(?<!c)h', '', w)
+    w = re.sub(r'c(?=[ei])', 's', w)
+    w = re.sub(r'g(?=[ei])', 'h', w)
+    for a, b in (('ch', 's'), ('ll', 'y'), ('rr', 'r'), ('qu', 'k'), ('j', 'h'), ('z', 's'), ('c', 'k'), ('v', 'b'), ('x', 'h')):
+        w = w.replace(a, b)
+    return w
+
+
 def terlunan(word):
     """Terlunan's words are the framework's own; a coined word still in its Māori spelling takes f for wh, as the
     reference's fanga does."""
@@ -335,10 +394,10 @@ def plain(word):
 
 
 READERS = dict(kk=kazakh, mn=mongolian, qu=quechua, ar=arabic, sw=swahili, tl=tagalog, he=hebrew, ja=japanese, eo=esperanto,
-               fr=french, te=terlunan, la=plain)
+               fr=french, so=somali, ug=uyghur, tn=setswana, en=english, es=spanish, te=terlunan, la=plain)
 PARENT_OF = dict(kk='Kazakh or Kyrgyz', mn='Mongolian', qu='Quechua', ar='Arabic or Tamazight', sw='Swahili', tl='Tagalog', he='Hebrew',
-                 ja='Japanese', eo='Esperanto with Hebrew loans', fr='Louisiana French and the Creoles beside it', te='Terlunan',
-                 la='another language')
+                 ja='Japanese', eo='Esperanto with Hebrew loans', fr='Louisiana French and the Creoles beside it', so='Somali', ug='Uyghur', tn='Setswana',
+                 en='English of the American West', es='Spanish of New Mexico', te='Terlunan', la='another language')
 
 
 def read(spec):
@@ -512,7 +571,8 @@ def build(log=print):
         evidence=("A rule sheet and its results, nothing in it validated: the framework is the sound section of the author's Terlunan "
                   "reference (v0.6, section 2, outside the repository); each parent language's rules are choices made on 20 November 2026; "
                   "the parent words are written from general knowledge of Kazakh, Kyrgyz, Mongolian, Quechua, Arabic, Tamazight, Swahili, "
-                  "Tagalog, Hebrew, Japanese, Esperanto and Louisiana French, and no dictionary or speaker has checked them."),
+                  "Tagalog, Hebrew, Japanese, Esperanto, Louisiana French, Somali, Uyghur, Setswana, English and Spanish, and no speaker has checked "
+                  "them; a dictionary check of one batch of names is described in the paper."),
         reading_rule=("tongues gives every word of district_names.py's lexicons: its key, its role (head, modifier, or the word for an old "
                       "name's meaning), its parent form (a code for the parent's rule sheet, a colon and the word as the parent language "
                       "spells it), the form names are fused from (read), the word standing alone (passed), its syllables with the stressed "

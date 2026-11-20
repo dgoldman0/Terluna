@@ -35,7 +35,13 @@ A sound the framework has is kept. A sound it lacks goes to its nearest neighbou
 | Terlunan | itself | Everything: its words are the framework's own | One coined word still in its Māori spelling | whakapono, *fakapono* |
 | No lexicon yet: tried on one region's names | Louisiana French, with the Creoles of Louisiana and Haiti | *f*, *v*; the *h* that Louisiana still sounds; a consonant closing a syllable before the next one's opening consonant | The hushing sounds and *z* to *s*; *gn* to *n* and *y*; the rounded front vowels unrounded; a nasal vowel to its vowel with *n*; a final stop loses the *l* or *r* after it | bleu, *bele*; lune, *lin*; lagniappe, *lanyap*; grand lac, *garanlak*; ouaouaron, *wawaron*; sable, *sab* |
 
-The Louisiana French sheet takes each word as it is said, written in the phonetic alphabet's letters, because French spelling carries letters that are not sounded. It was made for the second naming trial (register, 20 November), the first on the map of parent cultures, and no lexicon uses it yet.
+| No lexicon yet: tried on one region's names | Somali | Long vowels, written double; the glottal stop | *c*, the deep throat sound, to the glottal stop; *x*, *kh* to *h*; *q* to *k*; *sh* to *s*; *dh* to *d*; *j* to *y* | xeeb, *heeb*; cidla, *'idla*; qabow, *kabow*; gacan, *ga'an* |
+| No lexicon yet: tried on one region's names | Uyghur | *ng*; final consonants | *q*, *gh* to *k*, *g*; *x* to *h*; *ch*, *sh*, *zh*, *z* to *s*; *j* to *y*; *ö*, *ü*, *é* to *o*, *u*, *e* | qumluq, *kumluk*; köl, *kol*; quruq tagh, *kuruktag* |
+| No lexicon yet: tried on one region's names | Setswana | *ng*; its open syllables | *kg* to *k* and *g*, its throat sound, to *h*; the breathed stops to plain ones; *tl* to *t*; *ts*, *š* to *s* | Kgalagadi, *kalahadi*; thaba, *taba*; kgolo, *kolo* |
+| No lexicon yet: tried on one region's names | English of the American West | *f*, *v*, *h*, the *r* the West sounds; the glides *ai*, *au*, *oi*, *ou* | *th* to *t* or *d*; the hushing sounds, *z*, *ch*, *j* to *s*; the short vowels to the nearest of the five | rimrock, *rimrak*; lonesome, *lounsem*; Dyson, *daisen* |
+| No lexicon yet: tried on one region's names | Spanish of New Mexico | Its five vowels | *ll* to *y*; *j* and the soft *g* to *h*; *z*, the soft *c* and *ch* to *s*; *v* to *b*; the silent *h* dropped | jornada, *hornada*; hoyo, *oyo*; grande, *garande*; verde, *berde* |
+
+The Louisiana French and English sheets take each word as it is said, written in the phonetic alphabet's letters, because their spellings carry letters that are not sounded. These six sheets were made as regions were named on the map of parent cultures (register, 20 November): Louisiana French for the second naming trial, the other five for the first batch of regions after it. Tamasheq and Hassaniya Arabic pass by the Arabic and Tamazight sheet. No lexicon uses the six yet.
 
 ## The choices, and what else was possible
 
@@ -102,7 +108,7 @@ In the draft record 424 generated names, 16 calques and the six seas changed. Ea
 ## What is left
 
 - **The scheme of tongues is to be set out again** (register, 20 November). A region's names are to fit the distribution of the related parent cultures of Earth; most names have a specific parent language; within the broader regions local languages take those parent cultures and shape the Moon's dialects and languages; Terlunan is the Moon's common language and Proto-Olivolingvo the proposed common language of Earth; and the local languages are more diverse than the eight tongues here, of which one, Proto-Olivolingvo, now stands as a region's tongue where it should be a contributing layer.
-- **Rule sheets for the other languages of the map of parent cultures** are made as their regions are named; Louisiana French is the first. The map and both naming trials are working products on the research drive.
+- **Rule sheets for the other languages of the map of parent cultures** are made as their regions are named; six are here so far. The map and both naming trials are working products on the research drive.
 - **The redraw of 20 November and the naming trial's two regions** are on the research drive; the redraw's names are the generator's and its record keeps their earlier spellings.
 - **The lexicons themselves are the first draft's.** The pass changes how a word sounds, not which word a tongue has; the reworked way of making names chooses the words.
 - **Older records keep the spellings of their date**: the register's earlier rows and the lake rule's two records.
@@ -110,7 +116,7 @@ In the draft record 424 generated names, 16 calques and the six seas changed. Ea
 ## Limits
 
 - The framework is read from the Terlunan reference, which sets it for Terlunan. Taking it as the sounds every lunar tongue shares is this study's reading of the register's row.
-- The parent words and the rules for twelve languages are written from general knowledge. A check against dictionaries, and of the Kazakh rounding harmony and the Quechua lowering against descriptions of those languages, has not been made.
+- The parent words and the rules for seventeen languages are written from general knowledge. The words of one batch of names in Somali, Setswana, Uyghur and Tamasheq were looked up in web dictionaries on 20 November: most were found, and four names rest on words that were not. The rule sheets are sound rules and do not depend on that check. A check against dictionaries, and of the Kazakh rounding harmony and the Quechua lowering against descriptions of those languages, has not been made.
 - A passed word can look like a word of another language: Dala's *sol* (desert, thirst), the author's tongue's *sahara* (dawn), the Hebrew *kesef* from the word for foam. The tests check only that two words of one tongue do not fall together.
 - Stress moves with the pass: the framework stresses the syllable before the last, where Kazakh stresses the last and Arabic follows the weight of its syllables.
 

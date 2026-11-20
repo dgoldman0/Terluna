@@ -6,7 +6,7 @@
   "research/studies/atlas_round/place_names.json": "6310b57648748aec6264c94cb8ed61d5d52ccc3d83e0246d9624075da607304d",
   "research/studies/atlas_round/results/districts.json": "7586a27c98d68c0b827cc2d7f948ec62d641d7e01d8e41b69db9a55e86957f92"
  },
- "evidence": "A rule sheet and its results, nothing in it validated: the framework is the sound section of the author's Terlunan reference (v0.6, section 2, outside the repository); each parent language's rules are choices made on 20 November 2026; the parent words are written from general knowledge of Kazakh, Kyrgyz, Mongolian, Quechua, Arabic, Tamazight, Swahili, Tagalog, Hebrew, Japanese, Esperanto and Louisiana French, and no dictionary or speaker has checked them.",
+ "evidence": "A rule sheet and its results, nothing in it validated: the framework is the sound section of the author's Terlunan reference (v0.6, section 2, outside the repository); each parent language's rules are choices made on 20 November 2026; the parent words are written from general knowledge of Kazakh, Kyrgyz, Mongolian, Quechua, Arabic, Tamazight, Swahili, Tagalog, Hebrew, Japanese, Esperanto, Louisiana French, Somali, Uyghur, Setswana, English and Spanish, and no speaker has checked them; a dictionary check of one batch of names is described in the paper.",
  "reading_rule": "tongues gives every word of district_names.py's lexicons: its key, its role (head, modifier, or the word for an old name's meaning), its parent form (a code for the parent's rule sheet, a colon and the word as the parent language spells it), the form names are fused from (read), the word standing alone (passed), its syllables with the stressed one in capitals (said) and any fault against the framework; fallen_together lists pairs of different parent words with one passed form; joined_names_at_fault counts the tongue's head-and-modifier names that break the framework. pins gives every name in place_names.json with the name its tongue's words make from its head and modifier, and whether the two agree (stands). record counts the draft record's generated names and those the words make today.",
  "framework": {
   "vowels": [
@@ -61,6 +61,11 @@
   "ja": "Japanese in the Hepburn spelling. Kept: its five vowels and long vowels. Changed to the spelling that follows\nits own sound system: shi, chi, tsu, fu are si, ti, tu, hu; z and j are s; a consonant and y before a vowel get\nan i between (kyo, kiyo).",
   "eo": "Proto-Olivolingvo, the author's Esperanto-based tongue, in its own spelling. Kept: f and v. Changed: j, its y sound, is written y;\nthe hatted ĥ and ŝ to h and s; ĝ to g; ĉ, ĵ, c and z to s. How its clusters open depends on the local language\nthat takes the word up; here they take the framework's own repair (kratero, karatero).",
   "fr": "Louisiana French and the Creoles of Louisiana and Haiti beside it, each word as it is said, in the phonetic\nalphabet's letters, since French spelling carries letters that are not sounded. Kept: f and v, and the h that\nLouisiana still sounds. Changed: the hushing sounds and z to s; gn to n followed by y; the rounded front vowels\nunrounded, as the Creoles unround them (lune, lin; bleu, ble); a nasal vowel to its vowel with n; a final stop or\nfricative loses the l or r after it, as it does in Louisiana speech (sable, sab).",
+  "so": "Somali in its own spelling. Kept: long vowels, written double; the glottal stop. Changed: c, the deep throat\nsound, to the glottal stop; x and kh to h; q to k; sh to s; dh to d; j to y. Somali has no p or v, so a borrowed\nname comes with b and f.",
+  "ug": "Uyghur in Latin letters. Kept: ng, final consonants. Changed: q and gh to k and g; x to h; ch, sh, zh and z to\ns; j to y; ö, ü and é to o, u and e; v to w.",
+  "tn": "Setswana in its own spelling. Kept: ng, and its open syllables. Changed: kg to k and g, its throat sound, to h\n(Kgalagadi comes out as kalahadi, near the form English made of it); the breathed stops ph, th, kh to p, t, k;\ntl and tlh to t; ts, tsh and š to s; j to y.",
+  "en": "English of the American West, each word as it is said, in the phonetic alphabet's letters. Kept: f, v, h, the\nr that the West sounds, and the glides ai, au, oi and ou. Changed: th to t or d; the hushing sounds, z, ch and j\nto s; the vowel of 'say' to e; the short vowels to the nearest of the five.",
+  "es": "Spanish of New Mexico in its own spelling. Kept: its five vowels, the framework's own. Changed: ll to y; j and\nthe soft g to h; z and the soft c to s, ch to s; v to b, as Spanish says it; ñ to n followed by y; the silent h\ndropped; rr to r.",
   "te": "Terlunan's words are the framework's own; a coined word still in its Māori spelling takes f for wh, as the\nreference's fanga does.",
   "la": "A name from elsewhere in Latin letters with its sounds marked (zh, sh, ch, ts, z, j, q, long vowels)."
  },
@@ -7553,5 +7558,5 @@
   "generated_names": 658,
   "made_by_the_words": 658
  },
- "seconds": 0.09
+ "seconds": 0.12
 }

@@ -85,6 +85,15 @@ def test_each_parent_keeps_what_the_framework_holds():
     assert L.passed('fr:blø') == 'bele' and L.passed('fr:laɲap') == 'lanyap' and L.passed('fr:bwa') == 'buwa'
     assert L.passed('fr:grɑ̃+fr:lak') == 'garanlak' and L.passed('fr:grɑ̃+fr:pre') == 'garanpere'
     assert L.passed('fr:dlo+fr:dus') == 'dolodus' and L.passed('fr:kɔpɛrnik') == 'kopernik'
+    # Somali: its deep throat sound is the glottal stop, x is h and long vowels stay double; Uyghur as its Turkic kin
+    assert L.somali('xeeb') == 'heeb' and L.somali('cidla') == "'idla" and L.passed('so:bannaan') == 'banaan'
+    assert L.somali('qabow') == 'kabow' and L.somali('gacan') == "ga'an" and L.passed('so:oogo') == 'oogo'
+    assert L.uyghur('qumluq') == 'kumluk' and L.uyghur('köl') == 'kol' and L.passed('ug:quruq+ug:tagh') == 'kuruktag'
+    # Setswana: kg is k and g, its throat sound, is h; English as it is said; Spanish as it is spelled
+    assert L.setswana('kgalagadi') == 'kalahadi' and L.setswana('thaba') == 'taba' and L.setswana('kgolo') == 'kolo'
+    assert L.english('rɪmrɑk') == 'rimrak' and L.english('loʊnsəm') == 'lounsem' and L.english('daɪsən') == 'daisen'
+    assert L.spanish('jornada') == 'hornada' and L.spanish('hoyo') == 'oyo' and L.passed('es:grande') == 'garande'
+    assert L.spanish('verde') == 'berde' and L.spanish('bolsón') == 'bolson' and L.spanish('cañón') == 'kanyon'
     assert L.terlunan('whakapono') == 'fakapono' and L.terlunan("feti'a") == "feti'a"
     assert L.passed('la:kaguya') == 'kaguya' and L.passed('la:zāhiya') == 'sahiya'
 
