@@ -2,7 +2,7 @@
  "schema": "terluna.research.atlas-round-sand/1",
  "producer": {
   "files": {
-   "research/studies/atlas_round/sand.py": "cdd8a94fad3c027958db8b8af6732aa9472e6cfafb535515b3cd6dfa61b66428"
+   "research/studies/atlas_round/sand.py": "b39ea58f937c4dc18f803c20b7e982ad9171e6b01976eb4962f17cb634378daa"
   },
   "constants": {
    "MOON_RADIUS": 1737400.0,
@@ -4983,7 +4983,7 @@
  },
  "product": {
   "path": "/media/projectspace/terluna-research/atlas-round/sand/sand_16ppd.npz",
-  "sha256": "31f7b0c59f98af41ffa259fd47865b2c15b611b31b4f628f4faf71a37aed3991"
+  "sha256": "32ecde617443144cd8fa0611e06452e5afef8e3a61753c5e7220e5305373df9f"
  },
  "limits": [
   "The winds are one run's, at 170 km and 3 days; sea and lake breezes, slope winds and the storms' gusts enter only through the stated factor and tail.",
@@ -4994,5 +4994,5 @@
   "The climate's fields reach the 1.9 km grid smoothed over 0.7 of the run's 170 km spacing, as the round's look carries them: nothing in the map is finer than that except what the ground gives (water, shelter, river ends and shores).",
   "Dune forms follow the resultant over the potential and the sand's thickness by Earth's classes; crest spacings are an estimate from the sand at hand and the time."
  ],
- "seconds": 340
+ "seconds": 298
 }

@@ -34,6 +34,7 @@ import json
 import math
 import time
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 
@@ -702,11 +703,12 @@ class NpzWriter:
         self.zf.close()
 
 
-def build(store, log=print):
-    """Everything from the reduced winds to the map: arrays go to store(name, array) as they are finished; the sums
-    come back."""
+def fields(log=print):
+    """Everything the cases share, on the 1.9 km grid, from the reduced winds on: each gust case's drift, the dryness with the
+    cover and the crust's hold it gives, shelter and floors, the sources at river ends and on downwind shores, and the
+    regions. variant() draws one case from the namespace this returns."""
     t0 = time.time()
-    s = load_series()
+    series = s = load_series()
     lat_c, lon_c = s['lat'].astype(float), s['lon'].astype(float)
     land_c = s['lsm'] > 0.5
     height, water, surface_meta = read_surface()
@@ -808,118 +810,154 @@ def build(store, log=print):
     land_km2 = float((a2 * ~water).sum())
     class_km2 = {CLASS_NAMES[k]: round(float(a2[(classes == k) & ~water].sum())) for k in range(6)}
     crest_min = ELEMENTARY_FACTOR[0] * saturation_length(easiest_grain(GRAINS['feldspar'])[0], GRAINS['feldspar'])
-    summary = {}
-    for name, var in VARIANTS.items():
-        f, years, sup = fine[var['subgrid']], var['years'], SUPPLY[var['supply']]
-        kept = np.zeros_like(kept_crust) if var['open_sand'] else kept_crust
-        crust = (1.0 - kept * (1.0 - FRESH_SHARE)).astype(np.float32)
-        take = (1.0 - kept * (1.0 - FRESH_TAKE)).astype(np.float32)
-        windy = np.clip(f['above'] / 0.01, 0.0, 1.0)
-        q_eff = (f['rdp'] * moving * crust * exposure).astype(np.float32)
-        bowl_depth = BOWL_DEPTH_M[0] if years <= 1000.0 else BOWL_DEPTH_M[1]
-        bowl_cap = np.where(water, 0.0, BOWL_SHARE * bowl_depth).astype(np.float32)
-        loose = through_plants * crust                              # the share of in-place sand that stays loose sand and does not become soil under cover
-        mantle = (sup['deflation_m'] * SAND_SIZE_SHARE * sup['durable'] * (1.0 - cover) * loose).astype(np.float32)
-        mantle[water] = 0.0
+    return SimpleNamespace(t0=t0, series=series, drifts=drifts, surface_meta=surface_meta, rotation=rotation, land_c=land_c, aridity_c=aridity_c, classed=classed, height=height, water=water, aridity=aridity, mafic=mafic, fine=fine, cover=cover,
+                           classes=classes, through_plants=through_plants, moving=moving, kept_crust=kept_crust, trap_index=trap_index, trap=trap, exposure=exposure, drained=drained, upwind_water_km=upwind_water_km, yield_row=yield_row, rain_rule=rain_rule, band_rain=band_rain, ground=ground,
+                           near_water=near_water, region=region, region_list=region_list, area_row=area_row, a2=a2, land_by_region=land_by_region, land_km2=land_km2, class_km2=class_km2, crest_min=crest_min, lat_f=lat_f, lon_f=lon_f, mouths_n=mouths_n, shore_n=shore_n)
+
+
+def variant(name, var, F, store, placed=None, suffix=None, rivers=None, log=print):
+    """One case of the map from the shared fields: its arrays go to store(name + suffix, array) and its sums come back.
+    `placed` adds sand set down by hand, as equivalent thickness in metres on the grid: `thin` joins the offered sand and
+    is carried with it, and `thick` is a body that fills the bowls under it and stays where it lies. `rivers`, where given,
+    is the durable sand each end of drainage receives in a year before any cover (bulk metres on its cell) and stands
+    in for this module's own rule of a capped catchment behind each end."""
+    t0, fine, water, cover, classes, mafic = F.t0, F.fine, F.water, F.cover, F.classes, F.mafic
+    through_plants, moving, kept_crust, trap_index, trap, exposure = F.through_plants, F.moving, F.kept_crust, F.trap_index, F.trap, F.exposure
+    drained, upwind_water_km, yield_row, rain_rule, ground, near_water = F.drained, F.upwind_water_km, F.yield_row, F.rain_rule, F.ground, F.near_water
+    region, region_list, area_row, a2, land_by_region, land_km2, crest_min = F.region, F.region_list, F.area_row, F.a2, F.land_by_region, F.land_km2, F.crest_min
+    f, years, sup = fine[var['subgrid']], var['years'], SUPPLY[var['supply']]
+    kept = np.zeros_like(kept_crust) if var['open_sand'] else kept_crust
+    crust = (1.0 - kept * (1.0 - FRESH_SHARE)).astype(np.float32)
+    take = (1.0 - kept * (1.0 - FRESH_TAKE)).astype(np.float32)
+    windy = np.clip(f['above'] / 0.01, 0.0, 1.0)
+    q_eff = (f['rdp'] * moving * crust * exposure).astype(np.float32)
+    bowl_depth = BOWL_DEPTH_M[0] if years <= 1000.0 else BOWL_DEPTH_M[1]
+    bowl_cap = np.where(water, 0.0, BOWL_SHARE * bowl_depth).astype(np.float32)
+    loose = through_plants * crust                              # the share of in-place sand that stays loose sand and does not become soil under cover
+    mantle = (sup['deflation_m'] * SAND_SIZE_SHARE * sup['durable'] * (1.0 - cover) * loose).astype(np.float32)
+    mantle[water] = 0.0
+    if rivers is None:
         river = (yield_row[:, None] * rain_rule * sup['erosion'] * sup['durable'] * np.minimum(drained, sup['catchment_cap_km2']) / area_row[:, None]
                  * years * through_plants * take * windy).astype(np.float32)
-        shore = (sup['shore_m2_yr'] * np.clip(upwind_water_km / sup['fetch_km'], 0.0, 1.0) * CELL_M / (area_row[:, None] * 1e6)
-                 * years * through_plants * take * windy).astype(np.float32)
-        supply_km3 = {k: round(float((v * a2).sum() / 1e3), 1) for k, v in (('mantle', mantle), ('rivers', river), ('shores', shore))}
-        offered = mantle + settle(river + shore, ground)            # a river end's or a shore's sand lies over its fan or beach
-        del mantle, river, shore, take, loose
-        bowl = np.minimum(offered, bowl_cap)
-        free = offered - bowl
-        del offered
-        log(f'  {name}: offered {supply_km3} km3')
-        ratio = f['rdp'] / np.maximum(f['dp'], 1e-9)
-        side = np.clip(0.5 * (1.0 - ratio), *SIDE_SHARE).astype(np.float32)
-        lost = carry(free, q_eff, f['az'], trap, water, bowl, bowl_cap.reshape(-1), years, side, log)
-        del side
-        free = settle(free, ground)
-        deep = free >= DUNE_THICKNESS_M                              # deep enough for dunes where it is set down
-        piled = ground.share(np.where(deep, free, 0.0).astype(np.float32), FINAL_SIGMA)
-        seeded = ground.share(deep.astype(np.float32), FINAL_SIGMA)
-        free = ground.share(free, FINAL_SIGMA)
-        bowl = np.minimum(ground.share(bowl, FINAL_SIGMA), bowl_cap)
-        del deep
-        share = np.clip(BOWL_SHARE * np.sqrt(bowl / np.maximum(bowl_cap, 1e-6)) + (1.0 - np.exp(-free / FULL_COVER_M)), 0.0, 1.0).astype(np.float32)
-        share[water] = 0.0
-        share[share < 0.005] = 0.0
-        has = share > 0
-        active = (moving * crust * windy).astype(np.float32)
-        active[~has] = 0.0
-        form = np.zeros((ROWS, COLS), np.uint8)
-        dunes = has & (piled > 0.5 * free) & (free > 0.02)
-        form[has] = 1
-        form[dunes & (ratio >= 0.8)] = 2
-        form[dunes & (ratio >= 0.3) & (ratio < 0.8)] = 3
-        form[dunes & (ratio < 0.3)] = 4
-        form[dunes & (active < 0.2)] = 5
-        az = f['az']
-        crest = np.full((ROWS, COLS), np.nan, np.float32)
-        crest[form == 2] = (az[form == 2] + 90.0) % 180.0
-        for k in (3, 5):
-            crest[form == k] = az[form == k] % 180.0
-        spacing = np.zeros((ROWS, COLS), np.float32)
-        isdune = form >= 2
-        body = piled[isdune] / np.maximum(seeded[isdune], 1e-3)      # thickness of the dune sand where it was set down
-        grown = np.minimum(np.sqrt(2.0 * CREST_ASPECT * np.maximum(f['rdp'][isdune] * moving[isdune], 1e-6) * years),
-                           3.0 * CREST_ASPECT * body)
-        spacing[isdune] = np.clip(grown, crest_min, MIXED_LAYER_M[0])
-        drift_az = np.where(has & (active > 0), az, np.nan).astype(np.float32)
+    else:
+        river = (rivers * years * through_plants * take * windy).astype(np.float32)
+    shore = (sup['shore_m2_yr'] * np.clip(upwind_water_km / sup['fetch_km'], 0.0, 1.0) * CELL_M / (area_row[:, None] * 1e6)
+             * years * through_plants * take * windy).astype(np.float32)
+    supply_km3 = {k: round(float((v * a2).sum() / 1e3), 1) for k, v in (('mantle', mantle), ('rivers', river), ('shores', shore))}
+    offered = mantle + settle(river + shore, ground)            # a river end's or a shore's sand lies over its fan or beach
+    if placed is not None and placed.get('thin') is not None:   # thin sand set down by hand fills the bowls and is carried as the land's own is
+        offered = offered + np.where(water, 0.0, placed['thin']).astype(np.float32)
+    del mantle, river, shore, take, loose
+    bowl = np.minimum(offered, bowl_cap)
+    free = offered - bowl
+    del offered
+    log(f'  {name}: offered {supply_km3} km3')
+    ratio = f['rdp'] / np.maximum(f['dp'], 1e-9)
+    side = np.clip(0.5 * (1.0 - ratio), *SIDE_SHARE).astype(np.float32)
+    lost = carry(free, q_eff, f['az'], trap, water, bowl, bowl_cap.reshape(-1), years, side, log)
+    del side
+    free = settle(free, ground)
+    # A body set down by hand fills the bowls under it and lies where it was put: it is neither spread as a river end's
+    # sand is nor carried, and whoever places it reckons what its margins lose.
+    if placed is not None and placed.get('thick') is not None:
+        thick = np.where(water, 0.0, placed['thick']).astype(np.float32)
+        into = np.minimum(thick, np.maximum(bowl_cap - bowl, 0.0))
+        bowl = bowl + into
+        free = free + (thick - into)
+        del thick, into
+    deep = free >= DUNE_THICKNESS_M                              # deep enough for dunes where it is set down
+    piled = ground.share(np.where(deep, free, 0.0).astype(np.float32), FINAL_SIGMA)
+    seeded = ground.share(deep.astype(np.float32), FINAL_SIGMA)
+    free = ground.share(free, FINAL_SIGMA)
+    bowl = np.minimum(ground.share(bowl, FINAL_SIGMA), bowl_cap)
+    del deep
+    share = np.clip(BOWL_SHARE * np.sqrt(bowl / np.maximum(bowl_cap, 1e-6)) + (1.0 - np.exp(-free / FULL_COVER_M)), 0.0, 1.0).astype(np.float32)
+    share[water] = 0.0
+    share[share < 0.005] = 0.0
+    has = share > 0
+    active = (moving * crust * windy).astype(np.float32)
+    active[~has] = 0.0
+    form = np.zeros((ROWS, COLS), np.uint8)
+    dunes = has & (piled > 0.5 * free) & (free > 0.02)
+    form[has] = 1
+    form[dunes & (ratio >= 0.8)] = 2
+    form[dunes & (ratio >= 0.3) & (ratio < 0.8)] = 3
+    form[dunes & (ratio < 0.3)] = 4
+    form[dunes & (active < 0.2)] = 5
+    az = f['az']
+    crest = np.full((ROWS, COLS), np.nan, np.float32)
+    crest[form == 2] = (az[form == 2] + 90.0) % 180.0
+    for k in (3, 5):
+        crest[form == k] = az[form == k] % 180.0
+    spacing = np.zeros((ROWS, COLS), np.float32)
+    isdune = form >= 2
+    body = piled[isdune] / np.maximum(seeded[isdune], 1e-3)      # thickness of the dune sand where it was set down
+    grown = np.minimum(np.sqrt(2.0 * CREST_ASPECT * np.maximum(f['rdp'][isdune] * moving[isdune], 1e-6) * years),
+                       3.0 * CREST_ASPECT * body)
+    spacing[isdune] = np.clip(grown, crest_min, MIXED_LAYER_M[0])
+    drift_az = np.where(has & (active > 0), az, np.nan).astype(np.float32)
+    if suffix is None:
         suffix = '' if name == 'central' else f'__{name}'
-        thickness = (free + bowl).astype(np.float32)
-        for key, array in (('sand_share', share), ('active_share', active), ('form', form), ('crest_azimuth_deg', crest),
-                           ('crest_spacing_m', spacing), ('drift_azimuth_deg', drift_az), ('sand_thickness_m', thickness)):
-            store(key + suffix, array)
-        if name in ('central', 'nogust', 'highgust'):
-            store('drift_potential_m2_yr' + suffix, np.where(water, 0.0, np.round(f['dp'], 1)).astype(np.float32))
-        if name == 'central':
-            store('drift_resultant_m2_yr', np.where(water, 0.0, np.round(f['rdp'], 1)).astype(np.float32))
-            store('drift_direction_deg', np.where(water, np.nan, np.round(az)).astype(np.float32))
-        sand_km2 = (share * a2).reshape(-1)
-        moving_km2 = sand_km2 * active.reshape(-1)
-        flat_form = form.reshape(-1).astype(np.int64)
-        by_form = np.bincount(flat_form, weights=sand_km2, minlength=6)
-        by_class = np.bincount(classes.reshape(-1).astype(np.int64), weights=sand_km2, minlength=6)
-        r_sand = np.bincount(region, weights=sand_km2, minlength=200)
-        r_move = np.bincount(region, weights=moving_km2, minlength=200)
-        r_form = np.bincount(region * 6 + flat_form, weights=sand_km2, minlength=1200).reshape(200, 6)
-        r_basalt = np.bincount(region, weights=sand_km2 * mafic.reshape(-1), minlength=200)
-        table = []
-        for i, r in enumerate(region_list):
-            k = i + 1
-            if r_sand[k] < 1.0 or land_by_region[k] <= 0:
-                continue
-            table.append(dict(code=r['code'], at_today=r['at']['today'], land_km2=round(float(land_by_region[k])),
-                              sand_km2=round(float(r_sand[k])), sand_share=round(float(r_sand[k] / land_by_region[k]), 4),
-                              moving_km2=round(float(r_move[k])), dunes_km2=round(float(r_form[k, 2:].sum())),
-                              basalt_share=round(float(r_basalt[k] / r_sand[k]), 2),
-                              main_form=FORM_NAMES[int(r_form[k, 1:].argmax()) + 1]))
-        table.sort(key=lambda t: -t['sand_km2'])
-        total = float(sand_km2.sum())
-        summary[name] = dict(rests_on=var['rests_on'], years=years, subgrid=var['subgrid'], open_sand=var['open_sand'],
-                             supply=var['supply'], sand_km2=round(total), share_of_land=round(total / land_km2, 5),
-                             moving_km2=round(float(moving_km2.sum())), moving_share=round(float(moving_km2.sum() / max(total, 1e-9)), 4),
-                             dunes_km2=round(float(by_form[2:].sum())),
-                             basalt_share_of_sand=round(float((sand_km2 * mafic.reshape(-1)).sum() / max(total, 1e-9)), 3),
-                             cells_over_half_sand_km2=round(float(a2[share > 0.5].sum())),
-                             by_form_km2={FORM_NAMES[k]: round(float(by_form[k])) for k in range(1, 6)},
-                             by_class_km2={CLASS_NAMES[k]: round(float(by_class[k])) for k in range(6)},
-                             volume_km3=round(float((thickness * a2).sum() / 1e3), 1), in_bowls_km3=round(float((bowl * a2).sum() / 1e3), 1),
-                             free_km3=round(float((free * a2).sum() / 1e3), 1), offered_km3=supply_km3, lost_to_water_km3=round(lost, 1),
-                             crest_spacing_m=dict(median=round(float(np.median(spacing[isdune]))) if isdune.any() else None,
-                                                  p90=round(float(np.percentile(spacing[isdune], 90))) if isdune.any() else None),
-                             thickest_m=round(float(free.max()), 1), neighbour_steps=neighbour_steps(share, near_water, trap_index), regions=table)
-        log(f'  {name}: sand {summary[name]["sand_km2"]} km2, moving {summary[name]["moving_km2"]}, dunes {summary[name]["dunes_km2"]}, lost {lost:.1f} km3, steps {summary[name]["neighbour_steps"]["share_of_sandy_pairs"]} ({time.time() - t0:.0f} s)')
-        del share, active, form, crest, spacing, drift_az, thickness, free, bowl, q_eff, sand_km2, moving_km2, flat_form, ratio, piled, seeded
-    store('basalt_share', np.where(water, 0.0, np.round(mafic, 2)).astype(np.float32))
-    store('plant_cover', np.where(water, 0.0, np.round(cover, 2)).astype(np.float32))
-    store('shelter', np.round(trap_index, 2).astype(np.float32))
-    return dict(summary=summary, drifts=drifts, series=s, surface_meta=surface_meta, rotation=rotation, land_c=land_c,
-                aridity_c=aridity_c, classed=classed, land_km2=land_km2, class_km2=class_km2, regions=region_list,
-                counts=dict(mouths=mouths_n, downwind_shore_cells=shore_n), band_rain_mm_yr=band_rain, seconds=time.time() - t0)
+    thickness = (free + bowl).astype(np.float32)
+    for key, array in (('sand_share', share), ('active_share', active), ('form', form), ('crest_azimuth_deg', crest),
+                       ('crest_spacing_m', spacing), ('drift_azimuth_deg', drift_az), ('sand_thickness_m', thickness)):
+        store(key + suffix, array)
+    if name in ('central', 'nogust', 'highgust'):
+        store('drift_potential_m2_yr' + suffix, np.where(water, 0.0, np.round(f['dp'], 1)).astype(np.float32))
+    if name == 'central':
+        store('drift_resultant_m2_yr', np.where(water, 0.0, np.round(f['rdp'], 1)).astype(np.float32))
+        store('drift_direction_deg', np.where(water, np.nan, np.round(az)).astype(np.float32))
+    sand_km2 = (share * a2).reshape(-1)
+    moving_km2 = sand_km2 * active.reshape(-1)
+    flat_form = form.reshape(-1).astype(np.int64)
+    by_form = np.bincount(flat_form, weights=sand_km2, minlength=6)
+    by_class = np.bincount(classes.reshape(-1).astype(np.int64), weights=sand_km2, minlength=6)
+    r_sand = np.bincount(region, weights=sand_km2, minlength=200)
+    r_move = np.bincount(region, weights=moving_km2, minlength=200)
+    r_form = np.bincount(region * 6 + flat_form, weights=sand_km2, minlength=1200).reshape(200, 6)
+    r_basalt = np.bincount(region, weights=sand_km2 * mafic.reshape(-1), minlength=200)
+    table = []
+    for i, r in enumerate(region_list):
+        k = i + 1
+        if r_sand[k] < 1.0 or land_by_region[k] <= 0:
+            continue
+        table.append(dict(code=r['code'], at_today=r['at']['today'], land_km2=round(float(land_by_region[k])),
+                          sand_km2=round(float(r_sand[k])), sand_share=round(float(r_sand[k] / land_by_region[k]), 4),
+                          moving_km2=round(float(r_move[k])), dunes_km2=round(float(r_form[k, 2:].sum())),
+                          basalt_share=round(float(r_basalt[k] / r_sand[k]), 2),
+                          main_form=FORM_NAMES[int(r_form[k, 1:].argmax()) + 1]))
+    table.sort(key=lambda t: -t['sand_km2'])
+    total = float(sand_km2.sum())
+    out = dict(rests_on=var['rests_on'], years=years, subgrid=var['subgrid'], open_sand=var['open_sand'],
+                         supply=var['supply'], sand_km2=round(total), share_of_land=round(total / land_km2, 5),
+                         moving_km2=round(float(moving_km2.sum())), moving_share=round(float(moving_km2.sum() / max(total, 1e-9)), 4),
+                         dunes_km2=round(float(by_form[2:].sum())),
+                         basalt_share_of_sand=round(float((sand_km2 * mafic.reshape(-1)).sum() / max(total, 1e-9)), 3),
+                         cells_over_half_sand_km2=round(float(a2[share > 0.5].sum())),
+                         by_form_km2={FORM_NAMES[k]: round(float(by_form[k])) for k in range(1, 6)},
+                         by_class_km2={CLASS_NAMES[k]: round(float(by_class[k])) for k in range(6)},
+                         volume_km3=round(float((thickness * a2).sum() / 1e3), 1), in_bowls_km3=round(float((bowl * a2).sum() / 1e3), 1),
+                         free_km3=round(float((free * a2).sum() / 1e3), 1), offered_km3=supply_km3, lost_to_water_km3=round(lost, 1),
+                         crest_spacing_m=dict(median=round(float(np.median(spacing[isdune]))) if isdune.any() else None,
+                                              p90=round(float(np.percentile(spacing[isdune], 90))) if isdune.any() else None),
+                         thickest_m=round(float(free.max()), 1), neighbour_steps=neighbour_steps(share, near_water, trap_index), regions=table)
+    log(f'  {name}: sand {out["sand_km2"]} km2, moving {out["moving_km2"]}, dunes {out["dunes_km2"]}, lost {lost:.1f} km3, steps {out["neighbour_steps"]["share_of_sandy_pairs"]} ({time.time() - t0:.0f} s)')
+    if placed is not None:
+        out['placed_km3'] = {k: round(float((np.where(water, 0.0, v) * a2).sum() / 1e3), 1) for k, v in placed.items() if v is not None}
+    return out
+
+
+def build(store, log=print):
+    """Everything from the reduced winds to the map: arrays go to store(name, array) as they are finished; the sums
+    come back."""
+    F = fields(log)
+    summary = {name: variant(name, var, F, store, log=log) for name, var in VARIANTS.items()}
+    store('basalt_share', np.where(F.water, 0.0, np.round(F.mafic, 2)).astype(np.float32))
+    store('plant_cover', np.where(F.water, 0.0, np.round(F.cover, 2)).astype(np.float32))
+    store('shelter', np.round(F.trap_index, 2).astype(np.float32))
+    return dict(summary=summary, drifts=F.drifts, series=F.series, surface_meta=F.surface_meta, rotation=F.rotation, land_c=F.land_c,
+                aridity_c=F.aridity_c, classed=F.classed, land_km2=F.land_km2, class_km2=F.class_km2, regions=F.region_list,
+                counts=dict(mouths=F.mouths_n, downwind_shore_cells=F.shore_n), band_rain_mm_yr=F.band_rain, seconds=time.time() - F.t0)
 
 
 # ---- the record ---------------------------------------------------------------------------------------------------
