@@ -245,3 +245,78 @@ def test_crests_are_a_fixed_function_of_position_and_keep_the_sands_share():
     assert abs(float(star.mean()) - 0.4) < 0.07
     close = K.sand_cover(made_up_sand(shape, 0.4, 1.0, 3, spacing=600.0), lat, lon, dy)
     assert np.allclose(close, 0.4)                                                 # crests under two pixels apart: an even cover
+
+
+def made_sea_product(form, towards, spacing=1500.0, height=75.0):
+    """A product with one made sea, 40 by 60 product cells round 30 S, 100 E, of dunes of one form."""
+    product = {k: np.zeros(K.SAND_SHAPE, np.uint8 if k in ('form', 'made_sea') else np.float32) for k in K.SAND_FIELDS + K.SAND_MADE}
+    sea = (slice(1900, 1940), slice(1570, 1630))
+    product['sand_share'][sea], product['active_share'][sea], product['made_sea'][sea], product['dune_height_m'][sea] = 1.0, 0.5, 1, height
+    product['made_sand_part'][sea], product['made_sand_basalt'][sea] = 1.0, 0.25
+    product['form'][sea] = dict(star=4, linear=3, transverse=2)[form]
+    name = dict(star='star dunes', linear='linear dunes', transverse='crescent dunes and transverse ridges')[form]
+    product['seas'] = [dict(id=1, name='made up', centre_today=[-30.0, 100.0], form=name, crest_spacing_m=spacing, height_m=height, net_towards_deg=towards)]
+    return product
+
+
+def test_a_made_seas_dunes_are_relief_of_its_form_spacing_and_height():
+    quiet = lambda s: None                                                         # noqa: E731
+    assert K.dune_relief(None) == [] and K.relief_window([], np.arange(10), np.arange(10)) is None
+    dy = 474.0
+    for form, towards in (('transverse', 0.0), ('linear', 0.0), ('star', 60.0)):
+        (patch,) = K.dune_relief(made_sea_product(form, towards), quiet)
+        again = K.dune_relief(made_sea_product(form, towards), quiet)[0]
+        assert np.array_equal(patch['relief'], again['relief'])                    # the same dunes at every run
+        relief = patch['relief']
+        inner = relief[60:-60, 60:-60]                                             # inside the sea, clear of its edge
+        assert 0.5 * 75.0 < np.abs(inner).max() <= 75.0 * 1.3 and relief[0, 0] == 0.0     # of the dunes' height, and none off the sea
+        # the pattern's wavelength, from the spectrum's peak: the crest spacing, across the ground at the sea's latitude
+        power = np.abs(np.fft.fft2(inner - inner.mean())) ** 2
+        k_north = np.fft.fftfreq(inner.shape[0], d=dy)[:, None] + np.zeros((1, inner.shape[1]))
+        k_east = np.fft.fftfreq(inner.shape[1], d=dy * np.cos(np.radians(30.0)))[None, :] + np.zeros((inner.shape[0], 1))
+        top = np.unravel_index(power.argmax(), power.shape)
+        assert abs(1.0 / np.hypot(k_north[top], k_east[top]) - 1500.0) < 300.0, form
+        if form == 'transverse':                                                   # crests run across a drift towards the north
+            assert abs(k_north[top]) > 3.0 * abs(k_east[top])
+        if form == 'linear':                                                       # and along it
+            assert abs(k_east[top]) > 3.0 * abs(k_north[top])
+        rows, cols = np.arange(patch['row'] + 100, patch['row'] + 130), np.arange(patch['col'] + 100, patch['col'] + 150)
+        here = K.relief_window([patch], rows, cols)
+        assert all(np.array_equal(here[name], patch[name][100:130, 100:150]) for name in ('east', 'north', 'grain', 'streak', 'rank', 'covered'))
+        assert 0.0 < patch['rank'].min() < 1e-4 and 1.0 - 1e-4 < patch['rank'].max() < 1.0 and abs(float(patch['rank'].mean()) - 0.5) < 1e-3
+        assert abs(float(patch['streak'].std()) - 1.0) < 1e-3 and float(np.abs(patch['grain']).max()) <= 1.3
+        assert K.relief_window([patch], rows + 5000, cols) is None and K.relief_window([patch], rows, (cols + 9000) % 23040) is None
+    steep = K.dune_relief(made_sea_product('transverse', 0.0, spacing=3000.0), quiet)[0]['north']   # the lee face, to the north, is the steeper
+    mid = steep[60:-60, 60:-60]
+    assert np.percentile(-mid, 99) > 1.2 * np.percentile(mid, 99)
+
+
+def test_a_made_seas_sand_keeps_the_colour_of_the_rock_it_was_hauled_from():
+    rows, cols = np.arange(4 * 1900 + 40, 4 * 1900 + 104), np.arange(4 * 1570 + 40, 4 * 1570 + 140)
+    window = K.sand_window(made_sea_product('star', 0.0), rows, cols)
+    assert np.allclose(window['made'], 1.0) and np.allclose(window['made_basalt'], 0.25, atol=1e-3)
+    off = K.sand_window(made_sea_product('star', 0.0), rows, cols + 4 * 30)        # across the sea's eastern edge
+    assert off['made'][0, 0] == 1.0 and off['made'][0, -1] == 0.0 and np.allclose(off['made_basalt'][off['made'] > 0.01], 0.25, atol=1e-2)
+    full = lambda v, kind=np.float32: np.full((24, 24), v, kind)                   # noqa: E731
+    sand = dict(made_up_sand((24, 24), 1.0, 1.0, 1, spacing=0.0), made=full(1.0), made_basalt=full(0.0))
+    pale, _ = piece(0.03, sand=sand, basalt=True)                                  # a sea of highland sand on basalt ground
+    local, _ = piece(0.03, sand=made_up_sand((24, 24), 1.0, 1.0, 1, spacing=0.0), basalt=True)
+    dark, _ = piece(0.03, sand=dict(sand, made_basalt=full(1.0)), basalt=True)
+    tone = lambda kinds: lum(kinds['bare_colour'])                                 # noqa: E731
+    assert tone(pale) > 1.5 * tone(local) and abs(tone(dark) - tone(local)) < 1e-4 * tone(local)
+
+
+def test_a_made_seas_thinning_margin_breaks_up_into_dunes():
+    (patch,) = K.dune_relief(made_sea_product('star', 0.0), lambda s: None)
+    rows, cols = np.arange(patch['row'] + 60, patch['row'] + 160), np.arange(patch['col'] + 60, patch['col'] + 220)
+    dunes = K.relief_window([patch], rows, cols)
+    full = lambda v: np.full((100, 160), v, np.float32)                            # noqa: E731
+    lat, lon = 90.0 - (rows + 0.5) / 64.0, (cols + 0.5) / 64.0
+    sand = lambda share: dict(made_up_sand((100, 160), share, 1.0, 4), made=full(1.0), made_basalt=full(0.2))   # noqa: E731
+    whole = K.sand_cover(sand(1.0), lat, lon, 474.0, dunes)
+    assert whole.min() == 1.0                                                      # a whole sea is sand everywhere
+    assert K.sand_cover(sand(0.0), lat, lon, 474.0, dunes).max() == 0.0
+    thin = K.sand_cover(sand(0.3), lat, lon, 474.0, dunes)
+    assert abs(float(thin.mean()) - 0.3) < 0.04 and (thin < 0.05).mean() > 0.5 and (thin > 0.95).mean() > 0.15    # dunes on bare ground
+    on, off = dunes['rank'][thin > 0.95], dunes['rank'][thin < 0.05]
+    assert on.min() > off.max() - 0.2 and on.mean() > 0.8                          # and they are the highest dunes

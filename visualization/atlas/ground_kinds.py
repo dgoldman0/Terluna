@@ -56,6 +56,8 @@ Where each kind lies:
 """
 from __future__ import annotations
 
+import json
+import math
 import sys
 from pathlib import Path
 
@@ -78,6 +80,22 @@ MEASURED = dict(                         # sRGB, colour groups of NASA's Blue Ma
     soda=(204, 191, 174))                # a salt crust: Lake Eyre's and its neighbours'; soda's trona and natron are as white
 SAND_SHAPE = (2880, 5760)                # the sand product's grid: 16 cells per degree from 90 N and 0 E, today's Moon
 SAND_FIELDS = ('sand_share', 'active_share', 'form', 'crest_azimuth_deg', 'crest_spacing_m', 'drift_azimuth_deg')
+SAND_MADE = ('made_sea', 'dune_height_m', 'made_sand_part', 'made_sand_basalt')   # what a product with made seas adds (sand_seas.py)
+DUNES = dict(                            # display: the relief drawn for a made sea's dunes; the product gives form, direction, spacing and height
+    pad_cells=8,                         # product cells (15 km) kept round a sea's outline, where its fringe may carry dunes
+    star_ring=0.18,                      # star dunes: the spread of the pattern's wavelengths about the spacing, as a share of the wavenumber
+    star_floor=0.35,                     # and how far the ground between the dunes dips, against a dune's height
+    star_peak=2.4,                       # a star dune of the product's height stands where the pattern is this many of its standard deviations
+    ridge_along=(0.16, 0.11),            # transverse ridges, linear dunes: the wavenumber's spread along the pattern's own direction
+    ridge_across=(0.38, 0.10),           # and across it: wide for sinuous, broken crests, narrow for long straight ones
+    lee=0.25,                            # transverse ridges: the second harmonic that steepens the lee face, where the pixels resolve it
+    crest=0.15,                          # linear dunes: the second harmonic that sharpens the crest
+    amplitude=(0.35, 1.6),               # a dune's height against its field's mean, held between these
+    streak_km=(12.0, 2.5, 35.0),         # darker and paler sand: streaks down the drift of this length and width, on drifts of tone this broad
+    streak_parts=(0.8, 0.6),             # the streaks' and the broad drifts' parts in the pattern
+    streak=0.08,                         # how far the pattern moves the basalt's share of a made sea's sand, as its standard deviation
+    margin_soft=0.12,                    # where a made sea thins out its sand is drawn on the highest dunes first; how soft their edges are, in rank
+    tone=0.04)                           # crests are drawn paler and the ground between darker by this share, at a dune of the usual height
 KINDS = dict(
     # the rock on each side of a mare's mapped edge
     rock_cells=8.0,             # the page's iron and titanium (16 px/deg) averaged over this many cells on each side (15 km)
@@ -156,6 +174,7 @@ KINDS = dict(
     sand_white=0.1,             # guess: highland sand is the rock's least weathered soil colour with this share of N 8/
     #                             (white feldspar); the rest of its tone is glass and iron stain
     sand_rock=0.5,              # guess: basalt sand is that soil colour with this share of the page's basalt rock
+    hauled_highland=(5.0, 0.3),  # FeO and TiO2 (weight per cent) of the highland rock a made sea's pale sand is hauled from: the highlands' usual 4-6% FeO
     # loose sand
     dune_px=2.0,                # crests are drawn where their spacing is at least this many pixels
     dune_soft=0.25,             # display: how soft a crest's edge is drawn, in the cosine of the phase
@@ -383,6 +402,9 @@ def read_sand(path, log=print):
         if missing or z['sand_share'].shape != SAND_SHAPE:
             raise SystemExit(f'{path} is not the sand product: missing {missing}, sand_share {z["sand_share"].shape}')
         product = {k: z[k] for k in SAND_FIELDS}
+        if all(k in z.files for k in SAND_MADE):
+            product.update({k: z[k] for k in SAND_MADE})
+            product['seas'] = json.loads(str(z['metadata'])).get('seas', [])
     return product if float(np.nanmax(product['sand_share'])) > 0.0 else None
 
 
@@ -399,9 +421,14 @@ def sand_window(product, rows, cols):
     dunes = np.nan_to_num(np.asarray(product['crest_spacing_m'], np.float32)) > 0.0
     azimuth = np.radians(np.nan_to_num(np.asarray(product['crest_azimuth_deg'], np.float32)))
     turn = lambda f: at_fine(f(2.0 * azimuth) * dunes, rows, cols, 4)   # noqa: E731
-    return dict(share=np.clip(share, 0.0, 1.0), active=np.clip(read('active_share'), 0.0, 1.0), form=read('form', True).astype(np.uint8),
-                azimuth_deg=np.degrees(0.5 * np.arctan2(turn(np.sin), turn(np.cos))),
-                spacing_m=read('crest_spacing_m') * (at_fine(dunes.astype(np.float32), rows, cols, 4) > 0.5))
+    out = dict(share=np.clip(share, 0.0, 1.0), active=np.clip(read('active_share'), 0.0, 1.0), form=read('form', True).astype(np.uint8),
+               azimuth_deg=np.degrees(0.5 * np.arctan2(turn(np.sin), turn(np.cos))),
+               spacing_m=read('crest_spacing_m') * (at_fine(dunes.astype(np.float32), rows, cols, 4) > 0.5))
+    if 'made_sand_part' in product:                          # a made sea's sand, and the basalt's share of it by where it was hauled from
+        part = np.clip(read('made_sand_part'), 0.0, 1.0)
+        dark = at_fine(np.asarray(product['made_sand_part'], np.float32) * np.asarray(product['made_sand_basalt'], np.float32), rows, cols, 4)
+        out.update(made=part, made_basalt=np.clip(dark / np.maximum(part, 1e-4), 0.0, 1.0))
+    return out
 
 
 def crests(lat, lon, azimuth_deg, spacing_m):
@@ -432,14 +459,117 @@ def crests(lat, lon, azimuth_deg, spacing_m):
     return np.cos(np.angle(total)).astype(np.float32)
 
 
-def sand_cover(sand, lat, lon, dy):
+def dune_relief(product, log=print):
+    """The relief of each made sea's dunes on the fine grid, as slopes to add to the ground's: a list of patches, each
+    with its first fine row and column and the dunes' height's slope eastward and northward (metres a metre). The
+    product gives each sea's form, the direction of its net drift, its crest spacing and the dunes' height cell by
+    cell; where each dune stands is made up here, as texture. A field of random numbers, the same at every run for the
+    same outline, is passed through a filter that keeps the wavelengths near the spacing: every direction alike for
+    star dunes, which leaves mounds a spacing apart; a band across the drift for transverse ridges, with a steeper lee
+    face; a narrow band along it for linear dunes. Distances are measured on the ground at the sea's own latitude."""
+    if product is None or not product.get('seas') or 'made_sea' not in product:
+        return []
+    k, made = DUNES, np.asarray(product['made_sea'])
+    dy = appearance.MOON_KM * 1000.0 * np.radians(1.0 / (4 * 16))
+    patches = []
+    for sea in product['seas']:
+        cells = np.argwhere(made == sea['id'])
+        if not len(cells):
+            continue
+        (ra, ca), (rb, cb) = cells.min(axis=0), cells.max(axis=0)
+        if cb - ca > made.shape[1] // 2:
+            log(f"the sea {sea['name']} lies across 0 E: its dunes are not drawn")
+            continue
+        r0, r1 = max(ra - k['pad_cells'], 0), min(rb + k['pad_cells'] + 1, made.shape[0])
+        c0, c1 = max(ca - k['pad_cells'], 0), min(cb + k['pad_cells'] + 1, made.shape[1])
+        rows, cols = np.arange(4 * r0, 4 * r1), np.arange(4 * c0, 4 * c1)
+        height = at_fine(np.asarray(product['dune_height_m'], np.float32), rows, cols, 4)
+        if float(height.max()) <= 0.0:
+            continue
+        lat = 90.0 - (rows + 0.5) / 64.0
+        dx = dy * math.cos(math.radians(sea['centre_today'][0]))
+        spacing, towards = float(sea['crest_spacing_m']), math.radians(sea['net_towards_deg'])
+        form = 'star' if sea['form'].startswith('star') else 'linear' if sea['form'].startswith('linear') else 'transverse'
+        rng = np.random.default_rng([int(sea['id']), int(rows[0]), int(cols[0])])
+        white = np.fft.fft2(rng.standard_normal((len(rows), len(cols))))
+        k_north = -2.0 * np.pi * np.fft.fftfreq(len(rows), d=dy)[:, None]      # rows run south
+        k_east = 2.0 * np.pi * np.fft.fftfreq(len(cols), d=dx)[None, :]
+        along = k_east * math.sin(towards) + k_north * math.cos(towards)       # the wavenumber along the drift, and across it
+        across = -k_east * math.cos(towards) + k_north * math.sin(towards)
+        k0 = 2.0 * np.pi / spacing
+        if form == 'star':
+            field = np.fft.ifft2(white * np.exp(-(np.hypot(along, across) - k0) ** 2 / (2.0 * (k['star_ring'] * k0) ** 2))).real
+            field /= k['star_peak'] * field.std()                              # a dune of the usual size stands a little under 1
+            pattern = np.clip(np.where(field > 0.0, np.abs(field) ** 1.25, k['star_floor'] * field), -1.0, k['amplitude'][1] * 0.75)
+        else:
+            i = 0 if form == 'transverse' else 1
+            own, other = (along, across) if form == 'transverse' else (across, along)
+            wave = np.fft.ifft2(white * np.exp(-((own - k0) ** 2 / (2.0 * (k['ridge_along'][i] * k0) ** 2) + other ** 2 / (2.0 * (k['ridge_across'][i] * k0) ** 2))))
+            size = np.clip(np.abs(wave) / np.abs(wave).mean(), *k['amplitude'])
+            phase = np.angle(wave)                                             # it grows downwind for transverse ridges
+            if form == 'transverse':
+                pixel = math.hypot(dx * math.sin(towards), dy * math.cos(towards))
+                shape = np.cos(phase) + k['lee'] * float(np.clip((spacing / pixel - 3.0) / 3.0, 0.0, 1.0)) * np.sin(2.0 * phase)
+            else:
+                shape = np.cos(phase) + k['crest'] * np.cos(2.0 * phase)
+            pattern = 0.5 * size * shape                                       # from trough to crest, a dune of the usual size is the product's height
+        relief = (height * pattern).astype(np.float32)
+        north = -np.gradient(relief, axis=0) / dy
+        east = np.gradient(relief, axis=1) / (dy * np.cos(np.radians(lat)))[:, None]
+        long, wide, broad = (1000.0 * v for v in k['streak_km'])     # sand from different sources: streaks drawn out down the drift, on broad drifts of tone
+        smooth = lambda shape: np.fft.ifft2(np.fft.fft2(rng.standard_normal(white.shape)) * shape).real   # noqa: E731
+        streak = smooth(np.exp(-0.5 * ((along * long) ** 2 + (across * wide) ** 2)))
+        drift = smooth(np.exp(-0.5 * (along ** 2 + across ** 2) * broad ** 2))
+        streak = k['streak_parts'][0] * streak / streak.std() + k['streak_parts'][1] * drift / drift.std()
+        rank = np.empty(pattern.size, np.float32)                    # each pixel's place among the patch's, lowest ground to highest dune
+        rank[np.argsort(pattern, axis=None)] = (np.arange(pattern.size) + 0.5) / pattern.size
+        patches.append(dict(row=int(rows[0]), col=int(cols[0]), east=east.astype(np.float32), north=north.astype(np.float32), relief=relief,
+                            streak=(streak / streak.std()).astype(np.float32), grain=pattern.astype(np.float32) * (height > 0),
+                            rank=rank.reshape(pattern.shape), covered=np.ones(pattern.shape, np.float32), name=sea['name'], form=form))
+        log(f"the dunes of {sea['name']}: {form}, {spacing:.0f} m apart, up to {float(np.abs(relief).max()):.0f} m of relief on {len(rows)} x {len(cols)} pixels")
+    return patches
+
+
+def relief_window(patches, rows, cols):
+    """The made seas' dunes at a window's fine rows and columns: their slopes eastward and northward (`east`, `north`),
+    their relief against their height (`grain`), each pixel's place from the lowest ground to the highest dune (`rank`),
+    the streaks and drifts of tone (`streak`) and where a sea's patch lies (`covered`), or None where the window
+    holds none."""
+    out = None
+    for p in patches or ():
+        nr, nc = p['east'].shape
+        ra, rb = max(rows[0], p['row']), min(rows[-1] + 1, p['row'] + nr)
+        if ra >= rb:
+            continue
+        inside = (cols >= p['col']) & (cols < p['col'] + nc)
+        if not inside.any():
+            continue
+        if out is None:
+            out = {name: np.zeros((len(rows), len(cols)), np.float32) for name in ('east', 'north', 'grain', 'streak', 'rank', 'covered')}
+        take = (slice(ra - p['row'], rb - p['row']), cols[inside] - p['col'])
+        for name, field in out.items():
+            field[ra - rows[0]:rb - rows[0], inside] += p[name][take]
+    return out
+
+
+def sand_cover(sand, lat, lon, dy, dunes=None):
     """The share of each cell under loose sand as drawn: the product's share, gathered onto crests where the crests
     stand KINDS['dune_px'] pixels or more apart (crescent, transverse, linear and held dunes along one direction; star
-    dunes along two at right angles), and laid evenly elsewhere. Over a field of crests the mean stays the product's."""
+    dunes along two at right angles), and laid evenly elsewhere. Over a field of crests the mean stays the product's.
+    Where a made sea's dunes are given (relief_window) its sand lies on them: all of it where the sea is whole, and
+    on the highest dunes first where it thins out, so that its margin breaks up into dunes on bare ground."""
     share = sand['share']
+    made = None
+    if dunes is not None and sand.get('made') is not None:
+        soft = DUNES['margin_soft']
+        at = (1.0 - share) * (1.0 + soft) - 0.5 * soft               # the rank above which sand lies: under every rank where the sea is whole
+        made = (dunes['covered'] > 0.5) & (sand['made'] > 0.5)
+        on_dunes = S(at - 0.5 * soft, at + 0.5 * soft, dunes['rank'])
     drawn = (sand['spacing_m'] >= KINDS['dune_px'] * dy) & (sand['form'] >= 2)
+    if made is not None:
+        drawn &= ~made
     if not drawn.any():
-        return share
+        return share if made is None else np.where(made, on_dunes, share).astype(np.float32)
 
     def gathered(part, azimuth):
         soft = KINDS['dune_soft'] * np.clip(4.0 * part * (1.0 - part), 1e-3, 1.0)
@@ -451,11 +581,12 @@ def sand_cover(sand, lat, lon, dy):
         part = 1.0 - np.sqrt(1.0 - share)
         two = 1.0 - (1.0 - gathered(part, sand['azimuth_deg'])) * (1.0 - gathered(part, sand['azimuth_deg'] + 90.0))
         one = np.where(star, two, one)
-    return np.where(drawn, one, share).astype(np.float32)
+    out = np.where(drawn, one, share)
+    return (out if made is None else np.where(made, on_dunes, out)).astype(np.float32)
 
 
 def ground(surf, s, wet, rcv, root, own, held, deficit, least, area, cell, slope, aridity, mare, rock, soil,
-           broad=None, laden=None, mouth=None, sand=None, lat=None, lon=None, dy=None):
+           broad=None, laden=None, mouth=None, sand=None, lat=None, lon=None, dy=None, dunes=None):
     """The open ground of a window, kind by kind.
 
     surf and s are the ground's heights (s with ground_look's lean for level ground), wet the open water, rcv and
@@ -464,8 +595,8 @@ def ground(surf, s, wet, rcv, root, own, held, deficit, least, area, cell, slope
     the cells' areas and widths, slope and aridity the ground's and the climate's, mare the mare map on the fine grid,
     rock the iron and titanium on each side of its edge (rock_sides' four fields at the fine cells), soil the page's
     soil colour there, broad the place of each cell on its plain (plain_ground's field), laden the share of each cell
-    under sediment-laden river water, mouth the share of low wet ground beside a plume, and sand the sand product at
-    the fine cells (sand_window) with lat, lon and dy to lay it.
+    under sediment-laden river water, mouth the share of low wet ground beside a plume, sand the sand product at
+    the fine cells (sand_window) with lat, lon and dy to lay it, and dunes a made sea's dunes there (relief_window).
 
     Returns the hollows' planted margins and marshes as shares of each cell (`margin`), the share of each cell that is
     bare whatever its climate (`bare`: beds, pan floors, bars and moving sand) and its colour (`bare_colour`), the
@@ -510,7 +641,7 @@ def ground(surf, s, wet, rcv, root, own, held, deficit, least, area, cell, slope
     silt = np.where(wet, 0.0, np.clip(silt, 0.0, 1.0))
 
     # loose sand, from the product
-    loose = sand_cover(sand, lat, lon, dy) if sand is not None else np.zeros(aridity.shape, np.float32)
+    loose = sand_cover(sand, lat, lon, dy, dunes) if sand is not None else np.zeros(aridity.shape, np.float32)
     loose = np.where(wet, 0.0, loose)
     moving = loose * (sand['active'] if sand is not None else 0.0)
     held_sand = loose - moving
@@ -532,6 +663,15 @@ def ground(surf, s, wet, rcv, root, own, held, deficit, least, area, cell, slope
     water_sand = sand_highland * (1.0 - carried) + sand_mare * carried            # sand that storm water brought
     near = cv2.GaussianBlur(mare.astype(np.float32), (0, 0), k['sand_rock_px'])[..., None]
     wind_sand = sand_highland * (1.0 - near) + sand_mare * near                   # sand that the wind laid
+    if sand is not None and sand.get('made') is not None:                         # a made sea's sand keeps the colour of the rock it was hauled from:
+        dark, part = sand['made_basalt'][..., None], sand['made'][..., None]      # highland sand of the highlands' usual make-up, basalt sand of the rock at hand
+        if dunes is not None:                                                     # display: streaks down the drift move the basalt's share
+            dark = np.clip(dark + DUNES['streak'] * dunes['streak'][..., None], 0.0, 1.0)
+        far = appearance.soil_colour(least_weathered, np.full(aridity.shape, k['hauled_highland'][0], np.float32), np.full(aridity.shape, k['hauled_highland'][1], np.float32))
+        hauled = (1.0 - k['sand_white']) * far + k['sand_white'] * appearance.munsell_srgb(NEUTRAL_8)
+        wind_sand = wind_sand * (1.0 - part) + (hauled * (1.0 - dark) + sand_mare * dark) * part
+        if dunes is not None:                                                     # display: crests a little paler than the ground between them
+            wind_sand = wind_sand * (1.0 + DUNES['tone'] * dunes['grain'][..., None] * part)
     m3 = mare[..., None]
     fresh_here = np.where(m3, fresh_mare, fresh_highland)
     pan_colour = np.where(soda[..., None], measured('soda'), measured('pan_floor'))

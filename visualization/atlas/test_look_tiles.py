@@ -45,3 +45,18 @@ def test_decoding_undoes_the_pages_encoding():
     linear = np.linspace(0.0, 1.0, 256, dtype=np.float32)
     encoded = np.round(appearance.srgb_encode(linear) * 255).astype(np.uint8)
     assert np.abs(LT.decode(encoded) - linear).max() < 0.012
+
+
+def test_dunes_slopes_are_added_to_the_grounds_shading():
+    flat = np.zeros((4, 4, 3), np.uint8)
+    flat[...] = (128, 128, 255)                                                    # level ground
+    zero = np.zeros((4, 4), np.float16)
+    assert np.abs(LT.with_dunes(flat, zero, zero).astype(int) - flat).max() <= 1
+    east = np.full((4, 4), 0.05, np.float16)                                       # ground rising eastward by one in twenty
+    n = LT.with_dunes(flat, east, zero).astype(np.float64) / 255.0 * 2.0 - 1.0
+    tilt = n[..., 0] / n[..., 2]
+    assert np.allclose(tilt, -0.05 * LT.appearance.NORMAL_STRENGTH, atol=0.02) and np.abs(n[..., 1]).max() < 0.01
+    sloped = LT.with_dunes(LT.with_dunes(flat, east, zero), zero, east)            # slopes add: a rise to the north on top of it
+    m = sloped.astype(np.float64) / 255.0 * 2.0 - 1.0
+    assert np.allclose(m[..., 1] / m[..., 2], -0.05 * LT.appearance.NORMAL_STRENGTH, atol=0.03)
+    assert np.allclose(m[..., 0] / m[..., 2], -0.05 * LT.appearance.NORMAL_STRENGTH, atol=0.03)

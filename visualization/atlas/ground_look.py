@@ -342,7 +342,8 @@ def cover_dryness(cover):
 def look_window(tr, tc, g, size=2 * TILE, margin=MARGIN, origin=None):
     """The look of the window whose top left tile is (tr, tc), or of the piece of ground whose first fine row and
     column are `origin` (multiples of 4) and whose rows and columns are `size`: its colour (uint8 sRGB), the share of
-    each pixel under water, and the fields the colour was mixed from."""
+    each pixel under water, the slopes of a made sea's dunes where the window holds any (eastward and northward, or
+    None), and the fields the colour was mixed from."""
     import cv2
     from climate.gcm.turned import to_turned
     r0, c0 = origin if origin is not None else ((90 - FT.LAT_TOP + FT.TILE_DEG * tr) * PPD, FT.TILE_DEG * tc * PPD)
@@ -409,9 +410,10 @@ def look_window(tr, tc, g, size=2 * TILE, margin=MARGIN, origin=None):
     reach = K.KINDS['mouth_px']                            # the plume of the water within a few pixels, for the silt at a mouth
     beside = cv2.GaussianBlur(plume * wet, (0, 0), reach) / np.maximum(cv2.GaussianBlur(wet.astype(np.float32), (0, 0), reach), 0.05)
     cell = dy * np.sqrt(np.cos(np.radians(lat)))[:, None]
+    dunes = K.relief_window(g.get('dunes'), rows, cols)   # a made sea's dunes: their slopes for the shading, their grain and streaks for the colour
     kinds = K.ground(surf, s, wet, rcv, root, share * rain * area, held, deficit, LOOK['deficit_least_m'], area, cell, slope,
                      ground_aridity, mare, rock, soil, broad=broad, laden=rivers['share'] * rivers['sediment'], mouth=marsh * beside,
-                     sand=K.sand_window(g.get('sand'), rows, cols), lat=lat, lon=lon, dy=dy)
+                     sand=K.sand_window(g.get('sand'), rows, cols), lat=lat, lon=lon, dy=dy, dunes=dunes)
     on_floors = kinds['margin']
     wetted = 1.0 - (1.0 - np.clip(on_lines + on_floors, 0.0, 1.0)) * (1.0 - shore)
 
@@ -503,7 +505,7 @@ def look_window(tr, tc, g, size=2 * TILE, margin=MARGIN, origin=None):
                          floor_km2_largest=round(float(held[ends].max()) * K.KINDS['stand_ratio'] / K.KINDS['pool_evaporation_m'] / 1e6, 3)
                          if ends.any() else 0.0)
     return dict(colour=np.round(appearance.srgb_encode(np.clip(colour[inner], 0.0, 1.0)) * 255).astype(np.uint8),
-                water=under_water[inner],
+                water=under_water[inner], dunes=None if dunes is None else (dunes['east'][inner], dunes['north'][inner]),
                 plants=plants[inner].astype(np.float32), wetted=wetted[inner].astype(np.float32),
                 river=rivers['share'][inner], stats=stats,
                 kinds=dict({name: v[inner] for name, v in kinds['shares'].items()}, bare=kinds['bare'][inner],
@@ -554,6 +556,7 @@ def read_inputs(surface, moisture, cache=None, log=print, sand=None):
     g['sand'] = K.read_sand(sand, log) if sand else None
     if g['sand'] is not None:
         g['sources'][str(sand)] = FT.sha256(sand)
+    g['dunes'] = K.dune_relief(g['sand'], log)
     log(f'the mare map on the fine grid, {time.time() - started:.0f} s')
     return g
 
