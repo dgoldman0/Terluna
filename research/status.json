@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13",
+  "updated": "2026-11-21",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -2201,7 +2201,7 @@
     },
     {
       "topic": "vacuum_economy_periods",
-      "condition": "second_version; designed_whole_before_built; technology_paths_2041_2241_with_dated_arrivals_sourced_by_the_lookups_of_15_and_16_november_at_their_starting_values_and_held_after_2241; rates_of_work_plant_masses_bounds_and_water_set_asides_constructed; three_design_choices_open_carried_as_switches; growth_shape_settled_16_november; residents_grow_past_the_plan_where_resources_allow_to_2341; residents_as_a_result_by_the_funders_3pct_and_the_decade_test; eventual_crater_sites_house_growth_past_the_initial_quota; rough_time_to_exhaustion_of_sites_and_water_under_set_asides; money_in_U_conservative_and_liberal_policies_under_five_tests_U_floating_after_repayment_to_a_floor_against_a_partial_reserve_of_currencies_and_metals_holders_set_by_two_lookups; U_the_default_since_17_november_liberal_at_a_75pct_floor_with_the_funders_credit_line_dollars_alone_the_comparison; scoping_study_for_the_buildouts_prospective_partners_written_17_november; technology_groups_and_demand_brackets_run_17_november; fund_proposal_for_research_and_development_2027_2041_written_17_november; tug_fleet_turns_over_gradually_on_a_lookup_of_17_november_with_trip_lengths_lengthening_smoothly_within_each_band",
+      "condition": "closed_for_now_21_november_2026_at_this_state; second_version; designed_whole_before_built; technology_paths_2041_2241_with_dated_arrivals_sourced_by_the_lookups_of_15_and_16_november_at_their_starting_values_and_held_after_2241; rates_of_work_plant_masses_bounds_and_water_set_asides_constructed; three_design_choices_open_carried_as_switches; growth_shape_settled_16_november; residents_grow_past_the_plan_where_resources_allow_to_2341; residents_as_a_result_by_the_funders_3pct_and_the_decade_test; eventual_crater_sites_house_growth_past_the_initial_quota; rough_time_to_exhaustion_of_sites_and_water_under_set_asides; money_in_U_conservative_and_liberal_policies_under_five_tests_U_floating_after_repayment_to_a_floor_against_a_partial_reserve_of_currencies_and_metals_holders_set_by_two_lookups; U_the_default_since_17_november_liberal_at_a_75pct_floor_with_the_funders_credit_line_dollars_alone_the_comparison; scoping_study_for_the_buildouts_prospective_partners_written_17_november; technology_groups_and_demand_brackets_run_17_november; fund_proposal_for_research_and_development_2027_2041_written_17_november; tug_fleet_turns_over_gradually_on_a_lookup_of_17_november_with_trip_lengths_lengthening_smoothly_within_each_band",
       "material": [
         "studies/vacuum_economy_periods/README.md",
         "studies/vacuum_economy_periods/scoping_study.md",
@@ -2232,6 +2232,27 @@
         "Since 17 November the tug fleet turns over as fleets of heavy equipment do, on a bounded lookup of 44 sources: a new kind takes a rising share of the factories' tug building, old tugs fly on until they wear out or their legs stop closing, a fifth of those retired are sold used and the rest give spares and recycled metal. On central demand and technology chemical tugs carry the water alone to about 2210; tugs driven by solar arrays carry a quarter of the capacity in 2214, three-quarters by 2220 and all of it from 2230, when the chemical tugs are retired. With the earlier fleet, which switched all new building to a new kind at once and bought the factories' shortfall finished from Earth, slow food and life support nearly stopped growth past the plan (7.7 million by 2341) and fast local industry carried 16.6 million; with the gradual turnover and trip lengths that lengthen smoothly within each band of the source survey they carry 18.7 and 22.6 million.",
         "The fund proposal (rd_fund.md), since 18 November a short document on what is known, what remains to be learned and how the fund closes each gap, asks for 100 million dollars over 2027-2041 in three phases with decision points in 2031, 2036 and 2040, weighted toward local industry (26 million) and food and life support (20 million), with demand evidence first, and lines with buyers on Earth whatever is decided about the Moon; its budget and earnings rest on a bounded lookup of 80 sources."
       ]
+    },
+    {
+      "topic": "atlas_round",
+      "condition": "closed_for_now_21_november_2026_at_this_state; surface_redrawn_under_its_water_at_the_crusts_settled_state; drainage_with_the_works_chosen_on_the_corrected_lake_rule; design_climate_the_0_936_run_on_the_design_surface_pattern_scaled_to_300_31_K_and_stepped_onto_the_designs_own_waters_by_an_estimate; no_ocean_run_on_the_new_basin; regions_and_districts_first_draft_with_a_redraw_on_the_research_drive; names_first_draft_in_the_adopted_sounds_with_the_naming_in_the_middle_of_a_rework; heritage_review_landforms_to_keep_riparian_share_and_three_dimensional_atlas_not_begun",
+      "material": [
+        "studies/atlas_round/README.md",
+        "studies/atlas_round/districts.md",
+        "studies/atlas_round/lunar_sounds.md",
+        "studies/atlas_round/satoyama.md",
+        "studies/atlas_round/land_use.md",
+        "studies/atlas_round/sand.md",
+        "studies/atlas_round/sand_seas.md",
+        "studies/atlas_round/place_names.json",
+        "studies/atlas_round/results/districts.json",
+        "studies/atlas_round/results/region_profiles.json",
+        "../visualization/atlas/README.md"
+      ],
+      "unresolved": [
+        "What is open is listed in studies/atlas_round/README.md under 'Where the round stands (21 November 2026)' and 'What is open'. The naming samples and the map of parent cultures are on the research drive (session-tools/atlas_places/), none adopted."
+      ],
+      "next_session_task": "Resumes on the author's word."
     }
   ]
 }
