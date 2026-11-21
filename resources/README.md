@@ -300,6 +300,12 @@ is [sea_phosphorus.md](sea_phosphorus.md), with its screen [sea_phosphorus.py](s
     70–187 kt a year, 4.5–4.8% of the land's loss. For 30–50% of the land kept wild that is 21–94 kt: 0.6–5.3 million
     albatross-scale flyers, or lake insects at 11–104% of Lake Mývatn's highest emergence, feeding in the lakes.
 
+## Salt for an ocean-like south sea
+
+On 15 November 2026 the author asked to test making the South Pole–Aitken Sea an Earth-like ocean. [The salt for an ocean-like south sea](sea_salt.md) sets its chloride and sodium beside what the planned imports carry; the sea's water balance, rivers and mixing are the companion study on `domain/hydrosphere` (`research/studies/south_sea_ocean` there).
+
+25. **The south sea's chloride lies within the feed already planned for the air, if that feed is carbonaceous rock.** The sea needs 95,650 Gt of chloride and 53,300 Gt of sodium, 174,000 Gt of salt in all, one to five years of the delivery stream. Lunar ground cannot give the chloride (the chlorine of 2–19% of the Moon at soil grades), and the whole near-Earth asteroid population holds 0.05–0.07% of it. Rock like the CI chondrites, at 717 ppm of chlorine, holds it in 1.3×10²⁰ kg with 13 times the sea's sodium. The air's nitrogen sourced from such rock would carry 7.6 times the sea's chloride (1.2 times at one disputed lower grade); sourced from ice like comet 67P's, 13–93%, on measurements of that comet's gas alone. No body the project would mine has been assayed for chlorine (*screen on published grades*).
+
 ## Statements elsewhere that need correcting
 
 The evaluation ([state.md](state.md#statements-elsewhere-that-need-correcting)) lists stale or conflicting statements
@@ -328,6 +334,10 @@ in other folders, for their owners to correct. The largest:
 | [results/phosphorus.json](results/phosphorus.json) | Its product (schema `terluna.resources.phosphorus/1`) |
 | [phosphorus_sources.json](phosphorus_sources.json) | Primary scholarly sources and actual access level |
 | [industry_sources.json](industry_sources.json) | The industry study's sources and how far each was read |
+| [sea_salt.md](sea_salt.md) | The salt for an ocean-like South Pole–Aitken Sea: the need, what the planned imports carry, lunar ground and near-Earth asteroids |
+| [sea_salt.py](sea_salt.py) | Its screen: chloride and sodium by sea, the chlorine riding in each import by kind of body, the rock that holds it, the asteroid pools, the delivery |
+| [results/sea_salt.json](results/sea_salt.json) | Its product (schema `terluna.resources.sea-salt/1`) |
+| [sea_salt_sources.json](sea_salt_sources.json) | The grades with their evidence labels, and the sources with how far each was read |
 | [sea_phosphorus.md](sea_phosphorus.md) | Phosphorus from the waters: the lakes and seas, people's needs, the routes, distribution and the natural cycle |
 | [sea_phosphorus.py](sea_phosphorus.py) | Its screen: the land loss through the lakes, sea boxes, food systems, routes, carriers and ledgers |
 | [sea_phosphorus_waters.py](sea_phosphorus_waters.py) | The drainage routing rerun with lake-retention tracers, receiving waters and the seas' depths |

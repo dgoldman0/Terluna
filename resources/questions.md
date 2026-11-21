@@ -99,6 +99,7 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
    ([closed lakes and salt seas](../research/studies/sea_chemistry/README.md#closed-lakes-soda-lakes-and-salt-seas)):
    the Moon's closed lakes turn to soda, ocean-like water needs its chlorine brought, and the author leans to
    aquariums for saltwater life, with the soda lakes left as their own local ecosystems. Open: salt seas or aquariums.
+   **Taken up on 15 November** for the South Pole–Aitken Sea as an ocean: [the salt and where it comes from](sea_salt.md) here, and the sea's water balance, rivers and mixing on `domain/hydrosphere` (`research/studies/south_sea_ocean`).
 10. **A geochemical map of the Moon's rock.** Elements by region on the atlas, separating dry ground from the flooded
    high-titanium basalts and KREEP. That sets what can be mined before flooding, and where the summit's steel and the
    shield's titania come from.
@@ -135,6 +136,8 @@ air moves the Moon's own phosphorus and adds none, and the return model's high r
     chloride, about 0.5–0.6 g/kg in all with the cations that balance it, at the line between fresh and brackish
     water, and the shores' soils would gather it where plants draw. Cleaned out, it keeps the seas at 0.14 g/kg and
     yields chlorine for salt water.
+
+    **Sized on 15 November** ([the salt for an ocean-like south sea](sea_salt.md)): on comet 67P's gas, 2.8×10⁻⁴ kg of chlorine per kg of water with a range of 0.4–12×10⁻⁴, the standing water's chloride is 3.9×10¹⁵ kg, 4% of what the South Pole–Aitken Sea would need as an ocean. The figure is a lower bound on a comet nucleus, whose salts and dust are unmeasured. Whether it is cleaned out stays open.
 
     **How:** the sea chemistry with a chlorine-bearing delivery, and the chlorine's balance in the extraction plan
     (question 2).
