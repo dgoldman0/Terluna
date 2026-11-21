@@ -1,0 +1,55 @@
+{
+  "schema": "terluna.research.first-hundred-sources/1",
+  "date": "2026-11-12",
+  "evidence": "Primary-source reading scopes and project transfers. No source supplies the proposed industrial annual rates, future U prices or qualification duration.",
+  "sources": [
+    {
+      "id": "rassor2",
+      "authors": "Robert P. Mueller; Jonathan D. Smith; Jason M. Schuler; Andrew J. Nick; Nathan J. Gelino; Kurt W. Leucht; Ivan I. Townsend; Adam G. Dokos",
+      "title": "Design of an Excavation Robot: Regolith Advanced Surface Systems Operations Robot (RASSOR) 2.0",
+      "year": 2016,
+      "url": "https://ntrs.nasa.gov/api/citations/20210011366/downloads/ASCE%202016%20RASSOR%202%20Final%20%206_8_2016.pdf",
+      "reading_scope": "Primary PDF text: abstract, concept of operations pp1\u20133, selected design/testing and lessons sections pp4\u201310. Not complete figure review.",
+      "claims_supported": "66 kg prototype; Mars concept of 1,000 t/Earth-year, 100 m haul, 16 h mining/8 h charging, 35 trips/day.",
+      "limits": "Annual output is conceptual; testing is terrestrial/simulant; not lunar sustained productivity or equipment cost."
+    },
+    {
+      "id": "landing_pad_model",
+      "authors": "Philip T. Metzger; Greg W. Autry",
+      "title": "The Cost of Lunar Landing Pads with a Trade Study of Construction Methods",
+      "year": 2022,
+      "url": "https://arxiv.org/pdf/2205.00378",
+      "reading_scope": "Abstract, Table 1 pp. 5\u20136, Table A1 pp. 34\u201336, methods on grading, sintering and pavers pp. 36\u201344. Full economic argument and figures not reviewed.",
+      "claims_supported": "Explicit equipment/rate/thermal inputs and parallel-production scheduling.",
+      "limits": "Trade model, not construction demonstration. Thermal table 100\u20131120 C differs from prose 127\u20131200 C; reported microwave layer dimensions also inconsistent. Only table-based sensible-heat diagnostic used; no site/lunar production or pad dollar quote adopted."
+    },
+    {
+      "id": "nasa_mre_2026",
+      "title": "Large-Scale Demonstration of Molten Regolith Electrolysis for Oxygen Production on A Relevant Environment",
+      "url": "https://ntrs.nasa.gov/citations/20260006167",
+      "reading_scope": "Complete NTRS abstract and bibliographic record, not presentation PDF.",
+      "claims_supported": "25kg simulant,0.07kg/hourO2,9-hour vacuum experiment in late2024; current demonstrated scope.",
+      "limits": "No production-scale metal yield, sustained lunar operation or cost."
+    },
+    {
+      "id": "nasa_construction_2025",
+      "title": "NASA Enables Construction Technology for Moon and Mars Exploration",
+      "url": "https://www.nasa.gov/directorates/stmd/nasa-enables-construction-technology-for-moon-and-mars-exploration/",
+      "reading_scope": "Primary web account of robotic construction and regolith test development.",
+      "claims_supported": "Development path for local construction and gravity-dependent material tests.",
+      "limits": "No qualified300m pressure enclosure or construction rate."
+    }
+  ],
+  "project_sources": [
+    "habitation/crater_gardens/design.json",
+    "habitation/crater_gardens/buildout.json",
+    "research/studies/vacuum_crater_buildout/README.md",
+    "research/studies/world_economy/construction.md",
+    "research/studies/world_economy/development.md",
+    "research/studies/conservation/README.md",
+    "resources/industry.md",
+    "resources/phosphorus.md",
+    "provisioning/energy_options.md"
+  ],
+  "ancillary_review_sources": "Engineering review also examined terrestrial fibre, metal deposition and DOE PV comparisons. Their prices and rates are not used as study inputs. Its DOE spreadsheet download failed with HTTP503; only published tables were read. The unavailable spreadsheet remains unexamined and is excluded from this study."
+}

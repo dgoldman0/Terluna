@@ -1,0 +1,43 @@
+{
+  "schema": "terluna.resources.lunar-composition-inputs/1",
+  "archive_directory": "research/runs/source_access/inputs/lunar_prospector",
+  "expected_pixel_count": 1790,
+  "dataset_id": "LP-L-GRS-5-ELEM-ABUNDANCE-V1.0",
+  "pds4_lidvid": "urn:nasa:pds:lp_grs_derived:data:lpgrs_high1_elem_abundance_5deg::1.1",
+  "observation_dates": [
+    "1998-01-17",
+    "1998-10-07"
+  ],
+  "archive_release_date": "2012-10-24",
+  "label_revision_date": "2024-07-09",
+  "label_revision_scope": "XML schema-location correction; no numeric data revision",
+  "citation": "Prettyman, T.H. (2012), Lunar Prospector GRS Elemental Abundance, NASA Planetary Data System; numerical analysis in Prettyman et al. (2006), doi:10.1029/2005JE002656.",
+  "retrieved": "2026-11-13",
+  "files": {
+    "table": {
+      "filename": "lpgrs_high1_elem_abundance_5deg.tab",
+      "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_5deg.tab",
+      "bytes": 1575200,
+      "sha256": "4a9fd850a7b717ca5e6003e87342191cff6f6afe468acd7227a42db2a6b4cde5"
+    },
+    "label": {
+      "filename": "lpgrs_high1_elem_abundance_5deg.xml",
+      "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/data/lpgrs_high1_elem_abundance_5deg.xml",
+      "bytes": 37879,
+      "sha256": "3256aa6e0904768b5862760faab5055dd43e3de1c1b093c91e09fa4cb77fa367"
+    },
+    "catalogue_documentation": {
+      "filename": "dataset.cat",
+      "url": "https://pds-geosciences.wustl.edu/lunar/lp-l-grs-5-elem-abundance-v1/lp_9001/catalog/dataset.cat",
+      "bytes": 16259,
+      "sha256": "769ea2d58bb544dfb6fc8643c4e30a1fc6d3d82d96e5c2d9215408a86ea446b1"
+    }
+  },
+  "rights_scope": "Public mission data restored locally by URL/hash; raw archive and documentation remain ignored, with no redistribution approval inferred. Derived numeric analysis records credit and source identity.",
+  "metadata_cautions": [
+    "The XML Table_Character generic name says 2 degrees; filename, product description and spatial bounds identify the 5-degree product.",
+    "Six oxides do not sum exactly to one; original values are not normalized.",
+    "The covariance matrix uses mixed mass-fraction and ppm coordinate units.",
+    "Formal covariance omits systematic errors and does not establish independent spatial pixels."
+  ]
+}

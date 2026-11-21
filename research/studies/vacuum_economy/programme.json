@@ -1,0 +1,112 @@
+{
+  "schema": "terluna.research.vacuum-economy-programme/1",
+  "evidence": "The programme's adopted schedule and population, as planning inputs. A ramp states how many residents the plan houses in each year; whether the industry, the sources and the financing deliver them is what the study's run tests.",
+  "calendar": {
+    "year_zero": 2041,
+    "first_productive_year": 8,
+    "completion_year": 200,
+    "last_year": 220,
+    "reading_rule": "Years count from the start of the founding build. Production opens in year 8 (2049), the planned population is reached in year 200, and years 201 to 220 hold it there as a check that the finished economy sustains itself."
+  },
+  "money": {
+    "unit": "USD2041",
+    "reading_rule": "Every amount is in constant dollars of year zero. U is the general economic unit of the whole planned system beyond Earth, and the monetary account states its value against the dollar.",
+    "financing": {
+      "initial_runway_years": 5,
+      "liquidity_buffer_years": 1,
+      "retain_through_year": 200,
+      "distribution_policy": "completion_funded",
+      "cash_real_return": 0.0,
+      "external_rate": 0.03,
+      "local_U_rate": 0.025,
+      "loan_term_years": 20,
+      "supplier_U_fraction": 0.5,
+      "service_capital_local_fraction": 0.1,
+      "monetary": {
+        "initial_reserve_fraction_of_seed": 0.05,
+        "reserve_contribution_fraction": 0.2,
+        "base_reserve_years_core_imports": 1.0,
+        "U_credit_conversion_buffer_fraction": 0.25,
+        "U_credit_loss_capital_fraction": 0.15,
+        "unclassified_capital_local_fraction": 0.5,
+        "service_capital_local_fraction": 0.1,
+        "domestic_holding_days": 90.0,
+        "customer_holding_days": 7.0,
+        "settlement_initial_share": 0.25,
+        "settlement_final_share": 0.85,
+        "settlement_transition_years": 10,
+        "incremental_distribution_spending_fraction": 0.01,
+        "supply_elasticity": 1.0,
+        "annual_relative_price_limit": 0.005,
+        "cumulative_relative_price_limit": 0.05
+      },
+      "underwriting": {
+        "min_DSCR": 1.5,
+        "pledgeable_operating_cash_fraction": 0.7,
+        "max_loan_fraction_of_budget": 0.75,
+        "max_debt_fraction_of_seed": 0.25,
+        "principal_grace_years": 2,
+        "project_appraisal_years": 40,
+        "project_discount_rate": 0.03,
+        "external_benchmark_rate": 0.03
+      },
+      "capital_cost_allowance_fraction": 0.35,
+      "preopening_commercial_fixed_USD2041_year": 1137500000,
+      "preopening_commercial_payroll_USD2041_year": 137500000,
+      "hotel_staff_per_bed": 0.25,
+      "hotel_staff_USD2041_year": 250000,
+      "operating_external_keys": [
+        "operating_external_replacement_USD2041",
+        "operating_external_logistics_materials_USD2041",
+        "operating_external_services_USD2041"
+      ],
+      "resident_work_fraction": 0.6,
+      "opportunity_USD2041_worker_year": 155796.7416600765,
+      "resident_service_value_USD2041_person_year": 942717.9059875613,
+      "domestic_transaction_basket_USD2041_person_year": 942717.9059875613,
+      "monetary_basket_multiplier": 1.0
+    },
+    "financing_reading_rule": "The rules by which the run finances a case under each arrangement (equity, funded credit, credit in U): the cash held through the build, the rates and terms of loans, the reserves of the monetary system, the underwriting of credit, the allowance on capital and the costs of commerce before the opening. The horizons and discount rates are the programme's own, above and below.",
+    "financing_source": {
+      "path": "research/studies/enclosed_returns/finance_inputs.json",
+      "sha256": "6e40693196ce4c89e6c066a6187f3ecffc425a1c36818c1460dbc3c0fe74a287",
+      "taken": "The staged returns study's financing rules, unchanged, on 16 November 2026; the study reads them here and no longer reads that study."
+    }
+  },
+  "population": {
+    "opening": 12500,
+    "founding_system": 250000,
+    "planned": 6468289.238000949,
+    "planned_basis": "0.1% of the full buildout, reached at the end of the vacuum period"
+  },
+  "ramps": {
+    "constant_growth": {
+      "kind": "constant_rate",
+      "description": "One growth rate from the opening population in the first productive year to the planned population in the completion year: 3.3% a year, which passes the founding system's 250,000 residents at about year 100."
+    },
+    "front_loaded": {
+      "kind": "two_rates",
+      "founding_system_year": 33,
+      "description": "The founding system of 250,000 residents stands by year 33, at 12.7% a year from the opening population, and the settlement then grows at 2.0% a year to the planned population in the completion year."
+    },
+    "first_pass": {
+      "kind": "smooth_logarithmic",
+      "start_year": 10,
+      "description": "The schedule of the staged studies of 12 to 14 November 2026, kept so that their figures can be reproduced: the logarithm of the population follows a smooth step from year 10 to the completion year, reaching 222,240 residents in year 100."
+    },
+    "resident_led": {
+      "kind": "solved",
+      "limit": "planned",
+      "description": "The residents are a result. From the opening population in the first productive year the settlement grows, period by period, at the highest steady rate at which, with no growth after that period, the system needs no equity beyond its opening funding (with credit in U, and its surplus kept for growth), the residents' own work for themselves and their newcomers fits within the workforce, and the receipts of years 201 to 220 pay the running costs and renewals of the population reached. Growth stops at the planned population. residents.py finds the schedule, and its product holds it."
+    },
+    "resident_led_beyond_plan": {
+      "kind": "solved",
+      "limit": null,
+      "description": "The same rule without the stop at the planned population: the settlement grows as its production and financing allow to the completion year and holds its population after it. It reads what the system carries beyond the plan."
+    }
+  },
+  "horizons": [100, 200, 220],
+  "discount_rates": [0.0, 0.01, 0.03, 0.07],
+  "reporting_periods": [[0, 7], [8, 25], [26, 50], [51, 100], [101, 150], [151, 200], [201, 220]],
+  "reporting_periods_reading_rule": "The years each period account sums: the founding build, then periods that lengthen as the programme matures, ending with the twenty years that hold the planned population."
+}

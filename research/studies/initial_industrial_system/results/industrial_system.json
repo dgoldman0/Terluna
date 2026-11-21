@@ -1,0 +1,1883 @@
+{
+  "schema": "terluna.research.initial-industrial-system/1",
+  "date": "2026-11-12",
+  "evidence": "Scenario engineering and procurement arithmetic; not an empirical forecast, flight design, reserve certification or settlement site approval.",
+  "inputs": {
+    "settlement": {
+      "path": "research/studies/lava_tube_cities/results/buildout.json",
+      "sha256": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de",
+      "schema": "terluna.research.lava-tube-buildout/1"
+    },
+    "settlement_inputs": {
+      "path": "research/studies/lava_tube_cities/buildout_inputs.json",
+      "sha256": "dbe184ee7fba99bb0cb9b6e0251ffe11685e87a0b0afb0dbb7390dda8128da91",
+      "schema": "terluna.research.lava-tube-buildout-inputs/1"
+    },
+    "towns": {
+      "path": "research/studies/vacuum_crater_buildout/results/first_hundred.json",
+      "sha256": "7d9c3f01c130f5dc1fb9a74e31a72cac9920f5c6ba6e50cc8f97224924bd9086",
+      "schema": "terluna.research.first-hundred-crater-communities/1"
+    },
+    "town_inputs": {
+      "path": "research/studies/vacuum_crater_buildout/first_hundred_inputs.json",
+      "sha256": "335b0f584986e45942aa350a5a88cc35a413788852f031a288c81033d8155bd4",
+      "schema": "terluna.research.first-hundred-inputs/1"
+    },
+    "constants": {
+      "path": "shared/constants.json",
+      "sha256": "40e0efed795ed079810c8fcda113f01f14e554b35c2a10282e1817daffafdd72",
+      "schema": "terluna.shared.constants/1"
+    }
+  },
+  "producer": {
+    "path": "research/studies/initial_industrial_system/run.py",
+    "sha256": "43c9531a8196cd420940c2ee52d84b32fc6c5a25de69b1ce72ad954649aa7500",
+    "configuration": {
+      "path": "research/studies/initial_industrial_system/industrial_inputs.json",
+      "sha256": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade"
+    },
+    "sources": {
+      "path": "research/studies/initial_industrial_system/industrial_sources.json",
+      "sha256": "8b469e12e34d8a577ab8244fb216bf725e6d04ce7b68d3ffebaa71b8118010b0"
+    }
+  },
+  "cases": {
+    "lower": {
+      "demand": {
+        "population": 250000,
+        "bulk": 47895887471.53333,
+        "metal": 6856959102.438558,
+        "loose_and_grading": 52017777777.77777,
+        "pressure": 1838666377.7653446,
+        "earth_special": 4089691497.6543164,
+        "water": 4051179962.2222223,
+        "air": 906392037.8434104,
+        "roads": 22680000000.0,
+        "renewal_bulk": 882198593.3941667,
+        "renewal_metal": 137139182.04877114,
+        "yearly_water": 846554404.9710002,
+        "yearly_air": 8239927.616758276,
+        "yearly_earth": 155824104.87009352,
+        "yearly_pressure": 51315756.50062361,
+        "goods_virgin": 9999999.999999998,
+        "occupied_W": 9589590477.001022,
+        "occupied_mean_W": 6302786128.321851,
+        "old_construction_W": 2000000000.0,
+        "old_total_W": 11589590477.001022,
+        "old_radiator_m2": 47873821.18969137,
+        "reserve_Wh": 104999999999.99998,
+        "power_hardware_kg_W": 0.02,
+        "radiator_controls_kg_m2": 1,
+        "radiator_metal_kg_m2": 10,
+        "U_pressure_kg": 60,
+        "U_volatile_kg": 1,
+        "U_other_freight_kg": 10
+      },
+      "assets": {
+        "excavators": {
+          "mass_kg": 780000,
+          "manufacture_USD2026": 195000000,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "haulers": {
+          "mass_kg": 11625000,
+          "manufacture_USD2026": 2906250000,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "bulk_trains": {
+          "mass_kg": 12000000,
+          "manufacture_USD2026": 3000000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "metal_trains": {
+          "mass_kg": 44500000,
+          "manufacture_USD2026": 11125000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "fabrication_cells": {
+          "mass_kg": 8900000,
+          "manufacture_USD2026": 2225000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "construction_and_service_robots": {
+          "mass_kg": 150000000.0,
+          "manufacture_USD2026": 37500000000.0,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "source_mine_trains": {
+          "mass_kg": 97500000,
+          "manufacture_USD2026": 48750000000,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_metal_trains": {
+          "mass_kg": 0,
+          "manufacture_USD2026": 0,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_fabrication_cells": {
+          "mass_kg": 0,
+          "manufacture_USD2026": 0,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_chemistry": {
+          "mass_kg": 7519024.618097529,
+          "manufacture_USD2026": 5639268463.573147,
+          "life_years": 10,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_chemistry": {
+          "mass_kg": 3776033.974552691,
+          "manufacture_USD2026": 2832025480.9145184,
+          "life_years": 10,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "additional_ground_receivers": {
+          "mass_kg": 14020780.058796024,
+          "manufacture_USD2026": 701039002.9398012,
+          "life_years": 20,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "additional_ground_radiator_controls": {
+          "mass_kg": 2895824.1398037802,
+          "manufacture_USD2026": 115832965.59215121,
+          "life_years": 30,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "lunar_beam_constellation": {
+          "mass_kg": 706033403.0296887,
+          "manufacture_USD2026": 211810020908.90662,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "power"
+        },
+        "source_solar": {
+          "mass_kg": 22114778.288522143,
+          "manufacture_USD2026": 6634433486.556643,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_solar": {
+          "mass_kg": 11105982.27809615,
+          "manufacture_USD2026": 3331794683.4288454,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "source_radiators": {
+          "mass_kg": 15969644.882199056,
+          "manufacture_USD2026": 3992411220.549764,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_radiators": {
+          "mass_kg": 3496321.712689924,
+          "manufacture_USD2026": 874080428.1724811,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "lunar_landers": {
+          "mass_kg": 15600000.0,
+          "manufacture_USD2026": 9360000000.0,
+          "life_years": 10,
+          "destination": "depot",
+          "group": "landing",
+          "import_fraction": 1
+        },
+        "asteroid_tugs": {
+          "mass_kg": 814400000.0,
+          "manufacture_USD2026": 488640000000.0,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source",
+          "import_fraction": 1
+        },
+        "Earth_transfer_tugs": {
+          "mass_kg": 11200000.0,
+          "manufacture_USD2026": 6720000000.0,
+          "life_years": 20,
+          "destination": "leo",
+          "group": "earth_transfer",
+          "import_fraction": 1
+        },
+        "depots_and_orbital_workshops": {
+          "mass_kg": 67640248.79695892,
+          "manufacture_USD2026": 40584149278.175354,
+          "life_years": 25,
+          "destination": "depot",
+          "group": "landing"
+        }
+      },
+      "peak_flows": {
+        "bulk_kg_year": 3363468468.2828956,
+        "metal_kg_year": 499144726.3624637,
+        "raw_lunar_kg_year": 6426458596.063667,
+        "handling_kg_year": 9027347484.952557,
+        "additional_bulk_stock_kg": 1223608020.992999,
+        "additional_metal_stock_kg": 273679845.5966376,
+        "earth_surface_kg_year": 393942826.43700594,
+        "earth_deep_kg_year": 572751720.6367494,
+        "moon_payload_kg_year": 1496615759.0280461,
+        "moon_water_kg_year": 1049113403.0821114,
+        "moon_air_kg_year": 53559529.50892879,
+        "lunar_propellant_kg_year": 2154273485.5828543,
+        "depot_water_for_propellant_kg_year": 2166592177.369908,
+        "depot_excess_oxygen_kg_year": 0.0,
+        "depot_hydrogen_kg_year": 240732464.152212,
+        "depot_oxygen_to_fuel_kg_year": 1913541021.4306424,
+        "depot_effective_O_to_H": 7.948828290233158,
+        "nea_payload_kg_year": 3256946418.1738944,
+        "nea_return_hardware_kg_year": 97751296.00978675,
+        "nea_propellant_kg_year": 2104169781.0376902,
+        "source_water_kg_year": 5319875361.48971,
+        "source_nitrogen_kg_year": 41240837.72187517,
+        "source_ore_kg_year": 44332294679.08092,
+        "source_ore_water_bound_kg_year": 44332294679.08092,
+        "source_ore_nitrogen_bound_kg_year": 28639470640.191093,
+        "source_retained_tails_kg_year": 38971178479.86933,
+        "source_metal_kg_year": 0.0,
+        "source_virgin_metal_kg_year": 0.0,
+        "source_ore_metal_bound_kg_year": 0.0,
+        "local_mean_W": 1728664961.8815327,
+        "source_mean_W": 3007609847.239027,
+        "depot_mean_W": 1510413589.8210883,
+        "source_heat_W": 1956778486.5159686,
+        "depot_heat_W": 428408218.20379966,
+        "earth_transfer_propellant_kg_year": 1076879239.89645,
+        "LEO_kg_year": 1650750960.5331993,
+        "payload_destination_kg_year": {
+          "surface": 33634146.68419659,
+          "depot": 81057598.1899567,
+          "source": 97751296.00978675,
+          "leo": 1120000.0
+        },
+        "earth_round_trip": {
+          "outbound": 1.6888477406179032,
+          "returning": 0.13657466750659417,
+          "total": 1.8254224081244974,
+          "mass_ratio": 2.3657466750659415
+        },
+        "lander_round_trip": {
+          "outbound": 1.2202927315324472,
+          "returning": 0.17721203432942897,
+          "total": 1.3975047658618762,
+          "mass_ratio": 1.8860601716471448
+        },
+        "nea_round_trip": {
+          "outbound": 0.5718321910389874,
+          "returning": 0.05540664567060403,
+          "total": 0.6272388367095915,
+          "mass_ratio": 1.5036364664760675
+        }
+      },
+      "steady_flows": {
+        "bulk_kg_year": 907493693.6565793,
+        "metal_kg_year": 142612778.9607039,
+        "raw_lunar_kg_year": 132278261.35016201,
+        "handling_kg_year": 132278261.35016201,
+        "additional_bulk_stock_kg": 1223608020.992999,
+        "additional_metal_stock_kg": 273679845.5966376,
+        "earth_surface_kg_year": 177222171.3443601,
+        "earth_deep_kg_year": 267773293.66506332,
+        "moon_payload_kg_year": 1032016503.9321185,
+        "moon_water_kg_year": 846554404.9710002,
+        "moon_air_kg_year": 8239927.616758276,
+        "lunar_propellant_kg_year": 1485515422.1740448,
+        "depot_water_for_propellant_kg_year": 1487410605.5258992,
+        "depot_excess_oxygen_kg_year": 0.0,
+        "depot_hydrogen_kg_year": 165267845.05843323,
+        "depot_oxygen_to_fuel_kg_year": 1320247577.1156116,
+        "depot_effective_O_to_H": 7.9885326552713005,
+        "nea_payload_kg_year": 2340309754.761803,
+        "nea_return_hardware_kg_year": 49876123.620345816,
+        "nea_propellant_kg_year": 1496087148.386587,
+        "source_water_kg_year": 3830052158.8834867,
+        "source_nitrogen_kg_year": 6344744.264903872,
+        "source_ore_kg_year": 31917101324.029057,
+        "source_ore_water_bound_kg_year": 31917101324.029057,
+        "source_ore_nitrogen_bound_kg_year": 4406072406.183245,
+        "source_retained_tails_kg_year": 28080704420.880665,
+        "source_metal_kg_year": 0.0,
+        "source_virgin_metal_kg_year": 0.0,
+        "source_ore_metal_bound_kg_year": 0.0,
+        "local_mean_W": 480873068.42040324,
+        "source_mean_W": 2138901313.510044,
+        "depot_mean_W": 1036930353.4352984,
+        "source_heat_W": 1391749012.3663385,
+        "depot_heat_W": 294111154.7925575,
+        "earth_transfer_propellant_kg_year": 503463351.6701134,
+        "LEO_kg_year": 771796645.3351767,
+        "payload_destination_kg_year": {
+          "surface": 21398066.474266592,
+          "depot": 40674998.70035737,
+          "source": 49876123.620345816,
+          "leo": 560000.0
+        },
+        "earth_round_trip": {
+          "outbound": 1.6888477406179032,
+          "returning": 0.13657466750659417,
+          "total": 1.8254224081244974,
+          "mass_ratio": 2.3657466750659415
+        },
+        "lander_round_trip": {
+          "outbound": 1.2202927315324472,
+          "returning": 0.17721203432942897,
+          "total": 1.3975047658618762,
+          "mass_ratio": 1.8860601716471448
+        },
+        "nea_round_trip": {
+          "outbound": 0.5696250807604211,
+          "returning": 0.051024297636893305,
+          "total": 0.6206493783973144,
+          "mass_ratio": 1.5036364664760675
+        }
+      },
+      "engineering": {
+        "counts": {
+          "excavators": 26,
+          "haulers": 155,
+          "bulk_trains": 60,
+          "metal_trains": 89,
+          "fabrication_cells": 178,
+          "source_mine_trains": 390,
+          "source_metal_trains": 0,
+          "source_fabrication_cells": 0,
+          "lunar_landers": 780,
+          "asteroid_tugs": 1018,
+          "Earth_transfer_tugs": 560
+        },
+        "local_industry_firm_W": 2701039002.939801,
+        "total_ground_firm_W": 12290629479.940823,
+        "added_ground_firm_W": 701039002.9398012,
+        "added_ground_radiator_m2": 2895824.1398037802,
+        "beam_PV_nameplate_W": 141206680605.93774,
+        "beam_PV_area_m2": 324225478.9813045,
+        "process_radiator_flux_W_m2": 765.8195051260687,
+        "beam_converter_radiator_m2": 31345683.339650247,
+        "source_process_radiator_m2": 3193928.9764398113,
+        "depot_process_radiator_m2": 699264.3425379848,
+        "orbital_period_hours": 31.696633004256498,
+        "minimum_geometric_sources_visible": 4,
+        "sources_after_one_failure_and_one_lunar_eclipse": 2,
+        "far_range_m": 13474800.0,
+        "first_null_radius_m": 1676.314613582057,
+        "receiver_active_area_m2": 61453147.39970411,
+        "full_occupied_load_reserve_hours": 9.995579529012842,
+        "launch_flights_year": 16508,
+        "launch_pads": 83,
+        "chemical_exhaust_kg_year": 5335322506.516994,
+        "Earth_launcher_propellant_kg_year": 82537548026.65997,
+        "Earth_launcher_methane_kg_year": 17942945223.18695,
+        "Earth_gross_launcher_CO2_kg_year": 49343099363.764114,
+        "Earth_synthetic_fuel_mean_W": 61406383378.46321
+      },
+      "cost": {
+        "inflation_factor": 1.557967416600765,
+        "installed_assets_USD2026": {
+          "excavators": 311726851.2224227,
+          "haulers": 4645929032.641877,
+          "bulk_trains": 4795797711.114196,
+          "metal_trains": 17784416512.048477,
+          "fabrication_cells": 3556883302.409695,
+          "construction_and_service_robots": 59947471388.927444,
+          "source_mine_trains": 63340856402.80284,
+          "source_metal_trains": 0.0,
+          "source_fabrication_cells": 0.0,
+          "source_chemistry": 6764489063.48905,
+          "depot_chemistry": 3397108244.963782,
+          "additional_ground_receivers": 2799246064.408256,
+          "additional_ground_radiator_controls": 549192495.7628897,
+          "lunar_beam_constellation": 317467785003.1467,
+          "source_solar": 9943905839.250473,
+          "depot_solar": 4993802812.985502,
+          "source_radiators": 6382265531.113064,
+          "depot_radiators": 1397304305.5864334,
+          "lunar_landers": 11694537024.448454,
+          "asteroid_tugs": 610514804660.9501,
+          "Earth_transfer_tugs": 7280000000.0,
+          "depots_and_orbital_workshops": 50706499608.90649
+        },
+        "groups_USD2041": {
+          "lunar": 147057577943.9297,
+          "source": 1085819660013.0306,
+          "landing": 112468502439.93736,
+          "earth_transfer": 11342002792.853569,
+          "power": 494604464855.31964
+        },
+        "preservation_USD2041": 92564610402.25356,
+        "research_USD2041": 77898370830.03825,
+        "seed_water_kg": 63760450.12443885,
+        "seed_USD2041": 15163728881.688599,
+        "capital_direct_USD2041": 2036918918159.0513,
+        "capital_with_contingency_USD2041": 2444302701790.8613,
+        "initial_stock_manufacture_USD2041": 348964253501.9965,
+        "initial_stock_Earth_freight_USD2041": 953509637136.9093,
+        "initial_stock_restoration_USD2041": 5883676725.415763,
+        "campaign_supplier_operation_and_renewal_USD2041": 3339567511571.8047,
+        "construction_period_settlement_makeup_USD2041": 675041022597.3134,
+        "construction_occupied_equivalent_years": 13.25,
+        "industrial_and_initial_material_campaign_USD2041": 8831862023630.988,
+        "annual_supplier_operation_USD2041": 50956207450.92908,
+        "annual_supplier_renewal_USD2041": 100842315802.33478,
+        "annual_settlement_import_manufacture_USD2041": 14609993411.765402,
+        "annual_settlement_import_freight_USD2041": 36330316303.0967,
+        "annual_local_restoration_USD2041": 6182556.633244582,
+        "annual_supply_direct_USD2041": 202745015524.75922,
+        "annual_supply_with_contingency_USD2041": 243294018629.71103,
+        "tariffs_USD2041_kg": {
+          "Earth_to_Moon_freight": 291.82395460291343,
+          "pooled_volatile_delivery": 90.5336314106599,
+          "pressure_manufactured_and_delivered": 338.5629771009364
+        },
+        "U_calibration": {
+          "basket_U": 137787805864.87604,
+          "basket_USD2041": 1728234411293.8772,
+          "USD2041_per_U": 12.542723940235318,
+          "component_USD2041_per_U": {
+            "pressure": 5.642716285015607,
+            "volatiles": 90.5336314106599,
+            "freight": 29.182395460291342
+          },
+          "scope": "Proposed procurement-basket calibration only. Pressure systems, air/water, and incremental freight for other site imports at inherited 60, 1 and 10 U/kg; no general U exchange rate or blanket conversion of prior settlement capital."
+        }
+      },
+      "convergence": {
+        "iterations": 8,
+        "relative_mass_residual": 7.226315687682089e-12
+      },
+      "schedule": {
+        "start_year": 2041,
+        "first_source_capacity_year": 2049,
+        "full_rate_year": 2054,
+        "conditional_completion_year": 2073.5,
+        "elapsed_years": 32.5
+      },
+      "resource_reservation": {
+        "source_campaign_upper_kg": 886645893581.6184,
+        "source_campaign_plus_200year_kg": 7270066158387.43,
+        "equivalent_spherical_body_diameter_m": 2099.6625100658794,
+        "rule": "An equivalent volume, not a target body, mineable fraction or permission. Campaign envelope includes full steady replenishment throughout delivery; no permitted extractable fraction is assumed."
+      }
+    },
+    "reference": {
+      "demand": {
+        "population": 250000,
+        "bulk": 47895887471.53333,
+        "metal": 6856959102.438558,
+        "loose_and_grading": 52017777777.77777,
+        "pressure": 1838666377.7653446,
+        "earth_special": 4089691497.6543164,
+        "water": 4051179962.2222223,
+        "air": 906392037.8434104,
+        "roads": 22680000000.0,
+        "renewal_bulk": 882198593.3941667,
+        "renewal_metal": 137139182.04877114,
+        "yearly_water": 846554404.9710002,
+        "yearly_air": 8239927.616758276,
+        "yearly_earth": 155824104.87009352,
+        "yearly_pressure": 51315756.50062361,
+        "goods_virgin": 9999999.999999998,
+        "occupied_W": 9589590477.001022,
+        "occupied_mean_W": 6302786128.321851,
+        "old_construction_W": 2000000000.0,
+        "old_total_W": 11589590477.001022,
+        "old_radiator_m2": 47873821.18969137,
+        "reserve_Wh": 104999999999.99998,
+        "power_hardware_kg_W": 0.02,
+        "radiator_controls_kg_m2": 1,
+        "radiator_metal_kg_m2": 10,
+        "U_pressure_kg": 60,
+        "U_volatile_kg": 1,
+        "U_other_freight_kg": 10
+      },
+      "assets": {
+        "excavators": {
+          "mass_kg": 780000,
+          "manufacture_USD2026": 390000000,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "haulers": {
+          "mass_kg": 11700000,
+          "manufacture_USD2026": 5850000000,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "bulk_trains": {
+          "mass_kg": 12200000,
+          "manufacture_USD2026": 6100000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "metal_trains": {
+          "mass_kg": 45500000,
+          "manufacture_USD2026": 22750000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "fabrication_cells": {
+          "mass_kg": 9050000,
+          "manufacture_USD2026": 4525000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "construction_and_service_robots": {
+          "mass_kg": 150000000.0,
+          "manufacture_USD2026": 75000000000.0,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "source_mine_trains": {
+          "mass_kg": 288500000,
+          "manufacture_USD2026": 288500000000,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_metal_trains": {
+          "mass_kg": 0,
+          "manufacture_USD2026": 0,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_fabrication_cells": {
+          "mass_kg": 0,
+          "manufacture_USD2026": 0,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_chemistry": {
+          "mass_kg": 29036108.37045365,
+          "manufacture_USD2026": 21777081277.840237,
+          "life_years": 10,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_chemistry": {
+          "mass_kg": 6555301.302382521,
+          "manufacture_USD2026": 4916475976.786891,
+          "life_years": 10,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "additional_ground_receivers": {
+          "mass_kg": 41572384.041131556,
+          "manufacture_USD2026": 2078619202.0565777,
+          "life_years": 20,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "additional_ground_radiator_controls": {
+          "mass_kg": 8586277.849781767,
+          "manufacture_USD2026": 343451113.99127066,
+          "life_years": 30,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "lunar_beam_constellation": {
+          "mass_kg": 1570336589.965257,
+          "manufacture_USD2026": 471100976989.5771,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "power"
+        },
+        "source_solar": {
+          "mass_kg": 244000910.6760811,
+          "manufacture_USD2026": 73200273202.82433,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_solar": {
+          "mass_kg": 38560595.89636777,
+          "manufacture_USD2026": 11568178768.910332,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "source_radiators": {
+          "mass_kg": 74535566.74126187,
+          "manufacture_USD2026": 37267783370.630936,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_radiators": {
+          "mass_kg": 8428161.557536421,
+          "manufacture_USD2026": 4214080778.768211,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "lunar_landers": {
+          "mass_kg": 31280000.0,
+          "manufacture_USD2026": 46920000000.0,
+          "life_years": 10,
+          "destination": "depot",
+          "group": "landing",
+          "import_fraction": 1
+        },
+        "asteroid_tugs": {
+          "mass_kg": 2003000000.0,
+          "manufacture_USD2026": 3004500000000.0,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source",
+          "import_fraction": 1
+        },
+        "Earth_transfer_tugs": {
+          "mass_kg": 16480000.0,
+          "manufacture_USD2026": 24720000000.0,
+          "life_years": 20,
+          "destination": "leo",
+          "group": "earth_transfer",
+          "import_fraction": 1
+        },
+        "depots_and_orbital_workshops": {
+          "mass_kg": 93040666.0473527,
+          "manufacture_USD2026": 139560999071.02905,
+          "life_years": 25,
+          "destination": "depot",
+          "group": "landing"
+        }
+      },
+      "peak_flows": {
+        "bulk_kg_year": 3374301923.8117437,
+        "metal_kg_year": 505554737.9979102,
+        "raw_lunar_kg_year": 6482910219.383598,
+        "handling_kg_year": 9083799108.272488,
+        "additional_bulk_stock_kg": 1396943309.4545665,
+        "additional_metal_stock_kg": 365251440.388731,
+        "earth_surface_kg_year": 397340941.311071,
+        "earth_deep_kg_year": 843289828.5232419,
+        "moon_payload_kg_year": 1500013873.902111,
+        "moon_water_kg_year": 1049113403.0821114,
+        "moon_air_kg_year": 53559529.50892879,
+        "lunar_propellant_kg_year": 3170290175.598656,
+        "depot_water_for_propellant_kg_year": 3182608867.38571,
+        "depot_excess_oxygen_kg_year": 0.0,
+        "depot_hydrogen_kg_year": 353623207.4873011,
+        "depot_oxygen_to_fuel_kg_year": 2816666968.111355,
+        "depot_effective_O_to_H": 7.965164357072078,
+        "nea_payload_kg_year": 4272963108.1896963,
+        "nea_return_hardware_kg_year": 270167397.33063567,
+        "nea_propellant_kg_year": 4968953998.8809,
+        "source_water_kg_year": 9200676269.34872,
+        "source_nitrogen_kg_year": 41240837.72187517,
+        "source_ore_kg_year": 131438232419.26746,
+        "source_ore_water_bound_kg_year": 131438232419.26746,
+        "source_ore_nitrogen_bound_kg_year": 28639470640.191093,
+        "source_retained_tails_kg_year": 122196315312.19685,
+        "source_metal_kg_year": 0.0,
+        "source_virgin_metal_kg_year": 0.0,
+        "source_ore_metal_bound_kg_year": 0.0,
+        "local_mean_W": 2610316289.3164787,
+        "source_mean_W": 11614443348.181692,
+        "depot_mean_W": 2622120520.9530654,
+        "source_heat_W": 9132926533.773659,
+        "depot_heat_W": 1032712082.098438,
+        "earth_transfer_propellant_kg_year": 1710051945.1630747,
+        "LEO_kg_year": 2554989773.6863165,
+        "payload_destination_kg_year": {
+          "surface": 37032261.55826164,
+          "depot": 175781489.88153523,
+          "source": 270167397.33063567,
+          "leo": 1648000.0
+        },
+        "earth_round_trip": {
+          "outbound": 1.8225290681835453,
+          "returning": 0.14624198869240465,
+          "total": 1.96877105687595,
+          "mass_ratio": 2.4624198869240463
+        },
+        "lander_round_trip": {
+          "outbound": 1.6749289959476017,
+          "returning": 0.3770197762246712,
+          "total": 2.051948772172273,
+          "mass_ratio": 1.9425494405616779
+        },
+        "nea_round_trip": {
+          "outbound": 0.9969365228591811,
+          "returning": 0.1320756078875713,
+          "total": 1.1290121307467524,
+          "mass_ratio": 1.8091520654064868
+        }
+      },
+      "steady_flows": {
+        "bulk_kg_year": 909660384.7623488,
+        "metal_kg_year": 144444210.85654578,
+        "raw_lunar_kg_year": 133314349.02618125,
+        "handling_kg_year": 133314349.02618125,
+        "additional_bulk_stock_kg": 1396943309.4545665,
+        "additional_metal_stock_kg": 365251440.388731,
+        "earth_surface_kg_year": 178886933.3338095,
+        "earth_deep_kg_year": 405472125.5181458,
+        "moon_payload_kg_year": 1033681265.9215679,
+        "moon_water_kg_year": 846554404.9710002,
+        "moon_air_kg_year": 8239927.616758276,
+        "lunar_propellant_kg_year": 2184692834.5579996,
+        "depot_water_for_propellant_kg_year": 2186588017.909854,
+        "depot_excess_oxygen_kg_year": 0.0,
+        "depot_hydrogen_kg_year": 242954224.212206,
+        "depot_oxygen_to_fuel_kg_year": 1941738610.3457937,
+        "depot_effective_O_to_H": 7.992199422101017,
+        "nea_payload_kg_year": 3039487167.145758,
+        "nea_return_hardware_kg_year": 138213768.04124585,
+        "nea_propellant_kg_year": 3453199099.1802998,
+        "source_water_kg_year": 6486341522.061153,
+        "source_nitrogen_kg_year": 6344744.264903872,
+        "source_ore_kg_year": 92662021743.73077,
+        "source_ore_water_bound_kg_year": 92662021743.73077,
+        "source_ore_nitrogen_bound_kg_year": 4406072406.183245,
+        "source_retained_tails_kg_year": 86169335477.40471,
+        "source_metal_kg_year": 0.0,
+        "source_virgin_metal_kg_year": 0.0,
+        "source_ore_metal_bound_kg_year": 0.0,
+        "local_mean_W": 732590639.4368634,
+        "source_mean_W": 8133984241.9629965,
+        "depot_mean_W": 1801508621.240405,
+        "source_heat_W": 6409441887.567176,
+        "depot_heat_W": 709517241.5962211,
+        "earth_transfer_propellant_kg_year": 822230238.6428007,
+        "LEO_kg_year": 1228526364.1609464,
+        "payload_destination_kg_year": {
+          "surface": 23062828.46371597,
+          "depot": 88371424.14309043,
+          "source": 138213768.04124585,
+          "leo": 824000.0
+        },
+        "earth_round_trip": {
+          "outbound": 1.8225290681835453,
+          "returning": 0.14624198869240465,
+          "total": 1.96877105687595,
+          "mass_ratio": 2.4624198869240463
+        },
+        "lander_round_trip": {
+          "outbound": 1.6749289959476017,
+          "returning": 0.3770197762246712,
+          "total": 2.051948772172273,
+          "mass_ratio": 1.9425494405616779
+        },
+        "nea_round_trip": {
+          "outbound": 0.9853122030674503,
+          "returning": 0.1177095569452293,
+          "total": 1.1030217600126795,
+          "mass_ratio": 1.8091520654064868
+        }
+      },
+      "engineering": {
+        "counts": {
+          "excavators": 26,
+          "haulers": 156,
+          "bulk_trains": 61,
+          "metal_trains": 91,
+          "fabrication_cells": 181,
+          "source_mine_trains": 1154,
+          "source_metal_trains": 0,
+          "source_fabrication_cells": 0,
+          "lunar_landers": 782,
+          "asteroid_tugs": 2003,
+          "Earth_transfer_tugs": 824
+        },
+        "local_industry_firm_W": 4078619202.0565777,
+        "total_ground_firm_W": 13668209679.0576,
+        "added_ground_firm_W": 2078619202.0565777,
+        "added_ground_radiator_m2": 8586277.849781767,
+        "beam_PV_nameplate_W": 157033658996.5257,
+        "beam_PV_area_m2": 360565895.9325076,
+        "process_radiator_flux_W_m2": 765.8195051260687,
+        "beam_converter_radiator_m2": 34859025.98552217,
+        "source_process_radiator_m2": 14907113.348252373,
+        "depot_process_radiator_m2": 1685632.3115072842,
+        "orbital_period_hours": 31.696633004256498,
+        "minimum_geometric_sources_visible": 4,
+        "sources_after_one_failure_and_one_lunar_eclipse": 2,
+        "far_range_m": 13474800.0,
+        "first_null_radius_m": 1676.314613582057,
+        "receiver_active_area_m2": 68341048.395288,
+        "full_occupied_load_reserve_hours": 9.995579529012842,
+        "launch_flights_year": 25550,
+        "launch_pads": 128,
+        "chemical_exhaust_kg_year": 9849296119.642632,
+        "Earth_launcher_propellant_kg_year": 127749488684.31583,
+        "Earth_launcher_methane_kg_year": 27771627974.85127,
+        "Earth_gross_launcher_CO2_kg_year": 76371976930.84099,
+        "Earth_synthetic_fuel_mean_W": 95043216888.60805
+      },
+      "cost": {
+        "inflation_factor": 1.557967416600765,
+        "installed_assets_USD2026": {
+          "excavators": 867087265.42011,
+          "haulers": 13006308981.301651,
+          "bulk_trains": 13562134151.442747,
+          "metal_trains": 50580090482.83975,
+          "fabrication_cells": 10060435579.55384,
+          "construction_and_service_robots": 166747551042.32886,
+          "source_mine_trains": 464961123171.4125,
+          "source_metal_trains": 0.0,
+          "source_fabrication_cells": 0.0,
+          "source_chemistry": 39537026843.09882,
+          "depot_chemistry": 8926028249.041458,
+          "additional_ground_receivers": 27506382047.156677,
+          "additional_ground_radiator_controls": 5595250882.5677395,
+          "lunar_beam_constellation": 1431597886599.404,
+          "source_solar": 222443513247.01416,
+          "depot_solar": 35153780370.40779,
+          "source_radiators": 82857488131.04982,
+          "depot_radiators": 9369168663.388655,
+          "lunar_landers": 66052422644.02698,
+          "asteroid_tugs": 4229635631585.2314,
+          "Earth_transfer_tugs": 28016000000.0,
+          "depots_and_orbital_workshops": 196469354118.97415
+        },
+        "groups_USD2041": {
+          "lunar": 448578143010.9497,
+          "source": 7851275189963.971,
+          "landing": 492272139402.1916,
+          "earth_transfer": 43648015143.48704,
+          "power": 2230382860996.3887
+        },
+        "preservation_USD2041": 553307817425.8494,
+        "research_USD2041": 155796741660.0765,
+        "seed_water_kg": 243566934.7905345,
+        "seed_USD2041": 233240963976.26425,
+        "capital_direct_USD2041": 12008501871579.178,
+        "capital_with_contingency_USD2041": 16211477526631.89,
+        "initial_stock_manufacture_USD2041": 697928507003.993,
+        "initial_stock_Earth_freight_USD2041": 3897195037554.34,
+        "initial_stock_restoration_USD2041": 5935478084.759779,
+        "campaign_supplier_operation_and_renewal_USD2041": 19105241166423.293,
+        "construction_period_settlement_makeup_USD2041": 2354735472419.851,
+        "construction_occupied_equivalent_years": 13.25,
+        "industrial_and_initial_material_campaign_USD2041": 51393875669638.32,
+        "annual_supplier_operation_USD2041": 281327810962.727,
+        "annual_supplier_renewal_USD2041": 587092242056.5137,
+        "annual_settlement_import_manufacture_USD2041": 29219986823.530804,
+        "annual_settlement_import_freight_USD2041": 148489666905.0429,
+        "annual_local_restoration_USD2041": 6230982.358443969,
+        "annual_supply_direct_USD2041": 1046135937730.1729,
+        "annual_supply_with_contingency_USD2041": 1412283515935.7334,
+        "tariffs_USD2041_kg": {
+          "Earth_to_Moon_freight": 1425.8159986161752,
+          "pooled_volatile_delivery": 669.7536634655064,
+          "pressure_manufactured_and_delivered": 1519.2940436122212
+        },
+        "U_calibration": {
+          "basket_U": 137787805864.87604,
+          "basket_USD2041": 9323374514091.512,
+          "USD2041_per_U": 67.66472878764495,
+          "component_USD2041_per_U": {
+            "pressure": 25.32156739353702,
+            "volatiles": 669.7536634655064,
+            "freight": 142.58159986161752
+          },
+          "scope": "Proposed procurement-basket calibration only. Pressure systems, air/water, and incremental freight for other site imports at inherited 60, 1 and 10 U/kg; no general U exchange rate or blanket conversion of prior settlement capital."
+        }
+      },
+      "convergence": {
+        "iterations": 9,
+        "relative_mass_residual": 6.602566182205985e-12
+      },
+      "schedule": {
+        "start_year": 2041,
+        "first_source_capacity_year": 2049,
+        "full_rate_year": 2054,
+        "conditional_completion_year": 2073.5,
+        "elapsed_years": 32.5
+      },
+      "resource_reservation": {
+        "source_campaign_upper_kg": 2628764648385.349,
+        "source_campaign_plus_200year_kg": 21161168997131.504,
+        "equivalent_spherical_body_diameter_m": 2997.896198350017,
+        "rule": "An equivalent volume, not a target body, mineable fraction or permission. Campaign envelope includes full steady replenishment throughout delivery; no permitted extractable fraction is assumed."
+      }
+    },
+    "upper": {
+      "demand": {
+        "population": 250000,
+        "bulk": 47895887471.53333,
+        "metal": 6856959102.438558,
+        "loose_and_grading": 52017777777.77777,
+        "pressure": 1838666377.7653446,
+        "earth_special": 4089691497.6543164,
+        "water": 4051179962.2222223,
+        "air": 906392037.8434104,
+        "roads": 22680000000.0,
+        "renewal_bulk": 882198593.3941667,
+        "renewal_metal": 137139182.04877114,
+        "yearly_water": 846554404.9710002,
+        "yearly_air": 8239927.616758276,
+        "yearly_earth": 155824104.87009352,
+        "yearly_pressure": 51315756.50062361,
+        "goods_virgin": 9999999.999999998,
+        "occupied_W": 9589590477.001022,
+        "occupied_mean_W": 6302786128.321851,
+        "old_construction_W": 2000000000.0,
+        "old_total_W": 11589590477.001022,
+        "old_radiator_m2": 47873821.18969137,
+        "reserve_Wh": 104999999999.99998,
+        "power_hardware_kg_W": 0.02,
+        "radiator_controls_kg_m2": 1,
+        "radiator_metal_kg_m2": 10,
+        "U_pressure_kg": 60,
+        "U_volatile_kg": 1,
+        "U_other_freight_kg": 10
+      },
+      "assets": {
+        "excavators": {
+          "mass_kg": 810000,
+          "manufacture_USD2026": 810000000,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "haulers": {
+          "mass_kg": 11850000,
+          "manufacture_USD2026": 11850000000,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "bulk_trains": {
+          "mass_kg": 12200000,
+          "manufacture_USD2026": 12200000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "metal_trains": {
+          "mass_kg": 46500000,
+          "manufacture_USD2026": 46500000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "fabrication_cells": {
+          "mass_kg": 9250000,
+          "manufacture_USD2026": 9250000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "construction_and_service_robots": {
+          "mass_kg": 150000000.0,
+          "manufacture_USD2026": 150000000000.0,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "source_mine_trains": {
+          "mass_kg": 2279500000,
+          "manufacture_USD2026": 4559000000000,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_metal_trains": {
+          "mass_kg": 0,
+          "manufacture_USD2026": 0,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_fabrication_cells": {
+          "mass_kg": 0,
+          "manufacture_USD2026": 0,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_chemistry": {
+          "mass_kg": 288183917.87409866,
+          "manufacture_USD2026": 216137938405.57397,
+          "life_years": 10,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_chemistry": {
+          "mass_kg": 12116839.816093065,
+          "manufacture_USD2026": 9087629862.0698,
+          "life_years": 10,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "additional_ground_receivers": {
+          "mass_kg": 89079684.5736315,
+          "manufacture_USD2026": 4453984228.681575,
+          "life_years": 20,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "additional_ground_radiator_controls": {
+          "mass_kg": 18398341.595309187,
+          "manufacture_USD2026": 735933663.8123674,
+          "life_years": 30,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "lunar_beam_constellation": {
+          "mass_kg": 3072069298.7290506,
+          "manufacture_USD2026": 1105944947542.4583,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "power"
+        },
+        "source_solar": {
+          "mass_kg": 5650665056.354876,
+          "manufacture_USD2026": 2034239420287.7554,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_solar": {
+          "mass_kg": 118792547.21659869,
+          "manufacture_USD2026": 42765316997.975525,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "source_radiators": {
+          "mass_kg": 858658841.5353221,
+          "manufacture_USD2026": 858658841535.322,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_radiators": {
+          "mass_kg": 20074234.74299907,
+          "manufacture_USD2026": 20074234742.99907,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "lunar_landers": {
+          "mass_kg": 47100000.0,
+          "manufacture_USD2026": 141300000000.0,
+          "life_years": 10,
+          "destination": "depot",
+          "group": "landing",
+          "import_fraction": 1
+        },
+        "asteroid_tugs": {
+          "mass_kg": 6880500000.0,
+          "manufacture_USD2026": 20641500000000.0,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source",
+          "import_fraction": 1
+        },
+        "Earth_transfer_tugs": {
+          "mass_kg": 46760000.0,
+          "manufacture_USD2026": 140280000000.0,
+          "life_years": 20,
+          "destination": "leo",
+          "group": "earth_transfer",
+          "import_fraction": 1
+        },
+        "depots_and_orbital_workshops": {
+          "mass_kg": 132968689.41906744,
+          "manufacture_USD2026": 398906068257.20233,
+          "life_years": 25,
+          "destination": "depot",
+          "group": "landing"
+        }
+      },
+      "peak_flows": {
+        "bulk_kg_year": 3392645475.148627,
+        "metal_kg_year": 516532138.1192413,
+        "raw_lunar_kg_year": 6579397616.470776,
+        "handling_kg_year": 9180286505.359665,
+        "additional_bulk_stock_kg": 1690440130.8447032,
+        "additional_metal_stock_kg": 522071442.1220325,
+        "earth_surface_kg_year": 403076343.3431149,
+        "earth_deep_kg_year": 2393171303.568911,
+        "moon_payload_kg_year": 1505749275.934155,
+        "moon_water_kg_year": 1049113403.0821114,
+        "moon_air_kg_year": 53559529.50892879,
+        "lunar_propellant_kg_year": 4767411110.467177,
+        "depot_water_for_propellant_kg_year": 4779729802.254231,
+        "depot_excess_oxygen_kg_year": 0.0,
+        "depot_hydrogen_kg_year": 531081089.13935906,
+        "depot_oxygen_to_fuel_kg_year": 4236330021.3278184,
+        "depot_effective_O_to_H": 7.976804499277093,
+        "nea_payload_kg_year": 5870084043.058218,
+        "nea_return_hardware_kg_year": 1648151644.1368012,
+        "nea_propellant_kg_year": 20146277516.052525,
+        "source_water_kg_year": 25975120721.388866,
+        "source_nitrogen_kg_year": 41240837.72187517,
+        "source_ore_kg_year": 1039004828855.5546,
+        "source_ore_water_bound_kg_year": 1039004828855.5546,
+        "source_ore_nitrogen_bound_kg_year": 114557882560.76434,
+        "source_retained_tails_kg_year": 1012988467296.4437,
+        "source_metal_kg_year": 0.0,
+        "source_virgin_metal_kg_year": 0.0,
+        "source_ore_metal_bound_kg_year": 0.0,
+        "local_mean_W": 4130549906.3562083,
+        "source_mean_W": 115273567150.12143,
+        "depot_mean_W": 4846735926.437226,
+        "source_heat_W": 105212430255.90298,
+        "depot_heat_W": 2459718482.666893,
+        "earth_transfer_propellant_kg_year": 5744165503.294956,
+        "LEO_kg_year": 8142012806.863867,
+        "payload_destination_kg_year": {
+          "surface": 42767663.59030559,
+          "depot": 341943316.08899486,
+          "source": 1648151644.1368012,
+          "leo": 4676000.0
+        },
+        "earth_round_trip": {
+          "outbound": 2.160236150259586,
+          "returning": 0.1700858386511698,
+          "total": 2.3303219889107556,
+          "mass_ratio": 2.700858386511698
+        },
+        "lander_round_trip": {
+          "outbound": 2.426250464761686,
+          "returning": 0.6476706389427851,
+          "total": 3.073921103704471,
+          "mass_ratio": 2.079451064904642
+        },
+        "nea_round_trip": {
+          "outbound": 2.6871557801662806,
+          "returning": 0.6449077116949707,
+          "total": 3.3320634918612515,
+          "mass_ratio": 2.4970996907850713
+        }
+      },
+      "steady_flows": {
+        "bulk_kg_year": 913329095.0297256,
+        "metal_kg_year": 147580610.8912118,
+        "raw_lunar_kg_year": 135086366.28059077,
+        "handling_kg_year": 135086366.28059077,
+        "additional_bulk_stock_kg": 1690440130.8447032,
+        "additional_metal_stock_kg": 522071442.1220325,
+        "earth_surface_kg_year": 181687367.1519521,
+        "earth_deep_kg_year": 1203750856.093343,
+        "moon_payload_kg_year": 1036481699.7397105,
+        "moon_water_kg_year": 846554404.9710002,
+        "moon_air_kg_year": 8239927.616758276,
+        "lunar_propellant_kg_year": 3281644859.546378,
+        "depot_water_for_propellant_kg_year": 3283540042.8982325,
+        "depot_excess_oxygen_kg_year": 0.0,
+        "depot_hydrogen_kg_year": 364837782.54424804,
+        "depot_oxygen_to_fuel_kg_year": 2916807077.00213,
+        "depot_effective_O_to_H": 7.994805408204606,
+        "nea_payload_kg_year": 4136439192.1341367,
+        "nea_return_hardware_kg_year": 850276253.3485864,
+        "nea_propellant_kg_year": 12998387871.702421,
+        "source_water_kg_year": 17128482319.571653,
+        "source_nitrogen_kg_year": 6344744.264903872,
+        "source_ore_kg_year": 685139292782.8661,
+        "source_ore_water_bound_kg_year": 685139292782.8661,
+        "source_ore_nitrogen_bound_kg_year": 17624289624.73298,
+        "source_retained_tails_kg_year": 668004465719.0295,
+        "source_metal_kg_year": 0.0,
+        "source_virgin_metal_kg_year": 0.0,
+        "source_ore_metal_bound_kg_year": 0.0,
+        "local_mean_W": 1166633184.5253217,
+        "source_mean_W": 75711200487.54976,
+        "depot_mean_W": 3329571367.0476665,
+        "source_heat_W": 69219750159.95735,
+        "depot_heat_W": 1689757468.776691,
+        "earth_transfer_propellant_kg_year": 2889280901.798198,
+        "LEO_kg_year": 4095369757.8915415,
+        "payload_destination_kg_year": {
+          "surface": 25863262.28185855,
+          "depot": 171787235.59280443,
+          "source": 850276253.3485864,
+          "leo": 2338000.0
+        },
+        "earth_round_trip": {
+          "outbound": 2.160236150259586,
+          "returning": 0.1700858386511698,
+          "total": 2.3303219889107556,
+          "mass_ratio": 2.700858386511698
+        },
+        "lander_round_trip": {
+          "outbound": 2.426250464761686,
+          "returning": 0.6476706389427851,
+          "total": 3.073921103704471,
+          "mass_ratio": 2.079451064904642
+        },
+        "nea_round_trip": {
+          "outbound": 2.518578413702532,
+          "returning": 0.5323050790838135,
+          "total": 3.0508834927863457,
+          "mass_ratio": 2.4970996907850713
+        }
+      },
+      "engineering": {
+        "counts": {
+          "excavators": 27,
+          "haulers": 158,
+          "bulk_trains": 61,
+          "metal_trains": 93,
+          "fabrication_cells": 185,
+          "source_mine_trains": 9118,
+          "source_metal_trains": 0,
+          "source_fabrication_cells": 0,
+          "lunar_landers": 785,
+          "asteroid_tugs": 4587,
+          "Earth_transfer_tugs": 2338
+        },
+        "local_industry_firm_W": 6453984228.681575,
+        "total_ground_firm_W": 16043574705.682598,
+        "added_ground_firm_W": 4453984228.681575,
+        "added_ground_radiator_m2": 18398341.595309187,
+        "beam_PV_nameplate_W": 184324157923.74304,
+        "beam_PV_area_m2": 423227768.92850626,
+        "process_radiator_flux_W_m2": 765.8195051260687,
+        "beam_converter_radiator_m2": 40917091.60878312,
+        "source_process_radiator_m2": 171731768.3070644,
+        "depot_process_radiator_m2": 4014846.9485998135,
+        "orbital_period_hours": 31.696633004256498,
+        "minimum_geometric_sources_visible": 4,
+        "sources_after_one_failure_and_one_lunar_eclipse": 2,
+        "far_range_m": 13474800.0,
+        "first_null_radius_m": 1676.314613582057,
+        "receiver_active_area_m2": 80217873.528413,
+        "full_occupied_load_reserve_hours": 9.995579529012842,
+        "launch_flights_year": 81421,
+        "launch_pads": 408,
+        "chemical_exhaust_kg_year": 30657854129.81466,
+        "Earth_launcher_propellant_kg_year": 407100640343.19336,
+        "Earth_launcher_methane_kg_year": 88500139205.04204,
+        "Earth_gross_launcher_CO2_kg_year": 243375382813.8656,
+        "Earth_synthetic_fuel_mean_W": 302875219729.78107
+      },
+      "cost": {
+        "inflation_factor": 1.557967416600765,
+        "installed_assets_USD2026": {
+          "excavators": 3570020198.2542877,
+          "haulers": 52228073270.75717,
+          "bulk_trains": 53770674590.99051,
+          "metal_trains": 204945603973.85727,
+          "fabrication_cells": 40768749177.59526,
+          "construction_and_service_robots": 661114851528.5718,
+          "source_mine_trains": 12326242027062.53,
+          "source_metal_trains": 0.0,
+          "source_fabrication_cells": 0.0,
+          "source_chemistry": 1198105141053.1877,
+          "depot_chemistry": 50374941752.72243,
+          "additional_ground_receivers": 307986982595.7727,
+          "additional_ground_radiator_controls": 63427037882.868385,
+          "lunar_beam_constellation": 11573813237578.342,
+          "source_solar": 21288498295731.16,
+          "depot_solar": 447542884553.3935,
+          "source_radiators": 3784480750235.466,
+          "depot_radiators": 88475831477.78351,
+          "lunar_landers": 301790063379.97156,
+          "asteroid_tugs": 44086338239615.59,
+          "Earth_transfer_tugs": 187040000000.0,
+          "depots_and_orbital_workshops": 851987881259.7052
+        },
+        "groups_USD2041": {
+          "lunar": 2162165865802.4458,
+          "source": 128818455104012.28,
+          "landing": 2711130655869.8726,
+          "earth_transfer": 291402225601.0071,
+          "power": 18031623909969.668
+        },
+        "preservation_USD2041": 7600738888062.764,
+        "research_USD2041": 311593483320.153,
+        "seed_water_kg": 2503485285.562432,
+        "seed_USD2041": 13301874685119.758,
+        "capital_direct_USD2041": 173228984817757.94,
+        "capital_with_contingency_USD2041": 259843477226636.9,
+        "initial_stock_manufacture_USD2041": 1395857014007.986,
+        "initial_stock_Earth_freight_USD2041": 21710816696115.18,
+        "initial_stock_restoration_USD2041": 6024016170.138029,
+        "campaign_supplier_operation_and_renewal_USD2041": 261696878190057.25,
+        "construction_period_settlement_makeup_USD2041": 11735058795039.486,
+        "construction_occupied_equivalent_years": 13.25,
+        "industrial_and_initial_material_campaign_USD2041": 704660429293721.9,
+        "annual_supplier_operation_USD2041": 3805043346281.184,
+        "annual_supplier_renewal_USD2041": 8090269298721.417,
+        "annual_settlement_import_manufacture_USD2041": 58439973647.06161,
+        "annual_settlement_import_freight_USD2041": 827218527268.1869,
+        "annual_local_restoration_USD2041": 6313804.712764702,
+        "annual_supply_direct_USD2041": 12780977459722.562,
+        "annual_supply_with_contingency_USD2041": 19171466189583.844,
+        "tariffs_USD2041_kg": {
+          "Earth_to_Moon_freight": 14463.641522802343,
+          "pooled_volatile_delivery": 11945.131582316048,
+          "pressure_manufactured_and_delivered": 14650.597612794434
+        },
+        "U_calibration": {
+          "basket_U": 137787805864.87604,
+          "basket_USD2041": 118714431507301.33,
+          "USD2041_per_U": 861.5742936187014,
+          "component_USD2041_per_U": {
+            "pressure": 244.17662687990725,
+            "volatiles": 11945.131582316048,
+            "freight": 1446.3641522802343
+          },
+          "scope": "Proposed procurement-basket calibration only. Pressure systems, air/water, and incremental freight for other site imports at inherited 60, 1 and 10 U/kg; no general U exchange rate or blanket conversion of prior settlement capital."
+        }
+      },
+      "convergence": {
+        "iterations": 13,
+        "relative_mass_residual": 3.87602796410121e-11
+      },
+      "schedule": {
+        "start_year": 2041,
+        "first_source_capacity_year": 2049,
+        "full_rate_year": 2054,
+        "conditional_completion_year": 2073.5,
+        "elapsed_years": 32.5
+      },
+      "resource_reservation": {
+        "source_campaign_upper_kg": 20780096577111.09,
+        "source_campaign_plus_200year_kg": 157807955133684.3,
+        "equivalent_spherical_body_diameter_m": 5857.059963979395,
+        "rule": "An equivalent volume, not a target body, mineable fraction or permission. Campaign envelope includes full steady replenishment throughout delivery; no permitted extractable fraction is assumed."
+      }
+    },
+    "local_fleet_fabrication": {
+      "demand": {
+        "population": 250000,
+        "bulk": 47895887471.53333,
+        "metal": 6856959102.438558,
+        "loose_and_grading": 52017777777.77777,
+        "pressure": 1838666377.7653446,
+        "earth_special": 4089691497.6543164,
+        "water": 4051179962.2222223,
+        "air": 906392037.8434104,
+        "roads": 22680000000.0,
+        "renewal_bulk": 882198593.3941667,
+        "renewal_metal": 137139182.04877114,
+        "yearly_water": 846554404.9710002,
+        "yearly_air": 8239927.616758276,
+        "yearly_earth": 155824104.87009352,
+        "yearly_pressure": 51315756.50062361,
+        "goods_virgin": 9999999.999999998,
+        "occupied_W": 9589590477.001022,
+        "occupied_mean_W": 6302786128.321851,
+        "old_construction_W": 2000000000.0,
+        "old_total_W": 11589590477.001022,
+        "old_radiator_m2": 47873821.18969137,
+        "reserve_Wh": 104999999999.99998,
+        "power_hardware_kg_W": 0.02,
+        "radiator_controls_kg_m2": 1,
+        "radiator_metal_kg_m2": 10,
+        "U_pressure_kg": 60,
+        "U_volatile_kg": 1,
+        "U_other_freight_kg": 10
+      },
+      "assets": {
+        "excavators": {
+          "mass_kg": 780000,
+          "manufacture_USD2026": 390000000,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "haulers": {
+          "mass_kg": 11700000,
+          "manufacture_USD2026": 5850000000,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "bulk_trains": {
+          "mass_kg": 12200000,
+          "manufacture_USD2026": 6100000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "metal_trains": {
+          "mass_kg": 45500000,
+          "manufacture_USD2026": 22750000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "fabrication_cells": {
+          "mass_kg": 9050000,
+          "manufacture_USD2026": 4525000000,
+          "life_years": 15,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "construction_and_service_robots": {
+          "mass_kg": 150000000.0,
+          "manufacture_USD2026": 75000000000.0,
+          "life_years": 10,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "source_mine_trains": {
+          "mass_kg": 289250000,
+          "manufacture_USD2026": 289250000000,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_metal_trains": {
+          "mass_kg": 14500000,
+          "manufacture_USD2026": 14500000000,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_fabrication_cells": {
+          "mass_kg": 2850000,
+          "manufacture_USD2026": 2850000000,
+          "life_years": 15,
+          "destination": "source",
+          "group": "source"
+        },
+        "source_chemistry": {
+          "mass_kg": 31197785.45655811,
+          "manufacture_USD2026": 23398339092.418583,
+          "life_years": 10,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_chemistry": {
+          "mass_kg": 6555301.302382521,
+          "manufacture_USD2026": 4916475976.786891,
+          "life_years": 10,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "additional_ground_receivers": {
+          "mass_kg": 41572384.041131556,
+          "manufacture_USD2026": 2078619202.0565777,
+          "life_years": 20,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "additional_ground_radiator_controls": {
+          "mass_kg": 8586277.849781767,
+          "manufacture_USD2026": 343451113.99127066,
+          "life_years": 30,
+          "destination": "surface",
+          "group": "lunar"
+        },
+        "lunar_beam_constellation": {
+          "mass_kg": 1570336589.965257,
+          "manufacture_USD2026": 471100976989.5771,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "power"
+        },
+        "source_solar": {
+          "mass_kg": 262166264.34082448,
+          "manufacture_USD2026": 78649879302.24734,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_solar": {
+          "mass_kg": 38560595.89636777,
+          "manufacture_USD2026": 11568178768.910332,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "source_radiators": {
+          "mass_kg": 81482529.21521437,
+          "manufacture_USD2026": 40741264607.607185,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source"
+        },
+        "depot_radiators": {
+          "mass_kg": 8428161.557536421,
+          "manufacture_USD2026": 4214080778.768211,
+          "life_years": 20,
+          "destination": "depot",
+          "group": "landing"
+        },
+        "lunar_landers": {
+          "mass_kg": 31280000.0,
+          "manufacture_USD2026": 46920000000.0,
+          "life_years": 10,
+          "destination": "depot",
+          "group": "landing",
+          "import_fraction": 1
+        },
+        "asteroid_tugs": {
+          "mass_kg": 2403600000.0,
+          "manufacture_USD2026": 1207808999999.9998,
+          "life_years": 20,
+          "destination": "source",
+          "group": "source",
+          "import_fraction": 0.33499999999999996
+        },
+        "Earth_transfer_tugs": {
+          "mass_kg": 14240000.0,
+          "manufacture_USD2026": 21360000000.0,
+          "life_years": 20,
+          "destination": "leo",
+          "group": "earth_transfer",
+          "import_fraction": 1
+        },
+        "depots_and_orbital_workshops": {
+          "mass_kg": 93040666.0473527,
+          "manufacture_USD2026": 139560999071.02905,
+          "life_years": 25,
+          "destination": "depot",
+          "group": "landing"
+        }
+      },
+      "peak_flows": {
+        "bulk_kg_year": 3374301923.8117437,
+        "metal_kg_year": 505554737.9979102,
+        "raw_lunar_kg_year": 6482910219.383598,
+        "handling_kg_year": 9083799108.272488,
+        "additional_bulk_stock_kg": 1396943309.4545665,
+        "additional_metal_stock_kg": 365251440.388731,
+        "earth_surface_kg_year": 397340941.311071,
+        "earth_deep_kg_year": 728457578.3666937,
+        "moon_payload_kg_year": 1500013873.902111,
+        "moon_water_kg_year": 1049113403.0821114,
+        "moon_air_kg_year": 53559529.50892879,
+        "lunar_propellant_kg_year": 3170290175.598656,
+        "depot_water_for_propellant_kg_year": 3182608867.38571,
+        "depot_excess_oxygen_kg_year": 0.0,
+        "depot_hydrogen_kg_year": 353623207.4873011,
+        "depot_oxygen_to_fuel_kg_year": 2816666968.111355,
+        "depot_effective_O_to_H": 7.965164357072078,
+        "nea_payload_kg_year": 4272963108.1896963,
+        "nea_return_hardware_kg_year": 155335147.17408758,
+        "nea_propellant_kg_year": 4995889564.281071,
+        "source_water_kg_year": 9227611834.748892,
+        "source_nitrogen_kg_year": 41240837.72187517,
+        "source_ore_kg_year": 131823026210.69847,
+        "source_ore_water_bound_kg_year": 131823026210.69847,
+        "source_ore_nitrogen_bound_kg_year": 28639470640.191093,
+        "source_retained_tails_kg_year": 122470257853.2277,
+        "source_metal_kg_year": 159839400.0,
+        "source_virgin_metal_kg_year": 83915685.00000001,
+        "source_ore_metal_bound_kg_year": 1748243437.5000002,
+        "local_mean_W": 2610316289.3164787,
+        "source_mean_W": 12479114182.623486,
+        "depot_mean_W": 2622120520.9530654,
+        "source_heat_W": 9984145632.002726,
+        "depot_heat_W": 1032712082.098438,
+        "earth_transfer_propellant_kg_year": 1477191182.3437994,
+        "LEO_kg_year": 2207072760.710493,
+        "payload_destination_kg_year": {
+          "surface": 37032261.55826164,
+          "depot": 175781489.88153523,
+          "source": 155335147.17408758,
+          "leo": 1424000.0
+        },
+        "earth_round_trip": {
+          "outbound": 1.8225290681835453,
+          "returning": 0.14624198869240465,
+          "total": 1.96877105687595,
+          "mass_ratio": 2.4624198869240463
+        },
+        "lander_round_trip": {
+          "outbound": 1.6749289959476017,
+          "returning": 0.3770197762246712,
+          "total": 2.051948772172273,
+          "mass_ratio": 1.9425494405616779
+        },
+        "nea_round_trip": {
+          "outbound": 1.0086188723217635,
+          "returning": 0.12651337547420363,
+          "total": 1.135132247795967,
+          "mass_ratio": 1.8091520654064868
+        }
+      },
+      "steady_flows": {
+        "bulk_kg_year": 909660384.7623488,
+        "metal_kg_year": 144444210.85654578,
+        "raw_lunar_kg_year": 133314349.02618125,
+        "handling_kg_year": 133314349.02618125,
+        "additional_bulk_stock_kg": 1396943309.4545665,
+        "additional_metal_stock_kg": 365251440.388731,
+        "earth_surface_kg_year": 178886933.3338095,
+        "earth_deep_kg_year": 348260875.7003577,
+        "moon_payload_kg_year": 1033681265.9215679,
+        "moon_water_kg_year": 846554404.9710002,
+        "moon_air_kg_year": 8239927.616758276,
+        "lunar_propellant_kg_year": 2184692834.5579996,
+        "depot_water_for_propellant_kg_year": 2186588017.909854,
+        "depot_excess_oxygen_kg_year": 0.0,
+        "depot_hydrogen_kg_year": 242954224.212206,
+        "depot_oxygen_to_fuel_kg_year": 1941738610.3457937,
+        "depot_effective_O_to_H": 7.992199422101017,
+        "nea_payload_kg_year": 3039487167.145758,
+        "nea_return_hardware_kg_year": 81002518.22345774,
+        "nea_propellant_kg_year": 3509258526.4024353,
+        "source_water_kg_year": 6542400949.283289,
+        "source_nitrogen_kg_year": 6344744.264903872,
+        "source_ore_kg_year": 93462870704.047,
+        "source_ore_water_bound_kg_year": 93462870704.047,
+        "source_ore_nitrogen_bound_kg_year": 4406072406.183245,
+        "source_retained_tails_kg_year": 86910129025.4988,
+        "source_metal_kg_year": 79919700.0,
+        "source_virgin_metal_kg_year": 3995985.0000000037,
+        "source_ore_metal_bound_kg_year": 83249687.50000007,
+        "local_mean_W": 732590639.4368634,
+        "source_mean_W": 8636115729.666265,
+        "depot_mean_W": 1801508621.240405,
+        "source_heat_W": 6883577058.281169,
+        "depot_heat_W": 709517241.5962211,
+        "earth_transfer_propellant_kg_year": 706215310.2907712,
+        "LEO_kg_year": 1055188185.9911289,
+        "payload_destination_kg_year": {
+          "surface": 23062828.46371597,
+          "depot": 88371424.14309043,
+          "source": 81002518.22345774,
+          "leo": 712000.0
+        },
+        "earth_round_trip": {
+          "outbound": 1.8225290681835453,
+          "returning": 0.14624198869240465,
+          "total": 1.96877105687595,
+          "mass_ratio": 2.4624198869240463
+        },
+        "lander_round_trip": {
+          "outbound": 1.6749289959476017,
+          "returning": 0.3770197762246712,
+          "total": 2.051948772172273,
+          "mass_ratio": 1.9425494405616779
+        },
+        "nea_round_trip": {
+          "outbound": 1.0022660772279046,
+          "returning": 0.1186621996996382,
+          "total": 1.1209282769275428,
+          "mass_ratio": 1.8091520654064868
+        }
+      },
+      "engineering": {
+        "counts": {
+          "excavators": 26,
+          "haulers": 156,
+          "bulk_trains": 61,
+          "metal_trains": 91,
+          "fabrication_cells": 181,
+          "source_mine_trains": 1157,
+          "source_metal_trains": 29,
+          "source_fabrication_cells": 57,
+          "lunar_landers": 782,
+          "asteroid_tugs": 2003,
+          "Earth_transfer_tugs": 712
+        },
+        "local_industry_firm_W": 4078619202.0565777,
+        "total_ground_firm_W": 13668209679.0576,
+        "added_ground_firm_W": 2078619202.0565777,
+        "added_ground_radiator_m2": 8586277.849781767,
+        "beam_PV_nameplate_W": 157033658996.5257,
+        "beam_PV_area_m2": 360565895.9325076,
+        "process_radiator_flux_W_m2": 765.8195051260687,
+        "beam_converter_radiator_m2": 34859025.98552217,
+        "source_process_radiator_m2": 16296505.843042875,
+        "depot_process_radiator_m2": 1685632.3115072842,
+        "orbital_period_hours": 31.696633004256498,
+        "minimum_geometric_sources_visible": 4,
+        "sources_after_one_failure_and_one_lunar_eclipse": 2,
+        "far_range_m": 13474800.0,
+        "first_null_radius_m": 1676.314613582057,
+        "receiver_active_area_m2": 68341048.395288,
+        "full_occupied_load_reserve_hours": 9.995579529012842,
+        "launch_flights_year": 22071,
+        "launch_pads": 111,
+        "chemical_exhaust_kg_year": 9643370922.223526,
+        "Earth_launcher_propellant_kg_year": 110353638035.52466,
+        "Earth_launcher_methane_kg_year": 23989921312.07058,
+        "Earth_gross_launcher_CO2_kg_year": 65972283608.19409,
+        "Earth_synthetic_fuel_mean_W": 82101031184.36201
+      },
+      "cost": {
+        "inflation_factor": 1.557967416600765,
+        "installed_assets_USD2026": {
+          "excavators": 867087265.42011,
+          "haulers": 13006308981.301651,
+          "bulk_trains": 13562134151.442747,
+          "metal_trains": 50580090482.83975,
+          "fabrication_cells": 10060435579.55384,
+          "construction_and_service_robots": 166747551042.32886,
+          "source_mine_trains": 466169860926.62415,
+          "source_metal_trains": 23368929934.09179,
+          "source_fabrication_cells": 4593203469.804249,
+          "source_chemistry": 42480475182.97318,
+          "depot_chemistry": 8926028249.041458,
+          "additional_ground_receivers": 27506382047.156677,
+          "additional_ground_radiator_controls": 5595250882.5677395,
+          "lunar_beam_constellation": 1431597886599.404,
+          "source_solar": 239003964096.82382,
+          "depot_solar": 35153780370.40779,
+          "source_radiators": 90580081329.14673,
+          "depot_radiators": 9369168663.388655,
+          "lunar_landers": 66052422644.02698,
+          "asteroid_tugs": 1700313523897.2627,
+          "Earth_transfer_tugs": 24208000000.0,
+          "depots_and_orbital_workshops": 196469354118.97415
+        },
+        "groups_USD2041": {
+          "lunar": 448578143010.9497,
+          "source": 3998539014886.3843,
+          "landing": 492272139402.1916,
+          "earth_transfer": 37715275221.07132,
+          "power": 2230382860996.3887
+        },
+        "preservation_USD2041": 360374371675.8493,
+        "research_USD2041": 155796741660.0765,
+        "seed_water_kg": 280735594.8972834,
+        "seed_USD2041": 268833866274.18787,
+        "capital_direct_USD2041": 7992492413127.099,
+        "capital_with_contingency_USD2041": 10789864757721.584,
+        "initial_stock_manufacture_USD2041": 697928507003.993,
+        "initial_stock_Earth_freight_USD2041": 3897195037554.34,
+        "initial_stock_restoration_USD2041": 5935478084.759779,
+        "campaign_supplier_operation_and_renewal_USD2041": 12760145830759.1,
+        "construction_period_settlement_makeup_USD2041": 2354735472419.851,
+        "construction_occupied_equivalent_years": 13.25,
+        "industrial_and_initial_material_campaign_USD2041": 37406384197581.34,
+        "annual_supplier_operation_USD2041": 184861088087.72693,
+        "annual_supplier_renewal_USD2041": 395145540583.14136,
+        "annual_settlement_import_manufacture_USD2041": 29219986823.530804,
+        "annual_settlement_import_freight_USD2041": 148489666905.0429,
+        "annual_local_restoration_USD2041": 6230982.358443969,
+        "annual_supply_direct_USD2041": 757722513381.8003,
+        "annual_supply_with_contingency_USD2041": 1022925393065.4307,
+        "tariffs_USD2041_kg": {
+          "Earth_to_Moon_freight": 1225.2105149325685,
+          "pooled_volatile_delivery": 374.1565752768908,
+          "pressure_manufactured_and_delivered": 1318.6885599286143
+        },
+        "U_calibration": {
+          "basket_U": 137787805864.87604,
+          "basket_USD2041": 7037516125383.02,
+          "USD2041_per_U": 51.075028600749185,
+          "component_USD2041_per_U": {
+            "pressure": 21.978142665476906,
+            "volatiles": 374.1565752768908,
+            "freight": 122.52105149325685
+          },
+          "scope": "Proposed procurement-basket calibration only. Pressure systems, air/water, and incremental freight for other site imports at inherited 60, 1 and 10 U/kg; no general U exchange rate or blanket conversion of prior settlement capital."
+        }
+      },
+      "convergence": {
+        "iterations": 9,
+        "relative_mass_residual": 6.602566182205985e-12
+      },
+      "schedule": {
+        "start_year": 2041,
+        "first_source_capacity_year": 2049,
+        "full_rate_year": 2054,
+        "conditional_completion_year": 2073.5,
+        "elapsed_years": 32.5
+      },
+      "resource_reservation": {
+        "source_campaign_upper_kg": 2636460524213.969,
+        "source_campaign_plus_200year_kg": 21329034665023.367,
+        "equivalent_spherical_body_diameter_m": 3005.8024878291326,
+        "rule": "An equivalent volume, not a target body, mineable fraction or permission. Campaign envelope includes full steady replenishment throughout delivery; no permitted extractable fraction is assumed."
+      }
+    }
+  },
+  "sensitivities": {
+    "launch_50": {
+      "water_makeup_factor": 1,
+      "launch_USD2026_kg": 50,
+      "delivery_equivalent_years": 20,
+      "capital_USD2041": 11292647763687.346,
+      "campaign_USD2041": 32889278515735.895,
+      "annual_USD2041": 913122380373.5623,
+      "source_ore_kg_year": 131438232419.26746,
+      "completion_year": 2073.5
+    },
+    "water_makeup_quarter": {
+      "water_makeup_factor": 0.25,
+      "launch_USD2026_kg": 200,
+      "delivery_equivalent_years": 20,
+      "capital_USD2041": 10617306072846.035,
+      "campaign_USD2041": 36973821667696.46,
+      "annual_USD2041": 1011107036474.097,
+      "source_ore_kg_year": 70357713319.5691,
+      "completion_year": 2073.5
+    },
+    "stock_delivery_10_years": {
+      "water_makeup_factor": 1,
+      "launch_USD2026_kg": 200,
+      "delivery_equivalent_years": 10,
+      "capital_USD2041": 20973297056112.805,
+      "campaign_USD2041": 47360166079164.41,
+      "annual_USD2041": 1756242257032.2126,
+      "source_ore_kg_year": 174270622383.73895,
+      "completion_year": 2063.5
+    },
+    "stock_delivery_40_years": {
+      "water_makeup_factor": 1,
+      "launch_USD2026_kg": 200,
+      "delivery_equivalent_years": 40,
+      "capital_USD2041": 13904560037667.32,
+      "campaign_USD2041": 67936585112179.234,
+      "annual_USD2041": 1245693628334.3254,
+      "source_ore_kg_year": 111038341195.75732,
+      "completion_year": 2093.5
+    }
+  },
+  "electric_tug_comparison": [
+    {
+      "efficiency": 0.3,
+      "cargo_kg": 10000000.0,
+      "dry_kg": 1973739.3050128287,
+      "propellant_water_kg": 3431729.822179629,
+      "power_W": 69720294.64573278,
+      "PV_nameplate_W": 82023876.05380327,
+      "radiator_m2": 63728.07943038591,
+      "average_thrust_N": 2132.8474447155586,
+      "powered_days": 365.25
+    },
+    {
+      "efficiency": 0.5,
+      "cargo_kg": 10000000.0,
+      "dry_kg": 1394385.4447528648,
+      "propellant_water_kg": 3139946.0911591365,
+      "power_W": 38275384.950022966,
+      "PV_nameplate_W": 45029864.647085845,
+      "radiator_m2": 24989.821161398922,
+      "average_thrust_N": 1951.5015295754902,
+      "powered_days": 365.25
+    }
+  ],
+  "rules": [
+    "No previous settlement U or physical product is modified.",
+    "Credit the 150 million kg embedded construction plant once; retain the existing ground utility inventory and add only industrial capacity beyond its 2 GW allocation.",
+    "Prices are 2026-real scenario inputs; one 15-year inflation multiplication gives 2041 dollars. All later spending is at flat 2041 prices.",
+    "Supplier capital, operating costs and renewal are paid in the owner budget; diagnostic internal tariffs are never added to that budget.",
+    "The material campaign excludes civil installation and commissioning labour within settlements, passenger transport, settlement civic, food-growing and household operations during phased occupation, finance, planetary terraforming, and unqualified source/site losses."
+  ]
+}

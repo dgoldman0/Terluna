@@ -1,0 +1,49 @@
+{
+  "schema": "terluna.research.price-pressure-sources/1",
+  "accessed": "2026-11-12",
+  "sources": [
+    {
+      "title": "Public Investment in Resource-Abundant Developing Countries",
+      "authors": "Berg et al.",
+      "year": 2012,
+      "url": "https://assets.publishing.service.gov.uk/media/57a08a7f40f0b6497400061c/wp12274.pdf",
+      "read": "Introduction; pp7–8 basket and numeraire equations; pp14–16 calibration discussion and Table1, bounded research reading.",
+      "use": "Distinct traded/nontraded prices, saving, investment and maintenance. Its substitution and output elasticities are not the basket supply elasticity tested here; no coefficients transferred."
+    },
+    {
+      "title": "On the Capacity to Absorb Public Investment: How Much is Too Much?",
+      "authors": "Gurara et al.",
+      "year": 2020,
+      "url": "https://www.imf.org/-/media/files/publications/wp/2020/english/wpiea2020048-print-pdf.pdf",
+      "read": "Abstract, introduction, theoretical framework and data description; institutional summary.",
+      "use": "Construction unit costs can respond to investment scale and acceleration. Road-project coefficients and GDP thresholds are not lunar calibration."
+    },
+    {
+      "title": "Dutch Disease: Wealth Managed Unwisely",
+      "author": "Christine Ebrahimzadeh",
+      "year": 2017,
+      "url": "https://www.imf.org/en/publications/fandd/issues/series/back-to-basics/dutch-disease",
+      "read": "Substantive institutional explanation.",
+      "use": "Spending and resource-movement channels are separate. Export proceeds need actual expenditure transactions to affect domestic prices."
+    },
+    {
+      "title": "Frequently asked questions about the Consumer Price Index",
+      "organization": "Australian Bureau of Statistics",
+      "url": "https://www.abs.gov.au/articles/frequently-asked-questions-faqs-about-consumer-price-index",
+      "read": "Index construction, quality adjustment and alternative price measures.",
+      "use": "Different baskets measure different price changes; domestic final-use index is not a household CPI."
+    }
+  ],
+  "project_definitions": [
+    "../world_economy/comparison.md:23",
+    "../world_economy/construction_inputs.json:4",
+    "../world_economy/annual.py:241",
+    "../monetary_system/inputs.json:4",
+    "../monetary_system/institutions.md:13",
+    "../monetary_system/external_accounts.md:39"
+  ],
+  "unresolved_retrievals": [
+    "IMF CPI manual chapter-2 direct PDF URL returned404. That unavailable file supplies no input; ABS methodological guidance supplies the basket distinction."
+  ],
+  "limits": "Targeted primary and institutional reading. The spending shares, basket valuation multipliers and supply elasticities are uncalibrated experiments. No source identifies a lunar inflation rate or converts physical capacity utilization to prices."
+}

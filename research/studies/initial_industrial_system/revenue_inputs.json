@@ -1,0 +1,235 @@
+{
+  "schema": "terluna.research.initial-revenue-inputs/1",
+  "date": "2026-11-12",
+  "inputs": {
+    "transport": {
+      "path": "research/studies/initial_industrial_system/results/transport.json",
+      "sha256": "26f37dcc0c110402ea5d5a23be7338acdaf9501ddd6e4289c9b46053882aa507"
+    },
+    "transport_configuration": {
+      "path": "research/studies/initial_industrial_system/transport_inputs.json",
+      "sha256": "ba335eb4625bef2f5fddeab66964df543f240aa6373153b5356ae08314682d1f"
+    },
+    "industrial_configuration": {
+      "path": "research/studies/initial_industrial_system/industrial_inputs.json",
+      "sha256": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade"
+    },
+    "industrial": {
+      "path": "research/studies/initial_industrial_system/results/industrial_system.json",
+      "sha256": "4bf5c8a00838735b7716aeca07bb9cf1a43265c75a69b02cf4ab183b3b19e9e7"
+    },
+    "settlement": {
+      "path": "research/studies/lava_tube_cities/results/buildout.json",
+      "sha256": "1360c1fca263a52d5225080ce681fba58939ef6a03c8581c0533a493c14a17de"
+    },
+    "early_exports": {
+      "path": "research/studies/world_economy/early_exports_inputs.json",
+      "sha256": "f9187baa20f7147f84dfc67bd93f773a7f9637323bf2da62327cd65b7e0b47b4"
+    },
+    "inventory": {
+      "path": "research/studies/initial_industrial_system/results/resource_inventory.json",
+      "sha256": "5c2a25bea8a212e2c89e9af8adf04cb19838a87c595a72520c6f1e32fe8b84b0"
+    }
+  },
+  "evidence": "Conditional full-occupation market and external-purchase scenarios; no customer contracts, market-clearing exchange rate, resource rights or certified reserves.",
+  "boundary": {
+    "population": 250000,
+    "net_definition": "Consolidated off-Earth external operating cash balance, then balance after external equipment renewal and a resource-transition provision; debt separate. Internal payments cancel.",
+    "internal_transactions_are_revenue": false,
+    "debt_service_USD2041": null,
+    "comparison_focus": "local_structures_space_chemical",
+    "focus_is_adopted_architecture": false,
+    "commercial_ramp_years": 5
+  },
+  "finance": {
+    "maintenance_services_Earth_fraction": 0.3,
+    "staff_Earth_fraction": 0.5,
+    "ground_radiator_assembly_Earth_fraction": 0.5,
+    "annual_maintenance_fraction_commerce_capital": 0.02,
+    "commerce_maintenance_Earth_fraction": 0.3,
+    "source_transition_USD2026_per_kg_feed": 0.1,
+    "source_transition_sensitivity_USD2026_per_kg_feed": [
+      0,
+      0.03,
+      0.1,
+      0.3
+    ],
+    "maintenance_services_Earth_fraction_sensitivity": [
+      0,
+      0.1,
+      0.3,
+      0.6,
+      1
+    ],
+    "import_service_reserve_fraction": 0.35
+  },
+  "manufacturing": {
+    "nameplate_finished_kg_per_resident_year": 100,
+    "saleable_yield": 0.9,
+    "Earth_input_mass_fraction": 0.2,
+    "finish_kWh_per_finished_kg": 5,
+    "equipment_kg_per_nameplate_kg_year": 0.05,
+    "equipment_life_years": 20,
+    "civil_and_commissioning_USD2026_per_nameplate_kg_year": 100,
+    "staff": 1000,
+    "transport_packaging_mass_fraction": 0.05,
+    "delivered_quality_yield": 0.98,
+    "retained_U_price_per_kg": 50,
+    "floor_m2_per_nameplate_kg_year": 0.01,
+    "bulk_kg_m2": 500,
+    "metal_kg_m2": 100,
+    "air_kg_m2": 4
+  },
+  "visitors": {
+    "stay_nights": 14,
+    "occupancy": 0.7,
+    "surface_hardware_kg_bed": 2000,
+    "equipment_life_years": 20,
+    "civil_USD2026_bed": 3000000,
+    "initial_water_kg_bed": 3000,
+    "local_bulk_kg_bed": 100000,
+    "local_metal_kg_bed": 15000,
+    "mean_W_bed": 25000,
+    "staff_per_bed": 0.25,
+    "Earth_service_share_of_receipts": 0.1,
+    "retained_U_per_night": 1000,
+    "U_basis": "Pioneer destination-service price from the existing early-export study; no access fare or gravity-productivity premium.",
+    "initial_air_kg_bed": 320
+  },
+  "computing": {
+    "billable_duty": 0.6,
+    "IT_kg_W": 0.0128,
+    "space_packaging_factor": 2,
+    "IT_USD2026_W": 45,
+    "IT_life_years": 5,
+    "communications_USD2026_W": 2,
+    "communications_kg_W": 0.001,
+    "Earth_service_share_of_receipts": 0.2,
+    "staff_per_MW": 2
+  },
+  "services": {
+    "research_hardware_kg_staff": 500,
+    "research_hardware_life_years": 10,
+    "research_civil_USD2026_staff": 1000000,
+    "research_W_staff": 5000,
+    "research_Earth_service_share": 0.2,
+    "research_consumables_kg_staff_year": 50,
+    "media_hardware_kg_staff": 100,
+    "media_hardware_life_years": 5,
+    "media_Earth_service_share": 0.15,
+    "remote_hardware_kg_staff": 20,
+    "remote_hardware_life_years": 5,
+    "remote_Earth_service_share": 0.1,
+    "office_W_staff": 500,
+    "research_floor_m2_staff": 100,
+    "bulk_kg_m2": 500,
+    "metal_kg_m2": 100,
+    "air_kg_m2": 4
+  },
+  "return": {
+    "capsule_payload_kg": 10000,
+    "capsule_dry_to_payload": 0.5,
+    "shield_fraction_of_dry": 0.2,
+    "durable_life_flights": 10,
+    "loss_probability_flight": 0.01,
+    "cycles_year": 10,
+    "deorbit_dv_m_s": 150,
+    "deorbit_Isp_s": 300,
+    "Earth_ground_service_USD2026_per_payload_kg": 150,
+    "LEO_altitude_m": 400000,
+    "durable_calendar_life_years": 20
+  },
+  "propellant_customers": {
+    "Earth_alternative_price_fraction_ceiling": 0.8,
+    "buyers": "Independently funded Earth mission customers; excludes all own fleet, settlement growth and intra-system demand.",
+    "no_assured_offtake": true
+  },
+  "markets": {
+    "weak": {
+      "factory_utilization": 0.2,
+      "factory_USD2026_kg": 300,
+      "factory_customer_budget_USD2026_year": 2000000000,
+      "visitors_year": 2000,
+      "visitor_USD2026_night": 10000,
+      "propellant_customer_kg_year": 5000000,
+      "propellant_USD2026_kg": 150,
+      "compute_W": 50000000,
+      "compute_USD2026_per_W_billable_year": 15,
+      "research_receipts_USD2026_year": 1000000000,
+      "research_staff": 1000,
+      "media_receipts_USD2026_year": 250000000,
+      "media_staff": 250,
+      "remote_staff": 10000,
+      "remote_USD2026_staff_year": 100000,
+      "mission_customer_budget_USD2026_year": 5000000000
+    },
+    "reference": {
+      "factory_utilization": 0.7,
+      "factory_USD2026_kg": 750,
+      "factory_customer_budget_USD2026_year": 20000000000,
+      "visitors_year": 10000,
+      "visitor_USD2026_night": 20000,
+      "propellant_customer_kg_year": 25000000,
+      "propellant_USD2026_kg": 300,
+      "compute_W": 200000000,
+      "compute_USD2026_per_W_billable_year": 30,
+      "research_receipts_USD2026_year": 5000000000,
+      "research_staff": 5000,
+      "media_receipts_USD2026_year": 1000000000,
+      "media_staff": 1000,
+      "remote_staff": 25000,
+      "remote_USD2026_staff_year": 200000,
+      "mission_customer_budget_USD2026_year": 30000000000
+    },
+    "strong": {
+      "factory_utilization": 0.9,
+      "factory_USD2026_kg": 2000,
+      "factory_customer_budget_USD2026_year": 50000000000,
+      "visitors_year": 30000,
+      "visitor_USD2026_night": 50000,
+      "propellant_customer_kg_year": 100000000,
+      "propellant_USD2026_kg": 600,
+      "compute_W": 1000000000,
+      "compute_USD2026_per_W_billable_year": 40,
+      "research_receipts_USD2026_year": 15000000000,
+      "research_staff": 15000,
+      "media_receipts_USD2026_year": 5000000000,
+      "media_staff": 5000,
+      "remote_staff": 50000,
+      "remote_USD2026_staff_year": 300000,
+      "mission_customer_budget_USD2026_year": 100000000000
+    }
+  },
+  "resources": {
+    "usable_feed_pools_kg": [
+      1000000000000,
+      10000000000000,
+      100000000000000,
+      1000000000000000
+    ],
+    "horizons_years": [
+      1000000,
+      10000000
+    ],
+    "rule": "Specified usable-feed pools are conditional planning quantities, not approved fractions of the catalogue or reserve discoveries.",
+    "equivalent_body_density_kg_m3": 1500
+  },
+  "rules": [
+    "Receipts from Earth require independent external buyers; internal supplier sales, residents spending U, taxes, borrowing and equity are not additional consolidated earned revenue.",
+    "Operating balance is the external cash position of the whole modeled society, not corporate profit or GDP. Domestic wages and retained domestic replacement work are internal.",
+    "New commercial facilities and ordinary imported materials are explicit. Existing post-construction capacity may be used only within rated throughput, preserving the separate 25 percent spare margin.",
+    "Manufacturing and computing activities are suppressed if their incremental external costs, renewal and resource provision exceed receipts; rejected demand cases remain visible.",
+    "The Earth-return service fee covers ground recovery/handling only. Capsules, shields, deorbit fuel and relaunch are priced separately once.",
+    "No return spacecraft is assumed empty or to brake for free; outward cargo, fuel backhaul and sale goods share the stated mass and tank limits.",
+    "USD inputs are prospective 2026-purchasing-power prices, inflated once; no future vendor quote or million-year economic forecast is asserted.",
+    "The proposed 30 USD2041/U normalization is checked against matched destination-service and original pressure-procurement prices. Manufacturing-price comparison is separately hypothetical because the earlier 50 U/kg quote left freight scope unpriced. No currency peg or universal price consistency is adopted.",
+    "Resource-transition provision is a stated funding requirement, not a validated depletion valuation or demonstration of adequate million-year sustainability.",
+    "Passenger access fares and any unmodelled passenger-carrier surplus are excluded; destination facilities have additional food/life-support provision.",
+    "Beyond-local Solar System expansion and its socioeconomic boundary remain unresolved future work."
+  ],
+  "normalization": {
+    "proposed_USD2041_per_U": 30,
+    "status": "Proposal only; no currency peg adopted.",
+    "basis": "Pioneer destination spending gives 31.16 USD2041/U at the reference price; original pressure-component procurement gives 25.32. Manufacturing delivery scope was unpriced in the older U study, so its inferred basket is only a separately labelled illustration."
+  }
+}

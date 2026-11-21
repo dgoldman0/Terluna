@@ -1,0 +1,875 @@
+{
+  "schema": "terluna.research.vacuum-economy-cases/1",
+  "reading_rule": "Each case names a scenario of demand, a population ramp from programme.json and the recovery measures of the industry. In the scenario first_pass the portfolio, the market and its growth are those of the staged studies' order book: nine export portfolios at their strongest market, with real demand growing 0.5% a year, and with material recovery and equipment refurbishment applied. Each portfolio runs on the staged schedule, which reproduces the staged appraisal, and on the programme's two ramps. A case may change engineering coefficients, each named by its path with its value, or with a schedule {\"by_year\": [[year, value], ...]}. The diversified and services portfolios on constant growth carry the arrangements of the Earth leg's propellant (made in space throughout as the staged model has it, the outward burn launched from Earth, or launched from Earth until year 20 and made in space after) at launch prices of 200, 100 and 50 dollars of 2026 a kilogram. The same two portfolios carry the local manufacture of the machinery's working parts: the industry becomes able to make 78% of them over the thirty years from the opening, which leaves 5% of all equipment mass imported, and makes as much of that share as its residents can staff, at labour worth 25%, 50% or 10% of a part's import price. The scenarios low, central and high are the demand of scenarios.json, judged at each year's date; each brings its launch price, its local manufacture and its arrangement of the Earth leg, which a case may change, and a case may name the rule of pricing (the seller's price by default, or cost_plus). On the solved ramps resident_led and resident_led_beyond_plan each scenario takes the schedule of residents that residents.py found for it: the settlement grows as fast as its own production and financing sustain, held at the planned population from the year it reaches it, or not held before completion. Each scenario brings its own improvement of technology, the learning that lowers the price of working parts and the growth of labour productivity; the three cases named frozen_technology hold both at nought, the founding design's technology throughout. Freight to the sources: each scenario case flies the tugs freight.py chose for its scenario, period by period, mining the nearest water of the source survey first at the median of its water, so that the leg the tugs fly lengthens as the water near the depot is drawn. The cases named founding_freight, the frozen_technology cases and the first pass fly the founding design's chemical tugs on one leg of 2.5 km/s to every source; the cases named chemical_tugs fly chemical tugs throughout with the survey's reach; the cases named target_tugs fly electric tugs on water at the thruster's development target throughout; reach_p05 and reach_p95 read the survey's water at its 5th and 95th percentiles. Where the choice finds a period whose water no kind of tug reaches, a case that would take it flies the founding freight and records those periods; a case that names one kind of tug and cannot reach its water records the year.",
+  "cases": [
+    {
+      "name": "first_pass:raw_resource_price",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "raw_resource_price",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:commodity_refined",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "commodity_refined",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:specialty",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "specialty",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:premium_lunar",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "premium_lunar",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:propellant_logistics",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "propellant_logistics",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:compute_digital",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "compute_digital",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:services",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:diversified",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:prior_manufacturing_mix",
+      "scenario": "first_pass",
+      "ramp": "first_pass",
+      "portfolio": "prior_manufacturing_mix",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:raw_resource_price:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "raw_resource_price",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:commodity_refined:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "commodity_refined",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:specialty:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "specialty",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:premium_lunar:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "premium_lunar",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:propellant_logistics:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "propellant_logistics",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:compute_digital:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "compute_digital",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:services:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:diversified:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:prior_manufacturing_mix:constant_growth",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "prior_manufacturing_mix",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:raw_resource_price:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "raw_resource_price",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:commodity_refined:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "commodity_refined",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:specialty:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "specialty",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:premium_lunar:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "premium_lunar",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:propellant_logistics:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "propellant_logistics",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:compute_digital:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "compute_digital",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:services:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:diversified:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:prior_manufacturing_mix:front_loaded",
+      "scenario": "first_pass",
+      "ramp": "front_loaded",
+      "portfolio": "prior_manufacturing_mix",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined"
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_100",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_100:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100,
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_100:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100,
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_50",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_50:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50,
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:launch_50:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50,
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_100",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_100:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100,
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_100:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 100,
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_50",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_50:earth_leg_split",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50,
+        "industrial.transport.earth_leg": "split"
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:launch_50:earth_leg_split_to_20",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 50,
+        "industrial.transport.earth_leg": {
+          "by_year": [
+            [
+              0,
+              "split"
+            ],
+            [
+              20,
+              "space"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:local_parts",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "economy.production.local_working_parts.share": {
+          "by_year": [
+            [
+              8,
+              0.0
+            ],
+            [
+              38,
+              0.78
+            ]
+          ]
+        },
+        "economy.production.local_working_parts.labour_fraction_of_import_price": 0.25
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:local_parts_labour_50",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "economy.production.local_working_parts.share": {
+          "by_year": [
+            [
+              8,
+              0.0
+            ],
+            [
+              38,
+              0.78
+            ]
+          ]
+        },
+        "economy.production.local_working_parts.labour_fraction_of_import_price": 0.5
+      }
+    },
+    {
+      "name": "first_pass:diversified:constant_growth:local_parts_labour_10",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "diversified",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "economy.production.local_working_parts.share": {
+          "by_year": [
+            [
+              8,
+              0.0
+            ],
+            [
+              38,
+              0.78
+            ]
+          ]
+        },
+        "economy.production.local_working_parts.labour_fraction_of_import_price": 0.1
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:local_parts",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "economy.production.local_working_parts.share": {
+          "by_year": [
+            [
+              8,
+              0.0
+            ],
+            [
+              38,
+              0.78
+            ]
+          ]
+        },
+        "economy.production.local_working_parts.labour_fraction_of_import_price": 0.25
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:local_parts_labour_50",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "economy.production.local_working_parts.share": {
+          "by_year": [
+            [
+              8,
+              0.0
+            ],
+            [
+              38,
+              0.78
+            ]
+          ]
+        },
+        "economy.production.local_working_parts.labour_fraction_of_import_price": 0.5
+      }
+    },
+    {
+      "name": "first_pass:services:constant_growth:local_parts_labour_10",
+      "scenario": "first_pass",
+      "ramp": "constant_growth",
+      "portfolio": "services",
+      "market": "breakthrough",
+      "growth": "reference",
+      "recovery": "combined",
+      "engineering": {
+        "economy.production.local_working_parts.share": {
+          "by_year": [
+            [
+              8,
+              0.0
+            ],
+            [
+              38,
+              0.78
+            ]
+          ]
+        },
+        "economy.production.local_working_parts.labour_fraction_of_import_price": 0.1
+      }
+    },
+    {
+      "name": "low:constant_growth",
+      "scenario": "low",
+      "ramp": "constant_growth",
+      "recovery": "combined"
+    },
+    {
+      "name": "low:front_loaded",
+      "scenario": "low",
+      "ramp": "front_loaded",
+      "recovery": "combined"
+    },
+    {
+      "name": "low:resident_led",
+      "scenario": "low",
+      "ramp": "resident_led",
+      "recovery": "combined"
+    },
+    {
+      "name": "low:resident_led_beyond_plan",
+      "scenario": "low",
+      "ramp": "resident_led_beyond_plan",
+      "recovery": "combined"
+    },
+    {
+      "name": "central:constant_growth",
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined"
+    },
+    {
+      "name": "central:front_loaded",
+      "scenario": "central",
+      "ramp": "front_loaded",
+      "recovery": "combined"
+    },
+    {
+      "name": "central:resident_led",
+      "scenario": "central",
+      "ramp": "resident_led",
+      "recovery": "combined"
+    },
+    {
+      "name": "central:resident_led_beyond_plan",
+      "scenario": "central",
+      "ramp": "resident_led_beyond_plan",
+      "recovery": "combined"
+    },
+    {
+      "name": "high:constant_growth",
+      "scenario": "high",
+      "ramp": "constant_growth",
+      "recovery": "combined"
+    },
+    {
+      "name": "high:front_loaded",
+      "scenario": "high",
+      "ramp": "front_loaded",
+      "recovery": "combined"
+    },
+    {
+      "name": "high:resident_led",
+      "scenario": "high",
+      "ramp": "resident_led",
+      "recovery": "combined"
+    },
+    {
+      "name": "high:resident_led_beyond_plan",
+      "scenario": "high",
+      "ramp": "resident_led_beyond_plan",
+      "recovery": "combined"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:depot_throughout",
+      "engineering": {
+        "industrial.transport.earth_leg": "space"
+      }
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:parts_bought",
+      "engineering": {
+        "economy.production.local_working_parts.share": 0.0
+      }
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:launch_200",
+      "engineering": {
+        "industrial.transport.LEO_USD2026_kg": 200
+      }
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:cost_plus",
+      "pricing": "cost_plus"
+    },
+    {
+      "scenario": "low",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "low:constant_growth:frozen_technology",
+      "engineering": {
+        "economy.technology.learning_per_doubling": 0.0,
+        "economy.technology.labour_productivity_growth": 0.0
+      },
+      "freight": "founding"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:frozen_technology",
+      "engineering": {
+        "economy.technology.learning_per_doubling": 0.0,
+        "economy.technology.labour_productivity_growth": 0.0
+      },
+      "freight": "founding"
+    },
+    {
+      "scenario": "high",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "high:constant_growth:frozen_technology",
+      "engineering": {
+        "economy.technology.learning_per_doubling": 0.0,
+        "economy.technology.labour_productivity_growth": 0.0
+      },
+      "freight": "founding"
+    },
+    {
+      "scenario": "low",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "low:constant_growth:founding_freight",
+      "freight": "founding"
+    },
+    {
+      "scenario": "low",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "low:constant_growth:chemical_tugs",
+      "freight": "chemical"
+    },
+    {
+      "scenario": "low",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "low:constant_growth:target_tugs",
+      "freight": "electric_water_target"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:founding_freight",
+      "freight": "founding"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:chemical_tugs",
+      "freight": "chemical"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:target_tugs",
+      "freight": "electric_water_target"
+    },
+    {
+      "scenario": "high",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "high:constant_growth:founding_freight",
+      "freight": "founding"
+    },
+    {
+      "scenario": "high",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "high:constant_growth:chemical_tugs",
+      "freight": "chemical"
+    },
+    {
+      "scenario": "high",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "high:constant_growth:target_tugs",
+      "freight": "electric_water_target"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:reach_p05",
+      "reach": "p05"
+    },
+    {
+      "scenario": "central",
+      "ramp": "constant_growth",
+      "recovery": "combined",
+      "name": "central:constant_growth:reach_p95",
+      "reach": "p95"
+    }
+  ]
+}

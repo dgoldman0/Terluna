@@ -1,0 +1,32 @@
+{
+  "schema": "terluna.external-inputs/1",
+  "retrieved": "2026-11-12",
+  "catalogue": {
+    "bytes": 472100001,
+    "sha256": "cd6d4d3e9d36c2329005966355dda1165af5e999ddb27d69c0ba3021add3d6e5",
+    "url": "https://moon.bao.ac.cn/Moon/data/LUC-GRAS200_full.zip?download=1",
+    "etag": "\"69e599e7-1c23aca1\"",
+    "rows": 10699651,
+    "member": "LUC-GRAS200_full.csv",
+    "member_bytes": 1278351288,
+    "member_crc32": "196bdeb0",
+    "doi": "10.12350/CLPDS.GRAS.CE2.LUC-GRAS200.vA"
+  },
+  "documentation": {
+    "bytes": 3368,
+    "sha256": "8b59e17b00615056085cf9a3127643e29c519bd2dd30fec356b171dfceff43cc",
+    "url": "https://moon.bao.ac.cn/Moon/data/README.md?download=1"
+  },
+  "context": {
+    "bytes": 526448,
+    "sha256": "49202d847d6c79726620638a2d8ebdf240f22760bb538d94954ae976d38f1835",
+    "schema": "terluna.research.crater-gardens-context/1"
+  },
+  "design": {
+    "bytes": 2125,
+    "sha256": "b232179b23261d67fe59137f9a3a96f4cc749d402112f378d89877616825c6ff",
+    "schema": "terluna.habitation.crater-garden-design/1"
+  },
+  "rights": "The official README supplies source credit but no explicit redistribution licence. The external archive, documentation and derived candidate CSV stay in ignored research-drive storage; the repository holds code, input identity and aggregate results.",
+  "credit": "Zuo, Gao, Liu and colleagues (2026), LUC-GRAS200; China Lunar Exploration Program Data Release and Information Service System, Chang'E-2 and LRO teams. Article DOI 10.1029/2025JE009551."
+}

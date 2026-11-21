@@ -1,0 +1,1202 @@
+{
+  "schema": "terluna.humanities.entertainment-economics/1",
+  "producer": {
+    "domain": "humanities",
+    "files": {
+      "humanities/economics/accounts.py": "1b3b180283e5c22d789a9322fe23a387946a60481521c2fccb5a706af56d89de",
+      "humanities/economics/entertainment.py": "ef123a5d0909d8d95602ea1c7db1d50516391f0785b4af0c4513e8c2ce9d44ab",
+      "humanities/economics/entertainment_inputs.json": "985dbc7761bca8e444cd10f6a37d9fd9da02ce90eb8fc8141e2dd1c591d46f67",
+      "humanities/economics/entertainment_sources.json": "306980cb71927b61c60bd80585d0226cb013d0cf1290eca72f4576e6614abd1b"
+    },
+    "constants": {}
+  },
+  "evidence": "Conditional cultural-production portfolio. Audience cohorts, prices, costs, staffing and visiting capacity are assumptions. No paying lunar audience, production contract, qualified facility or successful cultural product is demonstrated.",
+  "reading_rule": "Portfolio accounts replace the sports bundle, not add it a second time. Audience groups are disjoint people with overlapping genre interests. Incremental outcomes compare with the pinned four-competition sports circuit. All amounts use real U with no conversion to current USD. Net royalties exclude licensees sales. Patron gifts are transfers. Nonresident workers and direct-investment earnings are outward income, separately from imported inputs and debt principal.",
+  "units": "Real U per year except capital, initial audience acquisition, people and physical capacities.",
+  "inputs": {
+    "schema": "terluna.humanities.entertainment-inputs/1",
+    "evidence": "Conditional cultural-production portfolio. Audience cohorts, prices, costs, staffing and visiting capacity are assumptions. No paying lunar audience, production contract, qualified facility or successful cultural product is demonstrated.",
+    "reading_rule": "Portfolio accounts replace the sports bundle, not add it a second time. Audience groups are disjoint people with overlapping genre interests. Incremental outcomes compare with the pinned four-competition sports circuit. All amounts use real U with no conversion to current USD. Net royalties exclude licensees sales. Patron gifts are transfers. Nonresident workers and direct-investment earnings are outward income, separately from imported inputs and debt principal.",
+    "products": {
+      "humanities/economics/results/sports.json": {
+        "schema": "terluna.humanities.sports-economics/1",
+        "sha256": "809b2cec731454bbf6c0e1a58fc20ff05e589ba986a0b2a70ec51d08ca080518",
+        "use": "Consolidated touring sports circuit, physical capacity, costs and common accounting assumptions."
+      }
+    },
+    "membership_share": 0.05,
+    "membership_yield_U": 40,
+    "royalty_U_fan": 1,
+    "sponsor_U_fan": 0.5,
+    "variable_cost_fraction": 0.35,
+    "acquisition_U_customer": 8,
+    "payroll_revenue_fraction": 0.2,
+    "resident_pay_U_year": 120000,
+    "visitor_pay_U_visit": 20000,
+    "work_hours_per_resident_year": 1500,
+    "patron_share": 0.01,
+    "patron_gift_U": 20,
+    "production": {
+      "resident_workers": 32,
+      "visiting_workers": 40,
+      "visits_year": 2,
+      "nights_visit": 28,
+      "commission_receipts_U_year": 12000000,
+      "studio_operations_U_year": 1000000,
+      "studio_capital_U": 30000000,
+      "studio_available_hours_year": 2400,
+      "programmes": [
+        {
+          "name": "ordinary_life",
+          "units_year": 150,
+          "purchased_capture_U_unit": 10000,
+          "studio_hours_unit": 2,
+          "arena_hours_unit": 0,
+          "crew": 3,
+          "hours_per_crew_member_unit": 8
+        },
+        {
+          "name": "documentaries",
+          "units_year": 12,
+          "purchased_capture_U_unit": 150000,
+          "studio_hours_unit": 20,
+          "arena_hours_unit": 0,
+          "crew": 6,
+          "hours_per_crew_member_unit": 80
+        },
+        {
+          "name": "performances",
+          "units_year": 24,
+          "purchased_capture_U_unit": 50000,
+          "studio_hours_unit": 0,
+          "arena_hours_unit": 12,
+          "crew": 8,
+          "hours_per_crew_member_unit": 24
+        },
+        {
+          "name": "interactive_classes",
+          "units_year": 40,
+          "purchased_capture_U_unit": 5000,
+          "studio_hours_unit": 3,
+          "arena_hours_unit": 0,
+          "crew": 3,
+          "hours_per_crew_member_unit": 6
+        },
+        {
+          "name": "location_commissions",
+          "units_year": 8,
+          "purchased_capture_U_unit": 100000,
+          "studio_hours_unit": 30,
+          "arena_hours_unit": 0,
+          "crew": 6,
+          "hours_per_crew_member_unit": 60
+        }
+      ]
+    },
+    "empty_production": {
+      "resident_workers": 0,
+      "visiting_workers": 0,
+      "visits_year": 0,
+      "nights_visit": 0,
+      "commission_receipts_U_year": 0,
+      "studio_operations_U_year": 0,
+      "studio_capital_U": 0,
+      "studio_available_hours_year": 0,
+      "programmes": []
+    },
+    "cases": {
+      "expanded": {
+        "extra_programme": true,
+        "audience_groups": [
+          {
+            "genres": [
+              "sports"
+            ],
+            "fans": 40000000
+          },
+          {
+            "genres": [
+              "ordinary_life"
+            ],
+            "fans": 30000000
+          },
+          {
+            "genres": [
+              "performance"
+            ],
+            "fans": 10000000
+          },
+          {
+            "genres": [
+              "factual"
+            ],
+            "fans": 10000000
+          },
+          {
+            "genres": [
+              "sports",
+              "ordinary_life"
+            ],
+            "fans": 20000000
+          },
+          {
+            "genres": [
+              "sports",
+              "performance"
+            ],
+            "fans": 10000000
+          },
+          {
+            "genres": [
+              "sports",
+              "factual"
+            ],
+            "fans": 10000000
+          },
+          {
+            "genres": [
+              "ordinary_life",
+              "performance",
+              "factual"
+            ],
+            "fans": 10000000
+          }
+        ],
+        "paid_share": 0.2,
+        "owner_viewing_yield_U": 25,
+        "retention": 0.75
+      },
+      "sports_control": {
+        "extra_programme": false,
+        "audience_groups": [
+          {
+            "genres": [
+              "sports"
+            ],
+            "fans": 80000000
+          }
+        ],
+        "paid_share": 0.2,
+        "owner_viewing_yield_U": 20,
+        "retention": 0.75
+      },
+      "shared_audience_same_price": {
+        "extra_programme": true,
+        "audience_groups": [
+          {
+            "genres": [
+              "sports",
+              "ordinary_life",
+              "performance",
+              "factual"
+            ],
+            "fans": 80000000
+          }
+        ],
+        "paid_share": 0.2,
+        "owner_viewing_yield_U": 20,
+        "retention": 0.75
+      },
+      "lower_paid_conversion": {
+        "extra_programme": true,
+        "audience_groups": [
+          {
+            "genres": [
+              "sports"
+            ],
+            "fans": 40000000
+          },
+          {
+            "genres": [
+              "ordinary_life"
+            ],
+            "fans": 30000000
+          },
+          {
+            "genres": [
+              "performance"
+            ],
+            "fans": 10000000
+          },
+          {
+            "genres": [
+              "factual"
+            ],
+            "fans": 10000000
+          },
+          {
+            "genres": [
+              "sports",
+              "ordinary_life"
+            ],
+            "fans": 20000000
+          },
+          {
+            "genres": [
+              "sports",
+              "performance"
+            ],
+            "fans": 10000000
+          },
+          {
+            "genres": [
+              "sports",
+              "factual"
+            ],
+            "fans": 10000000
+          },
+          {
+            "genres": [
+              "ordinary_life",
+              "performance",
+              "factual"
+            ],
+            "fans": 10000000
+          }
+        ],
+        "paid_share": 0.1,
+        "owner_viewing_yield_U": 25,
+        "retention": 0.75
+      },
+      "audience_quarter": {
+        "extra_programme": true,
+        "audience_groups": [
+          {
+            "genres": [
+              "sports"
+            ],
+            "fans": 10000000.0
+          },
+          {
+            "genres": [
+              "ordinary_life"
+            ],
+            "fans": 7500000.0
+          },
+          {
+            "genres": [
+              "performance"
+            ],
+            "fans": 2500000.0
+          },
+          {
+            "genres": [
+              "factual"
+            ],
+            "fans": 2500000.0
+          },
+          {
+            "genres": [
+              "sports",
+              "ordinary_life"
+            ],
+            "fans": 5000000.0
+          },
+          {
+            "genres": [
+              "sports",
+              "performance"
+            ],
+            "fans": 2500000.0
+          },
+          {
+            "genres": [
+              "sports",
+              "factual"
+            ],
+            "fans": 2500000.0
+          },
+          {
+            "genres": [
+              "ordinary_life",
+              "performance",
+              "factual"
+            ],
+            "fans": 2500000.0
+          }
+        ],
+        "paid_share": 0.2,
+        "owner_viewing_yield_U": 25,
+        "retention": 0.75
+      }
+    },
+    "assumption_basis": {
+      "audience": "Expanded cohorts contain 140 million unique people with 200 million genre memberships, including the existing 80 million sports fans. One annual bundle charged once; additional membership services sold to a subset of paid viewers. The shared-audience case admits no new fans or increase in viewing yield.",
+      "costs": "Existing physical sport purchases retained, but portfolio commercial and acquisition costs recomputed once. Fixed capture services exclude employee payroll and variable postproduction/distribution services. Pay is the larger of baseline staffing costs or 20% of remote receipts, allocated among resident/visiting staff in the baseline pay proportions.",
+      "capacity": "Additional 32 residents and 40 visiting performers/producers in two 28-night rotations; 288 annual arena hours and 900 studio hours. The annual, peak-guest and crew-hour checks do not qualify a day-by-day timetable. Eight spare arrival places and 248 spare arena hours in the reference leave little scheduling slack.",
+      "capital": "An additional 30 million U studio/production allowance, with inherited 20-year renewal and 70% import share; no construction quote or funding commitment.",
+      "shock": "All remote earned revenue halves with the expanded programme, opening audience and payroll unchanged; fixed operations and acquisition continue and variable commercial services fall with delivered receipts. Patron transfers are not assumed to rescue contractual obligations.",
+      "income": "Foreign equity is represented as a direct-investment claim for the proportional retained-earnings memo. Dispersed portfolio equity needs its own statistical treatment. Artists modeled as employees; independent offworld production companies instead sell imported services."
+    }
+  },
+  "cases": {
+    "expanded": {
+      "receipts": {
+        "portfolio_viewing": {
+          "U_year": 700000000.0,
+          "export_fraction": 1
+        },
+        "additional_membership_services": {
+          "U_year": 280000000.0,
+          "export_fraction": 1
+        },
+        "game_merchandise_and_archive_royalties": {
+          "U_year": 140000000,
+          "export_fraction": 1
+        },
+        "sponsor_services": {
+          "U_year": 70000000.0,
+          "export_fraction": 1
+        },
+        "separate_production_commissions": {
+          "U_year": 12000000,
+          "export_fraction": 1
+        },
+        "local_admissions": {
+          "U_year": 100000,
+          "export_fraction": 0
+        }
+      },
+      "purchases": {
+        "resident_host_services": {
+          "U_year": 7200000,
+          "import_fraction": 0
+        },
+        "guest_host_services": {
+          "U_year": 8601600,
+          "import_fraction": 0
+        },
+        "return_travel": {
+          "U_year": 12800000,
+          "import_fraction": 1
+        },
+        "venue_operations": {
+          "U_year": 3000000,
+          "import_fraction": 0.4
+        },
+        "event_services": {
+          "U_year": 9440000,
+          "import_fraction": 0.5
+        },
+        "commercial_services": {
+          "U_year": 420700000.0,
+          "import_fraction": 0.6
+        },
+        "audience_acquisition": {
+          "U_year": 56000000.0,
+          "import_fraction": 0.9
+        },
+        "additional_resident_host": {
+          "U_year": 3200000,
+          "import_fraction": 0
+        },
+        "additional_guest_host": {
+          "U_year": 672000,
+          "import_fraction": 0
+        },
+        "additional_return_travel": {
+          "U_year": 2000000,
+          "import_fraction": 1
+        },
+        "studio_operations": {
+          "U_year": 1000000,
+          "import_fraction": 0.4
+        },
+        "additional_capture_services": {
+          "U_year": 5500000,
+          "import_fraction": 0.5
+        }
+      },
+      "revenue_U_year": 1202100000.0,
+      "exports_U_year": 1202000000.0,
+      "wages_U_year": 240400000.0,
+      "resident_wages_U_year": 94362616.8224299,
+      "nonresident_wages_U_year": 146037383.1775701,
+      "intermediate_U_year": 530113600.0,
+      "direct_imports_U_year": 326690000.0,
+      "domestic_purchases_U_year": 203423600.0,
+      "upstream_imports_U_year": 50855900.0,
+      "gross_value_added_U_year": 671986400.0,
+      "gross_operating_surplus_U_year": 431586400.0,
+      "installed_capital_U": 230000000,
+      "replacement_U_year": 11500000.0,
+      "replacement_imports_U_year": 8049999.999999999,
+      "net_value_added_U_year": 660486400.0,
+      "net_operating_surplus_U_year": 420086400.0,
+      "tax_allowance_U_year": 84017280.0,
+      "cash_before_debt_U_year": 336069120.0,
+      "debt_service_U_year": 2590091.4993091337,
+      "interest_U_year": 1000000.0,
+      "principal_repayment_U_year": 1590091.4993091337,
+      "debt_coverage": 129.75183312622013,
+      "cash_after_debt_U_year": 333479028.5006909,
+      "funding_gap_U_year": 0,
+      "foreign_dividends_U_year": 100043708.55020726,
+      "foreign_equity_earnings_U_year": 100520736.0,
+      "direct_net_resident_income_U_year": 412928280.8224299,
+      "external_trade_after_replacement_U_year": 816404100.0,
+      "external_cash_after_financing_U_year": 567732916.7729135,
+      "value_added_identity_residual_U": 0.0,
+      "audience": {
+        "unique_fans": 140000000,
+        "fans_by_genre": {
+          "sports": 80000000,
+          "ordinary_life": 60000000,
+          "performance": 30000000,
+          "factual": 30000000
+        },
+        "sum_genre_followings": 200000000,
+        "paid_viewer_equivalents": 28000000.0,
+        "membership_buyers": 7000000.0
+      },
+      "capacity": {
+        "resident_workers": 104,
+        "host_residents": 500,
+        "arrivals_year": 592,
+        "arrival_capacity_year": 600,
+        "guest_nights_year": 30912,
+        "guest_night_allowance_year": 36525.0,
+        "peak_guests": 168.0,
+        "guest_beds": 200,
+        "arena_hours_year": 4552.0,
+        "arena_hours_available": 4800,
+        "studio_hours_year": 900,
+        "studio_hours_available": 2400,
+        "additional_crew_hours": 17568,
+        "additional_crew_hours_available": 48000
+      },
+      "increment_against_sport": {
+        "exports_U_year": 602000000.0,
+        "gross_value_added_U_year": 354928000.0,
+        "cash_before_debt_U_year": 186422400.0,
+        "external_cash_after_financing_U_year": 302340396.82242984,
+        "installed_capital_U": 30000000
+      },
+      "patron_transfers_U_year": 28000000.0,
+      "initial_paid_audience_acquisition_U": 224000000.0
+    },
+    "sports_control": {
+      "receipts": {
+        "portfolio_viewing": {
+          "U_year": 320000000.0,
+          "export_fraction": 1
+        },
+        "additional_membership_services": {
+          "U_year": 160000000.0,
+          "export_fraction": 1
+        },
+        "game_merchandise_and_archive_royalties": {
+          "U_year": 80000000,
+          "export_fraction": 1
+        },
+        "sponsor_services": {
+          "U_year": 40000000.0,
+          "export_fraction": 1
+        },
+        "separate_production_commissions": {
+          "U_year": 0,
+          "export_fraction": 1
+        },
+        "local_admissions": {
+          "U_year": 100000,
+          "export_fraction": 0
+        }
+      },
+      "purchases": {
+        "resident_host_services": {
+          "U_year": 7200000,
+          "import_fraction": 0
+        },
+        "guest_host_services": {
+          "U_year": 8601600,
+          "import_fraction": 0
+        },
+        "return_travel": {
+          "U_year": 12800000,
+          "import_fraction": 1
+        },
+        "venue_operations": {
+          "U_year": 3000000,
+          "import_fraction": 0.4
+        },
+        "event_services": {
+          "U_year": 9440000,
+          "import_fraction": 0.5
+        },
+        "commercial_services": {
+          "U_year": 210000000.0,
+          "import_fraction": 0.6
+        },
+        "audience_acquisition": {
+          "U_year": 32000000.0,
+          "import_fraction": 0.9
+        },
+        "additional_resident_host": {
+          "U_year": 0,
+          "import_fraction": 0
+        },
+        "additional_guest_host": {
+          "U_year": 0,
+          "import_fraction": 0
+        },
+        "additional_return_travel": {
+          "U_year": 0,
+          "import_fraction": 1
+        },
+        "studio_operations": {
+          "U_year": 0,
+          "import_fraction": 0.4
+        },
+        "additional_capture_services": {
+          "U_year": 0,
+          "import_fraction": 0.5
+        }
+      },
+      "revenue_U_year": 600100000.0,
+      "exports_U_year": 600000000.0,
+      "wages_U_year": 120000000.0,
+      "resident_wages_U_year": 40000000.0,
+      "nonresident_wages_U_year": 80000000.0,
+      "intermediate_U_year": 283041600.0,
+      "direct_imports_U_year": 173520000.0,
+      "domestic_purchases_U_year": 109521600.0,
+      "upstream_imports_U_year": 27380400.0,
+      "gross_value_added_U_year": 317058400.0,
+      "gross_operating_surplus_U_year": 197058400.0,
+      "installed_capital_U": 200000000,
+      "replacement_U_year": 10000000.0,
+      "replacement_imports_U_year": 7000000.0,
+      "net_value_added_U_year": 307058400.0,
+      "net_operating_surplus_U_year": 187058400.0,
+      "tax_allowance_U_year": 37411680.0,
+      "cash_before_debt_U_year": 149646720.0,
+      "debt_service_U_year": 2590091.4993091337,
+      "interest_U_year": 1000000.0,
+      "principal_repayment_U_year": 1590091.4993091337,
+      "debt_coverage": 57.77661524309698,
+      "cash_after_debt_U_year": 147056628.50069088,
+      "funding_gap_U_year": 0,
+      "foreign_dividends_U_year": 44116988.550207265,
+      "foreign_equity_earnings_U_year": 44594016.0,
+      "direct_net_resident_income_U_year": 181464384.0,
+      "external_trade_after_replacement_U_year": 392099600.0,
+      "external_cash_after_financing_U_year": 265392519.95048362,
+      "value_added_identity_residual_U": 0.0,
+      "audience": {
+        "unique_fans": 80000000,
+        "fans_by_genre": {
+          "sports": 80000000
+        },
+        "sum_genre_followings": 80000000,
+        "paid_viewer_equivalents": 16000000.0,
+        "membership_buyers": 4000000.0
+      },
+      "capacity": {
+        "resident_workers": 72,
+        "host_residents": 500,
+        "arrivals_year": 512,
+        "arrival_capacity_year": 600,
+        "guest_nights_year": 28672,
+        "guest_night_allowance_year": 36525.0,
+        "peak_guests": 128.0,
+        "guest_beds": 200,
+        "arena_hours_year": 4264.0,
+        "arena_hours_available": 4800,
+        "studio_hours_year": 0,
+        "studio_hours_available": 0,
+        "additional_crew_hours": 0,
+        "additional_crew_hours_available": 0
+      },
+      "increment_against_sport": {
+        "exports_U_year": 0.0,
+        "gross_value_added_U_year": 0.0,
+        "cash_before_debt_U_year": 0.0,
+        "external_cash_after_financing_U_year": 0.0,
+        "installed_capital_U": 0
+      },
+      "patron_transfers_U_year": 16000000.0,
+      "initial_paid_audience_acquisition_U": 128000000.0
+    },
+    "shared_audience_same_price": {
+      "receipts": {
+        "portfolio_viewing": {
+          "U_year": 320000000.0,
+          "export_fraction": 1
+        },
+        "additional_membership_services": {
+          "U_year": 160000000.0,
+          "export_fraction": 1
+        },
+        "game_merchandise_and_archive_royalties": {
+          "U_year": 80000000,
+          "export_fraction": 1
+        },
+        "sponsor_services": {
+          "U_year": 40000000.0,
+          "export_fraction": 1
+        },
+        "separate_production_commissions": {
+          "U_year": 12000000,
+          "export_fraction": 1
+        },
+        "local_admissions": {
+          "U_year": 100000,
+          "export_fraction": 0
+        }
+      },
+      "purchases": {
+        "resident_host_services": {
+          "U_year": 7200000,
+          "import_fraction": 0
+        },
+        "guest_host_services": {
+          "U_year": 8601600,
+          "import_fraction": 0
+        },
+        "return_travel": {
+          "U_year": 12800000,
+          "import_fraction": 1
+        },
+        "venue_operations": {
+          "U_year": 3000000,
+          "import_fraction": 0.4
+        },
+        "event_services": {
+          "U_year": 9440000,
+          "import_fraction": 0.5
+        },
+        "commercial_services": {
+          "U_year": 214200000.0,
+          "import_fraction": 0.6
+        },
+        "audience_acquisition": {
+          "U_year": 32000000.0,
+          "import_fraction": 0.9
+        },
+        "additional_resident_host": {
+          "U_year": 3200000,
+          "import_fraction": 0
+        },
+        "additional_guest_host": {
+          "U_year": 672000,
+          "import_fraction": 0
+        },
+        "additional_return_travel": {
+          "U_year": 2000000,
+          "import_fraction": 1
+        },
+        "studio_operations": {
+          "U_year": 1000000,
+          "import_fraction": 0.4
+        },
+        "additional_capture_services": {
+          "U_year": 5500000,
+          "import_fraction": 0.5
+        }
+      },
+      "revenue_U_year": 612100000.0,
+      "exports_U_year": 612000000.0,
+      "wages_U_year": 122400000.0,
+      "resident_wages_U_year": 48044859.81308411,
+      "nonresident_wages_U_year": 74355140.18691589,
+      "intermediate_U_year": 299613600.0,
+      "direct_imports_U_year": 181190000.0,
+      "domestic_purchases_U_year": 118423600.0,
+      "upstream_imports_U_year": 29605900.0,
+      "gross_value_added_U_year": 312486400.0,
+      "gross_operating_surplus_U_year": 190086400.0,
+      "installed_capital_U": 230000000,
+      "replacement_U_year": 11500000.0,
+      "replacement_imports_U_year": 8049999.999999999,
+      "net_value_added_U_year": 300986400.0,
+      "net_operating_surplus_U_year": 178586400.0,
+      "tax_allowance_U_year": 35717280.0,
+      "cash_before_debt_U_year": 142869120.0,
+      "debt_service_U_year": 2590091.4993091337,
+      "interest_U_year": 1000000.0,
+      "principal_repayment_U_year": 1590091.4993091337,
+      "debt_coverage": 55.159873710294825,
+      "cash_after_debt_U_year": 140279028.50069088,
+      "funding_gap_U_year": 0,
+      "foreign_dividends_U_year": 42083708.550207265,
+      "foreign_equity_earnings_U_year": 42560736.0,
+      "direct_net_resident_income_U_year": 183070523.81308413,
+      "external_trade_after_replacement_U_year": 393154100.0,
+      "external_cash_after_financing_U_year": 274125159.76356775,
+      "value_added_identity_residual_U": 0.0,
+      "audience": {
+        "unique_fans": 80000000,
+        "fans_by_genre": {
+          "sports": 80000000,
+          "ordinary_life": 80000000,
+          "performance": 80000000,
+          "factual": 80000000
+        },
+        "sum_genre_followings": 320000000,
+        "paid_viewer_equivalents": 16000000.0,
+        "membership_buyers": 4000000.0
+      },
+      "capacity": {
+        "resident_workers": 104,
+        "host_residents": 500,
+        "arrivals_year": 592,
+        "arrival_capacity_year": 600,
+        "guest_nights_year": 30912,
+        "guest_night_allowance_year": 36525.0,
+        "peak_guests": 168.0,
+        "guest_beds": 200,
+        "arena_hours_year": 4552.0,
+        "arena_hours_available": 4800,
+        "studio_hours_year": 900,
+        "studio_hours_available": 2400,
+        "additional_crew_hours": 17568,
+        "additional_crew_hours_available": 48000
+      },
+      "increment_against_sport": {
+        "exports_U_year": 12000000.0,
+        "gross_value_added_U_year": -4572000.0,
+        "cash_before_debt_U_year": -6777600.0,
+        "external_cash_after_financing_U_year": 8732639.813084126,
+        "installed_capital_U": 30000000
+      },
+      "patron_transfers_U_year": 16000000.0,
+      "initial_paid_audience_acquisition_U": 128000000.0
+    },
+    "lower_paid_conversion": {
+      "receipts": {
+        "portfolio_viewing": {
+          "U_year": 350000000.0,
+          "export_fraction": 1
+        },
+        "additional_membership_services": {
+          "U_year": 280000000.0,
+          "export_fraction": 1
+        },
+        "game_merchandise_and_archive_royalties": {
+          "U_year": 140000000,
+          "export_fraction": 1
+        },
+        "sponsor_services": {
+          "U_year": 70000000.0,
+          "export_fraction": 1
+        },
+        "separate_production_commissions": {
+          "U_year": 12000000,
+          "export_fraction": 1
+        },
+        "local_admissions": {
+          "U_year": 100000,
+          "export_fraction": 0
+        }
+      },
+      "purchases": {
+        "resident_host_services": {
+          "U_year": 7200000,
+          "import_fraction": 0
+        },
+        "guest_host_services": {
+          "U_year": 8601600,
+          "import_fraction": 0
+        },
+        "return_travel": {
+          "U_year": 12800000,
+          "import_fraction": 1
+        },
+        "venue_operations": {
+          "U_year": 3000000,
+          "import_fraction": 0.4
+        },
+        "event_services": {
+          "U_year": 9440000,
+          "import_fraction": 0.5
+        },
+        "commercial_services": {
+          "U_year": 298200000.0,
+          "import_fraction": 0.6
+        },
+        "audience_acquisition": {
+          "U_year": 28000000.0,
+          "import_fraction": 0.9
+        },
+        "additional_resident_host": {
+          "U_year": 3200000,
+          "import_fraction": 0
+        },
+        "additional_guest_host": {
+          "U_year": 672000,
+          "import_fraction": 0
+        },
+        "additional_return_travel": {
+          "U_year": 2000000,
+          "import_fraction": 1
+        },
+        "studio_operations": {
+          "U_year": 1000000,
+          "import_fraction": 0.4
+        },
+        "additional_capture_services": {
+          "U_year": 5500000,
+          "import_fraction": 0.5
+        }
+      },
+      "revenue_U_year": 852100000.0,
+      "exports_U_year": 852000000.0,
+      "wages_U_year": 170400000.0,
+      "resident_wages_U_year": 66885981.30841121,
+      "nonresident_wages_U_year": 103514018.69158879,
+      "intermediate_U_year": 379613600.0,
+      "direct_imports_U_year": 227990000.0,
+      "domestic_purchases_U_year": 151623600.0,
+      "upstream_imports_U_year": 37905900.0,
+      "gross_value_added_U_year": 472486400.0,
+      "gross_operating_surplus_U_year": 302086400.0,
+      "installed_capital_U": 230000000,
+      "replacement_U_year": 11500000.0,
+      "replacement_imports_U_year": 8049999.999999999,
+      "net_value_added_U_year": 460986400.0,
+      "net_operating_surplus_U_year": 290586400.0,
+      "tax_allowance_U_year": 58117280.0,
+      "cash_before_debt_U_year": 232469120.0,
+      "debt_service_U_year": 2590091.4993091337,
+      "interest_U_year": 1000000.0,
+      "principal_repayment_U_year": 1590091.4993091337,
+      "debt_coverage": 89.75324619304278,
+      "cash_after_debt_U_year": 229879028.50069088,
+      "funding_gap_U_year": 0,
+      "foreign_dividends_U_year": 68963708.55020726,
+      "foreign_equity_earnings_U_year": 69440736.0,
+      "direct_net_resident_income_U_year": 287031645.30841124,
+      "external_trade_after_replacement_U_year": 578054100.0,
+      "external_cash_after_financing_U_year": 402986281.25889486,
+      "value_added_identity_residual_U": 0.0,
+      "audience": {
+        "unique_fans": 140000000,
+        "fans_by_genre": {
+          "sports": 80000000,
+          "ordinary_life": 60000000,
+          "performance": 30000000,
+          "factual": 30000000
+        },
+        "sum_genre_followings": 200000000,
+        "paid_viewer_equivalents": 14000000.0,
+        "membership_buyers": 7000000.0
+      },
+      "capacity": {
+        "resident_workers": 104,
+        "host_residents": 500,
+        "arrivals_year": 592,
+        "arrival_capacity_year": 600,
+        "guest_nights_year": 30912,
+        "guest_night_allowance_year": 36525.0,
+        "peak_guests": 168.0,
+        "guest_beds": 200,
+        "arena_hours_year": 4552.0,
+        "arena_hours_available": 4800,
+        "studio_hours_year": 900,
+        "studio_hours_available": 2400,
+        "additional_crew_hours": 17568,
+        "additional_crew_hours_available": 48000
+      },
+      "increment_against_sport": {
+        "exports_U_year": 252000000.0,
+        "gross_value_added_U_year": 155428000.0,
+        "cash_before_debt_U_year": 82822400.0,
+        "external_cash_after_financing_U_year": 137593761.30841124,
+        "installed_capital_U": 30000000
+      },
+      "patron_transfers_U_year": 28000000.0,
+      "initial_paid_audience_acquisition_U": 112000000.0
+    },
+    "audience_quarter": {
+      "receipts": {
+        "portfolio_viewing": {
+          "U_year": 175000000.0,
+          "export_fraction": 1
+        },
+        "additional_membership_services": {
+          "U_year": 70000000.0,
+          "export_fraction": 1
+        },
+        "game_merchandise_and_archive_royalties": {
+          "U_year": 35000000.0,
+          "export_fraction": 1
+        },
+        "sponsor_services": {
+          "U_year": 17500000.0,
+          "export_fraction": 1
+        },
+        "separate_production_commissions": {
+          "U_year": 12000000,
+          "export_fraction": 1
+        },
+        "local_admissions": {
+          "U_year": 100000,
+          "export_fraction": 0
+        }
+      },
+      "purchases": {
+        "resident_host_services": {
+          "U_year": 7200000,
+          "import_fraction": 0
+        },
+        "guest_host_services": {
+          "U_year": 8601600,
+          "import_fraction": 0
+        },
+        "return_travel": {
+          "U_year": 12800000,
+          "import_fraction": 1
+        },
+        "venue_operations": {
+          "U_year": 3000000,
+          "import_fraction": 0.4
+        },
+        "event_services": {
+          "U_year": 9440000,
+          "import_fraction": 0.5
+        },
+        "commercial_services": {
+          "U_year": 108325000.0,
+          "import_fraction": 0.6
+        },
+        "audience_acquisition": {
+          "U_year": 14000000.0,
+          "import_fraction": 0.9
+        },
+        "additional_resident_host": {
+          "U_year": 3200000,
+          "import_fraction": 0
+        },
+        "additional_guest_host": {
+          "U_year": 672000,
+          "import_fraction": 0
+        },
+        "additional_return_travel": {
+          "U_year": 2000000,
+          "import_fraction": 1
+        },
+        "studio_operations": {
+          "U_year": 1000000,
+          "import_fraction": 0.4
+        },
+        "additional_capture_services": {
+          "U_year": 5500000,
+          "import_fraction": 0.5
+        }
+      },
+      "revenue_U_year": 309600000.0,
+      "exports_U_year": 309500000.0,
+      "wages_U_year": 61900000.0,
+      "resident_wages_U_year": 24297196.261682242,
+      "nonresident_wages_U_year": 37602803.73831776,
+      "intermediate_U_year": 175738600.0,
+      "direct_imports_U_year": 101465000.0,
+      "domestic_purchases_U_year": 74273600.0,
+      "upstream_imports_U_year": 18568400.0,
+      "gross_value_added_U_year": 133861400.0,
+      "gross_operating_surplus_U_year": 71961400.0,
+      "installed_capital_U": 230000000,
+      "replacement_U_year": 11500000.0,
+      "replacement_imports_U_year": 8049999.999999999,
+      "net_value_added_U_year": 122361400.0,
+      "net_operating_surplus_U_year": 60461400.0,
+      "tax_allowance_U_year": 12092280.0,
+      "cash_before_debt_U_year": 48369120.0,
+      "debt_service_U_year": 2590091.4993091337,
+      "interest_U_year": 1000000.0,
+      "principal_repayment_U_year": 1590091.4993091337,
+      "debt_coverage": 18.674676169896586,
+      "cash_after_debt_U_year": 45779028.50069086,
+      "funding_gap_U_year": 0,
+      "foreign_dividends_U_year": 13733708.55020726,
+      "foreign_equity_earnings_U_year": 14210736.0,
+      "direct_net_resident_income_U_year": 69547860.26168224,
+      "external_trade_after_replacement_U_year": 181416600.0,
+      "external_cash_after_financing_U_year": 127489996.21216586,
+      "value_added_identity_residual_U": 0.0,
+      "audience": {
+        "unique_fans": 35000000.0,
+        "fans_by_genre": {
+          "sports": 20000000.0,
+          "ordinary_life": 15000000.0,
+          "performance": 7500000.0,
+          "factual": 7500000.0
+        },
+        "sum_genre_followings": 50000000.0,
+        "paid_viewer_equivalents": 7000000.0,
+        "membership_buyers": 1750000.0
+      },
+      "capacity": {
+        "resident_workers": 104,
+        "host_residents": 500,
+        "arrivals_year": 592,
+        "arrival_capacity_year": 600,
+        "guest_nights_year": 30912,
+        "guest_night_allowance_year": 36525.0,
+        "peak_guests": 168.0,
+        "guest_beds": 200,
+        "arena_hours_year": 4552.0,
+        "arena_hours_available": 4800,
+        "studio_hours_year": 900,
+        "studio_hours_available": 2400,
+        "additional_crew_hours": 17568,
+        "additional_crew_hours_available": 48000
+      },
+      "increment_against_sport": {
+        "exports_U_year": -290500000.0,
+        "gross_value_added_U_year": -183197000.0,
+        "cash_before_debt_U_year": -101277600.0,
+        "external_cash_after_financing_U_year": -137902523.73831776,
+        "installed_capital_U": 30000000
+      },
+      "patron_transfers_U_year": 7000000.0,
+      "initial_paid_audience_acquisition_U": 56000000.0
+    },
+    "shared_revenue_shock": {
+      "receipts": {
+        "portfolio_viewing": {
+          "U_year": 350000000.0,
+          "export_fraction": 1
+        },
+        "additional_membership_services": {
+          "U_year": 140000000.0,
+          "export_fraction": 1
+        },
+        "game_merchandise_and_archive_royalties": {
+          "U_year": 70000000.0,
+          "export_fraction": 1
+        },
+        "sponsor_services": {
+          "U_year": 35000000.0,
+          "export_fraction": 1
+        },
+        "separate_production_commissions": {
+          "U_year": 6000000.0,
+          "export_fraction": 1
+        },
+        "local_admissions": {
+          "U_year": 100000,
+          "export_fraction": 0
+        }
+      },
+      "purchases": {
+        "resident_host_services": {
+          "U_year": 7200000,
+          "import_fraction": 0
+        },
+        "guest_host_services": {
+          "U_year": 8601600,
+          "import_fraction": 0
+        },
+        "return_travel": {
+          "U_year": 12800000,
+          "import_fraction": 1
+        },
+        "venue_operations": {
+          "U_year": 3000000,
+          "import_fraction": 0.4
+        },
+        "event_services": {
+          "U_year": 9440000,
+          "import_fraction": 0.5
+        },
+        "commercial_services": {
+          "U_year": 210350000.0,
+          "import_fraction": 0.6
+        },
+        "audience_acquisition": {
+          "U_year": 56000000.0,
+          "import_fraction": 0.9
+        },
+        "additional_resident_host": {
+          "U_year": 3200000,
+          "import_fraction": 0
+        },
+        "additional_guest_host": {
+          "U_year": 672000,
+          "import_fraction": 0
+        },
+        "additional_return_travel": {
+          "U_year": 2000000,
+          "import_fraction": 1
+        },
+        "studio_operations": {
+          "U_year": 1000000,
+          "import_fraction": 0.4
+        },
+        "additional_capture_services": {
+          "U_year": 5500000,
+          "import_fraction": 0.5
+        }
+      },
+      "revenue_U_year": 601100000.0,
+      "exports_U_year": 601000000.0,
+      "wages_U_year": 240400000.0,
+      "resident_wages_U_year": 94362616.8224299,
+      "nonresident_wages_U_year": 146037383.1775701,
+      "intermediate_U_year": 319763600.0,
+      "direct_imports_U_year": 200480000.0,
+      "domestic_purchases_U_year": 119283600.0,
+      "upstream_imports_U_year": 29820900.0,
+      "gross_value_added_U_year": 281336400.0,
+      "gross_operating_surplus_U_year": 40936400.0,
+      "installed_capital_U": 230000000,
+      "replacement_U_year": 11500000.0,
+      "replacement_imports_U_year": 8049999.999999999,
+      "net_value_added_U_year": 269836400.0,
+      "net_operating_surplus_U_year": 29436400.0,
+      "tax_allowance_U_year": 5887280.0,
+      "cash_before_debt_U_year": 23549120.0,
+      "debt_service_U_year": 2590091.4993091337,
+      "interest_U_year": 1000000.0,
+      "principal_repayment_U_year": 1590091.4993091337,
+      "debt_coverage": 9.092003122778234,
+      "cash_after_debt_U_year": 20959028.500690866,
+      "funding_gap_U_year": 0,
+      "foreign_dividends_U_year": 6287708.55020726,
+      "foreign_equity_earnings_U_year": 6764736.0,
+      "direct_net_resident_income_U_year": 116034280.8224299,
+      "external_trade_after_replacement_U_year": 362649100.0,
+      "external_cash_after_financing_U_year": 207733916.77291352,
+      "value_added_identity_residual_U": 0.0,
+      "audience": {
+        "unique_fans": 140000000,
+        "fans_by_genre": {
+          "sports": 80000000,
+          "ordinary_life": 60000000,
+          "performance": 30000000,
+          "factual": 30000000
+        },
+        "sum_genre_followings": 200000000,
+        "paid_viewer_equivalents": 28000000.0,
+        "membership_buyers": 7000000.0
+      },
+      "capacity": {
+        "resident_workers": 104,
+        "host_residents": 500,
+        "arrivals_year": 592,
+        "arrival_capacity_year": 600,
+        "guest_nights_year": 30912,
+        "guest_night_allowance_year": 36525.0,
+        "peak_guests": 168.0,
+        "guest_beds": 200,
+        "arena_hours_year": 4552.0,
+        "arena_hours_available": 4800,
+        "studio_hours_year": 900,
+        "studio_hours_available": 2400,
+        "additional_crew_hours": 17568,
+        "additional_crew_hours_available": 48000
+      },
+      "increment_against_sport": {
+        "exports_U_year": 1000000.0,
+        "gross_value_added_U_year": -35722000.0,
+        "cash_before_debt_U_year": -126097600.0,
+        "external_cash_after_financing_U_year": -57658603.177570105,
+        "installed_capital_U": 30000000
+      },
+      "patron_transfers_U_year": 28000000.0,
+      "initial_paid_audience_acquisition_U": 224000000.0
+    }
+  },
+  "sports_input_sha256": "809b2cec731454bbf6c0e1a58fc20ff05e589ba986a0b2a70ec51d08ca080518"
+}

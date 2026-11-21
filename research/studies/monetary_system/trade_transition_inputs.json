@@ -1,0 +1,46 @@
+{
+  "schema": "terluna.research.trade-transition-inputs/1",
+  "evidence": "Synthetic fixed-stock FX transactions, a basket of U-related currencies, and transaction-balance scenarios applied to pinned conditional export portfolios. No currency adoption, issuer, peg, market exchange rate, appreciation or monetary demand forecast is established.",
+  "boundary": "The currently planned enclosed off-Earth economic zone and its actual industrial, source, power and transport operations. Earth counterparties remain external. The Open Moon, planetary array and subsequent outer Solar System buildout are outside this boundary.",
+  "units": "U_nom labels a hypothetical nominal contract denominated in U. Ledger prices value U_nom and external settlement unit S in common constant-U accounting units. Initial parity is an exogenous illustrative FX quote, not a peg, redemption promise, USD/U conversion or conversion of earlier U budgets. The currency basket contains synthetic U-related currencies Ua and Ub; S only measures its external value.",
+  "valuation_prices_constant_U": {"U_nom": 1.0, "S": 1.0},
+  "settlement_loops": {
+    "fixed_U_stock": 120,
+    "customer_opening_S": 120,
+    "service_exports_U_nom": 100,
+    "service_imports_S": 60,
+    "cases": {
+      "complete_reconversion": {"customer_purchase_U_nom": 100, "exporter_sale_U_nom": 100},
+      "exporter_holds_U": {"customer_purchase_U_nom": 100, "exporter_sale_U_nom": 60},
+      "customer_and_exporter_hold_U": {"customer_purchase_U_nom": 120, "exporter_sale_U_nom": 60}
+    }
+  },
+  "currency_basket": {
+    "constituent_units_per_U": {"Ua": 0.6, "Ub": 0.4},
+    "reference_quotes_S_per_constituent": {"Ua": 1.0, "Ub": 1.0},
+    "scenario_quotes_S_per_constituent": {"Ua": 0.8, "Ub": 1.1},
+    "rule": "U = 0.6 Ua + 0.4 Ub is illustrative fixed-quantity basket arithmetic for two synthetic U-related currencies. Ua and Ub are not assigned to cities, territories or adopted institutions. External unit S measures the basket value and is neither a constituent nor a reserve-backing target. No issuer, peg, redemption mechanism or forecasting rule is adopted."
+  },
+  "partial_external_liquidity": {
+    "initial_investment_S_value": 100,
+    "initial_reserve_allocation_fraction": 0.05,
+    "annual_available_cash_S_value": [10, 10, 10],
+    "earned_cash_reserve_allocation_fraction": 0.2,
+    "convertible_liability_value_at_stress_quote_S": 40,
+    "withdrawal_fractions": [0.25, 0.4],
+    "reserve_asset_haircuts": [0, 0.1],
+    "rule": "A separate normalized funding example allocates part of initial investment and cash remaining after operating costs and renewal to partial external liquidity/backing. Every allocated asset is unavailable for the other investment or distribution uses in this example. S-valued liabilities use an illustrative stress quote and are not the U stock in the fixed-stock ledger. Reserves are assets, not additional profit. No unlimited fixed-price convertibility or Earth-currency definition of U is promised. This example does not retrofit reserve funding into the nine portfolio seeds or NPVs."
+  },
+  "portfolio_source": {
+    "path": "../complex_returns/results/strategies.json",
+    "schema": "terluna.research.export-strategy-returns/1",
+    "sha256": "685a27c5b6820adf4b1e188e19906a1c747f2a34ef8b0da8f97c8326b62ed4dc"
+  },
+  "transaction_balance": {
+    "horizons": [30, 100, 300, 800],
+    "settlement_shares": [0.25, 0.6, 0.85],
+    "holding_days": [1, 7, 30],
+    "settlement_year_days": 365,
+    "rule": "Average transaction balances equal the assumed U-settled annual receipt flow times holding days divided by 365. Shares concern actual U settlement, not invoice labels. Each dated receipt is treated as a steady annual flow for this diagnostic. These balances are source-value equivalents, not nominal U amounts, newly created balances, reserve requirements, annual revenue or additional investment return. Existing balances, netting, intrayear peaks and recipient reconversion are not inferred."
+  }
+}

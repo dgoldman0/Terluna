@@ -1,0 +1,39 @@
+{
+  "schema": "terluna.resources.coproduct-candidates/1",
+  "source": {
+    "path": "research/runs/source_access/inputs/neo/nea_catalogue.json",
+    "sha256": "14f20ec966039c91e884e7c4ae58508a10f0ecf87acd5e971392f912b38baaa0",
+    "documentation": "https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html",
+    "reading_rule": "Exact records from the retained snapshot. Diameter disagreement with the 2021 paper is preserved; no candidate stock is estimated here."
+  },
+  "records": [
+    {
+      "spkid": 20006178,
+      "full_name": "  6178 (1986 DA)",
+      "diameter": "2.3",
+      "diameter_sigma": null,
+      "albedo": "0.15",
+      "spec_B": null,
+      "spec_T": null,
+      "a": "2.813340461298638",
+      "e": ".5850216206473592",
+      "q": "1.16747546519692",
+      "i": "4.3150566184972",
+      "H": "15.71"
+    },
+    {
+      "spkid": 20843295,
+      "full_name": "843295 (2016 ED85)",
+      "diameter": null,
+      "diameter_sigma": null,
+      "albedo": null,
+      "spec_B": null,
+      "spec_T": null,
+      "a": "2.984549360943957",
+      "e": ".6947146912088135",
+      "q": ".9111390732583144",
+      "i": "8.808852370636409",
+      "H": "17.62"
+    }
+  ]
+}

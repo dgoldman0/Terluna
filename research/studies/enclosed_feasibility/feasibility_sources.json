@@ -1,0 +1,158 @@
+{
+  "schema": "terluna.research.enclosed-feasibility-sources/1",
+  "accessed": "2026-11-13",
+  "reading_rule": "Only the stated sections support the stated claims. Dated development announcements are not treated as completed missions. No external paper or dataset bytes are redistributed. Analytical screens and programme recommendations are this study’s calculations and judgments.",
+  "external_sources": [
+    {
+      "id": "mre",
+      "title": "NASA/KSC, ICES-2026-300",
+      "published": "2026-07-12",
+      "url": "https://ntrs.nasa.gov/citations/20260006167",
+      "reading_scope": "NTRS abstract read in full; presentation PDF not used for additional performance claims.",
+      "claim": "A late-2024 vacuum experiment processed 25 kg simulant, with 0.07 kg/hour oxygen and 9 hours sustained electrolysis.",
+      "limit": "Laboratory relevant-environment demonstration; no commercial metal yield, alloy quality or lifetime qualification."
+    },
+    {
+      "id": "card",
+      "title": "NASA, Carbothermal Reduction Demonstration",
+      "published": "2026-02-13",
+      "url": "https://www.nasa.gov/centers-and-facilities/johnson/sunlight-extracts-oxygen-from-regolith-using-solar-chemistry/",
+      "reading_scope": "Article body read.",
+      "claim": "Integrated solar concentrator, reactor, controls and gas analysis confirmed carbon monoxide from simulated regolith.",
+      "limit": "Ground prototype; no operating lunar factory."
+    },
+    {
+      "id": "blue",
+      "title": "Blue Origin, Blue Alchemist CDR",
+      "published": "2025-09-10",
+      "url": "https://www.blueorigin.com/news/blue-alchemist-hits-major-milestone-toward-permanent-sustainable-lunar-infrastructure",
+      "reading_scope": "Announcement body read.",
+      "claim": "Vendor reports completed critical design review and a planned autonomous simulated-lunar-environment demonstration in 2026.",
+      "limit": "Vendor claim and schedule, not an admitted completed 2026 demonstration or production qualification."
+    },
+    {
+      "id": "maple",
+      "title": "Caltech, SSPD-1 mission outcome",
+      "published": "2024-01-16",
+      "url": "https://www.caltech.edu/about/news/space-solar-power-project-ends-first-in-space-mission-with-successes-and-lessons",
+      "reading_scope": "Mission-report MAPLE section and deployment lessons read.",
+      "claim": "Wireless transfer demonstrated in space and a beam directed to Earth; subsequent testing found transmitter degradation and thermal-electrical interactions.",
+      "limit": "Element and experiment evidence, not multi-hundred-megawatt service or a kilometre aperture."
+    },
+    {
+      "id": "cfm",
+      "title": "NASA, LOXSAT preparation",
+      "published": "2026; updated 2026-06-22",
+      "url": "https://www.nasa.gov/directorates/stmd/tech-demo-missions-program/cryogenic-fluid-management-cfm/nasa-industry-prepare-cryogenic-fuel-technology-demo/",
+      "reading_scope": "Article body read, including nine-month mission and 11 technologies.",
+      "claim": "Planned liquid-oxygen flight tests cover boiloff, transfer, pressure and gauging.",
+      "limit": "Planning evidence only; no assumed completion, liquid-hydrogen equivalence or depot fleet qualification."
+    },
+    {
+      "id": "water",
+      "title": "NASA, ISS water recovery",
+      "published": "2023-06-20",
+      "url": "https://www.nasa.gov/missions/station/nasa-achieves-water-recovery-milestone-on-international-space-station/",
+      "reading_scope": "Article body read.",
+      "claim": "Brine processing helped demonstrate 98% recovery of collected water, versus 93–94% previously.",
+      "limit": "Applies to the described water-processing boundary; no full agriculture, industrial, oxygen or nutrient closure."
+    },
+    {
+      "id": "dust",
+      "title": "NASA, electrodynamic dust shield on the Moon",
+      "published": "2025-03-27",
+      "url": "https://www.nasa.gov/image-article/nasas-dust-shield-successfully-repels-lunar-regolith-on-moon/",
+      "reading_scope": "Article body read.",
+      "claim": "EDS removed lunar dust from glass and thermal-radiator surfaces on Blue Ghost Mission 1.",
+      "limit": "Surface cleaning demonstration; no decades-long seal, bearing or mine reliability."
+    },
+    {
+      "id": "fission",
+      "title": "DOE, fission surface power development",
+      "published": "2026-01-13",
+      "url": "https://www.energy.gov/ne/articles/5-things-you-need-know-about-fission-surface-power-systems",
+      "reading_scope": "Article read.",
+      "claim": "Development objective up to 40 kW for a lunar demonstration.",
+      "limit": "Dated programme target, not operating hardware or a current guaranteed schedule. Does not establish a gigawatt alternative."
+    },
+    {
+      "id": "bvad",
+      "title": "NASA BVAD, revision 2",
+      "published": "2022-02",
+      "url": "https://ntrs.nasa.gov/api/citations/20210024855/downloads/BVAD_2.15.22-final.pdf",
+      "reading_scope": "PDF printed pages 47–50 / PDF pages 60–63, Tables 3-23 to 3-27 and surrounding assumptions. Not whole-document review.",
+      "claim": "Long-mission reference crewmember Table 3-25 consumes 0.90 kg oxygen/day; short-mission reference Table 3-23 is 0.84.",
+      "limit": "Crew reference under specified exercise and microgravity conditions; population-scale multiplication is a screening analogue, not measured lunar population demand."
+    },
+    {
+      "id": "gravity",
+      "title": "Harry W. Jones, ICES-2021-142",
+      "published": "2021-07",
+      "url": "https://ntrs.nasa.gov/citations/20210019591",
+      "reading_scope": "NTRS abstract read.",
+      "claim": "Notes absence of direct long-duration human partial-gravity evidence and argues from indirect evidence for health concerns.",
+      "limit": "An evidence-gap and interpretation source, not proof that lunar habitation is impossible or a numerical gravity threshold certified for all people."
+    },
+    {
+      "id": "sample",
+      "title": "NASA, OSIRIS-REx bulk sample mass",
+      "published": "2024-02-15",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2024/02/15/nasa-announces-osiris-rex-bulk-sample-mass/",
+      "reading_scope": "Official mission announcement consulted.",
+      "claim": "121.6 g of Bennu material returned to Earth in September 2023.",
+      "limit": "Demonstrates rendezvous, sampling and return; not industrial excavation. Bennu remains a retained scientific exclusion."
+    },
+    {
+      "id": "systems",
+      "title": "NASA Systems Engineering Handbook, Appendix",
+      "published": "2016 handbook; live reference",
+      "url": "https://www.nasa.gov/reference/system-engineering-handbook-appendix/",
+      "reading_scope": "Targeted readiness and verification/validation entries consulted.",
+      "claim": "Technology readiness is attached to a specified component/system performance history; system verification, validation and operational transition need their own evidence.",
+      "limit": "Used for evidence distinctions; no formal NASA rating assigned to Terluna."
+    }
+  ],
+  "parallel_branch_records": [
+    {
+      "branch": "domain/resources",
+      "revision": "1d652941",
+      "path": "resources/source_access/potential.md",
+      "sha256": "dc4a5f8fbbaf75b97b9031a0750a3102719d1670ca11bdaaacbbec9cf5014c86",
+      "use": "Read for distribution, scope and preservation requirements; no candidate is admitted as an industrial reserve or released source."
+    },
+    {
+      "branch": "domain/resources",
+      "revision": "1d652941",
+      "path": "resources/source_access/protocols.md",
+      "sha256": "b0128490e2f73102f46f0e7fbc587f29eb0c9e3fc01c9da13922f1ab275ad913",
+      "use": "Read for distribution, scope and preservation requirements; no candidate is admitted as an industrial reserve or released source."
+    },
+    {
+      "branch": "domain/resources",
+      "revision": "1d652941",
+      "path": "resources/source_access/protection_inputs.json",
+      "sha256": "3f20e052e97e7d771eaea00ab1c40b101db1720b8f67431e648406b0dcda21f8",
+      "use": "Read for distribution, scope and preservation requirements; no candidate is admitted as an industrial reserve or released source."
+    }
+  ],
+  "local_definition_records": [
+    {
+      "path": "research/studies/initial_industrial_system/run.py",
+      "sha256": "43c9531a8196cd420940c2ee52d84b32fc6c5a25de69b1ce72ad954649aa7500",
+      "revision": "a8af8761",
+      "use": "Inspected to preserve the meanings of delivered receiver flux, nominal storage, conversion efficiency and protected reserve margin."
+    },
+    {
+      "path": "research/studies/initial_industrial_system/README.md",
+      "sha256": "bbfba7423be56047df6411e78d93a3e24b6f8392247c9a312f12ec6970967946",
+      "revision": "a8af8761",
+      "use": "Inspected to preserve the meanings of delivered receiver flux, nominal storage, conversion efficiency and protected reserve margin."
+    },
+    {
+      "path": "research/studies/lava_tube_cities/buildout.py",
+      "sha256": "f746e0fa8a9ed1def55ec9856afb5be4f2069e1fe6acba989aa2d51c1226ecd6",
+      "revision": "a8af8761",
+      "use": "Inspected to preserve the meanings of delivered receiver flux, nominal storage, conversion efficiency and protected reserve margin."
+    }
+  ]
+}

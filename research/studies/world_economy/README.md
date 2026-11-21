@@ -111,3 +111,18 @@ python -m pytest research/studies/world_economy/tests
 ```
 
 Each runner writes to ignored `research/runs/` by default; pass `--output research/studies/world_economy/results/<name>.json` to rewrite the committed product. The products bind their inputs and upstream products by SHA-256, in the order above, so a changed upstream product is rebound in its readers' inputs before they run. [sources.json](sources.json) records the targeted source reading and [checks.json](checks.json) the numerical and repository checks.
+
+## Cultural-export continuation
+
+The humanities domain now develops [sports economics](../../../humanities/economics/sports.md)
+and [broader entertainment](../../../humanities/economics/entertainment.md) as
+separate, reproducible studies. They examine large Earth fan followings while
+lunar settlement is small, several competitions with visiting teams, everyday-life
+programming, performance, factual work and licensed products. The four-competition
+case earns 600 million U annually from 80 million distinct fans; an expanded
+140-million-fan portfolio earns 1.202 billion U under its own explicit assumptions.
+These are conditional export and producer accounts, with imported services and
+nonresident compensation identified. They preserve the earlier sports venue
+calculation and allocate mature cultural production within the existing leisure,
+information and other sector totals. They establish no measured audience and add
+no automatic increment to planetary product or construction finance.

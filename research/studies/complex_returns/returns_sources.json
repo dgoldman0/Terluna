@@ -1,0 +1,68 @@
+{
+  "schema": "terluna.research.complex-returns-sources/1",
+  "accessed": "2026-11-12",
+  "method_sources": [
+    {
+      "author": "HM Treasury",
+      "title": "The Green Book 2026",
+      "url": "https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026",
+      "read": "Targeted HTML: appraisal boundaries, counterfactuals, distribution, risk, presentation and switching values.",
+      "limit": "Methods only; no lunar prices or adopted policy."
+    },
+    {
+      "author": "HM Treasury",
+      "title": "Green Book supplementary discounting guidance October 2026",
+      "url": "https://assets.publishing.service.gov.uk/media/6ae0b34016428df537606216/Green_Book_supplementary_guidance_-_discounting.pdf",
+      "read": "Sections2.6–2.16 and3.1–3.13, including successive forward rates and the125-year limit.",
+      "limit": "No extrapolated UK rate schedule used; constant project sensitivity rates are separate."
+    },
+    {
+      "author": "Millennium Challenge Corporation",
+      "title": "Guidelines for Economic and Beneficiary Analysis",
+      "url": "https://www.mcc.gov/publications-sections/story-cdg-guidelines-for-economic-and-beneficiary-analysis/",
+      "read": "ERR steps, alternative uses, actor financial analysis, beneficiary analysis, shadow prices and multipliers.",
+      "limit": "No agency hurdle rate or income-growth calibration transferred."
+    },
+    {
+      "author": "OECD",
+      "title": "Cost Benefit Analysis and the Environment 2018",
+      "url": "https://www.oecd.org/en/publications/cost-benefit-analysis-and-the-environment_9789264085169-en.html",
+      "read": "Executive summary and key findings in HTML.",
+      "limit": "Full book not read; no nonmarket value transferred."
+    },
+    {
+      "author": "HM Treasury",
+      "title": "Wellbeing Guidance for Appraisal 2021",
+      "url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1005388/Wellbeing_guidance_for_appraisal_-_supplementary_Green_Book_guidance.pdf",
+      "read": "Overview,4.6 double counting and Annex2 WELLBY definition.",
+      "limit": "No sterling value or superseded discount convention used."
+    },
+    {
+      "author": "Evans Quigley and Guthrie",
+      "title": "NZ Treasury Working Paper12/01",
+      "url": "https://www.treasury.govt.nz/publications/wp/contemporary-microeconomic-foundations-structure-and-management-public-sector-wp-12-01",
+      "read": "Sections4.1–4.5 on waiting, learning and irreversible investment.",
+      "limit": "Authored working paper, not government policy; no numerical real-option value estimated."
+    }
+  ],
+  "input_sources": {
+    "economy": {
+      "snapshot": "inputs/economy.json",
+      "sha256": "960f413d25d2d9a61dea32cfa9c1695df57268ec708b1ab1a86b59bffcc44961",
+      "schema": "terluna.research.initial-system-economy/1",
+      "source_repository_path": "research/studies/initial_industrial_system/results/economy.json",
+      "source_commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888"
+    },
+    "industrial": {
+      "snapshot": "inputs/industrial_system.json",
+      "sha256": "4bf5c8a00838735b7716aeca07bb9cf1a43265c75a69b02cf4ab183b3b19e9e7",
+      "schema": "terluna.research.initial-industrial-system/1",
+      "source_repository_path": "research/studies/initial_industrial_system/results/industrial_system.json",
+      "source_commit": "146a558275f486c9fd9a5cf79908b7c6fdf21888"
+    }
+  },
+  "unresolved_retrievals": [
+    "World Bank economic-analysis PDF and EIB2023 appraisal PDF exceeded browser retrieval limits; not used as substantive evidence."
+  ],
+  "source_limit": "Research informs appraisal structure. Future demand, cost sufficiency, schedules, shadow prices and social outcomes remain unvalidated."
+}

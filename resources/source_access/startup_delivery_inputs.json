@@ -1,0 +1,103 @@
+{
+  "schema": "terluna.resources.startup-delivery-inputs/1",
+  "reference_case": "propellant_logistics:breakthrough:wider:combined",
+  "feed_weights": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "refinery_ramp": [
+    0,
+    0,
+    0.1,
+    0.2,
+    0.4,
+    0.6,
+    0.8,
+    1
+  ],
+  "source_final_treated_shares": [
+    0.01,
+    0.1,
+    1
+  ],
+  "lunar_selected_final_treated_share": 0.1,
+  "Earth_allocation_fraction": 0.8,
+  "source_delivery_lag_years": 1.5,
+  "lunar_delivery_lag_years": 0.25,
+  "return_loss_fraction": 0.01,
+  "feed_shape_sensitivities": {
+    "uniform": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "gradual": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "later": [
+      0,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "source_delivery_lag_sensitivities_years": [
+    0.5,
+    1.5,
+    3
+  ],
+  "assumptions": [
+    "Annual feed weights redistribute the inherited seed aggregate; they are an assumed gradual ramp, not a deployment solution. The separately recorded late feed is split equally between build years 7 and 8.",
+    "Coproduct refining starts in build year 3 and ramps to the selected final source share by year 8. Lunar treatment separately reaches 10% of total lunar feed, assumed to be selectable KREEP-like material. The lunar share is unchanged across source-refinery alternatives.",
+    "80% of refined product is allocated to Earth and 20% retained by the off-Earth economy, solely as an explicit allocation example; actual domestic demand and saleable export surpluses remain unestimated.",
+    "Source-to-Earth delay of 1.5 years is a planning proxy alongside the inherited three-year source round trip, not a derived trajectory; lunar delay of 0.25 years includes handling and dispatch. Sensitivities vary the source delay.",
+    "One-percent return loss is inherited from the capsule scenario and applied once. Refinery finishing recovery already covers processing losses.",
+    "Every material receipt is physical potential conditional on funded refining, delivery capacity, quality and buyers. The output does not assume bulk nickel, cobalt or a mixed rare-earth basket is automatically an economic Earth export."
+  ],
+  "return_context": {
+    "source_path": "provisioning/enclosed_industry/inputs/engineering.json",
+    "source_sha256": "e15aec1a0da1b41f23326d1ce15a587addc994e69b4cdca53c1516990365eed2",
+    "capsule_payload_kg": 10000,
+    "packaging_fraction": 0.05,
+    "ground_service_USD2026_kg": 150,
+    "USD2026_to_USD2041": 1.557967416600765
+  },
+  "dependencies": {
+    "inputs/startup_feed.json": "50456a4c98b41b8796d8aa981b8eea5adb00631c6a4f247e60e6533cd17771ea",
+    "export_startup_feed.py": "a64c41e3b505e7407c38cd7a2a6423b6aa132a5279f95b5fe188e22b67b116d5",
+    "coproducts.py": "04fa8f146fe82287628466f065949d57b7a94c4b0f9bb424bc4437a31471e90a",
+    "coproduct_inputs.json": "e8dfd0fe5761ba1576282bc13b509b2038f31a409182b9a6d807b002ddd67d63",
+    "coproduct_assays.json": "6a5a5d2d826a320f9bfd2a51449b94c74937a98887288ece4f45fc3df2f4ca29"
+  },
+  "external_context_sources": [
+    {
+      "id": "usgs_nickel_2026",
+      "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+      "retrieved": "2026-11-13",
+      "reading_scope": "Search-indexed primary USGS nickel table: 2025 estimated annual LME nickel cash price $6.90/lb, approximately $15/kg. Context only, not a future price or model input.",
+      "retrieval_limit": "Direct opening of the full PDF and guessed individual chapter URLs returned 403. Full PDF retrieval and full-table review remain unresolved; no raw byte hash is claimed."
+    }
+  ]
+}

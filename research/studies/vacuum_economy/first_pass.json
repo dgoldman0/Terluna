@@ -1,0 +1,332 @@
+{
+ "schema": "terluna.research.vacuum-economy.first-pass-inputs/1",
+ "evidence": "The values the staged order books read, frozen from the staged inputs so that the first pass is drawn up without the staged studies. Each part names the file it was taken from and that file's digest.",
+ "books_drawn_to_record_the_reads": 81,
+ "rules": {
+  "source": "research/studies/enclosed_returns/enclosed_inputs.json",
+  "sha256": "055fedce2d7f3824213960e0d37a29d4b7c700fa4c75594ae1da32f7584d40ca",
+  "values": {
+   "first_productive_year": 8,
+   "ramp_start_year": 10,
+   "completion_year": 200,
+   "last_year": 220,
+   "commissioning_years": 2,
+   "seed_population": 12500,
+   "founding_population": 250000,
+   "cap_population": 6468289.238000949,
+   "seed_commercial_fraction": 0.05,
+   "commercial_capture_growth": 0.04,
+   "service_staff_fraction": 0.1,
+   "market_growth": {
+    "static": 0.0,
+    "reference": 0.005,
+    "wider": 0.01
+   },
+   "Earth_ground_service_USD2026_per_payload_kg": 150,
+   "delivered_quality_yield": 0.98,
+   "return_loss_probability": 0.01,
+   "reference_visitors_year": 10000,
+   "visitor_stay_nights": 14,
+   "visitor_occupancy": 0.7,
+   "visitor_USD2026_night": 20000,
+   "visitor_Earth_service_fraction": 0.1,
+   "year_days": 365.25
+  }
+ },
+ "strategies": {
+  "source": "research/studies/complex_returns/strategy_inputs.json",
+  "sha256": "ad8d3af2ec0a5614492536abd3bb10a21681cf08c17b8e52a46ab8af65500284",
+  "values": {
+   "strategies": {
+    "raw_resource_price": {
+     "profile": "source_refined",
+     "lunar_price_USD2026_kg": 0,
+     "source_price_USD2026_kg": 3,
+     "premium_share": 0
+    },
+    "commodity_refined": {
+     "profile": "commodity_mixed",
+     "lunar_price_USD2026_kg": 3,
+     "source_price_USD2026_kg": 3,
+     "premium_share": 0
+    },
+    "specialty": {
+     "profile": "specialty_mixed",
+     "lunar_price_USD2026_kg": 750,
+     "source_price_USD2026_kg": 750,
+     "premium_share": 0
+    },
+    "premium_lunar": {
+     "profile": "goods_heavy",
+     "lunar_price_USD2026_kg": 750,
+     "source_price_USD2026_kg": 750,
+     "premium_share": 1
+    },
+    "propellant_logistics": {
+     "profile": "logistics_1Mt",
+     "lunar_price_USD2026_kg": 0,
+     "source_price_USD2026_kg": 0,
+     "premium_share": 0
+    },
+    "compute_digital": {
+     "profile": "computing_5GW",
+     "lunar_price_USD2026_kg": 0,
+     "source_price_USD2026_kg": 0,
+     "premium_share": 0
+    },
+    "services": {
+     "profile": "domestic_services",
+     "lunar_price_USD2026_kg": 0,
+     "source_price_USD2026_kg": 0,
+     "premium_share": 0
+    },
+    "diversified": {
+     "profile": "balanced",
+     "lunar_price_USD2026_kg": 750,
+     "source_price_USD2026_kg": 750,
+     "premium_share": 0.5
+    },
+    "prior_manufacturing_mix": {
+     "profile": "current_large",
+     "lunar_price_USD2026_kg": 2000,
+     "source_price_USD2026_kg": 30,
+     "premium_share": 0
+    }
+   },
+   "markets": {
+    "limited": {
+     "industrial_budget_USD2041_year": 100000000000.0,
+     "mission_budget_USD2041_year": 46739022498.02295,
+     "household_budget_USD2041_year": 10000000000.0,
+     "premium_demand_kg_year": 10000000.0,
+     "compute_price_factor": 0.75,
+     "compute_contracted_capacity_W": 1000000000.0,
+     "compute_capacity_offtake_fraction": 0.5,
+     "funded_compatible_missions_year": 100,
+     "institutional_services_budget_USD2041_year": 30000000000.0
+    },
+    "global": {
+     "industrial_budget_USD2041_year": 500000000000.0,
+     "mission_budget_USD2041_year": 100000000000.0,
+     "household_budget_USD2041_year": 90000000000.0,
+     "premium_demand_kg_year": 60000000.0,
+     "compute_price_factor": 1,
+     "compute_contracted_capacity_W": 5000000000.0,
+     "compute_capacity_offtake_fraction": 0.75,
+     "funded_compatible_missions_year": 1000,
+     "institutional_services_budget_USD2041_year": 200000000000.0
+    },
+    "breakthrough": {
+     "industrial_budget_USD2041_year": 2000000000000.0,
+     "mission_budget_USD2041_year": 1000000000000.0,
+     "household_budget_USD2041_year": 600000000000.0,
+     "premium_demand_kg_year": 150000000.0,
+     "compute_price_factor": 1,
+     "compute_contracted_capacity_W": 20000000000.0,
+     "compute_capacity_offtake_fraction": 1,
+     "funded_compatible_missions_year": 10000,
+     "institutional_services_budget_USD2041_year": 1500000000000.0
+    }
+   },
+   "premium": {
+    "equivalent_product_offer_USD2026_kg": 2000,
+    "willingness_to_pay_multiple": 1.5,
+    "accepted_fraction": 0.6,
+    "qualification_years_after_first_production": 10,
+    "fallback_recovery_fraction": 0.8,
+    "installed_capital_USD2041_per_founding_scale": 20000000000.0,
+    "life_years": 20,
+    "annual_development_USD2041_per_founding_scale": 400000000.0,
+    "incremental_cost_USD2041_attempted_kg": 20,
+    "additional_mean_W_per_attempted_kg_year": 0.5,
+    "staff_per_founding_scale": 300
+   },
+   "logistics": {
+    "delivered_fuel_kg_per_mission": 1000000.0,
+    "support_invoice_USD2041_per_mission": 30000000.0,
+    "support_variable_cost_fraction": 0.6,
+    "support_capital_USD2041_per_founding_scale": 5000000000.0,
+    "life_years": 20,
+    "support_fixed_USD2041_per_founding_scale_year": 200000000.0,
+    "support_staff_per_founding_scale": 100
+   },
+   "synergies": {
+    "internal_compute_W_for_culture": 5000000.0,
+    "internal_compute_W_per_service_kit": 10000000.0,
+    "avoided_external_digital_cost_fraction": 0.03,
+    "premium_accepted_fraction_gain": 0.1,
+    "premium_qualification_years_saved": 2,
+    "additional_separate_branded_license_fraction": 0.05,
+    "qualification_research_slots_per_founding_scale": 100
+   },
+   "competition": {
+    "mission_share_of_research_invoices": 0.25,
+    "Earth_launch_cost_factor": 1,
+    "Earth_fuel_price_floor_share_of_delivered_alternative": 0.02,
+    "premium_competitor_price_factor": 1
+   }
+  }
+ },
+ "profiles": {
+  "source": "research/studies/complex_returns/inputs/strategy_profiles.json",
+  "sha256": "68de393762a3411e0fc3fb2956c8d16c936c46019db70995cc3ccd5654449a9c",
+  "values": {
+   "inflation_factor": 1.557967416600765,
+   "profiles": {
+    "domestic_services": {
+     "input_arguments": {
+      "physical": {}
+     }
+    },
+    "source_refined": {
+     "input_arguments": {
+      "physical": {
+       "source_goods": 100000000.0
+      }
+     }
+    },
+    "commodity_mixed": {
+     "input_arguments": {
+      "physical": {
+       "goods": 100000000.0,
+       "source_goods": 50000000.0,
+       "compute": 1000000000.0,
+       "propellant_sales": 25000000.0
+      }
+     }
+    },
+    "specialty_mixed": {
+     "input_arguments": {
+      "physical": {
+       "goods": 100000000.0,
+       "source_goods": 50000000.0,
+       "compute": 1000000000.0,
+       "propellant_sales": 25000000.0
+      }
+     }
+    },
+    "goods_heavy": {
+     "input_arguments": {
+      "physical": {
+       "goods": 200000000.0
+      }
+     }
+    },
+    "current_large": {
+     "input_arguments": {
+      "physical": {
+       "goods": 200000000.0,
+       "compute": 3000000000.0,
+       "propellant_sales": 25000000.0
+      }
+     }
+    },
+    "logistics_1Mt": {
+     "input_arguments": {
+      "physical": {
+       "propellant_sales": 1000000000.0
+      }
+     }
+    },
+    "computing_5GW": {
+     "input_arguments": {
+      "physical": {
+       "compute": 5000000000.0
+      }
+     }
+    },
+    "balanced": {
+     "input_arguments": {
+      "physical": {
+       "goods": 100000000.0,
+       "source_goods": 25000000.0,
+       "compute": 3000000000.0,
+       "propellant_sales": 250000000.0
+      }
+     }
+    }
+   },
+   "market_reference": {
+    "Earth_propellant_competitor_USD2026_kg": 614.6503402821924,
+    "Earth_propellant_price_fraction_ceiling": 0.8,
+    "propellant_USD2026_kg": 300,
+    "compute_USD2026_per_installed_W_year": 13.657449999999999,
+    "compute_Earth_service_fraction": 0.2
+   }
+  }
+ },
+ "services": {
+  "source": "research/studies/complex_returns/staged_inputs.json",
+  "sha256": "31eb2fee9cda8744ba4e9c729c62d54f132a16ecb6c2c60ea52e3d6dc11cf2a5",
+  "values": {
+   "production_ramp_years": 5,
+   "service_demand_initial_fraction": 0.1,
+   "service_demand_annual_growth": 0.35,
+   "service_kit": {
+    "capital_USD2041": 15000000000,
+    "life_years": 20,
+    "staff": 350,
+    "power_W": 20000000,
+    "research_contracts_year": 1000,
+    "professional_clients_year": 5000,
+    "fixed_purchases_USD2041_year": 400000000
+   },
+   "cultural_platform": {
+    "capital_USD2041": 10000000000,
+    "life_years": 10,
+    "staff": 200,
+    "power_W": 5000000,
+    "fixed_purchases_USD2041_year": 600000000
+   },
+   "service_staff_USD2041_year": 250000,
+   "paid_churn": 0.25,
+   "paid_acquisition_USD2041": 30,
+   "license_renewal_churn": 0.2,
+   "license_acquisition_USD2041": 8,
+   "variable_cost_fractions": {
+    "culture": 0.5,
+    "licenses": 0.55,
+    "research": 0.65,
+    "professional": 0.7
+   },
+   "scenarios": {
+    "limited": {
+     "audience": 150000000,
+     "paid_fraction": 0.2,
+     "paid_USD2041_year": 120,
+     "advertising_and_rights_USD2041_fan_year": 6,
+     "licenses": 20000000,
+     "license_USD2041_year": 100,
+     "research_contracts": 2000,
+     "research_USD2041_contract": 5000000,
+     "professional_clients": 10000,
+     "professional_USD2041_client_year": 1000000
+    },
+    "global": {
+     "audience": 600000000,
+     "paid_fraction": 0.3,
+     "paid_USD2041_year": 240,
+     "advertising_and_rights_USD2041_fan_year": 18,
+     "licenses": 80000000,
+     "license_USD2041_year": 300,
+     "research_contracts": 5000,
+     "research_USD2041_contract": 20000000,
+     "professional_clients": 25000,
+     "professional_USD2041_client_year": 2000000
+    },
+    "breakthrough": {
+     "audience": 2000000000,
+     "paid_fraction": 0.4,
+     "paid_USD2041_year": 360,
+     "advertising_and_rights_USD2041_fan_year": 36,
+     "licenses": 400000000,
+     "license_USD2041_year": 500,
+     "research_contracts": 20000,
+     "research_USD2041_contract": 40000000,
+     "professional_clients": 100000,
+     "professional_USD2041_client_year": 5000000
+    }
+   }
+  }
+ }
+}

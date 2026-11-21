@@ -1,0 +1,25 @@
+{
+  "schema": "terluna.resources.lunar-potential-sources/1",
+  "sources": [
+    {
+      "id": "hayne2017",
+      "url": "https://doi.org/10.1002/2017JE005387",
+      "accessed": "2026-11-13",
+      "reading_scope": "Sections 3.1 and Appendix A, Tables A1/A2: density-depth equation, assumed surface/deep density, H scale and Apollo constraints. Full article not read.",
+      "use": "Density-profile functional form and order-of-magnitude constraints; triangular priors are study assumptions.",
+      "retrieval": "Publisher HTML read through web tool; no full-text redistribution."
+    },
+    {
+      "id": "usgs2023",
+      "url": "https://www.usgs.gov/publications/assessment-lunar-resource-exploration-2022",
+      "accessed": "2026-11-13",
+      "reading_scope": "Publication abstract: distinction between resources/reserves, abundant bulk minerals, uncertain polar ice. No numerical input imported.",
+      "retrieval": "Full report PDF and Publications Warehouse URL returned HTTP403; report claims restricted to the obtained USGS publication abstract."
+    },
+    {
+      "id": "lunar_prospector",
+      "path": "lunar_sources.json",
+      "reading_scope": "Existing admitted 1790-cell Lunar Prospector derived composition product and formal covariance, unchanged; see producer source register."
+    }
+  ]
+}

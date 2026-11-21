@@ -1,0 +1,108 @@
+{
+  "schema": "terluna.research.industrial-transport-inputs/1",
+  "date": "2026-11-12",
+  "inputs": {
+    "industrial_configuration": {
+      "path": "research/studies/initial_industrial_system/industrial_inputs.json",
+      "sha256": "e67ad3b04ed0cba6c605474008cf5a24a5458d43054373d680215f00e682bade"
+    },
+    "industrial_result": {
+      "path": "research/studies/initial_industrial_system/results/industrial_system.json",
+      "sha256": "4bf5c8a00838735b7716aeca07bb9cf1a43265c75a69b02cf4ab183b3b19e9e7"
+    },
+    "industrial_producer": {
+      "path": "research/studies/initial_industrial_system/run.py",
+      "sha256": "43c9531a8196cd420940c2ee52d84b32fc6c5a25de69b1ce72ad954649aa7500"
+    }
+  },
+  "evidence": "Comparative engineering scenarios with the same settlement demand; no trajectory-qualified fleet, permitted source reserve or adopted architecture.",
+  "chemical": {
+    "fixed_dry_to_payload": 0.1,
+    "tank_dry_to_peak_propellant": 0.05,
+    "handling_retention": 0.98,
+    "cooling_electric_W_per_stored_kg": 0.03,
+    "cooling_hardware_kg_W": 0.02,
+    "cooling_hardware_USD2026_W": 20
+  },
+  "electric": {
+    "Isp_s": 2000,
+    "total_efficiency": 0.3,
+    "earth_dv_oneway_m_s": 8000,
+    "source_dv_oneway_m_s": 4000,
+    "earth_powered_days": 365.25,
+    "earth_cycle_days": 550,
+    "source_powered_days": 365.25,
+    "source_cycle_days": 1095.75,
+    "structural_dry_to_payload": 0.08,
+    "tank_dry_to_propellant": 0.05,
+    "drive_kg_W": 0.0005,
+    "drive_USD2026_W": 5,
+    "drive_powered_life_hours": 23000,
+    "hull_life_years": 20,
+    "earth_array_life_years": 10,
+    "source_array_life_years": 20,
+    "radiator_life_years": 20,
+    "handling_retention": 0.99,
+    "thermal_control_W_per_stored_kg": 0.002,
+    "thermal_control_kg_W": 0.01,
+    "thermal_control_USD2026_W": 10
+  },
+  "depots": {
+    "inventory_years": 0.25,
+    "tank_mass_per_stored_kg": 0.05,
+    "life_years": 25,
+    "seed_earth_fleet_fraction": 0.02
+  },
+  "architecture_cases": {
+    "earth_chemical": {
+      "earth_route": "earth_chemical",
+      "source_route": "chemical"
+    },
+    "space_chemical": {
+      "earth_route": "space_chemical",
+      "source_route": "chemical"
+    },
+    "electric_earth_leg": {
+      "earth_route": "electric",
+      "source_route": "chemical"
+    },
+    "electric_both_legs": {
+      "earth_route": "electric",
+      "source_route": "electric"
+    },
+    "split_chemical": {
+      "earth_route": "split_chemical",
+      "source_route": "chemical"
+    }
+  },
+  "sensitivities": {
+    "electric_efficiency_50pct": {
+      "electric.total_efficiency": 0.5
+    },
+    "electric_efficiency_15pct": {
+      "electric.total_efficiency": 0.15
+    },
+    "electric_earth_delta_v_6000": {
+      "electric.earth_dv_oneway_m_s": 6000
+    },
+    "electric_earth_delta_v_10000": {
+      "electric.earth_dv_oneway_m_s": 10000
+    },
+    "electric_powered_730days": {
+      "electric.earth_powered_days": 730.5,
+      "electric.earth_cycle_days": 1000
+    },
+    "electric_drive_life_10000h": {
+      "electric.drive_powered_life_hours": 10000
+    }
+  },
+  "rules": [
+    "Original industrial results remain unchanged; Earth launch flow is conditional on architecture.",
+    "All chemical Earth-return braking is propulsive; no aerocapture, free braking or propellant at LEO without delivery.",
+    "Electric efficiency is from stored water and electrical bus to exhaust kinetic energy, including feed processing and all gas use; current oxygen-anode specific impulse is not a demonstrated total-water specific impulse.",
+    "All new fleet modules are Earth-manufactured in this comparison; the earlier source-structure localization case remains independent.",
+    "Additional route inventories are filled from the source network and enter construction material flows; a 2 percent first-dispatch Earth-fuel seed is an explicit bootstrap allowance, not continuing Earth propellant procurement.",
+    "Quarter-year depot inventories, 25 percent installed spare margin and 80 percent fleet availability are separate allowances.",
+    "Core city/town geometry, population, source protections and ordinary material demand remain fixed."
+  ]
+}

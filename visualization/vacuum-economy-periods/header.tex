@@ -1,0 +1,39 @@
+% Typography for the scoping study and the fund proposal, included by pandoc ahead of the document. A document may set
+% its running head and the heading of its title-page note with \def\runninghead{...} and \def\abouttitle{...} in its
+% header-includes; these defaults apply otherwise.
+\providecommand{\runninghead}{The enclosed lunar buildout, 2041--2341: a scoping study}
+\providecommand{\abouttitle}{About this study}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Inter}[Scale=0.92]
+\usepackage{microtype}
+\usepackage{xurl}
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\raggedright}
+\usepackage{caption}
+\captionsetup{font={small,sf}, labelfont=bf, labelsep=period, justification=raggedright, singlelinecheck=false, skip=6pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\footnotesize\runninghead}
+\fancyhead[R]{\sffamily\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\sffamily\footnotesize\thepage}\renewcommand{\headrulewidth}{0pt}}
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\footnotesize\sffamily}
+\setlength{\parskip}{5pt plus 1pt}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.15}
+\usepackage{float}
+\floatplacement{figure}{H}
+% The title page: title, subtitle, who prepared it and when, then the note about the study; the contents on a page of
+% their own and the study from the page after.
+\usepackage{titling}
+\pretitle{\begin{center}\vspace*{36mm}\sffamily\fontsize{26}{32}\selectfont}
+\posttitle{\par\end{center}\vskip 10mm}
+\preauthor{\begin{center}\sffamily\normalsize}
+\postauthor{\par\end{center}}
+\predate{\begin{center}\sffamily\normalsize}
+\postdate{\par\end{center}\vskip 28mm}
+\renewenvironment{abstract}{\small\begin{center}\sffamily\bfseries\abouttitle\end{center}\list{}{\leftmargin 12mm\rightmargin 12mm\listparindent 0pt\itemindent 0pt\parsep 5pt}\item\relax}{\endlist}
+\let\studytoc\tableofcontents
+\renewcommand{\tableofcontents}{\clearpage\studytoc\clearpage}

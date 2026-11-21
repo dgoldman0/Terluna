@@ -1,0 +1,18 @@
+{
+  "physical_product": {
+    "compression": "gzip",
+    "content_sha256": "d09d207268accf88ee29c6a501c2cb799c763c486e6e4d9c54d79030baed7161",
+    "manifest_path": "../../provisioning/enclosed_industry/results/bottlenecks.json.manifest.json",
+    "manifest_sha256": "2d8cb6d3c03975a5893e78cd4da8eb35087bac9db4cf58ab00636d3871aca2b8",
+    "path": "../../provisioning/enclosed_industry/results/bottlenecks.json.gz",
+    "schema": "terluna.provisioning.enclosed-industry/1",
+    "sha256": "0d8b15a1cca896edb2974601cf68369c065f93108b244cf1124bee5d982ae816",
+    "source_base_commit": "3e04591148223b079ecd255416555b8d4a4d4f7e"
+  },
+  "reference_dependencies": {
+    "inputs.json": "61f10e483cea993600d95ffb2941fb72534df4f08a11cc38f58c2270569847ab",
+    "run.py": "fa9924fe003fb6b759d1a4572c97bde97abd53570a2503f43fe3b8507395caf3",
+    "sources.json": "a2aca5f47ec2ec05eb43fb20d87ebf6589c7f816575a0aa82636304677f3fd59"
+  },
+  "schema": "terluna.resources.enclosed-bottleneck-inputs/1"
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "terluna.research.product-allocation-sources/1",
+  "sources": [
+    {
+      "id": "mcs2026",
+      "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf",
+      "bytes": 17646709,
+      "sha256": "595e6e66674236dea40125a03eb1ea6b347f331c0bcf3411a1e77eba53c0d391",
+      "content_type": "application/pdf",
+      "status": 200,
+      "retrieved": "2026-11-14",
+      "redistribution": "Full source bytes remain outside the repository; selected factual observations and original calculations only.",
+      "reading_scope": "Selected commodity chapters and their price, production and unit notes: printed pages 40-41, 70-71, 82-83, 88-91, 132-133, 144-145, 152-155, 166-167, 172-173, 196-197. PGM and rare-earth price tables visually checked; no claim of complete report review."
+    },
+    {
+      "id": "zblan2025",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/08/august-cop-in-space-manufacturing-2025-08-06.pdf",
+      "bytes": 2945763,
+      "sha256": "9e9092e6fafe7ff85dfc261c4761ae828679c10b9c893a99401c5b3b5015b143",
+      "content_type": "application/pdf",
+      "status": 200,
+      "retrieved": "2026-11-14",
+      "redistribution": "Full source bytes remain outside the repository; selected factual observations and original calculations only.",
+      "reading_scope": "Slides 8-10: transferred pharmaceutical knowledge, four crystal ingots and optical-fibre performance. NASA presentation reports; no independent yield or cost validation."
+    },
+    {
+      "id": "metals_iss",
+      "url": "https://www.nasa.gov/wp-content/uploads/2025/06/np-2025-jsc-microgravity-materials-iss-mini-book-final.pdf",
+      "bytes": 4331857,
+      "sha256": "a8f49992213d900598f2c148bcb868c0bfbad6a3e89ab520b9068f2f0e3e6816",
+      "content_type": "application/pdf",
+      "status": 200,
+      "retrieved": "2026-11-14",
+      "redistribution": "Full source bytes remain outside the repository; selected factual observations and original calculations only.",
+      "reading_scope": "Downloaded contextual NASA materials-science survey. No numeric model input or full scholarly-review claim is based on this document."
+    },
+    {
+      "id": "nasa_zblan_2024",
+      "url": "https://www.nasa.gov/humans-in-space/optical-fiber-production/",
+      "retrieved": "2026-11-14",
+      "reading_scope": "Article sections describing February-March 2024 production, pending quality testing and microgravity mechanism.",
+      "evidence": "NASA flight-program report; approximately 12 km produced, commercial lengths demonstrated, no cost or total-market estimate."
+    },
+    {
+      "id": "esa_metal_print",
+      "url": "https://www.esa.int/articles/a-close-up-look-at-the-first-metal-part-made-in-space",
+      "retrieved": "2026-11-14",
+      "reading_scope": "Article on wire-fed laser stainless-steel technology demonstrator and returned sample evaluation.",
+      "evidence": "Metal additive manufacturing demonstrated on ISS; no asteroid-fed industrial line or Earth-export superiority established."
+    },
+    {
+      "id": "esa_regolith",
+      "url": "https://www.esa.int/articles/esa-opens-oxygen-plant-making-air-out-of-moondust",
+      "retrieved": "2026-11-14",
+      "reading_scope": "950 C calcium-chloride electrolysis of regolith simulant, mixed alloy outcome and open refining/application questions.",
+      "evidence": "Terrestrial laboratory demonstrator, not a qualified lunar metal refinery."
+    },
+    {
+      "id": "nasa_merck",
+      "url": "https://www.nasa.gov/missions/station/iss-research/space-station-research-informs-new-fda-approved-cancer-therapy/",
+      "retrieved": "2026-11-14",
+      "reading_scope": "Space crystallization research and its contribution to formulation knowledge; no medical guidance or pharmaceutical revenue forecast.",
+      "evidence": "Knowledge transferred to an Earth product; not proof that all commercial drug manufacture must occur in orbit."
+    },
+    {
+      "id": "usgs_reo_download",
+      "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-rare-earths_ver.1.2.pdf",
+      "retrieved": "2026-11-14",
+      "sha256": "a733c264883a3acb80b40929873a562220090251ff25adb9abc77a977e068ab1",
+      "reading_scope": "Rare-earth price and production table cross-check.",
+      "evidence": "Selected 2025 historical estimates. Full integrated MCS PDF is the numeric model source."
+    }
+  ],
+  "retrieval_record": "The web reader returned 403 for the USGS report and commodity PDFs; direct HTTPS downloads of the intended USGS report and rare-earth chapter succeeded and their hashes are recorded. No substitute report or silently replaced year was used. The local text extractor reported font-weight warnings; primary PGM and rare-earth tables were also visually inspected. NASA webinar figures are presentation reports, not independent factory qualification."
+}

@@ -1,0 +1,573 @@
+{
+  "schema": "terluna.research.vacuum-economy-scenarios/1",
+  "evidence": "Scenario values for the demand of the vacuum buildout's customers, judged at the date of each year of the programme. Values marked sourced are read from the two lookups named in `lookups`; values marked constructed are this study's own assumptions, stated where no opened source gives a figure, and each is a candidate for a single-driver sensitivity. No customer, contract or price is established.",
+  "lookups": {
+    "projections": "Published projections for the 2040s and 2050s (research drive, vacuum-economy/research/projections_2049/values.md, source ids P..).",
+    "markets": "Sourced ranges for the market drivers (research drive, vacuum-economy/research/market_drivers/values.md, sections 1 to 8).",
+    "local_content": "Published ranges for the share of equipment an industry beyond Earth makes itself (research drive, vacuum-economy/research/local_content/values.md)."
+  },
+  "money": {
+    "note": "Dollars of another year are brought to 2026 at the project's 3% a year, except 2015, which uses the United States consumer price index's annual averages of 2015 and 2024 (237.017 and 313.689) and 3% a year after. The engineering coefficients carry 2026 to constant 2041.",
+    "USD2015_to_USD2026": 1.404,
+    "USD2022_to_USD2026": 1.1255,
+    "USD2024_to_USD2026": 1.0609,
+    "USD2025_to_USD2026": 1.03
+  },
+  "world": {
+    "population": {
+      "basis": "sourced: United Nations, World Population Prospects 2024, medium variant (P02); held at the 2100 value after 2100, where the projection ends.",
+      "by_calendar_year": [
+        [
+          2024,
+          8162000000.0
+        ],
+        [
+          2050,
+          9664000000.0
+        ],
+        [
+          2075,
+          10250000000.0
+        ],
+        [
+          2084,
+          10289000000.0
+        ],
+        [
+          2100,
+          10180000000.0
+        ]
+      ]
+    },
+    "output": {
+      "basis": "sourced: world output at market exchange rates in 2050, 163,437 billion dollars of 2015 (P06). Before and after 2050 it follows population and income per person.",
+      "calendar_year": 2050,
+      "USD2015": 163437000000000.0
+    },
+    "income_per_person_growth_to_2049": {
+      "basis": "sourced: about 1.6% a year to 2050, from P06 with P02 (derived in the lookup).",
+      "value": 0.016
+    },
+    "wealthy_buyers_growth_to_2049": {
+      "basis": "sourced: adults above 30 million dollars per adult in the United States grew 2.8% a year in constant purchasing power over 2005 to 2025 (P09); carried to 2049 from the 2022 date of the travel model.",
+      "value": 0.028
+    }
+  },
+  "lines": {
+    "culture": {
+      "definition": "A follower is a person who watches the competitions or programmes regularly. The humanities study counts distinct fans, of whom one in five pays; the lookup's anchors give 2 to 4 dollars a year for a claimed fan, 45 for a regular viewer and 130 for a paying subscriber (2024 dollars). Receipts here are followers times receipts per follower, and no other audience count enters.",
+      "opening_receipts_USD2041_year": {
+        "basis": "The humanities study's portfolio at the opening settlement: 1.202 billion U a year from 140 million distinct fans (humanities/economics/entertainment.md), of which sport is 600 million. U is read as a dollar of 2041.",
+        "value": 1202000000.0
+      },
+      "sport_share": {
+        "basis": "The same study: 600 of 1,202 million U.",
+        "value": 0.5
+      },
+      "resident_jobs": {
+        "basis": "constructed: athletes, performers and crews who live in the settlement.",
+        "fixed": 200,
+        "per_billion_USD2041": 20
+      },
+      "power_W": {
+        "basis": "constructed, from the first pass's platform (5 MW).",
+        "fixed": 5000000.0,
+        "per_billion_USD2041": 100000.0
+      },
+      "income_elasticity": {
+        "basis": "sourced range +1 to +2 for a discretionary service (P32); the lower end is used.",
+        "value": 1.0
+      }
+    },
+    "institutions": {
+      "definition": "Research, operations and professional work that outside institutions pay the settlement to host and support. Sized as a share of world output, around the one published scenario of lunar surface activity to 2050 (P28: 94 to 127 billion dollars over 2026 to 2050). Each resident job in this work has the floor, the instruments, the stores and the power the industry model gives a research post."
+    },
+    "computing": {
+      "definition": "Computing capacity sold to customers on Earth at the cost of the same service there.",
+      "Earth_service_share_of_receipts": {
+        "basis": "The industry model's coefficient.",
+        "value": 0.2
+      }
+    },
+    "space": {
+      "definition": "Propellant and structural material handed to customers at the depot; the material is made at the sources from the metal of the mined feed. The ceiling on the price is the stated share of what the same kilogram costs launched from Earth to the depot in that year. Quantity follows the price with the stated elasticity and grows with activity in space.",
+      "anchor_price_USD2026_kg": {
+        "basis": "sourced: the price buyers were assumed to accept in the design studies behind the quantity anchors (markets, section 4).",
+        "value": 500
+      },
+      "share_of_Earth_delivered_price": {
+        "basis": "The first pass's ceiling.",
+        "value": 0.8
+      },
+      "material_per_propellant": {
+        "basis": "constructed: no opened source gives a market for structural material in space; a customer who buys a tonne of propellant at the depot is taken to buy this many tonnes of material.",
+        "value": 1.0
+      },
+      "activity_growth_until": 2100
+    },
+    "metals": {
+      "definition": "Platinum-group metals and gold recovered from the feed the sources already mine, and returned to Earth. Yields per tonne of feed and treatment costs are the source-access study's scenario values (resources/source_access, coproducts); prices and world production are the United States Geological Survey's estimates for 2025 (research/studies/product_allocation/market_benchmarks.json).",
+      "PGM_price_USD2025_kg": 37000,
+      "PGM_world_production_kg_year": 360000,
+      "gold_price_USD2025_kg": 106097,
+      "contained_PGM_per_kg_feed": 3.9699e-06,
+      "contained_gold_per_kg_feed": 1.56e-07,
+      "gold_per_PGM": {
+        "basis": "Refined gold per refined platinum-group metal at the middle recovery (0.083 against 2.112 tonnes per million tonnes of feed).",
+        "value": 0.0393
+      },
+      "price_elasticity": {
+        "basis": "constructed: the platinum-group price falls in proportion to total supply; gold is sold at its price.",
+        "value": 1.0
+      }
+    },
+    "visits": {
+      "definition": "Visitors who pay one price for the passage and a stay. Numbers follow the price with the stated elasticity and grow with the number of wealthy buyers.",
+      "anchor": {
+        "basis": "sourced: about 1,370 travellers a year at 4 million dollars a seat to orbit in a model of 2022 (P16).",
+        "visitors_year": 1370,
+        "price_USD2022": 4000000.0,
+        "calendar_year": 2022
+      },
+      "first_price_USD2041": {
+        "basis": "constructed: the price used before the system's cost is known.",
+        "value": 1500000.0
+      },
+      "stay_nights": {
+        "basis": "The industry model's coefficient.",
+        "value": 14
+      },
+      "occupancy": {
+        "basis": "The industry model's coefficient.",
+        "value": 0.7
+      },
+      "launched_kg_per_visitor": {
+        "basis": "sourced: 270 kg a passenger in one published estimate of the cost of a seat to orbit (P23).",
+        "value": 270
+      },
+      "cabin_kg_per_visitor": {
+        "basis": "constructed: cabin, air, water and stores carried for each visitor on the ferry and the lander, each way.",
+        "value": 1000
+      },
+      "Earth_service_share_of_receipts": {
+        "basis": "The industry model's coefficient.",
+        "value": 0.1
+      }
+    },
+    "service_wage_USD2041_year": {
+      "basis": "The first pass's wage for resident service staff.",
+      "value": 250000
+    },
+    "cost_plus_margin": {
+      "basis": "constructed: the margin over cost in a case priced for affordable travel.",
+      "value": 0.5
+    }
+  },
+  "scenarios": {
+    "low": {
+      "label": "Low: the least the opened evidence supports for each driver, together",
+      "income_per_person_growth_after_2049": {
+        "basis": "constructed: half the central rate.",
+        "value": 0.005
+      },
+      "culture": {
+        "followers_share_of_world": {
+          "basis": "sourced anchor: the 75 million regular viewers of one leading world circuit, of 8.16 billion people in 2024 (markets, section 1).",
+          "value": 0.0092
+        },
+        "receipts_per_follower_USD2024": {
+          "basis": "sourced: 45 dollars per regular viewer (markets, section 2).",
+          "value": 45
+        },
+        "growth_of_receipts": {
+          "basis": "sourced: the slowest growth found for a property that succeeded (markets, section 7).",
+          "value": 0.06
+        },
+        "share_others_keep": {
+          "basis": "sourced range 43% to 96% once production and administration are counted (markets, section 3); a high value.",
+          "value": 0.85
+        }
+      },
+      "institutions": {
+        "share_of_world_output": {
+          "basis": "constructed: about 5 billion dollars of 2041 a year in 2049, under half the rate the published lunar scenario reaches at its end.",
+          "value": 1.5e-05
+        },
+        "share_others_keep": {
+          "basis": "sourced: professional services, upper end (markets, section 3).",
+          "value": 0.85
+        },
+        "retained_USD2041_per_job": {
+          "basis": "constructed.",
+          "value": 1000000.0
+        }
+      },
+      "computing": {
+        "capacity_W_2049": {
+          "basis": "carried from the first pass; no source gives contracted demand (markets, section 8).",
+          "value": 1000000000.0
+        },
+        "price_USD2024_W_year": {
+          "basis": "sourced: the cost of computing on Earth, lower end (markets, section 8).",
+          "value": 11.5
+        }
+      },
+      "space": {
+        "propellant_kg_year_2049": {
+          "basis": "sourced: the smallest demand in the opened design studies (markets, section 4).",
+          "value": 60000.0
+        },
+        "price_elasticity": {
+          "basis": "sourced range for air travel, lower end (P32); borrowed.",
+          "value": 0.6
+        },
+        "activity_growth": {
+          "basis": "constructed, below the forecasts of the space economy.",
+          "value": 0.03
+        }
+      },
+      "metals": {
+        "PGM_supply_share_of_world": {
+          "basis": "constructed: none sold.",
+          "value": 0.0
+        },
+        "refined_PGM_per_kg_feed": {
+          "basis": "The source-access study's low recovery.",
+          "value": 4.76e-07
+        },
+        "treatment_USD2041_per_kg_feed": {
+          "basis": "The source-access study's high cost; unsourced there.",
+          "value": 1.0
+        }
+      },
+      "visits": {
+        "price_elasticity": {
+          "basis": "sourced: about 0.5 among the wealthy surveyed in 2002 (P15).",
+          "value": 0.5
+        },
+        "income_elasticity": {
+          "basis": "sourced range +1 to +2 (P32), lower end.",
+          "value": 1.0
+        }
+      },
+      "engineering": {
+        "economy.technology.learning_per_doubling": {
+          "basis": "sourced: the fall in the average price of a unit for each doubling of the units made, 5%, 10% and 15% in satellite programmes of 1 to 10, 11 to 50 and more than 50 units (a 1994 study, as cited by NASA cost analysts in the local-content lookup); across more than 100 manufacturing processes the fall runs from 46% to a rise of 8%. This scenario takes the smallest of the satellite rates, for programmes of 1 to 10 units.",
+          "value": 0.05
+        },
+        "economy.technology.labour_productivity_growth": {
+          "basis": "constructed: the scenario's growth of income per person on Earth after 2049, so that the settlement's work grows more productive at the pace of its customers' economies; no source gives productivity growth for an industry beyond Earth.",
+          "value": 0.005
+        },
+        "industrial.transport.LEO_USD2026_kg": {
+          "basis": "sourced: the highest of the launch prices projected for 2040, 273 dollars a kilogram (P26).",
+          "value": 273
+        },
+        "economy.production.local_working_parts.share": {
+          "basis": "sourced: 10% of equipment mass still imported, the least local of the published studies, reached in 30 years, their slowest (local-content lookup); working parts are 23% of the founding industry, so 57% of them are made in place.",
+          "value": {
+            "by_year": [
+              [
+                8,
+                0.0
+              ],
+              [
+                38,
+                0.57
+              ]
+            ]
+          }
+        },
+        "economy.production.local_working_parts.labour_fraction_of_import_price": {
+          "basis": "constructed: no source gives the cost of parts made in place.",
+          "value": 0.5
+        },
+        "industrial.transport.earth_leg": {
+          "basis": "The study's own result: the ferries' outward burn is fuelled with propellant launched from Earth until year 20 and from the depot after, which lowered the opening funding in every case run on the first pass's demand. The year of the change has not been searched.",
+          "value": {
+            "by_year": [
+              [
+                0,
+                "split"
+              ],
+              [
+                20,
+                "space"
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "central": {
+      "label": "Central: the middle of the opened evidence for each driver",
+      "income_per_person_growth_after_2049": {
+        "basis": "constructed: below the 1.6% a year projected to 2050, as trend growth slows (P06).",
+        "value": 0.01
+      },
+      "culture": {
+        "followers_share_of_world": {
+          "basis": "constructed from a sourced anchor: four properties, each with the regular following of one leading world circuit (three or four sports and programmes about life on the Moon).",
+          "value": 0.037
+        },
+        "receipts_per_follower_USD2024": {
+          "basis": "sourced: 45 dollars per regular viewer (markets, section 2).",
+          "value": 45
+        },
+        "growth_of_receipts": {
+          "basis": "sourced: the middle growth found for a property that succeeded (markets, section 7).",
+          "value": 0.1
+        },
+        "share_others_keep": {
+          "basis": "sourced range 43% to 96% (markets, section 3); a middle value.",
+          "value": 0.65
+        }
+      },
+      "institutions": {
+        "share_of_world_output": {
+          "basis": "constructed: about 18 billion dollars of 2041 a year in 2049, somewhat above the rate the published lunar scenario reaches at its end.",
+          "value": 5e-05
+        },
+        "share_others_keep": {
+          "basis": "sourced: research, 72% (markets, section 3).",
+          "value": 0.72
+        },
+        "retained_USD2041_per_job": {
+          "basis": "constructed.",
+          "value": 2000000.0
+        }
+      },
+      "computing": {
+        "capacity_W_2049": {
+          "basis": "carried from the first pass; no source gives contracted demand.",
+          "value": 5000000000.0
+        },
+        "price_USD2024_W_year": {
+          "basis": "sourced: the cost of computing on Earth, middle (markets, section 8).",
+          "value": 13.25
+        }
+      },
+      "space": {
+        "propellant_kg_year_2049": {
+          "basis": "sourced: the middle demand in the opened design studies (markets, section 4).",
+          "value": 450000.0
+        },
+        "price_elasticity": {
+          "basis": "sourced range for air travel, middle (P32); borrowed.",
+          "value": 1.0
+        },
+        "activity_growth": {
+          "basis": "sourced: the space economy from 370 billion dollars in 2020 to 1 trillion in 2040 (P25).",
+          "value": 0.05
+        }
+      },
+      "metals": {
+        "PGM_supply_share_of_world": {
+          "basis": "constructed: half of world primary production.",
+          "value": 0.5
+        },
+        "refined_PGM_per_kg_feed": {
+          "basis": "The source-access study's middle recovery.",
+          "value": 2.112e-06
+        },
+        "treatment_USD2041_per_kg_feed": {
+          "basis": "The source-access study's middle cost; unsourced there.",
+          "value": 0.1
+        }
+      },
+      "visits": {
+        "price_elasticity": {
+          "basis": "constructed: between the survey's 0.5 and the model's 2 (P15, P16).",
+          "value": 1.25
+        },
+        "income_elasticity": {
+          "basis": "sourced range +1 to +2 (P32), middle.",
+          "value": 1.5
+        }
+      },
+      "engineering": {
+        "economy.technology.learning_per_doubling": {
+          "basis": "sourced: the fall in the average price of a unit for each doubling of the units made, 5%, 10% and 15% in satellite programmes of 1 to 10, 11 to 50 and more than 50 units (a 1994 study, as cited by NASA cost analysts in the local-content lookup); across more than 100 manufacturing processes the fall runs from 46% to a rise of 8%. This scenario takes the middle satellite rate, for programmes of 11 to 50 units.",
+          "value": 0.1
+        },
+        "economy.technology.labour_productivity_growth": {
+          "basis": "constructed: the scenario's growth of income per person on Earth after 2049, so that the settlement's work grows more productive at the pace of its customers' economies; no source gives productivity growth for an industry beyond Earth.",
+          "value": 0.01
+        },
+        "industrial.transport.LEO_USD2026_kg": {
+          "basis": "sourced: the middle of the launch prices projected for 2040, 100 dollars a kilogram (P25).",
+          "value": 100
+        },
+        "economy.production.local_working_parts.share": {
+          "basis": "sourced: 5% of equipment mass still imported, reached in 20 years (local-content lookup); 78% of working parts are made in place.",
+          "value": {
+            "by_year": [
+              [
+                8,
+                0.0
+              ],
+              [
+                28,
+                0.78
+              ]
+            ]
+          }
+        },
+        "economy.production.local_working_parts.labour_fraction_of_import_price": {
+          "basis": "constructed.",
+          "value": 0.25
+        },
+        "industrial.transport.earth_leg": {
+          "basis": "The study's own result: the ferries' outward burn is fuelled with propellant launched from Earth until year 20 and from the depot after, which lowered the opening funding in every case run on the first pass's demand. The year of the change has not been searched.",
+          "value": {
+            "by_year": [
+              [
+                0,
+                "split"
+              ],
+              [
+                20,
+                "space"
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "high": {
+      "label": "High: the most the opened evidence supports for each driver, together",
+      "income_per_person_growth_after_2049": {
+        "basis": "sourced rate to 2050, held after (P06 with P02).",
+        "value": 0.016
+      },
+      "culture": {
+        "followers_share_of_world": {
+          "basis": "sourced anchor: the 830 million claimed fans of one leading world circuit, of 8.16 billion people, taken as regular viewers (markets, section 1).",
+          "value": 0.1
+        },
+        "receipts_per_follower_USD2024": {
+          "basis": "sourced: 130 dollars per paying subscriber, taken for every follower (markets, section 2).",
+          "value": 130
+        },
+        "growth_of_receipts": {
+          "basis": "sourced: the fastest growth found for a property that succeeded (markets, section 7).",
+          "value": 0.19
+        },
+        "share_others_keep": {
+          "basis": "sourced range 43% to 96% (markets, section 3); the lower end.",
+          "value": 0.43
+        }
+      },
+      "institutions": {
+        "share_of_world_output": {
+          "basis": "constructed: about 71 billion dollars of 2041 a year in 2049.",
+          "value": 0.0002
+        },
+        "share_others_keep": {
+          "basis": "sourced: lower end (markets, section 3).",
+          "value": 0.65
+        },
+        "retained_USD2041_per_job": {
+          "basis": "constructed.",
+          "value": 5000000.0
+        }
+      },
+      "computing": {
+        "capacity_W_2049": {
+          "basis": "carried from the first pass; no source gives contracted demand.",
+          "value": 20000000000.0
+        },
+        "price_USD2024_W_year": {
+          "basis": "sourced: the cost of computing on Earth, upper end (markets, section 8).",
+          "value": 15.0
+        }
+      },
+      "space": {
+        "propellant_kg_year_2049": {
+          "basis": "sourced: the largest demand in the opened design studies (markets, section 4).",
+          "value": 1640000.0
+        },
+        "price_elasticity": {
+          "basis": "sourced range for air travel, upper end (P32); borrowed.",
+          "value": 1.4
+        },
+        "activity_growth": {
+          "basis": "sourced: the space economy to 1.8 trillion dollars by 2035 (P27).",
+          "value": 0.09
+        }
+      },
+      "metals": {
+        "PGM_supply_share_of_world": {
+          "basis": "constructed: twice world primary production.",
+          "value": 2.0
+        },
+        "refined_PGM_per_kg_feed": {
+          "basis": "The source-access study's high recovery.",
+          "value": 3.547e-06
+        },
+        "treatment_USD2041_per_kg_feed": {
+          "basis": "The source-access study's low cost; unsourced there.",
+          "value": 0.01
+        }
+      },
+      "visits": {
+        "price_elasticity": {
+          "basis": "sourced: about 2 between 70 and 4 million dollars a seat (P16).",
+          "value": 2.0
+        },
+        "income_elasticity": {
+          "basis": "sourced range +1 to +2 (P32), upper end.",
+          "value": 2.0
+        }
+      },
+      "engineering": {
+        "economy.technology.learning_per_doubling": {
+          "basis": "sourced: the fall in the average price of a unit for each doubling of the units made, 5%, 10% and 15% in satellite programmes of 1 to 10, 11 to 50 and more than 50 units (a 1994 study, as cited by NASA cost analysts in the local-content lookup); across more than 100 manufacturing processes the fall runs from 46% to a rise of 8%. This scenario takes the largest satellite rate, for programmes of more than 50 units.",
+          "value": 0.15
+        },
+        "economy.technology.labour_productivity_growth": {
+          "basis": "constructed: the scenario's growth of income per person on Earth after 2049, so that the settlement's work grows more productive at the pace of its customers' economies; no source gives productivity growth for an industry beyond Earth.",
+          "value": 0.016
+        },
+        "industrial.transport.LEO_USD2026_kg": {
+          "basis": "sourced: the lowest of the launch prices projected for 2040, 33 dollars a kilogram (P25).",
+          "value": 33
+        },
+        "economy.production.local_working_parts.share": {
+          "basis": "sourced: 1% of equipment mass still imported, reached in 12 years, the fastest published schedule (local-content lookup); 96% of working parts are made in place.",
+          "value": {
+            "by_year": [
+              [
+                8,
+                0.0
+              ],
+              [
+                20,
+                0.96
+              ]
+            ]
+          }
+        },
+        "economy.production.local_working_parts.labour_fraction_of_import_price": {
+          "basis": "constructed.",
+          "value": 0.1
+        },
+        "industrial.transport.earth_leg": {
+          "basis": "The study's own result: the ferries' outward burn is fuelled with propellant launched from Earth until year 20 and from the depot after, which lowered the opening funding in every case run on the first pass's demand. The year of the change has not been searched.",
+          "value": {
+            "by_year": [
+              [
+                0,
+                "split"
+              ],
+              [
+                20,
+                "space"
+              ]
+            ]
+          }
+        }
+      }
+    }
+  }
+}

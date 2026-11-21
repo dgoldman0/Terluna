@@ -1,0 +1,2944 @@
+{
+ "schema": "terluna.research.vacuum-economy.staged-appraisal-reference/1",
+ "evidence": "The staged appraisal's headline measures for the nine order books on the staged schedule with combined recovery, extracted from the staged returns study's product so that the first pass is checked against it without reading that study.",
+ "source": {
+  "path": "research/studies/enclosed_returns/results/revised.json.gz",
+  "sha256": "29d5b03ca9db985fa9c26a24dce26eb47216570f292a6693a3788de20b9a70f6"
+ },
+ "cases": {
+  "commodity_refined:breakthrough:reference": [
+   {
+    "mode": "equity",
+    "horizon": 100,
+    "annual_gross": 3002170704323.567,
+    "annual_operating_available": 969406027814.0972,
+    "cumulative_gross_receipts": 134673135319908.6,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4102437990386.9185,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4102437990386.9185,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4102437990386.918,
+      "unlevered_cash_NPV": 41316504583915.33,
+      "full_price_socioeconomic_NPV": 46362031782753.91
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3956519466976.802,
+      "unlevered_cash_NPV": 21116612958814.0,
+      "full_price_socioeconomic_NPV": 23541335870344.625
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3690649800446.473,
+      "unlevered_cash_NPV": 5878824271038.814,
+      "full_price_socioeconomic_NPV": 6587541284144.34
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3246217077471.124,
+      "unlevered_cash_NPV": -440431643056.9716,
+      "full_price_socioeconomic_NPV": -272604985887.1748
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 200,
+    "annual_gross": 7150258815651.283,
+    "annual_operating_available": -193759731007.69922,
+    "cumulative_gross_receipts": 592823886317302.8,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4102437990386.9185,
+    "additional_equity_required": 31050079093248.72,
+    "all_funder_contributions": 35152517083635.637,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -35152517083635.637,
+      "unlevered_cash_NPV": -23645000539079.344,
+      "full_price_socioeconomic_NPV": 246086736838424.75
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -8977963647862.594,
+      "unlevered_cash_NPV": 10488547559774.299,
+      "full_price_socioeconomic_NPV": 61997682385886.72
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3831012190219.7637,
+      "unlevered_cash_NPV": 5752911655158.882,
+      "full_price_socioeconomic_NPV": 8564116537699.996
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3246357610538.5903,
+      "unlevered_cash_NPV": -434421297592.8139,
+      "full_price_socioeconomic_NPV": -256946263683.1963
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 220,
+    "annual_gross": 7150258815651.283,
+    "annual_operating_available": -285763830009.49316,
+    "cumulative_gross_receipts": 735829062630328.5,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4102437990386.9185,
+    "additional_equity_required": 36893013991061.43,
+    "all_funder_contributions": 40995451981448.35,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -40995451981448.35,
+      "unlevered_cash_NPV": -29395931337890.266,
+      "full_price_socioeconomic_NPV": 359783815987260.6
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -9698002620845.502,
+      "unlevered_cash_NPV": 9780077432831.367,
+      "full_price_socioeconomic_NPV": 76020374658045.19
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3842752227876.2026,
+      "unlevered_cash_NPV": 5741368086543.025,
+      "full_price_socioeconomic_NPV": 8793126192962.863
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3246361699122.4746,
+      "unlevered_cash_NPV": -434425311996.5777,
+      "full_price_socioeconomic_NPV": -256866254095.8584
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 100,
+    "annual_gross": 3002170704323.567,
+    "annual_operating_available": 969406027814.0972,
+    "cumulative_gross_receipts": 134673135319908.6,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4102437990386.9185,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4102437990386.9185,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4102437990386.918,
+      "unlevered_cash_NPV": 41316504583915.33,
+      "full_price_socioeconomic_NPV": 46362031782753.91
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3956519466976.802,
+      "unlevered_cash_NPV": 21116612958814.0,
+      "full_price_socioeconomic_NPV": 23541335870344.625
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3690649800446.473,
+      "unlevered_cash_NPV": 5878824271038.814,
+      "full_price_socioeconomic_NPV": 6587541284144.34
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3246217077471.124,
+      "unlevered_cash_NPV": -440431643056.9716,
+      "full_price_socioeconomic_NPV": -272604985887.1748
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 200,
+    "annual_gross": 7150258815651.283,
+    "annual_operating_available": -193759731007.69922,
+    "cumulative_gross_receipts": 592823886317302.8,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4102437990386.9185,
+    "additional_equity_required": 31050079093248.72,
+    "all_funder_contributions": 35152517083635.637,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -35152517083635.637,
+      "unlevered_cash_NPV": -23645000539079.344,
+      "full_price_socioeconomic_NPV": 246086736838424.75
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -8977963647862.594,
+      "unlevered_cash_NPV": 10488547559774.299,
+      "full_price_socioeconomic_NPV": 61997682385886.72
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3831012190219.7637,
+      "unlevered_cash_NPV": 5752911655158.882,
+      "full_price_socioeconomic_NPV": 8564116537699.996
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3246357610538.5903,
+      "unlevered_cash_NPV": -434421297592.8139,
+      "full_price_socioeconomic_NPV": -256946263683.1963
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 220,
+    "annual_gross": 7150258815651.283,
+    "annual_operating_available": -285763830009.49316,
+    "cumulative_gross_receipts": 735829062630328.5,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4102437990386.9185,
+    "additional_equity_required": 36893013991061.43,
+    "all_funder_contributions": 40995451981448.35,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -40995451981448.35,
+      "unlevered_cash_NPV": -29395931337890.266,
+      "full_price_socioeconomic_NPV": 359783815987260.6
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -9698002620845.502,
+      "unlevered_cash_NPV": 9780077432831.367,
+      "full_price_socioeconomic_NPV": 76020374658045.19
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3842752227876.2026,
+      "unlevered_cash_NPV": 5741368086543.025,
+      "full_price_socioeconomic_NPV": 8793126192962.863
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3246361699122.4746,
+      "unlevered_cash_NPV": -434425311996.5777,
+      "full_price_socioeconomic_NPV": -256866254095.8584
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 100,
+    "annual_gross": 3002170704323.567,
+    "annual_operating_available": 969406027814.0972,
+    "cumulative_gross_receipts": 134673135319908.6,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4102437990386.9185,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4102437990386.9185,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4102437990386.918,
+      "unlevered_cash_NPV": 41316504583915.33,
+      "full_price_socioeconomic_NPV": 46362031782753.91
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3956519466976.802,
+      "unlevered_cash_NPV": 21116612958814.0,
+      "full_price_socioeconomic_NPV": 23541335870344.625
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3690649800446.473,
+      "unlevered_cash_NPV": 5878824271038.814,
+      "full_price_socioeconomic_NPV": 6587541284144.34
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3246217077471.124,
+      "unlevered_cash_NPV": -440431643056.9716,
+      "full_price_socioeconomic_NPV": -272604985887.1748
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 200,
+    "annual_gross": 7150258815651.283,
+    "annual_operating_available": -193759731007.69922,
+    "cumulative_gross_receipts": 592823886317302.8,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4102437990386.9185,
+    "additional_equity_required": 31050079093248.72,
+    "all_funder_contributions": 35152517083635.637,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -35152517083635.637,
+      "unlevered_cash_NPV": -23645000539079.344,
+      "full_price_socioeconomic_NPV": 246086736838424.75
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -8977963647862.594,
+      "unlevered_cash_NPV": 10488547559774.299,
+      "full_price_socioeconomic_NPV": 61997682385886.72
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3831012190219.7637,
+      "unlevered_cash_NPV": 5752911655158.882,
+      "full_price_socioeconomic_NPV": 8564116537699.996
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3246357610538.5903,
+      "unlevered_cash_NPV": -434421297592.8139,
+      "full_price_socioeconomic_NPV": -256946263683.1963
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 220,
+    "annual_gross": 7150258815651.283,
+    "annual_operating_available": -285763830009.49316,
+    "cumulative_gross_receipts": 735829062630328.5,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4102437990386.9185,
+    "additional_equity_required": 36893013991061.43,
+    "all_funder_contributions": 40995451981448.35,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -40995451981448.35,
+      "unlevered_cash_NPV": -29395931337890.266,
+      "full_price_socioeconomic_NPV": 359783815987260.6
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -9698002620845.502,
+      "unlevered_cash_NPV": 9780077432831.367,
+      "full_price_socioeconomic_NPV": 76020374658045.19
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3842752227876.2026,
+      "unlevered_cash_NPV": 5741368086543.025,
+      "full_price_socioeconomic_NPV": 8793126192962.863
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3246361699122.4746,
+      "unlevered_cash_NPV": -434425311996.5777,
+      "full_price_socioeconomic_NPV": -256866254095.8584
+     }
+    }
+   }
+  ],
+  "compute_digital:breakthrough:reference": [
+   {
+    "mode": "equity",
+    "horizon": 100,
+    "annual_gross": 3136271815279.637,
+    "annual_operating_available": 947713067237.4128,
+    "cumulative_gross_receipts": 138061247712822.72,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4132673831025.1577,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4132673831025.1577,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4132673831025.157,
+      "unlevered_cash_NPV": 39698437957566.164,
+      "full_price_socioeconomic_NPV": 44900161369456.516
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3985670802944.8945,
+      "unlevered_cash_NPV": 20336847604723.8,
+      "full_price_socioeconomic_NPV": 22835412173760.18
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3717826019933.252,
+      "unlevered_cash_NPV": 5650936355106.773,
+      "full_price_socioeconomic_NPV": 6379436056885.676
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3270094567349.65,
+      "unlevered_cash_NPV": -496760462285.4125,
+      "full_price_socioeconomic_NPV": -325669098769.4287
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 200,
+    "annual_gross": 5991459034882.379,
+    "annual_operating_available": -1227050945674.1152,
+    "cumulative_gross_receipts": 597934272104542.0,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4132673831025.1577,
+    "additional_equity_required": 58382652763543.54,
+    "all_funder_contributions": 62515326594568.695,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -62515326594568.7,
+      "unlevered_cash_NPV": -50959123563063.75,
+      "full_price_socioeconomic_NPV": 219825654808424.75
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -13520469153601.004,
+      "unlevered_cash_NPV": 4817093824250.404,
+      "full_price_socioeconomic_NPV": 56651805727044.875
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3992473077830.415,
+      "unlevered_cash_NPV": 5279904546204.268,
+      "full_price_socioeconomic_NPV": 8131190595718.727
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3270397170153.425,
+      "unlevered_cash_NPV": -492512973143.938,
+      "full_price_socioeconomic_NPV": -311590130156.28906
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 220,
+    "annual_gross": 5991459034882.379,
+    "annual_operating_available": -1313818668300.662,
+    "cumulative_gross_receipts": 717763452802189.6,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4132673831025.1577,
+    "additional_equity_required": 84781995481093.69,
+    "all_funder_contributions": 88914669312118.84,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -88914669312118.84,
+      "unlevered_cash_NPV": -77271698557987.34,
+      "full_price_socioeconomic_NPV": 312671765932639.4
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -16775733235309.172,
+      "unlevered_cash_NPV": 1572701342813.8242,
+      "full_price_socioeconomic_NPV": 68102896432862.22
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -4045614490077.382,
+      "unlevered_cash_NPV": 5226946538644.427,
+      "full_price_socioeconomic_NPV": 8318203263905.191
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3270415721774.361,
+      "unlevered_cash_NPV": -492531456287.61145,
+      "full_price_socioeconomic_NPV": -311524792731.17773
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 100,
+    "annual_gross": 3136271815279.637,
+    "annual_operating_available": 947713067237.4128,
+    "cumulative_gross_receipts": 138061247712822.72,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4132673831025.1577,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4132673831025.1577,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4132673831025.157,
+      "unlevered_cash_NPV": 39698437957566.164,
+      "full_price_socioeconomic_NPV": 44900161369456.516
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3985670802944.8945,
+      "unlevered_cash_NPV": 20336847604723.8,
+      "full_price_socioeconomic_NPV": 22835412173760.18
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3717826019933.252,
+      "unlevered_cash_NPV": 5650936355106.773,
+      "full_price_socioeconomic_NPV": 6379436056885.676
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3270094567349.65,
+      "unlevered_cash_NPV": -496760462285.4125,
+      "full_price_socioeconomic_NPV": -325669098769.4287
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 200,
+    "annual_gross": 5991459034882.379,
+    "annual_operating_available": -1227050945674.1152,
+    "cumulative_gross_receipts": 597934272104542.0,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4132673831025.1577,
+    "additional_equity_required": 58382652763543.54,
+    "all_funder_contributions": 62515326594568.695,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -62515326594568.7,
+      "unlevered_cash_NPV": -50959123563063.75,
+      "full_price_socioeconomic_NPV": 219825654808424.75
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -13520469153601.004,
+      "unlevered_cash_NPV": 4817093824250.404,
+      "full_price_socioeconomic_NPV": 56651805727044.875
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3992473077830.415,
+      "unlevered_cash_NPV": 5279904546204.268,
+      "full_price_socioeconomic_NPV": 8131190595718.727
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3270397170153.425,
+      "unlevered_cash_NPV": -492512973143.938,
+      "full_price_socioeconomic_NPV": -311590130156.28906
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 220,
+    "annual_gross": 5991459034882.379,
+    "annual_operating_available": -1313818668300.662,
+    "cumulative_gross_receipts": 717763452802189.6,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4132673831025.1577,
+    "additional_equity_required": 84781995481093.69,
+    "all_funder_contributions": 88914669312118.84,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -88914669312118.84,
+      "unlevered_cash_NPV": -77271698557987.34,
+      "full_price_socioeconomic_NPV": 312671765932639.4
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -16775733235309.172,
+      "unlevered_cash_NPV": 1572701342813.8242,
+      "full_price_socioeconomic_NPV": 68102896432862.22
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -4045614490077.382,
+      "unlevered_cash_NPV": 5226946538644.427,
+      "full_price_socioeconomic_NPV": 8318203263905.191
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3270415721774.361,
+      "unlevered_cash_NPV": -492531456287.61145,
+      "full_price_socioeconomic_NPV": -311524792731.17773
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 100,
+    "annual_gross": 3136271815279.637,
+    "annual_operating_available": 947713067237.4128,
+    "cumulative_gross_receipts": 138061247712822.72,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4132673831025.1577,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4132673831025.1577,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4132673831025.157,
+      "unlevered_cash_NPV": 39698437957566.164,
+      "full_price_socioeconomic_NPV": 44900161369456.516
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3985670802944.8945,
+      "unlevered_cash_NPV": 20336847604723.8,
+      "full_price_socioeconomic_NPV": 22835412173760.18
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3717826019933.252,
+      "unlevered_cash_NPV": 5650936355106.773,
+      "full_price_socioeconomic_NPV": 6379436056885.676
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3270094567349.65,
+      "unlevered_cash_NPV": -496760462285.4125,
+      "full_price_socioeconomic_NPV": -325669098769.4287
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 200,
+    "annual_gross": 5991459034882.379,
+    "annual_operating_available": -1227050945674.1152,
+    "cumulative_gross_receipts": 597934272104542.0,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4132673831025.1577,
+    "additional_equity_required": 58382652763543.54,
+    "all_funder_contributions": 62515326594568.695,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -62515326594568.7,
+      "unlevered_cash_NPV": -50959123563063.75,
+      "full_price_socioeconomic_NPV": 219825654808424.75
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -13520469153601.004,
+      "unlevered_cash_NPV": 4817093824250.404,
+      "full_price_socioeconomic_NPV": 56651805727044.875
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3992473077830.415,
+      "unlevered_cash_NPV": 5279904546204.268,
+      "full_price_socioeconomic_NPV": 8131190595718.727
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3270397170153.425,
+      "unlevered_cash_NPV": -492512973143.938,
+      "full_price_socioeconomic_NPV": -311590130156.28906
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 220,
+    "annual_gross": 5991459034882.379,
+    "annual_operating_available": -1313818668300.662,
+    "cumulative_gross_receipts": 717763452802189.6,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4132673831025.1577,
+    "additional_equity_required": 84781995481093.69,
+    "all_funder_contributions": 88914669312118.84,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -88914669312118.84,
+      "unlevered_cash_NPV": -77271698557987.34,
+      "full_price_socioeconomic_NPV": 312671765932639.4
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -16775733235309.172,
+      "unlevered_cash_NPV": 1572701342813.8242,
+      "full_price_socioeconomic_NPV": 68102896432862.22
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -4045614490077.382,
+      "unlevered_cash_NPV": 5226946538644.427,
+      "full_price_socioeconomic_NPV": 8318203263905.191
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3270415721774.361,
+      "unlevered_cash_NPV": -492531456287.61145,
+      "full_price_socioeconomic_NPV": -311524792731.17773
+     }
+    }
+   }
+  ],
+  "diversified:breakthrough:reference": [
+   {
+    "mode": "equity",
+    "horizon": 100,
+    "annual_gross": 3777850909544.854,
+    "annual_operating_available": 1415325061170.2593,
+    "cumulative_gross_receipts": 154855979632578.88,
+    "owner_payouts": 50427368718595.76,
+    "initial_full_funding": 4239945935009.922,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4239945935009.922,
+    "real_IRR_roundoff_screened": 0.056982394763753885,
+    "population": 222239.79097944312,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 46187422783585.836,
+      "unlevered_cash_NPV": 50876656748387.84,
+      "full_price_socioeconomic_NPV": 56406146834934.41
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 22913965065452.625,
+      "unlevered_cash_NPV": 25602775968821.24,
+      "full_price_socioeconomic_NPV": 28256543235885.875
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 5788996195593.791,
+      "unlevered_cash_NPV": 7013670955398.284,
+      "full_price_socioeconomic_NPV": 7784080198442.48
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -965606780914.1052,
+      "unlevered_cash_NPV": -342522815273.29865,
+      "full_price_socioeconomic_NPV": -164143267665.38086
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 200,
+    "annual_gross": 13287829084714.348,
+    "annual_operating_available": 1537864368414.9355,
+    "cumulative_gross_receipts": 1030045826966887.6,
+    "owner_payouts": 136453763109740.81,
+    "initial_full_funding": 4239945935009.922,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4239945935009.922,
+    "real_IRR_roundoff_screened": 0.057642012784095864,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 132213817174730.89,
+      "unlevered_cash_NPV": 154980452870843.06,
+      "full_price_socioeconomic_NPV": 438868746929063.9
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 43613451241363.72,
+      "unlevered_cash_NPV": 50241330543367.84,
+      "full_price_socioeconomic_NPV": 104624059063784.56
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 7349907829544.104,
+      "unlevered_cash_NPV": 8806080571718.578,
+      "full_price_socioeconomic_NPV": 11803671488741.844
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -948870600965.1854,
+      "unlevered_cash_NPV": -324151491940.1511,
+      "full_price_socioeconomic_NPV": -135446999603.31152
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 220,
+    "annual_gross": 13287829084714.348,
+    "annual_operating_available": 1438045635614.2559,
+    "cumulative_gross_receipts": 1295802408661174.5,
+    "owner_payouts": 164902248423115.9,
+    "initial_full_funding": 4239945935009.922,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4239945935009.922,
+    "real_IRR_roundoff_screened": 0.05764421102534245,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 160662302488105.97,
+      "unlevered_cash_NPV": 183619194261950.53,
+      "full_price_socioeconomic_NPV": 592190578365707.1
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 47121574763891.88,
+      "unlevered_cash_NPV": 53773566802613.59,
+      "full_price_socioeconomic_NPV": 123533092497017.97
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 7407181822354.332,
+      "unlevered_cash_NPV": 8863770173875.049,
+      "full_price_socioeconomic_NPV": 12112457496055.762
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -948850604800.168,
+      "unlevered_cash_NPV": -324131334819.3085,
+      "full_price_socioeconomic_NPV": -135339135647.05664
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 100,
+    "annual_gross": 3777850909544.854,
+    "annual_operating_available": 1415325061170.2593,
+    "cumulative_gross_receipts": 154855979632578.88,
+    "owner_payouts": 50427368718595.76,
+    "initial_full_funding": 4239945935009.922,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4239945935009.922,
+    "real_IRR_roundoff_screened": 0.056982394763753885,
+    "population": 222239.79097944312,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 46187422783585.836,
+      "unlevered_cash_NPV": 50876656748387.84,
+      "full_price_socioeconomic_NPV": 56406146834934.41
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 22913965065452.625,
+      "unlevered_cash_NPV": 25602775968821.24,
+      "full_price_socioeconomic_NPV": 28256543235885.875
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 5788996195593.791,
+      "unlevered_cash_NPV": 7013670955398.284,
+      "full_price_socioeconomic_NPV": 7784080198442.48
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -965606780914.1052,
+      "unlevered_cash_NPV": -342522815273.29865,
+      "full_price_socioeconomic_NPV": -164143267665.38086
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 200,
+    "annual_gross": 13287829084714.348,
+    "annual_operating_available": 1537864368414.9355,
+    "cumulative_gross_receipts": 1030045826966887.6,
+    "owner_payouts": 136453763109740.81,
+    "initial_full_funding": 4239945935009.922,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4239945935009.922,
+    "real_IRR_roundoff_screened": 0.057642012784095864,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 132213817174730.89,
+      "unlevered_cash_NPV": 154980452870843.06,
+      "full_price_socioeconomic_NPV": 438868746929063.9
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 43613451241363.72,
+      "unlevered_cash_NPV": 50241330543367.84,
+      "full_price_socioeconomic_NPV": 104624059063784.56
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 7349907829544.104,
+      "unlevered_cash_NPV": 8806080571718.578,
+      "full_price_socioeconomic_NPV": 11803671488741.844
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -948870600965.1854,
+      "unlevered_cash_NPV": -324151491940.1511,
+      "full_price_socioeconomic_NPV": -135446999603.31152
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 220,
+    "annual_gross": 13287829084714.348,
+    "annual_operating_available": 1438045635614.2559,
+    "cumulative_gross_receipts": 1295802408661174.5,
+    "owner_payouts": 164902248423115.9,
+    "initial_full_funding": 4239945935009.922,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4239945935009.922,
+    "real_IRR_roundoff_screened": 0.05764421102534245,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 160662302488105.97,
+      "unlevered_cash_NPV": 183619194261950.53,
+      "full_price_socioeconomic_NPV": 592190578365707.1
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 47121574763891.88,
+      "unlevered_cash_NPV": 53773566802613.59,
+      "full_price_socioeconomic_NPV": 123533092497017.97
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 7407181822354.332,
+      "unlevered_cash_NPV": 8863770173875.049,
+      "full_price_socioeconomic_NPV": 12112457496055.762
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -948850604800.168,
+      "unlevered_cash_NPV": -324131334819.3085,
+      "full_price_socioeconomic_NPV": -135339135647.05664
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 100,
+    "annual_gross": 3777850909544.854,
+    "annual_operating_available": 1415325061170.2593,
+    "cumulative_gross_receipts": 154855979632578.88,
+    "owner_payouts": 50427368718595.76,
+    "initial_full_funding": 4239945935009.922,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4239945935009.922,
+    "real_IRR_roundoff_screened": 0.056982394763753885,
+    "population": 222239.79097944312,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 46187422783585.836,
+      "unlevered_cash_NPV": 50876656748387.84,
+      "full_price_socioeconomic_NPV": 56406146834934.41
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 22913965065452.625,
+      "unlevered_cash_NPV": 25602775968821.24,
+      "full_price_socioeconomic_NPV": 28256543235885.875
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 5788996195593.791,
+      "unlevered_cash_NPV": 7013670955398.284,
+      "full_price_socioeconomic_NPV": 7784080198442.48
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -965606780914.1052,
+      "unlevered_cash_NPV": -342522815273.29865,
+      "full_price_socioeconomic_NPV": -164143267665.38086
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 200,
+    "annual_gross": 13287829084714.348,
+    "annual_operating_available": 1537864368414.9355,
+    "cumulative_gross_receipts": 1030045826966887.6,
+    "owner_payouts": 136453763109740.81,
+    "initial_full_funding": 4239945935009.922,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4239945935009.922,
+    "real_IRR_roundoff_screened": 0.057642012784095864,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 132213817174730.89,
+      "unlevered_cash_NPV": 154980452870843.06,
+      "full_price_socioeconomic_NPV": 438868746929063.9
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 43613451241363.72,
+      "unlevered_cash_NPV": 50241330543367.84,
+      "full_price_socioeconomic_NPV": 104624059063784.56
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 7349907829544.104,
+      "unlevered_cash_NPV": 8806080571718.578,
+      "full_price_socioeconomic_NPV": 11803671488741.844
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -948870600965.1854,
+      "unlevered_cash_NPV": -324151491940.1511,
+      "full_price_socioeconomic_NPV": -135446999603.31152
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 220,
+    "annual_gross": 13287829084714.348,
+    "annual_operating_available": 1438045635614.2559,
+    "cumulative_gross_receipts": 1295802408661174.5,
+    "owner_payouts": 164902248423115.9,
+    "initial_full_funding": 4239945935009.922,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4239945935009.922,
+    "real_IRR_roundoff_screened": 0.05764421102534245,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 160662302488105.97,
+      "unlevered_cash_NPV": 183619194261950.53,
+      "full_price_socioeconomic_NPV": 592190578365707.1
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 47121574763891.88,
+      "unlevered_cash_NPV": 53773566802613.59,
+      "full_price_socioeconomic_NPV": 123533092497017.97
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 7407181822354.332,
+      "unlevered_cash_NPV": 8863770173875.049,
+      "full_price_socioeconomic_NPV": 12112457496055.762
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -948850604800.168,
+      "unlevered_cash_NPV": -324131334819.3085,
+      "full_price_socioeconomic_NPV": -135339135647.05664
+     }
+    }
+   }
+  ],
+  "premium_lunar:breakthrough:reference": [
+   {
+    "mode": "equity",
+    "horizon": 100,
+    "annual_gross": 4184828491564.8335,
+    "annual_operating_available": 1783889348718.162,
+    "cumulative_gross_receipts": 166183798399847.4,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4277390996219.1055,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4277390996219.1055,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4277390996219.1055,
+      "unlevered_cash_NPV": 60736492602252.84,
+      "full_price_socioeconomic_NPV": 66383550466712.56
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -4125454575786.9653,
+      "unlevered_cash_NPV": 30102348877421.77,
+      "full_price_socioeconomic_NPV": 32811804691291.625
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3848599754588.699,
+      "unlevered_cash_NPV": 8065892648098.396,
+      "full_price_socioeconomic_NPV": 8851354860802.25
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3385738117797.7217,
+      "unlevered_cash_NPV": -261907768719.3465,
+      "full_price_socioeconomic_NPV": -80912469857.84082
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 200,
+    "annual_gross": 10048417353028.166,
+    "annual_operating_available": -1528182839922.7363,
+    "cumulative_gross_receipts": 883103260898337.6,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4277390996219.1055,
+    "additional_equity_required": 8273275318141.158,
+    "all_funder_contributions": 12550666314360.264,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -12550666314360.264,
+      "unlevered_cash_NPV": 6602004224335.341,
+      "full_price_socioeconomic_NPV": 292992919794422.25
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -5278804520670.601,
+      "unlevered_cash_NPV": 25575077790713.69,
+      "full_price_socioeconomic_NPV": 80505074714021.62
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3872363013730.6445,
+      "unlevered_cash_NPV": 8737877182299.615,
+      "full_price_socioeconomic_NPV": 11776602341705.305
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3385750730163.996,
+      "unlevered_cash_NPV": -245014439359.64908,
+      "full_price_socioeconomic_NPV": -53533916595.018555
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 220,
+    "annual_gross": 10048417353028.166,
+    "annual_operating_available": -1623052520261.2324,
+    "cumulative_gross_receipts": 1084071607958900.9,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4277390996219.1055,
+    "additional_equity_required": 40949545198057.95,
+    "all_funder_contributions": 45226936194277.06,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -45226936194277.06,
+      "unlevered_cash_NPV": -25979395975242.957,
+      "full_price_socioeconomic_NPV": 385769937647297.9
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -9308661440040.05,
+      "unlevered_cash_NPV": 21557203061709.96,
+      "full_price_socioeconomic_NPV": 91947281998757.34
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3938168929014.789,
+      "unlevered_cash_NPV": 8672276270988.169,
+      "full_price_socioeconomic_NPV": 11963457798554.484
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3385773716500.7524,
+      "unlevered_cash_NPV": -245037347555.52493,
+      "full_price_socioeconomic_NPV": -53468642951.98926
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 100,
+    "annual_gross": 4184828491564.8335,
+    "annual_operating_available": 1783889348718.162,
+    "cumulative_gross_receipts": 166183798399847.4,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4277390996219.1055,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4277390996219.1055,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4277390996219.1055,
+      "unlevered_cash_NPV": 60736492602252.84,
+      "full_price_socioeconomic_NPV": 66383550466712.56
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -4125454575786.9653,
+      "unlevered_cash_NPV": 30102348877421.77,
+      "full_price_socioeconomic_NPV": 32811804691291.625
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3848599754588.699,
+      "unlevered_cash_NPV": 8065892648098.396,
+      "full_price_socioeconomic_NPV": 8851354860802.25
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3385738117797.7217,
+      "unlevered_cash_NPV": -261907768719.3465,
+      "full_price_socioeconomic_NPV": -80912469857.84082
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 200,
+    "annual_gross": 10048417353028.166,
+    "annual_operating_available": -1528182839922.7363,
+    "cumulative_gross_receipts": 883103260898337.6,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4277390996219.1055,
+    "additional_equity_required": 8273275318141.158,
+    "all_funder_contributions": 12550666314360.264,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -12550666314360.264,
+      "unlevered_cash_NPV": 6602004224335.341,
+      "full_price_socioeconomic_NPV": 292992919794422.25
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -5278804520670.601,
+      "unlevered_cash_NPV": 25575077790713.69,
+      "full_price_socioeconomic_NPV": 80505074714021.62
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3872363013730.6445,
+      "unlevered_cash_NPV": 8737877182299.615,
+      "full_price_socioeconomic_NPV": 11776602341705.305
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3385750730163.996,
+      "unlevered_cash_NPV": -245014439359.64908,
+      "full_price_socioeconomic_NPV": -53533916595.018555
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 220,
+    "annual_gross": 10048417353028.166,
+    "annual_operating_available": -1623052520261.2324,
+    "cumulative_gross_receipts": 1084071607958900.9,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4277390996219.1055,
+    "additional_equity_required": 40949545198057.95,
+    "all_funder_contributions": 45226936194277.06,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -45226936194277.06,
+      "unlevered_cash_NPV": -25979395975242.957,
+      "full_price_socioeconomic_NPV": 385769937647297.9
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -9308661440040.05,
+      "unlevered_cash_NPV": 21557203061709.96,
+      "full_price_socioeconomic_NPV": 91947281998757.34
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3938168929014.789,
+      "unlevered_cash_NPV": 8672276270988.169,
+      "full_price_socioeconomic_NPV": 11963457798554.484
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3385773716500.7524,
+      "unlevered_cash_NPV": -245037347555.52493,
+      "full_price_socioeconomic_NPV": -53468642951.98926
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 100,
+    "annual_gross": 4184828491564.8335,
+    "annual_operating_available": 1783889348718.162,
+    "cumulative_gross_receipts": 166183798399847.4,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4277390996219.1055,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4277390996219.1055,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4277390996219.1055,
+      "unlevered_cash_NPV": 60736492602252.84,
+      "full_price_socioeconomic_NPV": 66383550466712.56
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -4125454575786.9653,
+      "unlevered_cash_NPV": 30102348877421.77,
+      "full_price_socioeconomic_NPV": 32811804691291.625
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3848599754588.699,
+      "unlevered_cash_NPV": 8065892648098.396,
+      "full_price_socioeconomic_NPV": 8851354860802.25
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3385738117797.7217,
+      "unlevered_cash_NPV": -261907768719.3465,
+      "full_price_socioeconomic_NPV": -80912469857.84082
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 200,
+    "annual_gross": 10048417353028.166,
+    "annual_operating_available": -1528182839922.7363,
+    "cumulative_gross_receipts": 883103260898337.6,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4277390996219.1055,
+    "additional_equity_required": 8273275318141.158,
+    "all_funder_contributions": 12550666314360.264,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -12550666314360.264,
+      "unlevered_cash_NPV": 6602004224335.341,
+      "full_price_socioeconomic_NPV": 292992919794422.25
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -5278804520670.601,
+      "unlevered_cash_NPV": 25575077790713.69,
+      "full_price_socioeconomic_NPV": 80505074714021.62
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3872363013730.6445,
+      "unlevered_cash_NPV": 8737877182299.615,
+      "full_price_socioeconomic_NPV": 11776602341705.305
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3385750730163.996,
+      "unlevered_cash_NPV": -245014439359.64908,
+      "full_price_socioeconomic_NPV": -53533916595.018555
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 220,
+    "annual_gross": 10048417353028.166,
+    "annual_operating_available": -1623052520261.2324,
+    "cumulative_gross_receipts": 1084071607958900.9,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4277390996219.1055,
+    "additional_equity_required": 40949545198057.95,
+    "all_funder_contributions": 45226936194277.06,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -45226936194277.06,
+      "unlevered_cash_NPV": -25979395975242.957,
+      "full_price_socioeconomic_NPV": 385769937647297.9
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -9308661440040.05,
+      "unlevered_cash_NPV": 21557203061709.96,
+      "full_price_socioeconomic_NPV": 91947281998757.34
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3938168929014.789,
+      "unlevered_cash_NPV": 8672276270988.169,
+      "full_price_socioeconomic_NPV": 11963457798554.484
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3385773716500.7524,
+      "unlevered_cash_NPV": -245037347555.52493,
+      "full_price_socioeconomic_NPV": -53468642951.98926
+     }
+    }
+   }
+  ],
+  "prior_manufacturing_mix:breakthrough:reference": [
+   {
+    "mode": "equity",
+    "horizon": 100,
+    "annual_gross": 4196314841075.7236,
+    "annual_operating_available": 1708694898967.248,
+    "cumulative_gross_receipts": 164844453790399.97,
+    "owner_payouts": 56710997187724.2,
+    "initial_full_funding": 4294661545048.682,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4294661545048.682,
+    "real_IRR_roundoff_screened": 0.05856914769430921,
+    "population": 222239.79097944312,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 52416335642675.52,
+      "unlevered_cash_NPV": 57346673191514.47,
+      "full_price_socioeconomic_NPV": 63119115322597.516
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 25806427106543.875,
+      "unlevered_cash_NPV": 28608253635075.42,
+      "full_price_socioeconomic_NPV": 31376962650074.867
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 6518332178561.469,
+      "unlevered_cash_NPV": 7772960702839.254,
+      "full_price_socioeconomic_NPV": 8574266731715.379
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -877054932383.093,
+      "unlevered_cash_NPV": -247786317056.65985,
+      "full_price_socioeconomic_NPV": -64206289464.6709
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 200,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 3264372780210.2676,
+    "cumulative_gross_receipts": 1019711131250681.1,
+    "owner_payouts": 220556967758167.84,
+    "initial_full_funding": 4294661545048.682,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4294661545048.682,
+    "real_IRR_roundoff_screened": 0.059388346334278475,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 216262306213119.16,
+      "unlevered_cash_NPV": 233870169460181.66,
+      "full_price_socioeconomic_NPV": 513502340314166.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 63071621453306.836,
+      "unlevered_cash_NPV": 68791779286378.03,
+      "full_price_socioeconomic_NPV": 122625826892666.38
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 9075501166362.295,
+      "unlevered_cash_NPV": 10525146310436.32,
+      "full_price_socioeconomic_NPV": 13546425957382.355
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -852437870394.2323,
+      "unlevered_cash_NPV": -221475066097.962,
+      "full_price_socioeconomic_NPV": -27372883097.91504
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 220,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 3174165983897.1426,
+    "cumulative_gross_receipts": 1266934574894799.8,
+    "owner_payouts": 283778925448839.8,
+    "initial_full_funding": 4294661545048.682,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4294661545048.682,
+    "real_IRR_roundoff_screened": 0.05939176688820502,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 279484263903791.12,
+      "unlevered_cash_NPV": 297263589217478.7,
+      "full_price_socioeconomic_NPV": 698619220175389.2
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 70868559871859.56,
+      "unlevered_cash_NPV": 76610260587048.72,
+      "full_price_socioeconomic_NPV": 145456103980049.47
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 9202818976691.271,
+      "unlevered_cash_NPV": 10652829538293.951,
+      "full_price_socioeconomic_NPV": 13919245325146.969
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -852393402762.2334,
+      "unlevered_cash_NPV": -221430460600.35648,
+      "full_price_socioeconomic_NPV": -27242652606.44922
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 100,
+    "annual_gross": 4196314841075.7236,
+    "annual_operating_available": 1708694898967.248,
+    "cumulative_gross_receipts": 164844453790399.97,
+    "owner_payouts": 56710997187724.2,
+    "initial_full_funding": 4294661545048.682,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4294661545048.682,
+    "real_IRR_roundoff_screened": 0.05856914769430921,
+    "population": 222239.79097944312,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 52416335642675.52,
+      "unlevered_cash_NPV": 57346673191514.47,
+      "full_price_socioeconomic_NPV": 63119115322597.516
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 25806427106543.875,
+      "unlevered_cash_NPV": 28608253635075.42,
+      "full_price_socioeconomic_NPV": 31376962650074.867
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 6518332178561.469,
+      "unlevered_cash_NPV": 7772960702839.254,
+      "full_price_socioeconomic_NPV": 8574266731715.379
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -877054932383.093,
+      "unlevered_cash_NPV": -247786317056.65985,
+      "full_price_socioeconomic_NPV": -64206289464.6709
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 200,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 3264372780210.2676,
+    "cumulative_gross_receipts": 1019711131250681.1,
+    "owner_payouts": 220556967758167.84,
+    "initial_full_funding": 4294661545048.682,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4294661545048.682,
+    "real_IRR_roundoff_screened": 0.059388346334278475,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 216262306213119.16,
+      "unlevered_cash_NPV": 233870169460181.66,
+      "full_price_socioeconomic_NPV": 513502340314166.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 63071621453306.836,
+      "unlevered_cash_NPV": 68791779286378.03,
+      "full_price_socioeconomic_NPV": 122625826892666.38
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 9075501166362.295,
+      "unlevered_cash_NPV": 10525146310436.32,
+      "full_price_socioeconomic_NPV": 13546425957382.355
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -852437870394.2323,
+      "unlevered_cash_NPV": -221475066097.962,
+      "full_price_socioeconomic_NPV": -27372883097.91504
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 220,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 3174165983897.1426,
+    "cumulative_gross_receipts": 1266934574894799.8,
+    "owner_payouts": 283778925448839.8,
+    "initial_full_funding": 4294661545048.682,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4294661545048.682,
+    "real_IRR_roundoff_screened": 0.05939176688820502,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 279484263903791.12,
+      "unlevered_cash_NPV": 297263589217478.7,
+      "full_price_socioeconomic_NPV": 698619220175389.2
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 70868559871859.56,
+      "unlevered_cash_NPV": 76610260587048.72,
+      "full_price_socioeconomic_NPV": 145456103980049.47
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 9202818976691.271,
+      "unlevered_cash_NPV": 10652829538293.951,
+      "full_price_socioeconomic_NPV": 13919245325146.969
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -852393402762.2334,
+      "unlevered_cash_NPV": -221430460600.35648,
+      "full_price_socioeconomic_NPV": -27242652606.44922
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 100,
+    "annual_gross": 4196314841075.7236,
+    "annual_operating_available": 1708694898967.248,
+    "cumulative_gross_receipts": 164844453790399.97,
+    "owner_payouts": 56710997187724.2,
+    "initial_full_funding": 4294661545048.682,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4294661545048.682,
+    "real_IRR_roundoff_screened": 0.05856914769430921,
+    "population": 222239.79097944312,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 52416335642675.52,
+      "unlevered_cash_NPV": 57346673191514.47,
+      "full_price_socioeconomic_NPV": 63119115322597.516
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 25806427106543.875,
+      "unlevered_cash_NPV": 28608253635075.42,
+      "full_price_socioeconomic_NPV": 31376962650074.867
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 6518332178561.469,
+      "unlevered_cash_NPV": 7772960702839.254,
+      "full_price_socioeconomic_NPV": 8574266731715.379
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -877054932383.093,
+      "unlevered_cash_NPV": -247786317056.65985,
+      "full_price_socioeconomic_NPV": -64206289464.6709
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 200,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 3264372780210.2676,
+    "cumulative_gross_receipts": 1019711131250681.1,
+    "owner_payouts": 220556967758167.84,
+    "initial_full_funding": 4294661545048.682,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4294661545048.682,
+    "real_IRR_roundoff_screened": 0.059388346334278475,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 216262306213119.16,
+      "unlevered_cash_NPV": 233870169460181.66,
+      "full_price_socioeconomic_NPV": 513502340314166.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 63071621453306.836,
+      "unlevered_cash_NPV": 68791779286378.03,
+      "full_price_socioeconomic_NPV": 122625826892666.38
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 9075501166362.295,
+      "unlevered_cash_NPV": 10525146310436.32,
+      "full_price_socioeconomic_NPV": 13546425957382.355
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -852437870394.2323,
+      "unlevered_cash_NPV": -221475066097.962,
+      "full_price_socioeconomic_NPV": -27372883097.91504
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 220,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 3174165983897.1426,
+    "cumulative_gross_receipts": 1266934574894799.8,
+    "owner_payouts": 283778925448839.8,
+    "initial_full_funding": 4294661545048.682,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4294661545048.682,
+    "real_IRR_roundoff_screened": 0.05939176688820502,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 279484263903791.12,
+      "unlevered_cash_NPV": 297263589217478.7,
+      "full_price_socioeconomic_NPV": 698619220175389.2
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 70868559871859.56,
+      "unlevered_cash_NPV": 76610260587048.72,
+      "full_price_socioeconomic_NPV": 145456103980049.47
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 9202818976691.271,
+      "unlevered_cash_NPV": 10652829538293.951,
+      "full_price_socioeconomic_NPV": 13919245325146.969
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -852393402762.2334,
+      "unlevered_cash_NPV": -221430460600.35648,
+      "full_price_socioeconomic_NPV": -27242652606.44922
+     }
+    }
+   }
+  ],
+  "propellant_logistics:breakthrough:reference": [
+   {
+    "mode": "equity",
+    "horizon": 100,
+    "annual_gross": 3864651664815.07,
+    "annual_operating_available": 1789603304032.3916,
+    "cumulative_gross_receipts": 156529786992597.5,
+    "owner_payouts": 60832199852075.99,
+    "initial_full_funding": 4168310010331.886,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4168310010331.886,
+    "real_IRR_roundoff_screened": 0.06029599588533341,
+    "population": 222239.79097944312,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 56663889841744.1,
+      "unlevered_cash_NPV": 60788587990059.66,
+      "full_price_socioeconomic_NPV": 66040208578696.03
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 27775495679071.617,
+      "unlevered_cash_NPV": 30194444667709.43,
+      "full_price_socioeconomic_NPV": 32716772609009.32
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 7046622247784.525,
+      "unlevered_cash_NPV": 8194688136941.393,
+      "full_price_socioeconomic_NPV": 8929796280534.25
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -740713094041.2972,
+      "unlevered_cash_NPV": -134835431728.7209,
+      "full_price_socioeconomic_NPV": 37635613859.2207
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 200,
+    "annual_gross": 7028730693243.718,
+    "annual_operating_available": 746260580713.7871,
+    "cumulative_gross_receipts": 706366775055580.5,
+    "owner_payouts": 119929680478929.83,
+    "initial_full_funding": 4168310010331.886,
+    "additional_equity_required": 0.0087890625,
+    "all_funder_contributions": 4168310010331.895,
+    "real_IRR_roundoff_screened": 0.060946102835612526,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 115761370468597.94,
+      "unlevered_cash_NPV": 127889772847554.81,
+      "full_price_socioeconomic_NPV": 397426808062436.5
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 45196083971883.17,
+      "unlevered_cash_NPV": 49855732336029.984,
+      "full_price_socioeconomic_NPV": 101461704123435.88
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 8788007721292.245,
+      "unlevered_cash_NPV": 10110930107657.281,
+      "full_price_socioeconomic_NPV": 12957665113363.875
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -717246781792.1555,
+      "unlevered_cash_NPV": -110092109976.3852,
+      "full_price_socioeconomic_NPV": 72180582409.91309
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 220,
+    "annual_gross": 7028730693243.718,
+    "annual_operating_available": 663814588886.7441,
+    "cumulative_gross_receipts": 846941388920454.9,
+    "owner_payouts": 133014075463938.81,
+    "initial_full_funding": 4168310010331.886,
+    "additional_equity_required": 0.0087890625,
+    "all_funder_contributions": 4168310010331.895,
+    "real_IRR_roundoff_screened": 0.06094665490027473,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 128845765453606.92,
+      "unlevered_cash_NPV": 141130176972037.56,
+      "full_price_socioeconomic_NPV": 529404756504493.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 46810262952302.77,
+      "unlevered_cash_NPV": 51489361184900.914,
+      "full_price_socioeconomic_NPV": 117738877469455.84
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 8814383157575.44,
+      "unlevered_cash_NPV": 10137630372880.479,
+      "full_price_socioeconomic_NPV": 13223487900488.094
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -717237557931.6527,
+      "unlevered_cash_NPV": -110082767231.78648,
+      "full_price_socioeconomic_NPV": 72273449454.16602
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 100,
+    "annual_gross": 3864651664815.07,
+    "annual_operating_available": 1789603304032.3916,
+    "cumulative_gross_receipts": 156529786992597.5,
+    "owner_payouts": 60832199852075.99,
+    "initial_full_funding": 4168310010331.886,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4168310010331.886,
+    "real_IRR_roundoff_screened": 0.06029599588533341,
+    "population": 222239.79097944312,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 56663889841744.1,
+      "unlevered_cash_NPV": 60788587990059.66,
+      "full_price_socioeconomic_NPV": 66040208578696.03
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 27775495679071.617,
+      "unlevered_cash_NPV": 30194444667709.43,
+      "full_price_socioeconomic_NPV": 32716772609009.32
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 7046622247784.525,
+      "unlevered_cash_NPV": 8194688136941.393,
+      "full_price_socioeconomic_NPV": 8929796280534.25
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -740713094041.2972,
+      "unlevered_cash_NPV": -134835431728.7209,
+      "full_price_socioeconomic_NPV": 37635613859.2207
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 200,
+    "annual_gross": 7028730693243.718,
+    "annual_operating_available": 746260580713.7871,
+    "cumulative_gross_receipts": 706366775055580.5,
+    "owner_payouts": 119929680478929.81,
+    "initial_full_funding": 4168310010331.886,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4168310010331.886,
+    "real_IRR_roundoff_screened": 0.060946102835612526,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 115761370468597.94,
+      "unlevered_cash_NPV": 127889772847554.81,
+      "full_price_socioeconomic_NPV": 397426808062436.5
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 45196083971883.17,
+      "unlevered_cash_NPV": 49855732336029.984,
+      "full_price_socioeconomic_NPV": 101461704123435.88
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 8788007721292.245,
+      "unlevered_cash_NPV": 10110930107657.281,
+      "full_price_socioeconomic_NPV": 12957665113363.875
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -717246781792.1555,
+      "unlevered_cash_NPV": -110092109976.3852,
+      "full_price_socioeconomic_NPV": 72180582409.91309
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 220,
+    "annual_gross": 7028730693243.718,
+    "annual_operating_available": 663814588886.7441,
+    "cumulative_gross_receipts": 846941388920454.9,
+    "owner_payouts": 133014075463938.8,
+    "initial_full_funding": 4168310010331.886,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4168310010331.886,
+    "real_IRR_roundoff_screened": 0.06094665490027473,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 128845765453606.92,
+      "unlevered_cash_NPV": 141130176972037.56,
+      "full_price_socioeconomic_NPV": 529404756504493.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 46810262952302.77,
+      "unlevered_cash_NPV": 51489361184900.914,
+      "full_price_socioeconomic_NPV": 117738877469455.84
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 8814383157575.44,
+      "unlevered_cash_NPV": 10137630372880.479,
+      "full_price_socioeconomic_NPV": 13223487900488.094
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -717237557931.6527,
+      "unlevered_cash_NPV": -110082767231.78648,
+      "full_price_socioeconomic_NPV": 72273449454.16602
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 100,
+    "annual_gross": 3864651664815.07,
+    "annual_operating_available": 1789603304032.3916,
+    "cumulative_gross_receipts": 156529786992597.5,
+    "owner_payouts": 60832199852075.99,
+    "initial_full_funding": 4168310010331.886,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4168310010331.886,
+    "real_IRR_roundoff_screened": 0.06029599588533341,
+    "population": 222239.79097944312,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 56663889841744.1,
+      "unlevered_cash_NPV": 60788587990059.66,
+      "full_price_socioeconomic_NPV": 66040208578696.03
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 27775495679071.617,
+      "unlevered_cash_NPV": 30194444667709.43,
+      "full_price_socioeconomic_NPV": 32716772609009.32
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 7046622247784.525,
+      "unlevered_cash_NPV": 8194688136941.393,
+      "full_price_socioeconomic_NPV": 8929796280534.25
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -740713094041.2972,
+      "unlevered_cash_NPV": -134835431728.7209,
+      "full_price_socioeconomic_NPV": 37635613859.2207
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 200,
+    "annual_gross": 7028730693243.718,
+    "annual_operating_available": 746260580713.7871,
+    "cumulative_gross_receipts": 706366775055580.5,
+    "owner_payouts": 119929680478929.81,
+    "initial_full_funding": 4168310010331.886,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4168310010331.886,
+    "real_IRR_roundoff_screened": 0.060946102835612526,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 115761370468597.94,
+      "unlevered_cash_NPV": 127889772847554.81,
+      "full_price_socioeconomic_NPV": 397426808062436.5
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 45196083971883.17,
+      "unlevered_cash_NPV": 49855732336029.984,
+      "full_price_socioeconomic_NPV": 101461704123435.88
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 8788007721292.245,
+      "unlevered_cash_NPV": 10110930107657.281,
+      "full_price_socioeconomic_NPV": 12957665113363.875
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -717246781792.1555,
+      "unlevered_cash_NPV": -110092109976.3852,
+      "full_price_socioeconomic_NPV": 72180582409.91309
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 220,
+    "annual_gross": 7028730693243.718,
+    "annual_operating_available": 663814588886.7441,
+    "cumulative_gross_receipts": 846941388920454.9,
+    "owner_payouts": 133014075463938.8,
+    "initial_full_funding": 4168310010331.886,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4168310010331.886,
+    "real_IRR_roundoff_screened": 0.06094665490027473,
+    "population": 6468289.238000949,
+    "first_payout_year": 8,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": 128845765453606.92,
+      "unlevered_cash_NPV": 141130176972037.56,
+      "full_price_socioeconomic_NPV": 529404756504493.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": 46810262952302.77,
+      "unlevered_cash_NPV": 51489361184900.914,
+      "full_price_socioeconomic_NPV": 117738877469455.84
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": 8814383157575.44,
+      "unlevered_cash_NPV": 10137630372880.479,
+      "full_price_socioeconomic_NPV": 13223487900488.094
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -717237557931.6527,
+      "unlevered_cash_NPV": -110082767231.78648,
+      "full_price_socioeconomic_NPV": 72273449454.16602
+     }
+    }
+   }
+  ],
+  "raw_resource_price:breakthrough:reference": [
+   {
+    "mode": "equity",
+    "horizon": 100,
+    "annual_gross": 2946880379086.019,
+    "annual_operating_available": 941145173608.9814,
+    "cumulative_gross_receipts": 133341240037813.17,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4091523002820.859,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4091523002820.859,
+      "unlevered_cash_NPV": 40338322063437.945,
+      "full_price_socioeconomic_NPV": 45335391845203.53
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3945895655630.65,
+      "unlevered_cash_NPV": 20568916530286.375,
+      "full_price_socioeconomic_NPV": 22970711282481.016
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3680566134351.5986,
+      "unlevered_cash_NPV": 5672250912186.774,
+      "full_price_socioeconomic_NPV": 6374799721428.512
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237067545372.717,
+      "unlevered_cash_NPV": -488720120739.47845,
+      "full_price_socioeconomic_NPV": -321938736728.2412
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 200,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1183654818119.2988,
+    "cumulative_gross_receipts": 520156818784293.9,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 48075325770230.48,
+    "all_funder_contributions": 52166848773051.336,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -52166848773051.336,
+      "unlevered_cash_NPV": -42459380512099.19,
+      "full_price_socioeconomic_NPV": 225098557811492.88
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -11634677305841.342,
+      "unlevered_cash_NPV": 6930568371322.334,
+      "full_price_socioeconomic_NPV": 58032232558866.47
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3892057862244.424,
+      "unlevered_cash_NPV": 5437491333160.879,
+      "full_price_socioeconomic_NPV": 8226763847194.148
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237277211010.585,
+      "unlevered_cash_NPV": -483174851622.26654,
+      "full_price_socioeconomic_NPV": -306816370132.64844
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 220,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1264663571569.3428,
+    "cumulative_gross_receipts": 619022298983621.8,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 73482524019262.17,
+    "all_funder_contributions": 77574047022083.03,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -77574047022083.03,
+      "unlevered_cash_NPV": -67785570007680.84,
+      "full_price_socioeconomic_NPV": 318070987542084.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -14767528202102.629,
+      "unlevered_cash_NPV": 3807812184636.4214,
+      "full_price_socioeconomic_NPV": 69498889637227.19
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3943198463849.6523,
+      "unlevered_cash_NPV": 5386519160405.485,
+      "full_price_socioeconomic_NPV": 8414030262898.457
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237295062407.379,
+      "unlevered_cash_NPV": -483192641492.9576,
+      "full_price_socioeconomic_NPV": -306750944450.38184
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 100,
+    "annual_gross": 2946880379086.019,
+    "annual_operating_available": 941145173608.9814,
+    "cumulative_gross_receipts": 133341240037813.17,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4091523002820.859,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4091523002820.859,
+      "unlevered_cash_NPV": 40338322063437.945,
+      "full_price_socioeconomic_NPV": 45335391845203.53
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3945895655630.65,
+      "unlevered_cash_NPV": 20568916530286.375,
+      "full_price_socioeconomic_NPV": 22970711282481.016
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3680566134351.5986,
+      "unlevered_cash_NPV": 5672250912186.774,
+      "full_price_socioeconomic_NPV": 6374799721428.512
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237067545372.717,
+      "unlevered_cash_NPV": -488720120739.47845,
+      "full_price_socioeconomic_NPV": -321938736728.2412
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 200,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1183654818119.2988,
+    "cumulative_gross_receipts": 520156818784293.9,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 48075325770230.48,
+    "all_funder_contributions": 52166848773051.336,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -52166848773051.336,
+      "unlevered_cash_NPV": -42459380512099.19,
+      "full_price_socioeconomic_NPV": 225098557811492.88
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -11634677305841.342,
+      "unlevered_cash_NPV": 6930568371322.334,
+      "full_price_socioeconomic_NPV": 58032232558866.47
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3892057862244.424,
+      "unlevered_cash_NPV": 5437491333160.879,
+      "full_price_socioeconomic_NPV": 8226763847194.148
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237277211010.585,
+      "unlevered_cash_NPV": -483174851622.26654,
+      "full_price_socioeconomic_NPV": -306816370132.64844
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 220,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1264663571569.3428,
+    "cumulative_gross_receipts": 619022298983621.8,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 73482524019262.17,
+    "all_funder_contributions": 77574047022083.03,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -77574047022083.03,
+      "unlevered_cash_NPV": -67785570007680.84,
+      "full_price_socioeconomic_NPV": 318070987542084.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -14767528202102.629,
+      "unlevered_cash_NPV": 3807812184636.4214,
+      "full_price_socioeconomic_NPV": 69498889637227.19
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3943198463849.6523,
+      "unlevered_cash_NPV": 5386519160405.485,
+      "full_price_socioeconomic_NPV": 8414030262898.457
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237295062407.379,
+      "unlevered_cash_NPV": -483192641492.9576,
+      "full_price_socioeconomic_NPV": -306750944450.38184
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 100,
+    "annual_gross": 2946880379086.019,
+    "annual_operating_available": 941145173608.9814,
+    "cumulative_gross_receipts": 133341240037813.17,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4091523002820.859,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4091523002820.859,
+      "unlevered_cash_NPV": 40338322063437.945,
+      "full_price_socioeconomic_NPV": 45335391845203.53
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3945895655630.65,
+      "unlevered_cash_NPV": 20568916530286.375,
+      "full_price_socioeconomic_NPV": 22970711282481.016
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3680566134351.5986,
+      "unlevered_cash_NPV": 5672250912186.774,
+      "full_price_socioeconomic_NPV": 6374799721428.512
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237067545372.717,
+      "unlevered_cash_NPV": -488720120739.47845,
+      "full_price_socioeconomic_NPV": -321938736728.2412
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 200,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1183654818119.2988,
+    "cumulative_gross_receipts": 520156818784293.9,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 48075325770230.48,
+    "all_funder_contributions": 52166848773051.336,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -52166848773051.336,
+      "unlevered_cash_NPV": -42459380512099.19,
+      "full_price_socioeconomic_NPV": 225098557811492.88
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -11634677305841.342,
+      "unlevered_cash_NPV": 6930568371322.334,
+      "full_price_socioeconomic_NPV": 58032232558866.47
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3892057862244.424,
+      "unlevered_cash_NPV": 5437491333160.879,
+      "full_price_socioeconomic_NPV": 8226763847194.148
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237277211010.585,
+      "unlevered_cash_NPV": -483174851622.26654,
+      "full_price_socioeconomic_NPV": -306816370132.64844
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 220,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1264663571569.3428,
+    "cumulative_gross_receipts": 619022298983621.8,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 73482524019262.17,
+    "all_funder_contributions": 77574047022083.03,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -77574047022083.03,
+      "unlevered_cash_NPV": -67785570007680.84,
+      "full_price_socioeconomic_NPV": 318070987542084.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -14767528202102.629,
+      "unlevered_cash_NPV": 3807812184636.4214,
+      "full_price_socioeconomic_NPV": 69498889637227.19
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3943198463849.6523,
+      "unlevered_cash_NPV": 5386519160405.485,
+      "full_price_socioeconomic_NPV": 8414030262898.457
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237295062407.379,
+      "unlevered_cash_NPV": -483192641492.9576,
+      "full_price_socioeconomic_NPV": -306750944450.38184
+     }
+    }
+   }
+  ],
+  "services:breakthrough:reference": [
+   {
+    "mode": "equity",
+    "horizon": 100,
+    "annual_gross": 2946880379086.019,
+    "annual_operating_available": 941145173608.9814,
+    "cumulative_gross_receipts": 133341240037813.17,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4091523002820.859,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4091523002820.859,
+      "unlevered_cash_NPV": 40338322063437.945,
+      "full_price_socioeconomic_NPV": 45335391845203.53
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3945895655630.65,
+      "unlevered_cash_NPV": 20568916530286.375,
+      "full_price_socioeconomic_NPV": 22970711282481.016
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3680566134351.5986,
+      "unlevered_cash_NPV": 5672250912186.774,
+      "full_price_socioeconomic_NPV": 6374799721428.512
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237067545372.717,
+      "unlevered_cash_NPV": -488720120739.47845,
+      "full_price_socioeconomic_NPV": -321938736728.2412
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 200,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1183654818119.2988,
+    "cumulative_gross_receipts": 520156818784293.9,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 48075325770230.48,
+    "all_funder_contributions": 52166848773051.336,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -52166848773051.336,
+      "unlevered_cash_NPV": -42459380512099.19,
+      "full_price_socioeconomic_NPV": 225098557811492.88
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -11634677305841.342,
+      "unlevered_cash_NPV": 6930568371322.334,
+      "full_price_socioeconomic_NPV": 58032232558866.47
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3892057862244.424,
+      "unlevered_cash_NPV": 5437491333160.879,
+      "full_price_socioeconomic_NPV": 8226763847194.148
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237277211010.585,
+      "unlevered_cash_NPV": -483174851622.26654,
+      "full_price_socioeconomic_NPV": -306816370132.64844
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 220,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1264663571569.3428,
+    "cumulative_gross_receipts": 619022298983621.8,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 73482524019262.17,
+    "all_funder_contributions": 77574047022083.03,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -77574047022083.03,
+      "unlevered_cash_NPV": -67785570007680.84,
+      "full_price_socioeconomic_NPV": 318070987542084.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -14767528202102.629,
+      "unlevered_cash_NPV": 3807812184636.4214,
+      "full_price_socioeconomic_NPV": 69498889637227.19
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3943198463849.6523,
+      "unlevered_cash_NPV": 5386519160405.485,
+      "full_price_socioeconomic_NPV": 8414030262898.457
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237295062407.379,
+      "unlevered_cash_NPV": -483192641492.9576,
+      "full_price_socioeconomic_NPV": -306750944450.38184
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 100,
+    "annual_gross": 2946880379086.019,
+    "annual_operating_available": 941145173608.9814,
+    "cumulative_gross_receipts": 133341240037813.17,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4091523002820.859,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4091523002820.859,
+      "unlevered_cash_NPV": 40338322063437.945,
+      "full_price_socioeconomic_NPV": 45335391845203.53
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3945895655630.65,
+      "unlevered_cash_NPV": 20568916530286.375,
+      "full_price_socioeconomic_NPV": 22970711282481.016
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3680566134351.5986,
+      "unlevered_cash_NPV": 5672250912186.774,
+      "full_price_socioeconomic_NPV": 6374799721428.512
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237067545372.717,
+      "unlevered_cash_NPV": -488720120739.47845,
+      "full_price_socioeconomic_NPV": -321938736728.2412
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 200,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1183654818119.2988,
+    "cumulative_gross_receipts": 520156818784293.9,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 48075325770230.48,
+    "all_funder_contributions": 52166848773051.336,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -52166848773051.336,
+      "unlevered_cash_NPV": -42459380512099.19,
+      "full_price_socioeconomic_NPV": 225098557811492.88
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -11634677305841.342,
+      "unlevered_cash_NPV": 6930568371322.334,
+      "full_price_socioeconomic_NPV": 58032232558866.47
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3892057862244.424,
+      "unlevered_cash_NPV": 5437491333160.879,
+      "full_price_socioeconomic_NPV": 8226763847194.148
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237277211010.585,
+      "unlevered_cash_NPV": -483174851622.26654,
+      "full_price_socioeconomic_NPV": -306816370132.64844
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 220,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1264663571569.3428,
+    "cumulative_gross_receipts": 619022298983621.8,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 73482524019262.17,
+    "all_funder_contributions": 77574047022083.03,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -77574047022083.03,
+      "unlevered_cash_NPV": -67785570007680.84,
+      "full_price_socioeconomic_NPV": 318070987542084.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -14767528202102.629,
+      "unlevered_cash_NPV": 3807812184636.4214,
+      "full_price_socioeconomic_NPV": 69498889637227.19
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3943198463849.6523,
+      "unlevered_cash_NPV": 5386519160405.485,
+      "full_price_socioeconomic_NPV": 8414030262898.457
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237295062407.379,
+      "unlevered_cash_NPV": -483192641492.9576,
+      "full_price_socioeconomic_NPV": -306750944450.38184
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 100,
+    "annual_gross": 2946880379086.019,
+    "annual_operating_available": 941145173608.9814,
+    "cumulative_gross_receipts": 133341240037813.17,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4091523002820.859,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4091523002820.859,
+      "unlevered_cash_NPV": 40338322063437.945,
+      "full_price_socioeconomic_NPV": 45335391845203.53
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -3945895655630.65,
+      "unlevered_cash_NPV": 20568916530286.375,
+      "full_price_socioeconomic_NPV": 22970711282481.016
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3680566134351.5986,
+      "unlevered_cash_NPV": 5672250912186.774,
+      "full_price_socioeconomic_NPV": 6374799721428.512
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237067545372.717,
+      "unlevered_cash_NPV": -488720120739.47845,
+      "full_price_socioeconomic_NPV": -321938736728.2412
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 200,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1183654818119.2988,
+    "cumulative_gross_receipts": 520156818784293.9,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 48075325770230.48,
+    "all_funder_contributions": 52166848773051.336,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -52166848773051.336,
+      "unlevered_cash_NPV": -42459380512099.19,
+      "full_price_socioeconomic_NPV": 225098557811492.88
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -11634677305841.342,
+      "unlevered_cash_NPV": 6930568371322.334,
+      "full_price_socioeconomic_NPV": 58032232558866.47
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3892057862244.424,
+      "unlevered_cash_NPV": 5437491333160.879,
+      "full_price_socioeconomic_NPV": 8226763847194.148
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237277211010.585,
+      "unlevered_cash_NPV": -483174851622.26654,
+      "full_price_socioeconomic_NPV": -306816370132.64844
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 220,
+    "annual_gross": 4943274009966.395,
+    "annual_operating_available": -1264663571569.3428,
+    "cumulative_gross_receipts": 619022298983621.8,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4091523002820.859,
+    "additional_equity_required": 73482524019262.17,
+    "all_funder_contributions": 77574047022083.03,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -77574047022083.03,
+      "unlevered_cash_NPV": -67785570007680.84,
+      "full_price_socioeconomic_NPV": 318070987542084.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -14767528202102.629,
+      "unlevered_cash_NPV": 3807812184636.4214,
+      "full_price_socioeconomic_NPV": 69498889637227.19
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3943198463849.6523,
+      "unlevered_cash_NPV": 5386519160405.485,
+      "full_price_socioeconomic_NPV": 8414030262898.457
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3237295062407.379,
+      "unlevered_cash_NPV": -483192641492.9576,
+      "full_price_socioeconomic_NPV": -306750944450.38184
+     }
+    }
+   }
+  ],
+  "specialty:breakthrough:reference": [
+   {
+    "mode": "equity",
+    "horizon": 100,
+    "annual_gross": 3315939234380.5225,
+    "annual_operating_available": 1024034037004.9531,
+    "cumulative_gross_receipts": 142600858060089.62,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4213886199006.582,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4213886199006.582,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4213886199006.5815,
+      "unlevered_cash_NPV": 41432314214185.46,
+      "full_price_socioeconomic_NPV": 46842324411131.03
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -4064155691594.798,
+      "unlevered_cash_NPV": 21133029014884.586,
+      "full_price_socioeconomic_NPV": 23730272966827.383
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3791325371512.1895,
+      "unlevered_cash_NPV": 5832638143791.631,
+      "full_price_socioeconomic_NPV": 6587851800469.598
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3335208172077.2725,
+      "unlevered_cash_NPV": -503848558049.97955,
+      "full_price_socioeconomic_NPV": -328036450048.251
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 200,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 715327078917.8418,
+    "cumulative_gross_receipts": 864475450830391.6,
+    "owner_payouts": 2028297451604.084,
+    "initial_full_funding": 4213886199006.582,
+    "additional_equity_required": 13801897930504.086,
+    "all_funder_contributions": 18015784129510.668,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": 193,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -15987486677906.584,
+      "unlevered_cash_NPV": 6602970659092.978,
+      "full_price_socioeconomic_NPV": 288484492162241.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -6070908356146.663,
+      "unlevered_cash_NPV": 15595421906390.568,
+      "full_price_socioeconomic_NPV": 69520628973650.56
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3852273403988.348,
+      "unlevered_cash_NPV": 5875433421165.618,
+      "full_price_socioeconomic_NPV": 8834980480607.852
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3335275886390.3794,
+      "unlevered_cash_NPV": -497401960568.5451,
+      "full_price_socioeconomic_NPV": -311420815368.8584
+     }
+    }
+   },
+   {
+    "mode": "equity",
+    "horizon": 220,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 622396160473.6738,
+    "cumulative_gross_receipts": 1111698894474510.2,
+    "owner_payouts": 14188579514232.127,
+    "initial_full_funding": 4213886199006.582,
+    "additional_equity_required": 13801897930504.086,
+    "all_funder_contributions": 18015784129510.668,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": 193,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -3827204615278.5415,
+      "unlevered_cash_NPV": 18940022525559.16,
+      "full_price_socioeconomic_NPV": 424858000223764.5
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -4571469702409.351,
+      "unlevered_cash_NPV": 17117159842509.455,
+      "full_price_socioeconomic_NPV": 86339421062797.25
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3827797554302.993,
+      "unlevered_cash_NPV": 5900290285396.546,
+      "full_price_socioeconomic_NPV": 9109631731893.523
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3335267344760.581,
+      "unlevered_cash_NPV": -497393273559.3315,
+      "full_price_socioeconomic_NPV": -311324876202.7012
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 100,
+    "annual_gross": 3315939234380.5225,
+    "annual_operating_available": 1024034037004.9531,
+    "cumulative_gross_receipts": 142600858060089.62,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4213886199006.582,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4213886199006.582,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4213886199006.5815,
+      "unlevered_cash_NPV": 41432314214185.46,
+      "full_price_socioeconomic_NPV": 46842324411131.03
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -4064155691594.798,
+      "unlevered_cash_NPV": 21133029014884.586,
+      "full_price_socioeconomic_NPV": 23730272966827.383
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3791325371512.1895,
+      "unlevered_cash_NPV": 5832638143791.631,
+      "full_price_socioeconomic_NPV": 6587851800469.598
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3335208172077.2725,
+      "unlevered_cash_NPV": -503848558049.97955,
+      "full_price_socioeconomic_NPV": -328036450048.251
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 200,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 715327078917.8418,
+    "cumulative_gross_receipts": 864475450830391.6,
+    "owner_payouts": 1203135898137.8125,
+    "initial_full_funding": 4213886199006.582,
+    "additional_equity_required": 12982315876789.262,
+    "all_funder_contributions": 17196202075795.844,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": 195,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -15993066177658.031,
+      "unlevered_cash_NPV": 6602970659092.978,
+      "full_price_socioeconomic_NPV": 288484492162241.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -6047007734777.376,
+      "unlevered_cash_NPV": 15595421906390.568,
+      "full_price_socioeconomic_NPV": 69520628973650.56
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3850427225756.8184,
+      "unlevered_cash_NPV": 5875433421165.618,
+      "full_price_socioeconomic_NPV": 8834980480607.852
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3335272396797.1035,
+      "unlevered_cash_NPV": -497401960568.5451,
+      "full_price_socioeconomic_NPV": -311420815368.8584
+     }
+    }
+   },
+   {
+    "mode": "funded_credit",
+    "horizon": 220,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 622396160473.6738,
+    "cumulative_gross_receipts": 1111698894474510.2,
+    "owner_payouts": 12726592305176.402,
+    "initial_full_funding": 4213886199006.582,
+    "additional_equity_required": 12982315876789.262,
+    "all_funder_contributions": 17196202075795.844,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": 195,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4469609770619.442,
+      "unlevered_cash_NPV": 18940022525559.16,
+      "full_price_socioeconomic_NPV": 424858000223764.5
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -4631041243014.639,
+      "unlevered_cash_NPV": 17117159842509.455,
+      "full_price_socioeconomic_NPV": 86339421062797.25
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3827479393158.419,
+      "unlevered_cash_NPV": 5900290285396.546,
+      "full_price_socioeconomic_NPV": 9109631731893.523
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3335264506675.507,
+      "unlevered_cash_NPV": -497393273559.3315,
+      "full_price_socioeconomic_NPV": -311324876202.7012
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 100,
+    "annual_gross": 3315939234380.5225,
+    "annual_operating_available": 1024034037004.9531,
+    "cumulative_gross_receipts": 142600858060089.62,
+    "owner_payouts": 0.0,
+    "initial_full_funding": 4213886199006.582,
+    "additional_equity_required": 0.0,
+    "all_funder_contributions": 4213886199006.582,
+    "real_IRR_roundoff_screened": null,
+    "population": 222239.79097944312,
+    "first_payout_year": null,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4213886199006.5815,
+      "unlevered_cash_NPV": 41432314214185.46,
+      "full_price_socioeconomic_NPV": 46842324411131.03
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -4064155691594.798,
+      "unlevered_cash_NPV": 21133029014884.586,
+      "full_price_socioeconomic_NPV": 23730272966827.383
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3791325371512.1895,
+      "unlevered_cash_NPV": 5832638143791.631,
+      "full_price_socioeconomic_NPV": 6587851800469.598
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3335208172077.2725,
+      "unlevered_cash_NPV": -503848558049.97955,
+      "full_price_socioeconomic_NPV": -328036450048.251
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 200,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 715327078917.8418,
+    "cumulative_gross_receipts": 864475450830391.6,
+    "owner_payouts": 1203135898137.8125,
+    "initial_full_funding": 4213886199006.582,
+    "additional_equity_required": 12982315876789.262,
+    "all_funder_contributions": 17196202075795.844,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": 195,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -15993066177658.031,
+      "unlevered_cash_NPV": 6602970659092.978,
+      "full_price_socioeconomic_NPV": 288484492162241.0
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -6047007734777.376,
+      "unlevered_cash_NPV": 15595421906390.568,
+      "full_price_socioeconomic_NPV": 69520628973650.56
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3850427225756.8184,
+      "unlevered_cash_NPV": 5875433421165.618,
+      "full_price_socioeconomic_NPV": 8834980480607.852
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3335272396797.1035,
+      "unlevered_cash_NPV": -497401960568.5451,
+      "full_price_socioeconomic_NPV": -311420815368.8584
+     }
+    }
+   },
+   {
+    "mode": "U_credit",
+    "horizon": 220,
+    "annual_gross": 12361172182205.93,
+    "annual_operating_available": 622396160473.6738,
+    "cumulative_gross_receipts": 1111698894474510.2,
+    "owner_payouts": 12726592305176.402,
+    "initial_full_funding": 4213886199006.582,
+    "additional_equity_required": 12982315876789.262,
+    "all_funder_contributions": 17196202075795.844,
+    "real_IRR_roundoff_screened": null,
+    "population": 6468289.238000949,
+    "first_payout_year": 195,
+    "discounted": {
+     "0.0": {
+      "sponsor_distributed_cash_NPV": -4469609770619.442,
+      "unlevered_cash_NPV": 18940022525559.16,
+      "full_price_socioeconomic_NPV": 424858000223764.5
+     },
+     "0.01": {
+      "sponsor_distributed_cash_NPV": -4631041243014.639,
+      "unlevered_cash_NPV": 17117159842509.455,
+      "full_price_socioeconomic_NPV": 86339421062797.25
+     },
+     "0.03": {
+      "sponsor_distributed_cash_NPV": -3827479393158.419,
+      "unlevered_cash_NPV": 5900290285396.546,
+      "full_price_socioeconomic_NPV": 9109631731893.523
+     },
+     "0.07": {
+      "sponsor_distributed_cash_NPV": -3335264506675.507,
+      "unlevered_cash_NPV": -497393273559.3315,
+      "full_price_socioeconomic_NPV": -311324876202.7012
+     }
+    }
+   }
+  ]
+ }
+}

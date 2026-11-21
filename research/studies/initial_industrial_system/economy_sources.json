@@ -1,0 +1,125 @@
+{
+  "date": "2026-11-12",
+  "scope": "Bounded supplemental primary-source reading and byte archive. Complete literature review and source-body assays remain open. Browser-access failures are preserved alongside independent byte-fetch results. Outside papers remain on the research drive.",
+  "items": [
+    {
+      "id": "bea",
+      "url": "https://www.bea.gov/help/faq/1197",
+      "date_accessed": "2026-11-12",
+      "scope": "Gross output, intermediate consumption and value added; accounting definitions, not scenario prices.",
+      "resolved_url": "https://www.bea.gov/help/faq/1197",
+      "cache_path": "/media/projectspace/terluna-research/initial-industrial-system/economy/sources/bea.html",
+      "sha256": "63dcf57e7845d1be9400504693bd4fb1edd61e2779713cbd3c0306b1afb4c08c",
+      "bytes": 38705,
+      "content_type": "text/html; charset=utf-8",
+      "status": "retrieved_bytes"
+    },
+    {
+      "id": "esa",
+      "url": "https://www.esa.int/media/first-metal-part-3d-printed-in-space",
+      "date_accessed": "2026-11-12",
+      "scope": "September 2024 report of an ISS metal-printing demonstration; no fleet-scale production or lifetime validation.",
+      "resolved_url": "https://www.esa.int/media/first-metal-part-3d-printed-in-space",
+      "cache_path": "/media/projectspace/terluna-research/initial-industrial-system/economy/sources/esa.html",
+      "sha256": "737eb38dd6ce7af64110d2cfb96848d3842f7c261526951f9bd31e88c3216bb9",
+      "bytes": 203945,
+      "content_type": "text/html; charset=UTF-8",
+      "status": "retrieved_bytes"
+    },
+    {
+      "id": "blue_origin",
+      "url": "https://www.blueorigin.com/news/blue-alchemist-hits-major-milestone-toward-permanent-sustainable-lunar-infrastructure",
+      "date_accessed": "2026-11-12",
+      "scope": "September 2025 company report of CDR and a planned 2026 demonstration. Completion of that later demonstration is not established here.",
+      "status": "retrieval_failed",
+      "error": "HTTP Error 429: Too Many Requests",
+      "browser_reading": "Company page was successfully read through the web tool; separate byte archive retrieval failed and remains unavailable."
+    },
+    {
+      "id": "carbon",
+      "url": "https://ntrs.nasa.gov/api/citations/20240006219/downloads/Keller%20TEM%20of%20carbonaceous%20matter%20in%20Bennu%206385.pdf?attachment=true",
+      "date_accessed": "2026-11-12",
+      "scope": "Keller et al., 2024 conference abstract, preliminary 4.7 wt% Bennu carbon. Analogue only; no mining designation or recovery measurement.",
+      "resolved_url": "https://ntrs.nasa.gov/api/citations/20240006219/downloads/Keller%20TEM%20of%20carbonaceous%20matter%20in%20Bennu%206385.pdf?attachment=true",
+      "cache_path": "/media/projectspace/terluna-research/initial-industrial-system/economy/sources/carbon.pdf",
+      "sha256": "0be28065450d7bac6f7df48e2a72d3a5fe640f062ad32aaecaa5a55e5096f218",
+      "bytes": 474013,
+      "content_type": "application/pdf",
+      "status": "retrieved_bytes"
+    },
+    {
+      "id": "phosphate",
+      "url": "https://www.nasa.gov/solar-system/surprising-phosphate-finding-in-nasas-osiris-rex-asteroid-sample/",
+      "date_accessed": "2026-11-12",
+      "scope": "NASA June 2024 report: phosphate and carbonaceous/sulfide minerals in Bennu samples; no numerical industrial recovery or phosphorus grade inferred.",
+      "resolved_url": "https://www.nasa.gov/solar-system/surprising-phosphate-finding-in-nasas-osiris-rex-asteroid-sample/",
+      "cache_path": "/media/projectspace/terluna-research/initial-industrial-system/economy/sources/phosphate.html",
+      "sha256": "e3e3709b4202cbd5c2bffdd401adf6438405f2b02e67a9524b10a2c152b6b978",
+      "bytes": 298408,
+      "content_type": "text/html; charset=UTF-8",
+      "status": "retrieved_bytes"
+    },
+    {
+      "id": "bulk_elements",
+      "url": "https://ntrs.nasa.gov/api/citations/20240000341/downloads/Koefoed_LPSC%202024%20Bennu%20Elemental%20Comp.pdf",
+      "date_accessed": "2026-11-12",
+      "scope": "Koefoed et al., 2024 conference abstract: 54-element analysis of a 20.66 mg aggregate resembles CI composition; individual refinery grades remain unspecified.",
+      "resolved_url": "https://ntrs.nasa.gov/api/citations/20240000341/downloads/Koefoed_LPSC%202024%20Bennu%20Elemental%20Comp.pdf",
+      "cache_path": "/media/projectspace/terluna-research/initial-industrial-system/economy/sources/bulk_elements.pdf",
+      "sha256": "9b17865f8490fb983451e0bd08db7b9ea054e79a9316224aba6c734074bc57a9",
+      "bytes": 169364,
+      "content_type": "application/pdf",
+      "status": "retrieved_bytes"
+    },
+    {
+      "id": "semiconductors",
+      "url": "https://www.semiconductors.org/global-semiconductor-sales-increase-19-1-in-2024-double-digit-growth-projected-in-2025/",
+      "date_accessed": "2026-11-12",
+      "scope": "SIA March 2025 update: WSTS 2024 worldwide semiconductor sales 630.5 billion USD. Historical scale context only; unrelated products and years, no 2041 demand ceiling.",
+      "resolved_url": "https://www.semiconductors.org/global-semiconductor-sales-increase-19-1-in-2024-double-digit-growth-projected-in-2025/",
+      "cache_path": "/media/projectspace/terluna-research/initial-industrial-system/economy/sources/semiconductors.html",
+      "sha256": "3515a5aaabe221ec5ad6270ac4470bc33b625e436db9cf4e78d0cb3eda44d95e",
+      "bytes": 63598,
+      "content_type": "text/html; charset=UTF-8",
+      "status": "retrieved_bytes"
+    },
+    {
+      "id": "nature_bulk",
+      "url": "https://www.nature.com/articles/s41550-025-02631-6.pdf",
+      "date_accessed": "2026-11-12",
+      "scope": "PDF obtained after browser authentication failure; targeted inspection only, no model parameter depends on it. Full scholarly reading remains open.",
+      "resolved_url": "https://www.nature.com/articles/s41550-025-02631-6.pdf?error=cookies_not_supported&code=5dcc509d-3caa-4335-addd-318bd3ef8efe",
+      "cache_path": "/media/projectspace/terluna-research/initial-industrial-system/economy/sources/nature_bulk.pdf",
+      "sha256": "b7aa63c7b04afc6a779e0c3c2368d2239db32997e610cd80feef9bf98cdaf5ff",
+      "bytes": 5395945,
+      "content_type": "application/pdf",
+      "status": "retrieved_bytes"
+    },
+    {
+      "id": "usgs_pgm",
+      "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-platinum-group.pdf",
+      "date_accessed": "2026-11-12",
+      "scope": "USGS 2026 PGM chapter, both pages read from the archived PDF after browser HTTP 403. Uses 2025 estimated platinum price and output only for a labelled per-ppm sensitivity, not as a 2041 market forecast or asteroid assay.",
+      "resolved_url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-platinum-group.pdf",
+      "cache_path": "/media/projectspace/terluna-research/initial-industrial-system/economy/sources/usgs_pgm.pdf",
+      "sha256": "e28369fb9be476bb46e1d7eee3d9d6ef184985db4c7b05b0c145e383b88fd35d",
+      "bytes": 141354,
+      "content_type": "application/pdf",
+      "status": "retrieved_bytes"
+    }
+  ],
+  "browser_failures": [
+    {
+      "url": "https://www.nature.com/articles/s41550-025-02631-6",
+      "issue": "authentication redirect; HTML and PDF unavailable through browser"
+    },
+    {
+      "url": "https://www.nature.com/articles/s41550-024-02472-9",
+      "issue": "authentication redirect; earlier study retains its own source evidence"
+    },
+    {
+      "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-platinum-group.pdf",
+      "issue": "HTTP 403 in browser"
+    }
+  ]
+}

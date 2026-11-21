@@ -12,6 +12,8 @@ Local purchasing power can support additional real production when usable lunar 
 
 The common real unit U used in the economic comparison remains an accounting numeraire. A monetary scenario additionally needs nominal prices, contract currencies, exchange rates and price indices. Changing a currency's exchange value must not automatically change the physical production assumptions or be interpreted as an equivalent change in domestic living standards. Likewise, the construction model's patient real financing rate does not establish a monetary authority's future policy rate.
 
+The enclosed-economy [U transition proposal](trade_transition.md) develops an operational contract and payment role for that established unit. It compares one U currency with a basket of participating U-related currencies and treats partial reserve backing as a separately funded arrangement. Its Earth-currency assets support external obligations rather than defining the U basket. This scoped proposal leaves the earlier L/S transaction examples and mature-world comparison intact.
+
 Each function stays visible even where one body performs several. The present-day family assigns them as follows:
 
 | Function | In the present-day family | Consequential boundary |

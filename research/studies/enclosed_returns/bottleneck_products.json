@@ -1,0 +1,17 @@
+{
+  "orders": {
+    "path": "results/bottleneck_orders.json",
+    "sha256": "cb638534e60cf7f796316d8b371ba0e0b7a97c76c1332ebb8b73be1aa92b8aee",
+    "schema": "terluna.humanities.enclosed-bottleneck-orders/1"
+  },
+  "physical": {
+    "path": "../../../provisioning/enclosed_industry/results/bottlenecks.json.gz",
+    "sha256": "0d8b15a1cca896edb2974601cf68369c065f93108b244cf1124bee5d982ae816",
+    "schema": "terluna.provisioning.enclosed-industry/1"
+  },
+  "resources": {
+    "path": "../../../resources/enclosed_mining/results/bottlenecks.json.gz",
+    "sha256": "3275033cd3d5845146ea6e2ceee246c0adb3e6639515a93ec4bb9376c6cecec1",
+    "schema": "terluna.resources.enclosed-mining/1"
+  }
+}

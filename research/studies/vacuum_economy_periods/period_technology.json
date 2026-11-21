@@ -1,0 +1,930 @@
+{
+ "schema": "terluna.research.vacuum-economy-periods.technology/1",
+ "evidence": "Paths of the vacuum period's technology, 2041-2241, in a slow, a central and a fast case, and the windows in which new technologies arrive. Source keys name the lookups on the research drive (vacuum-economy/research/): engineering E, local content L and transport T of 15 November; food F, power and launch W, and manufacturing, automation and labour I of 16 November. Where a path's later values or an arrival year have no source, the basis says the study's own.",
+ "reading_rule": "Each quantity gives its value at the stated years for the cases slow, central and fast; between stated years the model interpolates geometrically where `interpolate` is `geometric` and linearly otherwise, and holds the last value after the last year. The static case holds the 2041 value throughout and has no arrivals. An arrival gives its first year in each case, null where it does not arrive by 2241, with the window the year is drawn from and the parameters it brings.",
+ "years": [
+  2041,
+  2070,
+  2100,
+  2150,
+  2241
+ ],
+ "quantities": {
+  "led_umol_J": {
+   "unit": "umol of light per joule",
+   "interpolate": "linear",
+   "slow": [
+    3.5,
+    3.8,
+    4.0,
+    4.1,
+    4.2
+   ],
+   "central": [
+    3.5,
+    4.1,
+    4.4,
+    4.7,
+    4.9
+   ],
+   "fast": [
+    3.5,
+    4.5,
+    4.9,
+    5.1,
+    5.2
+   ],
+   "basis": "design 3.5; the food lookup of 16 November carries 3.0, 3.8 and 4.4 for the 2040s (best tested fixture 3.69 in 2022) and gives the physical limit, 5.27 for 10% blue and 90% red"
+  },
+  "crop_kcal_per_mol": {
+   "unit": "kcal of crop food per mol of light",
+   "interpolate": "geometric",
+   "slow": [
+    1.25,
+    1.3,
+    1.4,
+    1.45,
+    1.5
+   ],
+   "central": [
+    1.25,
+    1.45,
+    1.7,
+    2.0,
+    2.4
+   ],
+   "fast": [
+    1.25,
+    1.7,
+    2.2,
+    2.7,
+    3.2
+   ],
+   "basis": "design 1.25 (50 kcal per m2 a day at 40 mol), between wheat (0.30 g of edible dry mass per mol, about 1.0 kcal) and potato (0.75 g, about 2.7 kcal) in the food lookup; the ceiling is 1.64-1.78 g of total biomass per mol, about 3.4 kcal of edible food per mol at a harvest index of one half; engineered photosynthesis has gained 15-40% in field trials"
+  },
+  "microbial_diet_share": {
+   "unit": "share of food energy from electro-microbial food",
+   "interpolate": "linear",
+   "slow": [
+    0.03,
+    0.05,
+    0.1,
+    0.15,
+    0.2
+   ],
+   "central": [
+    0.03,
+    0.15,
+    0.3,
+    0.4,
+    0.5
+   ],
+   "fast": [
+    0.03,
+    0.25,
+    0.4,
+    0.55,
+    0.7
+   ],
+   "basis": "design 18.7 g of microbial protein a day; the food lookup finds the product able to carry all protein once its nucleic acids are cut to about 2%, 19-31% of calories when sized to protein; shares above that need fats and sugars made from CO2, for which no energy balance was found"
+  },
+  "microbial_efficiency": {
+   "unit": "food energy per unit of electricity, electro-microbial",
+   "interpolate": "linear",
+   "slow": [
+    0.15,
+    0.15,
+    0.16,
+    0.17,
+    0.18
+   ],
+   "central": [
+    0.15,
+    0.18,
+    0.2,
+    0.22,
+    0.24
+   ],
+   "fast": [
+    0.15,
+    0.2,
+    0.23,
+    0.25,
+    0.26
+   ],
+   "basis": "food lookup: 14.6-16.5% of the electricity into whole dried biomass in two models (34-38 kWh/kg), carried as 0.15, 0.18 and 0.20; theoretical limit 25-27% for amino acids"
+  },
+  "basic_kW_resident": {
+   "unit": "kW of basic services a resident",
+   "interpolate": "linear",
+   "slow": [
+    5.0,
+    5.0,
+    4.5,
+    4.25,
+    4.0
+   ],
+   "central": [
+    5.0,
+    4.5,
+    3.5,
+    3.0,
+    2.5
+   ],
+   "fast": [
+    5.0,
+    4.0,
+    3.0,
+    2.5,
+    2.0
+   ],
+   "basis": "design"
+  },
+  "water_recovery": {
+   "unit": "share of water recovered in life support and farms",
+   "interpolate": "linear",
+   "slow": [
+    0.98,
+    0.98,
+    0.985,
+    0.987,
+    0.99
+   ],
+   "central": [
+    0.98,
+    0.99,
+    0.995,
+    0.997,
+    0.998
+   ],
+   "fast": [
+    0.98,
+    0.995,
+    0.998,
+    0.9985,
+    0.999
+   ],
+   "basis": "E8"
+  },
+  "built_mass_multiple": {
+   "unit": "built mass a resident, multiple of the design",
+   "interpolate": "linear",
+   "slow": [
+    1.0,
+    1.0,
+    0.95,
+    0.93,
+    0.9
+   ],
+   "central": [
+    1.0,
+    0.9,
+    0.8,
+    0.75,
+    0.7
+   ],
+   "fast": [
+    1.0,
+    0.8,
+    0.7,
+    0.65,
+    0.6
+   ],
+   "basis": "design"
+  },
+  "array_W_kg": {
+   "unit": "W of array per kg delivered to the surface",
+   "interpolate": "geometric",
+   "slow": [
+    100,
+    150,
+    200,
+    280,
+    400
+   ],
+   "central": [
+    100,
+    250,
+    500,
+    800,
+    1200
+   ],
+   "fast": [
+    100,
+    500,
+    1500,
+    2500,
+    4000
+   ],
+   "basis": "E2 (100 W/kg in 2041); W29: about 30 W/kg typical now and 200 at best, the 2035 target above 200 W/kg and under 10 USD/W (Department of Energy, 2026). Later values the study's own."
+  },
+  "array_local_share": {
+   "unit": "share of array mass made on the Moon",
+   "interpolate": "linear",
+   "slow": [
+    0.0,
+    0.3,
+    0.6,
+    0.75,
+    0.9
+   ],
+   "central": [
+    0.0,
+    0.7,
+    0.95,
+    0.98,
+    0.99
+   ],
+   "fast": [
+    0.0,
+    0.9,
+    0.99,
+    0.995,
+    0.999
+   ],
+   "basis": "study's projection"
+  },
+  "storage_Wh_kg": {
+   "unit": "Wh stored per kg at system level",
+   "interpolate": "geometric",
+   "slow": [
+    550,
+    600,
+    700,
+    800,
+    900
+   ],
+   "central": [
+    550,
+    800,
+    1200,
+    1600,
+    2000
+   ],
+   "fast": [
+    550,
+    1200,
+    2000,
+    2500,
+    3000
+   ],
+   "basis": "E2"
+  },
+  "storage_round_trip": {
+   "unit": "electricity out per electricity in",
+   "interpolate": "linear",
+   "slow": [
+    0.4,
+    0.42,
+    0.45,
+    0.47,
+    0.5
+   ],
+   "central": [
+    0.4,
+    0.48,
+    0.55,
+    0.6,
+    0.65
+   ],
+   "fast": [
+    0.4,
+    0.55,
+    0.65,
+    0.7,
+    0.75
+   ],
+   "basis": "E2"
+  },
+  "fission_kg_kWe": {
+   "unit": "kg per kW of electricity",
+   "interpolate": "geometric",
+   "slow": [
+    75,
+    40,
+    25,
+    20,
+    18
+   ],
+   "central": [
+    75,
+    20,
+    16,
+    14,
+    12
+   ],
+   "fast": [
+    75,
+    12,
+    12,
+    12,
+    12
+   ],
+   "basis": "W24-W28 as the power and launch lookup reads them: for 2041, units of about 100 kWe between the 250-270 kg/kWe of present 10-40 kWe estimates and the under 75 kg/kWe found above 200 kWe with regolith shielding (E1); megawatt power systems near 20 kg/kWe by 2070 on a central path (19 kg/kWe at 2 MWe, W24) and 12 kg/kWe on a fast one (the 2023 reference, W25), to which a surface plant adds shielding made of regolith on the Moon; no opened source goes below about 12 kg/kWe, so the fast path holds there. Later values the study's own."
+  },
+  "fission_life_years": {
+   "unit": "years",
+   "interpolate": "linear",
+   "slow": [
+    10,
+    10,
+    15,
+    17,
+    20
+   ],
+   "central": [
+    10,
+    15,
+    25,
+    30,
+    40
+   ],
+   "fast": [
+    10,
+    20,
+    40,
+    50,
+    60
+   ],
+   "basis": "E1"
+  },
+  "fission_USD2024_kWe": {
+   "unit": "USD of 2024 per kW of electricity, built on Earth",
+   "interpolate": "geometric",
+   "slow": [
+    15000,
+    12000,
+    10000,
+    8000,
+    7000
+   ],
+   "central": [
+    15000,
+    8000,
+    6000,
+    5000,
+    4000
+   ],
+   "fast": [
+    15000,
+    6000,
+    4000,
+    3000,
+    2500
+   ],
+   "basis": "W28: microreactors at 18,000 USD/kWe for the first unit, falling 13-14.5% for each doubling of units built; 15,000 in 2041 after a few doublings, the later values the study's reading of that learning."
+  },
+  "launch_USD2026_kg": {
+   "unit": "USD of 2026 per kg to low Earth orbit",
+   "interpolate": "geometric",
+   "slow": [
+    600,
+    400,
+    300,
+    220,
+    150
+   ],
+   "central": [
+    600,
+    100,
+    50,
+    30,
+    20
+   ],
+   "fast": [
+    600,
+    30,
+    15,
+    13,
+    13
+   ],
+   "basis": "E4 (the 2040 trend, 600); W13: fully reusable rockets at 67-233 USD/kg after about ten uses (2026); W14: 454-3,301 EUR/kg assumed through 2070 (2022); the lowest claimed, 13 USD/kg, from an operator's stated marginal cost (derived), is the fast floor. Launch that is not a rocket was found at 50 USD/kg (magnetic launch tube) and 220 (elevator), above the fast path, with every date given passed unbuilt."
+  },
+  "landed_multiple": {
+   "unit": "cost of a kg landed on the Moon from Earth, multiple of the launch price, with propellant from the sources",
+   "interpolate": "linear",
+   "slow": [
+    3.0,
+    3.0,
+    2.8,
+    2.6,
+    2.5
+   ],
+   "central": [
+    3.0,
+    2.2,
+    1.8,
+    1.6,
+    1.5
+   ],
+   "fast": [
+    3.0,
+    1.8,
+    1.5,
+    1.3,
+    1.2
+   ],
+   "basis": "T2: 6 to 15 with propellant from Earth, a factor 2 to 4 less with propellant made in space"
+  },
+  "metal_kWh_kg": {
+   "unit": "kWh per kg of metal from regolith",
+   "interpolate": "geometric",
+   "slow": [
+    35,
+    30,
+    25,
+    22,
+    20
+   ],
+   "central": [
+    35,
+    20,
+    15,
+    12,
+    10
+   ],
+   "fast": [
+    35,
+    15,
+    10,
+    8,
+    7
+   ],
+   "basis": "E6"
+  },
+  "equipment_import_share": {
+   "unit": "share of new equipment's mass bought from Earth, once local production runs",
+   "interpolate": "geometric",
+   "slow": [
+    0.05,
+    0.05,
+    0.03,
+    0.02,
+    0.01
+   ],
+   "central": [
+    0.05,
+    0.02,
+    0.005,
+    0.002,
+    0.001
+   ],
+   "fast": [
+    0.05,
+    0.005,
+    0.001,
+    0.0005,
+    0.0001
+   ],
+   "basis": "L1"
+  },
+  "output_per_job": {
+   "unit": "multiple of 2041",
+   "interpolate": "geometric",
+   "slow": [
+    1,
+    1.2242,
+    1.5092,
+    2.1392,
+    4.0357
+   ],
+   "central": [
+    1,
+    1.54,
+    2.4072,
+    5.0674,
+    19.643
+   ],
+   "fast": [
+    1,
+    2.3566,
+    5.72,
+    25.075,
+    369.36
+   ],
+   "basis": "I13-I17: output per hour grew 0.7-2.5% a year before 1914; robots added 0.36 points a year as their prices fell; artificial intelligence adds 0.05-0.2 points a year for a decade or two; one review judges growth above 30% a year about as likely as not this century if AI can do most tasks. Carried at 0.7%, 1.5% and 3% a year from 2041, as the lookup proposes."
+  },
+  "equipment_price_multiple": {
+   "unit": "price of a kg of equipment made on Earth, multiple of 2041",
+   "interpolate": "geometric",
+   "slow": [
+    1,
+    0.8,
+    0.65,
+    0.5,
+    0.4
+   ],
+   "central": [
+    1,
+    0.5,
+    0.3,
+    0.18,
+    0.1
+   ],
+   "fast": [
+    1,
+    0.3,
+    0.1,
+    0.05,
+    0.03
+   ],
+   "basis": "L4 (5-20% per doubling of output)"
+  },
+  "equipment_life_multiple": {
+   "unit": "life of equipment and surface plant, multiple of each component's design life",
+   "basis": "design lives (ordinary equipment 20 years, lamps 8, storage 20, radiators 30, transport 15); the roadmap's 20 years becoming 25, 30 and 40 on the central path; the study's projection",
+   "interpolate": "linear",
+   "slow": [
+    1.0,
+    1.0,
+    1.1,
+    1.153,
+    1.25
+   ],
+   "central": [
+    1.0,
+    1.25,
+    1.5,
+    1.677,
+    2.0
+   ],
+   "fast": [
+    1.0,
+    1.5,
+    2.0,
+    2.355,
+    3.0
+   ]
+  },
+  "beam_station_W_kg": {
+   "unit": "W of grid power per kg of station in orbit",
+   "basis": "W of grid power delivered per kg of station in orbit, the beam's whole chain included. Every case starts at the best lunar-orbit design, 12 W/kg (E3: designs of 1990-2025 at 0.1-1 MW, 0.1-12 W/kg). The central path reaches the 202 W/kg of NASA's 2024 assessment of 2 GW geostationary designs (E3, S13: 202-344) by 2100 and the fast path the 698 W/kg of the European study of 2022 (W14, derived) by 2100, as gigawatt stations are built; the slow path reaches 100 W/kg by 2241. No study scales a gigawatt station to lunar orbit and none supports improvement beyond the 2020s designs, so the paths between these sourced end points are the study's own.",
+   "interpolate": "geometric",
+   "slow": [
+    12,
+    12,
+    30,
+    60,
+    100
+   ],
+   "central": [
+    12,
+    100,
+    202,
+    202,
+    202
+   ],
+   "fast": [
+    12,
+    202,
+    698,
+    698,
+    698
+   ]
+  },
+  "tug_life_years": {
+   "unit": "years of active life of tugs and ferries",
+   "basis": "E7",
+   "interpolate": "linear",
+   "slow": [
+    10,
+    10,
+    12,
+    13,
+    15
+   ],
+   "central": [
+    10,
+    12,
+    20,
+    24,
+    30
+   ],
+   "fast": [
+    10,
+    15,
+    30,
+    34,
+    40
+   ]
+  },
+  "water_extraction_kWh_kg": {
+   "unit": "kWh per kg of water driven from asteroid rock",
+   "basis": "E5",
+   "interpolate": "geometric",
+   "slow": [
+    2.0,
+    2.0,
+    1.8,
+    1.7,
+    1.5
+   ],
+   "central": [
+    2.0,
+    1.5,
+    1.2,
+    1.1,
+    1.0
+   ],
+   "fast": [
+    2.0,
+    1.2,
+    1.0,
+    0.9,
+    0.8
+   ]
+  },
+  "water_recovered_from_rock": {
+   "unit": "share of the contained water recovered from the rock heated",
+   "basis": "the staged model's 0.7, without a source; the study's projection",
+   "interpolate": "linear",
+   "slow": [
+    0.7,
+    0.7,
+    0.75,
+    0.77,
+    0.8
+   ],
+   "central": [
+    0.7,
+    0.8,
+    0.85,
+    0.87,
+    0.9
+   ],
+   "fast": [
+    0.7,
+    0.85,
+    0.9,
+    0.92,
+    0.95
+   ]
+  },
+  "computation_per_W_multiple": {
+   "unit": "computation per watt, multiple of 2041",
+   "basis": "the study's projection",
+   "interpolate": "geometric",
+   "slow": [
+    1,
+    4,
+    10,
+    22,
+    50
+   ],
+   "central": [
+    1,
+    20,
+    100,
+    320,
+    1000
+   ],
+   "fast": [
+    1,
+    100,
+    1000,
+    6000,
+    30000
+   ]
+  },
+  "industry_doubling_years": {
+   "unit": "shortest time in years in which the installed industry can double from its own output",
+   "basis": "I03 (the 1980 NASA study, read in full): a 100 t seed (63-146 t) makes its own mass each working year, at two calendar years a working year, so doubling in about 2 calendar years and in 1.4 with cooperating units; seeds of 6-100 t use 1-20 W/kg and make 0.5-1 kg a year per kg of factory; only single steps have been demonstrated. The lookup carries 7, 2 and 1.4 years; the 10 years of 2041, before such an industry stands, is the study's own.",
+   "interpolate": "linear",
+   "slow": [
+    10,
+    7,
+    7,
+    7,
+    7
+   ],
+   "central": [
+    10,
+    3,
+    2,
+    2,
+    2
+   ],
+   "fast": [
+    10,
+    2,
+    1.4,
+    1.4,
+    1.4
+   ]
+  },
+  "services_output_multiple": {
+   "unit": "what a job serving residents does, multiple of 2041",
+   "basis": "the study's construction: work serving residents gains the square root of what output per job gains",
+   "interpolate": "geometric",
+   "slow": [
+    1,
+    1.1064,
+    1.2285,
+    1.4626,
+    2.0089
+   ],
+   "central": [
+    1,
+    1.241,
+    1.5515,
+    2.2511,
+    4.432
+   ],
+   "fast": [
+    1,
+    1.5351,
+    2.3917,
+    5.0075,
+    19.219
+   ]
+  }
+ },
+ "arrivals": {
+  "fusion": {
+   "what": "fusion power plant, first built on Earth and shipped",
+   "basis": "W19 (2026 meta-analysis): 12,600 USD2018/kW for the first plant and 6,100-7,000 after ten, about 15,600 and 7,600-8,700 USD2024 (the study's price index of 1.24); dates on Earth: United States pilot plants by 2035-2040, the European demonstration plant after 2054 (as of 2017). No lunar fusion design exists; the arrival years on the Moon and the specific masses are the study's own.",
+   "year": {
+    "slow": 2150,
+    "central": 2095,
+    "fast": 2065
+   },
+   "window": {
+    "slow": [
+     2120,
+     2200
+    ],
+    "central": [
+     2075,
+     2110
+    ],
+    "fast": [
+     2055,
+     2075
+    ]
+   },
+   "kg_kWe": {
+    "slow": 10,
+    "central": 10,
+    "fast": 5
+   },
+   "USD2024_kWe": {
+    "slow": 12000,
+    "central": 8000,
+    "fast": 5000
+   },
+   "life_years": {
+    "slow": 30,
+    "central": 30,
+    "fast": 40
+   }
+  },
+  "polar_grid": {
+   "what": "a grid fed by arrays on the polar ridges, carried by surface lines",
+   "basis": "W01 (towers, 2021) and W06 (linked sites, 2023): power across the south polar region lit more than 70% / 90% of the time, 55 / 6 MW on 20 m masts, 458 / 83 MW on 100 m towers, 3.6 / 1.5 GW on 500 m towers, up to 8.5 GW on 1 km towers; the longest darkness at one site 64 h (10 m), 36 h (100 m), 34 h (500 m), and 0-3 h with two or three sites linked 42-158 km apart. Lines (W02, W03, W05): at a fixed share lost, conductor mass per delivered kW grows with the square of the length; 808 kg/kW of copper at 1,000 km at 240 kV and 3% lost (derived), 6 t/kW to the equator. The arrival years are the study's own.",
+   "year": {
+    "slow": null,
+    "central": 2095,
+    "fast": 2070
+   },
+   "window": {
+    "slow": null,
+    "central": [
+     2080,
+     2110
+    ],
+    "fast": [
+     2060,
+     2080
+    ]
+   },
+   "ridge_darkness_hours": {
+    "slow": 64.0,
+    "central": 0.0,
+    "fast": 0.0
+   },
+   "ridge_darkness_basis": "W01, W06: one site on a 10 m mast; linked sites",
+   "supply_cap_GW": {
+    "slow": 0.055,
+    "central": 0.458,
+    "fast": 8.5
+   },
+   "supply_cap_basis": "W01, W06: the region's power lit more than 70% of the time on masts, 100 m towers with linked sites, and 1 km towers",
+   "line_kg_kW_km2": {
+    "slow": 0.000808,
+    "central": 0.000409,
+    "fast": 0.000124
+   },
+   "line_kg_kW_km2_basis": "W03 scaled (derived): copper at 240 kV with 3% lost (slow); aluminium for the same resistance, 0.506 of copper's mass by handbook densities and resistivities not read in an opened source (central, the study's derivation); aluminium with 10% lost (fast)",
+   "line_loss": {
+    "slow": 0.03,
+    "central": 0.03,
+    "fast": 0.1
+   }
+  },
+  "mass_driver": {
+   "what": "electromagnetic launch of lunar material to lunar orbit",
+   "basis": "W15 (1977: a 3,130 t driver at 125 MW launching 650,000 t a year) and W16 (1990: a 212 t barrel launching 4,400 t a year, paying back seven years after operations began at 600 t a year); 0.5-0.8 kWh per kg (derived). The arrival years are the study's own; no lunar launcher was found designed after 1990.",
+   "year": {
+    "slow": 2200,
+    "central": 2085,
+    "fast": 2060
+   },
+   "window": {
+    "slow": [
+     2180,
+     2241
+    ],
+    "central": [
+     2075,
+     2100
+    ],
+    "fast": [
+     2050,
+     2070
+    ]
+   },
+   "kWh_kg": {
+    "slow": 0.8,
+    "central": 0.65,
+    "fast": 0.5
+   },
+   "kWh_kg_2241": {
+    "slow": 0.8,
+    "central": 0.5,
+    "fast": 0.5
+   },
+   "launcher_kg_per_kg_year": {
+    "slow": 0.048,
+    "central": 0.01,
+    "fast": 0.0048
+   },
+   "launcher_basis": "W16, the study's middle value, W15"
+  },
+  "nuclear_electric": {
+   "what": "nuclear-electric tugs at thousands of seconds",
+   "basis": "W25: a first crewed nuclear-electric mission to Mars in 2039 at the earliest, its development start in 2027 unfunded when written; the arrival years for cargo tugs and the 5,000 s specific impulse are the study's own",
+   "year": {
+    "slow": 2100,
+    "central": 2070,
+    "fast": 2050
+   },
+   "window": {
+    "slow": [
+     2080,
+     2120
+    ],
+    "central": [
+     2055,
+     2085
+    ],
+    "fast": [
+     2045,
+     2060
+    ]
+   },
+   "isp_s": 5000
+  },
+  "chips_on_moon": {
+   "what": "chips and other electronics made on the Moon",
+   "basis": "the study's projection (roadmap: central 2090-2120)",
+   "year": {
+    "slow": 2160,
+    "central": 2105,
+    "fast": 2070
+   },
+   "window": {
+    "slow": [
+     2140,
+     2200
+    ],
+    "central": [
+     2090,
+     2120
+    ],
+    "fast": [
+     2060,
+     2080
+    ]
+   },
+   "electronics_share_of_equipment_mass": 0.02,
+   "electronics_basis": "the study's own: the floor on the imported share of equipment until chips are made on the Moon"
+  },
+  "equatorial_belt": {
+   "what": "a belt of arrays around the equator that needs no night storage",
+   "basis": "the study's projection (roadmap: fast only, after 2120)",
+   "year": {
+    "slow": null,
+    "central": null,
+    "fast": 2125
+   },
+   "window": {
+    "slow": null,
+    "central": null,
+    "fast": [
+     2120,
+     2160
+    ]
+   }
+  }
+ }
+}

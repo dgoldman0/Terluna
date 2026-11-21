@@ -1,0 +1,3137 @@
+{
+  "schema": "terluna.research.trade-transition/1",
+  "evidence": "Synthetic fixed-stock FX transactions, a basket of U-related currencies, and transaction-balance scenarios applied to pinned conditional export portfolios. No currency adoption, issuer, peg, market exchange rate, appreciation or monetary demand forecast is established.",
+  "boundary": "The currently planned enclosed off-Earth economic zone and its actual industrial, source, power and transport operations. Earth counterparties remain external. The Open Moon, planetary array and subsequent outer Solar System buildout are outside this boundary.",
+  "units": "U_nom labels a hypothetical nominal contract denominated in U. Ledger prices value U_nom and external settlement unit S in common constant-U accounting units. Initial parity is an exogenous illustrative FX quote, not a peg, redemption promise, USD/U conversion or conversion of earlier U budgets. The currency basket contains synthetic U-related currencies Ua and Ub; S only measures its external value.",
+  "producer_sha256": "d284a75e94c7e3f401cd38a6326610a1c5146ec3cf0f31e20724d5d4b29956e8",
+  "input_sha256": "6416d009cad1ba7777547d08f0c6452ab327d2028538dc5a6527ce00dda3ee5c",
+  "ledger_sha256": "d3758deb3ea2f4d24c79f6044770ff9870586a427bd4d79ef0ac0a15dbdbec04",
+  "portfolio_source": {
+    "path": "../complex_returns/results/strategies.json",
+    "schema": "terluna.research.export-strategy-returns/1",
+    "sha256": "685a27c5b6820adf4b1e188e19906a1c747f2a34ef8b0da8f97c8326b62ed4dc",
+    "producer_sha256": "f33d10804a4018e9de888272254b56fe3178016731d1c87063ea35f97f80cd19",
+    "input_sha256": "ad8d3af2ec0a5614492536abd3bb10a21681cf08c17b8e52a46ab8af65500284",
+    "evidence": "Research-informed accounting scenarios on exact joint provisioning responses. Physical export portfolios are conditional; small-module replication, premium recipes and global markets remain unqualified."
+  },
+  "reading_rule": "U invoicing, actual settlement and sustained balances are distinct. Customer purchases can be offset by recipient reconversion or supplied from dealer inventory without changing the U stock. Claims always have matching liabilities, and foreign holdings add no unpaired wealth. The basket contains U-related currencies, with S only an external measurement unit. A separate partial external-liquidity example funds reserves once from specified investment and earned-cash allocations; those assets cannot also finance other uses. These scenarios add no revenue, return or capital-financing credit to the existing portfolios. No adoption probability, issuer, peg, unlimited convertibility or endogenous exchange-rate response is estimated.",
+  "valuation_prices_constant_U": {
+    "U_nom": 1.0,
+    "S": 1.0
+  },
+  "settlement_loops": {
+    "complete_reconversion": {
+      "stages": {
+        "opening": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 0.0,
+          "exporter_U_nom": 0.0,
+          "dealer_U_nom": 120.0,
+          "dealer_external_assets_S": 0.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 120.0,
+          "zone_net_foreign_assets_constant_U": -120.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": 0.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 0.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "customer_acquired_U": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 100.0,
+          "exporter_U_nom": 0.0,
+          "dealer_U_nom": 20.0,
+          "dealer_external_assets_S": 100.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 120.0,
+          "zone_net_foreign_assets_constant_U": -120.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": 0.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 0.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "export_paid": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 0.0,
+          "exporter_U_nom": 100.0,
+          "dealer_U_nom": 20.0,
+          "dealer_external_assets_S": 100.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 20.0,
+          "zone_net_foreign_assets_constant_U": -20.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": -100.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 100.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "exporter_reconverted": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 0.0,
+          "exporter_U_nom": 0.0,
+          "dealer_U_nom": 120.0,
+          "dealer_external_assets_S": 0.0,
+          "exporter_external_assets_S": 100.0,
+          "foreign_U_liability_constant_U": 120.0,
+          "zone_net_foreign_assets_constant_U": -20.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": -100.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 100.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "imports_paid": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 0.0,
+          "exporter_U_nom": 0.0,
+          "dealer_U_nom": 120.0,
+          "dealer_external_assets_S": 0.0,
+          "exporter_external_assets_S": 40.0,
+          "foreign_U_liability_constant_U": 120.0,
+          "zone_net_foreign_assets_constant_U": -80.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": -100.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 60.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 40.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        }
+      },
+      "final_claims": [
+        {
+          "issuer": "earth_customer",
+          "holder": "external_issuer",
+          "instrument": "opening_loan",
+          "currency": "S",
+          "amount": 120.0
+        },
+        {
+          "issuer": "external_issuer",
+          "holder": "earth_customer",
+          "instrument": "settlement",
+          "currency": "S",
+          "amount": 20.0
+        },
+        {
+          "issuer": "external_issuer",
+          "holder": "earth_supplier",
+          "instrument": "settlement",
+          "currency": "S",
+          "amount": 60.0
+        },
+        {
+          "issuer": "external_issuer",
+          "holder": "zone_exporter",
+          "instrument": "settlement",
+          "currency": "S",
+          "amount": 40.0
+        },
+        {
+          "issuer": "zone_bank",
+          "holder": "earth_dealer",
+          "instrument": "deposit",
+          "currency": "U_nom",
+          "amount": 120.0
+        },
+        {
+          "issuer": "zone_issuer",
+          "holder": "zone_bank",
+          "instrument": "base_reserve",
+          "currency": "U_nom",
+          "amount": 120.0
+        }
+      ],
+      "journal": [
+        {
+          "event": "Customer buys existing U from the FX dealer at the assumed quote",
+          "flow_class": "financial_transaction",
+          "claim_changes": [
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_customer",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": -100.0
+            },
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_dealer",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": 100.0
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_customer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": 100
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_dealer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": -100
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {},
+          "max_balance_sheet_residual_U": 0.0
+        },
+        {
+          "event": "Customer consumes the exported service and pays the exporter",
+          "flow_class": "current_service_export",
+          "claim_changes": [
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_customer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": -100
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "zone_exporter",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": 100
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {
+            "earth_customer": -100.0,
+            "zone_exporter": 100.0
+          },
+          "max_balance_sheet_residual_U": 0.0
+        },
+        {
+          "event": "Exporter sells U back to the dealer for existing S",
+          "flow_class": "financial_transaction",
+          "claim_changes": [
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_dealer",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": -100.0
+            },
+            {
+              "issuer": "external_issuer",
+              "holder": "zone_exporter",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": 100.0
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_dealer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": 100
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "zone_exporter",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": -100
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {},
+          "max_balance_sheet_residual_U": 0.0
+        },
+        {
+          "event": "Exporter consumes an Earth service and pays in S",
+          "flow_class": "current_service_import",
+          "claim_changes": [
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_supplier",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": 60
+            },
+            {
+              "issuer": "external_issuer",
+              "holder": "zone_exporter",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": -60
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {
+            "zone_exporter": -60.0,
+            "earth_supplier": 60.0
+          },
+          "max_balance_sheet_residual_U": 0.0
+        }
+      ],
+      "exports_constant_U": 100.0,
+      "imports_constant_U": 60.0,
+      "net_service_receipts_constant_U": 40.0,
+      "change_in_zone_net_foreign_assets_constant_U": 40.0,
+      "interpretation": "Each case starts with the same 120-U base and deposit stock held initially by an Earth FX dealer. Customers and exporters trade this existing inventory at an exogenous quote; no issuer creates or redeems U and no foreign reserve backing is assumed. The opening domestic real asset is a synthetic balance-sheet initialization, not new wealth from trade or a conversion guarantee. Export receipts and imported services have explicit income/expenditure counterparts. The ledger supplies neither a complete production-cost/GVA account nor an endogenous exchange rate."
+    },
+    "exporter_holds_U": {
+      "stages": {
+        "opening": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 0.0,
+          "exporter_U_nom": 0.0,
+          "dealer_U_nom": 120.0,
+          "dealer_external_assets_S": 0.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 120.0,
+          "zone_net_foreign_assets_constant_U": -120.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": 0.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 0.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "customer_acquired_U": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 100.0,
+          "exporter_U_nom": 0.0,
+          "dealer_U_nom": 20.0,
+          "dealer_external_assets_S": 100.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 120.0,
+          "zone_net_foreign_assets_constant_U": -120.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": 0.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 0.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "export_paid": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 0.0,
+          "exporter_U_nom": 100.0,
+          "dealer_U_nom": 20.0,
+          "dealer_external_assets_S": 100.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 20.0,
+          "zone_net_foreign_assets_constant_U": -20.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": -100.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 100.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "exporter_reconverted": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 0.0,
+          "exporter_U_nom": 40.0,
+          "dealer_U_nom": 80.0,
+          "dealer_external_assets_S": 40.0,
+          "exporter_external_assets_S": 60.0,
+          "foreign_U_liability_constant_U": 80.0,
+          "zone_net_foreign_assets_constant_U": -20.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": -100.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 100.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "imports_paid": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 0.0,
+          "exporter_U_nom": 40.0,
+          "dealer_U_nom": 80.0,
+          "dealer_external_assets_S": 40.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 80.0,
+          "zone_net_foreign_assets_constant_U": -80.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": -100.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 60.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 40.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        }
+      },
+      "final_claims": [
+        {
+          "issuer": "earth_customer",
+          "holder": "external_issuer",
+          "instrument": "opening_loan",
+          "currency": "S",
+          "amount": 120.0
+        },
+        {
+          "issuer": "external_issuer",
+          "holder": "earth_customer",
+          "instrument": "settlement",
+          "currency": "S",
+          "amount": 20.0
+        },
+        {
+          "issuer": "external_issuer",
+          "holder": "earth_dealer",
+          "instrument": "settlement",
+          "currency": "S",
+          "amount": 40.0
+        },
+        {
+          "issuer": "external_issuer",
+          "holder": "earth_supplier",
+          "instrument": "settlement",
+          "currency": "S",
+          "amount": 60.0
+        },
+        {
+          "issuer": "zone_bank",
+          "holder": "earth_dealer",
+          "instrument": "deposit",
+          "currency": "U_nom",
+          "amount": 80.0
+        },
+        {
+          "issuer": "zone_bank",
+          "holder": "zone_exporter",
+          "instrument": "deposit",
+          "currency": "U_nom",
+          "amount": 40.0
+        },
+        {
+          "issuer": "zone_issuer",
+          "holder": "zone_bank",
+          "instrument": "base_reserve",
+          "currency": "U_nom",
+          "amount": 120.0
+        }
+      ],
+      "journal": [
+        {
+          "event": "Customer buys existing U from the FX dealer at the assumed quote",
+          "flow_class": "financial_transaction",
+          "claim_changes": [
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_customer",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": -100.0
+            },
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_dealer",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": 100.0
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_customer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": 100
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_dealer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": -100
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {},
+          "max_balance_sheet_residual_U": 0.0
+        },
+        {
+          "event": "Customer consumes the exported service and pays the exporter",
+          "flow_class": "current_service_export",
+          "claim_changes": [
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_customer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": -100
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "zone_exporter",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": 100
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {
+            "earth_customer": -100.0,
+            "zone_exporter": 100.0
+          },
+          "max_balance_sheet_residual_U": 0.0
+        },
+        {
+          "event": "Exporter sells U back to the dealer for existing S",
+          "flow_class": "financial_transaction",
+          "claim_changes": [
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_dealer",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": -60.0
+            },
+            {
+              "issuer": "external_issuer",
+              "holder": "zone_exporter",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": 60.0
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_dealer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": 60
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "zone_exporter",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": -60
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {},
+          "max_balance_sheet_residual_U": 0.0
+        },
+        {
+          "event": "Exporter consumes an Earth service and pays in S",
+          "flow_class": "current_service_import",
+          "claim_changes": [
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_supplier",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": 60
+            },
+            {
+              "issuer": "external_issuer",
+              "holder": "zone_exporter",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": -60
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {
+            "zone_exporter": -60.0,
+            "earth_supplier": 60.0
+          },
+          "max_balance_sheet_residual_U": 0.0
+        }
+      ],
+      "exports_constant_U": 100.0,
+      "imports_constant_U": 60.0,
+      "net_service_receipts_constant_U": 40.0,
+      "change_in_zone_net_foreign_assets_constant_U": 40.0,
+      "interpretation": "Each case starts with the same 120-U base and deposit stock held initially by an Earth FX dealer. Customers and exporters trade this existing inventory at an exogenous quote; no issuer creates or redeems U and no foreign reserve backing is assumed. The opening domestic real asset is a synthetic balance-sheet initialization, not new wealth from trade or a conversion guarantee. Export receipts and imported services have explicit income/expenditure counterparts. The ledger supplies neither a complete production-cost/GVA account nor an endogenous exchange rate."
+    },
+    "customer_and_exporter_hold_U": {
+      "stages": {
+        "opening": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 0.0,
+          "exporter_U_nom": 0.0,
+          "dealer_U_nom": 120.0,
+          "dealer_external_assets_S": 0.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 120.0,
+          "zone_net_foreign_assets_constant_U": -120.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": 0.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 0.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "customer_acquired_U": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 120.0,
+          "exporter_U_nom": 0.0,
+          "dealer_U_nom": 0.0,
+          "dealer_external_assets_S": 120.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 120.0,
+          "zone_net_foreign_assets_constant_U": -120.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": 0.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 0.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "export_paid": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 20.0,
+          "exporter_U_nom": 100.0,
+          "dealer_U_nom": 0.0,
+          "dealer_external_assets_S": 120.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 20.0,
+          "zone_net_foreign_assets_constant_U": -20.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": -100.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 100.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "exporter_reconverted": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 20.0,
+          "exporter_U_nom": 40.0,
+          "dealer_U_nom": 60.0,
+          "dealer_external_assets_S": 60.0,
+          "exporter_external_assets_S": 60.0,
+          "foreign_U_liability_constant_U": 80.0,
+          "zone_net_foreign_assets_constant_U": -20.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": -100.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 0.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 100.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        },
+        "imports_paid": {
+          "base_U_nom": 120.0,
+          "bank_deposits_U_nom": 120.0,
+          "customer_U_nom": 20.0,
+          "exporter_U_nom": 40.0,
+          "dealer_U_nom": 60.0,
+          "dealer_external_assets_S": 60.0,
+          "exporter_external_assets_S": 0.0,
+          "foreign_U_liability_constant_U": 80.0,
+          "zone_net_foreign_assets_constant_U": -80.0,
+          "actor_net_worth_constant_U": {
+            "external_issuer": 0.0,
+            "earth_customer": -100.0,
+            "earth_dealer": 120.0,
+            "earth_supplier": 60.0,
+            "zone_issuer": 0.0,
+            "zone_bank": 0.0,
+            "zone_exporter": 40.0
+          },
+          "global_financial_residual_constant_U": 0.0,
+          "aggregate_net_worth_constant_U": 120.0,
+          "net_worth_minus_real_assets_constant_U": 0.0
+        }
+      },
+      "final_claims": [
+        {
+          "issuer": "earth_customer",
+          "holder": "external_issuer",
+          "instrument": "opening_loan",
+          "currency": "S",
+          "amount": 120.0
+        },
+        {
+          "issuer": "external_issuer",
+          "holder": "earth_dealer",
+          "instrument": "settlement",
+          "currency": "S",
+          "amount": 60.0
+        },
+        {
+          "issuer": "external_issuer",
+          "holder": "earth_supplier",
+          "instrument": "settlement",
+          "currency": "S",
+          "amount": 60.0
+        },
+        {
+          "issuer": "zone_bank",
+          "holder": "earth_customer",
+          "instrument": "deposit",
+          "currency": "U_nom",
+          "amount": 20.0
+        },
+        {
+          "issuer": "zone_bank",
+          "holder": "earth_dealer",
+          "instrument": "deposit",
+          "currency": "U_nom",
+          "amount": 60.0
+        },
+        {
+          "issuer": "zone_bank",
+          "holder": "zone_exporter",
+          "instrument": "deposit",
+          "currency": "U_nom",
+          "amount": 40.0
+        },
+        {
+          "issuer": "zone_issuer",
+          "holder": "zone_bank",
+          "instrument": "base_reserve",
+          "currency": "U_nom",
+          "amount": 120.0
+        }
+      ],
+      "journal": [
+        {
+          "event": "Customer buys existing U from the FX dealer at the assumed quote",
+          "flow_class": "financial_transaction",
+          "claim_changes": [
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_customer",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": -120.0
+            },
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_dealer",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": 120.0
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_customer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": 120
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_dealer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": -120
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {},
+          "max_balance_sheet_residual_U": 0.0
+        },
+        {
+          "event": "Customer consumes the exported service and pays the exporter",
+          "flow_class": "current_service_export",
+          "claim_changes": [
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_customer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": -100
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "zone_exporter",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": 100
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {
+            "earth_customer": -100.0,
+            "zone_exporter": 100.0
+          },
+          "max_balance_sheet_residual_U": 0.0
+        },
+        {
+          "event": "Exporter sells U back to the dealer for existing S",
+          "flow_class": "financial_transaction",
+          "claim_changes": [
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_dealer",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": -60.0
+            },
+            {
+              "issuer": "external_issuer",
+              "holder": "zone_exporter",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": 60.0
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "earth_dealer",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": 60
+            },
+            {
+              "issuer": "zone_bank",
+              "holder": "zone_exporter",
+              "instrument": "deposit",
+              "currency": "U_nom",
+              "amount": -60
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {},
+          "max_balance_sheet_residual_U": 0.0
+        },
+        {
+          "event": "Exporter consumes an Earth service and pays in S",
+          "flow_class": "current_service_import",
+          "claim_changes": [
+            {
+              "issuer": "external_issuer",
+              "holder": "earth_supplier",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": 60
+            },
+            {
+              "issuer": "external_issuer",
+              "holder": "zone_exporter",
+              "instrument": "settlement",
+              "currency": "S",
+              "amount": -60
+            }
+          ],
+          "real_asset_changes_U": {},
+          "net_worth_changes_U": {
+            "zone_exporter": -60.0,
+            "earth_supplier": 60.0
+          },
+          "max_balance_sheet_residual_U": 0.0
+        }
+      ],
+      "exports_constant_U": 100.0,
+      "imports_constant_U": 60.0,
+      "net_service_receipts_constant_U": 40.0,
+      "change_in_zone_net_foreign_assets_constant_U": 40.0,
+      "interpretation": "Each case starts with the same 120-U base and deposit stock held initially by an Earth FX dealer. Customers and exporters trade this existing inventory at an exogenous quote; no issuer creates or redeems U and no foreign reserve backing is assumed. The opening domestic real asset is a synthetic balance-sheet initialization, not new wealth from trade or a conversion guarantee. Export receipts and imported services have explicit income/expenditure counterparts. The ledger supplies neither a complete production-cost/GVA account nor an endogenous exchange rate."
+    }
+  },
+  "currency_basket": {
+    "constituent_units_per_U": {
+      "Ua": 0.6,
+      "Ub": 0.4
+    },
+    "reference_quotes_S_per_constituent": {
+      "Ua": 1.0,
+      "Ub": 1.0
+    },
+    "scenario_quotes_S_per_constituent": {
+      "Ua": 0.8,
+      "Ub": 1.1
+    },
+    "reference_value_S_per_U": 1.0,
+    "scenario_value_S_per_U": 0.92,
+    "external_value_ratio": 0.92,
+    "external_value_change_percent": -7.9999999999999964,
+    "rule": "U = 0.6 Ua + 0.4 Ub is illustrative fixed-quantity basket arithmetic for two synthetic U-related currencies. Ua and Ub are not assigned to cities, territories or adopted institutions. External unit S measures the basket value and is neither a constituent nor a reserve-backing target. No issuer, peg, redemption mechanism or forecasting rule is adopted."
+  },
+  "partial_external_liquidity": {
+    "initial_investment_S_value": 100,
+    "initial_reserve_allocation_S": 5.0,
+    "annual_available_cash_S_value": [
+      10,
+      10,
+      10
+    ],
+    "annual_earned_cash_reserve_allocation_S": [
+      2.0,
+      2.0,
+      2.0
+    ],
+    "total_funding_S_value": 130.0,
+    "productive_capital_S_value": 95.0,
+    "accumulated_external_reserves_S": 11.0,
+    "remaining_cash_for_other_uses_S": 24.0,
+    "funding_residual_S": 0.0,
+    "convertible_liability_value_at_stress_quote_S": 40,
+    "coverage_of_liabilities": 0.275,
+    "stresses": [
+      {
+        "reserve_asset_haircut": 0,
+        "withdrawal_fraction": 0.25,
+        "reserve_asset_value_after_haircut_S": 11.0,
+        "reserve_valuation_loss_S": 0.0,
+        "coverage_of_liabilities": 0.275,
+        "requested_external_payment_S": 10.0,
+        "available_payment_S": 10.0,
+        "remaining_reserves_S": 1.0,
+        "unmet_external_payment_S": 0.0,
+        "payment_fully_covered": true
+      },
+      {
+        "reserve_asset_haircut": 0,
+        "withdrawal_fraction": 0.4,
+        "reserve_asset_value_after_haircut_S": 11.0,
+        "reserve_valuation_loss_S": 0.0,
+        "coverage_of_liabilities": 0.275,
+        "requested_external_payment_S": 16.0,
+        "available_payment_S": 11.0,
+        "remaining_reserves_S": 0.0,
+        "unmet_external_payment_S": 5.0,
+        "payment_fully_covered": false
+      },
+      {
+        "reserve_asset_haircut": 0.1,
+        "withdrawal_fraction": 0.25,
+        "reserve_asset_value_after_haircut_S": 9.9,
+        "reserve_valuation_loss_S": 1.0999999999999996,
+        "coverage_of_liabilities": 0.2475,
+        "requested_external_payment_S": 10.0,
+        "available_payment_S": 9.9,
+        "remaining_reserves_S": 0.0,
+        "unmet_external_payment_S": 0.09999999999999964,
+        "payment_fully_covered": false
+      },
+      {
+        "reserve_asset_haircut": 0.1,
+        "withdrawal_fraction": 0.4,
+        "reserve_asset_value_after_haircut_S": 9.9,
+        "reserve_valuation_loss_S": 1.0999999999999996,
+        "coverage_of_liabilities": 0.2475,
+        "requested_external_payment_S": 16.0,
+        "available_payment_S": 9.9,
+        "remaining_reserves_S": 0.0,
+        "unmet_external_payment_S": 6.1,
+        "payment_fully_covered": false
+      }
+    ],
+    "rule": "A separate normalized funding example allocates part of initial investment and cash remaining after operating costs and renewal to partial external liquidity/backing. Every allocated asset is unavailable for the other investment or distribution uses in this example. S-valued liabilities use an illustrative stress quote and are not the U stock in the fixed-stock ledger. Reserves are assets, not additional profit. No unlimited fixed-price convertibility or Earth-currency definition of U is promised. This example does not retrofit reserve funding into the nine portfolio seeds or NPVs."
+  },
+  "portfolio_transaction_balances": {
+    "source_value_unit": "constant USD2041 from the financial source; valuation equivalent only, not a nominal U quantity or a USD/U exchange rate",
+    "matrix_rows_settlement_share": [
+      0.25,
+      0.6,
+      0.85
+    ],
+    "matrix_columns_holding_days": [
+      1,
+      7,
+      30
+    ],
+    "parameter_combinations_per_funded_row": 9,
+    "settlement_year_days": 365,
+    "rule": "Average transaction balances equal the assumed U-settled annual receipt flow times holding days divided by 365. Shares concern actual U settlement, not invoice labels. Each dated receipt is treated as a steady annual flow for this diagnostic. These balances are source-value equivalents, not nominal U amounts, newly created balances, reserve requirements, annual revenue or additional investment return. Existing balances, netting, intrayear peaks and recipient reconversion are not inferred.",
+    "rows": [
+      {
+        "strategy": "raw_resource_price",
+        "market": "limited",
+        "horizon": 30,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 25988968658.28183
+        }
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "limited",
+        "horizon": 100,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 25988968658.28183
+        }
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "limited",
+        "horizon": 300,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 25988968658.28183
+        }
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "limited",
+        "horizon": 800,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 25988968658.28183
+        }
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "global",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 108240788538.13791,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            74137526.39598487,
+            518962684.77189404,
+            2224125791.879546
+          ],
+          [
+            177930063.35036367,
+            1245510443.4525456,
+            5337901900.510911
+          ],
+          [
+            252067589.74634856,
+            1764473128.2244399,
+            7562027692.390456
+          ]
+        ]
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "global",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 198315362004.2803,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            135832439.7289591,
+            950827078.1027138,
+            4074973191.8687735
+          ],
+          [
+            325997855.34950185,
+            2281984987.446513,
+            9779935660.485056
+          ],
+          [
+            461830295.07846093,
+            3232812065.5492268,
+            13854908852.353828
+          ]
+        ]
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "global",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 228375430961.1911,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            156421528.05561033,
+            1094950696.3892725,
+            4692645841.66831
+          ],
+          [
+            375411667.3334648,
+            2627881671.334254,
+            11262350020.003944
+          ],
+          [
+            531833195.3890751,
+            3722832367.723526,
+            15954995861.672255
+          ]
+        ]
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "global",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 228375430961.1911,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            156421528.05561033,
+            1094950696.3892725,
+            4692645841.66831
+          ],
+          [
+            375411667.3334648,
+            2627881671.334254,
+            11262350020.003944
+          ],
+          [
+            531833195.3890751,
+            3722832367.723526,
+            15954995861.672255
+          ]
+        ]
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "breakthrough",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 755268701775.4434,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            517307329.9831804,
+            3621151309.8822627,
+            15519219899.49541
+          ],
+          [
+            1241537591.9596329,
+            8690763143.71743,
+            37246127758.78899
+          ],
+          [
+            1758844921.9428132,
+            12311914453.599691,
+            52765347658.28439
+          ]
+        ]
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "breakthrough",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 950440846481.9376,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            650986881.1520121,
+            4556908168.064085,
+            19529606434.560364
+          ],
+          [
+            1562368514.764829,
+            10936579603.353804,
+            46871055442.94487
+          ],
+          [
+            2213355395.916841,
+            15493487771.417889,
+            66400661877.50523
+          ]
+        ]
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "breakthrough",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1470941319513.8574,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1007494054.4615462,
+            7052458381.2308235,
+            30224821633.846382
+          ],
+          [
+            2417985730.7077107,
+            16925900114.953976,
+            72539571921.23132
+          ],
+          [
+            3425479785.169257,
+            23978358496.1848,
+            102764393555.07771
+          ]
+        ]
+      },
+      {
+        "strategy": "raw_resource_price",
+        "market": "breakthrough",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1861276465247.872,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1274846894.0053918,
+            8923928258.037743,
+            38245406820.16176
+          ],
+          [
+            3059632545.6129403,
+            21417427819.29058,
+            91788976368.3882
+          ],
+          [
+            4334479439.618332,
+            30341356077.328323,
+            130034383188.54996
+          ]
+        ]
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "limited",
+        "horizon": 30,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 29623249798.519974
+        }
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "limited",
+        "horizon": 100,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 29623249798.519974
+        }
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "limited",
+        "horizon": 300,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 29623249798.519974
+        }
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "limited",
+        "horizon": 800,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 29623249798.519974
+        }
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "global",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 109432406749.23375,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            74953703.25289983,
+            524675922.7702988,
+            2248611097.586995
+          ],
+          [
+            179888887.80695957,
+            1259222214.6487172,
+            5396666634.208787
+          ],
+          [
+            254842591.0598594,
+            1783898137.419016,
+            7645277731.795782
+          ]
+        ]
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "global",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 109432406749.23375,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            74953703.25289983,
+            524675922.7702988,
+            2248611097.586995
+          ],
+          [
+            179888887.80695957,
+            1259222214.6487172,
+            5396666634.208787
+          ],
+          [
+            254842591.0598594,
+            1783898137.419016,
+            7645277731.795782
+          ]
+        ]
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "global",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 139482982282.71008,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            95536289.23473294,
+            668754024.6431305,
+            2866088677.0419884
+          ],
+          [
+            229287094.16335905,
+            1605009659.1435132,
+            6878612824.900772
+          ],
+          [
+            324823383.398092,
+            2273763683.786644,
+            9744701501.94276
+          ]
+        ]
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "global",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 230741407853.19406,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            158042060.17342058,
+            1106294421.2139442,
+            4741261805.202618
+          ],
+          [
+            379300944.41620946,
+            2655106610.913466,
+            11379028332.486282
+          ],
+          [
+            537343004.58963,
+            3761401032.12741,
+            16120290137.6889
+          ]
+        ]
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "breakthrough",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 691649370105.2478,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            473732445.27756697,
+            3316127116.942969,
+            14211973358.32701
+          ],
+          [
+            1136957868.6661608,
+            7958705080.663126,
+            34108736059.984825
+          ],
+          [
+            1610690313.9437275,
+            11274832197.606094,
+            48320709418.31183
+          ]
+        ]
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "breakthrough",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 822599728075.4674,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            563424471.2845668,
+            3943971298.9919667,
+            16902734138.537003
+          ],
+          [
+            1352218731.0829601,
+            9465531117.58072,
+            40566561932.48881
+          ],
+          [
+            1915643202.367527,
+            13409502416.57269,
+            57469296071.02581
+          ]
+        ]
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "breakthrough",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1215384671280.8518,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            832455254.3019533,
+            5827186780.113673,
+            24973657629.058598
+          ],
+          [
+            1997892610.324688,
+            13985248272.272818,
+            59936778309.74064
+          ],
+          [
+            2830347864.6266413,
+            19812435052.38649,
+            84910435938.79922
+          ]
+        ]
+      },
+      {
+        "strategy": "commodity_refined",
+        "market": "breakthrough",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1869900717679.324,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1280753916.218715,
+            8965277413.531006,
+            38422617486.561455
+          ],
+          [
+            3073809398.924916,
+            21516665792.47441,
+            92214281967.74747
+          ],
+          [
+            4354563315.143631,
+            30481943206.005417,
+            130636899454.30893
+          ]
+        ]
+      },
+      {
+        "strategy": "specialty",
+        "market": "limited",
+        "horizon": 30,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 14,
+          "shortfall_USD2041": 28376859048.309864
+        }
+      },
+      {
+        "strategy": "specialty",
+        "market": "limited",
+        "horizon": 100,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 14,
+          "shortfall_USD2041": 28376859048.309864
+        }
+      },
+      {
+        "strategy": "specialty",
+        "market": "limited",
+        "horizon": 300,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 14,
+          "shortfall_USD2041": 28376859048.309864
+        }
+      },
+      {
+        "strategy": "specialty",
+        "market": "limited",
+        "horizon": 800,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 14,
+          "shortfall_USD2041": 28376859048.309864
+        }
+      },
+      {
+        "strategy": "specialty",
+        "market": "global",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 117900809529.68466,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            80753979.129921,
+            565277853.909447,
+            2422619373.89763
+          ],
+          [
+            193809549.9118104,
+            1356666849.3826728,
+            5814286497.354312
+          ],
+          [
+            274563529.0417314,
+            1921944703.29212,
+            8236905871.251943
+          ]
+        ]
+      },
+      {
+        "strategy": "specialty",
+        "market": "global",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 149861796099.9324,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            102645065.8218715,
+            718515460.7531006,
+            3079351974.656145
+          ],
+          [
+            246348157.97249162,
+            1724437105.8074412,
+            7390444739.174748
+          ],
+          [
+            348993223.7943631,
+            2442952566.5605416,
+            10469796713.830893
+          ]
+        ]
+      },
+      {
+        "strategy": "specialty",
+        "market": "global",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 249074031903.28873,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            170598651.9885539,
+            1194190563.9198773,
+            5117959559.656618
+          ],
+          [
+            409436764.7725294,
+            2866057353.407706,
+            12283102943.175882
+          ],
+          [
+            580035416.7610834,
+            4060247917.3275833,
+            17401062502.8325
+          ]
+        ]
+      },
+      {
+        "strategy": "specialty",
+        "market": "global",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 249074031903.28873,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            170598651.9885539,
+            1194190563.9198773,
+            5117959559.656618
+          ],
+          [
+            409436764.7725294,
+            2866057353.407706,
+            12283102943.175882
+          ],
+          [
+            580035416.7610834,
+            4060247917.3275833,
+            17401062502.8325
+          ]
+        ]
+      },
+      {
+        "strategy": "specialty",
+        "market": "breakthrough",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 701182184503.15,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            480261770.207637,
+            3361832391.453459,
+            14407853106.229109
+          ],
+          [
+            1152628248.498329,
+            8068397739.488301,
+            34578847454.94987
+          ],
+          [
+            1632890018.7059658,
+            11430230130.94176,
+            48986700561.17897
+          ]
+        ]
+      },
+      {
+        "strategy": "specialty",
+        "market": "breakthrough",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 838145582486.8427,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            574072316.77181,
+            4018506217.4026704,
+            17222169503.1543
+          ],
+          [
+            1377773560.2523441,
+            9644414921.766409,
+            41333206807.57032
+          ],
+          [
+            1951845877.0241542,
+            13662921139.169079,
+            58555376310.724625
+          ]
+        ]
+      },
+      {
+        "strategy": "specialty",
+        "market": "breakthrough",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1248680640586.516,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            855260712.7304904,
+            5986824989.113434,
+            25657821381.914715
+          ],
+          [
+            2052625710.553177,
+            14368379973.872238,
+            61578771316.595314
+          ],
+          [
+            2907886423.2836676,
+            20355204962.985672,
+            87236592698.51003
+          ]
+        ]
+      },
+      {
+        "strategy": "specialty",
+        "market": "breakthrough",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1932231638284.3657,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1323446327.5920312,
+            9264124293.14422,
+            39703389827.76094
+          ],
+          [
+            3176271186.2208753,
+            22233898303.546127,
+            95288135586.62625
+          ],
+          [
+            4499717513.812906,
+            31498022596.690346,
+            134991525414.3872
+          ]
+        ]
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "limited",
+        "horizon": 30,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 321552357.0926819
+        }
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "limited",
+        "horizon": 100,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 321552357.0926819
+        }
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "limited",
+        "horizon": 300,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 321552357.0926819
+        }
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "limited",
+        "horizon": 800,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 321552357.0926819
+        }
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "global",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 144174304215.6818,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            98749523.43539849,
+            691246664.0477895,
+            2962485703.0619545
+          ],
+          [
+            236998856.24495637,
+            1658991993.7146945,
+            7109965687.34869
+          ],
+          [
+            335748379.68035483,
+            2350238657.762484,
+            10072451390.410645
+          ]
+        ]
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "global",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 153224785537.26987,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            104948483.2447054,
+            734639382.7129377,
+            3148454497.3411613
+          ],
+          [
+            251876359.78729293,
+            1763134518.5110505,
+            7556290793.618789
+          ],
+          [
+            356824843.03199834,
+            2497773901.223988,
+            10704745290.95995
+          ]
+        ]
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "global",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 320212797491.7222,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            219323833.89843988,
+            1535266837.2890792,
+            6579715016.953196
+          ],
+          [
+            526377201.3562557,
+            3684640409.49379,
+            15791316040.687672
+          ],
+          [
+            745701035.2546957,
+            5219907246.782869,
+            22371031057.64087
+          ]
+        ]
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "global",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 535324743371.2816,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            366660783.1310148,
+            2566625481.917104,
+            10999823493.930445
+          ],
+          [
+            879985879.5144355,
+            6159901156.601048,
+            26399576385.43307
+          ],
+          [
+            1246646662.6454504,
+            8726526638.518152,
+            37399399879.3635
+          ]
+        ]
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "breakthrough",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 670374700620.9833,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            459160753.8499885,
+            3214125276.9499197,
+            13774822615.499657
+          ],
+          [
+            1101985809.2399726,
+            7713900664.679808,
+            33059574277.199177
+          ],
+          [
+            1561146563.089961,
+            10928025941.629728,
+            46834396892.69884
+          ]
+        ]
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "breakthrough",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 680102398872.7229,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            465823560.871728,
+            3260764926.102096,
+            13974706826.15184
+          ],
+          [
+            1117976546.092147,
+            7825835822.64503,
+            33539296382.764416
+          ],
+          [
+            1583800106.9638753,
+            11086600748.747126,
+            47514003208.91626
+          ]
+        ]
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "breakthrough",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 952501455305.0834,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            652398257.0582763,
+            4566787799.407934,
+            19571947711.748287
+          ],
+          [
+            1565755816.9398632,
+            10960290718.579042,
+            46972674508.19589
+          ],
+          [
+            2218154073.9981394,
+            15527078517.986975,
+            66544622219.944176
+          ]
+        ]
+      },
+      {
+        "strategy": "premium_lunar",
+        "market": "breakthrough",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1744399989746.081,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1194794513.524713,
+            8363561594.672991,
+            35843835405.74139
+          ],
+          [
+            2867506832.459311,
+            20072547827.21518,
+            86025204973.77933
+          ],
+          [
+            4062301345.9840245,
+            28436109421.888176,
+            121869040379.52074
+          ]
+        ]
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "limited",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 41587626687.33558,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            28484675.813243546,
+            199392730.69270483,
+            854540274.3973064
+          ],
+          [
+            68363221.95178452,
+            478542553.6624916,
+            2050896658.5535355
+          ],
+          [
+            96847897.76502807,
+            677935284.3551965,
+            2905436932.950842
+          ]
+        ]
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "limited",
+        "horizon": 100,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 47,
+          "shortfall_USD2041": 1234408855.2937393
+        }
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "limited",
+        "horizon": 300,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 47,
+          "shortfall_USD2041": 1234408855.2937393
+        }
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "limited",
+        "horizon": 800,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 47,
+          "shortfall_USD2041": 1234408855.2937393
+        }
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "global",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 195964199457.94864,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            134222054.4232525,
+            939554380.9627674,
+            4026661632.6975746
+          ],
+          [
+            322132930.615806,
+            2254930514.310642,
+            9663987918.474178
+          ],
+          [
+            456354985.0390585,
+            3194484895.2734094,
+            13690649551.171755
+          ]
+        ]
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "global",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 278770196984.9868,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            190938491.0856074,
+            1336569437.5992517,
+            5728154732.568222
+          ],
+          [
+            458252378.6054578,
+            3207766650.2382045,
+            13747571358.163733
+          ],
+          [
+            649190869.6910652,
+            4544336087.837457,
+            19475726090.731956
+          ]
+        ]
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "global",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 303661060455.3919,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            207987027.70917255,
+            1455909193.964208,
+            6239610831.275177
+          ],
+          [
+            499168866.5020141,
+            3494182065.5140986,
+            14975065995.060421
+          ],
+          [
+            707155894.2111865,
+            4950091259.478306,
+            21214676826.335598
+          ]
+        ]
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "global",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 303661060455.3919,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            207987027.70917255,
+            1455909193.964208,
+            6239610831.275177
+          ],
+          [
+            499168866.5020141,
+            3494182065.5140986,
+            14975065995.060421
+          ],
+          [
+            707155894.2111865,
+            4950091259.478306,
+            21214676826.335598
+          ]
+        ]
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "breakthrough",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 784465225239.6202,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            537304948.7942604,
+            3761134641.559823,
+            16119148463.827812
+          ],
+          [
+            1289531877.106225,
+            9026723139.743576,
+            38685956313.18675
+          ],
+          [
+            1826836825.9004855,
+            12787857781.303398,
+            54805104777.014565
+          ]
+        ]
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "breakthrough",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1000699878747.9104,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            685410875.8547331,
+            4797876130.983132,
+            20562326275.641994
+          ],
+          [
+            1644986102.0513594,
+            11514902714.359516,
+            49349583061.54079
+          ],
+          [
+            2330396977.9060926,
+            16312778845.34265,
+            69911909337.18279
+          ]
+        ]
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "breakthrough",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1711751562156.1,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1172432576.8192465,
+            8207028037.734727,
+            35172977304.5774
+          ],
+          [
+            2813838184.366192,
+            19696867290.563343,
+            84415145530.98575
+          ],
+          [
+            3986270761.1854386,
+            27903895328.29807,
+            119588122835.56316
+          ]
+        ]
+      },
+      {
+        "strategy": "propellant_logistics",
+        "market": "breakthrough",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 2667079822827.105,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1826767001.9363732,
+            12787369013.554613,
+            54803010058.0912
+          ],
+          [
+            4384240804.647296,
+            30689685632.531067,
+            131527224139.41888
+          ],
+          [
+            6211007806.583669,
+            43477054646.08568,
+            186330234197.51007
+          ]
+        ]
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "limited",
+        "horizon": 30,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 21294451520.709633
+        }
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "limited",
+        "horizon": 100,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 21294451520.709633
+        }
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "limited",
+        "horizon": 300,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 21294451520.709633
+        }
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "limited",
+        "horizon": 800,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 21294451520.709633
+        }
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "global",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 111968338632.3659,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            76690642.89888075,
+            536834500.2921653,
+            2300719286.9664226
+          ],
+          [
+            184057542.9573138,
+            1288402800.7011967,
+            5521726288.719414
+          ],
+          [
+            260748185.85619456,
+            1825237300.993362,
+            7822445575.685837
+          ]
+        ]
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "global",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 202905266892.71722,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            138976210.20049125,
+            972833471.4034387,
+            4169286306.0147376
+          ],
+          [
+            333542904.481179,
+            2334800331.3682528,
+            10006287134.43537
+          ],
+          [
+            472519114.68167025,
+            3307633802.771692,
+            14175573440.450108
+          ]
+        ]
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "global",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 233682842727.4357,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            160056741.59413403,
+            1120397191.1589382,
+            4801702247.824021
+          ],
+          [
+            384136179.8259217,
+            2688953258.781452,
+            11524085394.77765
+          ],
+          [
+            544192921.4200557,
+            3809350449.94039,
+            16325787642.601673
+          ]
+        ]
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "global",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 233682842727.4357,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            160056741.59413403,
+            1120397191.1589382,
+            4801702247.824021
+          ],
+          [
+            384136179.8259217,
+            2688953258.781452,
+            11524085394.77765
+          ],
+          [
+            544192921.4200557,
+            3809350449.94039,
+            16325787642.601673
+          ]
+        ]
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "breakthrough",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 760491873541.2334,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            520884844.89125574,
+            3646193914.23879,
+            15626545346.73767
+          ],
+          [
+            1250123627.739014,
+            8750865394.173096,
+            37503708832.17042
+          ],
+          [
+            1771008472.6302695,
+            12397059308.411884,
+            53130254178.90808
+          ]
+        ]
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "breakthrough",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 958806353460.6047,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            656716680.452469,
+            4597016763.167283,
+            19701500413.57407
+          ],
+          [
+            1576120033.0859256,
+            11032840231.601479,
+            47283600992.57776
+          ],
+          [
+            2232836713.5383945,
+            15629856994.768763,
+            66985101406.15184
+          ]
+        ]
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "breakthrough",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1488629177514.9387,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1019609025.6951635,
+            7137263179.866144,
+            30588270770.854908
+          ],
+          [
+            2447061661.6683927,
+            17129431631.67875,
+            73411849850.05177
+          ],
+          [
+            3466670687.3635564,
+            24266694811.544895,
+            104000120620.90668
+          ]
+        ]
+      },
+      {
+        "strategy": "compute_digital",
+        "market": "breakthrough",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1884993794610.6377,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1291091640.1442723,
+            9037641481.009907,
+            38732749204.32817
+          ],
+          [
+            3098619936.3462534,
+            21690339554.423775,
+            92958598090.3876
+          ],
+          [
+            4389711576.490526,
+            30727981035.433678,
+            131691347294.71577
+          ]
+        ]
+      },
+      {
+        "strategy": "services",
+        "market": "limited",
+        "horizon": 30,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 18246978333.818573
+        }
+      },
+      {
+        "strategy": "services",
+        "market": "limited",
+        "horizon": 100,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 18246978333.818573
+        }
+      },
+      {
+        "strategy": "services",
+        "market": "limited",
+        "horizon": 300,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 18246978333.818573
+        }
+      },
+      {
+        "strategy": "services",
+        "market": "limited",
+        "horizon": 800,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 13,
+          "shortfall_USD2041": 18246978333.818573
+        }
+      },
+      {
+        "strategy": "services",
+        "market": "global",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 138218551669.20074,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            94670240.86931558,
+            662691686.0852091,
+            2840107226.0794673
+          ],
+          [
+            227208578.08635738,
+            1590460046.6045015,
+            6816257342.590721
+          ],
+          [
+            321878818.955673,
+            2253151732.6897106,
+            9656364568.670189
+          ]
+        ]
+      },
+      {
+        "strategy": "services",
+        "market": "global",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 198333580332.46243,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            135844918.03593317,
+            950914426.2515322,
+            4075347541.0779953
+          ],
+          [
+            326027803.2862396,
+            2282194623.0036774,
+            9780834098.587189
+          ],
+          [
+            461872721.3221728,
+            3233109049.25521,
+            13856181639.665184
+          ]
+        ]
+      },
+      {
+        "strategy": "services",
+        "market": "global",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 228340079677.8327,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            156397314.84783062,
+            1094781203.9348142,
+            4691919445.434918
+          ],
+          [
+            375353555.63479346,
+            2627474889.4435544,
+            11260606669.043804
+          ],
+          [
+            531750870.4826241,
+            3722256093.3783693,
+            15952526114.478724
+          ]
+        ]
+      },
+      {
+        "strategy": "services",
+        "market": "global",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 228340079677.8327,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            156397314.84783062,
+            1094781203.9348142,
+            4691919445.434918
+          ],
+          [
+            375353555.63479346,
+            2627474889.4435544,
+            11260606669.043804
+          ],
+          [
+            531750870.4826241,
+            3722256093.3783693,
+            15952526114.478724
+          ]
+        ]
+      },
+      {
+        "strategy": "services",
+        "market": "breakthrough",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 755245648500.9711,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            517291540.06915826,
+            3621040780.484108,
+            15518746202.074749
+          ],
+          [
+            1241499696.1659799,
+            8690497873.16186,
+            37244990884.97939
+          ],
+          [
+            1758791236.2351382,
+            12311538653.645967,
+            52763737087.05414
+          ]
+        ]
+      },
+      {
+        "strategy": "services",
+        "market": "breakthrough",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 950401342862.7196,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            650959823.8785751,
+            4556718767.150025,
+            19528794716.357254
+          ],
+          [
+            1562303577.30858,
+            10936125041.16006,
+            46869107319.2574
+          ],
+          [
+            2213263401.1871552,
+            15492843808.310087,
+            66397902035.614655
+          ]
+        ]
+      },
+      {
+        "strategy": "services",
+        "market": "breakthrough",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1470855294147.0188,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1007435132.9774101,
+            7052045930.84187,
+            30223053989.322304
+          ],
+          [
+            2417844319.1457844,
+            16924910234.020493,
+            72535329574.37354
+          ],
+          [
+            3425279452.1231947,
+            23976956164.862362,
+            102758383563.69585
+          ]
+        ]
+      },
+      {
+        "strategy": "services",
+        "market": "breakthrough",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1861156270891.831,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1274764569.103994,
+            8923351983.727957,
+            38242937073.11981
+          ],
+          [
+            3059434965.8495855,
+            21416044760.947098,
+            91783048975.48756
+          ],
+          [
+            4334199534.953579,
+            30339396744.675053,
+            130025986048.60739
+          ]
+        ]
+      },
+      {
+        "strategy": "diversified",
+        "market": "limited",
+        "horizon": 30,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 14,
+          "shortfall_USD2041": 11735258268.032604
+        }
+      },
+      {
+        "strategy": "diversified",
+        "market": "limited",
+        "horizon": 100,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 14,
+          "shortfall_USD2041": 11735258268.032604
+        }
+      },
+      {
+        "strategy": "diversified",
+        "market": "limited",
+        "horizon": 300,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 14,
+          "shortfall_USD2041": 11735258268.032604
+        }
+      },
+      {
+        "strategy": "diversified",
+        "market": "limited",
+        "horizon": 800,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 14,
+          "shortfall_USD2041": 11735258268.032604
+        }
+      },
+      {
+        "strategy": "diversified",
+        "market": "global",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 130606860931.90607,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            89456754.06294936,
+            626197278.4406456,
+            2683702621.888481
+          ],
+          [
+            214696209.75107843,
+            1502873468.257549,
+            6440886292.532353
+          ],
+          [
+            304152963.8140278,
+            2129070746.6981947,
+            9124588914.420834
+          ]
+        ]
+      },
+      {
+        "strategy": "diversified",
+        "market": "global",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 201202302640.39935,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            137809796.32904065,
+            964668574.3032845,
+            4134293889.8712196
+          ],
+          [
+            330743511.18969756,
+            2315204578.327883,
+            9922305335.690928
+          ],
+          [
+            468553307.5187382,
+            3279873152.631168,
+            14056599225.562147
+          ]
+        ]
+      },
+      {
+        "strategy": "diversified",
+        "market": "global",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 276219530826.1895,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            189191459.46999282,
+            1324340216.2899497,
+            5675743784.099785
+          ],
+          [
+            454059502.72798276,
+            3178416519.0958796,
+            13621785081.839483
+          ],
+          [
+            643250962.1979755,
+            4502756735.385829,
+            19297528865.939266
+          ]
+        ]
+      },
+      {
+        "strategy": "diversified",
+        "market": "global",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 276219530826.1895,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            189191459.46999282,
+            1324340216.2899497,
+            5675743784.099785
+          ],
+          [
+            454059502.72798276,
+            3178416519.0958796,
+            13621785081.839483
+          ],
+          [
+            643250962.1979755,
+            4502756735.385829,
+            19297528865.939266
+          ]
+        ]
+      },
+      {
+        "strategy": "diversified",
+        "market": "breakthrough",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 660261516418.3617,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            452233915.3550423,
+            3165637407.4852962,
+            13567017460.651268
+          ],
+          [
+            1085361396.8521016,
+            7597529777.96471,
+            32560841905.563046
+          ],
+          [
+            1537595312.2071435,
+            10763167185.450005,
+            46127859366.21431
+          ]
+        ]
+      },
+      {
+        "strategy": "diversified",
+        "market": "breakthrough",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 870703995756.3829,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            596372599.833139,
+            4174608198.831973,
+            17891177994.99417
+          ],
+          [
+            1431294239.5995336,
+            10019059677.196735,
+            42938827187.986
+          ],
+          [
+            2027666839.4326723,
+            14193667876.028706,
+            60830005182.98017
+          ]
+        ]
+      },
+      {
+        "strategy": "diversified",
+        "market": "breakthrough",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1307189220091.2546,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            895335082.254284,
+            6267345575.779988,
+            26860052467.62852
+          ],
+          [
+            2148804197.4102817,
+            15041629381.871971,
+            64464125922.30846
+          ],
+          [
+            3044139279.6645656,
+            21308974957.65196,
+            91324178389.93697
+          ]
+        ]
+      },
+      {
+        "strategy": "diversified",
+        "market": "breakthrough",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 2034115468202.8345,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1393229772.7416675,
+            9752608409.191673,
+            41796893182.25002
+          ],
+          [
+            3343751454.580002,
+            23406260182.060013,
+            100312543637.40007
+          ],
+          [
+            4736981227.321669,
+            33158868591.25168,
+            142109436819.65005
+          ]
+        ]
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "limited",
+        "horizon": 30,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 18,
+          "shortfall_USD2041": 5586331716.719849
+        }
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "limited",
+        "horizon": 100,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 18,
+          "shortfall_USD2041": 5586331716.719849
+        }
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "limited",
+        "horizon": 300,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 18,
+          "shortfall_USD2041": 5586331716.719849
+        }
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "limited",
+        "horizon": 800,
+        "status": "unfunded_path_no_future_trade_estimate",
+        "failure": {
+          "year": 18,
+          "shortfall_USD2041": 5586331716.719849
+        }
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "global",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 142435364325.93622,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            97558468.71639466,
+            682909281.0147626,
+            2926754061.49184
+          ],
+          [
+            234140324.9193472,
+            1638982274.43543,
+            7024209747.580415
+          ],
+          [
+            331698793.63574183,
+            2321891555.450193,
+            9950963809.072254
+          ]
+        ]
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "global",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 161848697014.23126,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            110855271.92755567,
+            775986903.4928896,
+            3325658157.8266697
+          ],
+          [
+            266052652.6261336,
+            1862368568.3829348,
+            7981579578.784007
+          ],
+          [
+            376907924.5536892,
+            2638355471.8758245,
+            11307237736.610676
+          ]
+        ]
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "global",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 362839770225.2816,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            248520390.5652614,
+            1739642733.9568295,
+            7455611716.957842
+          ],
+          [
+            596448937.3566273,
+            4175142561.4963913,
+            17893468120.69882
+          ],
+          [
+            844969327.9218887,
+            5914785295.453221,
+            25349079837.656662
+          ]
+        ]
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "global",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 9784527684271.793,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            6701731290.597118,
+            46912119034.179825,
+            201051938717.91357
+          ],
+          [
+            16084155097.433083,
+            112589085682.03157,
+            482524652922.9925
+          ],
+          [
+            22785886388.0302,
+            159501204716.2114,
+            683576591640.906
+          ]
+        ]
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "breakthrough",
+        "horizon": 30,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 661942507637.9355,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            453385279.20406544,
+            3173696954.428458,
+            13601558376.121964
+          ],
+          [
+            1088124670.089757,
+            7616872690.628299,
+            32643740102.692707
+          ],
+          [
+            1541509949.2938225,
+            10790569645.056759,
+            46245298478.814674
+          ]
+        ]
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "breakthrough",
+        "horizon": 100,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 684930011664.9674,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            469130144.9760051,
+            3283911014.832035,
+            14073904349.280153
+          ],
+          [
+            1125912347.9424121,
+            7881386435.596885,
+            33777370438.27236
+          ],
+          [
+            1595042492.9184172,
+            11165297450.42892,
+            47851274787.55251
+          ]
+        ]
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "breakthrough",
+        "horizon": 300,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1091602232007.069,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            747672761.6486773,
+            5233709331.540741,
+            22430182849.460323
+          ],
+          [
+            1794414627.9568255,
+            12560902395.697779,
+            53832438838.704765
+          ],
+          [
+            2542087389.605503,
+            17794611727.238518,
+            76262621688.16508
+          ]
+        ]
+      },
+      {
+        "strategy": "prior_manufacturing_mix",
+        "market": "breakthrough",
+        "horizon": 800,
+        "status": "conditional_transaction_balance",
+        "annual_gross_receipts_source_value": 1944021796157.5608,
+        "balance_source_value_by_share_and_holding_days": [
+          [
+            1331521778.1901102,
+            9320652447.33077,
+            39945653345.7033
+          ],
+          [
+            3195652267.656264,
+            22369565873.59385,
+            95869568029.68791
+          ],
+          [
+            4527174045.846374,
+            31690218320.92462,
+            135815221375.39122
+          ]
+        ]
+      }
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08",
+  "updated": "2026-11-13",
   "base_commit": "b0537b83a070354e799085f9cb4918fae94698ab",
   "next_manuscript": "cef466e6-d9f8",
   "principle": "Each topic spans the open Moon; the root opening scene is one illustration",
@@ -471,15 +471,15 @@
       "unresolved": [
         "The 2026-10-03 review (climate/waves/review.md, results/review_checks.json) holds the assessment. SWAN's and SWASH's lunar handling holds; the GCM-forced runs carry ExoPlaSim's open-sea roughness, which follows Charnock's law at lunar gravity (ratio 1.000000 over 203,389 samples; 6.04 at Earth gravity). The wave studies cover Smythii-Marginis (2.7% of the standing water) and, since 2026-10-03, the nearside sea (50%); the South Pole-Aitken sea (22%) has no wave run. Every coastal and run-up calculation holds the water level fixed, while the geography tide product gives typical monthly ranges of 3.7 m over the nearside sea, 2.1 m in the South Pole-Aitken sea, 0.55 m in Smythii-Marginis and 0.78 m at the eastern headland; the inverse barometer adds at most 0.18 m and wind setup about 1 cm. The coasts are regolith, whose sediment moves at about one sixth of Earth's stress for the same grain. The largest uncertainties sit upstream: the 1-degree basin grid (41% local change at 0.5 degrees in the pilot), the T21 forcing with its lowest level about 885 m above the sea, and a single lunar cycle.",
         "The nearside sea (climate/waves/nearside.md, results/nearside.json), 1-degree nodes, 300 s timestep, second lunar cycle after a first of spin-up: mean Hs 1.39 m over area and time (Smythii-Marginis 0.88 m), Hs >= 1 m over 68% and >= 2 m over 17% of area and time, largest Hs 4.91 m in Mare Imbrium (19.3 s mean period). Mean periods 8-15 s; waves run toward the south-west north of 10 N and vary with a northward tendency in the south. Swell carries 34-64% of the energy at the reference points. Coastal power has a median of 87 W/m and reaches 731 W/m on western Oceanus Procellarum. A month at four shores (results/shore_month.json) pairs the hourly waves with the equilibrium tide of 7 February to 8 March 2038, matched to the GCM's Sun at mid-month: about 3 m of range on the northern shores and 7.6-7.7 m on the southern ones.",
-        "An isolated continuation of A28_dim5_moon year 29 supplies 481 global instantaneous snapshots over 60 Earth days at three-hour intervals. The original 30-day export overlaps exactly in all 6,416,962 values, and recording preserves final climate state and ordinary output. The wave model now follows two solar cycles, excluding the first 29.53059 days and analyzing the second. Inter-cycle and seasonal occurrence, other seas, coastal winds, gusts and an independent 10 m diagnostic remain further work. CM1 ring products retain only days 29.5–59.0.",
+        "An isolated continuation of A28_dim5_moon year 29 supplies 481 global instantaneous snapshots over 60 Earth days at three-hour intervals. The original 30-day export overlaps exactly in all 6,416,962 values, and recording preserves final climate state and ordinary output. The wave model now follows two solar cycles, excluding the first 29.53059 days and analyzing the second. Inter-cycle and seasonal occurrence, other seas, coastal winds, gusts and an independent 10 m diagnostic remain further work. CM1 ring products retain only days 29.5\u201359.0.",
         "The shore study adds native 118 m LOLA/GRAIL terrain, a regional propagation grid, and local wave grids from 948 to 118 m. Two basin replays retain all 3,103,551 wave values exactly while recovering directional spectra from the second cycle. The east-northeast phase gives 1.842 m Hs and 600 W/m shoreward power on the western face, versus 0.228 m and 0.021 W/m on the eastern face. In a later west-southwest phase at 237 m spacing, exposure reverses: eastern Hs 0.771 m and incoming power 52.9 W/m, western Hs 0.250 m and 8.35 W/m. All 13 coastal cases meet their stationary stopping criterion. Boundary position, regional grid, wet-spectrum interpolation and directional controls pass the stated exposure bounds. The 237-to-118-m comparison has height differences of 2.84% at the 95th percentile and 39.09% maximum; local shoreline convergence remains open. The three phases supply stationary spatial references for the subsequent evolving coastal history. The 474 m history retains this local geographic uncertainty.",
-        "The weather coupling preserves GCM dimensional surface stress through SWAN's Wu drag law at fixed air density 1.4039 kg/m3. The GCM stress-closure density over the selected sea and week ranges from 1.3885 to 1.4093 kg/m3. Spatial and temporal density effects within the wave source terms, two-way air–water coupling and lunar calibration of growth and breaking remain open.",
+        "The weather coupling preserves GCM dimensional surface stress through SWAN's Wu drag law at fixed air density 1.4039 kg/m3. The GCM stress-closure density over the selected sea and week ranges from 1.3885 to 1.4093 kg/m3. Spatial and temporal density effects within the wave source terms, two-way air\u2013water coupling and lunar calibration of growth and breaking remain open.",
         "At 4.001 m/s, frequency refinement passes the 5% bound. The 2-to-1-second timestep comparison over 20 minutes to 2 hours fails for mean period (12.2%); the later 1-to-2-hour window passes. Doubling coastal child directions from 36 to 72 at 3.8 km changes final Hs by at most 0.57% and mean period by 0.31%. The evolving coast adds two selected-window timestep comparisons; further coastal and upstream temporal refinements and parent directional coverage remain open.",
-        "The second-cycle Smythii–Marginis record reaches Hs 3.375 m with mean period 15.84 s at the peak; Hs>=1 m covers up to 84.7% of the coarse basin. Mean local Hs over area and time is 0.880 m. The offshore reference has Hs>=1 m for 309.6 hours, with a 98.1-hour continuous episode. In the selected six-day comparison, halving the timestep changes metre-scale heights by at most 0.376% and mean period by 0.870%; time above 1 m changes by at most 19 minutes per node. Across all paired Hs>=0.1 m, maximum differences are 16.29% and 29.37%, failing the 5% criterion. A shorter preceding history agrees with the continuous run within 0.440% in Hs and 0.913% in mean period over that window. Of 708 second-cycle spectra at three diagnostic nodes, 129 fail the band criterion, with resolved Hs 0.118–0.507 m. Widening the frequency band, complete-cycle timestep refinement and finer basin geography remain open.",
+        "The second-cycle Smythii\u2013Marginis record reaches Hs 3.375 m with mean period 15.84 s at the peak; Hs>=1 m covers up to 84.7% of the coarse basin. Mean local Hs over area and time is 0.880 m. The offshore reference has Hs>=1 m for 309.6 hours, with a 98.1-hour continuous episode. In the selected six-day comparison, halving the timestep changes metre-scale heights by at most 0.376% and mean period by 0.870%; time above 1 m changes by at most 19 minutes per node. Across all paired Hs>=0.1 m, maximum differences are 16.29% and 29.37%, failing the 5% criterion. A shorter preceding history agrees with the continuous run within 0.440% in Hs and 0.913% in mean period over that window. Of 708 second-cycle spectra at three diagnostic nodes, 129 fail the band criterion, with resolved Hs 0.118\u20130.507 m. Widening the frequency band, complete-cycle timestep refinement and finer basin geography remain open.",
         "The native shore terrain has 234 active wave nodes below 10 m depth in the eastward 118 m case, with 45 reaching the Qb>=0.01 breaking diagnostic. Its sheltered eastern station has 8.88% of resolved variance in the highest two frequency intervals, exceeding the 1% edge criterion. Wider coastal frequency coverage and tighter solver accuracy retain uncertainty in short-wave periods and small-wave outliers. SWASH now resolves individual waves, reflection, breaking and wetting/drying on 1D rock profiles and explicit beach slopes. The rock information retains 118 m geographic spacing; the eventual sediment geometry, two-dimensional diffraction and currents, changing water levels and lunar physical calibration remain open.",
-        "The evolving regional and coastal models retain hours 0–1419 and report the second solar cycle, 708.73416–1417.46832 h. Western Hs peaks at 1.797 m with 142.8 hours above 1 m; southern Hs peaks at 1.534 m with 96.3 hours above 1 m. The eastern peak is 0.968 m, with 77.7 hours above 0.5 m and its strongest phase about nine days later. Western mean incoming power is 12.5 times the eastern mean. The local offshore reference at 92.84570 E, 2.34570 N has 203.3 hours above 1 m; the earlier 309.6-hour reference lies farther into the basin. Main new 1 m crossings follow the local offshore crossing by 1.24 h west and 2.34 h south, combining propagation, local growth and direction. Station histories use 15-minute sampling and spectra hourly; further cycles are required for variability between months.",
+        "The evolving regional and coastal models retain hours 0\u20131419 and report the second solar cycle, 708.73416\u20131417.46832 h. Western Hs peaks at 1.797 m with 142.8 hours above 1 m; southern Hs peaks at 1.534 m with 96.3 hours above 1 m. The eastern peak is 0.968 m, with 77.7 hours above 0.5 m and its strongest phase about nine days later. Western mean incoming power is 12.5 times the eastern mean. The local offshore reference at 92.84570 E, 2.34570 N has 203.3 hours above 1 m; the earlier 309.6-hour reference lies farther into the basin. Main new 1 m crossings follow the local offshore crossing by 1.24 h west and 2.34 h south, combining propagation, local growth and direction. Station histories use 15-minute sampling and spectra hourly; further cycles are required for variability between months.",
         "The shoreline model passes linear dispersion, gravity/clock similarity, still-water and wall-reflection controls. Under the selected changing-history peak, the refined western rock has a 2.070 m 98th time percentile and a 2.401 m maximum run-up in 30 minutes; the southern rock maximum is 1.684 m. Western beach maxima are 1.099 m at slope 1:20, 1.080 m at slope 1:50 and 0.900 m at slope 1:100. The changing-history 1:50 grid comparison changes the upper time percentile by 5.19%, exceeding the 5% bound; its finer breaking reach spans 152 m. The western rock grid comparison changes the upper time percentile by 1.1%, while a second phase realization reaches 2.659 m. The stationary 1:50 reference beach retains about a 6% upper-time-percentile difference at half spacing. Finite sampling, phase, friction, breaking coefficients, low-frequency boundary forcing, gentle-beach resolution and continuous changing shoreline histories retain separate uncertainties. A laboratory benchmark and lunar physical calibration remain further work.",
-        "The 900-to-450 s coastal timestep checks cover 720–912 and 840–1097 h after 24 h of adjustment. The earlier window passes all four station bounds; main 1 m onsets shift by 0.47, 2.60 and 5.20 minutes offshore, west and south. In the later window, the eastern net energy-transport vector difference reaches 13.83% at the 95th percentile, exceeding 10%; its paired Hs>=0.5 m subset gives 8.12%. Independent spectral transport agrees within 0.552%. Upper-frequency edge failures occur in 1048 of 2815 eligible coastal spectra, all with resolved Hs below 0.752 m; every sampled metre-scale spectrum passes this edge check. The transient nests use one iteration per step. Across 2835 second-cycle steps the coastal log remains below its 99% iteration-accuracy target, while the regional log meets it 68 times; coastal and regional total-height boundary warnings occur 2424 and 1936 times. Further iteration and evolving boundary-position controls remain open.",
+        "The 900-to-450 s coastal timestep checks cover 720\u2013912 and 840\u20131097 h after 24 h of adjustment. The earlier window passes all four station bounds; main 1 m onsets shift by 0.47, 2.60 and 5.20 minutes offshore, west and south. In the later window, the eastern net energy-transport vector difference reaches 13.83% at the 95th percentile, exceeding 10%; its paired Hs>=0.5 m subset gives 8.12%. Independent spectral transport agrees within 0.552%. Upper-frequency edge failures occur in 1048 of 2815 eligible coastal spectra, all with resolved Hs below 0.752 m; every sampled metre-scale spectrum passes this edge check. The transient nests use one iteration per step. Across 2835 second-cycle steps the coastal log remains below its 99% iteration-accuracy target, while the regional log meets it 68 times; coastal and regional total-height boundary warnings occur 2424 and 1936 times. Further iteration and evolving boundary-position controls remain open.",
         "The irregular-spectrum flat-water SWASH control at 0.5 m spacing gives up to 5.22% lower Hs and 6.28% longer mean period across its three gauges, exceeding 5% bounds. Six layers retain similar errors. Halving spacing to 0.25 m gives 4.93% height and 5.73% period differences, retaining the period failure. The source audit establishes that above four uniform Keller-box layers SWASH changes from discrete Stokes incident velocities to a continuum cosh profile. Layer comparisons include that boundary change. Two eastern common-band sensitivity cases explicitly remove 4.52% incoming variance; the main profile cases retain the 1% guard. With identical eastern input spectra, four versus six layers changes the upper run-up time percentile by 6.75% and maximum by 10.66%, exceeding the stated bounds. Absolute shoreline heights carry boundary and numerical propagation uncertainty.",
         "Sea temperature gradients, mixing and currents; the existing climate uses a slab ocean or fixed sea-surface temperatures.",
         "Underwater light has a first study (studies/underwater_light, 2026-11-04): the solved sky's light through a flat surface into the design waters with fresh water's scattering and pure water's ultraviolet absorption, latitudes 0-75 degrees, explicit euphotic, disphotic and aphotic zones, lit floors at today's latitudes and the turned Moon's, ultraviolet and fish vision, with an Earth control. Open: clouds and haze over the water, the sky's angular radiance and waves at the surface, inelastic scattering, measured constituents, the turned Moon's own sea level and lakes, and organisms' survival through the night."
@@ -527,7 +527,7 @@
     },
     {
       "topic": "resources",
-      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11; carbon_cycle_box_model_to_year_10000_with_the_managed_return_2026_10_12; industry_burial_basis_lakes_at_lake_rates_seas_at_marine_rates; sea_chemistry_through_a_billion_years_alkaline_unless_held_2026_10_13; terrain_through_time_small_waters_first_upkeep_a_few_gigawatts_2026_10_13; terrain_deltas_move_the_shorelines_first_2026_10_13; groundwater_model_prepared_2026_10_13; groundwater_stage_1_the_crust_drinks_more_than_the_seas_hold_2026_10_13; groundwater_stage_2_water_table_a_third_of_the_land_seeps_2026_10_13; groundwater_stage_3_springs_carry_the_soils_load_and_build_little_travertine_2026_10_14; carbon_cycle_and_sea_chemistry_take_the_groundwater_2026_10_14; river_deltas_screen_young_braid_mature_single_thread_plumes_plunge_deltas_keep_0_08_to_0_42_2026_11_04",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_inventories_delivery_heat_redox_oxygen_sink_film_flooded_ore_carbon_fresh_seas; phosphorus_return_requirements_and_six_box_finite_reservoir_sensitivities; common_population_material_accounts_no_allocation_selected; sea_phosphorus_lake_retention_routes_and_natural_cycle_screen_2026_10_11; carbon_cycle_box_model_to_year_10000_with_the_managed_return_2026_10_12; industry_burial_basis_lakes_at_lake_rates_seas_at_marine_rates; sea_chemistry_through_a_billion_years_alkaline_unless_held_2026_10_13; terrain_through_time_small_waters_first_upkeep_a_few_gigawatts_2026_10_13; terrain_deltas_move_the_shorelines_first_2026_10_13; groundwater_model_prepared_2026_10_13; groundwater_stage_1_the_crust_drinks_more_than_the_seas_hold_2026_10_13; groundwater_stage_2_water_table_a_third_of_the_land_seeps_2026_10_13; groundwater_stage_3_springs_carry_the_soils_load_and_build_little_travertine_2026_10_14; carbon_cycle_and_sea_chemistry_take_the_groundwater_2026_10_14; river_deltas_screen_young_braid_mature_single_thread_plumes_plunge_deltas_keep_0_08_to_0_42_2026_11_04; enclosed_build_dated_feed_87_cases_finite_catalogue_and_geometry_bounds_2026_11_13; lunar_and_near_earth_multicatalogue_source_access_composition_uncertainty_cost_and_preservation_screen_2026_11_13; enclosed_population_distributions_and_pinned_reclamation_comparison_2026_11_13; precious_metal_rare_earth_coproduct_assays_recovery_scenarios_and_243_physical_checkpoints_2026_11_13; first_eight_year_12500_resident_coproduct_deliveries_with_refinery_and_arrival_sensitivities_2026_11_13",
       "material": [
         "../resources/README.md",
         "../resources/state.md",
@@ -562,9 +562,49 @@
         "studies/springs/results/springs.json",
         "studies/springs/results/springs_carbon.json",
         "studies/springs/carbon.py",
-        "studies/carbon_cycle/results/carbon_cycle.json"
+        "studies/carbon_cycle/results/carbon_cycle.json",
+        "../resources/enclosed_mining/README.md",
+        "../resources/enclosed_mining/run.py",
+        "../resources/enclosed_mining/catalogue.py",
+        "../resources/enclosed_mining/inputs.json",
+        "../resources/enclosed_mining/sources.json",
+        "../resources/enclosed_mining/checks.json",
+        "../resources/enclosed_mining/results/assessment.json.gz",
+        "../resources/source_access/README.md",
+        "../resources/source_access/run.py",
+        "../resources/source_access/access_inputs.json",
+        "../resources/source_access/results/access.json.gz",
+        "../resources/source_access/protocols.md",
+        "../resources/source_access/results/composition.json.gz",
+        "../resources/source_access/results/lightcurves.json.gz",
+        "../resources/source_access/potential.md",
+        "../resources/source_access/population.py",
+        "../resources/source_access/lunar_potential.py",
+        "../resources/source_access/potential.py",
+        "../resources/source_access/potential_inputs.json",
+        "../resources/source_access/results/population.json.gz",
+        "../resources/source_access/results/lunar_potential.json.gz",
+        "../resources/source_access/results/potential.json.gz",
+        "../resources/source_access/potential_checks.md",
+        "../resources/source_access/coproducts.md",
+        "../resources/source_access/coproducts.py",
+        "../resources/source_access/coproduct_inputs.json",
+        "../resources/source_access/coproduct_assays.json",
+        "../resources/source_access/coproduct_sources.json",
+        "../resources/source_access/export_coproduct_flows.py",
+        "../resources/source_access/inputs/coproduct_flows.json",
+        "../resources/source_access/inputs/coproduct_candidates.json",
+        "../resources/source_access/results/coproducts.json.gz",
+        "../resources/source_access/coproduct_checks.md",
+        "../resources/source_access/startup_deliveries.py",
+        "../resources/source_access/startup_delivery_inputs.json",
+        "../resources/source_access/export_startup_feed.py",
+        "../resources/source_access/inputs/startup_feed.json",
+        "../resources/source_access/results/startup_deliveries.json.gz"
       ],
       "unresolved": [
+        "Enclosed-phase geological potential now includes missing asteroid characterization and a disjoint inferred population, with conditional predictive distributions and separate structural sensitivities. The wider orbital pool contains 25\u201373 Gt water equivalent (median 39 Gt); the old narrow characterized samples do not define total availability. Survey selection, source grades and depth, recurring access, site/data preservation and future resource allocations remain unresolved. See resources/source_access/potential.md.",
+        "A pinned 36-case reclamation product reduces cumulative year-200 source feed by 12\u201319% and year-200 physical operating outlay by 10\u201327% across six combined orderbooks, under explicit prospective recovery/refurbishment coefficients. Full food/carbon/nutrient accounts, repeated repair-life qualification, residual landscape-water overlap and chemical freight alternatives remain open. The financial returns have not been silently recomputed.",
         "The aerial phosphorus cycle: nutrient-specific stocks and annual throughput, natural retention, collection-to-delivery harvest return, land/sea donor depletion, sediment recovery and genuine irreversible losses. Six conservative box sensitivities are arithmetic, not a demonstrated lunar ecology; 1% footprint reference requires9.228MtP/year throughput and4.153–41.527Mt stock; at99.9% natural retention and99% food return the low assumed upward supply leaves10,726tP/year to return.",
         "Population distribution remains unselected. New resource accounts read shared/scenarios/population.json; historical industry allocations are superseded for joint planning. Generic lunar material stocks overlap aerial district inventory and cannot be added wholesale; SP-413 shielding applies only to the orbital comparator.",
         "the nitrogen's extraction plan, which the author asked for on 2026-10-09: feasible, sustainable and protecting the major celestial bodies as conservation principle 5 plans; ordinary icy bodies hold the air's 2.5e18 kg of N2 bound as ammonia, ammonium salts and organics, the Kuiper belt's small bodies 80-800 times the need by a rough count, so supplying it means processing 1e20-1e21 kg with the ammonia cracked to N2 at the source (resources/questions.md)",
@@ -576,26 +616,44 @@
         "the seas' composition through time and the delivered water's salts; a geochemical map separating dry from flooded ore; the crust's water uptake; micronutrients and critical elements element by element; lift gas; what weathering releases; Earth's share of the costs",
         "Phosphorus from the waters (resources/sea_phosphorus.md, 2026-10-11): the rain-fed lakes keep 96% of the land's 1.47-4.16 Tg a year and the common-level waters receive 55-180 kt, the great seas least; dredging the lake deltas can supply people's 0.18-1.44 Tg a year and the waters' life can spare 21-56 kt. Open: the great seas' inflow once common-level pits spill, lunar lake retention, delta grades and dredgeable share, the food systems' efficiencies from provisioning, the carriers' lake food webs, and whether the living seas need phosphorus delivered.",
         "The terrain through time (research/studies/terrain_through_time, 2026-10-13): left alone the small waters go first and the large lakes last, and keeping lakes and relief costs 0.2-11 GW as one loop of dredging and return. Open: the springs' load from a groundwater model, the small streams below the 1.9 km grid where dam builders work, the deltas' shapes beyond fans from fixed mouths, and the set of landforms to keep, chosen in the atlas round.",
-        "Groundwater (2026-10-13, 2026-10-14): stages 1-3 done (geography/groundwater_uptake.py, groundwater_table.py; research/studies/springs). The crust takes 0.7-3 times the seas' water within 10,000 years; groundwater comes out across a third of the mature land; the springs carry about the soil water's load and build little travertine, the rock laying the calcium. The carbon cycle and the sea chemistry take the springs study's weathering, the rock's calcite, the filling crust's carbon and the floors' uptake (2026-10-14). Open: regional water tables finer than 15 km for the districts; secondary clays and zeolites; evaporation from shallow water tables; a map of the maria's extent."
+        "Groundwater (2026-10-13, 2026-10-14): stages 1-3 done (geography/groundwater_uptake.py, groundwater_table.py; research/studies/springs). The crust takes 0.7-3 times the seas' water within 10,000 years; groundwater comes out across a third of the mature land; the springs carry about the soil water's load and build little travertine, the rock laying the calcium. The carbon cycle and the sea chemistry take the springs study's weathering, the rock's calcite, the filling crust's carbon and the floors' uptake (2026-10-14). Open: regional water tables finer than 15 km for the districts; secondary clays and zeolites; evaporation from shallow water tables; a map of the maria's extent.",
+        "Precious-metal and rare-earth feed selection, spatial/depth continuity, element-specific processing and recycling, refining capital and operating costs, existing generic-metal overlap, market absorption and preservation still determine realizable value. The two named metal-rich candidates examined fall outside the current wider orbital screen. See resources/source_access/coproducts.md."
       ],
-      "next_session_task": "Groundwater: stages 1-3 are done and the carbon cycle and sea chemistry take them in (2026-10-14); the desert note on the research drive (deserts/desert_analysis.md) waits for the author's review. The author's next round is atlas building down to districts, with the young-Moon landforms to keep chosen in it as a set; the terrain study's grids (research/runs/resources/terrain) give each lake's and hollow's fill times and upkeep. The carbon cycle box model (research/studies/carbon_cycle) is in place; its next work: the imports' form and the redox account (questions 4 and 8), burial by lake, calcite where the kilns can reach it, and the organic returns. Rerun the drainage with common-level pits that fill and spill, then give each sea and large lake its own phosphorus box; bind provisioning's food systems; size delta dredging against delta habitats; settle with ecology whether the seas need phosphorus delivered for their living waters and sea-feeding flyers."
+      "next_session_task": "Groundwater: stages 1-3 are done and the carbon cycle and sea chemistry take them in (2026-10-14); the desert note on the research drive (deserts/desert_analysis.md) waits for the author's review. The author's next round is atlas building down to districts, with the young-Moon landforms to keep chosen in it as a set; the terrain study's grids (research/runs/resources/terrain) give each lake's and hollow's fill times and upkeep. The carbon cycle box model (research/studies/carbon_cycle) is in place; its next work: the imports' form and the redox account (questions 4 and 8), burial by lake, calcite where the kilns can reach it, and the organic returns. Rerun the drainage with common-level pits that fill and spill, then give each sea and large lake its own phosphorus box; bind provisioning's food systems; size delta dredging against delta habitats; settle with ecology whether the seas need phosphorus delivered for their living waters and sea-feeding flyers.",
+      "findings": [
+        "The coproduct assessment adds 40-element CI and lunar KREEP profiles. Middle recovery gives 1.72 tonnes of six platinum-group metals per million tonnes of CI-like feed and 480 tonnes of REY per million tonnes of KREEP-like feed. Treating 1% of year-200 source feed gives 40–99 tonnes of platinum-group metals annually across 81 industrial cases. These are conditional process outputs, not qualified reserves or additional booked revenue.",
+        "The original 12,500-resident founding build processes 298.94 Mt of asteroid feed and 7.703 Mt of lunar raw material in the reference case. New refinery ramps reaching 1%, 10% or 100% of asteroid feed by year 8 give conditional cumulative Earth receipts of 1.07, 10.72 or 107.18 tonnes of platinum-group metals at middle grades and recovery, with 80% Earth allocation, 1.5-year delivery lag and 1% return loss. No accepted growth schedule or financial result changes."
+      ]
     },
     {
       "topic": "provisioning",
       "four_lava_tube_city_programme": {
         "date": "2026-11-12",
         "status": "conditional_city_and_industrial_studies_available_on_domain_branch_site_qualification_open",
+        "initial_assessment": "Four plausible search regions; two leading entrance targets. Connected city-scale space and four high-confidence locations are not established. The Schröter anomaly uses its published location, which changes the coarse future-water comparison.",
+        "study": "studies/lava_tube_cities/README.md",
         "cities": 4,
         "population_rule": "Each city approximately equals the first 100-town population; 50,000 residents at the smaller reference and 100,000 at the larger comparison.",
-        "first_task": "Initial location evidence remains the site-selection basis. Conditional engineering and costing may proceed with assumed caverns while four-city qualification remains open.",
-        "conditional_followup": "Construction and annual sustaining costs for all 250,000 residents, including shared intensive agriculture, aquaculture, everyday light industry, utilities and vacuum transport; no approved locations or pressure architecture.",
+        "first_task": "Initial location assessment complete; no four high-confidence city sites established. Conditional construction and sustaining calculations now complete under subsequent authorization.",
+        "conditional_followup": "The integrated 250,000-person study covers city construction and renewal, shared agriculture, aquaculture, everyday light industry, utilities, transport and basic civic services.",
         "next_study": "Qualify source inventories and routes, refine water recovery and local fleet manufacture, and reconcile the settlement dollar account and scope of U calibration.",
         "plan": "plan.md#four-lava-tube-cities-and-their-supply-programme-12-november-2026",
         "reference_population": 250000,
+        "engineering_study": "studies/lava_tube_cities/buildout.md",
+        "engineering_product": "studies/lava_tube_cities/results/buildout.json",
+        "reference_initial_funding_U": 578217153151.1289,
+        "reference_annual_sustaining_U": 22190564215.40375,
+        "reference_annual_renewal_U": 9929557439.096794,
+        "equivalent_cave_length_m_per_city": 11200.0,
+        "engineering_evidence": "Conditional dry-cave quantities, development material assumptions and future U price/lifetime scenarios. No selected or qualified sites, complete menu, demonstrated lunar service life or supplier quotation.",
         "future_distribution": {
           "status": "recorded_not_started",
           "eventual_buildout_fraction": 0.025,
           "denominator": "To define from a Moon-wide inventory distinguishing entrances, connected systems and usable segments; no count established."
+        },
+        "programme_authorization": {
+          "scope": "Construction and annual sustaining costs for all 250,000 residents, including shared intensive agriculture, aquaculture, everyday light industry, utilities and vacuum transport; no approved locations or pressure architecture.",
+          "site_qualification_condition": "Initial location evidence remains the site-selection basis. Conditional engineering and costing may proceed with assumed caverns while four-city qualification remains open."
         },
         "industrial_supply_study": {
           "status": "conditional_study_completed_on_domain_provisioning",
@@ -638,7 +696,7 @@
           }
         }
       },
-      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_heat_ledger_with_fleet_infrared_food_land_night_tides_rivers_transit_fusion_fuel; inhabited_volume_and_shared_population_comparisons_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; drifting_days_holds_and_gathering_from_the_design_winds_2026_10_09; ways_of_living_eighteen_settings_costs_per_billion_and_shared_case_mixes_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_lava_tubes_against_the_atlas_and_highland_tall_cities_2026_10_11; food_systems_costs_cycle_fit_mixes_and_feasibility_2026_10_11; distributions_of_25_to_30_billion_with_moon_bands_and_synergies_2026_10_11; cprime_authors_distribution_with_homesteads_and_the_middle_latitudes_moved_2026_10_11; authors_wild_share_half_wild_or_30_wild_with_20_hybrid_applied_to_food_and_distributions_2026_10_11; authors_automation_network_uptime_and_food_blend_2026_10_12; beamed_power_chosen_and_screened_absorption_rain_tiles_grid_reserves_2026_10_12; cprime_placed_with_the_blend_every_corner_fits_2026_10_12",
+      "condition": "domain_opened_2026_10_09; evaluation_and_literature; first_screen_heat_ledger_with_fleet_infrared_food_land_night_tides_rivers_transit_fusion_fuel; inhabited_volume_and_shared_population_comparisons_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; drifting_days_holds_and_gathering_from_the_design_winds_2026_10_09; ways_of_living_eighteen_settings_costs_per_billion_and_shared_case_mixes_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_lava_tubes_against_the_atlas_and_highland_tall_cities_2026_10_11; food_systems_costs_cycle_fit_mixes_and_feasibility_2026_10_11; distributions_of_25_to_30_billion_with_moon_bands_and_synergies_2026_10_11; cprime_authors_distribution_with_homesteads_and_the_middle_latitudes_moved_2026_10_11; authors_wild_share_half_wild_or_30_wild_with_20_hybrid_applied_to_food_and_distributions_2026_10_11; authors_automation_network_uptime_and_food_blend_2026_10_12; beamed_power_chosen_and_screened_absorption_rain_tiles_grid_reserves_2026_10_12; cprime_placed_with_the_blend_every_corner_fits_2026_10_12; vacuum_to_open_crater_buildout_single_dome_500_1000_people_nested_catalogue_targets_2026_11_12; enclosed_industry_demand_sized_cohorts_and_consolidated_cash_2026_11_13",
       "material": [
         "../provisioning/README.md",
         "../provisioning/state.md",
@@ -672,7 +730,23 @@
         "studies/distributions/sources.json",
         "studies/distributions/checks.json",
         "../provisioning/network.md",
-        "studies/food_systems/blend.py"
+        "studies/food_systems/blend.py",
+        "studies/vacuum_crater_buildout/README.md",
+        "studies/vacuum_crater_buildout/results/buildout.json",
+        "../habitation/crater_gardens/buildout.json",
+        "studies/vacuum_crater_buildout/first_hundred.md",
+        "studies/vacuum_crater_buildout/results/first_hundred.json",
+        "studies/vacuum_crater_buildout/first_hundred_checks.json",
+        "studies/vacuum_crater_buildout/maintenance.md",
+        "studies/vacuum_crater_buildout/results/maintenance.json",
+        "studies/vacuum_crater_buildout/maintenance_checks.json",
+        "studies/lava_tube_cities/README.md",
+        "studies/lava_tube_cities/buildout.md",
+        "studies/lava_tube_cities/results/buildout.json",
+        "studies/lava_tube_cities/buildout_checks.md",
+        "studies/lava_tube_cities/buildout.py",
+        "studies/lava_tube_cities/buildout_inputs.json",
+        "studies/lava_tube_cities/buildout_sources.json"
       ],
       "unresolved": [
         "the ring fleet's own infrared, 5.7-9.9 W/m2 on the Moon by the corrected first screen, which the design climate leaves out; the author decided on 2026-10-09 that the investigated climate is the planned one, so the glow is answered with added solar protection, by redirecting it away from the Moon, or both: the stack's radiative transfer, where the column absorbs the glow, its warming, its effect on the upper air's CO2 cooling, and the means (less absorbing films, a heat mirror on Moon-facing faces, which the stack's two overlapping layers weaken, strong outer emitters, added dimming)",
@@ -686,9 +760,50 @@
         "Author direction 2026-10-09: much floating habitation roams. Navigation, collision/storm avoidance, rendezvous and occasional repositioning need weather-derived control duties and manoeuvre reserves; the 1/5/10%-duty screen is exploratory. Fixed-position stationkeeping is not assigned to all aerial residents. On the shared tracks towns give way to sky reefs (author, 2026-10-12).",
         "the distribution of people (studies/distributions, 2026-10-11): four distributions of 25-30 billion and the author's chosen C' (C with the 30-48.6 degree lowland people moved to the high-latitude lowland homes and homesteads among the middle-wet fields, at C's costs), Earth at 9 billion within its boundaries in each; the Moon at 4-8 billion with 2-4 aloft leaves 61-94% of its dry land wild outside a kept 30% and 31-92% outside a kept half, uses 11-131 TW of primary energy and takes 9.2-119 TW of heat with fusion (0.080-1.7% more dimming); at 8 billion outside half the high-cost end overfills the middle-wet zone, the 30-45 degree highlands or the 0-30 degree land unless three placements are made together (the dry highland towns poleward of 45 degrees first, the scattered communities gathered on the twilit and Earthlit homes, the middle band's communities on the fog-desert side of their homes); 348,000-696,000 sky towns meet 0.066-5.3 million conflicts a day; under the author's wild share, at least half wild or 30% wild with another 20% of megaparks and great gardens (4.68 million km2), C' fits every corner through the poleward and twilit placements once the homesteads' homes count within their fields, at the kept half's costs; half wild with another 20% hybrid, run for comparison at the author's request, draws 3,250 km3 a year from the seas at the high-cost end; open: the parks' water, automation energy, amenities and night light, the high-latitude towns' water from lakes and seas a median 32.8 km away, the farms' work beyond the homesteads, the dry highland cities' water and land poleward of 45 degrees, an overlay of the scattered homes on the food study's zones, the sky towns' heights, traffic rules and relative drift, dredging rates, the joined undersea and tube cities, the array's habitat designs, the colonies' capacity and health over a lifetime at 0.16 g",
         "Cities on the land (studies/land_cities, 2026-10-11): the lava tubes' groundwater beyond the two-dimensional screen (layered basalt, the crust beneath and the seas filling it from below), the GRAIL candidates' own sizes and the papers read only through secondary sources; a structural model of tube roofs under water pressure and moonquakes; the highland cities' wind over real terrain and their water poleward of 45 degrees; the undersea cities joined to the tubes and the synergies among places the author asked for.",
-        "automation and the network (author directions 2026-10-12; provisioning/network.md): heavy automation everywhere, the parks and their amenities almost purely automated, the whole system engineered for extreme uptime, and consensus decisions with the near-continual input of an educated, involved population; a mesh of aerostats drifting near 30 km with fixed posts, fibre and towers, linked to the array; open: the machines' energy and materials, a constellation model on the design winds, the fixed posts' night power and the ionosphere under the shield"
+        "automation and the network (author directions 2026-10-12; provisioning/network.md): heavy automation everywhere, the parks and their amenities almost purely automated, the whole system engineered for extreme uptime, and consensus decisions with the near-continual input of an educated, involved population; a mesh of aerostats drifting near 30 km with fixed posts, fibre and towers, linked to the array; open: the machines' energy and materials, a constellation model on the design winds, the fixed posts' night power and the ionosphere under the shield",
+        "Vacuum-to-open crater communities: local rim and foundation survey, conservation and wild-land allocation, one complete 238–336 m pressure enclosure with shielding and daylight, qualified material allowables and repair life, food and utility capacity, durable dry transport corridors, regional diversity and removal during atmospheric transition. The ranked sites and analytical service scenarios do not establish buildability or supported occupancy."
       ],
-      "next_session_task": "The power screen's next work (provisioning/power.md): beams assigned through the lunar cycle, the transmitting tiles, the receivers' land with the cities' look, and the ring-wide fault's causes and restart time. C' as the planned distribution (studies/distributions): the high-latitude towns' water and lakes, the middle latitudes' farms and homesteads, the dry highland cities poleward of 45 degrees, the sky towns' heights and traffic rules, and the joined undersea and tube cities, with the planned climate, night power, shield infrared and freight requirements kept in the joint account."
+      "next_session_task": "The power screen's next work (provisioning/power.md): beams assigned through the lunar cycle, the transmitting tiles, the receivers' land with the cities' look, and the ring-wide fault's causes and restart time. C' as the planned distribution (studies/distributions): the high-latitude towns' water and lakes, the middle latitudes' farms and homesteads, the dry highland cities poleward of 45 degrees, the sky towns' heights and traffic rules, and the joined undersea and tube cities, with the planned climate, night power, shield infrared and freight requirements kept in the joint account. For the crater programme, develop a complete 250–330 m single-community dome on measured terrain and route a regional group through future dry corridors, retaining the adopted domeless end state.",
+      "vacuum_crater_buildout": {
+        "programme_sites": {
+          "eventual": 222163,
+          "initial": 8886
+        },
+        "denominator": "All 8,886,558 catalogue craters 200–1,000 m across",
+        "initial_architecture": "One contiguous dome per 500–1,000-person community; remove after sustainable breathable conditions",
+        "result": "Both numerical quotas met under proxy ranking and circular estate separation; grouped initial floor-space population 6.27 million; site engineering and operational capacity open."
+      },
+      "first_hundred_crater_communities": {
+        "evidence": "Conditional quantities, future-price allowances and capacity schedule; no approved sites, qualified enclosure or forecast.",
+        "reference_residents_per_community": 500,
+        "communities": 100,
+        "reference_initial_funding_U": 128954694625.23969,
+        "reference_years_from_regional_mobilisation": 17.833333333333332,
+        "external_condition": "Advanced specialist supply, controlled volatile deliveries and firm power must be orderable; local establishment and qualification included in the assumed lead.",
+        "resource_condition": "Scientific/heritage clearance and site/element-specific future reserves precede extraction; local products/tails and imported stocks tracked separately."
+      },
+      "crater_town_maintenance": {
+        "evidence": "Conditional engineering service budgets using unchanged future U replacement prices and assumed asset lives. No demonstrated lunar failure rate, qualified dome lifetime, observed service labour requirement or household budget.",
+        "reference_residents": 500,
+        "reference_annual_funding_U": 35657481.054037526,
+        "recurring_cash_before_renewal_U": 17722188.45814635,
+        "renewal_fund_U": 17935292.595891178,
+        "scope": "Physical upkeep, stated operating services and major replacement provision, including regional operating share; household/social-service/debt costs separate."
+      },
+      "enclosed_industry": {
+        "date": "2026-11-13",
+        "state": "Demand-sized cohort and physical cash calculation; conditional engineering requirements, not qualified sources or funded completion",
+        "model": "provisioning/enclosed_industry/model.py",
+        "writeup": "provisioning/enclosed_industry/README.md",
+        "product": "provisioning/enclosed_industry/results/industry.json.gz",
+        "seed_population": 12500,
+        "cap_population": 6468289.238000949,
+        "completion_year": 200,
+        "reported_through_year": 220,
+        "reference": "Inherited chemical transport, grades, component partitions, prices and mean lifetimes; no automatic learning",
+        "accounting": "Separate residential stocks and throughput-sized equipment; seed common programme once; explicit orders, retirement, reuse and consolidated cash without duplicate local transfer values",
+        "limits": "Conditional source access, site qualification, bootstrap sequence, service-facility proxies, staffing intensity and passenger migration remain open"
+      }
     },
     {
       "topic": "illumination",
@@ -852,17 +967,30 @@
       "four_lava_tube_city_programme": {
         "date": "2026-11-12",
         "status": "conditional_city_and_industrial_studies_available_on_domain_branch_site_qualification_open",
+        "initial_assessment": "Four plausible search regions; two leading entrance targets. Connected city-scale space and four high-confidence locations are not established. The Schröter anomaly uses its published location, which changes the coarse future-water comparison.",
+        "study": "studies/lava_tube_cities/README.md",
         "cities": 4,
         "population_rule": "Each city approximately equals the first 100-town population; 50,000 residents at the smaller reference and 100,000 at the larger comparison.",
-        "first_task": "Initial location evidence remains the site-selection basis. Conditional engineering and costing may proceed with assumed caverns while four-city qualification remains open.",
-        "conditional_followup": "Construction and annual sustaining costs for all 250,000 residents, including shared intensive agriculture, aquaculture, everyday light industry, utilities and vacuum transport; no approved locations or pressure architecture.",
+        "first_task": "Initial location assessment complete; no four high-confidence city sites established. Conditional construction and sustaining calculations now complete under subsequent authorization.",
+        "conditional_followup": "The integrated 250,000-person study covers city construction and renewal, shared agriculture, aquaculture, everyday light industry, utilities, transport and basic civic services.",
         "next_study": "Qualify source inventories and routes, refine water recovery and local fleet manufacture, and reconcile the settlement dollar account and scope of U calibration.",
         "plan": "plan.md#four-lava-tube-cities-and-their-supply-programme-12-november-2026",
         "reference_population": 250000,
+        "engineering_study": "studies/lava_tube_cities/buildout.md",
+        "engineering_product": "studies/lava_tube_cities/results/buildout.json",
+        "reference_initial_funding_U": 578217153151.1289,
+        "reference_annual_sustaining_U": 22190564215.40375,
+        "reference_annual_renewal_U": 9929557439.096794,
+        "equivalent_cave_length_m_per_city": 11200.0,
+        "engineering_evidence": "Conditional dry-cave quantities, development material assumptions and future U price/lifetime scenarios. No selected or qualified sites, complete menu, demonstrated lunar service life or supplier quotation.",
         "future_distribution": {
           "status": "recorded_not_started",
           "eventual_buildout_fraction": 0.025,
           "denominator": "To define from a Moon-wide inventory distinguishing entrances, connected systems and usable segments; no count established."
+        },
+        "programme_authorization": {
+          "scope": "Construction and annual sustaining costs for all 250,000 residents, including shared intensive agriculture, aquaculture, everyday light industry, utilities and vacuum transport; no approved locations or pressure architecture.",
+          "site_qualification_condition": "Initial location evidence remains the site-selection basis. Conditional engineering and costing may proceed with assumed caverns while four-city qualification remains open."
         },
         "industrial_supply_study": {
           "status": "conditional_study_completed_on_domain_provisioning",
@@ -905,7 +1033,7 @@
           }
         }
       },
-      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28; reviewed_against_main_and_the_other_branches_2026-10-08; branch_closed_merge_waits_for_the_joint_integration; inhabited_volume_requirement_screen_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; ways_of_living_settings_light_air_hazards_and_sky_town_drift_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_tubes_and_highland_towers_2026_10_11; low_gravity_design_note_guards_stairs_handholds_ramps_movement_halls_2026_10_17",
+      "condition": "design_concepts; no complete sizing or service model; optical_comfort_clear_sky_surface_and_eye_screen_with_earth_controls; optical_comfort_packed_angular_sky_transfer_and_finite_matte_scene_transport; optical_comfort_local_native_sky_and_resolved_wave_slopes; solved_column_shielded_spherical_sky_and_updated_gaze_and_finite_scenes; summit_sky_tower_concept_sizing_for_gravity_and_wind; wind_devices_screened; central_port_chosen_24km_to_the_flight_band_35km2_about_1.5_million_present; port_fire_safety_first_order_at_0.16g; sky_ship_size_first_order_rigid_hulls_fitted_to_four_airships_wings_to_ten_transports; flyer_classes_from_canopies_to_long_haul_liners_sized_with_numbers_and_height_bands; long_haul_classes_drawn_at_the_crown_for_the_authors_choice; sky_ship_and_flyer_findings_adopted_by_the_author_2026-09-28; reviewed_against_main_and_the_other_branches_2026-10-08; branch_closed_merge_waits_for_the_joint_integration; inhabited_volume_requirement_screen_2026_10_09; roaming_floating_habitation_author_direction_and_powered_duty_sensitivity; ways_of_living_settings_light_air_hazards_and_sky_town_drift_2026_10_09; daily_life_through_the_lunar_cycle_by_setting_2026_10_09; land_cities_tubes_and_highland_towers_2026_10_11; low_gravity_design_note_guards_stairs_handholds_ramps_movement_halls_2026_10_17; crater_garden_design_and_population_adopted_2026_11_12; first_catalogue_count_200_1000m_with_published_depths_and_broad_water_climate_exclusions; vacuum_to_open_crater_buildout_single_dome_500_1000_people_nested_catalogue_targets_2026_11_12",
       "material": [
         "../habitation/README.md",
         "../ensemble/papers/babdd5f6-4920/seed-02.md",
@@ -943,7 +1071,25 @@
         "studies/land_cities/results/land_cities.json",
         "../habitation/low_gravity/README.md",
         "../habitation/low_gravity/movement.py",
-        "../habitation/low_gravity/results/low_gravity.json"
+        "../habitation/low_gravity/results/low_gravity.json",
+        "../habitation/crater_gardens/README.md",
+        "../habitation/crater_gardens/design.json",
+        "studies/crater_gardens/README.md",
+        "studies/crater_gardens/results/first_count.json",
+        "studies/crater_gardens/checks.json",
+        "studies/vacuum_crater_buildout/README.md",
+        "studies/vacuum_crater_buildout/results/buildout.json",
+        "../habitation/crater_gardens/buildout.json",
+        "studies/vacuum_crater_buildout/first_hundred.md",
+        "studies/vacuum_crater_buildout/results/first_hundred.json",
+        "studies/vacuum_crater_buildout/first_hundred_checks.json",
+        "studies/vacuum_crater_buildout/maintenance.md",
+        "studies/vacuum_crater_buildout/results/maintenance.json",
+        "studies/vacuum_crater_buildout/maintenance_checks.json",
+        "studies/lava_tube_cities/README.md",
+        "studies/lava_tube_cities/buildout.md",
+        "studies/lava_tube_cities/results/buildout.json",
+        "studies/lava_tube_cities/buildout_checks.md"
       ],
       "unresolved": [
         "supported floor area and mass",
@@ -973,9 +1119,55 @@
         "sky towns (studies/ways_of_living, climate/gcm/zonal_winds.md): a town drifting at 10 km meets the Sun every 15-23 days at the median and near the ground can hold the hour at 40-75 degrees from the late afternoon into the night; passive routes gather onto shared tracks; a streamlined 3 km hull holds a place for 0.089 kW a resident; a moored sphere's tether is 1.1% of its district's mass and a grounded conductor into the storms; open are town and hull designs, steering against the gathering, storm routing, gas-cell tightness (each percent a year lost costs 0.43 TW per billion aloft), rain at their height and rescue",
         "daily life by setting (studies/daily_life, 2026-10-09): clear-sky, mean-geometry light states for every ways-of-living setting, and the days drifting towns live by height and latitude from the design winds; open are cloud and libration by place, light at height, indoor lighting for the long night, children's eyes and growth at 0.16 g, and the artificial-gravity dose that keeps a body ready for Earth",
         "lava-tube cities as lasting places: daylight by heliostats and light guides, fans for air, membranes and pumps against the water table, quakes near young scarps; highland towers: wind-led frames with anchored windward legs from about 400 storeys, heat and daylight capping density (studies/land_cities)",
-        "low-gravity architecture (habitation/low_gravity, 2026-10-17): guards, stairs, handholds, ramps and halls for moving derived from the shared gravity, with the guard bands, the guard's form, the stairs, landings, ramps and halls as design choices for the author's review; open are human-factors tests in low gravity, the take-off speeds people use (the same leg work would carry jumps up to about twice the heights taken), the guard for young children beside long drops (2.8-3.9 m by the energy rule, or play kept back), children's jumps and grips, how far a tumbling body turns in a fall six times as long, and the two lower balustrades in the summit's ring 0 section"
+        "low-gravity architecture (habitation/low_gravity, 2026-10-17): guards, stairs, handholds, ramps and halls for moving derived from the shared gravity, with the guard bands, the guard's form, the stairs, landings, ramps and halls as design choices for the author's review; open are human-factors tests in low gravity, the take-off speeds people use (the same leg work would carry jumps up to about twice the heights taken), the guard for young children beside long drops (2.8-3.9 m by the energy rule, or play kept back), children's jumps and grips, how far a tumbling body turns in a fall six times as long, and the two lower balustrades in the summit's ring 0 section",
+        "Vacuum-to-open crater communities: local rim and foundation survey, conservation and wild-land allocation, one complete 238–336 m pressure enclosure with shielding and daylight, qualified material allowables and repair life, food and utility capacity, durable dry transport corridors, regional diversity and removal during atmospheric transition. The ranked sites and analytical service scenarios do not establish buildability or supported occupancy."
       ],
-      "next_session_task": "The branch merged in the joint integration of 2026-10-08, where its four studies were rerun with the corrected climate products, ring_equator and main's drainage and sunlight, and their READMEs and the metropolis brief brought to the new numbers (research/integration). Next, in an order for the author to choose (studies/infrastructure_review, section 7; research/plan.md): the crown as a lightning conductor (the joint synthesis's screen, atmosphere/electricity/tower.py, puts it past the upward leader's inception about a tenth of the time) and lightning protection for its berths; the chosen form's own programme for the crown's traffic and berths; the frame resized with a design gust that varies with height; the long-haul class and the crown's wind and wake; the sky boats' traffic system with storms and the night."
+      "next_session_task": "The branch merged in the joint integration of 2026-10-08, where its four studies were rerun with the corrected climate products, ring_equator and main's drainage and sunlight, and their READMEs and the metropolis brief brought to the new numbers (research/integration). Next, in an order for the author to choose (studies/infrastructure_review, section 7; research/plan.md): the crown as a lightning conductor (the joint synthesis's screen, atmosphere/electricity/tower.py, puts it past the upward leader's inception about a tenth of the time) and lightning protection for its berths; the chosen form's own programme for the crown's traffic and berths; the frame resized with a design gust that varies with height; the long-haul class and the crown's wind and wake; the sky boats' traffic system with storms and the night. For the crater programme, develop a complete 250–330 m single-community dome on measured terrain and route a regional group through future dry corridors, retaining the adopted domeless end state.",
+      "crater_gardens": {
+        "date": "2026-11-12",
+        "state": "first_catalogue_count_complete",
+        "branch": "domain/provisioning",
+        "catalogue": "LUC-GRAS200, version 1.0.0, 10,699,651 source records",
+        "selected_candidates": {
+          "200_300m_proportional_relief": 249677,
+          "300_500m_proportional_relief": 280486,
+          "500_1000m_depth_40_70m": 372128
+        },
+        "evidence": "Published detections and depth estimates under source-quality, coarse standing-water and regional climate cuts; architectural floor-space population scenarios.",
+        "open": "Local terrain and estate spacing, the lake level and water supply, foundations and access, heritage evaluation, and the vacuum-era pressure envelope. The initial 20,000–100,000-settlement comparison retains its assumed usable fraction.",
+        "smaller_crater_construction_phase_comparison": {
+          "proportional_relief_and_source_quality": 1480315,
+          "also_outside_projected_waters": 995649,
+          "also_passing_future_garden_climate": 530163,
+          "meaning": "The vacuum-era terrain comparison starts before the future water and rainfall cuts; the latter describe later Open Moon conditions. Enclosure engineering remains open."
+        }
+      },
+      "vacuum_crater_buildout": {
+        "programme_sites": {
+          "eventual": 222163,
+          "initial": 8886
+        },
+        "denominator": "All 8,886,558 catalogue craters 200–1,000 m across",
+        "initial_architecture": "One contiguous dome per 500–1,000-person community; remove after sustainable breathable conditions",
+        "result": "Both numerical quotas met under proxy ranking and circular estate separation; grouped initial floor-space population 6.27 million; site engineering and operational capacity open."
+      },
+      "first_hundred_crater_communities": {
+        "evidence": "Conditional quantities, future-price allowances and capacity schedule; no approved sites, qualified enclosure or forecast.",
+        "reference_residents_per_community": 500,
+        "communities": 100,
+        "reference_initial_funding_U": 128954694625.23969,
+        "reference_years_from_regional_mobilisation": 17.833333333333332,
+        "external_condition": "Advanced specialist supply, controlled volatile deliveries and firm power must be orderable; local establishment and qualification included in the assumed lead.",
+        "resource_condition": "Scientific/heritage clearance and site/element-specific future reserves precede extraction; local products/tails and imported stocks tracked separately."
+      },
+      "crater_town_maintenance": {
+        "evidence": "Conditional engineering service budgets using unchanged future U replacement prices and assumed asset lives. No demonstrated lunar failure rate, qualified dome lifetime, observed service labour requirement or household budget.",
+        "reference_residents": 500,
+        "reference_annual_funding_U": 35657481.054037526,
+        "recurring_cash_before_renewal_U": 17722188.45814635,
+        "renewal_fund_U": 17935292.595891178,
+        "scope": "Physical upkeep, stated operating services and major replacement provision, including regional operating share; household/social-service/debt costs separate."
+      }
     },
     {
       "topic": "engineering",
@@ -1105,7 +1297,7 @@
         "the hub architecture of report.md section 3 (industrial hub, lunar depots, heavy facilities on economical trajectories, Earth-Sun L1/L2 hubs): no design or budget yet",
         "solar-wind subsystem: a 1 kg/s budget needs one against the solar wind's charge exchange unless the ring fleet's wake shelters the inner exosphere (a sensitivity); at the design point's standard level, with the thermal column's infrared cooling (2026-10-08), the collisional and LTE cases need none for their exosphere and the warmest about 3e19 A m^2 at every maximum on record; the September moment (four 100 km regional loops, 1.5e21 A m^2, about 2e14 kg) keeps every titania case within 1 kg/s averaged over the solar cycle; the 2025 plasma-inflated Lunashield-L1 concept (23-40 t, unvalidated; known from a 2026-09-26 reconstruction in reference/historical/) is another candidate",
         "effects on Earth (report.md section 6): reflections toward Earth near full moon, and the screen crossing the full Moon and the Sun as seen from Earth",
-        "Active global fleet: 38.65 million prescribed 10 km tiles cost roughly 1480–1520 TW before added control mass and are rejected. Natural release of the same starting geometry loses coverage and intersects; ideal photon-force cancellation is only a cost component. Minimum-intervention repair, collision avoidance, return paths and their recurring total cost remain unmeasured.",
+        "Active global fleet: 38.65 million prescribed 10 km tiles cost roughly 1480\u20131520 TW before added control mass and are rejected. Natural release of the same starting geometry loses coverage and intersects; ideal photon-force cancellation is only a cost component. Minimum-intervention repair, collision avoidance, return paths and their recurring total cost remain unmeasured.",
         "Coverage-led pilot: 54 common-epoch sail-assisted families, 10 km tiles and 50 g/m2. The 17.29-million-tile result is a summed-area cell-capacity relaxation with unconverged phase/spatial sampling, not sufficient inventory. Individual placement, coupled mutual shadows, bounded attitude histories and measured recurring corrections remain open; conditional cost break-even is about 6 m/s per day with the specified additional-mass and peak-duty scenario.",
         "Natural local pattern: 361 separate 10 km tiles at 50 g/m2 retain sampled finite-Sun coverage of a moving 20 km window for six hours without electric translational thrust, with coupled mutual illumination and finite-square separation guards. The endpoint remains almost 3 km from the reference lattice. Shared pattern interfaces, acquisition, handover, coast/return, recovery, recurring impulse and attitude engineering remain unclosed; this does not establish global coverage or fleet inventory.",
         "Local return checkpoint: the 361-tile terminal-state search finds roughly 0.4 m/s endpoint-only proposals, but every solvable assignment has finite-square conflicts and an inherited coast-rate violation. Selected encounter cuts are infeasible in the conservative capped three-arc LP. A fully coupled uneclipsed prefix reaches 100 m clearance at 47.69 minutes after service, reproduced within 0.00990 m; the early beam and rate constraints still pass. Transition timing, intermediate depth/lane spacing and attitudes must be optimized together. Full return, two-pattern handover and recurring cost remain unexecuted.",
@@ -1115,7 +1307,7 @@
         "Starting-arrangement checkpoint: 12 km spacing between four depth levels (36 km total) retains 361 physical 10 km tiles, 8.5 km projected pitch and 50 g/m2 optics. Coupled six-hour service and six-hour departure, including a four-hour 90-degree turn, need no electric translation; all 2,166 independent burn coefficients remain zero. Tighter replay agrees within 8.99 m, calculated rigid-actuator cost is 0.757864 m/s versus 4.239825 m/s (82.13% lower), closest sampled physical surfaces are 1,760.43 m apart, and the conditional all-pair interval bound is 1,724.61 m. All 887 additional local ray probes pass. This is a local prefix, with unexecuted acquisition, return, repacking, handover, recovery, hardware-mass feedback and recurrence. Under the hypothetical two-day, 17.29-million-tile scenario, only 0.53987 m/s remains for those recurring obligations at 23.835 TW; that inventory is still a capacity relaxation. Per-tile optical inventory is retained, with about 6% more twelve-hour first interception than the previous passage, not a delivered-power result.",
         "Cycle-closure checkpoint: the same low-energy 361-tile service/departure survives 20% fixed hardware plus per-member return-power equipment, for mean total mass 1.25390 times the optical allocation. A complete tighter replay from the initial epoch preserves twelve hours with zero electric translation, 1,719.63 m closest sampled surface separation and a 1,683.84 m conditional interval bound. Twelve return/arrival proposals and three selected encounter corrections yield no accepted return. The hardware-state endpoint refit costs 1.85801 m/s in its restricted four-arc family. Coupled return reaches the 100 m surface-clearance floor at hour 13.893535, reproduced on the same pair within 0.6523 s and 9.04188 m. Mean translation already applied is 0.97590 m/s. This is a stopped clearance failure, not a simulated impact or general impossibility result. Structural layout, collection momentum, complete return, handover, recovery, recurrence and simultaneous full-target coverage remain open; see closure.md and its seven products for the executed energy and optical inventory. The mass-loaded twelve-hour passage uses 51.859 TJ; the return before the stop adds 67.479 TJ. Repeating that measured prefix every two days at the hypothetical 17.29-million inventory implies 33.07 TW before cycle completion. Frozen 60/75-degree in-plane rolls raise snapshot clearance to 719/766 m, with no executed transition or savings. All 891 additional local ray probes pass. Individual installed power meets the 25% margin on executed loads; grazing return collection retains a 3.14% source-quadrature discrepancy.",
         "Encounter-directed checkpoint: preserve the hardware-loaded twelve-hour passage. Three coupled return corrections fail. The local correction delays the physical 100 m stop to hour 15.390986 on pair 151/186; tighter replay differs by 10.5791 m and 0.05950 s. Its uncertainty-adjusted conditional clearance first falls below 100 m around hour 14.9589. Mean executed return translation is 1.57187 m/s, and 160 members exceed installed power. The completed -30-degree roll postpones failure to hour 14.155954; the +60-degree transition fails at hour 12.399292. New witnesses have projected centre separations below 10 km, so in-plane rotation at those centres cannot remove overlap. Measured local-correction prefix energy is 159.671 TJ, equivalent to 44.24 TW only under the unproven two-day/17.29-million scaling. The 586 TW source account is lunar-disk extra dimming; the selected held aperture has 32.7725 PW under the same combined band or about 218.982 PW under its broader annular allowance. No actual fleet duty, collection or delivered power is established. See return_repair.md and eleven source-bound products for tested failures, collection and hardware accounts, uncertainty and material sensitivities.",
-        "Electromagnetic checkpoint: measured nine-tile geometry and all-member loads favor independent Sun-tracking generation with short buffers (1.633 million kg added for nine central tiles) over complete microwave/laser hub supply (6.030/12.037 million kg under explicit extrapolations). Coils supply useful near-neighbor forces but have large changing torques/cross-talk; a static return allocation reduces modeled power about 10% after cooling, while tested departure states do not improve. A one-winding nine-tile installation adds 4.020 million kg before supply and deployment. Actual 14.9–15.2 thousand km lunar distance makes the existing anchored field a relevant torque input. Solar-wind pressure contours and BL are diagnostics, with no accepted plasma volume or radiation dose. Read electromagnetic.md and its two source-bound products; no new trajectory, recurrence or target relaxation is accepted.",
+        "Electromagnetic checkpoint: measured nine-tile geometry and all-member loads favor independent Sun-tracking generation with short buffers (1.633 million kg added for nine central tiles) over complete microwave/laser hub supply (6.030/12.037 million kg under explicit extrapolations). Coils supply useful near-neighbor forces but have large changing torques/cross-talk; a static return allocation reduces modeled power about 10% after cooling, while tested departure states do not improve. A one-winding nine-tile installation adds 4.020 million kg before supply and deployment. Actual 14.9\u201315.2 thousand km lunar distance makes the existing anchored field a relevant torque input. Solar-wind pressure contours and BL are diagnostics, with no accepted plasma volume or radiation dose. Read electromagnetic.md and its two source-bound products; no new trajectory, recurrence or target relaxation is accepted.",
         "Bounded 2026-10-05 comparison: regional 500-1000 km circuits strongly reduce screened mass at matched vacuum-field requirements; weaker moments fit four inherited cold-atmosphere loss cases but compress inside the exobase in storm screens. Actual ion transport, terrain/support, quench and current reserve remain open. Continuously held upstream sources fail near-array hardware closure and retain substantial propellant/wake penalties farther away. No primary architecture, new trajectory, target or loss budget is accepted; larger plasma campaigns await review.",
         "Joint departure/arrival checkpoint: twelve bounded proposals preserve the loaded first-service states and optical requirements, including earlier electric control, changed packing/assignment, staggered slots and grouped normals. A full 361-tile separated corridor returns at hour 45.77978 and completes six more hours of service on independent replay, with 900.28 m conditional clearance after numerical allowance and 26.76 m maximum position disagreement. It is an ideal-force diagnostic: 145 tiles exceed installed actuator power and the 1.53538 PJ executed sequence loses the low-energy departure gain (339.461 versus 51.859 TJ over the first twelve hours). The cheaper executed case fits actuator ratings but stops at 100 m at hour 12.75076. Optimistic local collectors and short buffers leave 27.067 TJ unserved in lunar eclipse; resized supply and actuator masses have not been replayed. Replacement shielding is needed from hour 6 to 45.77978. Next-service endpoint relative velocity differs by up to 0.23793 m/s, so no recurrence or handover is accepted. Read joint_cycle.md and its twelve source-bound products. Held comparison 238.35 TW and current target 23.835 TW remain unchanged; no failed-prefix or diagnostic fleet demand is claimed.",
         "Service-led natural-return checkpoint: broadened natural service dates to about 46, 92, 139 and 185 hours and freed endpoint states, burn timing and selected ray assignments under explicit energy and individual power limits. A slower six-hour departure turn preserves the loaded first service and twelve-hour zero-translation prefix at 36.186 TJ, 30.22% below 51.859 TJ, with 1,722.48 m minimum sampled clearance and a 374.01 m conditional all-pair bound after numerical allowance. Coupled replay still reaches 100 m at hour 13.799825 on pair 325/347, with strong formation compression. The cheap free-state ray proposal loses initial optical coverage and stops at hour 8.925115; omitted coupled force response produces about 5.31 km error. Two grouped sail pulses also fail reduced clearance. No new next service, return, actual generation/storage, handover, repetition or operating fleet cost is accepted. Longer cadences carry T/6 necessary inventory charges, not validated fleets. Read natural_return.md and sixteen source-bound products; two dynamic-ray rows are a documented duplicate, not distinct packings.",
@@ -1340,10 +1532,10 @@
         "decisions.md"
       ],
       "unresolved": [
-        "the seas' magnesium: the managed route leaves none, and a floor of 0.05–0.5 mmol/kg is studied on resources",
+        "the seas' magnesium: the managed route leaves none, and a floor of 0.05\u20130.5 mmol/kg is studied on resources",
         "the deep mixing's form, Osborn's rule against Shih and Bouffard's energetic regime, checked first in turbulence columns on climate",
-        "the floors' methane share, a bracket of 0.3–0.8 around 0.5, tied to the floors' make-up on ecology",
-        "the photosynthetic calcifiers' 354-hour night at about 30 °C"
+        "the floors' methane share, a bracket of 0.3\u20130.8 around 0.5, tied to the floors' make-up on ecology",
+        "the photosynthetic calcifiers' 354-hour night at about 30 \u00b0C"
       ],
       "next_session_task": "Nothing starts before the author's word; then the plan's order (studies/aquatic_biogeochemistry/plan.md): the seas' chemistry with magnesium kept on resources, the calcifiers and the floors on ecology, the mixing form's check on climate, then the harvests and the coupled study."
     },
@@ -1479,7 +1671,7 @@
     },
     {
       "topic": "monetary_system",
-      "condition": "capped_for_the_merge_2026_10_31; the_functions_any_arrangement_performs_and_four_currency_arrangements_of_the_present_day_family; verified_ledger_at_normalized_sizes",
+      "condition": "conditional_U_trade_transition_and_nine_portfolio_monetary_pressure; explicit_stock_transmission_and_reserve_funding; no_calibrated_inflation_or_floating_FX_forecast",
       "material": [
         "studies/monetary_system/README.md",
         "studies/monetary_system/institutions.md",
@@ -1489,17 +1681,556 @@
         "studies/monetary_system/inputs.json",
         "studies/monetary_system/sources.json",
         "studies/monetary_system/results/reference.json",
-        "studies/monetary_system/checks.json"
+        "studies/monetary_system/checks.json",
+        "studies/monetary_system/trade_transition.md",
+        "studies/monetary_system/trade_transition.py",
+        "studies/monetary_system/trade_transition_inputs.json",
+        "studies/monetary_system/trade_transition_sources.json",
+        "studies/monetary_system/results/trade_transition.json",
+        "studies/monetary_system/trade_transition_checks.md",
+        "studies/monetary_system/pressure.md",
+        "studies/monetary_system/pressure.py",
+        "studies/monetary_system/pressure_inputs.json",
+        "studies/monetary_system/pressure_sources.json",
+        "studies/monetary_system/results/pressure.json",
+        "studies/monetary_system/pressure_checks.md",
+        "studies/complex_returns/policy.md",
+        "studies/complex_returns/policy.py",
+        "studies/complex_returns/policy_inputs.json",
+        "studies/complex_returns/policy_sources.json",
+        "studies/complex_returns/results/policy.json",
+        "studies/complex_returns/policy_checks.md",
+        "studies/complex_returns/consolidated.md",
+        "studies/complex_returns/consolidated.py",
+        "studies/complex_returns/consolidated_inputs.json",
+        "studies/complex_returns/consolidated_sources.json",
+        "studies/complex_returns/results/consolidated.json",
+        "studies/complex_returns/consolidated_checks.md"
       ],
       "unresolved": [
         "The arrangement itself, its mandates, collective revenue and guarantees, chosen through the communities' collective decisions.",
         "Staged domestic supply, invoicing currencies, imports, debt ownership and maturities for a quantitative comparison.",
-        "Inflation, exchange rates, interest rates, credit demand and production responses."
+        "Inflation, exchange rates, interest rates, credit demand and production responses.",
+        "Single-currency or constituent-basket monetary constitution, admission/exit/default rules, domestic price objective, reserve ownership and funded contributions; actual invoice/payment currencies, liquidity access and balance holding periods.",
+        "Measured holding periods, spending propensities, supplier-currency exposures, constituent clearing, reserve commitments and engineering-constrained supply response; jointly endogenous currency prices, exports, credit and investment remain unmodeled.",
+        "Qualified receivables, payment-delay frequencies, voluntary local and outside term holdings, their redemption destination, supplier geography, facility and clearing agreements, undrawn commitment costs, and full monthly legacy-loan evolution. Rate-savings reinvestment and avoided-disruption value remain unestimated.",
+        "A qualified mature enclosed-economy design and funded route to the architectural cap; validated small-module costs, full supplier shadow prices, stakeholder contracts, value of avoided payment disruption and actual business/international demand for liquid U. Interest-saving reinvestment remains outside the fixed-path release assumption."
       ],
-      "next_session_task": "Merged in the fifth joint integration (c5aa9ac; research/integration/four-branches.md): settle follows its two context identities, the world economy's comparison and inputs, in place of its run in the order. The open items are the unresolved list's.",
+      "next_session_task": "Qualify the worldwide service and industrial demand assumptions and minimum productive module; develop a mature enclosed-economy configuration with a funded route to the cap, then connect measured social outcomes and payment risks to stakeholder returns.",
       "findings": [
         "Currency use, access to settlement and emergency lending, and the bearing of losses are separate functions; three worlds need not mean three currencies or three issuers.",
-        "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs."
+        "In the reference ledger a 20 L loan creates 20 L of deposits, a payment exposes a 12 L reserve shortfall that liquidity bridges, and an agreed debt cancellation after 15 U of physical loss takes the bank's capital from 10 to -5 U, which only a loss allocation repairs.",
+        "The U transition plan compares one U currency with a basket of participating U-related currencies. Earth currencies remain external trade currencies; partial reserve assets do not define the basket or establish an external peg. Proposed adoption stages distinguish U price setting, invoice denomination, settlement and retained balances.",
+        "Normalized dealer transactions keep U stock fixed at120 while exports100 and imports60 improve the zone external position by40 under three holding patterns. A separate reserve budget allocates investment and earned cash once; greater currency turnover or reserve assets are not added to financial returns.",
+        "Pinned nine-portfolio payment flows supply conditional transaction-balance comparisons at30/100/300/800years. The study does not infer adoption rates, U exchange rates, annual inflation or reserve adequacy from those flows.",
+        "Nine portfolios at four dates and three market levels yield 73 funded monetary-pressure experiments and 35 excluded failed paths. In the strong year-100 cases, neutral issuance, finite reserve funding and a total 5% supply shift give 1.02\u20132.46% higher domestic price levels over ten years; a 10% issuance shortfall drains 10.3\u201314.2% of modeled domestic transaction balances. These are conditional reference-quote calculations, not annual-rate forecasts.",
+        "Reserve contributions use released distributions and preserve original expansion orders, while reducing immediate investor payouts. Outside-demand reversals distinguish income contraction from unretired money balances; the U-related currency-basket interpretation requires coordinated liquidity and fixed internal reference conversions in this aggregate experiment.",
+        "The credit-supported financial comparison now models continuous loan and repayment paths, residual monetary accommodation, domestic and outside U holdings, separate reserve allocations, and funded deferral of intended local payouts. Its 0.5% annual rule limits growth in a positive price premium over the matched control, with a 5% cumulative guard; it is not an absolute CPI target.",
+        "A separate U-policy comparison holds external rates fixed, reprices only U-local loan portions and reruns wider voluntary capital-supplier acceptance. At strong year 100, 50 bp local rate relief gives 0\u2013138 million USD2041-equivalent borrower NPV saving, offset by lower bank gross income; wider acceptance adds 11.54 billion operating-minus-capital NPV in the computing portfolio while chiefly substituting funding in others.",
+        "A monthly receivables facility tests three-, six- and twelve-month collection delays at 30/100/300/800 years. Under strong demand, six-month payment survival rises from 8/9 to 9/9 at 100 years and from 0/9 to 6/9 at 800 years with 50% outside supplier acceptance, paid term absorption and emergency reserve access. These are conditional scenario counts, not default probabilities; foreign reserves and saving contracts carry most of the bridge.",
+        "The integrated returns synthesis reconciles original distributions, reserve funding, matched controllers, commercial U lending, wider supplier acceptance and an explicit owner-saving release rule. Across nine strong-demand portfolios at 100 years, sponsor cash NPV is 2.643\u20134.466 trillion USD2041-equivalent at 3%; finite-horizon real internal returns are 5.23\u20136.59%, and all portfolios remain negative at 7%.",
+        "Full purchaser-price and resident-service proxies give 3.475\u20135.122 trillion of socioeconomic net value at 100 years and 3%, after removing identified financial provisions and embedded resident payroll before opportunity costs. Halving both benefit proxies makes all strong cases negative. Middle cases require 30.7\u201379.7 billion of additional annual net benefit, separate from 55.9\u2013100.5 billion of annual sponsor cash needed to close their financial gap.",
+        "The latest strong paths support 16,500\u201325,700 residents of physical capacity at 100 years and 66,000\u2013406,000 at 800 years, with worldwide stakeholders and mostly service receipts. They remain below the 6.468-million enclosed architectural cap. Under preserved full-density replication and buyer assumptions, eight of nine strong cap-operation portfolios have 6.15\u201310.54 trillion annual deficits; the earlier manufacturing mix has a positive 2.83-trillion operating residual without a funded staged path to that cap."
+      ]
+    },
+    {
+      "topic": "initial_industrial_system",
+      "condition": "conditional_reconciled_production_trade_coproduct_and_growth_accounts_2026_11_12",
+      "material": [
+        "studies/initial_industrial_system/README.md",
+        "studies/initial_industrial_system/run.py",
+        "studies/initial_industrial_system/industrial_inputs.json",
+        "studies/initial_industrial_system/industrial_sources.json",
+        "studies/initial_industrial_system/results/industrial_system.json",
+        "studies/initial_industrial_system/test_run.py",
+        "studies/initial_industrial_system/checks.md",
+        "studies/initial_industrial_system/industrial_checks.json",
+        "studies/initial_industrial_system/plot.py",
+        "studies/initial_industrial_system/results/industrial_system.png",
+        "studies/initial_industrial_system/revenue.md",
+        "studies/initial_industrial_system/revenue.py",
+        "studies/initial_industrial_system/revenue_inputs.json",
+        "studies/initial_industrial_system/revenue_sources.json",
+        "studies/initial_industrial_system/results/revenue.json",
+        "studies/initial_industrial_system/resource_inventory.py",
+        "studies/initial_industrial_system/results/resource_inventory.json",
+        "studies/initial_industrial_system/test_revenue.py",
+        "studies/initial_industrial_system/revenue_checks.md",
+        "studies/initial_industrial_system/revenue_checks.json",
+        "studies/initial_industrial_system/plot_revenue.py",
+        "studies/initial_industrial_system/results/revenue.png",
+        "studies/initial_industrial_system/economy.md",
+        "studies/initial_industrial_system/economy.py",
+        "studies/initial_industrial_system/evolution.py",
+        "studies/initial_industrial_system/economy_inputs.json",
+        "studies/initial_industrial_system/economy_sources.json",
+        "studies/initial_industrial_system/economy_review.md",
+        "studies/initial_industrial_system/economy_checks.md",
+        "studies/initial_industrial_system/test_economy.py",
+        "studies/initial_industrial_system/plot_economy.py",
+        "studies/initial_industrial_system/results/economy.json",
+        "studies/initial_industrial_system/results/economy.png",
+        "studies/initial_industrial_system/results/economy.pdf"
+      ],
+      "findings": [
+        "At the 2041 automation scenario and 3% inflation for fifteen years, reference industrial establishment is 16.2 trillion USD2041 and the industrial/material campaign 51.4 trillion; annual sustaining supply is 1.41 trillion with growth capacity retained.",
+        "Local cargo-fleet fabrication lowers establishment to 10.8 trillion USD2041 and the campaign to 37.4 trillion under additional source-metal and manufacturing assumptions.",
+        "The original 25,550 Earth launches/year is conditional on Earth-supplied transfer propellant; 66.9% of launch mass is that propellant. The transport extension compares depot refuelling, space-supplied fuel and electric freight with their coupled hardware and renewal costs; no minimum cadence is established.",
+        "The matched procurement basket gives about 68 USD2041/U; materially different component ratios prevent blanket conversion of earlier settlement U accounts.",
+        "The illustrative local-tug-structure, space-fuelled reference portfolio earns 56.65 billion USD2041/year, with a 46.36 billion operating external cash deficit and a 683.79 billion deficit after external renewal and a resource provision; debt remains separate. Earth-delivered goods, their extra propulsion, capsules, entry, recovery and renewal are included.",
+        "A proposed 30 USD2041/U normalization follows scoped destination-service and original pressure-procurement price comparisons; it is not an adopted currency peg or a universal conversion of old U accounts.",
+        "The reference source flow is 189 million tonnes of feed per year: a specified usable 100-billion-tonne pool would last 528 years. The JPL snapshot has 43,050 objects but only 1,246 catalogue diameters; its assumed-density volumes establish no permitted reserve or exhaustion date.",
+        "The earlier revenue portfolio is a prescribed external-cash stress test, not a domestic-output or maximum-revenue estimate. The new supply-use account reconciles gross output, value added, imports, exports and investment; prices remain explicit conventions.",
+        "At the local-structure no-growth point, 133.27 million tonnes/year of feed contains 6.39 million tonnes/year of additional recoverable metal potential; existing spare refinement is about 226,000 tonnes/year. Refined stock is domestic investment; carbon, nutrient and trace-metal screens retain qualification and valuation limits.",
+        "Retained plant supports initial starts for about 7,699 additional residents/year with proportionate industry, falling to about 2,806 alongside the larger tested export portfolio. Growth consumes existing capacity; new equipment enters after two years. No demographic rate, new tube count or terraforming date is adopted."
+      ],
+      "unresolved": [
+        "Qualified ordinary-body inventories and actual trajectories; lunar and source metallurgy, reusable pressure/cryogenic hardware, autonomous maintenance and power-beam qualification.",
+        "Water recovery, Earth launch capacity and environmental effects, source conservation and nutrient reservations, plume transport and future atmospheric transition.",
+        "A unified settlement dollar budget that reprices living services and credits matching supplier purchases; full critical-path and occupation schedule.",
+        "Surveyed source composition, actual routes, protected extraction fractions and long-term inventories; constant vacuum-period flows do not establish million-year sustainability.",
+        "Qualify the modular component lives and cost density, product-specific demand, nutrient/trace-metal recovery and discrete fleet retirement. Conditional high-value trade surpluses require both the tested sales volume and price."
+      ],
+      "next_session_task": "Qualify products, modular components, sources and customer demand; fund the commissioning and import requirements; resolve site distribution and monetary policy.",
+      "transport_comparison": {
+        "path": "studies/initial_industrial_system/transport.md",
+        "product": "studies/initial_industrial_system/results/transport.json",
+        "state": "conditional comparisons; no architecture adopted",
+        "next": "Trajectory and propulsion qualification, manufacturing localization, water recovery and fleet retirement; revenue and resource comparisons are now recorded separately, without adopting a route."
+      },
+      "revenue_comparison": {
+        "path": "studies/initial_industrial_system/revenue.md",
+        "product": "studies/initial_industrial_system/results/revenue.json",
+        "state": "conditional post-occupation portfolios in 2041 dollars; no sustainable business, currency peg or reserve established",
+        "net_definition": "operating external cash balance, then external renewal and resource provision; debt separate; internal transactions cancel"
+      },
+      "economy_comparison": {
+        "path": "studies/initial_industrial_system/economy.md",
+        "product": "studies/initial_industrial_system/results/economy.json",
+        "state": "Conditional reconciled domestic/trade accounts, joint co-product recovery and capacity-supported growth; no architecture, market forecast or currency peg adopted",
+        "boundary": "All off-Earth production included; internal transfers cancel externally, while useful inventories and growth enter domestic capital formation",
+        "growth": "Derive construction from capacity; retain the 2.5% eventual crater quota and the separate initial vacuum quota; no uncounted tube expansion",
+        "next": "Qualify products, modular components, sources and customer demand; fund the commissioning and import requirements; resolve site distribution and monetary policy."
+      }
+    },
+    {
+      "topic": "enclosed_engineering_feasibility",
+      "condition": "bounded engineering study with a fifteen-year development allowance; nine portfolios and all 93 physical cases retained; numerical capacity passes remain separate from integrated qualification",
+      "material": [
+        "studies/enclosed_feasibility/README.md",
+        "studies/enclosed_feasibility/feasibility.py",
+        "studies/enclosed_feasibility/feasibility_inputs.json",
+        "studies/enclosed_feasibility/feasibility_sources.json",
+        "studies/enclosed_feasibility/results/feasibility.json",
+        "studies/enclosed_feasibility/checks.md"
+      ],
+      "boundary": "The planned off-Earth economic zone served by U before Open Moon, habitat array or outer-system development; U remains the general economic unit.",
+      "next": "Qualify the dated initial deployment, source-to-depot routes, local and beamed power alternatives at real sites, pressure enclosures, biological services and repaired equipment life; propagate measured coefficients and explicit stresses through the coupled physical and financial producers."
+    },
+    {
+      "topic": "enclosed_surface_power",
+      "condition": "conditional local-versus-beamed comparison; six architectures, three technology bundles, delivery and localization sensitivities; power selection reopened without changing the inherited physical or financial baseline",
+      "material": [
+        "../provisioning/enclosed_power/README.md",
+        "../provisioning/enclosed_power/model.py",
+        "../provisioning/enclosed_power/enclosed_power_inputs.json",
+        "../provisioning/enclosed_power/enclosed_power_sources.json",
+        "../provisioning/enclosed_power/results/power_comparison.json",
+        "../provisioning/enclosed_power/checks.md"
+      ],
+      "boundary": "Lunar surface electrical service in the enclosed off-Earth programme served by U. No atmospheric heating penalty, shield credit or habitat array; remote sources and depots retain separate supplies.",
+      "finding": "Local fission has the lowest cost under middle assumptions; solar thermal storage can compete under development targets; beam utilization, reactor mass and the import burden of long-night storage determine crossovers. Neither technology bundles nor future prices are probability distributions or qualified hardware.",
+      "next": "Qualify actual sites, complete plants and commissioning sequences; allocate existing development expenditure once; recouple chosen generating and storage cohorts, freight, maintenance and load scheduling into the industrial and financial producers."
+    },
+    {
+      "topic": "cultural_economics_sport",
+      "condition": "conditional_multi_competition_and_fan_support_accounts; no_demand_forecast_or_qualified_programme",
+      "material": [
+        "../humanities/economics/README.md",
+        "../humanities/economics/sports.md",
+        "../humanities/economics/sports_inputs.json",
+        "../humanities/economics/sports_sources.json",
+        "../humanities/economics/results/sports.json",
+        "../humanities/economics/checks.json",
+        "../humanities/economics/buildout.py",
+        "../humanities/economics/buildout_inputs.json",
+        "../humanities/economics/results/buildout.json"
+      ],
+      "findings": [
+        "Fan-support scales of 10, 100 and 500 million imply 75 million, 750 million and 3.75 billion U of annual exports at assumed average net receipts of 7.5 U per fan; gifts and investment are separately recorded.",
+        "Four competitions with eight organizations each register 256 athletes, including 224 visitors. Seventy-two resident workers, two venues and 200 guest beds fit the modeled annual and block allowances. Eighty million distinct fans, after overlap, yield 600 million U annual exports and 149.647 million U cash before debt under the stated costs.",
+        "The small resident league has 25.1 million U annual revenue and 11.46 million U direct gross value added at one million paid equivalents, but only 0.496 million U cash before debt. Its 20-million-U debt assumption is not supported at the stated coverage.",
+        "Quick build-out screen: 302-517 million U gross uses for the full sports circuit; 359-679 million U for the combined entertainment programme, including sports. Includes development effort, pilots, asset contingency, 6-12 months of no-receipt support and alternative paid-promotion shares. No peak funding schedule or engineering quotation is established.",
+        "Existing tourism studies budget hospitality and visitor facilities. These cultural accounts accommodate visiting workers but exclude paying spectators, their purchases and any additional hotel capacity; shared costs and package receipts must be reconciled before combination."
+      ],
+      "unresolved": [
+        "Sport selection, physical qualification and the complete visiting-team schedule.",
+        "Paid conversion, retention, rights yield, fan support and buyer commitments.",
+        "Transport quotations and capacity, host services, imported content, staffing and capital requirements.",
+        "Rights and club governance, ownership and integration within the existing planetary accounts.",
+        "Replace inherited facility allowances with engineering quotations; measure development effort and organic versus paid audience acquisition; time costs and early receipts to determine peak outside funding.",
+        "Estimate event-induced spectator trips, lengths of stay, spending and hospitality expansion against shared beds, seating, transport and host capacity, net of displaced tourism."
+      ],
+      "next_session_task": "Test sport and audience propositions, cost the visiting circuit against qualified host and transport services, and use measured cohorts to replace hypothetical commercial parameters."
+    },
+    {
+      "topic": "cultural_economics_entertainment",
+      "condition": "conditional_portfolio_with_shared_audiences_and_facilities; commercial_and_physical_validation_open",
+      "material": [
+        "../humanities/economics/entertainment.md",
+        "../humanities/economics/entertainment.py",
+        "../humanities/economics/entertainment_inputs.json",
+        "../humanities/economics/entertainment_sources.json",
+        "../humanities/economics/results/entertainment.json",
+        "../humanities/economics/checks.json",
+        "../humanities/economics/buildout.py",
+        "../humanities/economics/buildout_inputs.json",
+        "../humanities/economics/results/buildout.json"
+      ],
+      "findings": [
+        "A worked portfolio contains 140 million unique fans and 200 million genre memberships; one bundle is counted once, producing 1.202 billion U of annual exports, 602 million U above the pinned sports circuit.",
+        "The programme has 104 resident workers and 592 annual visitor arrivals, using 30,912 guest-nights and 4,552 of 4,800 arena hours. Capacity screens are conditional, not a qualified timetable.",
+        "Expanded annual cash before debt is 336.069 million U. Extra programmes with the same audience and viewing price reduce cash by 6.778 million U; audience breadth alone does not guarantee incremental profit.",
+        "Quick build-out screen: 302-517 million U gross uses for the full sports circuit; 359-679 million U for the combined entertainment programme, including sports. Includes development effort, pilots, asset contingency, 6-12 months of no-receipt support and alternative paid-promotion shares. No peak funding schedule or engineering quotation is established.",
+        "Existing tourism studies budget hospitality and visitor facilities. These cultural accounts accommodate visiting workers but exclude paying spectators, their purchases and any additional hotel capacity; shared costs and package receipts must be reconciled before combination."
+      ],
+      "unresolved": [
+        "Measured cross-genre audience overlap, willingness to pay, retention and customer acquisition.",
+        "Programme quality, participation agreements, production costs and crew/venue schedules.",
+        "Host and travel qualification, upfront audience acquisition and a dated funding plan.",
+        "Actual rights, employment and ownership arrangements and integration with territorial accounts.",
+        "Replace inherited facility allowances with engineering quotations; measure development effort and organic versus paid audience acquisition; time costs and early receipts to determine peak outside funding.",
+        "Estimate event-induced spectator trips, lengths of stay, spending and hospitality expansion against shared beds, seating, transport and host capacity, net of displaced tourism."
+      ],
+      "next_session_task": "Test distinct programme and bundle propositions with paying cohorts, measure production requirements, and replace conditional inputs with observed demand and qualified costs."
+    },
+    {
+      "topic": "founding_complex_socioeconomic_returns",
+      "condition": "conditional_integrated_returns_with_U_financing_and_resilience; preserved_provisioning_baseline; no_qualified_market_or_global_welfare_forecast",
+      "material": [
+        "studies/complex_returns/README.md",
+        "studies/complex_returns/run.py",
+        "studies/complex_returns/returns_inputs.json",
+        "studies/complex_returns/returns_sources.json",
+        "studies/complex_returns/results/returns.json",
+        "studies/complex_returns/checks.md",
+        "studies/complex_returns/staged.md",
+        "studies/complex_returns/staged.py",
+        "studies/complex_returns/staged_inputs.json",
+        "studies/complex_returns/staged_sources.json",
+        "studies/complex_returns/results/staged.json",
+        "studies/complex_returns/strategies.md",
+        "studies/complex_returns/strategies.py",
+        "studies/complex_returns/strategy_inputs.json",
+        "studies/complex_returns/strategy_sources.json",
+        "studies/complex_returns/inputs/strategy_profiles.json",
+        "studies/complex_returns/results/strategies.json",
+        "studies/complex_returns/provenance/export_profiles.py",
+        "studies/complex_returns/prices.md",
+        "studies/complex_returns/prices.py",
+        "studies/complex_returns/prices_inputs.json",
+        "studies/complex_returns/prices_sources.json",
+        "studies/complex_returns/results/prices.json",
+        "studies/complex_returns/credit.md",
+        "studies/complex_returns/credit.py",
+        "studies/complex_returns/credit_inputs.json",
+        "studies/complex_returns/credit_sources.json",
+        "studies/complex_returns/results/credit.json",
+        "studies/complex_returns/credit_checks.md",
+        "studies/complex_returns/policy.md",
+        "studies/complex_returns/policy.py",
+        "studies/complex_returns/policy_inputs.json",
+        "studies/complex_returns/policy_sources.json",
+        "studies/complex_returns/results/policy.json",
+        "studies/complex_returns/policy_checks.md",
+        "studies/complex_returns/consolidated.md",
+        "studies/complex_returns/consolidated.py",
+        "studies/complex_returns/consolidated_inputs.json",
+        "studies/complex_returns/consolidated_sources.json",
+        "studies/complex_returns/results/consolidated.json",
+        "studies/complex_returns/consolidated_checks.md"
+      ],
+      "findings": [
+        "The matched current provisioning context is 14.501 trillion USD2041 for establishment and 41.892 trillion for the campaign, plus separately costed commercial commissioning. Earlier 16.211/10.790-trillion establishment comparisons are distinct architectures.",
+        "The larger tested export portfolio has a 136.562-billion-USD2041 annual external residual. With 33 uniform construction draws and 100 operating years, its 3% funding NPV is -25.639 trillion; the commercial upgrade versus continuing the already funded modest programme has +7.088 trillion incremental NPV over 30 operating years. Neither result is an investor entitlement or complete welfare value.",
+        "Slow 0.5%/1% growth paths respect the larger-export initial capacity ceiling, taper to the enclosed 6.468-million architectural reference and sustain its stock. Demand is separate; eight-century outcomes remain conditional extensions.",
+        "Stakeholder appraisal includes Earth-based investors, funders, customers, researchers, workers and affected communities as well as residents. Purchase-value socioeconomic sensitivity and required net-benefit thresholds retain unresolved counterfactual and nonmarket valuation.",
+        "Staged cash model reconciles the 41.892-trillion campaign into 17.171 trillion of one-time establishment/material deliveries and 24.721 trillion of legacy recurring support, then replaces the latter with dated operations. Commercial commissioning remains additional.",
+        "A conditional 2.789-trillion-USD2041 seed opens a five-percent module after eight years. New capital orders use only earned cash after costs, losses and reserves. The limited service market fails in year19; global and breakthrough demand sustain expansion, with undiscounted seed recovery in years152 and24.",
+        "At 100 elapsed years and 3% real, global-service capital-recovery NPV is -2.208 trillion USD2041 and breakthrough is +2.947 trillion. Worldwide audiences are independent of resident population; new-service revenues replace overlapping baseline channels. Small-module design, institutional contracts and service capacity remain unqualified.",
+        "Integrated export comparison uses nine alternative portfolios with three worldwide-service markets. Frozen joint provisioning responses enforce shared production and commercial-asset replication; combining individual maxima exceeds source heat capacity by78.2%.",
+        "At100elapsedyears and3%real, strong-service propellant/logistics gives+4.599trillionUSD2041 capital-recovery NPV, services/domestic support+3.781trillion and diversification+3.320trillion. All middle-market100yearNPVs are negative. Positive combined returns do not prove profitable commodity exports.",
+        "Premium recipes retain development, rejected-batch and qualification costs. Computing, research, mission fuel/support and cultural products share explicit capacity and buyer limits; internal use and inventory generate no duplicated sales. Sustained-cap operation is tested separately from cash-constrained paths.",
+        "U retains its established meaning as the general economic unit serving the currently planned off-Earth zone before the Open Moon, planetary array and subsequent outer Solar System buildout. Conditional price experiments use actual distributions and investment commitments, not gross exports or capacity-headroom percentages. They preserve fixed-price financial paths and report level comparisons rather than annual inflation forecasts.",
+        "Six financing arrangements across nine portfolios, three markets and four horizons produce 648 financial records. Under strong demand, commercial mixed credit adds 7.3\u201322.8 billion USD2041 of 100-year operating-minus-capital NPV in six portfolios; three take no additional credit. The low-price-pressure policy also schedules investment and defers some intended local payout spending.",
+        "Negotiated supplier-U term claims can finance identified external capital purchases. In the diversified strong case, about 21.4 billion USD2041-equivalent of supplier claims replaces other external finance with the productive outcome unchanged. Claims remain outside domestic circulation and match loan terms; supplier acceptance and intermediation costs remain unqualified.",
+        "Middle-demand credit programmes can reduce portfolio returns despite affordable debt service. Concessional development finance can add capacity while imposing explicit financing costs. The original financial products remain intact; matched-controller differences are recorded separately.",
+        "A separate U-policy comparison holds external rates fixed, reprices only U-local loan portions and reruns wider voluntary capital-supplier acceptance. At strong year 100, 50 bp local rate relief gives 0\u2013138 million USD2041-equivalent borrower NPV saving, offset by lower bank gross income; wider acceptance adds 11.54 billion operating-minus-capital NPV in the computing portfolio while chiefly substituting funding in others.",
+        "A monthly receivables facility tests three-, six- and twelve-month collection delays at 30/100/300/800 years. Under strong demand, six-month payment survival rises from 8/9 to 9/9 at 100 years and from 0/9 to 6/9 at 800 years with 50% outside supplier acceptance, paid term absorption and emergency reserve access. These are conditional scenario counts, not default probabilities; foreign reserves and saving contracts carry most of the bridge.",
+        "The integrated returns synthesis reconciles original distributions, reserve funding, matched controllers, commercial U lending, wider supplier acceptance and an explicit owner-saving release rule. Across nine strong-demand portfolios at 100 years, sponsor cash NPV is 2.643\u20134.466 trillion USD2041-equivalent at 3%; finite-horizon real internal returns are 5.23\u20136.59%, and all portfolios remain negative at 7%.",
+        "Full purchaser-price and resident-service proxies give 3.475\u20135.122 trillion of socioeconomic net value at 100 years and 3%, after removing identified financial provisions and embedded resident payroll before opportunity costs. Halving both benefit proxies makes all strong cases negative. Middle cases require 30.7\u201379.7 billion of additional annual net benefit, separate from 55.9\u2013100.5 billion of annual sponsor cash needed to close their financial gap.",
+        "The latest strong paths support 16,500\u201325,700 residents of physical capacity at 100 years and 66,000\u2013406,000 at 800 years, with worldwide stakeholders and mostly service receipts. They remain below the 6.468-million enclosed architectural cap. Under preserved full-density replication and buyer assumptions, eight of nine strong cap-operation portfolios have 6.15\u201310.54 trillion annual deficits; the earlier manufacturing mix has a positive 2.83-trillion operating residual without a funded staged path to that cap."
+      ],
+      "unresolved": [
+        "Unified dated campaign budget and retained civil/service costs; component cohort renewal and source permissions.",
+        "Demand, product qualification, capital claims and benefit distribution; counterfactual Earth production and full opportunity costs.",
+        "Measured research, customer and public benefits and environmental or heritage losses; no generic multiplier or perpetuity credited.",
+        "Engineering-qualified minimum productive module and common cost floor; dated startup carrying costs, service staff-hours/power/communications, rights, paid retention and acquisition. Staging is a conditional policy, not an optimized or probabilistic real-option valuation.",
+        "Raw-resource production design, buyer-qualified lunar advantages, empirical orders and actual synergy effects; exact service installation schedules and an optimized portfolio/growth policy.",
+        "Observed domestic expenditure baskets and supplier geography, incremental local spending, construction disbursement, current-U expenditure/credit dynamics and engineering-constrained supply response; price feedback into finance and production remains unmodeled.",
+        "Qualified borrower and supplier-U contracts, reconciled local capital cash costs, bank fees and resolution; measured consumer prices, saving and constituent clearing. Source-valued costs do not respond endogenously to the pressure index.",
+        "Qualified receivables, payment-delay frequencies, voluntary local and outside term holdings, their redemption destination, supplier geography, facility and clearing agreements, undrawn commitment costs, and full monthly legacy-loan evolution. Rate-savings reinvestment and avoided-disruption value remain unestimated.",
+        "A qualified mature enclosed-economy design and funded route to the architectural cap; validated small-module costs, full supplier shadow prices, stakeholder contracts, value of avoided payment disruption and actual business/international demand for liquid U. Interest-saving reinvestment remains outside the fixed-path release assumption."
+      ],
+      "next_session_task": "Qualify the worldwide service and industrial demand assumptions and minimum productive module; develop a mature enclosed-economy configuration with a funded route to the cap, then connect measured social outcomes and payment risks to stakeholder returns."
+    },
+    {
+      "topic": "enclosed_buildout_year200",
+      "condition": "proportional_model_withdrawn; replacement_available_in_owning_domains",
+      "material": [
+        "studies/vacuum_buildout/README.md",
+        "studies/enclosed_returns/README.md"
+      ],
+      "findings": [
+        "The proportional year-200 model remains withdrawn. Its historical costs and financing requirements are not estimates of the revised expansion.",
+        "The replacement uses actual dated work and component stocks in provisioning, finite inventory conditions in resources, and a separate financial consumer."
+      ],
+      "unresolved": [
+        "Qualified source access, dated deployment, staffing performance and investment commitments remain unestablished."
+      ],
+      "next_session_task": "Use the replacement domain products and stratified economic account to assess feasible industrial schedules; retain the proportional-model withdrawal."
+    },
+    {
+      "topic": "enclosed_industrial_returns",
+      "condition": "revised_conditional_financial_and_socioeconomic_appraisal_with_recovery_refurbishment_and_source_distributions; source_and_deployment_unqualified",
+      "material": [
+        "studies/enclosed_returns/README.md",
+        "studies/enclosed_returns/results/returns.json",
+        "studies/enclosed_returns/checks.md",
+        "studies/enclosed_returns/bottlenecks.md",
+        "studies/enclosed_returns/results/bottlenecks.json",
+        "studies/enclosed_returns/bottleneck_checks.md",
+        "studies/enclosed_returns/revised.md",
+        "studies/enclosed_returns/revised_inputs.json",
+        "studies/enclosed_returns/results/revised.json.gz",
+        "studies/enclosed_returns/results/revised_flows.json.gz",
+        "studies/enclosed_returns/revised_checks.md",
+        "studies/enclosed_returns/earth_purchases.md",
+        "studies/enclosed_returns/earth_purchases_inputs.json",
+        "studies/enclosed_returns/results/earth_purchases.json.gz",
+        "studies/enclosed_returns/earth_purchases_checks.md"
+      ],
+      "source_commits": {
+        "provisioning": "a8af87614e9c30b6fa4879440765f7e74fe094be",
+        "resources": "1d652941"
+      },
+      "findings": [
+        "The prior 81 primary financial cases reproduce exactly across three financing modes and three horizons. The revised physical product supplies 81 passing combined-recovery cases, six passing poorer-source cases and four of six passing faster-rollout cases.",
+        "At breakthrough demand and 0.5 percent real growth, three portfolios fund the prescribed build without further equity and four have positive year-200 operating cash. At 1 percent growth, all nine labels fund construction and retain positive operation through year 220.",
+        "The propellant/reference annual year-200 operating balance changes from a 0.38 trillion deficit to a 0.75 trillion surplus; funder NPV at 3 percent real rises from 5.91 to 8.79 trillion USD2041.",
+        "Recovery/refurbishment plus feasible faster propellant rollout at 1 percent demand growth gives 507.91 trillion USD2041 of cumulative year-200 payouts and 23.16 trillion funder NPV, against 4.17 trillion of modeled initial funding. Both faster diversified cases fail workforce from year 24.",
+        "Broader population distributions support substantially larger material potential. Qualified grades and routes remain separate; poorer sources raise opening funding to about 11 trillion USD2041 for the tested portfolios.",
+        "Nine of 81 primary cases draw U credit; maximum cumulative draw is 1.026 billion USD2041 through year 200, with no relative-price breach. A six-month invoice interruption with only 25 percent of cash accessible passes 6 of 54 dated cases without credit and 18 with the assumed bridge.",
+        "Permanent late sales losses can require large new funding while barely changing year-zero NPV. Ownership, productive assets, monetary stocks and net external claims are evaluated in the revised wealth companion.",
+        "Existing orders reconcile to cumulative external purchases at years 100 and 200. The breakthrough diversified case sells 5.52 million tonnes of Earth goods by year 100 and 191-274 million tonnes by year 200 at 0.5-1 percent real demand growth, with separate in-space propellant sales. Individual precious-metal and rare-earth sales remain unallocated within generic products."
+      ],
+      "diagnostic_source_commits": {
+        "provisioning": "a6df1bec78ad533f8868ef40a7df81906a3baa38",
+        "resources": "0d4aee389de1bbe46f6d78ff7dfca7fa50301a89"
+      },
+      "unresolved": [
+        "Qualified selective sources and delivery routes; full deployment costs; demonstrated repair lifetime and loss coefficients; commercial commitments and margins; complete nutrient/carbon closure; workforce-feasible diversified acceleration; funded treasury and ownership arrangements."
+      ],
+      "next_session_task": "Integrate the revised return, physical-resource and ownership products while preserving distinct evidence states; prioritize source selection, repair qualification and early commercial rollout.",
+      "baseline_source_commits": {
+        "provisioning": "3e04591148223b079ecd255416555b8d4a4d4f7e",
+        "resources": "38cd446f361f19ff732e8f511ee87104dd51a083"
+      }
+    },
+    {
+      "topic": "enclosed_product_allocation",
+      "condition": "conditional_product_and_processing_location_screen; no_global_optimum_or_new_export_receipts",
+      "material": [
+        "studies/product_allocation/README.md",
+        "studies/product_allocation/allocation_inputs.json",
+        "studies/product_allocation/market_benchmarks.json",
+        "studies/product_allocation/allocation_sources.json",
+        "studies/product_allocation/results/allocation.json",
+        "studies/product_allocation/checks.md"
+      ],
+      "source_commits": {
+        "resources": "84886850",
+        "provisioning": "adeaa8ea",
+        "humanities": "a63cd71b"
+      },
+      "findings": [
+        "Product routes favor local bulk materials and repair, compact specialty exports, Earth finishing where it reduces freight or improves recovery, and specific orbital manufacturing pilots. Lunar partial gravity and microgravity have distinct process evidence.",
+        "The inherited 150 USD2026/kg Earth-handling floor excludes ordinary aluminium, nickel, cobalt, titanium and NdPr-oxide exports at the admitted 2025 product benchmarks. Cheaper return routes are separate sensitivities, not adopted replacements.",
+        "For 10 percent platinum concentrate at equal 95 percent refining recovery, freight savings support at most 136 or 453 USD2026/kg concentrate of extra off-Earth treatment at 150 or 500 USD2026/kg return. Reducing off-Earth recovery to 90 percent can reverse the choice.",
+        "Existing assay and process scenarios produce annual specialty output large relative to some present markets even at 1 percent treatment of year-200 feed. This is a market-scale diagnostic, not a permanent demand ceiling."
+      ],
+      "unresolved": [
+        "Product-specific domestic requirements and future-stock allocations; assayed mineral forms and complete recoveries; priced plants, utilization and commissioning; joint power, heat, workers, reagents and freight capacity.",
+        "Buyer quantities, quality, market substitution and price-volume paths; qualified Earth refining and final-product offers; incremental export targets without double counting existing generic invoices."
+      ],
+      "next_session_task": "Develop named production chains and buyer tranches for local materials and repair, joint precious/specialty recovery, domestic magnet/alloy inputs and orbital fibre/crystal pilots; couple their measured costs and product recipes into the dated allocation and return models."
+    },
+    {
+      "topic": "monetary_wealth",
+      "condition": "conditional_annual_counterparty_balance_sheets_and_ownership_scenarios; no_nominal_U_exchange_rate_or_complete_asset_valuation",
+      "material": [
+        "studies/monetary_wealth/README.md",
+        "studies/monetary_wealth/wealth_inputs.json",
+        "studies/monetary_wealth/results/wealth.json.gz",
+        "studies/monetary_wealth/checks.md",
+        "studies/monetary_wealth/revised.md",
+        "studies/monetary_wealth/revised_inputs.json",
+        "studies/monetary_wealth/results/revised.json.gz"
+      ],
+      "source_commits": {
+        "provisioning_asset_export": "a8af87614e9c30b6fa4879440765f7e74fe094be",
+        "resources_source_potential": "1d652941"
+      },
+      "findings": [
+        "Fifty-four revised annual paths retain nine portfolios, two breakthrough-demand growth rates and three ownership arrangements, with 270 matched checkpoints at years 0, 32, 100, 200 and 220. The previous 54 paths reproduce exactly under unchanged accounting rules.",
+        "The primary strong propellant case has 415.568 trillion USD2041 of cumulative year-200 payouts and 33.023 trillion of included real assets, compared with 347.655 and 38.914 trillion in the previous baseline.",
+        "At 15 percent payroll saving, included local year-200 wealth is 0.525 trillion USD2041 under outside ownership, 0.908 trillion under paid purchases, and 329.780 trillion under negotiated 75 percent community ownership with retained distributions. Outside payouts in the negotiated case total 127.503 trillion, with 5.98 percent real cash IRR.",
+        "The transaction-money equivalents for those ownership arrangements are 14.777, 14.648 and 26.300 trillion USD2041. These are liquid claims, not nominal U faces or net wealth.",
+        "The paid-purchase outcome falls from 1.056 trillion of local book wealth despite better programme cash: the conditional share quote rises while the required replacement-cost asset stock falls. Avoided purchases and refurbished cores are not counted as duplicate assets."
+      ],
+      "unresolved": [
+        "Qualified assets and source supply; intangible capital and inventories; household income and saving evidence; negotiated economic and voting rights; funded public spending; jointly endogenous money demand, exchange rates and lending."
+      ],
+      "next_session_task": "Integrate the revised ownership and currency balances with the return comparison; keep valuation, saving, distribution policy and economic/voting rights explicit.",
+      "baseline_source_commits": {
+        "provisioning_asset_export": "c9e37d59803ec568e41111b857f76d7bf5741e05",
+        "resources_source_access": "b73457e7",
+        "humanities_financial_baseline": "65804012"
+      }
+    },
+    {
+      "topic": "production_income",
+      "condition": "conditional_year200_GDP_and_GNI_distributions; explicit_subjective_priors_and_direct_investment_income; no_empirical_completion_probability",
+      "material": [
+        "studies/production_income/README.md",
+        "studies/production_income/income_inputs.json",
+        "studies/production_income/income_sources.json",
+        "studies/production_income/extract.py",
+        "studies/production_income/model.py",
+        "studies/production_income/inputs/year200.json.gz",
+        "studies/production_income/results/year200.json.gz",
+        "studies/production_income/checks.md",
+        "../visualization/production_income/render.py"
+      ],
+      "source_commits": {
+        "humanities_revised_returns_and_wealth": "d06172c0",
+        "provisioning_asset_and_recovery_export": "a8af87614e9c30b6fa4879440765f7e74fe094be"
+      },
+      "findings": [
+        "Year-200 production and expenditure GDP reconcile with earned-income allocation across 81 market cases and 663552 paired draws. GNP and GNI coincide in the absence of a statistical discrepancy.",
+        "For the diversified portfolio under the balanced prior over previously self-financing paths, median GDP is 9.43 trillion USD2041 per year, with a central 80 percent interval of 7.67\u201320.62 trillion. GNI is separately conditional on ownership and foreign-income treatment.",
+        "The broader funded-completion distribution gives diversified GDP of 3.79 trillion at the median, with a 2.68\u20139.29 trillion central 80 percent interval; an expansive market prior gives 7.97 trillion and 3.27\u201320.76 trillion. These weights are modeling judgments, not empirical project-success frequencies.",
+        "Gross income includes depreciation and imputed resident services. Foreign direct-investment income includes retained earnings and signed losses; investor cash payouts do not substitute for earned income.",
+        "Eighteen cases use exported asset depreciation; 63 use a replacement-based proxy whose leave-one-out error against the available engineering accounts is -11.87 to +13.12 percent. Additional economic-life uncertainty remains explicit."
+      ],
+      "unresolved": [
+        "Completion probabilities and adaptive investment; empirical long-run market priors; full asset cohorts and inventories; domestic service production; fiscal and resource-provision counterparties; legal treatment of outside equity; external-asset yields and the balance of payments."
+      ],
+      "next_session_task": "Integrate annual GDP/GNI with the financial and wealth accounts while retaining the distinction between gross income, cash, ownership, externally funded losses and the conditions for completing the build."
+    },
+    {
+      "topic": "vacuum_economy",
+      "condition": "conditional_accounts; first_pass_reproduces_staged_appraisal; first_pass_run_on_both_programme_ramps_three_Earth_leg_arrangements_and_local_working_parts; three_scenarios_of_demand_at_their_own_date_run_on_both_ramps; technology_improving_in_the_scenarios_with_founding_design_controls; residents_a_result_on_two_solved_ramps; high_scenario_residents_and_sales_not_yet_solved_together; tugs_mine_the_nearest_water_first_and_are_chosen_by_cost; high_scenario_orders_outrun_every_tug_and_keep_the_founding_freight; power_as_staged",
+      "material": [
+        "studies/vacuum_economy/README.md",
+        "studies/vacuum_economy/programme.json",
+        "studies/vacuum_economy/programme.py",
+        "studies/vacuum_economy/cases.json",
+        "studies/vacuum_economy/run.py",
+        "studies/vacuum_economy/scenarios.json",
+        "studies/vacuum_economy/demand.py",
+        "studies/vacuum_economy/mix.py",
+        "studies/vacuum_economy/inputs.py",
+        "studies/vacuum_economy/residents.py",
+        "studies/vacuum_economy/freight.py",
+        "studies/vacuum_economy/finance.py",
+        "studies/vacuum_economy/accounts.py",
+        "studies/vacuum_economy/first_pass.py",
+        "studies/vacuum_economy/results/economy.json",
+        "studies/vacuum_economy/results/residents.json",
+        "studies/vacuum_economy/results/freight.json",
+        "../provisioning/vacuum_industry/README.md",
+        "../provisioning/vacuum_industry/model.py",
+        "../provisioning/vacuum_industry/recovery.py",
+        "../provisioning/vacuum_industry/industry.py",
+        "../resources/source_access/reach.py"
+      ],
+      "findings": [
+        "One run draws up a case's orders, sizes its industry with provisioning's cohort model and finances it with the returns study's financing model; the nine headline cases of the staged appraisal are reproduced exactly, and all 81 staged order books were checked the same way on 15 November 2026.",
+        "In the first pass the costs paid to Earth rise from 4 percent of all costs in years 8 to 25 to 63 percent in years 151 to 200 in the diversified case, because the working parts of every new machine and their launch are bought at fixed prices throughout.",
+        "The asteroid feed of the first pass, 134 to 213 trillion kg by year 200 across the nine cases, is set by water in every year; in the diversified case 94 percent of that water is propellant for the system's own tugs and ferries and 2 percent is propellant sold.",
+        "With the first pass's demand unchanged, constant growth of 3.3 percent a year improves every portfolio on the staged schedule (diversified funders' net present value at year 200 from 7.35 to 9.04 trillion USD2041; services' added equity from 48 to 7 trillion), and the front-loaded ramp lowers the net present value of the three self-financing portfolios by about 1.6 trillion; all 27 cases pass their capacity screens.",
+        "Fuelling the Earth leg's outward burn with propellant launched from Earth until year 20, and from the depot afterwards, halves the funding at the opening (4.2 to 2.0 trillion USD2041 at 200 USD2026 a kg) and raises funders' net present value at year 200 by 1.8 to 2.0 trillion in the diversified and services portfolios at launch prices of 200, 100 and 50 USD2026 a kg; the launch price alone moves the services portfolio from -3.7 to 2.4 trillion between 200 and 100.",
+        "The diversified first-pass case implies 61,000 launches from Earth and 259,000 lunar landings in year 200, and 5,200 and 13,700 in year 100.",
+        "Where the industry may make 78 percent of its machinery's working parts and the residents staff what they can, the workforce limits the share (a tenth to a half of working parts in year 100 in the diversified portfolio, for labour at 50 to 10 percent of the import price); the services portfolio then finances itself with a funders' net present value of 5.8 to 7.7 trillion USD2041 against -3.7 trillion, and the diversified portfolio gains 0.4 to 2.2 trillion. The labour of a locally made part is the study's assumption; no source gives it.",
+        "The first pass's order book counts what the system sells in founding systems: 5 percent of the founding export mix at the opening and 4 percent more each year, costs per founding scale, and identical service facilities of 350 staff that each bring 65 billion dollars a year. The correction of 13 November 2026 reached the sizing of equipment and left the order book as it was; the scenarios of demand replace it, and the first returns chain and the monetary-system study were never rebuilt on the corrected model.",
+        "Judged at each year's date from the opened evidence, with technology improving at the scenario's rates and the tugs chosen by cost, the central demand brings 0.58 trillion USD2041 a year at year 100 and 1.85 at year 200, about a seventh of the first pass's diversified portfolio. On constant growth it covers each year's costs after year 25 (448 against 271 billion a year in years 51 to 100), needs no equity after an opening of 1.37 trillion for the growth from 250,000 to 6.47 million residents, and returns the opening to its funders with 0.29 trillion to spare in net present value at year 200 and 3 percent. The low scenario needs 110 trillion of added equity (0.15 trillion a year of receipts at year 200); the high scenario, on the founding freight, finances the programme with a net present value of 38 trillion, 126 trillion of its 154 trillion a year of receipts at year 200 being 238 million visits.",
+        "On the central demand, fuelling the ferries' outward burn from Earth until year 20 lowers the opening funding from 2.14 to 1.37 trillion USD2041, because the staged arrangement buys 389 tugs on Earth before the opening, 0.75 trillion at the spacecraft price, to fetch the water for the founding freight's propellant, against 115; making working parts in place lowers the equity added by year 200 from 54 trillion to none and the share of costs paid to Earth in years 151 to 200 from 58 to 31 percent; a launch price of 200 against 100 USD2026 a kg costs 0.47 trillion of net present value.",
+        "In the central scenario the system's propellant costs it 12 to 15 USD2041 a kg at the depot against 600 for a kilogram launched from Earth at 100 USD2026 a kg to low orbit, and the published demand takes 13,200 tonnes in year 100; a visit costs 0.4 to 0.5 million USD2041 and sells at 1.8 to 2.1 million to 53,000 visitors in year 100 and 287,000 in year 200, or at cost and a half to 240,000 and 1.29 million for 0.58 trillion less net present value. Computing at the price of the same service on Earth, which the founding design's prices never repay, is served from the opening once the price of working parts falls with the working parts acquired, and is the largest line in year 200: 35.8 GW for 784 billion of the 1.85 trillion of receipts.",
+        "By year 200 the central scenario mines 94.6 trillion kg of feed for its water, uses all 6.62 trillion kg of that water and sells 2.9 billion kg as propellant; of 4.54 trillion kg of recoverable metal it uses 0.14 trillion and sells 2.9 billion, and 97 percent lies idle with 113 of 136 billion kg of nitrogen. No quantity is held back, because the protection gates reserve none yet.",
+        "Each scenario's technology improves from the opening: the price of machinery's working parts falls 5, 10 or 15 percent for each doubling of those acquired (rates published for satellite programmes), and what a job does grows 0.5, 1.0 or 1.6 percent a year with the wage (the scenario's growth of income on Earth, a link the study constructs). Against cases that hold the founding design, which reproduce the earlier records exactly, and with both on the founding freight, the central scenario on constant growth goes from 37 trillion USD2041 of added equity to none and from -1.40 to -0.08 trillion of net present value at year 200, the low scenario's equity falls from 152 to 104 trillion, and the high scenario's net present value rises from 17 to 38 trillion, its year-200 jobs falling from 96 to 21 percent of its workforce and its costs paid to Earth from 50 to 15 percent. Technology alone leaves the tugs as they were, so it brings no farther source within reach; on constant growth the high scenario passes the median water of the wider near-Earth screen in year 134 against 188.",
+        "With the number of residents a result, growing in each period as fast as the system's money (no equity after an opening funding no larger than the constant-growth ramp's, credit in U, surplus kept for growth), its residents' hands and its income in years 201 to 220 sustain, with technology improving and the tugs chosen by cost, the central scenario reaches 250,000 residents in year 65 and 5.81 million by year 200, 90 percent of the plan (the planned 6.47 million in year 197 on the founding freight; 2.15 million by year 200 with the founding design), and the low scenario carries 210,800 by year 200 (194,300 on the founding freight; 141,300 with the founding design). The chosen tugs' short early legs and long late ones move growth earlier, and the larger first century leaves a smaller surplus: money holds central to 1.2 percent a year in years 101 to 200, where the constant-growth ramp reaches the plan without equity. Financed under the ordinary rules, low's schedule needs no equity after the opening and central's 0.28 trillion USD2041 in years 51 to 100, which the search did not need; they lose the funders 1.35 and 1.27 trillion of net present value at year 200. In years 201 to 220 the central plan on constant growth spends 1.77 trillion a year against receipts of 2.10, where with the founding design it spent 1.69 against 1.21.",
+        "The high scenario, on the founding freight, reaches the planned population in year 62 and its money would carry 959 million residents by year 200, with the sales chosen on the constant-growth ramp. On those schedules the system serves the same seven lines and prices visits and propellant lower from the costs of its larger industry (9.5 million visits at 0.54 million USD2041 in year 100 against 2.8 million at 1.0 million), which pays over the programme at 3 percent but needs 5.5 to 6.6 trillion of equity before year 100 (29 to 31 with the founding design); growing the residents and choosing the sales are not yet solved together for that scenario. Its schedule beyond the plan draws the median contained water of the wider near-Earth screen, 39 billion tonnes, by year 88 with 43 million residents, and that of the broader near-Earth population without Don Quixote, 961 billion tonnes, by year 185.",
+        "Each body of the source survey has a velocity change from its orbit (the figure of merit of Shoemaker and Helin, 1978, for rendezvous at aphelion, flown from a depot near the Earth's escape energy; their Table 1 reproduced within 0.1 km/s), and the tugs mine the nearest water first: at the median about 1 billion tonnes of contained water lie within 2.5 km/s, 4.4 billion within 3.0, 64 billion within 4 and 219 billion within 5. Chosen period by period by the industry's cost among the founding chemical tug, whose tanks follow its leg, an electric tug on the sources' water at a laboratory thruster's 2,039 s and 12.5 percent and one on xenon bought on Earth, with water thrusters at the 2,000 s and 30 percent development target sized beside, chemical tugs are the cheaper in every period in low and central: the electric tug at the target mines 40 percent less feed but costs 30 percent (central) and 66 percent (low) more over the programme, its drives (5 USD2026 a watt, about ten years in service), arrays and radiators being bought again and again; the laboratory tug cannot close beyond about 3.5 km/s, and xenon would need 200 to 340 times the world's output and does not close once the Earth ferries are fuelled at the depot. In central the legs run from 1.0 km/s for the founding deployment to 3.0 km/s by year 200, which lowers the opening funding from 1.64 to 1.37 trillion USD2041 and raises the funders' net present value at year 200 from -0.08 to 0.29 trillion (0.20 to 0.47 between the survey's 5th and 95th percentiles of water). The high scenario's orders draw more water than any tug reaches after year 150, and its sales do not yet answer the cost of far water, so its cases keep the founding freight. With every working part bought from Earth, as the sales decision counts its hands, electric tugs at the target cannot carry even the residents' own freight past year 204, because their imported parts ride ferries that burn the sources' water."
+      ]
+    },
+    {
+      "topic": "vacuum_economy_compact",
+      "condition": "first_slice; technology_paths_2041_2241_slow_central_fast_and_static; starting_values_sourced_food_paths_sourced_other_paths_projected; unit_values_of_local_work_and_imports_constructed; visits_bounded_by_construction; metals_and_residents_as_a_result_not_yet; kept_as_committed_not_extended",
+      "material": [
+        "studies/vacuum_economy_compact/README.md",
+        "studies/vacuum_economy_compact/compact.py",
+        "studies/vacuum_economy_compact/technology.json",
+        "studies/vacuum_economy_compact/technology.md",
+        "studies/vacuum_economy_compact/results/compact.json"
+      ],
+      "findings": [
+        "Started from the founding design's computation for 250,000 residents, a resident needs about 25 kW of average power (14.5 kW of it food under lamps), 318 t of material made on the Moon and 17 t bought from Earth, and 3.4 t of water a year. On the central technology path food falls to 6.3 kW by 2100 and 3.0 kW by 2241, with lamps toward their physical limit, crops yielding more food per unit of light and a growing share of the diet grown from electricity by hydrogen-oxidising microbes, whose 15-16% conversion is the food lookup's sourced value.",
+        "With technology held at 2041 a new resident costs about 92 million USD2041 to build and 5 million a year to run, mostly landing imports at about 1,800 USD2026 a kg, and no scenario of demand pays; on the central path by 2100 about 1.3 million and 93,000. On constant growth to 6.47 million residents the central demand needs about 0.9 trillion of funding and repays it by year 29 with central technology, the low demand needs 3.9 trillion and repays by year 60, and the high demand at year 200 implies 10 million visitors a year and 95 launches a day from 457 pads. The outcome turns on the technology path more than on the demand."
+      ]
+    },
+    {
+      "topic": "vacuum_economy_periods",
+      "condition": "second_version; designed_whole_before_built; technology_paths_2041_2241_with_dated_arrivals_sourced_by_the_lookups_of_15_and_16_november_at_their_starting_values_and_held_after_2241; rates_of_work_plant_masses_bounds_and_water_set_asides_constructed; three_design_choices_open_carried_as_switches; growth_shape_settled_16_november; residents_grow_past_the_plan_where_resources_allow_to_2341; residents_as_a_result_by_the_funders_3pct_and_the_decade_test; eventual_crater_sites_house_growth_past_the_initial_quota; rough_time_to_exhaustion_of_sites_and_water_under_set_asides; money_in_U_conservative_and_liberal_policies_under_five_tests_U_floating_after_repayment_to_a_floor_against_a_partial_reserve_of_currencies_and_metals_holders_set_by_two_lookups; U_the_default_since_17_november_liberal_at_a_75pct_floor_with_the_funders_credit_line_dollars_alone_the_comparison; scoping_study_for_the_buildouts_prospective_partners_written_17_november; technology_groups_and_demand_brackets_run_17_november; fund_proposal_for_research_and_development_2027_2041_written_17_november; tug_fleet_turns_over_gradually_on_a_lookup_of_17_november_with_trip_lengths_lengthening_smoothly_within_each_band",
+      "material": [
+        "studies/vacuum_economy_periods/README.md",
+        "studies/vacuum_economy_periods/scoping_study.md",
+        "studies/vacuum_economy_periods/rd_fund.md",
+        "studies/vacuum_economy_periods/scoping.py",
+        "studies/vacuum_economy_periods/results/scoping.json",
+        "studies/vacuum_economy_periods/zone_trade.md",
+        "studies/vacuum_economy_periods/period_technology.json",
+        "studies/vacuum_economy_periods/period_inputs.json",
+        "studies/vacuum_economy_periods/technology.py",
+        "studies/vacuum_economy_periods/designs.py",
+        "studies/vacuum_economy_periods/engineering.py",
+        "studies/vacuum_economy_periods/sales.py",
+        "studies/vacuum_economy_periods/economy.py",
+        "studies/vacuum_economy_periods/money.py",
+        "studies/vacuum_economy_periods/run.py",
+        "studies/vacuum_economy_periods/results/periods.json",
+        "studies/vacuum_economy_periods/tests/test_periods.py"
+      ],
+      "findings": [
+        "The technology of the period decides whether the vacuum settlement pays more than the demand does. With 2041 engineering held for two centuries no scenario of demand pays; on the central path, under the default policy of U, the planned settlement of 6.47 million on the programme's constant growth needs 1.63 trillion USD2041 of funding, 1.15 of it by the opening, is repaid by 2076 and gives its funders 2.65 trillion of net present value at 3% to 2241 (1.55, 1.05, 2075 and 2.81 in dollars alone).",
+        "Power comes from megawatt fission through the opening decades and from beamed stations from 2064 on the central path; the polar grid is never chosen, since its lines grow with the square of their length to sites 600-2,700 km from the poles and the poles supply under half a gigawatt. The settlement makes 98% of its equipment by 2071, and on the programme's ramp the beamed constellation carries 190 GW of firm power by 2241 on about 950 GW of stations.",
+        "Grown as fast as the funders still earn 3%, no ten years together run a deficit once repaid and U's five tests hold in every year, central demand and technology carry the planned 6.47 million by 2142 at 7.0% a year and 20.1 million by 2341 on 1.77 trillion USD2041 of funding, with U's lowest value 0.77 of par and the funders earning 3.9% a year; in dollars alone 2150 and 16.2 million. Fast technology carries 30.2 million by 2341 (6.6 in dollars alone, where a decade barely in deficit while the tug fleet grows by two-thirds stops growth past the plan), slow technology 5.9 million (7.5), and low demand with central technology cannot pay for growth.",
+        "At the programme's 3.3% a year carried on past 2241 the account with Earth is in deficit for good from about 2260 and the eventual crater sites fill in 2341, the water open to mining running out within a decade of that under the project's set-asides; growth as a result never fills the sites, and in every path the account limits growth before any resource does.",
+        "Of the open design choices, counting the whole payroll as spent on Earth lowers the central net present value to 2241 from 2.65 to 2.00 trillion under U and, in dollars alone, raises the funding needed by 2241 from 1.55 to 9.84 trillion; births, fares, towns or cities and the source survey's percentiles each move the net present value by under 0.05 trillion.",
+        "The report written from these results (scoping_study.md), since 18 November a general outward-facing account in dollars of 2026, sets out what would be built, how the settlements pay their way, their money, what the funders put in and get back by growth path (5.3% a year at the programme's pace held at the plan, 4.0% for the base case's growth to the plan held there, 3.9% for the base case), what could change the answer by residents and by return, and what remains open: computing bought at the opening, the residents' spending, U's institutions, trade within the zone beyond Earth and health over a lifetime. If paying in U cut Earth's purchases by a tenth, a quarter or a half, the settlements would carry 17.8, 15.1 or 6.6 million residents by 2341.",
+        "Moved one at a time from the central case (20.1 million residents by 2341), computing contracted at the opening moves the result most, 8.1 million at 1 GW and 48.2 million at 20 GW against 5 GW. Of the six technology groups moved alone, slow launch stops all growth, slow local industry delays the plan to 2174 (12.9 million), slow power more than halves the funders' present value at 3% (0.36 against 0.79 trillion dollars of 2041) and slow food and life support costs 1.4 million residents and a fifth of that present value; fast local industry alone brings the plan to 2130 and carries 22.6 million.",
+        "Since 17 November the tug fleet turns over as fleets of heavy equipment do, on a bounded lookup of 44 sources: a new kind takes a rising share of the factories' tug building, old tugs fly on until they wear out or their legs stop closing, a fifth of those retired are sold used and the rest give spares and recycled metal. On central demand and technology chemical tugs carry the water alone to about 2210; tugs driven by solar arrays carry a quarter of the capacity in 2214, three-quarters by 2220 and all of it from 2230, when the chemical tugs are retired. With the earlier fleet, which switched all new building to a new kind at once and bought the factories' shortfall finished from Earth, slow food and life support nearly stopped growth past the plan (7.7 million by 2341) and fast local industry carried 16.6 million; with the gradual turnover and trip lengths that lengthen smoothly within each band of the source survey they carry 18.7 and 22.6 million.",
+        "The fund proposal (rd_fund.md), since 18 November a short document on what is known, what remains to be learned and how the fund closes each gap, asks for 100 million dollars over 2027-2041 in three phases with decision points in 2031, 2036 and 2040, weighted toward local industry (26 million) and food and life support (20 million), with demand evidence first, and lines with buyers on Earth whatever is decided about the Moon; its budget and earnings rest on a bounded lookup of 80 sources."
       ]
     }
   ]
